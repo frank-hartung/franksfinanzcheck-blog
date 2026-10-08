@@ -138,6 +138,8 @@ npm run hooks:status                                  # steht die Commit-Sperre 
 npm run test:haken                                    # Selbstscharfstellung der Commit-Sperre (echte Wegwerf-Repos)
 npm run vorgang:abschluss -- --pr <Nr>                # Abschlussvermerk an die Meldung (Plan; --apply schreibt)
 npm run test:vorgang                                  # Abschlussvermerk: 12 Fallgruppen + 15 Verfahrenstests
+npm run manifest:check                                # Manifest-Wache: package.json + Lockfile vor npm ci (J/K/F/D/L/P, Exit 1 bei Befund)
+npm run test:manifest                                 # Manifest-Wache: Selbsttest (Sabotage + Gegenprobe) + Unit-Tests (#654)
 
 # 0 € Blogautomatik (Whisper lokal + n8n self-hosted + Pages, 03.10.2026) – Details: docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md
 npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)
@@ -1218,6 +1220,33 @@ kritischen Pfad.
   die Originalbytes; anschließend das normale Produktionsartefakt neu bauen.
 - Diagnose, Wiederherstellungsherkunft, Messnachweise und Runbook:
   `RESERVE-634-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
+
+## Das Manifest ist der Bau-Eingang (Manifest-Wache, seit WF-7B6B / #654, 08.10.2026)
+
+Am 08.10.2026 brach `npm ci` in Sekunde 1 ab: Ein Merge (#647) hatte `package.json`
+als **ungültiges JSON** auf `main` zurückgelassen (fehlendes Komma, `pagefind` doppelt).
+Der E2E-Lauf und von 10:41 bis 12:50 UTC jeder Produktions-Deploy wurden rot. Die
+automatische Meldung riet zu API-Keys – die Ursache stand in Zeile 181.
+
+- **Vor jedem `npm ci` / `npm install` läuft `scripts/manifest_guard.py`** – Selbsttest
+  zuerst, fail-closed. Geprüft werden JSON, Konfliktmarker, doppelte Schlüssel, Form
+  und Lock ↔ Manifest (Wurzel-Sync, Vollständigkeit, exakte Pins). Befund = Datei +
+  Zeile + Ursache, in GitHub als Annotation an der Zeile.
+- **Verdrahtet** in `deploy.yml` (direkt nach dem Merge-Marker-Schutz), `e2e.yml`,
+  `design-varianten.yml`, `lesehilfen-gate.yml`, `robustheit.yml`,
+  `themenwelten-gate.yml`, `werkbank.yml`. Ein neuer Workflow mit `npm ci` ohne Wache
+  fällt in `test_manifest_guard.VerdrahtungTests` rot.
+- **Eine Quelle:** alle Manifeste des Repos (Wurzel, `tools/ff-voice-*`). Die einzige
+  begründete Ausnahme (`OHNE_LOCKFILE_ERLAUBT`, `newsletter-worker`) gilt nur für ihren Pfad.
+- **Die Wache ersetzt `npm ci` nicht.** Versions-Ranges entscheidet npm.
+- **Der Alarm** nennt bei Install- und Manifest-Fehlern die Manifest-Diagnose statt des
+  API-Key-Rats (`alert-on-failure.yml`, `installFailed`; Verhalten in
+  `scripts/tests/sim/alert_scoping_sim.mjs`, Szenarien #654 und Deploy).
+- Lock neu erzeugen: `npm install --package-lock-only --ignore-scripts`, dann Manifest
+  und Lock **gemeinsam** committen. Den Lock nie von Hand auf einen Pin setzen.
+- Bedienung: `npm run manifest:check` · `python3 scripts/manifest_guard.py --ref <sha>`
+  (Vorfall nachspielen). Runbook: `docs/ANLEITUNG-MANIFEST-WACHE.md`.
+  Vorgangsbericht: `WF-7B6B-654-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
 
 ## Wichtige Konventionen
 

@@ -121,6 +121,13 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
 
+      # WF-7B6B / #654 (08.10.2026): Manifest und Lockfile vor dem npm-Install prüfen.
+      # Runbook: docs/ANLEITUNG-MANIFEST-WACHE.md
+      - name: Manifest-Wache (package.json & Lockfile vor npm ci)
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
       - name: Hugo installieren (Extended, verifiziert)
         uses: ./.github/actions/install-hugo
         with:
