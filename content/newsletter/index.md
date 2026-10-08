@@ -26,6 +26,10 @@ Der Newsletter kostet nichts, er gibt keine Adressen weiter und er ist mit einem
 Klick beendet. Es gibt ihn, weil die besten Rechnungen dieses Blogs sonst
 zwischen zwei Besuchen untergehen.
 
+## Dein Extra zum Start: 15-Minuten-Fixkosten-Check
+
+Direkt loslegen statt auf ein Willkommensgeschenk zu warten: Die kompakte [Fixkosten-Checkliste](/newsletter-checkliste/) hilft dir, wiederkehrende Ausgaben und Fristen in 15 Minuten zu sortieren. Sie ist **ohne Anmeldung** frei zugänglich – der Newsletter ist kein Zugangsschlüssel und kein Druckmittel.
+
 ## Was du bekommst
 
 **Dienstag · der Wochen-Check**
