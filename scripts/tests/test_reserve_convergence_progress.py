@@ -71,14 +71,18 @@ class ProgressTests(unittest.TestCase):
             path = Path(tmp) / "index.md"
             raw = sh._fixture()
             path.write_text(raw)
-            with patch.object(rr, "score_diagnosis", return_value=None), \
-                    patch.object(rr, "capture_gate", return_value=(False, "")):
-                row = rr.certify_one(path)
-            self.assertFalse(row["ready"])
-            self.assertEqual(row["flesch"], sh.lh.flesch(raw, path.parent.name))
-            self.assertIsInstance(row["flesch"], float)
-            self.assertEqual(row["sha256"], hashlib.sha256(raw.encode()).hexdigest())
-            self.assertEqual(path.read_text(), raw)
+            for findings in ([], ["RS5: unbelegte Zahl"]):
+                with self.subTest(findings=findings), \
+                        patch.object(rr, "score_diagnosis", return_value=None), \
+                        patch.object(rr, "reserve_editorial_findings", return_value=findings), \
+                        patch.object(rr, "capture_gate", return_value=(False, "")) as gate:
+                    row = rr.certify_one(path)
+                self.assertEqual(gate.call_count, 0 if findings else 1)
+                self.assertFalse(row["ready"])
+                self.assertEqual(row["flesch"], sh.lh.flesch(raw, path.parent.name))
+                self.assertIsInstance(row["flesch"], float)
+                self.assertEqual(row["sha256"], hashlib.sha256(raw.encode()).hexdigest())
+                self.assertEqual(path.read_text(), raw)
 
     def test_summary_unterscheidet_teilfortschritt_und_ready(self):
         states = iter([state(), state(59, "neu"), state(59, "neu")])

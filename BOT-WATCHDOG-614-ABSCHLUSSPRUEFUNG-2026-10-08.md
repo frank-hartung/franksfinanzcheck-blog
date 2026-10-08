@@ -1,6 +1,6 @@
 # Bot-Watchdog #614: Reserve wieder am Ziel, Fortschritt bis zur Freigabe führen
 
-Stand: 08.10.2026 · Ergänzung zu `BOT-WATCHDOG-614-DAUERHEILUNG-PREMIUM-2026-10-07.md`
+Stand: 08.10.2026 · integriert mit `main` bis `24b8cc5` (#635) · Ergänzung zu `BOT-WATCHDOG-614-DAUERHEILUNG-PREMIUM-2026-10-07.md`
 
 ## Ergebnis in dieser Arbeitskopie
 
@@ -22,12 +22,12 @@ Stub-Modell oder simuliertem Publikations-Gate. Das Ergebnis liegt in
 
 | Frisch zertifizierter Kandidat (Kurzname) | Flesch |
 |---|---:|
-| 7 Gewohnheiten für finanzielle Freiheit | 65,8 |
-| Handyvertrag kündigen | 60,8 |
-| Smart-Home-Geräte / Stromrechnung | 62,7 |
-| Campingurlaub 2026 | 60,8 |
-| DSL-Anbieter wechseln | **63,1** |
-| Urlaub sparen | 60,6 |
+| 7 Gewohnheiten für finanzielle Freiheit | 61,8 |
+| Handyvertrag kündigen | 61,9 |
+| Smart-Home-Geräte / Stromrechnung | 62,8 |
+| Campingurlaub 2026 | 66,5 |
+| DSL-Anbieter wechseln | **63,6** |
+| Urlaub sparen | 61,4 |
 
 Das ist ein **lokaler Produktions-Gate-Nachweis**, kein neuer GitHub-
 Produktionslauf. Die Änderungen müssen noch zusammengeführt werden. Der
@@ -79,9 +79,30 @@ nicht deren vollständige Steuerung:
   Eltern und Kinder beendet (TERM, maximal fünf Sekunden Aufräumfrist,
   anschließend KILL auch für TERM-ignorierende Kinder).
 - Die doppelte Addition des Einzugs im Satz-Finder ist entfernt.
-- Der DSL-Entwurf wurde redaktionell an neun Stellen vereinfacht:
-  **59,5 → 63,1**, Qualitäts-Score nach erneuter Messung **0,982**.
-  Keine Schwelle, kein Zielbestand und keine Gate-Regel wurden gelockert.
+- Keine Schwelle, kein Zielbestand und keine Gate-Regel wurden gelockert.
+
+### Parallelkorrektur #635 bewahrt
+
+Während dieser Arbeit ging `24b8cc5` auf `main` ein: sechs vollständig neu
+redigierte Reserveartikel und eine zusätzliche redaktionelle Vorprüfung
+(`reserve_editorial_findings`). Die Konflikte wurden auf diesem Arbeitsbranch
+aufgelöst, ohne diese Änderungen zurückzunehmen:
+
+- **Alle sechs aktuellen Artikelfassungen stammen unverändert aus #635.**
+  Die eigene, zunächst erfolgreich geprüfte DSL-Zwischenfassung (59,5 →
+  63,1) wurde durch die neuere Redaktion ersetzt, nicht darübergelegt.
+- Die neue redaktionelle Prüfung läuft unverändert vor der Publikationsprüfung.
+  Der Flesch-Nachweis wird auch bei einer frühen redaktionellen Ablehnung
+  geschrieben. Die Regression prüft beide Pfade und beweist, dass eine
+  redaktionelle Sperre den Aufruf des Publikations-Gates verhindert.
+- Nach dem Zusammenführen wurden **alle 15 Kandidaten nochmals echt geprüft**:
+  weiterhin 6/6, DSL jetzt **63,6**, Qualitäts-Score **0,970**.
+  Die neun übrigen Kandidaten bleiben nun bereits an den strengeren
+  redaktionellen Regeln hängen; die Diagnose verschweigt dies nicht.
+- Das aus #635 kommende Integritäts-Siegel wird unverändert übernommen.
+
+Der finale PR enthält damit keine konkurrierenden Content-Änderungen mehr,
+sondern die ergänzende Steuerungsreparatur und das neu gemessene Zertifikat.
 
 ## Regressionen und Nachweise
 
@@ -90,9 +111,9 @@ Neue Datei: `scripts/tests/test_reserve_convergence_progress.py` mit
 
 | Prüfung | Ergebnis |
 |---|---|
-| Gesamtsuite `unittest discover -s scripts/tests` | **2.165 Tests OK**, 1 Skip |
+| Gesamtsuite vor Integration von #635 | **2.165 Tests OK**, 1 Skip |
 | Neue Regressionen + Satz-Heiler + Nachzertifizierung | **42 Tests OK** |
-| Abschlusslauf einschließlich bestehender Reserve-Pipeline-Tests | **171 Tests OK** |
+| Reserve-/Satz-/Nachzertifizierungs-/Redaktionsvertragstests nach Integration von #635 | **181 Tests OK** |
 | Gesamte Uhr-Probe +97 Tage, ohne vorgebautes `public/` (wie im CI-Testjob) | **2.163 Tests OK**, 7 Skips |
 | Neue Regressionen unter +97 und +1461 Tagen | jeweils **13 Tests OK** |
 | `reserve_converge --selftest`, einschließlich neuer Fortschritts-/Budgetproben | grün, auch unter +97/+1461 Tagen |
