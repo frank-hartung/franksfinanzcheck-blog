@@ -115,9 +115,6 @@ Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht autom
 
 ## Wie behältst du die Ausgaben vor Ort im Blick?
 
-
-Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht automatisch, ob das Auto zu deinem Urlaub passt. Lies die Bedingungen des Anbieters und entscheide selbst. Der Partnerlink am Ende führt zu Mietwagenangeboten; er ist kein allgemeiner Vergleich für jede Reiseleistung.
-
 ## Wie behältst du die Ausgaben vor Ort im Blick?
 
 Vor Ort fallen oft kleine Posten an. Ein Bus, ein Snack, ein Bad oder ein Kaffee wirkt für sich nicht groß. Notiere Käufe am selben Tag in einer App, auf dem Handy oder auf Papier. So siehst du, was noch in deiner Reisekasse liegt.
