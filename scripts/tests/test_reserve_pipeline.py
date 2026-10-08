@@ -1256,7 +1256,12 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
                     f'---\ntitle: "{titel}"\ndate: {gestern}T06:00:00Z\n'
                     f"draft: {draft}\n{extra}---\n\nBody.\n",
                     encoding="utf-8")
-            with self.rp._als_publikationstag():
+            # Diese Probe misst Themenvielfalt, nicht die Mitternachtssperre.
+            # now_utc_iso() zieht eine Minute ab; kurz nach 00:00 wäre der
+            # Zeitstempel deshalb gestern und die Veröffentlichung gesperrt.
+            with self.rp._als_publikationstag(), patch.object(
+                    self.rp, "now_utc_iso",
+                    return_value=f"{dt.date.today().isoformat()}T12:00:00Z"):
                 raus = self.rp.publish_to_min(2, posts_dir=posts,
                                               validator=lambda i: True)
         self.assertEqual(len(raus), 1,

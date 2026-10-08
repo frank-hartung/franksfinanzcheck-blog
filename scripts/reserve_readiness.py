@@ -28,6 +28,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -114,6 +115,30 @@ def score_diagnosis(index) -> dict | None:
         return {"fehler": str(exc)}
 
 
+def reserve_editorial_findings(index: Path, content: str) -> list[str]:
+    """Führt die unveränderte Reserve-Redaktionslatte vor dem Publish-Gate aus.
+
+    So kann weder ein guter Score noch ein erfolgreiches Hugo-Rendering eine
+    unbelegte Zahl, Phantomquelle oder H2-Zerstückelung überstimmen.
+    """
+    parts = (content or "").split("---", 2)
+    if len(parts) != 3 or parts[0] != "":
+        return ["Reserve-Qualitäts-Gate: Frontmatter-Grenze nicht lesbar"]
+    fm, body = parts[1], parts[2]
+    try:
+        import yaml
+        metadata = yaml.safe_load(fm) or {}
+        if not isinstance(metadata, dict):
+            return ["Reserve-Qualitäts-Gate: Frontmatter ist kein Mapping"]
+        import redaktions_standard as rs
+        return rs.reserve_quality_findings(
+            body, author=metadata.get("author") or "",
+            erfahrung=metadata.get("erfahrung"),
+            erfahrung_beleg=metadata.get("erfahrung_beleg"))
+    except Exception as exc:  # fail-closed, Messausfall ist kein Freispruch
+        return [f"Reserve-Qualitäts-Gate nicht prüfbar: {exc}"]
+
+
 def certify_one(index) -> dict:
     """Zertifiziert GENAU EINEN Entwurf am echten Produktions-Gate.
 
@@ -129,6 +154,16 @@ def certify_one(index) -> dict:
     """
     original = index.read_text(encoding="utf-8")
     diag = score_diagnosis(index)
+    content_findings = reserve_editorial_findings(index, original)
+    if content_findings:
+        row = {"slug": index.parent.name, "ready": False,
+               "sha256": hashlib.sha256(original.encode()).hexdigest(),
+               "reason": f"Reserve-Qualitäts-Gate: {content_findings[0]}",
+               "details": content_findings}
+        if diag:
+            row["score"] = diag.get("score")
+            row["parts"] = diag.get("parts")
+        return row
     ready, reason, details = False, None, []
     try:
         rp.publish_one(index)

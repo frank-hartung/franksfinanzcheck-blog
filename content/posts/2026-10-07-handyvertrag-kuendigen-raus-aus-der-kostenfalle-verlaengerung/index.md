@@ -1,184 +1,233 @@
 ---
-title: "Handyvertrag kündigen: Raus aus der Kostenfalle Verlängerung"
-description: "Du willst deinen Handyvertrag kündigen? Erfahre, wie du die automatische Verlängerung stoppst, effektiv Mobilfunk sparen kannst und den Tarifwechsel meiste."
+title: "Handyvertrag kündigen: Frist und Kosten richtig prüfen"
+description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen."
 date: 2026-10-07T10:33:21Z
 draft: true
 reserve: true
-tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
+tags: ["Handyvertrag", "Internet und Mobilfunk", "Fixkosten"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Handyvertrag kündigen", "Mobilfunk sparen", "Tarifwechsel", "Handyvertrag", "Kostenfalle", "Verlängerung"]
-pin_title: "Handyvertrag kündigen: Raus aus der Kostenfalle Verlängerung"
-pin_description: "*Werbung | Du willst deinen Handyvertrag kündigen? Erfahre, wie du die automatische Verlängerung stoppst, effektiv Mobilfunk sparen kannst und den Tarifwechsel meiste Mehr Spartipps auf FranksFinanzcheck! #handyvertragkuendigen #mobilfunksparen #tarifwechsel"
+keywords: ["Handyvertrag kündigen", "Handyvertrag", "Mobilfunkvertrag", "Kündigungsfrist", "Tarifwechsel"]
+pin_title: "Handyvertrag kündigen: Frist und Kosten prüfen"
+pin_description: "*Werbung | Prüfe Laufzeit, Kündigungsweg und Gesamtkosten deines Handyvertrags. Verständliche Hinweise ohne pauschale Sparversprechen. #handyvertrag #kuendigung #mobilfunk"
 ai_generated: true
-ai_provider: "Content-Engine v2"
+ai_provider: "Editorial revision"
 engine_level: "draft"
 redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
-  aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
-
-inspiration: "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung"
+  aenderungsgrund: "Vertragsinformationen anhand amtlicher Quellen geprüft; formale Schlussprüfung bleibt ausstehend"
+inspiration: "Handyvertrag kündigen: Laufzeit, Verlängerung und Wechsel sauber prüfen"
 cover:
   image: "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg"
-  alt: "Handyvertrag kündigen: Raus aus der Kostenfalle Verlängerung"
+  alt: "Handyvertrag kündigen: Laufzeit, Frist und Wechsel prüfen"
   caption: "Tipp von FranksFinanzcheck"
 quellen:
   - id: "Q1"
-    titel: "Referenzseite bundesnetzagentur.de"
-    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
-    herausgeber: "Bundesnetzagentur"
+    titel: "Telekommunikationsgesetz § 56: Vertragslaufzeit und Kündigung"
+    url: "https://www.gesetze-im-internet.de/tkg_2021/__56.html"
+    herausgeber: "Bundesministerium der Justiz"
+    datum: "2026-10-07"
   - id: "Q2"
-    titel: "E-Auto-Ladetarife: Gericht verbietet EWE Go höhere Roamingpreise für DCS"
-    url: "https://www.heise.de/news/E-Auto-Ladetarife-Gericht-verbietet-EWE-Go-hoehere-Roamingpreise-fuer-DCS-11478945.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag"
-    herausgeber: "heise online"
+    titel: "Bürgerliches Gesetzbuch § 312k: Kündigung von Verbraucherverträgen im elektronischen Geschäftsverkehr"
+    url: "https://www.gesetze-im-internet.de/bgb/__312k.html"
+    herausgeber: "Bundesministerium der Justiz"
     datum: "2026-10-07"
   - id: "Q3"
-    titel: "Minion-Router Kevin & Bob: Deshalb sollten Sie die Finger davon lassen"
-    url: "https://www.heise.de/hintergrund/Minion-Router-Kevin-und-Bob-Cooles-Gadget-oder-Finger-weg-11477871.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag"
-    herausgeber: "heise online"
-    datum: "2026-10-06"
-faktencheck: 2026-10-07
-kurzantwort: "Kündige schriftlich (z. B. per Einschreiben) mindestens drei Monate vor dem regulären Vertragsende, denn das ist die gängige Kündigungsfrist. Nutze die 14‑Tage‑Widerrufsfrist nach Abschluss eines neuen Tarifs, um ohne Zusatzkosten zu wechseln. So stoppst du die automatische Verlängerung und vermeidest unnötige Kosten."
+    titel: "Vertrag: Laufzeit, Kündigung und Anbieterwechsel"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-10-07"
+  - id: "Q4"
+    titel: "Telekommunikationsgesetz § 59: Anbieterwechsel und Rufnummernmitnahme"
+    url: "https://www.gesetze-im-internet.de/tkg_2021/__59.html"
+    herausgeber: "Bundesministerium der Justiz"
+    datum: "2026-10-07"
+faktencheck: "2026-10-07"
+kurzantwort: "Prüfe zuerst die Laufzeit und das vereinbarte Enddatum. Nach einer stillschweigenden Verlängerung kannst du einen Handyvertrag grundsätzlich mit Monatsfrist kündigen. Nutze deine Vertragsunterlagen und sichere dir eine Bestätigung."
 ---
 
-Zahlst du monatlich 45 € für einen Handyvertrag, obwohl dein Smartphone längst abbezahlt ist? Viele Haushalte verschenken so jeden Monat bares Geld. Du verpasst den richtigen Moment, in dem du deinen **Handyvertrag** kündigst.
+Handyvertrag kündigen klingt einfach. In der Praxis zählen das Ende der festen Laufzeit, der Kündigungsweg und ein mögliches Gerät.
 
-Wer die Frist übersieht, landet oft in einer teuren Verlängerung. Diese läuft meist zu schlechteren Konditionen weiter als aktuelle Angebote für Neukunden. Mein Fixkosten-Cockpit hilft dir dabei, diese Trägheit zu überwinden. So reduzierst du deine monatlichen Belastungen drastisch.
+Ein niedriger Monatspreis reicht nicht für einen fairen Vergleich. Prüfe zuerst deine Unterlagen.
+
+Danach kannst du entscheiden, ob du kündigst, wechselst oder ein neues Angebot prüfst.
 
 **Das Wichtigste in Kürze**
-* **Flexibilität nutzen:** Verträge sind nach der Mindestlaufzeit in der Regel monatlich kündbar.
-* **Kostenfalle Hardware:** Ohne Handeln zahlst du oft für ein Handy weiter, das rechnerisch bereits abbezahlt ist.
-* **Einsparungspotenzial:** Ein gezielter Wechsel senkt deine Fixkosten oft um ca. 30 % bis 50 %.
-* **Rufnummernmitnahme:** Du nimmst deine Nummer kostenlos mit – das ist heute gesetzlich garantiert.
 
+- Prüfe Laufzeit, Enddatum und Kündigungsweg in deinen Unterlagen.
+- Eine automatische Verlängerung bedeutet nicht immer eine neue lange Bindung.
+- Vergleiche Tarif, Gerät und Zusatzoptionen als ganze Kosten.
 
+## Welche Kündigungsfrist gilt für deinen Handyvertrag?
 
----
+Die erste feste Laufzeit eines üblichen Handyvertrags darf höchstens 24 Monate dauern ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Lies diese Angabe in deinem Vertrag, bevor du zustimmst.
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Handytarife vergleichen**](/go/handytarife/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+Der Anbieter muss dir außerdem einen Vertrag mit höchstens 12 Monaten Laufzeit anbieten ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Prüfe, welches Modell zu deinem Bedarf passt.
 
-## Warum ist es so schwer, den Handyvertrag zu kündigen?
+Läuft dein Vertrag nach der ersten festen Zeit still weiter, kannst du ihn jederzeit kündigen. Die Frist beträgt einen Monat ([§ 56 Absatz 3 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Eine pauschale Kündigungsfrist passt daher nicht zu jedem Fall.
 
-Viele Anbieter setzen auf die Bequemlichkeit ihrer Kunden. Ein typischer Fall verdeutlicht das Problem: Ein Nutzer zahlt für seinen **Handyvertrag** inklusive Top-Smartphone ca. 45 € im Monat.
+Prüfe trotzdem dein genaues Enddatum. Der Vertrag kann ein Gerät oder weitere Dienste enthalten. Eine offene Gerätezahlung kann anders laufen als der Mobilfunkdienst. Bitte den Anbieter, beide Punkte getrennt aufzulisten.
 
-Nach 24 Monaten ist das Gerät über die Grundgebühr abbezahlt. Kündigt er nun nicht, verlangt der Anbieter oft den gleichen Preis einfach weiter. Die Hardware-Komponente müsste eigentlich wegfallen. Der Provider streicht so eine zusätzliche Marge ein, ohne dir eine neue Gegenleistung zu bieten.
+## Wo findest du das passende Enddatum?
 
-Einen **Handyvertrag kündigen** funktioniert heute so einfach wie nie zuvor. Seit Dezember 2021 findest du den verpflichtenden Kündigungsbutton auf den Webseiten der Provider.
+Suche zuerst in der Vertragsübersicht, auf einer aktuellen Rechnung und im Kundenkonto. Notiere Beginn, Ende der festen Laufzeit und den Weg für eine Kündigung. Wenn Angaben voneinander abweichen, frag den Anbieter schriftlich. Heb die Antwort bei deinen Vertragsunterlagen auf.
 
-Er muss leicht auffindbar und ohne Log-in zugänglich sein. Trotzdem zögern viele Nutzer aus Gewohnheit. Du scheust den Aufwand oder fürchtest den Verlust deiner Rufnummer. Dabei ist genau dieser Schritt dein effektivster Hebel, wenn du beim **Mobilfunk sparen** willst.
+Achte auf Zusatzkarten, Versicherungen und weitere Dienste. Sie können eigene Bedingungen haben.
 
-Mein Fixkosten-Cockpit findet für dich gezielt solche teuren Kostenfresser. Ein Mobilfunkvertrag ist kein statisches Produkt, das du einmal kaufst und dann vergisst.
+Ein Tarifwechsel kann einzelne Leistungen ändern, auch wenn deine Rufnummer gleich bleibt. Lies deshalb nicht nur die Seite mit dem Preis.
 
-Die Preise pro Gigabyte sinken kontinuierlich, während das Datenvolumen in neuen Tarifen steigt. Wer länger als zwei Jahre im selben Tarif bleibt, zahlt fast immer drauf. Du erhältst dann zu wenig Leistung für zu viel Geld.
+Prüfe auch die Bestätigung vor dem Klick.
 
-## Der 4K-Prüfpfad für deinen Mobilfunk
+Die Bundesnetzagentur erklärt, welche Angaben zu Laufzeit und Kündigung in den Vertragsunterlagen wichtig sind. Ihre [Informationen zum Vertrag](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html) sind ein guter Start. Wenn du danach noch unsicher bist, lass dir den Beendigungszeitpunkt vom Anbieter bestätigen.
 
-Bringe jetzt Ordnung in deine Fixkosten. Nutze dafür den Franks Finanzen 4K-Prüfpfad. Er hilft dir dabei, sachlich über deinen nächsten Schritt zu entscheiden.
+Wenn dein Vertrag mehrere Leistungen bündelt, prüfe jede einzeln. Dazu können eine zweite SIM, ein Datenpaket oder ein Gerät gehören. Notiere, was weiterlaufen soll und was enden soll. So vermeidest du, dass du eine Leistung kündigst, die du behalten möchtest.
 
-1. **Kosten sehen:** Erfasse den exakten Betrag deiner monatlichen Abrechnung. Schaue dafür direkt in die letzte Rechnung deines Anbieters. Wie viel zahlst du für den reinen Tarif und wie viel für Hardware oder Zusatzoptionen?
-2. **Konditionen rechnen:** Prüfe dein tatsächlich verbrauchtes Datenvolumen in der Anbieter-App. Die meisten Menschen nutzen nur einen Bruchteil ihres gebuchten Volumens. Vergleiche deine Gesamtkosten auf 24 Monate mit aktuellen SIM-only-Angeboten auf dem Markt.
-3. **Kündigungsfenster sichern:** Wann endet deine Mindestlaufzeit? Markiere dir diesen Termin sofort fett in deinem Kalender. Nach dieser Zeit kündigst du dank moderner Regeln jederzeit mit einer Frist von nur einem Monat.
-4. **Kurs halten:** Ein Handeln lohnt sich erst bei einer Ersparnis von ca. 5 bis 10 € pro Monat. Prüfe deine Verträge deshalb quartalsweise auf Optimierungsmöglichkeiten. So rutschst du nicht wieder zurück in die teure Komfortzone.
+## Wie kündigst du und behältst einen Nachweis?
 
-**Faustregel:** Ein **Tarifwechsel** lohnt sich immer, wenn du für den gleichen Preis das doppelte Datenvolumen bekommst. Alternativ sparst du bei gleicher Leistung ca. 25 % deiner monatlichen Grundgebühr ein.
+Nutze den Kündigungsweg, den dein Anbieter für den Vertrag nennt. Speichere bei einer Kündigung im Kundenkonto die Bestätigung und den Zeitpunkt.
 
-## Wie du effektiv Mobilfunk sparen kannst
+Bei einem Brief solltest du Versand und Zugang belegen können. Ein einfacher Text reicht oft.
 
-Die größte Ersparnis erzielst du durch die Trennung von Hardware und Tarif. Nutze dein aktuelles Handy einfach weiter und wechsle in einen reinen SIM-only-Tarif.
+Nenne deinen Namen und die Kundennummer. Schreibe auch, welchen Vertrag du beenden willst.
 
-Das ist der Königsweg für deine Finanzen. Hier zahlst du nur für die reine Mobilfunkleistung. Die Preise für solche Tarife sind in den letzten Jahren massiv gefallen.
+Bitte um eine Bestätigung mit dem Datum, an dem der Vertrag endet. Teile nicht mehr persönliche Daten mit als nötig. Wenn die Kündigung telefonisch aufgenommen wird, frage nach einer schriftlichen Bestätigung. So kannst du später prüfen, ob der Auftrag angekommen ist.
 
-Wähle das richtige Netz, um weiter beim **Mobilfunk sparen** zu können. Große Netzbetreiber verlangen oft Premium-Preise für ihren Namen.
+Kündige nicht mehrfach über verschiedene Wege, wenn du schon eine klare Bestätigung hast. Das kann Rückfragen auslösen. Wenn der Anbieter nicht reagiert, nimm erneut Kontakt auf und bewahre auch diesen Austausch auf. Halte dich an die Adresse oder Funktion, die in deinen Unterlagen steht.
 
-Discount-Marken im selben Netz bieten dir oft deutlich günstigere Konditionen an. Prüfe vorab, ob du Features wie 5G oder eine Multi-SIM wirklich zwingend benötigst. Für die meisten Nutzer reicht LTE/4G mit normaler Bandbreite vollkommen aus.
+## Lohnt sich der Wechsel finanziell?
 
-Achte zusätzlich auf versteckte Kosten in deiner Abrechnung. Aktiviere sofort nach dem Vertragsabschluss eine Drittanbietersperre bei deinem Provider.
+Ein Preis im Werbebanner zeigt nicht immer den Betrag, den du am Ende zahlst. Addiere Grundpreis, Gerätezahlung, Anschlusskosten, Versand und alle gewählten Extras.
 
-Auch Optionen für das Ausland außerhalb der EU treiben die Rechnung schnell in die Höhe. Ein Blick in das Kleingedruckte der Preisliste verrät dir alle lauernden Fallen. Wer diszipliniert vergleicht, findet Tarife, die perfekt zum eigenen Nutzerverhalten passen.
+Prüfe auch, wann ein Rabatt endet und welcher Preis danach gilt. Ein Tarif ohne Gerät kann günstiger oder teurer sein.
 
-## Der richtige Zeitpunkt für den Tarifwechsel
+Rechne es mit deinen echten Beträgen aus.
 
-Wann ist der ideale Moment für einen **Tarifwechsel**? Du kannst theoretisch jederzeit wechseln, sobald dein alter Vertrag monatlich kündbar ist.
+**Modellrechnung:** Angenommen, Tarif und Gerätezahlung kosten zusammen 35 Euro im Monat.
 
-Praktisch lohnt es sich jedoch, gezielt auf Aktionszeiträume zu warten. Rund um den Black Friday oder zum Quartalsende bieten viele Provider besonders starke Konditionen an. Oft winken dann hohe Wechselprämien oder dauerhafte Rabatte.
+**Modellrechnung:** Bei einer Laufzeit von 24 Monaten zahlst du 24 mal 35 Euro.
 
-Benötigst du doch ein neues Smartphone, musst du besonders genau rechnen. Die Kombination aus Gerät und Vertrag wirkt auf den ersten Blick oft günstig. Doch die Gesamtkosten über 24 Monate liegen häufig über dem Preis eines Einzelkaufs. Kombiniere lieber ein separat gekauftes Gerät mit einem günstigen SIM-only-Tarif.
+**Modellrechnung:** Das ergibt 840 Euro, noch ohne einmalige Gebühren. Das Beispiel ist frei gewählt und kein Marktpreis. Ersetze die Werte durch die Beträge aus deinem Angebot.
 
-Hier hilft dir eine einfache Modellrechnung:
-* **Option A (Bundle):** 24 Monate x 40 € Grundgebühr + 1 € Zuzahlung = 961 € Gesamtkosten.
-* **Option B (Einzelkauf):** Smartphone für 500 € + 24 Monate x 15 € SIM-only = 860 € Gesamtkosten.
-In diesem Modell sparst du durch die Trennung rund 101 € über zwei Jahre. Die Rechenprobe bestätigt diesen Vorteil – 961 minus 860 ergibt 101 € Ersparnis. Je teurer das Smartphone, desto größer wird oft diese Differenz.
+Schau dir außerdem deinen Datenverbrauch an. Nutze dafür die Anzeige im Telefon oder die App deines Anbieters.
 
-## Welche Fehler kosten dich beim Kündigen Geld?
+Wähle keinen größeren Tarif nur aus Angst, zu wenig Daten zu haben. Ein passender Umfang hängt von deinem Alltag ab.
 
-Vermeide unbedingt die "passive Vertragsverlängerung". Du tust nichts und der Vertrag läuft einfach zu alten Konditionen weiter.
+Streamst du unterwegs? Nutzt du oft Karten oder den Hotspot?
 
-Zwar bleibst du nun monatlich flexibel, zahlst aber weiterhin den überteuerten Preis. Ein weiterer Patzer ist die Annahme von Rückholangeboten am Telefon. Diese klingen oft gut, enthalten aber versteckte Nachteile oder binden dich erneut für 24 Monate.
+Prüfe die Anzeige an Tagen, die zu deinem Alltag passen. Schau auch, welche Apps viel Daten nutzen.
 
-Viele Nutzer **kündigen** aus Angst um ihre Rufnummer nicht. Dieser Fehler kostet dich jeden Monat bares Geld.
+Manche Telefone können dich warnen, wenn ein selbst gewählter Wert erreicht ist. Nutze so eine Hilfe nur, wenn du die Anzeige verstehst.
 
-Der Prozess der Rufnummernmitnahme ist heute standardisiert und sicher. Du forderst bei deinem alten Anbieter einfach ein "Opt-in" für die Freigabe an. Danach gibst du beim neuen Anbieter deinen Wechselwunsch an.
+Prüfe außerdem, welche Regeln dein Tarif für Reisen im Ausland nennt. Verlass dich bei Extras nicht auf eine alte Erinnerung.
 
-| Fehler | Folge | Lösung |
-| :--- | :--- | :--- |
-| Kündigungsfrist verpasst | Monatliche Weiterzahlung zu hohen Preisen | Sofort kündigen, monatliche Frist nutzen |
-| Hardware-Zuschlag vergessen | Du zahlst für ein Gerät, das dir schon gehört | In günstigen SIM-only Tarif wechseln |
-| Lockvogel-Angebote | Lange Bindung an schlechte Konditionen | 4K-Prüfpfad nutzen, Gesamtkosten rechnen |
-| Zu viel Datenvolumen | Du zahlst für ungenutzte Leistung | Tatsächlichen Verbrauch in der App prüfen |
+Ein Tarif soll nicht nur auf dem Bildschirm gut aussehen. Er soll dir im Alltag dienen.
 
-## So gehst du vor: Schritt-für-Schritt zum neuen Tarif
+Was nutzt du oft? Was bleibt meist ungenutzt? Welche Option willst du behalten? Was kannst du gut weglassen?
 
-Hast du dich entschieden und willst deinen **Handyvertrag kündigen**? Folge einfach diesem strukturierten Plan für deinen Erfolg:
+Schau auf deinen Bedarf, nicht nur auf den Werbetext. Wenn eine Zeile nicht klar ist, frag nach.
 
-1. **Bestandsaufnahme:** Prüfe dein Datenvolumen und die monatlichen Kosten in der letzten Rechnung. Nutze dafür auch die App deines Anbieters.
-2. **Vergleich starten:** Suche mit einem unabhängigen Vergleichsrechner nach passenden Angeboten für dich. Filtere dabei nach deinen Mindestanforderungen wie 10 GB Daten oder einer Allnet-Flat.
-3. **Kündigung auslösen:** Nutze den Kündigungsbutton auf der Webseite deines aktuellen Anbieters. Alternativ reicht oft eine einfache E-Mail als Textform-Kündigung aus.
-4. **Neuen Vertrag abschließen:** Wähle den passenden Tarif aus und beauftrage die Rufnummernmitnahme. Nutze den [Handytarife vergleichen](/go/handytarife/), um dir die besten Konditionen zu sichern.
-5. **Bestätigung prüfen:** Achte auf den schriftlichen Nachweis deiner Kündigung. Kontrolliere auch den Termin für deinen neuen Vertragsbeginn genau.
+Nimm das Angebot erst an, wenn du es verstehst. Es gibt keinen Grund, sofort zu klicken.
 
-## Checkliste für den erfolgreichen Tarifwechsel
+## Was ändert sich bei Gerät und Zusatzoptionen?
 
-Gehe diese Liste durch, bevor du den finalen Klick machst:
+Wenn du ein Telefon zusammen mit dem Tarif bezahlt hast, prüfe die noch offenen Raten. Frag, ob sie weiterlaufen, wenn du den Mobilfunkdienst kündigst. Eine getrennte Aufstellung macht sichtbar, was du noch zahlen musst. Verlasse dich nicht auf eine mündliche Zusammenfassung, wenn du die Bedingungen auch schriftlich bekommen kannst.
 
-* [ ] Ist die Mindestlaufzeit meines aktuellen Vertrags sicher abgelaufen?
-* [ ] Kenne ich meinen echten Datenverbrauch der letzten 3 Monate?
-* [ ] Brauche ich wirklich ein neues Smartphone oder reicht das alte noch?
-* [ ] Habe ich die Gesamtkosten über 24 Monate inklusive aller Gebühren berechnet?
-* [ ] Ist die Rufnummernmitnahme beim neuen Anbieter fest beauftragt?
-* [ ] Habe ich unnötige Zusatzoptionen wie Versicherungen im neuen Vertrag abgewählt?
+Prüfe auch, ob du eine Versicherung, einen Musikdienst oder eine weitere SIM nutzt. Kündige nur, was du nicht brauchst.
 
-Wer diese Punkte beachtet, macht den Wechsel zu einem Routinevorgang im Haushalt. Jage nicht blind dem günstigsten Preis hinterher. Suche stattdessen eine faire Leistung für einen fairen Preis. Das ist der Kern meines Fixkosten-Cockpits – Transparenz schaffen und die Kontrolle über deine Ausgaben zurückgewinnen.
+Manche Dienste laufen unabhängig vom Tarif. Andere enden mit ihm.
 
-Die Mobilfunkbranche wandelt sich ständig. Was vor zwei Jahren ein Top-Angebot war, ist heute oft nur noch teurer Durchschnitt.
+Das steht in den jeweiligen Unterlagen.
 
-Tappe deshalb nicht in die Abo-Falle der Trägheit. Ein kurzer Check alle 12 bis 24 Monate reicht völlig aus. So behältst du deine Kosten dauerhaft im Griff.
+Wenn du ein neues Telefon möchtest, vergleiche den Gesamtpreis mit einem Tarif ohne Gerät. Rechne den Preis über dieselbe Laufzeit. Berücksichtige eine mögliche Anzahlung und zusätzliche Kosten. So vergleichst du Angebote nach dem Betrag, den du wirklich zahlst, nicht nach dem auffälligsten Monatswert.
 
-Zahlen lügen nicht. Sparst du durch eine Kündigung monatlich 20 €, sind das auf zwei Jahre gerechnet 480 €. Für diesen Betrag müssen viele Menschen mehrere Tage hart arbeiten. Mit dem richtigen Fokus auf das Kündigungsfenster sicherst du dir dieses Geld fast ohne Aufwand.
+## Wie wechselst du, ohne deine Rufnummer zu verlieren?
 
+Wenn du deine Nummer behalten möchtest, beauftrage die Mitnahme beim neuen Anbieter. Prüfe, dass die richtige Nummer im Auftrag steht und du eine Bestätigung bekommst. Anbieterwechsel und Rufnummernmitnahme sind in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) geregelt.
 
+Kündige den alten Vertrag nicht vorschnell selbst, wenn du zu einem neuen Anbieter wechselst. Die Bundesnetzagentur empfiehlt, den neuen Anbieter mit der Koordination zu beauftragen. Ihre [Informationen zum Vertrag und Anbieterwechsel](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html) erläutern die nötigen Angaben. So können beide Anbieter den Übergang abstimmen.
 
-**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
-**Lesetipp:** [Preiswert surfen: So findest du den optimalen DSL‑Anschluss](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
+Bewahre die Auftragsbestätigung und die Nachricht zur Rufnummer auf. Prüfe, ob dein Telefon eine eSIM oder eine normale SIM nutzt.
+
+Richte die neue Karte erst nach der Anleitung des Anbieters ein. Falls der Wechsel nicht klappt, notiere Zeitpunkt und Fehlermeldung.
+
+Dann kannst du den Fall klar schildern.
+
+Vergleiche die Angaben beim alten und neuen Anbieter. Name und Anschrift müssen zu deinen Vertragsdaten passen.
+
+Auch die zu übertragende Nummer muss stimmen. Die Bundesnetzagentur nennt übereinstimmende Kundendaten als wichtigen Punkt beim Wechsel.
+
+Lies dazu ihre [Hinweise zu Vertrag und Anbieterwechsel](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html).
+
+## Was gilt für Kündigungen im Internet?
+
+Ein Kündigungsbutton ist für bestimmte kostenpflichtige Verträge vorgeschrieben, die Verbraucher online abschließen können. Die genauen Voraussetzungen und Ausnahmen stehen in [§ 312k BGB](https://www.gesetze-im-internet.de/bgb/__312k.html). Prüfe zuerst, ob du den Vertrag über diese Webseite abgeschlossen hast. Dann siehst du, ob die Regel auf ihn passt.
+
+Das Gesetz sieht eine Bestätigungsseite und eine klare Schaltfläche zum Absenden vor ([§ 312k BGB](https://www.gesetze-im-internet.de/bgb/__312k.html)). Speichere die Nachricht nach dem Klick. So kannst du belegen, dass du die Kündigung wirklich abgeschickt hast.
+
+Wenn du den Button nutzt, geh bis zum letzten Bestätigungsschritt. Speichere danach die Bestätigung.
+
+Eine Seite mit dem Wort „Kündigung“ reicht nicht als Nachweis. Prüfe, ob du die Erklärung wirklich abgesendet hast.
+
+Achte auf eine klare Nachricht mit Zugang und gewünschtem Enddatum.
+
+Kannst du die Funktion nicht finden, prüfe die Vertragsunterlagen. Nutze den dort genannten Kündigungsweg.
+
+Wenn ein Anbieter die Vorgabe aus deiner Sicht missachtet, halte den Ablauf fest. Wende dich dann an eine passende Beratungsstelle.
+
+Ein Screenshot kann helfen, den Weg zu erklären.
+
+## So gehst du Schritt für Schritt vor
+
+1. Öffne Rechnung, Vertragsübersicht und Kundenkonto.
+
+2. Notiere Ende der festen Laufzeit und den Kündigungsweg.
+
+3. Addiere Tarif, Gerät und Zusatzoptionen.
+
+4. Entscheide, ob du kündigst, wechselst oder nachfragst.
+
+5. Speichere Kündigung, Wechselauftrag und Bestätigung.
+
+Die Reihenfolge hilft, einen alten Vertrag nicht zu beenden, bevor du den nächsten Schritt verstanden hast. Prüfe deine Angaben vor dem Absenden. Wenn eine Frist oder Summe unklar bleibt, frag den Anbieter schriftlich. Bewahre die Antwort bei den anderen Unterlagen auf.
+
+## Was machst du, wenn der Anbieter nicht reagiert?
+
+Speichere deine Anfrage und notiere, wann du sie gesendet hast. Bitte den Anbieter um eine klare Antwort zum Enddatum und zum Kündigungsweg. Wenn du eine Ablehnung erhältst, prüfe den Grund mit deinem Vertrag. Bitte um eine Erklärung, die du schriftlich aufbewahren kannst.
+
+Bleibt die Frage offen, hol dir Unterstützung, bevor du weitere Schritte setzt. Die Bundesnetzagentur bündelt [Hinweise zu Vertrag und Kündigung](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html). Eine Verbraucherberatung kann dir helfen, die Unterlagen einzuordnen. Gib keine Zugangsdaten oder persönlichen Codes an Personen weiter, die du nicht geprüft hast.
+
+**Faustregel:** Erst Laufzeit und Gesamtkosten prüfen, dann kündigen. Ein Wechsel ist übersichtlich, wenn du weißt, was endet und was weiterläuft.
+
+## Was prüfst du nach der Umstellung?
+
+Teste, ob du anrufen, Nachrichten senden und mobile Daten nutzen kannst. Folge der Anleitung für deine neue SIM oder eSIM. Wenn etwas fehlt, notiere die Meldung und wende dich an den Anbieter. Bewahre die Antwort auf, statt mehrere Schritte zugleich zu ändern.
+
+Vergleiche die erste Rechnung mit dem Angebot und der Bestätigung. Prüfe Grundpreis, Gerät und Zusatzoptionen getrennt.
+
+Wenn ein Betrag nicht passt, bitte den Anbieter um eine Aufstellung. So lässt sich die Rechnung besser prüfen.
+
+Du erkennst, ob ein Posten einmalig anfällt oder wiederkehrt.
+
+**Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [Handytarif vergleichen: Worauf es ankommt](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
 
 ## Häufige Fragen
 
-### Kann ich meinen Handyvertrag jederzeit kündigen?
-Ist deine Mindestlaufzeit von meist 24 Monaten um? Dann kündigst du deinen Vertrag jederzeit mit einer Frist von einem Monat. Innerhalb der ersten zwei Jahre klappt eine ordentliche Kündigung meist erst zum Ende dieser Laufzeit.
+### Kann ich einen Handyvertrag jederzeit kündigen?
+Während der ersten festen Laufzeit gelten die vereinbarten Bedingungen. Nach einer stillschweigenden Verlängerung kannst du den Vertrag grundsätzlich mit Monatsfrist kündigen. Prüfe die Voraussetzungen in [§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html) und in deinen Unterlagen.
 
-### Was passiert mit meiner Rufnummer beim Tarifwechsel?
-Du hast ein gesetzliches Recht auf die Mitnahme deiner Nummer. Dein alter Anbieter darf dafür seit Ende 2021 keine Gebühren mehr verlangen. Dein neuer Anbieter leitet den Prozess für dich ein, sobald du ihn beauftragst.
+### Muss ich die Kündigung per Einschreiben senden?
+Nicht jeder Vertrag verlangt denselben Weg. Nutze den zulässigen Kündigungsweg und bewahre einen Nachweis auf. Bei einer Kündigung über das Kundenkonto solltest du die Bestätigung speichern.
 
-### Lohnt sich ein Wechsel auch innerhalb des gleichen Anbieters?
-Ein interner Wechsel bringt dir oft mehr Leistung, spart aber selten maximales Geld. Anbieter reservieren ihre besten Preise meist für Neukunden. Oft verlangen sie für interne Wechsel sogar zusätzliche Gebühren oder starten die Laufzeit neu.
+### Kann ich meine Rufnummer beim Wechsel behalten?
+Das Telekommunikationsgesetz regelt die Mitnahme beim Anbieterwechsel. Beauftrage den neuen Anbieter damit und prüfe, dass deine Nummer im Auftrag steht. Die Details findest du in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html).
 
-### Wie finde ich heraus, wie viel Datenvolumen ich brauche?
-Öffne die Einstellungen deines Smartphones unter dem Punkt "Datenverbrauch". Alternativ schaust du in die App deines Mobilfunkanbieters für genaue Werte. Wähle einen neuen Tarif mit ca. 20 % Puffer über deinem Durchschnittsverbrauch.
+### Gilt der Kündigungsbutton für meinen Vertrag?
+Die Pflicht betrifft bestimmte entgeltliche Verträge, die Verbraucher online abschließen können. Es gibt gesetzliche Ausnahmen. Prüfe den Anwendungsbereich in [§ 312k BGB](https://www.gesetze-im-internet.de/bgb/__312k.html).
 
-### Was ist der Kündigungsbutton und wo finde ich ihn?
-Dieser Button ist eine gesetzlich vorgeschriebene Schaltfläche auf der Webseite deines Anbieters. Du findest ihn meist leicht im Fußbereich oder unter dem Menüpunkt "Vertrag". Er ermöglicht dir die Kündigung ohne Anmeldung in einem Portal.
+### Soll ich zuerst kündigen oder einen neuen Tarif suchen?
+Prüfe zuerst Enddatum, Kündigungsweg und Rufnummernmitnahme. Wenn du wechselst, lass den neuen Anbieter den Übergang koordinieren und bewahre alle Bestätigungen auf.
 
 ---
 
