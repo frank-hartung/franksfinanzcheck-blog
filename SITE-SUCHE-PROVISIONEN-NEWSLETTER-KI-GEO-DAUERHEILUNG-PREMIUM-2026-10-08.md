@@ -100,7 +100,20 @@ und Gates sind vollständig grün.
 - Das GEO-Protokoll bleibt absichtlich eine manuelle Stichprobe; automatisiertes
   UI-Scraping wäre kein Qualitätsgewinn und würde die Messung verfälschen.
 
+## Nachtrag: Unterpfad-Härtung
+
+Ein zusätzlicher Produktionsrandfall ist geschlossen: Newsletter-CTAs und
+interne Datenschutz-, Impressums-, Abmelde- und Feed-Links in
+`newsletter_strip.html`, `newsletter_form.html` und `newsletter_themen.html`
+verwenden nun `relURL` statt root-absoluter Pfade. Auch die Ausschlusslogik
+verwendet den basisURL-unabhängigen Hugo-Routenpfad. Damit funktionieren die
+Links und der „kein CTA auf Utility-Seiten“-Vertrag auch bei einer
+Veröffentlichung unter einem Unterpfad wie `/franksfinanzcheck-blog/`. Der
+Regressionstest dafür läuft mit den Newsletter- und Suchverträgen; ein Hugo-
+Build mit entsprechendem `baseURL` erzeugt den korrekten Unterpfad-Link und
+lässt Newsletter-/Datenschutzseiten ohne Newsletter-Streifen.
+
 **Urteil:** #647 ist auf Premium-Agentur-Niveau umgesetzt: Datenschutz,
-Fail-closed-Builds, redaktionelle Freigaben, einheitliche KI-Transportwege und
-reproduzierbare Qualitätswachen sind Bestandteil der Lösung – nicht nachträgliche
-Handarbeit.
+Fail-closed-Builds, redaktionelle Freigaben, unterpfadfeste interne Links,
+einheitliche KI-Transportwege und reproduzierbare Qualitätswachen sind Bestandteil
+der Lösung – nicht nachträgliche Handarbeit.
