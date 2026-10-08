@@ -237,6 +237,13 @@ class SuchindexWache(unittest.TestCase):
     def test_e2e_spec_der_suche_liegt_vor(self):
         self.assertTrue((ROOT / "e2e" / "suche.spec.mjs").exists())
 
+    def test_e2e_baut_den_index_selbst(self):
+        """Der E2E-Job baut ohne npm run build – die Suite muss den Index selbst sicherstellen."""
+        self.assertIn("globalSetup: './e2e/suchindex.setup.mjs'", lies("playwright.config.mjs"))
+        setup = lies("e2e/suchindex.setup.mjs")
+        self.assertIn("'suchindex'", setup)
+        self.assertIn("E2E_ROOT", setup, "Varianten-Builds dürfen nicht überschrieben werden")
+
 
 if __name__ == "__main__":
     unittest.main()

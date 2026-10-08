@@ -32,6 +32,8 @@ const launchOptions = await resolveLaunchOptions();
 
 export default defineConfig({
   testDir: './e2e',
+  // Der Suchindex gehört zum Build: wird vor dem ersten Test neu gebaut (e2e/suchindex.setup.mjs).
+  globalSetup: './e2e/suchindex.setup.mjs',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,

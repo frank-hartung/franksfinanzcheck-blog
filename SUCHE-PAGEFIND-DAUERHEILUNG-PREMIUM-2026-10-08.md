@@ -81,6 +81,7 @@ Kein „Closes“: #644 ist bereits geschlossen; der Vorgang wird über diesen B
 | `npx playwright test` (Desktop und Mobil, vor der Korrektur des Ohne-JS-Links) | 107/107 |
 | `python3 -m unittest discover -s scripts/tests` | vorher 2285 Tests, 15 Fehlschläge; nachher 2301 Tests OK, 5 übersprungen |
 | CodeQL (javascript), Sicherheits-Gate auf dem PR | vor der Korrektur 1 Befund: `js/incomplete-multi-character-sanitization` in `ff-suche.js:54` (Tag-Regex beim Auszug). Behoben: Auszug bleibt Text, nur `<mark>` ist Markup. Erneuter Lauf auf dem PR ausstehend |
+| CI-Job „Playwright-Suite“ auf dem PR (E2E baut mit der Hugo-Action, nicht mit `npm run build`) | vor der Korrektur rot: `public/pagefind/pagefind.js fehlt`. Behoben durch `e2e/suchindex.setup.mjs` (globales Setup baut den Index vor dem ersten Test neu). Nachbildung ohne Index: 9/9 |
 | `integrity_guard.py --gate` | rc 0, 47 versiegelte Dateien unverändert |
 | `fm_boundary_guard.py --check` · `h1_wache.py` · `offenlegung_gate.py` · `index_hygiene_gate.py` | grün |
 | `robustheits_gate.py --public public --strict` | rc 0 |
