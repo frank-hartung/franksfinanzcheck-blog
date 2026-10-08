@@ -103,6 +103,36 @@ KLASSE_KETTE = "kette"          # Stufen übersprungen → Messung gar nicht ers
                                 # erzeugt (Stufe 3 schreibt das Zertifikat)
 KLASSE_WACHEN = "wachen"        # Wachen-Selbsttest rot (Sabotageschutz)
 
+# Die drei Klassen, bei denen die Messung als Ganzes fehlschlug – dann darf
+# KEINE Engpass-Analyse aus der Zahl abgeleitet werden (siehe #653).
+PRUEFKLASSE_FEHLMESSUNG = (KLASSE_ARTEFAKT, KLASSE_KETTE, KLASSE_WACHEN)
+
+# Klartext pro Klasse – drei verschiedene Baustellen, drei Reparaturrichtungen.
+FEHLMESSUNG_KLARTEXT = {
+    KLASSE_ARTEFAKT: (
+        "Die Zahl unten ist KEIN Bestand, sondern das Fehlen einer Messung. "
+        "Wer sie als Engpass liest, repariert nachts die falsche Baustelle."
+    ),
+    KLASSE_KETTE: (
+        "Die Zahl unten stammt aus der VORNACHT – in diesem Lauf wurde nicht "
+        "gemessen, nur der alte Stand weitergereicht. Reparatur: die "
+        "übersprungene Stufe, nicht der Vorrat."
+    ),
+    KLASSE_WACHEN: (
+        "Die Zahl unten ist AKTUELL gemessen – was fehlt, ist der Nachschub: "
+        "die Wachen-Selbstprüfung ist ROT und muss erst stehen, bevor ein "
+        "grüner Vorrat veröffentlicht werden darf. Reparatur: den roten "
+        "Wachen-Selbsttest, nicht den Vorrat."
+    ),
+}
+
+
+def wachen_rot() -> bool:
+    """Wurde in diesem Lauf ein Wachen-Selbsttest ROT?"""
+    return (os.environ.get("RESERVE_WACHEN_ROT") or "").strip().lower() in (
+        "1", "true", "ja", "yes",
+    )
+
 
 def zertifikat_lage(cert_path: Path) -> tuple[str, str]:
     """(klasse, meldung) des Zertifikats – UNABHÄNGIG von der Kandidatenzahl.
@@ -167,12 +197,8 @@ def ketten_lage() -> list[str]:
                      "VORNACHT")
             zeilen.append(
                 f"KETTE: Stufe {stufe} ({namen[stufe]}) = {status} – {grund}.")
-    if (os.environ.get("RESERVE_WACHEN_ROT") or "").strip() in ("1", "true",
-                                                                "True"):
-        zeilen.append(
-            "WACHEN: Der Selbsttest aller Wachen war in diesem Lauf ROT. "
-            "Ein Lauf, der seine Wachen nicht prüfen kann, darf nicht so tun, "
-            "als hätte er einen Vorrat gemessen.")
+    # WACHEN-Hinweis wird über Klasse=KLASSE_WACHEN in main() erzeugt –
+    # er verdient seinen eigenen Klartext (s. FEHLMESSUNG_KLARTEXT).
     return zeilen
 
 
@@ -426,19 +452,22 @@ def report(ready: int, target: int, candidates: list[dict],
            klasse: str = KLASSE_OK, meldung: str = "",
            ketten: list[str] | None = None) -> None:
     # WF-D4E0 (#653): Eine fehlgeschlagene Messung darf nicht als Vorrats-
-    # Urteil aussehen. Die Klasse steht deshalb VOR der Zahl.
-    if klasse in (KLASSE_ARTEFAKT, KLASSE_KETTE):
-        print("\U0001f6d1 RESERVE-MESSUNG FEHLGESCHLAGEN – "
-              "KEIN Vorrats-Urteil möglich.")
+    # Urteil aussehen. Drei Klassen – drei verschiedene Baustellen.
+    if klasse in PRUEFKLASSE_FEHLMESSUNG:
+        kopf = {
+            KLASSE_ARTEFAKT: "RESERVE-MESSUNG FEHLGESCHLAGEN",
+            KLASSE_KETTE:    "RESERVE-MESSUNG STAMMT AUS DER VORNACHT",
+            KLASSE_WACHEN:   "RESERVE-WACHEN-SELBSTTEST ROT",
+        }[klasse]
+        print(f"\U0001f6d1 {kopf} – KEIN Vorrats-Urteil möglich.")
         print(f"   Ursachenklasse: {klasse}")
-        print(f"   {meldung}")
+        if meldung:
+            print(f"   {meldung}")
         for zeile in (ketten or []):
             print(f"   • {zeile}")
-        print(f"   Die Zahl darunter ({ready}/{target}) ist KEIN Bestand, "
-              "sondern das Fehlen einer Messung. Wer sie als Engpass liest, "
-              "reparaturiert nachts die falsche Baustelle.")
+        print(f"   {FEHLMESSUNG_KLARTEXT[klasse]}")
         print()
-    if klasse in (KLASSE_ARTEFAKT, KLASSE_KETTE):
+    if klasse in PRUEFKLASSE_FEHLMESSUNG:
         # HIER ENDET DIE AUSKUNFT. Alles Folgende – „RESERVE-ENGPAß“,
         # „URSACHEN DIESES ENGPASSES“, Themen-Vielfalt, Schritt-Zusammen-
         # fassung – leitet aus einer Zahl ab, die es in diesem Lauf gar nicht
@@ -449,7 +478,9 @@ def report(ready: int, target: int, candidates: list[dict],
         # herleitet, ist keine Diagnose – sie ist eine Erfindung.
         print(f"   \u26d4 Keine Engpass-Diagnose: sie würde Ursachen aus einer "
               f"Zahl herleiten, die dieser Lauf nicht gemessen hat.")
-        if ready >= target:
+        if ready >= target and klasse != KLASSE_WACHEN:
+            # Bei Klasse wachen ist die Messung AKTUELL – der Hinweis wäre
+            # irreführend (der Nachschub steht, nicht die Uhr).
             print(f"   \u2139 Der vorliegende Stand meldet {ready}/{target}, "
                   "stammt aber nicht aus diesem Lauf.")
         return
@@ -674,12 +705,43 @@ def run_selftest() -> int:
                 assert len(zeilen) == 1 and "Stufe 3" in zeilen[0], zeilen
                 assert "nicht neu geschrieben" in zeilen[0], zeilen
                 os.environ["RESERVE_WACHEN_ROT"] = "1"
-                assert any("WACHEN" in z for z in ketten_lage()), \
-                    "roter Wachen-Selbsttest muss als Klasse erscheinen"
+                # WACHEN-Meldung läuft über Klasse=KLASSE_WACHEN in main().
+                assert not any("WACHEN" in z for z in ketten_lage()), \
+                    "ketten_lage() ist für übersprungene Stufen zuständig"
+                assert wachen_rot(), "wachen_rot() muss RESERVE_WACHEN_ROT lesen"
+                os.environ.pop("RESERVE_WACHEN_ROT", None)
                 os.environ["RESERVE_STUFE1_STATUS"] = "success"
                 assert not any("Stufe 1" in z for z in ketten_lage()), \
                     "erfolgreiche Stufe darf nicht als Kette gemeldet werden"
                 cert_cases.append("ketten-lage")
+
+                # ---- Wachen-Klasse (#653): roter Selbsttest ≠ Vornacht ----
+                alt_w = os.environ.get("RESERVE_WACHEN_ROT")
+                try:
+                    for wert, erwartet in (("1", True), ("true", True),
+                                           ("0", False), ("", False)):
+                        os.environ["RESERVE_WACHEN_ROT"] = wert
+                        assert wachen_rot() is erwartet, (wert, erwartet)
+                    os.environ.pop("RESERVE_WACHEN_ROT", None)
+                    assert wachen_rot() is False
+                    os.environ["RESERVE_WACHEN_ROT"] = "1"
+                    puffer_w = io.StringIO()
+                    with contextlib.redirect_stdout(puffer_w):
+                        report(6, 6, [{"slug": f"k{i}", "ready": True}
+                                      for i in range(6)],
+                               klasse=KLASSE_WACHEN, meldung="",
+                               ketten=["WACHEN: Selbsttest rot"])
+                    text_w = puffer_w.getvalue()
+                    assert "AKTUELL gemessen" in text_w, text_w
+                    assert "nicht aus diesem Lauf" not in text_w, (
+                        "bei Klasse wachen ist die Messung nicht alt")
+                    assert "ENGPA" not in text_w, text_w
+                    cert_cases.append("wachen-klasse")
+                finally:
+                    if alt_w is None:
+                        os.environ.pop("RESERVE_WACHEN_ROT", None)
+                    else:
+                        os.environ["RESERVE_WACHEN_ROT"] = alt_w
             finally:
                 for k, v in alt_env.items():
                     if v is None:
@@ -738,7 +800,18 @@ def main() -> int:
     # lief in die falsche Richtung (KI-Keys, Themen, Produktion).
     klasse, meldung = zertifikat_lage(cert)
     ketten = ketten_lage()
-    if klasse == KLASSE_OK and ketten:
+    if wachen_rot():
+        # Wachen-Selbsttest rot: Die Messung ist aktuell (Stufe 3 lief),
+        # aber die Sabotageschutz-Schwellen sind nicht erreicht.
+        # Reparatur: die Wache, NICHT der Vorrat – Klasse `wachen`, nicht
+        # `kette`.
+        klasse = KLASSE_WACHEN
+        if not meldung:
+            meldung = (
+                "Wachen-Selbsttest in diesem Lauf ROT – eine Schwellen-Wache "
+                "meldet Verletzung."
+            )
+    elif klasse == KLASSE_OK and ketten:
         # Eine Stufe, die das Zertifikat schreibt, wurde übersprungen: Die
         # vorliegende Zahl ist dann der Stand der VORNACHT, kein Urteil über
         # diese Nacht.
@@ -748,7 +821,7 @@ def main() -> int:
     chronik_schreiben(ready, target, candidates, klasse=klasse)
     frisch, frische_meldung = freshness(cert)
     print(f"   {frische_meldung}")
-    if klasse in (KLASSE_ARTEFAKT, KLASSE_KETTE):
+    if klasse in PRUEFKLASSE_FEHLMESSUNG:
         # C2 bleibt hart: ohne Messung kein Grün. Aber die Zusammenfassung
         # nennt die Klasse – sonst sucht die nächste Nacht wieder am
         # falschen Ort.

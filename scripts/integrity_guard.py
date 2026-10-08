@@ -1783,8 +1783,25 @@ def main():
         lock = load_lock(LOCK)
         vorher = sha256_file(rp)
         files = {**lock.get("files", {}), ADD_PATH: vorher}
+        # Ein neuer Pfad MUSS seine Herkunft nennen, sonst verletzt die Akte
+        # den Vertrag „wer zeichnet, nennt die Herkunft JEDER gezeichneten
+        # Datei“ (test_akte_bleibt_gebunden_und_bennbar). Bug 08.10.2026,
+        # entdeckt bei der Dauerheilung #653: ohne diesen Block erzeugt
+        # --add einen audit-Eintrag mit geaendert=[…] aber herkunft=[], und
+        # test_integrity_guard schlägt rot.
+        herkunft_eintraege = []
+        if lock.get("files") and vorher:
+            herkunft_eintraege = [{
+                "pfad": ADD_PATH,
+                "klasse": "kritisch" if ADD_PATH in KRITISCH else "fest",
+                "urteil": "NEU UNTER SIEGEL",
+                "commits": [],
+                "commits_art": "neu-unter-siegel",
+            }]
         eintrag = {"date": date.today().isoformat(), "art": "add",
-                   "head": git_head(ROOT), "geaendert": [ADD_PATH] if vorher else []}
+                   "head": git_head(ROOT),
+                   "geaendert": [ADD_PATH] if vorher else [],
+                   "herkunft": herkunft_eintraege}
         dokument = _lock_dokument(ROOT, files, list(lock.get("audit") or []),
                                   eintrag)
         ok, meldung = lock_schreiben(ROOT, dokument)

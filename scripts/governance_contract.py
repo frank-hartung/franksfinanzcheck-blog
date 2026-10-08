@@ -353,7 +353,7 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Klasse mit Sabotage- und Negativproben ein, ihre
           # --wirkungsprobe die Selbstheilung samt Idempotenz – ohne
           # beides im Minimum wäre die Reparatur wieder nur eine Zusage.
-          "artefakt_waechter.py"]
+          "artefakt_waechter.py",
           # Manifest-Wache (WF-7B6B / #654, 08.10.2026): Ein Merge-Rest in
           # package.json (ungültiges JSON) hat den E2E-Lauf und danach zwei
           # Stunden lang jeden Produktions-Deploy rot gemacht – `npm ci` brach
@@ -3462,8 +3462,6 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          # nächste freie Nummer nach C32 ist deshalb C33.
          "C33": "Maschinen-Artefakte werden gegengelesen (kein Artefakt-"
                 "Defekt sieht mehr aus wie ein leerer Vorrat)"}
-                "Zweig, Audit ohne Stichprobe; Stufe 2: Markdown-Wahrheit, "
-                "H1-Inventar, Blätterseiten geprüft)"}
 
 
 def render_md(checks, ok_notes=()):

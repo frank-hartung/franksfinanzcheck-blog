@@ -338,6 +338,44 @@ class GateKlassenTests(unittest.TestCase):
             else:
                 os.environ["RESERVE_STUFE3_STATUS"] = alt
 
+    def test_wachen_klasse_ist_ein_eigener_befund(self):
+        """Roter Wachen-Selbsttest ≠ übersprungene Kette (#653).
+
+        Bei Klasse `wachen` ist die Messung AKTUELL – der Nachschub steht.
+        Wer beides „Kette“ nennt, weist die Reparatur in die Reihenfolge
+        statt in die Wache.
+        """
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import io
+        import os
+        import contextlib
+        import reserve_gate as rg  # noqa: E402
+        alt = os.environ.get("RESERVE_WACHEN_ROT")
+        try:
+            for wert, erwartet in (("1", True), ("true", True),
+                                   ("0", False), ("", False)):
+                os.environ["RESERVE_WACHEN_ROT"] = wert
+                self.assertIs(rg.wachen_rot(), erwartet, wert)
+            os.environ.pop("RESERVE_WACHEN_ROT", None)
+            self.assertIs(rg.wachen_rot(), False)
+            os.environ["RESERVE_WACHEN_ROT"] = "1"
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                rg.report(6, 6, [{"slug": f"k{i}", "ready": True}
+                                 for i in range(6)],
+                          klasse=rg.KLASSE_WACHEN, meldung="",
+                          ketten=["WACHEN: Selbsttest rot"])
+            text = puffer.getvalue()
+            self.assertIn("AKTUELL gemessen", text)
+            self.assertNotIn("nicht aus diesem Lauf", text,
+                             "bei Klasse wachen ist die Messung nicht alt")
+            self.assertNotIn("ENGPA", text)
+        finally:
+            if alt is None:
+                os.environ.pop("RESERVE_WACHEN_ROT", None)
+            else:
+                os.environ["RESERVE_WACHEN_ROT"] = alt
+
     def test_keine_erfundene_engpass_diagnose_ohne_messung(self):
         """#653: Aus einer fehlgeschlagenen Messung darf keine Ursache werden.
 

@@ -1,9 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T16:16:02.616439+00:00",
-  "head": "1e7f8194",
-  "signed_at": "2026-10-08T15:07:40.115125+00:00",
-  "head": "3484dcf",
+  "signed_at": "2026-10-08T18:35:52.323952+00:00",
+  "head": "de04097",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -54,8 +52,7 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
     "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9"
   },
-  "files_sha256": "838c996faa7189a3335f4ab42b17b892c234ec40b6bb2e75681f5d946d7c34c6",
-  "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
+  "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -403,13 +400,6 @@
     },
     {
       "date": "2026-10-08",
-      "art": "add",
-      "head": "1e7f8194",
-      "geaendert": [
-        "scripts/artefakt_waechter.py"
-      ],
-      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
-      "files_sha256": "838c996faa7189a3335f4ab42b17b892c234ec40b6bb2e75681f5d946d7c34c6"
       "art": "heal",
       "head": "3484dcf",
       "geaendert": [
@@ -435,8 +425,52 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
-      "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d"
+      "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
+      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "repair",
+      "head": "de04097",
+      "geaendert": [],
+      "quelle": {
+        "art": "git-historie",
+        "beschreibung": "jüngste gültige Fassung der Historie (1a6a490d, fix(a11y): H1-Wache Stufe 2 – Markdown-Wahrheit, H1-Inventar)",
+        "commit": "1a6a490d",
+        "geborgene_akteneintraege": 8
+      },
+      "beschaedigung": {
+        "zustand": "beschaedigt",
+        "groesse": 18096,
+        "offset": 17125,
+        "verdacht": "zusammenschnitt",
+        "detail": [
+          "JSON nicht lesbar: Expecting ',' delimiter: line 413 column 7 (char 17125)",
+          "Bruchstelle: Byte 17125 von 18096 (Zeile 413)",
+          "Hinter der Bruchstelle steht der Rest einer ANDEREN Fassung – Muster: zwei Stände wurden zusammengesetzt (Merge-Konflikt in einer Maschinendatei)."
+        ]
+      },
+      "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
+      "prev_sha256": "5662ac9efa7de034b4224f2a8d514729ed933559d2ea2fe127d0e66073e0141f"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "add",
+      "head": "de04097",
+      "geaendert": [
+        "scripts/artefakt_waechter.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/artefakt_waechter.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "prev_sha256": "17cf8e0a9ef6038e0c00d797a518adfa2bc62adebeb015743c09a7bb87dfe515",
+      "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01"
     }
   ]
 }
