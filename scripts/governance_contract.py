@@ -1926,6 +1926,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                               python_bin=python_bin)
     checks += c30_eine_h1(script_texts, wflows, root=root,
                           python_bin=python_bin)
+    checks += c32_doppelte_schluessel(
+        script_texts, wflows, root=root, python_bin=python_bin)
     return checks
 
 
@@ -2721,7 +2723,148 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
     return out
 
 
+# --- C32: Doppelte Mapping-Schluessel sind eine Bau-Ursache (WF-54C4 #643) ---
+# Am 08.10.2026 starb der Produktions-Build an fuenf Reserve-Artikeln, die aus
+# einem Merge je zwei `tags:`-Zeilen trugen. go-yaml bricht dort HART ab
+# (`mapping key "tags" already defined`), PyYAML liest dieselbe Datei still
+# (letzter Wert gewinnt) – ALLE bisherigen Gates waren gruen. Die Wache heilt
+# jetzt VOR dem Build (ohne die Klasse nachtraeglich zu entschaerfen), und
+# jeder FM-Schreiber endet mit genau einem Feld. Diese Regel prueft nicht die
+# Absicht, sondern die Verdrahtung UND die lebende Wirkung.
+# Haus-Nummern: C31 ist der Robustheits-Vertrag (robustheits_gate.py), C24 die
+# C24 Bank – beide sind keine Regeln dieses Vertrags. C32 ist darum frei.
+def c32_doppelte_schluessel(script_texts, wflows, root=BLOG_DIR, python_bin=None):
+    out = []
+    wache = script_texts.get("fm_boundary_guard.py", "")
+    schreiber = script_texts.get("post_utils.py", "")
+    tag = script_texts.get("tag_governance.py", "")
+    kw = script_texts.get("keyword_optimizer.py", "")
+    pin = script_texts.get("pinterest_pin_text_sync.py", "")
+    deploy = ""
+    rel = ""
+    for pfad, text in (wflows or {}).items():
+        name = os.path.basename(str(pfad))
+        if name == "deploy.yml":
+            deploy = text
+        elif name == "publication-reliability-tests.yml":
+            rel = text
+
+    # a) Die Wache: Klasse vorhanden, VOR dem Parser-Kurzschluss geprueft,
+    #    in beiden Modus-Pfaden verdrahtet, mit Index-Blob-Pfad (--staged).
+    if not wache:
+        out.append(("C32", "scripts/fm_boundary_guard.py fehlt – ohne die Wache "
+                           "ist „kein doppelter Mapping-Schluessel“ eine "
+                           "Behauptung, keine Pruefung (#643, fail-closed)."))
+    else:
+        for marke, sinn in (
+                ("def doppelte_schluessel(", "Erkennung der Klasse F7"),
+                ("def heile_doppelte(", "verlustfreie Heilung (Listen vereinigt, "
+                                        "sonst gilt der letzte Wert)"),
+                ("doppel_funde", "Meldung der Funde im Prueflauf"),
+                ("doppel_heilungen", "Beleg jeder Heilung (Report-Pflicht)"),
+                ("def staged_content(", "Pruefung der GESTAGETEN Blobs (--staged)"),
+                ("--wirkungsprobe", "Fixture-Beweis der Wirkung")):
+            if marke not in wache:
+                out.append(("C32", f"scripts/fm_boundary_guard.py kennt {sinn} "
+                                   f"nicht (`{marke}`) – genau diese Haelfte von "
+                                   f"#643 koennte unbemerkt zurueckkehren."))
+        idx_f7 = wache.find("doppel = doppelte_schluessel(fm_lines)")
+        idx_ok = wache.find("if not doppel and _yaml is not None and parse_ok(")
+        if idx_f7 == -1:
+            out.append(("C32", "scripts/fm_boundary_guard.py ruft die F7-Erkennung "
+                               "nicht mit den Frontmatter-Zeilen auf – PyYAML "
+                               "akzeptiert doppelte Schluessel, nur der Zeilenscan "
+                               "sieht sie (#643)."))
+        elif idx_ok == -1 or idx_f7 > idx_ok:
+            out.append(("C32", "scripts/fm_boundary_guard.py laesst den "
+                               "Parser-Kurzschluss VOR der F7-Erkennung greifen – "
+                               "dann bleibt genau der Fall unsichtbar, der den "
+                               "Build am 08.10.2026 getoetet hat (#643)."))
+        if "python3 scripts/fm_boundary_guard.py" not in wache:
+            out.append(("C32", "scripts/fm_boundary_guard.py nennt seinen Aufruf "
+                               "nicht – Charta und Kommando sollen nicht "
+                               "auseinanderlaufen."))
+
+    # b) Die Verdrahtung: heilen VOR dem Build, pruefen im PR (fail-closed).
+    if not deploy:
+        out.append(("C32", "deploy.yml nicht lesbar – die Reihenfolge "
+                           "(Heilen vor dem Build) ist nicht pruefbar."))
+    else:
+        if "scripts/fm_boundary_guard.py --fix" not in deploy:
+            out.append(("C32", "deploy.yml ruft `fm_boundary_guard.py --fix` nicht "
+                               "– ein doppelter Schluessel stuerzt den Build ab, "
+                               "statt vorher geheilt zu werden (#643)."))
+        if "scripts/fm_boundary_guard.py --selftest" not in deploy:
+            out.append(("C32", "deploy.yml prueft die Wache nicht selbst – eine "
+                               "tote Wache vor dem Build faellt niemandem auf "
+                               "(#643)."))
+        idx_fix = deploy.find("scripts/fm_boundary_guard.py --fix")
+        idx_bau = deploy.find("./.github/actions/hugo-build")
+        if idx_fix != -1 and idx_bau != -1 and idx_fix > idx_bau:
+            out.append(("C32", "deploy.yml heilt die FM-Grenzen erst NACH dem "
+                               "Build-Schritt – genau die Reihenfolge, an der "
+                               "der Deploy am 08.10.2026 gestorben ist (#643)."))
+    if not rel:
+        out.append(("C32", "publication-reliability-tests.yml nicht lesbar – der "
+                           "PR-Pfad (fail-closed ohne --fix) ist nicht pruefbar."))
+    elif "scripts/fm_boundary_guard.py --check" not in rel:
+        out.append(("C32", "publication-reliability-tests.yml ruft "
+                           "`fm_boundary_guard.py --check` nicht – ein PR koennte "
+                           "doppelte Schluessel unbemerkt nach main tragen (#643)."))
+
+    # c) Die Schreiber-Schlussregel: EINE Regel, kein zweiter Schluessel.
+    if "def doppel_freies_feld(" not in schreiber:
+        out.append(("C32", "scripts/post_utils.py kennt die gemeinsame "
+                           "Schreiber-Schlussregel `doppel_freies_feld` nicht – "
+                           "ein Heiler mit `count=1` liesse die zweite Zeile "
+                           "stehen und wuerde die Falle nur unsichtbar machen "
+                           "(#643)."))
+    for name, text in (("keyword_optimizer.py", kw),
+                       ("tag_governance.py", tag),
+                       ("pinterest_pin_text_sync.py", pin)):
+        if text and "doppel_freies_feld" not in text:
+            out.append(("C32", f"scripts/{name} schreibt Top-Level-Felder ohne "
+                               f"`doppel_freies_feld` – der naechste Schreibvorgang "
+                               f"koennte einen zweiten Schluessel hinterlassen "
+                               f"(#643)."))
+
+    # d) Lebende Wirkung: Selbsttest UND Fixture-Beweis muessen JETZT gruen sein.
+    bin_ = python_bin or sys.executable or "python3"
+    for flagge, sinn in (("--selftest", "Sabotageproben der Wache"),
+                         ("--wirkungsprobe", "Fixture-Beweis der F7-Wirkung")):
+        if not wache:
+            break
+        try:
+            lauf = subprocess.run(
+                [bin_, os.path.join(root, "scripts", "fm_boundary_guard.py"), flagge],
+                cwd=root, capture_output=True, text=True, timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C32", f"{sinn} nicht ausfuehrbar "
+                               f"({exc.__class__.__name__}) – fail-closed."))
+        else:
+            if lauf.returncode != 0:
+                zeilen = ((lauf.stdout or "") + (lauf.stderr or "")).strip().splitlines()
+                out.append(("C32", f"{sinn} ROT: "
+                                   + (zeilen[-1][:160] if zeilen
+                                      else f"Exit {lauf.returncode}")))
+    return out
+
+
 RULE_TEXT = {
+    "C32": "Doppelte Mapping-Schluessel sind eine Bau-Ursache: go-yaml bricht "
+           "bei einem wiederholten Schluessel HART ab (`mapping key \"…\" "
+           "already defined`), PyYAML liest dieselbe Datei still weiter (letzter "
+           "Wert gewinnt). Genau daran starben am 08.10.2026 fuenf Reserve-"
+           "Artikel aus einem Merge (WF-54C4 #643): FM-Grenze, Taxonomie und "
+           "alle PyYAML-Gates waren gruen, der Deploy starb im Bauschritt. Die "
+           "Wache (scripts/fm_boundary_guard.py, F7) erkennt die Klasse im "
+           "Zeilenscan VOR dem Parser-Kurzschluss, heilt verlustfrei VOR dem "
+           "Build (Listen werden vereinigt, sonst gilt die YAML-Leseregel: der "
+           "letzte Wert bleibt, das fruehere Vorkommen faellt mit Beleg weg) und "
+           "prueft die gestageten Blobs im PR. Jeder FM-Schreiber endet ueber "
+           "`post_utils.doppel_freies_feld` mit GENAU EINEM Top-Level-Feld – "
+           "ein Heiler mit `count=1` wuerde die Falle sonst nur unsichtbar "
+           "machen.",
     "C30": "Eine Seite hat genau eine H1: Die Schirmzeile gehoert dem Layout, "
            "nie dem Markdown-Fliesstext – wer eine eigene braucht, setzt sie "
            "als `heading:` ins Frontmatter. Eine Wache (scripts/h1_wache.py) "
@@ -2939,6 +3082,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                 "Auslieferungs-SLO)",
          "C29": "Der Schreiber prüft, was über ihn entscheidet (Geburts-Tor, "
                 "Retry-Gedächtnis, Chronik-Reihenfolge, Ruinen-Heiler)",
+         "C32": "Doppelte Mapping-Schluessel (Hugo-Abbruch, verdeckt fuer "
+                "PyYAML) – erkennen vor dem Kurzschluss, heilen vor dem Build",
          "C30": "Eine Seite hat genau eine H1 (Quelle + Build, kein toter "
                 "Zweig, Audit ohne Stichprobe)"}
 
@@ -3809,13 +3954,82 @@ def _selftest():
             if "--fix" in f[1]]:
         failures.append("C30: eine selbst heilende H1-Wache bleibt unentdeckt "
                         "(Content-Verlust, #623).")
+    # --- C32: Doppelte Mapping-Schluessel (#643) ---------------------------
+    # Der echte Baum muss still bleiben; jede Sabotage muss GENAU ihren Zweig
+    # treffen. Selbsttest und Fixture-Beweis der Wache laufen dabei einmal echt.
+    c32_dateien = ("fm_boundary_guard.py", "post_utils.py", "tag_governance.py",
+                   "keyword_optimizer.py", "pinterest_pin_text_sync.py")
+    echte_c32 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in c32_dateien}
+    echte_c32_befunde = c32_doppelte_schluessel(
+        echte_c32, wflows_echt, python_bin=sys.executable or "python3")
+    if echte_c32_befunde:
+        failures.append(f"C32: der echte Zustand wird beanstandet: "
+                        f"{echte_c32_befunde}")
+    # (a) Die F7-Erkennung faellt aus dem Pruefpfad: der Build stuerbe wieder
+    #     an einer Zeile, die PyYAML fuer gueltig haelt (#643).
+    ohne_f7 = dict(echte_c32, **{
+        "fm_boundary_guard.py": echte_c32["fm_boundary_guard.py"].replace(
+            "doppel = doppelte_schluessel(fm_lines)", "doppel = []")})
+    if not [f for f in c32_doppelte_schluessel(
+            ohne_f7, wflows_echt, python_bin=sys.executable or "python3")
+            if "F7-Erkennung" in f[1] or "doppelte" in f[1]]:
+        failures.append("C32: eine abgeschaltete F7-Erkennung bleibt unentdeckt "
+                        "(#643).")
+    # (b) Der Parser-Kurzschluss steht wieder VOR der Erkennung: genau der
+    #     Zustand, in dem alle PyYAML-Gates gruen waren und Hugo starb.
+    alte_reihenfolge = dict(echte_c32, **{
+        "fm_boundary_guard.py": echte_c32["fm_boundary_guard.py"].replace(
+            "if not doppel and _yaml is not None and parse_ok(",
+            "if _yaml is not None and parse_ok(")})
+    if not [f for f in c32_doppelte_schluessel(
+            alte_reihenfolge, wflows_echt, python_bin=sys.executable or "python3")
+            if "Parser-Kurzschluss" in f[1] or "unsichtbar" in f[1]]:
+        failures.append("C32: ein Parser-Kurzschluss vor der F7-Erkennung "
+                        "bleibt unentdeckt (#643).")
+    # (c) Der Deploy heilt nicht mehr VOR dem Build: die Bau-Falle kehrt zurueck.
+    ohne_heilung = dict(wflows_echt)
+    for pfad in list(ohne_heilung):
+        if os.path.basename(pfad) == "deploy.yml":
+            ohne_heilung[pfad] = ohne_heilung[pfad].replace(
+                "scripts/fm_boundary_guard.py --fix", "# Heilung entfernt")
+    if not [f for f in c32_doppelte_schluessel(
+            echte_c32, ohne_heilung, python_bin=sys.executable or "python3")
+            if "vorher geheilt" in f[1] or "Heilung" in f[1]]:
+        failures.append("C32: ein Deploy ohne FM-Selbstheilung bleibt unentdeckt "
+                        "(#643).")
+    # (d) Ein Schreiber laesst die Schlussregel fallen: count=1 liesse die
+    #     zweite Zeile stehen und machte die Falle nur unsichtbar (#643).
+    ohne_regel = dict(echte_c32, **{
+        "tag_governance.py": echte_c32["tag_governance.py"].replace(
+            "return post_utils.doppel_freies_feld(ergebnis[:grenze], feld) + "
+            "ergebnis[grenze:]", "return ergebnis")})
+    if not [f for f in c32_doppelte_schluessel(
+            ohne_regel, wflows_echt, python_bin=sys.executable or "python3")
+            if "doppel_freies_feld" in f[1]]:
+        failures.append("C32: ein FM-Schreiber ohne die Schlussregel bleibt "
+                        "unentdeckt (#643).")
+    # (e) Der PR-Pfad verliert die fail-closed Pruefung: doppelte Schluessel
+    #     koennten unbemerkt nach main wandern.
+    ohne_pr = dict(wflows_echt)
+    for pfad in list(ohne_pr):
+        if os.path.basename(pfad) == "publication-reliability-tests.yml":
+            ohne_pr[pfad] = ohne_pr[pfad].replace(
+                "python3 scripts/fm_boundary_guard.py --check",
+                "# Pruefung entfernt")
+    if not [f for f in c32_doppelte_schluessel(
+            echte_c32, ohne_pr, python_bin=sys.executable or "python3")
+            if "nach main tragen" in f[1] or "--check" in f[1]]:
+        failures.append("C32: ein PR-Pfad ohne fail-closed FM-Pruefung bleibt "
+                        "unentdeckt (#643).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C30 mit Kunstbefunden: Fehler erkannt, "
-          "gutes Setup bleibt still).")
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C32 mit Kunstbefunden: Fehler "
+          "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
+          "anderen Verträgen).")
     return 0
 
 

@@ -1121,6 +1121,45 @@ Signatur.
 Runbook: `docs/ANLEITUNG-ROBUSTHEIT.md` · Befund und Beweis:
 `ROBUSTHEIT-PREMIUM-2026-10-07.md`
 
+## Ein doppelter Schlüssel ist eine Bau-Falle (FM-Grenzen, F7/C32, seit #643, 08.10.2026)
+
+Am 08.10.2026 starb der Produktions-Deploy (Run `37755044113`, Push 09:12 UTC)
+im Bauschritt an **fünf Reserve-Artikeln**, die aus einem Merge je zwei
+`tags:`-Zeilen trugen. go-yaml bricht bei einem wiederholten Mapping-Schlüssel
+**hart** ab (`mapping key "tags" already defined at [7:1]`), PyYAML liest
+dieselbe Datei still weiter (der letzte Wert gewinnt) – FM-Grenze, Taxonomie
+und **alle** Gate-Reporte waren grün, der Deploy starb erst dort, wo niemand
+mehr heilen kann. Zwei Dinge waren daran lehrreich:
+
+- **Der Parser-Kurzschluss war die Blindstelle.** Solange „der Block parst“ als
+  „sauber“ galt, konnte ein doppelter Schlüssel nie auffallen: PyYAML
+  akzeptiert ihn. Die Wache (`scripts/fm_boundary_guard.py`) scannt deshalb
+  **zeilenweise** die Mapping-Ebenen (Regel **F7**) – Erkennung **vor** dem
+  Parser-Kurzschluss, Sequenzlisten (`quellen: - id: …`) und Block-Skalare sind
+  eigene Container bzw. Inhalt und bleiben ruhig.
+- **Heilung muss verlustfrei sein und belegt werden.** Listen werden vereinigt
+  (kein Element geht verloren), alles andere folgt der YAML-Leseregel: der
+  letzte Wert gilt, das frühere Vorkommen fällt weg – **jede** Änderung steht
+  im `FM-GRENZEN-REPORT.md`. `--fix` heilt F7 **vor** dem Build (deploy.yml,
+  selbstheilend wie F6), `--check` bleibt fail-closed (PR-Kette), `--staged`
+  prüft die **Blobs aus dem Index** statt des Arbeitsbaums, `--wirkungsprobe`
+  beweist die Klasse am Fixture (Erkennen, verlustfreies Heilen, Fixpunkt).
+- **Ein Schreiber darf die Falle nicht unsichtbar machen.** Wer nur das ERSTE
+  Vorkommen ersetzt (`count=1`), lässt die zweite Zeile stehen: Sieht geheilt
+  aus, stirbt weiter. Die Schlussregel `post_utils.doppel_freies_feld` gilt
+  darum für jeden FM-Schreiber (keyword_optimizer, tag_governance,
+  pinterest_pin_text_sync) – nach dem Schreiben existiert der Schlüssel genau
+  einmal.
+- **Vertrag:** Regel **C32** in `governance_contract.py` (Haus-Nummern C24/C31
+  gehören anderen Verträgen) friert Wache, Reihenfolge (Heilen VOR dem Build),
+  PR-Pfad, Schreiber-Regel und die lebende Wirkung ein – fünf Kunstbefunde
+  werden im Kontrakt-Selbsttest rot, der echte Baum bleibt still.
+
+Bedienung: `python3 scripts/fm_boundary_guard.py --selftest` · `--check` ·
+`--fix` · `--staged` · `--wirkungsprobe`. Tests:
+`python3 -m unittest scripts.tests.test_fm_boundaries`.
+Vorgangsbericht: `WF-54C4-643-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
+
 ## Ein Selbsttest urteilt über den Code, nicht über das Modell (KI-Probe, seit #138, 08.10.2026)
 
 Engine-Lauf **#138** (Run `37694986440`, 07.10.2026 22:15 UTC) starb in Phase

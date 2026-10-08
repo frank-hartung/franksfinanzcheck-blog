@@ -4,7 +4,6 @@ description: "DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, R
 date: 2026-10-07T10:32:00Z
 draft: true
 reserve: true
-tags: ["DSL-Vergleich", "Internet und Mobilfunk", "Fixkosten"]
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

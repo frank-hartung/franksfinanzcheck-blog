@@ -1,18 +1,18 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T23:58:49.852839+00:00",
-  "head": "c33e0ab",
+  "signed_at": "2026-10-08T09:58:06.162063+00:00",
+  "head": "deeeb87",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "827f34403b06f3e2e94913105bbc5485841c6a62430f9f5940c0cfbd0e1d2407",
+    "hugo.toml": "b85b8ae1cb22f23c8466756dacce9395e3aec6a8957e3638d716cba6ca0ef462",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "8fb36b8fcfb807c6c2d175d39aa8aa5f191814473f88df083627a02714f286d7",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
-    "layouts/_partials/head.html": "266e693120e9928b57d31ecd577eef2e7fd8d0c814741f84e668c549997c7d55",
+    "layouts/_partials/head.html": "6cdcccaa91de626b4fb76a015eaa401543d328e348c4dae1a4c41baf89307039",
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
@@ -51,7 +51,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a",
+  "files_sha256": "05dcfac4adf18a0c2d8e531cf33372cafe2963d1cc3e634c0b6b5db18ff79cc4",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -214,8 +214,52 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17",
-      "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a"
+      "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a",
+      "prev_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "deeeb87",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/_partials/head.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "654bda4",
+              "datum": "2026-10-08",
+              "betreff": "Add Pagefind search and editorial growth resources (#644)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "deeeb87",
+              "datum": "2026-10-08",
+              "betreff": "fix(fm): F7 – doppelte Mapping-Schlüssel töten den Build nicht mehr (WF-54C4 #643)"
+            },
+            {
+              "sha": "654bda4",
+              "datum": "2026-10-08",
+              "betreff": "Add Pagefind search and editorial growth resources (#644)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "2dc5fbd4ff179e6986ccce00e7c64d77848e67d1186b4faa35e7c665acb6e72b",
+      "files_sha256": "05dcfac4adf18a0c2d8e531cf33372cafe2963d1cc3e634c0b6b5db18ff79cc4"
     }
   ]
 }

@@ -95,6 +95,8 @@ import re
 import sys
 import unicodedata
 
+import post_utils  # noqa: E402  – Schreiber-Schlussregel (F7, WF-54C4 #643)
+
 try:
     import yaml
 except ImportError:  # pragma: no cover - the deploy installs PyYAML explicitly
@@ -347,14 +349,20 @@ def schreibe_feld(text: str, feld: str, werte: list[str]) -> str:
     neu = f"{feld}: {_yaml_liste(werte)}"
     inline = re.compile(rf"^{re.escape(feld)}:[ \t]*\[.*?\][ \t]*$", re.M)
     if inline.search(kopf):
-        return inline.sub(lambda _m: neu, kopf, count=1) + rest
-    block = re.compile(rf"^{re.escape(feld)}:[ \t]*\n(?:[ \t]*-[ \t]*.+\n)+", re.M)
-    if block.search(kopf):
-        return block.sub(lambda _m: neu + "\n", kopf, count=1) + rest
-    skalar = re.compile(rf"^{re.escape(feld)}:[ \t]*\S.*$", re.M)
-    if skalar.search(kopf):
-        return skalar.sub(lambda _m: neu, kopf, count=1) + rest
-    return kopf.rstrip("\n") + "\n" + neu + "\n" + rest
+        ergebnis = inline.sub(lambda _m: neu, kopf, count=1) + rest
+    elif (block := re.compile(
+            rf"^{re.escape(feld)}:[ \t]*\n(?:[ \t]*-[ \t]*.+\n)+", re.M)).search(kopf):
+        ergebnis = block.sub(lambda _m: neu + "\n", kopf, count=1) + rest
+    elif (skalar := re.compile(
+            rf"^{re.escape(feld)}:[ \t]*\S.*$", re.M)).search(kopf):
+        ergebnis = skalar.sub(lambda _m: neu, kopf, count=1) + rest
+    else:
+        ergebnis = kopf.rstrip("\n") + "\n" + neu + "\n" + rest
+    # F7-Schlussregel (WF-54C4 #643): Ein Heiler mit `count=1` liesse die zweite
+    # Zeile stehen – Hugo bricht daran den Build ab, PyYAML liest still weiter.
+    # Dieselbe Regel wie in jedem anderen FM-Schreiber (post_utils, SSOT).
+    grenze = ergebnis.index("---", 3)
+    return post_utils.doppel_freies_feld(ergebnis[:grenze], feld) + ergebnis[grenze:]
 
 
 # ---------------------------------------------------------------------------
