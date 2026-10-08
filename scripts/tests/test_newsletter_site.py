@@ -315,7 +315,8 @@ class Streifen(unittest.TestCase):
         self.assertNotIn('partial "newsletter_strip.html"', _text("layouts/_default/single.html"))
 
     def test_blog_streifen_steht_vor_dem_hauptinhalt(self):
-        base = _text("layouts/baseof.html")
+        # Kommentare raus: ein Hinweis im Kommentar auf das Hauptelement täuscht sonst die Reihenfolge vor.
+        base = _ohne_kommentare(_text("layouts/baseof.html"))
         self.assertLess(base.index('partial "header.html"') if 'partial "header.html"' in base
                         else base.index('partialCached "header.html"'), base.index('partial "newsletter_strip.html"'))
         self.assertLess(base.index('partial "newsletter_strip.html"'), base.index('<main'))

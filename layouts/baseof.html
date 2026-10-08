@@ -16,10 +16,23 @@
     {{- partial "head.html" . }}
 </head>
 
+{{- /* SUCHE 08.10.2026 (Pagefind): Die Suchseite selbst gehört nicht in den
+       Index – sonst findet man sie bei jedem Suchbegriff. Der Index liest nur
+       <main data-pagefind-body>, also keine Navigation und kein Footer. */ -}}
+{{- /* Blätterseiten ab Seite 2 (/page/5/) sind nur Listen-Ausschnitte: sie würden
+       bei jedem Begriff als Treffer erscheinen. Die Artikel stehen auf den Seiten selbst. */ -}}
+{{- $listenseite := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "taxonomy") (eq .Kind "term") }}
+{{- $blaetter := false }}
+{{- if $listenseite }}{{ with .Paginator }}{{ $blaetter = gt .PageNumber 1 }}{{ end }}{{ end }}
+{{- /* Was Suchmaschinen nicht indexieren dürfen, gehört auch nicht in die Suche:
+       404, Newsletter-Abmeldung und -Bestätigung, Archive, Pager. Die Entscheidung
+       liegt in seo_indexierbar.html – dieselbe Quelle wie robots-Meta und Sitemap. */ -}}
+{{- $nicht_indexierbar := not (partial "seo_indexierbar.html" .) }}
+{{- $ohne_suchindex := or (hasPrefix .RelPermalink "/suche/") $blaetter $nicht_indexierbar }}
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
-<body class="list" id="top">
+<body class="list" id="top"{{ if $ohne_suchindex }} data-pagefind-ignore="all"{{ end }}>
 {{- else }}
-<body id="top">
+<body id="top"{{ if $ohne_suchindex }} data-pagefind-ignore="all"{{ end }}>
 {{- end }}
     {{- /* Consent-Banner ganz vorn im DOM – LCP-Optimierung (kein
            Render-Delay für das LCP-Element, s. consent_banner.html) */ -}}
@@ -27,7 +40,7 @@
     <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
     {{ partialCached "header.html" . .Page -}}
     {{- partial "newsletter_strip.html" (dict "ort" "kopf" "seite" .) }}
-    <main class="main{{ if and (eq .Section "posts") (eq .Kind "section") }} ff-posts-index{{ end }}" id="main-content">
+    <main class="main{{ if and (eq .Section "posts") (eq .Kind "section") }} ff-posts-index{{ end }}" id="main-content" data-pagefind-body>
         {{- block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . -}}

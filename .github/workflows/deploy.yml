@@ -962,6 +962,23 @@ jobs:
             echo "_(Runbook: \`docs/AUDIO-BACKFILL-RUNBUCH.md\`)._"
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # ------------------------------------------------------------
+      # SUCHE (Pagefind, 08.10.2026): Der Suchindex entsteht aus dem
+      # FERTIGEN public/-Stand – nach dem letzten Hugo-Build und vor
+      # beiden Veröffentlichungen (gh-pages und Pages-Artefakt). Die
+      # Version ist in package.json exakt gepinnt (Lockfile). Fail-
+      # closed: fehlt der Index, stoppt der Deploy, statt eine Suche
+      # ohne Inhalt auszuliefern. Runbook: docs/ANLEITUNG-SUCHE-PAGEFIND.md
+      # ------------------------------------------------------------
+      - name: Suchindex bauen (Pagefind)
+        run: |
+          set -euo pipefail
+          npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+          npm run --silent suchindex
+          test -s public/pagefind/pagefind.js
+          test -s public/pagefind/pagefind-entry.json
+          echo "Suchindex: $(find public/pagefind -type f | wc -l) Dateien, $(du -sh public/pagefind | cut -f1)"
+
       - name: Deploy auf gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:

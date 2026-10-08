@@ -1,0 +1,32 @@
+{{- /* layouts/shortcodes/suche.html – die Suchmaske der Site (Pagefind).
+
+    Ohne JavaScript bleibt das Formular verborgen; der Leser sieht einen Hinweis
+    mit den Wegen über das Menü. Mit JavaScript läuft die Suche komplett im
+    Browser: Die Eingabe steht weder in der URL noch in einem Protokoll – das
+    Formular wird per JavaScript abgefangen (kein GET-Submit mit ?q=).
+
+    Logik:   static/premium/ff-suche.js (first-party, kein Tracking)
+    Optik:   assets/css/extended/ff-suche.css
+    Index:   /pagefind/ – im Deploy gebaut (deploy.yml, Schritt „Suchindex bauen“)
+    Runbook: docs/ANLEITUNG-SUCHE-PAGEFIND.md */ -}}
+<div class="ff-suche" data-ff-suche data-ff-suche-pfad="{{ "pagefind/pagefind.js" | relURL }}" data-pagefind-ignore="all">
+  <noscript>
+    <p class="ff-suche__ohne-js">Die Suche läuft im Browser und braucht JavaScript. Ohne JavaScript findest du alles über das Menü: <a href="{{ "blog/" | relURL }}">Blog</a>, <a href="{{ "pillar/" | relURL }}">Ratgeber</a> und <a href="{{ "werkzeuge/" | relURL }}">Werkzeuge</a>.</p>
+  </noscript>
+
+  <form class="ff-suche__form" role="search" data-ff-suche-form hidden>
+    <label class="ff-suche__label" for="ff-suche-eingabe">Suchbegriff</label>
+    <div class="ff-suche__zeile">
+      <input class="ff-suche__eingabe" id="ff-suche-eingabe" type="search" name="suche"
+             autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search"
+             placeholder="z. B. Kündigungsfrist, Tagesgeld, Stromtarif" data-ff-suche-eingabe>
+      <button class="ff-suche__knopf" type="submit">Suchen</button>
+    </div>
+  </form>
+
+  <p class="ff-suche__status" aria-live="polite" data-ff-suche-status></p>
+  <ol class="ff-suche__liste" data-ff-suche-liste></ol>
+
+  <p class="ff-suche__hinweis">Die Suche läuft auf deinem Gerät. Es gibt keinen Suchdienst im Hintergrund, kein Konto und kein Tracking der Suchbegriffe.</p>
+</div>
+<script defer src="{{ partial "asset_url.html" "premium/ff-suche.js" }}"></script>

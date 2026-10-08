@@ -22,8 +22,17 @@
   </a>
 </aside>
 {{- else -}}
+{{- /* Werkzeugseiten bekommen die konkrete Zusage zum Rechner statt des
+       allgemeinen Satzes. Dieselbe Zusage wie auf der Anmeldeseite: Rechner mit
+       neuen Zahlen (Dienstags-Vorschau), Fristen vor dem Wochenende (Freitag).
+       Weiter ein Streifen pro Seite – kein zweiter Anmeldehinweis. */ -}}
+{{- $werkzeug := hasPrefix $pfad "/werkzeuge/" -}}
 <div class="newsletter-footer ff-nl-strip">
+  {{- if $werkzeug }}
+  <p class="ff-nl-strip__text">Ändern sich die Zahlen hinter einem dieser Rechner, steht es im nächsten Dienstags-Newsletter. Freitags kommen die Fristen, die vor Montag zählen.</p>
+  {{- else }}
   <p class="ff-nl-strip__text">{{ $nl.capture.versprechen }}</p>
+  {{- end }}
   <a class="ff-nl-strip__cta" href="/newsletter/#newsletter-anmeldung">Newsletter abonnieren <span aria-hidden="true">→</span></a>
   <p class="ff-nl-strip__klein">Dienstag &amp; Freitag · kostenlos · ein Klick zum Abmelden</p>
 </div>
