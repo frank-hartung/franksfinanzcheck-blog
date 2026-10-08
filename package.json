@@ -170,6 +170,8 @@
     "nachheilung": "python3 scripts/nachheilung.py",
     "nachheilung:fix": "python3 scripts/nachheilung.py --fix",
     "test:sync": "python3 scripts/nachheilung.py --selftest && python3 -m unittest scripts.tests.test_git_sync scripts.tests.test_nachheilung",
+    "manifest:check": "python3 scripts/manifest_guard.py",
+    "test:manifest": "python3 scripts/manifest_guard.py --selftest && python3 -m unittest scripts.tests.test_manifest_guard",
     "prepare": "python3 scripts/haken_wache.py --install --leise || true"
   },
   "devDependencies": {

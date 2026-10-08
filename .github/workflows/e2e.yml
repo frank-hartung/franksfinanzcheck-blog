@@ -46,6 +46,8 @@ on:
       - "scripts/a11y_audit.py"
       - "scripts/tests/test_h1_wache.py"
       - "scripts/tests/test_a11y_audit.py"
+      - "scripts/manifest_guard.py"
+      - "scripts/tests/test_manifest_guard.py"
       - "playwright.config.mjs"
       - "package.json"
       - "package-lock.json"
@@ -74,6 +76,16 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
+
+      # WF-7B6B / #654 (08.10.2026): Ein Merge-Rest in package.json ließ `npm ci`
+      # in Sekunde 1 abbrechen – die Meldung riet zu API-Keys. Diese Wache prüft
+      # Manifest und Lockfile VOR dem Install, nennt Datei, Zeile und Ursache
+      # (als Annotation an der Zeile) und beweist sich vorher selbst.
+      # Runbook: docs/ANLEITUNG-MANIFEST-WACHE.md
+      - name: Manifest-Wache (package.json & Lockfile vor npm ci)
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo

@@ -338,6 +338,16 @@ jobs:
           fi
           echo "✅ Keine Merge-Marker."
 
+      # WF-7B6B / #654 (08.10.2026): Ein Merge-Rest in package.json ließ jeden
+      # Deploy zwischen 10:41 und 12:50 UTC im Schritt „Suchindex bauen“ sterben,
+      # ohne Hinweis auf die Datei. Diese Wache stoppt den Lauf VOR dem ersten
+      # Gate und dem Build und nennt Datei, Zeile und Ursache. Fail-closed.
+      # Runbook: docs/ANLEITUNG-MANIFEST-WACHE.md
+      - name: Manifest-Schutz (package.json & Lockfile – fail-closed)
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
       # ================= HARTES VOR-VERÖFFENTLICHUNGSGATE (26.08.2026) =================
       # ZWANGSVORGABE: Vor JEDEM Publish muss der Blog die Publikationsroutine
       # (nur Mo/Mi/Fr, 2–3 Artikel/Tag – CADENCE-REPORT.md Regel 2) und die

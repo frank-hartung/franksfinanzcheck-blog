@@ -99,6 +99,14 @@ jobs:
         with:
           submodules: true
 
+      # WF-7B6B / #654 (08.10.2026): Manifeste aller npm-Verzeichnisse (Wurzel,
+      # tools/ff-voice-qa, tools/ff-voice-browser) vor dem Install prüfen.
+      # Runbook: docs/ANLEITUNG-MANIFEST-WACHE.md
+      - name: Manifest-Wache (package.json & Lockfile vor npm ci)
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
       - name: Node bereitstellen
         uses: actions/setup-node@v7
         with:
