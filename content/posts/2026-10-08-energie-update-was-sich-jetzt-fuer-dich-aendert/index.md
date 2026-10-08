@@ -16,6 +16,8 @@ news_kategorie: "energie"
 
 **Stand: 08.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt auf den eigenen Verbrauch an. Das bedeutet, dass die Wahl des richtigen Strom‑ oder Gastarifs stärker vom individuellen Nutzungsverhalten abhängt als bisher. Wer jetzt genauer hinschaut, kann langfristig Geld sparen und unangenehme Überraschungen vermeiden.
 
 ## Was ist passiert?

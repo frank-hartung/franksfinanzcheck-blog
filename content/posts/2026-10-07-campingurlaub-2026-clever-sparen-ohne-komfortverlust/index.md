@@ -41,6 +41,8 @@ kurzantwort: "Ein gutes Campingbudget erfasst mehr als den Stellplatz. Plane Anf
 
 Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehören aber auch Anfahrt, Essen, Ausrüstung und mögliche Gebühren vor Ort. Ein vollständiges Budget zeigt, was der Urlaub wirklich kostet. Es hilft dir auch, Komfort zu wählen, der zu dir passt.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**
 
 - Vergleiche den Gesamtpreis statt nur die Übernachtung.
