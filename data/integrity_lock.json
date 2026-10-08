@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T23:58:49.852839+00:00",
-  "head": "c33e0ab",
+  "signed_at": "2026-10-08T10:00:35.881695+00:00",
+  "head": "1ac187b",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "827f34403b06f3e2e94913105bbc5485841c6a62430f9f5940c0cfbd0e1d2407",
+    "hugo.toml": "b85b8ae1cb22f23c8466756dacce9395e3aec6a8957e3638d716cba6ca0ef462",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -51,7 +51,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a",
+  "files_sha256": "3104e2eba191fe1c6249205abc4ba94c136af9fe65ab73fa3bbf557e41942791",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -214,8 +214,33 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17",
-      "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a"
+      "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a",
+      "prev_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "1ac187b",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "654bda4",
+              "datum": "2026-10-08",
+              "betreff": "Add Pagefind search and editorial growth resources (#644)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "2dc5fbd4ff179e6986ccce00e7c64d77848e67d1186b4faa35e7c665acb6e72b",
+      "files_sha256": "3104e2eba191fe1c6249205abc4ba94c136af9fe65ab73fa3bbf557e41942791"
     }
   ]
 }
