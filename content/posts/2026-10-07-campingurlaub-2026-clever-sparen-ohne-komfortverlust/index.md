@@ -5,7 +5,6 @@ date: 2026-10-07T17:47:29Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, Preisbehauptungen und Metadaten redaktionell neu geprüft"
-tags: ["Campingurlaub", "Reisekosten", "Urlaub planen"]
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -22,7 +21,6 @@ redaktionelle_pruefung:
   aenderungsgrund: "Preis- und Rabattbehauptungen entfernt; Beispielwerte klar als Modell markiert"
 inspiration: "Campingurlaub planen: Gesamtkosten vor der Buchung erfassen"
 cover:
-  image: "images/covers/2026-10-06-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg"
   image: "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg"
   alt: "Campingurlaub planen und Kosten für Platz, Fahrt und Ausrüstung erfassen"
   caption: "Tipp von FranksFinanzcheck"
