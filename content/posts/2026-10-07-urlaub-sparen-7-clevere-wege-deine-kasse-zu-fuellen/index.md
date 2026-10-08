@@ -5,6 +5,7 @@ date: 2026-10-07T10:43:51Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, veraltete Kreditkartenangaben und Metadaten redaktionell neu geprüft"
+tags: ["Urlaub planen", "Reisebudget", "Geld sparen im Alltag"]
 tags: ["Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -110,6 +111,11 @@ Vergleiche Leistungsumfang, Ausschlüsse und Preis.
 Wenn du ein Auto brauchst, vergleiche Abholort, Tankregel, Kilometer und Versicherung gemeinsam. Lies, welche Schäden abgedeckt sind und welche Selbstbeteiligung gilt. Prüfe, ob eine Zusatzversicherung bereits über einen anderen Vertrag besteht. Verlass dich nicht auf ein Werbewort wie „Vollschutz“, ohne die Bedingungen zu lesen.
 
 Ein Mietwagen ist nicht für jede Reise nötig. Vergleiche ihn mit Bahn, Bus, eigenem Auto oder Transfer. Beachte den Weg zum Anbieter und die Öffnungszeiten. Wenn du ein Fahrzeug mietest, fotografiere vorhandene Schäden bei der Übernahme und bewahre die Unterlagen auf.
+
+Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht automatisch, ob das Auto zu deinem Urlaub passt. Lies die Bedingungen des Anbieters und entscheide selbst. Der Partnerlink am Ende führt zu Mietwagenangeboten; er ist kein allgemeiner Vergleich für jede Reiseleistung.
+
+## Wie behältst du die Ausgaben vor Ort im Blick?
+
 
 Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht automatisch, ob das Auto zu deinem Urlaub passt. Lies die Bedingungen des Anbieters und entscheide selbst. Der Partnerlink am Ende führt zu Mietwagenangeboten; er ist kein allgemeiner Vergleich für jede Reiseleistung.
 

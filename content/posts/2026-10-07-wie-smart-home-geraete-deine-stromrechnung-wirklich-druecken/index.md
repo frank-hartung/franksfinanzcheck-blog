@@ -5,6 +5,7 @@ date: 2026-10-07T10:31:02Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): redaktionell neu aufgebaut; Fakten- und Quellenprüfung am 07.10.2026"
+tags: ["Stromkosten senken", "Smart Home", "Energie sparen"]
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

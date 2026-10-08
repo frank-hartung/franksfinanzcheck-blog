@@ -4,6 +4,7 @@ description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamt
 date: 2026-10-07T10:33:21Z
 draft: true
 reserve: true
+tags: ["Handyvertrag", "Internet und Mobilfunk", "Fixkosten"]
 tags: ["Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
