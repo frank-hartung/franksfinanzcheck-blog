@@ -757,9 +757,22 @@ def selftest() -> int:
                    f"ST6: Regel {r.get('id')} postet Recherche-Signale ungeprüft "
                    "(Agent Reach ist lesend – Kuratierung ist Pflicht)")
 
-    # ST7 – Trockenlauf der kompletten Engine schreibt nichts
+    # ST7 – Trockenlauf der kompletten Engine schreibt nichts – und bleibt
+    # OFFLINE: Netz-Trigger (trg.NETZ_TRIGGER) laufen gegen eine Attrappe.
+    # Vorher holte dieser „Offline“-Selbsttest live den tagesschau-Feed
+    # (Dauerheilung Content-Engine v2 #138, KI-Probe scripts/selftest_ki.py).
+    pruefe(trg.NETZ_TRIGGER <= set(trg.PROVIDER),
+           f"ST7: NETZ_TRIGGER nennt unbekannte Trigger "
+           f"{sorted(trg.NETZ_TRIGGER - set(trg.PROVIDER))}")
     vorher = load_state()
-    probe = run(regeln, dry_run=True, state=json.loads(json.dumps(vorher)), verbose=False)
+    echte_provider = {n: trg.PROVIDER[n] for n in trg.NETZ_TRIGGER if n in trg.PROVIDER}
+    try:
+        for n in echte_provider:
+            trg.PROVIDER[n] = lambda _params, _ctx: []
+        probe = run(regeln, dry_run=True, state=json.loads(json.dumps(vorher)),
+                    verbose=False)
+    finally:
+        trg.PROVIDER.update(echte_provider)
     pruefe(isinstance(probe, dict) and "regeln" in probe, "ST7: Probelauf liefert keinen Bericht")
     pruefe(load_state() == vorher, "ST7: Probelauf hat den State verändert")
 

@@ -1,19 +1,20 @@
 {
   "target": 6,
-  "ready": 10,
+  "ready": 6,
   "pool_size": 15,
-  "generated_at": "2026-10-08T00:39:17Z",
+  "generated_at": "2026-10-08T01:07:50Z",
   "candidates": [
     {
       "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
       "ready": true,
-      "sha256": "f16dbd9f2428f0d7ce0cf6f8c5caae723914031abb4067f1df1655fe0305517a",
-      "score": 0.974,
+      "sha256": "ce5afc4bef6391a7033f700076d4e3e26d6ded9064068a7e7cf3aaa23a55df97",
+      "flesch": 61.5,
+      "score": 0.992,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -22,43 +23,62 @@
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
       "ready": true,
-      "sha256": "358a3a63c3516acefeb43eccb2adc628af790b4a0687b9ce5f3de7e86d1238c1",
-      "score": 0.928,
+      "sha256": "fcb923cc3f6c658cf4376ced0552ee18657b73ddb1eb59ee58cb9c263fa2d328",
+      "flesch": 66.1,
+      "score": 0.98,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.78,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+      "ready": true,
+      "sha256": "0ef0400014074ef503325528378887c81b6d7fb8f977f581a83f82577332ec29",
+      "flesch": 63.3,
+      "score": 0.97,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
       "ready": true,
-      "sha256": "efb93ad8c141f269bf33de324f3272a9961cd146b163105350ad041714f17199",
-      "score": 0.966,
+      "sha256": "e04ea938de1c388d34b1101384e47ae663ebef91d09b5359547adc1a45d143dc",
+      "flesch": 61.7,
+      "score": 0.982,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
-      "sha256": "01062488b1a1590307c0cc62361c4fb0de28bf3355732d9872d9a52fb09890cc",
-      "score": 0.948,
+      "sha256": "8a14655c6da03c2c49d030b7497ab396a65e04ed82d9b8441641367d0442037e",
+      "flesch": 61.1,
+      "score": 0.984,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.88,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -67,27 +87,27 @@
     {
       "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
       "ready": true,
-      "sha256": "99b02399173ed07a0de300e0de496289d827c814203a4c9615604071fc01a1da",
-      "score": 0.95,
+      "sha256": "0b559b7937a9ab413921da1db9670d235dd6699edf1088629cd5863257d74881",
+      "flesch": 62.5,
+      "score": 0.984,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-08-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
       "ready": false,
       "sha256": "dcd8cb75a27364200cbb5b0d3ef0a5e18b1affd87076436438898455128f718c",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 51 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 10 Passiv-Formulierungen; Flesch 51.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschn",
+      "flesch": 51.1,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: * **Nullsteuersatz:** Seit 2023 profitierst du beim Kauf von der Befreiung der Umsatzsteuer (0 % MwSt.), was einer indirekten Förderung von 19 % entspricht.",
       "details": [
-        "🛑 2026-10-08-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 51 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 10 Passiv-Formulierungen; Flesch 51.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: * **Nullsteuersatz:** Seit 2023 profitierst du beim Kauf von der Befreiung der Umsatzsteuer (0 % MwSt.), was einer indirekten Förderung von 19 % entspricht."
       ],
       "score": 0.867,
       "parts": {
@@ -102,8 +122,15 @@
     },
     {
       "slug": "2026-10-08-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
-      "ready": true,
+      "ready": false,
       "sha256": "c0b007d4aecf976480ca70f2a5d98119e2522ef8f64b1fbaf901aabfdf867eeb",
+      "flesch": 60.3,
+      "reason": "Reserve-Qualitäts-Gate: RS2: nur 1 Frage-H2 von 11 H2 (Standard: ≥ 2)",
+      "details": [
+        "RS2: nur 1 Frage-H2 von 11 H2 (Standard: ≥ 2)",
+        "RS3: keine Faustregel markiert",
+        "RS5: 28 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Dein Weg zu geringeren Monatskosten – stell dir vor: Du könntest jeden Monat 50 €, 100 € oder sogar 200 € mehr im Portemonnaie haben."
+      ],
       "score": 0.917,
       "parts": {
         "spelling": 0.8,
@@ -116,29 +143,13 @@
       }
     },
     {
-      "slug": "2026-10-08-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
-      "ready": true,
-      "sha256": "47c5389260a986139f69e46a8cefe3b87c52687d0b26576c45eaa4af7d884b59",
-      "score": 0.984,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-10-08-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": false,
       "sha256": "7643fb7cf63e9c2afdfb919386961bd13941a69609e6a328d3046ed250753949",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%); 14 Passiv-Formulierungen; Flesch 52.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestan",
+      "flesch": 52.1,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden.",
       "details": [
-        "🛑 2026-10-08-energieausweis-was-das-dokument-fuer-deine-fixkosten: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%); 14 Passiv-Formulierungen; Flesch 52.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden."
       ],
       "score": 0.88,
       "parts": {
@@ -153,8 +164,13 @@
     },
     {
       "slug": "2026-10-08-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
-      "ready": true,
+      "ready": false,
       "sha256": "d6cbd060a7e72778356b303495c401e8b98571007c4c8cea716689c212086adf",
+      "flesch": 60.9,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** * **Heizungssteuerung:** Smarte Thermostate bieten das größte Sparpotenzial und können die Heizkosten um rund 10–25 % senken.",
+      "details": [
+        "RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** * **Heizungssteuerung:** Smarte Thermostate bieten das größte Sparpotenzial und können die Heizkosten um rund 10–25 % senken."
+      ],
       "score": 0.954,
       "parts": {
         "spelling": 0.8,
@@ -168,8 +184,13 @@
     },
     {
       "slug": "2026-10-08-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
-      "ready": true,
+      "ready": false,
       "sha256": "13406d114dcff348361b2caaa88bf40fca261fef147a1b89a64efacf3d48336d",
+      "flesch": 60.7,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 30 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Haushaltskosten im Check: Wusstest du, dass deutsche Haushalte jährlich über 1.000 € durch veraltete Verträge verschenken?",
+      "details": [
+        "RS5: 30 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Haushaltskosten im Check: Wusstest du, dass deutsche Haushalte jährlich über 1.000 € durch veraltete Verträge verschenken?"
+      ],
       "score": 0.98,
       "parts": {
         "spelling": 0.92,
@@ -185,11 +206,10 @@
       "slug": "2026-10-08-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
       "ready": false,
       "sha256": "06cd42a6893f89050ed3f79d2b336e5067aa00bf3d6ef822e72be5efb4184fbc",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 50.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "flesch": 50.5,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Willst du deine Stromrechnung um bis zu 30 % senken?",
       "details": [
-        "🛑 2026-10-08-kleine-energiespar-tricks-die-deine-kosten-sofort-senken: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Flesch 50.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Willst du deine Stromrechnung um bis zu 30 % senken?"
       ],
       "score": 0.92,
       "parts": {
@@ -206,11 +226,10 @@
       "slug": "2026-10-08-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
       "ready": false,
       "sha256": "935738f1936065c39a4728345cc5e180a7ce198b48d1e3f8e0ce89f6d826dbb9",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschni",
+      "flesch": 52.3,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 55 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %.",
       "details": [
-        "🛑 2026-10-08-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "RS5: 55 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
       ],
       "score": 0.884,
       "parts": {
@@ -225,8 +244,13 @@
     },
     {
       "slug": "2026-10-08-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
-      "ready": true,
+      "ready": false,
       "sha256": "eaca0d239a25185b28f049af51aae7e5972178e9a916db834bc850131af63d93",
+      "flesch": 60.3,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 8 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 100 € pro Jahr für einen Schutz, den du längst besitzt?",
+      "details": [
+        "RS5: 8 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 100 € pro Jahr für einen Schutz, den du längst besitzt?"
+      ],
       "score": 0.954,
       "parts": {
         "spelling": 0.8,
@@ -242,11 +266,10 @@
       "slug": "2026-10-08-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
       "ready": false,
       "sha256": "029c15f620764422da84fde1f49ff3776941b22862a03e9e61ea0cb7c0667928",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "flesch": 53.1,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 28 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?",
       "details": [
-        "🛑 2026-10-08-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "RS5: 28 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?"
       ],
       "score": 0.936,
       "parts": {

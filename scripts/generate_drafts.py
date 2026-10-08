@@ -113,10 +113,11 @@ SYSTEM_PROMPT = (
     "Beobachtung. Du schreibst sachlich korrekte Artikel. "
     "Du erfindest keine Preise, Spannen, Zinssätze, Statistiken, Studien, Umfragen, "
     "Personen, Kundengeschichten, eigenen Tests oder Experten-Zitate. Ein \"ca.\" "
-    "macht eine unbelegte Zahl nicht belastbar. Harte Zahlen verwendest du nur, wenn "
-    "der Recherchekontext eine konkrete externe Quelle dafür enthält. Modellrechnungen "
-    "kennzeichnest du als Modellrechnung und nennst Annahmen, Formel, Rechenschritte "
-    "und Ergebnis; sie sind kein Marktwert. Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze "
+    "macht eine unbelegte Zahl nicht belastbar. Jede externe Zahlen- oder Rechtsaussage "
+    "braucht einen klickbaren Quellenlink direkt im selben Satz; ein Quellenverzeichnis "
+    "allein reicht nicht. Gesetzesparagraphen brauchen immer einen Primärquellen-Link. "
+    "Modellrechnungen kennzeichnest du im Satz als Modellrechnung und nennst Annahmen, "
+    "Formel, Rechenschritte und Ergebnis; sie sind kein Marktwert. Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze "
     "(max. ~20 Wörter), starke Verben. " + SYSTEM_ANREDE + " Kein Passiv, keine Füllphrasen, kein Werbesprech. "
     "Du verzichtest auf typische KI-Floskeln wie \"In der heutigen schnelllebigen Welt\", "
     "\"Es ist wichtig zu beachten\", \"Zusammenfassend lässt sich sagen\", \"Des Weiteren\", "
@@ -505,6 +506,13 @@ def profi_quality_ok(body, keywords=None):
     lesbarkeit = lesbarkeits_befund(body)
     if lesbarkeit:
         problems.append(lesbarkeit)
+    # Reserve-Qualitätsvertrag: Faktenbeleg/RS5, Phantomquellen/RS6,
+    # H2-Redundanz und redaktioneller Mindestumfang blockieren schon bei Geburt.
+    try:
+        from redaktions_standard import reserve_quality_findings
+        problems.extend(reserve_quality_findings(body, author=AUTHOR))
+    except Exception as exc:  # fail-closed: Messausfall ist kein Freispruch
+        problems.append(f"Reserve-Qualitäts-Gate nicht prüfbar: {exc}")
     if keywords:
         kws = [k.strip().strip('"').lower() for k in keywords if k.strip()]
         if kws and kws[0] not in text:

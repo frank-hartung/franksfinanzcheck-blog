@@ -31,7 +31,7 @@ WARUM DIESE DATEI EXISTIERT (Root-Cause 15.09.2026):
         Produktion   (engine_generate --reserve-only, force, Batch = brauche)
         Veredelung   (reserve_finisher --finish)
         Zertifizierung (reserve_readiness.py)
-        wenn kein Fortschritt (weder READY noch Pool gewachsen) → aufhören
+        wenn kein Fortschritt (READY, Pool oder gemessene Lesbarkeit) → aufhören
 
   Der Abbruch ist EHRLICH: Bleibt der Pool unter dem Ziel, exitet die Stufe
   mit 1 (der harte End-Gate `reserve_gate.py` meldet den Engpass ohnehin).
@@ -60,7 +60,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
+import signal
 import subprocess
 import sys
 import tempfile
@@ -72,6 +74,8 @@ CERT = ROOT / "data" / "reserve-readiness.json"
 PY = sys.executable
 
 sys.path.insert(0, str(ROOT / "scripts"))
+import readability_check  # SSOT: Publikationsschwelle
+from satz_heiler import MIN_FORTSCHRITT  # sichere Zwischenstufen (#614)
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 
 
@@ -104,12 +108,16 @@ def cert_state(cert_path: Path = CERT) -> dict:
         return state
     if not isinstance(data, dict):
         return state
-    cands = list(data.get("candidates") or [])
+    cands = data.get("candidates") or []
+    if not isinstance(cands, list):
+        return state
+    cands = [r for r in cands if isinstance(r, dict)]
     state["exists"] = True
     # Beweismittel, nicht Vorgabe: Womit wurde zuletzt gemessen?
     state["zertifikat_ziel"] = reserve_economy.zertifikat_ziel(data)
     state["ready"] = sum(1 for r in cands if r.get("ready") is True)
     state["pool_size"] = len(cands)
+    state["candidates"] = cands
     return state
 
 
@@ -119,12 +127,56 @@ def _run(cmd: list, env_extra: dict | None = None, timeout: int = 2400) -> int:
         env.update(env_extra)
     print(f"    $ {' '.join(cmd)}"
           + (f"   [env: {', '.join(sorted(env_extra))}]" if env_extra else ""))
+    # Die Kette startet selbst Kinder. subprocess.run(timeout=...) beendet
+    # nur den direkten Prozess; verwaiste Heiler könnten nach dem Timeout
+    # weiter schreiben, während der Workflow bereits sichert/zertifiziert.
+    proc = subprocess.Popen(cmd, cwd=str(ROOT), env=env, start_new_session=True)
     try:
-        proc = subprocess.run(cmd, cwd=str(ROOT), env=env, timeout=timeout)
-        return proc.returncode
+        return proc.wait(timeout=timeout)
     except subprocess.TimeoutExpired:
-        print(f"    ⚠ Zeitüberschreitung nach {timeout}s – Runde wird beendet.")
+        try:
+            os.killpg(proc.pid, signal.SIGTERM)
+            proc.wait(timeout=5)
+        except (ProcessLookupError, subprocess.TimeoutExpired):
+            pass
+        finally:
+            # Auch bei bereits beendetem Elternprozess verbliebene Kinder
+            # stoppen (einschließlich solcher, die SIGTERM ignorieren).
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            proc.wait()
+        print(f"    ⚠ Zeitüberschreitung nach {timeout}s – Prozessgruppe beendet.")
         return 124
+
+
+def partial_progress(before: dict, after: dict) -> list[dict]:
+    """Messbarer Teilfortschritt ist KEIN READY, erlaubt aber nächste Runde.
+
+    Nur derselbe zuvor blockierte Kandidat mit neuen Bytes und mindestens
+    dem sicheren Flesch-Sprung des Satz-Heilers zählt. Neue Slugs, reine
+    Hash-/Metadatenänderungen und unbekannte Messwerte sind kein Nachweis.
+    Die volle Publish-Gate-Entscheidung bleibt ausschließlich `ready`.
+    """
+    old = {r.get("slug"): r for r in before.get("candidates", [])
+           if r.get("slug") and r.get("ready") is False}
+    gains = []
+    for row in after.get("candidates", []):
+        prev = old.get(row.get("slug"))
+        if not prev or row.get("ready") is not False:
+            continue
+        if not prev.get("sha256") or not row.get("sha256") or \
+                prev["sha256"] == row["sha256"]:
+            continue
+        a, b = prev.get("flesch"), row.get("flesch")
+        if any(type(v) not in (int, float) or not math.isfinite(v)
+               for v in (a, b)):
+            continue
+        if a < readability_check.NEW_FLESCH_MIN and \
+                round(b - a, 6) >= MIN_FORTSCHRITT:
+            gains.append({"slug": row["slug"], "vor": a, "nach": b})
+    return gains
 
 
 def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
@@ -133,8 +185,8 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
     """Führt die begrenzte Konvergenz aus und liefert den Abschlussbericht.
 
     `runner`/`state_reader`/`now` sind injizierbar (Selbsttest ohne API/Hugo).
-    `max_sekunden` ist das Wanduhr-Budget: Runde 1 läuft immer (sonst täte
-    die Stufe gar nichts), jede weitere nur, wenn noch Budget übrig ist.
+    `max_sekunden` gilt für die gesamte Kette, nicht erneut je Schritt.
+    Nach Budget-Ende startet auch innerhalb einer Runde kein weiteres Kind.
     """
     start = now()
     verlauf = []
@@ -143,17 +195,13 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
         # Zustand IMMER frisch lesen – auch der Budget-Abbruch meldet damit
         # den echten Stand (nie einen erfundenen).
         vorher = state_reader()
-        if max_sekunden is not None and runde > 1 and verbraucht >= max_sekunden:
+        if max_sekunden is not None and verbraucht >= max_sekunden:
             ok = vorher["ready"] >= vorher["target"]
             log(f"  ⏱ Zeitbudget erschöpft nach {int(verbraucht)}s "
                 f"(Grenze {max_sekunden}s) – keine weitere Runde. "
                 f"Stand: READY {vorher['ready']}/{vorher['target']}.")
             return {"ok": ok, "runden": runde - 1, "state": vorher,
                     "verlauf": verlauf, "abbruch": "zeit-budget"}
-        # Verbleibendes Budget als Deckel für JEDEN Schritt der Runde:
-        # kein Einzelschritt kann mehr über das Budget hinauslaufen.
-        rest = (2400 if max_sekunden is None
-                else max(300, int(max_sekunden - verbraucht)))
         brauche = max(0, vorher["target"] - vorher["ready"])
         log(f"  🔄 Konvergenz-Runde {runde}/{max_runden}: "
             f"READY {vorher['ready']}/{vorher['target']} "
@@ -172,22 +220,46 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
                "RESERVE_TARGET": str(vorher["target"])}
         log(f"    → {brauche} zertifizierte(r) Kandidat(en) fehlen – "
             f"Nachschub-Charge (Batch {batch}):")
-        runner([PY, str(ROOT / "scripts" / "engine_generate.py"),
-                "--reserve-only"], env, timeout=rest)
-        runner([PY, str(ROOT / "scripts" / "reserve_finisher.py"), "--finish"],
-               timeout=rest)
-        # Die Zertifizierung zieht die Quarantäne nach (reserve_quarantine):
-        # Ein Kandidat, der zum zweiten Mal am SELBEN Fund scheitert, verlässt
-        # den Pool – die nächste Runde produziert dann Ersatz für ihn. Ohne
-        # diesen Abgang bliebe der Zielbestand unerreichbar, sobald die
-        # Themen-Dedup keinen Nachschub mehr hergibt (Nachtrag #295).
-        runner([PY, str(ROOT / "scripts" / "reserve_readiness.py")],
-               timeout=rest)
+        schritte = [
+            ("engine_generate.py", ["--reserve-only"], env),
+            ("reserve_finisher.py", ["--finish"], None),
+            ("reserve_readiness.py", [], None),
+        ]
+        codes = {}
+        for script, args, step_env in schritte:
+            # Vor JEDEM Kind neu rechnen. Keine künstliche Mindestlaufzeit:
+            # 5 Restsekunden sind nicht erneut 300 Sekunden Budget.
+            rest = (2400 if max_sekunden is None else
+                    max(0, int(max_sekunden - (now() - start))))
+            if rest <= 0:
+                return {"ok": False, "runden": runde,
+                        "state": state_reader(), "verlauf": verlauf,
+                        "abbruch": "zeit-budget", "schritte": codes}
+            code = runner([PY, str(ROOT / "scripts" / script), *args],
+                          step_env, timeout=rest)
+            codes[script] = code
+            if code == 124:
+                # Ein Timeout ist kein inhaltlicher Engpass. Kein Weiterlauf
+                # auf einem möglicherweise nur halb bearbeiteten Bestand.
+                return {"ok": False, "runden": runde,
+                        "state": state_reader(), "verlauf": verlauf,
+                        "abbruch": "schritt-timeout", "schritte": codes}
+            if script == "reserve_readiness.py" and code not in (0, 1):
+                return {"ok": False, "runden": runde,
+                        "state": state_reader(), "verlauf": verlauf,
+                        "abbruch": "zertifizierung-fehlgeschlagen",
+                        "schritte": codes}
         nachher = state_reader()
+        teilfortschritt = partial_progress(vorher, nachher)
         fortschritt = (nachher["ready"] > vorher["ready"]
-                       or nachher["pool_size"] > vorher["pool_size"])
+                       or nachher["pool_size"] > vorher["pool_size"]
+                       or bool(teilfortschritt))
         verlauf.append({**nachher, "runde": runde, "vorher_ready":
-                        vorher["ready"], "fortschritt": fortschritt})
+                        vorher["ready"], "fortschritt": fortschritt,
+                        "teilfortschritt": teilfortschritt, "schritte": codes})
+        for gain in teilfortschritt:
+            log(f"    ↗ {gain['slug']}: Flesch {gain['vor']} → "
+                f"{gain['nach']} (noch nicht zertifiziert)")
         if nachher["ready"] >= nachher["target"]:
             log(f"  ✅ Zielbestand erreicht: READY {nachher['ready']}/"
                 f"{nachher['target']} nach {runde} Runde(n).")
@@ -224,6 +296,11 @@ def write_summary(res: dict, summary_path: str | None) -> None:
                      f"{step['vorher_ready']} → {step['ready']} · Pool "
                      f"{step['pool_size']} · Fortschritt: "
                      f"{'ja' if step['fortschritt'] else 'nein'}")
+        for gain in step.get("teilfortschritt", []):
+            lines.append(f"    - `{gain['slug']}`: Flesch {gain['vor']} → "
+                         f"{gain['nach']} (Teilfortschritt, kein READY)")
+    if res.get("schritte"):
+        lines.append(f"- **Schritt-Exitcodes:** `{res['schritte']}`")
     try:
         with open(summary_path, "a", encoding="utf-8") as fh:
             fh.write("\n".join(lines) + "\n")
@@ -360,6 +437,35 @@ def run_selftest() -> int:
     if batches != ["4", "4", "4"]:
         fehler.append(f"Batch-Deckel (max 4) verletzt: {batches}")
 
+    # #614: gleicher Pool/READY, aber echte Wirkung unterhalb der Schwelle.
+    def probe(wert, sha):
+        return {"target": 6, "ready": 2, "pool_size": 12,
+                "candidates": [{"slug": "probe", "ready": False,
+                                "sha256": sha, "flesch": wert}]}
+
+    rufe.clear()
+    zustaende = iter([probe(58.0, "alt"), probe(58.3, "neu"),
+                      probe(58.3, "neu"), probe(58.3, "neu")])
+    res = converge(runner=fake_runner, state_reader=lambda: next(zustaende),
+                   max_runden=3, log=lambda *_: None)
+    if res["ok"] or res["runden"] != 2 or len(rufe) != 6:
+        fehler.append(f"Teilfortschritt muss genau eine weitere Runde erlauben: {res}")
+    if partial_progress(probe(58, "alt"), probe(58, "neu")):
+        fehler.append("Hashwechsel ohne Messfortschritt darf nicht weiterproduzieren")
+
+    # Das Restbudget gilt pro Schritt frisch, nicht dreimal unverändert.
+    uhr_b, timeouts = [0], []
+
+    def budget_runner(cmd, env_extra=None, timeout=0):
+        timeouts.append(timeout)
+        uhr_b[0] += 400
+        return 0
+
+    converge(runner=budget_runner, state_reader=lambda: probe(58, "alt"),
+             max_sekunden=900, now=lambda: uhr_b[0], log=lambda *_: None)
+    if timeouts != [900, 500, 100]:
+        fehler.append(f"Schritte müssen sich EIN Zeitbudget teilen: {timeouts}")
+
     if fehler:
         print("🛑 RESERVE-CONVERGE-SELFTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -367,7 +473,7 @@ def run_selftest() -> int:
         return 2
     print("✅ Reserve-Converge-Selbsttest grün (Ziel-Abbruch, Fortschritts-"
           "Abbruch, Runden-/Batch-/Zeitbudget-Deckel, ehrliche Zählung aus "
-          "der Liste).")
+          "der Liste, gemessener Teilfortschritt, Restbudget je Schritt).")
     return 0
 
 
@@ -394,7 +500,7 @@ def main() -> int:
         st = cert_state(Path(args.cert))
         print(json.dumps(st, ensure_ascii=False))
         return 0 if st["ready"] >= st["target"] else 1
-    budget = max(300, int(args.max_minuten * 60)) if args.max_minuten else None
+    budget = max(0, int(args.max_minuten * 60)) if args.max_minuten else None
     res = converge(max_runden=max(1, args.runden), max_sekunden=budget)
     write_summary(res, args.summary)
     if res["ok"]:

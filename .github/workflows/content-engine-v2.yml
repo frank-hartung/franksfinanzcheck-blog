@@ -93,6 +93,7 @@ jobs:
       # Zusätzlich hält das PR-Gate (integrity-lock.yml) den Drift schon
       # VOR dem Merge auf – hier bleibt er dann die Ausnahme.
       - name: Integritäts-Lock prüfen & belegten Drift signieren (HARD STOP bei Sabotage)
+        id: lock
         run: |
           python3 scripts/integrity_guard.py --heal
           if ! git diff --quiet -- data/integrity_lock.json data/integrity_history.jsonl; then
@@ -111,6 +112,7 @@ jobs:
 
       # ================= PHASE 0: PRE-FLIGHT =================
       - name: Pre-Flight-Check (Syntax, Keys, Themenpool)
+        id: preflight
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
@@ -147,6 +149,7 @@ jobs:
       # Gate-Durchlauf. Falsch geparkte Artikel verstopfen so nie wieder
       # dauerhaft die Pipeline.
       - name: Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)
+        id: kadenz
         # PREM-AUDIT 26.08.2026: nach jeder Kadenz-Heilung (Zurückstufung
         # → draft, URL verschwindet aus dem Build) sofort die kontextuellen
         # Links auf die betroffenen Posts in andern live Artikeln entlinken
@@ -158,10 +161,20 @@ jobs:
         # Keys wie Phase 2. Ohne sie bliebe der Hold bis zur Phase-2-Heilung
         # liegen und der Slot bliebe in der Frühphase unbesetzt (genau die
         # 1/2-Lage, aus der die Produktions-Wache entstand).
+        #
+        # DAUERHEILUNG #138 (08.10.2026): Mit diesen Schlüsseln liefen auch die
+        # SELBSTTESTS dieses Schritts gegen das Live-Modell – und
+        # `requeue_quality_holds.py --selftest` ließ sich vom Modell umstimmen
+        # (Exit 2, Run 37694986440, Lauf tot vor Phase 1). Heute führt jeder
+        # Selbsttest seinen KI-Weg über eine Attrappe; die PR-Probe
+        # `scripts/selftest_ki.py --trap-workflows` hält das für ALLE
+        # Workflow-Selbsttests dauerhaft fest. Die ERR-Falle nennt im Ernstfall
+        # den exakten Befehl als Annotation statt eines nackten „Exit 2“.
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          trap 'rc=$?; echo "::error title=Phase 0.5 abgebrochen (#138)::„$BASH_COMMAND“ endete mit Exit $rc. Selbsttest-Exit 2 = Werkzeug defekt ODER Selbsttest hängt an KI/Netz – Diagnose: python3 scripts/selftest_ki.py --trap <skript>"' ERR
           python3 scripts/fix_url_hygiene.py --selftest
           python3 scripts/fix_url_hygiene.py --fix
           python3 scripts/fix_url_hygiene.py --heal-holds
@@ -191,6 +204,7 @@ jobs:
 
       # ================= PHASE 1: GENERIEREN (Multi-Fallback) =================
       - name: Phase 1 – Artikel generieren (Engine v2, 3 Ebenen)
+        id: generate
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
@@ -215,12 +229,14 @@ jobs:
       # keinen Entwurf mit Keyword-Tags committen. Der Deploy prüft den
       # fertigen Build erneut; hier stoppen wir die Quelle bereits vor Phase 1.
       - name: Taxonomie-Gate nach Generierung (kein Keyword-Tag-Leak)
+        id: taxonomie
         run: |
           python3 scripts/tag_governance.py --selftest
           python3 scripts/tag_governance.py --apply
           python3 scripts/tag_governance.py --check
 
       - name: Phase-1-Commit – sofort veröffentlichen (auch Entwürfe)
+        id: phase1_commit
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
@@ -559,6 +575,7 @@ jobs:
         run: python3 scripts/submit_indexnow.py || echo 
 
       - name: Hugo for final acceptance (Extended, verifiziert, mehrquellig)
+        id: hugo
         uses: ./.github/actions/install-hugo
         with:
           version: "0.164.0"
@@ -573,6 +590,7 @@ jobs:
       # Schaden (gleiches Muster wie die Kadenz-Endkontrolle). publication_
       # release führt sie zusätzlich selbst aus – eine Quelle, alle Aufrufer.
       - name: "Shortcode-Wache vor der Endabnahme (WF-A535 #529)"
+        id: shortcode
         run: |
           python3 scripts/shortcode_guard.py --selftest
           python3 scripts/shortcode_guard.py --fix
@@ -699,6 +717,31 @@ jobs:
           # nichts auf main, Ticket riet zu API-Schlüsseln).
           if [ "${{ steps.persist.outcome }}" != 'success' ]; then
             echo "::error::SYNCHRONVERLUST (WF-A535 #590) – die Endabnahme konnte ihren Stand nicht nach main bringen. Ursache steht wörtlich im Schritt „Persist final acceptance corrections“ (git_sync.sh nennt Datei und Klasse: konflikt/schutz/auth/netzwerk). Kein Tagesdefizit, kein API-Key-Problem. Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md bzw. den genannten Artikel von Hand angleichen."
+            exit 1
+          fi
+          # DAUERHEILUNG #138: Die vierte ehrlich rote Klasse ist der
+          # FRÜHABBRUCH – ein Pflichtschritt VOR der Endabnahme ist gestorben,
+          # die Endabnahme lief nie (outcome „skipped“, kein Exit-Code). Bisher
+          # landete das im Topf „Endabnahme ohne Exit-Code fehlgeschlagen“ und
+          # schickte die Diagnose in den falschen Schritt (Run 37694986440:
+          # tatsächlich starb Phase 0.5 an einem Selbsttest).
+          if [ "${{ steps.final_release.outcome }}" = 'skipped' ]; then
+            GESTORBEN=""
+            for paar in \
+              "lock=${{ steps.lock.outcome }}=Integritäts-Lock" \
+              "preflight=${{ steps.preflight.outcome }}=Pre-Flight-Check" \
+              "kadenz=${{ steps.kadenz.outcome }}=Phase 0.5 – Kadenz-Gate (Selbsttests + Selbstheilung)" \
+              "generate=${{ steps.generate.outcome }}=Phase 1 – Artikel generieren" \
+              "taxonomie=${{ steps.taxonomie.outcome }}=Taxonomie-Gate" \
+              "phase1_commit=${{ steps.phase1_commit.outcome }}=Phase-1-Commit" \
+              "hugo=${{ steps.hugo.outcome }}=Hugo-Installation" \
+              "shortcode=${{ steps.shortcode.outcome }}=Shortcode-Wache"; do
+              ergebnis="${paar#*=}"; ergebnis="${ergebnis%%=*}"
+              if [ "$ergebnis" = 'failure' ]; then
+                GESTORBEN="${GESTORBEN:+$GESTORBEN, }${paar##*=}"
+              fi
+            done
+            echo "::error::FRÜHABBRUCH (#138) – die Endabnahme lief nie; gescheitert ist: ${GESTORBEN:-ein Schritt vor der Endabnahme (siehe Schrittliste)}. Kein Tagesdefizit, kein API-Key-Problem. Den exakten Befehl nennt die Annotation des genannten Schritts; ein Selbsttest-Exit 2 wird mit python3 scripts/selftest_ki.py --trap <skript> eingegrenzt."
             exit 1
           fi
           if [ "${{ steps.final_release.outcome }}" = 'success' ]; then

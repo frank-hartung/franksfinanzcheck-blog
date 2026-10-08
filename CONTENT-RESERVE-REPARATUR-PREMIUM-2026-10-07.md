@@ -169,6 +169,47 @@ Coverage-Guard alarmiert erst unterhalb der Alarm-Schwelle.
   corpus-weiten Stand 68 → 1 degradiert); die zugehörigen History-Appends
   (`data/*_history.jsonl`) bleiben als Protokoll erhalten.
 
+## 5) Merge mit origin/main – Konflikt aufgeloest, strengste Kette gilt
+
+Nach dem Push bewegte sich main (5 Commits: #635 „restore premium drafts
+with signed editorial contract", #636 „Reserve für #614 stabilisieren",
+#637 „Selbsttests hermetisch + KI-Probe", #638-folge) – PR #638 war
+CONFLICTING. Main hatte zeitgleich dieselbe Klasse dauerhaft behoben:
+6/6 zertifiziert mit **voll redaktionell ueberarbeiteten Drafts**
+(„Editorial revision", amtliche Quellen, signierter Editorial-Contract
+RS2/RS3/RS5/RS6/RS7 direkt im Zertifizierungs-Gate).
+
+Konfliktloesung (5 Daten-Dateien + 16 Cover-Binaries + DSL-Draft):
+
+- **DSL-Draft:** mains Editorial-Revision gewinnt (2026-10-07, Quellen
+  TKG § 56/§ 59, zertifiziert 0,970). Die eigene 2026-10-08-Version
+  (reiner Lesbarkeits-Heal) wurde samt Cover fallengelassen – durch die
+  ownerseitige Ueberarbeitung ueberholt.
+- **Campingurlaub-Cover (add/add):** mains Version gewinnt (gehoert zum
+  redaktionell ueberarbeiteten Draft).
+- **Datenstaende:** nach dem Merge mit der **fusionierten Kette**
+  regeneriert (nicht hand-gefuehrt).
+
+Ergebnis nach Re-Zertifizierung unter der strengeren Kette
+(`reserve_readiness.py`, Zertifikat 2026-10-08T01:07:50Z):
+
+- **ready 6/6 (target 6)** – die 6 zertifizierten Premium-Drafts sind
+  mains Editorial-Revisionen (Qualitaet 0,970–0,992, Flesch 61,1–66,1,
+  alle sha256-Zertifikate matchen die Draft-Bytes).
+- Die **9 gehobenen 2026-10-08-Drafts** bleiben Reserve-Bestand: 4 davon
+  sind lesbarkeitsseitig Premium-geheilt (Flesch 60,3–60,9,
+  `readability 1.0`), blockieren jetzt an **RS5** (8–55 unbelegte
+  Zahlenbehauptungen je Draft) – Klasse „heilbar" fuer die naechtliche
+  KI-Kette bzw. kuenftige Quellen-Arbeit im Editorial-Contract-Stil.
+- **Quarantine + Custody** von der Kette automatisch konsistent
+  regeneriert (9 Quarantine-Eintraege mit RS5-Befund, 0 stale
+  Slug-Pointer, alle 15 Reserve-Drafts getrackt).
+- **Covers:** Manifest bereinigt (102 Eintraege, alle Dateien verifiziert),
+  LCP/FCP-Eintraege aktualisiert.
+- **Suite:** 2187 Tests OK (skipped=1) – inkl. mains neuer Editorial-
+  Contract- und Konvergenz-Tests sowie des eigenen
+  `keyword_optimizer`-Fixpunkts.
+
 ---
 
 **Artefakte dieses Vorgangs:** 5 redaktionell geheilte + zertifizierte
@@ -177,4 +218,7 @@ Reserve-Drafts (`content/posts/2026-10-08-*/index.md`), frisches Zertifikat
 Pipeline-Stände (`data/reserve-custody.json`, `data/reserve-quarantine.json`,
 `data/covers_manifest.json`, `data/faktenfrische_queue.json`,
 `data/audit/2026-10-08.jsonl`, History-Appends), Code-Fix
-`scripts/keyword_optimizer.py` (Heiler-Fixpunkt), dieser Report.
+`scripts/keyword_optimizer.py` (Heiler-Fixpunkt), Branded Covers + LCP/FCP
+fuer die gehobenen Drafts, dieser Report, sowie der Merge mit origin/main
+(mainUeberarbeitung der 6 Premium-Drafts inkl. Editorial-Contract uebernommen,
+Re-Zertifizierung 6/6 unter der fusionierten Kette).
