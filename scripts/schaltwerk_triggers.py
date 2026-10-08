@@ -545,6 +545,14 @@ PROVIDER = {
     "n8n_event": trigger_n8n_event,
 }
 
+# Trigger, die das NETZ erreichen. Der Schaltwerk-Selbsttest (ST7) ersetzt
+# genau diese durch eine Attrappe – ein Selbsttest urteilt über den Code,
+# nicht über die Erreichbarkeit eines Fremd-Feeds (Dauerheilung Content-
+# Engine v2 #138; CI-Probe: scripts/selftest_ki.py). Wer einen neuen
+# Netz-Trigger registriert, trägt ihn hier ein – sonst meldet die KI-Probe
+# den Netzversuch des Selbsttests mit Datei und Zeile.
+NETZ_TRIGGER = frozenset({"rss"})
+
 
 if __name__ == "__main__":  # pragma: no cover – Handprobe
     import schaltwerk
