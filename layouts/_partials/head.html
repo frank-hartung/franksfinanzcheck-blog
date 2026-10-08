@@ -155,28 +155,10 @@
 <style>{{ $stylesheet.Content | safeCSS }}{{ partial "ff_fontfaces.html" . | safeCSS }}</style>
 {{- /* Fonts sind immer eingebettet (first-party). */ -}}
 
-{{- /* Search */}}
-{{- if (eq .Layout `search`) -}}
-<link crossorigin="anonymous" rel="preload" as="fetch" href="{{ "index.json" | relURL }}">
-{{- $fastsearch := resources.Get "js/fastsearch.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify }}
-{{- /* MEDIEN-TYP-ANGLEICH (WF-54C4 #643, 08.10.2026): hugo.toml registriert
-       `application/javascript` für `.js` – rohe Assets (fuse, license) kommen
-       so an, das esbuild-Ergebnis von `js.Build` dagegen als
-       `text/javascript`. `resources.Concat` verlangt EINEN Typ und brach sonst
-       genau hier ab – auf der ersten Seite mit `layout: search` (`/suche/`),
-       und mit ihr der gesamte Build/Deploy. FromString auf ein `.js`-Ziel
-       normalisiert den Typ, ohne Inhalt oder Reihenfolge zu ändern. */ -}}
-{{- $fastsearch = resources.FromString "js/fastsearch.built.js" $fastsearch.Content }}
-{{- $fusejs := resources.Get "js/fuse.basic.min.js" }}
-{{- $license_js := resources.Get "js/license.js" }}
-{{- if not site.Params.assets.disableFingerprinting }}
-{{- $search := (slice $fusejs $license_js $fastsearch ) | resources.Concat "assets/js/search.js" | fingerprint }}
-<script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}"></script>
-{{- else }}
-{{- $search := (slice $fusejs $fastsearch ) | resources.Concat "assets/js/search.js" }}
-<script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}"></script>
-{{- end }}
-{{- end -}}
+{{- /* Search: seit #644 läuft die Suche auf /suche/ vollständig über Pagefind
+       (layouts/search/single.html). Der frühere Fuse-Block lud /index.json –
+       diese Datei wird nicht gebaut (Home-Outputs: HTML, RSS, SWJS) → toter Link
+       und toter Fetch. Entfernt, damit das Qualitäts-Gate (Link-Check) grün wird. */}}
 
 {{- /* Favicons (12.08. Runde 2, Frank): Marken-Favicon aus bake_brand.py –
        modernes SVG (gold-Haken auf Tiefgruen) + Apple-Touch-Icon.
