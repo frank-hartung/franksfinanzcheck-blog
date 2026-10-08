@@ -26,6 +26,12 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import fm_boundary_guard as fm  # noqa: E402
 import keyword_optimizer as ko  # noqa: E402
+import pinterest_pin_text_sync as pin_sync  # noqa: E402
+import tag_governance as tag_governance  # noqa: E402
+
+# Der ECHTE Bestandsleser, bevor irgendein Test ihn umbiegt: Der
+# Klassen-Wächter unten muss über den echten Inhalt laufen (nicht über Fixtures).
+ECHTE_CONTENT_FILES = fm.content_files
 import post_utils  # noqa: E402  – Naht-SSOT (join/split/heal)
 
 try:
@@ -129,7 +135,7 @@ class BestandTests(unittest.TestCase):
             encoding="utf-8")
         datei = self.alt_dir / "kaputt.md"
         vorher = datei.read_text(encoding="utf-8")
-        hart, _hin, _heil, unheilbar, residual, _g = fm.run(fix=True)
+        hart, _hin, _heil, unheilbar, residual, _g, _dups = fm.run(fix=True)
         self.assertEqual([h[1] for h in hart if h[1] == "F2"], ["F2"])
         self.assertEqual(datei.read_text(encoding="utf-8"), vorher)
         self.assertTrue(residual or unheilbar)
@@ -166,7 +172,8 @@ class KleberFugeTests(unittest.TestCase):
 
     def test_check_meldet_f6_baukritisch_und_laesst_die_datei_ruhen(self):
         vorher = self.datei.read_text(encoding="utf-8")
-        hart, kleber, heilungen, unheilbar, _residual, _geprueft = fm.run(fix=False)
+        (hart, kleber, heilungen, unheilbar, _residual, _geprueft,
+         _doppel) = fm.run(fix=False)
         self.assertIn("F6", [h[1] for h in hart],
                       "ohne --fix muss der Kleber baukritisch sein (Exit 1)")
         self.assertEqual([k[1] for k in kleber], ["F6"])
@@ -187,14 +194,14 @@ class KleberFugeTests(unittest.TestCase):
     def test_fix_ist_konvergent(self):
         fm.run(fix=True)
         einmal = self.datei.read_text(encoding="utf-8")
-        _hart, kleber, _heil, _unh, residual, _g = fm.run(fix=True)
+        _hart, kleber, _heil, _unh, residual, _g, _dups = fm.run(fix=True)
         self.assertEqual(kleber, [])
         self.assertEqual(residual, [])
         self.assertEqual(self.datei.read_text(encoding="utf-8"), einmal)
 
     def test_prompt_geruest_verschwindet_und_der_einstieg_bleibt(self):
         self.datei.write_text(self.GERUEST, encoding="utf-8")
-        _hart, kleber, _heil, _unh, _res, _g = fm.run(fix=True)
+        _hart, kleber, _heil, _unh, _res, _g, _dups = fm.run(fix=True)
         self.assertTrue(kleber and kleber[0][3],
                         "die Gerüst-Entfernung muss im Befund belegt sein")
         text = self.datei.read_text(encoding="utf-8")
@@ -217,6 +224,236 @@ def preher_body(text):
     """Alles ab der Schlussgrenze (Body) – muss durch Heilung gleich bleiben."""
     _zeilen, _begin, ende = fm.split_fm(text)
     return "\n".join(text.split("\n")[ende:]) if ende else text
+
+
+# ------------------------------------------------ F7 Doppelte Mapping-Schlüssel
+class DoppelSchluesselTests(unittest.TestCase):
+    """F7: doppelte Mapping-Schlüssel in EINER Ebene (Bau-Ursache 08.10.2026).
+
+    Der Produktions-Build starb am 08.10.2026 (Issue #643, WF-54C4), weil fünf
+    Reserve-Artikel aus einem MERGE je zwei `tags:`-Zeilen trugen. go-yaml bricht
+    bei einem wiederholten Schlüssel HART ab (`mapping key "tags" already
+    defined`), während jede PyYAML-Prüfung die Datei still parst (letzter Wert
+    gewinnt) – die Wache lief grün und der Deploy starb erst im Bauschritt.
+    Diese Tests halten die Klasse fest: Erkennen ohne Schreiben, verlustfreie
+    Vereinigung bei Listen, YAML-Leseregel bei allem anderen, Konvergenz – und
+    dass Sequenzlisten (`quellen: - id: …`) davon unberührt bleiben.
+    """
+
+    DOPPEL = ("---\n"
+              'title: "Reisekasse: 7 Tipps"\n'
+              "date: 2026-10-07T17:47:29Z\n"
+              "draft: true\n"
+              'tags: ["Urlaub planen", "Reisekosten"]\n'
+              'tags: ["Reisebudget", "Geld sparen im Alltag"]\n'
+              'categories: ["Ratgeber"]\n'
+              "cover:\n"
+              '  image: "images/covers/2026-10-06-x.jpg"\n'
+              '  image: "images/covers/2026-10-07-x.jpg"\n'
+              '  alt: "Alt"\n'
+              "quellen:\n"
+              '  - id: "Q1"\n'
+              '    quelle: "A"\n'
+              '  - id: "Q1"\n'
+              '    quelle: "B"\n'
+              "description: |\n"
+              "  Beispieltext mit einer Zeile.\n"
+              '  tags: ["kein", "Schluessel"]\n'
+              "---\n\nBody.\n")
+    VEREINIGUNG = 'tags: ["Urlaub planen", "Reisekosten", "Reisebudget", "Geld sparen im Alltag"]'
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="fmdup-"))
+        self.dir = self.tmp / "content" / "posts" / "demo"
+        self.dir.mkdir(parents=True)
+        self.datei = self.dir / "index.md"
+        self.datei.write_text(self.DOPPEL, encoding="utf-8")
+        self._pf, self._rep = fm.content_files, fm.REPORT
+        fm.content_files = lambda: sorted(
+            str(q) for q in (self.tmp / "content").rglob("*.md"))
+        fm.REPORT = str(self.tmp / "FM-GRENZEN-REPORT.md")
+
+    def tearDown(self):
+        fm.content_files, fm.REPORT = self._pf, self._rep
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_check_meldet_f7_baukritisch_und_schreibt_nicht(self):
+        vorher = self.datei.read_text(encoding="utf-8")
+        (hart, _kleber, _heil, _unh, _res, _g,
+         (funde, heilungen)) = fm.run(fix=False)
+        f7 = [h for h in hart if h[1] == "F7"]
+        self.assertEqual(sorted(f[1] for f in funde), ["image", "tags"],
+                         "top-level UND verschachtelte Doppel müssen auffallen")
+        self.assertEqual(len(f7), 2, "ohne --fix ist jeder Doppel baukritisch")
+        self.assertFalse(heilungen, "ein Prüflauf darf nie heilen (C15)")
+        self.assertEqual(self.datei.read_text(encoding="utf-8"), vorher)
+
+    def test_fix_vereinigt_listen_und_folgt_der_yaml_leseregel(self):
+        _hart, _kleber, _heil, _unh, _res, _g, (_funde, heilungen) = fm.run(fix=True)
+        text = self.datei.read_text(encoding="utf-8")
+        self.assertEqual(text.count("\ntags:"), 1,
+                         "nach der Heilung darf 'tags' nur noch einmal existieren")
+        self.assertIn(self.VEREINIGUNG, text,
+                      "die Vereinigung darf kein Element verlieren")
+        self.assertNotIn("2026-10-06-x.jpg", text,
+                         "Skalar-Doppel folgt der Leseregel: der letzte Wert gilt")
+        self.assertIn("2026-10-07-x.jpg", text)
+        self.assertIn('  - id: "Q1"\n', text)
+        self.assertEqual(text.count('id: "Q1"'), 2,
+                         "Sequenz-Einträge sind eigene Container – kein Fund")
+        self.assertEqual(preher_body(text), preher_body(self.DOPPEL))
+        notizen = [n for _r, _a, n in heilungen if n]
+        self.assertTrue(any("vereinigt" in n for n in notizen),
+                        "die Vereinigung muss im Report belegt sein")
+        self.assertTrue(any("letzten Wert" in n for n in notizen),
+                        "der verworfene Wert muss im Report stehen")
+
+    def test_fix_ist_konvergent_und_yaml_liest_die_vereinigung(self):
+        fm.run(fix=True)
+        einmal = self.datei.read_text(encoding="utf-8")
+        (_hart, _kleber, _heil, _unh, residual, _g, (funde, _h)) = fm.run(fix=True)
+        self.assertEqual(funde, [])
+        self.assertEqual(residual, [])
+        self.assertEqual(self.datei.read_text(encoding="utf-8"), einmal)
+        if yaml is not None:
+            block = einmal.split("---\n", 2)[1]
+            daten = yaml.safe_load(block)
+            self.assertEqual(daten["tags"],
+                             ["Urlaub planen", "Reisekosten", "Reisebudget",
+                              "Geld sparen im Alltag"])
+            self.assertEqual(daten["cover"]["image"],
+                             "images/covers/2026-10-07-x.jpg")
+
+    def test_blocklisten_werden_vereinigt(self):
+        self.datei.write_text(
+            '---\ntitle: x\ntags:\n  - "A"\n  - "B"\n'
+            'tags:\n  - "B"\n  - "C"\n---\n\nBody.\n',
+            encoding="utf-8")
+        fm.run(fix=True)
+        text = self.datei.read_text(encoding="utf-8")
+        self.assertEqual(text.count("\ntags:"), 1,
+                         "auch Blocklisten müssen zu EINEM Schlüssel werden")
+        self.assertIn('- "A"', text)
+        self.assertIn('- "C"', text)
+        self.assertEqual(text.count('- "B"'), 1,
+                         "Dubletten fallen bei der Vereinigung weg")
+        if yaml is not None:
+            self.assertEqual(
+                yaml.safe_load(text.split("---\n", 2)[1])["tags"],
+                ["A", "B", "C"])
+
+    def test_staged_blob_heilt_nichts_auf_der_platte(self):
+        vorher = self.datei.read_text(encoding="utf-8")
+        rel = "content/posts/demo/index.md"
+        (hart, _kleber, _heil, _unh, _res, _g,
+         (funde, heilungen)) = fm.run(fix=True, quellen=[(rel, self.DOPPEL)])
+        self.assertEqual(len(funde), 2,
+                         "auch der Index-Blob muss geprüft werden (--staged)")
+        self.assertFalse(heilungen)
+        self.assertIn("F7", [h[1] for h in hart])
+        self.assertEqual(self.datei.read_text(encoding="utf-8"), vorher,
+                         "quellen=… ist ein Prüfpfad – er schreibt nie")
+
+    def test_verschachtelter_schluessel_ist_kein_doppel(self):
+        zeilen = ['tags: ["A"]', "cover:", '  tags: ["B"]', '  image: "x.jpg"']
+        self.assertEqual(fm.doppelte_schluessel(zeilen), [],
+                         "gleicher Name auf ANDERER Ebene ist kein Duplikat")
+
+    def test_blockskalar_inhalt_ist_kein_schluessel(self):
+        zeilen = ["description: |", '  tags: ["kein", "Schluessel"]',
+                  'tags: ["A"]']
+        self.assertEqual(fm.doppelte_schluessel(zeilen), [])
+
+    def test_bestand_ist_doppelschluesselfrei(self):
+        """Klassen-Wächter über den echten Bestand: kein Artikel trägt einen
+        doppelten Mapping-Schlüssel – sonst stirbt der nächste Deploy."""
+        if fm.content_files is not ECHTE_CONTENT_FILES:      # Fixture zur Seite
+            alt = fm.content_files
+            fm.content_files = ECHTE_CONTENT_FILES
+            try:
+                (_hart, _kleber, _heil, _unh, _res, _g,
+                 (funde, _h)) = fm.run(fix=False)
+            finally:
+                fm.content_files = alt
+        else:
+            (_hart, _kleber, _heil, _unh, _res, _g,
+             (funde, _h)) = fm.run(fix=False)
+        self.assertEqual(funde, [],
+                         "doppelte Schlüssel im Bestand – Hugo bricht hier ab")
+
+
+# ------------------------------------------- F7 Schreiber-Schlussregel
+class SchreiberTests(unittest.TestCase):
+    """Jeder FM-Schreiber endet mit GENAU EINEM Top-Level-Feld.
+
+    Die F7-Falle entsteht nicht nur im Merge, sondern auch im Schreiber: Wer
+    `count=1` ersetzt, lässt eine zweite Zeile stehen. Der Deploy-Gate-Heiler
+    (`tag_governance.schreibe_feld`) hätte die fünf Artikel dann scheinbar
+    geheilt – und der Build wäre weiter gestorben (WF-54C4 #643).
+    """
+
+    DOPPEL = ('---\ntitle: "Alt"\ntitle: "Älter"\ntags: ["A"]\n'
+              'tags: ["B"]\ncover:\n  image: "x.jpg"\n---\n\nBody.\n')
+
+    def test_post_utils_schlussregel(self):
+        fm = 'title: "X"\ntags:\n  - "A"\ntags:\ntitle: "Y"'
+        self.assertEqual(post_utils.doppel_freies_feld(fm, "tags"),
+                         'title: "X"\ntags:\n  - "A"\ntitle: "Y"')
+        self.assertEqual(post_utils.doppel_freies_feld("title: x\n", "tags"),
+                         "title: x\n", "ohne Fund bleibt der Block bytegleich")
+        self.assertEqual(post_utils.doppel_freies_feld("  tags: x\ntags: y\n", "tags"),
+                         "  tags: x\ntags: y\n",
+                         "verschachtelter Schlüssel ist kein Duplikat")
+        self.assertEqual(post_utils.doppel_freies_feld("tagsx: 1\n", "tags"),
+                         "tagsx: 1\n", "Präfix-Verwechslung ist kein Treffer")
+
+    def test_keyword_optimizer_fm_set_laesst_kein_duplikat_zurueck(self):
+        neu = ko.fm_set(self.DOPPEL, "title", "Neu")
+        self.assertEqual(neu.count("\ntitle:"), 1, neu)
+        self.assertIn('title: "Neu"', neu)
+        self.assertIn('tags: ["A"]', neu)
+        self.assertEqual(preher_body(neu), preher_body(self.DOPPEL))
+        # Fixpunkt: der zweite Lauf ändert nichts mehr.
+        self.assertEqual(ko.fm_set(neu, "title", "Neu"), neu)
+
+    def test_keyword_optimizer_fm_set_list_laesst_kein_duplikat_zurueck(self):
+        neu = ko.fm_set_list(self.DOPPEL, "tags", ["Neu1", "Neu2"])
+        self.assertEqual(neu.count("\ntags:"), 1, neu)
+        self.assertIn('tags: ["Neu1", "Neu2"]', neu)
+
+    def test_tag_governance_schreibe_feld_raeumt_doppel_ab(self):
+        aus = tag_governance.schreibe_feld(self.DOPPEL, "tags", ["B", "C"])
+        self.assertEqual(aus.count("\ntags:"), 1, aus)
+        self.assertIn('tags: ["B", "C"]', aus)
+
+    def test_tag_governance_raeumt_auch_blocklisten_doppel_ab(self):
+        text = ('---\ntags:\n  - "A"\n  - "B"\ntags:\n  - "C"\n'
+                'cover:\n  image: "x.jpg"\n---\n\nBody.\n')
+        aus = tag_governance.schreibe_feld(text, "tags", ["A", "B"])
+        self.assertEqual(aus.count("\ntags:"), 1, aus)
+        self.assertNotIn('- "C"', aus, "die Blockliste des Duplikats muss mit")
+        self.assertIn("image:", aus, "Nachbarfelder bleiben unberührt")
+        self.assertTrue(aus.endswith("\n\nBody.\n"))
+
+    def test_pinterest_pin_text_sync_laesst_kein_duplikat_zurueck(self):
+        text = ('---\npin_title: "Alt"\npin_title: "Älter"\n---\n\nBody.\n')
+        aus = pin_sync.fm_set(text, "pin_title", "Neu")
+        self.assertEqual(aus.count("\npin_title:"), 1, aus)
+        self.assertIn("pin_title: Neu", aus)
+
+    def test_bestand_schreiber_konvergiert(self):
+        """Klassen-Wächter: Für jeden echten Artikel hinterlässt ein Schreib-
+        vorgang keinen doppelten Schlüssel und ist beim zweiten Lauf Fixpunkt."""
+        geprueft = 0
+        for pfad in ECHTE_CONTENT_FILES():
+            text = Path(pfad).read_text(encoding="utf-8")
+            geprueft += 1
+            einmal = ko.fm_set(text, "fm_test_feld", "Wert")
+            zweimal = ko.fm_set(einmal, "fm_test_feld", "Wert")
+            self.assertEqual(einmal, zweimal, f"nicht idempotent: {pfad}")
+            fm_block = einmal.split("---\n", 2)[1]
+            self.assertEqual(fm_block.count("\nfm_test_feld:"), 1)
+        self.assertGreater(geprueft, 0, "kein Artikel gefunden – Test blind?")
 
 
 # ------------------------------- R15-Stempel (BOT-WATCHDOG #614, 07.10.2026)

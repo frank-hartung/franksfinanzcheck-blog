@@ -318,6 +318,17 @@ jobs:
             //  Schritt-Namen und werden weiterhin gemeldet.
             // ================================================================
             const failedStepNames = failedJobs.flatMap(j => j.steps || []);
+            // WF-A535 #632 / Content-Engine v2: the final status step is a
+            // classifier, not necessarily the root cause. Phase 0.5 has a
+            // more specific signature; otherwise its ::error:: annotation
+            // names the class (deficit, release crash, sync loss, early abort).
+            // Scope both checks to this workflow so similarly named steps in
+            // unrelated workflows keep their own runbooks.
+            const isContentEngine = wfName === 'Content-Engine v2';
+            const enginePhase05Failed = isContentEngine &&
+              failedStepNames.some(s => String(s).includes('Phase 0.5 – Kadenz-Gate sicherstellen'));
+            const engineFinalClassifierFailed = isContentEngine &&
+              failedStepNames.some(s => String(s).includes('Do not report a quota deficit as success'));
             const labelsOf = issue => (issue.labels || [])
               .map(l => typeof l === 'string' ? l : (l && l.name) || '')
               .filter(Boolean);
@@ -402,15 +413,30 @@ jobs:
               }
               lines.push('');
             }
+            const handlung = enginePhase05Failed
+              ? [
+                  '1. **Frühabbruch vor der Endabnahme:** Phase 0.5 ist der fehlgeschlagene Pflichtschritt. Falls „Do not report a quota deficit as success“ ebenfalls rot ist, ist es nur die Schlussklassifikation. Das belegt weder ein Tagesdefizit noch einen API-Key-Ausfall.',
+                  '2. Öffne das Log von „Phase 0.5 – Kadenz-Gate sicherstellen“. Die ERR-Annotation nennt den exakten Befehl und Exit-Code.',
+                  '3. Bei einem Selbsttest-Exit 2: `python3 scripts/selftest_ki.py --trap <skript>` ausführen. Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
+                ]
+              : engineFinalClassifierFailed
+                ? [
+                    '1. **Einordnung:** „Do not report a quota deficit as success“ ist der Abschluss-Classifier, nicht automatisch die Fehlerursache.',
+                    '2. Öffne dessen Log und lies die `::error::`-Annotation. Sie unterscheidet FRÜHABBRUCH, TAGESDEFIZIT, RELEASE-CRASH und SYNCHRONVERLUST und nennt den zuständigen Schritt.',
+                    '3. Folge der dort genannten Diagnose. API-Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
+                  ]
+                : [
+                    failedJobs.length > 0
+                      ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
+                      : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
+                    '2. Häufigste Ursachen:',
+                    '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
+                    '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
+                    '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)'
+                  ];
             lines.push(
               '### Was du tun solltest',
-              failedJobs.length > 0
-                ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
-                : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
-              '2. Häufigste Ursachen:',
-              '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
-              '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
-              '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)',
+              ...handlung,
               '',
               '---',
               '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'

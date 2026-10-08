@@ -43,7 +43,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import (list_post_paths, slug_of, safe_title_cut,  # noqa: E402
-                        join_article)
+                        join_article, doppel_freies_feld)
 import groq_config  # noqa: E402
 
 DENSITY_MIN = 0.003
@@ -88,6 +88,9 @@ def fm_set(content: str, key: str, value: str) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
+    # F7 (WF-54C4 #643): Der Schreiber darf NIE einen zweiten Schlüssel
+    # hinterlassen – Hugo bricht daran den ganzen Build ab, PyYAML liest still.
+    fm2 = doppel_freies_feld(fm2, key)
     return join_article(fm2, body)
 
 
@@ -100,6 +103,7 @@ def fm_set_list(content: str, key: str, items: list[str]) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
+    fm2 = doppel_freies_feld(fm2, key)      # F7-Schlussregel (WF-54C4 #643)
     return join_article(fm2, body)
 
 

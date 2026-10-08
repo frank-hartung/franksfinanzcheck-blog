@@ -22,3 +22,16 @@ Gib einen Begriff ein – eine Frist, einen Vertrag oder den Namen eines Rechner
 {{< suche >}}
 
 Was die Suche nicht tut: Deine Eingabe geht nicht an einen Suchdienst, es entsteht keine Suchhistorie und es wird kein Cookie gesetzt. Der Suchindex ist eine statische Datei dieser Seite.
+title: "Ratgeber durchsuchen"
+description: "Finde unabhängige Antworten, Rechner und verständliche Vergleiche zu deinen Fixkosten."
+layout: search
+url: "/suche/"
+robotsNoIndex: true
+sitemap:
+  disable: true
+showToc: false
+hidemeta: true
+disableShare: true
+comments: false
+draft: false
+---

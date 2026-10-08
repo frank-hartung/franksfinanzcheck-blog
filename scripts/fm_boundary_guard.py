@@ -35,6 +35,29 @@ PRÜFPRINZIP (bewusst anders als die Text-Wachen):
   Ohne PyYAML arbeitet die Wache deterministisch nach Regelkanon (F5), heilt
   aber nur die eindeutig gefahrlosen Fälle.
 
+DOPPELTE MAPPING-SCHLÜSSEL (F7 – die Klasse, die PyYAML nicht sieht, 08.10.2026):
+  Am 08.10.2026 starb der Produktions-Build zweimal an derselben Zeile:
+      ERROR error building site: assemble: failed to create page from
+      pageMetaSource /posts/2026-10-07-campingurlaub-…:
+      "…/index.md:9:1": [8:1] mapping key "tags" already defined at [7:1]
+  Fünf Reserve-Entwürfe trugen ein zweites `tags:` (einer zusätzlich ein
+  zweites `cover.image:`) – entstanden beim Zusammenführen zweier Fassungen,
+  in denen beide Seiten ihre eigene Schlüsselzeile behielten.
+  Die Tücke: **PyYAML parst doppelte Schlüssel still** (der letzte gewinnt),
+  Hugo (go-yaml) bricht hart ab. Damit war die Grundannahme dieser Wache
+  („Parsbar = RUHE“) für genau diese Klasse FALSCH: FM-Grenze, Taxonomie,
+  Publish-Gate und Scorecard standen alle grün, während `hugo --minify` den
+  kompletten Publish-Pfad mitnahm – ohne Report, ohne verwertbares Alert.
+  F7 wird deshalb REGELBASIERT erkannt (Zeilenscan über die Mapping-Struktur,
+  unabhängig von PyYAML) und deterministisch, verlustfrei geheilt:
+    · Listen (Flow- wie Blockform) werden VEREINIGT – kein Element geht
+      verloren, Dubletten fallen weg, Reihenfolge des ersten Vorkommens;
+    · alles andere behält das LETZTE Vorkommen (YAML-Leseregel: genau der
+      Wert, den jeder Leser bisher sah), das frühere wird entfernt und im
+      Report namentlich belegt.
+  Geschrieben wird nur, wenn danach (a) keine Doppelung mehr existiert und
+  (b) der Block weiterhin parst – sonst bleibt die Datei unangetastet.
+
 KLEBER (F6 – baukritisch seit 18.09.2026): Hugo schließt das Frontmatter an der
 ERSTEN Zeile ab Index 1, die mit „---“ BEGINNT – auch wenn Text direkt
 dahinterklebt („---Warum zahlen …“). Der geklebte Rest RENDERT als Body (im
@@ -64,13 +87,19 @@ und eine Live-Seite mit „TITEL:/ARTIKEL:“ versehen hat, darf nicht als
 
 AUFRUF:
   python3 scripts/fm_boundary_guard.py --selftest   # Sabotage-Schutz, Exit 2
-  python3 scripts/fm_boundary_guard.py --check      # melden, Exit 1 bei F1–F6
+  python3 scripts/fm_boundary_guard.py --check      # melden, Exit 1 bei F1–F7
   python3 scripts/fm_boundary_guard.py --fix        # heilen (konvergent)
+  python3 scripts/fm_boundary_guard.py --staged     # nur die GESTAGETEN
+                                                    # Content-Blobs (Commit-Sperre)
+  python3 scripts/fm_boundary_guard.py --wirkungsprobe  # Fixture-Beweis: F7
+                                                    # erkannt, geheilt, konvergent
 """
 import datetime
 import os
 import re
+import subprocess
 import sys
+import tempfile
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -177,6 +206,235 @@ def find_defects(fm_lines):
     return defects
 
 
+# ------------------------------------------------- F7: doppelte Mapping-Schlüssel
+# Hugo (go-yaml) bricht hart ab, sobald ein Mapping-Schlüssel auf derselben
+# Ebene zweimal steht:
+#     [8:1] mapping key "tags" already defined at [7:1]
+# PyYAML parst dieselbe Datei still (der letzte Wert gewinnt) – deshalb ist
+# dieser Befund ein ZEILENSCAN und keine Parser-Frage. Er läuft MIT und OHNE
+# PyYAML identisch (Regelkanon der Wache).
+KEY_RX = re.compile(r"^([A-Za-z_][A-Za-z0-9_.\-]*)[ \t]*:(.*)$")
+BLOCK_SKALAR_RX = re.compile(r"^[|>][0-9+\-]*[ \t]*$")
+FLOW_LISTE_RX = re.compile(r"^\[(?P<inner>.*)\][ \t]*$")
+
+
+def _einzug(zeile):
+    """Spaltenzahl des ersten Nicht-Leerzeichens (Tabs zählen als Spalte)."""
+    return len(zeile) - len(zeile.lstrip(" \t"))
+
+
+def _schluessel_und_wert(text):
+    m = KEY_RX.match(text.strip())
+    return (m.group(1), m.group(2).strip()) if m else (None, "")
+
+
+def _wert_zeile(zeile):
+    """(schlüssel, wert) einer Mapping-Zeile – None, wenn sie keine ist."""
+    m = KEY_RX.match(zeile.strip())
+    return (m.group(1), m.group(2).strip()) if m else (None, "")
+
+
+def doppelte_schluessel(fm_lines):
+    """F7 – derselbe Mapping-Schlüssel zweimal auf DERSELBEN Ebene.
+
+    Rückgabe: [(zeilen_idx, schlüssel, erstes_idx, einzug)] (aufsteigend).
+    Erkennt Top-Level (`tags`, `cover: …`) UND verschachtelte Schlüssel
+    (`cover.image`). Sequenz-Elemente (`- id: "Q1"`) sind EIGENE Container:
+    dieselbe Kennung in zwei Einträgen ist korrekt (Quellenlisten!) – sie wird
+    nur innerhalb EINES Eintrags gemeldet. Block-Skalare („|“ / „>“) werden
+    übersprungen: ihr Text ist Inhalt, kein Schlüssel.
+    """
+    funde = []
+    rahmen = []            # [{"indent": spalte, "keys": {schluessel: idx}}]
+    skalar_einzug = None   # läuft ein Block-Skalar, gehören tiefere Zeilen dazu
+    for idx, roh in enumerate(fm_lines):
+        if skalar_einzug is not None:
+            if not roh.strip() or _einzug(roh) > skalar_einzug:
+                continue
+            skalar_einzug = None
+        if not roh.strip() or roh.lstrip().startswith("#"):
+            continue
+        einzug = _einzug(roh)
+        rest = roh[einzug:]
+        # --- Sequenz-Element: JEDER Strich eröffnet einen frischen Container
+        if rest == "-" or rest.startswith(("- ", "-\t")):
+            rahmen = [r for r in rahmen if r["indent"] < einzug]
+            nach_strich = rest[1:]
+            inhalt = nach_strich.lstrip(" \t")
+            spalte = einzug + 1 + (len(nach_strich) - len(inhalt))
+            rahmen.append({"indent": spalte, "keys": {}})
+            if inhalt:
+                schluessel, wert = _wert_zeile(inhalt)
+                if schluessel:
+                    _merke(rahmen, funde, schluessel, idx)
+                    if BLOCK_SKALAR_RX.match(wert or ""):
+                        skalar_einzug = spalte
+            continue
+        # --- Mapping-Zeile (Top-Level oder verschachtelt)
+        if not KEY_RX.match(rest):
+            continue
+        while rahmen and rahmen[-1]["indent"] > einzug:
+            rahmen.pop()          # tiefere Rahmen gehörten zur letzten Zuweisung
+        if not rahmen or rahmen[-1]["indent"] < einzug:
+            rahmen.append({"indent": einzug, "keys": {}})
+        schluessel, wert = _wert_zeile(rest)
+        _merke(rahmen, funde, schluessel, idx)
+        if BLOCK_SKALAR_RX.match(wert or ""):
+            skalar_einzug = einzug
+    return funde
+
+
+def _merke(rahmen, funde, schluessel, idx):
+    keys = rahmen[-1]["keys"]
+    if schluessel in keys:
+        funde.append((idx, schluessel, keys[schluessel], rahmen[-1]["indent"]))
+    else:
+        keys[schluessel] = idx
+
+
+def _block_ende(fm_lines, idx):
+    """Erste Zeile nach dem Block, der zu Zeile idx gehört (tiefere Zeilen)."""
+    einzug = _einzug(fm_lines[idx])
+    ende = idx + 1
+    while ende < len(fm_lines):
+        roh = fm_lines[ende]
+        if not roh.strip() or _einzug(roh) <= einzug:
+            break
+        ende += 1
+    return ende
+
+
+def _fluss_liste(wert):
+    """`[a, b]` → Liste der Roh-Einträge; None, wenn keine Flow-Liste."""
+    m = FLOW_LISTE_RX.match(wert or "")
+    return _teile_fluss(m.group("inner")) if m else None
+
+
+def _teile_fluss(inner):
+    """Flow-Liste in ihre Elemente zerlegen (Klammern/Quotes bleiben unberührt)."""
+    teile, puffer, tief, quote, escape = [], "", 0, None, False
+    for ch in inner:
+        if escape:
+            puffer += ch
+            escape = False
+            continue
+        if quote:
+            puffer += ch
+            if ch == "\\" and quote == "\"":
+                escape = True
+            elif ch == quote:
+                quote = None
+            continue
+        if ch in "\"'":
+            quote = ch
+            puffer += ch
+            continue
+        if ch in "[{":
+            tief += 1
+        elif ch in "]}":
+            tief -= 1
+        if ch == "," and tief == 0:
+            teile.append(puffer.strip())
+            puffer = ""
+        else:
+            puffer += ch
+    if puffer.strip():
+        teile.append(puffer.strip())
+    return teile
+
+
+def _block_items(fm_lines, key_idx, ende):
+    """Block-Liste unterhalb von `key:` → Roh-Einträge; None, wenn keine."""
+    items = []
+    for zeile in fm_lines[key_idx + 1:ende]:
+        text = zeile.strip()
+        if text == "-" or text.startswith(("- ", "-\t")):
+            items.append(text[1:].strip())
+        else:
+            return None
+    return items
+
+
+def _normalisiert(roh):
+    return roh.strip().strip("\"'").strip().lower()
+
+
+def heile_doppelte(fm_lines, funde):
+    """F7 heilen – Rückgabe (neue Zeilen, änderungen, notizen, ok).
+
+    Reihenfolge: von hinten nach vorn, damit die Indizes stabil bleiben.
+    Listen → Vereinigung (kein Element geht verloren) · alles andere →
+    letztes Vorkommen bleibt (YAML-Leseregel), das frühere fällt weg.
+    ok=False → die Heilung wäre keine Verbesserung; es wird NICHTS geschrieben.
+    """
+    zeilen = list(fm_lines)
+    aenderungen, notizen = [], []
+    for idx, schluessel, erst, _einzug_ in sorted(funde, key=lambda f: -f[0]):
+        if not (0 <= erst < idx < len(zeilen)):
+            return fm_lines, [], [], False
+        vorher = zeilen[erst]
+        einzug = vorher[:len(vorher) - len(vorher.lstrip(" \t"))]
+        erst_ende = _block_ende(zeilen, erst)
+        jetzt_ende = _block_ende(zeilen, idx)
+        _k1, erst_wert = _wert_zeile(zeilen[erst])
+        _k2, jetzt_wert = _wert_zeile(zeilen[idx])
+        erst_flow, jetzt_flow = _fluss_liste(erst_wert), _fluss_liste(jetzt_wert)
+        erst_block = (_block_items(zeilen, erst, erst_ende)
+                      if erst_flow is None and not erst_wert else None)
+        jetzt_block = (_block_items(zeilen, idx, jetzt_ende)
+                       if jetzt_flow is None and not jetzt_wert else None)
+        if erst_flow is not None and jetzt_flow is not None:
+            vereint = _vereinige(erst_flow, jetzt_flow)
+            zeilen[erst] = f"{einzug}{schluessel}: [{', '.join(vereint)}]"
+            entfernt = jetzt_ende - idx
+            del zeilen[idx:jetzt_ende]
+            aenderungen.append((vorher, zeilen[erst]))
+            notizen.append(f"'{schluessel}' vereinigt "
+                           f"({len(erst_flow)} + {len(jetzt_flow)} → {len(vereint)} Elemente, "
+                           f"{entfernt} Zeile(n) entfernt)")
+            continue
+        if erst_block is not None and jetzt_block is not None:
+            vereint = _vereinige(erst_block, jetzt_block)
+            neu_block = [f"{einzug}  - {item}" for item in vereint]
+            zeilen[erst + 1:erst_ende] = neu_block
+            verschiebung = len(neu_block) - (erst_ende - (erst + 1))
+            idx += verschiebung
+            jetzt_ende += verschiebung
+            del zeilen[idx:jetzt_ende]
+            aenderungen.append((vorher, f"{schluessel}: (vereinigte Blockliste)"))
+            notizen.append(f"'{schluessel}' (Blockliste) vereinigt "
+                           f"({len(erst_block)} + {len(jetzt_block)} → {len(vereint)} Elemente)")
+            continue
+        # Alles andere: YAML-Leseregel – der LETZTE Wert gilt.
+        del zeilen[erst:erst_ende]
+        notizen.append(f"'{schluessel}': erstes Vorkommen entfernt – YAML liest "
+                       f"den letzten Wert ({jetzt_wert[:60]!r}); verworfen: "
+                       f"{erst_wert[:60]!r}")
+        aenderungen.append((vorher, None))
+    return zeilen, aenderungen, notizen, True
+
+
+def _vereinige(links, rechts):
+    """Beide Listen in Reihenfolge vereinigen, Dubletten (normiert) fallen weg."""
+    vereint, gesehen = [], set()
+    for roh in list(links) + list(rechts):
+        marke = _normalisiert(roh)
+        if not marke or marke in gesehen:
+            continue
+        gesehen.add(marke)
+        vereint.append(roh.strip())
+    return vereint
+
+
+def _setze_fm(text, fm_zeilen):
+    """Text mit ersetztem Frontmatter-Block – Grenzen und Body bleiben stehen."""
+    zeilen = text.split("\n")
+    _fm, begin, ende = split_fm(text)
+    if begin is None or ende is None:
+        return text
+    return "\n".join(zeilen[:begin] + list(fm_zeilen) + zeilen[ende:])
+
+
 # YAML-Indikatoren am Wertanfang – ein Plain-Scalar darf mit keinem davon
 # beginnen (Alias *, Anker &, Tag !, reserved @ `, Directive %, Block | >,
 # Flow [ ] { }, Quote " ', Kommentar #, Block-Mapping -, Key-Grenz :).
@@ -229,19 +487,30 @@ def heal_line(raw):
 
 
 # ------------------------------------------------------------------- Prüfen/Heilen
-def inspect(path):
-    """(grenzregel, kleber, text, defects) einer Content-Datei."""
-    with open(path, "r", encoding="utf-8") as fh:
-        text = fh.read()
+def inspect_text(text):
+    """(grenzregel, kleber, text, defects, doppel) eines Content-Textes.
+
+    Wichtig seit 08.10.2026: Die Doppel-Schlüssel-Prüfung (F7) läuft VOR dem
+    Parser-Kurzschluss. PyYAML hält doppelte Schlüssel für gültig (letzter
+    gewinnt), Hugo nicht – „der Block parst“ darf hier also NICHT mehr
+    „sauber“ heißen.
+    """
     fm_lines, begin, end = split_fm(text)
     if fm_lines is None:
-        return "F1", "", text, []
+        return "F1", "", text, [], []
     if end is None:
-        return "F2", "", text, []
+        return "F2", "", text, [], []
+    doppel = doppelte_schluessel(fm_lines)
     block = "\n".join(fm_lines) + "\n"
-    if _yaml is not None and parse_ok(block) is True:
-        return None, closing_glue(text), text, []      # Hugo-Sicht: sauber
-    return None, closing_glue(text), text, find_defects(fm_lines)
+    if not doppel and _yaml is not None and parse_ok(block) is True:
+        return None, closing_glue(text), text, [], []   # Hugo-Sicht: sauber
+    return None, closing_glue(text), text, find_defects(fm_lines), doppel
+
+
+def inspect(path):
+    """Wie `inspect_text`, liest die Datei von der Platte."""
+    with open(path, "r", encoding="utf-8") as fh:
+        return inspect_text(fh.read())
 
 
 def heal_values(text, defects):
@@ -282,18 +551,36 @@ def heal(path, text, defects):
     return changes, True
 
 
-def run(fix):
-    """→ (hart, kleber, heilungen, unheilbar, residual, geprüfte_dateien).
+def run(fix, quellen=None):
+    """→ (hart, kleber, heilungen, unheilbar, residual, geprüfte, doppel).
 
     `kleber` = F6-Funde (Schlussgrenze zugeklebt). Mit `--fix` werden sie
     ZUSAMMEN mit der Wert-Ebene in einem Schreibvorgang geheilt; ohne `--fix`
     sind sie harte Befunde (Exit 1), damit die Klasse nicht wieder still
-    durchläuft. Jeder Eintrag: (pfad, "F6", meldung, notizen)."""
+    durchläuft. Jeder Eintrag: (pfad, "F6", meldung, notizen).
+
+    `doppel` = (funde, heilungen) der Klasse F7 (doppelte Mapping-Schlüssel,
+    08.10.2026): `funde` = [(rel, schlüssel, meldung)] und `heilungen` =
+    [(rel, alt, neu)] – Listen werden vereinigt, alles andere folgt der
+    YAML-Leseregel (das letzte Vorkommen gilt, das frühere fällt weg und wird
+    im Report belegt).
+
+    `quellen` = None → Bestand von der PLATTE; nur dann wird geschrieben.
+    `quellen` = [(rel, text)] → Prüflauf auf mitgegebenen Texten (z. B.
+    `--staged`: genau die Blobs aus dem Index, nie der Arbeitsbaum) – heilt nie.
+    """
+    fix = bool(fix) and quellen is None
+    if quellen is None:
+        quellen = [(os.path.relpath(p, BLOG_DIR), None) for p in content_files()]
     hart, kleber, heilungen, unheilbar, geprüfte = [], [], [], [], 0
-    for path in content_files():
+    doppel_funde, doppel_heilungen = [], []
+    for rel, gegeben in quellen:
         geprüfte += 1
-        rel = os.path.relpath(path, BLOG_DIR)
-        grenze, glue, text, defects = inspect(path)
+        path = os.path.join(BLOG_DIR, rel)
+        if gegeben is None:
+            grenze, glue, text, defects, dups = inspect(path)
+        else:
+            grenze, glue, text, defects, dups = inspect_text(gegeben)
         if grenze:
             note = ("keine eigene ---Zeile am Dateianfang" if grenze == "F1"
                     else "Frontmatter-Block nicht geschlossen – der Body wird "
@@ -309,34 +596,61 @@ def run(fix):
             else:
                 hart.append((rel, "F6", meldung))     # ohne --fix baukritisch
             kleber.append((rel, "F6", meldung, notizen))
-        if not defects and arbeits_text == text:
-            continue
-        for idx, regel, msg in defects:
-            hart.append((rel, regel, msg))
-        if not fix:
-            continue
-        neu, changes, ok = heal_values(arbeits_text, defects)
-        if not ok:
-            unheilbar.append(rel)
-            continue
-        if neu != text:
-            with open(path, "w", encoding="utf-8") as fh:
-                fh.write(neu)
-        for alt, ziel in changes:
-            heilungen.append((rel, alt, ziel))
+        for idx, schluessel, erst, _e in dups:
+            meldung = (f"doppelter Schlüssel '{schluessel}': Zeile {idx + 1} "
+                       f"wiederholt Zeile {erst + 1} – Hugo bricht hier ab "
+                       f"(\u201emapping key already defined\u201c)")
+            doppel_funde.append((rel, schluessel, meldung))
+            if not fix:
+                hart.append((rel, "F7", meldung))
+        if fix and dups:
+            fm_zeilen, _b, _e = split_fm(arbeits_text)
+            neu_zeilen, aenderungen, f7_notizen, ok = heile_doppelte(fm_zeilen, dups)
+            if not ok:
+                unheilbar.append(rel)
+                continue                                   # nichts anfassen
+            arbeits_text = _setze_fm(arbeits_text, neu_zeilen)
+            for alt, neu in aenderungen:
+                doppel_heilungen.append((rel, alt, neu))
+            for n in f7_notizen:
+                doppel_heilungen.append((rel, "", n))
+            for idx, schluessel, erst, _e in doppelte_schluessel(
+                    split_fm(arbeits_text)[0]):
+                hart.append((rel, "F7",
+                             f"doppelter Schlüssel '{schluessel}' steht nach "
+                             f"der Heilung erneut (Zeile {idx + 1} / {erst + 1})"))
+        if fix:
+            rest_defects = find_defects(split_fm(arbeits_text)[0])
+            neu, changes, ok = heal_values(arbeits_text, rest_defects)
+            if not ok:
+                unheilbar.append(rel)
+                continue
+            if neu != text:
+                with open(path, "w", encoding="utf-8") as fh:
+                    fh.write(neu)
+            for alt, ziel in changes:
+                heilungen.append((rel, alt, ziel))
+        else:
+            for idx, regel, msg in defects:
+                hart.append((rel, regel, msg))
+    unheilbar = sorted(set(unheilbar))
     residual = []
     if fix:
-        for path in content_files():
-            rel = os.path.relpath(path, BLOG_DIR)
-            grenze, glue, _text, defects = inspect(path)
-            if grenze or glue or defects:
+        for rel, _gegeben in quellen:
+            grenze, glue, _text, defects, dups = inspect(os.path.join(BLOG_DIR, rel))
+            if grenze or glue or defects or dups:
                 residual.append(rel)
-    return hart, kleber, heilungen, unheilbar, residual, geprüfte
+    return (hart, kleber, heilungen, unheilbar, residual, geprüfte,
+            (doppel_funde, doppel_heilungen))
 
 
-def write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte, modus):
+def write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte, modus,
+                 doppel=((), ())):
     stand = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M")
     geheilt_f6 = [k for k in kleber if k[3]]
+    doppel_funde, doppel_heilungen = doppel
+    doppel_listen = [h for h in doppel_heilungen if h[1]]
+    doppel_regel = [h for h in doppel_heilungen if not h[1]]
     zeilen = [
         "# 🧱 FM-GRENZEN-REPORT (fm_boundary_guard.py)",
         "",
@@ -345,21 +659,26 @@ def write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte, modus)
         f"**automatisch geheilt:** {len(heilungen)} · **unheilbar:** "
         f"{len(unheilbar)} · **offen nach Heilung:** {len(residual)} · "
         f"**Klebefugen (F6):** {len(kleber)}"
-        + (f" (davon {len(geheilt_f6)} geheilt)" if geheilt_f6 else ""),
+        + (f" (davon {len(geheilt_f6)} geheilt)" if geheilt_f6 else "")
+        + f" · **doppelte Schlüssel (F7):** {len(doppel_funde)}"
+        + (f" (davon {len(doppel_listen)} vereinigt, "
+           f"{len(doppel_regel)} nach YAML-Leseregel)" if doppel_heilungen else ""),
         "",
         "**Regelkanon:** F1 Grenze oben · F2 Grenze unten · F3 Block/Zeile "
         "nicht YAML-parbar · F4 Quote/Flow nicht geschlossen · F5 "
         "Fallback-Regel ohne PyYAML · F6 Schlussgrenze zugeklebt (baukritisch, "
-        "mit --fix selbstheilend)",
+        "mit --fix selbstheilend) · F7 doppelter Mapping-Schlüssel "
+        "(baukritisch, mit --fix verlustfrei selbstheilend)",
         "",
         f"**Gegenprüfung:** PyYAML "
         f"{'aktiv (Block-Parse vor und nach jeder Heilung)' if _yaml is not None else 'fehlt – nur deterministische Formregeln, Heilung auf eindeutig gefahrlose Fälle beschränkt'}",
         "",
     ]
     if not hart:
-        zeilen.append("🎉 Alle Frontmatter-Blöcke sind baufest – Grenzen und "
-                      "Werte YAML-konform. `hugo --minify` kann am "
-                      "Frontmatter nicht mehr scheitern.")
+        zeilen.append("🎉 Alle Frontmatter-Blöcke sind baufest – Grenzen "
+                      "stehen, Werte sind YAML-konform, kein Schlüssel steht "
+                      "doppelt. `hugo --minify` kann am Frontmatter nicht mehr "
+                      "scheitern.")
     else:
         zeilen += ["## ⚠️ Baukritische Funde", "",
                    "| Datei | Regel | Befund |", "|---|---|---|"]
@@ -370,6 +689,25 @@ def write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte, modus)
         zeilen += ["", "## Selbstheilung (nur Wert-Quote, Text bytegleich)", ""]
         zeilen += [f"- `{rel}`: `{alt[:70]}` → `{neu[:70]}`"
                    for rel, alt, neu in heilungen[:60]]
+    if doppel_funde or doppel_heilungen:
+        zeilen += ["", "## F7 – doppelte Mapping-Schlüssel (Hugo-Abbruch)", "",
+                   "Hugo (go-yaml) bricht bei einem wiederholten Mapping-Schlüssel "
+                   "hart ab (`mapping key \"…\" already defined`), während "
+                   "PyYAML dieselbe Datei still parst (letzter Wert gewinnt). "
+                   "Genau daran starb der Produktions-Build am 08.10.2026 – "
+                   "alle PyYAML-Gates meldeten grün. Listen werden vereinigt "
+                   "(kein Element geht verloren), alles andere folgt der "
+                   "YAML-Leseregel: Das letzte Vorkommen gilt, das frühere wird "
+                   "entfernt und hier belegt.", ""]
+        for rel, schluessel, meldung in doppel_funde[:40]:
+            ziel = [z for z in doppel_heilungen if z[0] == rel]
+            zusatz = ""
+            if ziel:
+                zusatz = "; ".join(v for _r, _o, v in ziel if v) or "geheilt"
+                zusatz = f" → {zusatz[:120]}"
+            zeilen.append(f"- `{rel}` **{schluessel}**: {meldung}{zusatz}")
+        if len(doppel_funde) > 40:
+            zeilen.append(f"- … {len(doppel_funde) - 40} weitere")
     if kleber:
         zeilen += ["", "## F6 – zugeklebte FM-Schlussgrenze (`---Text`)", "",
                    "Hugo rendert den Rest der Grenzzeile als Body (gemessen: "
@@ -547,6 +885,49 @@ def selftest():
             fehler.append(f"Naht-SSOT: join_article klebt bei {fragment!r}")
         if post_utils.split_article(z)[2].lstrip("\n") != fragment.lstrip("\n"):
             fehler.append(f"Naht-SSOT: join/split verliert Text bei {fragment!r}")
+    # F7 – doppelte Mapping-Schlüssel (Bau-Ursache 08.10.2026, WF-54C4 #643).
+    # PyYAML hält sie für gültig (der letzte Wert gewinnt), Hugo bricht ab.
+    # Deshalb prüft und heilt die Wache hier REGELBASIERT, nicht über den Parser.
+    f7_doppelt = ['tags: ["Campingurlaub", "Reisekosten"]',
+                  'tags: ["Mietwagen und Wohnmobil"]',
+                  'categories: ["Ratgeber"]']
+    funde = doppelte_schluessel(f7_doppelt)
+    if len(funde) != 1 or funde[0][1] != "tags" or funde[0][2] != 0:
+        fehler.append(f"F7: doppeltes 'tags' nicht erkannt: {funde}")
+    verschachtelt = ["cover:", "  image: alt.jpg", "  image: neu.jpg", "  alt: x"]
+    funde_v = doppelte_schluessel(verschachtelt)
+    if len(funde_v) != 1 or funde_v[0][1] != "image" or funde_v[0][2] != 1:
+        fehler.append(f"F7: verschachteltes 'cover.image' nicht erkannt: {funde_v}")
+    sequenz = ["quellen:", '  - id: "Q1"', "    titel: Eins",
+               '  - id: "Q2"', "    titel: Zwei"]
+    if doppelte_schluessel(sequenz):
+        fehler.append("F7: Sequenz-Einträge (Quellenliste) fälschlich gemeldet")
+    skalar = ["beschreibung: |", "  Zeile: mit Doppelpunkt", "  Zeile: noch eine",
+              "titel: x"]
+    if doppelte_schluessel(skalar):
+        fehler.append("F7: Block-Skalar-Inhalt fälschlich als Schlüssel gelesen")
+    neu, _aend, notizen, ok = heile_doppelte(f7_doppelt, funde)
+    if not ok or doppelte_schluessel(neu) or len(neu) != 2:
+        fehler.append(f"F7: Flow-Listen-Heilung nicht konvergent: {neu}")
+    elif not any('"Campingurlaub"' in z and '"Mietwagen und Wohnmobil"' in z
+                 for z in neu):
+        fehler.append(f"F7: Vereinigung verlor ein Element: {neu}")
+    if not any("vereinigt" in n for n in notizen):
+        fehler.append("F7: Vereinigung wird nicht belegt (Report-Pflicht)")
+    neu_v, _a2, _n2, ok_v = heile_doppelte(verschachtelt, funde_v)
+    if not ok_v or doppelte_schluessel(neu_v):
+        fehler.append(f"F7: Skalar-Heilung nicht konvergent: {neu_v}")
+    elif "alt.jpg" in "".join(neu_v) or "neu.jpg" not in "".join(neu_v):
+        fehler.append("F7: YAML-Leseregel verletzt – der letzte Wert muss gelten")
+    blockliste = ["tags:", '  - "A"', '  - "B"', "tags:", '  - "C"']
+    neu_b, _a3, _n3, ok_b = heile_doppelte(blockliste, doppelte_schluessel(blockliste))
+    if not (ok_b and not doppelte_schluessel(neu_b)
+            and '"A"' in "".join(neu_b) and '"C"' in "".join(neu_b)):
+        fehler.append(f"F7: Blocklisten-Vereinigung fehlerhaft: {neu_b}")
+    if heile_doppelte(neu, [])[0] != neu or heile_doppelte(neu, [])[3] is not True:
+        fehler.append("F7: Heilung ohne Funde verändert die Datei (nicht idempotent)")
+    if _yaml is not None and parse_ok("\n".join(neu) + "\n") is not True:
+        fehler.append("F7: geheiltes Frontmatter parst nicht")
     for h in hinweise:
         print(f"ℹ FM-Grenzen-Selbsttest: {h}")
     if fehler:
@@ -556,20 +937,210 @@ def selftest():
             print("  -", f)
         return 2
     print(f"✅ FM-Grenzen-Selbsttest: {len(SELFTEST_CASES)} Wert-Fälle + "
-          f"{len(GRENZE_CASES)} Grenz-Fälle + Kleber/Quote/Schema-Schutz grün "
-          f"(inkl. Regression '*Werbung |').")
+          f"{len(GRENZE_CASES)} Grenz-Fälle + F7-Doppelschlüssel (erkennen, "
+          f"vereinigen, YAML-Leseregel, Sequenz-/Skalar-Schutz) + "
+          f"Kleber/Quote/Schema-Schutz grün (inkl. Regression '*Werbung |').")
     return 0
+
+
+def staged_content():
+    """[(rel, text)] der GESTAGETEN Content-Blobs (für die Commit-Sperre).
+
+    Gelesen wird der INDEX (`git show :<pfad>`), nicht der Arbeitsbaum – genau
+    der Stand, den der Commit festschreiben würde (dieselbe Regel wie die
+    Markenflächen-Sperre in `.githooks/pre-commit`). Rückgabe None, wenn
+    git/Index nicht lesbar sind: dann entscheidet der Aufrufer fail-closed.
+    """
+    try:
+        r = subprocess.run(["git", "diff", "--cached", "--name-only",
+                            "--diff-filter=ACMR"], capture_output=True,
+                           text=True, timeout=30, cwd=BLOG_DIR)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if r.returncode != 0:
+        return None
+    treffer = []
+    for pfad in r.stdout.splitlines():
+        pfad = pfad.strip()
+        if not pfad.startswith("content/") or not pfad.endswith((".md", ".markdown")):
+            continue
+        try:
+            b = subprocess.run(["git", "show", f":{pfad}"], capture_output=True,
+                               text=True, timeout=30, cwd=BLOG_DIR)
+        except (OSError, subprocess.SubprocessError):
+            return None
+        if b.returncode != 0:
+            return None
+        treffer.append((pfad, b.stdout))
+    return sorted(treffer)
+
+
+# --------------------------------------------------------------- Wirkungsprobe
+F7_FIXTURE = """---
+title: "Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung"
+date: 2026-10-07T17:47:29Z
+draft: true
+reserve: true
+tags: ["Campingurlaub", "Reisekosten", "Urlaub planen"]
+tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
+categories: ["Ratgeber"]
+cover:
+  image: images/covers/2026-10-06-campingurlaub.jpg
+  image: images/covers/2026-10-07-campingurlaub.jpg
+  alt: "Campingurlaub planen"
+quellen:
+  - id: "Q1"
+    titel: "Erste Quelle"
+  - id: "Q2"
+    titel: "Zweite Quelle"
+---
+
+Camping wirkt oft preiswert, solange du nur den Platz ansiehst.
+"""
+
+# Ruhe-Fixture: legale Block-Skalare und Sequenz-Einträge mit gleichen
+# Schlüsseln (Quellenlisten) – hier darf NICHTS gefunden werden.
+F7_RUHE = """---
+title: "Ruhige Datei"
+beschreibung: |
+  Mehrzeilig: mit Doppelpunkt
+  und einer zweiten Zeile.
+quellen:
+  - id: "Q1"
+    titel: "Erste Quelle"
+  - id: "Q2"
+    titel: "Zweite Quelle"
+---
+
+Text.
+"""
+
+
+def wirkungsprobe():
+    """Maschinenvertrag „Deckung heißt Wirkung“: beweist an echten Fixtures,
+    dass die F7-Klasse erkannt, verlustfrei geheilt und konvergent ist.
+
+    Rückgabe (ok, meldung). Geprüft wird der GANZE Weg über `run(fix=True)` mit
+    umgelenktem Content-Verzeichnis – inklusive Report, Body-Treue und einem
+    zweiten Lauf (Fixpunkt). Nie am Bestand: alles läuft in einer Wegwerf-Ablage.
+    """
+    with tempfile.TemporaryDirectory(prefix="fmwirkung-") as tmp:
+        posts = os.path.join(tmp, "content", "posts")
+        os.makedirs(os.path.join(posts, "camping"))
+        os.makedirs(os.path.join(posts, "ruhig"))
+        camping = os.path.join(posts, "camping", "index.md")
+        ruhig = os.path.join(posts, "ruhig", "index.md")
+        with open(camping, "w", encoding="utf-8") as fh:
+            fh.write(F7_FIXTURE)
+        with open(ruhig, "w", encoding="utf-8") as fh:
+            fh.write(F7_RUHE)
+        globe = globals()
+        alt_files, alt_report = globe["content_files"], globe["REPORT"]
+        globe["content_files"] = lambda: sorted(
+            os.path.join(wurzel, name)
+            for wurzel, _dirs, namen in os.walk(os.path.join(tmp, "content"))
+            for name in namen if name.endswith(".md"))
+        globe["REPORT"] = os.path.join(tmp, "FM-GRENZEN-REPORT.md")
+        try:
+            hart, _kleber, _heil, unheilbar, residual, geprueft, (funde, _dh) = run(True)
+            if not funde or len(funde) != 2:
+                return False, (f"Fixture lieferte {len(funde)} F7-Funde statt 2 "
+                               "(tags + cover.image) – Detektor greift nicht")
+            if unheilbar or residual or any(r == "F7" for _f, r, _m in hart):
+                return False, f"Heilung nicht sauber (unheilbar/residual/hart): {hart}"
+            mit = open(camping, encoding="utf-8").read()
+            fm_neu, _b, _e = split_fm(mit)
+            tags = [z for z in fm_neu if z.startswith("tags:")]
+            if len(tags) != 1:
+                return False, f"tags steht {len(tags)}× – nicht konvergent"
+            for erwartet in ("\"Campingurlaub\"", "\"Reisekosten\"",
+                             "\"Urlaub planen\"", "\"Mietwagen und Wohnmobil\"",
+                             "\"Reisekosten sparen\""):
+                if erwartet not in tags[0]:
+                    return False, f"Vereinigung verlor {erwartet}: {tags[0]}"
+            bilder = [z for z in fm_neu if z.strip().startswith("image:")]
+            if len(bilder) != 1 or "2026-10-07" not in bilder[0]:
+                return False, ("cover.image nicht nach YAML-Leseregel geheilt "
+                               f"(letzter Wert muss gelten): {bilder}")
+            if "Q2" not in "\n".join(fm_neu):
+                return False, "Sequenz-Einträge (quellen Q1/Q2) wurden angetastet"
+            if _yaml is not None and parse_ok("\n".join(fm_neu) + "\n") is not True:
+                return False, "geheiltes Frontmatter parst nicht"
+            if body(mit) != body(F7_FIXTURE):
+                return False, "Body wurde verändert – Heilung muss texttreu sein"
+            if open(ruhig, encoding="utf-8").read() != F7_RUHE:
+                return False, "Ruhe-Fixture wurde angefasst (False Positive)"
+            (hart2, kleber2, heil2, unheil2, residual2, geprueft2,
+             doppel2) = run(True)
+            if open(camping, encoding="utf-8").read() != mit:
+                return False, "zweiter Lauf ändert erneut (nicht idempotent)"
+            if residual2 or doppel2[0]:
+                return False, f"zweiter Lauf meldet noch Befunde: {doppel2[0]}"
+            write_report(hart2, kleber2, heil2, unheil2, residual2, geprueft2,
+                         "fix", doppel2)
+            if not os.path.exists(globe["REPORT"]):
+                return False, "Report wurde nicht geschrieben"
+        finally:
+            globe["content_files"] = alt_files
+            globe["REPORT"] = alt_report
+    return True, (f"F7 erkannt (tags + cover.image), verlustfrei geheilt "
+                  f"(5 Tags vereinigt, letztes Bild gilt), Body bytegleich, "
+                  f"Sequenzlisten unberührt, zweiter Lauf ein Fixpunkt "
+                  f"({geprueft} Dateien)")
+
+
+def body(text):
+    """Alles ab der FM-Schlussgrenze – für die Texttreue-Prüfung."""
+    _zeilen, _begin, ende = split_fm(text)
+    return "\n".join(text.split("\n")[ende:]) if ende else text
 
 
 def main():
     if "--selftest" in sys.argv:
         return selftest()
+    if "--wirkungsprobe" in sys.argv:
+        ok, meldung = wirkungsprobe()
+        print(("✅ " if ok else "❌ ") + "FM-Grenzen-Wirkungsprobe: " + meldung)
+        return 0 if ok else 2
+    if "--staged" in sys.argv:
+        texte = staged_content()
+        if texte is None:
+            print("❌ FM-Grenzen (--staged): der Index ist nicht lesbar – es "
+                  "wird nichts freigegeben (fail-closed).")
+            return 2
+        (hart, _kleber, _heil, _unh, _res, geprüfte,
+         (doppel_funde, _dh)) = run(False, quellen=texte)
+        for rel, schluessel, msg in doppel_funde:
+            print(f"⚠ FM-Grenze F7: {rel} – {msg}")
+        for rel, regel, msg in hart:
+            if regel != "F7":
+                print(f"⚠ FM-Grenze {regel}: {rel} – {msg}")
+        if hart:
+            print(f"❌ {len(hart)} baukritische(r) FM-Fund/Funde in den "
+                  f"gestageten Dateien ({geprüfte} geprüft) – dieser Commit "
+                  f"würde den Build töten. Heilung: "
+                  f"python3 scripts/fm_boundary_guard.py --fix && git add content/")
+            return 1
+        print(f"✅ FM-Grenzen (--staged) sauber ({geprüfte} Content-Datei(en) im "
+              f"Index): dieser Commit kann den Hugo-Build nicht am Frontmatter "
+              f"töten.")
+        return 0
     fix = "--fix" in sys.argv
-    hart, kleber, heilungen, unheilbar, residual, geprüfte = run(fix)
+    (hart, kleber, heilungen, unheilbar, residual, geprüfte,
+     (doppel_funde, doppel_heilungen)) = run(fix)
     write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte,
-                 "fix" if fix else "check")
+                 "fix" if fix else "check", (doppel_funde, doppel_heilungen))
+    for rel, schluessel, msg in doppel_funde:
+        if fix:
+            print(f"🩹 FM-Doppelschlüssel geheilt: {rel} – {msg}")
+        else:
+            print(f"⚠ FM-Grenze F7: {rel} – {msg}")
+    if fix:
+        for rel, alt, neu in doppel_heilungen:
+            print(f"   ↳ {rel}: {neu}")
     for rel, regel, msg in hart:
-        print(f"⚠ FM-Grenze {regel}: {rel} – {msg}")
+        if regel != "F7":
+            print(f"⚠ FM-Grenze {regel}: {rel} – {msg}")
     for rel, alt, neu in heilungen:
         print(f"🩹 FM-Grenze geheilt: {rel}: {alt[:60]} → {neu[:60]}")
     if fix:
@@ -587,8 +1158,9 @@ def main():
         print(f"❌ {len(unheilbar)} Datei(en) müssen manuell repariert werden – "
               f"Report: FM-GRENZEN-REPORT.md")
         return 1
-    if heilungen:
-        print(f"✅ FM-Grenzen: {len(heilungen)} Wert(e) selbstgeheilt "
+    if heilungen or doppel_heilungen:
+        print(f"✅ FM-Grenzen: {len(heilungen)} Wert(e) und "
+              f"{len(doppel_heilungen)} Doppelschlüssel-Stelle(n) selbstgeheilt "
               f"({geprüfte} Dateien geprüft) – der Build ist wieder möglich.")
         return 0
     if hart:
@@ -601,7 +1173,8 @@ def main():
               f"Text wie Hugo.")
         return 0
     print(f"✅ FM-Grenzen sauber ({geprüfte} Dateien) – Grenzen stehen allein, "
-          f"Werte sind YAML-konform: die Wachen und Hugo lesen denselben Text.")
+          f"kein Schlüssel doppelt, Werte sind YAML-konform: die Wachen und "
+          f"Hugo lesen denselben Text.")
     return 0
 
 

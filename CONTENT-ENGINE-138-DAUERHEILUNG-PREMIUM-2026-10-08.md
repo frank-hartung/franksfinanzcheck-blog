@@ -174,6 +174,29 @@ Modell“ – Regel, Muster, Leitplanke, Bedienung.
   Modell oder am Netz hängen (#138)“ erscheint in *Publication reliability
   regression tests* und ist grün.
 
+## Nachtrag · Alarmmeldung WF-A535 #632 (08.10.2026)
+
+Die Fehler-Meldung #632 enthielt trotz erkannter roter Schritte weiterhin das
+pauschale API-Key-/GitHub-Ausfall-Runbook. Bei der konkreten Signatur
+**Phase 0.5 rot + „Do not report a quota deficit as success“ rot** ist der zweite
+Schritt nur der Schluss-Classifier; die Ursache liegt im vorgeschalteten
+Kadenz-Gate. Diese Kombination darf nicht als Quotenproblem fehlgedeutet werden.
+
+Das Fehler-Alerting ordnet diese Signatur jetzt workflow-spezifisch als
+Frühabbruch ein und gibt die passende Diagnose aus: Phase-0.5-Log öffnen, den
+exakten Befehl aus der ERR-Annotation prüfen und bei Selbsttest-Exit 2 die
+KI-/Netz-Probe (`python3 scripts/selftest_ki.py --trap <skript>`) verwenden.
+Der generische API-Key-/GitHub-Ratschlag wird für diese Klasse ausdrücklich
+weggelassen. Scheitert nur der Schluss-Classifier, verweist das Runbook auf
+dessen `::error::`-Annotation und die dort benannte Klasse (FRÜHABBRUCH,
+TAGESDEFIZIT, RELEASE-CRASH oder SYNCHRONVERLUST). Andere Workflows behalten
+ihren bisherigen Fail-open-Pfad.
+
+Die Verhaltens-Simulation reproduziert die Schrittkombination aus #632 mit der
+echten Content-Engine-Issue-Identität (WF-A535). Sie prüft sowohl die konkrete
+Handlungsempfehlung als auch, dass kein allgemeines API-Key-/Transient-Runbook
+in das Issue gelangt.
+
 ## Regressionen
 
 `python3 -m unittest scripts.tests.test_selftest_ki` ·
