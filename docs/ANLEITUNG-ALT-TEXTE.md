@@ -26,6 +26,10 @@ die ein Mensch freigibt.
 - **Nur das Titelbild** wird an den Anbieter geschickt. Keine Personendaten.
 - Anbieter: Google Gemini, Gratis-Tier, Modell `gemini-3-flash-preview`
   (wie in `data/ki_transportweg.yaml`). Kein kostenpflichtiger Weg.
+- **Ein Transportweg:** Der Modellaufruf geht ausschließlich durch
+  `scripts/llm_client.py` (T6 des KI-Transportwegs) – ein Ort für Schlüssel,
+  Retries und Kosten. Das Gate `scripts/ki_transportweg.py` prüft das auch
+  für dieses Skript; eine Nebenstrecke neben dem Client wird gemeldet.
 
 ## Ablauf
 
@@ -83,8 +87,9 @@ Der Mensch prüft zusätzlich:
 
 ## Grenzen
 
-- Der Live-Aufruf gegen die Gemini-API ist im Entwicklungs-Sandkasten nicht getestet
-  (der Host war dort nicht freigegeben). Getestet ist die Verarbeitung mit einem Fake-Anbieter.
-  Beim ersten echten Lauf also `--max 1` verwenden und das Ergebnis ansehen.
+- Der Live-Aufruf ist im Entwicklungs-Sandkasten nicht getestet (der Gemini-Host war
+  dort nicht freigegeben). Getestet sind der Weg durch `scripts/llm_client.py` (Bildteil,
+  Payload) und die Verarbeitung mit einem Fake-Anbieter. Beim ersten echten Lauf also
+  `--max 1` verwenden und das Ergebnis ansehen.
 - Der Vergleich mit dem Bild findet nur über die Anfrage statt. Das Skript prüft nicht,
   ob der Text inhaltlich stimmt. Das bleibt die Aufgabe des Menschen.

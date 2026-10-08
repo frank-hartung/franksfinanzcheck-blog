@@ -14,7 +14,6 @@ from __future__ import annotations
 import contextlib
 import importlib.util
 import io
-import os
 import sys
 import tempfile
 import unittest
@@ -141,6 +140,54 @@ class Freigabe(unittest.TestCase):
             ergebnis = at.anwenden(root)
             self.assertTrue(any("veraltet" in m for _, m in ergebnis))
             self.assertIn('alt: "test-ratgeber"', (root / "content/posts/a/index.md").read_text(encoding="utf-8"))
+
+
+@unittest.skipUnless(HAS_YAML, "PyYAML fehlt (CI installiert es)")
+class Transportweg(unittest.TestCase):
+    """T6: Der Modellaufruf geht ausschließlich durch scripts/llm_client.py."""
+
+    def test_skript_hat_keinen_eigenen_endpunkt(self):
+        text = SKRIPT.read_text(encoding="utf-8")
+        self.assertIn("import llm_client", text)
+        self.assertNotIn("generativelanguage.googleapis.com", text,
+                         "kein zweiter Gemini-Endpunkt neben llm_client")
+        self.assertNotIn("urllib.request", text)
+
+    def test_anbieter_spricht_ueber_den_client_und_traegt_das_bild(self):
+        aufrufe = []
+        ursprung = at.llm_client.chat
+
+        def fake_chat(provider, prompt=None, **kw):
+            aufrufe.append((provider, kw))
+            return "Sparschwein auf Münzen"
+
+        at.llm_client.chat = fake_chat
+        try:
+            text = at.gemini_anbieter()(b"\xff\xd8", "image/jpeg", "Test-Ratgeber")
+        finally:
+            at.llm_client.chat = ursprung
+        self.assertEqual(text, "Sparschwein auf Münzen")
+        self.assertEqual(len(aufrufe), 1)
+        provider, kw = aufrufe[0]
+        self.assertEqual(provider, "gemini")
+        self.assertEqual(kw["bilder"], [{"mime": "image/jpeg", "data": b"\xff\xd8"}])
+        self.assertIn("Test-Ratgeber", kw["messages"][0]["content"])
+        self.assertEqual(kw["model"], at.MODELL)
+
+    def test_ohne_antwort_wird_die_seite_verworfen_nicht_uebersprungen(self):
+        ursprung = at.llm_client.chat
+        at.llm_client.chat = lambda provider, prompt=None, **kw: None
+        try:
+            with self.assertRaises(RuntimeError):
+                at.gemini_anbieter()(b"\xff\xd8", "image/jpeg", "T")
+        finally:
+            at.llm_client.chat = ursprung
+
+    def test_schluessel_sieht_die_fabrik_nie(self):
+        import inspect
+        parameter = list(inspect.signature(at.gemini_anbieter).parameters)
+        self.assertNotIn("api_key", parameter,
+                         "Schlüssel gehören in llm_client, nicht in die Fabrik")
 
 
 @unittest.skipUnless(HAS_YAML, "PyYAML fehlt (CI installiert es)")
