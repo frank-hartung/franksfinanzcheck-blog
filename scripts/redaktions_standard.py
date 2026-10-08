@@ -56,6 +56,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -315,6 +316,125 @@ def detect_rs7(a):
     if a.get("erfahrung") and not a.get("erfahrung_beleg"):
         return False, "erfahrung ohne erfahrung_beleg (keine automatische Schein-Evidenz)"
     return True, "author vorhanden; Erfahrung fehlt ehrlich oder ist belegt"
+
+
+def _reserve_numeric_claim_findings(body):
+    """Find numbers that lack a sentence-level source or explicit model basis.
+
+    A hedge such as “about” is not evidence. Reserve copy needs a clickable
+    source in the same sentence for external figures; calculations need to be
+    clearly marked as a model with stated assumptions. Legal sections always
+    require a source link.
+    """
+    link_re = re.compile(r"\[([^\]]+)\]\(\s*([^)\s]+)[^)]*\)", re.I)
+    text = re.sub(r"```.*?```", " ", body or "", flags=re.S)
+    text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
+    # Strip internal links so year-bearing slugs are not claims. External
+    # Markdown links leave a marker that proves sentence-level evidence.
+    def _link_marker(match):
+        target = match.group(2).strip().lower()
+        return " QUELLENLINK " if target.startswith(("https://", "http://")) else " INTERNLINK "
+    text = link_re.sub(_link_marker, text)
+    lines = [ln for ln in text.splitlines()
+             if not ln.lstrip().startswith(("#", ">", "<!--"))]
+    text = re.sub(r"\s+", " ", " ".join(lines))
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    number_words = (
+        r"ein(?:e|em|en|es)?|zwei|drei|vier|f[uü]nf|sechs|sieben|acht|"
+        r"neun|zehn|elf|zw[oö]lf|dreizehn|vierzehn|f[uü]nfzehn|"
+        r"sechzehn|siebzehn|achtzehn|neunzehn|zwanzig|drei[ßs]ig|"
+        r"vierzig|f[uü]nfzig|sechzig|siebzig|achtzig|neunzig|hundert|"
+        r"tausend|mehrere|einige")
+    units = (
+        r"€|eur\b|euro\b|cent\b|ct\b|%|prozent\b|kwh\b|wh\b|mwh\b|"
+        r"kilowattstunden?\b|wattstunden?\b|watt\b|(?<![a-z])w\b|"
+        r"kw\b|kilowatt\b|mbit/s\b|gbit/s\b|gb\b|mb\b|"
+        r"tage?n?\b|wochen?\b|monate?n?\b|jahre?n?\b|stunden?\b|"
+        r"minuten?\b|kilometer\b|km\b|meter\b|grad\b|°c\b")
+    numeric_claim = re.compile(
+        rf"(?ix)(?:§\s*\d+[a-z]?\b|"
+        rf"(?<!\w)(?:\d[\d.,]*|{number_words})\s*(?:{units})(?!\w)|"
+        rf"(?<!\w)\d{{3,}}(?:[.,]\d+)?(?!\w))")
+    model_marker = re.compile(
+        r"\b(?:rechenbeispiel|modellrechnung|modellfall|annahme|annahmen|"
+        r"musterrechnung|beispielrechnung|angenommen|unterstellen wir)\b", re.I)
+    findings = []
+    for sentence in sentences:
+        sentence = sentence.strip()
+        if not numeric_claim.search(sentence):
+            continue
+        if "QUELLENLINK" in sentence:
+            continue
+        # A model label must not disguise a statutory clause or a claimed study.
+        if "§" not in sentence and model_marker.search(sentence):
+            continue
+        findings.append(sentence[:240])
+    return findings
+
+
+def reserve_quality_findings(body, author=None, erfahrung=None,
+                             erfahrung_beleg=None):
+    """Strict editorial contract for reserve drafts and their generation.
+
+    RS1–RS7, same-sentence evidence for numbers, phantom-source rejection,
+    minimum substance and a calm H2 structure are hard requirements. A high
+    average score or a successful render cannot compensate for these blockers.
+    """
+    body = body or ""
+    findings = []
+    for code, detector in (("RS1", detect_rs1), ("RS2", detect_rs2),
+                           ("RS3", detect_rs3), ("RS4", detect_rs4)):
+        ok, detail = detector(body)
+        if not ok:
+            findings.append(f"{code}: {detail}")
+    if author is not None:
+        rs7_ok, rs7_detail = detect_rs7({
+            "author": author, "erfahrung": erfahrung,
+            "erfahrung_beleg": erfahrung_beleg})
+        if not rs7_ok:
+            findings.append(f"RS7: {rs7_detail}")
+
+    rs5_ok, _rs5_examples, _rs5_count = detect_rs5(body)
+    ungrounded = _reserve_numeric_claim_findings(body)
+    if ungrounded:
+        findings.append(
+            f"RS5: {len(ungrounded)} Zahlenbehauptung(en) ohne Satzbeleg "
+            f"oder klare Modellannahme: {ungrounded[0]}")
+    # The stricter sentence-level source/model rule supersedes RS5's softer
+    # hedge test: a cited claim is stronger evidence than “ca.” or “rund”.
+    _ = rs5_ok
+
+    rs6_ok, rs6_examples, rs6_count = detect_rs6(body)
+    if not rs6_ok:
+        findings.append(
+            f"RS6: {rs6_count} Phantomquelle(n): "
+            f"{rs6_examples[0] if rs6_examples else 'Fund ohne Textbeispiel'}")
+
+    words = len(re.findall(r"\w+", body))
+    chars = len(re.sub(r"\s+", " ", body).strip())
+    if words < 1400 or chars < 10000:
+        findings.append(
+            f"Umfang: {words} Wörter / {chars} Zeichen; Premium verlangt "
+            "mindestens 1.400 Wörter und 10.000 Zeichen")
+    h2 = re.findall(r"^##\s+(.+?)\s*$", body, re.M)
+    if len(h2) < 5:
+        findings.append(f"Struktur: nur {len(h2)} H2-Abschnitte (Minimum 5)")
+    if len(h2) > 16:
+        findings.append(
+            f"Struktur: {len(h2)} H2-Abschnitte (Maximum 16; keine "
+            "Abschnittszerstückelung)")
+    normalized = [re.sub(
+        r"[^\w]+", " ", unicodedata.normalize("NFKC", heading).casefold()).strip()
+        for heading in h2]
+    duplicate_headings = sorted({heading for heading in normalized
+                                 if heading and normalized.count(heading) > 1})
+    if duplicate_headings:
+        findings.append("Struktur: doppelte H2-Überschrift(en): "
+                         + ", ".join(duplicate_headings[:3]))
+    faq_count = len(re.findall(r"^###\s+[^\n]*\?\s*$", body, re.M))
+    if faq_count < 4:
+        findings.append(f"FAQ: nur {faq_count} Fragen (Premium verlangt 4)")
+    return findings
 
 
 def analyse_article(a):
@@ -708,6 +828,22 @@ SELFTEST = [
         "Experten sagen, das sei erst der Anfang.")[0], False),
     ("RS6-ok", lambda: detect_rs6(
         "In der Praxis sparst du oft mehrere hundert Euro im Jahr.")[0], True),
+    ("Reserve-RS5-blockiert-unbelegte-Zahl", lambda: any(
+        f.startswith("RS5:") for f in reserve_quality_findings(
+            "Ein Tarif kostet 240 Euro pro Jahr.", author="Frank Hartung")), True),
+    ("Reserve-RS5-belegt-Primärquelle", lambda: not any(
+        f.startswith("RS5:") for f in reserve_quality_findings(
+            "Der Vertrag darf höchstens 24 Monate laufen "
+            "([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).",
+            author="Frank Hartung")), True),
+    ("Reserve-RS6-Phantomquelle", lambda: any(
+        f.startswith("RS6:") for f in reserve_quality_findings(
+            "Laut einer aktuellen Studie sparen Kunden viel Geld.",
+            author="Frank Hartung")), True),
+    ("Reserve-H2-Duplikat", lambda: any(
+        "doppelte H2" in f for f in reserve_quality_findings(
+            "\n".join(("## Warum sparen?", "", "## Warum sparen?")),
+            author="Frank Hartung")), True),
     ("RS7-fund", lambda: detect_rs7(
         {"author": "", "erfahrung": ""})[0], False),
     ("RS7-unbelegte-erfahrung", lambda: detect_rs7(
