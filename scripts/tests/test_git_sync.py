@@ -884,5 +884,132 @@ class ReserveSnapshotKonfliktTests(GitSyncTestBase):
                                check=True, capture_output=True)
 
 
+class ReservePoolKonflikt661Tests(GitSyncTestBase):
+    """Issue #661 (08.10.2026): Die Content-Reserve verliert ihren Pool-Stand
+    Nacht für Nacht am Rebase – zehn von zwölf Läufen rot.
+
+    Zwei Klassen sind entscheidbar, OHNE dass auf main etwas verloren geht:
+      a) main kennt den Pfad nicht mehr (Janitor, Umbenennung) → der Entwurf
+         des laufenden Reserve-Laufs gewinnt,
+      b) main hat den Kandidaten veröffentlicht → die LIVE-Fassung gewinnt.
+    Beide sind OPT-IN (`GIT_SYNC_RESERVE_POLICY=reserve-verwaltet`, gesetzt
+    von content-reserve.yml) und setzen zwingend voraus, dass die BASIS ein
+    Reserve-Entwurf war. LIVE-Content und Hand-Entwürfe bleiben ein harter
+    Stopp – auch mit eingeschalteter Politik.
+    """
+
+    ALT = "content/posts/2026-10-07-alpha-probe/index.md"
+    NEU = "content/posts/2026-10-08-alpha-probe/index.md"
+    SLUG = "content/posts/2026-10-07-beta-probe/index.md"
+    POLITIK = {"GIT_SYNC_RESERVE_POLICY": "reserve-verwaltet"}
+
+    @staticmethod
+    def _entwurf(slug_titel, draft=True, reserve=True):
+        kopf = ("---\n"
+                f"title: {slug_titel}\n"
+                "date: 2026-10-07T10:00:00Z\n"
+                f"draft: {'true' if draft else 'false'}\n")
+        if reserve:
+            kopf += "reserve: true\n"
+        return kopf + "---\n\nText\n"
+
+    def _beide_seiten_legen_los(self):
+        """Gemeinsame Basis: beide Klone kennen den Reserve-Entwurf.
+
+        Ohne diesen Abgleich entstünde ein add/add-Konflikt OHNE Basis
+        (Stufe 1) – eine andere Klasse als die hier geprüfte.
+        """
+        self._commit(self.bot_a, self.ALT, self._entwurf("Alpha"), "basis: alpha")
+        self._commit(self.bot_a, self.SLUG, self._entwurf("Beta"), "basis: beta")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        subprocess.run(["git", "-C", str(self.bot_b), "pull", "-q", "--rebase"],
+                       check=True, capture_output=True)
+
+    def test_auf_main_geloeschter_entwurf_heilt_mit_reserve_politik(self):
+        self._beide_seiten_legen_los()
+        # main: Janitor mustert den Kandidaten aus …
+        subprocess.run(["git", "-C", str(self.bot_a), "rm", "-r", "-q",
+                        "content/posts/2026-10-07-alpha-probe"], check=True)
+        subprocess.run(["git", "-C", str(self.bot_a), "commit", "-q", "-m",
+                        "A: janitor"], check=True)
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        # … der Reserve-Lauf hat ihn umbenannt (Datums-Lift) und veredelt.
+        subprocess.run(["git", "-C", str(self.bot_b), "mv",
+                        "content/posts/2026-10-07-alpha-probe",
+                        "content/posts/2026-10-08-alpha-probe"], check=True)
+        (self.bot_b / self.NEU).write_text(self._entwurf("Alpha B"), encoding="utf-8")
+        subprocess.run(["git", "-C", str(self.bot_b), "commit", "-q", "-am",
+                        "B: lift + veredelung"], check=True)
+
+        res = self.run_sync(["--push-only"], env_extra=self.POLITIK)
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Pool-Stand gewinnt", res.stdout)
+        self.assertIn("Alpha B", self.origin_read(self.NEU))
+
+    def test_dieselbe_klasse_bleibt_harter_stopp_ohne_politik(self):
+        """Ohne Opt-in bleibt die Politik aus – die Diagnose nennt die Klasse."""
+        self._beide_seiten_legen_los()
+        subprocess.run(["git", "-C", str(self.bot_a), "rm", "-r", "-q",
+                        "content/posts/2026-10-07-alpha-probe"], check=True)
+        subprocess.run(["git", "-C", str(self.bot_a), "commit", "-q", "-m",
+                        "A: janitor"], check=True)
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        subprocess.run(["git", "-C", str(self.bot_b), "mv",
+                        "content/posts/2026-10-07-alpha-probe",
+                        "content/posts/2026-10-08-alpha-probe"], check=True)
+        (self.bot_b / self.NEU).write_text(self._entwurf("Alpha B"), encoding="utf-8")
+        subprocess.run(["git", "-C", str(self.bot_b), "commit", "-q", "-am",
+                        "B: lift + veredelung"], check=True)
+
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 1, res.stdout + res.stderr)
+        self.assertIn("Kein Push", res.stdout + res.stderr)
+        # #661: Das Log benennt die KLASSE statt nur den Dateinamen.
+        self.assertIn("stufe2=fehlt", res.stdout + res.stderr)
+
+    def test_veroeffentlichter_kandidat_gewinnt_mit_reserve_politik(self):
+        self._beide_seiten_legen_los()
+        # main veröffentlicht den Kandidaten (Publikationskette) …
+        self._commit(self.bot_a, self.SLUG,
+                     self._entwurf("Beta live von main", draft=False, reserve=False),
+                     "A: veroeffentlicht")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        # … der Reserve-Lauf veredelt denselben Entwurf weiter.
+        self._commit(self.bot_b, self.SLUG, self._entwurf("Beta veredelt"),
+                     "B: veredelt")
+
+        res = self.run_sync(["--push-only"], env_extra=self.POLITIK)
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Veröffentlicht", res.stdout)
+        # Ein veröffentlichter Artikel wird NIE überschrieben.
+        self.assertIn("Beta live von main", self.origin_read(self.SLUG))
+
+    def test_live_auf_beiden_seiten_bleibt_harter_stopp_trotz_politik(self):
+        """Schutzprobe: LIVE-Content bleibt unantastbar, auch mit Opt-in."""
+        self._beide_seiten_legen_los()
+        self._commit(self.bot_a, self.SLUG,
+                     self._entwurf("Beta live A", draft=False, reserve=False),
+                     "A: live")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG,
+                     self._entwurf("Beta live B", draft=False, reserve=False),
+                     "B: live")
+        res = self.run_sync(["--push-only"], env_extra=self.POLITIK)
+        self.assertEqual(res.returncode, 1, res.stdout + res.stderr)
+        self.assertIn("Beta live A", self.origin_read(self.SLUG))
+
+    def test_hand_entwurf_ohne_reserve_fahne_bleibt_harter_stopp(self):
+        """Schutzprobe: Ohne Reserve-Fahne ist es kein Pool-Eigentum."""
+        self._beide_seiten_legen_los()
+        self._commit(self.bot_a, self.SLUG, self._entwurf("Beta hand", reserve=False),
+                     "A: hand-entwurf")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, self._entwurf("Beta reserve"),
+                     "B: veredelt")
+        res = self.run_sync(["--push-only"], env_extra=self.POLITIK)
+        self.assertEqual(res.returncode, 1, res.stdout + res.stderr)
+        self.assertIn("Beta hand", self.origin_read(self.SLUG))
+
+
 if __name__ == "__main__":
     unittest.main()

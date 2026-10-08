@@ -572,6 +572,11 @@ def check_content_reserve():
     """
     minimum = reserve_economy.alarmschwelle()
     ziel = reserve_economy.ziel()
+    # #661: Die Diagnose gehört zu DIESEM Check. Ein Rest aus einem früheren
+    # Aufruf würde den nächsten Befund falsch etikettieren (beobachtet in der
+    # Regression: nach einem defekten Snapshot blieb „beschädigt“ stehen und
+    # färbte den Folgebefund, obwohl längst nur ein Messlauf fehlte).
+    RESERVE_DIAGNOSE.clear()
     draft_paths = {}
     for raw_path in glob.glob(str(BLOG_DIR / "content/posts/*/index.md")):
         path = Path(raw_path)
@@ -589,9 +594,29 @@ def check_content_reserve():
         cert = read_certificate(cert_path)
         if not isinstance(cert, dict) or not isinstance(cert.get("candidates"), list):
             raise ValueError("Kandidatenliste fehlt oder ist ungültig")
+    except FileNotFoundError:
+        # Kein Zertifikat ist NICHT derselbe Fall wie ein defektes: Es fehlt
+        # ein Messlauf, kein Byte. Die #462-Logik greift hier weiter
+        # (produzieren/nachzertifizieren), die Snapshot-Heilung würde an einer
+        # fehlenden Datei ohnehin nichts tun.
+        pass
     except (OSError, json.JSONDecodeError, ValueError) as exc:
-        return False, (f"Reife-Zertifikat nicht verfügbar ({exc}); "
-                       f"{len(draft_paths)} Reserve-Entwürfe, Nachweis fehlt")
+        # #661 (08.10.2026): „Nachweis defekt“ ist eine ANDERE Krankheit als
+        # „zu wenig Content“ – sie hat eine andere Heilung (Sekunden statt
+        # Stunden) und einen anderen nächsten Schritt. Beides in einen Topf
+        # zu werfen, erzeugt genau das Dauer-Ticket, das #661 war: 15 Entwürfe
+        # im Pool, sechs davon zertifiziert, und das Ticket riet, vier neue
+        # Kandidaten zu produzieren. Die Klasse wird deshalb gesondert
+        # vermerkt und von reserve_finding() in einen eigenen Befund mit
+        # passendem Schließpfad übersetzt.
+        RESERVE_DIAGNOSE.update({
+            "beschädigt": [f"{cert_path.name}: {exc}"],
+            "pool": len(draft_paths),
+            "minimum": minimum, "ziel": ziel, "certified": 0, "drifted": [],
+        })
+        return False, (f"Reserve-Nachweis beschädigt ({exc}); "
+                       f"{len(draft_paths)} Reserve-Entwürfe, "
+                       f"Nachweis unlesbar")
 
     fresh, freshness_text = reserve_gate.freshness(cert_path)
     if not fresh:
@@ -672,7 +697,26 @@ def reserve_finding(msg: str):
     Ein Ticket, dessen nächster Schritt die Ursache verfehlt, wird nie
     abgearbeitet und kommt jeden Tag zurück – exakt die Historie von #272
     und #393.
+
+    #661 (08.10.2026): Die DRITTE Klasse heißt NACHWEIS DEFEKT. Der Vorrat
+    kann vollständig und zertifiziert sein, während `data/reserve-*.json`
+    unlesbar ist – dann hilft kein einziger neuer Kandidat, sondern nur ein
+    neu gezogener Snapshot. Genau das kann eine Maschine in Sekunden
+    (`reserve_snapshot_heiler.py --fix`, danach die echte Nachmessung); der
+    Befund bekommt deshalb seinen eigenen Titel und seinen eigenen Schritt,
+    statt unter „Content-Reserve niedrig“ durchgereicht zu werden.
     """
+    schaden = list(RESERVE_DIAGNOSE.get("beschädigt") or [])
+    if schaden:
+        return _f(
+            "reserve-nachweis", "Reserve-Nachweis beschädigt", "P2", "auto",
+            detail=msg,
+            next_step=("Snapshot neu ziehen: "
+                       "`python3 scripts/reserve_snapshot_heiler.py --fix` "
+                       "baut Zertifikat und Gedächtnisse aus dem Bestand neu "
+                       "(kein erfundenes READY); danach "
+                       "`python3 scripts/reserve_readiness.py` für die echte "
+                       "Nachmessung. Ursache: " + " | ".join(schaden[:2])))
     drift_slugs = list(RESERVE_DIAGNOSE.get("drifted") or [])
     nachweis_traegt = (RESERVE_DIAGNOSE.get("certified", 0) + len(drift_slugs)
                        >= RESERVE_DIAGNOSE.get("minimum", 0))

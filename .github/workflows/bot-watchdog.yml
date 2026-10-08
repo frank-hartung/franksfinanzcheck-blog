@@ -115,15 +115,16 @@ jobs:
           # Zusätzlich klassische Checks für Rückwärtskompatibilität in GITHUB_ENV laden
           # bot_watchdog.py schreibt bereits ins GITHUB_ENV via emit-env
 
-      # Ein Alarm ohne Reparatur ist kein Profi-Betrieb: Der Watchdog stößt
-      # die zuständige Reserve-Linie sofort an. Der Broker ist idempotent und
-      # dispatcht nicht doppelt, falls der nächtliche Lauf noch aktiv ist.
-      - name: Content-Reserve bei Engpass selbst heilen
-        if: ${{ contains(env.CHECK8, 'WARN') }}
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/watchdog_recovery.py --reserve
+      # REPARATUR 08.10.2026 (Issue #661): Der Dispatch stand bis hier vorn –
+      # und damit VOR der billigen Selbstheilung. Folge: Der Watchdog stieß
+      # jeden Tag den 45–90-Minuten-Produktionslauf an UND schrieb im selben
+      # Lauf sein eigenes Zertifikat nach main (`Reserve-Zertifikat
+      # nachziehen`). Zwei Schreiber, eine Datei, eine Nacht – der Rebase des
+      # Reserve-Laufs kollidierte damit per Konstruktion (zehn von zwölf
+      # Läufen rot). Jetzt gilt die Reihenfolge: erst der billige Weg
+      # (Snapshot heilen, Nachzertifizieren), dann NEU messen, und nur wenn
+      # der Engpass WIRKLICH noch steht, die Produktionslinie anstoßen. Der
+      # Dispatch-Schritt steht deshalb weiter unten hinter der Nachmessung.
 
       # ------------------------------------------------------------
       #  SELBSTHEILUNG #462 (30.09.2026) – „Automatisierung braucht Eingriff"
@@ -162,12 +163,23 @@ jobs:
           sudo apt-get install -y -qq hunspell hunspell-de-de || true
           python3 scripts/reserve_recert.py --selftest
           set +e
+          # #661, Schritt 1 – der NACHWEIS selbst. Ist das Zertifikat oder
+          # eines der Gedächtnisse unlesbar, kann die Nachzertifizierung gar
+          # nicht anfangen (sie liest dieselben Dateien). Der Snapshot-Heiler
+          # zieht sie deshalb VORHER neu: aus dem Bestand, ohne erfundenes
+          # READY, atomar und mit Gegenprobe. Bei intaktem Snapshot tut er
+          # nichts – Idempotenz ist Teil seines Selbsttests.
+          python3 scripts/reserve_snapshot_heiler.py --selftest
+          python3 scripts/reserve_snapshot_heiler.py --fix
+          echo "snapshot_heiler_exit=$?" >> "$GITHUB_STEP_SUMMARY"
+          # Schritt 2 – die echte Nachmessung der betroffenen Entwürfe (#462).
           python3 scripts/reserve_recert.py --fix
           echo "recert_exit=$?" >> "$GITHUB_STEP_SUMMARY"
           set -e
           GIT_USER="Bot-Watchdog" GIT_MAIL="bot-watchdog@users.noreply.github.com" \
             scripts/git_sync.sh "chore(reserve): Zertifikat nachgezogen (#462)" \
-            data/reserve-readiness.json
+            data/reserve-readiness.json data/reserve-custody.json \
+            data/reserve-quarantine.json data/reserve-history.jsonl
 
       - name: Abhängigkeiten für den Pinterest-Report
         if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
@@ -210,6 +222,22 @@ jobs:
           python3 scripts/bot_watchdog.py --emit-env
           echo "--- Befunde nach Selbstheilung ---"
           cat /tmp/problems.txt || echo "(keine)"
+
+      # REPARATUR 08.10.2026 (Issue #661): Erst JETZT, nach billiger Heilung
+      # und Nachmessung, wird die Produktionslinie angestoßen – und nur, wenn
+      # CHECK8 hier immer noch WARNT. Vorher wurde sie blind am Laufanfang
+      # gestartet: Der Reserve-Lauf lief dann 45–90 Minuten, während dieser
+      # Lauf sein eigenes Zertifikat nach main schrieb. Der Rebase des
+      # Reserve-Laufs kollidierte damit per Konstruktion; der frisch
+      # gemessene Pool kam nie in main an, das Ticket kam am nächsten Tag
+      # wieder. Ein Engpass, den eine Nachzertifizierung schließt, kostet
+      # jetzt keine Produktionsnacht mehr.
+      - name: Content-Reserve bei echtem Engpass selbst heilen
+        if: ${{ contains(env.CHECK8, 'WARN') }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/watchdog_recovery.py --reserve
 
       - name: Zusammenfassung
         if: always()

@@ -178,8 +178,18 @@ GIT_SYNC_BACKOFF="${GIT_SYNC_BACKOFF:-4}"
 #                     auf dem neuen Text nachgezogen.
 GIT_SYNC_BESTAND_POLICY="${GIT_SYNC_BESTAND_POLICY:-hart}"
 GIT_SYNC_NACHHEIL_LOG="${GIT_SYNC_NACHHEIL_LOG:-.git_sync_nachheilung.txt}"
+# #661 (08.10.2026): Umgang mit Konflikten auf MASCHINENVERWALTETEN
+# POOL-ENTWÜRFEN der Content-Reserve (draft: true + reserve: true, Basis
+# ebenfalls Reserventwurf).
+#   hart (Default)          = wie bisher: kein Blind-Merge, Lauf endet rot.
+#   reserve-verwaltet       = zwei Klassen werden entschieden, in denen auf
+#                             main nichts verloren gehen kann (Pfad auf main
+#                             nicht mehr vorhanden bzw. dort veröffentlicht).
+#                             Opt-in, ausschließlich für content-reserve.yml.
+GIT_SYNC_RESERVE_POLICY="${GIT_SYNC_RESERVE_POLICY:-hart}"
 # Zähler für die Abschlussmeldung (wie viele Artikel wurden abgegeben?).
 BESTAND_UEBERNOMMEN=0
+POOL_UEBERNOMMEN=0
 
 # Warum der letzte Synchronisierungsversuch gescheitert ist:
 #   netzwerk | auth | schutz | konflikt | rebase | autostash | leer | ref_fehlt
@@ -356,6 +366,56 @@ bestand_konflikt_abgebbar() {
   return 0
 }
 
+# --- Konflikt-Diagnose (Issue #661, 08.10.2026) --------------------------------
+#  Zehn von zwölf Nachtläufen der Content-Reserve wurden rot, und jedes Log
+#  sagte dasselbe: „ein paralleler Workflow hat dieselben Zeilen geändert“.
+#  Welche KLASSE der Konflikt ist, stand nirgends – also riet das Ticket zu
+#  API-Keys und Produktion, statt den wirklichen Grund zu nennen (derselbe
+#  Fehler wie in #295 und #590 vor ihren Reparaturen).
+#  `konflikt_seite` beantwortet je Stufe eine einzige, entscheidbare Frage:
+#     fehlt              – diese Seite kennt den Pfad nicht (Umbenennung,
+#                          Janitor, Parallel-Löschung)
+#     reserve-entwurf    – maschinenverwalteter Pool-Kandidat
+#                          (draft: true + reserve: true)
+#     veroeffentlicht    – LIVE-Artikel (draft: false): unantastbar
+#     fremd              – Entwurf ohne Reserve-Fahne (Hand-Entwurf, Re-Queue)
+#     vorhanden          – sonstige Datei (JSON, Report …) ist da
+#  Die Diagnose entscheidet NICHTS. Sie macht die Entscheidung begründbar.
+konflikt_seite() {
+  python3 -c '
+import re, subprocess, sys
+path, stage = sys.argv[1], sys.argv[2]
+r = subprocess.run(["git", "show", f":{stage}:{path}"], capture_output=True, text=True)
+if r.returncode != 0:
+    print("fehlt"); raise SystemExit(0)
+if not path.endswith(".md"):
+    print("vorhanden"); raise SystemExit(0)
+text = r.stdout
+fm = text.split("---", 2)[1] if text.startswith("---") else ""
+if re.search(r"(?m)^draft:\s*false\s*$", fm):
+    print("veroeffentlicht"); raise SystemExit(0)
+if re.search(r"(?m)^reserve:\s*(true|yes|1)\s*$", fm):
+    print("reserve-entwurf"); raise SystemExit(0)
+print("fremd")
+' "$1" "$2" 2>/dev/null || printf '%s' "fehlt"
+}
+
+konflikt_diagnose() {
+  local f s1 s2 s3 treiber
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    s1=$(konflikt_seite "$f" 1); s2=$(konflikt_seite "$f" 2)
+    s3=$(konflikt_seite "$f" 3)
+    case "$f" in
+      content/posts/*/index.md) treiber="inhalt" ;;
+      data/*.jsonl|*.jsonl)     treiber="historie-jsonl" ;;
+      data/*.json)              treiber="maschine-json" ;;
+      *)                        treiber="sonst" ;;
+    esac
+    echo "  konflikt: $f [klasse: $treiber] stufe1=$s1 stufe2=$s2 stufe3=$s3"
+  done <<< "$(git diff --name-only --diff-filter=U 2>/dev/null)"
+}
+
 # Pfad für die spätere Nachheilung vormerken (dedupliziert, eine Zeile je Datei).
 nachheilung_vormerken() {
   local f="$1" log="$GIT_SYNC_NACHHEIL_LOG"
@@ -434,10 +494,15 @@ sys.path.insert(0, str(pathlib.Path(sys.argv[2]).resolve()))
 import reserve_artifacts as artifacts
 path = pathlib.Path(sys.argv[1])
 def seite(stage):
+    # #661: Ein GANZER Schnappschuss kennt keine „halbe“ Seite. Fehlt eine
+    # Seite (frisch angelegt, parallel gelöscht), gewinnt die vorhandene –
+    # aber nur, wenn sie vollständig und streng gültig ist. Vorher brach hier
+    # eine MissingPage den ganzen Reserve-Lauf ab (#634-Kommentar behalten
+    # wir bei: defekte Seiten bleiben ein harter Konflikt).
     r = subprocess.run(["git", "show", f":{stage}:{path.as_posix()}"],
                        text=True, capture_output=True)
     if r.returncode != 0:
-        raise ValueError(f"Konfliktseite {stage} fehlt: {path}")
+        return None
     return artifacts.parse_object(r.stdout)
 def alter(eintrag):
     if not isinstance(eintrag, dict):
@@ -446,21 +511,24 @@ def alter(eintrag):
                 if isinstance(v, str) and k.startswith(
                     ("letzter", "zuletzt", "last", "seit", "first"))] or [""])
 ours, theirs = seite(2), seite(3)
-merged = dict(ours)
-for schluessel, eintrag in theirs.items():
-    previous = merged.get(schluessel)
-    chosen = eintrag if previous is None or alter(eintrag) >= alter(previous) else previous
-    if (path.name == "reserve-quarantine.json" and isinstance(previous, dict)
-            and isinstance(eintrag, dict) and eintrag.get("signatur")
-            and eintrag.get("signatur") == previous.get("signatur")):
-        chosen = dict(chosen)
-        runs = sorted(set(previous.get("laeufe", [])) | set(eintrag.get("laeufe", [])))
-        chosen["laeufe"] = runs
-        chosen["hits"] = max(len(runs), previous.get("hits", 0), eintrag.get("hits", 0))
-        first = [v for v in (previous.get("first"), eintrag.get("first")) if v]
-        if first:
-            chosen["first"] = min(first)
-    merged[schluessel] = chosen
+if ours is None and theirs is None:
+    raise ValueError(f"beide Konfliktseiten fehlen: {path}")
+merged = dict(theirs if ours is None else ours)
+if ours is not None and theirs is not None:
+    for schluessel, eintrag in theirs.items():
+        previous = merged.get(schluessel)
+        chosen = eintrag if previous is None or alter(eintrag) >= alter(previous) else previous
+        if (path.name == "reserve-quarantine.json" and isinstance(previous, dict)
+                and isinstance(eintrag, dict) and eintrag.get("signatur")
+                and eintrag.get("signatur") == previous.get("signatur")):
+            chosen = dict(chosen)
+            runs = sorted(set(previous.get("laeufe", [])) | set(eintrag.get("laeufe", [])))
+            chosen["laeufe"] = runs
+            chosen["hits"] = max(len(runs), previous.get("hits", 0), eintrag.get("hits", 0))
+            first = [v for v in (previous.get("first"), eintrag.get("first")) if v]
+            if first:
+                chosen["first"] = min(first)
+        merged[schluessel] = chosen
 artifacts.write_object(path, merged, sort_keys=True)
 PYMERGE
           then
@@ -573,6 +641,47 @@ sys.exit(0 if is_reserve_draft(stage(2)) and is_reserve_draft(stage(3)) else 1)
 ' "$f"; then
             git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
             git add -- "$f"
+          elif [ "$GIT_SYNC_RESERVE_POLICY" = "reserve-verwaltet" ] \
+               && [ "$(konflikt_seite "$f" 1)" = "reserve-entwurf" ]; then
+            # REPARATUR 08.10.2026 (Issue #661, Content-Reserve):
+            #   Der nächtliche Reserve-Lauf veredelt 6–15 Pool-Entwürfe über
+            #   45–90 Minuten und hebt sie dabei auf das Tagesdatum
+            #   (Ordner-Umbenennung). In derselben Zeit fassen andere Bot-
+            #   Ketten dieselben Entwürfe an. Trifft der Rebase danach auf
+            #   eine Seite, die es auf main gar nicht mehr gibt (umbenannt,
+            #   vom Janitor ausgemustert), war das bisher ein HARTER Stopp –
+            #   obwohl auf main nichts zu verlieren war. Zehn von zwölf
+            #   Läufen starben daran, ohne dass ein Log die Klasse nannte.
+            #   Zwei Fälle sind jetzt entscheidbar, beide VERLIEREN NICHTS:
+            #     a) main kennt den Pfad nicht mehr (stufe2 = fehlt):
+            #        Der Entwurf dieses Laufs gewinnt – auf main existiert
+            #        keine Fassung, die überschrieben werden könnte.
+            #     b) main hat den Kandidaten inzwischen VERÖFFENTLICHT
+            #        (stufe2 = veroeffentlicht): Ein LIVE-Artikel ist
+            #        unantastbar, die fremde Fassung gewinnt (--ours) und der
+            #        Pfad wandert ins Nachheil-Protokoll – die Reserve-
+            #        Zertifizierung misst ihn ohnehin neu.
+            #   Voraussetzung in BEIDEN Fällen: die Basis (Stufe 1) war ein
+            #   Reserve-Entwurf. Damit bleibt jeder LIVE-Artikel, jeder
+            #   Hand-Entwurf und jeder Bestands-Artikel außen vor.
+            #   OPT-IN: Nur die Content-Reserve setzt diese Politik; für alle
+            #   anderen Aufrufer bleibt es beim harten Stopp (Default hart).
+            if [ "$(konflikt_seite "$f" 2)" = "fehlt" ] \
+               && [ "$(konflikt_seite "$f" 3)" = "reserve-entwurf" ]; then
+              git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+              git add -- "$f"
+              POOL_UEBERNOMMEN=$(( POOL_UEBERNOMMEN + 1 ))
+              echo "    ↪ Pool-Stand gewinnt: $f (auf main nicht mehr vorhanden)"
+            elif [ "$(konflikt_seite "$f" 2)" = "veroeffentlicht" ] \
+                 && [ "$(konflikt_seite "$f" 3)" = "reserve-entwurf" ]; then
+              git checkout --ours -- "$f" >/dev/null 2>&1 || safe=0
+              git add -- "$f"
+              nachheilung_vormerken "$f"
+              BESTAND_UEBERNOMMEN=$(( BESTAND_UEBERNOMMEN + 1 ))
+              echo "    ↪ Veröffentlicht: $f (Live-Fassung von main gewinnt)"
+            else
+              safe=0
+            fi
           elif [ "$GIT_SYNC_BESTAND_POLICY" = "bestand-gewinnt" ] \
                && bestand_konflikt_abgebbar "$f"; then
             # REPARATUR 05.10.2026 (Issue #590, Vorgang WF-A535):
@@ -634,6 +743,15 @@ sys.exit(0 if is_reserve_draft(stage(2)) and is_reserve_draft(stage(3)) else 1)
     return 1
   fi
 
+  # #661: Auch eine übernommene Pool-Entscheidung steht sichtbar im Lauf.
+  # Sie betrifft ausschließlich maschinenverwaltete Entwürfe; die Reserve
+  # zertifiziert ihren Bestand ohnehin nach jedem Lauf neu.
+  if [ "$POOL_UEBERNOMMEN" -gt 0 ]; then
+    echo "::warning::git_sync.sh: $POOL_UEBERNOMMEN Reserve-Entwurf/Entwürfe "\
+         "wurden übernommen (auf main nicht mehr vorhanden – Reservestand "\
+         "gewinnt). Der Nachtlauf misst den Pool danach neu."
+  fi
+
   # #590: Eine Abgabe an den Bestand ist kein Fehler, aber auch keine
   # Nebensache – sie steht sichtbar im Lauf und benennt den Nachheil-Auftrag.
   if [ "$BESTAND_UEBERNOMMEN" -gt 0 ]; then
@@ -685,6 +803,9 @@ rebase_gegen_origin() {
         echo "  rebase: generierte Bot-Artefakt-Konflikte automatisch gelöst."
         return 0
       fi
+      # #661: Vor dem Abbruch sagt das Log, WELCHE Klasse hier blockiert –
+      # Dateinamen allein haben zehn Nächte lang zu keiner Heilung geführt.
+      konflikt_diagnose
       git rebase --abort 2>/dev/null || true
       SYNC_FAIL_URSACHE=konflikt
       echo "::error::git_sync.sh: Rebase-Konflikt gegen origin/$BRANCH "\
