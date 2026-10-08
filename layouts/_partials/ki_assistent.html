@@ -7,9 +7,19 @@
     DSGVO: Kein Netzwerkverkehr bis der Nutzer eine Frage stellt.
     Kein Tracking, keine Cookies, session-only.
     ============================================================ */ -}}
-{{- if ne .Params.hideAssistent true -}}
 {{- $endpoint := site.Params.kiAssistentEndpoint | default "" -}}
-{{- $slug := .File.BaseFileName | default "seite" -}}
+{{- /* Ohne Endpoint (Worker noch nicht deployt, siehe
+        docs/ANLEITUNG-KI-ASSISTENT.md 4.3) bleibt das Widget aus: sonst
+        stünde auf jeder Seite ein Knopf, dessen Anfrage ins Leere läuft
+        und jedes Mal „nicht erreichbar“ meldet. Sobald der Endpoint in
+        hugo.toml steht, erscheint das Widget ohne weitere Änderung. */ -}}
+{{- if and (ne .Params.hideAssistent true) $endpoint -}}
+{{- /* Die Partial läuft auf JEDER Seite – auch auf 404, Taxonomie- und
+        generierten Seiten, die keine Quelldatei haben (.File ist dort nil).
+        Ohne `with` bricht der Build an diesem Zugriff („File is nil“ auf
+        /404, Befund 08.10.2026 beim Bau für #666). */ -}}
+{{- $slug := "seite" -}}
+{{- with .File -}}{{- $slug = .BaseFileName | default "seite" -}}{{- end -}}
 {{- if or (eq $slug "_index") (eq $slug "index") -}}
   {{- $segs := split (trim .RelPermalink "/") "/" -}}
   {{- $slug = index $segs (sub (len $segs) 1) | default "seite" -}}

@@ -107,7 +107,7 @@ jobs:
         run: python3 scripts/robustheits_gate.py --source-only
 
       - name: Resilienzschicht und Site-Suche im Browser-DOM testen (jsdom)
-        run: node --test tools/robust.test.mjs tools/ff-suche.test.mjs
+        run: node --test tools/robust.test.mjs tools/ff-suche.test.mjs tools/ki-assistent.test.mjs
 
       - name: Einheitstests der Wache
         run: python3 -m unittest scripts.tests.test_robustheits_gate
