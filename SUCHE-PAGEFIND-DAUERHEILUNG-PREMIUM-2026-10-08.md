@@ -96,6 +96,31 @@ PyPI-Fallback der Repo-Action (`hugo==0.164.0`). Für die Browser-Tests lief Chr
 
 **Gemessen zur Last:** Der gesamte Pagefind-Ordner ist 1,7 MB, davon 588 KB Fragmente.
 
+## Nachtrag 08.10.2026 (zweite Runde)
+
+Zwei Punkte aus der offenen Liste sind geschlossen:
+
+1. **Alt-Text-Skript nutzt den gemeinsamen Transportweg (T6).**
+   `scripts/alt_text_vorschlaege.py` spricht Gemini nicht mehr selbst an.
+   `scripts/llm_client.py` trägt seit diesem Stand Bildteile
+   (`chat(..., bilder=[{mime, data}])` – Gemini `inline_data`, OpenAI-kompatible
+   Hostern als Inhalts-Teile mit data-URL). Das Gate `scripts/ki_transportweg.py`
+   führt das Skript in `RUFER` und meldet zusätzlich jeden direkten
+   Modell-Endpunkt in einem Rufer-Skript. Der Gate-Selbsttest sabotiert beide
+   Seiten (ST9d: Endpunkt neben dem Client, Rufer ohne Import). Nachweise ohne
+   Netz: `scripts/tests/test_llm_client_bilder.py` (6 Vertragstests),
+   `test_alt_text_vorschlaege.py` (4 Transportweg-Tests),
+   `test_ki_transportweg.py` (2 neue Prüfungen). Der Live-Aufruf bleibt offen.
+2. **„Mehr Treffer“ lädt nach.** Die Liste zeigt zehn Treffer; der Knopf darunter
+   lädt die nächsten zehn nach und verschwindet, sobald alle sichtbar sind. Die
+   Zählzeile nennt weiter die Gesamtzahl. Nachweise: `tools/ff-suche.test.mjs`
+   (16 jsdom-Tests, davon 3 für das Nachladen), `e2e/suche.spec.mjs`
+   (10 Browser-Tests, neu „Mehr Treffer“).
+
+Geprüft am Stand: Python-Vertragstests 2312 OK (10 übersprungen),
+`npm run test:suche` grün (jsdom 16, Wache 14 Proben, Vertrag 26),
+Playwright-Suche 10/10, alle Gates aus der Tabelle oben erneut grün.
+
 ## Entscheidungen
 
 - **Suche bleibt im Hauptmenü und im Footer.** Der Menüpunkt aus #644 bleibt; Runbook und
@@ -113,15 +138,12 @@ PyPI-Fallback der Repo-Action (`hugo==0.164.0`). Für die Browser-Tests lief Chr
      `layouts/search/single.html`, die Datei gibt es nicht mehr. Nur ein Kommentar.
    - `hugo.toml` (KRITISCH): Die Menüpunkte „Suche“ und „Über mich“ haben beide das Gewicht 7.
      Kosmetisch.
-2. **Alt-Text-Skript (#647) umgeht den Transportweg:** `scripts/alt_text_vorschlaege.py` ruft
-   Gemini direkt auf (`ENDPUNKT`), nicht über `scripts/llm_client.py`. Das verstößt gegen den
-   KI-Transportweg in CLAUDE.md. Das Gate T6 erkennt es nicht, weil die Liste `RUFER` das Skript
-   nicht führt. Die Umstellung braucht Bildteile im Client und einen Live-Test. Beides war hier
-   nicht möglich.
-3. **Live-Aufruf Gemini nicht getestet:** `generativelanguage.googleapis.com` ist aus der Sandbox
-   nicht erreichbar.
-4. **Mehr Treffer:** Angezeigt werden die ersten zehn Treffer, mit Zählzeile. Ein Knopf „Mehr“
-   fehlt. Folgearbeit.
-5. **Mobil:** Der Menüpunkt „Suche“ liegt im horizontal scrollbaren Menü weit rechts. Erreichbar
+2. **Live-Aufruf Gemini nicht getestet:** `generativelanguage.googleapis.com` ist aus der Sandbox
+   nicht erreichbar. Getestet sind der Weg durch `scripts/llm_client.py` (Payload mit Bildteil)
+   und die Verarbeitung mit einem Fake-Anbieter. Beim ersten echten Lauf `--max 1` verwenden.
+3. **Mobil:** Der Menüpunkt „Suche“ liegt im horizontal scrollbaren Menü weit rechts. Erreichbar
    ist er über den Footer. Eine Suchschaltfläche im Kopf wäre eine Designentscheidung.
-6. **Keine weiteren Befunde aus den geprüften Gates.** Die Ergebnisse stehen in der Tabelle oben.
+4. **Altbestand an Modell-Skripten:** 18 ältere Skripte enthalten direkte Modell-Endpunkte
+   (Bestand aus der Zeit vor #647, außerhalb dieses Auftrags). Der Vertrag T6 prüft die
+   dokumentierte Liste `RUFER`; eine Aufarbeitung des Altbestands ist eine eigene Maßnahme.
+5. **Keine weiteren Befunde aus den geprüften Gates.** Die Ergebnisse stehen in der Tabelle oben.
