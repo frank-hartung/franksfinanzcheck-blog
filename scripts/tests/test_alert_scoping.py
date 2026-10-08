@@ -36,11 +36,14 @@ dass die Regeln nicht still zurückgebaut werden:
      kein zweites generisches auto-report-Issue, wenn das engine-deficit-
      Fach-Issue offen nachweisbar ist (#602); fehlt der Fachkanal,
      bleibt das Alerting fail-open.
-  7. VERHALTEN: Die Verhaltens-Simulation (scripts/tests/sim/
+  7. ENGINE-DIAGNOSE (#632): Wenn Phase 0.5 und der Schluss-Classifier
+     gemeinsam fehlschlagen, erklärt das Issue den Frühabbruch und liefert
+     das KI-Probe-Runbook statt pauschal API-Key-/GitHub-Tipps.
+  8. VERHALTEN: Die Verhaltens-Simulation (scripts/tests/sim/
      alert_scoping_sim.mjs) führt das Inline-Skript mit gestubbtem
      github-script-Kontext aus – die Produktionsszenarien inkl. exakter
-     #343-Reproduktion, Phantom-Filter (#218), Dedupe, Fachkanal-
-     Stummschaltung und Fail-open.
+     #343- und #632-Reproduktion, Phantom-Filter (#218), Dedupe,
+     Fachkanal-Stummschaltung und Fail-open.
 
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
@@ -109,6 +112,17 @@ class ProdScopingAlarm(unittest.TestCase):
         # Vertrag 5: Der Alarm benennt die roten Jobs/Schritte im Issue.
         self.assertIn("listJobsForWorkflowRun", self.code)
         self.assertIn("Fehlgeschlagene Schritte", self.code)
+
+    def test_wf_a535_phase05_hat_eigenes_runbook(self):
+        # Issue #632: Die Schlussklassifikation kann ebenfalls rot sein;
+        # entscheidend ist die Kombination mit dem fehlgeschlagenen Phase-0.5-
+        # Gate. In diesem Fall sind Tagesdefizit/API-Key-Ratschläge irreführend.
+        self.assertIn("wfName === 'Content-Engine v2'", self.code)
+        self.assertIn("engineFinalClassifierFailed", self.code)
+        self.assertIn("Phase 0.5 – Kadenz-Gate sicherstellen", self.code)
+        self.assertIn("Do not report a quota deficit as success", self.code)
+        self.assertIn("selftest_ki.py --trap <skript>", self.code)
+        self.assertIn("weder ein Tagesdefizit noch einen API-Key-Ausfall", self.code)
 
     def test_tagesdefizit_fachkanal_verhindert_duplikat(self):
         # Vertrag 6 (#602): Ein ehrlich roter Quotenschritt darf nur dann
@@ -261,7 +275,11 @@ class VerhaltensSimulation(unittest.TestCase):
         import alert_issue_identity as ident_modul
         with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
                                          encoding="utf-8") as idf:
-            json.dump(ident_modul.identitaet("Layout-AI"), idf, ensure_ascii=False)
+            # Simulation deckt mehrere echte Workflows ab, insbesondere die
+            # markenneutrale Identität der Content-Engine (WF-A535 / #632).
+            identitaeten = {name: ident_modul.identitaet(name)
+                            for name in ("Layout-AI", "Content-Engine v2")}
+            json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)
         try:
