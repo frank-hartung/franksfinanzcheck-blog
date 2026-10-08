@@ -305,6 +305,29 @@ await run('#608-Gegenprobe: Fachkanal blieb geschlossen → generischer Alarm fa
     openIssues: [] },
   true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
 
+// 9. WF-7B6B / #654: Install-Schritt rot (npm ci) → Manifest-Diagnose statt des
+//    irreführenden API-Key-Rats. Vorfall: package.json war ungültiges JSON, npm ci
+//    brach in Sekunde 1 ab – die Meldung riet trotzdem zu Schlüsseln.
+await run('#654-Reproduktion: npm ci rot auf main → Manifest-Diagnose, kein API-Key-Rat',
+  { workflowName: 'E2E-Tests (Playwright)', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure',
+             html_url: 'https://x/jobs/113296822355',
+             steps: [{ name: 'Abhängigkeiten installieren', conclusion: 'failure' }] }] },
+  true, ['Abhängigkeiten nicht installierbar', 'manifest_guard.py', '### Fehlgeschlagene Schritte'],
+  null, ['API-Key abgelaufen']);
+// 10. Deploy: die Manifest-Wache rot → dieselbe Diagnose (Produktionspfad).
+await run('Deploy: Manifest-Schutz rot → Manifest-Diagnose',
+  { workflowName: 'Deploy auf GitHub Pages', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'deploy', conclusion: 'failure', html_url: 'https://x/jobs/9001',
+             steps: [{ name: 'Manifest-Schutz (package.json & Lockfile – fail-closed)', conclusion: 'failure' }] }] },
+  true, ['Abhängigkeiten nicht installierbar', 'manifest_guard.py'], null, ['API-Key abgelaufen']);
+// 11. Gegenprobe: ein Fehler OHNE Install-Bezug behält das bisherige Runbook.
+await run('Gegenprobe: E2E-Suite rot ohne Install-Bezug → bisheriges Runbook',
+  { workflowName: 'E2E-Tests (Playwright)', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure', html_url: 'https://x/jobs/7',
+             steps: [{ name: 'E2E-Suite ausführen', conclusion: 'failure' }] }] },
+  true, ['Häufigste Ursachen', 'API-Key abgelaufen'], null, ['Abhängigkeiten nicht installierbar']);
+
 console.log(failed === 0
   ? `\n✅ SIMULATION: alle ${count} Szenarien korrekt`
   : `\n❌ SIMULATION: ${failed} von ${count} Szenarien falsch`);

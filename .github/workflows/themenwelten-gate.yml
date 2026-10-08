@@ -72,6 +72,14 @@ jobs:
 
       - name: Auslieferungsprüfung
         run: python3 scripts/themenwelten_guard.py --public public
+      # WF-7B6B / #654 (08.10.2026): Lockfile des Browser-Werkzeugs (tools/ff-voice-browser)
+      # und alle übrigen Manifeste vor dem npm-Install prüfen.
+      # Runbook: docs/ANLEITUNG-MANIFEST-WACHE.md
+      - name: Manifest-Wache (package.json & Lockfile vor npm ci)
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
       - name: Browser-Abhängigkeiten aus dem vorhandenen Lockfile
         run: npm ci --prefix tools/ff-voice-browser --no-audit --no-fund
       - name: Chromium – mobil, Desktop, Tastatur, Dunkelmodus, ohne JavaScript

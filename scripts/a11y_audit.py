@@ -90,6 +90,12 @@ def collect_html_files(public_dir=None):
     Nur die begründeten Routen-Ausnahmen aus der H1-Wache werden
     ausgelassen. Insbesondere gibt es keine pauschalen Verzeichnisfilter
     (z. B. ``assets``) oder substring-basierten Skip-Listen.
+
+    Blätterseiten (`/page/2/`, `/posts/page/3/` …) sind KEINE Ausnahme
+    (Stufe 2, 08.10.2026): Seit `[pagination] disableAliases = true` gibt es
+    keine inhaltsleeren Blätter-Redirects mehr – was bleibt, sind echte,
+    verlinkte Seiten, und sie trugen real keine H1, solange die alte
+    Pauschalausnahme sie verdeckte.
     """
     _require_h1_contract()
     public_root = os.fspath(public_dir or PUBLIC_DIR)

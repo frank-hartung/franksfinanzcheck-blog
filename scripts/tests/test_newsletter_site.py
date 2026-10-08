@@ -149,9 +149,9 @@ class Vorlagen(unittest.TestCase):
         self.assertIn("Frank Hartung", t, "Verantwortlicher fehlt im Consent")
         self.assertRegex(t, r"(?i)werbung|partnerlink",
                          "Consent deckt die Partnerlinks in der Mail nicht ab")
-        self.assertIn("/datenschutz/", t)
-        self.assertIn("/impressum/", t)
-        self.assertIn("/newsletter/abmelden/", t)
+        self.assertIn('"datenschutz/" | relURL', t)
+        self.assertIn('"impressum/" | relURL', t)
+        self.assertIn('"newsletter/abmelden/" | relURL', t)
         self.assertIn("Art. 6 Abs. 1 lit. a", t)
         self.assertNotRegex(t, r'name="consent"[^>]*checked|checked[^>]*name="consent"',
                             "vorangekreuzte Einwilligung ist unwirksam")
@@ -309,6 +309,32 @@ class Streifen(unittest.TestCase):
         for pfad in ('"/newsletter"', '"/impressum"', '"/datenschutz"'):
             self.assertIn(pfad, strip, f"kein CTA auf {pfad}")
         self.assertIn("$nl.aktiv", strip, "ohne Anmeldeweg darf kein Kasten stehen")
+
+    def test_interne_newsletter_links_respektieren_einen_unterpfad(self):
+        """GitHub Pages kann unter /franksfinanzcheck-blog/ liegen.
+        Root-absolute Newsletter-Links würden dann auf der Domainwurzel
+        landen. Alle internen CTAs müssen daher durch relURL laufen."""
+        for rel in (STRIP, "layouts/shortcodes/newsletter_form.html",
+                    "layouts/shortcodes/newsletter_themen.html"):
+            text = _ohne_kommentare(_text(rel))
+            for pfad in ("newsletter/", "datenschutz/", "impressum/", "index.xml"):
+                self.assertNotIn(f'href="/{pfad}', text,
+                                 f"{rel}: root-absoluter interner Link")
+        strip = _text(STRIP)
+        self.assertIn('"newsletter/" | relURL', strip)
+        self.assertIn("$pfad := $seite.Path", strip,
+                      "Ausschlüsse müssen unabhängig vom baseURL-Unterpfad arbeiten")
+        self.assertNotIn("$pfad := $seite.RelPermalink", strip)
+        self.assertIn('"newsletter/abmelden/" | relURL',
+                      _text("layouts/shortcodes/newsletter_form.html"))
+        self.assertIn('"datenschutz/" | relURL',
+                      _text("layouts/shortcodes/newsletter_form.html"))
+        self.assertIn('"impressum/" | relURL',
+                      _text("layouts/shortcodes/newsletter_form.html"))
+        self.assertIn('"index.xml" | relURL',
+                      _text("layouts/shortcodes/newsletter_form.html"))
+        self.assertIn('"newsletter/" | relURL',
+                      _text("layouts/shortcodes/newsletter_themen.html"))
 
     def test_doppel_cta_wird_verhindert(self):
         self.assertNotIn('<div class="newsletter-footer">', _text("layouts/_partials/extend_footer.html"))
@@ -572,6 +598,40 @@ class Journeys(unittest.TestCase):
         abschnitt = text[text.lower().find("newsletter"):]
         for pflicht in ("Double-Opt", "Auftragsverarbeitungsvertrag", "Widerruf"):
             self.assertIn(pflicht, abschnitt[:4000], f"Datenschutz-Abschnitt ohne {pflicht}")
+
+
+CHECKLISTE = "content/newsletter-checkliste/index.md"
+
+
+class Checkliste(unittest.TestCase):
+    """Der 15-Minuten-Fixkosten-Check ist der Newsletter-Anreiz aus #644:
+    ohne E-Mail-Gate, frei zugänglich, von der Anmeldeseite verlinkt.
+    Verloren geht so etwas nicht durch einen Fehler, sondern durch eine
+    gut gemeinte Änderung – hier steht der Vertrag dagegen."""
+
+    def _koerper(self, rel: str) -> str:
+        text = _text(rel)
+        ende = text.index("\n---\n", 4)
+        return text[ende + len("\n---\n"):]
+
+    def test_checkliste_ist_ohne_gate(self):
+        koerper = self._koerper(CHECKLISTE)
+        self.assertIn("Kein E-Mail-Gate", koerper, "aus dem Anreiz wurde ein Lock")
+        self.assertIn("ohne Anmeldung", koerper, "die Checkliste bleibt frei nutzbar")
+        self.assertIn("(/newsletter/)", koerper,
+                      "die Checkliste führt zum Newsletter – Anreiz, keine Sackgasse")
+
+    def test_checkliste_bleibt_auffindbar(self):
+        schuppe = _text(CHECKLISTE).split("---")[1]
+        self.assertNotRegex(schuppe, r"(?m)^draft:\s*true", "Anreiz im Draft – niemand sieht ihn")
+        self.assertNotRegex(schuppe, r"(?m)^robotsNoIndex:\s*true",
+                            "ein versteckter Anreiz wächst nicht")
+        self.assertNotRegex(schuppe, r"(?m)^\s+disable:\s*true", "Checkliste aus der Sitemap")
+
+    def test_newsletter_seite_verlinkt_die_checkliste(self):
+        text = _text("content/newsletter/index.md")
+        self.assertIn("(/newsletter-checkliste/)", text,
+                      "der Anreiz muss von der Anmeldeseite aus erreichbar sein")
 
 
 if __name__ == "__main__":

@@ -78,11 +78,11 @@
           speichert und mir den Spar-Newsletter per E-Mail sendet – mit Spartipps, Tariffristen
           und als Werbung gekennzeichneten Partnerlinks (Art. 6 Abs. 1 lit. a DSGVO).
           Widerruf jederzeit über den Link in jeder Mail, das Formular auf der
-          <a href="/newsletter/abmelden/">Abmeldeseite</a> oder formlos an
+          <a href="{{ "newsletter/abmelden/" | relURL }}">Abmeldeseite</a> oder formlos an
           <a href="mailto:kontakt@franksfinanzcheck.de">kontakt@franksfinanzcheck.de</a>.
           Einzelheiten (Speicherdauer, Empfänger Resend und Cloudflare, Rechte) in den
-          <a href="/datenschutz/">Datenschutzhinweisen</a> und im
-          <a href="/impressum/">Impressum</a>.</span>
+          <a href="{{ "datenschutz/" | relURL }}">Datenschutzhinweisen</a> und im
+          <a href="{{ "impressum/" | relURL }}">Impressum</a>.</span>
       </label>
     </p>
     <p class="ff-nl__aktionen">
@@ -112,8 +112,8 @@
     </a>
   </p>
   <p class="ff-nl__status">Anmeldung über das Formular deines E-Mail-Dienstleisters,
-    Double-Opt-In inklusive. <a href="/datenschutz/">Datenschutzhinweise</a> ·
-    <a href="/impressum/">Impressum</a>.</p>
+    Double-Opt-In inklusive. <a href="{{ "datenschutz/" | relURL }}">Datenschutzhinweise</a> ·
+    <a href="{{ "impressum/" | relURL }}">Impressum</a>.</p>
 {{- else -}}
   {{- /* Leerzustand: für Leser ein Satz, für den Betreiber die Anleitung.
          Die Betreiberzeile steht in einem Kommentar, damit die Site nirgends
@@ -124,7 +124,7 @@
     Diese Seite zeigt absichtlich kein Formular, das nirgends ankommt. Sobald der
     Versanddienst eingerichtet ist, erscheint hier das Feld – ein Eintrag genügt.
     Bis dahin: jede neue Rechnung steht auch im
-    <a href="/index.xml" hreflang="de">Feed</a> und auf
+    <a href="{{ "index.xml" | relURL }}" hreflang="de">Feed</a> und auf
     <a href="{{ site.Params.mastodonUrl | default "https://mastodon.social/@FranksFinanzcheck" }}"
        target="_blank" rel="noopener noreferrer">Mastodon</a>.
   </p>

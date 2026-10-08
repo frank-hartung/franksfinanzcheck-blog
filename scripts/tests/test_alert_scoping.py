@@ -277,8 +277,10 @@ class VerhaltensSimulation(unittest.TestCase):
                                          encoding="utf-8") as idf:
             # Simulation deckt mehrere echte Workflows ab, insbesondere die
             # markenneutrale Identität der Content-Engine (WF-A535 / #632).
+            # E2E + Deploy: WF-7B6B / #654 (Install-Diagnose) und Veröffentlichung.
             identitaeten = {name: ident_modul.identitaet(name)
-                            for name in ("Layout-AI", "Content-Engine v2")}
+                            for name in ("Layout-AI", "Content-Engine v2",
+                                         "E2E-Tests (Playwright)", "Deploy auf GitHub Pages")}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

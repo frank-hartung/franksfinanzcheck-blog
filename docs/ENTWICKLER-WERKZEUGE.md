@@ -232,6 +232,36 @@ Meldung #623 auslöste. Genau deshalb **heilt die Wache nicht selbst** – eine 
 automatisch zu löschen hieße, einen redaktionellen Satz zu vernichten. Der
 Befund nennt Datei, Zeile und den Handgriff.
 
-**Hintergrund:** Meldung #623 (07.10.2026), Bericht
-`A11Y-EINE-H1-DAUERHEILUNG-PREMIUM-2026-10-07.md`, Vertrag C30 in
+### Was seit Stufe 2 (08.10.2026) zusätzlich geprüft wird
+
+Drei Ränder waren auch nach der Dauerheilung offen; einer davon war ein
+**echter, live Befund**:
+
+1. **Markdown-Wahrheit statt `#`-Suche.** Die Quellprüfung kennt jetzt alle
+   Formen, die Goldmark als `<h1>` rendert: ATX mit bis zu drei führenden
+   Leerzeichen (`   # Titel`), Setext (`Titel` + `=====`) und rohes
+   `<h1 …>` (hugo.toml setzt `unsafe = true`). Code-Zäune, eingerückter Code
+   und Inline-Code-Spans bleiben Text – dort ist die Raute keine Überschrift.
+2. **Die Ausnahme, die einen Befund verdeckte.** `page/N/` galt pauschal als
+   „Blätter-Redirect ohne Inhalt“. Seit `[pagination] disableAliases = true`
+   (29.09.2026) gibt es diese Redirects aber nicht mehr: `/page/2/` … sind
+   echte, verlinkte Seiten – und trugen **gar keine H1**. Die Ausnahme ist
+   entfernt; Blätterseiten werden geprüft, die Startseiten-Blätter bekommen
+   ihre H1 aus `layouts/_default/list.html` (Marker `H1-BLÄTTERKOPF`, an
+   `scripts/h1_wache.py` gebunden).
+3. **Vollständiges H1-Inventar.** `layouts/` enthält neun Dateien, die eine H1
+   rendern dürfen. Jede steht mit Anzahl und Grund in `H1_QUELLEN`, jede
+   Seitenart in `SEITENARTEN`; beide Sichten müssen zusammenpassen. Eine neue
+   H1-Quelle ohne Eintrag ist ein Befund – **fail-closed**. Die
+   Einzelansichten mit eigener Vorlage (`layouts/pillar/single.html`,
+   `layouts/werkzeuge/single.html`) müssen `heading:` genauso ehren wie der
+   gemeinsame Baustein.
+
+Der **Pull Request** misst die gebaute Wahrheit jetzt ebenfalls: `e2e.yml`
+führt direkt nach dem Hugo-Build `python3 scripts/h1_wache.py --public public`
+aus (und die Browser-Suite prüft `/page/2/` und `/posts/page/2/`).
+
+**Hintergrund:** Meldung #623 (07.10.2026), Berichte
+`A11Y-EINE-H1-DAUERHEILUNG-PREMIUM-2026-10-07.md` (Stufe 1) und
+`A11Y-EINE-H1-DAUERHEILUNG-PREMIUM-2026-10-08.md` (Stufe 2), Vertrag C30 in
 `scripts/governance_contract.py`.

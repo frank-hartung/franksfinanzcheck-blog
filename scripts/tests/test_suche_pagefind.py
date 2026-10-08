@@ -13,6 +13,8 @@ Geprüft wird die Verdrahtung, nicht das Ranking:
   · es gibt genau eine Suchoberfläche (kein zweiter pagefind-ui-Pfad)
   · die Suchseite trägt keine Front-Matter-Reste im Fließtext
   · die Index-Wache (scripts/suchindex_check.py) besteht ihren Selbsttest
+  · die Datenschutz-Versprechen der Suchseite und der Datenschutzerklärung
+    stehen auch in einem Jahr noch da (Vertrag gegen stillen Verlust)
 
 Aufruf:  python3 -m unittest scripts.tests.test_suche_pagefind
 """
@@ -243,6 +245,33 @@ class SuchindexWache(unittest.TestCase):
         setup = lies("e2e/suchindex.setup.mjs")
         self.assertIn("'suchindex'", setup)
         self.assertIn("E2E_ROOT", setup, "Varianten-Builds dürfen nicht überschrieben werden")
+
+
+class DatenschutzVersprechen(unittest.TestCase):
+    """Die Suche verspricht auf zwei Flächen: „die Eingabe bleibt bei dir“.
+    Suchseite und Datenschutzerklärung sind Produkttext – und werden deshalb
+    hier gegen stillen Verlust vertraglich gehalten (Abschluss #644, 08.10.2026)."""
+
+    def test_suchseite_haelt_ihr_versprechen(self):
+        text = lies("content/suche/index.md")
+        for pflicht in ("Suchdienst", "Suchhistorie", "Cookie"):
+            self.assertIn(pflicht, text, f"Suchseite nennt „{pflicht}“ nicht mehr")
+
+    def test_datenschutz_beschreibt_die_lokale_suche(self):
+        text = lies("content/datenschutz/index.md")
+        start = text.find("Website-Suche")
+        self.assertGreaterEqual(start, 0, "Abschnitt „Website-Suche (lokale Suche)“ fehlt")
+        abschnitt = text[start:start + 900]
+        for pflicht in ("im Browser", "Suchdienst", "Suchhistorie", "Indexdateien"):
+            self.assertIn(pflicht, abschnitt, f"Datenschutz-Abschnitt ohne „{pflicht}“")
+
+    def test_runbook_fuehrt_die_datenschutzfrage_nicht_mehr_offen(self):
+        text = lies("docs/ANLEITUNG-SUCHE-PAGEFIND.md")
+        self.assertNotIn("Offen: Ob die Datenschutzerklärung", text,
+                         "die Frage ist entschieden (Datenschutz, Abschnitt 2) – "
+                         "der Offen-Satz wäre wieder eine offene Flanke")
+        self.assertIn("Website-Suche (lokale Suche)", text)
+        self.assertIn("content/datenschutz/index.md", text)
 
 
 if __name__ == "__main__":

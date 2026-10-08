@@ -73,6 +73,25 @@
       ersten Startseiten-Seite verlässlich (genau ein H1). */ -}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
+{{- else if and .IsHome (gt $paginator.PageNumber 1) }}
+{{- /* H1-BLÄTTERKOPF: Startseite ab Seite 2 (Wache: scripts/h1_wache.py, S2) */ -}}
+{{- /* GENAU EINE H1 – AUCH AUF DEN BLÄTTERSEITEN (Dauerheilung #623,
+       Stufe 2, 08.10.2026): Der Kopf-Block ganz oben überspringt die
+       Startseite (`not .IsHome`), der saisonale Hero existiert nur auf
+       Seite 1 – /page/2/ … /page/5/ trugen damit GAR KEINE H1. Ein Dokument
+       ohne Hauptüberschrift ist so kaputt wie eines mit zweien: Es gibt
+       keinen Einstieg für Screenreader, Inhaltsverzeichnis und KI-Antworten.
+       Auffallen konnte das nie, weil scripts/h1_wache.py alle `page/N/`-Dateien
+       pauschal für „Blätter-Redirects ohne Inhalt“ erklärte. Seit
+       `[pagination] disableAliases = true` (hugo.toml, 29.09.2026) gibt es
+       diese Redirects nicht mehr – was bleibt, sind echte, verlinkte
+       Pager-Seiten. Aufbau identisch zum Ratgeber-Blätterkopf (/posts/page/2/). */ -}}
+<header class="page-header ff-posts-header">
+  <p class="ff-posts-eyebrow">FranksFinanzcheck · Der Blog</p>
+  <h1>Weitere Ratgeber</h1>
+  <p class="ff-posts-intro">Seite {{ $paginator.PageNumber }} von {{ $paginator.TotalPages }} · Alle Beiträge, neueste zuerst.</p>
+  <a class="ff-posts-jump" href="{{ "/" | relURL }}#deine-6-themenwelten"><span aria-hidden="true">←</span> Zurück zu den Themenwelten</a>
+</header>
 {{- end }}
 
 {{- if $isPosts }}

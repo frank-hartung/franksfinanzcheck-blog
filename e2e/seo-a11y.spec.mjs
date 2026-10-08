@@ -42,6 +42,12 @@ test.describe('SEO & A11y (Stichprobe Kern-Seiten)', () => {
       '/presse/',
       '/studien/',
       '/studien/fixkosten-index-2026-q4/',
+      // Stufe 2 (08.10.2026): Die Blätterseiten sind echte, verlinkte Seiten.
+      // Die Startseiten-Blätter (/page/N/) trugen GAR KEINE H1 – eine
+      // pauschale Ausnahme der H1-Wache deckte den Befund. Der Browser ist
+      // die letzte Instanz: hier zählt, was der Leser wirklich bekommt.
+      '/page/2/',
+      '/posts/page/2/',
     ]) {
       await page.goto(p);
       const h1 = page.locator('h1');

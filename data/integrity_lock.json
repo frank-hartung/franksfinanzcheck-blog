@@ -2,6 +2,8 @@
   "schema": 2,
   "signed_at": "2026-10-08T16:16:02.616439+00:00",
   "head": "1e7f8194",
+  "signed_at": "2026-10-08T15:07:40.115125+00:00",
+  "head": "3484dcf",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -18,7 +20,7 @@
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "bedd9ae9b3e56d204a487137f90479feebb53395a4a046e738025321bd4ef5d8",
     "layouts/pillar/list.html": "435db5bd1741bde574bae2c547e75ff879fd7681ce26721513dc93a21800bac4",
-    "layouts/pillar/single.html": "8ccda4b5629b5b1672ed894c14baed92f4bc5eb75586eba2b612419ebefab001",
+    "layouts/pillar/single.html": "972b72f5d293b4fa5e041705197989cefd3015b581346eafedf408b76843cfff",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
@@ -53,6 +55,7 @@
     "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9"
   },
   "files_sha256": "838c996faa7189a3335f4ab42b17b892c234ec40b6bb2e75681f5d946d7c34c6",
+  "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -407,6 +410,33 @@
       ],
       "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
       "files_sha256": "838c996faa7189a3335f4ab42b17b892c234ec40b6bb2e75681f5d946d7c34c6"
+      "art": "heal",
+      "head": "3484dcf",
+      "geaendert": [
+        "layouts/pillar/single.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/pillar/single.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "3484dcf",
+              "datum": "2026-10-08",
+              "betreff": "fix(a11y): H1-Wache Stufe 2 – Markdown-Wahrheit, H1-Inventar, Blätterseiten (#623)"
+            },
+            {
+              "sha": "f85ce6d",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
+      "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d"
     }
   ]
 }

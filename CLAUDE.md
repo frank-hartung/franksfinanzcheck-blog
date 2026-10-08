@@ -130,7 +130,7 @@ npm run test:suche                                    # Suche: jsdom + Suchindex
 npm run test:suche:browser                            # Suche im Chromium: Trefferregel, Datenschutz, Tastatur, Mobil
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
-npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (33 Regressionstests, C30)
+npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (46 Regressionstests, C30)
 npm run test:a11y                                     # fokussierte Vollscan-/Fail-closed-Regressionen
 npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
 npm run test:marke                                    # Wache (17 Fallgruppen) + Haken-Wächter (11) + 34 Regressionstests
@@ -138,6 +138,8 @@ npm run hooks:status                                  # steht die Commit-Sperre 
 npm run test:haken                                    # Selbstscharfstellung der Commit-Sperre (echte Wegwerf-Repos)
 npm run vorgang:abschluss -- --pr <Nr>                # Abschlussvermerk an die Meldung (Plan; --apply schreibt)
 npm run test:vorgang                                  # Abschlussvermerk: 12 Fallgruppen + 15 Verfahrenstests
+npm run manifest:check                                # Manifest-Wache: package.json + Lockfile vor npm ci (J/K/F/D/L/P, Exit 1 bei Befund)
+npm run test:manifest                                 # Manifest-Wache: Selbsttest (Sabotage + Gegenprobe) + Unit-Tests (#654)
 
 # 0 € Blogautomatik (Whisper lokal + n8n self-hosted + Pages, 03.10.2026) – Details: docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md
 npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)
@@ -1239,6 +1241,32 @@ Dazu: `scripts/reserve_readiness.py` schreibt Zertifikate atomar
 Vertrag: **C33** in `governance_contract.py` (Wache · Klassen · fail-closed ·
 Verdrahtung in PR-Pfad und Reserve-Lauf in der richtigen Reihenfolge ·
 Ursachenklassen · atomarer Schreiber · Siegel · Regressionstest).
+## Das Manifest ist der Bau-Eingang (Manifest-Wache, seit WF-7B6B / #654, 08.10.2026)
+
+Am 08.10.2026 brach `npm ci` in Sekunde 1 ab: Ein Merge (#647) hatte `package.json`
+als **ungültiges JSON** auf `main` zurückgelassen (fehlendes Komma, `pagefind` doppelt).
+Der E2E-Lauf und von 10:41 bis 12:50 UTC jeder Produktions-Deploy wurden rot. Die
+automatische Meldung riet zu API-Keys – die Ursache stand in Zeile 181.
+
+- **Vor jedem `npm ci` / `npm install` läuft `scripts/manifest_guard.py`** – Selbsttest
+  zuerst, fail-closed. Geprüft werden JSON, Konfliktmarker, doppelte Schlüssel, Form
+  und Lock ↔ Manifest (Wurzel-Sync, Vollständigkeit, exakte Pins). Befund = Datei +
+  Zeile + Ursache, in GitHub als Annotation an der Zeile.
+- **Verdrahtet** in `deploy.yml` (direkt nach dem Merge-Marker-Schutz), `e2e.yml`,
+  `design-varianten.yml`, `lesehilfen-gate.yml`, `robustheit.yml`,
+  `themenwelten-gate.yml`, `werkbank.yml`. Ein neuer Workflow mit `npm ci` ohne Wache
+  fällt in `test_manifest_guard.VerdrahtungTests` rot.
+- **Eine Quelle:** alle Manifeste des Repos (Wurzel, `tools/ff-voice-*`). Die einzige
+  begründete Ausnahme (`OHNE_LOCKFILE_ERLAUBT`, `newsletter-worker`) gilt nur für ihren Pfad.
+- **Die Wache ersetzt `npm ci` nicht.** Versions-Ranges entscheidet npm.
+- **Der Alarm** nennt bei Install- und Manifest-Fehlern die Manifest-Diagnose statt des
+  API-Key-Rats (`alert-on-failure.yml`, `installFailed`; Verhalten in
+  `scripts/tests/sim/alert_scoping_sim.mjs`, Szenarien #654 und Deploy).
+- Lock neu erzeugen: `npm install --package-lock-only --ignore-scripts`, dann Manifest
+  und Lock **gemeinsam** committen. Den Lock nie von Hand auf einen Pin setzen.
+- Bedienung: `npm run manifest:check` · `python3 scripts/manifest_guard.py --ref <sha>`
+  (Vorfall nachspielen). Runbook: `docs/ANLEITUNG-MANIFEST-WACHE.md`.
+  Vorgangsbericht: `WF-7B6B-654-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
 
 ## Wichtige Konventionen
 
