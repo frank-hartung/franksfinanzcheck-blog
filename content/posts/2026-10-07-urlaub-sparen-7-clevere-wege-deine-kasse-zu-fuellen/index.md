@@ -5,7 +5,6 @@ date: 2026-10-07T10:43:51Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, veraltete Kreditkartenangaben und Metadaten redaktionell neu geprüft"
-tags: ["Urlaub planen", "Reisebudget", "Geld sparen im Alltag"]
 tags: ["Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
