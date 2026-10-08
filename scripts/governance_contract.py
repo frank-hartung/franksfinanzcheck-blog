@@ -2545,6 +2545,28 @@ def c29_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
 # liefert). Die Wache prüft Quelle UND Build – und das Audit prüft ALLE
 # Seiten, keine Stichprobe. Geheilt wird nie automatisch: Eine H1 zu
 # löschen hieße, einen redaktionellen Satz zu vernichten.
+#
+# STUFE 2 (08.10.2026, „verifizieren & nachhärten“): Die Nachprüfung fand
+# drei Ränder, die Stufe 1 nicht sah – und einen echten, LIVE Befund:
+#   A) MARKDOWN-WAHRHEIT: Eine reine `#`-Suche übersah eingerückte ATX-H1
+#      (bis drei Leerzeichen), Setext-H1 (`=====`) und rohes `<h1 …>`
+#      (hugo.toml: `unsafe = true`). Alle drei rendert Goldmark als H1 –
+#      die Quellprüfung wäre still geblieben, der Build hätte es getragen.
+#   B) DIE AUSNAHME, DIE EINEN BEFUND VERDECKTE: `page/N/` war pauschal als
+#      „Blätter-Redirect ohne Inhalt“ ausgenommen. Mit
+#      `[pagination] disableAliases = true` (29.09.2026) gibt es diese
+#      Redirects nicht mehr: /page/2/ … /page/5/ sind echte, verlinkte
+#      Seiten – und trugen GAR KEINE H1. Der Befund war für die Wache
+#      unsichtbar, weil die Ausnahme ihn deckte.
+#   C) LAYOUT-INVENTAR: S2 kannte vier Dateien. Neun Dateien rendern H1.
+#      Jetzt gilt ein fail-closed Inventar (H1_QUELLEN + SEITENARTEN) plus
+#      Parität der eigenen Einzelansichten (pillar/, werkzeuge/).
+# Der Vertrag prüft deshalb zusätzlich: Inventar und Seitenarten-Tabelle
+# existieren und passen zusammen, der Startseiten-Blätterkopf hängt an
+# seinem Marker, die Einzelansichten mit eigener Vorlage ehren `heading:`,
+# und die Ausnahmen decken KEINE Blätterseite mehr (Wirkungsprobe – eine
+# Textsuche wäre hier unzuverlässig, weil die Datei die alte Ausnahme
+# dokumentiert).
 RE_C30_H1 = re.compile(r"<h1(?=[\s>])")
 
 
@@ -2603,6 +2625,33 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
                                "automatisch zu löschen vernichtet einen "
                                "redaktionellen Satz. Die Wache meldet den "
                                "Handgriff, sie führt ihn nicht aus (#623)."))
+        # a2) Die Ausnahmen-Registry selbst: Sie darf keine Blätterseite
+        #     decken. Geprüft wird der Registry-Block (b2 misst zusätzlich das
+        #     Verhalten) – die Prosa daneben ist ausdrücklich erlaubt, denn
+        #     sie erklärt die alte, falsche Ausnahme.
+        block = re.search(r"AUSNAHMEN_H1[^\n=]*=\s*\((?P<body>.*?)\n\)", wache, re.S)
+        if block is None:
+            out.append(("C30", "scripts/h1_wache.py: AUSNAHMEN_H1 ist nicht als "
+                               "begründete Registry erkennbar (fail-closed)."))
+        elif re.search(r"page/", block.group("body")):
+            out.append(("C30", "Die Ausnahmen der H1-Wache decken wieder "
+                               "Blätterseiten (page/N/) – genau diese "
+                               "Pauschalausnahme verdeckte, dass /page/2/ … "
+                               "gar keine H1 trugen (#623, Stufe 2)."))
+        # a3) Stufe 2: die Markdown-Wahrheit, das Inventar und der
+        #     Startseiten-Blätterkopf sind Eigenschaften der Wache selbst.
+        for marke, sinn in (
+                ("SETEXT_UNTERSTRICH", "Setext-H1 (`Text` + `=====`)"),
+                ("markdown_roh_html_h1", "rohes `<h1 …>` im Markdown (`unsafe = true`)"),
+                ("H1_QUELLEN", "Inventar aller H1-Quellen im Layout-Baum"),
+                ("SEITENARTEN", "Seitenarten-Tabelle (keine Seite ohne H1-Quelle)"),
+                ("H1_BLAETTERKOPF", "Startseiten-Blätterkopf (/page/N/ braucht eine H1)"),
+        ):
+            if marke not in wache:
+                out.append(("C30", f"Der H1-Wache fehlt {sinn} ({marke}) – Stufe 1 "
+                                   f"war an genau diesem Rand blind; ohne die "
+                                   f"Prüfung entsteht der Befund wieder unsichtbar "
+                                   f"(#623, 08.10.2026)."))
         # b) Wirkungsprobe: der Selbsttest der Wache muss JETZT grün sein.
         bin_ = python_bin or sys.executable or "python3"
         try:
@@ -2618,6 +2667,39 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
                 out.append(("C30", "Wirkungsprobe der H1-Wache ROT: "
                             + (zeilen[-1][:160] if zeilen
                                else f"Exit {lauf.returncode}")))
+        # b2) Wirkungsprobe der Ausnahmen (Stufe 2): Eine Blätterseite darf
+        #     NICHT ausgenommen sein – genau diese Pauschalausnahme verdeckte,
+        #     dass /page/2/ … gar keine H1 trugen. Textsuche wäre hier
+        #     unzuverlässig, weil die Wache die alte Ausnahme dokumentiert;
+        #     gemessen wird deshalb das Verhalten.
+        probe = (
+            "import sys;sys.path.insert(0,'scripts');import h1_wache as w;"
+            "print('|'.join([w.ausnahme_grund('page/2/index.html'),"
+            "w.ausnahme_grund('posts/page/3/index.html'),"
+            "w.ausnahme_grund('google123.html'),"
+            "w.ausnahme_grund('pinterest-oauth/index.html')]))")
+        try:
+            mess = subprocess.run([bin_, "-c", probe], cwd=root,
+                                  capture_output=True, text=True, timeout=60)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C30", f"Ausnahmen der H1-Wache nicht messbar "
+                               f"({exc.__class__.__name__}) – fail-closed."))
+        else:
+            felder = (mess.stdout or "").strip().split("|")
+            if len(felder) < 4 or mess.returncode != 0:
+                out.append(("C30", "Ausnahmen der H1-Wache nicht messbar "
+                                   "(Probe ohne Ergebnis) – fail-closed."))
+            else:
+                if felder[0] or felder[1]:
+                    out.append(("C30", "Die H1-Wache nimmt Blätterseiten "
+                                       "(page/N/) wieder pauschal aus – diese "
+                                       "Ausnahme verdeckte bis 08.10.2026, dass "
+                                       "/page/2/ … gar keine H1 trugen (#623)."))
+                if not felder[2] or not felder[3]:
+                    out.append(("C30", "Die begründeten Ausnahmen "
+                                       "(Verifikationsdateien, Pinterest-Redirect) "
+                                       "fehlen – das Gate würde Dateien prüfen, "
+                                       "die nie ein Layout sehen."))
 
     # c) EIN Baustein, EINE H1 – und beide Zweige zeigen auf ihn.
     if not baustein.strip():
@@ -2648,6 +2730,27 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
         out.append(("C30", "layouts/_default/list.html ehrt `.Params.heading` nicht "
                            "– Abschnittsseiten bräuchten für eine Schirmzeile "
                            "wieder eine H1 im Fließtext (#623)."))
+    # c2) Parität der Einzelansichten mit eigener Vorlage (Stufe 2): Auch
+    #     Themenwelt- und Werkzeug-Seiten rendern ihre H1 selbst. Ohne
+    #     `heading:`-Ehrung wäre die dokumentierte Heilung dort wirkungslos.
+    for rel in ("pillar/single.html", "werkzeuge/single.html"):
+        text = _read(os.path.join(root, "layouts", rel))
+        if not text.strip():
+            out.append(("C30", f"layouts/{rel} ist leer – die Einzelansicht "
+                               "würde nicht rendern."))
+        elif ".Params.heading" not in text:
+            out.append(("C30", f"layouts/{rel} ehrt `.Params.heading` nicht – "
+                               "die dokumentierte Schirmzeile wäre auf dieser "
+                               "Seite wirkungslos, und die nächste eigene "
+                               "Überschrift landete wieder als zweite H1 im "
+                               "Fließtext (#623)."))
+    # c3) Startseiten-Blätterkopf: /page/N/ ab Seite 2 ist eine echte Seite
+    #     und braucht eine H1. Der Marker bindet die Prüfung an den Zweig.
+    if "H1-BLÄTTERKOPF" not in liste:
+        out.append(("C30", "layouts/_default/list.html trägt den Marker "
+                           "„H1-BLÄTTERKOPF“ nicht – die Startseiten-Blätter "
+                           "/page/2/ … stehen dann wieder ohne jede H1 da "
+                           "(Befund vom 08.10.2026, #623)."))
 
     # d) Das Audit darf keine Stichprobe mehr sein: 20 von 107 Seiten sahen
     #    die dritte Doppel-H1 nicht.
@@ -2705,6 +2808,13 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
                 out.append(("C30", f"e2e.yml-Pfadfilter fehlt `{pfad}` – Änderungen "
                                    "an der H1-Wache könnten ohne Browser-Regression "
                                    "durchrutschen."))
+        # Im Pull Request wird gebaut: dort muss die gebaute Wahrheit auch
+        # gemessen werden (Stufe 2) – sonst fällt ein Blätter-Befund wie der
+        # vom 08.10.2026 erst nach dem Merge auf.
+        if "scripts/h1_wache.py --public public" not in e2e:
+            out.append(("C30", "e2e.yml prüft die GEBAUTEN Seiten nicht – im "
+                               "Pull Request bliebe die gebaute Wahrheit "
+                               "ungemessen (#623, Stufe 2)."))
     if paket and '"h1:check"' not in paket:
         out.append(("C30", "package.json kennt `h1:check` nicht – eine Wache, die "
                            "man lokal nicht rufen kann, wartet auf den nächsten "
@@ -2883,7 +2993,24 @@ RULE_TEXT = {
            "Vermerk, layouts/single.html gewinne die Template-Aufloesung. "
            "Ein Baustein-Marker im gebauten HTML bewies das Gegenteil – die "
            "Kopie war der tote Zweig, in dem jede kuenftige Heilung "
-           "versandet waere (#623).",
+           "versandet waere (#623). "
+           "STUFE 2 (08.10.2026, verifizieren & nachhaerten) schliesst drei "
+           "Raender, die Stufe 1 nicht sah: (1) Die Quellpruefung kennt jetzt "
+           "die ECHTE Markdown-Wahrheit – eingerueckte ATX-H1 (bis drei "
+           "Leerzeichen), Setext-H1 (`Text` + `=====`) und rohes `<h1 …>` "
+           "(`unsafe = true` in hugo.toml). (2) Die Ausnahmen der Wache decken "
+           "KEINE Blaetterseiten mehr: `page/N/` galt pauschal als "
+           "Blätter-Redirect ohne Inhalt, obwohl es seit "
+           "`[pagination] disableAliases = true` keine solchen Redirects mehr "
+           "gibt – die Startseiten-Blaetter /page/2/ … trugen real GAR KEINE "
+           "H1, und die Ausnahme machte sie unsichtbar. Eine Ausnahme, die "
+           "einen Befund deckt, ist ein Versteck. (3) S2 prueft nicht mehr "
+           "vier Dateien, sondern ein fail-closed Inventar aller H1-Quellen "
+           "(H1_QUELLEN) samt Seitenarten-Tabelle (SEITENARTEN), bindet den "
+           "Startseiten-Blaetterkopf an seinen Marker und verlangt Paritaet "
+           "der Einzelansichten mit eigener Vorlage (pillar/, werkzeuge/) bei "
+           "`heading:`. Der Pull Request misst die gebaute Wahrheit jetzt "
+           "ebenfalls (e2e.yml, direkt nach dem Hugo-Build).",
     "C1": "Die Sicht (Chefredakteur-Scorecard) läuft nach allen Messungen – sonst "
           "zeigt sie Werte des Vorlaufs als aktuellen Befund (#206).",
     "C2": "Der Hugo-Build darf keinen Fehler mit `|| true` verschlucken und meldet sein "
@@ -3085,7 +3212,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C32": "Doppelte Mapping-Schluessel (Hugo-Abbruch, verdeckt fuer "
                 "PyYAML) – erkennen vor dem Kurzschluss, heilen vor dem Build",
          "C30": "Eine Seite hat genau eine H1 (Quelle + Build, kein toter "
-                "Zweig, Audit ohne Stichprobe)"}
+                "Zweig, Audit ohne Stichprobe; Stufe 2: Markdown-Wahrheit, "
+                "H1-Inventar, Blätterseiten geprüft)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -3954,6 +4082,46 @@ def _selftest():
             if "--fix" in f[1]]:
         failures.append("C30: eine selbst heilende H1-Wache bleibt unentdeckt "
                         "(Content-Verlust, #623).")
+    # (e) STUFE 2 (08.10.2026): Markdown-Wahrheit, Inventar und
+    #     Startseiten-Blätterkopf sind eigene Zusagen der Wache – jede muss
+    #     auffallen, wenn sie verschwindet.
+    def _wache_variante(alt, neu):
+        return dict(echte_h1, **{
+            "h1_wache.py": echte_h1["h1_wache.py"].replace(alt, neu)})
+
+    for alt, neu, marke, grund in (
+            ("SETEXT_UNTERSTRICH", "X_UNTERSTRICH", "SETEXT_UNTERSTRICH",
+             "die Setext-H1 (`Text` + `=====`) fiele aus der Quellprüfung"),
+            ("markdown_roh_html_h1", "x_roh_html", "roh",
+             "rohes `<h1 …>` (unsafe = true) fiele aus der Quellprüfung"),
+            ("H1_QUELLEN", "X_QUELLEN", "H1_QUELLEN",
+             "das H1-Inventar fehlte – eine neue H1-Quelle bliebe unbemerkt"),
+            ("H1_BLAETTERKOPF", "X_BLAETTERKOPF", "H1_BLAETTERKOPF",
+             "der Startseiten-Blätterkopf wäre nicht mehr gebunden")):
+        if not [f for f in c30_eine_h1(_wache_variante(alt, neu), wflows_echt,
+                                       python_bin=sys.executable or "python3")
+                if marke in f[1]]:
+            failures.append(f"C30: {grund} bleibt unentdeckt (#623, Stufe 2).")
+    # Die pauschale Blätter-Ausnahme kehrt zurück: /page/2/ wäre wieder
+    # unsichtbar – genau der Zustand, den Stufe 2 geheilt hat.
+    pauschal = _wache_variante(
+        "AUSNAHMEN_H1: tuple[tuple[str, str], ...] = (\n",
+        "AUSNAHMEN_H1: tuple[tuple[str, str], ...] = (\n"
+        "    (r\"^(?:[^/]+/)?page/[0-9]+/index\\.html$\", \"Sabotage\"),\n")
+    if not [f for f in c30_eine_h1(pauschal, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+            if "Blätterseiten" in f[1]]:
+        failures.append("C30: eine wieder eingeführte pauschale "
+                        "Blätter-Ausnahme bleibt unentdeckt (#623, Stufe 2).")
+    # Und im Pull Request muss die gebaute Wahrheit gemessen werden.
+    if not [f for f in c30_eine_h1(
+            echte_h1,
+            _e2e_variante(("scripts/h1_wache.py --public public",
+                           "# Build-Wache entfernt")),
+            python_bin=sys.executable or "python3")
+            if "GEBAUTEN" in f[1]]:
+        failures.append("C30: eine aus e2e.yml entfernte Build-Prüfung der "
+                        "H1-Wache bleibt unentdeckt (#623, Stufe 2).")
     # --- C32: Doppelte Mapping-Schluessel (#643) ---------------------------
     # Der echte Baum muss still bleiben; jede Sabotage muss GENAU ihren Zweig
     # treffen. Selbsttest und Fixture-Beweis der Wache laufen dabei einmal echt.

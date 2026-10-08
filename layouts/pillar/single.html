@@ -26,8 +26,13 @@
       <span class="ff-pc-breadcrumbs__current">{{ .Title | plainify | truncate 45 }}</span>
     </nav>
 
+    {{- /* GENAU EINE H1 (Dauerheilung #623): Diese Themenwelt-Seite hat ihre
+           eigene Einzelansicht – deshalb gilt hier dieselbe Mechanik wie im
+           gemeinsamen Baustein: Eine eigene Schirmzeile kommt als `heading:`
+           aus dem Frontmatter, damit sie nicht als zweite H1 im Fließtext
+           landen muss. Wache: scripts/h1_wache.py (S2, Paritätsregel). */ -}}
     <h1 class="post-title entry-hint-parent ff-pc-title">
-      {{ .Title | safeHTML }}
+      {{ .Params.heading | default .Title | safeHTML }}
     </h1>
 
     <div class="post-meta ff-pc-meta">

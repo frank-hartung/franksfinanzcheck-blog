@@ -130,7 +130,7 @@ npm run test:suche                                    # Suche: jsdom + Suchindex
 npm run test:suche:browser                            # Suche im Chromium: Trefferregel, Datenschutz, Tastatur, Mobil
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
-npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (33 Regressionstests, C30)
+npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (46 Regressionstests, C30)
 npm run test:a11y                                     # fokussierte Vollscan-/Fail-closed-Regressionen
 npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
 npm run test:marke                                    # Wache (17 Fallgruppen) + Haken-Wächter (11) + 34 Regressionstests

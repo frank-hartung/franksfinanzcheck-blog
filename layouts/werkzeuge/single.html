@@ -17,7 +17,11 @@
       <span class="ff-pc-breadcrumbs__current">{{ $w.name }}</span>
     </nav>
 
-    <h1 class="post-title entry-hint-parent">{{ .Title | safeHTML }}</h1>
+    {{- /* GENAU EINE H1 (Dauerheilung #623): Auch die Werkzeug-Einzelansicht
+           folgt der gemeinsamen Mechanik – eine eigene Schirmzeile kommt als
+           `heading:` aus dem Frontmatter, nie als `# …`-Zeile im Fließtext.
+           Wache: scripts/h1_wache.py (S2, Paritätsregel). */ -}}
+    <h1 class="post-title entry-hint-parent">{{ .Params.heading | default .Title | safeHTML }}</h1>
 
     {{- if .Description }}
     <div class="post-description">{{ .Description }}</div>

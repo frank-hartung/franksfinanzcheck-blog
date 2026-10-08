@@ -19,23 +19,47 @@
 #
 #  REGELN
 #    S1 QUELLE   Kein Markdown-Dokument unter content/ oder
-#                archetypes/ trägt im Fließtext eine `# …`-
-#                Überschrift. Die H1 gehört dem Layout. Wer eine
-#                eigene Schirmzeile braucht, setzt sie als
+#                archetypes/ trägt im Fließtext eine H1. Die H1 gehört dem
+#                Layout. Wer eine eigene Schirmzeile braucht, setzt sie als
 #                `heading:` ins Frontmatter.
-#                Frontmatter, Code-Zäune (``` / ~~~) und
-#                eingerückter Code werden übersprungen.
-#    S2 LAYOUT   Der Artikel-Baustein (layouts/_partials/
-#                artikel_einzeln.html) rendert GENAU EINE H1 und
-#                ehrt `.Params.heading`. Beide Einzel-Templates
-#                (_default/single.html und single.html) binden
-#                genau diesen Baustein ein – eine zweite Kopie
-#                des Bausteins wäre wieder ein Zweig, der ins
-#                Leere läuft (s. u.). Die Abschnitts-Liste
-#                (_default/list.html) ehrt `heading:` ebenfalls.
+#                Geprüft wird die ECHTE Markdown-Wahrheit – also alles, was
+#                Goldmark als <h1> rendert:
+#                  · ATX mit bis zu DREI führenden Leerzeichen (`   # …`);
+#                    vier Leerzeichen sind eingerückter Code und bleiben
+#                    Code.
+#                  · Setext (`Titel` in der Zeile darüber, `=====` darunter).
+#                    Eine reine `#`-Suche sieht sie nie – Goldmark rendert
+#                    sie trotzdem.
+#                  · rohes `<h1 …>` (hugo.toml setzt `unsafe = true`; das
+#                    Markup geht unverändert in den Build).
+#                Frontmatter, Code-Zäune (``` / ~~~), eingerückter Code und
+#                Inline-Code-Spans bleiben unberührt – dort ist `#` bzw.
+#                `<h1>` Text, kein Markup.
+#    S2 LAYOUT   Der Artikel-Baustein (layouts/_partials/artikel_einzeln.html)
+#                rendert GENAU EINE H1 und ehrt `.Params.heading`. Beide
+#                Einzel-Templates (_default/single.html und single.html)
+#                binden genau diesen Baustein ein – eine zweite Kopie
+#                des Bausteins wäre wieder ein Zweig, der ins Leere läuft
+#                (s. u.). Die Abschnitts-Liste (_default/list.html) ehrt
+#                `heading:` ebenfalls und trägt die H1 der Startseiten-
+#                Blätterseiten (/page/2/ …). Die Abschnitts-Einzelansichten
+#                mit eigener Vorlage (pillar/, werkzeuge/) folgen derselben
+#                Parität: auch sie ehren `heading:`.
+#                Jede Layout-Datei, die ein <h1> rendern DARF, steht im
+#                Inventar H1_QUELLEN (Anzahl + Grund) und in der
+#                Seitenarten-Tabelle SEITENARTEN. Fail-closed: Eine neue
+#                H1-Quelle ohne Eintrag ist ein Befund – so kann keine
+#                zweite H1 unbemerkt entstehen. Die beiden Tabellen müssen
+#                zusammenpassen: jede Seitenart hat eine Quelle, jede Quelle
+#                eine Seitenart.
 #    S3 BUILD    Jede gebaute Seite trägt GENAU EINE nicht-leere
 #                H1. Ausnahmen sind dokumentiert und begründet
-#                (Verifikationsdateien, reine Redirects).
+#                (Verifikationsdateien, reine Redirects). Blätterseiten
+#                (`page/N/`) sind KEINE Ausnahme: Seit
+#                `[pagination] disableAliases = true` gibt es keine
+#                inhaltsleeren Blätter-Redirects mehr – was bleibt, sind
+#                echte, verlinkte Seiten, und die tragen eine H1
+#                (Dauerheilung Stufe 2, 08.10.2026).
 #
 #  WARUM S2 SO SCHARF IST (Beweis vom 07.10.2026):
 #  Bis zur Dauerheilung lag der Artikel-Baustein ZWEIMAL im Repo
@@ -58,8 +82,24 @@
 #    python3 scripts/h1_wache.py --json          # maschinenlesbar
 #
 #  Exit: 0 = grün · 1 = Befund.
-#  Verdrahtet: deploy.yml (Quelle vor dem Build, Build danach) ·
-#  npm run h1:check · Vertrag C30 (scripts/governance_contract.py).
+#  Verdrahtet: deploy.yml (Quelle vor dem Build, Build danach) · e2e.yml
+#  (Build-Prüfung im Pull Request) · npm run h1:check · Vertrag C30
+#  (scripts/governance_contract.py).
+#
+#  STUFE 2 (08.10.2026, „verifizieren & nachhärten“): Die Stufe-1-Wache
+#  sah drei Dinge nicht, die diese Fassung nachholt:
+#    1. GOLDGRÄBER IM MARKDOWN: eingerückte ATX-H1 (`   # …`), Setext-H1
+#       (`=====`) und rohes `<h1 …>` wurden nicht gefunden – der Build
+#       hätte sie gerendert, die Quellprüfung blieb still.
+#    2. DIE AUSNAHME, DIE EINEN BEFUND VERDECKTE: `page/N/` galt pauschal
+#       als „Blätter-Redirect ohne Inhalt“. Mit `disableAliases = true`
+#       existieren diese Redirects nicht mehr; die Startseiten-Blätterseiten
+#       /page/2/ … trugen real GAR KEINE H1 und waren trotzdem ausgenommen.
+#       Ausnahmen sind jetzt auf Routen beschränkt, die nachweislich keinen
+#       Seiteninhalt tragen.
+#    3. BLINDE FLECKEN IM LAYOUT: S2 kannte vier Dateien. Jetzt gilt ein
+#       vollständiges, fail-closed Inventar (H1_QUELLEN + SEITENARTEN) und
+#       Parität für die Einzelansichten mit eigener Vorlage.
 # ============================================================
 
 from __future__ import annotations
@@ -83,10 +123,25 @@ SINGLE_DEFAULT = LAYOUTS_DIR / "_default" / "single.html"
 SINGLE_WURZEL = LAYOUTS_DIR / "single.html"
 LISTE_DEFAULT = LAYOUTS_DIR / "_default" / "list.html"
 
-# S1 – eine `# `-Überschrift am Zeilenanfang. `#hashtag` (ohne
-# Leerzeichen) ist keine Überschrift, `###### x` schon (dann aber
-# keine H1 – geprüft wird nur die Ebene 1).
-H1_ZEILE = re.compile(r"^# (?!#)(?P<text>\S.*?)[ \t]*$", re.M)
+# S1 – eine ATX-Überschrift der Ebene 1 am Zeilenanfang. `#hashtag` (ohne
+# Leerzeichen) ist keine Überschrift, `###### x` schon (dann aber keine H1 –
+# geprüft wird nur die Ebene 1).
+# CommonMark erlaubt bis zu DREI führende Leerzeichen: `   # Titel` ist eine
+# H1, `    # Titel` (vier) ist eingerückter Code und damit Code.
+H1_ZEILE = re.compile(r"^ {0,3}# (?!#)(?P<text>\S.*?)[ \t]*$")
+# Setext-Überschrift der Ebene 1: Textzeile, darunter eine Zeile nur aus `=`.
+# Diese Form sieht eine reine `#`-Suche nie – Goldmark rendert sie trotzdem
+# als <h1>. (`---` wäre die Ebene 2, also kein H1-Fall.)
+SETEXT_UNTERSTRICH = re.compile(r"^ {0,3}=+[ \t]*$")
+# Roh-HTML im Markdown: `unsafe = true` (hugo.toml) reicht `<h1 …>` unverändert
+# in den Build. Das ist eine H1, die keine `#`-Zeile ist.
+ROH_HTML_H1 = re.compile(r"<\s*h1(?=[\s/>])", re.I)
+# Inline-Code-Spans (`…`, ``…``): dort ist Markup TEXT, kein Element.
+INLINE_CODE = re.compile(r"(`+)(.+?)\1")
+# Blätter-ALIAS (nicht die echten Blätterseiten): entsteht nur, wenn Hugo
+# wieder Redirect-Dateien baut (`disableAliases` aus). Dann ist die Ursache
+# benennbar – ein Befund ohne Weg ist nur die halbe Miete.
+BLATTER_ALIAS = re.compile(r"^(?:[^/]+/)?page/1/index\.html$")
 CODE_ZAUN = re.compile(r"^\s{0,3}(```|~~~)")
 FRONTMATTER_TRENNER = re.compile(r"^---[ \t]*$")
 
@@ -100,12 +155,19 @@ AUSNAHMEN_H1: tuple[tuple[str, str], ...] = (
     # eines gleichnamigen Segments versehentlich aus dem Gate fällt.
     (r"^google[^/]*\.html$", "Verifikationsdatei (Google verlangt exakten Inhalt)"),
     (r"^pinterest-[a-z0-9]+\.html$", "Verifikationsdatei (Pinterest verlangt exakten Inhalt)"),
-    # Ausschließlich echte Hugo-Paginierungsdateien /[section/]page/N/index.html.
-    (r"^(?:[^/]+/)?page/[0-9]+/index\.html$", "Blätter-Redirect ohne Seiteninhalt"),
     # Client-Redirect der Pinterest-Autorisierung (Zwilling von
     # /pinterest-oauth.html – diese Datei selbst WIRD geprüft).
     (r"^pinterest-oauth/index\.html$", "Client-Redirect ohne Seiteninhalt"),
 )
+# HIER STAND BIS 08.10.2026 EINE PAUSCHALE `page/N/`-AUSNAHME.
+# Sie lautete „Blätter-Redirect ohne Seiteninhalt“ und war damit schlicht
+# falsch: Seit `[pagination] disableAliases = true` (hugo.toml, 29.09.2026)
+# erzeugt Hugo KEINE inhaltsleeren Blätter-Aliase mehr. Was unter
+# `/page/2/`, `/posts/page/3/` … liegt, sind echte, verlinkte Seiten – und
+# genau sie trugen die eine H1 nicht, die sie brauchen (Startseiten-Blätter
+# ohne jede Überschrift). Eine Ausnahme, die den Befund deckt, ist keine
+# Ausnahme, sondern ein Versteck. Blätterseiten werden deshalb wieder
+# geprüft; die Config selbst bewacht `scripts/index_hygiene_gate.py` (H2).
 
 # Für das VOLLAUDIT (scripts/a11y_audit.py) gilt zusätzlich:
 # Diese exakt bekannten Routen sind reine Weiterleitungen ohne
@@ -137,9 +199,10 @@ def ausnahme_grund(rel: str, ausnahmen=AUSNAHMEN_H1) -> str:
 
 # ------------------------------------------------------------ S1: Quelle
 
-def markdown_ohne_huelle(text: str) -> list[tuple[int, str]]:
-    """Liefert (Zeilennummer, Text) aller Fließtext-H1 – ohne Frontmatter
-    und ohne Code-Zäune. Zeilennummern beziehen sich auf die Originaldatei."""
+def _fliesszeilen(text: str) -> list[tuple[int, str]]:
+    """(Zeilennummer, Zeile) des Fließtexts – ohne Frontmatter, ohne
+    Code-Zäune und ohne eingerückten Code (vier Leerzeichen/Tab). Genau die
+    Zeilen, in denen Markdown Markup ist und Text Text bleibt."""
     zeilen = text.splitlines()
     start = 0
     if zeilen and FRONTMATTER_TRENNER.match(zeilen[0]):
@@ -147,7 +210,7 @@ def markdown_ohne_huelle(text: str) -> list[tuple[int, str]]:
             if FRONTMATTER_TRENNER.match(zeilen[i]) or zeilen[i].strip() in ("...",):
                 start = i + 1
                 break
-    funde: list[tuple[int, str]] = []
+    raus: list[tuple[int, str]] = []
     im_code = False
     zaun = ""
     for nr in range(start, len(zeilen)):
@@ -161,9 +224,42 @@ def markdown_ohne_huelle(text: str) -> list[tuple[int, str]]:
             continue
         if im_code:
             continue
-        m = H1_ZEILE.match(zeile)
+        if zeile.startswith("    ") or zeile.startswith("\t"):
+            continue  # eingerückter Code: vier Leerzeichen = Code, kein Markup
+        raus.append((nr + 1, zeile))
+    return raus
+
+
+def markdown_ohne_huelle(text: str) -> list[tuple[int, str]]:
+    """(Zeilennummer, Text) jeder Fließtext-H1 in Markdown-Form: ATX (`# …`,
+    auch mit bis zu drei führenden Leerzeichen) und Setext (`Titel` +
+    `=====`). Frontmatter, Code-Zäune und eingerückter Code bleiben
+    unberührt. Bei Setext nennt die Zeilennummer die TEXTZEILE (dort steht
+    der redaktionelle Satz) – nicht den Unterstrich."""
+    zeilen = _fliesszeilen(text)
+    funde: list[tuple[int, str]] = []
+    for index, (nr, roh) in enumerate(zeilen):
+        m = H1_ZEILE.match(roh)
         if m:
-            funde.append((nr + 1, m.group("text")))
+            funde.append((nr, m.group("text")))
+            continue
+        if SETEXT_UNTERSTRICH.match(roh) and index > 0:
+            vor_nr, vorher = zeilen[index - 1]
+            text_davor = vorher.strip()
+            if text_davor and not H1_ZEILE.match(vorher) and not SETEXT_UNTERSTRICH.match(vorher):
+                funde.append((vor_nr, text_davor))
+    return funde
+
+
+def markdown_roh_html_h1(text: str) -> list[tuple[int, str]]:
+    """(Zeilennummer, Fundstelle) jedes rohen `<h1 …>` im Fließtext.
+    Inline-Code (`` `<h1>` ``) ist Text und wird nicht gemeldet; Frontmatter,
+    Code-Zäune und eingerückter Code ebenfalls nicht. Verankert am Tag –
+    `<h1>` in einem Code-Beispiel bleibt Code, `<h1>` im Text ist Markup."""
+    funde: list[tuple[int, str]] = []
+    for nr, zeile in _fliesszeilen(text):
+        if ROH_HTML_H1.search(INLINE_CODE.sub("", zeile)):
+            funde.append((nr, zeile.strip()[:120]))
     return funde
 
 
@@ -183,10 +279,171 @@ def s1_quelle(wurzel: Path = ROOT) -> list[str]:
                     "Die H1 gehört dem Layout – Schirmzeile als `heading:` ins "
                     "Frontmatter, `# …`-Zeile entfernen (sonst zwei H1 pro Seite)."
                 )
+            for nr, fund in markdown_roh_html_h1(_lesen(pfad)):
+                funde.append(
+                    f"S1: {rel}:{nr} rendert rohes `<h1 …>`: „{fund[:80]}“. "
+                    "`unsafe = true` in hugo.toml reicht das Markup unverändert "
+                    "in die Seite – zusammen mit der Layout-H1 sind das zwei. "
+                    "Schirmzeile als `heading:` ins Frontmatter, Tag entfernen."
+                )
     return funde
 
 
 # ------------------------------------------------------------ S2: Layout
+
+# ------------------------------------------------------------ S2: Layout
+
+# Jede Layout-Datei, die ein <h1> rendern DARF – mit der Zahl der Vorkommen
+# und dem Grund. Fail-closed: Eine Datei mit <h1>, die hier fehlt, ist ein
+# Befund (niemand hat entschieden, dass diese Seite eine H1 braucht bzw. dass
+# es genau eine bleibt); eine Zahl, die nicht mehr stimmt, ebenso.
+H1_TAG = re.compile(r"<h1(?=[\s/>])", re.I)
+
+H1_QUELLEN: tuple[tuple[str, int, str], ...] = (
+    ("layouts/404.html", 1, "404-Seite: eigener Inhalt, keine Einzelansicht greift"),
+    ("layouts/_default/list.html", 3,
+     "drei sich ausschließende Zweige: Ratgeber-Liste (auch /posts/page/N/), "
+     "Abschnitts-/Begriffsliste, Startseiten-Blätterkopf (/page/N/ ab Seite 2)"),
+    ("layouts/_partials/artikel_einzeln.html", 1, "die eine H1 der Einzelansicht (Beitrag/Seite)"),
+    ("layouts/_partials/home_info.html", 1, "saisonaler Hero der Startseite (data/saisons.yaml), nur Seite 1"),
+    ("layouts/pillar/list.html", 1, "Hero der Ratgeber-Übersicht /pillar/"),
+    ("layouts/pillar/single.html", 1, "Themenwelt-Einzelansicht (eigene Vorlage, Parität zum Baustein)"),
+    ("layouts/taxonomy.html", 1, "Überschrift der Taxonomie-Übersicht"),
+    ("layouts/werkzeuge/list.html", 1, "Kopf der Werkzeug-Übersicht /werkzeuge/"),
+    ("layouts/werkzeuge/single.html", 1, "Werkzeug-Einzelansicht (eigene Vorlage, Parität zum Baustein)"),
+)
+
+# Welche Seitenart hat welche H1-Quelle? Zwei Sichten auf dieselbe Wahrheit:
+# die Seitenart-Tabelle sagt „keine Seite ohne H1-Quelle“, das Inventar sagt
+# „keine H1-Quelle ohne Seite“. Beide müssen zusammenpassen – sonst entsteht
+# genau der tote Zweig, den #623 teuer machte.
+SEITENARTEN: tuple[tuple[str, str, str], ...] = (
+    ("startseite-seite-1", "layouts/_partials/home_info.html", "saisonaler Hero (nur Seite 1)"),
+    ("startseite-blaetter", "layouts/_default/list.html", "Blätterkopf ab Seite 2 (/page/N/)"),
+    ("ratgeber-liste", "layouts/_default/list.html", "/posts/ und /posts/page/N/"),
+    ("abschnitt-und-begriff", "layouts/_default/list.html", "Abschnitts- und Begriffsseiten"),
+    ("taxonomie", "layouts/taxonomy.html", "Taxonomie-Übersicht"),
+    ("einzelansicht", "layouts/_partials/artikel_einzeln.html", "Beitrag/Seite über beide Single-Wrapper"),
+    ("themenwelt", "layouts/pillar/single.html", "Themenwelt-Einzelansicht"),
+    ("werkzeug", "layouts/werkzeuge/single.html", "Werkzeug-Einzelansicht"),
+    ("ratgeber-uebersicht", "layouts/pillar/list.html", "/pillar/"),
+    ("werkzeug-uebersicht", "layouts/werkzeuge/list.html", "/werkzeuge/"),
+    ("nicht-gefunden", "layouts/404.html", "/404.html"),
+)
+
+# Einzelansichten mit eigener Vorlage rendern ihre H1 selbst – sie müssen
+# dieselbe Mechanik tragen wie der gemeinsame Baustein. Sonst wäre die
+# dokumentierte Heilung („Schirmzeile als `heading:` ins Frontmatter“) auf
+# genau diesen Seiten falsch, und die nächste redaktionelle Schirmzeile
+# landete wieder als zweite H1 im Fließtext.
+PARITAET_TEMPLATES: tuple[str, ...] = ("layouts/pillar/single.html",
+                                       "layouts/werkzeuge/single.html")
+
+# Marker, an dem der Startseiten-Blätterkopf hängt (Layout und Wache teilen
+# ihn). Der Marker ist kein Schmuck: Ohne ihn wüsste die Wache nicht, dass
+# die Startseite zwei sich ausschließende H1-Quellen hat – und genau das
+# fehlt der Seite /page/2/ bis zum 08.10.2026 komplett.
+H1_BLAETTERKOPF_MARKER = "H1-BLÄTTERKOPF"
+
+
+def _inventar_funde(wurzel: Path) -> list[str]:
+    """Fail-closed-Inventar: Jede H1-Quelle im Layout-Baum ist registriert und
+    die Zahl ihrer <h1>-Vorkommen stimmt. Eine neue H1 ohne Eintrag fällt auf,
+    bevor sie gebaut wird."""
+    funde: list[str] = []
+    layouts = wurzel / "layouts"
+    if not layouts.is_dir():
+        return ["S2: layouts/ fehlt – ohne Vorlagen ist der Layoutvertrag nicht "
+                "prüfbar (fail-closed)."]
+    gefunden: dict[str, int] = {}
+    for pfad in sorted(layouts.rglob("*.html")):
+        rel = str(pfad.relative_to(wurzel)).replace(os.sep, "/")
+        anzahl = len(H1_TAG.findall(_lesen(pfad)))
+        if anzahl:
+            gefunden[rel] = anzahl
+    inventar = {rel: anzahl for rel, anzahl, _grund in H1_QUELLEN}
+    for rel, anzahl in sorted(gefunden.items()):
+        if rel not in inventar:
+            funde.append(
+                f"S2: {rel} rendert {anzahl}× `<h1` und steht nicht im Inventar "
+                "H1_QUELLEN – eine neue H1-Quelle ohne Eintrag könnte eine "
+                "Seite auf zwei H1 bringen. Eintrag mit Grund ergänzen oder "
+                "die H1 entfernen.")
+        elif inventar[rel] != anzahl:
+            funde.append(
+                f"S2: {rel} rendert {anzahl}× `<h1`, registriert sind "
+                f"{inventar[rel]} (H1_QUELLEN) – die Zahl im Inventar ist "
+                "Teil des Vertrags, keine Doku.")
+    for rel, anzahl, _grund in H1_QUELLEN:
+        if rel not in gefunden:
+            funde.append(f"S2: H1_QUELLEN nennt {rel} mit {anzahl} H1 – die "
+                         "Datei fehlt oder rendert keine H1 mehr.")
+    # Beide Sichten müssen zusammenpassen: keine Seite ohne Quelle, keine
+    # Quelle ohne Seite.
+    for seitenart, rel, beschreibung in SEITENARTEN:
+        if rel not in inventar:
+            funde.append(f"S2: Seitenart „{seitenart}“ ({beschreibung}) steht auf "
+                         f"{rel} – diese Quelle fehlt im Inventar H1_QUELLEN.")
+    quellen_mit_seite = {rel for _art, rel, _b in SEITENARTEN}
+    for rel, _anzahl, grund in H1_QUELLEN:
+        if rel not in quellen_mit_seite:
+            funde.append(f"S2: H1-Quelle {rel} ({grund}) gehört zu keiner "
+                         "Seitenart in SEITENARTEN – dann weiß niemand, welche "
+                         "Seite diese H1 trägt.")
+    return funde
+
+
+def _blaetterkopf_funde(wurzel: Path) -> list[str]:
+    """Die Startseite hat zwei sich ausschließende H1-Quellen: den Hero auf
+    Seite 1 und den Blätterkopf ab Seite 2. Der Blätterkopf wird über seinen
+    Marker geprüft – fehlt er, trägt /page/2/ gar keine H1 (Befund vom
+    08.10.2026, von einer pauschalen Ausnahme verdeckt)."""
+    liste = _lesen(wurzel / "layouts" / "_default" / "list.html")
+    if not liste.strip():
+        return []  # „leer“ meldet bereits die Hauptprüfung
+    stellen = [m.start() for m in re.finditer(re.escape(H1_BLAETTERKOPF_MARKER), liste)]
+    if len(stellen) != 1:
+        return [f"S2: layouts/_default/list.html trägt den Marker "
+                f"„{H1_BLAETTERKOPF_MARKER}“ {len(stellen)}× (erwartet: 1) – die "
+                "Startseiten-Blätterseiten /page/N/ brauchen ab Seite 2 eine "
+                "eigene H1; ohne sie trägt die Seite gar keine."]
+    stelle = stellen[0]
+    davor = liste[max(0, stelle - 400):stelle]
+    # Fenster: vom Marker bis zum Ende seines Zweigs (`{{- end }}`), höchstens
+    # aber 2500 Zeichen – der Zweig darf seine H1 hinter einer Begründung
+    # tragen, aber nicht irgendwo sonst in der Datei.
+    danach = liste[stelle:stelle + 2500]
+    zweig_ende = danach.find("{{- end }}")
+    if zweig_ende != -1:
+        danach = danach[:zweig_ende]
+    funde: list[str] = []
+    if ".IsHome" not in davor:
+        funde.append(f"S2: der Marker „{H1_BLAETTERKOPF_MARKER}“ hängt an keinem "
+                     "`.IsHome`-Zweig – er muss die Startseiten-Blätter meinen, "
+                     "nicht irgendeine Liste.")
+    if not H1_TAG.search(danach):
+        funde.append(f"S2: nach dem Marker „{H1_BLAETTERKOPF_MARKER}“ folgt keine "
+                     "`<h1` – die Blätterseite /page/2/ bliebe ohne "
+                     "Hauptüberschrift (Befund vom 08.10.2026).")
+    return funde
+
+
+def _paritaets_funde(wurzel: Path) -> list[str]:
+    """Einzelansichten mit eigener Vorlage (Themenwelt, Werkzeug) müssen
+    `.Params.heading` genauso ehren wie der gemeinsame Baustein."""
+    funde: list[str] = []
+    for rel in PARITAET_TEMPLATES:
+        text = _lesen(wurzel / rel)
+        if not text.strip():
+            funde.append(f"S2: {rel} ist leer – die Einzelansicht würde nicht rendern.")
+        elif ".Params.heading" not in text:
+            funde.append(f"S2: {rel} ehrt `.Params.heading` nicht – die "
+                         "dokumentierte Schirmzeile („heading: ins Frontmatter“) "
+                         "wäre auf dieser Seite wirkungslos, und die nächste "
+                         "eigene Überschrift landete wieder als zweite H1 im "
+                         "Fließtext (#623).")
+    return funde
+
 
 def s2_layout(wurzel: Path = ROOT) -> list[str]:
     funde: list[str] = []
@@ -194,6 +451,11 @@ def s2_layout(wurzel: Path = ROOT) -> list[str]:
     single_default = _lesen(wurzel / "layouts" / "_default" / "single.html")
     single_wurzel = _lesen(wurzel / "layouts" / "single.html")
     liste = _lesen(wurzel / "layouts" / "_default" / "list.html")
+    # Vollständiges Inventar zuerst: es fängt jede H1, die niemand eingetragen
+    # hat – die teuerste Klasse von Fehlern, weil sie unsichtbar entsteht.
+    funde.extend(_inventar_funde(wurzel))
+    funde.extend(_blaetterkopf_funde(wurzel))
+    funde.extend(_paritaets_funde(wurzel))
 
     if not baustein:
         funde.append("S2: layouts/_partials/artikel_einzeln.html fehlt oder ist leer – "
@@ -322,10 +584,18 @@ def s3_build(public: Path, ausnahmen=AUSNAHMEN_H1) -> list[str]:
         geprueft += 1
         texte = h1_der_seite(_lesen(pfad))
         if len(texte) != 1:
-            fund = (f"S3: {rel} trägt {len(texte)} H1 (erwartet: 1)"
-                    + (f": {texte[:3]}" if texte else " – gar keine"))
-            funde.append(fund + ". Zwei H1 zerstören die Gliederung für Screenreader, "
-                         "Inhaltsverzeichnis und KI-Antworten.")
+            if not texte:
+                fund = (f"S3: {rel} trägt GAR KEINE H1 (erwartet: 1) – eine Seite ohne "
+                        "Hauptüberschrift gibt Screenreadern, Inhaltsverzeichnis und "
+                        "KI-Antworten keinen Einstieg")
+            else:
+                fund = (f"S3: {rel} trägt {len(texte)} H1 (erwartet: 1): {texte[:3]} – "
+                        "zwei H1 zerstören die Gliederung für Screenreader, "
+                        "Inhaltsverzeichnis und KI-Antworten")
+            if BLATTER_ALIAS.search(rel):
+                fund += (". Blätter-Alias? Dann fehlt `[pagination] disableAliases = true` "
+                         "in hugo.toml (Wache: scripts/index_hygiene_gate.py, H2)")
+            funde.append(fund + ".")
             continue
         if not h1_ist_gefuellt(texte[0]):
             funde.append(f"S3: {rel} trägt eine leere H1 – eine Überschrift ohne Text ist keine.")
@@ -363,8 +633,57 @@ def selftest(wurzel: Path = ROOT) -> list[str]:
     check("S1: mehrere H1 werden gemeldet",
           len(markdown_ohne_huelle("# eins\n\n# zwei\n")) == 2)
 
+    # S1 – die Markdown-Wahrheit jenseits der `#`-Zeile (Stufe 2, 08.10.2026)
+    check("S1: eingerückte ATX-H1 (drei Leerzeichen) wird erkannt",
+          markdown_ohne_huelle("---\n---\n\n   # Eingerückt\n") == [(4, "Eingerückt")])
+    check("S1: vier Leerzeichen sind eingerückter Code, keine Überschrift",
+          markdown_ohne_huelle("    # Code, kein Titel\n") == [])
+    check("S1: Setext-H1 wird erkannt und nennt die Textzeile",
+          markdown_ohne_huelle("---\n---\n\nSchirmzeile\n===========\n") == [(4, "Schirmzeile")])
+    check("S1: Setext-Unterstrich im Code-Zaun bleibt still",
+          markdown_ohne_huelle("```\nTitel\n=====\n```\n") == [])
+    check("S1: rohes `<h1>` im Fließtext wird erkannt",
+          [nr for nr, _ in markdown_roh_html_h1("Text\n\n<h1 class=\"x\">Titel</h1>\n")] == [3])
+    check("S1: `<h1>` in Inline-Code ist Text, kein Markup",
+          markdown_roh_html_h1("Beispiel: `<h1>Titel</h1>` – so rendert Goldmark es.\n") == [])
+    check("S1: rohes `<h1>` im Code-Zaun bleibt Code",
+          markdown_roh_html_h1("```html\n<h1>Titel</h1>\n```\n") == [])
+
     # S2 – Layoutvertrag (gegen den echten Baum)
     check("S2: Layoutvertrag des echten Baums ist grün", s2_layout(wurzel) == [])
+
+    # S2 – Inventar und Parität greifen (künstlicher Baum)
+    with tempfile.TemporaryDirectory() as tmp:
+        kuenstlich = Path(tmp)
+        (kuenstlich / "layouts" / "_default").mkdir(parents=True)
+        (kuenstlich / "layouts" / "_partials").mkdir(parents=True)
+        (kuenstlich / "layouts" / "_default" / "list.html").write_text(
+            "{{- if and .IsHome (gt $paginator.PageNumber 1) }}\n"
+            "{{- /* H1-BLÄTTERKOPF: Startseite ab Seite 2 */ -}}\n"
+            "<h1>Weitere Ratgeber</h1>\n{{- end }}\n", encoding="utf-8")
+        (kuenstlich / "layouts" / "_partials" / "artikel_einzeln.html").write_text(
+            '<h1>{{ .Params.heading | default .Title }}</h1>', encoding="utf-8")
+        (kuenstlich / "layouts" / "_default" / "single.html").write_text(
+            '{{ partial "artikel_einzeln.html" . }}', encoding="utf-8")
+        (kuenstlich / "layouts" / "single.html").write_text(
+            '{{ partial "artikel_einzeln.html" . }}', encoding="utf-8")
+        (kuenstlich / "layouts" / "pillar").mkdir()
+        (kuenstlich / "layouts" / "pillar" / "single.html").write_text(
+            "<h1>{{ .Title }}</h1>", encoding="utf-8")
+        (kuenstlich / "layouts" / "_partials" / "neuer_kasten.html").write_text(
+            "<h1>Neuer Kasten</h1>", encoding="utf-8")
+        funde_k = s2_layout(kuenstlich)
+        check("S2: unregistrierte H1-Quelle wird gemeldet",
+              any("neuer_kasten.html" in f and "nicht im Inventar" in f for f in funde_k))
+        check("S2: Einzelansicht ohne `.Params.heading` wird gemeldet (Parität)",
+              any("pillar/single.html ehrt `.Params.heading` nicht" in f for f in funde_k))
+        # Sabotage am Blätterkopf: H1 entfernt → Startseiten-Blätter ohne H1
+        (kuenstlich / "layouts" / "_default" / "list.html").write_text(
+            "{{- if and .IsHome (gt $paginator.PageNumber 1) }}\n"
+            "{{- /* H1-BLÄTTERKOPF: Startseite ab Seite 2 */ -}}\n"
+            "<p>Ohne Überschrift</p>\n{{- end }}\n", encoding="utf-8")
+        check("S2: fehlende H1 im Startseiten-Blätterkopf wird gemeldet",
+              any("folgt keine" in f for f in s2_layout(kuenstlich)))
 
     # S3 – Build gegen einen künstlichen Baum
     with tempfile.TemporaryDirectory() as tmp:
@@ -394,19 +713,25 @@ def selftest(wurzel: Path = ROOT) -> list[str]:
         check("S3: Zero-Width-Zeichen allein täuschen keine gefüllte H1 vor",
               len(unsichtbar) == 1 and not h1_ist_gefuellt(unsichtbar[0]))
 
-        # Ausnahmen: begründet und nicht zu weit
+        # Ausnahmen: begründet, routenscharf – und keine, die einen Befund deckt
         (pub / "page" / "2").mkdir(parents=True)
-        (pub / "page" / "2" / "index.html").write_text("<html>redirect</html>", encoding="utf-8")
+        (pub / "page" / "2" / "index.html").write_text("<html>ohne H1</html>", encoding="utf-8")
         (pub / "google123.html").write_text("google-site-verification: x", encoding="utf-8")
+        (pub / "pinterest-ab12.html").write_text("pinterest-site-verification: y", encoding="utf-8")
         funde2 = s3_build(pub)
-        check("S3: Blätter-Redirect ist begründet ausgenommen",
-              not any("page/2/index.html" in f for f in funde2))
+        check("S3: Blätterseite ohne H1 wird GEPRÜFT (keine Pauschalausnahme)",
+              any("page/2/index.html" in f for f in funde2))
         check("S3: Verifikationsdatei ist begründet ausgenommen",
               not any("google123.html" in f for f in funde2))
+        check("S3: Pinterest-Verifikationsdatei ist begründet ausgenommen",
+              not any("pinterest-ab12.html" in f for f in funde2))
 
-        # Sabotage: ohne die Ausnahme muss der Redirect auffallen
-        check("S3: Ausnahme ohne Grund wäre eine Lücke – Redirect fiele auf",
-              any("page/2/index.html" in f for f in s3_build(pub, ausnahmen=())))
+        # Sabotage: die frühere Pauschalausnahme darf nirgends zurückkehren –
+        # eine Ausnahme, die den Befund deckt, ist ein Versteck.
+        (pub / "page" / "2" / "index.html").write_text(
+            "<html lang=de><h1>Weitere Ratgeber</h1></html>", encoding="utf-8")
+        check("S3: Blätterseite mit genau einer H1 ist grün",
+              not any("page/2/index.html" in f for f in s3_build(pub)))
 
     check("S3: fehlendes Build-Verzeichnis ist fail-closed",
           s3_build(Path("/tmp/gibt-es-nicht-h1-wache")) != [])
