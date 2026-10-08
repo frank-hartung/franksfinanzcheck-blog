@@ -9,7 +9,7 @@ reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, Fak
 tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Finanzielle Freiheit", "Budget planen", "Rücklagen bilden", "Fixkosten prüfen"]
+keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Finanzielle Freiheit", "Budget planen", "Rücklagen bilden", "Fixkosten prüfen", "Gewohnheiten", "finanzielle"]
 author: "Frank Hartung"
 ai_generated: true
 ai_provider: "Editorial revision"
@@ -25,7 +25,7 @@ cover:
   alt: "Sieben Geldgewohnheiten für mehr Übersicht und finanziellen Spielraum"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "7 Gewohnheiten für finanzielle Freiheit"
-pin_description: "*Werbung | Sieben ruhige Geldgewohnheiten für Budget, Rücklagen und Fixkosten – ohne Sparversprechen. #finanziellefreiheit #budget #geldsparen"
+pin_description: "*Werbung | Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen. Mehr Spartipps auf FranksFinanzcheck! #finanziellefreiheit #budgetplanen #ruecklagenbilden"
 quellen:
   - titel: "Effektiv sparen – auch mit kleinem Budget"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610"

@@ -9,9 +9,9 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Smart Home", "Strom sparen", "smarte Steckdose", "Stand-by-Verbrauch", "Stromkosten senken"]
+keywords: ["Smart Home", "Strom sparen", "smarte Steckdose", "Stand-by-Verbrauch", "Stromkosten senken", "Stromersparnis"]
 pin_title: "Smart Home: So prüfst du echte Stromersparnis"
-pin_description: "*Werbung | Smarte Geräte sparen nicht von allein. So misst du den Verbrauch und prüfst, ob eine Automatik zu deinem Alltag passt. #smarthome #stromsparen #energie"
+pin_description: "*Werbung | Smart Home spart nicht automatisch Strom. Erfahre, wie du Verbrauch misst, Schaltregeln sicher wählst und Kosten mit einem klaren Modell prüfst. Mehr Spartipps auf FranksFinanzcheck! #smarthome #stromsparen #smartesteckdose"
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"

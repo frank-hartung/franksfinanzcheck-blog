@@ -8,9 +8,9 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel"]
+keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel", "DSL Anbieter wechseln", "DSL-Anbieter"]
 pin_title: "DSL-Anbieter wechseln: Kosten und Fristen prüfen"
-pin_description: "*Werbung | Prüfe Preis, Laufzeit, Router und Wechseltermin, bevor du deinen DSL-Vertrag änderst. Ohne pauschale Sparversprechen. #dsl #internet #anbieterwechsel"
+pin_description: "*Werbung | DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen. Mehr Spartipps auf FranksFinanzcheck! #dslanbieterwechseln #dslwechseln #internetanbieter"
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"

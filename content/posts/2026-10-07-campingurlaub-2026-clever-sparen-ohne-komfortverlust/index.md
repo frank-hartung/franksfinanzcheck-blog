@@ -9,9 +9,9 @@ tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-keywords: ["Campingurlaub planen", "Campingurlaub", "Campingplatz", "Reisebudget", "Campingkosten"]
+keywords: ["Campingurlaub planen", "Campingurlaub", "Campingplatz", "Reisebudget", "Campingkosten", "Ausrüstung"]
 pin_title: "Campingurlaub planen: Budget ohne Kostentricks"
-pin_description: "*Werbung | Plane Platz, Fahrt, Ausrüstung und Verpflegung mit einem klaren Budget. Ohne pauschale Preis- oder Sparversprechen. #campingurlaub #reisebudget #urlaub"
+pin_description: "*Werbung | Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend. Mehr Spartipps auf FranksFinanzcheck! #campingurlaubplanen #campingurlaub #campingplatz"
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"

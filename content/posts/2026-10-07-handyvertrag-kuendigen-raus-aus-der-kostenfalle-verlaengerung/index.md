@@ -4,13 +4,13 @@ description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamt
 date: 2026-10-07T10:33:21Z
 draft: true
 reserve: true
-tags: ["Internet und Mobilfunk"]
+tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Handyvertrag kündigen", "Handyvertrag", "Mobilfunkvertrag", "Kündigungsfrist", "Tarifwechsel"]
 pin_title: "Handyvertrag kündigen: Frist und Kosten prüfen"
-pin_description: "*Werbung | Prüfe Laufzeit, Kündigungsweg und Gesamtkosten deines Handyvertrags. Verständliche Hinweise ohne pauschale Sparversprechen. #handyvertrag #kuendigung #mobilfunk"
+pin_description: "*Werbung | Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #handyvertragkuendigen #handyvertrag #mobilfunkvertrag"
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
