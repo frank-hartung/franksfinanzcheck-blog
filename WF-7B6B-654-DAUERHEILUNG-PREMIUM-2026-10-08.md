@@ -113,6 +113,20 @@ Die Meldung nannte den roten Schritt korrekt. Sie deutete ihn aber als API-Key-,
 
 **Nicht lokal bewiesen:** Hugo-Build und Playwright. Die Sandbox hat kein Hugo, und die Job-Logs von GitHub sind von hier nicht abrufbar. Den vollständigen Beweis liefert der CI-Lauf des Pull Requests.
 
+### 5b. Pull-Request-CI (#659)
+
+Auf Schritt-Ebene geprüft, nicht nur auf Job-Ebene:
+
+| Job (Lauf) | Ergebnis | Manifest-Wache im Lauf |
+|---|---|---|
+| Playwright-Suite (Desktop + Mobile) (37800692228) | ✅ 5m10s | „Manifest-Wache“ ✅, danach „Abhängigkeiten installieren“ ✅, Chromium ✅ |
+| robustheit (37800692138) | ✅ | ✅ vor dem Install |
+| navigation / Themenwelten (37800692124) | ✅ | ✅ vor dem Browser-Install |
+| lesehilfen (37800580418) | ✅ | ✅ vor den Install-Schritten |
+| gate, regression, CodeQL (JS, Python), Klartext-Wache, Integritäts-Siegel, Regelwerk & Produktionswache | ✅ | – |
+
+Nicht im PR-Lauf: `deploy` (nur Push auf `main`), `werkbank` in `design-varianten` und `werkbank.yml` (nur Zeitplan und manueller Start). Ihre Wache-Schritte sind über Verdrahtungstests und die YAML-Prüfung abgesichert. Die Ausführung folgt beim nächsten Lauf nach dem Merge. Sie laufen dasselbe Skript mit demselben Aufruf wie die vier grünen Jobs oben.
+
 ### 5a. Vollständiger Unit-Test-Lauf
 
 Im Repo, mit Git-Historie, ohne Netz, vor dem Commit:
@@ -126,7 +140,7 @@ Im Repo, mit Git-Historie, ohne Netz, vor dem Commit:
 ## 6. Offene Punkte (nicht Teil dieses Vorgangs)
 
 1. **Kein Pflicht-Check auf `main`.** Der Merge von #647 war möglich, obwohl der E2E-Lauf des Branches rot war. Die Wache und E2E blockieren einen Merge erst, wenn sie im Branch-Schutz als Pflicht-Check stehen. Das ist eine Admin-Entscheidung (Governance-Regel C15). Empfehlung: „Playwright-Suite (Desktop + Mobile)“ und „Manifest-Wache“ als Pflicht-Checks hinterlegen.
-2. **Lesehilfen-Gate auf `main` rot** (Run 37795103195, 14:45Z, Commit `742decd9`), Schritt „Funktionstest Vorlesen + Kurzfassung (echte DOM)“. Das ist eine andere Ursache als #654, denn kein Install-Schritt ist betroffen. Es braucht einen eigenen Vorgang (Bereich *Lesbarkeit & Gestaltung*, WF-7935).
+2. **Lesehilfen-Gate auf `main` rot** (Run 37795103195, 14:45Z, Commit `742decd9`), Schritt „Funktionstest Vorlesen + Kurzfassung (echte DOM)“. Kein Install-Schritt ist betroffen, also andere Ursache als #654. Auf dem PR-Stand ist der Lauf grün (37800580418). Die Ursache auf `main` ist damit nicht geklärt: Es kann ein Flake oder ein Zustand des Commits `742decd9` sein. Beobachten, und bei erneutem Rot einen eigenen Vorgang anlegen (Bereich *Lesbarkeit & Gestaltung*, WF-7935).
 3. **Abschluss:** Der Pull Request trägt `Closes #654`. Dann schreibt `vorgangs-abschluss.yml` den Vermerk. Der Alarm schließt sich ohnehin, sobald E2E auf `main` wieder grün läuft.
 
 ---
