@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T13:48:27.929405+00:00",
-  "head": "9d15f6a",
+  "signed_at": "2026-10-08T16:16:02.616439+00:00",
+  "head": "1e7f8194",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -49,9 +49,10 @@
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
-    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
+    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
+    "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9"
   },
-  "files_sha256": "aad14c94488d7ad8a150a658f9f0d0c64d382ad368c7d11c2fdaa539c7c5d1a3",
+  "files_sha256": "838c996faa7189a3335f4ab42b17b892c234ec40b6bb2e75681f5d946d7c34c6",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -394,8 +395,18 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "7780859056844c10647717c541eb141cc3eb8b5ff10243778b6a04b3486a2ee4",
-      "files_sha256": "aad14c94488d7ad8a150a658f9f0d0c64d382ad368c7d11c2fdaa539c7c5d1a3"
+      "files_sha256": "aad14c94488d7ad8a150a658f9f0d0c64d382ad368c7d11c2fdaa539c7c5d1a3",
+      "prev_sha256": "7780859056844c10647717c541eb141cc3eb8b5ff10243778b6a04b3486a2ee4"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "add",
+      "head": "1e7f8194",
+      "geaendert": [
+        "scripts/artefakt_waechter.py"
+      ],
+      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
+      "files_sha256": "838c996faa7189a3335f4ab42b17b892c234ec40b6bb2e75681f5d946d7c34c6"
     }
   ]
 }
