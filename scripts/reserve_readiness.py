@@ -132,7 +132,6 @@ def reserve_editorial_findings(index: Path, content: str) -> list[str]:
             return ["Reserve-Qualitäts-Gate: Frontmatter ist kein Mapping"]
         import redaktions_standard as rs
         return rs.reserve_quality_findings(
-            body, author=metadata.get("author", ""),
             body, author=metadata.get("author") or "",
             erfahrung=metadata.get("erfahrung"),
             erfahrung_beleg=metadata.get("erfahrung_beleg"))

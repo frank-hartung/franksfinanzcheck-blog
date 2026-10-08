@@ -333,6 +333,22 @@ def _laufen(befehl: list, deckel: int) -> tuple:
         return 126, [f"nicht ausführbar: {exc.__class__.__name__}"], 0.0
 
 
+def _syntaxfehler(pfad: str):
+    """Kompiliert die Quelle ohne Bytecode zu schreiben; Fehlertext oder None.
+
+    Fängt Merge-Artefakte (doppelte Argumente, halbe Zeilen) VOR dem Lauf ab,
+    damit die Meldung die Ursache nennt statt eines Exit-Codes.
+    """
+    try:
+        with open(pfad, "rb") as fh:
+            compile(fh.read(), pfad, "exec")
+    except SyntaxError as exc:
+        return f"Zeile {exc.lineno}: {exc.msg}"
+    except (OSError, ValueError):
+        return None
+    return None
+
+
 def pruefen(python: str = "python3", uhr_probe: bool = True,
             skript_dir: str = SKRIPT_DIR, deckel: int = ZEITDECKEL,
             baum_wurzel: str = BLOG_DIR) -> dict:
@@ -397,12 +413,32 @@ def pruefen(python: str = "python3", uhr_probe: bool = True,
         datei = os.path.basename(pfad)
         if datei in AUSNAHMEN:
             continue
+        syntax = _syntaxfehler(pfad)
+        if syntax:
+            # Ein Syntaxfehler ist ein Werkzeugfehler, kein Datumsbefund. Ohne
+            # diese Weiche lief die Uhr-Probe trotzdem und meldete den kaputten
+            # Code als „datumsabhängig" (Run 37755013130, 08.10.2026).
+            befunde.append(f"scripts/{datei} hat einen SYNTAXFEHLER ({syntax}) – "
+                           "Merge-Artefakt oder halbe Änderung. Kein Selbsttest-"
+                           "Befund; Basis-Lauf und Uhr-Proben entfallen.")
+            laeufe.append({"wache": datei, "exit": 2, "sekunden": 0.0,
+                           "tail": [f"SyntaxError {syntax}"]})
+            continue
         lauf_vorher = arbeitsbaum(baum_wurzel)
         code, tail, sek = _laufen([python, pfad, "--selftest"], deckel)
         laeufe.append({"wache": datei, "exit": code, "sekunden": sek, "tail": tail})
         if code != 0:
             befunde.append(f"scripts/{datei} --selftest Exit {code}: "
                             f"{tail[-1][:170] if tail else 'keine Ausgabe'}")
+            # Basis rot → KEINE Uhr-Probe. Eine Probe auf einem ohnehin roten
+            # Selbsttest liefert nur einen irreführenden Datumsbefund.
+            if lauf_vorher is not None:
+                lauf_nachher = arbeitsbaum(baum_wurzel)
+                if lauf_nachher is not None:
+                    for zeile in sorted(lauf_nachher - lauf_vorher):
+                        befunde.append(f"scripts/{datei} --selftest schrieb in den "
+                                       f"Arbeitsbaum (C15): {zeile}")
+            continue
         lauf_nachher = arbeitsbaum(baum_wurzel)
         if lauf_vorher is not None and lauf_nachher is not None:
             for zeile in sorted(lauf_nachher - lauf_vorher):
@@ -513,6 +549,9 @@ def _selftest() -> int:
               "os.makedirs(os.path.join(os.environ['RUNNER_BAUM'],\n"
               "                         'content', 'entwuerfe'), exist_ok=True)\n"
               "sys.exit(0)\n")
+        # Syntaxfehler (Merge-Artefakt, Run 37755013130): muss als Syntax
+        # gemeldet werden – NICHT als Datumsabhängigkeit.
+        bauen("syntax.py", "def f(:\n    pass\nimport sys\nsys.exit(0)\n")
         # Ohne Kennung: darf gar nicht erst geprüft werden
         with open(os.path.join(skripte, "ohne_selbsttest.py"), "w",
                   encoding="utf-8") as fh:
@@ -538,13 +577,20 @@ def _selftest() -> int:
         erg = pruefen(python=sys.executable, uhr_probe=True, skript_dir=skripte,
                       deckel=180, baum_wurzel=tmp)
         texte, hinweise = " ".join(erg["befunde"]), " ".join(erg["hinweise"])
-        if erg["wachen"] != 7:
-            fehler.append(f"Entdeckung zählt {erg['wachen']} statt 7 (gut, kaputt, "
-                          "bombe, kettenleiter, schreiber, ordner_leiche, "
+        if erg["wachen"] != 8:
+            fehler.append(f"Entdeckung zählt {erg['wachen']} statt 8 (gut, kaputt, "
+                          "bombe, kettenleiter, schreiber, ordner_leiche, syntax, "
                           "selftest_clock)")
-        if erg["gelaufen"] != 6:
-            fehler.append(f"Gelaufen {erg['gelaufen']} statt 6 "
-                          "(die begründete Ausnahme muss übersprungen werden)")
+        if erg["gelaufen"] != 7:
+            fehler.append(f"Gelaufen {erg['gelaufen']} statt 7 (die begründete "
+                          "Ausnahme muss übersprungen werden; der Syntaxfehler "
+                          "zählt als Lauf mit Exit 2)")
+        if "syntax.py" not in texte or "SYNTAXFEHLER" not in texte:
+            fehler.append("Syntaxfehler wird nicht als solcher gemeldet")
+        if "syntax.py --selftest ist DATUMSABHÄNGIG" in texte:
+            fehler.append("Syntaxfehler wird fälschlich als Datumsabhängigkeit gemeldet")
+        if "kaputt.py --selftest ist DATUMSABHÄNGIG" in texte:
+            fehler.append("Uhr-Probe läuft auf einem ohnehin roten Selbsttest")
         if "kaputt.py --selftest Exit 1" not in texte:
             fehler.append("roter Selbsttest wird nicht gemeldet")
         if "DATUMSABHÄNGIG" not in texte or "bombe.py" not in texte:
@@ -561,9 +607,11 @@ def _selftest() -> int:
             fehler.append("C15-Wache sieht das leer zurückgelassene Verzeichnis "
                           "nicht – genau diese Lücke ließ am 03.10.2026 den "
                           "Hugo-Build sterben, während die Wache grün meldete")
-        if erg["uhr_proben"] != 6 * len(UHR_PROBE_TAGE):
+        # gut, bombe, schreiber, ordner_leiche, selftest_clock (kaputt und
+        # syntax sind rot → keine Uhr-Probe)
+        if erg["uhr_proben"] != 5 * len(UHR_PROBE_TAGE):
             fehler.append(f"Uhr-Proben {erg['uhr_proben']} statt "
-                          f"{6 * len(UHR_PROBE_TAGE)}")
+                          f"{5 * len(UHR_PROBE_TAGE)}")
 
         # ------------------------------------------------------------
         # VERDRAHTUNGS-NACHWEIS: `verdrahtet()` muss den Mechanismus prüfen,
