@@ -16,8 +16,8 @@ Premium-Fix 15.09.2026 (#295) – ZWEI zusätzliche Ehrlichkeits-Regeln:
      der älter ist als RESERVE_CERT_MAX_AGE_H (Default 36 h), ist KEIN
      Nachweis. Genau diese Klasse („Zertifikat von gestern sagt 6/6, der Pool
      hat real 4 Entwürfe“) hat am 15.09. dazu geführt, dass der Lauf erst nach
-     dem Push auffiel. Fehlt der Zeitstempel, wird gewarnt (Alt-Zertifikate
-     bleiben lesbar), ist er zu alt, ist das Gate rot.
+     dem Push auffiel. Fehlende, defekte, zukünftige oder zu alte
+     Zeitstempel machen das Gate rot (fail-closed, #634).
   2. Der Zähler kommt IMMER aus der Kandidatenliste (nie aus dem `ready`-Feld).
 
 Verwendung:
@@ -28,7 +28,9 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
+import math
 import os
 import re
 import sys
@@ -40,10 +42,11 @@ CERT = ROOT / "data" / "reserve-readiness.json"
 CERT_MAX_AGE_H = 36  # Notbremse gegen veraltete Zertifikate (env-übersteuerbar)
 
 sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_artifacts as artifacts  # noqa: E402
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 
 
-def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
+def evaluate(cert_path: Path, posts_dir: Path | None = None) -> tuple[int, int, list[dict]]:
     """Liefert (ready, target, candidates). Fehlt das Zertifikat,
     gilt der Pool als leer (0/target) – ein abgestürzter Lauf darf
     nicht als erfolgreich aussehen.
@@ -64,14 +67,12 @@ def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
     if not cert_path.exists():
         return 0, target, []
     try:
-        data = json.loads(cert_path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        # Ein unlesbares Zertifikat ist kein Nachweis – leerer Pool statt
-        # Absturz (C2: eine nicht ausgeführte Messung ist kein Grün).
+        data = artifacts.read_certificate(cert_path)
+        candidates = artifacts.verified_rows(
+            data, posts_dir if posts_dir is not None else ROOT / "content" / "posts")
+    except (OSError, ValueError) as exc:
+        print(f"🛑 Reserve-Zertifikat ungültig: {exc}")
         return 0, target, []
-    if not isinstance(data, dict):
-        return 0, target, []
-    candidates = list(data.get("candidates", []) or [])
     # Nur ready=true-Einträge; leere/kaputte Zeilen zählen nicht.
     ready = sum(1 for r in candidates if r.get("ready") is True)
     return ready, target, candidates
@@ -79,8 +80,8 @@ def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
 
 def max_age_hours() -> float:
     try:
-        return float(os.environ.get("RESERVE_CERT_MAX_AGE_H")
-                     or CERT_MAX_AGE_H)
+        value = float(os.environ.get("RESERVE_CERT_MAX_AGE_H") or CERT_MAX_AGE_H)
+        return value if math.isfinite(value) and value > 0 else float(CERT_MAX_AGE_H)
     except ValueError:
         return float(CERT_MAX_AGE_H)
 
@@ -88,32 +89,30 @@ def max_age_hours() -> float:
 def cert_age_hours(cert_path: Path) -> float | None:
     """Alter des Zertifikats in Stunden; None = kein/defekter Zeitstempel."""
     try:
-        data = json.loads(cert_path.read_text(encoding="utf-8"))
+        data = artifacts.read_object(cert_path)
     except (OSError, ValueError):
         return None
     raw = data.get("generated_at")
     if not isinstance(raw, str):
         return None
-    m = re.match(r"(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2}:\d{2})", raw)
-    if not m:
-        return None
     try:
-        stamp = dt.datetime.strptime(f"{m.group(1)} {m.group(2)}",
-                                     "%Y-%m-%d %H:%M:%S").replace(
-            tzinfo=dt.timezone.utc)
+        stamp = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if stamp.tzinfo is None:
+            return None
     except ValueError:
         return None
     return (dt.datetime.now(dt.timezone.utc) - stamp).total_seconds() / 3600.0
 
 
 def freshness(cert_path: Path) -> tuple[bool, str]:
-    """(frisch?, Meldung). Kein Zeitstempel = gewarnt, aber nicht blockierend;
-    zu altes Zertifikat = blockierend (kein Nachweis)."""
+    """Kein, defekter, zukünftiger oder zu alter Zeitstempel ist kein Nachweis."""
     alter = cert_age_hours(cert_path)
     grenze = max_age_hours()
     if alter is None:
-        return True, ("⚠ Zertifikat ohne verwertbaren Zeitstempel – "
-                      "Alter nicht prüfbar.")
+        return False, ("🛑 Zertifikat ohne verwertbaren Zeitstempel – "
+                       "Alter nicht prüfbar, kein Nachweis.")
+    if alter < -5 / 60:
+        return False, "🛑 Zertifikat-Zeitstempel liegt in der Zukunft – kein Nachweis."
     if alter > grenze:
         return False, (f"🛑 Zertifikat ist veraltet ({alter:.1f} h > "
                        f"{grenze:.0f} h) – kein Nachweis für den aktuellen "
@@ -383,9 +382,20 @@ def run_selftest() -> int:
         os.environ["RESERVE_CERT_MAX_AGE_H"] = str(CERT_MAX_AGE_H)
         with tempfile.TemporaryDirectory() as tmp:
             cert = Path(tmp) / "reserve-readiness.json"
+            posts = Path(tmp) / "content" / "posts"
+
+            def write_cert(text, encoding="utf-8"):
+                data = json.loads(text)
+                for row in data["candidates"]:
+                    index = posts / row["slug"] / "index.md"
+                    index.parent.mkdir(parents=True, exist_ok=True)
+                    raw = b"---\ndraft: true\nreserve: true\n---\nTest.\n"
+                    index.write_bytes(raw)
+                    row["sha256"] = hashlib.sha256(raw).hexdigest()
+                cert.write_text(json.dumps(data), encoding=encoding)
 
             # Fall 1: kein Zertifikat -> wie leerer Pool behandeln
-            ready, target, candidates = evaluate(cert)
+            ready, target, candidates = evaluate(cert, posts)
             assert (ready, target, candidates) == (0, 6, []), \
                 "fehlendes Zertifikat muss leer zählen"
 
@@ -393,43 +403,43 @@ def run_selftest() -> int:
             # ist aber im Test explizit kontrolliert statt ein versteckter
             # Seiteneffekt des CI-Jobs zu sein.
             os.environ["RESERVE_TARGET"] = "8"
-            ready_env, target_env, candidates_env = evaluate(cert)
+            ready_env, target_env, candidates_env = evaluate(cert, posts)
             assert (ready_env, target_env, candidates_env) == (0, 8, []), \
                 "RESERVE_TARGET-Override muss respektiert werden"
             os.environ["RESERVE_TARGET"] = "6"
 
             # Fall 2: 5/6 -> Engpass
-            cert.write_text(json.dumps({
+            write_cert(json.dumps({
                 "target": 6, "ready": 5,
                 "candidates": [{"slug": f"k{i}", "ready": i < 5,
                                 "score": 0.9 if i < 5 else None,
                                 "reason": None if i < 5 else "R5"} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
-            ready, target, candidates = evaluate(cert)
+            ready, target, candidates = evaluate(cert, posts)
             assert (ready, target) == (5, 6), f"5/6 erwartet, {ready}/{target}"
             assert len(candidates) == 6
 
             # Fall 3: 6/6 -> voll
-            cert.write_text(json.dumps({
+            write_cert(json.dumps({
                 "target": 6, "ready": 6,
                 "candidates": [{"slug": f"k{i}", "ready": True, "score": 0.95} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
-            ready, target, _ = evaluate(cert)
+            ready, target, _ = evaluate(cert, posts)
             assert (ready, target) == (6, 6), f"6/6 erwartet, {ready}/{target}"
 
             # Fall 4: überfüllt 7/6 -> ebenfalls grün
-            cert.write_text(json.dumps({
+            write_cert(json.dumps({
                 "target": 6, "ready": 7,
                 "candidates": [{"slug": f"k{i}", "ready": True} for i in range(7)],
             }, ensure_ascii=False), encoding="utf-8")
-            ready, target, _ = evaluate(cert)
+            ready, target, _ = evaluate(cert, posts)
             assert ready >= target, "7/6 muss grün sein"
 
             cert_cases.append("ok")
 
             # ---- Frische-Prüfung (#295): veraltetes Zertifikat ist kein Nachweis
             now = dt.datetime.now(dt.timezone.utc)
-            cert.write_text(json.dumps({
+            write_cert(json.dumps({
                 "target": 6, "ready": 1,
                 "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "candidates": [{"slug": "k", "ready": True}],
@@ -440,7 +450,7 @@ def run_selftest() -> int:
 
             alt = (now - dt.timedelta(hours=max_age_hours() + 2)).strftime(
                 "%Y-%m-%dT%H:%M:%SZ")
-            cert.write_text(json.dumps({
+            write_cert(json.dumps({
                 "target": 6, "ready": 6, "generated_at": alt,
                 "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
@@ -448,15 +458,15 @@ def run_selftest() -> int:
             assert not frisch, "veraltetes Zertifikat darf nicht als frisch gelten"
             assert "veraltet" in meldung, meldung
             # … und der End-Gate-Entscheid muss dann rot sein, obwohl 6/6 ready
-            ready, target, _ = evaluate(cert)
+            ready, target, _ = evaluate(cert, posts)
             assert ready >= target and not frisch, "Alters-Regel greift nicht"
 
-            cert.write_text(json.dumps({
+            write_cert(json.dumps({
                 "target": 6, "ready": 6,
                 "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
             frisch, meldung = freshness(cert)
-            assert frisch and "Zeitstempel" in meldung, meldung
+            assert not frisch and "Zeitstempel" in meldung, meldung
             cert_cases.append("frische")
     finally:
         if alt_target is None:
@@ -477,7 +487,9 @@ def run_selftest() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Harter End-Gate der Content-Reserve")
     ap.add_argument("--selftest", action="store_true", help="interne Tests ausführen")
-    ap.add_argument("--cert", default=str(CERT), help="Pfad zum Zertifikat (für Tests)")
+    ap.add_argument("--cert", default=str(CERT), help="Pfad zum Zertifikat")
+    ap.add_argument("--posts-dir", type=Path, default=ROOT / "content" / "posts",
+                    help="Content-Bestand für den bytegebundenen Nachweis")
     ap.add_argument("--chronik", action="store_true",
                     help="NUR die Chronik-Zeile dieses Laufs schreiben (für den "
                          "Sicherungs-Schritt VOR dem Push) – dieselbe Zeile, "
@@ -495,13 +507,13 @@ def main() -> int:
         # keinen einzigen CI-Lauf, sondern nur „lokal“-Zeilen – der
         # Blocker-Verlauf über Läufe hinweg war unsichtbar. Der Workflow ruft
         # diese Bahn jetzt VOR dem Staging auf.
-        ready, target, candidates = evaluate(cert)
+        ready, target, candidates = evaluate(cert, args.posts_dir)
         chronik_schreiben(ready, target, candidates)
         print(f"Chronik geschrieben: {ready}/{target} bereit · "
               f"{sum(1 for c in candidates if not c.get('ready'))} Blocker · "
               f"Lauf {os.environ.get('GITHUB_RUN_ID', 'lokal')}")
         return 0
-    ready, target, candidates = evaluate(cert)
+    ready, target, candidates = evaluate(cert, args.posts_dir)
     if args.chronik:
         # WF-D4E0 (#612): Die Chronik ist der einzige Ort, an dem ein Trend
         # sichtbar wird. Sie wurde bis hier NACH dem Sicherungs-Commit

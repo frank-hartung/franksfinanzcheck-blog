@@ -210,6 +210,9 @@ FEST = {
     # lesbarkeit_heiler – deshalb unter Siegel; die erste Signatur nimmt
     # ihn als „NEU UNTER SIEGEL“ mit Herkunft auf.
     "scripts/politur_ruine_heiler.py",
+    # #634: Ein READY-Nachweis braucht eindeutige JSON-Identitäten, exakte
+    # Draft-Bytes und atomare Zustände. Dieser Vertrag ist signaturpflichtig.
+    "scripts/reserve_artifacts.py",
     "data/brand_lock.yaml",
     "layouts/_partials/header.html",
     "static/images/brand/logo.svg",

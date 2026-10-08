@@ -65,6 +65,7 @@ import sys
 import tempfile
 from pathlib import Path
 
+import reserve_artifacts as artifacts  # noqa: E402
 BLOG_DIR = Path(__file__).resolve().parent.parent
 POSTS_DIR = BLOG_DIR / "content" / "posts"
 READINESS = BLOG_DIR / "data" / "reserve-readiness.json"
@@ -86,12 +87,13 @@ def frontmatter_of(text: str) -> str:
     return parts[1] if len(parts) == 3 and parts[0] == "" else ""
 
 
+
 def certified_slugs() -> dict:
     """slug -> sha256 für alle Kandidaten mit gültigem Reife-Zertifikat."""
     try:
-        report = json.loads(READINESS.read_text(encoding="utf-8"))
-        return {r["slug"]: r["sha256"] for r in report.get("candidates", [])
-                if r.get("ready") and r.get("sha256")}
+        report = artifacts.read_certificate(READINESS)
+        return {r["slug"]: r["sha256"] for r in artifacts.verified_rows(
+            report, POSTS_DIR) if r["ready"]}
     except (OSError, ValueError, KeyError):
         return {}
 

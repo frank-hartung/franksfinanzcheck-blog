@@ -63,6 +63,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -146,6 +147,26 @@ def _load_json(path, default=None):
         return default if default is not None else {}
 
 
+def load_reserve(cert_path: Path | None = None, posts_dir: Path | None = None) -> dict:
+    """Verify the existing proof; never turn a stale/merged summary green (#634)."""
+    import reserve_artifacts as artifacts
+    import reserve_economy
+    import reserve_gate
+
+    cert = cert_path if cert_path is not None else Path(RESERVE_PATH)
+    posts = posts_dir if posts_dir is not None else Path(BLOG_DIR) / "content" / "posts"
+    unknown = {"target": reserve_economy.ziel(), "ready": None}
+    try:
+        data = artifacts.read_certificate(cert)
+    except (OSError, ValueError) as exc:
+        return dict(unknown, reason=f"Zertifikat nicht prüfbar ({exc})")
+    fresh, reason = reserve_gate.freshness(cert)
+    if not fresh:
+        return dict(unknown, reason=reason)
+    rows = artifacts.verified_rows(data, posts)
+    return {"target": unknown["target"], "ready": sum(row["ready"] for row in rows)}
+
+
 def _load_jsonl(path):
     rows = []
     try:
@@ -206,7 +227,9 @@ def bucket_content(governance: dict, reserve: dict):
     target = reserve.get("target")
     if target:
         if ready is None:
-            pass
+            lvl = worst([lvl, "gelb"])
+            reserve_note = ("Artikel-Reserve ungeprüft: "
+                            + str(reserve.get("reason") or "kein gültiger Nachweis"))
         elif ready < target:
             lvl = worst([lvl, "rot" if ready == 0 else "gelb"])
             reserve_note = f"Artikel-Reserve knapp: {ready}/{target} bereit – Nachschub nötig"
@@ -639,7 +662,7 @@ def main():
 
     now = datetime.datetime.now(datetime.timezone.utc)
     governance = _load_json(GOVERNANCE_PATH, {})
-    reserve = _load_json(RESERVE_PATH, {})
+    reserve = load_reserve()
     zugang_state = _load_json(ZUGANG_STATE_PATH, {})
     channels_cfg = _load_yaml(SOCIAL_CHANNELS_PATH, {})
     social_state = _load_yaml(SOCIAL_STATE_PATH, {})

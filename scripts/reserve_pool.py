@@ -46,6 +46,7 @@ ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
 
 sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_artifacts as artifacts  # noqa: E402
 import cadence_guard  # noqa: E402 – PUBLICATION_DAYS/load_posts (SSOT)
 
 
@@ -89,34 +90,15 @@ def reserve_drafts(posts_dir: Path = POSTS) -> list:
 
 def _prefer_certified(drafts: list) -> list:
     """Stable: ready-zertifizierte zuerst, Rest in Originalreihenfolge."""
-    import hashlib
-    import json
     cert_path = ROOT / "data" / "reserve-readiness.json"
     if not cert_path.exists() or not drafts:
         return drafts
     try:
-        data = json.loads(cert_path.read_text(encoding="utf-8"))
-    except Exception:  # noqa: BLE001 – Zertifikat optional
+        data = artifacts.read_certificate(cert_path)
+        rows = artifacts.verified_rows(data, drafts[0].parent.parent)
+    except (OSError, ValueError):
         return drafts
-    ready_ok = set()
-    for row in data.get("candidates") or []:
-        if not row.get("ready"):
-            continue
-        slug = row.get("slug")
-        sha = row.get("sha256")
-        if not slug:
-            continue
-        # Hash-Match: nur EXAKT dieser Inhalt gilt als zertifiziert.
-        path = next((p for p in drafts if p.parent.name == slug), None)
-        if path is None:
-            continue
-        try:
-            body = path.read_text(encoding="utf-8")
-        except OSError:
-            continue
-        if sha and hashlib.sha256(body.encode()).hexdigest() != sha:
-            continue
-        ready_ok.add(slug)
+    ready_ok = {r["slug"] for r in rows if r["ready"]}
     if not ready_ok:
         return drafts
     head = [p for p in drafts if p.parent.name in ready_ok]

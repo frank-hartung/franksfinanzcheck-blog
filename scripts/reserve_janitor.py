@@ -101,6 +101,7 @@ STATIC = ROOT / "static"
 DATA = ROOT / "data"
 
 sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_artifacts as artifacts  # noqa: E402
 import reserve_blocker_klassen as bk  # noqa: E402 – SSOT der Löschklassen
 import reserve_pool as rp  # noqa: E402 – Nachweis/Rückholung (#610)
 #     Absichtlich auf Modulebene: Im Selbsttest ist die Kalender-Uhr ersetzt
@@ -237,8 +238,8 @@ def matching_audio_files(root: Path, slugs: set[str]) -> list[Path]:
 def ledger_keys(root: Path) -> set[str]:
     pfad = root / "data" / "reserve-custody.json"
     try:
-        data = json.loads(pfad.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        data = artifacts.read_object(pfad)
+    except FileNotFoundError:
         return set()
     if not isinstance(data, dict):
         return set()
@@ -597,8 +598,9 @@ def unlink_content_references(root: Path, slugs: set[str], *, dry_run: bool) -> 
 
 def prune_json_file(path: Path, predicate) -> int:
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        data = artifacts.read_object(path)
+    except (OSError, ValueError) as exc:
+        print(f"⚠ Zustandsbereinigung übersprungen ({path.name}): {exc}")
         return 0
     removed = 0
     if isinstance(data, dict):
@@ -625,8 +627,11 @@ def prune_json_file(path: Path, predicate) -> int:
     # reiner Löschlauf darf nicht tausend Zeilen Diff durch alphabetisches
     # Umsortieren oder andere Einrückung erzeugen.
     indent = 1 if path.name == "covers_manifest.json" else 2
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=indent) + "\n",
-                    encoding="utf-8")
+    if path.name in artifacts.STATE_FILES:
+        artifacts.write_object(path, data)
+    else:
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=indent) + "\n",
+                        encoding="utf-8")
     return removed
 
 

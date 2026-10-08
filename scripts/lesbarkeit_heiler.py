@@ -127,6 +127,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS_DIR = os.path.join(BLOG_DIR, "scripts")
@@ -139,7 +140,8 @@ import publikations_vertrag as vertrag   # noqa: E402 – V1–V3 (WF-54C4/#607)
 import textverstaendnis_guard as tv      # noqa: E402 – echter Verständnis-Prüfer
 import r5_absatz_splitter as r5          # noqa: E402 – Abkürzungen + Absatz-Splitter
 from post_utils import join_article      # noqa: E402 – Naht-SSOT
-import llm_client                         # noqa: E402 – einziger KI-Transportweg
+import reserve_artifacts as artifacts    # noqa: E402 – ganze Belege (#634)
+import llm_client                       # noqa: E402 – einziger KI-Transportweg
 
 # Die Schwelle ist IMPORTIERT – eine Regel, zwei Leser, eine Zahl.
 MINDEST_FLESCH = rc.NEW_FLESCH_MIN
@@ -671,9 +673,9 @@ def hole_blocked() -> list[str]:
     """Reserve-Kandidaten laut Zertifikat (`data/reserve-readiness.json`)."""
     zertifikat = os.path.join(BLOG_DIR, "data", "reserve-readiness.json")
     try:
-        with open(zertifikat, encoding="utf-8") as fh:
-            daten = json.load(fh)
-    except (OSError, ValueError):
+        daten = artifacts.read_certificate(Path(zertifikat))
+    except (OSError, ValueError) as exc:
+        print(f"⚠ Reserve-Heiler-Auswahl übersprungen: Zertifikat nicht prüfbar ({exc})")
         return []
     pfade = []
     for c in daten.get("candidates", []):
@@ -683,7 +685,8 @@ def hole_blocked() -> list[str]:
         if "Lesbarkeits-Gate" not in grund and "Lesbarkeits-Score" not in grund:
             continue
         pfad = os.path.join(BLOG_DIR, "content", "posts", str(c.get("slug")), "index.md")
-        if os.path.isfile(pfad):
+        if (os.path.isfile(pfad) and Path(pfad).resolve().is_relative_to(
+                (Path(BLOG_DIR) / "content" / "posts").resolve())):
             pfade.append(pfad)
     return sorted(pfade)
 
