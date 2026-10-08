@@ -599,10 +599,11 @@ def call_gemini(prompt):
     # Explizites Ausgabelimit hält den 1.500–2.200-Wörter-Auftrag unabhängig
     # vom impliziten Modell-Default; der gemeinsame Client liest alle Antwort-Parts.
     def _call():
-        return llm_client.chat(
+        text = llm_client.chat(
             "gemini", prompt=prompt, model=model, temperature=0.8,
             max_tokens=8192, timeout=90, attempts=1, raise_on_error=True,
         )
+        return text or None
     return _retry(_call)
 
 
