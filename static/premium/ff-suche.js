@@ -12,6 +12,8 @@
  * als HTML-Fragment mit <mark>; sie werden hier zerlegt und als Text über
  * textContent eingesetzt. Verlinkt wird nur gleich-seitiger Pfad (/…).
  *
+ * TREFFER: Ein Treffer zählt nur mit sichtbarer, passender Fundstelle oder Titel
+ *  (Pagefind liefert sonst Teilstücke wie einzelne Buchstaben).
  * LADEN: Der Index wird erst bei der ersten Eingabe geladen, nicht schon
  * beim Seitenaufruf (Bandbreite, Lighthouse).
  *
@@ -59,6 +61,29 @@
   function sichereUrl(url) {
     var u = String(url || '');
     return (u.charAt(0) === '/' && u.charAt(1) !== '/' && u.charAt(1) !== '\\') ? u : null;
+  }
+
+  /* Vergleichsform: klein, ohne Umlaut-Punkte und ß (Kündigung = kundigung). */
+  function normalisieren(text) {
+    return String(text || '').toLowerCase().replace(/ß/g, 'ss')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  /* Pagefind bestätigt bei unbekannten Begriffen auch Teilstücke (z. B. das
+     einzelne Zeichen „z.“ aus „z.B.“). Ein Treffer zählt deshalb nur, wenn
+     eine markierte Fundstelle oder der Titel den Anfang eines Suchworts trägt
+     (die ersten fünf Buchstaben). Flexion (Kündigungsfristen) bleibt treffbar. */
+  function fundstelleTrifft(d, begriff) {
+    var woerter = normalisieren(begriff).split(/\s+/).filter(function (w) { return w.length >= 2; });
+    if (!woerter.length) { return false; }
+    var quellen = auszugSegmente(d.excerpt || '').filter(function (s) { return s.markiert; })
+      .map(function (s) { return s.text; });
+    if (d.meta && d.meta.title) { quellen.push(String(d.meta.title)); }
+    var texte = quellen.map(normalisieren);
+    return woerter.some(function (w) {
+      var wurzel = w.slice(0, 5);
+      return texte.some(function (t) { return t.indexOf(wurzel) !== -1; });
+    });
   }
 
   /* Zählzeile in ganzen Sätzen – ohne Pluralfehler. */
@@ -156,10 +181,10 @@
       status.textContent = 'Suche läuft …';
       index().then(function (pf) {
         return pf.search(begriff).then(function (antwort) {
-          var treffer = antwort.results || [];
-          var ersten = treffer.slice(0, MAX_TREFFER);
-          return Promise.all(ersten.map(function (t) { return t.data(); })).then(function (daten) {
-            return { gesamt: treffer.length, daten: daten };
+          var kandidaten = antwort.results || [];
+          return Promise.all(kandidaten.map(function (t) { return t.data(); })).then(function (alle) {
+            var echte = alle.filter(function (d) { return fundstelleTrifft(d, begriff); });
+            return { gesamt: echte.length, daten: echte.slice(0, MAX_TREFFER) };
           });
         });
       }).then(function (ergebnis) {
@@ -208,6 +233,8 @@
     auszugSegmente: auszugSegmente,
     sichereUrl: sichereUrl,
     trefferText: trefferText,
+    fundstelleTrifft: fundstelleTrifft,
+    normalisieren: normalisieren,
     ffSucheStarten: ffSucheStarten
   };
 

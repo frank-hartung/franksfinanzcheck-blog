@@ -2,6 +2,7 @@
 
 Stand: 08.10.2026 · Skript: `scripts/alt_text_vorschlaege.py` · Tests: `scripts/tests/test_alt_text_vorschlaege.py`
 Vorschläge: `data/alt_texte/vorschlaege.yaml` (versioniert)
+Redaktionsstandard (verbindlich für Entscheidung und Prüfung): `docs/ALT-TEXT-REDAKTIONSSTANDARD.md`
 
 ## Befund
 

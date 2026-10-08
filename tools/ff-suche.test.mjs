@@ -99,7 +99,8 @@ test('Treffer werden als Text gerendert – fremdes HTML wird nie ausgeführt', 
           meta: { title: 'Tagesgeld-Zinsen <b>2026</b>' },
           excerpt: 'Die besten <mark>Tagesgeld</mark>-Zinse &amp; mehr <img src=x onerror="alert(1)">',
         },
-        { url: 'javascript:alert(1)', meta: { title: 'Böse' }, excerpt: '' },
+        // Mit echter Fundstelle: die neue Trefferregel verwirft Einträge ohne Bezug zum Suchwort.
+        { url: 'javascript:alert(1)', meta: { title: 'Böse' }, excerpt: 'Ein <mark>Tagesgeld</mark>-Hinweis' },
       ],
     }),
   );
@@ -191,4 +192,49 @@ test('der Index wird erst bei der ersten Suche geladen, nicht schon beim Aufruf'
   sucheAbschicken('Strom');
   await settle();
   assert.equal(geladen, 1, 'ein Index, wiederverwendet');
+});
+
+test('fundstelleTrifft: Kurzform, Umlaute, Flexion und Titel', () => {
+  assert.equal(api.normalisieren('Kündigung ß'), 'kundigung ss');
+  assert.equal(
+    api.fundstelleTrifft({ excerpt: 'Der Zins (<mark>z.</mark>B.)', meta: { title: 'Herbst' } }, 'Zyklotronbeschleuniger'),
+    false,
+    'ein markiertes Teilstück ohne Bezug zum Suchwort ist kein Treffer',
+  );
+  assert.equal(api.fundstelleTrifft({ excerpt: '<mark>Stromtarife</mark>', meta: {} }, 'Stromtarif'), true);
+  assert.equal(api.fundstelleTrifft({ excerpt: 'Ohne <mark>Markierung</mark>', meta: { title: 'Miete' } }, 'Stromtarif'), false);
+  assert.equal(api.fundstelleTrifft({ excerpt: '', meta: { title: 'Kündigungsfristen-Kalender' } }, 'Kalender'), true, 'Titeltreffer zählt');
+});
+
+test('Pagefind-Rauschen ohne passende Fundstelle wird nicht als Treffer gezeigt', async () => {
+  const root = fixture();
+  api.ffSucheStarten(root, async () =>
+    fakeIndex({
+      Zyklotronbeschleuniger: [
+        { url: '/posts/herbst/', meta: { title: 'Sparen im Herbst' }, excerpt: 'Der Zins (<mark>z.</mark>B. 2 %)' },
+        { url: '/pillar/frugalismus/', meta: { title: 'Frugalismus' }, excerpt: 'Budget <mark>x</mark>' },
+      ],
+    }),
+  );
+  sucheAbschicken('Zyklotronbeschleuniger');
+  await settle();
+  assert.match(root.querySelector('[data-ff-suche-status]').textContent, /^Keine Treffer für „Zyklotronbeschleuniger“\./);
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 0);
+});
+
+test('echte Fundstellen zählen – ohne Umlaute und in Flexion', async () => {
+  const root = fixture();
+  api.ffSucheStarten(root, async () =>
+    fakeIndex({
+      Kundigung: [{
+        url: '/werkzeuge/kuendigungsfristen-kalender/',
+        meta: { title: 'Kündigungsfristen-Kalender' },
+        excerpt: 'Vertragsende und <mark>Kündigungsfristen</mark> eintragen',
+      }],
+    }),
+  );
+  sucheAbschicken('Kundigung');
+  await settle();
+  assert.equal(root.querySelector('[data-ff-suche-status]').textContent, '1 Treffer für „Kundigung“.');
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 1);
 });

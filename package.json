@@ -4,11 +4,12 @@
   "private": true,
   "description": "E2E-Tests (Playwright) für FranksFinanzcheck – Startseite, Artikel, Navigation, SEO/A11y und Affiliate-Integrität. Siehe e2e/ und .github/workflows/e2e.yml.",
   "scripts": {
-    "build": "hugo --destination public",
-    "suchindex": "node node_modules/pagefind/lib/runner/bin.cjs --site public --force-language de",
-    "test:suche": "node --test tools/ff-suche.test.mjs && python3 -m unittest scripts.tests.test_suche_pagefind",
+    "suchindex": "rm -rf public/pagefind && pagefind --site public --force-language de --exclude-selectors 'a.anchor' && python3 scripts/suchindex_check.py --site public",
+    "suchindex:pruefen": "python3 scripts/suchindex_check.py --site public",
+    "test:suche": "node --test tools/ff-suche.test.mjs && python3 scripts/suchindex_check.py --selftest && python3 -m unittest scripts.tests.test_suche_pagefind",
+    "test:suche:browser": "playwright test e2e/suche.spec.mjs",
     "provisionen:check": "python3 scripts/provisionen_check.py --summary",
-    "build": "hugo --destination public && pagefind --site public --output-path public/pagefind",
+    "build": "hugo --destination public && npm run --silent suchindex",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
@@ -178,7 +179,5 @@
   },
   "dependencies": {
     "pagefind": "1.5.2"
-    "lighthouse": "13.5.0",
-    "pagefind": "^1.5.2"
   }
 }
