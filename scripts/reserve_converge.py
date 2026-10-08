@@ -59,6 +59,7 @@ EXIT: 0 = Zielbestand erreicht · 1 = Engpass nach erschöpfter Konvergenz
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -74,6 +75,7 @@ CERT = ROOT / "data" / "reserve-readiness.json"
 PY = sys.executable
 
 sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_artifacts as artifacts  # noqa: E402
 import readability_check  # SSOT: Publikationsschwelle
 from satz_heiler import MIN_FORTSCHRITT  # sichere Zwischenstufen (#614)
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
@@ -84,7 +86,8 @@ def target() -> int:
     return reserve_economy.ziel()
 
 
-def cert_state(cert_path: Path = CERT) -> dict:
+
+def cert_state(cert_path: Path = CERT, posts_dir: Path | None = None) -> dict:
     """Aktueller Pool-Zustand: (target, ready, pool_size).
 
     `ready` wird – wie im harten End-Gate – aus der Kandidatenliste gezählt,
@@ -103,7 +106,7 @@ def cert_state(cert_path: Path = CERT) -> dict:
     state = {"target": goal, "ready": 0, "pool_size": 0, "exists": False,
              "zertifikat_ziel": None}
     try:
-        data = json.loads(cert_path.read_text(encoding="utf-8"))
+        data = artifacts.read_certificate(cert_path)
     except (OSError, ValueError):
         return state
     if not isinstance(data, dict):
@@ -111,7 +114,8 @@ def cert_state(cert_path: Path = CERT) -> dict:
     cands = data.get("candidates") or []
     if not isinstance(cands, list):
         return state
-    cands = [r for r in cands if isinstance(r, dict)]
+    cands = artifacts.verified_rows(
+        data, posts_dir if posts_dir is not None else ROOT / "content" / "posts")
     state["exists"] = True
     # Beweismittel, nicht Vorgabe: Womit wurde zuletzt gemessen?
     state["zertifikat_ziel"] = reserve_economy.zertifikat_ziel(data)
@@ -379,16 +383,22 @@ def run_selftest() -> int:
         fehler.append(f"Fehlendes Zertifikat muss leer zählen: {leer}")
     with tempfile.TemporaryDirectory() as tmp:
         cert = Path(tmp) / "reserve-readiness.json"
+        posts = Path(tmp) / "content" / "posts"
+        index = posts / "a" / "index.md"
+        index.parent.mkdir(parents=True)
+        raw = b"---\ndraft: true\nreserve: true\n---\nTest.\n"
+        index.write_bytes(raw)
+        digest = hashlib.sha256(raw).hexdigest()
         cert.write_text(json.dumps({
             "target": 6, "ready": 6,  # gelogen – Liste ist maßgeblich
-            "candidates": [{"slug": "a", "ready": True},
+            "candidates": [{"slug": "a", "ready": True, "sha256": digest},
                            {"slug": "b", "ready": False}],
         }), encoding="utf-8")
-        st = cert_state(cert)
+        st = cert_state(cert, posts)
         if st["ready"] != 1 or st["pool_size"] != 2:
             fehler.append(f"Zählung muss aus der Liste kommen: {st}")
         cert.write_text("{kaputt", encoding="utf-8")
-        st = cert_state(cert)
+        st = cert_state(cert, posts)
         if st["ready"] != 0:
             fehler.append(f"Defektes Zertifikat muss leer zählen: {st}")
 

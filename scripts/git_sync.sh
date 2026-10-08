@@ -422,28 +422,23 @@ PY
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
           ;;
-        data/reserve-topic-ledger.json|data/reserve-custody.json)
-          # NEU 26.09.2026 (#387): Diese beiden Dateien sind GEDÄCHTNISSE,
-          # keine Momentaufnahmen – „letzter Schreiber gewinnt" wäre hier
-          # falsch, weil jede verworfene Seite echtes Wissen löscht
-          # (welches Thema schon gescheitert ist, wer im Pool war). Sie
-          # sind aber schlüssel-basiert und damit sauber vereinbar:
-          # Vereinigung über alle Schlüssel, bei Dopplung gewinnt der
-          # JÜNGERE Eintrag (spätestes Datum). Scheitert der Merge,
-          # bleibt der Konflikt hart stehen.
-          python3 - "$f" <<'PY'
-import json, pathlib, subprocess, sys
+        data/reserve-topic-ledger.json|data/reserve-custody.json|data/reserve-quarantine.json)
+          # Schlüsselbasierte Gedächtnisse: keine Text-/JSONL-Vereinigung.
+          # #634: striktes JSON und atomarer Ganzdatei-Schreiber. Defekte
+          # Seiten bleiben ein harter Konflikt, statt zu {} zu verschwinden.
+          # Quarantäne zählt bei gleichem Fund die verschiedenen Lauf-IDs;
+          # ein neuer Fund beginnt weiterhin eine eigene Beweislast.
+          if python3 - "$f" "$(dirname "${BASH_SOURCE[0]}")" <<'PYMERGE'
+import pathlib, subprocess, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[2]).resolve()))
+import reserve_artifacts as artifacts
 path = pathlib.Path(sys.argv[1])
 def seite(stage):
     r = subprocess.run(["git", "show", f":{stage}:{path.as_posix()}"],
                        text=True, capture_output=True)
     if r.returncode != 0:
-        return {}
-    try:
-        data = json.loads(r.stdout)
-        return data if isinstance(data, dict) else {}
-    except ValueError:
-        return {}
+        raise ValueError(f"Konfliktseite {stage} fehlt: {path}")
+    return artifacts.parse_object(r.stdout)
 def alter(eintrag):
     if not isinstance(eintrag, dict):
         return ""
@@ -453,12 +448,26 @@ def alter(eintrag):
 ours, theirs = seite(2), seite(3)
 merged = dict(ours)
 for schluessel, eintrag in theirs.items():
-    if schluessel not in merged or alter(eintrag) >= alter(merged[schluessel]):
-        merged[schluessel] = eintrag
-path.write_text(json.dumps(merged, ensure_ascii=False, indent=2,
-                           sort_keys=True) + "\n", encoding="utf-8")
-PY
-          git add -- "$f"
+    previous = merged.get(schluessel)
+    chosen = eintrag if previous is None or alter(eintrag) >= alter(previous) else previous
+    if (path.name == "reserve-quarantine.json" and isinstance(previous, dict)
+            and isinstance(eintrag, dict) and eintrag.get("signatur")
+            and eintrag.get("signatur") == previous.get("signatur")):
+        chosen = dict(chosen)
+        runs = sorted(set(previous.get("laeufe", [])) | set(eintrag.get("laeufe", [])))
+        chosen["laeufe"] = runs
+        chosen["hits"] = max(len(runs), previous.get("hits", 0), eintrag.get("hits", 0))
+        first = [v for v in (previous.get("first"), eintrag.get("first")) if v]
+        if first:
+            chosen["first"] = min(first)
+    merged[schluessel] = chosen
+artifacts.write_object(path, merged, sort_keys=True)
+PYMERGE
+          then
+            git add -- "$f"
+          else
+            safe=0
+          fi
           ;;
         data/faktenfrische_queue.json|data/research/artikel/*)
           # REPARATUR 01.10.2026 (Issue #497 – „Faktenfrische (Bestand) rot trotz
@@ -516,8 +525,22 @@ PY
           #   dessen Ergebnis gerade gepusht wird). Die Dateien sind hash- bzw.
           #   rein generiert: kein fachlicher Merge nötig, kein Datenverlust,
           #   weil der jeweils nächste Lauf sie ohnehin vollständig neu schreibt.
-          git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
-          git add -- "$f"
+          if git checkout --theirs -- "$f" >/dev/null 2>&1; then
+            if [ "$f" != "data/reserve-readiness.json" ] || \
+               python3 - "$f" "$(dirname "${BASH_SOURCE[0]}")" <<'PYVERIFY'
+import pathlib, sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[2]).resolve()))
+from reserve_artifacts import read_object
+read_object(pathlib.Path(sys.argv[1]))
+PYVERIFY
+            then
+              git add -- "$f"
+            else
+              safe=0
+            fi
+          else
+            safe=0
+          fi
           ;;
         content/posts/*/index.md)
           # REPARATUR 15.09.2026 (Issue #295):

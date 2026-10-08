@@ -87,6 +87,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_artifacts as artifacts  # noqa: E402
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 import reserve_blocker_klassen as bk  # noqa: E402  – SSOT: heilbar oder nicht?
 
@@ -145,18 +146,16 @@ def lauf_kennung() -> str:
     return "lokal:" + dt.datetime.now(dt.timezone.utc).date().isoformat()
 
 
+
 def load_state(path: Path = STATE) -> dict:
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        return artifacts.read_object(path)
+    except FileNotFoundError:
         return {}
-    return data if isinstance(data, dict) else {}
 
 
 def save_state(state: dict, path: Path = STATE) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(state, ensure_ascii=False, indent=2,
-                               sort_keys=True) + "\n", encoding="utf-8")
+    artifacts.write_object(path, state, sort_keys=True)
 
 
 def audit(slug: str, grund: str, hits: int) -> None:

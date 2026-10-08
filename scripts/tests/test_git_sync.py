@@ -566,8 +566,7 @@ class TagTriggerUndGeloeschtesRefTests(GitSyncTestBase):
                          "genau EIN Push-Versuch erwartet")
 
 
-if __name__ == "__main__":
-    unittest.main()
+
 
 
 # --------------------------------------------------------------------------- #
@@ -805,3 +804,85 @@ class BestandsAbgabeTests(GitSyncTestBase):
         self.assertIn("B: frisch", self.origin_read(self.SLUG))
         self.assertEqual(self._nachheil_log(), [],
                          "Reserve-Kandidaten brauchen keine Nachheilung")
+
+
+class ReserveSnapshotKonfliktTests(GitSyncTestBase):
+    """#634: binary snapshots still sync, but corrupt evidence never does."""
+
+    def setUp(self):
+        super().setUp()
+        attributes = "\n".join(
+            f"data/reserve-{name}.json merge=binary"
+            for name in ("readiness", "custody", "quarantine")) + "\n"
+        self._commit(self.bot_a, ".gitattributes", attributes, "snapshot policy")
+        result = self.run_sync(["--push-only"], repo=self.bot_a)
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        subprocess.run(["git", "-C", str(self.bot_b), "pull", "-q", "--ff-only"], check=True)
+
+    def _compete(self, name, older, newer):
+        path = f"data/reserve-{name}.json"
+        self._commit(self.bot_a, path, older, "older snapshot")
+        result = self.run_sync(["--push-only"], repo=self.bot_a)
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self._commit(self.bot_b, path, newer, "newer snapshot")
+        result = self.run_sync(["--push-only"])
+        return path, result
+
+    def test_readiness_chooses_one_complete_snapshot(self):
+        older = '{"ready": 6, "generated_at": "old"}\n'
+        newer = '{"ready": 4, "generated_at": "new"}\n'
+        path, result = self._compete("readiness", older, newer)
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertEqual(newer, self.origin_read(path))
+
+    def test_custody_preserves_distinct_identities_and_latest_entry(self):
+        import json
+        older = {"a": {"slug": "a", "zuletzt_im_pool": "2026-10-07"},
+                 "shared": {"slug": "old", "zuletzt_im_pool": "2026-10-07"}}
+        newer = {"b": {"slug": "b", "zuletzt_im_pool": "2026-10-08"},
+                 "shared": {"slug": "new", "zuletzt_im_pool": "2026-10-08"}}
+        path, result = self._compete("custody", json.dumps(older), json.dumps(newer))
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        actual = json.loads(self.origin_read(path))
+        self.assertEqual({"a", "b", "shared"}, set(actual))
+        self.assertEqual("new", actual["shared"]["slug"])
+
+    def test_quarantine_counts_distinct_runs_of_the_same_finding_once(self):
+        import json
+        older = {"a": {"signatur": "same", "hits": 2, "laeufe": ["10", "11"],
+                       "first": "2026-10-06", "last": "2026-10-07"}}
+        newer = {"a": {"signatur": "same", "hits": 2, "laeufe": ["11", "12"],
+                       "first": "2026-10-07", "last": "2026-10-08"}}
+        path, result = self._compete("quarantine", json.dumps(older), json.dumps(newer))
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        actual = json.loads(self.origin_read(path))["a"]
+        self.assertEqual(["10", "11", "12"], actual["laeufe"])
+        self.assertEqual(3, actual["hits"])
+        self.assertEqual("2026-10-06", actual["first"])
+        self.assertEqual("2026-10-08", actual["last"])
+
+    def test_new_quarantine_finding_does_not_inherit_old_hits(self):
+        import json
+        older = {"a": {"signatur": "old", "hits": 5, "laeufe": ["10"], "last": "2026-10-07"}}
+        newer = {"a": {"signatur": "new", "hits": 1, "laeufe": ["12"], "last": "2026-10-08"}}
+        path, result = self._compete("quarantine", json.dumps(older), json.dumps(newer))
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertEqual(newer, json.loads(self.origin_read(path)))
+
+    def test_corrupt_memory_or_certificate_is_not_pushed_or_silently_emptied(self):
+        for name in ("custody", "quarantine", "readiness"):
+            with self.subTest(name=name):
+                older = '{"a": {"last": "2026-10-07"}}\n'
+                newer = '{"a": {"hits": 1, "hits": 2}}\n'
+                path, result = self._compete(name, older, newer)
+                self.assertNotEqual(0, result.returncode, result.stdout + result.stderr)
+                self.assertEqual(older, self.origin_read(path))
+                self.assertEqual(newer, (self.bot_b / path).read_text())
+                # The failed local commit belongs to this test, not the next
+                # synthetic race. Reset only the sandbox clone to its remote.
+                subprocess.run(["git", "-C", str(self.bot_b), "reset", "--hard", "origin/main"],
+                               check=True, capture_output=True)
+
+
+if __name__ == "__main__":
+    unittest.main()

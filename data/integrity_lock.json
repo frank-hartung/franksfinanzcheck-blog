@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T18:35:52.323952+00:00",
-  "head": "de04097",
+  "signed_at": "2026-10-08T18:44:31.459536+00:00",
+  "head": "21e1defa",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -24,6 +24,7 @@
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
     "scripts/affiliate_integrity_gate.py": "d40139ed377cfe976e2a0f652b5cf3ec47cff3f55e9cee6f8a044142bcdf247b",
     "scripts/affiliate_marketer.py": "0c61e9822be05958657799a62de52826226fc4ba36ddea124b720f6ff47ae9e1",
+    "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
     "scripts/brand_guard.py": "caad0d0abcf8506158218e4e7b51a97b35aec83aedf0055f9f653e9bc7ca5ba7",
@@ -36,7 +37,7 @@
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "d19dee6b438ed06fb2b74718a90defc4b0ec0f5b40635254c5dd2c91ebdb0e14",
     "scripts/lektor_guard.py": "0f6eb11dbf468907eb24c460dfeff42833fe50dc855ab4345fa5dd35fa22a166",
-    "scripts/lesbarkeit_heiler.py": "1ab39bb7438738e53a6d3dcf5e2903a43992681ed3afb5824d9435c61d2f9245",
+    "scripts/lesbarkeit_heiler.py": "8b9f40a5f1e706d4131973e15dd9d19ee6d6929365cdc78108a960d5861d4ebd",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
@@ -49,10 +50,9 @@
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
-    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
-    "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9"
+    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01",
+  "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -469,8 +469,35 @@
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "17cf8e0a9ef6038e0c00d797a518adfa2bc62adebeb015743c09a7bb87dfe515",
-      "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01"
+      "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01",
+      "prev_sha256": "17cf8e0a9ef6038e0c00d797a518adfa2bc62adebeb015743c09a7bb87dfe515"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "1711970b",
+      "geaendert": [
+        "scripts/lesbarkeit_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
+      "prev_sha256": "1b3a8c17aedc07df5bf1671cc1bad97fe3c8385ca6fb87a099dd54f7571b9e25"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "21e1defa",
+      "geaendert": [],
+      "prev_sha256": "5e5d3197fe10c9d5b87d9dcdf11e6ef2802ae1ea77f2dda5874306498e1beddc",
+      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292"
     }
   ]
 }

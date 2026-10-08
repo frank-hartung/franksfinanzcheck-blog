@@ -24,6 +24,8 @@ from __future__ import annotations
 
 import datetime
 import os
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -447,14 +449,23 @@ class TestDatenpfadUndBuild(unittest.TestCase):
             funde = wache.validate_build(Path(tmp), {"id": "herbst"}, [], "keywords", 3)
             self.assertTrue(any("Build fehlt" in f for f in funde), funde)
 
-    @unittest.skipUnless((ROOT / "public" / "index.html").is_file(),
-                         "public/ fehlt – vorher `hugo --destination public`")
+    @unittest.skipUnless(shutil.which("hugo"), "Hugo nicht installiert")
     def test_echter_build_ist_kohärent(self):
-        """End-to-End gegen den echten Build (lokal/CI, sonst übersprungen)."""
+        """Python und echtes Hugo prüfen denselben Tag, auch unter Uhr-Probe."""
         heute = datetime.datetime.now(datetime.timezone.utc).date()
-        exit_code, bericht = wache.pruefe_build(ROOT / "public", ROOT, heute)
-        self.assertEqual(bericht["fehler"], [])
-        self.assertEqual(exit_code, 0)
+        # #634-Endabnahme: Ein gecachtes public/ war mit der echten Herbst-
+        # Uhr gebaut; --offset 97 erwartete Winter. Nicht das Gate lockern
+        # oder die Probe überspringen, sondern beide Uhren gleich stellen.
+        with tempfile.TemporaryDirectory(prefix="saison-build-") as tmp:
+            public = Path(tmp)
+            build = subprocess.run(
+                ["hugo", "--clock", f"{heute.isoformat()}T00:00:00Z",
+                 "--destination", str(public)], cwd=ROOT,
+                capture_output=True, text=True, timeout=120)
+            self.assertEqual(build.returncode, 0, build.stdout + build.stderr)
+            exit_code, bericht = wache.pruefe_build(public, ROOT, heute)
+            self.assertEqual(bericht["fehler"], [], bericht["fehler"])
+            self.assertEqual(exit_code, 0)
 
 
 class TestGesamtlauf(unittest.TestCase):

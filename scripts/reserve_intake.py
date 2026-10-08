@@ -80,6 +80,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
+import reserve_artifacts as artifacts  # noqa: E402
 
 LEDGER = Path("data") / "reserve-intake.json"
 
@@ -136,12 +137,10 @@ def live_identitaeten(root: Path) -> tuple[set[str], set[str]]:
 
 def custody_slugs(root: Path) -> set[str]:
     try:
-        data = json.loads((root / "data" / "reserve-custody.json")
-                          .read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        data = artifacts.read_object(root / "data" / "reserve-custody.json")
+    except FileNotFoundError:
         return set()
-    if not isinstance(data, dict):
-        return set()
+    # Beschädigtes Gedächtnis darf nie „herrenlos“ bedeuten (#634).
     out = set(data)
     for k, v in data.items():
         if isinstance(v, dict) and v.get("slug"):

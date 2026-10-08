@@ -68,6 +68,8 @@ import os
 import sys
 from pathlib import Path
 
+import reserve_artifacts as artifacts
+
 ROOT = Path(__file__).resolve().parent.parent
 CERT = ROOT / "data" / "reserve-readiness.json"
 
@@ -176,7 +178,7 @@ def zertifikat_ziel(cert: Path | dict | None = None) -> int | None:
     else:
         pfad = CERT if cert is None else Path(cert)
         try:
-            geladen = json.loads(pfad.read_text(encoding="utf-8"))
+            geladen = artifacts.read_object(pfad)
         except (OSError, ValueError):
             return None
         if isinstance(geladen, dict):

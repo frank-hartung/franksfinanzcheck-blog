@@ -6,6 +6,10 @@ on:
       # (u. a. Affiliate-Intent). Content-only-Korrekturen müssen sie deshalb
       # genauso auslösen wie Änderungen am Detektor selbst (#493).
       - 'content/**'
+      # #634: Auch reine Zustands-/Merge-Vertragsänderungen brauchen den
+      # Offline-Nachweis; content-reserve läuft auf PR-Refs absichtlich nicht.
+      - 'data/reserve-*.json'
+      - '.gitattributes'
       - 'scripts/**'
       - '.github/workflows/**'
       # Die Commit-Sperre der Markenfläche und ihre Selbstscharfstellung
@@ -34,6 +38,8 @@ jobs:
       # Unit-Test-Netz darunter enthält zusätzlich Sabotageproben des Audits.
       - name: Workflow-Permissions und Betriebsverträge prüfen
         run: python3 scripts/automation_premium_audit.py --strict
+      - name: Reserve-Snapshot – vollständiger Nachweis statt Merge-Chimäre (#634)
+        run: python3 scripts/reserve_artifacts.py --check
       - run: |
           python3 -m unittest discover -s scripts/tests -v
           python3 scripts/engine_generate.py --selftest

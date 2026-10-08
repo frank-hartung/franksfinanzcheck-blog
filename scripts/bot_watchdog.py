@@ -585,7 +585,8 @@ def check_content_reserve():
 
     cert_path = BLOG_DIR / "data" / "reserve-readiness.json"
     try:
-        cert = json.loads(cert_path.read_text(encoding="utf-8"))
+        from reserve_artifacts import read_certificate
+        cert = read_certificate(cert_path)
         if not isinstance(cert, dict) or not isinstance(cert.get("candidates"), list):
             raise ValueError("Kandidatenliste fehlt oder ist ungültig")
     except (OSError, json.JSONDecodeError, ValueError) as exc:
