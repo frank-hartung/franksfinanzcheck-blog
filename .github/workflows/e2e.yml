@@ -132,6 +132,15 @@ jobs:
           args: "--destination public"
           label: "E2E-Build"
 
+      # H1-Wache, zweiter Teil (Stufe 2, 08.10.2026): Die Quellprüfung sieht
+      # Markdown und Vorlagen, diese Prüfung sieht JEDE gebaute Seite – auch
+      # die Blätterseiten /page/2/ … und /posts/page/2/ …, die eine pauschale
+      # Ausnahme bis dahin verdeckte (sie trugen real gar keine H1). Der
+      # Schritt läuft bewusst HIER: direkt nach dem echten Build, vor den
+      # Browser-Tests, damit ein roter Befund sofort sichtbar ist.
+      - name: H1-Wache – gebaute Seiten (jede genau eine H1)
+        run: python3 scripts/h1_wache.py --public public
+
       - name: E2E-Suite ausführen
         run: npx playwright test
 
