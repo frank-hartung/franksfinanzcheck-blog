@@ -1,5 +1,5 @@
-generated_at: '2026-10-07T10:34:09Z'
-day: '2026-10-07'
+generated_at: '2026-10-08T10:55:30Z'
+day: '2026-10-08'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,60 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
-    pillar: mietwagen
+  - topic: DNS-Server ändern für schnelleres Internet
+    pillar: internet-dsl
     signal: niche_hook
-    source: topics:5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    source: topics:DNS-Server ändern für schnelleres Internet
     score: 0.55
     keywords:
-    - Mietwagen
-    - Fehler
-    - vermeiden
-  - topic: Günstige Kreditkarten für den Alltag finden
+    - DNS Server wechseln
+    - Internet schneller machen
+    - DSL Tipps
+  - topic: Die besten Kreditkarten für den Alltag im Vergleich
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Günstige Kreditkarten für den Alltag finden
+    source: topics:Die besten Kreditkarten für den Alltag im Vergleich
     score: 0.55
     keywords:
     - Kreditkarte
-    - Günstige Karten
     - Alltag
-  - topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
-    pillar: konto-karten
+    - Vergleich
+  - topic: Die verschiedenen Arten von Reiseversicherungen im Vergleich
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Hauskauf finanzieren: Darlehen clever vergleichen'
+    source: topics:Die verschiedenen Arten von Reiseversicherungen im Vergleich
     score: 0.55
     keywords:
-    - Baufinanzierung
-    - Immobilienkredit
-    - Hauskauf Finanzierung
-  - topic: Kreditkarten mit Reiseversicherung im Test
-    pillar: konto-karten
+    - Reiseversicherungen
+    - Versicherungsarten
+    - Reise-Schutz
+  - topic: Energieeffizienz zu Hause verbessern
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:Kreditkarten mit Reiseversicherung im Test
+    source: topics:Energieeffizienz zu Hause verbessern
     score: 0.55
     keywords:
-    - Kreditkarten
-    - Reiseversicherung
-    - Versicherungsvergleich
-  - topic: 'Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst'
+    - Energie
+    - Effizienz
+    - Zuhause
+  - topic: Günstige Reisezeitpunkte für den Urlaub
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst'
+    source: topics:Günstige Reisezeitpunkte für den Urlaub
     score: 0.55
     keywords:
-    - Mietwagen
-    - Verträge
-    - Wissenswertes
-  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
-    pillar: konto-karten
+    - Reise
+    - Urlaub
+    - SparTipps
+  - topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    source: 'topics:Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
     score: 0.55
     keywords:
-    - Schufa Eintrag löschen
-    - Negativeintrag entfernen
-    - Bonität verbessern
+    - Kfz Versicherung Wechselsaison
+    - Kfz Versicherung kündigen Frist
+    - Kfz Versicherung wechseln Januar
 live_web:
   enabled: false
   findings: []
