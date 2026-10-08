@@ -39,6 +39,7 @@ on:
       - "scripts/robustheits_gate.py"
       - "scripts/tests/test_robustheits_gate.py"
       - "tools/robust.test.mjs"
+      - "tools/ff-suche.test.mjs"
       - "data/robustheit_ausnahmen.yaml"
       - ".github/workflows/robustheit.yml"
   pull_request:
@@ -49,6 +50,7 @@ on:
       - "scripts/robustheits_gate.py"
       - "scripts/tests/test_robustheits_gate.py"
       - "tools/robust.test.mjs"
+      - "tools/ff-suche.test.mjs"
       - "data/robustheit_ausnahmen.yaml"
       - ".github/workflows/robustheit.yml"
   schedule:
@@ -95,8 +97,8 @@ jobs:
       - name: Quelle prüfen (R1–R13, ohne Build)
         run: python3 scripts/robustheits_gate.py --source-only
 
-      - name: Resilienzschicht im Browser-DOM testen (jsdom)
-        run: node --test tools/robust.test.mjs
+      - name: Resilienzschicht und Site-Suche im Browser-DOM testen (jsdom)
+        run: node --test tools/robust.test.mjs tools/ff-suche.test.mjs
 
       - name: Einheitstests der Wache
         run: python3 -m unittest scripts.tests.test_robustheits_gate
