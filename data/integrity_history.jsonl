@@ -258,3 +258,4 @@
 {"date": "2026-10-07", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/redaktions_standard.py"]}
 {"date": "2026-10-08", "kritisch": 2, "fest": 0, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html"]}
 {"date": "2026-10-08", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["layouts/_partials/head.html"]}
+{"date": "2026-10-08", "kritisch": 2, "fest": 3, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html", "scripts/lektor_guard.py", "scripts/lesbarkeit_heiler.py", "scripts/redaktions_standard.py"]}
