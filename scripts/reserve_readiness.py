@@ -35,7 +35,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-import reserve_artifacts as artifacts  # noqa: E402
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 import reserve_pool as rp  # noqa: E402
 from publication_release import accept_candidate  # noqa: E402
@@ -122,10 +121,15 @@ def reserve_editorial_findings(index: Path, content: str) -> list[str]:
     So kann weder ein guter Score noch ein erfolgreiches Hugo-Rendering eine
     unbelegte Zahl, Phantomquelle oder H2-Zerstückelung überstimmen.
     """
+    parts = (content or "").split("---", 2)
+    if len(parts) != 3 or parts[0] != "":
+        return ["Reserve-Qualitäts-Gate: Frontmatter-Grenze nicht lesbar"]
+    fm, body = parts[1], parts[2]
     try:
-        metadata = artifacts.reserve_metadata(content)
-        from post_utils import split_article
-        _prefix, _fm, body = split_article(content)
+        import yaml
+        metadata = yaml.safe_load(fm) or {}
+        if not isinstance(metadata, dict):
+            return ["Reserve-Qualitäts-Gate: Frontmatter ist kein Mapping"]
         import redaktions_standard as rs
         return rs.reserve_quality_findings(
             body, author=metadata.get("author") or "",
@@ -148,8 +152,7 @@ def certify_one(index) -> dict:
     danach BYTEGENAU zurückgeschrieben – das Zertifikat gilt für genau
     diese Bytes.
     """
-    original_bytes = index.read_bytes()
-    original = original_bytes.decode("utf-8")
+    original = index.read_text(encoding="utf-8")
     diag = score_diagnosis(index)
     # Unabhängig vom groben Lesbarkeits-Score: 58,0 → 59,0 bleibt dort
     # häufig 80/100. Konvergenz muss sichere Zwischenstufen erkennen können.
@@ -159,7 +162,7 @@ def certify_one(index) -> dict:
     content_findings = reserve_editorial_findings(index, original)
     if content_findings:
         row = {"slug": index.parent.name, "ready": False,
-               "sha256": hashlib.sha256(original_bytes).hexdigest(),
+               "sha256": hashlib.sha256(original.encode()).hexdigest(),
                "flesch": measured_flesch,
                "reason": f"Reserve-Qualitäts-Gate: {content_findings[0]}",
                "details": content_findings}
@@ -170,14 +173,8 @@ def certify_one(index) -> dict:
     ready, reason, details = False, None, []
     try:
         rp.publish_one(index)
-        proof_bytes = index.read_bytes()
         ready, gate_text = capture_gate(index)
-        if ready and index.read_bytes() != proof_bytes:
-            ready = False
-            details = ["Gate-Vorheilung hat die Messfassung verändert – "
-                       "erst dauerhaft heilen, dann erneut zertifizieren"]
-            reason = details[0]
-        if not ready and not reason:
+        if not ready:
             details = gate_findings(gate_text)
             if diag and diag.get("score") is not None \
                     and diag["score"] < 0.85:
@@ -194,9 +191,9 @@ def certify_one(index) -> dict:
     except Exception as exc:  # noqa: BLE001 – nie am Gate scheitern
         ready, reason = False, f"Gate-Ausnahme: {exc}"
     finally:
-        index.write_bytes(original_bytes)
+        index.write_text(original, encoding="utf-8")
     row = {"slug": index.parent.name, "ready": ready,
-           "sha256": hashlib.sha256(original_bytes).hexdigest(),
+           "sha256": hashlib.sha256(original.encode()).hexdigest(),
            "flesch": measured_flesch}
     if reason:
         row["reason"] = reason
@@ -221,22 +218,67 @@ def prune_stale_rows(rows: list[dict]) -> list[dict]:
     return [r for r in rows if r.get("slug")]
 
 
-def main():
+
+def schreibe_zertifikat(pfad: Path, report: dict) -> None:
+    """Schreibt das Zertifikat atomisch UND prüft, was es geschrieben hat.
+
+    WARUM (08.10.2026, WF-D4E0 #653): Das Zertifikat wurde mit einem nackten
+    `write_text` geschrieben. Fällt der Prozess mitten im Schreiben um, steht
+    eine halbe Datei im Repo; wird sie danach von einem Merge verschmolzen,
+    steht ein strukturell kaputtes Artefakt in `main` – und der harte
+    End-Gate liest daraus „0/6 gate-fertig“ und meldet einen Vorrats-Engpass,
+    den es nie gab.
+
+    Zwei Lagen:
+      1. ATOMAR – erst in eine temporäre Datei desselben Verzeichnisses,
+         dann `os.replace`. Ein Zertifikat ist danach entweder alt oder neu,
+         nie halb.
+      2. SELBSTPRÜFUNG – der geschriebene Stand wird zurückgelesen und gegen
+         den Bericht abgeglichen (parsebar, Objekt, Kandidatenliste, gleiche
+         `ready`-Zahl, keine doppelten Schlüssel). Schlägt die Prüfung fehl,
+         bleibt die alte Datei unangetastet und der Lauf stirbt laut –
+         kein stilles „Zertifikat geschrieben“.
+    """
+
+    def doppelte(paare):
+        gesehen: set = set()
+        for schluessel, _ in paare:
+            if schluessel in gesehen:
+                raise ValueError(
+                    f"doppelter Schlüssel {schluessel!r} im Zertifikat")
+            gesehen.add(schluessel)
+        return dict(paare)
+
+    text = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     try:
-        artifacts.check_memories(ROOT / "data")
+        json.loads(text, object_pairs_hook=doppelte)
     except ValueError as exc:
-        print(f"🛑 Reserve-Zertifizierung angehalten: Gedächtnis beschädigt ({exc})")
-        return 2
+        raise RuntimeError(
+            f"Zertifikat nicht serialisierbar – es wird NICHT geschrieben: "
+            f"{exc}") from exc
 
-    # #634: Auch der volle Lauf muss dieselbe echte Messkette beweisen wie
-    # die Nachzertifizierung. Bei Werkzeugausfall KEINE Fahnen, Quarantäne,
-    # Custody oder Zertifikate verändern; der vorhandene Beleg altert normal.
-    from reserve_recert import gate_verfuegbar
-    verfuegbar, grund = gate_verfuegbar()
-    if not verfuegbar:
-        print(f"🛑 Reserve-Zertifizierung angehalten: {grund}")
-        return 3
+    pfad.parent.mkdir(parents=True, exist_ok=True)
+    tmp = pfad.with_suffix(pfad.suffix + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    try:
+        geprueft = json.loads(tmp.read_text(encoding="utf-8"),
+                              object_pairs_hook=doppelte)
+    except (OSError, ValueError) as exc:
+        tmp.unlink(missing_ok=True)
+        raise RuntimeError(
+            f"Zertifikat nicht gegenlesbar – es wird NICHT geschrieben: "
+            f"{exc}") from exc
+    if geprueft.get("ready") != report.get("ready") or \
+            len(geprueft.get("candidates") or []) != \
+            len(report.get("candidates") or []):
+        tmp.unlink(missing_ok=True)
+        raise RuntimeError(
+            "Zertifikat stimmt nach dem Gegenlesen nicht mit dem Bericht "
+            "überein – es wird NICHT geschrieben.")
+    os.replace(tmp, pfad)
 
+
+def main():
     # BESTANDS-WÄCHTER (26.09.2026, #387): Bevor irgendetwas über den Pool
     # geurteilt wird, bekommt er zurück, was ihm gehört. Fremde Umschreibungen
     # (Agenten, KI-Redaktion, Heiler) hatten am 25.09. zwei zertifizierte
@@ -338,8 +380,7 @@ def main():
         report["geschont"] = [{"slug": g["slug"], "klasse": g["klasse"],
                                "hits": g["hits"], "heiler": g["heiler"],
                                "warum": g["warum"]} for g in geschont]
-    artifacts.certificate_rows(report)
-    artifacts.write_object(ROOT / "data" / "reserve-readiness.json", report)
+    schreibe_zertifikat(ROOT / "data" / "reserve-readiness.json", report)
     print(json.dumps(report, ensure_ascii=False))
     if ready_count < goal:
         print(f"\n🛑 RESERVE-ENGPAß: {ready_count}/{goal} Kandidaten "

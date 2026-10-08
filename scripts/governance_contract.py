@@ -342,6 +342,18 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Ohne Selbsttest im vertraglichen Minimum wäre genau dieser
           # Schließpfad wieder eine unbewachte Zeile.
           "publication_incident.py",
+          # Artefakt-Wächter (08.10.2026, WF-D4E0 #653): Sechs Nächte
+          # hintereinander meldete der harte End-Gate „0/6 gate-fertig“,
+          # obwohl der Vorrat voll war – `data/reserve-readiness.json` war
+          # durch ein Merge-Artefakt strukturell kaputt und niemand las es.
+          # Ein Maschinen-Artefakt, das niemand gegenliest, ist eine
+          # Behauptung: Die Wache prüft alle ~390 JSON/JSONL/YAML/Front-
+          # matter-Artefakte des Korpus auf Syntax, doppelte Schlüssel,
+          # Zeilenform und Konfliktmarker. Ihr --selftest friert jede
+          # Klasse mit Sabotage- und Negativproben ein, ihre
+          # --wirkungsprobe die Selbstheilung samt Idempotenz – ohne
+          # beides im Minimum wäre die Reparatur wieder nur eine Zusage.
+          "artefakt_waechter.py",
           # Manifest-Wache (WF-7B6B / #654, 08.10.2026): Ein Merge-Rest in
           # package.json (ungültiges JSON) hat den E2E-Lauf und danach zwei
           # Stunden lang jeden Produktions-Deploy rot gemacht – `npm ci` brach
@@ -1935,7 +1947,221 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                           python_bin=python_bin)
     checks += c32_doppelte_schluessel(
         script_texts, wflows, root=root, python_bin=python_bin)
+    checks += c33_artefakt_waechter(script_texts, wflows, root=root,
+                                    python_bin=python_bin)
     return checks
+
+
+# --- C33: Maschinen-Artefakte werden gegengelesen (WF-D4E0 #653) ------------
+# ---------------------------------------------------------------------------
+# Haus-Nummern: C24 ist die C24 Bank, C31 der Robustheits-Vertrag
+# (robustheits_gate.py) – C33 ist darum die nächste freie Nummer.
+# ---------------------------------------------------------------------------
+# Auslöser: Sechs Nächte hintereinander meldete der harte End-Gate der
+# Content-Reserve „🛑 RESERVE-ENGPAß: nur 0/6 Kandidaten gate-fertig“, und
+# in keiner dieser Nächte war der Vorrat leer. `data/reserve-readiness.json`
+# lag nach einem Merge als strukturell kaputtes JSON in main (zwei Stände
+# desselben Artefakts verschmolzen) und `data/reserve-quarantine.json`
+# gleich mit. Niemand las die Artefakte gegen – der End-Gate las daraus eine
+# „0“, und eine fehlgeschlagene Messung sah aus wie ein leerer Lagerbestand.
+# Die Folge war teurer als der Defekt: sechs Nächte Reparatur in die falsche
+# Richtung (KI-Keys, Themenmangel, Produktion), während die Ursache ein
+# halbes Artefakt war.
+#
+# Was der Vertrag verlangt:
+#   a) Eine Wache, die den Artefakt-Korpus prüft (Klassen A1–A6),
+#   b) fail-closed: sie rekonstruiert kein unlesbares Artefakt,
+#   c) Verdrahtung am PR-Pfad (ein kaputtes Artefakt darf nicht nach main)
+#      UND am Reserve-Lauf, letzteres NACH den heilenden Stufen,
+#   d) Ursachenklassen am End-Gate: „nicht gemessen“ ≠ „zu wenig Vorrat“,
+#   e) Siegel und Regressionstest – ein Vertrag ohne Test ist Prosa.
+C33_KLASSEN = ("A1", "A2", "A3", "A4", "A5", "A6")
+C33_PFLICHT_WF = ("integrity-lock.yml", "content-reserve.yml")
+
+
+def c33_artefakt_waechter(script_texts, wflows, root=BLOG_DIR,
+                          python_bin=None):
+    out = []
+    wache = script_texts.get("artefakt_waechter.py", "")
+    gate = script_texts.get("reserve_gate.py", "")
+    readiness = script_texts.get("reserve_readiness.py", "")
+    kerndateien = _read(os.path.join(root, "scripts", "integrity_guard.py"))
+    test = os.path.join(root, "scripts", "tests", "test_artefakt_waechter.py")
+
+    dateien: dict[str, str] = {}
+    for pfad, text in (wflows or {}).items():
+        dateien[os.path.basename(str(pfad))] = text
+
+    if not wache:
+        out.append(("C33", "scripts/artefakt_waechter.py fehlt – ohne die "
+                           "Wache ist „unsere Maschinen-Artefakte sind "
+                           "heil“ eine Behauptung, kein Zustand (#653, "
+                           "fail-closed)."))
+        return out
+
+    # a) Erkennung aller sechs Klassen. Eine Wache, die nur JSON prüft,
+    #    übersieht genau die Hälfte: A6 (Frontmatter) ist die Klasse, an
+    #    der Hugo beim Bauen stirbt, und A4 (Konfliktmarker) die, die ein
+    #    Merge hinterlässt.
+    for klasse in C33_KLASSEN:
+        if klasse not in wache:
+            out.append(("C33", f"scripts/artefakt_waechter.py: Klasse {klasse} "
+                               "fehlt – eine Wache, die eine Klasse nicht "
+                               "kennt, meldet für sie Grün (#653)."))
+
+    # b) Selbsttest und Wirkungsprobe: eine Wache, deren Behauptungen
+    #    niemand nachstellt, ist Dekoration (C25-Logik, sinngemäß).
+    for flagge, feld, sinn in (("--selftest", "args.selftest",
+                                "der Beweis der Erkennung"),
+                               ("--wirkungsprobe", "args.wirkungsprobe",
+                                "der Beweis der Heilung"),
+                               ("--heal", "args.heal",
+                                "die Selbstheilung")):
+        if flagge not in wache:
+            out.append(("C33", f"scripts/artefakt_waechter.py: {flagge} fehlt "
+                               f"– ohne {sinn} bleibt die Wache eine Zusage."))
+        elif feld not in wache:
+            out.append(("C33", f"scripts/artefakt_waechter.py: {flagge} ist "
+                               "nicht ausgewertet – eine Flagge, die niemand "
+                               "liest, ist Papier (#653)."))
+
+    # c) FAIL-CLOSED: Ein nicht mehr lesbares Artefakt zu rekonstruieren
+    #    hieße, Inhalt zu erfinden. Die Wache darf nur A2 heilen (doppelte
+    #    Schlüssel: der letzte Eintrag gewinnt, mit Gegenprobe).
+    if "heile(" in wache and "A1" not in wache.split("def heile(")[-1][:900]:
+        if "nicht mehr lesbar" not in wache and "rekonstru" not in wache.lower():
+            out.append(("C33", "scripts/artefakt_waechter.py: die Heilung "
+                               "begründet nicht, warum sie unlesbare "
+                               "Artefakte auslässt – rekonstruierter Inhalt "
+                               "wäre erfunden (#653, fail-closed)."))
+
+    # d) C6: Ohne Selbsttest im vertraglichen Minimum führt die Wache
+    #    irgendwann niemand aus (Befund C).
+    if "artefakt_waechter.py" not in GUARDS:
+        out.append(("C33", "scripts/artefakt_waechter.py steht nicht in "
+                           "governance_contract.GUARDS – ohne den Zwang zum "
+                           "Selbsttest im Minimum verstummt die Wache "
+                           "(C6, #653)."))
+
+    # e) Verdrahtung: der PR-Pfad UND der Reserve-Lauf.
+    for name in C33_PFLICHT_WF:
+        text = dateien.get(name, "")
+        if not text:
+            out.append(("C33", f".github/workflows/{name} fehlt – das "
+                               "Artefakt-Siegel hat keinen Ort, an dem es "
+                               "verlangt wird (#653)."))
+        elif "scripts/artefakt_waechter.py" not in text:
+            out.append(("C33", f".github/workflows/{name} ruft den "
+                               "Artefakt-Wächter nicht – ein strukturell "
+                               "kaputtes Maschinen-Artefakt bliebe "
+                               "unbemerkt (#653)."))
+
+    # f) REIHENFOLGE im Reserve-Lauf: ERST heilen (Stufe 3 schreibt das
+    #    Zertifikat neu), DANN urteilen. Ein am Lauf-Anfang platzierter
+    #    Wächter würde die Stufe abschalten, die seinen eigenen Fund heilt
+    #    – genau das war der Fehler der übersprungenen Stufen 1–3.
+    reserve = dateien.get("content-reserve.yml", "")
+    if reserve and "scripts/artefakt_waechter.py" in reserve:
+        i_wache = reserve.rindex("scripts/artefakt_waechter.py")
+        i_stufe3 = reserve.find("scripts/reserve_readiness.py")
+        if i_stufe3 < 0 or i_wache < i_stufe3:
+            out.append(("C33", "content-reserve.yml: der Artefakt-Wächter "
+                               "steht VOR der Zertifizierung – er würde die "
+                               "Stufe überspringen, die seinen Fund heilt "
+                               "(#653). Reihenfolge: heilen, dann urteilen."))
+        if "artefakt_waechter.py --selftest" not in reserve:
+            out.append(("C33", "content-reserve.yml: der Selbsttest des "
+                               "Artefakt-Wächters läuft nicht mit – eine "
+                               "Wache, die ihren eigenen Beweis nicht führt, "
+                               "kann still erblinden (#653)."))
+        if "if: ${{ !cancelled() }}" not in reserve:
+            out.append(("C33", "content-reserve.yml: dem Artefakt-Schritt "
+                               "fehlt `!cancelled()` – als harter Fehler "
+                               "würde er den Lauf abbrechen, statt den "
+                               "Befund zu sichern (#653)."))
+
+    # g) Stufe 3 (Zertifizierung) muss IMMER laufen. Sie schreibt das
+    #    Artefakt, aus dem der End-Gate urteilt – wird sie übersprungen,
+    #    liest er den Stand der VORNACHT und gibt ihn als diese Nacht aus.
+    if reserve:
+        # Der Stufen-Block wird am Schritt-NAMEN gesucht, nicht am bloßen
+        # Vorkommen von „Stufe 3“: Der Name steht im Kommentar einer ANDEREN
+        # Stufe und hätte die Prüfung sonst auf den falschen Block gelenkt
+        # (die Regel fände eine Bedingung, die sie gar nicht meint).
+        treffer = re.search(
+            r"^      - name:[^\n]*Stufe 3[^\n]*\n(.*?)(?=^      - name:|\Z)",
+            reserve, re.S | re.M)
+        if not treffer:
+            out.append(("C33", "content-reserve.yml: Stufe 3 "
+                               "(Zertifizierung) fehlt – ohne sie gibt es "
+                               "keine Messung, nur ein altes Artefakt "
+                               "(#653)."))
+        else:
+            block = treffer.group(1)
+            if "steps.wachen.conclusion" in block:
+                out.append(("C33", "content-reserve.yml: Stufe 3 hängt am "
+                                   "Wachen-Selbsttest – die Messung wird "
+                                   "dann übersprungen und der End-Gate liest "
+                                   "den Stand der VORNACHT als diese Nacht "
+                                   "(#653)."))
+            elif "!cancelled()" not in block:
+                out.append(("C33", "content-reserve.yml: Stufe 3 hat keine "
+                                   "eigene Lauf-Bedingung – eine übersprungene "
+                                   "Messung darf nie als Vorrats-Urteil "
+                                   "aussehen (#653)."))
+
+    # h) Ursachenklassen am End-Gate: „nicht gemessen“ darf nicht als
+    #    „zu wenig Vorrat“ gemeldet werden. Genau diese Verwechslung hat
+    #    #653 sechs Nächte lang die Reparatur in die falsche Richtung
+    #    geschickt.
+    if not gate:
+        out.append(("C33", "scripts/reserve_gate.py fehlt – ohne ihn gibt es "
+                           "keinen Ort, an dem eine Messung von einem "
+                           "Vorrats-Urteil zu unterscheiden wäre (#653)."))
+    else:
+        for marke, sinn in (("def zertifikat_lage(", "die Klasse des Zertifikats"),
+                            ("KLASSE_ARTEFAKT", "die Klasse „nicht gemessen“"),
+                            ("KLASSE_KETTE", "die Klasse „Kette übersprungen“"),
+                            ("def ketten_lage(", "die Lage der Kette")):
+            if marke not in gate:
+                out.append(("C33", f"scripts/reserve_gate.py: {marke} fehlt – "
+                                   f"ohne {sinn} sieht eine fehlgeschlagene "
+                                   "Messung wieder wie ein leerer Vorrat aus "
+                                   "(#653)."))
+        if "RESERVE_STUFE3_STATUS" not in gate:
+            out.append(("C33", "scripts/reserve_gate.py liest die Ketten-Lage "
+                               "nicht aus der Umgebung – ohne sie kann der "
+                               "Lauf nicht wissen, dass seine Messung "
+                               "übersprungen wurde (#653)."))
+
+    # i) Der Schreiber prüft, was er geschrieben hat: atomar und mit
+    #    Gegenprobe. Ein Zertifikat ist danach entweder alt oder neu, nie
+    #    halb – und ein halbes hätte niemand bemerkt (#653).
+    if not readiness:
+        out.append(("C33", "scripts/reserve_readiness.py fehlt – ohne den "
+                           "Schreiber gibt es kein Zertifikat (#653)."))
+    else:
+        for marke, sinn in (("def schreibe_zertifikat(",
+                             "das atomische Schreiben"),
+                            ("os.replace(", "der unteilbare Tausch"),
+                            ("object_pairs_hook",
+                             "die Gegenprobe auf doppelte Schlüssel")):
+            if marke not in readiness:
+                out.append(("C33", f"scripts/reserve_readiness.py: {marke} "
+                                   f"fehlt – ohne {sinn} kann ein halbes "
+                                   "Artefakt im Repo stehen (#653)."))
+
+    # j) Siegel und Regressionstest: eine Wache, die man löschen darf,
+    #    ohne dass irgendwo etwas rot wird, ist eine Empfehlung.
+    if "artefakt_waechter.py" not in kerndateien:
+        out.append(("C33", "scripts/artefakt_waechter.py steht nicht unter "
+                           "dem Integritäts-Siegel – als ungesiegelte Datei "
+                           "könnte die Wache still verändert werden (#653)."))
+    if not os.path.exists(test):
+        out.append(("C33", "scripts/tests/test_artefakt_waechter.py fehlt – "
+                           "ohne Regressionstest ist dieser Vertrag Prosa "
+                           "(#653)."))
+    return out
 
 
 # --- C25: Deckung heißt Wirkung (WACHE-609, 07.10.2026)
@@ -3195,6 +3421,18 @@ RULE_TEXT = {
            "gemessenen Montag nur mit 1/2 trug – der unbenannte Sammel-Schritt "
            "erzeugte das generische Wartungs-Issue #611 mit API-Key-Runbook, "
            "obwohl der Fachkanal existierte.",
+    "C33": "Maschinen-Artefakte werden gegengelesen, bevor sie bewertet werden: "
+           "data/**/*.json, *.jsonl, *.yaml und das Frontmatter aller Inhalte "
+           "müssen parsebar, schlüsseleindeutig und frei von Konfliktmarkern "
+           "sein – `artefakt_waechter.py` prüft das als Wache im vertraglichen "
+           "Minimum, am PR-Pfad hart und im Reserve-Lauf NACH der Stufe, die "
+           "das Zertifikat neu schreibt (erst heilen, dann urteilen). Wer das "
+           "Zertifikat schreibt, schreibt es atomar und liest es gegen. Wer es "
+           "liest, unterscheidet eine fehlgeschlagene Messung von einem leeren "
+           "Vorrat: Am 08.10.2026 meldete der harte End-Gate sechs Nächte lang "
+           "\u201e0/6 gate-fertig\u201c, weil ein Merge zwei Zertifikatsstände "
+           "verschmolzen hatte – die Reparatur lief sechs Nächte in die falsche "
+           "Richtung (WF-D4E0, #653).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -3219,8 +3457,11 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C32": "Doppelte Mapping-Schluessel (Hugo-Abbruch, verdeckt fuer "
                 "PyYAML) – erkennen vor dem Kurzschluss, heilen vor dem Build",
          "C30": "Eine Seite hat genau eine H1 (Quelle + Build, kein toter "
-                "Zweig, Audit ohne Stichprobe; Stufe 2: Markdown-Wahrheit, "
-                "H1-Inventar, Blätterseiten geprüft)"}
+                "Zweig, Audit ohne Stichprobe)",
+         # C31 ist der Robustheits-Vertrag (robustheits_gate.py) – die
+         # nächste freie Nummer nach C32 ist deshalb C33.
+         "C33": "Maschinen-Artefakte werden gegengelesen (kein Artefakt-"
+                "Defekt sieht mehr aus wie ein leerer Vorrat)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -4197,12 +4438,85 @@ def _selftest():
             if "nach main tragen" in f[1] or "--check" in f[1]]:
         failures.append("C32: ein PR-Pfad ohne fail-closed FM-Pruefung bleibt "
                         "unentdeckt (#643).")
+    # --- C33: Maschinen-Artefakte werden gegengelesen (#653) ---------------
+    # Der echte Baum muss still bleiben; jede Sabotage muss GENAU ihren Zweig
+    # treffen. Sechs Nächte „0/6 gate-fertig“ bei vollem Vorrat waren der
+    # Preis dafür, dass niemand die Artefakte gegenlas.
+    c33_dateien = ("artefakt_waechter.py", "reserve_gate.py",
+                   "reserve_readiness.py")
+    echte_c33 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in c33_dateien}
+    if c33_artefakt_waechter(echte_c33, wflows_echt,
+                             python_bin=sys.executable or "python3"):
+        failures.append(f"C33: der echte Zustand wird beanstandet: "
+                        f"{c33_artefakt_waechter(echte_c33, wflows_echt, python_bin=sys.executable or 'python3')}")
+    # (a) Eine Klasse fällt aus dem Prüfpfad: JSONL-Fehler blieben wieder
+    #     unsichtbar – genau die Hälfte der Wahrheit, die #653 verschwieg.
+    ohne_a3 = dict(echte_c33, **{
+        "artefakt_waechter.py": echte_c33["artefakt_waechter.py"].replace(
+            "A3", "A9")})
+    if not [f for f in c33_artefakt_waechter(
+            ohne_a3, wflows_echt, python_bin=sys.executable or "python3")
+            if "A3" in f[1]]:
+        failures.append("C33: eine fehlende Artefakt-Klasse bleibt unentdeckt "
+                        "(#653).")
+    # (b) Der PR-Pfad verliert den Wächter: ein strukturell kaputtes
+    #     Artefakt könnte wieder unbemerkt nach main wandern.
+    ohne_pr33 = dict(wflows_echt)
+    for pfad in list(ohne_pr33):
+        if os.path.basename(pfad) == "integrity-lock.yml":
+            ohne_pr33[pfad] = ohne_pr33[pfad].replace(
+                "python3 scripts/artefakt_waechter.py",
+                "# Wächter entfernt")
+    if not [f for f in c33_artefakt_waechter(
+            echte_c33, ohne_pr33, python_bin=sys.executable or "python3")
+            if "integrity-lock.yml" in f[1]]:
+        failures.append("C33: ein PR-Pfad ohne Artefakt-Wächter bleibt "
+                        "unentdeckt (#653).")
+    # (c) Die Zertifizierung hängt wieder am Wachen-Selbsttest: die Messung
+    #     wird übersprungen und der End-Gate liest die VORNACHT als heute.
+    stufe3_gegängt = dict(wflows_echt)
+    for pfad in list(stufe3_gegängt):
+        if os.path.basename(pfad) == "content-reserve.yml":
+            stufe3_gegängt[pfad] = stufe3_gegängt[pfad].replace(
+                "        if: ${{ !cancelled() }}\n        continue-on-error: true\n"
+                "        run: python3 scripts/reserve_readiness.py",
+                "        if: ${{ !cancelled() && steps.wachen.conclusion != 'failure' }}\n"
+                "        continue-on-error: true\n"
+                "        run: python3 scripts/reserve_readiness.py")
+    if not [f for f in c33_artefakt_waechter(
+            echte_c33, stufe3_gegängt,
+            python_bin=sys.executable or "python3")
+            if "Stufe 3" in f[1]]:
+        failures.append("C33: eine am Wachen-Selbsttest hängende "
+                        "Zertifizierung bleibt unentdeckt (#653).")
+    # (d) Der End-Gate verliert die Ursachenklassen: eine fehlgeschlagene
+    #     Messung sieht wieder aus wie ein leerer Vorrat.
+    ohne_klassen = dict(echte_c33, **{
+        "reserve_gate.py": echte_c33["reserve_gate.py"].replace(
+            "def zertifikat_lage(", "def _entfernt_zertifikat_lage(")})
+    if not [f for f in c33_artefakt_waechter(
+            ohne_klassen, wflows_echt,
+            python_bin=sys.executable or "python3")
+            if "zertifikat_lage" in f[1]]:
+        failures.append("C33: ein End-Gate ohne Ursachenklassen bleibt "
+                        "unentdeckt (#653).")
+    # (e) Der Schreiber schreibt wieder unteilbar-falsch: ein halbes
+    #     Zertifikat stünde wieder im Repo.
+    ohne_atomar = dict(echte_c33, **{
+        "reserve_readiness.py": echte_c33["reserve_readiness.py"].replace(
+            "os.replace(", "os.rename(")})
+    if not [f for f in c33_artefakt_waechter(
+            ohne_atomar, wflows_echt, python_bin=sys.executable or "python3")
+            if "os.replace" in f[1]]:
+        failures.append("C33: ein nicht atomar schreibender Zertifikats-"
+                        "Schreiber bleibt unentdeckt (#653).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C32 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C33 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

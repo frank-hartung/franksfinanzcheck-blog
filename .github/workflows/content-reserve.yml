@@ -260,6 +260,7 @@ jobs:
       # und meldet es als Befund, wenn ein Selbsttest den Arbeitsbaum
       # schreibt (C15). Kosten: ~1 Minute in einem 120-Minuten-Lauf.
       - name: Selbsttests aller Wachen (entdeckt, uhrfest, schreibfrei)
+        id: wachen
         run: |
           set -o pipefail
           python3 scripts/selftest_runner.py | tee selbsttests.log
@@ -301,8 +302,24 @@ jobs:
 
       # ================= RUNDE 1 =================
       # Stufe 1 – PRODUKTION
+      #
+      # REPARATUR 08.10.2026 (WF-D4E0 #653): Diese Stufe trug als einzige
+      # Kandidaten-Stufe KEIN `if: !cancelled()`. Fiel irgendein Schritt
+      # davor aus (an diesem Tag der Wachen-Selbsttest), wurden ausgerechnet
+      # Produktion, Veredelung UND Zertifizierung übersprungen – während
+      # Janitor, Konvergenz, Triage, Chronik und End-Gate weiterliefen. Der
+      # Lauf arbeitete 43 Minuten weiter und nahm der Nacht genau die Stufen,
+      # die den Befund hätten heilen können.
+      #   * Stufe 1/2 SCHREIBEN Inhalt: sie bleiben am roten Wachen-Selbsttest
+      #     hängen (Sabotageschutz – eine Wache, die ihren Selbsttest nicht
+      #     besteht, darf keinen Inhalt anfassen). Neu ist nur, dass die
+      #     Bedingung jetzt AUSGESPROCHEN ist statt eine still wirkende
+      #     Nebenregel von GitHub Actions.
+      #   * Stufe 3 MISST: sie läuft ab jetzt IMMER (siehe dort) – eine
+      #     übersprungene Messung darf nie als Vorrats-Urteil aussehen.
       - name: Stufe 1 – Kandidaten erzeugen (nur bei echtem Bedarf)
         id: stock
+        if: ${{ !cancelled() && steps.wachen.conclusion != 'failure' }}
         continue-on-error: true
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -311,9 +328,10 @@ jobs:
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
         run: python3 scripts/engine_generate.py --reserve-only
 
-      # Stufe 2 – VEREDELUNG
+      # Stufe 2 – VEREDELUNG (schreibend – Sabotageschutz wie Stufe 1)
       - name: Stufe 2 – Kandidaten veredeln (Phase-2/3-Kette, nur Pool)
         id: finish
+        if: ${{ !cancelled() && steps.wachen.conclusion != 'failure' }}
         continue-on-error: true
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -323,8 +341,23 @@ jobs:
         run: python3 scripts/reserve_finisher.py --finish
 
       # Stufe 3 – ZERTIFIZIERUNG
+      #
+      # REPARATUR 08.10.2026 (WF-D4E0 #653) – DIE MESSUNG LÄUFT IMMER:
+      #   Diese Stufe schreibt `data/reserve-readiness.json`, also genau das
+      #   Artefakt, aus dem der harte End-Gate urteilt. Wird sie übersprungen,
+      #   liest der End-Gate den Stand der VORNACHT und meldet ihn als diesen
+      #   Lauf. Am 08.10.2026 war dieses Artefakt zusätzlich durch ein
+      #   Merge-Artefakt strukturell kaputt – die Stufe hätte es neu
+      #   geschrieben und den Lauf geheilt, lief aber nicht, weil der
+      #   Wachen-Selbsttest rot war. Ergebnis: sechs rote Nächte mit
+      #   derselben, falschen Diagnose „0/6 gate-fertig“.
+      #   Messen ist lesend gegenüber der Entscheidung: Auch bei rotem
+      #   Wachen-Selbsttest wird zertifiziert, damit der End-Gate eine
+      #   AKTUELLE Zahl hat. Er bleibt trotzdem rot – nur mit der
+      #   Ursachenklasse WACHEN statt der erfundenen Vorrats-Lüge.
       - name: Stufe 3 – Reife durch Produktions-Gates beweisen
         id: readiness
+        if: ${{ !cancelled() }}
         continue-on-error: true
         run: python3 scripts/reserve_readiness.py
 
@@ -379,6 +412,35 @@ jobs:
             || echo "::warning::Triage-Tabelle nicht schreibbar – Details im Log"
           python3 scripts/draft_triage.py --check-decisions \
             || echo "::warning::Reife Entwürfe verfallen oder Quellen sind defekt – Liste in der Lauf-Zusammenfassung"
+
+      # ================= ARTEFAKT-WACHE (#653) =================
+      # Ein Merge kann zwei Stände desselben Maschinen-Artefakts
+      # verschmelzen: `data/reserve-readiness.json` stand am 08.10.2026 als
+      # strukturell kaputtes JSON in main (doppelte Schlüssel, halbe
+      # Blöcke), `data/reserve-quarantine.json` gleich mit. Niemand prüfte
+      # das – der End-Gate las daraus „0/6 gate-fertig“ und sechs Nächte
+      # lang hieß die Diagnose „Vorrats-Engpass“.
+      #
+      # Reihenfolge ist die halbe Reparatur:
+      #   * ERST heilen (Stufe 3 schreibt Zertifikat und Quarantäne neu),
+      #   * DANN urteilen (diese Wache).
+      # Darum steht sie bewusst NACH der Konvergenz und nicht am Anfang:
+      # Ein am Anfang roter Wächter würde die Stufe abschalten, die den Fund
+      # heilt – genau das war der Fehler der übersprungenen Stufen 1–3.
+      #
+      # `--heal` repariert ausschließlich doppelte JSON-Schlüssel (letzter
+      # Eintrag gewinnt, mit Gleichheits-Gegenprobe). Alles andere bleibt
+      # bewusst unangetastet: Ein nicht mehr lesbares Artefakt zu
+      # rekonstruieren hieße, Inhalt zu erfinden.
+      - name: Artefakt-Wächter (Maschinen-Artefakte strukturell heil)
+        id: artefakte
+        if: ${{ !cancelled() }}
+        run: |
+          set -o pipefail
+          python3 scripts/artefakt_waechter.py --selftest
+          python3 scripts/artefakt_waechter.py --heal | tee artefakte.log
+          python3 scripts/artefakt_waechter.py --md \
+            >> "${GITHUB_STEP_SUMMARY:-/dev/null}" 2>/dev/null || true
 
       # WF-D4E0 (#612): Die Chronik gehört VOR den Sicherungs-Commit. Bis
       # hierher schrieb sie der harte End-Gate – also NACH dem einzigen
@@ -446,8 +508,19 @@ jobs:
           fi
 
       # ================= HARTES END-GATE =================
+      # ================= HARTES END-GATE =================
+      # WF-D4E0 (#653): Der End-Gate bekommt die LAGE DER KETTE mit. Ohne sie
+      # konnte er nicht zwischen „zu wenig Vorrat“ und „nicht gemessen“
+      # unterscheiden – und meldete beides als „RESERVE-ENGPAß: 0/6“. Die
+      # Zahlen unten sind also kein Urteil über den Vorrat, wenn die Kette
+      # eine messende Stufe übersprungen hat; das Gate sagt das dann selbst.
       - name: Stock shortage must not look successful
         if: ${{ !cancelled() }}
+        env:
+          RESERVE_WACHEN_ROT: ${{ steps.wachen.conclusion == 'failure' && '1' || '0' }}
+          RESERVE_STUFE1_STATUS: ${{ steps.stock.conclusion || 'skipped' }}
+          RESERVE_STUFE2_STATUS: ${{ steps.finish.conclusion || 'skipped' }}
+          RESERVE_STUFE3_STATUS: ${{ steps.readiness.conclusion || 'skipped' }}
         run: python3 scripts/reserve_gate.py
 
       # Der Watchdog startet die Reserve bei einem Engpass asynchron. Vorher

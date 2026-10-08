@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T16:34:02.630622+00:00",
-  "head": "67e9f0c",
+  "signed_at": "2026-10-08T18:44:31.459536+00:00",
+  "head": "21e1defa",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -24,6 +24,7 @@
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
     "scripts/affiliate_integrity_gate.py": "d40139ed377cfe976e2a0f652b5cf3ec47cff3f55e9cee6f8a044142bcdf247b",
     "scripts/affiliate_marketer.py": "0c61e9822be05958657799a62de52826226fc4ba36ddea124b720f6ff47ae9e1",
+    "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
     "scripts/brand_guard.py": "caad0d0abcf8506158218e4e7b51a97b35aec83aedf0055f9f653e9bc7ca5ba7",
@@ -42,7 +43,6 @@
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
     "scripts/redaktions_standard.py": "410c65072122855850620a63c4e51147541fbfc6423fa87121187b1af65b305c",
-    "scripts/reserve_artifacts.py": "291dea98a703c2c1d19de91f4cbd2c6a2df33b914d07ad4aba793aa0d68ec652",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
@@ -52,7 +52,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "edc75ae646380b82b53ba4a77aa5604e579a0daf7e0a9eb0d8c5fb744d1a5517",
+  "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -430,46 +430,74 @@
     },
     {
       "date": "2026-10-08",
-      "art": "set-current",
-      "head": "67e9f0c",
+      "art": "repair",
+      "head": "de04097",
+      "geaendert": [],
+      "quelle": {
+        "art": "git-historie",
+        "beschreibung": "jüngste gültige Fassung der Historie (1a6a490d, fix(a11y): H1-Wache Stufe 2 – Markdown-Wahrheit, H1-Inventar)",
+        "commit": "1a6a490d",
+        "geborgene_akteneintraege": 8
+      },
+      "beschaedigung": {
+        "zustand": "beschaedigt",
+        "groesse": 18096,
+        "offset": 17125,
+        "verdacht": "zusammenschnitt",
+        "detail": [
+          "JSON nicht lesbar: Expecting ',' delimiter: line 413 column 7 (char 17125)",
+          "Bruchstelle: Byte 17125 von 18096 (Zeile 413)",
+          "Hinter der Bruchstelle steht der Rest einer ANDEREN Fassung – Muster: zwei Stände wurden zusammengesetzt (Merge-Konflikt in einer Maschinendatei)."
+        ]
+      },
+      "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
+      "prev_sha256": "5662ac9efa7de034b4224f2a8d514729ed933559d2ea2fe127d0e66073e0141f"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "add",
+      "head": "de04097",
       "geaendert": [
-        "scripts/lesbarkeit_heiler.py",
-        "scripts/reserve_artifacts.py"
+        "scripts/artefakt_waechter.py"
       ],
       "herkunft": [
         {
-          "pfad": "scripts/lesbarkeit_heiler.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "fe308d0",
-              "datum": "2026-10-08",
-              "betreff": "chore(integration): aktuellen Main-Stand mit Reserve-Dauerheilung vereinen"
-            },
-            {
-              "sha": "132373c",
-              "datum": "2026-10-08",
-              "betreff": "fix(reserve): sechs Premium-Entwürfe dauerhaft gegen Belegkorruption sichern (#634)"
-            },
-            {
-              "sha": "8f9344a",
-              "datum": "2026-10-08",
-              "betreff": "Centralize legacy AI transports and add manual Gemini probe (#655)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/reserve_artifacts.py",
+          "pfad": "scripts/artefakt_waechter.py",
           "klasse": "fest",
           "urteil": "NEU UNTER SIEGEL",
           "commits": [],
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "5662ac9efa7de034b4224f2a8d514729ed933559d2ea2fe127d0e66073e0141f",
-      "files_sha256": "edc75ae646380b82b53ba4a77aa5604e579a0daf7e0a9eb0d8c5fb744d1a5517"
+      "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01",
+      "prev_sha256": "17cf8e0a9ef6038e0c00d797a518adfa2bc62adebeb015743c09a7bb87dfe515"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "1711970b",
+      "geaendert": [
+        "scripts/lesbarkeit_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
+      "prev_sha256": "1b3a8c17aedc07df5bf1671cc1bad97fe3c8385ca6fb87a099dd54f7571b9e25"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "21e1defa",
+      "geaendert": [],
+      "prev_sha256": "5e5d3197fe10c9d5b87d9dcdf11e6ef2802ae1ea77f2dda5874306498e1beddc",
+      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292"
     }
   ]
 }

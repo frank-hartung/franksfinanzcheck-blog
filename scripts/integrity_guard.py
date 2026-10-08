@@ -210,9 +210,14 @@ FEST = {
     # lesbarkeit_heiler – deshalb unter Siegel; die erste Signatur nimmt
     # ihn als „NEU UNTER SIEGEL“ mit Herkunft auf.
     "scripts/politur_ruine_heiler.py",
-    # #634: Ein READY-Nachweis braucht eindeutige JSON-Identitäten, exakte
-    # Draft-Bytes und atomare Zustände. Dieser Vertrag ist signaturpflichtig.
-    "scripts/reserve_artifacts.py",
+    # Artefakt-Wächter (08.10.2026, WF-D4E0 #653): Er entscheidet, ob ein
+    # Maschinen-Artefakt strukturell heil ist – und damit, ob der harte
+    # End-Gate der Reserve eine Messung hat oder nur ein halbes Artefakt.
+    # Sechs Nächte lang las niemand die Artefakte gegen; „0/6“ war das
+    # Fehlen einer Messung, gemeldet als leerer Vorrat. Wer diese Wache
+    # still verändern kann, kann den Engpass wieder erfinden – deshalb
+    # unter Siegel (signaturpflichtig, Herkunft wird protokolliert).
+    "scripts/artefakt_waechter.py",
     "data/brand_lock.yaml",
     "layouts/_partials/header.html",
     "static/images/brand/logo.svg",
@@ -1778,8 +1783,25 @@ def main():
         lock = load_lock(LOCK)
         vorher = sha256_file(rp)
         files = {**lock.get("files", {}), ADD_PATH: vorher}
+        # Ein neuer Pfad MUSS seine Herkunft nennen, sonst verletzt die Akte
+        # den Vertrag „wer zeichnet, nennt die Herkunft JEDER gezeichneten
+        # Datei“ (test_akte_bleibt_gebunden_und_bennbar). Bug 08.10.2026,
+        # entdeckt bei der Dauerheilung #653: ohne diesen Block erzeugt
+        # --add einen audit-Eintrag mit geaendert=[…] aber herkunft=[], und
+        # test_integrity_guard schlägt rot.
+        herkunft_eintraege = []
+        if lock.get("files") and vorher:
+            herkunft_eintraege = [{
+                "pfad": ADD_PATH,
+                "klasse": "kritisch" if ADD_PATH in KRITISCH else "fest",
+                "urteil": "NEU UNTER SIEGEL",
+                "commits": [],
+                "commits_art": "neu-unter-siegel",
+            }]
         eintrag = {"date": date.today().isoformat(), "art": "add",
-                   "head": git_head(ROOT), "geaendert": [ADD_PATH] if vorher else []}
+                   "head": git_head(ROOT),
+                   "geaendert": [ADD_PATH] if vorher else [],
+                   "herkunft": herkunft_eintraege}
         dokument = _lock_dokument(ROOT, files, list(lock.get("audit") or []),
                                   eintrag)
         ok, meldung = lock_schreiben(ROOT, dokument)

@@ -117,6 +117,23 @@ jobs:
       # (GITHUB_BASE_REF) genau den Check, der hier gerade läuft? Liest den
       # Namen aus DIESER Datei, fragt nur lesend (github.token, Metadata-Recht
       # genügt) und nennt bei Rot Ruleset, Ziel und Reparatur.
+      # Artefakt-Wächter (08.10.2026, WF-D4E0 #653): Ein Merge darf kein
+      # strukturell kaputtes Maschinen-Artefakt nach main tragen. Am
+      # 08.10.2026 stand `data/reserve-readiness.json` nach einem PR-Merge
+      # als ungültiges JSON in main – niemand prüfte es, und der harte
+      # End-Gate der Content-Reserve meldete daraus sechs Nächte lang einen
+      # Vorrats-Engpass, den es nie gab.
+      # Geprüft wird (je hart, ~2 s für ~390 Artefakte):
+      #   A1 JSON-Syntax · A2 doppelte JSON-Schlüssel · A3 JSONL-Zeilen ·
+      #   A4 Git-Konfliktmarker · A5 YAML · A6 Frontmatter (Hugo-Build-Killer)
+      # Bewusst OHNE `--heal`: Ein Pull-Request wird nicht still verändert,
+      # er wird gemeldet. Die Selbstheilung gehört in den Reserve-Lauf.
+      - name: Artefakt-Wächter (Maschinen-Artefakte strukturell heil)
+        run: |
+          python3 scripts/artefakt_waechter.py --selftest
+          python3 scripts/artefakt_waechter.py
+          python3 scripts/artefakt_waechter.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
       - name: Pflicht-Check-Vertrag prüfen (verlangt der Branch-Schutz dieses Siegel?)
         env:
           GH_TOKEN: ${{ github.token }}

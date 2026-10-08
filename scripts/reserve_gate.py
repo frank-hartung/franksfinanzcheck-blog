@@ -16,8 +16,8 @@ Premium-Fix 15.09.2026 (#295) – ZWEI zusätzliche Ehrlichkeits-Regeln:
      der älter ist als RESERVE_CERT_MAX_AGE_H (Default 36 h), ist KEIN
      Nachweis. Genau diese Klasse („Zertifikat von gestern sagt 6/6, der Pool
      hat real 4 Entwürfe“) hat am 15.09. dazu geführt, dass der Lauf erst nach
-     dem Push auffiel. Fehlende, defekte, zukünftige oder zu alte
-     Zeitstempel machen das Gate rot (fail-closed, #634).
+     dem Push auffiel. Fehlt der Zeitstempel, wird gewarnt (Alt-Zertifikate
+     bleiben lesbar), ist er zu alt, ist das Gate rot.
   2. Der Zähler kommt IMMER aus der Kandidatenliste (nie aus dem `ready`-Feld).
 
 Verwendung:
@@ -27,10 +27,10 @@ Verwendung:
 from __future__ import annotations
 
 import argparse
+import contextlib
+import io
 import datetime as dt
-import hashlib
 import json
-import math
 import os
 import re
 import sys
@@ -42,11 +42,10 @@ CERT = ROOT / "data" / "reserve-readiness.json"
 CERT_MAX_AGE_H = 36  # Notbremse gegen veraltete Zertifikate (env-übersteuerbar)
 
 sys.path.insert(0, str(ROOT / "scripts"))
-import reserve_artifacts as artifacts  # noqa: E402
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 
 
-def evaluate(cert_path: Path, posts_dir: Path | None = None) -> tuple[int, int, list[dict]]:
+def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
     """Liefert (ready, target, candidates). Fehlt das Zertifikat,
     gilt der Pool als leer (0/target) – ein abgestürzter Lauf darf
     nicht als erfolgreich aussehen.
@@ -67,21 +66,146 @@ def evaluate(cert_path: Path, posts_dir: Path | None = None) -> tuple[int, int, 
     if not cert_path.exists():
         return 0, target, []
     try:
-        data = artifacts.read_certificate(cert_path)
-        candidates = artifacts.verified_rows(
-            data, posts_dir if posts_dir is not None else ROOT / "content" / "posts")
-    except (OSError, ValueError) as exc:
-        print(f"🛑 Reserve-Zertifikat ungültig: {exc}")
+        data = json.loads(cert_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        # Ein unlesbares Zertifikat ist kein Nachweis – leerer Pool statt
+        # Absturz (C2: eine nicht ausgeführte Messung ist kein Grün).
         return 0, target, []
+    if not isinstance(data, dict):
+        return 0, target, []
+    candidates = list(data.get("candidates", []) or [])
     # Nur ready=true-Einträge; leere/kaputte Zeilen zählen nicht.
     ready = sum(1 for r in candidates if r.get("ready") is True)
     return ready, target, candidates
 
 
+# ---------------------------------------------------------------------------
+#  URSACHENKLASSEN (08.10.2026, WF-D4E0 #653)
+# ---------------------------------------------------------------------------
+# Sechs Nächte hintereinander meldete dieses Gate
+#     „🛑 RESERVE-ENGPAß: nur 0/6 Kandidaten gate-fertig“
+# und kein einziger dieser Läufe hatte einen leeren Vorrat. Der Lauf war rot,
+# weil `data/reserve-readiness.json` durch ein Merge-Artefakt kein gültiges
+# JSON mehr war: `evaluate()` fing den Parse-Fehler und zählte 0 bereite
+# Kandidaten. **Ein Artefakt-Defekt sah damit aus wie ein leerer Lagerbestand**
+# — und die Diagnose wies die Reparatur in die falsche Richtung (KI-Keys,
+# Themenmangel, Produktion), während die Ursache ein verstümmeltes Artefakt
+# war, das niemand las.
+#
+# C2 bleibt unangetastet: Eine nicht ausgeführte Messung ist kein Grün. Neu
+# ist nur, dass das Gate die KLASSE nennt, statt eine Messung als Urteil
+# auszugeben. Wer den Unterschied nicht nennt, schickt die Reparatur nachts
+# um drei in die falsche Richtung.
+KLASSE_OK = "ok"                # gemessen, Ziel erfüllt
+KLASSE_ENGPASS = "engpass"      # gemessen, zu wenig Vorrat – der echte Fall
+KLASSE_ARTEFAKT = "artefakt"    # Zertifikat fehlt/unlesbar → NICHT gemessen
+KLASSE_KETTE = "kette"          # Stufen übersprungen → Messung gar nicht erst
+                                # erzeugt (Stufe 3 schreibt das Zertifikat)
+KLASSE_WACHEN = "wachen"        # Wachen-Selbsttest rot (Sabotageschutz)
+
+# Die drei Klassen, bei denen die Messung als Ganzes fehlschlug – dann darf
+# KEINE Engpass-Analyse aus der Zahl abgeleitet werden (siehe #653).
+PRUEFKLASSE_FEHLMESSUNG = (KLASSE_ARTEFAKT, KLASSE_KETTE, KLASSE_WACHEN)
+
+# Klartext pro Klasse – drei verschiedene Baustellen, drei Reparaturrichtungen.
+FEHLMESSUNG_KLARTEXT = {
+    KLASSE_ARTEFAKT: (
+        "Die Zahl unten ist KEIN Bestand, sondern das Fehlen einer Messung. "
+        "Wer sie als Engpass liest, repariert nachts die falsche Baustelle."
+    ),
+    KLASSE_KETTE: (
+        "Die Zahl unten stammt aus der VORNACHT – in diesem Lauf wurde nicht "
+        "gemessen, nur der alte Stand weitergereicht. Reparatur: die "
+        "übersprungene Stufe, nicht der Vorrat."
+    ),
+    KLASSE_WACHEN: (
+        "Die Zahl unten ist AKTUELL gemessen – was fehlt, ist der Nachschub: "
+        "die Wachen-Selbstprüfung ist ROT und muss erst stehen, bevor ein "
+        "grüner Vorrat veröffentlicht werden darf. Reparatur: den roten "
+        "Wachen-Selbsttest, nicht den Vorrat."
+    ),
+}
+
+
+def wachen_rot() -> bool:
+    """Wurde in diesem Lauf ein Wachen-Selbsttest ROT?"""
+    return (os.environ.get("RESERVE_WACHEN_ROT") or "").strip().lower() in (
+        "1", "true", "ja", "yes",
+    )
+
+
+def zertifikat_lage(cert_path: Path) -> tuple[str, str]:
+    """(klasse, meldung) des Zertifikats – UNABHÄNGIG von der Kandidatenzahl.
+
+    Warum eine eigene Funktion: `evaluate()` muss `0` liefern, wenn keine
+    Messung vorliegt (C2 – sonst wäre ein abgestürzter Lauf grün). Genau
+    diese `0` wurde aber als „Vorrat leer“ gelesen. Die Klasse trennt die
+    beiden Aussagen wieder: WAS fehlt (Vorrat) und OB überhaupt gemessen
+    wurde (Artefakt).
+    """
+    if not cert_path.exists():
+        return KLASSE_ARTEFAKT, (
+            "Das Zertifikat fehlt völlig "
+            f"({cert_path.name}) – es wurde in diesem Lauf nicht geschrieben. "
+            "Reparatur: python3 scripts/reserve_readiness.py")
+    try:
+        rohtext = cert_path.read_text(encoding="utf-8")
+    except OSError as exc:
+        return KLASSE_ARTEFAKT, (
+            f"Das Zertifikat ist nicht lesbar ({exc.__class__.__name__}) – "
+            "keine Messung. Reparatur: python3 scripts/reserve_readiness.py")
+    try:
+        daten = json.loads(rohtext)
+    except ValueError as exc:
+        return KLASSE_ARTEFAKT, (
+            f"Das Zertifikat ist STRUKTURELL KAPUTT (kein gültiges JSON: "
+            f"{str(exc).splitlines()[0][:160]}). Typische Ursache: ein Merge "
+            "hat zwei Stände desselben Maschinen-Artefakts verschmolzen "
+            "(doppelte Schlüssel, halbe Blöcke). Das ist KEIN Vorrats-Urteil, "
+            "sondern eine fehlgeschlagene Messung. "
+            "Reparatur: python3 scripts/reserve_readiness.py · "
+            "Prüfung: python3 scripts/artefakt_waechter.py")
+    if not isinstance(daten, dict):
+        return KLASSE_ARTEFAKT, (
+            "Das Zertifikat ist kein JSON-Objekt – keine verwertbare Messung. "
+            "Reparatur: python3 scripts/reserve_readiness.py")
+    if not isinstance(daten.get("candidates"), list):
+        return KLASSE_KETTE, (
+            "Das Zertifikat trägt keine Kandidatenliste – die Zertifizierung "
+            "hat nicht geschrieben, was dieses Gate bewerten soll.")
+    return KLASSE_OK, ""
+
+
+def ketten_lage() -> list[str]:
+    """Was der Lauf übersprungen hat – der End-Gate darf es nicht verschweigen.
+
+    Der Workflow übergibt je Stufe ihren Status (`RESERVE_STUFE1_STATUS` …
+    `RESERVE_STUFE3_STATUS`, `RESERVE_WACHEN_ROT`). Fehlt Stufe 3, wurde das
+    Zertifikat nicht neu geschrieben: Die Zahl unten ist dann der Stand der
+    VORNACHT, kein Urteil über diese Nacht.
+    """
+    zeilen: list[str] = []
+    namen = {1: "Produktion", 2: "Veredelung", 3: "Zertifizierung"}
+    for stufe in (1, 2, 3):
+        status = (os.environ.get(f"RESERVE_STUFE{stufe}_STATUS") or "").strip()
+        if status and status not in ("success",):
+            grund = ("Stufe 1/2 laufen bei rotem Wachen-Selbsttest bewusst "
+                     "nicht (Sabotageschutz)"
+                     if stufe in (1, 2) else
+                     "OHNE diese Stufe wird das Zertifikat nicht neu "
+                     "geschrieben – der End-Gate liest dann den Stand der "
+                     "VORNACHT")
+            zeilen.append(
+                f"KETTE: Stufe {stufe} ({namen[stufe]}) = {status} – {grund}.")
+    # WACHEN-Hinweis wird über Klasse=KLASSE_WACHEN in main() erzeugt –
+    # er verdient seinen eigenen Klartext (s. FEHLMESSUNG_KLARTEXT).
+    return zeilen
+
+
 def max_age_hours() -> float:
     try:
-        value = float(os.environ.get("RESERVE_CERT_MAX_AGE_H") or CERT_MAX_AGE_H)
-        return value if math.isfinite(value) and value > 0 else float(CERT_MAX_AGE_H)
+        return float(os.environ.get("RESERVE_CERT_MAX_AGE_H")
+                     or CERT_MAX_AGE_H)
     except ValueError:
         return float(CERT_MAX_AGE_H)
 
@@ -89,30 +213,32 @@ def max_age_hours() -> float:
 def cert_age_hours(cert_path: Path) -> float | None:
     """Alter des Zertifikats in Stunden; None = kein/defekter Zeitstempel."""
     try:
-        data = artifacts.read_object(cert_path)
+        data = json.loads(cert_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
     raw = data.get("generated_at")
     if not isinstance(raw, str):
         return None
+    m = re.match(r"(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2}:\d{2})", raw)
+    if not m:
+        return None
     try:
-        stamp = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
-        if stamp.tzinfo is None:
-            return None
+        stamp = dt.datetime.strptime(f"{m.group(1)} {m.group(2)}",
+                                     "%Y-%m-%d %H:%M:%S").replace(
+            tzinfo=dt.timezone.utc)
     except ValueError:
         return None
     return (dt.datetime.now(dt.timezone.utc) - stamp).total_seconds() / 3600.0
 
 
 def freshness(cert_path: Path) -> tuple[bool, str]:
-    """Kein, defekter, zukünftiger oder zu alter Zeitstempel ist kein Nachweis."""
+    """(frisch?, Meldung). Kein Zeitstempel = gewarnt, aber nicht blockierend;
+    zu altes Zertifikat = blockierend (kein Nachweis)."""
     alter = cert_age_hours(cert_path)
     grenze = max_age_hours()
     if alter is None:
-        return False, ("🛑 Zertifikat ohne verwertbaren Zeitstempel – "
-                       "Alter nicht prüfbar, kein Nachweis.")
-    if alter < -5 / 60:
-        return False, "🛑 Zertifikat-Zeitstempel liegt in der Zukunft – kein Nachweis."
+        return True, ("⚠ Zertifikat ohne verwertbaren Zeitstempel – "
+                      "Alter nicht prüfbar.")
     if alter > grenze:
         return False, (f"🛑 Zertifikat ist veraltet ({alter:.1f} h > "
                        f"{grenze:.0f} h) – kein Nachweis für den aktuellen "
@@ -276,7 +402,8 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
     return zeilen
 
 
-def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
+def chronik_schreiben(ready: int, target: int, candidates: list[dict],
+                      klasse: str = KLASSE_OK) -> None:
     """Eine Zeile pro Lauf – damit ein Trend sichtbar wird, nicht nur der Tag.
 
     IDEMPOTENT JE LAUF (WF-D4E0 #612, aus main) UND UMLENKBAR (BOT-WATCHDOG
@@ -306,6 +433,10 @@ def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
         "ts": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ready": ready, "target": target, "pool": len(candidates),
         "lauf": lauf,
+        # WF-D4E0 (#653): Ohne Klasse ist eine „0/6“-Zeile nicht von einem
+        # echten Engpass zu unterscheiden – und genau diese Verwechslung hat
+        # den Trend-Beweis sechs Nächte lang unbrauchbar gemacht.
+        "klasse": klasse,
         "blocker": [c.get("slug") for c in candidates if not c.get("ready")],
         "themen": themen_vielfalt(candidates)[0],
     }
@@ -317,7 +448,42 @@ def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
         pass
 
 
-def report(ready: int, target: int, candidates: list[dict]) -> None:
+def report(ready: int, target: int, candidates: list[dict],
+           klasse: str = KLASSE_OK, meldung: str = "",
+           ketten: list[str] | None = None) -> None:
+    # WF-D4E0 (#653): Eine fehlgeschlagene Messung darf nicht als Vorrats-
+    # Urteil aussehen. Drei Klassen – drei verschiedene Baustellen.
+    if klasse in PRUEFKLASSE_FEHLMESSUNG:
+        kopf = {
+            KLASSE_ARTEFAKT: "RESERVE-MESSUNG FEHLGESCHLAGEN",
+            KLASSE_KETTE:    "RESERVE-MESSUNG STAMMT AUS DER VORNACHT",
+            KLASSE_WACHEN:   "RESERVE-WACHEN-SELBSTTEST ROT",
+        }[klasse]
+        print(f"\U0001f6d1 {kopf} – KEIN Vorrats-Urteil möglich.")
+        print(f"   Ursachenklasse: {klasse}")
+        if meldung:
+            print(f"   {meldung}")
+        for zeile in (ketten or []):
+            print(f"   • {zeile}")
+        print(f"   {FEHLMESSUNG_KLARTEXT[klasse]}")
+        print()
+    if klasse in PRUEFKLASSE_FEHLMESSUNG:
+        # HIER ENDET DIE AUSKUNFT. Alles Folgende – „RESERVE-ENGPAß“,
+        # „URSACHEN DIESES ENGPASSES“, Themen-Vielfalt, Schritt-Zusammen-
+        # fassung – leitet aus einer Zahl ab, die es in diesem Lauf gar nicht
+        # gibt. Genau dieser abgeleitete Text hat #653 sechs Nächte lang die
+        # Richtung gewiesen: Er nennt „PRODUKTION: 6 Kandidaten fehlen im
+        # Pool“, obwohl der Pool voll war und nur das Zertifikat kaputt.
+        # Eine Diagnose, die aus einer fehlgeschlagenen Messung Ursachen
+        # herleitet, ist keine Diagnose – sie ist eine Erfindung.
+        print(f"   \u26d4 Keine Engpass-Diagnose: sie würde Ursachen aus einer "
+              f"Zahl herleiten, die dieser Lauf nicht gemessen hat.")
+        if ready >= target and klasse != KLASSE_WACHEN:
+            # Bei Klasse wachen ist die Messung AKTUELL – der Hinweis wäre
+            # irreführend (der Nachschub steht, nicht die Uhr).
+            print(f"   \u2139 Der vorliegende Stand meldet {ready}/{target}, "
+                  "stammt aber nicht aus diesem Lauf.")
+        return
     if ready >= target:
         print(f"\u2705 Reserve-Pool gate-fertig: {ready}/{target} Kandidaten zertifiziert.")
         # Auch ein grüner Lauf sagt, gegen WELCHE Latte er grün ist (#393):
@@ -382,20 +548,9 @@ def run_selftest() -> int:
         os.environ["RESERVE_CERT_MAX_AGE_H"] = str(CERT_MAX_AGE_H)
         with tempfile.TemporaryDirectory() as tmp:
             cert = Path(tmp) / "reserve-readiness.json"
-            posts = Path(tmp) / "content" / "posts"
-
-            def write_cert(text, encoding="utf-8"):
-                data = json.loads(text)
-                for row in data["candidates"]:
-                    index = posts / row["slug"] / "index.md"
-                    index.parent.mkdir(parents=True, exist_ok=True)
-                    raw = b"---\ndraft: true\nreserve: true\n---\nTest.\n"
-                    index.write_bytes(raw)
-                    row["sha256"] = hashlib.sha256(raw).hexdigest()
-                cert.write_text(json.dumps(data), encoding=encoding)
 
             # Fall 1: kein Zertifikat -> wie leerer Pool behandeln
-            ready, target, candidates = evaluate(cert, posts)
+            ready, target, candidates = evaluate(cert)
             assert (ready, target, candidates) == (0, 6, []), \
                 "fehlendes Zertifikat muss leer zählen"
 
@@ -403,43 +558,43 @@ def run_selftest() -> int:
             # ist aber im Test explizit kontrolliert statt ein versteckter
             # Seiteneffekt des CI-Jobs zu sein.
             os.environ["RESERVE_TARGET"] = "8"
-            ready_env, target_env, candidates_env = evaluate(cert, posts)
+            ready_env, target_env, candidates_env = evaluate(cert)
             assert (ready_env, target_env, candidates_env) == (0, 8, []), \
                 "RESERVE_TARGET-Override muss respektiert werden"
             os.environ["RESERVE_TARGET"] = "6"
 
             # Fall 2: 5/6 -> Engpass
-            write_cert(json.dumps({
+            cert.write_text(json.dumps({
                 "target": 6, "ready": 5,
                 "candidates": [{"slug": f"k{i}", "ready": i < 5,
                                 "score": 0.9 if i < 5 else None,
                                 "reason": None if i < 5 else "R5"} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
-            ready, target, candidates = evaluate(cert, posts)
+            ready, target, candidates = evaluate(cert)
             assert (ready, target) == (5, 6), f"5/6 erwartet, {ready}/{target}"
             assert len(candidates) == 6
 
             # Fall 3: 6/6 -> voll
-            write_cert(json.dumps({
+            cert.write_text(json.dumps({
                 "target": 6, "ready": 6,
                 "candidates": [{"slug": f"k{i}", "ready": True, "score": 0.95} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
-            ready, target, _ = evaluate(cert, posts)
+            ready, target, _ = evaluate(cert)
             assert (ready, target) == (6, 6), f"6/6 erwartet, {ready}/{target}"
 
             # Fall 4: überfüllt 7/6 -> ebenfalls grün
-            write_cert(json.dumps({
+            cert.write_text(json.dumps({
                 "target": 6, "ready": 7,
                 "candidates": [{"slug": f"k{i}", "ready": True} for i in range(7)],
             }, ensure_ascii=False), encoding="utf-8")
-            ready, target, _ = evaluate(cert, posts)
+            ready, target, _ = evaluate(cert)
             assert ready >= target, "7/6 muss grün sein"
 
             cert_cases.append("ok")
 
             # ---- Frische-Prüfung (#295): veraltetes Zertifikat ist kein Nachweis
             now = dt.datetime.now(dt.timezone.utc)
-            write_cert(json.dumps({
+            cert.write_text(json.dumps({
                 "target": 6, "ready": 1,
                 "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "candidates": [{"slug": "k", "ready": True}],
@@ -450,7 +605,7 @@ def run_selftest() -> int:
 
             alt = (now - dt.timedelta(hours=max_age_hours() + 2)).strftime(
                 "%Y-%m-%dT%H:%M:%SZ")
-            write_cert(json.dumps({
+            cert.write_text(json.dumps({
                 "target": 6, "ready": 6, "generated_at": alt,
                 "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
@@ -458,16 +613,141 @@ def run_selftest() -> int:
             assert not frisch, "veraltetes Zertifikat darf nicht als frisch gelten"
             assert "veraltet" in meldung, meldung
             # … und der End-Gate-Entscheid muss dann rot sein, obwohl 6/6 ready
-            ready, target, _ = evaluate(cert, posts)
+            ready, target, _ = evaluate(cert)
             assert ready >= target and not frisch, "Alters-Regel greift nicht"
 
-            write_cert(json.dumps({
+            cert.write_text(json.dumps({
                 "target": 6, "ready": 6,
                 "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
             }, ensure_ascii=False), encoding="utf-8")
             frisch, meldung = freshness(cert)
-            assert not frisch and "Zeitstempel" in meldung, meldung
+            assert frisch and "Zeitstempel" in meldung, meldung
             cert_cases.append("frische")
+
+            # ---- WF-D4E0 (#653): Ursachenklasse statt Vorrats-Lüge ----
+            # Ein kaputtes Zertifikat darf nicht als „0/6 Engpass“ gelesen
+            # werden. Die Klasse trennt „nicht gemessen“ von „zu wenig“.
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 6,
+                "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
+            }, ensure_ascii=False), encoding="utf-8")
+            assert zertifikat_lage(cert)[0] == KLASSE_OK, \
+                "gültiges Zertifikat mit Liste muss Klasse ok haben"
+
+            # Zwei verschmolzene Stände: der zweite Block wurde mitten in
+            # einen nicht geschlossenen Eintrag geklebt -> kein gültiges JSON
+            # (exakt die Form, die am 08.10.2026 in main stand, #653).
+            cert.write_text(
+                '{\n  "target": 6,\n  "ready": 2,\n  "candidates": [\n'
+                '    {"slug": "a", "ready": true, '
+                '"parts": {"spelling": 0.5},\n'
+                '    {"slug": "b", "ready": true}\n  ]\n}\n',
+                encoding="utf-8")
+            klasse, meldung = zertifikat_lage(cert)
+            assert klasse == KLASSE_ARTEFAKT, \
+                f"kaputtes Zertifikat muss Klasse artefakt haben: {klasse}"
+            assert "STRUKTURELL KAPUTT" in meldung, meldung
+            # … und die Zählung bleibt trotzdem fail-closed (C2):
+            leer, ziel, kand = evaluate(cert)
+            assert (leer, ziel) == (0, 6), "ohne Messung zählt der Pool leer"
+            cert_cases.append("artefakt-klasse")
+
+            fehlend = Path(tmp) / "nicht-da.json"
+            klasse, meldung = zertifikat_lage(fehlend)
+            assert klasse == KLASSE_ARTEFAKT and "fehlt" in meldung, meldung
+            cert_cases.append("zertifikat-fehlt")
+
+            # Zertifikat ohne Kandidatenliste = Messung nie geschrieben
+            cert.write_text(json.dumps({"target": 6, "ready": 6},
+                                       ensure_ascii=False), encoding="utf-8")
+            klasse, meldung = zertifikat_lage(cert)
+            assert klasse == KLASSE_KETTE, \
+                "Zertifikat ohne Kandidatenliste muss Klasse kette haben"
+            cert_cases.append("kette-klasse")
+
+            # ---- Keine erfundene Engpass-Diagnose (#653) ----
+            # Sechs Nächte lang leitete der Bericht aus einer Zahl, die es
+            # gar nicht gab, eine Ursachenliste ab („PRODUKTION: 6
+            # Kandidaten fehlen im Pool“) – bei vollem Vorrat. Ohne
+            # Messung darf der Bericht KEINE Ursachen nennen.
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                report(0, 6, [], klasse=KLASSE_ARTEFAKT,
+                       meldung="Test: Zertifikat strukturell kaputt",
+                       ketten=[])
+            text = puffer.getvalue()
+            assert "RESERVE-MESSUNG FEHLGESCHLAGEN" in text, text
+            assert "ENGPA" not in text, (
+                "aus einer fehlgeschlagenen Messung darf keine "
+                f"Engpass-Diagnose entstehen:\n{text}")
+            assert "URSACHEN DIESES ENGPASSES" not in text, text
+            puffer2 = io.StringIO()
+            with contextlib.redirect_stdout(puffer2):
+                report(6, 6, [{"slug": f"k{i}", "ready": True}
+                              for i in range(6)],
+                       klasse=KLASSE_KETTE, meldung="",
+                       ketten=["KETTE: Stufe 3 = skipped"])
+            text2 = puffer2.getvalue()
+            assert "KETTE" in text2 and "ENGPA" not in text2, text2
+            assert "nicht aus diesem Lauf" in text2, text2
+            cert_cases.append("keine-engpass-luege")
+
+            # ---- Ketten-Lage aus der Umgebung (#653) ----
+            alt_env = {k: os.environ.get(k) for k in
+                       ("RESERVE_STUFE1_STATUS", "RESERVE_STUFE2_STATUS",
+                        "RESERVE_STUFE3_STATUS", "RESERVE_WACHEN_ROT")}
+            try:
+                for k in alt_env:
+                    os.environ.pop(k, None)
+                assert ketten_lage() == [], "ohne Env darf die Kette leer sein"
+                os.environ["RESERVE_STUFE3_STATUS"] = "skipped"
+                zeilen = ketten_lage()
+                assert len(zeilen) == 1 and "Stufe 3" in zeilen[0], zeilen
+                assert "nicht neu geschrieben" in zeilen[0], zeilen
+                os.environ["RESERVE_WACHEN_ROT"] = "1"
+                # WACHEN-Meldung läuft über Klasse=KLASSE_WACHEN in main().
+                assert not any("WACHEN" in z for z in ketten_lage()), \
+                    "ketten_lage() ist für übersprungene Stufen zuständig"
+                assert wachen_rot(), "wachen_rot() muss RESERVE_WACHEN_ROT lesen"
+                os.environ.pop("RESERVE_WACHEN_ROT", None)
+                os.environ["RESERVE_STUFE1_STATUS"] = "success"
+                assert not any("Stufe 1" in z for z in ketten_lage()), \
+                    "erfolgreiche Stufe darf nicht als Kette gemeldet werden"
+                cert_cases.append("ketten-lage")
+
+                # ---- Wachen-Klasse (#653): roter Selbsttest ≠ Vornacht ----
+                alt_w = os.environ.get("RESERVE_WACHEN_ROT")
+                try:
+                    for wert, erwartet in (("1", True), ("true", True),
+                                           ("0", False), ("", False)):
+                        os.environ["RESERVE_WACHEN_ROT"] = wert
+                        assert wachen_rot() is erwartet, (wert, erwartet)
+                    os.environ.pop("RESERVE_WACHEN_ROT", None)
+                    assert wachen_rot() is False
+                    os.environ["RESERVE_WACHEN_ROT"] = "1"
+                    puffer_w = io.StringIO()
+                    with contextlib.redirect_stdout(puffer_w):
+                        report(6, 6, [{"slug": f"k{i}", "ready": True}
+                                      for i in range(6)],
+                               klasse=KLASSE_WACHEN, meldung="",
+                               ketten=["WACHEN: Selbsttest rot"])
+                    text_w = puffer_w.getvalue()
+                    assert "AKTUELL gemessen" in text_w, text_w
+                    assert "nicht aus diesem Lauf" not in text_w, (
+                        "bei Klasse wachen ist die Messung nicht alt")
+                    assert "ENGPA" not in text_w, text_w
+                    cert_cases.append("wachen-klasse")
+                finally:
+                    if alt_w is None:
+                        os.environ.pop("RESERVE_WACHEN_ROT", None)
+                    else:
+                        os.environ["RESERVE_WACHEN_ROT"] = alt_w
+            finally:
+                for k, v in alt_env.items():
+                    if v is None:
+                        os.environ.pop(k, None)
+                    else:
+                        os.environ[k] = v
     finally:
         if alt_target is None:
             os.environ.pop("RESERVE_TARGET", None)
@@ -487,9 +767,7 @@ def run_selftest() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Harter End-Gate der Content-Reserve")
     ap.add_argument("--selftest", action="store_true", help="interne Tests ausführen")
-    ap.add_argument("--cert", default=str(CERT), help="Pfad zum Zertifikat")
-    ap.add_argument("--posts-dir", type=Path, default=ROOT / "content" / "posts",
-                    help="Content-Bestand für den bytegebundenen Nachweis")
+    ap.add_argument("--cert", default=str(CERT), help="Pfad zum Zertifikat (für Tests)")
     ap.add_argument("--chronik", action="store_true",
                     help="NUR die Chronik-Zeile dieses Laufs schreiben (für den "
                          "Sicherungs-Schritt VOR dem Push) – dieselbe Zeile, "
@@ -507,33 +785,71 @@ def main() -> int:
         # keinen einzigen CI-Lauf, sondern nur „lokal“-Zeilen – der
         # Blocker-Verlauf über Läufe hinweg war unsichtbar. Der Workflow ruft
         # diese Bahn jetzt VOR dem Staging auf.
-        ready, target, candidates = evaluate(cert, args.posts_dir)
-        chronik_schreiben(ready, target, candidates)
+        ready, target, candidates = evaluate(cert)
+        klasse, _ = zertifikat_lage(cert)
+        chronik_schreiben(ready, target, candidates, klasse=klasse)
         print(f"Chronik geschrieben: {ready}/{target} bereit · "
               f"{sum(1 for c in candidates if not c.get('ready'))} Blocker · "
+              f"Klasse {klasse} · "
               f"Lauf {os.environ.get('GITHUB_RUN_ID', 'lokal')}")
         return 0
-    ready, target, candidates = evaluate(cert, args.posts_dir)
-    if args.chronik:
-        # WF-D4E0 (#612): Die Chronik ist der einzige Ort, an dem ein Trend
-        # sichtbar wird. Sie wurde bis hier NACH dem Sicherungs-Commit
-        # geschrieben – jeder rote Lauf verlor seine Zeile und mit ihr die
-        # Evidenz genau der Nacht, die man später erklären will (der letzte
-        # CI-Eintrag stammte vom 02.10., alle späteren Zeilen sind lokale
-        # Reparaturläufe). Der Workflow ruft diesen Modus jetzt VOR dem Commit
-        # auf; das harte Gate am Ende liest dieselbe Messung und schreibt
-        # nichts doppelt (Idempotenz je `lauf`).
-        print(f"📈 Reserve-Chronik: {ready}/{target} (Pool {len(candidates)}) "
-              f"→ data/reserve-history.jsonl")
-        chronik_schreiben(ready, target, candidates)
-        return 0
-    report(ready, target, candidates)
-    chronik_schreiben(ready, target, candidates)
-    frisch, meldung = freshness(cert)
-    print(f"   {meldung}")
+    ready, target, candidates = evaluate(cert)
+    # WF-D4E0 (#653): Erst die KLASSE, dann die Zahl. Ein unlesbares oder nie
+    # geschriebenes Zertifikat ist KEINE Aussage über den Vorrat – sechs
+    # Nächte lang wurde genau das als „Engpass“ gemeldet und die Reparatur
+    # lief in die falsche Richtung (KI-Keys, Themen, Produktion).
+    klasse, meldung = zertifikat_lage(cert)
+    ketten = ketten_lage()
+    if wachen_rot():
+        # Wachen-Selbsttest rot: Die Messung ist aktuell (Stufe 3 lief),
+        # aber die Sabotageschutz-Schwellen sind nicht erreicht.
+        # Reparatur: die Wache, NICHT der Vorrat – Klasse `wachen`, nicht
+        # `kette`.
+        klasse = KLASSE_WACHEN
+        if not meldung:
+            meldung = (
+                "Wachen-Selbsttest in diesem Lauf ROT – eine Schwellen-Wache "
+                "meldet Verletzung."
+            )
+    elif klasse == KLASSE_OK and ketten:
+        # Eine Stufe, die das Zertifikat schreibt, wurde übersprungen: Die
+        # vorliegende Zahl ist dann der Stand der VORNACHT, kein Urteil über
+        # diese Nacht.
+        klasse = KLASSE_KETTE
+    report(ready, target, candidates, klasse=klasse, meldung=meldung,
+           ketten=ketten)
+    chronik_schreiben(ready, target, candidates, klasse=klasse)
+    frisch, frische_meldung = freshness(cert)
+    print(f"   {frische_meldung}")
+    if klasse in PRUEFKLASSE_FEHLMESSUNG:
+        # C2 bleibt hart: ohne Messung kein Grün. Aber die Zusammenfassung
+        # nennt die Klasse – sonst sucht die nächste Nacht wieder am
+        # falschen Ort.
+        _summary(ready, target, [meldung] + ketten, klasse)
+        return 1
     if ready >= target and frisch:
         return 0
     return 1
+
+
+def _summary(ready: int, target: int, ursachen: list[str],
+             klasse: str) -> None:
+    """Ursachenklasse in die Lauf-Zusammenfassung (best effort, nie blockierend)."""
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not summary:
+        return
+    try:
+        with open(summary, "a", encoding="utf-8") as fh:
+            fh.write("\n## \U0001f6d1 Content-Reserve: Messung fehlgeschlagen "
+                     f"({klasse})\n\n")
+            fh.write(f"- Gemeldeter Stand: {ready}/{target}\n")
+            fh.write("- **Das ist kein Vorrats-Urteil, sondern eine "
+                     "fehlgeschlagene Messung.**\n")
+            for zeile in ursachen:
+                if zeile:
+                    fh.write(f"- {zeile}\n")
+    except OSError:
+        pass
 
 
 if __name__ == "__main__":

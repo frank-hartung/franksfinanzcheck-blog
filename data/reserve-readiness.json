@@ -2,16 +2,16 @@
   "target": 6,
   "ready": 6,
   "pool_size": 15,
-  "generated_at": "2026-10-08T14:28:25Z",
+  "generated_at": "2026-10-08T15:38:48Z",
   "candidates": [
     {
       "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
       "ready": true,
       "sha256": "3d426ed649a596a35f69e7338a29346d17f8affd35f53c745ce475b6de97c207",
       "flesch": 61.5,
-      "score": 0.96,
+      "score": 0.9,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -25,9 +25,9 @@
       "ready": true,
       "sha256": "b4bd7156457a27daa629a543f4c3a60646bbde0654c8fded758ebf31b65f9604",
       "flesch": 66.1,
-      "score": 0.96,
+      "score": 0.9,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -41,9 +41,9 @@
       "ready": true,
       "sha256": "10bcde7652f03ed4f2c775a6c7830248a37c886f80d1fc90ea10ef8cac05402d",
       "flesch": 63.3,
-      "score": 0.95,
+      "score": 0.89,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -57,9 +57,9 @@
       "ready": true,
       "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
       "flesch": 61.7,
-      "score": 0.95,
+      "score": 0.89,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -73,9 +73,9 @@
       "ready": true,
       "sha256": "f3412b02755bab2af0b4929001bf07a368654ee703cadca3fb430f620a48e668",
       "flesch": 61.1,
-      "score": 0.96,
+      "score": 0.9,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -89,9 +89,9 @@
       "ready": true,
       "sha256": "2eb4aaeeaba61d89ff1bbc62a4e338819959c9a4759a75796de70025cb568d72",
       "flesch": 62.5,
-      "score": 0.96,
+      "score": 0.9,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -109,9 +109,9 @@
       "details": [
         "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: * **Nullsteuersatz:** Seit 2023 profitierst du beim Kauf von der Befreiung der Umsatzsteuer (0 % MwSt.), was einer indirekten Förderung von 19 % entspricht."
       ],
-      "score": 0.867,
+      "score": 0.807,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 0.85,
         "structure": 1.0,
         "typography": 0.9,
@@ -131,9 +131,9 @@
         "RS3: keine Faustregel markiert",
         "RS5: 28 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Dein Weg zu geringeren Monatskosten – stell dir vor: Du könntest jeden Monat 50 €, 100 € oder sogar 200 € mehr im Portemonnaie haben."
       ],
-      "score": 0.917,
+      "score": 0.857,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 0.85,
         "structure": 1.0,
         "typography": 0.8,
@@ -151,9 +151,9 @@
       "details": [
         "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden."
       ],
-      "score": 0.88,
+      "score": 0.82,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.9,
@@ -171,9 +171,9 @@
       "details": [
         "RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** * **Heizungssteuerung:** Smarte Thermostate bieten das größte Sparpotenzial und können die Heizkosten um rund 10–25 % senken."
       ],
-      "score": 0.954,
+      "score": 0.894,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.94,
@@ -191,9 +191,9 @@
       "details": [
         "RS5: 30 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Haushaltskosten im Check: Wusstest du, dass deutsche Haushalte jährlich über 1.000 € durch veraltete Verträge verschenken?"
       ],
-      "score": 0.956,
+      "score": 0.896,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
@@ -211,9 +211,9 @@
       "details": [
         "RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Willst du deine Stromrechnung um bis zu 30 % senken?"
       ],
-      "score": 0.92,
+      "score": 0.86,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -231,9 +231,9 @@
       "details": [
         "RS5: 55 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
       ],
-      "score": 0.884,
+      "score": 0.824,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.84,
@@ -251,9 +251,9 @@
       "details": [
         "RS5: 8 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 100 € pro Jahr für einen Schutz, den du längst besitzt?"
       ],
-      "score": 0.954,
+      "score": 0.894,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.94,
@@ -271,9 +271,9 @@
       "details": [
         "RS5: 28 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?"
       ],
-      "score": 0.92,
+      "score": 0.86,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
