@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-06T23:44:54Z",
+  "generated": "2026-10-08T00:07:54Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "rot",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig",
         "lesbarkeit: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md – Flesch 47.4 < Floor 55; 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-fei…",
-        "Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig"
+        "Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -54,7 +54,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.2 Tag(en)",
+        "letzter erfolgreicher Post vor 1.2 Tag(en)",
         "2 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
@@ -65,10 +65,10 @@
       ]
     },
     "Newsletter": {
-      "level": "gelb",
+      "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "4 Artikel in der Warteschlange, ältester 6 Tag(e) alt"
+        "4 Artikel in der Warteschlange, ältester 8 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
