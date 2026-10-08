@@ -75,11 +75,12 @@ REGELN = {
     "T8": "Verdrahtung – Runbook, Cockpit und npm-Skripte existieren",
     "T9": "Schlüssel-Durchreichung – KI-Workflows bekommen ≥2 Gratis-Schlüssel",
     "T10": "Kostensperre – jede Geldfläche außerhalb der Textkette ist verriegelt",
+    "T11": "KI-Assistent – Gate-Dateien und Worker-Code vorhanden (scripts/ki_assistent_gate.py)",
 }
 
 # Aufgaben, für die eine Kette existieren MUSS (T7). Jede entspricht
 # einer real laufenden Automatik im Repo.
-PFLICHT_AUFGABEN = ("lang", "news", "faktenpruefung", "politur")
+PFLICHT_AUFGABEN = ("lang", "news", "faktenpruefung", "politur", "ki_assistent")
 
 # npm-Skripte, die laut Vertrag existieren müssen (T8).
 NPM_PFLICHT = ("ki:transportweg", "ki:status", "test:ki")
@@ -578,6 +579,27 @@ def t10_kostensperre(ssot: dict) -> list[str]:
     return befunde
 
 
+def t11_ki_assistent(_ssot: dict) -> list[str]:
+    """T11: KI-Assistent – Gate und Worker müssen vorhanden sein.
+
+    Der KI-Assistent ist das benutzerfrontende Chat-Widget. Sein
+    Gate (scripts/ki_assistent_gate.py) muss existieren und
+    lauffähig sein, damit die Vertragsprüfung (KA1–KA9) greift.
+    Der Worker (cloudflare/ki-assistent/) muss deploybar sein.
+    """
+    befunde = []
+    gate = ROOT / "scripts" / "ki_assistent_gate.py"
+    if not gate.exists():
+        befunde.append("T11: scripts/ki_assistent_gate.py fehlt")
+    worker_js = ROOT / "cloudflare" / "ki-assistent" / "worker.js"
+    wrangler = ROOT / "cloudflare" / "ki-assistent" / "wrangler.toml"
+    if not worker_js.exists():
+        befunde.append("T11: cloudflare/ki-assistent/worker.js fehlt")
+    if not wrangler.exists():
+        befunde.append("T11: cloudflare/ki-assistent/wrangler.toml fehlt")
+    return befunde
+
+
 PRUEFER = {
     "T1": t1_kostenregel,
     "T2": t2_nur_implementierte,
@@ -589,6 +611,7 @@ PRUEFER = {
     "T8": t8_verdrahtung,
     "T9": t9_schluessel_durchreichung,
     "T10": t10_kostensperre,
+    "T11": t11_ki_assistent,
 }
 
 
