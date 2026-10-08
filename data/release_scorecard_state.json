@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-08T11:58:34Z",
-  "modus": "live",
-  "commit": "2aae8c35b2ee40ddae0e6fe88836376040b8d8fd",
+  "generated_at": "2026-10-08T12:16:30Z",
+  "modus": "kandidaten",
+  "commit": "a979120fa6d3c504ae79c580add224e86a323539",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -226,7 +226,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
+      "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
@@ -566,7 +566,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
-      "sha256": "d1ee87d0d08d6c6e94b8dfe7d1eb81501340a58bdcdd3f6010b244945540d064",
+      "sha256": "f1365ac7d54f03f03a8f38f8a8fdc2c42a9b5f7b3401026ef06b447314cb9304",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -580,7 +580,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
       "sha256": "d5b4906f8761bd9de1d585a584e73538778de15413b867f8c1cafed715fe06d1",
