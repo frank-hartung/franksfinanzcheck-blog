@@ -5,13 +5,13 @@ date: 2026-10-07T10:43:51Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, veraltete Kreditkartenangaben und Metadaten redaktionell neu geprüft"
-tags: ["Geld sparen im Alltag"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-keywords: ["Urlaub sparen", "Reisebudget", "Urlaub planen", "Reisekosten", "Reisekasse"]
+keywords: ["Urlaub sparen", "Reisebudget", "Urlaub planen", "Reisekosten", "Reisekasse", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Urlaub sparen: Budget und Buchung gut planen"
-pin_description: "*Werbung | Plane Reisekasse, Buchung und Kosten vor Ort mit klarem Blick. Ohne pauschale Preis- oder Sparversprechen. #urlaubsparen #reisebudget #reiseplanung"
+pin_description: "*Werbung | Urlaub sparen: Plane Reisekasse, Buchung, Storno, Mietwagen und Ausgaben vor Ort mit einem klaren Budget statt mit pauschalen Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #urlaubsparen #reisebudget #urlaubplanen"
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
@@ -114,9 +114,6 @@ Ein Mietwagen ist nicht für jede Reise nötig. Vergleiche ihn mit Bahn, Bus, ei
 Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht automatisch, ob das Auto zu deinem Urlaub passt. Lies die Bedingungen des Anbieters und entscheide selbst. Der Partnerlink am Ende führt zu Mietwagenangeboten; er ist kein allgemeiner Vergleich für jede Reiseleistung.
 
 ## Wie behältst du die Ausgaben vor Ort im Blick?
-
-
-Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht automatisch, ob das Auto zu deinem Urlaub passt. Lies die Bedingungen des Anbieters und entscheide selbst. Der Partnerlink am Ende führt zu Mietwagenangeboten; er ist kein allgemeiner Vergleich für jede Reiseleistung.
 
 ## Wie behältst du die Ausgaben vor Ort im Blick?
 

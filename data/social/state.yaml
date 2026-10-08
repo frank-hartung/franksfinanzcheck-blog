@@ -588,6 +588,27 @@ history:
     #Frugalismus #Geldsparen #Tagesgeld #Zinsen'
   ref: '117395489343468673'
   ai: true
+- posted_at: '2026-10-08T14:05:51.368204+02:00'
+  channel: mastodon
+  slug: 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert
+  title: 'Internet & DSL-Update: Was sich jetzt für dich ändert'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117405198564655648
+  ok: true
+  text: 'Internet & DSL-Update?
+
+
+    Beim aktuellen Internet & DSL-Update geht es vor allem um zwei Punkte: Viele Haushalte
+    buchen mehr Geschwindigkeit, als sie wirklich brauchen, und viele Altverträge
+    sind …
+
+
+    https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
+  ref: '117405198564655648'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -597,4 +618,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-07T21:23:16.132637+02:00'
+updated_at: '2026-10-08T14:05:59.914329+02:00'

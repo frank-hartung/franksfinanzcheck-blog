@@ -1,11 +1,11 @@
 {
-  "stand": "2026-10-07T11:58:27Z",
+  "stand": "2026-10-08T12:12:54Z",
   "urteil": "gruen",
   "probleme": [],
   "kpis": {
     "live_artikel": 40,
-    "ki_artikel": 12,
-    "ki_anteil_prozent": 30.0,
+    "ki_artikel": 13,
+    "ki_anteil_prozent": 32.5,
     "tempo_max_pro_tag": 2,
     "tempo_letzte7_tage": 5,
     "auto_freigaben_letzte7_tage": 0,

@@ -1,14 +1,56 @@
 {
-  "erzeugt": "2026-10-08 00:13 UTC",
+  "erzeugt": "2026-10-08 11:35 UTC",
   "uebersicht": {
-    "gesamt": 1,
-    "ratgeber": 0,
-    "faellig": 0,
-    "bearbeitet": 0,
-    "geo_schnitt": 100,
+    "gesamt": 79,
+    "ratgeber": 6,
+    "faellig": 2,
+    "bearbeitet": 2,
+    "geo_schnitt": 92,
     "befunde": 0,
-    "geo_luecken": {}
+    "geo_luecken": {
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 5,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 8,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 5,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 13,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 2,
+      "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
+    }
   },
   "offen": [],
-  "laeufe": []
+  "laeufe": [
+    {
+      "slug": "2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Markt-Update: Was sich jetzt für dich ändert",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [],
+      "geo": 17,
+      "fehler": [
+        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
+      ],
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-08"
+      ]
+    },
+    {
+      "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
+      "titel": "Notgroschen aufbauen: Wie viel reicht wirklich?",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [],
+      "geo": 50,
+      "fehler": [
+        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
+      ],
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-08"
+      ]
+    }
+  ]
 }

@@ -172,7 +172,7 @@ Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
 ### 2. Geschwindigkeit ehrlich einordnen Braucht dein Haushalt wirklich 250 Mbit/s oder mehr?
 
-### 3. Routerfrage klären Zahlst du Miete?
+### 3. Routerfrage klären zahlst du Miete?
 
 Ist der Router technisch noch okay?
 

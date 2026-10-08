@@ -1,11 +1,56 @@
 {
- "generated_at": "2026-10-07 10:46:10 UTC",
+ "generated_at": "2026-10-08 11:04:51 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 68,
- "checked_links": 201,
+ "checked_articles": 80,
+ "checked_links": 224,
  "healed_count": 0,
  "healed": [],
- "findings": [],
+ "findings": [
+  {
+   "code": "IW2",
+   "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+   "line": 229,
+   "route": "mietwagen",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „Mietwagen“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 16,
+   "route": "strom",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 47,
+   "route": "strom",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 124,
+   "route": "strom",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  }
+ ],
  "errors": []
 }

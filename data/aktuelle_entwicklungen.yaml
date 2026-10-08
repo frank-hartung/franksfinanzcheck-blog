@@ -86,6 +86,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt auf den eigenen Verbrauch an."
+  ki_news_used: true
 
 - id: versicherung-vergleichsportale-nicht-vollstaendig
   kategorie: versicherung
