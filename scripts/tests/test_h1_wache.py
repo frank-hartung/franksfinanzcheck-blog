@@ -44,6 +44,45 @@ class MarkdownErkennungTests(unittest.TestCase):
     def test_ohne_frontmatter_wird_ab_zeile_eins_gelesen(self):
         self.assertEqual(wache.markdown_ohne_huelle("# direkt los\n"), [(1, "direkt los")])
 
+    # ---- Stufe 2 (08.10.2026): die Markdown-Wahrheit jenseits der `#`-Zeile --
+    # Eine reine `#`-Suche übersieht drei Formen, die Goldmark trotzdem als
+    # <h1> rendert. Genau dort entstünde die zweite H1, ohne dass die
+    # Quellprüfung rot würde.
+
+    def test_eingerueckte_atx_h1_wird_erkannt(self):
+        # CommonMark erlaubt bis zu drei führende Leerzeichen.
+        self.assertEqual(wache.markdown_ohne_huelle("   # Eingerückt\n"), [(1, "Eingerückt")])
+
+    def test_vier_leerzeichen_sind_eingerueckter_code(self):
+        self.assertEqual(wache.markdown_ohne_huelle("    # Code, kein Titel\n"), [])
+        self.assertEqual(wache.markdown_ohne_huelle("\t# Tab-Code\n"), [])
+
+    def test_setext_h1_wird_erkannt_und_nennt_die_textzeile(self):
+        text = '---\ntitle: "x"\n---\n\nSchirmzeile\n===========\n'
+        self.assertEqual(wache.markdown_ohne_huelle(text), [(5, "Schirmzeile")])
+
+    def test_setext_im_code_zaun_bleibt_still(self):
+        self.assertEqual(wache.markdown_ohne_huelle("```\nTitel\n=====\n```\n"), [])
+
+    def test_setext_ohne_textzeile_ist_keine_ueberschrift(self):
+        self.assertEqual(wache.markdown_ohne_huelle("\n=====\n"), [])
+
+    def test_rohes_h1_im_fliess_text_wird_erkannt(self):
+        # hugo.toml: [markup.goldmark.renderer] unsafe = true – rohes HTML geht
+        # unverändert in den Build.
+        self.assertEqual(wache.markdown_roh_html_h1('Text\n\n<h1 class="x">Titel</h1>\n'),
+                         [(3, '<h1 class="x">Titel</h1>')])
+
+    def test_h1_in_inline_code_und_im_zaun_ist_text(self):
+        self.assertEqual(
+            wache.markdown_roh_html_h1("Beispiel: `<h1>Titel</h1>` im Text.\n"), [])
+        self.assertEqual(
+            wache.markdown_roh_html_h1("```html\n<h1>Titel</h1>\n```\n"), [])
+
+    def test_rohes_h1_im_frontmatter_zaehlt_nicht(self):
+        self.assertEqual(
+            wache.markdown_roh_html_h1('---\ntitle: "<h1>Nein</h1>"\n---\n\nText\n'), [])
+
 
 class QuellWacheTests(unittest.TestCase):
     def test_echte_quelle_ist_gruen(self):
@@ -92,6 +131,52 @@ class LayoutWacheTests(unittest.TestCase):
         text = wache._lesen(wache.ARTIKEL_BAUSTEIN)
         self.assertEqual(len(wache.h1_der_seite(text)), 1)
         self.assertIn(".Params.heading", text)
+
+    def test_inventar_registriert_jede_h1_quelle_mit_stimmiger_zahl(self):
+        # Fail-closed: Jede Layout-Datei mit <h1> steht im Inventar, die Zahl
+        # der Vorkommen stimmt, und die Seitenarten-Tabelle nennt dieselben
+        # Dateien. Ohne diese Klammer könnte eine neue H1 unbemerkt entstehen.
+        inventar = {rel: anzahl for rel, anzahl, _grund in wache.H1_QUELLEN}
+        gefunden = {
+            str(p.relative_to(ROOT)).replace("\\", "/"): len(wache.H1_TAG.findall(
+                p.read_text(encoding="utf-8", errors="ignore")))
+            for p in sorted((ROOT / "layouts").rglob("*.html"))
+        }
+        gefunden = {rel: n for rel, n in gefunden.items() if n}
+        self.assertEqual(gefunden, inventar, "Inventar und Layout-Baum müssen deckungsgleich sein")
+        for rel, anzahl, grund in wache.H1_QUELLEN:
+            self.assertGreater(anzahl, 0)
+            self.assertGreater(len(grund.strip()), 15, f"H1-Quelle {rel} ohne Begründung")
+        self.assertEqual({rel for _art, rel, _b in wache.SEITENARTEN}, set(inventar),
+                         "jede H1-Quelle braucht genau eine Seitenart und umgekehrt")
+        self.assertEqual(wache.s2_layout(ROOT), [])
+
+    def test_unregistrierte_h1_quelle_ist_ein_befund(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            for ordner in ("_partials", "_default", "pillar"):
+                (wurzel / "layouts" / ordner).mkdir(parents=True)
+            (wurzel / "layouts" / "_partials" / "neuer_kasten.html").write_text(
+                "<h1>Neuer Kasten</h1>", encoding="utf-8")
+            funde = wache.s2_layout(wurzel)
+            self.assertTrue(any("neuer_kasten.html" in f and "nicht im Inventar" in f
+                                for f in funde), funde)
+
+    def test_eigene_einzelansichten_ehren_heading(self):
+        # Parität: Themenwelt- und Werkzeug-Einzelansicht rendern ihre H1
+        # selbst – sie müssen dieselbe Mechanik tragen wie der Baustein,
+        # sonst wäre die dokumentierte `heading:`-Heilung dort wirkungslos.
+        for rel in wache.PARITAET_TEMPLATES:
+            with self.subTest(datei=rel):
+                text = (ROOT / rel).read_text(encoding="utf-8")
+                self.assertIn(".Params.heading", text)
+
+    def test_startseiten_blaetterkopf_traegt_eine_h1(self):
+        # /page/2/ … hatten bis 08.10.2026 GAR KEINE H1; der Blätterkopf ist
+        # über den Marker an den Home-Zweig gebunden.
+        text = (ROOT / "layouts" / "_default" / "list.html").read_text(encoding="utf-8")
+        self.assertEqual(text.count(wache.H1_BLAETTERKOPF_MARKER), 1)
+        self.assertEqual(wache._blaetterkopf_funde(ROOT), [])
 
     def test_zweiter_baustein_im_template_ist_ein_befund(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -154,20 +239,40 @@ class BuildWacheTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             public = self._public(tmp, {
                 "google123.html": "google-site-verification: x",
-                "page/2/index.html": "<html>weiter</html>",
                 "go/strom/index.html": "<html lang=de><h1>Weiter</h1></html>",
             })
             self.assertEqual(wache.s3_build(public), [])
-            # Ohne Ausnahme muss der Redirect auffallen – sonst wäre die
-            # Ausnahme eine Lücke mit Etikett.
-            self.assertTrue(any("page/2/index.html" in f for f in wache.s3_build(public, ausnahmen=())))
+
+    def test_blaetter_seiten_werden_geprueft_keine_pauschalausnahme(self):
+        # Dauerheilung Stufe 2 (08.10.2026): Die frühere Ausnahme erklärte
+        # ALLE `page/N/`-Dateien für „Blätter-Redirects ohne Inhalt“. Seit
+        # `[pagination] disableAliases = true` gibt es diese Redirects nicht
+        # mehr – /page/2/ ist eine echte, verlinkte Seite. Genau diese Ausnahme
+        # verdeckte, dass die Startseiten-Blätter gar keine H1 trugen.
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp, {
+                "page/2/index.html": "<html lang=de><p>ohne H1</p></html>",
+                "posts/page/2/index.html": "<html lang=de><p>ohne H1</p></html>",
+            })
+            funde = wache.s3_build(public)
+            self.assertTrue(any("page/2/index.html" in f for f in funde), funde)
+            self.assertTrue(any("posts/page/2/index.html" in f for f in funde), funde)
+            # Mit genau einer H1 ist dieselbe Route grün.
+            self._public(tmp, {
+                "page/2/index.html": "<html lang=de><h1>Weitere Ratgeber</h1></html>",
+                "posts/page/2/index.html": "<html lang=de><h1>Weitere Ratgeber</h1></html>",
+            })
+            self.assertEqual(wache.s3_build(public), [])
 
     def test_ausnahmen_sind_routenscharf(self):
         self.assertTrue(wache.ausnahme_grund("google123.html"))
-        self.assertTrue(wache.ausnahme_grund("page/2/index.html"))
-        self.assertTrue(wache.ausnahme_grund("posts/page/2/index.html"))
+        self.assertTrue(wache.ausnahme_grund("pinterest-e238f.html"))
+        self.assertTrue(wache.ausnahme_grund("pinterest-oauth/index.html"))
         self.assertEqual(wache.ausnahme_grund("docs/google123.html"), "")
-        self.assertEqual(wache.ausnahme_grund("page/2/inhalt.html"), "")
+        self.assertEqual(wache.ausnahme_grund("pinterest-oauth/inhalt.html"), "")
+        # Die Blätterseiten sind KEINE Ausnahme mehr – sie tragen Inhalt.
+        self.assertEqual(wache.ausnahme_grund("page/2/index.html"), "")
+        self.assertEqual(wache.ausnahme_grund("posts/page/2/index.html"), "")
         self.assertEqual(wache.ausnahme_grund("go/strom/index.html"), "")
         self.assertTrue(wache.ausnahme_grund("go/strom/index.html", wache.AUSNAHMEN_SEITE))
 

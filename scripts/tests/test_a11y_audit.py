@@ -42,9 +42,14 @@ class HTMLCoverageTests(unittest.TestCase):
             self.assertIn("BingSiteAuth.html", relative)
             # Die Root-Verifikationsausnahme darf keine echte Unterseite treffen.
             self.assertIn("docs/google-example.html", relative)
+            # Blätterseiten sind ECHTE, verlinkte Seiten – sie werden geprüft.
+            # (Stufe 2, 08.10.2026: Bis dahin nahm die Ausnahme der H1-Wache
+            # alle `page/N/`-Dateien pauschal aus und verdeckte damit, dass
+            # /page/2/ … gar keine H1 trugen. Mit disableAliases = true gibt es
+            # keine inhaltsleeren Blätter-Redirects mehr.)
+            self.assertIn("page/2/index.html", relative)
+            self.assertIn("posts/page/2/index.html", relative)
             # Nur die dokumentierten Redirects sind von diesem Voll-Audit befreit.
-            self.assertNotIn("page/2/index.html", relative)
-            self.assertNotIn("posts/page/2/index.html", relative)
             self.assertNotIn("go/strom/index.html", relative)
             self.assertNotIn("pinterest-oauth/index.html", relative)
 

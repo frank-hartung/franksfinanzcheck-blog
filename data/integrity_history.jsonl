@@ -262,3 +262,5 @@
 {"date": "2026-10-08", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py", "scripts/reserve_artifacts.py"]}
 {"date": "2026-10-08", "kritisch": 2, "fest": 3, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html", "scripts/lektor_guard.py", "scripts/lesbarkeit_heiler.py", "scripts/redaktions_standard.py"]}
 {"date": "2026-10-08", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py", "scripts/reserve_artifacts.py"]}
+{"date": "2026-10-08", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["layouts/pillar/single.html"], "head": "3484dcf"}
+{"date": "2026-10-08", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py", "scripts/reserve_artifacts.py"]}
