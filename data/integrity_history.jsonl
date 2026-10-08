@@ -271,3 +271,4 @@
 {"date": "2026-10-08", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py", "scripts/reserve_artifacts.py"]}
 {"date": "2026-10-08", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py"]}
 {"date": "2026-10-08", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
+{"date": "2026-10-08", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/artefakt_waechter.py", "scripts/reserve_artifacts.py"]}

@@ -305,15 +305,52 @@ def _yaml_doppelte_schluessel(text: str) -> list[str]:
     return funde
 
 
-def _yaml_laden(text: str) -> tuple[list[str], list[str]]:
-    """(syntaxfehler, doppelte_schluessel)."""
+# Meldung, wenn kein YAML-Werkzeug da ist. Bewusst ein BEFUND und keine
+# Warnung: „nicht geprüft“ darf nie wie „heil“ aussehen (siehe unten).
+YAML_NICHT_PRUEFBAR = ("kein YAML-Werkzeug verfügbar (PyYAML fehlt) – dieses "
+                       "Artefakt ist NICHT geprüft")
+
+
+def _yaml_modul(mit_werkzeug: bool = True):
+    """PyYAML oder None. `mit_werkzeug=False` spielt einen Rechner ohne vor.
+
+    NACHTRAG 08.10.2026 (#661): Genau diese Unterscheidung hat den
+    Integritäts-Lock vier Stunden lang rot gefärbt – und wäre beinahe als
+    „Test-Problem“ abgetan worden. Der Wächter lief im CI ohne PyYAML
+    (`actions/setup-python` bringt es nicht mit), `_yaml_laden` fing das mit
+    `return [], []` ab und meldete damit „nichts gefunden“, wo es „nichts
+    gemessen“ heißen müsste. Ein Hart-Gate, das bei fehlendem Werkzeug
+    grün wird, ist schlimmer als keins: Es bezeugt eine Prüfung, die nie
+    stattfand. Zwei Lagen:
+      1. Der EIGENE Scanner ist die Wahrheit. Doppelte Schlüssel findet
+         `_yaml_doppelte_schluessel` ohne jedes Drittwerkzeug – mit oder
+         ohne PyYAML dasselbe Ergebnis.
+      2. Fehlt das Werkzeug, ist die Syntax-Prüfung ein BEFUND: „nicht
+         geprüft“, nie Stille. Wer das Werkzeug hat, merkt davon nichts;
+         wer es nicht hat, sieht rot und eine klare Ursache.
+    """
+    if not mit_werkzeug:
+        return None
     try:
         import yaml  # noqa: WPS433 – optionale Abhängigkeit
     except ImportError:
-        return [], []
+        return None
+    return yaml
+
+
+def _yaml_laden(text: str, mit_werkzeug: bool = True) -> tuple[list[str], list[str]]:
+    """(syntaxfehler, doppelte_schluessel).
+
+    Liefert OHNE Werkzeug den Befund `YAML_NICHT_PRUEFBAR` als Syntaxfehler
+    – die Wache darf an keinem Artefakt vorbeigehen, als hätte sie es
+    gesehen. Doppelte Schlüssel werden in beiden Fällen gemeldet.
+    """
+    modul = _yaml_modul(mit_werkzeug)
+    if modul is None:
+        return [YAML_NICHT_PRUEFBAR], _yaml_doppelte_schluessel(text)
     fehler: list[str] = []
     try:
-        for _ in yaml.safe_load_all(text):
+        for _ in modul.safe_load_all(text):
             pass
     except Exception as exc:  # noqa: BLE001 – yaml wirft viele Klassen
         meldung = str(getattr(exc, "problem", exc) or exc)
@@ -323,7 +360,8 @@ def _yaml_laden(text: str) -> tuple[list[str], list[str]]:
     return fehler, _yaml_doppelte_schluessel(text)
 
 
-def pruefe_yaml(pfad: Path, rel: str | None = None) -> list[Fund]:
+def pruefe_yaml(pfad: Path, rel: str | None = None,
+                mit_werkzeug: bool = True) -> list[Fund]:
     rel = rel or str(pfad)
     try:
         text = pfad.read_text(encoding="utf-8")
@@ -332,7 +370,7 @@ def pruefe_yaml(pfad: Path, rel: str | None = None) -> list[Fund]:
     konflikt = _konflikt_fund(text, rel)
     if konflikt:
         return [konflikt]
-    fehler, doppelt = _yaml_laden(text)
+    fehler, doppelt = _yaml_laden(text, mit_werkzeug=mit_werkzeug)
     funde = [Fund("A5-YAML", rel, "-", f) for f in fehler]
     if doppelt:
         funde.append(Fund("A5-YAML", rel, ", ".join(sorted(set(doppelt))[:4]),
@@ -342,7 +380,8 @@ def pruefe_yaml(pfad: Path, rel: str | None = None) -> list[Fund]:
     return funde
 
 
-def pruefe_frontmatter(pfad: Path, rel: str | None = None) -> list[Fund]:
+def pruefe_frontmatter(pfad: Path, rel: str | None = None,
+                       mit_werkzeug: bool = True) -> list[Fund]:
     rel = rel or str(pfad)
     try:
         text = pfad.read_text(encoding="utf-8")
@@ -358,7 +397,7 @@ def pruefe_frontmatter(pfad: Path, rel: str | None = None) -> list[Fund]:
         return [Fund("A4-KONFLIKT-MARKER", rel,
                      f"Frontmatter-Zeile {konflikt[0]}",
                      "Git-Konfliktmarker im Frontmatter.")]
-    fehler, doppelt = _yaml_laden(fm)
+    fehler, doppelt = _yaml_laden(fm, mit_werkzeug=mit_werkzeug)
     funde = [Fund("A6-FRONTMATTER", rel, "-", f) for f in fehler]
     if doppelt:
         funde.append(Fund("A6-FRONTMATTER", rel,
@@ -578,17 +617,26 @@ def run_selftest() -> int:
             fehler.append("A4: Konfliktmarker wurden nicht erkannt")
 
         # --- A5/A6: YAML + Frontmatter ---
+        # Der „nicht geprüft“-Befund ist KEIN Fehlalarm, sondern die ehrliche
+        # Antwort eines Rechners ohne YAML-Werkzeug (siehe `_yaml_modul`).
+        # Die „sauber darf nichts melden“-Proben zählen ihn deshalb nur, wenn
+        # das Werkzeug wirklich da ist – und verlangen ihn, wenn nicht.
+        werkzeug_da = _yaml_modul() is not None
+
+        def ohne_blind(funde):
+            return [f for f in funde if "NICHT geprüft" not in f.meldung]
+
         yml = _schreib(wurzel, "data/kaputt.yaml", _SABOTAGE_YAML)
         if not any(f.klasse == "A5-YAML"
                    for f in pruefe_yaml(yml, "data/kaputt.yaml")):
             fehler.append("A5: doppelter YAML-Schlüssel wurde nicht erkannt")
         yml_ok = _schreib(wurzel, "data/gut.yaml", "a: 1\nb: 2\n")
-        if pruefe_yaml(yml_ok, "data/gut.yaml"):
+        if ohne_blind(pruefe_yaml(yml_ok, "data/gut.yaml")):
             fehler.append("A5: sauberes YAML wurde fälschlich als Fund gemeldet")
         liste = _schreib(wurzel, "data/liste.yaml",
                          "items:\n  - name: a\n    value: 1\n"
                          "  - name: b\n    value: 2\n")
-        if pruefe_yaml(liste, "data/liste.yaml"):
+        if ohne_blind(pruefe_yaml(liste, "data/liste.yaml")):
             fehler.append("A5: gleiche Schlüssel in verschiedenen "
                           "Listenelementen wurden fälschlich gemeldet")
         fm = _schreib(wurzel, "content/posts/beispiel/index.md",
@@ -599,13 +647,46 @@ def run_selftest() -> int:
             fehler.append("A6: doppelter Frontmatter-Schlüssel wurde nicht erkannt")
         fm_ok = _schreib(wurzel, "content/posts/gut/index.md",
                          "---\ntitle: X\ndraft: true\n---\n\nText\n")
-        if pruefe_frontmatter(fm_ok, "content/posts/gut/index.md"):
+        if ohne_blind(pruefe_frontmatter(fm_ok, "content/posts/gut/index.md")):
             fehler.append("A6: sauberes Frontmatter wurde fälschlich gemeldet")
 
         # --- YAML-Scanner: Ebenen dürfen denselben Schlüssel tragen ---
         if _yaml_doppelte_schluessel("a:\n  x: 1\nb:\n  x: 2\n"):
             fehler.append("A5: gleicher Schlüssel auf verschiedenen Ebenen "
                           "wurde fälschlich als Duplikat gemeldet")
+
+        # --- NACHTRAG 08.10.2026 (#661): Kein Rechner darf „heil“ melden,
+        #     nur weil ihm das Werkzeug fehlt. Das CI hat genau das getan. ---
+        if not [f for f in pruefe_yaml(yml_ok, "data/gut.yaml",
+                                       mit_werkzeug=False)
+                if "NICHT geprüft" in f.meldung]:
+            fehler.append("A5: ohne YAML-Werkzeug blieb die Prüfung still – "
+                          "ungeprüft darf nie wie heil aussehen (#661).")
+        if not [f for f in pruefe_frontmatter(
+                    fm_ok, "content/posts/gut/index.md", mit_werkzeug=False)
+                if "NICHT geprüft" in f.meldung]:
+            fehler.append("A6: ohne YAML-Werkzeug blieb die Prüfung still – "
+                          "ungeprüft darf nie wie heil aussehen (#661).")
+        # … und die eigene Erkennung trägt werkzeuglos weiter:
+        if not any(f.klasse == "A5-YAML" and "doppelte" in f.meldung
+                   for f in pruefe_yaml(yml, "data/kaputt.yaml",
+                                        mit_werkzeug=False)):
+            fehler.append("A5: doppelter Schlüssel wurde OHNE YAML-Werkzeug "
+                          "nicht erkannt – der eigene Scanner muss allein "
+                          "tragen (#661).")
+        if not any(f.klasse == "A6-FRONTMATTER" and "doppelte" in f.meldung
+                   for f in pruefe_frontmatter(
+                       fm, "content/posts/beispiel/index.md",
+                       mit_werkzeug=False)):
+            fehler.append("A6: doppelter Frontmatter-Schlüssel wurde OHNE "
+                          "YAML-Werkzeug nicht erkannt (#661).")
+        # Saubere Artefakte bleiben vollständig sauber, WENN das Werkzeug da
+        # ist – dann ist „nicht geprüft“ nie zu sehen:
+        if werkzeug_da and (pruefe_yaml(yml_ok, "data/gut.yaml") or
+                            pruefe_frontmatter(fm_ok,
+                                               "content/posts/gut/index.md")):
+            fehler.append("A5/A6: saubere Artefakte wurden MIT Werkzeug "
+                          "fälschlich gemeldet.")
 
         # --- Das echte Repo bleibt unberührt (C15) ---
         if heile([Fund("A1-JSON-SYNTAX", "data/kaputt.json", "-", "x")], wurzel):

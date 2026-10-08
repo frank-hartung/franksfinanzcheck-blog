@@ -273,6 +273,23 @@ jobs:
         run: python3 scripts/affiliate_marketer.py
 
       # ================= RUNDE 0 (BESTAND) =================
+      # NEU 08.10.2026 (Issue #661): Bevor IRGENDEIN Werkzeug der Kette den
+      # Reserve-Zustand liest, muss er lesbar sein. Janitor, Bestands-Wächter,
+      # Produktion, Veredelung, Konvergenz und der harte End-Gate lesen
+      # dieselben drei Dateien (`reserve_artifacts.STATE_FILES`). Ist eine
+      # davon defekt, stirbt die Nacht im ersten Schritt – und zwar mit einer
+      # Meldung, die auf einen CONTENT-Engpass deutet, obwohl nur der NACHWEIS
+      # beschädigt ist (genau das war #661: 15 Entwürfe im Pool, sechs
+      # zertifiziert, Lauf rot). Der Heiler zieht den Schnappschuss vorher
+      # aus dem Bestand neu; bei intaktem Zustand schreibt er kein Byte
+      # (Idempotenz ist Teil seines Selbsttests).
+      - name: Stufe 0 – Reserve-Snapshot heilen (Nachweis vor jeder Messung)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          python3 scripts/reserve_snapshot_heiler.py --selftest
+          python3 scripts/reserve_snapshot_heiler.py --fix
+
       # FIX 26.09.2026 (Workflow #24): Rückläufer und blockierte
       # maschinenverwaltete Entwürfe werden nicht mehr als ewiger
       # Schubladen-Bestand mitgeschleppt. Vor jeder KI-Anfrage putzt der
@@ -499,7 +516,16 @@ jobs:
             # branch: reserve state belongs on main.  git_sync already retries
             # transient failures; the explicit branch also makes this contract
             # auditable and prevents a successful push to the wrong ref.
-            if ! BRANCH=main scripts/git_sync.sh --push-only; then
+            #
+            # REPARATUR 08.10.2026 (Issue #661): GIT_SYNC_RESERVE_POLICY ist
+            # das Opt-in für die RESERVE-Konfliktpolitik in git_sync.sh. Zehn
+            # von zwölf Nachtläufen starben am Rebase auf Pool-Entwürfen –
+            # obwohl in zwei klar umrissenen Klassen auf main NICHTS zu
+            # verlieren ist (Pfad dort nicht mehr vorhanden bzw. dort bereits
+            # veröffentlicht). Nur dieser Workflow verwaltet den Pool und darf
+            # die Politik setzen; für alle anderen bleibt der harte Stopp.
+            if ! BRANCH=main GIT_SYNC_RESERVE_POLICY=reserve-verwaltet \
+                 scripts/git_sync.sh --push-only; then
               echo "::error::Push der Reserve nach main fehlgeschlagen. Der Lauf bleibt rot, WEIL der zertifizierte Pool sonst nicht in main ankommt (nächster Lauf könnte sonst erneut 0/6 lesen). Ursache im git_sync-Log oben."
               exit 1
             fi
