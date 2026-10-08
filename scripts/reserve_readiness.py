@@ -154,10 +154,16 @@ def certify_one(index) -> dict:
     """
     original = index.read_text(encoding="utf-8")
     diag = score_diagnosis(index)
+    # Unabhängig vom groben Lesbarkeits-Score: 58,0 → 59,0 bleibt dort
+    # häufig 80/100. Konvergenz muss sichere Zwischenstufen erkennen können.
+    # Gemessen werden dieselben Original-Bytes, deren Hash unten steht.
+    from lesbarkeit_heiler import flesch
+    measured_flesch = flesch(original, index.parent.name)
     content_findings = reserve_editorial_findings(index, original)
     if content_findings:
         row = {"slug": index.parent.name, "ready": False,
                "sha256": hashlib.sha256(original.encode()).hexdigest(),
+               "flesch": measured_flesch,
                "reason": f"Reserve-Qualitäts-Gate: {content_findings[0]}",
                "details": content_findings}
         if diag:
@@ -187,7 +193,8 @@ def certify_one(index) -> dict:
     finally:
         index.write_text(original, encoding="utf-8")
     row = {"slug": index.parent.name, "ready": ready,
-           "sha256": hashlib.sha256(original.encode()).hexdigest()}
+           "sha256": hashlib.sha256(original.encode()).hexdigest(),
+           "flesch": measured_flesch}
     if reason:
         row["reason"] = reason
     if details:

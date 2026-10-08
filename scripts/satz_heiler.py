@@ -154,7 +154,6 @@ def saetze_finden(body: str, *, base_offset: int = 0) -> list[dict]:
     for offset, zeile in _zeilen_mit_offset(body):
         if not _ist_prosa(zeile):
             continue
-        führend = len(zeile) - len(zeile.lstrip())
         for m in re.finditer(r"[^.!?\n]+[.!?]+", zeile):
             satz = m.group(0).strip()
             woerter = _WORT.findall(satz)
@@ -162,7 +161,7 @@ def saetze_finden(body: str, *, base_offset: int = 0) -> list[dict]:
                 continue
             if _BANNED.search(satz) or "http" in satz:
                 continue
-            start = (base_offset + offset + führend + m.start()
+            start = (base_offset + offset + m.start()
                      + (len(m.group(0)) - len(m.group(0).lstrip())))
             treffer.append({"start": start, "satz": satz,
                             "woerter": [w for w in woerter],
