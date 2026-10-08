@@ -96,6 +96,17 @@ Oder pro Shortcode:
 {{</* ki-assistent endpoint="https://ki-assistent.DEIN-NAME.workers.dev/chat" */>}}
 ```
 
+**Verhalten ohne Endpoint:** Solange kein Endpoint gesetzt ist, rendert die
+globale Partial (`layouts/_partials/ki_assistent.html`) das Widget nicht – der
+Leser sieht keinen Knopf, der ins Leere läuft. Sobald der Endpoint in
+`hugo.toml` steht, erscheint das Widget auf allen Seiten ohne weitere Änderung.
+
+**Zeitlimit:** Der Client bricht eine Anfrage nach 130 s ab (Konstante
+`ANTWORT_ZEITLIMIT_MS` in `static/premium/ki-assistent.js`). Der Worker
+probiert bis zu vier Provider nacheinander mit je 30 s Timeout – 130 s
+decken diese Worst-Case-Kette ab. Wer die Provider-Liste ändert, zieht das
+Limit mit.
+
 ### 4.4 Verifizieren
 
 ```bash

@@ -23,6 +23,11 @@
   const ENDPOINT = CFG.endpoint || "";
   const MAX_HISTORY = 10; // Nachrichten für Kontext
   const MAX_QUESTION = 2000;
+  // Zeitlimit je Anfrage (R4). Der Worker probiert bis zu vier Provider
+  // nacheinander, je 30 s (cloudflare/ki-assistent/worker.js). Darunter
+  // würde ein erfolgreicher Failover abgeschnitten – darüber hinaus wartet
+  // der Leser ohne Rückmeldung. 4 × 30 s + Puffer.
+  const ANTWORT_ZEITLIMIT_MS = 130000;
 
   // ---- State ----
   let history = []; // {role, content}
@@ -40,29 +45,51 @@
   if (!trigger || !panel || !messages || !input || !sendBtn || !closeBtn) return;
 
   // ---- Hilfsfunktionen ----
-  function escapeHtml(str) {
-    const div = document.createElement("div");
-    div.textContent = str;
-    return div.innerHTML;
+  // Antworten werden NIE als HTML-Text eingesetzt (R7): Jeder Teil landet als
+  // textContent bzw. als eigens erzeugtes Element. Fremder oder berechneter
+  // Text kann so nicht als Markup ins Dokument geraten.
+
+  // Inline-Auszeichnung: **fett**, `code`, *kursiv* (in dieser Reihenfolge geprüft).
+  function inlineNodes(text, parent) {
+    const muster = /\*\*(.+?)\*\*|`(.+?)`|(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g;
+    let letzter = 0;
+    let treffer;
+    while ((treffer = muster.exec(text)) !== null) {
+      if (treffer.index > letzter) {
+        parent.appendChild(document.createTextNode(text.slice(letzter, treffer.index)));
+      }
+      let el;
+      if (treffer[1] !== undefined) {
+        el = document.createElement("strong");
+        el.textContent = treffer[1];
+      } else if (treffer[2] !== undefined) {
+        el = document.createElement("code");
+        el.textContent = treffer[2];
+      } else {
+        el = document.createElement("em");
+        el.textContent = treffer[3];
+      }
+      parent.appendChild(el);
+      letzter = muster.lastIndex;
+    }
+    if (letzter < text.length) {
+      parent.appendChild(document.createTextNode(text.slice(letzter)));
+    }
   }
 
-  // Einfache Markdown-ähnliche Formatierung (kein HTML-Injection)
-  function formatAnswer(text) {
-    let html = escapeHtml(text);
-    // Bold: **text**
-    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-    // Italic: *text*
-    html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, "<em>$1</em>");
-    // Inline code: `text`
-    html = html.replace(/`(.+?)`/g, "<code>$1</code>");
-    // Listen: Zeilen mit - oder * am Anfang
-    html = html.replace(/(^|\n)[*-]\s+(.+)/g, function (m, pre, item) {
-      return pre + "• " + item;
-    });
-    // Absätze
-    html = html.replace(/\n\n+/g, "</p><p>");
-    html = html.replace(/\n/g, "<br>");
-    return "<p>" + html + "</p>";
+  // Absätze (Leerzeile), Zeilenumbrüche, Listen (- oder * am Zeilenanfang).
+  function renderAnswer(text, container) {
+    String(text)
+      .split(/\n\n+/)
+      .forEach(function (absatz) {
+        const p = document.createElement("p");
+        absatz.split("\n").forEach(function (zeile, i) {
+          if (i > 0) p.appendChild(document.createElement("br"));
+          const listenEintrag = zeile.match(/^[*-]\s+(.+)/);
+          inlineNodes(listenEintrag ? "• " + listenEintrag[1] : zeile, p);
+        });
+        container.appendChild(p);
+      });
   }
 
   function scrollToBottom() {
@@ -71,11 +98,11 @@
     });
   }
 
-  function addMessage(text, type, isHtml) {
+  function addMessage(text, type, formatiert) {
     const el = document.createElement("div");
     el.className = "ff-ki-msg ff-ki-msg--" + type;
-    if (isHtml) {
-      el.innerHTML = text;
+    if (formatiert) {
+      renderAnswer(text, el);
     } else {
       el.textContent = text;
     }
@@ -90,10 +117,11 @@
     el.className = "ff-ki-typing";
     el.id = "ff-ki-typing";
     el.setAttribute("aria-label", "Assistent schreibt…");
-    el.innerHTML =
-      '<span class="ff-ki-typing__dot"></span>' +
-      '<span class="ff-ki-typing__dot"></span>' +
-      '<span class="ff-ki-typing__dot"></span>';
+    for (let i = 0; i < 3; i++) {
+      const punkt = document.createElement("span");
+      punkt.className = "ff-ki-typing__dot";
+      el.appendChild(punkt);
+    }
     messages.appendChild(el);
     scrollToBottom();
   }
@@ -156,6 +184,11 @@
     // Typing-Indicator
     showTyping();
 
+    const steuerung = new AbortController();
+    const zeitlimit = setTimeout(function () {
+      steuerung.abort();
+    }, ANTWORT_ZEITLIMIT_MS);
+
     try {
       const resp = await fetch(ENDPOINT, {
         method: "POST",
@@ -164,6 +197,7 @@
           question: question,
           history: history.slice(-MAX_HISTORY),
         }),
+        signal: steuerung.signal,
       });
 
       hideTyping();
@@ -184,7 +218,7 @@
       const data = await resp.json();
 
       if (data.answer) {
-        addMessage(formatAnswer(data.answer), "bot", true);
+        addMessage(data.answer, "bot", true);
         history.push({ role: "assistant", content: data.answer });
       } else {
         addMessage(
@@ -192,13 +226,21 @@
           "error"
         );
       }
-    } catch {
+    } catch (err) {
       hideTyping();
-      addMessage(
-        "Verbindungsfehler. Bitte prüfe deine Internetverbindung und versuch es erneut.",
-        "error"
-      );
+      if (err && err.name === "AbortError") {
+        addMessage(
+          "Der Assistent hat zu lange gebraucht. Bitte stell die Frage gleich noch einmal.",
+          "error"
+        );
+      } else {
+        addMessage(
+          "Verbindungsfehler. Bitte prüfe deine Internetverbindung und versuch es erneut.",
+          "error"
+        );
+      }
     } finally {
+      clearTimeout(zeitlimit);
       isSending = false;
       sendBtn.disabled = false;
       input.disabled = false;
