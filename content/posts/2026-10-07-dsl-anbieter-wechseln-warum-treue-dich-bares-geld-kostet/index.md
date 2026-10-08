@@ -4,7 +4,7 @@ description: "DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, R
 date: 2026-10-07T10:32:00Z
 draft: true
 reserve: true
-tags: ["DSL-Vergleich", "Internet und Mobilfunk", "Fixkosten"]
+tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
@@ -44,6 +44,8 @@ kurzantwort: "Vergleiche beim DSL-Wechsel den gesamten Preis, die Vertragslaufze
 ---
 
 Ein DSL-Vertrag läuft leicht weiter, obwohl sich deine Nutzung geändert hat. Ein Wechsel kann passen, muss aber nicht automatisch Geld sparen. Prüfe erst Preis, Leistung und Ablauf. Dann kannst du entscheiden, ob ein neuer Anbieter zu deinem Haushalt passt.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
 

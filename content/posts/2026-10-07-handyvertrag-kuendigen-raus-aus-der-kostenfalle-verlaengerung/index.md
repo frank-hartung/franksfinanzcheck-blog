@@ -4,7 +4,7 @@ description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamt
 date: 2026-10-07T10:33:21Z
 draft: true
 reserve: true
-tags: ["Handyvertrag", "Internet und Mobilfunk", "Fixkosten"]
+tags: ["Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
@@ -49,6 +49,8 @@ kurzantwort: "Prüfe zuerst die Laufzeit und das vereinbarte Enddatum. Nach eine
 ---
 
 Handyvertrag kündigen klingt einfach. In der Praxis zählen das Ende der festen Laufzeit, der Kündigungsweg und ein mögliches Gerät.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Ein niedriger Monatspreis reicht nicht für einen fairen Vergleich. Prüfe zuerst deine Unterlagen.
 

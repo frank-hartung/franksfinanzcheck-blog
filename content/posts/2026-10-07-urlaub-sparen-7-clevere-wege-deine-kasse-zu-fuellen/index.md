@@ -5,7 +5,7 @@ date: 2026-10-07T10:43:51Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, veraltete Kreditkartenangaben und Metadaten redaktionell neu geprüft"
-tags: ["Urlaub planen", "Reisebudget", "Geld sparen im Alltag"]
+tags: ["Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
@@ -50,6 +50,8 @@ kurzantwort: "Setze zuerst einen Gesamtbetrag für die Reise fest. Rechne Anfahr
 ---
 
 Urlaub sparen heißt nicht, jede schöne Sache zu streichen. Es heißt, vor der Buchung zu wissen, was dir wichtig ist und was du dafür ausgeben kannst. Der erste angezeigte Preis ist selten die ganze Reise. Plane deshalb Fahrt, Unterkunft, Essen und mögliche Änderungen zusammen.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
 
