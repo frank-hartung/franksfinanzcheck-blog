@@ -111,6 +111,7 @@ Neue Datei: `scripts/tests/test_reserve_convergence_progress.py` mit
 
 | Prüfung | Ergebnis |
 |---|---|
+| Gesamtsuite auf dem finalen, integrierten Stand | **2.175 Tests OK**, 1 Skip |
 | Gesamtsuite vor Integration von #635 | **2.165 Tests OK**, 1 Skip |
 | Neue Regressionen + Satz-Heiler + Nachzertifizierung | **42 Tests OK** |
 | Reserve-/Satz-/Nachzertifizierungs-/Redaktionsvertragstests nach Integration von #635 | **181 Tests OK** |
