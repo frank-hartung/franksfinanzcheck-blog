@@ -59,7 +59,7 @@ Kein „Closes“: #644 ist bereits geschlossen; der Vorgang wird über diesen B
   internen Links, keine Anfrage an fremde Hosts, Suchbegriff in keinem Speicher, Enter ohne
   `?q=`, Ansagen für Kurzeingabe und Leertreffer, Tastaturfokus, Mobil ohne horizontalen
   Überlauf, Footer-Link, Ohne-JavaScript-Pfad mit Erreichbarkeit der drei Links).
-- **Tests:** `scripts/tests/test_suche_pagefind.py` auf 25 Verträge erweitert (JSON-Gültigkeit,
+- **Tests:** `scripts/tests/test_suche_pagefind.py` auf 26 Verträge erweitert (JSON-Gültigkeit,
   Doppelschlüssel, Lock-Konsistenz, eine Suchoberfläche, Front-Matter, Titelbild, Ausgabe leeren,
   Anker, Ohne-JS-Links, Wache). `tools/ff-suche.test.mjs` auf 13 Tests erweitert; ein
   Sicherheitstest bekam eine echte Fundstelle im Fixture, sein Prüfgegenstand bleibt gleich.
@@ -76,7 +76,7 @@ Kein „Closes“: #644 ist bereits geschlossen; der Vorgang wird über diesen B
 | Deploy-Simulation: `npm ci --omit=dev --ignore-scripts` in frischem Ordner | nur `pagefind@1.5.2` (+ Linux-Binary); Index 70 Seiten; `test -s` OK; Wache OK |
 | `npm run build` (Hugo 0.164.0 Extended, Chromium-Fallback wie unten) | Hugo 80 Seiten; Wache: 109 HTML · 70 indexierbar · 70 im Index · 39 bewusst ausgeschlossen |
 | Sabotage am echten Build (Artikelseite in einer Kopie auf `noindex`) | Exit 1, nennt die Seite |
-| `npm run test:suche` | jsdom 13/13; Wache-Selbsttest 14 Proben; Python 25 Verträge OK |
+| `npm run test:suche` | jsdom 13/13; Wache-Selbsttest 14 Proben; Python 26 Verträge OK |
 | `npx playwright test e2e/suche.spec.mjs --project=desktop` | 9/9 (letzter Lauf nach allen Korrekturen) |
 | `npx playwright test` (Desktop und Mobil, vor der Korrektur des Ohne-JS-Links) | 107/107 |
 | `python3 -m unittest discover -s scripts/tests` | vorher 2285 Tests, 15 Fehlschläge; nachher 2301 Tests OK, 5 übersprungen |
