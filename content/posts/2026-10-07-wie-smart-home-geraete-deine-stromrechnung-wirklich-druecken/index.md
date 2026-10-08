@@ -6,6 +6,7 @@ draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): redaktionell neu aufgebaut; Fakten- und Quellenprüfung am 07.10.2026"
 tags: ["Stromkosten senken", "Smart Home", "Energie sparen"]
+tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
@@ -40,6 +41,8 @@ kurzantwort: "Ein Smart-Home-Gerät spart nicht automatisch Strom. Miss zuerst d
 ---
 
 Smart Home klingt nach weniger Strom. Ein vernetztes Gerät spart aber nicht schon durch seine Verbindung Energie.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Es braucht eine klare Aufgabe. Eine Automatik kann Licht ausschalten oder eine unnötige Laufzeit vermeiden.
 

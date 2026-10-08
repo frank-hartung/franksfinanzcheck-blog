@@ -773,14 +773,38 @@ def selbsttest() -> int:
     if "lang genug" not in lesetext or titel != "Testseite":
         fehler.append("_html_lesetext hat Text/Titel nicht erkannt")
 
-    karte = neue_karte("text", titel="Selbsttest-Karte", url="",
-                       rohtext="Strom kostet 2026 rund 300 Euro mehr. "
-                       "Ein Wechsel spart oft Geld.", methode="selbsttest")
-    insights_generieren(karte)  # offline, da kein Key im Selbsttest
+    # KI-WEG HERMETISCH (Dauerheilung Content-Engine v2 #138, 08.10.2026):
+    # Hier stand „offline, da kein Key im Selbsttest“ – eine Annahme, keine
+    # Garantie. Läuft der Selbsttest in einem Schritt MIT Schlüssel, fragte er
+    # das Live-Modell, und dessen Säulenwahl entschied über Grün/Rot (genau
+    # die Klasse, die Engine-Lauf #138 vor Phase 1 getötet hat). Der KI-Weg
+    # läuft deshalb über eine Attrappe; geprüft werden beide Zweige:
+    # Rückfall auf die Heuristik UND Fail-closed gegen eine erfundene Säule.
+    mit_rueckfall = neue_karte("text", titel="Selbsttest-Karte", url="",
+                               rohtext="Strom kostet 2026 rund 300 Euro mehr. "
+                               "Ein Wechsel spart oft Geld.", methode="selbsttest")
+    mit_ki = neue_karte("text", titel="Selbsttest-Karte", url="",
+                        rohtext="Strom kostet 2026 rund 300 Euro mehr.",
+                        methode="selbsttest")
+    echter_chat = globals()["chat"]
+    try:
+        globals()["chat"] = lambda *_a, **_k: (None, "selbsttest-attrappe")
+        insights_generieren(mit_rueckfall)
+        globals()["chat"] = lambda *_a, **_k: (
+            '{"insights": ["Strom wird teurer."], "pillar": "erfundene-saeule", '
+            '"winkel": "w", "schlagworte": [], "artikel_titel": "t"}',
+            "selbsttest-attrappe")
+        insights_generieren(mit_ki)
+    finally:
+        globals()["chat"] = echter_chat
+    karte = mit_rueckfall
     if not karte["insights"] or karte["pillar"] not in lade_pillars():
         fehler.append("insights_offline lieferte keine verwertbaren Insights")
     if karte["pillar"] != "strom-sparen":
         fehler.append(f"Pillar-Heuristik: {karte['pillar']!r} != strom-sparen")
+    if mit_ki["pillar"] != "" or mit_ki["insights"] != ["Strom wird teurer."]:
+        fehler.append("KI-Antwort mit erfundener Säule wird nicht fail-closed "
+                      f"behandelt: pillar={mit_ki['pillar']!r}")
 
     for probe in ('{"a": 1}', '```json\n{"a": 1}\n```', 'Vorrede {"a": 1} Ende'):
         if not extrahiere_json(probe):

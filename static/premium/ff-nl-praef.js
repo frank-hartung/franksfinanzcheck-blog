@@ -42,6 +42,22 @@
     }
   }
 
+  /* EIN WEG MIT ZEITLIMIT (Härtung C31, 07.10.2026 – Robustheit Premium).
+     Befund: Beide Worker-Anfragen warteten unbegrenzt. Hing der Worker,
+     blieb die Statuszeile auf „Wird gespeichert …" stehen und der Knopf
+     gesperrt – der Leser hatte weder eine Antwort noch einen zweiten
+     Versuch. Die Resilienzschicht liefert das Zeitlimit (FFRobust.hole);
+     fehlt sie, gilt der schlichte Fetch von vorher – nie ein Stillstand. */
+  function anfragen(ziel, optionen) {
+    var robust = window.FFRobust;
+    if (robust && typeof robust.hole === 'function') return robust.hole(ziel, optionen);
+    return window.fetch(ziel, optionen).then(function (antwort) {
+      return { ok: antwort.type === 'opaque' ? true : antwort.ok, status: antwort.status, antwort: antwort };
+    }).catch(function () {
+      return { ok: false, fehler: 'netz' };
+    });
+  }
+
   function praeferenzen() {
     var kasten = document.querySelector('fieldset[data-ff-nl-praef]');
     if (!kasten || kasten.dataset.ffNlPraefBereit === '1') return;
@@ -132,14 +148,19 @@
     /* Zustand 2a: die aktuelle Auswahl laden (Token als Legitimation,
        Accept: application/json erzwingt die JSON-Antwort des Workers
        statt der HTML-Seite). */
-    window.fetch(basis + '/status?token=' + encodeURIComponent(token), {
+    anfragen(basis + '/status?token=' + encodeURIComponent(token), {
       method: 'GET',
       headers: { 'Accept': 'application/json' },
       mode: 'cors',
       credentials: 'omit',
-    }).then(function (antwort) {
-      if (!antwort.ok) throw new Error(String(antwort.status));
-      return antwort.json();
+      zeitlimit: 12000,
+      versuche: 2,
+      quelle: 'newsletter-praferenzen-lesen'
+    }).then(function (ergebnis) {
+      if (!ergebnis.ok || !ergebnis.antwort) {
+        throw new Error(String(ergebnis.fehler || ergebnis.status || 'unbekannt'));
+      }
+      return ergebnis.antwort.json();
     }).then(function (daten) {
       var thesen = (daten && Array.isArray(daten.themen)) ? daten.themen : [];
       felder.forEach(function (f) { f.checked = thesen.indexOf(f.value) >= 0; });
@@ -169,7 +190,7 @@
       melden('Wird gespeichert …');
       var korper = ['token=' + encodeURIComponent(token)];
       ausgewaehlt().forEach(function (id) { korper.push('themen=' + encodeURIComponent(id)); });
-      window.fetch(basis + '/praferenzen', {
+      anfragen(basis + '/praferenzen', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -178,9 +199,14 @@
         body: korper.join('&'),
         mode: 'cors',
         credentials: 'omit',
-      }).then(function (antwort) {
-        if (!antwort.ok) throw new Error(String(antwort.status));
-        return antwort.json();
+        zeitlimit: 15000,
+        versuche: 2,
+        quelle: 'newsletter-praferenzen-speichern'
+      }).then(function (ergebnis) {
+        if (!ergebnis.ok || !ergebnis.antwort) {
+          throw new Error(String(ergebnis.fehler || ergebnis.status || 'unbekannt'));
+        }
+        return ergebnis.antwort.json();
       }).then(function (daten) {
         kasten.dataset.status = 'ok';
         melden((daten && daten.text) ? daten.text : 'Gespeichert – die Auswahl gilt ab der nächsten Ausgabe.');

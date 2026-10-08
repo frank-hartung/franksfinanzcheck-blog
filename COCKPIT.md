@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-10-06 23:44 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-10-08 00:07 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -8,21 +8,21 @@
 
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
-| Content-Pipeline | 🔴 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig |
+| Content-Pipeline | 🔴 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig |
 | SEO & Technik | 🔴 | 1 Prüfpunkt(e) auffällig (live-policy) |
 | Affiliate & Umsatz | 🟢 | in Ordnung (3 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
 | Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
-| Newsletter | 🟡 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
+| Newsletter | 🔴 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
 
 ---
 
 ## Details
 
 ### Content-Pipeline — 🔴 ROT
-- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
+- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig
 - lesbarkeit: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md – Flesch 47.4 < Floor 55; 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-fei…
-- Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
+- Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
@@ -47,14 +47,14 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 0.2 Tag(en)
+- letzter erfolgreicher Post vor 1.2 Tag(en)
 - 2 Fehlversuch(e) in den letzten 14 Tagen
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
-### Newsletter — 🟡 GELB
+### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 4 Artikel in der Warteschlange, ältester 6 Tag(e) alt
+- 4 Artikel in der Warteschlange, ältester 8 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 

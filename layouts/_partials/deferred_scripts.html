@@ -69,9 +69,50 @@
 </script>
 {{- end -}}
 
-{{- /* ---------- Service Worker: Langzeit-Caching auf GitHub Pages ---------- */ -}}
+{{- /* ---------- Resilienzschicht (zweite Stufe, Vertrag C31) ----------
+       Die erste Stufe (Fehler-Horcher + Fetch mit Zeitlimit) steht im
+       <head>, weil sie VOR jedem Body-Skript laufen muss. Diese Datei
+       ergänzt die Bausteine, die Zeit haben: Fehlergrenzen für interaktive
+       Inseln, Speicher-Wache, Zwischenablage, Diagnose.
+       Ladereihenfolge: hinter den Body-Bausteinen – jeder von ihnen hat
+       sein eigenes Fangnetz und ruft die Schicht nur ab, wenn sie da ist.
+       Quelle: static/premium/ff-robust.js · Runbook: docs/ANLEITUNG-ROBUSTHEIT.md */ -}}
+<script defer src="{{ partial "asset_url.html" "premium/ff-robust.js" }}"></script>
+
+{{- /* ---------- Service Worker: Langzeit-Caching auf GitHub Pages ----------
+       HÄRTUNG (C31, 07.10.2026): Eine Registrierung, die still scheitert,
+       war bisher unsichtbar – `.catch(function () {})`. Genau in dem
+       Augenblick fehlt der Seite aber der Offline-Fangnetz und das
+       Langzeit-Caching, und niemand erfährt davon. Jetzt wird der Fehlschlag
+       gemeldet (FFRobust) und EINMAL neu versucht: Der häufigste echte Grund
+       ist ein Deploy-Fenster, in dem sw.js kurz nicht zum HTML passt.
+       Kein Wiederholungs-Kreislauf – ein zweiter Fehlschlag bleibt Befund. */ -}}
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('{{ "sw.js" | relURL }}').catch(function () {});
+(function () {
+  if (!('serviceWorker' in navigator) || !navigator.serviceWorker.register) return;
+  var quelle = '{{ "sw.js" | relURL }}';
+  function melden(text) {
+    try {
+      if (window.FFRobust && window.FFRobust.melden) {
+        window.FFRobust.melden({ quelle: 'service-worker', text: text });
+      }
+    } catch (e) {}
   }
+  function registrieren(versuch) {
+    try {
+      navigator.serviceWorker.register(quelle).then(function () {
+        if (versuch > 1) melden('Registrierung im zweiten Versuch gelungen');
+      })['catch'](function (fehler) {
+        melden('Registrierung fehlgeschlagen (' + versuch + '. Versuch): ' +
+               String((fehler && fehler.message) || fehler || ''));
+        if (versuch < 2) {
+          setTimeout(function () { registrieren(versuch + 1); }, 4000);
+        }
+      });
+    } catch (e) {
+      melden('Registrierung nicht möglich: ' + String((e && e.message) || e || ''));
+    }
+  }
+  registrieren(1);
+})();
 </script>

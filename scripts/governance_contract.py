@@ -2556,12 +2556,16 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
     single_wurzel = _read(os.path.join(root, "layouts", "single.html"))
     liste = _read(os.path.join(root, "layouts", "_default", "list.html"))
     deploy = ""
+    e2e = ""
     for pfad, text in (wflows or {}).items():
-        if os.path.basename(str(pfad)) == "deploy.yml":
+        name = os.path.basename(str(pfad))
+        if name == "deploy.yml":
             deploy = text
-            break
+        elif name == "e2e.yml":
+            e2e = text
     paket = _read(os.path.join(root, "package.json"))
     tests = os.path.join(root, "scripts", "tests", "test_h1_wache.py")
+    a11y_tests = os.path.join(root, "scripts", "tests", "test_a11y_audit.py")
 
     if not wache:
         out.append(("C30", "scripts/h1_wache.py fehlt – ohne Wache ist „genau "
@@ -2588,6 +2592,10 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
             out.append(("C30", "scripts/h1_wache.py prüft die Archetypen nicht – "
                                "eine H1 in einer Vorlage vererbt sich an jeden "
                                "neuen Artikel (#623)."))
+        if "class _H1TextParser(HTMLParser)" not in wache:
+            out.append(("C30", "scripts/h1_wache.py verwendet keinen HTML-aware Parser – "
+                               "Skriptstrings, Kommentare oder Entities könnten den "
+                               "H1-Befund verfälschen."))
         if "--fix" in wache:
             out.append(("C30", "scripts/h1_wache.py bietet ein `--fix` an: Eine H1 "
                                "automatisch zu löschen vernichtet einen "
@@ -2649,10 +2657,21 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
             out.append(("C30", "scripts/a11y_audit.py prüft wieder nur eine "
                                "STICHPROBE – genau die Blindstelle, die die dritte "
                                "Doppel-H1 am 07.10.2026 verdeckt hat (#623)."))
-        if "AUSNAHMEN" not in audit:
-            out.append(("C30", "scripts/a11y_audit.py führt seine Ausnahmen nicht "
-                               "aus der H1-Wache – zwei Ausnahme-Listen driften "
-                               "auseinander, und eine ohne Grund ist eine Lücke."))
+        if ("from h1_wache import AUSNAHMEN_SEITE" not in audit
+                or "h1_der_seite" not in audit or "h1_ist_gefuellt" not in audit):
+            out.append(("C30", "scripts/a11y_audit.py bezieht Ausnahme-Registry und "
+                               "HTML-aware H1-Erkennung nicht direkt aus der H1-Wache – "
+                               "zwei Wahrheiten könnten auseinanderlaufen."))
+        if ("AUSNAHMEN = (" in audit or "SKIP_PATTERNS" in audit
+                or 'if "assets" in root' in audit):
+            out.append(("C30", "scripts/a11y_audit.py enthält wieder eine lokale "
+                               "Ersatz-Ausnahmeliste oder einen undokumentierten "
+                               "Datei-/Verzeichnisfilter; das Audit muss fail-closed "
+                               "und vollständig bleiben."))
+        if ("_require_h1_contract" not in audit or "public/ fehlt" not in audit
+                or "return 2" not in audit):
+            out.append(("C30", "scripts/a11y_audit.py meldet eine fehlende H1-Wache "
+                               "oder einen fehlenden Build nicht fail-closed."))
 
     # e) Verdrahtung: geprüft wird erst, wenn der Deploy es verlangt.
     if deploy:
@@ -2663,17 +2682,42 @@ def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
             out.append(("C30", "deploy.yml prüft die gebauten Seiten nicht – die "
                                "Doppel-H1 stünde wieder live, bevor jemand sie "
                                "sieht (#623)."))
+        if "scripts.tests.test_a11y_audit" not in deploy:
+            out.append(("C30", "deploy.yml führt die Fail-closed-/Vollständigkeits-Regressionen "
+                               "des A11y-Audits nicht vor dem Build aus."))
     else:
         out.append(("C30", "deploy.yml nicht lesbar – die Verdrahtung der H1-Wache "
                            "ist nicht prüfbar."))
+    e2e_pfade = (
+        "scripts/h1_wache.py",
+        "scripts/a11y_audit.py",
+        "scripts/tests/test_h1_wache.py",
+        "scripts/tests/test_a11y_audit.py",
+    )
+    if not e2e:
+        out.append(("C30", "e2e.yml nicht lesbar – Änderungen an H1-Wache/Audit "
+                           "lösen keine Browser-Regression aus."))
+    else:
+        for pfad in e2e_pfade:
+            if f'"{pfad}"' not in e2e:
+                out.append(("C30", f"e2e.yml-Pfadfilter fehlt `{pfad}` – Änderungen "
+                                   "an der H1-Wache könnten ohne Browser-Regression "
+                                   "durchrutschen."))
     if paket and '"h1:check"' not in paket:
         out.append(("C30", "package.json kennt `h1:check` nicht – eine Wache, die "
                            "man lokal nicht rufen kann, wartet auf den nächsten "
                            "Montag (#623)."))
+    if paket and ('"test:h1"' not in paket or "scripts.tests.test_a11y_audit" not in paket):
+        out.append(("C30", "package.json bündelt die H1-Wache nicht mit den "
+                           "Regressionstests des A11y-Audits."))
     if not os.path.isfile(tests):
         out.append(("C30", "scripts/tests/test_h1_wache.py fehlt – ohne "
                            "Regressionstest fällt die nächste Doppel-H1 erst im "
                            "wöchentlichen Audit auf (#623)."))
+    if not os.path.isfile(a11y_tests):
+        out.append(("C30", "scripts/tests/test_a11y_audit.py fehlt – Vollständigkeit, "
+                           "eine einzige Ausnahmenquelle und fail-closed sind nicht "
+                           "dauerhaft belegt."))
     return out
 
 
@@ -2684,7 +2728,9 @@ RULE_TEXT = {
            "prueft Quelle (content/ + archetypes/, inklusive "
            "Template-Verdrahtung) UND Build (jede gebaute Seite), und das "
            "Barrierefreiheits-Audit prueft ALLE Seiten statt einer "
-           "Stichprobe. Geheilt wird nie automatisch: Eine H1 zu loeschen "
+           "Stichprobe. Er nutzt denselben HTML-aware Parser und dasselbe "
+           "Ausnahmenregister; ohne Wache oder Build ist das Ergebnis "
+           "fail-closed statt eines falschen Gruens. Geheilt wird nie automatisch: Eine H1 zu loeschen "
            "hiesze, einen redaktionellen Satz zu vernichten. Am 07.10.2026 "
            "trugen /presse/ und /studien/ je zwei H1 – und weil das Audit "
            "nur 20 von 107 Seiten sah, blieb die dritte "
@@ -3699,6 +3745,19 @@ def _selftest():
             if "STICHPROBE" in f[1]]:
         failures.append("C30: eine wieder eingeführte Stichprobe im Audit "
                         "bleibt unentdeckt (#623).")
+    # (c) Eine lokale Ersatz-Ausnahmeliste oder ein blinder Asset-Filter
+    #     darf das zentrale, begründete Register nicht umgehen.
+    a11y_fallback = dict(echte_h1, **{
+        "a11y_audit.py": echte_h1["a11y_audit.py"].replace(
+            "from h1_wache import AUSNAHMEN_SEITE as AUSNAHMEN, h1_der_seite",
+            "from h1_wache import h1_der_seite\nAUSNAHMEN = ((r'^go/', 'fallback'),)"
+        ) + "\nSKIP_PATTERNS = ('BingSiteAuth',)\n"
+    })
+    if not [f for f in c30_eine_h1(a11y_fallback, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+            if "Ersatz-Ausnahmeliste" in f[1]]:
+        failures.append("C30: eine lokale Ersatzliste/Skip-Ausnahme im A11y-Audit "
+                        "bleibt unentdeckt.")
     # (c) Die Wache fällt aus dem Deploy: geprüft wäre nur, was jemand von
     #     Hand ruft – und die Doppel-H1 stünde wieder live.
     def _deploy_variante(ersetzung):
@@ -3723,6 +3782,22 @@ def _selftest():
             if "gebauten Seiten" in f[1] or "deploy.yml" in f[1]]:
         failures.append("C30: eine aus deploy.yml entfernte Build-Prüfung der "
                         "H1-Wache bleibt unentdeckt (#623).")
+
+    # Änderungen an Wache/Audit und deren Tests müssen den E2E-Vertrag auslösen.
+    def _e2e_variante(ersetzung):
+        kopie = dict(wflows_echt)
+        for pfad, text_ in list(kopie.items()):
+            if os.path.basename(pfad) == "e2e.yml":
+                kopie[pfad] = text_.replace(*ersetzung)
+        return kopie
+
+    if not [f for f in c30_eine_h1(
+            echte_h1,
+            _e2e_variante(('"scripts/a11y_audit.py"', '"# Audit-Pfad entfernt"')),
+            python_bin=sys.executable or "python3")
+            if "e2e.yml-Pfadfilter" in f[1]]:
+        failures.append("C30: ein aus dem e2e.yml-Pfadfilter entfernter A11y-Audit "
+                        "bleibt unentdeckt.")
     # (d) Eine Wache, die selbst heilt, vernichtet Sätze.
     mit_fix = dict(echte_h1, **{
         "h1_wache.py": echte_h1["h1_wache.py"].replace(

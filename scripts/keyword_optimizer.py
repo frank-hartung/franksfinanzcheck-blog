@@ -344,7 +344,11 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
     # R15-PHrasen-Doppel-Ruine aus der Zertifizierung. Trägt der Zielabsatz
     # den Stempel schon, ist der Heiler fertig.
     if re.match(r"^" + re.escape(main_kw) + r"\s+im Check\b", first_para):
-        return body
+        # Fixpunkt auch mit führender Naht: `body` ist hier bereits um `lead`
+        # gekürzt – ohne Wiederanhängen frisst der Heiler die Leerzeilen vor
+        # einem oben angeklebten Schnell-Tipp-Block (Klassen-Wächter
+        # test_fm_boundaries, 07.10.2026).
+        return lead + body
     # #585-Nachtrag: KEIN `.lower()` und keine Themen-Sonderlocken mehr. Beides
     # hat Ruinen erzeugt („Du willst bankgebühren sparen?", „Du willst
     # online-konten?"). Das Keyword steht wortgleich vor dem Doppelpunkt – die

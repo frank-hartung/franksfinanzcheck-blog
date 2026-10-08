@@ -256,6 +256,94 @@ def fix(posts_dir=None):
     return requeued, kept, errors
 
 
+# ---------------------------------------------------------------------------
+#  Lesbarkeits-Selbsttest – KI ausschließlich über die Attrappe
+# ---------------------------------------------------------------------------
+_LES_SCHLECHT = ("---\ntitle: Test\ndate: 2026-09-07\ndraft: true\n---\n\n"
+                 "Die Beitragsanpassung der Versicherungsgesellschaft erhöht die "
+                 "monatliche Belastung der Kunden. Die Verbraucherzentrale empfiehlt "
+                 "eine Überprüfung der Vertragsbedingungen.\n")
+_LES_GUT = _LES_SCHLECHT.replace(
+    "Die Beitragsanpassung der Versicherungsgesellschaft erhöht die "
+    "monatliche Belastung der Kunden. Die Verbraucherzentrale empfiehlt "
+    "eine Überprüfung der Vertragsbedingungen.",
+    "Die Kasse hebt den Beitrag jedes Jahr an. Die Kunden merken das "
+    "erst bei der Abrechnung. Die Beratung notiert, was sie mit dir "
+    "ausgemacht hat. Das Geld für den Monat bleibt so unter Kontrolle.")
+# Eine GELUNGENE KI-Antwort: gleiche Länge (Tor T4), keine Zahlen/Links,
+# deutlich über Flesch 60. Genau diese Antwort hat das Live-Modell im
+# Ernstfall sinngemäß geliefert – und damit den alten Test rot gefärbt.
+_LES_KI_GELUNGEN = ("Die Kasse hebt den Beitrag an. Das kostet die Kunden jeden "
+                    "Monat mehr Geld. Die Beratung der Verbraucherzentrale rät "
+                    "dir: Lies den Vertrag noch einmal genau durch. So siehst du, "
+                    "was sich für dich ändert und was gleich bleibt.")
+# Vertragsbruch: einfach, aber viel zu kurz (T4 Länge < 90 %).
+_LES_KI_ZU_KURZ = "Der Beitrag steigt. Prüf den Vertrag."
+
+
+class _KiAttrappe:
+    """Ersetzt `lesbarkeit_heiler.KI_CALL` für die Dauer eines Blocks.
+
+    Zählt die Aufrufe (Beweis, dass ein Pfad die KI wirklich – oder gerade
+    NICHT – fragt) und stellt den vorigen Zustand garantiert wieder her,
+    auch wenn der Block wirft. Der echte Transport (`_ki_chat`) wird in
+    keinem Fall erreicht: Das Urteil des Selbsttests hängt weder an einem
+    Schlüssel noch an einem Netz noch an einer Modellantwort.
+    """
+
+    def __init__(self, antwort):
+        self.antwort = antwort
+        self.aufrufe = 0
+
+    def __call__(self, _prompt):
+        self.aufrufe += 1
+        return self.antwort
+
+    def __enter__(self):
+        import lesbarkeit_heiler as lh
+        self._lh = lh
+        self._vorher = lh.KI_CALL
+        lh.KI_CALL = self
+        return self
+
+    def __exit__(self, *_exc):
+        self._lh.KI_CALL = self._vorher
+        return False
+
+
+def _selftest_lesbarkeit() -> list:
+    fehler = []
+    # L1 – KI stumm (kein Schlüssel, Ausfall, Kontingent leer): Hold bleibt.
+    with _KiAttrappe(None) as ki:
+        reif, beleg, text = lesbarkeit_reif(_LES_SCHLECHT, "fixture")
+    if reif or text != _LES_SCHLECHT:
+        fehler.append(f"L1: Lesbarkeits-Hold ohne KI-Antwort wird freigegeben: {beleg}")
+    if ki.aufrufe < 1:
+        fehler.append("L1: Text unter der Schwelle fragt die KI-Stufe nie an")
+    # L2 – KI bricht den Vertrag (zu kurz, T4): Hold bleibt, nichts geschrieben.
+    with _KiAttrappe(_LES_KI_ZU_KURZ):
+        reif, beleg, text = lesbarkeit_reif(_LES_SCHLECHT, "fixture")
+    if reif or text != _LES_SCHLECHT:
+        fehler.append(f"L2: KI-Vertragsbruch (T4) gibt den Hold frei: {beleg}")
+    # L3 – KI liefert eine gelungene Fassung: Hold wird reif, NEUER Text.
+    #      (Das ist die gewollte Produktionswirkung von WACHE-609 – sie muss
+    #      hier bewiesen werden, statt den Test im Ernstfall rot zu färben.)
+    with _KiAttrappe(_LES_KI_GELUNGEN):
+        reif, beleg, text = lesbarkeit_reif(_LES_SCHLECHT, "fixture")
+    if not reif or text == _LES_SCHLECHT or "Kasse hebt den Beitrag" not in text:
+        fehler.append(f"L3: gelungene KI-Heilung wird nicht übernommen: {beleg}")
+    elif "Stufe B" not in beleg:
+        fehler.append(f"L3: Beleg nennt die heilende Stufe nicht: {beleg}")
+    # L4 – Text schon über der Schwelle: reif ohne Schreiben, OHNE KI-Anfrage.
+    with _KiAttrappe(_LES_KI_ZU_KURZ) as ki:
+        reif, beleg, text = lesbarkeit_reif(_LES_GUT, "fixture")
+    if not reif or text != _LES_GUT:
+        fehler.append(f"L4: Hold über der Schwelle wird nicht freigegeben: {beleg}")
+    if ki.aufrufe:
+        fehler.append(f"L4: Text über der Schwelle fragt trotzdem die KI ({ki.aufrufe}×)")
+    return fehler
+
+
 def run_selftest() -> list:
     fehler = []
     if not is_quality_hold("quality-score: Score 0.70 < 0.80 (…) – Human-Review"):
@@ -301,25 +389,20 @@ def run_selftest() -> list:
     if is_readability_hold("publish-gate: Textverständnis-Gate nicht bestanden") \
             or is_readability_hold(None):
         fehler.append("fremder/leerer Grund wird als Lesbarkeits-Hold erkannt (#609)")
-    # Unter der Schwelle bleibt der Hold – der Heiler darf nichts behaupten.
-    schlecht = ("---\ntitle: Test\ndate: 2026-09-07\ndraft: true\n---\n\n"
-                "Die Beitragsanpassung der Versicherungsgesellschaft erhöht die "
-                "monatliche Belastung der Kunden. Die Verbraucherzentrale empfiehlt "
-                "eine Überprüfung der Vertragsbedingungen.\n")
-    reif_l, beleg_l, text_l = lesbarkeit_reif(schlecht, "fixture")
-    if reif_l or text_l != schlecht:
-        fehler.append(f"Lesbarkeits-Hold unter der Schwelle wird freigegeben: {beleg_l}")
-    # Über der Schwelle ist der Hold erledigt (bereits) – ohne Schreiben.
-    gut = schlecht.replace(
-        "Die Beitragsanpassung der Versicherungsgesellschaft erhöht die "
-        "monatliche Belastung der Kunden. Die Verbraucherzentrale empfiehlt "
-        "eine Überprüfung der Vertragsbedingungen.",
-        "Die Kasse hebt den Beitrag jedes Jahr an. Die Kunden merken das "
-        "erst bei der Abrechnung. Die Beratung notiert, was sie mit dir "
-        "ausgemacht hat. Das Geld für den Monat bleibt so unter Kontrolle.")
-    reif_g, beleg_g, text_g = lesbarkeit_reif(gut, "fixture")
-    if not reif_g or text_g != gut:
-        fehler.append(f"Hold über der Schwelle wird nicht freigegeben: {beleg_g}")
+    # LESBARKEIT – HERMETISCH (Dauerheilung Content-Engine v2 #138, 08.10.2026).
+    # Bis hierher rief dieser Selbsttest den Heiler mit `ki=True` OHNE
+    # Attrappe auf. Lokal und im PR-CI fehlt der Schlüssel → Stufe B fiel
+    # still aus → grün. In Phase 0.5 der Engine stehen seit WACHE-609 echte
+    # GROQ/GEMINI-Schlüssel – dort entschied das LIVE-MODELL über das Urteil
+    # des Selbsttests: Schrieb es den „schlechten“ Fixture-Text gut genug um
+    # (Flesch 2.9 → 86), meldete der Test „Hold unter der Schwelle wird
+    # freigegeben“, Exit 2, und der komplette Engine-Lauf starb vor Phase 1
+    # (Run 37694986440). Ein Selbsttest ist ein Urteil über den CODE, nicht
+    # über die Tagesform eines Modells – deshalb läuft jeder KI-Weg hier über
+    # die Attrappe `lesbarkeit_heiler.KI_CALL`, und eine unerwartete
+    # KI-Anfrage ist selbst ein Befund. Die CI-Probe dafür:
+    # `scripts/selftest_ki.py` (KI-Sperre um jeden Workflow-Selbsttest).
+    fehler += _selftest_lesbarkeit()
     r5_ok, r5_beleg, r5_text = r5_reif(body, "fixture")
     if not r5_ok or "0 harte Funde" not in r5_beleg:
         fehler.append(f"R5-Heilung gibt nicht frei: {r5_beleg}")

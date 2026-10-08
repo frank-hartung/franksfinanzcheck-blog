@@ -70,6 +70,8 @@ import os
 import re
 import sys
 import tempfile
+import unicodedata
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(os.environ.get("GITHUB_WORKSPACE") or Path(__file__).resolve().parents[1])
@@ -92,29 +94,29 @@ FRONTMATTER_TRENNER = re.compile(r"^---[ \t]*$")
 # Ausnahme braucht einen Grund; eine Ausnahme ohne Grund ist eine
 # Lücke mit Etikett.
 AUSNAHMEN_H1: tuple[tuple[str, str], ...] = (
-    # Verifikationsdateien: Google und Pinterest verlangen den
-    # exakten Inhalt – dort darf kein Layout hinein.
-    (r"(^|/)google[^/]*\.html$", "Verifikationsdatei (Google verlangt exakten Inhalt)"),
-    (r"(^|/)pinterest-[a-z0-9]+\.html$", "Verifikationsdatei (Pinterest verlangt exakten Inhalt)"),
-    # Blätter-Redirects: /page/N/ leitet sofort weiter.
-    (r"(^|/)page/[0-9]+/", "Blätter-Redirect ohne Seiteninhalt"),
+    # Verifikationsdateien liegen ausschließlich im öffentlichen Root:
+    # Google und Pinterest verlangen dort den exakten Inhalt – kein Layout.
+    # Root-Anker verhindern, dass künftig eine echte Inhaltsseite nur wegen
+    # eines gleichnamigen Segments versehentlich aus dem Gate fällt.
+    (r"^google[^/]*\.html$", "Verifikationsdatei (Google verlangt exakten Inhalt)"),
+    (r"^pinterest-[a-z0-9]+\.html$", "Verifikationsdatei (Pinterest verlangt exakten Inhalt)"),
+    # Ausschließlich echte Hugo-Paginierungsdateien /[section/]page/N/index.html.
+    (r"^(?:[^/]+/)?page/[0-9]+/index\.html$", "Blätter-Redirect ohne Seiteninhalt"),
     # Client-Redirect der Pinterest-Autorisierung (Zwilling von
     # /pinterest-oauth.html – diese Datei selbst WIRD geprüft).
     (r"^pinterest-oauth/index\.html$", "Client-Redirect ohne Seiteninhalt"),
 )
 
 # Für das VOLLAUDIT (scripts/a11y_audit.py) gilt zusätzlich:
-# Diese Seiten sind reine Weiterleitungen ohne Seitennavigation –
-# sie tragen zwar eine H1, aber bewusst keinen Skip-Link. Die
-# H1-Wache prüft sie (eine H1 ist eine H1), das Komplett-Audit
-# nicht (ein Skip-Link wäre dort sinnlos).
+# Diese exakt bekannten Routen sind reine Weiterleitungen ohne
+# Seitennavigation – sie tragen zwar eine H1, aber bewusst keinen Skip-Link.
+# Die H1-Wache prüft sie (eine H1 ist eine H1), das Komplett-Audit nicht
+# (ein Skip-Link wäre dort sinnlos). Auch hier sind die Muster absichtlich
+# routenscharf statt pauschal für ganze Pfadpräfixe.
 AUSNAHMEN_SEITE: tuple[tuple[str, str], ...] = AUSNAHMEN_H1 + (
-    (r"^go/", "Affiliate-Redirect (noindex, keine Seitennavigation)"),
+    (r"^go/[^/]+/index\.html$", "Affiliate-Redirect (noindex, keine Seitennavigation)"),
     (r"^pinterest-oauth\.html$", "Client-Redirect (Pinterest-Autorisierung)"),
 )
-
-H1_TAG = re.compile(r"<h1(?=[\s>])(.*?)</h1>", re.S | re.I)
-LEER = re.compile(r"<[^>]+>|\s|&[a-z]+;", re.I)
 
 
 def _lesen(pfad: Path) -> str:
@@ -230,16 +232,80 @@ def s2_layout(wurzel: Path = ROOT) -> list[str]:
 
 # ------------------------------------------------------------ S3: Build
 
+class _H1TextParser(HTMLParser):
+    """HTML-aware H1 counter; comments and script strings are not markup.
+
+    Regex over serialized HTML can mistake ``<h1>`` in comments, JavaScript,
+    CSS or inert ``<template>`` content for a real page heading. It also
+    mistakes every named entity (including visible ``&amp;``) for whitespace.
+    The standard-library parser gives the build gate and the full A11y audit
+    one consistent, entity-aware view without adding a runtime dependency.
+    """
+
+    _TEXTLESS_TAGS = {"script", "style"}
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.h1_texts: list[list[str]] = []
+        # A None stack entry marks an H1 inside inert <template> content, so
+        # its closing tag cannot accidentally close a surrounding real H1.
+        self._h1_stack: list[int | None] = []
+        self._template_depth = 0
+        self._textless_stack: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs) -> None:
+        tag = tag.lower()
+        if tag == "template":
+            self._template_depth += 1
+        if tag == "h1":
+            if self._template_depth:
+                self._h1_stack.append(None)
+            else:
+                self.h1_texts.append([])
+                self._h1_stack.append(len(self.h1_texts) - 1)
+        if tag in self._TEXTLESS_TAGS:
+            self._textless_stack.append(tag)
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if tag == "h1" and self._h1_stack:
+            self._h1_stack.pop()
+        if tag in self._TEXTLESS_TAGS:
+            for index in range(len(self._textless_stack) - 1, -1, -1):
+                if self._textless_stack[index] == tag:
+                    del self._textless_stack[index]
+                    break
+        if tag == "template":
+            self._template_depth = max(0, self._template_depth - 1)
+
+    def handle_data(self, data: str) -> None:
+        if self._template_depth or self._textless_stack:
+            return
+        for index in reversed(self._h1_stack):
+            if index is not None:
+                self.h1_texts[index].append(data)
+                break
+
+
 def h1_der_seite(html: str) -> list[str]:
-    """Sichtbare H1-Texte einer gebauten Seite (Tags entfernt)."""
-    texte = []
-    for treffer in H1_TAG.finditer(html):
-        roh = html[treffer.start():treffer.end()]
-        innen = re.sub(r"^<h1[^>]*>", "", roh, flags=re.I | re.S)
-        innen = re.sub(r"</h1>$", "", innen, flags=re.I)
-        text = LEER.sub("", innen)
-        texte.append(text)
-    return texte
+    """Gibt den normalisierten Text aller echten H1-Elemente zurück.
+
+    HTML-Entities werden dekodiert, Inline-Markup wird entfernt und
+    zusammenhängende Leerzeichen (inkl. NBSP) werden vereinheitlicht.
+    Leere H1 bleiben als ``""`` erhalten, damit S3 sie ausdrücklich meldet.
+    """
+    parser = _H1TextParser()
+    parser.feed(html)
+    parser.close()
+    return [" ".join("".join(teile).split()) for teile in parser.h1_texts]
+
+
+def h1_ist_gefuellt(text: str) -> bool:
+    """True only if the heading contains a visible, non-whitespace character."""
+    return any(
+        not char.isspace() and unicodedata.category(char) not in {"Cc", "Cf", "Cs"}
+        for char in text
+    )
 
 
 def s3_build(public: Path, ausnahmen=AUSNAHMEN_H1) -> list[str]:
@@ -247,7 +313,9 @@ def s3_build(public: Path, ausnahmen=AUSNAHMEN_H1) -> list[str]:
     if not public.is_dir():
         return [f"S3: {public} fehlt – ohne Build ist die gebaute Wahrheit nicht prüfbar (fail-closed)."]
     geprueft = 0
-    for pfad in sorted(public.rglob("*.html")):
+    html_dateien = (pfad for pfad in public.rglob("*")
+                    if pfad.is_file() and pfad.suffix.lower() == ".html")
+    for pfad in sorted(html_dateien):
         rel = str(pfad.relative_to(public)).replace(os.sep, "/")
         if ausnahme_grund(rel, ausnahmen):
             continue
@@ -259,7 +327,7 @@ def s3_build(public: Path, ausnahmen=AUSNAHMEN_H1) -> list[str]:
             funde.append(fund + ". Zwei H1 zerstören die Gliederung für Screenreader, "
                          "Inhaltsverzeichnis und KI-Antworten.")
             continue
-        if not texte[0]:
+        if not h1_ist_gefuellt(texte[0]):
             funde.append(f"S3: {rel} trägt eine leere H1 – eine Überschrift ohne Text ist keine.")
     if geprueft == 0:
         funde.append("S3: keine prüfbare Seite im Build gefunden – ein Build ohne Seiten ist ein Befund.")
@@ -312,6 +380,19 @@ def selftest(wurzel: Path = ROOT) -> list[str]:
         check("S3: H1-Texte werden genannt", any("Zwei" in f for f in funde))
         check("S3: leere H1 wird erkannt", any("leer/index.html" in f for f in funde))
         check("S3: saubere Seite bleibt still", not any("index.html trägt 1 H1" in f for f in funde))
+        parserprobe = (
+            '<!-- <h1>Kommentar</h1> -->'
+            '<script>const markup = "<h1>Skript</h1>";</script>'
+            '<template><h1>Vorlage</h1></template>'
+            '<H1>Text &amp; <em>Mehr</em></H1>'
+        )
+        check("S3: HTML-Parser zählt nur echte H1 und dekodiert sichtbare Entities",
+              h1_der_seite(parserprobe) == ["Text & Mehr"])
+        check("S3: numerische Leerzeichen-Entities ergeben keine gefüllte H1",
+              h1_der_seite("<h1>&nbsp;&#160;&#xA0;</h1>") == [""])
+        unsichtbar = h1_der_seite("<h1>&#x200B;</h1>")
+        check("S3: Zero-Width-Zeichen allein täuschen keine gefüllte H1 vor",
+              len(unsichtbar) == 1 and not h1_ist_gefuellt(unsichtbar[0]))
 
         # Ausnahmen: begründet und nicht zu weit
         (pub / "page" / "2").mkdir(parents=True)

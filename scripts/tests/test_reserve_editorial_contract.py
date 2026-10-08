@@ -20,6 +20,25 @@ import reserve_readiness as rr  # noqa: E402
 
 
 class ReserveEditorialContractTests(unittest.TestCase):
+    def test_leerer_yaml_autor_umgeht_rs7_nicht(self):
+        for author in ("", "null", "~", '""'):
+            with self.subTest(author=author):
+                article = f"---\nauthor: {author}\n---\nText."
+                findings = rr.reserve_editorial_findings(Path("unused"), article)
+                self.assertTrue(any(f.startswith("RS7:") for f in findings), findings)
+
+    def test_defektes_frontmatter_bleibt_gesperrt(self):
+        for article in ("Text ohne Frontmatter", "---\n- Liste\n---\nText",
+                        "---\nauthor: [\n---\nText"):
+            with self.subTest(article=article):
+                self.assertTrue(rr.reserve_editorial_findings(Path("unused"), article))
+
+    def test_ausfall_des_redaktionspruefers_bleibt_gesperrt(self):
+        with patch.object(rs, "reserve_quality_findings", side_effect=RuntimeError("Test")):
+            findings = rr.reserve_editorial_findings(
+                Path("unused"), "---\nauthor: Frank Hartung\n---\nText")
+        self.assertIn("nicht prüfbar", findings[0])
+
     def test_unbelegte_zahl_blockiert_rs5(self):
         findings = rs.reserve_quality_findings(
             "Ein Tarif kostet 240 Euro pro Jahr.", author="Frank Hartung")

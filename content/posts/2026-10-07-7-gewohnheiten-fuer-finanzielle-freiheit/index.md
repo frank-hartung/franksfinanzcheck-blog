@@ -40,6 +40,8 @@ faktencheck: "2026-10-07"
 
 Finanzielle Freiheit klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Du musst nicht jede Ausgabe streichen. Du brauchst zuerst einen verlässlichen Blick auf dein Geld.
 
 Dann kannst du entscheiden, was bleiben soll und was sich ändern darf.

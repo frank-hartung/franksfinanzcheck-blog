@@ -52,6 +52,17 @@ jobs:
       # vorgestellten Uhr: dieselben Tests, fremdes Datum, gleiches Ergebnis.
       - name: Uhr-Probe – die Suite muss an jedem Kalendertag grün sein
         run: python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
+      # KI-PROBE (Dauerheilung Content-Engine v2 #138, 08.10.2026): Jeder
+      # Selbsttest, den irgendein Workflow aufruft, läuft hier mit Attrappen-
+      # Schlüsseln und gesperrtem Netz. Hier fehlen echte Schlüssel – in der
+      # Produktion nicht. Ein Selbsttest, der dann das Modell fragt, urteilt
+      # nach Tagesform des Modells statt nach dem Code (Run 37694986440: Lauf
+      # tot vor Phase 1). Die Probe meldet jeden Netzversuch mit Datei/Zeile,
+      # auch wenn der Aufrufer die Ausnahme schluckt.
+      - name: KI-Probe – kein Selbsttest darf am Modell oder am Netz hängen (#138)
+        run: |
+          python3 scripts/selftest_ki.py --selftest
+          python3 scripts/selftest_ki.py --trap-workflows
       # Ledger-Isolation (C27, Nebenbefund zu #610): audit_log trägt den
       # Vertrag, repo_isolation stellt die Sandbox für Tests. Beide prüfen in
       # beide Richtungen – Umlenkung wirkt UND Normalfall bleibt scharf.

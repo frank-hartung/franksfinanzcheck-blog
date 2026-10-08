@@ -5,6 +5,7 @@
     "nacht-planung::planung:2026-10-05": "2026-10-05T08:55:53+02:00",
     "nacht-planung::planung:2026-10-06": "2026-10-06T04:30:18+02:00",
     "nacht-planung::planung:2026-10-07": "2026-10-07T09:10:22+02:00",
+    "nacht-planung::planung:2026-10-08": "2026-10-08T08:36:17+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/service/flugpreise-tickets-ab-deutschland-seit-2010-im-schnitt-verdoppelt-a-2a070709-c88f-4826-a4d7-5c7ecf35cff2#ref=rss": "2026-10-05T17:55:29+02:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html": "2026-10-04T16:20:48+02:00",
@@ -32,7 +33,7 @@
   },
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-10-05T17:55:29+02:00",
-    "nacht-planung": "2026-10-07T09:10:22+02:00",
+    "nacht-planung": "2026-10-08T08:36:17+02:00",
     "reach-signale-kuratieren": "2026-10-05T17:55:29+02:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "verbraucher-nachrichten": "2026-10-07T09:10:22+02:00"
@@ -44,7 +45,8 @@
     "slot:2026-10-04:03:40": "2026-10-04T16:20:48+02:00",
     "slot:2026-10-05:03:40": "2026-10-05T08:55:53+02:00",
     "slot:2026-10-06:03:40": "2026-10-06T04:30:18+02:00",
-    "slot:2026-10-07:03:40": "2026-10-07T09:10:22+02:00"
+    "slot:2026-10-07:03:40": "2026-10-07T09:10:22+02:00",
+    "slot:2026-10-08:03:40": "2026-10-08T08:36:17+02:00"
   },
   "version": 1,
   "zaehler": {
@@ -55,7 +57,8 @@
       "2026-10-04": 1,
       "2026-10-05": 1,
       "2026-10-06": 1,
-      "2026-10-07": 1
+      "2026-10-07": 1,
+      "2026-10-08": 1
     },
     "reach-signale-kuratieren": {
       "2026-10-04": 6,

@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T17:25:22.231322+00:00",
-  "head": "da2556e",
+  "signed_at": "2026-10-07T23:58:49.852839+00:00",
+  "head": "c33e0ab",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -16,7 +16,7 @@
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
-    "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
+    "layouts/index.sw.js": "bedd9ae9b3e56d204a487137f90479feebb53395a4a046e738025321bd4ef5d8",
     "layouts/pillar/list.html": "435db5bd1741bde574bae2c547e75ff879fd7681ce26721513dc93a21800bac4",
     "layouts/pillar/single.html": "8ccda4b5629b5b1672ed894c14baed92f4bc5eb75586eba2b612419ebefab001",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
@@ -41,7 +41,7 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
-    "scripts/redaktions_standard.py": "7df1aa4fd66288b6d12a9da0f621f4fd01f63c2b6acb80e8c2b2f02af57c92b5",
+    "scripts/redaktions_standard.py": "282acfc81639f9fc1158e8ee2e752c2a8b00f8f93eaeaca82509ef5c9ca9c7bd",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
@@ -51,7 +51,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
+  "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -159,8 +159,63 @@
       "art": "set-current",
       "head": "da2556e",
       "geaendert": [],
-      "prev_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
-      "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364"
+      "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
+      "prev_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "heal",
+      "head": "8912847",
+      "geaendert": [
+        "layouts/index.sw.js"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/index.sw.js",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "8912847",
+              "datum": "2026-10-07",
+              "betreff": "feat(robustheit): Resilienzschicht C31 – die Seite darf nie stumm sterben"
+            },
+            {
+              "sha": "4c85d5b",
+              "datum": "2026-10-07",
+              "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "7439babe5af3b72ede239d1d8f260bed8f5a6c9f7cd210f46c3d79fc49e142a4",
+      "prev_sha256": "342ab5a1b98a735a8250610fb5cf8575533dbca6d073e7ba115ed739344ad445"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "c33e0ab",
+      "geaendert": [
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "c33e0ab",
+              "datum": "2026-10-08",
+              "betreff": "feat(robustheit): C31 – Resilienzschicht für die Laufzeit (die Seite darf nie stumm sterben) (#633)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17",
+      "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a"
     }
   ]
 }

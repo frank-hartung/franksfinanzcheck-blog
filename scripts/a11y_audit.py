@@ -16,7 +16,7 @@ Nutzung:
     python3 scripts/a11y_audit.py            # Audit (alle gebauten Seiten)
     python3 scripts/a11y_audit.py --json     # JSON-Report
 
-Exit-Code: 0 = ok, 1 = A11y-Probleme
+Exit-Code: 0 = bestanden · 1 = A11y-Befund · 2 = Audit nicht prüfbar
 
 BLINDER FLECK GESCHLOSSEN (Dauerheilung #623, 07.10.2026):
 Bis dahin prüfte dieses Audit eine STICHPROBE von 20 Seiten – von 107
@@ -24,10 +24,11 @@ gebauten Seiten. Die dritte Doppel-H1 des Befundtages
 (/studien/fixkosten-index-2026-q4/) stand im selben Build und blieb
 UNSICHTBAR; gemeldet wurden nur /presse/ und /studien/. Ein Audit,
 das ein Fünftel sieht, würfelt. Jetzt läuft der Lauf über ALLE
-gebauten Seiten (eine Sekunde, kein Grund für eine Stichprobe) und
-nennt bei einer falschen H1-Anzahl die Überschriften TEXTLICH, damit
-das automatische Issue ohne Nachfrage erklärt, was zu tun ist.
-Die H1-Regel selbst gehört der Wache scripts/h1_wache.py (S1–S3).
+gebauten Seiten und nennt bei einer falschen H1-Anzahl die Überschriften
+TEXTLICH, damit das automatische Issue ohne Nachfrage erklärt, was zu tun
+ist. Die H1-Regel samt HTML-Parser und begründeten Ausnahmen gehört der
+Wache scripts/h1_wache.py (S1–S3). Fehlt die Wache, der Build oder eine
+prüfbare Seite, meldet das Audit Exit 2 statt eines falschen Grün.
 """
 import json
 import os
@@ -57,80 +58,81 @@ def hex_rgb(h):
     return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
 
-# Seiten, die bewusst minimal sind und NICHT geprüft werden. Die Liste
-# gehört der H1-Wache (eine Wahrheit, keine zweite Ausnahme-Quelle):
-#   scripts/h1_wache.py → AUSNAHMEN_SEITE. Jeder Eintrag trägt dort
-#   seinen Grund; eine Ausnahme ohne Grund ist eine Lücke mit Etikett.
-#   - Verifikationsdateien (Google/Pinterest verlangen exakten Inhalt)
-#   - /page/N/: Blätter-Redirects ohne Seiteninhalt
-#   - /go/ und /pinterest-oauth*: reine Weiterleitungen (noindex)
-#   - BingSiteAuth.xml: keine HTML-Seite
-try:  # a11y_audit.py liegt wie die Wache in scripts/ – direkter Import.
-    from h1_wache import AUSNAHMEN_SEITE as AUSNAHMEN  # type: ignore
-except ImportError:  # fail-closed gemeldet, nicht stillschweigend grün
-    AUSNAHMEN = (
-        (r"(^|/)google[^/]*\.html$", "Verifikationsdatei"),
-        (r"(^|/)pinterest-[a-z0-9]+\.html$", "Verifikationsdatei"),
-        (r"(^|/)page/[0-9]+/", "Blätter-Redirect"),
-        (r"^pinterest-oauth/index\.html$", "Client-Redirect"),
-        (r"^go/", "Affiliate-Redirect"),
-        (r"^pinterest-oauth\.html$", "Client-Redirect"),
-    )
-    print("⚠ a11y_audit: scripts/h1_wache.py nicht ladbar – Ausnahmen "
-          "ersatzweise aus der eingebauten Liste (Gründe: h1_wache.py).")
-
-SKIP_PATTERNS = ("BingSiteAuth",)
+# Seiten, die bewusst minimal sind und NICHT vom Voll-Audit geprüft werden.
+# Die Liste kommt ausschließlich aus scripts/h1_wache.py: Jede Ausnahme
+# hat dort einen dokumentierten Grund. Ist die Wache nicht importierbar,
+# wird das Audit rot – ein zweiter Fallback würde eine zweite Wahrheit und
+# damit eine stille Driftstelle schaffen.
+_H1_WACHE_IMPORT_ERROR = None
+AUSNAHMEN = None
+h1_der_seite = None
+h1_ist_gefuellt = None
+try:
+    from h1_wache import AUSNAHMEN_SEITE as AUSNAHMEN, h1_der_seite, h1_ist_gefuellt
+except ImportError as exc:  # sichtbar fail-closed, niemals Ersatzliste
+    _H1_WACHE_IMPORT_ERROR = f"{exc.__class__.__name__}: {exc}"
 
 
-def collect_html_files():
-    """ALLE gebauten Seiten – seit #623 keine Stichprobe mehr.
+def _require_h1_contract():
+    """Stoppt den Audit, wenn sein H1-SSOT fehlt oder nicht nutzbar ist."""
+    if (_H1_WACHE_IMPORT_ERROR is not None or AUSNAHMEN is None
+            or not callable(h1_der_seite) or not callable(h1_ist_gefuellt)):
+        detail = f" ({_H1_WACHE_IMPORT_ERROR})" if _H1_WACHE_IMPORT_ERROR else ""
+        raise RuntimeError(
+            "H1-Wache scripts/h1_wache.py nicht ladbar; das A11y-Audit "
+            f"bricht fail-closed ab{detail}. Es gibt keine Ersatz-Ausnahmeliste."
+        )
 
-    Begründung: Eine Stichprobe von 20 aus 107 Seiten hat die dritte
-    Doppel-H1 des Befundtages nicht gesehen. Der vollständige Lauf
-    kostet rund eine Sekunde; eine Auslassung kostet ein Issue.
+
+def collect_html_files(public_dir=None):
+    """Alle prüfbaren, gebauten HTML-Dateien – keine Stichprobe, kein Blindfilter.
+
+    Nur die begründeten Routen-Ausnahmen aus der H1-Wache werden
+    ausgelassen. Insbesondere gibt es keine pauschalen Verzeichnisfilter
+    (z. B. ``assets``) oder substring-basierten Skip-Listen.
     """
+    _require_h1_contract()
+    public_root = os.fspath(public_dir or PUBLIC_DIR)
     files = []
-    for root, dirs, names in os.walk(PUBLIC_DIR):
-        if "assets" in root:
-            continue
+    for root, _dirs, names in os.walk(public_root):
         for n in names:
-            if not n.endswith(".html"):
+            if not n.lower().endswith(".html"):
                 continue
-            rel = os.path.relpath(os.path.join(root, n), PUBLIC_DIR).replace(os.sep, "/")
-            if any(p in rel for p in SKIP_PATTERNS):
-                continue
+            full_path = os.path.join(root, n)
+            rel = os.path.relpath(full_path, public_root).replace(os.sep, "/")
             if any(re.search(muster, rel) for muster, _grund in AUSNAHMEN):
                 continue
-            files.append(os.path.join(root, n))
-    # Wichtige Seiten zuerst (flach vor tief) – nur die Ausgabe-Ordnung
+            files.append(full_path)
+    # Flache Seiten zuerst – ausschließlich die Ausgabe-Ordnung.
     files.sort(key=lambda f: (f.count(os.sep), f))
     return files
 
 
-def audit_page(path):
+def audit_page(path, public_dir=None):
+    _require_h1_contract()
+    public_root = os.fspath(public_dir or PUBLIC_DIR)
+    name = os.path.relpath(path, public_root)
     try:
-        html = open(path, encoding="utf-8", errors="ignore").read()
+        with open(path, encoding="utf-8", errors="ignore") as fh:
+            html = fh.read()
     except OSError as e:
-        return os.path.relpath(path, PUBLIC_DIR), [f"Datei nicht lesbar: {e}"]
+        return name, [f"Datei nicht lesbar: {e}"]
     issues = []
-    name = os.path.relpath(path, PUBLIC_DIR)
 
     if '<html lang=' not in html:
         issues.append("lang-Attribut fehlt")
     if '<title>' not in html and "<title>" not in html:
         issues.append("title fehlt")
-    h1s = re.findall(r"<h1[\s>].*?</h1>", html, re.S)
+    # Die H1-Erkennung ist dieselbe HTML-aware Implementierung wie im
+    # Build-Gate. Kommentare, Skriptstrings und Entities können den Zähler
+    # daher weder aufblähen noch eine leere H1 kaschieren.
+    h1s = h1_der_seite(html)
     if len(h1s) != 1:
-        # Seit #623 textlich benannt: ein Issue, das nur „2 h1“ sagt,
-        # zwingt zum Nachfragen. Die Texte zeigen sofort, welche
-        # Überschrift aus dem Fließtext stammt (dort liegt die Ursache).
-        texte = []
-        for roh in h1s[:3]:
-            innen = re.sub(r"</h1>\s*$", "", re.sub(r"^<h1[^>]*>", "", roh, flags=re.S))
-            text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", innen)).strip()
-            texte.append(f"„{text[:60]}“" if text else "„“ (leer)")
+        texte = [f"„{text[:60]}“" if text else "„“ (leer)" for text in h1s[:3]]
         issues.append(f"{len(h1s)} h1 (erwartet: 1): " + " · ".join(texte)
                       if texte else f"{len(h1s)} h1 (erwartet: 1)")
+    elif not h1_ist_gefuellt(h1s[0]):
+        issues.append("H1 ist leer oder enthält nur unsichtbare Zeichen (erwartet: nicht-leere H1)")
     # Bilder ohne alt-Text. WICHTIG: Ein nacktes `alt`-Attribut ist nach
     # HTML5 identisch mit alt="" (dekorativ) – Hugo --minify kürzt leere
     # Attribute genau so. Wir zählen also nur Bilder, die gar kein
@@ -143,8 +145,9 @@ def audit_page(path):
     return name, issues
 
 
-def audit_css(sampled_htmls=()):
+def audit_css(page_htmls=(), public_dir=None):
     issues = []
+    public_root = os.fspath(public_dir or PUBLIC_DIR)
     # CSS kann in diesem Setup an zwei Orten liegen:
     #   1. als .css-Dateien irgendwo unter public/ (klassisch assets/css/)
     #   2. INLINE in <style>-Blöcken der HTML-Seiten (dieses Theme inlined
@@ -153,9 +156,9 @@ def audit_css(sampled_htmls=()):
     # FIX (#81): Früher erwartete die Funktion starr public/assets/css/ und
     # crashte mit FileNotFoundError, wenn der Ordner fehlte. Folge: stdout
     # blieb leer, /tmp/a11y_log.txt war leer und das Auto-Issue bekam einen
-    # leeren Body. Jetzt: robustes os.walk über alles + Inline-CSS, nie crashen.
+    # leeren Body. Jetzt: robustes os.walk über den Build + Inline-CSS.
     css_parts = []
-    for root, _dirs, names in os.walk(PUBLIC_DIR):
+    for root, _dirs, names in os.walk(public_root):
         for n in names:
             if n.endswith(".css"):
                 try:
@@ -163,7 +166,7 @@ def audit_css(sampled_htmls=()):
                         css_parts.append(fh.read())
                 except OSError:
                     pass
-    for html in sampled_htmls:
+    for html in page_htmls:
         for m in re.finditer(r"<style[^>]*>(.*?)</style>", html, re.S):
             css_parts.append(m.group(1))
     css = "\n".join(css_parts)
@@ -201,47 +204,78 @@ def audit_contrast():
     return results
 
 
-def main():
-    as_json = "--json" in sys.argv
+def _audit_unavailable(message, as_json=False):
+    """Meldet eine nicht prüfbare Grundlage als Fehler, nie als Grün."""
+    if as_json:
+        print(json.dumps({
+            "ok": False,
+            "seiten": 0,
+            "css_probleme": [],
+            "kontrast": [],
+            "gesamt_probleme": 1,
+            "ausnahmen": [],
+            "uebersprungen": True,
+            "fehler": [message],
+        }, ensure_ascii=False, indent=2))
+    else:
+        print(f"🛑 Barrierefreiheits-Audit nicht prüfbar: {message}")
+    return 2
 
-    # Robustheit: Das Audit braucht den Hugo-Build (public/). Wird das Skript
-    # lokal oder in einem Pre-Build-Schritt aufgerufen, darf es NICHT mit einer
-    # Traceback crashen – es meldet den fehlenden Build sauber und bricht nicht
-    # die Kette (der Aufrufer steuert über Exit-Code 0 = ohne Befund).
-    if not os.path.isdir(PUBLIC_DIR):
-        print("Barrierefreiheits-Audit: public/ fehlt – Hugo-Build vorher ausführen, Überspringe Audit.")
-        if as_json:
-            print(json.dumps({"seiten": 0, "css_probleme": [], "kontrast": [],
-                              "gesamt_probleme": 0, "uebersprungen": True},
-                             ensure_ascii=False, indent=2))
-        sys.exit(0)
+
+def main(argv=None):
+    args = list(sys.argv[1:] if argv is None else argv)
+    as_json = "--json" in args
+
+    # Fail-closed: Ohne kanonische H1-Wache gäbe es eine zweite,
+    # driftende Ausnahmeliste oder eine unprüfbare H1-Erkennung.
+    try:
+        _require_h1_contract()
+    except RuntimeError as exc:
+        return _audit_unavailable(str(exc), as_json)
+
+    public_root = os.fspath(PUBLIC_DIR)
+    if not os.path.isdir(public_root):
+        return _audit_unavailable(
+            "public/ fehlt – zuerst den Hugo-Build ausführen; kein Audit ohne Build.",
+            as_json,
+        )
+
+    paths = collect_html_files(public_root)
+    if not paths:
+        return _audit_unavailable(
+            "keine prüfbare HTML-Seite im Build gefunden; ein leerer oder "
+            "vollständig ausgenommener Build ist kein grünes Audit.",
+            as_json,
+        )
 
     page_results = []
-    sampled_htmls = []
-    for path in collect_html_files():
-        name, issues = audit_page(path)
+    page_htmls = []
+    for path in paths:
+        name, issues = audit_page(path, public_root)
         page_results.append({"seite": name, "probleme": issues})
         try:
             with open(path, encoding="utf-8", errors="ignore") as fh:
-                sampled_htmls.append(fh.read())
+                page_htmls.append(fh.read())
         except OSError:
             pass
 
-    css_issues = audit_css(sampled_htmls)
+    css_issues = audit_css(page_htmls, public_root)
     contrast_results = audit_contrast()
 
     total_issues = sum(len(p["probleme"]) for p in page_results) + len(css_issues)
     contrast_fail = sum(1 for c in contrast_results if not c["ok"])
+    ok = total_issues == 0 and contrast_fail == 0
 
     if as_json:
         print(json.dumps({
+            "ok": ok,
             "seiten": len(page_results),
             "css_probleme": css_issues,
             "kontrast": contrast_results,
             "gesamt_probleme": total_issues,
             "ausnahmen": sorted({grund for _m, grund in AUSNAHMEN}),
         }, ensure_ascii=False, indent=2))
-        sys.exit(1 if total_issues > 0 or contrast_fail else 0)
+        return 0 if ok else 1
 
     # Vollständiger Lauf (seit #623 keine Stichprobe): saubere Seiten
     # werden nur gezählt, nicht aufgezählt – der Report bleibt lesbar.
@@ -272,10 +306,11 @@ def main():
         print(f"  {'✅' if c['ok'] else '❌'} {c['paar']}: {c['verhältnis']}:1 (min. {c['mindest']}:1)")
 
     print(f"\nErgebnis: {total_issues} Probleme, {contrast_fail} Kontrast-Fehler")
-    if total_issues > 0 or contrast_fail:
-        sys.exit(1)
+    if not ok:
+        return 1
     print("✅ Barrierefreiheit auf Top-Niveau")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

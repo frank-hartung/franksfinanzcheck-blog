@@ -71,16 +71,62 @@
     for (var i = 0; i < links.length; i++) trimAnchorTrail(links[i]);
   }
 
+  /* ---------- Härtung (Vertrag C31, 07.10.2026 – Robustheit Premium) ----------
+     Dieses Netz ist das LETZTE seiner Kette: Fällt es aus, sieht der Leser
+     Markdown-Reste in der Kurzfassung. Drei Ausfälle waren möglich, alle still:
+       1. `document.body` fehlt (Skript läuft im <head> eines fremden
+          Auslieferungswegs) → TypeError beim Beobachten, Netz tot.
+       2. `MutationObserver` fehlt (alter Browser) → derselbe Abbruch.
+       3. Eine Ausnahme IN einem Durchlauf (unerwarteter Knoten, gesperrtes
+          DOM) beendete alle weiteren Durchläufe – das Netz riss, ohne dass
+          irgendwo ein Befund stand.
+     Jetzt: Fangnetz je Durchlauf, Anschluss erst mit vorhandenem Body, und
+     ein Leistungsschalter, der nach drei Fehlern in Folge aufhört (ein
+     Dauerläufer, der bei jeder Mutation wirft, kostet mehr als er schützt). */
+  var FEHLER_LIMIT = 3;
+  var fehlerFolge = 0;
+  var beobachter = null;
+
+  function melden(text) {
+    try {
+      if (window.FFRobust && window.FFRobust.melden) {
+        window.FFRobust.melden({ quelle: 'kurzfassung-safety', text: text });
+      }
+    } catch (e) { /* die Wache darf nie selbst zur Fehlerquelle werden */ }
+  }
+
   function run() {
-    var dialog = document.getElementById('ff-voice-dialog');
-    sanitizeDialog(dialog);
-    cleanTocTrails(dialog);
+    try {
+      var dialog = document.getElementById('ff-voice-dialog');
+      sanitizeDialog(dialog);
+      cleanTocTrails(dialog);
+      fehlerFolge = 0;
+    } catch (fehler) {
+      fehlerFolge += 1;
+      melden(String((fehler && fehler.message) || fehler || '') + ' (Folge ' + fehlerFolge + ')');
+      if (fehlerFolge >= FEHLER_LIMIT && beobachter && beobachter.disconnect) {
+        beobachter.disconnect();
+        beobachter = null;
+        melden('nach ' + fehlerFolge + ' Fehlern abgeschaltet – der Dialog bleibt, wie er ist');
+      }
+    }
+  }
+
+  function anschliessen() {
+    run();
+    if (!document.body) return;                 /* kein Body → nichts zu beobachten */
+    if (typeof MutationObserver !== 'function') return;  /* alter Browser: einmal ist einmal */
+    try {
+      beobachter = new MutationObserver(run);
+      beobachter.observe(document.body, { childList: true, subtree: true });
+    } catch (fehler) {
+      melden('Beobachter nicht gestartet: ' + String((fehler && fehler.message) || fehler || ''));
+    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run, { once: true });
+    document.addEventListener('DOMContentLoaded', anschliessen, { once: true });
   } else {
-    run();
+    anschliessen();
   }
-  new MutationObserver(run).observe(document.body, { childList: true, subtree: true });
 }());

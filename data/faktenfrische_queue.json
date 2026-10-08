@@ -1,19 +1,13 @@
 {
-  "erzeugt": "2026-10-06 11:28 UTC",
+  "erzeugt": "2026-10-08 00:13 UTC",
   "uebersicht": {
-    "gesamt": 66,
-    "ratgeber": 6,
+    "gesamt": 1,
+    "ratgeber": 0,
     "faellig": 0,
     "bearbeitet": 0,
-    "geo_schnitt": 95,
+    "geo_schnitt": 100,
     "befunde": 0,
-    "geo_luecken": {
-      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 2,
-      "Mindestens eine Tabelle (extrahierbare Struktur)": 1,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 9,
-      "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
-    }
+    "geo_luecken": {}
   },
   "offen": [],
   "laeufe": []
