@@ -166,10 +166,14 @@ def ai_description(a):
     kws = parse_keywords(a["keywords"])[:4]
     anrede_hint = ("Sprich den Leser mit 'du' an." if not a.get("anrede_sie")
                    else "Sprich den Leser mit der Höflichkeitsform 'Sie' an.")
-    prompt = (f"Schreibe für einen deutschen Blog-Artikel eine klickstarke Meta-Description "
-              f"(max. 155 Zeichen, mit wichtigstem Keyword '{kws[0] if kws else title}'). "
+    prompt = (f"Schreibe für einen deutschen Blog-Artikel eine Premium-SEO-Meta-Description "
+              f"(exakt 130-150 Zeichen). Das wichtigste Keyword lautet '{kws[0] if kws else title}'. "
               f"{anrede_hint} "
-              f"Artikel-Titel: '{title}'. Nur die Description, ohne Anführungszeichen.")
+              f"Nutze starke psychologische Trigger (Problembewusstsein, Dringlichkeit, Lösung). "
+              f"Keine Floskeln wie 'Hier erfährst du'. Integriere ein spezifisches Detail "
+              f"als E-E-A-T-Vertrauenssignal (z.B. Kostenfalle, Gesetz, Frist). "
+              f"Ende mit einem klaren Call-to-Action (z.B. 'Jetzt prüfen', 'Hier vergleichen ➔', 'So gehst du vor'). "
+              f"Artikel-Titel: '{title}'. Nur die fertige Description ausgeben, ohne Anführungszeichen, ohne Einleitung.")
 
     text = _llm_meta(prompt, max_tokens=100)
     if text:
@@ -197,10 +201,12 @@ def ai_title(a):
     title = a["title"][:80]
     kws = parse_keywords(a["keywords"])[:4]
     kw = kws[0] if kws else title
-    prompt = (f"Schreibe für einen deutschen Blog-Artikel einen klickstarken, "
-              f"natürlichen SEO-Titel von EXAKT 50-60 Zeichen. Wichtigstes Keyword: "
-              f"'{kw}'. Ausgangs-Titel: '{title}'. Kein Clickbait, keine "
-              f"Sonderzeichen am Ende. Nur der Titel, ohne Anführungszeichen. "
+    prompt = (f"Schreibe für einen deutschen Blog-Artikel einen Premium-SEO-Titel von "
+              f"EXAKT 50-60 Zeichen Länge. Wichtigstes Keyword: '{kw}'. "
+              f"Ausgangs-Titel: '{title}'. Mach den Titel klickstark, nutze emotionale oder "
+              f"finanzielle Trigger (z. B. 'legal vermeiden', 'versteckte Kosten', '2026', Zahlen). "
+              f"Kein billiger Clickbait, sondern harte, journalistische Relevanz. "
+              f"Keine Sonderzeichen am Ende. Nur der Titel, ohne Anführungszeichen. "
               f"WICHTIG: Falls der Ausgangs-Titel einen Doppelpunkt enthält "
               f"(Muster 'Hauptkeyword: Untertitel'), behalte diese Struktur "
               f"unbedingt bei – kein 'dieses Jahr' o. Ä. am Ende, keine "
