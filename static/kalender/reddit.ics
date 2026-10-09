@@ -5,4 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-somme
+ r-schnaepp:zahl:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261024T121500Z
+DTEND:20261024T123000Z
+SUMMARY:Reddit: Last Minute Urlaub: – So schnappst du dir das Sommer‑S
+ chnäpp (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Reddit\nArtikel: htt
+ ps://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schn
+ appst-du-dir-das-sommer-schnaepp/
+URL:https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-s
+ o-schnappst-du-dir-das-sommer-schnaepp/
+STATUS:TENTATIVE
+END:VEVENT
 END:VCALENDAR

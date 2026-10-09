@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 09.10.2026 20:51 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.10.2026 01:19 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
@@ -13,12 +13,12 @@
 
 ## Nächste Produktionstermine
 
-- 🎬 Sa, 10. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Di, 13. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Sa, 17. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Di, 20. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Sa, 24. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Di, 27. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
+- 🎬 Sa, 31. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 
 ## Zuletzt produziert
 
