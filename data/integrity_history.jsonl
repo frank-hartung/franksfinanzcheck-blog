@@ -280,3 +280,4 @@
 {"date": "2026-10-09", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-09", "kritisch": 0, "fest": 1, "modus": "verify"}
 {"date": "2026-10-09", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-10-09", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["layouts/_partials/extend_footer.html"]}
