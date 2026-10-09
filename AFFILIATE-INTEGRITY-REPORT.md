@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-08 11:04:49 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-09 11:03:50 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 40 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 42 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -14,6 +14,7 @@
 |:---|:---:|:---|
 | 2026-08-10-dsl-wechselbonus-sichern | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas | 2 → 3 ✅ | /go/gas/ |
+| 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel | 3 → 3 ✅ | /go/dsl/ |
@@ -52,6 +53,7 @@
 | 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss | 3 → 3 ✅ | /go/dsl/ |
 | 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage | 2 → 3 ✅ | /go/tagesgeld/ |
 | 2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest | 2 → 3 ✅ | /go/tagesgeld/ |
+| 2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit | 0 → 1 ✅ | /go/tagesgeld/ |
 
 ## Hinweise (nicht blockierend)
 
