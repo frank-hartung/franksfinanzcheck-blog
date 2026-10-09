@@ -215,4 +215,4 @@ Nein. Entscheidend ist, dass du den Betrag passend aufbewahrst und bei Bedarf er
 
 👉 **Jetzt das Tagesgeld-Angebot der C24 Bank ansehen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für du entstehen keine Mehrkosten.*
+*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
