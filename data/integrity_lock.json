@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T20:24:32.438585+00:00",
-  "head": "7da71fd",
+  "signed_at": "2026-10-09T16:45:42.157190+00:00",
+  "head": "f5975b11",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -10,7 +10,7 @@
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
-    "layouts/_partials/extend_footer.html": "8fb36b8fcfb807c6c2d175d39aa8aa5f191814473f88df083627a02714f286d7",
+    "layouts/_partials/extend_footer.html": "e9edf0ffe0346207a385b3953bf36a1c9ad243b4a857a40160112cbd6ac5ed8b",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
     "layouts/_partials/head.html": "e91bf0b087c2e541c2e27b78fe6f7e9c892cec4b29f105d0cffe8142776c5b03",
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
@@ -53,17 +53,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "a7db47e1bbdb68d3615c63221b5250a436de0bf0134abeb16446d07bf18003bd",
-  "audit_start_sha256": "342ab5a1b98a735a8250610fb5cf8575533dbca6d073e7ba115ed739344ad445",
+  "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
+  "audit_start_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17",
   "audit": [
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "da2556e",
-      "geaendert": [],
-      "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-07",
       "art": "heal",
@@ -92,7 +84,7 @@
         }
       ],
       "files_sha256": "7439babe5af3b72ede239d1d8f260bed8f5a6c9f7cd210f46c3d79fc49e142a4",
-      "prev_sha256": "342ab5a1b98a735a8250610fb5cf8575533dbca6d073e7ba115ed739344ad445"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-07",
@@ -435,8 +427,43 @@
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "5cdf675fb97f11a7d35aa0e786b5687a6abeb6b81e01b90bd7ac31f756bd5cc9",
-      "files_sha256": "a7db47e1bbdb68d3615c63221b5250a436de0bf0134abeb16446d07bf18003bd"
+      "files_sha256": "a7db47e1bbdb68d3615c63221b5250a436de0bf0134abeb16446d07bf18003bd",
+      "prev_sha256": "5cdf675fb97f11a7d35aa0e786b5687a6abeb6b81e01b90bd7ac31f756bd5cc9"
+    },
+    {
+      "date": "2026-10-09",
+      "art": "set-current",
+      "head": "f5975b11",
+      "geaendert": [
+        "layouts/_partials/extend_footer.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/extend_footer.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "01f55427",
+              "datum": "2026-10-09",
+              "betreff": "feat: Premium Content-Engine & Social-Media-Automatik (BOFU/E-E-A-T) (#673)"
+            },
+            {
+              "sha": "8c360de8",
+              "datum": "2026-09-23",
+              "betreff": "feat(newsletter): Versand auf zweimal pro Woche begrenzen und Anmeldung hervorheben"
+            },
+            {
+              "sha": "22079304",
+              "datum": "2026-09-22",
+              "betreff": "newsletter: Freischaltung Capture (Brevo-Formular) + Wache-/Doku-Sync"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "d45b24b1473f7b363df3e23ed67f7127ad91acf311974e5880cabf5806252349",
+      "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678"
     }
   ]
 }
