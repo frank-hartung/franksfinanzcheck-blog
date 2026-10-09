@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 09.10.2026 13:58 (Europe/Berlin)  
+> Automatisch aktualisiert: 09.10.2026 20:51 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -15,6 +15,11 @@
 ### Sa, 10. Oktober 2026
 - **07:30** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
+- **07:30** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
+### So, 11. Oktober 2026
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 
 ## Zuletzt veröffentlicht
 

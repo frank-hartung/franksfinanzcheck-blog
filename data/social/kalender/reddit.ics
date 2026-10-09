@@ -5,18 +5,4 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
-BEGIN:VEVENT
-UID:reddit:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-09@frank
- sfinanzcheck.de
-DTSTAMP:20261009T115819Z
-DTSTART:20261009T121500Z
-DTEND:20261009T123000Z
-SUMMARY:Reddit: DSL-Wechselbonus sichern: So sparst du beim Internetve
- rtrag (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
-STATUS:TENTATIVE
-END:VEVENT
 END:VCALENDAR
