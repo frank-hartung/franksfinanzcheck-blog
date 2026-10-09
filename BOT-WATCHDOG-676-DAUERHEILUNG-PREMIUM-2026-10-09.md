@@ -119,6 +119,48 @@ Frage interessant, ob das Buch sauber geblieben ist").
 Festgenagelt durch **C34 h)**: Fehlt der Bedingungsausdruck am Suite-Schritt, wird die
 Regel rot. Sabotage-Probe (f) im Selbsttest entfernt ihn und verlangt den Befund.
 
+### U6 · Was die wieder laufende Suite sofort zeigte: eine Gate-Regel ohne Deckung
+
+Die erste vollständige Suite seit dem Ausfall lieferte prompt einen Befund, den niemand
+hatte sehen können: **2519 Tests, 4 Fehler – alle vier identisch auf `origin/main`
+(`c167aac`)**, nachgewiesen in einem sauberen Worktree. Drei davon hatten eine einzige
+Ursache:
+
+```
+AssertionError: [{'regel': 'duplicate_failures', 'art': 'keine-deckung'}] != []
+```
+
+#674/#677 hatte `duplicate_failures` als harte Gate-Familie aufgenommen
+(`publish_gate.py` Z. 602, `release_scorecard.PUBLISH_GATE_HART_FAMILIEN`), aber weder
+einen Heiler in `reserve_finisher.HEALER_CHAIN` noch eine begründete Ausnahme in
+`reserve_healer_coverage.AUSNAHMEN` hinterlegt – ein Verstoß gegen **C25** („Deckung
+heißt Wirkung"). Getroffen hat es ausgerechnet die Regel, die #676 ausgelöst hatte.
+
+**Heilung (dieser Vorgang):** begründete Ausnahme, kein Heiler. Beide denkbaren
+Automatismen wären falsch gewesen:
+
+1. Ein Cross-Artikel-Fund (D3/D4) sagt, dass zwei Artikel dieselbe Passage tragen –
+   aber nicht, **welcher** sie behalten darf. Das ist eine redaktionelle Entscheidung;
+   `duplikat_guard` hält D3/D4 deshalb report-only, und `auto_fix` heilt nur
+   artikelinterne Wiederholungen. `publish_gate` ruft `auto_fix` nicht auf (geprüft).
+2. Ein Fund an einem **Haus-Template** ist kein Inhaltsfehler, sondern ein Messfehler.
+   Genau das war #676: Ein Heiler am Entwurf hätte den vertraglich *vorgeschriebenen*
+   End-CTA umgeschrieben und den Defekt der Messung unsichtbar gemacht
+   (C15: Beweisen ist nicht Heilen). Geheilt wird in der Wache, entschieden in der
+   Redaktion.
+
+Damit folgt die Regel denselben Präzedenzfällen wie `offenlegung_failures` (C15) und
+`editorial_review_failures` (menschliche Freigabe). Ergebnis: `deckung()` liefert
+`luecken: []`, `tote_ausnahmen: []`, der Selbsttest des Moduls ist grün, und **drei der
+vier** Suite-Fehler sind geschlossen.
+
+**Verbleibend, nicht aus diesem Vorgang heilbar:** der vierte Fehler
+(`test_current_snapshot_is_whole_and_editorially_valid`) ist der Reserve-Snapshot aus
+§6b – zwei alte SHA-256-Zertifikate. Nachzertifizierung braucht `hugo` + `hunspell`
+(`reserve_recert.gate_verfuegbar()`) und läuft deshalb ausschließlich in CI über die
+dort genannten Ketten. `campingurlaub-2026` war schon auf `main` alt.
+Stand nach diesem Vorgang: **2519 Tests, 1 Fehler** (vorher 4).
+
 ---
 
 ## 3. Dauerhafte Änderungen
@@ -393,8 +435,10 @@ npm run test:duplikate           # Selbsttest + 23 Regressionstests
 - `.github/workflows/publication-reliability-tests.yml` – vier Prüf-Schritte mit
   `if: ${{ !cancelled() }}`: ein Daten-Befund schaltet die einzige vollständige
   Unit-Test-Ausführung des Repos nicht mehr aus (U5)
-- `scripts/governance_contract.py` – Regel **C34**, zwei neue `GUARDS`-Einträge,
-  `LABEL`/`RULE_TEXT`, sechs Sabotage-Proben
+- `scripts/governance_contract.py` – Regel **C34** (Klauseln a–h), zwei neue
+  `GUARDS`-Einträge, `LABEL`/`RULE_TEXT`, sechs Sabotage-Proben
+- `scripts/reserve_healer_coverage.py` – begründete Ausnahme für
+  `duplicate_failures` (U6): Gate-Regel ohne Deckung, seit #674/#677
 - `CLAUDE.md` – Abschnitt „Ein Befund darf nicht die ganze Seite einfrieren (C34)“
 - `package.json` – fünf npm-Skripte
 - `content/posts/2026-10-07-dsl-anbieter-wechseln-…/index.md` – § 56 TKG-Absatz
