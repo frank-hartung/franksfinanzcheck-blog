@@ -10,16 +10,25 @@
     - Upgrade auf Cookiebot/Klaro jederzeit möglich (siehe README)
 ============================================================ -}}
 
-{{- /* ---------- Pinterest-Footer (nur auf Inhaltsseiten) ---------- */ -}}
+{{- /* ---------- Pinterest & Mastodon-Footer (nur auf Inhaltsseiten) ---------- */ -}}
 {{- $isLegal := or (strings.HasPrefix .RelPermalink "/impressum/") (strings.HasPrefix .RelPermalink "/datenschutz/") -}}
 {{- if not $isLegal -}}
-<div class="pinterest-footer">
+<div class="social-footer-links" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
   <a href="https://www.pinterest.de/franksfinanzcheck/"
      target="_blank"
      rel="noopener noreferrer me"
-     title="FranksFinanzcheck auf Pinterest">
+     title="FranksFinanzcheck auf Pinterest"
+     style="display: flex; align-items: center; gap: 0.5rem;">
     <span class="ff-icon-pinterest" aria-hidden="true">📌</span>
-    <span>Folge mir auf Pinterest<span aria-hidden="true"> 📌</span></span>
+    <span>Folge mir auf Pinterest</span>
+  </a>
+  <a href="https://mastodon.social/@FranksFinanzcheck"
+     target="_blank"
+     rel="noopener noreferrer me"
+     title="FranksFinanzcheck auf Mastodon"
+     style="display: flex; align-items: center; gap: 0.5rem;">
+    <span class="ff-icon-mastodon" aria-hidden="true">🐘</span>
+    <span>Folge mir auf Mastodon</span>
   </a>
 </div>
 {{- end -}}
