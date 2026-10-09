@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-09T11:50:39Z",
-  "modus": "live",
-  "commit": "6023dcbcfdffa1880791a795d5566c23f04aaf94",
+  "generated_at": "2026-10-09T17:46:42Z",
+  "modus": "kandidaten",
+  "commit": "b9a8b0127998849ab1878e3c266c2d3948a68be8",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -37,23 +37,6 @@
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
-    },
-    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-      "sha256": "0cf4392f899a577cdc4ad977756d1987e756c08736f42e29d2d7fb39ed9f50d6",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "neu versiegelt"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "71b59678fbae0edd9baa638e5e5168467732008be506797123bbe403a6cb4967",
@@ -243,7 +226,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
+      "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -702,20 +685,37 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "59b296f8ecbb79c506099b8719225f5c568c15f1a6596f7cfe5768f53914b9a5",
-      "urteil": "blockiert",
+      "sha256": "1dc147f540d14e89a69e6518a640729fc8754efab91c3fa440603c3d0c5c34d9",
+      "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "geändert – neu geprüft"
+    },
+    "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
+      "sha256": "2ce741fc19fd92ed0ef8c3d0441e76fe80966b365799c68cd0ba3679deb73e68",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-06",
       "siegel_drift": "neu versiegelt"
     }
   }

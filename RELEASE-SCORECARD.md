@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-10-09 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-10-09 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -19,14 +19,14 @@
 
 | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung |
 |---|---|---|---|---|---|---|---|
-| ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
+| ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
 
 ## Heutige Live-Kandidaten (Deploy-Scope)
 
 | Artikel | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung | Urteil |
 |---|---|---|---|---|---|---|---|---|---|
-| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ❌ blockiert | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **blockiert** |
-| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-11-19 | **freigabe-reif** |
+| `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-06 | **warnung** |
+| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **warnung** |
 
 ## Live-Bestand (Artikel für Artikel)
 
@@ -34,7 +34,6 @@
 |---|---|---|---|---|---|---|---|---|---|
 | `2026-08-10-dsl-wechselbonus-sichern` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
 | `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-28 | **freigabe-reif** |
-| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-11-19 | **freigabe-reif** |
 | `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-28 | **freigabe-reif** |
 | `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-28 | **freigabe-reif** |
 | `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
@@ -73,15 +72,13 @@
 | `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-18 | **warnung** |
 | `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ✅ bestanden | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-03 | **warnung** |
 | `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-19 | **warnung** |
-| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ❌ blockiert | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **warnung** |
+| `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-06 | **warnung** |
 
-## Blockierende Funde (1 Artikel)
+## Blockierende Funde (0 Artikel)
 
-### `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` (blockiert, Risikoklasse standard)
-
-- **RD1-duplikate** [redundanz]: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/index.md ≈ content/posts/2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum
-
-## Warnungen ohne Blockade (7 Artikel)
+Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
+## Warnungen ohne Blockade (9 Artikel)
 
 - `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11718 Zeichen, Optimum 12.000–18.000)
 - `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11888 Zeichen, Optimum 12.000–18.000)
@@ -90,12 +87,15 @@
 - `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11203 Zeichen, Optimum 12.000–18.000)
 - `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)
 - `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10941 Zeichen, Optimum 12.000–18.000)
+- `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10875 Zeichen, Optimum 12.000–18.000)
+- `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10386 Zeichen, Optimum 12.000–18.000)
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 
 | Artikel | Risikoklasse | Freigabe | Faktenstand | Nächste Prüfung |
 |---|---|---|---|---|
-| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | vorhanden | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | hoch | vorhanden | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | ausstehend | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | vorhanden | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | hoch | vorhanden | frisch geprüft vor 12 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | frisch geprüft vor 12 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
@@ -109,7 +109,6 @@
 | `2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-06-energieeffizienz-im-haushalt-5-schnelle-spartricks` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 90 Tage) | 2027-01-06 |
-| `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 30 Tage) | 2026-11-06 |
 | `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-11-21 |
 | `2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | erhoeht | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-11-21 |
 | `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` | erhoeht | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-11-21 |
@@ -119,14 +118,14 @@
 | `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-11-21 |
 | `2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-20 |
+| `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-11-23 |
 | `2026-10-09-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 90 Tage) | 2027-01-05 |
 | `2026-10-09-energieausweis-was-das-dokument-fuer-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-09-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 90 Tage) | 2027-01-05 |
 | `2026-10-09-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-09-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-11-21 |
-| `2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 90 Tage) | 2027-01-05 |
+| `2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 90 Tage) | 2027-01-07 |
 | `2026-10-09-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 30 Tage) | 2026-11-06 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
