@@ -30,7 +30,6 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -188,8 +187,7 @@ class MessungTests(unittest.TestCase):
             basis = Path(tmp)
             pfade = [self._artikel(basis, "a", REDAKTION),
                      self._artikel(basis, "b", REDAKTION)]
-            with patch.object(dg, "ROOT", basis):
-                funde = dg.check_cross(pfade)
+            funde = dg.check_cross(pfade, root=basis)
             regeln = [f[1] for f in funde]
             self.assertIn("D3-X", regeln)
 
@@ -200,8 +198,7 @@ class MessungTests(unittest.TestCase):
             pfade = [self._artikel(basis, "a", REDAKTION + "\n\n" + CTA_676),
                      self._artikel(basis, "b", REDAKTION.replace("Gaspreis", "Strompreis")
                                    .replace("neun Cent", "acht Cent") + "\n\n" + CTA_676)]
-            with patch.object(dg, "ROOT", basis):
-                funde = dg.check_cross(pfade)
+            funde = dg.check_cross(pfade, root=basis)
             self.assertEqual([f[1] for f in funde], [],
                              f"Haus-CTA wurde wieder gemessen: {funde}")
 
@@ -212,7 +209,7 @@ class MessungTests(unittest.TestCase):
         self.assertEqual(entfernt, 1)
 
     def test_selftest_des_moduls_ist_gruen(self):
-        """12 eingefrorene Fälle inkl. der #676-Klasse."""
+        """14 eingefrorene Fälle inkl. der #676-Klasse und der SSOT-Lesart."""
         self.assertEqual(dg.run_selftest(), [])
 
 
