@@ -265,6 +265,39 @@ Regeltext und Label: `RULE_TEXT["C34"]`, `LABEL["C34"]`.
 
 ---
 
+## 6b. Folge der Inhaltsheilung: Reserve-Zertifikat muss nachgezogen werden
+
+Die Heilung aus (e) ändert den Entwurf von
+`2026-10-07-dsl-anbieter-wechseln-…`. Damit passt der hinterlegte SHA-256 im
+Reserve-Snapshot nicht mehr, und `scripts/reserve_artifacts.py --check` meldet
+`Nachzertifizierung nötig`. Das ist **gewollt** und kein Fehler: Ein Zertifikat,
+das über einen Text ausgestellt wurde, den es nicht mehr gibt, wäre ein
+gefälschter Nachweis.
+
+Nachzertifizieren darf nur die vollständige Messkette – `reserve_recert.gate_verfuegbar()`
+verlangt `hugo` **und** `hunspell` (ohne hunspell wertet `quality_score` die
+Rechtschreibung als „unbekannt" = 0.5 und drückt jeden Artikel um bis zu 0.10
+unter die 0.85-Schwelle: ein Werkzeugmangel, der wie ein Qualitätsproblem
+aussähe). Deshalb ist dieser Schritt lokal nicht ausführbar und läuft
+ausschließlich über die sanktionierten Ketten:
+
+| Kette | Auslöser | Schritt |
+|---|---|---|
+| `bot-watchdog.yml` | cron `30 8 * * *` + `workflow_dispatch` | „Reserve-Zertifikat nachziehen (#462)": `reserve_snapshot_heiler.py --fix` → `reserve_recert.py --fix` → `git_sync.sh` auf `data/reserve-*.json` |
+| `content-reserve.yml` | cron `25 3 * * *` + `workflow_dispatch` | Stufe 3 Zertifizierung: `reserve_readiness.py` |
+| `reserve-nachweis.yml` | `workflow_dispatch` | `reserve_readiness.py` |
+
+**Vorbestehend, nicht aus diesem Vorgang:** Derselbe Check meldet auf `main`
+(`c167aac`) bereits `2026-10-07-campingurlaub-2026-…: SHA-256 passt nicht mehr` –
+nachgewiesen in einem sauberen Worktree von `origin/main`. Genau dieser Artikel
+ist der 404-Auslöser aus #676; sein Zertifikat war schon vor diesem Vorgang
+alt. Die PR-Prüfung `regression` ist deshalb auf der aktuellen Basis rot
+(die letzten drei gemergten PRs #677, #680, #681 ebenfalls, je
+`regression: FAILURE`); dieser Vorgang fügt ihr einen zweiten, nach dem Merge
+automatisch heilenden Eintrag hinzu und behebt den ersten nicht.
+
+---
+
 ## 7. Was bewusst NICHT geändert wurde
 
 - **Kein `|| true`, kein `continue-on-error`** an Scorecard oder Isolation. Fail-closed
