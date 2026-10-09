@@ -2,12 +2,11 @@
 lastmod: 2026-10-01
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute Pflicht sind und was guter Schutz für Singles und Familien kostet."
-date: 2026-08-17T08:35:12Z
+date: 2026-10-09T12:39:47Z
 draft: true
+cadence_demoted: 2026-10-09T12:39:55Z
+cadence_grund: "ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert"
 endredaktion_status: freigegeben
-cadence_wait: true
-cadence_demoted: 2026-10-09T12:05:11Z
-cadence_grund: "Endredaktion: alle Gates grün – automatisch freigegeben (2026-10-09)"
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -149,7 +148,7 @@ redaktionelle_pruefung:
       quellen: ["Q1", "Q3"]
 ---
 
-Ein Moment der Unachtsamkeit reicht. Du bist kurz abgelenkt. Du rempelst jemanden an. Ein teures Gerät geht zu Bruch.
+Privathaftpflicht im Check: Ein Moment der Unachtsamkeit reicht. Du bist kurz abgelenkt. Du rempelst jemanden an. Ein teures Gerät geht zu Bruch.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
