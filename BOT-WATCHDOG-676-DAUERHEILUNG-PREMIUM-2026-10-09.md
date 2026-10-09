@@ -92,6 +92,33 @@ Schleife für **nicht deklarierte** Check-IDs, bevor beide Variablen initialisie
 (`NameError`). Folge: roher Traceback, Exit 2 (Werkzeugfehler) statt eines Befunds –
 ebenfalls ein blockierter Deploy, nur ohne verwertbare Meldung.
 
+### U5 · Nebenbefund dieses Vorgangs: dieselbe Klasse auf der Prüfebene
+
+Bei der CI-Kontrolle dieses PRs zeigte sich derselbe Mechanismus an anderer Stelle.
+`publication-reliability-tests.yml` ist der **einzige** Workflow, der die vollständige
+Unit-Test-Suite fährt (`python3 -m unittest discover -s scripts/tests -v`). Sein erster
+fachlicher Schritt prüft einen **Daten**-Zustand (`reserve_artifacts.py --check`), und
+der war auf `main` rot – zwei alte SHA-256-Zertifikate.
+
+Folge: Die Suite wurde `skipped`. Damit lief im gesamten Repo **kein** Regressionstest
+mehr, auch die neuen aus #674 und diesem Vorgang nicht. Ein Befund über einen Zustand
+fror die Prüfung des Codes ein – exakt die Blustradius-Klasse aus U2, nur eine Ebene
+höher: Dort blockierte ein Artikel die Auslieferung aller Artikel, hier blockierte ein
+Daten-Artefakt die Verifikation aller Code-Änderungen. Der Check war rot „aus einem
+Grund, der mit dem geprüften Code nichts zu tun hatte", und niemand sah, was die Tests
+dazu sagen.
+
+**Heilung:** Die vier Prüf-Schritte (Suite + Selbsttests, Uhr-Probe, KI-Probe,
+Ledger-Isolation) laufen jetzt mit `if: ${{ !cancelled() }}`. Der Job bleibt über den
+Daten-Befund **rot** – fail-closed im Sinne von #634, kein `|| true`, kein
+`continue-on-error` – aber er liefert wieder Signal. `!cancelled()` ist das Haus-Muster:
+Der letzte Schritt desselben Workflows trägt es bereits, mit derselben Begründung
+(„Der Schritt läuft auch nach einem fehlgeschlagenen Testlauf: Gerade dann ist die
+Frage interessant, ob das Buch sauber geblieben ist").
+
+Festgenagelt durch **C34 h)**: Fehlt der Bedingungsausdruck am Suite-Schritt, wird die
+Regel rot. Sabotage-Probe (f) im Selbsttest entfernt ihn und verlangt den Befund.
+
 ---
 
 ## 3. Dauerhafte Änderungen
@@ -254,9 +281,10 @@ Schein-Sicherheit). Geprüft werden:
 | e | `bot_watchdog.py` enthält `deploy_ausfall_spur` **und** `DEPLOY_SCHRITT` |
 | f | `duplikat_guard.py` enthält `affiliate_intent_contract`, `haus_template_grund`, `news_writer`; `news_writer.py` enthält `STAND_INTRO` |
 | g | beide Wachen in `GUARDS`, `scripts/tests/test_<name>.py` vorhanden, Runbook vorhanden |
+| h | `publication-reliability-tests.yml`: die vollständige Unit-Test-Suite läuft auch nach einem Fehlschlag davor (`!cancelled()`) – ein Daten-Befund schaltet die Code-Prüfung nicht aus (U5) |
 
 Beide neuen Wachen (`release_isolation.py`, `duplikat_guard.py`) stehen jetzt in
-`GUARDS` und werden von **C6** ausgeführt. Der Selbsttest sabotiert die Regel fünfmal
+`GUARDS` und werden von **C6** ausgeführt. Der Selbsttest sabotiert die Regel sechsmal
 (`hold`→`park`, Isolation hinter den End-Gate verschoben, `|| true` angehängt,
 SSOT-Ableitung→Whitelist, Ausfallspur umbenannt) und verlangt, dass jeder Sabotage-Akt
 rot wird.
@@ -362,8 +390,11 @@ npm run test:duplikate           # Selbsttest + 23 Regressionstests
 - `scripts/news_writer.py` – `STAND_INTRO` als benannte Haus-Formel-Quelle
 - `.github/workflows/deploy.yml` – Isolations-Schritt (Z. 667–680), Scorecard-Schritt
   mit `set -uo pipefail`, `::error title=…`, `exit "$status"`
+- `.github/workflows/publication-reliability-tests.yml` – vier Prüf-Schritte mit
+  `if: ${{ !cancelled() }}`: ein Daten-Befund schaltet die einzige vollständige
+  Unit-Test-Ausführung des Repos nicht mehr aus (U5)
 - `scripts/governance_contract.py` – Regel **C34**, zwei neue `GUARDS`-Einträge,
-  `LABEL`/`RULE_TEXT`, fünf Sabotage-Proben
+  `LABEL`/`RULE_TEXT`, sechs Sabotage-Proben
 - `CLAUDE.md` – Abschnitt „Ein Befund darf nicht die ganze Seite einfrieren (C34)“
 - `package.json` – fünf npm-Skripte
 - `content/posts/2026-10-07-dsl-anbieter-wechseln-…/index.md` – § 56 TKG-Absatz

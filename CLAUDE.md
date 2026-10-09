@@ -1295,6 +1295,15 @@ Vier Schichten halten die Klasse jetzt:
   Hinweis, dass ein Catchup denselben Fehlschlag wiederholt. Live geprüft:
   `laeufe_fehlend: 13`, Job `deploy`, Schritt `Release-Scorecard
   (Produktionswahrheit versiegeln, fail-closed)`, Run `37963585911`.
+- **Dasselbe gilt auf der Prüfebene.** `publication-reliability-tests.yml`
+  ist der einzige Workflow mit vollständiger Unit-Test-Suite. Sein erster
+  fachlicher Schritt prüft einen **Daten**-Zustand
+  (`reserve_artifacts.py --check`); war der rot, wurde die Suite `skipped` –
+  und es lief im ganzen Repo kein Regressionstest mehr, auch die neuen nicht.
+  Die vier Prüf-Schritte tragen jetzt `if: ${{ !cancelled() }}`: Der Job
+  bleibt über den Daten-Befund rot (fail-closed, #634, kein `|| true`), aber
+  er liefert wieder Signal. Ein Befund über einen Zustand darf die Prüfung
+  des Codes nicht einfrieren.
 
 Dazu repariert: `release_scorecard.bewerte_artikel()` hatte einen `NameError`
 bei einer nicht deklarierten Check-ID – roher Traceback, Exit 2, blockierter
@@ -1312,7 +1321,8 @@ Vertrag: **C34** in `governance_contract.py` (Isolations-Bausteine · `hold`
 statt `park` · Messung über die Scorecard · Exit-Werkzeugfehler ·
 Verdrahtungs-Reihenfolge in `deploy.yml` ohne Still-Schalter ·
 Ausfallspur im Watchdog · SSOT-Haus-Templates statt Whitelist · beide Wachen
-in `GUARDS` mit Regressionstest und Runbook).
+in `GUARDS` mit Regressionstest und Runbook · Suite läuft auch nach einem
+Daten-Befund).
 
 ## Das Manifest ist der Bau-Eingang (Manifest-Wache, seit WF-7B6B / #654, 08.10.2026)
 

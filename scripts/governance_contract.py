@@ -2394,6 +2394,37 @@ def c34_blustradius(script_texts, wflows, root=BLOG_DIR):
         out.append(("C34", "docs/ANLEITUNG-AUSLIEFERUNGS-ISOLATION.md fehlt – "
                            "ohne Runbook bleibt die Isolation eine Zeile im "
                            "Workflow, die niemand bedienen kann (#676)."))
+
+    # h) Ein DATEN-Befund darf die CODE-Prüfung nicht stummschalten.
+    # Am 09.10.2026 war `regression` rot, weil zwei SHA-256-Zertifikate des
+    # Reserve-Snapshots alt waren – und weil dieser Schritt VOR der Suite
+    # steht, wurde die einzige vollständige Unit-Test-Ausführung des Repos
+    # `skipped`. Damit lief kein Test mehr, auch die neuen aus #674/#676
+    # nicht: Ein Befund über einen Zustand fror die Prüfung des Codes ein.
+    # Dieselbe Klasse wie #676, nur auf der Prüfebene. Der Job bleibt über
+    # den Snapshot rot (fail-closed, #634), aber die Prüfung muss laufen.
+    regress = dateien.get("publication-reliability-tests.yml", "")
+    if regress and "unittest discover" in regress:
+        zeilen = regress.splitlines()
+        idx = next((i for i, z in enumerate(zeilen)
+                    if "unittest discover" in z), None)
+        if idx is not None:
+            # Rückwärts zum Anfang dieses Schrittes (`- name:` / `- run:` /
+            # `- uses:`) und prüfen, ob der Schritt bedingt weiterläuft.
+            anfang = idx
+            while anfang > 0 and not zeilen[anfang].lstrip().startswith("- "):
+                anfang -= 1
+            schritt = "\n".join(zeilen[anfang:idx + 1])
+            if "!cancelled()" not in schritt and "always()" not in schritt:
+                out.append(("C34", ".github/workflows/"
+                                   "publication-reliability-tests.yml: die "
+                                   "vollständige Unit-Test-Suite läuft nicht "
+                                   "bei einem Fehlschlag davor – ein "
+                                   "Daten-Befund (z. B. ein altes "
+                                   "Reserve-Zertifikat) schaltet damit die "
+                                   "einzige Code-Prüfung des Repos aus. Der "
+                                   "Schritt braucht `if: ${{ !cancelled() }}` "
+                                   "(#676)."))
     return out
 
 
@@ -3685,8 +3716,16 @@ RULE_TEXT = {
            "Watchdog-Befund „Neuester Artikel nicht live“ nennt Job und Schritt "
            "des Deploy-Fehlschlags: Am 09.10.2026 riet das Ticket zu einem "
            "Catchup, der denselben Fehlschlag sechsmal wiederholte, während 13 "
-           "Deploys in Folge amselben Gate starben und 42 Live-Artikel "
-           "eingefroren blieben (Bot-Watchdog, #676).",
+           "Deploys in Folge am selben Gate starben und die gesamte öffentliche "
+           "Auslieferung eingefroren blieb (Bot-Watchdog, #676). Derselbe "
+           "Blustradius gilt auf der Prüfebene: Ein DATEN-Befund (etwa ein "
+           "altes SHA-256-Zertifikat im Reserve-Snapshot) darf die CODE-Prüfung "
+           "nicht überspringen. `publication-reliability-tests.yml` ist der "
+           "einzige Ort mit vollständiger Unit-Test-Suite; lief sie wegen eines "
+           "vorgelagerten Daten-Schritts nicht, prüfte kein Lauf mehr, ob der "
+           "Code hält, was die Regeln versprechen. Der Job bleibt über den "
+           "Daten-Befund rot (fail-closed, #634) – aber die Prüfung läuft "
+           "(`if: ${{ !cancelled() }}`).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -4841,6 +4880,30 @@ def _selftest():
             if "bot_watchdog" in f[1]]:
         failures.append("C34: ein Watchdog ohne Deploy-Ursache bleibt "
                         "unentdeckt (#676).")
+    # (f) Die Suite läuft nur, wenn nichts davor scheitert: Genau so wurde am
+    #     09.10.2026 die einzige vollständige Code-Prüfung des Repos
+    #     `skipped`, weil zwei alte Reserve-Zertifikate den Job vorher rot
+    #     machten. Kein Lauf prüfte mehr den Code – ein Daten-Befund fror die
+    #     Verifikation ein (#676 auf der Prüfebene).
+    ohne_suite = dict(wflows_echt)
+    for pfad in list(ohne_suite):
+        if os.path.basename(pfad) == "publication-reliability-tests.yml":
+            zeilen = ohne_suite[pfad].splitlines(True)
+            try:
+                i_name = next(i for i, z in enumerate(zeilen)
+                              if "Code-Regression" in z)
+                i_suite = next(i for i, z in enumerate(zeilen)
+                               if "unittest discover" in z)
+            except StopIteration:
+                continue
+            ohne_suite[pfad] = "".join(
+                z for i, z in enumerate(zeilen)
+                if not (i_name < i < i_suite and "!cancelled()" in z))
+    if not [f for f in c34_blustradius(echte_c34, ohne_suite, root=BLOG_DIR)
+            if "!cancelled()" in f[1]]:
+        failures.append("C34: eine übersprungene Unit-Test-Suite bleibt "
+                        "unentdeckt – ein Daten-Befund schaltet die "
+                        "Code-Prüfung aus (#676).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
