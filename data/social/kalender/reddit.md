@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 09.10.2026 01:47 (Europe/Berlin)  
+> Automatisch aktualisiert: 09.10.2026 13:58 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,9 +12,9 @@
 
 ## Kommende Beiträge
 
-### Fr, 23. Oktober 2026
-- **14:15** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
+### Fr, 09. Oktober 2026
+- **14:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
 

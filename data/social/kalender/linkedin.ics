@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – LinkedIn
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:linkedin:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-
- wirklich:zitat:2026-10-09@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
-DTSTART:20261009T054500Z
-DTEND:20261009T060000Z
-SUMMARY:LinkedIn: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirkl
- ich? (zitat)
-DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mes
- h-wlan-was-brauchst-du-wirklich/
-URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
- mesh-wlan-was-brauchst-du-wirklich/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:linkedin:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-som
  mer-schnaepp:nutzen:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+DTSTAMP:20261009T115819Z
 DTSTART:20261012T054500Z
 DTEND:20261012T060000Z
 SUMMARY:LinkedIn: Last Minute Urlaub: – So schnappst du dir das Sommer
@@ -38,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
  son-richtig:frage:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+DTSTAMP:20261009T115819Z
 DTSTART:20261013T054500Z
 DTEND:20261013T060000Z
 SUMMARY:LinkedIn: Gasabschlag berechnen: So planst du die Heizsaison r
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
  die-feiertage:takeaway:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+DTSTAMP:20261009T115819Z
 DTSTART:20261014T054500Z
 DTEND:20261014T060000Z
 SUMMARY:LinkedIn: Weihnachten Budget planen: Ohne Schulden durch die F
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
  sl-anschluss:zahl:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+DTSTAMP:20261009T115819Z
 DTSTART:20261015T054500Z
 DTEND:20261015T060000Z
 SUMMARY:LinkedIn: Preiswert surfen: So findest du den optimalen DSL‑An
@@ -83,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so
  -vermeidest:zitat:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+DTSTAMP:20261009T115819Z
 DTSTART:20261016T054500Z
 DTEND:20261016T060000Z
 SUMMARY:LinkedIn: Büroausstattung steuerlich clever absetzen: So geht'
@@ -98,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
  endert:zitat:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+DTSTAMP:20261009T115819Z
 DTSTART:20261019T054500Z
 DTEND:20261019T060000Z
 SUMMARY:LinkedIn: Internet & DSL-Update: Was sich jetzt für dich änder
@@ -111,26 +96,41 @@ URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
- tie-gas:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+UID:linkedin:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
+ pdate-2026:zitat:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261009T115819Z
 DTSTART:20261020T054500Z
 DTEND:20261020T060000Z
-SUMMARY:LinkedIn: Sicher heizen: So schützt dich eine Gaspreisgarantie
-  (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schue
- tzt-dich-eine-preisgarantie-gas/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
- uetzt-dich-eine-preisgarantie-gas/
+SUMMARY:LinkedIn: Dein Haus sicher schützen: Das neue Vorsorge-Update 
+ 2026 (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuet
+ zen-das-neue-vorsorge-update-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
+ uetzen-das-neue-vorsorge-update-2026/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:zitat:2026-10-21@fran
- ksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+UID:linkedin:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:takea
+ way:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261009T115819Z
 DTSTART:20261021T054500Z
 DTEND:20261021T060000Z
+SUMMARY:LinkedIn: 7 Gewohnheiten für finanzielle Freiheit: Geld bewuss
+ t ordnen (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: LinkedIn\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:zitat:2026-10-22@fran
+ ksfinanzcheck.de
+DTSTAMP:20261009T115819Z
+DTSTART:20261022T054500Z
+DTEND:20261022T060000Z
 SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
  vertrag (zitat)
 DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
@@ -140,33 +140,18 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
- -tarife-fuer-2026:takeaway:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
-DTSTART:20261022T054500Z
-DTEND:20261022T060000Z
-SUMMARY:LinkedIn: Preisgarantie Gas: So sicherst du günstige Tarife (t
- akeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: LinkedIn\nArtike
- l: https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
- -sicherst-du-dir-guenstige-tarife-fuer-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
- -sicherst-du-dir-guenstige-tarife-fuer-2026/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
- bieterwechsel:frage:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261008T234750Z
+UID:linkedin:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
+ tie-gas:nutzen:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261009T115819Z
 DTSTART:20261023T054500Z
 DTEND:20261023T060000Z
-SUMMARY:LinkedIn: Internet & DSL wechseln: Praxis-Tipps – Highspeed In
- ternet (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: LinkedIn\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-p
- raxis-tipps-fuer-den-anbieterwechsel/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
- n-praxis-tipps-fuer-den-anbieterwechsel/
+SUMMARY:LinkedIn: Sicher heizen: So schützt dich eine Gaspreisgarantie
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schue
+ tzt-dich-eine-preisgarantie-gas/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
+ uetzt-dich-eine-preisgarantie-gas/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

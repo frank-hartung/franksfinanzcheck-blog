@@ -609,6 +609,26 @@ history:
     #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
   ref: '117405198564655648'
   ai: false
+- posted_at: '2026-10-09T13:57:55.224696+02:00'
+  channel: mastodon
+  slug: 2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest
+  title: 'Büroausstattung steuerlich clever absetzen: So geht''s'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117410830633382287
+  ok: true
+  text: 'Büroausstattung steuerlich clever absetzen?
+
+
+    Arbeitsmittel wie Schreibtisch, Monitor oder Bürostuhl kannst du als Werbungskosten
+    absetzen, wenn du sie so gut wie ausschließlich beruflich nutzt.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
+  ref: '117410830633382287'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -618,4 +638,8 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-09T01:47:49.989565+02:00'
+- at: '2026-10-09T13:57:55.224696+02:00'
+  channel: mastodon
+  slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
+updated_at: '2026-10-09T13:58:18.479720+02:00'

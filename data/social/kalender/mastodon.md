@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 09.10.2026 01:47 (Europe/Berlin)  
+> Automatisch aktualisiert: 09.10.2026 13:58 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,14 +12,13 @@
 
 ## Kommende Beiträge
 
-### Fr, 09. Oktober 2026
-- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
-- **07:30** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+### Sa, 10. Oktober 2026
+- **07:30** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
 - ✅ 08.10.2026 14:05 · Internet & DSL-Update: Was sich jetzt für dich ändert → https://mastodon.social/@FranksFinanzcheck/117405198564655648
 - ✅ 06.10.2026 20:56 · Weihnachten Budget planen: Ohne Schulden durch die Feiertage → https://mastodon.social/@FranksFinanzcheck/117395489343468673
 - ✅ 06.10.2026 14:05 · Preiswert surfen: So findest du den optimalen DSL‑Anschluss → https://mastodon.social/@FranksFinanzcheck/117393872454593493
@@ -29,7 +28,6 @@
 - ✅ 01.10.2026 13:40 · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung → https://mastodon.social/@FranksFinanzcheck/117365463246886384
 - ✅ 30.09.2026 13:13 · Gasrechnung prüfen: Fehler finden und Nachzahlungen → https://mastodon.social/@FranksFinanzcheck/117359692643267110
 - ✅ 29.09.2026 20:41 · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen → https://mastodon.social/@FranksFinanzcheck/117355793846755045
-- ✅ 29.09.2026 13:25 · Heizkosten senken: Mit diesen Strategien sparst du sofort → https://mastodon.social/@FranksFinanzcheck/117354080626572441
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
@@ -38,6 +36,7 @@
 - 🚫 07.10. 07:30 · Budget app 2026 so beherrschst du deine ausgaben ohne auf · Artikel nicht mehr im Bestand
 - 🚫 07.10. 11:30 · Oekostrom anbieter wechseln clever sparen und gruen bleiben · Artikel nicht mehr im Bestand
 - 🚫 08.10. 07:30 · 7 gewohnheiten fuer finanzielle freiheit · Artikel nicht mehr im Bestand
+- 🚫 09.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*
