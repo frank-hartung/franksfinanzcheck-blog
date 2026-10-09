@@ -146,24 +146,40 @@ python3 scripts/integrity_guard.py --gate   # Exit 0
 ### Mutationstests
 
 ```bash
-# Beweis, dass die Heilung beißt
-python3 -m unittest scripts/tests/test_integrity_guard.py
-# Alle Tests grün, inklusive:
-# - test_kritisch_bleibt_hard_stop
-# - test_fest_wird_geheilt
-# - test_extend_footer_ist_fest_nicht_kritisch
+# Beweis, dass die Heilung beißt (59 Tests, alle grün)
+python3 -m unittest scripts.tests.test_integrity_guard
+
+# Alle Tests grün, inklusive der WF-A535-Pins:
+# - WFA535DauerheilungTests.test_extend_footer_ist_fest_nicht_kritisch
+# - WFA535DauerheilungTests.test_kritisch_bleibt_auf_die_echten_kerne_beschraenkt
+# - WFA535DauerheilungTests.test_footer_pr_ist_selbstheilbar
+#     (Replay #675: committete Footer-Änderung → FEST-Drift → --heal Exit 0)
+# - WFA535DauerheilungTests.test_footer_laufzeitmutation_bleibt_hard_stop
+# - WFA535DauerheilungTests.test_kritischer_kern_bleibt_hard_stop
+# - RepoSealTests.test_siegel_signiert_den_footer_als_fest
+# - HeilungTests.test_heilen_signiert_belegten_fest_drift   (FEST wird geheilt)
+# - HeilungTests.test_heilen_stoppt_bei_kritischem_drift     (KRITISCH bleibt HARD STOP)
 ```
+
+**Gegenbeweis (Mutation):** `extend_footer.html` testweise zurück in die
+KRITISCH-Menge gesetzt → 4 der 6 Pins werden rot (Klassifikation, Kern-Set,
+#675-Replay, Siegel-Pin). Nach dem Revert wieder grün. Der Pin beißt.
 
 ---
 
 ## 📊 Metriken
 
-| Metrik | Vorher | Nachher |
+| Metrik | Vorher | Nachher (verifiziert 09.10.2026) |
 |---|---|---|
-| KRITISCH-Dateien | 7 | 6 |
-| FEST-Dateien | 42 | 43 |
-| Selbstheilbare Drift-Fälle | 42 | 43 |
-| Produktionsstopp-Risiko | Hoch (jeder KRITISCH-PR) | Niedrig (nur noch 6 Dateien) |
+| KRITISCH-Dateien (Set) | 7 | **6** (davon 5 im Baum signiert; `render-image.html` existiert nicht mehr im Baum) |
+| FEST-Dateien (Set) | 42 | **45** (davon 44 als FEST signiert; `check24_links.yaml` zählt als KRITISCH, weil KRITISCH Vorrang hat) |
+| Dateien im Lock gesamt | 49 | **49** |
+| Selbstheilbare Drift-Fälle (signierte FEST-Dateien) | 42 | **44** |
+| Produktionsstopp-Risiko | Hoch (jeder KRITISCH-PR) | Niedrig (nur noch KRITISCH-Kern stoppt hart) |
+
+*Anmerkung: Die FEST-Zahl ist seit der ersten Fassung dieses Dokuments durch
+spätere Vorgänge gewachsen (#653/#662 u. a.); die Heilung selbst – Footer von
+KRITISCH nach FEST – ist davon unberührt und per Regressionstest festgenagelt.*
 
 ---
 
@@ -186,6 +202,30 @@ python3 -m unittest scripts/tests/test_integrity_guard.py
 
 ---
 
+## 🧷 Nachtrag (18:00 UTC): Regressionstests nachgezogen
+
+Die Heilung selbst (Reklassifizierung + Neu-Signatur) war implementiert, der
+festgenagelte Beweis fehlte: Die als Nachweis genannten Mutationstests
+existierten so nicht. Nachgezogen in `scripts/tests/test_integrity_guard.py`:
+
+- **Neu:** Testklasse `WFA535DauerheilungTests` (5 Tests) – Klassifikations-Pin
+  (`extend_footer.html` ∈ FEST, ∉ KRITISCH), Kern-Pin (KRITISCH-Set exakt die
+  6 echten Kerne), Replay des Vorfalls #675 (committete Footer-Änderung →
+  FEST-Drift → `--heal` Exit 0), fail-closed-Gegenbeweis (Laufzeit-Mutation
+  bleibt Exit 3), Sabotage-Schutz-Gegenbeweis (KRITISCH bleibt Exit 3).
+- **Neu:** `RepoSealTests.test_siegel_signiert_den_footer_als_fest` – das
+  ausgelieferte Siegel kennt den Footer, der Wächter stuft ihn als FEST ein.
+- **Verifiziert:** `python3 -m unittest scripts.tests.test_integrity_guard`
+  → 59/59 grün. Gegenbeweis durch Mutation (Footer zurück nach KRITISCH):
+  4 Pins rot, nach Revert grün.
+
+Damit ist die Dauerheilung nicht nur vollzogen, sondern dauerhaft gesichert:
+Eine künftige Rückstufung des Footers in KRITISCH – oder ein schrumpfender
+KRITISCH-Kern – fällt jetzt im Testlauf auf, bevor eine PR die Produktion
+stoppen kann.
+
+---
+
 ## 🎯 Abnahmekriterien
 
 - [x] `scripts/integrity_guard.py` – `extend_footer.html` aus KRITISCH entfernt
@@ -193,8 +233,9 @@ python3 -m unittest scripts/tests/test_integrity_guard.py
 - [x] `python3 scripts/integrity_guard.py` → Exit 0 (kein Drift)
 - [x] `python3 scripts/integrity_guard.py --gate` → Exit 0
 - [x] Lock neu signiert mit korrigierter Klassifizierung
-- [x] Alle Unit-Tests grün
-- [ ] Content-Engine v2 Lauf nach Merge → grün (17:40 UTC Slot)
+- [x] Alle Unit-Tests grün (59/59, inkl. 6 neuer WF-A535-Pins in `scripts/tests/test_integrity_guard.py`)
+- [x] Gegenbeweis: Mutationstest (Footer zurück nach KRITISCH) macht 4 Pins rot – die Heilung beißt
+- [ ] Content-Engine v2 Lauf nach Merge → grün (nächster Slot; 17:40-UTC-Slot am 09.10. ist ausgefallen)
 
 ---
 

@@ -38,6 +38,15 @@ die Mechanik oben nicht fangen konnte, weil sie nur Attrappen prüfte:
      Content-Engine-Lauf wäre im ersten Schritt hart gestoppt (kein Artikel,
      kein Slot, Defizit-Alarm). Der Testlauf ist der Weg, den CLAUDE.md vor
      dem Push nennt: hier steht der Befund jetzt nicht mehr stumm daneben.
+
+Nachtrag 09.10.2026 (WF-A535 / #675) – Klassifikations-Pin:
+
+  6. DAUERHEILUNG  PR #673 änderte `extend_footer.html` (KRITISCH) und
+     stoppte die Content-Engine hart (Exit 3). Die Heilung stuft das
+     Footer-Partial nach FEST herab. `WFA535DauerheilungTests` nagelt diese
+     Einstufung fest (inkl. Replay des Vorfalls und fail-closed-Gegenbeweis),
+     damit weder eine Rückstufung in KRITISCH noch ein schrumpfender
+     KRITISCH-Kern unbemerkt durchgehen kann.
 """
 import contextlib
 import datetime
@@ -228,6 +237,88 @@ class HeilungTests(Fixture):
         self.assertIsInstance(zeilen[0]["fest"], int)
         self.assertEqual(zeilen[0]["modus"], "heal")
         self.assertEqual(zeilen[0]["geheilt"], [FEST_REL])
+
+
+class WFA535DauerheilungTests(Fixture):
+    """WF-A535 #675 (09.10.2026): Dauerheilung der Footer-Klassifikation.
+
+    PR #673 änderte `extend_footer.html` (Mastodon `rel=me`) – legitim,
+    gereviewt, gemergt. Die Datei war KRITISCH einsortiert, der Engine-Schritt
+    `--heal` stoppte darum hart (Exit 3), und kein Artikel wurde produziert.
+    Die Dauerheilung stuft das Footer-Partial nach FEST herab (kein Render-Hook,
+    kein Affiliate-Kern, kein Brand-Kern, kein SEO-Kern). Diese Tests nageln die
+    Einstufung fest, damit eine künftige Footer-PR die Produktion nie wieder so
+    stoppt – und damit der Sabotage-Schutz für die echten Kern-Dateien unberührt
+    bleibt.
+    """
+
+    FOOTER_REL = "layouts/_partials/extend_footer.html"
+
+    def _footer_signiert(self):
+        self.schreibe(self.FOOTER_REL, "<footer>v1</footer>\n")
+        self.assertEqual(_commit(self.root, "feat: footer initial").returncode, 0)
+        self.signieren()
+
+    def test_extend_footer_ist_fest_nicht_kritisch(self):
+        self.assertIn(self.FOOTER_REL, ig.FEST,
+                      "Footer-Partial muss FEST sein – sonst stoppt jede "
+                      "Footer-PR die Content-Engine hart (WF-A535 #675)")
+        self.assertNotIn(self.FOOTER_REL, ig.KRITISCH,
+                         "Footer-Partial darf nicht KRITISCH sein – das war "
+                         "die Wurzelursache von #675")
+
+    def test_kritisch_bleibt_auf_die_echten_kerne_beschraenkt(self):
+        self.assertEqual(ig.KRITISCH, {
+            "hugo.toml",
+            "scripts/check24_links.yaml",
+            "layouts/_default/_markup/render-link.html",
+            "layouts/_default/_markup/render-image.html",
+            "layouts/_partials/head.html",
+            "layouts/robots.txt",
+        }, "KRITISCH darf weder den Footer zurückbekommen noch echte "
+           "Kern-Dateien verlieren – beides wäre Sabotage am Sabotage-Schutz")
+
+    def test_footer_pr_ist_selbstheilbar(self):
+        """Replay #675: Eine committete Footer-Änderung (wie PR #673) ist
+        FEST-Drift – `--heal` signiert sie, Exit 0, die Engine läuft weiter."""
+        self._footer_signiert()
+        self.schreibe(self.FOOTER_REL,
+                      '<footer>v2 <a rel="me" '
+                      'href="https://mastodon.social/@frank">Mastodon</a>'
+                      "</footer>\n")
+        self.assertEqual(
+            _commit(self.root, "feat(footer): Mastodon rel=me (PR #673)").returncode, 0)
+        crit, fest = self.driften()
+        self.assertEqual(crit, [],
+                         "committete Footer-Änderung darf kein KRITISCH-Drift sein")
+        self.assertEqual(fest, [self.FOOTER_REL])
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root), 0,
+                             "Engine-Schritt --heal muss belegten Footer-Drift "
+                             "heilen (Exit 0) – der Vorfall #675 war Exit 3")
+        self.assertEqual(self.driften(), ([], []))
+
+    def test_footer_laufzeitmutation_bleibt_hard_stop(self):
+        """Selbstheilung bleibt fail-closed: eine uncommittete Footer-Mutation
+        ist UNERKLÄRT und wird niemals automatisch geadelt."""
+        self._footer_signiert()
+        self.schreibe(self.FOOTER_REL, "<footer>laufzeit-mutation</footer>\n")
+        vorher = ig.sha256_file(self.lock_pfad)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root), 3)
+        self.assertEqual(ig.sha256_file(self.lock_pfad), vorher,
+                         "HARD STOP darf nicht signieren")
+
+    def test_kritischer_kern_bleibt_hard_stop(self):
+        """Der Sabotage-Schutz ist unberührt: KRITISCH-Drift stoppt weiter hart."""
+        self._footer_signiert()
+        self.schreibe(CRIT_REL, "baseURL = '/neu/'\n")
+        _commit(self.root, "feat: kritischer Kern")
+        vorher = ig.sha256_file(self.lock_pfad)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root), 3)
+        self.assertEqual(ig.sha256_file(self.lock_pfad), vorher,
+                         "HARD STOP darf nicht signieren")
 
 
 class GateTests(Fixture):
@@ -860,6 +951,16 @@ class RepoSealTests(unittest.TestCase):
         unsigniert = sorted(p for p in ig.KRITISCH
                             if (ig.ROOT / p).exists() and p not in lock.get("files", {}))
         self.assertEqual(unsigniert, [], "kritische Knoten ohne Signatur")
+
+    def test_siegel_signiert_den_footer_als_fest(self):
+        """WF-A535 #675: Das ausgelieferte Siegel kennt den Footer – und der
+        Wächter stuft ihn als FEST ein (selbstheilbar, nicht sabotage-kritisch)."""
+        footer = "layouts/_partials/extend_footer.html"
+        lock = ig.load_lock(ig.LOCK)
+        self.assertIn(footer, lock.get("files", {}),
+                      "Footer-Partial ohne Signatur – --set-current nachziehen")
+        self.assertIn(footer, ig.FEST)
+        self.assertNotIn(footer, ig.KRITISCH)
 
     def test_akte_bleibt_gebunden_und_bennbar(self):
         lock = ig.load_lock(ig.LOCK)
