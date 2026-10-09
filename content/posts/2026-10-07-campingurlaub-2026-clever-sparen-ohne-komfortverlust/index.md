@@ -1,9 +1,9 @@
 ---
 title: "Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung"
 description: "Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend."
-date: 2026-10-07T17:47:29Z
-draft: true
-reserve: true
+date: 2026-10-09T14:01:19Z
+draft: false
+reserve_published: 2026-10-09
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, Preisbehauptungen und Metadaten redaktionell neu geprüft"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
@@ -50,6 +50,9 @@ Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehör
 - Leihe oder nutze Ausrüstung weiter, bevor du neu kaufst.
 
 ## Welche Kosten gehören in ein Campingbudget?
+
+
+Darum geht es hier konkret: Campingurlaub planen.
 
 Beginne mit der Unterkunft. Prüfe, ob der Preis pro Stellplatz, Person oder Fahrzeug gilt.
 
@@ -160,6 +163,9 @@ Mach die Liste vor der Buchung. Ergänze sie, wenn du neue Informationen bekomms
 **Faustregel:** Buche nicht nach dem niedrigsten Übernachtungspreis. Entscheide nach Gesamtpreis, Regeln und dem Komfort, den du wirklich nutzt.
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
+
+
+Genau das ist der Hebel: Campingurlaub planen.
 
 ## Häufige Fragen
 
