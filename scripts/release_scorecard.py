@@ -675,9 +675,22 @@ def bewerte_artikel(slug: str, befunde: dict, tool_fehler: dict, kontext: dict,
             review = {}
         erg_ergebnis["_review"] = review if isinstance(review, dict) else {}
 
-    # Funde zu nicht deklarierten Prüfungen sind VERBOTEN – sie werden laut
-    # blockiert, nie still ignoriert (sonst könnte eine neue Wache Funde
-    # erzeugen, die die Scorecard unsichtbar verwürfe).
+    # Check-Ergebnisse je Dimension: VOLLE Matrix über alle deklarierten
+    # Checks (reine Funktion check_ergebnis) – gelaufen+sauber = bestanden,
+    # nicht anwendbar = nicht erforderlich, nicht gemessen = nicht beweisbar.
+    #
+    # REPARATUR #676 (09.10.2026): Beide Sammler standen UNTER der Schleife,
+    # die sie befüllt. Solange jeder Fund einer deklarierten Check-ID
+    # zugeordnet war, fiel das nicht auf – der erste undeklarierte Fund aber
+    # lief in ein NameError. Ausgerechnet der Pfad, der „Funde zu nicht
+    # deklarierten Prüfungen sind VERBOTEN – sie werden laut blockiert, nie
+    # still ignoriert" durchsetzen sollte, starb mit einem rohen Traceback
+    # statt mit einem Befund (die Klasse WF-A535 #529: ein roter Schritt,
+    # der seine Ursache nicht nennt). Jetzt wird initialisiert, bevor
+    # geschrieben wird.
+    je_dimension: dict[str, list[dict]] = {dim: [] for dim in DIMENSIONS_FOLGE}
+    befundliste: list[dict] = []
+
     for check_id in sorted(artikel_befunde):
         if check_id in register:
             continue
@@ -689,11 +702,6 @@ def bewerte_artikel(slug: str, befunde: dict, tool_fehler: dict, kontext: dict,
                             "detail": "nicht in der SSOT deklariert: "
                                       + "; ".join(artikel_befunde[check_id])[:300]})
 
-    # Check-Ergebnisse je Dimension: VOLLE Matrix über alle deklarierten
-    # Checks (reine Funktion check_ergebnis) – gelaufen+sauber = bestanden,
-    # nicht anwendbar = nicht erforderlich, nicht gemessen = nicht beweisbar.
-    je_dimension: dict[str, list[dict]] = {dim: [] for dim in DIMENSIONS_FOLGE}
-    befundliste: list[dict] = []
     for check_id in sorted(register):
         check = register[check_id]
         ergebnis = check_ergebnis(slug, check, artikel_befunde, tool_fehler,

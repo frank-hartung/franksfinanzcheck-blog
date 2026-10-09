@@ -134,6 +134,10 @@ AFFILIATE_WACHE_WORKFLOW = "affiliate-integrity-daily.yml"
 PINTEREST_WATCHDOG_WORKFLOW = "pinterest-watchdog.yml"
 PINTEREST_TOKEN_WORKFLOW = "pinterest-token.yml"
 CONTENT_RESERVE_WORKFLOW = "content-reserve.yml"
+# Der Deploy ist der einzige Weg, auf dem ein Artikel öffentlich wird. Wer
+# „neuester Artikel nicht live" meldet, ohne den Deploy zu benennen, meldet
+# ein Symptom ohne Ursache (Dauerheilung #676, 09.10.2026).
+DEPLOY_WORKFLOW = "deploy.yml"
 
 # Mindestziel
 def effective_min():
@@ -276,6 +280,89 @@ def check_syntax():
     if result.returncode != 0:
         return False, (result.stderr or result.stdout).strip()[:500]
     return True, ""
+
+def deploy_ausfall_spur(workflow_file=None, limit=15):
+    """WARUM der Deploy nicht ausliefert – Job und Schritt, nicht nur „rot".
+
+    Dauerheilung Issue #676 (09.10.2026): Der neueste Artikel lieferte 404,
+    und das Ticket riet „Deploy prüfen, ggf. Deploy-Catchup triggern". Der
+    Catchup lief längst stündlich und hatte den Deploy sechsmal angestoßen –
+    alle sechs Läufe starben am selben Schritt („Release-Scorecard …
+    fail-closed", Exit 1). Der Ratschlag war also nicht nur ungenau, er
+    beschrieb eine Maßnahme, die den Ausfall nachweislich verlängerte.
+
+    Rückgabe ist ein Dict oder None (None = nicht ermittelbar, nie raten):
+      laeufe_fehlend  aufeinanderfolgende Fehlschläge ab dem jüngsten Lauf
+      job             Name des fehlgeschlagenen Jobs
+      schritt         Name des fehlgeschlagenen Schritts (die Ursache)
+      lauf_id         Run-ID des jüngsten Fehlschlags (Nachweis)
+
+    Offline/gh-Fehler sind KEIN Befund: Der Aufrufer fällt dann auf die
+    allgemeine Formulierung zurück (C2: eine nicht ausgeführte Messung ist
+    kein Grün – aber auch kein erfundener Schuldiger).
+    """
+    workflow_file = workflow_file or DEPLOY_WORKFLOW
+    if not _valid_workflow_file(workflow_file):
+        return None
+    rc, out, _err = run_cmd([
+        "gh", "run", "list", "--workflow", workflow_file, "--limit", str(limit),
+        "--json", "databaseId,status,conclusion",
+    ], timeout=25)
+    if rc != 0:
+        return None
+    try:
+        rows = json.loads(out.strip() or "[]")
+    except ValueError:
+        return None
+    if not isinstance(rows, list):
+        return None
+
+    # Aufeinanderfolgende Fehlschläge ab dem jüngsten ABGESCHLOSSENEN Lauf.
+    # `cancelled` ist gewolltes Verdrängen in der Warteschlange (Kommentar
+    # deploy.yml, #218) und zählt weder als Erfolg noch als Fehlschlag.
+    fehlende = 0
+    juengster_fehlschlag = None
+    for row in rows:
+        row = row or {}
+        if (row.get("status") or "") != "completed":
+            continue
+        schluss = (row.get("conclusion") or "").lower()
+        if schluss == "success":
+            break
+        if schluss == "cancelled":
+            continue
+        fehlende += 1
+        if juengster_fehlschlag is None:
+            juengster_fehlschlag = row.get("databaseId")
+    if not fehlende or juengster_fehlschlag is None:
+        return None
+
+    # Job/Schritt-Ebene: die Annotation „Process completed with exit code 1"
+    # nennt die Ursache nicht, der Schrittname schon.
+    ausdrueck = ("[.jobs[] | select(.conclusion == \"failure\") | "
+                 "{job: .name, schritte: [.steps[] | "
+                 "select(.conclusion == \"failure\") | .name]}][0]")
+    rc2, out2, _err2 = run_cmd([
+        "gh", "api", f"repos/:owner/:repo/actions/runs/{juengster_fehlschlag}/jobs",
+        "--jq", ausdrueck,
+    ], timeout=25)
+    job = schritt = ""
+    if rc2 == 0 and out2.strip() and out2.strip() != "null":
+        try:
+            daten = json.loads(out2)
+        except ValueError:
+            daten = {}
+        if isinstance(daten, dict):
+            job = str(daten.get("job") or "")
+            schritte = [s for s in (daten.get("schritte") or []) if s]
+            schritt = str(schritte[0]) if schritte else ""
+    return {
+        "laeufe_fehlend": fehlende,
+        "job": job,
+        "schritt": schritt,
+        "lauf_id": juengster_fehlschlag,
+    }
+
 
 def check_live_site(slug, timeout=20):
     """Live-Site mit Redirect-Follow, Retry und sicherem URL-Transport prüfen."""
@@ -1029,12 +1116,41 @@ def run_all():
             # In CI mit Internet wird das als OK/FAIL entschieden, nicht als WARN
         else:
             env["CHECK3"] = f"FAIL ({slug} → {code})"
+            # URSACHE STATT SYMPTOM (Dauerheilung #676, 09.10.2026):
+            # „Deploy prüfen, ggf. Catchup triggern" war am 09.10. der
+            # falsche Ratschlag – der Catchup lief stündlich und hatte den
+            # Deploy sechsmal angestoßen, alle Läufe starben amselben
+            # Schritt. Wer das Ticket öffnet, muss den Schritt sehen, nicht
+            # eine Maßnahme, die den Ausfall verlängert.
+            spur = deploy_ausfall_spur()
+            if spur and (spur.get("schritt") or spur.get("job")):
+                ziel = spur.get("schritt") or spur.get("job")
+                detail = (f"{slug} liefert HTTP {code}. Ursache: "
+                          f"`deploy.yml` ist {spur['laeufe_fehlend']}× in Folge "
+                          f"fehlgeschlagen, zuletzt am Schritt „{ziel}“"
+                          + (f" (Job „{spur['job']}“)"
+                             if spur.get("schritt") and spur.get("job") else "")
+                          + ". Der Artikel ist nicht das Problem – er wird "
+                            "nicht ausgeliefert.")
+                next_step = (f"Schritt „{ziel}“ in .github/workflows/deploy.yml "
+                             f"prüfen (Run {spur['lauf_id']}). Ein Deploy-Catchup "
+                             "wiederholt nur denselben Fehlschlag.")
+                evidence = [f"URL=/posts/{slug}/", f"HTTP={code}",
+                            f"DEPLOY_FEHLERSCHLAEGE={spur['laeufe_fehlend']}",
+                            f"DEPLOY_SCHRITT={ziel}",
+                            f"DEPLOY_RUN={spur['lauf_id']}"]
+            else:
+                detail = f"{slug} liefert HTTP {code}."
+                next_step = ("Deploy prüfen, ggf. Deploy-Catchup triggern "
+                             "(Actions → Deploy auf GitHub Pages).")
+                evidence = [f"URL=/posts/{slug}/", f"HTTP={code}"]
+                if spur:
+                    evidence.append(
+                        f"DEPLOY_FEHLERSCHLAEGE={spur['laeufe_fehlend']} "
+                        f"(Job/Schritt nicht ermittelbar)")
             findings.append(_f(
                 "live-site", "Neuester Artikel nicht live", "P1", "auto",
-                detail=f"{slug} liefert HTTP {code}.",
-                next_step="Deploy prüfen, ggf. Deploy-Catchup triggern "
-                          "(Actions → Deploy auf GitHub Pages).",
-                evidence=[f"URL=/posts/{slug}/", f"HTTP={code}"]))
+                detail=detail, next_step=next_step, evidence=evidence))
     else:
         env["CHECK3"] = "FAIL"
         findings.append(_f(

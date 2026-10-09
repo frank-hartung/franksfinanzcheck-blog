@@ -635,6 +635,51 @@ jobs:
           python3 scripts/publication_release.py --selftest
           python3 scripts/publication_release.py --refill-only
 
+      # ============ AUSLIEFERUNGS-ISOLATION (Dauerheilung #676) ============
+      # Befund 09.10.2026: Der neueste Artikel lag veröffentlichungsreif im
+      # Repo (draft: false, redaktionell geprüft) und lieferte trotzdem
+      # HTTP 404. Der Deploy war 13× in Folge am Schritt „Release-Scorecard
+      # (fail-closed)" gestorben – Exit 1, weil RD1-duplikate den End-CTA
+      # eines KANDIDATEN als wortgleiches Duplikat maß, den
+      # affiliate_intent_contract wörtlich vorschreibt.
+      #
+      # Die Schwäche war nicht der Befund, sondern sein BLUSTRADIUS: Die
+      # Scorecard steht vor `upload-pages-artifact`, also brach ein roter
+      # Kandidat den ganzen Job ab. Zurückgehalten wurde nicht EIN Artikel,
+      # sondern das komplette Pages-Deployment – 42 Live-Artikel froren auf
+      # dem Vortagsstand ein, Vertonung, Suchindex und deploy-pages liefen
+      # nie. Dazu kam die Sackgasse: `entscheidung: auto` verspricht einen
+      # Maschinen-Heiler, Cross-Artikel-Duplikate werden aber nie
+      # auto-gefixed (C29: „Ein harter Blocker braucht einen Heiler").
+      #
+      # Ab hier misst dieselbe Scorecard-Engine VOR dem Bau-Finalstand den
+      # Deploy-Scope und stellt blockierte Kandidaten einzeln auf `hold`
+      # (park_state, Grund im Frontmatter – nie automatisch zurückgeholt),
+      # füllt die Quote nach (#287/#610) und baut neu. Begrenzte
+      # Konvergenz, danach prüft die Scorecard unten unverändert hart.
+      #
+      # KEIN `|| true`, KEIN continue-on-error: Exit 1 bleibt rot und stoppt
+      # den Deploy, Exit 2 (Werkzeugfehler) greift bewusst nicht – eine
+      # ausgefallene Messung ist kein Grün (C33). Isoliert wird Content,
+      # deshalb übernimmt der bestehende Gate-Diff-Pfad unten Commit und
+      # Rebuild; die finalen Veröffentlichungs-Gates sehen den neuen Stand.
+      # Runbook: docs/ANLEITUNG-AUSLIEFERUNGS-ISOLATION.md
+      - name: Auslieferungs-Isolation (blockierte Kandidaten → hold, Quote → Min)
+        run: |
+          set -uo pipefail
+          if ! python3 scripts/release_isolation.py --selftest; then
+            echo "::error title=Auslieferungs-Isolation::Selbsttest rot – die Isolation darf nicht blind greifen (fail-closed)."
+            exit 2
+          fi
+          python3 scripts/release_isolation.py --commit-sha "$GITHUB_SHA" --runden 3
+          iso=$?
+          if [ "$iso" -eq 1 ]; then
+            echo "::error title=Auslieferungs-Isolation::Nach 3 Runden bleiben Kandidaten blockiert – Deploy stoppt ehrlich, nichts Ungeprüftes geht live."
+          elif [ "$iso" -eq 2 ]; then
+            echo "::error title=Auslieferungs-Isolation::Werkzeugfehler – Messung nicht führbar, Deploy stoppt fail-closed (kein Scheingrün)."
+          fi
+          exit "$iso"
+
       # Bestands-Sicherheitsnetz: publish_gate prüft Kandidaten des heutigen
       # Slots. Diese zweite Wache prüft ALLE tatsächlich veröffentlichten
       # Artikel, damit auch ein manueller draft:false-Flip bei einem alten
@@ -734,8 +779,22 @@ jobs:
       # 1 = heutige Kandidaten blockiert · 2 = Werkzeugfehler (fail-closed).
       # Kein || true / continue-on-error: Scheingrün geht nicht live.
       # Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md
+      # HARTER ENTPUNKT, unverändert: Die Isolation oben heilt VOR diesem
+      # Schritt, sie ersetzt ihn nicht. Was hier rot bleibt, geht nicht live
+      # – und der Fehler nennt jetzt den Befund, statt nur „exit code 1"
+      # (Lektion WF-A535 #529: ein roter Schritt, der die Ursache nicht
+      # nennt, erzieht zum Wegsehen).
       - name: Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)
-        run: python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
+        run: |
+          set -uo pipefail
+          python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
+          status=$?
+          if [ "$status" -eq 1 ]; then
+            echo "::error title=Release-Scorecard::Heutige Kandidaten sind blockiert und die Auslieferungs-Isolation konnte sie nicht auflösen – der Deploy stoppt, damit nichts Ungeprüftes live geht. Befund: RELEASE-SCORECARD.md, Grund je Artikel im Frontmatter (cadence_grund)."
+          elif [ "$status" -eq 2 ]; then
+            echo "::error title=Release-Scorecard::Werkzeugfehler – die Produktionswahrheit ist nicht messbar. Fail-closed: eine ausgefallene Messung ist kein Grün (C33)."
+          fi
+          exit "$status"
 
       # Scorecard-Artefakte sichern (Report + Siegel-Zustand + Historie).
       # Alle drei Pfade sind deploy-irrelevant (STATE_ONLY im Deploy-Gate):

@@ -55,6 +55,30 @@ except Exception:  # noqa: BLE001
 
 ROLLE = "chatgpt"
 
+# ============================================================
+#  HAUS-FORMEL DER NEWS-KOMPAKT-DATELINE (SSOT, Dauerheilung #676)
+#  ------------------------------------------------------------
+#  Diese Zeile schreibt die Engine ABSICHTLICH in jeden News-Kompakt-
+#  Artikel – sie ist Format (Dateline + Einordnungsauftrag), kein
+#  redaktioneller Inhalt. Bis zum 09.10.2026 stand sie als f-string
+#  mitten in `main()`: Damit war sie für keine andere Wache als
+#  Konstante greifbar, und duplikat_guard maß sie über Artikel hinweg
+#  als D4-X-Fast-Duplikat (Ratio 0.98, `markt-update` ≈ `energie-update`,
+#  Unterschied nur das Datum). RD1-duplikate ist in der Release-Scorecard
+#  blockierend – derselbe Widerspruch wie beim Haus-CTA, dieselbe
+#  eingefrorene Auslieferung (Issue #676).
+#
+#  Jetzt ist die Formel eine benannte Konstante und duplikat_guard leitet
+#  ihr Vergleichsmuster DARAUS ab (`haus_formeln()`): Ein Platzhalter wird
+#  zur Wildcard, alles andere bleibt literal. Eine neue Haus-Formel muss
+#  also nur hier entstehen – die Duplikat-Messung kennt sie automatisch.
+# ============================================================
+STAND_INTRO = (
+    "**Stand: {today}.** Dieser News-Kompakt-Artikel ordnet eine "
+    "aktuelle Entwicklung ein. Konditionen und Regeln können sich "
+    "ändern – prüfe Details immer beim jeweiligen Anbieter.\n\n"
+)
+
 SYSTEM_PROMPT = """Du bist der News-Desk von FranksFinanzcheck: schnell, \
 präzise, verlässlich – wie eine seriöse deutsche Wirtschaftsredaktion. \
 Du schreibst einen News-Kompakt-Artikel.
@@ -221,9 +245,7 @@ def run(args) -> int:
         pillar=_kategorie_pillar(kategorie),
         keywords=keywords or [title], rolle=ROLLE, news=True,
         kategorie=kategorie)
-    stand = (f"**Stand: {today}.** Dieser News-Kompakt-Artikel ordnet eine "
-             "aktuelle Entwicklung ein. Konditionen und Regeln können sich "
-             "ändern – prüfe Details immer beim jeweiligen Anbieter.\n\n")
+    stand = STAND_INTRO.format(today=today)
     content = fm + stand + body
     if provider != "offline":
         content += ("\n\n" + ks.cta_block() + "\n" + ks.DISCLAIMER + "\n")

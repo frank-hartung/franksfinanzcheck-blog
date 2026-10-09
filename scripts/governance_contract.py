@@ -74,6 +74,15 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
                      festgestellten, befristeten Zustand ab – die Wache meldet ihn
                      als BEKANNT statt als Vorfall, jeder andere Befund bleibt rot
                      (20.09.2026)
+  C34 Blustradius       – ein blockierender Befund an EINEM Kandidaten darf die
+                     öffentliche Auslieferung nicht insgesamt einfrieren: vor dem
+                     harten End-Gate isoliert eine Wache den Kandidaten (hold mit
+                     Grund, nie park, nie Inhaltsumschrift), füllt die Quote und
+                     misst über dieselbe Scorecard-Engine erneut. Werkzeugfehler
+                     werden nicht isoliert (C33), der Exit-Code wird durchgereicht
+                     (kein `|| true`), und die Redundanz-Messung erkennt
+                     Haus-Templates aus ihrer SSOT statt aus einer Whitelist
+                     (Bot-Watchdog #676, 09.10.2026)
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -333,6 +342,24 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # veröffentlichte Version. Ihr --selftest friert SSOT-Form,
           # Gate-Deckung, Ausnahmen-Protokoll und Siegel-Bindung ein.
           "release_scorecard.py",
+          # Auslieferungs-Isolation (09.10.2026, Bot-Watchdog #676): Der
+          # neueste Artikel lag veröffentlichungsreif im Repo und lieferte
+          # HTTP 404, weil der Deploy 13× in Folge am Scorecard-Schritt
+          # starb – EIN blockierter Kandidat fror die komplette öffentliche
+          # Auslieferung ein. Ihr --selftest friert ein: Auswahl (blockiert/
+          # unbeweisbar, nie warnung), Grund mit Check-ID, hold statt park,
+          # eine Messregel über release_scorecard, kein Still-Schalter im
+          # Deploy. Ohne Selbsttest im Minimum wäre genau diese Kette wieder
+          # eine unbewachte Zeile (C6).
+          "release_isolation.py",
+          # Duplikat-Wache (09.10.2026, #676): Sie ist die Quelle von RD1,
+          # dem blockierenden Redundanz-Befund der Release-Scorecard. Ihr
+          # --selftest friert die Haus-Template-Ausnahme ein (CTA aus der
+          # Vertrags-SSOT, News-Dateline, Unicode-Bindestriche) UND die
+          # Gegenprobe: ein Redaktionssatz neben der CTA hebt die Ausnahme
+          # auf. Eine Wache, die ihre eigene Blindheit nicht beweist, ist
+          # entweder zu scharf (Site-Freeze) oder zu blind (Scheingrün).
+          "duplikat_guard.py",
           # Auslieferungs-Melder (07.10.2026, WF-54C4/#610): Am 05.10.2026
           # lieferte der Blog 1/2 Artikel öffentlich; der Kanal dazu hätte
           # JEDEN späteren grünen Beleg als Abschluss akzeptiert – der
@@ -1949,6 +1976,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
         script_texts, wflows, root=root, python_bin=python_bin)
     checks += c33_artefakt_waechter(script_texts, wflows, root=root,
                                     python_bin=python_bin)
+    checks += c34_blustradius(script_texts, wflows, root=root)
     return checks
 
 
@@ -2187,6 +2215,185 @@ def c33_artefakt_waechter(script_texts, wflows, root=BLOG_DIR,
         out.append(("C33", "scripts/tests/test_artefakt_waechter.py fehlt – "
                            "ohne Regressionstest ist dieser Vertrag Prosa "
                            "(#653)."))
+    return out
+
+
+# --- C34: Blustradius – ein Befund an einem Artikel friert nicht die Site ein
+# ---------------------------------------------------------------------------
+# Auslöser (Bot-Watchdog #676, 09.10.2026): „Neuester Artikel nicht live",
+# HTTP 404 auf /posts/2026-10-07-campingurlaub-…/ – obwohl der Artikel
+# veröffentlichungsreif im Repo lag (draft: false, redaktionell geprüft,
+# Cover, Quellen, Faktencheck). Der Deploy war 13× in Folge am Schritt
+# „Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)"
+# gestorben, weil RD1-duplikate den End-CTA eines Kandidaten als
+# wortgleiches Duplikat maß, den affiliate_intent_contract wörtlich
+# vorschreibt. Die Scorecard steht vor upload-pages-artifact: EIN roter
+# Kandidat hielt damit nicht einen Artikel zurück, sondern das komplette
+# Pages-Deployment – 42 Live-Artikel eingefroren, Vertonung, Suchindex und
+# deploy-pages liefen nie. Der Deploy-Catchup hatte den Deploy sechsmal
+# angestoßen; das Ticket riet zu einer Maßnahme, die den Ausfall verlängerte.
+#
+# Was der Vertrag verlangt:
+#   a) ISOLATION VOR DEM END-GATE: blockierte Kandidaten einzeln auf hold
+#      (nie park, nie Inhaltsumschrift), Quote nachfüllen, neu bauen,
+#      erneut messen – begrenzte Konvergenz.
+#   b) EINE MESSREGEL: gemessen wird über release_scorecard, nicht über
+#      eine eigene Ampel (Lektion #521, C19).
+#   c) FAIL-CLOSED bleibt: Werkzeugfehler (Exit 2) werden NICHT isoliert,
+#      der Exit-Code wird durchgereicht, kein `|| true` /
+#      continue-on-error am Schritt.
+#   d) URSACHE STATT SYMPTOM: Der Watchdog-Befund „Neuester Artikel nicht
+#      live" benennt Job und Schritt des Deploy-Fehlschlags (Lektion
+#      WF-A535 #529: ein roter Schritt, der die Ursache nicht nennt,
+#      erzieht zum Wegsehen).
+#   e) HAUS-TEMPLATES AUS DER SSOT: Die Redundanz-Messung erkennt
+#      vertraglich vorgeschriebene CTA-Blöcke und Haus-Formeln über die
+#      erzeugenden Module, nicht über eine Whitelist, die mit jeder neuen
+#      Variante verrottet – und die Ausnahme ist begründet (stille
+#      Ausnahme = Scheingrün) und hat eine Gegenprobe (Redaktionssatz hebt
+#      sie auf).
+C34_WACHEN = ("release_isolation.py", "duplikat_guard.py")
+
+
+def c34_blustradius(script_texts, wflows, root=BLOG_DIR):
+    out = []
+    isolation = script_texts.get("release_isolation.py", "")
+    duplikat = script_texts.get("duplikat_guard.py", "")
+    watchdog = script_texts.get("bot_watchdog.py", "")
+    news = script_texts.get("news_writer.py", "")
+
+    dateien: dict[str, str] = {}
+    for pfad, text in (wflows or {}).items():
+        dateien[os.path.basename(str(pfad))] = text
+    deploy = dateien.get("deploy.yml", "")
+
+    if not isolation:
+        out.append(("C34", "scripts/release_isolation.py fehlt – ohne die "
+                           "Isolation friert EIN blockierter Kandidat die "
+                           "komplette öffentliche Auslieferung ein (#676)."))
+        return out
+
+    # a) Isolation: hold mit Grund, Quote, Rebuild, begrenzte Runden.
+    for baustein, sinn in (
+            ("def blockierte_kandidaten", "die Auswahl dessen, was isoliert wird"),
+            ("park_state.hold(", "hold statt park – park() holte den Artikel "
+                                 "automatisch zurück und machte die Blockade "
+                                 "unsichtbar (#129)"),
+            ("refill_until_min", "die Quote-Nachfüllung (#287/#610) – ohne sie "
+                                 "endet der Tag unter dem Mindestziel"),
+            ("def neu_bauen", "der Rebuild – ohne ihn prüft die zweite Messung "
+                              "einen Build, in dem der Artikel noch steckt (C33)"),
+            ("MAX_ISOLATIONEN_PRO_LAUF", "die Obergrenze – ein strukturelles "
+                                         "Problem soll rot bleiben, nicht den "
+                                         "Vorrat leerräumen"),
+            ("--runden", "die begrenzte Konvergenz (keine Endlosschleife)"),
+            ("--selftest", "der Selbsttest (C6)"),
+            ("--trockenlauf", "der Trockenlauf (C15: Beweis heilt nicht)")):
+        if baustein not in isolation:
+            out.append(("C34", f"scripts/release_isolation.py: {baustein} fehlt "
+                               f"– ohne {sinn} ist die Isolation keine (#676)."))
+
+    if "park_state.park(" in isolation:
+        out.append(("C34", "scripts/release_isolation.py ruft park_state.park() "
+                           "– ein blockierter Kandidat käme am nächsten Slot "
+                           "automatisch wieder, die Blockade wäre unsichtbar "
+                           "(#676, Zustandsmaschine park_state)."))
+
+    # b) Eine Messregel: über release_scorecard, nie eine eigene Ampel.
+    if "release_scorecard" not in isolation:
+        out.append(("C34", "scripts/release_isolation.py misst nicht über "
+                           "release_scorecard – zwei Messregeln, zwei Ampeln "
+                           "(Lektion #521, C19)."))
+
+    # c) Fail-closed: Werkzeugfehler dürfen nicht isoliert werden.
+    if "EXIT_WERKZEUGFEHLER" not in isolation:
+        out.append(("C34", "scripts/release_isolation.py kennt keinen "
+                           "Werkzeugfehler-Exit – eine ausgefallene Messung "
+                           "würde als Inhalt behandelt und still isoliert "
+                           "(C33, #676)."))
+
+    # d) Verdrahtung im Deploy: VOR der finalen Scorecard, ohne Still-Schalter.
+    if "release_isolation.py" not in deploy:
+        out.append(("C34", ".github/workflows/deploy.yml ruft die "
+                           "Auslieferungs-Isolation nicht – der Blustradius "
+                           "eines Kandidaten bleibt die ganze Site (#676)."))
+    else:
+        i_iso = deploy.find("release_isolation.py --commit-sha")
+        i_score = deploy.find("Release-Scorecard (Produktionswahrheit versiegeln")
+        if i_iso < 0:
+            out.append(("C34", "deploy.yml: die Isolation wird nicht mit "
+                               "--commit-sha aufgerufen (Siegel-Bindung fehlt)."))
+        elif i_score >= 0 and i_iso > i_score:
+            out.append(("C34", "deploy.yml: die Isolation steht NACH der "
+                               "finalen Release-Scorecard – der Deploy ist an "
+                               "dieser Stelle schon gestorben, die Isolation "
+                               "käme zu spät (#676)."))
+        for zeile in deploy.splitlines():
+            if "release_isolation.py" in zeile and ("|| true" in zeile
+                                                    or "continue-on-error" in zeile):
+                out.append(("C34", "deploy.yml: die Isolation ist mit `|| true`/"
+                                   "continue-on-error verdrahtet – ein roter "
+                                   "Kandidat ginge als Grün durch (Scheingrün, "
+                                   "#676)."))
+        if 'exit "$iso"' not in deploy:
+            out.append(("C34", "deploy.yml: der Exit-Code der Isolation wird "
+                               "nicht durchgereicht – ohne ihn stoppt ein "
+                               "Dauerrot den Deploy nicht (#676)."))
+
+    # e) Ursache statt Symptom im Watchdog.
+    if "deploy_ausfall_spur" not in watchdog:
+        out.append(("C34", "scripts/bot_watchdog.py benennt den Deploy-"
+                           "Fehlschlag nicht (Job/Schritt) – das Ticket riet "
+                           "am 09.10.2026 zu einem Catchup, der denselben "
+                           "Fehlschlag sechsmal wiederholte (#676)."))
+    elif "DEPLOY_SCHRITT" not in watchdog:
+        out.append(("C34", "scripts/bot_watchdog.py: der fehlende Schritt steht "
+                           "nicht im Nachweis – ohne ihn ist die Meldung ein "
+                           "Symptom ohne Ursache (#676)."))
+
+    # f) Haus-Templates aus der SSOT, nicht aus einer Whitelist.
+    if not duplikat:
+        out.append(("C34", "scripts/duplikat_guard.py fehlt – die Quelle von "
+                           "RD1, dem blockierenden Redundanz-Befund (#676)."))
+    else:
+        if "affiliate_intent_contract" not in duplikat:
+            out.append(("C34", "scripts/duplikat_guard.py leitet die Haus-CTA "
+                               "nicht aus affiliate_intent_contract ab – der "
+                               "Widerspruch zweier Wachen (Vertrag schreibt "
+                               "Wortlaut vor, Messung meldet ihn als Plagiat) "
+                               "ist die Ursache von #676."))
+        if "def haus_template_grund" not in duplikat:
+            out.append(("C34", "scripts/duplikat_guard.py begründet die "
+                               "Ausnahme nicht – eine stille Ausnahme ist ein "
+                               "Scheingrün (Lektion #521, C19)."))
+        if "news_writer" not in duplikat:
+            out.append(("C34", "scripts/duplikat_guard.py kennt die Haus-Formeln "
+                               "des News-Desk nicht – dieselbe Klasse wie der "
+                               "CTA (Format wird als Inhaltsklau gemessen, #676)."))
+    if "STAND_INTRO" not in news:
+        out.append(("C34", "scripts/news_writer.py: die News-Dateline steht "
+                           "nicht als benannte Konstante STAND_INTRO – als "
+                           "f-string in main() ist sie für keine andere Wache "
+                           "greifbar und verrottet zur Whitelist-Lücke (#676)."))
+
+    # g) Siegel und Test: eine Regel ohne Regressionstest ist Prosa.
+    for wache in C34_WACHEN:
+        if wache not in GUARDS:
+            out.append(("C34", f"scripts/{wache} steht nicht in "
+                               "governance_contract.GUARDS – ohne den Zwang zum "
+                               "Selbsttest im vertraglichen Minimum verstummt "
+                               "die Wache (C6, #676)."))
+        if not os.path.exists(os.path.join(root, "scripts", "tests",
+                                           f"test_{wache[:-3]}.py")):
+            out.append(("C34", f"scripts/tests/test_{wache[:-3]}.py fehlt – "
+                               "ohne Regressionstest ist dieser Vertrag Prosa "
+                               "(#676)."))
+
+    runbook = os.path.join(root, "docs", "ANLEITUNG-AUSLIEFERUNGS-ISOLATION.md")
+    if not os.path.exists(runbook):
+        out.append(("C34", "docs/ANLEITUNG-AUSLIEFERUNGS-ISOLATION.md fehlt – "
+                           "ohne Runbook bleibt die Isolation eine Zeile im "
+                           "Workflow, die niemand bedienen kann (#676)."))
     return out
 
 
@@ -3459,6 +3666,27 @@ RULE_TEXT = {
            "\u201e0/6 gate-fertig\u201c, weil ein Merge zwei Zertifikatsstände "
            "verschmolzen hatte – die Reparatur lief sechs Nächte in die falsche "
            "Richtung (WF-D4E0, #653).",
+    "C34": "Der Blustradius eines Befunds ist der Artikel, nicht die Site: Ein "
+           "blockierender Fund an EINEM heutigen Kandidaten darf die "
+           "öffentliche Auslieferung nicht insgesamt einfrieren. "
+           "`release_isolation.py` misst den Deploy-Scope über dieselbe "
+           "Scorecard-Engine (keine zweite Messregel), stellt blockierte "
+           "Kandidaten einzeln auf `hold` mit Check-ID und Befund im "
+           "Frontmatter (nie `park`, nie Inhaltsumschrift), füllt die Quote "
+           "(#287/#610), baut neu und misst erneut – begrenzte Konvergenz, "
+           "Obergrenze gegen das Leeräumen des Vorrats. Werkzeugfehler werden "
+           "NICHT isoliert, der Exit-Code wird durchgereicht, kein `|| true` "
+           "und kein `continue-on-error` am Schritt. Die Redundanz-Messung "
+           "erkennt Haus-Templates aus ihren SSOTs (`affiliate_intent_contract`, "
+           "`ki_shared.DISCLAIMER`, `cta_builder.END_DISCLOSURE`, "
+           "`news_writer.STAND_INTRO`) statt aus einer Whitelist, die mit jeder "
+           "neuen CTA-Variante verrottet; jede Ausnahme ist begründet und hat "
+           "eine Gegenprobe (ein Redaktionssatz hebt sie auf). Und der "
+           "Watchdog-Befund „Neuester Artikel nicht live“ nennt Job und Schritt "
+           "des Deploy-Fehlschlags: Am 09.10.2026 riet das Ticket zu einem "
+           "Catchup, der denselben Fehlschlag sechsmal wiederholte, während 13 "
+           "Deploys in Folge amselben Gate starben und 42 Live-Artikel "
+           "eingefroren blieben (Bot-Watchdog, #676).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -3487,7 +3715,10 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          # C31 ist der Robustheits-Vertrag (robustheits_gate.py) – die
          # nächste freie Nummer nach C32 ist deshalb C33.
          "C33": "Maschinen-Artefakte werden gegengelesen (kein Artefakt-"
-                "Defekt sieht mehr aus wie ein leerer Vorrat)"}
+                "Defekt sieht mehr aus wie ein leerer Vorrat)",
+         "C34": "Blustradius eines Befunds (ein blockierter Kandidat friert "
+                "nicht die ganze Auslieferung ein; Haus-Templates aus der "
+                "SSOT statt aus einer Whitelist)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -4542,12 +4773,80 @@ def _selftest():
             if "artifacts.write_object" in f[1]]:
         failures.append("C33: ein nicht atomar schreibender Zertifikats-"
                         "Schreiber bleibt unentdeckt (#653).")
+
+    # --- C34: Blustradius eines Befunds (Bot-Watchdog #676) ----------------
+    # Der echte Baum muss still bleiben. Jede Sabotage stellt genau den
+    # Zustand vom 09.10.2026 wieder her: 13 Deploy-Fehlschläge in Folge,
+    # 42 Live-Artikel eingefroren, der neueste Artikel HTTP 404 – und ein
+    # Ticket, das zu einem Catchup riet, der denselben Fehlschlag wiederholte.
+    c34_dateien = ("release_isolation.py", "duplikat_guard.py",
+                   "bot_watchdog.py", "news_writer.py")
+    echte_c34 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in c34_dateien}
+    echte_c34_befunde = c34_blustradius(echte_c34, wflows_echt, root=BLOG_DIR)
+    if echte_c34_befunde:
+        failures.append(f"C34: der echte Zustand wird beanstandet: "
+                        f"{echte_c34_befunde}")
+    # (a) hold wird zu park: der blockierte Artikel käme am nächsten Slot
+    #     automatisch wieder – die Blockade wäre unsichtbar (#129).
+    mit_park = dict(echte_c34, **{
+        "release_isolation.py": echte_c34["release_isolation.py"].replace(
+            "park_state.hold(", "park_state.park(")})
+    if not [f for f in c34_blustradius(mit_park, wflows_echt, root=BLOG_DIR)
+            if "park()" in f[1]]:
+        failures.append("C34: park() statt hold() bleibt unentdeckt (#676).")
+    # (b) Die Isolation rutscht hinter die finale Scorecard: der Deploy ist
+    #     an dieser Stelle schon gestorben, sie käme zu spät.
+    nachgeschoben = dict(wflows_echt)
+    for pfad in list(nachgeschoben):
+        if os.path.basename(pfad) == "deploy.yml":
+            text = nachgeschoben[pfad]
+            i_iso = text.find("      - name: Auslieferungs-Isolation")
+            i_score = text.find("      - name: Release-Scorecard (Produktionswahrheit")
+            if i_iso >= 0 and i_score > i_iso:
+                block = text[i_iso:i_score]
+                nachgeschoben[pfad] = (text[:i_iso] + text[i_score:]
+                                       + block + text[i_score + len(text[i_score:]):])
+    if not [f for f in c34_blustradius(echte_c34, nachgeschoben, root=BLOG_DIR)
+            if "NACH der finalen Release-Scorecard" in f[1]]:
+        failures.append("C34: eine Isolation hinter dem End-Gate bleibt "
+                        "unentdeckt (#676).")
+    # (c) Still-Schalter am Schritt: ein roter Kandidat ginge als Grün durch.
+    mit_still = dict(wflows_echt)
+    for pfad in list(mit_still):
+        if os.path.basename(pfad) == "deploy.yml":
+            mit_still[pfad] = mit_still[pfad].replace(
+                'python3 scripts/release_isolation.py --commit-sha "$GITHUB_SHA" --runden 3',
+                'python3 scripts/release_isolation.py --commit-sha "$GITHUB_SHA" --runden 3 || true')
+    if not [f for f in c34_blustradius(echte_c34, mit_still, root=BLOG_DIR)
+            if "|| true" in f[1] or "Scheingrün" in f[1]]:
+        failures.append("C34: ein `|| true` an der Isolation bleibt "
+                        "unentdeckt – Scheingrün (#676).")
+    # (d) Die Redundanz-Messung verliert die SSOT-Ableitung: der Widerspruch
+    #     zweier Wachen kehrt zurück (Vertrag schreibt Wortlaut vor, Messung
+    #     meldet ihn als Plagiat) – die Ursache von #676.
+    ohne_ssot = dict(echte_c34, **{
+        "duplikat_guard.py": echte_c34["duplikat_guard.py"].replace(
+            "affiliate_intent_contract", "eine_whitelist_von_hand")})
+    if not [f for f in c34_blustradius(ohne_ssot, wflows_echt, root=BLOG_DIR)
+            if "affiliate_intent_contract" in f[1]]:
+        failures.append("C34: eine Haus-CTA-Erkennung ohne Vertrags-SSOT "
+                        "bleibt unentdeckt (#676).")
+    # (e) Der Watchdog benennt den Deploy-Schritt nicht: das Ticket bliebe
+    #     ein Symptom ohne Ursache (Lektion WF-A535 #529).
+    ohne_spur = dict(echte_c34, **{
+        "bot_watchdog.py": echte_c34["bot_watchdog.py"].replace(
+            "deploy_ausfall_spur", "deploy_unbekannt")})
+    if not [f for f in c34_blustradius(ohne_spur, wflows_echt, root=BLOG_DIR)
+            if "bot_watchdog" in f[1]]:
+        failures.append("C34: ein Watchdog ohne Deploy-Ursache bleibt "
+                        "unentdeckt (#676).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C33 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C34 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

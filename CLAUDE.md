@@ -1241,6 +1241,79 @@ Dazu: `scripts/reserve_readiness.py` schreibt Zertifikate atomar
 Vertrag: **C33** in `governance_contract.py` (Wache · Klassen · fail-closed ·
 Verdrahtung in PR-Pfad und Reserve-Lauf in der richtigen Reihenfolge ·
 Ursachenklassen · atomarer Schreiber · Siegel · Regressionstest).
+
+## Ein Befund darf nicht die ganze Seite einfrieren (Blustradius, C34, seit #676, 09.10.2026)
+
+Am 09.10.2026 meldete der Bot-Watchdog `P1 · Neuester Artikel nicht live`:
+`campingurlaub-2026` lieferte HTTP 404. Der Artikel war gesund, `draft: false`,
+fertig gebaut. Er war nur nie ausgeliefert worden – weil **jeder** Deploy seit
+02:12 UTC rot war (13 Fehlschläge in Folge, letzter grüner Lauf
+`37851368576`). Rot wurde der Schritt `Release-Scorecard` mit Exit 1, alles
+dahinter fiel aus, auch `pages-deployment`.
+
+Der Auslöser war ein einziger Satz in einem **anderen** Artikel: Der End-CTA von
+`7-gewohnheiten-…` (Z. 216) war wortgleich mit `etf-sparplan-…` (Z. 164) – und
+beide waren richtig, weil `cta_builder.cta_end_block()` sie aus derselben
+Vertrags-SSOT erzeugt. Die Duplikat-Wache maß Haus-Format als Inhaltsklau
+(`RD1-duplikate`, `wirkung: blockiert`). Der Befund war echt, die **Wirkung**
+war falsch: Ein Artikel mit einem Format-Befund fror die Auslieferung aller 75
+Artikel ein. Der Deploy-Catchup wiederholte stündlich denselben Fehlschlag,
+denn er baute neu, ohne die Ursache zu berühren.
+
+Vier Schichten halten die Klasse jetzt:
+
+- **Die Ausnahme kommt aus der Quelle, nicht aus einer Liste.**
+  `duplikat_guard.py` erkennt Haus-Templates aus `affiliate_intent_contract`
+  (CTA-Register), `ki_shared.DISCLAIMER`, `cta_builder.END_DISCLOSURE` /
+  `_END_SATZ_FALLBACK` und `news_writer.STAND_INTRO` (Formel mit `{today}`).
+  Eine Whitelist hätte denselben Widerspruch beim nächsten Partner neu
+  erzeugt. **Gelesen wird per AST, nicht per Import:** `ki_shared`,
+  `cta_builder` und `news_writer` ziehen PyYAML nach – ohne AST-Lesart fiele
+  die Ausnahme in jeder pyyaml-freien Umgebung *still* aus und #676 käme als
+  Dauer-Fehlalarm zurück. Eine nicht lesbare Quelle ist darum ein
+  Werkzeugfehler (Exit 2, `haus_template_luecken()`), nie ein Verzicht.
+  Normalisiert wird über `affiliate_intent_contract.norm()` – dieselbe
+  Vergleichsform wie die Intent-Wache (der weiche Bindestrich U+2011 war die
+  Unsichtbarkeits-Ursache).
+- **Ausnahmen sind sichtbar.** `haus_template_grund()` nennt die Quelle im
+  Report. Eine stille Ausnahme wäre Scheingrün (Lektion #521, C19). Ein
+  einziger Redaktionssatz hebt jede Ausnahme auf – die Wache wird nicht blind.
+- **Blockiert heißt isoliert, nicht gestoppt.** `scripts/release_isolation.py`
+  nimmt blockierte Kandidaten aus der Auslieferung (`park_state.hold()` –
+  **nie** `park()`, Frontmatter-only, mit `cadence_grund`, der die Check-ID
+  und #676 nennt), füllt die Quote nach (`refill_until_min(finalize=False)`),
+  baut neu und misst **über dieselbe Scorecard-Engine** nach. Begrenzte
+  Runden (`--runden`, `MAX_ISOLATIONEN_PRO_LAUF = 6`), Exit `0` ausgeliefert /
+  `1` weiterhin blockiert / `2` Werkzeugfehler. Bei Werkzeugfehler greift die
+  Isolation bewusst nicht: Sie würde sonst auf einer Messung handeln, die
+  nichts gemessen hat (C33). Verdrahtet in `deploy.yml` **vor** dem
+  Heal-Diff/Rebuild; die Scorecard bleibt der harte Endpunkt – ohne
+  `|| true`, ohne `continue-on-error`.
+- **Der Alarm nennt die Ursache, nicht das Symptom.** `bot_watchdog.py`
+  schreibt bei `live-site` die Deploy-Ausfallspur dazu: fehlender Workflow,
+  Anzahl aufeinanderfolgender Fehlschläge, Job, Schritt, Run-ID – und den
+  Hinweis, dass ein Catchup denselben Fehlschlag wiederholt. Live geprüft:
+  `laeufe_fehlend: 13`, Job `deploy`, Schritt `Release-Scorecard
+  (Produktionswahrheit versiegeln, fail-closed)`, Run `37963585911`.
+
+Dazu repariert: `release_scorecard.bewerte_artikel()` hatte einen `NameError`
+bei einer nicht deklarierten Check-ID – roher Traceback, Exit 2, blockierter
+Deploy. Eine Messregel kann nicht gleichzeitig Messung und Absturz sein.
+
+Bedienung: `npm run release:isolation` (Trockenlauf) ·
+`npm run release:isolation:probe` · `npm run test:isolation` ·
+`npm run duplikate:check` · `npm run test:duplikate`. Runbook:
+`docs/ANLEITUNG-AUSLIEFERUNGS-ISOLATION.md`. Regression:
+`scripts/tests/test_release_isolation.py` (21) ·
+`scripts/tests/test_duplikat_guard.py` (23, davon 2 nur mit PyYAML).
+Vorgangsbericht: `WF-A535-676-DAUERHEILUNG-PREMIUM-2026-10-09.md`.
+
+Vertrag: **C34** in `governance_contract.py` (Isolations-Bausteine · `hold`
+statt `park` · Messung über die Scorecard · Exit-Werkzeugfehler ·
+Verdrahtungs-Reihenfolge in `deploy.yml` ohne Still-Schalter ·
+Ausfallspur im Watchdog · SSOT-Haus-Templates statt Whitelist · beide Wachen
+in `GUARDS` mit Regressionstest und Runbook).
+
 ## Das Manifest ist der Bau-Eingang (Manifest-Wache, seit WF-7B6B / #654, 08.10.2026)
 
 Am 08.10.2026 brach `npm ci` in Sekunde 1 ab: Ein Merge (#647) hatte `package.json`
