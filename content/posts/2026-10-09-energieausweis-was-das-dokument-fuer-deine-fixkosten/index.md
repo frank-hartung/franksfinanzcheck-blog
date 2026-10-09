@@ -1,7 +1,7 @@
 ---
 title: "Energieausweis: Was das Dokument für deine Fixkosten"
 description: Brauchst du einen Energieausweis? Erfahre alles über gesetzliche Pflichten, die Energieausweis Kosten und wie die Energieeffizienzklasse Haus-Kosten senkt.
-date: 2026-10-08T00:11:05Z
+date: 2026-10-09T10:48:20Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -109,7 +109,7 @@ Zwei Werte sind dabei besonders wichtig: der Endenergiekennwert und der Primäre
 B. Heizöl, Erdgas oder Strom für die Wärmepumpe).
 2. **Primärenergie:** Dieser Wert berücksichtigt auch die Verluste, die bei der Gewinnung, Umwandlung und dem Transport des Energieträgers entstehen. Eine Wärmepumpe schneidet hier oft sehr gut ab, da sie Umweltwärme nutzt, während eine Elektro-Direktheizung aufgrund der hohen Verluste bei der Stromerzeugung schlecht bewertet wird.
 
-Die Einstufung in eine Klasse hat direkten Einfluss auf deine Fixkosten. Ein Sprung von Klasse F zu Klasse C kann die Heizkosten pro Jahr um mehrere hundert oder sogar tausend Euro senken. Das ist der vierte Schritt im Kompass: **Kurs halten**. Nutze den Ausweis als Fahrplan für deine Sanierungen, um deine laufenden Kosten langfristig im Griff zu behalten.
+Die Einstufung in eine Klasse hat direkten Einfluss auf deine Fixkosten. Ein Sprung von Klasse F zu **Kategorie** C kann die Heizkosten pro Jahr um mehrere hundert oder sogar tausend Euro senken. Das ist der vierte Schritt im Kompass: **Kurs halten**. Nutze den Ausweis als Fahrplan für deine Sanierungen, um die laufenden Kosten langfristig im Griff zu behalten.
 
 
 
@@ -149,7 +149,7 @@ Wenn du merkst, dass dein aktuelles Dokument abläuft oder du für einen Verkauf
 1. **Unterlagen sammeln:** Suche Grundrisse, Baubeschreibungen und die Heizkostenabrechnungen der letzten drei Jahre zusammen. Prüfe, wann genau das Haus gebaut wurde und ob es Sanierungen (z. B. neues Dach 2010) gab.
 2. **Ausweistyp bestimmen:** Prüfe, ob für dein Haus die freie Wahl besteht oder ob du aufgrund des Baujahres und der Wohnungsanzahl zwingend einen Bedarfsausweis benötigst.
 3. **Anbieter prüfen:** Suche nach zertifizierten Energieberatern, Architekten oder Schornsteinfegern. Online-Anbieter sind günstig, aber bei einem komplexen Haus ist die Beratung vor Ort oft wertvoller.
-4. **Daten übermitteln:** Gib die Angaben gewissenhaft an. Falsche Angaben können den Ausweis ungültig machen und dich rechtlich angreifbar machen.
+4. **Daten übermitteln:** Gib die Angaben gewissenhaft an. Falsche Angaben können den Ausweis ungültig machen und dich rechtlich angreifbar
 5. **Empfehlungen prüfen:** Schau dir nach Erhalt besonders die Seite mit den Modernisierungshinweisen an. Diese sind oft die Basis für staatliche Förderungen (KfW/BAFA).
 
 ## Typische Fehler beim Energieausweis

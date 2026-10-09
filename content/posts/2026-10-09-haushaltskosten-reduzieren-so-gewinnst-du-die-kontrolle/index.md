@@ -1,7 +1,7 @@
 ---
 title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
 description: Willst du effektiv deine Haushaltskosten reduzieren? Frank Hartung zeigt dir, wie du mit einfachen Mitteln und dem 4K-Prüfpfad deine Fixkosten senkst.
-date: 2026-10-08T00:11:05Z
+date: 2026-10-09T10:48:20Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -74,7 +74,7 @@ Auch Kreditkarten verursachen nach dem ersten beitragsfreien Jahr oft Kosten. We
 
 ## Haushaltskosten reduzieren mit dem 4K-Prüfpfad
 
-Du willst deine Ausgaben nachhaltig in den Griff bekommen. Dafür hat sich bei FranksFinanzcheck der 4K-Prüfpfad bewährt. Dieses System hilft dir dabei, deine **Haushaltskosten** Schritt für Schritt zu **reduzieren**. Es basiert auf Logik und klaren Zahlen statt auf vagen Versprechungen.
+Du willst deine Ausgaben nachhaltig in den Griff bekommen. Dafür hat sich bei FranksFinanzcheck der 4K-Prüfpfad bewährt. Dieses System hilft dir dabei, deine **Haushaltskosten** nach und nach zu **reduzieren**. Es basiert auf Logik und klaren Zahlen statt auf vagen Versprechungen.
 
 ### 1. Kosten sehen
 Zuerst erfasst du alle laufenden Beträge. Nimm dir deine Kontoauszüge der letzten zwölf Monate vor. Liste jeden Dauerauftrag und jede Lastschrift genau auf. Nur wer weiß, wohin das Geld fließt, kann effektiv gegensteuern. Priorisiere dabei die großen Posten wie Miete, Energie und Versicherungen.
@@ -121,7 +121,7 @@ Der neue Anbieter kündigt in der Regel deinen alten Vertrag. Deine Versorgung i
 
 ## Den Überblick behalten: Fixkosten vs. Variable Ausgaben
 
-Willst du deine **Haushaltskosten** effektiv **reduzieren**, unterscheide fix von variabel. Fixkosten fallen jeden Monat in gleicher Höhe an (z. B. Miete, Versicherungen).
+Willst du deine **Haushaltskosten** effektiv **reduzieren**, unterscheide fix von variabel. Fixkosten fallen jeden Monat in gleicher Höhe an (z. B. miete, Versicherungen).
 
 Variable Kosten hängen direkt von deinem Konsumverhalten ab. Dazu zählen Lebensmittel, Kleidung oder deine Freizeitgestaltung.
 
