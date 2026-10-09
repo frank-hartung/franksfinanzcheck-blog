@@ -225,7 +225,7 @@ checks:
     dimension: redundanz
     wirkung: blockiert
     entscheidung: auto
-    quelle: scripts/duplikat_guard.py D1–D6
+    quelle: scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)
     pruefung: "keine Absatz-/Sektions-Duplikate im Artikel oder gegen den Bestand"
 
   # ——— YMYL-Risiko ———

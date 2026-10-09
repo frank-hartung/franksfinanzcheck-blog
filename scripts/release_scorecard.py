@@ -25,7 +25,7 @@
 #  Die Scorecard ist eine SICHT, kein zweites Gate: Sie misst über
 #  die Collector-Funktionen des Publish-Gates (scripts/publish_gate.py)
 #  und die Prüffunktionen der Fachwachen (editorial_review_gate,
-#  faktenfrische, duplikat_guard). Die deklarative Wahrheit
+#  faktenfrische). Die deklarative Wahrheit
 #  (blockiert/warnung, Besitz, Eskalation) steht in der menschlich
 #  kuratierten SSOT data/release_scorecard.yaml; die Wache
 #  scripts/governance_contract.py erzwingt mit Regel C19, dass jede
@@ -136,6 +136,7 @@ PUBLISH_GATE_HART_FAMILIEN = {
     "A4-profi-check": "affiliate_profi_check.py",
     "M1-fachliche-freigabe": "editorial_review_gate.py",
     "M2-siegel-bindung": "editorial_review_gate.py",
+    "RD1-duplikate": "duplikat_guard.py",
 }
 
 AUSNAHME_PFLICHTFELDER = ("slug", "check", "begruendung", "gueltig_bis", "entschieden_von")
@@ -508,19 +509,18 @@ def sammle(live_slugs: list[str], heute: dt.date) -> tuple[dict, dict, dict]:
     except Exception as exc:  # noqa: BLE001
         tool_fehler["A3-offenlegung"] = f"Offenlegung nicht auswertbar: {exc}"
 
-    # ---------- Redundanz: Duplikat-Wache (D1–D6, reiner Lese-Lauf) ----------
+    # ---------- Redundanz: derselbe Publish-Gate-Collector (D1–D6) ----------
+    # WF-54C4/#674: Die Scorecard darf keine eigene Schleife über die
+    # Duplikat-Wache besitzen. Sonst kann ein Kandidat das Publish-Gate
+    # passieren und erst nach dem Build an einer zweiten Messung scheitern.
+    # Der Collector ordnet Cross-Artikel-Funde beiden Seiten zu.
     try:
-        duplikat_guard = _importiere_gate_module("duplikat_guard")
-        pfade = sorted(POSTS.glob("*/index.md"))
-        pfade = [p for p in pfade if p.name != "_index.md"]
-        funde = []
-        for p in pfade:
-            funde += duplikat_guard.check_article(p, pfade)
-        for rel_a, regel, detail, _pos, _rel_b in duplikat_guard.check_cross(pfade):
-            funde.append((rel_a, regel, detail, _pos))
-        for rel, regel, detail, _pos in funde:
-            slug = Path(rel).parent.name
-            _merke(befunde, slug, "RD1-duplikate", f"{regel}: {detail[:180]}")
+        dupl_fail, dupl_tool = publish_gate.duplicate_failures(live_slugs)
+        if dupl_tool:
+            tool_fehler["RD1-duplikate"] = dupl_tool
+        for slug, probleme in dupl_fail.items():
+            for problem in probleme:
+                _merke(befunde, slug, "RD1-duplikate", problem)
     except Exception as exc:  # noqa: BLE001
         tool_fehler["RD1-duplikate"] = f"Duplikat-Wache nicht auswertbar: {exc}"
 

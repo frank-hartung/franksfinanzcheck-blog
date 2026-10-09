@@ -797,7 +797,7 @@ Version wirklich die geprüfte war. Die Antwort ist die **Release-Scorecard**:
 - **Keine zweite Messregel (C19):** `scripts/release_scorecard.py` misst
   ausschließlich über die Collector-Funktionen des Publish-Gates und die
   Prüffunktionen der Fachwachen (`editorial_review_gate.evaluate_path`,
-  `faktenfrische.faelligkeit`, `duplikat_guard`). Die Governance-Regel **C19**
+  `faktenfrische.faelligkeit`, `publish_gate.duplicate_failures`). Die Governance-Regel **C19**
   erzwingt Deckungsgleichheit – eine harte Gate-Familie, die nicht als
   blockierend deklariert ist, bricht den Build.
 - **Beweislauf ohne Heilung (C15):** Die Scorecard setzt

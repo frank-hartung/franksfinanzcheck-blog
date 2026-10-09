@@ -2,7 +2,7 @@
 """publish_gate.py – Harte Vor-Publish-Kontrolle (13.08.2026)
 
 Betriebsregel (Frank, 13.08.2026, erweitert 14.08.2026): Zukünftige Artikel
-werden nur dann tatsächlich live geschaltet, wenn sie ACHT automatische
+werden nur dann tatsächlich live geschaltet, wenn sie NEUN automatische
 Prüfungen bestehen:
 
   1. check_length.py          – Zeichenlänge Premium (Floor 10.000, Optimum 12.000–18.000)
@@ -53,6 +53,11 @@ Prüfungen bestehen:
                                   Review sowie ein fassungsgebundener Hash.
                                   Frühe Affiliate-CTAs und veraltete
                                   „Stand 2024"-Angaben blockieren ebenfalls.
+  9. duplikat_guard.py          – D1–D6: kein Absatz-/Sektions-Duplikat
+                                  im Kandidaten oder gegen den Live-Bestand.
+                                  Dieselbe Collector-Funktion speist die
+                                  Release-Scorecard; ein Fund kann damit nie
+                                  erst NACH einem grünen Publish-Gate auftreten.
 
 Läuft NACH der bestehenden Qualitäts-/Selbstheilungs-Kette (Rechtschreibung,
 Meta-Optimierung, interne Verlinkung, affiliate_profi_check --fix, …) und
@@ -93,6 +98,7 @@ import os
 import re
 import subprocess
 import sys
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
@@ -593,6 +599,63 @@ def textverstaendnis_failures(candidates):
         reason = f"Textverständnisprüfung nicht verfügbar: {exc}"
         return {slug: [reason] for slug in candidates}, None
 
+def duplicate_failures(candidates):
+    """Liefert D1–D6-Funde für genau die angefragten Kandidaten.
+
+    Die Duplikat-Wache bleibt Eigentümerin der Erkennung. Dieser schmale,
+    schreibfreie Adapter macht ihren Collector zum Teil des harten
+    Publish-Gates und der Release-Scorecard. Entscheidend ist die Behandlung
+    von D3/D4: Ein Cross-Artikel-Fund wird *beiden* beteiligten Artikeln
+    zugeordnet. Der alte Scorecard-Pfad merkte nur den lexikografisch ersten
+    Pfad – dadurch konnte ein Kandidat als zweiter Pfad eine andere Ampel
+    bekommen als die Wache selbst.
+
+    Rückgabe: ({slug: [detail]}, werkzeugfehler|None). Ein defekter Detektor
+    ist kein Qualitätsurteil und wird vom Aufrufer fail-closed behandelt.
+    """
+    wanted = {str(slug).strip() for slug in candidates if str(slug).strip()}
+    if not wanted:
+        return {}, None
+
+    try:
+        import duplikat_guard
+
+        posts = Path(POSTS_DIR).resolve()
+        root = posts.parent.parent
+        paths = sorted(posts.glob("*/index.md"))
+        paths = [path for path in paths if path.name != "_index.md"]
+        findings: dict[str, list[str]] = {}
+
+        def record(rel: str, rule: str, detail: str) -> None:
+            slug = Path(rel).parent.name
+            if slug not in wanted:
+                return
+            text = f"{rule}: {detail[:180]}"
+            bucket = findings.setdefault(slug, [])
+            if text not in bucket:
+                bucket.append(text)
+
+        # D1/D2/D5/D6 sind artikelintern: nur Kandidaten brauchen hier
+        # einen Befund, der Bestand bleibt Aufgabe der täglichen Scorecard.
+        for path in paths:
+            if path.parent.name not in wanted:
+                continue
+            for rel, rule, detail, _pos in duplikat_guard.check_article(
+                    path, paths, root=root):
+                record(rel, rule, detail)
+
+        # D3/D4 müssen dagegen den gesamten Bestand sehen. Beide Seiten des
+        # Paares werden zugeordnet, damit die Reihenfolge der Dateinamen nie
+        # darüber entscheidet, welcher Artikel blockiert wird.
+        for rel_a, rule, detail, _pos, rel_b in duplikat_guard.check_cross(
+                paths, root=root):
+            record(rel_a, rule, detail)
+            record(rel_b, rule, detail)
+        return findings, None
+    except Exception as exc:  # noqa: BLE001 – Beweisweg ist fail-closed
+        return {}, f"Duplikat-Wache nicht auswertbar: {exc}"
+
+
 def r5_self_heal_candidates(candidates):
     """Letzte deterministische Heilung für R5-ABSATZ-HART.
 
@@ -832,6 +895,7 @@ def main():
     keyword_fail, keyword_warn = keyword_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
     understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
+    duplicate_fail, duplicate_tool_error = duplicate_failures(candidates)
     for w in (len_warn, seo_warn, facts_warn):
         if w:
             print(f"⚠ {w}")
@@ -857,6 +921,21 @@ def main():
     # Also: nichts veröffentlichen – aber auch NICHTS vernichten. Exit 1 bricht
     # den Deploy-Schritt sichtbar ab (alert-on-failure meldet es), die Artikel
     # bleiben unangetastet und gehen beim nächsten Lauf erneut ins Gate.
+    if duplicate_tool_error:
+        print("\n🛑 DUPLIKAT-WACHE NICHT BEWEISBAR → Publish-Gate stoppt "
+              "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
+        print(f"   {duplicate_tool_error}")
+        print("   Diagnose: python3 scripts/duplikat_guard.py --selftest")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="duplikat_tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": duplicate_tool_error}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
+
     if facts_tool_error:
         print("\n🛑 FAKTENFRISCHE NICHT BEWEISBAR → Publish-Gate stoppt "
               "(fail-closed, kein Artikel wird verworfen):")
@@ -971,6 +1050,9 @@ def main():
             reasons.append("Lesbarkeits-Gate nicht bestanden: " + "; ".join(readability_fail[slug]))
         if slug in understanding_fail:
             reasons.append("Textverständnis-Gate nicht bestanden: " + "; ".join(understanding_fail[slug]))
+        if slug in duplicate_fail:
+            reasons.append("Redundanz-Gate D1–D6 nicht bestanden: "
+                           + "; ".join(duplicate_fail[slug]))
 
         if reasons:
             if slug in review_high_risk and slug in review_fail:
