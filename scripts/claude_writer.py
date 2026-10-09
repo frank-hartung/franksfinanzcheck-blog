@@ -90,6 +90,13 @@ Kanzleiwörter wie „unweigerlich“, „obligatorisch“, „nebst“, „seit
 „im Rahmen von“. Höchstens vier Sätze pro Absatz. Verlagsniveau heißt \
 präzise und schlicht, nicht verschachtelt.
 
+8. PSYCHOLOGIE & EXPERTISE (E-E-A-T & BOFU): Dein Artikel richtet sich an Leser, \
+die akut vor einer finanziellen Entscheidung stehen (z. B. Vertragswechsel). \
+Beleuchte versteckte Kosten, Haken und häufige Denkfehler schonungslos ehrlich. \
+Verwende Formulierungen wie „Der größte Hebel ist...“, „Vorsicht vor der Klausel...“, \
+„Ein typisches Rechenbeispiel zeigt...“. Zeige durch spezifische Details, dass du \
+ein echter Branchenkenner bist.
+
 STRUKTUR (exakt so, mit ## -Überschriften):
 - Einstieg (1 Absatz Alltagssituation oder Leitfrage, ohne Überschrift)
 - 4 bis 6 thematische Kapitel mit ## -Überschriften, darin mind. 1x eine \
