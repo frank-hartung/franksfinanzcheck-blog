@@ -9,6 +9,11 @@
 //                 →  LLM-Kette (Groq → NVIDIA → CF Workers AI → Gemini)
 //                 →  { answer, provider?, model? }
 //
+//  WICHTIG: Keine direkten Provider-URLs mehr im Worker. Alle Modellrufe
+//  laufen über einen eigenen Backend-Proxy, damit der Worker nicht neben
+//  llm_client.py eine zweite Transportstrecke eröffnet. Das hält den
+//  Transportweg nachvollziehbar und erfüllt den repo-internen Vertrag T6.
+//
 //  RATE LIMITING: In-Memory pro IP (15 Req/Min Default).
 //  CORS: Nur franksfinanzcheck.de + pages.dev-Preview.
 //  KOSTEN: 0 € – nur Gratis-Tiers.
@@ -46,11 +51,16 @@ function cleanupBuckets() {
   }
 }
 
+function proxyBaseUrl(env) {
+  const raw = (env.LLM_PROXY_BASE_URL || "").trim().replace(/\/$/, "");
+  return raw || null;
+}
+
 // ---- Provider-Definitionen (Spiegel von llm_client.py) ----
 const PROVIDERS = [
   {
     id: "groq",
-    url: "https://api.groq.com/openai/v1/chat/completions",
+    route: "/proxy/groq/chat",
     model: "openai/gpt-oss-120b",
     headers: (key) => ({
       "Content-Type": "application/json",
@@ -70,7 +80,7 @@ const PROVIDERS = [
   },
   {
     id: "nvidia",
-    url: "https://integrate.api.nvidia.com/v1/chat/completions",
+    route: "/proxy/nvidia/chat",
     model: "openai/gpt-oss-120b",
     headers: (key) => ({
       "Content-Type": "application/json",
@@ -90,8 +100,7 @@ const PROVIDERS = [
   },
   {
     id: "cloudflare",
-    // URL wird dynamisch gebaut (braucht Account-ID)
-    url: null,
+    route: "/proxy/cloudflare/chat",
     model: "@cf/openai/gpt-oss-120b",
     headers: (key) => ({
       "Content-Type": "application/json",
@@ -112,8 +121,7 @@ const PROVIDERS = [
   },
   {
     id: "gemini",
-    // Gemini-Format ist anders (nicht OpenAI-kompatibel)
-    url: null, // dynamisch
+    route: "/proxy/gemini/chat",
     model: "gemini-3-flash-preview",
     envKey: "GEMINI_API_KEY",
     isGemini: true,
@@ -137,33 +145,30 @@ async function callProvider(provider, messages, systemPrompt, maxTokens, env) {
   const key = env[provider.envKey];
   if (!key) return null;
 
-  let url, headers, body;
+  const base = proxyBaseUrl(env);
+  if (!base) return null;
 
-  if (provider.isGemini) {
-    // Gemini-Format
-    url = `https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${key}`;
-    headers = { "Content-Type": "application/json" };
-    const contents = messages.map((m) => ({
-      role: m.role === "assistant" ? "model" : "user",
-      parts: [{ text: m.content || "" }],
-    }));
-    body = JSON.stringify({
-      contents,
-      systemInstruction: systemPrompt
-        ? { parts: [{ text: systemPrompt }] }
-        : undefined,
-      generationConfig: { temperature: 0.4, maxOutputTokens: maxTokens },
-    });
-  } else if (provider.needsAccountId) {
+  let url = `${base}${provider.route}`;
+  let headers = { "Content-Type": "application/json" };
+  let body = JSON.stringify({
+    provider: provider.id,
+    messages,
+    systemPrompt,
+    maxTokens,
+    apiKey: key,
+  });
+
+  if (provider.id === "cloudflare") {
     const accountId = env.CLOUDFLARE_ACCOUNT_ID;
     if (!accountId) return null;
-    url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/v1/chat/completions`;
-    headers = provider.headers(key);
-    body = JSON.stringify(provider.body(messages, systemPrompt, maxTokens));
-  } else {
-    url = provider.url;
-    headers = provider.headers(key);
-    body = JSON.stringify(provider.body(messages, systemPrompt, maxTokens));
+    body = JSON.stringify({
+      provider: provider.id,
+      accountId,
+      messages,
+      systemPrompt,
+      maxTokens,
+      apiKey: key,
+    });
   }
 
   const resp = await fetch(url, {
@@ -211,7 +216,7 @@ async function callLLMChain(messages, systemPrompt, maxTokens, env) {
 function corsHeaders(origin, env) {
   const allowed = (env.ALLOWED_ORIGIN || "https://franksfinanzcheck.de").split(",").map(s => s.trim());
   // pages.dev-Preview erlauben
-  const isAllowed = allowed.includes(origin) || 
+  const isAllowed = allowed.includes(origin) ||
     (origin && origin.endsWith(".pages.dev")) ||
     (origin && origin.endsWith(".e2b.app")); // Arena-Preview
   return {
