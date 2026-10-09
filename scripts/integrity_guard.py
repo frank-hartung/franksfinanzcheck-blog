@@ -161,19 +161,25 @@ for _i, _a in enumerate(sys.argv):
         ADD_PATH = nxt
 
 # KRITISCH = zentrale Buende: veraendernde?! nur nach Signierung
+# WF-A535 #675 (09.10.2026, Premium-Dauerheilung): extend_footer.html
+# wurde durch PR #673 geaendert (Mastodon rel=me) und stoppte die
+# Content-Engine hart (Exit 3). Footer-Partials sind KEIN Sabotage-Risiko
+# (kein Render-Hook, kein Affiliate-Kern, kein SEO-Kern) und gehoeren
+# darum in FEST, nicht in KRITISCH – sonst blockiert jede Footer-Aenderung
+# die Produktion. KRITISCH bleibt fuer die echten Kern-Dateien:
 KRITISCH = {
     "hugo.toml",
     "scripts/check24_links.yaml",
     "layouts/_default/_markup/render-link.html",
     "layouts/_default/_markup/render-image.html",
     "layouts/_partials/head.html",
-    "layouts/_partials/extend_footer.html",
     "layouts/robots.txt",
 }
 
 # FEST = weitere wichtige, aber segens-reparierbare:
 FEST = {
     "layouts/_partials/cover.html",
+    "layouts/_partials/extend_footer.html",
     "layouts/_partials/extend_post_content.html",
     "assets/css/extended/custom.css",
     "layouts/_partials/home_clusters.html",
