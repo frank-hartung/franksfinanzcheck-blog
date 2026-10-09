@@ -1,25 +1,9 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 14,
-  "generated_at": "2026-10-09T11:09:33Z",
+  "ready": 6,
+  "pool_size": 13,
+  "generated_at": "2026-10-09T19:32:24Z",
   "candidates": [
-    {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-      "ready": true,
-      "sha256": "b4bd7156457a27daa629a543f4c3a60646bbde0654c8fded758ebf31b65f9604",
-      "flesch": 66.1,
-      "score": 0.98,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
     {
       "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
       "ready": true,
@@ -86,19 +70,15 @@
     },
     {
       "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
-      "ready": false,
-      "sha256": "4e6285606d5cf0e1c73dcbd7e62b53bfc2a42febcf961e601d28144a3d5c17b8",
-      "flesch": 60.9,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 18 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: * **Nullsteuersatz:** Seit 2023 profitierst du beim Kauf von der Befreiung der Umsatzsteuer (0 % MwSt.), was einer indirekten Förderung von 19 % entspricht.",
-      "details": [
-        "RS5: 18 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: * **Nullsteuersatz:** Seit 2023 profitierst du beim Kauf von der Befreiung der Umsatzsteuer (0 % MwSt.), was einer indirekten Förderung von 19 % entspricht."
-      ],
-      "score": 0.942,
+      "ready": true,
+      "sha256": "453160bfde9c704a7f2df745705ba843e7bb97ec5aebbf624d44c5eab236f767",
+      "flesch": 61.0,
+      "score": 0.95,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.92,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -229,23 +209,18 @@
     },
     {
       "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
-      "ready": false,
-      "sha256": "31a9d7dcec107bb6bf5c1dbb19a3699ab2fe037c05b178432c2b23b7b0fd2796",
-      "flesch": 60.5,
-      "reason": "Reserve-Qualitäts-Gate: RS3: keine Faustregel markiert",
-      "details": [
-        "RS3: keine Faustregel markiert",
-        "RS5: 8 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 100 € pro Jahr für einen Schutz, den du längst besitzt?"
-      ],
-      "score": 0.96,
+      "ready": true,
+      "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
+      "flesch": 64.4,
+      "score": 0.97,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     },
     {
@@ -268,5 +243,13 @@
         "readability": 0.8
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-09T19:32:24Z",
+    "renewed": [
+      "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
+      "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
