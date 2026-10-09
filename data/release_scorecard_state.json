@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-08T22:07:50Z",
-  "modus": "kandidaten",
-  "commit": "ca97b1b30d42036b948ae245f68e3d09c885e54c",
+  "generated_at": "2026-10-09T11:50:39Z",
+  "modus": "live",
+  "commit": "6023dcbcfdffa1880791a795d5566c23f04aaf94",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -37,6 +37,23 @@
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
+      "sha256": "0cf4392f899a577cdc4ad977756d1987e756c08736f42e29d2d7fb39ed9f50d6",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "71b59678fbae0edd9baa638e5e5168467732008be506797123bbe403a6cb4967",
@@ -226,7 +243,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
+      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -240,7 +257,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
@@ -683,6 +700,23 @@
       },
       "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
+      "sha256": "59b296f8ecbb79c506099b8719225f5c568c15f1a6596f7cfe5768f53914b9a5",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "blockiert",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
