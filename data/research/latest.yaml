@@ -1,5 +1,5 @@
-generated_at: '2026-10-08T10:55:30Z'
-day: '2026-10-08'
+generated_at: '2026-10-09T10:54:21Z'
+day: '2026-10-09'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,61 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: DNS-Server ändern für schnelleres Internet
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:DNS-Server ändern für schnelleres Internet
-    score: 0.55
-    keywords:
-    - DNS Server wechseln
-    - Internet schneller machen
-    - DSL Tipps
-  - topic: Die besten Kreditkarten für den Alltag im Vergleich
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Die besten Kreditkarten für den Alltag im Vergleich
-    score: 0.55
-    keywords:
-    - Kreditkarte
-    - Alltag
-    - Vergleich
-  - topic: Die verschiedenen Arten von Reiseversicherungen im Vergleich
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Die verschiedenen Arten von Reiseversicherungen im Vergleich
-    score: 0.55
-    keywords:
-    - Reiseversicherungen
-    - Versicherungsarten
-    - Reise-Schutz
-  - topic: Energieeffizienz zu Hause verbessern
+  - topic: 'Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:Energieeffizienz zu Hause verbessern
+    source: 'topics:Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
     score: 0.55
     keywords:
-    - Energie
-    - Effizienz
-    - Zuhause
-  - topic: Günstige Reisezeitpunkte für den Urlaub
-    pillar: mietwagen
+    - Balkonkraftwerk
+    - Mini-Solaranlage
+    - Stecker-Solargerät
+  - topic: Günstige Angebote für Internet und TV
+    pillar: internet-dsl
     signal: niche_hook
-    source: topics:Günstige Reisezeitpunkte für den Urlaub
+    source: topics:Günstige Angebote für Internet und TV
     score: 0.55
     keywords:
-    - Reise
-    - Urlaub
-    - SparTipps
-  - topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
+    - Internet
+    - TV
+    - Günstig
+  - topic: 'Haushaltsbuch-Apps im Vergleich: Die beste kostenlose Lösung'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:Haushaltsbuch-Apps im Vergleich: Die beste kostenlose Lösung'
+    score: 0.55
+    keywords:
+    - Haushaltsbuch App
+    - Ausgaben tracken
+    - Budgetplanung App
+  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
+    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
     score: 0.55
     keywords:
-    - Kfz Versicherung Wechselsaison
-    - Kfz Versicherung kündigen Frist
-    - Kfz Versicherung wechseln Januar
+    - Hausratversicherung vergleichen
+    - Hausrat absichern
+    - Hausrat Kosten
+  - topic: 'Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten
+      was?'
+    score: 0.55
+    keywords:
+    - Internetflat
+    - Hohe Geschwindigkeit
+    - Anbietervergleich
+  - topic: Kfz-Versicherung vergleichen und sparen
+    pillar: versicherungen
+    signal: niche_hook
+    source: topics:Kfz-Versicherung vergleichen und sparen
+    score: 0.55
+    keywords:
+    - Kfz Versicherung wechseln
+    - Autoversicherung vergleichen
+    - Sparmethoden Auto
 live_web:
   enabled: false
   findings: []
