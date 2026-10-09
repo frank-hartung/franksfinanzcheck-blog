@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-09T16:45:42.157190+00:00",
-  "head": "f5975b11",
+  "signed_at": "2026-10-09T16:55:51.718899+00:00",
+  "head": "cd7eb24a",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -54,63 +54,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
-  "audit_start_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17",
+  "audit_start_sha256": "b8101019a13987f5c09f340d4af5297bca0bf35cdcaa13a980d70db20945f1be",
   "audit": [
-    {
-      "date": "2026-10-07",
-      "art": "heal",
-      "head": "8912847",
-      "geaendert": [
-        "layouts/index.sw.js"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/index.sw.js",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "8912847",
-              "datum": "2026-10-07",
-              "betreff": "feat(robustheit): Resilienzschicht C31 – die Seite darf nie stumm sterben"
-            },
-            {
-              "sha": "4c85d5b",
-              "datum": "2026-10-07",
-              "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "7439babe5af3b72ede239d1d8f260bed8f5a6c9f7cd210f46c3d79fc49e142a4",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "c33e0ab",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "c33e0ab",
-              "datum": "2026-10-08",
-              "betreff": "feat(robustheit): C31 – Resilienzschicht für die Laufzeit (die Seite darf nie stumm sterben) (#633)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "b8a5eed78f3010909e8d1b3eee4feef4fefb6bd1519e466950564cb9d1b24b7a",
-      "prev_sha256": "e105bbdbb95471035a87681830cc4b2f7c34250c6eb60de917328ea130059f17"
-    },
     {
       "date": "2026-10-08",
       "art": "set-current",
@@ -153,7 +98,7 @@
         }
       ],
       "files_sha256": "05dcfac4adf18a0c2d8e531cf33372cafe2963d1cc3e634c0b6b5db18ff79cc4",
-      "prev_sha256": "2dc5fbd4ff179e6986ccce00e7c64d77848e67d1186b4faa35e7c665acb6e72b"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-08",
@@ -462,7 +407,23 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "d45b24b1473f7b363df3e23ed67f7127ad91acf311974e5880cabf5806252349",
+      "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
+      "prev_sha256": "d45b24b1473f7b363df3e23ed67f7127ad91acf311974e5880cabf5806252349"
+    },
+    {
+      "date": "2026-10-09",
+      "art": "set-current",
+      "head": "cd7eb24a",
+      "geaendert": [],
+      "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
+      "prev_sha256": "a5105b591f5b76a88c75a81ac095f59faaa13c941a40c9a284621aa9dfca8d9e"
+    },
+    {
+      "date": "2026-10-09",
+      "art": "set-current",
+      "head": "cd7eb24a",
+      "geaendert": [],
+      "prev_sha256": "f32f8e76f3309421b4d8778d4d6b9e3bf76e4ae9f2e5e3c52003a400686baf24",
       "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678"
     }
   ]
