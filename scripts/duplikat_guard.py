@@ -146,9 +146,14 @@ def near_candidates(blocks: list, min_len: int):
                     yield b, o
 
 
-def check_article(path: Path, articles: list) -> list:
-    """Gibt Liste von (artikel, regel, detail, pos) zurück."""
-    rel = str(path.relative_to(ROOT))
+def check_article(path: Path, articles: list, *, root: Path = ROOT) -> list:
+    """Gibt Liste von (artikel, regel, detail, pos) zurück.
+
+    ``root`` ist für isolierte Vor-Publish-Prüfungen injizierbar. Die
+    Produktionswache bleibt mit dem Standardwert unverändert, während das
+    Publish-Gate denselben Collector auch in einer Test-Sandbox nutzen kann.
+    """
+    rel = str(path.relative_to(root))
     raw = path.read_text(encoding="utf-8")
     body = split_body(raw)
     blocks = blocks_of(body)
@@ -211,7 +216,7 @@ def ngrams(text: str, n: int) -> set:
     return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)} if len(words) >= n else set()
 
 
-def load_blocks(paths: list) -> dict:
+def load_blocks(paths: list, *, root: Path = ROOT) -> dict:
     """{rel: [(block_text, pos), ...]} – Boilerplate aussortiert."""
     per: dict[str, list] = {}
     for p in paths:
@@ -219,13 +224,13 @@ def load_blocks(paths: list) -> dict:
             raw = p.read_text(encoding="utf-8")
         except OSError:
             continue
-        per[str(p.relative_to(ROOT))] = [(t, pos)
+        per[str(p.relative_to(root))] = [(t, pos)
                                          for t, pos, _ in blocks_of(split_body(raw))
                                          if not is_boilerplate(t)]
     return per
 
 
-def check_cross(paths: list) -> list:
+def check_cross(paths: list, *, root: Path = ROOT) -> list:
     """D3 (exakt) + D4 (near) ÜBER Artikel hinweg – NUR Report, nie Auto-Fix.
 
     (Befund 12.09.2026: D3/D4 standen im Docstring, wurden aber nie
@@ -233,7 +238,7 @@ def check_cross(paths: list) -> list:
     Zwei Artikel DÜRFEN sich legitime Formulierungen teilen, deshalb bleibt
     die Gegenprüfung hier bewusst report-only; der Heilweg läuft über die
     Redaktion. Rückgabe: (rel_a, regel, detail, pos, rel_b)."""
-    per = load_blocks(paths)
+    per = load_blocks(paths, root=root)
     finds: list = []
 
     # D3: exakte Übereinstimmung (SHA-256) in ≥ 2 Artikeln

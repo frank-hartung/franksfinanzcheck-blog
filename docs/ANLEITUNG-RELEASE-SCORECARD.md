@@ -34,9 +34,10 @@ Das ist keine Behauptung, sondern maschinell durchgesetzt:
 - Der **Deploy** läuft die Scorecard hart über die heutigen Live-Kandidaten
   (`deploy.yml` → „Release-Scorecard (Produktionswahrheit versiegeln,
   fail-closed)“): Exit 1 stoppt die Auslieferung.
-- Das **Publish-Gate** selbst (unverändert) verwirft/verparkt Kandidaten mit
-  harten Funden – die Scorecard ist die zweite, unabhängige Sicht auf
-  dieselben Messungen.
+- Das **Publish-Gate** verwirft/verparkt Kandidaten mit harten Funden – auch
+  Redundanz D1–D6 über `publish_gate.duplicate_failures`. Die Scorecard liest
+  exakt diesen Collector; eine eigene Duplikat-Schleife ist ausdrücklich
+  verboten.
 
 ### 2. Welche Checks liefern nur Warnungen?
 
@@ -72,8 +73,8 @@ Zwei Richtungen, beide abgedeckt:
 
 1. **Keine zweite Messregel:** Die Scorecard misst über *dieselben*
    Collector-Funktionen wie das Publish-Gate (`publish_gate.check_length_failures`
-   … `textverstaendnis_failures`, `editorial_review_gate.evaluate_path`,
-   `faktenfrische.faelligkeit`, `duplikat_guard`). Andere Ampeln für dieselbe
+   … `textverstaendnis_failures`, `duplicate_failures`,
+   `editorial_review_gate.evaluate_path`, `faktenfrische.faelligkeit`). Andere Ampeln für dieselbe
    Messung sind ausgeschlossen; eine Abweichung ist per Definition ein
    Defekt in einer der beiden Ketten (P1, Deploy stoppt).
 2. **Fail-closed:** Kann ein Beweis nicht geführt werden (kein `public/`,

@@ -314,7 +314,8 @@ class QuellvertragTests(unittest.TestCase):
                      "affiliate_intent_failures", "offenlegung_failures",
                      "editorial_review_failures", "title_integrity_failures",
                      "keyword_failures", "readability_failures",
-                     "textverstaendnis_failures", "todays_live_candidates"):
+                     "textverstaendnis_failures", "duplicate_failures",
+                     "todays_live_candidates"):
             self.assertTrue(hasattr(pg, name), f"publish_gate.{name} fehlt")
 
     def test_beweislauf_schreibt_nicht(self):
@@ -324,6 +325,13 @@ class QuellvertragTests(unittest.TestCase):
         self.assertIn("DRY_RUN = True", quelle,
                       "sammle() muss publish_gate.DRY_RUN=True setzen "
                       "(Intent-Wache heilt dann nicht)")
+
+    def test_redundanz_hat_keine_zweite_scorecard_messung(self):
+        """WF-54C4/#674: D1–D6 kommen aus dem Publish-Gate-Collector."""
+        import inspect
+        quelle = inspect.getsource(rs.sammle)
+        self.assertIn("publish_gate.duplicate_failures", quelle)
+        self.assertNotIn('_importiere_gate_module("duplikat_guard")', quelle)
 
     def test_selbsttest_gruen(self):
         self.assertEqual(rs.selftest(), [])
