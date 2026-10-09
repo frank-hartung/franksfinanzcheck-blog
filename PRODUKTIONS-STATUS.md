@@ -1,18 +1,18 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-08 00:07 UTC  
-**Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-07): 2 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 1 Tage: ymyl-review: E18: geprüfte Aussage 1: Textanker kommt im Artikel nicht vor; E18: geprüfte Aussage 2: Textanker kommt im Artikel nicht vor; E18: geprüfte Aussage 4: Textanker kom…)
+**Stand:** 2026-10-09 00:14 UTC  
+**Stufe:** P1  
+**Befund:** Heute (Freitag, 2026-10-09) ist ein Publikationstag – alle Slots vorbei, **0 Artikel** erschienen (Ziel: 2). – Bestand: 1 förderfähig in der Re-Queue
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-10-08 (Donnerstag) |
-| Publikationstag heute | nein |
-| Artikel letzter Publikationstag (2026-10-07) | 2 |
-| Letzter Artikel überhaupt | 2026-10-07 (1 Tage her) |
+| Heute | 2026-10-09 (Freitag) |
+| Publikationstag heute | ja |
+| Artikel letzter Publikationstag (2026-10-09) | 0 |
+| Letzter Artikel überhaupt | 2026-10-07 (2 Tage her) |
 | Live-Artikel gesamt | 40 |
-| Förderfähig in der Re-Queue | 0 |
-| Von Gates gehalten (braucht Korrektur) | 1 |
+| Förderfähig in der Re-Queue | 1 |
+| Von Gates gehalten (braucht Korrektur) | 0 |
 | Mindestziel/Tag | 2 |
 
 _Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._
