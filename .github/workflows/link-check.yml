@@ -5,6 +5,8 @@
 #  auf DEFEKTE INTERNE LINKS geprüft (Rendering-Ebene – erkennt auch
 #  Theme-Links, /go/-Weiterleitungen, Bilder und Menü-Links).
 #
+#  Meldet NUR vom Produktionszweig (main/master): PRs prüfen und blockieren,
+#  dürfen aber Produktions-Issues weder öffnen noch fälschlich schließen.
 #  Meldet (Label auto-report, ohne Duplikate, automatisch geschlossen bei Grün):
 #    · kaputte interne Links   → "🔗 Defekte interne Links gefunden"
 #    · Schema-/SEO-Funde       → "🧠 Strukturdaten der Website: Prüfung meldet Funde"
@@ -43,6 +45,11 @@ jobs:
   gate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # PRs erhalten den vollen roten/grünen Check, aber nur ein Ergebnis vom
+    # Produktionszweig darf das gemeinsame auto-report-Issue verändern.
+    # Sonst könnte ein grüner PR einen weiterhin roten main-Lauf schließen.
+    env:
+      REPORT_PRODUCTION: ${{ (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
@@ -99,7 +106,9 @@ jobs:
       # 19.09.2026: C17 (Pinterest-Duplikate) und C18 (Pflicht-Check-Vertrag:
       # der Check-Name des PR-Gates ist der Vertrag mit dem Ruleset) dazu.
       - name: Governance-Vertrag C1–C18 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check)
-        run: python3 scripts/governance_contract.py --quick
+        run: |
+          python3 scripts/governance_contract.py --quick
+          python3 -m unittest scripts.tests.test_linkcheck_reporting
 
       # ------------------------------------------------------------
       #  HUGO-BUILD-VERTRAG (H1–H8, 03.10.2026)
@@ -171,7 +180,7 @@ jobs:
           python3 scripts/schema_seo_gate.py | tee schemagate.log
 
       - name: Label sicherstellen
-        if: steps.links.outcome == 'failure' || steps.schema.outcome == 'failure'
+        if: env.REPORT_PRODUCTION == 'true' && (steps.links.outcome == 'failure' || steps.schema.outcome == 'failure')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -184,7 +193,7 @@ jobs:
         # geöffnet bzw. aktualisiert wird. Getrennte Schritte pro Prüfer sind
         # der klassische Weg zu zwei YAML-Schritten mit doppeltem `run:`-Schlüssel
         # (letzter gewinnt, still) – deshalb hier ein Schritt mit Verzweigung.
-        if: steps.links.outcome == 'failure' || steps.schema.outcome == 'failure'
+        if: env.REPORT_PRODUCTION == 'true' && (steps.links.outcome == 'failure' || steps.schema.outcome == 'failure')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -255,7 +264,7 @@ jobs:
       #  es die präziseren Meldungen, doppelt wäre Lärm.
       # ------------------------------------------------------------
       - name: Gate-Fehlschlag melden (Selbsttests, Vertrag oder Build)
-        if: ${{ failure() && steps.links.outcome != 'failure' && steps.schema.outcome != 'failure' }}
+        if: ${{ failure() && env.REPORT_PRODUCTION == 'true' && steps.links.outcome != 'failure' && steps.schema.outcome != 'failure' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -301,13 +310,10 @@ jobs:
           fi
 
       - name: Meldung schließen (alles grün)
-        # Alle Melder werden geschlossen, wenn der Job grün ist – sonst bleibt
-        # eine erledigte Meldung offen stehen und das nächste Gate-Ergebnis wirkt
-        # älter, als es ist. `success()` ist strenger als die alte Bedingung
-        # (beide Prüfer grün) und umfasst ausdrücklich auch Selbsttests, Vertrag
-        # und Build: Ein Gate, das vorn rot ist und hinten nicht lief, darf keine
-        # alte „erledigt"-Meldung stehen lassen.
-        if: ${{ success() }}
+        # Nur ein GRÜNER Produktionslauf kann eine Produktionsmeldung schließen.
+        # PRs prüfen genauso streng, können aber einen roten main-Lauf nicht
+        # mit ihrem eigenen grünen Stand irrtümlich für erledigt erklären.
+        if: ${{ success() && env.REPORT_PRODUCTION == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
