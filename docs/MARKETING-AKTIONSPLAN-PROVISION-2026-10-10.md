@@ -52,11 +52,20 @@ Jede Maßnahme mit **Aufwand**, **Zeit bis zum Effekt** und **Beweis, dass sie w
 
 ### P0 – Messen verbinden (Woche 1, 2–4 h) · *Grundlage für alles Weitere*
 
+> **Stand 10.10.2026 – Weg 0.1/0.3 ist gebaut:** `scripts/offline_import.py`
+> zieht Dashboard-Exporte (`data/offline/messstand.json`) **und** die
+> Abrechnungstabelle in die versionierten Aggregate; `scripts/revenue_funnel.py`
+> rechnet daraus einen Trichter mit ausgewiesener Messbrücke. Ablauf:
+> `npm run mess:vorlage` → ausfüllen → `npm run mess:import`; Kontrolle:
+> `npm run mess:status`. Runbook: `docs/UMSATZ-MESSUNG-PREMIUM.md`, Abschnitt 5a.
+> 0.2 (Zweitnetz-API) bleibt der bevorzugte Weg, sobald Token vorhanden –
+> `data/monetization.yaml` ist und bleibt die einzige Entscheidung darüber.
+
 | # | Maßnahme | Aufwand | Effekt |
 |---|---|---|---|
 | 0.1 | **Partner-Dashboard zur einzigen täglichen Wahrheit machen:** `a.check24.net` Statistiken nach `pid`/`aid`/`deep` auswerten – die sind bei dir schon kategoriegenau getrennt. Täglich 1 Zeile manuell in `data/provisionen/provisionen.csv` (Vorlage existiert, `provisionen_check.py` validiert) | 15 Min/Tag → später 10 Min/Woche | Klicks ↔ Anträge ↔ Provision zum ersten Mal **im selben Bild** |
 | 0.2 | **Zweitnetz zur Kreuzprüfung anmelden** (CHECK24 läuft u. a. über Awin; dort `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` setzen) – *nur* als Kontrollkanal mit SubID, Hauptlinks bleiben unverändert auf Inhouse (höhere Vergütung, stornofrei) | 1–2 h | Deine vorhandene `revenue-import`-Pipeline füllt sich, der Funnel hört auf, `null` zu melden. Ohne Netz-Backup hast du keine unabhängige Zahl |
-| 0.3 | **Umami aus dem Free-Plan holen.** Stand: `hugo.toml → [params.umami]` zeigt auf `cloud.umami.is` (Cloud Free, seit 31.08.2026, cookieless, `consentRequired = false`), deshalb ist `umami_api_import_enabled: false` – die Views liegen nur im Dashboard und sind für die Automatik unsichtbar. Zwei Wege: (a) Export-Schleife (wöchentlich CSV je Seite + Event `affiliate_click` einlesen), (b) **self-hosted** auf VPS/Container mit Postgres (die `hostUrl`-Zeile ist dafür schon vorbereitet) | 2–4 h | Kanal-Zerlegung (Google / Newsletter / Community / Discover) wird erst messbar – und zwar ohne UTM-Parameter am Affiliate-Link zu verbiegen (deine bewusste Regel von 25.08.2026) |
+| 0.3 | **Umami-Zahlen in den Trichter holen (Export-Schleife) oder aus dem Free-Plan raus.** Stand: `hugo.toml → [params.umami]` zeigt auf `cloud.umami.is` (Cloud Free, seit 31.08.2026, cookieless, `consentRequired = false`), deshalb ist `umami_api_import_enabled: false` – die Views liegen nur im Dashboard und sind für die Automatik unsichtbar. Zwei Wege: (a) Export-Schleife (wöchentlich CSV je Seite + Event `affiliate_click` einlesen), (b) **self-hosted** auf VPS/Container mit Postgres (die `hostUrl`-Zeile ist dafür schon vorbereitet) | 2–4 h | Kanal-Zerlegung (Google / Newsletter / Community / Discover) wird erst messbar – und zwar ohne UTM-Parameter am Affiliate-Link zu verbiegen (deine bewusste Regel von 25.08.2026) |
 | 0.4 | **Ein Testklick, kein Testkauf:** `click_chain_guard.py --test-page` – eigene Adresse über /go/ klicken, Klick im Dashboard wiederfinden. **Niemals** selbst einen Vertrag über den eigenen Link abschließen | 10 Min | Kette bewiesen, Programm-Status nicht gefährdet |
 
 > Ehrliche Erwartung: P0 bringt 0 €. Es ist der Grund, warum P1–P4 überhaupt bewertet werden können. Ein Profi beginnt hier, weil „nach Gefühl optimieren" die einzige Art ist, ein Jahr zu verlieren.
