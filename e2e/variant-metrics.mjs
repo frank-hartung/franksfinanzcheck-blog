@@ -420,7 +420,7 @@ async function messeVariante(id, launchOptions, browserVerfuegbar) {
 
   if (!browserVerfuegbar) {
     const grund =
-      'Kein Chromium verfügbar (npx playwright install chromium). ' +
+      'Kein startbares Chromium (npm ci && npm run browser:setup). ' +
       'Tier B bleibt ungemessen – eine Freigabe ist damit ausgeschlossen.';
     schreibeTier(id, 'gerendert', { status: 'nicht_verfuegbar', grund });
     schreibeTier(id, 'lighthouse', { status: 'nicht_verfuegbar', grund });

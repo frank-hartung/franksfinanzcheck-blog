@@ -17,9 +17,9 @@
 #  nach gh-pages. Der tägliche Lauf schließt trotzdem die Lücke für
 #  automatische Content-Commits, die ohne PR direkt auf main landen.
 #
-#  Browser: Chromium (offizieller Download via npx playwright install
-#  – auf GitHub-Runnern problemlos; der @sparticuz/chromium-Fallback
-#  aus e2e/browser.mjs greift nur in CDN-blockierten Umgebungen).
+#  Browser: gepinntes @sparticuz/chromium aus package-lock.json.
+#  Die Browser-Vorprüfung startet Chromium und führt JavaScript aus;
+#  kein Zugriff auf cdn.playwright.dev ist erforderlich.
 # ============================================================
 name: E2E-Tests (Playwright)
 
@@ -42,6 +42,12 @@ on:
       - "tools/werkzeuge.test.mjs"
       - "hugo.toml"
       - "e2e/**"
+      - "scripts/browser_setup.mjs"
+      - "scripts/chromium_cache.mjs"
+      - "scripts/tests/chromium_cache.test.mjs"
+      - "scripts/ff_voice_browser_test.mjs"
+      - "scripts/themenwelten_browser_test.mjs"
+      - "scripts/tests/test_browser_setup_contract.py"
       - "scripts/h1_wache.py"
       - "scripts/a11y_audit.py"
       - "scripts/tests/test_h1_wache.py"
@@ -52,6 +58,10 @@ on:
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/e2e.yml"
+      - ".github/workflows/design-varianten.yml"
+      - ".github/workflows/werkbank.yml"
+      - ".github/workflows/lesehilfen-gate.yml"
+      - ".github/workflows/themenwelten-gate.yml"
   schedule:
     - cron: "0 5 * * *"    # täglich 07:00 MESZ (05:00 UTC) – deckt direkte Content-Pushes ab
   workflow_dispatch: {}
@@ -101,8 +111,13 @@ jobs:
       - name: Abhängigkeiten installieren
         run: npm ci
 
-      - name: Playwright-Chromium installieren (mit System-libs)
-        run: npx playwright install --with-deps chromium
+      - name: Chromium-Versorgungsvertrag (Manifest, Lockfile, CI)
+        run: |
+          python3 -m unittest scripts.tests.test_browser_setup_contract
+          npm run test:browser-cache
+
+      - name: Chromium vorbereiten + JavaScript-Smoke-Test
+        run: npm run browser:setup
 
       # Statische Wache VOR dem Browser: sie braucht weder Build noch
       # Chromium und faengt die Ursachenklasse „Markup da, CSS nie

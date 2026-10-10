@@ -36,6 +36,7 @@ import os from 'node:os';
 import http from 'node:http';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createRequire } from 'node:module';
+import { prepareChromiumTemp, withChromiumExtractionLock } from './chromium_cache.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
@@ -108,10 +109,12 @@ async function fromSparticz() {
   try {
     const pkgRoot = path.join(ROOT, 'tools', 'ff-voice-browser', 'node_modules', '@sparticuz', 'chromium');
     if (!fs.existsSync(pkgRoot)) return null;
+    const version = JSON.parse(fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf8')).version;
+    const versionedTmp = prepareChromiumTemp(version);
     const req = createRequire(pathToFileURL(path.join(ROOT, 'tools', 'ff-voice-browser', 'package.json')));
     const mod = req('@sparticuz/chromium');
     const chromium = (mod && mod.default) || mod;
-    const exe = await chromium.executablePath();          // entpackt nach /tmp/chromium
+    const exe = await withChromiumExtractionLock(versionedTmp, () => chromium.executablePath());
     if (!fs.existsSync(exe)) return null;
     // Shared Libraries (libnss3 & Co.) liegen dem Paket bei — auf Debian
     // nicht vorhanden, deshalb per LD_LIBRARY_PATH voranstellen.
@@ -148,8 +151,8 @@ if (BROWSER_PATH) {
 if (!BROWSER_PATH || !chromium) {
   if (!BROWSER_PATH) {
     console.log('⚠ Kein Chromium gefunden — Browser-Suite übersprungen (Exit 0).');
-    console.log('  Optionen: FF_BROWSER_PATH setzen · npx playwright-core install chromium ·');
-    console.log('            cd tools/ff-voice-browser && npm install  (bundled Chromium)');
+    console.log('  Optionen: FF_BROWSER_PATH/CHROME_PATH setzen ·');
+    console.log('            npm ci --prefix tools/ff-voice-browser  (CDN-freies, gelocktes Chromium)');
   }
   process.exit(0);
 }

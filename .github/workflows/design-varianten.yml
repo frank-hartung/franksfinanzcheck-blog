@@ -143,11 +143,11 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Abhängigkeiten
+      - name: Abhängigkeiten + Chromium-Smoke-Test
         run: |
           python3 -m pip install -q pyyaml
           npm ci
-          npx playwright install --with-deps chromium
+          npm run browser:setup
 
       - name: Tier A – bauen & statisch messen
         id: tier_a

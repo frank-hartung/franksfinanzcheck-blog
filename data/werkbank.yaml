@@ -262,7 +262,7 @@ fragen:
 browser:
   bruecke: tools/werkbank/render.mjs
   # Nutzt denselben Resolver wie die E2E-Suite (e2e/browser.mjs):
-  # offizieller Playwright-Chromium, sonst @sparticuz/chromium.
+  # Root-Lockfile-gepinntes @sparticuz/chromium; ohne Playwright-CDN.
   resolver: e2e/browser.mjs
   timeout_ms: 20000
   viewport: { breite: 1280, hoehe: 900 }

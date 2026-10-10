@@ -183,10 +183,14 @@
     "test:reserve": "python3 -m unittest scripts.tests.test_reserve_artifacts scripts.tests.test_reserve_editorial_contract scripts.tests.test_reserve_recert scripts.tests.test_reserve_convergence_progress scripts.tests.test_reserve_pipeline scripts.tests.test_reserve_vorratsschutz scripts.tests.test_reserve_snapshot_heiler",
     "manifest:check": "python3 scripts/manifest_guard.py",
     "test:manifest": "python3 scripts/manifest_guard.py --selftest && python3 -m unittest scripts.tests.test_manifest_guard",
-    "prepare": "python3 scripts/haken_wache.py --install --leise || true"
+    "prepare": "python3 scripts/haken_wache.py --install --leise || true",
+    "browser:setup": "node scripts/browser_setup.mjs",
+    "browser:check": "node scripts/browser_setup.mjs --check",
+    "test:browser-cache": "node --test scripts/tests/chromium_cache.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
+    "@sparticuz/chromium": "153.0.0",
     "jsdom": "^30.1.2",
     "lighthouse": "13.5.0"
   },

@@ -122,11 +122,11 @@ jobs:
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
-      - name: Browser-QA installieren (playwright-core, Chromium)
+      - name: Browser-QA installieren (Playwright + gebündeltes Chromium)
         working-directory: tools/ff-voice-browser
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
-          npx playwright-core install --with-deps chromium
+          node --input-type=module -e "import chromium from '@sparticuz/chromium'; const path = await chromium.executablePath(); console.log('Gebündeltes Chromium bereit:', path);"
 
       - name: Syntaxprüfung ff-voice.js
         run: node --check static/premium/ff-voice.js
