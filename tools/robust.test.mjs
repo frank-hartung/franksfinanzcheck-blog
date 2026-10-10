@@ -52,9 +52,11 @@ function bootstrapQuelltext() {
   const bloecke = skriptBloecke(ohneHugoKommentare(HEAD));
   const block = bloecke.find((b) => b.includes('FFRobust'));
   assert.ok(block, 'Bootstrap im <head> nicht gefunden');
-  assert.ok(block.includes('ff_cookie_consent'),
+  assert.ok(block.includes('ff_analytics_consent_v2'),
     'Der Bootstrap muss sich das vorhandene Head-Skript teilen (DOM-Budget 58)');
-  return block;
+  // Der optionale Consent-Vorlauf ist im Hugo-Build bedingt. jsdom wertet
+  // ausschließlich JavaScript aus; Hugo-Direktiven vor dem Eval entfernen.
+  return block.replace(/\{\{-?\s*(?:with site\.Params\.umami\.websiteId|end)\s*-?\}\}/g, '');
 }
 
 /** Frische Seite mit Bootstrap + Schicht, Fetch-Stub vor dem Laden gesetzt. */
