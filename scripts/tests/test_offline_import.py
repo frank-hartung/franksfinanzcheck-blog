@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import datetime
 import os
 import shutil
 import sys
@@ -43,6 +44,26 @@ def _load(name: str, path: str):
 oi = _load("offline_import", os.path.join(SCRIPTS, "offline_import.py"))
 rf = _load("revenue_funnel_regress", os.path.join(SCRIPTS, "revenue_funnel.py"))
 
+HEUTE = datetime.date.today()
+
+
+def tag(tage_vorher=0):
+    return (HEUTE - datetime.timedelta(days=tage_vorher)).isoformat()
+
+
+def monat(rueckwaerts=0):
+    """JJJJ-MM `rueckwaerts` Monate vor dem aktuellen Monat – Fixtures dürfen
+    nie auf einen Kalender geheftet sein (scripts/selftest_clock.py)."""
+    m = HEUTE.year * 12 + (HEUTE.month - 1) - rueckwaerts
+    return f"{m // 12:04d}-{m % 12 + 1:02d}"
+
+
+MONAT_A, MONAT_B = monat(2), monat(1)          # zwei aufeinanderfolgende Monate
+FENSTER_ANFANG = tag(90)                        # 90-Tage-Fenster endet heute
+
+
+MESSSTAND = {
+    "window": {"start": FENSTER_ANFANG, "ende": HEUTE.isoformat(), "tage": 90},
 
 MESSSTAND = {
     "window": {"start": "2026-07-12", "ende": "2026-10-10", "tage": 90},
@@ -115,6 +136,7 @@ class Sandbox(unittest.TestCase):
         self.assertEqual(meta["modus"], "ueberschreiben")
         self.assertTrue(meta["datei"].endswith("messstand.json"))
         self.assertEqual(meta["days"], 90)
+        self.assertEqual(meta["window_start"], FENSTER_ANFANG)
         self.assertEqual(meta["window_start"], "2026-07-12")
         self.assertEqual(len(meta["written_files"]), 3)
         # Die Meta der API-Skripte gehört denen allein – sie darf hier nicht
@@ -192,6 +214,12 @@ class Sandbox(unittest.TestCase):
     def test_provisionstabelle_aggregiert_nach_monat_und_partner(self):
         with open(self.prov, "w", encoding="utf-8") as fh:
             fh.write("monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n")
+            fh.write(f"{MONAT_A},CHECK24,2,0,33.00,A-{MONAT_A[-2:]},\n")
+            fh.write(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},\n")
+            fh.write(f"{MONAT_B},Tarifcheck,1,0,18.00,B-{MONAT_B[-2:]},\n")
+            fh.write("falsch,CHECK24,9,9,9.00,x,\n")
+        prov = oi.read_provisionen(self.prov)
+        self.assertEqual(prov["letzter_monat"], MONAT_B)
             fh.write("2026-08,CHECK24,2,0,33.00,A-08,\n")
             fh.write("2026-09,CHECK24,3,1,49.50,A-09,\n")
             fh.write("2026-09,Tarifcheck,1,0,18.00,B-09,\n")
@@ -207,6 +235,7 @@ class Sandbox(unittest.TestCase):
     def test_aggregat_wird_beim_import_geschrieben(self):
         with open(self.prov, "w", encoding="utf-8") as fh:
             fh.write("monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n")
+            fh.write(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},\n")
             fh.write("2026-09,CHECK24,3,1,49.50,A-09,\n")
         self.imp()
         agg = self.read("provisionen_agg")
@@ -230,6 +259,10 @@ class Sandbox(unittest.TestCase):
                       "Misch-Stern fehlt – jemand läse die Rate als Wochenwert")
 
     def test_awin_ueberlagert_die_tabelle_nie(self):
+        prov = {"monate": [{"monat": MONAT_B, "partner": ["CHECK24"],
+                            "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
+                "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
+                          "provision_eur": 49.5}, "letzter_monat": MONAT_B}
         prov = {"monate": [{"monat": "2026-09", "partner": ["CHECK24"],
                             "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
                 "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
@@ -245,6 +278,10 @@ class Sandbox(unittest.TestCase):
 
     def test_monatsalter_der_buchfuehrung(self):
         self.assertEqual(rf._month_age(rf.TODAY.strftime("%Y-%m")), 0)
+        self.assertEqual(rf._month_age(monat(9)), 9)
+        self.assertEqual(rf._month_age(monat(0)), 0)
+        n = HEUTE.year * 12 + HEUTE.month      # der Monat nach heute = Zukunft
+        for schlecht in (f"{n // 12:04d}-{n % 12 + 1:02d}", "quatsch", ""):
         self.assertEqual(rf._month_age("2026-01"), 9)
         for schlecht in ("2099-01", "quatsch", ""):
             with self.assertRaises((ValueError, AttributeError)):

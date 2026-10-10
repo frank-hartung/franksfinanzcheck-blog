@@ -102,6 +102,81 @@ class WerkzeugeVertragTests(unittest.TestCase):
         befunde = guard.validate_content(kaputt)
         self.assertTrue(any("gibt-es-nicht" in f for f in befunde))
 
+    # ---------------------------------------------------------- W8 VERDRAHTUNG
+
+    def _sandkasten(self, tmp: str, *, link: bool = True,
+                    lastmod: bool = True) -> Path:
+        """Minimaler Quellbaum: ein Pillar, ein Artikel, eine Werkzeugseite.
+
+        validate_embedding liest nur `content/`, deshalb reicht dieser Rumpf –
+        die echte SSOT bleibt der Maßstab für die IDs."""
+        wurzel = Path(tmp)
+        pillar = wurzel / "content" / "pillar" / self.PILLAR
+        pillar.mkdir(parents=True)
+        text = "## Rechner\n\n"
+        if link:
+            text += f"Siehe [Werkzeug](/werkzeuge/{self.SLUG}/).\n"
+        (pillar / "index.md").write_text(text, encoding="utf-8")
+        post = wurzel / "content" / "posts" / "2026-10-10-test"
+        post.mkdir(parents=True)
+        kopf = ("---\ntitle: Test\nlastmod: 2026-10-10\n---\n\n" if lastmod
+                else "---\ntitle: Test\n---\n\n")
+        (post / "index.md").write_text(kopf + "{{< werkzeug id=\"notgroschen\" >}}\n",
+                                        encoding="utf-8")
+        werkz = wurzel / "content" / "werkzeuge" / self.SLUG
+        werkz.mkdir(parents=True)
+        (werkz / "index.md").write_text("---\nwerkzeug: notgroschen\n---\n\n## Frage?\n\nFrage?\n",
+                                        encoding="utf-8")
+        return wurzel
+
+    PILLAR = "frugalismus"
+    SLUG = "notgroschen-rechner"
+
+    def test_w8_verdrahtung_ist_im_echten_baum_gruen(self):
+        self.assertEqual(guard.validate_embedding(self.data), [])
+
+    def test_jedes_werkzeug_ist_seinem_pillar_verlinkt(self):
+        for w in self.data["werkzeuge"]:
+            seite = ROOT / "content" / "pillar" / w["pillar"] / "index.md"
+            self.assertIn(f"/werkzeuge/{w['slug']}/", seite.read_text(encoding="utf-8"),
+                          f"{w['slug']} hängt nicht in {seite.parent.name}")
+
+    def test_w8_blockiert_verwaistes_werkzeug(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = self._sandkasten(tmp, link=False)
+            befunde = guard.validate_embedding(self.data, wurzel)
+            self.assertTrue(any(f.startswith("W8") and self.SLUG in f for f in befunde),
+                            f"unverlinktes Werkzeug läuft durch: {befunde}")
+
+    def test_w8_blockiert_unbekannte_und_nackte_einbettung(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = self._sandkasten(tmp)
+            post = wurzel / "content" / "posts" / "2026-10-10-test" / "index.md"
+            text = post.read_text(encoding="utf-8") + '{{< werkzeug id="phantom" >}}\n'
+            post.write_text(text, encoding="utf-8")
+            befunde = guard.validate_embedding(self.data, wurzel)
+            self.assertTrue(any("phantom" in f for f in befunde), befunde)
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = self._sandkasten(tmp)
+            post = wurzel / "content" / "posts" / "2026-10-10-test" / "index.md"
+            post.write_text("---\ntitle: T\nlastmod: 2026-10-10\n---\n\n{{< werkzeug >}}\n",
+                            encoding="utf-8")
+            befunde = guard.validate_embedding(self.data, wurzel)
+            self.assertTrue(any("ohne id=" in f for f in befunde), befunde)
+
+    def test_w8_verlangt_lastmod_fuer_geaenderte_ratgeber(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = self._sandkasten(tmp, lastmod=False)
+            befunde = guard.validate_embedding(self.data, wurzel)
+            self.assertTrue(any("lastmod" in f for f in befunde), befunde)
+
+    def test_w8_aendert_nichts_an_der_Werbefreiheit_der_werkzeugseiten(self):
+        """Einbettungen sind der Weg ZUM Werkzeug – W3 bleibt unangetastet."""
+        for seite in sorted((ROOT / "content" / "werkzeuge").glob("*/index.md")):
+            self.assertNotIn("/go/", seite.read_text(encoding="utf-8"),
+                            f"{seite} wirbt – W3 verbietet das")
+        self.assertTrue(guard.einbettungen(), "ohne Einbettungen wäre W8 bloße Deko")
+
     def test_partnerlink_wird_in_jeder_spielart_erkannt(self):
         domains = guard.partner_domains() or {"check24.net"}
         beispiel = sorted(domains)[0]

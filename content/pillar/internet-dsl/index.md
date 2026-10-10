@@ -112,6 +112,8 @@ Berechne hier den echten monatlichen Durchschnittspreis über die gesamte Vertra
 
 {{< rechner typ="dsl-effektiv" quelle="BNetzA & Preismodelle Telekommunikation" stand="Oktober 2026" >}}
 
+Wer über die zwölf Monate hinaus rechnen will: der [24-Monats-Effektivpreis-Rechner](/werkzeuge/effektivpreis-rechner/) enthält Grundpreis, Boni und Routermiete über zwei Laufzeiten, der [Kündigungsfristen-Kalender](/werkzeuge/kuendigungsfristen-kalender/) macht aus Vertragsbeginn und Frist konkrete Termine. Beide rechnen im Browser, ohne Anmeldung und ohne Affiliate-Link.
+
 ---
 
 ## 5. Entscheidungstabelle: Kündigen, wechseln oder Nachverhandeln?
@@ -383,6 +385,11 @@ Ja, für fast alle Verbraucherverträge (DSL, Handy, Fitnessstudio, Streaming, Z
 <div class="ff-changelog-card">
   <div class="ff-changelog-card__title"><span>📝</span> Revisionsprotokoll &amp; Datenbasis</div>
   <ul class="ff-changelog-list">
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.3</span>
+      <span class="ff-changelog-item__date">10.10.2026</span>
+      <span>Verdrahtung mit den eigenständigen Werkzeugen: 24-Monats-Effektivpreis-Rechner und Kündigungsfristen-Kalender sind jetzt aus diesem Ratgeber erreichbar (10.10.2026, W8).</span>
+    </li>
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.2</span>
       <span class="ff-changelog-item__date">02.10.2026</span>

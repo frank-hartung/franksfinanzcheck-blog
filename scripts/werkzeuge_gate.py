@@ -28,6 +28,10 @@ W6 LOKAL         Kein form action, kein Netzpfad im Rechenkern, kein externes
                  Asset – die Rechnung verlässt den Browser nicht.
 W7 OFFEN         Die Methodik steht sichtbar auf der Seite, nicht in einem
                  zugeklappten <details> und nicht hinter einem Klick.
+W8 VERDRAHTUNG   Kein Werkzeug ist eine Waise: Jedes Werkzeug muss aus seinem
+                 deklarierten Pillar erreichbar sein, jede Einbettung
+                 {{< werkzeug id="…" >}} außerhalb von /werkzeuge/ nennt eine
+                 ID der SSOT, und die Seite führt ein lastmod.
 
 Das Gate repariert nie selbst. Ein Defekt stoppt den Deploy, statt das
 Versprechen still abzuschwächen.
@@ -276,6 +280,80 @@ def validate_data(data: Any, root: Path = ROOT) -> list[str]:
     return findings
 
 
+# ID-Form ist freigestellt (doppelte oder einfache Quotes), die SSOT-Regel nicht.
+Q = chr(34) + chr(39)
+EMBED_MUSTER = re.compile(
+    r"\{\{<\s*werkzeug\s+id\s*=\s*[" + Q + r"]([^" + Q + r"]+)[" + Q + r"][^>]*>\}\}")
+BARE_MUSTER = re.compile(r"\{\{<\s*werkzeug\s*>\}\}")
+LASTMOD_MUSTER = re.compile(r"(?m)^lastmod:\s*\d{4}-\d{2}-\d{2}")
+
+
+def einbettungen(root: Path = ROOT) -> dict[Path, list[str]]:
+    """Werkzeug-Einbettungen außerhalb von /werkzeuge/ → Dateien und ihre IDs.
+
+    Die Werkzeugseiten selbst prüft W4 (dort gehört der nackte Aufruf
+    `{{< werkzeug >}}` hin, die ID kommt aus dem Frontmatter). Hier geht es um
+    die Gegenrichtung: Artikel und Pillar, die ein Werkzeug einbetten."""
+    out: dict[Path, list[str]] = {}
+    content = root / "content"
+    for md in sorted(content.rglob("*.md")):
+        # content/werkzeuge/<slug>/index.md und der Hub bleiben außen vor:
+        # dort gehört der nackte Aufruf hin, die ID kommt aus dem Frontmatter (W4).
+        if md.parent.parent.name == "werkzeuge" or md.name == "_index.md":
+            continue
+        try:
+            text = md.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        ids = EMBED_MUSTER.findall(text)
+        if ids or BARE_MUSTER.search(text):
+            # Leere Liste = nur ein nackter Aufruf – auch der ist ein Befund.
+            out[md] = ids
+    return out
+
+
+def validate_embedding(data: dict[str, Any], root: Path = ROOT) -> list[str]:
+    """W8 VERDRAHTUNG: acht Werkzeugseiten, die niemand verlinkt, sind acht
+    ungenutzte Rechner. Der Befund vom 10.10.2026: 0 Links aus `content/` auf
+    `/werkzeuge/`, 0 Einbettungen – die Seiten waren ein Silo für sich. Diese
+    Regel verhindert, dass der Zustand zurückkehrt, ohne die Werbefreiheit der
+    Werkzeugseiten (W3) anzutasten: verdrahtet wird der Weg ZUM Werkzeug."""
+    findings: list[str] = []
+    werkzeuge = [w for w in (data.get("werkzeuge") or []) if isinstance(w, dict)]
+    ids = {w.get("id") for w in werkzeuge}
+
+    # (a) jedes Werkzeug muss aus seinem deklarierten Pillar erreichbar sein
+    for w in werkzeuge:
+        slug, pillar, name = w.get("slug"), w.get("pillar"), w.get("name")
+        if not (isinstance(pillar, str) and pillar.strip()):
+            findings.append(f"W8: {name!r} deklariert keinen pillar – wo das "
+                            f"Werkzeug stehen soll, weiß nur die SSOT")
+            continue
+        seite = root / "content" / "pillar" / pillar / "index.md"
+        if not seite.is_file():
+            continue  # totes Ziel meldet W2, hier nicht doppelt
+        if f"/werkzeuge/{slug}/" not in seite.read_text(encoding="utf-8"):
+            findings.append(f"W8: Pillar {pillar!r} verlinkt sein Werkzeug "
+                            f"{slug!r} nicht – die kaufnahe Seite führt vorbei")
+
+    # (b) Einbettungen anderswo: nur IDs der SSOT, nie ohne ID, mit lastmod
+    for datei, gefunden in einbettungen(root).items():
+        rel = datei.relative_to(root)
+        text = datei.read_text(encoding="utf-8")
+        for wid in gefunden:
+            if wid not in ids:
+                findings.append(
+                    f"W8: {rel} bettet das unbekannte Werkzeug {wid!r} ein "
+                    f"(verfügbar: {', '.join(sorted(str(i) for i in ids))})")
+        if BARE_MUSTER.search(text):
+            findings.append(f"W8: {rel} ruft {{{{< werkzeug >}}}} ohne id= auf – "
+                            f"außerhalb von /werkzeuge/ kennt kein Frontmatter die ID")
+        if not LASTMOD_MUSTER.search(text):
+            findings.append(f"W8: {rel} bettet ein Werkzeug ein, nennt aber kein "
+                            f"lastmod – geänderter Ratgeber ohne Frische-Signal")
+    return findings
+
+
 def validate_content(data: dict[str, Any], root: Path = ROOT) -> list[str]:
     """W2/W4: Seiten und SSOT dürfen nicht auseinanderlaufen."""
     findings: list[str] = []
@@ -325,6 +403,7 @@ def validate_source(root: Path = ROOT) -> list[str]:
         return [str(exc)]
     findings.extend(validate_data(data, root))
     findings.extend(validate_content(data if isinstance(data, dict) else {}, root))
+    findings.extend(validate_embedding(data if isinstance(data, dict) else {}, root))
 
     partial = read_source(root / "layouts" / "_partials" / "ff_werkzeug.html", findings, "Werkzeug-Partial")
     data_partial = read_source(root / "layouts" / "_partials" / "werkzeuge_data.html", findings, "Daten-Partial")
@@ -544,6 +623,9 @@ def selftest(root: Path = ROOT) -> list[str]:
     kaputt = copy.deepcopy(data)
     kaputt["werkzeuge"][0]["pillar"] = "gibt-es-nicht"
     proben.append(("totes Pillar-Ziel", kaputt))
+    kaputt = copy.deepcopy(data)
+    kaputt["werkzeuge"][0]["pillar"] = ""
+    proben.append(("Werkzeug ohne Pillar-Zuordnung", kaputt))
 
     kaputt = copy.deepcopy(data)
     kaputt["vertrauen"]["punkte"] = kaputt["vertrauen"]["punkte"][:2]

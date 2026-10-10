@@ -1,6 +1,7 @@
 ---
 title: "Gasabschlag berechnen: So planst du die Heizsaison richtig"
 description: "Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel, Modellrechnung und fünf Sparhebeln startest du entspannt in die Heizsaison."
+lastmod: 2026-10-10
 date: 2026-10-02T21:37:08Z
 draft: false
 reserve_published: 2026-10-02
@@ -128,6 +129,10 @@ Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden 
 Gerade der zweite Punkt kostet jedes Jahr viele Haushalte dreistellige Beträge. Ein Tarif mit 200 € Sofortbonus, der danach 15 % teurer ist, verliert gegen den ehrlichen Durchschnittstarif fast immer.
 
 ## Schritt-für-Schritt: Dein Abschlags-Check in 30 Minuten
+
+Vor der Handarbeit die Grundsatzfrage: Lohnt der Wechsel überhaupt, oder ist der bestehende Vertrag mit Preisgarantie der ruhigere Pfad? Der Entscheidungsbaum rechnet die Bedingungen durch, statt sie zu behaupten.
+
+{{< werkzeug id="tarifwechsel-baum" >}}
 
 1. **Jahresrechnung suchen:** Notiere Verbrauch in kWh, Arbeitspreis und Grundpreis aus der letzten Abrechnung.
 2. **Abschlag nachrechnen:** Wende die Formel aus dem Modellteil an und vergleiche das Ergebnis mit deinem aktuellen Abschlag.

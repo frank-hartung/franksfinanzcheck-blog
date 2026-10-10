@@ -105,13 +105,13 @@ jede Engine liefert `{ kennzahlen, zeilen, liste, hinweise, termine }` oder
 
 ```bash
 npm run werkzeuge:check     # Selbsttest + Quellvertrag + Build + Produkt-Gate
-npm run test:werkzeuge      # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
+npm run test:werkzeuge      # 24 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
 python3 scripts/werkzeuge_gate.py --source-only     # nur die Quelle, ohne Build
 python3 scripts/werkzeuge_gate.py --public public   # nur der gebaute Stand
 npx playwright test e2e/werkzeuge.spec.mjs          # Produktverhalten im Browser
 ```
 
-Das Gate kennt sieben Regeln und **repariert nie selbst**:
+Das Gate kennt acht Regeln und **repariert nie selbst**:
 
 | Regel | Was sie schützt |
 |---|---|
@@ -122,9 +122,29 @@ Das Gate kennt sieben Regeln und **repariert nie selbst**:
 | **W5 Nachvollziehbar** | Formel, Annahmen und Quellen mit Stand werden tatsächlich gerendert |
 | **W6 Lokal** | Kein `action`, kein Netzpfad im Rechenkern, kein externes Asset |
 | **W7 Offen** | Methodik sichtbar auf der Seite, nicht in `<details>`, nicht hinter einem Klick |
+| **W8 Verdrahtung** | Kein Werkzeug ist eine Waise: jedes muss aus seinem `pillar:` erreichbar sein; Einbettungen `{{< werkzeug id="…" >}}` außerhalb von `/werkzeuge/` nennen eine ID der SSOT und die Seite führt `lastmod` |
 
-Im Deploy läuft W1–W7 zweimal: als Quellvertrag **vor** dem Build und als
-Produkt-Gate **nach** dem Build gegen `public/`.
+Im Deploy läuft W1–W8 zweimal: als Quellvertrag **vor** dem Build und als
+Produkt-Gate **nach** dem Build gegen `public/` (W8 ist eine Quellenregel –
+der Build prüft sie nicht erneut, weil sie nichts am Markup ändert).
+
+## Werkzeuge in Artikeln und Pillaren einbetten
+
+`{{< werkzeug id="…" >}}` ist für die Einbettung **außerhalb** des Silos gebaut:
+der Rechenkern und das CSS werden pro Seite genau einmal geladen, die ID muss
+in `data/werkzeuge.yaml` stehen (sonst stoppt W8 die Quelle und `errorf` den
+Build). Zwei Grenzen bleiben, weil sie das Produktversprechen sind:
+
+- **Kein `/go/`-Link, kein `rel="sponsored"`, keine Partner-Domain unter
+  `/werkzeuge/`** (W3) – auch nicht „optional“ und nicht „nur ein CTA unten“.
+- Der Verdrahtungspfad ist die **Gegenrichtung**: Werkzeug → in den kaufnahen
+  Text, nicht Werbung → auf das Werkzeug. Verlinkung aus dem deklarierten
+  Pillar ist Pflicht (W8), damit kein Werkzeug als unentdeckte Seite endet.
+
+Der Grund ist gemessen, nicht gefühlt (10.10.2026): 0 Links aus `content/` auf
+`/werkzeuge/`, 0 Einbettungen, 0 der 82 kaufnahen Trichter-Seiten waren
+Werkzeugseiten. Acht fertige Rechner, die niemand auf dem Entscheidungsweg
+traf.
 
 ## Stolpersteine
 

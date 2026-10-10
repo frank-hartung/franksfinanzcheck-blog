@@ -116,6 +116,8 @@ Nutze die Rechner, um deine optimale Einkommensverteilung und dein Notgroschen-Z
 
 {{< rechner typ="notgroschen" quelle="Bundesbank & Verbraucherzentrale" stand="Oktober 2026" >}}
 
+Die Langfassungen mit eigenen Feldern, Quelle und Export: [Notgroschen-Rechner](/werkzeuge/notgroschen-rechner/) und [Haushaltsbudget](/werkzeuge/haushaltsbudget/) – letzteres merkt sich deine Zahlen auf diesem Gerät, wenn du es ausdrücklich ankreuzt.
+
 ---
 
 ## 5. Entscheidungstabelle: Wie viel Notgroschen brauchst du wirklich?
@@ -376,6 +378,11 @@ Das ist bei steigenden Mieten und Lebenshaltungskosten keine Seltenheit. Gehe de
 <div class="ff-changelog-card">
   <div class="ff-changelog-card__title"><span>📝</span> Revisionsprotokoll &amp; Datenbasis</div>
   <ul class="ff-changelog-list">
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.3</span>
+      <span class="ff-changelog-item__date">10.10.2026</span>
+      <span>Verdrahtung mit den eigenständigen Werkzeugen: Notgroschen-Rechner und Haushaltsbudget sind jetzt aus diesem Ratgeber erreichbar (10.10.2026, W8).</span>
+    </li>
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.2</span>
       <span class="ff-changelog-item__date">02.10.2026</span>
