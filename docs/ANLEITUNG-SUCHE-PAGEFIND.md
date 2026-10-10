@@ -82,9 +82,11 @@ Erwartet: `✅ Suchindex korrekt: N HTML-Seiten gebaut · M indexierbar · M im 
 ausgeschlossen.` Die Zahlen wechseln mit dem Inhalt; wichtig ist, dass „indexierbar“ und
 „im Index“ gleich sind.
 
-Die Browser-Tests brauchen einen Chromium. Im CI installiert ihn `npx playwright install`.
-In Sandboxen ohne Zugang zu `cdn.playwright.dev` greift der Fallback aus `e2e/browser.mjs`
-(`npm i --no-save @sparticuz/chromium`).
+Die Browser-Tests brauchen Chromium. Der Browser ist als `@sparticuz/chromium`
+exakt im Root-Manifest und Lockfile gepinnt; `e2e/browser.mjs` verwendet ihn, wenn
+kein expliziter `CHROME_PATH`-Browser oder Playwright-Cache vorhanden ist. Nach
+`npm ci` prüft `npm run browser:setup` Start und JavaScript-Ausführung. Der Ablauf
+benötigt weder `cdn.playwright.dev` noch ein ungepinntes `--no-save`-Paket.
 
 ## Deploy-Verhalten
 

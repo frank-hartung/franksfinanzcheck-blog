@@ -99,7 +99,8 @@ Lesbarkeitsprüfung müssen sie berücksichtigen.
 
 ```bash
 hugo --destination public            # Build (Hugo Extended 0.164 nötig)
-npm run test:e2e                     # Build + 25 Playwright-Tests (Desktop+Mobile)
+npm ci && npm run browser:setup      # einmalig: gepinntes Chromium + JS-Smoke-Test
+npm run test:e2e                     # Build + Playwright-Tests (Desktop+Mobile)
 npx playwright test                  # nur Tests (nutzt vorhandenes public/)
 node e2e/design-metrics.mjs          # messbarer Design-Audit (stdout = JSON)
 node e2e/design-shots.mjs            # Screenshots für Design-Reviews → shots/
@@ -161,17 +162,17 @@ python3 scripts/design_handoff.py --check             # SSOT-/Exportdrift blocki
 
 E2E-Architektur (Details in `e2e/`-Datei-Köpfen): zero-dependency
 Static-Server (`e2e/server.mjs`), hermetische Produktions-URL-Umleitung
-(`e2e/fixtures.mjs`), Browser-Resolver mit CDN-Fallback (`e2e/browser.mjs`).
-Mobile-Projekt: `browserName: 'chromium'` explizit setzen – sonst startet
-Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
+(`e2e/fixtures.mjs`), gemeinsamer Browser-Resolver mit gelocktem Chromium-Fallback
+(`e2e/browser.mjs`). Mobile-Projekt: `browserName: 'chromium'` explizit setzen –
+sonst startet Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
 
-**Browser-Pflicht (seit #507, 01.10.2026):** Ein merge-fähiger Stand hat den
-vollen Playwright-Lauf hinter sich – „in dieser Sandbox nicht startbar" ist
-kein akzeptabler PR-Zustand mehr. Wenn `cdn.playwright.dev` blockiert ist
-(TLS-Reset), läuft die Suite über den eingebauten Fallback:
-`npm i --no-save @sparticuz/chromium` (Resolver greift automatisch) –
-Hintergrund und weitere Rettungswege: `docs/ANLEITUNG-DESIGN-VARIANTEN.md`,
-Abschnitt Troubleshooting, und `docs/INCIDENT-2026-10-01-e2e-suite-492.md`.
+**Browser-Pflicht:** Ein merge-fähiger Stand hat den vollen Playwright-Lauf hinter
+sich – „in dieser Sandbox nicht startbar" ist kein akzeptabler PR-Zustand. Der
+Chromium-Fallback `@sparticuz/chromium` ist exakt in `package.json` und
+`package-lock.json` gepinnt. Nach `npm ci` führt `npm run browser:setup` einen
+Start- und JavaScript-Render-Smoke-Test aus. Projekt-CI und lokale Browser-Checks
+brauchen dadurch keinen Zugriff auf `cdn.playwright.dev` und keinen flüchtigen
+`npm i --no-save`-Workaround mehr. Runbook: `docs/ANLEITUNG-CHROMIUM.md`.
 
 ## CI
 

@@ -8,7 +8,7 @@
     "test": "node ../../scripts/ff_voice_browser_test.mjs"
   },
   "devDependencies": {
-    "@sparticuz/chromium": "^149.0.0",
+    "@sparticuz/chromium": "153.0.0",
     "playwright-core": "^1.63.0"
   }
 }

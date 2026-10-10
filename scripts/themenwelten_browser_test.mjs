@@ -14,6 +14,7 @@ import zlib from 'node:zlib';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { prepareChromiumTemp, withChromiumExtractionLock } from './chromium_cache.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const arg = (key, fallback) => {
@@ -35,6 +36,9 @@ const HOME_MAIN_WIDTH_LIMITS = Object.freeze({
   'v-hero-premium': 1024,
 });
 assert.ok(fs.existsSync(path.join(PUBLIC, 'posts/index.html')), 'Hugo-Build fehlt.');
+const browserPackageRoot = path.join(ROOT, 'tools/ff-voice-browser/node_modules/@sparticuz/chromium');
+const browserVersion = JSON.parse(fs.readFileSync(path.join(browserPackageRoot, 'package.json'), 'utf8')).version;
+const versionedTmp = prepareChromiumTemp(browserVersion);
 const require = createRequire(path.join(ROOT, 'tools/ff-voice-browser/package.json'));
 const { chromium } = require('playwright-core');
 const mod = require('@sparticuz/chromium');
@@ -52,9 +56,9 @@ function check(condition, label) {
 }
 
 try {
-  let executablePath = process.env.FF_BROWSER_PATH;
+  let executablePath = process.env.FF_BROWSER_PATH || process.env.CHROME_PATH;
   if (!executablePath) {
-    executablePath = await bundled.executablePath();
+    executablePath = await withChromiumExtractionLock(versionedTmp, () => bundled.executablePath());
     const archive = path.join(ROOT, 'tools/ff-voice-browser/node_modules/@sparticuz/chromium/bin/al2023.tar.br');
     if (fs.existsSync(archive)) {
       libDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ff-topics-libs-'));

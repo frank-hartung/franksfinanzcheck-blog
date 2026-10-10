@@ -98,9 +98,9 @@ erraten. Keine Zeitreihe und kein automatisches Rank-Tracking.
 ```bash
 npm run seo:check
 npm run test:seo
-# Browser einmalig installieren:
+# Gebündeltes Chromium einmalig vorbereiten und per JS-Smoke-Test prüfen:
 npm ci
-npx playwright install chromium
+npm run browser:setup
 npm run test:seo:browser
 npm run test:e2e
 ```

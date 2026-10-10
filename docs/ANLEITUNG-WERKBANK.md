@@ -201,9 +201,11 @@ Ausgabe ist JSON: `status`, `titel`, `text_laenge`, `auszug`, `treffer`,
 gesuchten Begriffe auf der gerenderten Seite tatsächlich vorkommen.
 
 Die Brücke nutzt denselben Browser-Resolver wie die E2E-Suite
-(`e2e/browser.mjs`): offizieller Playwright-Chromium, sonst
-`@sparticuz/chromium` als Fallback bei gesperrtem `cdn.playwright.dev`.
-Ein Browser-Pin für Tests und Werkbank, nicht zwei.
+(`e2e/browser.mjs`): zuerst `FF_BROWSER_PATH`/`CHROME_PATH`, dann einen
+bereits installierten Playwright-Browser, zuletzt das im Root-Lockfile
+gepinnte `@sparticuz/chromium`. Der Standardweg benötigt `cdn.playwright.dev`
+nicht; Browser-Pin und JavaScript-Smoke-Test sind zentral dokumentiert in
+`docs/ANLEITUNG-CHROMIUM.md`.
 
 Fehlt Chromium, meldet das Gewerk **Standby**. Die Antwort entsteht trotzdem,
 nur ohne Beweisspalte.
@@ -331,8 +333,8 @@ ausschließlich über die Faktenfrische und ihre Allowlist.
 | SearXNG liefert 403 | Bot-Limiter aktiv | `server.limiter: false` |
 | SearXNG liefert 500 | kaputte Engine in den Defaults | `&engines=duckduckgo,bing` anhängen oder Engine entfernen |
 | `DuckDuckGo lieferte keine auswertbaren Treffer` | Drosselung der IP | normal; SearXNG einrichten |
-| `browser ⏸ playwright-core fehlt` | kein `npm ci` | `npm ci && npx playwright install chromium` |
-| Browser-Beweis `defekt` trotz Chromium | CDN gesperrt | `npm i --no-save @sparticuz/chromium` (Resolver greift automatisch) |
+| `browser ⏸ playwright-core fehlt` | Root-Node-Abhängigkeiten fehlen | `npm ci && npm run browser:setup` |
+| Chromium startet nicht / Browser-Beweis `defekt` | Paket nicht installiert, Linux-Laufzeit fehlt oder Systembrowserpfad ungültig | `npm run browser:setup` lesen; Standard-Fallback ist gelockt und benötigt kein Playwright-CDN. Alternativ `CHROME_PATH=/pfad/zu/chrome` setzen |
 | Dossier ohne Belege | Treffer nicht auf der Allowlist | Abschnitt „Verworfen" im Dossier lesen; ggf. Allowlist in `data/agent_reach/faktenfrische.yaml` erweitern (**redaktionelle Entscheidung**) |
 | `konnektor ⏸` trotz Schlüssel | keine Aktion freigegeben | Abschnitt 8, Schloss 2 |
 | Gate rot bei B8 | Workflow/Runbook/npm-Skript entfernt | Verdrahtung wiederherstellen, nicht die Regel lockern |
