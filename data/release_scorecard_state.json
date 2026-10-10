@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-10T17:59:11Z",
+  "generated_at": "2026-10-10T18:42:01Z",
   "modus": "kandidaten",
-  "commit": "ac9030154acfbdb94c9c4d8608d1299624bcce8e",
+  "commit": "19b7f2cdd5bda3a82be28d3f5be8d7c34b37d7ce",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -53,7 +53,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "6456d29bc663f97fbdb1dfd1f4541baeb9123b3b5d0b0c0b7c04e783e29d2d2d",
@@ -546,7 +546,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "65ac482f2edaea315cc9eb5f0255b7d9507aad54ecee543ae573e70cf4b97c2f",
@@ -631,7 +631,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
       "sha256": "5b9e0658d3a1535c405e7391e1441bd2d51a87be07097edfdf898838fbf84e40",
