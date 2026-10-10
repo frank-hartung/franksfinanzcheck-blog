@@ -59,7 +59,7 @@ jobs:
         run: |
           fail=0
           for s in umami_views umami_clicks awin_fetch awin_provisions \
-                   revenue_funnel click_chain_guard; do
+                   revenue_funnel click_chain_guard offline_import; do
             if ! python3 "scripts/$s.py" --selftest >/tmp/st_$s.log 2>&1; then
               echo "::error::Selbsttest $s fehlgeschlagen"; cat "/tmp/st_$s.log"
               fail=1
@@ -119,6 +119,24 @@ jobs:
           fi
           exit 0
 
+      # WEG 3 DER MESSKETTE (10.10.2026, docs/UMSATZ-MESSUNG-PREMIUM.md): Umami
+      # Cloud Free hat keinen API-Zugang – die API-Schritte oben bleiben dann leer.
+      # Dieser Schritt zieht Messstände, die ein Mensch aus dem Umami-Dashboard
+      # exportiert hat (lokal: data/offline/messstand.json, gitignored), und die
+      # abgerechneten Monatssummen (data/provisionen/provisionen.csv, gitignored)
+      # in die versionierten Aggregate – und rechnet den Trichter neu.
+      #
+      # BEWUSST ZULETZT: der letzte Schreiber gewinnt. Ein später API-Lauf darf
+      # nie von einer manuellen Datei überschrieben werden; umgekehrt erhält der
+      # Import API-Zeilen, solange die API-Meta „ok“ meldet
+      # (scripts/offline_import.py: merge_views/keep). Fehlt beides, meldet der
+      # Import „übersprungen“ und der Trichter bleibt bei „unbekannt“ (nie bei 0).
+      - name: Manuelle Messstände + Provisions-Abrechnung importieren
+        run: |
+          set +e
+          python3 scripts/offline_import.py | tee /tmp/offline_import.log
+          exit 0
+
       - name: Messstände committen
         if: always()
         run: |
@@ -132,9 +150,10 @@ jobs:
           git add data/awin_fetch.meta.json 2>/dev/null || true
           git add data/awin_provisions.json data/subid_map.yaml 2>/dev/null || true
           git add data/revenue_funnel.json data/revenue_funnel_history.jsonl 2>/dev/null || true
+          git add data/offline_import.meta.json data/provisionen_aggregat.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Revenue-Import: keine Änderungen."
           else
-            git commit -m "revenue-import: Messstände + Funnel (4× täglich)"
+            git commit -m "revenue-import: Messstände + Funnel (2× täglich)"
             scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
           fi
