@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 10.10.2026 13:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.10.2026 18:16 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Sa, 10. Oktober 2026
-- **07:30** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### So, 11. Oktober 2026
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
@@ -24,6 +21,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
 - ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
 - ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
 - ✅ 08.10.2026 14:05 · Internet & DSL-Update: Was sich jetzt für dich ändert → https://mastodon.social/@FranksFinanzcheck/117405198564655648
@@ -33,7 +31,6 @@
 - ✅ 04.10.2026 17:50 · Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp → https://mastodon.social/@FranksFinanzcheck/117383431263250864
 - ✅ 04.10.2026 10:52 · WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? → https://mastodon.social/@FranksFinanzcheck/117381789225405577
 - ✅ 01.10.2026 13:40 · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung → https://mastodon.social/@FranksFinanzcheck/117365463246886384
-- ✅ 30.09.2026 13:13 · Gasrechnung prüfen: Fehler finden und Nachzahlungen → https://mastodon.social/@FranksFinanzcheck/117359692643267110
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
