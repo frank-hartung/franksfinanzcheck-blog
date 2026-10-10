@@ -18,7 +18,7 @@ on:
       dry_run:
         description: "Nur anzeigen, nichts an Mastodon senden (true/false)"
         required: false
-        default: "false"
+        default: "true"
 
 # Kein contents:write nötig – MASTODON-PROFILE-REPORT.md ist seit dem
 # Profi-Cleanup (31.08.2026) bewusst nicht versioniert (.gitignore).
@@ -44,6 +44,9 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+
+      - name: Profiltexte und Vorschau offline prüfen
+        run: python3 -m unittest scripts.tests.test_mastodon_profile_sync
 
       - name: Mastodon-Profil aktualisieren
         env:

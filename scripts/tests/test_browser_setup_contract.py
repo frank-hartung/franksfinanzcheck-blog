@@ -64,6 +64,11 @@ class ChromiumSetupContractTests(unittest.TestCase):
                 self.assertIn("prepareChromiumTemp", source)
                 self.assertIn("withChromiumExtractionLock", source)
 
+    def test_systemschriften_haben_vorrang_vor_serverless_pfad(self):
+        source = (ROOT / "e2e" / "browser.mjs").read_text(encoding="utf-8")
+        self.assertIn("process.env.FONTCONFIG_PATH ??= existsSync('/etc/fonts/fonts.conf')", source)
+        self.assertIn("? '/etc/fonts'", source)
+
     def test_ci_prueft_browser_ohne_playwright_cdn_download(self):
         workflows = {
             ".github/workflows/e2e.yml": "npm run browser:setup",

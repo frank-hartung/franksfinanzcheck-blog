@@ -80,7 +80,13 @@ export async function resolveLaunchOptions() {
     process.env.LD_LIBRARY_PATH = [libDir, tmpdir(), process.env.LD_LIBRARY_PATH]
       .filter(Boolean)
       .join(':');
-    process.env.FONTCONFIG_PATH ??= join(tmpdir(), 'fonts');
+    // Die Serverless-Konfiguration verweist hart auf /tmp/fonts, obwohl wir
+    // versionsisoliert entpacken. Ohne verfügbare Ersatzschriften kann Skia
+    // beim Rendern mit SIGTRAP abbrechen. Auf Linux die Systemschriften nutzen;
+    // eine ausdrücklich konfigurierte Umgebung bleibt unangetastet.
+    process.env.FONTCONFIG_PATH ??= existsSync('/etc/fonts/fonts.conf')
+      ? '/etc/fonts'
+      : join(tmpdir(), 'fonts');
 
     // stderr statt stdout: Messskripte geben JSON auf stdout aus.
     console.error(`[E2E] Gebündelter Chromium aktiv: ${exe} (@sparticuz/chromium, versioniert im Root-Lockfile)`);

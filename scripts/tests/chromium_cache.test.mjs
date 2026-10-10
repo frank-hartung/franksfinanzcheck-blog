@@ -39,3 +39,21 @@ test('räumt einen Lock eines beendeten Prozesses auf', async t => {
   assert.equal(await withChromiumExtractionLock(directory, async () => 'freigegeben'), 'freigegeben');
   assert.equal(existsSync(lock), false);
 });
+
+test('Worker behalten denselben versionsisolierten Cache wie der Elternprozess', async () => {
+  const { execFileSync } = await import('node:child_process');
+  const moduleURL = new URL('../chromium_cache.mjs', import.meta.url).href;
+  const source = `
+    import assert from 'node:assert/strict';
+    import { execFileSync } from 'node:child_process';
+    import { prepareChromiumTemp } from ${JSON.stringify(moduleURL)};
+    const directory = prepareChromiumTemp('153.0.0');
+    assert.equal(prepareChromiumTemp('153.0.0'), directory);
+    const child = execFileSync(process.execPath, ['--input-type=module', '-e',
+      'import { prepareChromiumTemp } from ' + ${JSON.stringify(JSON.stringify(moduleURL))} +
+      '; console.log(prepareChromiumTemp("153.0.0"));'
+    ], { encoding: 'utf8' }).trim();
+    assert.equal(child, directory, 'Worker darf TMPDIR nicht erneut verschachteln');
+  `;
+  execFileSync(process.execPath, ['--input-type=module', '-e', source]);
+});

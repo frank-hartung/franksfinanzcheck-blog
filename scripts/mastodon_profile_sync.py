@@ -18,7 +18,7 @@
 #    (für scripts/social_poster.py) auch den Scope 'write:accounts',
 #    sonst schlägt der Aufruf mit HTTP 403 fehl. Siehe docs/ANLEITUNG-SOCIAL-MEDIA.md.
 #
-#  OHNE Token: zeigt eine Setup-Anleitung und endet SAUBER (exit 0).
+#  OHNE Token: zeigt eine Setup-Anleitung und endet mit Fehler (kein Scheinerfolg).
 #
 #  Lokale Tests:
 #    python3 scripts/mastodon_profile_sync.py --dry-run   # zeigt nur, was gesendet würde
@@ -40,51 +40,39 @@ MASTODON_TOKEN = (os.environ.get("MASTODON_ACCESS_TOKEN") or "").strip()
 MASTODON_INSTANCE = (os.environ.get("MASTODON_INSTANCE") or "https://mastodon.social").strip().rstrip("/")
 DRY_RUN = "--dry-run" in sys.argv
 
-DISPLAY_NAME = "FranksFinanzcheck 💰 1.800€ sparen"
-
-# Bio auf Premium-Agentur-Niveau (2026-08-27 Update):
-# - Nutzen zuerst (bis zu 1.800€ als eigenständiges redaktionelles Profilversprechen)
-# - Social Proof (25+ Guides)
-# - 6 Ratgeber-Welten vollständig
-# - Rhythmus Mo/Mi/Fr + Qualitätsversprechen (Zahlen, Checklisten, redaktionell geprüft)
-# - Transparenz: KI + Affiliate (Werbung) – rechtssicher nach deutschem Recht
-# - Persönliche Interaktion als CTA
-# Mehrzeilig, weil Mastodon Absätze rendert – 451/500 Zeichen.
+# Zeitlose Positionierung statt unbelegter Sparsummen oder veralteter Zähler.
+DISPLAY_NAME = "Frank | FranksFinanzcheck"
 NOTE = (
-    "💰 Bis zu 1.800 €/Jahr Fixkosten sparen – ehrliche Ratgeber statt Verkaufsdruck.\n\n"
-    "🧭 25+ Guides in 6 Welten: Strom & Gas · DSL & Internet · Versicherungen · Konto & Karten · Mietwagen · Frugalismus\n\n"
-    "🗓 Mo/Mi/Fr neue Artikel – mit konkreten Zahlen, redaktionell geprüft, inkl. Checklisten.\n\n"
-    "🤖 KI-unterstützt, automatisch veröffentlicht. Enthält Affiliate-Links (Werbung) – für dich ohne Mehrkosten.\n\n"
-    "❓ Fragen zu deinen Verträgen? Ich antworte persönlich 👇"
+    "Ich bin Frank Hartung. Ich helfe dir, Fixkosten nachvollziehbar zu prüfen – "
+    "mit Rechnungen und Checklisten statt Wechsel-Druck.\n\n"
+    "Strom & Gas · Internet · Versicherungen · Konto · Budget · Mobilität\n\n"
+    "Mein 4K-Kompass: Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern, Kurs halten.\n\n"
+    "KI-unterstützte Ratgeber. Der Blog enthält Affiliate-Links (Werbung). "
+    "Keine individuelle Finanzberatung.\n\n"
+    "Welche Fixkosten möchtest du als Nächstes prüfen? #Fixkosten #GeldSparen"
 )
 
-# Mastodon erlaubt maximal 4 Profilfelder – Premium-Strategie:
-# 1. Web (verifiziert via rel=me, grüner Haken) – Haupteinstieg
-# 2. Ratgeber (/pillar/ = alle 6 Welten auf einen Blick, Topical Authority)
-# 3. Themen (suchbare Hashtags, CamelCase, inkl. #Finanzen für Discoverability)
-# 4. Pinterest (Zweitkanal, 400+ Pins, Cross-Promo für visuelle Reichweite)
-# Verifizierte Links brauchen rel="me" auf der Zielseite (hugo.toml + extend_head.html).
+# Vier klare Einstiege: Produkt, Themen, Person, Finanzierung/Transparenz.
+# Verifizierung belegt Link-Kontrolle, keine fachliche Zertifizierung.
 FIELDS = [
-    ("Web:", "https://franksfinanzcheck.de"),
-    ("Ratgeber:", "https://franksfinanzcheck.de/pillar/"),
-    ("Themen:", "#StromSparen #DSL #Versicherung #Girokonto #Mietwagen #Frugalismus #Finanzen"),
-    ("Pinterest:", "https://www.pinterest.de/franksfinanzcheck/"),
+    ("Fixkosten-Cockpit", "https://franksfinanzcheck.de/cockpit/"),
+    ("Ratgeber", "https://franksfinanzcheck.de/pillar/"),
+    ("Über Frank", "https://franksfinanzcheck.de/ueber/"),
+    ("Transparenz", "https://franksfinanzcheck.de/transparenz/"),
 ]
 
-# Premium-Flags: Discoverability = Reichweite, Indexable = Fediverse-Suche.
-# Bot = False, weil trotz Automatisierung persönlich geantwortet wird (E-E-A-T).
-# Früher war das Profil NICHT im Verzeichnis – direkter Reichweitenverlust.
 DISCOVERABLE = True
 INDEXABLE = True
-BOT = False
+# Bestehende Bot-Kennzeichnung nicht überschreiben. Automatisches Publishing
+# allein ist kein Nachweis für persönliche Antworten oder deren Geschwindigkeit.
 
 AVATAR_DESCRIPTION = (
     "FranksFinanzcheck Logo: dunkelgrünes Quadrat mit abgerundeten Ecken und "
     "gelbem Haken – Symbol für geprüfte Spartipps."
 )
 HEADER_DESCRIPTION = (
-    "Banner: FranksFinanzcheck Logo, Schriftzug und Slogan 'Weniger Fixkosten, "
-    "mehr vom Leben' auf dunkelgrün – 6 Ratgeber-Welten im Überblick."
+    "Banner mit gelbem Haken und FranksFinanzcheck: Geld sparen bei Strom, "
+    "Gas, Internet & Versicherungen auf dunkelgrünem Hintergrund."
 )
 
 AVATAR = ROOT / "static" / "images" / "social" / "mastodon-avatar.png"
@@ -152,7 +140,7 @@ def build_multipart(fields, files):
 
 def print_setup_hint():
     print("=" * 68)
-    print("MASTODON-PROFIL-SYNC: Kein API-Token gefunden - überspringe (exit 0).")
+    print("MASTODON-PROFIL-SYNC: Kein API-Token gefunden - kein Live-Update möglich.")
     print("")
     print("Setup: Secret MASTODON_ACCESS_TOKEN muss den Scope 'write:accounts'")
     print("zusätzlich zu 'write:statuses'+'write:media' enthalten.")
@@ -163,7 +151,7 @@ def print_setup_hint():
 def main():
     if not MASTODON_TOKEN and not DRY_RUN:
         print_setup_hint()
-        return
+        sys.exit("FEHLER: Kein Token – es wurde kein Profil aktualisiert.")
 
     validate_lengths()
 
@@ -175,7 +163,6 @@ def main():
         # Mastodon erwartet Booleans im Multipart-Body als "true"/"false".
         ("discoverable", "true" if DISCOVERABLE else "false"),
         ("indexable", "true" if INDEXABLE else "false"),
-        ("bot", "true" if BOT else "false"),
     ]
     for i, (name, value) in enumerate(FIELDS):
         fields.append((f"fields_attributes[{i}][name]", name))
@@ -193,16 +180,14 @@ def main():
             print(f"    field: {n} = {v}")
         print(f"  discoverable: {DISCOVERABLE}  (Instanz-Verzeichnis)")
         print(f"  indexable:    {INDEXABLE}  (Fediverse-Suche)")
-        print(f"  bot:          {BOT}  (False = persönlich antwortend, E-E-A-T)")
+        print("  bot:          unverändert (keine Identitätsbehauptung durch den Sync)")
         print(f"  avatar: {AVATAR} ({'vorhanden' if AVATAR.is_file() else 'FEHLT'})")
         print(f"  header: {HEADER} ({'vorhanden' if HEADER.is_file() else 'FEHLT'})")
         print("")
-        print("  Premium-Checks:")
-        print(f"    - Affiliate-Disclosure in Bio: {'✅' if 'Affiliate' in NOTE else '❌'}")
-        print(f"    - 25+ Guides erwähnt: {'✅' if '25+' in NOTE else '❌'}")
-        print(f"    - 1.800€ Nutzenversprechen: {'✅' if '1.800' in NOTE else '❌'}")
-        print(f"    - Mo/Mi/Fr Kadenz: {'✅' if 'Mo/Mi/Fr' in NOTE else '❌'}")
-        print(f"    - Pinterest Cross-Promo Feld: {'✅' if any('Pinterest' in n for n,_ in FIELDS) else '❌'}")
+        print("  Qualitäts-Checks:")
+        print(f"    - Affiliate-Transparenz: {'OK' if 'Affiliate' in NOTE else 'FEHLT'}")
+        print(f"    - Eigener 4K-Kompass: {'OK' if '4K-Kompass' in NOTE else 'FEHLT'}")
+        print("    - Keine pauschale Spargarantie, kein veralteter Artikelzähler")
         return
 
     body, boundary = build_multipart(fields, files)
@@ -250,22 +235,15 @@ def main():
         f"- **Header:** {data.get('header')}\n"
         f"- **Im Instanz-Verzeichnis (discoverable):** {data.get('discoverable')} – Reichweite\n"
         f"- **Für Suche freigegeben (indexable):** {data.get('indexable')} – Fediverse-SEO\n"
-        f"- **Bot-Flag:** {bot_flag} – False = persönlich antwortend (E-E-A-T)\n\n"
+        f"- **Bot-Flag:** {bot_flag} – unverändert übernommen\n\n"
         "## Profilfelder (max. 4 – Premium-Strategie)\n\n"
         "| Feld | Wert | Verifiziert |\n|---|---|---|\n"
         f"{field_rows}\n\n"
-        "## Premium-Checks\n\n"
-        f"- **Affiliate-Disclosure in Bio:** {'✅ enthalten (rechtssicher)' if 'Affiliate' in (data.get('note') or '') else '❌ fehlt'}\n"
-        f"- **25+ Guides / 6 Welten:** {'✅' if '25+' in (data.get('note') or '') or '6 Welten' in (data.get('note') or '') else '—'}\n"
-        f"- **1.800€ Nutzenversprechen:** {'✅' if '1.800' in (data.get('note') or '') else '—'}\n"
-        f"- **Mo/Mi/Fr Kadenz:** {'✅' if 'Mo/Mi/Fr' in (data.get('note') or '') else '—'}\n"
-        f"- **Pinterest Cross-Promo:** {'✅' if any('pinterest' in (f.get('value') or '').lower() for f in (data.get('fields') or [])) else '—'}\n"
-        f"- **Themen-Hashtags optimiert:** {'✅' if any('Finanzen' in (f.get('value') or '') for f in (data.get('fields') or [])) else '—'}\n\n"
-        "## Fehlende Blogbeiträge – Status\n\n"
-        "Siehe `MASTODON-PREMIUM-ERGÄNZUNG.md` für die vollständige Backfill-Analyse (11 fehlende Artikel, Premium-Toots, Affiliate & Pinterest-Strategie).\n\n"
-        "---\n"
-        "*Erzeugt von scripts/mastodon_profile_sync.py – Premium-Agentur-Level (Bio 451/500 Zeichen, Affiliate-Transparenz, 25+ Guides, 1.800€-Claim, 6 Pillar, Mo/Mi/Fr, persönlich). "
-        "Bewusst kein Cronjob, sondern manuell auslösbar über Actions → Mastodon-Profil-Sync → Run workflow, sobald sich Content-Fokus oder Branding erkennbar ändern.*\n",
+        "## Einordnung\n\n"
+        "Affiliate-Hinweis ersetzt nicht die Kennzeichnung konkreter Werbung. "
+        "Profil-Verifizierung bestätigt die Link-Kontrolle, keine Finanzqualifikation. "
+        "Sichtbarkeitseinstellungen ermöglichen Auffindbarkeit, garantieren aber keine Reichweite.\n\n"
+        "Wachstumsplan und manuelle Freigabe: `docs/MASTODON-WACHSTUMSPLAN.md`.\n",
         encoding="utf-8",
     )
 

@@ -200,7 +200,9 @@ try {
 
   const { page, context } = await newPage();
   await page.goto(url('posts/'), { waitUntil: 'networkidle' });
-  await page.getByRole('button', { name: 'Nur notwendige', exact: true }).click();
+  // Bei deaktiviertem Analytics wird kein Consent-Banner ausgegeben.
+  const consent = page.getByRole('button', { name: 'Nur notwendige', exact: true });
+  if (await consent.isVisible()) await consent.click();
   await page.locator('.ff-posts-jump').focus();
   for (const topic of DATA.topics) {
     await page.keyboard.press('Tab');

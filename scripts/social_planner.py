@@ -237,7 +237,9 @@ def pick_angle(channel_cfg: dict, channel_id: str, slug: str, state: dict,
     seed = f"{channel_id}|{slug}|{day.isoformat()}|{sequence}"
     digest = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
 
-    if not angle_weights:
+    # Gleiche (auch neutral zurückgemeldete) Gewichte liefern keinen Sieger.
+    # Der alphabetische Tie-Break darf nicht 80 % der Posts vereinnahmen.
+    if not angle_weights or len({float(angle_weights.get(a, 1.0)) for a in pool}) == 1:
         return pool[digest % len(pool)]
 
     ranked = sorted(pool, key=lambda a: (-float(angle_weights.get(a, 1.0)), a))
