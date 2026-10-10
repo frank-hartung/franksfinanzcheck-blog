@@ -50,15 +50,55 @@
 #    Menschliche Befunde halten das Automations-Ticket NIE offen –
 #    damit hat jedes Ticket einen Schließpfad.
 #
+#  REPARATUR #676 TEIL 2 (10.10.2026) – MELDETAKT AN DEN AUSFALL BINDEN:
+#    Teil 1 (PR #686) hat die Auslieferung vor das Siegel gestellt und den
+#    Befund `deploy-blockade` eingeführt. Geblieben ist die LATENZ: Der
+#    Watchdog lief einmal täglich um 08:30 UTC. Zwischen dem Beginn eines
+#    Ausfalls und seiner Entdeckung lagen damit bis zu 23,5 Stunden – der
+#    gesamte Ausfall vom 09.10.2026 (19 h 38 min ohne öffentliche
+#    Auslieferung) fand zwischen zwei Watchdog-Läufen statt.
+#
+#    Jetzt gibt es ZWEI Takte in diesem einen Workflow:
+#      · AUSFALL-TAKT  stündlich :05 UTC (`--triage`) – read-only, ohne Hugo,
+#        ohne Reserve-Produktion, ohne Report-Nachzug. Misst nur die
+#        Ausfall-Klasse (1a Produktions-Wache, 2 Skript-Syntax, 3 Live-Site,
+#        3b Auslieferungs-Kette), heilt den Live-Site-Befund selbst und
+#        routet. Kosten: Sekunden statt Minuten.
+#      · VOLL-LAUF     täglich 08:30 UTC – unverändert alle Checks.
+#
+#    Die nicht gemessenen Checks stehen im Ausfall-Takt als ÜBERSPRUNGEN in
+#    der Env, NIE als OK (Vertrag C2: eine nicht ausgeführte Messung ist kein
+#    Grün). Der MELDETAKT des Alarm-Routers ist an den AUSFALL gebunden,
+#    nicht an den Kalender: akute Befunde melden nach 0/1/6/24 h und danach
+#    alle 24 h, chronische Befunde behalten ihre 72-h-Kadenz (#272 bleibt
+#    gültig – ein offenes Ticket ist kein tägliches Rauschen).
+#    Vertrag: Governance C35 „Meldetakt an den Ausfall".
+#
 #  Bei Problemen: automatisch GitHub-Issue (Besitz, Kadenz, Auto-Close).
-#  Manuell: Actions → Bot-Watchdog → Run workflow
+#  Manuell: Actions → Bot-Watchdog → Run workflow (Takt wählbar)
 # ============================================================
 name: Bot-Watchdog
 
 on:
   schedule:
+    # AUSFALL-TAKT (#676): stündlich zur Minute :05. Der Abstand zu den
+    # übrigen :05/:20/:35-Crons ist bewusst gewählt – dieser Lauf ist
+    # read-only und kurz, darf aber nicht mit dem Deploy-Catchup (:20)
+    # zusammenfallen, den er bei Befund selbst auslöst.
+    - cron: "5 * * * *"
+    # VOLL-LAUF: unverändert nach dem Morgen-Artikel (08:10 UTC).
     - cron: "30 8 * * *"    # 10:30 MESZ – nach dem Morgen-Artikel (08:10)
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      takt:
+        description: "Welcher Takt soll laufen?"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto      # wie der Cron, der diesen Lauf ausgelöst hätte
+          - triage    # nur die Ausfall-Klasse (read-only)
+          - voll      # alle Checks inkl. Hugo, Reserve, Pinterest-Report
 
 permissions:
   contents: write    # für den Routing-Zustand (data/alert_router_state.json)
@@ -83,6 +123,35 @@ jobs:
         with:
           fetch-depth: 0
 
+      # ------------------------------------------------------------
+      #  TAKT BESTIMMEN (#676) – EIN Workflow, zwei Takte
+      # ------------------------------------------------------------
+      #  Der stündliche Cron (:05) läuft als AUSFALL-TAKT (read-only, nur die
+      #  Ausfall-Klasse), der tägliche Cron (08:30) als VOLL-LAUF. Der Takt
+      #  ist hier die einzige Wahrheit: Jeder teure oder schreibende Schritt
+      #  unten prüft `steps.takt.outputs.modus == 'voll'` – ein Ausfall-Takt
+      #  kann damit per Konstruktion weder Hugo bauen noch die
+      #  Produktionslinie anstoßen noch nach main committen.
+      - name: Takt bestimmen (Ausfall-Takt oder Voll-Lauf)
+        id: takt
+        env:
+          CRON: ${{ github.event.schedule }}
+          WUNSCH: ${{ github.event.inputs.takt }}
+        run: |
+          set -euo pipefail
+          case "${WUNSCH:-auto}" in
+            triage) modus=triage ;;
+            voll)   modus=voll ;;
+            *)
+              case "${CRON:-}" in
+                "5 * * * *")  modus=triage ;;
+                *)            modus=voll ;;
+              esac
+              ;;
+          esac
+          echo "modus=${modus}" >> "$GITHUB_OUTPUT"
+          echo "Takt: ${modus} · Cron: '${CRON:-manuell}' · Wunsch: '${WUNSCH:-auto}'"
+
       - name: Python einrichten
         uses: actions/setup-python@v7
         with:
@@ -106,8 +175,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          echo "=== Bot-Watchdog 2.0 – Profi-Agentur-Level ==="
-          python3 scripts/bot_watchdog.py --emit-env
+          echo "=== Bot-Watchdog – Takt: ${{ steps.takt.outputs.modus }} ==="
+          if [ "${{ steps.takt.outputs.modus }}" = "triage" ]; then
+            # AUSFALL-TAKT (#676): nur die Ausfall-Klasse. Nicht gemessene
+            # Checks stehen als ÜBERSPRUNGEN in der Env, nie als OK (C2).
+            python3 scripts/bot_watchdog.py --emit-env --triage
+          else
+            python3 scripts/bot_watchdog.py --emit-env
+          fi
           echo "--- Env Dump ---"
           cat /tmp/bot_watchdog.env || true
           echo "--- Problems ---"
@@ -145,13 +220,14 @@ jobs:
       #  Beide Schritte laufen NUR bei Befund, sind idempotent und dürfen den
       #  Melder nie röten (continue-on-error).
       - name: Hugo installieren (für echte Nachmessungen)
-        if: ${{ contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        # Nur im Voll-Lauf: ein Ausfall-Takt baut per Konstruktion nichts (#676).
+        if: ${{ steps.takt.outputs.modus == 'voll' && (contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN')) }}
         uses: ./.github/actions/install-hugo
         with:
           version: "0.164.0"
 
       - name: Reserve-Zertifikat nachziehen (#462)
-        if: ${{ contains(env.CHECK8, 'WARN') }}
+        if: ${{ steps.takt.outputs.modus == 'voll' && contains(env.CHECK8, 'WARN') }}
         continue-on-error: true
         run: |
           python3 -m pip install -q pyyaml 2>/dev/null || true
@@ -182,7 +258,7 @@ jobs:
             data/reserve-quarantine.json data/reserve-history.jsonl
 
       - name: Abhängigkeiten für den Pinterest-Report
-        if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        if: ${{ steps.takt.outputs.modus == 'voll' && (contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN')) }}
         continue-on-error: true
         run: python3 -m pip install -q pyyaml 2>/dev/null || true
 
@@ -190,7 +266,7 @@ jobs:
       # Watchdog soll trotzdem messen), aber er darf es nicht lautlos tun –
       # „toleriert" und „unbemerkt" sind zwei verschiedene Dinge.
       - name: Seite bauen (Fehlschlag toleriert, aber sichtbar)
-        if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        if: ${{ steps.takt.outputs.modus == 'voll' && (contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN')) }}
         uses: ./.github/actions/hugo-build
         with:
           args: "--minify"
@@ -198,7 +274,7 @@ jobs:
           weiter-bei-fehler: "true"
 
       - name: Pinterest-Report nachziehen (#462)
-        if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        if: ${{ steps.takt.outputs.modus == 'voll' && (contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN')) }}
         continue-on-error: true
         run: |
           set +e
@@ -247,7 +323,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python3 scripts/bot_watchdog.py --emit-env
+          if [ "${{ steps.takt.outputs.modus }}" = "triage" ]; then
+            python3 scripts/bot_watchdog.py --emit-env --triage
+          else
+            python3 scripts/bot_watchdog.py --emit-env
+          fi
           echo "--- Befunde nach Selbstheilung ---"
           cat /tmp/problems.txt || echo "(keine)"
 
@@ -261,7 +341,9 @@ jobs:
       # wieder. Ein Engpass, den eine Nachzertifizierung schließt, kostet
       # jetzt keine Produktionsnacht mehr.
       - name: Content-Reserve bei echtem Engpass selbst heilen
-        if: ${{ contains(env.CHECK8, 'WARN') }}
+        # Nur im Voll-Lauf: Die Produktionslinie ist ein 45–90-Minuten-Lauf
+        # und darf nicht 24× am Tag angestoßen werden (#661, #676).
+        if: ${{ steps.takt.outputs.modus == 'voll' && contains(env.CHECK8, 'WARN') }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -340,18 +422,33 @@ jobs:
       #  Der Melder darf nie selbst zum Vorfall werden: der Schritt ist
       #  immer erfolgreich, Fehler stehen als ::error:: im Lauf-Log.
       # ------------------------------------------------------------
-      - name: Alarm-Routing (Besitz · Kadenz · Auto-Close)
+      # ------------------------------------------------------------
+      #  MELDETAKT (#676): Der Router entscheidet selbst, wie laut er wird.
+      #  Steht ein AUSFALL offen (deploy-blockade, live-site), meldet er nach
+      #  0/1/6/24 h und danach alle 24 h – der Takt ist an den Ausfall
+      #  gebunden, nicht an den Kalender. Chronische Befunde behalten ihre
+      #  72-h-Kadenz (#272). Ein stündlicher Lauf ohne Befund ist stumm.
+      # ------------------------------------------------------------
+      - name: Alarm-Routing (Besitz · Meldetakt · Auto-Close)
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set +e
-          python3 scripts/bot_watchdog.py --route
+          if [ "${{ steps.takt.outputs.modus }}" = "triage" ]; then
+            python3 scripts/bot_watchdog.py --route --triage
+          else
+            python3 scripts/bot_watchdog.py --route
+          fi
           echo "exit=$?" >> "$GITHUB_STEP_SUMMARY"
           set -e
 
       - name: Routing-Zustand sichern (Kadenz/Eskalation überlebt den Lauf)
-        if: always()
+        # Nur im Voll-Lauf: Der Ausfall-Takt ist read-only und committet nie
+        # nach main – sonst schriebe ein stündlicher Lauf 24× am Tag in den
+        # Hauptzweig. Der akute Meldetakt braucht den Zustand nicht: Er liest
+        # Stufe und letzten Stand aus dem Ticket selbst (Router-Marker).
+        if: ${{ always() && steps.takt.outputs.modus == 'voll' }}
         continue-on-error: true    # ein Push-Rennen darf den Melder nicht röten
         run: |
           git config user.name "Bot-Watchdog"

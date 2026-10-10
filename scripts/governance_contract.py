@@ -1978,7 +1978,167 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                                     python_bin=python_bin)
     checks += c34_blustradius(script_texts, wflows, root=root)
     checks += c34_auslieferung_vor_siegel(script_texts, wflows, root=root)
+    checks += c35_meldetakt_an_den_ausfall(script_texts, wflows, root=root)
     return checks
+
+
+# --- C35: Meldetakt an den Ausfall (Bot-Watchdog #676 Teil 2, 10.10.2026) ----
+#
+# Befund: C34 hat die Auslieferung vor das Siegel gestellt und den Befund
+# `deploy-blockade` eingeführt – gesehen hat ihn trotzdem niemand. Der
+# Watchdog lief EINMAL täglich um 08:30 UTC; zwischen dem Beginn eines
+# Ausfalls und seiner Entdeckung lagen bis zu 23,5 Stunden. Der gesamte
+# Ausfall vom 09.10.2026 (19 h 38 min ohne öffentliche Auslieferung) fand
+# zwischen zwei Watchdog-Läufen statt. Und selbst als das Ticket offen war,
+# rechnete die Eskalationsleiter in TAGEN (0/3/7/14) – der Meldetakt war an
+# den Kalender gebunden, nicht an den Ausfall.
+#
+# Der Vertrag in sechs Sätzen:
+#   a) Die Wache misst die Ausfall-Klasse STÜNDLICH (:05) – ein Ausfall ist
+#      spätestens eine Stunde nach Beginn sichtbar.
+#   b) Der Voll-Lauf bleibt: Der Ausfall-Takt ersetzt keine Messung, er
+#      ergänzt sie. Nicht gemessene Checks stehen als ÜBERSPRUNGEN in der
+#      Env, niemals als OK (C2).
+#   c) Der Ausfall-Takt ist read-only: Kein teurer und kein schreibender
+#      Schritt darf im stündlichen Takt laufen.
+#   d) Der Meldetakt des Routers ist an den AUSFALL gebunden: akute Befunde
+#      melden in Stunden, chronische behalten ihre 72-h-Kadenz (#272).
+#   e) Die Ausfall-Befunde sind als akut markiert – sonst bleibt d) Prosa.
+#   f) Regressionstest – ein Vertrag ohne Test ist Prosa.
+C35_AUSFALL_CRON = '- cron: "5 * * * *"'
+C35_VOLL_CRON = '- cron: "30 8 * * *"'
+C35_TAKT_ID = "id: takt"
+C35_TAKT_ANKER = "steps.takt.outputs.modus == 'voll'"
+# Schritte, die im Ausfall-Takt per Konstruktion nicht laufen dürfen.
+C35_NUR_VOLL_LAUF = (
+    "Hugo installieren",
+    "Reserve-Zertifikat nachziehen",
+    "Pinterest-Report nachziehen",
+    "Content-Reserve bei echtem Engpass selbst heilen",
+    "Routing-Zustand sichern",
+)
+C35_TESTS = ("test_bot_watchdog_meldetakt.py",)
+
+
+def c35_meldetakt_an_den_ausfall(script_texts, wflows, root=BLOG_DIR):
+    """Der Meldetakt muss an den Ausfall gebunden sein, nicht an den Kalender."""
+    out = []
+    wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(pfad) == "bot-watchdog.yml":
+            wf = inhalt or ""
+    wache = (script_texts or {}).get("bot_watchdog.py", "")
+    router = (script_texts or {}).get("alert_router.py", "")
+
+    if not wf:
+        out.append(("C35", ".github/workflows/bot-watchdog.yml fehlt – ohne die "
+                           "Wache ist der Meldetakt nicht prüfbar."))
+        return out
+
+    # (a) Stündlicher Ausfall-Takt -------------------------------------------
+    if C35_AUSFALL_CRON not in wf:
+        out.append(("C35", "bot-watchdog.yml: der stündliche Ausfall-Takt "
+                           "(`5 * * * *`) fehlt – ein Ausfall bleibt bis zu "
+                           "23,5 h unbemerkt, genau wie am 09.10.2026 "
+                           "(19 h 38 min ohne Auslieferung, #676)."))
+
+    # (b) Der Voll-Lauf bleibt ----------------------------------------------
+    if C35_VOLL_CRON not in wf:
+        out.append(("C35", "bot-watchdog.yml: der tägliche Voll-Lauf "
+                           "(`30 8 * * *`) fehlt – der Ausfall-Takt misst nur "
+                           "die Ausfall-Klasse und darf die übrigen Checks "
+                           "nicht ersetzen (#676)."))
+
+    # (c) Takt-Umschalter + read-only Ausfall-Takt ---------------------------
+    if C35_TAKT_ID not in wf:
+        out.append(("C35", "bot-watchdog.yml: der Takt-Umschalter "
+                           "(`id: takt`) fehlt – ohne ihn weiß kein Schritt, "
+                           "ob er im Ausfall-Takt oder im Voll-Lauf läuft."))
+    if "--triage" not in wf:
+        out.append(("C35", "bot-watchdog.yml: `--triage` ist nicht verdrahtet – "
+                           "der stündliche Lauf würde die volle Messkette "
+                           "(Hugo, Reserve, Pinterest) 24× am Tag fahren."))
+    for name in C35_NUR_VOLL_LAUF:
+        marke = f"- name: {name}"
+        if marke not in wf:
+            continue
+        block = wf[wf.index(marke):wf.index(marke) + 700]
+        if C35_TAKT_ANKER not in block:
+            out.append(("C35", f"bot-watchdog.yml: der Schritt „{name}“ läuft "
+                               "auch im stündlichen Ausfall-Takt – ein "
+                               "read-only-Takt, der Hugo baut, die "
+                               "Produktionslinie anstößt oder nach main "
+                               "committet, ist keiner (#676)."))
+
+    # (b') Eine nicht ausgeführte Messung darf nicht als Grün lesbar sein ----
+    if "TRIAGE_SKIP" not in wache:
+        out.append(("C35", "bot_watchdog.py: übersprungene Prüfungen sind nicht "
+                           "gekennzeichnet – im Ausfall-Takt sähe eine nicht "
+                           "ausgeführte Messung wie ein Grün aus (C2)."))
+    else:
+        zeile = wache[wache.index("TRIAGE_SKIP ="):]
+        zeile = zeile[:zeile.find("\n")]
+        for token in ("OK", "WARN", "FAIL"):
+            if token in zeile:
+                out.append(("C35", f"bot_watchdog.py: TRIAGE_SKIP enthält "
+                                   f"{token!r} – ein Workflow-Schritt läse eine "
+                                   "übersprungene Messung als Befund oder als "
+                                   "Grün (C2)."))
+    if "--triage" not in wache:
+        out.append(("C35", "bot_watchdog.py: der Ausfall-Takt (`--triage`) "
+                           "existiert nicht – der Workflow läuft ins Leere."))
+
+    # (d) Meldetakt an den Ausfall gebunden ----------------------------------
+    if "AKUT_TAKT" not in router:
+        out.append(("C35", "alert_router.py: der akute Meldetakt (`AKUT_TAKT`) "
+                           "fehlt – ein Ausfall würde weiter im 72-h-Takt "
+                           "gemeldet, also gar nicht (#676)."))
+    else:
+        if "def akut_tier_for_age(" not in router:
+            out.append(("C35", "alert_router.py: die akute Leiter rechnet nicht "
+                               "in Stunden – ohne `akut_tier_for_age` ist "
+                               "`AKUT_TAKT` Dekoration."))
+        if "akuter_takt(" not in router:
+            out.append(("C35", "alert_router.py: der Router entscheidet nicht "
+                               "nach der Ausfall-Klasse – der Meldetakt bliebe "
+                               "an den Kalender gebunden (#676)."))
+        if "MIN_COMMENT_INTERVAL_HOURS = 72" not in router:
+            out.append(("C35", "alert_router.py: die 72-h-Kadenz für chronische "
+                               "Befunde ist verschwunden – ein akuter Takt für "
+                               "ALLES wäre Taktfeuer und würde #272 kippen."))
+        plan = router[router.index("def plan_generic("):]
+        plan = plan[:plan.index("\ndef plan_channels(")]
+        if "akuter_takt(machine)" not in plan:
+            out.append(("C35", "alert_router.py: `plan_generic` nutzt den "
+                               "akuten Takt nicht – der Automations-Kanal "
+                               "meldet einen laufenden Ausfall weiter nur alle "
+                               "72 h (#676)."))
+
+    # (e) Ausfall-Befunde sind akut markiert ---------------------------------
+    if "def deploy_blockade_finding(" not in wache:
+        out.append(("C35", "bot_watchdog.py: der Blockade-Befund hat keinen "
+                           "eigenen Bauplan – eine Blockade ohne 404 bliebe "
+                           "unsichtbar (#676)."))
+    else:
+        start = wache.index("def deploy_blockade_finding(")
+        ende = wache.find("\ndef ", start + 1)
+        bauplan = wache[start:] if ende < 0 else wache[start:ende]
+        if "akut=True" not in bauplan:
+            out.append(("C35", "bot_watchdog.py: `deploy_blockade_finding` ist "
+                               "nicht als akut markiert – die Auslieferung steht, "
+                               "aber der Meldetakt bleibt bei 72 h (#676)."))
+        if "watchdog_recovery.py" not in bauplan:
+            out.append(("C35", "bot_watchdog.py: der Blockade-Befund nennt keinen "
+                               "maschinellen Heilungsweg – bei Besitzer `auto` "
+                               "ist das eine Sackgasse (C34/#676)."))
+
+    # (f) Regressionstest ----------------------------------------------------
+    for name in C35_TESTS:
+        if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
+            out.append(("C35", f"scripts/tests/{name} fehlt – der Vertrag "
+                               "‚Meldetakt an den Ausfall‘ wäre ungetestet "
+                               "(#676)."))
+    return out
 
 
 # --- C34: Auslieferung vor Siegel (Bot-Watchdog #676, 10.10.2026) ----------
@@ -2486,7 +2646,15 @@ def c34_blustradius(script_texts, wflows, root=BLOG_DIR):
                            "eines Kandidaten bleibt die ganze Site (#676)."))
     else:
         i_iso = deploy.find("release_isolation.py --commit-sha")
-        i_score = deploy.find("Release-Scorecard (Produktionswahrheit versiegeln")
+        # ANKER-REPARATUR 10.10.2026: Gesucht wird der SCHRITT, nicht das Wort.
+        # Der blanke String „Release-Scorecard (Produktionswahrheit versiegeln“
+        # steht seit #686 auch in einem KOMMENTAR am Kopf von deploy.yml (Zeile
+        # ~324) – `find` fand den Kommentar, hielt ihn für die Scorecard und
+        # meldete die Isolation (Zeile ~704) als „steht NACH der Scorecard“.
+        # Ein Vertrag, der den echten Baum beanstandet, ist schlimmer als kein
+        # Vertrag: Er trainiert zum Wegsehen (C2).
+        i_score = deploy.find(
+            "- name: Release-Scorecard (Produktionswahrheit versiegeln")
         if i_iso < 0:
             out.append(("C34", "deploy.yml: die Isolation wird nicht mit "
                                "--commit-sha aufgerufen (Siegel-Bindung fehlt)."))
@@ -3864,47 +4032,58 @@ RULE_TEXT = {
            "\u201e0/6 gate-fertig\u201c, weil ein Merge zwei Zertifikatsstände "
            "verschmolzen hatte – die Reparatur lief sechs Nächte in die falsche "
            "Richtung (WF-D4E0, #653).",
-    "C34": "Der Blustradius eines Befunds ist der Artikel, nicht die Site: Ein "
-           "blockierender Fund an EINEM heutigen Kandidaten darf die "
-           "öffentliche Auslieferung nicht insgesamt einfrieren. "
-           "`release_isolation.py` misst den Deploy-Scope über dieselbe "
-           "Scorecard-Engine (keine zweite Messregel), stellt blockierte "
-           "Kandidaten einzeln auf `hold` mit Check-ID und Befund im "
-           "Frontmatter (nie `park`, nie Inhaltsumschrift), füllt die Quote "
-           "(#287/#610), baut neu und misst erneut – begrenzte Konvergenz, "
-           "Obergrenze gegen das Leeräumen des Vorrats. Werkzeugfehler werden "
-           "NICHT isoliert, der Exit-Code wird durchgereicht, kein `|| true` "
-           "und kein `continue-on-error` am Schritt. Die Redundanz-Messung "
-           "erkennt Haus-Templates aus ihren SSOTs (`affiliate_intent_contract`, "
-           "`ki_shared.DISCLAIMER`, `cta_builder.END_DISCLOSURE`, "
-           "`news_writer.STAND_INTRO`) statt aus einer Whitelist, die mit jeder "
-           "neuen CTA-Variante verrottet; jede Ausnahme ist begründet und hat "
-           "eine Gegenprobe (ein Redaktionssatz hebt sie auf). Und der "
-           "Watchdog-Befund „Neuester Artikel nicht live“ nennt Job und Schritt "
-           "des Deploy-Fehlschlags: Am 09.10.2026 riet das Ticket zu einem "
-           "Catchup, der denselben Fehlschlag sechsmal wiederholte, während 13 "
-           "Deploys in Folge am selben Gate starben und die gesamte öffentliche "
-           "Auslieferung eingefroren blieb (Bot-Watchdog, #676). Derselbe "
-           "Blustradius gilt auf der Prüfebene: Ein DATEN-Befund (etwa ein "
-           "altes SHA-256-Zertifikat im Reserve-Snapshot) darf die CODE-Prüfung "
-           "nicht überspringen. `publication-reliability-tests.yml` ist der "
-           "einzige Ort mit vollständiger Unit-Test-Suite; lief sie wegen eines "
-           "vorgelagerten Daten-Schritts nicht, prüfte kein Lauf mehr, ob der "
-           "Code hält, was die Regeln versprechen. Der Job bleibt über den "
-           "Daten-Befund rot (fail-closed, #634) – aber die Prüfung läuft "
-           "(`if: ${{ !cancelled() }}`).",
     "C34": "Die Auslieferung kommt vor dem Siegel: Kein Mess-, Report- oder "
            "Siegel-Schritt darf die öffentliche Auslieferung blockieren. Ein "
-           "Beweislauf wertet seinen Exit-Code aus – ein Inhaltsbefund stoppt "
-           "den Deploy, ein Werkzeugfehler nicht. Nach dem Auslieferungs-Beleg "
-           "folgt im deploy-Job nichts mehr, was ihn rot machen kann; das "
-           "Siegel wird danach im eigenen Job (`release-seal`, `if: always()`) "
-           "gelegt und bleibt laut. Der Watchdog benennt die Ursache "
-           "(blockierender Schritt) statt nur des HTTP-Status und heilt den "
-           "Befund selbst (`watchdog_recovery.py --live-site`). Am 09.10.2026 "
-           "nahm die Release-Scorecard die Live-Site 19 h 38 min als Geisel: "
-           "20 rote Deploy-Läufe in Folge, kein Artikel live, der neueste "
-           "Artikel 4 h 11 min 404 (Bot-Watchdog, #676).",
+           "Beweislauf wertet seinen Exit-Code aus – ein Inhaltsbefund stoppt den "
+           "Deploy, ein Werkzeugfehler nicht. Nach dem Auslieferungs-Beleg folgt im "
+           "deploy-Job nichts mehr, was ihn rot machen kann; das Siegel wird danach "
+           "im eigenen Job (`release-seal`, `if: always()`) gelegt und bleibt laut. "
+           "Der Watchdog benennt die Ursache (blockierender Schritt) statt nur des "
+           "HTTP-Status und heilt den Befund selbst (`watchdog_recovery.py "
+           "--live-site`). Am 09.10.2026 nahm die Release-Scorecard die Live-Site 19 "
+           "h 38 min als Geisel: 20 rote Deploy-Läufe in Folge, kein Artikel live, "
+           "der neueste Artikel 4 h 11 min 404 (Bot-Watchdog, #676). Der Blustradius "
+           "eines Befunds ist der Artikel, nicht die Site: Ein blockierender Fund an "
+           "EINEM heutigen Kandidaten darf die öffentliche Auslieferung nicht "
+           "insgesamt einfrieren. `release_isolation.py` misst den Deploy-Scope über "
+           "dieselbe Scorecard-Engine (keine zweite Messregel), stellt blockierte "
+           "Kandidaten einzeln auf `hold` mit Check-ID und Befund im Frontmatter "
+           "(nie `park`, nie Inhaltsumschrift), füllt die Quote (#287/#610), baut "
+           "neu und misst erneut – begrenzte Konvergenz, Obergrenze gegen das "
+           "Leeräumen des Vorrats. Werkzeugfehler werden NICHT isoliert, der "
+           "Exit-Code wird durchgereicht, kein `|| true` und kein "
+           "`continue-on-error` am Schritt. Die Redundanz-Messung erkennt "
+           "Haus-Templates aus ihren SSOTs (`affiliate_intent_contract`, "
+           "`ki_shared.DISCLAIMER`, `cta_builder.END_DISCLOSURE`, "
+           "`news_writer.STAND_INTRO`) statt aus einer Whitelist, die mit jeder "
+           "neuen CTA-Variante verrottet; jede Ausnahme ist begründet und hat eine "
+           "Gegenprobe (ein Redaktionssatz hebt sie auf). Und der Watchdog-Befund "
+           "„Neuester Artikel nicht live“ nennt Job und Schritt des "
+           "Deploy-Fehlschlags: Am 09.10.2026 riet das Ticket zu einem Catchup, der "
+           "denselben Fehlschlag sechsmal wiederholte, während 13 Deploys in Folge "
+           "am selben Gate starben und die gesamte öffentliche Auslieferung "
+           "eingefroren blieb (Bot-Watchdog, #676). Derselbe Blustradius gilt auf "
+           "der Prüfebene: Ein DATEN-Befund (etwa ein altes SHA-256-Zertifikat im "
+           "Reserve-Snapshot) darf die CODE-Prüfung nicht überspringen. "
+           "`publication-reliability-tests.yml` ist der einzige Ort mit "
+           "vollständiger Unit-Test-Suite; lief sie wegen eines vorgelagerten "
+           "Daten-Schritts nicht, prüfte kein Lauf mehr, ob der Code hält, was die "
+           "Regeln versprechen. Der Job bleibt über den Daten-Befund rot "
+           "(fail-closed, #634) – aber die Prüfung läuft (`if: ${{ !cancelled() "
+           "}}`).",
+    "C35": "Der Meldetakt ist an den Ausfall gebunden, nicht an den Kalender: "
+           "Die Wache misst die Ausfall-Klasse STUENDLICH (:05 UTC) und der "
+           "taegliche Voll-Lauf (08:30 UTC) bleibt. Der Ausfall-Takt ist "
+           "read-only – kein teurer und kein schreibender Schritt laeuft im "
+           "stuendlichen Takt. Was er nicht misst, steht als UEBERSPRUNGEN in "
+           "der Env, niemals als OK (C2: eine nicht ausgefuehrte Messung ist "
+           "kein Gruen). Der Alarm-Router meldet einen laufenden Ausfall nach "
+           "0/1/6/24 h und danach alle 24 h; chronische Befunde behalten ihre "
+           "72-h-Kadenz (#272). C34 hat die Auslieferung vor das Siegel "
+           "gestellt, gesehen hat den Ausfall trotzdem niemand: Der ganze "
+           "Vorfall vom 09.10.2026 (19 h 38 min ohne oeffentliche "
+           "Auslieferung) lag zwischen zwei taeglichen Watchdog-Laeufen "
+           "(Bot-Watchdog, #676 Teil 2).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -3934,11 +4113,21 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          # nächste freie Nummer nach C32 ist deshalb C33.
          "C33": "Maschinen-Artefakte werden gegengelesen (kein Artefakt-"
                 "Defekt sieht mehr aus wie ein leerer Vorrat)",
-         "C34": "Blustradius eines Befunds (ein blockierter Kandidat friert "
-                "nicht die ganze Auslieferung ein; Haus-Templates aus der "
-                "SSOT statt aus einer Whitelist)"}
-         "C34": "Auslieferung vor Siegel (kein Mess-Schritt blockiert die "
-                "Live-Site, Ursache benannt, Befund selbst geheilt)"}
+         # REPARATUR 10.10.2026: PR #684 hatte diesen Dict-Literal mit einer
+         # Klammer ZU früh geschlossen und zwei weitere Einträge dahinter-
+         # geschrieben – `governance_contract.py` war damit nicht mehr
+         # importierbar (IndentationError) und das Qualitäts-Gate
+         # (link-check.yml) auf main rot. Außerdem trug der neue Vertrag
+         # dieselbe Haus-Nummer wie C34; zwei Einträge mit demselben
+         # Schlüssel bedeuten in einem Dict-Literal, dass einer unsichtbar
+         # wird. Beide Verträge stehen jetzt in EINEM Eintrag.
+         "C34": "Auslieferung vor Siegel UND Blustradius eines Befunds: kein "
+                "Mess-Schritt blockiert die Live-Site (Ursache benannt, Befund "
+                "selbst geheilt), und ein blockierter Kandidat friert nicht die "
+                "ganze Auslieferung ein (Haus-Templates aus der SSOT statt aus "
+                "einer Whitelist)",
+         "C35": "Meldetakt an den Ausfall (stündliche Ausfall-Erkennung, "
+                "read-only-Takt, Stunden-Leiter statt 72-h-Schweigen)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -5182,7 +5371,103 @@ def _selftest():
         failures.append("C34: eine unverdrahtete Live-Site-Selbstheilung bleibt "
                         "unentdeckt (#676).")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C34 mit Kunstbefunden: Fehler "
+    # --- C35: Meldetakt an den Ausfall (Bot-Watchdog #676 Teil 2) -----------
+    # Der Preis für einen kalendergebundenen Meldetakt waren 19 h 38 min
+    # ohne öffentliche Auslieferung – der ganze Ausfall lag zwischen zwei
+    # täglichen Watchdog-Läufen.
+    echte_c35 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in ("bot_watchdog.py", "alert_router.py")}
+    if c35_meldetakt_an_den_ausfall(echte_c35, wflows_echt, root=BLOG_DIR):
+        failures.append("C35: der echte Zustand wird beanstandet: "
+                        f"{c35_meldetakt_an_den_ausfall(echte_c35, wflows_echt, root=BLOG_DIR)}")
+
+    def _wf35(datei, alt, neu, was):
+        variante = dict(wflows_echt)
+        getroffen = False
+        for pfad in list(variante):
+            if os.path.basename(pfad) == datei and alt in variante[pfad]:
+                variante[pfad] = variante[pfad].replace(alt, neu, 1)
+                getroffen = True
+        if not getroffen:
+            failures.append(f"C35: Sabotage ‚{was}‘ konnte nicht eingespielt "
+                            f"werden (Anker fehlt in {datei}).")
+        return variante
+
+    # (a) Stündlicher Ausfall-Takt weg: zurück zur 23,5-h-Latenz.
+    ohne_takt = _wf35("bot-watchdog.yml", C35_AUSFALL_CRON, "# Ausfall-Takt entfernt",
+                      "stündlicher Cron entfernt")
+    if not [f for f in c35_meldetakt_an_den_ausfall(echte_c35, ohne_takt, root=BLOG_DIR)
+            if "23,5 h unbemerkt" in f[1]]:
+        failures.append("C35: ein fehlender Ausfall-Takt bleibt unentdeckt (#676).")
+    # (b) Voll-Lauf weg: der Ausfall-Takt ersetzt die Messkette.
+    ohne_voll = _wf35("bot-watchdog.yml", C35_VOLL_CRON, "# Voll-Lauf entfernt",
+                      "täglicher Cron entfernt")
+    if not [f for f in c35_meldetakt_an_den_ausfall(echte_c35, ohne_voll, root=BLOG_DIR)
+            if "Voll-Lauf" in f[1] and "fehlt" in f[1]]:
+        failures.append("C35: ein fehlender Voll-Lauf bleibt unentdeckt (#676).")
+    # (c) Takt-Umschalter weg.
+    ohne_umschalter = _wf35("bot-watchdog.yml", C35_TAKT_ID, "# takt entfernt",
+                            "Takt-Umschalter entfernt")
+    if not [f for f in c35_meldetakt_an_den_ausfall(echte_c35, ohne_umschalter,
+                                                    root=BLOG_DIR)
+            if "Takt-Umschalter" in f[1]]:
+        failures.append("C35: ein fehlender Takt-Umschalter bleibt unentdeckt (#676).")
+    # (c') Ein schreibender Schritt verliert seine Takt-Sperre: der
+    #      stündliche Lauf committet wieder 24× am Tag nach main.
+    ohne_sperre = _wf35(
+        "bot-watchdog.yml",
+        "if: ${{ always() && steps.takt.outputs.modus == 'voll' }}",
+        "if: always()",
+        "Takt-Sperre des Routing-Zustands entfernt")
+    if not [f for f in c35_meldetakt_an_den_ausfall(echte_c35, ohne_sperre,
+                                                    root=BLOG_DIR)
+            if "Routing-Zustand sichern" in f[1]]:
+        failures.append("C35: ein schreibender Schritt im Ausfall-Takt bleibt "
+                        "unentdeckt (#676).")
+    # (d) Router verliert den akuten Takt: Ausfall wieder im 72-h-Rhythmus.
+    blinder_router = dict(echte_c35, **{
+        "alert_router.py": echte_c35["alert_router.py"].replace(
+            "if akuter_takt(machine):", "if False:")})
+    if not [f for f in c35_meldetakt_an_den_ausfall(blinder_router, wflows_echt,
+                                                    root=BLOG_DIR)
+            if "nutzt den akuten Takt nicht" in f[1]]:
+        failures.append("C35: ein Router ohne akuten Takt bleibt unentdeckt (#676).")
+    # (d') Akuter Takt für ALLES: die 72-h-Kadenz für chronische Befunde fällt.
+    taktfeuer = dict(echte_c35, **{
+        "alert_router.py": echte_c35["alert_router.py"].replace(
+            "MIN_COMMENT_INTERVAL_HOURS = 72", "MIN_COMMENT_INTERVAL_HOURS = 1")})
+    if not [f for f in c35_meldetakt_an_den_ausfall(taktfeuer, wflows_echt,
+                                                    root=BLOG_DIR)
+            if "Taktfeuer" in f[1]]:
+        failures.append("C35: ein Taktfeuer für chronische Befunde bleibt "
+                        "unentdeckt (#272/#676).")
+    # (e) Ausfall-Befund verliert die Ausfall-Klasse.
+    stumme_blockade = dict(echte_c35, **{
+        "bot_watchdog.py": echte_c35["bot_watchdog.py"].replace(
+            'evidence=[e for e in (f"BLOCKIERENDER_SCHRITT={block_schritt}",\n'
+            '                              blockade_beleg) if e],\n        akut=True)',
+            'evidence=[e for e in (f"BLOCKIERENDER_SCHRITT={block_schritt}",\n'
+            '                              blockade_beleg) if e])')})
+    if stumme_blockade["bot_watchdog.py"] == echte_c35["bot_watchdog.py"]:
+        failures.append("C35: Sabotage ‚akut=True entfernt‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in bot_watchdog.py).")
+    elif not [f for f in c35_meldetakt_an_den_ausfall(stumme_blockade, wflows_echt,
+                                                      root=BLOG_DIR)
+              if "nicht als akut markiert" in f[1]]:
+        failures.append("C35: eine Blockade ohne Ausfall-Klasse bleibt "
+                        "unentdeckt (#676).")
+    # (b') Übersprungene Messung tarnt sich als Grün.
+    scheingruen = dict(echte_c35, **{
+        "bot_watchdog.py": echte_c35["bot_watchdog.py"].replace(
+            'TRIAGE_SKIP = "ÜBERSPRUNGEN (Ausfall-Takt – Voll-Lauf 08:30 UTC)"',
+            'TRIAGE_SKIP = "OK (im Ausfall-Takt nicht gemessen)"')})
+    if not [f for f in c35_meldetakt_an_den_ausfall(scheingruen, wflows_echt,
+                                                    root=BLOG_DIR)
+            if "TRIAGE_SKIP enthält" in f[1]]:
+        failures.append("C35: eine als Grün getarnte Nicht-Messung bleibt "
+                        "unentdeckt (C2/#676).")
+
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C35 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

@@ -52,12 +52,30 @@ HERZSCHLAG STATT BEFUND-ZEITSTEMPEL (Reparatur #281, 15.09.2026)
     · Check 5 wertet nur noch fehlerfreie Läufe: eine dauerhaft rote Wache
       ist kein Grün (C2: eine nicht ausgeführte Messung ist kein Grün).
 
+ZWEI TAKTE – MELDETAKT AN DEN AUSFALL GEBUNDEN (#676, 10.10.2026)
+  Der Watchdog lief einmal täglich um 08:30 UTC. Damit lag zwischen dem
+  Beginn eines Ausfalls und seiner Entdeckung bis zu 23,5 Stunden. Am
+  09.10.2026 fror die öffentliche Auslieferung 19 h 38 min ein – der ganze
+  Ausfall fand zwischen zwei Watchdog-Läufen statt.
+  Seit #676 gibt es deshalb zwei Takte in EINEM Workflow:
+    · AUSFALL-TAKT  `--triage`, stündlich :05 UTC – read-only, misst nur die
+      Ausfall-Klasse (1a Produktions-Wache, 2 Skript-Syntax, 3 Live-Site,
+      3b Auslieferungs-Kette) und heilt den Live-Site-Befund selbst.
+    · VOLL-LAUF     täglich 08:30 UTC – unverändert alle Checks inkl. Hugo,
+      Reserve-Nachzertifizierung und Pinterest-Report.
+  Die nicht gemessenen Checks stehen im Ausfall-Takt als ÜBERSPRUNGEN in der
+  Env, niemals als OK (Vertrag C2: eine nicht ausgeführte Messung ist kein
+  Grün). Der Meldetakt des Alarm-Routers ist an den AUSFALL gebunden, nicht
+  an den Kalender: akute Befunde melden nach 0/1/6/24 h und danach alle 24 h,
+  chronische Befunde behalten ihre 72-h-Kadenz (scripts/alert_router.py).
+
 Exit-Codes:
   0 = Lauf ok (Befunde stehen in Env/Report; Meldung macht der Router)
   2 = Selbsttest defekt
 
 Nutzung:
   python3 scripts/bot_watchdog.py --check      # nur prüfen (prüft + berichtet)
+  python3 scripts/bot_watchdog.py --triage     # nur die Ausfall-Klasse (stündlicher Takt)
   python3 scripts/bot_watchdog.py --emit-env   # schreibt /tmp/bot_watchdog.env + /tmp/problems.txt
   python3 scripts/bot_watchdog.py --route      # meldet über scripts/alert_router.py
   python3 scripts/bot_watchdog.py --selftest
@@ -107,6 +125,12 @@ except ImportError:
 
 REPORT_PATH = BLOG_DIR / "BOT-WATCHDOG-REPORT.md"
 FINDINGS_PATH = Path("/tmp/bot_watchdog_findings.json")
+
+# Kennzeichnung für Prüfungen, die der stündliche Ausfall-Takt bewusst nicht
+# misst (#676 Teil 2). Der Wortlaut ist Vertragsbestandteil: Er darf weder
+# „OK“ noch „WARN“/„FAIL“ enthalten, damit kein Schritt im Workflow eine
+# übersprungene Messung als Grün oder als Befund liest (Vertrag C2).
+TRIAGE_SKIP = "ÜBERSPRUNGEN (Ausfall-Takt – Voll-Lauf 08:30 UTC)"
 
 # Wie alt ein Pinterest-Lagebild sein darf, bevor die Wache selbst zum Befund
 # wird (ein veraltetes Bild ist kein Beweis für einen toten Kanal).
@@ -504,17 +528,48 @@ def classify_deploy_jobs(jobs):
     return "unbekannt", "", f"deploy-Job endete als „{ende}“"
 
 
-def live_site_findings(slug, code, deploy_lage, block_schritt="", blockade_beleg=""):
+def live_site_findings(slug, code, deploy_lage, block_schritt="", blockade_beleg="",
+                       spur=None):
     """Baut die Live-Site-Befunde: Folge (HTTP-Status) UND Ursache (Deploy).
 
     Rein funktional, damit der Vertrag testbar ist: Ein 404-Befund, der nur
     „Deploy prüfen" sagt, ist eine Arbeitsanweisung an einen Menschen – bei
     Besitzer `auto` muss der Befund die Ursache und den Heilungsweg tragen
     (Dauerheilung #676).
+
+    ZWEI URSACHEN-QUELLEN, EIN BEFUND (Reparatur 10.10.2026): PR #686 las die
+    Ursache aus der Job-Liste des letzten Deploy-Laufs (`classify_deploy_jobs`
+    → `block_schritt`), PR #684 zählte zusätzlich die aufeinanderfolgenden
+    Fehlschläge und nannte Job/Schritt aus der Run-Historie
+    (`deploy_ausfall_spur` → `spur`). Beide Wege waren verdrahtet und erzeugten
+    ZWEI Befunde mit derselben id `live-site` für dieselbe 404 – derselbe
+    Ausfall zweimal im Ticket, einmal mit und einmal ohne Heilungsweg. Jetzt
+    trägt der EINE Befund beide Belege.
     """
+    spur = spur or {}
+    spur_schritt = str(spur.get("schritt") or spur.get("job") or "")
+    spur_laeufe = spur.get("laeufe_fehlend")
+    spur_run = spur.get("lauf_id")
+    spur_belege = []
+    if spur_laeufe:
+        spur_belege.append(f"DEPLOY_FEHLERSCHLAEGE={spur_laeufe}")
+    if spur_schritt:
+        spur_belege.append(f"DEPLOY_SCHRITT={spur_schritt}")
+    if spur_run:
+        spur_belege.append(f"DEPLOY_RUN={spur_run}")
+    elif spur_laeufe:
+        spur_belege.append(f"DEPLOY_FEHLERSCHLAEGE={spur_laeufe} "
+                           "(Job/Schritt nicht ermittelbar)")
+    spur_text = ""
+    if spur_laeufe and spur_schritt:
+        spur_text = (f" `deploy.yml` ist {spur_laeufe}× in Folge fehlgeschlagen, "
+                     f"zuletzt am Schritt „{spur_schritt}“"
+                     + (f" (Run {spur_run})" if spur_run else "") + ".")
+
     if deploy_lage == "blockiert":
         ursache = (f" Ursache: Der letzte deploy.yml-Lauf brach VOR der "
-                   f"Auslieferung ab – blockierender Schritt „{block_schritt}“.")
+                   f"Auslieferung ab – blockierender Schritt „{block_schritt}“."
+                   f"{spur_text}")
         naechster = ("Der Watchdog löst Deploy-Catchup selbst aus "
                      "(`scripts/watchdog_recovery.py --live-site`). Heilt das "
                      f"nicht, blockiert Schritt „{block_schritt}“ in deploy.yml "
@@ -523,18 +578,23 @@ def live_site_findings(slug, code, deploy_lage, block_schritt="", blockade_beleg
         beleg = [f"URL=/posts/{slug}/", f"HTTP={code}",
                  f"BLOCKIERENDER_SCHRITT={block_schritt}", blockade_beleg]
     else:
-        ursache = ""
+        ursache = (f" Ursache: `deploy.yml` liefert nicht aus – zuletzt am "
+                   f"Schritt „{spur_schritt}“." if spur_schritt else "")
         naechster = ("Der Watchdog löst Deploy-Catchup selbst aus "
                      "(`scripts/watchdog_recovery.py --live-site`) und misst "
                      "danach neu; erst wenn der Artikel dann immer noch nicht "
-                     "live ist, bleibt dieses Ticket offen.")
+                     "live ist, bleibt dieses Ticket offen."
+                     + (f" Ein Catchup wiederholt sonst nur denselben "
+                        f"Fehlschlag am Schritt „{spur_schritt}“ "
+                        f"(Run {spur_run})." if spur_schritt and spur_run else ""))
         beleg = [f"URL=/posts/{slug}/", f"HTTP={code}", blockade_beleg]
 
     befunde = [_f(
         "live-site", "Neuester Artikel nicht live", "P1", "auto",
         detail=f"{slug} liefert HTTP {code}.{ursache}",
         next_step=naechster,
-        evidence=[b for b in beleg if b])]
+        evidence=[b for b in beleg + spur_belege if b],
+        akut=True)]
 
     # Eigener Ursachen-Befund, unabhängig vom HTTP-Status: Am 09.10.2026 fror
     # die Site 19,6 Stunden ein; sichtbar wurde das erst, als ein neuer
@@ -542,21 +602,38 @@ def live_site_findings(slug, code, deploy_lage, block_schritt="", blockade_beleg
     # Auslieferungsweg unbemerkt, solange kein neuer Artikel erscheint
     # (Klasse #537: alle Signale grün, öffentlich steht die Zeit still).
     if deploy_lage == "blockiert":
-        befunde.append(_f(
-            "deploy-blockade", "Auslieferung blockiert (Live-Stand eingefroren)",
-            "P1", "auto",
-            detail=(f"Der letzte deploy.yml-Lauf endete, bevor das "
-                    f"Pages-Artefakt hochgeladen war – blockierender Schritt: "
-                    f"„{block_schritt}“. {blockade_beleg}. Solange das steht, "
-                    f"geht kein einziger Artikel live, egal wie oft der "
-                    f"Deploy-Catchup läuft."),
-            next_step=(f"deploy.yml → deploy-Job → Schritt „{block_schritt}“ öffnen. "
-                       f"Ist es ein Inhalts-Gate, ist der Befund fachlich gemeint; "
-                       f"ist es ein Mess-/Siegel-Schritt, darf er die Auslieferung "
-                       f"nicht blockieren (Dauerheilung #676: erst liefern, dann "
-                       f"siegeln – Job `release-seal`)."),
-            evidence=[f"BLOCKIERENDER_SCHRITT={block_schritt}", blockade_beleg]))
+        befunde.append(deploy_blockade_finding(block_schritt, blockade_beleg))
     return befunde
+
+
+def deploy_blockade_finding(block_schritt, blockade_beleg=""):
+    """Der Ausfall-Befund „Auslieferung blockiert“ – EIN Bauplan, zwei Wege.
+
+    Derselbe Befund entsteht auf zwei Wegen: zusammen mit einem 404
+    (:func:`live_site_findings`) und ALLEIN, wenn der neueste Artikel noch
+    live ist, die Kette dahinter aber schon steht (#676 Teil 2). Ohne den
+    zweiten Weg bliebe eine Blockade unsichtbar, bis der nächste Artikel
+    erscheint – und genau dafür misst der Ausfall-Takt stündlich.
+    """
+    return _f(
+        "deploy-blockade", "Auslieferung blockiert (Live-Stand eingefroren)",
+        "P1", "auto",
+        detail=(f"Der letzte deploy.yml-Lauf endete, bevor das "
+                f"Pages-Artefakt hochgeladen war – blockierender Schritt: "
+                f"„{block_schritt}“. {blockade_beleg}. Solange das steht, "
+                f"geht kein einziger Artikel live, egal wie oft der "
+                f"Deploy-Catchup läuft."),
+        next_step=(f"Der Watchdog löst Deploy-Catchup selbst aus "
+                   f"(`scripts/watchdog_recovery.py --live-site`) und LÄSST es "
+                   f"hier: ein Dispatch in eine blockierte Kette scheitert am "
+                   f"selben Schritt. Heilung: deploy.yml → deploy-Job → Schritt "
+                   f"„{block_schritt}“ öffnen. Ist es ein Inhalts-Gate, ist der "
+                   f"Befund fachlich gemeint; ist es ein Mess-/Siegel-Schritt, "
+                   f"darf er die Auslieferung nicht blockieren (Dauerheilung "
+                   f"#676: erst liefern, dann siegeln – Job `release-seal`)."),
+        evidence=[e for e in (f"BLOCKIERENDER_SCHRITT={block_schritt}",
+                              blockade_beleg) if e],
+        akut=True)
 
 
 def deploy_blockade(hours=30):
@@ -1103,7 +1180,7 @@ def build_bilanz():
     return status, count, minimum, day.isoformat(), text
 
 def _f(fid, title, severity="P2", owner="auto", channel="", detail="",
-       next_step="", evidence=(), ladder=None, once=False):
+       next_step="", evidence=(), ladder=None, once=False, akut=False):
     """Kurzform für einen Befund.
 
     Die wichtigste Zeile in jedem Aufruf ist `owner`:
@@ -1111,12 +1188,18 @@ def _f(fid, title, severity="P2", owner="auto", channel="", detail="",
       · `human` – nur ein Mensch kann das heilen → Fach-Ticket mit Kadenz
     Genau diese Unterscheidung hat in #272 gefehlt (Alarm ohne Besitzer und
     ohne Schließpfad).
+
+    `akut=True` markiert die AUSFALL-Klasse (#676): Der Meldetakt wird an den
+    Ausfall gebunden (Stunden statt 72 h), weil der Ausfall-Takt stündlich
+    misst. Nur Befunde, die die öffentliche Auslieferung oder die
+    Produktionslinie betreffen, dürfen das tragen – ein akuter Takt für einen
+    chronischen Befund wäre Taktfeuer.
     """
     return ar.Finding(
         id=fid, title=title, detail=detail, severity=severity, owner=owner,
         channel=channel or (ar.GENERIC_CHANNEL if owner == "auto" else "human-action"),
         next_step=next_step, evidence=tuple(evidence),
-        ladder=tuple(ladder or ar.ESCALATION_LADDER), once=once)
+        ladder=tuple(ladder or ar.ESCALATION_LADDER), once=once, akut=akut)
 
 
 def pinterest_domain_block():
@@ -1240,9 +1323,22 @@ def check_pinterest_channel():
     return findings, f"Token OK (Quelle {source})"
 
 
-def run_all():
+def run_all(triage=False):
+    """Alle Prüfungen – oder, im Ausfall-Takt, nur die Ausfall-Klasse.
+
+    ``triage=True`` ist der stündliche Meldetakt (#676 Teil 2): read-only,
+    ohne Hugo, ohne Reserve-Produktion, ohne Report-Nachzug. Gemessen wird
+    ausschließlich, was die öffentliche Auslieferung oder die
+    Produktionslinie blockiert. Alles andere bleibt im Voll-Lauf (08:30 UTC).
+
+    WICHTIG (Vertrag C2): Eine übersprungene Messung ist KEIN Grün. Die
+    nicht gemessenen Checks stehen deshalb als ``ÜBERSPRUNGEN`` in der Env –
+    niemals als ``OK``.
+    """
     findings = []
     env = {}
+    if triage:
+        env["MODUS"] = "AUSFALL-TAKT (stündlich, nur Ausfall-Klasse)"
 
     # 1a META: Produktions-Wache
     count, err = check_workflow_liveness(PRODUKTIONS_WACHE_WORKFLOW, hours=26)
@@ -1270,16 +1366,24 @@ def run_all():
         env["CHECK1A"] = f"OK ({count} Lauf/Läufe in 26h)"
 
     # 1b Bilanz
-    status, count_b, min_b, tag_b, text_b = build_bilanz()
-    env["CHECK1B"] = status
-    env["BILANZ_TEXT"] = text_b
-    env["BILANZ_TAG"] = tag_b
-    env["BILANZ_COUNT"] = str(count_b)
-    env["BILANZ_MIN"] = str(min_b)
+    if triage:
+        env["CHECK1B"] = TRIAGE_SKIP
+        env["BILANZ_TEXT"] = ""
+        env["BILANZ_TAG"] = "-"
+        env["BILANZ_COUNT"] = "0"
+        env["BILANZ_MIN"] = "0"
+        status, count_b, min_b, tag_b, text_b = "SKIP", 0, 0, "-", ""
+    else:
+        status, count_b, min_b, tag_b, text_b = build_bilanz()
+        env["CHECK1B"] = status
+        env["BILANZ_TEXT"] = text_b
+        env["BILANZ_TAG"] = tag_b
+        env["BILANZ_COUNT"] = str(count_b)
+        env["BILANZ_MIN"] = str(min_b)
 
     # Nur alarmieren wenn Wache nicht aktiv (Dedupe)
     wache_da = env["CHECK1A"].startswith("OK")
-    if not wache_da:
+    if not wache_da and status not in ("SKIP",):
         if status == "FAIL":
             findings.append(_f(
                 "kadenz", f"Kein Artikel am Publikationstag {tag_b}", "P1", "auto",
@@ -1333,46 +1437,20 @@ def run_all():
         else:
             env["CHECK3"] = f"FAIL ({slug} → {code})"
             # URSACHE STATT SYMPTOM (Dauerheilung #676, 09.10.2026):
-            # „Deploy prüfen, ggf. Catchup triggern" war am 09.10. der
+            # „Deploy prüfen, ggf. Catchup triggern“ war am 09.10. der
             # falsche Ratschlag – der Catchup lief stündlich und hatte den
-            # Deploy sechsmal angestoßen, alle Läufe starben amselben
+            # Deploy sechsmal angestoßen, alle Läufe starben am selben
             # Schritt. Wer das Ticket öffnet, muss den Schritt sehen, nicht
             # eine Maßnahme, die den Ausfall verlängert.
-            spur = deploy_ausfall_spur()
-            if spur and (spur.get("schritt") or spur.get("job")):
-                ziel = spur.get("schritt") or spur.get("job")
-                detail = (f"{slug} liefert HTTP {code}. Ursache: "
-                          f"`deploy.yml` ist {spur['laeufe_fehlend']}× in Folge "
-                          f"fehlgeschlagen, zuletzt am Schritt „{ziel}“"
-                          + (f" (Job „{spur['job']}“)"
-                             if spur.get("schritt") and spur.get("job") else "")
-                          + ". Der Artikel ist nicht das Problem – er wird "
-                            "nicht ausgeliefert.")
-                next_step = (f"Schritt „{ziel}“ in .github/workflows/deploy.yml "
-                             f"prüfen (Run {spur['lauf_id']}). Ein Deploy-Catchup "
-                             "wiederholt nur denselben Fehlschlag.")
-                evidence = [f"URL=/posts/{slug}/", f"HTTP={code}",
-                            f"DEPLOY_FEHLERSCHLAEGE={spur['laeufe_fehlend']}",
-                            f"DEPLOY_SCHRITT={ziel}",
-                            f"DEPLOY_RUN={spur['lauf_id']}"]
-            else:
-                detail = f"{slug} liefert HTTP {code}."
-                next_step = ("Deploy prüfen, ggf. Deploy-Catchup triggern "
-                             "(Actions → Deploy auf GitHub Pages).")
-                evidence = [f"URL=/posts/{slug}/", f"HTTP={code}"]
-                if spur:
-                    evidence.append(
-                        f"DEPLOY_FEHLERSCHLAEGE={spur['laeufe_fehlend']} "
-                        f"(Job/Schritt nicht ermittelbar)")
-            findings.append(_f(
-                "live-site", "Neuester Artikel nicht live", "P1", "auto",
-                detail=detail, next_step=next_step, evidence=evidence))
-            # Dauerheilung #676: Der Befund nennt die Ursache und den
-            # Selbstheilungsweg. „Deploy prüfen, ggf. Catchup triggern" war
-            # eine Arbeitsanweisung an einen Menschen – dabei ist dieser
-            # Befund ausdrücklich maschinell heilbar (Besitzer `auto`).
+            #
+            # REPARATUR 10.10.2026: `deploy_ausfall_spur()` (PR #684) liefert
+            # die Fehlschlag-Serie samt Run-Id, `classify_deploy_jobs()`
+            # (PR #686) den blockierenden Schritt. Beide Belege gehören in
+            # EINEN Befund – zwei Befunde mit derselben id `live-site`
+            # zeigten denselben Ausfall doppelt, einmal ohne Heilungsweg.
             findings.extend(live_site_findings(
-                slug, code, deploy_lage, block_schritt, blockade_beleg))
+                slug, code, deploy_lage, block_schritt, blockade_beleg,
+                spur=deploy_ausfall_spur()))
     else:
         env["CHECK3"] = "FAIL"
         findings.append(_f(
@@ -1380,6 +1458,31 @@ def run_all():
             detail="In content/posts/ liegt kein veröffentlichter Artikel – "
                    "Deploy kann nicht geprüft werden.",
             next_step="Content-Engine prüfen (Actions → Content-Engine v2)."))
+
+    # 3c Dauerheilung #676 (Teil 2): Die Blockade ist ein EIGENER Befund – auch
+    # dann, wenn der neueste Artikel noch live ist. Ohne diese Zeile blieb ein
+    # eingefrorener Auslieferungsweg unsichtbar, solange kein neuer Artikel
+    # erschien: CHECK3 maß grün (der letzte Artikel war ja ausgeliefert),
+    # CHECK3B maß „FAIL (Schritt: …)“, und aus CHECK3B entstand kein Befund.
+    # Genau so lief es am 09.10.2026 – 19 h 38 min ohne Auslieferung, bemerkt
+    # erst durch die 404 des nächsten Artikels. Der Ausfall-Takt (:05) macht
+    # die Blockade jetzt sichtbar, bevor der nächste Artikel sie offenbart.
+    if deploy_lage == "blockiert" and not any(
+            f.id == "deploy-blockade" for f in findings):
+        findings.append(deploy_blockade_finding(block_schritt, blockade_beleg))
+
+    if triage:
+        # Checks 4–10 gehören zum Voll-Lauf (08:30 UTC): Sie brauchen Hugo,
+        # den Pinterest-Report, die Reserve-Zertifikate oder eine tägliche
+        # Fenstermessung – im stündlichen Ausfall-Takt haben sie nichts zu
+        # suchen. Sie werden hier bewusst NICHT gemessen und stehen deshalb
+        # als ÜBERSPRUNGEN in der Env, niemals als OK (Vertrag C2: eine nicht
+        # ausgeführte Messung ist kein Grün).
+        for key in ("CHECK4", "CHECK5", "CHECK5B", "CHECK6", "CHECK7",
+                    "CHECK7_OWNER", "CHECK7_CHANNEL", "CHECK8", "CHECK9",
+                    "CHECK9B", "CHECK10"):
+            env[key] = TRIAGE_SKIP
+        return env, findings, slug
 
     # 4 TLS
     if check_tls():
@@ -1515,11 +1618,14 @@ def split_findings(findings):
 def write_report(env, findings):
     machine, human = split_findings(findings)
     now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    triage = str(env.get("MODUS", "")).startswith("AUSFALL-TAKT")
+    modus = (env.get("MODUS") if triage else
+             "VOLL-LAUF – Selbstüberwachung aller kritischen Automatisierungen")
     lines = [
         "# 🤖 BOT-WATCHDOG-REPORT (Profi-Agentur-Level)",
         "",
         f"**Letzter Lauf:** {now}",
-        f"**Branch:** main · **Modus:** Selbstüberwachung aller kritischen Automatisierungen",
+        f"**Branch:** main · **Modus:** {modus}",
         "",
         "## Checks",
         "",
@@ -1527,6 +1633,7 @@ def write_report(env, findings):
         f"- **Check 1b (Publikationstag-Bilanz):** {env.get('CHECK1B','?')} – {env.get('BILANZ_TEXT','')}",
         f"- **Check 2 (Skript-Syntax):** {env.get('CHECK2','?')}",
         f"- **Check 3 (Live-Site):** {env.get('CHECK3','?')}",
+        f"- **Check 3b (Auslieferungs-Kette):** {env.get('CHECK3B','?')}",
         f"- **Check 4 (GitHub-TLS):** {env.get('CHECK4','?')}",
         f"- **Check 5 (Affiliate-Wache aktiv):** {env.get('CHECK5','?')}",
         f"- **Check 5b (Affiliate-Integrität):** {env.get('CHECK5B','?')}",
@@ -1553,12 +1660,25 @@ def write_report(env, findings):
         lines += ["", "_Diese Befunde öffnen und blockieren KEIN Automations-Ticket – "
                        "sie haben je ein Fach-Ticket mit Runbook und Eskalationsleiter._", ""]
     if not machine and not human:
-        lines += ["## Ergebnis", "",
-                  "✅ **ALLES OK** – alle Wachen leben, Live-Site aktuell, Affiliate- und "
-                  "Pinterest-Kanäle im grünen Bereich.", ""]
+        if triage:
+            lines += [
+                "## Ergebnis", "",
+                "✅ **AUSFALL-TAKT GRÜN** – Produktions-Wache lebt, Skript-Syntax sauber, "
+                "neuester Artikel live und die Auslieferungs-Kette nicht blockiert.",
+                "",
+                "_Der Ausfall-Takt misst nur die Ausfall-Klasse. Die übrigen Checks "
+                "(TLS, Affiliate, Pinterest, Reserve) laufen im Voll-Lauf um 08:30 UTC – "
+                "sie sind hier als ÜBERSPRUNGEN geführt, nicht als grün (Vertrag C2)._", ""]
+        else:
+            lines += ["## Ergebnis", "",
+                      "✅ **ALLES OK** – alle Wachen leben, Live-Site aktuell, Affiliate- und "
+                      "Pinterest-Kanäle im grünen Bereich.", ""]
+    takt = ("stündlich :05 UTC (Ausfall-Klasse) + täglich 08:30 UTC (Voll-Lauf)"
+            if triage else "täglich 08:30 UTC + stündlich :05 UTC für die Ausfall-Klasse")
     lines += ["---",
-              "*Automatisch erstellt vom Bot-Watchdog (täglich 10:30 MESZ) – "
-              "Profi-Agentur-Level, Alarm-Routing seit #272.*", ""]
+              f"*Automatisch erstellt vom Bot-Watchdog ({takt}) – "
+              "Profi-Agentur-Level, Alarm-Routing seit #272, Meldetakt an den "
+              "Ausfall gebunden seit #676.*", ""]
     REPORT_PATH.write_text("\n".join(lines), encoding="utf-8")
     return REPORT_PATH
 
@@ -1625,7 +1745,7 @@ def route_issues(args):
     """
     findings = _load_findings_for_route()
     if findings is None:
-        _env, findings, _slug = run_all()
+        _env, findings, _slug = run_all(triage="--triage" in args)
     machine, human = split_findings(findings)
     print(f"Alarm-Routing: {len(machine)} maschinell · {len(human)} menschlich")
 
@@ -1839,6 +1959,38 @@ def selftest():
         except Exception as e:
             errors.append(f"Routing-Selftest Exception: {e}")
 
+    # Ausfall-Takt (#676 Teil 2): Die Ausfall-Klasse muss als AKUT markiert
+    # sein, sonst rechnet der Router weiter in Tagen und schweigt 72 h –
+    # genau der Befund vom 09.10.2026 (19 h 38 min ohne Auslieferung).
+    try:
+        blockade = deploy_blockade_finding("49. Release-Scorecard", "Beleg")
+        if blockade.id != "deploy-blockade" or blockade.akut is not True:
+            errors.append("deploy_blockade_finding ist nicht als akut markiert "
+                          "– der Meldetakt bliebe an den Kalender gebunden (#676)")
+        live = live_site_findings("slug", "404", "blockiert",
+                                  "49. Release-Scorecard", "Beleg")
+        if [f.id for f in live] != ["live-site", "deploy-blockade"]:
+            errors.append("live_site_findings liefert nicht Folge UND Ursache (#676)")
+        if not all(f.akut for f in live):
+            errors.append("Live-Site-Befunde sind nicht akut – ein 404-Ausfall "
+                          "würde im 72-h-Takt gemeldet (#676)")
+        if ar is not None and not ar.akuter_takt(live):
+            errors.append("der Router erkennt die Ausfall-Klasse nicht (#676)")
+        chronisch = _f("cadence", "Kadenz", severity="P1", owner="auto")
+        if chronisch.akut or (ar is not None and ar.akuter_takt([chronisch])):
+            errors.append("ein chronischer Befund ist akut markiert – das wäre "
+                          "Taktfeuer statt Meldetakt (#676)")
+        for token in ("OK", "WARN", "FAIL"):
+            if token in TRIAGE_SKIP:
+                errors.append(f"TRIAGE_SKIP enthält {token!r} – ein Workflow-"
+                              f"Schritt läse eine übersprungene Messung als "
+                              f"Befund oder als Grün (Vertrag C2)")
+        if "ÜBERSPRUNGEN" not in TRIAGE_SKIP:
+            errors.append("TRIAGE_SKIP nennt sich nicht ÜBERSPRUNGEN – eine "
+                          "nicht ausgeführte Messung muss als solche lesbar sein")
+    except Exception as e:
+        errors.append(f"Ausfall-Takt-Selftest Exception: {e}")
+
     if errors:
         print("🛑 BOT-WATCHDOG SELFTEST FEHLGESCHLAGEN:")
         for er in errors:
@@ -1857,7 +2009,7 @@ def main():
     if "--route" in args:
         sys.exit(route_issues(args))
 
-    env, findings, slug = run_all()
+    env, findings, slug = run_all(triage="--triage" in args)
     write_report(env, findings)
     emit_env(env, findings)
     machine, human = split_findings(findings)
@@ -1875,7 +2027,8 @@ def main():
         for f in human:
             print(f.line())
     if not machine and not human:
-        print("ALLES OK")
+        print("AUSFALL-TAKT GRÜN (nur Ausfall-Klasse gemessen)"
+              if env.get("MODUS", "").startswith("AUSFALL-TAKT") else "ALLES OK")
 
     if "--emit-env" in args:
         sys.exit(0)

@@ -1392,6 +1392,54 @@ stoppt weiter · nichts nach dem Auslieferungs-Beleg · Siegel nach der
 Veröffentlichung · Ursachen-Nennung · Selbstheilung · Verdrahtung ·
 Regressionstest).
 
+## Meldetakt an den Ausfall (C35, seit #676 Teil 2, 10.10.2026)
+
+C34 baute den Befund `deploy-blockade`. Gesehen hat ihn trotzdem niemand: Der
+Watchdog lief **einmal täglich** um 08:30 UTC, zwischen Ausfall-Beginn und
+Entdeckung lagen bis zu 23,5 Stunden. Der ganze Ausfall vom 09.10.2026
+(19 h 38 min) fand zwischen zwei Läufen statt – und als das Ticket offen war,
+rechnete die Eskalationsleiter in **Tagen** (0/3/7/14) mit 72 h Mindestabstand:
+während der 19 Stunden kein einziger Kommentar. **Der Meldetakt war an den
+Kalender gebunden, nicht an den Ausfall.**
+
+- **Zwei Takte in einem Workflow.** `bot-watchdog.yml` läuft stündlich `5 * * * *`
+  als **Ausfall-Takt** (`--triage`) und täglich `30 8 * * *` als **Voll-Lauf**.
+  Der Takt-Umschalter (`id: takt`) liest `github.event.schedule`; per
+  `workflow_dispatch` ist der Takt wählbar (`auto|triage|voll`).
+- **Der Ausfall-Takt ist read-only.** Jeder teure und jeder schreibende Schritt
+  prüft `steps.takt.outputs.modus == 'voll'`: Hugo, Reserve-Zertifikat,
+  Pinterest-Report, Content-Reserve-Dispatch und der Commit des
+  Routing-Zustands. Ein stündlicher Lauf kann damit per Konstruktion weder
+  bauen noch produzieren noch nach main committen.
+- **Eine nicht ausgeführte Messung ist kein Grün (C2).** Nicht gemessene Checks
+  stehen als `ÜBERSPRUNGEN (Ausfall-Takt – Voll-Lauf 08:30 UTC)` in der Env –
+  niemals als `OK`. Der Wortlaut ist Vertragsbestandteil.
+- **Der Router meldet in Stunden, solange der Ausfall steht.** Befunde der
+  Ausfall-Klasse tragen `akut=True` und folgen `AKUT_TAKT` (0/1/6/24 h, danach
+  alle 24 h). Gerechnet wird ab dem **letzten Stand**, nicht ab der
+  Stufen-Schwelle – sonst würde der stündliche Takt ab Stunde 48 jede Runde
+  feuern (Taktfeuer statt Meldetakt). **Chronische Befunde behalten ihre
+  72-h-Kadenz unverändert** (#272 bleibt gültig).
+- **Voraussetzung:** Weil der Ausfall-Takt stündlich misst, ist das Ticket-Alter
+  ein brauchbares Maß für die Ausfalldauer. Bei einem täglichen Lauf dürfte die
+  Leiter gar nicht in Stunden rechnen.
+- **Eine Blockade ist auch ohne 404 ein Befund.** `CHECK3B == blockiert`
+  erzeugt `deploy-blockade` unabhängig vom HTTP-Status – sonst blieb die
+  eingefrorene Auslieferung unsichtbar, bis der nächste Artikel 404 lief.
+- **Ein Befund, zwei Beleg-Quellen.** `classify_deploy_jobs` (blockierender
+  Schritt) und `deploy_ausfall_spur` (Fehlschlag-Serie, Run-Id) fließen in
+  **einen** `live-site`-Befund. Zwei Befunde mit derselben id zeigten denselben
+  Ausfall doppelt, einmal ohne Heilungsweg.
+- Tests: `scripts/tests/test_bot_watchdog_meldetakt.py` (Takt, Nicht-Messung,
+  Stunden-Leiter, Grenze zum Taktfeuer, C35-Sabotagen, Anker-Disziplin).
+  Vorgangsbericht:
+  `BOT-WATCHDOG-676-TEIL2-MELDETAKT-DAUERHEILUNG-PREMIUM-2026-10-10.md`.
+
+Vertrag: **C35** in `governance_contract.py` (stündlicher Ausfall-Takt ·
+Voll-Lauf bleibt · Takt-Umschalter · read-only-Takt · Nicht-Messung ist kein
+Grün · Router nutzt den akuten Takt · Chronisch bleibt bei 72 h · Ausfall-Befund
+ist akut · Regressionstest).
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
