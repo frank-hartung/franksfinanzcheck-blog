@@ -154,7 +154,7 @@ Kündigung alt erst nach Bestätigung neu. Screenshot + PDF im Ordner „Versich
 
 ## Selbstbeteiligung als Hebel, nicht als Falle
 
-500 € SB bei Kfz-Vollkasko lohnt, wenn du Schäden unter 500 € selbst trägst und die Prämie klar sinkt. 1.500 € SB bei Hausrat kann bei einem 800-€-Fahrraddiebstahl bedeuten, dass du faktisch unversichert warst. SB an die Reserve koppeln: SB nie höher als 10 % des Notgroschens.
+500 € SB bei Kfz-Vollkasko lohnt, wenn du Schäden unter 500 € selbst trägst und die Prämie klar sinkt. 1.500 € SB bei Hausrat kann bei einem 800-€-Fahrraddiebstahl bedeuten, dass du faktisch unversichert warst. SB an die Reserve koppeln: SB nie höher als 10 % des Notgroschens. Ob diese Grenze bei deiner Police trägt, zeigt der [Versicherungs-Selbstbehalt-Rechner](/werkzeuge/selbstbehalt-rechner/): Prämienersparnis und Eigenanteil im Schadensfall gegeneinander rechnen, statt die Selbstbeteiligung aus dem Bauch zu erhöhen.
 
 ## Inflation der Summen
 

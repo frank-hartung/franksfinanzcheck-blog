@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-28
+lastmod: 2026-10-10
 title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung."
 date: 2026-08-12T08:35:12Z
@@ -221,6 +221,10 @@ Kontrolliere die Vertragsbestätigung:
 Setze zwei Kalendertermine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den Vergleich erst, wenn der Jahresverbrauch vor dir liegt: [**Gastarife vergleichen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
+
+Rechnen lohnt vorher: Der 24-Monats-Effektivpreis rechnet Grundpreis, Arbeitspreis, Bonus und Garantiezeit zu einem monatlichen Durchschnitt zusammen – das ist die Zahl, mit der du Angebote belastbar vergleichst.
+
+{{< werkzeug id="effektivpreis-24" >}}
 
 ## Nach dem Klick: Bestätigung und Widerruf prüfen
 

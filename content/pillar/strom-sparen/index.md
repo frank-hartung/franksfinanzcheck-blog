@@ -42,6 +42,7 @@ Strom und Gas machen in deutschen Haushalten oft den größten Block der variabl
 * **Heimliche Stromfresser eliminieren:** Standby-Geräte, veraltete Kühltechnik und Dauerverbraucher verursachen bis zu 20&nbsp;% deiner jährlichen Stromrechnung.
 * **Preisgarantien richtig wählen:** Vor der Heizperiode sorgen Tarife mit mindestens zwölf Monaten Preisgarantie für planbare Sicherheit ohne Preissprünge.
 * **Unterbrechungsfreie Versorgung:** Ein Versorgungsengpass beim Anbieterwechsel ist in Deutschland gesetzlich nach §&nbsp;36 EnWG ausgeschlossen.
+* **Energie ist ein Fixkostenposten:** Im [Fixkosten-Scanner](/werkzeuge/fixkosten-scanner/) stehen Strom, Gas und Wohn-Nebenkosten zusammen mit den übrigen Verträgen – gespart wird am größten Block, nicht am kleinsten.
 
 ---
 
@@ -120,6 +121,8 @@ Nutze die beiden Rechner, um deinen fairen Monatsabschlag für Strom und Gas zu 
 ### Gas-Abschlagsrechner
 
 {{< rechner typ="gas-abschlag" quelle="BDEW-Gaspreisanalyse 2026" stand="Oktober 2026" >}}
+
+Die vollständigen Werkzeuge dazu – mit eigenen Eingabefeldern, offengelegter Formel und Export als CSV oder PDF: [Strom- und Gas-Abschlagsrechner](/werkzeuge/abschlag-nachzahlung-rechner/), [24-Monats-Effektivpreis-Rechner](/werkzeuge/effektivpreis-rechner/) und [Tarifwechsel-Entscheidungsbaum](/werkzeuge/tarifwechsel-entscheidungsbaum/). Alle drei rechnen im Browser: keine Anmeldung, keine personenbezogenen Daten, kein Affiliate-Link, den man klicken müsste.
 
 ---
 
@@ -410,6 +413,11 @@ Der Spätsommer und der frühe Herbst (August bis Oktober) sind ideal, um vor de
 <div class="ff-changelog-card">
   <div class="ff-changelog-card__title"><span>📝</span> Revisionsprotokoll &amp; Datenbasis</div>
   <ul class="ff-changelog-list">
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.3</span>
+      <span class="ff-changelog-item__date">10.10.2026</span>
+      <span>Verdrahtung mit den eigenständigen Werkzeugen: Abschlagsrechner, Effektivpreis-Rechner, Entscheidungsbaum und Fixkosten-Scanner sind jetzt aus diesem Ratgeber erreichbar (10.10.2026, W8).</span>
+    </li>
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.2</span>
       <span class="ff-changelog-item__date">02.10.2026</span>

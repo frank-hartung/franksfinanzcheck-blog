@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-28
+lastmod: 2026-10-10
 title: "Gasrechnung prüfen: Fehler finden und Nachzahlungen"
 description: "Gasrechnung prüfen statt nur auf die Endsumme schauen: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter."
 date: 2026-09-25T12:15:37Z
@@ -148,6 +148,8 @@ Vergleiche nie nur „dieses Jahr 300 € mehr“. Stelle zwei Fragen:
 Ein kalter Winter, Homeoffice oder mehr Bewohner können den Verbrauch ändern. Ohne den kWh-Vergleich siehst du das nicht.
 
 ## Abschlag realistisch einstellen
+
+{{< werkzeug id="energie-abschlag" >}}
 
 Teile die erwarteten Jahreskosten durch zwölf. Rechne sichere Boni oder Guthaben nur ein, wenn sie wirklich kommen. Ein kleiner Puffer kann sinnvoll sein. Er ersetzt aber keine echte Rechnung.
 
