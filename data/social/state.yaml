@@ -629,6 +629,18 @@ history:
     #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
   ref: '117410830633382287'
   ai: false
+- posted_at: '2026-10-10T13:14:19.529237+02:00'
+  channel: mastodon
+  slug: 2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit
+  title: '7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117416320264126149
+  ok: true
+  text: 'Mehr Wahlmöglichkeiten im Alltag? Ein ehrlicher Überblick statt strenger
+    Spartipps schafft finanzielle Freiheit. 👉 https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #BudgetPlanen #FinanzielleFreiheit'
+  ref: '117416320264126149'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -642,4 +654,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-10T01:19:00.555914+02:00'
+updated_at: '2026-10-10T13:14:24.326665+02:00'

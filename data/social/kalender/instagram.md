@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 10.10.2026 01:19 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.10.2026 13:14 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -13,11 +13,11 @@
 ## Kommende Beiträge
 
 ### Sa, 10. Oktober 2026
-- **11:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
+- **18:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _mythos_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### So, 11. Oktober 2026
-- **11:45** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
+- **11:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _mythos_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 ### Mo, 12. Oktober 2026
 - **11:45** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _karussell_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
@@ -25,17 +25,17 @@
 - **11:45** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Mi, 14. Oktober 2026
-- **11:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
+- **11:45** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _karussell_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Do, 15. Oktober 2026
-- **11:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+- **11:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zahl_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 ### Fr, 16. Oktober 2026
-- **11:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _karussell_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-### Sa, 17. Oktober 2026
-- **11:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
+- **11:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _karussell_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
+### Sa, 17. Oktober 2026
+- **11:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### So, 18. Oktober 2026
 - **11:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
@@ -55,7 +55,7 @@
 - **11:45** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### Sa, 24. Oktober 2026
-- **11:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _takeaway_ · Launch  
+- **11:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 
 ## Zuletzt veröffentlicht

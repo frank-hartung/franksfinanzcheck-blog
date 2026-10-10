@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 10.10.2026 01:19 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.10.2026 13:14 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,25 +13,25 @@
 ## Kommende Beiträge
 
 ### Sa, 10. Oktober 2026
-- **09:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _zahl_ · Launch  
+- **16:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _zahl_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
+- **20:30** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
-- **16:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### So, 11. Oktober 2026
 - **09:15** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
-- **16:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
+- **16:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### Mo, 12. Oktober 2026
-- **09:15** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
-- **16:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
+- **09:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+- **16:15** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 ### Di, 13. Oktober 2026
-- **09:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-- **16:15** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _vergleich_ · Launch  
+- **09:15** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
+- **16:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### Mi, 14. Oktober 2026
 - **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
@@ -83,9 +83,9 @@
 - **16:15** ⏳ Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
 ### Sa, 24. Oktober 2026
-- **09:15** ⏳ Günstig durch den Winter: Heizungs-Check im Spätsommer — _vergleich_ · Launch  
+- **09:15** ⏳ Günstig durch den Winter: Heizungs-Check im Spätsommer — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
-- **16:15** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _frage_ · Launch  
+- **16:15** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
 
 ## Zuletzt veröffentlicht

@@ -6,26 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Pinterest
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-11@fr
- anksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261011T081500Z
-DTEND:20261011T083000Z
+UID:pinterest:2026-08-10-dsl-wechselbonus-sichern:vergleich:2026-10-10
+ @franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261010T191500Z
+DTEND:20261010T193000Z
 SUMMARY:Pinterest: DSL-Wechselbonus sichern: So sparst du beim Interne
- tvertrag (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
- ern/
+ tvertrag (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Pinterest\nArti
+ kel: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-s
+ ichern/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
  hern/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
- ntie-gas:nutzen:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261012T081500Z
-DTEND:20261012T083000Z
+ ntie-gas:nutzen:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261011T081500Z
+DTEND:20261011T083000Z
 SUMMARY:Pinterest: Sicher heizen: So schützt dich eine Gaspreisgaranti
  e (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -37,25 +37,25 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
- nbieterwechsel:nutzen:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261013T081500Z
-DTEND:20261013T083000Z
+ nbieterwechsel:zahl:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261012T081500Z
+DTEND:20261012T083000Z
 SUMMARY:Pinterest: Internet & DSL wechseln: Praxis-Tipps – Highspeed I
- nternet (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
- -praxis-tipps-fuer-den-anbieterwechsel/
+ nternet (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Pinterest\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-p
+ raxis-tipps-fuer-den-anbieterwechsel/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
  n-praxis-tipps-fuer-den-anbieterwechsel/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstig
- e-tarife-fuer-2026:zahl:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261014T081500Z
-DTEND:20261014T083000Z
+ e-tarife-fuer-2026:zahl:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261013T081500Z
+DTEND:20261013T083000Z
 SUMMARY:Pinterest: Preisgarantie Gas: So sicherst du günstige Tarife (
  zahl)
 DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Pinterest\nArtikel: 
@@ -67,23 +67,38 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto
- -ohne-gebuehren:zahl:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261015T081500Z
-DTEND:20261015T083000Z
+ -ohne-gebuehren:nutzen:2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261014T081500Z
+DTEND:20261014T083000Z
 SUMMARY:Pinterest: Kostenloses Girokonto: So findest du ein Konto ohne
-  Gebühren (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Pinterest\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-s
- o-findest-du-ein-konto-ohne-gebuehren/
+  Gebühren (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto
+ -so-findest-du-ein-konto-ohne-gebuehren/
 URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
  o-so-findest-du-ein-konto-ohne-gebuehren/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verm
+ eiden:vergleich:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261015T081500Z
+DTEND:20261015T083000Z
+SUMMARY:Pinterest: Gasrechnung senken: Fehler im Spätsommer vermeiden 
+ (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Pinterest\nArti
+ kel: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken
+ -fehler-im-spaetsommer-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
+ ehler-im-spaetsommer-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:pinterest:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inte
  rnet:takeaway:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
+DTSTAMP:20261010T111425Z
 DTSTART:20261016T081500Z
 DTEND:20261016T083000Z
 SUMMARY:Pinterest: DSL-Vergleich: So findest du den günstigsten Intern
@@ -96,56 +111,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verm
- eiden:vergleich:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
+UID:pinterest:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:n
+ utzen:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
 DTSTART:20261017T081500Z
 DTEND:20261017T083000Z
-SUMMARY:Pinterest: Gasrechnung senken: Fehler im Spätsommer vermeiden 
- (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Pinterest\nArti
- kel: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken
- -fehler-im-spaetsommer-vermeiden/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
- ehler-im-spaetsommer-vermeiden/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalis
- mus-tipps:takeaway:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261018T081500Z
-DTEND:20261018T083000Z
-SUMMARY:Pinterest: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzi
- cht (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Pinterest\nArtik
- el: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch
- -verzicht-clevere-frugalismus-tipps/
-URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
- verzicht-clevere-frugalismus-tipps/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresse
- r-finden:takeaway:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261019T081500Z
-DTEND:20261019T083000Z
-SUMMARY:Pinterest: Energiediebe stoppen: So kannst du Stromfresser fin
- den (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Pinterest\nArtik
- el: https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppe
- n-so-kannst-du-stromfresser-finden/
-URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
- -so-kannst-du-stromfresser-finden/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:n
- utzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261020T081500Z
-DTEND:20261020T083000Z
 SUMMARY:Pinterest: Haushaltsbuch führen: App\, Excel oder Stift im Ver
  gleich (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -156,41 +126,71 @@ URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:n
- utzen:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261021T081500Z
-DTEND:20261021T083000Z
-SUMMARY:Pinterest: Mietwagen ohne Kautionsfallen: So sparst du im Urla
- ub (nutzen)
+UID:pinterest:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresse
+ r-finden:nutzen:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261018T081500Z
+DTEND:20261018T083000Z
+SUMMARY:Pinterest: Energiediebe stoppen: So kannst du Stromfresser fin
+ den (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne
- -kaution-fallen-urlaub/
+ : https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-
+ so-kannst-du-stromfresser-finden/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
+ -so-kannst-du-stromfresser-finden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:pinterest:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:t
+ akeaway:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261019T081500Z
+DTEND:20261019T083000Z
+SUMMARY:Pinterest: Mietwagen ohne Kautionsfallen: So sparst du im Urla
+ ub (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Pinterest\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-oh
+ ne-kaution-fallen-urlaub/
 URL:https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohn
  e-kaution-fallen-urlaub/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-pre
- isspruengen:vergleich:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261022T081500Z
-DTEND:20261022T083000Z
-SUMMARY:Pinterest: Preisgarantie Gas: So schützt du dich vor Preissprü
- ngen (vergleich)
+UID:pinterest:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalis
+ mus-tipps:vergleich:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261020T081500Z
+DTEND:20261020T083000Z
+SUMMARY:Pinterest: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzi
+ cht (vergleich)
 DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Pinterest\nArti
- kel: https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-
- so-schuetzt-du-dich-vor-preisspruengen/
+ kel: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durc
+ h-verzicht-clevere-frugalismus-tipps/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
+ verzicht-clevere-frugalismus-tipps/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:pinterest:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-pre
+ isspruengen:takeaway:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261021T081500Z
+DTEND:20261021T083000Z
+SUMMARY:Pinterest: Preisgarantie Gas: So schützt du dich vor Preissprü
+ ngen (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Pinterest\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-s
+ o-schuetzt-du-dich-vor-preisspruengen/
 URL:https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so
  -schuetzt-du-dich-vor-preisspruengen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-26-dns-server-wechseln-schnelleres-sichereres-in
- ternet:nutzen:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261023T081500Z
-DTEND:20261023T083000Z
+ ternet:nutzen:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261022T081500Z
+DTEND:20261022T083000Z
 SUMMARY:Pinterest: DNS-Server wechseln: Schnelleres und sichereres Int
  ernet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -202,10 +202,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen
- -schnaeppchen:vergleich:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261024T081500Z
-DTEND:20261024T083000Z
+ -schnaeppchen:vergleich:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261023T081500Z
+DTEND:20261023T083000Z
 SUMMARY:Pinterest: September-Roadtrip: Clevere Wege zum Mietwagen-Schn
  äppchen (vergleich)
 DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Pinterest\nArti
@@ -213,6 +213,21 @@ DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Pinterest\nArti
  -clevere-wege-zum-mietwagen-schnaeppchen/
 URL:https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-c
  levere-wege-zum-mietwagen-schnaeppchen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:pinterest:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-e
+ cke:takeaway:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261024T081500Z
+DTEND:20261024T083000Z
+SUMMARY:Pinterest: WLAN verbessern: So bringst du stabilen Speed in je
+ de Ecke (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Pinterest\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-
+ bringst-du-speed-in-jede-ecke/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-b
+ ringst-du-speed-in-jede-ecke/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

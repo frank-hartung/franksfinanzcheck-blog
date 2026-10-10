@@ -8,9 +8,9 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:bluesky:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-somm
  er-schnaepp:zahl:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261010T061500Z
-DTEND:20261010T063000Z
+DTSTAMP:20261010T111425Z
+DTSTART:20261010T161500Z
+DTEND:20261010T163000Z
 SUMMARY:Bluesky: Last Minute Urlaub: – So schnappst du dir das Sommer‑
  Schnäpp (zahl)
 DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
@@ -22,58 +22,58 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsais
- on-richtig:takeaway:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261010T101500Z
-DTEND:20261010T103000Z
+ on-richtig:vergleich:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261011T061500Z
+DTEND:20261011T063000Z
 SUMMARY:Bluesky: Gasabschlag berechnen: So planst du die Heizsaison ri
- chtig (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen
- -so-planst-du-die-heizsaison-richtig/
+ chtig (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Bluesky\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
+ n-so-planst-du-die-heizsaison-richtig/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
  n-so-planst-du-die-heizsaison-richtig/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-d
- ie-feiertage:mythos:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261011T061500Z
-DTEND:20261011T063000Z
+ ie-feiertage:frage:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261011T101500Z
+DTEND:20261011T103000Z
 SUMMARY:Bluesky: Weihnachten Budget planen: Ohne Schulden durch die Fe
- iertage (mythos)
-DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-plan
- en-ohne-schulden-durch-die-feiertage/
+ iertage (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-plane
+ n-ohne-schulden-durch-die-feiertage/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
  lanen-ohne-schulden-durch-die-feiertage/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-ds
- l-anschluss:zahl:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261011T101500Z
-DTEND:20261011T103000Z
+ l-anschluss:frage:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261012T061500Z
+DTEND:20261012T063000Z
 SUMMARY:Bluesky: Preiswert surfen: So findest du den optimalen DSL‑Ans
- chluss (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
- tps://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-finde
- st-du-den-optimalen-dsl-anschluss/
+ chluss (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-find
+ est-du-den-optimalen-dsl-anschluss/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
  findest-du-den-optimalen-dsl-anschluss/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-
- vermeidest:frage:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261012T061500Z
-DTEND:20261012T063000Z
+ vermeidest:zitat:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261012T101500Z
+DTEND:20261012T103000Z
 SUMMARY:Bluesky: Büroausstattung steuerlich clever absetzen: So geht's
-  (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
+  (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
  ttps://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerl
  ich-clever-absetzen-so-vermeidest/
 URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
@@ -82,87 +82,87 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-ae
- ndert:takeaway:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261012T101500Z
-DTEND:20261012T103000Z
+ ndert:nutzen:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261013T061500Z
+DTEND:20261013T063000Z
 SUMMARY:Bluesky: Internet & DSL-Update: Was sich jetzt für dich ändert
-  (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-w
- as-sich-jetzt-fuer-dich-aendert/
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was
+ -sich-jetzt-fuer-dich-aendert/
 URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
  was-sich-jetzt-fuer-dich-aendert/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:bluesky:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:vergle
- ich:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261013T061500Z
-DTEND:20261013T063000Z
+UID:bluesky:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:zitat:
+ 2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261013T101500Z
+DTEND:20261013T103000Z
 SUMMARY:Bluesky: 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst
-  ordnen (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Bluesky\nArtike
- l: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
- finanzielle-freiheit/
+  ordnen (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-fina
+ nzielle-freiheit/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
  finanzielle-freiheit/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortve
- rlust:nutzen:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261013T101500Z
-DTEND:20261013T103000Z
+ rlust:zitat:2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261014T061500Z
+DTEND:20261014T063000Z
 SUMMARY:Bluesky: Campingurlaub planen: Budget für Platz\, Fahrt und Au
- srüstung (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clev
- er-sparen-ohne-komfortverlust/
+ srüstung (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-cleve
+ r-sparen-ohne-komfortverlust/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
  lever-sparen-ohne-komfortverlust/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:bluesky:2026-08-10-dsl-wechselbonus-sichern:zahl:2026-10-14@franks
- finanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261014T061500Z
-DTEND:20261014T063000Z
+UID:bluesky:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-14@fran
+ ksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261014T101500Z
+DTEND:20261014T103000Z
 SUMMARY:Bluesky: DSL-Wechselbonus sichern: So sparst du beim Internetv
- ertrag (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
- tps://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+ ertrag (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
  hern/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarant
- ie-gas:nutzen:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261014T101500Z
-DTEND:20261014T103000Z
+ ie-gas:frage:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261015T061500Z
+DTEND:20261015T063000Z
 SUMMARY:Bluesky: Sicher heizen: So schützt dich eine Gaspreisgarantie 
- (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuet
- zt-dich-eine-preisgarantie-gas/
+ (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetz
+ t-dich-eine-preisgarantie-gas/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
  uetzt-dich-eine-preisgarantie-gas/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anb
- ieterwechsel:nutzen:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261015T061500Z
-DTEND:20261015T063000Z
+ ieterwechsel:mythos:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261015T101500Z
+DTEND:20261015T103000Z
 SUMMARY:Bluesky: Internet & DSL wechseln: Praxis-Tipps – Highspeed Int
- ernet (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
+ ernet (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-p
  raxis-tipps-fuer-den-anbieterwechsel/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
@@ -171,58 +171,58 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-
- tarife-fuer-2026:vergleich:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261015T101500Z
-DTEND:20261015T103000Z
-SUMMARY:Bluesky: Preisgarantie Gas: So sicherst du günstige Tarife (ve
- rgleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Bluesky\nArtike
- l: https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
- -sicherst-du-dir-guenstige-tarife-fuer-2026/
+ tarife-fuer-2026:zahl:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261016T061500Z
+DTEND:20261016T063000Z
+SUMMARY:Bluesky: Preisgarantie Gas: So sicherst du günstige Tarife (za
+ hl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sich
+ erst-du-dir-guenstige-tarife-fuer-2026/
 URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
  -sicherst-du-dir-guenstige-tarife-fuer-2026/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-o
- hne-gebuehren:frage:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261016T061500Z
-DTEND:20261016T063000Z
+ hne-gebuehren:takeaway:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261016T101500Z
+DTEND:20261016T103000Z
 SUMMARY:Bluesky: Kostenloses Girokonto: So findest du ein Konto ohne G
- ebühren (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so
- -findest-du-ein-konto-ohne-gebuehren/
+ ebühren (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto
+ -so-findest-du-ein-konto-ohne-gebuehren/
 URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
  o-so-findest-du-ein-konto-ohne-gebuehren/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermei
- den:takeaway:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261016T101500Z
-DTEND:20261016T103000Z
-SUMMARY:Bluesky: Gasrechnung senken: Fehler im Spätsommer vermeiden (t
- akeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fe
- hler-im-spaetsommer-vermeiden/
+ den:zitat:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261017T061500Z
+DTEND:20261017T063000Z
+SUMMARY:Bluesky: Gasrechnung senken: Fehler im Spätsommer vermeiden (z
+ itat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehle
+ r-im-spaetsommer-vermeiden/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
  ehler-im-spaetsommer-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
- et:nutzen:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261017T061500Z
-DTEND:20261017T063000Z
+ et:mythos:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261017T101500Z
+DTEND:20261017T103000Z
 SUMMARY:Bluesky: DSL-Vergleich: So findest du den günstigsten Internet
- tarif (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
+ tarif (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findes
  t-du-guenstigeres-internet/
 URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
@@ -231,28 +231,28 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-
- finden:takeaway:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261017T101500Z
-DTEND:20261017T103000Z
+ finden:mythos:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261018T061500Z
+DTEND:20261018T063000Z
 SUMMARY:Bluesky: Energiediebe stoppen: So kannst du Stromfresser finde
- n (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-
- so-kannst-du-stromfresser-finden/
+ n (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so
+ -kannst-du-stromfresser-finden/
 URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
  -so-kannst-du-stromfresser-finden/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:bluesky:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:zit
- at:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261018T061500Z
-DTEND:20261018T063000Z
+UID:bluesky:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:fra
+ ge:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261018T101500Z
+DTEND:20261018T103000Z
 SUMMARY:Bluesky: Haushaltsbuch führen: App\, Excel oder Stift im Vergl
- eich (zitat)
-DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ eich (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
  ttps://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-ap
  p-excel-oder-papier/
 URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
@@ -261,10 +261,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nut
- zen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261018T101500Z
-DTEND:20261018T103000Z
+ zen:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261019T061500Z
+DTEND:20261019T063000Z
 SUMMARY:Bluesky: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
   (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
@@ -276,88 +276,88 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismu
- s-tipps:takeaway:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261019T061500Z
-DTEND:20261019T063000Z
+ s-tipps:frage:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261019T101500Z
+DTEND:20261019T103000Z
 SUMMARY:Bluesky: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzich
- t (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-v
- erzicht-clevere-frugalismus-tipps/
+ t (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verz
+ icht-clevere-frugalismus-tipps/
 URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
  verzicht-clevere-frugalismus-tipps/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preis
- spruengen:frage:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261019T101500Z
-DTEND:20261019T103000Z
+ spruengen:zahl:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261020T061500Z
+DTEND:20261020T063000Z
 SUMMARY:Bluesky: Preisgarantie Gas: So schützt du dich vor Preissprüng
- en (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-sch
- uetzt-du-dich-vor-preisspruengen/
+ en (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schu
+ etzt-du-dich-vor-preisspruengen/
 URL:https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so
  -schuetzt-du-dich-vor-preisspruengen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-26-dns-server-wechseln-schnelleres-sichereres-inte
- rnet:mythos:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261020T061500Z
-DTEND:20261020T063000Z
+ rnet:zitat:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261020T101500Z
+DTEND:20261020T103000Z
 SUMMARY:Bluesky: DNS-Server wechseln: Schnelleres und sichereres Inter
- net (mythos)
-DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-sch
- nelleres-sichereres-internet/
+ net (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schn
+ elleres-sichereres-internet/
 URL:https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-
  schnelleres-sichereres-internet/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-s
- chnaeppchen:zahl:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261020T101500Z
-DTEND:20261020T103000Z
+ chnaeppchen:zitat:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261021T061500Z
+DTEND:20261021T063000Z
 SUMMARY:Bluesky: September-Roadtrip: Clevere Wege zum Mietwagen-Schnäp
- pchen (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
- tps://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clever
- e-wege-zum-mietwagen-schnaeppchen/
+ pchen (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-cleve
+ re-wege-zum-mietwagen-schnaeppchen/
 URL:https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-c
  levere-wege-zum-mietwagen-schnaeppchen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-eck
- e:zahl:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261021T061500Z
-DTEND:20261021T063000Z
+ e:takeaway:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261021T101500Z
+DTEND:20261021T103000Z
 SUMMARY:Bluesky: WLAN verbessern: So bringst du stabilen Speed in jede
-  Ecke (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
- tps://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-brings
- t-du-speed-in-jede-ecke/
+  Ecke (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-br
+ ingst-du-speed-in-jede-ecke/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-b
  ringst-du-speed-in-jede-ecke/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahl
- en:zitat:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261021T101500Z
-DTEND:20261021T103000Z
+ en:frage:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261022T061500Z
+DTEND:20261022T063000Z
 SUMMARY:Bluesky: Kreditkarte vergleichen: Kostenlos und sicher zahlen 
- (zitat)
-DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Bluesky\nArtikel: h
  ttps://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-
  kostenlos-sicher-bezahlen/
 URL:https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleic
@@ -365,93 +365,78 @@ URL:https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleic
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:bluesky:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:ta
- keaway:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261022T061500Z
-DTEND:20261022T063000Z
+UID:bluesky:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:za
+ hl:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261022T101500Z
+DTEND:20261022T103000Z
 SUMMARY:Bluesky: Handytarif 2026 vergleichen: Günstige Tarife ab 4\,99
-  € (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleiche
- n-2026-guenstige-tarife/
+  € (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-20
+ 26-guenstige-tarife/
 URL:https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleich
  en-2026-guenstige-tarife/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten
- -konsum:nutzen:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261022T101500Z
-DTEND:20261022T103000Z
+ -konsum:vergleich:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261023T061500Z
+DTEND:20261023T063000Z
 SUMMARY:Bluesky: Kleine Beträge\, große Wirkung: Frugalismus für den E
- instieg (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-
- freiheit-durch-bewussten-konsum/
+ instieg (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Bluesky\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-me
+ hr-freiheit-durch-bewussten-konsum/
 URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-me
  hr-freiheit-durch-bewussten-konsum/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-
- vergleich:mythos:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261023T061500Z
-DTEND:20261023T063000Z
+ vergleich:zitat:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261023T101500Z
+DTEND:20261023T103000Z
 SUMMARY:Bluesky: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergle
- ich (mythos)
-DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-d
- ie-besten-zinssaetze-im-vergleich/
+ ich (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-di
+ e-besten-zinssaetze-im-vergleich/
 URL:https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-202
  6-die-besten-zinssaetze-im-vergleich/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltag
- sfehler:takeaway:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261023T101500Z
-DTEND:20261023T103000Z
+ sfehler:zahl:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
+DTSTART:20261024T061500Z
+DTEND:20261024T063000Z
 SUMMARY:Bluesky: Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfeh
- ler (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Bluesky\nArtikel
- : https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-
- vermeidest-du-teure-alltagsfehler/
+ ler (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Bluesky\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-verm
+ eidest-du-teure-alltagsfehler/
 URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so
  -vermeidest-du-teure-alltagsfehler/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spa
- etsommer:mythos:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
-DTSTART:20261024T061500Z
-DTEND:20261024T063000Z
-SUMMARY:Bluesky: Günstig durch den Winter: Heizungs-Check im Spätsomme
- r (mythos)
-DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Bluesky\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-wint
- er-heizungs-check-im-spaetsommer/
-URL:https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-w
- inter-heizungs-check-im-spaetsommer/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:bluesky:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-
- polster:vergleich:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261009T231901Z
+ etsommer:zitat:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261010T111425Z
 DTSTART:20261024T101500Z
 DTEND:20261024T103000Z
-SUMMARY:Bluesky: Notgroschen: Die Wahrheit über das finanzielle Polste
- r (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Bluesky\nArtike
- l: https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahr
- heit-ueber-das-finanzielle-polster/
-URL:https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahr
- heit-ueber-das-finanzielle-polster/
+SUMMARY:Bluesky: Günstig durch den Winter: Heizungs-Check im Spätsomme
+ r (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Bluesky\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winte
+ r-heizungs-check-im-spaetsommer/
+URL:https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-w
+ inter-heizungs-check-im-spaetsommer/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

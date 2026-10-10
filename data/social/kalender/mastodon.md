@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 10.10.2026 01:19 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.10.2026 13:14 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Sa, 10. Oktober 2026
-- **07:30** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 - **07:30** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### So, 11. Oktober 2026
@@ -26,6 +24,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
 - ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
 - ✅ 08.10.2026 14:05 · Internet & DSL-Update: Was sich jetzt für dich ändert → https://mastodon.social/@FranksFinanzcheck/117405198564655648
 - ✅ 06.10.2026 20:56 · Weihnachten Budget planen: Ohne Schulden durch die Feiertage → https://mastodon.social/@FranksFinanzcheck/117395489343468673
@@ -35,7 +34,6 @@
 - ✅ 04.10.2026 10:52 · WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? → https://mastodon.social/@FranksFinanzcheck/117381789225405577
 - ✅ 01.10.2026 13:40 · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung → https://mastodon.social/@FranksFinanzcheck/117365463246886384
 - ✅ 30.09.2026 13:13 · Gasrechnung prüfen: Fehler finden und Nachzahlungen → https://mastodon.social/@FranksFinanzcheck/117359692643267110
-- ✅ 29.09.2026 20:41 · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen → https://mastodon.social/@FranksFinanzcheck/117355793846755045
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
