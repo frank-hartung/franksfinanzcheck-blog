@@ -1,17 +1,49 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 7,
   "pool_size": 13,
-  "generated_at": "2026-10-10T10:06:35Z",
+  "generated_at": "2026-10-10T20:35:15Z",
   "candidates": [
+    {
+      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+      "ready": true,
+      "sha256": "bf3a2748158e8e2f289c6fd6443d41fabf3274dfae1a08d83b6f2da0d1c615a7",
+      "flesch": 63.0,
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+      "ready": true,
+      "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
+      "flesch": 61.7,
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
       "sha256": "f3412b02755bab2af0b4929001bf07a368654ee703cadca3fb430f620a48e668",
       "flesch": 61.1,
-      "score": 0.984,
+      "score": 0.9,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -25,9 +57,9 @@
       "ready": true,
       "sha256": "2eb4aaeeaba61d89ff1bbc62a4e338819959c9a4759a75796de70025cb568d72",
       "flesch": 62.5,
-      "score": 0.984,
+      "score": 0.9,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -41,97 +73,32 @@
       "ready": true,
       "sha256": "453160bfde9c704a7f2df745705ba843e7bb97ec5aebbf624d44c5eab236f767",
       "flesch": 61.0,
-      "score": 0.95,
+      "score": 0.89,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
-      "ready": true,
-      "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
-      "flesch": 64.4,
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
-      "ready": false,
-      "sha256": "10bcde7652f03ed4f2c775a6c7830248a37c886f80d1fc90ea10ef8cac05402d",
-      "flesch": 63.3,
-      "reason": "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
-      "details": [
-        "🛑 2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
-      "ready": false,
-      "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
-      "flesch": 61.7,
-      "reason": "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
-      "details": [
-        "🛑 2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.982,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-09-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": false,
-      "sha256": "44bd97bfc7a6bbe930d492988f322d39aa6f4babd55007762f80f6e17f478ee6",
-      "flesch": 60.2,
-      "reason": "Reserve-Qualitäts-Gate: RS2: nur 1 Frage-H2 von 10 H2 (Standard: ≥ 2)",
-      "details": [
-        "RS2: nur 1 Frage-H2 von 10 H2 (Standard: ≥ 2)",
-        "RS3: keine Faustregel markiert",
-        "RS5: 24 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ 1.200 € pro Jahr mehr auf dem Konto – ohne eine einzige Überstunde."
-      ],
-      "score": 0.954,
+      "sha256": "3208e4c29bc7241e31228ae0e49139ad802f3fde7252ff7311e40f305e76acf4",
+      "flesch": 54.3,
+      "reason": "Lesbarkeits-Gate: Flesch 54.3 < 60",
+      "score": 0.854,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.8
       }
     },
     {
@@ -143,9 +110,9 @@
       "details": [
         "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden."
       ],
-      "score": 0.88,
+      "score": 0.82,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.9,
@@ -156,43 +123,35 @@
     },
     {
       "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
-      "ready": false,
-      "sha256": "6a9ea7a59a3690d2cda5091f25703e4d2447414c91492a274043a329ab41349c",
-      "flesch": 61.9,
-      "reason": "Reserve-Qualitäts-Gate: RS3: keine Faustregel markiert",
-      "details": [
-        "RS3: keine Faustregel markiert",
-        "RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wusstest du, dass du bis zu 25 % deiner Heizkosten mit einem einzigen Gadget sparst?"
-      ],
-      "score": 0.96,
+      "ready": true,
+      "sha256": "ccbea17d34524846d71387e53e06c8d216adff33d83ed65d0af4c6ece6dded6f",
+      "flesch": 60.0,
+      "score": 0.85,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.75
       }
     },
     {
       "slug": "2026-10-09-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
       "ready": false,
-      "sha256": "378c2c60c3ee8d0f2373c2f35d71d7a0d67ed769f5d8b86e667e74532251e394",
-      "flesch": 60.7,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 30 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Haushaltskosten im Check: Wusstest du, dass deutsche Haushalte jährlich über 1.000 € durch veraltete Verträge verschenken?",
-      "details": [
-        "RS5: 30 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Haushaltskosten im Check: Wusstest du, dass deutsche Haushalte jährlich über 1.000 € durch veraltete Verträge verschenken?"
-      ],
-      "score": 0.98,
+      "sha256": "777cf329fc315f96eacf12c643aa95b2b1f871abbc37c09911a5faea956e7951",
+      "flesch": 60.0,
+      "reason": "quality-score 0.848 < 0.85 (schwach: spelling 0.50, readability 0.75, typography 0.98)",
+      "score": 0.848,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.96,
+        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.75
       }
     },
     {
@@ -204,9 +163,9 @@
       "details": [
         "RS5: 36 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senke deine Stromrechnung um bis zu 30 % mit nur wenigen Handgriffen."
       ],
-      "score": 0.924,
+      "score": 0.86,
       "parts": {
-        "spelling": 0.8200000000000001,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -224,15 +183,31 @@
       "details": [
         "RS5: 55 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
       ],
-      "score": 0.888,
+      "score": 0.828,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.88,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.7
+      }
+    },
+    {
+      "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
+      "ready": true,
+      "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
+      "flesch": 64.4,
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     },
     {
@@ -244,9 +219,9 @@
       "details": [
         "RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?"
       ],
-      "score": 0.944,
+      "score": 0.86,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -254,57 +229,6 @@
         "affiliate": 1.0,
         "readability": 0.8
       }
-    }
-  ],
-  "geschont": [
-    {
-      "slug": "2026-10-09-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
-    },
-    {
-      "slug": "2026-10-09-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
-    },
-    {
-      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
-    },
-    {
-      "slug": "2026-10-09-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
-    },
-    {
-      "slug": "2026-10-09-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
-    },
-    {
-      "slug": "2026-10-09-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
-    },
-    {
-      "slug": "2026-10-09-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "klasse": "unbekannt",
-      "hits": 2,
-      "heiler": [],
-      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
     }
   ]
 }
