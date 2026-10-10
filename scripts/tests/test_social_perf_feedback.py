@@ -46,6 +46,11 @@ class TestScoring(unittest.TestCase):
         self.assertGreater(agg["gut"]["score"], 1.0)
         self.assertLess(agg["schlecht"]["score"], 1.0)
 
+    def test_nur_nullwerte_bleiben_trotz_unterschiedlicher_stichproben_neutral(self):
+        agg = feedback._aggregate({"a": [0.0] * 5, "b": [0.0] * 3})
+        self.assertEqual(agg["a"], {"score": 1.0, "samples": 5})
+        self.assertEqual(agg["b"], {"score": 1.0, "samples": 3})
+
     def test_leere_eingabe_liefert_leeres_ergebnis(self):
         self.assertEqual(feedback._aggregate({}), {})
 
@@ -76,6 +81,24 @@ class TestBuildPerformance(unittest.TestCase):
         perf = feedback.build_performance(history, cache, {"s1": "strom-sparen"})
         self.assertEqual(perf["channels"]["mastodon"]["angles"]["nutzen"]["score"], 1.0)
 
+    def test_null_interaktionen_erzeugen_keine_sieger_oder_cooldown_strafe(self):
+        history = self._history(8)
+        for i, entry in enumerate(history):
+            entry["angle"] = "nutzen" if i < 5 else "vergleich"
+            entry["slug"] = "s1" if i < 5 else "s2"
+        cache = {"mastodon": {str(i): {"favourites": 0, "reblogs": 0, "replies": 0}
+                              for i in range(8)}}
+        perf = feedback.build_performance(history, cache, {"s1": "strom", "s2": "dsl"})
+        ch = perf["channels"]["mastodon"]
+        self.assertFalse(ch["has_signal"])
+        self.assertEqual(ch["top"], [])
+        self.assertEqual(ch["flop"], [])
+        for item in ch["angles"].values():
+            self.assertEqual(item["score"], 1.0)
+        for item in ch["pillars"].values():
+            self.assertEqual(item["cooldown_factor"], 1.0)
+        self.assertIn("Keine gemessenen Interaktionen", feedback.render_report(perf, []))
+
     def test_ab_mindeststichprobe_wirkt_der_score(self):
         history = self._history(5)
         cache = {"mastodon": {str(i): {"favourites": 50, "reblogs": 20, "replies": 10}
@@ -84,6 +107,24 @@ class TestBuildPerformance(unittest.TestCase):
         # Einziger Winkel/Pillar im Datensatz -> Score == Durchschnitt == 1.0,
         # aber mit echter Stichprobe (nicht die Neutral-Klausel).
         self.assertEqual(perf["channels"]["mastodon"]["angles"]["nutzen"]["samples"], 5)
+
+    def test_audit_history_meldet_keinen_sieger_ohne_signal(self):
+        import json
+        import tempfile
+        from unittest.mock import patch
+        history = self._history(5)
+        cache = {"mastodon": {str(i): {"favourites": 0, "reblogs": 0, "replies": 0}
+                              for i in range(5)}}
+        perf = feedback.build_performance(history, cache, {"s1": "strom"})
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "history.jsonl")
+            with patch.object(feedback, "HISTORY_FILE", path):
+                feedback._append_history(perf)
+            with open(path) as fh:
+                row = json.loads(fh.read())["mastodon"]
+        self.assertEqual(row["top_angle"], "")
+        self.assertEqual(row["top_pillar"], "")
+        self.assertEqual(row["samples"], 5)
 
     def test_ohne_cache_treffer_keine_kanaldaten(self):
         history = self._history(5)
@@ -108,6 +149,18 @@ class TestPlannerRueckwaertskompatibel(unittest.TestCase):
         a2 = planner.pick_angle({"angles": ["nutzen", "zahl", "mythos"]}, "mastodon",
                                 "slug-x", state, set(), day, 0, angle_weights=None)
         self.assertEqual(a1, a2)
+
+    def test_gleiche_gewichte_bleiben_hash_rotation_statt_alphabetischem_sieger(self):
+        cfg = {"angles": ["nutzen", "zahl", "mythos"]}
+        for weights in ({"nutzen": 1.0, "zahl": 1.0, "mythos": 1.0},
+                        {"nutzen": 0.5, "zahl": 0.5, "mythos": 0.5},
+                        {"nutzen": 1.0}):
+            for i in range(100):
+                with self.subTest(weights=weights, slug=i):
+                    args = (cfg, "mastodon", f"slug-{i}", {"history": []},
+                            set(), date(2026, 10, 10), i)
+                    self.assertEqual(planner.pick_angle(*args),
+                                     planner.pick_angle(*args, angle_weights=weights))
 
     def test_cooldown_ohne_performance_unveraendert(self):
         self.assertEqual(feedback_cooldown_days_proxy(75, "strom-sparen", None), 75)

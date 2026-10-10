@@ -66,6 +66,7 @@ Damit dieser Ratgeber für alle Leser dauerhaft kostenfrei bleibt, nimmt er an P
 Hast du eine Frage zu einem Ratgeber, einen Themenwunsch oder Feedback zu einer Berechnung? Schreib mir gerne direkt:
 
 📧 **E-Mail:** kontakt@franksfinanzcheck.de<br>
+🐘 **Mastodon:** <a href="https://mastodon.social/@FranksFinanzcheck" rel="me noopener noreferrer" target="_blank">Fragen und Fixkosten-Tipps im Fediverse</a><br>
 📌 **Pinterest:** [FranksFinanzcheck auf Pinterest](https://www.pinterest.de/franksfinanzcheck/)<br>
 📚 **Redaktionsstandards:** [So arbeiten wir (Methodik & Recherche)](/methodik/)<br>
 ⚖️ **Rechtliches:** [Impressum](/impressum/) · [Datenschutzerklärung](/datenschutz/)

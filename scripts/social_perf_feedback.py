@@ -263,7 +263,11 @@ def _aggregate(buckets: dict) -> dict:
     if not all_scores:
         return {}
     global_avg = sum(all_scores) / len(all_scores)
-    global_avg = global_avg or 1.0  # Division durch 0 vermeiden, wenn alles 0 ist
+    if global_avg == 0:
+        # Ohne Interaktionen fehlt ein relatives Erfolgssignal. Unterschiedliche
+        # Stichprobengrößen dürfen keine künstlichen Gewinner/Flops erzeugen.
+        return {key: {"score": 1.0, "samples": len(scores)}
+                for key, scores in buckets.items()}
     out = {}
     for key, scores in buckets.items():
         n = len(scores)
@@ -341,8 +345,10 @@ def build_performance(history: list[dict], cache: dict, slug_pillar: dict,
             "angles": {a: {"score": angle_weights[a], "samples": angle_agg[a]["samples"]}
                       for a in angle_agg},
             "pillars": pillar_weights,
-            "top": posts[:5],
-            "flop": list(reversed(posts[-5:])) if len(posts) > 5 else [],
+            "has_signal": any(p["raw"] > 0 for p in posts),
+            "top": posts[:5] if any(p["raw"] > 0 for p in posts) else [],
+            "flop": (list(reversed(posts[-5:]))
+                     if len(posts) > 5 and any(p["raw"] > 0 for p in posts) else []),
         }
 
     return {
@@ -379,6 +385,10 @@ def render_report(perf: dict, all_channel_ids: list[str]) -> str:
             lines.append("")
             continue
         lines.append(f"**{data['samples']} gemessene Posts** in diesem Fenster.")
+        if data.get("has_signal") is False:
+            lines.append("_Keine gemessenen Interaktionen: Gewichte und Cooldowns bleiben "
+                         "neutral. Keine belastbaren Gewinner/Verlierer; "
+                         "diese Kennzahlen sind keine Impressions- oder Reichweitenmessung._")
         lines.append("")
         if data.get("angles"):
             lines.append("| Winkel | Score | Stichprobe |")
@@ -405,9 +415,9 @@ def render_report(perf: dict, all_channel_ids: list[str]) -> str:
     lines += [
         "## 🎯 Was die Engine daraus macht",
         "",
-        "1. **Winkel-Bandit (80/20):** Der Planer wählt den Sieger-Winkel in 80 % "
+        "1. **Winkel-Bandit (80/20):** Bei unterschiedlichen Gewichten wählt der Planer den Sieger-Winkel in 80 % "
         "der Fälle, probiert in 20 % bewusst einen anderen – damit lernt er "
-        "weiter dazu, statt sich festzufahren.",
+        "weiter dazu, statt sich festzufahren. Bei gleichen Gewichten bleibt die Hash-Rotation erhalten.",
         "2. **Cooldown nach Erfolg:** Themenwelten mit überdurchschnittlichem "
         "Score kommen bis zu 40 % früher wieder dran (Evergreen-Recycling); "
         "Flops bis zu 40 % später.",
@@ -427,6 +437,8 @@ def _append_history(perf: dict) -> None:
         pillars = data.get("pillars") or {"": {"score": 0}}
         top_angle = max(angles.items(), key=lambda kv: kv[1]["score"], default=("", {}))[0]
         top_pillar = max(pillars.items(), key=lambda kv: kv[1]["score"], default=("", {}))[0]
+        if data.get("has_signal") is False:
+            top_angle = top_pillar = ""
         rec[cid] = {"samples": data.get("samples", 0), "top_angle": top_angle,
                    "top_pillar": top_pillar}
     os.makedirs(os.path.dirname(HISTORY_FILE), exist_ok=True)
@@ -543,6 +555,10 @@ def _selftest() -> int:
         failures.append(f"_append_history crasht bei echten Kanaldaten: {exc}")
     finally:
         HISTORY_FILE = real_history_file
+
+    neutral = _aggregate({"a": [0.0] * 5, "b": [0.0] * 3})
+    if any(d["score"] != 1.0 for d in neutral.values()):
+        failures.append("Null-Engagement erzeugt künstliche Erfolgsgewichte")
 
     if failures:
         print("❌ SOCIAL-PERF-FEEDBACK-SELFTEST FEHLGESCHLAGEN:")
