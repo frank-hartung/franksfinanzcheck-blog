@@ -15,10 +15,23 @@ existing ``bot_watchdog.py`` and ``alert_router.py`` SSOTs; it never closes an
 issue merely because one producer believes it is healthy. Other machine-owned
 findings keep the ticket open or update it.
 
+The same applies to the live site. "Newest article not live" (issue #676)
+was reported as machine-healable, yet nothing healed it: the watchdog wrote
+the ticket and the next scheduled run measured the same 404 again. Since the
+repair for #676 the broker also closes that loop -- but only when a dispatch
+can actually help. If the deploy chain itself is blocked (a step aborted the
+``deploy`` job before the Pages artifact was uploaded), re-triggering the
+catch-up would fail identically; the honest answer is then the name of the
+blocking step, not another red run.
+
 Usage (GitHub Actions):
     python3 scripts/watchdog_recovery.py --reserve
+    python3 scripts/watchdog_recovery.py --live-site
     python3 scripts/watchdog_recovery.py --reconcile
     python3 scripts/watchdog_recovery.py --selftest
+
+Exit codes: 0 = geheilt/nicht nötig · 2 = Umgebung fehlt (gh/Token) ·
+3 = nicht durch Dispatch heilbar (Auslieferung blockiert).
 """
 from __future__ import annotations
 
@@ -31,6 +44,8 @@ import sys
 from pathlib import Path
 
 WORKFLOW = "content-reserve.yml"
+DEPLOY_CATCHUP_WORKFLOW = "deploy-catchup.yml"
+DEPLOY_WORKFLOW = "deploy.yml"
 REF = "main"
 # Der Reserve-Workflow unterscheidet seinen regulären Nachtlauf bewusst von
 # einer vom Watchdog ausgelösten Reparatur. Nur letztere führt nach dem harten
@@ -92,6 +107,94 @@ def trigger_reserve() -> int:
     return 0
 
 
+def deploy_in_flight() -> bool:
+    """Return whether a deploy or catch-up run is already active.
+
+    Both workflows share the ``pages-deploy`` concurrency group, so a second
+    dispatch would only be queued (or displace a waiting run, issue #218).
+    """
+    active = {"queued", "in_progress", "waiting", "requested"}
+    for workflow in (DEPLOY_WORKFLOW, DEPLOY_CATCHUP_WORKFLOW):
+        result = _run([
+            "gh", "run", "list", "--workflow", workflow, "--branch", REF,
+            "--limit", "10", "--json", "status",
+        ])
+        if result.returncode != 0:
+            raise RuntimeError(result.stderr.strip() or f"gh run list {workflow} fehlgeschlagen")
+        try:
+            runs = json.loads(result.stdout or "[]")
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"gh run list {workflow} lieferte ungültiges JSON: {exc}") from exc
+        for row in runs:
+            if isinstance(row, dict) and str(row.get("status", "")).lower() in active:
+                return True
+    return False
+
+
+def deploy_chain_blocked() -> tuple[bool, str]:
+    """Ask the watchdog SSOT whether the deploy chain is blocked.
+
+    Returns ``(blocked, evidence)``. Anything the watchdog cannot decide
+    (offline, no completed run) is reported as *not* blocked: a recovery
+    dispatch is cheap and idempotent, while a wrong "blocked" verdict would
+    silently skip the only repair path.
+    """
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import bot_watchdog
+    except Exception as exc:  # pragma: no cover - defensiv
+        print(f"::warning::Watchdog-Klassifikation nicht verfügbar ({exc}); "
+              f"Catchup wird ausgelöst")
+        return False, "Klassifikation nicht verfügbar"
+    try:
+        lage, schritt, beleg = bot_watchdog.deploy_blockade()
+    except Exception as exc:  # pragma: no cover - defensiv
+        print(f"::warning::Deploy-Kette nicht messbar ({exc}); Catchup wird ausgelöst")
+        return False, f"nicht messbar: {exc}"
+    if lage == "blockiert":
+        return True, f"Schritt „{schritt}“ – {beleg}"
+    return False, beleg
+
+
+def trigger_deploy_catchup() -> int:
+    """Heal a missing live article by dispatching the deploy catch-up.
+
+    Order matters (lesson from #661): first check whether a dispatch can heal
+    at all, then avoid duplicate runs, then dispatch.
+    """
+    if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
+        print("::warning::Keine GitHub-Authentifizierung – Deploy-Catchup nicht ausgelöst")
+        return 2
+    if shutil.which("gh") is None:
+        print("::warning::gh CLI fehlt – Deploy-Catchup nicht ausgelöst")
+        return 2
+
+    blocked, evidence = deploy_chain_blocked()
+    if blocked:
+        # Ein erneuter Dispatch würde exakt denselben Schritt treffen.
+        print(f"::error::Auslieferung blockiert: {evidence}")
+        print("🛑 Deploy-Catchup NICHT ausgelöst – er würde am selben Schritt "
+              "scheitern. Der blockierende Schritt in deploy.yml muss zuerst "
+              "weg (Dauerheilung #676: erst liefern, dann siegeln).")
+        return 3
+
+    try:
+        if deploy_in_flight():
+            print("✅ Deploy oder Catchup läuft bereits; kein Doppel-Dispatch.")
+            return 0
+    except RuntimeError as exc:
+        print(f"::warning::{exc}; starte einmalig neu")
+
+    result = _run(["gh", "workflow", "run", DEPLOY_CATCHUP_WORKFLOW, "--ref", REF])
+    if result.returncode:
+        print(f"::warning::Deploy-Catchup konnte nicht gestartet werden: "
+              f"{result.stderr.strip() or result.stdout.strip()}")
+        return result.returncode
+    print("🚑 Deploy-Catchup ausgelöst – der fehlende Artikel wird nachgeliefert "
+          "(Nachmessung im selben Watchdog-Lauf).")
+    return 0
+
+
 def reconcile_after_reserve() -> int:
     """Re-measure and route after a *successful* reserve end gate.
 
@@ -141,6 +244,14 @@ def selftest() -> int:
     errors = []
     if not WORKFLOW.endswith(".yml"):
         errors.append("workflow muss YAML sein")
+    if not DEPLOY_CATCHUP_WORKFLOW.endswith(".yml"):
+        errors.append("deploy-catchup muss YAML sein")
+    if DEPLOY_WORKFLOW != "deploy.yml":
+        errors.append("Deploy-Kette muss über deploy.yml gemessen werden")
+    if not (ROOT / ".github" / "workflows" / DEPLOY_CATCHUP_WORKFLOW).is_file():
+        errors.append("deploy-catchup.yml fehlt – der Selbstheilungsweg wäre tot")
+    if not callable(globals().get("deploy_chain_blocked")):
+        errors.append("Blockade-Prüfung fehlt")
     if REF != "main":
         errors.append("Reparatur darf nur main bearbeiten")
     if RECOVERY_INPUT != "watchdog_recovery":
@@ -158,6 +269,7 @@ def selftest() -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--reserve", action="store_true")
+    parser.add_argument("--live-site", action="store_true")
     parser.add_argument("--reconcile", action="store_true")
     parser.add_argument("--selftest", action="store_true")
     args = parser.parse_args(argv)
@@ -165,9 +277,11 @@ def main(argv: list[str] | None = None) -> int:
         return selftest()
     if args.reserve:
         return trigger_reserve()
+    if args.live_site:
+        return trigger_deploy_catchup()
     if args.reconcile:
         return reconcile_after_reserve()
-    parser.error("--reserve, --reconcile oder --selftest erforderlich")
+    parser.error("--reserve, --live-site, --reconcile oder --selftest erforderlich")
     return 2
 
 

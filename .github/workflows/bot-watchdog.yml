@@ -209,12 +209,40 @@ jobs:
             scripts/git_sync.sh "chore(pinterest): Report nachgezogen (#462)" \
             PINTEREST-REPORT.md content/posts static/robots.txt
 
+      # ------------------------------------------------------------
+      #  SELBSTHEILUNG #676 (10.10.2026) – „Neuester Artikel nicht live"
+      # ------------------------------------------------------------
+      #  Dieser Befund trug seit jeher den Besitzer `auto` („eine Maschine
+      #  kann ihn heilen"), geheilt hat ihn trotzdem niemand: Der Watchdog
+      #  schrieb das Ticket, der nächste Lauf maß dieselbe 404. Der
+      #  nächste Schritt im Ticket war eine Arbeitsanweisung an einen
+      #  Menschen („Deploy prüfen, ggf. Deploy-Catchup triggern").
+      #
+      #  Ab hier löst der Watchdog den Catchup SELBST aus – und zwar in
+      #  derselben Reihenfolge wie die Reserve-Heilung (#661): erst
+      #  prüfen, ob ein Dispatch überhaupt heilen kann (bei blockierter
+      #  Auslieferung würde er am selben Schritt scheitern), dann
+      #  Doppel-Dispatch vermeiden, dann auslösen. Der Schritt darf den
+      #  Melder nie röten (continue-on-error); die Nachmessung unten
+      #  entscheidet, ob der Befund wirklich noch offen ist.
+      - name: Deploy-Catchup bei nicht live-gegangenem Artikel selbst auslösen
+        if: ${{ contains(env.CHECK3, 'FAIL') || contains(env.CHECK3B, 'FAIL') }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/watchdog_recovery.py --selftest
+          set +e
+          python3 scripts/watchdog_recovery.py --live-site
+          echo "live_site_recovery_exit=$?" >> "$GITHUB_STEP_SUMMARY"
+          set -e
+
       # Nach der Selbstheilung wird NEU gemessen – sonst meldet das Routing
       # einen Zustand, den dieser Lauf bereits repariert hat (ein Ticket für
       # ein gelöstes Problem ist derselbe Vertrauensverlust wie ein
       # übersehener Fehler).
       - name: Nachmessung (geheilte Befunde dürfen kein Ticket erzeugen)
-        if: ${{ contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        if: ${{ contains(env.CHECK3, 'FAIL') || contains(env.CHECK3B, 'FAIL') || contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}

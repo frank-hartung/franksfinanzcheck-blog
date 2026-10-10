@@ -316,6 +316,36 @@ jobs:
     # Tonspur-Budget + Build + Deploy) und geben die Gruppe im Stoerfall
     # trotzdem schnell wieder frei.
     timeout-minutes: 150
+    # ============================================================
+    #  AUSLIEFERUNG VOR SIEGEL (Dauerheilung #676, 10.10.2026)
+    #  ------------------------------------------------------------
+    #  Befund: Zwischen 02:12 und 17:43 UTC am 09.10.2026 scheiterte der
+    #  `deploy`-Job 20× in Folge (plus ein verdrängter Lauf) am Schritt
+    #  „Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)“.
+    #  Weil die Scorecard VOR der Auslieferung steht, sprangen die Schritte
+    #  50–60 – inkl. „Artefakt für offizielles Pages-Deployment hochladen“ –
+    #  und damit der Job `pages-deployment` komplett. Öffentlich ging vom
+    #  08.10. 22:35 bis zum 09.10. 18:13 UTC nichts raus (19 h 38 min); der
+    #  um 14:02 UTC veröffentlichte Artikel lieferte 4 h 11 min HTTP 404
+    #  (Ticket #676, „Neuester Artikel nicht live“).
+    #
+    #  Die Scorecard ist ein BEWEISLAUF ohne Heilung. Ihr Exit-Vertrag
+    #  trennt zwei grundverschiedene Dinge:
+    #    · Exit 1 = heutige Kandidaten fachlich BLOCKIERT  → echter
+    #      Inhaltsbefund, die Auslieferung MUSS stehen bleiben.
+    #    · Exit 2 = WERKZEUGFEHLER                          → die Messung
+    #      selbst ist kaputt. Das ist kein Inhaltsbefund – und darf die
+    #      öffentliche Auslieferung nie als Geisel nehmen.
+    #  Deshalb wird der Werkzeugfehler hier als Job-Output nach außen
+    #  gegeben und der Lauf erst NACH der Auslieferung rot (Job
+    #  `release-seal`). Fail-closed bleibt erhalten: nichts wird
+    #  verschluckt, das zentrale Fehler-Alerting meldet weiterhin. Nur
+    #  die Reihenfolge stimmt jetzt: erst liefern, dann siegeln.
+    # ============================================================
+    outputs:
+      artefakt_ok: ${{ steps.artefakt.outputs.artefakt_ok }}
+      scorecard_exit: ${{ steps.scorecard.outputs.exit_code }}
+      scorecard_werkzeugfehler: ${{ steps.scorecard.outputs.werkzeugfehler }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
@@ -732,10 +762,48 @@ jobs:
       # Dimensionen + Deploy-Commit) – der Nachweis, dass die veröffentlichte
       # Version wirklich die geprüfte ist. Exit-Vertrag: 0 = ok ·
       # 1 = heutige Kandidaten blockiert · 2 = Werkzeugfehler (fail-closed).
-      # Kein || true / continue-on-error: Scheingrün geht nicht live.
+      #
+      # DAUERHEILUNG #676 (10.10.2026) – „Auslieferung vor Siegel":
+      # Bis hierher galt pauschal „kein continue-on-error". Für Exit 1 ist
+      # das richtig, für Exit 2 war es fatal: Als die Scorecard am
+      # 09.10.2026 wegen einer eigenen, vom Publish-Gate abweichenden
+      # Redundanz-Messung 20× in Folge rot lief (02:12–17:43 UTC), sprangen
+      # die Schritte 50–60 samt „Artefakt für offizielles Pages-Deployment
+      # hochladen" – 19 h 38 min ging öffentlich nichts raus, und der um
+      # 14:02 UTC veröffentlichte Artikel blieb 4 h 11 min 404 (#676). Ein kaputtes
+      # Messwerkzeug ist aber kein Inhaltsbefund. Deshalb wird der Exit-Code
+      # jetzt AUSGEWERTET statt nur durchgereicht:
+      #   · 0 → Siegel steht, weiter.
+      #   · 1 → echter Inhaltsbefund: harter Stopp, nichts geht live
+      #         (unverändert fail-closed).
+      #   · 2 und jeder andere → WERKZEUGFEHLER: Die Auslieferung läuft
+      #         weiter, der Lauf wird NACH der Veröffentlichung im Job
+      #         `release-seal` rot. Der Befund bleibt laut und sichtbar –
+      #         er nimmt nur nicht mehr die Live-Site als Geisel.
       # Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md
       - name: Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)
-        run: python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
+        id: scorecard
+        run: |
+          set +e
+          python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          case "$code" in
+            0)
+              echo "✅ Release-Scorecard: Live-Bestand versiegelt."
+              echo "werkzeugfehler=false" >> "$GITHUB_OUTPUT"
+              ;;
+            1)
+              echo "🛑 Release-Scorecard blockiert die heutigen Kandidaten – nichts geht live (fail-closed)."
+              echo "werkzeugfehler=false" >> "$GITHUB_OUTPUT"
+              exit 1
+              ;;
+            *)
+              echo "::error::Release-Scorecard meldet WERKZEUGFEHLER (Exit $code). Die Auslieferung läuft bewusst weiter; der Lauf wird nach der Veröffentlichung rot (Job release-seal, Dauerheilung #676)."
+              echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
 
       # Scorecard-Artefakte sichern (Report + Siegel-Zustand + Historie).
       # Alle drei Pfade sind deploy-irrelevant (STATE_ONLY im Deploy-Gate):
@@ -1024,6 +1092,23 @@ jobs:
         with:
           path: ./public
 
+      # ------------------------------------------------------------
+      # AUSLIEFERUNGS-BELEG (Dauerheilung #676, 10.10.2026)
+      # ------------------------------------------------------------
+      # Dieser Schritt läuft NUR, wenn das Artefakt wirklich hochgeladen
+      # wurde – er ist damit der maschinenlesbare Beweis „die
+      # Veröffentlichung ist raus". Der Job `release-seal` wertet ihn aus:
+      # Fehlt der Beleg, obwohl das Deploy-Gate einen Deploy verlangt hat,
+      # ist der Lauf rot, OHNE dass dafür ein Inhalts-Gate die Site
+      # blockieren musste. So wird ein stiller Auslieferungsausfall
+      # (Klasse #537/#676) zum eigenen, benannten Befund.
+      # ------------------------------------------------------------
+      - name: Auslieferungs-Artefakt bestätigen (Beleg für das Siegel)
+        id: artefakt
+        run: |
+          echo "artefakt_ok=true" >> "$GITHUB_OUTPUT"
+          echo "✅ Auslieferungs-Artefakt bestätigt – Veröffentlichung ist unterwegs."
+
   # ============================================================
   #  OFFIZIELLES PAGES-DEPLOYMENT (Premium-Fix 03.10.2026, Issue #537)
   #  ------------------------------------------------------------
@@ -1058,3 +1143,92 @@ jobs:
       - name: Deployment auslösen
         id: deployment
         uses: actions/deploy-pages@v5
+
+  # ============================================================
+  #  AUSLIEFERUNGS-SIEGEL (Dauerheilung #676, 10.10.2026)
+  #  ------------------------------------------------------------
+  #  Befund #676: Ein MESS-Schritt (Release-Scorecard) stand vor der
+  #  Auslieferung und nahm sie 19 h 38 min lang als Geisel – 20 rote
+  #  Läufe in Folge, kein einziger Artikel ging live, der neueste Artikel
+  #  blieb 404.
+  #
+  #  Dieser Job dreht die Reihenfolge um, OHNE das Fail-closed-Prinzip
+  #  aufzugeben:
+  #    · Er läuft NACH `pages-deployment` und mit `if: always()`, also
+  #      auch dann, wenn ein früherer Job rot war.
+  #    · Er meldet einen Scorecard-WERKZEUGFEHLER rot – der Lauf bleibt
+  #      damit sichtbar fehlerhaft und das zentrale Fehler-Alerting
+  #      (`alert-on-failure.yml`) nennt Schritt und Job.
+  #    · Er prüft zusätzlich den Auslieferungs-Beleg: War ein Deploy
+  #      verlangt, aber kein Artefakt bestätigt, ist das ein eigener
+  #      Befund („Auslieferung ausgeblieben"), kein stilles Grün.
+  #  Ein Inhaltsbefund (Scorecard Exit 1) erreicht diesen Job gar nicht:
+  #  Dort bricht der `deploy`-Job vorher hart ab, es wird kein Artefakt
+  #  hochgeladen und `pages-deployment` liefert nichts aus.
+  # ============================================================
+  release-seal:
+    name: Auslieferungs-Siegel (Beweis nach der Veröffentlichung)
+    needs: [deploy-gate, deploy, pages-deployment]
+    if: always() && needs.deploy-gate.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Siegel auswerten (Auslieferung ist zu diesem Punkt bereits gelaufen)
+        env:
+          DEPLOY_ERGEBNIS: ${{ needs.deploy.result }}
+          PAGES_ERGEBNIS: ${{ needs.pages-deployment.result }}
+          ARTEFAKT_OK: ${{ needs.deploy.outputs.artefakt_ok }}
+          SCORECARD_EXIT: ${{ needs.deploy.outputs.scorecard_exit }}
+          SCORECARD_WERKZEUGFEHLER: ${{ needs.deploy.outputs.scorecard_werkzeugfehler }}
+        run: |
+          set -uo pipefail
+          echo "## 🧾 Auslieferungs-Siegel (#676)" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Prüfpunkt | Wert |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| --- | --- |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| deploy-Job | ${DEPLOY_ERGEBNIS:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| pages-deployment | ${PAGES_ERGEBNIS:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Auslieferungs-Artefakt | ${ARTEFAKT_OK:-nicht bestätigt} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Release-Scorecard Exit | ${SCORECARD_EXIT:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          # Verdrängter Lauf (Issue #218): Ein `cancelled` ist gewolltes
+          # Verdrängen durch einen neueren Push – kein Befund.
+          if [ "$DEPLOY_ERGEBNIS" = "cancelled" ]; then
+            echo "ℹ️ Deploy-Lauf wurde von einem neueren Push verdrängt – kein Siegel-Befund."
+            exit 0
+          fi
+
+          fehler=0
+
+          if [ "$ARTEFAKT_OK" != "true" ]; then
+            if [ "$DEPLOY_ERGEBNIS" = "failure" ]; then
+              echo "::error::Deploy-Job VOR der Auslieferung abgebrochen (Scorecard-Exit ${SCORECARD_EXIT:-unbekannt}) – kein Artefakt, keine Veröffentlichung. Die Ursache steht im deploy-Job; die Live-Site bleibt auf dem letzten erfolgreichen Stand."
+            else
+              echo "::error::Auslieferung ausgeblieben: Deploy-Gate verlangte einen Deploy (deploy-Job: ${DEPLOY_ERGEBNIS:-unbekannt}), aber es wurde kein Auslieferungs-Artefakt bestätigt. Die Live-Site ist eingefroren, ohne dass ein Inhalts-Gate sie gestoppt hätte (Befundklasse #676)."
+            fi
+            fehler=1
+          elif [ "$PAGES_ERGEBNIS" != "success" ]; then
+            echo "::error::Artefakt bestätigt, aber das offizielle Pages-Deployment war '${PAGES_ERGEBNIS:-unbekannt}' – die Site ist nicht öffentlich ausgeliefert (Issue-#537-Klasse)."
+            fehler=1
+          else
+            echo "✅ Auslieferung belegt: Artefakt hochgeladen und offizielles Pages-Deployment erfolgreich."
+          fi
+
+          if [ "$SCORECARD_WERKZEUGFEHLER" = "true" ]; then
+            echo "::error::Release-Scorecard meldete einen WERKZEUGFEHLER (Exit ${SCORECARD_EXIT:-unbekannt}). Die Auslieferung ist bewusst weitergelaufen (Dauerheilung #676), das Siegel fehlt damit für diesen Stand – Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md"
+            fehler=1
+          fi
+
+          if [ "$fehler" -ne 0 ]; then
+            # Ehrliche Schlusszeile: „bereits raus" darf nur stehen, wenn die
+            # Auslieferung wirklich belegt ist – sonst verschleiert das Siegel
+            # genau den Zustand, den es melden soll.
+            if [ "$PAGES_ERGEBNIS" = "success" ]; then
+              echo "🛑 Auslieferungs-Siegel rot – die Veröffentlichung ist öffentlich raus, der Befund bleibt offen."
+            else
+              echo "🛑 Auslieferungs-Siegel rot – die öffentliche Auslieferung ist NICHT belegt, der Befund bleibt offen."
+            fi
+            exit 1
+          fi
+          echo "✅ Auslieferungs-Siegel grün."
