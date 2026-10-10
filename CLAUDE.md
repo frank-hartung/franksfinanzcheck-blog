@@ -1351,6 +1351,47 @@ automatische Meldung riet zu API-Keys – die Ursache stand in Zeile 181.
   (Vorfall nachspielen). Runbook: `docs/ANLEITUNG-MANIFEST-WACHE.md`.
   Vorgangsbericht: `WF-7B6B-654-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
 
+## Auslieferung vor Siegel (kein Mess-Schritt blockiert die Live-Site, C34, seit #676, 10.10.2026)
+
+Am 09.10.2026 fror die öffentliche Auslieferung **19 h 38 min** ein: Der
+`deploy`-Job scheiterte 20× in Folge am Schritt „Release-Scorecard
+(Produktionswahrheit versiegeln, fail-closed)" – einem **Beweislauf**, der vor
+der Auslieferung steht. Die Schritte 50–60 sprangen, inklusive „Artefakt für
+offizielles Pages-Deployment hochladen"; `pages-deployment` startete nie. Der um
+14:02 UTC veröffentlichte Artikel lieferte 4 h 11 min HTTP 404 (Ticket #676).
+
+- **Ein Beweislauf wertet seinen Exit-Code aus.** `0` → weiter · `1` → echter
+  Inhaltsbefund, harter Stopp (unverändert fail-closed) · `2` → **Werkzeugfehler**:
+  die Messung ist kaputt, das ist kein Inhaltsbefund und darf die Auslieferung
+  nicht als Geisel nehmen. Der Fehler wird Job-Output und `::error::`-Annotation.
+- **Nach dem Auslieferungs-Beleg (`id: artefakt`, direkt nach
+  `actions/upload-pages-artifact`) folgt im `deploy`-Job nichts mehr.** Jeder
+  spätere Schritt wäre ein neuer Kandidat für dieselbe Blockade. Meldeschritte
+  gehören hinter die Veröffentlichung.
+- **Das Siegel liegt danach:** Job `release-seal` (`needs: [deploy-gate, deploy,
+  pages-deployment]`, `if: always()`) macht den Lauf rot, wenn der Beleg fehlt,
+  der `deploy`-Job vor der Auslieferung abbrach oder die Scorecard einen
+  Werkzeugfehler meldete. Fail-closed bleibt erhalten – nur die Reihenfolge
+  stimmt: **erst liefern, dann siegeln.** `release-seal` ist bewusst kein
+  `needs`-Vorlauf von `pages-deployment`.
+- **Die Wache nennt die Ursache.** `bot_watchdog.classify_deploy_jobs()` erkennt
+  am deploy-Job, ob die Auslieferung blockiert ist, und benennt den blockierenden
+  Schritt (`CHECK3B`, Befund `deploy-blockade`) – unabhängig vom HTTP-Status,
+  damit eine eingefrorene Site auch ohne neuen 404-Artikel auffällt (Klasse #537).
+- **Der Befund heilt sich selbst:** `watchdog_recovery.py --live-site` löst
+  `deploy-catchup.yml` aus, aber **nicht** in eine blockierte Kette (Exit 3 – der
+  Dispatch scheiterte am selben Schritt) und nie doppelt. Die Nachmessung deckt
+  `CHECK3`/`CHECK3B` ab, damit ein geheilter Befund kein Ticket erzeugt.
+- Tests: `scripts/tests/test_deploy_publication_priority.py` (Reihenfolge,
+  Exit-Zweige, Siegel-Job) und `scripts/tests/test_bot_watchdog_live_site.py`
+  (Diagnose, Befund, Heiler). Vorgangsbericht:
+  `BOT-WATCHDOG-676-DAUERHEILUNG-PREMIUM-2026-10-10.md`.
+
+Vertrag: **C34** in `governance_contract.py` (Exit-Auswertung · Inhaltsbefund
+stoppt weiter · nichts nach dem Auslieferungs-Beleg · Siegel nach der
+Veröffentlichung · Ursachen-Nennung · Selbstheilung · Verdrahtung ·
+Regressionstest).
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

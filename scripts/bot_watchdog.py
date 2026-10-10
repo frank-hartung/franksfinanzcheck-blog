@@ -138,6 +138,16 @@ CONTENT_RESERVE_WORKFLOW = "content-reserve.yml"
 # „neuester Artikel nicht live" meldet, ohne den Deploy zu benennen, meldet
 # ein Symptom ohne Ursache (Dauerheilung #676, 09.10.2026).
 DEPLOY_WORKFLOW = "deploy.yml"
+DEPLOY_WORKFLOW = "deploy.yml"
+DEPLOY_CATCHUP_WORKFLOW = "deploy-catchup.yml"
+
+# Dauerheilung #676 (10.10.2026): Namen, an denen der Watchdog den
+# AUSLIEFERUNGSWEG in deploy.yml wiedererkennt. Fällt einer dieser Schritte
+# aus, bevor das Pages-Artefakt hochgeladen ist, ist die Live-Site
+# eingefroren – unabhängig davon, wie viele Gates davor grün waren.
+DEPLOY_JOB_NAME = "deploy"
+ARTEFAKT_SCHRITT = "Artefakt für offizielles Pages-Deployment hochladen"
+PAGES_JOB_NAME = "An GitHub Pages ausliefern (Environment github-pages)"
 
 # Mindestziel
 def effective_min():
@@ -406,6 +416,200 @@ def check_live_site(slug, timeout=20):
     if code2 == "200" or code2 in ("301", "302", "303", "307", "308"):
         return True, code2
     return False, code2 or code
+
+# ============================================================
+#  CHECK 3b – AUSLIEFERUNGS-KETTE (Dauerheilung #676, 10.10.2026)
+#  ------------------------------------------------------------
+#  Der Befund „Neuester Artikel nicht live" ist eine FOLGE, keine Ursache.
+#  Am 09.10.2026 brach deploy.yml 20× in Folge am Release-Scorecard-Schritt
+#  ab – VOR dem Hochladen des Pages-Artefakts. Die Live-Site fror 15,5
+#  Stunden ein, der um 14:02 UTC veröffentlichte Artikel blieb 404, und das
+#  Ticket #676 nannte als nächsten Schritt „Deploy prüfen, ggf.
+#  Deploy-Catchup triggern", ohne den blockierenden Schritt zu benennen.
+#
+#  Der Watchdog liest deshalb jetzt den Auslieferungsweg selbst: Welcher
+#  Schritt hat den deploy-Job beendet, und wurde das Auslieferungs-Artefakt
+#  überhaupt hochgeladen? Damit trägt der Befund die URSACHE (Schrittname)
+#  und nicht nur den HTTP-Status.
+# ============================================================
+
+def classify_deploy_jobs(jobs):
+    """Bewertet die Job-Liste eines deploy.yml-Laufs – rein funktional.
+
+    ``jobs`` ist die Liste aus ``gh run view <id> --json jobs``. Rückgabe
+    ``(lage, blockierender_schritt, beleg)`` mit
+
+      lage = "ausgeliefert"  Artefakt hochgeladen, Pages-Job erfolgreich
+             "blockiert"     deploy-Job endete VOR dem Artefakt-Upload
+             "uebersprungen" Deploy-Gate verlangte keinen Deploy
+             "unbekannt"     Lauf nicht auswertbar (kein Urteil, kein Befund)
+
+    Die Funktion ist bewusst frei von I/O: Der Vertrag (welcher Schritt
+    blockiert die Auslieferung?) ist damit ohne GitHub-API testbar.
+    """
+    if not isinstance(jobs, list) or not jobs:
+        return "unbekannt", "", "keine Job-Liste"
+    deploy_job = None
+    pages_job = None
+    for job in jobs:
+        if not isinstance(job, dict):
+            continue
+        name = str(job.get("name") or "")
+        if name == DEPLOY_JOB_NAME:
+            deploy_job = job
+        elif name == PAGES_JOB_NAME:
+            pages_job = job
+    if deploy_job is None:
+        return "unbekannt", "", "deploy-Job im Lauf nicht gefunden"
+
+    ergebnis = str(deploy_job.get("conclusion") or "")
+    if ergebnis in ("", "skipped"):
+        # Kein Deploy verlangt (Entlastungs-Gate) – das ist kein Ausfall.
+        return "uebersprungen", "", "deploy-Job übersprungen (kein Deploy verlangt)"
+    if ergebnis == "cancelled":
+        # Gewolltes Verdrängen durch einen neueren Push (Issue #218).
+        return "uebersprungen", "", "deploy-Lauf verdrängt (cancelled)"
+
+    schritte = deploy_job.get("steps") or []
+    artefakt = None
+    erster_fehler = ""
+    for schritt in schritte:
+        if not isinstance(schritt, dict):
+            continue
+        name = str(schritt.get("name") or "")
+        fazit = str(schritt.get("conclusion") or "")
+        if name == ARTEFAKT_SCHRITT:
+            artefakt = fazit
+        if not erster_fehler and fazit in ("failure", "timed_out"):
+            erster_fehler = name
+
+    if artefakt == "success":
+        pages_fazit = str((pages_job or {}).get("conclusion") or "")
+        if pages_fazit == "success":
+            return "ausgeliefert", "", "Artefakt hochgeladen und Pages-Deployment erfolgreich"
+        if pages_fazit in ("", "skipped"):
+            # Artefakt vorhanden, aber das offizielle Deployment lief nicht:
+            # genau die Issue-#537-Klasse (gh-pages grün, öffentlich eingefroren).
+            return ("blockiert", f"{PAGES_JOB_NAME} lief nicht",
+                    "Artefakt hochgeladen, aber kein offizielles Pages-Deployment")
+        return ("blockiert", f"{PAGES_JOB_NAME} ({pages_fazit})",
+                f"Artefakt hochgeladen, Pages-Deployment {pages_fazit}")
+
+    if ergebnis in ("failure", "timed_out"):
+        schritt = erster_fehler or "unbenannter Schritt"
+        return ("blockiert", schritt,
+                f"deploy-Job {ergebnis} – Auslieferung ab Schritt „{schritt}“ nicht erreicht")
+
+    ende = ergebnis or "ohne Ergebnis"
+    return "unbekannt", "", f"deploy-Job endete als „{ende}“"
+
+
+def live_site_findings(slug, code, deploy_lage, block_schritt="", blockade_beleg=""):
+    """Baut die Live-Site-Befunde: Folge (HTTP-Status) UND Ursache (Deploy).
+
+    Rein funktional, damit der Vertrag testbar ist: Ein 404-Befund, der nur
+    „Deploy prüfen" sagt, ist eine Arbeitsanweisung an einen Menschen – bei
+    Besitzer `auto` muss der Befund die Ursache und den Heilungsweg tragen
+    (Dauerheilung #676).
+    """
+    if deploy_lage == "blockiert":
+        ursache = (f" Ursache: Der letzte deploy.yml-Lauf brach VOR der "
+                   f"Auslieferung ab – blockierender Schritt „{block_schritt}“.")
+        naechster = ("Der Watchdog löst Deploy-Catchup selbst aus "
+                     "(`scripts/watchdog_recovery.py --live-site`). Heilt das "
+                     f"nicht, blockiert Schritt „{block_schritt}“ in deploy.yml "
+                     "die Auslieferung – Mess-Schritte dürfen das nicht "
+                     "(Dauerheilung #676: erst liefern, dann siegeln).")
+        beleg = [f"URL=/posts/{slug}/", f"HTTP={code}",
+                 f"BLOCKIERENDER_SCHRITT={block_schritt}", blockade_beleg]
+    else:
+        ursache = ""
+        naechster = ("Der Watchdog löst Deploy-Catchup selbst aus "
+                     "(`scripts/watchdog_recovery.py --live-site`) und misst "
+                     "danach neu; erst wenn der Artikel dann immer noch nicht "
+                     "live ist, bleibt dieses Ticket offen.")
+        beleg = [f"URL=/posts/{slug}/", f"HTTP={code}", blockade_beleg]
+
+    befunde = [_f(
+        "live-site", "Neuester Artikel nicht live", "P1", "auto",
+        detail=f"{slug} liefert HTTP {code}.{ursache}",
+        next_step=naechster,
+        evidence=[b for b in beleg if b])]
+
+    # Eigener Ursachen-Befund, unabhängig vom HTTP-Status: Am 09.10.2026 fror
+    # die Site 19,6 Stunden ein; sichtbar wurde das erst, als ein neuer
+    # Artikel 404 lief. Ohne diesen Befund bleibt ein blockierter
+    # Auslieferungsweg unbemerkt, solange kein neuer Artikel erscheint
+    # (Klasse #537: alle Signale grün, öffentlich steht die Zeit still).
+    if deploy_lage == "blockiert":
+        befunde.append(_f(
+            "deploy-blockade", "Auslieferung blockiert (Live-Stand eingefroren)",
+            "P1", "auto",
+            detail=(f"Der letzte deploy.yml-Lauf endete, bevor das "
+                    f"Pages-Artefakt hochgeladen war – blockierender Schritt: "
+                    f"„{block_schritt}“. {blockade_beleg}. Solange das steht, "
+                    f"geht kein einziger Artikel live, egal wie oft der "
+                    f"Deploy-Catchup läuft."),
+            next_step=(f"deploy.yml → deploy-Job → Schritt „{block_schritt}“ öffnen. "
+                       f"Ist es ein Inhalts-Gate, ist der Befund fachlich gemeint; "
+                       f"ist es ein Mess-/Siegel-Schritt, darf er die Auslieferung "
+                       f"nicht blockieren (Dauerheilung #676: erst liefern, dann "
+                       f"siegeln – Job `release-seal`)."),
+            evidence=[f"BLOCKIERENDER_SCHRITT={block_schritt}", blockade_beleg]))
+    return befunde
+
+
+def deploy_blockade(hours=30):
+    """Letzter abgeschlossener deploy.yml-Lauf: ist die Auslieferung blockiert?
+
+    Rückgabe ``(lage, schritt, beleg)`` wie :func:`classify_deploy_jobs`.
+    Bei gh-Fehlern oder fehlenden Läufen ist die Lage „unbekannt" – Offline
+    ist kein Ausfall, und daraus darf kein Befund entstehen.
+    """
+    if not _valid_workflow_file(DEPLOY_WORKFLOW):
+        return "unbekannt", "", "ungültiger Workflow-Dateiname"
+    rc, out, err = run_cmd([
+        "gh", "run", "list", "--workflow", DEPLOY_WORKFLOW, "--limit", "20",
+        "--json", "databaseId,createdAt,status,conclusion",
+    ], timeout=25)
+    if rc != 0:
+        return "unbekannt", "", f"gh Fehler: {(err or out or 'ohne Meldung').strip()[:160]}"
+    try:
+        rows = json.loads(out.strip() or "[]")
+    except ValueError:
+        return "unbekannt", "", f"gh output unparsable: {str(out)[:160]}"
+    if not isinstance(rows, list):
+        return "unbekannt", "", f"gh output unerwartet: {str(out)[:160]}"
+
+    cutoff = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=hours)
+    kandidat = None
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        if (row.get("status") or "") != "completed":
+            continue
+        erstellt = _parse_ts(row.get("createdAt"))
+        if erstellt is None or erstellt < cutoff:
+            continue
+        if kandidat is None or erstellt > kandidat[0]:
+            kandidat = (erstellt, row.get("databaseId"))
+    if kandidat is None:
+        return "unbekannt", "", f"kein abgeschlossener Deploy-Lauf in den letzten {hours} h"
+
+    lauf_id = str(kandidat[1])
+    rc2, out2, err2 = run_cmd([
+        "gh", "run", "view", lauf_id, "--json", "jobs",
+    ], timeout=40)
+    if rc2 != 0:
+        return "unbekannt", "", f"gh Fehler beim Lauf {lauf_id}: {(err2 or out2 or 'ohne Meldung').strip()[:160]}"
+    try:
+        daten = json.loads(out2.strip() or "{}")
+    except ValueError:
+        return "unbekannt", "", f"gh output unparsable (Lauf {lauf_id}): {str(out2)[:160]}"
+    lage, schritt, beleg = classify_deploy_jobs((daten or {}).get("jobs"))
+    beleg = f"{beleg} (Lauf {lauf_id}, {kandidat[0].strftime('%Y-%m-%d %H:%M UTC')})"
+    return lage, schritt, beleg
+
 
 def check_tls():
     """Check 4 via existing script."""
@@ -1104,6 +1308,18 @@ def run_all():
                       "nennt die Zeile.",
             evidence=[f"py_compile: {str(err)[:120]}"]))
 
+    # 3b Auslieferungs-Kette VOR der Live-Messung lesen: Der HTTP-Status ist
+    # die Folge, der abgebrochene Deploy-Schritt die Ursache (#676).
+    deploy_lage, block_schritt, blockade_beleg = deploy_blockade()
+    if deploy_lage == "ausgeliefert":
+        env["CHECK3B"] = "OK"
+    elif deploy_lage == "uebersprungen":
+        env["CHECK3B"] = f"OK ({blockade_beleg})"
+    elif deploy_lage == "blockiert":
+        env["CHECK3B"] = f"FAIL (Schritt: {block_schritt})"
+    else:
+        env["CHECK3B"] = f"UNKNOWN ({blockade_beleg})"
+
     # 3 Live-Site – Profi: Offline = WARN, nicht FAIL (vermeidet Fehlalarm im Sandbox/Runner ohne Netz)
     slug, dt = newest_slug()
     if slug:
@@ -1151,6 +1367,12 @@ def run_all():
             findings.append(_f(
                 "live-site", "Neuester Artikel nicht live", "P1", "auto",
                 detail=detail, next_step=next_step, evidence=evidence))
+            # Dauerheilung #676: Der Befund nennt die Ursache und den
+            # Selbstheilungsweg. „Deploy prüfen, ggf. Catchup triggern" war
+            # eine Arbeitsanweisung an einen Menschen – dabei ist dieser
+            # Befund ausdrücklich maschinell heilbar (Besitzer `auto`).
+            findings.extend(live_site_findings(
+                slug, code, deploy_lage, block_schritt, blockade_beleg))
     else:
         env["CHECK3"] = "FAIL"
         findings.append(_f(
@@ -1491,6 +1713,46 @@ def selftest():
             errors.append(f"check_syntax meldet Fehler im eigenen Repo: {err[:200]}")
     except Exception as e:
         errors.append(f"check_syntax Exception: {e}")
+
+    # Regression #676: Die Auslieferungs-Kette muss am Artefakt-Upload
+    # erkannt werden – nicht am Workflow-Ergebnis. Ein deploy-Job, der vor
+    # dem Upload abbricht, ist „blockiert", und der blockierende Schritt
+    # muss benannt sein (damit das Ticket die Ursache trägt).
+    try:
+        lage, schritt, _beleg = classify_deploy_jobs([
+            {"name": DEPLOY_JOB_NAME, "conclusion": "failure",
+             "steps": [
+                 {"name": "Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)",
+                  "conclusion": "failure"},
+                 {"name": ARTEFAKT_SCHRITT, "conclusion": "skipped"}]},
+            {"name": PAGES_JOB_NAME, "conclusion": "skipped"}])
+        if lage != "blockiert" or not schritt:
+            errors.append("classify_deploy_jobs erkennt blockierten Auslieferungsweg nicht")
+
+        lage, _, _ = classify_deploy_jobs([
+            {"name": DEPLOY_JOB_NAME, "conclusion": "success",
+             "steps": [{"name": ARTEFAKT_SCHRITT, "conclusion": "success"}]},
+            {"name": PAGES_JOB_NAME, "conclusion": "success"}])
+        if lage != "ausgeliefert":
+            errors.append("classify_deploy_jobs wertet eine belegte Auslieferung nicht als ausgeliefert")
+
+        lage, _, _ = classify_deploy_jobs([
+            {"name": DEPLOY_JOB_NAME, "conclusion": "success",
+             "steps": [{"name": ARTEFAKT_SCHRITT, "conclusion": "success"}]},
+            {"name": PAGES_JOB_NAME, "conclusion": "skipped"}])
+        if lage != "blockiert":
+            errors.append("classify_deploy_jobs übersieht ein ausgebliebenes Pages-Deployment (#537-Klasse)")
+
+        lage, _, _ = classify_deploy_jobs([
+            {"name": DEPLOY_JOB_NAME, "conclusion": "skipped", "steps": []}])
+        if lage != "uebersprungen":
+            errors.append("classify_deploy_jobs meldet einen übersprungenen Deploy als Befund")
+
+        lage, _, _ = classify_deploy_jobs([])
+        if lage != "unbekannt":
+            errors.append("classify_deploy_jobs erfindet bei leerer Job-Liste ein Urteil")
+    except Exception as e:
+        errors.append(f"Auslieferungs-Ketten-Selftest Exception: {e}")
 
     # Regression #446: Ein grüner Lauf darf seine im selben Lauf geheilten
     # Funde als Historie behalten, ohne dass der Watchdog sie als offen zählt.

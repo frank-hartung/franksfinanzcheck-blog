@@ -1977,7 +1977,174 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c33_artefakt_waechter(script_texts, wflows, root=root,
                                     python_bin=python_bin)
     checks += c34_blustradius(script_texts, wflows, root=root)
+    checks += c34_auslieferung_vor_siegel(script_texts, wflows, root=root)
     return checks
+
+
+# --- C34: Auslieferung vor Siegel (Bot-Watchdog #676, 10.10.2026) ----------
+#
+# Befund: Vom 09.10.2026 02:12 bis 17:43 UTC scheiterte der `deploy`-Job 18×
+# in Folge am Release-Scorecard-Schritt. Die Scorecard steht VOR der
+# Auslieferung; ihr Fehlschlag ließ die Schritte 50–60 springen – inklusive
+# „Artefakt für offizielles Pages-Deployment hochladen" – und der Job
+# `pages-deployment` startete nie. Die Live-Site fror 15,5 Stunden ein, der
+# um 14:02 UTC veröffentlichte Artikel lieferte HTTP 404 (Ticket #676).
+#
+# Der Vertrag in fünf Sätzen:
+#   a) Ein MESS-Schritt wertet seinen Exit-Code aus: ein Inhaltsbefund stoppt
+#      die Auslieferung, ein WERKZEUGFEHLER nicht.
+#   b) Nach dem Auslieferungs-Beleg folgt im deploy-Job nichts mehr, was den
+#      Job rot machen kann – Meldeschritte gehören hinter die Veröffentlichung.
+#   c) Das Siegel wird NACH der Veröffentlichung gelegt (`release-seal`,
+#      `if: always()`) und bleibt laut: kein stilles Scheingrün.
+#   d) Der Watchdog benennt die URSACHE (blockierender Schritt), nicht nur den
+#      HTTP-Status, und heilt selbst (`watchdog_recovery.py --live-site`).
+#   e) Regressionstest – ein Vertrag ohne Test ist Prosa.
+C34_SIEGEL_ID = "id: scorecard"
+C34_ARTEFAKT_SCHRITT = "Artefakt für offizielles Pages-Deployment hochladen"
+C34_ARTEFAKT_ID = "id: artefakt"
+C34_SEAL_JOB = "  release-seal:"
+C34_TESTS = ("test_deploy_publication_priority.py",
+             "test_bot_watchdog_live_site.py")
+
+
+def _c34_zweig(block, marker):
+    """Schneidet einen `case`-Zweig aus einem Shell-Block."""
+    if marker not in block:
+        return ""
+    start = block.index(marker)
+    ende = block.find(";;", start)
+    return block[start:] if ende < 0 else block[start:ende]
+
+
+def c34_auslieferung_vor_siegel(script_texts, wflows, root=BLOG_DIR):
+    """Kein Mess-Schritt darf die öffentliche Auslieferung blockieren."""
+    out = []
+    deploy = ""
+    watchdog_wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        basis = os.path.basename(pfad)
+        if basis == "deploy.yml":
+            deploy = inhalt or ""
+        elif basis == "bot-watchdog.yml":
+            watchdog_wf = inhalt or ""
+    wache = (script_texts or {}).get("bot_watchdog.py", "")
+    broker = (script_texts or {}).get("watchdog_recovery.py", "")
+
+    if not deploy:
+        out.append(("C34", ".github/workflows/deploy.yml fehlt – ohne den "
+                           "Auslieferungsweg ist der Vertrag nicht prüfbar."))
+        return out
+
+    # (a) Siegel-Schritt wertet den Exit-Code aus ----------------------------
+    if C34_SIEGEL_ID not in deploy:
+        out.append(("C34", "deploy.yml: dem Release-Scorecard-Schritt fehlt "
+                           "`id: scorecard` – sein Ergebnis ist nicht mehr "
+                           "auswertbar (#676)."))
+    else:
+        start = deploy.index(C34_SIEGEL_ID)
+        block = deploy[start:start + 4000]
+        if 'case "$code" in' not in block:
+            out.append(("C34", "deploy.yml: die Release-Scorecard reicht ihren "
+                               "Exit-Code durch, statt ihn auszuwerten – jeder "
+                               "Werkzeugfehler stoppt die Auslieferung (#676)."))
+        else:
+            inhaltszweig = _c34_zweig(block, "1)")
+            werkzeugzweig = _c34_zweig(block, "*)")
+            if "exit 1" not in inhaltszweig:
+                out.append(("C34", "deploy.yml: ein Inhaltsbefund der Scorecard "
+                                   "(Exit 1) stoppt die Auslieferung nicht mehr "
+                                   "– Scheingrün ginge live."))
+            if "exit 1" in werkzeugzweig:
+                out.append(("C34", "deploy.yml: ein WERKZEUGFEHLER der Scorecard "
+                                   "bricht den deploy-Job wieder hart ab – genau "
+                                   "die 19,6-Stunden-Blockade aus #676."))
+            if "werkzeugfehler=true" not in werkzeugzweig:
+                out.append(("C34", "deploy.yml: der Werkzeugfehler wird nicht als "
+                                   "Job-Output gemeldet – das Siegel fehlt "
+                                   "unbemerkt."))
+
+    # (b) Nach dem Auslieferungs-Beleg darf nichts mehr röten ----------------
+    if C34_ARTEFAKT_SCHRITT not in deploy:
+        out.append(("C34", "deploy.yml: der Upload des Pages-Artefakts fehlt – "
+                           "ohne ihn gibt es keine öffentliche Auslieferung "
+                           "(Issue-#537-Klasse)."))
+    elif C34_ARTEFAKT_ID not in deploy:
+        out.append(("C34", "deploy.yml: der Auslieferungs-Beleg (`id: artefakt`) "
+                           "fehlt – das Siegel kann die Veröffentlichung nicht "
+                           "belegen (#676)."))
+    else:
+        if deploy.index(C34_ARTEFAKT_SCHRITT) > deploy.index(C34_ARTEFAKT_ID):
+            out.append(("C34", "deploy.yml: der Auslieferungs-Beleg steht VOR dem "
+                               "Artefakt-Upload – er belegt dann nichts."))
+        danach = deploy[deploy.index(C34_ARTEFAKT_ID):]
+        naechster_job = danach.find("\n  pages-deployment:")
+        segment = danach if naechster_job < 0 else danach[:naechster_job]
+        if "\n      - name:" in segment:
+            out.append(("C34", "deploy.yml: nach dem Auslieferungs-Beleg folgt ein "
+                               "weiterer Schritt im deploy-Job – jeder spätere "
+                               "Meldeschritt kann die Veröffentlichung wieder "
+                               "kippen (#676)."))
+
+    # (c) Siegel NACH der Veröffentlichung -----------------------------------
+    if C34_SEAL_JOB not in deploy:
+        out.append(("C34", "deploy.yml: der Job `release-seal` fehlt – ein "
+                           "Werkzeugfehler des Siegels bliebe stumm oder "
+                           "blockierte die Auslieferung (#676)."))
+    else:
+        siegel = deploy[deploy.index(C34_SEAL_JOB):]
+        if "always()" not in siegel[:1200]:
+            out.append(("C34", "deploy.yml: `release-seal` läuft nicht mit "
+                               "`if: always()` – das Siegel fällt genau dann aus, "
+                               "wenn ein Vorläufer rot war (#676)."))
+        if 'ARTEFAKT_OK" != "true"' not in siegel:
+            out.append(("C34", "deploy.yml: `release-seal` prüft den "
+                               "Auslieferungs-Beleg nicht – eine ausgebliebene "
+                               "Veröffentlichung bliebe grün."))
+        if 'SCORECARD_WERKZEUGFEHLER" = "true"' not in siegel:
+            out.append(("C34", "deploy.yml: `release-seal` meldet den "
+                               "Werkzeugfehler der Scorecard nicht – das Siegel "
+                               "fehlte unbemerkt."))
+        if "exit 1" not in siegel:
+            out.append(("C34", "deploy.yml: `release-seal` beendet den Lauf nicht "
+                               "rot – das zentrale Fehler-Alerting sähe nichts."))
+
+    # (d) Watchdog nennt die Ursache und heilt selbst ------------------------
+    if "def classify_deploy_jobs(" not in wache:
+        out.append(("C34", "bot_watchdog.py: die Auslieferungs-Diagnose "
+                           "(`classify_deploy_jobs`) fehlt – der Watchdog meldet "
+                           "wieder nur den HTTP-Status (#676)."))
+    if "ARTEFAKT_SCHRITT" not in wache:
+        out.append(("C34", "bot_watchdog.py: der Watchdog kennt den "
+                           "Auslieferungsschritt nicht und kann eine Blockade "
+                           "nicht erkennen (#676)."))
+    if "watchdog_recovery.py --live-site" not in wache:
+        out.append(("C34", "bot_watchdog.py: der Live-Site-Befund nennt keinen "
+                           "maschinellen Heilungsweg – bei Besitzer `auto` ist "
+                           "das eine Sackgasse (#676)."))
+    if "--live-site" not in broker:
+        out.append(("C34", "watchdog_recovery.py: die Selbstheilung `--live-site` "
+                           "fehlt – der Catchup würde nie ausgelöst (#676)."))
+    elif "return 3" not in broker:
+        out.append(("C34", "watchdog_recovery.py: `--live-site` dispatcht auch in "
+                           "eine blockierte Auslieferung – der Lauf scheitert am "
+                           "selben Schritt (#676)."))
+    if "--live-site" not in watchdog_wf:
+        out.append(("C34", "bot-watchdog.yml: die Live-Site-Selbstheilung ist "
+                           "nicht verdrahtet – der Befund bleibt ein Ticket ohne "
+                           "Heiler (#676)."))
+    elif "CHECK3" not in watchdog_wf:
+        out.append(("C34", "bot-watchdog.yml: die Nachmessung deckt CHECK3 nicht "
+                           "ab – ein geheilter Befund erzeugt trotzdem ein "
+                           "Ticket (#446-Klasse)."))
+
+    # (e) Regressionstest ----------------------------------------------------
+    for name in C34_TESTS:
+        if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
+            out.append(("C34", f"scripts/tests/{name} fehlt – der Vertrag "
+                               "‚Auslieferung vor Siegel‘ wäre ungetestet "
+                               "(#676)."))
+    return out
 
 
 # --- C33: Maschinen-Artefakte werden gegengelesen (WF-D4E0 #653) ------------
@@ -3726,6 +3893,18 @@ RULE_TEXT = {
            "Code hält, was die Regeln versprechen. Der Job bleibt über den "
            "Daten-Befund rot (fail-closed, #634) – aber die Prüfung läuft "
            "(`if: ${{ !cancelled() }}`).",
+    "C34": "Die Auslieferung kommt vor dem Siegel: Kein Mess-, Report- oder "
+           "Siegel-Schritt darf die öffentliche Auslieferung blockieren. Ein "
+           "Beweislauf wertet seinen Exit-Code aus – ein Inhaltsbefund stoppt "
+           "den Deploy, ein Werkzeugfehler nicht. Nach dem Auslieferungs-Beleg "
+           "folgt im deploy-Job nichts mehr, was ihn rot machen kann; das "
+           "Siegel wird danach im eigenen Job (`release-seal`, `if: always()`) "
+           "gelegt und bleibt laut. Der Watchdog benennt die Ursache "
+           "(blockierender Schritt) statt nur des HTTP-Status und heilt den "
+           "Befund selbst (`watchdog_recovery.py --live-site`). Am 09.10.2026 "
+           "nahm die Release-Scorecard die Live-Site 19 h 38 min als Geisel: "
+           "20 rote Deploy-Läufe in Folge, kein Artikel live, der neueste "
+           "Artikel 4 h 11 min 404 (Bot-Watchdog, #676).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -3758,6 +3937,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C34": "Blustradius eines Befunds (ein blockierter Kandidat friert "
                 "nicht die ganze Auslieferung ein; Haus-Templates aus der "
                 "SSOT statt aus einer Whitelist)"}
+         "C34": "Auslieferung vor Siegel (kein Mess-Schritt blockiert die "
+                "Live-Site, Ursache benannt, Befund selbst geheilt)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -4909,6 +5090,98 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
+    # --- C34: Auslieferung vor Siegel (Bot-Watchdog #676) -------------------
+    # Der echte Baum muss still bleiben; jede Sabotage muss genau ihren Zweig
+    # treffen. 15,5 Stunden eingefrorene Live-Site waren der Preis dafür, dass
+    # ein Mess-Schritt vor der Auslieferung stehen durfte.
+    echte_c34 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in ("bot_watchdog.py", "watchdog_recovery.py")}
+    if c34_auslieferung_vor_siegel(echte_c34, wflows_echt, root=BLOG_DIR):
+        failures.append("C34: der echte Zustand wird beanstandet: "
+                        f"{c34_auslieferung_vor_siegel(echte_c34, wflows_echt, root=BLOG_DIR)}")
+
+    def _wf34(datei, alt, neu, was):
+        variante = dict(wflows_echt)
+        getroffen = False
+        for pfad in list(variante):
+            if os.path.basename(pfad) == datei and alt in variante[pfad]:
+                variante[pfad] = variante[pfad].replace(alt, neu)
+                getroffen = True
+        if not getroffen:
+            failures.append(f"C34: Sabotage ‚{was}‘ konnte nicht eingespielt "
+                            f"werden (Anker fehlt in {datei}).")
+        return variante
+
+    # (a) Exit-Code wird wieder durchgereicht: jeder Werkzeugfehler stoppt die
+    #     Auslieferung – exakt der Befund vom 09.10.2026.
+    ohne_auswertung = _wf34(
+        "deploy.yml", 'case "$code" in', '# case entfernt',
+        "Exit-Auswertung entfernt")
+    if not [f for f in c34_auslieferung_vor_siegel(echte_c34, ohne_auswertung,
+                                                  root=BLOG_DIR)
+            if "auszuwerten" in f[1]]:
+        failures.append("C34: eine Scorecard ohne Exit-Auswertung bleibt "
+                        "unentdeckt (#676).")
+    # (b) Werkzeugfehler bricht wieder hart ab.
+    harter_abbruch = _wf34(
+        "deploy.yml", 'echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"',
+        'echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"\n              exit 1',
+        "harter Abbruch bei Werkzeugfehler")
+    if not [f for f in c34_auslieferung_vor_siegel(echte_c34, harter_abbruch,
+                                                  root=BLOG_DIR)
+            if "19,6-Stunden-Blockade" in f[1]]:
+        failures.append("C34: ein harter Abbruch bei Werkzeugfehler bleibt "
+                        "unentdeckt (#676).")
+    # (c) Siegel-Job fällt weg: der Werkzeugfehler bliebe stumm.
+    ohne_siegel = _wf34("deploy.yml", "  release-seal:", "  # release-seal entfernt:",
+                        "release-seal entfernt")
+    if not [f for f in c34_auslieferung_vor_siegel(echte_c34, ohne_siegel,
+                                                  root=BLOG_DIR)
+            if "release-seal` fehlt" in f[1]]:
+        failures.append("C34: ein fehlender release-seal-Job bleibt unentdeckt "
+                        "(#676).")
+    # (d) Ein Schritt hinter dem Auslieferungs-Beleg: neue Blockade-Kandidaten.
+    mit_nachtritt = _wf34(
+        "deploy.yml",
+        '          echo "✅ Auslieferungs-Artefakt bestätigt – Veröffentlichung ist unterwegs."',
+        '          echo "✅ Auslieferungs-Artefakt bestätigt – Veröffentlichung ist unterwegs."\n'
+        '      - name: Meldung nach der Auslieferung\n'
+        '        run: python3 scripts/release_scorecard.py --kandidaten',
+        "Schritt nach dem Auslieferungs-Beleg")
+    if not [f for f in c34_auslieferung_vor_siegel(echte_c34, mit_nachtritt,
+                                                  root=BLOG_DIR)
+            if "weiterer Schritt im deploy-Job" in f[1]]:
+        failures.append("C34: ein Schritt hinter dem Auslieferungs-Beleg bleibt "
+                        "unentdeckt (#676).")
+    # (e) Watchdog verliert die Ursachen-Diagnose: nur noch HTTP-Status.
+    blinde_wache = dict(echte_c34, **{
+        "bot_watchdog.py": echte_c34["bot_watchdog.py"].replace(
+            "def classify_deploy_jobs(", "def _entfernt_classify_deploy_jobs(")})
+    if not [f for f in c34_auslieferung_vor_siegel(blinde_wache, wflows_echt,
+                                                  root=BLOG_DIR)
+            if "classify_deploy_jobs" in f[1]]:
+        failures.append("C34: ein Watchdog ohne Auslieferungs-Diagnose bleibt "
+                        "unentdeckt (#676).")
+    # (f) Selbstheilung dispatcht in eine blockierte Kette.
+    blinder_broker = dict(echte_c34, **{
+        "watchdog_recovery.py": echte_c34["watchdog_recovery.py"].replace(
+            "        return 3", "        return 0")})
+    if not [f for f in c34_auslieferung_vor_siegel(blinder_broker, wflows_echt,
+                                                  root=BLOG_DIR)
+            if "blockierte Auslieferung" in f[1]]:
+        failures.append("C34: ein Dispatch in eine blockierte Auslieferung bleibt "
+                        "unentdeckt (#676).")
+    # (g) Die Heilung ist nicht mehr verdrahtet: Ticket ohne Heiler.
+    ohne_heilung = _wf34("bot-watchdog.yml",
+                         "python3 scripts/watchdog_recovery.py --live-site",
+                         "# Selbstheilung entfernt",
+                         "Live-Site-Selbstheilung entfernt")
+    if not [f for f in c34_auslieferung_vor_siegel(echte_c34, ohne_heilung,
+                                                  root=BLOG_DIR)
+            if "nicht verdrahtet" in f[1]]:
+        failures.append("C34: eine unverdrahtete Live-Site-Selbstheilung bleibt "
+                        "unentdeckt (#676).")
+
     print("✅ KONTRAKT-SELFTEST bestanden (C1–C34 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")

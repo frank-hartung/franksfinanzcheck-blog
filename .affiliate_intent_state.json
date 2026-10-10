@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-10-09 11:03:52 UTC",
+ "generated_at": "2026-10-10 10:20:57 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 81,
- "checked_links": 225,
+ "checked_articles": 82,
+ "checked_links": 226,
  "healed_count": 0,
  "healed": [],
  "findings": [
   {
    "code": "IW2",
    "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-   "line": 143,
+   "line": 149,
    "route": "mietwagen",
    "slot": "end",
    "owner": "human",
@@ -61,6 +61,17 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
+   "line": 116,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Tagesgeld der C24 Bank“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

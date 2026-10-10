@@ -7,15 +7,15 @@ X-WR-CALNAME:FranksFinanzcheck – Facebook (Seite)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:facebook:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
- sl-anschluss:nutzen:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ sl-anschluss:takeaway:2026-10-10@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261010T074500Z
 DTEND:20261010T080000Z
 SUMMARY:Facebook (Seite): Preiswert surfen: So findest du den optimale
- n DSL‑Anschluss (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surf
- en-so-findest-du-den-optimalen-dsl-anschluss/
+ n DSL‑Anschluss (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-su
+ rfen-so-findest-du-den-optimalen-dsl-anschluss/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
  findest-du-den-optimalen-dsl-anschluss/
 STATUS:TENTATIVE
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so
  -vermeidest:vergleich:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+DTSTAMP:20261009T231901Z
 DTSTART:20261010T131500Z
 DTEND:20261010T133000Z
 SUMMARY:Facebook (Seite): Büroausstattung steuerlich clever absetzen: 
@@ -37,145 +37,85 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-som
- mer-schnaepp:takeaway:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ mer-schnaepp:vergleich:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261011T074500Z
 DTEND:20261011T080000Z
 SUMMARY:Facebook (Seite): Last Minute Urlaub: – So schnappst du dir da
- s Sommer‑Schnäpp (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-09-30-last-minute-
- urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
+ s Sommer‑Schnäpp (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-30-last-minute
+ -urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
 URL:https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-s
  o-schnappst-du-dir-das-sommer-schnaepp/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
- son-richtig:nutzen:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ son-richtig:vergleich:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261011T131500Z
 DTEND:20261011T133000Z
 SUMMARY:Facebook (Seite): Gasabschlag berechnen: So planst du die Heiz
- saison richtig (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-be
- rechnen-so-planst-du-die-heizsaison-richtig/
+ saison richtig (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag
+ -berechnen-so-planst-du-die-heizsaison-richtig/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
  n-so-planst-du-die-heizsaison-richtig/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
- die-feiertage:zahl:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ die-feiertage:takeaway:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261012T074500Z
 DTEND:20261012T080000Z
 SUMMARY:Facebook (Seite): Weihnachten Budget planen: Ohne Schulden dur
- ch die Feiertage (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
- tikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budg
- et-planen-ohne-schulden-durch-die-feiertage/
+ ch die Feiertage (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-
+ budget-planen-ohne-schulden-durch-die-feiertage/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
  lanen-ohne-schulden-durch-die-feiertage/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
- endert:vergleich:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+UID:facebook:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
+ erlust:zahl:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261012T131500Z
 DTEND:20261012T133000Z
-SUMMARY:Facebook (Seite): Internet & DSL-Update: Was sich jetzt für di
- ch ändert (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-ds
- l-update-was-sich-jetzt-fuer-dich-aendert/
-URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
- was-sich-jetzt-fuer-dich-aendert/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
- erlust:vergleich:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261013T074500Z
-DTEND:20261013T080000Z
 SUMMARY:Facebook (Seite): Campingurlaub planen: Budget für Platz\, Fah
- rt und Ausrüstung (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-10-07-campingurla
- ub-2026-clever-sparen-ohne-komfortverlust/
+ rt und Ausrüstung (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-20
+ 26-clever-sparen-ohne-komfortverlust/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
  lever-sparen-ohne-komfortverlust/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-10-dsl-wechselbonus-sichern:vergleich:2026-10-13@
- franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261013T131500Z
-DTEND:20261013T133000Z
-SUMMARY:Facebook (Seite): DSL-Wechselbonus sichern: So sparst du beim 
- Internetvertrag (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechsel
- bonus-sichern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:takea
- way:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261014T074500Z
-DTEND:20261014T080000Z
-SUMMARY:Facebook (Seite): 7 Gewohnheiten für finanzielle Freiheit: Gel
- d bewusst ordnen (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheit
- en-fuer-finanzielle-freiheit/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
- finanzielle-freiheit/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
- -tarife-fuer-2026:vergleich:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261014T131500Z
-DTEND:20261014T133000Z
-SUMMARY:Facebook (Seite): Preisgarantie Gas: So sicherst du günstige T
- arife (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-12-preisgarant
- ie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
- -sicherst-du-dir-guenstige-tarife-fuer-2026/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
- bieterwechsel:vergleich:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261015T074500Z
-DTEND:20261015T080000Z
-SUMMARY:Facebook (Seite): Internet & DSL wechseln: Praxis-Tipps – High
- speed Internet (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-internet-ds
- l-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
- n-praxis-tipps-fuer-den-anbieterwechsel/
+UID:facebook:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
+ endert:frage:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261013T074500Z
+DTEND:20261013T080000Z
+SUMMARY:Facebook (Seite): Internet & DSL-Update: Was sich jetzt für di
+ ch ändert (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-up
+ date-was-sich-jetzt-fuer-dich-aendert/
+URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
+ was-sich-jetzt-fuer-dich-aendert/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
- tie-gas:vergleich:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261015T131500Z
-DTEND:20261015T133000Z
+ tie-gas:vergleich:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261013T131500Z
+DTEND:20261013T133000Z
 SUMMARY:Facebook (Seite): Sicher heizen: So schützt dich eine Gaspreis
  garantie (vergleich)
 DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
@@ -186,71 +126,86 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-
- ohne-gebuehren:frage:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261016T074500Z
-DTEND:20261016T080000Z
-SUMMARY:Facebook (Seite): Kostenloses Girokonto: So findest du ein Kon
- to ohne Gebühren (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
- rtikel: https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-gir
- okonto-so-findest-du-ein-konto-ohne-gebuehren/
-URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
- o-so-findest-du-ein-konto-ohne-gebuehren/
+UID:facebook:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:zahl:
+ 2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261014T074500Z
+DTEND:20261014T080000Z
+SUMMARY:Facebook (Seite): 7 Gewohnheiten für finanzielle Freiheit: Gel
+ d bewusst ordnen (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-f
+ uer-finanzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
- net:frage:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261016T131500Z
-DTEND:20261016T133000Z
-SUMMARY:Facebook (Seite): DSL-Vergleich: So findest du den günstigsten
-  Internettarif (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
- rtikel: https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-s
- o-findest-du-guenstigeres-internet/
-URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
- dest-du-guenstigeres-internet/
+UID:facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
+ -tarife-fuer-2026:nutzen:2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261014T131500Z
+DTEND:20261014T133000Z
+SUMMARY:Facebook (Seite): Preisgarantie Gas: So sicherst du günstige T
+ arife (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-
+ gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
+ -sicherst-du-dir-guenstige-tarife-fuer-2026/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-10-15@f
+ ranksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261015T074500Z
+DTEND:20261015T080000Z
+SUMMARY:Facebook (Seite): DSL-Wechselbonus sichern: So sparst du beim 
+ Internetvertrag (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselb
+ onus-sichern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verme
- iden:nutzen:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261017T074500Z
-DTEND:20261017T080000Z
+ iden:takeaway:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261015T131500Z
+DTEND:20261015T133000Z
 SUMMARY:Facebook (Seite): Gasrechnung senken: Fehler im Spätsommer ver
- meiden (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-se
- nken-fehler-im-spaetsommer-vermeiden/
+ meiden (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-
+ senken-fehler-im-spaetsommer-vermeiden/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
  ehler-im-spaetsommer-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:fr
- age:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261017T131500Z
-DTEND:20261017T133000Z
-SUMMARY:Facebook (Seite): Haushaltsbuch führen: App\, Excel oder Stift
-  im Vergleich (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
- rtikel: https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-f
- uehren-app-excel-oder-papier/
-URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
- n-app-excel-oder-papier/
+UID:facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
+ bieterwechsel:vergleich:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261016T074500Z
+DTEND:20261016T080000Z
+SUMMARY:Facebook (Seite): Internet & DSL wechseln: Praxis-Tipps – High
+ speed Internet (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-internet-ds
+ l-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser
- -finden:takeaway:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261018T074500Z
-DTEND:20261018T080000Z
+ -finden:takeaway:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261016T131500Z
+DTEND:20261016T133000Z
 SUMMARY:Facebook (Seite): Energiediebe stoppen: So kannst du Stromfres
  ser finden (takeaway)
 DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
@@ -261,46 +216,91 @@ URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
- us-tipps:takeaway:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261018T131500Z
-DTEND:20261018T133000Z
-SUMMARY:Facebook (Seite): Frugalismus-Tipps: Mehr Freiheit durch kluge
- n Verzicht (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freihei
- t-durch-verzicht-clevere-frugalismus-tipps/
-URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
- verzicht-clevere-frugalismus-tipps/
+UID:facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-
+ ohne-gebuehren:nutzen:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261017T074500Z
+DTEND:20261017T080000Z
+SUMMARY:Facebook (Seite): Kostenloses Girokonto: So findest du ein Kon
+ to ohne Gebühren (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-gi
+ rokonto-so-findest-du-ein-konto-ohne-gebuehren/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
+ o-so-findest-du-ein-konto-ohne-gebuehren/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:za
- hl:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261019T074500Z
-DTEND:20261019T080000Z
+UID:facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:ta
+ keaway:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261017T131500Z
+DTEND:20261017T133000Z
 SUMMARY:Facebook (Seite): Mietwagen ohne Kautionsfallen: So sparst du 
- im Urlaub (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
- tikel: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen
- -ohne-kaution-fallen-urlaub/
+ im Urlaub (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-bu
+ chen-ohne-kaution-fallen-urlaub/
 URL:https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohn
  e-kaution-fallen-urlaub/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
+ net:frage:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261018T074500Z
+DTEND:20261018T080000Z
+SUMMARY:Facebook (Seite): DSL-Vergleich: So findest du den günstigsten
+  Internettarif (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-s
+ o-findest-du-guenstigeres-internet/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
+ dest-du-guenstigeres-internet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
+ us-tipps:zahl:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261018T131500Z
+DTEND:20261018T133000Z
+SUMMARY:Facebook (Seite): Frugalismus-Tipps: Mehr Freiheit durch kluge
+ n Verzicht (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-du
+ rch-verzicht-clevere-frugalismus-tipps/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
+ verzicht-clevere-frugalismus-tipps/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:za
+ hl:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261019T074500Z
+DTEND:20261019T080000Z
+SUMMARY:Facebook (Seite): Haushaltsbuch führen: App\, Excel oder Stift
+  im Vergleich (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fu
+ ehren-app-excel-oder-papier/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
+ n-app-excel-oder-papier/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-int
- ernet:zahl:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ ernet:frage:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261019T131500Z
 DTEND:20261019T133000Z
 SUMMARY:Facebook (Seite): DNS-Server wechseln: Schnelleres und sichere
- res Internet (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
- tikel: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechs
- eln-schnelleres-sichereres-internet/
+ res Internet (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wech
+ seln-schnelleres-sichereres-internet/
 URL:https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-
  schnelleres-sichereres-internet/
 STATUS:TENTATIVE
@@ -308,7 +308,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-prei
  sspruengen:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+DTSTAMP:20261009T231901Z
 DTSTART:20261020T074500Z
 DTEND:20261020T080000Z
 SUMMARY:Facebook (Seite): Preisgarantie Gas: So schützt du dich vor Pr
@@ -322,107 +322,137 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ec
- ke:takeaway:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ ke:zahl:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261020T131500Z
 DTEND:20261020T133000Z
 SUMMARY:Facebook (Seite): WLAN verbessern: So bringst du stabilen Spee
- d in jede Ecke (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbess
- ern-so-bringst-du-speed-in-jede-ecke/
+ d in jede Ecke (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-
+ so-bringst-du-speed-in-jede-ecke/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-b
  ringst-du-speed-in-jede-ecke/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-
- schnaeppchen:vergleich:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ schnaeppchen:zahl:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261021T074500Z
 DTEND:20261021T080000Z
 SUMMARY:Facebook (Seite): September-Roadtrip: Clevere Wege zum Mietwag
- en-Schnäppchen (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-02-september-r
- oadtrip-clevere-wege-zum-mietwagen-schnaeppchen/
+ en-Schnäppchen (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-09-02-september-roadtr
+ ip-clevere-wege-zum-mietwagen-schnaeppchen/
 URL:https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-c
  levere-wege-zum-mietwagen-schnaeppchen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:n
- utzen:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+UID:facebook:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:z
+ ahl:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261021T131500Z
 DTEND:20261021T133000Z
 SUMMARY:Facebook (Seite): Handytarif 2026 vergleichen: Günstige Tarife
-  ab 4\,99 € (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-26-handytarif-ver
- gleichen-2026-guenstige-tarife/
+  ab 4\,99 € (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergl
+ eichen-2026-guenstige-tarife/
 URL:https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleich
  en-2026-guenstige-tarife/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezah
- len:vergleich:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ len:frage:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261022T074500Z
 DTEND:20261022T080000Z
 SUMMARY:Facebook (Seite): Kreditkarte vergleichen: Kostenlos und siche
- r zahlen (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte
- -vergleichen-kostenlos-sicher-bezahlen/
+ r zahlen (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-ver
+ gleichen-kostenlos-sicher-bezahlen/
 URL:https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleic
  hen-kostenlos-sicher-bezahlen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-allta
- gsfehler:takeaway:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+ gsfehler:zahl:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261022T131500Z
 DTEND:20261022T133000Z
 SUMMARY:Facebook (Seite): Frugalismus-Tipps: Vier Tricks gegen teure A
- lltagsfehler (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-
- tipps-so-vermeidest-du-teure-alltagsfehler/
+ lltagsfehler (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Facebook (Seite)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipp
+ s-so-vermeidest-du-teure-alltagsfehler/
 URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so
  -vermeidest-du-teure-alltagsfehler/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im
- -vergleich:frage:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
+UID:facebook:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-sp
+ aetsommer:vergleich:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
 DTSTART:20261023T074500Z
 DTEND:20261023T080000Z
+SUMMARY:Facebook (Seite): Günstig durch den Winter: Heizungs-Check im 
+ Spätsommer (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-11-guenstig-du
+ rch-den-winter-heizungs-check-im-spaetsommer/
+URL:https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-w
+ inter-heizungs-check-im-spaetsommer/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewusste
+ n-konsum:vergleich:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261023T131500Z
+DTEND:20261023T133000Z
+SUMMARY:Facebook (Seite): Kleine Beträge\, große Wirkung: Frugalismus 
+ für den Einstieg (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Facebook (Seite
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-07-frugalismus
+ -tipps-mehr-freiheit-durch-bewussten-konsum/
+URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-me
+ hr-freiheit-durch-bewussten-konsum/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im
+ -vergleich:nutzen:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261024T074500Z
+DTEND:20261024T080000Z
 SUMMARY:Facebook (Seite): Tagesgeld-Zinsen 2026: Die besten Zinssätze 
- im Vergleich (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Facebook (Seite)\nA
- rtikel: https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinse
- n-2026-die-besten-zinssaetze-im-vergleich/
+ im Vergleich (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zins
+ en-2026-die-besten-zinssaetze-im-vergleich/
 URL:https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-202
  6-die-besten-zinssaetze-im-vergleich/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewusste
- n-konsum:nutzen:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261009T185146Z
-DTSTART:20261023T131500Z
-DTEND:20261023T133000Z
-SUMMARY:Facebook (Seite): Kleine Beträge\, große Wirkung: Frugalismus 
- für den Einstieg (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-ti
- pps-mehr-freiheit-durch-bewussten-konsum/
-URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-me
- hr-freiheit-durch-bewussten-konsum/
+UID:facebook:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stro
+ mfresser:takeaway:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261009T231901Z
+DTSTART:20261024T131500Z
+DTEND:20261024T133000Z
+SUMMARY:Facebook (Seite): Standby Kosten reduzieren: So entlarvst du S
+ tromfresser (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Facebook (Seite)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-09-11-standby-kost
+ en-reduzieren-so-entlarvst-du-stromfresser/
+URL:https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduz
+ ieren-so-entlarvst-du-stromfresser/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

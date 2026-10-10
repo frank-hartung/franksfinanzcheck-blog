@@ -3,14 +3,20 @@ title: "7 Gewohnheiten für finanzielle Freiheit"
 description: "7 Gewohnheiten für finanzielle Freiheit – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-10-09T11:32:49Z
 draft: true
-tags: ["Frugalismus"]
+tags: ["Geld sparen im Alltag", "Frugalismus"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["7 Gewohnheiten für finanzielle Freiheit"]
+keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
+pin_title: "7 Gewohnheiten für finanzielle Freiheit"
+pin_description: "*Werbung | 7 Gewohnheiten für finanzielle Freiheit – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #gewohnheiten #finanzielle"
+cover:
+  image: "images/covers/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit.jpg"
+  alt: "7 Gewohnheiten für finanzielle Freiheit"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast das Gefühl, dass am Monatsende immer wieder Geld fehlt. Du willst wissen, welche kleinen Gewohnheiten dir den Weg zur finanziellen Freiheit ebnen können, ohne dass du dein Leben radikal umkrempeln musst. Dieser Ratgeber zeigt dir sieben praxisnahe Schritte, die du sofort umsetzen kannst.
