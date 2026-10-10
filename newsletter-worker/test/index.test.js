@@ -19,7 +19,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { TAKT, takt_ausfuehren, takt_fuer } from '../src/index.js';
+import worker, { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON } from '../src/index.js';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -28,18 +28,22 @@ const EXPORT_KEY = 'export-key-32-z------------';
 
 function kvLeeren() {
   const daten = new Map();
+  const optionen = new Map();
   return {
     map: daten,
+    options: optionen,
     async get(schluessel, typ) {
       const roh = daten.get(schluessel);
       if (roh === undefined) return null;
       return typ === 'json' ? JSON.parse(roh) : roh;
     },
-    async put(schluessel, wert) {
+    async put(schluessel, wert, opts) {
       daten.set(schluessel, typeof wert === 'string' ? wert : JSON.stringify(wert));
+      optionen.set(schluessel, opts || null);
     },
     async delete(schluessel) {
       daten.delete(schluessel);
+      optionen.delete(schluessel);
     },
     async list({ prefix = '' } = {}) {
       const keys = [...daten.keys()].filter((k) => k.startsWith(prefix)).sort();
@@ -702,7 +706,7 @@ function wrangler_crons() {
 
 test('taktgeber: wrangler.toml und TAKT decken sich (Wochentage als Namen, nicht 2,5)', () => {
   const crons = wrangler_crons();
-  assert.deepEqual([...crons].sort(), Object.keys(TAKT).sort());
+  assert.deepEqual([...crons].sort(), [...Object.keys(TAKT), PFLEGE_CRON].sort());
   for (const c of crons) {
     const wochentag = c.trim().split(/\s+/)[4];
     assert.ok(!/^\d/.test(wochentag) || wochentag === '*',
@@ -905,4 +909,70 @@ test('feedback: antwortet CORS nur fuer die Site-Origin', async () => {
   const kv = kvLeeren();
   const antwort = await worker.fetch(feedback_request('pillar-konto-karten', 'ja'), env_mit(kv));
   assert.equal(antwort.headers.get('Access-Control-Allow-Origin'), 'https://franksfinanzcheck.de');
+});
+
+// ------------------------------------------------------------------ Datenschutz-Pflege
+test('Datenschutz-Pflege: abgemeldete Bestandsdaten nach 29 Tagen inkl. Token löschen, Nachweis getrennt erhalten', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'alt@beispiel.de', consent: '1' });
+  const eintrag = await kv.get('abo:alt@beispiel.de', 'json');
+  eintrag.status = 'unsubscribed';
+  eintrag.abbestellt = '2026-09-01T00:00:00Z';
+  await kv.put('abo:alt@beispiel.de', JSON.stringify(eintrag)); // Altbestand ohne TTL
+  const env = env_mit(kv);
+  const frueh = await datenschutz_pflege(env, Date.parse('2026-09-28T00:00:00Z'));
+  assert.equal(frueh.geloescht, 0);
+  const spaet = await worker.scheduled({ cron: PFLEGE_CRON, scheduledTime: Date.parse('2026-10-01T00:00:00Z') }, env, { waitUntil() {} });
+  assert.equal(spaet.geloescht, 1);
+  assert.equal(await kv.get('abo:alt@beispiel.de'), null);
+  assert.equal(await kv.get(`token:${eintrag.token}`), null);
+  assert.equal([...kv.map.keys()].filter((k) => k.startsWith('nachweis:')).length, 1);
+});
+
+test('Datenschutz-Pflege: aktive Abos bleiben, offene veraltete und alte Token verschwinden', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'aktiv@beispiel.de', consent: '1' });
+  await anmelden(kv, { email: 'offen@beispiel.de', consent: '1' });
+  const aktiv = await kv.get('abo:aktiv@beispiel.de', 'json');
+  aktiv.status = 'active';
+  await kv.put('abo:aktiv@beispiel.de', JSON.stringify(aktiv));
+  const offen = await kv.get('abo:offen@beispiel.de', 'json');
+  offen.seit = '2026-09-01T00:00:00Z';
+  await kv.put('abo:offen@beispiel.de', JSON.stringify(offen));
+  await kv.put('token:verwaist', 'aktiv@beispiel.de');
+  const env = env_mit(kv);
+  const erg = await datenschutz_pflege(env, Date.parse('2026-10-01T00:00:00Z'));
+  assert.equal(erg.geloescht, 1);
+  assert.ok(await kv.get('abo:aktiv@beispiel.de'));
+  assert.equal(await kv.get('abo:offen@beispiel.de'), null);
+  assert.equal(await kv.get('token:verwaist'), null);
+  assert.equal(await kv.get(`token:${offen.token}`), null);
+  assert.equal((await worker.fetch(new Request('http://abos.test/status?token=verwaist'), env)).status, 404);
+});
+
+test('Wiederanmeldung: alter Token verliert Berechtigung', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'neu@beispiel.de', consent: '1' });
+  const erster = await kv.get('abo:neu@beispiel.de', 'json');
+  erster.status = 'unsubscribed';
+  erster.abbestellt = new Date().toISOString();
+  await kv.put('abo:neu@beispiel.de', JSON.stringify(erster));
+  await anmelden(kv, { email: 'neu@beispiel.de', consent: '1' });
+  assert.equal(await kv.get(`token:${erster.token}`), null);
+  const antwort = await worker.fetch(new Request(`http://abos.test/status?token=${erster.token}`), env_mit(kv));
+  assert.equal(antwort.status, 404);
+});
+
+test('Abo und Token: TTL für pending/unsubscribed, aktives Abo ohne TTL', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'ttl@beispiel.de', consent: '1' });
+  const pending = await kv.get('abo:ttl@beispiel.de', 'json');
+  assert.equal(kv.options.get('abo:ttl@beispiel.de').expirationTtl, 15 * 86400);
+  assert.equal(kv.options.get(`token:${pending.token}`).expirationTtl, 15 * 86400);
+  await worker.fetch(form_request('/bestaetigung', { token: pending.token }), env_mit(kv));
+  assert.equal(kv.options.get('abo:ttl@beispiel.de'), null);
+  assert.equal(kv.options.get(`token:${pending.token}`), null);
+  await worker.fetch(form_request('/abmeldung', { token: pending.token }), env_mit(kv));
+  assert.equal(kv.options.get('abo:ttl@beispiel.de').expirationTtl, 29 * 86400);
+  assert.equal(kv.options.get(`token:${pending.token}`).expirationTtl, 29 * 86400);
 });

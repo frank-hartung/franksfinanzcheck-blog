@@ -5,7 +5,7 @@
 #
 #   1) cd newsletter-worker
 #   2) npx wrangler login
-#   3) npx wrangler kv:namespace create ABO
+#   3) npx wrangler kv namespace create ABO --jurisdiction=eu
 #        -> wrangler ergänzt id + placement automatisch unten
 #   4) npx wrangler secret put GITHUB_PAT    (Fine-Grained-PAT, nur dieses
 #      Repo, Berechtigung "Actions: Read and write" – das ist das Recht,
@@ -55,18 +55,20 @@ BESTAETIGUNG_TAGE = "14"
 #   30 4 * * TUE,FRI  -> newsletter-daily.yml   (planmaessig=true)  06:30 MESZ / 05:30 MEZ
 #    5 5 * * TUE,FRI  -> newsletter-cadence.yml (zaehlt nach, holt nach, wird laut)
 #   17 * * * *        -> newsletter-lifecycle.yml (aktion=nachgang)
+#   13 2 * * *        -> taegliche Datenschutz-Pflege im Worker (kein Dispatch)
 # ACHTUNG Wochentage: Cloudflare zaehlt 1=SO..7=SA (Quartz). "2,5" waere
-# Mo/Do. Deshalb Namen (TUE,FRI). Die Schluessel muessen EXAKT der
-# TAKT-Tabelle in src/index.js entsprechen (Test haelt beides deckungsgleich).
+# Mo/Do. Deshalb Namen (TUE,FRI). Crons muessen TAKT + PFLEGE_CRON
+# in src/index.js entsprechen (Test haelt beides deckungsgleich).
 [triggers]
-crons = ["30 4 * * TUE,FRI", "5 5 * * TUE,FRI", "17 * * * *"]
+crons = ["30 4 * * TUE,FRI", "5 5 * * TUE,FRI", "17 * * * *", "13 2 * * *"]
 
-# KV-Speicher: nach `npx wrangler kv:namespace create ABO` automatisch
-# ergaenzt. PLACEMENT: "eu" halten, damit die Adressen in der EU liegen.
+# KV-Speicher: EU-Jurisdiktion muss BEI Erstellung gesetzt sein. Ein
+# placement-Feld belegt KEINEN EU-Speicherort. Bestehende Produktion im
+# Dashboard pruefen, ggf. neue EU-Namespace anlegen + Daten migrieren.
+# npx wrangler kv namespace create ABO --jurisdiction=eu
 [[kv_namespaces]]
 binding = "ABO"
 id = "HIER-DIE-ID-NACH-ERSTELLUNG"
-placement = "eu"
 
 # Eigene Subdomain (TLS wird von Cloudflare automatisch gestellt).
 # zone_id: Dashboard -> Your Sites -> franksfinanzcheck.de -> API ID.

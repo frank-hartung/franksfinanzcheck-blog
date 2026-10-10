@@ -27,9 +27,9 @@
  *                        eigener Scheduler an diesem Repo Stunden zu spaet
  *                        oder gar nicht feuert. Details: Abschnitt „Taktgeber“.
  *
- * DATEN (Workers KV, Binding `ABO`, EU-Region in deinem CF-Account):
- *   abo:{email-norm}     Abo-Status, Token, Themen, Zeitstempel
- *   token:{token}        Rueckweg Token -> email-norm
+ * DATEN (Workers KV, Binding `ABO`; Jurisdiktion im CF-Konto pruefen):
+ *   abo:{email-norm}     Abo-Status, Token, Themen, Zeitstempel (aktive ohne TTL)
+ *   token:{token}        Rueckweg Token -> email-norm (gleiche TTL wie Abo)
  *   nachweis:{sha256}    Einwilligungsnachweis (IP, UA, Zeitpunkt), TTL 3 Jahre
  *   rat:{sha256(ip)}     Rate-Limit-Zaehler (15 Min)
  *   metrik:falle        Bot-Fallen-Treffer (1 Tag)
@@ -48,7 +48,11 @@
  */
 
 // ---------------------------------------------------------------- Konstanten
-const TTL_NACHWEIS_SEK = 1095 * 24 * 60 * 60; // 3 Jahre (Art. 7 DSGVO)
+const TTL_NACHWEIS_SEK = 1095 * 24 * 60 * 60; // Nachweis: bis zu 3 Jahre
+const TTL_UNSUB_SEK = 29 * 24 * 60 * 60; // KV-Fangnetz bei Cron-Ausfall (< 30 Tage)
+const TTL_PENDING_SEK = 15 * 24 * 60 * 60; // DOI-Frist 14 Tage + Fangnetz
+const TTL_EXPIRED_SEK = 24 * 60 * 60;
+const PFLEGE_CRON = '13 2 * * *';
 const TTL_RATE_SEK = 15 * 60;
 const MAX_ANMELDUNGEN_PRO_IP = 5;
 // FEEDBACK (H4, 28.09.2026): Leser-Stimmen je Artikel. Missbrauchsschutz =
@@ -234,8 +238,17 @@ async function abo_lesen(kv, norm) {
 }
 
 async function abo_schreiben(kv, eintrag) {
-  await kv.put(`abo:${eintrag.norm}`, JSON.stringify(eintrag));
-  await kv.put(`token:${eintrag.token}`, eintrag.norm);
+  const bisher = await abo_lesen(kv, eintrag.norm);
+  // Neu-Anmeldung darf keinen zweiten gültigen Token zurücklassen.
+  if (bisher && bisher.token && bisher.token !== eintrag.token) {
+    await kv.delete(`token:${bisher.token}`);
+  }
+  const ttl = eintrag.status === 'unsubscribed' ? TTL_UNSUB_SEK
+    : eintrag.status === 'pending' ? TTL_PENDING_SEK
+      : eintrag.status === 'abgelaufen' ? TTL_EXPIRED_SEK : null;
+  const optionen = ttl ? { expirationTtl: ttl } : undefined;
+  await kv.put(`abo:${eintrag.norm}`, JSON.stringify(eintrag), optionen);
+  await kv.put(`token:${eintrag.token}`, eintrag.norm, optionen);
 }
 
 async function nachweis_schreiben(kv, eintrag) {
@@ -260,6 +273,37 @@ async function liste_mit_prefix(kv, prefix) {
     cursor = seite.list_complete ? undefined : seite.cursor;
   } while (cursor);
   return alle;
+}
+
+// Einmal täglich: auch Bestandsdaten ohne TTL bereinigen. Kein API-Endpunkt:
+// nur der Cloudflare-Cron darf diese Operation starten. Wiederholbar; aktive
+// Abos und separat befristete Nachweise bleiben erhalten.
+async function datenschutz_pflege(env, zeit = Date.now()) {
+  const grenze = (tage) => zeit - tage * 24 * 60 * 60 * 1000;
+  let geloescht = 0;
+  for (const key of await liste_mit_prefix(env.ABO, 'abo:')) {
+    const eintrag = await env.ABO.get(key, 'json');
+    if (!eintrag || !['unsubscribed', 'abgelaufen', 'pending'].includes(eintrag.status)) continue;
+    const datum = eintrag.status === 'unsubscribed' ? eintrag.abbestellt
+      : eintrag.status === 'pending' ? eintrag.seit : (eintrag.abgelaufen_am || eintrag.seit);
+    const stichtag = eintrag.status === 'unsubscribed' ? grenze(29) : grenze(14);
+    if (!datum || !Number.isFinite(Date.parse(datum)) || Date.parse(datum) > stichtag) continue;
+    // Recheck unmittelbar vor dem Löschen; Keys sind im Produktionsbestand
+    // bereits vorhanden und können zwischen list() und get() geändert werden.
+    const aktuell = await env.ABO.get(key, 'json');
+    if (!aktuell || aktuell.status !== eintrag.status || aktuell.token !== eintrag.token ||
+        aktuell.abbestellt !== eintrag.abbestellt || aktuell.seit !== eintrag.seit) continue;
+    await env.ABO.delete(key);
+    if (eintrag.token) await env.ABO.delete(`token:${eintrag.token}`);
+    geloescht += 1;
+  }
+  // Alte Token-Versionen und Waisen aus früheren Deploys beseitigen.
+  for (const key of await liste_mit_prefix(env.ABO, 'token:')) {
+    const norm = await env.ABO.get(key);
+    const eintrag = norm && await abo_lesen(env.ABO, norm);
+    if (!eintrag || key !== `token:${eintrag.token}`) await env.ABO.delete(key);
+  }
+  return { geloescht };
 }
 
 // ---------------------------------------------------------------- Trigger
@@ -580,9 +624,13 @@ function bestaetigung_tage(env) {
 }
 
 async function token_eintrag(env, token) {
-  const norm = await env.ABO.get(`token:${String(token || '').trim()}`);
+  const sauber = String(token || '').trim();
+  if (!sauber) return null;
+  const norm = await env.ABO.get(`token:${sauber}`);
   if (!norm) return null;
-  return abo_lesen(env.ABO, norm);
+  const eintrag = await abo_lesen(env.ABO, norm);
+  // Auch alte, bereits ausgegebene und verwaiste Tokens nicht akzeptieren.
+  return eintrag && eintrag.token === sauber ? eintrag : null;
 }
 
 async function bestaetigung(request, env) {
@@ -596,6 +644,7 @@ async function bestaetigung(request, env) {
   const ist_abgelaufen = eintrag.status === 'pending' && (Date.now() - new Date(eintrag.seit).getTime() > ablauf_millis);
   if (ist_abgelaufen) {
     eintrag.status = 'abgelaufen';
+    eintrag.abgelaufen_am = new Date().toISOString();
     await abo_schreiben(env.ABO, eintrag);
     return antwort_mit('abgelaufen', `Die Bestätigung ist abgelaufen (${bestaetigung_tage(env)} Tage). Melde dich bitte erneut an – das dauert einen Moment.`, env, request, 410);
   }
@@ -857,9 +906,10 @@ async function exportiert(request, env, p, url) {
     if (ergebnis === 'gesendet' && eintrag.status === 'pending') {
       eintrag.versuche = (eintrag.versuche || 0) + 1;
       eintrag.bestaetigung_gesendet = jetzt;
-      if (eintrag.versuche >= MAX_VERSEND_VERSUCHE) eintrag.status = 'abgelaufen';
+      if (eintrag.versuche >= MAX_VERSEND_VERSUCHE) { eintrag.status = 'abgelaufen'; eintrag.abgelaufen_am = jetzt; }
     } else if (ergebnis === 'abgelaufen') {
       eintrag.status = 'abgelaufen';
+      eintrag.abgelaufen_am = jetzt;
     } else if (ergebnis === 'bounce') {
       // Harte Bounce: Unterdruckung, keine Weiterleitung, kein Retry.
       eintrag.status = 'unsubscribed';
@@ -904,11 +954,13 @@ export default {
    * "http://localhost:8787/cdn-cgi/local/scheduled?cron=30+4+*+*+TUE,FRI".
    */
   async scheduled(controller, env, ctx) {
-    const arbeit = takt_ausfuehren(env, controller && controller.cron, controller && controller.scheduledTime);
+    const arbeit = controller && controller.cron === PFLEGE_CRON
+      ? datenschutz_pflege(env, controller.scheduledTime || Date.now())
+      : takt_ausfuehren(env, controller && controller.cron, controller && controller.scheduledTime);
     if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(arbeit);
     return arbeit;
   },
 };
 
 // Fuer Tests (node --test): die Takt-Tabelle und der Ausfuehrer ohne Cloudflare.
-export { TAKT, takt_ausfuehren, takt_fuer };
+export { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON };

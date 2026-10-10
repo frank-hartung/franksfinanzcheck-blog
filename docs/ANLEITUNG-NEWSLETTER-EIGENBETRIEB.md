@@ -82,10 +82,10 @@ Eigener Cloudflare-Account (kostenlos; der Worker ist Teil des Free-Plans).
 ```bash
 cd newsletter-worker
 wrangler login
-wrangler kv namespace create ABO     # Bindung: ABO (schon in wrangler.toml)
-                                     # OHNE --jurisdiction=eu = globales KV.
-                                     # EU-only erst nach Beta-Zusage, siehe Schritt 9c.
-                                     # Einmal global angelegt, nicht nachträglich auf EU umstellbar.
+wrangler kv namespace create ABO --jurisdiction=eu
+                                     # Bindung: ABO; ID ins wrangler.toml.
+                                     # EU-Jurisdiktion nur bei Erstellung setzbar.
+                                     # Produktion gesondert prüfen, siehe Schritt 9c.
 wrangler secret put GITHUB_PAT       # Fine-Grained-PAT, NUR dieses Repo, Berechtigung
                                      # „Actions: Read and write“ (löst workflow_dispatch aus;
                                      # „Workflows“ wäre das Recht, Workflow-DATEIEN zu ändern –
@@ -212,19 +212,18 @@ Normalzustand vor der Freischaltung)`).
 
 Code kann das nicht. Ohne diese Schritte bleiben Resend und Cloudflare
 technisch im Betrieb, aber ohne nachweisbaren Auftragsverarbeitungsvertrag
-und ohne klare Entscheidung zum Speicherort der Abo-Liste. Die
-Datenschutzerklärung (`content/datenschutz/index.md`, § 8) behauptet
-genau diese Verträge – sie müssen in deinem Ablageordner stehen, nicht
-nur als Link.
+und ohne klare Entscheidung zum Speicherort der Abo-Liste. Die Datenschutzerklärung (`content/datenschutz/index.md`, § 8) macht
+seit dem 10.10.2026 keine ungeprüfte Vertragszusage mehr. Für eine
+rechtliche Freigabe müssen Verträge und Drittlandnachweise dennoch
+im internen Betreiberarchiv vorliegen.
 
 **Was du dabei *nicht* erwartest:** Resend speichert Kundendaten **in den
 USA** (Stand der Resend-GDPR-Seite). Die Domain-Region (`eu-west-1`)
 steuert nur den Versandweg, nicht den Speicherort. Cloudflare KV ist
 standardmäßig **global repliziert**. Ein Feld `placement = "eu"` in
 `newsletter-worker/wrangler.toml` erzeugt **kein** EU-only-KV – das
-Feld ist kein Ersatz für eine Jurisdiction. EU-KV (`jurisdiction=eu`)
-ist bei Cloudflare **private Beta**, nur bei der *Erstellung* des
-Namespaces setzbar, danach nicht mehr umstellbar.
+Feld ist kein Ersatz für eine Jurisdiction. EU-KV (`jurisdiction=eu`) ist seit 02.10.2026 allgemein verfügbar,
+nur bei der *Erstellung* des Namespaces setzbar, danach nicht mehr umstellbar.
 
 #### 9a. Resend – DPA herunterladen (kein Gegenzeichnen)
 
@@ -296,8 +295,8 @@ Zusätzlich sichern (kein Vertrag, aber Beleg der Garantien):
 #### 9c. Cloudflare KV – EU-Speicherort, ehrlich
 
 **Ist-Zustand im Repo:** `newsletter-worker/wrangler.toml` hat
-`id = "HIER-DIE-ID-NACH-ERSTELLUNG"` und ein Kommentarfeld
-`placement = "eu"`. Das ist **kein** erstelltes EU-Namespace.
+`id = "HIER-DIE-ID-NACH-ERSTELLUNG"`. Das ist **kein** erstelltes
+EU-Namespace. Ein früher verwendetes `placement = "eu"` ist entfernt.
 Wrangler-KV-Bindings kennen `binding` + `id` (+ `preview_id`).
 Jurisdiction wird **nur beim Anlegen** gesetzt.
 
@@ -306,7 +305,7 @@ Jurisdiction wird **nur beim Anlegen** gesetzt.
 
 | | Standard-KV | Jurisdiction `eu` |
 |---|---|---|
-| Verfügbarkeit | jeder Account | **private Beta** (Account-Team / Support) |
+| Verfügbarkeit | jeder Account | seit 02.10.2026 allgemein verfügbar (Cloudflare-Changelog) |
 | Dauerhafter Speicher | global repliziert | nur in der EU |
 | Nachträglich umstellen | – | **unmöglich** |
 | Worker / Cache | kann außerhalb der EU laufen | ebenfalls; Cache kann Kopien außerhalb lassen |
@@ -315,15 +314,11 @@ Jurisdiction wird **nur beim Anlegen** gesetzt.
 **Ablauf, wenn noch kein Namespace existiert** (ID steht noch auf dem
 Platzhalter – das ist der günstige Fall):
 
-1. Dashboard → Support → Ticket, Betreff etwa
-   `Workers KV jurisdiction eu – private beta access`.
-   Text: Account-ID, Vorhaben „Newsletter-Abo-Liste, personenbezogene
-   E-Mail-Adressen, Speicherung nur in der EU“, Bitte um Freischaltung
-   von `jurisdiction=eu`.
-2. Antwort abwarten. **Ohne Freischaltung schlägt
-   `--jurisdiction=eu` fehl** oder erzeugt ein ganz normales globales
-   KV – das merkst du erst später.
-3. Erst nach Zusage, **bevor die erste Adresse geschrieben wird:**
+1. Im Cloudflare-Dashboard die Verfügbarkeit und die Jurisdiktionsoption für
+   dieses Konto prüfen. [Cloudflare-Changelog vom 02.10.2026](https://developers.cloudflare.com/changelog/post/2026-10-02-kv-jurisdictions-ga/).
+2. **Vor** dem ersten Schreiben ein neues Namespace mit `--jurisdiction=eu`
+   anlegen; das existierende globale Namespace lässt sich nicht umstellen.
+3. Danach, **bevor die erste Adresse geschrieben wird:**
 
    ```bash
    cd newsletter-worker
@@ -340,17 +335,16 @@ Platzhalter – das ist der günstige Fall):
 **Ablauf, wenn schon ein globales KV mit Daten existiert:**
 
 Nicht umbenennen, nicht „EU drüberschreiben“. Neues EU-Namespace
-anlegen (nach Beta-Zusage), Daten kontrolliert umziehen, Binding auf
+anlegen, Daten kontrolliert umziehen, Binding auf
 die neue ID, altes Namespace leeren und löschen. Jede Adresse, die
 einmal global lag, war global.
 
-**Was du tun kannst, wenn die Beta nicht kommt** (wahrscheinlich auf
-Free/Pro):
+**Wenn ein EU-Namespace nicht eingerichtet oder der Standort nicht
+nachgewiesen werden kann:**
 
 - AVV Cloudflare (9b) liegt vor.
-- Datenschutzerklärung bleibt bei **SCC + Data Privacy Framework**
-  für Cloudflare (steht schon in § 8) – das ist die
-  Drittland-Rechtsgrundlage, kein EU-Hosting.
+- Drittlandtransfer und Rechtsgrundlage für den konkret genutzten Dienst
+  anhand der Vertragsunterlagen prüfen, bevor eine Rechtsgrundlage behauptet wird.
 - `placement = "eu"` **nicht** als erledigte EU-Speicherung verkaufen,
   weder intern noch gegenüber Lesern.
 - Optional später: Data Localization Suite / Regional Services, wenn

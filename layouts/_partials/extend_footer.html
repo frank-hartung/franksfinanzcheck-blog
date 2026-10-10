@@ -1,10 +1,10 @@
 {{- /* ============================================================
-    CONSENT-BANNER + Pinterest-Footer (Site-Override von extend_footer)
-    - Erscheint auf ALLEN Seiten (Footer wird überall gerendert)
+    Pinterest-Footer + optionaler Analyse-Consent (Site-Override)
+    - Consent erscheint nur bei konfigurierter Umami-Website-ID
     - Pinterest-Link NUR auf Inhaltsseiten, NICHT auf Rechtsseiten
       (impressum, datenschutz)
     - Funktioniert ohne externe Dienste (offline-fähig)
-    - Speichert die Einwilligung im Cookie "ff_cookie_consent"
+    - Speichert die Einwilligung im Cookie "ff_analytics_consent_v2"
       (technisch notwendig, § 25 Abs. 2 TDDDG – kein Consent nötig)
     - Bietet API für künftige Tracking-Skripte: window.ffConsentChoice
     - Upgrade auf Cookiebot/Klaro jederzeit möglich (siehe README)
@@ -36,15 +36,16 @@
 {{- /* Newsletter-Anmeldung: newsletterFormAction / newsletterFormUrl werden
        zentral in newsletter_strip.html ausgewertet. Kein zweiter CTA hier. */ -}}
 
+{{- with site.Params.umami.websiteId }}
 <div class="ff-consent-wrap" style="text-align:center; margin: 8px 0;">
-  <a href="#" onclick="ffConsentShow(true);return false;" title="Cookie-Einstellungen öffnen"
-     class="ff-consent-reopen">Cookie-Einstellungen</a>
+  <a href="#" onclick="ffConsentShow(true);return false;" title="Analyse-Einstellungen öffnen"
+     class="ff-consent-reopen">Analyse-Einstellungen</a>
 </div>
 
 {{- /* ---------- Consent-Banner (Logik) ---------- */ -}}
 <script>
 (function () {
-  var KEY = 'ff_cookie_consent';
+  var KEY = 'ff_analytics_consent_v2';
   function getCookie(name) {
     var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : null;
@@ -98,6 +99,11 @@
   // kein JS-Einblenden nötig (LCP-optimiert).
 })();
 </script>
+
+{{- else }}
+{{- /* Alte Consent-Cookies entfernen; die Messung ist deaktiviert. */ -}}
+<script>document.cookie="ff_cookie_consent=;max-age=0;path=/;SameSite=Lax";</script>
+{{- end }}
 
 {{- /* ---------- Premium Blog Enhancements: GSAP + reflow-sichere UX-Microinteractions ----------
      First-party/self-hosted, kein Tracking, keine Cookies.

@@ -1,6 +1,6 @@
 ---
 title: "Datenschutzerklärung"
-description: "Datenschutzerklärung gemäß DSGVO und TDDDG – Affiliate-Partnerprogramm (CHECK24/Tarifcheck), Consent-Banner und alle Betroffenenrechte"
+description: "Datenschutzhinweise zu Hosting, Affiliate-Links, Newsletter, Feedback und deinen Rechten"
 draft: false
 showToc: true
 ---
@@ -23,7 +23,7 @@ Verantwortliche Stelle im Sinne der Datenschutz-Grundverordnung (DSGVO) und ande
 
 Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit deinen personenbezogenen Daten passiert, wenn du diese Website besuchst. Personenbezogene Daten sind alle Daten, mit denen du persönlich identifiziert werden kannst. Ausführliche Informationen zum Thema Datenschutz entnimmst du den nachfolgenden Abschnitten dieser Datenschutzerklärung.
 
-Diese Website nutzt **Affiliate-Partnerprogramme** (CHECK24, Tarifcheck) sowie einen **Consent-Banner** zur Cookie-Verwaltung. Details hierzu findest du in den Abschnitten 4 und 5.
+Diese Website enthält **Affiliate-Links** zu Partnerangeboten. Newsletter und freiwilliges Feedback nutzen gesonderte Datenflüsse. Die externe Reichweitenmessung ist derzeit deaktiviert.
 
 ---
 
@@ -33,17 +33,13 @@ Diese Website nutzt **Affiliate-Partnerprogramme** (CHECK24, Tarifcheck) sowie e
 
 Diese Website wird bei einem externen Dienstleister gehostet: **GitHub Pages** (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA), erreichbar unter **franksfinanzcheck.de**. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. GitHub unterhält Serverstandorte auch außerhalb der EU; eine Verarbeitung der IP-Adresse kann daher außerhalb der EU (insbesondere in den USA) erfolgen.
 
-Der Datentransfer in die USA ist rechtlich abgesichert: **GitHub ist unter dem EU-US Data Privacy Framework (DPF) zertifizert.** Die EU-Kommission hat für DPF-zertifizierte Unternehmen mit Beschluss vom 10.07.2023 ein angemessenes Datenschutzniveau im Sinne von **Art. 45 DSGVO** festgestellt (Bestätigung durch das Gericht der EU vom 03.09.2025, Rs. T-553/23 „Latombe"). Der aktuelle Zertifizierungsstatus ist öffentlich einsehbar unter [dataprivacyframework.gov](https://www.dataprivacyframework.gov/). Zusätzlich besteht mit dem Hoster ein **Auftragsverarbeitungs­vertrag (AVV) gemäß Art. 28 DSGVO**.
-
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, stabilen und effizienten Bereitstellung der Website). Mit dem Hoster wird ein **Auftragsverarbeitungs­vertrag (AVV)** gemäß Art. 28 DSGVO geschlossen.
+**Zweck und Rechtsgrundlage:** Bereitstellung, Sicherheit und Stabilität der Website, Art. 6 Abs. 1 lit. f DSGVO. Dabei werden technische Zugriffsdaten wie IP-Adresse, Zeitpunkt und angeforderte URL verarbeitet. Ob und in welchem Umfang GitHub als Auftragsverarbeiter für diesen konkreten Dienst eingesetzt wird und welche Drittlandgarantien gelten, muss anhand der tatsächlich geltenden Vereinbarungen geprüft werden. Eine EU-exklusive Verarbeitung wird nicht zugesagt.
 
 ### Content-Delivery-Network (Cloudflare)
 
 Zur Auslieferung der Website wird das Content-Delivery-Network (CDN) **Cloudflare** (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA) eingesetzt. Beim Abruf einer Seite wird deine IP-Adresse sowie technische Daten (Browsertyp, Betriebssystem, Referrer, Uhrzeit der Anfrage) an die Server von Cloudflare übermittelt. Cloudflare betreibt Serverstandorte weltweit; eine Verarbeitung der IP-Adresse kann daher auch außerhalb der EU (insbesondere in den USA) erfolgen.
 
-Auch hier ist der Datentransfer in die USA abgesichert: **Cloudflare ist unter dem EU-US Data Privacy Framework (DPF) zertifiziert**, sodass die Übermittlung auf den Angemessenheitsbeschluss der EU-Kommission vom 10.07.2023 (**Art. 45 DSGVO**) gestützt werden kann (Status prüfbar unter [dataprivacyframework.gov](https://www.dataprivacyframework.gov/)). Cloudflare verarbeitet die Daten nach eigenen Angaben ausschließlich zur Auslieferung der angeforderten Inhalte und zur Fehleranalyse – nicht zu Werbezwecken.
-
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen und zuverlässigen Auslieferung der Website-Inhalte). Weitere Informationen: [www.cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/).
+**Zweck und Rechtsgrundlage:** schnelle und sichere Auslieferung sowie Schutz vor Missbrauch, Art. 6 Abs. 1 lit. f DSGVO. Cloudflare kann technische Zugriffsdaten auch außerhalb der EU verarbeiten. Die für die konkret eingesetzten Cloudflare-Dienste geltenden Verträge und Garantien für Drittlandübermittlungen sind vor einer rechtlichen Freigabe anhand des Betreiberkontos zu prüfen. Weitere Informationen: [Cloudflare-Datenschutzhinweise](https://www.cloudflare.com/privacypolicy/).
 
 ### Schriftarten (lokal gehostet)
 
@@ -63,24 +59,9 @@ Zur Beschleunigung wiederholter Besuche setzt diese Website einen **Service Work
 
 Die Suchbegriffe werden im Browser verarbeitet und nicht an einen Suchdienst übermittelt oder als Suchhistorie gespeichert. Für die Suche lädt der Browser statische Indexdateien von dieser Website; dabei anfallende technische Zugriffsdaten sind in Abschnitt 2 beschrieben.
 
-### Statistik und Reichweitenmessung (Umami – cookieless)
+### Reichweitenmessung
 
-Diese Website nutzt zur Reichweitenmessung das datenschutzfreundliche Analyse-Tool **Umami** (Open Source). Umami ist **cookieless**: Es werden **keine Cookies** gesetzt und **keine personenbezogenen Daten** gespeichert. Erfasst werden ausschließlich anonyme, aggregierte Kennzahlen:
-
-- Seitenaufrufe und Verweildauer
-- Herkunftsland (auf Regionsebene, nicht IP-basiert)
-- Referrer (welche Website verwiesen hat)
-- Gerätetyp und Browser (ohne individuelle Kennung)
-
-**Technische Umsetzung:** Die IP-Adresse wird von Umami beim Empfang **sofort anonymisiert** (gehasht) und nicht gespeichert. Eine Identifizierung einzelner Besucher ist technisch ausgeschlossen. Es werden keine Daten an Dritte (z. B. Google) weitergegeben.
-
-**Betrieb der Instanz:**
-- **Cloud-Variante:** Die Daten werden auf den Servern von Umami verarbeitet (weitere Informationen: [umami.is/privacy](https://umami.is/privacy)). Umami verarbeitet nach eigenen Angaben keine personenbezogenen Daten.
-- **Self-hosted-Variante:** Die Daten liegen auf einem eigenen Server (je nach Hosting in der EU oder im Rahmen der gültigen Datenschutz-Abkommen mit dem Hosting-Anbieter).
-
-**Einwilligung:** Der Einsatz erfolgt nach deiner Wahl im Consent-Banner – entweder erst nach „Alle akzeptieren" (strenger Modus) oder cookieless ohne Einwilligung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verbesserung der Website). **Aktuell aktiv ist der cookieless-Modus ohne Einwilligung** (Art. 6 Abs. 1 lit. f DSGVO). Du kannst die Messung jederzeit verhindern, indem du in deinem Browser den **Do-Not-Track-Header** aktivierst oder im Consent-Banner „Nur notwendige" wählst.
-
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse), je nach gewähltem Modus. § 25 TDDDG ist nicht einschlägig, da keine Cookies gesetzt werden.
+**Derzeit ist die externe Reichweitenmessung mit Umami deaktiviert** (Konfiguration der Website). Es wird daher kein Umami-Skript auf dieser Website geladen. Klicks auf Affiliate-Links werden derzeit nicht über Umami gemessen. Eine spätere Aktivierung erfordert eine erneute Prüfung der technischen Datenflüsse, der Empfänger und der Rechtsgrundlagen sowie die Anpassung dieser Hinweise und – falls erforderlich – eine wirksame Einwilligung vor dem Laden des Skripts.
 
 ### Server-Logfiles
 
@@ -93,20 +74,20 @@ Der Provider der Seiten erhebt und speichert automatisch Informationen in sogena
 - Uhrzeit der Serveranfrage
 - IP-Adresse
 
-Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website. Die Logfiles werden in der Regel nach **7 bis 14 Tagen** automatisch gelöscht.
+Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website. Die Aufbewahrungsfristen der beteiligten Dienstleister unterscheiden sich; eine pauschale Frist von 7 bis 14 Tagen wird nicht zugesagt. Die konkreten Fristen sind anhand der Betreiberkonten und Anbietervereinbarungen zu verifizieren.
 
 ---
 
 ## 3. Rechtsgrundlagen der Verarbeitung
 
-| Verarbeitung | Rechtsgrundlage |
+| Verarbeitung | Zweck / Rechtsgrundlage |
 |---|---|
-| Bereitstellung der Website / Logfiles | Art. 6 Abs. 1 lit. f DSGVO |
-| Speicherung der Consent-Einstellung | Art. 6 Abs. 1 lit. c DSGVO i. V. m. § 25 Abs. 2 TDDDG |
-| Affiliate-Tracking durch Drittanbieter | Einwilligung beim Drittanbieter (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG) bzw. berechtigtes Interesse |
-| Kontakt per E-Mail | Art. 6 Abs. 1 lit. b DSGVO bzw. lit. f DSGVO |
+| Auslieferung, Serverzugriffe und Sicherheit | Art. 6 Abs. 1 lit. f DSGVO: Betrieb und Schutz der Website |
+| Newsletter-Anmeldung und Versand | Art. 6 Abs. 1 lit. a DSGVO (freiwillige Einwilligung); Nachweise und Missbrauchsschutz zusätzlich Art. 6 Abs. 1 lit. f DSGVO |
+| Feedback und kurzzeitiger Missbrauchsschutz | Art. 6 Abs. 1 lit. f DSGVO: Auswertung der freiwillig abgegebenen Bewertung und Schutz vor Mehrfachabgaben |
+| Kontakt per E-Mail | Art. 6 Abs. 1 lit. b DSGVO bei (vor-)vertraglichen Fragen; sonst lit. f (Bearbeitung deiner Anfrage) |
 
-Sofern die Verarbeitung auf Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) beruht, kannst du diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.
+Für das Speichern oder Auslesen von Informationen auf deinem Endgerät ist § 25 TDDDG eigenständig zu prüfen; er ist keine DSGVO-Rechtsgrundlage. Details zu Browser-Speichern stehen in Abschnitt 5.
 
 ---
 
@@ -132,37 +113,28 @@ Beim Klick auf einen Affiliate-Link kann der jeweilige Kooperationspartner ein *
 - ggf. IP-Adresse (gekürzt oder vollständig)
 - Angaben zu Kauf-/Buchungsverhalten beim Partner
 
-**Wichtig:** Für die Datenverarbeitung nach dem Klick ist **allein der jeweilige Kooperationspartner** verantwortlich. Wir selbst erheben über die Affiliate-Links **keine personenbezogenen Daten** und erhalten ausschließlich statistische Informationen (Klicks und Abschlüsse ohne Personenbezug).
+**Wichtig:** Beim Klick verlässt du unsere Website. Auf der Partnerseite gelten deren Hinweise und Einwilligungseinstellungen. Wir legen mit den Partnern die Bedingungen unserer Verlinkung fest und können Provisions-/Abschlussberichte erhalten; ob diese im Einzelfall einen Personenbezug haben, ist anhand des Partnerkontos zu prüfen. Eine mögliche gemeinsame Verantwortlichkeit kann nicht pauschal ausgeschlossen werden. Eine derzeitige Umami-Klickmessung auf dieser Website findet nicht statt.
 
-**Rechtsgrundlage:** Sofern der Partner Tracking-Cookies einsetzt, erfolgt dies auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO bzw. § 25 Abs. 1 TDDDG) oder berechtigter Interessen des Partners (Art. 6 Abs. 1 lit. f DSGVO) – abhängig von den Einstellungen des Partners bzw. dessen Consent-Banners.
+**Rechtsgrundlage unserer Verlinkung:** Art. 6 Abs. 1 lit. f DSGVO (Finanzierung des redaktionellen Angebots); über den Einsatz von Tracking-Techniken auf der Zielseite informiert und entscheidet der jeweilige Anbieter nach den für ihn geltenden Regeln. Unsere Website erteilt dafür keine Einwilligung.
 
 **Tracking verhindern:** Cookies in den Browsereinstellungen deaktivieren, Privatmodus nutzen oder Affiliate-Links nicht anklicken. Gesetzte Cookies kannst du jederzeit in deinen Browsereinstellungen löschen.
 
 ---
 
-## 5. Cookies und Consent-Banner
+## 5. Cookies und Speicher auf deinem Gerät
 
-### Consent-Banner
+Derzeit setzen wir **kein Analytics-Consent-Cookie** und zeigen keinen Analyse-Banner: Die Reichweitenmessung ist abgeschaltet. Ein noch vorhandenes früheres `ff_cookie_consent`-Cookie wird beim nächsten Besuch durch die Website gelöscht. Externe Partner können erst nach einem Klick auf ihren Link eigene Speichertechniken einsetzen; unsere Website kann deren Einstellungen nicht verwalten.
 
-Diese Website verwendet einen **Consent-Banner** (Cookie-Einwilligungsverwaltung). Beim ersten Besuch erscheint ein Hinweis, in dem du zwischen „Alle akzeptieren" und „Nur notwendige" wählen kannst. **Es besteht keine Cookie-Wall** – die Nutzung der Website ist auch ohne Einwilligung vollständig möglich.
+**Lokaler Browser-Speicher und Cache:** Technisch notwendige Dateien können über den Service Worker im Cache des Browsers liegen. Bei freiwilliger Nutzung einzelner Funktionen speichern wir gegebenenfalls auf deinem Gerät:
 
-### Technisch notwendige Cookies
+| Schlüssel / Funktion | Zweck und Auslöser | Löschen |
+|---|---|---|
+| `ff_nl`, `ff_nl_themen` | Statushinweis nach Anmeldung bzw. Themenauswahl beim Wechsel zum Formular | Browserdaten löschen; die Themenauswahl wird nach erfolgreicher Anmeldung entfernt |
+| `ff_fixkosten_cockpit_v1` | Fixkosten-Eingaben nur, wenn du „auf diesem Gerät speichern“ wählst | „Zurücksetzen“ im Werkzeug oder Browserdaten löschen |
+| `ff_werkzeug_*_v1` | Eingaben einzelner Werkzeuge nach Aktivierung der lokalen Speicheroption | Speicheroption im Werkzeug deaktivieren oder Browserdaten löschen |
+| `ff-voice-pos:*` | Leseposition beim freiwillig genutzten Vorlesewerkzeug | im Werkzeug zurücksetzen oder Browserdaten löschen |
 
-Diese Website selbst setzt keine Tracking-Cookies. Es wird ausschließlich das Cookie **`ff_cookie_consent`** gesetzt, um deine getroffene Einwilligungsentscheidung zu speichern:
-
-- **Zweck:** Dokumentation deiner Cookie-Einwilligung
-- **Rechtsgrundlage:** Art. 6 Abs. 1 lit. c DSGVO i. V. m. § 25 Abs. 2 TDDDG (technisch erforderlich)
-- **Inhalt:** nur die gewählte Option („all" oder „necessary") – keine personenbezogenen Daten
-- **Speicherdauer:** 12 Monate
-- **Keine Weitergabe an Dritte**
-
-### Änderung / Widerruf
-
-Du kannst deine Einwilligung jederzeit über den Link **„Cookie-Einstellungen" im Footer** der Website ändern oder widerrufen (Art. 7 Abs. 3 DSGVO). Der Widerruf wirkt für die Zukunft; die Rechtmäßigkeit der bisherigen Verarbeitung bleibt unberührt.
-
-### Cookies durch Drittanbieter (Affiliate)
-
-Beim Klick auf Affiliate-Links (siehe Abschnitt 4) können Cookies durch Drittanbieter (CHECK24, Tarifcheck, Awin) gesetzt werden. Diese unterliegen der Datenschutzerklärung des jeweiligen Anbieters.
+Diese Werte bleiben im Browser und werden durch das bloße lokale Speichern nicht an uns übertragen. `localStorage` hat keine automatische Ablaufzeit; du kannst die Daten in deinen Browsereinstellungen jederzeit entfernen. Ob im Einzelfall die Ausnahme des § 25 Abs. 2 TDDDG für eine ausdrücklich gewünschte Funktion greift, ist anhand des konkreten Auslösers zu beurteilen; für nicht notwendige Speicherzugriffe ist gegebenenfalls eine Einwilligung erforderlich.
 
 ---
 
@@ -182,27 +154,23 @@ Diese Website enthält Links zu externen Websites Dritter. Auf die Datenverarbei
 
 ## 8. Newsletter / Kontaktaufnahme
 
-{{< newsletter_status >}} Du kannst dich über [die Anmeldeseite](/newsletter/) oder den Anmeldelink im Kopfbereich des Blogs für den Newsletter von FranksFinanzcheck anmelden. Dafür verarbeiten wir deine E-Mail-Adresse sowie die im Formular zusätzlich angegebenen Angaben (Themenwahl, Bestätigungszeitpunkt, Anmeldezeitpunkt).
+{{< newsletter_status >}} Du kannst dich freiwillig über [die Anmeldeseite](/newsletter/) für den Newsletter anmelden. Wir verarbeiten deine E-Mail-Adresse, gewählte Themen, Zeitpunkt der Anmeldung und Bestätigung sowie IP-Adresse, Browserkennung (User-Agent) und Herkunft der Anmeldung zum Nachweis der Einwilligung und zum Schutz vor Missbrauch.
 
-- **Double-Opt-In.** Nach der Anmeldung senden wir eine Bestätigungs-Mail. Der Newsletter wird erst nach deinem Klick auf den Bestätigungslink verschickt. Wir speichern Anmeldezeitpunkt, Bestätigungszeitpunkt und deine IP-Adresse, um nachweisen zu können, dass die Anmeldung von dir stammt (Art. 6 Abs. 1 lit. a, Art. 7 Abs. 1 DSGVO).
-- **Inhalt und Kadenz.** Höchstens zwei Newsletter pro Kalenderwoche, dienstags und freitags: ausgewählte Spartipps, Tariffristen und Rechner aus dem Blog. Die Bestätigungs-Mail zur Anmeldung (Double-Opt-In) wird zusätzlich ausgelöst.
-- **Rechtsgrundlage.** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
-- **Speicherdauer.** Deine Adresse bleibt auf der Liste, bis du dich abmeldest. Nach der Abmeldung löschen wir die Adresse innerhalb von 30 Tagen; Nachweise zur erteilten Einwilligung bewahren wir gemäß Art. 7 Abs. 1 DSGVO für 3 Jahre auf (berechtigtes Interesse zur Abwehr von Ansprüchen).
-- **Widerruf.** Jeder Newsletter enthält am Ende einen klickbaren Link („Newsletter abmelden“) und einen formlosen mailto-Weg; zusätzlich steht in jeder Mail der List-Unsubscribe-Header (One-Click, RFC 8058). Du kannst die Einwilligung außerdem über [das Formular auf der Abmeldeseite](/newsletter/abmelden/) oder formlos per Mail an kontakt@franksfinanzcheck.de mit Wirkung für die Zukunft widerrufen. Ein Grund ist nicht nötig.
-- **Auftragsverarbeiter.** Wir betreiben den Newsletter selbst und beauftragen zwei Anbieter: den Versand erfolgt über **Resend** (Resend, Inc., 548 Market St, San Francisco, CA 94104, USA) – der Auftragsverarbeitungsvertrag (Datenschutzvereinbarung/DPA) ist unter [resend.com/legal/dpa](https://resend.com/legal/dpa) abrufbar; für die Übermittlung in die USA gelten die Standardvertragsklauseln der EU-Kommission. Die Adresse, deine Themenwahl und die Bestätigungsnachweise (Zeitpunkt, IP-Adresse) werden in einem dedizierten Speicher von **Cloudflare** (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA) gehalten – Auftragsverarbeitungsvertrag unter [cloudflare.com/de/privacy](https://www.cloudflare.com/de/privacy/). Da Cloudflare unter dem EU-US Data Privacy Framework (DPF) zertifiziert ist (wie oben beim CDN beschrieben), ist auch diese Übermittlung auf den Angemessenheitsbeschluss der EU-Kommission (**Art. 45 DSGVO**) gestützt.
+- **Double-Opt-In:** Erst nach Klick auf den Bestätigungslink erfolgt der Versand. Die Bestätigung ist 14 Tage lang möglich. Inhalt: bis zu zwei Mails pro Kalenderwoche (dienstags und freitags) mit Spartipps, Fristen, Rechnern und gekennzeichneten Partnerlinks.
+- **Rechtsgrundlagen:** Deine Einwilligung für den Versand, Art. 6 Abs. 1 lit. a DSGVO. Nachweis und Missbrauchsschutz: Art. 6 Abs. 1 lit. f DSGVO (Nachweispflicht und Abwehr unberechtigter Anmeldungen). Die freiwillige Themenauswahl dient der Gestaltung des Newsletters.
+- **Widerruf:** Über den Abmeldelink in jeder Mail, [das Abmeldeformular](/newsletter/abmelden/) oder per Mail an kontakt@franksfinanzcheck.de jederzeit mit Wirkung für die Zukunft; ohne Angabe von Gründen. Jeder Newsletter enthält auch einen List-Unsubscribe-Header.
+- **Speicherfristen:** Aktive Adressen bleiben bis zur Abmeldung gespeichert. Nach Abmeldung werden Abo-Eintrag und Token spätestens innerhalb von 30 Tagen gelöscht; unbestätigte Anmeldungen nach Ablauf der Bestätigungsfrist (technisches Fangnetz bis zu 15 Tage). Ein gesonderter Nachweis der Anmeldung (einschließlich E-Mail, IP, User-Agent und Zeitpunkten) wird bis zu drei Jahre gespeichert, soweit zur Verteidigung gegen Ansprüche erforderlich. Kurzzeitige IP-Hashes für das Anmelde-Rate-Limit verfallen nach 15 Minuten.
+- **Technische Empfänger:** Die Anmeldedaten liegen im Cloudflare Workers KV. Der Worker stößt GitHub-Actions-Läufe an (im Dispatch nur ein Token); die Actions-Runner rufen die E-Mail-Adresse aus dem Worker ab und leiten sie an den für den Versand konfigurierten Dienst **Resend** weiter. Dabei können Daten in Drittländern verarbeitet werden. Die geltenden Verträge, Datenstandorte, Garantien und Logfristen für Cloudflare, GitHub Actions und Resend sind anhand der Betreiberkonten gesondert zu überprüfen; eine ausschließliche EU-Speicherung wird nicht zugesichert.
 
 **Kontakt per E-Mail:** Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine angegebenen Daten (E-Mail-Adresse, ggf. Name, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertrag/Vorvertrag) bzw. lit. f DSGVO (berechtigtes Interesse). Die Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
 
 ---
 
-## 9. Speicherdauer der Daten
+## 9. Speicherdauer und freiwilliges Feedback
 
-| Daten | Speicherdauer |
-|---|---|
-| Server-Logfiles | 7–14 Tage, danach automatische Löschung/Anonymisierung |
-| Consent-Cookie (`ff_cookie_consent`) | 12 Monate |
-| E-Mail-Korrespondenz | Bis zur abschließenden Bearbeitung, danach Löschung (gesetzliche Aufbewahrungspflichten bleiben unberührt) |
-| Newsletter-Adresse (eigene Liste: Worker + Cloudflare-Speicher) | Bis zur Abmeldung; Löschung innerhalb von 30 Tagen danach; Einwilligungsnachweise 3 Jahre |
+Wenn du bei einem Artikel auf „Ja“ oder „Nein“ zur Frage „War dieser Ratgeber hilfreich?“ klickst, sendet dein Browser die Auswahl und den Artikelbezug an unseren Cloudflare Worker. Der Worker speichert Zähler je Artikel. Um Mehrfachabgaben innerhalb von sechs Stunden zu begrenzen, wird ein aus IP-Adresse und Artikelkennung abgeleiteter Hash kurzzeitig gespeichert (TTL: sechs Stunden). Ein solcher Hash ist nicht automatisch anonym. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Verbesserung der Inhalte und Missbrauchsschutz). Ohne Klick findet keine Feedback-Übermittlung statt. Die aggregierten Zähler bleiben bestehen, solange sie für die Auswertung der Artikel benötigt werden.
+
+Für Newsletter-Fristen siehe Abschnitt 8. Technische Zugriffsdaten von Hosting/CDN/Worker werden entsprechend den tatsächlich geltenden Anbieter- und Sicherheitsfristen aufbewahrt; diese Fristen können wir ohne Einblick in die Produktionskonten hier nicht zuverlässig beziffern. E-Mail-Korrespondenz wird nach Abschluss der Anfrage gelöscht, soweit keine gesetzlichen Aufbewahrungsfristen oder berechtigten Ansprüche entgegenstehen.
 
 ---
 
@@ -221,7 +189,7 @@ Du hast im Rahmen der geltenden Datenschutzgesetze jederzeit das Recht auf:
 
 **Kontakt für deine Rechte:** E-Mail an kontakt@franksfinanzcheck.de
 
-**Zuständige Aufsichtsbehörde:** Landesbeauftragte für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern (https://www.datenschutz-mv.de)
+**Beschwerde:** Du kannst dich insbesondere an die Landesbeauftragte für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern (https://www.datenschutz-mv.de) wenden. Bei Direktwerbung kannst du der Verarbeitung jederzeit ohne Angabe besonderer Gründe widersprechen (Art. 21 Abs. 2 DSGVO).
 
 ---
 
@@ -249,8 +217,6 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 
 ---
 
-## 15. Aktualität und Änderung dieser Datenschutzerklärung
+## 15. Aktualität und Änderungen
 
-Diese Datenschutzerklärung ist aktuell gültig (**Stand: 12. September 2026**). Durch die Weiterentwicklung dieser Website oder aufgrund geänderter gesetzlicher bzw. behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Fassung findest du jederzeit auf dieser Seite.
-
-**Letzte Überarbeitung:** 25. September 2026 – Abschnitt 8: Widerruf um Abmelde-Formular und List-Unsubscribe (RFC 8058) ergänzt; Einwilligungstext der Anmeldung nennt Verantwortlichen, Partnerlinks und Impressum. 24. September 2026 – Abschnitt 8: Eigenbetrieb statt Brevo; Auftragsverarbeiter sind jetzt Resend (Versand, DPA + Standardvertragsklauseln) und Cloudflare (Liste und Bestätigungsnachweise, DPF/Art. 45); Double-Opt-In, Widerruf und Speicherdauer bleiben unverändert. 12. September 2026 – Abschnitt 8 trägt jetzt den vollständigen Newsletter-Rechtstext (Double-Opt-In mit Nachweis, Inhalt und Kadenz, Speicherdauer, Widerruf, Auftragsverarbeiter BREVO); die Freischaltung der Anmeldung ist an den Abschluss des AVV geknüpft; §9 um die Newsletter-Zeile ergänzt. 30. August 2026 – Drittlandtransfer in die USA auf das EU-US Data Privacy Framework (Art. 45 DSGVO) für GitHub Pages und Cloudflare umgestellt; Impressum um KI-Transparenzhinweis (Art. 50 EU-KI-VO) ergänzt.
+**Redaktioneller Stand: 10. Oktober 2026.** Diese Fassung bildet den geprüften Quellcode nach der vorsorglichen Abschaltung von Umami und der Ergänzung der Newsletter-Löschroutine ab. Sie beschreibt nicht automatisch die bereits laufende Produktion: Vor dem Einsatz müssen Deployment, Verträge, Empfänger, Drittlandgarantien und tatsächliche Fristen durch den Betreiber überprüft und nötigenfalls hier nachgetragen werden. Änderungen der Dienste oder des Geschäftsmodells erfordern eine erneute Prüfung.

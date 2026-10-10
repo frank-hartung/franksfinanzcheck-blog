@@ -34,9 +34,8 @@
 {{- else }}
 <body id="top"{{ if $ohne_suchindex }} data-pagefind-ignore="all"{{ end }}>
 {{- end }}
-    {{- /* Consent-Banner ganz vorn im DOM – LCP-Optimierung (kein
-           Render-Delay für das LCP-Element, s. consent_banner.html) */ -}}
-    {{- partial "consent_banner.html" . }}
+    {{- /* Nur bei aktivierter Analyse ist eine Einwilligungsoberfläche nötig. */ -}}
+    {{- with site.Params.umami.websiteId }}{{ partial "consent_banner.html" $ }}{{ end }}
     <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
     {{ partialCached "header.html" . .Page -}}
     {{- partial "newsletter_strip.html" (dict "ort" "kopf" "seite" .) }}

@@ -21,16 +21,16 @@
     Logik (ffConsent/ffConsentShow/Escape) bleibt im Footer-Skript
     (extend_footer.html) – findet das Element per ID.
 ============================================================ */}}
-<div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen">
+<div id="ff-consent-banner" role="region" aria-label="Analyse-Einstellungen">
   <div class="ff-consent-banner__inner">
     <div class="ff-consent-banner__text">
-      <strong class="ff-consent-banner__title"><span aria-hidden="true">🍪 </span>Cookie-Einstellungen:</strong>
-      Nur technisch notwendige Cookies. Beim Klick auf Affiliate-Links (z.&nbsp;B. zu CHECK24) können Anbieter Tracking-Cookies setzen – hier verwalten.
+      <strong class="ff-consent-banner__title">Analyse-Einstellungen:</strong>
+      Dürfen wir Umami Cloud zur Reichweitenmessung laden? Dabei werden technische Daten an Umami übermittelt. Ohne Zustimmung bleibt die Analyse aus. Cookies auf externen Partnerseiten verwalten wir hier nicht.
       <a href="{{ "datenschutz/" | absURL }}" class="ff-consent-banner__link">Datenschutzerklärung</a>
     </div>
     <div class="ff-consent-banner__buttons">
-      <button onclick="ffConsent('all')" class="ff-consent-banner__btn-accept">Alle akzeptieren</button>
-      <button onclick="ffConsent('necessary')" class="ff-consent-banner__btn-necessary">Nur notwendige</button>
+      <button onclick="ffConsent('all')" class="ff-consent-banner__btn-accept">Analyse zustimmen</button>
+      <button onclick="ffConsent('necessary')" class="ff-consent-banner__btn-necessary">Ohne Analyse</button>
     </div>
   </div>
 </div>
