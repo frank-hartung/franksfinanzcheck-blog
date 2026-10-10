@@ -242,8 +242,22 @@ Dazu `cloudflare/ki-assistent/test/worker.test.mjs` (**7 Tests**, `node --test`)
 | `python3 scripts/integrity_guard.py --gate` | ✅ 49 Kerndateien signiert (Lock mitgezeichnet) |
 | `python3 scripts/actions_version_guard.py --gate` | ✅ keine Action-Versions-Drift |
 | `python3 scripts/artefakt_waechter.py` | ✅ 391 Artefakte strukturell heil |
-| **CI auf dem PR** | ✅ `URL-Wache`, `Klartext-Wache`, `Integritäts-Siegel`, `CodeQL (javascript)` |
+| **CI auf dem PR** | ✅ `URL-Wache`, `Klartext-Wache`, `Integritäts-Siegel`, `Regelwerk`, `gate`, `regression`, `CodeQL (python)`, `CodeQL (javascript)` |
 | Repository-Grep | ✅ 0 `# noqa` nackt, 0 `# lgtm`, 0 `# codeql[...]` |
+
+
+### Der Beweis aus der echten Analyse (PR #696, Lauf `38077159639`)
+
+Die entscheidende Zahl steht nicht in einem lokalen Skript, sondern in der SARIF der GitHub-Analyse — **ohne jede Whitelist**:
+
+```
+sarif-results/python.sarif:     0 Funde (0 unterdrückt), 43 Regeln mit Metadaten
+sarif-results/javascript.sarif: 0 Funde (0 unterdrückt), 87 Regeln mit Metadaten
+```
+
+Beide Klammern zählen: **0 Funde** heißt, die Klasse ist weg; **0 unterdrückt** heißt, sie ist nicht versteckt. Vorher war die erste Zahl nur deshalb klein, weil die zweite ungeprüft blieb.
+
+Der Weg dorthin war instruktiv: Der **erste** Lauf ohne Whitelist meldete `1 Security-Fundstelle` — `py/bad-tag-filter` in der URL-Wache selbst (Abschnitt 8, Punkt 4). Geheilt, erneut analysiert, seitdem 0. Ein Gate, das beim ersten scharfen Lauf nichts findet, hat meistens nur nicht hingesehen.
 
 ---
 
