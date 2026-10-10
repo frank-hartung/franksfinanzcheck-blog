@@ -246,6 +246,19 @@ Dazu `cloudflare/ki-assistent/test/worker.test.mjs` (**7 Tests**, `node --test`)
 | Repository-Grep | ✅ 0 `# noqa` nackt, 0 `# lgtm`, 0 `# codeql[...]` |
 
 
+### Der Beweis auf `main` – der Zweig, den die Security-Tab zeigt (Lauf `38079000771`)
+
+Nach dem Merge von PR #696 (Squash `0a37cdc3`) lief die Analyse auf `main`:
+
+```
+CodeQL (python):     success   ·  python.sarif:     0 Funde (0 unterdrückt), 43 Regeln
+CodeQL (javascript): success   ·  javascript.sarif: 0 Funde (0 unterdrückt), 87 Regeln
+URL-Wache:           success   ·  Eigenprüfung · Bestand · Vertrag · CORS-Vertrag
+Klartext-Wache:      success
+```
+
+**Zwei Dinge wurden damit zugleich grün.** Die beiden `main`-Läufe davor (`ac903015` um 17:57, `ab47c76a` um 16:21) waren **rot** – und zwar nicht an CodeQL, sondern an der **Klartext-Wache mit Exit 2**: Deren Fail-closed-Regel schlug an, weil `scripts/tests/test_offline_import.py` seit `ac903015` nicht parsebar war. Dieselbe kaputte Datei, die Fundstelle C vor jeder Analyse versteckt hat, hielt also auch die Wache aus Alert #78/#80 in Dauerrot. Mit ihrer Reparatur ist beides erledigt – ein Beleg dafür, dass „unlesbar“ nie als „sauber“ durchgehen darf.
+
 ### Der Beweis aus der echten Analyse (PR #696, Lauf `38077159639`)
 
 Die entscheidende Zahl steht nicht in einem lokalen Skript, sondern in der SARIF der GitHub-Analyse — **ohne jede Whitelist**:
