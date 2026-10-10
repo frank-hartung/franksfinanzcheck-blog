@@ -30,6 +30,7 @@ Ausgabe: DUPLIKAT-REPORT.md + data/duplikat_history.jsonl
 Sicherheit: Cross-Artikel-Funde werden NIE auto-gefixed, nur gemeldet.
 """
 
+import ast
 import difflib
 import hashlib
 import json
@@ -43,6 +44,13 @@ ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
 REPORT = ROOT / "DUPLIKAT-REPORT.md"
 HISTORY = ROOT / "data" / "duplikat_history.jsonl"
+
+# Die CTA-SSOT liegt als Schwestermodul in scripts/. Beim Aufruf über
+# `python3 -m unittest scripts.tests.…` ist scripts/ nicht auf sys.path –
+# ohne diesen Eintrag fiele die Haus-CTA-Erkennung still auf die lokale
+# Fallback-Normalform zurück (#676: eine stille Ausnahme ist ein Scheingrün).
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 DO_FIX = "--fix" in sys.argv
 AS_JSON = "--json" in sys.argv
@@ -60,6 +68,18 @@ SHINGLE = 5             # N-Gramm-Größe für D6
 
 # Boilerplate-Blöcke (sind absichtlich mehrfach im Artikel: Disclaimer, CTA,
 # Weiterlesen-Boxen) – werden von der Duplikat-Messung ausgenommen.
+#
+# DAUERHEILUNG #676 (09.10.2026): Diese Liste wird gegen die VERGLEICHSFORM
+# `_vergleichsform()` geprüft, nicht mehr gegen `text.lower()`. Zwei Gründe:
+#   1. Unicode-Bindestriche: Der Bestand schreibt „Affiliate‑Links" mit
+#      U+2011 (weicher Bindestrich, aus der KI-Erzeugung). `lower()` erhielt
+#      ihn, das Muster „affiliate-links" traf nie – die Transparenz-Zeile
+#      galt als redaktioneller Text und wurde als D3/D4-Duplikat gemeldet.
+#   2. Markdown-Schmuck: `**Jetzt …:**` und `> 💶 …` verschoben den Anfang
+#      des Vergleichstextes, Muster mit führendem Wort trafen nicht.
+# `affiliate_intent_contract.norm()` ist dafür die SSOT – dieselbe Normalform,
+# mit der die Intent-Wache CTA-Sätze im Bestand wiederfindet. Eine zweite
+# Normalform wäre eine zweite Messregel (Lektion #521).
 BOILERPLATE_RE = [
     r"dieser artikel enthält affiliate-links",
     r"jetzt vergleichen und sparen",
@@ -69,18 +89,297 @@ BOILERPLATE_RE = [
     r"lesetipps zum weitersparen",
     r"dieser beitrag enthält affiliate",
     r"beim abschluss über einen link",
-    # Haus-Templates, die abschriftlich in vielen Artikeln stehen (Befund
+    # Haus-Templates, die absichtlich in vielen Artikeln stehen (Befund
     # 12.09.2026, D3/D4-Einführung): In-Text-CTA aus affiliate_marketer.py
     # und die Fazit-Formel aus fazit_schmiede.py. Nichts zu heilen – aber
     # ohne Whitelist blendet jede Cross-Artikel-Messung sie als Duplikat.
     r"spar-tipp zwischendurch",
     r"sich gezielt mit dem thema",
+    # Rechtlicher Standard-Hinweis (YMYL-Disclaimer), wortgleich in jedem
+    # Finanz-Artikel vorgeschrieben. Kein redaktioneller Inhalt, also kein
+    # Duplikat – aber vor #676 nicht erfasst (D3-X über 5 Artikel).
+    r"dieser artikel dient ausschließlich der allgemeinen information",
 ]
+
+# ============================================================
+#  HAUS-CTA AUS DER VERTRAGS-SSOT (Dauerheilung #676, 09.10.2026)
+#  ------------------------------------------------------------
+#  Root Cause von Issue #676 waren ZWEI WACHTEN MIT WIDERSPRÜCHLICHEN
+#  VERTRÄGEN:
+#
+#    · scripts/affiliate_intent_contract.py ist die SSOT für CTA-Wortlaut.
+#      Sie schreibt je Route EINEN ehrlichen Satz fest (`saetze["end"]` =
+#      „Jetzt das Tagesgeld-Angebot der C24 Bank ansehen") und verlangt,
+#      dass der Anker das Ziel nennt. `Ziel.satz_ehrlich()` sagt ausdrücklich:
+#      „Ein Marker darf nicht umgeschrieben werden." Die Intent-Wache
+#      (IW0–IW9) und die Affiliate-Integritäts-Wache PRÜFEN diesen Wortlaut.
+#    · duplikat_guard maß denselben Wortlaut über Artikel hinweg und meldete
+#      D3-X „Absatz wortgleich in 2 Artikeln" – für einen Block, den der
+#      Vertrag absichtlich identisch vorgibt.
+#
+#  Die Folge war eine Blockade ohne Heiler: RD1-duplikate ist in der
+#  Release-Scorecard `wirkung: blockiert`, `entscheidung: auto`, Cross-
+#  Artikel-Funde werden aber NIE auto-gefixed („der Heilweg läuft über die
+#  Redaktion"). Der Deploy starb 13× in Folge amselben Befund, kein
+#  `--fix`-Lauf konnte ihn je heilen, die komplette öffentliche
+#  Auslieferung fror ein – der neueste Artikel lieferte HTTP 404.
+#
+#  Die Reparatur ist keine weitere handgepflegte Zeichenkette, sondern die
+#  ABLEITUNG aus der SSOT: Was der CTA-Vertrag als Haus-Wortlaut registriert,
+#  ist Struktur und kein Inhalt. `ist_haus_cta()` erkennt einen Block nur
+#  dann als Template, wenn er (a) ein internes Affiliate-Gateway `/go/…`
+#  trägt und (b) sein gesamter Prosatext lückenlos aus registrierten
+#  Vertrags-Bausteinen besteht. Ein einziger eigener Redaktionssatz im Block
+#  hebt die Ausnahme auf – gemessen wird dann wieder alles.
+# ============================================================
+
+# Haus-Marker, die der Vertrag bewusst nicht umbenennt sieht (Kommentar in
+# affiliate_intent_contract.CTA_SAETZE_DEFAULT): Sie sind Stil, kein Inhalt.
+HAUS_MARKER = (
+    "jetzt vergleichen und sparen",
+    "spar-tipp zwischendurch",
+    "schnell-tipp von franksfinanzcheck",
+    "passendes angebot finden",
+    "jetzt angebote ansehen",
+    "jetzt angebote vergleichen",
+    "transparenz",
+    "werbung",
+)
+
+# Nur interne Affiliate-Gateways zählen als CTA-Beweis. Ein externer Link
+# macht aus einem Absatz keinen Haus-Block.
+GO_LINK_RE = re.compile(r"\]\(\s*/go/[a-z0-9_\-/]+/?\s*\)")
+
+# Alles, was nach dem Herausnehmen der Vertrags-Bausteine übrig bleiben darf:
+# Satzzeichen, Aufzählungs-/Pfeil-Schmuck und die CTA-Emoji-Marker des
+# Bestands (👉 78×, 💡 51×, 💶 44× – siehe Kommentar in affiliate_intent_guard).
+REST_SCHMUCK_RE = re.compile(
+    "[\\s:·\\-–—.,;!?()\\[\\]{}\"'„“»«*_`>#|/→←👉💡💶✅📌🔗💰📊]+"
+)
+
+_HAUS_CTA_REGISTER: list | None = None
+_HAUS_FORMELN: list | None = None
+
+# Klartext-Hausformeln anderer SSOTs: (modul, attribut). Auch hier gilt:
+# abgeleitet, nicht abgeschrieben. Steht die Formel im erzeugenden Modul,
+# kennt die Duplikat-Messung sie – ohne zweite Zeichenkette, die verrotten
+# kann (die Whitelist-Falle, die zu #676 führte).
+HAUS_TEXT_QUELLEN = (
+    ("ki_shared", "DISCLAIMER"),          # rechtlicher Standard-Hinweis (YMYL)
+    ("cta_builder", "END_DISCLOSURE"),    # Werbe-Offenlegung am Artikelende
+    ("cta_builder", "_END_SATZ_FALLBACK"),
+    ("news_writer", "STAND_INTRO"),       # News-Kompakt-Dateline (mit Platzhalter)
+)
+
+# Ein Platzhalter in einer Haus-Formel wird zu genau EINEM Token – nie zu
+# „beliebigem Text". Sonst wäre die Formel ein Freibrief für alles.
+_PLATZHALTER_RE = re.compile(r"\{[^{}]*\}")
+
+
+def _ssot_wert(modul: str, attribut: str):
+    """Modulkonstante aus der QUELLDATEI lesen (AST) – nie per Import.
+
+    Warum nicht `__import__`: `ki_shared`, `cta_builder` und `news_writer`
+    ziehen PyYAML (und damit eine ganze Kette) nach. In jeder Umgebung ohne
+    PyYAML – PR-Pfad, C6-Selbsttest, lokale Probe – wäre die Haus-Template-
+    Erkennung damit STILL ausgefallen: Die Ausnahme verschwindet, die Wache
+    misst vertraglich vorgeschriebene CTA-Blöcke wieder als Plagiat, und
+    Issue #676 kehrt als Dauer-Fehlalarm zurück, der den Deploy einfriert.
+
+    Fail-open ist hier teurer als ein Fehler. Ein AST-Lesezugriff auf eine
+    Modulkonstante hat keine Import-Nebenwirkungen, braucht keine
+    Abhängigkeit des Produzenten und liest trotzdem DIESELBE Quelle – keine
+    zweite, abschreibbare Zeichenkette.
+
+    Rückgabe: (wert, lücke). `lücke` ist leer, wenn gelesen wurde; sonst der
+    Grund. Eine Lücke wird von `haus_template_luecken()` laut gemeldet und
+    stoppt den Gate-Lauf (Exit 2) – eine blinde Wache ist kein Grün."""
+    pfad = Path(__file__).resolve().parent / f"{modul}.py"
+    try:
+        baum = ast.parse(pfad.read_text(encoding="utf-8"))
+    except OSError as exc:
+        return None, f"{pfad.name} nicht lesbar: {exc}"
+    except SyntaxError as exc:
+        return None, f"{pfad.name} ist kein gültiges Python (Z. {exc.lineno})"
+    for knoten in baum.body:
+        if not isinstance(knoten, ast.Assign):
+            continue
+        for ziel in knoten.targets:
+            if isinstance(ziel, ast.Name) and ziel.id == attribut:
+                try:
+                    return ast.literal_eval(knoten.value), ""
+                except (ValueError, SyntaxError):
+                    return None, (f"{modul}.{attribut} ist keine "
+                                  "literal auswertbare Konstante")
+    return None, f"{modul}.{attribut} nicht gefunden"
+
+
+def haus_template_luecken() -> list:
+    """Deklarierte SSOT-Quellen, die nicht gelesen werden konnten.
+
+    Eine Lücke heißt: Die Ausnahme für diese Haus-Formel fehlt, die Wache
+    misst sie wieder als Duplikat. Das ist kein Zustand, den man verschweigt
+    (C33: eine fehlgeschlagene Messung ist kein leerer Vorrat)."""
+    luecken = []
+    for modul, attribut in HAUS_TEXT_QUELLEN:
+        _wert, grund = _ssot_wert(modul, attribut)
+        if grund:
+            luecken.append(f"{modul}.{attribut}: {grund}")
+    return luecken
+
+
+def haus_formeln() -> list:
+    """Vergleichsmuster für Haus-Formeln MIT Platzhalter (SSOT-abgeleitet).
+
+    `news_writer.STAND_INTRO` trägt `{today}`: Dieselbe Zeile steht in jedem
+    News-Kompakt-Artikel, nur das Datum wechselt. Vor #676 maß D4-X sie als
+    Fast-Duplikat (Ratio 0.98) zwischen `markt-update` und `energie-update` –
+    ein Format wurde als Inhaltsklau gewertet."""
+    global _HAUS_FORMELN
+    if _HAUS_FORMELN is not None:
+        return _HAUS_FORMELN
+    formeln = []
+    for modul, attribut in HAUS_TEXT_QUELLEN:
+        wert, _luecke = _ssot_wert(modul, attribut)
+        if not isinstance(wert, str) or not _PLATZHALTER_RE.search(wert):
+            continue
+        # Auch kurze Fragmente zählen (die Dateline beginnt mit „Stand:“ –
+        # sechs Zeichen). Wegfiltern würde die Formel hier unsichtbar machen;
+        # die Sicherheit kommt aus der Längenprüfung der GESAMTformel unten.
+        teile = [_vergleichsform(t) for t in _PLATZHALTER_RE.split(wert)]
+        teile = [t for t in teile if len(t) >= 3]
+        if len(teile) < 2 or sum(len(t) for t in teile) < 60:
+            continue
+        # `\s*\S+\s*` statt `\S+`: `normalize()` strippt die Leerzeichen um
+        # den Platzhalter weg („**Stand: “ → „stand:“), im Artikel steht das
+        # Datum aber mit Abstand. Ohne die flexiblen Ränder träfe die Formel
+        # ihren eigenen Text nie – die Ausnahme wäre tot, nicht zu weit.
+        formeln.append((f"{modul}.{attribut}",
+                        re.compile(r"\s*\S+\s*".join(re.escape(t) for t in teile))))
+    _HAUS_FORMELN = formeln
+    return _HAUS_FORMELN
+
+
+def haus_texte() -> list:
+    """Klartext-Hausformeln ohne Platzhalter, in Vergleichsform (SSOT)."""
+    texte = []
+    for modul, attribut in HAUS_TEXT_QUELLEN:
+        wert, _luecke = _ssot_wert(modul, attribut)
+        if not isinstance(wert, str) or _PLATZHALTER_RE.search(wert):
+            continue
+        form = _vergleichsform(wert)
+        if len(form) >= 40:          # nur echte Formeln, keine Marker-Wörter
+            texte.append((f"{modul}.{attribut}", form))
+    return texte
+
+
+def _vergleichsform(text: str) -> str:
+    """Normalform für den Template-Vergleich (SSOT: affiliate_intent_contract).
+
+    Entfernt Unicode-Bindestriche, geschützte Leerzeichen und Markdown-
+    Schmuck – genau wie die Intent-Wache, damit beide Wachen denselben Text
+    sehen. Fällt auf eine lokale, gleichwertige Normalisierung zurück, wenn
+    das Vertragsmodul nicht importierbar ist (die Wache bleibt lauffähig)."""
+    try:
+        import affiliate_intent_contract as aic  # noqa: PLC0415
+        return aic.norm(normalize(text))
+    except Exception:  # noqa: BLE001 – Fallback, nie still grün
+        s = normalize(text).lower()
+        s = s.replace("\u00ad", "").replace("\u00a0", " ").replace("\u202f", " ")
+        for z in ("\u2010", "\u2011", "\u2012", "\u2013", "\u2014", "\u2015",
+                  "\u2212", "\u02d7"):
+            s = s.replace(z, "-")
+        s = re.sub(r"[*_`>]", " ", s)
+        return re.sub(r"\s+", " ", s).strip()
+
+
+def haus_cta_register() -> list:
+    """Alle CTA-Bausteine der Vertrags-SSOT in Vergleichsform (längster zuerst).
+
+    Abgeleitet, nicht abgeschrieben: Ein neuer Partner, eine neue Route oder
+    eine neue Anker-Variante in `affiliate_intent_contract.ZIELE` ist ab dem
+    nächsten Lauf automatisch erfasst. Genau das fehlte der Whitelist – sie
+    verrottete mit jeder neuen CTA-Variante und machte den Vertragstreuesten
+    Block zum Plagiat.
+    """
+    global _HAUS_CTA_REGISTER
+    if _HAUS_CTA_REGISTER is not None:
+        return _HAUS_CTA_REGISTER
+    bausteine: set = set()
+    try:
+        import affiliate_intent_contract as aic  # noqa: PLC0415
+        for z in getattr(aic, "ZIELE", {}).values():
+            for satz in (getattr(z, "saetze", {}) or {}).values():
+                if satz:
+                    bausteine.add(_vergleichsform(satz))
+            for varianten in (getattr(z, "anker", {}) or {}).values():
+                for anker in varianten or ():
+                    if anker:
+                        bausteine.add(_vergleichsform(anker))
+            for feld in ("produkt", "weiter_zu"):
+                wert = getattr(z, feld, "") or ""
+                if wert:
+                    bausteine.add(_vergleichsform(wert))
+        for satz in (getattr(aic, "CTA_SAETZE_DEFAULT", {}) or {}).values():
+            if satz:
+                bausteine.add(_vergleichsform(satz))
+    except Exception:  # noqa: BLE001 – ohne Vertrag nur Haus-Marker
+        pass
+    bausteine.update(_vergleichsform(m) for m in HAUS_MARKER)
+    _HAUS_CTA_REGISTER = sorted((b for b in bausteine if len(b) >= 8),
+                                key=len, reverse=True)
+    return _HAUS_CTA_REGISTER
+
+
+def ist_haus_cta(text: str) -> bool:
+    """True, wenn der Block NUR aus Haus-CTA-Bausteinen des Vertrags besteht.
+
+    Bewusst streng (kein Inhalts-Freibrief):
+      1. ohne internes `/go/`-Gateway kein CTA-Block,
+      2. jeder Prosarest außerhalb der Vertrags-Bausteine hebt die Ausnahme
+         auf – ein Redaktionssatz neben der CTA wird wieder gemessen.
+    """
+    if not GO_LINK_RE.search(text or ""):
+        return False
+    rest = _vergleichsform(GO_LINK_RE.sub(" ", text))
+    rest = rest.replace("[", " ").replace("]", " ")
+    for baustein in haus_cta_register():
+        if baustein and baustein in rest:
+            rest = rest.replace(baustein, " ")
+    return REST_SCHMUCK_RE.sub("", rest) == ""
+
+
+def haus_template_grund(text: str) -> str:
+    """Warum ein Block ausgenommen ist – Ausnahmen müssen sichtbar sein.
+
+    Eine stille Ausnahme ist ein Scheingrün (Lektion #521, C19). Der Report
+    zählt deshalb je Familie mit, und `--json` nennt den Grund am Fund.
+    Reihenfolge ist bewusst: erst die SSOT-abgeleiteten Familien (sie sind
+    die Wahrheit), dann die handfesten Haus-Formeln der Whitelist."""
+    if not text:
+        return ""
+    t = _vergleichsform(text)
+    for quelle, muster in haus_formeln():
+        if muster.search(t):
+            return f"Haus-Formel mit Platzhalter (`{quelle}`)"
+    for quelle, form in haus_texte():
+        if form in t:
+            return f"Haus-Text (`{quelle}`)"
+    if ist_haus_cta(text):
+        return "Haus-CTA (Bausteine aus affiliate_intent_contract)"
+    for muster in BOILERPLATE_RE:
+        if re.search(muster, t):
+            return f"Haus-Formel `{muster}`"
+    return ""
 
 
 def is_boilerplate(text: str) -> bool:
-    t = text.lower()
-    return any(p in t for p in BOILERPLATE_RE)
+    """Haus-Template? (Disclaimer, CTA, Dateline, Weiterlesen-Boxen).
+
+    Einziger Einstieg in die Ausnahme – damit Messung und Begründung nie
+    auseinanderlaufen können (ein Block ist genau dann ausgenommen, wenn
+    `haus_template_grund()` einen Grund nennt)."""
+    return bool(haus_template_grund(text))
 
 
 def split_body(frontmatter_body: str) -> str:
@@ -466,6 +765,102 @@ def run_selftest() -> list:
         fehler.append(f"Fall 7 (D2-Index-Drift): falscher Absatz entfernt ({n7})")
     if a7 not in out7:
         fehler.append("Fall 7 (D2-Index-Drift): Original entfernt statt der Kopie")
+
+    # ------------------------------------------------------------
+    # Fälle 8–11: HAUS-TEMPLATES (Dauerheilung Issue #676, 09.10.2026)
+    # ------------------------------------------------------------
+    # Eingefrorener Originalbefund: Der End-CTA stand wortgleich in zwei
+    # Artikeln vom 07.10. und wurde als D3-X gemeldet, obwohl
+    # affiliate_intent_contract genau diesen Wortlaut vorschreibt. RD1 ist
+    # blockierend, Cross-Artikel-Funde sind nie auto-heilbar → der Deploy
+    # starb 13× in Folge, die komplette Auslieferung fror ein, der neueste
+    # Artikel lieferte 404. Diese vier Fälle sind der Sabotage-Schutz: Wer
+    # die SSOT-Ableitung wieder durch eine Whitelist ersetzt, wird rot.
+    cta_676 = ("👉 **Jetzt das Tagesgeld-Angebot der C24 Bank ansehen:** "
+               "[**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)")
+    if not is_boilerplate(cta_676):
+        fehler.append("Fall 8 (#676 Haus-CTA): vertraglich vorgeschriebener "
+                      "End-CTA wird wieder als Duplikat gemessen")
+    grund8 = haus_template_grund(cta_676)
+    if "affiliate_intent_contract" not in grund8:
+        fehler.append(f"Fall 8 (#676 Begründung): Ausnahme nennt nicht die "
+                      f"Vertrags-SSOT („{grund8}“) – eine stille Ausnahme ist "
+                      "ein Scheingrün")
+
+    # Fall 9: Die Ausnahme ist KEIN Freibrief. Derselbe CTA-Block mit einem
+    # eigenen Redaktionssatz muss wieder gemessen werden – sonst könnte
+    # beliebiger Inhalt hinter einer CTA verschwinden.
+    cta_redaktionell = (cta_676 + " Beachte aber, dass eine lange Zinsbindung "
+                        "deiner Anlagestrategie widersprechen kann, wenn du "
+                        "kurzfristig Liquidität brauchst und deshalb einen "
+                        "Vergleich der Angebote lieber verschieben möchtest.")
+    if is_boilerplate(cta_redaktionell):
+        fehler.append("Fall 9 (Kein Freibrief): CTA-Block mit eigenem "
+                      "Redaktionssatz wurde als Haus-Template ausgenommen")
+
+    # Fall 10: Unicode-Bindestriche. Der Bestand schreibt „Affiliate‑Links"
+    # mit U+2011; gegen `text.lower()` traf das Muster „affiliate-links"
+    # nie, die Offenlegung galt als Inhalt und wurde als D3/D4 gemeldet.
+    offenlegung_u2011 = ("***Transparenz:** Dieser Artikel enthält "
+                         "Affiliate\u2011Links (Werbung). Beim Abschluss über "
+                         "einen Link erhalten wir eine Provision – für dich "
+                         "entstehen keine Mehrkosten.*")
+    if not is_boilerplate(offenlegung_u2011):
+        fehler.append("Fall 10 (U+2011): Offenlegung mit weichem Bindestrich "
+                      "wird wieder als Duplikat gemessen")
+
+    # Fall 11: Haus-Formel MIT Platzhalter (News-Kompakt-Dateline). Dieselbe
+    # Zeile steht in jedem News-Artikel, nur das Datum wechselt – D4-X maß
+    # sie als Fast-Duplikat (Ratio 0.98) zwischen markt- und energie-update.
+    dateline = ("**Stand: 06.10.2026.** Dieser News\u2011Kompakt\u2011Artikel "
+                "ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln "
+                "können sich ändern – prüfe Details immer beim jeweiligen "
+                "Anbieter.")
+    if not is_boilerplate(dateline):
+        fehler.append("Fall 11 (News-Dateline): Haus-Formel mit Datum wird "
+                      "wieder als Fast-Duplikat gemessen")
+    # … aber nur, solange sie die Formel ist. Ein eigener Satz danach hebt
+    # die Ausnahme auf (derselbe Grundsatz wie Fall 9).
+    dateline_eigenbau = ("**Stand: 06.10.2026.** Dieser News-Kompakt-Artikel "
+                         "ordnet eine aktuelle Entwicklung ein, die vor allem "
+                         "Haushalte mit Wärmepumpe betrifft, weil der "
+                         "Netzbetreiber die Einspeisevergütung gesenkt hat und "
+                         "deshalb viele Verträge neu gerechnet werden müssen.")
+    if is_boilerplate(dateline_eigenbau):
+        fehler.append("Fall 11b (News-Dateline): eigenständig ausformulierter "
+                      "Artikelanfang wurde als Haus-Formel ausgenommen")
+
+    # Fall 12: Echter redaktioneller Inhalt bleibt messbar – die Ausnahme
+    # darf die Wache nicht blind machen (Gegenprobe zu 8–11).
+    redaktion = ("Der Gaspreis je Kilowattstunde liegt aktuell etwa bei neun "
+                 "Cent, und wer früh vergleicht, sichert sich den günstigeren "
+                 "Tarif für ein ganzes Jahr im Voraus und spart damit deutlich "
+                 "mehr als mit einer verspäteten Entscheidung im Herbst.")
+    if is_boilerplate(redaktion):
+        fehler.append("Fall 12 (Gegenprobe): redaktioneller Absatz wurde als "
+                      "Haus-Template ausgenommen – die Wache wäre blind")
+
+    # Fall 13: Die SSOT-Quellen sind ohne Import-Kette lesbar. `ki_shared`,
+    # `cta_builder` und `news_writer` ziehen PyYAML nach; würde die Ableitung
+    # importieren statt zu lesen, fiele die Ausnahme in jeder pyyaml-freien
+    # Umgebung STILL aus – und #676 kehrte als Dauer-Fehlalarm zurück.
+    luecken = haus_template_luecken()
+    if luecken:
+        fehler.append(f"Fall 13 (SSOT-Lücke): Haus-Template-Quellen nicht "
+                      f"lesbar – {luecken[0][:120]}")
+    if not haus_formeln():
+        fehler.append("Fall 13b (SSOT-Ableitung): keine Haus-Formel mit "
+                      "Platzhalter abgeleitet – die News-Dateline wäre blind")
+    if not haus_texte():
+        fehler.append("Fall 13c (SSOT-Ableitung): kein Haus-Text abgeleitet – "
+                      "Disclaimer/Offenlegung wären blind")
+
+    # Fall 14: Eine umbenannte Konstante ist eine LÜCKE, kein stiller
+    # Verzicht. Wer die SSOT verschiebt, muss rot sehen (fail-closed).
+    _wert, grund = _ssot_wert("news_writer", "STAND_INTRO_GIBT_ES_NICHT")
+    if not grund:
+        fehler.append("Fall 14 (Lücken-Meldung): eine fehlende SSOT-Konstante "
+                      "wurde nicht als Lücke gemeldet")
     return fehler
 
 
@@ -477,9 +872,25 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Duplikat-Selbsttest: 7 Fälle grün (inkl. Trennlinien-Muster "
-              "und Index-Drift-Regression).")
+        print("✅ Duplikat-Selbsttest: 14 Fälle grün (Trennlinien-Muster, "
+              "Index-Drift, Haus-Templates aus der CTA-/News-SSOT #676, "
+              "kein Freibrief für Redaktionssätze, SSOT ohne Import-Kette).")
         return 0
+
+    # FAIL-CLOSED VOR JEDER MESSUNG (#676): Die Haus-Template-Ausnahme wird
+    # aus den erzeugenden Modulen abgeleitet. Ist eine dieser Quellen nicht
+    # lesbar, fehlt genau ihre Ausnahme – die Wache würde vertraglich
+    # vorgeschriebene CTA-/Disclaimer-Blöcke wieder als Plagiat messen und
+    # den Deploy einfrieren. Das ist keine Warnung, sondern ein
+    # Werkzeugfehler: Eine blinde Messung darf nie als Grün durchgehen.
+    luecken = haus_template_luecken()
+    if luecken:
+        print("🛑 Haus-Template-SSOT unvollständig (Exit 2, fail-closed):")
+        for luecke in luecken:
+            print(f"   ❔ {luecke}")
+        print("   Ohne diese Quellen fehlt die Ausnahme für Haus-CTA/-Formeln –")
+        print("   die Messung würde Format als Inhaltsklau werten (Klasse #676).")
+        return 2
 
     today = date.today().isoformat()
     paths = sorted(POSTS.glob("*/index.md"))

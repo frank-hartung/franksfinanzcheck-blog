@@ -40,7 +40,20 @@ jobs:
         run: python3 scripts/automation_premium_audit.py --strict
       - name: Reserve-Snapshot – vollständiger Nachweis statt Merge-Chimäre (#634)
         run: python3 scripts/reserve_artifacts.py --check
-      - run: |
+      # BLUSTRADIUS (Dauerheilung #676, 09.10.2026): Dieser Job ist der
+      # EINZIGE Ort, an dem die volle Unit-Test-Suite läuft. Am 09.10. war
+      # der Reserve-Snapshot oben rot – zwei alte SHA-256-Zertifikate, ein
+      # reiner DATEN-Befund – und die Suite darunter wurde `skipped`. Damit
+      # prüfte kein Lauf mehr, ob der Code noch tut, was die Regeln
+      # versprechen; auch die neuen Tests aus #674 und #676 liefen nie.
+      # Ein Befund über einen Zustand darf nicht die Prüfung des Codes
+      # einfrieren (dieselbe Klasse wie #676: ein Artikel blockierte die
+      # Auslieferung aller 75). Der Job bleibt über den Snapshot rot –
+      # fail-closed im Sinne von #634 – aber er liefert wieder Signal.
+      # `!cancelled()` ist das Haus-Muster, siehe Beweis-Ledger-Schritt unten.
+      - name: Code-Regression – Suite und Selbsttests
+        if: ${{ !cancelled() }}
+        run: |
           python3 -m unittest discover -s scripts/tests -v
           python3 scripts/engine_generate.py --selftest
           python3 scripts/reserve_pool.py --selftest
@@ -57,6 +70,7 @@ jobs:
       # Jetzt läuft die ganze Suite ein zweites Mal unter einer um 97 Tage
       # vorgestellten Uhr: dieselben Tests, fremdes Datum, gleiches Ergebnis.
       - name: Uhr-Probe – die Suite muss an jedem Kalendertag grün sein
+        if: ${{ !cancelled() }}   # Blustradius #676: Daten-Befund schaltet Code-Prüfung nicht aus
         run: python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
       # KI-PROBE (Dauerheilung Content-Engine v2 #138, 08.10.2026): Jeder
       # Selbsttest, den irgendein Workflow aufruft, läuft hier mit Attrappen-
@@ -66,6 +80,7 @@ jobs:
       # tot vor Phase 1). Die Probe meldet jeden Netzversuch mit Datei/Zeile,
       # auch wenn der Aufrufer die Ausnahme schluckt.
       - name: KI-Probe – kein Selbsttest darf am Modell oder am Netz hängen (#138)
+        if: ${{ !cancelled() }}   # Blustradius #676
         run: |
           python3 scripts/selftest_ki.py --selftest
           python3 scripts/selftest_ki.py --trap-workflows
@@ -73,6 +88,7 @@ jobs:
       # Vertrag, repo_isolation stellt die Sandbox für Tests. Beide prüfen in
       # beide Richtungen – Umlenkung wirkt UND Normalfall bleibt scharf.
       - name: Beweis-Ledger-Isolation (Selbsttests)
+        if: ${{ !cancelled() }}   # Blustradius #676
         run: |
           python3 scripts/audit_log.py --selftest
           python3 scripts/repo_isolation.py --selftest

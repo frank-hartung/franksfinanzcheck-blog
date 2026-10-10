@@ -59,7 +59,7 @@ Sieh zuerst in deinen Vertrag und auf die aktuelle Rechnung. Dort findest du Beg
 
 Die erste feste Laufzeit eines üblichen Internetvertrags darf höchstens 24 Monate dauern ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Lies die Laufzeit in deinem Vertrag, bevor du ein neues Angebot annimmst.
 
-Der Anbieter muss dir auch einen Vertrag mit höchstens 12 Monaten Laufzeit anbieten ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Prüfe, welches Modell besser zu deinem Bedarf passt.
+Zusätzlich muss dir der Anbieter eine Variante mit höchstens 12 Monaten Laufzeit anbieten ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Beim Internetanschluss lohnt die kurze Bindung vor allem, wenn ein Umzug ansteht oder du die tatsächliche Bandbreite an deiner Adresse erst noch im Alltag prüfen willst.
 
 Läuft dein Vertrag nach der ersten festen Zeit still weiter, kannst du ihn mit einer Frist von einem Monat kündigen ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Notiere das Enddatum und den Kündigungsweg. Wenn dir eine Angabe fehlt, frag den Anbieter schriftlich. Heb die Antwort auf, damit du nicht raten musst.
 

@@ -181,6 +181,36 @@ AUSNAHMEN: dict[str, str] = {
         "Fachliche Freigaben dürfen nicht automatisiert erzeugt werden. "
         "Hochrisiko-Kandidaten bleiben als Review-Hold erhalten; Quellen, "
         "Zahlen und Prüfer werden redaktionell dokumentiert und versiegelt.",
+    # Redundanz D1–D6 (09.10.2026, Dauerheilung Bot-Watchdog #676). Die Regel
+    # kam mit #674/#677 als harte Gate-Familie dazu (`duplicate_failures` in
+    # publish_gate/release_scorecard), ohne Deckung – drei Regressionstests
+    # waren rot, sichtbar erst, seit die Suite nicht mehr hinter einem
+    # Daten-Befund übersprungen wird (C34 h).
+    # Bewusst KEIN Heiler in der Reserve-Kette, und zwar aus zwei Gründen,
+    # die beide mit #676 belegt sind:
+    #   1. Ein Cross-Artikel-Fund (D3/D4) sagt, dass zwei Artikel dieselbe
+    #      Passage tragen – nicht, WELCHER sie behalten darf. Diese
+    #      Entscheidung ist redaktionell (duplikat_guard hält D3/D4 deshalb
+    #      report-only; `auto_fix` heilt nur artikelinterne Wiederholungen).
+    #   2. Ein Fund an einem Haus-Template ist kein Inhaltsfehler, sondern
+    #      ein Messfehler: Am 09.10.2026 war der wortgleiche End-CTA zweier
+    #      Artikel `RD1-duplikate`/`blockiert`, weil die Wache ihn nicht aus
+    #      der CTA-Vertrags-SSOT erkannte. Ein Heiler am Entwurf hätte den
+    #      vertraglich VORGESCHRIEBENEN Wortlaut umgeschrieben und den Defekt
+    #      der Messung unsichtbar gemacht (C15: Beweisen ist nicht Heilen).
+    # Zuständig ist deshalb ein Mensch – mit einer Ausnahme: Liegt ein
+    # Messfehler vor, wird er in der Wache geheilt (`haus_template_grund()`
+    # nennt die Quelle jeder Ausnahme). Seit #676 leitet die Wache
+    # Haus-Templates aus ihren SSOTs ab; eine neue Route im Vertrag ist ohne
+    # Nachpflege gedeckt (test_duplikat_guard.VertragsCtaTests).
+    "duplicate_failures":
+        "Redundanz über Artikel hinweg (D3/D4) ist eine redaktionelle "
+        "Entscheidung – die Wache meldet, welcher Artikel welche Passage "
+        "teilt, aber nicht, wer sie behalten darf. Ein Cross-Fund am "
+        "Haus-Template ist zudem ein Messfehler, kein Inhaltsfehler (#676): "
+        "Heilung am Entwurf würde vertraglich vorgeschriebenen Wortlaut "
+        "umschreiben und den Defekt der Messung verdecken (C15). Geheilt "
+        "wird in der Wache, entschieden in der Redaktion.",
 }
 
 # ---------------------------------------------------------------------------
