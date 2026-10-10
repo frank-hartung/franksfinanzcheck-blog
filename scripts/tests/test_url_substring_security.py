@@ -86,7 +86,8 @@ class WacheIstScharf(unittest.TestCase):
         erg = _lauf("--selftest")
         self.assertEqual(erg.returncode, 0,
                          f"Eigenprüfung der URL-Wache rot:\n{erg.stdout}\n{erg.stderr}")
-        for begriff in ("Positivproben", "Gegenproben", "Musterproben", "Fail-closed"):
+        for begriff in ("Positivproben", "Gegenproben", "Musterproben",
+                        "Fail-closed", "Scope-Proben"):
             self.assertIn(begriff, erg.stdout)
 
     def test_eigenpruefung_der_host_wahrheit(self):
@@ -128,6 +129,39 @@ class WacheIstScharf(unittest.TestCase):
         bericht = json.loads(erg.stdout)
         self.assertEqual(bericht["befunde"], [])
         self.assertEqual(len(bericht["fehler"]), 1)
+
+
+class ScopeHatKeineBlindenFlecken(unittest.TestCase):
+    """Was eine Analyse nicht liest, hält sie für in Ordnung – Lehre aus #83."""
+
+    def test_typescript_wird_gelesen(self):
+        """CodeQLs JS-Extraktor liest .ts/.tsx – diese Wache muss es auch."""
+        for endung in (".ts", ".tsx", ".mts", ".cts"):
+            self.assertIn(endung, wache.JS_ENDUNGEN)
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            pfad = wurzel / "ziel.ts"
+            pfad.write_text(
+                "export const treffer = (u: string): boolean =>\n"
+                '    u.includes("https://api.resend.com/emails");\n', encoding="utf-8")
+            befunde, fehler = wache.pruefe([pfad], wurzel)
+            self.assertEqual(fehler, [], f"TypeScript nicht lexbar: {fehler}")
+            self.assertTrue(befunde, "TypeScript-Fundstelle wurde nicht erkannt")
+
+    def test_ungelesene_endung_ist_ein_fehler_kein_gruen(self):
+        """Der erste .vue-Baustein muss die Wache rot machen, nicht umgehen."""
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            (wurzel / "Komponente.vue").write_text("<template/>\n", encoding="utf-8")
+            self.assertEqual(wache.scopeluecken(wurzel), ["Komponente.vue"])
+
+    def test_repository_hat_heute_keine_ungelesene_endung(self):
+        erg = _lauf("--json", "--quiet")
+        bericht = json.loads(erg.stdout)
+        self.assertEqual(
+            bericht.get("scopeluecken"), [],
+            "Es gibt Dateien, die CodeQL liest und diese Wache nicht – "
+            "Leser in scripts/url_substring_guard.py ergänzen, nicht ignorieren.")
 
 
 class BestandIstFrei(unittest.TestCase):

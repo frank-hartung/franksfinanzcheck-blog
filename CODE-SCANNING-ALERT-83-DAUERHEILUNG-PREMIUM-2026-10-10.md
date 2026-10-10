@@ -105,9 +105,11 @@ self.assertEqual(verseucht, [])
 
 Von den zwei Zusicherungen war eine wirkungslos und eine unvollständig: Sie prüfte auf **einen** Beispielhost statt auf die **Eigenschaft** „hier steht ein Host oder eine Kennung, wo ein Pfad stehen muss“. Jetzt wird die Eigenschaft geprüft (Benutzer-Kennung via `@`, IPv4-Adresse) – und die Zusicherung nennt im Fehlerfall den konkreten Übeltäter.
 
-### D · `cloudflare/ki-assistent/worker.js` – dieselbe Fehlerklasse, außerhalb der CodeQL-Sicht
+### D · `cloudflare/ki-assistent/worker.js` – dieselbe Fehlerklasse, die keine Query meldet
 
-Der Worker entschied seine **CORS-Freigabe** über `origin.endsWith(".pages.dev")`. Das ist exakt `js/incomplete-url-substring-sanitization`, nur in einem Verzeichnis, das die Analyse nicht erfasst – und es ist die gefährlichste der vier Stellen, weil hier eine **Sicherheitsentscheidung zur Laufzeit** daran hängt.
+Der Worker entschied seine **CORS-Freigabe** über `origin.endsWith(".pages.dev")` – die gefährlichste der vier Stellen, weil hier eine **Sicherheitsentscheidung zur Laufzeit** daran hängt.
+
+**Wichtige Präzisierung, damit niemand sich auf das Werkzeug verlässt:** CodeQL meldet dieses Muster **nicht** – und diese Wache ebenfalls nicht. Die JS-Query nimmt `EndsWith`-Ziele aus, die wie ein Domain-Suffix aussehen (`"(?i)\\.([a-z0-9-]+)(\\.[a-z0-9-]+)+"`), weil Suffix-Prüfungen auf Hostnamen meistens legitim sind. Hier war die Prüfung aber nicht auf einem **Hostnamen**, sondern auf der **ganzen Herkunftszeichenkette** – und damit falsch. Genau für solche Fälle gibt es Regel **KA10**: Eine semantische Hausregel schlägt dort zu, wo eine generische Query bewusst schweigt. Wer nur auf grüne Scanner wartet, findet diese Klasse nie.
 
 ```js
 const VORSCHAU_HOSTS = ["pages.dev", "e2b.app"];
@@ -149,12 +151,13 @@ Keine Wache und kein Produktionsskript baut mehr eigene Host-Logik. Das Modul ka
 Sie ist **nicht** von CodeQL, vom SARIF-Upload oder von der Alert-API abhängig – die Lehre aus #78/#80, hier zum dritten Mal bestätigt:
 
 * **Python** über `ast` (Vergleiche, `startswith`/`endswith`, auch Tupel-Argumente) plus `tokenize` für Unterdrückungskommentare.
-* **JavaScript** über einen **echten Lexer** (nicht Regex): `.includes/.startsWith/.endsWith/.indexOf/.lastIndexOf/.search`, dazu die `slice`/`substring`/`substr`-Idiome beidseitig. Reine Textsuche hätte an Kommentaren, Template-Strings und Regex-Literalen versagt.
+* **JavaScript und TypeScript** über einen **echten Lexer** (nicht Regex): `.includes/.startsWith/.endsWith/.indexOf/.lastIndexOf/.search`, dazu die `slice`/`substring`/`substr`-Idiome beidseitig. Reine Textsuche hätte an Kommentaren, Template-Strings und Regex-Literalen versagt. `.ts/.tsx/.mts/.cts` sind mit drin, weil CodeQLs JS-Extraktor sie ebenfalls liest.
 * **HTML** mit eingebetteten `<script>`-Blöcken; Hugo- und HTML-Kommentare werden vorher positionstreu neutralisiert.
 * **Fail-closed:** Nicht lexbarer Quelltext ist ein **Fehler** (Exit 2), kein „sauber“. Ausnahme nur für `*.min.js`/`*.umd.js`.
 * **Bewusst schärfer als CodeQL:** `not in` zählt mit, `.de`-Hosts zählen mit, `indexOf`-Idiome ohne Vergleichskontext zählen mit – **und jede Unterdrückung ist selbst ein Befund.**
+* **Scope-Lücken sind ein Fehler, kein „grün“.** Taucht eine Endung auf, die CodeQL liest und diese Wache (noch) nicht – `.vue`, `.hbs`, `.ejs`, `.njk`, `.svelte`, `.astro` –, meldet `scopeluecken()` sie und der Lauf endet mit Exit 2. Der erste Vue-Baustein erzwingt damit die Erweiterung der Wache, statt still an ihr vorbeizulaufen.
 
-`--selftest` → **17 Positivproben, 15 Gegenproben, 23 Musterproben, 2 Fail-closed-Proben.** Repository-Lauf → **697 Dateien, 0 Funde, Exit 0.** Schnittstelle: `--json`, `--quiet`, Exit 0/1/2.
+`--selftest` → **20 Positivproben, 16 Gegenproben, 23 Musterproben, 2 Fail-closed-Proben, 2 Scope-Proben.** Repository-Lauf → **697 Dateien, 0 Funde, Exit 0.** Schnittstelle: `--json`, `--quiet`, Exit 0/1/2.
 
 ### Schicht 3 · `scripts/ki_assistent_gate.py`, Regel **KA10** – „CORS-Freigabe host-genau“
 
@@ -172,13 +175,14 @@ Geprüft wird auf dem **kommentarfreien** Token-Strom (über den Lexer aus Schic
 
 ---
 
-## 5 · Der Dauerschutz: `scripts/tests/test_url_substring_security.py` (14 Tests)
+## 5 · Der Dauerschutz: `scripts/tests/test_url_substring_security.py` (17 Tests)
 
 Fünf Ebenen, damit kein einzelner Rückschritt unbemerkt bleibt:
 
 | Klasse | Was eingefroren wird |
 |---|---|
 | `WacheIstScharf` (5) | Eigenprüfung beider Module; **Rückfall-Probe**: die zwei historischen Fundstellen werden wortgleich in ein Temporärverzeichnis geschrieben und müssen gemeldet werden („Hätte diese Wache Alert #83 gefunden?“); Unterdrückungskommentar = Befund; kaputter Code = Exit 2 |
+| `ScopeHatKeineBlindenFlecken` (3) | TypeScript wird wirklich gelesen; eine `.vue`-Datei wird als Scope-Lücke gemeldet; das Repository hat heute keine ungelesene Endung |
 | `BestandIstFrei` (1) | Repository-Lauf: 0 Funde, **0 Analysefehler**, Exit 0, Mindest-Dateizahl (damit niemand die Wache durch eine geschrumpfte Dateiauswahl „grün“ macht) |
 | `HeilungBleibtBestehen` (3) | Die geheilten Zeilen A/B inhaltlich; die Umgehungstabelle aus Abschnitt 1 als ausführbare Zusicherung |
 | `BetriebsvertragCI` (3) | `ERLAUBT=` darf **nicht** zurückkommen; der Job `url-wache` muss die vier Prüfbefehle enthalten; beide Regeln bleiben security-relevant |
@@ -222,9 +226,9 @@ Dazu `cloudflare/ki-assistent/test/worker.test.mjs` (**7 Tests**, `node --test`)
 | Prüfung | Ergebnis |
 |---|---|
 | `python3 scripts/url_host.py --selftest` | ✅ 42 Proben |
-| `python3 scripts/url_substring_guard.py --selftest` | ✅ 17 / 15 / 23 / 2 Proben |
+| `python3 scripts/url_substring_guard.py --selftest` | ✅ 20 / 16 / 23 / 2 / 2 Proben |
 | `python3 scripts/url_substring_guard.py` (Repository) | ✅ **697 Dateien, 0 Funde, Exit 0** |
-| `python3 -m unittest scripts.tests.test_url_substring_security` | ✅ **14 Tests** |
+| `python3 -m unittest scripts.tests.test_url_substring_security` | ✅ **17 Tests** |
 | `node --test cloudflare/ki-assistent/test/worker.test.mjs` | ✅ **7/7** |
 | `python3 scripts/ki_assistent_gate.py --selftest` | ✅ 4 Sabotage-Proben + Gegenprobe |
 | `python3 scripts/ki_assistent_gate.py` | ✅ 9 bereit, 1 Warnung (KA1, vorbestehend), **0 defekt** |
@@ -235,6 +239,10 @@ Dazu `cloudflare/ki-assistent/test/worker.test.mjs` (**7 Tests**, `node --test`)
 | `python3 -m unittest scripts.tests.test_zugangs_namensvertrag` | ✅ 21 Tests |
 | `npm run test:mess` | ✅ 63 Tests |
 | `python3 scripts/selftest_runner.py` | ✅ **184 Wachen, 368 Uhr-Proben** |
+| `python3 scripts/integrity_guard.py --gate` | ✅ 49 Kerndateien signiert (Lock mitgezeichnet) |
+| `python3 scripts/actions_version_guard.py --gate` | ✅ keine Action-Versions-Drift |
+| `python3 scripts/artefakt_waechter.py` | ✅ 391 Artefakte strukturell heil |
+| **CI auf dem PR** | ✅ `URL-Wache`, `Klartext-Wache`, `Integritäts-Siegel`, `CodeQL (javascript)` |
 | Repository-Grep | ✅ 0 `# noqa` nackt, 0 `# lgtm`, 0 `# codeql[...]` |
 
 ---
@@ -244,7 +252,8 @@ Dazu `cloudflare/ki-assistent/test/worker.test.mjs` (**7 Tests**, `node --test`)
 1. **`scripts/tests/test_offline_import.py` war seit `ac903015` unparsebar.** Repariert statt per Ausschlussliste umgangen – sonst wäre Fundstelle C für immer unsichtbar geblieben. Lehre: Eine Wache, die unlesbare Dateien überspringt, erzeugt genau die blinden Flecken, gegen die sie antritt.
 2. **Regel C10 war erwähnungsbasiert** und produzierte Falschmeldungen (jede Doku-Nennung machte ein Skript zum API-Verbraucher). Mit `ruft_host_an()` urteilt sie jetzt über den AST. Nebeneffekt: weniger Lärm, mehr Autorität.
 3. **Die URL-Wache löste anfangs sich selbst aus** – ihre Musterprobe enthielt einen echten Partnerhost und verstieß damit gegen C10. Jetzt steht dort `https://api.beispiel.com/v5/pins`. Lehre: Proben gehören auf Beispiel-Hosts.
-4. **`scripts/revenue_funnel.py` hatte eine Zeitbombe** (`_month_age("2030-01")` als „Zukunfts-Monat“): Unter der 1 461-Tage-Uhrprobe des Runners war das ein **Vergangenheits**-Monat, der Selbsttest ging datumsabhängig rot. Auf dem Basis-Commit `b38fe54` reproduzierbar, also **vorbestehend** – mitgeheilt (relative Fixture, 10 Jahre voraus), weil eine rote Wache in der Lieferung niemandem nützt.
+4. **Die Wache hat sich selbst einen Fund eingebrockt – und ihn bestanden.** Der erste CodeQL-Lauf ohne Whitelist meldete `py/bad-tag-filter` in `scripts/url_substring_guard.py:602`: Das Endtag-Muster `</script\s*>` übersieht, was Browser sehr wohl als Ende lesen (`</script foo="bar">`, `</script\t\n bar>`, `</script/>`). Für die Wache wäre das ein **Fail-open** gewesen – ein nicht beendeter Skriptblock, in dem sie den Code nicht mehr findet. Geheilt zu `</script\b[^>]*>` (ein `\b` hält `</scriptfoo>` weiterhin draußen), vier Endtag-Varianten als Probe eingefroren. **Das ist der Beweis, dass die Abschaffung der Whitelist wirkt:** Der Fund war eine Zeile in dem Werkzeug, das Funde verhindern soll – mit Whitelist-Denken wäre genau hier die Versuchung zum Unterdrücken am größten gewesen.
+5. **`scripts/revenue_funnel.py` hatte eine Zeitbombe** (`_month_age("2030-01")` als „Zukunfts-Monat“): Unter der 1 461-Tage-Uhrprobe des Runners war das ein **Vergangenheits**-Monat, der Selbsttest ging datumsabhängig rot. Auf dem Basis-Commit `b38fe54` reproduzierbar, also **vorbestehend** – mitgeheilt (relative Fixture, 10 Jahre voraus), weil eine rote Wache in der Lieferung niemandem nützt.
 
 ---
 

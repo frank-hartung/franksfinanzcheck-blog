@@ -599,7 +599,13 @@ def unterdrueckungen_js(toks: list[Tok], rel: str) -> list[Befund]:
 # --------------------------------------------------------------------------- #
 #  5 · HTML – eingebettete <script>-Blöcke (CodeQL analysiert sie mit)
 # --------------------------------------------------------------------------- #
-_SCRIPT = re.compile(r"<script\b([^>]*)>(.*?)</script\s*>", re.IGNORECASE | re.DOTALL)
+# HEILUNG 10.10.2026 (py/bad-tag-filter, gefunden von CodeQL AN DIESER WACHE):
+# Das Endtag hieß hier `</script\s*>` und übersah damit, was Browser sehr wohl
+# als Ende lesen – `</script foo="bar">`, `</script\t\n bar>`, `</script/>`.
+# Folge wäre ein Fail-OPEN gewesen: Der Skriptblock hätte nicht geendet, der
+# Lexer hätte Markup als JavaScript gelesen oder den Block ganz verfehlt. Ein
+# `\b` nach dem Namen hält `</scriptfoo>` weiterhin draußen.
+_SCRIPT = re.compile(r"<script\b([^>]*)>(.*?)</script\b[^>]*>", re.IGNORECASE | re.DOTALL)
 _ATTR_SRC = re.compile(r"\bsrc\s*=", re.IGNORECASE)
 _ATTR_TYPE = re.compile(r"""\btype\s*=\s*["']?([^"'\s>]+)""", re.IGNORECASE)
 _JS_TYPEN = {"", "text/javascript", "application/javascript", "module",
@@ -650,9 +656,42 @@ def html_skripte(quelltext: str) -> list[tuple[int, str]]:
 #  6 · Dateiauswahl und Lauf
 # --------------------------------------------------------------------------- #
 PY_ENDUNGEN = {".py", ".pyw"}
-JS_ENDUNGEN = {".js", ".mjs", ".cjs", ".jsx"}
-HTML_ENDUNGEN = {".html", ".htm"}
+# TypeScript wird mitgeprüft: Der Lexer unten braucht nur Zeichenketten,
+# Kommentare, Regex-Literale und Bezeichner – Typannotationen stören ihn
+# nicht. CodeQLs JavaScript-Extraktor liest .ts/.tsx/.mts/.cts ohnehin als
+# JavaScript, also darf diese Wache dort keinen blinden Fleck haben.
+JS_ENDUNGEN = {".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".mts", ".cts"}
+HTML_ENDUNGEN = {".html", ".htm", ".xhtml"}
 ALLE_ENDUNGEN = PY_ENDUNGEN | JS_ENDUNGEN | HTML_ENDUNGEN
+
+# Endungen, die CodeQL analysiert, für die hier aber (noch) kein Leser
+# existiert. Taucht eine davon im Repository auf, ist das KEIN „sauber“,
+# sondern eine Lücke: `scopeluecken()` meldet sie, der Sicherheitsvertrag
+# macht sie rot. So erzwingt der erste `.vue`-Baustein die Erweiterung der
+# Wache, statt still an ihr vorbeizulaufen (Lehre aus Alert #83: Was eine
+# Analyse nicht liest, hält sie für in Ordnung).
+UNGELESENE_ENDUNGEN = {".vue", ".hbs", ".ejs", ".njk", ".svelte", ".astro"}
+
+
+def scopeluecken(wurzel: Path = None) -> list[str]:
+    """Dateien, die CodeQL liest und diese Wache (noch) nicht.
+
+    Rückgabe ist die (hoffentlich leere) Liste der Pfade. Nicht leer heißt:
+    Wache erweitern, bevor der Baustein nach `main` geht.
+    """
+    wurzel = Path(wurzel or ROOT)
+    muster = [f"*{e}" for e in sorted(UNGELESENE_ENDUNGEN)]
+    try:
+        roh = subprocess.run(
+            ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", *muster],
+            cwd=wurzel, capture_output=True, text=True, timeout=120, check=True).stdout
+        kandidaten = [wurzel / p for p in roh.split("\0") if p.strip()]
+    except (OSError, subprocess.SubprocessError):
+        kandidaten = [p for e in UNGELESENE_ENDUNGEN for p in wurzel.rglob(f"*{e}")]
+    return sorted(
+        str(p.relative_to(wurzel)) for p in kandidaten
+        if not any(teil in AUSGESCHLOSSENE_TEILE for teil in p.parts))
+
 
 
 def quelldateien(wurzel: Path) -> list[Path]:
@@ -801,6 +840,29 @@ export const laenge = (t) => t.length;
 </script>
 </body></html>
 '''),
+    # TypeScript: CodeQLs JS-Extraktor liest .ts/.tsx wie JavaScript, also
+    # muss diese Wache es auch tun (Scope-Vertrag seit 10.10.2026).
+    "ts_includes": (".ts", '''
+export function istBlog(url: string): boolean {
+  const liste: Array<string> = [];
+  return liste.length === 0 && url.includes("https://franksfinanzcheck.de/go/");
+}
+'''),
+    "tsx_indexof": (".tsx", '''
+export const trefferAt = (u: string): number => u.indexOf("https://api.resend.com/emails");
+'''),
+    # Endtag mit Müll: Browser lesen `</script\t\n bar>` als Ende, eine naive
+    # Regex nicht (py/bad-tag-filter, 10.10.2026 von CodeQL an dieser Wache
+    # selbst gefunden). Wird der Block nicht beendet, verfehlt die Wache den
+    # Code darin – ein Fail-OPEN, das hier dauerhaft ausgeschlossen bleibt.
+    "html_endtag_mit_muell": (".html", '''<!doctype html>
+<html><body>
+<script>
+  const treffer = url.includes("https://api.resend.com/emails");
+</script\t
+ bar>
+</body></html>
+'''),
 }
 
 NEGATIV: dict[str, tuple[str, str]] = {
@@ -878,6 +940,19 @@ export const ok = (u) => muster.test(new URL(u).hostname);
   {{ end }}
 </script>
 </body></html>
+'''),
+    # TypeScript-Syntax darf den Lexer nicht aus dem Tritt bringen: Generics,
+    # `as`-Zusicherung, Division (kein Regex-Literal) und ein echtes Regex.
+    "ts_host_exakt": (".ts", '''
+export function erlaubt(origin: string): boolean {
+  let url: URL;
+  try { url = new URL(origin); } catch { return false; }
+  const teile = origin.split("/") as string[];
+  const quote = teile.length / 2 / 2;
+  const muster = /https?:\\/\\/[a-z.]+/i;
+  return url.protocol === "https:" && muster.test(origin) && quote >= 0
+    && url.hostname.toLowerCase() === "franksfinanzcheck.de";
+}
 '''),
 }
 
@@ -967,6 +1042,20 @@ def selftest() -> int:
             if not lauffehler:
                 fehler.append(f"Fail-closed: {endung}-Datei ohne Analysefehler durchgelassen")
 
+        # d) Scope-Lücke: eine Endung, die CodeQL liest und diese Wache nicht,
+        #    muss auffallen – sonst wächst der blinde Fleck still mit dem Repo.
+        #    Geprüft wird in einem eigenen Verzeichnis OHNE Git, damit der
+        #    Rückfall-Pfad (rglob) mitgeprüft wird und das echte Repository
+        #    unberührt bleibt.
+        luecke = wurzel / "komponente.vue"
+        luecke.write_text("<template><div/></template>\n", encoding="utf-8")
+        gemeldet = scopeluecken(wurzel)
+        if "komponente.vue" not in gemeldet:
+            fehler.append("Scope-Lücke: .vue-Datei wurde nicht als ungelesene Endung gemeldet")
+        luecke.unlink()
+        if scopeluecken(wurzel):
+            fehler.append("Scope-Lücke: Fehlalarm auf einem Baum ohne ungelesene Endungen")
+
     if fehler:
         print("❌ URL-WACHE SELBSTTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -975,7 +1064,7 @@ def selftest() -> int:
     print(f"✅ URL-Wache Selbsttest bestanden ({len(POSITIV)} Positivproben, "
           f"{len(NEGATIV)} Gegenproben, "
           f"{len(MUSTERPROBEN) + len(MUSTERPROBEN_INCLUDES) + len(AUSNAHMEPROBEN) + len(SUFFIXPROBEN)}"
-          f" Musterproben, 2 Fail-closed-Proben).")
+          f" Musterproben, 2 Fail-closed-Proben, 2 Scope-Proben).")
     return 0
 
 
@@ -994,7 +1083,7 @@ HEILUNG = (
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(
         description="URL-Wache: findet unvollständige URL-Substring-Prüfungen "
-                    "(Python, JavaScript, HTML).")
+                    "(Python, JavaScript/TypeScript, HTML).")
     p.add_argument("pfade", nargs="*", help="zu prüfende Dateien (Standard: ganzes Repository)")
     p.add_argument("--json", action="store_true", help="Befunde als JSON ausgeben")
     p.add_argument("--selftest", action="store_true", help="Eigenprüfung der Wache")
@@ -1004,13 +1093,24 @@ def main(argv=None) -> int:
     if a.selftest:
         return selftest()
 
+    eigener_lauf = not a.pfade
     pfade = [Path(x) for x in a.pfade] if a.pfade else quelldateien(ROOT)
     befunde, fehler = pruefe(pfade, ROOT)
     befunde.sort(key=lambda b: (b.datei, b.zeile, b.form))
 
+    # Eine Endung, die CodeQL liest und diese Wache nicht, ist eine Lücke –
+    # und zwar eine, die sich wie „grün“ anfühlt. Sie zählt als Fehler
+    # (Exit 2), nicht als Befund: Es ist kein Fund, sondern Blindheit.
+    luecken = scopeluecken(ROOT) if eigener_lauf else []
+    fehler = fehler + [
+        f"{pfad}: Endung wird von CodeQL analysiert, von dieser Wache aber nicht "
+        f"gelesen – Leser in url_substring_guard.py ergänzen (Scope-Lücke)"
+        for pfad in luecken]
+
     if a.json:
         print(json.dumps({"befunde": [asdict(b) for b in befunde], "fehler": fehler,
-                          "geprueft": len(pfade), "regeln": list(REGELN)},
+                          "geprueft": len(pfade), "regeln": list(REGELN),
+                          "scopeluecken": luecken},
                          ensure_ascii=False, indent=2))
         if fehler:
             return 2
@@ -1030,7 +1130,7 @@ def main(argv=None) -> int:
         print(HEILUNG)
         return 2 if fehler else 1
     if not a.quiet:
-        print(f"✅ URL-Wache: {len(pfade)} Dateien (Python, JavaScript, HTML), keine "
+        print(f"✅ URL-Wache: {len(pfade)} Dateien (Python, JavaScript/TypeScript, HTML), keine "
               f"unvollständige URL-Prüfung (Regeln: {REGEL_PY}, {REGEL_JS}).")
     return 0 if not fehler else 2
 
