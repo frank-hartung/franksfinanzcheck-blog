@@ -50,6 +50,10 @@ ops-report.json
 # Nur im Root ignorieren, docs/ enthält strategische Dokumente
 /*-REPORT.md
 /*-STATUS.md
+# Ausnahme: manuell gepflegte Rechts-Historie (keine Automatik, wird von keinem
+# Skript erzeugt, referenziert von docs/INFRASTRUKTUR.md und scripts/fristen_check.py).
+# Frist bfsg-barrierefreiheit-bewertung (#689, 10.10.2026)
+!/RECHT-UPDATE-REPORT.md
 # Governance-Scorecard (Premium-Audit 12.09.2026: nicht versioniert,
 # bleibt im Lauf-Log; passt nicht auf die -REPORT/-STATUS-Muster)
 /EDITORIAL-SCORECARD.md
