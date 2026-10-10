@@ -589,15 +589,31 @@ class Journeys(unittest.TestCase):
 
     def test_datenschutz_meldet_den_zustatt_der_vermutung(self):
         text = _text("content/datenschutz/index.md")
-        self.assertIn("{{< newsletter_status >}}", text,
-                      "der Abschnitt schreibt einen Zustand, statt ihn aus dem Studio zu lesen")
+        # Der erste Treffer von „Newsletter“ liegt schon im Frontmatter und
+        # seit #700 auch in der Einleitung. Nur der ECHTE Abschnitt 8 beweist
+        # die Zusagen; ein Präfix/Suffix oder eine andere Rubrik darf den Test
+        # nicht grün färben.
+        def abschnitt_8(quelltext):
+            match = re.search(r"(?ms)^## 8\. Newsletter / Kontaktaufnahme[ \t]*\n"
+                              r"(.*?)(?=^## |\Z)", quelltext)
+            return match.group(1) if match else ""
+
+        probe = ('description: Newsletter Double-Opt Widerruf Resend\n'
+                 '## 8. Newsletter / Kontaktaufnahme\nNur ein Entwurf.\n'
+                 '## 9. Widerruf Double-Opt Resend\n')
+        self.assertNotIn("Double-Opt", abschnitt_8(probe),
+                         "Frontmatter oder Folgeabschnitt erfüllen den Vertrag nicht")
+        abschnitt = abschnitt_8(text)
+        self.assertTrue(abschnitt, "Datenschutz-Abschnitt 8 fehlt")
+        for pflicht in ("{{< newsletter_status >}}", "Double-Opt", "Widerruf",
+                        "Cloudflare", "Resend", "anhand der Betreiberkonten"):
+            self.assertIn(pflicht, abschnitt, f"Datenschutz-Abschnitt ohne {pflicht}")
         self.assertNotIn("Sie wird erst aktiv, wenn der Auftragsverarbeitungsvertrag",
-                         text.replace("{{< newsletter_status >}}", ""),
+                         abschnitt,
                          "der alte bedingte Satz beschreibt einen Zustand, den "
                          "die Datenschutzerklärung nicht kennen kann")
-        abschnitt = text[text.lower().find("newsletter"):]
-        for pflicht in ("Double-Opt", "Auftragsverarbeitungsvertrag", "Widerruf"):
-            self.assertIn(pflicht, abschnitt[:4000], f"Datenschutz-Abschnitt ohne {pflicht}")
+        self.assertNotIn("Auftragsverarbeitungsvertrag unter", abschnitt,
+                         "keine unbestätigten AVV-/Drittlandgarantien zusagen")
 
 
 CHECKLISTE = "content/newsletter-checkliste/index.md"
