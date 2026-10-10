@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-10T10:22:15Z",
-  "modus": "kandidaten",
-  "commit": "30362b4bd5d88e4f93798e72c35c13b0deac8a8b",
+  "generated_at": "2026-10-10T11:08:06Z",
+  "modus": "live",
+  "commit": "7c7668fb8c92f5c8f2afe54ab3f0b3a9ce86ba73",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -226,7 +226,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
+      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
@@ -685,7 +685,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "1dc147f540d14e89a69e6518a640729fc8754efab91c3fa440603c3d0c5c34d9",
+      "sha256": "bbc72a437294bc7dc2a493eecc9f1ff61681feecfca51656f760d9e3ad1f7868",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -699,7 +699,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
       "sha256": "2ce741fc19fd92ed0ef8c3d0441e76fe80966b365799c68cd0ba3679deb73e68",
