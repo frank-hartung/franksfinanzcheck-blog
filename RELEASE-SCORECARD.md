@@ -76,7 +76,7 @@ Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
 - `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11718 Zeichen, Optimum 12.000–18.000)
 - `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11888 Zeichen, Optimum 12.000–18.000)
 - `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11453 Zeichen, Optimum 12.000–18.000)
-- `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10353 Zeichen, Optimum 12.000–18.000)
+- `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10607 Zeichen, Optimum 12.000–18.000)
 - `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11203 Zeichen, Optimum 12.000–18.000)
 - `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)
 - `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10941 Zeichen, Optimum 12.000–18.000)
