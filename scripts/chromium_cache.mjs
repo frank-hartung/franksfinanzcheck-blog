@@ -11,7 +11,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 
-const TEMP_BASE = tmpdir();
+// Playwright-Worker erben TMPDIR: die ursprüngliche Basis weiterreichen,
+// damit sie nicht erneut ein Versionsverzeichnis darunter anlegen.
+const TEMP_BASE = process.env.FF_CHROMIUM_TEMP_BASE || tmpdir();
+process.env.FF_CHROMIUM_TEMP_BASE = TEMP_BASE;
 
 /**
  * Put Sparticuz's hard-coded `$TMPDIR/chromium` cache under a versioned path.
