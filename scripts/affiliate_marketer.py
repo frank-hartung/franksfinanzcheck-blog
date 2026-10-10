@@ -43,8 +43,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import affiliate_intent_contract as vk  # noqa: E402  (SSOT Anker/Sätze/Routen)
+from url_host import hat_link_auf_host  # noqa: E402  (Host-exakte URL-Wahrheit)
 
 ROOT = Path(__file__).resolve().parent.parent
+# Eigener Host – eine Quelle für Gateway-Regex und Selbsttest (Alert #83).
+BLOG_HOST = "franksfinanzcheck.de"
 REGISTRY = ROOT / "scripts" / "check24_links.yaml"
 REPORT = ROOT / "AFFILIATE-MARKETING-REPORT.md"
 HISTORY = ROOT / "data" / "affiliate_marketing_history.jsonl"
@@ -228,7 +231,7 @@ def normalize_gateway_links(text: str, reg: dict, pillar: str = "") -> tuple[str
     # aufsaugen -> alle /go/-Links verlassen die KI-Erzeugung kanonisch
     # relativ (nur so greift rel="sponsored" im Render-Hook).
     go_re = re.compile(
-        r"(?:https?://(?:www\.)?franksfinanzcheck\.de)?/go/([\w-]+)(/?)")
+        r"(?:https?://(?:www\.)?" + re.escape(BLOG_HOST) + r")?/go/([\w-]+)(/?)")
     new_text = go_re.sub(repl, text)
     return new_text, fixed
 
@@ -319,11 +322,18 @@ def run_selftest() -> list[str]:
         t3, n3 = normalize_gateway_links(
             "Siehe [Gas](https://franksfinanzcheck.de/go/gas) hier.",
             reg_test, "strom-sparen")
-        # Hinweis: „… in t3“ ist hier Absicht – der Selftest prüft, dass der
-        # absolute Blog-Host NIRGENDWO mehr im kanonisierten Text steht (auch
-        # nicht in einer anderen Position). Keine URL-Sanitisierung, daher
-        # bewusst keine Host-exakte Prüfung.  # codeql[py/incomplete-url-substring-sanitization]
-        if n3 != 1 or "https://franksfinanzcheck.de" in t3 \
+        # Geprüft wird: Im kanonisierten Text steht KEIN absoluter Link auf den
+        # eigenen Host mehr – weder auf `franksfinanzcheck.de` noch auf eine
+        # seiner Subdomains (`www.`), an keiner Stelle.
+        #
+        # HEILUNG 10.10.2026 (Code-Scanning-Alert #83): Vorher stand hier
+        # `"https://franksfinanzcheck.de" in t3` mit einer Inline-Unterdrückung.
+        # Die Zeichenketten-Suche war in beide Richtungen unscharf – sie hätte
+        # `https://franksfinanzcheck.de.angreifer.example/go/gas/` als „eigenen
+        # Host“ gewertet und `https://www.franksfinanzcheck.de/go/gas` (den die
+        # Kanonisierung ebenfalls auflösen muss) übersehen. `hat_link_auf_host`
+        # liest die Links aus dem Text und vergleicht den HOST exakt.
+        if n3 != 1 or hat_link_auf_host(t3, BLOG_HOST, mit_subdomains=True) \
                 or "/go/gas/" not in t3:
             fehler.append(f"  NR: absoluter Blog-Host nicht kanonisiert (t3={t3})")
         # MISROUTING (Reserve #5): Gas-Artikel mit eigenem Gas-Link und

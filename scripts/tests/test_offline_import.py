@@ -24,6 +24,7 @@ import importlib.util
 import json
 import datetime
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -58,15 +59,19 @@ def monat(rueckwaerts=0):
     return f"{m // 12:04d}-{m % 12 + 1:02d}"
 
 
+IPV4 = re.compile(r"\A\d{1,3}(?:\.\d{1,3}){3}\Z")   # Netzadresse statt Seitenpfad
+
 MONAT_A, MONAT_B = monat(2), monat(1)          # zwei aufeinanderfolgende Monate
 FENSTER_ANFANG = tag(90)                        # 90-Tage-Fenster endet heute
 
 
 MESSSTAND = {
+    # Mitlaufendes Fenster – siehe `monat()`/`tag()` oben: Eine Fixture mit
+    # festen Kalenderdaten („2026-07-12"/„2026-10-10") wäre ab dem Folgetag
+    # falsch. Genau dieser Doppelblock stand am 10.10.2026 unvollständig im
+    # Bestand und machte die Datei syntaktisch unlesbar (Reparatur im Zuge
+    # von Code-Scanning-Alert #83: jede fail-closed Wache bricht daran ab).
     "window": {"start": FENSTER_ANFANG, "ende": HEUTE.isoformat(), "tage": 90},
-
-MESSSTAND = {
-    "window": {"start": "2026-07-12", "ende": "2026-10-10", "tage": 90},
     "totals": {"aufrufe": 412, "besuche": 268},
     "views": [
         {"pfad": "/posts/x/", "aufrufe": 96, "besuche": 61},
@@ -137,7 +142,6 @@ class Sandbox(unittest.TestCase):
         self.assertTrue(meta["datei"].endswith("messstand.json"))
         self.assertEqual(meta["days"], 90)
         self.assertEqual(meta["window_start"], FENSTER_ANFANG)
-        self.assertEqual(meta["window_start"], "2026-07-12")
         self.assertEqual(len(meta["written_files"]), 3)
         # Die Meta der API-Skripte gehört denen allein – sie darf hier nicht
         # entstehen, sonst verliert die Kette ihr Gedächtnis (falscher Alarm
@@ -154,8 +158,13 @@ class Sandbox(unittest.TestCase):
         x = next(p for p in views["pages"] if p["path"] == "/posts/x/")
         self.assertEqual(x["views"], 110)
         self.assertEqual(x["visits"], 70)
-        self.assertNotIn("/", [p for p in pfade if "example.com" in p or "10.0.0" in p])
-        self.assertFalse(any("@" in p or "10.0.0" in p for p in pfade),
+        # Datenschutz: Geprüft wird die EIGENSCHAFT der Zeile (Personenbezug,
+        # Netzadresse), nicht das Vorkommen einer Beispiel-Domain. Die frühere
+        # Fassung suchte `"example.com" in p` – eine unvollständige
+        # URL-Substring-Prüfung (Code-Scanning-Alert #83) und obendrein blind
+        # für jede andere Mail-Domain im Messstand.
+        verseucht = [p for p in pfade if "@" in p or IPV4.match(p.strip("/"))]
+        self.assertEqual(verseucht, [],
                          "personenbezogene/Netz-Zeilen sind im Repo gelandet")
 
     def test_klicks_aggregieren_und_ctas_seit_trennt_sich(self):
@@ -220,12 +229,6 @@ class Sandbox(unittest.TestCase):
             fh.write("falsch,CHECK24,9,9,9.00,x,\n")
         prov = oi.read_provisionen(self.prov)
         self.assertEqual(prov["letzter_monat"], MONAT_B)
-            fh.write("2026-08,CHECK24,2,0,33.00,A-08,\n")
-            fh.write("2026-09,CHECK24,3,1,49.50,A-09,\n")
-            fh.write("2026-09,Tarifcheck,1,0,18.00,B-09,\n")
-            fh.write("falsch,CHECK24,9,9,9.00,x,\n")
-        prov = oi.read_provisionen(self.prov)
-        self.assertEqual(prov["letzter_monat"], "2026-09")
         self.assertEqual(prov["summe"]["abschluesse"], 6)
         self.assertEqual(prov["summe"]["provision_eur"], 100.5)
         self.assertEqual(len(prov["monate"]), 2)
@@ -236,7 +239,6 @@ class Sandbox(unittest.TestCase):
         with open(self.prov, "w", encoding="utf-8") as fh:
             fh.write("monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n")
             fh.write(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},\n")
-            fh.write("2026-09,CHECK24,3,1,49.50,A-09,\n")
         self.imp()
         agg = self.read("provisionen_agg")
         self.assertEqual(agg["summe"]["provision_eur"], 49.5)
@@ -263,10 +265,6 @@ class Sandbox(unittest.TestCase):
                             "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
                 "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
                           "provision_eur": 49.5}, "letzter_monat": MONAT_B}
-        prov = {"monate": [{"monat": "2026-09", "partner": ["CHECK24"],
-                            "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
-                "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
-                          "provision_eur": 49.5}, "letzter_monat": "2026-09"}
         f = rf.compute({}, [], {"status_totals": {"approved": {"count": 2}},
                                 "total_commission": 33.0, "total_paid": 33.0},
                        [], set(), measured={"views": False, "clicks": False, "awin": True},
@@ -282,8 +280,6 @@ class Sandbox(unittest.TestCase):
         self.assertEqual(rf._month_age(monat(0)), 0)
         n = HEUTE.year * 12 + HEUTE.month      # der Monat nach heute = Zukunft
         for schlecht in (f"{n // 12:04d}-{n % 12 + 1:02d}", "quatsch", ""):
-        self.assertEqual(rf._month_age("2026-01"), 9)
-        for schlecht in ("2099-01", "quatsch", ""):
             with self.assertRaises((ValueError, AttributeError)):
                 rf._month_age(schlecht)
 

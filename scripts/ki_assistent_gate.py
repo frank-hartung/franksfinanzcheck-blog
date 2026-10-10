@@ -43,6 +43,7 @@ REGELN = {
     "KA7": "Keine hardcoded API-Schlüssel im Frontend",
     "KA8": "Keine Tracking-Pixel oder externen Requests vor Nutzeraktion",
     "KA9": "Worker-Code vorhanden",
+    "KA10": "CORS-Freigabe host-genau (keine Zeichenketten-Prüfung der Herkunft)",
 }
 
 ERGEBNISSE = {"bereit": [], "warnung": [], "defekt": []}
@@ -64,6 +65,47 @@ def inhalt(pfad: Path) -> str:
         return pfad.read_text(encoding="utf-8")
     except Exception:
         return ""
+
+
+# Zeichenketten-Urteil über die Herkunft – genau die Lücke aus
+# Code-Scanning-Alert #83 (js/incomplete-url-substring-sanitization).
+# `origin.endsWith(".pages.dev")` lässt `https://boese.example/?x=.pages.dev`
+# und `http://` durch; erlaubt ist nur ein Urteil über den geparsten Host.
+CORS_ZEICHENKETTE = re.compile(
+    r"origin[^;\n]{0,40}\.\s*(endsWith|startsWith|includes|indexOf|search|match)\s*\(",
+    re.IGNORECASE)
+
+
+def _js_ohne_kommentare(code: str) -> str:
+    """Kommentare entfernen, ohne an `https://` zu zerbrechen (eigener Lexer)."""
+    try:
+        from url_substring_guard import LexFehler, js_lexen
+        return " ".join(tok.text for tok in js_lexen(code) if tok.art != "kommentar")
+    except Exception:  # noqa: BLE001 – Wache darf nie am Werkzeug scheitern
+        return code
+
+
+def pruefe_ka10(worker: Path = None):
+    """KA10: Die CORS-Entscheidung urteilt über den HOST, nicht über Zeichenketten."""
+    worker = worker or (ROOT / "cloudflare" / "ki-assistent" / "worker.js")
+    if not datei_existiert(worker):
+        status("KA10", "defekt", "worker.js fehlt – der CORS-Vertrag ist nicht prüfbar")
+        return
+    code = _js_ohne_kommentare(inhalt(worker))
+    treffer = CORS_ZEICHENKETTE.search(code)
+    if treffer:
+        status("KA10", "defekt",
+               "Herkunft wird über eine Zeichenkette geprüft "
+               f"(`{treffer.group(0).strip()}`) statt über den Host – "
+               "Code-Scanning-Alert #83")
+        return
+    # Der Lexer trennt Token mit Leerzeichen – deshalb toleranter Vergleich.
+    if not re.search(r"new\s+URL\s*\(", code) or "vorschauHost" not in code:
+        status("KA10", "defekt",
+               "CORS-Entscheidung ohne geparste Herkunft: `new URL(...)` + "
+               "`vorschauHost(...)` fehlen im Worker")
+        return
+    status("KA10", "bereit")
 
 
 def pruefe_ka1():
@@ -264,6 +306,37 @@ def selftest() -> int:
     ERGEBNISSE["warnung"].clear()
     ERGEBNISSE["defekt"].clear()
 
+    # Test 4: Zeichenketten-Prüfung der Herkunft wird erkannt (Alert #83).
+    #         Läuft auf einer Wegwerf-Kopie – der echte Worker wird nie angefasst.
+    with tempfile.TemporaryDirectory() as tmp:
+        sabotage = Path(tmp) / "worker.js"
+        sabotage.write_text(
+            "function corsHeaders(origin, env) {\n"
+            "  const ok = origin && origin.endsWith('.pages.dev');\n"
+            "  return { 'Access-Control-Allow-Origin': ok ? origin : '' };\n"
+            "}\n", encoding="utf-8")
+        pruefe_ka10(sabotage)
+        if not any(e["regel"] == "KA10" for e in ERGEBNISSE["defekt"]):
+            print("FAIL: KA10 erkannte die Zeichenketten-Prüfung der Herkunft nicht.")
+            fehler += 1
+        else:
+            print("OK: KA10 erkennt Zeichenketten-Prüfung der Herkunft.")
+        ERGEBNISSE["bereit"].clear()
+        ERGEBNISSE["warnung"].clear()
+        ERGEBNISSE["defekt"].clear()
+
+        # Gegenprobe: der echte, host-genaue Worker bleibt still.
+        pruefe_ka10()
+        if any(e["regel"] == "KA10" for e in ERGEBNISSE["defekt"]):
+            print("FAIL: KA10 beanstandet den host-genauen Worker "
+                  f"({ERGEBNISSE['defekt']}).")
+            fehler += 1
+        else:
+            print("OK: KA10 lässt den host-genauen Worker passieren.")
+        ERGEBNISSE["bereit"].clear()
+        ERGEBNISSE["warnung"].clear()
+        ERGEBNISSE["defekt"].clear()
+
     if fehler == 0:
         print("\nAlle Sabotage-Proben erkannt. Gate ist scharf.")
     else:
@@ -286,7 +359,8 @@ def main():
 
     # Alle Prüfungen laufen lassen
     for pruefer in [pruefe_ka1, pruefe_ka2, pruefe_ka3, pruefe_ka4,
-                    pruefe_ka5, pruefe_ka6, pruefe_ka7, pruefe_ka8, pruefe_ka9]:
+                    pruefe_ka5, pruefe_ka6, pruefe_ka7, pruefe_ka8, pruefe_ka9,
+                    pruefe_ka10]:
         try:
             pruefer()
         except Exception as exc:

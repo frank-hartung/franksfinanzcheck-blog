@@ -944,8 +944,13 @@ def _selftest():
     if _month_age(monat_rel(1)) != 1 or _month_age(monat_rel(PROV_STALE_MONATE)) != PROV_STALE_MONATE:
         failures.append("_month_age zählt Monate falsch (Relative-Fixture-Vertrag)")
     try:
-        _month_age("2030-01")
-        failures.append("Zukunfts-Monat muss werfen (nichts erfinden)")
+        # Zweite Zukunfts-Probe, bewusst WEIT vorn (10 Jahre) und relativ:
+        # Hier stand bis 10.10.2026 ein eingefrorenes "2030-01" – unter der
+        # 1461-Tage-Uhrprobe des Selbsttest-Runners war das ein VERGANGENHEITS-
+        # Monat, der Selbsttest wurde datumsabhängig rot. Ein absolutes Datum
+        # in einer Zukunfts-Zusicherung ist immer eine Zeitbombe.
+        _month_age(monat_rel(-120))
+        failures.append("Ferner Zukunfts-Monat muss werfen (nichts erfinden)")
     except ValueError:
         pass
     # --- Datenqualitäts-Logik

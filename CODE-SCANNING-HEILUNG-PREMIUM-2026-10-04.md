@@ -84,3 +84,17 @@ Lücken sind dauerhaft geschlossen; der Sonderfall ist vollständig dokumentiert
 in **`CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md`** (Wahrheitsort
 für #78): Namensvertrag statt Unterdrückung, Vollanalyse in jedem Ereignis,
 Wert-Dichtheitstest und Unterdrückungsverbot für die Clear-Text-Regeln.
+
+## Nachtrag 10.10.2026 · Alert #83 („Incomplete URL substring sanitization")
+
+Die beiden URL-Regeln standen seit dem 04.10. als „begründete Ausnahme" in der
+Unterdrückungs-Whitelist dieses Workflows – und genau deshalb blieb Alert #83
+offen: Das parallel laufende Default-Setup kennt keine `# codeql[...]`-
+Kommentare und meldete weiter, während das Gate „0 Funde" sagte. **Die
+Whitelist ist ersatzlos gestrichen**; jede Unterdrückung lässt den Lauf
+seitdem scheitern. Alle Fundstellen sind im Code geheilt (Host parsen statt
+Zeichenkette prüfen), drei neue Wachen frieren den Zustand ein
+(`scripts/url_host.py`, `scripts/url_substring_guard.py`, Regel KA10). Der
+Sonderfall ist vollständig dokumentiert in
+**`CODE-SCANNING-ALERT-83-DAUERHEILUNG-PREMIUM-2026-10-10.md`** (Wahrheitsort
+für #83).

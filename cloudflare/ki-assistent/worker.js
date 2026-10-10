@@ -213,12 +213,35 @@ async function callLLMChain(messages, systemPrompt, maxTokens, env) {
 }
 
 // ---- CORS ----
+//  HÄRTUNG 10.10.2026 (Code-Scanning-Alert #83, Regelklasse
+//  js/incomplete-url-substring-sanitization):
+//  Vorher entschied `origin.endsWith(".pages.dev")` über die Freigabe – eine
+//  Prüfung auf der ZEICHENKETTE statt auf dem HOST. Damit galt jede Herkunft
+//  als Vorschau, die zufällig so endet, und `http://` war genauso gut wie
+//  `https://`. Jetzt wird die Herkunft geparst: nur https, und die
+//  Punkt-Grenze wird auf dem Hostnamen geprüft.
+const VORSCHAU_HOSTS = ["pages.dev", "e2b.app"]; // Cloudflare-Preview, Arena-Preview
+
+function vorschauHost(origin) {
+  let url;
+  try {
+    url = new URL(String(origin));
+  } catch {
+    return false; // keine gültige Herkunft → keine Freigabe
+  }
+  if (url.protocol !== "https:") return false;
+  const host = url.hostname.toLowerCase();
+  return VORSCHAU_HOSTS.some((basis) => host.endsWith("." + basis));
+}
+
 function corsHeaders(origin, env) {
-  const allowed = (env.ALLOWED_ORIGIN || "https://franksfinanzcheck.de").split(",").map(s => s.trim());
-  // pages.dev-Preview erlauben
-  const isAllowed = allowed.includes(origin) ||
-    (origin && origin.endsWith(".pages.dev")) ||
-    (origin && origin.endsWith(".e2b.app")); // Arena-Preview
+  const allowed = (env.ALLOWED_ORIGIN || "https://franksfinanzcheck.de")
+    .split(",")
+    .map(s => s.trim())
+    .filter(Boolean);
+  // Produktion: exakter Origin-Vergleich (Array.includes, kein Teilstring).
+  // Vorschau: host-genaue Subdomain-Prüfung, siehe oben.
+  const isAllowed = allowed.includes(origin) || vorschauHost(origin);
   return {
     "Access-Control-Allow-Origin": isAllowed ? origin : allowed[0],
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -334,3 +357,7 @@ export default {
     );
   },
 };
+
+// Nur für Tests (node --test, siehe test/worker.test.mjs): Die CORS-Entscheidung
+// ist sicherheitsrelevant und wird deshalb direkt geprüft, nicht über Umwege.
+export { corsHeaders, vorschauHost };
