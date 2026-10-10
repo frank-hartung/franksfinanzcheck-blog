@@ -24,8 +24,8 @@ cover:
   image: "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg"
   alt: "Sieben Geldgewohnheiten für mehr Übersicht und finanziellen Spielraum"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "7 Gewohnheiten für finanzielle Freiheit"
-pin_description: "*Werbung | Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen. Mehr Spartipps findest du auf FranksFinanzcheck.*"
+pin_title: "7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen"
+pin_description: "*Werbung | Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen. Mehr Spartipps auf FranksFinanzcheck! #finanziellefreiheit #budgetplanen #ruecklagenbilden"
 quellen:
   - titel: "Effektiv sparen – auch mit kleinem Budget"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610"

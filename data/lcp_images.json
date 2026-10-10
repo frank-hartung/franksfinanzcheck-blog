@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-09T12:06:19+00:00",
+  "generatedAt": "2026-10-10T10:42:41+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg",
+      "image": "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg",
+      "image": "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -64,22 +64,6 @@
     },
     "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/": {
       "image": "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/": {
-      "image": "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -704,6 +688,22 @@
     },
     "/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/": {
       "image": "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/": {
+      "image": "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
