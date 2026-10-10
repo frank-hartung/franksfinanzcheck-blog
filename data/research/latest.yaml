@@ -1,5 +1,5 @@
-generated_at: '2026-10-09T10:54:21Z'
-day: '2026-10-09'
+generated_at: '2026-10-10T10:07:16Z'
+day: '2026-10-10'
 mode: deterministic
 teams:
   trending:
@@ -90,15 +90,15 @@ teams:
     source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
     score: 0.85
     keywords: []
-  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
     pillar: strom-sparen
     signal: evergreen
-    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
     score: 0.85
     keywords:
-    - Stromanbieter Pleite
-    - Grundversorgung Strom
-    - Anbieterinsolvenz
+    - Smart-Plug
+    - Energie sparen
+    - Haushaltsgeräte
   - topic: Die besten Tarife für ein günstiges Handy-Abonnement
     pillar: internet-dsl
     signal: evergreen
@@ -126,15 +126,15 @@ teams:
     - Reisekreditkarten
     - günstige Karten
     - Reisekosten sparen
-  - topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
+  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Hund & Katze: Lohnt sich eine Tierversicherung?'
+    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     score: 0.85
     keywords:
-    - Tierversicherung
-    - Hundeversicherung
-    - Katzenversicherung
+    - Rechtsschutzversicherung
+    - Rechtsschutz Leistungen
+    - Rechtsstreit versichern
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -238,61 +238,65 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 'Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
+  - topic: DSL- und Internet-Flat günstig sichern
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:DSL- und Internet-Flat günstig sichern
+    score: 0.55
+    keywords:
+    - DSL Vergleich
+    - Internetvertrag wechseln
+    - Günstiges Internet
+    - Wechselbonus
+  - topic: Die besten Kreditkarten für Reisen
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Die besten Kreditkarten für Reisen
+    score: 0.55
+    keywords:
+    - Kreditkarte
+    - Reise
+    - Vorteile
+  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
+    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
     score: 0.55
     keywords:
-    - Balkonkraftwerk
-    - Mini-Solaranlage
-    - Stecker-Solargerät
-  - topic: Günstige Angebote für Internet und TV
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:Günstige Angebote für Internet und TV
-    score: 0.55
-    keywords:
-    - Internet
-    - TV
-    - Günstig
-  - topic: 'Haushaltsbuch-Apps im Vergleich: Die beste kostenlose Lösung'
+    - E-Auto Ladekosten
+    - Stromtarif E-Auto
+    - Wallbox sparen
+  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Haushaltsbuch-Apps im Vergleich: Die beste kostenlose Lösung'
+    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     score: 0.55
     keywords:
-    - Haushaltsbuch App
-    - Ausgaben tracken
-    - Budgetplanung App
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
+    - Neujahrsvorsätze Geld
+    - finanzielle Ziele 2027
+    - Sparziele erreichen
+    - Gewohnheiten ändern
+  - topic: Stromanbieter wechseln und bis zu 300 Euro sparen
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Stromanbieter wechseln und bis zu 300 Euro sparen
+    score: 0.55
+    keywords:
+    - Stromanbieter wechseln
+    - Stromvergleich
+    - Stromkosten sparen 2026
+  - topic: 'Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
+      0'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: 'topics:Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
+      0'
     score: 0.55
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
-  - topic: 'Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten
-      was?'
-    score: 0.55
-    keywords:
-    - Internetflat
-    - Hohe Geschwindigkeit
-    - Anbietervergleich
-  - topic: Kfz-Versicherung vergleichen und sparen
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Kfz-Versicherung vergleichen und sparen
-    score: 0.55
-    keywords:
-    - Kfz Versicherung wechseln
-    - Autoversicherung vergleichen
-    - Sparmethoden Auto
+    - Zweitwagenregelung
+    - Zweitwagen günstig versichern
+    - Schadenfreiheitsklasse übertragen
+    - SF-Klasse retten
 live_web:
   enabled: false
   findings: []

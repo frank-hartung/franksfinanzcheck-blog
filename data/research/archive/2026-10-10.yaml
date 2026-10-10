@@ -1,5 +1,5 @@
-generated_at: '2026-09-10T08:23:31Z'
-day: '2026-09-10'
+generated_at: '2026-10-10T10:07:16Z'
+day: '2026-10-10'
 mode: deterministic
 teams:
   trending:
@@ -22,20 +22,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.75
-  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
-      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-      als der reine Anbieterwechsel.
-    pillar: internet-dsl
-    signal: trending
-    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
-    score: 0.65
   - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
       ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
       statt sie automatisch zu verlängern.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.6
+    score: 0.65
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: trending
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.65
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -43,18 +42,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:konto-gebuehren-transparenz
     score: 0.6
+  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
+      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+      als der reine Anbieterwechsel.
+    pillar: internet-dsl
+    signal: trending
+    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
+    score: 0.6
   - topic: Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue
       Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten
       wieder fallen.
     pillar: konto-karten
     signal: trending
     source: aktuelle_entwicklungen:zinsumfeld-tagesgeld
-    score: 0.6
-  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
-      Ergebnis nimmt, lässt oft bares Geld liegen.
-    pillar: versicherungen
-    signal: trending
-    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
     score: 0.6
   - topic: Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an
       einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
@@ -84,57 +84,57 @@ teams:
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
   evergreen:
-  - topic: Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
     pillar: frugalismus
     signal: evergreen
-    source: topics:Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
     score: 0.85
     keywords: []
-  - topic: Energieeffiziente Geräte für dein Zuhause
+  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Energieeffiziente Geräte für dein Zuhause
+    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
     score: 0.85
     keywords:
-    - Energieeffiziente
-    - Geräte
-    - Zuhause
-  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    - Smart-Plug
+    - Energie sparen
+    - Haushaltsgeräte
+  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
     pillar: internet-dsl
     signal: evergreen
-    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
     score: 0.85
     keywords:
-    - DSL-Tarife
-    - günstige Anbieter
-    - Internetvergleich
-  - topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    - günstiges Handy-Abonnement
+    - Tarifvergleich
+    - Mobilfunk
+  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
     pillar: mietwagen
     signal: evergreen
-    source: topics:5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
     score: 0.85
     keywords:
-    - Mietwagen
-    - Fehler
-    - vermeiden
-  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    - Mietwagenvertrag
+    - versteckte Kosten
+    - Urlaubskasse
+  - topic: 10 Tipps für günstige Reisekreditkarten
     pillar: konto-karten
     signal: evergreen
-    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    source: topics:10 Tipps für günstige Reisekreditkarten
     score: 0.85
     keywords:
-    - Kreditkarte Ausland
-    - Auslandsgebühren vermeiden
-    - Reisekreditkarte
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
+    - Reisekreditkarten
+    - günstige Karten
+    - Reisekosten sparen
+  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     score: 0.85
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
+    - Rechtsschutzversicherung
+    - Rechtsschutz Leistungen
+    - Rechtsstreit versichern
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -238,146 +238,65 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 50 30 20 Regel – Budgetplanung
-    pillar: null
+  - topic: DSL- und Internet-Flat günstig sichern
+    pillar: internet-dsl
     signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - Budgetplanung
-  - topic: 50 30 20 Regel – Haushaltsbuch Vorlage
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - Haushaltsbuch Vorlage
-  - topic: 50 30 20 Regel – Regel Rechner
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - Regel Rechner
-  - topic: DNS Server wechseln – Bester DNS Server
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - Bester DNS Server
-  - topic: DNS Server wechseln – DNS Server ändern
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - DNS Server ändern
-  - topic: DNS Server wechseln – FritzBox DNS ändern
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - FritzBox DNS ändern
-  - topic: DNS-Server wechseln – Beste kostenlose DNS-Server
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - Beste kostenlose DNS-Server
-  - topic: DNS-Server wechseln – DNS-Server FritzBox ändern
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - DNS-Server FritzBox ändern
-  - topic: DNS-Server wechseln – DNS-Server Geschwindigkeit verbessern
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - DNS-Server Geschwindigkeit verbessern
-  - topic: DSL Tarif finden – DSL Vergleich
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
+    source: topics:DSL- und Internet-Flat günstig sichern
+    score: 0.55
     keywords:
     - DSL Vergleich
-  - topic: DSL Tarif finden – Günstiges Internet
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
+    - Internetvertrag wechseln
     - Günstiges Internet
-  - topic: DSL Tarif finden – Internetanbieter wechseln
-    pillar: null
+    - Wechselbonus
+  - topic: Die besten Kreditkarten für Reisen
+    pillar: konto-karten
     signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
+    source: topics:Die besten Kreditkarten für Reisen
+    score: 0.55
     keywords:
-    - Internetanbieter wechseln
-  - topic: DSL Vergleich – DSL Tarife
-    pillar: null
+    - Kreditkarte
+    - Reise
+    - Vorteile
+  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
+    pillar: strom-sparen
     signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
+    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
+    score: 0.55
     keywords:
-    - DSL Tarife
-  - topic: DSL Vergleich – DSL Tarife ohne Mindestlaufzeit
-    pillar: null
+    - E-Auto Ladekosten
+    - Stromtarif E-Auto
+    - Wallbox sparen
+  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+    pillar: frugalismus
     signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
+    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+    score: 0.55
     keywords:
-    - DSL Tarife ohne Mindestlaufzeit
-  - topic: DSL Vergleich – Günstiges Internet
-    pillar: null
+    - Neujahrsvorsätze Geld
+    - finanzielle Ziele 2027
+    - Sparziele erreichen
+    - Gewohnheiten ändern
+  - topic: Stromanbieter wechseln und bis zu 300 Euro sparen
+    pillar: strom-sparen
     signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
+    source: topics:Stromanbieter wechseln und bis zu 300 Euro sparen
+    score: 0.55
     keywords:
-    - Günstiges Internet
-  - topic: DSL Vergleich – Internetanbieter Vergleich
-    pillar: null
+    - Stromanbieter wechseln
+    - Stromvergleich
+    - Stromkosten sparen 2026
+  - topic: 'Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
+      0'
+    pillar: versicherungen
     signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
+    source: 'topics:Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
+      0'
+    score: 0.55
     keywords:
-    - Internetanbieter Vergleich
-  - topic: DSL Vergleich – Internetanbieter wechseln
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - Internetanbieter wechseln
-  - topic: DSL Vergleich – WLAN für zuhause günstig
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - WLAN für zuhause günstig
-  - topic: DSL wechseln – DSL Vergleich
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - DSL Vergleich
-  - topic: DSL wechseln – DSL Wechselservice
-    pillar: null
-    signal: niche_hook
-    source: keyword_suggestions
-    score: 0.6
-    keywords:
-    - DSL Wechselservice
+    - Zweitwagenregelung
+    - Zweitwagen günstig versichern
+    - Schadenfreiheitsklasse übertragen
+    - SF-Klasse retten
 live_web:
   enabled: false
   findings: []
