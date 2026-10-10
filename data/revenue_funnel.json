@@ -17,7 +17,11 @@
   },
   "provision": {
     "gesamt": null,
-    "bezahlt": null
+    "bezahlt": null,
+    "quelle": null,
+    "monat": null,
+    "zeitbezug": null,
+    "monats_alter": null
   },
   "raten": {
     "outbound_ctr": null,
@@ -31,6 +35,11 @@
   "platzierungen": {},
   "seiten": [],
   "quellen": [
+    {
+      "quelle": "offline",
+      "status": "disabled",
+      "alter_tage": null
+    },
     {
       "quelle": "views",
       "status": "disabled",
