@@ -109,11 +109,13 @@
        Runbook: docs/ANLEITUNG-ROBUSTHEIT.md · Wache: scripts/robustheits_gate.py */ -}}
 <script>
 (function () {
+  {{- with site.Params.umami.websiteId }}
   try {
-    if (document.cookie.indexOf('ff_cookie_consent=') !== -1) {
+    if (document.cookie.indexOf('ff_analytics_consent_v2=') !== -1) {
       document.documentElement.classList.add('ff-consent-set');
     }
   } catch (e) {}
+  {{- end }}
 })();
 
 /* ---- Robustheits-Bootstrap: die Seite stirbt nie stumm ---- */

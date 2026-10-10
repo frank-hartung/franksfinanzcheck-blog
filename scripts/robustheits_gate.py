@@ -345,7 +345,10 @@ def pruefe_bootstrap(root: Path) -> list[str]:
                 "der Inline-Skripte unsichtbar"]
     inhalt = hugo_kommentarfrei(roh)
     bloecke = skript_bloecke(inhalt)
-    gemeinsame = [b for b in bloecke if "ff_cookie_consent" in b and "FFRobust" in b]
+    # Der Consent-Schlüssel wurde mit der Analytics-Deaktivierung versioniert.
+    # R2 bewacht weiter denselben gemeinsamen Head-Skriptblock, nicht den
+    # historischen Cookie-Namen aus der Zeit vor dem Datenschutz-Audit.
+    gemeinsame = [b for b in bloecke if "ff_analytics_consent_v2" in b and "FFRobust" in b]
     if not gemeinsame:
         funde.append("R2 Der Robustheits-Bootstrap teilt sich kein <script> mit dem "
                      "Consent-Vorlauf: entweder fehlt er im <head>, oder er ist ein "
