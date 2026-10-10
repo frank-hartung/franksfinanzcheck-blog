@@ -758,6 +758,20 @@ def _write_atomic(path, text):
 # ------------------------------------------------------------------ Selftest
 
 def _selftest():
+    """Deterministisch – und damit uhrfest: alle Datums-Fixtures werden RELATIV
+    zum Testdatum gebaut (`vor()` / `monat_rel()`), absolut eingestempelt wird
+    nur, was ein ferner Vergangenheitstag bleiben soll. Der Beweis läuft in
+    der CI: `python3 scripts/selftest_clock.py --trap scripts/revenue_funnel.py
+    --offset 1461` (Verbrannt am 10.10.2026: ein auf 2030-01 eingefrorener
+    Zukunfts-Monat wurde vier Jahre später zum Vergangenheits-Monat)."""
+    def vor(tage):
+        return (TODAY - datetime.timedelta(days=tage)).isoformat()
+
+    def monat_rel(rueckwaerts=0):
+        """JJJJ-MM, `rueckwaerts` Monate vor dem aktuellen Monat."""
+        m = TODAY.year * 12 + (TODAY.month - 1) - rueckwaerts
+        return f"{m // 12:04d}-{m % 12 + 1:02d}"
+
     failures = []
     # --- Artikel-Attribut → Pfad (die Brücke Klick↔Besuch muss sitzen)
     for art, want in (("posts/2026-08-16-gas-anbieter-wechseln/index.md",
@@ -849,8 +863,9 @@ def _selftest():
     if evaluate([("views", "V", "disabled", None), ("clicks", "K", "disabled", None)]) != []:
         failures.append("deaktivierte Quellen (disabled) dürfen nicht als Lücke gemeldet werden")
     # --- Manuelle Brücke: zweite Messquelle, gleiche Hausregeln ---------------
+    AB_RECHNUNG = monat_rel(1)           # relativ: der zuletzt abgerechnete Monat
     mp = {"summe": {"abschluesse": 4, "stornos": 1, "provision_eur": 67.5},
-          "monate": ["2026-09"], "letzter_monat": "2026-09", "partner": ["CHECK24"]}
+          "monate": [AB_RECHNUNG], "letzter_monat": AB_RECHNUNG, "partner": ["CHECK24"]}
     fm = compute({"totals": {"visits": 200, "pageviews": 300},
                   "pages": [{"path": "/pillar/strom-sparen/", "views": 90, "visits": 60}]},
                  [{"event": "affiliate_click", "count": 12, "article": "pillar/strom-sparen/index.md"}],
@@ -866,8 +881,12 @@ def _selftest():
         failures.append("Monatssumme wird auf eine Seite gebucht (erfunden) – verboten")
     if abs(fm["raten"]["epc"] - 67.5 / 12) > 0.01:
         failures.append(f"EPC mit manuellen Zahlen: {fm['raten']['epc']}")
-    rep_m = render(fm, [], [], [], bruecke="manuell (`scripts/offline_import.py`, Stand 2026-10-10)",
-                   prov_monate=mp["monate"] and [dict(mp, monat="2026-09")])
+    rep_m = render(fm, [], [], [],
+                   bruecke=f"manuell (`scripts/offline_import.py`, Stand {vor(0)})",
+                   prov_monate=[dict(mp, monat=AB_RECHNUNG)])
+    if AB_RECHNUNG not in rep_m:
+        failures.append(f"Monatsmarke {AB_RECHNUNG} steht nicht im Report – "
+                        f"die Monatsbasis wäre ohne Datum nicht prüfbar")
     if "Abrechnungstabelle (Provision je Monat)" not in rep_m:
         failures.append("Provisions-Tabelle fehlt im Report – Monatsbasis ist nicht belegbar")
     if rep_m.count("Abrechnungstabelle") < 2:
@@ -901,7 +920,8 @@ def _selftest():
     if len(g_free) != 1 or "Manuelle Messbrücke" not in g_free[0]:
         failures.append(f"Umami Free ohne Manuell-Import meldet keine Lücke: {g_free}")
     if not bruecke_frisch({"status": "ok", "written": TODAY.isoformat()}) \
-            or bruecke_frisch({"status": "ok", "written": "2026-01-01"}) \
+            or bruecke_frisch({"status": "ok", "written": vor(STALE_DAYS + 1)}) \
+            or not bruecke_frisch({"status": "ok", "written": vor(STALE_DAYS)}) \
             or bruecke_frisch({}) or bruecke_frisch(None):
         failures.append("bruecke_frisch() erkennt die Frist nicht")
     if zustand_mit_bruecke("disabled", True) != "ok" \
@@ -910,11 +930,14 @@ def _selftest():
         failures.append("Zustands-Korrektur der Brücke verletzt die Hausregeln")
     if _month_age(TODAY.strftime("%Y-%m")) != 0:
         failures.append("_month_age(aktueller Monat) ≠ 0")
+    n = TODAY.year * 12 + TODAY.month          # der Monat NACH heute
     try:
-        _month_age("2030-01")
+        _month_age(f"{n // 12:04d}-{n % 12 + 1:02d}")
         failures.append("Zukunfts-Monat muss werfen (nichts erfinden)")
     except ValueError:
         pass
+    if _month_age(monat_rel(1)) != 1 or _month_age(monat_rel(PROV_STALE_MONATE)) != PROV_STALE_MONATE:
+        failures.append("_month_age zählt Monate falsch (Relative-Fixture-Vertrag)")
     # --- Datenqualitäts-Logik
     if evaluate([("views", "V", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
         failures.append("frische Quellen werden als Lücke gemeldet")
