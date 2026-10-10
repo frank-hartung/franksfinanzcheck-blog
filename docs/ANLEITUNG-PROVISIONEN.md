@@ -14,6 +14,14 @@ Lücke von Hand, ohne Kundendaten zu speichern.
 Die Tabelle ist **intern**. Sie wird nicht veröffentlicht und nicht in den Blog
 übernommen. Sie ersetzt keine Buchhaltung und keine Steuerberatung.
 
+Seit 10.10.2026 ist sie auch die **Provisions-Basis des Mess-Trichters**:
+`scripts/offline_import.py` liest diese Datei und schreibt das Aggregat
+`data/provisionen_aggregat.json` (nur Monatssummen je Partner, keine
+Abrechnungs-Details) – `scripts/revenue_funnel.py` nutzt es als Provision,
+solange keine Awin-API läuft, und kennzeichnet es im Report als
+Abrechnungs-Tabelle mit Monats-Zeitbezug. Leere oder fehlende Tabelle ⇒
+`unbekannt`, nie `0`. Anleitung: `docs/UMSATZ-MESSUNG-PREMIUM.md`, Abschnitt 5a.
+
 ## Wo die Daten liegen
 
 | Datei | Inhalt | Git |

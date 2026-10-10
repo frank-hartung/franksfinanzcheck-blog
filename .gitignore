@@ -133,6 +133,12 @@ data/integrity_lock.json.tmp
 # das Repo ist öffentlich. Versioniert ist nur die Vorlage (nur Kopfzeile).
 data/provisionen/provisionen.csv
 
+# Manuelle Messstände (10.10.2026, docs/UMSATZ-MESSUNG-PREMIUM.md „Weg 3“):
+# Der Export aus dem Umami-Dashboard ist Roheingang – er bleibt lokal. Das
+# daraus gezogene Aggregat (data/provisionen_aggregat.json) ist versioniert:
+# nur Monatssummen je Partner, keine Abrechnungs-Details, keine Personenbezüge.
+data/offline/
+
 # KI-Alt-Texte (08.10.2026): die Vorschlagsdatei wird atomar über eine .tmp-Datei
 # geschrieben. Bleibt sie nach einem Abbruch liegen, darf sie nie in einen Commit.
 data/alt_texte/*.tmp
