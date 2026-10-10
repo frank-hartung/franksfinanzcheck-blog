@@ -64,6 +64,9 @@ FENSTER_ANFANG = tag(90)                        # 90-Tage-Fenster endet heute
 
 MESSSTAND = {
     "window": {"start": FENSTER_ANFANG, "ende": HEUTE.isoformat(), "tage": 90},
+
+MESSSTAND = {
+    "window": {"start": "2026-07-12", "ende": "2026-10-10", "tage": 90},
     "totals": {"aufrufe": 412, "besuche": 268},
     "views": [
         {"pfad": "/posts/x/", "aufrufe": 96, "besuche": 61},
@@ -134,6 +137,7 @@ class Sandbox(unittest.TestCase):
         self.assertTrue(meta["datei"].endswith("messstand.json"))
         self.assertEqual(meta["days"], 90)
         self.assertEqual(meta["window_start"], FENSTER_ANFANG)
+        self.assertEqual(meta["window_start"], "2026-07-12")
         self.assertEqual(len(meta["written_files"]), 3)
         # Die Meta der API-Skripte gehört denen allein – sie darf hier nicht
         # entstehen, sonst verliert die Kette ihr Gedächtnis (falscher Alarm
@@ -216,6 +220,12 @@ class Sandbox(unittest.TestCase):
             fh.write("falsch,CHECK24,9,9,9.00,x,\n")
         prov = oi.read_provisionen(self.prov)
         self.assertEqual(prov["letzter_monat"], MONAT_B)
+            fh.write("2026-08,CHECK24,2,0,33.00,A-08,\n")
+            fh.write("2026-09,CHECK24,3,1,49.50,A-09,\n")
+            fh.write("2026-09,Tarifcheck,1,0,18.00,B-09,\n")
+            fh.write("falsch,CHECK24,9,9,9.00,x,\n")
+        prov = oi.read_provisionen(self.prov)
+        self.assertEqual(prov["letzter_monat"], "2026-09")
         self.assertEqual(prov["summe"]["abschluesse"], 6)
         self.assertEqual(prov["summe"]["provision_eur"], 100.5)
         self.assertEqual(len(prov["monate"]), 2)
@@ -226,6 +236,7 @@ class Sandbox(unittest.TestCase):
         with open(self.prov, "w", encoding="utf-8") as fh:
             fh.write("monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n")
             fh.write(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},\n")
+            fh.write("2026-09,CHECK24,3,1,49.50,A-09,\n")
         self.imp()
         agg = self.read("provisionen_agg")
         self.assertEqual(agg["summe"]["provision_eur"], 49.5)
@@ -252,6 +263,10 @@ class Sandbox(unittest.TestCase):
                             "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
                 "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
                           "provision_eur": 49.5}, "letzter_monat": MONAT_B}
+        prov = {"monate": [{"monat": "2026-09", "partner": ["CHECK24"],
+                            "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
+                "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
+                          "provision_eur": 49.5}, "letzter_monat": "2026-09"}
         f = rf.compute({}, [], {"status_totals": {"approved": {"count": 2}},
                                 "total_commission": 33.0, "total_paid": 33.0},
                        [], set(), measured={"views": False, "clicks": False, "awin": True},
@@ -267,6 +282,8 @@ class Sandbox(unittest.TestCase):
         self.assertEqual(rf._month_age(monat(0)), 0)
         n = HEUTE.year * 12 + HEUTE.month      # der Monat nach heute = Zukunft
         for schlecht in (f"{n // 12:04d}-{n % 12 + 1:02d}", "quatsch", ""):
+        self.assertEqual(rf._month_age("2026-01"), 9)
+        for schlecht in ("2099-01", "quatsch", ""):
             with self.assertRaises((ValueError, AttributeError)):
                 rf._month_age(schlecht)
 

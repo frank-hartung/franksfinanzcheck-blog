@@ -866,6 +866,8 @@ def _selftest():
     AB_RECHNUNG = monat_rel(1)           # relativ: der zuletzt abgerechnete Monat
     mp = {"summe": {"abschluesse": 4, "stornos": 1, "provision_eur": 67.5},
           "monate": [AB_RECHNUNG], "letzter_monat": AB_RECHNUNG, "partner": ["CHECK24"]}
+    mp = {"summe": {"abschluesse": 4, "stornos": 1, "provision_eur": 67.5},
+          "monate": ["2026-09"], "letzter_monat": "2026-09", "partner": ["CHECK24"]}
     fm = compute({"totals": {"visits": 200, "pageviews": 300},
                   "pages": [{"path": "/pillar/strom-sparen/", "views": 90, "visits": 60}]},
                  [{"event": "affiliate_click", "count": 12, "article": "pillar/strom-sparen/index.md"}],
@@ -887,6 +889,8 @@ def _selftest():
     if AB_RECHNUNG not in rep_m:
         failures.append(f"Monatsmarke {AB_RECHNUNG} steht nicht im Report – "
                         f"die Monatsbasis wäre ohne Datum nicht prüfbar")
+    rep_m = render(fm, [], [], [], bruecke="manuell (`scripts/offline_import.py`, Stand 2026-10-10)",
+                   prov_monate=mp["monate"] and [dict(mp, monat="2026-09")])
     if "Abrechnungstabelle (Provision je Monat)" not in rep_m:
         failures.append("Provisions-Tabelle fehlt im Report – Monatsbasis ist nicht belegbar")
     if rep_m.count("Abrechnungstabelle") < 2:
@@ -922,6 +926,7 @@ def _selftest():
     if not bruecke_frisch({"status": "ok", "written": TODAY.isoformat()}) \
             or bruecke_frisch({"status": "ok", "written": vor(STALE_DAYS + 1)}) \
             or not bruecke_frisch({"status": "ok", "written": vor(STALE_DAYS)}) \
+            or bruecke_frisch({"status": "ok", "written": "2026-01-01"}) \
             or bruecke_frisch({}) or bruecke_frisch(None):
         failures.append("bruecke_frisch() erkennt die Frist nicht")
     if zustand_mit_bruecke("disabled", True) != "ok" \
@@ -938,6 +943,11 @@ def _selftest():
         pass
     if _month_age(monat_rel(1)) != 1 or _month_age(monat_rel(PROV_STALE_MONATE)) != PROV_STALE_MONATE:
         failures.append("_month_age zählt Monate falsch (Relative-Fixture-Vertrag)")
+    try:
+        _month_age("2030-01")
+        failures.append("Zukunfts-Monat muss werfen (nichts erfinden)")
+    except ValueError:
+        pass
     # --- Datenqualitäts-Logik
     if evaluate([("views", "V", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
         failures.append("frische Quellen werden als Lücke gemeldet")
