@@ -71,20 +71,38 @@ RETRIES = 3
 
 # ------------------------------------------------------------------ Konfiguration
 
-def website_id():
-    """Website-ID aus hugo.toml – die eine Wahrheit, kein zweiter Secret-Wirrwarr."""
-    env = os.environ.get("UMAMI_WEBSITE_ID", "").strip()
+def website_id(config_path=None, use_env=True):
+    """Website-ID aus der Umami-Sektion; leer bedeutet bewusst abgeschaltet.
+
+    `use_env=False` prüft die versionierte Konfiguration im Selbsttest, selbst
+    wenn ein Runner UMAMI_WEBSITE_ID setzt. Zur Laufzeit bleibt der Override
+    für selbst-gehostete Instanzen erhalten.
+    """
+    env = os.environ.get("UMAMI_WEBSITE_ID", "").strip() if use_env else ""
     if env:
         return env
     try:
-        with open(HUGO_TOML, encoding="utf-8") as f:
+        with open(config_path or HUGO_TOML, encoding="utf-8") as f:
             txt = f.read()
     except OSError:
         return ""
-    m = re.search(r"^\[params\.umami\]$(.*?)(?=^\[|\Z)", txt, re.M | re.S)
-    block = m.group(1) if m else txt
-    m = re.search(r"websiteId\s*=\s*\"([0-9a-fA-F\-]{8,})\"", block)
-    return m.group(1) if m else ""
+    m = re.search(r"^\s*\[params\.umami\]\s*$(.*?)(?=^\s*\[|\Z)", txt, re.M | re.S)
+    if not m:
+        return ""  # websiteId einer fremden TOML-Sektion ist keine Umami-ID
+    wid = re.search(r'^\s*websiteId\s*=\s*"([0-9a-fA-F\-]{8,})"', m.group(1), re.M)
+    return wid.group(1) if wid else ""
+
+
+def website_config_errors(hugo_path=None, monetization_path=None):
+    """Konfigurationsvertrag: API-Import nur mit gültiger ID; Privacy-Stopp ist OK.
+
+    Ein leeres websiteId ist KEIN Fehler bei deaktiviertem API-Import. Der
+    Browser-Loader liest denselben Hugo-Wert und bleibt dann ebenfalls aus.
+    """
+    wid = website_id(config_path=hugo_path, use_env=False)
+    if umami_api_import_enabled(monetization_path) and not wid:
+        return ["Umami-API-Import aktiv, aber keine gültige websiteId in hugo.toml"]
+    return []
 
 
 def api_token():
@@ -432,10 +450,37 @@ def _selftest():
     for r in aggregate(long_rows):
         if any(len(str(v)) > 120 for v in (r["slug"], r["article"], r["pillar"])):
             failures.append("Felder werden nicht gekürzt (Datenschutz)")
-    # --- Konfigurationsquelle: Website-ID aus hugo.toml
-    wid = website_id()
-    if not re.fullmatch(r"[0-9a-fA-F\-]{8,}", wid or ""):
-        failures.append(f"websiteId nicht aus hugo.toml lesbar: {wid!r}")
+    # --- Konfigurationsvertrag: kein Analytics ohne Freigabe, aber ein leerer
+    # Privacy-Stopp darf das Gate nicht rot färben. Fixtures beweisen beide
+    # Zustände unabhängig vom echten Stand und von CI-Environment-Overrides.
+    failures.extend(website_config_errors())
+    import tempfile as _tf
+    with _tf.TemporaryDirectory(prefix="umami-selftest-") as tmp:
+        hugo = os.path.join(tmp, "hugo.toml")
+        monetization = os.path.join(tmp, "monetization.yaml")
+        with open(monetization, "w", encoding="utf-8") as f:
+            f.write("umami_api_import_enabled: true\n")
+        with open(hugo, "w", encoding="utf-8") as f:
+            f.write('[params.umami]\nwebsiteId = ""\n')
+        if not website_config_errors(hugo, monetization):
+            failures.append("aktiver API-Import ohne Website-ID bleibt unbemerkt")
+        with open(hugo, "w", encoding="utf-8") as f:
+            f.write('websiteId = "deadbeef-dead-beef"\n[params.umami]\n'
+                    'websiteId = "12345678-abcd-1234"\n')
+        if website_id(config_path=hugo, use_env=False) != "12345678-abcd-1234":
+            failures.append("websiteId nicht aus der Umami-Sektion lesbar")
+        if website_config_errors(hugo, monetization):
+            failures.append("gültige aktive Website-ID wird zurückgewiesen")
+        with open(hugo, "w", encoding="utf-8") as f:
+            f.write('websiteId = "deadbeef-dead-beef"\n[params.other]\n')
+        if not website_config_errors(hugo, monetization):
+            failures.append("Website-ID einer fremden Sektion gilt als Umami-ID")
+        with open(monetization, "w", encoding="utf-8") as f:
+            f.write("umami_api_import_enabled: false\n")
+        with open(hugo, "w", encoding="utf-8") as f:
+            f.write('[params.umami]\nwebsiteId = ""\n')
+        if website_config_errors(hugo, monetization):
+            failures.append("bewusst abgeschaltetes Umami wird als Fehler gemeldet")
     # --- Redaction: Token darf in keiner Fehlermeldung auftauchen
     tok = "umami_SUPERGEHEIM_123"
     if tok in _redact(f"fetch failed for {tok} at api.umami.is", tok):

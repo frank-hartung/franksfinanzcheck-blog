@@ -181,6 +181,36 @@ class TestReportProtokoll(unittest.TestCase):
 class TestUmamiFreeBoundary(unittest.TestCase):
     """Option 3: Umami Free als explizite Betriebsgrenze."""
 
+    def test_website_id_vertrag_prueft_aktiv_und_privacy_stopp(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            hugo = os.path.join(tmp, "hugo.toml")
+            monetization = os.path.join(tmp, "monetization.yaml")
+            with open(monetization, "w", encoding="utf-8") as f:
+                f.write("umami_api_import_enabled: true\n")
+            with open(hugo, "w", encoding="utf-8") as f:
+                f.write('[params.umami]\nwebsiteId = ""\n')
+            # Der Selftest darf nicht durch ein CI-Environment-Override grün werden.
+            with patch.dict(os.environ, {"UMAMI_WEBSITE_ID": "abcdef12"}):
+                self.assertEqual(uc.website_id(config_path=hugo), "abcdef12")
+                self.assertTrue(uc.website_config_errors(hugo, monetization))
+            with open(hugo, "w", encoding="utf-8") as f:
+                f.write('websiteId = "deadbeef-dead-beef"\n[params.umami]\n'
+                        'websiteId = "12345678-abcd-1234"\n')
+            self.assertEqual(uc.website_id(config_path=hugo, use_env=False),
+                             "12345678-abcd-1234")
+            self.assertEqual(uc.website_config_errors(hugo, monetization), [])
+            with open(hugo, "w", encoding="utf-8") as f:
+                f.write('websiteId = "deadbeef-dead-beef"\n[params.other]\n')
+            self.assertTrue(uc.website_config_errors(hugo, monetization))
+            with open(monetization, "w", encoding="utf-8") as f:
+                f.write("umami_api_import_enabled: false\n")
+            self.assertEqual(uc.website_config_errors(hugo, monetization), [])
+            with open(hugo, "w", encoding="utf-8") as f:
+                f.write('[params.umami]\nwebsiteId = ""\n')
+            self.assertEqual(uc.website_config_errors(hugo, monetization), [])
+
     def test_umami_free_deaktiviert_api_import_und_meldet_disabled(self):
         import tempfile
         with tempfile.NamedTemporaryFile("w+", encoding="utf-8") as tf:
