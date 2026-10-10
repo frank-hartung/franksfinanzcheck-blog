@@ -1,41 +1,9 @@
 {
   "target": 6,
-  "ready": 6,
+  "ready": 4,
   "pool_size": 13,
-  "generated_at": "2026-10-09T19:32:24Z",
+  "generated_at": "2026-10-10T10:06:35Z",
   "candidates": [
-    {
-      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
-      "ready": true,
-      "sha256": "10bcde7652f03ed4f2c775a6c7830248a37c886f80d1fc90ea10ef8cac05402d",
-      "flesch": 63.3,
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
-      "ready": true,
-      "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
-      "flesch": 61.7,
-      "score": 0.982,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
@@ -82,6 +50,66 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
+      "ready": true,
+      "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
+      "flesch": 64.4,
+      "score": 0.97,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+      "ready": false,
+      "sha256": "10bcde7652f03ed4f2c775a6c7830248a37c886f80d1fc90ea10ef8cac05402d",
+      "flesch": 63.3,
+      "reason": "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
+      "details": [
+        "🛑 2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.97,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+      "ready": false,
+      "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
+      "flesch": 61.7,
+      "reason": "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
+      "details": [
+        "🛑 2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.96, content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md ≈ content/posts/2026-10-07-handyvertrag-kuendigen",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.982,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
       }
     },
     {
@@ -208,22 +236,6 @@
       }
     },
     {
-      "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
-      "ready": true,
-      "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
-      "flesch": 64.4,
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
       "slug": "2026-10-09-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
       "ready": false,
       "sha256": "f8d12f1fa818f0f17d5df920ca046ec39c407bdf2ac1e7eae2d707a3602d9727",
@@ -244,12 +256,55 @@
       }
     }
   ],
-  "recert": {
-    "at": "2026-10-09T19:32:24Z",
-    "renewed": [
-      "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
-      "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  }
+  "geschont": [
+    {
+      "slug": "2026-10-09-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    },
+    {
+      "slug": "2026-10-09-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    },
+    {
+      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    },
+    {
+      "slug": "2026-10-09-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    },
+    {
+      "slug": "2026-10-09-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    },
+    {
+      "slug": "2026-10-09-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    },
+    {
+      "slug": "2026-10-09-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "klasse": "unbekannt",
+      "hits": 2,
+      "heiler": [],
+      "warum": "Unbekannter Gate-Fund – ohne Eintrag in reserve_blocker_klassen.GATE_BEFUNDE wird nicht gelöscht."
+    }
+  ]
 }
