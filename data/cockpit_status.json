@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-09T23:58:32Z",
+  "generated": "2026-10-10T23:27:08Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -7,7 +7,7 @@
       "lines": [
         "1 Prüfpunkt(e) auffällig (lesbarkeit)",
         "lesbarkeit: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md – Flesch 47.4 < Floor 55; 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-fei…",
-        "Artikel-Reserve 6/6 bereit"
+        "Artikel-Reserve 7/6 bereit"
       ],
       "sources": [
         "data/governance_status.json",
@@ -54,7 +54,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.5 Tag(en)",
+        "letzter erfolgreicher Post vor 0.3 Tag(en)",
         "3 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
@@ -68,7 +68,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 58 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 59 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
