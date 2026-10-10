@@ -1,0 +1,443 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Social-Autopilot Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – Threads
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:threads:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsais
+ on-richtig:takeaway:2026-10-10@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261010T183000Z
+DTEND:20261010T184500Z
+SUMMARY:Threads: Gasabschlag berechnen: So planst du die Heizsaison ri
+ chtig (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Threads\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen
+ -so-planst-du-die-heizsaison-richtig/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
+ n-so-planst-du-die-heizsaison-richtig/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-somm
+ er-schnaepp:nutzen:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261011T071500Z
+DTEND:20261011T073000Z
+SUMMARY:Threads: Last Minute Urlaub: – So schnappst du dir das Sommer‑
+ Schnäpp (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-s
+ chnappst-du-dir-das-sommer-schnaepp/
+URL:https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-s
+ o-schnappst-du-dir-das-sommer-schnaepp/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-ds
+ l-anschluss:frage:2026-10-11@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261011T141500Z
+DTEND:20261011T143000Z
+SUMMARY:Threads: Preiswert surfen: So findest du den optimalen DSL‑Ans
+ chluss (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Threads\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-find
+ est-du-den-optimalen-dsl-anschluss/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
+ findest-du-den-optimalen-dsl-anschluss/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-d
+ ie-feiertage:nutzen:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261012T071500Z
+DTEND:20261012T073000Z
+SUMMARY:Threads: Weihnachten Budget planen: Ohne Schulden durch die Fe
+ iertage (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-plan
+ en-ohne-schulden-durch-die-feiertage/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
+ lanen-ohne-schulden-durch-die-feiertage/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-ae
+ ndert:frage:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261012T141500Z
+DTEND:20261012T143000Z
+SUMMARY:Threads: Internet & DSL-Update: Was sich jetzt für dich ändert
+  (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Threads\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-
+ sich-jetzt-fuer-dich-aendert/
+URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
+ was-sich-jetzt-fuer-dich-aendert/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-
+ vermeidest:mythos:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261013T071500Z
+DTEND:20261013T073000Z
+SUMMARY:Threads: Büroausstattung steuerlich clever absetzen: So geht's
+  (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuer
+ lich-clever-absetzen-so-vermeidest/
+URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
+ uerlich-clever-absetzen-so-vermeidest/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortve
+ rlust:frage:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261013T141500Z
+DTEND:20261013T143000Z
+SUMMARY:Threads: Campingurlaub planen: Budget für Platz\, Fahrt und Au
+ srüstung (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Threads\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-cleve
+ r-sparen-ohne-komfortverlust/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
+ lever-sparen-ohne-komfortverlust/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:mythos
+ :2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261014T071500Z
+DTEND:20261014T073000Z
+SUMMARY:Threads: 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst
+  ordnen (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-fin
+ anzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-10-dsl-wechselbonus-sichern:vergleich:2026-10-14@f
+ ranksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261014T141500Z
+DTEND:20261014T143000Z
+SUMMARY:Threads: DSL-Wechselbonus sichern: So sparst du beim Internetv
+ ertrag (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Threads\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarant
+ ie-gas:nutzen:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261015T071500Z
+DTEND:20261015T073000Z
+SUMMARY:Threads: Sicher heizen: So schützt dich eine Gaspreisgarantie 
+ (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuet
+ zt-dich-eine-preisgarantie-gas/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
+ uetzt-dich-eine-preisgarantie-gas/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anb
+ ieterwechsel:takeaway:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261015T141500Z
+DTEND:20261015T143000Z
+SUMMARY:Threads: Internet & DSL wechseln: Praxis-Tipps – Highspeed Int
+ ernet (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Threads\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
+ -praxis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-
+ tarife-fuer-2026:zahl:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261016T071500Z
+DTEND:20261016T073000Z
+SUMMARY:Threads: Preisgarantie Gas: So sicherst du günstige Tarife (za
+ hl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Threads\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sich
+ erst-du-dir-guenstige-tarife-fuer-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
+ -sicherst-du-dir-guenstige-tarife-fuer-2026/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-o
+ hne-gebuehren:vergleich:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261016T141500Z
+DTEND:20261016T143000Z
+SUMMARY:Threads: Kostenloses Girokonto: So findest du ein Konto ohne G
+ ebühren (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Threads\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
+ o-so-findest-du-ein-konto-ohne-gebuehren/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
+ o-so-findest-du-ein-konto-ohne-gebuehren/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermei
+ den:takeaway:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261017T071500Z
+DTEND:20261017T073000Z
+SUMMARY:Threads: Gasrechnung senken: Fehler im Spätsommer vermeiden (t
+ akeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Threads\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fe
+ hler-im-spaetsommer-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
+ ehler-im-spaetsommer-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
+ et:mythos:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261017T141500Z
+DTEND:20261017T143000Z
+SUMMARY:Threads: DSL-Vergleich: So findest du den günstigsten Internet
+ tarif (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findes
+ t-du-guenstigeres-internet/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
+ dest-du-guenstigeres-internet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-
+ finden:frage:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261018T071500Z
+DTEND:20261018T073000Z
+SUMMARY:Threads: Energiediebe stoppen: So kannst du Stromfresser finde
+ n (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Threads\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-
+ kannst-du-stromfresser-finden/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
+ -so-kannst-du-stromfresser-finden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:ver
+ gleich:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261018T141500Z
+DTEND:20261018T143000Z
+SUMMARY:Threads: Haushaltsbuch führen: App\, Excel oder Stift im Vergl
+ eich (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Threads\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
+ n-app-excel-oder-papier/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
+ n-app-excel-oder-papier/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:fra
+ ge:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261019T071500Z
+DTEND:20261019T073000Z
+SUMMARY:Threads: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
+  (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Threads\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-ka
+ ution-fallen-urlaub/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohn
+ e-kaution-fallen-urlaub/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismu
+ s-tipps:zahl:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261019T141500Z
+DTEND:20261019T143000Z
+SUMMARY:Threads: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzich
+ t (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Threads\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzi
+ cht-clevere-frugalismus-tipps/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
+ verzicht-clevere-frugalismus-tipps/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preis
+ spruengen:vergleich:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261020T071500Z
+DTEND:20261020T073000Z
+SUMMARY:Threads: Preisgarantie Gas: So schützt du dich vor Preissprüng
+ en (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Threads\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so
+ -schuetzt-du-dich-vor-preisspruengen/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so
+ -schuetzt-du-dich-vor-preisspruengen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-26-dns-server-wechseln-schnelleres-sichereres-inte
+ rnet:mythos:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261020T141500Z
+DTEND:20261020T143000Z
+SUMMARY:Threads: DNS-Server wechseln: Schnelleres und sichereres Inter
+ net (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-sch
+ nelleres-sichereres-internet/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-
+ schnelleres-sichereres-internet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-s
+ chnaeppchen:mythos:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261021T071500Z
+DTEND:20261021T073000Z
+SUMMARY:Threads: September-Roadtrip: Clevere Wege zum Mietwagen-Schnäp
+ pchen (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clev
+ ere-wege-zum-mietwagen-schnaeppchen/
+URL:https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-c
+ levere-wege-zum-mietwagen-schnaeppchen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-eck
+ e:takeaway:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261021T141500Z
+DTEND:20261021T143000Z
+SUMMARY:Threads: WLAN verbessern: So bringst du stabilen Speed in jede
+  Ecke (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Threads\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-br
+ ingst-du-speed-in-jede-ecke/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-b
+ ringst-du-speed-in-jede-ecke/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahl
+ en:frage:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261022T071500Z
+DTEND:20261022T073000Z
+SUMMARY:Threads: Kreditkarte vergleichen: Kostenlos und sicher zahlen 
+ (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Threads\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-
+ kostenlos-sicher-bezahlen/
+URL:https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleic
+ hen-kostenlos-sicher-bezahlen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:za
+ hl:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261022T141500Z
+DTEND:20261022T143000Z
+SUMMARY:Threads: Handytarif 2026 vergleichen: Günstige Tarife ab 4\,99
+  € (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Threads\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-20
+ 26-guenstige-tarife/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleich
+ en-2026-guenstige-tarife/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten
+ -konsum:mythos:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261023T071500Z
+DTEND:20261023T073000Z
+SUMMARY:Threads: Kleine Beträge\, große Wirkung: Frugalismus für den E
+ instieg (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Threads\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-
+ freiheit-durch-bewussten-konsum/
+URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-me
+ hr-freiheit-durch-bewussten-konsum/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-
+ vergleich:vergleich:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261023T141500Z
+DTEND:20261023T143000Z
+SUMMARY:Threads: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergle
+ ich (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Threads\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-202
+ 6-die-besten-zinssaetze-im-vergleich/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-202
+ 6-die-besten-zinssaetze-im-vergleich/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltag
+ sfehler:zahl:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261024T071500Z
+DTEND:20261024T073000Z
+SUMMARY:Threads: Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfeh
+ ler (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Threads\nArtikel: ht
+ tps://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-verm
+ eidest-du-teure-alltagsfehler/
+URL:https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so
+ -vermeidest-du-teure-alltagsfehler/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:threads:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spa
+ etsommer:vergleich:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261010T161608Z
+DTSTART:20261024T141500Z
+DTEND:20261024T143000Z
+SUMMARY:Threads: Günstig durch den Winter: Heizungs-Check im Spätsomme
+ r (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Threads\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-w
+ inter-heizungs-check-im-spaetsommer/
+URL:https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-w
+ inter-heizungs-check-im-spaetsommer/
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR
