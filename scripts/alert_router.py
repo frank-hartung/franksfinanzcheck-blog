@@ -98,6 +98,39 @@ ESCALATION_LADDER: tuple[tuple[int, str], ...] = (
 # Cadence schlägt Taktfeuer: ein offenes Ticket ist KEIN täglicher Auftrag.
 MIN_COMMENT_INTERVAL_HOURS = 72
 
+# --------------------------------------------------------------------------- #
+#  AKUTER MELDETAKT (#676, 10.10.2026) – „Meldetakt an den Ausfall binden"
+# --------------------------------------------------------------------------- #
+# Die 72-Stunden-Kadenz oben ist richtig für CHRONISCHE Befunde: ein offenes
+# Ticket ist kein täglicher Auftrag. Für einen AUSFALL ist sie falsch: Am
+# 09.10.2026 fror die öffentliche Auslieferung 19 h 38 min ein (Ticket #676).
+# In dieser Zeit hätte der Kanal keinen einzigen Kommentar geschrieben – die
+# Eskalationsleiter rechnet in TAGEN (0/3/7/14), ein Ausfall aber in STUNDEN.
+# Der Meldetakt war damit an den Kalender gebunden statt an den Ausfall.
+#
+# Deshalb gilt für Befunde der Klasse `akut` (Auslieferung blockiert, neuester
+# Artikel nicht live) eine eigene Leiter in Stunden. Der Meldetakt ist damit an
+# den Ausfall gebunden:
+#   · laut, solange der Ausfall steht (Meldung, 1 h, 6 h, danach alle 24 h),
+#   · still, sobald er geheilt ist (Schließpfad) oder nur ein chronischer
+#     Befund übrig bleibt (dann wieder 72 h – #272 bleibt gültig).
+#
+# VORAUSSETZUNG: Der Ausfall-Takt misst stündlich (:05, bot-watchdog.yml).
+# Erst dadurch ist das Ticket-Alter ein brauchbares Maß für die Ausfalldauer –
+# bei einem täglichen Lauf dürfte die Leiter gar nicht in Stunden rechnen.
+AKUT_TAKT: tuple[tuple[int, str], ...] = (
+    (0, "Meldung"),
+    (1, "Stand nach 1 h"),
+    (6, "Stand nach 6 h"),
+    (24, "Stand nach 24 h"),
+)
+# Nach der letzten Stufe verstummt der Kanal nicht: Ein Ausfall, der länger als
+# 24 h steht, bekommt alle 24 h einen Stand – bis er geheilt ist.
+AKUT_WIEDERHOLUNG_HOURS = 24
+# Ein akuter Stand erscheint nie öfter als einmal pro Stunde. Der Ausfall-Takt
+# selbst läuft stündlich; den Ausschlag gibt die Leiter, nicht der Cron.
+AKUT_MIN_COMMENT_INTERVAL_HOURS = 1
+
 # Findings jünger als dieses Alter gelten als frisch (Schutz gegen veraltete Lagebilder).
 DEFAULT_MAX_STATE_AGE_HOURS = 48
 
@@ -132,6 +165,7 @@ class Finding:
     evidence: tuple[str, ...] = ()
     ladder: tuple[tuple[int, str], ...] = ESCALATION_LADDER
     once: bool = False            # Hinweis-Klasse: nur einmal melden (Zustand in data/alert_router_state.json)
+    akut: bool = False            # Ausfall-Klasse: Meldetakt in STUNDEN statt 72 h (#676)
 
     def __post_init__(self) -> None:
         if self.severity not in SEVERITIES:
@@ -229,6 +263,62 @@ def next_escalation_in_days(tier: int, ladder: Sequence[tuple[int, str]] = ESCAL
     return ladder[tier + 1][0] if tier + 1 < len(ladder) else None
 
 
+# --------------------------------------------------------------------------- #
+#  Akuter Meldetakt (#676) – die Leiter rechnet in Stunden
+# --------------------------------------------------------------------------- #
+def akut_tier_for_age(age_hours: float,
+                      ladder: Sequence[tuple[int, str]] = AKUT_TAKT) -> int:
+    """Stufe des akuten Takts aus der Ausfalldauer in Stunden (0-basiert)."""
+    tier = 0
+    for i, (stunden, _label) in enumerate(ladder):
+        if age_hours >= stunden:
+            tier = i
+    return tier
+
+
+def akut_wiederholung_faellig(tier: int, stunden_seit_stand: float,
+                              ladder: Sequence[tuple[int, str]] = AKUT_TAKT,
+                              wiederholung: float = AKUT_WIEDERHOLUNG_HOURS) -> bool:
+    """Endstufe erreicht und der letzte Stand liegt `wiederholung` h zurück?
+
+    Ohne diese Regel verstummte der Kanal nach 24 h Ausfall für immer – ein
+    Melder, der beim längsten Ausfall am leisesten ist, ist kein Melder.
+    Gerechnet wird ab dem LETZTEN STAND, nicht ab der Stufen-Schwelle: Sonst
+    würde der stündliche Ausfall-Takt ab Stunde 48 jede Runde feuern – das
+    wäre Taktfeuer, genau das Gegenteil eines Meldetakts.
+    """
+    if tier < len(ladder) - 1:
+        return False
+    return stunden_seit_stand >= wiederholung
+
+
+def akut_naechster_stand_in_hours(age_hours: float, tier: int,
+                                  stunden_seit_stand: float,
+                                  ladder: Sequence[tuple[int, str]] = AKUT_TAKT,
+                                  wiederholung: float = AKUT_WIEDERHOLUNG_HOURS) -> float:
+    """Stunden bis zum nächsten fälligen Stand."""
+    if tier + 1 < len(ladder):
+        return max(0.0, float(ladder[tier + 1][0]) - age_hours)
+    return max(0.0, wiederholung - stunden_seit_stand)
+
+
+def akuter_takt(findings: Sequence[Finding]) -> bool:
+    """Bindet der Ausfall den Meldetakt? (ein akuter Befund genügt)"""
+    return any(bool(getattr(f, "akut", False)) for f in findings)
+
+
+def _age_hours(issue: IssueRef, now: datetime.datetime) -> float:
+    """Ausfalldauer ≈ Ticket-Alter.
+
+    Genaue deshalb, weil der Ausfall-Takt stündlich misst: Ein Ausfall wird
+    spätestens eine Stunde nach Beginn zum Ticket, das Ticket-Alter weicht
+    also höchstens um den Takt von der echten Ausfalldauer ab.
+    """
+    if not issue.created_at:
+        return 0.0
+    return max(0.0, (now - issue.created_at).total_seconds() / 3600.0)
+
+
 def _age_days(issue: IssueRef, now: datetime.datetime) -> float:
     if not issue.created_at:
         return 0.0
@@ -268,6 +358,43 @@ def plan_generic(findings: Sequence[Finding],
                 action="update", channel=GENERIC_CHANNEL, issue=open_issue.number,
                 title=open_issue.title, body=body, severity=worst(machine).severity,
                 owner="auto", reason="Befundmenge hat sich geändert – Ticket aktualisiert.")
+
+        # ------------------------------------------------------------- #
+        #  AKUTER MELDETAKT (#676): Steht ein AUSFALL offen, rechnet die
+        #  Leiter in Stunden (0/1/6/24, danach alle 24 h). Die 72-h-Kadenz
+        #  unten gilt weiter für chronische Befunde – sie ist dort richtig.
+        # ------------------------------------------------------------- #
+        if akuter_takt(machine):
+            alter_h = _age_hours(open_issue, now)
+            tier = akut_tier_for_age(alter_h)
+            label = tier_label(tier, AKUT_TAKT)
+            seit_kommentar = _hours_since(open_issue.last_bot_comment_at, now)
+            if seit_kommentar < AKUT_MIN_COMMENT_INTERVAL_HOURS:
+                return RouteDecision(
+                    action="none", channel=GENERIC_CHANNEL, issue=open_issue.number,
+                    tier=tier, tier_label=label, severity=worst(machine).severity,
+                    owner="auto",
+                    reason=f"Ausfall steht {alter_h:.1f} h, letzter Stand "
+                           f"{seit_kommentar:.1f} h alt – akuter Mindestabstand "
+                           f"{AKUT_MIN_COMMENT_INTERVAL_HOURS} h noch nicht erreicht.")
+            gemeldet = open_issue.last_tier
+            if tier > gemeldet or akut_wiederholung_faellig(gemeldet, seit_kommentar):
+                return RouteDecision(
+                    action="comment", channel=GENERIC_CHANNEL, issue=open_issue.number,
+                    tier=tier, tier_label=label,
+                    body=render_akut_status_comment(machine, open_issue.number,
+                                                    alter_h, tier, now),
+                    severity=worst(machine).severity, owner="auto",
+                    reason=f"Ausfall steht {alter_h:.1f} h – Stufe {tier} ({label}).")
+            nxt = akut_naechster_stand_in_hours(alter_h, gemeldet, seit_kommentar)
+            rest = f"nächster Stand in {nxt:.1f} h"
+            return RouteDecision(
+                action="none", channel=GENERIC_CHANNEL, issue=open_issue.number,
+                tier=tier, tier_label=label, severity=worst(machine).severity,
+                owner="auto",
+                reason=f"Ausfall steht {alter_h:.1f} h, Ticket #{open_issue.number} "
+                       f"offen (Stufe {tier} · {label}, {rest}).")
+
         if _hours_since(open_issue.last_bot_comment_at, now) >= MIN_COMMENT_INTERVAL_HOURS:
             return RouteDecision(
                 action="comment", channel=GENERIC_CHANNEL, issue=open_issue.number,
@@ -367,10 +494,15 @@ def _channel_done(state: dict[str, Any], channel: str) -> bool:
 # --------------------------------------------------------------------------- #
 def render_generic_body(machine: Sequence[Finding], human: Sequence[Finding],
                         now: datetime.datetime) -> str:
+    akut = akuter_takt(machine)
+    stand = (f"**Stand:** {now:%Y-%m-%d %H:%M} UTC · **Besitzer:** "
+             "Content-Automatisierung (Maschine)")
+    if akut:
+        stand += " · **Meldetakt:** akut – an den Ausfall gebunden (stündlich)"
     lines = [
         "## 🤖 Bot-Watchdog: Automatisierung braucht Eingriff",
         "",
-        f"**Stand:** {now:%Y-%m-%d %H:%M} UTC · **Besitzer:** Content-Automatisierung (Maschine)",
+        stand,
         "",
         "Diese Befunde kann eine Maschine heilen – sie blockieren den Betrieb,",
         "bis sie erledigt sind:",
@@ -390,6 +522,18 @@ def render_generic_body(machine: Sequence[Finding], human: Sequence[Finding],
                   "mit eigenem Besitzer und eigener Runbook-Seite – sie tauchen in diesem",
                   "Ticket nicht auf (Alarm-Routing, docs/ALARMROUTING-2026-09-12.md):", ""]
         lines += [f"- {f.title} → Ticket-Kanal `{f.channel}`" for f in human]
+    if akut:
+        stufen = ", ".join(f"{h} h" for h, _ in AKUT_TAKT[1:])
+        lines += ["", "### Meldetakt (an den Ausfall gebunden)", "",
+                  "Der Ausfall-Takt des Watchdogs misst **stündlich** (:05 UTC). Solange",
+                  "dieser Befund offen steht, meldet das Ticket nach "
+                  f"{stufen} – und danach alle {AKUT_WIEDERHOLUNG_HOURS} h. Das ist",
+                  "bewusst dichter als die übliche 72-h-Kadenz: ein Ausfall rechnet in",
+                  "Stunden, nicht in Tagen (Ausfall vom 09.10.2026: 19 h 38 min ohne",
+                  "öffentliche Auslieferung, Ticket #676).",
+                  "",
+                  "Chronische Befunde ohne Ausfall-Charakter behalten ihre 72-h-Kadenz –",
+                  "ein offenes Ticket ist kein tägliches Rauschen (#272).", ""]
     lines += ["", "Das Ticket schließt sich von selbst, sobald kein maschinell behebbarer",
               "Befund mehr offen ist.", "",
               MARKER.format(channel=GENERIC_CHANNEL),
@@ -404,6 +548,67 @@ def render_status_comment(machine: Sequence[Finding], now: datetime.datetime) ->
                   "ein offenes Ticket ist kein tägliches Rauschen._", "",
               MARKER.format(channel=GENERIC_CHANNEL)]
     return "\n".join(lines)
+
+
+def render_akut_status_comment(machine: Sequence[Finding], issue: int, age_hours: float,
+                               tier: int, now: datetime.datetime) -> str:
+    """Stand eines laufenden AUSFALLS – Takt in Stunden, nicht in Tagen (#676).
+
+    Der Kommentar nennt drei Dinge, die ein Mensch im Alarmfall braucht:
+    wie lange der Ausfall schon steht, was die Maschine inzwischen versucht
+    hat, und wann der nächste Stand kommt, falls niemand eingreift.
+    """
+    label = tier_label(tier, AKUT_TAKT)
+    dauer = _dauer_text(age_hours)
+    akut = [f for f in machine if getattr(f, "akut", False)]
+    ruhig = [f for f in machine if not getattr(f, "akut", False)]
+    lines = [
+        f"### 🔴 Ausfall steht {dauer} – {label} (Stufe {tier})",
+        "",
+        f"**Stand:** {now:%Y-%m-%d %H:%M} UTC · Ticket #{issue} seit {dauer} offen "
+        "· **Besitzer:** Maschine",
+        "",
+        "Dieser Meldetakt ist an den **Ausfall** gebunden, nicht an den Kalender:",
+        f"Der Ausfall-Takt misst stündlich (:05) und meldet nach {dauer} auf Stufe "
+        f"{tier}. Nach der Stufe „Stand nach {AKUT_TAKT[-1][0]} h“ folgt alle "
+        f"{AKUT_WIEDERHOLUNG_HOURS} h ein Stand – bis der Befund geheilt ist. "
+        "Das Ticket schließt sich selbst, sobald die Nachmessung grün ist.",
+        "",
+        "**Offene Befunde:**",
+        "",
+    ]
+    lines += [f.line() for f in akut]
+    if ruhig:
+        lines += ["", "**Daneben offen (chronisch, eigene 72-h-Kadenz):**", ""]
+        lines += [f.line() for f in ruhig]
+    for f in akut:
+        if f.evidence:
+            lines += ["", f"**Nachweis `{f.id}`:**"] + [f"- {e}" for e in f.evidence]
+    if akut:
+        lines += ["", "**Was die Maschine bereits versucht hat:**", ""]
+        lines += [f"- {f.next_step or 'siehe Befund'}" for f in akut]
+        lines += ["", "Ist das nicht genug, ist der Befund falsch klassifiziert "
+                      "(Besitzer `auto`, aber kein Heiler) – dann gehört er in "
+                      "den Fachkanal eines Menschen, nicht in dieses Ticket."]
+    # Gerechnet ab JETZT: Dieser Kommentar ist der letzte Stand.
+    nxt = akut_naechster_stand_in_hours(age_hours, tier, 0.0)
+    lines += ["", f"_Nächster Stand in {nxt:.1f} h, wenn der Ausfall bestehen bleibt._"]
+    lines += ["", TIER_MARKER.format(channel=GENERIC_CHANNEL, tier=tier)]
+    return "\n".join(lines)
+
+
+def _dauer_text(hours: float) -> str:
+    """Ausfalldauer menschenlesbar: „19 h 38 min“ statt „19.633 h“."""
+    hours = max(0.0, float(hours))
+    h = int(hours)
+    m = int(round((hours - h) * 60))
+    if m == 60:
+        h, m = h + 1, 0
+    if h >= 24:
+        return f"{h // 24} T {h % 24} h {m:02d} min"
+    if h >= 1:
+        return f"{h} h {m:02d} min"
+    return f"{m} min"
 
 
 def render_channel_title(channel: str, group: Sequence[Finding]) -> str:
@@ -897,9 +1102,83 @@ def _selftest() -> int:
     check("Kadenz: ohne Ticket ist Erinnerung fällig",
           should_notify(_Fake(None, None), "x", 7, now)[0] is True)
 
+    # 6c) AKUTER MELDETAKT (#676): Ausfall rechnet in Stunden, nicht in Tagen
+    blockade = Finding(id="deploy-blockade", title="Auslieferung blockiert",
+                       detail="Schritt 49 bricht ab", severity="P1", owner="auto",
+                       channel=GENERIC_CHANNEL, akut=True,
+                       next_step="watchdog_recovery.py --live-site")
+    check("akuter Befund bindet den Meldetakt", akuter_takt([blockade]))
+    check("chronischer Befund bindet ihn nicht", not akuter_takt([machine]))
+    check("akuter Befund öffnet sofort ein Ticket",
+          plan_generic([blockade], None, now).action == "create")
+    check("akutes Ticket nennt den Meldetakt im Body",
+          "Meldetakt" in render_generic_body([blockade], [], now))
+    check("chronisches Ticket behält die 72-h-Kadenz im Body",
+          "Meldetakt" not in render_generic_body([machine], [], now))
+    check("akute Leiter: Stunde 0", akut_tier_for_age(0.4) == 0)
+    check("akute Leiter: Stunde 1", akut_tier_for_age(1.0) == 1)
+    check("akute Leiter: Stunde 6", akut_tier_for_age(6.5) == 2)
+    check("akute Leiter: Stunde 24", akut_tier_for_age(24.0) == 3)
+    check("akute Wiederholung greift erst an der Endstufe",
+          not akut_wiederholung_faellig(2, 99.0) and akut_wiederholung_faellig(3, 24.0))
+    check("akute Wiederholung ist kein Taktfeuer",
+          not akut_wiederholung_faellig(3, 23.9))
+
+    # Der eigentliche Vertrag: 24 stündliche Takt-Runden bei durchgehendem
+    # Ausfall ergeben GENAU drei Stände – nicht 24 (Taktfeuer) und nicht
+    # null (die alte 72-h-Kadenz, die am 09.10.2026 19 h geschwiegen hätte).
+    def _takt_simulation(stunden: int) -> int:
+        """Zählt Kommentare über `stunden` stündliche Ausfall-Takt-Runden."""
+        stand = now - datetime.timedelta(hours=stunden)
+        ticket = IssueRef(number=676, created_at=stand,
+                          body=render_generic_body([blockade], [], stand),
+                          last_tier=0, last_bot_comment_at=None)
+        kommentare = 0
+        for offset in range(1, stunden + 1):
+            uhr = stand + datetime.timedelta(hours=offset)
+            d = plan_generic([blockade], ticket, uhr)
+            if d.action != "comment":
+                continue
+            kommentare += 1
+            ticket.last_tier = d.tier
+            ticket.last_bot_comment_at = uhr
+        return kommentare
+
+    check("24 h Ausfall → genau 3 Stände (Meldetakt, kein Taktfeuer)",
+          _takt_simulation(24) == 3)
+    check("48 h Ausfall → 4 Stände (Endstufe wiederholt alle 24 h)",
+          _takt_simulation(48) == 4)
+    check("6 h Ausfall → 2 Stände", _takt_simulation(6) == 2)
+    check("geheilter Ausfall schließt das Ticket",
+          plan_generic([], IssueRef(number=676, created_at=born,
+                                    body=render_generic_body([blockade], [], born)),
+                       now).action == "close")
+    check("Ausfalldauer wird menschenlesbar",
+          _dauer_text(19 + 38 / 60) == "19 h 38 min" and _dauer_text(0.5) == "30 min")
+    stand_19h = plan_generic(
+        [blockade],
+        IssueRef(number=676, created_at=now - datetime.timedelta(hours=19, minutes=38),
+                 body=render_generic_body([blockade], [], now), last_tier=1,
+                 last_bot_comment_at=now - datetime.timedelta(hours=18)),
+        now)
+    check("19 h 38 min Ausfall meldet Stufe 2 – die alte 72-h-Kadenz hätte geschwiegen",
+          stand_19h.action == "comment" and stand_19h.tier == 2
+          and "19 h 38 min" in stand_19h.body)
+    stille_19h = plan_generic(
+        [blockade],
+        IssueRef(number=676, created_at=now - datetime.timedelta(hours=19, minutes=38),
+                 body=render_generic_body([blockade], [], now), last_tier=2,
+                 last_bot_comment_at=now - datetime.timedelta(hours=13)),
+        now)
+    check("keine Stufe übersprungen: 19 h 38 min wartet auf die 24-h-Stufe",
+          stille_19h.action == "none" and stille_19h.tier == 2
+          and "nächster Stand in 4.4 h" in stille_19h.reason)
+
     # 7) Round-Trip JSON (Findings-Datei der Wachen)
     rt = Finding.from_dict(human.as_dict())
     check("JSON-Roundtrip", rt == human)
+    check("JSON-Roundtrip behält die Ausfall-Klasse",
+          Finding.from_dict(blockade.as_dict()).akut is True)
 
     if failures:
         print("🛑 ALARM-ROUTER SELFTEST FEHLGESCHLAGEN:")

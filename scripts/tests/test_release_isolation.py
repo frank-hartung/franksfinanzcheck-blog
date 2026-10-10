@@ -225,8 +225,14 @@ class DeployVerdrahtungTests(unittest.TestCase):
 
     def test_isolation_laeuft_vor_der_finalen_scorecard(self):
         iso = self.text.index("release_isolation.py --commit-sha")
+        # ANKER 10.10.2026: gesucht ist der SCHRITT, nicht ein Shell-Fragment.
+        # Der Anker hing an `status=$?` aus einem `run:`-Block, den PR #684
+        # doppelt in denselben Schritt geschrieben hatte (doppelter YAML-
+        # Schlüssel, toter Code). Gemerged mit dem Block aus #686 heißt die
+        # Variable `code`. Der Schritt-Name ist der stabile Anker – der blanke
+        # Text steht auch in einem Kommentar am Kopf der Datei.
         scorecard = self.text.index(
-            'release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"\n          status=$?')
+            "- name: Release-Scorecard (Produktionswahrheit versiegeln")
         self.assertLess(iso, scorecard,
                         "Isolation muss VOR der finalen Scorecard laufen, "
                         "sonst friert der Deploy weiter ein (#676)")

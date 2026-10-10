@@ -832,17 +832,15 @@ jobs:
       # (Lektion WF-A535 #529: ein roter Schritt, der die Ursache nicht
       # nennt, erzieht zum Wegsehen).
       - name: Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)
-        run: |
-          set -uo pipefail
-          python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
-          status=$?
-          if [ "$status" -eq 1 ]; then
-            echo "::error title=Release-Scorecard::Heutige Kandidaten sind blockiert und die Auslieferungs-Isolation konnte sie nicht auflösen – der Deploy stoppt, damit nichts Ungeprüftes live geht. Befund: RELEASE-SCORECARD.md, Grund je Artikel im Frontmatter (cadence_grund)."
-          elif [ "$status" -eq 2 ]; then
-            echo "::error title=Release-Scorecard::Werkzeugfehler – die Produktionswahrheit ist nicht messbar. Fail-closed: eine ausgefallene Messung ist kein Grün (C33)."
-          fi
-          exit "$status"
         id: scorecard
+        # REPARATUR 10.10.2026: Dieser Schritt hatte ZWEI `run:`-Blöcke – PR
+        # #684 hatte seinen vor den von PR #686 geschoben. In YAML gewinnt bei
+        # doppeltem Schlüssel der LETZTE: Der erste Block war toter Code, und
+        # die Repo-eigene Wache (test_workflow_yaml, UniqueKeyLoader) war rot.
+        # Beide Absichten sind jetzt in EINEM Block: die Exit-Auswertung aus
+        # #686 (C34: ein Werkzeugfehler blockiert die Auslieferung nicht) und
+        # die benannten Annotationen aus #684 (ein roter Schritt, der die
+        # Ursache nicht nennt, erzieht zum Wegsehen – WF-A535 #529).
         run: |
           set +e
           python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
@@ -856,11 +854,12 @@ jobs:
               ;;
             1)
               echo "🛑 Release-Scorecard blockiert die heutigen Kandidaten – nichts geht live (fail-closed)."
+              echo "::error::Release-Scorecard – heutige Kandidaten sind blockiert und die Auslieferungs-Isolation konnte sie nicht auflösen. Der Deploy stoppt, damit nichts Ungeprüftes live geht. Befund: RELEASE-SCORECARD.md, Grund je Artikel im Frontmatter (cadence_grund)."
               echo "werkzeugfehler=false" >> "$GITHUB_OUTPUT"
               exit 1
               ;;
             *)
-              echo "::error::Release-Scorecard meldet WERKZEUGFEHLER (Exit $code). Die Auslieferung läuft bewusst weiter; der Lauf wird nach der Veröffentlichung rot (Job release-seal, Dauerheilung #676)."
+              echo "::error::Release-Scorecard meldet WERKZEUGFEHLER (Exit $code) – die Produktionswahrheit ist nicht messbar. Die Auslieferung läuft bewusst weiter; der Lauf wird nach der Veröffentlichung rot (Job release-seal, Dauerheilung #676). Eine ausgefallene Messung ist kein Grün (C33)."
               echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"
               ;;
           esac
