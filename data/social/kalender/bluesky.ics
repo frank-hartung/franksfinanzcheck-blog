@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:bluesky:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-somm
  er-schnaepp:zahl:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261010T161500Z
 DTEND:20261010T163000Z
 SUMMARY:Bluesky: Last Minute Urlaub: – So schnappst du dir das Sommer‑
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsais
  on-richtig:vergleich:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261011T061500Z
 DTEND:20261011T063000Z
 SUMMARY:Bluesky: Gasabschlag berechnen: So planst du die Heizsaison ri
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-d
  ie-feiertage:frage:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261011T101500Z
 DTEND:20261011T103000Z
 SUMMARY:Bluesky: Weihnachten Budget planen: Ohne Schulden durch die Fe
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-ds
  l-anschluss:frage:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261012T061500Z
 DTEND:20261012T063000Z
 SUMMARY:Bluesky: Preiswert surfen: So findest du den optimalen DSL‑Ans
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-
  vermeidest:zitat:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261012T101500Z
 DTEND:20261012T103000Z
 SUMMARY:Bluesky: Büroausstattung steuerlich clever absetzen: So geht's
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-ae
  ndert:nutzen:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261013T061500Z
 DTEND:20261013T063000Z
 SUMMARY:Bluesky: Internet & DSL-Update: Was sich jetzt für dich ändert
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:zitat:
  2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261013T101500Z
 DTEND:20261013T103000Z
 SUMMARY:Bluesky: 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortve
  rlust:zitat:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261014T061500Z
 DTEND:20261014T063000Z
 SUMMARY:Bluesky: Campingurlaub planen: Budget für Platz\, Fahrt und Au
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-14@fran
  ksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261014T101500Z
 DTEND:20261014T103000Z
 SUMMARY:Bluesky: DSL-Wechselbonus sichern: So sparst du beim Internetv
@@ -142,7 +142,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarant
  ie-gas:frage:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261015T061500Z
 DTEND:20261015T063000Z
 SUMMARY:Bluesky: Sicher heizen: So schützt dich eine Gaspreisgarantie 
@@ -157,7 +157,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anb
  ieterwechsel:mythos:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261015T101500Z
 DTEND:20261015T103000Z
 SUMMARY:Bluesky: Internet & DSL wechseln: Praxis-Tipps – Highspeed Int
@@ -172,7 +172,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-
  tarife-fuer-2026:zahl:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261016T061500Z
 DTEND:20261016T063000Z
 SUMMARY:Bluesky: Preisgarantie Gas: So sicherst du günstige Tarife (za
@@ -187,7 +187,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-o
  hne-gebuehren:takeaway:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261016T101500Z
 DTEND:20261016T103000Z
 SUMMARY:Bluesky: Kostenloses Girokonto: So findest du ein Konto ohne G
@@ -202,7 +202,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermei
  den:zitat:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261017T061500Z
 DTEND:20261017T063000Z
 SUMMARY:Bluesky: Gasrechnung senken: Fehler im Spätsommer vermeiden (z
@@ -217,7 +217,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
  et:mythos:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261017T101500Z
 DTEND:20261017T103000Z
 SUMMARY:Bluesky: DSL-Vergleich: So findest du den günstigsten Internet
@@ -232,7 +232,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-
  finden:mythos:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261018T061500Z
 DTEND:20261018T063000Z
 SUMMARY:Bluesky: Energiediebe stoppen: So kannst du Stromfresser finde
@@ -247,7 +247,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:fra
  ge:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261018T101500Z
 DTEND:20261018T103000Z
 SUMMARY:Bluesky: Haushaltsbuch führen: App\, Excel oder Stift im Vergl
@@ -262,7 +262,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nut
  zen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261019T061500Z
 DTEND:20261019T063000Z
 SUMMARY:Bluesky: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
@@ -277,7 +277,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismu
  s-tipps:frage:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261019T101500Z
 DTEND:20261019T103000Z
 SUMMARY:Bluesky: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzich
@@ -292,7 +292,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preis
  spruengen:zahl:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261020T061500Z
 DTEND:20261020T063000Z
 SUMMARY:Bluesky: Preisgarantie Gas: So schützt du dich vor Preissprüng
@@ -307,7 +307,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-26-dns-server-wechseln-schnelleres-sichereres-inte
  rnet:zitat:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261020T101500Z
 DTEND:20261020T103000Z
 SUMMARY:Bluesky: DNS-Server wechseln: Schnelleres und sichereres Inter
@@ -322,7 +322,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-s
  chnaeppchen:zitat:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261021T061500Z
 DTEND:20261021T063000Z
 SUMMARY:Bluesky: September-Roadtrip: Clevere Wege zum Mietwagen-Schnäp
@@ -337,7 +337,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-eck
  e:takeaway:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261021T101500Z
 DTEND:20261021T103000Z
 SUMMARY:Bluesky: WLAN verbessern: So bringst du stabilen Speed in jede
@@ -352,7 +352,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahl
  en:frage:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261022T061500Z
 DTEND:20261022T063000Z
 SUMMARY:Bluesky: Kreditkarte vergleichen: Kostenlos und sicher zahlen 
@@ -367,7 +367,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:za
  hl:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261022T101500Z
 DTEND:20261022T103000Z
 SUMMARY:Bluesky: Handytarif 2026 vergleichen: Günstige Tarife ab 4\,99
@@ -382,7 +382,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten
  -konsum:vergleich:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261023T061500Z
 DTEND:20261023T063000Z
 SUMMARY:Bluesky: Kleine Beträge\, große Wirkung: Frugalismus für den E
@@ -397,7 +397,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-
  vergleich:zitat:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261023T101500Z
 DTEND:20261023T103000Z
 SUMMARY:Bluesky: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergle
@@ -412,7 +412,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltag
  sfehler:zahl:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261024T061500Z
 DTEND:20261024T063000Z
 SUMMARY:Bluesky: Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfeh
@@ -427,7 +427,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:bluesky:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spa
  etsommer:zitat:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261010T111425Z
+DTSTAMP:20261010T111549Z
 DTSTART:20261024T101500Z
 DTEND:20261024T103000Z
 SUMMARY:Bluesky: Günstig durch den Winter: Heizungs-Check im Spätsomme
