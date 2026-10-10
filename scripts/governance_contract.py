@@ -105,6 +105,8 @@ from pathlib import Path
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
+from url_host import ruft_host_an  # noqa: E402  (Host-Wahrheit statt Teilstring)
+
 GOV_WORKFLOW = os.path.join(BLOG_DIR, ".github", "workflows", "premium-governance.yml")
 WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 # Mindestmenge der Wachen, die der Vertrag prüft (C6: jede mit `--selftest`).
@@ -392,6 +394,12 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
 TOKEN_BROKER = "pinterest_token"
+# Host der Pinterest-API. C10 sucht ihn im QUELLTEXT der Skripte – über
+# `ruft_host_an` als echte URL im AST, nicht als beliebigen Teilstring
+# (Code-Scanning-Alert #83, 10.10.2026). Vorher genügte die bloße Erwähnung:
+# Eine Wache, die den Host nur dokumentiert, galt als API-Verbraucher und
+# forderte den Token-Broker an – Lärm, der echte C10-Befunde zudeckt.
+PINTEREST_API_HOST = "api.pinterest.com"
 
 # Kanal der maschinell behebbaren Befunde (Alarm-Routing, C14).
 GENERIC_LABEL = "bot-watchdog"
@@ -680,7 +688,8 @@ def c10_token_broker(script_texts):
     for name, text in sorted(script_texts.items()):
         if name in TOKEN_BROKER_EXEMPT:
             continue
-        if "api.pinterest.com" not in text and "PINTEREST_ACCESS_TOKEN" not in text:
+        spricht_mit_api = ruft_host_an(text, PINTEREST_API_HOST)
+        if not spricht_mit_api and "PINTEREST_ACCESS_TOKEN" not in text:
             continue
         uses_broker = TOKEN_BROKER in text
         # Direktzugriff auf das Env-Secret als TOKEN-QUELLE (nicht bloß erwähnt)
@@ -689,10 +698,13 @@ def c10_token_broker(script_texts):
             out.append(("C10", f"scripts/{name}: holt den Pinterest-Token direkt aus dem "
                                "Env statt über `pinterest_token.get_token()` – damit prüft "
                                "die Wache einen anderen Token als der Bot benutzt (#206)."))
-        # Hinweis: „… in text“ durchsucht den QUELLTEXT eines Scripts nach der
-        # Pinterest-API-Host-Erwähnung (Governance-Regel C10) – das ist
-        # Code-Suche, keine URL-Validierung.  # codeql[py/incomplete-url-substring-sanitization]
-        if not uses_broker and "api.pinterest.com" in text and not direct:
+        # `spricht_mit_api` steht für eine echte URL auf den Pinterest-Host im
+        # Quelltext (AST-Literal). Heilung von Code-Scanning-Alert #83
+        # (10.10.2026): Vorher war das eine rohe Teilstring-Suche mit
+        # Inline-Unterdrückung – sie hielt `fake-api.pinterest.com` und
+        # `api.pinterest.com.angreifer.example` für denselben Host und machte
+        # jede Doku-Erwähnung zum API-Verbraucher.
+        if not uses_broker and spricht_mit_api and not direct:
             out.append(("C10", f"scripts/{name}: spricht mit der Pinterest-API, kennt aber "
                                "den Token-Broker `pinterest_token` nicht – Failover und "
                                "Auto-Erneuerung greifen dort nicht."))

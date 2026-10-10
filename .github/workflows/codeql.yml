@@ -123,50 +123,55 @@ jobs:
           path: sarif-results/
           retention-days: 7
 
-      - name: Unterdrückte Funde entfernen (vor Upload & Gate)
+      - name: Unterdrückungen sind selbst ein Befund (Upload & Gate)
         run: |
           set -euo pipefail
-          # Nur diese Regeln dürfen per Code-Kommentar unterdrückt werden
-          # (begrenzte, dokumentierte Ausnahmen – siehe Strategie-Doc).
-          # CodeQL behandelt ein nacktes `# noqa`/`# lgtm` als Unterdrückung
-          # JEGLICHER Alerts auf der Zeile – deshalb greift die Whitelist
-          # hier zusätzlich als zweite Instanz.
+          # KEINE Regel darf mehr per Code-Kommentar unterdrückt werden
+          # (10.10.2026, Alert #83). Bis dahin standen hier die beiden
+          # `incomplete-url-substring-sanitization`-Regeln als „begründete
+          # Ausnahme". Genau diese Ausnahme stand sechs Tage später wieder
+          # als offener Alert in der Security-Tab: Das parallel laufende
+          # GitHub-Default-Setup kennt weder `paths-ignore` noch
+          # `# codeql[...]`-Kommentare. Eine Unterdrückung versteckt einen
+          # Fund also nur in EINER von zwei Sichten – sie heilt nichts.
           #
-          # DIE Clear-Text-Regeln stehen NICHT mehr hier (05.10.2026, Alert
-          # #78): Funde dieser Klasse werden an der Quelle geheilt, nie
-          # unterdrückt. Eine Unterdrückung bliebe damit in der SARIF
-          # sichtbar und würde das Gate rot machen – doppelt gesichert
-          # durch test_zugangs_namensvertrag.py (Unterdrückungsverbot).
-          ERLAUBT='py/incomplete-url-substring-sanitization
-          js/incomplete-url-substring-sanitization'
+          # Folge: Dieser Schritt filtert nichts mehr heraus. Er macht
+          # Unterdrückungen sichtbar und lässt den Lauf daran scheitern.
+          # CodeQL wertet auch ein nacktes `# noqa`/`# lgtm` als
+          # Unterdrückung JEGLICHER Alerts der Zeile – auch das ist hier
+          # ein Befund, nicht ein Freibrief.
+          GESAMT_UNTERDRUECKT=0
           for f in sarif-results/*.sarif; do
             [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
-            VORHER="$(jq '[.runs[0].results[]?] | length' "$f")"
-            jq -r --arg erlaubt "$ERLAUBT" '
-              . as $sarif
-              | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
-              | [ $sarif.runs[].results[]?
-                  | select(((.suppressions // []) != [])
-                           and (.ruleId as $id | $liste | index($id))) ]
-              | map("- `" + .ruleId + "` " +
-                    (.locations[0].physicalLocation.artifactLocation.uri // "?") + ":"
+            jq -r '
+              [ .runs[].results[]? | select((.suppressions // []) != []) ]
+              | map("- `" + .ruleId + "` "
+                    + (.locations[0].physicalLocation.artifactLocation.uri // "?") + ":"
                     + ((.locations[0].physicalLocation.region.startLine // 0) | tostring)
                     + " – " + ((.suppressions[0].justification // "Code-Kommentar") | .[0:120]))
               | .[]
             ' "$f" > "/tmp/$(basename "$f").unterdrueckt" || true
-            jq --arg erlaubt "$ERLAUBT" '
-              . as $sarif
-              | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
-              | $sarif
-              | .runs[].results |= map(select(
-                  ((.suppressions // []) == [])
-                  or (.ruleId as $id | $liste | index($id) | not)
-                ))
-            ' "$f" > "${f}.neu" && mv "${f}.neu" "$f"
-            NACHER="$(jq '[.runs[0].results[]?] | length' "$f")"
-            WEG=$((VORHER - NACHER))
-            echo "${f}: ${VORHER} → ${NACHER} Funde (${WEG} per Code-Kommentar unterdrückt)"
+            ANZ="$(jq '[.runs[].results[]? | select((.suppressions // []) != [])] | length' "$f")"
+            GESAMT_UNTERDRUECKT=$((GESAMT_UNTERDRUECKT + ANZ))
+            echo "${f}: ${ANZ} unterdrückte Fundstelle(n)"
+            if [ "$ANZ" -gt 0 ]; then
+              jq -r '
+                .runs[].results[]? | select((.suppressions // []) != [])
+                | . as $r
+                | ($r.locations[0].physicalLocation // {}) as $loc
+                | "::error file=\($loc.artifactLocation.uri // "unbekannt")"
+                  + ",line=\($loc.region.startLine // 1)"
+                  + ",title=Unterdrückung statt Heilung (\($r.ruleId))"
+                  + "::Diese Fundstelle ist per Code-Kommentar unterdrückt. "
+                  + "Das GitHub-Default-Setup sieht sie trotzdem. Ursache heilen "
+                  + "statt unterdrücken – siehe CODE-SCANNING-ALERT-83-DAUERHEILUNG-PREMIUM-2026-10-10.md."
+              ' "$f"
+            fi
           done
+          if [ "$GESAMT_UNTERDRUECKT" -gt 0 ]; then
+            echo "::error::${GESAMT_UNTERDRUECKT} unterdrückte Fundstelle(n) – Unterdrückung ist keine Heilung (Alert #83)."
+            exit 1
+          fi
 
       - name: SARIF in Security-Tab hochladen
         id: upload
@@ -304,7 +309,7 @@ jobs:
                 fi
                 if [ -n "$UNTERDRUECKT" ]; then
                   echo ""
-                  echo "**Unterdrückte Ausnahmen (dokumentiert im Code, nicht gemeldet):**"
+                  echo "**Verbotene Unterdrückungen (seit Alert #83 ein Befund, kein Freibrief):**"
                   echo "$UNTERDRUECKT"
                 fi
               } > wache-bilanz.md
@@ -337,3 +342,43 @@ jobs:
 
       - name: Sicherheitsvertrag zu Alert 77/78/80
         run: python3 -m unittest scripts.tests.test_clear_text_logging_security -v
+
+  url-wache:
+    name: URL-Wache (unabhängig vom SARIF-Upload)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # LEHRE AUS ALERT #83: Die beiden `incomplete-url-substring-sanitization`-
+      # Regeln waren bis 10.10.2026 per Code-Kommentar unterdrückt. Das
+      # GitHub-Default-Setup kennt solche Kommentare nicht – es hielt die
+      # Fundstellen weiter offen, während das Gate hier „0 Funde" meldete.
+      # Diese Wache prüft denselben Bestand lokal, fail-closed und ohne
+      # jede Abhängigkeit von CodeQL, dessen Upload oder der Alert-API.
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Node bereitstellen (für die CORS-Tests des Workers)
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Eigenprüfung der Wache (Positiv-, Gegen- und Musterproben)
+        run: |
+          python3 scripts/url_host.py --selftest
+          python3 scripts/url_substring_guard.py --selftest
+
+      - name: Python, JavaScript und HTML auf URL-Substring-Prüfungen abklopfen
+        run: python3 scripts/url_substring_guard.py
+
+      - name: Sicherheitsvertrag zu Alert 83
+        run: python3 -m unittest scripts.tests.test_url_substring_security -v
+
+      - name: CORS-Vertrag des KI-Assistent-Workers
+        run: |
+          python3 scripts/ki_assistent_gate.py --selftest
+          node --test cloudflare/ki-assistent/test/worker.test.mjs

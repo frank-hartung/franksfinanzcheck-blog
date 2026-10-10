@@ -100,3 +100,47 @@ Jede Wache trägt Positiv- und Gegenproben; eine stumpf gewordene Kontrolle wird
 somit selbst rot. Beweisführung und Runbook:
 `CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md` und
 `CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md`.
+
+## Host-Vertrag und URL-Wache (Code-Scanning-Alert #83, 10.10.2026)
+
+Eine URL ist eine strukturierte Adresse, keine Zeichenkette mit Bedeutung. Wer
+Herkunft, Ziel oder Zugehörigkeit einer Adresse mit `in`, `startswith`,
+`endsWith` oder `includes` beurteilt, prüft Text statt Host – und lässt
+`https://unser-host.de.angreifer.example/` passieren. Für dieses Repository
+gilt deshalb:
+
+1. **Host parsen, nicht Zeichenkette vergleichen.** Die einzige Wahrheit ist
+   `scripts/url_host.py` (`ist_host`, `ist_host_oder_subdomain`, `nennt_host`,
+   `ruft_host_an`, `hat_link_auf_host`). Eigene Host-Logik wird nicht gebaut.
+2. **Subdomains nur über die Punkt-Grenze.** `ist_host_oder_subdomain()` –
+   niemals `endsWith(".beispiel.de")`, das erlaubt `boeseebeispiel.de`.
+3. **Erwähnung ist kein Aufruf.** Prüft eine Regel den Quelltext anderer
+   Skripte, zählt nur ein echtes URL-Literal im AST (`ruft_host_an()`), nicht
+   die Nennung in Kommentar, Dokumentation oder Fixture.
+4. **Herkunftsprüfungen zur Laufzeit parsen.** CORS-Freigaben im
+   Cloudflare-Worker entscheiden über `new URL()`, erzwingen `https:` und
+   prüfen den Hostnamen – bewacht von Regel KA10 in
+   `scripts/ki_assistent_gate.py`.
+5. **URL-Funde werden nie unterdrückt.** Für
+   `py/incomplete-url-substring-sanitization` und
+   `js/incomplete-url-substring-sanitization` gibt es keine
+   `# codeql[...]`-Unterdrückung – und seit dem 10.10.2026 gibt es in der
+   CodeQL-Wache überhaupt **keine Unterdrückungs-Whitelist mehr**: Jede
+   unterdrückte Fundstelle lässt den Lauf scheitern.
+
+Erzwungen wird der Vertrag auf vier unabhängigen Ebenen:
+
+- `scripts/url_substring_guard.py` prüft **Python, JavaScript und HTML** (AST,
+  echter JS-Lexer, eingebettete `<script>`-Blöcke) fail-closed: Nicht
+  analysierbarer Quelltext ist ein Fehler, kein „sauber“.
+- `scripts/tests/test_url_substring_security.py` verankert Eigenprüfung,
+  Repository-Nullbefund, die geheilten Fundstellen, die Umgehungstabelle und
+  das Verbot der Whitelist – inklusive Rückfall-Probe mit den historischen
+  Mustern.
+- `cloudflare/ki-assistent/test/worker.test.mjs` prüft die CORS-Entscheidung
+  gegen sechs Umgehungsversuche.
+- Der eigenständige CI-Job `url-wache` läuft fail-closed und unabhängig von
+  CodeQL-SARIF-Upload und GitHub-Default-Setup.
+
+Beweisführung und Runbook:
+`CODE-SCANNING-ALERT-83-DAUERHEILUNG-PREMIUM-2026-10-10.md`.
