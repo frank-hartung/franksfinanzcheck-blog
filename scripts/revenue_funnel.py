@@ -59,6 +59,13 @@ CLICKS_META = os.path.join(DATA, "umami_clicks.meta.json")
 CTAS = os.path.join(DATA, "umami_ctas.json")
 AWIN = os.path.join(DATA, "awin_provisions.json")
 AWIN_META = os.path.join(DATA, "awin_fetch.meta.json")
+# Manuelle Provisions-Monatssummen (Abgeleitetes aus `data/provisionen/provisionen.csv`,
+# geschrieben von `scripts/offline_import.py`). Die CSV selbst ist gitignored –
+# versioniert wird nur das Aggregat, weil es keine Abrechnungs-Details enthält.
+PROVISIONEN = os.path.join(DATA, "provisionen_aggregat.json")
+# Eigene Provenienz-Datei der manuellen Messbrücke (NIEMALS die API-Meta-Dateien).
+OFFLINE_META = os.path.join(DATA, "offline_import.meta.json")
+PROV_STALE_MONATE = 2      # letzter befüllter Monat älter als 2 Monate ⇒ Hinweis
 OUT_JSON = os.path.join(DATA, "revenue_funnel.json")
 HISTORY = os.path.join(DATA, "revenue_funnel_history.jsonl")
 REPORT = os.path.join(BLOG_DIR, "REVENUE-FUNNEL-REPORT.md")
@@ -69,6 +76,14 @@ MAX_HISTORY = 260       # gut 5 Jahre Wochenläufe
 
 SOURCES = (
     # (Schlüssel, menschenlesbarer Name, Daten-/Meta-Pfade, Behebung)
+    # Reihenfolge = Vorrang: die manuelle Brücke steht zuerst, weil sie die
+    # einzige ist, die ohne Secrets und ohne API-Zugang läuft.
+    ("offline", "Manuelle Messbrücke (Offline-Import)",
+     os.path.join(DATA, "provisionen_aggregat.json"), OFFLINE_META,
+     "Export aus dem Umami-Dashboard nach `data/offline/messstand.json` legen "
+     "und `npm run mess:import` ausführen (Vorlage: "
+     "`python3 scripts/offline_import.py --template`) "
+     "– oder API-Import aktivieren: docs/UMSATZ-MESSUNG-PREMIUM.md"),
     ("views", "Besuche (Umami /pages)", VIEWS, VIEWS_META,
      "Secret `UMAMI_API_TOKEN` setzen, dann `python3 scripts/umami_views.py --fetch` ausführen"),
     ("clicks", "Affiliate-Klicks (Umami event-data)", CLICKS, CLICKS_META,
@@ -117,6 +132,36 @@ def _age_days(meta, keys=("written", "generated", "attempted")):
             except ValueError:
                 continue
     return None
+
+
+def bruecke_frisch(offline_meta) -> bool:
+    """Hat der Manuell-Import innerhalb der Frist geliefert?
+
+    Die API-Meta (`data/umami_*.meta.json`) gehört den API-Skripten und meldet
+    im Umami-Free-Betrieb `disabled`, obwohl die Bestandsdateien frisch aus dem
+    Offline-Import stammen. Ohne den Blick auf die eigene Meta der manuellen
+    Brücke galten frische Zahlen als „nicht gemessen“ – Schein-Lücke."""
+    if not isinstance(offline_meta, dict) or offline_meta.get("status") != "ok":
+        return False
+    alt = _age_days(offline_meta)
+    return alt is not None and alt <= STALE_DAYS
+
+
+def zustand_mit_bruecke(state, bruecke):
+    """`disabled`/`skipped`/`fehlt` werden zu `ok`, wenn die manuelle Brücke
+    frisch gemessen hat. `alt` bleibt `alt` – zwei Zeitstände sind kein Bild."""
+    return "ok" if bruecke and state in ("disabled", "skipped", "fehlt") else state
+
+
+def _month_age(jjjj_mm: str) -> int:
+    """Monate zwischen `JJJJ-MM` und heute (0 = aktueller Monat). Wirft bei
+    unplausiblem Format – der Aufrufer dokumentiert dann „unbekannt“ statt zu
+    raten. Bewusst grob (30-Tage-Monate): Es geht um „nachtragen oder nicht“."""
+    y, m = jjjj_mm.split("-")
+    given = datetime.date(int(y), int(m), 1)
+    if given > TODAY:
+        raise ValueError("Zukunft")
+    return (TODAY.year - given.year) * 12 + (TODAY.month - given.month)
 
 
 def _source_state(data, meta):
@@ -219,12 +264,19 @@ def fmt(v, kind="int"):
     return f"{v:.4f}".replace(".", ",")
 
 
-def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None):
+def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None,
+            manual_prov=None):
     """Reine Trichter-Rechnung (testbar, ohne Dateizugriff).
 
     `measured` = {views, clicks, awin: bool}: „die Quelle wurde erfolgreich
     importiert“. Nur dann darf eine 0 als echte Null stehen – sonst gilt
-    überall die Hausregel: nicht gemessen ⇒ unbekannt, nie eine Null."""
+    überall die Hausregel: nicht gemessen ⇒ unbekannt, nie eine Null.
+
+    `manual_prov` = Monatsaggregate der Partnerabrechnungen (manuelle
+    Provisions-Tabelle). Sie überlagert NUR, was die Awin-API nicht liefert, und
+    wird überall als „provisionen-tabelle“ gekennzeichnet – eine Abrechnungs-
+    summe ist kein API-Transaktionszähler und darf auch nicht wie einer
+    aussehen (Monats-, nicht Fenster-Sicht)."""
     views = (views_doc or {}).get("pages") if isinstance(views_doc, dict) else None
     views = views if isinstance(views, list) else []
     totals = (views_doc or {}).get("totals") if isinstance(views_doc, dict) else None
@@ -274,6 +326,29 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None):
     if revenue is not None:
         revenue = round(float(revenue), 2)
     provision_bezahlt = round(float(awin_doc.get("total_paid") or 0), 2) if has_awin else None
+    prov_quelle = "awin" if has_awin else None
+
+    # Zweite Datenbrücke: manuelle Provisions-Tabelle (Partnerabrechnungen).
+    # Füllt ausschließlich, was die API nicht liefert – nie daneben, nie darüber.
+    mp = manual_prov if isinstance(manual_prov, dict) else {}
+    ms = mp.get("summe") if isinstance(mp.get("summe"), dict) else {}
+    prov_monats_alter = None
+    if not has_awin and ms:
+        abschl = int(ms.get("abschluesse") or 0)
+        stornos = int(ms.get("stornos") or 0)
+        antraege = abschl if abschl else 0
+        confirmed = max(0, abschl - stornos)
+        declined = stornos
+        pending = 0
+        rev_m = ms.get("provision_eur")
+        if rev_m is not None:
+            revenue = round(float(rev_m), 2)
+            provision_bezahlt = revenue
+        prov_quelle = "provisionen-tabelle"
+        try:
+            prov_monats_alter = _month_age(str(mp.get("letzter_monat") or ""))
+        except (ValueError, TypeError):
+            prov_monats_alter = None
 
     # Provision je Seite (für die Trichter-Tabelle; SubID-Auflösung wie in awin_provisions:
     # Awin führt den Artikel als rohen Slug, Umami als content-Pfad – hier wird
@@ -324,8 +399,14 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None):
                   "kaufnah": views_kaufnah},
         "affiliate_klicks": clicks_total,
         "transaktionen": {"antraege": antraege, "pending": pending, "bestaetigt": confirmed,
-                          "stornos": declined, "quelle": "awin" if has_awin else None},
-        "provision": {"gesamt": revenue, "bezahlt": provision_bezahlt},
+                          "stornos": declined, "quelle": prov_quelle},
+        "provision": {"gesamt": revenue, "bezahlt": provision_bezahlt,
+                      "quelle": prov_quelle,
+                      "monat": (mp.get("letzter_monat") if prov_quelle == "provisionen-tabelle"
+                                else None),
+                      "zeitbezug": ("monat" if prov_quelle == "provisionen-tabelle"
+                                    else "fenster" if prov_quelle == "awin" else None),
+                      "monats_alter": prov_monats_alter},
         "raten": rates,
         "platzierungen": dict(sorted(placements.items(), key=lambda kv: -kv[1])),
         "seiten": per_page,
@@ -335,18 +416,47 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None):
 def evaluate(sources):
     """→ (gaps, notations): welche Quellen sind Löcher, was kostet die Behebung?"""
     gaps = []
+    # Eine funktionierende Brücke ersetzt die andere – aber NUR, wenn die andere
+    # nachweislich liefert. Umgekehrt wird nichts überblendet: fehlt die manuelle
+    # Brücke und ist die API deaktiviert, bleiben die Lücken sichtbar. Eine
+    # Schein-Null-Messlücke ist genau der Fehler, den #514 dokumentiert.
+    offline_ok = any(k == "offline" and st == "ok" for k, _l, st, _a in sources)
+    ersetzte = {"views", "clicks"} if offline_ok else set()
     for key, label, data_state, age in sources:
         if data_state in ("ok", "disabled"):
             continue
+        if key in ersetzte and data_state in ("fehlt", "skipped"):
+            continue
         why = {"fehlt": "noch nie importiert", "skipped": "Import übersprungen (Secret fehlt)",
                "alt": f"Import {age or '?'}d alt (Frist {STALE_DAYS}d)"}.get(data_state, data_state)
+        if key == "offline" and data_state in ("fehlt", "skipped"):
+            why += " – weder API-Import noch Manuell-Import gemessen " \
+                   "(docs/UMSATZ-MESSUNG-PREMIUM.md, Abschnitt 5a)"
         gaps.append(f"{label}: {why}")
     return gaps
 
 
 # ------------------------------------------------------------------ Report
 
-def render(f, gaps, fix_hints, wow=None, operating_boundaries=None):
+def bruecken_text(src, offline_meta, umami_api_enabled):
+    """Zeile im Report: WOHER kommen die Zahlen gerade? (Agentur-Standard: jede
+    Kennzahl braucht ihre Quelle – eine Zahl ohne Herkunft ist ein Gerücht.)"""
+    state = next((st for k, _l, st, _a in src if k == "offline"), "unbekannt")
+    if state == "ok":
+        stand = (offline_meta or {}).get("written") or "unbekannt"
+        seiten = (offline_meta or {}).get("seiten")
+        modus = (offline_meta or {}).get("modus")
+        extra = f", {seiten} Seiten" if isinstance(seiten, int) else ""
+        extra += f", Modus {modus}" if modus else ""
+        return (f"manuell (`scripts/offline_import.py`, Stand {stand}{extra})")
+    if umami_api_enabled:
+        return "Umami-API (`scripts/umami_views.py` / `umami_clicks.py`)"
+    return ("keine – API-Import deaktiviert und kein Manuell-Import gelaufen "
+            "(Zahlen bleiben „unbekannt“, docs/UMSATZ-MESSUNG-PREMIUM.md Abschnitt 5a)")
+
+
+def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None,
+           prov_monate=None):
     """Markdown-Wochenseite. Enthält die Markerzeile `Messlücken: N` und die
     Gesamt-Ampel – der Governance-Gate liest beides (kein Exit-Code-Raten)."""
     rate = f["raten"]
@@ -356,7 +466,7 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None):
         ("Besuche kaufnaher Seiten", fmt(f["views"]["kaufnah"])),
         ("Affiliate-Klicks", fmt(f["affiliate_klicks"])),
         ("Outbound-CTR (Klicks ÷ Besuche kaufnah)", fmt(rate["outbound_ctr"], "pct")),
-        ("Anträge (Awin, alle Status)", fmt(tx["antraege"])),
+        ("Vermittelte Abschlüsse (alle Status)", fmt(tx["antraege"])),
         ("Klick → Antrag", fmt(rate["klick_antrag"], "pct")),
         ("Antrag → bestätigter Abschluss", fmt(rate["antrag_abschluss"], "pct")),
         ("Stornoquote (declined ÷ abgeschlossene)", fmt(rate["stornoquote"], "pct")),
@@ -368,6 +478,20 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None):
          fmt(rate["rev_per_100_kaufnah"], "eur")),
         ("EPC (Einnahmen pro Affiliate-Klick)", fmt(rate["epc"], "eur")),
     ]
+    # Monats-Sicht überlagert Fenster-Sicht ⇒ drei Zeilen mischen zwei Bezüge.
+    # Ehrliche Beschriftung statt stiller Rundung: Sternchen + Fußnote.
+    mischt = f["provision"].get("quelle") == "provisionen-tabelle"
+    if mischt:
+        stand = f["provision"].get("monat") or "Stand unbekannt"
+        rows = [(k + (" *" if k in ("Klick → Antrag", "Antrag → bestätigter Abschluss",
+                                    "Provision pro 100 Besuche (gesamte Site)",
+                                    "Provision pro 100 Besuche (kaufnahe Seiten)",
+                                    "EPC (Einnahmen pro Affiliate-Klick)") else ""), v)
+                for k, v in rows]
+        rows = [(k.replace("Provision (gesamt)", f"Provision (Abrechnungstabelle, Stand {stand})")
+                 .replace("Provision bezahlt (Awin-Kasse)",
+                          "Provision bezahlt (lt. Abrechnungstabelle)"), v)
+                for k, v in rows]
     ampel = "GREEN" if not gaps else "AMBER"
     out = ["# 📈 Umsatz-Funnel – Besuch → Klick → Antrag → Provision",
            f"**Stand:** {f['generated']} · **Fenster:** {f['window_days']} Tage · "
@@ -378,6 +502,26 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None):
            "| Kennzahl | Wert |",
            "|---|---|"]
     out += [f"| {k} | {v} |" for k, v in rows]
+    if mischt:
+        out += ["", "_* Diese drei Zeilen mischen zwei Zeitbezüge: Klicks und Besuche "
+                "aus dem Messfenster (oben), Abschlüsse und Provision aus der "
+                "**abgerechneten Monatssicht** der Provisions-Tabelle. Sie taugen als "
+                "Größenordnung, nicht als Wochenvergleich – der exakte "
+                "Klick→Antrag→Euro-Hebel braucht die API-Brücke "
+                "(`docs/UMSATZ-MESSUNG-PREMIUM.md`)._", ""]
+    if bruecke:
+        out += [f"**Messbrücke:** {bruecke}", ""]
+    if prov_monate:
+        out += ["## 🧾 Abrechnungstabelle (Provision je Monat)", "",
+                "| Monat | Partner | Abschlüsse | Stornos | Provision |", "|---|---|---|---|---|"]
+        for mrow in prov_monate[:12]:
+            partner = ", ".join(str(x) for x in (mrow.get("partner") or [])) or "unbenannt"
+            out.append(f"| {mrow.get('monat') or 'unbekannt'} | {partner} | "
+                       f"{fmt(mrow.get('abschluesse'))} | {fmt(mrow.get('stornos'))} | "
+                       f"{fmt(mrow.get('provision_eur'), 'eur')} |")
+        out += ["", "_Monatssicht der abgerechneten Provisionen – deshalb kein "
+                "Wochenvergleich und keine Tageskurve. Quelle: "
+                "`data/provisionen/provisionen.csv` (intern, gitignored)._", ""]
     if wow:
         out += ["", "## 🔁 Vorwoche (Woche für Woche)", "",
                 "| Kennzahl | letzte Woche | Δ |", "|---|---|---|"]
@@ -486,19 +630,29 @@ def main(argv=None):
     cta_rows = _read_json(CTAS, []) or []
     awin_doc = _read_json(AWIN, {}) or {}
     awin_meta = _read_json(AWIN_META, {}) or {}
+    prov_doc = _read_json(PROVISIONEN, {}) or {}
+    offline_meta = _read_json(OFFLINE_META, {}) or {}
 
     umami_api_enabled = umami_api_import_enabled()
-    # „gemessen“ = Import sagt ok ODER Bestand mit Datum (manueller Export zählt auch).
+    bruecke = bruecke_frisch(offline_meta)
+    # „gemessen“ = Import sagt ok ODER Bestand mit Datum (manueller Export zählt
+    # auch – seit 10.10.2026 mit dokumentierter Herkunft in data/offline_import.meta.json).
     measured = {
-        "views": bool(views_doc) and (views_meta.get("status") or "ok") not in ("skipped", "disabled"),
-        "clicks": (clicks_meta.get("status") or ("ok" if clicks_rows else "fehlt")) == "ok",
+        "views": bool(views_doc) and ((views_meta.get("status") or "ok")
+                                      not in ("skipped", "disabled") or bruecke),
+        "clicks": ((clicks_meta.get("status") or ("ok" if clicks_rows else "fehlt")) == "ok")
+                  or bruecke,
         "awin": bool(awin_doc),
     }
-    src = [("views", SOURCES[0][1], *_source_state(views_doc, views_meta)),
-           ("clicks", SOURCES[1][1], *_source_state(clicks_rows, clicks_meta))]
+    src = [("offline", SOURCES[0][1], *_source_state(prov_doc or {}, offline_meta)),
+           ("views", SOURCES[1][1], *_source_state(views_doc, views_meta)),
+           ("clicks", SOURCES[2][1], *_source_state(clicks_rows, clicks_meta))]
     if not umami_api_enabled:
         src = [(k, label, "disabled" if state in ("fehlt", "skipped", "disabled") else state, age)
                for k, label, state, age in src]
+    # Frische manuelle Brücke ⇒ die abgeleiteten Bestände zählen als Messung.
+    if bruecke:
+        src = [(k, label, zustand_mit_bruecke(state, True), age) for k, label, state, age in src]
     if AWIN_ENABLED:
         src.append(("awin", "Awin-Transaktionen (Publisher API)",
                     *_source_state(awin_doc, awin_meta)))
@@ -510,18 +664,28 @@ def main(argv=None):
         return state, age
     src = [(k, label, *_state_of(state, age, k)) for k, label, state, age in src]
     gaps = evaluate(src)
-    operating_boundaries = []
+    prov_info = []          # wird nach compute() mit der Tabelle gefüllt (s.u.)
+    operating_boundaries = list(prov_info)
     if not umami_api_enabled or any(state == "disabled" for _, _, state, _ in src):
         operating_boundaries.append(
             "Umami Analytics: API-Import deaktiviert (Umami Free – Klicks und Besuche werden im Umami-Dashboard erfasst)"
         )
-    source_fixes = {"views": SOURCES[0][4], "clicks": SOURCES[1][4]}
+    source_fixes = {k: SOURCES[i][4] for i, k in enumerate(("offline", "views", "clicks"))}
     if AWIN_ENABLED:
         source_fixes["awin"] = "Awin-Quelle konfigurieren oder CSV-Export importieren"
     fixes = [source_fixes[k] for k, _l, state, _a in src if state not in ("ok", "disabled")]
-    f = compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=measured)
+    f = compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=measured,
+                manual_prov=prov_doc)
+    # Info-Grenze (keine Lücke): Abrechnungstabelle zu lange nicht nachgetragen.
+    alter = f["provision"].get("monats_alter")
+    if f["provision"].get("quelle") == "provisionen-tabelle" \
+            and isinstance(alter, int) and alter > PROV_STALE_MONATE:
+        prov_info.append(f"Provisions-Tabelle: letzter befüllter Monat "
+                         f"{f['provision'].get('monat')} ist {alter} Monate her – "
+                         f"abrechnen und nachtragen (`data/provisionen/provisionen.csv`) "
+                         f"und `npm run mess:import`)")
     # Fenster ehrlich machen: die Importe schreiben ihr Zeitfenster in die Meta.
-    for meta in (clicks_meta, views_meta):
+    for meta in (clicks_meta, views_meta, offline_meta):
         if isinstance(meta, dict) and isinstance(meta.get("days"), int):
             f["window_days"] = meta["days"]
             break
@@ -530,7 +694,10 @@ def main(argv=None):
 
     prev = _prev_metrics()
     wow = _wow(_history_row(f), prev)
-    body = render(f, gaps, fixes, wow, operating_boundaries=operating_boundaries)
+    bruecke_txt = bruecken_text(src, offline_meta, umami_api_enabled)
+    body = render(f, gaps, fixes, wow, operating_boundaries=operating_boundaries,
+                  bruecke=bruecke_txt,
+                  prov_monate=(prov_doc.get("monate") if isinstance(prov_doc, dict) else None))
 
     if print_only:
         print(body)
@@ -563,11 +730,13 @@ def main(argv=None):
               f"EPC {fmt(f['raten']['epc'], 'eur')} · Messlücken: {len(gaps)}")
     try:
         from audit_log import log_event
-        v_state = next((s for k, _l, s, _a in src if k == "views"), ("unknown",))
-        c_state = next((s for k, _l, s, _a in src if k == "clicks"), ("unknown",))
-        a_state = next((s for k, _l, s, _a in src if k == "awin"), ("disabled",))
+        def _zustand(key, fallback):
+            return next((st for k, _l, st, _a in src if k == key), fallback)
         log_event(module="revenue_funnel", action="report",
-                  input={"views": v_state, "clicks": c_state, "awin": a_state},
+                  input={"views": _zustand("views", "unknown"),
+                         "clicks": _zustand("clicks", "unknown"),
+                         "offline": _zustand("offline", "unknown"),
+                         "awin": _zustand("awin", "disabled")},
                   output={"gaps": len(gaps), "clicks": f["affiliate_klicks"],
                           "revenue": f["provision"]["gesamt"]}, status="ok")
     except Exception:  # noqa: BLE001
@@ -679,6 +848,73 @@ def _selftest():
         failures.append("Betriebsgrenze (operating_boundary) wird nicht grün als INFO formatiert")
     if evaluate([("views", "V", "disabled", None), ("clicks", "K", "disabled", None)]) != []:
         failures.append("deaktivierte Quellen (disabled) dürfen nicht als Lücke gemeldet werden")
+    # --- Manuelle Brücke: zweite Messquelle, gleiche Hausregeln ---------------
+    mp = {"summe": {"abschluesse": 4, "stornos": 1, "provision_eur": 67.5},
+          "monate": ["2026-09"], "letzter_monat": "2026-09", "partner": ["CHECK24"]}
+    fm = compute({"totals": {"visits": 200, "pageviews": 300},
+                  "pages": [{"path": "/pillar/strom-sparen/", "views": 90, "visits": 60}]},
+                 [{"event": "affiliate_click", "count": 12, "article": "pillar/strom-sparen/index.md"}],
+                 {}, [], {"/pillar/strom-sparen/"},
+                 measured={"views": True, "clicks": True, "awin": False}, manual_prov=mp)
+    if fm["provision"]["gesamt"] != 67.5 or fm["provision"]["quelle"] != "provisionen-tabelle":
+        failures.append(f"manuelle Provisionstabelle wird nicht genutzt: {fm['provision']}")
+    if fm["provision"]["zeitbezug"] != "monat" or fm["transaktionen"]["antraege"] != 4:
+        failures.append(f"Zeitbezug/Anträge der manuellen Brücke falsch: {fm['provision']}")
+    if fm["transaktionen"]["stornos"] != 1 or fm["transaktionen"]["bestaetigt"] != 3:
+        failures.append(f"Storno/Abschluss-Zerlegung fehlt: {fm['transaktionen']}")
+    if fm["seiten"][0]["revenue"] is not None:
+        failures.append("Monatssumme wird auf eine Seite gebucht (erfunden) – verboten")
+    if abs(fm["raten"]["epc"] - 67.5 / 12) > 0.01:
+        failures.append(f"EPC mit manuellen Zahlen: {fm['raten']['epc']}")
+    rep_m = render(fm, [], [], [], bruecke="manuell (`scripts/offline_import.py`, Stand 2026-10-10)",
+                   prov_monate=mp["monate"] and [dict(mp, monat="2026-09")])
+    if "Abrechnungstabelle (Provision je Monat)" not in rep_m:
+        failures.append("Provisions-Tabelle fehlt im Report – Monatsbasis ist nicht belegbar")
+    if rep_m.count("Abrechnungstabelle") < 2:
+        failures.append("Provisions-Tabelle wird nicht als eigene Sektion ausgewiesen")
+    if "Abrechnungstabelle" not in rep_m or "Messbrücke:** manuell" not in rep_m:
+        failures.append("Report verschweigt Herkunft ‚Abrechnungstabelle‘ bzw. die Messbrücke")
+    if rep_m.count("*") < 3:
+        failures.append("gemischter Zeitbezug wird nicht mit Sternchen + Fußnote markiert")
+    fa = compute({"totals": {"visits": 100}}, [], {"generated": TODAY.isoformat(),
+                 "total_commission": 50.0, "total_paid": 50.0,
+                 "status_totals": {"approved": {"count": 1, "commission": 50.0}},
+                 "articles": {}}, [], {"/pillar/"},
+                 measured={"views": True, "clicks": False, "awin": True}, manual_prov=mp)
+    if fa["provision"]["quelle"] != "awin" or fa["provision"]["gesamt"] != 50.0:
+        failures.append("Awin-API wird von der manuellen Tabelle überstimmt – verboten")
+    if len(evaluate([("offline", "Manuelle Messbrücke", "ok", 0),
+                     ("views", "Besuche", "fehlt", None),
+                     ("clicks", "Klicks", "skipped", None)])) != 0:
+        failures.append("eine funktionierende Brücke lässt die Lücke der anderen offen")
+    if len(evaluate([("offline", "Manuelle Messbrücke", "alt", 30),
+                     ("views", "Besuche", "fehlt", None)])) != 2:
+        failures.append("überblendung gilt auch für ‚alt‘ – muss als Lücke bleiben")
+    g_beide = evaluate([("views", "Besuche", "skipped", None),
+                        ("clicks", "Klicks", "skipped", None),
+                        ("offline", "Manuelle Messbrücke", "fehlt", None)])
+    if len(g_beide) != 3 or "weder API-Import noch Manuell-Import" not in g_beide[-1]:
+        failures.append(f"beide Brücken leer ⇒ jede Lücke bleibt sichtbar: {g_beide}")
+    g_free = evaluate([("views", "Besuche", "disabled", None),
+                       ("clicks", "Klicks", "disabled", None),
+                       ("offline", "Manuelle Messbrücke", "fehlt", None)])
+    if len(g_free) != 1 or "Manuelle Messbrücke" not in g_free[0]:
+        failures.append(f"Umami Free ohne Manuell-Import meldet keine Lücke: {g_free}")
+    if not bruecke_frisch({"status": "ok", "written": TODAY.isoformat()}) \
+            or bruecke_frisch({"status": "ok", "written": "2026-01-01"}) \
+            or bruecke_frisch({}) or bruecke_frisch(None):
+        failures.append("bruecke_frisch() erkennt die Frist nicht")
+    if zustand_mit_bruecke("disabled", True) != "ok" \
+            or zustand_mit_bruecke("alt", True) != "alt" \
+            or zustand_mit_bruecke("fehlt", False) != "fehlt":
+        failures.append("Zustands-Korrektur der Brücke verletzt die Hausregeln")
+    if _month_age(TODAY.strftime("%Y-%m")) != 0:
+        failures.append("_month_age(aktueller Monat) ≠ 0")
+    try:
+        _month_age("2030-01")
+        failures.append("Zukunfts-Monat muss werfen (nichts erfinden)")
+    except ValueError:
+        pass
     # --- Datenqualitäts-Logik
     if evaluate([("views", "V", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
         failures.append("frische Quellen werden als Lücke gemeldet")
@@ -708,7 +944,8 @@ def _selftest():
             print("   -", x)
         return 2
     print("✅ REVENUE-FUNNEL-SELFTEST bestanden (Trichter-Rechnung, unbekannt≠0, "
-          "Ampel+Marker für den Gate, Platzierungen, Robustheit).")
+          "Ampel+Marker für den Gate, Platzierungen, manuelle Provisions-Brücke, "
+          "Robustheit).")
     return 0
 
 
