@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:linkedin:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
  son-richtig:zahl:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+DTSTAMP:20261011T225806Z
 DTSTART:20261012T054500Z
 DTEND:20261012T060000Z
 SUMMARY:LinkedIn: Gasabschlag berechnen: So planst du die Heizsaison r
@@ -22,60 +22,60 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
- die-feiertage:frage:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ die-feiertage:zahl:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261013T054500Z
 DTEND:20261013T060000Z
 SUMMARY:LinkedIn: Weihnachten Budget planen: Ohne Schulden durch die F
- eiertage (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: LinkedIn\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-plan
- en-ohne-schulden-durch-die-feiertage/
+ eiertage (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: LinkedIn\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-plane
+ n-ohne-schulden-durch-die-feiertage/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
  lanen-ohne-schulden-durch-die-feiertage/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
- sl-anschluss:nutzen:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ sl-anschluss:vergleich:2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261014T054500Z
 DTEND:20261014T060000Z
 SUMMARY:LinkedIn: Preiswert surfen: So findest du den optimalen DSL‑An
- schluss (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-fi
- ndest-du-den-optimalen-dsl-anschluss/
+ schluss (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: LinkedIn\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so
+ -findest-du-den-optimalen-dsl-anschluss/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
  findest-du-den-optimalen-dsl-anschluss/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so
- -vermeidest:takeaway:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ -vermeidest:zahl:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261015T054500Z
 DTEND:20261015T060000Z
 SUMMARY:LinkedIn: Büroausstattung steuerlich clever absetzen: So geht'
- s (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: LinkedIn\nArtike
- l: https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
- uerlich-clever-absetzen-so-vermeidest/
+ s (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: LinkedIn\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerl
+ ich-clever-absetzen-so-vermeidest/
 URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
  uerlich-clever-absetzen-so-vermeidest/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
- endert:zahl:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ endert:zitat:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261016T054500Z
 DTEND:20261016T060000Z
 SUMMARY:LinkedIn: Internet & DSL-Update: Was sich jetzt für dich änder
- t (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: LinkedIn\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-
- sich-jetzt-fuer-dich-aendert/
+ t (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was
+ -sich-jetzt-fuer-dich-aendert/
 URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
  was-sich-jetzt-fuer-dich-aendert/
 STATUS:TENTATIVE
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:vergl
  eich:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+DTSTAMP:20261011T225806Z
 DTSTART:20261019T054500Z
 DTEND:20261019T060000Z
 SUMMARY:LinkedIn: 7 Gewohnheiten für finanzielle Freiheit: Geld bewuss
@@ -97,42 +97,43 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
- erlust:frage:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ erlust:vergleich:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261020T054500Z
 DTEND:20261020T060000Z
 SUMMARY:LinkedIn: Campingurlaub planen: Budget für Platz\, Fahrt und A
- usrüstung (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: LinkedIn\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clev
- er-sparen-ohne-komfortverlust/
+ usrüstung (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: LinkedIn\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-
+ clever-sparen-ohne-komfortverlust/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
  lever-sparen-ohne-komfortverlust/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:frage:2026-10-21@fran
- ksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:vergleich:2026-10-21@
+ franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261021T054500Z
 DTEND:20261021T060000Z
 SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
- vertrag (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: LinkedIn\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+ vertrag (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: LinkedIn\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-si
+ chern/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
  hern/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
- tie-gas:frage:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ tie-gas:zitat:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261022T054500Z
 DTEND:20261022T060000Z
 SUMMARY:LinkedIn: Sicher heizen: So schützt dich eine Gaspreisgarantie
-  (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: LinkedIn\nArtikel: 
+  (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuet
  zt-dich-eine-preisgarantie-gas/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
@@ -141,17 +142,32 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
- bieterwechsel:vergleich:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261011T181004Z
+ bieterwechsel:takeaway:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
 DTSTART:20261023T054500Z
 DTEND:20261023T060000Z
 SUMMARY:LinkedIn: Internet & DSL wechseln: Praxis-Tipps – Highspeed In
- ternet (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: LinkedIn\nArtik
- el: https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechse
- ln-praxis-tipps-fuer-den-anbieterwechsel/
+ ternet (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: LinkedIn\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
 URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
  n-praxis-tipps-fuer-den-anbieterwechsel/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
+ -tarife-fuer-2026:takeaway:2026-10-26@franksfinanzcheck.de
+DTSTAMP:20261011T225806Z
+DTSTART:20261026T064500Z
+DTEND:20261026T070000Z
+SUMMARY:LinkedIn: Preisgarantie Gas: So sicherst du günstige Tarife (t
+ akeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: LinkedIn\nArtike
+ l: https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
+ -sicherst-du-dir-guenstige-tarife-fuer-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
+ -sicherst-du-dir-guenstige-tarife-fuer-2026/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

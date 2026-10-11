@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 11.10.2026 20:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 12.10.2026 00:58 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,11 +12,17 @@
 
 ## Kommende Beiträge
 
+### Mo, 12. Oktober 2026
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _thread_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Sa, 24. Oktober 2026
 - **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _takeaway_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
+- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zitat_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+### Mo, 26. Oktober 2026
+- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _frage_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 
 ## Zuletzt veröffentlicht
 
