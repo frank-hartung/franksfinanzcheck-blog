@@ -9,7 +9,7 @@
 #  über das Governance-Gate (Issue-Eskalation = eine Stimme, nicht zwei).
 #
 #  Pipeline (2×/Tag, s. Audit 30.09.): Umami-Views + CTA-Events → Umami-Affiliate-Klicks →
-#  Awin-Transaktionen (Publisher API) → Provisions-Statistik → Umsatz-Funnel.
+#  Abrechnungstabelle (Provisionen) → Umsatz-Funnel.
 #  Der Trichter-Lauf erscheint zusätzlich in der Lauf-Zusammenfassung –
 #  direkt lesbar, ohne Root-Müll (Reports sind gitignored).
 #
@@ -18,8 +18,7 @@
 #    · Token tot/API kaputt → Schritt ROT (Import kann nicht so tun, als ob).
 #    · Funnel-Lücken selbst → NIE rot; sie sind AMBER-Finding fürs Wochen-Gate.
 #
-#  Secrets: UMAMI_API_TOKEN, AWIN_API_TOKEN, AWIN_PUBLISHER_ID (Secret oder
-#  Repository-Variable). Setup in zwei Minuten: docs/UMSATZ-MESSUNG-PREMIUM.md
+#  Secrets: UMAMI_API_TOKEN (Secret). Setup in zwei Minuten: docs/UMSATZ-MESSUNG-PREMIUM.md
 # ============================================================
 name: Revenue-Import
 on:
@@ -58,7 +57,7 @@ jobs:
       - name: Selbsttests der Import-Skripte (Preflight)
         run: |
           fail=0
-          for s in umami_views umami_clicks awin_fetch awin_provisions \
+          for s in umami_views umami_clicks \
                    revenue_funnel click_chain_guard offline_import; do
             if ! python3 "scripts/$s.py" --selftest >/tmp/st_$s.log 2>&1; then
               echo "::error::Selbsttest $s fehlgeschlagen"; cat "/tmp/st_$s.log"
@@ -87,21 +86,6 @@ jobs:
         run: |
           set +e
           python3 scripts/umami_clicks.py --days 90 | tee /tmp/umami.log
-          exit ${PIPESTATUS[0]}
-
-      - name: Awin-Transaktionen per API laden
-        env:
-          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
-          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID || vars.AWIN_PUBLISHER_ID }}
-        run: |
-          set +e
-          python3 scripts/awin_fetch.py --days 62 | tee /tmp/awin_fetch.log
-          exit ${PIPESTATUS[0]}
-
-      - name: Provisions-Statistik neu berechnen
-        run: |
-          set +e
-          python3 scripts/awin_provisions.py | tee /tmp/awin.log
           exit ${PIPESTATUS[0]}
 
       - name: Umsatz-Funnel neu berechnen (Lücken = Info, nicht Rot)
@@ -147,8 +131,6 @@ jobs:
           git add data/umami_views.json data/umami_views.meta.json \
                   data/umami_ctas.json data/umami_ctas.meta.json 2>/dev/null || true
           git add data/umami_clicks.json data/umami_clicks.meta.json 2>/dev/null || true
-          git add data/awin_fetch.meta.json 2>/dev/null || true
-          git add data/awin_provisions.json data/subid_map.yaml 2>/dev/null || true
           git add data/revenue_funnel.json data/revenue_funnel_history.jsonl 2>/dev/null || true
           git add data/offline_import.meta.json data/provisionen_aggregat.json 2>/dev/null || true
           if git diff --cached --quiet; then
