@@ -1,0 +1,51 @@
+{{- /* ============================================================
+     partner_impressum – Anbieterkennzeichnung Tarifcheck
+     ------------------------------------------------------------
+     Aufruf im Impressum (ohne Parameter):
+       {{< partner_impressum >}}
+
+     WARUM DER CODE HIER LIEGT, NICHT IM MARKDOWN (11.10.2026):
+     Das Partnerprogramm verlangt genau dieses Dokument:
+       https://a.partner-versicherung.de/filestore/ad/1166/index.php?partner_id=47086
+     scripts/affiliate_shield.py würde dieselbe URL in content/*.md
+     als rohen Partnerlink auf eine /go/-Route umbiegen. Dann wäre die
+     Kennzeichnung tot. Deshalb bleibt die URL im Layout.
+
+     WARUM HÖHE, OBWOHL DAS SNIPPET KEINE HAT:
+     Ein iframe ohne Höhe ist 150 px hoch. Mit scrolling="no" wäre der
+     Rechtstext abgeschnitten und nicht erreichbar. 736 px ist der
+     geprüfte Rahmen ähnlicher Einbindungen (375 px und 1280 px);
+     schmale Viewports bekommen über CSS mehr Höhe. scrolling="no"
+     und border="0" bleiben, weil das Programm-Snippet sie so vorgibt.
+
+     Datenschutz: der Abruf passiert beim Seitenaufruf, nur hier.
+     Offenlegung: content/datenschutz/index.md, Anker
+     #partner-kennzeichnung.
+   ============================================================ */ -}}
+{{- $src := "https://a.partner-versicherung.de/filestore/ad/1166/index.php?partner_id=47086" -}}
+{{- $hinweis := "/datenschutz/#partner-kennzeichnung" | relURL -}}
+<figure class="ff-partner-impressum" data-ff-partner-impressum="tarifcheck">
+  <figcaption class="ff-partner-impressum__kicker">Angaben des Partners</figcaption>
+  <div class="ff-partner-impressum__frame-wrap">
+    <iframe
+      id="ff-partner-impressum-frame"
+      class="ff-partner-impressum__frame"
+      src="{{ $src }}"
+      title="Impressum der TARIFCHECK24 GmbH und weiterer Vermittler für Versicherungsangebote"
+      width="100%"
+      height="736"
+      scrolling="no"
+      border="0"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+  <p class="ff-partner-impressum__meta">
+    Quelle: Tarifcheck-Partnerprogramm.
+    Wenn der Rahmen leer bleibt oder Text fehlt,
+    <a href="{{ $src }}" rel="noopener noreferrer nofollow" target="_blank">Partner-Kennzeichnung direkt öffnen (Partnerseite)</a>.
+    Beim Abruf werden technische Zugriffsdaten an den Partner übermittelt.
+    <a href="{{ $hinweis }}">Datenschutzhinweis</a>
+  </p>
+  <p class="ff-partner-impressum__print-url">{{ $src }}</p>
+</figure>
+<script defer src="{{ partial "asset_url.html" "premium/ff-partner-impressum.js" }}"></script>
