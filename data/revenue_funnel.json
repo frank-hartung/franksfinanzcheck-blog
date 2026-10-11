@@ -10,9 +10,9 @@
   "affiliate_klicks": null,
   "transaktionen": {
     "antraege": null,
-    "pending": 0,
-    "bestaetigt": 0,
-    "stornos": 0,
+    "pending": null,
+    "bestaetigt": null,
+    "stornos": null,
     "quelle": null
   },
   "provision": {
