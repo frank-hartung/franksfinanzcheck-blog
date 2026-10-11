@@ -62,7 +62,7 @@ Core Web Vitals im Feld, Rankings. Dafür fehlen Zugänge (siehe Abschnitt 7).
 | Live-Artikel mit `ai_generated: true` | 15 | Kennzeichnung vorhanden |
 | Live-Artikel mit offener Redaktionsprüfung (`ausstehend`) | 6 | menschliche Freigabe fehlt dort |
 | Pillar-Verteilung live | Frugalismus 12 · Internet-DSL 11 · Strom/Gas 11 · Konto 4 · Mietwagen 4 | Mietwagen/Konto dünn |
-| Provisions-Datenlage | **keine** (CSV fehlt, Umami per Datenschutz-Entscheidung aus, Awin aus) | **kritisch** |
+| Provisions-Datenlage | **keine** (CSV fehlt, Umami aus, weil die API im Gratisplan kostenpflichtig ist, Awin aus) | **kritisch** |
 | Newsletter | noch kein echter Listenversand protokolliert, Warteschlange 5 Artikel, ältester 59 Tage | **kritisch** |
 | Social | 1 von 10 Kanälen live (Mastodon); Pinterest-Kanal laut Issue #448 geparkt | schwach |
 | Partner-Routen (`data/affiliate_ziele.yaml`) | 20: CHECK24 11 · Tarifcheck 7 · C24 Bank 2 | Konzentration |
@@ -76,14 +76,22 @@ Core Web Vitals im Feld, Rankings. Dafür fehlen Zugänge (siehe Abschnitt 7).
 - Die Provisionsdatei fehlt. Der Import-Pfad existiert (`npm run mess:vorlage`), aber niemand hat
   bisher Daten eingespielt.
 - Klick-Messung ist abgeschaltet: `data/monetization.yaml` setzt `umami_api_import_enabled: false`,
-  und die Umami-`websiteId` in `hugo.toml` ist leer, aus Datenschutzgründen. Das ist eine bewusste
-  Marken-Entscheidung und wird hier **nicht** geändert.
+  und die Umami-`websiteId` in `hugo.toml` ist leer. **Korrektur (Nutzerhinweis 11.10.2026):** Der Grund
+  ist die Kostenfrage. Die Umami-API ist im kostenfreien Plan nicht verfügbar. Die frühere Begründung
+  „aus Datenschutzgründen“ war unvollständig und wird hiermit zurückgenommen. Die Abschaltung ist daher
+  kein Datenschutz-Entscheid. Umami-Self-Hosting oder ein bezahlter Plan wären möglich, bleiben aber
+  Kostenentscheidungen. Die Ursache der leeren `websiteId` in `hugo.toml` ist im Repo nicht belegt
+  und muss vor einer Reaktivierung geklärt werden.
 - Die Ampel „Affiliate & Umsatz: 🟢“ im Cockpit ist deshalb irreführend. Grün bedeutet nur „keine
   Fehler“, nicht „Umsatz vorhanden“.
 
-**Lösungsweg ohne Tracking-Cookies:** Die /go/-Weiterleitungen laufen bereits über eigene Seiten. Sie
-können Klicks je Artikel und Route serverseitig oder über Cloudflare-Logs zählen, ohne Cookies und
-ohne Drittanbieter. Das wäre mit der Datenschutz-Linie vereinbar und sollte mit dir abgestimmt werden.
+**Lösungsweg ohne Tracking-Cookies (umgesetzt als Vorbereitung, nicht live):** Die /go/-Seiten senden
+per `navigator.sendBeacon` ein Ereignis mit Gateway-Schlüssel und Artikel-Kennung (`subid`) an einen
+eigenen Zähler auf `stats.franksfinanzcheck.de` (Cloudflare Worker + D1, kostenfreier Tarif). Es werden
+nur Tagessummen gespeichert. Keine Cookies, keine IP-Speicherung, DNT und GPC werden respektiert, ein
+Kill-Switch (`KLICKS_AUS`) ist vorgesehen. Details: `cloudflare/klick-zaehler/` und
+`docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md`. Die Einführung braucht Freigabe, Datenschutz-Prüfung
+und eine Tracking-Hinweis-Anpassung.
 
 ### 4.2 P1 – Vertrauen und Belegbarkeit
 
@@ -162,7 +170,7 @@ Behauptungen nur mit Messwert stehen lassen.
 - **Keine Live-Schaltung der zwei Entwürfe.** Unbelegte Zahlen in YMYL-Inhalten werden nicht
   veröffentlicht.
 - **Keine erfundenen Kennzahlen, Testimonials oder Auszeichnungen** in Texten oder Metadaten.
-- **Keine Aktivierung von Umami oder Awin** ohne deine Freigabe. Das sind Datenschutz- bzw.
+- **Keine Aktivierung von Umami oder Awin** ohne deine Freigabe. Das sind Kosten- bzw.
   Geschäftsentscheidungen.
 - **Keine Layout-Änderungen an der Basis.** Nach `CLAUDE.md` gehören Umbauten in eine Variante
   (`assets/css/varianten/`) mit Messung und Freigabe.

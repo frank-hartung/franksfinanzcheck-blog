@@ -1,0 +1,63 @@
+# ============================================================
+#  VORLAGE – Klick-Import aus Cloudflare D1 (NICHT aktiv)
+#  Umsetzung: nach .github/workflows/klick-import.yml kopieren, per PR.
+#  Vorher: Worker und D1 einrichten (docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md, Abschnitt 3).
+#  ------------------------------------------------------------
+#  Ablauf: täglich. Ändert nur data/klicks_eigen*.json. Öffnet einen PR.
+#  Kein Merge automatisch. Nur Lese-Token für D1 (Recht: D1 Read).
+#  Ohne Secrets endet der Lauf mit Status "nicht_konfiguriert" ohne Fehler.
+# ============================================================
+name: Klick-Import
+
+on:
+  schedule:
+    - cron: "37 5 * * *"    # täglich 05:37 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: klick-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Drift-Check Registry ↔ Worker
+        run: python3 scripts/klick_import.py --pruefe-keys
+
+      - name: D1 lesen
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_D1_DATABASE_ID: ${{ secrets.CLOUDFLARE_D1_DATABASE_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: python3 scripts/klick_import.py --tage 400
+
+      - name: PR öffnen, wenn sich Daten geändert haben
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data/klicks_eigen.json data/klicks_eigen.meta.json; then
+            echo "Keine Änderungen."; exit 0
+          fi
+          BRANCH="automation/klick-import-$(date -u +%Y%m%d)"
+          git config user.name "klick-import"
+          git config user.email "klick-import@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add data/klicks_eigen.json data/klicks_eigen.meta.json
+          git commit -m "Klick-Import $(date -u +%F)"
+          git push --force-with-lease origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "Klick-Import $(date -u +%F)" \
+            --body "Automatischer Import der eigenen /go/-Tageszähler (aggregiert). Bitte prüfen und mergen." \
+            || gh pr view "$BRANCH" --json url -q .url
