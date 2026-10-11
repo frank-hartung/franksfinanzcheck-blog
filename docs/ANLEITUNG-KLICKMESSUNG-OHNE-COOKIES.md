@@ -201,6 +201,7 @@ Für einen dauerhaften Stopp deshalb Stufe 1 oder 3 wählen.
 - [ ] Rechtsprüfung (Abschnitt 7) abgeschlossen, Datenschutzerklärung angepasst
 - [ ] D1 angelegt, `database_id` per PR eingetragen, Schema eingespielt
 - [ ] Worker deployt, `/healthz` = 200, Testklick = 204, fremde Herkunft = 403, Testzeile gelöscht
+- [ ] Löschlauf aktiv: Cron-Trigger `17 3 * * *` (wrangler.toml, Abschnitt `[triggers]`) im Dashboard unter Worker → Trigger sichtbar; Löschfrist 13 Monate, Stichtag = gleicher Kalendertag vor 13 Monaten (Europe/Berlin)
 - [ ] Rate-Limit-Regel gesetzt
 - [ ] GitHub-Secrets (3.7) angelegt
 - [ ] Erster `klick_import.py --tage 30` gegen die echte D1 gelaufen (Status `ok`). Falls Wrangler mit „D1 Read“ 403 meldet, braucht das Token zusätzlich „D1 Edit“. Dann Recht anpassen und dokumentieren.

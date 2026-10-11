@@ -103,7 +103,38 @@ export async function erfasse(request, env, now = new Date()) {
   return leer(204);
 }
 
+/**
+ * Aufbewahrungsfrist: Tageszähler werden höchstens 13 Monate gespeichert
+ * (so steht es in der Datenschutzerklärung, Abschnitt 5). Stichtag ist derselbe
+ * Kalendertag vor 13 Monaten (Europe/Berlin); gibt es ihn im Zielmonat nicht,
+ * gilt dessen letzter Tag. Zeilen mit tag < Stichtag werden gelöscht.
+ */
+export function fristStichtag(now = new Date(), monate = 13) {
+  const [j, m, t] = berlinDatum(now).split("-").map(Number);
+  const gesamt = j * 12 + (m - 1) - monate;
+  const zielJahr = Math.floor(gesamt / 12);
+  const zielMonat = (gesamt % 12) + 1;
+  const letzterTag = new Date(Date.UTC(zielJahr, zielMonat, 0)).getUTCDate();
+  const tag = Math.min(t, letzterTag);
+  return `${zielJahr}-${String(zielMonat).padStart(2, "0")}-${String(tag).padStart(2, "0")}`;
+}
+
+/**
+ * Löschlauf (Cron-Trigger in wrangler.toml). Läuft auch bei KLICKS_AUS = "1":
+ * Der Kill-Switch stoppt das Zählen, nicht die Einhaltung der Löschfrist.
+ */
+export async function bereinige(env, now = new Date()) {
+  const stichtag = fristStichtag(now);
+  const ergebnis = await env.DB.prepare("DELETE FROM klicks WHERE tag < ?")
+    .bind(stichtag)
+    .run();
+  return { stichtag, ergebnis };
+}
+
 export default {
+  async scheduled(_event, env, ctx) {
+    ctx.waitUntil(bereinige(env));
+  },
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/healthz" && request.method === "GET") {

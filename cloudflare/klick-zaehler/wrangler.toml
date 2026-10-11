@@ -22,3 +22,7 @@ database_id = "EINTRAGEN-NACH-wrangler-d1-create"
 
 [vars]
 KLICKS_AUS = "0"   # "1" = Zählung sofort aus (Notschalter, siehe Runbook)
+
+# Löschlauf der Tageszähler (Aufbewahrung 13 Monate), täglich 03:17 UTC
+[triggers]
+crons = ["17 3 * * *"]

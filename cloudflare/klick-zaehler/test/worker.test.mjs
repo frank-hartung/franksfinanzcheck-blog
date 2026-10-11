@@ -166,3 +166,43 @@ test("wrangler.toml: routes steht vor allen Tabellen (sonst wirkt die Domain-Bin
   assert.ok(ersteTabelle === -1 || routesIdx < ersteTabelle, "routes steht nach einer Tabelle");
   assert.match(toml, /pattern = "stats\.franksfinanzcheck\.de"/);
 });
+
+// --- Aufbewahrung (13 Monate) und Löschlauf -------------------------------
+
+import { fristStichtag, bereinige } from "../worker.js";
+
+test("fristStichtag: gleicher Kalendertag vor 13 Monaten (Europe/Berlin)", () => {
+  assert.equal(fristStichtag(new Date("2026-10-11T12:00:00Z")), "2025-09-11");
+  // 31.03. -> Februar: letzter Tag des Zielmonats
+  assert.equal(fristStichtag(new Date("2026-03-31T12:00:00Z")), "2025-02-28");
+  // Schaltjahr: 29.02.2028 -> 29.01.2027 existiert, 2028-02-29 -> 2027-02-28
+  assert.equal(fristStichtag(new Date("2028-02-29T12:00:00Z")), "2027-01-29");
+  // 23:30 UTC am 10.10. ist in Berlin bereits 01:30 am 11.10. -> Stichtag vom 11.
+  // (Mit UTC-Tag wäre es 2025-09-10.)
+  assert.equal(fristStichtag(new Date("2026-10-10T23:30:00Z")), "2025-09-11");
+});
+
+test("bereinige: löscht Zeilen vor dem Stichtag, auch bei KLICKS_AUS=1", async () => {
+  const db = fakeDb();
+  const env = { DB: db, KLICKS_AUS: "1" };
+  const { stichtag } = await bereinige(env, new Date("2026-10-11T12:00:00Z"));
+  assert.equal(stichtag, "2025-09-11");
+  assert.equal(db.aufrufe.length, 1);
+  assert.match(db.aufrufe[0].sql, /DELETE FROM klicks WHERE tag < \?/);
+  assert.deepEqual(db.aufrufe[0].werte, ["2025-09-11"]);
+});
+
+test("scheduled-Handler ist exportiert und stößt den Löschlauf an", async () => {
+  const db = fakeDb();
+  let wartet = null;
+  const ctx = { waitUntil(p) { wartet = p; } };
+  await worker.scheduled({ scheduledTime: Date.now() }, { DB: db }, ctx);
+  assert.ok(wartet, "waitUntil wurde nicht aufgerufen");
+  await wartet;
+  assert.equal(db.aufrufe.length, 1);
+});
+
+test("wrangler.toml: täglicher Cron-Trigger für den Löschlauf ist gesetzt", () => {
+  const toml = readFileSync(join(HIER, "..", "wrangler.toml"), "utf-8");
+  assert.match(toml, /\[triggers\][\s\S]*crons\s*=\s*\["[^"]+"\]/);
+});
