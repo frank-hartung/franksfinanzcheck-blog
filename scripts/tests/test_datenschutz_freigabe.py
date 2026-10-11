@@ -40,6 +40,12 @@ class DatenschutzQuellvertrag(unittest.TestCase):
         fehlend = sorted(h for h in hosts if h not in policy)
         self.assertEqual(fehlend, [], "Partner-Host nicht in der Datenschutzerklärung")
 
+    def test_awin_wird_nicht_eingesetzt_und_steht_so_drin(self):
+        # Betreiber-Angabe 11.10.2026: Awin wird nicht genutzt.
+        policy = read("content/datenschutz/index.md")
+        self.assertIn("Ein Affiliate-Netzwerk wie Awin setzen wir **nicht** ein", policy)
+        self.assertNotIn("Awin-Netzwerk", policy)
+
     def test_klickzaehler_beschreibung_und_cdn_aussage(self):
         # Der Beacon steht in den /go/-Seiten; die Erklärung muss ihn beschreiben.
         policy = read("content/datenschutz/index.md")
