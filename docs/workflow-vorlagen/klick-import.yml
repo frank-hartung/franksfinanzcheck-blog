@@ -36,10 +36,17 @@ jobs:
       - name: Drift-Check Registry ↔ Worker
         run: python3 scripts/klick_import.py --pruefe-keys
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Wrangler installieren (Worker-devDependency)
+        run: npm ci --no-audit --no-fund
+        working-directory: cloudflare/klick-zaehler
+
       - name: D1 lesen
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_D1_DATABASE_ID: ${{ secrets.CLOUDFLARE_D1_DATABASE_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: python3 scripts/klick_import.py --tage 400
 

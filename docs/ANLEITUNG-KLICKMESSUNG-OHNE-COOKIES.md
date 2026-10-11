@@ -62,8 +62,8 @@ npx wrangler login
 npx wrangler d1 create ff-klicks
 ```
 
-Die ausgegebene `database_id` in `wrangler.toml` eintragen (ersetzt `EINTRAGEN-NACH-wrangler-d1-create`).
-Das ist eine Änderung über einen Pull Request, nicht direkt auf `main`.
+Die ausgegebene `database_id` in `cloudflare/klick-zaehler/wrangler.toml` eintragen (ersetzt `EINTRAGEN-NACH-wrangler-d1-create`).
+Die ID ist kein Geheimnis, sie gehört ins Repo. Der Zugriff ist durch das Token geschützt. Das ist eine Änderung über einen Pull Request, nicht direkt auf `main`.
 
 **3.3 Schema anlegen**
 
@@ -110,8 +110,9 @@ speichert sie nicht im Repo. Im Datenschutz-Entwurf (Abschnitt 7) erwähnen.
 | Name | Inhalt |
 |---|---|
 | `CLOUDFLARE_ACCOUNT_ID` | Account-ID aus dem Dashboard (rechte Seitenleiste) |
-| `CLOUDFLARE_D1_DATABASE_ID` | `database_id` aus 3.2 |
 | `CLOUDFLARE_API_TOKEN` | Token mit **nur** *Account › D1 › Read* |
+
+Die Datenbank-ID steht in `wrangler.toml` (Abschnitt 3.2), nicht mehr als Secret. Der Import ruft D1 über `wrangler d1 execute --remote --json` auf (Wrangler ist devDependency des Workers, `npm ci` in `cloudflare/klick-zaehler`).
 
 Token anlegen: Dashboard → *My Profile → API Tokens → Create Custom Token*. Nur das Recht „D1 Read“.
 Die Werte legst du selbst an. Der Agent legt keine Geheimnisse an.
@@ -119,11 +120,12 @@ Die Werte legst du selbst an. Der Agent legt keine Geheimnisse an.
 **3.8 Lokaler Import-Check**
 
 ```bash
-export CLOUDFLARE_ACCOUNT_ID=… CLOUDFLARE_D1_DATABASE_ID=… CLOUDFLARE_API_TOKEN=…
+(cd cloudflare/klick-zaehler && npm ci)
+export CLOUDFLARE_ACCOUNT_ID=… CLOUDFLARE_API_TOKEN=…
 python3 scripts/klick_import.py --tage 30
 ```
 
-Ohne Zugangsdaten endet der Import mit Status `nicht_konfiguriert` und Exit 0. Das ist kein Fehler.
+Ohne Zugangsdaten oder mit noch eingetragenem Platzhalter in `wrangler.toml` endet der Import mit Status `nicht_konfiguriert` und Exit 0. Das ist kein Fehler. Schlägt der Abruf fehl (z. B. Token-Recht), steht der Grund im Status `fehler`; das Token wird dabei nicht ausgegeben.
 
 ## 4. Betrieb
 
@@ -201,6 +203,7 @@ Für einen dauerhaften Stopp deshalb Stufe 1 oder 3 wählen.
 - [ ] Worker deployt, `/healthz` = 200, Testklick = 204, fremde Herkunft = 403, Testzeile gelöscht
 - [ ] Rate-Limit-Regel gesetzt
 - [ ] GitHub-Secrets (3.7) angelegt
+- [ ] Erster `klick_import.py --tage 30` gegen die echte D1 gelaufen (Status `ok`). Falls Wrangler mit „D1 Read“ 403 meldet, braucht das Token zusätzlich „D1 Edit“. Dann Recht anpassen und dokumentieren.
 - [ ] `npm test` und beide Selbsttests grün
 - [ ] Beacon-PR gemerged, `static/go/` neu erzeugt, Gates grün (`affiliate_integrity_gate.py`)
 - [ ] Erster Import mit echten Daten, `click_attribution.py` zeigt Quelle `data/klicks_eigen.json`

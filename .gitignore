@@ -146,3 +146,6 @@ data/offline/
 # KI-Alt-Texte (08.10.2026): die Vorschlagsdatei wird atomar über eine .tmp-Datei
 # geschrieben. Bleibt sie nach einem Abbruch liegen, darf sie nie in einen Commit.
 data/alt_texte/*.tmp
+
+# Wrangler-Lokalzustand (lokale D1-Kopie, Tests)
+.wrangler/

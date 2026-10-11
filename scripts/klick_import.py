@@ -15,10 +15,15 @@ AUFRUF:
   python3 scripts/klick_import.py --selftest      # Offline-Selbsttest (ohne Netz)
 
 ZUGANG (nur in GitHub Actions bzw. lokal, nie im Repo):
-  CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_DATABASE_ID, CLOUDFLARE_API_TOKEN
+  CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN
   Token-Recht: „Account › D1 › Read“ (nur lesen).
-  Fehlt ein Wert, schreibt der Import den Status „nicht_konfiguriert“ und
-  endet mit Exit 0 – die Datenlage ist dann schlicht offen, kein Fehlalarm.
+  Die Datenbank-ID steht in cloudflare/klick-zaehler/wrangler.toml (keine Secret-Größe).
+  Der Abruf läuft über den offiziellen Wrangler-CLI (devDependency des Workers):
+  `wrangler d1 execute DB --remote --json`. Dieses Skript spricht keinen Cloudflare-
+  Endpunkt direkt an.
+  Fehlt ein Wert oder ist die database_id noch Platzhalter, schreibt der Import den
+  Status „nicht_konfiguriert“ und endet mit Exit 0 – die Datenlage ist dann schlicht
+  offen, kein Fehlalarm.
 
 AUSGABE:
   data/klicks_eigen.json       Zeilen im Format von click_attribution.py
@@ -33,21 +38,27 @@ import datetime as dt
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import tempfile
-import urllib.error
-import urllib.request
 from pathlib import Path
+from typing import Callable
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "scripts" / "check24_links.yaml"
-KEYS_MJS = ROOT / "cloudflare" / "klick-zaehler" / "gateway-keys.mjs"
+WORKER_DIR = ROOT / "cloudflare" / "klick-zaehler"
+KEYS_MJS = WORKER_DIR / "gateway-keys.mjs"
+WRANGLER_TOML = WORKER_DIR / "wrangler.toml"
 POSTS = ROOT / "content" / "posts"
 OUT_ROWS = ROOT / "data" / "klicks_eigen.json"
 OUT_META = ROOT / "data" / "klicks_eigen.meta.json"
-API = "https://api.cloudflare.com/client/v4"
+D1_BINDING = "DB"  # Binding in wrangler.toml (Datenbank ff-klicks)
+WRANGLER_TIMEOUT = 180
 ARTIKEL_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,119}$")
-SQL = "SELECT tag, go_key, artikel, anzahl FROM klicks WHERE tag >= ? ORDER BY tag, go_key, artikel"
+DATUM_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+SQL_TEMPLATE = ("SELECT tag, go_key, artikel, anzahl FROM klicks "
+                "WHERE tag >= '{von}' ORDER BY tag, go_key, artikel")
 
 
 class ImportFehler(RuntimeError):
@@ -105,34 +116,87 @@ def pillar_index(posts_dir: Path = POSTS) -> dict[str, str]:
     return index
 
 
-# ---------------------------------------------------------------- Cloudflare D1
+# ---------------------------------------------------------------- Cloudflare D1 (über Wrangler)
 
-def default_http(method: str, url: str, headers: dict, body: bytes | None):
-    req = urllib.request.Request(url, data=body, method=method, headers=headers)
+def wrangler_exe() -> str | None:
+    """Lokal installierter Wrangler des Workers, sonst der Wrangler im PATH."""
+    lokal = WORKER_DIR / "node_modules" / ".bin" / "wrangler"
+    if lokal.exists():
+        return str(lokal)
+    return shutil.which("wrangler")
+
+
+def d1_db_id_gesetzt(toml: Path = WRANGLER_TOML) -> tuple[bool, str]:
+    """True, wenn in wrangler.toml eine echte database_id eingetragen ist."""
+    if not toml.exists():
+        return False, "wrangler.toml fehlt"
+    m = re.search(r'^\s*database_id\s*=\s*"([^"]*)"', toml.read_text(encoding="utf-8"), re.M)
+    if not m or not m.group(1).strip() or m.group(1).startswith("EINTRAGEN"):
+        return False, ("database_id in cloudflare/klick-zaehler/wrangler.toml ist noch Platzhalter "
+                       "(Runbook Abschnitt 3: wrangler d1 create)")
+    return True, ""
+
+
+def sql_fuer(von: str) -> str:
+    """Baut das SQL. Wrangler kennt keine Parameter-Bindung bei --command,
+    deshalb wird das Datum vorher strikt geprüft – nur YYYY-MM-DD ist erlaubt."""
+    if not DATUM_RE.match(von):
+        raise ImportFehler(f"ungültiges Datum für die Abfrage: {von!r}")
+    return SQL_TEMPLATE.format(von=von)
+
+
+def d1_ergebnis_aus_wrangler(stdout: str) -> list[dict]:
+    """Wrangler --json liefert ein Array je Statement: [{results, success, meta}]."""
+    text = (stdout or "").strip()
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            return resp.status, json.loads(resp.read().decode("utf-8") or "{}")
-    except urllib.error.HTTPError as e:
+        antwort = json.loads(text)
+    except ValueError:
+        # Fallback: Hinweise vor dem JSON-Array ignorieren
+        idx = text.find("\n[")
         try:
-            return e.code, json.loads(e.read().decode("utf-8") or "{}")
-        except (ValueError, UnicodeDecodeError):
-            return e.code, {}
+            antwort = json.loads(text[idx + 1:]) if idx >= 0 else None
+        except ValueError:
+            antwort = None
+    if not isinstance(antwort, list) or not antwort or not isinstance(antwort[0], dict):
+        raise ImportFehler("Wrangler-Ausgabe nicht lesbar (kein JSON-Ergebnis)")
+    erstes = antwort[0]
+    if not erstes.get("success"):
+        raise ImportFehler("D1-Abfrage meldet success=false")
+    return list(erstes.get("results") or [])
 
 
-def d1_abfrage(http, konto: str, db: str, token: str, sql: str, params: list) -> list[dict]:
-    url = f"{API}/accounts/{konto}/d1/database/{db}/query"
-    body = json.dumps({"sql": sql, "params": params}).encode("utf-8")
-    status, antwort = http(
-        "POST",
-        url,
-        {"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        body,
-    )
-    if status != 200 or not antwort.get("success"):
-        fehler = antwort.get("errors") or [{"message": f"HTTP {status}"}]
-        raise ImportFehler(f"D1-Abfrage fehlgeschlagen: {fehler}")
-    ergebnisse = antwort.get("result") or []
-    return list(ergebnisse[0].get("results") or []) if ergebnisse else []
+def _kurz(text: str, geheim: list[str]) -> str:
+    for g in geheim:
+        if g:
+            text = text.replace(g, "***")
+    text = " ".join((text or "").split())
+    return text[:300]
+
+
+def wrangler_abfrage(sql: str, env: dict) -> list[dict]:
+    """Führt das SQL remote über `wrangler d1 execute` aus (ohne Shell, mit Timeout)."""
+    exe = wrangler_exe()
+    if not exe:
+        raise ImportFehler("wrangler fehlt – in cloudflare/klick-zaehler `npm ci` ausführen")
+    token = env["CLOUDFLARE_API_TOKEN"]
+    cmd = [exe, "d1", "execute", D1_BINDING, "--remote", "--json",
+           "-c", str(WRANGLER_TOML), "-y", "--command", sql]
+    umgebung = {
+        **os.environ,
+        "CLOUDFLARE_API_TOKEN": token,
+        "CLOUDFLARE_ACCOUNT_ID": env["CLOUDFLARE_ACCOUNT_ID"],
+        "WRANGLER_SEND_METRICS": "false",
+        "NO_COLOR": "1",
+    }
+    try:
+        p = subprocess.run(cmd, cwd=str(WORKER_DIR), capture_output=True, text=True,
+                           timeout=WRANGLER_TIMEOUT, env=umgebung, check=False)
+    except subprocess.TimeoutExpired as exc:
+        raise ImportFehler(f"wrangler: Zeitüberschreitung nach {WRANGLER_TIMEOUT}s") from exc
+    if p.returncode != 0:
+        raise ImportFehler(f"wrangler d1 execute beendet mit Exit {p.returncode}: "
+                           f"{_kurz(p.stderr or p.stdout, [token])}")
+    return d1_ergebnis_aus_wrangler(p.stdout)
 
 
 def berlin_heute(now: dt.datetime | None = None) -> dt.date:
@@ -189,24 +253,30 @@ def schreibe(zeilen: list[dict], meta: dict, rows_path: Path = OUT_ROWS, meta_pa
 
 # ---------------------------------------------------------------- Lauf
 
-def lauf(tage: int, http=default_http, env: dict | None = None,
-         rows_path: Path = OUT_ROWS, meta_path: Path = OUT_META, now: dt.datetime | None = None) -> dict:
+def lauf(tage: int, abfrage: Callable[[str, dict], list[dict]] = wrangler_abfrage,
+         env: dict | None = None, rows_path: Path = OUT_ROWS, meta_path: Path = OUT_META,
+         now: dt.datetime | None = None, db_pruefung: Callable[[], tuple[bool, str]] = d1_db_id_gesetzt) -> dict:
     env = os.environ if env is None else env
     now = now or dt.datetime.now(dt.timezone.utc)
     konto = env.get("CLOUDFLARE_ACCOUNT_ID", "").strip()
-    db = env.get("CLOUDFLARE_D1_DATABASE_ID", "").strip()
     token = env.get("CLOUDFLARE_API_TOKEN", "").strip()
     heute = berlin_heute(now)
     von = (heute - dt.timedelta(days=tage - 1)) if tage > 0 else dt.date(2000, 1, 1)
 
-    if not (konto and db and token):
+    if not (konto and token):
         meta = baue_meta([], von.isoformat(), "nicht_konfiguriert",
-                         "CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_D1_DATABASE_ID / CLOUDFLARE_API_TOKEN fehlen", now)
+                         "CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_API_TOKEN fehlen", now)
+        schreibe([], meta, rows_path, meta_path)
+        return meta
+
+    db_ok, db_grund = db_pruefung()
+    if not db_ok:
+        meta = baue_meta([], von.isoformat(), "nicht_konfiguriert", db_grund, now)
         schreibe([], meta, rows_path, meta_path)
         return meta
 
     try:
-        d1 = d1_abfrage(http, konto, db, token, SQL, [von.isoformat()])
+        d1 = abfrage(sql_fuer(von.isoformat()), {"CLOUDFLARE_ACCOUNT_ID": konto, "CLOUDFLARE_API_TOKEN": token})
     except ImportFehler as e:
         meta = baue_meta([], von.isoformat(), "fehler", str(e), now)
         schreibe([], meta, rows_path, meta_path)
@@ -221,8 +291,6 @@ def lauf(tage: int, http=default_http, env: dict | None = None,
 # ---------------------------------------------------------------- Selbsttest
 
 def _selftest() -> int:
-    import tempfile as tf
-
     fehler = []
     # 1) Schlüssel-Drift: Registry muss zur Worker-Liste passen (nach --bake-keys)
     if not pruefe_keys():
@@ -245,32 +313,71 @@ def _selftest() -> int:
         fehler.append("ungültiger Slug wurde nicht verworfen")
 
     # 3) Lauf ohne Zugang → Status nicht_konfiguriert, Exit-freundlich
-    with tf.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory() as tmp:
         rp, mp = Path(tmp) / "r.json", Path(tmp) / "m.json"
         meta = lauf(90, env={}, rows_path=rp, meta_path=mp)
         if meta["status"] != "nicht_konfiguriert" or json.loads(rp.read_text()) != []:
             fehler.append("ohne Zugang muss der Status nicht_konfiguriert sein")
 
-    # 4) Lauf mit Fake-API → Summen und Dateiformat
-    def fake_http(method, url, headers, body):
-        if "/d1/database/" not in url or method != "POST":
-            return 404, {}
-        return 200, {"success": True, "result": [{"results": d1, "success": True}], "errors": []}
-
-    with tf.TemporaryDirectory() as tmp:
+    # 4) Platzhalter-database_id → nicht_konfiguriert (kein Abruf)
+    with tempfile.TemporaryDirectory() as tmp:
         rp, mp = Path(tmp) / "r.json", Path(tmp) / "m.json"
-        meta = lauf(90, http=fake_http,
-                    env={"CLOUDFLARE_ACCOUNT_ID": "a", "CLOUDFLARE_D1_DATABASE_ID": "d", "CLOUDFLARE_API_TOKEN": "t"},
-                    rows_path=rp, meta_path=mp)
+        aufrufe = []
+        meta = lauf(90, abfrage=lambda s, e: aufrufe.append(s) or [],
+                    env={"CLOUDFLARE_ACCOUNT_ID": "a", "CLOUDFLARE_API_TOKEN": "t"},
+                    rows_path=rp, meta_path=mp,
+                    db_pruefung=lambda: (False, "Platzhalter"))
+        if meta["status"] != "nicht_konfiguriert" or aufrufe:
+            fehler.append("Platzhalter-database_id darf keinen Abruf auslösen")
+
+    # 5) Lauf mit Fake-Abfrage → Summen, Datum im SQL, Dateiformat
+    aufrufe_sql: list[str] = []
+
+    def fake_abfrage(sql: str, env: dict) -> list[dict]:
+        aufrufe_sql.append(sql)
+        return d1
+
+    with tempfile.TemporaryDirectory() as tmp:
+        rp, mp = Path(tmp) / "r.json", Path(tmp) / "m.json"
+        meta = lauf(90, abfrage=fake_abfrage,
+                    env={"CLOUDFLARE_ACCOUNT_ID": "a", "CLOUDFLARE_API_TOKEN": "t"},
+                    rows_path=rp, meta_path=mp, db_pruefung=lambda: (True, ""))
         if meta["status"] != "ok" or meta["summe_klicks"] != 6:
             fehler.append(f"Fake-Lauf: Status/Summe falsch ({meta.get('status')}, {meta.get('summe_klicks')})")
+        if not aufrufe_sql or "tag >= '" not in aufrufe_sql[0]:
+            fehler.append("SQL-Abfrage fehlt oder hat kein Datumsfilter")
+
+    # 6) Datumsvalidierung: keine Injektion über das Datum
+    try:
+        sql_fuer("2026-10-01' OR 1=1 --")
+        fehler.append("ungültiges Datum wurde akzeptiert")
+    except ImportFehler:
+        pass
+
+    # 7) Wrangler-Ausgabe: echtes Format (Array je Statement), Hinweiszeile davor, Fehler
+    echt = ('[\n  {\n    "results": [\n      {\n        "tag": "2026-10-10",\n        "go_key": "gas",\n'
+            '        "artikel": "x-artikel",\n        "anzahl": 3\n      }\n    ],\n'
+            '    "success": true,\n    "meta": {\n      "duration": 1\n    }\n  }\n]\n')
+    try:
+        if d1_ergebnis_aus_wrangler(echt) != [{"tag": "2026-10-10", "go_key": "gas", "artikel": "x-artikel", "anzahl": 3}]:
+            fehler.append("Wrangler-Format wird falsch gelesen")
+        if len(d1_ergebnis_aus_wrangler("Hinweis vorab\n" + echt)) != 1:
+            fehler.append("Hinweiszeile vor dem JSON bricht das Parsen")
+    except ImportFehler as exc:
+        fehler.append(f"Wrangler-Format: {exc}")
+    for kaputt in ('{"success": true}', "kein json", '[{"success": false, "results": []}]'):
+        try:
+            d1_ergebnis_aus_wrangler(kaputt)
+            fehler.append(f"kaputte Wrangler-Ausgabe akzeptiert: {kaputt!r}")
+        except ImportFehler:
+            pass
 
     if fehler:
         print("❌ KLICK-IMPORT-SELBSTTEST fehlgeschlagen:")
         for f in fehler:
             print(f"   - {f}")
         return 1
-    print("✅ KLICK-IMPORT-SELBSTTEST bestanden (Schlüssel-Drift, Aufbereitung, Status, Fake-Lauf).")
+    print("✅ KLICK-IMPORT-SELBSTTEST bestanden (Schlüssel-Drift, Aufbereitung, Status, SQL, Wrangler-Format).")
     return 0
 
 
