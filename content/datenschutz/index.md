@@ -122,7 +122,6 @@ Beim Weiterleiten übergeben wir in der Link-Adresse:
 |---|---|---|
 | **CHECK24** (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) | CHECK24-Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München | https://www.check24.de/datenschutz/ |
 | **Tarifcheck** (Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken) | Tarifcheck24 GmbH, Zollstr. 11b, 21465 Wentorf bei Hamburg | https://www.tarifcheck.de/datenschutz/ |
-| **Awin** (Vermittlungsnetzwerk) | Awin AG, Otto-Oliva-Platz 1, 10707 Berlin | https://www.awin.com/de/rechtliches |
 
 - die **Artikel-Kennung** (SubID), damit sich Abschlüsse dem Artikel zuordnen lassen,
 - **Kampagnen-Kennungen** (UTM-Parameter, z. B. `utm_source=franksfinanzcheck`, `utm_medium=affiliate`, `utm_campaign=<Kategorie>`).
@@ -283,4 +282,4 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 ## 18. Aktualität und Änderungen
 
 **Stand: 11. Oktober 2026.** Diese Erklärung beschreibt die Verarbeitungen, wie sie in der Website angelegt sind. Ändern sich Dienste, Dienstleister, Partner oder Speicherfristen, passen wir die Erklärung an.
-**Redaktioneller Stand: 11. Oktober 2026.** Diese Fassung bildet den geprüften Quellcode nach der Einbindung der Partner-Anbieterkennzeichnung im Impressum, der vorsorglichen Abschaltung von Umami und der Ergänzung der Newsletter-Löschroutine ab. Sie beschreibt nicht automatisch die bereits laufende Produktion: Vor dem Einsatz müssen Deployment, Verträge, Empfänger, Drittlandgarantien und tatsächliche Fristen durch den Betreiber überprüft und nötigenfalls hier nachgetragen werden. Ob das eingebettete Partnerdokument Cookies setzt, ist noch nicht an der Live-Antwort geprüft. Änderungen der Dienste oder des Geschäftsmodells erfordern eine erneute Prüfung.
+**Redaktioneller Stand: 11. Oktober 2026.** Diese Fassung bildet den geprüften Quellcode nach der Einbindung der Partner-Anbieterkennzeichnung im Impressum, der vorsorglichen Abschaltung der Reichweitenmessung und der Ergänzung der Newsletter-Löschroutine ab. Sie beschreibt nicht automatisch die bereits laufende Produktion: Vor dem Einsatz müssen Deployment, Verträge, Empfänger, Drittlandgarantien und tatsächliche Fristen durch den Betreiber überprüft und nötigenfalls hier nachgetragen werden. Ob das eingebettete Partnerdokument Cookies setzt, ist noch nicht an der Live-Antwort geprüft. Änderungen der Dienste oder des Geschäftsmodells erfordern eine erneute Prüfung.
