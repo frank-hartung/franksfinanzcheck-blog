@@ -1,5 +1,5 @@
-generated_at: '2026-10-10T10:07:16Z'
-day: '2026-10-10'
+generated_at: '2026-10-11T10:18:51Z'
+day: '2026-10-11'
 mode: deterministic
 teams:
   trending:
@@ -238,65 +238,55 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: DSL- und Internet-Flat günstig sichern
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:DSL- und Internet-Flat günstig sichern
-    score: 0.55
-    keywords:
-    - DSL Vergleich
-    - Internetvertrag wechseln
-    - Günstiges Internet
-    - Wechselbonus
-  - topic: Die besten Kreditkarten für Reisen
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Die besten Kreditkarten für Reisen
-    score: 0.55
-    keywords:
-    - Kreditkarte
-    - Reise
-    - Vorteile
-  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
-    score: 0.55
-    keywords:
-    - E-Auto Ladekosten
-    - Stromtarif E-Auto
-    - Wallbox sparen
-  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
+    score: 0.55
+    keywords: []
+  - topic: Die Vorteile von Frugalismus für dein Finanzbudget
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Die Vorteile von Frugalismus für dein Finanzbudget
+    score: 0.55
+    keywords: []
+  - topic: 'Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
     score: 0.55
     keywords:
-    - Neujahrsvorsätze Geld
-    - finanzielle Ziele 2027
-    - Sparziele erreichen
-    - Gewohnheiten ändern
-  - topic: Stromanbieter wechseln und bis zu 300 Euro sparen
+    - Handyvertrag kündigen
+    - Mobilfunk sparen
+    - Tarifwechsel
+  - topic: Stromfresser im Haushalt entlarven
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:Stromanbieter wechseln und bis zu 300 Euro sparen
+    source: topics:Stromfresser im Haushalt entlarven
     score: 0.55
     keywords:
-    - Stromanbieter wechseln
-    - Stromvergleich
-    - Stromkosten sparen 2026
-  - topic: 'Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
-      0'
+    - Stromfresser finden
+    - Strom sparen Tipps
+    - Energiekosten senken
+    - Standby Kosten
+  - topic: 'Versicherungen im Überblick: Was brauchst du wirklich?'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
-      0'
+    source: 'topics:Versicherungen im Überblick: Was brauchst du wirklich?'
     score: 0.55
     keywords:
-    - Zweitwagenregelung
-    - Zweitwagen günstig versichern
-    - Schadenfreiheitsklasse übertragen
-    - SF-Klasse retten
+    - Versicherungen
+    - Versicherungsvergleich
+    - Risikomanagement
+  - topic: 'Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?'
+    score: 0.55
+    keywords:
+    - Weihnachtsgeld was tun
+    - Weihnachtsgeld anlegen
+    - Weihnachtsgeld tilgen oder sparen
 live_web:
   enabled: false
   findings: []
