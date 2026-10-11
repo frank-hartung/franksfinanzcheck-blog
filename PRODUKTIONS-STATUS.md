@@ -1,15 +1,15 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-10 23:24 UTC  
+**Stand:** 2026-10-11 23:33 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-09): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 1 Tage: ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert)
+**Befund:** Letzter Publikationstag (2026-10-09): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 2 Tage: Redaktions-Standard: RS1, RS2, RS3)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-10-10 (Samstag) |
+| Heute | 2026-10-11 (Sonntag) |
 | Publikationstag heute | nein |
 | Artikel letzter Publikationstag (2026-10-09) | 2 |
-| Letzter Artikel überhaupt | 2026-10-09 (1 Tage her) |
+| Letzter Artikel überhaupt | 2026-10-09 (2 Tage her) |
 | Live-Artikel gesamt | 42 |
 | Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 2 |
