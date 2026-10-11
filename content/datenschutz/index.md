@@ -155,9 +155,9 @@ Zur Beschleunigung speichert ein Service Worker bereits geladene Schriftarten, B
 
 ---
 
-## 8. Newsletter
+## 8. Newsletter / Kontaktaufnahme
 
-Du kannst dich freiwillig über [die Anmeldeseite](/newsletter/) für den Newsletter anmelden. Wir verarbeiten deine E-Mail-Adresse, die gewählten Themen, den Zeitpunkt der Anmeldung und Bestätigung sowie IP-Adresse, Browserkennung (User-Agent) und Herkunft der Anmeldung. Die letzten drei Angaben dienen dem Nachweis der Einwilligung und dem Schutz vor Missbrauch.
+{{< newsletter_status >}} Du kannst dich freiwillig über [die Anmeldeseite](/newsletter/) für den Newsletter anmelden. Wir verarbeiten deine E-Mail-Adresse, die gewählten Themen, den Zeitpunkt der Anmeldung und Bestätigung sowie IP-Adresse, Browserkennung (User-Agent) und Herkunft der Anmeldung. Die letzten drei Angaben dienen dem Nachweis der Einwilligung und dem Schutz vor Missbrauch.
 
 - **Double-Opt-In:** Der Versand beginnt erst nach Klick auf den Bestätigungslink. Die Bestätigung ist 14 Tage lang möglich.
 - **Inhalt:** bis zu zwei E-Mails pro Woche (dienstags und freitags) mit Spartipps, Fristen, Rechnern und gekennzeichneten Partnerlinks.
@@ -169,7 +169,7 @@ Du kannst dich freiwillig über [die Anmeldeseite](/newsletter/) für den Newsle
   - Unbestätigte Anmeldungen werden nach Ablauf der Bestätigungsfrist (14 Tage) technisch spätestens nach 15 Tagen entfernt.
   - Der Nachweis der Anmeldung (E-Mail-Adresse, IP-Adresse, User-Agent und Zeitpunkte) wird bis zu drei Jahre gespeichert, soweit er zur Abwehr von Ansprüchen erforderlich ist.
   - IP-basierte Zähler für das Anmelde-Limit verfallen nach 15 Minuten.
-- **Empfänger und Verarbeitung:** Das Anmeldeformular läuft über `abos.franksfinanzcheck.de`, einen Cloudflare Worker. Die Anmeldedaten liegen im Cloudflare Workers KV. Für den Versand stößt der Worker GitHub-Actions-Läufe an. Der Versand erfolgt über den Dienst **Resend**, der die E-Mails zustellt. Dabei können Daten in Drittländern verarbeitet werden (siehe Abschnitt 12).
+- **Empfänger und Verarbeitung:** Das Anmeldeformular läuft über `abos.franksfinanzcheck.de`, einen Cloudflare Worker. Die Anmeldedaten liegen im Cloudflare Workers KV. Für den Versand stößt der Worker GitHub-Actions-Läufe an. Der Versand erfolgt über den Dienst **Resend**, der die E-Mails zustellt. Dabei können Daten in Drittländern verarbeitet werden (siehe Abschnitt 12). Die geltenden Verträge, Datenstandorte und Logfristen für Cloudflare und Resend sind anhand der Betreiberkonten gesondert zu überprüfen; eine ausschließliche EU-Speicherung wird nicht zugesichert.
 
 **Kontakt per E-Mail:** Wenn du uns schreibst, verarbeiten wir deine Angaben (E-Mail-Adresse, ggf. Name, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage. Die Daten löschen wir, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
 
@@ -187,7 +187,7 @@ Unter jedem Ratgeber kannst du mit „Ja“ oder „Nein“ abstimmen. Dabei sen
 
 ## 10. Website-Suche
 
-Die Suche läuft im Browser. Suchbegriffe werden nicht an einen Suchdienst übermittelt und nicht als Suchverlauf gespeichert. Der Browser lädt dafür statische Indexdateien von unserer Website.
+Die Suche läuft im Browser. Suchbegriffe werden nicht an einen Suchdienst übermittelt und nicht als Suchhistorie gespeichert. Der Browser lädt dafür statische Indexdateien von unserer Website.
 
 ---
 
