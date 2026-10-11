@@ -23,10 +23,31 @@ class DatenschutzQuellvertrag(unittest.TestCase):
         for datei in ("layouts/baseof.html", "layouts/_partials/extend_footer.html",
                       "layouts/_partials/deferred_scripts.html", "layouts/_partials/extend_head.html"):
             self.assertNotIn("site.Params.umami", read(datei), datei)
-        # Rechtstext wird hier nicht geändert: er muss die Abschaltung weiterhin korrekt beschreiben.
+        # Rechtstext: Umami darf darin nicht mehr vorkommen, und die Aussage
+        # „keine Analyse-Cookies“ muss stehen.
         policy = read("content/datenschutz/index.md")
-        self.assertIn("Reichweitenmessung mit Umami deaktiviert", policy)
+        self.assertNotIn("umami", policy.lower())
+        self.assertIn("Wir setzen keine Cookies für Analyse", policy)
         self.assertNotIn("Aktuell aktiv ist der cookieless-Modus", policy)
+
+    def test_partner_hosts_stehen_in_der_datenschutzerklaerung(self):
+        # Jeder Weiterleitungs-Host aus der Link-Registry muss offengelegt sein.
+        import re
+        registry = read("scripts/check24_links.yaml")
+        policy = read("content/datenschutz/index.md")
+        hosts = set(re.findall(r"https?://([a-z0-9.-]+)/", registry))
+        self.assertTrue(hosts, "keine Hosts in der Registry gefunden")
+        fehlend = sorted(h for h in hosts if h not in policy)
+        self.assertEqual(fehlend, [], "Partner-Host nicht in der Datenschutzerklärung")
+
+    def test_klickzaehler_beschreibung_und_cdn_aussage(self):
+        # Der Beacon steht in den /go/-Seiten; die Erklärung muss ihn beschreiben.
+        policy = read("content/datenschutz/index.md")
+        self.assertIn("stats.franksfinanzcheck.de", policy)
+        self.assertIn("keine IP-Adresse", policy)
+        self.assertIn("13 Monate", policy)
+        # Die Website liegt nach der DNS-Prüfung vom 11.10.2026 auf GitHub Pages ohne Cloudflare-Proxy.
+        self.assertNotIn("Cloudflare-CDN", policy)
 
     def test_kein_umami_loader_und_altcookies_werden_geloescht(self):
         loader = read("layouts/_partials/deferred_scripts.html")
