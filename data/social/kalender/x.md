@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 10.10.2026 22:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.10.2026 13:27 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,12 +13,10 @@
 ## Kommende Beiträge
 
 ### So, 11. Oktober 2026
-- **08:45** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
-- **13:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
-- **19:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _thread_ · Launch  
+- **13:15** ⚪ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
+- **19:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Mo, 12. Oktober 2026
 - **08:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
@@ -104,12 +102,15 @@
 - **19:15** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 ### Sa, 24. Oktober 2026
-- **08:45** ⏳ Finanzieller Puffer: Wie viel Notgroschen ist genug? — _thread_ · Launch  
+- **08:45** ⏳ Finanzieller Puffer: Wie viel Notgroschen ist genug? — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/
-- **13:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _nutzen_ · Launch  
+- **13:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
-- **19:15** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _nutzen_ · Launch  
+- **19:15** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
+### So, 25. Oktober 2026
+- **08:45** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _thread_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
 
 ## Zuletzt veröffentlicht
 

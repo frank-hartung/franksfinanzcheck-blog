@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 10.10.2026 22:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.10.2026 13:27 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -13,13 +13,11 @@
 ## Kommende Beiträge
 
 ### So, 11. Oktober 2026
-- **08:15** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
-- **12:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
-### Mo, 12. Oktober 2026
-- **08:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _mythos_ · Launch  
+- **18:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
+### Mo, 12. Oktober 2026
+- **08:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 - **12:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### Di, 13. Oktober 2026
@@ -78,10 +76,15 @@
 - **12:15** ⏳ Kleine Beträge, große Wirkung: Frugalismus für den Einstieg — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
 ### Sa, 24. Oktober 2026
-- **08:15** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _frage_ · Launch  
+- **08:15** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
-- **12:15** ⏳ Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler — _mythos_ · Launch  
+- **12:15** ⏳ Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
+### So, 25. Oktober 2026
+- **08:15** ⏳ Günstig durch den Winter: Heizungs-Check im Spätsommer — _mythos_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
+- **12:15** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
 
 ## Zuletzt veröffentlicht
 

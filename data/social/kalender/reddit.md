@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 10.10.2026 22:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.10.2026 13:27 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,7 +12,12 @@
 
 ## Kommende Beiträge
 
-_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
+### So, 11. Oktober 2026
+- **14:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+### So, 25. Oktober 2026
+- **14:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 
 ## Zuletzt veröffentlicht
 

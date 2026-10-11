@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 10.10.2026 22:35 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.10.2026 13:27 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -13,35 +13,35 @@
 ## Kommende Beiträge
 
 ### Mo, 12. Oktober 2026
-- **07:45** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
+- **07:45** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Di, 13. Oktober 2026
 - **07:45** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Mi, 14. Oktober 2026
-- **07:45** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
-### Do, 15. Oktober 2026
-- **07:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _vergleich_ · Launch  
+- **07:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
-### Fr, 16. Oktober 2026
-- **07:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _zahl_ · Launch  
+### Do, 15. Oktober 2026
+- **07:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
-### Mo, 19. Oktober 2026
-- **07:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zitat_ · Launch  
+### Fr, 16. Oktober 2026
+- **07:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
-### Di, 20. Oktober 2026
-- **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _frage_ · Launch  
+### Mo, 19. Oktober 2026
+- **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
-### Mi, 21. Oktober 2026
-- **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _takeaway_ · Launch  
+### Di, 20. Oktober 2026
+- **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-### Do, 22. Oktober 2026
-- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Launch  
+### Mi, 21. Oktober 2026
+- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-### Fr, 23. Oktober 2026
+### Do, 22. Oktober 2026
 - **07:45** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+### Fr, 23. Oktober 2026
+- **07:45** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _zahl_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 
 ## Zuletzt veröffentlicht
 

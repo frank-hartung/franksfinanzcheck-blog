@@ -673,4 +673,8 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-10T22:35:30.923613+02:00'
+- at: '2026-10-11T13:27:45.241802+02:00'
+  channel: mastodon
+  slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
+updated_at: '2026-10-11T13:27:51.323883+02:00'
