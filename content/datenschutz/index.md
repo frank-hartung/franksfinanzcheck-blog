@@ -118,6 +118,11 @@ Die Partnerlinks führen direkt auf die Adressen der genannten Partner.
 ### Was beim Klick übergeben wird
 
 Beim Weiterleiten übergeben wir in der Link-Adresse:
+| Partner | Anbieter (Verantwortlicher) | Datenschutzerklärung |
+|---|---|---|
+| **CHECK24** (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) | CHECK24-Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München | https://www.check24.de/datenschutz/ |
+| **Tarifcheck** (Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken) | Tarifcheck24 GmbH, Zollstr. 11b, 21465 Wentorf bei Hamburg | https://www.tarifcheck.de/datenschutz/ |
+| **Awin** (Vermittlungsnetzwerk) | Awin AG, Otto-Oliva-Platz 1, 10707 Berlin | https://www.awin.com/de/rechtliches |
 
 - die **Artikel-Kennung** (SubID), damit sich Abschlüsse dem Artikel zuordnen lassen,
 - **Kampagnen-Kennungen** (UTM-Parameter, z. B. `utm_source=franksfinanzcheck`, `utm_medium=affiliate`, `utm_campaign=<Kategorie>`).
@@ -132,11 +137,26 @@ Wir erhalten von den Partnern Abrechnungsinformationen zu Provisionen. Welche An
 
 **Rechtsgrundlage unserer Verlinkung:** Art. 6 Abs. 1 lit. f DSGVO (Finanzierung des redaktionellen Angebots). Für Cookies auf den Partnerseiten holt der jeweilige Anbieter die nötige Einwilligung ein. Unsere Website erteilt dafür keine Einwilligung.
 
+<a id="partner-kennzeichnung"></a>
+
+### Eingebettete Anbieterkennzeichnung im Impressum
+
+Auf der Seite [Impressum](/impressum/) wird die Anbieterkennzeichnung des Tarifcheck-Partnerprogramms als eingebettetes Dokument geladen. Der Browser ruft dafür beim Seitenaufruf ein Dokument von a.partner-versicherung.de ab (Partner-ID 47086). Dabei werden technische Zugriffsdaten an diesen Server übermittelt, insbesondere IP-Adresse, Zeitpunkt, Browserkennung und die Herkunft des Abrufs.
+
+Ob der Anbieter dabei Cookies setzt, weitere Empfänger beteiligt oder Daten außerhalb der EU verarbeitet, ist anhand der Partnerunterlagen zu prüfen. Diese Erklärung behauptet das nicht.
+
+Zweck: die vom Partnerprogramm geforderte, stets aktuelle Kennzeichnung der Unternehmen, die für Vergleichsformulare und die Vermittlung der darüber angefragten Versicherungen zuständig sind. Die Einbindung erfolgt nur auf der Impressumsseite, nicht auf Artikeln, Werkzeugen oder der Startseite.
+
+Rechtsgrundlage unserer Einbindung: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer vollständigen Anbieterkennzeichnung und an der Einhaltung der Programmbedingungen). Für ein Speichern oder Auslesen auf deinem Endgerät durch den Partner ist § 25 TDDDG eigenständig zu prüfen. Eine Einwilligung ist erforderlich, soweit keine Ausnahme greift. Ob eine Ausnahme greift, ist an der konkreten Technik des Dokuments noch nicht geprüft.
+
+Die Kennzeichnung lässt sich auch direkt beim Partner öffnen, über den Link unter dem Dokument im Impressum.
+
 ---
 
 ## 7. Cookies und Speicher auf deinem Gerät
 
 **Wir setzen keine Cookies für Analyse, Reichweitenmessung oder Werbung.** Frühere Einwilligungs-Cookies (`ff_cookie_consent` und `ff_analytics_consent_v2`) aus der Zeit vor der Entfernung der Reichweitenmessung löscht die Website beim Besuch automatisch. Die Partnerseiten können nach einem Klick eigene Cookies setzen (siehe Abschnitt 6).
+Derzeit setzen wir **kein Analytics-Consent-Cookie** und zeigen keinen Analyse-Banner: Die Reichweitenmessung ist abgeschaltet. Ein noch vorhandenes früheres `ff_cookie_consent`-Cookie wird beim nächsten Besuch durch die Website gelöscht. Externe Partner können eigene Speichertechniken einsetzen, sobald du einen Partnerlink anklickst. Zusätzlich ruft die Impressumsseite ohne weiteren Klick das Kennzeichnungsdokument des Tarifcheck-Partnerprogramms ab; das steht in Abschnitt 4. Unsere Website kann die Einstellungen der Partner nicht verwalten.
 
 Auf deinem Gerät können folgende lokale Speicherwerte liegen. Sie werden nur gesetzt, wenn du die jeweilige Funktion nutzt, und bleiben im Browser. Wir übertragen sie nicht an uns oder Dritte.
 
@@ -263,3 +283,4 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 ## 18. Aktualität und Änderungen
 
 **Stand: 11. Oktober 2026.** Diese Erklärung beschreibt die Verarbeitungen, wie sie in der Website angelegt sind. Ändern sich Dienste, Dienstleister, Partner oder Speicherfristen, passen wir die Erklärung an.
+**Redaktioneller Stand: 11. Oktober 2026.** Diese Fassung bildet den geprüften Quellcode nach der Einbindung der Partner-Anbieterkennzeichnung im Impressum, der vorsorglichen Abschaltung von Umami und der Ergänzung der Newsletter-Löschroutine ab. Sie beschreibt nicht automatisch die bereits laufende Produktion: Vor dem Einsatz müssen Deployment, Verträge, Empfänger, Drittlandgarantien und tatsächliche Fristen durch den Betreiber überprüft und nötigenfalls hier nachgetragen werden. Ob das eingebettete Partnerdokument Cookies setzt, ist noch nicht an der Live-Antwort geprüft. Änderungen der Dienste oder des Geschäftsmodells erfordern eine erneute Prüfung.

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 11.10.2026 13:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.10.2026 20:10 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,9 +13,9 @@
 ## Kommende Beiträge
 
 ### Sa, 24. Oktober 2026
-- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _mythos_ · Evergreen  
+- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _takeaway_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _frage_ · Evergreen  
+- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
@@ -40,6 +40,7 @@
 - 🚫 08.10. 07:30 · 7 gewohnheiten fuer finanzielle freiheit · Artikel nicht mehr im Bestand
 - 🚫 09.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 11.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
+- 🚫 11.10. 20:00 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*

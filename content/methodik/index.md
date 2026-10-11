@@ -176,7 +176,7 @@ Damit FranksFinanzcheck dauerhaft kostenfrei und ohne Bezahlschranken für alle 
 
 - **Keine individuelle Rechts- oder Steuerberatung:** Unsere Leitfäden bieten praxisnahe Orientierung und sorgfältig recherchierte Allgemein-Informationen, ersetzen jedoch keine persönliche Rechts- oder Finanzberatung.
 - **Keine Schein-Rankings:** Wir verkaufen keine redaktionellen Testsiege an den Meistbietenden – und wir erfinden keine Gewichtungs-Prozente, die Objektivität nur simulieren.
-- **Kein Tracking-Missbrauch:** Wir respektieren deine Privatsphäre. Die Website nutzt keine zustimmungspflichtigen Werbetracker von Drittanbietern.
+- **Kein Tracking-Missbrauch:** Wir respektieren deine Privatsphäre. Die Website nutzt keine zustimmungspflichtigen Werbetracker von Drittanbietern. Die Anbieterkennzeichnung im Impressum wird vom Partner geladen; was dabei technisch passiert, steht in der [Datenschutzerklärung](/datenschutz/#partner-kennzeichnung).
 
 ---
 

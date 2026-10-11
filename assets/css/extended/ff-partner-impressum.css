@@ -1,0 +1,149 @@
+/* ============================================================
+   Anbieterkennzeichnung im Impressum (Tarifcheck-Partnerprogramm)
+   Ruhige Rechtsfläche, kein Werbekasten.
+   Höhe: Attribut 736 px als Fallback, hier die responsive Fläche.
+   scrolling="no" schneidet ab, was nicht in den Rahmen passt.
+   ============================================================ */
+.ff-partner-impressum {
+  margin: 0.5rem 0 1.75rem;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--ff-border-card, rgba(14, 90, 67, 0.2));
+  border-top: 3px solid var(--ff-emerald, #0E5A43);
+  border-radius: var(--ff-radius-md, 12px);
+  background: var(--ff-surface, #fff);
+}
+
+.ff-partner-impressum__kicker {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--ff-emerald, #0E5A43);
+}
+
+.ff-partner-impressum__frame-wrap {
+  overflow: hidden;
+  border: 1px solid rgba(14, 90, 67, 0.12);
+  border-radius: var(--ff-radius-sm, 8px);
+  background: #fff;
+}
+
+.ff-partner-impressum__frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 46rem;
+  min-height: 44rem;
+  border: 0;
+  background: #fff;
+  color-scheme: light;
+}
+
+.ff-partner-impressum__frame:focus-visible {
+  outline: 3px solid var(--ff-yellow, #FFB300);
+  outline-offset: 3px;
+}
+
+.ff-partner-impressum__meta {
+  margin: 12px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ff-text-muted, #55625C);
+}
+
+.ff-partner-impressum__meta a {
+  font-weight: 600;
+  text-underline-offset: 0.16em;
+}
+
+/* Die gelbe Affiliate-Karte in custom.css trifft jeden Absatz mit einem
+   direkten Partnerlink. Diese Kennzeichnung ist kein CTA. Die Selektoren
+   sind absichtlich spezifischer als `.post-content a[href*="partner-versicherung.de"]`. */
+.post-content .ff-partner-impressum p.ff-partner-impressum__meta,
+.post-content .ff-partner-impressum p.ff-partner-impressum__meta:has(> a[href*="partner-versicherung.de"]) {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 12px 0 0;
+  max-width: none;
+  text-align: start;
+  text-wrap: pretty;
+}
+
+.post-content .ff-partner-impressum p.ff-partner-impressum__meta > a[href*="partner-versicherung.de"],
+.post-content .ff-partner-impressum a[href*="partner-versicherung.de"] {
+  display: inline;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: var(--link-color, var(--ff-emerald, #0E5A43));
+  border-radius: 0;
+  font-weight: 600;
+  line-height: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+  text-wrap: pretty;
+  box-shadow: none;
+  transform: none;
+  gap: 0;
+  max-width: none;
+}
+
+.post-content .ff-partner-impressum a[href*="partner-versicherung.de"]:hover,
+.post-content .ff-partner-impressum a[href*="partner-versicherung.de"]:active {
+  background: none;
+  color: var(--link-hover, var(--ff-emerald-dark, #0A4634));
+  box-shadow: none;
+  transform: none;
+}
+
+.ff-partner-impressum__print-url {
+  display: none;
+}
+
+:root[data-theme="dark"] .ff-partner-impressum {
+  border-top-color: var(--ff-emerald-bright, #7FD1B4);
+}
+
+:root[data-theme="dark"] .ff-partner-impressum__kicker {
+  color: var(--ff-emerald-bright, #7FD1B4);
+}
+
+:root[data-theme="dark"] .ff-partner-impressum__frame:focus-visible {
+  outline-color: var(--ff-accent-2, #FFD15A);
+}
+
+@media (max-width: 420px) {
+  .ff-partner-impressum {
+    padding: 14px 12px 12px;
+  }
+
+  .ff-partner-impressum__frame {
+    height: 56rem;
+    min-height: 52rem;
+  }
+}
+
+@media print {
+  .ff-partner-impressum {
+    border: 1px solid #777;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .ff-partner-impressum__frame-wrap {
+    display: none;
+  }
+
+  .ff-partner-impressum__print-url {
+    display: block;
+    margin: 8px 0 0;
+    font-size: 10pt;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+}

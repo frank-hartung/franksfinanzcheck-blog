@@ -5,34 +5,4 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
-BEGIN:VEVENT
-UID:reddit:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-v
- ermeidest:takeaway:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261011T112752Z
-DTSTART:20261011T121500Z
-DTEND:20261011T123000Z
-SUMMARY:Reddit: Büroausstattung steuerlich clever absetzen: So geht's 
- (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steue
- rlich-clever-absetzen-so-vermeidest/
-URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
- uerlich-clever-absetzen-so-vermeidest/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:reddit:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaiso
- n-richtig:takeaway:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261011T112752Z
-DTSTART:20261025T131500Z
-DTEND:20261025T133000Z
-SUMMARY:Reddit: Gasabschlag berechnen: So planst du die Heizsaison ric
- htig (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-
- so-planst-du-die-heizsaison-richtig/
-URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
- n-so-planst-du-die-heizsaison-richtig/
-STATUS:TENTATIVE
-END:VEVENT
 END:VCALENDAR

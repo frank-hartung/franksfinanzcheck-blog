@@ -11,6 +11,32 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Eintrag 2026-10-11 · Tarifcheck-Anbieterkennzeichnung im Impressum
+
+| | |
+|---|---|
+| **Frist-ID** | keine (Umsetzung einer Programm-Vorgabe, kein Fristen-Eintrag) |
+| **Kategorie** | Anbieterkennzeichnung / Datenschutz |
+| **Ergebnis** | iframe des Tarifcheck-Partnerprogramms im Impressum, Datenschutzhinweis ergänzt |
+
+Das Partnerprogramm verlangt die Einbindung von
+`a.partner-versicherung.de/filestore/ad/1166/` mit der Partner-ID 47086.
+Das Snippet allein wäre 150 px hoch und mit `scrolling="no"` abgeschnitten.
+Es liegt deshalb in `layouts/shortcodes/partner_impressum.html` (nicht im
+Markdown, damit der Affiliate-Shield die URL nicht auf eine `/go/`-Route
+umbiegt), mit Titel, ausreichender Höhe, Fallback-Link und Hinweis auf den
+Datenabruf.
+
+Die Datenschutzerklärung nennt den Abruf beim Seitenaufruf, die Rechtsgrundlage
+Art. 6 Abs. 1 lit. f DSGVO und die offene Prüfung zu Cookies und § 25 TDDDG.
+Eine Einwilligungs-Wand vor dem Dokument wurde nicht gesetzt: die Kennzeichnung
+soll im Impressum sichtbar sein. Ob das Dokument Cookies setzt, ist an der
+Live-Antwort noch nicht geprüft.
+
+Dies ist eine dokumentierte Umsetzung, keine Rechtsberatung.
+
+---
+
 ## Eintrag 2026-10-10 · BFSG-Scope-Bewertung
 
 | | |

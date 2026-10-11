@@ -1,6 +1,6 @@
 ---
 title: "Impressum"
-description: "Impressum gemäß § 5 DDG (Digitale-Dienste-Gesetz) und § 18 Abs. 2 MStV"
+description: "Impressum gemäß § 5 DDG und § 18 Abs. 2 MStV, mit Anbieterkennzeichnung für vermittelte Versicherungsangebote"
 draft: false
 showToc: false
 ---
@@ -26,11 +26,19 @@ Deutschland
 
 ---
 
+## Verantwortliche für vermittelte Versicherungsangebote
+
+Für Vergleichsformulare und die Vermittlung der darüber angefragten Versicherungen gelten abweichende Verantwortlichkeiten. Zuständig sind die dort genannten Unternehmen, nicht der oben genannte Betreiber dieser Website. Diese Seite lädt die Angaben direkt vom Tarifcheck-Partnerprogramm, damit die Kennzeichnung aktuell bleibt.
+
+{{< partner_impressum >}}
+
+---
+
 ## Hinweis zu Affiliate-Links (Transparenz)
 
 Diese Website nimmt am **CHECK24-Partnerprogramm** teil sowie am Partnerprogramm von **Tarifcheck** für Versicherungsvergleiche. Wenn Besucher über einen auf dieser Website platzierten Affiliate-Link zu CHECK24 oder Tarifcheck gelangen und dort einen Vertrag abschließen, ein Produkt buchen oder kaufen, erhält der Betreiber dieser Website eine Provision. **Für dich als Besucher entstehen dadurch keine Mehrkosten.**
 
-Alle Affiliate-Links sind als Werbung gekennzeichnet. Die redaktionellen Inhalte dieser Website entstehen unabhängig von den Partnerprogrammen; die Auswahl und Bewertung der Themen wird durch die Provisionsmöglichkeit nicht beeinflusst.
+Alle Affiliate-Links sind als Werbung gekennzeichnet. Die redaktionellen Inhalte dieser Website entstehen unabhängig von den Partnerprogrammen; die Auswahl und Bewertung der Themen wird durch die Provisionsmöglichkeit nicht beeinflusst. Welche Unternehmen für die vermittelten Versicherungsangebote verantwortlich sind, steht im Abschnitt direkt darüber.
 
 ---
 
@@ -64,4 +72,4 @@ Wir sind nicht bereit und nicht verpflichtet, an Streit­beilegungs­verfahren v
 
 ---
 
-*Stand: 30. August 2026*
+*Stand: 11. Oktober 2026*
