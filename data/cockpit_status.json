@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-10T23:27:08Z",
+  "generated": "2026-10-11T23:36:26Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -28,7 +28,7 @@
     "Affiliate & Umsatz": {
       "level": "gruen",
       "lines": [
-        "in Ordnung (3 Kennzahl(en) noch ohne Datenlage)"
+        "in Ordnung (2 Kennzahl(en) noch ohne Datenlage)"
       ],
       "sources": [
         "data/governance_status.json",
@@ -54,8 +54,8 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.3 Tag(en)",
-        "3 Fehlversuch(e) in den letzten 14 Tagen"
+        "letzter erfolgreicher Post vor 1.3 Tag(en)",
+        "5 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -68,7 +68,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 59 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 60 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",

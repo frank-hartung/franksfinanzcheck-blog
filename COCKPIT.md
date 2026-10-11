@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-10-10 23:27 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-10-11 23:36 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -10,7 +10,7 @@
 |---|---|---|
 | Content-Pipeline | 🔴 | 1 Prüfpunkt(e) auffällig (lesbarkeit) |
 | SEO & Technik | 🔴 | 1 Prüfpunkt(e) auffällig (live-policy) |
-| Affiliate & Umsatz | 🟢 | in Ordnung (3 Kennzahl(en) noch ohne Datenlage) |
+| Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
 | Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
 | Newsletter | 🔴 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
@@ -33,7 +33,7 @@ Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTI
 Quellen: `data/governance_status.json`
 
 ### Affiliate & Umsatz — 🟢 GRÜN
-- in Ordnung (3 Kennzahl(en) noch ohne Datenlage)
+- in Ordnung (2 Kennzahl(en) noch ohne Datenlage)
 
 Quellen: `data/governance_status.json`, `AFFILIATE-INTEGRITY-REPORT.md`, `AFFILIATE-INTENT-REPORT.md`
 
@@ -47,14 +47,14 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 0.3 Tag(en)
-- 3 Fehlversuch(e) in den letzten 14 Tagen
+- letzter erfolgreicher Post vor 1.3 Tag(en)
+- 5 Fehlversuch(e) in den letzten 14 Tagen
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 59 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 60 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 
