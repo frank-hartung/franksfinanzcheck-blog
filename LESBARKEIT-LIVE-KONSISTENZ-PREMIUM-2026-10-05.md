@@ -1,10 +1,11 @@
 # Lesbarkeit & Live-Konsistenz – Premium-Instandsetzung vom 05.10.2026
 
 > **Korrekturvermerk (11.10.2026):** Die Artikel `2026-10-05-budget-app-2026-…` und
-> `2026-10-05-oekostrom-anbieter-wechseln-…` sind auf `main` **nicht** vorhanden und waren
-> nie live (Live-Policy meldet HTTP 404). Die Texte liegen nur als unveröffentlichte Entwürfe
-> (`draft: true`) auf dem Branch `arena/01a10c61-franksfinanzcheck-blog`; dort ist „noch nie
-> faktengeprüft“ vermerkt. Die Aussage „behoben“ und „live“ im Abschnitt 1 (Tabelle) und
+> `2026-10-05-oekostrom-anbieter-wechseln-…` waren am 05.10. nur als Entwürfe (`draft: true`) auf
+> `main` (Commit `c029574b`), wurden um 17:35 UTC durch `c56382b2` entfernt und sind heute auf
+> `main` **nicht** vorhanden (Live-Policy meldet HTTP 404). Sie waren nie live. Die Texte liegen nur
+> noch auf dem Branch `arena/01a10c61-franksfinanzcheck-blog`; dort ist „noch nie faktengeprüft“
+> vermerkt. Die Aussage „behoben“ und „live“ im Abschnitt 1 (Tabelle) und
 > im Ergebnis-Abschnitt gilt für diese beiden Artikel deshalb **nicht**. Details:
 > `AFFILIATE-MASTERPLAN-PREMIUM-2026-10-11.md`, Abschnitt 4.2.
 

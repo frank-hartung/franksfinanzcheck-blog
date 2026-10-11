@@ -92,9 +92,12 @@ ohne Drittanbieter. Das wäre mit der Datenschutz-Linie vereinbar und sollte mit
 - `2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben`
 - `2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf`
 
-Beide sind auf `main` nicht vorhanden. Die Dateien liegen nur auf dem Branch
-`arena/01a10c61-franksfinanzcheck-blog` (Merge #592). Dort sind sie `draft: true` mit dem
-Vermerk *„Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg“*.
+Auf `main` sind sie nicht mehr vorhanden. Die Historie zeigt: Commit `c029574b` (05.10., 10:46 UTC)
+hat sie als `draft: true` auf `main` gebracht, `c56382b2` (05.10., 17:35 UTC, „content: unabhängige
+Redaktionsreserve auffüllen“) hat sie wieder entfernt. Sie waren auf `main` also nie live
+(`draft: false`). Der Live-Policy-Befund „HTTP 404“ passt dazu. Die Dateien existieren nur noch auf dem
+Branch `arena/01a10c61-franksfinanzcheck-blog`. Dort sind sie `draft: true` mit dem Vermerk
+*„Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg“*.
 Im Ökostrom-Text stehen unbelegte Zahlen wie „spart im Schnitt 7 Prozent“, „100 bis 300 € im
 Jahr“ und „5 bis 10 Cent je kWh“. Ein Live-Schalten hätte Falschangaben in einem YMYL-Thema
 veröffentlicht. Die Gates haben das richtig verhindert.
