@@ -198,7 +198,7 @@ def _render(per_article, per_pillar, per_go, source):
               "2. **Niedrige = Nachfrage-Lücke:** Themen mit wenig Klicks, aber viel",
               "   Traffic → Anzeige-Problem statt Content-Problem (CTA platzieren).",
               "3. **Datenpflege:** `data/click_stats.json` speist die Scorecard;",
-              "   Umami-Export regelmäßig einlesen (siehe Premium-Governance).",
+              "   Quelle ist der eigene Klickzähler (`scripts/klick_import.py`) oder ein manueller Export; Umami ist abgeschaltet.",
               "",
               f"_Erzeugt von `scripts/click_attribution.py` am {TODAY.isoformat()}._",
     ]
@@ -244,6 +244,12 @@ def main():
     # Quelle wählen
     source = "data/umami_clicks.json"
     path = DEFAULT_UMA
+    # Eigener Klickzähler (Cloudflare Worker + D1, scripts/klick_import.py) hat Vorrang,
+    # sobald er Daten geliefert hat. Umami ist seit der Free-Plan-Umstellung abgeschaltet.
+    eigen = os.path.join(BLOG_DIR, "data", "klicks_eigen.json")
+    if os.path.exists(eigen) and os.path.getsize(eigen) > 2:
+        path = eigen
+        source = "data/klicks_eigen.json"
     for i, arg in enumerate(sys.argv):
         if arg == "--umami-file" and i + 1 < len(sys.argv):
             path = sys.argv[i + 1]
