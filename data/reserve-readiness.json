@@ -2,16 +2,16 @@
   "target": 6,
   "ready": 7,
   "pool_size": 13,
-  "generated_at": "2026-10-10T20:35:15Z",
+  "generated_at": "2026-10-11T10:29:21Z",
   "candidates": [
     {
       "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
       "ready": true,
       "sha256": "bf3a2748158e8e2f289c6fd6443d41fabf3274dfae1a08d83b6f2da0d1c615a7",
       "flesch": 63.0,
-      "score": 0.89,
+      "score": 0.97,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -25,9 +25,9 @@
       "ready": true,
       "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
       "flesch": 61.7,
-      "score": 0.89,
+      "score": 0.982,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -41,9 +41,9 @@
       "ready": true,
       "sha256": "f3412b02755bab2af0b4929001bf07a368654ee703cadca3fb430f620a48e668",
       "flesch": 61.1,
-      "score": 0.9,
+      "score": 0.984,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -57,9 +57,9 @@
       "ready": true,
       "sha256": "2eb4aaeeaba61d89ff1bbc62a4e338819959c9a4759a75796de70025cb568d72",
       "flesch": 62.5,
-      "score": 0.9,
+      "score": 0.984,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -73,52 +73,15 @@
       "ready": true,
       "sha256": "453160bfde9c704a7f2df745705ba843e7bb97ec5aebbf624d44c5eab236f767",
       "flesch": 61.0,
-      "score": 0.89,
+      "score": 0.95,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-09-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
-      "ready": false,
-      "sha256": "3208e4c29bc7241e31228ae0e49139ad802f3fde7252ff7311e40f305e76acf4",
-      "flesch": 54.3,
-      "reason": "Lesbarkeits-Gate: Flesch 54.3 < 60",
-      "score": 0.854,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-09-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "ready": false,
-      "sha256": "45b1e6b92697105f98408facd5fe6f3da42e0abf522192c2aeb85301b28e99ed",
-      "flesch": 52.1,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden.",
-      "details": [
-        "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden."
-      ],
-      "score": 0.82,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.65
       }
     },
     {
@@ -126,72 +89,15 @@
       "ready": true,
       "sha256": "ccbea17d34524846d71387e53e06c8d216adff33d83ed65d0af4c6ece6dded6f",
       "flesch": 60.0,
-      "score": 0.85,
+      "score": 0.91,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-09-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
-      "ready": false,
-      "sha256": "777cf329fc315f96eacf12c643aa95b2b1f871abbc37c09911a5faea956e7951",
-      "flesch": 60.0,
-      "reason": "quality-score 0.848 < 0.85 (schwach: spelling 0.50, readability 0.75, typography 0.98)",
-      "score": 0.848,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-09-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
-      "ready": false,
-      "sha256": "7852bf0e5c6844f7106e3781914ca3b210a0ce95f4454fcb2659e406e3848b5e",
-      "flesch": 56.3,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 36 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senke deine Stromrechnung um bis zu 30 % mit nur wenigen Handgriffen.",
-      "details": [
-        "RS5: 36 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senke deine Stromrechnung um bis zu 30 % mit nur wenigen Handgriffen."
-      ],
-      "score": 0.86,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-09-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
-      "ready": false,
-      "sha256": "4944e59578799dd3de113016998f3f06e38bfe1a6ede5b3f6d160995a43d1872",
-      "flesch": 57.9,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 55 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %.",
-      "details": [
-        "RS5: 55 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
-      ],
-      "score": 0.828,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.88,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.7
       }
     },
     {
@@ -199,9 +105,9 @@
       "ready": true,
       "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
       "flesch": 64.4,
-      "score": 0.89,
+      "score": 0.97,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -211,17 +117,117 @@
       }
     },
     {
-      "slug": "2026-10-09-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "slug": "2026-10-11-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": false,
-      "sha256": "f8d12f1fa818f0f17d5df920ca046ec39c407bdf2ac1e7eae2d707a3602d9727",
-      "flesch": 56.8,
+      "sha256": "226ced4a64e02744e701c94dc8bfb8d36439cb00d6d40cae18a18bb2d3787875",
+      "flesch": 60.5,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Willst du 1.332 € pro Jahr mehr auf dem Konto haben, ohne eine einzige Überstunde zu leisten?",
+      "details": [
+        "RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Willst du 1.332 € pro Jahr mehr auf dem Konto haben, ohne eine einzige Überstunde zu leisten?"
+      ],
+      "score": 0.954,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-11-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "ready": false,
+      "sha256": "ffe456881ce45ed95abcbfa0941b7b34651b6040211286f6a3f9c580a58f2624",
+      "flesch": 61.3,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden.",
+      "details": [
+        "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden."
+      ],
+      "score": 0.944,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-11-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+      "ready": false,
+      "sha256": "81bae3c0825213c580505bcd045fce25dae160aad786107ae85b445049ba5221",
+      "flesch": 60.5,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wusstest du, dass ein durchschnittlicher Haushalt jährlich über 1.000 € durch veraltete Verträge verschenkt?",
+      "details": [
+        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wusstest du, dass ein durchschnittlicher Haushalt jährlich über 1.000 € durch veraltete Verträge verschenkt?"
+      ],
+      "score": 0.978,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-11-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "ready": false,
+      "sha256": "1c0748d1da24539b954089cbac526be5673cd72f29dd7c4d928e5c8d05296819",
+      "flesch": 61.0,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für Investments übrig.",
+      "details": [
+        "RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für Investments übrig."
+      ],
+      "score": 0.96,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-11-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "ready": false,
+      "sha256": "09dbab4db1891ffe1d2c2fbacd20908e5207d8b1c6bbebf892df60e8b8a596f1",
+      "flesch": 60.2,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 44 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %.",
+      "details": [
+        "RS5: 44 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
+      ],
+      "score": 0.956,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-11-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "ready": false,
+      "sha256": "be50fcabe1226f096bbf90c98181a7300d393578fb82411a8f0364e1f0de6bb1",
+      "flesch": 57.2,
       "reason": "Reserve-Qualitäts-Gate: RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?",
       "details": [
         "RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?"
       ],
-      "score": 0.86,
+      "score": 0.94,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
