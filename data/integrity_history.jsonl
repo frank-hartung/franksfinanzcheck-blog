@@ -292,3 +292,4 @@
 {"date": "2026-10-11", "kritisch": 1, "fest": 3, "modus": "set-current", "geaendert": ["layouts/_default/_markup/render-link.html", "layouts/_partials/affiliate_anchor_attrs.html", "scripts/affiliate_integrity_gate.py", "scripts/tag_casing.py"]}
 {"date": "2026-10-11", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-11", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-11", "kritisch": 0, "fest": 0, "modus": "verify"}
