@@ -1,7 +1,7 @@
 {
-  "attempted": "2026-10-10",
+  "attempted": "2026-10-11",
   "base": "https://api.umami.is/v1",
-  "website_id_set": true,
+  "website_id_set": false,
   "token_present": false,
   "days": 90,
   "event": "affiliate_click",
