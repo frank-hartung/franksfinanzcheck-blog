@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 11.10.2026 13:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.10.2026 20:10 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,20 +12,15 @@
 
 ## Kommende Beiträge
 
-### So, 11. Oktober 2026
-- **18:00** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 ### Sa, 17. Oktober 2026
-- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _zahl_ · Launch  
+- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### So, 18. Oktober 2026
-- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _takeaway_ · Launch  
+- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### So, 25. Oktober 2026
-- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _zahl_ · Launch  
+- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
-- **18:00** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 
 ## Zuletzt veröffentlicht
 
