@@ -1,5 +1,5 @@
 version: 1
-generated_at: '2026-10-10T22:35:30.472298+02:00'
+generated_at: '2026-10-11T08:23:12.980415+02:00'
 horizon_days: 14
 timezone: Europe/Berlin
 items:
@@ -448,12 +448,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:zahl:2026-10-11
+- id: threads:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:takeaway:2026-10-11
   channel: threads
-  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  angle: zahl
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  angle: takeaway
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-10-11'
   time: 09:15
   scheduled_at: '2026-10-11T09:15:00+02:00'
@@ -496,24 +496,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:takeaway:2026-10-11
+- id: bluesky:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:mythos:2026-10-11
   channel: bluesky
-  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  angle: takeaway
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  angle: mythos
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-10-11'
   time: '12:15'
   scheduled_at: '2026-10-11T12:15:00+02:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:frage:2026-10-11
+- id: x:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:mythos:2026-10-11
   channel: x
-  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  angle: frage
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  angle: mythos
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-10-11'
   time: '13:15'
   scheduled_at: '2026-10-11T13:15:00+02:00'
@@ -544,12 +544,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:thread:2026-10-11
+- id: x:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:frage:2026-10-11
   channel: x
-  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  angle: thread
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-10-11'
   time: '19:15'
   scheduled_at: '2026-10-11T19:15:00+02:00'
@@ -568,12 +568,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:mythos:2026-10-12
+- id: bluesky:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:frage:2026-10-12
   channel: bluesky
-  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  angle: mythos
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-10-12'
   time: 08:15
   scheduled_at: '2026-10-12T08:15:00+02:00'
@@ -676,12 +676,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:mythos:2026-10-12
+- id: threads:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:takeaway:2026-10-12
   channel: threads
-  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  angle: mythos
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  angle: takeaway
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-10-12'
   time: '16:15'
   scheduled_at: '2026-10-12T16:15:00+02:00'
@@ -700,12 +700,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:zitat:2026-10-13
+- id: linkedin:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:vergleich:2026-10-13
   channel: linkedin
-  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  angle: zitat
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  angle: vergleich
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-10-13'
   time: 07:45
   scheduled_at: '2026-10-13T07:45:00+02:00'
@@ -844,12 +844,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:vergleich:2026-10-14
+- id: linkedin:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:zitat:2026-10-14
   channel: linkedin
-  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  angle: vergleich
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  angle: zitat
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-10-14'
   time: 07:45
   scheduled_at: '2026-10-14T07:45:00+02:00'
@@ -916,12 +916,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:takeaway:2026-10-14
+- id: instagram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:takeaway:2026-10-14
   channel: instagram
-  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
   angle: takeaway
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-10-14'
   time: '11:45'
   scheduled_at: '2026-10-14T11:45:00+02:00'
@@ -1060,12 +1060,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:karussell:2026-10-15
+- id: instagram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:takeaway:2026-10-15
   channel: instagram
-  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  angle: karussell
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  angle: takeaway
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-10-15'
   time: '11:45'
   scheduled_at: '2026-10-15T11:45:00+02:00'
@@ -1420,12 +1420,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:takeaway:2026-10-18
+- id: telegram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig:nutzen:2026-10-18
   channel: telegram
-  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  angle: takeaway
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-10-18'
   time: 07:00
   scheduled_at: '2026-10-18T07:00:00+02:00'
@@ -2284,10 +2284,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:frage:2026-10-24
+- id: bluesky:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:zitat:2026-10-24
   channel: bluesky
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
-  angle: frage
+  angle: zitat
   kind: launch
   pillar: konto-karten
   date: '2026-10-24'
@@ -2296,10 +2296,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug:thread:2026-10-24
+- id: x:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug:mythos:2026-10-24
   channel: x
   slug: 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug
-  angle: thread
+  angle: mythos
   kind: launch
   pillar: frugalismus
   date: '2026-10-24'
@@ -2308,10 +2308,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:mythos:2026-10-24
+- id: threads:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:nutzen:2026-10-24
   channel: threads
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
-  angle: mythos
+  angle: nutzen
   kind: launch
   pillar: konto-karten
   date: '2026-10-24'
@@ -2320,10 +2320,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:frage:2026-10-24
+- id: facebook:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:vergleich:2026-10-24
   channel: facebook
   slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
-  angle: frage
+  angle: vergleich
   kind: launch
   pillar: strom-sparen
   date: '2026-10-24'
@@ -2332,22 +2332,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-10-24
-  channel: pinterest
-  slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
-  angle: nutzen
-  kind: launch
-  pillar: mietwagen
+- id: mastodon:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:mythos:2026-10-24
+  channel: mastodon
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  angle: mythos
+  kind: evergreen
+  pillar: strom-sparen
   date: '2026-10-24'
-  time: '10:15'
-  scheduled_at: '2026-10-24T10:15:00+02:00'
+  time: '11:30'
+  scheduled_at: '2026-10-24T11:30:00+02:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:karussell:2026-10-24
+- id: instagram:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:frage:2026-10-24
   channel: instagram
   slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  angle: karussell
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-10-24'
@@ -2356,10 +2356,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:mythos:2026-10-24
+- id: bluesky:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:frage:2026-10-24
   channel: bluesky
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
-  angle: mythos
+  angle: frage
   kind: launch
   pillar: frugalismus
   date: '2026-10-24'
@@ -2368,10 +2368,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro:nutzen:2026-10-24
+- id: x:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro:takeaway:2026-10-24
   channel: x
   slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-10-24'
@@ -2380,10 +2380,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:zahl:2026-10-24
+- id: facebook:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:nutzen:2026-10-24
   channel: facebook
   slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
-  angle: zahl
+  angle: nutzen
   kind: launch
   pillar: frugalismus
   date: '2026-10-24'
@@ -2392,10 +2392,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:mythos:2026-10-24
+- id: threads:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:frage:2026-10-24
   channel: threads
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
-  angle: mythos
+  angle: frage
   kind: launch
   pillar: frugalismus
   date: '2026-10-24'
@@ -2416,15 +2416,147 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich:nutzen:2026-10-24
+- id: x:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich:zahl:2026-10-24
   channel: x
   slug: 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich
-  angle: nutzen
+  angle: zahl
   kind: launch
   pillar: internet-dsl
   date: '2026-10-24'
   time: '19:15'
   scheduled_at: '2026-10-24T19:15:00+02:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: telegram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage:nutzen:2026-10-25
+  channel: telegram
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  angle: nutzen
+  kind: launch
+  pillar: frugalismus
+  date: '2026-10-25'
+  time: 07:00
+  scheduled_at: '2026-10-25T07:00:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: bluesky:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:mythos:2026-10-25
+  channel: bluesky
+  slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  angle: mythos
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-10-25'
+  time: 08:15
+  scheduled_at: '2026-10-25T08:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: threads:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:mythos:2026-10-25
+  channel: threads
+  slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  angle: mythos
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-10-25'
+  time: 09:15
+  scheduled_at: '2026-10-25T09:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: facebook:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:frage:2026-10-25
+  channel: facebook
+  slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
+  angle: frage
+  kind: launch
+  pillar: konto-karten
+  date: '2026-10-25'
+  time: 09:45
+  scheduled_at: '2026-10-25T09:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: pinterest:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:vergleich:2026-10-25
+  channel: pinterest
+  slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
+  angle: vergleich
+  kind: launch
+  pillar: mietwagen
+  date: '2026-10-25'
+  time: '10:15'
+  scheduled_at: '2026-10-25T10:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: instagram:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-10-25
+  channel: instagram
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  angle: nutzen
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-10-25'
+  time: '11:45'
+  scheduled_at: '2026-10-25T11:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: bluesky:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:nutzen:2026-10-25
+  channel: bluesky
+  slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
+  angle: nutzen
+  kind: launch
+  pillar: frugalismus
+  date: '2026-10-25'
+  time: '12:15'
+  scheduled_at: '2026-10-25T12:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: reddit:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp:takeaway:2026-10-25
+  channel: reddit
+  slug: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp
+  angle: takeaway
+  kind: launch
+  pillar: mietwagen
+  date: '2026-10-25'
+  time: '14:15'
+  scheduled_at: '2026-10-25T14:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: facebook:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:frage:2026-10-25
+  channel: facebook
+  slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  angle: frage
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-10-25'
+  time: '15:15'
+  scheduled_at: '2026-10-25T15:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: threads:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:mythos:2026-10-25
+  channel: threads
+  slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
+  angle: mythos
+  kind: launch
+  pillar: frugalismus
+  date: '2026-10-25'
+  time: '16:15'
+  scheduled_at: '2026-10-25T16:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: telegram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss:zahl:2026-10-25
+  channel: telegram
+  slug: 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss
+  angle: zahl
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-10-25'
+  time: '18:00'
+  scheduled_at: '2026-10-25T18:00:00+01:00'
   status: planned
   attempts: 0
   reason: ''
