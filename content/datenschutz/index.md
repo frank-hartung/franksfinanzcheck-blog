@@ -100,7 +100,7 @@ Diese Website nimmt an **Affiliate-Partnerprogrammen** teil. Beim Klick auf eine
 | Partner | Anbieter (Verantwortlicher) | Datenschutzerklärung |
 |---|---|---|
 | **CHECK24** (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) | CHECK24-Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München | https://www.check24.de/datenschutz/ |
-| **Tarifcheck** (Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken) | Tarifcheck – Datenschutzerklärung über die jeweilige Website | https://www.tarifcheck.de/datenschutz |
+| **Tarifcheck** (Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken) | Tarifcheck24 GmbH, Zollstr. 11b, 21465 Wentorf bei Hamburg | https://www.tarifcheck.de/datenschutz/ |
 | **Awin** (Vermittlungsnetzwerk) | Awin AG, Otto-Oliva-Platz 1, 10707 Berlin | https://www.awin.com/de/rechtliches |
 
 ### Was passiert beim Klick auf einen Affiliate-Link?
@@ -119,11 +119,25 @@ Beim Klick auf einen Affiliate-Link kann der jeweilige Kooperationspartner ein *
 
 **Tracking verhindern:** Cookies in den Browsereinstellungen deaktivieren, Privatmodus nutzen oder Affiliate-Links nicht anklicken. Gesetzte Cookies kannst du jederzeit in deinen Browsereinstellungen löschen.
 
+<a id="partner-kennzeichnung"></a>
+
+### Eingebettete Anbieterkennzeichnung im Impressum
+
+Auf der Seite [Impressum](/impressum/) wird die Anbieterkennzeichnung des Tarifcheck-Partnerprogramms als eingebettetes Dokument geladen. Der Browser ruft dafür beim Seitenaufruf ein Dokument von a.partner-versicherung.de ab (Partner-ID 47086). Dabei werden technische Zugriffsdaten an diesen Server übermittelt, insbesondere IP-Adresse, Zeitpunkt, Browserkennung und die Herkunft des Abrufs.
+
+Ob der Anbieter dabei Cookies setzt, weitere Empfänger beteiligt oder Daten außerhalb der EU verarbeitet, ist anhand der Partnerunterlagen zu prüfen. Diese Erklärung behauptet das nicht.
+
+Zweck: die vom Partnerprogramm geforderte, stets aktuelle Kennzeichnung der Unternehmen, die für Vergleichsformulare und die Vermittlung der darüber angefragten Versicherungen zuständig sind. Die Einbindung erfolgt nur auf der Impressumsseite, nicht auf Artikeln, Werkzeugen oder der Startseite.
+
+Rechtsgrundlage unserer Einbindung: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer vollständigen Anbieterkennzeichnung und an der Einhaltung der Programmbedingungen). Für ein Speichern oder Auslesen auf deinem Endgerät durch den Partner ist § 25 TDDDG eigenständig zu prüfen. Eine Einwilligung ist erforderlich, soweit keine Ausnahme greift. Ob eine Ausnahme greift, ist an der konkreten Technik des Dokuments noch nicht geprüft.
+
+Die Kennzeichnung lässt sich auch direkt beim Partner öffnen, über den Link unter dem Dokument im Impressum.
+
 ---
 
 ## 5. Cookies und Speicher auf deinem Gerät
 
-Derzeit setzen wir **kein Analytics-Consent-Cookie** und zeigen keinen Analyse-Banner: Die Reichweitenmessung ist abgeschaltet. Ein noch vorhandenes früheres `ff_cookie_consent`-Cookie wird beim nächsten Besuch durch die Website gelöscht. Externe Partner können erst nach einem Klick auf ihren Link eigene Speichertechniken einsetzen; unsere Website kann deren Einstellungen nicht verwalten.
+Derzeit setzen wir **kein Analytics-Consent-Cookie** und zeigen keinen Analyse-Banner: Die Reichweitenmessung ist abgeschaltet. Ein noch vorhandenes früheres `ff_cookie_consent`-Cookie wird beim nächsten Besuch durch die Website gelöscht. Externe Partner können eigene Speichertechniken einsetzen, sobald du einen Partnerlink anklickst. Zusätzlich ruft die Impressumsseite ohne weiteren Klick das Kennzeichnungsdokument des Tarifcheck-Partnerprogramms ab; das steht in Abschnitt 4. Unsere Website kann die Einstellungen der Partner nicht verwalten.
 
 **Lokaler Browser-Speicher und Cache:** Technisch notwendige Dateien können über den Service Worker im Cache des Browsers liegen. Bei freiwilliger Nutzung einzelner Funktionen speichern wir gegebenenfalls auf deinem Gerät:
 
@@ -219,4 +233,4 @@ Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des 
 
 ## 15. Aktualität und Änderungen
 
-**Redaktioneller Stand: 10. Oktober 2026.** Diese Fassung bildet den geprüften Quellcode nach der vorsorglichen Abschaltung von Umami und der Ergänzung der Newsletter-Löschroutine ab. Sie beschreibt nicht automatisch die bereits laufende Produktion: Vor dem Einsatz müssen Deployment, Verträge, Empfänger, Drittlandgarantien und tatsächliche Fristen durch den Betreiber überprüft und nötigenfalls hier nachgetragen werden. Änderungen der Dienste oder des Geschäftsmodells erfordern eine erneute Prüfung.
+**Redaktioneller Stand: 11. Oktober 2026.** Diese Fassung bildet den geprüften Quellcode nach der Einbindung der Partner-Anbieterkennzeichnung im Impressum, der vorsorglichen Abschaltung von Umami und der Ergänzung der Newsletter-Löschroutine ab. Sie beschreibt nicht automatisch die bereits laufende Produktion: Vor dem Einsatz müssen Deployment, Verträge, Empfänger, Drittlandgarantien und tatsächliche Fristen durch den Betreiber überprüft und nötigenfalls hier nachgetragen werden. Ob das eingebettete Partnerdokument Cookies setzt, ist noch nicht an der Live-Antwort geprüft. Änderungen der Dienste oder des Geschäftsmodells erfordern eine erneute Prüfung.
