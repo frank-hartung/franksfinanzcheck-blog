@@ -127,7 +127,7 @@
 {{- if .Page -}}{{- with .Page.File -}}{{- $artikelPfad = .Path | default "" -}}{{- end -}}{{- end -}}
 {{- $pillar := "" -}}
 {{- if .Page }}{{ $pillar = .Page.Params.pillar | default "" }}{{ end -}}
-{{- /* Artikel-Slug für Awin-SubID (Klicks→Umsatz). Aus dem Quelldatei-Pfad extrahieren.
+{{- /* Artikel-Slug für die SubID (Klickzuordnung je Artikel). Aus dem Quelldatei-Pfad extrahieren.
    Hugo .File.Path ist content-relativ: posts/<slug>/index.md (oder content/posts/<slug>/).
    Robust: letzte Verzeichnisebene = Slug (bei index.md), sonst Dateiname ohne .md.
    _index.md (Sektionen/Start) bekommt Platzierungs-IDs – „_index" als SubID wäre
@@ -166,8 +166,8 @@
    (Ziel), data-klick-article = Quelldatei, data-klick-pillar = Pillar.
    Damit kann `scripts/click_attribution.py` Klicks exakt einem Artikel zuordnen
    (Content-Priorisierung nach Umsatz-Hebel statt nur Traffic). */ -}}
-{{- /* Awin-SubID: Der /go/-Link trägt ?subid=<artikelslug>, damit der Gateway
-   sie an Awin weitergibt (Klicks→Umsatz pro Artikel). Nur wenn ein Slug bekannt
+{{- /* SubID: Der /go/-Link trägt ?subid=<artikelslug>, damit der Gateway
+   die Klicks dem Artikel zuordnet (Klickzähler je Artikel). Nur wenn ein Slug bekannt
    und nicht bereits vorhanden. */ -}}
 {{- $goHref := $href -}}
 {{- if and $isGo $artikelSlug -}}

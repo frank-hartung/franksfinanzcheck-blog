@@ -55,7 +55,7 @@ Das bedeutet auch: Ein Wechsel ist nie das Ziel an sich. Erst wenn Preis, Leistu
 
 ## Transparenz & Finanzierung
 
-Damit dieser Ratgeber für alle Leser dauerhaft kostenfrei bleibt, nimmt er an Partnerprogrammen (u. a. CHECK24 und Tarifcheck über das Awin-Netzwerk) teil. Das bedeutet: Wenn du über einen Empfehlungslink auf dieser Seite einen Vertrag abschließt oder ein Angebot buchst, erhalte ich eine Provision – **für dich entstehen zu keinem Zeitpunkt Mehrkosten**.
+Damit dieser Ratgeber für alle Leser dauerhaft kostenfrei bleibt, nimmt er an Partnerprogrammen (u. a. CHECK24 und Tarifcheck) teil. Das bedeutet: Wenn du über einen Empfehlungslink auf dieser Seite einen Vertrag abschließt oder ein Angebot buchst, erhalte ich eine Provision – **für dich entstehen zu keinem Zeitpunkt Mehrkosten**.
 
 **Der eiserne Grundsatz:** Provisionen haben **keinen Einfluss** auf die redaktionelle Bewertung. Was rechnerisch oder qualitativ nicht überzeugt, wird nicht empfohlen. Alle Ratgeber lassen sich auch ohne Klick auf einen Partnerlink vollständig und uneingeschränkt nutzen.
 

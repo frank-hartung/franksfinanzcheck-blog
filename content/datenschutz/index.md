@@ -113,7 +113,7 @@ Diese Website nimmt an Partnerprogrammen teil. Kommt über einen Partnerlink ein
 | **CHECK24** (CHECK24-Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München) | Strom, Gas, DSL, Mobilfunk, Girokonto, Kredit, Kreditkarte, Tagesgeld, Kfz-Versicherung, Reisen, Mietwagen, Flüge | a.check24.net | https://www.check24.de/popup/datenschutz-check24-gmbh/ |
 | **Tarifcheck24 GmbH** (Zollstr. 11b, 21465 Wentorf bei Hamburg) | Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken, Hunde, Wohngebäude | a.partner-versicherung.de | https://www.tarifcheck.de/datenschutz |
 
-Ein Affiliate-Netzwerk wie Awin setzen wir **nicht** ein. Die Links führen direkt auf die Adressen der genannten Partner.
+Die Partnerlinks führen direkt auf die Adressen der genannten Partner.
 
 ### Was beim Klick übergeben wird
 
