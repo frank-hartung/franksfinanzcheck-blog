@@ -1,5 +1,10 @@
 # Google Search Console für franksfinanzcheck.de
 
+> **Überholt (11.10.2026):** Die Aussage „ohne API“ in diesem Dokument gilt nicht mehr.
+> Die Search Console lässt sich per Dienstkonto kostenlos automatisiert auslesen.
+> Anleitung: [ANLEITUNG-GSC-API-ZUGRIFF.md](ANLEITUNG-GSC-API-ZUGRIFF.md).
+> Die Abschnitte 1–3 bleiben gültig. Abschnitt 4 (CSV-Export) ist der manuelle Notweg.
+
 Aktualisiert: 20.09.2026. Die frühere github.io-Anleitung ist ersetzt.
 Der tatsächliche Verifikations- und Indexierungsstatus ist ohne Zugriff
 auf dein Google-Konto **nicht bekannt**.

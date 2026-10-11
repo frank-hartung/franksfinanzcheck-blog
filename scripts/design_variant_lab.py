@@ -181,7 +181,7 @@ def bauen(vid: str, ist_basis: bool) -> tuple[bool, str, Path]:
 # ======================================================================
 
 # Bewusst gezielte Regexe statt eines DOM-Baus: Die Attribute, die hier
-# zählen (rel, data-umami-event, width/height, alt), hängt der Parser in
+# zählen (rel, data-klick, width/height, alt), hängt der Parser in
 # dom_audit.py nicht an die Knoten – er misst Struktur, nicht Inhalt.
 RE_H1 = re.compile(r"<h1[\s>]", re.I)
 # `rel=canonical` OHNE Anführungszeichen ist gültig und entsteht durch
@@ -309,7 +309,7 @@ def messen_statisch(vid: str, public: Path, regelwerk: dict) -> dict:
         a = attrs_von(tag)
         if "ff-btn" in a.get("class", ""):
             cta_anzahl += 1
-            if not a.get("data-umami-event"):
+            if not a.get("data-klick"):
                 cta_ohne_umami += 1
 
     fehlende_bausteine = [b for b in pflicht_bausteine
@@ -708,15 +708,15 @@ def _selftest() -> int:
 
     # 1) Attribut-Parser – zitiert UND minifiziert (hugo --minify)
     a = attrs_von('<a href="/go/dsl/" rel="sponsored nofollow noopener" '
-                  'data-umami-event="affiliate_click">')
+                  'data-klick="affiliate_click">')
     assert a["href"] == "/go/dsl/" and "sponsored" in a["rel"]
     # Produktion liefert `class=ff-btn` ohne Anführungszeichen. Die erste
     # Fassung sah davon NICHTS und hätte jede Conversion-Prüfung still auf
     # 0 gesetzt – also „alles in Ordnung" gemeldet.
     m = attrs_von('<a href=/go/dsl/ rel="sponsored nofollow noopener" '
-                  'data-umami-event=affiliate_click class=ff-btn>')
+                  'data-klick=affiliate_click class=ff-btn>')
     assert m["href"] == "/go/dsl/", m
-    assert m["data-umami-event"] == "affiliate_click", m
+    assert m["data-klick"] == "affiliate_click", m
     assert m["class"] == "ff-btn", m
     assert attrs_von("<br>") == {}
 
@@ -729,7 +729,7 @@ def _selftest() -> int:
 <script type="application/ld+json">{"@type":"BreadcrumbList"}</script>
 </head><body><h1>T</h1>
 <div class="ff-home-ctas">
-<a class="ff-btn ff-btn-primary" href="/posts/" data-umami-event="cta_click">A</a>
+<a class="ff-btn ff-btn-primary" href="/posts/" data-klick="cta_click">A</a>
 <a class="ff-btn ff-btn-secondary" href="/pillar/">B</a>
 </div>
 <div class="ff-trust-row">x</div>
@@ -770,7 +770,7 @@ def _selftest() -> int:
             '<style data-ff-variante=v-x>.a{}</style>'
             '<script type=application/ld+json>{"@type":"BreadcrumbList"}</script>'
             '</head><body><h1>T</h1><div class=ff-home-ctas>'
-            '<a class="ff-btn ff-btn-primary" href=/posts/ data-umami-event=cta_click>A</a>'
+            '<a class="ff-btn ff-btn-primary" href=/posts/ data-klick=cta_click>A</a>'
             '<a class="ff-btn ff-btn-secondary" href=/pillar/>B</a></div>'
             '<div class=ff-trust-row>x</div>'
             '<a href=/go/dsl/ rel="sponsored nofollow">P</a>'

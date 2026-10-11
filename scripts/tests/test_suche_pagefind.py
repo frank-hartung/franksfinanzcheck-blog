@@ -259,7 +259,9 @@ class DatenschutzVersprechen(unittest.TestCase):
 
     def test_datenschutz_beschreibt_die_lokale_suche(self):
         text = lies("content/datenschutz/index.md")
-        start = text.find("Website-Suche")
+        # Ueberschrift des Abschnitts, nicht die Tabellenzeile in Abschnitt 2.
+        treffer = re.search(r"(?m)^## \d+\. Website-Suche", text)
+        start = treffer.start() if treffer else -1
         self.assertGreaterEqual(start, 0, "Abschnitt „Website-Suche (lokale Suche)“ fehlt")
         abschnitt = text[start:start + 900]
         for pflicht in ("im Browser", "Suchdienst", "Suchhistorie", "Indexdateien"):

@@ -196,10 +196,10 @@ test.describe('Saisonale Startseite', () => {
       expect(zeit, `Karte ${i + 1}: <time datetime> fehlt`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
 
       // Messkette (scripts/revenue_funnel.py aggregiert cta_click per Slug)
-      expect(await karte.getAttribute('data-umami-event'), `Karte ${i + 1}: Event fehlt`).toBe('cta_click');
-      expect(await karte.getAttribute('data-umami-event-placement')).toBe('start-saison');
-      expect(await karte.getAttribute('data-umami-event-saison')).toBe(saison);
-      expect(await karte.getAttribute('data-umami-event-slug')).toMatch(new RegExp(`^saison-${saison}-`));
+      expect(await karte.getAttribute('data-klick'), `Karte ${i + 1}: Event fehlt`).toBe('cta_click');
+      expect(await karte.getAttribute('data-klick-placement')).toBe('start-saison');
+      expect(await karte.getAttribute('data-klick-saison')).toBe(saison);
+      expect(await karte.getAttribute('data-klick-slug')).toMatch(new RegExp(`^saison-${saison}-`));
       expect(await karte.getAttribute('aria-labelledby'), `Karte ${i + 1}: aria-labelledby fehlt`)
         .toBeTruthy();
     }
@@ -213,7 +213,7 @@ test.describe('Saisonale Startseite', () => {
     await expect(ratgeber, 'Ratgeber-Link im Block-Kopf fehlt').toHaveCount(1);
     const ratgeberHref = await ratgeber.getAttribute('href');
     expect((await page.request.get(ratgeberHref)).status(), `Ratgeber ${ratgeberHref} nicht erreichbar`).toBe(200);
-    expect(await ratgeber.getAttribute('data-umami-event-slug')).toBe(`saison-${saison}-ratgeber`);
+    expect(await ratgeber.getAttribute('data-klick-slug')).toBe(`saison-${saison}-ratgeber`);
   });
 
   test('Seitengerüst bleibt intakt: ein H1, Block ist Kind von main, kein toter Anker', async ({ page }) => {

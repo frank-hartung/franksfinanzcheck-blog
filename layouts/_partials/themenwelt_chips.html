@@ -57,10 +57,10 @@
       {{- /* cta_click wie in themenwelten.html – sonst wäre der Absprung
              „Artikelende → Ratgeber" in der Umsatzmessung unsichtbar. */ -}}
       <a href="{{ $ziel.RelPermalink }}" data-topic="{{ .id }}"
-         {{ if $istEigen }}data-own="true" {{ end }}data-umami-event="cta_click"
-         data-umami-event-cta="thema-{{ .id }}"
-         data-umami-event-slug="thema-{{ .id }}"
-         data-umami-event-placement="artikel-themenwelten">
+         {{ if $istEigen }}data-own="true" {{ end }}data-klick="cta_click"
+         data-klick-cta="thema-{{ .id }}"
+         data-klick-slug="thema-{{ .id }}"
+         data-klick-placement="artikel-themenwelten">
         <span class="ff-themenwelt-chip__icon" aria-hidden="true">{{ partial "themenwelt_icon.html" .id }}</span>{{ .title }}{{ if $istEigen }}<span class="ff-themenwelt-chip__own"> · dein Thema</span>{{ end }}
       </a>
     </li>

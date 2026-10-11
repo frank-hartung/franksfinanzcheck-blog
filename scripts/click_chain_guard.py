@@ -5,23 +5,20 @@ CLICK-CHAIN-GUARD – beweist die Messkette: CTA → Event → Gateway → SubID
 WARUM: „Keine Klicks" kann zwei Dinge heißen: es klickt niemand – ODER die
 Messung ist irgendwo kaputt. Die Kette ist lang und jede Stufe kann still
 sterben:
-  1. CTA am Seitenende/Anker      → muss data-umami-event="affiliate_click"
-                                    + data-umami-event-slug + -placement
+  1. CTA am Seitenende/Anker      → muss data-klick="affiliate_click"
+                                    + data-klick-slug + -placement
                                     + ?subid= im href tragen
-  2. Umami-Script geladen         → sonst feuert kein einziges Event
+  2. Klick-Beacon auf /go/-Seiten → sonst wird kein Klick gezählt
   3. /go/-Gateway                → muss die SubID an die Partner-URL anhängen
   4. Import (API)                 → Daten müssen im Repo ankommen (Funnel prüft das)
-  5. Partner-Attribution          → Transaktionen müssen eine ClickRef tragen
-Dieser Guard prüft Stufe 1–3 am GEMACHTEN Build (und optional live), Stufe 5 an
-den importierten Awin-Daten. Fundklasse: 02.09.2026 – Shortcode-CTAs ohne Event,
+Dieser Guard prüft Stufe 1–3 am GEMACHTEN Build (und optional live). Fundklasse: 02.09.2026 – Shortcode-CTAs ohne Event,
 hier jetzt für ALLE Seiten (Start, /pillar/, Artikel) als Vertrag.
 
 SELBSTTEST-KLICK (SOP Frank, manuell – kein Roboter klickt beim Partner):
   1. `python3 scripts/click_chain_guard.py --test-page` zeigt den exakten Klickpfad.
   2. Frank klickt auf einer echten Seite einen /go/-Button (DA ist der Testklick).
-  3. ≤ 24 h später muss der nächste Importlauf den Klick in `data/umami_clicks.json`
-     zeigen (sonst: Meldung des Guards/Issues), und im Awin-Dashboard muss die
-     Click-Reference = Seiten-Slug auftauchen (Reports → Click References).
+  3. ≤ 24 h später muss der nächste Importlauf den Klick in `data/klicks_eigen.json`
+     zeigen (sonst: Meldung des Guards/Issues).
   4. NIEMALS selbst einen Antrag abschließen (Eigenabschluss = Programmtod).
      Ein Klick ist erlaubt und üblich; eine Conversion vom eigenen Netz ist es nicht.
 
@@ -54,7 +51,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 TODAY = datetime.date.today()
 ANCHOR_RE = re.compile(r"<a\b[^>]*>", re.I | re.S)
 # Hugo --minify removes quotes from safe attribute values (for example
-# `data-umami-event=affiliate_click`).  HTML permits that, and the guard must
+# `data-klick=affiliate_click`).  HTML permits that, and the guard must
 # inspect the browser-equivalent markup instead of mistaking minification for
 # a missing measurement contract.  Capture double-quoted, single-quoted and
 # unquoted values explicitly; values without `=` remain intentional booleans.
@@ -84,8 +81,8 @@ def scan_page(html, label):
     """→ [(label, problem)] für alle /go/-Anker einer Seite.
 
     Vertragsanker (rel=…sponsored…) MÜSSEN tragen:
-      data-umami-event="affiliate_click", data-umami-event-slug (nicht leer),
-      data-umami-event-placement (nicht leer – sonst ist der Klick im Funnel
+      data-klick="affiliate_click", data-klick-slug (nicht leer),
+      data-klick-placement (nicht leer – sonst ist der Klick im Funnel
       keiner Stelle zuordenbar), ?subid=… bzw. &subid=… im href.
     Rohe Partnerlinks (a.check24.net / partner-versicherung.de direkt im
     Dokument) sind ein Leck: sie umgehen Gateway UND Messung.
@@ -103,17 +100,17 @@ def scan_page(html, label):
         rel = (attrs.get("rel") or "").lower()
         if "sponsored" not in rel:
             continue  # interne /go/-Nav-Links (z. B. Sitemap-Vorschau) ohne CTA-Pflicht
-        if attrs.get("data-umami-event") != "affiliate_click":
-            problems.append((label, f"/go/{gm.group(1)}/ ohne data-umami-event=affiliate_click "
+        if attrs.get("data-klick") != "affiliate_click":
+            problems.append((label, f"/go/{gm.group(1)}/ ohne data-klick=affiliate_click "
                                      f"(Klick unsichtbar für die Umsatzmessung)"))
-        if not (attrs.get("data-umami-event-slug") or "").strip():
-            problems.append((label, f"/go/{gm.group(1)}/ ohne data-umami-event-slug "
+        if not (attrs.get("data-klick-slug") or "").strip():
+            problems.append((label, f"/go/{gm.group(1)}/ ohne data-klick-slug "
                                      f"(Ziel-Klick nicht zuordenbar)"))
         if not re.search(r"[?&]subid=", href):
             problems.append((label, f"/go/{gm.group(1)}/ ohne ?subid= "
-                                     f"(Awin sieht den Klick, aber nicht die Quelle)"))
-        if not (attrs.get("data-umami-event-placement") or "").strip():
-            problems.append((label, f"/go/{gm.group(1)}/ ohne data-umami-event-placement "
+                                     f"(die Quelle des Klicks geht verloren)"))
+        if not (attrs.get("data-klick-placement") or "").strip():
+            problems.append((label, f"/go/{gm.group(1)}/ ohne data-klick-placement "
                                      f"(Klick im Funnel keiner Stelle zuordenbar)"))
     return problems
 
@@ -159,51 +156,27 @@ def check_gateway(root, key):
     return ""
 
 
-def check_umami_script(root):
-    home = read(os.path.join(root, "index.html"))
-    if not home:
-        return "keine Startseite im Build – Seite leer?"
-    if "umami" not in home.lower():
-        return ("im Build der Startseite fehlt das Umami-Script "
-                "(hugo.toml [params.umami] / Consent-Gate prüfen) – "
-                "ohne Script gemessene Klicks IMMER null")
-    return ""
+KLICK_BEACON = "stats.franksfinanzcheck.de/e"
 
 
-# ------------------------------------------------------------------ Awin-Seite
+def check_klick_beacon(root):
+    """Prüft am Build, dass jede /go/-Übergabeseite den Klick-Beacon trägt.
 
-def check_awin_coverage(config_path=None, data_path=None):
-    """Prüft Awin-Attribution nur, wenn Awin ausdrücklich aktiviert ist.
-
-    Awin ist derzeit kein aktiver Partner dieses Blogs; fehlender Awin-Import
-    ist daher eine bewusste Konfiguration und kein Governance-Befund. Wenn die
-    Quelle später aktiviert wird, werden aggregierte SubID-Zuordnungen geprüft.
+    Ohne Beacon wird kein Klick gezählt. Das ist eine Messlücke, kein Fehler
+    der Seite. Der Beacon steht im Generator scripts/affiliate_shield.py.
     """
-    config_path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
-    try:
-        config = open(config_path, encoding="utf-8").read()
-        if re.search(r"^awin_enabled:\s*false\s*$", config, re.M):
-            return {"disabled": True, "problems": []}
-    except OSError:
-        pass
-
-    path = data_path or os.path.join(BLOG_DIR, "data", "awin_provisions.json")
-    try:
-        doc = json.load(open(path, encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    articles = doc.get("articles") or {}
-    total_tx = int(doc.get("transactions") or 0)
-    if total_tx <= 0:
-        return None
-    matched = sum(1 for v in articles.values() if str(v.get("subid") or "").strip())
-    unmatched = int(doc.get("unmatched") or 0)
-    coverage = round(100.0 * matched / max(1, matched + unmatched), 1)
-    problems = []
-    if unmatched > 0:
-        problems.append(f"{unmatched} Transaktion(en) ohne bekannte SubID – "
-                        f"Awin-Empfänger verliert die Artikel-Zuordnung (coverage {coverage} %)")
-    return {"transactions": total_tx, "coverage_pct": coverage, "problems": problems}
+    go_dir = os.path.join(root, "go")
+    if not os.path.isdir(go_dir):
+        return "kein /go/-Verzeichnis im Build – Klicks können nicht gezählt werden"
+    seiten = [os.path.join(go_dir, d, "index.html") for d in sorted(os.listdir(go_dir))]
+    seiten = [p for p in seiten if os.path.isfile(p)]
+    if not seiten:
+        return "keine /go/-Übergabeseiten im Build"
+    ohne = [p for p in seiten if KLICK_BEACON not in read(p)]
+    if ohne:
+        return (f"{len(ohne)} von {len(seiten)} /go/-Seiten ohne Klick-Beacon "
+                f"({KLICK_BEACON}) – ohne Beacon werden Klicks NICHT gezählt")
+    return ""
 
 
 # ------------------------------------------------------------------ Live-Variante
@@ -249,9 +222,9 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
             pages = []
         else:
             home_html = read(os.path.join(public_dir, "index.html"))
-            umami_gap = check_umami_script(public_dir)
-            if umami_gap:
-                gaps.append(umami_gap)
+            beacon_gap = check_klick_beacon(public_dir)
+            if beacon_gap:
+                gaps.append(beacon_gap)
             pages = walk_site(public_dir)
             for path, label in pages:
                 checked += 1
@@ -268,27 +241,8 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
                 if problem:
                     gaps.append(problem)
             checked += len(keys)
-    cov = check_awin_coverage()
-    # `data/monetization.yaml` may deliberately disable Awin. That is a
-    # documented product decision, not an incomplete coverage report.  The
-    # previous branch fell through to the coverage message and indexed fields
-    # that do not exist for that sentinel (`KeyError: coverage_pct`).  A guard
-    # that crashes is worse than a missing metric: governance then reports its
-    # stale predecessor instead of the current build truth.
-    if cov and cov.get("disabled"):
-        notes.append("Awin-Attribution ist laut `data/monetization.yaml` bewusst deaktiviert "
-                     "(kein aktives Partnerprogramm).")
-    elif cov and cov["problems"]:
-        gaps += cov["problems"]
-    elif cov:
-        notes.append(f"Awin-ClickRef-Abdeckung {cov['coverage_pct']} % "
-                     f"bei {cov['transactions']} Transaktionen")
-    else:
-        notes.append("Awin-Attribution noch nicht bewertbar (kein Transaktions-Import) – "
-                     "Secrets `AWIN_API_TOKEN`+`AWIN_PUBLISHER_ID` setzen oder CSV liefern")
-
     ampel = "AMBER" if gaps else ("NICHT GEMESSEN" if not_measured else "GREEN")
-    lines = ["# 🔗 Klick-Messkette – Guard (Build → Umami → Gateway → Awin)",
+    lines = ["# 🔗 Klick-Messkette – Guard (Build → Klick-Beacon → Gateway → Klick-Zähler)",
              f"**Stand:** {TODAY.isoformat()} · **Geprüfte Anker-Seiten:** {checked} · "
              f"**Ampel:** **{ampel}** · **Messlücken: {len(gaps)}**",
              "",
@@ -299,7 +253,7 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
         lines += [f"| AMBER | chain_gap | {g[:150]} |" for g in gaps]
         lines += ["", "## 🛠️ Behebung", "",
                   "Die Lücken gehören an die Quelle der Kette (Render-Hook,",
-                  "`affiliate_anchor_attrs.html`, Layout-CTA oder Awin-Zugang).",
+                  "`affiliate_anchor_attrs.html` oder Layout-CTA).",
                   "Nach der Reparatur reicht der nächste Build – dieser Guard und",
                   "der Wochen-Funnel melden dann grün."]
     elif not_measured:
@@ -307,16 +261,16 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
                      f"{os.path.relpath(public_dir, BLOG_DIR)}/ gefunden.")
     else:
         lines.append("🟢 Kette dicht: jeder Affiliate-CTA trägt Event+SubID, jedes "
-                     "Gateway reicht die SubID durch, das Umami-Script ist drin.")
+                     "Gateway reicht die SubID durch, der Klick-Beacon ist drin.")
     if notes:
         lines += ["", "## ℹ️ Hinweise", ""] + [f"- {n}" for n in notes]
     lines += ["", "## 🧪 Eigen-Testklick (SOP – maximal ein Klick, NIE eine Anmeldung)",
               "",
               "1. Live-Artikel öffnen (z. B. letzter Gastbeitrag) und EINEN",
-              "   /go/-Button klicken – der Klick erzeugt das Umami-Event `affiliate_click`.",
-              "2. Im Umami-Dashboard (Events → `affiliate_click`) prüfen, ob der",
-              "   Klick mit passendem `slug` aufgeführt wird.",
-              "3. Klick im Dashboard da? ⇒ Frontend-Messkette bewiesen.",
+              "   /go/-Button klicken – der Beacon zählt den Aufruf der Übergabeseite.",
+              "2. Nach dem nächsten `scripts/klick_import.py`-Lauf prüfen, ob der",
+              "   Klick mit passendem `slug` in `data/klicks_eigen.json` steht.",
+              "3. Klick dort da? ⇒ Frontend-Messkette bewiesen.",
               "4. Kein Eigenabschluss! Transaktionen aus dem eigenen Netz werden",
               "   storniert und können das Programm kosten.",
               "",
@@ -349,7 +303,7 @@ def gateway_keys():
 def test_page_sop():
     print("Testklick-Anleitung (manuell, vom Betreiber – nie automatisiert):")
     print("  1. Live-Artikel öffnen, einen /go/-CTA klicken (rel=sponsored, SubID aktiv).")
-    print("  2. Umami-Dashboard aufrufen: Events → `affiliate_click` (Slug der Seite prüfen).")
+    print("  2. Nach klick_import.py: data/klicks_eigen.json auf den Slug der Seite prüfen.")
     print("  3. Optional bei API-Import: python3 scripts/revenue_funnel.py --print")
     print("  4. KEINE Anmeldung, KEIN Antrag – nur der Klick ist der Test.")
     return 0
@@ -360,24 +314,24 @@ def test_page_sop():
 def _selftest():
     failures = []
     good = ('<a href="/go/strom/?subid=posts-x" rel="sponsored nofollow noopener" '
-            'target="_blank" data-umami-event="affiliate_click" '
-            'data-umami-event-slug="strom" data-umami-event-placement="artikel">Strom ↔</a>')
-    no_sub = '<a href="/go/gas/" rel="sponsored nofollow noopener" data-umami-event="affiliate_click" data-umami-event-slug="gas">Gas</a>'
+            'target="_blank" data-klick="affiliate_click" '
+            'data-klick-slug="strom" data-klick-placement="artikel">Strom ↔</a>')
+    no_sub = '<a href="/go/gas/" rel="sponsored nofollow noopener" data-klick="affiliate_click" data-klick-slug="gas">Gas</a>'
     no_event = ('<a href="/go/dsl/?subid=y" rel="sponsored nofollow noopener" '
-                'data-umami-event="click" data-umami-event-slug="dsl">DSL</a>')
+                'data-klick="click" data-klick-slug="dsl">DSL</a>')
     no_platz = ('<a href="/go/heiz/?subid=z" rel="sponsored nofollow noopener" '
-                'data-umami-event="affiliate_click" data-umami-event-slug="heiz">Heiz</a>')
+                'data-klick="affiliate_click" data-klick-slug="heiz">Heiz</a>')
     raw_link = '<a href="https://a.check24.net/misc/click.php?pid=1" rel="sponsored">direkt</a>'
     internal = '<a href="/go/allgemein/">nur Navigation</a>'
     probs = scan_page(good + no_sub + no_event + raw_link + internal, "t")
     text = " | ".join(p for _l, p in probs)
     if "ohne ?subid=" not in text:
         failures.append("fehlende SubID am CTA bleibt unerkannt")
-    if "ohne data-umami-event=affiliate_click" not in text:
+    if "ohne data-klick=affiliate_click" not in text:
         failures.append("fehlendes Event bleibt unerkannt")
     if "roher Partnerlink" not in text:
         failures.append("roher Partnerlink (Gateway umgangen) bleibt unerkannt")
-    if not any("ohne data-umami-event-placement" in p for _l, p in scan_page(no_platz, "t")):
+    if not any("ohne data-klick-placement" in p for _l, p in scan_page(no_platz, "t")):
         failures.append("fehlende Platzierung am CTA bleibt unerkannt")
     if scan_page(good, "t"):
         failures.append("sauberer Anker wird gemeldet (False Positive)")
@@ -385,16 +339,16 @@ def _selftest():
         failures.append("interner Link ohne CTA-Vertrag wird gemeldet (False Positive)")
     # --- Attribut-Robustheit: einfache Anführungszeichen, Zeilenumbrüche im Tag
     weird = ('<a\n  href="/go/x/?a=1&amp;subid=slug" rel=\'sponsored nofollow noopener\'\n'
-             '  data-umami-event="affiliate_click" data-umami-event-slug="x"'
-             ' data-umami-event-placement="pillar">y</a>')
+             '  data-klick="affiliate_click" data-klick-slug="x"'
+             ' data-klick-placement="pillar">y</a>')
     if scan_page(weird, "t"):
         failures.append("mehrzeiliger sauberer Anker falsch gemeldet")
     # Hugo's minifier uses unquoted values wherever HTML permits it. This is
     # the exact production representation that previously yielded hundreds of
     # false chain gaps despite fully instrumented CTAs.
     minified = ('<a href="/go/strom/?subid=x" rel="sponsored nofollow noopener" '
-                'data-umami-event=affiliate_click data-umami-event-slug=strom '
-                'data-umami-event-placement=artikel>Strom</a>')
+                'data-klick=affiliate_click data-klick-slug=strom '
+                'data-klick-placement=artikel>Strom</a>')
     if scan_page(minified, "t"):
         failures.append("minifizierter, sauberer Anker wird falsch gemeldet")
     # --- Gateway-Check gegen Kunst-Baum
@@ -412,22 +366,23 @@ def _selftest():
             failures.append("Gateway ohne SubID-Förderung bleibt unentdeckt")
         if "Build" not in check_gateway(td, "kies"):
             failures.append("Gateway ohne Datei bleibt unentdeckt")
-        # Bewusst deaktiviertes Awin ist kein Messloch und darf niemals den
-        # Report mit einer fehlenden coverage_pct zum Absturz bringen.
-        with open(os.path.join(td, "monetization.yaml"), "w", encoding="utf-8") as f:
-            f.write("awin_enabled: false\n")
-        disabled = check_awin_coverage(
-            config_path=os.path.join(td, "monetization.yaml"),
-            data_path=os.path.join(td, "awin_provisions.json"))
-        if not disabled or not disabled.get("disabled") or disabled.get("problems"):
-            failures.append("deaktiviertes Awin wird nicht als bewusste Konfiguration erkannt")
-        # Umami-Script
-        if not check_umami_script(td):
-            failures.append("fehlendes Umami-Script bleibt unentdeckt")
+        # Klick-Beacon auf /go/-Seiten (eigenes Verzeichnis, damit andere Fixtures nicht stören)
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as bt:
+            if not check_klick_beacon(bt):
+                failures.append("fehlende Beacon-Lücke bleibt unentdeckt (kein /go/)")
+            os.makedirs(os.path.join(bt, "go", "strom"), exist_ok=True)
+            with open(os.path.join(bt, "go", "strom", "index.html"), "w", encoding="utf-8") as f:
+                f.write("<html><body>ohne Zähler</body></html>")
+            if not check_klick_beacon(bt):
+                failures.append("/go/-Seite ohne Beacon wird nicht als Lücke gemeldet")
+            with open(os.path.join(bt, "go", "strom", "index.html"), "w", encoding="utf-8") as f:
+                f.write('<script>navigator.sendBeacon("https://stats.franksfinanzcheck.de/e", b)</script>')
+            if check_klick_beacon(bt):
+                failures.append("Seite mit Beacon wird als Lücke gemeldet")
+        # Startseite wieder anlegen (walk_site braucht sie)
         with open(os.path.join(td, "index.html"), "w", encoding="utf-8") as f:
-            f.write("<script src=\"https://cloud.umami.is/script.js\"></script>")
-        if check_umami_script(td):
-            failures.append("Script vorhanden wird als Lücke gemeldet")
+            f.write(good)
         # walk_site findet home + Sektionen
         os.makedirs(os.path.join(td, "pillar"), exist_ok=True)
         with open(os.path.join(td, "pillar", "index.html"), "w") as f:
@@ -441,7 +396,7 @@ def _selftest():
             print("   -", x)
         return 2
     print("✅ CLICK-CHAIN-GUARD-SELFTEST bestanden (CTA-Vertrag, rohe Partnerlinks, "
-          "Gateway-Drift, Umami-Script, Seiten-Findung).")
+          "Gateway-Drift, Klick-Beacon, Seiten-Findung).")
     return 0
 
 

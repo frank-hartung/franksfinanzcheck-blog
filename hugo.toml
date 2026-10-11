@@ -296,11 +296,3 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   theme_color = "#0E5A43"
   msapplication_TileColor = "#0E5A43"
 
-# Privacy-freundliches Analytics (Umami – cookieless, DSGVO-konform)
-# websiteId leer = Analytics deaktiviert. ID + ggf. src/hostUrl eintragen
-# (siehe ANLEITUNG-UMAMI-ANALYTICS.md).
-[params.umami]
-  websiteId = ""  # Datenschutz-Stopp 10.10.2026: erst nach Verträgen/Live-Prüfung wieder aktivieren
-  src = "https://cloud.umami.is/script.js"  # Cloud; self-hosted: eigene URL (z. B. https://umami.example.com/script.js)
-  hostUrl = ""                          # self-hosted: https://umami.example.com (sonst leer)
-  consentRequired = true                # Bei Reaktivierung: keine Anfrage vor ausdrücklicher Einwilligung

@@ -41,9 +41,9 @@
              `slug` = Platzierungs-ID, damit der Import (umami_ctas.json) sie
              ohne Sonderbehandlung aggregiert. */ -}}
       <a class="ff-topic-card" href="{{ $target.RelPermalink }}" data-topic="{{ .id }}"
-         data-umami-event="cta_click" data-umami-event-cta="thema-{{ .id }}"
-         data-umami-event-slug="thema-{{ .id }}"
-         data-umami-event-placement="{{ if $home }}start-themenwelten{{ else }}posts-themenwelten{{ end }}"
+         data-klick="cta_click" data-klick-cta="thema-{{ .id }}"
+         data-klick-slug="thema-{{ .id }}"
+         data-klick-placement="{{ if $home }}start-themenwelten{{ else }}posts-themenwelten{{ end }}"
          aria-labelledby="{{ $cardID }}-title" aria-describedby="{{ $cardID }}-description {{ $cardID }}-count">
         <div class="ff-topic-card-head">
           <span class="ff-topic-icon">{{ partial "themenwelt_icon.html" .id }}</span>

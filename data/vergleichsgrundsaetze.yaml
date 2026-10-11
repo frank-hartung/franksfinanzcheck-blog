@@ -57,7 +57,7 @@ aufnahme:
     Marktabdeckung in Echtzeit beim verlinkten Portal.
   kriterien:
     - "Der Partner deckt den jeweiligen Produktbereich als Marktvergleich ab – Ausnahmen (Einzelangebot, Portalstartseite, Bündelprodukt) stehen sichtbar als Zieltyp im Register unten."
-    - "Abrechnung über ein etabliertes, nachprüfbares Partnerprogramm (CHECK24- und Tarifcheck-Programm, beide über das Awin-Netzwerk) – keine Direktdeals mit Handschlag-Konditionen."
+    - "Abrechnung über ein etabliertes, nachprüfbares Partnerprogramm (CHECK24- und Tarifcheck-Programm) – keine Direktdeals mit Handschlag-Konditionen."
     - "Der Partner stellt keine Bedingungen an redaktionelle Inhalte: kein Textabnahme-Recht, keine Platzierungszusagen, keine Vorgaben zur Bewertung."
     - "Deutsches Verbraucherrecht gilt: Widerrufs- und Kündigungsrechte, Preisangaben nach PAngV, Aufsicht durch BaFin bzw. Bundesnetzagentur im jeweiligen Markt."
     - "Jede Route führt auf eine konkrete, wöchentlich maschinell geprüfte Zielseite – nicht auf eine rotierende Kampagnen-URL."
@@ -149,7 +149,7 @@ deaktivierung:
   ausloeser:
     - ausloeser: "Die Ziel- oder Landeseite ist tot (Fehlerseite, Endlos-Redirect) oder zeigt eine andere Produktkategorie als versprochen"
       reaktion: "Automatischer Umbau auf das sichere Portal-Fallback noch im selben Prüflauf, plus Vorgang zur Nacharbeit – niemand klickt in einen 404"
-    - ausloeser: "Das Partnerprogramm wird pausiert oder beendet (Awin-Status)"
+    - ausloeser: "Das Partnerprogramm wird pausiert oder beendet (Programmstatus)"
       reaktion: "Route wird deaktiviert; betroffene Artikel verlieren den Link, der redaktionelle Inhalt bleibt vollständig nutzbar"
     - ausloeser: "Das verlinkte Produkt reißt ein K.-o.-Kriterium der aktuellen Methodik-Version"
       reaktion: "Link wird redaktionell entfernt, auch wenn die Provision weiterfließen würde; die Änderung landet im öffentlichen Änderungsprotokoll"

@@ -161,7 +161,7 @@ Preise, Zinsen und Gesetze ändern sich. Deshalb wird unser Bestand in festen, r
 
 ## Finanzierung: Unabhängigkeit & Affiliate-Transparenz
 
-Damit FranksFinanzcheck dauerhaft kostenfrei und ohne Bezahlschranken für alle Leser zugänglich bleibt, finanzieren wir den redaktionellen Betrieb über Partnerschaften mit renommierten Vergleichsportalen (z. B. CHECK24, Tarifcheck über das Awin-Netzwerk):
+Damit FranksFinanzcheck dauerhaft kostenfrei und ohne Bezahlschranken für alle Leser zugänglich bleibt, finanzieren wir den redaktionellen Betrieb über Partnerschaften mit renommierten Vergleichsportalen (z. B. CHECK24 und Tarifcheck):
 
 - **Strikte Trennung von Redaktion und Provision:** Empfehlungen folgen der versionierten Vergleichsmethodik des jeweiligen Themenbereichs – Partnerlinks haben auf Formel, K.-o.-Kriterien und Rangfolge keinen Einfluss, und Affiliate-Partner sind als Beleg-Quellen technisch ausgeschlossen.
 - **Keine Mehrkosten für dich:** Wenn du über einen unserer Empfehlungslinks wechselst, zahlst du exakt denselben Preis wie direkt beim Anbieter.

@@ -131,15 +131,6 @@ CONFIG_ENV_VARS = {
         "optional": True,
         "proof_by": ("premium-governance", "revenue-import"),
     },
-    # 19.09.2026 (Auftrag: „vollständige Umsatzmessung“): die letzte Stufe des
-    # Trichters – Klick → Antrag → Provision – braucht den Awin-Zugang. Als
-    # registriertes Secret unterscheidet die Wache „nie eingerichtet“ (Info +
-    # Funnel-Lücke) von „Token tot“ (rot) und altern lässt (STALE).
-    "AWIN_API_TOKEN": {
-        "days": 90, "label": "Awin Publisher-API-Token", "probe": "awin",
-        "optional": True,
-        "proof_by": ("premium-governance", "revenue-import"),
-    },
 }
 
 SECRETS = CONFIG_ENV_VARS
@@ -445,24 +436,6 @@ def _probe_umami(secret):
     return "error", _sanitize(err or f"Umami HTTP {code}", secret)
 
 
-def _probe_awin(secret):
-    """Awin Publisher-API: GET auf das eigene Publisher-Konto.
-
-    Ohne `AWIN_PUBLISHER_ID` ist die Probe nicht ausführbar (skipped statt
-    Fehlalarm) – die ID ist kein Geheimnis, aber Kontext, den die Wache braucht."""
-    pid = (os.environ.get("AWIN_PUBLISHER_ID") or "").strip()
-    if not pid.isdigit():
-        return "skipped", "AWIN_PUBLISHER_ID fehlt – Probe braucht die Publisher-ID"
-    base = (os.environ.get("AWIN_API_BASE") or "https://api.awin.com").strip().rstrip("/")
-    code, err = _http_status(f"{base}/publishers/{pid}",
-                             {"Authorization": f"Bearer {secret}"})
-    if code == 200:
-        return "ok", "Awin /publishers 200"
-    if code in (401, 403):
-        return "dead", f"Awin-API-Token abgelehnt ({code})"
-    return "error", _sanitize(err or f"Awin HTTP {code}", secret)
-
-
 def _probe_none(_secret):
     return "skipped", "kein Live-Check für dieses Secret definiert"
 
@@ -473,7 +446,6 @@ PROBES = {
     "pinterest": _probe_pinterest,
     "mastodon": _probe_mastodon,
     "umami": _probe_umami,
-    "awin": _probe_awin,
     None: _probe_none,
 }
 
@@ -644,8 +616,8 @@ def classify(var, meta, ent, today=None, verification=None, live_check_available
             "level": "red", "code": "dead", "var": var,
             "msg": f"{meta['label']}: Live-Check abgelehnt – {v_detail or 'Token abgelaufen'}"})
     if verification.get("ran") and v_kind == "skipped":
-        # Die Probe existiert, konnte aber nicht laufen (z. B. Awin ohne
-        # Publisher-ID). Kein Alarm, aber sichtbar im Report.
+        # Die Probe existiert, konnte aber nicht laufen (z. B. fehlende
+        # Konto-ID). Kein Alarm, aber sichtbar im Report.
         return (f"PRÜFUNG ÜBERSPRUNGEN ({v_detail})", "–", {
             "level": "info", "code": "probe_skipped", "var": var,
             "msg": f"{meta['label']}: {v_detail or 'Probe übersprungen'}"})

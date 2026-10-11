@@ -875,7 +875,7 @@ def lauf(cfg):
     "nur_vorhandensein": '''
 def api_token():
     import os
-    return os.environ.get("AWIN_API_TOKEN", "")
+    return os.environ.get("DIENST_API_TOKEN", "")
 
 def status():
     print(f"Token: {'gesetzt' if api_token() else 'fehlt'}")

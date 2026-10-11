@@ -24,7 +24,6 @@ export const EXTERNAL_NOISE = [
   'googletagmanager',
   'google-analytics',
   'analytics',
-  'umami',
   'mastodon',
 ];
 

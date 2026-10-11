@@ -65,9 +65,9 @@
       <h2 id="saison-fokus">{{ $saison.headline }}</h2>
     </div>
     <a class="ff-saison-pillar" href="{{ $hauptZiel.RelPermalink }}"
-       data-umami-event="cta_click" data-umami-event-cta="saison-{{ $saison.id }}-ratgeber"
-       data-umami-event-slug="saison-{{ $saison.id }}-ratgeber" data-umami-event-placement="start-saison"
-       data-umami-event-saison="{{ $saison.id }}">{{ $saison.pillar_link }} <span aria-hidden="true">→</span></a>
+       data-klick="cta_click" data-klick-cta="saison-{{ $saison.id }}-ratgeber"
+       data-klick-slug="saison-{{ $saison.id }}-ratgeber" data-klick-placement="start-saison"
+       data-klick-saison="{{ $saison.id }}">{{ $saison.pillar_link }} <span aria-hidden="true">→</span></a>
   </header>
   <ul class="ff-saison-liste" role="list">
     {{- range $ctx.auswahl -}}
@@ -75,9 +75,9 @@
       {{- $cardSlug := printf "saison-%s-%s" $saison.id $seite.File.ContentBaseName -}}
     <li>
       <a class="ff-saison-card" href="{{ $seite.RelPermalink }}"
-         data-umami-event="cta_click" data-umami-event-cta="saison-{{ $saison.id }}-artikel"
-         data-umami-event-slug="{{ $cardSlug }}" data-umami-event-placement="start-saison"
-         data-umami-event-saison="{{ $saison.id }}" aria-labelledby="{{ $cardSlug }}-title">
+         data-klick="cta_click" data-klick-cta="saison-{{ $saison.id }}-artikel"
+         data-klick-slug="{{ $cardSlug }}" data-klick-placement="start-saison"
+         data-klick-saison="{{ $saison.id }}" aria-labelledby="{{ $cardSlug }}-title">
         <span class="ff-saison-card-meta">
           <time datetime="{{ $seite.Date.Format "2006-01-02" }}">{{ $seite.Date | time.Format "02.01.2006" }}</time>
           {{- with $seite.Params.pillar -}}

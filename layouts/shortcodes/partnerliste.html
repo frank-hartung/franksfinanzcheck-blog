@@ -18,16 +18,16 @@
      Registers hier auch wirklich steht – eine stille Lücke zwischen
      beworbenem Ziel und offengelegtem Partner ist damit unmöglich.
 
-     Netzwerk-Zuordnung: `netz` benennt das Partnerprogramm
+     Programm-Zuordnung: `netz` benennt das Partnerprogramm
      (check24 = CHECK24-Partnerprogramm inkl. C24 Bank,
      tarifcheck = Tarifcheck-Partnerprogramm); die Abrechnung beider
-     Programme läuft über das Awin-Netzwerk (siehe /impressum/).
+     Programme läuft direkt mit dem jeweiligen Partner (siehe /impressum/).
    ============================================================ */ -}}
 {{- $ziele := dict -}}
 {{- with partialCached "affiliate_ziele_data.html" "" "ziele" -}}
   {{- with .ziele }}{{ $ziele = . }}{{ end -}}
 {{- end -}}
-{{- $programme := dict "check24" "CHECK24-Partnerprogramm (Awin)" "tarifcheck" "Tarifcheck-Partnerprogramm (Awin)" -}}
+{{- $programme := dict "check24" "CHECK24-Partnerprogramm" "tarifcheck" "Tarifcheck-Partnerprogramm" -}}
 {{- $partner := slice -}}
 {{- $produkte := dict -}}
 {{- $netze := dict -}}
@@ -39,7 +39,7 @@
     {{- if not (in $liste .) }}{{ $liste = $liste | append . }}{{ end -}}
   {{- end -}}
   {{- $produkte = merge $produkte (dict $name $liste) -}}
-  {{- $netze = merge $netze (dict $name (index $programme ($z.netz | default "") | default "Awin-Netzwerk")) -}}
+  {{- $netze = merge $netze (dict $name (index $programme ($z.netz | default "") | default "Partnerprogramm")) -}}
 {{- end -}}
 <div class="ff-partnerliste">
   <table class="ff-partnerliste__tabelle">
@@ -47,7 +47,7 @@
       <tr>
         <th scope="col">Partner</th>
         <th scope="col">Vermittelte Bereiche</th>
-        <th scope="col">Programm / Netzwerk</th>
+        <th scope="col">Programm</th>
         <th scope="col">Vergütung</th>
       </tr>
     </thead>

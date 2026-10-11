@@ -882,7 +882,7 @@ def pruefe_messwerte(reg: dict, rw: dict, bericht: Bericht, nur: str | None) -> 
                 bericht.melde(
                     regel="conversion.umami_events_vollstaendig", variante=vid,
                     schwere="P1", besitzer="human",
-                    text=f"{w['cta_ohne_umami']} CTA(s) ohne data-umami-event. "
+                    text=f"{w['cta_ohne_umami']} CTA(s) ohne data-klick. "
                          "Wer die Messkette kappt, gewinnt jeden A/B-Test – "
                          "auf dem Papier.")
             if conv.get("affiliate_rel_attribute_intakt") and w.get("affiliate_rel_fehler"):

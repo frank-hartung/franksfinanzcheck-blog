@@ -1,5 +1,11 @@
 # 📊 Umami Analytics – Setup-Anleitung (Privacy-freundlich, kostenlos)
 
+> **Stand 11.10.2026:** Umami ist aus dem Blog entfernt (Skript, Consent-Banner, `data-umami-*`-Attribute). Grund war nur die Kostenfrage: Die API ist im kostenfreien Plan kostenpflichtig;
+> der Import bleibt aus (`data/monetization.yaml`: `umami_api_import_enabled: false`).
+> Die Klickmessung läuft als Vorbereitung über den eigenen Zähler:
+> [ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md](ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md).
+> Der Rest dieser Seite beschreibt den früheren Stand.
+
 **Warum Umami?** Cookieless (keine Cookies, kein Consent-Banner-Zwang nach § 25 TDDDG), keine
 personenbezogenen Daten (IP wird gehasht), keine Daten an Google, Open Source, DSGVO-konform –
 der professionelle Ersatz für Google Analytics.
@@ -125,8 +131,8 @@ als Fehler.
 
 **Seit 19.09.2026 – die komplette Umsatzmessung obendrauf:** dasselbe Token speist
 nun auch `scripts/umami_views.py` (Seitenbesuche als Nenner) und den
-`cta_click`-Import (Start-/Pillar-Buttons). Zusammen mit der Awin-Publisher-API
-(`scripts/awin_fetch.py`) rechnet `scripts/revenue_funnel.py` den ganzen Trichter
+`cta_click`-Import (Start-/Pillar-Buttons). Zusammen mit der Abrechnungstabelle (Provisionen)
+rechnet `scripts/revenue_funnel.py` den ganzen Trichter
 (Besuche → Klicks → Antrag → Abschluss → Storno → Provision/EPC); der
 `click_chain_guard` hält die Kette am gebauten Stand dicht. Setup, Testklick-SOP
 und Eskalationswege: **`docs/UMSATZ-MESSUNG-PREMIUM.md`**.

@@ -412,11 +412,11 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 "<div class=ff-pinterest-cta></div>"
                 "<section class='ff-saison ff-saison--herbst' data-ff-saison=herbst "
                 "data-ff-saison-quelle=keywords data-ff-saison-treffer=1>"
-                "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-umami-event=cta_click>"
+                "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-klick=cta_click>"
                 "Zum Ratgeber</a>"
-                "<a class=ff-saison-card href=/posts/a/ data-umami-event=cta_click "
-                "data-umami-event-placement=start-saison data-umami-event-saison=herbst "
-                "data-umami-event-slug=saison-herbst-a aria-labelledby=a-title>"
+                "<a class=ff-saison-card href=/posts/a/ data-klick=cta_click "
+                "data-klick-placement=start-saison data-klick-saison=herbst "
+                "data-klick-slug=saison-herbst-a aria-labelledby=a-title>"
                 "<span class=ff-saison-card-titel id=a-title>Artikel A</span></a>"
                 "</section><article class='post-entry lcp-card'></article></main>"
                 "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
@@ -432,7 +432,7 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 ("toter Link", gut.replace("/posts/a/", "/posts/fehlt/"), "ins Leere"),
                 ("falsche Saison", gut.replace("data-ff-saison=herbst", "data-ff-saison=sommer"), "B2"),
                 ("zwei H1", gut.replace("<h1>Herbst-Check: Strom vergleichen</h1>", "<h1>Herbst-Check: Strom vergleichen</h1><h1>zwei</h1>"), "B1"),
-                ("ohne Messkette", gut.replace("data-umami-event-placement=start-saison", ""), "B4"),
+                ("ohne Messkette", gut.replace("data-klick-placement=start-saison", ""), "B4"),
                 ("Karte ohne Titel", gut.replace(">Artikel A</span>", "></span>"), "B3"),
                 ("Block ohne Auswahl-Quelle", gut.replace("data-ff-saison-quelle=keywords",
                                                            "data-ff-saison-quelle=neueste"), "B2"),

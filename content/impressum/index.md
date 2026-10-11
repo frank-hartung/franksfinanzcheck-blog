@@ -36,7 +36,7 @@ Für Vergleichsformulare und die Vermittlung der darüber angefragten Versicheru
 
 ## Hinweis zu Affiliate-Links (Transparenz)
 
-Diese Website nimmt am **CHECK24-Partnerprogramm** teil (vermittelt über das Affiliate-Netzwerk Awin) sowie am Partnerprogramm von **Tarifcheck** für Versicherungsvergleiche. Wenn Besucher über einen auf dieser Website platzierten Affiliate-Link zu CHECK24 oder Tarifcheck gelangen und dort einen Vertrag abschließen, ein Produkt buchen oder kaufen, erhält der Betreiber dieser Website eine Provision. **Für dich als Besucher entstehen dadurch keine Mehrkosten.**
+Diese Website nimmt am **CHECK24-Partnerprogramm** teil sowie am Partnerprogramm von **Tarifcheck** für Versicherungsvergleiche. Wenn Besucher über einen auf dieser Website platzierten Affiliate-Link zu CHECK24 oder Tarifcheck gelangen und dort einen Vertrag abschließen, ein Produkt buchen oder kaufen, erhält der Betreiber dieser Website eine Provision. **Für dich als Besucher entstehen dadurch keine Mehrkosten.**
 
 Alle Affiliate-Links sind als Werbung gekennzeichnet. Die redaktionellen Inhalte dieser Website entstehen unabhängig von den Partnerprogrammen; die Auswahl und Bewertung der Themen wird durch die Provisionsmöglichkeit nicht beeinflusst. Welche Unternehmen für die vermittelten Versicherungsangebote verantwortlich sind, steht im Abschnitt direkt darüber.
 

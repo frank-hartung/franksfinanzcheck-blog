@@ -838,14 +838,14 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
         if not titel or not titel[0].volltext():
             fehler.append(f"B3: Saison-Karte {href} hat keinen Titel-Text.")
         # B4 – Messung
-        for attribut, soll in (("data-umami-event", "cta_click"),
-                               ("data-umami-event-placement", "start-saison"),
-                               ("data-umami-event-saison", sid)):
+        for attribut, soll in (("data-klick", "cta_click"),
+                               ("data-klick-placement", "start-saison"),
+                               ("data-klick-saison", sid)):
             if k.attrs.get(attribut) != soll:
                 fehler.append(f"B4: Karte {href}: {attribut} = {k.attrs.get(attribut)!r}, "
                               f"erwartet {soll!r} (Revenue-Trichter wäre blind).")
-        if not k.attrs.get("data-umami-event-slug", "").startswith(f"saison-{sid}-"):
-            fehler.append(f"B4: Karte {href}: data-umami-event-slug muss mit "
+        if not k.attrs.get("data-klick-slug", "").startswith(f"saison-{sid}-"):
+            fehler.append(f"B4: Karte {href}: data-klick-slug muss mit "
                           f"„saison-{sid}-“ beginnen.")
         if not k.attrs.get("aria-labelledby"):
             fehler.append(f"B4: Karte {href}: aria-labelledby fehlt (a11y-Vertrag der "
@@ -858,7 +858,7 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
         ziel = output_path(public, pillar_link[0].attrs.get("href", ""), base_path)
         if ziel is None:
             fehler.append(f"B3: Ratgeber-Link zeigt ins Leere: {pillar_link[0].attrs.get('href')}")
-        if pillar_link[0].attrs.get("data-umami-event") != "cta_click":
+        if pillar_link[0].attrs.get("data-klick") != "cta_click":
             fehler.append("B4: Ratgeber-Link ohne cta_click-Event.")
 
     # B5 – CSS wirklich eingebunden
@@ -1131,10 +1131,10 @@ def selbsttest() -> int:
             "<div class=ff-pinterest-cta></div>"
             "<section class='ff-saison ff-saison--herbst' data-ff-saison=herbst "
             "data-ff-saison-quelle=keywords data-ff-saison-treffer=1>"
-            "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-umami-event=cta_click>Zum Ratgeber</a>"
-            "<a class=ff-saison-card href=/posts/a/ data-umami-event=cta_click "
-            "data-umami-event-placement=start-saison data-umami-event-saison=herbst "
-            "data-umami-event-slug=saison-herbst-a aria-labelledby=a-title>"
+            "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-klick=cta_click>Zum Ratgeber</a>"
+            "<a class=ff-saison-card href=/posts/a/ data-klick=cta_click "
+            "data-klick-placement=start-saison data-klick-saison=herbst "
+            "data-klick-slug=saison-herbst-a aria-labelledby=a-title>"
             "<span class=ff-saison-card-titel id=a-title>Artikel A</span></a>"
             "</section><article class='post-entry lcp-card'></article></main>"
             "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"

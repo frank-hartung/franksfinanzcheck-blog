@@ -1,0 +1,12 @@
+{
+  "name": "klick-zaehler",
+  "private": true,
+  "description": "Cookieloser /go/-Klickzähler (Cloudflare Worker + D1). Keine Laufzeit-Abhängigkeiten.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/worker.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.149.0"
+  }
+}

@@ -157,7 +157,7 @@ Jedes Asset braucht: Stand-Datum, Quellenzeile, 1000×1500-Pin, 1200×628-Press-
 
 - TP-Pins und Gastbeiträge nie als getarnte Werbung.
 - `rel=sponsored` auf bezahlten/partnerischen Links (Gateway tut das bereits).
-- Kein Linkkauf „damit die Kfz-Seite rankt“ – ToS von CHECK24/Awin + Google.
+- Kein Linkkauf „damit die Kfz-Seite rankt“ – ToS von CHECK24 + Google.
 - Co-Content mit dem Partnerprogramm: Datencharts mit Quellenangabe, nicht Sitewide-Footer.
 
 ---

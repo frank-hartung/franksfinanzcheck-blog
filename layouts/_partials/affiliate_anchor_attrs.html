@@ -28,16 +28,16 @@
       Ergebnis anschließend im gebauten HTML.
 
     Vertrag pro Gateway-Link (/go/<key>/):
-      href            = /go/<key>/[?subid=<artikel-slug>]   (Awin-Attribution)
+      href            = /go/<key>/[?subid=<artikel-slug>]   (Artikel-Zuordnung)
       rel             = sponsored nofollow noopener
       target          = _blank
-      data-umami-*    = affiliate_click + slug/article/pillar/subid/placement
+      data-klick*      = affiliate_click + slug/article/pillar/subid/placement
       title           = "Weiter zu <Partner> (Partnerlink = Werbung)"
 
     Placement (19.09.2026, Premium-Messkette): „wo wurde geklickt" – artikel,
     pillar, start, ratgeber-zentrale oder ein Call-eigener Wert (z. B.
     spar-matrix). zusammen mit `subid` (auch als Event-Eigenschaft, damit der
-    Testklick ohne Awin-Export in Umami verifizierbar ist) schließt sie die
+    Testklick ohne Export verifizierbar ist) schließt sie die
     Lücke „Start-/Pillar-CTAs waren unsichtbar".
    ============================================================ */ -}}
 {{- $out := dict -}}
@@ -70,7 +70,7 @@
   {{- $key := $url | strings.TrimPrefix "/go/" -}}
   {{- with findRE `^[^/?#]+` $key 1 }}{{ $key = index . 0 }}{{ end -}}
   {{- $key = strings.TrimSuffix "/" $key -}}
-  {{- /* Artikel-Kontext fuer Awin-SubID + Umami-Attribution. Aufgeloest
+  {{- /* Artikel-Kontext fuer SubID + Klickzaehler. Aufgeloest
          wird immer ueber `.Page`: das funktioniert fuer eine Seite (dann
          ist .Page die Seite selbst) UND fuer einen Shortcode-Kontext
          (ShortcodeWithPage hat KEIN eigenes .File – ein direkter Zugriff
@@ -88,7 +88,7 @@
   {{- $dir  := path.Dir $file -}}
   {{- if eq $base "_index.md" -}}
     {{- /* Sektions-/Startseite: nie „_index“ als SubID verschenken –
-           Platzierungs-IDs sind stabil messbar (Awin ClickRef + Umami). */ -}}
+           Platzierungs-IDs sind stabil messbar (SubID + Klickzaehler). */ -}}
     {{- if or (not $dir) (eq $dir ".") -}}
       {{- $slug = "home" -}}
     {{- else -}}

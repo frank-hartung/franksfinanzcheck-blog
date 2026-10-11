@@ -133,14 +133,14 @@ GO_NAMES = {**_FALLBACK_NAMES, **_kontrakt_names()}
 def generate_go_pages(reg: dict) -> int:
     """Erzeugt die statischen Weiterleitungen static/go/<key>/index.html.
 
-    Awin-SubID-Förderung (Klicks→Umsatz, 01.09.2026): Der /go/-Link am Artikel
+    SubID-Weitergabe (Klickzuordnung je Artikel, 01.09.2026): Der /go/-Link am Artikel
     trägt ?subid=<artikelslug>. Das kleine JS liest diese aus location.search und
     hängt sie vor dem Weiterleiten als &subid= an die Affiliate-URL. Fallback
     (kein JS): die Meta-Refresh auf {url} bleibt byte-identisch = check_gateway
     (registry URL als Substring) und noindex/Sponsored bleiben unangetastet.
 
     PREMIUM-FIX (12.09.2026, zwei Funde im Audit-Nachlauf):
-    1) Kein `rel=canonical` auf die Awin-Klick-URL. Eine Weiterleitung, die
+    1) Kein `rel=canonical` auf die Klick-URL. Eine Weiterleitung, die
        zugleich noindex trägt UND kanonisch auf den Werbelink zeigt, ist
        widersprüchlich: Google ignoriert das canonical zwar (noindex gewinnt),
        aber Crawler, Sitemap-Tools und KI-Systeme lesen die Tracking-URL als
@@ -161,7 +161,21 @@ def generate_go_pages(reg: dict) -> int:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <script>
-// Awin-SubID-Förderung (Klicks→Umsatz per Artikel, 01.09.2026): Der /go/-Link am
+// Klick-Zählung (11.10.2026): cookielos, nur Tagessummen je Gateway und Artikel.
+// sendBeacon an den eigenen Zähler (stats.franksfinanzcheck.de, Cloudflare Worker).
+// Respektiert Do-Not-Track und Global Privacy Control. Fällt bei Fehlern still aus –
+// die Weiterleitung unten läuft unabhängig davon. Details: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md
+(function () {
+  try {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) return;
+    if (!navigator.sendBeacon) return;
+    var s = new URLSearchParams(location.search).get('subid') || '';
+    navigator.sendBeacon('https://stats.franksfinanzcheck.de/e', new Blob([JSON.stringify({k: '{key}', s: s.slice(0, 120)})], {type: 'text/plain'}));
+  } catch (e) { /* Zählung ist optional */ }
+})();
+</script>
+<script>
+// SubID-Weitergabe (Klickzuordnung je Artikel, 01.09.2026): Der /go/-Link am
 // Artikel trägt ?subid=<artikelslug>. Dieses Script hängt sie vor dem Weiterleiten
 // als &subid= an die Affiliate-URL an. Führt SYNCHRON im head aus (läuft vor dem
 // Meta-Refresh), damit die Attribution zuverlässig greift. Ohne subid: unverändert.
@@ -194,7 +208,8 @@ def generate_go_pages(reg: dict) -> int:
         # im Moment des Klicks.
         phrase = GO_PHRASEN.get(key) or f"zu {GO_NAMES.get(key, 'CHECK24')}"
         dest.write_text(tpl.replace("{url}", url)
-                        .replace("{zielname}", phrase), encoding="utf-8")
+                        .replace("{zielname}", phrase)
+                        .replace("{key}", key), encoding="utf-8")
         count += 1
     return count
 

@@ -166,11 +166,11 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # erst vom Deploy-Lauf. Diese Wache haelt den Vertrag selbst,
           # damit die Schreib-Seite nie ohne pruefbare Schwelle heilt.
           "publikations_vertrag.py",
-          "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
-          # Umsatz-Messkette (19.09.2026): Views-Nenner, Awin-API-Import,
-          # Wochen-Trichter und Ketten-Guard sind Wachen wie alle anderen –
+          "umami_clicks.py", "click_attribution.py",
+          # Umsatz-Messkette (19.09.2026): Views-Nenner, Wochen-Trichter und
+          # Ketten-Guard sind Wachen wie alle anderen –
           # ohne sie wäre „unbekannt“ wieder eine Fußnote statt ein Befund.
-          "umami_views.py", "awin_fetch.py", "revenue_funnel.py",
+          "umami_views.py", "revenue_funnel.py",
           "click_chain_guard.py",
           "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py",
           "schema_seo_gate.py", "generate_pwa_icons.py", "report_hygiene.py",
@@ -407,8 +407,8 @@ TOKEN_BROKER_EXEMPT = {"pinterest_token.py", "pinterest_auth.py"}
 TOKEN_WORKFLOW = "pinterest-token.yml"
 
 # Reihenfolge-Vertrag: diese Schritte sind Messungen, die vor der Sicht liegen müssen
-MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks", "awin",
-                 "live-policy", "umami-views", "awin-fetch", "revenue-funnel",
+MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks",
+                 "live-policy", "umami-views", "revenue-funnel",
                  "click-chain")
 VIEW_STEP = "scorecard"
 
@@ -449,14 +449,10 @@ STEP_SIGNATURES = {
     "secrets":   (r"--emit\s+secrets\b", r"secrets_age_guard\.py"),
     "pinperf":   (r"--emit\s+pinperf\b", r"pinterest_perf_feedback\.py"),
     "clicks":    (r"--emit\s+clicks\b", r"click_attribution\.py"),
-    # (?!-) : `--emit awin\b` würde sonst auch `--emit awin-fetch` „sehen“ –
-    # zwei Messschritte, eine Signatur = falsche Reihenfolge-Indizes.
-    "awin":      (r"--emit\s+awin\b(?!-)", r"awin_provisions\.py"),
     "live-policy": (r"--emit\s+live-policy\b", r"live_policy_guard\.py"),
     # Umsatz-Messkette: eigene Signaturen, damit die Reihenfolge (Messung vor
     # Sicht) auch für Views-Nenner, API-Abruf, Trichter und Ketten-Guard gilt.
     "umami-views": (r"--emit\s+umami-views\b", r"umami_views\.py"),
-    "awin-fetch":  (r"--emit\s+awin-fetch\b", r"awin_fetch\.py"),
     "revenue-funnel": (r"--emit\s+revenue-funnel\b", r"revenue_funnel\.py"),
     "click-chain": (r"--emit\s+click-chain\b", r"click_chain_guard\.py"),
     "scorecard": (r"--emit\s+scorecard\b", r"editorial_scorecard\.py"),
@@ -4192,8 +4188,6 @@ def _selftest():
         run: python3 scripts/governance_gate.py --emit pinperf --report PINTEREST-PERF-REPORT.md
       - name: emit clicks
         run: python3 scripts/governance_gate.py --emit clicks --report CLICK-REPORT.md
-      - name: emit awin
-        run: python3 scripts/governance_gate.py --emit awin --report AWIN-REPORT.md
       - name: Chefredakteur-Scorecard
         run: python3 scripts/editorial_scorecard.py
       - name: decide

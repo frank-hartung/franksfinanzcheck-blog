@@ -83,7 +83,7 @@ BRANDS = {
     "fritzfon": "FRITZ!Fon", "fritzdect": "FRITZ!DECT", "fritzos": "FRITZ!OS",
     # Vergleichsportale / Affiliate-Partner (Hauskanon = data/brand_lock.yaml)
     "check24": "CHECK24", "verivox": "Verivox", "tarifcheck": "Tarifcheck",
-    "tarifcheck24": "Tarifcheck24", "awin": "Awin", "idealo": "idealo",
+    "tarifcheck24": "Tarifcheck24", "idealo": "idealo",
     # TK-Markt
     "telekom": "Telekom", "vodafone": "Vodafone", "congstar": "congstar",
     "otelo": "otelo", "o2": "O2", "pyur": "pyur", "freenet": "Freenet",

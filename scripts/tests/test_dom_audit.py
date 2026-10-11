@@ -429,7 +429,8 @@ class TemplateVertragTests(unittest.TestCase):
         self.assertIn('partial "deferred_scripts.html"', foot)
         deferred = (ROOT / "layouts/_partials/deferred_scripts.html").read_text(
             encoding="utf-8")
-        self.assertIn("cloud.umami.is", deferred)
+        # Umami-Loader entfernt (11.10.2026): der Service Worker bleibt im Fuß.
+        self.assertNotIn("cloud.umami.is", deferred)
         self.assertIn("serviceWorker.register", deferred)
 
     def test_taxonomie_ist_gruppiert(self):

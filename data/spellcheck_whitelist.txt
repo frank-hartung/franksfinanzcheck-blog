@@ -26,7 +26,6 @@ schufa
 bu
 gkv
 pkv
-awin
 
 # Fachbegriffe (Finanzen/Technik)
 frugalismus

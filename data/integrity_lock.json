@@ -1,16 +1,16 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-10T21:47:33.928790+00:00",
-  "head": "be320be",
+  "signed_at": "2026-10-11T17:28:12.025380+00:00",
+  "head": "a00ea6e",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "b15b8da56b8a36cdc7b7ff3a7948b6172e65dc366d1dbed9e67e17bbdcb4fa5a",
-    "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
-    "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
+    "hugo.toml": "8ad68cb9fc0a7d5afd776d622893c4e27bd52d246c7a9fae7a3607db82e9a8e6",
+    "layouts/_default/_markup/render-link.html": "bf3f44119c4fdf76624732c16db3bd27ee241125ddc1e01ce41d267ce1adb281",
+    "layouts/_partials/affiliate_anchor_attrs.html": "8e56bc560a2c04e7b3e2a1d6c8ad69c19bf86f757c2197358b44f0197265fd6e",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
-    "layouts/_partials/extend_footer.html": "b890a43f0173729bd1ca4e9041c1023f6471396e9ec954760c045c320226a668",
+    "layouts/_partials/extend_footer.html": "900006a46c78debdaed747a8854bb9906f7d98562cfe8c080b00bafe7944b97f",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
     "layouts/_partials/head.html": "e91bf0b087c2e541c2e27b78fe6f7e9c892cec4b29f105d0cffe8142776c5b03",
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
@@ -20,9 +20,9 @@
     "layouts/pillar/list.html": "435db5bd1741bde574bae2c547e75ff879fd7681ce26721513dc93a21800bac4",
     "layouts/pillar/single.html": "972b72f5d293b4fa5e041705197989cefd3015b581346eafedf408b76843cfff",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
-    "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
-    "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
-    "scripts/affiliate_integrity_gate.py": "d40139ed377cfe976e2a0f652b5cf3ec47cff3f55e9cee6f8a044142bcdf247b",
+    "layouts/shortcodes/einspartabelle.html": "172a4812488cecfd147dc8d03ffba0971fbb12c2a5fa8b2dbd5771590ef2c393",
+    "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
+    "scripts/affiliate_integrity_gate.py": "f03a713b095bfe2c695b3471f1303c4552e85318a7a7ebb24f2de7de82452b30",
     "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -46,152 +46,16 @@
     "scripts/reserve_artifacts.py": "291dea98a703c2c1d19de91f4cbd2c6a2df33b914d07ad4aba793aa0d68ec652",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
-    "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
+    "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
     "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2",
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "3882a48befcdeb880909f209c8a7d7b7e89208765862870adb376fb2ca264956",
-  "audit_start_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
+  "files_sha256": "fc4305c6ab1e51dcba9ac766764bf06da60bdab29884338eca39d179979c4c5c",
+  "audit_start_sha256": "17cf8e0a9ef6038e0c00d797a518adfa2bc62adebeb015743c09a7bb87dfe515",
   "audit": [
-    {
-      "date": "2026-10-08",
-      "art": "set-current",
-      "head": "9d15f6a",
-      "geaendert": [
-        "hugo.toml",
-        "layouts/_partials/head.html",
-        "scripts/lektor_guard.py",
-        "scripts/lesbarkeit_heiler.py",
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d15f6a",
-              "datum": "2026-10-08",
-              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
-            },
-            {
-              "sha": "bc76acb",
-              "datum": "2026-10-08",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/head.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d15f6a",
-              "datum": "2026-10-08",
-              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
-            },
-            {
-              "sha": "bc76acb",
-              "datum": "2026-10-08",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/lektor_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d15f6a",
-              "datum": "2026-10-08",
-              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
-            },
-            {
-              "sha": "bc76acb",
-              "datum": "2026-10-08",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/lesbarkeit_heiler.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d15f6a",
-              "datum": "2026-10-08",
-              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
-            },
-            {
-              "sha": "bc76acb",
-              "datum": "2026-10-08",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d15f6a",
-              "datum": "2026-10-08",
-              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
-            },
-            {
-              "sha": "bc76acb",
-              "datum": "2026-10-08",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "aad14c94488d7ad8a150a658f9f0d0c64d382ad368c7d11c2fdaa539c7c5d1a3",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-08",
-      "art": "heal",
-      "head": "3484dcf",
-      "geaendert": [
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "3484dcf",
-              "datum": "2026-10-08",
-              "betreff": "fix(a11y): H1-Wache Stufe 2 – Markdown-Wahrheit, H1-Inventar, Blätterseiten (#623)"
-            },
-            {
-              "sha": "f85ce6d",
-              "datum": "2026-10-08",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
-      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421"
-    },
     {
       "date": "2026-10-08",
       "art": "repair",
@@ -215,7 +79,7 @@
         ]
       },
       "files_sha256": "70c59c4cfdb6a604700c04ba52bf29859f3a2215816c7ce6f5d7cfc35a30b75d",
-      "prev_sha256": "5662ac9efa7de034b4224f2a8d514729ed933559d2ea2fe127d0e66073e0141f"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-08",
@@ -461,8 +325,219 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "ec666bf10a4dc7b18f3b6a366c1bde85cdd9bc65d5a86f15cef3ece165bd7871",
-      "files_sha256": "3882a48befcdeb880909f209c8a7d7b7e89208765862870adb376fb2ca264956"
+      "files_sha256": "3882a48befcdeb880909f209c8a7d7b7e89208765862870adb376fb2ca264956",
+      "prev_sha256": "ec666bf10a4dc7b18f3b6a366c1bde85cdd9bc65d5a86f15cef3ece165bd7871"
+    },
+    {
+      "date": "2026-10-11",
+      "art": "set-current",
+      "head": "513f160",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/_partials/extend_footer.html",
+        "layouts/shortcodes/einspartabelle.html",
+        "layouts/shortcodes/tarifvergleich.html",
+        "scripts/affiliate_integrity_gate.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_default/_markup/render-link.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/affiliate_anchor_attrs.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/extend_footer.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/shortcodes/einspartabelle.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/shortcodes/tarifvergleich.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/affiliate_integrity_gate.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ad36258",
+              "datum": "2026-10-11",
+              "betreff": "refactor(umami): Umami vollständig entfernt, data-umami-* → data-klick*"
+            },
+            {
+              "sha": "ed4dbc1",
+              "datum": "2026-10-11",
+              "betreff": "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "f39e589a0f4cfa4b6812b3852325a7f87664157abd0663d41042573e2bed3a32",
+      "prev_sha256": "ee413b085995244d062e0e14b2033f9fe98cccd0ef218c24733966712c540397"
+    },
+    {
+      "date": "2026-10-11",
+      "art": "set-current",
+      "head": "a00ea6e",
+      "geaendert": [
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "scripts/affiliate_integrity_gate.py",
+        "scripts/tag_casing.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_default/_markup/render-link.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "d037bcf",
+              "datum": "2026-10-11",
+              "betreff": "chore(awin): Awin aus Inhalten, Layouts und /go-Seiten entfernen"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "layouts/_partials/affiliate_anchor_attrs.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "d037bcf",
+              "datum": "2026-10-11",
+              "betreff": "chore(awin): Awin aus Inhalten, Layouts und /go-Seiten entfernen"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "scripts/affiliate_integrity_gate.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "60d2b98",
+              "datum": "2026-10-11",
+              "betreff": "Awin aus Code, Daten und Doku entfernen (Stufe 2)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "scripts/tag_casing.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "60d2b98",
+              "datum": "2026-10-11",
+              "betreff": "Awin aus Code, Daten und Doku entfernen (Stufe 2)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "8adcb361523d7fb64c7c8400f956260afe8816b800fa781dd9d5c7b43545872c",
+      "files_sha256": "fc4305c6ab1e51dcba9ac766764bf06da60bdab29884338eca39d179979c4c5c"
     }
   ]
 }

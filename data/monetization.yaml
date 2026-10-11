@@ -1,8 +1,5 @@
 # Monetarisierungsquellen des Blogs.
-# Awin ist bewusst deaktiviert: Die aktiven Partnerprogramme werden nicht über
-# Awin abgewickelt. Governance darf dafür keine nicht benötigten Secrets fordern.
 provider: umami-only
-awin_enabled: false
 
 # Umami ist als Messquelle vorbereitet, aber im Browser derzeit per leerer
 # websiteId in hugo.toml aus Datenschutzgründen deaktiviert. Erst nach

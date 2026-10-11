@@ -13,14 +13,14 @@
 #  WARUM VERSION 2 (Vorfall 01./02.09.2026 – "stille Blindheit"):
 #
 #  Am 01.09.2026 wurde der Render-Hook layouts/_default/_markup/
-#  render-link.html erweitert (Awin-SubID `?subid=<artikel>`, Umami-
+#  render-link.html erweitert (SubID `?subid=<artikel>`, Umami-
 #  Kontext-Attribute). Seitdem zählte der Render-Beweis AI4 in JEDEM
 #  Artikel 0 Affiliate-Links – obwohl alle Links korrekt im HTML standen.
 #  Ursache: AI4 war als EIN starres Regex auf die exakte Attribut-Reihen-
 #  folge der damaligen Ausgabe genagelt:
 #      r"<a href=/go/[\w-]+/[^>]*affiliate_click[^>]*>"
 #  Der Hook liefert aber (a) ein QUOTIERTES href und (b) zwischen href und
-#  data-umami-event vier weitere Attribute (`?subid=` bricht zusätzlich das
+#  data-klick vier weitere Attribute (`?subid=` bricht zusätzlich das
 #  `[\w-]+/`-Muster). Folge: 24/24 Artikel "Render-Probleme", die tägliche
 #  Wache rot (Issues #76/#78/#95/#99/#137/#146), BESTAND-REPORT rot, und –
 #  am gefährlichsten – publish_gate.py hätte jeden Re-Queue-Kandidaten wegen
@@ -29,14 +29,14 @@
 #  LEHRE (diese Version setzt sie um): Ein Beweis, der die HTML-Ausgabe
 #  nur "anblickt", bricht bei jeder Layout-Änderung. Deshalb:
 #    1. ATTRIBUT-TOLERANTE AUSWERTUNG: <a>-Tags werden geparst (href,
-#       rel, data-umami-event, target) statt per Positions-Regex gezählt.
+#       rel, data-klick, target) statt per Positions-Regex gezählt.
 #       Minifiziert oder nicht, quotes oder nicht, ?subid= oder nicht –
 #       alles gleich gültig.
 #    2. EINGEFRORENER SELBSTTEST (--selftest): Fixtures aus REALER
 #       Hook-Ausgabe (01.09.-Format, 14.08.-Format, unminifiziert) plus
 #       die Schadensfälle von 14.08. Dazu ein ABGLEICH GEGEN DAS LIVE-
 #       TEMPLATE: enthält render-link.html den Gateway-Link noch mit
-#       `data-umami-event="affiliate_click"`? Fehlt der Fingerabdruck,
+#       `data-klick="affiliate_click"`? Fehlt der Fingerabdruck,
 #       meldet das Gate "Detektor veraltet" (Exit 2) statt grüner Nullen.
 #    3. FAIL-CLOSED: Kann der Beweis nicht geführt werden (kein public/,
 #       Hugo-Build失败, Selbsttest rot), ist das ein WERKZEUGFEHLER
@@ -1005,10 +1005,10 @@ def verify_article_render(article: dict, reg: dict,
                 "layouts/_default/_markup/render-link.html")
             break
     for attrs in gateway_anchors:
-        umami = " ".join(f"{k}={v}" for k, v in attrs.items() if "umami" in k)
-        if "affiliate_click" not in umami:
+        klick = " ".join(f"{k}={v}" for k, v in attrs.items() if k.startswith("data-klick"))
+        if "affiliate_click" not in klick:
             result["notes"].append(
-                "Klick-Attribution (data-umami-event=affiliate_click) fehlt an "
+                "Klick-Attribution (data-klick=affiliate_click) fehlt an "
                 "mindestens einem Gateway-Link – Umsatz-Messung pro Artikel "
                 "unvollständig (Prüfpunkt: render-link.html)")
             break
@@ -1441,28 +1441,28 @@ def write_state(result: dict) -> None:
 #  SELBSTTEST (eingefrorene Fixtures – Sabotage-/Drift-Schutz)
 # ------------------------------------------------------------------ #
 # Reale Hook-Ausgaben. FIXTURE_CURRENT stammt 1:1 aus dem Build vom
-# 02.09.2026 (Render-Hook mit Awin-SubID + Umami-Kontext), FIXTURE_LEGACY
+# 02.09.2026 (Render-Hook mit SubID + Umami-Kontext), FIXTURE_LEGACY
 # aus dem Stand 14.08.2026. Genau zwischen diesen beiden Formaten ist das
 # alte Gate blind geworden – deshalb sind BEIDE eingefroren.
 FIXTURE_CURRENT = (
     '<p>Text <a href="/go/kfz-versicherung/?subid=2026-08-26-kfz" '
     'rel="sponsored nofollow noopener" target=_blank '
-    'data-umami-event=affiliate_click data-umami-event-slug=kfz-versicherung '
-    'data-umami-event-article=posts/2026-08-26-kfz/index.md '
-    'data-umami-event-pillar=versicherungen '
+    'data-klick=affiliate_click data-klick-slug=kfz-versicherung '
+    'data-klick-article=posts/2026-08-26-kfz/index.md '
+    'data-klick-pillar=versicherungen '
     'title="Weiter zu Check24 · Kfz-Versicherung (Partnerlink = Werbung)">'
     '<strong>Jetzt vergleichen</strong></a> und '
     '<a href="/go/haftpflicht/?subid=2026-08-26-kfz" rel="sponsored nofollow noopener" '
-    'target="_blank" data-umami-event="affiliate_click" '
-    'data-umami-event-slug="haftpflicht">Kostenlos vergleichen</a></p>'
+    'target="_blank" data-klick="affiliate_click" '
+    'data-klick-slug="haftpflicht">Kostenlos vergleichen</a></p>'
 )
 FIXTURE_LEGACY = (
     '<a href=/go/strom/ rel="sponsored nofollow noopener" target=_blank '
-    'data-umami-event=affiliate_click><strong>Kostenlos vergleichen</strong></a>'
+    'data-klick=affiliate_click><strong>Kostenlos vergleichen</strong></a>'
 )
 FIXTURE_UNMINIFIED = (
     '<a href="/go/gas/"\n   rel="sponsored nofollow noopener"\n'
-    '   target="_blank"\n   data-umami-event="affiliate_click"\n'
+    '   target="_blank"\n   data-klick="affiliate_click"\n'
     '   title="Weiter zu Check24 · Gastarife (Partnerlink = Werbung)">\n'
     '  <strong>Vergleichen</strong>\n</a>'
 )
@@ -1555,7 +1555,7 @@ def run_selftest() -> list[str]:
            "unminifiziertes, mehrzeiliges Format muss erkannt werden")
 
     no_track, _ = rendered_affiliate_anchors(FIXTURE_NO_TRACKING)
-    expect(len(no_track) == 1, "Gateway-Link OHNE Umami-Attribut muss trotzdem zählen "
+    expect(len(no_track) == 1, "Gateway-Link OHNE data-klick-Attribut muss trotzdem zählen "
                                "(Zählung darf nicht an Attributen hängen)")
     _, raw_only = rendered_affiliate_anchors(FIXTURE_RAW_PARTNER)
     expect(len(raw_only) == 1, "roher Partner-Link im HTML muss als Leck erkannt werden")

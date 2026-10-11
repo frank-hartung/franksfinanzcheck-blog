@@ -21,7 +21,7 @@ Dieser Ratgeber ist kostenlos, hat keine Bezahlschranke und verkauft keine Daten
 
 ## 2. Woher das Geld kommt
 
-Die Finanzierung läuft über Partnerprogramme, abgerechnet über das Affiliate-Netzwerk Awin. Wenn du über einen gekennzeichneten Link zu einem Partner wechselst und dort einen Vertrag abschließt, meldet der Partner diesen Abschluss und zahlt eine Provision.
+Die Finanzierung läuft über Partnerprogramme. Wenn du über einen gekennzeichneten Link zu einem Partner wechselst und dort einen Vertrag abschließt, meldet der Partner diesen Abschluss und zahlt eine Provision.
 
 {{< partnerliste >}}
 

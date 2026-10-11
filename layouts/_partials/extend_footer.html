@@ -1,13 +1,9 @@
 {{- /* ============================================================
-    Pinterest-Footer + optionaler Analyse-Consent (Site-Override)
-    - Consent erscheint nur bei konfigurierter Umami-Website-ID
+    Pinterest-Footer (Analyse-Banner und Umami entfernt, 11.10.2026)
     - Pinterest-Link NUR auf Inhaltsseiten, NICHT auf Rechtsseiten
       (impressum, datenschutz)
     - Funktioniert ohne externe Dienste (offline-fähig)
-    - Speichert die Einwilligung im Cookie "ff_analytics_consent_v2"
-      (technisch notwendig, § 25 Abs. 2 TDDDG – kein Consent nötig)
-    - Bietet API für künftige Tracking-Skripte: window.ffConsentChoice
-    - Upgrade auf Cookiebot/Klaro jederzeit möglich (siehe README)
+    - Räumt nur noch alte Einwilligungs-Cookies auf (kein Setzen mehr)
 ============================================================ -}}
 
 {{- /* ---------- Pinterest & Mastodon-Footer (nur auf Inhaltsseiten) ---------- */ -}}
@@ -36,74 +32,8 @@
 {{- /* Newsletter-Anmeldung: newsletterFormAction / newsletterFormUrl werden
        zentral in newsletter_strip.html ausgewertet. Kein zweiter CTA hier. */ -}}
 
-{{- with site.Params.umami.websiteId }}
-<div class="ff-consent-wrap" style="text-align:center; margin: 8px 0;">
-  <a href="#" onclick="ffConsentShow(true);return false;" title="Analyse-Einstellungen öffnen"
-     class="ff-consent-reopen">Analyse-Einstellungen</a>
-</div>
-
-{{- /* ---------- Consent-Banner (Logik) ---------- */ -}}
-<script>
-(function () {
-  var KEY = 'ff_analytics_consent_v2';
-  function getCookie(name) {
-    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-    return m ? decodeURIComponent(m[1]) : null;
-  }
-  function setCookie(name, value) {
-    document.cookie = name + '=' + encodeURIComponent(value) + ';max-age=31536000;path=/;SameSite=Lax';
-  }
-  var root = document.documentElement;
-  // Öffentliche API: Einwilligung setzen / Banner erneut öffnen / Status abfragen
-  // Klassenbasierte Steuerung (html.ff-consent-set) statt style.display-Wechsel:
-  // - Banner sichtbar (Standard-CSS), wenn KEINE Klasse gesetzt ist
-  // - Schließen = Klasse setzen (kein Reflow im JS)
-  // - Öffnen (Klick) = Klasse entfernen
-  // Das Head-Skript setzt die Klasse für Rückkehrer bereits VOR dem ersten
-  // Paint – der Banner wird dort nie gerendert (kein Flash, kein CLS).
-  window.ffConsent = function (choice) {
-    setCookie(KEY, choice);
-    window.ffConsentChoice = choice;
-    root.classList.add('ff-consent-set');
-    // Event für nachgeladene Dienste (z. B. Umami-Analytics, das bei
-    // späterer Zustimmung "Alle akzeptieren" nachgeladen wird)
-    try {
-      document.dispatchEvent(new CustomEvent('ffConsentChange', { detail: choice }));
-    } catch (e) {}
-  };
-  window.ffConsentShow = function (focusFirst) {
-    root.classList.remove('ff-consent-set');
-    // Fokus NUR bei explizitem Öffnen (Klick auf „Cookie-Einstellungen“):
-    // WCAG 3.2.1 – automatisch erscheinende Banner übernehmen keinen Fokus.
-    // Beim Klick: Fokus erst nach dem nächsten vollständigen Frame
-    // (Double-rAF), damit das Banner-Layout berechnet ist.
-    if (focusFirst) {
-      var firstBtn = document.querySelector('#ff-consent-banner button');
-      if (firstBtn) {
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            firstBtn.focus({ preventScroll: true });
-          });
-        });
-      }
-    }
-  };
-  // Escape-Taste schließt den Banner, wenn er sichtbar ist
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !root.classList.contains('ff-consent-set')) {
-      window.ffConsent('necessary');
-    }
-  });
-  window.ffConsentStatus = function () { return getCookie(KEY); };
-  // Erstbesucher (kein Cookie): Banner ist bereits per CSS sichtbar –
-  // kein JS-Einblenden nötig (LCP-optimiert).
-})();
-</script>
-
-{{- else }}
-{{- /* Alte Consent-Cookies entfernen; die Messung ist deaktiviert. */ -}}
-<script>document.cookie="ff_cookie_consent=;max-age=0;path=/;SameSite=Lax";</script>
-{{- end }}
+{{- /* Alte Einwilligungs-Cookies entfernen (Umami/Analyse-Banner entfernt, 11.10.2026). */ -}}
+<script>document.cookie="ff_cookie_consent=;max-age=0;path=/;SameSite=Lax";document.cookie="ff_analytics_consent_v2=;max-age=0;path=/;SameSite=Lax";</script>
 
 {{- /* ---------- Premium Blog Enhancements: GSAP + reflow-sichere UX-Microinteractions ----------
      First-party/self-hosted, kein Tracking, keine Cookies.

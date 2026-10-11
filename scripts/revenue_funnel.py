@@ -4,7 +4,7 @@ REVENUE-FUNNEL – die komplette Umsatzmessung: Besuch → Klick → Antrag → 
 
 WARUM: Eine Profi-Agentur investiert keinen Euro in Reichweite, bevor der
 Monetarisierungs-Trichter sichtbar ist. Die Einzelteile existieren (Umami-
-Klickimport, Awin-Provisionen, Klick-Attribution), aber die EINHEIT – der
+Klickimport, Provisions-Tabelle, Klick-Attribution), aber die EINHEIT – der
 Trichter mit allen acht Kennzahlen je Woche – fehlte. Ohne ihn heißt es
 „0 Klicks, 0.00 €“ – und das ist kein Messwert, sondern Unwissen. Dieses
 Skript übersetzt Unwissen in eine dokumentierte Datenlücke und misst alles,
@@ -13,10 +13,10 @@ was messbar ist:
   1. Besuche je kaufnaher Seite   (Umami /pages ÷ Seiten mit /go/-CTA)
   2. Affiliate-Klicks             (Umami `affiliate_click` je Stelle/Artikel)
   3. Outbound-CTR                 (Klicks ÷ Besuche kaufnaher Seiten)
-  4. Klick → Antrag               (Awin-Transaktionen jeglichen Status ÷ Klicks)
+  4. Klick → Antrag               (Abschlüsse aus der Provisions-Tabelle ÷ Klicks)
   5. Antrag → bestätigter Abschluss (approved ÷ alle Anträge)
   6. Stornoquote                  (declined ÷ abgeschlossene Anträge)
-  7. Provision pro 100 Besuche    (Awin-Provision ÷ Besuche × 100)
+  7. Provision pro 100 Besuche    (Provision ÷ Besuche × 100)
   8. EPC                          (Provision ÷ Affiliate-Klicks)
 
 EHRLICHE REGELN (Hausrecht der Messkette, siehe umami_clicks.py):
@@ -57,8 +57,6 @@ VIEWS_META = os.path.join(DATA, "umami_views.meta.json")
 CLICKS = os.path.join(DATA, "umami_clicks.json")
 CLICKS_META = os.path.join(DATA, "umami_clicks.meta.json")
 CTAS = os.path.join(DATA, "umami_ctas.json")
-AWIN = os.path.join(DATA, "awin_provisions.json")
-AWIN_META = os.path.join(DATA, "awin_fetch.meta.json")
 # Manuelle Provisions-Monatssummen (Abgeleitetes aus `data/provisionen/provisionen.csv`,
 # geschrieben von `scripts/offline_import.py`). Die CSV selbst ist gitignored –
 # versioniert wird nur das Aggregat, weil es keine Abrechnungs-Details enthält.
@@ -89,11 +87,6 @@ SOURCES = (
     ("clicks", "Affiliate-Klicks (Umami event-data)", CLICKS, CLICKS_META,
      "Secret `UMAMI_API_TOKEN` setzen, dann `python3 scripts/umami_clicks.py --fetch` ausführen"),
 )
-
-# Awin ist kein aktiver Partner dieses Blogs. Die Quelle bleibt im Code für
-# historische CSV-Importe verfügbar, darf aber ohne ausdrückliche Aktivierung
-# weder als fehlend noch als Governance-Befund erscheinen.
-AWIN_ENABLED = False
 
 
 def umami_api_import_enabled(config_path=None):
@@ -264,17 +257,17 @@ def fmt(v, kind="int"):
     return f"{v:.4f}".replace(".", ",")
 
 
-def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None,
+def compute(views_doc, clicks_rows, cta_rows, paths, measured=None,
             manual_prov=None):
     """Reine Trichter-Rechnung (testbar, ohne Dateizugriff).
 
-    `measured` = {views, clicks, awin: bool}: „die Quelle wurde erfolgreich
+    `measured` = {views, clicks: bool}: „die Quelle wurde erfolgreich
     importiert“. Nur dann darf eine 0 als echte Null stehen – sonst gilt
     überall die Hausregel: nicht gemessen ⇒ unbekannt, nie eine Null.
 
     `manual_prov` = Monatsaggregate der Partnerabrechnungen (manuelle
-    Provisions-Tabelle). Sie überlagert NUR, was die Awin-API nicht liefert, und
-    wird überall als „provisionen-tabelle“ gekennzeichnet – eine Abrechnungs-
+    Provisions-Tabelle). Sie ist die einzige Provisionsquelle und wird überall
+    als „provisionen-tabelle“ gekennzeichnet – eine Abrechnungs-
     summe ist kein API-Transaktionszähler und darf auch nicht wie einer
     aussehen (Monats-, nicht Fenster-Sicht)."""
     views = (views_doc or {}).get("pages") if isinstance(views_doc, dict) else None
@@ -282,9 +275,7 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None,
     totals = (views_doc or {}).get("totals") if isinstance(views_doc, dict) else None
     totals = totals if isinstance(totals, dict) else {}
     clicks_rows = [r for r in (clicks_rows or []) if isinstance(r, dict)]
-    awin_doc = awin_doc if isinstance(awin_doc, dict) else {}
-    m = measured or {"views": bool(views_doc), "clicks": bool(clicks_rows),
-                     "awin": bool(awin_doc)}
+    m = measured or {"views": bool(views_doc), "clicks": bool(clicks_rows)}
 
     # Besuche: ganze Seite + kaufnahe Teileschiene
     views_total = totals.get("visits") or 0
@@ -310,30 +301,28 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None,
 
     # Platzierungen (cta_click-Import von Start-/Pillar-CTAs)
     placements = {}
-    for r in [x for x in (cta_rows or []) + clicks_rows if isinstance(x, dict)]:
+    cta_rows = cta_rows if isinstance(cta_rows, list) else []
+    for r in [x for x in cta_rows + clicks_rows if isinstance(x, dict)]:
         if str(r.get("event") or "") == "cta_click":
             label = str(r.get("slug") or "unbenannt")[:60]
             placements[label] = placements.get(label, 0) + int(r.get("count") or 0)
 
-    # Awin-Trichter: Antrag → Abschluss → Storno
-    st = awin_doc.get("status_totals") or {}
-    has_awin = bool(m.get("awin"))
-    antraege = sum(int(d.get("count") or 0) for d in st.values()) if st else (0 if has_awin else None)
-    confirmed = int((st.get("approved") or {}).get("count") or 0)
-    declined = int((st.get("declined") or {}).get("count") or 0)
-    pending = int((st.get("pending") or {}).get("count") or 0)
-    revenue = awin_doc.get("total_commission") if has_awin else None
-    if revenue is not None:
-        revenue = round(float(revenue), 2)
-    provision_bezahlt = round(float(awin_doc.get("total_paid") or 0), 2) if has_awin else None
-    prov_quelle = "awin" if has_awin else None
+    # Trichter-Kennzahlen starten als „unbekannt“ (None). Nur die Provisions-
+    # Tabelle füllt sie – nie eine Null, die es nicht gibt.
+    antraege = None
+    confirmed = None
+    declined = None
+    pending = None
+    revenue = None
+    provision_bezahlt = None
+    prov_quelle = None
 
-    # Zweite Datenbrücke: manuelle Provisions-Tabelle (Partnerabrechnungen).
-    # Füllt ausschließlich, was die API nicht liefert – nie daneben, nie darüber.
+    # Provisions-Tabelle (Partnerabrechnungen, Monatssummen): einzige Quelle für
+    # Anträge, Abschlüsse, Stornos und Provision.
     mp = manual_prov if isinstance(manual_prov, dict) else {}
     ms = mp.get("summe") if isinstance(mp.get("summe"), dict) else {}
     prov_monats_alter = None
-    if not has_awin and ms:
+    if ms:
         abschl = int(ms.get("abschluesse") or 0)
         stornos = int(ms.get("stornos") or 0)
         antraege = abschl if abschl else 0
@@ -350,26 +339,16 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None,
         except (ValueError, TypeError):
             prov_monats_alter = None
 
-    # Provision je Seite (für die Trichter-Tabelle; SubID-Auflösung wie in awin_provisions:
-    # Awin führt den Artikel als rohen Slug, Umami als content-Pfad – hier wird
-    # beides auf denselben Blog-Pfad /posts/<slug>/ bzw. /pillar/<key>/ gebracht)
+    # Provision je Seite ist nicht messbar: die Tabelle liefert nur Monatssummen.
     per_article_rev = {}
-    for key, v in (awin_doc.get("articles") or {}).items():
-        art = str(v.get("article") or key)
-        if re.match(r"^20\d{2}-", art):
-            path = f"/posts/{art}/"
-        else:
-            path = article_to_path(art) or "sonstiges"
-        d = per_article_rev.setdefault(path, {"revenue": 0.0, "orders": 0})
-        d["revenue"] += float(v.get("commission") or 0)
-        d["orders"] += int(v.get("orders") or 0)
+
 
     # Kennzahlen – None heißt „unbekannt“, das ist der ganze Witz.
     rates = {
         "outbound_ctr": _rate(clicks_total, views_kaufnah),
         "klick_antrag": _rate(antraege, clicks_total),
         "antrag_abschluss": _rate(confirmed, antraege),
-        "stornoquote": _rate(declined, (confirmed or 0) + (declined or 0) if st else None),
+        "stornoquote": _rate(declined, (confirmed or 0) + (declined or 0) if prov_quelle else None),
         "rev_per_100_visits": _per100(revenue, views_total if m.get("views") else None),
         "rev_per_100_kaufnah": _per100(revenue, views_kaufnah),
         "epc": _per_unit(revenue, clicks_total),
@@ -405,7 +384,7 @@ def compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=None,
                       "monat": (mp.get("letzter_monat") if prov_quelle == "provisionen-tabelle"
                                 else None),
                       "zeitbezug": ("monat" if prov_quelle == "provisionen-tabelle"
-                                    else "fenster" if prov_quelle == "awin" else None),
+                                    else None),
                       "monats_alter": prov_monats_alter},
         "raten": rates,
         "platzierungen": dict(sorted(placements.items(), key=lambda kv: -kv[1])),
@@ -471,7 +450,7 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
         ("Antrag → bestätigter Abschluss", fmt(rate["antrag_abschluss"], "pct")),
         ("Stornoquote (declined ÷ abgeschlossene)", fmt(rate["stornoquote"], "pct")),
         ("Provision (gesamt)", fmt(f["provision"]["gesamt"], "eur")),
-        ("Provision bezahlt (Awin-Kasse)", fmt(f["provision"]["bezahlt"], "eur")),
+        ("Provision bezahlt", fmt(f["provision"]["bezahlt"], "eur")),
         ("Provision pro 100 Besuche (gesamte Site)",
          fmt(rate["rev_per_100_visits"], "eur")),
         ("Provision pro 100 Besuche (kaufnahe Seiten)",
@@ -489,7 +468,7 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
                                     "EPC (Einnahmen pro Affiliate-Klick)") else ""), v)
                 for k, v in rows]
         rows = [(k.replace("Provision (gesamt)", f"Provision (Abrechnungstabelle, Stand {stand})")
-                 .replace("Provision bezahlt (Awin-Kasse)",
+                 .replace("Provision bezahlt",
                           "Provision bezahlt (lt. Abrechnungstabelle)"), v)
                 for k, v in rows]
     ampel = "GREEN" if not gaps else "AMBER"
@@ -561,7 +540,7 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
             "   (Tooltip/Anker müssen halten, was sie versprechen – siehe Intent-Wache).",
             "",
             "_Erzeugt von `scripts/revenue_funnel.py`; Quelle der Zahlen: Umami-API +",
-            "Awin-Publisher-API. „unbekannt“ heißt: Messkette noch nicht befüllt –",
+            "Provisions-Tabelle. „unbekannt“ heißt: Messkette noch nicht befüllt –",
             "siehe Datenqualität oben, nicht „nichts verdient“._",
             ""]
     return "\n".join(out) + "\n"
@@ -628,8 +607,6 @@ def main(argv=None):
     clicks_rows = _read_json(CLICKS, []) or []
     clicks_meta = _read_json(CLICKS_META, {}) or {}
     cta_rows = _read_json(CTAS, []) or []
-    awin_doc = _read_json(AWIN, {}) or {}
-    awin_meta = _read_json(AWIN_META, {}) or {}
     prov_doc = _read_json(PROVISIONEN, {}) or {}
     offline_meta = _read_json(OFFLINE_META, {}) or {}
 
@@ -642,7 +619,6 @@ def main(argv=None):
                                       not in ("skipped", "disabled") or bruecke),
         "clicks": ((clicks_meta.get("status") or ("ok" if clicks_rows else "fehlt")) == "ok")
                   or bruecke,
-        "awin": bool(awin_doc),
     }
     src = [("offline", SOURCES[0][1], *_source_state(prov_doc or {}, offline_meta)),
            ("views", SOURCES[1][1], *_source_state(views_doc, views_meta)),
@@ -653,9 +629,6 @@ def main(argv=None):
     # Frische manuelle Brücke ⇒ die abgeleiteten Bestände zählen als Messung.
     if bruecke:
         src = [(k, label, zustand_mit_bruecke(state, True), age) for k, label, state, age in src]
-    if AWIN_ENABLED:
-        src.append(("awin", "Awin-Transaktionen (Publisher API)",
-                    *_source_state(awin_doc, awin_meta)))
     # Ein leeres, aber frisch als ok geschriebenes Import-File ist eine MES-SUNG
     # (echte 0), kein Loch – evaluate darf das nicht doppelt zählen.
     def _state_of(state, age, key):
@@ -671,10 +644,8 @@ def main(argv=None):
             "Umami Analytics: API-Import deaktiviert (Umami Free – Klicks und Besuche werden im Umami-Dashboard erfasst)"
         )
     source_fixes = {k: SOURCES[i][4] for i, k in enumerate(("offline", "views", "clicks"))}
-    if AWIN_ENABLED:
-        source_fixes["awin"] = "Awin-Quelle konfigurieren oder CSV-Export importieren"
     fixes = [source_fixes[k] for k, _l, state, _a in src if state not in ("ok", "disabled")]
-    f = compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=measured,
+    f = compute(views_doc, clicks_rows, cta_rows, paths, measured=measured,
                 manual_prov=prov_doc)
     # Info-Grenze (keine Lücke): Abrechnungstabelle zu lange nicht nachgetragen.
     alter = f["provision"].get("monats_alter")
@@ -735,8 +706,7 @@ def main(argv=None):
         log_event(module="revenue_funnel", action="report",
                   input={"views": _zustand("views", "unknown"),
                          "clicks": _zustand("clicks", "unknown"),
-                         "offline": _zustand("offline", "unknown"),
-                         "awin": _zustand("awin", "disabled")},
+                         "offline": _zustand("offline", "unknown")},
                   output={"gaps": len(gaps), "clicks": f["affiliate_klicks"],
                           "revenue": f["provision"]["gesamt"]}, status="ok")
     except Exception:  # noqa: BLE001
@@ -802,15 +772,11 @@ def _selftest():
                "article": "posts/2026-08-16-gas-anbieter-wechseln/index.md",
                "pillar": "", "count": 40},
               {"event": "cta_click", "slug": "home-strom", "article": "home", "count": 25}]
-    awin = {"generated": TODAY.isoformat(), "total_commission": 210.0, "total_paid": 150.0,
-            "status_totals": {"pending": {"count": 6, "commission": 60.0},
-                              "approved": {"count": 9, "commission": 150.0},
-                              "declined": {"count": 3, "commission": 0.0}},
-            "articles": {"2026-08-16-gas-anbieter-wechseln":
-                         {"commission": 120.0, "orders": 8,
-                          "subid": "2026-08-16-gas-anbieter-wechseln"}}}
-    f = compute(views, clicks, awin, [], {"/pillar/", "/posts/2026-08-16-gas-anbieter-wechseln/",
-                                          "/pillar/strom-sparen/"})
+    # Provisions-Tabelle als einzige Quelle: 20 Abschlüsse, 5 Stornos, 210 € Provision.
+    mp1 = {"summe": {"abschluesse": 20, "stornos": 5, "provision_eur": 210.0},
+           "monate": [f"{TODAY:%Y-%m}"], "letzter_monat": f"{TODAY:%Y-%m}", "partner": ["CHECK24"]}
+    f = compute(views, clicks, [], {"/pillar/", "/posts/2026-08-16-gas-anbieter-wechseln/",
+                                    "/pillar/strom-sparen/"}, manual_prov=mp1)
     r = f["raten"]
     if f["affiliate_klicks"] != 40:
         failures.append(f"cta_click verunreinigt Affiliate-Zähler: {f['affiliate_klicks']}")
@@ -818,9 +784,9 @@ def _selftest():
         failures.append(f"Besuche kaufnah: {f['views']['kaufnah']}")
     if abs(r["outbound_ctr"] - 100 * 40 / 230) > 0.01:
         failures.append(f"Outbound-CTR: {r['outbound_ctr']}")
-    if f["transaktionen"]["antraege"] != 18:
+    if f["transaktionen"]["antraege"] != 20:
         failures.append(f"Anträge gesamt: {f['transaktionen']['antraege']}")
-    if abs(r["antrag_abschluss"] - 50.0) > 0.01:
+    if abs(r["antrag_abschluss"] - 75.0) > 0.01:
         failures.append(f"Antrag→Abschluss: {r['antrag_abschluss']}")
     if abs(r["stornoquote"] - 25.0) > 0.01:
         failures.append(f"Stornoquote: {r['stornoquote']}")
@@ -832,18 +798,18 @@ def _selftest():
         failures.append(f"Platzierungen: {f['platzierungen']}")
     top = f["seiten"][0]
     if (top["path"] != "/posts/2026-08-16-gas-anbieter-wechseln/" or top["clicks"] != 40
-            or top["revenue"] != 120.0 or top["epc"] != 3.0):
+            or top["revenue"] is not None or top["epc"] is not None):
         failures.append(f"Seiten-Trichter Top: {top}")
     if top["ctr"] != 20.0:
         failures.append(f"Seiten-CTR (Klicks ÷ Seitenaufrufe): {top['ctr']}")
     # --- „unbekannt“ ≠ 0: leere Quellen dürfen nirgends Nullen gebären
-    empty = compute({}, [], {}, [], {"/", "/pillar/"})
+    empty = compute({}, [], [], {"/", "/pillar/"})
     for name, v in list(empty["raten"].items()) + [("klicks", empty["affiliate_klicks"]),
                                                    ("prov", empty["provision"]["gesamt"]),
                                                    ("antraege", empty["transaktionen"]["antraege"])]:
         if v is not None:
             failures.append(f"ohne Quellen erfindet der Trichter {name}={v} (soll unbekannt)")
-    if "unbekannt" not in render(empty, ["Besuche: fehlt", "Klicks: fehlt", "Awin: fehlt"],
+    if "unbekannt" not in render(empty, ["Besuche: fehlt", "Klicks: fehlt", "Provisionen: fehlt"],
                                  ["Secrets setzen"], []):
         failures.append("Report versteckt das Wort „unbekannt“")
     # --- Ampel + Marker + Befundtabelle für den Governance-Gate
@@ -871,8 +837,8 @@ def _selftest():
     fm = compute({"totals": {"visits": 200, "pageviews": 300},
                   "pages": [{"path": "/pillar/strom-sparen/", "views": 90, "visits": 60}]},
                  [{"event": "affiliate_click", "count": 12, "article": "pillar/strom-sparen/index.md"}],
-                 {}, [], {"/pillar/strom-sparen/"},
-                 measured={"views": True, "clicks": True, "awin": False}, manual_prov=mp)
+                 [], {"/pillar/strom-sparen/"},
+                 measured={"views": True, "clicks": True}, manual_prov=mp)
     if fm["provision"]["gesamt"] != 67.5 or fm["provision"]["quelle"] != "provisionen-tabelle":
         failures.append(f"manuelle Provisionstabelle wird nicht genutzt: {fm['provision']}")
     if fm["provision"]["zeitbezug"] != "monat" or fm["transaktionen"]["antraege"] != 4:
@@ -899,13 +865,6 @@ def _selftest():
         failures.append("Report verschweigt Herkunft ‚Abrechnungstabelle‘ bzw. die Messbrücke")
     if rep_m.count("*") < 3:
         failures.append("gemischter Zeitbezug wird nicht mit Sternchen + Fußnote markiert")
-    fa = compute({"totals": {"visits": 100}}, [], {"generated": TODAY.isoformat(),
-                 "total_commission": 50.0, "total_paid": 50.0,
-                 "status_totals": {"approved": {"count": 1, "commission": 50.0}},
-                 "articles": {}}, [], {"/pillar/"},
-                 measured={"views": True, "clicks": False, "awin": True}, manual_prov=mp)
-    if fa["provision"]["quelle"] != "awin" or fa["provision"]["gesamt"] != 50.0:
-        failures.append("Awin-API wird von der manuellen Tabelle überstimmt – verboten")
     if len(evaluate([("offline", "Manuelle Messbrücke", "ok", 0),
                      ("views", "Besuche", "fehlt", None),
                      ("clicks", "Klicks", "skipped", None)])) != 0:
@@ -956,9 +915,8 @@ def _selftest():
     # --- Datenqualitäts-Logik
     if evaluate([("views", "V", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
         failures.append("frische Quellen werden als Lücke gemeldet")
-    g = evaluate([("views", "V", "alt", 30), ("clicks", "K", "skipped", 1),
-                  ("awin", "A", "fehlt", None)])
-    if len(g) != 3 or "30d" not in " ".join(g):
+    g = evaluate([("views", "V", "alt", 30), ("clicks", "K", "skipped", 1)])
+    if len(g) != 2 or "30d" not in " ".join(g):
         failures.append(f"Lückentext unvollständig: {g}")
     # --- Alter aus Meta
     if _age_days({"written": TODAY.isoformat()}) != 0:

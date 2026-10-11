@@ -1,0 +1,28 @@
+# ============================================================
+#  KLICK-ZÄHLER – Cloudflare Worker (Konfiguration)
+#  Deploy: cd cloudflare/klick-zaehler && npx wrangler deploy
+#  Vorher: D1-Datenbank anlegen (siehe Runbook) und die
+#          database_id unten eintragen. Keine Secrets in dieser Datei.
+#  Secrets/IDs des Imports (CLOUDFLARE_API_TOKEN …) liegen in
+#  GitHub Actions, nicht hier.
+# ============================================================
+name = "klick-zaehler"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Muss VOR den Tabellen stehen – sonst gehört es zu [vars] und wirkt nicht.
+routes = [
+  { pattern = "stats.franksfinanzcheck.de", custom_domain = true }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ff-klicks"
+database_id = "EINTRAGEN-NACH-wrangler-d1-create"
+
+[vars]
+KLICKS_AUS = "0"   # "1" = Zählung sofort aus (Notschalter, siehe Runbook)
+
+# Löschlauf der Tageszähler (Aufbewahrung 13 Monate), täglich 03:17 UTC
+[triggers]
+crons = ["17 3 * * *"]

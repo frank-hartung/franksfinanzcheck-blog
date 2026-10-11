@@ -115,7 +115,7 @@ class BucketAffiliateTest(unittest.TestCase):
         self.assertTrue(any("click-chain" in l for l in lines))
 
     def test_nur_info_ist_grau_keine_datenlage(self):
-        gov = {"steps": {"awin": {"level": "info", "message": "keine Daten"}}}
+        gov = {"steps": {"pinperf": {"level": "info", "message": "keine Daten"}}}
         lvl, lines, _ = cockpit.bucket_affiliate(gov)
         self.assertEqual(lvl, "grau")
         self.assertTrue(any("keine Datenlage" in l for l in lines))
@@ -123,7 +123,7 @@ class BucketAffiliateTest(unittest.TestCase):
     def test_gruenes_plus_info_bleibt_gruen(self):
         gov = {"steps": {
             "click-chain": {"level": "green", "message": "ok"},
-            "awin": {"level": "info", "message": "keine Daten"},
+            "pinperf": {"level": "info", "message": "keine Daten"},
         }}
         lvl, lines, _ = cockpit.bucket_affiliate(gov)
         self.assertEqual(lvl, "gruen")

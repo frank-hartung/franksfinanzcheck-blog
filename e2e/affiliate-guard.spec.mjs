@@ -61,8 +61,8 @@ test.describe('Affiliate-Integrität', () => {
         }
       }
       if (target !== '_blank') verstoesse.push(`${href}: target="${target}" statt _blank`);
-      // Awin-SubID-Attribution (01.09.2026): /go/-Links am Artikel tragen ?subid=<slug>
-      if (!/[?&]subid=/.test(href)) verstoesse.push(`${href}: keine ?subid= (Awin-Attribution)`);
+      // SubID-Weitergabe (01.09.2026): /go/-Links am Artikel tragen ?subid=<slug>
+      if (!/[?&]subid=/.test(href)) verstoesse.push(`${href}: keine ?subid= (Klick-Zuordnung)`);
     }
     expect(verstoesse, 'Affiliate-Links sind vollständig ausgezeichnet').toEqual([]);
   });
@@ -122,15 +122,15 @@ test.describe('Affiliate-Integrität', () => {
       for (let i = 0; i < n; i++) {
         const el = els.nth(i);
         const href = (await el.getAttribute('href')) || '';
-        const slug = await el.getAttribute('data-umami-event-slug');
-        const subid = await el.getAttribute('data-umami-event-subid');
-        const platz = await el.getAttribute('data-umami-event-placement');
-        if (!slug) probleme.push(`${quelle} #${i}: data-umami-event-slug fehlt (${href})`);
-        if (!platz) probleme.push(`${quelle} #${i}: data-umami-event-placement fehlt (${href})`);
+        const slug = await el.getAttribute('data-klick-slug');
+        const subid = await el.getAttribute('data-klick-subid');
+        const platz = await el.getAttribute('data-klick-placement');
+        if (!slug) probleme.push(`${quelle} #${i}: data-klick-slug fehlt (${href})`);
+        if (!platz) probleme.push(`${quelle} #${i}: data-klick-placement fehlt (${href})`);
         // SubID nur, wo sie hingehört: Outbound-/go/-Links tragen sie immer,
         // und nie einen Template-Artefakt-Rest wie „_index".
         if (href.includes('/go/')) {
-          if (!subid) probleme.push(`${quelle} #${i}: /go/-Link ohne data-umami-event-subid (${href})`);
+          if (!subid) probleme.push(`${quelle} #${i}: /go/-Link ohne data-klick-subid (${href})`);
           if (subid && subid.includes('_index')) {
             probleme.push(`${quelle} #${i}: SubID trägt Template-Artefakt „_index" (${subid})`);
           }
@@ -142,17 +142,17 @@ test.describe('Affiliate-Integrität', () => {
     const articlePath = await newestAffiliateArticle(page, request, baseURL);
     test.skip(!articlePath, 'Kein aktueller Artikel mit Affiliate-Links auf der Startseite');
     await page.goto(articlePath);
-    await prüfe('a[data-umami-event="affiliate_click"]', { pflicht: true, quelle: 'Artikel' });
+    await prüfe('a[data-klick="affiliate_click"]', { pflicht: true, quelle: 'Artikel' });
 
     // 2) Startseite: interne Hero-/Themenwelt-CTAs (cta_click, kein /go/)
     await page.goto('/');
-    await prüfe('a[data-umami-event="cta_click"]', { pflicht: true, quelle: 'Startseite' });
+    await prüfe('a[data-klick="cta_click"]', { pflicht: true, quelle: 'Startseite' });
 
     // 3) Pillar-Hub: Karten-CTAs + Spar-Matrix (Pflicht – dort sitzt der
     //    kaufnahe Traffic; fehlt hier etwas, ist der Trichter blind)
     await page.goto('/pillar/');
-    await prüfe('a[data-umami-event="affiliate_click"]', { pflicht: true, quelle: 'Pillar' });
-    const matrix = await page.locator('a[data-umami-event-placement="spar-matrix"]').count();
+    await prüfe('a[data-klick="affiliate_click"]', { pflicht: true, quelle: 'Pillar' });
+    const matrix = await page.locator('a[data-klick-placement="spar-matrix"]').count();
     expect(matrix, 'Spar-Matrix-CTAs tragen placement=spar-matrix').toBeGreaterThan(0);
 
     expect(probleme, 'Jeder gemessene CTA trägt eine vollständige Messsignatur').toEqual([]);

@@ -14,25 +14,55 @@ def read(path):
 
 
 class DatenschutzQuellvertrag(unittest.TestCase):
-    def test_analytics_deaktiviert_und_banner_nur_bei_aktivierter_instanz(self):
-        params = tomllib.loads(read("hugo.toml"))["params"]["umami"]
-        self.assertEqual(params["websiteId"], "")
-        self.assertTrue(params["consentRequired"])
-        self.assertIn('with site.Params.umami.websiteId', read("layouts/baseof.html"))
-        self.assertIn('with site.Params.umami.websiteId', read("layouts/_partials/extend_footer.html"))
-        self.assertIn('with site.Params.umami.websiteId', read("layouts/_partials/deferred_scripts.html"))
+    def test_umami_und_analyse_banner_entfernt(self):
+        # Umami wurde am 11.10.2026 entfernt (Kostenentscheidung, nicht Datenschutz).
+        # Diese Prüfung belegt, dass keine Konfiguration und kein Banner mehr übrig sind.
+        self.assertNotIn("umami", tomllib.loads(read("hugo.toml")).get("params", {}))
+        self.assertNotIn("site.Params.umami", read("layouts/baseof.html"))
+        self.assertFalse((ROOT / "layouts/_partials/consent_banner.html").exists())
+        for datei in ("layouts/baseof.html", "layouts/_partials/extend_footer.html",
+                      "layouts/_partials/deferred_scripts.html", "layouts/_partials/extend_head.html"):
+            self.assertNotIn("site.Params.umami", read(datei), datei)
+        # Rechtstext: Umami darf darin nicht mehr vorkommen, und die Aussage
+        # „keine Analyse-Cookies“ muss stehen.
         policy = read("content/datenschutz/index.md")
-        self.assertIn("Reichweitenmessung mit Umami deaktiviert", policy)
+        self.assertNotIn("umami", policy.lower())
+        self.assertIn("Wir setzen keine Cookies für Analyse", policy)
         self.assertNotIn("Aktuell aktiv ist der cookieless-Modus", policy)
 
-    def test_widerruf_und_altes_cookie(self):
+    def test_partner_hosts_stehen_in_der_datenschutzerklaerung(self):
+        # Jeder Weiterleitungs-Host aus der Link-Registry muss offengelegt sein.
+        import re
+        registry = read("scripts/check24_links.yaml")
+        policy = read("content/datenschutz/index.md")
+        hosts = set(re.findall(r"https?://([a-z0-9.-]+)/", registry))
+        self.assertTrue(hosts, "keine Hosts in der Registry gefunden")
+        fehlend = sorted(h for h in hosts if h not in policy)
+        self.assertEqual(fehlend, [], "Partner-Host nicht in der Datenschutzerklärung")
+
+    def test_awin_ist_im_blog_nicht_mehr_genannt(self):
+        # Betreiber-Angabe 11.10.2026: Awin wird nicht genutzt und ist im Blog entfernt.
+        policy = read("content/datenschutz/index.md")
+        self.assertNotIn("Awin", policy)
+        self.assertIn("Die Partnerlinks führen direkt auf die Adressen der genannten Partner.", policy)
+
+    def test_klickzaehler_beschreibung_und_cdn_aussage(self):
+        # Der Beacon steht in den /go/-Seiten; die Erklärung muss ihn beschreiben.
+        policy = read("content/datenschutz/index.md")
+        self.assertIn("stats.franksfinanzcheck.de", policy)
+        self.assertIn("keine IP-Adresse", policy)
+        self.assertIn("13 Monate", policy)
+        # Die Website liegt nach der DNS-Prüfung vom 11.10.2026 auf GitHub Pages ohne Cloudflare-Proxy.
+        self.assertNotIn("Cloudflare-CDN", policy)
+
+    def test_kein_umami_loader_und_altcookies_werden_geloescht(self):
         loader = read("layouts/_partials/deferred_scripts.html")
-        self.assertIn("getConsent() !== 'all'", loader)
-        self.assertIn("window.location.reload()", loader)
-        self.assertNotIn("if (!shouldLoad) return", loader)
-        self.assertIn("max-age=0", read("layouts/_partials/extend_footer.html"))
-        banner = read("layouts/_partials/consent_banner.html")
-        self.assertIn("Cookies auf externen Partnerseiten verwalten wir hier nicht", banner)
+        self.assertNotIn("cloud.umami.is", loader)
+        self.assertNotIn("ffConsentChange", loader)
+        footer = read("layouts/_partials/extend_footer.html")
+        self.assertIn("max-age=0", footer)
+        self.assertIn("ff_analytics_consent_v2=;max-age=0", footer)
+        self.assertIn("ff_cookie_consent=;max-age=0", footer)
 
     def test_newsletter_retention_contract(self):
         worker = read("newsletter-worker/src/index.js")
