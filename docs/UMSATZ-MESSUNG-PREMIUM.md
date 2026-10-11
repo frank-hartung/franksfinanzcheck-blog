@@ -10,7 +10,7 @@ einzige Stelle, an der du ANLEGEN musst; alles andere erledigen die Workflows.
 Kurzform für die Eiligen: **zwei Secrets setzen → Testklick machen →
 nichts mehr tun.** Der Rest ist Eskalation, die von allein kommt.
 
-**Kein API-Zugang (Umami Cloud Free) und keine Awin-Teilnahme?** Dann ist
+**Kein API-Zugang (Umami Cloud Free)?** Dann ist
 Abschnitt **5a** dein Weg: eine Datei aus dem Dashboard legen, ein Befehl,
 und der Trichter rechnet mit echten Zahlen statt `unbekannt`. Das ist kein
 Provisorium, sondern die von der Repo-Hausregel vorgesehene
@@ -27,9 +27,9 @@ einem Befehl statt Handarbeit an den JSON-Dateien.
 | Besuche je Seite (kaufnah + gesamt) | Umami `/pages`, `/total` | `data/umami_views.json` |
 | Affiliate-Klicks (`affiliate_click`) | Umami Event-API | `data/umami_clicks.json` |
 | Start-/Pillar-CTA-Klicks (`cta_click`) | Umami Event-API | `data/umami_ctas.json` |
-| Anträge/Abschlüsse/Stornos + Provision | Awin Publisher API | `data/awin_transactions.csv` (laufzeitlich, gitignored) → `data/awin_provisions.json` |
+| Abschlüsse/Stornos + Provision (Monatssummen) | Manuelle Provisions-Tabelle aus den Partnerabrechnungen | `data/provisionen/provisionen.csv` (gitignored) → `data/provisionen_aggregat.json` |
 | Alles zusammen: Trichter + Ampel + Empfehlungen | Rechenlage | `REVENUE-FUNNEL-REPORT.md` (Lauf-Artefakt) + `data/revenue_funnel.json` + `data/revenue_funnel_history.jsonl` |
-| Integrität der Kette (Template→Build→Umami→Gateway→Awin) | `scripts/click_chain_guard.py` | `CLICK-CHAIN-REPORT.md` |
+| Integrität der Kette (Template→Build→Umami→Gateway) | `scripts/click_chain_guard.py` | `CLICK-CHAIN-REPORT.md` |
 
 **Hausregel der ganzen Pipeline:** eine Quelle, die nicht gemessen wurde, ist
 **„unbekannt“** – niemals eine 0. Echte Nullen erscheinen erst, wenn der
@@ -75,50 +75,30 @@ GitHub → Repo → **Settings → Secrets and variables → Actions → Reposit
 Nach dem nächsten Importlauf (siehe 4) prüfst du mit:
 `python3 scripts/umami_views.py --status` → muss `ok` melden.
 
-#### b) `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` (liest Transaktionen)
-
-1. Awin-Dashboard (app.awin.com) → **Settings → Users → „Manage your web
-   services" (API credentials)** → API-Dienst anlegen/scopes auf *Lesen*
-   (Transactions) → Token anzeigen lassen **und sofort kopieren**.
-2. **Publisher-ID:** dein Account-Number aus dem Awin-Backend (steht in der
-   URL bzw. unter Account-Details; reine Ziffernfolge).
-3. Secrets anlegen: `AWIN_API_TOKEN` = Token, `AWIN_PUBLISHER_ID` = ID
-   (die ID darf alternativ als Repository-**Variable** stehen – sie ist kein
-   Geheimnis, macht aber 404-Fehler aussagekräftiger).
-4. Token wird **nie** geloggt oder in Dateien geschrieben – die Skripte
-   lesen ihn nur aus der Umgebung (und die Secrets-Wache prüft per
-   Live-Probe `GET /publishers/{id}`, ob er noch lebt).
-
-Hinweis aus der API-Doku: Abrufe max. 31 Tage pro Fenster (der Import
-nutzt 62-Tage-Fenster über mehrere Slices), Zeitzonen-Referenz
-`Europe/Berlin`, Beträge in Cent (automatisch umgerechnet).
-
 ## 3) Der Eigen-Testklick (Pflicht, exakt EIN Klick)
 
 Damit die Kette **bewiesen** ist, nicht nur „konfiguriert":
 
 1. Irgendeinen Live-Artikel mit `/go/`-Button öffnen (z. B. der letzte
    Gastbeitrag) → **genau einen** Affiliate-CTA klicken.
-2. Beim Partner (Check24/Awin-Ziel) darf **nichts abgeschlossen** werden –
+2. Beim Partner (CHECK24 bzw. Tarifcheck) darf **nichts abgeschlossen** werden –
    keine Anmeldung, kein Antrag, kein Kauf. **Kein Eigenabschluss – der
    wird storniert und kann den Programm-Status kosten.**
-3. Innerhalb von ~24 h muss der Klick im Awin-Dashboard sichtbar sein:
-   **Reports → Click References** (dort steht deine Click-Reference mit dem
-   SubID-Wert = Artikel-Slug ⇒ Attribution funktioniert).
-4. Beim nächsten Importlauf muss derselbe Klick als `affiliate_click` in
-   `data/umami_clicks.json` auftauchen ⇒ **beide Systeme sehen dasselbe**.
+3. Innerhalb von ~24 h muss der Klick im Umami-Dashboard als `affiliate_click`
+   mit dem Artikel-Slug erscheinen (SubID = Artikel-Slug ⇒ die Zuordnung
+   zum Artikel funktioniert).
+4. Beim nächsten Importlauf taucht derselbe Klick in `data/umami_clicks.json`
+   auf (sofern der API-Import aktiv ist) ⇒ **beide Quellen sehen dasselbe**.
 
 Komfort: `python3 scripts/click_chain_guard.py --test-page` zeigt die SOP
-mit den konkreten Prüfkommandos. Wer es genau wissen will: Awinexport
-„Click References“ (CSV, enthält Click Reference + SubID) gegen
-`data/umami_clicks.json` halten – mehr als ein Kreuzvergleich ist nicht nötig.
+mit den konkreten Prüfkommandos.
 
 ## 4) Der Regelbetrieb – was läuft wann, ohne dass du etwas tust
 
 | Takt | Workflow | Aufgabe |
 |---|---|---|
 | zuletzt, 2×/Tag | `revenue-import.yml` → **Weg 3** | `scripts/offline_import.py`: manuelle Messstände (Dashboard-Export) + Abrechnungs-Monatssummen → Aggregate → Trichter neu (Abschnitt 5a) |
-| 2×/Tag (06:10 + 18:10 MESZ; war ~alle 6 h, Audit 30.09.) | `revenue-import.yml` | Umami-Views + CTA-Klicks + Affiliate-Klicks + Awin-API → Daten committen; Funnel neu berechnet in die Lauf-Zusammenfassung |
+| 2×/Tag (06:10 + 18:10 MESZ; war ~alle 6 h, Audit 30.09.) | `revenue-import.yml` | Umami-Views + CTA-Klicks + Affiliate-Klicks → Daten committen; Funnel neu berechnet in die Lauf-Zusammenfassung |
 | Montag 07:15 | `premium-governance.yml` | Alles messen → GATE bewertet → Scorecard (zeigt Datenalter + Messlücken des Funnels) → bei Befund: EIN Issue mit Label `governance` |
 | PR/push auf layouts/e2e | `e2e.yml` | Playwright `affiliate-guard`: jeder gebaute CTA trägt Event+Slug+SubID+Placement (der Layout-Vertrag) |
 
@@ -134,7 +114,7 @@ mit den konkreten Prüfkommandos. Wer es genau wissen will: Awinexport
 - Template baut CTA ohne Messattribute → `click_chain_guard` meldet
   `chain_gap` → wieder AMBER-Issue, plus e2e-Test rot auf dem PR, der es
   einführen wollte (Fehler sterben vor der Merge, nicht danach).
-- Awin-Zahlen bleiben aus (Partner liefert nicht) → Stornoquote/EPC stehen
+- Keine Abrechnungstabelle (noch nichts eingetragen) → Stornoquote/EPC stehen
   auf „unbekannt“ mit Benennung der Quelle; das ist eine Info, kein Alarm.
 
 ## 5) lokal prüfen (Werkbank, keine Secrets nötig)
@@ -142,7 +122,6 @@ mit den konkreten Prüfkommandos. Wer es genau wissen will: Awinexport
 ```bash
 python3 scripts/umami_views.py --status        # Stand des Views-Imports
 python3 scripts/umami_views.py --days 7        # jetzt, live importieren (braucht den Token im Env)
-python3 scripts/awin_fetch.py --status         # Stand des Awin-Imports
 python3 scripts/revenue_funnel.py --print      # Trichter auf stdout (schreibt nichts)
 npm run mess:import                            # Weg 3: Manuell-Messstände + Abrechnung importieren
 npm run mess:status                            # Woher kommen die Zahlen gerade? (API/manuell/keine)
@@ -232,7 +211,8 @@ commiten (beide enthalten nur Aggregate), und der Wochen-Funnel rechnet damit.
 
 *Erste Installation: 19.09.2026 im Zuge der Forderung „vollständige
 Umsatzmessung innerhalb einer Stunde" – Skripte `umami_views.py`,
-`umami_clicks.py`, `awin_fetch.py`, `awin_provisions.py`,
-`revenue_funnel.py`, `click_chain_guard.py`; verdrahtet in
+`umami_clicks.py`, `revenue_funnel.py`, `click_chain_guard.py`; verdrahtet in
 `premium-governance.yml`, `revenue-import.yml`, Governance-Gate
 (`funnel_gap`/`chain_gap`), Scorecard-Datenlage und e2e-CTA-Vertrag.*
+
+*Stand 11.10.2026: Awin ist aus dem Blog entfernt (Abruf, Import und Gate-Schritte). Provisionen laufen über die Abrechnungstabelle (Abschnitt 5a).*

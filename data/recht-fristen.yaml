@@ -103,12 +103,12 @@ fristen:
   # 4) Affiliate-Partnerprogramme: Bedingungen & Werbekennzeichnung
   # ------------------------------------------------------------
   - id: affiliate-partnerbedingungen
-    titel: "Partnerbedingungen CHECK24 / Tarifcheck / Awin prüfen (Werbekennzeichnung)"
+    titel: "Partnerbedingungen CHECK24 / Tarifcheck prüfen (Werbekennzeichnung)"
     kategorie: "Affiliate / UWG"
     beschreibung: >
       Partnerprogramm-Bedingungen ändern sich; die Werbekennzeichnung
       (§ 5a UWG, § 18 Abs. 3 MStV) muss stimmen. Quartalsweise die
-      Programmbedingungen in Awin/CHECK24/Tarifcheck sichten und die
+      Programmbedingungen bei CHECK24 und Tarifcheck sichten und die
       Kennzeichnung auf Impressum, Über-Seite und in Artikeln prüfen
       (der Affiliate-Integrity-Wache läuft täglich – hier der manuelle
       Blick auf die Vertragsbedingungen selbst).
@@ -117,7 +117,7 @@ fristen:
     erinnerung_ab_tage: 14
     eskalation_nach_tagen: [0, 14, 30]
     checkliste:
-      - "Awin-Dashboard: CHECK24-Programmbedingungen (Provisionen, zulässige Werbung) auf Änderungen prüfen"
+      - "CHECK24-Partnerbereich: Programmbedingungen (Provisionen, zulässige Werbung) auf Änderungen prüfen"
       - "Tarifcheck-Partnerbereich: Bedingungen prüfen"
       - "Stichprobe 3 Artikel: Affiliate-Links als Werbung erkennbar (CTA-Box/rel=sponsored/Kennzeichnung)?"
       - "Impressum + Über-Seite: Programmliste noch vollständig/korrekt?"

@@ -4,7 +4,7 @@ UMAMI-CLICKS – Klick-Daten automatisch holen (Geschäftsgrundlage Affiliate)
 
 WARUM: Der Governance-Report #206 stand jede Woche gleich:
   `Affiliate-Klicks (Umsatz-Hebel) | 0 über 0 Artikel | 🟡`
-  `Awin-Provision (Klicks→Umsatz)  | 0.00 € ... | 🟡`
+  `Provision (Klicks→Umsatz)  | 0.00 € ... | 🟡`
 Das ist kein Content-Problem, sondern eine **Datenlücke**: Die Blog-Seite feuert
 das Umami-Event `affiliate_click` längst (inkl. `slug`/`article`/`pillar`, siehe
 `layouts/_default/_markup/render-link.html`), aber die Auswertung in
@@ -429,7 +429,7 @@ def _selftest():
     if len(agg) != 3:
         failures.append(f"Granularität (slug, article, pillar) nicht erhalten: {len(agg)} Gruppen")
     # --- Schema B: flache Eigenschaften (ältere/self-hosted Varianten)
-    flat = {"data": [{"slug": "awin-konto", "article": "a.md", "pillar": "konto-karten", "count": 7}]}
+    flat = {"data": [{"slug": "girokonto-beispiel", "article": "a.md", "pillar": "konto-karten", "count": 7}]}
     rows_b = _rows_from_event_data(flat)
     if not rows_b or rows_b[0]["count"] != 7:
         failures.append("flache Eigenschaften werden nicht gelesen")

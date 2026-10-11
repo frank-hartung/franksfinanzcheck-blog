@@ -7,8 +7,8 @@ Stand: 08.10.2026 · Skript: `scripts/provisionen_check.py` · Tests: `scripts/t
 Die Tabelle hält, was die Partner (CHECK24, Tarifcheck, C24 Bank) pro Monat
 abrechnen: Abschlüsse, Stornos und Provision. Sie ist die Grundlage, um Klicks aus
 dem Blog mit echtem Umsatz zu vergleichen. Der Umsatztrichter in
-`scripts/revenue_funnel.py` braucht Awin-Transaktionen; Awin ist laut Stand 08.10.2026
-aus. Dort bleibt der Provisionsschritt deshalb „unbekannt“. Die Tabelle schließt diese
+`scripts/revenue_funnel.py` braucht eine Quelle für Abschlüsse und Provision. Ohne
+Eintrag bleibt der Provisionsschritt deshalb „unbekannt“. Die Tabelle schließt diese
 Lücke von Hand, ohne Kundendaten zu speichern.
 
 Die Tabelle ist **intern**. Sie wird nicht veröffentlicht und nicht in den Blog
@@ -17,8 +17,8 @@ Die Tabelle ist **intern**. Sie wird nicht veröffentlicht und nicht in den Blog
 Seit 10.10.2026 ist sie auch die **Provisions-Basis des Mess-Trichters**:
 `scripts/offline_import.py` liest diese Datei und schreibt das Aggregat
 `data/provisionen_aggregat.json` (nur Monatssummen je Partner, keine
-Abrechnungs-Details) – `scripts/revenue_funnel.py` nutzt es als Provision,
-solange keine Awin-API läuft, und kennzeichnet es im Report als
+Abrechnungs-Details) – `scripts/revenue_funnel.py` nutzt es als Provision
+und kennzeichnet es im Report als
 Abrechnungs-Tabelle mit Monats-Zeitbezug. Leere oder fehlende Tabelle ⇒
 `unbekannt`, nie `0`. Anleitung: `docs/UMSATZ-MESSUNG-PREMIUM.md`, Abschnitt 5a.
 

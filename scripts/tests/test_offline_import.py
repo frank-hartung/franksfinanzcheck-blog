@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Regressionstest: manueller Offline-Messimport → Trichter (10.10.2026).
 
-Die Messkette hat drei Brücken (Umami-API, Awin-API, manuelle Messstand-Datei).
+Die Messkette hat zwei Brücken (Umami-API, manuelle Messstand-Datei) und eine
+Provisions-Tabelle (Monatssummen aus den Partnerabrechnungen).
 Der Free-Plan von Umami lässt die API-Brücke dauerhaft ausfallen – ohne die
 manuelle Brücke meldete `data/revenue_funnel.json` seit Bestehen nur `null`
 und die Redaktion optimierte gegen eine Geisterzahl. Diese Fälle sind hier
@@ -13,8 +14,8 @@ dauerhaft verankert:
   3. Datenschutz – UTM-Splitting wird zusammengeführt, IP-/Mail-Zeilen fallen
      raus (Repo ist öffentlich).
   4. replace vs. merge – Dashboard-Export ersetzt, Teilimport summiert.
-  5. Provisions-Tabelle – Monatsaggregate werden übernommen, Awin überlagert
-     sie nie (eine Wahrheit), und sie werden keinem Artikel zugeschrieben.
+  5. Provisions-Tabelle – Monatsaggregate werden übernommen (einzige Wahrheit
+     für Provision), und sie werden keinem Artikel zugeschrieben.
   6. Misch-Stern – Raten aus Monats-Sicht müssen im Report als solche
      gekennzeichnet sein (sonst liest jemand 176 €/100 Besuche wie eine Woche).
 """
@@ -247,8 +248,8 @@ class Sandbox(unittest.TestCase):
                         "pages": [{"path": "/posts/x/", "views": 110, "visits": 70}]},
                        [{"event": "affiliate_click", "slug": "gas",
                          "article": "posts/x/index.md", "count": 11}],
-                       {}, [], {"/posts/x/"},
-                       measured={"views": True, "clicks": True, "awin": False},
+                       [], {"/posts/x/"},
+                       measured={"views": True, "clicks": True},
                        manual_prov=agg)
         self.assertEqual(f["provision"]["gesamt"], 49.5)
         self.assertEqual(f["provision"]["quelle"], "provisionen-tabelle")
@@ -259,20 +260,6 @@ class Sandbox(unittest.TestCase):
         self.assertIn("Abrechnungstabelle", rep)
         self.assertIn("* Diese drei Zeilen mischen zwei Zeitbezüge", rep,
                       "Misch-Stern fehlt – jemand läse die Rate als Wochenwert")
-
-    def test_awin_ueberlagert_die_tabelle_nie(self):
-        prov = {"monate": [{"monat": MONAT_B, "partner": ["CHECK24"],
-                            "abschluesse": 3, "stornos": 0, "provision_eur": 49.5}],
-                "summe": {"monate": 1, "abschluesse": 3, "stornos": 0,
-                          "provision_eur": 49.5}, "letzter_monat": MONAT_B}
-        f = rf.compute({}, [], {"status_totals": {"approved": {"count": 2}},
-                                "total_commission": 33.0, "total_paid": 33.0},
-                       [], set(), measured={"views": False, "clicks": False, "awin": True},
-                       manual_prov=prov)
-        self.assertEqual(f["provision"]["gesamt"], 33.0)
-        self.assertEqual(f["provision"]["quelle"], "awin")
-        self.assertEqual(f["provision"]["zeitbezug"], "fenster")
-        self.assertNotIn("* Diese drei Zeilen", rf.render(f, [], [], []))
 
     def test_monatsalter_der_buchfuehrung(self):
         self.assertEqual(rf._month_age(rf.TODAY.strftime("%Y-%m")), 0)

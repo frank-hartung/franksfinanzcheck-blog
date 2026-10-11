@@ -13,7 +13,7 @@ Pinterest war Reichweite, nie Provision. Die Sperre hat einen Kanal entfernt –
 
 | Nr. | Was fehlt | Beweis im Repo | Wirkung |
 |---|---|---|---|
-| **B1** | **Der Trichter ist nicht verbunden** | `revenue_funnel.json`: alle Felder `null` seit Anbeginn; `data/monetization.yaml`: `awin_enabled: false`, `umami_api_import_enabled: false`; `data/provisionen/` enthält nur die Vorlage | Du optimierst blind. Du weißt nicht, welche Seite klickt, welcher Klick führt zu einem Antrag, welche Route Geld bringt |
+| **B1** | **Der Trichter ist nicht verbunden** | `revenue_funnel.json`: alle Felder `null` seit Anbeginn; `data/monetization.yaml`: `umami_api_import_enabled: false`; `data/provisionen/` enthält nur die Vorlage | Du optimierst blind. Du weißt nicht, welche Seite klickt, welcher Klick führt zu einem Antrag, welche Route Geld bringt |
 | **B2** | **Zu wenig indexierter Bestand, um Kaufabsicht einzufangen** | 42 Live-Artikel, ~8 Wochen alte Domain; GSC meldete 237 nicht indexierte Seiten; 2 Artikel von Gates gehalten; 1 Draft wartet auf Freigabe | Bei 0–2 k Klicks/Monat und einer CTA-CTR von 3–4 % sind **300–800 /go/-Klicks** realistisch – bei 1–3 % Antragsrate auf Strom/Gas also **3–24 Anträge/Monat**, wenn alles stimmt. Wenn die Seiten aber nicht indexiert sind, ist der Ausgangswert 0 |
 | **B3** | **Kein vertrauensbildendes Außensignal** | `AUTHORITY-RADAR.md`: 0 Editorial-Links, 0 Mediennennungen, 0 Interviews, 0 Kooperationen; `data/social/engagement_cache.json`: alle 11 Mastodon-Posts bei 0 Reaktionen | Auf YMYL gewinnt nicht der beste Text, sondern der glaubwürdigste Absender. Ohne Außensignale konvertiert auch Platz 2 schlechter |
 
@@ -64,7 +64,7 @@ Jede Maßnahme mit **Aufwand**, **Zeit bis zum Effekt** und **Beweis, dass sie w
 | # | Maßnahme | Aufwand | Effekt |
 |---|---|---|---|
 | 0.1 | **Partner-Dashboard zur einzigen täglichen Wahrheit machen:** `a.check24.net` Statistiken nach `pid`/`aid`/`deep` auswerten – die sind bei dir schon kategoriegenau getrennt. Täglich 1 Zeile manuell in `data/provisionen/provisionen.csv` (Vorlage existiert, `provisionen_check.py` validiert) | 15 Min/Tag → später 10 Min/Woche | Klicks ↔ Anträge ↔ Provision zum ersten Mal **im selben Bild** |
-| 0.2 | **Zweitnetz zur Kreuzprüfung anmelden** (CHECK24 läuft u. a. über Awin; dort `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` setzen) – *nur* als Kontrollkanal mit SubID, Hauptlinks bleiben unverändert auf Inhouse (höhere Vergütung, stornofrei) | 1–2 h | Deine vorhandene `revenue-import`-Pipeline füllt sich, der Funnel hört auf, `null` zu melden. Ohne Netz-Backup hast du keine unabhängige Zahl |
+| 0.2 | ~~**Zweitnetz zur Kreuzprüfung anmelden**~~ | – | Entfällt: Awin wird nicht genutzt (Stand 11.10.2026). Die Provisions-Kontrolle läuft über die Abrechnungstabelle. |
 | 0.3 | **Umami-Zahlen in den Trichter holen (Export-Schleife) oder aus dem Free-Plan raus.** Stand: `hugo.toml → [params.umami]` zeigt auf `cloud.umami.is` (Cloud Free, seit 31.08.2026, cookieless, `consentRequired = false`), deshalb ist `umami_api_import_enabled: false` – die Views liegen nur im Dashboard und sind für die Automatik unsichtbar. Zwei Wege: (a) Export-Schleife (wöchentlich CSV je Seite + Event `affiliate_click` einlesen), (b) **self-hosted** auf VPS/Container mit Postgres (die `hostUrl`-Zeile ist dafür schon vorbereitet) | 2–4 h | Kanal-Zerlegung (Google / Newsletter / Community / Discover) wird erst messbar – und zwar ohne UTM-Parameter am Affiliate-Link zu verbiegen (deine bewusste Regel von 25.08.2026) |
 | 0.4 | **Ein Testklick, kein Testkauf:** `click_chain_guard.py --test-page` – eigene Adresse über /go/ klicken, Klick im Dashboard wiederfinden. **Niemals** selbst einen Vertrag über den eigenen Link abschließen | 10 Min | Kette bewiesen, Programm-Status nicht gefährdet |
 
@@ -144,7 +144,6 @@ Wer nach 30 Tagen 500 € erwartet, hat sich verrechnet. Wer nach 30 Tagen **nul
 ## 5. Die 12 Griffe für diese Woche (Checkliste)
 
 - [ ] `a.check24.net` Dashboard öffnen, letzte 30 Tage je `deep` notieren → `data/provisionen/provisionen.csv` anlegen (`cp provisionen-vorlage.csv …`)
-- [ ] Zweitnetz (Awin) beantragen, Secrets setzen, `awin_enabled: true` – erst dann meldet der Funnel echte Transaktionen
 - [ ] `click_chain_guard.py --test-page` einmal durchlaufen (Klick-Kette beweisen)
 - [ ] Heizöl-Artikel `2026-10-07-heizoel-…`: drei Strom-CTAs durch ein ehrliches Ziel ersetzen (Route ergänzen **oder** CTA entfernen – nicht auf `gas` umbiegen, wenn das Angebot nicht passt); `affiliate_intent_guard.py --fix` meldet danach `IW4: 0`
 - [ ] 3× IW2-Hinweise auflösen: Kontextsatz an der End-CTA **oder** Route themenexakt

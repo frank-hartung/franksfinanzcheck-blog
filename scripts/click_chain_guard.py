@@ -11,17 +11,14 @@ sterben:
   2. Klick-Beacon auf /go/-Seiten → sonst wird kein Klick gezählt
   3. /go/-Gateway                → muss die SubID an die Partner-URL anhängen
   4. Import (API)                 → Daten müssen im Repo ankommen (Funnel prüft das)
-  5. Partner-Attribution          → Transaktionen müssen eine ClickRef tragen
-Dieser Guard prüft Stufe 1–3 am GEMACHTEN Build (und optional live), Stufe 5 an
-den importierten Awin-Daten. Fundklasse: 02.09.2026 – Shortcode-CTAs ohne Event,
+Dieser Guard prüft Stufe 1–3 am GEMACHTEN Build (und optional live). Fundklasse: 02.09.2026 – Shortcode-CTAs ohne Event,
 hier jetzt für ALLE Seiten (Start, /pillar/, Artikel) als Vertrag.
 
 SELBSTTEST-KLICK (SOP Frank, manuell – kein Roboter klickt beim Partner):
   1. `python3 scripts/click_chain_guard.py --test-page` zeigt den exakten Klickpfad.
   2. Frank klickt auf einer echten Seite einen /go/-Button (DA ist der Testklick).
   3. ≤ 24 h später muss der nächste Importlauf den Klick in `data/klicks_eigen.json`
-     zeigen (sonst: Meldung des Guards/Issues), und im Awin-Dashboard muss die
-     Click-Reference = Seiten-Slug auftauchen (Reports → Click References).
+     zeigen (sonst: Meldung des Guards/Issues).
   4. NIEMALS selbst einen Antrag abschließen (Eigenabschluss = Programmtod).
      Ein Klick ist erlaubt und üblich; eine Conversion vom eigenen Netz ist es nicht.
 
@@ -111,7 +108,7 @@ def scan_page(html, label):
                                      f"(Ziel-Klick nicht zuordenbar)"))
         if not re.search(r"[?&]subid=", href):
             problems.append((label, f"/go/{gm.group(1)}/ ohne ?subid= "
-                                     f"(Awin sieht den Klick, aber nicht die Quelle)"))
+                                     f"(die Quelle des Klicks geht verloren)"))
         if not (attrs.get("data-klick-placement") or "").strip():
             problems.append((label, f"/go/{gm.group(1)}/ ohne data-klick-placement "
                                      f"(Klick im Funnel keiner Stelle zuordenbar)"))
@@ -182,42 +179,6 @@ def check_klick_beacon(root):
     return ""
 
 
-# ------------------------------------------------------------------ Awin-Seite
-
-def check_awin_coverage(config_path=None, data_path=None):
-    """Prüft Awin-Attribution nur, wenn Awin ausdrücklich aktiviert ist.
-
-    Awin ist derzeit kein aktiver Partner dieses Blogs; fehlender Awin-Import
-    ist daher eine bewusste Konfiguration und kein Governance-Befund. Wenn die
-    Quelle später aktiviert wird, werden aggregierte SubID-Zuordnungen geprüft.
-    """
-    config_path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
-    try:
-        config = open(config_path, encoding="utf-8").read()
-        if re.search(r"^awin_enabled:\s*false\s*$", config, re.M):
-            return {"disabled": True, "problems": []}
-    except OSError:
-        pass
-
-    path = data_path or os.path.join(BLOG_DIR, "data", "awin_provisions.json")
-    try:
-        doc = json.load(open(path, encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    articles = doc.get("articles") or {}
-    total_tx = int(doc.get("transactions") or 0)
-    if total_tx <= 0:
-        return None
-    matched = sum(1 for v in articles.values() if str(v.get("subid") or "").strip())
-    unmatched = int(doc.get("unmatched") or 0)
-    coverage = round(100.0 * matched / max(1, matched + unmatched), 1)
-    problems = []
-    if unmatched > 0:
-        problems.append(f"{unmatched} Transaktion(en) ohne bekannte SubID – "
-                        f"Awin-Empfänger verliert die Artikel-Zuordnung (coverage {coverage} %)")
-    return {"transactions": total_tx, "coverage_pct": coverage, "problems": problems}
-
-
 # ------------------------------------------------------------------ Live-Variante
 
 def fetch_live(base, paths, timeout=15):
@@ -280,27 +241,8 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
                 if problem:
                     gaps.append(problem)
             checked += len(keys)
-    cov = check_awin_coverage()
-    # `data/monetization.yaml` may deliberately disable Awin. That is a
-    # documented product decision, not an incomplete coverage report.  The
-    # previous branch fell through to the coverage message and indexed fields
-    # that do not exist for that sentinel (`KeyError: coverage_pct`).  A guard
-    # that crashes is worse than a missing metric: governance then reports its
-    # stale predecessor instead of the current build truth.
-    if cov and cov.get("disabled"):
-        notes.append("Awin-Attribution ist laut `data/monetization.yaml` bewusst deaktiviert "
-                     "(kein aktives Partnerprogramm).")
-    elif cov and cov["problems"]:
-        gaps += cov["problems"]
-    elif cov:
-        notes.append(f"Awin-ClickRef-Abdeckung {cov['coverage_pct']} % "
-                     f"bei {cov['transactions']} Transaktionen")
-    else:
-        notes.append("Awin-Attribution noch nicht bewertbar (kein Transaktions-Import) – "
-                     "Secrets `AWIN_API_TOKEN`+`AWIN_PUBLISHER_ID` setzen oder CSV liefern")
-
     ampel = "AMBER" if gaps else ("NICHT GEMESSEN" if not_measured else "GREEN")
-    lines = ["# 🔗 Klick-Messkette – Guard (Build → Klick-Beacon → Gateway → Awin)",
+    lines = ["# 🔗 Klick-Messkette – Guard (Build → Klick-Beacon → Gateway → Klick-Zähler)",
              f"**Stand:** {TODAY.isoformat()} · **Geprüfte Anker-Seiten:** {checked} · "
              f"**Ampel:** **{ampel}** · **Messlücken: {len(gaps)}**",
              "",
@@ -311,7 +253,7 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
         lines += [f"| AMBER | chain_gap | {g[:150]} |" for g in gaps]
         lines += ["", "## 🛠️ Behebung", "",
                   "Die Lücken gehören an die Quelle der Kette (Render-Hook,",
-                  "`affiliate_anchor_attrs.html`, Layout-CTA oder Awin-Zugang).",
+                  "`affiliate_anchor_attrs.html` oder Layout-CTA).",
                   "Nach der Reparatur reicht der nächste Build – dieser Guard und",
                   "der Wochen-Funnel melden dann grün."]
     elif not_measured:
@@ -424,15 +366,6 @@ def _selftest():
             failures.append("Gateway ohne SubID-Förderung bleibt unentdeckt")
         if "Build" not in check_gateway(td, "kies"):
             failures.append("Gateway ohne Datei bleibt unentdeckt")
-        # Bewusst deaktiviertes Awin ist kein Messloch und darf niemals den
-        # Report mit einer fehlenden coverage_pct zum Absturz bringen.
-        with open(os.path.join(td, "monetization.yaml"), "w", encoding="utf-8") as f:
-            f.write("awin_enabled: false\n")
-        disabled = check_awin_coverage(
-            config_path=os.path.join(td, "monetization.yaml"),
-            data_path=os.path.join(td, "awin_provisions.json"))
-        if not disabled or not disabled.get("disabled") or disabled.get("problems"):
-            failures.append("deaktiviertes Awin wird nicht als bewusste Konfiguration erkannt")
         # Klick-Beacon auf /go/-Seiten (eigenes Verzeichnis, damit andere Fixtures nicht stören)
         import tempfile as _tf
         with _tf.TemporaryDirectory() as bt:

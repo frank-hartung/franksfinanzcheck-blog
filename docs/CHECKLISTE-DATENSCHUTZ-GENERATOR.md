@@ -36,7 +36,7 @@
 
 | Thema | Im Generator ankreuzen |
 |---|---|
-| **Affiliate-Partnerprogramm** | ✅ **Ja** – CHECK24-Partnerprogramm (via Awin) + Tarifcheck (Versicherungen) |
+| **Affiliate-Partnerprogramm** | ✅ **Ja** – CHECK24-Partnerprogramm + Tarifcheck (Versicherungen) |
 | **Consent-Management-Banner** | ✅ **Ja** – „Eigenes Consent-Tool" bzw. „Cookie-Consent-Tool" auswählen |
 | **Hosting** | ✅ Ja – externer Host (GitHub Pages / Netlify / Cloudflare – nach Deployment konkret angeben) |
 | Server-Logfiles | ✅ Ja (wird meist automatisch ergänzt) |
@@ -49,7 +49,7 @@
 | SSL-Verschlüsselung | ✅ **Ja** (automatisch enthalten) |
 
 ### Affiliate-Details (für den Generator-Abschnitt)
-- Partnerprogramm-Anbieter: **CHECK24 Vergleichsportal GmbH** (via **Awin AG**) + **Tarifcheck** (Versicherungen)
+- Partnerprogramm-Anbieter: **CHECK24 Vergleichsportal GmbH** + **Tarifcheck** (Versicherungen)
 - Tracking-Mechanismus: **Tracking-Cookies / URL-Kennung** beim Klick auf Affiliate-Links
 - Eigene Datenverarbeitung durch dich: **Keine** – nur statistische Abschluss-Daten ohne Personenbezug
 - Verantwortung nach Klick: liegt beim Kooperationspartner (wird vom Generator automatisch formuliert)

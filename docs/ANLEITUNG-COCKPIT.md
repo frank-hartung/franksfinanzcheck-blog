@@ -26,7 +26,7 @@ fasst sie zu sechs Bereichen zusammen:
 |---|---|---|
 | **Content-Pipeline** | `data/governance_status.json` (Lesbarkeit/Decay/Scorecard/Automation), `data/reserve-readiness.json` | Ist der Artikel-Vorrat gesund, Texte lesbar, Automation fehlerfrei? |
 | **SEO & Technik** | `data/governance_status.json` (CWV/Build/Live-Policy/Umami) | Lädt die Seite schnell, baut sie fehlerfrei, ist die Live-Policy sauber? |
-| **Affiliate & Umsatz** | `data/governance_status.json` (Click-Chain/Revenue-Funnel/Awin/Clicks/Pinperf) | Ist die Klick-Kette lückenlos messbar, ist die Umsatz-Pipeline intakt? |
+| **Affiliate & Umsatz** | `data/governance_status.json` (Click-Chain/Revenue-Funnel/Clicks/Pinperf) | Ist die Klick-Kette lückenlos messbar, ist die Umsatz-Pipeline intakt? |
 | **Secrets & Zugänge** | `data/governance_status.json` (Secrets), `data/secrets_state.json` | Welche API-Zugänge sind live geprüft, welche abgelehnt/tot? |
 | **Social-Automation** | `data/social/state.yaml`, `data/social/channels.yaml`, `data/secrets_state.json` | Wie viele der 10 Kanäle sind live vs. Standby vs. tot, wann der letzte erfolgreiche Post? |
 | **Newsletter** | `data/newsletter_journal.jsonl`, `data/newsletter_state.json` | Ist zuletzt echt (nicht nur Test) versendet worden, wie groß ist der Rückstand? |

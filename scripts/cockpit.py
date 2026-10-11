@@ -274,7 +274,7 @@ def bucket_seo(governance: dict):
 
 def bucket_affiliate(governance: dict):
     steps = governance.get("steps", {}) or {}
-    keys = ["click-chain", "revenue-funnel", "awin", "awin-fetch", "clicks", "pinperf"]
+    keys = ["click-chain", "revenue-funnel", "clicks", "pinperf"]
     present = [steps[k] for k in keys if k in steps]
     lvl = worst(_level_from_governance(s.get("level")) for s in present)
     bad_keys = [

@@ -47,15 +47,15 @@ uc = _load("umami_clicks", os.path.join(SCRIPTS, "umami_clicks.py"))
 uv = _load("umami_views", os.path.join(SCRIPTS, "umami_views.py"))
 sa = _load("secrets_age_guard", os.path.join(SCRIPTS, "secrets_age_guard.py"))
 
-MEIN_GUTES_SETUP = {"views": True, "clicks": True, "awin": True}
+MEIN_GUTES_SETUP = {"views": True, "clicks": True}
 
 
 class TestNullVsUnbekannt(unittest.TestCase):
     """Hausregel: nicht gemessen ⇒ unbekannt (None), NIE eine 0."""
 
     def test_alle_quellen_fehlen_ist_nichts_null(self):
-        f = rf.compute({}, [], [], [], set(), measured={
-            "views": False, "clicks": False, "awin": False})
+        f = rf.compute({}, [], [], set(), measured={
+            "views": False, "clicks": False})
         self.assertIsNone(f["affiliate_klicks"])
         self.assertIsNone(f["views"]["kaufnah"])
         self.assertIsNone(f["views"]["total"])
@@ -65,10 +65,11 @@ class TestNullVsUnbekannt(unittest.TestCase):
             self.assertIsNone(v, f"Rate {k} trotz ungemessener Quelle nicht None")
 
     def test_gemessen_und_leer_ist_echte_null(self):
-        f = rf.compute({"pages": []}, [], {}, [], set(), measured=MEIN_GUTES_SETUP)
+        f = rf.compute({"pages": []}, [], [], set(), measured=MEIN_GUTES_SETUP)
         self.assertEqual(f["affiliate_klicks"], 0)          # gemessen, wirklich 0
         self.assertEqual(f["views"]["kaufnah"], 0)
-        self.assertEqual(f["transaktionen"]["antraege"], 0)
+        # Ohne Provisions-Tabelle gibt es keine Anträge – unbekannt, nicht 0.
+        self.assertIsNone(f["transaktionen"]["antraege"])
         # Provision ohne Wert im Dokument bleibt unbekannt – nicht erfunden.
         self.assertIsNone(f["provision"]["gesamt"])
 
@@ -85,43 +86,43 @@ class TestKaufnaheSchiene(unittest.TestCase):
                    "count": 1},
                   {"event": "affiliate_click", "article": "", "count": 2}]
         ctas = [{"event": "cta_click", "slug": "home-ratgeber", "count": 9}]
-        awin = {"status_totals": {"approved": {"count": 2}, "pending": {"count": 1}},
-                "total_commission": 12.0, "total_paid": 10.0,
-                "articles": {"a": {"article": "posts/a", "commission": 9.0,
-                                   "orders": 2}}}
+        # Provisions-Tabelle (einzige Provisionsquelle): 3 Abschlüsse, 0 Stornos, 12 €.
+        mp = {"summe": {"abschluesse": 3, "stornos": 0, "provision_eur": 12.0},
+              "monate": ["2026-10"], "letzter_monat": "2026-10", "partner": ["CHECK24"]}
         paths = {"/posts/a/", "/pillar/strom/", "/pillar/"}
-        return views, clicks, awin, ctas, paths
+        return views, clicks, mp, ctas, paths
 
     def test_kaufnah_nenner_und_ctr(self):
-        views, clicks, awin, ctas, paths = self._fixtures()
-        f = rf.compute(views, clicks, awin, ctas, paths, measured=MEIN_GUTES_SETUP)
+        views, clicks, mp, ctas, paths = self._fixtures()
+        f = rf.compute(views, clicks, ctas, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
         # Home (700 Besuche) und ferne Seite /posts/b/ (5) bleiben draußen.
         self.assertEqual(f["views"]["kaufnah"], 150)  # a(100)+strom(50); b fehlt in paths = nicht kaufnah
         # Klicks gesamt = ALLE affiliate_clicks (6), cta_click nie mitzählen.
         self.assertEqual(f["affiliate_klicks"], 6)
         self.assertAlmostEqual(f["raten"]["outbound_ctr"], 6 / 150.0 * 100, places=4)  # Prozent-Skala (4 %)
-        # Trichter-Raten aus Awin: 3 Anträge, 2 bestätigt, Storno 0 → quotiert.
+        # Trichter-Raten aus der Provisions-Tabelle: 3 Anträge, 3 bestätigt, Storno 0.
         self.assertEqual(f["transaktionen"]["antraege"], 3)
-        self.assertEqual(f["transaktionen"]["bestaetigt"], 2)
+        self.assertEqual(f["transaktionen"]["bestaetigt"], 3)
         self.assertAlmostEqual(f["raten"]["klick_antrag"], 3 / 6.0 * 100, places=4)
         self.assertAlmostEqual(f["raten"]["stornoquote"], 0.0, places=4)
         self.assertAlmostEqual(f["raten"]["epc"], 12.0 / 6.0, places=4)
 
     def test_seitentabelle_heimat_und_ausschluss(self):
-        views, clicks, awin, ctas, paths = self._fixtures()
-        f = rf.compute(views, clicks, awin, ctas, paths, measured=MEIN_GUTES_SETUP)
+        views, clicks, mp, ctas, paths = self._fixtures()
+        f = rf.compute(views, clicks, ctas, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
         by = {p["path"]: p for p in f["seiten"]}
         self.assertIn("/posts/a/", by)      # Klicks + Provision zugeordnet
         self.assertNotIn("/", by)            # Home ist keine Trichter-Seite
         self.assertNotIn("/posts/b/", by)    # ohne Messwert → gar nicht erst zeigen
         self.assertEqual(by["/posts/a/"]["clicks"], 3)
-        self.assertAlmostEqual(by["/posts/a/"]["revenue"], 9.0, places=2)
+        # Monatssumme wird keiner Seite zugeschrieben – die Tabelle kennt keine Artikel.
+        self.assertIsNone(by["/posts/a/"]["revenue"])
 
     def test_platzierungstabellen_aus_cta_und_markdown_klicks(self):
-        views, clicks, awin, ctas, paths = self._fixtures()
+        views, clicks, mp, ctas, paths = self._fixtures()
         clicks = clicks + [{"event": "cta_click", "article": "home", "count": 4,
                             "slug": "home-strom"}]
-        f = rf.compute(views, clicks, awin, ctas, paths, measured=MEIN_GUTES_SETUP)
+        f = rf.compute(views, clicks, ctas, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
         self.assertEqual(f["platzierungen"]["home-ratgeber"], 9)
         self.assertEqual(f["platzierungen"]["home-strom"], 4)
         # …und trotzdem KEIN Affiliate-Klick:
@@ -145,7 +146,7 @@ class TestReportProtokoll(unittest.TestCase):
 
     def _f(self):
         return rf.compute({"pages": [], "totals": {"visits": 0, "pageviews": 0}},
-                          [], {}, [], set(), measured=MEIN_GUTES_SETUP)
+                          [], [], set(), measured=MEIN_GUTES_SETUP)
 
     def test_luecke_meldet_amber_zeile_und_marker(self):
         out = rf.render(self._f(), ["Views: Import übersprungen (Secret fehlt)"],
@@ -164,8 +165,8 @@ class TestReportProtokoll(unittest.TestCase):
         self.assertNotIn("funnel_gap", out)
 
     def test_unbekannt_wird_nicht_als_null_formatiert(self):
-        f = rf.compute({}, [], [], [], set(), measured={
-            "views": False, "clicks": False, "awin": False})
+        f = rf.compute({}, [], [], set(), measured={
+            "views": False, "clicks": False})
         out = rf.render(f, [], [])
         self.assertIn("unbekannt", out)
         self.assertNotIn("| Affiliate-Klicks | 0 |", out)
@@ -288,7 +289,7 @@ class TestCtaMessvertrag(unittest.TestCase):
 class TestVerdrahtung(unittest.TestCase):
     """Ohne diese Koppelungen melden die neuen Wachen nie – oder zu spät."""
 
-    NEUE_SCHRITTE = ("umami-views", "awin-fetch", "revenue-funnel", "click-chain")
+    NEUE_SCHRITTE = ("umami-views", "revenue-funnel", "click-chain")
 
     def test_gate_und_vertrag_kennen_die_messschritte(self):
         for step in self.NEUE_SCHRITTE:
@@ -329,12 +330,8 @@ class TestVerdrahtung(unittest.TestCase):
         self.assertNotIn("--emit", wf,
                          "Der reine Import darf das Wochen-Ledger nicht zufüllen")
         for datendatei in ("data/revenue_funnel.json", "data/umami_views.json",
-                           "data/awin_fetch.meta.json", "data/umami_ctas.json"):
+                           "data/umami_ctas.json"):
             self.assertIn(datendatei, wf, f"Commit-Liste fehlt {datendatei}")
-        with open(os.path.join(ROOT, ".gitignore"), encoding="utf-8") as fh:
-            gi = fh.read()
-        self.assertIn("data/awin_transactions.csv", gi.splitlines(),
-                      "Roh-CSV gehört in .gitignore (Auftragsdaten, kein Repo)")
 
     def test_gate_report_pfade_fuer_funnel_und_chain(self):
         # Falscher Pfad = Gate liest einen Report, den es nie gab: Stille statt Alarm.

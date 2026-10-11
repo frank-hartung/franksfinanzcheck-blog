@@ -6,7 +6,7 @@ WARUM (Governance-Report #206, 07.09.2026):
 Der Premium-Governance-Lauf hat jede Woche ein Issue geöffnet – auch wenn gar
 nichts kaputt war. Ursache: Das Issue wurde an **Exit-Codes** der Schritte
 festgemacht. Ein Schritt, der nur „noch keine Daten“ meldet (Umami-Export
-fehlt, Awin-CSV fehlt, Pinterest-Analytics leer), lief mit Exit 1 und war damit
+fehlt, Pinterest-Analytics leer), lief mit Exit 1 und war damit
 für die Pipeline ein Fehler. Ergebnis: Alarm-Müdigkeit – und die echten roten
 Befunde gehen im Rauschen unter. Genau das ist für einen Betrieb mit 30+
 Automatisierungen der gefährliche Fehler, nicht der Einzelfall.
@@ -71,10 +71,7 @@ STEPS = {
     "umami":   {"report": "data/umami_clicks.meta.json", "label": "Umami-Datenimport"},
     "umami-views": {"report": "data/umami_views.meta.json",
                     "label": "Umami-Seitenaufrufe (Trichter-Nenner)"},
-    "awin-fetch": {"report": "data/awin_fetch.meta.json",
-                   "label": "Awin-Transaktions-Abruf (Publisher API)"},
     "clicks":  {"report": "CLICK-REPORT.md",      "label": "Affiliate-Klick-Attribution"},
-    "awin":    {"report": "AWIN-REPORT.md",       "label": "Awin-Provisionen"},
     # Umsatz-Messkette (19.09.2026): der Trichter ist die Antwort auf „0 Klicks,
     # 0.00 €“ – er meldet beides als Lücke, wenn er NICHTS messen kann. Beide
     # Reports tragen eine Befundtabelle (codes funnel_gap/chain_gap) statt zu
@@ -102,7 +99,7 @@ ACTIONABLE_AMBER = {
     "manual_token", "refresh_rotation",                          # Token-Lebenszyklus
     "render_block_css", "render_block_js", "inline_js", "cls_img", "build_missing",
     "build_thin",                                                # cwv
-    "stale_content", "unmatched_subid", "unattributed",          # decay / awin / clicks
+    "stale_content", "unattributed",                             # decay / clicks
     "scorecard_red",                                             # Chefredakteur-Sicht
     # Umsatz-Messkette (19.09.2026): eine Lücke im Trichter ist KEin
     # Konflikt-Rauschen, sondern die teuerste Sorte Befund – wer nicht messen
@@ -127,25 +124,23 @@ INFO_AMBER = {
     # sie denselben Sachverhalt als `sitemap_drift`/`page_drift` in ROT.
     "deploy_hysterese",
 }
-# Step-spezifische Marker: Berichte ohne eigene Ampel/Befundtabelle (die beiden
-# Monetarisierungs-Importe) werden über diese Zeilen auswertbar – sonst wäre ein
-# echter Fund (verlorene Provisionen) „nur“ ein Exit-Code und damit Lärm.
+# Step-spezifische Marker: Berichte ohne eigene Ampel/Befundtabelle werden über
+# diese Zeilen auswertbar – sonst wäre ein echter Fund (verlorene Klick-Zuordnung)
+# „nur“ ein Exit-Code und damit Lärm.
 STEP_MARKERS = {
-    "awin": [(r"Es wurden (\d+) SubIDs? von keinem Artikel erkannt", "unmatched_subid", "amber")],
     "clicks": [(r"ohne Zuordnung: (\d+)", "unattributed", "amber")],
 }
 
 # Report-Zeilen, die „Datenlage offen“ bedeuten – kein Fehler, nie ein Issue.
 DATA_GAP_PATTERNS = (
     "kein umami_api_token", "keine websiteid", "umami-klicks nicht geladen",
-    "noch keine daten", "keine klick-daten", "keine awin-daten", "keine transaktionen",
+    "noch keine daten", "keine klick-daten",
     "einträge analysiert: **0**", "noch keine pin-", "kein Datensatz",
     # Umsatz-Messkette: Secret-/Export-Lücken sind Konfigurationslage, keine
     # Laufzeit-Panne. Die ESKALATION übernimmt der Funnel selbst (funnel_gap in
     # seiner Befundtabelle) – der Meta-Schritt bleibt Info, damit nicht zwei
     # Schritte dieselbe Lücke doppelt ins Issue schreiben.
-    "awin_api_token", "awin-publisher", "umami-views nicht geladen",
-    "awin-transaktionen nicht geladen", "umami free", "operating_boundary",
+    "umami-views nicht geladen", "umami free", "operating_boundary",
     "api-import in data/monetization.yaml bewusst deaktiviert",
 )
 
@@ -555,7 +550,6 @@ def _selftest():
         ("cwv", "## 🤖 Gesamt-Ampel: **AMBER**\n\n| AMBER | img_soft | Bild optimierbar |", "", 1, "info"),
         ("cwv", "## 🤖 Gesamt-Ampel: **RED**\n\n| RED | img_over | Bild 900 KB |", "", 1, "red"),
         ("clicks", "_Noch keine Daten – Umami-Export …_", "ℹ️ Keine Klick-Daten gefunden.", 0, "info"),
-        ("awin", "_Keine Transaktionen gefunden in data/awin_transactions.csv_", "", 0, "info"),
         ("secrets", "## Gesamt-Ampel: **RED**\n\n| RED | dead | `PINTEREST` – tot |", "", 1, "red"),
         ("secrets", "## Gesamt-Ampel: **AMBER**\n\n| AMBER | aging | `MASTODON` – 30d |", "", 1, "amber"),
         # Transienter Probe-Ausfall darf kein Wochen-Issue werden (sonst hätte die
@@ -602,7 +596,7 @@ def _selftest():
     if a == c:
         failures.append("Fingerabdruck ignoriert Befundanzahl")
     # 4) Exit-Code-Policy: kein Alarm aus Exit 1 ohne Befundtabelle
-    if classify("awin", "whatever", "", 1)["actionable"]:
+    if classify("clicks", "whatever", "", 1)["actionable"]:
         failures.append("Exit 1 ohne Befunde erzeugt Alarm (alter #206-Zustand)")
     # 5) Frische-Policy: Altlasten aus Vorläufen dürfen nie erneut alarmieren
     old = {"cwv": {"level": "red", "actionable": True, "code": "red_finding", "findings": 1,
@@ -626,12 +620,12 @@ def _selftest():
     # 6b) Scorecard: gelb = Ansicht (info), rot = Alarm (amber, actionierbar)
     if classify("scorecard", "## Gesamt-Score: **68/100** · Ampel: **RED**", "", 1)["level"] != "amber":
         failures.append("rote Scorecard löst keinen gebündelten Alarm aus")
-    # 6c) Marker: verlorene Awin-Zuordnung muss sichtbar sein
-    aw = classify("awin", "_Es wurden 3 SubIDs von keinem Artikel erkannt._", "", 1)
-    if aw["level"] != "amber" or not aw["actionable"]:
-        failures.append("Awin: verlorene SubIDs bleiben ohne Alarm")
-    if classify("awin", "_Es wurden 0 SubIDs von keinem Artikel erkannt._", "", 0)["level"] != "green":
-        failures.append("Awin: sauberer Import meldet trotzdem")
+    # 6c) Marker: verlorene Klick-Zuordnung muss sichtbar sein
+    ck = classify("clicks", "_Es wurden 3 Klicks ohne Zuordnung gezählt._ ohne Zuordnung: 3", "", 1)
+    if ck["level"] != "amber" or not ck["actionable"]:
+        failures.append("Klicks: verlorene Zuordnung bleibt ohne Alarm")
+    if classify("clicks", "_Alle Klicks zugeordnet._", "", 0)["level"] != "green":
+        failures.append("Klicks: sauberer Import meldet trotzdem")
     # 6d) v1-Report der Secrets-Wache: kein Alarm aus einem Format ohne Live-Probe
     legacy = ("# 🔐 Secrets-/Token-Alters-Wache\n**Stand:** 2026-09-07\n\n"
               "## Gesamt-Ampel: **AMBER**\n\n| Secret | Status |\n|---|---|\n\n"
@@ -649,8 +643,8 @@ def _selftest():
     # Zeilen dasselbe Secret-Thema.
     funnel_gap = ("# 📈 Umsatz-Funnel\n## 🚦 Gesamt-Ampel: **AMBER**\n\n"
                   "| Level | Code | Befund |\n|---|---|---|\n"
-                  "| AMBER | funnel_gap | Awin-Transaktionen (Publisher API): "
-                  "noch nie importiert |\n")
+                  "| AMBER | funnel_gap | Provisions-Tabelle: "
+                  "noch nie befüllt |\n")
     fv = classify("revenue-funnel", funnel_gap, "", 1)
     if fv["level"] != "amber" or not fv["actionable"]:
         failures.append("Umsatz-Funnel: Messlücke alarmiert nicht (Agentur-Standard: Alarm)")
@@ -659,13 +653,10 @@ def _selftest():
     if classify("revenue-funnel", funnel_ok, "", 0)["level"] != "green":
         failures.append("Umsatz-Funnel: grüner Trichter meldet trotzdem")
     chain = ("## 🚦 Gesamt-Ampel: **AMBER**\n\n| AMBER | chain_gap | /go/strom/ "
-             "ohne ?subid= (Awin sieht die Quelle nicht) |\n")
+             "ohne ?subid= (die Quelle geht verloren) |\n")
     cv = classify("click-chain", chain, "", 1)
     if cv["level"] != "amber" or not cv["actionable"]:
         failures.append("Klick-Kette: CTA-Vertragsbruch bleibt ohne Alarm")
-    skip_meta = json.dumps({"status": "skipped", "reason": "fehlt: AWIN_API_TOKEN"})
-    if classify("awin-fetch", skip_meta, "", 0)["level"] != "info":
-        failures.append("Awin-Abruf ohne Secret muss Info bleiben (der Funnel eskaliert)")
     views_meta = json.dumps({"status": "skipped", "reason": "kein UMAMI_API_TOKEN"})
     if classify("umami-views", views_meta, "", 0)["level"] != "info":
         failures.append("Umami-Views ohne Token muss Info bleiben (Meta dokumentiert genug)")
@@ -732,9 +723,6 @@ def _render_from(state):
               "- Klick-Daten füllen: `python3 scripts/umami_clicks.py --fetch` "
               "(Secret `UMAMI_API_TOKEN` einmalig setzen – "
               "docs/UMSATZ-MESSUNG-PREMIUM.md, 2 Minuten)",
-              "- Awin: Secrets `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` setzen, "
-              "`python3 scripts/awin_fetch.py` holt dann regelmäßig; alternativ CSV nach "
-              "`data/awin_transactions.csv` + `awin_provisions.py --gen-subid-map`",
               "- Umsatz-Funnel: `python3 scripts/revenue_funnel.py --print` "
               "(alle Kennzahlen + welche Quelle fehlt)",
               "- Kette prüfen: `python3 scripts/click_chain_guard.py` "

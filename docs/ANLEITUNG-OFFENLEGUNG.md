@@ -161,7 +161,7 @@ Workflow-Änderung im Dauerbetrieb.
    neuer-key:
      partner: "Name wie er dem Leser angezeigt wird"
      produkt: "Konkretes Angebot"
-     netz: "awin"
+     netz: "check24"
    ```
 2. `npm run offenlegung` – die Kennzeichnung in allen Artikeln, die den Key
    verlinken, der Abbinder und die Tabelle auf `/transparenz/` ziehen automatisch nach.

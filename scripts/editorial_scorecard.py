@@ -45,7 +45,6 @@ _CWV_M = DATA("cwv_manifest.json")
 _SECRETS_S = DATA("secrets_state.json")
 _CLICK_S = DATA("click_stats.json")
 _CLICK_META = DATA("umami_clicks.meta.json")
-_AWIN_P = DATA("awin_provisions.json")
 _FUNNEL = DATA("revenue_funnel.json")
 _HISTORY = DATA("scorecard_history.jsonl")
 _SECRETS_REPORT = os.path.join(BLOG_DIR, "SECRETS-REPORT.md")
@@ -386,7 +385,6 @@ def collect():
     zugangslage = _zugangsalter_state(secrets_state, _read_text(_SECRETS_REPORT))
     clicks = _read_json(_CLICK_S, {})
     clicks_meta = _read_json(_CLICK_META, {}) or {}
-    awin = _read_json(_AWIN_P, {})
     readability = _avg_readability()
     lektor = _lektor_findings()
     casing = _casing_state()
@@ -403,11 +401,6 @@ def collect():
     # ohne die Info-Stufen zu kennen; das Ergebnis war eine Ampel, die niemand
     # reproduzieren konnte.
     zugangsalter_rot = zugangslage["red"]
-
-    # Awin-Provisions-Import (Klicks → Umsatz): aggregiert, DSGVO-sicher.
-    _awin_un = awin.get("unmatched", 0)
-    if isinstance(_awin_un, (list, tuple)):
-        _awin_un = len(_awin_un)
 
     return {
         "date": TODAY.isoformat(),
@@ -445,10 +438,6 @@ def collect():
         "clicks_pipeline": clicks_meta.get("status") or ("disabled" if not _umami_api_import_enabled() else "nie"),
         "clicks_reason": clicks_meta.get("reason") or "",
         "clicks_stand": clicks_meta.get("written") or clicks_meta.get("attempted") or "nie",
-        "awin_total": awin.get("total_commission", 0),
-        "awin_paid": awin.get("total_paid", 0),
-        "awin_articles": len(awin.get("articles", {})),
-        "awin_unmatched": int(_awin_un or 0),
     }
 
 
@@ -553,8 +542,6 @@ def _render_datalage(d):
           "disabled": "Umami Free aktiv (Auswertung im Umami-Dashboard)"}.get(
               d.get("clicks_pipeline"),
               "Umami Free aktiv (Auswertung im Umami-Dashboard)" if not _umami_api_import_enabled() else "Import nie gelaufen")),
-        ("Awin-Provision", "data/awin_transactions.csv", "-",
-         "CSV-Export fehlt" if int(d.get("awin_articles") or 0) == 0 else "befüllt"),
         _funnel_datalage(),
     ]
     out = ["| Kennzahl | Quelle | Stand | Bewertung |", "|---|---|---|---|"]
@@ -572,7 +559,7 @@ def _append_history(d, score):
            "readability": d["readability"], "lektor": d["lektor"],
            "zugangsalter_rot": d.get("zugangsalter_rot", 0),
            "zugangsalter_gelb": d.get("zugangsalter_gelb", 0),
-           "clicks": d["total_clicks"], "awin": d["awin_total"]}
+           "clicks": d["total_clicks"]}
     # Die Historie speichert ausschließlich Secret-GESUNDHEITS-Metadaten
     # (Ampel-Zähler red/amber, Verdict, Nachweis-Stufen) – nie Werte.
     try:
@@ -627,16 +614,6 @@ def _score(d) -> int:
     if d.get("click_articles", 0) > 0:
         if d.get("total_clicks", 0) < 20:
             s -= 5
-    # Monetarisierung (Awin-Provisions-Import): Umsatz-Maschinen belohnen.
-    # Trade-off: Umsatz ist nur ein Bestandteil – er darf nie die Qualität
-    # dominieren (~max +5). Kein Datensatz = neutral (kein Abzug).
-    awin_total = float(d.get("awin_total", 0) or 0)
-    awin_unmatched = int(d.get("awin_unmatched", 0) or 0)
-    if awin_total > 0:
-        s += min(5, int(awin_total / 50))  # alle 50 € +1, max +5
-    # Nicht zugeordnete SubIDs = verlorene Umsatz-Zuordnung → warnen (min. 1).
-    if awin_unmatched > 0:
-        s -= min(3, awin_unmatched)
     return max(0, min(100, s))
 
 
@@ -697,17 +674,10 @@ def render(d, score):
         f"| Affiliate-Klicks (Umsatz-Hebel) | {d['total_clicks']} über "
         f"{d['click_articles']} Artikel | "
         f"{_data_lamp(d['total_clicks'], d['click_articles'], d.get('clicks_pipeline') == 'ok')} |",
-        f"| Awin-Provision (Klicks→Umsatz) | {d['awin_total']:.2f} € "
-        f"({d['awin_paid']:.2f} € bezahlt) über {d['awin_articles']} Artikel | "
-        f"{_data_lamp(int(d['awin_total'] or 0), d['awin_articles'], d['awin_articles'] > 0)} |",
         "",
         "## Affiliate-Klick-Attribution",
         "",
         _render_clicks(d),
-        "",
-        "## Awin-Provisions-Import (Monetarisierung)",
-        "",
-        _render_awin(d),
         "",
         "## Datenlagen (Messabdeckung)",
         "",
@@ -813,29 +783,6 @@ def _render_clicks(d):
             f"Voll-Liste (Umsatz-Hebel-Priorisierung).")
 
 
-def _render_awin(d):
-    """Zeigt den Awin-Umsatz-Hebel (Klicks→Umsatz) kompakt an."""
-    total = float(d.get("awin_total", 0) or 0)
-    if total <= 0:
-        return ("_Noch keine Awin-Provisions-Daten – `scripts/awin_provisions.py` mit "
-                "dem Awin-Transaktions-CSV ausführen (Dashboard → Reports → Transactions)._\n"
-                "- Hinweis: `--gen-subid-map` erzeugt `data/subid_map.yaml`; danach "
-                "`--awin-csv <pfad>` → `AWIN-REPORT.md` + `data/awin_provisions.json`.")
-    unmatched = int(d.get("awin_unmatched", 0) or 0)
-    lines = [
-        f"- **{total:.2f} €** Provision (davon **{float(d.get('awin_paid', 0) or 0):.2f} €** "
-        f"bezahlt) über **{d.get('awin_articles', 0)}** Artikel.",
-        f"- **Umsatz-Maschine (Top-Artikel):** Top-Artikel siehe `AWIN-REPORT.md` "
-        f"(Priorisierung nach Umsatz-Hebel).",
-    ]
-    if unmatched:
-        lines.append(f"- ⚠ **{unmatched}** SubID(s) nicht zugeordnet → Umsatz geht verloren; "
-                     f"`scripts/awin_provisions.py` zeigt die Liste (`data/subid_map.yaml` pflegen).")
-    lines.append("- Empfehlung: `scripts/awin_provisions.py` laufend ausführen "
-                 "(z. B. ins Content-Engine-Workflow nach `--ingest-csv` bündeln).")
-    return "\n".join(lines)
-
-
 def _render_pillars(counts):
     if not counts:
         return "_Keine Pillar-Zuordnung gefunden._"
@@ -936,18 +883,6 @@ def _selftest():
                 "readability": 50, "lektor": 80, "zugangsalter_rot": 3})
     if not (a > b):
         failures.append("Score-Monotonie: a={}, b={}".format(a, b))
-    # Awin-Monetarisierung: Umsatz belohnt (max +5), kein Datensatz = neutral,
-    # unmatched SubIDs warnen (min. 1) – darf nie Qualität dominieren.
-    # Basis mit Spielraum: lektor 50 (-4), zugangsalter_rot 1 (-5) → Base 91.
-    base_rev = {"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
-                "readability": 80, "lektor": 50, "zugangsalter_rot": 1}
-    c = _score(dict(base_rev, awin_total=250))
-    d0 = _score(base_rev)
-    if not (c > d0 and (c - d0) <= 5):
-        failures.append("Awin-Bonus begrenzt: c={}, d0={}".format(c, d0))
-    cu = _score(dict(base_rev, awin_total=250, awin_unmatched=4))
-    if not (c > cu and (c - cu) <= 3):
-        failures.append("Awin-unmatched-Abzug begrenzt: c={}, cu={}".format(c, cu))
     if failures:
         print("❌ SCORECARD-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:

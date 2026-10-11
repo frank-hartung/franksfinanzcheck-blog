@@ -61,8 +61,8 @@ test.describe('Affiliate-Integrität', () => {
         }
       }
       if (target !== '_blank') verstoesse.push(`${href}: target="${target}" statt _blank`);
-      // Awin-SubID-Attribution (01.09.2026): /go/-Links am Artikel tragen ?subid=<slug>
-      if (!/[?&]subid=/.test(href)) verstoesse.push(`${href}: keine ?subid= (Awin-Attribution)`);
+      // SubID-Weitergabe (01.09.2026): /go/-Links am Artikel tragen ?subid=<slug>
+      if (!/[?&]subid=/.test(href)) verstoesse.push(`${href}: keine ?subid= (Klick-Zuordnung)`);
     }
     expect(verstoesse, 'Affiliate-Links sind vollständig ausgezeichnet').toEqual([]);
   });

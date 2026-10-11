@@ -20,7 +20,7 @@ einer Rechnung statt mit Werbeversprechen. Das interaktive
 [`Fixkosten-Cockpit`](/cockpit/) setzt diesen Ansatz lokal im Browser um; keine
 persönlichen Eingaben werden an den Server übertragen. Die Erfahrung aus über
 zehn Jahren Praxis im Finanzbereich bleibt das E-E-A-T-Fundament.
-Geschäftsmodell: Affiliate (CHECK24, Awin) + organische Reichweite über Google
+Geschäftsmodell: Affiliate (CHECK24, Tarifcheck) + organische Reichweite über Google
 und Pinterest.
 
 - **Plattform:** Hugo 0.164 (Extended) + PaperMod (stark angepasst), GitHub Pages

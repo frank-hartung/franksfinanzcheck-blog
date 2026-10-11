@@ -13,7 +13,7 @@
 #  WARUM VERSION 2 (Vorfall 01./02.09.2026 – "stille Blindheit"):
 #
 #  Am 01.09.2026 wurde der Render-Hook layouts/_default/_markup/
-#  render-link.html erweitert (Awin-SubID `?subid=<artikel>`, Umami-
+#  render-link.html erweitert (SubID `?subid=<artikel>`, Umami-
 #  Kontext-Attribute). Seitdem zählte der Render-Beweis AI4 in JEDEM
 #  Artikel 0 Affiliate-Links – obwohl alle Links korrekt im HTML standen.
 #  Ursache: AI4 war als EIN starres Regex auf die exakte Attribut-Reihen-
@@ -1441,7 +1441,7 @@ def write_state(result: dict) -> None:
 #  SELBSTTEST (eingefrorene Fixtures – Sabotage-/Drift-Schutz)
 # ------------------------------------------------------------------ #
 # Reale Hook-Ausgaben. FIXTURE_CURRENT stammt 1:1 aus dem Build vom
-# 02.09.2026 (Render-Hook mit Awin-SubID + Umami-Kontext), FIXTURE_LEGACY
+# 02.09.2026 (Render-Hook mit SubID + Umami-Kontext), FIXTURE_LEGACY
 # aus dem Stand 14.08.2026. Genau zwischen diesen beiden Formaten ist das
 # alte Gate blind geworden – deshalb sind BEIDE eingefroren.
 FIXTURE_CURRENT = (
