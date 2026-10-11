@@ -109,13 +109,8 @@
        Runbook: docs/ANLEITUNG-ROBUSTHEIT.md · Wache: scripts/robustheits_gate.py */ -}}
 <script>
 (function () {
-  {{- with site.Params.umami.websiteId }}
-  try {
-    if (document.cookie.indexOf('ff_analytics_consent_v2=') !== -1) {
-      document.documentElement.classList.add('ff-consent-set');
-    }
-  } catch (e) {}
-  {{- end }}
+  /* Altlast Einwilligungs-Cookie (Umami/Analyse-Banner entfernt, 11.10.2026): nur aufräumen. */
+  try { document.cookie = 'ff_analytics_consent_v2=;max-age=0;path=/;SameSite=Lax'; } catch (e) {}
 })();
 
 /* ---- Robustheits-Bootstrap: die Seite stirbt nie stumm ---- */
@@ -274,7 +269,6 @@
   }
 })();
 </script>
-<noscript><style>#ff-consent-banner{display:none}</style></noscript>
 
 {{- /* ---------- E-E-A-T: Person-Schema (Autor mit Foto) ---------- */ -}}
 {{- /* GEO-PREMIUM 27.09.2026: Auch auf der Startseite emittiert – der
@@ -456,7 +450,7 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- /* ---------- Privacy-Analytics (Umami) + Service Worker ---------- */ -}}
+{{- /* ---------- Service Worker (Analyse-Banner und Umami entfernt, 11.10.2026) ---------- */ -}}
 {{- /* HEAD-DOM-BUDGET (Issue #338, 21.09.2026): Beide Blöcke stehen jetzt am
        Ende des <body> – layouts/_partials/deferred_scripts.html, eingebunden
        von footer.html. Sie waren die letzten zwei direkten <script>-Kinder im

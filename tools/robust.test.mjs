@@ -54,9 +54,9 @@ function bootstrapQuelltext() {
   assert.ok(block, 'Bootstrap im <head> nicht gefunden');
   assert.ok(block.includes('ff_analytics_consent_v2'),
     'Der Bootstrap muss sich das vorhandene Head-Skript teilen (DOM-Budget 58)');
-  // Der optionale Consent-Vorlauf ist im Hugo-Build bedingt. jsdom wertet
-  // ausschließlich JavaScript aus; Hugo-Direktiven vor dem Eval entfernen.
-  return block.replace(/\{\{-?\s*(?:with site\.Params\.umami\.websiteId|end)\s*-?\}\}/g, '');
+  // Der Bootstrap enthält keine Hugo-Direktiven mehr (Analyse-Banner und
+  // Umami entfernt, 11.10.2026). jsdom wertet ausschließlich JavaScript aus.
+  return block;
 }
 
 /** Frische Seite mit Bootstrap + Schicht, Fetch-Stub vor dem Laden gesetzt. */

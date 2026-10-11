@@ -246,17 +246,17 @@ class TestCtaMessvertrag(unittest.TestCase):
 
     def test_volles_attribut_set_ist_sauber(self):
         html = ('<a href="/go/strom/?subid=posts-x" rel="sponsored nofollow noopener" '
-                'target="_blank" data-umami-event="affiliate_click" '
-                'data-umami-event-slug="strom" '
-                'data-umami-event-placement="artikel">↔</a>')
+                'target="_blank" data-klick="affiliate_click" '
+                'data-klick-slug="strom" '
+                'data-klick-placement="artikel">↔</a>')
         self.assertEqual(cc.scan_page(html, "t"), [])
 
     def test_jede_einzelne_pflicht_fehlt_wird_gemeldet(self):
         basis = ('<a href="/go/gas/{sub}" rel="sponsored nofollow noopener" '
                  '{ev}{slug}{platz}>↔</a>')
-        full = dict(sub="?subid=s", ev=' data-umami-event="affiliate_click"',
-                    slug=' data-umami-event-slug="gas"',
-                    platz=' data-umami-event-placement="artikel"')
+        full = dict(sub="?subid=s", ev=' data-klick="affiliate_click"',
+                    slug=' data-klick-slug="gas"',
+                    platz=' data-klick-placement="artikel"')
         for feld in full:
             kaputt = dict(full)
             kaputt[feld] = ""
@@ -273,15 +273,15 @@ class TestCtaMessvertrag(unittest.TestCase):
 
     def test_ampersand_escapes_beim_subid_check(self):
         html = ('<a href="/go/dsl/?a=1&amp;subid=x" rel="sponsored nofollow noopener" '
-                'data-umami-event="affiliate_click" data-umami-event-slug="dsl" '
-                'data-umami-event-placement="artikel">y</a>')
+                'data-klick="affiliate_click" data-klick-slug="dsl" '
+                'data-klick-placement="artikel">y</a>')
         self.assertEqual(cc.scan_page(html, "t"), [])
 
     def test_hugo_minify_ohne_attribut_anfuehrungszeichen_ist_sauber(self):
         """Hugo darf sichere Analytics-Werte ohne Anführungszeichen ausgeben."""
         html = ('<a href="/go/strom/?subid=posts-x" rel="sponsored nofollow noopener" '
-                'data-umami-event=affiliate_click data-umami-event-slug=strom '
-                'data-umami-event-placement=artikel>↔</a>')
+                'data-klick=affiliate_click data-klick-slug=strom '
+                'data-klick-placement=artikel>↔</a>')
         self.assertEqual(cc.scan_page(html, "t"), [])
 
 

@@ -113,7 +113,7 @@
           <td class="ff-es-col ff-es-col--win ff-es-cta">
             {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite "placement" "einspartabelle") -}}
             {{- with $aff -}}
-            <a class="ff-es-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-subid="{{ .subid }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" data-umami-event-placement="{{ .placement }}" title="{{ .title }}">
+            <a class="ff-es-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-klick="{{ .event }}" data-klick-slug="{{ .key }}" data-klick-subid="{{ .subid }}" data-klick-article="{{ .article }}" data-klick-pillar="{{ .pillar }}" data-klick-placement="{{ .placement }}" title="{{ .title }}">
               {{ $ctaText | safeHTML }}
             </a>
             {{- else -}}
@@ -155,7 +155,7 @@
       </div>
       {{- $affCard := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite "placement" "einspartabelle") -}}
       {{- with $affCard -}}
-      <a class="ff-es-btn ff-es-btn--card" href="{{ $affCard.href | safeURL }}" rel="{{ $affCard.rel }}" target="{{ $affCard.target }}" data-umami-event="{{ $affCard.event }}" data-umami-event-slug="{{ $affCard.key }}" data-umami-event-subid="{{ $affCard.subid }}" data-umami-event-article="{{ $affCard.article }}" data-umami-event-pillar="{{ $affCard.pillar }}" data-umami-event-placement="{{ $affCard.placement }}" title="{{ $affCard.title }}">{{ $ctaText | safeHTML }}</a>
+      <a class="ff-es-btn ff-es-btn--card" href="{{ $affCard.href | safeURL }}" rel="{{ $affCard.rel }}" target="{{ $affCard.target }}" data-klick="{{ $affCard.event }}" data-klick-slug="{{ $affCard.key }}" data-klick-subid="{{ $affCard.subid }}" data-klick-article="{{ $affCard.article }}" data-klick-pillar="{{ $affCard.pillar }}" data-klick-placement="{{ $affCard.placement }}" title="{{ $affCard.title }}">{{ $ctaText | safeHTML }}</a>
       {{- else -}}
       <a class="ff-es-btn ff-es-btn--card" href="{{ $ctaUrl | safeURL }}">{{ $ctaText | safeHTML }}</a>
       {{- end -}}

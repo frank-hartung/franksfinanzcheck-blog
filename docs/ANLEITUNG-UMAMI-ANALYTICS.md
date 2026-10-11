@@ -1,6 +1,6 @@
 # 📊 Umami Analytics – Setup-Anleitung (Privacy-freundlich, kostenlos)
 
-> **Stand 11.10.2026:** Umami ist abgeschaltet. Die API ist im kostenfreien Plan kostenpflichtig;
+> **Stand 11.10.2026:** Umami ist aus dem Blog entfernt (Skript, Consent-Banner, `data-umami-*`-Attribute). Grund war nur die Kostenfrage: Die API ist im kostenfreien Plan kostenpflichtig;
 > der Import bleibt aus (`data/monetization.yaml`: `umami_api_import_enabled: false`).
 > Die Klickmessung läuft als Vorbereitung über den eigenen Zähler:
 > [ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md](ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md).

@@ -34,7 +34,7 @@
 {{- if .arrow }}{{ $inner = print $inner " →" }}{{ end -}}
 {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $url "page" .page "placement" (.placement | default "")) -}}
 {{- with $aff -}}
-<a class="{{ $cls }}" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-subid="{{ .subid }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" data-umami-event-placement="{{ .placement }}" title="{{ .title }}">{{ $inner | safeHTML }}</a>
+<a class="{{ $cls }}" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-klick="{{ .event }}" data-klick-slug="{{ .key }}" data-klick-subid="{{ .subid }}" data-klick-article="{{ .article }}" data-klick-pillar="{{ .pillar }}" data-klick-placement="{{ .placement }}" title="{{ .title }}">{{ $inner | safeHTML }}</a>
 {{- else -}}
 <a class="{{ $cls }}" href="{{ $url | safeURL }}">{{ $inner | safeHTML }}</a>
 {{- end -}}

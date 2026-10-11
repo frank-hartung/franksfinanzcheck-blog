@@ -41,7 +41,7 @@
             <span>Nächster Check</span>
             <input id="ff-cockpit-{{ .id }}-date" type="date" data-ff-cockpit-date>
           </label>
-          <a class="ff-cockpit__guide" href="{{ printf "pillar/%s/" .pillar | relURL }}" data-umami-event="cta_click" data-umami-event-cta="cockpit-{{ .id }}-ratgeber" data-umami-event-slug="cockpit-{{ .id }}-ratgeber" data-umami-event-placement="fixkosten-cockpit">{{ .pillar_label }} <span aria-hidden="true">→</span></a>
+          <a class="ff-cockpit__guide" href="{{ printf "pillar/%s/" .pillar | relURL }}" data-klick="cta_click" data-klick-cta="cockpit-{{ .id }}-ratgeber" data-klick-slug="cockpit-{{ .id }}-ratgeber" data-klick-placement="fixkosten-cockpit">{{ .pillar_label }} <span aria-hidden="true">→</span></a>
         </div>
         {{- end -}}
       </div>
