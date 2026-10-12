@@ -1469,6 +1469,42 @@ Voll-Lauf bleibt · Takt-Umschalter · read-only-Takt · Nicht-Messung ist kein
 Grün · Router nutzt den akuten Takt · Chronisch bleibt bei 72 h · Ausfall-Befund
 ist akut · Regressionstest).
 
+## Das Gate misst, was das Audit misst (Phrasen-Einzigartigkeit, seit #714, 12.10.2026)
+
+Am 12.10.2026 gingen um 06:02 UTC zwei Reserve-Artikel live – „DSL-Anbieter
+wechseln" und „Handyvertrag kündigen" –, beide durch `quality_score` und
+`publish_gate --strict`. Um 13:35 UTC meldete das tägliche Einzigartigkeits-
+Audit dasselbe Paar als **kritisch**: 14 gleiche Sieben-Wort-Phrasen aus einem
+geteilten § 56-TKG-Absatz, dazu einen Titel-Zwilling („…: Kosten und Fristen
+richtig prüfen" ↔ „…: Frist und Kosten richtig prüfen"). Das Gate war nicht
+zu lasch – **es kannte die Messung nicht**: `duplikat_guard` (D3/D4) vergleicht
+ganze Absätze mit Ratio ≥ 0,85, und ein Absatz, der „DSL-Vertrag" gegen
+„Handyvertrag" tauscht, liegt darunter; `quality_score` gewichtet eine
+kritische Überlappung mit −0,01. Bestandswache und Gate hatten zwei
+Wahrheiten, und die strengere kam erst nach dem Deploy zu Wort – dieselbe
+Bauart wie #583 (Faktenfrische) und #674 (Duplikate).
+
+- **Eine Messregel.** `check_uniqueness.kandidaten_befunde()` ist der
+  Collector für Publish-Gate (`uniqueness_failures`, U1 = ≥ 5 gleiche
+  7-Wort-Phrasen mit einem auslieferbaren Artikel oder Mit-Kandidaten,
+  U2 = Titel-Zwilling am selben Slug-Tag), Release-Scorecard
+  (`RD2-einzigartigkeit`, `wirkung: blockiert`) und Tagesaudit. Ein
+  Bestandsbefund kann damit nie erst nach einem grünen Gate auftauchen.
+- **Entwürfe sind keine Gegenseite.** Ein `draft: true` im Vorrat kann nichts
+  kannibalisieren; der zweite Zwilling fällt, sobald der erste live ist.
+  Zwischen zwei Kandidaten trägt bei U2 nur der jüngere den Befund (der
+  ältere ist kanonisch – dieselbe Regel wie `heal_twin`).
+- **Kein Heiler, bewusst.** Welche Passage neu formuliert wird und ob die
+  Rechtsangabe dabei stimmt, ist Redaktionsarbeit mit Quellenpflicht
+  (`reserve_healer_coverage.AUSNAHMEN`). Der Kandidat bleibt als Hold erhalten.
+- **Fail-closed.** Roter Selbsttest der Wache = Werkzeugfehler = Gate stoppt,
+  nichts wird verworfen.
+- **Redaktionsvokabeln sind keine Themenwörter.** „richtig prüfen", „worauf
+  es ankommt", „Schritt für Schritt" stehen jetzt in `STOP`; der Zwillings-
+  Radar vergleicht Themen, nicht Schablonen (Selbsttest-Fälle 7+8).
+- Tests: `python3 -m unittest scripts.tests.test_publish_gate_uniqueness`
+  (16) · Bericht: `EINZIGARTIGKEIT-BESTAND-714-DAUERHEILUNG-PREMIUM-2026-10-12.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

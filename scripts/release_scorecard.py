@@ -137,6 +137,9 @@ PUBLISH_GATE_HART_FAMILIEN = {
     "M1-fachliche-freigabe": "editorial_review_gate.py",
     "M2-siegel-bindung": "editorial_review_gate.py",
     "RD1-duplikate": "duplikat_guard.py",
+    # #714 (12.10.2026): Phrasen-Einzigartigkeit – dieselbe Messung wie das
+    # Tagesaudit, damit ein Bestandsbefund nie erst nach dem Deploy auftaucht.
+    "RD2-einzigartigkeit": "check_uniqueness.py",
 }
 
 AUSNAHME_PFLICHTFELDER = ("slug", "check", "begruendung", "gueltig_bis", "entschieden_von")
@@ -523,6 +526,21 @@ def sammle(live_slugs: list[str], heute: dt.date) -> tuple[dict, dict, dict]:
                 _merke(befunde, slug, "RD1-duplikate", problem)
     except Exception as exc:  # noqa: BLE001
         tool_fehler["RD1-duplikate"] = f"Duplikat-Wache nicht auswertbar: {exc}"
+
+    # ---------- Einzigartigkeit: derselbe Publish-Gate-Collector (U1/U2) ----
+    # Issue #714 (12.10.2026): Zwei Artikel passierten das Gate und wurden
+    # erst vom Tagesaudit (7-Gramm) als kritisch gemeldet. Scorecard und Gate
+    # lesen jetzt `check_uniqueness.kandidaten_befunde` über denselben
+    # Adapter – keine zweite Messregel, kein Fund erst nach dem Deploy.
+    try:
+        uniq_fail, uniq_tool = publish_gate.uniqueness_failures(live_slugs)
+        if uniq_tool:
+            tool_fehler["RD2-einzigartigkeit"] = uniq_tool
+        for slug, probleme in uniq_fail.items():
+            for problem in probleme:
+                _merke(befunde, slug, "RD2-einzigartigkeit", problem)
+    except Exception as exc:  # noqa: BLE001
+        tool_fehler["RD2-einzigartigkeit"] = f"Einzigartigkeits-Wache nicht auswertbar: {exc}"
 
     # ---------- Faktenfrische (Faktenalter + nächste Überprüfung) ----------
     # Die Scorecard und das Publish-Gate benutzen denselben Collector. Damit

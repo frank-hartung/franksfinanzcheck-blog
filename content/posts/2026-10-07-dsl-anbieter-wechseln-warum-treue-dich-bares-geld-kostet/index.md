@@ -1,5 +1,5 @@
 ---
-title: "DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen"
+title: "DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin"
 description: "DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen."
 date: 2026-10-12T06:02:26Z
 draft: false
@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel", "DSL Anbieter wechseln", "DSL-Anbieter"]
-pin_title: "DSL-Anbieter wechseln: Kosten und Fristen prüfen"
+pin_title: "DSL-Anbieter wechseln: Gesamtpreis statt Lockpreis"
 pin_description: "*Werbung | DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen. Mehr Spartipps auf FranksFinanzcheck! #dslanbieterwechseln #dslwechseln #internetanbieter"
 ai_generated: true
 ai_provider: "Editorial revision"
@@ -17,7 +17,7 @@ engine_level: "draft"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Unbelegte Geschwindigkeits- und Sparwerte entfernt; Rechtsangaben mit amtlichen Quellen geprüft"
+  aenderungsgrund: "Unbelegte Geschwindigkeits- und Sparwerte entfernt; Rechtsangaben mit amtlichen Quellen geprüft; Laufzeit-Abschnitt (§ 56 TKG) eigenständig neu gefasst und Titel geschärft (Einzigartigkeits-Audit #714, 12.10.2026)"
 inspiration: "DSL-Anbieter wechseln: Gesamtpreis und Übergang planen"
 cover:
   image: "images/covers/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet.jpg"
@@ -55,13 +55,15 @@ Ein DSL-Vertrag läuft leicht weiter, obwohl sich deine Nutzung geändert hat. E
 
 ## Wann kannst du deinen DSL-Vertrag kündigen?
 
-Sieh zuerst in deinen Vertrag und auf die aktuelle Rechnung. Dort findest du Beginn, Ende der festen Laufzeit und den Kündigungsweg. Wenn dein DSL-Vertrag nach der ersten Laufzeit still weiterläuft, kannst du ihn grundsätzlich jederzeit mit einer Frist von einem Monat beenden ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).
+Der Termin steht nicht im Prospekt des neuen Anbieters. Er steht in deinen eigenen Unterlagen: in der Auftragsbestätigung, auf der letzten Rechnung, im Kundenportal. Dort liest du ab, wann die Mindestlaufzeit begonnen hat und auf welchem Weg der Anbieter eine Kündigung annimmt.
 
-Die erste feste Laufzeit eines üblichen Internetvertrags darf höchstens 24 Monate dauern ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Lies die Laufzeit in deinem Vertrag, bevor du ein neues Angebot annimmst.
+Beides brauchst du, bevor du irgendwo auf „Bestellen“ klickst. Denn der neue Anbieter plant den Schalttermin um genau dieses Datum herum.
 
-Zusätzlich muss dir der Anbieter eine Variante mit höchstens 12 Monaten Laufzeit anbieten ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Beim Internetanschluss lohnt die kurze Bindung vor allem, wenn ein Umzug ansteht oder du die tatsächliche Bandbreite an deiner Adresse erst noch im Alltag prüfen willst.
+Für die Laufzeit setzt das Telekommunikationsgesetz den Rahmen. Die anfängliche Bindung darf bei Internetverträgen nicht länger als 24 Monate sein ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Ein Tarif mit höchstens zwölf Monaten Laufzeit muss dir ebenfalls angeboten werden ([§ 56 Absatz 1 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).
 
-Läuft dein Vertrag nach der ersten festen Zeit still weiter, kannst du ihn mit einer Frist von einem Monat kündigen ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Notiere das Enddatum und den Kündigungsweg. Wenn dir eine Angabe fehlt, frag den Anbieter schriftlich. Heb die Antwort auf, damit du nicht raten musst.
+Beim Festnetzanschluss ist die kurze Variante mehr wert, als sie auf dem Papier aussieht. Wer bald umzieht, kauft sich damit Beweglichkeit. Das gilt auch, wenn du noch nicht weißt, ob die beworbene Bandbreite an deiner Adresse überhaupt ankommt.
+
+Ist die Mindestlaufzeit vorbei und der Vertrag läuft stillschweigend weiter, bist du frei. Dann genügt eine Kündigung mit einem Monat Vorlauf, und zwar jederzeit ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Fehlt dir eine Angabe, lass sie dir vom Anbieter schriftlich geben und lege die Antwort zu den Unterlagen. Ein Datum, das du nur im Kopf hast, ist am Schalttag keines.
 
 ## Was kostet der neue Vertrag wirklich?
 

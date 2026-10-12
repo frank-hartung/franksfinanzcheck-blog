@@ -12,8 +12,13 @@ Prüft:
 WICHTIG: Template-Bausteine (Werbekennzeichnung, Affiliate-CTA, FAQ-Rahmen)
 werden VOR dem Vergleich entfernt – nur der echte Fließtext zählt.
 
-SABOTAGE-SCHUTZ: SELFTEST_SAMEDAY (6 eingefrorene Faelle inkl. echtem
-Fall) laeuft vor jedem Audit; Abweichung → Exit 2.
+  4) KANDIDATEN-COLLECTOR (Issue #714, 12.10.2026): `kandidaten_befunde()`
+     ist DIESELBE Messung für das Publish-Gate (uniqueness_failures, U1/U2)
+     und die Release-Scorecard (RD2-einzigartigkeit). Ein Bestandsbefund
+     kann damit nie erst NACH einem grünen Gate auftauchen.
+
+SABOTAGE-SCHUTZ: SELFTEST_SAMEDAY (8 eingefrorene Faelle inkl. echtem
+Fall) + Collector-Korpus laufen vor jedem Audit; Abweichung → Exit 2.
 
 Nutzung:
     python3 scripts/check_uniqueness.py            # alle Artikel prüfen
@@ -158,7 +163,15 @@ def find_pin_for_topic(topic_title, pins):
 STOP = set("""der die das ein eine einem einer einem einen so du dich dein deine
 sich vor gegen mit und oder aber ist sind als zum zur im in am an auf aus wie
 was wer wann warum sicherst schuetzt einfach erklaert leicht gemacht ab
-vergleich vergleichen vergleichs vergleichstabelle""".split())
+vergleich vergleichen vergleichs vergleichstabelle
+richtig pruefen pruefst prueft wirklich lohnt jetzt tipps tricks schritt
+worauf ankommt achten clever""".split())
+# Die zweite Zeile (12.10.2026, Issue #714) sind REDAKTIONSVOKABELN, keine
+# Themenwörter: „richtig prüfen“, „worauf es ankommt“, „Schritt für Schritt“
+# stehen in jeder dritten Ratgeber-Überschrift. Am 12.10. machten allein
+# „kosten richtig pruefen“ aus einem DSL- und einem Handyvertrags-Artikel
+# einen Titel-Zwilling (Jaccard 0,30) – obwohl beide verschiedene Suchanfragen
+# bedienen. Der Zwillings-Radar soll Themen vergleichen, nicht Schablonen.
 SAMEDAY_JACCARD = 0.25  # fuzzy-Jaccard (Komposita werden aufgesplittet)
 
 
@@ -231,6 +244,14 @@ SELFTEST_SAMEDAY = [
     ("Tagesgeld-Zinsen 2026 im Vergleich", "Handytarife vergleichen 2026", False),
     ("50-30-20-Regel einfach erklärt", "Haushaltsbuch führen leicht gemacht", False),
     ("Kfz-Versicherung wechseln", "Handyvertrag kündigen", False),
+    # Issue #714 (12.10.2026): dieselbe Titel-SCHABLONE ist kein Zwilling –
+    # DSL und Mobilfunk bedienen verschiedene Suchanfragen.
+    ("DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen",
+     "Handyvertrag kündigen: Frist und Kosten richtig prüfen", False),
+    # … aber dasselbe THEMA bleibt einer, auch wenn die Schablone drumherum
+    # steht (Gegenprobe: die Redaktionsvokabeln dürfen nichts verstecken).
+    ("Stromfresser im Haushalt richtig prüfen",
+     "Stromfresser finden: So prüfst du deinen Haushalt", True),
 ]
 
 
@@ -306,6 +327,9 @@ def run_selftest() -> list:
         if bool(grund) == erlaubt:
             fehler.append(f"  Twin-Schutz {pfad} [{dat[:10] or '?'}]: erwartet "
                           f"erlaubt={erlaubt}, Grund={grund!r}")
+    # Kandidaten-Collector (#714): dieselbe Messung, die das Publish-Gate
+    # liest – wenn sie hier nicht findet, darf kein Gate ihr vertrauen.
+    fehler.extend(_collector_selftest())
     return fehler
 
 
@@ -392,6 +416,229 @@ def heal_twin(path_younger: str) -> bool:
     return park_state.hold(path_younger,
                            "duplikat (same-day-twin: älterer Titel ist "
                            "kanonisch, Zusammenführung nötig)")
+
+
+# ============================================================
+#  KANDIDATEN-COLLECTOR FÜR DAS PUBLISH-GATE (Issue #714, 12.10.2026)
+#  ------------------------------------------------------------
+#  Befund vom 12.10.2026: Zwei Reserve-Artikel (DSL-Anbieterwechsel und
+#  Handyvertrag kündigen) gingen um 06:02 Uhr live, beide durch quality_score
+#  und publish_gate STRICT – und das Tagesaudit um 13:35 Uhr meldete sie als
+#  KRITISCH: 14 gleiche Sieben-Wort-Phrasen aus demselben § 56-TKG-Absatz.
+#
+#  Warum das Gate blind war: Es kannte diese Messung nicht. `duplikat_guard`
+#  (D3/D4) misst GANZE Absätze mit difflib-Ratio ≥ 0,85 – zwei Absätze, die
+#  „DSL-Vertrag“ gegen „Handyvertrag“ tauschen und einen Satz anhängen,
+#  liegen darunter. `quality_score` wertet eine kritische Überlappung mit
+#  −0,01 Gesamtpunkten (Gewicht 0,1 × 0,1). Beides zusammen heißt: Die
+#  Bestandswache und das Veröffentlichungs-Gate hatten ZWEI Wahrheiten, und
+#  die strengere kam erst nach dem Deploy zu Wort. Genau diese Bauart hat
+#  dieses Repo schon in #583 (Faktenfrische) und #674 (Duplikate) gekostet:
+#  grüner Publish-Pfad, roter Nachlauf, offenes Ticket, niemand zuständig.
+#
+#  Dieser Collector ist DIESELBE Messung (clean_body + ngrams + KRITISCH_AB +
+#  same_day_twin), nur auf Kandidaten zugeschnitten:
+#    U1-PHRASEN   Kandidat teilt ≥ KRITISCH_AB Sieben-Wort-Phrasen mit einem
+#                 auslieferbaren Artikel oder einem Mit-Kandidaten.
+#    U2-ZWILLING  Kandidat ist Titel-Zwilling eines auslieferbaren Artikels
+#                 desselben Kalendertags (Slug-Datum). Zwischen zwei
+#                 Kandidaten trägt nur der jüngere den Befund – wie bei der
+#                 Heilung im Tagesaudit ist der ältere kanonisch.
+#  Ein Fund hier ist damit NIE erst nach einem grünen Gate möglich: Das
+#  Publish-Gate (uniqueness_failures), die Release-Scorecard
+#  (RD2-einzigartigkeit) und dieses Tagesaudit lesen dieselbe Funktion.
+# ============================================================
+def lade_bestand(paths=None, now=None) -> dict:
+    """{pfad: {slug, title, body, live, grund, date}} – eine Leseregel.
+
+    `paths` ersetzt nur im Test die Dateisuche (synthetischer Korpus); `now`
+    ist die Hugo-Uhr für Zukunfts-/Ablaufdaten (post_utils.build_state).
+    """
+    bestand = {}
+    for path in (paths if paths is not None else list_post_paths()):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                content = fh.read()
+        except OSError:
+            continue
+        m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
+        dm = re.search(r'(?m)^date:\s*["\']?([0-9T:\-]+)', content)
+        visible, reason = audit_publication_state(content, now=now)
+        bestand[path] = {
+            "slug": _slug(path),
+            "title": m.group(1) if m else _slug(path),
+            "body": clean_body(content),
+            "live": visible,
+            "grund": "" if visible else reason,
+            "date": dm.group(1) if dm else "",
+        }
+    return bestand
+
+
+def _slug_tag(slug: str) -> str:
+    m = re.match(r"(20\d\d-\d\d-\d\d)", slug or "")
+    return m.group(1) if m else ""
+
+
+def kandidaten_befunde(candidates, bestand=None, n: int = None,
+                       max_sim: int = None) -> dict:
+    """U1/U2-Befunde je Kandidaten-Slug: {slug: [detail, …]} (leer = sauber).
+
+    candidates  Slugs (Ordnernamen), die ein Lauf gerade live schalten würde.
+                Sie gelten als auslieferbar – unabhängig von ihrem aktuellen
+                `draft`-Stand (das Gate misst die Fassung, die gleich live ist).
+    bestand     Ergebnis von lade_bestand(); None = aus content/posts lesen.
+    Gegenseite  nur auslieferbare Artikel und Mit-Kandidaten. Ein Entwurf im
+                Vorrat kann nichts kannibalisieren – er wird hier NICHT gegen
+                den Kandidaten gerechnet (sonst würde die Reserve sich selbst
+                blockieren; der zweite Zwilling fällt, sobald der erste live
+                ist – fail-closed am richtigen Zeitpunkt).
+    """
+    n = PHRASE_LEN if n is None else n
+    max_sim = MAX_SIMILAR if max_sim is None else max_sim
+    wanted = {str(s).strip() for s in candidates if str(s).strip()}
+    if not wanted:
+        return {}
+    bestand = lade_bestand() if bestand is None else bestand
+    by_slug = {info["slug"]: info for info in bestand.values()}
+    gegenseite = {s: i for s, i in by_slug.items() if i["live"] or s in wanted}
+    grams = {s: ngrams(i["body"], n) for s, i in gegenseite.items()}
+    funde: dict[str, list[str]] = {}
+
+    def merke(slug, text):
+        if slug in wanted and text not in funde.setdefault(slug, []):
+            funde[slug].append(text)
+
+    for cand in sorted(wanted & set(by_slug)):
+        for other, info in sorted(gegenseite.items()):
+            if other == cand or (other in wanted and other < cand):
+                continue  # jedes Paar genau einmal
+            gemeinsam = grams[cand] & grams[other]
+            klasse = paar_klasse(len(gemeinsam), False, False, max_sim)
+            if klasse == "kritisch":
+                beispiel = sorted(gemeinsam)[0]
+                text = (f"U1-PHRASEN: {len(gemeinsam)} gleiche {n}-Wort-Phrasen "
+                        f"mit {{anderer}} (z. B. „{beispiel}“) – ab {KRITISCH_AB} "
+                        f"ist es Dopplung, Passage umschreiben")
+                # Beide Seiten benannt – aber nur Kandidaten erhalten einen
+                # Eintrag (merke() filtert; ein Live-Artikel ist hier Zeuge,
+                # nicht Angeklagter – seine Prüfung ist das Tagesaudit).
+                merke(cand, text.format(anderer=other))
+                merke(other, text.format(anderer=cand))
+            tag = _slug_tag(cand)
+            if tag and tag == _slug_tag(other) and same_day_twin(
+                    by_slug[cand]["title"], info["title"]):
+                a, b = by_slug[cand], info
+                text = (f"U2-ZWILLING: Titel-Zwilling am {tag} mit {{anderer}} "
+                        f"(„{a['title'][:40]}“ ↔ „{b['title'][:40]}“) – "
+                        "Thema zusammenführen oder Titel schärfen")
+                if other in wanted:
+                    # Zwei Kandidaten: der jüngere weicht, der ältere ist
+                    # kanonisch (dieselbe Regel wie heal_twin im Tagesaudit).
+                    juenger = max(cand, other,
+                                  key=lambda s: (by_slug[s]["date"], s))
+                    aelter = other if juenger == cand else cand
+                    merke(juenger, text.format(anderer=aelter))
+                else:
+                    merke(cand, text.format(anderer=other))
+    return funde
+
+
+def _collector_selftest() -> list:
+    """Eingefrorener Mini-Korpus: der Collector findet, was er finden muss,
+    und schweigt, wo nichts ist. Läuft in run_selftest() – ein Gate, das
+    diese Funktion liest, misst damit nachweislich (Sabotage-Schutz)."""
+    fehler = []
+    passage = ("Lies die Laufzeit in deinem Vertrag bevor du ein neues Angebot "
+               "annimmst denn die erste feste Laufzeit darf höchstens vierundzwanzig "
+               "Monate dauern und danach kannst du jederzeit mit einer Frist von "
+               "einem Monat kündigen wenn der Vertrag still weiterläuft.")
+    eigen = ("Ein Router steht selten am besten Platz; wer ihn vom Boden auf das "
+             "Regal hebt, gewinnt oft mehr als ein neuer Tarif verspricht. Miss das "
+             "WLAN in jedem Zimmer, bevor du den Vertrag anfasst.")
+    frei = ("Der Notgroschen ist kein Sparziel, sondern ein Puffer gegen den "
+            "Dienstag, an dem die Waschmaschine stirbt. Drei Nettogehälter sind "
+            "eine Faustregel, kein Gesetz.")
+    mobil = ("Eine offene Gerätezahlung läuft oft weiter, wenn der Mobilfunkdienst "
+             "endet; wer die Raten nicht getrennt aufgelistet bekommt, zahlt am "
+             "Ende für ein Telefon, das längst in der Schublade liegt.")
+
+    def doc(slug, title, body, draft="false", date="2026-10-07T08:00:00Z"):
+        return (f"---\ntitle: \"{title}\"\ndate: {date}\ndraft: {draft}\n---\n\n"
+                f"{body}\n")
+
+    korpus = {
+        "/k/posts/2026-10-07-dsl/index.md":
+            doc("2026-10-07-dsl", "DSL-Anbieter wechseln: was der Vertrag kostet",
+                passage + "\n\n" + eigen),
+        "/k/posts/2026-10-07-handy/index.md":
+            doc("2026-10-07-handy", "Handyvertrag kündigen: Enddatum und Nachweis",
+                passage + "\n\n" + mobil, date="2026-10-07T09:00:00Z"),
+        "/k/posts/2026-10-07-notgroschen/index.md":
+            doc("2026-10-07-notgroschen", "Notgroschen: wie viel Puffer reicht",
+                frei + " Und ein zweiter, ganz eigener Gedanke steht hier."),
+        "/k/posts/2026-10-07-notgroschen-zwilling/index.md":
+            doc("2026-10-07-notgroschen-zwilling", "Notgroschen aufbauen: wie viel reicht",
+                eigen, date="2026-10-07T10:00:00Z"),
+        "/k/posts/2026-09-01-entwurf/index.md":
+            doc("2026-09-01-entwurf", "Alter Entwurf", passage, draft="true"),
+    }
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        pfade = {}
+        for virt, inhalt in korpus.items():
+            p = os.path.join(tmp, *virt.strip("/").split("/")[1:])
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            with open(p, "w", encoding="utf-8") as fh:
+                fh.write(inhalt)
+            pfade[virt] = p
+        bestand = lade_bestand(paths=list(pfade.values()),
+                               now=datetime.datetime(2026, 10, 12,
+                                                     tzinfo=datetime.timezone.utc))
+    # Fall 1: Kandidat teilt die Passage mit einem Live-Artikel → U1, beide
+    # Richtungen benannt, der Live-Artikel selbst bekommt keinen Eintrag.
+    f1 = kandidaten_befunde(["2026-10-07-handy"], bestand)
+    if not any(d.startswith("U1-PHRASEN") and "2026-10-07-dsl" in d
+               for d in f1.get("2026-10-07-handy", [])):
+        fehler.append("  Collector: geteilte § 56-Passage (live↔Kandidat) wird "
+                      "nicht als U1 gemeldet")
+    if "2026-10-07-dsl" in f1:
+        fehler.append("  Collector: Nicht-Kandidat erhält einen Befund")
+    # Fall 2: zwei Mit-Kandidaten teilen die Passage → beide tragen U1.
+    f2 = kandidaten_befunde(["2026-10-07-dsl", "2026-10-07-handy"], bestand)
+    if not all(any(d.startswith("U1-PHRASEN") for d in f2.get(s, []))
+               for s in ("2026-10-07-dsl", "2026-10-07-handy")):
+        fehler.append("  Collector: Kandidat↔Kandidat-Dopplung wird nicht beiden "
+                      "zugeordnet")
+    # Fall 3: Entwürfe im Vorrat zählen nicht als Gegenseite.
+    f3 = kandidaten_befunde(["2026-10-07-notgroschen"], bestand)
+    if any("2026-09-01-entwurf" in d for d in f3.get("2026-10-07-notgroschen", [])):
+        fehler.append("  Collector: Entwurf (draft: true) wird als Gegenseite "
+                      "gerechnet – die Reserve würde sich selbst blockieren")
+    # Fall 4: Titel-Zwilling gegen Live-Artikel desselben Slug-Tags → U2 …
+    f4 = kandidaten_befunde(["2026-10-07-notgroschen-zwilling"], bestand)
+    if not any(d.startswith("U2-ZWILLING") and "2026-10-07-notgroschen" in d
+               for d in f4.get("2026-10-07-notgroschen-zwilling", [])):
+        fehler.append("  Collector: Same-Day-Titel-Zwilling gegen Live-Artikel "
+                      "wird nicht als U2 gemeldet")
+    # … und zwischen zwei Kandidaten trägt nur der jüngere den Befund.
+    f5 = kandidaten_befunde(["2026-10-07-notgroschen",
+                             "2026-10-07-notgroschen-zwilling"], bestand)
+    if any(d.startswith("U2-ZWILLING") for d in f5.get("2026-10-07-notgroschen", [])):
+        fehler.append("  Collector: der ÄLTERE Zwilling trägt den U2-Befund – "
+                      "kanonisch ist der ältere, weichen muss der jüngere")
+    if not any(d.startswith("U2-ZWILLING")
+               for d in f5.get("2026-10-07-notgroschen-zwilling", [])):
+        fehler.append("  Collector: der jüngere Kandidaten-Zwilling bleibt ohne U2")
+    # Fall 5: eigenständiger Text bleibt ohne Phrasen-Befund (kein Scheinrot) –
+    # der Notgroschen-Artikel teilt mit niemandem eine Passage.
+    u1 = [d for d in f3.get("2026-10-07-notgroschen", []) if d.startswith("U1-")]
+    if u1:
+        fehler.append(f"  Collector: eigenständiger Text erhält U1-Befund: {u1[:1]}")
+    f6 = kandidaten_befunde(["2026-10-07-dsl"], bestand)
+    if any("mit 2026-10-07-notgroschen (" in d for d in f6.get("2026-10-07-dsl", [])):
+        fehler.append("  Collector: unverwandte Artikel werden als Paar gemeldet")
+    return fehler
 
 
 def main():
