@@ -248,22 +248,22 @@ def bestandsaufnahme(root: Path = ROOT,
 def _ledger_schreiben(root: Path, eintrag: dict) -> None:
     pfad = root / LEDGER
     try:
-        data = json.loads(pfad.read_text(encoding="utf-8"))
-        if not isinstance(data, dict):
-            data = {}
-    except (OSError, ValueError):
+        data = artifacts.read_object(pfad)
+    except FileNotFoundError:
         data = {}
-    data.setdefault("uebernahmen", []).append(eintrag)
-    pfad.parent.mkdir(parents=True, exist_ok=True)
-    pfad.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-                    encoding="utf-8")
+    entries = data.setdefault("uebernahmen", [])
+    if not isinstance(entries, list) or any(not isinstance(e, dict) for e in entries):
+        raise ValueError("Reserve-Intake-Gedächtnis beschädigt; keine Übernahme")
+    entries.append(eintrag)
+    artifacts.write_object(pfad, data)
 
 
 def uebernehmen(index: Path, grund: str, *, root: Path = ROOT,
                 heute: dt.date | None = None) -> dict:
     """Setzt `reserve: true` + Herkunftszeile. Idempotent und protokolliert."""
     root = Path(root)
-    text = index.read_text(encoding="utf-8")
+    original = index.read_bytes()
+    text = original.decode("utf-8")
     slug = index.parent.name
     if re.search(r"(?m)^reserve:\s*true\s*$", text):
         return {"slug": slug, "ok": True, "schon": True,
@@ -279,9 +279,13 @@ def uebernehmen(index: Path, grund: str, *, root: Path = ROOT,
     if not anzahl:
         return {"slug": slug, "ok": False,
                 "grund": "keine Zeile `draft: true` gefunden"}
-    index.write_text(neu, encoding="utf-8")
-    _ledger_schreiben(root, {"slug": slug, "datum": heute.isoformat(),
-                             "grund": grund})
+    try:
+        index.write_text(neu, encoding="utf-8")
+        _ledger_schreiben(root, {"slug": slug, "datum": heute.isoformat(),
+                                "grund": grund})
+    except (OSError, ValueError):
+        index.write_bytes(original)  # no ownership change without its provenance
+        raise
     return {"slug": slug, "ok": True, "grund": grund}
 
 

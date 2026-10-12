@@ -190,7 +190,7 @@ class BestandUndVertrag(unittest.TestCase):
         self.assertIn("draft_triage.py --check-decisions", yml)
         self.assertIn("draft_triage.py --md", yml)
         # Und sie darf den Root nicht zumüllen: kein Report-Schreibpfad im Workflow
-        self.assertNotIn("--report", yml)
+        self.assertNotRegex(yml, r"draft_triage\.py[^\n]*--report")
         self.assertNotIn("DRAFT-TRIAGE-REPORT", yml)
         # Qualitäts-Gate: die Verdrahtung über den MECHANISMUS beweisen
         # (Regelwerk → Gate ruft den Runner → Runner entdeckt die quotierte

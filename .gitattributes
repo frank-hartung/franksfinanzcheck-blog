@@ -20,6 +20,9 @@ data/integrity_lock.json merge=binary
 data/reserve-readiness.json merge=binary
 data/reserve-custody.json merge=binary
 data/reserve-quarantine.json merge=binary
+# Intake provenance and Janitor evidence survive the daily run as whole objects.
+data/reserve-intake.json merge=binary
+data/reserve-janitor-state.json merge=binary
 
 # Die sechs wiederhergestellten Redaktionsfassungen bleiben auch nach einem
 # Datums-Lift unteilbar: kein stiller Zusammenschnitt von geprüften Absätzen.

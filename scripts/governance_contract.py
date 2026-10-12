@@ -332,7 +332,7 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Schwelle jetzt aus dem Ziel (Invariante 1 ≤ Alarm < Ziel); ohne
           # Selbsttest im Minimum wäre genau diese Invariante wieder nur eine
           # Behauptung.
-          "reserve_economy.py",
+          "reserve_economy.py", "reserve_operations.py",
           # Deploy-Drift-Wache (28.09.2026, #433 – „Deploy-Drift: #431 auf main,
           # aber nicht live“): Prüft Parität zwischen main und gh-pages.
           # Schützt vor Queue-Verdrängung und Skip-Deploy-Täuschung.
@@ -2488,7 +2488,8 @@ def c33_artefakt_waechter(script_texts, wflows, root=BLOG_DIR,
                                "(#653)."))
         else:
             block = treffer.group(1)
-            if "steps.wachen.conclusion" in block:
+            condition = re.search(r"^\s*if:\s*(.*)$", block, re.M)
+            if condition and re.search(r"steps\.wachen\.(?:conclusion|outcome)", condition.group(1)):
                 out.append(("C33", "content-reserve.yml: Stufe 3 hängt am "
                                    "Wachen-Selbsttest – die Messung wird "
                                    "dann übersprungen und der End-Gate liest "
@@ -5177,12 +5178,13 @@ def _selftest():
     stufe3_gegängt = dict(wflows_echt)
     for pfad in list(stufe3_gegängt):
         if os.path.basename(pfad) == "content-reserve.yml":
-            stufe3_gegängt[pfad] = stufe3_gegängt[pfad].replace(
-                "        if: ${{ !cancelled() }}\n        continue-on-error: true\n"
-                "        run: python3 scripts/reserve_readiness.py",
-                "        if: ${{ !cancelled() && steps.wachen.conclusion != 'failure' }}\n"
-                "        continue-on-error: true\n"
-                "        run: python3 scripts/reserve_readiness.py")
+            stufe3_gegängt[pfad] = re.sub(
+                r"^      - name:[^\n]*Stufe 3[^\n]*\n.*?(?=^      - name:|\Z)",
+                lambda match: re.sub(
+                    r"^        if:.*$",
+                    "        if: ${{ !cancelled() && steps.wachen.outcome == 'success' }}",
+                    match.group(0), flags=re.M),
+                stufe3_gegängt[pfad], flags=re.M | re.S)
     if not [f for f in c33_artefakt_waechter(
             echte_c33, stufe3_gegängt,
             python_bin=sys.executable or "python3")

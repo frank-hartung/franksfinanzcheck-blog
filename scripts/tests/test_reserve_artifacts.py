@@ -179,10 +179,15 @@ class SourceProofTests(Sandbox):
                     capture.side_effect = gate_result
                 else:
                     capture.return_value = gate_result
+                if isinstance(gate_result, Exception):
+                    with self.assertRaises(readiness.MeasurementUnavailable):
+                        readiness.certify_one(index)
+                    self.assertEqual(raw, index.read_bytes())
+                    continue
                 result = readiness.certify_one(index)
                 self.assertEqual(raw, index.read_bytes())
                 self.assertEqual(hashlib.sha256(raw).hexdigest(), result["sha256"])
-                self.assertEqual(not isinstance(gate_result, Exception), result["ready"])
+                self.assertTrue(result["ready"])
 
     def test_gate_cannot_certify_a_prehealed_version_but_hash_the_original(self):
         row = self.draft()
@@ -208,7 +213,8 @@ class SourceProofTests(Sandbox):
         index = self.posts / "kandidat" / "index.md"
         with patch.object(readiness, "score_diagnosis", return_value=None), \
                 patch.object(readiness.rp, "publish_one") as publish:
-            self.assertFalse(readiness.certify_one(index)["ready"])
+            with self.assertRaises(readiness.MeasurementUnavailable):
+                readiness.certify_one(index)
         publish.assert_not_called()
 
     def test_markdown_fence_inside_yaml_value_is_not_the_body_boundary(self):

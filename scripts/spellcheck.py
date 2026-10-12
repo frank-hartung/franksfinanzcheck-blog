@@ -304,9 +304,9 @@ def batch_hunspell(words):
         return "-".join("Haus" if part.lower() in wl else part
                         for part in token.split("-"))
     probes = [_probe(c) for c in clean]
-    r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
+    r = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
                        input="\n".join(probes) + "\n",
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, check=True, timeout=15)
     out = r.stdout.strip()
     if not out:
         return set()
@@ -326,23 +326,24 @@ def is_noun_capitalized(word):
     if not word or word[0].isupper():
         return False
     # Kleinform: bekannt → kein Nomen-Fall (Verb/Adjektiv)
-    r_small = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                             input=word + "\n", capture_output=True, text=True)
+    r_small = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
+                             input=word + "\n", capture_output=True, text=True, check=True, timeout=15)
     if r_small.stdout.strip() == "":
         return False
     # Großform: bekannt → Nomen-Kandidat
     cap = word[0].upper() + word[1:]
-    r_cap = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                           input=cap + "\n", capture_output=True, text=True)
+    r_cap = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
+                           input=cap + "\n", capture_output=True, text=True, check=True, timeout=15)
     return r_cap.stdout.strip() == ""
 
 
 def suggestions(word):
     """Hunspell-Korrekturvorschläge."""
     word = word.replace("\u00ad", "").replace("\u2010", "-").replace("\u2011", "-")
-    r = subprocess.run(["hunspell", "-d", "de_DE"],
-                       input=word + "\n", capture_output=True, text=True)
-    lines = [l for l in r.stdout.strip().split("\n") if l.strip()]
+    r = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE"],
+                       input=word + "\n", capture_output=True, text=True, check=True, timeout=15)
+    lines = [l for l in r.stdout.strip().split("\n")
+             if l.strip() and not l.startswith("@(#)")]
     if lines and lines[0].startswith("&"):
         # Format: & original 0 0: vorschlag1, vorschlag2
         parts = lines[0].split(":")
@@ -612,8 +613,8 @@ def analyze_article(a, whitelist):
             continue  # neuer Satz nach Satzendepunkt – groß korrekt
         w = m.group(1)
         # Whitelist/ambig: Wenn die Kleinform unbekannt ist (Nomen), groß lassen
-        r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                           input=w.lower() + "\n", capture_output=True, text=True)
+        r = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
+                           input=w.lower() + "\n", capture_output=True, text=True, check=True, timeout=15)
         if r.stdout.strip() != "":
             continue  # Nomen/Eigenname – groß korrekt
         abbr = m.group(0).split(w)[0].strip()
@@ -641,15 +642,15 @@ def analyze_article(a, whitelist):
             continue
         # Wenn die KLEINFORM ein Hunspell-FEHLER ist → Nomen (nur groß korrekt,
         # z. B. "gas", "strom") → groß lassen, nicht als Fehler markieren.
-        r = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                           input=w.lower() + "\n", capture_output=True, text=True)
+        r = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
+                           input=w.lower() + "\n", capture_output=True, text=True, check=True, timeout=15)
         if r.stdout.strip() != "":
             continue  # Kleinform unbekannt = Nomen/Eigenname → groß korrekt
         # AMBIG: Existiert die GROSSform auch als eigenständiges Wort (Nomen)?
         # ("Steuern" = Abgaben, "Gerät" = Gegenstand, "Decken" = Decke)
         # Dann ist die Großschreibung kontextabhängig → NICHT automatisch fixen.
-        r2 = subprocess.run(["hunspell", "-d", "de_DE", "-l"],
-                            input=w + "\n", capture_output=True, text=True)
+        r2 = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
+                            input=w + "\n", capture_output=True, text=True, check=True, timeout=15)
         if r2.stdout.strip() == "":
             continue  # Großform bekannt → ambig → lassen
         problems.append({

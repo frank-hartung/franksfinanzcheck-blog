@@ -228,10 +228,16 @@ jobs:
     timeout-minutes: 120
     env:
       RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
+      # A result from yesterday (or attempt 1 of a re-run) is not this run.
+      RESERVE_REQUIRE_CURRENT_RUN: "1"
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           ref: main
+      - name: Arbeitsfenster vor Installation und Selbsttests verankern
+        id: window
+        timeout-minutes: 1
+        run: python3 scripts/reserve_operations.py --start --max-minuten 65
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -261,6 +267,7 @@ jobs:
       # schreibt (C15). Kosten: ~1 Minute in einem 120-Minuten-Lauf.
       - name: Selbsttests aller Wachen (entdeckt, uhrfest, schreibfrei)
         id: wachen
+        timeout-minutes: 10
         run: |
           set -o pipefail
           python3 scripts/selftest_runner.py | tee selbsttests.log
@@ -271,6 +278,18 @@ jobs:
       # Routing-Nachweis und read-only.
       - name: Affiliate-Marketer Routing-Nachweis (read-only)
         run: python3 scripts/affiliate_marketer.py
+
+      # Tool failure must be detected before deletion, lifting or any model
+      # request. The shared 65-minute work deadline leaves a safety window
+      # inside the 120-minute job for evidence, sync and final diagnosis.
+      - name: Werkzeug-Preflight und gemeinsames Arbeitsbudget
+        id: tools
+        if: ${{ !cancelled() && steps.window.outcome == 'success' }}
+        continue-on-error: true
+        timeout-minutes: 2
+        run: |
+          python3 scripts/reserve_operations.py --selftest
+          python3 scripts/reserve_operations.py --preflight --max-minuten 65
 
       # ================= RUNDE 0 (BESTAND) =================
       # NEU 08.10.2026 (Issue #661): Bevor IRGENDEIN Werkzeug der Kette den
@@ -284,7 +303,9 @@ jobs:
       # aus dem Bestand neu; bei intaktem Zustand schreibt er kein Byte
       # (Idempotenz ist Teil seines Selbsttests).
       - name: Stufe 0 – Reserve-Snapshot heilen (Nachweis vor jeder Messung)
-        if: ${{ !cancelled() }}
+        id: snapshot
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' }}
+        timeout-minutes: 10
         continue-on-error: true
         run: |
           python3 scripts/reserve_snapshot_heiler.py --selftest
@@ -297,7 +318,9 @@ jobs:
       # Cover/Audio-Artefakte und Reserve-Gedächtnisse bereinigen. Danach
       # darf die Produktion den Zielbestand sauber neu auffüllen.
       - name: Stufe 0a – Reserve-Janitor (Rückläufer/Blocker löschen)
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' }}
+        continue-on-error: true
+        timeout-minutes: 3
         run: |
           set -o pipefail
           python3 scripts/reserve_janitor.py --purge --md | tee -a "${GITHUB_STEP_SUMMARY:-/dev/null}"
@@ -310,12 +333,38 @@ jobs:
       # und wurde trotzdem rot. Der Wächter ist kein Gate (kein
       # Abbruch-Recht), er stellt nur die Fahne wieder her.
       - name: Stufe 0b – Bestands-Wächter (verlorene Reserve-Fahnen heilen)
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' }}
+        timeout-minutes: 2
         continue-on-error: true
         run: |
           python3 scripts/reserve_custody.py --heal
           python3 scripts/reserve_custody.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null \
             || echo "::warning::Bestands-Bericht nicht schreibbar – Details im Log"
+
+      # Agency principle: use and re-prove existing work before commissioning
+      # new text. Intake retains the existing ownership/YMYL/duplicate rules;
+      # stale or byte-drifted evidence is renewed at the real production gate.
+      - name: Stufe 0c – Bestand aufnehmen und gezielt nachzertifizieren
+        id: bestand
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' }}
+        continue-on-error: true
+        timeout-minutes: 15
+        run: |
+          python3 scripts/reserve_operations.py --timeout-sekunden 120 --run python3 scripts/reserve_intake.py --apply
+          set +e
+          python3 scripts/reserve_operations.py --timeout-sekunden 840 --run python3 scripts/reserve_recert.py --fix --refresh-stale
+          CODE=$?
+          set -e
+          if [ "$CODE" -eq 2 ]; then
+            # Missing complete proof is not a reason to fabricate fresh text.
+            set +e
+            python3 scripts/reserve_operations.py --timeout-sekunden 840 --run python3 scripts/reserve_readiness.py
+            CODE=$?
+            set -e
+            if [ "$CODE" -gt 1 ]; then exit "$CODE"; fi
+          else
+            exit "$CODE"
+          fi
 
       # ================= RUNDE 1 =================
       # Stufe 1 – PRODUKTION
@@ -336,26 +385,28 @@ jobs:
       #     übersprungene Messung darf nie als Vorrats-Urteil aussehen.
       - name: Stufe 1 – Kandidaten erzeugen (nur bei echtem Bedarf)
         id: stock
-        if: ${{ !cancelled() && steps.wachen.conclusion != 'failure' }}
+        timeout-minutes: 12
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' && steps.bestand.outcome == 'success' }}
         continue-on-error: true
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
-        run: python3 scripts/engine_generate.py --reserve-only
+        run: python3 scripts/reserve_operations.py --timeout-sekunden 660 --run python3 scripts/engine_generate.py --reserve-only
 
       # Stufe 2 – VEREDELUNG (schreibend – Sabotageschutz wie Stufe 1)
       - name: Stufe 2 – Kandidaten veredeln (Phase-2/3-Kette, nur Pool)
         id: finish
-        if: ${{ !cancelled() && steps.wachen.conclusion != 'failure' }}
+        timeout-minutes: 22
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' && steps.bestand.outcome == 'success' }}
         continue-on-error: true
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
-        run: python3 scripts/reserve_finisher.py --finish
+        run: python3 scripts/reserve_finisher.py --finish --bedarf
 
       # Stufe 3 – ZERTIFIZIERUNG
       #
@@ -374,9 +425,14 @@ jobs:
       #   Ursachenklasse WACHEN statt der erfundenen Vorrats-Lüge.
       - name: Stufe 3 – Reife durch Produktions-Gates beweisen
         id: readiness
+        timeout-minutes: 15
         if: ${{ !cancelled() }}
         continue-on-error: true
-        run: python3 scripts/reserve_readiness.py
+        env:
+          # Measurement still runs after a red selftest; custody, intake and
+          # quarantine must NOT write content under that circumstance.
+          RESERVE_WRITERS_ALLOWED: ${{ steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' && steps.bestand.outcome == 'success' && '1' || '0' }}
+        run: python3 scripts/reserve_operations.py --timeout-sekunden 840 --run python3 scripts/reserve_readiness.py
 
       # ================= RUNDE 2 (KONVERGENZ) =================
       # REPARATUR 15.09.2026 (#295): Die frühere Fassung war ein EINZELNER
@@ -397,7 +453,7 @@ jobs:
       # ehrlich, was erreicht wurde – die Bewertung macht der End-Gate.
       - name: Stufe 4 – Konvergenz-Nachschub bis zum Zielbestand
         id: convergence
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' && steps.snapshot.outcome == 'success' && steps.bestand.outcome == 'success' }}
         continue-on-error: true
         # Zeitdeckel doppelt gesichert (Nachtrag 15.09.2026, #295): Die Stufe
         # bricht selbst nach 45 Minuten sauber ab (--max-minuten) und dieser
@@ -405,7 +461,7 @@ jobs:
         # hängt. In BEIDEN Fällen laufen „sichern“ und End-Gate weiter – sonst
         # würde der 90-Minuten-Job gekillt und der erarbeitete Pool-Stand wäre
         # verloren, ohne dass der Lauf seine Diagnose schreiben könnte.
-        timeout-minutes: 60
+        timeout-minutes: 47
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -422,6 +478,7 @@ jobs:
       # die Automation. Aber die Automation legt die Entscheidungsliste täglich
       # vor, statt 17 Schubladen ungeöffnet zu lassen.
       - name: Stufe 5 – Reserve triagieren (Entscheidungsdruck statt Stapel)
+        timeout-minutes: 3
         if: ${{ !cancelled() }}
         run: |
           python3 scripts/draft_triage.py --selftest
@@ -451,11 +508,18 @@ jobs:
       # rekonstruieren hieße, Inhalt zu erfinden.
       - name: Artefakt-Wächter (Maschinen-Artefakte strukturell heil)
         id: artefakte
+        timeout-minutes: 3
+        env:
+          RESERVE_WRITERS_ALLOWED: ${{ steps.wachen.outcome == 'success' && '1' || '0' }}
         if: ${{ !cancelled() }}
         run: |
           set -o pipefail
           python3 scripts/artefakt_waechter.py --selftest
-          python3 scripts/artefakt_waechter.py --heal | tee artefakte.log
+          if [ "$RESERVE_WRITERS_ALLOWED" = "1" ]; then
+            python3 scripts/artefakt_waechter.py --heal | tee artefakte.log
+          else
+            python3 scripts/artefakt_waechter.py | tee artefakte.log
+          fi
           python3 scripts/artefakt_waechter.py --md \
             >> "${GITHUB_STEP_SUMMARY:-/dev/null}" 2>/dev/null || true
 
@@ -470,10 +534,26 @@ jobs:
       - name: Reserve-Chronik schreiben (Trend-Beweis, auch bei Engpass)
         if: ${{ !cancelled() }}
         continue-on-error: true
+        env:
+          RESERVE_WACHEN_ROT: ${{ steps.wachen.outcome != 'success' && '1' || '0' }}
+          RESERVE_TOOL_STATUS: ${{ steps.tools.outcome || 'skipped' }}
+          RESERVE_STUFE1_STATUS: ${{ steps.stock.outcome || 'skipped' }}
+          RESERVE_STUFE2_STATUS: ${{ steps.finish.outcome || 'skipped' }}
+          RESERVE_STUFE3_STATUS: ${{ steps.readiness.outcome || 'skipped' }}
+          RESERVE_STUFE4_STATUS: ${{ steps.convergence.outcome || 'skipped' }}
         run: python3 scripts/reserve_gate.py --chronik
 
       - name: Entwürfe, Zertifikate und Reporte sichern (auch bei Engpass)
+        id: save
         if: ${{ !cancelled() }}
+        timeout-minutes: 15
+        env:
+          RESERVE_WACHEN_ROT: ${{ steps.wachen.outcome != 'success' && '1' || '0' }}
+          RESERVE_TOOL_STATUS: ${{ steps.tools.outcome || 'skipped' }}
+          RESERVE_STUFE1_STATUS: ${{ steps.stock.outcome || 'skipped' }}
+          RESERVE_STUFE2_STATUS: ${{ steps.finish.outcome || 'skipped' }}
+          RESERVE_STUFE3_STATUS: ${{ steps.readiness.outcome || 'skipped' }}
+          RESERVE_STUFE4_STATUS: ${{ steps.convergence.outcome || 'skipped' }}
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
@@ -499,7 +579,7 @@ jobs:
           # den Kandidaten nicht?“ ließ sich nicht aus dem Repo beantworten,
           # nur aus einem Log, das niemand aufbewahrt. Diese Zeile schreibt den
           # Zustand VOR der Sicherung; das End-Gate schreibt sie danach nur
-          # noch einmal in den flüchtigen Arbeitsbaum.
+          # idempotent (je Lauf und Versuch) in den flüchtigen Arbeitsbaum.
           python3 scripts/reserve_gate.py --chronik
           echo "── Arbeitsbaum vor dem Commit ──────────────────────────────"
           git status --porcelain | head -40
@@ -534,20 +614,49 @@ jobs:
           fi
 
       # ================= HARTES END-GATE =================
-      # ================= HARTES END-GATE =================
       # WF-D4E0 (#653): Der End-Gate bekommt die LAGE DER KETTE mit. Ohne sie
       # konnte er nicht zwischen „zu wenig Vorrat“ und „nicht gemessen“
       # unterscheiden – und meldete beides als „RESERVE-ENGPAß: 0/6“. Die
       # Zahlen unten sind also kein Urteil über den Vorrat, wenn die Kette
       # eine messende Stufe übersprungen hat; das Gate sagt das dann selbst.
       - name: Stock shortage must not look successful
+        id: end_gate
         if: ${{ !cancelled() }}
+        timeout-minutes: 3
         env:
-          RESERVE_WACHEN_ROT: ${{ steps.wachen.conclusion == 'failure' && '1' || '0' }}
-          RESERVE_STUFE1_STATUS: ${{ steps.stock.conclusion || 'skipped' }}
-          RESERVE_STUFE2_STATUS: ${{ steps.finish.conclusion || 'skipped' }}
-          RESERVE_STUFE3_STATUS: ${{ steps.readiness.conclusion || 'skipped' }}
-        run: python3 scripts/reserve_gate.py
+          RESERVE_WACHEN_ROT: ${{ steps.wachen.outcome != 'success' && '1' || '0' }}
+          RESERVE_TOOL_STATUS: ${{ steps.tools.outcome || 'skipped' }}
+          RESERVE_STUFE1_STATUS: ${{ steps.stock.outcome || 'skipped' }}
+          RESERVE_STUFE2_STATUS: ${{ steps.finish.outcome || 'skipped' }}
+          RESERVE_STUFE3_STATUS: ${{ steps.readiness.outcome || 'skipped' }}
+          RESERVE_STUFE4_STATUS: ${{ steps.convergence.outcome || 'skipped' }}
+          RESERVE_SYNC_STATUS: ${{ steps.save.outcome || 'skipped' }}
+        run: |
+          set -o pipefail
+          python3 scripts/reserve_gate.py --report-json .cache/content-reserve/reserve-end.json \
+            | tee reserve-end.log
+
+      # A failed push must not take the entire night's diagnosis with it.
+      # Artifact upload is read-only and deliberately also runs on cancellation.
+      - name: Reserve-Nachweise und Diagnose aufbewahren
+        if: ${{ always() }}
+        timeout-minutes: 3
+        uses: actions/upload-artifact@v7
+        with:
+          name: content-reserve-${{ github.run_id }}-${{ github.run_attempt }}
+          include-hidden-files: true
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            .cache/content-reserve/reserve-end.json
+            reserve-end.log
+            selbsttests.log
+            artefakte.log
+            RESERVE-FINISH-REPORT.md
+            data/reserve-readiness.json
+            data/reserve-history.jsonl
+            data/reserve-intake.json
+            data/reserve-quarantine.json
 
       # Der Watchdog startet die Reserve bei einem Engpass asynchron. Vorher
       # blieb sein Automations-Ticket deshalb bis zum nächsten Tageslauf offen,
@@ -563,6 +672,7 @@ jobs:
       - name: Watchdog nach bestätigter Reserve-Reparatur abgleichen
         if: ${{ success() && github.event_name == 'workflow_dispatch' && inputs.watchdog_recovery == true }}
         continue-on-error: true
+        timeout-minutes: 2
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -579,6 +689,7 @@ jobs:
       # Schließzeitpunkt) versioniert. Ohne diesen kleinen, gesonderten Commit
       # wäre die gerade bestätigte Selbstheilung beim nächsten Lauf vergessen.
       - name: Routing-Zustand nach Reserve-Reparatur sichern
+        timeout-minutes: 3
         if: ${{ success() && github.event_name == 'workflow_dispatch' && inputs.watchdog_recovery == true }}
         continue-on-error: true
         run: |

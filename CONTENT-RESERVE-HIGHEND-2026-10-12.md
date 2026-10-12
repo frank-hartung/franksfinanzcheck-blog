@@ -1,0 +1,246 @@
+# Content-Reserve: belastbare tägliche Produktionslinie
+
+**Stand: 12. Oktober 2026 · Geltungsbereich: `Content-Reserve (täglicher Vorrat)`**
+
+## Ergebnis und Abgrenzung
+
+Die Reserve-Automatik wurde im bestehenden System gehärtet, nicht durch eine
+zweite Produktionslinie ersetzt. Das Vorratsziel bleibt in `reserve_economy.py`;
+Publikations-, Fakten-, YMYL-, Affiliate- und Redaktions-Gates bleiben verbindlich.
+
+Die echte lokale Neubewertung vom **12.10.2026, 21:17:13 UTC** bestätigt
+**7 READY bei Ziel 6 aus 11 Entwürfen**. Sie lief mit Hugo Extended 0.164.0,
+Hunspell 1.7.2 und dem tatsächlichen deutschen LibreOffice-Frami-Wörterbuch.
+Alle Artikeldateien unter `content/` waren anschließend bytegenau unverändert.
+Das Zertifikat ist eine **lokale vollständige Messung**, kein vorgetäuschter
+GitHub-Actions-Lauf. Die vier abgelehnten Entwürfe bleiben abgelehnt.
+
+Damit ist auch die bereits im Ausgangsstand vorhandene SHA-Abweichung des
+Entwurfs `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt`
+durch eine echte neue Prüfung behoben, nicht durch Abschreiben eines Hashes.
+
+Die Änderungen werden erst nach Übernahme nach `main` für den geplanten
+Produktionslauf wirksam. Ein erfolgreicher künftiger Nachtlauf, erfolgreiche
+KI-Neuproduktion, Push oder Veröffentlichung werden durch diese lokale Abnahme
+**nicht** behauptet. Cronzeit und Veröffentlichungsrhythmus wurden nicht geändert.
+
+## Warum der bisherige Zähler nicht genügte
+
+Der untersuchte Actions-Lauf
+[38240822821](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/38240822821)
+endete mit 5/6 READY. Der danach gespeicherte Stand von 7 READY entstand durch
+spätere lokale Reparatur, die ohne Hunspell ausgeführt wurde und den alten
+Zeitstempel beibehielt. Das sind unterschiedliche Messzustände, kein Beweis
+für eine Korruption innerhalb des ursprünglichen CI-Laufs.
+
+Weitere strukturelle Risiken waren maskierte `continue-on-error`-Ergebnisse,
+fehlende echte Messungen hinter numerischen Fallback-Werten, fehlendes
+Gesamtzeitbudget und nicht mitgesicherte Hilfsgedächtnisse. Sie werden nun an
+Ausführung, Belegen und Abschlussentscheidung abgesichert.
+
+## Betriebsverträge
+
+### 1. Vorhandene Arbeit vor zusätzlicher KI-Produktion
+
+Vor der Generierung läuft eine Bestandsaufnahme über die bestehenden
+Besitz-, Duplikat-, Triage- und Risikoregeln. Geänderte oder abgelaufene
+Einzelnachweise werden gezielt am tatsächlichen Produktions-Gate erneuert.
+Fehlt ein vollständiger lesbarer Nachweis, folgt zunächst eine echte Messung.
+
+Ein gemessener Fehlbestand (`reserve_readiness.py`: rc 1) erlaubt Nachschub;
+Artefakt-, Werkzeug- und Zeitfehler erlauben ihn nicht. Produktion, Finisher
+und Konvergenz verlangen ausdrücklich erfolgreiche Selbsttests, Werkzeugprüfung,
+Snapshot und Bestandsstufe. Der Finisher läuft im Workflow mit `--bedarf`:
+Ist das Ziel bereits frisch und bytegebunden nachgewiesen, wird keine
+zusätzliche KI-Politur für liegengebliebene Entwürfe beauftragt.
+
+Die Engine prüft Frische und Besitz statt bloß `reserve: true` oder eines
+alten READY-Zählers. Beschädigte Nachweise und vorhandener ungemessener
+Bestand werden nicht als leeres, nachzufüllendes Lager interpretiert.
+
+### 2. Echte Stufenausgänge statt Scheingrün
+
+Prüfungen und Entscheidungen benutzen `steps.<id>.outcome`, nicht die durch
+`continue-on-error` maskierbare `conclusion`. Der harte End-Gate bekommt
+Produktion, Veredelung, Messung, Konvergenz und Sicherung als tatsächliche
+Ausgänge. Die Chronik benutzt dieselbe Bewertungslogik.
+
+Eine rote Wache oder Werkzeugprüfung verhindert weiterhin ein grünes
+Gesamturteil. Eine spätere echte erfolgreiche Neubewertung darf dagegen einen
+zwischenzeitlichen Produktions- oder Veredelungsfehler überwinden, wenn der
+benötigte Vorrat anschließend wirklich nachgewiesen ist. Die ursprünglichen
+Stufenfehler bleiben im Abschlussbericht sichtbar.
+
+### 3. Frische gehört zur einzelnen Messung
+
+Jede neu gemessene Zeile erhält `measured_at`. Die Grenze bleibt höchstens
+**36 Stunden**; eine Konfiguration darf sie verschärfen, nicht verlängern.
+Unzulässige Zukunftszeiten, fehlende oder ungültige Zeitpunkte sind keine
+Nachweise. Fünf Minuten Uhrtoleranz sind keine zusätzliche Haltbarkeit.
+
+Teil-Nachzertifizierung setzt bei unveränderten alten Zeilen ausdrücklich
+deren ursprünglichen Messzeitpunkt. Ein neuer `generated_at` kann dadurch
+nicht den gesamten alten Vorrat künstlich verjüngen.
+
+CI verlangt außerdem einen Messkontext mit dem aktuellen `GITHUB_RUN_ID`
+**und** `GITHUB_RUN_ATTEMPT`. Die Chronik dedupliziert je Lauf und Versuch:
+Ein Wiederholungslauf behält seinen eigenen Verlauf. Lokale und ältere
+Zertifikate bleiben außerhalb dieses ausdrücklich aktivierten CI-Vertrags lesbar.
+
+### 4. Messausfall ist kein schlechtes Manuskript
+
+`quality_score` weist Werkzeugfehler separat als `measurement_errors` aus.
+Der numerische Fallback ist damit kein Zertifizierungsbeleg. Auch eine zweite
+fehlgeschlagene Qualitätsmessung im Produktions-Gate kann nicht unbemerkt
+als akzeptierter Kandidat enden.
+
+Hunspell-Abfragen sind explizit UTF-8, zeitlich begrenzt und prüfen den
+Rückgabecode. Die Vorprüfung testet korrekte Wörter **mit Umlauten** sowie ein
+wirklich falsch geschriebenes Kontrollwort. Eine bloß vorhandene CLI oder
+ein kaputtes Wörterbuch genügt nicht.
+
+Bei ausgefallener Messung werden der bisherige vollständige Nachweis und die
+Originalbytes erhalten. Es gibt dann keine Quarantäne-Abwertung aus einer
+fehlenden Messung. Auch die technischen `NICHT BEWEISBAR`-Abbrüche des
+Publish-Gates und ein nicht prüfbares RS-Gate werden als Messausfall behandelt.
+
+Stufe 3 bleibt unabhängig ausführbar (`!cancelled()`, C33), auch nach roten
+Voraussetzungen. In diesem Fall sind Custody-, Intake- und Quarantäne-Schreiber
+explizit ausgeschaltet; gemessen werden darf weiterhin. Ein erschöpftes
+Zeitbudget wird als Abbruch gemeldet, nicht als erfolgreicher Vorrat.
+
+### 5. Begrenzte Arbeit, gesicherter Abschluss
+
+`scripts/reserve_operations.py` verankert vor Installation und Selbsttests
+ein gemeinsames **65-Minuten-Arbeitsfenster**. Das Verankern allein erteilt
+kein Schreibrecht; der spätere echte Werkzeug-Preflight verlängert das Fenster
+nicht. Ungültige oder erschöpfte Fristen stoppen neue Arbeit.
+
+- Intake, Teilmessung, Erstproduktion und unabhängige Messung werden als
+  ganze Prozesse auf das verbleibende Budget begrenzt, inklusive interner
+  Wiederholungsversuche.
+- Eine komplette Finisher-Heilerkette hat höchstens 20 Minuten; jedes Kind
+  bekommt nur die verbleibende lokale und gemeinsame Zeit. Nach einem Timeout
+  startet kein weiterer Heiler. Actions lässt Zeit für Isolation und Bericht.
+- Konvergenz bleibt bei höchstens drei Runden, höchstens vier Nachschüben je
+  Produktionsrunde und höchstens 45 Minuten innerhalb des gemeinsamen Fensters.
+- Ein fehlender Messnachweis wird vor einer Produktionsrunde gemessen.
+  Technisch fehlgeschlagene Schreiber stoppen weitere Schreiber.
+- Timeout und Abbruch beenden Prozessgruppen, bevor die Isolation wiederhergestellt
+  wird. SIGTERM führt temporär veröffentlichte Kandidaten durch die bytegenaue
+  Wiederherstellung; der Finisher sichert auch bereits auf heute datierte Entwürfe.
+
+Der 120-Minuten-Job behält damit eine getrennte Abschlussreserve für Chronik,
+Sicherung, End-Gate und Artefakt. Git-Sicherung hat ihr eigenes Zeitlimit.
+
+### 6. Hilfsgedächtnisse sind Belege, kein Wegwerfzustand
+
+`data/reserve-intake.json` und `data/reserve-janitor-state.json` gehören jetzt
+zum zulässigen Staging. Sie werden streng gelesen und atomar geschrieben;
+defekte vorhandene Dateien werden nicht still durch leere Objekte ersetzt.
+Scheitert das Intake-Provenienzjournal, wird die Besitzänderung am Entwurf
+bytegenau zurückgenommen.
+
+Beide Dateien sind `merge=binary`. Bei einem bekannten automatischen Konflikt
+vereinigt `git_sync.sh` vollständige, unterschiedliche Intake-Ereignisse, ohne
+wiederholte Adoptionen oder zusätzliche Herkunftsfelder wegzuwerfen. Janitor-Zähler
+vereinigen nur unterschiedliche Läufe derselben Signatur; ein neuer Befund
+erbt keine alten Lösch-Hits. Beschädigte Konfliktseiten stoppen die Sicherung.
+LIVE- und menschliche Content-Konflikte erhalten keinen blinden Gewinner.
+
+Die Snapshot-Heilung rekonstruiert diese Hilfsgedächtnisse ausdrücklich **nicht**:
+Defekte Provenienz oder Löschbeweise stoppen, ohne einen intakten Nachweis
+umzuschreiben oder die Historie auf null zu setzen. Die bestehenden drei
+rekonstruierbaren/gesondert belegten primären Snapshot-Verträge bleiben getrennt.
+
+### 7. Ein nachvollziehbarer Abschluss auch bei Push-Fehlern
+
+`reserve_gate.py --report-json <pfad>` schreibt ein maschinenlesbares Urteil
+und eine lesbare Step Summary: tatsächlicher frischer Vorrat, Ziel, Klasse,
+Stufenausgänge, Kandidatenblocker und nächster Schritt. Ein echter Fehlbestand
+ist `engpass`, nicht `ok`; stale/drift ist `nachweis`, Werkzeugausfall
+`werkzeug`. Fehler beim Sichern bleiben Kettenfehler.
+
+Nach dem Git-Sync werden die tatsächlichen Arbeitsbaum-Bytes erneut gegen
+die Zertifikate geprüft. Fehlende Messungen begründen keine Vermutung über
+API-Schlüssel oder Provider.
+
+Der Workflow lädt JSON, End-Gate-Log, Zertifikate und vorhandene Fachberichte
+mit `always()` als
+`content-reserve-<run_id>-<run_attempt>` hoch (21 Tage Aufbewahrung,
+versteckte Cache-Dateien eingeschlossen). Die Diagnose ist damit nicht vom
+Erfolg des Push abhängig. Bei frühem Abbruch oder Cancellation können einzelne
+Dateien fehlen; das Artefakt enthält dann die bereits vorhandenen Belege.
+
+## Noch gesperrter Bestand
+
+| Entwurf (Kurzname) | Verbleibender Grund |
+|---|---|
+| Energieausweis | RS3/RS4 und 16 unbelegte Zahlenbehauptungen |
+| Kleine Energiespar-Tricks | 34 unbelegte Zahlenbehauptungen |
+| Clevere Haushaltsgeräte | 43 unbelegte Zahlenbehauptungen |
+| Wärmepumpe vs. Gasheizung | 29 unbelegte Zahlenbehauptungen; Flesch 59,6 |
+
+Diese Zahlen sind Diagnosen der realen lokalen Messung, keine pauschale
+KI-Freigabe. Quellen-/Modellannahmen müssen redaktionell belegt werden; für
+YMYL gelten weiterhin die vorhandenen menschlichen Freigaberegeln.
+
+## Abnahme und Wiederholbarkeit
+
+Die neue Regression `scripts/tests/test_reserve_operations.py` deckt Deadline,
+Unterprozess-Abbruch, Frische, Wiederholungsläufe, Messausfälle, unveränderte
+Originalbytes, schreibfreie Messung, bedarfsgerechte Arbeit und Workflow-Verträge
+ab. `test_git_sync.py` enthält zusätzliche echte Rebase-Sabotageproben mit
+Wegwerf-Remotes. Der Operations-Selbsttest ist im Governance-Minimum registriert;
+`npm run test:reserve` enthält die neue Batterie.
+
+Abschließende Ergebnisse werden nach dem vollständigen Durchlauf ergänzt.
+Bereits tatsächlich geprüft: echte Neubewertung 7/6, Originalbytes unverändert,
+266 gezielte Vertrags-/Pipeline-Prüfungen in der zuletzt ausgeführten Batterie, komplette
+Python-Syntax, Workflow-YAML/JSON und Python-Heredocs des Git-Sync.
+Die erste Gesamtsuite fand zusätzlich anpassungsbedürftige bestehende
+Vertragsfixtures und das erwartbar noch alte Integritäts-Siegel; diese Befunde
+werden nicht durch abgeschwächte Tests ausgeblendet.
+
+Reproduzierbare Hauptprüfungen (in der installierten Projektumgebung):
+
+```bash
+python3 -m unittest discover -s scripts/tests -q
+python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
+python3 scripts/selftest_ki.py --trap-workflows
+python3 scripts/reserve_artifacts.py --check
+python3 scripts/governance_contract.py --quick
+python3 scripts/integrity_guard.py --gate
+hugo --minify --cleanDestinationDir
+```
+
+Echte Messung statt Neuproduktion:
+
+```bash
+python3 scripts/reserve_operations.py --preflight
+RESERVE_WRITERS_ALLOWED=0 python3 scripts/reserve_readiness.py
+python3 scripts/reserve_gate.py --report-json .cache/content-reserve/reserve-end-local.json
+```
+
+Lokale Tests und Publikationssimulationen gehören nicht in `data/audit/`.
+Für diese Abnahme war das Audit-Ziel ausdrücklich ein ignorierter Cache-Pfad;
+das versionierte Produktions-Beweis-Ledger wurde nicht verändert. Das
+Integritäts-Siegel wird nur über den echten Signierer mit nachvollziehbarer
+Herkunft aktualisiert, nicht per Hand oder durch eine Testattrappe.
+
+## Runbook: Was bei Rot tun?
+
+1. **Zuerst das Abschlussartefakt lesen**, nicht blind neue Texte generieren.
+2. `wachen`: konkreten Selbsttest reparieren; keine Gate-Absenkung.
+3. `werkzeug`: echten Preflight, Wörterbuch/UTF-8, Build und Paketinstallation
+   prüfen; den unveränderten alten Nachweis nicht als frische Messung ausgeben.
+4. `artefakt`: vollständige bekannte JSON-Fassung bzw. belegte Snapshot-Heilung;
+   Hilfsgedächtnisse aus vollständiger vertrauenswürdiger Historie wiederherstellen,
+   niemals zusammenkopieren oder kommentarlos leeren.
+5. `nachweis`: bytegebunden neu messen (`reserve_recert.py --fix --refresh-stale`),
+   bevor zusätzliche KI-Arbeit angefordert wird.
+6. `engpass`: offene Kandidatengründe und freie Themen prüfen; nur belegbare
+   Inhalte veredeln/produzieren. Faktische/YMYL-Freigaben nicht automatisieren.
+7. Sicherungs-/Kettenfehler: tatsächlichen `git_sync`-Ausgang und Nach-Sync-Drift
+   prüfen. Erst ein vollständiger, gesicherter aktueller Nachweis erfüllt den
+   Produktionsvertrag.

@@ -97,6 +97,7 @@ POOL_POST = "content/posts/2026-09-15-pool/index.md"
 
 def _certificate_in_pool(tmp, payload, name="reserve-readiness.json"):
     posts = Path(tmp) / "content" / "posts"
+    payload.setdefault("generated_at", dt.datetime.now(dt.timezone.utc).isoformat())
     for row in payload["candidates"]:
         index = posts / row["slug"] / "index.md"
         index.parent.mkdir(parents=True, exist_ok=True)
@@ -299,7 +300,7 @@ class KonvergenzTests(unittest.TestCase):
                 patch.object(eg, "_pool_conflicts", return_value=False), \
                 patch.object(eg, "_weighted_choose", side_effect=lambda free, _weights: free[0]), \
                 patch.object(eg, "try_generate", side_effect=fail), \
-                patch.object(Path, "read_text", side_effect=OSError("kein Zertifikat")), \
+                patch.object(Path, "read_text", side_effect=FileNotFoundError("kein Zertifikat")), \
                 patch("builtins.print"):
             for _ in range(2):
                 self.assertEqual(
@@ -916,14 +917,14 @@ class IntentHeilerTests(unittest.TestCase):
         class FakeProc:
             returncode = 0
             stdout = "ok\n"
+            stderr = ""
 
         def fake_run(cmd, **kw):
             if "affiliate_intent_guard.py" in " ".join(cmd):
                 rufe.append(cmd)
             return FakeProc()
 
-        with patch.object(rf.subprocess, "run", fake_run):
-            rf.run_chain([], [self.index], env={})
+        rf.run_chain([], [self.index], env={}, runner=fake_run)
         self.assertTrue(rufe, "der Wächter wurde von der Kette nie aufgerufen")
         for cmd in rufe:
             self.assertIn("--file", cmd, cmd)
@@ -1397,7 +1398,7 @@ class WorkflowVertragTests(unittest.TestCase):
         self.assertIn("reserve_custody.py --heal", wf)
         self.assertLess(
             wf.index("reserve_custody.py --heal"),
-            wf.index("run: python3 scripts/engine_generate.py --reserve-only"),
+            wf.index("scripts/engine_generate.py --reserve-only"),
             "erst den Bestand sichern, dann neu produzieren")
 
     def test_gedaechtnisse_ueberleben_den_rebase(self):
@@ -1430,7 +1431,8 @@ class WorkflowVertragTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             ziel = 6
             cert = _certificate_in_pool(tmp, {
-                "target": ziel, "ready": 2, "generated_at": "2026-10-07T13:20:00Z",
+                "target": ziel, "ready": 2,
+                "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
                 "candidates": [
                     {"slug": "a", "ready": True, "score": 0.96},
                     {"slug": "b", "ready": True, "score": 0.95},

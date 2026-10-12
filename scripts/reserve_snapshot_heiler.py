@@ -120,6 +120,10 @@ def pruefe(root: Path = ROOT) -> list[str]:
     """Alle Befunde am Reserve-Snapshot. Leere Liste = vollständig."""
     daten = root / DATA
     befunde: list[str] = []
+    try:
+        artifacts.check_memories(daten, names=artifacts.AUXILIARY_MEMORIES)
+    except ValueError as exc:
+        befunde.append(str(exc))
     for name in artifacts.STATE_FILES:
         path = daten / name
         fund = (zertifikat_befund(path) if name == "reserve-readiness.json"
@@ -250,6 +254,14 @@ def repariere(root: Path = ROOT) -> dict:
     """Heilt jeden defekten Snapshot. Rückgabe: Protokoll."""
     daten = root / DATA
     protokoll = {"geheilt": [], "belege": [], "fehler": []}
+
+    # Provenance and deletion evidence cannot be reconstructed from drafts.
+    # Never rebuild a good certificate or reset these journals to hide damage.
+    try:
+        artifacts.check_memories(daten, names=artifacts.AUXILIARY_MEMORIES)
+    except ValueError as exc:
+        protokoll["fehler"] = protokoll["restbefunde"] = [str(exc)]
+        return protokoll
 
     for name in artifacts.STATE_FILES:
         path = daten / name
