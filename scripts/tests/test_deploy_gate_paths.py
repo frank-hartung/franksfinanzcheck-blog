@@ -77,7 +77,15 @@ class DeployGatePfadTestCase(unittest.TestCase):
                      "data/umami_clicks.meta.json",
                      "data/governance_status.json",
                      "data/governance_history.jsonl",
-                     "data/alerting_heartbeat.json"):
+                     "data/alerting_heartbeat.json",
+                     # GSC-Tageslauf (12.10.2026): Leistungsdaten und der
+                     # Indexierungs-Zustand sind Nachweise, keine Site-Inhalte.
+                     # Ein täglicher Lauf, der jedes Mal einen Livegang auslöst,
+                     # würde genau die Queue verstopfen, die Befund F1 entlastet hat.
+                     "data/gsc_indexierung_state.json",
+                     "data/gsc/meta.json",
+                     "data/gsc/tagesdaten.jsonl",
+                     "data/gsc/top_seiten_28t.json"):
             self.assertFalse(self.relevant(path),
                              f"{path} ist ein Zustands-/Nachweis-Pfad und darf keinen "
                              f"Deploy auslösen")

@@ -292,7 +292,7 @@ jobs:
           #    der Audit-Befund F1) genau das Gegenteil war. Jetzt `dir/.*`.
           #    Vertrag: tests/test_deploy_gate_paths.py friert beide
           #    Richtungen ein (Lebenszeichen irrelevant, Site-Pfade relevant).
-          STATE_ONLY='^(\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\.json|data/[^/]*_history\.jsonl|data/[^/]*\.meta\.json|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|data/integrity_lock\.json|data/governance_status\.json|data/governance_history\.jsonl|data/alerting_heartbeat\.json|data/revenue_funnel\.json|static/images/social/.*|\.[^/]*_state\.json|\.casing_report\.json|\.indexnow_submitted\.json|\.meta_cache\.json|\.affiliate_integrity_state\.json|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
+          STATE_ONLY='^(\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\.json|data/gsc_indexierung_state\.json|data/gsc/.*|data/[^/]*_history\.jsonl|data/[^/]*\.meta\.json|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|data/integrity_lock\.json|data/governance_status\.json|data/governance_history\.jsonl|data/alerting_heartbeat\.json|data/revenue_funnel\.json|static/images/social/.*|\.[^/]*_state\.json|\.casing_report\.json|\.indexnow_submitted\.json|\.meta_cache\.json|\.affiliate_integrity_state\.json|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
           relevant="$(echo "$files" | grep -vE "$STATE_ONLY" || true)"
           if [ -n "$relevant" ]; then
             echo "Deploy-relevante Pfade:"
@@ -629,6 +629,53 @@ jobs:
             echo "::error title=Index-Hygiene::Crawl-Fläche über Budget – Deploy wird zum Schutz vor neuen GSC-URLs gestoppt"
           fi
           exit "$gate_status"
+
+      # ============ SEARCH-CONSOLE-ZUGANG (V1–V12, 12.10.2026) ============
+      # Auftrag Frank: „alle Seiten verifiziert und indexiert auf Premium-
+      # Level einer Profi-Agentur". Index-Hygiene misst die MENGE der
+      # Crawl-Fläche, das Schema-Gate die AUSZEICHNUNG der Seite – beide
+      # prüfen nicht die ZUGANGSSCHICHT zur Search Console:
+      #   · Liegt der Besitznachweis im Build UND stimmt sein Inhalt mit dem
+      #     Dateinamen überein? (Ein Token, der nicht zum Namen passt,
+      #     verifiziert nichts – und fällt erst Wochen später auf.)
+      #   · Sperrt robots.txt versehentlich Googlebot aus? Die Datei enthält
+      #     Cloudflare-Managed-Content; ein `Disallow: /` im `User-agent: *`-
+      #     Block kostet die gesamte Sichtbarkeit, ohne dass der Build rot ist.
+      #   · Zeigt der Sitemap-Hinweis auf eine Datei, die es gibt, auf dem
+      #     eigenen Host?
+      #   · Ist die Sitemap protokollgültig (50.000 URLs / 50 MiB / keine
+      #     Duplikate / Kind-Reihenfolge / Bild-Namensraum)?
+      #   · Deckt sich die gebaute Wahrheit mit der Sitemap – Canonical
+      #     selbstreferenziell, robots-Meta `index`, Entity-Schema auf der
+      #     Startseite?
+      #   · Hat JEDE noindex-Seite einen erklärten Grund? Das ist die
+      #     häufigste Ursache für „Gefunden – derzeit nicht indexiert".
+      # Bewusst hart und VOR der Auslieferung: Eine Site, die ihren
+      # Besitznachweis verliert oder sich selbst aussperrt, darf nicht live
+      # gehen. Runbook: docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md
+      - name: GSC-Verifikations-Selbsttest (Wache muss lauffähig sein)
+        run: |
+          python3 scripts/indexierbare_seiten.py --selftest
+          python3 scripts/gsc_verifikations_guard.py --selftest
+
+      - name: GSC-Verifikations-Gate (Besitznachweis, robots.txt, Sitemap, Canonical)
+        run: |
+          set +e
+          # Protokoll in $RUNNER_TEMP, nicht ins Repo: Maschinen-Artefakte
+          # gehören nicht in den Baum (Hausregel seit #346, 22.09.2026).
+          protokoll="${RUNNER_TEMP:-/tmp}/gsc-verifikation.log"
+          python3 scripts/gsc_verifikations_guard.py | tee "$protokoll"
+          wache_status=${PIPESTATUS[0]}
+          {
+            echo "### 🔎 Search-Console-Zugang (V1–V12)"
+            echo '```'
+            sed -n '1,80p' "$protokoll"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$wache_status" -ne 0 ]; then
+            echo "::error title=GSC-Verifikation::Besitznachweis, robots.txt, Sitemap oder Canonical sind nicht indexierungsfähig – die Seite würde in der Search Console als nicht verifiziert oder ausgeschlossen erscheinen"
+          fi
+          exit "$wache_status"
 
       # ================= SPAM-WACHE (Google + Pinterest, 26.08.2026) =================
       # Dauerauftrag: Blog, RSS-Feed (/index.xml = Quelle des Pinterest-
