@@ -389,7 +389,34 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # in Sekunde 1 ab. Die Wache prüft Manifest und Lockfile vor dem
           # Install. Eine Wache, die niemand verlangt, führt niemand aus –
           # deshalb steht ihr Selbsttest im vertraglichen Minimum (C6).
-          "manifest_guard.py"]
+          "manifest_guard.py",
+          # SEARCH-CONSOLE-KETTE (12.10.2026, Auftrag „alle Seiten verifiziert
+          # und indexiert auf Premium-Level"): drei Wachen, eine Zuständigkeit
+          # je Wache – und alle drei im vertraglichen Minimum, weil eine
+          # Indexierungs-Automatik, die niemand verlangt, nach dem ersten
+          # grünen Monat still verrottet (dieselbe Lektion wie bei C6 selbst).
+          #
+          #   indexierbare_seiten.py     EINE Quelle dafür, welche Seiten
+          #                              eingereicht werden: die Sitemap.
+          #                              Ersetzt die Namensliste, durch die
+          #                              20 von 74 indexierbaren Seiten nie
+          #                              an eine Suchmaschine gemeldet wurden.
+          #   gsc_verifikations_guard.py V1–V13: Besitznachweis, robots.txt,
+          #                              Sitemap-Protokoll, Canonical,
+          #                              noindex-Gründe – und mit --live die
+          #                              AUSGELIEFERTE Wahrheit statt der
+          #                              lokalen Build-Behauptung.
+          #   gsc_indexierung.py         die aktive Indexierungs-Anfrage über
+          #                              die URL Inspection API (200/Tag),
+          #                              inkl. Berechtigungs-Vorcheck,
+          #                              Kontingent-Haushalt und Wiedervorlage.
+          #   submit_indexnow.py         derselbe Bestand für Bing/Yandex/
+          #                              Naver/Seznam (Google nimmt an
+          #                              IndexNow nicht teil).
+          "indexierbare_seiten.py",
+          "gsc_verifikations_guard.py",
+          "gsc_indexierung.py",
+          "submit_indexnow.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

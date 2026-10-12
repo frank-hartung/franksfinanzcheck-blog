@@ -159,7 +159,7 @@ jobs:
             }
 
             // 6) Relevanz-Prüfung via Compare-API (falls Basis vorhanden)
-            const STATE_ONLY_PATTERN = '^(\\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\\.json|data/[^/]*_history\\.jsonl|data/[^/]*\\.meta\\.json|data/social_log\\.jsonl|data/secrets_state\\.json|data/pinterest_token_state\\.json|data/integrity_lock\\.json|data/governance_status\\.json|data/governance_history\\.jsonl|data/alerting_heartbeat\\.json|data/revenue_funnel\\.json|static/images/social/.*|\\.[^/]*_state\\.json|\\.casing_report\\.json|\\.indexnow_submitted\\.json|\\.meta_cache\\.json|\\.affiliate_integrity_state\\.json|\\.gitignore|package\\.json|package-lock\\.json|[A-Za-z0-9._-]+\\.md)$';
+            const STATE_ONLY_PATTERN = '^(\\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\\.json|data/gsc_indexierung_state\\.json|data/gsc/.*|data/[^/]*_history\\.jsonl|data/[^/]*\\.meta\\.json|data/social_log\\.jsonl|data/secrets_state\\.json|data/pinterest_token_state\\.json|data/integrity_lock\\.json|data/governance_status\\.json|data/governance_history\\.jsonl|data/alerting_heartbeat\\.json|data/revenue_funnel\\.json|static/images/social/.*|\\.[^/]*_state\\.json|\\.casing_report\\.json|\\.indexnow_submitted\\.json|\\.meta_cache\\.json|\\.affiliate_integrity_state\\.json|\\.gitignore|package\\.json|package-lock\\.json|[A-Za-z0-9._-]+\\.md)$';
             const STATE_ONLY = new RegExp(STATE_ONLY_PATTERN);
 
             let needsDeploy = true;

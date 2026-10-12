@@ -68,6 +68,7 @@ import zlib
 from pathlib import Path
 
 from serp_html import attribut_url, baum, domaene_aus_url, uddg_entpacken, url_saeubern
+from url_host import ist_host_oder_subdomain  # noqa: E402  (Host-exakte URL-Wahrheit)
 
 try:                                                    # pragma: no cover
     import kostensperre
@@ -679,7 +680,12 @@ def parse_duckduckgo(anfrage: str, html: str, max_treffer: int = 10) -> list[dic
             continue
         link = karte.waehle_eins("a.result__a") or karte.waehle_eins("h2 a")
         url = uddg_entpacken(url_saeubern(attribut_url(link)))
-        if not url or "duckduckgo.com" in url:
+        # Eigene Umleitungen und Anzeigen sind keine Treffer. Der Vergleich
+        # geht auf den geparsten HOST, nicht auf eine Teilzeichenkette:
+        # `https://angreifer.example/?x=duckduckgo.com` wäre sonst ein
+        # Treffer, `https://notduckduckgo.com/…` fiele sonst raus
+        # (Code-Scanning-Alert #83, py/incomplete-url-substring-sanitization).
+        if not url or ist_host_oder_subdomain(url, "duckduckgo.com"):
             continue
         snippet = (karte.waehle_eins("a.result__snippet")
                    or karte.waehle_eins(".result__snippet"))
@@ -766,8 +772,8 @@ def parse_duckduckgo_lite(anfrage: str, html: str, max_treffer: int = 10) -> lis
             ablegen("")                                   # Vorgänger ohne Snippet
             url = uddg_entpacken(url_saeubern(attribut_url(link)))
             # Anzeigen zeigen bei Lite auf duckduckgo.com/y.js – dieselbe
-            # Regel wie bei der Vollversion filtert sie mit raus.
-            if url and "duckduckgo.com" not in url:
+            # Regel wie bei der Vollversion filtert sie mit raus (host-exakt).
+            if url and not ist_host_oder_subdomain(url, "duckduckgo.com"):
                 offen = (url, link.text())
             continue
         snippet = (zeile.waehle_eins("td.result-snippet")
@@ -826,7 +832,9 @@ def parse_mojeek(anfrage: str, html: str, max_treffer: int = 10) -> list[dict]:
         link = eintrag.waehle_eins("a.ob") or eintrag.waehle_eins("h2 a") \
             or eintrag.waehle_eins("a[href]")
         ziel = url_saeubern(attribut_url(link))
-        if not ziel or "mojeek.com" in ziel:
+        # Mojeek verlinkt sich selbst (`/about`) – kein Treffer. Host-exakt,
+        # nicht per Teilzeichenkette (Alert #83).
+        if not ziel or ist_host_oder_subdomain(ziel, "mojeek.com"):
             continue
         titel = eintrag.waehle_eins("h2") or eintrag.waehle_eins(".title")
         snippet = eintrag.waehle_eins("p.s") or eintrag.waehle_eins("p.desc") \

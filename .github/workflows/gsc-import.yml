@@ -1,0 +1,315 @@
+# ============================================================
+#  GSC-TAGESLAUF – Search Console: Daten holen UND Indexierung anfragen
+#  ------------------------------------------------------------
+#  Auftrag 12.10.2026 (Frank): „Google Search Console soll alle Seiten
+#  des Blogs verifiziert und indexiert haben – Premium-Level einer
+#  Profi-Agentur."
+#
+#  Bis zu diesem Workflow konnte das Projekt den Index nur ZUSEHEN:
+#  Sitemap hinlegen, robots.txt öffnen, warten. Was fehlte, war die
+#  aktive Anfrage – derselbe Knopf wie „Indexierung beantragen" in der
+#  Search-Console-Oberfläche, nur maschinell (URL Inspection API).
+#
+#  ABLAUF (täglich 05:17 UTC ≈ 07:17 Berlin)
+#    1. Selbsttests der drei beteiligten Wachen (fail-closed, offline)
+#    2. Verifikations- und Indexierbarkeits-Befund (V1–V12, ohne Build)
+#       gegen die LIVE ausgelieferte Site: Verifikationsdatei, robots.txt,
+#       Sitemap, Canonical, robots-Meta – also das, was Google wirklich sieht.
+#    3. Leistungsdaten holen (scripts/gsc_import.py, nur lesend)
+#    4. Indexierung anfragen (scripts/gsc_indexierung.py --live):
+#       fällige Seiten aus der Live-Sitemap, höchstens 200/Tag (Google-Kontingent)
+#    5. IndexNow-Ping für Bing/Yandex/Naver/Seznam (Google nimmt nicht teil)
+#    6. Ein PR, wenn sich Daten oder Zustand geändert haben
+#
+#  OHNE SECRETS endet der Lauf mit Status „nicht_konfiguriert" und bleibt
+#  GRÜN – ein noch nicht eingerichtetes Dienstkonto ist ein Zustand, kein
+#  Defekt. Verschwiegen wird er nicht: Er steht in der Lauf-Zusammenfassung.
+#  Einrichtung: docs/ANLEITUNG-GSC-API-ZUGRIFF.md
+#
+#  Dieser Lauf nutzt ausschließlich den GITHUB_TOKEN dieses Repos.
+#  Ein PR wird NICHT automatisch gemergt (main deployt live).
+#  Daten und Zustand liegen in data/gsc/ bzw. data/gsc_indexierung_state.json;
+#  beide Pfade stehen in der STATE_ONLY-Negativliste des Deploy-Gates, ein
+#  reines Lebenszeichen löst also keinen Livegang aus.
+# ============================================================
+name: GSC-Tageslauf (Daten + Indexierungs-Anfragen)
+
+on:
+  schedule:
+    - cron: "17 5 * * *"    # täglich 05:17 UTC (≈ 07:17 Berlin)
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Erstbefüllung der Leistungsdaten: 480 Tage statt 90"
+        type: boolean
+        default: false
+      alles_anfragen:
+        description: "Alle indexierbaren Seiten anfragen (ignoriert Wiedervorlage-Fristen)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: gsc-tageslauf
+  cancel-in-progress: false
+
+jobs:
+  gsc:
+    name: Search Console – Daten, Verifikation, Indexierungs-Anfragen
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      # ------------------------------------------------------------
+      #  Selbsttests VOR der Arbeit: Eine Wache, die selbst nicht läuft,
+      #  darf keinen Befund melden (Hausregel, vgl. deploy.yml).
+      # ------------------------------------------------------------
+      - name: Selbsttests (Verifikations-Wache, Seiten-Quelle, Indexierung)
+        run: |
+          set -euo pipefail
+          python3 scripts/indexierbare_seiten.py --selftest
+          python3 scripts/gsc_verifikations_guard.py --selftest
+          python3 scripts/gsc_indexierung.py --selftest
+          python3 scripts/gsc_import.py --selftest
+          python3 scripts/submit_indexnow.py --selftest
+
+      # ------------------------------------------------------------
+      #  V13 LIVE: Was Google sieht, nicht was der Build behauptet.
+      #  Bewusst berichtend (continue-on-error): Ein Netz- oder
+      #  Cache-Befund darf den Datenimport nicht stoppen – er muss
+      #  aber sichtbar sein, deshalb steht er in der Zusammenfassung.
+      # ------------------------------------------------------------
+      - name: Verifikation und Indexierbarkeit LIVE prüfen (V13)
+        id: live
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_verifikations_guard.py --nur-live --stichprobe 15 \
+            --json > gsc-live.json 2> gsc-live.log
+          status=$?
+          python3 - <<'PY' || true
+          import json, os
+          try:
+              d = json.load(open("gsc-live.json", encoding="utf-8"))
+          except Exception as e:
+              print(f"Live-Befund nicht lesbar: {e}")
+              raise SystemExit(0)
+          hart = d.get("harte_funde") or []
+          live = d.get("live") or {}
+          geprueft = live.get("geprueft") or []
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 🔎 Verifikation & Indexierbarkeit (LIVE)\n\n")
+              f.write(f"Geprüfte Live-URLs: **{len(geprueft)}** · "
+                      f"harte Funde: **{len(hart)}**\n\n")
+              if hart:
+                  f.write("| Regel | Wo | Befund |\n|---|---|---|\n")
+                  for x in hart[:25]:
+                      f.write(f"| {x['regel']} | `{x['wo']}` | {x['text']} |\n")
+              else:
+                  f.write("✅ Besitznachweis, robots.txt, Sitemap, Canonical und "
+                          "robots-Meta sind live so, wie der Build sie erklärt.\n")
+          PY
+          if [ "$status" -ne 0 ]; then
+            echo "::warning title=GSC-Verifikation live::Die ausgelieferte Site weicht vom erwarteten Indexierungs-Stand ab – Befund steht in der Lauf-Zusammenfassung."
+          fi
+          exit "$status"
+
+      - name: Leistungsdaten holen (searchAnalytics, nur lesend)
+        id: daten
+        env:
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -uo pipefail
+          if [ "${{ inputs.backfill }}" = "true" ]; then
+            python3 scripts/gsc_import.py --backfill
+          else
+            python3 scripts/gsc_import.py
+          fi
+          echo "status=$(python3 -c 'import json;print(json.load(open("data/gsc/meta.json"))["status"])' 2>/dev/null || echo unbekannt)" >> "$GITHUB_OUTPUT"
+
+      # ------------------------------------------------------------
+      #  Indexierung ANFRAGEN. --live liest die ausgelieferte Sitemap:
+      #  Eingereicht wird, was Google auch sehen kann – nicht, was ein
+      #  lokaler Build zufällig enthält. Ohne Secrets: Status
+      #  „nicht_konfiguriert", Exit 0, klare Zeile in der Zusammenfassung.
+      # ------------------------------------------------------------
+      - name: Indexierung bei Google anfragen (URL Inspection API)
+        id: anfrage
+        env:
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -uo pipefail
+          zusatz=""
+          if [ "${{ inputs.alles_anfragen }}" = "true" ]; then
+            zusatz="--limit 200"
+          fi
+          {
+            echo "### 🗂️ Fällige Seiten (Plan aus der Live-Sitemap)"
+            echo '```'
+            python3 scripts/gsc_indexierung.py --live --plan 2>&1 | sed -n '1,40p' || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/gsc_indexierung.py --live --json $zusatz > gsc-anfrage.json
+          rc=$?
+          python3 - <<'PY' || true
+          import json, os
+          d = json.load(open("gsc-anfrage.json", encoding="utf-8"))
+          status = d.get("status")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 📮 Indexierungs-Anfragen (Google URL Inspection API)\n\n")
+              f.write(f"Status: **{status}**\n\n")
+              if d.get("grund"):
+                  f.write(f"{d['grund']}\n\n")
+              if d.get("berechtigung"):
+                  f.write(f"Berechtigung: {d['berechtigung']}\n\n")
+              f.write("| Kennzahl | Wert |\n|---|---|\n")
+              f.write(f"| Indexierbare Seiten (Live-Sitemap) | {d.get('seiten_indexierbar', 0)} |\n")
+              f.write(f"| Angefragt | {len(d.get('angefragt') or [])} |\n")
+              f.write(f"| davon von Google als indexiert gemeldet | {d.get('indexiert', 0)} |\n")
+              f.write(f"| davon NICHT indexiert | {d.get('nicht_indexiert', 0)} |\n")
+              f.write(f"| Abgelehnt | {len(d.get('abgelehnt') or [])} |\n")
+              f.write(f"| Kontingent heute | {d.get('kontingent_verbraucht', 0)} von {d.get('kontingent_tag', 200)} |\n\n")
+              nicht = [a for a in (d.get('angefragt') or []) if a.get('abdeckung')]
+              if nicht:
+                  f.write("| URL | Abdeckung laut Google |\n|---|---|\n")
+                  for a in nicht[:30]:
+                      f.write(f"| `{a['url']}` | {a['abdeckung']} |\n")
+                  f.write("\n")
+              for a in (d.get('abgelehnt') or [])[:10]:
+                  f.write(f"- ❌ `{a['url']}` → {a['fehler']}\n")
+          PY
+          exit "$rc"
+
+      # ------------------------------------------------------------
+      #  IndexNow (Bing, Yandex, Naver, Seznam – Google nimmt nicht teil).
+      #  Quelle ist dieselbe Sitemap; der Zustand dedupliziert über Läufe.
+      # ------------------------------------------------------------
+      # ------------------------------------------------------------
+      #  IndexNow (Bing, Yandex, Naver, Seznam – Google nimmt nicht teil).
+      #  Quelle ist dieselbe Sitemap; der Zustand dedupliziert über Läufe.
+      #  --kein-llms: Die GEO-Begleitdatei trägt `date.today()` im Kopf und
+      #  würde JEDEN Tag einen vollständigen Deploy auslösen (static/llms.txt
+      #  ist zu Recht deploy-relevant). Ihre Pflege bleibt wöchentlich bei
+      #  seo-weekly.yml – Befund F1 (Deploy-Entlastung) gilt auch hier.
+      # ------------------------------------------------------------
+      - name: IndexNow-Ping (Bing/Yandex/Naver/Seznam)
+        continue-on-error: true
+        run: python3 scripts/submit_indexnow.py --live --kein-llms
+
+      - name: Befund in die Lauf-Zusammenfassung
+        if: always()
+        run: |
+          {
+            echo ""
+            echo "### 🧭 Einordnung"
+            echo ""
+            echo "| Kanal | Wirkung | Grenze |"
+            echo "|---|---|---|"
+            echo "| Sitemap + robots.txt | Google entdeckt URLs selbst | kein Anspruch auf Indexierung |"
+            echo "| URL Inspection API | aktive Anfrage je URL | 200/Tag je Property, Berechtigung „Vollständig“ |"
+            echo "| IndexNow | Push an Bing/Yandex/Naver/Seznam | Google nimmt nicht teil |"
+            echo ""
+            echo "Runbook: `docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md` · "
+            echo "API-Zugang: `docs/ANLEITUNG-GSC-API-ZUGRIFF.md`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # ------------------------------------------------------------
+      #  ZWEI VERSCHIEDENE DINGE, ZWEI VERSCHIEDENE WEGE
+      #
+      #  a) ZUSTAND (data/gsc_indexierung_state.json, .indexnow_submitted.json)
+      #     wird DIREKT auf main gesichert. Ohne ihn weiß der nächste Lauf
+      #     nicht, was er schon angefragt hat – und verbrennt das harte
+      #     Tageskontingent von 200 Anfragen mit Seiten, die längst dran
+      #     waren. Ein Zustand, der auf einen PR wartet, ist kein Zustand.
+      #     Beide Pfade stehen in der STATE_ONLY-Negativliste des Deploy-Gates:
+      #     dieses Lebenszeichen löst keinen Livegang aus.
+      #
+      #  b) DATEN (data/gsc/) gehen als PR. Das sind Kennzahlen, die Frank
+      #     liest und einordnet – die Vorlage von 11.10.2026 sah das so vor,
+      #     und ein automatischer Merge auf main würde unbemerkt Zahlen in
+      #     den Bestand schreiben, die niemand geprüft hat.
+      # ------------------------------------------------------------
+      - name: Indexierungs-Zustand direkt sichern (Kontingent-Gedächtnis)
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          git config user.name "gsc-tageslauf"
+          git config user.email "gsc-tageslauf@users.noreply.github.com"
+          pfade=""
+          for f in data/gsc_indexierung_state.json .indexnow_submitted.json; do
+            [ -e "$f" ] && pfade="$pfade $f"
+          done
+          if [ -z "$pfade" ]; then
+            echo "Kein Zustand geschrieben – nichts zu sichern."
+            exit 0
+          fi
+          git add $pfade
+          if git diff --cached --quiet; then
+            echo "Zustand unverändert."
+            exit 0
+          fi
+          scripts/git_sync.sh "chore(gsc): Indexierungs-Zustand $(date -u +%F)" $pfade
+
+      - name: PR öffnen, wenn sich Leistungsdaten geändert haben
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          git config user.name "gsc-tageslauf"
+          git config user.email "gsc-tageslauf@users.noreply.github.com"
+          # `git status --porcelain` sieht neue UND geänderte Dateien; ein
+          # reines `git diff` würde den Erstlauf (data/gsc/ ist noch leer)
+          # still überspringen – genau dann gäbe es nie einen ersten PR.
+          if [ -z "$(git status --porcelain -- data/gsc/)" ]; then
+            echo "Keine Leistungsdaten geändert – kein PR."
+            exit 0
+          fi
+          TAG="$(date -u +%Y%m%d)"
+          BRANCH="automation/gsc-tagesdaten-${TAG}"
+          git checkout -B "$BRANCH"
+          # Push über den Sync-Kern, nicht roh (Push-Wache, Issue #547):
+          # git_sync.sh bringt Fetch-/Push-Retry, Rebase-Runden und die
+          # Auto-Heilung generierter Dateien mit – und legt über den
+          # vollqualifizierten Refname (refs/heads/$BRANCH) eine Branch an,
+          # die remote noch nicht existiert (#329). Der BRANCH-Override ist
+          # der dokumentierte Weg dafür; ohne ihn würde der Kern nach main
+          # pushen – also genau an den Ort, den dieser Schritt vermeidet.
+          BRANCH="$BRANCH" scripts/git_sync.sh "chore(gsc): Leistungsdaten $(date -u +%F)" data/gsc/
+          gh pr create --base main --head "$BRANCH" \
+            --title "GSC-Leistungsdaten $(date -u +%F)" \
+            --body "$(cat <<'TEXT'
+          Automatischer Import der Search-Console-Leistungsdaten (nur lesend).
+
+          **Was drin ist**
+
+          - `data/gsc/tagesdaten.jsonl` – Klicks, Impressionen, CTR, Position je Tag.
+            Wächst dauerhaft: Google hält nur 16 Monate, das Repo behält alles.
+          - `data/gsc/top_seiten_28t.json`, `data/gsc/top_suchbegriffe_28t.json` – Top 500 der letzten 28 Tage.
+          - `data/gsc/meta.json` – Stand, Zeitraum, Status.
+
+          **Was zu prüfen ist**
+
+          1. Status in `meta.json`: `ok`, `nicht_konfiguriert` oder `fehler`.
+          2. In der Lauf-Zusammenfassung: Steht bei den Indexierungs-Anfragen ein
+             Abdeckungszustand wie `Crawled - currently not indexed`? Dann hat
+             Google die Seite gesehen und sich dagegen entschieden – das ist ein
+             redaktionelles Signal (Inhalt, interne Verlinkung, Duplikat), kein
+             technisches.
+          3. Steht dort `keine_berechtigung`? Dann braucht das Dienstkonto in der
+             Search Console die Stufe „Vollständig“ (Owner); „Eingeschränkt“
+             reicht nur für diesen Lese-Import.
+
+          Keine Personenbezüge, keine Schlüssel, keine Tokens in diesem PR.
+          Runbook: `docs/ANLEITUNG-GSC-API-ZUGRIFF.md`
+          TEXT
+          )" || gh pr view "$BRANCH" --json url -q .url
