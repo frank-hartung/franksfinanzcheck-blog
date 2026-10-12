@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 11,
   "pool_size": 11,
-  "generated_at": "2026-10-12T21:08:23Z",
+  "generated_at": "2026-10-12T22:10:57Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -103,7 +103,7 @@
     {
       "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": true,
-      "sha256": "c91fa209c52fdfe3f9df514603b413c9326cde114e55ebcb280496cfb0d16870",
+      "sha256": "a4eaca988a473689b1f441b633949fb22d0e2b14e594175b9dca46c0e3fc0681",
       "flesch": 60.1,
       "score": 0.954,
       "parts": {
@@ -119,7 +119,7 @@
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
-      "sha256": "73f79be738e8c8622b441b855e8ae6b8978dea59ab9da65d9ca0d91a26891fa5",
+      "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
       "score": 0.984,
       "parts": {
@@ -135,7 +135,7 @@
     {
       "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
       "ready": true,
-      "sha256": "6199db21ff0a1118648332dc459dc9d9f28f0313c1f11dbbb1368627eb4be012",
+      "sha256": "18e0fe1fb6fd54664894925da3a3e1c4c62eddc4ee7e31228569ba4067cd5981",
       "flesch": 63.2,
       "score": 0.96,
       "parts": {
@@ -151,7 +151,7 @@
     {
       "slug": "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
       "ready": true,
-      "sha256": "8bf4df016cf6e77c36a3b26294fa4dffe7e633d6d890eaa4743345e953fd7cfe",
+      "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
       "flesch": 71.5,
       "score": 0.97,
       "parts": {
@@ -180,5 +180,15 @@
         "readability": 0.95
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-12T22:10:57Z",
+    "renewed": [
+      "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
