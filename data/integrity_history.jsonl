@@ -297,3 +297,6 @@
 {"date": "2026-10-12", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-10-12", "kritisch": 0, "fest": 1, "modus": "verify"}
 {"date": "2026-10-12", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/lesbarkeit_heiler.py"], "head": "123b6a3"}
+{"date": "2026-10-12", "kritisch": 0, "fest": 2, "modus": "verify"}
+{"date": "2026-10-12", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["scripts/publikations_vertrag.py", "scripts/redaktions_standard.py"], "head": "edd78f0"}
+{"date": "2026-10-12", "kritisch": 0, "fest": 0, "modus": "verify"}
