@@ -1,7 +1,7 @@
 ---
 title: "Dein Weg zu geringeren: Monatskosten – Schritt für Schritt"
 description: "Dein Weg zu geringeren: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick."
-date: 2026-10-11T10:12:39Z
+date: 2026-10-12T11:17:49Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -148,7 +148,7 @@ Viele Menschen scheitern trotz Sparwillen an den gleichen Mustern. Hier siehst d
 Die Rechnung zeigt, wie Sparen wirkt. Wir nutzen dafür Werte für einen normalen Haushalt.
 
 **Beispielrechnung Szenario A (Annahme: ohne Optimierung):**
-Unter dieser Voraussetzung betragen die Kosten: Strom 85 €, Handy 45 €, Internet 40 €, Versicherungen 25 €, Streaming 60 € – Gesamt: 255 €/Monat.
+Unter dieser Voraussetzung betragen die Kosten: Strom 85 €, Handy 45 €, Internet 40 €, Versicherungen 25 €, Streaming 60 € – Gesamt: 255 €/Monat.
 
 **Beispielrechnung Szenario B (Annahme: mit Optimierung):**
 Unter diesen Annahmen lauten die Beispielwerte: Strom 62 € (−23 €), Handy 15 € (−30 €), Internet 28 € (−12 €), Versicherungen 14 € (−11 €), Streaming 25 € (−35 €) – Gesamt in der Beispielrechnung: 144 €/Monat.
@@ -168,7 +168,7 @@ Befolge diesen Pfad für nachhaltig geringere Ausgaben. Er führt dich sicher an
 
 ## Verhandlungstipps: Wenn du nicht wechseln willst
 
-Manchmal scheust du den Aufwand eines Wechsels beim Internetanbieter. Auch ohne Anbieterwechsel kannst du deine Kosten senken:
+Manchmal scheust du den Aufwand eines Wechsels beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/). Auch ohne Anbieterwechsel kannst du deine Kosten senken:
 
 * **Die Kundenrückgewinnung:** Rufe an und frage nach besseren Konditionen. Erwähne dabei konkret die günstigeren Angebote der Konkurrenz.
 * **Die Kündigungsabteilung:** Verlange ein Gespräch mit den Spezialisten für Kündigungen. Diese Mitarbeiter haben oft viel größere Rabatt-Spielräume als die Hotline.

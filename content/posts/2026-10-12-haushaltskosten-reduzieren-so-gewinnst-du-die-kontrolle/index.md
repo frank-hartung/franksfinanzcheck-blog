@@ -1,7 +1,7 @@
 ---
 title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
 description: Willst du effektiv deine Haushaltskosten reduzieren? Frank Hartung zeigt dir, wie du mit einfachen Mitteln und dem 4K-Prüfpfad deine Fixkosten senkst.
-date: 2026-10-11T10:12:39Z
+date: 2026-10-12T11:17:49Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -42,13 +42,13 @@ Mit System schaffst du dir finanziellen Spielraum. Du gewinnst die Kontrolle üb
 
 Diese Strategien senken deine Ausgaben sofort:
 1 Versteckte Kostenfresser identifizieren und eliminieren.
-2 Mit einfachen Mitteln dauerhaft Geld sparen.
+2 Mit einfachen Mitteln dauerhaft [Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 3 Den 4K-Prüfpfad für die Fixkosten-Optimierung nutzen.
 
 **Das Wichtigste in Kürze**
 * **Transparenz schaffen:** Eine Bestandsaufnahme aller Verträge deckt sofort ungenutzte Potenziale auf.
 * **Systematik schlägt Spontanität:** Ein geplanter Check-Nachmittag wirkt effektiver als punktuelle Sparversuche.
-* **Einsparpotenzial:** Anbieterwechsel bei Energie und Versicherungen sparen oft einen dreistelligen Euro-Betrag pro Jahr ein.
+* **Einsparpotenzial:** [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) bei Energie und Versicherungen sparen oft einen dreistelligen Euro-Betrag pro Jahr ein.
 * **Dranbleiben:** Die regelmäßige Überprüfung verhindert, dass neue Verträge schleichend teurer werden.
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Unfallversicherung vergleichen**](/go/unfallversicherung/)
@@ -86,7 +86,7 @@ Einmaliges Sparen reicht für langfristigen Erfolg nicht aus. Die Fixkosten-Opti
 
 ## Warum scheitern viele Sparpläne im Alltag?
 
-Viele Menschen wollen Geld sparen, scheitern aber an der Umsetzung. Ein Hauptgrund ist die psychologische Hürde. Der Aufwand für einen Wechsel wird oft zu hoch eingeschätzt. Dabei bringt ein Nachmittag Arbeit eine Ersparnis für das ganze Jahr.
+Viele Menschen wollen [Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/), scheitern aber an der Umsetzung. Ein Hauptgrund ist die psychologische Hürde. Der Aufwand für einen Wechsel wird oft zu hoch eingeschätzt. Dabei bringt ein Nachmittag Arbeit eine Ersparnis für das ganze Jahr.
 
 Ein weiterer Fehler ist das Gießkannen-Prinzip. Man versucht an allen Ecken gleichzeitig zu sparen.
 
@@ -124,7 +124,7 @@ Typische Stolperfallen können deine Erfolge schnell zunichtemachen. Wer diese G
 | Fehler | Auswirkung | Lösung |
 | :--- | :--- | :--- |
 | **Boni-Hopping ohne Plan** | Der Tarif wird im zweiten Jahr extrem teuer. | Kündigungstermin sofort bei Abschluss im Kalender eintragen. |
-| **Unterversicherung** | Im Schadensfall droht der finanzielle Ruin. | Wichtige Policen wie Haftpflicht nicht kündigen, nur optimieren. |
+| **Unterversicherung** | Im Schadensfall droht der [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Ruin. | Wichtige Policen wie Haftpflicht nicht kündigen, nur optimieren. |
 | **Überversicherung** | Du zahlst für unnötige Zusatzleistungen. | Nischen-Versicherungen wie Handy-Schutz kritisch hinterfragen. |
 | **Versteckte Gebühren** | [Kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) summieren sich unbemerkt. | Kreditkartenabrechnungen monatlich auf Gebühren prüfen. |
 | **Mietwagen-Fallen** | Hohe Zusatzgebühren im Urlaub. | Kleingedrucktes lesen und Versicherungen über Drittanbieter buchen. |
