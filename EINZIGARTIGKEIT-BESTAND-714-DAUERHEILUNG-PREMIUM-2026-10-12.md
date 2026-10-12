@@ -131,12 +131,16 @@ python3 scripts/selftest_runner.py                               # 191 Wachen gr
 python3 -m unittest discover -s scripts/tests                    # 2862 Tests, 1 Fehler (vorbestehend, s. u.)
 ```
 
-**Vorbestehend, nicht Teil dieses Vorgangs:**
-`test_integrity_guard.RepoSealTests.test_ausgelieferter_baum_passt_zum_siegel`
-ist auf `main` rot (Siegel-Drift `scripts/publikations_vertrag.py`,
-`scripts/redaktions_standard.py` aus #713/#721; identisch ohne diese Änderungen).
-Reparatur laut Wache: `python3 scripts/integrity_guard.py --set-current` im
-eigenen Commit mit `data/integrity_lock.json`.
+**Vorbestehender Blocker, im zweiten Commit mitgeheilt:** Der PR-Check
+„Integritäts-Siegel" lief rot – nicht wegen dieser Änderungen, sondern wegen
+eines belegten FEST-Drifts aus `05178f3` (#713/#721): `scripts/publikations_vertrag.py`
+und `scripts/redaktions_standard.py` waren auf `main` geändert, ohne das Siegel
+nachzuziehen. Jeder Folge-PR wäre daran gescheitert. Reparatur über den vom Repo
+vorgesehenen Weg `python3 scripts/integrity_guard.py --heal` (signiert
+ausschließlich versionierten, bytegleich committeten FEST-Drift; KRITISCH bleibt
+HARD STOP) – eigener Commit `chore(integrity)`, Herkunft im Lock (`audit`) und in
+`data/integrity_history.jsonl`. Danach: `test_integrity_guard` 59/59 grün,
+Siegel „gültig und verkettet", volle Suite ohne Fehler.
 
 ## 6. Dateien
 
