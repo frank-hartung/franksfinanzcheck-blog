@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-11T23:24:10Z",
+  "generated_at": "2026-10-12T06:07:06Z",
   "modus": "kandidaten",
-  "commit": "0b6845e613ba020cb3e1eadf7a4c1d7468e8dc3b",
+  "commit": "92c08aa65b4a1ae32a8588115699a6351a3db097",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -717,6 +717,40 @@
       },
       "naechste_pruefung": "2026-11-06",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
+      "sha256": "55765afaca178bb249cf73f5559c005c775f9c416bbb2e07b66a1bdf74388992",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "neu versiegelt"
+    },
+    "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
+      "sha256": "b9af276601e3410959cb44c25eea31339e1f1a9cb652388195204a69556b00d2",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "erhoeht",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
