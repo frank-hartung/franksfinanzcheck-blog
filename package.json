@@ -197,7 +197,7 @@
     "test:browser-cache": "node --test scripts/tests/chromium_cache.test.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "1.63.0",
+    "@playwright/test": "1.64.0",
     "@sparticuz/chromium": "153.0.0",
     "jsdom": "^30.1.2",
     "lighthouse": "13.5.0"
