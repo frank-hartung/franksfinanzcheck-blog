@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 12.10.2026 00:58 (Europe/Berlin)  
+> Automatisch aktualisiert: 12.10.2026 15:16 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,39 +12,36 @@
 
 ## Kommende Beiträge
 
-### Mo, 12. Oktober 2026
+### Di, 13. Oktober 2026
 - **07:45** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
-### Di, 13. Oktober 2026
-- **07:45** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Mi, 14. Oktober 2026
-- **07:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
+- **07:45** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Do, 15. Oktober 2026
-- **07:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+- **07:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### Fr, 16. Oktober 2026
-- **07:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zitat_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
+- **07:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 ### Mo, 19. Oktober 2026
-- **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
+- **07:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 ### Di, 20. Oktober 2026
-- **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
+- **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 ### Mi, 21. Oktober 2026
-- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+- **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _zahl_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### Do, 22. Oktober 2026
+- **07:45** ⏳ DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen — _vergleich_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
+### Fr, 23. Oktober 2026
 - **07:45** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-### Fr, 23. Oktober 2026
-- **07:45** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 ### Mo, 26. Oktober 2026
-- **07:45** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
+- **07:45** ⏳ Handyvertrag kündigen: Frist und Kosten richtig prüfen — _zitat_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 
 ## Zuletzt veröffentlicht
 
