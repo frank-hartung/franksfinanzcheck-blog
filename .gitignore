@@ -113,6 +113,13 @@ data/*.tmp-*
 /SOCIAL-AUTOPILOT-STATUS.md
 data/social/pinterest_boards_cache.json
 
+# Suchradar (12.10.2026): Der Zwischenspeicher ist flüchtig – er spart
+# Abrufbudget innerhalb eines Tages und wächst sonst unbegrenzt. Der
+# Zustand (Quote, Instanzen-Gesundheit, Rang-Historie) ist dagegen
+# BEWUSST versioniert: Ohne ihn gibt es kein Lauf-übergreifendes Delta,
+# und genau das Delta ist der Nutzen des Radars.
+data/suchradar/cache/
+
 # Design-Review-Screenshots (e2e/design-shots.mjs)
 shots/
 

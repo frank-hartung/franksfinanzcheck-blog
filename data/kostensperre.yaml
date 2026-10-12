@@ -105,6 +105,39 @@ flaechen:
       Gering. LT1–LT4 laufen deterministisch und ohne Netz; der Premium-
       Dienst findet zusätzlich einige Stil- und Grammatikfälle.
 
+  - id: serp_premium
+    name: "Bezahlte Suchergebnis-Dienste (Apify, SerpApi, serper.dev, Google CSE)"
+    freigegeben: false
+    modul: "scripts/serp_anbieter.py"
+    funktion: "pruefe_freigabe"
+    endpunkt: "api.apify.com / serpapi.com / google.serper.dev"
+    schluessel_umgebung:
+      - APIFY_TOKEN
+      - APIFY_API_TOKEN
+      - SERPAPI_KEY
+      - SERPAPI_API_KEY
+      - SERPER_API_KEY
+      - GOOGLE_CSE_KEY
+      - GOOGLE_CSE_ID
+      - BRAVE_API_KEY
+    gratis_weg: >-
+      Schlüssellose Anbieter-Kette SearXNG → DuckDuckGo → Mojeek →
+      Wikipedia. Läuft ohne jeden Schlüssel als Normalbetrieb und trägt
+      das gesamte Suchradar: Rang-Verfolgung, Wettbewerbs-Radar und
+      Merkmal-Erkennung.
+    wirkung_bei_sperre: >-
+      pruefe_freigabe() liefert für rein bezahlte Anbieter (apify,
+      serpapi, serper) stets False. hole_treffer() überspringt sie und
+      fällt in der Kette auf den nächsten schlüssellosen Anbieter zurück –
+      kein Sonderpfad, kein Abbruch, nur eine Stufe weiter.
+    qualitaetsverlust: >-
+      Messbar, aber begrenzt. Ohne Schlüssel gibt es kein
+      Google-Original-Ranking: SearXNG bündelt den Google-Index über
+      fremde Instanzen, DuckDuckGo und Mojeek sind eigene Indizes. Die
+      Ränge sind Indikationen statt Positionsgarantie. Für die exakte
+      Position bleibt die Google Search Console die richtige Quelle –
+      und die ist ebenfalls kostenlos (docs/ANLEITUNG-GSC-API-ZUGRIFF.md).
+
 # ------------------------------------------------------------------
 #  NICHT HIER AUFGEFÜHRT – und warum
 #  Der LLM-Transportweg (groq, nvidia, cloudflare, gemini) braucht keine

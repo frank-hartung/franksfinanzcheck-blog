@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- Probe: SearXNG-Instanz, Standard-Theme, /search?q=stromkosten+senken
+     Entscheidend für den Parser:
+       · <h3><a class="url_wrapper">  = die ADRESSE
+       · <h4 class="title"><a>        = der TITEL
+       Wer h3 zuerst nimmt, schreibt die Adresse ins Titelfeld.
+       · .result_ad muss rausfallen
+       · .engines nennt die beteiligten Suchmaschinen -->
+<html lang="de">
+<body>
+<main id="main">
+  <div id="results" class="results">
+    <article class="result result-default">
+      <h3>
+        <a class="url_wrapper" href="https://www.stiftung-warentest.de/strom">
+          <span class="url_o1">https://</span><span class="url_o2">stiftung-warentest.de</span>
+        </a>
+      </h3>
+      <h4 class="title">
+        <a href="https://www.stiftung-warentest.de/strom">Stromtarife im Vergleich</a>
+      </h4>
+      <p class="content">Welcher Tarif wirklich günstiger ist – geprüft und
+        nachgerechnet.</p>
+      <div class="engines"><span>google</span><span>bing</span></div>
+    </article>
+
+    <article class="result result-default">
+      <h3>
+        <a class="url_wrapper" href="https://franksfinanzcheck.de/strom-sparen/">
+          <span class="url_o1">https://</span><span class="url_o2">franksfinanzcheck.de</span>
+        </a>
+      </h3>
+      <h4 class="title">
+        <a href="https://franksfinanzcheck.de/strom-sparen/">Stromkosten senken: 12 Hebel</a>
+      </h4>
+      <p class="content">Mit Rechnung: Abschlag, Grundpreis, Verbrauch.</p>
+      <div class="engines"><span>google</span></div>
+    </article>
+
+    <article class="result result-default result_ad">
+      <h3><a class="url_wrapper" href="https://anzeige.example/"><span class="url_o2">anzeige.example</span></a></h3>
+      <h4 class="title"><a href="https://anzeige.example/">Bezahlte Platzierung</a></h4>
+      <p class="content">Werbung.</p>
+    </article>
+
+    <article class="result result-default">
+      <h3>
+        <a class="url_wrapper" href="https://www.verbraucherzentrale.de/strom">
+          <span class="url_o2">verbraucherzentrale.de</span>
+        </a>
+      </h3>
+      <h4 class="title"><a href="https://www.verbraucherzentrale.de/strom">Strom sparen – Tipps</a></h4>
+      <p class="content">Unabhängige Beratung zur Stromrechnung.</p>
+      <div class="engines"><span>duckduckgo</span></div>
+    </article>
+  </div>
+</main>
+</body>
+</html>

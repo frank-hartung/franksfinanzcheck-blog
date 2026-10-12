@@ -3,3 +3,51 @@
 {"ts": "2026-10-12T06:04:22Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-10-12T06:04:50Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-10-12T06:05:54Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "92c08aa65b4a1ae32a8588115699a6351a3db097"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:06:56Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:07:25Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:08:30Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "0d58ec089ec223cf482229141d73e55cf633ca41"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:21:28Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:21:34Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:21:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:21:45Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 9}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:21:58Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 93}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:03Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:04Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 2}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:04Z", "module": "fix_spaces", "action": "apply", "input": {"files": 81}, "output": {"fixes": 17}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:49Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:22:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:28:43Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:29:20Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:29:58Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:30:36Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:31:13Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:23Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:29Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:34Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 9}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:52Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 17}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:57Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:57Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 3}, "output": {"changes": 5}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:37:58Z", "module": "fix_spaces", "action": "apply", "input": {"files": 81}, "output": {"fixes": 17}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:38:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:46:03Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:46:40Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:47:19Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:47:57Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T11:48:34Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T12:14:40Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
+{"ts": "2026-10-12T12:16:06Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T12:16:35Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-12T12:17:39Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "884fd57381ae6e51682ff432b652c9983d685a22"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-12T12:28:09Z", "module": "ops_report", "action": "daily-report", "input": {"cron": true}, "output": {"status": "ok"}, "status": "ok", "critical": false, "commit": null}

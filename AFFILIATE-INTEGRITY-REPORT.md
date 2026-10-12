@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-11 10:29:14 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-12 11:31:47 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 42 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 44 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -54,6 +54,8 @@
 | 2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest | 2 → 3 ✅ | /go/tagesgeld/ |
 | 2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit | 0 → 1 ✅ | /go/tagesgeld/ |
 | 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust | 1 → 1 ✅ | /go/mietwagen/ |
+| 2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet | 1 → 1 ✅ | /go/dsl/ |
+| 2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung | 1 → 1 ✅ | /go/handytarife/ |
 
 ## Hinweise (nicht blockierend)
 

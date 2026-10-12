@@ -1,41 +1,9 @@
 {
   "target": 6,
-  "ready": 7,
-  "pool_size": 13,
-  "generated_at": "2026-10-11T10:29:21Z",
+  "ready": 5,
+  "pool_size": 11,
+  "generated_at": "2026-10-12T11:49:16Z",
   "candidates": [
-    {
-      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
-      "ready": true,
-      "sha256": "bf3a2748158e8e2f289c6fd6443d41fabf3274dfae1a08d83b6f2da0d1c615a7",
-      "flesch": 63.0,
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
-      "ready": true,
-      "sha256": "b826e3b0beeca1b24eff92f4a6d2bd346e3ff73a902a86ed76160c271a7ba8b9",
-      "flesch": 61.7,
-      "score": 0.982,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
@@ -117,9 +85,9 @@
       }
     },
     {
-      "slug": "2026-10-11-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": false,
-      "sha256": "226ced4a64e02744e701c94dc8bfb8d36439cb00d6d40cae18a18bb2d3787875",
+      "sha256": "c6eb49527d2335f02a6dc58e1ae7f6d171d75bdca24b0b07e166c23d7e3cd788",
       "flesch": 60.5,
       "reason": "Reserve-Qualitäts-Gate: RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Willst du 1.332 € pro Jahr mehr auf dem Konto haben, ohne eine einzige Überstunde zu leisten?",
       "details": [
@@ -137,29 +105,31 @@
       }
     },
     {
-      "slug": "2026-10-11-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": false,
-      "sha256": "ffe456881ce45ed95abcbfa0941b7b34651b6040211286f6a3f9c580a58f2624",
-      "flesch": 61.3,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden.",
+      "sha256": "f0f5b3169cfdc82e79d7fe5693787b51a8b594a24770557f781c62e000ed9699",
+      "flesch": 59.0,
+      "reason": "Reserve-Qualitäts-Gate: RS3: keine Faustregel markiert",
       "details": [
-        "RS5: 19 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: - **Zehn Jahre Gültigkeit:** Einmal erstellt, ist das Dokument in der Regel ein Jahrzehnt lang gültig, sofern keine energetisch relevanten Umbauten stattfinden."
+        "RS3: keine Faustregel markiert",
+        "RS4: weder Schrittfolge (0 nummerierte Zeilen) noch Schritt-Überschriften (0)",
+        "RS5: 16 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ein fehlender Energieausweis kostet dich bis zu 15.000 € Bußgeld."
       ],
       "score": 0.944,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.94,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-11-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+      "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
       "ready": false,
-      "sha256": "81bae3c0825213c580505bcd045fce25dae160aad786107ae85b445049ba5221",
+      "sha256": "deba80497dc85626487a506ff08e7882033a3c22bb1ac6ff63d82c6971f4d188",
       "flesch": 60.5,
       "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wusstest du, dass ein durchschnittlicher Haushalt jährlich über 1.000 € durch veraltete Verträge verschenkt?",
       "details": [
@@ -177,13 +147,13 @@
       }
     },
     {
-      "slug": "2026-10-11-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
       "ready": false,
-      "sha256": "1c0748d1da24539b954089cbac526be5673cd72f29dd7c4d928e5c8d05296819",
-      "flesch": 61.0,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für Investments übrig.",
+      "sha256": "ef5ff5031464710d50e45a3b6f547bbc7294fc13e3d6754cdb2f02874dcb8d0d",
+      "flesch": 61.7,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für dein Depot übrig.",
       "details": [
-        "RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für Investments übrig."
+        "RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für dein Depot übrig."
       ],
       "score": 0.96,
       "parts": {
@@ -197,37 +167,37 @@
       }
     },
     {
-      "slug": "2026-10-11-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "slug": "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
       "ready": false,
-      "sha256": "09dbab4db1891ffe1d2c2fbacd20908e5207d8b1c6bbebf892df60e8b8a596f1",
-      "flesch": 60.2,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 44 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %.",
+      "sha256": "30b2e8035db0a35383db13bd782c1189c41ff636d260ffa27d9bd3ab7ca28aab",
+      "flesch": 60.1,
+      "reason": "Reserve-Qualitäts-Gate: RS5: 43 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %.",
       "details": [
-        "RS5: 44 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
+        "RS5: 43 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
       ],
-      "score": 0.956,
+      "score": 0.958,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.96,
+        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
       }
     },
     {
-      "slug": "2026-10-11-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
       "ready": false,
-      "sha256": "be50fcabe1226f096bbf90c98181a7300d393578fb82411a8f0364e1f0de6bb1",
-      "flesch": 57.2,
+      "sha256": "0442ba41f8027458b179a9a4c9e48793d40af5838b1f0b5a99ff4feed83cbfd2",
+      "flesch": 59.6,
       "reason": "Reserve-Qualitäts-Gate: RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?",
       "details": [
         "RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?"
       ],
-      "score": 0.94,
+      "score": 0.944,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,

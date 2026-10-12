@@ -1,5 +1,5 @@
-generated_at: '2026-10-11T10:18:51Z'
-day: '2026-10-11'
+generated_at: '2026-10-12T11:19:11Z'
+day: '2026-10-12'
 mode: deterministic
 teams:
   trending:
@@ -238,55 +238,60 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
-    score: 0.55
-    keywords: []
-  - topic: Die Vorteile von Frugalismus für dein Finanzbudget
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Die Vorteile von Frugalismus für dein Finanzbudget
-    score: 0.55
-    keywords: []
-  - topic: 'Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
-    score: 0.55
-    keywords:
-    - Handyvertrag kündigen
-    - Mobilfunk sparen
-    - Tarifwechsel
-  - topic: Stromfresser im Haushalt entlarven
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Stromfresser im Haushalt entlarven
-    score: 0.55
-    keywords:
-    - Stromfresser finden
-    - Strom sparen Tipps
-    - Energiekosten senken
-    - Standby Kosten
-  - topic: 'Versicherungen im Überblick: Was brauchst du wirklich?'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Versicherungen im Überblick: Was brauchst du wirklich?'
-    score: 0.55
-    keywords:
-    - Versicherungen
-    - Versicherungsvergleich
-    - Risikomanagement
-  - topic: 'Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?'
+  - topic: 'Depot eröffnen: Worauf Anfänger 2026 achten sollten'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?'
+    source: 'topics:Depot eröffnen: Worauf Anfänger 2026 achten sollten'
+    score: 0.55
+    keywords: []
+  - topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit
+      Wärmepumpe'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte
+      mit Wärmepumpe'
     score: 0.55
     keywords:
-    - Weihnachtsgeld was tun
-    - Weihnachtsgeld anlegen
-    - Weihnachtsgeld tilgen oder sparen
+    - Dynamische Stromtarife Vor Nachteile
+    - Wärmepumpenstrom Vergleich
+    - Tibber Alternative
+    - Stromvertrag Smart Meter
+  - topic: Energiekosten senken mit kleinen Veränderungen
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Energiekosten senken mit kleinen Veränderungen
+    score: 0.55
+    keywords:
+    - Energie
+    - Kosten
+    - SparTipps
+  - topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Hund & Katze: Lohnt sich eine Tierversicherung?'
+    score: 0.55
+    keywords:
+    - Tierversicherung
+    - Hundeversicherung
+    - Katzenversicherung
+  - topic: Jahreskosten fürs Auto minimieren
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Jahreskosten fürs Auto minimieren
+    score: 0.55
+    keywords:
+    - Autokosten
+    - Versicherungen
+    - Kraftstoff
+  - topic: 'Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+    score: 0.55
+    keywords:
+    - Stromspeicher kaufen
+    - Batteriespeicher Solar
+    - Photovoltaik Speicher
 live_web:
   enabled: false
   findings: []

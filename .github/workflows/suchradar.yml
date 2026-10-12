@@ -1,0 +1,269 @@
+# ============================================================
+#  SUCHRADAR – Suchergebnis-Erfassung ohne API (täglich)
+#  Integration 12.10.2026 – siehe docs/ANLEITUNG-SUCHRADAR.md
+#
+#  Was hier läuft: der Nachbau des Apify-Actors
+#  `apify/google-search-scraper` als blogeigene Kette. Ohne Schlüssel,
+#  ohne Konto, ohne Kosten – die Begründung, warum google.com nicht
+#  direkt angefragt wird, steht in scripts/serp_anbieter.py.
+#
+#  Ablauf:
+#    1. Selbsttest   – Fail-closed, bevor eine einzige Anfrage rausgeht
+#    2. Probe        – welcher Anbieter antwortet heute?
+#    3. Lauf         – suchen → Rang messen → Wettbewerb auswerten
+#    4. Sichern      – Quote, Instanzen-Gesundheit, Rang-Historie committen
+#    5. Störung      – bei Totalausfall eine Meldung, kein stilles Grün
+#
+#  LEITPLANKEN
+#    - Kein API-Schlüssel im Workflow. Die Kette ist schlüssellos.
+#      Bezahlte Anbieter (Apify, SerpApi, serper.dev) sind über
+#      data/kostensperre.yaml (Fläche `serp_premium`) gesperrt.
+#    - Das Tagesbudget steht in data/suchradar.yaml und wird hart
+#      durchgesetzt. Es schützt fremde Server vor der eigenen Automatik.
+#    - Der Lauf misst. Er übernimmt nichts ungeprüft in einen Artikel.
+#
+#  Manuell starten: GitHub → Actions → „Suchradar – Suchergebnis-Erfassung"
+# ============================================================
+name: Suchradar – Suchergebnis-Erfassung
+
+on:
+  schedule:
+    - cron: "52 5 * * *"    # 07:52 MESZ – freier Slot (entzerrt)
+  workflow_dispatch:
+    inputs:
+      anfragen:
+        description: "Suchbegriffe (Komma-getrennt). Leer = Konfiguration."
+        required: false
+        default: ""
+      max_anfragen:
+        description: "Höchstzahl der Anfragen in diesem Lauf"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: suchradar
+  cancel-in-progress: false
+
+jobs:
+  suchradar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v7.0.1
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: PyYAML installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+
+      # ------------------------------------------------------------
+      # 1. Selbsttest VOR der ersten Anfrage.
+      #    Ein Parser, der nach einem Markup-Wechsel ins Leere greift,
+      #    würde sonst still leere Berichte erzeugen. Fail-closed.
+      # ------------------------------------------------------------
+      - name: Selbsttest (offline, ohne Netz)
+        run: |
+          # Beide Module einzeln, nicht nur über den Umweg in suchradar.py:
+          # scripts/selftest_ki.py entdeckt Kandidaten anhand der
+          # Workflow-Aufrufe. Ein Selbsttest, den kein Workflow nennt, ist
+          # für die KI-Probe unsichtbar – und damit ungeschützt.
+          python3 scripts/serp_anbieter.py --selftest
+          python3 scripts/suchradar.py --selftest
+
+      # ------------------------------------------------------------
+      # 2. Unit-Tests. Decken Budget, Cache, Kette und Parser ab.
+      # ------------------------------------------------------------
+      - name: Unit-Tests
+        run: python3 -m unittest scripts.tests.test_suchradar
+
+      # ------------------------------------------------------------
+      # 3. Probe: Welcher Anbieter antwortet heute?
+      #    Getrennt vom Lauf, weil die Kette sonst den Ausfall eines
+      #    einzelnen Anbieters versteckt – bis der letzte auch noch geht.
+      #    Exit 3 heißt „keiner antwortet"; das darf den Lauf nicht
+      #    abbrechen, es gehört in die Meldung.
+      # ------------------------------------------------------------
+      - name: Anbieter-Probe
+        id: probe
+        continue-on-error: true
+        run: |
+          # `continue-on-error` braucht einen sichtbaren Fallback, sonst
+          # verschwindet der Befund im Protokoll (Automation-Premium-Audit,
+          # Regel 3). Die Probe landet deshalb in der Schritt-Zusammenfassung
+          # – auch dann, wenn sie den Lauf nicht abbricht.
+          set +e
+          ausgabe=$(python3 scripts/suchradar.py --probe 2>&1)
+          code=$?
+          set -e
+          echo "$ausgabe"
+          {
+            echo "## Suchradar – Anbieter-Probe (Exit $code)"
+            echo '```'
+            echo "$ausgabe"
+            echo '```'
+            if [ "$code" = "3" ]; then
+              echo
+              echo "> ⚠️ Kein schlüsselloser Anbieter hat geantwortet."
+              echo "> Der Lauf wird versuchen, trotzdem Treffer zu holen;"
+              echo "> scheitert er ebenfalls, entsteht eine Meldung."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # ------------------------------------------------------------
+      # 4. Der Lauf.
+      # ------------------------------------------------------------
+      - name: Suchlauf
+        id: lauf
+        continue-on-error: true
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.anfragen }}" ]; then
+            IFS=',' read -ra LISTE <<< "${{ inputs.anfragen }}"
+            for begriff in "${LISTE[@]}"; do
+              ARGS="$ARGS --anfrage $(echo "$begriff" | xargs)"
+            done
+          fi
+          if [ "${{ inputs.max_anfragen }}" != "0" ] && [ -n "${{ inputs.max_anfragen }}" ]; then
+            ARGS="$ARGS --max-anfragen ${{ inputs.max_anfragen }}"
+          fi
+          # `set +e` ist hier Pflicht, nicht Stil: GitHubs Standard-Shell
+          # läuft mit `set -e`, ein rohes `python3 … ; echo "code=$?"`
+          # bricht also VOR dem echo ab. Der Exit-Code käme nie an, und
+          # der Exit-Vertrag unten wäre tot – der Lauf erschiene grün.
+          set +e
+          # shellcheck disable=SC2086
+          python3 scripts/suchradar.py $ARGS
+          code=$?
+          set -e
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      # ------------------------------------------------------------
+      # 5. Zustand sichern.
+      #    Das Cockpit SUCHRADAR-RADAR.md wird MIT committet. Es heißt
+      #    bewusst nicht `*-STATUS.md`: Die .gitignore-Regel /*-STATUS.md
+      #    würde es verschlucken und den einzigen menschenlesbaren Output
+      #    eines vollautomatischen Laufs in ein CI-Artefakt verbannen.
+      #    Vorbild: KENNZAHLEN-RADAR.md, AUTHORITY-RADAR.md.
+      #
+      #    Der Zustand darunter ist ohnehin versioniert: Ohne die
+      #    Rang-Historie gibt es kein Delta zum Vortag, und ohne die
+      #    Quote gibt es keine Budget-Grenze über Läufe hinweg.
+      #
+      #    Nur vorhandene ODER bereits getrackte Pfade stagen – `git add`
+      #    bricht die ganze Liste ab, sobald ein optionales Log fehlt.
+      #    Genau dadurch blieb anderswo Zustand unversioniert, obwohl der
+      #    Workflow grün war (#549).
+      # ------------------------------------------------------------
+      - name: Zustand dauerhaft sichern
+        if: always()
+        run: |
+          PFADE=(
+            SUCHRADAR-RADAR.md
+            data/suchradar/quota.json
+            data/suchradar/instanzen.json
+            data/suchradar/rankings.json
+            data/suchradar/rankings.jsonl
+            data/suchradar/wettbewerb.json
+            data/suchradar/letzte_ergebnisse.json
+            data/suchradar/verlauf.jsonl
+          )
+          STAGE=()
+          for pfad in "${PFADE[@]}"; do
+            if [ -e "$pfad" ] || git ls-files --error-unmatch -- "$pfad" >/dev/null 2>&1; then
+              STAGE+=("$pfad")
+            fi
+          done
+
+          if [ "${#STAGE[@]}" -gt 0 ]; then
+            git add -- "${STAGE[@]}"
+          fi
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen am Zustand."
+          else
+            git config user.name "Suchradar"
+            git config user.email "suchradar@users.noreply.github.com"
+            git commit -m "chore(suchradar): Erfassungslauf $(date +%F\ %H:%M)"
+            # Persistenz ist Teil des Erfolgsvertrags: kein `|| true`.
+            # Kommt die Rang-Historie nicht an, gibt es morgen kein Delta –
+            # und dann muss der Lauf rot sein, nicht grün.
+            scripts/git_sync.sh --push-only
+            echo "✅ Zustand committet und gepusht."
+          fi
+
+      - name: Cockpit als Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: suchradar-cockpit
+          path: |
+            SUCHRADAR-RADAR.md
+            data/suchradar/*.json
+          if-no-files-found: ignore
+
+      # ------------------------------------------------------------
+      # 6. Meldung nur bei echtem Totalausfall.
+      #    Ein einzelner toter Anbieter ist eine Umschaltung, kein
+      #    Vorfall – sonst ist die Meldung nach zwei Wochen nur noch Lärm.
+      # ------------------------------------------------------------
+      - name: Meldung bei Totalausfall
+        if: ${{ steps.lauf.outputs.code == '3' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Label VOR der Issue-Erzeugung anlegen, sonst HTTP 422 (C12).
+          gh label create suchradar --repo "$GITHUB_REPOSITORY" \
+            --color "1d76db" \
+            --description "Suchradar: automatische Meldungen" --force || true
+          TITEL="Suchradar: kein Anbieter liefert Treffer ($(date +%F))"
+          if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+               --search "in:title \"$TITEL\"" | grep -q .; then
+            BODY=$(cat <<'EOF'
+          `scripts/suchradar.py` lieferte keinen einzigen Treffer (Exit 3).
+
+          Wahrscheinliche Ursachen:
+
+          - **Alle SearXNG-Instanzen ausgefallen.** Öffentliche Instanzen
+            kommen und gehen. Prüfen: `python3 scripts/suchradar.py --probe`
+            und die Liste in `data/suchradar.yaml` gegen <https://searx.space>
+            abgleichen.
+          - **Markup-Änderung.** DuckDuckGo oder Mojeek haben ihr HTML
+            umgebaut; die Parser greifen ins Leere. Prüfen:
+            `python3 -m unittest scripts.tests.test_suchradar`
+          - **Ratenlimit.** Zu viele Anfragen an einem Tag. Der Zähler
+            steht in `data/suchradar/quota.json`.
+
+          Runbook: `docs/ANLEITUNG-SUCHRADAR.md`, Abschnitt „Störungssuche".
+          EOF
+            )
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITEL" \
+              --label suchradar \
+              --body "$BODY"
+          else
+            echo "Meldung existiert bereits – kein Duplikat."
+          fi
+
+      # ------------------------------------------------------------
+      # 7. Exit-Vertrag. Erst NACH dem Sichern, damit der Zustand auch
+      #    bei einem Fehler ankommt – sonst verliert der nächste Lauf
+      #    den Vergleichspunkt.
+      # ------------------------------------------------------------
+      - name: Exit-Vertrag durchsetzen
+        if: ${{ steps.lauf.outputs.code != '' && steps.lauf.outputs.code != '0' }}
+        run: |
+          echo "::error::Suchradar meldet Exit ${{ steps.lauf.outputs.code }}."
+          echo "Exit 3 = kein Anbieter lieferte Treffer. Diagnose: --probe"
+          exit 1
