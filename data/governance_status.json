@@ -1,18 +1,18 @@
 {
   "counts": {
-    "amber": 0,
-    "green": 8,
-    "info": 5,
-    "red": 2
+    "amber": 1,
+    "green": 9,
+    "info": 4,
+    "red": 0
   },
-  "fingerprint": "5a5b9df06cc5",
-  "generated": "2026-10-05T12:18:54+00:00",
+  "fingerprint": "a69d19423d76",
+  "generated": "2026-10-12T13:12:47+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
     "changed": true,
-    "fingerprint": "5a5b9df06cc5",
-    "verdict": "RED"
+    "fingerprint": "a69d19423d76",
+    "verdict": "AMBER"
   },
   "steps": {
     "automation": {
@@ -23,17 +23,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "/tmp/automation-report.md",
-      "ts": "2026-10-05T12:18:48+00:00"
-    },
-    "awin": {
-      "actionable": false,
-      "code": "no_data",
-      "exit": 0,
-      "findings": 0,
-      "level": "info",
-      "message": "Datenlage offen (noch kein Export/Import)",
-      "report": "AWIN-REPORT.md",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:39+00:00"
     },
     "build": {
       "actionable": false,
@@ -43,7 +33,7 @@
       "level": "green",
       "message": "Schritt erfolgreich (Report folgt nicht)",
       "report": "",
-      "ts": "2026-10-05T12:18:50+00:00"
+      "ts": "2026-10-12T13:12:41+00:00"
     },
     "click-chain": {
       "actionable": false,
@@ -53,7 +43,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CLICK-CHAIN-REPORT.md",
-      "ts": "2026-10-05T12:18:53+00:00"
+      "ts": "2026-10-12T13:12:45+00:00"
     },
     "clicks": {
       "actionable": false,
@@ -63,7 +53,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "CLICK-REPORT.md",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:44+00:00"
     },
     "cwv": {
       "actionable": false,
@@ -73,7 +63,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CWV-REPORT.md",
-      "ts": "2026-10-05T12:18:50+00:00"
+      "ts": "2026-10-12T13:12:41+00:00"
     },
     "decay": {
       "actionable": false,
@@ -83,27 +73,27 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "DECAY-REPORT.md",
-      "ts": "2026-10-05T12:18:50+00:00"
+      "ts": "2026-10-12T13:12:41+00:00"
     },
     "lesbarkeit": {
       "actionable": true,
-      "code": "red_finding",
-      "exit": 1,
-      "findings": 9,
-      "level": "red",
-      "message": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md – Flesch 47.4 < Floor 55; 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/index.md – Flesch 50.3 < Floor 55; 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md – Flesch 50.4 <",
+      "code": "read_draft",
+      "exit": 0,
+      "findings": 11,
+      "level": "amber",
+      "message": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md (Entwurf) – Flesch 38.2 < Publish-Schwelle 60; 2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert/index.md (Entwurf) – Flesch 46.1 < Publish-Schwelle 60; 2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich/index.md (Entwu",
       "report": "LESBARKEIT-REPORT.md",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:43+00:00"
     },
     "live-policy": {
-      "actionable": true,
-      "code": "red_finding",
-      "exit": 1,
-      "findings": 2,
-      "level": "red",
-      "message": "L2: 2 Money-URL(s) fehlen live in der Sitemap, z. B. https://franksfinanzcheck.de/posts/2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf/ – Deploy/Cache-Hysterese; L3: /posts/2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben/ liefert live HTTP 404",
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 1,
+      "level": "green",
+      "message": "in Ordnung (1 Hinweis(e))",
       "report": "LIVE-POLICY-REPORT.md",
-      "ts": "2026-10-05T12:18:54+00:00"
+      "ts": "2026-10-12T13:12:46+00:00"
     },
     "pinperf": {
       "actionable": false,
@@ -113,7 +103,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "PINTEREST-PERF-REPORT.md",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:43+00:00"
     },
     "revenue-funnel": {
       "actionable": false,
@@ -123,7 +113,7 @@
       "level": "green",
       "message": "in Ordnung (1 Hinweis(e))",
       "report": "REVENUE-FUNNEL-REPORT.md",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:45+00:00"
     },
     "scorecard": {
       "actionable": false,
@@ -133,7 +123,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "EDITORIAL-SCORECARD.md",
-      "ts": "2026-10-05T12:18:54+00:00"
+      "ts": "2026-10-12T13:12:47+00:00"
     },
     "secrets": {
       "actionable": false,
@@ -143,7 +133,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "SECRETS-REPORT.md",
-      "ts": "2026-10-05T12:18:51+00:00"
+      "ts": "2026-10-12T13:12:43+00:00"
     },
     "umami": {
       "actionable": false,
@@ -153,7 +143,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "data/umami_clicks.meta.json",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:43+00:00"
     },
     "umami-views": {
       "actionable": false,
@@ -163,9 +153,9 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "data/umami_views.meta.json",
-      "ts": "2026-10-05T12:18:52+00:00"
+      "ts": "2026-10-12T13:12:44+00:00"
     }
   },
-  "verdict": "RED",
+  "verdict": "AMBER",
   "version": 1
 }
