@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T20:35:16Z",
+  "generated_at": "2026-10-12T21:29:23Z",
   "modus": "kandidaten",
-  "commit": "ea92f369476ea4e9bd2bc5f1eea65b74b61e0d28",
+  "commit": "3d25fc3a3b4e48b45edf725f97acb3faa8ddefc6",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -600,7 +600,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "91e4c2da09355d9bb77589586bbc9fa3e0e30a48b71ff850795561e6178a1709",
+      "sha256": "8cabca5c9b718035dbd844f2584ddf5854ecc6b6d7e5eff77244d1100058f99c",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -614,7 +614,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-01",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "2baa26c16ea3bbddedcf93f832e4994bc11f5e7af49af68c09450f4d7fbd385a",
