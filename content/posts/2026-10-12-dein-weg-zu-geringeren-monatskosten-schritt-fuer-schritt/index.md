@@ -1,5 +1,5 @@
 ---
-title: "Dein Weg zu geringeren Monatskosten – Schritt für Schritt"
+title: "Dein Weg zu geringeren: Monatskosten – Schritt für Schritt"
 description: "Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick."
 date: 2026-10-12T11:17:49Z
 draft: true
