@@ -1,0 +1,720 @@
+#!/usr/bin/env python3
+"""Tests für das Suchradar (scripts/suchradar.py + scripts/serp_anbieter.py).
+
+Hintergrund: Seit dem 12.10.2026 erfasst das Suchradar Suchergebnisse ohne
+API-Anbindung – ohne Schlüssel, ohne Konto, ohne Kosten. Weil es fremde
+Server abfragt und Befunde erzeugt, an denen redaktionelle Entscheidungen
+hängen, nageln diese Tests die Betriebsversprechen fest:
+
+  1. Budget:  kein Lauf reißt das Tageslimit – auch nicht im Fehlerfall.
+  2. Cache:   ein Nachlauf am selben Tag kostet kein Abrufbudget.
+  3. Kette:   ein ausgefallener Anbieter ist eine Umschaltung, kein Abbruch.
+  4. Stille Leere: liefert niemand etwas, ist der Lauf rot (Exit 3).
+  5. Probelauf: `--dry-run` schreibt weder Zustand noch Bericht.
+  6. Isolation: Tests berühren data/suchradar/ nicht.
+  7. Parser:  Anzeigen fallen raus, Umleitungen werden ausgepackt,
+              Titel sind keine Adressen.
+  8. Sperre:  bezahlte Anbieter bleiben ohne Freigabe unbrauchbar.
+
+Läuft deterministisch ohne Netz:
+    python3 -m unittest scripts.tests.test_suchradar
+"""
+from __future__ import annotations
+
+import json
+import os
+import shutil
+import sys
+import tempfile
+import unittest
+from datetime import timedelta
+from pathlib import Path
+from unittest.mock import patch
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+import serp_anbieter as sa      # noqa: E402
+import suchradar as sr          # noqa: E402
+
+PROBEN = Path(__file__).resolve().parent / "serp_proben"
+
+
+def probe(name: str) -> str:
+    return (PROBEN / name).read_text(encoding="utf-8")
+
+
+def treffer(url: str, rang: int, domaene: str = "", titel: str = "",
+            merkmale: list | None = None, anfrage: str = "strom") -> dict:
+    """Ein Treffer im Normalformat – für die Auswertungstests."""
+    return sa.normalisieren(
+        anfrage=anfrage, url=url, titel=titel or f"Titel {rang}",
+        beschreibung="Beschreibung", rang=rang, anbieter="mojeek",
+        merkmale=merkmale or [])
+
+
+class SandboxFall(unittest.TestCase):
+    """Lenkt alle Schreibpfade des Suchradars in ein Wegwerfverzeichnis.
+
+    Ohne diese Umlenkung würde jeder Testlauf data/suchradar/ der
+    Arbeitskopie beschreiben – und ein Test, der Produktionszustand
+    verändert, ist kein Test mehr, sondern ein Seiteneffekt. Genau diese
+    Klasse von Fehler prüft das Repo unter C27.
+    """
+
+    def setUp(self):
+        self.temp = Path(tempfile.mkdtemp(prefix="suchradar-test-"))
+        self._pfade = {
+            "ZUSTAND": sr.ZUSTAND,
+            "CACHE_VERZEICHNIS": sr.CACHE_VERZEICHNIS,
+            "QUOTEN_DATEI": sr.QUOTEN_DATEI,
+            "INSTANZEN_DATEI": sr.INSTANZEN_DATEI,
+            "VERLAUF_DATEI": sr.VERLAUF_DATEI,
+            "RANKING_DATEI": sr.RANKING_DATEI,
+            "RANKING_VERLAUF": sr.RANKING_VERLAUF,
+            "WETTBEWERB_DATEI": sr.WETTBEWERB_DATEI,
+            "ERGEBNIS_DATEI": sr.ERGEBNIS_DATEI,
+            "COCKPIT": sr.COCKPIT,
+            "KONFIG": sr.KONFIG,
+        }
+        sr.ZUSTAND = self.temp / "zustand"
+        sr.CACHE_VERZEICHNIS = sr.ZUSTAND / "cache"
+        sr.QUOTEN_DATEI = sr.ZUSTAND / "quota.json"
+        sr.INSTANZEN_DATEI = sr.ZUSTAND / "instanzen.json"
+        sr.VERLAUF_DATEI = sr.ZUSTAND / "verlauf.jsonl"
+        sr.RANKING_DATEI = sr.ZUSTAND / "rankings.json"
+        sr.RANKING_VERLAUF = sr.ZUSTAND / "rankings.jsonl"
+        sr.WETTBEWERB_DATEI = sr.ZUSTAND / "wettbewerb.json"
+        sr.ERGEBNIS_DATEI = sr.ZUSTAND / "letzte_ergebnisse.json"
+        sr.COCKPIT = self.temp / "SUCHRADAR-STATUS.md"
+        sr.KONFIG = self.temp / "suchradar.yaml"
+
+    def tearDown(self):
+        for name, wert in self._pfade.items():
+            setattr(sr, name, wert)
+        shutil.rmtree(self.temp, ignore_errors=True)
+
+    def konfig(self, **uebersteuerung) -> dict:
+        return {**sr.VORGABEN, **uebersteuerung}
+
+
+# ====================================================================
+#  KONFIGURATION
+# ====================================================================
+class TestKonfiguration(SandboxFall):
+
+    def test_fehlende_ssot_faellt_auf_vorgaben_zurueck(self):
+        konfig = sr.lade_konfiguration(self.temp / "gibt-es-nicht.yaml")
+        self.assertEqual(konfig["eigene_domaene"], "franksfinanzcheck.de")
+        self.assertIn("fehlt", konfig.get("_hinweis", ""))
+
+    def test_kaputte_ssot_faellt_auf_vorgaben_zurueck(self):
+        pfad = self.temp / "kaputt.yaml"
+        pfad.write_text("version: 1\n  fehlerhafte: einrückung\n\ttab",
+                        encoding="utf-8")
+        konfig = sr.lade_konfiguration(pfad)
+        self.assertEqual(konfig["max_treffer"], sr.VORGABEN["max_treffer"])
+        self.assertEqual(konfig.get("_hinweis"), "SSOT unlesbar")
+
+    def test_werte_aus_der_ssot_setzen_sich_durch(self):
+        pfad = self.temp / "eigen.yaml"
+        pfad.write_text("max_treffer: 5\neigene_domaene: beispiel.de\n",
+                        encoding="utf-8")
+        konfig = sr.lade_konfiguration(pfad)
+        self.assertEqual(konfig["max_treffer"], 5)
+        self.assertEqual(konfig["eigene_domaene"], "beispiel.de")
+
+    def test_reale_ssot_ist_lesbar_und_vollstaendig(self):
+        """Die ausgelieferte data/suchradar.yaml muss dem Vertrag genügen."""
+        konfig = sr.lade_konfiguration(sr.ROOT / "data" / "suchradar.yaml")
+        self.assertEqual(konfig["eigene_domaene"], "franksfinanzcheck.de")
+        self.assertGreater(konfig["max_abfragen_pro_tag"], 0)
+        self.assertTrue(konfig["reihenfolge"])
+        self.assertTrue(konfig["searxng_instanzen"])
+        # Nur schlüssellose Anbieter dürfen in der Standardkette stehen.
+        for anbieter in konfig["reihenfolge"]:
+            self.assertTrue(
+                sa.ANBIETER[anbieter]["schluessellos"],
+                f"Bezahlter Anbieter `{anbieter}` in der Standardkette")
+
+
+# ====================================================================
+#  ANFRAGEN
+# ====================================================================
+class TestAnfragen(SandboxFall):
+
+    def test_deterministisch_und_entdoppelt(self):
+        konfig = self.konfig(anfragen=["Stromkosten senken", "stromkosten  SENKEN!",
+                                       "Notgroschen aufbauen"])
+        erste = sr.ermittle_anfragen(konfig)
+        zweite = sr.ermittle_anfragen(konfig)
+        self.assertEqual(erste, zweite)
+        normiert = [sr.schlank(e["anfrage"]) for e in erste]
+        self.assertEqual(len(normiert), len(set(normiert)))
+
+    def test_anfragenlimit_wird_gehalten(self):
+        konfig = self.konfig(max_anfragen_pro_lauf=4,
+                             anfragen=[f"begriff nummer {i}" for i in range(40)],
+                             schluesselbegriffe_aus_themenpool=False)
+        self.assertLessEqual(len(sr.ermittle_anfragen(konfig)), 4)
+
+    def test_eigene_marke_ist_immer_dabei(self):
+        konfig = self.konfig(anfragen=[], schluesselbegriffe_aus_themenpool=False)
+        begriffe = [e["anfrage"] for e in sr.ermittle_anfragen(konfig)]
+        self.assertIn("franksfinanzcheck.de", begriffe)
+
+    def test_prioritaet_sortiert_vor(self):
+        konfig = self.konfig(anfragen=[{"anfrage": "niedrig", "prioritaet": 0.1},
+                                       {"anfrage": "hoch", "prioritaet": 0.9}],
+                             schluesselbegriffe_aus_themenpool=False)
+        ergebnis = sr.ermittle_anfragen(konfig)
+        selbst = [e["anfrage"] for e in ergebnis]
+        self.assertLess(selbst.index("hoch"), selbst.index("niedrig"))
+
+    def test_themenpool_liefert_begriffe_aus_dem_repo(self):
+        begriffe = sr._themenpool_begriffe(sr.ROOT, 5)
+        # Der Pool hat Schlüsselbegriffe; leer hieße: die Anbindung ist tot.
+        self.assertTrue(begriffe, "Themenpool liefert keine Schlüsselbegriffe")
+        self.assertLessEqual(len(begriffe), 5)
+
+    def test_themenpool_auswahl_ist_datumsstabil(self):
+        erste = sr._themenpool_begriffe(sr.ROOT, 5)
+        zweite = sr._themenpool_begriffe(sr.ROOT, 5)
+        self.assertEqual(erste, zweite)
+
+    def test_schlank_normalisiert(self):
+        self.assertEqual(sr.schlank("  Strom­kosten  SENKEN! "), "stromkosten senken")
+
+
+# ====================================================================
+#  ZWISCHENSPEICHER
+# ====================================================================
+class TestZwischenspeicher(SandboxFall):
+
+    def opts(self, **uebersteuerung) -> dict:
+        """Cache-relevante Optionen – dieselbe Quelle wie im Code.
+
+        Ein handgebauter Ausschnitt driftet vom echten Schlüssel ab; der
+        Test wäre dann grün, während der Cache im Betrieb nie trifft.
+        """
+        return {**sr.cache_relevante_optionen(self.konfig()), **uebersteuerung}
+
+    def test_rundlauf(self):
+        liste = [treffer("https://a.de/", 1)]
+        sr.cache_schreiben("strom", self.opts(), liste, "mojeek")
+        self.assertEqual(sr.cache_lesen("strom", self.opts(), 18), liste)
+
+    def test_anderer_suchbegriff_trifft_den_cache_nicht(self):
+        sr.cache_schreiben("strom", self.opts(), [treffer("https://a.de/", 1)], "mojeek")
+        self.assertIsNone(sr.cache_lesen("gas", self.opts(), 18))
+
+    def test_anderes_land_trifft_den_cache_nicht(self):
+        sr.cache_schreiben("strom", self.opts(), [treffer("https://a.de/", 1)], "mojeek")
+        self.assertIsNone(sr.cache_lesen("strom", self.opts(land="at"), 18))
+
+    def test_abgelaufener_eintrag_zaehlt_nicht(self):
+        sr.CACHE_VERZEICHNIS.mkdir(parents=True, exist_ok=True)
+        alt = {"anfrage": "strom", "anbieter": "mojeek",
+               "zeitstempel": (sr.berlin_now() - timedelta(hours=99)).isoformat(),
+               "treffer": [treffer("https://alt.de/", 1)]}
+        (sr.CACHE_VERZEICHNIS
+         / f"{sr.cache_schluessel('strom', self.opts())}.json").write_text(
+            json.dumps(alt), encoding="utf-8")
+        self.assertIsNone(sr.cache_lesen("strom", self.opts(), 18))
+
+    def test_stunden_null_schaltet_den_cache_ab(self):
+        sr.cache_schreiben("strom", self.opts(), [treffer("https://a.de/", 1)], "mojeek")
+        self.assertIsNone(sr.cache_lesen("strom", self.opts(), 0))
+
+    def test_kaputter_cache_wird_ignoriert_statt_zu_krachen(self):
+        sr.CACHE_VERZEICHNIS.mkdir(parents=True, exist_ok=True)
+        pfad = (sr.CACHE_VERZEICHNIS
+                / f"{sr.cache_schluessel('strom', self.opts())}.json")
+        pfad.write_text("{ kein json", encoding="utf-8")
+        self.assertIsNone(sr.cache_lesen("strom", self.opts(), 18))
+
+    def test_cache_raeumen_loescht_nur_altes(self):
+        sr.cache_schreiben("frisch", self.opts(), [treffer("https://a.de/", 1)], "mojeek")
+        sr.CACHE_VERZEICHNIS.mkdir(parents=True, exist_ok=True)
+        alt = sr.CACHE_VERZEICHNIS / "alt.json"
+        alt.write_text(json.dumps({"zeitstempel": "2020-01-01T00:00:00+02:00",
+                                   "treffer": []}), encoding="utf-8")
+        self.assertGreaterEqual(sr.cache_raeumen(), 1)
+        self.assertFalse(alt.exists())
+        self.assertIsNotNone(sr.cache_lesen("frisch", self.opts(), 18))
+
+    def test_suchen_und_cache_teilen_denselben_schluessel(self):
+        """Der Fehler, den der erste Entwurf hatte.
+
+        `suchen()` baute seinen Schlüssel aus der vollen Optionen-Menge,
+        `lauf()` aus einem handgebauten Ausschnitt. Beide waren für sich
+        richtig – und trafen einander nie.
+        """
+        konfig = self.konfig()
+        liste = [treffer("https://a.de/", 1)]
+        with patch.object(sa, "hole_treffer", return_value=liste):
+            sr.suchen("strom", konfig)
+            self.assertIsNotNone(
+                sr.cache_lesen("strom", sr.cache_relevante_optionen(konfig), 18),
+                "suchen() und lauf() nutzen unterschiedliche Cache-Schlüssel")
+
+
+# ====================================================================
+#  QUOTE
+# ====================================================================
+class TestQuote(SandboxFall):
+
+    def test_anbieterlimit_stoppt_den_abruf(self):
+        quota = {sr.heute(): {"searxng": 10 ** 6}}
+        self.assertEqual(sr.quota_verbleibend("searxng", self.konfig(), quota), 0)
+
+    def test_gesamtbudget_stoppt_auch_einen_frischen_anbieter(self):
+        """Der Fall, den der erste Entwurf falsch machte.
+
+        Ein überschrittenes Gesamtbudget wurde weggefiltert statt auf 0
+        geklemmt – und gab damit ausgerechnet dann unbegrenzt frei.
+        """
+        quota = {sr.heute(): {"searxng": 5, "mojeek": 5}}
+        konfig = self.konfig(max_abfragen_pro_tag=6)
+        self.assertEqual(sr.quota_verbleibend("duckduckgo", konfig, quota), 0)
+
+    def test_frischer_tag_hat_budget(self):
+        self.assertGreater(sr.quota_verbleibend("duckduckgo", self.konfig(), {}), 0)
+
+    def test_buchen_schreibt_dauerhaft(self):
+        sr.quota_buchen("mojeek", 2)
+        sr.quota_buchen("mojeek", 1)
+        daten = json.loads(sr.QUOTEN_DATEI.read_text(encoding="utf-8"))
+        self.assertEqual(daten[sr.heute()]["mojeek"], 3)
+
+    def test_alte_tage_werden_abgeraeumt(self):
+        daten = {f"2026-09-{d:02d}": {"mojeek": 1} for d in range(1, 20)}
+        daten[sr.heute()] = {"mojeek": 1}
+        sr.quota_buchen("mojeek", 1, quota=daten)
+        self.assertLessEqual(len(daten), 8)
+
+
+# ====================================================================
+#  INSTANZEN-GESUNDHEIT
+# ====================================================================
+class TestInstanzen(SandboxFall):
+
+    def test_bewaehrte_zuerst_ausfaelle_zuletzt(self):
+        zustand = {
+            "https://tot.example": {"erfolge": 0, "fehler": 9, "letzte_dauer_ms": 5},
+            "https://gut.example": {"erfolge": 9, "fehler": 0, "letzte_dauer_ms": 900},
+        }
+        reihe = sr.instanzen_sortieren(
+            ["https://tot.example", "https://neu.example", "https://gut.example"],
+            zustand)
+        self.assertEqual(reihe[0], "https://gut.example")
+        self.assertEqual(reihe[-1], "https://tot.example")
+        self.assertLess(reihe.index("https://neu.example"),
+                        reihe.index("https://tot.example"))
+
+    def test_bei_gleicher_quote_entscheidet_die_antwortzeit(self):
+        zustand = {
+            "https://langsam.example": {"erfolge": 5, "fehler": 0, "letzte_dauer_ms": 3000},
+            "https://schnell.example": {"erfolge": 5, "fehler": 0, "letzte_dauer_ms": 120},
+        }
+        reihe = sr.instanzen_sortieren(
+            ["https://langsam.example", "https://schnell.example"], zustand)
+        self.assertEqual(reihe[0], "https://schnell.example")
+
+    def test_doppelte_eintraege_werden_zusammengefasst(self):
+        reihe = sr.instanzen_sortieren(
+            ["https://a.example/", "https://a.example", "https://b.example"], {})
+        self.assertEqual(len(reihe), 2)
+
+    def test_erfolg_und_fehler_werden_vermerkt(self):
+        sr.instanz_merken("https://a.example", True, 120.0)
+        sr.instanz_merken("https://a.example", False, 0, "Zeitüberschreitung")
+        daten = json.loads(sr.INSTANZEN_DATEI.read_text(encoding="utf-8"))
+        self.assertEqual(daten["https://a.example"]["erfolge"], 1)
+        self.assertEqual(daten["https://a.example"]["fehler"], 1)
+        self.assertEqual(daten["https://a.example"]["letzter_fehler"], "Zeitüberschreitung")
+
+    def test_kaputte_instanzdatei_bricht_nichts_ab(self):
+        sr.ZUSTAND.mkdir(parents=True, exist_ok=True)
+        sr.INSTANZEN_DATEI.write_text("{ defekt", encoding="utf-8")
+        self.assertEqual(sr.instanzen_laden(), {})
+        self.assertEqual(len(sr.instanzen_sortieren(["https://a.example"], None)), 1)
+
+
+# ====================================================================
+#  SUCHLAUF (mit simuliertem Anbieter – kein Netz)
+# ====================================================================
+class TestSuchlauf(SandboxFall):
+
+    def _simuliere(self, trefferliste):
+        return patch.object(sa, "hole_treffer", return_value=trefferliste)
+
+    def test_erfolg_schreibt_zustand_und_cache(self):
+        liste = [treffer("https://franksfinanzcheck.de/x", 1, anfrage="strom")]
+        with self._simuliere(liste):
+            ergebnis = sr.suchen("strom", self.konfig())
+        self.assertEqual(ergebnis["status"], "ok")
+        self.assertEqual(len(ergebnis["treffer"]), 1)
+        self.assertTrue(sr.QUOTEN_DATEI.exists())
+        self.assertIsNotNone(
+            sr.cache_lesen("strom", sr.cache_relevante_optionen(self.konfig()), 18))
+
+    def test_zweiter_lauf_kommt_aus_dem_cache(self):
+        liste = [treffer("https://a.de/", 1)]
+        with self._simuliere(liste):
+            sr.suchen("strom", self.konfig())
+            zweiter = sr.suchen("strom", self.konfig())
+        self.assertEqual(zweiter["status"], "cache")
+        self.assertEqual(zweiter["quelle"], "cache")
+        # Genau ein Abruf gebucht, nicht zwei.
+        daten = json.loads(sr.QUOTEN_DATEI.read_text(encoding="utf-8"))
+        self.assertEqual(sum(daten[sr.heute()].values()), 1)
+
+    def test_dry_run_schreibt_nichts(self):
+        liste = [treffer("https://a.de/", 1)]
+        with self._simuliere(liste):
+            ergebnis = sr.suchen("strom", self.konfig(), trocken=True)
+        self.assertEqual(ergebnis["status"], "ok")
+        self.assertFalse(sr.QUOTEN_DATEI.exists())
+        self.assertIsNone(
+            sr.cache_lesen("strom", sr.cache_relevante_optionen(self.konfig()), 18))
+
+    def test_anbieterfehler_wird_zum_befund_statt_zum_abbruch(self):
+        with patch.object(sa, "hole_treffer",
+                          side_effect=sa.AnfrageFehler("alle Anbieter tot", 0)):
+            ergebnis = sr.suchen("strom", self.konfig())
+        self.assertEqual(ergebnis["status"], "fehler")
+        self.assertIn("tot", ergebnis["fehler"])
+        self.assertEqual(ergebnis["treffer"], [])
+
+    def test_instanz_wird_aus_dem_merkmal_gelesen(self):
+        liste = [treffer("https://a.de/", 1, merkmale=["instanz:https://searx.be"])]
+        with self._simuliere(liste):
+            sr.suchen("strom", self.konfig())
+        daten = json.loads(sr.INSTANZEN_DATEI.read_text(encoding="utf-8"))
+        self.assertEqual(daten["https://searx.be"]["erfolge"], 1)
+
+
+class TestLaufEndeZuEnde(SandboxFall):
+
+    def _antwort(self, anfrage: str, optionen=None):
+        """Simulierter Anbieter: eigene Domaene auf Rang 2."""
+        return [
+            treffer("https://www.verivox.de/strom/", 1, anfrage=anfrage,
+                    merkmale=["zusatzzeile"]),
+            treffer("https://franksfinanzcheck.de/strom-sparen/", 2, anfrage=anfrage),
+            treffer("https://www.check24.de/strom/", 3, anfrage=anfrage,
+                    merkmale=["sitelinks"]),
+        ]
+
+    def test_lauf_schreibt_alle_schichten(self):
+        anfragen = [{"anfrage": "Stromkosten senken", "herkunft": "test",
+                     "prioritaet": 1.0}]
+        with patch.object(sa, "hole_treffer", side_effect=self._antwort):
+            befund = sr.lauf(self.konfig(), anfragen)
+        self.assertEqual(befund["zaehlung"]["ok"], 1)
+        self.assertEqual(befund["treffer_gesamt"], 3)
+        for pfad in (sr.ERGEBNIS_DATEI, sr.RANKING_DATEI, sr.WETTBEWERB_DATEI,
+                     sr.VERLAUF_DATEI, sr.RANKING_VERLAUF):
+            self.assertTrue(pfad.exists(), f"{pfad.name} wurde nicht geschrieben")
+
+    def test_lauf_erkennt_die_eigene_sichtbarkeit(self):
+        anfragen = [{"anfrage": "Stromkosten senken", "herkunft": "test",
+                     "prioritaet": 1.0}]
+        with patch.object(sa, "hole_treffer", side_effect=self._antwort):
+            befund = sr.lauf(self.konfig(), anfragen)
+        rang = befund["rang"][0]
+        self.assertTrue(rang["sichtbar"])
+        self.assertEqual(rang["eigener_rang"], 2)
+        self.assertEqual(rang["quelle"], "mojeek")
+
+    def test_dry_run_schreibt_weder_zustand_noch_bericht(self):
+        anfragen = [{"anfrage": "Stromkosten senken", "herkunft": "test",
+                     "prioritaet": 1.0}]
+        with patch.object(sa, "hole_treffer", side_effect=self._antwort):
+            sr.lauf(self.konfig(), anfragen, trocken=True)
+        self.assertFalse(sr.ZUSTAND.exists())
+        self.assertFalse(sr.COCKPIT.exists())
+
+    def test_delta_gegen_den_letzten_stand_derselben_anfrage(self):
+        anfragen = [{"anfrage": "Stromkosten senken", "herkunft": "test",
+                     "prioritaet": 1.0}]
+        with patch.object(sa, "hole_treffer", side_effect=self._antwort):
+            sr.lauf(self.konfig(), anfragen)          # Rang 2 wird vermerkt
+        # Jetzt rutscht die eigene Seite auf Rang 5 ab.
+        def schlechter(anfrage, optionen=None):
+            return [treffer(f"https://www.gegner{i}.de/", i, anfrage=anfrage)
+                    for i in range(1, 5)] + \
+                   [treffer("https://franksfinanzcheck.de/x", 5, anfrage=anfrage)]
+        with patch.object(sa, "hole_treffer", side_effect=schlechter):
+            befund = sr.lauf(self.konfig(), anfragen, ohne_cache=True)
+        rang = befund["rang"][0]
+        self.assertEqual(rang["eigener_rang"], 5)
+        self.assertEqual(rang["vorher"], 2)
+        self.assertEqual(rang["delta"], -3)
+
+    def test_totalausfall_liefert_keine_treffer_und_meldet(self):
+        anfragen = [{"anfrage": "Stromkosten senken", "herkunft": "test",
+                     "prioritaet": 1.0}]
+        with patch.object(sa, "hole_treffer",
+                          side_effect=sa.AnfrageFehler("nichts geht", 0)):
+            befund = sr.lauf(self.konfig(), anfragen)
+            code = sr.main(["--anfrage", "Stromkosten senken", "--kein-bericht"])
+        self.assertEqual(befund["zaehlung"]["fehler"], 1)
+        self.assertEqual(befund["treffer_gesamt"], 0)
+        self.assertEqual(code, 3, "Ein Lauf ohne einen einzigen Treffer muss rot sein")
+
+    def test_budget_schuetzt_vor_zu_vielen_abfragen(self):
+        konfig = self.konfig(max_abfragen_pro_tag=2)
+        anfragen = [{"anfrage": f"begriff {i}", "herkunft": "test", "prioritaet": 1.0}
+                    for i in range(10)]
+        with patch.object(sa, "hole_treffer", side_effect=self._antwort):
+            befund = sr.lauf(konfig, anfragen)
+        abgerufen = befund["zaehlung"]["ok"] + befund["zaehlung"]["cache"]
+        self.assertLessEqual(abgerufen, 2)
+        self.assertGreater(befund["zaehlung"]["uebersprungen"], 0)
+
+
+# ====================================================================
+#  AUSWERTUNG
+# ====================================================================
+class TestAuswertung(SandboxFall):
+
+    def test_wettbewerbs_radar_trennt_haeufigkeit_und_tiefe(self):
+        liste = [
+            treffer("https://a.de/1", 9, anfrage="q1"),
+            treffer("https://a.de/2", 9, anfrage="q2"),
+            treffer("https://b.de/1", 1, anfrage="q1", merkmale=["sitelinks"]),
+        ]
+        radar = sr.wettbewerbs_radar(liste)
+        praef = {e["domaene"]: e for e in radar["domaenen"]}
+        self.assertEqual(praef["a.de"]["treffer"], 2)
+        self.assertEqual(praef["a.de"]["durchschnitts_rang"], 9.0)
+        self.assertEqual(praef["a.de"]["top3"], 0)
+        self.assertEqual(praef["b.de"]["top3"], 1)
+        self.assertEqual(praef["b.de"]["bester_rang"], 1)
+
+    def test_technik_merkmale_gehoeren_nicht_in_den_bericht(self):
+        liste = [treffer("https://a.de/1", 1, merkmale=[
+            "instanz:https://searx.be", "engine:google", "faq", "vorschaubild"])]
+        radar = sr.wettbewerbs_radar(liste)
+        self.assertNotIn("instanz:https://searx.be", radar["merkmale"])
+        self.assertNotIn("engine:google", radar["merkmale"])
+        self.assertIn("faq", radar["merkmale"])
+        self.assertIn("vorschaubild", radar["merkmale"])
+
+    def test_rang_verfolgung_ohne_eigenen_treffer(self):
+        ergebnisse = [{"anfrage": "irgendwas", "quelle": "mojeek",
+                       "treffer": [treffer("https://fremd.de/", 1)]}]
+        rang = sr.rang_verfolgung(ergebnisse, "franksfinanzcheck.de")
+        self.assertFalse(rang[0]["sichtbar"])
+        self.assertEqual(rang[0]["eigener_rang"], 0)
+
+    def test_teildomaene_zaehlt_nicht_als_eigene(self):
+        """`franksfinanzcheck.de.example` ist nicht die eigene Seite."""
+        ergebnisse = [{"anfrage": "x", "quelle": "mojeek",
+                       "treffer": [treffer("https://franksfinanzcheck.de.evil.example/", 1)]}]
+        rang = sr.rang_verfolgung(ergebnisse, "franksfinanzcheck.de")
+        self.assertFalse(rang[0]["sichtbar"])
+
+    def test_bericht_enthaelt_die_kernabschnitte(self):
+        befund = {"zeitstempel": sr.berlin_now().isoformat(),
+                  "zaehlung": {"ok": 2, "cache": 1, "fehler": 0, "uebersprungen": 0},
+                  "anfragen_geplant": 3, "treffer_gesamt": 6,
+                  "rang": [{"anfrage": "Stromkosten senken", "eigener_rang": 2,
+                            "vorher": 3, "delta": 1, "titel": "T", "url": "U",
+                            "quelle": "searxng", "sichtbar": True}],
+                  "wettbewerb": sr.wettbewerbs_radar(
+                      [treffer("https://a.de/1", 1, merkmale=["sitelinks"])]),
+                  "fehler": []}
+        text = sr.bericht(befund, sr.VORGABEN)
+        for abschnitt in ("SUCHRADAR", "## Lauf", "## Eigene Sichtbarkeit",
+                          "## Wettbewerb", "## Einordnung"):
+            self.assertIn(abschnitt, text)
+        self.assertIn("▲", text, "Verbesserung wird nicht angezeigt")
+        self.assertNotIn("data/suchradar/", text)
+
+    def test_bericht_schreibt_die_datei(self):
+        befund = {"zeitstempel": sr.berlin_now().isoformat(), "zaehlung": {},
+                  "anfragen_geplant": 0, "treffer_gesamt": 0, "rang": [],
+                  "wettbewerb": {"domaenen": [], "merkmale": {}}, "fehler": []}
+        pfad = sr.bericht_schreiben(befund, sr.VORGABEN)
+        self.assertTrue(pfad.exists())
+        self.assertIn("SUCHRADAR", pfad.read_text(encoding="utf-8"))
+
+
+# ====================================================================
+#  PARSER (echte HTML-Proben, kein Netz)
+# ====================================================================
+class TestParser(SandboxFall):
+
+    def test_duckduckgo_filtert_anzeigen_und_entpackt_umleitungen(self):
+        liste = sa.parse_duckduckgo("stromkosten senken", probe("duckduckgo.html"))
+        self.assertEqual(len(liste), 3, "Anzeige wurde mitgezählt oder Treffer fehlt")
+        for t in liste:
+            self.assertNotIn("duckduckgo.com", t["url"])
+            self.assertNotIn("uddg", t["url"])
+        self.assertTrue(any(t["domaene"] == "franksfinanzcheck.de" for t in liste))
+        self.assertEqual(liste[0]["rang"], 1)
+
+    def test_duckduckgo_snippet_wird_geglättet(self):
+        liste = sa.parse_duckduckgo("x", probe("duckduckgo.html"))
+        self.assertNotIn("\n", liste[0]["beschreibung"])
+        self.assertNotIn("<b>", liste[0]["beschreibung"])
+        self.assertIn("vergleichen", liste[0]["beschreibung"])
+
+    def test_searxng_titel_ist_keine_adresse(self):
+        """Regression gegen den Selektor-Fehler des ersten Entwurfs."""
+        liste = sa.parse_searxng("stromkosten senken", probe("searxng.html"))
+        self.assertEqual(len(liste), 3)
+        for t in liste:
+            self.assertTrue(t["titel"], "Titel ist leer")
+            self.assertNotEqual(t["titel"], t["anzeigedomaene"],
+                                "Titel ist die Adresse – Selektor-Reihenfolge")
+            self.assertNotIn("http", t["titel"])
+
+    def test_searxng_merkt_die_beteligten_suchmaschinen(self):
+        liste = sa.parse_searxng("x", probe("searxng.html"))
+        self.assertIn("engine:google", liste[0]["merkmale"])
+        self.assertIn("engine:bing", liste[0]["merkmale"])
+
+    def test_mojeek_filtert_den_eigenlink(self):
+        liste = sa.parse_mojeek("stromkosten senken", probe("mojeek.html"))
+        self.assertEqual(len(liste), 3, "Mojeek-Eigenlink zählt als Treffer")
+        self.assertTrue(all("mojeek.com" not in t["url"] for t in liste))
+        self.assertEqual(liste[1]["domaene"], "franksfinanzcheck.de")
+
+    def test_leeres_html_liefert_leere_liste_statt_fehler(self):
+        self.assertEqual(sa.parse_duckduckgo("x", ""), [])
+        self.assertEqual(sa.parse_searxng("x", ""), [])
+        self.assertEqual(sa.parse_mojeek("x", ""), [])
+
+    def test_scriptinhalt_wird_nicht_zum_snippet(self):
+        liste = sa.parse_duckduckgo("x", probe("duckduckgo.html"))
+        for t in liste:
+            self.assertNotIn("dataLayer", t["beschreibung"])
+            self.assertNotIn("dataLayer", t["titel"])
+
+
+# ====================================================================
+#  GATTER
+# ====================================================================
+class TestGatter(SandboxFall):
+
+    def test_bezahlte_anbieter_sind_gesperrt(self):
+        for anbieter in ("apify", "serpapi", "serper"):
+            erlaubt, grund = sa.pruefe_freigabe(anbieter)
+            self.assertFalse(erlaubt, f"`{anbieter}` ist ohne Freigabe nutzbar")
+            self.assertIn("serp_premium", grund)
+
+    def test_schluessellose_anbieter_brauchen_keine_freigabe(self):
+        for anbieter in ("searxng", "duckduckgo", "mojeek", "wikipedia"):
+            self.assertTrue(sa.pruefe_freigabe(anbieter)[0])
+
+    def test_unbekannter_anbieter_ist_gesperrt(self):
+        self.assertFalse(sa.pruefe_freigabe("erfundener_dienst")[0])
+
+    def test_ssrf_gatter_blockiert_fremde_ziele(self):
+        for url in ("http://169.254.169.254/latest/meta-data/",
+                    "file:///etc/passwd", "https://evil.example/search"):
+            self.assertFalse(sa.host_erlaubt(url), f"SSRF-Gatter lässt {url} durch")
+
+    def test_ssrf_gatter_lässt_bekannte_anbieter_durch(self):
+        self.assertTrue(sa.host_erlaubt("https://html.duckduckgo.com/html/?q=x"))
+        self.assertTrue(sa.host_erlaubt("https://www.mojeek.com/search?q=x"))
+
+    def test_konfigurierte_instanz_wird_freigegeben(self):
+        sa.instanzen_zulassen(["https://meine-instanz.example"])
+        self.assertTrue(sa.host_erlaubt("https://meine-instanz.example/search"))
+        sa.instanzen_zulassen([])
+
+    def test_kette_ueberspringt_gesperrte_anbieter(self):
+        """Auch mit gesetztem Token darf ein gesperrter Anbieter nicht laufen."""
+        umgebung = {"APIFY_TOKEN": "geheim"}
+        erlaubt, _ = sa.pruefe_freigabe("apify", umgebung)
+        self.assertFalse(erlaubt,
+                         "Ein gesetztes Token hebelt die Kostensperre aus")
+
+    def test_kette_faellt_durch_bis_zum_lieferanten(self):
+        aufrufe = []
+
+        def kaputt(anfrage, optionen):
+            aufrufe.append("kaputt")
+            raise sa.AnfrageFehler("ausgefallen", 0)
+
+        def heil(anfrage, optionen):
+            aufrufe.append("heil")
+            return [treffer("https://a.de/", 1)]
+
+        with patch.dict(sa.AUSFUEHRER, {"mojeek": kaputt, "wikipedia": heil}):
+            liste = sa.hole_treffer("strom", {"reihenfolge": ["mojeek", "wikipedia"]})
+        self.assertEqual(aufrufe, ["kaputt", "heil"])
+        self.assertEqual(len(liste), 1)
+
+    def test_leere_anfrage_wird_abgelehnt(self):
+        with self.assertRaises(ValueError):
+            sa.hole_treffer("   ")
+
+
+# ====================================================================
+#  CLI
+# ====================================================================
+class TestCli(SandboxFall):
+
+    def test_selftest_laueft_durch(self):
+        self.assertEqual(sr.selbsttest(), 0)
+        self.assertEqual(sa.selbsttest(), 0)
+
+    def test_status_ohne_lauf_meldet_statt_zu_krachen(self):
+        self.assertEqual(sr.main(["--status"]), 1)
+
+    def test_json_ausgabe_ist_maschinenlesbar(self):
+        import contextlib
+        import io
+        puffer = io.StringIO()
+        with patch.object(sa, "hole_treffer",
+                          return_value=[treffer("https://a.de/", 1)]):
+            with contextlib.redirect_stdout(puffer):
+                code = sr.main(["--anfrage", "Stromkosten senken",
+                                "--json", "--kein-bericht"])
+        self.assertEqual(code, 0)
+        daten = json.loads(puffer.getvalue())
+        self.assertEqual(daten["treffer_gesamt"], 1)
+        self.assertNotIn("ergebnisse", daten, "Rohdaten gehören nicht in die Ausgabe")
+
+    def test_probe_meldet_gruen_wenn_ein_anbieter_liefert(self):
+        def liefert(anfrage, optionen):
+            return [treffer("https://a.de/", 1)]
+
+        fakes = {aid: liefert for aid in sa.ANBIETER if sa.ANBIETER[aid]["schluessellos"]}
+        with patch.dict(sa.AUSFUEHRER, fakes):
+            befund = sr.probe(self.konfig(), "test")
+        ok = [e for e in befund["anbieter"] if e["status"] == "ok"]
+        self.assertEqual(len(ok), 4, "Nicht jeder schlüssellose Anbieter wurde gemessen")
+        self.assertTrue(all(e["treffer"] == 1 for e in ok))
+
+    def test_probe_meldet_rot_bei_totalausfall(self):
+        def kaputt(anfrage, optionen):
+            raise sa.AnfrageFehler("unerreichbar", 0)
+
+        fakes = {aid: kaputt for aid in sa.ANBIETER if sa.ANBIETER[aid]["schluessellos"]}
+        with patch.dict(sa.AUSFUEHRER, fakes):
+            befund = sr.probe(self.konfig(), "test")
+        selbst = [e for e in befund["anbieter"] if e["schluessellos"]]
+        self.assertTrue(all(e["status"] == "fehler" for e in selbst))
+        self.assertTrue(all("unerreichbar" in e["fehler"] for e in selbst))
+
+    def test_probe_nennt_gesperrte_anbieter_statt_sie_still_zu_uebergehen(self):
+        def liefert(anfrage, optionen):
+            return [treffer("https://a.de/", 1)]
+
+        fakes = {aid: liefert for aid in sa.ANBIETER}
+        with patch.dict(sa.AUSFUEHRER, fakes):
+            befund = sr.probe(self.konfig(), "test")
+        gesperrt = {e["anbieter"]: e["status"] for e in befund["anbieter"]
+                    if not e["freigegeben"]}
+        self.assertIn("apify", gesperrt)
+        self.assertEqual(gesperrt["apify"], "gesperrt")
+
+
+if __name__ == "__main__":
+    unittest.main()

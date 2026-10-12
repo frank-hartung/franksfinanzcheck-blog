@@ -129,6 +129,8 @@ npm run robustheit:check                              # Robustheit R1–R13: Sel
 npm run test:robustheit                               # Robustheit: Gate-Selbsttest + Unit-Tests + Verhalten im jsdom
 npm run test:suche                                    # Suche: jsdom + Suchindex-Wache (Selbsttest) + Python-Verträge (#644)
 npm run test:suche:browser                            # Suche im Chromium: Trefferregel, Datenschutz, Tastatur, Mobil
+npm run suchradar:probe                               # Suchradar: welcher Suchanbieter antwortet heute? (schlüssellos, 0 €)
+npm run test:suchradar                                # Suchradar: Selbsttest (13 Blöcke) + 68 Unit-Tests (Budget, Cache, Kette, Parser)
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
 npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (46 Regressionstests, C30)
@@ -263,6 +265,32 @@ Task-Limits, keine Kosten.
 - **Vor jedem Umbau am Regelwerk:** `npm run test:schaltwerk`, danach
   `python3 scripts/schaltwerk.py --dry-run`.
 - Cockpit: `SCHALTWERK-STATUS.md` · Anleitung: `docs/ANLEITUNG-SCHALTWERK.md`.
+
+## Suchradar: Suchergebnis-Erfassung ohne API (seit 12.10.2026)
+
+`scripts/suchradar.py` ist der blogeigene Nachbau des Apify-Actors
+`apify/google-search-scraper` – **ohne API-Anbindung**, ohne Schlüssel, ohne
+Kosten. Getaktet von `.github/workflows/suchradar.yml` (täglich 07:52 MESZ).
+
+- **Warum nicht google.com direkt:** Nutzungsvertrag, Rechenzentrums-IP mit
+  CAPTCHA-Antwort, verzerrte Treffer. Stattdessen Metasuche und offene
+  Indizes: `searxng` → `duckduckgo` → `mojeek` → `wikipedia`, alle
+  schlüssellos. Die Begründung im Einzelnen steht in
+  `scripts/serp_anbieter.py` (Modulkopf).
+- **Drei Schichten über dem Abruf:** Rang-Verfolgung (Delta gegen den
+  letzten Stand *derselben Anfrage*), Wettbewerbs-Radar (Häufigkeit und
+  Rangtiefe getrennt), Merkmal-Erkennung (Sonderflächen).
+- **Leitplanken (durch Selbsttest + 68 Unit-Tests erzwungen):** Tagesbudget
+  wird *vor* dem Abruf geprüft; kein Treffer → Exit 3 statt grünes
+  Schweigen; `--dry-run` schreibt nichts; Anzeigen zählen nicht;
+  DuckDuckGo-Umleitungen werden entpackt; bezahlte Anbieter (Apify,
+  SerpApi, serper.dev) brauchen Schlüssel **und** die Freigabe der
+  Kostensperre (Fläche `serp_premium`).
+- **Vor jedem Umbau an den Providern:** `npm run test:suchradar`. Die
+  Parser-Tests laufen gegen echte HTML-Proben in
+  `scripts/tests/serp_proben/` – fällt einer, ist die Probe veraltet.
+- Cockpit: `SUCHRADAR-STATUS.md` · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md` ·
+  Bericht: `SUCHRADAR-GOOGLE-SERP-NACHBAU-PREMIUM-2026-10-12.md`.
 
 ## Faktenfrische: Recherche pro Artikel (seit 27.09.2026)
 

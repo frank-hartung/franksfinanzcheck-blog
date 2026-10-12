@@ -1,0 +1,142 @@
+# ============================================================
+#  SUCHRADAR – Single Source of Truth der Suchergebnis-Erfassung
+#  ------------------------------------------------------------
+#  Eingerichtet 12.10.2026. Engine: scripts/suchradar.py
+#  Anbieter-Schicht: scripts/serp_anbieter.py
+#  Anleitung: docs/ANLEITUNG-SUCHRADAR.md
+#  Cockpit: SUCHRADAR-STATUS.md
+#
+#  WARUM DIESE DATEI EXISTIERT
+#  Gefordert war ein Nachbau des Apify-Actors
+#  `apify/google-search-scraper`, der OHNE API-Anbindung läuft – kein
+#  Schlüssel, kein Konto, keine Rechnung. Diese Datei ist der Teil davon,
+#  den man anfassen kann, ohne Code zu lesen: Welche Suchbegriffe, wie
+#  viele, in welcher Reihenfolge der Anbieter, über welche Instanzen.
+#
+#  WICHTIGSTE REGEL
+#  `max_abfragen_pro_tag` ist die Kostengrenze. Sie schützt nicht vor
+#  einer Rechnung (es gibt keine), sondern vor einem Amoklauf der
+#  Automatik: eine Endlosschleife, die fremde Server mit Anfragen
+#  überschüttet, ist ein Ruf- und ein Sperrproblem – nicht bloß Lärm.
+#  Der Zähler steht in data/suchradar/quota.json und stoppt den Lauf hart.
+# ============================================================
+
+version: 1
+stand: "2026-10-12"
+
+# ------------------------------------------------------------------
+#  ZIEL
+# ------------------------------------------------------------------
+# Wofür die Rang-Verfolgung misst. Ohne diesen Wert gibt es keine
+# „eigene Sichtbarkeit" im Cockpit – nur eine Liste fremder Seiten.
+eigene_domaene: "franksfinanzcheck.de"
+
+# ------------------------------------------------------------------
+#  SUCHRAUM
+# ------------------------------------------------------------------
+land: "de"
+sprache: "de"
+geraet: "desktop"
+
+# Treffer je Anfrage. Der Apify-Actor nennt das `maxItems`.
+max_treffer: 10
+
+# Anfragen je Lauf. Zusammen mit dem Tagesbudget die zweite Bremse:
+# 25 Anfragen × 1 Abruf = 25 Abrufe pro Tag, deutlich unter jedem Limit.
+max_anfragen_pro_lauf: 25
+
+# Tagesbudget über ALLE Anbieter. Hart durchgesetzt, fail-closed.
+max_abfragen_pro_tag: 120
+
+# Wie lange ein Ergebnis als frisch gilt. 18 h heißt: ein Nachlauf am
+# selben Tag kostet kein Abrufbudget, der Lauf am nächsten Morgen schon.
+zwischenspeicher_stunden: 18
+
+# Dieselbe Adresse nur einmal je Anfrage – sonst zählt die
+# Wettbewerbs-Auswertung Metasuch-Duplikate als Stärke.
+entdoppeln: true
+
+# ------------------------------------------------------------------
+#  ANBIETER-KETTE
+# ------------------------------------------------------------------
+# Reihenfolge = Ausweichtiefe. Der erste Anbieter, der liefert, gewinnt.
+# Nur schlüssellose Anbieter gehören hierher – die mit Schlüssel
+# (google_cse, brave, serper, serpapi, apify) brauchen zusätzlich die
+# Freigabe in data/kostensperre.yaml und laufen sonst nie.
+#
+#   searxng     Metasuche; bündelt u. a. den Google-Index. Primärquelle.
+#   duckduckgo  HTML-Endpunkt, eigener Index plus Bing.
+#   mojeek      unabhängiger Index – der Kontrollwert.
+#   wikipedia   Wissens-Rückfall, damit ein Lauf nie ganz leer ausgeht.
+reihenfolge:
+  - searxng
+  - duckduckgo
+  - mojeek
+  - wikipedia
+
+# Öffentliche SearXNG-Instanzen. Diese Liste VERFÄLLT: Instanzen kommen
+# und gehen. `python3 scripts/suchradar.py --probe` misst, welche heute
+# antworten, und data/suchradar/instanzen.json führt die Erfolgsquote.
+# Die Engine sortiert selbst nach – eine tote Instanz kostet also nur den
+# ersten Versuch, nicht den Lauf.
+# Aktuelle öffentliche Instanzen: https://searx.space
+searxng_instanzen:
+  - "https://searx.be"
+  - "https://search.bus-hit.me"
+  - "https://paulgo.io"
+  - "https://searx.tiekoetter.com"
+  - "https://opnxng.com"
+  - "https://priv.au"
+  - "https://search.mdosch.de"
+  - "https://baresearch.org"
+
+# ------------------------------------------------------------------
+#  SUCHBEGRIFFE
+# ------------------------------------------------------------------
+# Ergänzung aus data/topics.yaml. Der Pool wächst mit jedem neuen Thema,
+# und genau diese Themen sind es, für die Rang und Wettbewerb
+# interessieren. Die Auswahl ist datumsabhängig, aber deterministisch:
+# Der Lauf wandert Tag für Tag durch den Pool, derselbe Tag liefert
+# dieselbe Auswahl – auch im Nachvollzug.
+schluesselbegriffe_aus_themenpool: true
+schluesselbegriffe_hoechstens: 15
+
+# Vorrang-Liste. Diese Begriffe werden immer gemessen, jeden Tag.
+# `prioritaet` entscheidet bei knappem Budget, was zuerst drankommt.
+anfragen:
+  - anfrage: "Fixkosten senken"
+    prioritaet: 1.0
+  - anfrage: "Stromanbieter wechseln"
+    prioritaet: 1.0
+  - anfrage: "Gaskosten senken"
+    prioritaet: 0.9
+  - anfrage: "DSL Anbieter Vergleich"
+    prioritaet: 0.9
+  - anfrage: "Versicherungen kündigen"
+    prioritaet: 0.9
+  - anfrage: "Kontogebühren vermeiden"
+    prioritaet: 0.8
+  - anfrage: "Notgroschen aufbauen"
+    prioritaet: 0.8
+  - anfrage: "Kündigungsfristen Strom"
+    prioritaet: 0.8
+  - anfrage: "Mietwagen günstig buchen"
+    prioritaet: 0.7
+  - anfrage: "Haushaltsbudget Rechner"
+    prioritaet: 0.7
+  - anfrage: "FranksFinanzcheck"
+    prioritaet: 1.0
+
+# ------------------------------------------------------------------
+#  NICHT HIER, UND WARUM
+# ------------------------------------------------------------------
+# Keine API-Schlüssel. Der Auftrag war ausdrücklich „ohne
+# API-Anbindung". Die Adapter für google_cse, brave, serper, serpapi und
+# apify sind in scripts/serp_anbieter.py vollständig vorhanden, aber über
+# data/kostensperre.yaml (Fläche `serp_premium`) gesperrt. Sie brauchen
+# einen Schlüssel UND eine begründete Freigabe – ein vergessenes Secret
+# allein kann hier nichts auslösen.
+#
+# Kein direktes google.com-Scraping. Auch nicht als „nur mal testen".
+# Die Begründung steht in scripts/serp_anbieter.py: Nutzungsvertrag,
+# Rechenzentrums-IP mit CAPTCHA-Antwort, verzerrte Treffer.
