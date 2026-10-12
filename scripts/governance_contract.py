@@ -100,6 +100,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -2014,6 +2015,9 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c34_blustradius(script_texts, wflows, root=root)
     checks += c34_auslieferung_vor_siegel(script_texts, wflows, root=root)
     checks += c35_meldetakt_an_den_ausfall(script_texts, wflows, root=root)
+    checks += c36_nachsorge_beweist_die_kennzahl(
+        script_texts, root=root, python_bin=python_bin, quick=quick,
+        wflows=wflows)
     return checks
 
 
@@ -2173,6 +2177,196 @@ def c35_meldetakt_an_den_ausfall(script_texts, wflows, root=BLOG_DIR):
             out.append(("C35", f"scripts/tests/{name} fehlt – der Vertrag "
                                "‚Meldetakt an den Ausfall‘ wäre ungetestet "
                                "(#676)."))
+    return out
+
+
+# --- C36: Die Nachsorge beweist die Kennzahl (Issue #712, 12.10.2026) -------
+#
+# Befund: Der Governance-Report #712 meldete Woche für Woche dieselben neun
+# Entwürfe unter der Publish-Schwelle (Flesch 38,2 bis 56,4). Die Nachsorge
+# existierte – `endredaktion.py` prüft jeden Entwurf, kennt den Befund E6 und
+# ruft eine KI-Politur –, sie konnte die Zahl aber nicht bewegen:
+#
+#   1. `politur_pruefen()` verifizierte Links, Überschriften, Länge und
+#      Floskeln – NICHT die Lesbarkeit. Eine Antwort mit unverändert
+#      schlechter Flesch-Zahl galt als „sauber“, wurde geschrieben, der
+#      Entwurf blieb gelb und wurde nie freigegeben.
+#   2. Ein E6-Befund in ROT (Flesch < 45, hier: „Energie-Update“ mit 38,2)
+#      ergab „blockiert“; die Politur lief nur bei „optimieren“. Die rote
+#      Lesbarkeits-Klasse war damit eine Sackgasse ohne Ausweg.
+#   3. Für E6 gab es keinen deterministischen Fix – obwohl der Lesbarkeits-
+#      Heiler (WACHE-609) eine geprüfte Wirkungsprobe besitzt.
+#   4. Der Schreiber selbst (`news_writer.py`, Rolle „ChatGPT/News“) maß die
+#      Lesbarkeit nie: Der Artikel entstand unter der Schwelle und belastete
+#      drei Wachen später.
+#
+# Das ist dieselbe Bauart wie #609 und wird darum mit derselben Regel
+# geschlossen wie C25 – **eine Heilung ohne Wirkungsnachweis ist Papier**:
+#   a) Die Schwelle ist IMPORTIERT (`readability_check.NEW_FLESCH_MIN`),
+#      keine zweite Zahl im Haus (#585).
+#   b) `politur_pruefen()` misst die Lesbarkeit VORHER und NACHHER; eine
+#      Fassung unter der Schwelle wird verworfen, die Datei bleibt
+#      unangetastet (fail-closed, „nichts Halbfertiges“).
+#   c) Die rote Lesbarkeits-Klasse ist heilbar: E6 rot bekommt die Politur,
+#      weil die Klasse eine Wirkungsprobe trägt (C25).
+#   d) Deterministisch zuerst: E6 läuft über die Stufe A des Lesbarkeits-
+#      Heilers als BIBLIOTHEK – eine Satz-Zerlegung im Haus, nicht zwei.
+#   e) Der Schreiber prüft vor dem Schreiben (`lesbarkeit_sichern`), ehrlich
+#      einschließlich der Restlücke; der Heiler kennt die Nachsorge-Auswahl
+#      `--entwuerfe` (genau die `read_draft`-Klasse des Reports).
+#   f) Regressionstest: ein Vertrag ohne Test ist Prosa.
+C36_TESTS = ("test_endredaktion.py",)
+C36_SELFTEST_TAKT = "--selftest"
+# Die Kette, die die Nachsorge FAHREN muss: eine Auswahl ohne Aufrufer ist die
+# nächste „Deckung ohne Wirkung" (#609/#712) – sie sieht nur aus wie ein Weg.
+C36_KETTE_WORKFLOW = "content-engine-v2.yml"
+C36_KETTE_AUFRUF = "lesbarkeit_heiler.py --entwuerfe --fix"
+
+
+def _c36_funktionstext(quelltext: str, name: str) -> str:
+    """Quelltext EINER Funktion (bis zur nächsten Definition auf Spaltenebene)."""
+    m = re.search(rf"(?ms)^def {re.escape(name)}\(.*?(?=^\S)", quelltext)
+    return m.group(0) if m else ""
+
+
+def c36_nachsorge_beweist_die_kennzahl(script_texts, root=BLOG_DIR,
+                                       python_bin=None, quick=False,
+                                       wflows=None):
+    """Die Nachsorge muss die Kennzahl beweisen, für die sie gerufen wird."""
+    out = []
+    ed = script_texts.get("endredaktion.py", "")
+    news = script_texts.get("news_writer.py", "")
+    heiler = script_texts.get("lesbarkeit_heiler.py", "")
+    if not ed or not news or not heiler:
+        out.append(("C36", "endredaktion.py / news_writer.py / "
+                           "lesbarkeit_heiler.py nicht lesbar – der "
+                           "Wirkungsnachweis der Nachsorge ist nicht prüfbar."))
+        return out
+    # (a) Importierte Schwelle, keine eigene Zahl (Lehre #585).
+    if "NEW_FLESCH_MIN" not in ed or "LESBARKEITS_SCHWELLE" not in ed:
+        out.append(("C36", "scripts/endredaktion.py importiert die "
+                           "Lesbarkeits-Schwelle nicht – die Nachsorge prüfte "
+                           "gegen eine eigene Vorstellung (#712)."))
+    if re.search(r"LESBARKEITS_SCHWELLE\s*=\s*[0-9]", ed):
+        out.append(("C36", "scripts/endredaktion.py definiert die Flesch-"
+                           "Schwelle selbst – die importierte SSOT ist die "
+                           "eine Wahrheit (#585)."))
+    # (b) Der Sicherheitsvertrag der Politur misst die Wirkung – in BEIDEN
+    #     Richtungen (vorher/nachher) und fail-closed.
+    vertrag = _c36_funktionstext(ed, "politur_pruefen")
+    if "_flesch_body(alt)" not in vertrag or "_flesch_body(neu)" not in vertrag:
+        out.append(("C36", "scripts/endredaktion.py: `politur_pruefen` misst "
+                           "die Lesbarkeit nicht (vorher/nachher) – eine "
+                           "Politur ohne Messung ist Papier (#712)."))
+    if "LESBARKEITS_SCHWELLE" not in vertrag:
+        out.append(("C36", "scripts/endredaktion.py: `politur_pruefen` "
+                           "vergleicht nicht gegen die importierte Schwelle – "
+                           "die Wirkung bleibt unbelegt (#712)."))
+    # (c) Die rote Lesbarkeits-Klasse bekommt die Politur.
+    lauf = _c36_funktionstext(ed, "lauf")
+    if "heilbares_rot" not in lauf:
+        out.append(("C36", "scripts/endredaktion.py: E6 rot (Flesch < 45) "
+                           "läuft ohne Politur – die Lesbarkeits-Klasse wäre "
+                           "wieder eine Sackgasse (#712)."))
+    # (d) Deterministisch zuerst – über die BIBLIOTHEK des Heilers.
+    fixe = _c36_funktionstext(ed, "deterministische_fixes")
+    helfer_e6 = _c36_funktionstext(ed, "_lesbarkeit_deterministisch")
+    if '"E6"' not in fixe or "_lesbarkeit_deterministisch(" not in fixe:
+        out.append(("C36", "scripts/endredaktion.py: `deterministische_fixes` "
+                           "behandelt E6 nicht – die Lesbarkeit hätte keinen "
+                           "Fix ohne KI (#712)."))
+    if ("lesbarkeit_heiler.stufe_a" not in helfer_e6
+            or "verifiziere" not in helfer_e6):
+        out.append(("C36", "scripts/endredaktion.py: der Heiler läuft nicht "
+                           "als Bibliothek (Stufe A + Tor) – eine zweite "
+                           "Satz-Zerlegung im Haus wäre eine zweite Wahrheit "
+                           "(#585/#712)."))
+    # (e) Der Schreiber prüft, was über ihn entscheidet (Lehre #612).
+    if "def lesbarkeit_sichern(" not in news:
+        out.append(("C36", "scripts/news_writer.py misst die Lesbarkeit nicht "
+                           "vor dem Schreiben – Ausschuss entsteht im "
+                           "Generator (#712)."))
+    if "lesbarkeit_sichern(content" not in news:
+        out.append(("C36", "scripts/news_writer.py: `lesbarkeit_sichern` ist "
+                           "nicht verdrahtet – die Messung wäre toter Code "
+                           "(#712)."))
+    # (f) Der Heiler kennt die Nachsorge-Auswahl (die `read_draft`-Klasse).
+    if "def hole_entwuerfe(" not in heiler or '"--entwuerfe"' not in heiler:
+        out.append(("C36", "scripts/lesbarkeit_heiler.py: die Auswahl "
+                           "`--entwuerfe` (alle Entwürfe unter der Schwelle) "
+                           "fehlt – die gemeldete Klasse bliebe unbehandelt "
+                           "(#712)."))
+    # (f2) Die Kette ruft die Nachsorge wirklich – eine Auswahl, die niemand
+    #      fährt, ist die nächste „Deckung ohne Wirkung" (#609): Der Befund
+    #      aus #712 verschwände dann nur so lange, bis der Vorrat wächst.
+    kette = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(pfad) == C36_KETTE_WORKFLOW:
+            kette = inhalt or ""
+    if not kette:
+        kette = _read(os.path.join(root, ".github", "workflows",
+                                   C36_KETTE_WORKFLOW))
+    if C36_KETTE_AUFRUF not in kette:
+        out.append(("C36", f".github/workflows/{C36_KETTE_WORKFLOW} ruft die "
+                           "Nachsorge-Auswahl nicht "
+                           f"(`{C36_KETTE_AUFRUF}`) – die read_draft-Klasse "
+                           "hätte wieder keinen Aufrufer (#712)."))
+    # (g) Regressionstest – ein Vertrag ohne Test ist Prosa.
+    for name in C36_TESTS:
+        pfad = os.path.join(root, "scripts", "tests", name)
+        if not os.path.isfile(pfad):
+            out.append(("C36", f"scripts/tests/{name} fehlt – der Vertrag "
+                               "‚Die Nachsorge beweist die Kennzahl‘ wäre "
+                               "ungetestet (#712)."))
+            continue
+        try:
+            with open(pfad, encoding="utf-8") as fh:
+                test_text = fh.read()
+        except OSError:
+            continue
+        if "TestPoliturWirkung" not in test_text:
+            out.append(("C36", f"scripts/tests/{name}: die Wirkungs-Tests "
+                               "(`TestPoliturWirkung`) fehlen (#712)."))
+    # (g2) Die Sicherung des Schreibers ist getestet – ein Versprechen ohne
+    #      Test ist Prosa. Genau diese Lücke hat #712 offengelegt: Der
+    #      Schreiber maß nichts, und keine Prüfung fragte danach.
+    schreiber_test = os.path.join(root, "scripts", "tests",
+                                  "test_news_writer_lesbarkeit.py")
+    if not os.path.isfile(schreiber_test):
+        out.append(("C36", "scripts/tests/test_news_writer_lesbarkeit.py "
+                           "fehlt – die Lesbarkeits-Sicherung des Schreibers "
+                           "wäre ungetestet (#712)."))
+    else:
+        try:
+            with open(schreiber_test, encoding="utf-8") as fh:
+                test_text = fh.read()
+        except OSError:
+            test_text = ""
+        for pflicht in ("lesbarkeit_sichern", "NEW_FLESCH_MIN"):
+            if pflicht not in test_text:
+                out.append(("C36", f"test_news_writer_lesbarkeit.py prüft "
+                                   f"`{pflicht}` nicht – der Wirkungsvertrag "
+                                   "des Schreibers bleibt behauptet (#712)."))
+    # (h) Der scharfe Teil: der Selbsttest der Nachsorge läuft JETZT (Exit 0).
+    #     In `--quick` wird nur die Quelltext-Prüfung gefahren.
+    if quick:
+        return out
+    bin_ = python_bin or sys.executable or "python3"
+    try:
+        lauf_ergebnis = subprocess.run(
+            [bin_, os.path.join(root, "scripts", "endredaktion.py"),
+             C36_SELFTEST_TAKT],
+            cwd=root, capture_output=True, text=True, timeout=300)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        out.append(("C36", f"Endredaktions-Selbsttest nicht ausführbar "
+                           f"({exc.__class__.__name__}) – fail-closed."))
+        return out
+    if lauf_ergebnis.returncode != 0:
+        zeilen = ((lauf_ergebnis.stdout or "")
+                  + (lauf_ergebnis.stderr or "")).strip().splitlines()
+        out.append(("C36", "Endredaktions-Selbsttest ROT: "
+                           + (zeilen[-1][:160] if zeilen
+                              else f"Exit {lauf_ergebnis.returncode}")))
     return out
 
 
@@ -4106,6 +4300,24 @@ RULE_TEXT = {
            "Regeln versprechen. Der Job bleibt über den Daten-Befund rot "
            "(fail-closed, #634) – aber die Prüfung läuft (`if: ${{ !cancelled() "
            "}}`).",
+    "C36": "Die Nachsorge beweist die Kennzahl, für die sie gerufen wird: "
+           "Der Governance-Report #712 meldete Woche für Woche dieselben "
+           "Entwuerfe unter der Publish-Schwelle (Flesch 38,2 bis 56,4). Die "
+           "Politur der Endredaktion verifizierte Links, Ueberschriften, "
+           "Laenge und Floskeln – aber nicht die Lesbarkeit; ein E6-Befund in "
+           "ROT (< 45) bekam gar keine Politur, weil nur ‚optimieren‘ sie "
+           "ausloeste, und ein deterministischer Fix fuer E6 existierte nicht. "
+           "Jetzt: importierte Schwelle (readability_check.NEW_FLESCH_MIN, eine "
+           "Zahl im Haus), Wirkungsnachweis im Sicherheitsvertrag (vorher/"
+           "nachher messen, unter der Schwelle verwerfen, Datei bleibt "
+           "byte-identisch), E6 rot ist heilbar (die Klasse traegt eine "
+           "Wirkungsprobe, C25), deterministisch zuerst ueber die Stufe A des "
+           "Lesbarkeits-Heilers als BIBLIOTHEK (keine zweite Satz-Zerlegung), "
+           "und der Schreiber selbst misst vor dem Schreiben "
+           "(`news_writer.lesbarkeit_sichern`). Dazu die Nachsorge-Auswahl "
+           "`lesbarkeit_heiler.py --entwuerfe` – genau die read_draft-Klasse, "
+           "die der Report nennt. Dieselbe Lehre wie #609: eine Heilung ohne "
+           "Wirkungsnachweis ist Papier.",
     "C35": "Der Meldetakt ist an den Ausfall gebunden, nicht an den Kalender: "
            "Die Wache misst die Ausfall-Klasse STUENDLICH (:05 UTC) und der "
            "taegliche Voll-Lauf (08:30 UTC) bleibt. Der Ausfall-Takt ist "
@@ -4161,6 +4373,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                 "selbst geheilt), und ein blockierter Kandidat friert nicht die "
                 "ganze Auslieferung ein (Haus-Templates aus der SSOT statt aus "
                 "einer Whitelist)",
+         "C36": "Die Nachsorge beweist die Kennzahl (Wirkungsnachweis der "
+                "Politur, E6 rot ist heilbar, Schreiber misst vor dem "
+                "Schreiben, Nachsorge-Auswahl --entwuerfe)",
          "C35": "Meldetakt an den Ausfall (stündliche Ausfall-Erkennung, "
                 "read-only-Takt, Stunden-Leiter statt 72-h-Schweigen)"}
 
@@ -5500,7 +5715,117 @@ def _selftest():
         failures.append("C35: eine als Grün getarnte Nicht-Messung bleibt "
                         "unentdeckt (C2/#676).")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C35 mit Kunstbefunden: Fehler "
+    # --- C36: Die Nachsorge beweist die Kennzahl (Issue #712) --------------
+    # Die Lehre ist dieselbe wie bei C25 (#609): Eine Heilung, deren Wirkung
+    # niemand messen kann, ist Papier. Vier Sabotagen, ein Ergebnis:
+    echte_c36 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in ("endredaktion.py", "news_writer.py",
+                              "lesbarkeit_heiler.py")}
+    if c36_nachsorge_beweist_die_kennzahl(echte_c36, root=BLOG_DIR,
+                                          quick=True):
+        failures.append("C36: der echte Zustand wird beanstandet: "
+                        f"{c36_nachsorge_beweist_die_kennzahl(echte_c36, root=BLOG_DIR, quick=True)}")
+
+    # (a) Der Sicherheitsvertrag verliert den Wirkungsnachweis: Die Politur
+    #     darf wieder schreiben, was die Schwelle nicht erreicht (#712).
+    blinde_politur = dict(echte_c36, **{
+        "endredaktion.py": echte_c36["endredaktion.py"].replace(
+            "    alt_f, neu_f = _flesch_body(alt), _flesch_body(neu)\n",
+            "", 1)})
+    if blinde_politur["endredaktion.py"] == echte_c36["endredaktion.py"]:
+        failures.append("C36: Sabotage ‚Wirkungsmessung entfernt‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in endredaktion.py).")
+    elif not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            blinde_politur, root=BLOG_DIR, quick=True)
+            if "misst die Lesbarkeit nicht" in f[1]]:
+        failures.append("C36: eine Politur ohne Wirkungsmessung bleibt "
+                        "unentdeckt (#712).")
+
+    # (b) Die Nachsorge führt eine eigene Schwelle (zweite Wahrheit, #585).
+    eigene_zahl = dict(echte_c36, **{
+        "endredaktion.py": echte_c36["endredaktion.py"].replace(
+            "LESBARKEITS_SCHWELLE = readability_check.NEW_FLESCH_MIN",
+            "LESBARKEITS_SCHWELLE = 60.0", 1)})
+    if eigene_zahl["endredaktion.py"] == echte_c36["endredaktion.py"]:
+        failures.append("C36: Sabotage ‚eigene Schwelle‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in endredaktion.py).")
+    elif not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            eigene_zahl, root=BLOG_DIR, quick=True)
+            if "definiert die Flesch-" in f[1]]:
+        failures.append("C36: eine zweite Lesbarkeits-Zahl bleibt unentdeckt "
+                        "(#585).")
+
+    # (c) E6 rot fällt aus der Politur: die Sackgasse wäre zurück.
+    ohne_heilbar = dict(echte_c36, **{
+        "endredaktion.py": echte_c36["endredaktion.py"].replace(
+            'heilbares_rot = bool(rote_codes) and rote_codes <= {"E6"}',
+            "heilbares_rot = False", 1)})
+    if ohne_heilbar["endredaktion.py"] == echte_c36["endredaktion.py"]:
+        failures.append("C36: Sabotage ‚E6 rot ohne Politur‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in endredaktion.py).")
+    elif not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            ohne_heilbar, root=BLOG_DIR, quick=True)
+            if "läuft ohne Politur" in f[1]]:
+        failures.append("C36: die rote Lesbarkeits-Sackgasse bleibt "
+                        "unentdeckt (#712).")
+
+    # (d) Der Schreiber misst nicht mehr vor dem Schreiben (#612-Lehre).
+    blinder_schreiber = dict(echte_c36, **{
+        "news_writer.py": echte_c36["news_writer.py"].replace(
+            "        content, flesch, lesbarkeit_status = lesbarkeit_sichern"
+            "(content, slug)",
+            "        flesch, lesbarkeit_status = None, 'ungeprüft'", 1)})
+    if blinder_schreiber["news_writer.py"] == echte_c36["news_writer.py"]:
+        failures.append("C36: Sabotage ‚Schreiber misst nicht‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in news_writer.py).")
+    elif not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            blinder_schreiber, root=BLOG_DIR, quick=True)
+            if "nicht verdrahtet" in f[1]]:
+        failures.append("C36: ein Schreiber ohne Lesbarkeits-Messung bleibt "
+                        "unentdeckt (#712).")
+
+    # (e) Die Nachsorge-Auswahl des Heilers verschwindet: die gemeldete
+    #     read_draft-Klasse hätte wieder keinen Adressaten.
+    ohne_auswahl = dict(echte_c36, **{
+        "lesbarkeit_heiler.py": echte_c36["lesbarkeit_heiler.py"].replace(
+            "def hole_entwuerfe(", "def hole_entwuerfe_aus(", 1)})
+    if ohne_auswahl["lesbarkeit_heiler.py"] == echte_c36["lesbarkeit_heiler.py"]:
+        failures.append("C36: Sabotage ‚--entwuerfe entfernt‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in lesbarkeit_heiler.py).")
+    elif not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            ohne_auswahl, root=BLOG_DIR, quick=True)
+            if "--entwuerfe" in f[1]]:
+        failures.append("C36: eine fehlende Nachsorge-Auswahl bleibt "
+                        "unentdeckt (#712).")
+
+    # (f) Der Test der Schreibersicherung verschwindet: das Versprechen wäre
+    #     wieder Prosa (kein anderer Vertrag prüft diese Datei).
+    leerer_wurzel = tempfile.mkdtemp(prefix="c36-ohne-test-")
+    if not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            echte_c36, root=leerer_wurzel, quick=True)
+            if "test_news_writer_lesbarkeit.py fehlt" in f[1]]:
+        failures.append("C36: eine fehlende Schreibersicherungs-Testdatei "
+                        "bleibt unentdeckt (#712).")
+
+    # (f) Die Kette verliert den Aufruf der Nachsorge: dann fährt niemand die
+    #     read_draft-Klasse, und der Report meldet sie Woche für Woche erneut.
+    kette_wurzel = tempfile.mkdtemp(prefix="c36-ohne-kette-")
+    os.makedirs(os.path.join(kette_wurzel, "scripts", "tests"))
+    for name in ("test_endredaktion.py", "test_news_writer_lesbarkeit.py"):
+        with open(os.path.join(kette_wurzel, "scripts", "tests", name), "w",
+                  encoding="utf-8") as fh:
+            fh.write(_read(os.path.join(BLOG_DIR, "scripts", "tests", name)))
+    os.makedirs(os.path.join(kette_wurzel, ".github", "workflows"))
+    with open(os.path.join(kette_wurzel, ".github", "workflows",
+                           C36_KETTE_WORKFLOW), "w", encoding="utf-8") as fh:
+        fh.write("# Sabotage: die Kette fährt die Nachsorge nicht.\n")
+    if not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            echte_c36, root=kette_wurzel, quick=True)
+            if "ruft die Nachsorge-Auswahl nicht" in f[1]]:
+        failures.append("C36: eine Kette ohne Nachsorge-Aufruf bleibt "
+                        "unentdeckt (#712).")
+
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C36 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

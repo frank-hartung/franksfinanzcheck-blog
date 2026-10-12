@@ -105,6 +105,11 @@ NUTZUNG
                                     # alle Gate-Holds der Lesbarkeits-Klasse
     python3 scripts/lesbarkeit_heiler.py --blocked --fix
                                     # Reserve-Kandidaten laut readiness-Zertifikat
+    python3 scripts/lesbarkeit_heiler.py --entwuerfe --fix
+                                    # NACHSORGE: ALLE Entwürfe unter der
+                                    # Publish-Schwelle – die `read_draft`-Klasse
+                                    # des Governance-Reports (Issue #712).
+                                    # Ohne Kandidaten Exit 0 (Sweep, kein Fehler).
     python3 scripts/lesbarkeit_heiler.py --new-only --fix
                                     # Artikel des HEUTIGEN Datums (Live-Engine
                                     # Phase 2 – genau die Texte, die das Gate
@@ -669,6 +674,37 @@ def hole_neue() -> list[str]:
     return sorted(pfade)
 
 
+def hole_entwuerfe() -> list[str]:
+    """Alle Entwürfe UNTER der Publish-Schwelle – schlechteste zuerst.
+
+    Die vierte Quelle (Issue #712, 12.10.2026): Die Lesbarkeits-Wache führt
+    diese Dateien als AMBER (`read_draft` im Bestands-Gate), und der
+    Governance-Report meldet sie Woche für Woche namentlich. Bis hierhin
+    kannte der Heiler nur `--holds` (Gate-Park), `--blocked` (Reserve-
+    Zertifikat) und `--new-only` (Artikel des Tages): Entwürfe, die aus
+    einer anderen Rolle stammen und einfach „zu dicht“ liegen, hatte niemand
+    als Kandidaten – sie alterten im Vorrat, bis das Publish-Gate sie anließ.
+
+    Die Messung kommt aus der SSOT (`readability_check`, importierte
+    Schwelle) – keine zweite Formel, keine zweite Zahl.
+    """
+    import post_utils
+    treffer: list[tuple[float, str]] = []
+    for f in post_utils.list_post_paths():
+        try:
+            with open(f, encoding="utf-8") as fh:
+                rohtext = fh.read()
+        except OSError:  # noqa: PERF203 – eine unlesbare Datei kippt den Lauf nicht
+            continue
+        if not _ist_entwurf(rohtext):
+            continue
+        wert = flesch(rohtext, _slug_von(f))
+        if wert is None or wert >= MINDEST_FLESCH:
+            continue
+        treffer.append((wert, f))
+    return [f for _, f in sorted(treffer)]
+
+
 def hole_blocked() -> list[str]:
     """Reserve-Kandidaten laut Zertifikat (`data/reserve-readiness.json`)."""
     zertifikat = os.path.join(BLOG_DIR, "data", "reserve-readiness.json")
@@ -968,6 +1004,9 @@ def main(argv: list[str] | None = None) -> int:
                     help="alle Gate-Holds der Lesbarkeits-Klasse")
     ap.add_argument("--blocked", action="store_true",
                     help="Reserve-Kandidaten laut data/reserve-readiness.json")
+    ap.add_argument("--entwuerfe", action="store_true",
+                    help="ALLE Entwürfe unter der Publish-Schwelle "
+                         "(read_draft-Klasse der Lesbarkeits-Wache, #712)")
     ap.add_argument("--new-only", action="store_true",
                     help="Artikel des heutigen Datums (Live-Engine Phase 2)")
     ap.add_argument("--fix", action="store_true", help="schreiben (sonst Trockenlauf)")
@@ -1003,11 +1042,22 @@ def main(argv: list[str] | None = None) -> int:
         pfade += hole_holds()
     if args.blocked:
         pfade += hole_blocked()
+    if args.entwuerfe:
+        pfade += hole_entwuerfe()
     if args.new_only:
         pfade += hole_neue()
     if not pfade:
-        ap.error("Quelle fehlt: --file, --holds, --blocked oder --new-only "
-                 "(oder --selftest/--wirkungsprobe)")
+        # Ein SWEEP über den Vorrat ist auch dann ein Erfolg, wenn es nichts
+        # zu heilen gibt: Die Wochen-Nachsorge (Issue #712) läuft sonst bei
+        # gesundem Bestand jeden Lauf in einen Fehler. Die Auswahl-Modi mit
+        # explizitem Einzelziel (`--file`) bleiben streng.
+        if (args.entwuerfe and not (args.file or args.holds or args.blocked
+                                    or args.new_only)):
+            print("✅ Lesbarkeits-Nachsorge: kein Entwurf unter der Publish-"
+                  f"Schwelle {MINDEST_FLESCH:g} – nichts zu tun.")
+            return 0
+        ap.error("Quelle fehlt: --file, --holds, --blocked, --entwuerfe oder "
+                 "--new-only (oder --selftest/--wirkungsprobe)")
 
     berichte, befund = _verarbeite(sorted(dict.fromkeys(pfade)), fix=args.fix,
                                    ki=not args.keine_ki, max_n=args.max,
