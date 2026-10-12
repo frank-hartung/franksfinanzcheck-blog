@@ -9,6 +9,41 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: 'Aufpreis möglich: Das plant Apple beim neuen iPad mini'
+  url: https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag
+  quelle: heise online (Internet/Telekommunikation)
+  erfasst: '2026-10-12T21:17:05'
+  brief: 2026-10-12-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-12-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Wirtschafsnobelpreis geht an US-Ökonomen Robert E. Hall und Michael Woodford
+  url: https://www.spiegel.de/wirtschaft/wirtschafsnobelpreis-geht-an-us-oekonomen-robert-e-hall-und-michael-woodford-a-c5499b28-236f-4315-85ac-3563147ba06b#ref=rss
+  quelle: DER SPIEGEL – Wirtschaft
+  erfasst: '2026-10-12T21:17:05'
+  brief: 2026-10-12-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-12-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'Tabaksteuer in Deutschland: Union und SPD einigen sich auf höhere Preise'
+  url: https://www.spiegel.de/wirtschaft/tabaksteuer-in-deutschland-union-und-spd-einigen-sich-auf-hoehere-preise-a-09d7ff68-9e7d-42c3-bbec-36efb8cb08cc#ref=rss
+  quelle: DER SPIEGEL – Wirtschaft
+  erfasst: '2026-10-12T21:17:05'
+  brief: 2026-10-12-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-12-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: CDU will Stromsteuer absenken
+  url: https://www.tagesschau.de/inland/cdu-klausur-merz-hoppermann-100.html
+  quelle: Tagesschau – alle Meldungen
+  erfasst: '2026-10-12T21:17:05'
+  brief: 2026-10-12-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-12-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'Krieg gegen die Ukraine: Von "Energie-Waffenruhe" keine Spur'
+  url: https://www.tagesschau.de/ausland/europa/ukraine-energie-waffenruhe-100.html
+  quelle: Tagesschau – alle Meldungen
+  erfasst: '2026-10-12T21:17:05'
+  brief: 2026-10-12-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-12-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: Was die Metall-Tarifrunde so kompliziert macht
   url: https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-tarifverhandlungen-104.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -121,4 +156,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-07T09:10:22'
+zuletzt_ergaenzt: '2026-10-12T21:17:05'
