@@ -685,6 +685,11 @@ def r5_self_heal_candidates(candidates):
         if not r5.hard_r5_findings(text, os.path.join("content", "posts", slug, "index.md")):
             continue
         new_text, splits, warnings = r5.heal_text(text)
+        import editorial_review_gate
+        blocked = editorial_review_gate.automatic_change_findings(text, new_text)
+        if blocked:
+            print(f"  ⚠ {slug}: {blocked[0]}")
+            continue
         if splits and not DRY_RUN:
             with open(path, "w", encoding="utf-8") as fh:
                 fh.write(new_text)

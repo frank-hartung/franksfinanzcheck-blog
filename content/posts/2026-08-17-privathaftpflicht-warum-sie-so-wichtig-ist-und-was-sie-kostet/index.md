@@ -148,7 +148,7 @@ redaktionelle_pruefung:
       quellen: ["Q1", "Q3"]
 ---
 
-Privathaftpflicht im Check: Ein Moment der Unachtsamkeit reicht. Du bist kurz abgelenkt. Du rempelst jemanden an. Ein teures Gerät geht zu Bruch.
+Ein Moment der Unachtsamkeit reicht. Du bist kurz abgelenkt. Du rempelst jemanden an. Ein teures Gerät geht zu Bruch.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

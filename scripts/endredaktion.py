@@ -205,10 +205,20 @@ def artikel_laden(path: str) -> dict | None:
     }
 
 
-def artikel_speichern(artikel: dict) -> None:
+def artikel_speichern(artikel: dict) -> bool:
+    import editorial_review_gate
+    with open(artikel["path"], encoding="utf-8") as fh:
+        old = fh.read()
+    new = post_utils.join_article(artikel["fm"], artikel["body"],
+                                 artikel.get("prefix", ""))
+    blocked = editorial_review_gate.automatic_change_findings(old, new)
+    if blocked:
+        print(f"  ⚠ {artikel['slug']}: {blocked[0]}")
+        artikel.update(artikel_laden(artikel["path"]))
+        return False
     with open(artikel["path"], "w", encoding="utf-8") as fh:
-        fh.write(post_utils.join_article(artikel["fm"], artikel["body"],
-                                         artikel.get("prefix", "")))
+        fh.write(new)
+    return True
 
 
 def wartende_entwuerfe() -> list[dict]:
@@ -465,7 +475,8 @@ def _lesbarkeit_deterministisch(artikel: dict) -> str | None:
     neu_body = teile[2]
     vorher, nachher = _flesch_body(artikel["body"], slug), _flesch_body(neu_body, slug)
     artikel["body"] = neu_body
-    artikel_speichern(artikel)
+    if not artikel_speichern(artikel):
+        return None
     return (f"Lesbarkeits-Heiler Stufe A (Lexikon {protokoll.get('lexikon', 0)}, "
             f"Satzschnitte {protokoll.get('saetze', 0)}, "
             f"Absätze {protokoll.get('absaetze', 0)}) – Flesch "
@@ -512,8 +523,8 @@ def deterministische_fixes(artikel: dict, funde: list[dict]) -> list[str]:
             artikel["description"] = neu
             angewandt.append(f"Description → {len(neu)} Zeichen")
 
-    if angewandt:
-        artikel_speichern(artikel)
+    if angewandt and not artikel_speichern(artikel):
+        return []
     return angewandt
 
 
@@ -646,7 +657,8 @@ def ki_politur(artikel: dict, funde: list[dict], cfg: dict) -> tuple[bool, str]:
             print(f"  ⚠ Politur ({provider}) verworfen: {fehler}")
             continue
         artikel["body"] = antwort.strip()
-        artikel_speichern(artikel)
+        if not artikel_speichern(artikel):
+            return False, "YMYL-Schreibvertrag blockiert die Politur"
         return True, provider
     return False, "kein Anbieter bestand den Sicherheitsvertrag"
 
