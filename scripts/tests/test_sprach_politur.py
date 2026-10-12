@@ -15,6 +15,7 @@ Ausführung: python3 -m unittest discover -s scripts/tests
 import json
 import os
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -141,6 +142,14 @@ class GlattTests(unittest.TestCase):
 
 
 class KernVertragTests(unittest.TestCase):
+    def setUp(self):
+        # Der YMYL-Vertrag sperrt nicht lesbare Dateien bewusst. Diese Tests
+        # brauchen daher einen echten, unversiegelten Artikel statt /tmp-Altlasten.
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.path = str(Path(tmp.name) / "index.md")
+        Path(self.path).write_text("---\ntitle: Test\ndraft: true\n---\nText.\n", encoding="utf-8")
+
     def test_identity_fund_ist_kein_fund(self):
         rules = [("T1", __import__("re").compile(r"\bGeld\b"),
                   (lambda m: "Geld"), "identity")]
@@ -156,7 +165,7 @@ class KernVertragTests(unittest.TestCase):
         self.assertEqual(sprachkern.unprotect(masked, origs), text)
 
     def test_write_verified_blockt_linkverlust(self):
-        a = {"content": "Sieh [an](/x/).", "path": "/tmp/sprachkern_test.md"}
+        a = {"content": "Sieh [an](/x/).", "path": self.path}
         ok, grund = sprachkern.write_verified(a, "Sieh an.", "test")
         self.assertFalse(ok)
         self.assertIn("Link", grund)
@@ -165,7 +174,7 @@ class KernVertragTests(unittest.TestCase):
         """Issue #482: keine Schrift darf eine NEUE Ruine (R11–R14) einführen."""
         a = {"content": "Nutze im kommenden Jahr gezielt hohe "
                         "Mindestbestellwerte für deine Bestellungen.",
-             "path": "/tmp/sprachkern_test.md"}
+             "path": self.path}
         ok, grund = sprachkern.write_verified(
             a, "Nutze 20 26 gezielt hohe Mindestbestellwerte für deine "
                "Bestellungen.", "test")
@@ -176,7 +185,7 @@ class KernVertragTests(unittest.TestCase):
     def test_write_verified_laesst_ruinenheilung_zu(self):
         """Bestehende Ruinen dürfen geheilt werden – keine Einfrierung."""
         a = {"content": "Du bist der 0 am deutschen Strommarkt.",
-             "path": "/tmp/sprachkern_test.md"}
+             "path": self.path}
         ok, grund = sprachkern.write_verified(
             a, "Diese Siegel gelten als strengster Maßstab am Markt.", "test")
         self.assertTrue(ok, grund)

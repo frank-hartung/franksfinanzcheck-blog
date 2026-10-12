@@ -79,14 +79,11 @@ except Exception:  # noqa: BLE001
 
 
 def _is_ymyl_sealed(path: str) -> bool:
-    """True, wenn der Artikel Hochrisiko + freigegeben + Hash gültig ist."""
+    """Auch abgelaufene/beschädigte Freigaben bleiben schreibgeschützt."""
     if not _YMYL_AVAILABLE or _ymyl_gate is None:
-        return False
-    try:
-        result = _ymyl_gate.evaluate_path(path)
-        return bool(result.get("approved") and not result.get("blocking") and result.get("risk") == "hoch")
-    except Exception:
-        return False
+        return True  # Ohne Messung keine automatische Änderung.
+    return _ymyl_gate.automatic_write_protected(path)
+
 
 # PUBLIKATIONS-VERTRAG (Vorgang WF-54C4/#607, 07.10.2026): Die KI-Heilung
 # prüfte bisher nur die STRUKTUR ihrer Änderung (Links, H2-Anzahl, Länge,
