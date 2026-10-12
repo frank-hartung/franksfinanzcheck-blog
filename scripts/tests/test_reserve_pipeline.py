@@ -45,6 +45,7 @@ import json
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -1432,7 +1433,8 @@ class WorkflowVertragTests(unittest.TestCase):
             ziel = 6
             cert = _certificate_in_pool(tmp, {
                 "target": ziel, "ready": 2,
-                "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+                # Child CLI uses the real clock, not the parent clock trap.
+                "generated_at": dt.datetime.fromtimestamp(time.time(), dt.timezone.utc).isoformat(),
                 "candidates": [
                     {"slug": "a", "ready": True, "score": 0.96},
                     {"slug": "b", "ready": True, "score": 0.95},

@@ -194,13 +194,39 @@ ab. `test_git_sync.py` enthält zusätzliche echte Rebase-Sabotageproben mit
 Wegwerf-Remotes. Der Operations-Selbsttest ist im Governance-Minimum registriert;
 `npm run test:reserve` enthält die neue Batterie.
 
-Abschließende Ergebnisse werden nach dem vollständigen Durchlauf ergänzt.
-Bereits tatsächlich geprüft: echte Neubewertung 7/6, Originalbytes unverändert,
-266 gezielte Vertrags-/Pipeline-Prüfungen in der zuletzt ausgeführten Batterie, komplette
-Python-Syntax, Workflow-YAML/JSON und Python-Heredocs des Git-Sync.
-Die erste Gesamtsuite fand zusätzlich anpassungsbedürftige bestehende
-Vertragsfixtures und das erwartbar noch alte Integritäts-Siegel; diese Befunde
-werden nicht durch abgeschwächte Tests ausgeblendet.
+**Abschließende lokale Abnahme:**
+
+| Prüfung | Tatsächliches Ergebnis |
+|---|---|
+| Gesamtsuite | 2.889 Tests, grün; 2 ausgewiesene Skips (204,4 s) |
+| Gesamtsuite unter Uhr +97 Tage | 2.889 Tests, grün; 4 ausgewiesene Skips (206,7 s) |
+| KI-/Netz-Probe der Workflow-Selbsttests | 114 Selbsttests grün, ohne Modell und ohne Netz |
+| Echte Reserve-Neubewertung | 7/6 READY aus 11 Entwürfen; Originalcontent unverändert |
+| Reserve-Snapshot | Gültiges vollständiges JSON, echte SHA-256 und Redaktionsvertrag |
+| Integritäts-Gate | 49 Kerndateien entsprechen dem echten verketteten Siegel |
+| Governance | Quick-Prüfung und C1–C35-Selbsttest grün |
+| Actions-Kontrollfläche | `automation_premium_audit.py --strict` grün |
+| Syntax | Python, Workflow-YAML, package JSON, Bash und 3 Python-Heredocs grün |
+| Produktions-Hugo-Build | Hugo Extended 0.164.0 grün; 84 Seiten, 1.838 statische Dateien |
+| Produktions-Beweis-Ledger | `data/audit/` nach sämtlichen Prüfungen unverändert |
+
+Die erste Gesamtsuite fand anpassungsbedürftige bestehende Vertragsfixtures
+und das zunächst noch alte Integritäts-Siegel. Die Zeitprobe fand außerdem
+einen Fixture-Zeitpunkt aus der verschobenen Elternuhr, während die getestete
+CLI mit echter Uhr lief. Die Fixture benutzt jetzt ausdrücklich denselben
+realen Zeitmaßstab wie ihr Kindprozess; weder Frische-Gate noch Zeitprobe
+wurden abgeschwächt.
+
+Die beiden geänderten FEST-Dateien wurden nach dem belegten Codecommit
+`65d891f` mit dem echten `integrity_guard.py --heal` verkettet signiert und
+mit `data/integrity_history.jsonl` committet. Keine kritische Datei wurde
+neu gezeichnet; kein `--set-current`, kein manuell erfundenes Siegel.
+
+Die neu eingebundene Artefakt-Action ist an den verifizierten Upstream-Commit
+`cf430e030ddbb5b0abf93d22962f4752f3646cd9` (v7) gebunden, nicht an eine
+bewegliche Tag-Referenz. Die Uhr- und KI-Proben sind keine Produktionsläufe:
+Das spätere CI-Ergebnis des Pull Requests und der erste geplante Nachtlauf
+sind getrennt von dieser lokalen Abnahme zu beurteilen.
 
 Reproduzierbare Hauptprüfungen (in der installierten Projektumgebung):
 
