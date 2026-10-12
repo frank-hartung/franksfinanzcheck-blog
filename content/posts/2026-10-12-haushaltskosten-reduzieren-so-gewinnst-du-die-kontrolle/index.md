@@ -33,10 +33,10 @@ quellen:
     herausgeber: "Statistisches Bundesamt"
     datum: "2023-01-01"
 faktencheck: 2026-10-07
-kurzantwort: "Ja, du kannst deine Haushaltskosten sofort senken, indem du den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) anwendest. Analysiere jede Ausgabe, streiche unwichtige Abos und wechsle zu günstigeren Anbietern – so reduzieren viele Haushalte ihre Fixkosten um bis zu 20 %. Der Schlüssel liegt in konsequenter Kontrolle und regelmäßiger Nachprüfung."
+kurzantwort: "Ja, du kannst deine Haushaltskosten sofort senken, indem du den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) anwendest. Analysiere jede Ausgabe, streiche unwichtige Abos und wechsle zu günstigeren Anbietern. Die Beispielrechnung im Artikel zeigt, wie dabei vierstellige Beträge im Jahr zusammenkommen können. Der Schlüssel liegt in konsequenter Kontrolle und regelmäßiger Nachprüfung."
 ---
 
-Wusstest du, dass ein durchschnittlicher Haushalt jährlich über 1.000 € durch veraltete Verträge verschenkt? Oft belasten nicht die großen Einmalkäufe dein Budget. Es ist die Summe kleiner, regelmäßiger Abbuchungen. Ein vergessener Streaming-Dienst oder ein teurer Stromtarif fressen dein Geld.
+Wusstest du, wie viel Geld Jahr für Jahr in veralteten Verträgen stecken bleibt, ohne dass du es merkst? Oft belasten nicht die großen Einmalkäufe dein Budget. Es ist die Summe kleiner, regelmäßiger Abbuchungen. Ein vergessener Streaming-Dienst oder ein teurer Stromtarif fressen dein Geld.
 
 Mit System schaffst du dir finanziellen Spielraum. Du gewinnst die Kontrolle über dein Konto zurück.
 
@@ -94,15 +94,15 @@ Man kauft die günstige Butter oder fährt zum billigen Supermarkt. Dabei übers
 
 Zudem fehlt oft die klare Dokumentation. Wer seine Erfolge nicht sieht, verliert schnell die Lust. Nutze ein einfaches Haushaltsbuch oder eine Tabelle für deine Ersparnisse. Wenn du schwarz auf weiß deine monatliche Ersparnis siehst, motiviert dich das.
 
-## Praktische Mitteln für die sofortige Umsetzung
+## Praktische Mittel für die sofortige Umsetzung
 
-Es gibt einfache **Mitteln**, mit denen du sofort Ergebnisse erzielst. Diese erfordern keine radikale Umstellung deines Lebensstils. Du brauchst lediglich ein wenig Aufmerksamkeit für die Details deiner Verträge.
+Es gibt einfache **Mittel**, mit denen du sofort Ergebnisse erzielst. Diese erfordern keine radikale Umstellung deines Lebensstils. Du brauchst lediglich ein wenig Aufmerksamkeit für die Details deiner Verträge.
 
 **So gehst du vor:**
 1. **Abo-Inventur:** Prüfe deine App-Stores und Streaming-Dienste. Kündige alles, was du im letzten Monat nicht genutzt hast.
 2. **Versicherungs-Check:** Vermeide teure Doppelversicherungen. Prüfe, ob alte Tarife noch zu deinem Leben passen.
 3. **Energie-Vergleich:** Nutze Vergleichsportale für Strom und Gas. Filter dabei nach hoher Kundenempfehlung und kurzen Laufzeiten.
-4. **Bankgebühren:** Suche dir ein Girokonto ohne monatliche Grundgebühren. Das spart nach Erfahrungswerten oft 50 € bis 150 € im Jahr.
+4. **Bankgebühren:** Suche dir ein Girokonto ohne monatliche Grundgebühren. Das spart in der Beispielrechnung oft 50 € bis 150 € im Jahr, wenn deine Bank heute eine Grundgebühr in dieser Größenordnung verlangt.
 5. **Heizkosten:** Senke die Raumtemperatur nur leicht. Das reduziert deine Heizkosten nach Erfahrungswerten spürbar.
 
 Die Optimierung der Energieversorgung ist oft der effektivste Hebel. Ein Wechsel des Stromanbieters dauert online meist nur wenige Minuten. Der neue Anbieter kündigt in der Regel deinen alten Vertrag. Deine Versorgung ist dabei gesetzlich lückenlos garantiert.
@@ -145,7 +145,7 @@ Der Stromverbrauch beträgt in der Annahme 3.500 kWh/Jahr. Der Gasverbrauch bet
 4. **Kommunikation:** Ein moderner Tarif spart in der Beispielrechnung monatlich etwa 15 €, also etwa 180 € pro Jahr.
 
 **Ergebnis der Beispielrechnung:**
-Dieser Haushalt hat in der Beispielrechnung nach wenigen Stunden Arbeit rund 1.100 bis 1.300 € mehr im Jahr zur Verfügung. Das sind monatlich etwa 100 € zusätzliches Budget. Du kannst dieses Geld investieren oder für Notfälle sparen.
+Dieser Haushalt hat in der Beispielrechnung nach wenigen Stunden Arbeit rund 1.100 bis 1.300 € mehr im Jahr zur Verfügung. Das sind in der Beispielrechnung monatlich etwa 100 € zusätzliches Budget. Du kannst dieses Geld investieren oder für Notfälle sparen.
 
 ## Kündigungsfristen als strategischer Hebel
 

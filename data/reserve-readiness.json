@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 7,
   "pool_size": 11,
   "generated_at": "2026-10-12T11:49:16Z",
   "candidates": [
@@ -86,16 +86,12 @@
     },
     {
       "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
-      "ready": false,
-      "sha256": "c6eb49527d2335f02a6dc58e1ae7f6d171d75bdca24b0b07e166c23d7e3cd788",
-      "flesch": 60.5,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Willst du 1.332 € pro Jahr mehr auf dem Konto haben, ohne eine einzige Überstunde zu leisten?",
-      "details": [
-        "RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_ Willst du 1.332 € pro Jahr mehr auf dem Konto haben, ohne eine einzige Überstunde zu leisten?"
-      ],
-      "score": 0.954,
+      "ready": true,
+      "sha256": "e34672fe0ef0097cce914ee99e24c3ceab972ed90193390e44e4c0ac05cb1102",
+      "flesch": 60.1,
+      "score": 0.894,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.94,
@@ -128,16 +124,12 @@
     },
     {
       "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
-      "ready": false,
-      "sha256": "deba80497dc85626487a506ff08e7882033a3c22bb1ac6ff63d82c6971f4d188",
-      "flesch": 60.5,
-      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wusstest du, dass ein durchschnittlicher Haushalt jährlich über 1.000 € durch veraltete Verträge verschenkt?",
-      "details": [
-        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wusstest du, dass ein durchschnittlicher Haushalt jährlich über 1.000 € durch veraltete Verträge verschenkt?"
-      ],
-      "score": 0.978,
+      "ready": true,
+      "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
+      "flesch": 60.8,
+      "score": 0.898,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,

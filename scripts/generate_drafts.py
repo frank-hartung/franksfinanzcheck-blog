@@ -793,15 +793,23 @@ Ab Zeile 3: Der Artikel in Markdown:
 - Pflicht-Module (kein Fülltext): eine Tabelle ODER Checkliste und ein Abschnitt „Typische Fehler“. Eine Modellrechnung nur, wenn sie fachlich hilft; dann mit offen gelegten Annahmen, Formel, Rechenschritten und Rechenprobe – nie mit einem künstlichen Jahreslabel.
 - REDAKTIONS-STANDARD (Capital/WirtschaftsWoche/ZEIT, Pflicht für alle Module):
   1) „Das Wichtigste in Kürze“: Direkt NACH der Einleitung (vor der ersten H2) ein Block
-     mit fettem Label + 3–4 Bullet-Punkten mit den Kernaussagen (Zahlen nur als Spannen).
+     mit fettem Label + 3–4 Bullet-Punkten mit den Kernaussagen (Beträge nur als
+     gekennzeichnetes Ergebnis der Beispielrechnung im selben Satz – oder ohne Zahl).
   2) Mindestens 2 deiner H2-Überschriften sind FRAGEN („Warum lohnt sich X?“, „Was kostet X?“,
      „Welche Fehler kosten dich Geld?“) – jede Frage wird direkt und konkret beantwortet.
   3) Mindestens EINE markierte Faustregel als eigener Absatz: „**Faustregel:** …“.
   4) Mindestens EINE nummerierte Schrittfolge mit 3–6 Schritten („So gehst du vor:“ + 1. 2. 3.).
-  5) Zahlen-Ehrlichkeit (WiWo-Standard): Harte Zahlen nur mit Einordnung – „ca. 20–40 €“,
-     „in der Regel“, „je nach Anbieter“, „rund“. NIE erfundene Studien/Umfragen/Experten
-     (keine Sätze wie „Laut einer Studie…“) – unbelegbare Aussagen als Allgemeinwissen
-     formulieren. Rechenbeispiele klar als solche kennzeichnen.
+  5) Zahlen-Ehrlichkeit (WiWo-Standard, HARTES Gate RS5): Jeder Satz mit einer Zahl
+     plus Einheit (€, %, kWh, Monat, Jahr …) wird ABGELEHNT, wenn er nicht im SELBEN
+     Satz entweder einen klickbaren Quellenlink trägt oder ausdrücklich als
+     Beispielrechnung/Modellrechnung mit Annahmen gekennzeichnet ist. Ein „ca.“,
+     „rund“ oder „etwa“ allein reicht NICHT – das Gate wertet Abschwächungen nicht als
+     Beleg. Da du keine Quellen erfinden und keine Links setzen darfst, gilt: Spar-
+     und Kostenbeträge schreibst du als ausgewiesene Beispielrechnung mit offen-
+     gelegten Annahmen (eigener Abschnitt, jeder Ergebnis-Satz trägt die Kennzeichnung
+     selbst) – oder du lässt die Zahl weg und beschreibst den Hebel ohne Betrag.
+     NIE erfundene Studien/Umfragen/Experten (keine Sätze wie „Laut einer Studie…“) –
+     unbelegbare Aussagen als Allgemeinwissen formulieren.
 - Mindestens EINE Liste oder Tabelle (Mehrwert, Scannability)
 - Am Ende ein FAQ-Bereich: "## Häufige Fragen" mit 5 Fragen als H3 und Antworten
 - 1.500 bis 2.200 Wörter insgesamt (mindestens 1.400 Wörter / 10.000 Zeichen – darunter gilt der Artikel als zu kurz und wird abgelehnt). Zielkorridor Premium: 12.000–18.000 Zeichen Fließtext. Substanz, keine Floskeln.
