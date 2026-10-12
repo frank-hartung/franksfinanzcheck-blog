@@ -194,7 +194,7 @@ npm run test:gsc
                             Wiedervorlage, 403/429, Zustands-Hygiene, Fail-closed
   ✅ gsc_import             JWT/RS256 mit openssl verifiziert, Paginierung, Merge, Geheimnisschutz
   ✅ submit_indexnow        Schlüsselvertrag, Queue aus der Sitemap, Batch-Grenze, Zustands-Hygiene
-  ✅ 52 Regressionstests (scripts/tests/test_gsc_indexierung_kette.py)
+  ✅ 54 Regressionstests (scripts/tests/test_gsc_indexierung_kette.py)
 ```
 
 Jede Regel hat eine Sabotage-Probe (muss anschlagen) und, wo es eine gültige Variante gibt, eine
@@ -204,7 +204,8 @@ deshalb sind sie Teil des Vertrags, nicht ein Anhang.
 Weitere Läufe, alle grün:
 
 ```
-scripts/selftest_runner.py            188 Wachen · 376 Uhr-Proben (+97/+1461 Tage) · 136 s
+scripts/selftest_runner.py            190 Wachen · 380 Uhr-Proben (+97/+1461 Tage) · 132 s
+scripts/selftest_ki.py --trap-workflows  113 Selbsttests, keiner hängt an KI oder Netz (#138)
 scripts/governance_contract.py        33 Regeln, beide Richtungen
 scripts/index_hygiene_gate.py         115 HTML-URLs · 76 indexierbar · Verhältnis 0,51 (Budget 1,0)
 scripts/schema_seo_gate.py            115 Seiten, 50 Money-Pages · 0 harte Funde
@@ -222,7 +223,7 @@ python3 -W error::ResourceWarning …   alle fünf Selbsttests ohne offene Datei
 | Tote github.io-URLs im Zustand | 32 | 0 |
 | Aktive Indexierungs-Anfrage an Google | nicht vorhanden | täglich, bis 195/Tag |
 | Bewachte Regeln der Zugangsschicht | 0 | 13 (V1–V13) |
-| Regressionstests der Kette | 2 | 52 |
+| Regressionstests der Kette | 2 | 54 |
 
 Die 74 Seiten selbst sind unverändert – es wurden keine neuen erfunden und keine abgeschaltet.
 Geändert hat sich, was mit ihnen passiert.
@@ -295,7 +296,7 @@ python3 scripts/gsc_indexierung.py --live --plan   # 74 Seiten wären fällig �
 - `scripts/indexierbare_seiten.py` – eine Quelle für „welche Seiten sollen in den Index?"
 - `scripts/gsc_indexierung.py` – aktive Indexierungs-Anfrage (URL Inspection API)
 - `scripts/gsc_verifikations_guard.py` – V1–V13
-- `scripts/tests/test_gsc_indexierung_kette.py` – 52 Regressionstests
+- `scripts/tests/test_gsc_indexierung_kette.py` – 54 Regressionstests
 - `.github/workflows/gsc-import.yml` – täglicher Lauf (Daten + Anfragen)
 
 **Geändert**
@@ -315,3 +316,60 @@ python3 scripts/gsc_indexierung.py --live --plan   # 74 Seiten wären fällig �
 - `docs/workflow-vorlagen/gsc-import.yml` – vom scharfen Workflow abgelöst
 
 Runbook: [`docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md`](docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md)
+
+---
+
+## 9. Nachtrag 12.10.2026 – ein eigener Fehler, den erst CI gefunden hat
+
+Abschnitt 4 stand zuerst mit anderen Zahlen da, und `_selftest()` in
+`scripts/gsc_indexierung.py` trug den Docstring *„Offline-Selbsttest mit Fake-API: kein
+Netz, keine Uhr, keine Schreiberei."* Der erste Teil war falsch. Die KI-Probe des
+Regressions-Jobs (`scripts/selftest_ki.py --trap-workflows`, Vertrag aus #138) hat es
+gemeldet:
+
+```
+🛑 scripts/gsc_indexierung.py (0.2s) – NETZ
+     ↳ create_connection → x:443 aus scripts/indexierbare_seiten.py:287 (_hole_http)
+```
+
+**Ursache.** `lauf()` ersetzte den API-Transport über `http=`, reichte aber keinen
+Transport für das Holen der Sitemap durch. `hole_seiten()` hat seit jeher einen
+injizierbaren `http`-Parameter – `lauf()` nutzte ihn nicht. Zwei Folgen:
+
+1. Der Selbsttest griff für die Fälle 1 und 2 wirklich ins Netz (Ziel `https://x/sitemap.xml`).
+2. Die beiden Prüfungen waren dadurch **verstellt**. Fall 1 sollte „kein Zugang →
+   `nicht_konfiguriert`" beweisen; tatsächlich kam der Netzwerk-Fehlschlag zuerst, also
+   wurde `werkzeugfehler` geprüft. Fall 2 trug die Assertion
+   `b2["status"] in ("werkzeugfehler", "ok")` – eine Prüfung, die beide Ausgänge
+   akzeptiert, ist keine Prüfung. Der Docstring „alle Zugänge sind injizierbar → offline
+   testbar" war ein Wunsch, kein Vertrag.
+
+**Heilung.** `lauf()` bekommt `sitemap_http` und reicht es an beide `hole_seiten`-Aufrufe
+durch. Die zwei getrennten Transporte sind jetzt im Docstring benannt, weil sie
+verschiedene Signaturen haben (`(method, url, headers, body)` gegen `(url) -> (status,
+text)`) – wer nur einen ersetzt, greift trotzdem ins Netz.
+
+Die Selbsttest-Fälle sind seither scharf statt verstellt:
+
+| Fall | Vorher | Nachher |
+|---|---|---|
+| 1 | `werkzeugfehler` durch Netzabbruch | Sitemap antwortet 404 → `werkzeugfehler`, **und** es wird nichts angefragt |
+| 2 | `in ("werkzeugfehler", "ok")` – wertlos | intakte Sitemap, kein Zugang → exakt `nicht_konfiguriert`, Bestand 3 Seiten, **keine** Anfrage |
+| 3 | voller Lauf über den `--urls`-Notweg | voller Lauf über die **injizierte Sitemap** – der Regelweg, mit Gewichtung 1.0/0.9/0.8 |
+
+**Beweis, dass die Wache greift.** Die Durchreichung wurde probehalber wieder entfernt:
+Der neue Test `test_sitemap_transport_ist_injizierbar` schlägt an mit *„der echte
+Sitemap-Transport wurde erreicht"*, der Selbsttest bricht ab. Die Gegenprobe
+`test_ohne_injektion_bleibt_der_echte_transport_zustaendig` bleibt dabei grün – sie
+nagelt die andere Richtung fest: Ohne Injektion muss weiter `_hole_http` zuständig sein,
+sonst „heilt" die Naht dadurch, dass der Tageslauf mit `--live` nie die ausgelieferte
+Sitemap sähe und still einen erfundenen Bestand anfragte. Grünes Gate, falsche Wirklichkeit.
+
+**Zahlen danach.** KI-Probe 113/113 ohne Netz · Regressionstests der Kette 54 statt 52 ·
+Gesamtsuite 2815 Tests, 0 Fehler · Selbsttest-Runner 190 Wachen, 380 Uhr-Proben, grün.
+
+**Was das lehrt.** Ein Selbsttest, der „kein Netz" behauptet, ist keine Zusage, sondern
+eine Behauptung – und dieses Repository hat mit der KI-Probe eine Wache, die sie prüft.
+Der Fund kam nicht aus dem Code-Review, sondern aus dem zweiten, upload-unabhängigen Gate.
+Er hätte ohne CI unbemerkt bleiben können, weil alle 52 Tests grün waren: Sie liefen über
+den `--urls`-Pfad und berührten die Sitemap-Naht nie.

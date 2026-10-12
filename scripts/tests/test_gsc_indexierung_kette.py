@@ -15,6 +15,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -87,6 +88,23 @@ def baue_projekt(tmp: str, *, verifikation: bool = True, sitemap: str | None = N
 SA = {"client_email": "gsc@x.iam.gserviceaccount.com", "private_key": "PEM"}
 ENV = {"GSC_SITE_URL": "sc-domain:franksfinanzcheck.de",
        "GSC_SERVICE_ACCOUNT_JSON": json.dumps(SA)}
+
+
+def sitemap_xml() -> str:
+    """Zwei Seiten mit redaktioneller Gewichtung – absichtlich falsch herum.
+
+    Die Startseite trägt `priority` 1.0, steht aber ZULETZT in der Datei. Wer
+    die Sitemap bloß in Dokumentreihenfolge abarbeitet, bekommt die
+    Reihenfolge-Assertion in den Transport-Tests nicht erfüllt: `reihenfolge()`
+    muss sortieren, nicht durchreichen.
+    """
+    return ('<?xml version="1.0" encoding="UTF-8"?>'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            f'<url><loc>{BASE}posts/neu/</loc><lastmod>2026-10-11</lastmod>'
+            '<changefreq>weekly</changefreq><priority>0.8</priority></url>'
+            f'<url><loc>{BASE}</loc><lastmod>2026-10-12</lastmod>'
+            '<changefreq>daily</changefreq><priority>1.0</priority></url>'
+            '</urlset>')
 
 
 def fake_api(stufe: str = "siteOwner", abdeckung: str = "Submitted and indexed",
@@ -171,6 +189,58 @@ class GscIndexierungTest(unittest.TestCase):
 
     def test_selbsttest(self):
         self.assertEqual(gi._selftest(), 0)
+
+    def test_sitemap_transport_ist_injizierbar(self):
+        """KI-Probe #138: Das Injektions-Versprechen von `lauf()` gilt auch für die Sitemap.
+
+        Regression gegen die erste Fassung: Sie ersetzte nur den API-Transport
+        (`http`), die Sitemap ging weiter über `indexierbare_seiten._hole_http`
+        ins Netz. Die KI-Probe meldete `create_connection → x:443`. Ein
+        Selbsttest, der am Netz hängt, ist nicht reproduzierbar und bricht den
+        Vertrag aus CONTENT-ENGINE-138.
+        """
+        erreicht = []
+
+        def verbotener_transport(url, timeout=30):
+            erreicht.append(url)
+            self.fail("der echte Sitemap-Transport wurde erreicht")
+
+        aufrufe = []
+
+        def fake_sitemap(url):
+            aufrufe.append(url)
+            return 200, sitemap_xml()
+
+        with patch.object(is_, "_hole_http", verbotener_transport):
+            b = self.lauf(urls=None, sitemap_url="https://x/sitemap.xml",
+                          sitemap_http=fake_sitemap)
+        self.assertEqual(b["status"], "ok")
+        self.assertEqual(aufrufe, ["https://x/sitemap.xml"],
+                         "die Sitemap kam nicht über den injizierten Transport")
+        self.assertEqual(erreicht, [], "der echte Transport wurde benutzt")
+        self.assertEqual(b["seiten_indexierbar"], 2)
+        self.assertEqual([a["url"] for a in b["angefragt"]], [BASE, BASE + "posts/neu/"])
+
+    def test_ohne_injektion_bleibt_der_echte_transport_zustaendig(self):
+        """Gegenprobe zur Injektion: Der Produktionsweg geht weiter durch `_hole_http`.
+
+        Ohne diese Probe ließe sich die Naht auch „heilen", indem die Sitemap
+        grundsätzlich über einen Attrappen-Transport läuft. Der Tageslauf mit
+        `--live` sähe dann nie die ausgelieferte Sitemap und würde still einen
+        erfundenen Bestand anfragen – grünes Gate, falsche Wirklichkeit.
+        """
+        aufrufe = []
+
+        def transport(url, timeout=30):
+            aufrufe.append(url)
+            return 200, sitemap_xml()
+
+        with patch.object(is_, "_hole_http", transport):
+            b = self.lauf(urls=None, live=True)
+        self.assertEqual(b["status"], "ok")
+        self.assertEqual(aufrufe, [is_.live_sitemap_url()],
+                         "--live läuft nicht über die ausgelieferte Sitemap")
+        self.assertEqual([a["url"] for a in b["angefragt"]], [BASE, BASE + "posts/neu/"])
 
     def test_alle_drei_seiten_werden_angefragt(self):
         b = self.lauf()

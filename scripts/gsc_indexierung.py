@@ -391,8 +391,21 @@ def lauf(http=default_http, env: dict | None = None, jetzt: dt.datetime | None =
          sign=rs256_signatur, state_pfad: Path = STATE_DATEI, limit: int | None = None,
          tage: int | None = None, dry_run: bool = False, nur_plan: bool = False,
          live: bool = False, sitemap_url: str | None = None, urls: list | None = None,
-         nur_pruefen: bool = False, warten: bool = True) -> dict:
-    """Ein vollständiger Lauf. Alle Zugänge sind injizierbar → offline testbar."""
+         nur_pruefen: bool = False, warten: bool = True, sitemap_http=None) -> dict:
+    """Ein vollständiger Lauf. Alle Zugänge sind injizierbar → offline testbar.
+
+    Es gibt ZWEI Transporte, weil sie verschiedene Signaturen haben:
+
+      · ``http``         – die Search-Console-API: ``(method, url, headers, body)``
+      · ``sitemap_http`` – das Holen der Sitemap:   ``(url) -> (status, text)``
+
+    Ohne ``sitemap_http`` geht die Sitemap über den echten Transport
+    (``indexierbare_seiten._hole_http``). Wer einen Lauf offline prüft, muss
+    BEIDE injizieren: Nur ``http`` zu ersetzen lässt die Sitemap trotzdem ins
+    Netz greifen. Genau das tat die erste Fassung dieses Selbsttests, und die
+    KI-Probe (#138) hat es gemeldet – der Docstring „alle Zugänge
+    injizierbar" war damals ein Wunsch, kein Vertrag.
+    """
     env = os.environ if env is None else env
     jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
     heute = jetzt.date()
@@ -423,9 +436,10 @@ def lauf(http=default_http, env: dict | None = None, jetzt: dt.datetime | None =
             seiten = [Seite(url=u, pfad="", lastmod="", priority=1.0) for u in urls]
             befunde: list[str] = []
         elif live or sitemap_url:
-            seiten, befunde = hole_seiten(sitemap_url=sitemap_url or live_sitemap_url())
+            seiten, befunde = hole_seiten(sitemap_url=sitemap_url or live_sitemap_url(),
+                                          http=sitemap_http)
         else:
-            seiten, befunde = hole_seiten()
+            seiten, befunde = hole_seiten(http=sitemap_http)
     except SitemapFehler as exc:
         bericht["status"] = "werkzeugfehler"
         bericht["grund"] = str(exc)
@@ -645,31 +659,61 @@ def _selftest() -> int:
                 "crawledAs": "Googlebot", "neuesFeld": "x"}}}
         return 404, {}
 
+    # Sitemap-Transport des Selbsttests: (url) -> (status, text), mit Zähler.
+    # Der Zähler ist die Gegenprobe – er beweist, dass die Sitemap über die
+    # Attrappe kam und nicht über `indexierbare_seiten._hole_http` ins Netz
+    # (KI-Probe #138: kein Selbsttest darf am Netz hängen).
+    sitemap_treffer: list[str] = []
+
+    def fake_sitemap(url: str):
+        sitemap_treffer.append(url)
+        return 200, sitemap
+
+    def fake_sitemap_404(url: str):
+        sitemap_treffer.append(url)
+        return 404, ""
+
     with tempfile.TemporaryDirectory() as tmp:
         state_pfad = Path(tmp) / "state.json"
 
-        # 1) Ohne Zugang: nicht_konfiguriert, keine Anfrage, Exit-freundlich
-        b1 = lauf(http=fake_ok, env={}, jetzt=fest, sign=lambda m, k: b"x",
-                  state_pfad=state_pfad, sitemap_url="https://x/sitemap.xml")
-        # Sitemap fehlt → Werkzeugfehler kommt zuerst (fail-closed)
-        pruefe("fehlende Sitemap ist Werkzeugfehler", b1["status"] == "werkzeugfehler")
-
-        # 2) Voller Lauf gegen die Fake-Sitemap
-        b2 = lauf(http=fake_ok, env=env, jetzt=fest, sign=lambda m, k: b"x",
+        # 1) Unerreichbare Sitemap: Werkzeugfehler, VOR der Zugangsfrage.
+        #    Fail-closed – wer nichts über den Bestand weiß, fragt nichts an.
+        b1 = lauf(http=fake_ok, env=env, jetzt=fest, sign=lambda m, k: b"x",
                   state_pfad=state_pfad, sitemap_url="https://x/sitemap.xml",
-                  warten=False)
-        # Die Fake-HTTP wird für die Sitemap-URL nicht benutzt (hole_seiten hat
-        # einen eigenen http-Parameter) – deshalb hier über --urls-Pfad prüfen:
-        pruefe("Lauf ohne lokale Sitemap meldet Werkzeugfehler",
-               b2["status"] in ("werkzeugfehler", "ok"))
+                  sitemap_http=fake_sitemap_404)
+        pruefe("unerreichbare Sitemap ist Werkzeugfehler", b1["status"] == "werkzeugfehler")
+        pruefe("Sitemap kam über den injizierten Transport",
+               sitemap_treffer == ["https://x/sitemap.xml"])
+        pruefe("bei Werkzeugfehler wird nichts angefragt", not anfragen)
 
+        # 2) Intakte Sitemap, aber kein Zugang: nicht_konfiguriert.
+        #    Diese Probe war vorher verstellt – der Netzversuch der Sitemap
+        #    lieferte den Werkzeugfehler zuerst, also wurde nie geprüft, was
+        #    hier stehen sollte. Erst die injizierbare Sitemap macht sie scharf.
+        sitemap_treffer.clear()
+        b2 = lauf(http=fake_ok, env={}, jetzt=fest, sign=lambda m, k: b"x",
+                  state_pfad=state_pfad, sitemap_url="https://x/sitemap.xml",
+                  sitemap_http=fake_sitemap)
+        pruefe("fehlender Zugang meldet nicht_konfiguriert",
+               b2["status"] == "nicht_konfiguriert")
+        pruefe("Bestand wurde trotzdem ermittelt", b2["seiten_indexierbar"] == 3)
+        pruefe("ohne Zugang wird keine einzige Seite angefragt", not anfragen)
+
+        # 3) Voller Lauf gegen die injizierte Sitemap – der Regelweg, keine
+        #    --urls-Notlösung. Die Sitemap trägt die Gewichtung (1.0/0.9/0.8),
+        #    also muss die Startseite zuerst dran sein.
+        sitemap_treffer.clear()
+        anfragen.clear()
         b3 = lauf(http=fake_ok, env=env, jetzt=fest, sign=lambda m, k: b"x",
-                  state_pfad=state_pfad, urls=[s.url for s in seiten], warten=False)
+                  state_pfad=state_pfad, sitemap_url="https://x/sitemap.xml",
+                  sitemap_http=fake_sitemap, warten=False)
         pruefe("drei URLs angefragt", len(b3["angefragt"]) == 3)
         pruefe("Reihenfolge nach Wichtigkeit", anfragen[:1] == ["https://franksfinanzcheck.de/"])
         pruefe("Status ok", b3["status"] == "ok")
         pruefe("indexiert gezählt", b3["indexiert"] == 3 and b3["nicht_indexiert"] == 0)
         pruefe("Berechtigung geprüft", "Vollständig" in b3.get("berechtigung", ""))
+        pruefe("Sitemap-Transport genau einmal benutzt",
+               sitemap_treffer == ["https://x/sitemap.xml"])
 
         state = lade_state(state_pfad)
         eintrag_home = state["urls"]["https://franksfinanzcheck.de/"]
