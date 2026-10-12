@@ -1,9 +1,9 @@
 ---
 title: "DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen"
 description: "DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen."
-date: 2026-10-07T10:32:00Z
-draft: true
-reserve: true
+date: 2026-10-12T06:02:26Z
+draft: false
+reserve_published: 2026-10-12
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

@@ -1,9 +1,9 @@
 ---
 title: "Handyvertrag kündigen: Frist und Kosten richtig prüfen"
 description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen."
-date: 2026-10-07T10:33:21Z
-draft: true
-reserve: true
+date: 2026-10-12T06:02:53Z
+draft: false
+reserve_published: 2026-10-12
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -63,6 +63,9 @@ Danach kannst du entscheiden, ob du kündigst, wechselst oder ein neues Angebot 
 - Vergleiche Tarif, Gerät und Zusatzoptionen als ganze Kosten.
 
 ## Welche Kündigungsfrist gilt für deinen Handyvertrag?
+
+
+Darum geht es hier konkret: Handyvertrag kündigen.
 
 Die erste feste Laufzeit eines üblichen Handyvertrags darf höchstens 24 Monate dauern ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Lies diese Angabe in deinem Vertrag, bevor du zustimmst.
 
@@ -213,6 +216,9 @@ Wenn ein Betrag nicht passt, bitte den Anbieter um eine Aufstellung. So lässt s
 Du erkennst, ob ein Posten einmalig anfällt oder wiederkehrt.
 
 **Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [Handytarif vergleichen: Worauf es ankommt](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
+
+
+Genau das ist der Hebel: Handyvertrag kündigen.
 
 ## Häufige Fragen
 
