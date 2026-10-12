@@ -293,3 +293,5 @@
 {"date": "2026-10-11", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-11", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-11", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-12", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/redaktions_standard.py"]}
+{"date": "2026-10-12", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}

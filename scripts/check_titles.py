@@ -271,6 +271,8 @@ def check_title(title):
         issues.append(("R4", "doppelte Leerzeichen"))
     if " :" in t or re.search(r":\s{2,}", t):
         issues.append(("R4", "Leerzeichen vor/mehrfach nach Doppelpunkt"))
+    if re.search(r"[,;]\s*:", t) or re.search(r":\s*[–—-](?:\s|$)", t):
+        issues.append(("R4", "Doppel-Interpunktion am Doppelpunkt (z. B. ',:' oder ': –')"))
 
     # R5: Truncation-Wächter (Wahrheitsprobe statt Wortliste, siehe Kopf).
     befund = r5_truncation(t)
@@ -381,9 +383,12 @@ def fix_title(title):
     for pat, repl in COMPOUND_FIXES:
         t = re.sub(pat, repl, t)
     t = TIME_TAIL.sub("", t).strip()
+    t = re.sub(r"[,;]+\s*:", ":", t)
+    t = re.sub(r":\s*[–—-]+\s*", ": ", t)
     t = re.sub(r"\s{2,}", " ", t)
     t = re.sub(r"\s+:", ":", t)
     t = re.sub(r":\s{2,}", ": ", t)
+    t = re.sub(r":\s+([a-zäöüß])", lambda m: ": " + m.group(1).upper(), t, count=1)
     # R1: Doppelpunkt erzwingen wenn Titel lang ohne :
     if len(t) > TITLE_NO_COLON_MAX and ":" not in t:
         try:
@@ -513,6 +518,26 @@ def run_selftest():
         fehler.append("R3 (Zeit-Anhängsel) feuert nicht mehr")
     if not any(r == "R4" for r, _ in check_title("Strom  sparen: Der Check")):
         fehler.append("R4 (doppelte Leerzeichen) feuert nicht mehr")
+    # WF-D4E0 (#710): Doppel-Interpunktion am Doppelpunkt (,: / : –) muss
+    # als R4 erkannt und von fix_title deterministisch geheilt werden.
+    for kaputt, erwartet in (
+        ("Kleine Energiespar‑Tricks,: die deine Kosten sofort senken",
+         "Kleine Energiespar‑Tricks: Die deine Kosten sofort senken"),
+        ("Wärmepumpe vs. Gasheizung 2026: – so entscheidest du richtig",
+         "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig"),
+    ):
+        if not any(r == "R4" for r, _ in check_title(kaputt)):
+            fehler.append(f"R4 übersieht Doppel-Interpunktion: {kaputt!r}")
+        geheilt_r4 = fix_title(kaputt)
+        if geheilt_r4 != erwartet or check_title(geheilt_r4):
+            fehler.append(f"R4-Heilung fehlgeschlagen für {kaputt!r}: {geheilt_r4!r}")
+    for roh in (
+        "Kleine Energiespar‑Tricks, die deine Kosten sofort senken",
+        "Wärmepumpe vs. Gasheizung 2026 – so entscheidest du richtig",
+    ):
+        geheilt_r1 = fix_title(roh)
+        if check_title(geheilt_r1) or ",:" in geheilt_r1 or ": –" in geheilt_r1:
+            fehler.append(f"R1-Doppelpunkt-Heilung erzeugt Artefakt bei {roh!r}: {geheilt_r1!r}")
 
     if fehler:
         print("🛑 CHECK-TITLES-SELBSTTEST FEHLGESCHLAGEN:")

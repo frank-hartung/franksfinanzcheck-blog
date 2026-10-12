@@ -33,10 +33,40 @@ import datetime
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
+if os.path.join(BLOG_DIR, "scripts") not in sys.path:
+    sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import (list_post_paths, slug_of,  # noqa: E402
                         join_article, strip_generator_scaffolding)
 import llm_client
 CACHE_FILE = os.path.join(BLOG_DIR, ".polish_cache.json")
+
+try:
+    from publikations_vertrag import (pruefe as _vertrag_pruefe,
+                                      raw_aus as _vertrag_raw_aus,
+                                      _flesch as _vertrag_flesch,
+                                      _harte_funde as _vertrag_harte_funde,
+                                      verstoesse_kurz)
+    import readability_check as _rc_guard
+    import textverstaendnis_guard as _tv_guard
+    _VERTRAG_FEHLER = ""
+except Exception as _exc:  # noqa: BLE001 – fail-closed: ohne Vertrag kein Schreiben
+    _vertrag_pruefe = None
+    _vertrag_raw_aus = None
+    _vertrag_flesch = None
+    _vertrag_harte_funde = None
+    verstoesse_kurz = None
+    _rc_guard = None
+    _tv_guard = None
+    _VERTRAG_FEHLER = f"{_exc.__class__.__name__}: {_exc}"
+
+try:
+    import redaktions_standard as _rs_guard
+except Exception:  # noqa: BLE001
+    _rs_guard = None
+
+
+def _stamm(slug: str) -> str:
+    return re.sub(r"^\d{4}-\d{2}-\d{2}-", "", (slug or "").strip())
 
 
 def load_article(path, include_drafts=False):
@@ -54,58 +84,48 @@ def load_article(path, include_drafts=False):
         return m.group(1).strip() if m else ""
 
     anrede_raw = get("anrede").strip('"').lower()
-    return {"path": path, "title": get("title"), "description": get("description"),
+    return {"path": path, "slug": slug_of(path), "fm": fm,
+            "title": get("title"), "description": get("description"),
             "keywords": get("keywords"), "body": body,
             "anrede_sie": anrede_raw in ("sie", "sie-form", "höflich")}
 
 
-def ai_polish(a):
-    """KI-Polish. Liefert neuen Body oder None."""
-    key = slug_of(a["path"])  # eindeutig (Bundles: Ordnername, nicht "index.md"!)
-    cache = {}
-    if os.path.exists(CACHE_FILE):
-        try:
-            cache = json.load(open(CACHE_FILE, encoding="utf-8"))
-        except Exception:
-            cache = {}
-    if key in cache:
-        return cache[key]
-
-    if not (llm_client.available("gemini") or llm_client.available("groq")):
-        print("  ⚠️ Keine API-Keys – kein Polish möglich.")
-        return None
-
-    # Keywords sauber parsen (YAML-Liste)
-    kws_raw = a["keywords"]
+def build_polish_prompt(a: dict) -> str:
+    """Baut den Lektorats-Prompt (reine Funktion, vertragstestbar)."""
+    kws_raw = a.get("keywords", "")
     kws = []
     if kws_raw.strip().startswith("["):
         kws = [k.strip().strip('"\'') for k in kws_raw.strip()[1:-1].split(",") if k.strip()]
     else:
         kws = [k.strip() for k in kws_raw.split(",") if k.strip()]
-    kw_hint = ", ".join(kws[:4]) if kws else a["title"]
-    # Anrede: Standard "du" – bei Frontmatter anrede:"Sie" → Sie-Form
+    kw_hint = ", ".join(kws[:4]) if kws else a.get("title", "")
     anrede_auftrag = ('"du" – der Leser wird geduzt (Blog-Stil)' if not a.get("anrede_sie")
                       else '"Sie" – dieser Artikel richtet sich bewusst an eine Zielgruppe, die gesiezt wird')
     anrede_pronomen = '("du"/"dein"/"dich")' if not a.get("anrede_sie") else '("Sie"/"Ihr"/"Ihnen")'
 
-    prompt = f"""Du bist Lektor für einen seriösen deutschen Finanz-Ratgeber-Blog (Profi-Niveau).
-Polieren den folgenden Blog-Artikel auf PROFESSIONELLES Text-Niveau.
+    return f"""Du bist Lektor für einen seriösen deutschen Finanz-Ratgeber-Blog (Profi-Niveau).
+Poliere den folgenden Blog-Artikel auf PROFESSIONELLES Text-Niveau.
 
 REGELN:
 1. Entferne ALLE KI-Floskeln und Füllphrasen ("In der heutigen…", "Es ist wichtig zu beachten",
    "Zusammenfassend lässt sich sagen", "Des Weiteren", "Es gibt viele…", "heutzutage" usw.).
 2. Schreibe in AKTIVER, lebendiger Sprache: kurze Sätze (max. ~20 Wörter), starke Verben,
    direkte Ansprache {anrede_auftrag} {anrede_pronomen}. Vermeide Passiv.
-3. Einleitung: Beginne mit einem starken Haken (Nutzenversprechen, konkrete Zahl, Frage).
+3. Einleitung: Beginne mit einem starken Haken (Nutzenversprechen, Alltags-Szene oder konkrete Frage) –
+   KEINE Zahl und kein Euro-/Prozentwert im Einstieg ohne bereits eingeführte Modellrechnung.
 4. Absätze auf 3-4 Sätze kürzen. Zwischenüberschriften beibehalten.
-5. Baue die Keywords natürlich ein (kein Stuffing): {a['keywords'][:120]}
-6. Mehr Praxisbezug (E-E-A-T): konkrete, PLAUSIBLE Beispiele ("In der Regel", "je nach Anbieter",
-   "ca. X–Y €") – ERFINDE KEINE Fakten, Preise nur als vorsichtige Spannen.
+5. Baue die Keywords natürlich ein (kein Stuffing): {a.get('keywords', '')[:120]}
+6. ZAHLEN-VERTRAG (RS5, hart): Erfinde KEINE neuen Zahlen, Preise, Prozentwerte oder Spannen.
+   Ein bloßes „ca.", „rund" oder „in der Regel" gilt am Gate NICHT als Beleg und führt zur Ablehnung!
+   Jede Zahl mit Einheit (€, %, kWh, Monate, Jahre) muss im SELBEN Satz als Modell-/Beispielrechnung
+   („Beispielrechnung", „Modellrechnung", „Annahme", „Rechenbeispiel") gekennzeichnet sein oder einen
+   klickbaren Quellenlink im selben Satz tragen. Wo keine Modellrechnung vorliegt, formuliere ohne Zahl.
 7. Deutsche Orthografie: korrekte Groß-/Kleinschreibung, korrekte Anführungszeichen.
-8. BEHALTE alle Links exakt bei (insbesondere https://a.check24.net und https://a.partner-versicherung.de).
-   Lösche KEINEN Link, ändere keine URL.
-9. Behalte alle Überschriften (##, ###) und die FAQ-Fragen bei. FAQ-Antworten dürfen leicht
-   frischer formuliert werden.
+8. BEHALTE alle Links exakt bei (insbesondere https://a.check24.net, https://a.partner-versicherung.de,
+   interne /go/-Links und interne Artikel-Links). Lösche KEINEN Link, ändere keine URL.
+9. Behalte alle Überschriften (##, ###) inklusive Frage-Überschriften mit „?" und die FAQ-Fragen bei.
+   Bewahre vorhandene Pflicht-Module (**Das Wichtigste in Kürze**, **Faustregel:**, nummerierte
+   Schrittfolgen 1./2./3. und Modellrechnungen) vollständig!
 10. Behalte Listen und Tabellen. WICHTIG: Der polierte Text muss mindestens 90% der
     Länge des Originaltextes haben. Kürze KEINE Absätze komplett weg – formuliere
     innerhalb der Absätze um. Nur Floskeln/Füllwörter dürfen entfallen.
@@ -118,8 +138,8 @@ REGELN:
     Ziel: Ø Satzlänge unter 15 Wörter, Flesch-Score über 60.
 11c. TEXTVERSTÄNDNIS (Verlagsregel, 01.09.2026): Ersetze die Schablone
     "In diesem Ratgeber zeige/erfährst/erkläre ich dir …" durch eine individuelle
-    Öffnung (Schritt-Versprechen, Zahlen-These, Irrtum, Analogie, Warnung,
-    Mini-Geschichte, Checkliste, Frage). Zerlege Komma-Ketten über 15 Begriffe in
+    Öffnung (Schritt-Versprechen, Alltags-Irrtum, Analogie, Warnung,
+    Mini-Geschichte, Checkliste, Frage – ohne unbelegte Zahl im Einstieg). Zerlege Komma-Ketten über 15 Begriffe in
     Tabellen oder Listen mit Erklärungen. Vereinheitliche Synonyme auf EINEN
     Leitbegriff pro Konzept (Synonyme nur einmal als Erklärung bei Ersterwähnung).
 12. TOP-LEVEL-DARSTELLUNG: Jeder Absatz ist 3-4 Sätze lang, behandelt genau EINEN
@@ -141,13 +161,35 @@ REGELN:
 14. Beginne den Text NICHT mit dem Artikel-Titel – der Titel steht bereits in der
     Überschrift der Seite. Starte direkt mit dem ersten Absatz.
 
-TITEL: {a['title']}
-DESCRIPTION: {a['description'][:100]}
+TITEL: {a.get('title', '')}
+DESCRIPTION: {a.get('description', '')[:100]}
 
 ARTIKEL:
-{a['body']}
+{a.get('body', '')}
 
 Liefere NUR den vollständigen polierten Markdown-Text (ohne Frontmatter, ohne Erklärungen)."""
+
+
+def ai_polish(a):
+    """KI-Polish. Liefert neuen Body oder None."""
+    key = slug_of(a["path"])  # eindeutig (Bundles: Ordnername, nicht "index.md"!)
+    stamm = _stamm(key)
+    cache = {}
+    if os.path.exists(CACHE_FILE):
+        try:
+            cache = json.load(open(CACHE_FILE, encoding="utf-8"))
+        except Exception:
+            cache = {}
+    if key in cache:
+        return cache[key]
+    if stamm and stamm in cache:
+        return cache[stamm]
+
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
+        print("  ⚠️ Keine API-Keys – kein Polish möglich.")
+        return None
+
+    prompt = build_polish_prompt(a)
 
     for provider in ("gemini", "groq"):
         if not llm_client.available(provider):
@@ -161,6 +203,8 @@ Liefere NUR den vollständigen polierten Markdown-Text (ohne Frontmatter, ohne E
             )
             if text:
                 cache[key] = text
+                if stamm:
+                    cache[stamm] = text
                 json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
                 return text
         except Exception as exc:
@@ -218,21 +262,130 @@ def fix_number_units(text):
 
 
 def verify(a, new_body):
-    """Sicherheits-Verifikation vor dem Schreiben."""
+    """Sicherheits-Verifikation vor dem Schreiben (inkl. Publikations- & RS-Vertrag)."""
     problems = []
-    old_links = set(re.findall(r"https?://[^\s)\"']+", a["body"]))
+    orig_body = a.get("body", "")
+    old_links = set(re.findall(r"https?://[^\s)\"']+", orig_body))
     new_links = set(re.findall(r"https?://[^\s)\"']+", new_body))
     old_aff = {l for l in old_links if "check24" in l or "partner-versicherung" in l}
     new_aff = {l for l in new_links if "check24" in l or "partner-versicherung" in l}
     if old_aff - new_aff:
         problems.append(f"Affiliate-Links verloren: {len(old_aff - new_aff)}")
-    old_h = len(re.findall(r"^#{1,3} ", a["body"], re.M))
+    old_go = set(re.findall(r"\]\(\s*(/go/[a-z0-9_\-/]+/?)\s*\)", orig_body, re.I))
+    new_go = set(re.findall(r"\]\(\s*(/go/[a-z0-9_\-/]+/?)\s*\)", new_body, re.I))
+    if old_go - new_go:
+        problems.append(f"/go/-Links verloren: {sorted(old_go - new_go)}")
+    old_h = len(re.findall(r"^#{1,3} ", orig_body, re.M))
     new_h = len(re.findall(r"^#{1,3} ", new_body, re.M))
     if abs(old_h - new_h) > 2:
         problems.append(f"Überschriften {old_h}→{new_h}")
-    if len(new_body) < len(a["body"]) * 0.75:
+    if len(new_body) < len(orig_body) * 0.75:
         problems.append("zu stark gekürzt")
+
+    # Publikations-Vertrag (V1 Flesch >= 60, V2 keine neuen harten Textverständnis-Funde)
+    fm = a.get("fm") or f'title: "{a.get("title", "Check")}"\n'
+    slug = a.get("slug") or (slug_of(a["path"]) if a.get("path") else "profi-polish-check")
+    if _vertrag_pruefe is None or _vertrag_raw_aus is None:
+        problems.append(f"Publikations-Vertrag nicht prüfbar ({_VERTRAG_FEHLER})")
+    else:
+        alt_raw = _vertrag_raw_aus(fm, orig_body)
+        neu_raw = _vertrag_raw_aus(fm, new_body)
+        verstoesse = _vertrag_pruefe(slug, alt_raw, neu_raw)
+        if verstoesse:
+            kurz = verstoesse_kurz(verstoesse) if verstoesse_kurz else "; ".join(str(v) for v in verstoesse)
+            problems.append(f"Publikations-Vertrag: {kurz}")
+
+    # Redaktions-Standard-Schutz (WF-D4E0 #710): Lektorat darf weder Pflicht-Module
+    # (RS1 Kurzfassung, RS2 Frage-H2, RS3 Faustregel, RS4 Schrittfolge) löschen noch
+    # neue unbelegte Zahlenbehauptungen (RS5) oder Phantom-Quellen (RS6) einführen.
+    if _rs_guard is not None:
+        vorher_rs = _rs_guard.reserve_quality_findings(orig_body)
+        nachher_rs = _rs_guard.reserve_quality_findings(new_body)
+        vorher_klassen = {f.split(":", 1)[0].strip() for f in vorher_rs}
+        nachher_klassen = {f.split(":", 1)[0].strip() for f in nachher_rs}
+        neue_klassen = sorted(nachher_klassen - vorher_klassen)
+        if neue_klassen:
+            problems.append(f"Redaktions-Standard-Regression ({', '.join(neue_klassen)})")
+        vorher_rs5 = len(_rs_guard._reserve_numeric_claim_findings(orig_body))
+        nachher_rs5 = len(_rs_guard._reserve_numeric_claim_findings(new_body))
+        if nachher_rs5 > vorher_rs5:
+            problems.append(f"RS5-Zahlenbehauptungen erhöht ({vorher_rs5}→{nachher_rs5})")
     return problems
+
+
+def _already_gate_clean(a: dict) -> bool:
+    """True, wenn der Entwurf bereits Flesch >= 60, 0 harte Textverständnis-Funde
+    und 0 Redaktions-Standard-Funde hat (Idempotenz in der Reserve-Heilerkette)."""
+    if (_vertrag_raw_aus is None or _vertrag_flesch is None
+            or _vertrag_harte_funde is None or _rs_guard is None
+            or _rc_guard is None or _tv_guard is None):
+        return False
+    orig_body = a.get("body", "")
+    fm = a.get("fm") or f'title: "{a.get("title", "Check")}"\n'
+    slug = a.get("slug") or (slug_of(a["path"]) if a.get("path") else "profi-polish-check")
+    raw = _vertrag_raw_aus(fm, orig_body)
+    flesch = _vertrag_flesch(raw, slug)
+    if flesch is None or flesch < _rc_guard.NEW_FLESCH_MIN:
+        return False
+    if _vertrag_harte_funde(raw, slug, _tv_guard.load_terminologie()):
+        return False
+    if _rs_guard.reserve_quality_findings(orig_body):
+        return False
+    return True
+
+
+def run_selftest() -> int:
+    errors = []
+    sample = {
+        "path": "",
+        "slug": "2026-10-12-test-artikel",
+        "fm": 'title: "Stromkosten senken: Kluge Tipps im Alltag"\nauthor: "Frank Hartung"\n',
+        "title": "Stromkosten senken: Kluge Tipps im Alltag",
+        "description": "So senkst du deine Stromkosten im Alltag.",
+        "keywords": '["Stromkosten senken", "Haushalt"]',
+        "body": (
+            "Willst du im Alltag einfach Geld sparen? Kurze Wege helfen dir sofort. "
+            "Du behältst dein Konto jeden Monat sicher im Griff.\n\n"
+            "**Das Wichtigste in Kürze**\n"
+            "- Erster klarer Punkt für dein Budget.\n"
+            "- Zweiter klarer Punkt für deine Rechnung.\n"
+            "- Dritter klarer Punkt für deinen Vertrag.\n\n"
+            "## Warum steigen deine Kosten im Haushalt?\n\n"
+            "Alte Geräte ziehen im Leerlauf ständig Strom. Ein Schalter stoppt diesen "
+            "Verbrauch sofort. [Jetzt Strom vergleichen](/go/strom/)\n\n"
+            "**Faustregel:** Trenne ungenutzte Geräte abends komplett vom Netz.\n\n"
+            "## Wie gehst du Schritt für Schritt vor?\n\n"
+            "1. Prüfe deine letzte Abrechnung in Ruhe.\n"
+            "2. Miss große Geräte mit einem Stecker.\n"
+            "3. Wechsle rechtzeitig in einen fairen Tarif.\n"
+        ) * 6,
+    }
+    prompt = build_polish_prompt(sample)
+    if "ca. X–Y €" in prompt or "konkrete Zahl" in prompt:
+        errors.append("build_polish_prompt enthält noch alte RS5-widrige Zahlen-Anweisung")
+    if "Beispielrechnung" not in prompt or "Faustregel" not in prompt:
+        errors.append("build_polish_prompt nennt Beispielrechnung/Faustregel-Schutz nicht")
+    if verify(sample, sample["body"]):
+        errors.append(f"verify lehnt sauberen Ausgangstext ab: {verify(sample, sample['body'])}")
+    # Regression 1: Faustregel gelöscht (RS3) + unbelegte Zahl eingeführt (RS5)
+    kaputt_rs = sample["body"].replace("**Faustregel:**", "Hinweis:") + (
+        "\n\nEin fehlender Ausweis kostet dich bis zu 15.000 € Bußgeld.\n"
+    )
+    prob_rs = verify(sample, kaputt_rs)
+    if not any("Redaktions-Standard" in p or "RS5" in p for p in prob_rs):
+        errors.append(f"verify erkennt RS3/RS5-Regression nicht: {prob_rs}")
+    # Regression 2: /go/-Link verloren
+    kaputt_go = sample["body"].replace("(/go/strom/)", "(/kontakt/)")
+    prob_go = verify(sample, kaputt_go)
+    if not any("/go/-Links" in p for p in prob_go):
+        errors.append(f"verify erkennt verlorenen /go/-Link nicht: {prob_go}")
+    if errors:
+        print("profi_polish selftest FAILED:")
+        for e in errors:
+            print(f"  - {e}")
+        return 1
+    print("profi_polish selftest OK (Prompt-Vertrag, Publikations-Vertrag, RS3/RS5- & /go/-Schutz).")
+    return 0
 
 
 def write_polished(a, new_body):
@@ -263,6 +416,8 @@ def write_polished(a, new_body):
 
 
 def main():
+    if "--selftest" in sys.argv:
+        sys.exit(run_selftest())
     dry = "--dry-run" in sys.argv
     mode_new = "--new" in sys.argv
     mode_all = "--all" in sys.argv
@@ -298,6 +453,10 @@ def main():
             if "ai_generated: true" not in content:
                 skipped += 1
                 continue
+        if include_drafts and _already_gate_clean(a):
+            print(f"  [{idx+1}/{len(files)}] ⏭ Bereits gate-konform (Flesch ≥ 60 & RS1–RS7 grün): {a['slug']}")
+            skipped += 1
+            continue
         print(f"  [{idx+1}/{len(files)}] → {os.path.basename(path)[:50]}…", flush=True)
         new_body = ai_polish(a)
         if not new_body:

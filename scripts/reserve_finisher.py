@@ -305,6 +305,10 @@ HEALER_CHAIN = [
     # Live-Frontmatter können so nicht mehr „nebenbei“ mitgepusht werden.
     ("check_covers.py", ["--fix"]),
     ("generate_kurzantworten.py", [], "file"),
+    # WF-D4E0 (#710): Redaktions-Standard datei-bezirkelt + entwurfsfähig
+    # (deterministisch RS7 + RS2-Frage-H2 + RS3-Faustregel sowie KI-Heilung
+    # für RS1–RS6 unter Schutz des Publikations-Vertrags).
+    ("redaktions_standard.py", ["--fix", "--ai", "--include-drafts"], "file"),
     ("affiliate_profi_check.py", ["--fix"]),
     # REPARATUR 11.09.2026 (Reserve #5, #247): Der deterministische
     # R5-Absatz-Splitter war vorher in KEINEM Workflow verdrahtet – frische
@@ -564,6 +568,99 @@ def isolation_enforce(baseline: dict) -> list:
     return eingriffe
 
 
+def _kandidat_regressionen(slug: str, alt_bytes: bytes,
+                           neu_bytes: bytes) -> list[str]:
+    """Prüft, ob ein Heiler-Schritt am Kandidaten neue harte Gate-Defekte einführt.
+
+    WF-D4E0 (#710): Heiler wie profi_polish.py oder korpusweite Wächter dürfen
+    niemals einen bereits gültigen Titel (R1–R5), ein RS1–RS8-Modul oder die
+    Flesch-Schwelle (Publikations-Vertrag V1/V2) verschlechtern. Führt ein
+    Schritt einen neuen harten Befund ein, rollt `run_chain` den Kandidaten
+    sofort auf den Zustand vor diesem Schritt zurück.
+    """
+    if alt_bytes == neu_bytes:
+        return []
+    try:
+        alt_text = alt_bytes.decode("utf-8")
+        neu_text = neu_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return ["UTF-8-Dekodierung beschädigt"]
+
+    alt_parts = alt_text.split("---", 2)
+    neu_parts = neu_text.split("---", 2)
+    if len(neu_parts) < 3 or neu_parts[0] != "":
+        return ["Frontmatter-Grenzen beschädigt"]
+    alt_fm = alt_parts[1] if len(alt_parts) >= 3 else ""
+    alt_body = alt_parts[2] if len(alt_parts) >= 3 else alt_text
+    neu_fm = neu_parts[1]
+    neu_body = neu_parts[2]
+
+    gruende: list[str] = []
+    sys.path.insert(0, str(BLOG_DIR / "scripts"))
+
+    # 1) Publikations-Vertrag (V1 Flesch-Absturz, V2 neue harte Textverständnis-Funde)
+    try:
+        import publikations_vertrag as pv
+        verstoesse = pv.pruefe(slug, alt_text, neu_text)
+        if verstoesse:
+            gruende.append(pv.verstoesse_kurz(verstoesse))
+    except Exception:  # noqa: BLE001
+        pass
+
+    # 2) Redaktions-Standard (RS1–RS8 + RS5-Zahlenbehauptungen)
+    try:
+        import redaktions_standard as rs
+        vorher_rs = {f.split(":", 1)[0].strip()
+                     for f in rs.reserve_quality_findings(alt_body)}
+        nachher_rs = {f.split(":", 1)[0].strip()
+                      for f in rs.reserve_quality_findings(neu_body)}
+        neue_rs = sorted(nachher_rs - vorher_rs)
+        if neue_rs:
+            gruende.append("neue RS-Defekte: " + ", ".join(neue_rs))
+        vorher_rs5 = len(rs._reserve_numeric_claim_findings(alt_body))
+        nachher_rs5 = len(rs._reserve_numeric_claim_findings(neu_body))
+        if nachher_rs5 > vorher_rs5:
+            gruende.append(f"RS5-Zahlenbehauptungen erhöht ({vorher_rs5}→{nachher_rs5})")
+    except Exception:  # noqa: BLE001
+        pass
+
+    # 3) Titel-Regeln (R1–R5, inkl. R4 Doppelpunkt-Interpunktion)
+    try:
+        import check_titles as ct
+        alt_tm = re.search(r'(?m)^title:\s*["\']?(.+?)["\']?\s*$', alt_fm)
+        neu_tm = re.search(r'(?m)^title:\s*["\']?(.+?)["\']?\s*$', neu_fm)
+        alt_title = alt_tm.group(1).strip() if alt_tm else ""
+        neu_title = neu_tm.group(1).strip() if neu_tm else ""
+        if alt_title and neu_title and alt_title != neu_title:
+            vorher_t = {r for r, _ in ct.check_title(alt_title)}
+            nachher_t = {r for r, _ in ct.check_title(neu_title)}
+            neue_t = sorted(nachher_t - vorher_t)
+            if neue_t:
+                gruende.append("neue Titel-Defekte: " + ", ".join(neue_t))
+    except Exception:  # noqa: BLE001
+        pass
+
+    return gruende
+
+
+def _step_guard_enforce(vorher_map: dict, label: str) -> list[str]:
+    """Rollt Kandidaten zurück, bei denen `label` neue harte Defekte einführte."""
+    rollbacks: list[str] = []
+    for index, alt_bytes in vorher_map.items():
+        if not index.is_file():
+            continue
+        neu_bytes = index.read_bytes()
+        if neu_bytes == alt_bytes:
+            continue
+        reg = _kandidat_regressionen(index.parent.name, alt_bytes, neu_bytes)
+        if reg:
+            index.write_bytes(alt_bytes)
+            msg = f"{index.parent.name}: {'; '.join(reg)}"
+            rollbacks.append(msg)
+            print(f"  🛡 Schritt-Vertrag Rollback ({label}): {msg}")
+    return rollbacks
+
+
 def run_chain(results: list, targets: list, env: dict | None = None) -> None:
     """Führt die Heiler-Kette aus. Fehler einzelner Heiler sind Hinweise –
     die Zertifizierung ist die Instanz, die über Reife entscheidet.
@@ -579,6 +676,7 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
         scope = entry[2] if len(entry) > 2 else "corpus"
         if scope == "slug":
             for index in targets:
+                vorher = {index: index.read_bytes()} if index.is_file() else {}
                 args = [index.parent.name if a == "{slug}" else a
                         for a in raw_args]
                 label = f"{script} {' '.join(args)}".strip()
@@ -589,6 +687,7 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
                         cwd=str(BLOG_DIR), env=env, timeout=900,
                         capture_output=True, text=True)
                     tail = (proc.stdout or "").strip().splitlines()
+                    _step_guard_enforce(vorher, label)
                     results.append({
                         "heiler": label, "ok": proc.returncode == 0,
                         "letzte_zeile": tail[-1][:160] if tail else "",
@@ -596,11 +695,13 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
                     if proc.returncode != 0:
                         print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
                 except subprocess.TimeoutExpired:
+                    _step_guard_enforce(vorher, label)
                     results.append({"heiler": label, "ok": False,
                                     "letzte_zeile": "TIMEOUT > 900s",
                                     "rc": None})
                     print(f"  ⚠ Heiler TIMEOUT: {label}")
                 except Exception as exc:  # noqa: BLE001
+                    _step_guard_enforce(vorher, label)
                     results.append({"heiler": label, "ok": False,
                                     "letzte_zeile": f"Fehler: {exc}",
                                     "rc": None})
@@ -609,6 +710,7 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
         args = raw_args
         if scope == "file":
             for index in targets:
+                vorher = {index: index.read_bytes()} if index.is_file() else {}
                 label = (f"{script} {' '.join(args)} --file {index.parent.name}"
                          ).strip()
                 try:
@@ -619,6 +721,7 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
                         cwd=str(BLOG_DIR), env=env, timeout=900,
                         capture_output=True, text=True)
                     tail = (proc.stdout or "").strip().splitlines()
+                    _step_guard_enforce(vorher, label)
                     results.append({
                         "heiler": label, "ok": proc.returncode == 0,
                         "letzte_zeile": tail[-1][:160] if tail else "",
@@ -626,14 +729,17 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
                     if proc.returncode != 0:
                         print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
                 except subprocess.TimeoutExpired:
+                    _step_guard_enforce(vorher, label)
                     results.append({"heiler": label, "ok": False,
                                     "letzte_zeile": "TIMEOUT > 900s", "rc": None})
                     print(f"  ⚠ Heiler TIMEOUT: {label}")
                 except Exception as exc:  # noqa: BLE001
+                    _step_guard_enforce(vorher, label)
                     results.append({"heiler": label, "ok": False,
                                     "letzte_zeile": f"Fehler: {exc}", "rc": None})
                     print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
             continue
+        vorher = {idx: idx.read_bytes() for idx in targets if idx.is_file()}
         label = f"{script} {' '.join(args)}".strip()
         try:
             proc = subprocess.run(
@@ -642,6 +748,7 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
                 capture_output=True, text=True)
             ok = proc.returncode == 0
             tail = (proc.stdout or "").strip().splitlines()
+            _step_guard_enforce(vorher, label)
             results.append({
                 "heiler": label, "ok": ok,
                 "letzte_zeile": tail[-1][:160] if tail else "",
@@ -650,10 +757,12 @@ def run_chain(results: list, targets: list, env: dict | None = None) -> None:
             if not ok:
                 print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
         except subprocess.TimeoutExpired:
+            _step_guard_enforce(vorher, label)
             results.append({"heiler": label, "ok": False,
                             "letzte_zeile": "TIMEOUT > 900s", "rc": None})
             print(f"  ⚠ Heiler TIMEOUT: {label}")
         except Exception as exc:  # noqa: BLE001 – nie die Kette brechen
+            _step_guard_enforce(vorher, label)
             results.append({"heiler": label, "ok": False,
                             "letzte_zeile": f"Fehler: {exc}", "rc": None})
             print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
@@ -1001,6 +1110,29 @@ def selftest() -> int:
                                       for e in intent_schritte):
         fehler.append("Intent-Heilung muss datei-bezirkelt laufen "
                       "(--fix --heal --file), nie korpusweit")
+    rs_schritte = [e for e in HEALER_CHAIN if e[0] == "redaktions_standard.py"]
+    if not rs_schritte or not all("--include-drafts" in e[1] and e[2] == "file"
+                                  for e in rs_schritte):
+        fehler.append("Redaktions-Standard muss datei-bezirkelt mit "
+                      "--include-drafts in HEALER_CHAIN laufen (#710)")
+    # WF-D4E0 (#710): Schritt-Vertrag (_kandidat_regressionen) muss
+    # RS-Regressionen und unbelegte Zahlen erkennen.
+    sauber_alt = (
+        '---\ntitle: "Stromkosten senken: Clevere Tipps für dich"\n---\n\n'
+        '**Das Wichtigste in Kürze**\n\n- Tipp eins.\n- Tipp zwei.\n- Tipp drei.\n\n'
+        '## Warum hilft der Vergleich?\n\nKurzer Satz hier. Noch ein kurzer Satz.\n\n'
+        '## Wie wechselst du richtig?\n\n1. Eins.\n2. Zwei.\n3. Drei.\n\n'
+        '**Faustregel:** Prüfe deinen Vertrag jedes Jahr.\n'
+    ).encode("utf-8")
+    kaputt_neu = (
+        '---\ntitle: "Stromkosten senken: Clevere Tipps für dich"\n---\n\n'
+        '**Das Wichtigste in Kürze**\n\n- Tipp eins.\n- Tipp zwei.\n- Tipp drei.\n\n'
+        '## Warum hilft der Vergleich?\n\nDas spart dir ca. 250 € im Jahr.\n\n'
+        '## Wie wechselst du richtig?\n\n1. Eins.\n2. Zwei.\n3. Drei.\n'
+    ).encode("utf-8")
+    reg_befunde = _kandidat_regressionen("2026-10-12-test", sauber_alt, kaputt_neu)
+    if not reg_befunde:
+        fehler.append("Schritt-Vertrag erkennt RS3/RS5-Regression nicht (#710)")
     if fehler:
         print("🛑 RESERVE-FINISHER-SELFTEST FEHLGESCHLAGEN:")
         for e in fehler:
