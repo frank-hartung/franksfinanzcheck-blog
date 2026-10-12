@@ -113,6 +113,14 @@ def now_iso() -> str:
     return dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+RE_DATUM_PRAEFIX = re.compile(r"^\d{4}-\d{2}-\d{2}-")
+
+
+def _stamm(slug: str) -> str:
+    """Datumsloser Stamm eines Kandidaten-Slugs (überlebt lift_to_today)."""
+    return RE_DATUM_PRAEFIX.sub("", (slug or "").strip())
+
+
 def signatur(grund: str) -> str:
     """Stabile Fund-Signatur: gleiche Ursache = gleiche Signatur.
 
@@ -228,6 +236,7 @@ def record(rows: list[dict], state_path: Path | None = None,
     blocked: list[dict] = []
     geschont: list[dict] = []
     seen = set()
+    active_slugs = {r.get("slug") for r in rows if r.get("slug")}
 
     for row in rows:
         slug = row.get("slug")
@@ -242,6 +251,18 @@ def record(rows: list[dict], state_path: Path | None = None,
             continue                     # Infrastruktur, kein Content-Urteil
         sig = signatur(grund)
         eintrag = state.get(slug)
+        if eintrag is None:
+            # WF-D4E0 (#710): reserve_finisher.lift_to_today() benennt
+            # <alt-datum>-<stamm> vor der Zertifizierung auf <heute>-<stamm>
+            # um. Ohne Stamm-Migration fiel hits jeden Tag auf 1 zurück.
+            stamm = _stamm(slug)
+            if stamm:
+                kandidaten_alt = [
+                    k for k in state
+                    if k not in active_slugs and _stamm(k) == stamm
+                ]
+                if len(kandidaten_alt) == 1:
+                    eintrag = state.pop(kandidaten_alt[0], None)
         if not eintrag or eintrag.get("signatur") != sig:
             eintrag = {"signatur": sig, "hits": 0, "first": now_iso(),
                        "grund": grund}
@@ -480,6 +501,23 @@ def run_selftest() -> int:
         text_gut = (posts / "2026-09-15-gut" / "index.md").read_text("utf-8")
         if "reserve_blocked" in text_gut:
             fehler.append("wegen Werkzeugfehler darf niemand ausgemustert werden")
+
+        # 5b) WF-D4E0 (#710): Stamm-Kontinuität über lift_to_today-Umbenennung.
+        #     Wird 2026-09-15-wanderer am Folgetag zu 2026-09-16-wanderer
+        #     umdatiert, darf der Zähler NICHT wieder bei 1 beginnen.
+        p_wander = root / "wander.json"
+        (posts / "2026-09-16-wanderer").mkdir(parents=True, exist_ok=True)
+        (posts / "2026-09-16-wanderer" / "index.md").write_text(
+            "---\ntitle: \"Wanderer\"\ndraft: true\nreserve: true\n---\n\nText.\n",
+            encoding="utf-8")
+        record([{"slug": "2026-09-15-wanderer", "ready": False,
+                 "reason": rows[0]["reason"]}], p_wander, posts,
+               apply=True, run_key="run:tag1")
+        blocked_w = record([{"slug": "2026-09-16-wanderer", "ready": False,
+                             "reason": rows[0]["reason"]}], p_wander, posts,
+                           apply=True, run_key="run:tag2")
+        if len(blocked_w) != 1 or blocked_w[0]["slug"] != "2026-09-16-wanderer":
+            fehler.append(f"Stamm-Migration nach lift_to_today griff nicht: {blocked_w}")
 
     # 6) Lauf-Kennung: GitHub-Actions-Läufe sind über GITHUB_RUN_ID getrennt,
     #    außerhalb von Actions zählt der Kalendertag (Handlauf).

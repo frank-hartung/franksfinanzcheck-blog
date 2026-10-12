@@ -256,6 +256,12 @@ GATE_BEFUNDE: tuple[dict, ...] = (
                "Politur-Heiler und der R5-Absatz-Splitter – alle mit "
                "Wirkungsprobe in der Kette. „manuell reparieren“ beschreibt "
                "die Lücke vor der Reparatur, nicht das Urteil über den Text.")},
+    {"muster": "reserve-qualit", "klasse": HEILBAR,
+     "heiler": ("redaktions_standard.py", "check_titles.py",
+                "lesbarkeit_heiler.py", "profi_polish.py"),
+     "grund": ("Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel "
+               "R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py "
+               "und lesbarkeit_heiler.py in der Reserve-Kette (#710).")},
     {"muster": "quality-score", "klasse": HEILBAR,
      "heiler": ("profi_polish.py", "spellcheck.py", "check_length.py"),
      "grund": ("Der Score ist die Summe heilbarer Teile (Rechtschreibung, "
@@ -498,6 +504,11 @@ def run_selftest() -> int:
             _ruine["klasse"] != HEILBAR or gate_befund_loeschbar(
                 "R14-MARKER-RUINE: Politur-Ruine")[0]:
         fehler.append("R14-Marker-Ruine muss den Ruinen-Heiler nennen (#612)")
+    _rqg = gate_befund_klasse(
+        "Reserve-Qualitäts-Gate nicht bestanden: RS3: keine markierte "
+        "**Faustregel:**")
+    if _rqg["klasse"] != HEILBAR or "redaktions_standard.py" not in _rqg["heiler"]:
+        fehler.append("Reserve-Qualitäts-Gate muss als heilbar klassifiziert sein (#710)")
     if gate_befund_klasse("Gate-Ausnahme: x")["klasse"] != TRANSIENT:
         fehler.append("Werkzeugfehler muss transient sein")
     if gate_befund_klasse("Freigabe fehlt")["klasse"] != MENSCHLICH:

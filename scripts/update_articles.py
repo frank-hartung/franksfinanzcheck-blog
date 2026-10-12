@@ -175,9 +175,11 @@ Tarif-Vergleichs-Blog auf (Frische-Signal für Google). Der heutige Stand ist {s
 REGELN – STRENG EINHALTEN:
 1. Überarbeite die Einleitung und 2-3 Absätze sprachlich so, dass sie aktuell wirken.
 2. Füge die Angabe "{stand}" an passender Stelle ein (z. B. in der Einleitung oder bei Preisen).
-3. Ersetze veraltete konkrete Preiszahlen durch aktuelle, PLAUSIBLE Spannen mit "ca." 
-   (z. B. "ca. 30–40 € pro Monat"). ERFINDE KEINE konkreten Anbieter-Fakten – verwende
-   vorsichtige Formulierungen wie "in der Regel", "je nach Anbieter".
+3. ZAHLEN-VERTRAG (RS5, hart): Erfinde KEINE neuen Zahlen, Preise, Prozentwerte oder Spannen.
+   Ein bloßes „ca.", „rund" oder „in der Regel" gilt am Gate NICHT als Beleg! Jede Zahl mit Einheit
+   muss im SELBEN Satz als Modell-/Beispielrechnung („Beispielrechnung", „Modellrechnung", „Annahme",
+   „Rechenbeispiel") gekennzeichnet sein oder einen klickbaren Quellenlink im selben Satz tragen;
+   formuliere andernfalls ohne Zahl.
 4. Behalte ALLE Überschriften (##, ###) exakt bei – ändere ihre Formulierung nur minimal.
 5. Behalte alle FAQ-Fragen (### ... mit ?) bei, frisch nur die Antworten leicht auf.
 6. Behalte ALLE Links exakt bei – insbesondere Affiliate-Links zu a.check24.net und

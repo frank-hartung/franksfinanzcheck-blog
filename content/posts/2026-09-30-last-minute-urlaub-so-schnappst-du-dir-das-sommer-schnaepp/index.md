@@ -1,5 +1,5 @@
 ---
-title: "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp"
+title: "Last Minute Urlaub: So schnappst du dir das Sommer‑Schnäpp"
 description: "Last Minute Urlaub: Erfahre, wie du Last Minute Urlaub clever buchst, Reiseangebote günstig sicherst und im Sommer große Ersparnisse erzielst."
 date: 2026-09-30T10:11:05Z
 draft: false
@@ -10,7 +10,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 
 keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
-pin_title: "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp"
+pin_title: "Last Minute Urlaub: So schnappst du dir das Sommer‑Schnäpp"
 pin_description: "*Werbung | Last Minute Urlaub: Erfahre, wie du Last Minute Urlaub clever buchst, Reiseangebote günstig sicherst und im Sommer große Ersparnisse erzielst. Mehr Spartipps auf FranksFinanzcheck! #lastminuteurlaub #reiseangeboteguenstig #sommerurlaubschnaeppchen"
 ai_generated: true
 ai_provider: "Content-Engine v2"
@@ -19,7 +19,7 @@ engine_level: "draft"
 inspiration: Last-Minute Urlaubsangebote sichern
 cover:
   image: "images/covers/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp.jpg"
-  alt: "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp"
+  alt: "Last Minute Urlaub: So schnappst du dir das Sommer‑Schnäpp"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Buche zwei bis acht Wochen vor der Abreise. So sparst du bis zu 50 Prozent gegenüber dem normalen Preis. Den größten Rabatt holst du heraus, wenn du beim Ziel und beim Flughafen flexibel bleibst und kurz vorher die Restplätze vergleichst."
 quellen:
