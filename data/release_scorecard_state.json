@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T13:04:55Z",
-  "modus": "live",
-  "commit": "2cf8b93ce02d900f7d04dfc4fcf33015b871e6c1",
+  "generated_at": "2026-10-12T13:16:54Z",
+  "modus": "kandidaten",
+  "commit": "82e7f642f35f06c504b89c46956e7163d3b8d3ba",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
