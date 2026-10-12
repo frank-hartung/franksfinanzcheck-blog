@@ -4,6 +4,15 @@
 
 ## Ergebnis und Abgrenzung
 
+**Integrationshinweis:** Während der Arbeit wurde `main` durch die separaten
+Reparaturen #720/#721 weiterentwickelt (Stand `05178f3`). Diese redaktionellen
+Änderungen, Lesbarkeits-Verträge und YMYL-Schreibsperren wurden auf dem festen
+Arbeitsbranch übernommen. Der nachfolgende Stand 7/6 und die vier damaligen
+RS-Blocker dokumentieren ausdrücklich die erste Abnahme **vor** dieser
+Integration, nicht den aktuellen Stand der inzwischen bearbeiteten Artikel.
+Die Abnahme des integrierten Stands wird unten separat protokolliert.
+
+
 Die Reserve-Automatik wurde im bestehenden System gehärtet, nicht durch eine
 zweite Produktionslinie ersetzt. Das Vorratsziel bleibt in `reserve_economy.py`;
 Publikations-, Fakten-, YMYL-, Affiliate- und Redaktions-Gates bleiben verbindlich.
@@ -12,8 +21,8 @@ Die echte lokale Neubewertung vom **12.10.2026, 21:17:13 UTC** bestätigt
 **7 READY bei Ziel 6 aus 11 Entwürfen**. Sie lief mit Hugo Extended 0.164.0,
 Hunspell 1.7.2 und dem tatsächlichen deutschen LibreOffice-Frami-Wörterbuch.
 Alle Artikeldateien unter `content/` waren anschließend bytegenau unverändert.
-Das Zertifikat ist eine **lokale vollständige Messung**, kein vorgetäuschter
-GitHub-Actions-Lauf. Die vier abgelehnten Entwürfe bleiben abgelehnt.
+Das damalige Zertifikat ist eine **lokale vollständige Messung**, kein vorgetäuschter
+GitHub-Actions-Lauf. Die vier damals abgelehnten Entwürfe wurden in dieser Abnahme nicht freigegeben.
 
 Damit ist auch die bereits im Ausgangsstand vorhandene SHA-Abweichung des
 Entwurfs `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt`
@@ -172,7 +181,7 @@ versteckte Cache-Dateien eingeschlossen). Die Diagnose ist damit nicht vom
 Erfolg des Push abhängig. Bei frühem Abbruch oder Cancellation können einzelne
 Dateien fehlen; das Artefakt enthält dann die bereits vorhandenen Belege.
 
-## Noch gesperrter Bestand
+## Historische Blocker der ersten Abnahme (vor Main-Integration)
 
 | Entwurf (Kurzname) | Verbleibender Grund |
 |---|---|
@@ -181,7 +190,8 @@ Dateien fehlen; das Artefakt enthält dann die bereits vorhandenen Belege.
 | Clevere Haushaltsgeräte | 43 unbelegte Zahlenbehauptungen |
 | Wärmepumpe vs. Gasheizung | 29 unbelegte Zahlenbehauptungen; Flesch 59,6 |
 
-Diese Zahlen sind Diagnosen der realen lokalen Messung, keine pauschale
+Diese Zahlen sind Diagnosen der ersten realen lokalen Messung, keine aktuelle
+Bestandsbehauptung nach den inzwischen übernommenen Reparaturen und keine pauschale
 KI-Freigabe. Quellen-/Modellannahmen müssen redaktionell belegt werden; für
 YMYL gelten weiterhin die vorhandenen menschlichen Freigaberegeln.
 
@@ -194,7 +204,7 @@ ab. `test_git_sync.py` enthält zusätzliche echte Rebase-Sabotageproben mit
 Wegwerf-Remotes. Der Operations-Selbsttest ist im Governance-Minimum registriert;
 `npm run test:reserve` enthält die neue Batterie.
 
-**Abschließende lokale Abnahme:**
+**Lokale Abnahme vor Main-Integration:**
 
 | Prüfung | Tatsächliches Ergebnis |
 |---|---|
@@ -247,6 +257,52 @@ python3 scripts/reserve_operations.py --preflight
 RESERVE_WRITERS_ALLOWED=0 python3 scripts/reserve_readiness.py
 python3 scripts/reserve_gate.py --report-json .cache/content-reserve/reserve-end-local.json
 ```
+
+### Integrierter Stand und Konfliktauflösung
+
+Der zunächst eröffnete PR #722 war wegen neuer Main-Commits konfliktbehaftet.
+Es wurde `main` auf dem Arbeitsbranch integriert, nicht umgekehrt und ohne
+Wechsel des Arena-Branches. Der Konflikt im Finisher verbindet nun beide
+Schutzschichten: die neu hinzugekommene per-Heiler-Regressionsprüfung und
+Rollback aus `main` **sowie** die begrenzten Prozessgruppen-/Budget-Aufrufe.
+Die Schrittprüfung läuft auch nach Timeout/Abbruch; zwei zusätzliche Tests
+beweisen die kombinierte Verdrahtung für Datei-, Slug- und Korpus-Scope.
+
+Die vollständigen neuesten Maschinenartefakte und das Main-Siegel wurden
+übernommen, nicht textweise zusammenkopiert. Anschließend wurde der belegte
+FEST-Drift mit dem echten Signierer aus dem committeten Integrationsstand
+`ad56631` geheilt. Dabei wurden auch zwei auf `main` bereits geänderte
+FEST-Verträge (`publikations_vertrag.py`, `redaktions_standard.py`)
+nachvollziehbar in das Siegel übernommen; die sechs kritischen Knoten wurden
+nicht übersteuert. Die Redaktionstexte, Covers und Produktions-Audit-Ereignisse
+aus `main` bleiben unverändert erhalten.
+
+**Aktuelle Abnahme nach Integration:**
+
+| Prüfung | Ergebnis des integrierten Stands |
+|---|---|
+| Gesamtsuite | **2.915 Tests grün**, 2 Skips (200,7 s) |
+| Gesamtsuite unter Uhr +97 Tage | **2.915 Tests grün**, 4 Skips (200,0 s) |
+| KI-/Netz-Probe | **114 Workflow-Selbsttests grün** |
+| Kombinierter Budget-/Schritt-Regressionsschutz | 63 operative Tests; beide Schutzschichten bleiben aktiv |
+| Echte komplette Neubewertung | **11/6 READY aus 11 Entwürfen**, 12.10.2026, **22:51:55 UTC** |
+| Artikel und Produktions-Audit | Bytegenau wie im übernommenen Main-Stand `05178f3` |
+| Integrität / Reserve-Snapshot / Actions-Audit | Alle grün; 49 signierte Kerndateien |
+| Governance | C1–C36-Selbsttest und Quick-Prüfung grün |
+| Produktions-Build | Hugo Extended 0.164.0 grün; 84 Seiten, 1.838 statische Dateien |
+
+Die zwischenzeitlichen redaktionellen Main-Reparaturen beseitigten die vier
+historischen Blocker. Das wurde hier nicht aus dem Main-Zähler übernommen,
+sondern mit authentischen Werkzeugen erneut vollständig gemessen. Auch diese
+Messung war lokal und schreibfrei für die Redaktion; keine CI-Lauf-ID wurde
+erfunden. Das komplette aktuelle Zertifikat enthält echte Einzelzeitpunkte
+und die unveränderten Bytes der inzwischen reparierten Artikel.
+
+Die historische 7/6-Messung wird nicht als aktuelle Messung verkauft. Ebenso
+sind die neuen Produktions-Audit-Ereignisse und Textänderungen ausschließlich
+aus `main` übernommen; die lokalen Prüfungen ergänzten keine Produktionszeilen.
+PR #722 ist die Übergabe für die Workflow-Änderungen. Ein Merge nach `main`,
+ein Produktions-Dispatch und ein Deploy wurden nicht vorgenommen.
 
 Lokale Tests und Publikationssimulationen gehören nicht in `data/audit/`.
 Für diese Abnahme war das Audit-Ziel ausdrücklich ein ignorierter Cache-Pfad;
