@@ -1,7 +1,7 @@
 # 🔎 SUCHRADAR – Google-Suchergebnis-Erfassung ohne API (Nachbau)
 
 > Premium-Rollout 12.10.2026 · Auftrag Frank Hartung
-> Anleitung: `docs/ANLEITUNG-SUCHRADAR.md` · Cockpit: `SUCHRADAR-STATUS.md`
+> Anleitung: `docs/ANLEITUNG-SUCHRADAR.md` · Cockpit: `SUCHRADAR-RADAR.md`
 
 ## Auftrag
 
@@ -53,13 +53,13 @@ Der Blog hatte bereits eine SERP-Anbindung, aber nicht die geforderte:
 
 | Baustein | Datei | Zeilen | Zweck |
 |---|---|---|---|
-| Engine | `scripts/suchradar.py` | 1146 | Anfragen, Cache, Quote, Auswertung, CLI, Selbsttest |
+| Engine | `scripts/suchradar.py` | 1152 | Anfragen, Cache, Quote, Auswertung, CLI, Selbsttest |
 | Anbieter | `scripts/serp_anbieter.py` | 1257 | 10 Adapter, HTTP, robots, Kostensperre, SSRF-Gatter |
 | HTML-Baum | `scripts/serp_html.py` | 367 | Parser mit CSS-Teilmenge, Standardbibliothek |
-| Konfiguration | `data/suchradar.yaml` | 142 | SSOT: Suchbegriffe, Budget, Anbieter, Instanzen |
-| Taktgeber | `.github/workflows/suchradar.yml` | 235 | täglich 07:52 MESZ + manuell |
-| Anleitung | `docs/ANLEITUNG-SUCHRADAR.md` | 238 | Bedienung, Störungssuche, Leitplanken |
-| Tests | `scripts/tests/test_suchradar.py` | 769 | 73 Unit-Tests, sandbox-isoliert |
+| Konfiguration | `data/suchradar.yaml` | 145 | SSOT: Suchbegriffe, Budget, Anbieter, Instanzen |
+| Taktgeber | `.github/workflows/suchradar.yml` | 269 | täglich 07:52 MESZ + manuell |
+| Anleitung | `docs/ANLEITUNG-SUCHRADAR.md` | 247 | Bedienung, Störungssuche, Leitplanken |
+| Tests | `scripts/tests/test_suchradar.py` | 835 | 78 Unit-Tests, sandbox-isoliert |
 | HTML-Proben | `scripts/tests/serp_proben/` | 4 | echte Markups aller vier Endpunkte |
 | Geldfläche | `data/kostensperre.yaml` | +33 | Fläche `serp_premium` registriert |
 
@@ -128,7 +128,7 @@ python3 scripts/suchradar.py --selftest
   ✅ 13 Prüfblöcke (Suchradar) + 10 Prüfblöcke (9 Anbieter, 9 Ausführer)
 
 python3 -m unittest scripts.tests.test_suchradar
-  ✅ Ran 73 tests in 0.522s – OK
+  ✅ Ran 78 tests in 0.456s – OK
 
 python3 scripts/selftest_ki.py --trap-workflows
   ✅ KI-Probe grün: 108 Selbsttests urteilen ohne Modell und ohne Netz.
@@ -148,12 +148,12 @@ Workflow-Vertrag (YAML geparst): 11 Schritte, Cron-Slot 52 5 * * *
   ✅ kollisionsfrei gegen alle 45+ bestehenden Workflows
 
 Berichtserzeugung mit simuliertem Anbieter
-  ✅ SUCHRADAR-STATUS.md rendert über alle fünf Abschnitte
+  ✅ SUCHRADAR-RADAR.md rendert über alle fünf Abschnitte
      (Artefakt danach gelöscht – simulierte Treffer dürfen nicht als
      echter Befund liegenbleiben)
 ```
 
-### Fünf echte Fehler, die die Tests gefunden haben
+### Sechs echte Fehler, die die Tests gefunden haben
 
 Nicht zur Dekoration – jeder war ein Befund im ersten Entwurf:
 
@@ -190,6 +190,17 @@ Nachsehen gefunden:
    eins. Der Lauf blieb grün, nur die Beschreibungen gehörten zum
    jeweils vorherigen Titel. Ersetzt durch einen zeilenweisen
    Zustandsautomaten, der eine Lücke als leeres Feld verbucht.
+
+6. **Das Ergebnis war unsichtbar.** Das Cockpit hieß `SUCHRADAR-STATUS.md`
+   – und fiel damit unter `.gitignore: /*-STATUS.md`. Der einzige
+   menschenlesbare Output eines vollautomatischen Laufs wäre als
+   CI-Artefakt geendet: Frank hätte jedes Mal in die Actions-Ansicht
+   klicken müssen, um zu sehen, was seine Automatik ergibt. Umbenannt auf
+   `SUCHRADAR-RADAR.md` und in die Stage-Liste des Workflows aufgenommen –
+   dem Vorbild von `KENNZAHLEN-RADAR.md` und `AUTHORITY-RADAR.md` folgend,
+   die genauso erzeugt und versioniert werden. Die Testklasse
+   `TestCockpitSichtbar` hält das fest (sabotagegeprüft: 3 Fehler, sobald
+   der Name zurückfällt).
 
 ## Nicht geprüft – und warum
 

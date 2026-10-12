@@ -83,7 +83,13 @@ except ImportError:                                        # pragma: no cover
 ROOT = Path(__file__).resolve().parent.parent
 KONFIG = ROOT / "data" / "suchradar.yaml"
 ZUSTAND = ROOT / "data" / "suchradar"
-COCKPIT = ROOT / "SUCHRADAR-STATUS.md"
+# Name bewusst NICHT `*-STATUS.md`: Die .gitignore-Regel `/*-STATUS.md`
+# würde das Cockpit verschlucken – und damit den einzigen menschenlesbaren
+# Output eines vollautomatischen Systems in ein CI-Artefakt verbannen.
+# Vorbild sind KENNZAHLEN-RADAR.md und AUTHORITY-RADAR.md: erzeugt vom
+# Skript, versioniert, vom Workflow committet. Der Test
+# `test_cockpit_ist_nicht_git_ignoriert` hält diesen Namen fest.
+COCKPIT = ROOT / "SUCHRADAR-RADAR.md"
 
 CACHE_VERZEICHNIS = ZUSTAND / "cache"
 QUOTEN_DATEI = ZUSTAND / "quota.json"
@@ -722,7 +728,7 @@ def wettbewerbs_radar(treffer: list[dict], spitze: int = 15) -> dict:
 #  BERICHT
 # ====================================================================
 def bericht(befund: dict, konfig: dict | None = None) -> str:
-    """Menschenlesbares Cockpit. Wird als SUCHRADAR-STATUS.md abgelegt."""
+    """Menschenlesbares Cockpit. Wird als SUCHRADAR-RADAR.md abgelegt."""
     konfig = konfig if konfig is not None else lade_konfiguration()
     jetzt = befund.get("zeitstempel", berlin_now().isoformat())
     z = befund.get("zaehlung", {})
@@ -1054,7 +1060,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-anfragen", type=int, default=0,
                         help="Höchstzahl der Anfragen in diesem Lauf")
     parser.add_argument("--kein-bericht", action="store_true",
-                        help="SUCHRADAR-STATUS.md nicht überschreiben")
+                        help="SUCHRADAR-RADAR.md nicht überschreiben")
     parser.add_argument("--cache-raeumen", action="store_true",
                         help="Abgelaufene Zwischenspeicher-Einträge löschen")
     argumente = parser.parse_args(argv)
@@ -1093,7 +1099,7 @@ def main(argv: list[str] | None = None) -> int:
         if COCKPIT.exists():
             print(COCKPIT.read_text(encoding="utf-8"))
             return 0
-        print("Noch kein Lauf – SUCHRADAR-STATUS.md fehlt.", file=sys.stderr)
+        print("Noch kein Lauf – SUCHRADAR-RADAR.md fehlt.", file=sys.stderr)
         return 1
 
     anfragen = ([{"anfrage": a, "herkunft": "adhoc", "prioritaet": 1.0}

@@ -85,7 +85,7 @@ class SandboxFall(unittest.TestCase):
         sr.RANKING_VERLAUF = sr.ZUSTAND / "rankings.jsonl"
         sr.WETTBEWERB_DATEI = sr.ZUSTAND / "wettbewerb.json"
         sr.ERGEBNIS_DATEI = sr.ZUSTAND / "letzte_ergebnisse.json"
-        sr.COCKPIT = self.temp / "SUCHRADAR-STATUS.md"
+        sr.COCKPIT = self.temp / "SUCHRADAR-RADAR.md"
         sr.KONFIG = self.temp / "suchradar.yaml"
 
     def tearDown(self):
@@ -700,6 +700,72 @@ class TestGatter(SandboxFall):
     def test_leere_anfrage_wird_abgelehnt(self):
         with self.assertRaises(ValueError):
             sa.hole_treffer("   ")
+
+
+# ====================================================================
+#  SICHTBARKEIT DES ERGEBNISSES
+# ====================================================================
+class TestCockpitSichtbar(unittest.TestCase):
+    """Das Ergebnis muss im Repo ankommen, nicht nur im CI-Artefakt.
+
+    Ein vollautomatischer Lauf, dessen einziger menschenlesbarer Output
+    als Build-Artefakt endet, ist für den Betreiber unsichtbar – er muss
+    jedes Mal in die Actions-Ansicht klicken. Genau das war der Zustand
+    des ersten Entwurfs: Der Name `SUCHRADAR-STATUS.md` fiel unter die
+    .gitignore-Regel `/*-STATUS.md` und wurde damit still verworfen.
+    """
+
+    def test_cockpit_faellt_nicht_unter_die_ignore_regel(self):
+        """Regression: `*-STATUS.md` und `*-REPORT.md` sind ignoriert."""
+        name = sr.COCKPIT.name
+        self.assertFalse(name.endswith("-STATUS.md"),
+                         f"{name} fällt unter .gitignore /*-STATUS.md")
+        self.assertFalse(name.endswith("-REPORT.md"),
+                         f"{name} fällt unter .gitignore /*-REPORT.md")
+
+    def test_git_ignoriert_das_cockpit_nicht(self):
+        """Der echte Beweis – nicht nur die Namensregel nachgebaut."""
+        import subprocess
+        rel = sr.COCKPIT.name
+        try:
+            r = subprocess.run(["git", "check-ignore", "-q", rel],
+                               cwd=sr.ROOT, capture_output=True, timeout=30)
+        except (OSError, subprocess.SubprocessError):
+            self.skipTest("git nicht verfügbar")
+        # Exit 0 = ignoriert, 1 = nicht ignoriert.
+        self.assertEqual(r.returncode, 1,
+                         f"{rel} wird von .gitignore verschluckt – das "
+                         "Cockpit käme nie im Repo an")
+
+    def test_workflow_committet_das_cockpit(self):
+        """Die Datei nützt nichts, wenn der Workflow sie nicht staged."""
+        wf = (sr.ROOT / ".github" / "workflows" / "suchradar.yml")
+        text = wf.read_text(encoding="utf-8")
+        self.assertIn(sr.COCKPIT.name, text,
+                      "Workflow erwähnt das Cockpit nicht")
+        pfade = text.split("PFADE=(", 1)[1].split(")", 1)[0]
+        self.assertIn(sr.COCKPIT.name, pfade,
+                      "Cockpit steht nicht in der Stage-Liste des Workflows")
+
+    def test_zustand_ist_vollstaendig_gelistet(self):
+        """Jede Auswertungsdatei muss mitkommen, sonst fehlt morgen das Delta."""
+        wf = (sr.ROOT / ".github" / "workflows" / "suchradar.yml")
+        pfade = wf.read_text(encoding="utf-8").split("PFADE=(", 1)[1].split(")", 1)[0]
+        for datei in ("quota.json", "instanzen.json", "rankings.json",
+                      "rankings.jsonl", "wettbewerb.json"):
+            self.assertIn(datei, pfade, f"{datei} wird nicht committet")
+
+    def test_cache_bleibt_ignoriert(self):
+        """Der Zwischenspeicher ist flüchtig und darf das Repo nicht füllen."""
+        import subprocess
+        try:
+            r = subprocess.run(["git", "check-ignore", "-q",
+                                "data/suchradar/cache/x.json"],
+                               cwd=sr.ROOT, capture_output=True, timeout=30)
+        except (OSError, subprocess.SubprocessError):
+            self.skipTest("git nicht verfügbar")
+        self.assertEqual(r.returncode, 0,
+                         "data/suchradar/cache/ ist nicht ignoriert")
 
 
 # ====================================================================

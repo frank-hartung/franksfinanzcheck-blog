@@ -83,9 +83,11 @@ die Suchmaschinen mit Anfragen überschüttet, ist ein Sperrproblem.
 5. Zustand committen (Quote, Instanzen-Gesundheit, Rang-Historie)
 6. Meldung bei Totalausfall, sonst nichts
 
-Das Cockpit `SUCHRADAR-STATUS.md` ist **bewusst git-ignoriert**
-(`.gitignore: /*-STATUS.md` – Cockpits werden erzeugt, nicht versioniert).
-Im Workflow-Protokoll liegt es als Artefakt `suchradar-cockpit`.
+Das Cockpit `SUCHRADAR-RADAR.md` wird **mit committet** – das Ergebnis
+steht also im Repo und nicht nur als CI-Artefakt. Es heißt bewusst nicht
+`*-STATUS.md`: Die .gitignore-Regel `/*-STATUS.md` würde es verschlucken.
+Vorbild sind `KENNZAHLEN-RADAR.md` und `AUTHORITY-RADAR.md`, die genauso
+erzeugt und versioniert werden.
 
 Der Zustand unter `data/suchradar/` ist dagegen versioniert. Ohne die
 Rang-Historie gibt es kein Delta zum Vortag, und ohne die Quote gibt es
@@ -240,6 +242,6 @@ richtige Quelle – und die ist ebenfalls kostenlos:
 | `data/suchradar/wettbewerb.json` | Wettbewerbs-Radar | ja |
 | `data/suchradar/verlauf.jsonl` | Lauf-Protokoll | ja |
 | `data/suchradar/cache/` | Zwischenspeicher | nein |
-| `SUCHRADAR-STATUS.md` | Cockpit | nein (erzeugt) |
+| `SUCHRADAR-RADAR.md` | Cockpit | **ja** (erzeugt, committet) |
 | `scripts/tests/serp_proben/` | HTML-Proben der Parser-Tests | ja |
 | `.github/workflows/suchradar.yml` | tägliche Automatik | ja |

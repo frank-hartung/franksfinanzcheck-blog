@@ -289,7 +289,7 @@ Kosten. Getaktet von `.github/workflows/suchradar.yml` (täglich 07:52 MESZ).
 - **Vor jedem Umbau an den Providern:** `npm run test:suchradar`. Die
   Parser-Tests laufen gegen echte HTML-Proben in
   `scripts/tests/serp_proben/` – fällt einer, ist die Probe veraltet.
-- Cockpit: `SUCHRADAR-STATUS.md` · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md` ·
+- Cockpit: `SUCHRADAR-RADAR.md` (versioniert) · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md` ·
   Bericht: `SUCHRADAR-GOOGLE-SERP-NACHBAU-PREMIUM-2026-10-12.md`.
 
 ## Faktenfrische: Recherche pro Artikel (seit 27.09.2026)

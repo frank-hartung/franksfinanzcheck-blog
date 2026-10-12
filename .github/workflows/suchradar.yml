@@ -152,9 +152,13 @@ jobs:
 
       # ------------------------------------------------------------
       # 5. Zustand sichern.
-      #    SUCHRADAR-STATUS.md ist bewusst git-ignoriert
-      #    (.gitignore: /*-STATUS.md – Cockpits werden erzeugt, nicht
-      #    versioniert). Der Zustand darunter ist es nicht: Ohne die
+      #    Das Cockpit SUCHRADAR-RADAR.md wird MIT committet. Es heißt
+      #    bewusst nicht `*-STATUS.md`: Die .gitignore-Regel /*-STATUS.md
+      #    würde es verschlucken und den einzigen menschenlesbaren Output
+      #    eines vollautomatischen Laufs in ein CI-Artefakt verbannen.
+      #    Vorbild: KENNZAHLEN-RADAR.md, AUTHORITY-RADAR.md.
+      #
+      #    Der Zustand darunter ist ohnehin versioniert: Ohne die
       #    Rang-Historie gibt es kein Delta zum Vortag, und ohne die
       #    Quote gibt es keine Budget-Grenze über Läufe hinweg.
       #
@@ -167,6 +171,7 @@ jobs:
         if: always()
         run: |
           PFADE=(
+            SUCHRADAR-RADAR.md
             data/suchradar/quota.json
             data/suchradar/instanzen.json
             data/suchradar/rankings.json
@@ -204,7 +209,7 @@ jobs:
         with:
           name: suchradar-cockpit
           path: |
-            SUCHRADAR-STATUS.md
+            SUCHRADAR-RADAR.md
             data/suchradar/*.json
           if-no-files-found: ignore
 
