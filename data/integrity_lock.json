@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-12T21:59:11.842257+00:00",
-  "head": "65d891f",
+  "signed_at": "2026-10-12T21:54:23.787982+00:00",
+  "head": "123b6a3",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -22,7 +22,7 @@
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "172a4812488cecfd147dc8d03ffba0971fbb12c2a5fa8b2dbd5771590ef2c393",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
-    "scripts/affiliate_integrity_gate.py": "52ad31d85f97e4345678f35b13090be8807511bb1870c7a9aad9364d138b2aad",
+    "scripts/affiliate_integrity_gate.py": "f03a713b095bfe2c695b3471f1303c4552e85318a7a7ebb24f2de7de82452b30",
     "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -37,13 +37,13 @@
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "d19dee6b438ed06fb2b74718a90defc4b0ec0f5b40635254c5dd2c91ebdb0e14",
     "scripts/lektor_guard.py": "0f6eb11dbf468907eb24c460dfeff42833fe50dc855ab4345fa5dd35fa22a166",
-    "scripts/lesbarkeit_heiler.py": "8b9f40a5f1e706d4131973e15dd9d19ee6d6929365cdc78108a960d5861d4ebd",
+    "scripts/lesbarkeit_heiler.py": "92ea9f6f235dcd8f550afd24ab9f517329dace321bc376837fec78741febcec5",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
-    "scripts/redaktions_standard.py": "410c65072122855850620a63c4e51147541fbfc6423fa87121187b1af65b305c",
-    "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
+    "scripts/redaktions_standard.py": "a17163055e3c7ea5f90eef015f4903c1d5fee070de9b77e7f9747a64398653a1",
+    "scripts/reserve_artifacts.py": "291dea98a703c2c1d19de91f4cbd2c6a2df33b914d07ad4aba793aa0d68ec652",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
@@ -53,54 +53,16 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "e8e48edb27e998487f659877747f034df0c39a123fcbc82a46b6f0e788c53e06",
-  "audit_start_sha256": "1b3a8c17aedc07df5bf1671cc1bad97fe3c8385ca6fb87a099dd54f7571b9e25",
+  "files_sha256": "ee9606650f8c2d32674ae4448a1f57fa5d10cb1ce56ae5b1868b96630189fc84",
+  "audit_start_sha256": "5cdf675fb97f11a7d35aa0e786b5687a6abeb6b81e01b90bd7ac31f756bd5cc9",
   "audit": [
-    {
-      "date": "2026-10-08",
-      "art": "add",
-      "head": "de04097",
-      "geaendert": [
-        "scripts/artefakt_waechter.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/artefakt_waechter.py",
-          "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
-          "commits": [],
-          "commits_art": "neu-unter-siegel"
-        }
-      ],
-      "files_sha256": "b11fe8c2b24bd6fcb93400d30db9729a79953889382d9c5746ed5bc84d8eaf01",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-08",
-      "art": "set-current",
-      "head": "1711970b",
-      "geaendert": [
-        "scripts/lesbarkeit_heiler.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/lesbarkeit_heiler.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
-      "prev_sha256": "1b3a8c17aedc07df5bf1671cc1bad97fe3c8385ca6fb87a099dd54f7571b9e25"
-    },
     {
       "date": "2026-10-08",
       "art": "set-current",
       "head": "21e1defa",
       "geaendert": [],
       "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
-      "prev_sha256": "5e5d3197fe10c9d5b87d9dcdf11e6ef2802ae1ea77f2dda5874306498e1beddc"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-08",
@@ -516,52 +478,71 @@
     },
     {
       "date": "2026-10-12",
-      "art": "heal",
-      "head": "65d891f",
+      "art": "set-current",
+      "head": "b9cf199",
       "geaendert": [
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/reserve_artifacts.py"
+        "scripts/redaktions_standard.py"
       ],
       "herkunft": [
         {
-          "pfad": "scripts/affiliate_integrity_gate.py",
+          "pfad": "scripts/redaktions_standard.py",
           "klasse": "fest",
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "65d891f",
+              "sha": "b9cf199",
               "datum": "2026-10-12",
-              "betreff": "feat(reserve): Vorratsproduktion und Messnachweise dauerhaft absichern"
+              "betreff": "fix(reserve): WF-D4E0 (#710) – 11/11 Pool-Reife & Heiler-/Vertrags-Dauerheilung"
             },
             {
-              "sha": "0af015f",
-              "datum": "2026-10-12",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/reserve_artifacts.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "65d891f",
-              "datum": "2026-10-12",
-              "betreff": "feat(reserve): Vorratsproduktion und Messnachweise dauerhaft absichern"
-            },
-            {
-              "sha": "0af015f",
-              "datum": "2026-10-12",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+              "sha": "77c9337",
+              "datum": "2026-10-10",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
             }
           ],
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "ca1fe09bac981f21bf7d29348bb863601cef659b45256bd719696fc23e7fd22a",
-      "files_sha256": "e8e48edb27e998487f659877747f034df0c39a123fcbc82a46b6f0e788c53e06"
+      "files_sha256": "ed039471f810ae0c1d0aab6495b293241482ad47c19734b42e1046922a98b3f9",
+      "prev_sha256": "ca1fe09bac981f21bf7d29348bb863601cef659b45256bd719696fc23e7fd22a"
+    },
+    {
+      "date": "2026-10-12",
+      "art": "set-current",
+      "head": "4d7616a",
+      "geaendert": [],
+      "files_sha256": "ed039471f810ae0c1d0aab6495b293241482ad47c19734b42e1046922a98b3f9",
+      "prev_sha256": "2dbfa982e94bfac6146ad9b569c58e8ea8d5215ecfd5d94e5faf6a05fe37e415"
+    },
+    {
+      "date": "2026-10-12",
+      "art": "heal",
+      "head": "123b6a3",
+      "geaendert": [
+        "scripts/lesbarkeit_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "fd16147",
+              "datum": "2026-10-12",
+              "betreff": "feat(heiler): Nachsorge-Auswahl --entwuerfe für Entwürfe unter der Schwelle (#712)"
+            },
+            {
+              "sha": "6e8162c",
+              "datum": "2026-10-12",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "a40ffa80ab696404649270d2d27950e03c61ddae6ce424d6921a111766d4a7de",
+      "files_sha256": "ee9606650f8c2d32674ae4448a1f57fa5d10cb1ce56ae5b1868b96630189fc84"
     }
   ]
 }

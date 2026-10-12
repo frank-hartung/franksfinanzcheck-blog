@@ -450,13 +450,13 @@
   "ts": "2026-09-29T15:09:43+00:00"
  },
  "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
+  "title": "Last Minute Urlaub: So schnappst du dir das Sommer‑Schnäpp",
+  "ts": "2026-10-12T21:26:10+00:00",
   "design": {
+   "v": 3,
    "badge": "GÜNSTIG REISEN",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
-  "ts": "2026-09-30T10:11:51+00:00"
+   "savings": ""
+  }
  },
  "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
   "design": {
@@ -1071,8 +1071,8 @@
   }
  },
  "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
-  "title": "Dein Weg zu geringeren: Monatskosten – Schritt für Schritt",
-  "ts": "2026-10-12T11:38:18+00:00",
+  "title": "Dein Weg zu geringeren Monatskosten: Schritt für Schritt",
+  "ts": "2026-10-12T21:26:23+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1080,8 +1080,8 @@
   }
  },
  "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-  "title": "Energieausweis: Was das Dokument für deine Fixkosten",
-  "ts": "2026-10-12T11:38:22+00:00",
+  "title": "Energieausweis: Was er für deine Fixkosten bedeutet",
+  "ts": "2026-10-12T21:26:17+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1098,8 +1098,8 @@
   }
  },
  "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-  "title": "Kleine Energiespar‑Tricks,: die deine Kosten sofort senken",
-  "ts": "2026-10-12T11:38:28+00:00",
+  "title": "Kleine Energiespar‑Tricks: Deine Kosten sofort senken",
+  "ts": "2026-10-12T21:26:13+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1107,8 +1107,8 @@
   }
  },
  "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
-  "title": "Stromkosten senken: – clevere Haushaltsgeräte im Überblick",
-  "ts": "2026-10-12T11:38:31+00:00",
+  "title": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
+  "ts": "2026-10-12T21:26:20+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",

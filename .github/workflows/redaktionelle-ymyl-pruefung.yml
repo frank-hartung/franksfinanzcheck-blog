@@ -32,7 +32,10 @@ jobs:
         run: python3 -m pip install -q "pyyaml==6.0.3"
 
       - name: Regelwerk selbst prüfen
-        run: python3 scripts/editorial_review_gate.py --selftest
+        run: |
+          python3 scripts/editorial_review_gate.py --selftest
+          python3 -m unittest discover -s scripts/tests -p 'test_editorial_review_gate.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_ymyl_write_contract.py' -v
 
       - name: Bestand prüfen und Review-Queue erzeugen
         id: audit

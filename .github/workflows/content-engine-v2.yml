@@ -546,6 +546,15 @@ jobs:
           # nachweislich über die importierte Schwelle hebt – ein „Versuch“
           # schreibt sich nicht fest (fail-closed).
           python3 scripts/lesbarkeit_heiler.py --new-only --fix || echo "⚠ Lesbarkeits-Heiler – Restlücke im Log (fail-closed, nichts Halbfertiges geschrieben)"
+          echo "== Lesbarkeits-Nachsorge für den Vorrat (read_draft-Klasse, #712) =="
+          # Der Heiler oben kennt nur den Artikel des Tages (--new-only). Genau
+          # darum meldete der Governance-Report #712 Woche für Woche dieselben
+          # Entwürfe unter der Publish-Schwelle: Sie stammten aus anderen Rollen
+          # (News/ki_redaktion), hatten keinen Gate-Hold und damit in KEINER
+          # Kette einen Adressaten. `--entwuerfe` nimmt alle Entwürfe unter der
+          # importierten Schwelle, schlechteste zuerst; das Tor T1-T4 bleibt
+          # fail-closed, ein Sweep ohne Kandidaten endet mit Exit 0.
+          python3 scripts/lesbarkeit_heiler.py --entwuerfe --fix || echo "⚠ Lesbarkeits-Nachsorge – Restlücke im Log (fail-closed, nichts Halbfertiges geschrieben)"
           echo "== Politur-Ruinen-Heiler (R11/R13/R14, Tor T1-T4, fail-closed, WF-D4E0/#612) =="
           # Die Ruinen-Familie ist ein HARTES Publish-Kriterium (#482) und hatte
           # in KEINER Kette einen Schreiber: Der Kandidat

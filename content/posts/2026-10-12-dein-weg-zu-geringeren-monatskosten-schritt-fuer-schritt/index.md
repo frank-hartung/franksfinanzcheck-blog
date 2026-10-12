@@ -1,5 +1,5 @@
 ---
-title: "Dein Weg zu geringeren: Monatskosten – Schritt für Schritt"
+title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
 description: "Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick."
 date: 2026-10-12T11:17:49Z
 draft: true
@@ -11,7 +11,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Dein Weg zu geringeren", "Geringeren", "Monatskosten"]
-pin_title: "Dein Weg zu geringeren Monatskosten – Schritt für Schritt"
+pin_title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
 pin_description: "*Werbung | Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick. Mehr Spartipps auf FranksFinanzcheck! #deinwegzugeringeren #geringeren #monatskosten"
 ai_generated: true
 ai_provider: "Content-Engine v2"
@@ -23,8 +23,8 @@ redaktionelle_pruefung:
 
 inspiration: Wie du deine monatlichen Ausgaben reduzieren kannst
 cover:
-  image: "images/covers/2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg"
-  alt: "Dein Weg zu geringeren Monatskosten – Schritt für Schritt"
+  image: "images/covers/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg"
+  alt: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
   caption: "Tipp von FranksFinanzcheck"
 quellen:
   - id: "Q1"

@@ -79,14 +79,11 @@ except Exception:  # noqa: BLE001
 
 
 def _is_ymyl_sealed(path: str) -> bool:
-    """True, wenn der Artikel Hochrisiko + freigegeben + Hash gültig ist."""
+    """Auch abgelaufene/beschädigte Freigaben bleiben schreibgeschützt."""
     if not _YMYL_AVAILABLE or _ymyl_gate is None:
-        return False
-    try:
-        result = _ymyl_gate.evaluate_path(path)
-        return bool(result.get("approved") and not result.get("blocking") and result.get("risk") == "hoch")
-    except Exception:
-        return False
+        return True  # Ohne Messung keine automatische Änderung.
+    return _ymyl_gate.automatic_write_protected(path)
+
 
 # PUBLIKATIONS-VERTRAG (Vorgang WF-54C4/#607, 07.10.2026): Die KI-Heilung
 # prüfte bisher nur die STRUKTUR ihrer Änderung (Links, H2-Anzahl, Länge,
@@ -113,6 +110,10 @@ DO_AI = "--ai" in sys.argv
 DO_GATE = "--gate" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
 DRY_RUN = "--dry-run" in sys.argv
+INCLUDE_DRAFTS = "--include-drafts" in sys.argv
+SINGLE_FILE = (sys.argv[sys.argv.index("--file") + 1]
+               if "--file" in sys.argv and sys.argv.index("--file") + 1 < len(sys.argv)
+               else "")
 
 # ---------------------------------------------------------------------------
 # HEDGE-MARKER (RS5): Wörter, die eine Zahl einordnen (WiWo-Verifikation).
@@ -154,7 +155,7 @@ PHANTOM_QUELLEN = [
 # Artikel laden
 # ---------------------------------------------------------------------------
 
-def load_article(path):
+def load_article(path, include_drafts=False):
     try:
         content = open(path, encoding="utf-8").read()
     except Exception:
@@ -163,7 +164,7 @@ def load_article(path):
     if len(parts) != 3:
         return None
     fm, body = parts[1], parts[2]
-    if "draft: true" in fm:
+    if not (include_drafts or INCLUDE_DRAFTS) and "draft: true" in fm:
         return None
 
     def get(key):
@@ -470,6 +471,75 @@ def fix_rs7(path, a):
     return join_article(fm, parts[2], parts[0])
 
 
+_QUESTION_STARTS = (
+    "warum ", "wie ", "was ", "wann ", "welche ", "welcher ", "welches ",
+    "wo ", "worauf ", "wer ", "wieso ", "weshalb ", "ab wann ", "für wen ",
+)
+
+
+def fix_rs2_rs3_deterministic(body: str) -> tuple[str, list[str]]:
+    """Heilt fehlende RS2 (Frage-H2) und RS3 (Faustregel) deterministisch,
+    ohne Links, H2-Anzahl oder Zahlen-Aussagen zu verändern."""
+    healed: list[str] = []
+    cur = body or ""
+
+    # RS2: mindestens 2 Frage-H2 mit '?'
+    r2_ok, _ = detect_rs2(cur)
+    if not r2_ok:
+        lines = cur.splitlines()
+        q_count = sum(1 for ln in lines if ln.startswith("## ") and ln.rstrip().endswith("?"))
+        for idx, ln in enumerate(lines):
+            if q_count >= 2:
+                break
+            if not ln.startswith("## "):
+                continue
+            h_text = ln[3:].strip()
+            if h_text.endswith("?"):
+                continue
+            low = h_text.lower()
+            if low in ("häufige fragen", "faq", "fazit"):
+                continue
+            new_h = None
+            if any(low.startswith(prefix) for prefix in _QUESTION_STARTS):
+                new_h = h_text.rstrip(".!:") + "?"
+            elif re.match(r"^typische fehler\b", low):
+                rest = h_text[len("Typische Fehler"):].strip(" –—-:")
+                new_h = (f"Welche typischen Fehler {rest} kosten dich Geld?"
+                         if rest else "Welche typischen Fehler kosten dich Geld?")
+            elif re.match(r"^fazit\s*[:–—-]\s*(.+)$", h_text, re.I):
+                tail = re.match(r"^fazit\s*[:–—-]\s*(.+)$", h_text, re.I).group(1).rstrip(".!")
+                new_h = f"Fazit: {tail}?" if any(tail.lower().startswith(p) for p in _QUESTION_STARTS) else f"Fazit: Was bedeutet das für {tail}?"
+            if new_h and new_h != h_text:
+                lines[idx] = f"## {new_h}"
+                q_count += 1
+        candidate = "\n".join(lines)
+        if cur.endswith("\n") and not candidate.endswith("\n"):
+            candidate += "\n"
+        if detect_rs2(candidate)[0] and _links(cur) == _links(candidate) and len(h2_lines(cur)) == len(h2_lines(candidate)):
+            cur = candidate
+            healed.append("RS2")
+
+    # RS3: mindestens 1 markierte Faustregel
+    r3_ok, _ = detect_rs3(cur)
+    if not r3_ok:
+        faustregel_absatz = (
+            "\n\n**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten "
+            "über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, "
+            "bevor du dich vertraglich festlegst.\n\n"
+        )
+        m_faq = re.search(r"^##\s+(?:Häufige Fragen|FAQ|Fazit)\b", cur, re.M | re.I)
+        if m_faq:
+            pos = m_faq.start()
+            candidate = cur[:pos].rstrip() + faustregel_absatz + cur[pos:]
+        else:
+            candidate = cur.rstrip() + faustregel_absatz
+        if detect_rs3(candidate)[0] and _links(cur) == _links(candidate):
+            cur = candidate
+            healed.append("RS3")
+
+    return cur, healed
+
+
 # ---------------------------------------------------------------------------
 # KI-Heilung (RS1–RS6) mit Verifikation
 # ---------------------------------------------------------------------------
@@ -558,8 +628,11 @@ def heal_article_ai(a, res, verworfen=None):
     """
     fehlend = res["hart_missing"]
     weiche = []
+    rs5_strict_vorher = _reserve_numeric_claim_findings(a["body"])
     if not res["rs5"][0]:
         weiche.append(f"RS5 harte Zahlen ohne Einordnung ({res['rs5'][2]} Sätze)")
+    elif rs5_strict_vorher:
+        weiche.append(f"RS5 Zahlenbehauptungen ohne Satzbeleg/Modellannahme ({len(rs5_strict_vorher)} Sätze)")
     if not res["rs6"][0]:
         weiche.append(f"RS6 Phantom-Quellen ({res['rs6'][2]} Stellen)")
     if not fehlend and not weiche:
@@ -574,7 +647,8 @@ def heal_article_ai(a, res, verworfen=None):
             "1. Ergänze direkt NACH der Einleitung (vor der ersten H2-Überschrift) "
             "das Modul:\n\n**Das Wichtigste in Kürze**\n\n- <Bullet 1>\n- <Bullet 2>\n"
             "- <Bullet 3>\n\nDrei bis vier konkrete Kernaussagen des Artikels "
-            "(Zahlen nur mit ca./rund/Spanne), keine Floskeln.")
+            "(ohne unbelegte Zahlen; Zahlenwerte nur mit Verweis auf die "
+            "Beispielrechnung im selben Satz), keine Floskeln.")
     if "RS2" in fehlend:
         auftraege.append(
             "2. Formuliere mindestens ZWEI bestehende H2-Überschriften in "
@@ -592,9 +666,12 @@ def heal_article_ai(a, res, verworfen=None):
             "1. …\n2. …\n3. …")
     if weiche:
         auftraege.append(
-            "5. Ehrlichkeit (WiWo-Standard): Ersetze harte Zahlen ohne Einordnung "
-            "durch ehrliche Spannen („ca. X–Y €“, „in der Regel“) oder kennzeichne "
-            "sie klar als Rechenbeispiel. Entferne ALLE Phantom-Quellen "
+            "5. Ehrlichkeit & Zahlen-Vertrag (RS5/RS6): Ein bloßes „ca.“, „rund“ oder "
+            "„in der Regel“ gilt am Gate NICHT als Beleg! Jede Zahl mit Einheit (€, %, "
+            "kWh, Monate, Jahre) muss im SELBEN Satz als Modell-/Beispielrechnung "
+            "(„Beispielrechnung“, „Modellrechnung“, „Annahme“, „Rechenbeispiel“) "
+            "gekennzeichnet sein oder ohne Zahl formuliert werden, sofern kein "
+            "klickbarer Quellenlink im selben Satz steht. Entferne ALLE Phantom-Quellen "
             "(„laut einer Studie“, „Experten sagen“ …) – formuliere stattdessen "
             "neutrales Allgemeinwissen ohne erfundene Belege.")
     prompt = (
@@ -647,7 +724,10 @@ def heal_article_ai(a, res, verworfen=None):
         _merke_verworfen(verworfen, a,
                          f"Idempotenz: {', '.join(res2['hart_missing'])} weiter offen")
         return None
-    if res2["rs5"][2] > res["rs5"][2] or res2["rs6"][2] > res["rs6"][2]:
+    rs5_strict_nachher = _reserve_numeric_claim_findings(neu)
+    if (res2["rs5"][2] > res["rs5"][2]
+            or res2["rs6"][2] > res["rs6"][2]
+            or len(rs5_strict_nachher) > len(rs5_strict_vorher)):
         print("  ✗ Nach-Heilung mehr Zahlen-/Quellen-Funde – verworfen.")
         _merke_verworfen(verworfen, a, "Idempotenz: mehr Zahlen-/Quellen-Funde")
         return None
@@ -881,6 +961,13 @@ SELFTEST = [
              "body": "Kurzer Satz hier. Noch ein kurzer Satz. Der Text bleibt leicht."},
             "In diesem Beitrag erfährst du alles Wichtige. Der Text bleibt leicht "
             "lesbar. Kurze Sätze helfen jedem Leser.")), True),
+    ("Fix-RS2-RS3-deterministisch", lambda: (
+        lambda out: detect_rs2(out[0])[0] and detect_rs3(out[0])[0] and out[1] == ["RS2", "RS3"]
+    )(fix_rs2_rs3_deterministic(
+        "## Warum ist der Vertrag wichtig\n\nKurzer Text.\n\n"
+        "## Typische Fehler beim Tarifwechsel\n\nMehr Text.\n\n"
+        "## Häufige Fragen\n\n### Frage 1?\nAntwort."
+    )), True),
 ]
 
 
@@ -915,16 +1002,17 @@ def main():
         return register_korrektur()
 
     today = datetime.date.today().isoformat()
-    posts = [load_article(p) for p in list_post_paths()]
+    raw_paths = [SINGLE_FILE] if SINGLE_FILE else list_post_paths()
+    posts = [load_article(p) for p in raw_paths]
     posts = [p for p in posts if p]
-    if NEW_ONLY:
+    if NEW_ONLY and not SINGLE_FILE:
         posts = [p for p in posts if p["date"] == today]
     results = [analyse_article(a) for a in posts]
     gehärtet = []
     history = []
     verworfen = []
 
-    # --- Deterministische Heilung (RS7), immer bei --fix --------------------
+    # --- Deterministische Heilung (RS7 + RS2/RS3), immer bei --fix ----------
     if DO_FIX:
         for a in posts:
             if _is_ymyl_sealed(a["path"]):
@@ -937,13 +1025,31 @@ def main():
                 gehärtet.append(f"{a['slug']}: RS7 (fehlenden Autor ergänzt; keine Erfahrung erfunden)")
                 history.append({"slug": a["slug"], "regel": "RS7",
                                 "aktion": "fix-deterministisch"})
+                a = load_article(a["path"]) or a
+            neu_body, rs_det = fix_rs2_rs3_deterministic(a["body"])
+            if rs_det and neu_body != a["body"]:
+                vertrag_err = _vertrag_gruende(a, neu_body)
+                if not vertrag_err and not DRY_RUN:
+                    content = open(a["path"], encoding="utf-8").read()
+                    parts = content.split("---", 2)
+                    with open(a["path"], "w", encoding="utf-8") as fh:
+                        fh.write(join_article(parts[1], neu_body, parts[0]))
+                    gehärtet.append(f"{a['slug']}: {', '.join(rs_det)} (deterministisch)")
+                    history.append({"slug": a["slug"], "regel": "+".join(rs_det),
+                                    "aktion": "fix-deterministisch"})
         if not DRY_RUN and gehärtet:
-            print(f"✅ RS7 deterministisch geheilt: {len(gehärtet)} Artikel")
+            print(f"✅ Deterministisch geheilt: {len(gehärtet)} Schritt(e)")
+        posts = [load_article(p) for p in raw_paths]
+        posts = [p for p in posts if p]
+        if NEW_ONLY and not SINGLE_FILE:
+            posts = [p for p in posts if p["date"] == today]
+        results = [analyse_article(a) for a in posts]
 
     # --- KI-Heilung (RS1–RS6), bei --fix --ai -------------------------------
     if DO_FIX and DO_AI:
         kandidaten = [r for r in results
-                      if r["hart_missing"] or not r["rs5"][0] or not r["rs6"][0]]
+                      if r["hart_missing"] or not r["rs5"][0] or not r["rs6"][0]
+                      or _reserve_numeric_claim_findings(load_article(r["path"])["body"])]
         kandidaten.sort(key=lambda r: (
             len(r["hart_missing"]), r["rs5"][2] + r["rs6"][2]), reverse=True)
         backlog = 0
@@ -986,9 +1092,9 @@ def main():
             history.append({"slug": r["slug"], "regel": "RS1-RS6",
                             "aktion": "fix-ki"})
         # Nach der Heilung neu bewerten
-        posts = [load_article(p) for p in list_post_paths()]
+        posts = [load_article(p) for p in raw_paths]
         posts = [p for p in posts if p]
-        if NEW_ONLY:
+        if NEW_ONLY and not SINGLE_FILE:
             posts = [p for p in posts if p["date"] == today]
         results = [analyse_article(a) for a in posts]
         if not DRY_RUN and gehärtet:
@@ -1033,7 +1139,7 @@ def main():
             "fix+ai" if (DO_FIX and DO_AI) else
             "fix" if DO_FIX else
             "new-only" if NEW_ONLY else "report")
-    if not DRY_RUN:
+    if not DRY_RUN and not SINGLE_FILE:
         write_report(results, mode, gehärtet, verworfen)
         log_history(history + verworfen)
 

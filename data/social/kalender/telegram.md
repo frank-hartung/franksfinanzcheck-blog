@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 12.10.2026 15:16 (Europe/Berlin)  
+> Automatisch aktualisiert: 12.10.2026 23:46 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,14 +12,11 @@
 
 ## Kommende Beiträge
 
-### Mo, 12. Oktober 2026
-- **18:00** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 ### Sa, 17. Oktober 2026
 - **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### So, 18. Oktober 2026
-- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _nutzen_ · Launch  
+- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### So, 25. Oktober 2026
 - **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _vergleich_ · Launch  

@@ -463,7 +463,8 @@ def heal_density(body: str, main_kw: str) -> str:
 
 
 def heal_article_file(path: str, include_drafts: bool = False) -> tuple[bool, list[str]]:
-    content = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as fh:
+        content = fh.read()
     fm, body, full = split_fm(content)
     if not include_drafts and "draft: true" in fm:
         return False, []
@@ -574,6 +575,10 @@ def heal_article_file(path: str, include_drafts: bool = False) -> tuple[bool, li
                 actions.append(f"Casing: Titel -> {new_title_cased[:40]}")
         except Exception:
             pass
+        import editorial_review_gate
+        blocked = editorial_review_gate.automatic_change_findings(content, new_content)
+        if blocked:
+            return False, blocked
         open(path, "w", encoding="utf-8").write(new_content)
     return changed, actions
 

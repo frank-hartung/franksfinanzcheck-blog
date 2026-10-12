@@ -172,61 +172,119 @@ def strip_ellipsis(title: str) -> str:
     return t.strip()
 
 
+def _clean_colon_artifacts(t: str) -> str:
+    """Bereinigt Doppel-Interpunktion rund um den Doppelpunkt (,: / : –)."""
+    t = re.sub(r"[,;]+\s*:", ":", t)
+    t = re.sub(r":\s*[–—-]+\s*", ": ", t)
+    t = re.sub(r"\s+:", ":", t)
+    t = re.sub(r":\s{2,}", ": ", t)
+    # Erstes Wort nach ': ' großschreiben
+    t = re.sub(r":\s+([a-zäöüß])", lambda m: ": " + m.group(1).upper(), t, count=1)
+    return t.strip()
+
+
+# Kleingeschriebene Adjektiv-/Funktionswort-Endungen, nach denen NIEMALS ein
+# Doppelpunkt stehen darf (verhindert z. B. „geringeren: Monatskosten").
+_NO_COLON_AFTER_LOWER = {
+    "der", "die", "das", "den", "dem", "des", "ein", "eine", "einen", "einem",
+    "einer", "eines", "kein", "keine", "keinen", "dein", "deine", "deinen",
+    "deinem", "deiner", "ihr", "ihre", "ihren", "unser", "unsere", "für", "mit",
+    "ohne", "und", "oder", "im", "in", "am", "an", "auf", "aus", "bei", "von",
+    "vom", "zum", "zur", "bis", "als", "wie", "vor", "nach", "über", "unter",
+    "durch", "gegen", "ums", "ans", "ins", "so", "zu",
+}
+
+
+def _bad_colon_head_word(word: str) -> bool:
+    w = word.strip(".,;:!?–—-\"'")
+    if not w:
+        return True
+    wl = w.lower()
+    if wl in STOP or wl in _NO_COLON_AFTER_LOWER:
+        return True
+    # Kleingeschriebenes flektiertes Adjektiv vor Nomen (z. B. „geringeren", „cleveren")
+    if w[0].islower() and re.search(r"(?:eren|erem|erer|eres|en|em|er|es|e)$", wl):
+        # Infinitive auf -en wie „senken", „sparen", „wechseln" sind gültige Köpfe
+        if not wl.endswith(("senken", "sparen", "wechseln", "finden", "prüfen",
+                            "vergleichen", "führen", "sichern", "kündigen",
+                            "planen", "rechnen", "vermeiden", "nutzen",
+                            "optimieren", "reduzieren", "stoppen", "starten")):
+            return True
+    return False
+
+
 def ensure_colon_title(title: str) -> str:
     """Erzwingt Blog-Konvention 'Hauptkeyword: Untertitel' für Cover-Umbruch.
 
     Regeln:
-      - Titel mit ':' bleibt (nach Komposita-Fix)
-      - Titel > 45 ohne ':' → semantisch teilen
+      - Titel mit ':' bleibt (nach Bereinigung von ',:' und ': –')
+      - Vorhandener Gedankenstrich (' – ') oder Komma wird sauber zu ': '
+      - Titel > 45 ohne ':' → semantisch teilen (nie zwischen Adjektiv & Nomen)
       - Fragezeichen-Titel: Keyword-Teil nach dem ? wird Kopf
     """
     t = strip_ellipsis(title)
     t = re.sub(r"\s{2,}", " ", t).strip()
     if ":" in t:
-        return t
+        return _clean_colon_artifacts(t)
+    # 1) Vorhandener Gedankenstrich / Bindestrich mit Leerzeichen ("X – Y")
+    m_dash = re.search(r"^(.{10,48}?)\s+[–—-]\s+(.{8,})$", t)
+    if m_dash:
+        head = m_dash.group(1).rstrip(" ,;–—-")
+        tail = m_dash.group(2).lstrip(" ,;–—-")
+        if head and tail:
+            return _clean_colon_artifacts(f"{head}: {tail}")
+    # 2) Vorhandenes Komma nach Keyword-Kopf ("Kleine Energiespar-Tricks, die ...")
+    m_comma = re.search(r"^([^,]{10,42}),\s+(.{8,})$", t)
+    if m_comma:
+        head = m_comma.group(1).rstrip(" ,;–—-")
+        tail = m_comma.group(2).lstrip(" ,;–—-")
+        # Relativsatz-Einleitung ("die deine Kosten..." -> "Deine Kosten...")
+        tail = re.sub(r"^(?:die|der|das|welche)\s+(?=(?:dein|deine|deinen|ihr|ihre|dir|dich)\b)",
+                      "", tail, flags=re.I)
+        if head and tail:
+            return _clean_colon_artifacts(f"{head}: {tail}")
     # "X? Y" → "Y: X?" falls Y Keyword-artig
     if "?" in t:
         head, tail = t.split("?", 1)
         head, tail = head.strip(), tail.strip(" ?.-–")
         if tail and len(tail) >= 8:
-            # "Clevere Frugalismus Tipps" → "Frugalismus-Tipps: Mehr Freiheit durch Verzicht?"
-            # Bevorzuge Substantiv-Kompositum als Keyword-Kopf
             words = tail.split()
-            # Finde Haupt-Nomen (längstes Inhaltswort)
             content_w = [w for w in words if w.lower() not in STOP and len(w) > 3]
             if content_w:
-                # Kopf = Rest-Phrase, Untertitel = Frage
                 kw = " ".join(words)
-                # Frugalismus Tipps → Frugalismus-Tipps
                 kw = re.sub(r"\b([A-ZÄÖÜ][a-zäöüß]+)\s+(Tipps|Tarif|Tarife|Vergleich|Konto|Versicherung)\b",
                             r"\1-\2", kw)
-                new = f"{kw}: {head}?"
+                new = _clean_colon_artifacts(f"{kw}: {head}?")
                 if TITLE_MIN <= len(new) <= TITLE_MAX + 8:
-                    return new[:TITLE_MAX] if len(new) > TITLE_MAX else new
-        # Fallback: "Frage: Antwort-Stub"
+                    return new
         if len(head) >= 12:
-            return f"{head}?" if len(head) <= TITLE_MAX else head[:TITLE_MAX - 1] + "?"
+            return f"{head}?"
     # Semantische Teilung nach ~40 % der Wörter (Keyword-Kopf)
     words = t.split()
     if len(words) < 4:
         return t
-    # Bevorzugt nach 2–4 Wörtern teilen, wenn erstes Segment Keyword-artig
+    # Bevorzugt nach 2–5 Wörtern teilen, wenn erstes Segment Keyword-artig
     for cut in (2, 3, 4, 5):
         if cut >= len(words):
             break
-        head = " ".join(words[:cut])
-        tail = " ".join(words[cut:])
+        if _bad_colon_head_word(words[cut - 1]):
+            continue
+        head = " ".join(words[:cut]).rstrip(" ,;–—-")
+        tail = " ".join(words[cut:]).lstrip(" ,;–—-")
         if len(head) < 12 or len(tail) < 8:
             continue
-        # Kopf nicht mit Stopwort enden
-        if words[cut - 1].lower().strip(".,!?") in STOP:
-            continue
-        candidate = f"{head}: {tail}"
-        if len(candidate) <= TITLE_MAX + 5:
-            return candidate if len(candidate) <= TITLE_MAX else candidate[:TITLE_MAX].rstrip()
-    # Notnagel: erste Hälfte
+        candidate = _clean_colon_artifacts(f"{head}: {tail}")
+        if len(candidate) <= TITLE_MAX + 12:
+            return candidate
+    # Fallback: suche einen grammatisch sauberen Schnitt nahe der Mitte
     mid = max(2, len(words) // 2)
-    return f"{' '.join(words[:mid])}: {' '.join(words[mid:])}"[:TITLE_MAX]
+    for idx in (mid, mid - 1, mid + 1, 2, 3):
+        if 1 <= idx < len(words) and not _bad_colon_head_word(words[idx - 1]):
+            head = " ".join(words[:idx]).rstrip(" ,;–—-")
+            tail = " ".join(words[idx:]).lstrip(" ,;–—-")
+            if head and tail:
+                return _clean_colon_artifacts(f"{head}: {tail}")
+    return t
 
 
 def restore_known_titles(slug: str, title: str) -> str:

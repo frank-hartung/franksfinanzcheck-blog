@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 12.10.2026 15:16 (Europe/Berlin)  
+> Automatisch aktualisiert: 12.10.2026 23:46 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,23 +12,23 @@
 
 ## Kommende Beiträge
 
-### Mo, 12. Oktober 2026
-- **17:30** ⏳ DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 ### Di, 13. Oktober 2026
 - **07:30** ⏳ Handyvertrag kündigen: Frist und Kosten richtig prüfen — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _vergleich_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Sa, 24. Oktober 2026
-- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _mythos_ · Evergreen  
+- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _frage_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _thread_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
+- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _takeaway_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
 - ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
 - ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
 - ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
@@ -38,7 +38,6 @@
 - ✅ 05.10.2026 14:22 · Gasabschlag berechnen: So planst du die Heizsaison richtig → https://mastodon.social/@FranksFinanzcheck/117388279584058422
 - ✅ 04.10.2026 17:50 · Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp → https://mastodon.social/@FranksFinanzcheck/117383431263250864
 - ✅ 04.10.2026 10:52 · WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? → https://mastodon.social/@FranksFinanzcheck/117381789225405577
-- ✅ 01.10.2026 13:40 · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung → https://mastodon.social/@FranksFinanzcheck/117365463246886384
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

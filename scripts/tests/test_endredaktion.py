@@ -10,6 +10,11 @@ in temporären Verzeichnissen:
                     draft bleibt true; Deckel + Kill-Switch werden respektiert
   3) POLITUR      – Sicherheitsvertrag: veränderte Links werden verworfen,
                     saubere Politur wird übernommen und macht grün
+  3b) WIRKUNG     – Issue #712: Die Politur muss die Kennzahl BEWEGEN, für
+                    die sie gerufen wurde. Eine Fassung unter der Flesch-
+                    Schwelle (oder unter dem Längen-Floor) wird verworfen,
+                    die Datei bleibt byte-identisch; Flesch < 45 ist keine
+                    Sackgasse mehr (Heiler-Klasse mit Wirkungsprobe).
   4) MASTODON     – Poppy-Text wird erst gepostet, wenn der Artikel live
                     ist; danach Dedupe über mastodon_gesendet
 """
@@ -245,6 +250,141 @@ class TestPolitur(EndredaktionTempFall):
             summary = er.lauf(er.lade_config())
         self.assertEqual(summary["freigaben"], 0)
         self.assertEqual(self.lies(pfad), original)  # Body unangetastet
+
+
+class TestPoliturWirkung(EndredaktionTempFall):
+    """Issue #712: Die Nachsorge muss beweisen, dass sie die Kennzahl bewegt.
+
+    Vor dem 12.10.2026 prüfte der Sicherheitsvertrag Links, Überschriften,
+    Länge und Floskeln – aber nicht die Lesbarkeit. Eine Politur konnte einen
+    Entwurf mit Flesch 47 „optimiert“ zurückgeben; er blieb gelb, wurde nie
+    freigegeben, und die Lesbarkeits-Wache meldete ihn im nächsten
+    Governance-Report erneut. Dieselbe Bauart wie #609 (Reserve-Deckung ohne
+    Wirkung) – deshalb heißt die Lehre hier wie dort: Papier.
+    """
+
+    # Dichter Text: lange Sätze, viele Silben je Wort (Flesch < 45).
+    DICHT = ("Im Rahmen von umfangreichen Vertragsbedingungen erfolgt eine "
+             "Berücksichtigung der Verbrauchsmuster der Verbraucher, und die "
+             "Tarifberatung dokumentiert die Vereinbarung der "
+             "Zahlungsmodalitäten für die Folgejahre. ")
+
+    def dichter_body(self, wiederholungen: int = 90) -> str:
+        """Dichter Body mit drei H2-Abschnitten (E3-Minimum) – sonst wäre der
+        Entwurf schon an der Struktur blockiert und die Politur liefe nie."""
+        drittel = max(1, wiederholungen // 3)
+        return ("## Was passiert ist\n\n" + self.DICHT * drittel
+                + "\n\n## Was das für dich bedeutet\n\n" + self.DICHT * drittel
+                + "\n\n## Was du jetzt tun kannst\n\n"
+                + self.DICHT * (wiederholungen - 2 * drittel))
+
+    def test_unveraenderte_lesbarkeit_wird_verworfen(self):
+        """Antwort behebt die Floskel, lässt die Lesbarkeit aber unter 60."""
+        body = self.dichter_body().replace(
+            "## Was passiert ist\n\n", "## Was passiert ist\n\nHeutzutage gilt: ")
+        pfad = self.schreibe_post("2026-10-03-wirkungslos", body=body)
+        original = self.lies(pfad)
+        # Fassung ohne Floskel, sonst unverändert dicht: Flesch < 60.
+        antwort = body.replace("Heutzutage gilt: ", "")
+        self.assertLess(er._flesch_body(antwort), er.LESBARKEITS_SCHWELLE)
+        with mock.patch.object(er.llm_client, "chat",
+                               return_value=antwort) as m:
+            summary = er.lauf(er.lade_config())
+        self.assertTrue(m.called, "Politur wurde nicht einmal gefragt")
+        self.assertEqual(summary["freigaben"], 0)
+        self.assertEqual(self.lies(pfad), original,
+                         "wirkungslose Politur darf nichts schreiben (#712)")
+
+    def test_lesbarkeit_erreicht_wird_uebernommen(self):
+        """Antwort erreicht die Schwelle → wird geschrieben und freigegeben."""
+        # Der Vergleichs-Link steht in beiden Fassungen (der Vertrag verlangt
+        # ein identisches Link-Multiset – Links sind keine Lesbarkeits-Frage).
+        # Die Länge des Originals ist bewusst so gewählt, dass die gute
+        # Fassung auch die Behalte-Regel (≥ 85 %) und den Floor erfüllt.
+        body = (self.dichter_body(40)
+                + "\n\nMehr Details findest du im [Vergleich](https://a.de/x).\n")
+        pfad = self.schreibe_post("2026-10-03-wirkung", body=body)
+        antwort = guter_body()  # floor-lang, lesbar, gleiche Link-/H2-Zahl
+        self.assertGreaterEqual(er._flesch_body(antwort),
+                                er.LESBARKEITS_SCHWELLE)
+        self.assertGreaterEqual(er._laenge(antwort),
+                                er.length_policy.POSTS["target_min_chars"])
+        with mock.patch.object(er.llm_client, "chat", return_value=antwort):
+            summary = er.lauf(er.lade_config())
+        self.assertIn("Du prüfst deine Verträge", self.lies(pfad))
+        self.assertEqual(summary["freigaben"], 1, str(summary["details"]))
+
+    def test_laenge_unter_floor_wird_verworfen(self):
+        """Lesbarkeit gut, aber unter dem Längen-Floor → bleibt unpublizierbar."""
+        body = self.dichter_body(9)
+        pfad = self.schreibe_post("2026-10-03-zu-kurz", body=body)
+        original = self.lies(pfad)
+        antwort = ("## A\n\nDu prüfst deine Verträge. Der Preis steigt. "
+                   "Du wechselst den Tarif. Das spart Geld.\n\n## B\n\n"
+                   "Das dauert Minuten.\n\n## C\n\nDu sparst Geld.")
+        self.assertGreaterEqual(er._flesch_body(antwort),
+                                er.LESBARKEITS_SCHWELLE)
+        self.assertLess(er._laenge(antwort),
+                        er.length_policy.POSTS["target_min_chars"])
+        with mock.patch.object(er.llm_client, "chat", return_value=antwort):
+            summary = er.lauf(er.lade_config())
+        self.assertEqual(summary["freigaben"], 0)
+        self.assertEqual(self.lies(pfad), original,
+                         "eine Fassung unter dem Floor bleibt liegen (E2)")
+
+    def test_e6_rot_ist_keine_sackgasse_mehr(self):
+        """Flesch < 45 bekommt eine Politur (vorher: „blockiert“ = Endstation)."""
+        self.schreibe_post("2026-10-03-e6-rot", body=self.dichter_body())
+        artikel = er.artikel_laden(er.wartende_entwuerfe()[0]["path"])
+        funde = er.pruefe_artikel(artikel)
+        self.assertIn("E6", {f["code"] for f in funde})
+        self.assertEqual(er.urteil(funde), "blockiert")
+        with mock.patch.object(er.llm_client, "chat",
+                               return_value=guter_body()) as m:
+            er.lauf(er.lade_config())
+        self.assertTrue(m.called,
+                        "E6 rot muss eine Politur bekommen (Heiler-Klasse, #712)")
+
+    def test_deterministischer_heiler_heilt_e6(self):
+        """Stufe A des Lesbarkeits-Heilers hebt splittbare Sätze über die Schwelle.
+
+        Der Fixture-Text ist der der Wirkungsprobe des Heilers (WACHE-609) –
+        vier verschiedene Schachtelsätze mit Nahtstellen, damit keine
+        Phrasen-Wiederholung (R15) den T2-Vertrag reißt.
+        """
+        # Die vier Sätze der Wirkungsprobe (WACHE-609) – bewusst verschiedene
+        # Formulierungen: Eine ≥ 10-Wort-Wiederholung im Fließtext wäre ein
+        # harter Fund (R15-PHRASEN-DOPPEL) und das Tor würde zu Recht
+        # verwerfen. Genau so soll es sein.
+        a = ("Wer seine Gebühren prüft, senkt die Kosten im Monat, und wer den "
+             "Tarif mit anderen Anbietern vergleicht, findet schnell ein "
+             "günstigeres Angebot, und wer die Frist für die Kündigung "
+             "notiert, vermeidet eine Verlängerung des Vertrages um ein "
+             "weiteres Jahr.")
+        b = ("Viele Verbraucher zahlen im Rahmen von alten Verträgen jeden "
+             "Monat zu viel, und sie erkennen die Mehrkosten erst bei der "
+             "Abrechnung, aber dann ist die Frist für die Kündigung schon "
+             "vorbei, denn die Bank meldet sich selten von selbst bei ihren "
+             "Kunden.")
+        c = ("Ein Blick auf die Abrechnung hilft sofort, und ein Wechsel "
+             "kostet nur wenig Zeit, die Bank übernimmt die meiste Arbeit, "
+             "und der Rest bleibt gleich, weil die bekannte Kontonummer "
+             "erhalten bleibt und keine Zahlung verloren geht.")
+        d = ("Wer nichts unternimmt, zahlt weiter, aber wer handelt, spart "
+             "jedes Jahr Geld.")
+        body = (f"## Was du prüfst\n\n{a}\n\n{b}\n\n## So vergleichst du\n\n{c}"
+                f"\n\n## Fristen\n\n{d}")
+        pfad = self.schreibe_post("2026-10-03-stufe-a", body=body)
+        artikel = er.artikel_laden(pfad)
+        vorher = er._flesch_body(artikel["body"])
+        self.assertLess(vorher, er.LESBARKEITS_SCHWELLE)
+        funde = er.pruefe_artikel(artikel)
+        fixes = er.deterministische_fixes(artikel, funde)
+        self.assertTrue(fixes and "Stufe A" in fixes[0], str(fixes))
+        neu = er.artikel_laden(pfad)
+        self.assertGreaterEqual(er._flesch_body(neu["body"]),
+                                er.LESBARKEITS_SCHWELLE)
+        self.assertIn("## Fristen", neu["body"])  # Überschriften bleiben
 
 
 class TestMastodon(EndredaktionTempFall):

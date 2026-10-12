@@ -66,6 +66,7 @@ import post_utils  # noqa: E402
 
 import check_titles  # noqa: E402
 import grammar_check  # noqa: E402
+import lesbarkeit_heiler  # noqa: E402  (Stufe A + Tor T1–T4, WACHE-609)
 import length_policy  # noqa: E402
 import readability_check  # noqa: E402
 
@@ -77,6 +78,16 @@ import ki_shared as ks  # noqa: E402
 CONFIG_FILE = os.path.join(BLOG_DIR, "data", "endredaktion.yaml")
 REPORT_FILE = os.path.join(BLOG_DIR, "ENDREDAKTION-REPORT.md")
 SPAM_STATUS_FILE = os.path.join(BLOG_DIR, "data", "spam_schutz_status.json")
+
+# Die Lesbarkeits-Schwelle ist IMPORTIERT (SSOT: readability_check R6) – keine
+# zweite Zahl im Haus. Genau daran scheiterte die Nachsorge bis zum 12.10.2026:
+# Der Lektor bekam die Fundliste, aber niemand maß nach der Politur, ob das
+# harte Publish-Kriterium (Flesch ≥ 60) nun erreicht war. Ergebnis: Entwürfe
+# pendelten Lauf für Lauf zwischen „optimiert“ und „optimiert“, die
+# Lesbarkeits-Wache meldete dieselben Namen erneut (Issue #712) – dieselbe
+# Bauart wie die Reserve-Deckung aus #609: **eine Heilung ohne Wirkungsnachweis
+# ist Papier** (Governance-Regel C25).
+LESBARKEITS_SCHWELLE = readability_check.NEW_FLESCH_MIN
 
 ROLLE = "endredaktion"
 
@@ -117,6 +128,14 @@ bei echten Fehlern anfassen. Überschriften enden nie mit Punkt.
 11–14 Wörter pro Satz, höchstens ein Nebensatz, kein Nominalstil, keine \
 Kanzleiwörter („obligatorisch“, „im Rahmen von“), höchstens vier Sätze pro \
 Absatz, Ziel Flesch-Amstad ≥ 60.
+4a. DER STÄRKSTE HEBEL IST DIE SILBE, nicht die Satzlänge: Flesch-Amstad =
+180 − Ø Satzlänge − 58,5 · Silben je Wort. Lange Komposita und \
+Substantivierungen durch kurze Alltagswörter ersetzen \
+(„Stromanbieterwechsel“ → „Wechsel“, „Vertragslaufzeit“ → „Laufzeit“, \
+„Beitragsanpassung“ → „Anpassung“, „Haushaltsgeräte“ → „Geräte“, \
+„Verbrauchsmuster“ → „Verbrauch“), Nominalstil in Verben auflösen \
+(„die Übernahme der Kosten“ → „die Kasse zahlt die Kosten“). Jede Fassung \
+wird gemessen: Bleibt sie unter der Schwelle, wird sie verworfen.
 5. KEINE KI-Floskeln („In der heutigen schnelllebigen Welt“, „Zusammenfassend \
 lässt sich sagen“, „Heutzutage“ …).
 6. ERFINDE NICHTS: keine neuen Zahlen, Studien, Institute, Anbieter oder \
@@ -186,10 +205,20 @@ def artikel_laden(path: str) -> dict | None:
     }
 
 
-def artikel_speichern(artikel: dict) -> None:
+def artikel_speichern(artikel: dict) -> bool:
+    import editorial_review_gate
+    with open(artikel["path"], encoding="utf-8") as fh:
+        old = fh.read()
+    new = post_utils.join_article(artikel["fm"], artikel["body"],
+                                 artikel.get("prefix", ""))
+    blocked = editorial_review_gate.automatic_change_findings(old, new)
+    if blocked:
+        print(f"  ⚠ {artikel['slug']}: {blocked[0]}")
+        artikel.update(artikel_laden(artikel["path"]))
+        return False
     with open(artikel["path"], "w", encoding="utf-8") as fh:
-        fh.write(post_utils.join_article(artikel["fm"], artikel["body"],
-                                         artikel.get("prefix", "")))
+        fh.write(new)
+    return True
 
 
 def wartende_entwuerfe() -> list[dict]:
@@ -397,11 +426,73 @@ def urteil(funde: list[dict]) -> str:
 
 
 # ---------------------------------------------------------------- Deterministische Fixes
+def _flesch_body(body: str, slug: str = "pruefling") -> float | None:
+    """Flesch-Amstad eines Bodys – über die Mess-SSOT (readability_check).
+
+    `parse_article` braucht Frontmatter-Grenzen; gemessen wird der Body.
+    None = nicht messbar (Aufrufer entscheidet fail-closed).
+    """
+    rohtext = "---\ntitle: \"Messung\"\n---\n" + (body or "")
+    try:
+        satz = readability_check.parse_article(rohtext, f"{slug}/index.md")
+        if not satz:
+            return None
+        return readability_check.analyze(satz)["flesch"]
+    except Exception:  # noqa: BLE001 – ohne Messung kein Urteil
+        return None
+
+
+def _lesbarkeit_deterministisch(artikel: dict) -> str | None:
+    """E6 ohne KI: Stufe A des Lesbarkeits-Heilers, Tor T1–T4 entscheidet.
+
+    Warum als BIBLIOTHEK und nicht als eigener Satzschnitt: Der Heiler ist
+    unter Siegel und trägt die Wirkungsprobe (`--wirkungsprobe`, Governance C25).
+    Eine zweite Satz-Zerlegung im Haus wäre eine zweite Wahrheit – genau die
+    Bauart, die den Bestand schon einmal in zwei Messungen gespalten hat (#585).
+
+    Rückgabe: Beschreibung des Fixes oder None (nichts geschrieben).
+    """
+    try:
+        with open(artikel["path"], encoding="utf-8") as fh:
+            alt = fh.read()
+    except OSError:
+        return None
+    slug = artikel["slug"]
+    try:
+        neu, protokoll = lesbarkeit_heiler.stufe_a(alt)
+    except Exception as exc:  # noqa: BLE001 – Werkzeugfehler heilt nichts
+        print(f"  ⚠ Lesbarkeits-Heiler nicht ausführbar ({exc.__class__.__name__})")
+        return None
+    if neu == alt:
+        return None
+    gruende = lesbarkeit_heiler.verifiziere(slug, alt, neu)
+    if gruende:
+        print(f"  ⚠ Lesbarkeits-Heiler (Stufe A) verworfen: {gruende[0]}")
+        return None
+    teile = neu.split("---", 2)
+    if len(teile) < 3:
+        return None
+    neu_body = teile[2]
+    vorher, nachher = _flesch_body(artikel["body"], slug), _flesch_body(neu_body, slug)
+    artikel["body"] = neu_body
+    if not artikel_speichern(artikel):
+        return None
+    return (f"Lesbarkeits-Heiler Stufe A (Lexikon {protokoll.get('lexikon', 0)}, "
+            f"Satzschnitte {protokoll.get('saetze', 0)}, "
+            f"Absätze {protokoll.get('absaetze', 0)}) – Flesch "
+            f"{vorher if vorher is not None else float('nan'):.1f} → "
+            f"{nachher if nachher is not None else float('nan'):.1f}")
+
+
 def deterministische_fixes(artikel: dict, funde: list[dict]) -> list[str]:
     """Sichere Reparaturen ohne KI. Rückgabe: Liste der angewandten Fixes."""
     angewandt = []
     codes = {f["code"] for f in funde}
 
+    if "E6" in codes:  # Lesbarkeit → Stufe A des Heilers (kein zweiter Splitter)
+        fix = _lesbarkeit_deterministisch(artikel)
+        if fix:
+            angewandt.append(fix)
     if "E8" in codes:  # Leerzeichen-URLs → Bindestrich (R8-Konvention)
         neu = re.sub(r"(\]\([^)\s]*)([ ])([^)]*\))", r"\1-\3", artikel["body"])
         if neu != artikel["body"]:
@@ -432,20 +523,63 @@ def deterministische_fixes(artikel: dict, funde: list[dict]) -> list[str]:
             artikel["description"] = neu
             angewandt.append(f"Description → {len(neu)} Zeichen")
 
-    if angewandt:
-        artikel_speichern(artikel)
+    if angewandt and not artikel_speichern(artikel):
+        return []
     return angewandt
 
 
 # ---------------------------------------------------------------- KI-Politur
+def _laenge(body: str) -> int:
+    """Fließtext-Zeichen des Bodys – dieselbe Messung wie E2 (length_policy)."""
+    try:
+        return length_policy.measure(body)[1]
+    except Exception:  # noqa: BLE001
+        return len(body)
+
+
 def politur_auftrag(artikel: dict, funde: list[dict]) -> str:
     fundliste = "\n".join(f"- [{f['code']}] {f['text']}" for f in funde)
     floor = length_policy.POSTS["target_min_chars"]
+    ist_zeichen = _laenge(artikel["body"])
+    # Ziel-Länge: unter dem Floor muss die Politur den Floor erreichen (sonst
+    # bleibt E2 gelb und der Entwurf wird nie freigegeben – der Auftrag muss
+    # also dieselbe Zahl nennen, die das Gate prüft). Oberhalb des Floors gilt
+    # die Behalte-Regel (max. 15 % Kürzung).
+    ziel_zeichen = floor if ist_zeichen < floor else int(len(artikel["body"]) * 0.9)
     min_zeichen = max(int(floor * 0.97),
                       int(len(artikel["body"]) * 0.9)) \
         if len(artikel["body"]) < floor else int(len(artikel["body"]) * 0.85)
+    # IST-Lage mitliefern (Muster `lesbarkeit_heiler._ki_prompt`): Ein Auftrag
+    # ohne Zahlen lässt das Modell „schöner“ schreiben statt messbar besser.
+    flesch = _flesch_body(artikel["body"], artikel["slug"])
+    try:
+        satz = readability_check.parse_article(
+            "---\ntitle: \"Messung\"\n---\n" + artikel["body"],
+            f"{artikel['slug']}/index.md")
+        masse = readability_check.analyze(satz) if satz else {}
+    except Exception:  # noqa: BLE001
+        masse = {}
+    lage = (f"LESBARKEIT IST (gemessen): Flesch-Amstad "
+            f"{flesch if flesch is not None else float('nan'):.1f} · "
+            f"Ø Satzlänge {masse.get('wps', 0):.1f} Wörter · "
+            f"Ø Wortlänge {masse.get('word_len', 0):.1f} Zeichen · "
+            f"{masse.get('long_pct', 0):.1f} % lange Wörter. "
+            f"ZIEL: Flesch-Amstad ≥ {LESBARKEITS_SCHWELLE:g} – diese Zahl wird "
+            "nach deiner Fassung gemessen; liegt sie darunter, wird deine "
+            "Fassung verworfen (die Datei bleibt dann unverändert).")
+    laenge_lage = (
+        f"LÄNGE IST (gemessen): {ist_zeichen:,} Zeichen Fließtext. "
+        f"ZIEL: mindestens {ziel_zeichen:,} Zeichen"
+        + (f" – es fehlen {ziel_zeichen - ist_zeichen:,} Zeichen. Forme die "
+           "vorhandenen Inhalte aus (Beispiele als Rechenbeispiel "
+           "kennzeichnen, FAQ-Antworten runder, Faustregeln als solche "
+           "gekennzeichnet) statt Neues zu erfinden."
+           if ist_zeichen < floor else "")
+        + " Diese Zahl wird nach deiner Fassung gemessen; liegt sie darunter, "
+          "wird deine Fassung verworfen.")
     return (
         "FUNDLISTE (diese Punkte beheben):\n" + fundliste
+        + "\n\n" + lage + "\n\n" + laenge_lage
         + f"\n\nSICHERHEITSVERTRAG: Behalte jede Markdown-Verlinkung exakt, "
         f"die Zahl der ## -Überschriften bleibt gleich, Mindestlänge "
         f"{min_zeichen:,} Zeichen, keine neuen Fakten oder Zahlen.\n\n"
@@ -454,7 +588,16 @@ def politur_auftrag(artikel: dict, funde: list[dict]) -> str:
 
 
 def politur_pruefen(alt: str, neu: str, cfg: dict) -> str | None:
-    """Sicherheitsvertrag verifizieren. Rückgabe: Fehlermeldung oder None."""
+    """Sicherheitsvertrag verifizieren. Rückgabe: Fehlermeldung oder None.
+
+    Seit 12.10.2026 (Issue #712) gehört der WIRKUNGSNACHWEIS dazu: Die
+    Lesbarkeit der neuen Fassung wird gemessen. Vorher prüfte der Vertrag
+    Links, Überschriften, Länge und Floskeln – nur nicht die Kennzahl, wegen
+    der die Politur überhaupt lief. Ein Entwurf mit Flesch 47 kam so als
+    „poliert“ zurück, blieb gelb, wurde nie freigegeben und stand im nächsten
+    Governance-Report wieder als Befund (dieselbe Lehre wie #609: eine
+    Heilung ohne Wirkung ist Papier). Fail-closed: ohne Messung kein Freispruch.
+    """
     if not neu or not neu.strip():
         return "leere Antwort"
     neu = neu.strip()
@@ -472,9 +615,30 @@ def politur_pruefen(alt: str, neu: str, cfg: dict) -> str | None:
     if len(neu) < len(alt) * (cfg["min_behalte_laenge_prozent"] / 100):
         return (f"zu kurz ({len(neu):,} < "
                 f"{int(len(alt) * cfg['min_behalte_laenge_prozent'] / 100):,})")
+    floor = length_policy.POSTS["target_min_chars"]
+    alt_zeichen, neu_zeichen = _laenge(alt), _laenge(neu)
+    if alt_zeichen < floor and neu_zeichen < floor:
+        return (f"Länge nicht erreicht: {neu_zeichen:,} < Floor {floor:,} "
+                f"(vorher {alt_zeichen:,}) – ein Entwurf unter dem Floor bleibt "
+                "unpublizierbar (E2), die Politur muss ihn anheben")
     text_norm = re.sub(r"\s+", " ", neu).lower()
     if [f for f in PROFI_FLOSKELN if f in text_norm]:
         return "KI-Floskeln noch enthalten"
+    alt_f, neu_f = _flesch_body(alt), _flesch_body(neu)
+    if alt_f is None or neu_f is None:
+        return "Lesbarkeit nicht messbar – fail-closed (keine Freigabe ohne Messung)"
+    if alt_f < LESBARKEITS_SCHWELLE:
+        if neu_f < LESBARKEITS_SCHWELLE:
+            return (f"Lesbarkeit nicht erreicht: Flesch {neu_f:.1f} < "
+                    f"Schwelle {LESBARKEITS_SCHWELLE:g} "
+                    f"(vorher {alt_f:.1f}) – die Politur hat das Publish-Kriterium "
+                    "nicht bewegt")
+        if neu_f <= alt_f:
+            return (f"Lesbarkeit nicht verbessert ({alt_f:.1f} → {neu_f:.1f}) – "
+                    "ohne Bewegung ist die Politur wirkungslos")
+    elif neu_f < alt_f - 1.0:
+        return (f"Lesbarkeit verschlechtert ({alt_f:.1f} → {neu_f:.1f}) – "
+                "die Politur darf nichts kaputt machen")
     return None
 
 
@@ -493,7 +657,8 @@ def ki_politur(artikel: dict, funde: list[dict], cfg: dict) -> tuple[bool, str]:
             print(f"  ⚠ Politur ({provider}) verworfen: {fehler}")
             continue
         artikel["body"] = antwort.strip()
-        artikel_speichern(artikel)
+        if not artikel_speichern(artikel):
+            return False, "YMYL-Schreibvertrag blockiert die Politur"
         return True, provider
     return False, "kein Anbieter bestand den Sicherheitsvertrag"
 
@@ -669,8 +834,17 @@ def lauf(cfg: dict, *, nur_pruefen: bool = False,
                 zustand = urteil(funde)
                 zeile["zustand"] = zustand
 
-        # 2) KI-Politur für verbleibende gelbe Funde
-        if zustand == "optimieren" and not nur_pruefen:
+        # 2) KI-Politur für verbleibende gelbe Funde – UND für die
+        #    Lesbarkeits-Klasse in Rot (Flesch < 45). Bis zum 12.10.2026 war
+        #    genau das eine Sackgasse: E6 rot → „blockiert“ → keine Politur →
+        #    der Entwurf blieb für immer liegen und die Lesbarkeits-Wache
+        #    meldete ihn Lauf für Lauf erneut (#712, Artikel energie-update
+        #    mit Flesch 38,2). Die Klasse gilt als heilbar, weil der Heiler
+        #    eine Wirkungsprobe trägt (Governance C25) und der Vertrag
+        #    fail-closed schreibt: nichts Halbfertiges.
+        rote_codes = {f["code"] for f in funde if f["schwere"] == "rot"}
+        heilbares_rot = bool(rote_codes) and rote_codes <= {"E6"}
+        if (zustand == "optimieren" or heilbares_rot) and not nur_pruefen:
             for runde in range(max(1, int(cfg["max_politur_versuche"]))):
                 ok, provider = ki_politur(artikel, funde, cfg)
                 if ok:
@@ -784,8 +958,13 @@ def _selbsttest() -> int:
 
     # Politur-Sicherheitsvertrag
     cfg = dict(DEFAULT_CONFIG)
-    gut = "## A\n\n" + ("Der Stromvertrag läuft und läuft. " * 60) \
-        + "\n[Link](https://a.de/x)\n\n## B\n\n" + ("Text. " * 60)
+    # Floor-lange, gut lesbare Fassung: Ein Body unter dem Längen-Floor ist
+    # unpublizierbar (E2) – der Selbsttest misst deshalb mit realistischer
+    # Länge, sonst prüfte er einen Zustand, den es im Betrieb nicht gibt.
+    lesbar = ("Du prüfst den Vertrag. Der Preis steigt. Du wechselst den "
+              "Tarif. Das spart Geld. ")
+    gut = (("## A\n\n" + lesbar * 150 + "\n[Link](https://a.de/x)\n\n## B\n\n"
+            + lesbar * 80))
     if politur_pruefen(gut, gut, cfg) is not None:
         fehler.append("Politur verwirft identischen Text")
     if politur_pruefen(gut, gut.replace("[Link]", "[Weg]"), cfg) is None:
@@ -796,6 +975,55 @@ def _selbsttest() -> int:
         fehler.append("Politur lässt Frontmatter durch")
     if politur_pruefen(gut, gut + " Heutzutage ist alles besser.", cfg) is None:
         fehler.append("Politur lässt KI-Floskel durch")
+
+    # Wirkungsnachweis der Politur (Issue #712): Die Lesbarkeit der neuen
+    # Fassung wird GEMESSEN. Ein Lektor, der die Kennzahl nicht bewegt, für
+    # die er gerufen wurde, ist keine Heilung – er ist eine Wiederholung.
+    schlecht = ("## A\n\nIm Rahmen von umfangreichen Vertragsbedingungen "
+                "erfolgt eine Berücksichtigung der Verbrauchsmuster der "
+                "Verbraucher, und die Tarifberatung dokumentiert die "
+                "Vereinbarung der Zahlungsmodalitäten für die Folgejahre. "
+                * 70)
+    gut_lesbar = ("## A\n\n" + ("Du zahlst zu viel. Der Anbieter prüft den "
+                  "Preis. Ein Wechsel lohnt sich. Das dauert nur Minuten. "
+                  "So sparst du Geld. " * 130))
+    alt_f = _flesch_body(schlecht)
+    neu_f = _flesch_body(gut_lesbar)
+    if alt_f is None or neu_f is None:
+        fehler.append("Politur-Wirkungsprobe nicht messbar (fail-closed)")
+    else:
+        if alt_f >= LESBARKEITS_SCHWELLE:
+            fehler.append("Politur-Probe startet nicht unter der Schwelle")
+        if neu_f < LESBARKEITS_SCHWELLE:
+            fehler.append("Politur-Probe erreicht die Schwelle nicht")
+        # (a) Fassung, die die Schwelle NICHT bewegt, wird verworfen.
+        if politur_pruefen(schlecht, schlecht, cfg) is None:
+            fehler.append("Politur lässt eine unveränderte Textverstümmelung "
+                          "unter der Schwelle durch (#712)")
+        # (b) Fassung, die die Schwelle erreicht, wird angenommen.
+        if politur_pruefen(schlecht, gut_lesbar, cfg) is not None:
+            fehler.append("Politur verwirft eine messbar bessere Fassung "
+                          "(Wirkungsnachweis blockiert den Heiler)")
+        # (c) Verschlechterung eines guten Textes wird verworfen.
+        if politur_pruefen(gut_lesbar, schlecht, cfg) is None:
+            fehler.append("Politur lässt eine Verschlechterung durch")
+    # (d) Die Schwelle ist IMPORTIERT (eine Zahl im Haus, Lehre #585).
+    if LESBARKEITS_SCHWELLE != readability_check.NEW_FLESCH_MIN:
+        fehler.append("Endredaktion führt eine eigene Lesbarkeits-Schwelle")
+    # (e) Der Auftrag nennt IST und ZIEL – sonst schreibt das Modell „schöner“
+    #     statt messbar besser.
+    auftrag = politur_auftrag(
+        {"body": schlecht, "slug": "probe", "titel": "Probe",
+         "path": os.path.join(BLOG_DIR, "content", "posts", "probe", "index.md")},
+        [fund("E6", "rot", "Flesch 38 < 60")])
+    for marke in ("LESBARKEIT IST", "ZIEL: Flesch-Amstad", "LÄNGE IST"):
+        if marke not in auftrag:
+            fehler.append(f"Politur-Auftrag ohne Ist-Lage („{marke}“ fehlt)")
+    # (f) Der Heiler ist als Bibliothek verdrahtet (eine Satz-Zerlegung im
+    #     Haus, nicht zwei – die SSOT-Regel aus #585).
+    if not hasattr(lesbarkeit_heiler, "stufe_a") or not hasattr(
+            lesbarkeit_heiler, "verifiziere"):
+        fehler.append("Lesbarkeits-Heiler ist nicht als Bibliothek nutzbar")
 
     # Urteils-Logik
     if urteil([]) != "gruen" or urteil([fund("X", "gelb", "y")]) != "optimieren" \

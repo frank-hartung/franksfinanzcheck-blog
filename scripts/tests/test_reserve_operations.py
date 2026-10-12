@@ -250,6 +250,34 @@ class FinisherBudgetTests(Sandbox):
         self.assertEqual(124, results[0]["rc"])
 
 
+    def test_integrated_step_guard_rolls_back_regression_for_every_job_scope(self):
+        path = self.draft()
+        for scope in ("file", "slug", "corpus"):
+            def run(cmd, **kw):
+                path.write_bytes(b"regressed output")
+                return subprocess.CompletedProcess(cmd, 0, "ok", "")
+            results = []
+            with patch.object(finisher, "HEALER_CHAIN", [("healer.py", [], scope)]), \
+                    patch.object(finisher, "_kandidat_regressionen", return_value=["hard regression"]):
+                finisher.run_chain(results, [path], runner=run)
+            self.assertEqual(RAW, path.read_bytes())
+            self.assertTrue(results[0]["rollback"])
+
+    def test_integrated_step_guard_runs_after_child_timeout_and_stops_next_job(self):
+        path = self.draft()
+        calls = []
+        def run(cmd, **kw):
+            calls.append(cmd)
+            path.write_bytes(b"partial regressed output")
+            raise subprocess.TimeoutExpired(cmd, kw["timeout"])
+        results = []
+        with patch.object(finisher, "HEALER_CHAIN", [("first.py", [], "file"), ("second.py", [], "file")]), \
+                patch.object(finisher, "_kandidat_regressionen", return_value=["hard regression"]):
+            finisher.run_chain(results, [path], runner=run)
+        self.assertEqual(1, len(calls))
+        self.assertEqual(RAW, path.read_bytes())
+        self.assertEqual(124, results[0]["rc"])
+
     def test_full_fresh_stock_does_not_commission_optional_model_polish(self):
         data = self.snapshot()
         stamp = dt.datetime.now(dt.timezone.utc).isoformat()

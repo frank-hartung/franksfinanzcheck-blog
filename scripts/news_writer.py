@@ -53,6 +53,20 @@ try:
 except Exception:  # noqa: BLE001
     length_policy = None
 
+# Lesbarkeits-SSOT + Heiler (Issue #712): Der Schreiber prüft, was über ihn
+# entscheidet – dieselbe Lehre wie WF-D4E0/#612. Vorher schrieb diese Rolle
+# News-Kompakt-Artikel in die Ablage, ohne die Publish-Schwelle überhaupt zu
+# messen: Der Entwurf „Energie-Update“ vom 08.10.2026 landete mit Flesch 38,2
+# im Vorrat, blockierte dort zwei Tage das Endredaktions-Gate und erzeugte den
+# Governance-Befund #712. Was der Schreiber nicht misst, muss die Nachsorge
+# aufräumen – messen ist billiger.
+try:
+    import readability_check as rc
+    import lesbarkeit_heiler as lesbarkeit_heiler
+except Exception:  # noqa: BLE001 – fehlende Messung darf den Lauf nicht töten
+    rc = None
+    lesbarkeit_heiler = None
+
 ROLLE = "chatgpt"
 
 # ============================================================
@@ -85,6 +99,14 @@ Du schreibst einen News-Kompakt-Artikel.
 
 HARTE REGELN (Verstoß = unbrauchbar):
 1. Deutsch, direkte Du-Ansprache, newsiger Ton (kurze Sätze, aktiv).
+1a. LESBARKEIT IST EIN MESSWERT, keine Stimmung: Ziel ist Flesch-Amstad \
+≥ 60 (deutsch). Die Formel lautet 180 − Ø Satzlänge − 58,5 · Silben je Wort. \
+Das heißt praktisch: höchstens 14 Wörter pro Satz, ein Gedanke pro Satz, \
+und KEINE langen Komposita, wo ein kurzes Alltagswort reicht \
+(„Stromanbieterwechsel“ → „Wechsel“, „Verbrauchsmuster“ → „Verbrauch“, \
+„Vertragsbedingungen“ → „Bedingungen“). Nominalstil in Verben auflösen \
+(„die Übernahme der Kosten“ → „die Kasse zahlt“). Wer schachtelt, wird \
+nachgemessen und verworfen.
 2. ERFINDE NIEMALS Fakten: keine Daten, keine Prozentzahlen, keine \
 Unternehmensmeldungen, keine Zitate, keine Paragraphen. Einziger \
 Faktenanker ist der kuratierte AUFHÄNGER im Brief – paraphrasiere ihn \
@@ -156,6 +178,61 @@ def _measure(text: str) -> int:
         except Exception:  # noqa: BLE001
             pass
     return len(re.sub(r"\s+", " ", text).strip())
+
+
+def _flesch_von(content: str, slug: str) -> float | None:
+    """Flesch-Amstad über die Mess-SSOT (readability_check). None = nicht messbar."""
+    if rc is None:
+        return None
+    try:
+        satz = rc.parse_article(content, f"{slug}/index.md")
+        return rc.analyze(satz)["flesch"] if satz else None
+    except Exception:  # noqa: BLE001 – ohne Messung bleibt der Lauf ehrlich
+        return None
+
+
+def lesbarkeit_sichern(content: str, slug: str) -> tuple[str, float | None, str]:
+    """Misst die Lesbarkeit VOR dem Schreiben und heilt deterministisch nach.
+
+    Rückgabe: (content – ggf. geheilt, Flesch, Statusmeldung).
+
+    Warum hier und nicht nur in der Nachsorge: Ein Generator, der seine
+    Schwelle nicht kennt, produziert Ausschuss, den drei Wachen später
+    einsammeln müssen (Publish-Gate, Endredaktion, Lesbarkeits-Wache). Der
+    Heiler läuft als BIBLIOTHEK mit seinem Tor T1–T4 – er schreibt nur, was
+    die importierte Schwelle wirklich erreicht; ohne API, ohne Netz.
+
+    Die Nachsorge bleibt zuständig, wenn die deterministische Stufe nicht
+    reicht (Flesch < 60 nach dem Lauf): Dann steht die Zahl ehrlich im Log,
+    und `endredaktion.py` bzw. `lesbarkeit_heiler.py --entwuerfe` heilen
+    redaktionell nach. Ein stiller Ausschuss ist die einzige verbotene Sorte.
+    """
+    if rc is None or lesbarkeit_heiler is None:
+        return content, None, "Lesbarkeits-Messung nicht verfügbar (Modul fehlt)"
+    vorher = _flesch_von(content, slug)
+    if vorher is None:
+        return content, None, "Lesbarkeit nicht messbar (fail-open im Schreiber)"
+    if vorher >= rc.NEW_FLESCH_MIN:
+        return content, vorher, (f"Flesch {vorher:.1f} ≥ {rc.NEW_FLESCH_MIN:g} "
+                                 "– Publish-Schwelle erfüllt")
+    try:
+        neu, protokoll = lesbarkeit_heiler.stufe_a(content)
+    except Exception as exc:  # noqa: BLE001
+        return content, vorher, (f"Flesch {vorher:.1f} < {rc.NEW_FLESCH_MIN:g}, "
+                                 f"Heiler nicht ausführbar ({exc.__class__.__name__})")
+    if neu != content:
+        gruende = lesbarkeit_heiler.verifiziere(slug, content, neu)
+        if not gruende:
+            content = neu
+            nachher = _flesch_von(content, slug)
+            return content, nachher, (
+                f"Flesch {vorher:.1f} → {nachher if nachher is not None else float('nan'):.1f} "
+                f"(Stufe A: Lexikon {protokoll.get('lexikon', 0)}, "
+                f"Satzschnitte {protokoll.get('saetze', 0)})")
+    return content, vorher, (f"Flesch {vorher:.1f} < {rc.NEW_FLESCH_MIN:g} – "
+                             "deterministische Stufe reicht nicht, "
+                             "redaktionelle Nachsorge nötig "
+                             "(`endredaktion.py --slug " + slug + "`)")
 
 
 def offline_skeleton(hook: dict) -> str:
@@ -246,27 +323,54 @@ def run(args) -> int:
         keywords=keywords or [title], rolle=ROLLE, news=True,
         kategorie=kategorie)
     stand = STAND_INTRO.format(today=today)
-    content = fm + stand + body
+    # Der Tail (CTA + Disclaimer) ist KEIN Fließtext: Er bleibt beim Messen
+    # und Heilen draußen – sonst meldet der Schreiber eine Länge, die er nur
+    # mit Werbeblock erreicht (dieselbe Ehrlichkeit wie `length_policy`).
+    tail = ""
     if provider != "offline":
-        content += ("\n\n" + ks.cta_block() + "\n" + ks.DISCLAIMER + "\n")
+        tail = ("\n\n" + ks.cta_block() + "\n" + ks.DISCLAIMER + "\n")
+    rumpf = fm + stand + body
 
     slug = ks.unique_bundle_slug(title)
+
+    # LESBARKEITS-GATE VOR DEM SCHREIBEN (Issue #712): messen, deterministisch
+    # heilen (Tor T1–T4 des Lesbarkeits-Heilers), dann erst schreiben. Der
+    # Befund steht in jedem Fall im Log – auch die ehrliche Restlücke.
+    if provider != "offline":
+        rumpf, flesch, lesbarkeit_status = lesbarkeit_sichern(rumpf, slug)
+    else:
+        flesch, lesbarkeit_status = None, "Offline-Gerüst – keine Messung"
+    content = rumpf + tail
+    # Für die Meldung zählt derselbe Ausschnitt wie bisher (`stand + body`):
+    # die Heilung kann Sätze geteilt haben, also den Body neu abgrenzen.
+    kern = rumpf.split("---", 2)[2] if rumpf.startswith("---") else rumpf
+    if kern.startswith(stand):
+        kern = kern[len(stand):]
+
     import post_utils  # noqa: E402
     path = post_utils.write_post(slug, content)
     ks.mark_news_hook_used(hook.get("id", ""))
 
-    chars = _measure(stand + body)
+    chars = _measure(stand + kern)
     print(f"✅ Rolle ChatGPT (News): Entwurf „{title}“")
     print(f"   Pfad: {os.path.relpath(path, BLOG_DIR)}")
     print(f"   Provider: {provider} | Fließtext: {chars:,} Zeichen "
           f"(Ziel {ziel:,}) | Aufhänger: {hook.get('id')}")
+    print(f"   Lesbarkeit: {lesbarkeit_status}")
     if chars < min_z and provider != "offline":
         print(f"   ⚠ Unter Floor ({min_z:,}) – vor --promote prüfen!")
+    if (flesch is not None and rc is not None and flesch < rc.NEW_FLESCH_MIN
+            and provider != "offline"):
+        print("   ⚠ Unter der Publish-Schwelle – Nachsorge nötig "
+              "(`python3 scripts/endredaktion.py --slug "
+              f"{slug}` oder `python3 scripts/lesbarkeit_heiler.py "
+              "--entwuerfe`)")
     ks.write_report([
         f"- **Letzter Lauf (Rolle ChatGPT/News):** Entwurf „{title}“ "
         f"({provider}, {chars:,} Zeichen, Aufhänger `{hook.get('id')}`) "
         "– Status: Review erforderlich.",
         f"- Pfad: `{os.path.relpath(path, BLOG_DIR)}`",
+        f"- Lesbarkeit: {lesbarkeit_status}",
         "- Veröffentlichung: NIE automatisch – Freigabe über "
         "`python3 scripts/ki_redaktion.py --promote <slug>`.",
     ])

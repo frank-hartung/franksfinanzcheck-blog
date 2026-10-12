@@ -1,18 +1,17 @@
 {
   "target": 6,
-  "ready": 7,
+  "ready": 11,
   "pool_size": 11,
-  "generated_at": "2026-10-12T21:17:13Z",
+  "generated_at": "2026-10-12T22:10:57Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
       "sha256": "f3412b02755bab2af0b4929001bf07a368654ee703cadca3fb430f620a48e668",
       "flesch": 61.1,
-      "measured_at": "2026-10-12T21:14:06Z",
-      "score": 0.992,
+      "score": 0.984,
       "parts": {
-        "spelling": 0.96,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -26,7 +25,6 @@
       "ready": true,
       "sha256": "2eb4aaeeaba61d89ff1bbc62a4e338819959c9a4759a75796de70025cb568d72",
       "flesch": 62.5,
-      "measured_at": "2026-10-12T21:14:37Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -43,10 +41,9 @@
       "ready": true,
       "sha256": "453160bfde9c704a7f2df745705ba843e7bb97ec5aebbf624d44c5eab236f767",
       "flesch": 61.0,
-      "measured_at": "2026-10-12T21:15:06Z",
-      "score": 0.966,
+      "score": 0.95,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -60,7 +57,6 @@
       "ready": true,
       "sha256": "ccbea17d34524846d71387e53e06c8d216adff33d83ed65d0af4c6ece6dded6f",
       "flesch": 60.0,
-      "measured_at": "2026-10-12T21:15:36Z",
       "score": 0.91,
       "parts": {
         "spelling": 0.8,
@@ -77,10 +73,9 @@
       "ready": true,
       "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
       "flesch": 64.4,
-      "measured_at": "2026-10-12T21:16:06Z",
-      "score": 0.97,
+      "score": 0.966,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -94,10 +89,9 @@
       "ready": true,
       "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
       "flesch": 60.8,
-      "measured_at": "2026-10-12T21:16:33Z",
-      "score": 0.986,
+      "score": 0.978,
       "parts": {
-        "spelling": 0.94,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
@@ -109,12 +103,11 @@
     {
       "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": true,
-      "sha256": "cf6901f9bd948a60948fd1dd686a37ef1a692736cd1f62a836a7b4333018b91c",
+      "sha256": "a4eaca988a473689b1f441b633949fb22d0e2b14e594175b9dca46c0e3fc0681",
       "flesch": 60.1,
-      "measured_at": "2026-10-12T21:17:05Z",
-      "score": 0.962,
+      "score": 0.954,
       "parts": {
-        "spelling": 0.84,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.94,
@@ -125,40 +118,28 @@
     },
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "ready": false,
-      "sha256": "f0f5b3169cfdc82e79d7fe5693787b51a8b594a24770557f781c62e000ed9699",
-      "flesch": 59.0,
-      "measured_at": "2026-10-12T21:17:06Z",
-      "reason": "Reserve-Qualitäts-Gate: RS3: keine Faustregel markiert",
-      "details": [
-        "RS3: keine Faustregel markiert",
-        "RS4: weder Schrittfolge (0 nummerierte Zeilen) noch Schritt-Überschriften (0)",
-        "RS5: 16 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ein fehlender Energieausweis kostet dich bis zu 15.000 € Bußgeld."
-      ],
-      "score": 0.956,
+      "ready": true,
+      "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
+      "flesch": 66.7,
+      "score": 0.984,
       "parts": {
-        "spelling": 0.98,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
-      "ready": false,
-      "sha256": "ef5ff5031464710d50e45a3b6f547bbc7294fc13e3d6754cdb2f02874dcb8d0d",
-      "flesch": 61.7,
-      "measured_at": "2026-10-12T21:17:10Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für dein Depot übrig.",
-      "details": [
-        "RS5: 34 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung um 30 %, bleibt am Monatsende spürbar mehr Geld für dein Depot übrig."
-      ],
-      "score": 0.968,
+      "ready": true,
+      "sha256": "18e0fe1fb6fd54664894925da3a3e1c4c62eddc4ee7e31228569ba4067cd5981",
+      "flesch": 63.2,
+      "score": 0.96,
       "parts": {
-        "spelling": 0.84,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -169,48 +150,45 @@
     },
     {
       "slug": "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
-      "ready": false,
-      "sha256": "30b2e8035db0a35383db13bd782c1189c41ff636d260ffa27d9bd3ab7ca28aab",
-      "flesch": 60.1,
-      "measured_at": "2026-10-12T21:17:12Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 43 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %.",
-      "details": [
-        "RS5: 43 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Das Wichtigste in Kürze** - **Energieeffiziente Geräte** senken deinen Jahresverbrauch um bis zu 40 %."
-      ],
-      "score": 0.974,
+      "ready": true,
+      "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
+      "flesch": 71.5,
+      "score": 0.97,
       "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "ready": false,
-      "sha256": "0442ba41f8027458b179a9a4c9e48793d40af5838b1f0b5a99ff4feed83cbfd2",
-      "flesch": 59.6,
-      "measured_at": "2026-10-12T21:17:13Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?",
-      "details": [
-        "RS5: 29 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Zahlst du 2026 zu viel für deine Wärme?"
-      ],
-      "score": 0.944,
-      "parts": {
-        "spelling": 0.92,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "ready": true,
+      "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
+      "flesch": 65.1,
+      "score": 0.982,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
   ],
-  "measurement": {
-    "kind": "full"
+  "recert": {
+    "at": "2026-10-12T22:10:57Z",
+    "renewed": [
+      "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }

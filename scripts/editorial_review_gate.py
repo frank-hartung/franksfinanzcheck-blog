@@ -261,6 +261,47 @@ def content_fingerprint(fm: dict, body: str) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def automatic_change_findings(old_raw: str, new_raw: str) -> list[str]:
+    """Schreibvertrag: bestehende Freigaben nie automatisch umversiegeln.
+
+    Unabhängig von Ablaufdatum und Siegelgültigkeit. Betriebsmetadaten und
+    die etablierte Typografie-Normalisierung bleiben erlaubt. Parsefehler
+    sperren die Änderung; ein entferntes Review im Ziel umgeht nichts.
+    """
+    if old_raw == new_raw:
+        return []
+    try:
+        old_fm, old_body = split_article(old_raw)
+        new_fm, new_body = split_article(new_raw)
+        yaml = _yaml_module()
+        old = yaml.safe_load(old_fm) or {}
+        new = yaml.safe_load(new_fm) or {}
+        if not isinstance(old, dict) or not isinstance(new, dict):
+            raise ParseError("Frontmatter ist kein Mapping")
+        review = old.get("redaktionelle_pruefung") or {}
+        if not isinstance(review, dict):
+            raise ParseError("Prüfprotokoll ist kein Mapping")
+        protected = review.get("inhalt_sha256") or review.get("status") == "freigegeben"
+        if protected and (
+            content_fingerprint(old, old_body) != content_fingerprint(new, new_body)
+            or review.get("inhalt_sha256") != (new.get("redaktionelle_pruefung") or {}).get("inhalt_sha256")
+        ):
+            return ["YMYL: versiegelter Inhalt/Prüfprotokoll verändert – redaktionelle Prüfung erforderlich"]
+    except Exception as exc:
+        return [f"YMYL: Schreibprüfung nicht auswertbar ({type(exc).__name__}) – fail-closed"]
+    return []
+
+
+def automatic_write_protected(path: Path | str) -> bool:
+    """Konservative Vorprüfung für Engines, die nur überspringen können."""
+    try:
+        fm, _, _ = load_article(path)
+        review = fm.get("redaktionelle_pruefung") or {}
+        return bool(review.get("inhalt_sha256") or review.get("status") == "freigegeben")
+    except Exception:
+        return True
+
+
 def _domain(url: str) -> str:
     try:
         host = (urlparse(url).hostname or "").lower()

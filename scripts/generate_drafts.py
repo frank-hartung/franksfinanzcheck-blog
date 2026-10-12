@@ -784,7 +784,7 @@ Zeile 1: TITLE: Ein prägnanter, klickstarker Titel (max. 60 Zeichen). Wähle ei
 Zeile 2: DESCRIPTION: Eine Meta-Beschreibung (max. 155 Zeichen, mit wichtigstem Keyword)
 Ab Zeile 3: Der Artikel in Markdown:
 - Keine Überschrift für den Titel am Anfang (Titel steht schon in Zeile 1)
-- Einleitung mit starkem HAKEN: Nutzenversprechen, konkrete Frage oder überraschende Zahl –
+- Einleitung mit starkem HAKEN: Nutzenversprechen, Alltags-Szene oder konkrete Frage (KEINE Zahl ohne im selben Satz genannte Modell-/Beispielrechnung) –
   KEIN generischer Einstieg ("In der heutigen Zeit…", "Geld sparen ist wichtig…")
 - VERBOTEN: die Schablone „In diesem Ratgeber zeige/erfährst/erkläre ich dir …“ am
   Einleitungsende. Entwickle stattdessen einen frischen Einstieg aus dem konkreten

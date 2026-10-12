@@ -120,7 +120,9 @@ def pruefe(slug: str, alt_rohtext: str, neu_rohtext: str) -> list[str]:
     Rückgabe: Liste der Verstöße (leer = Vertrag erfüllt). Fail-closed:
     jeder Messfehler ist ein Verstoß, niemals ein Freispruch.
     """
-    gruende: list[str] = []
+    import editorial_review_gate
+    gruende: list[str] = editorial_review_gate.automatic_change_findings(
+        alt_rohtext, neu_rohtext)
 
     # ---------- V1: Lesbarkeit ----------
     try:

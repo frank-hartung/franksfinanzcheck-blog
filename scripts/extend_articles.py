@@ -35,9 +35,23 @@ import random
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
+from post_utils import join_article, slug_of  # noqa: E402  – Naht-SSOT (FM-Grenze)
 import llm_client
 import length_policy as lp
+
+try:
+    from publikations_vertrag import (pruefe as _vertrag_pruefe,
+                                      raw_aus as _vertrag_raw_aus,
+                                      verstoesse_kurz)
+except Exception:  # noqa: BLE001
+    _vertrag_pruefe = None
+    _vertrag_raw_aus = None
+    verstoesse_kurz = None
+
+try:
+    import redaktions_standard as _rs_guard
+except Exception:  # noqa: BLE001
+    _rs_guard = None
 MIN_CHARS = int(os.environ.get("LENGTH_MIN_CHARS") or lp.POSTS["target_min_chars"])
 MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or max(1400, MIN_CHARS // 7))
 # Zielzone relativ zum Floor: nie unter der Schwelle landen, sonst Heilungs-Loop.
@@ -99,10 +113,16 @@ def build_prompt(title, keywords, body, target_min, target_max):
         f"die Profi-Länge von {target_min}-{target_max} Wörtern erreicht "
         f"(aktuell kürzer).\n\n"
         "REGLEN:\n"
-        "- Behalte Titel, Struktur, Stil (Du-Form, direkte Ansprache) und "
-        "alle vorhandenen Inhalte/Abschnitte bei.\n"
+        "- Behalte Titel, Struktur, Stil (Du-Form, direkte Ansprache), "
+        "alle Links (/go/, interne und externe URLs) und alle vorhandenen "
+        "Pflicht-Module (**Das Wichtigste in Kürze**, **Faustregel:**, "
+        "nummerierte Schrittfolgen, Frage-H2 mit ?) vollständig bei.\n"
         "- Ergänze Tiefe, KEINE Füllwörter: zusätzliche konkrete Tipps, "
-        "Zahlen und Beispiele, Vor-/Nachteile, ggf. eine Vergleichstabelle, "
+        "Handlungsanweisungen und im selben Satz als „Beispielrechnung“ "
+        "oder „Modellrechnung“ gekennzeichnete Rechenbeispiele (ein bloßes "
+        "„ca.“, „rund“ oder „in der Regel“ gilt am Gate NICHT als Beleg; "
+        "wo keine Modellrechnung vorliegt, formuliere ohne Zahl), "
+        "Vor-/Nachteile, ggf. eine Vergleichstabelle, "
         "1-2 zusätzliche FAQ-Fragen mit ehrlichen Antworten.\n"
         "- Baue die Keywords natürlich ein (kein Stuffing).\n"
         "- Keine KI-Floskeln wie ›In der heutigen Welt‹, ›Zusammenfassend "
@@ -173,6 +193,27 @@ def extend_article(path, min_words, dry=False, min_chars=None):
         if floskeln:
             print(f"    ✗ {name}: KI-Floskeln {floskeln[:2]}")
             continue
+        slug = slug_of(path)
+        if _vertrag_pruefe is not None and _vertrag_raw_aus is not None:
+            verstoesse = _vertrag_pruefe(
+                slug, _vertrag_raw_aus(front, body), _vertrag_raw_aus(front, new_body)
+            )
+            if verstoesse:
+                kurz = verstoesse_kurz(verstoesse) if verstoesse_kurz else verstoesse[0][:120]
+                print(f"    ✗ {name}: Publikations-Vertrag verletzt ({kurz})")
+                continue
+        if _rs_guard is not None:
+            vorher_rs = {f.split(":", 1)[0].strip() for f in _rs_guard.reserve_quality_findings(body)}
+            nachher_rs = {f.split(":", 1)[0].strip() for f in _rs_guard.reserve_quality_findings(new_body)}
+            neue_rs = sorted(nachher_rs - vorher_rs)
+            if neue_rs:
+                print(f"    ✗ {name}: Redaktions-Standard-Regression ({', '.join(neue_rs)})")
+                continue
+            vorher_rs5 = len(_rs_guard._reserve_numeric_claim_findings(body))
+            nachher_rs5 = len(_rs_guard._reserve_numeric_claim_findings(new_body))
+            if nachher_rs5 > vorher_rs5:
+                print(f"    ✗ {name}: RS5-Zahlenbehauptungen erhöht ({vorher_rs5}→{nachher_rs5})")
+                continue
         if dry:
             return True, f"DRY-RUN ok: {nw} Wörter / {nh2} H2 (via {name})"
         with open(path, "w", encoding="utf-8") as f:
