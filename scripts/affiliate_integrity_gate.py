@@ -459,7 +459,7 @@ def hunspell_unknown_ratio(words: list[str]) -> float:
     if not candidates or shutil.which("hunspell") is None:
         return 0.0
     try:
-        proc = subprocess.run(["hunspell", "-d", "de_DE"], input="\n".join(candidates),
+        proc = subprocess.run(["hunspell", "-i", "UTF-8", "-d", "de_DE"], input="\n".join(candidates),
                               capture_output=True, text=True, timeout=15)
     except Exception:  # noqa: BLE001
         return 0.0

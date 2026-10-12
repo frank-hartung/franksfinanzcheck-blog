@@ -83,6 +83,8 @@ ALLOWED_FILES = ("data/reserve-readiness.json", "data/covers_manifest.json",
                  "data/reserve-topic-ledger.json",
                  "data/reserve-custody.json",
                  "data/reserve-history.jsonl",
+                 "data/reserve-intake.json",
+                 "data/reserve-janitor-state.json",
                  # Workflow #24: Der Reserve-Janitor löscht Rückläufer/
                  # Blocker und entfernt deren öffentliche llms.txt-Zeilen im
                  # selben Commit, sonst bliebe eine 404-Empfehlung für KI-
@@ -94,7 +96,8 @@ STAGE_PATHS = ("content/posts", "static/images/covers",
                "data/reserve-quarantine.json",
                "data/reserve-topic-ledger.json",
                "data/reserve-custody.json",
-               "data/reserve-history.jsonl", "data/audit")
+               "data/reserve-history.jsonl", "data/audit",
+               "data/reserve-intake.json", "data/reserve-janitor-state.json")
 
 RE_RESERVE = re.compile(r"(?m)^reserve:\s*(true|yes|1)\s*$")
 RE_DRAFT_TRUE = re.compile(r"(?m)^draft:\s*(true|yes|1)\s*$")

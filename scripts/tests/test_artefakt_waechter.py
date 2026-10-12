@@ -359,7 +359,8 @@ class GateKlassenTests(unittest.TestCase):
         zert = tmp / "reserve-readiness.json"
         zert.write_text(json.dumps(
             {"target": 6, "ready": 6,
-             "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)]}),
+             "candidates": [{"slug": f"k{i}", "ready": True, "sha256": "a" * 64}
+                            for i in range(6)]}),
             encoding="utf-8")
         self.assertEqual(rg.zertifikat_lage(zert)[0], rg.KLASSE_OK)
 

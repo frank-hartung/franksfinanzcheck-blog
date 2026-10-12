@@ -36,6 +36,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import reserve_artifacts as artifacts  # noqa: E402  (Ganz-Schnappschüsse, #634)
+import reserve_operations as ops
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 import reserve_pool as rp  # noqa: E402
 from publication_release import accept_candidate  # noqa: E402
@@ -144,6 +145,10 @@ def reserve_editorial_findings(index: Path, content: str) -> list[str]:
         return [f"Reserve-Qualitäts-Gate nicht prüfbar: {exc}"]
 
 
+class MeasurementUnavailable(RuntimeError):
+    """A tool failure is not a content verdict; keep the previous snapshot."""
+
+
 def certify_one(index) -> dict:
     """Zertifiziert GENAU EINEN Entwurf am echten Produktions-Gate.
 
@@ -162,19 +167,28 @@ def certify_one(index) -> dict:
     # und damit der Bezug zwischen Zertifikat und Datei verloren: der
     # gespeicherte sha256 passte zu keinem Byte mehr auf der Platte, und
     # die Wiederherstellung nach der Messung veränderte den Entwurf.
+    if ops.work_seconds(900) <= 0:
+        raise MeasurementUnavailable("Arbeitsbudget erschöpft; keine neue Messung")
     original_bytes = index.read_bytes()
     original = original_bytes.decode("utf-8")
     diag = score_diagnosis(index)
+    if diag and (diag.get("fehler") or diag.get("measurement_errors")):
+        raise MeasurementUnavailable(
+            f"Qualitäts-Messwerkzeug ausgefallen: "
+            f"{diag.get('fehler') or diag.get('measurement_errors')}")
     # Unabhängig vom groben Lesbarkeits-Score: 58,0 → 59,0 bleibt dort
     # häufig 80/100. Konvergenz muss sichere Zwischenstufen erkennen können.
     # Gemessen werden dieselben Original-Bytes, deren Hash unten steht.
     from lesbarkeit_heiler import flesch
     measured_flesch = flesch(original, index.parent.name)
     content_findings = reserve_editorial_findings(index, original)
+    if any("nicht prüfbar:" in finding for finding in content_findings):
+        raise MeasurementUnavailable("; ".join(content_findings))
     if content_findings:
         row = {"slug": index.parent.name, "ready": False,
                "sha256": hashlib.sha256(original_bytes).hexdigest(),
                "flesch": measured_flesch,
+               "measured_at": artifacts.utc_stamp(),
                "reason": f"Reserve-Qualitäts-Gate: {content_findings[0]}",
                "details": content_findings}
         if diag:
@@ -182,41 +196,44 @@ def certify_one(index) -> dict:
             row["parts"] = diag.get("parts")
         return row
     ready, reason, details = False, None, []
-    try:
-        rp.publish_one(index)
-        # NACHTRAG 08.10.2026 (#661): Beweis-Gegenprobe. Der Abdruck wird
-        # NACH dem Umschalten, aber VOR dem Gate genommen: verändert das
-        # Gate den Entwurf während der Messung, wurde nicht die Fassung
-        # begutachtet, deren Hash später im Zertifikat steht. Dann ist die
-        # Messung wertlos – unabhängig davon, was sie sagt (fail-closed).
-        proof_bytes = index.read_bytes()
-        ready, gate_text = capture_gate(index)
-        if ready and index.read_bytes() != proof_bytes:
-            ready = False
-            details = ["Gate-Vorheilung hat die Messfassung verändert – "
-                       "erst dauerhaft heilen, dann erneut zertifizieren"]
-            reason = details[0]
-        if not ready and not reason:
-            details = gate_findings(gate_text)
-            if diag and diag.get("score") is not None \
-                    and diag["score"] < 0.85:
-                schwach = ", ".join(
-                    f"{k} {v:.2f}" for k, v in sorted(
-                        diag.get("parts", {}).items(),
-                        key=lambda kv: kv[1])[:3])
-                reason = (f"quality-score {diag['score']} < 0.85 "
-                          f"(schwach: {schwach})")
-            else:
-                # REPARATUR 15.09.2026 (#295): der KONKRETE Gate-Fund,
-                # nicht der Platzhalter („Details im Workflow-Log“).
-                reason = grund_aus_funden(details)
-    except Exception as exc:  # noqa: BLE001 – nie am Gate scheitern
-        ready, reason = False, f"Gate-Ausnahme: {exc}"
-    finally:
-        index.write_bytes(original_bytes)
+    with ops.restore_on_termination():
+        try:
+            rp.publish_one(index)
+            # NACHTRAG 08.10.2026 (#661): Beweis-Gegenprobe. Der Abdruck wird
+            # NACH dem Umschalten, aber VOR dem Gate genommen: verändert das
+            # Gate den Entwurf während der Messung, wurde nicht die Fassung
+            # begutachtet, deren Hash später im Zertifikat steht. Dann ist die
+            # Messung wertlos – unabhängig davon, was sie sagt (fail-closed).
+            proof_bytes = index.read_bytes()
+            ready, gate_text = capture_gate(index)
+            if not ready and "NICHT BEWEISBAR" in gate_text:
+                raise MeasurementUnavailable(gate_text.strip())
+            if ready and index.read_bytes() != proof_bytes:
+                ready = False
+                details = ["Gate-Vorheilung hat die Messfassung verändert – "
+                           "erst dauerhaft heilen, dann erneut zertifizieren"]
+                reason = details[0]
+            if not ready and not reason:
+                details = gate_findings(gate_text)
+                if diag and diag.get("score") is not None \
+                        and diag["score"] < 0.85:
+                    schwach = ", ".join(
+                        f"{k} {v:.2f}" for k, v in sorted(
+                            diag.get("parts", {}).items(),
+                            key=lambda kv: kv[1])[:3])
+                    reason = (f"quality-score {diag['score']} < 0.85 "
+                              f"(schwach: {schwach})")
+                else:
+                    # REPARATUR 15.09.2026 (#295): der KONKRETE Gate-Fund,
+                    # nicht der Platzhalter („Details im Workflow-Log“).
+                    reason = grund_aus_funden(details)
+        except Exception as exc:
+            raise MeasurementUnavailable(f"Produktions-Gate nicht messbar: {exc}") from exc
+        finally:
+            index.write_bytes(original_bytes)
     row = {"slug": index.parent.name, "ready": ready,
            "sha256": hashlib.sha256(original_bytes).hexdigest(),
-           "flesch": measured_flesch}
+           "flesch": measured_flesch, "measured_at": artifacts.utc_stamp()}
     if reason:
         row["reason"] = reason
     if details:
@@ -311,6 +328,10 @@ def schreibe_zertifikat(pfad: Path, report: dict) -> None:
 
 
 def main():
+    if ops.work_seconds(900) <= 0:
+        print("::error::Reserve-Messung: Arbeitsbudget erschöpft; Nachweis bleibt unverändert.")
+        return 3
+    writers_allowed = os.environ.get("RESERVE_WRITERS_ALLOWED") != "0"
     # NACHTRAG 08.10.2026 (#661): VORPRÜFUNGEN VOR JEDER MUTATION.
     # Die Dauerheilung #653 hatte die beiden Sperren entfernt, mit denen
     # #634 den Volllauf stillgelegt hatte, solange das Messwerkzeug fehlt
@@ -340,44 +361,50 @@ def main():
     # Kandidaten die `reserve`-Fahne gekostet – der Vorrat schrumpfte lautlos
     # von 8 auf 3 und der End-Gate wurde rot, obwohl beide Entwürfe im Repo
     # lagen. Best-effort, nie blockierend.
-    try:
-        import reserve_custody
-        reserve_custody.heal_quiet()
-    except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
-        print(f"⚠ Bestands-Wächter übersprungen: {exc}")
+    if writers_allowed:
+        try:
+            import reserve_custody
+            reserve_custody.heal_quiet()
+        except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
+            print(f"⚠ Bestands-Wächter übersprungen: {exc}")
 
-    # BESTANDSAUFNAHME (05.10.2026, WF-B594, #594): Erst zurückgeben, was dem
-    # Pool gehört – DANN zählen. Befund F des Vorgangs: Am 05.10. meldete der
-    # Watchdog „0 gate-fertige Artikel", während fünf Entwürfe im Repo lagen,
-    # die am echten Gate 0,898–0,90 erreichten. Ihnen fehlte nur die Zeile
-    # `reserve: true`; der Pool ist fahnen-definiert und sah sie deshalb nie.
-    # Die Aufnahme übernimmt ausschließlich HERRENLOSE, maschinell erzeugte,
-    # triage-reife, standardriskante und dublettenfreie Entwürfe (sechs
-    # Prüfungen, jede Ablehnung mit Grund). Alles andere bleibt ein Angebot an
-    # die Redaktion. Best-effort, nie blockierend – eine Bestandsaufnahme darf
-    # die Zertifizierung nicht aufhalten.
-    try:
-        import reserve_intake
-        aufnahme = reserve_intake.bestandsaufnahme()
-        for kandidat in aufnahme["uebernehmbar"]:
-            index = ROOT / "content" / "posts" / kandidat["slug"] / "index.md"
-            ergebnis = reserve_intake.uebernehmen(
-                index, "herrenlose Reife (automatische Bestandsaufnahme)")
-            if ergebnis.get("ok") and not ergebnis.get("schon"):
-                print(f"📥 In den Pool aufgenommen: {kandidat['slug']} "
-                      f"– {kandidat['grund']}")
-        if aufnahme["angebote"]:
-            print(f"ℹ {len(aufnahme['angebote'])} fertige(r) Entwurf/Entwürfe "
-                  "warten auf eine bewusste Freigabe "
-                  "(python3 scripts/reserve_intake.py --md)")
-    except Exception as exc:  # noqa: BLE001 – Aufnahme ist Zubringer, kein Gate
-        print(f"⚠ Reserve-Bestandsaufnahme übersprungen: {exc}")
+        # BESTANDSAUFNAHME (05.10.2026, WF-B594, #594): Erst zurückgeben, was dem
+        # Pool gehört – DANN zählen. Befund F des Vorgangs: Am 05.10. meldete der
+        # Watchdog „0 gate-fertige Artikel", während fünf Entwürfe im Repo lagen,
+        # die am echten Gate 0,898–0,90 erreichten. Ihnen fehlte nur die Zeile
+        # `reserve: true`; der Pool ist fahnen-definiert und sah sie deshalb nie.
+        # Die Aufnahme übernimmt ausschließlich HERRENLOSE, maschinell erzeugte,
+        # triage-reife, standardriskante und dublettenfreie Entwürfe (sechs
+        # Prüfungen, jede Ablehnung mit Grund). Alles andere bleibt ein Angebot an
+        # die Redaktion. Best-effort, nie blockierend – eine Bestandsaufnahme darf
+        # die Zertifizierung nicht aufhalten.
+        try:
+            import reserve_intake
+            aufnahme = reserve_intake.bestandsaufnahme()
+            for kandidat in aufnahme["uebernehmbar"]:
+                index = ROOT / "content" / "posts" / kandidat["slug"] / "index.md"
+                ergebnis = reserve_intake.uebernehmen(
+                    index, "herrenlose Reife (automatische Bestandsaufnahme)")
+                if ergebnis.get("ok") and not ergebnis.get("schon"):
+                    print(f"📥 In den Pool aufgenommen: {kandidat['slug']} "
+                          f"– {kandidat['grund']}")
+            if aufnahme["angebote"]:
+                print(f"ℹ {len(aufnahme['angebote'])} fertige(r) Entwurf/Entwürfe "
+                      "warten auf eine bewusste Freigabe "
+                      "(python3 scripts/reserve_intake.py --md)")
+        except Exception as exc:  # noqa: BLE001 – Aufnahme ist Zubringer, kein Gate
+            print(f"⚠ Reserve-Bestandsaufnahme übersprungen: {exc}")
 
     rows = []
     # Nur aktuelle Reserve-Entwürfe (draft+reserve). Bereits veröffentlichte
     # Kandidaten (reserve_published) erscheinen hier bewusst nicht mehr.
-    for index in rp.reserve_drafts():
-        rows.append(certify_one(index))
+    try:
+        for index in rp.reserve_drafts():
+            rows.append(certify_one(index))
+    except (MeasurementUnavailable, ops.WorkInterrupted) as exc:
+        print(f"::error::Reserve-Messung abgebrochen: {exc}. "
+              "Voriger Nachweis bleibt unverändert; keine Quarantäne-Abwertung.")
+        return 3
 
     # REPARATUR 15.09.2026 (#295): Ein Kandidat, den kein Heiler reparieren
     # kann, darf den Zielbestand nicht dauerhaft unerreichbar machen. Nach
@@ -387,7 +414,8 @@ def main():
     geschont: list[dict] = []
     try:
         import reserve_quarantine as rq
-        blocked = rq.record(rows, geschont_out=geschont)
+        if writers_allowed:
+            blocked = rq.record(rows, geschont_out=geschont)
     except Exception as exc:  # noqa: BLE001 – Quarantäne darf nie blockieren
         print(f"⚠ Reserve-Quarantäne nicht ausführbar: {exc}")
     if blocked:
@@ -422,6 +450,7 @@ def main():
             __import__("datetime").timezone.utc
         ).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "candidates": rows,
+        "measurement": artifacts.measurement_context("full"),
     }
     if blocked:
         # Der Pool-Stand ist ohne diese Information nicht zu verstehen: Ein

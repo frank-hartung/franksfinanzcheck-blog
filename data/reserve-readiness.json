@@ -2,16 +2,17 @@
   "target": 6,
   "ready": 11,
   "pool_size": 11,
-  "generated_at": "2026-10-12T22:10:57Z",
+  "generated_at": "2026-10-12T22:51:55Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
       "sha256": "f3412b02755bab2af0b4929001bf07a368654ee703cadca3fb430f620a48e668",
       "flesch": 61.1,
-      "score": 0.984,
+      "measured_at": "2026-10-12T22:46:34Z",
+      "score": 0.992,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -25,6 +26,7 @@
       "ready": true,
       "sha256": "2eb4aaeeaba61d89ff1bbc62a4e338819959c9a4759a75796de70025cb568d72",
       "flesch": 62.5,
+      "measured_at": "2026-10-12T22:47:05Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -41,9 +43,10 @@
       "ready": true,
       "sha256": "453160bfde9c704a7f2df745705ba843e7bb97ec5aebbf624d44c5eab236f767",
       "flesch": 61.0,
-      "score": 0.95,
+      "measured_at": "2026-10-12T22:47:41Z",
+      "score": 0.966,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -57,6 +60,7 @@
       "ready": true,
       "sha256": "ccbea17d34524846d71387e53e06c8d216adff33d83ed65d0af4c6ece6dded6f",
       "flesch": 60.0,
+      "measured_at": "2026-10-12T22:48:14Z",
       "score": 0.91,
       "parts": {
         "spelling": 0.8,
@@ -73,9 +77,10 @@
       "ready": true,
       "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
       "flesch": 64.4,
-      "score": 0.966,
+      "measured_at": "2026-10-12T22:48:49Z",
+      "score": 0.97,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -85,29 +90,14 @@
       }
     },
     {
-      "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
-      "ready": true,
-      "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
-      "flesch": 60.8,
-      "score": 0.978,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": true,
       "sha256": "a4eaca988a473689b1f441b633949fb22d0e2b14e594175b9dca46c0e3fc0681",
       "flesch": 60.1,
-      "score": 0.954,
+      "measured_at": "2026-10-12T22:49:24Z",
+      "score": 0.962,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.84,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.94,
@@ -121,12 +111,30 @@
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "score": 0.984,
+      "measured_at": "2026-10-12T22:49:54Z",
+      "score": 0.992,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+      "ready": true,
+      "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
+      "flesch": 60.8,
+      "measured_at": "2026-10-12T22:50:24Z",
+      "score": 0.986,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -137,9 +145,10 @@
       "ready": true,
       "sha256": "18e0fe1fb6fd54664894925da3a3e1c4c62eddc4ee7e31228569ba4067cd5981",
       "flesch": 63.2,
-      "score": 0.96,
+      "measured_at": "2026-10-12T22:50:58Z",
+      "score": 0.968,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.84,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -153,9 +162,10 @@
       "ready": true,
       "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
       "flesch": 71.5,
-      "score": 0.97,
+      "measured_at": "2026-10-12T22:51:27Z",
+      "score": 0.982,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -169,6 +179,7 @@
       "ready": true,
       "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
       "flesch": 65.1,
+      "measured_at": "2026-10-12T22:51:55Z",
       "score": 0.982,
       "parts": {
         "spelling": 0.96,
@@ -181,14 +192,7 @@
       }
     }
   ],
-  "recert": {
-    "at": "2026-10-12T22:10:57Z",
-    "renewed": [
-      "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
-      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
-      "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick"
-    ],
-    "tool": "scripts/reserve_recert.py"
+  "measurement": {
+    "kind": "full"
   }
 }

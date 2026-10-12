@@ -813,7 +813,7 @@ class ReserveSnapshotKonfliktTests(GitSyncTestBase):
         super().setUp()
         attributes = "\n".join(
             f"data/reserve-{name}.json merge=binary"
-            for name in ("readiness", "custody", "quarantine")) + "\n"
+            for name in ("readiness", "custody", "quarantine", "intake", "janitor-state")) + "\n"
         self._commit(self.bot_a, ".gitattributes", attributes, "snapshot policy")
         result = self.run_sync(["--push-only"], repo=self.bot_a)
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
@@ -870,7 +870,7 @@ class ReserveSnapshotKonfliktTests(GitSyncTestBase):
         self.assertEqual(newer, json.loads(self.origin_read(path)))
 
     def test_corrupt_memory_or_certificate_is_not_pushed_or_silently_emptied(self):
-        for name in ("custody", "quarantine", "readiness"):
+        for name in ("custody", "quarantine", "readiness", "intake", "janitor-state"):
             with self.subTest(name=name):
                 older = '{"a": {"last": "2026-10-07"}}\n'
                 newer = '{"a": {"hits": 1, "hits": 2}}\n'
@@ -882,6 +882,51 @@ class ReserveSnapshotKonfliktTests(GitSyncTestBase):
                 # synthetic race. Reset only the sandbox clone to its remote.
                 subprocess.run(["git", "-C", str(self.bot_b), "reset", "--hard", "origin/main"],
                                check=True, capture_output=True)
+
+
+    def test_intake_unions_complete_provenance_events_without_collapsing_repeat_adoption(self):
+        import json
+        shared = {"slug": "a", "datum": "2026-10-07", "grund": "triage"}
+        older = {"uebernahmen": [shared, {"slug": "b", "datum": "2026-10-07", "grund": "proof"}]}
+        newer = {"uebernahmen": [shared, {"slug": "a", "datum": "2026-10-08", "grund": "recovery"},
+                                 {**shared, "quelle": "second independent provenance"}]}
+        path, result = self._compete("intake", json.dumps(older), json.dumps(newer))
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        merged = json.loads(self.origin_read(path))["uebernahmen"]
+        self.assertEqual(4, len(merged))
+        self.assertEqual(1, merged.count(shared))
+        self.assertIn(newer["uebernahmen"][2], merged)
+        self.assertIn(older["uebernahmen"][1], merged)
+
+    def test_intake_bad_event_is_not_dropped_to_salvage_the_push(self):
+        import json
+        older = {"uebernahmen": [{"slug": "a", "datum": "2026-10-07", "grund": "triage"}]}
+        newer = {"uebernahmen": ["invalid-event"]}
+        path, result = self._compete("intake", json.dumps(older), json.dumps(newer))
+        self.assertNotEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertEqual(older, json.loads(self.origin_read(path)))
+        self.assertEqual(newer, json.loads((self.bot_b / path).read_text()))
+
+    def test_janitor_counter_unions_only_distinct_same_finding_runs(self):
+        import json
+        older = {"a": {"signatur": "same", "hits": 2, "laeufe": ["10", "11"],
+                       "first": "2026-10-06", "last": "2026-10-07"}}
+        newer = {"a": {"signatur": "same", "hits": 2, "laeufe": ["11", "12"],
+                       "first": "2026-10-07", "last": "2026-10-08"}}
+        path, result = self._compete("janitor-state", json.dumps(older), json.dumps(newer))
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        merged = json.loads(self.origin_read(path))["a"]
+        self.assertEqual(3, merged["hits"])
+        self.assertEqual(["10", "11", "12"], merged["laeufe"])
+        self.assertEqual("2026-10-06", merged["first"])
+
+    def test_janitor_new_finding_cannot_inherit_old_deletion_hits(self):
+        import json
+        older = {"a": {"signatur": "old", "hits": 5, "laeufe": ["10"], "last": "2026-10-07"}}
+        newer = {"a": {"signatur": "new", "hits": 1, "laeufe": ["12"], "last": "2026-10-08"}}
+        path, result = self._compete("janitor-state", json.dumps(older), json.dumps(newer))
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertEqual(newer, json.loads(self.origin_read(path)))
 
 
 class ReservePoolKonflikt661Tests(GitSyncTestBase):

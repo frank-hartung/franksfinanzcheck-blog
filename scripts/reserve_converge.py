@@ -76,6 +76,7 @@ PY = sys.executable
 
 sys.path.insert(0, str(ROOT / "scripts"))
 import reserve_artifacts as artifacts  # noqa: E402
+import reserve_operations as ops
 import readability_check  # SSOT: Publikationsschwelle
 from satz_heiler import MIN_FORTSCHRITT  # sichere Zwischenstufen (#614)
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
@@ -87,7 +88,8 @@ def target() -> int:
 
 
 
-def cert_state(cert_path: Path = CERT, posts_dir: Path | None = None) -> dict:
+def cert_state(cert_path: Path = CERT, posts_dir: Path | None = None, *,
+               require_fresh: bool = False) -> dict:
     """Aktueller Pool-Zustand: (target, ready, pool_size).
 
     `ready` wird – wie im harten End-Gate – aus der Kandidatenliste gezählt,
@@ -115,7 +117,8 @@ def cert_state(cert_path: Path = CERT, posts_dir: Path | None = None) -> dict:
     if not isinstance(cands, list):
         return state
     cands = artifacts.verified_rows(
-        data, posts_dir if posts_dir is not None else ROOT / "content" / "posts")
+        data, posts_dir if posts_dir is not None else ROOT / "content" / "posts",
+        require_fresh=require_fresh)
     state["exists"] = True
     # Beweismittel, nicht Vorgabe: Womit wurde zuletzt gemessen?
     state["zertifikat_ziel"] = reserve_economy.zertifikat_ziel(data)
@@ -136,22 +139,11 @@ def _run(cmd: list, env_extra: dict | None = None, timeout: int = 2400) -> int:
     # weiter schreiben, während der Workflow bereits sichert/zertifiziert.
     proc = subprocess.Popen(cmd, cwd=str(ROOT), env=env, start_new_session=True)
     try:
-        return proc.wait(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        try:
-            os.killpg(proc.pid, signal.SIGTERM)
-            proc.wait(timeout=5)
-        except (ProcessLookupError, subprocess.TimeoutExpired):
-            pass
-        finally:
-            # Auch bei bereits beendetem Elternprozess verbliebene Kinder
-            # stoppen (einschließlich solcher, die SIGTERM ignorieren).
-            try:
-                os.killpg(proc.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-            proc.wait()
-        print(f"    ⚠ Zeitüberschreitung nach {timeout}s – Prozessgruppe beendet.")
+        with ops.restore_on_termination():
+            return proc.wait(timeout=timeout)
+    except (subprocess.TimeoutExpired, ops.WorkInterrupted):
+        ops.stop_group(proc)
+        print(f"    ⚠ Zeitüberschreitung/Abbruch nach {timeout}s – Prozessgruppe beendet.")
         return 124
 
 
@@ -206,6 +198,15 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
                 f"Stand: READY {vorher['ready']}/{vorher['target']}.")
             return {"ok": ok, "runden": runde - 1, "state": vorher,
                     "verlauf": verlauf, "abbruch": "zeit-budget"}
+        if vorher.get("exists") is False:
+            rest = 2400 if max_sekunden is None else max(0, int(max_sekunden - (now() - start)))
+            code = runner([PY, str(ROOT / "scripts" / "reserve_readiness.py")],
+                          None, timeout=rest) if rest > 0 else 124
+            vorher = state_reader()
+            if code not in (0, 1) or vorher.get("exists") is False:
+                return {"ok": False, "runden": runde - 1, "state": vorher,
+                        "verlauf": verlauf, "abbruch": "messung-fehlt",
+                        "schritte": {"reserve_readiness.py": code}}
         brauche = max(0, vorher["target"] - vorher["ready"])
         log(f"  🔄 Konvergenz-Runde {runde}/{max_runden}: "
             f"READY {vorher['ready']}/{vorher['target']} "
@@ -248,6 +249,10 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
                 return {"ok": False, "runden": runde,
                         "state": state_reader(), "verlauf": verlauf,
                         "abbruch": "schritt-timeout", "schritte": codes}
+            if script != "reserve_readiness.py" and code not in (0, 1):
+                return {"ok": False, "runden": runde, "state": state_reader(),
+                        "verlauf": verlauf, "abbruch": "schreiber-fehlgeschlagen",
+                        "schritte": codes}
             if script == "reserve_readiness.py" and code not in (0, 1):
                 return {"ok": False, "runden": runde,
                         "state": state_reader(), "verlauf": verlauf,
@@ -495,8 +500,7 @@ def main() -> int:
     ap.add_argument("--runden", type=int, default=3,
                     help="maximale Konvergenz-Runden (Default 3)")
     ap.add_argument("--max-minuten", type=float,
-                    default=float(os.environ.get("RESERVE_CONVERGE_MAX_MINUTES")
-                                  or 45),
+                    default=os.environ.get("RESERVE_CONVERGE_MAX_MINUTES") or "45",
                     help="Wanduhr-Budget der Stufe (Default 45, env "
                          "RESERVE_CONVERGE_MAX_MINUTES) – danach laufen "
                          "Sichern + End-Gate garantiert noch")
@@ -507,11 +511,17 @@ def main() -> int:
     if args.selftest:
         return run_selftest()
     if args.status:
-        st = cert_state(Path(args.cert))
+        st = cert_state(Path(args.cert), require_fresh=True)
         print(json.dumps(st, ensure_ascii=False))
         return 0 if st["ready"] >= st["target"] else 1
-    budget = max(0, int(args.max_minuten * 60)) if args.max_minuten else None
-    res = converge(max_runden=max(1, args.runden), max_sekunden=budget)
+    if os.environ.get("RESERVE_WRITERS_ALLOWED") == "0":
+        print("🛑 Konvergenz-Schreiber gesperrt; keine Ersatzproduktion.")
+        return 3
+    if not math.isfinite(args.max_minuten) or args.max_minuten <= 0:
+        ap.error("--max-minuten muss endlich und positiv sein")
+    budget = int(ops.work_seconds(min(args.max_minuten, 45) * 60))
+    res = converge(max_runden=max(1, min(args.runden, 3)), max_sekunden=budget,
+                   state_reader=lambda: cert_state(Path(args.cert), require_fresh=True))
     write_summary(res, args.summary)
     if res["ok"]:
         return 0

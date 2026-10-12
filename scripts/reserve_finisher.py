@@ -63,9 +63,11 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 import reserve_artifacts as artifacts  # noqa: E402
+import reserve_operations as ops
 BLOG_DIR = Path(__file__).resolve().parent.parent
 POSTS_DIR = BLOG_DIR / "content" / "posts"
 READINESS = BLOG_DIR / "data" / "reserve-readiness.json"
@@ -88,12 +90,12 @@ def frontmatter_of(text: str) -> str:
 
 
 
-def certified_slugs() -> dict:
+def certified_slugs(*, require_fresh=False) -> dict:
     """slug -> sha256 für alle Kandidaten mit gültigem Reife-Zertifikat."""
     try:
         report = artifacts.read_certificate(READINESS)
         return {r["slug"]: r["sha256"] for r in artifacts.verified_rows(
-            report, POSTS_DIR) if r["ready"]}
+            report, POSTS_DIR, require_fresh=require_fresh) if r["ready"]}
     except (OSError, ValueError, KeyError):
         return {}
 
@@ -152,6 +154,8 @@ def lift_to_today(index: Path) -> Path:
     """
     slug = index.parent.name
     today = today_prefix()
+    if not any(original == index for original, _raw in SNAPSHOTS):
+        SNAPSHOTS.append((index, index.read_bytes()))
     if slug.startswith(today):
         # Idempotenz: Nur datieren, wenn der Kandidat noch nicht auf HEUTE
         # datiert ist – sonst änderte jeder Finish-Lauf das date-Feld und der
@@ -169,7 +173,6 @@ def lift_to_today(index: Path) -> Path:
     if new_dir.exists():
         raise FileExistsError(f"Ziel-Ordner existiert bereits: {new_dir.name}")
     new_index = new_dir / "index.md"
-    SNAPSHOTS.append((index, index.read_bytes()))
     index.parent.rename(new_dir)
     text = new_index.read_text(encoding="utf-8")
     text = re.sub(r"(?m)^date:\s*.*$", f"date: {now_utc_iso()}",
@@ -661,111 +664,67 @@ def _step_guard_enforce(vorher_map: dict, label: str) -> list[str]:
     return rollbacks
 
 
-def run_chain(results: list, targets: list, env: dict | None = None) -> None:
-    """Führt die Heiler-Kette aus. Fehler einzelner Heiler sind Hinweise –
-    die Zertifizierung ist die Instanz, die über Reife entscheidet.
+def run_chain(results: list, targets: list, env: dict | None = None, *,
+              max_seconds: float = 1200, now=time.monotonic, runner=None) -> None:
+    """One bounded work window for the WHOLE chain, not 900s per article.
 
-    `targets`: Liste der Lift-Pfade (Kandidaten). Heiler mit Scope „file"
-    laufen einmal pro Kandidat (--file <pfad>) und nie korpusweit; Scope
-    „slug" ersetzt den Platzhalter {slug} je Kandidat (z. B. Cover-Render)
-    und läuft ebenfalls nur für Pool-Kandidaten.
+    Individual editorial healer failures remain diagnostic. A timeout stops
+    the process group before returning to the isolation guard. Every child
+    receives only the remaining local AND workflow-wide budget.
     """
+    runner = ops.run_healer if runner is None else runner
+    started = now()
     for entry in HEALER_CHAIN:
-        script = entry[0]
-        raw_args = list(entry[1])
+        script, raw_args = entry[0], list(entry[1])
         scope = entry[2] if len(entry) > 2 else "corpus"
+        jobs = []
         if scope == "slug":
             for index in targets:
-                vorher = {index: index.read_bytes()} if index.is_file() else {}
-                args = [index.parent.name if a == "{slug}" else a
-                        for a in raw_args]
-                label = f"{script} {' '.join(args)}".strip()
-                try:
-                    proc = subprocess.run(
-                        [sys.executable,
-                         str(BLOG_DIR / "scripts" / script)] + args,
-                        cwd=str(BLOG_DIR), env=env, timeout=900,
-                        capture_output=True, text=True)
-                    tail = (proc.stdout or "").strip().splitlines()
-                    _step_guard_enforce(vorher, label)
-                    results.append({
-                        "heiler": label, "ok": proc.returncode == 0,
-                        "letzte_zeile": tail[-1][:160] if tail else "",
-                        "rc": proc.returncode})
-                    if proc.returncode != 0:
-                        print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
-                except subprocess.TimeoutExpired:
-                    _step_guard_enforce(vorher, label)
-                    results.append({"heiler": label, "ok": False,
-                                    "letzte_zeile": "TIMEOUT > 900s",
-                                    "rc": None})
-                    print(f"  ⚠ Heiler TIMEOUT: {label}")
-                except Exception as exc:  # noqa: BLE001
-                    _step_guard_enforce(vorher, label)
-                    results.append({"heiler": label, "ok": False,
-                                    "letzte_zeile": f"Fehler: {exc}",
-                                    "rc": None})
-                    print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
-            continue
-        args = raw_args
-        if scope == "file":
+                args = [index.parent.name if a == "{slug}" else a for a in raw_args]
+                jobs.append((args, f"{script} {' '.join(args)}".strip(), [index]))
+        elif scope == "file":
             for index in targets:
-                vorher = {index: index.read_bytes()} if index.is_file() else {}
-                label = (f"{script} {' '.join(args)} --file {index.parent.name}"
-                         ).strip()
-                try:
-                    proc = subprocess.run(
-                        [sys.executable,
-                         str(BLOG_DIR / "scripts" / script)] + args
-                        + ["--file", str(index)],
-                        cwd=str(BLOG_DIR), env=env, timeout=900,
-                        capture_output=True, text=True)
-                    tail = (proc.stdout or "").strip().splitlines()
-                    _step_guard_enforce(vorher, label)
-                    results.append({
-                        "heiler": label, "ok": proc.returncode == 0,
-                        "letzte_zeile": tail[-1][:160] if tail else "",
-                        "rc": proc.returncode})
-                    if proc.returncode != 0:
-                        print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
-                except subprocess.TimeoutExpired:
-                    _step_guard_enforce(vorher, label)
-                    results.append({"heiler": label, "ok": False,
-                                    "letzte_zeile": "TIMEOUT > 900s", "rc": None})
-                    print(f"  ⚠ Heiler TIMEOUT: {label}")
-                except Exception as exc:  # noqa: BLE001
-                    _step_guard_enforce(vorher, label)
-                    results.append({"heiler": label, "ok": False,
-                                    "letzte_zeile": f"Fehler: {exc}", "rc": None})
-                    print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
-            continue
-        vorher = {idx: idx.read_bytes() for idx in targets if idx.is_file()}
-        label = f"{script} {' '.join(args)}".strip()
-        try:
-            proc = subprocess.run(
-                [sys.executable, str(BLOG_DIR / "scripts" / script)] + args,
-                cwd=str(BLOG_DIR), env=env, timeout=900,
-                capture_output=True, text=True)
-            ok = proc.returncode == 0
-            tail = (proc.stdout or "").strip().splitlines()
-            _step_guard_enforce(vorher, label)
-            results.append({
-                "heiler": label, "ok": ok,
-                "letzte_zeile": tail[-1][:160] if tail else "",
-                "rc": proc.returncode,
-            })
-            if not ok:
-                print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
-        except subprocess.TimeoutExpired:
-            _step_guard_enforce(vorher, label)
-            results.append({"heiler": label, "ok": False,
-                            "letzte_zeile": "TIMEOUT > 900s", "rc": None})
-            print(f"  ⚠ Heiler TIMEOUT: {label}")
-        except Exception as exc:  # noqa: BLE001 – nie die Kette brechen
-            _step_guard_enforce(vorher, label)
-            results.append({"heiler": label, "ok": False,
-                            "letzte_zeile": f"Fehler: {exc}", "rc": None})
-            print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
+                jobs.append((raw_args + ["--file", str(index)],
+                             f"{script} {' '.join(raw_args)} --file {index.parent.name}".strip(), [index]))
+        else:
+            jobs.append((raw_args, f"{script} {' '.join(raw_args)}".strip(), targets))
+        for args, label, affected in jobs:
+            local_left = max(0.0, max_seconds - (now() - started))
+            remaining = ops.work_seconds(min(900, local_left))
+            if remaining <= 0:
+                results.append({"heiler": label, "ok": False, "rc": 124,
+                                "letzte_zeile": "ZEIT-BUDGET erschöpft; keine weiteren Heiler"})
+                print("  ⏱ Reserve-Finish: gemeinsames Zeitbudget erschöpft; "
+                      "Isolation, Sicherung und End-Gate folgen.")
+                return
+            previous = {index: index.read_bytes() for index in affected if index.is_file()}
+            try:
+                proc = runner([sys.executable, str(BLOG_DIR / "scripts" / script), *args],
+                              cwd=str(BLOG_DIR), env=env, timeout=remaining)
+                tail = (proc.stdout or "").strip().splitlines()
+                errors = (proc.stderr or "").strip().splitlines()
+                results.append({"heiler": label, "ok": proc.returncode == 0,
+                                "letzte_zeile": (tail[-1] if tail else "")[:160],
+                                "fehler": (errors[-1] if errors else "")[:160],
+                                "rc": proc.returncode})
+                if proc.returncode != 0:
+                    print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
+            except subprocess.TimeoutExpired:
+                results.append({"heiler": label, "ok": False, "rc": 124,
+                                "letzte_zeile": f"TIMEOUT nach {remaining:.1f}s; Prozessgruppe beendet"})
+                print(f"  ⏱ Heiler-TIMEOUT: {label} – keine weiteren Schreiber.")
+                return
+            except Exception as exc:
+                results.append({"heiler": label, "ok": False, "rc": None,
+                                "letzte_zeile": f"Fehler: {exc}"})
+                print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
+            finally:
+                # Preserve the main branch's per-writer editorial regression
+                # guard after the whole child group has stopped, including
+                # timeout/interruption paths. This is additional to isolation.
+                rollbacks = _step_guard_enforce(previous, label)
+                if rollbacks and results:
+                    results[-1]["rollback"] = rollbacks
 
 
 def quality_snapshot(index: Path) -> dict | None:
@@ -908,7 +867,11 @@ def write_report(results: list, targets: list, started_iso: str,
     REPORT.write_text("\n".join(lines), encoding="utf-8")
 
 
-def finish() -> int:
+def finish(*, only_if_needed=False) -> int:
+    if ops.work_seconds(1200) <= 0:
+        print("::warning::Reserve-Finish: Arbeitsbudget erschöpft – keine Mutation.")
+        return 124
+    SNAPSHOTS.clear()
     sys.path.insert(0, str(BLOG_DIR / "scripts"))
     import reserve_pool as rp
     started = now_utc_iso()
@@ -952,7 +915,13 @@ def finish() -> int:
               "(Issue #594).")
         write_report([], [], started, None, deckung)
         return 1
-    certified = certified_slugs()
+    certified = certified_slugs(require_fresh=only_if_needed)
+    if only_if_needed:
+        import reserve_economy
+        if len(certified) >= reserve_economy.ziel():
+            print("✅ Vorratsziel bereits frisch nachgewiesen – keine zusätzliche KI-Veredelung.")
+            write_report([], [], started, None, deckung)
+            return 0
     pool = [p for p in rp.reserve_drafts()
             if not _is_certified(p, certified)]
     targets = []
@@ -984,8 +953,9 @@ def finish() -> int:
     allowed = allowed_paths_for(targets)
     baseline = isolation_baseline(allowed)
     try:
-        run_chain(results, targets)
-    except Exception:  # noqa: BLE001 – katastrophal: Rollback auf Snapshot
+        with ops.restore_on_termination():
+            run_chain(results, targets)
+    except (Exception, ops.WorkInterrupted):  # Rollback before persistence
         print("🛑 Reserve-Finish KATASTROPHAL abgebrochen – Rollback der "
               "Snapshots.")
         for original, raw in reversed(SNAPSHOTS):
@@ -1017,7 +987,7 @@ def finish() -> int:
         print(f"  🛡 Live-Korpus-Isolation: {len(isolation)} Fremd-Änderung(en) "
               f"außerhalb der Pool-Kandidaten zurückgestellt "
               f"(Details: RESERVE-FINISH-REPORT.md).")
-    return 0
+    return 124 if any(r.get("rc") == 124 for r in results) else 0
 
 
 def status() -> int:
@@ -1151,6 +1121,9 @@ def main() -> int:
     if "--status" in args:
         return status()
     if "--finish" in args:
+        if os.environ.get("RESERVE_WRITERS_ALLOWED") == "0":
+            print("🛑 Reserve-Finish: Schreiber gesperrt – keine Mutation.")
+            return 3
         # Bestands-Wächter VOR der Kette: Ein Kandidat, dem eine fremde
         # Umschreibung die `reserve`-Fahne genommen hat, wäre für die
         # Veredelung unsichtbar (#387). Der Wächter läuft vor dem
@@ -1161,7 +1134,7 @@ def main() -> int:
             reserve_custody.heal_quiet()
         except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
             print(f"⚠ Bestands-Wächter übersprungen: {exc}")
-        return finish()
+        return finish(only_if_needed="--bedarf" in args)
     print(__doc__)
     return 1
 

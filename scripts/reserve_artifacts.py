@@ -9,6 +9,7 @@ measurement; the production end gate still enforces the 36-hour limit.
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import hashlib
 import json
 import math
@@ -18,8 +19,84 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+CERT_MAX_AGE_H = 36
 STATE_FILES = ("reserve-readiness.json", "reserve-custody.json",
                "reserve-quarantine.json")
+AUXILIARY_MEMORIES = ("reserve-intake.json", "reserve-janitor-state.json")
+
+
+
+def utc_stamp() -> str:
+    return dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def parse_stamp(raw) -> dt.datetime | None:
+    if not isinstance(raw, str):
+        return None
+    try:
+        stamp = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return stamp if stamp.tzinfo is not None else None
+
+
+def max_age_hours(env=None) -> float:
+    env = os.environ if env is None else env
+    try:
+        value = float(env.get("RESERVE_CERT_MAX_AGE_H") or CERT_MAX_AGE_H)
+        return min(value, float(CERT_MAX_AGE_H)) if math.isfinite(value) and value > 0 else float(CERT_MAX_AGE_H)
+    except (TypeError, ValueError):
+        return float(CERT_MAX_AGE_H)
+
+
+def proof_age_hours(data: dict, row: dict | None = None, *, now=None) -> float | None:
+    # Legacy rows inherit their ORIGINAL snapshot time. Partial recertification
+    # pins that time before refreshing generated_at; unchanged rows cannot be
+    # made fresh by measuring a different article.
+    raw = (row.get("measured_at", data.get("generated_at"))
+           if row is not None else data.get("generated_at"))
+    stamp = parse_stamp(raw)
+    if stamp is None:
+        return None
+    now = dt.datetime.now(dt.timezone.utc) if now is None else now
+    return (now - stamp).total_seconds() / 3600
+
+
+def proof_problem(data: dict, row: dict, *, now=None) -> str | None:
+    age = proof_age_hours(data, row, now=now)
+    if age is None:
+        return "Messzeitpunkt fehlt oder ist ungültig; neu zertifizieren"
+    if age < -5 / 60:
+        return "Messzeitpunkt liegt in der Zukunft; kein Nachweis"
+    if age > max_age_hours():
+        return f"Nachweis veraltet ({age:.1f} h); neu zertifizieren"
+    return None
+
+
+def measurement_context(kind: str, *, env=None) -> dict:
+    env = os.environ if env is None else env
+    result = {"kind": kind}
+    for key, variable in (("run_id", "GITHUB_RUN_ID"),
+                          ("run_attempt", "GITHUB_RUN_ATTEMPT")):
+        if env.get(variable):
+            result[key] = str(env[variable])
+    return result
+
+
+def measurement_problem(data: dict, *, env=None) -> str | None:
+    """CI opts into proof from THIS run/attempt, never a green previous night."""
+    env = os.environ if env is None else env
+    if env.get("RESERVE_REQUIRE_CURRENT_RUN") != "1":
+        return None
+    context = data.get("measurement")
+    expected = measurement_context("", env=env)
+    if not expected.get("run_id") or not expected.get("run_attempt"):
+        return "Lauf-ID/Versuch fehlen; aktuelle Messung nicht zuordenbar"
+    if not isinstance(context, dict) or context.get("kind") not in ("full", "partial"):
+        return "kein Messnachweis dieses Laufs; Zertifizierung erneut ausführen"
+    if any(context.get(key) != expected[key] for key in ("run_id", "run_attempt")):
+        return "Zertifikat stammt aus einem anderen Lauf/Versuch, nicht aus dieser Nacht"
+    return None
 
 
 def _unique_object(pairs: list[tuple]) -> dict:
@@ -77,6 +154,8 @@ def certificate_rows(data: dict) -> list[dict]:
         seen.add(slug)
         if type(row.get("ready")) is not bool:
             raise ValueError(f"{slug}: ready ist kein Boolean")
+        if "measured_at" in row and parse_stamp(row["measured_at"]) is None:
+            raise ValueError(f"{slug}: measured_at fehlt oder ist ungültig")
         digest = row.get("sha256")
         if row["ready"] or digest is not None:
             if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
@@ -84,12 +163,22 @@ def certificate_rows(data: dict) -> list[dict]:
     return rows
 
 
-def check_memories(data_dir: Path) -> None:
+def check_memories(data_dir: Path, *, names=None) -> None:
     """Missing bootstrap history is allowed; corrupt history is never empty."""
-    for name in STATE_FILES[1:]:
+    for name in (*STATE_FILES[1:], *AUXILIARY_MEMORIES) if names is None else names:
         try:
             data = read_object(data_dir / name)
-            if any(not isinstance(row, dict) for row in data.values()):
+            if name == "reserve-intake.json":
+                if data and "uebernahmen" not in data:
+                    raise ValueError("Intake-Provenienzliste fehlt")
+                events = data.get("uebernahmen", [])
+                if not isinstance(events, list) or any(
+                        not isinstance(event, dict) or any(
+                            not isinstance(event.get(key), str) or not event[key]
+                            for key in ("slug", "datum", "grund"))
+                        for event in events):
+                    raise ValueError("Intake-Provenienz beschädigt")
+            elif any(not isinstance(row, dict) for row in data.values()):
                 raise ValueError("Gedächtnis-Eintrag ist kein Objekt")
         except FileNotFoundError:
             continue
@@ -140,13 +229,16 @@ def candidate_problem(row: dict, posts_dir: Path) -> str | None:
     return None
 
 
-def verified_rows(data: dict, posts_dir: Path) -> list[dict]:
+def verified_rows(data: dict, posts_dir: Path, *, require_fresh: bool = False,
+                  now=None) -> list[dict]:
     """Return a diagnostic view, never modify the certificate or source files."""
     result = []
     for row in certificate_rows(data):
         checked = dict(row)
         if row["ready"]:
             problem = candidate_problem(row, posts_dir)
+            if not problem and require_fresh:
+                problem = proof_problem(data, row, now=now)
             if problem:
                 checked.update(ready=False, reason=f"Zertifikats-Integrität: {problem}")
         result.append(checked)
