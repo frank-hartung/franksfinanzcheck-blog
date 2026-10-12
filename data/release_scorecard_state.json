@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T13:51:19Z",
+  "generated_at": "2026-10-12T15:23:28Z",
   "modus": "kandidaten",
-  "commit": "4bffca7b722200e239dd809e0c29586685778fd2",
+  "commit": "b47abbe4fc227263d96b7b927eb0efcb6f3eac2f",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -37,23 +37,6 @@
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
-    },
-    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-      "sha256": "5649820b26ddb959e804a8978e7009bbcf7c1ee24eb8dcd863ddf79f00818baa",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "neu versiegelt"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "a22691ad7fe6966be84ceadf64f76aae4c9c2586dd0dad7fe8ba07056f3ac5d5",
@@ -257,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
