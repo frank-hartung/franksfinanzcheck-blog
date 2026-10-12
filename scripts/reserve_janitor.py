@@ -311,17 +311,17 @@ def _signatur(text: str) -> str:
 
 def lade_zaehler(root: Path) -> dict:
     try:
-        data = json.loads((root / JANITOR_STATE).read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        data = artifacts.read_object(root / JANITOR_STATE)
+    except FileNotFoundError:
         return {}
-    return data if isinstance(data, dict) else {}
+    if any(not isinstance(row, dict) for row in data.values()):
+        raise ValueError("Janitor-Zähler enthält keinen vollständigen Befund")
+    return data
 
 
 def schreibe_zaehler(root: Path, state: dict) -> None:
     pfad = root / JANITOR_STATE
-    pfad.parent.mkdir(parents=True, exist_ok=True)
-    pfad.write_text(json.dumps(state, ensure_ascii=False, indent=2,
-                               sort_keys=True) + "\n", encoding="utf-8")
+    artifacts.write_object(pfad, state, sort_keys=True)
 
 
 def _zaehle(state: dict, slug: str, signatur: str, grund: str,

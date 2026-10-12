@@ -41,10 +41,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CERT = ROOT / "data" / "reserve-readiness.json"
-CERT_MAX_AGE_H = 36  # Notbremse gegen veraltete Zertifikate (env-übersteuerbar)
 
 sys.path.insert(0, str(ROOT / "scripts"))
 import reserve_artifacts as artifacts  # noqa: E402  (Ganz-Schnappschüsse, #634)
+CERT_MAX_AGE_H = artifacts.CERT_MAX_AGE_H
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 
 
@@ -62,7 +62,8 @@ import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 #  beschlossen haben. Die Ergänzungen aus #653 (Artefakt-Wächter,
 #  Ursachenklassen) bleiben unberührt – sie erweitern die Diagnose, sie
 #  ersetzen keine Prüfung.
-def evaluate(cert_path: Path, posts_dir: Path | None = None) -> tuple[int, int, list[dict]]:
+def evaluate(cert_path: Path, posts_dir: Path | None = None, *,
+             require_fresh: bool = False) -> tuple[int, int, list[dict]]:
     """Liefert (ready, target, candidates). Fehlt das Zertifikat,
     gilt der Pool als leer (0/target) – ein abgestürzter Lauf darf
     nicht als erfolgreich aussehen.
@@ -85,7 +86,8 @@ def evaluate(cert_path: Path, posts_dir: Path | None = None) -> tuple[int, int, 
     try:
         data = artifacts.read_certificate(cert_path)
         candidates = artifacts.verified_rows(
-            data, posts_dir if posts_dir is not None else ROOT / "content" / "posts")
+            data, posts_dir if posts_dir is not None else ROOT / "content" / "posts",
+            require_fresh=require_fresh)
     except (OSError, ValueError) as exc:
         print(f"🛑 Reserve-Zertifikat ungültig: {exc}")
         return 0, target, []
@@ -116,14 +118,20 @@ KLASSE_ENGPASS = "engpass"      # gemessen, zu wenig Vorrat – der echte Fall
 KLASSE_ARTEFAKT = "artefakt"    # Zertifikat fehlt/unlesbar → NICHT gemessen
 KLASSE_KETTE = "kette"          # Stufen übersprungen → Messung gar nicht erst
                                 # erzeugt (Stufe 3 schreibt das Zertifikat)
+KLASSE_NACHWEIS = "nachweis"    # bytes/age drift, not missing editorial work
+KLASSE_WERKZEUG = "werkzeug"    # preflight failed, no complete measurement
 KLASSE_WACHEN = "wachen"        # Wachen-Selbsttest rot (Sabotageschutz)
 
 # Die drei Klassen, bei denen die Messung als Ganzes fehlschlug – dann darf
 # KEINE Engpass-Analyse aus der Zahl abgeleitet werden (siehe #653).
-PRUEFKLASSE_FEHLMESSUNG = (KLASSE_ARTEFAKT, KLASSE_KETTE, KLASSE_WACHEN)
+PRUEFKLASSE_FEHLMESSUNG = (KLASSE_ARTEFAKT, KLASSE_KETTE, KLASSE_WACHEN,
+                         KLASSE_WERKZEUG)
 
 # Klartext pro Klasse – drei verschiedene Baustellen, drei Reparaturrichtungen.
 FEHLMESSUNG_KLARTEXT = {
+    KLASSE_WERKZEUG: ("Das Messwerkzeug ist nicht vollständig lauffähig. "
+                     "Werkzeug/Preflight reparieren; keine Qualitätsabwertung "
+                     "und keine Ersatzproduktion aus einer unbekannten Zahl."),
     KLASSE_ARTEFAKT: (
         "Die Zahl unten ist KEIN Bestand, sondern das Fehlen einer Messung. "
         "Wer sie als Engpass liest, repariert nachts die falsche Baustelle."
@@ -158,36 +166,23 @@ def zertifikat_lage(cert_path: Path) -> tuple[str, str]:
     beiden Aussagen wieder: WAS fehlt (Vorrat) und OB überhaupt gemessen
     wurde (Artefakt).
     """
-    if not cert_path.exists():
-        return KLASSE_ARTEFAKT, (
-            "Das Zertifikat fehlt völlig "
-            f"({cert_path.name}) – es wurde in diesem Lauf nicht geschrieben. "
-            "Reparatur: python3 scripts/reserve_readiness.py")
     try:
-        rohtext = cert_path.read_text(encoding="utf-8")
-    except OSError as exc:
+        daten = artifacts.read_object(cert_path)
+        if not isinstance(daten.get("candidates"), list):
+            return KLASSE_KETTE, "Kandidatenliste fehlt – Zertifizierung hat keine vollständige Messung geschrieben."
+        daten = artifacts.read_certificate(cert_path)
+    except FileNotFoundError:
         return KLASSE_ARTEFAKT, (
-            f"Das Zertifikat ist nicht lesbar ({exc.__class__.__name__}) – "
-            "keine Messung. Reparatur: python3 scripts/reserve_readiness.py")
-    try:
-        daten = json.loads(rohtext)
-    except ValueError as exc:
+            f"Das Zertifikat fehlt völlig ({cert_path.name}); "
+            "reserve_readiness.py ausführen, keine Engpass-Diagnose möglich.")
+    except (OSError, ValueError) as exc:
         return KLASSE_ARTEFAKT, (
-            f"Das Zertifikat ist STRUKTURELL KAPUTT (kein gültiges JSON: "
-            f"{str(exc).splitlines()[0][:160]}). Typische Ursache: ein Merge "
-            "hat zwei Stände desselben Maschinen-Artefakts verschmolzen "
-            "(doppelte Schlüssel, halbe Blöcke). Das ist KEIN Vorrats-Urteil, "
-            "sondern eine fehlgeschlagene Messung. "
-            "Reparatur: python3 scripts/reserve_readiness.py · "
-            "Prüfung: python3 scripts/artefakt_waechter.py")
-    if not isinstance(daten, dict):
-        return KLASSE_ARTEFAKT, (
-            "Das Zertifikat ist kein JSON-Objekt – keine verwertbare Messung. "
-            "Reparatur: python3 scripts/reserve_readiness.py")
-    if not isinstance(daten.get("candidates"), list):
-        return KLASSE_KETTE, (
-            "Das Zertifikat trägt keine Kandidatenliste – die Zertifizierung "
-            "hat nicht geschrieben, was dieses Gate bewerten soll.")
+            f"Das Zertifikat/Gedächtnis ist STRUKTURELL KAPUTT oder nicht lesbar: {exc}. "
+            "Ganze Zustandsfassung mit reserve_snapshot_heiler.py prüfen/heilen; "
+            "das ist kein Vorrats-Urteil.")
+    problem = artifacts.measurement_problem(daten)
+    if problem:
+        return KLASSE_KETTE, problem
     return KLASSE_OK, ""
 
 
@@ -218,29 +213,15 @@ def ketten_lage() -> list[str]:
 
 
 def max_age_hours() -> float:
-    try:
-        value = float(os.environ.get("RESERVE_CERT_MAX_AGE_H") or CERT_MAX_AGE_H)
-        return value if math.isfinite(value) and value > 0 else float(CERT_MAX_AGE_H)
-    except ValueError:
-        return float(CERT_MAX_AGE_H)
+    return artifacts.max_age_hours()
 
 
 def cert_age_hours(cert_path: Path) -> float | None:
-    """Alter des Zertifikats in Stunden; None = kein/defekter Zeitstempel."""
+    """Alter des Schnappschusses; Einzel-Nachweise haben ihr eigenes Alter."""
     try:
-        data = artifacts.read_object(cert_path)
+        return artifacts.proof_age_hours(artifacts.read_object(cert_path))
     except (OSError, ValueError):
         return None
-    raw = data.get("generated_at")
-    if not isinstance(raw, str):
-        return None
-    try:
-        stamp = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
-        if stamp.tzinfo is None:
-            return None
-    except ValueError:
-        return None
-    return (dt.datetime.now(dt.timezone.utc) - stamp).total_seconds() / 3600.0
 
 
 def freshness(cert_path: Path) -> tuple[bool, str]:
@@ -382,9 +363,10 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
             zeilen.append(
                 f"PRODUKTION: {target - len(candidates)} Kandidat(en) fehlen "
                 f"im Pool, obwohl freie Themen bereitstehen (nächstes: "
-                f"„{frei[0].get('title')}“). Ursache liegt bei der "
-                f"KI-Generierung (API-Schlüssel, Profi-Gate) – siehe die "
-                f"Meldungen der Stufen 1/4 weiter oben im Log.")
+                f"„{frei[0].get('title')}“). Die tatsächlichen Stufenausgänge "
+                f"zeigen, ob Produktion, redaktionelle Ablehnung oder "
+                f"Zeitbudget den Nachschub begrenzt haben; ein fehlender "
+                f"Messnachweis belegt keinen API-/Schlüsselfehler.")
     except Exception as exc:  # noqa: BLE001
         zeilen.append(f"(Themen-Disposition nicht lesbar: {exc})")
 
@@ -429,6 +411,7 @@ def chronik_schreiben(ready: int, target: int, candidates: list[dict],
     pfad = Path(os.environ.get("RESERVE_HISTORY")
                 or ROOT / "data" / "reserve-history.jsonl")
     lauf = os.environ.get("GITHUB_RUN_ID", "lokal")
+    versuch = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
     # Lauf-Kennung aus dem DATEI-INHALT, nicht aus dem Prozessgedächtnis: der
     # Gate-Aufruf ist ein zweiter Prozess und darf die Zeile nicht doppeln.
     try:
@@ -438,14 +421,15 @@ def chronik_schreiben(ready: int, target: int, candidates: list[dict],
                     alt = json.loads(zeile_json)
                 except ValueError:
                     continue
-                if alt.get("lauf") == lauf and "ready" in alt:
+                if (alt.get("lauf") == lauf and "ready" in alt
+                        and str(alt.get("versuch", "1")) == versuch):
                     return
     except OSError:
         pass
     zeile = {
         "ts": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ready": ready, "target": target, "pool": len(candidates),
-        "lauf": lauf,
+        "lauf": lauf, "versuch": versuch,
         # WF-D4E0 (#653): Ohne Klasse ist eine „0/6“-Zeile nicht von einem
         # echten Engpass zu unterscheiden – und genau diese Verwechslung hat
         # den Trend-Beweis sechs Nächte lang unbrauchbar gemacht.
@@ -471,6 +455,7 @@ def report(ready: int, target: int, candidates: list[dict],
             KLASSE_ARTEFAKT: "RESERVE-MESSUNG FEHLGESCHLAGEN",
             KLASSE_KETTE:    "RESERVE-MESSUNG STAMMT AUS DER VORNACHT",
             KLASSE_WACHEN:   "RESERVE-WACHEN-SELBSTTEST ROT",
+            KLASSE_WERKZEUG: "RESERVE-MESSWERKZEUG NICHT LAUFFÄHIG",
         }[klasse]
         print(f"\U0001f6d1 {kopf} – KEIN Vorrats-Urteil möglich.")
         print(f"   Ursachenklasse: {klasse}")
@@ -496,6 +481,16 @@ def report(ready: int, target: int, candidates: list[dict],
             # irreführend (der Nachschub steht, nicht die Uhr).
             print(f"   \u2139 Der vorliegende Stand meldet {ready}/{target}, "
                   "stammt aber nicht aus diesem Lauf.")
+        return
+    if klasse == KLASSE_NACHWEIS:
+        print(f"🛑 RESERVE-NACHWEIS NICHT AKTUELL: {ready}/{target} "
+              "Kandidaten aktuell beweisbar.")
+        print(f"   {meldung}")
+        for row in candidates:
+            if str(row.get("reason", "")).startswith("Zertifikats-Integrität:"):
+                print(f"   • {row['slug']}: {row['reason']}")
+        print("   Nachzertifizierung statt blinder Ersatzproduktion: "
+              "python3 scripts/reserve_recert.py --fix --refresh-stale")
         return
     if ready >= target:
         print(f"\u2705 Reserve-Pool gate-fertig: {ready}/{target} Kandidaten zertifiziert.")
@@ -550,6 +545,7 @@ def report(ready: int, target: int, candidates: list[dict],
 
 def run_selftest() -> int:
     cert_cases = []
+    alt_contract = os.environ.pop("RESERVE_REQUIRE_CURRENT_RUN", None)
     # Content-Reserve-Workflows dürfen RESERVE_TARGET frei setzen. Der
     # Selbsttest prüft aber die Logik dieses Skripts, nicht die aktuelle
     # Repository-Variable: Frühere Fassung erwartete hart 6 und wurde in
@@ -787,6 +783,8 @@ def run_selftest() -> int:
                     else:
                         os.environ[k] = v
     finally:
+        if alt_contract is not None:
+            os.environ["RESERVE_REQUIRE_CURRENT_RUN"] = alt_contract
         if alt_target is None:
             os.environ.pop("RESERVE_TARGET", None)
         else:
@@ -802,6 +800,93 @@ def run_selftest() -> int:
     return 0
 
 
+
+def assessment(cert: Path, posts: Path) -> dict:
+    """One truth for the saved chronicle, end gate and diagnostic artifact."""
+    ready, target, candidates = evaluate(cert, posts, require_fresh=True)
+    klasse, message = zertifikat_lage(cert)
+    chain = ketten_lage()
+    fresh, freshness_message = freshness(cert)
+    if wachen_rot():
+        klasse, message = KLASSE_WACHEN, "Wachen-Selbsttest rot; Schreibstufen gesperrt."
+    elif os.environ.get("RESERVE_TOOL_STATUS") in ("failure", "skipped", "cancelled"):
+        klasse, message = KLASSE_WERKZEUG, "Werkzeug-Preflight nicht erfolgreich."
+    elif klasse == KLASSE_OK:
+        # Under the CI contract the written run/attempt proof is decisive:
+        # an early failed step may have been recovered by convergence. Outside
+        # that contract retain the legacy explicit stage-status protection.
+        if chain and os.environ.get("RESERVE_REQUIRE_CURRENT_RUN") != "1":
+            klasse, message = KLASSE_KETTE, "Kette nicht vollständig gemessen."
+        elif not fresh:
+            klasse, message = KLASSE_NACHWEIS, freshness_message
+        elif ready < target:
+            if any(str(r.get("reason", "")).startswith("Zertifikats-Integrität:")
+                   for r in candidates):
+                klasse, message = KLASSE_NACHWEIS, "Entwürfe oder Einzel-Nachweise sind gedriftet."
+            else:
+                klasse, message = KLASSE_ENGPASS, "Aktuell gemessen; Zielbestand noch nicht erreicht."
+    stages = {str(n): os.environ.get(f"RESERVE_STUFE{n}_STATUS", "unbekannt")
+              for n in (1, 2, 3, 4)}
+    stages["sicherung"] = os.environ.get("RESERVE_SYNC_STATUS", "unbekannt")
+    if stages["sicherung"] in ("failure", "skipped", "cancelled"):
+        klasse, message = KLASSE_KETTE, "Erarbeiteter Stand nicht nachweislich gesichert; Git-Sync prüfen."
+    return {"schema": 1, "generated_at": artifacts.utc_stamp(),
+            "run": artifacts.measurement_context("assessment"),
+            "class": klasse, "message": message,
+            "ok": klasse == KLASSE_OK and ready >= target and fresh,
+            "ready": ready, "target": target, "pool_size": len(candidates),
+            "alarm_threshold": reserve_economy.alarmschwelle(),
+            "fresh": fresh, "freshness": freshness_message,
+            "candidates": candidates, "stages": stages, "chain": chain}
+
+
+NEXT_ACTION = {
+    KLASSE_OK: "Zielbestand belegt. Keine zusätzliche KI-Produktion erforderlich.",
+    KLASSE_ENGPASS: "Konkrete Blocker unten bearbeiten; belegpflichtige/YMYL-Aussagen bleiben bei der Redaktion.",
+    KLASSE_NACHWEIS: "reserve_recert.py --fix --refresh-stale: betroffene Artikel echt nachmessen, keine Hashes passend editieren.",
+    KLASSE_ARTEFAKT: "reserve_snapshot_heiler.py --fix, danach echte Zertifizierung; keine JSON-Zeilen zusammensetzen.",
+    KLASSE_KETTE: "Aktuelle Zertifizierung und Git-Sicherung prüfen. Kein Ersatztext für einen fehlenden Mess-/Push-Nachweis.",
+    KLASSE_WACHEN: "Den roten Wachen-Selbsttest reparieren; Schreibstufen bleiben gesperrt.",
+    KLASSE_WERKZEUG: "Hugo Extended und Hunspell/de_DE samt Kontrollwörtern prüfen; vorhandenen Nachweis nicht abwerten.",
+}
+
+
+def write_end_report(result: dict, path: Path | None = None) -> None:
+    """Always diagnose success AND failure; upload remains independent of Git."""
+    import reserve_blocker_klassen as blockers
+    payload = dict(result)
+    payload["next_action"] = NEXT_ACTION[result["class"]]
+    payload["blockers"] = []
+    for row in result["candidates"]:
+        if row["ready"]:
+            continue
+        reason = str(row.get("reason") or "Kein vollständiger Nachweis")
+        classification = blockers.gate_befund_klasse(reason)
+        payload["blockers"].append({"slug": row["slug"], "reason": reason,
+                                    "class": classification["klasse"],
+                                    "healers": list(classification.get("heiler", []))})
+    if path is not None:
+        artifacts.write_object(path, payload)
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        def safe(value):
+            return str(value).replace("\n", " ").replace("|", "\\|").replace("`", "'")
+        lines = ["", "## Content-Reserve · Abschluss", "",
+                 f"- **Status:** {'bestätigt' if result['ok'] else 'nicht bestätigt'} · `{result['class']}`",
+                 f"- **Aktuell beweisbar:** {result['ready']}/{result['target']} · Pool {result['pool_size']}",
+                 f"- **Alarmschwelle:** unter {result['alarm_threshold']} (vom Produktionsziel abgeleitet)",
+                 f"- **Nachweis:** {safe(result['freshness'])}",
+                 f"- **Diagnose:** {safe(result['message'] or 'Keine offenen Betriebsbefunde.')}",
+                 f"- **Nächster Schritt:** {safe(payload['next_action'])}",
+                 f"- **Tatsächliche Stufen-Ausgänge (outcome):** `{safe(result['stages'])}`", ""]
+        if payload["blockers"]:
+            lines += ["| Kandidat | Klasse | Konkreter Blocker |", "|---|---|---|"]
+            lines += [f"| {safe(b['slug'])} | {safe(b['class'])} | {safe(b['reason'])} |"
+                      for b in payload["blockers"]]
+        with Path(summary).open("a", encoding="utf-8") as handle:
+            handle.write("\n".join(lines) + "\n")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Harter End-Gate der Content-Reserve")
     ap.add_argument("--selftest", action="store_true", help="interne Tests ausführen")
@@ -814,63 +899,27 @@ def main() -> int:
                          "Sicherungs-Schritt VOR dem Push) – dieselbe Zeile, "
                          "die das End-Gate sonst erst nach dem Commit anlegt; "
                          "idempotent je Lauf (WF-D4E0/#612)")
+    ap.add_argument("--report-json", type=Path,
+                    help="Abschlussdiagnose für das CI-Artefakt (auch bei rotem Gate)")
     args = ap.parse_args()
     if args.selftest:
         return run_selftest()
     cert = Path(args.cert)
+    result = assessment(cert, args.posts_dir)
+    ready, target, candidates = result["ready"], result["target"], result["candidates"]
+    chronik_schreiben(ready, target, candidates, klasse=result["class"])
     if args.chronik:
-        # BOT-WATCHDOG #614 (07.10.2026): Das End-Gate läuft NACH dem Push
-        # („Stock shortage must not look successful“ ist der letzte Schritt).
-        # Seine Chronik-Zeile entstand dadurch erst nach der Sicherung und
-        # wurde nie committet: `data/reserve-history.jsonl` auf main trug
-        # keinen einzigen CI-Lauf, sondern nur „lokal“-Zeilen – der
-        # Blocker-Verlauf über Läufe hinweg war unsichtbar. Der Workflow ruft
-        # diese Bahn jetzt VOR dem Staging auf.
-        ready, target, candidates = evaluate(cert, args.posts_dir)
-        klasse, _ = zertifikat_lage(cert)
-        chronik_schreiben(ready, target, candidates, klasse=klasse)
-        print(f"Chronik geschrieben: {ready}/{target} bereit · "
-              f"{sum(1 for c in candidates if not c.get('ready'))} Blocker · "
-              f"Klasse {klasse} · "
+        print(f"Chronik geschrieben: {ready}/{target} bereit · Klasse {result['class']} · "
               f"Lauf {os.environ.get('GITHUB_RUN_ID', 'lokal')}")
         return 0
-    ready, target, candidates = evaluate(cert, args.posts_dir)
-    # WF-D4E0 (#653): Erst die KLASSE, dann die Zahl. Ein unlesbares oder nie
-    # geschriebenes Zertifikat ist KEINE Aussage über den Vorrat – sechs
-    # Nächte lang wurde genau das als „Engpass“ gemeldet und die Reparatur
-    # lief in die falsche Richtung (KI-Keys, Themen, Produktion).
-    klasse, meldung = zertifikat_lage(cert)
-    ketten = ketten_lage()
-    if wachen_rot():
-        # Wachen-Selbsttest rot: Die Messung ist aktuell (Stufe 3 lief),
-        # aber die Sabotageschutz-Schwellen sind nicht erreicht.
-        # Reparatur: die Wache, NICHT der Vorrat – Klasse `wachen`, nicht
-        # `kette`.
-        klasse = KLASSE_WACHEN
-        if not meldung:
-            meldung = (
-                "Wachen-Selbsttest in diesem Lauf ROT – eine Schwellen-Wache "
-                "meldet Verletzung."
-            )
-    elif klasse == KLASSE_OK and ketten:
-        # Eine Stufe, die das Zertifikat schreibt, wurde übersprungen: Die
-        # vorliegende Zahl ist dann der Stand der VORNACHT, kein Urteil über
-        # diese Nacht.
-        klasse = KLASSE_KETTE
-    report(ready, target, candidates, klasse=klasse, meldung=meldung,
-           ketten=ketten)
-    chronik_schreiben(ready, target, candidates, klasse=klasse)
-    frisch, frische_meldung = freshness(cert)
-    print(f"   {frische_meldung}")
-    if klasse in PRUEFKLASSE_FEHLMESSUNG:
-        # C2 bleibt hart: ohne Messung kein Grün. Aber die Zusammenfassung
-        # nennt die Klasse – sonst sucht die nächste Nacht wieder am
-        # falschen Ort.
-        _summary(ready, target, [meldung] + ketten, klasse)
-        return 1
-    if ready >= target and frisch:
-        return 0
-    return 1
+    report(ready, target, candidates, klasse=result["class"],
+           meldung=result["message"], ketten=result["chain"])
+    print(f"   {result['freshness']}")
+    write_end_report(result, args.report_json)
+    if not result["ok"]:
+        print(f"::error::Content-Reserve nicht bestätigt ({result['class']}): "
+              f"{result['message']}")
+    return 0 if result["ok"] else 1
 
 
 def _summary(ready: int, target: int, ursachen: list[str],

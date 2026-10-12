@@ -100,6 +100,7 @@ def score_article(path: str) -> dict:
     """Berechnet den Qualitäts-Score 0–1 für einen Artikel."""
     a = _read_article(path)
     parts = {}
+    measurement_errors = {}
 
     # 1) Rechtschreibung (nutzt bestehenden Spellcheck-Lauf, falls vorhanden)
     try:
@@ -110,8 +111,9 @@ def score_article(path: str) -> dict:
         # Issue #251: nur ECHTE Fehler hart werten – Wörterbuch-Lücken sind
         # keine Rechtschreibfehler, sonst sperrt hunspell de_DE ganze Artikel.
         parts["spelling"] = _spelling_score(problems)
-    except Exception:
-        parts["spelling"] = 0.5  # unbekannt
+    except Exception as exc:
+        parts["spelling"] = 0.5  # unbekannt – ausdrücklich KEINE Messung
+        measurement_errors["spelling"] = str(exc)
 
     # 2) Meta-Qualität
     m = a["meta"]
@@ -220,8 +222,9 @@ def score_article(path: str) -> dict:
             if len(grams[x] & grams[y]) >= 5:
                 overlap += 1
         parts["uniqueness"] = max(0.0, 1.0 - overlap * 0.1)
-    except Exception:
+    except Exception as exc:
         parts["uniqueness"] = 0.5
+        measurement_errors["uniqueness"] = str(exc)
 
     # 6) Affiliate-Integrität (Gateway-Ära: echte Links laufen ueber /go/!)
     # Host-Erkennung per Muster (Code-Scanning-Härtung 2026-10): Sucht
@@ -243,9 +246,12 @@ def score_article(path: str) -> dict:
         from readability_check import load_article, analyze
         ra = load_article(os.path.join(BLOG_DIR, path))
         rb = analyze(ra) if ra else None
-        parts["readability"] = max(0.0, rb["score"] / 100.0) if rb else 0.5
-    except Exception:
-        parts["readability"] = 0.5  # unbekannt
+        if rb is None:
+            raise RuntimeError("Lesbarkeitsanalyse liefert keine Messung")
+        parts["readability"] = max(0.0, rb["score"] / 100.0)
+    except Exception as exc:
+        parts["readability"] = 0.5  # unbekannt – ausdrücklich KEINE Messung
+        measurement_errors["readability"] = str(exc)
 
     # Gesamt: gewichteter Mittelwert (Lesbarkeit & Rechtschreibung am
     # schwersten; Struktur & Meta folgen – verhindert „publish" für Dumps)
@@ -257,7 +263,7 @@ def score_article(path: str) -> dict:
         "draft+autofix" if total >= THRESHOLD_REVIEW else "human-review")
 
     return {"slug": a["slug"], "score": round(total, 3), "parts": parts,
-            "verdict": verdict}
+            "verdict": verdict, "measurement_errors": measurement_errors}
 
 
 def main() -> int:

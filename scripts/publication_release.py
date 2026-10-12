@@ -259,6 +259,8 @@ def accept_candidate(index):
     import publish_gate as gate
     import quality_score as qs
     result = qs.score_article(str(index))
+    if result.get("measurement_errors"):
+        raise ReleaseBuildCrash(f"Qualitätsmessung ausgefallen: {result['measurement_errors']}")
     if result['score'] < qs.THRESHOLD_PUBLISH:
         print(f"Reserve nicht bereit: {index.parent.name}: {result}")
         return False

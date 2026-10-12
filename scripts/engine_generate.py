@@ -918,19 +918,29 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         pool = rp.reserve_drafts()
         # A flag is not a readiness certificate; rejected candidates must not
         # make the pool look full. Hash prevents stale certificates after edits.
-        import hashlib
         from pathlib import Path
         certified = {}
         ready = 0
         try:
-            from reserve_artifacts import read_certificate
+            from reserve_artifacts import read_certificate, candidate_problem, proof_problem
             report = read_certificate(Path("data/reserve-readiness.json"))
             certified = {r["slug"]: r for r in report["candidates"] if r["ready"]}
             ready = sum(1 for p in pool if p.parent.name in certified
-                        and hashlib.sha256(p.read_bytes()).hexdigest()
-                        == certified[p.parent.name]["sha256"])
-        except (OSError, ValueError, KeyError):
-            pass
+                        and candidate_problem(certified[p.parent.name], p.parent.parent) is None
+                        and proof_problem(report, certified[p.parent.name]) is None)
+        except FileNotFoundError:
+            # An empty initial pool can be produced. Existing unmeasured stock
+            # needs a real measurement first, not a blind top-up.
+            if pool:
+                if stop is not None:
+                    stop.update(stop=True, grund="messung-fehlt")
+                print("  🛑 Reserve-Nachweis fehlt bei vorhandenem Bestand – erst messen.")
+                return 0
+        except (OSError, ValueError, KeyError) as exc:
+            if stop is not None:
+                stop.update(stop=True, grund="artefakt")
+            print(f"  🛑 Reserve-Nachweis nicht lesbar – keine Produktion: {exc}")
+            return 0
         if ready >= reserve_target:
             if stop is not None:
                 stop["stop"] = True
@@ -1130,6 +1140,10 @@ def _reserve_topup_batch(topics, quelle, used_titles, used_topics, batch,
     produced = 0
     leerlauf = 0
     for _ in range(max(1, min(batch, 4))):
+        from reserve_operations import work_seconds
+        if work_seconds(900) <= 0:
+            print("  ⏱ Reserve-Produktion: Arbeitsbudget erschöpft – keine weitere KI-Anfrage.")
+            break
         attempted_before = len(used_topics)
         stop = {}
         got = _reserve_topup(topics, quelle, used_titles, used_topics,
@@ -1439,6 +1453,9 @@ def main():
 
     # Independent stock production, including non-publication days. Never publishes.
     if "--reserve-only" in sys.argv:
+        if os.environ.get("RESERVE_WRITERS_ALLOWED") == "0":
+            print("🛑 Reserve-Produktion: Schreiber gesperrt – keine Mutation.")
+            return 3
         # Erst den Bestand zurückholen, dann über Nachschub entscheiden:
         # sonst produziert die Engine Ersatz für Kandidaten, die noch da
         # sind und nur ihre Fahne verloren haben (#387).

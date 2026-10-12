@@ -482,7 +482,7 @@ PY
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
           ;;
-        data/reserve-topic-ledger.json|data/reserve-custody.json|data/reserve-quarantine.json)
+        data/reserve-topic-ledger.json|data/reserve-custody.json|data/reserve-quarantine.json|data/reserve-janitor-state.json|data/reserve-intake.json)
           # Schlüsselbasierte Gedächtnisse: keine Text-/JSONL-Vereinigung.
           # #634: striktes JSON und atomarer Ganzdatei-Schreiber. Defekte
           # Seiten bleiben ein harter Konflikt, statt zu {} zu verschwinden.
@@ -513,22 +513,41 @@ def alter(eintrag):
 ours, theirs = seite(2), seite(3)
 if ours is None and theirs is None:
     raise ValueError(f"beide Konfliktseiten fehlen: {path}")
-merged = dict(theirs if ours is None else ours)
-if ours is not None and theirs is not None:
-    for schluessel, eintrag in theirs.items():
-        previous = merged.get(schluessel)
-        chosen = eintrag if previous is None or alter(eintrag) >= alter(previous) else previous
-        if (path.name == "reserve-quarantine.json" and isinstance(previous, dict)
-                and isinstance(eintrag, dict) and eintrag.get("signatur")
-                and eintrag.get("signatur") == previous.get("signatur")):
-            chosen = dict(chosen)
-            runs = sorted(set(previous.get("laeufe", [])) | set(eintrag.get("laeufe", [])))
-            chosen["laeufe"] = runs
-            chosen["hits"] = max(len(runs), previous.get("hits", 0), eintrag.get("hits", 0))
-            first = [v for v in (previous.get("first"), eintrag.get("first")) if v]
-            if first:
-                chosen["first"] = min(first)
-        merged[schluessel] = chosen
+if path.name == "reserve-intake.json":
+    # An adoption journal is a list of complete events, not a counter map.
+    # Validate BOTH complete sides and retain every distinct provenance event.
+    merged, entries, seen = {}, [], set()
+    import json
+    for side in (ours, theirs):
+        if side is None:
+            continue
+        events = side.get("uebernahmen", [])
+        if not isinstance(events, list) or any(not isinstance(e, dict) for e in events):
+            raise ValueError("Intake-Gedächtnis beschädigt; kein Blind-Merge")
+        merged.update(side)
+        for event in events:
+            identity = json.dumps(event, sort_keys=True, ensure_ascii=False)
+            if identity not in seen:
+                seen.add(identity)
+                entries.append(event)
+    merged["uebernahmen"] = entries
+else:
+    merged = dict(theirs if ours is None else ours)
+    if ours is not None and theirs is not None:
+        for schluessel, eintrag in theirs.items():
+            previous = merged.get(schluessel)
+            chosen = eintrag if previous is None or alter(eintrag) >= alter(previous) else previous
+            if (path.name in ("reserve-quarantine.json", "reserve-janitor-state.json") and isinstance(previous, dict)
+                    and isinstance(eintrag, dict) and eintrag.get("signatur")
+                    and eintrag.get("signatur") == previous.get("signatur")):
+                chosen = dict(chosen)
+                runs = sorted(set(previous.get("laeufe", [])) | set(eintrag.get("laeufe", [])))
+                chosen["laeufe"] = runs
+                chosen["hits"] = max(len(runs), previous.get("hits", 0), eintrag.get("hits", 0))
+                first = [v for v in (previous.get("first"), eintrag.get("first")) if v]
+                if first:
+                    chosen["first"] = min(first)
+            merged[schluessel] = chosen
 artifacts.write_object(path, merged, sort_keys=True)
 PYMERGE
           then

@@ -114,7 +114,8 @@ def load_cert(cert_path: Path = CERT) -> dict | None:
     return data
 
 
-def drift(cert: dict, drafts: dict) -> list[dict]:
+def drift(cert: dict, drafts: dict, *, refresh_stale: bool = False,
+          now=None) -> list[dict]:
     """Alle Zertifikatszeilen, deren Nachweis nicht mehr zum Entwurf passt.
 
     Drei Drift-Arten, bewusst unterschieden:
@@ -148,6 +149,9 @@ def drift(cert: dict, drafts: dict) -> list[dict]:
             out.append({"slug": slug, "art": "geaendert",
                         "ready": bool(row.get("ready")),
                         "ursache": last_touch(path)})
+        elif refresh_stale and (problem := artifacts.proof_problem(cert, row, now=now)):
+            out.append({"slug": slug, "art": "veraltet",
+                        "ready": bool(row.get("ready")), "ursache": problem})
     for slug in drafts:
         if slug not in gesehen:
             out.append({"slug": slug, "art": "unzertifiziert",
@@ -196,8 +200,8 @@ def messkette_rechtschreibung() -> tuple[bool, str]:
         # Hunspell-Installationen ohne de_DE liefern eine leere Trefferliste;
         # das darf weder „fehlerfrei“ noch einen frischen READY-Beleg ergeben.
         probe = subprocess.run(
-            ["hunspell", "-d", "de_DE", "-l"],
-            input="Haushalt\nFheler\n", text=True, capture_output=True,
+            ["hunspell", "-i", "UTF-8", "-d", "de_DE", "-l"],
+            input="Haushalt\nRücklagen\nprüft\nbehält\nFheler\n", text=True, capture_output=True,
             timeout=15, check=False,
         )
         if probe.returncode != 0 or probe.stdout.split() != ["Fheler"]:
@@ -232,13 +236,24 @@ def recertify(cert: dict, drafts: dict, betroffen: list[str]) -> dict:
         if slug in betroffen:
             neu = rr.certify_one(drafts[slug])
             erneuert.append(slug)
+            neu.setdefault("measured_at", artifacts.utc_stamp())
             rows.append(neu)
         else:
-            rows.append(row)
+            unchanged = dict(row)
+            # Preserve each original proof time before refreshing generated_at.
+            # A partial measurement must not renew the entire previous night.
+            if "measured_at" not in unchanged:
+                old_stamp = cert.get("generated_at")
+                if artifacts.parse_stamp(old_stamp) is None:
+                    raise Abwertungsverdacht("Alter unveränderter Nachweise unbekannt; Volllauf nötig")
+                unchanged["measured_at"] = old_stamp
+            rows.append(unchanged)
     vorhanden = {r["slug"] for r in rows}
     for slug, path in drafts.items():
         if slug not in vorhanden:
-            rows.append(rr.certify_one(path))
+            row = rr.certify_one(path)
+            row.setdefault("measured_at", artifacts.utc_stamp())
+            rows.append(row)
             erneuert.append(slug)
 
     ready = sum(1 for r in rows if r.get("ready") is True)
@@ -250,6 +265,7 @@ def recertify(cert: dict, drafts: dict, betroffen: list[str]) -> dict:
         "pool_size": len(rows),
         "generated_at": _now(),
         "candidates": rows,
+        "measurement": artifacts.measurement_context("partial"),
         # Provenienz: Ein nachgezogenes Zertifikat muss sich als solches zu
         # erkennen geben – sonst sieht ein Teil-Lauf aus wie ein Volllauf.
         "recert": {"at": _now(), "renewed": sorted(set(erneuert)),
@@ -358,6 +374,8 @@ def main(argv=None) -> int:
                     help="gedriftete Kandidaten neu zertifizieren")
     ap.add_argument("--check", action="store_true",
                     help="nur melden (Standard)")
+    ap.add_argument("--refresh-stale", action="store_true",
+                    help="auch abgelaufene Einzel-Nachweise echt neu messen")
     ap.add_argument("--json", action="store_true", help="Befunde als JSON")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args(argv)
@@ -373,7 +391,7 @@ def main(argv=None) -> int:
         return 2
 
     drafts = draft_paths()
-    befunde = drift(cert, drafts)
+    befunde = drift(cert, drafts, refresh_stale=args.refresh_stale)
     print(bericht(befunde))
     if args.json:
         print(json.dumps({"drift": befunde}, ensure_ascii=False))
@@ -392,9 +410,11 @@ def main(argv=None) -> int:
         return 3
 
     betroffen = [b["slug"] for b in befunde if b["art"] != "verschwunden"]
+    from reserve_readiness import MeasurementUnavailable
+    from reserve_operations import WorkInterrupted
     try:
         neu = recertify(cert, drafts, betroffen)
-    except Abwertungsverdacht as exc:
+    except (Abwertungsverdacht, MeasurementUnavailable, WorkInterrupted) as exc:
         print(f"🛑 Nachzertifizierung abgebrochen: {exc}")
         return 3
     artifacts.certificate_rows(neu)
