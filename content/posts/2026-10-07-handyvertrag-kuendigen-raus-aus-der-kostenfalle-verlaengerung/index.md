@@ -1,5 +1,5 @@
 ---
-title: "Handyvertrag kündigen: Frist und Kosten richtig prüfen"
+title: "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer"
 description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen."
 date: 2026-10-12T06:02:53Z
 draft: false
@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Handyvertrag kündigen", "Handyvertrag", "Mobilfunkvertrag", "Kündigungsfrist", "Tarifwechsel"]
-pin_title: "Handyvertrag kündigen: Frist und Kosten prüfen"
+pin_title: "Handyvertrag kündigen: Enddatum und Nachweis sichern"
 pin_description: "*Werbung | Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #handyvertragkuendigen #handyvertrag #mobilfunkvertrag"
 ai_generated: true
 ai_provider: "Editorial revision"
@@ -17,7 +17,7 @@ engine_level: "draft"
 redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
-  aenderungsgrund: "Vertragsinformationen anhand amtlicher Quellen geprüft; formale Schlussprüfung bleibt ausstehend"
+  aenderungsgrund: "Vertragsinformationen anhand amtlicher Quellen geprüft; formale Schlussprüfung bleibt ausstehend; Fristen-Abschnitt (§ 56 TKG) eigenständig neu gefasst, Keyword-Dichtesätze entfernt und Titel geschärft (Einzigartigkeits-Audit #714, 12.10.2026)"
 inspiration: "Handyvertrag kündigen: Laufzeit, Verlängerung und Wechsel sauber prüfen"
 cover:
   image: "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg"
@@ -64,16 +64,11 @@ Danach kannst du entscheiden, ob du kündigst, wechselst oder ein neues Angebot 
 
 ## Welche Kündigungsfrist gilt für deinen Handyvertrag?
 
+Die eine Kündigungsfrist für den Handyvertrag gibt es nicht. Es gibt zwei Phasen, und in jeder gilt etwas anderes. In der ersten Phase bist du gebunden. Diese Mindestlaufzeit darf bei Mobilfunkverträgen höchstens 24 Monate betragen, und daneben muss dir der Anbieter ein Angebot mit maximal zwölf Monaten machen ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).
 
-Darum geht es hier konkret: Handyvertrag kündigen.
+Danach beginnt die zweite Phase. Verlängert sich der Vertrag stillschweigend, kannst du ihn jederzeit kündigen, mit einem Monat Frist ([§ 56 Absatz 3 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Ob du also bald raus kannst oder noch gebunden bist, entscheidet nicht der Tarifname, sondern die Phase, in der dein Vertrag gerade steckt.
 
-Die erste feste Laufzeit eines üblichen Handyvertrags darf höchstens 24 Monate dauern ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Lies diese Angabe in deinem Vertrag, bevor du zustimmst.
-
-Der Anbieter muss dir außerdem einen Vertrag mit höchstens 12 Monaten Laufzeit anbieten ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Prüfe, welches Modell zu deinem Bedarf passt.
-
-Läuft dein Vertrag nach der ersten festen Zeit still weiter, kannst du ihn jederzeit kündigen. Die Frist beträgt einen Monat ([§ 56 Absatz 3 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Eine pauschale Kündigungsfrist passt daher nicht zu jedem Fall.
-
-Prüfe trotzdem dein genaues Enddatum. Der Vertrag kann ein Gerät oder weitere Dienste enthalten. Eine offene Gerätezahlung kann anders laufen als der Mobilfunkdienst. Bitte den Anbieter, beide Punkte getrennt aufzulisten.
+Beim Handyvertrag kommt eine Besonderheit dazu: das Gerät. Eine Ratenzahlung für das Telefon kann getrennt vom Mobilfunkdienst laufen. Dann endet mit der Kündigung der Tarif, aber nicht die Rate. Lass dir beides einzeln aufschlüsseln, bevor du das Enddatum festlegst.
 
 ## Wo findest du das passende Enddatum?
 
@@ -195,7 +190,7 @@ Ein Screenshot kann helfen, den Weg zu erklären.
 
 5. Speichere Kündigung, Wechselauftrag und Bestätigung.
 
-Die Reihenfolge hilft, einen alten Vertrag nicht zu beenden, bevor du den nächsten Schritt verstanden hast. Prüfe deine Angaben vor dem Absenden. Wenn eine Frist oder Summe unklar bleibt, frag den Anbieter schriftlich. Bewahre die Antwort bei den anderen Unterlagen auf.
+Die Reihenfolge hilft, einen alten Handyvertrag nicht zu kündigen, bevor du den nächsten Schritt verstanden hast. Prüfe deine Angaben vor dem Absenden. Wenn eine Frist oder Summe unklar bleibt, frag den Anbieter schriftlich. Bewahre die Antwort bei den anderen Unterlagen auf.
 
 ## Was machst du, wenn der Anbieter nicht reagiert?
 
@@ -217,9 +212,6 @@ Du erkennst, ob ein Posten einmalig anfällt oder wiederkehrt.
 
 **Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [Handytarif vergleichen: Worauf es ankommt](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
 
-
-Genau das ist der Hebel: Handyvertrag kündigen.
-
 ## Häufige Fragen
 
 ### Kann ich einen Handyvertrag jederzeit kündigen?
@@ -235,7 +227,7 @@ Das Telekommunikationsgesetz regelt die Mitnahme beim Anbieterwechsel. Beauftrag
 Die Pflicht betrifft bestimmte entgeltliche Verträge, die Verbraucher online abschließen können. Es gibt gesetzliche Ausnahmen. Prüfe den Anwendungsbereich in [§ 312k BGB](https://www.gesetze-im-internet.de/bgb/__312k.html).
 
 ### Soll ich zuerst kündigen oder einen neuen Tarif suchen?
-Prüfe zuerst Enddatum, Kündigungsweg und Rufnummernmitnahme. Wenn du wechselst, lass den neuen Anbieter den Übergang koordinieren und bewahre alle Bestätigungen auf.
+Prüfe zuerst Enddatum, Kündigungsweg und Rufnummernmitnahme, bevor du den Handyvertrag kündigst. Wenn du wechselst, lass den neuen Anbieter den Übergang koordinieren und bewahre alle Bestätigungen auf.
 
 ---
 

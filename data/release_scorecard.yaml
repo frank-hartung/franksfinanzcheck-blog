@@ -227,6 +227,16 @@ checks:
     entscheidung: auto
     quelle: scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)
     pruefung: "keine Absatz-/Sektions-Duplikate im Artikel oder gegen den Bestand"
+  # RD2 (12.10.2026, Issue #714): D3/D4 misst ganze Absätze – zwei Artikel,
+  # die denselben Gesetzes-Absatz mit getauschtem Produktwort tragen, lagen
+  # darunter und wurden erst vom Tagesaudit (7-Gramm, ≥ 5 Phrasen) gemeldet,
+  # sieben Stunden nach dem Deploy. Dieselbe Messung ist jetzt Gate + Scorecard.
+  - id: RD2-einzigartigkeit
+    dimension: redundanz
+    wirkung: blockiert
+    entscheidung: human
+    quelle: scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)
+    pruefung: "keine ≥ 5 gleichen 7-Wort-Phrasen und kein Titel-Zwilling am selben Tag gegen auslieferbare Artikel"
 
   # ——— YMYL-Risiko ———
   - id: Y1-risikoklasse

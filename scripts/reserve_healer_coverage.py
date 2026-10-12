@@ -211,6 +211,22 @@ AUSNAHMEN: dict[str, str] = {
         "Heilung am Entwurf würde vertraglich vorgeschriebenen Wortlaut "
         "umschreiben und den Defekt der Messung verdecken (C15). Geheilt "
         "wird in der Wache, entschieden in der Redaktion.",
+    # Einzigartigkeit U1/U2 (12.10.2026, Issue #714). Dieselbe Begründung wie
+    # D3/D4, eine Stufe feiner: Ein U1-Fund sagt, dass zwei Artikel ≥ 5
+    # Sieben-Wort-Phrasen teilen (am 12.10.: derselbe § 56-TKG-Absatz in einem
+    # DSL- und einem Handyvertrags-Artikel). Welcher Text die Passage neu
+    # formuliert – und ob die Rechtsangabe dabei korrekt bleibt –, ist
+    # redaktionelle Arbeit mit Quellenpflicht, kein Satzgenerator-Job. Ein
+    # U2-Fund (Titel-Zwilling) ist eine Themenentscheidung (zusammenführen
+    # oder schärfen), die der Kadenz-Backstop ausdrücklich nicht trifft.
+    # Der Kandidat bleibt als Hold erhalten (publish_gate: Re-Queue-Pfad).
+    "uniqueness_failures":
+        "Phrasen-Dopplung (U1) und Titel-Zwillinge (U2) sind redaktionelle "
+        "Entscheidungen mit Quellenpflicht: Die Wache benennt Paar und "
+        "Beispielphrase, nicht, welcher Text neu formuliert wird. Ein Heiler "
+        "am Entwurf müsste Rechtsangaben umschreiben, ohne sie zu prüfen "
+        "(C15). Der Kandidat bleibt als Hold erhalten; zuständig ist die "
+        "Redaktion (#714).",
 }
 
 # ---------------------------------------------------------------------------

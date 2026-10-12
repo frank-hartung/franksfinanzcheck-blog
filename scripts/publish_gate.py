@@ -58,6 +58,20 @@ Prüfungen bestehen:
                                   Dieselbe Collector-Funktion speist die
                                   Release-Scorecard; ein Fund kann damit nie
                                   erst NACH einem grünen Publish-Gate auftreten.
+ 10. check_uniqueness.py        – U1/U2: Einzigartigkeit auf Phrasenebene
+                                  (Issue #714, 12.10.2026). D3/D4 misst ganze
+                                  Absätze (Ratio ≥ 0,85); zwei Artikel, die
+                                  denselben Gesetzes-Absatz mit getauschtem
+                                  Produktwort tragen, liegen darunter – und
+                                  wurden am 12.10. erst vom TAGESAUDIT (7-Gramm,
+                                  ≥ 5 Phrasen) als „kritisch" gemeldet, sieben
+                                  Stunden nach dem Deploy. Jetzt liest das Gate
+                                  dieselbe Messung (kandidaten_befunde) wie
+                                  das Audit: U1 = ≥ 5 gleiche 7-Wort-Phrasen
+                                  mit einem auslieferbaren Artikel oder Mit-
+                                  Kandidaten, U2 = Titel-Zwilling am selben
+                                  Slug-Tag. Kein Heiler: Welche Passage bleibt,
+                                  entscheidet die Redaktion.
 
 Läuft NACH der bestehenden Qualitäts-/Selbstheilungs-Kette (Rechtschreibung,
 Meta-Optimierung, interne Verlinkung, affiliate_profi_check --fix, …) und
@@ -656,6 +670,42 @@ def duplicate_failures(candidates):
         return {}, f"Duplikat-Wache nicht auswertbar: {exc}"
 
 
+def uniqueness_failures(candidates):
+    """Liefert U1/U2-Funde (Einzigartigkeit auf Phrasenebene) je Kandidat.
+
+    Issue #714 (12.10.2026): Zwei Reserve-Artikel passierten dieses Gate und
+    wurden sieben Stunden später vom Tagesaudit (`check_uniqueness.py`) als
+    kritisch gemeldet – 14 gleiche Sieben-Wort-Phrasen aus einem geteilten
+    § 56-TKG-Absatz. Das Gate kannte die Messung nicht: D3/D4 vergleicht
+    ganze Absätze, der Qualitäts-Score gewichtet eine kritische Überlappung
+    mit −0,01. Dieser schmale, schreibfreie Adapter macht den Collector des
+    Audits (`check_uniqueness.kandidaten_befunde`) zum Teil des harten
+    Publish-Gates und der Release-Scorecard (RD2-einzigartigkeit) – EINE
+    Messregel, kein Fund mehr erst nach dem Deploy.
+
+    Rückgabe: ({slug: [detail]}, werkzeugfehler|None). Der Selbsttest der
+    Wache läuft mit: Eine Messung, die sich nicht selbst beweist, ist kein
+    Freispruch – der Aufrufer behandelt den Werkzeugfehler fail-closed.
+    """
+    wanted = [str(slug).strip() for slug in candidates if str(slug).strip()]
+    if not wanted:
+        return {}, None
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        import check_uniqueness as cu
+
+        fehler = cu.run_selftest()
+        if fehler:
+            return {}, ("Einzigartigkeits-Wache: Selbsttest rot – "
+                        + "; ".join(f.strip() for f in fehler[:2]))
+        posts = Path(POSTS_DIR).resolve()
+        paths = sorted(str(p) for p in posts.glob("*/index.md"))
+        bestand = cu.lade_bestand(paths=paths)
+        return cu.kandidaten_befunde(wanted, bestand), None
+    except Exception as exc:  # noqa: BLE001 – Beweisweg ist fail-closed
+        return {}, f"Einzigartigkeits-Wache nicht auswertbar: {exc}"
+
+
 def r5_self_heal_candidates(candidates):
     """Letzte deterministische Heilung für R5-ABSATZ-HART.
 
@@ -901,6 +951,7 @@ def main():
     readability_fail, readability_warn = readability_failures(candidates)
     understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
     duplicate_fail, duplicate_tool_error = duplicate_failures(candidates)
+    uniq_fail, uniq_tool_error = uniqueness_failures(candidates)
     for w in (len_warn, seo_warn, facts_warn):
         if w:
             print(f"⚠ {w}")
@@ -937,6 +988,21 @@ def main():
             log_event(module="publish_gate", action="duplikat_tool_error",
                       input={"candidates": candidates},
                       output={"reason": duplicate_tool_error}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
+
+    if uniq_tool_error:
+        print("\n🛑 EINZIGARTIGKEIT NICHT BEWEISBAR → Publish-Gate stoppt "
+              "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
+        print(f"   {uniq_tool_error}")
+        print("   Diagnose: python3 scripts/check_uniqueness.py --selftest")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="uniqueness_tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": uniq_tool_error}, status="fail_closed")
         except Exception:
             pass
         return 1
@@ -1058,6 +1124,10 @@ def main():
         if slug in duplicate_fail:
             reasons.append("Redundanz-Gate D1–D6 nicht bestanden: "
                            + "; ".join(duplicate_fail[slug]))
+        if slug in uniq_fail:
+            reasons.append("Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche "
+                           "Passage/Titel-Zwilling gegen den Bestand, #714): "
+                           + "; ".join(uniq_fail[slug]))
 
         if reasons:
             if slug in review_high_risk and slug in review_fail:

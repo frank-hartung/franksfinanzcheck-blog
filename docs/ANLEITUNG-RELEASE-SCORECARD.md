@@ -13,7 +13,7 @@ Pro Artikel, eine Zeile, acht Dimensionen:
 | Quellen | bestanden | Belegkette (E12) bzw. Quellen-Vorhandensein |
 | Faktenalter | bestanden | faktenfrische-Intervalle, Stand-Kennzeichnung (E16), Prüfdatum (E09) |
 | Affiliate-Integrität | bestanden | AI1–AI4 + Render-Beweis, IW0–IW9, O1–O7, A1–A8 |
-| Redundanz | bestanden | Duplikat-Wache D1–D6 |
+| Redundanz | bestanden | Duplikat-Wache D1–D6 + Phrasen-Einzigartigkeit U1–U2 (seit #714) |
 | YMYL-Risiko | geprüft | Risikoklassifikation + Prüfprotokoll |
 | menschliche Freigabe | vorhanden | redaktionelle Prüfung mit Siegel (nur Risikoklasse hoch) |
 | nächste Überprüfung | Datum | Review-Termin bzw. faktencheck + Intervall |
@@ -35,9 +35,12 @@ Das ist keine Behauptung, sondern maschinell durchgesetzt:
   (`deploy.yml` → „Release-Scorecard (Produktionswahrheit versiegeln,
   fail-closed)“): Exit 1 stoppt die Auslieferung.
 - Das **Publish-Gate** verwirft/verparkt Kandidaten mit harten Funden – auch
-  Redundanz D1–D6 über `publish_gate.duplicate_failures`. Die Scorecard liest
-  exakt diesen Collector; eine eigene Duplikat-Schleife ist ausdrücklich
-  verboten.
+  Redundanz D1–D6 über `publish_gate.duplicate_failures` und – seit #714
+  (12.10.2026) – Phrasen-Einzigartigkeit U1–U2 über
+  `publish_gate.uniqueness_failures` (derselbe Collector wie das tägliche
+  Einzigartigkeits-Audit, `check_uniqueness.kandidaten_befunde`). Die
+  Scorecard liest exakt diese Collectoren; eine eigene Duplikat- oder
+  Einzigartigkeits-Schleife ist ausdrücklich verboten.
 
 ### 2. Welche Checks liefern nur Warnungen?
 

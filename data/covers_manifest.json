@@ -648,13 +648,13 @@
   "ts": "2026-10-07T22:34:01+00:00"
  },
  "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
+  "title": "DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin",
+  "ts": "2026-10-12T23:03:31+00:00",
   "design": {
+   "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
-  "title": "DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen",
-  "ts": "2026-10-08T00:37:40+00:00"
+   "savings": ""
+  }
  },
  "2026-10-07-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
   "design": {
@@ -684,13 +684,13 @@
   "ts": "2026-10-07T15:57:52+00:00"
  },
  "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
+  "title": "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer",
+  "ts": "2026-10-12T23:03:33+00:00",
   "design": {
+   "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Handyvertrag kündigen: Frist und Kosten richtig prüfen",
-  "ts": "2026-10-08T00:37:36+00:00"
+   "savings": ""
+  }
  },
  "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
   "design": {
