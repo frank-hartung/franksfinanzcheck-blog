@@ -83,8 +83,12 @@ USER_AGENT = ("FranksFinanzcheck-Suchradar/1.0 "
 # SSRF-Schutz: Nur diese Hosts dürfen angefragt werden. Ein Selektor oder
 # eine Instanz-Liste aus einer Konfigurationsdatei darf den Prozess nicht
 # auf eine fremde Adresse lenken können.
+# Hinweis: `api.duckduckgo.com` stand hier eine Weile, ohne dass ein
+# Anbieter ihn anfragte. Ein freigegebener Host ohne Ausführer ist eine
+# unwahre Aussage im Code – und erweitert die Angriffsfläche um nichts.
+# Wer ihn braucht, trägt ihn zusammen mit dem Anbieter ein.
 ERLAUBTE_HOSTS = frozenset({
-    "html.duckduckgo.com", "lite.duckduckgo.com", "api.duckduckgo.com",
+    "html.duckduckgo.com", "lite.duckduckgo.com",
     "www.mojeek.com", "de.wikipedia.org", "en.wikipedia.org",
     "www.googleapis.com", "api.search.brave.com", "google.serper.dev",
     "serpapi.com", "api.apify.com",
@@ -121,6 +125,16 @@ ANBIETER: dict[str, dict] = {
         "tageslimit": 200,
         "beschreibung": "HTML-Endpunkt ohne Schlüssel. Eigener Index plus "
                         "Bing; kein Google-Abbild.",
+    },
+    "duckduckgo_lite": {
+        "name": "DuckDuckGo Lite (Ausweichstufe)",
+        "schluessellos": True,
+        "organisch": True,
+        "min_abstand": 2.5,
+        "tageslimit": 200,
+        "beschreibung": "Schlankes Tabellenlayout derselben Quelle. Fängt "
+                        "eine Blockade des HTML-Endpunkts ab, bevor auf "
+                        "einen fremden Index ausgewichen wird.",
     },
     "mojeek": {
         "name": "Mojeek (unabhängiger Index)",
@@ -201,7 +215,7 @@ ANBIETER: dict[str, dict] = {
 
 # Reihenfolge, wenn nichts anderes konfiguriert ist: erst schlüssellos und
 # Google-nah, dann unabhängige Indizes, zuletzt der Wissens-Rückfall.
-STANDARD_REIHENFOLGE = ["searxng", "duckduckgo", "mojeek", "wikipedia"]
+STANDARD_REIHENFOLGE = ["searxng", "duckduckgo", "duckduckgo_lite", "mojeek", "wikipedia"]
 
 # Öffentliche SearXNG-Instanzen als Startpunkt. Diese Liste ist bewusst
 # Konfiguration (data/suchradar.yaml) und nicht Code: Instanzen kommen und
@@ -708,6 +722,99 @@ def treffer_duckduckgo(anfrage: str, optionen: dict) -> list[dict]:
 
 
 # ====================================================================
+#  ANBIETER: DUCKDUCKGO LITE (Ausweichstufe)
+# ====================================================================
+def parse_duckduckgo_lite(anfrage: str, html: str, max_treffer: int = 10) -> list[dict]:
+    """DuckDuckGo-Lite-Tabellenlayout → Trefferliste.
+
+    Lite liefert keine Trefferkarten, sondern ein flaches
+    `<table>`-Layout: Titel und Snippet stehen in **Geschwisterzeilen**.
+
+        <tr class="result-link"><td><a class="result-link">TITEL</a></td></tr>
+        <tr><td class="result-snippet">SNIPPET</td></tr>
+
+    Der HTML-Baum kennt keinen Geschwister-Selektor – braucht hier aber
+    auch keinen. Stattdessen läuft ein Zustandsautomat zeilenweise durch
+    das Dokument: Eine Link-Zeile eröffnet einen Treffer, die nächste
+    Snippet-Zeile schließt ihn.
+
+    Warum NICHT über den Index gepaart wird: Der erste Entwurf sammelte
+    beide Listen und führte sie über `liste[i]` zusammen. Das funktioniert
+    genau so lange, wie jeder Link ein Snippet hat – und kippt danach
+    still. Ein fehlendes Snippet verschob jede folgende Zuordnung um
+    eins, der Lauf blieb grün, nur die Beschreibungen gehörten zum
+    jeweils vorherigen Titel. Der Unit-Test
+    `test_lite_verschiebt_die_liste_nicht_bei_fehlendem_snippet` hat genau
+    das gefunden.
+
+    Eine übersprungene Anzeige setzt den offenen Treffer ausdrücklich
+    zurück – sonst würde ihr Snippet beim letzten echten Treffer landen.
+    """
+    dokument = baum(html)
+    paarungen: list[tuple[str, str, str]] = []
+    offen: tuple[str, str] | None = None
+
+    def ablegen(snippet: str) -> None:
+        nonlocal offen
+        if offen:
+            paarungen.append((offen[0], offen[1], snippet))
+            offen = None
+
+    for zeile in dokument.waehle("tr"):
+        link = zeile.waehle_eins("a.result-link") or zeile.waehle_eins("a[href]")
+        if link is not None:
+            ablegen("")                                   # Vorgänger ohne Snippet
+            url = uddg_entpacken(url_saeubern(attribut_url(link)))
+            # Anzeigen zeigen bei Lite auf duckduckgo.com/y.js – dieselbe
+            # Regel wie bei der Vollversion filtert sie mit raus.
+            if url and "duckduckgo.com" not in url:
+                offen = (url, link.text())
+            continue
+        snippet = (zeile.waehle_eins("td.result-snippet")
+                   or zeile.waehle_eins(".result-snippet"))
+        if snippet is not None:
+            ablegen(snippet.text())
+    ablegen("")
+
+    treffer: list[dict] = []
+    for url, titel, beschreibung in paarungen[:max_treffer]:
+        treffer.append(normalisieren(
+            anfrage=anfrage, url=url, titel=titel, beschreibung=beschreibung,
+            rang=len(treffer) + 1, anbieter="duckduckgo_lite",
+            merkmale=["lite-endpunkt"]))
+    return treffer
+
+
+def treffer_duckduckgo_lite(anfrage: str, optionen: dict) -> list[dict]:
+    """Schlanke Ausweichstufe zu `treffer_duckduckgo`.
+
+    Warum ein zweiter DuckDuckGo-Weg: `html.duckduckgo.com` ist der
+    Endpunkt, der Rechenzentrums-IPs am ehesten blockt – und genau aus
+    solchen Netzbereichen fahren die GitHub-Runner. Lite ist weniger
+    aufwendig und damit erfahrungsgemäß nachsichtiger. Ohne diese Stufe
+    fällt bei einer Blockade sofort Mojeek an, und damit ein anderer
+    Index statt derselben Quelle.
+    """
+    max_treffer = optionen.get("max_treffer", 10)
+    warten("duckduckgo_lite")
+    if not robots_erlaubt("https://lite.duckduckgo.com/lite/"):
+        raise AnfrageFehler("DuckDuckGo Lite: robots.txt verbietet den Endpunkt")
+    parameter = urllib.parse.urlencode({
+        "q": anfrage,
+        "kl": (optionen.get("land", "de") or "de").upper() + "-de",
+    })
+    status, html, _ = hole(
+        "https://lite.duckduckgo.com/lite/?" + parameter,
+        zeitlimit=18, wiederholungen=2)
+
+    treffer = parse_duckduckgo_lite(anfrage, html, max_treffer)
+    if not treffer:
+        raise AnfrageFehler("DuckDuckGo Lite: keine Treffer (Blockade oder "
+                            " Markup-Änderung?)", status)
+    return treffer
+
+
+# ====================================================================
 #  ANBIETER: MOJEEK (unabhängiger Index)
 # ====================================================================
 def parse_mojeek(anfrage: str, html: str, max_treffer: int = 10) -> list[dict]:
@@ -989,6 +1096,7 @@ def treffer_apify(anfrage: str, optionen: dict) -> list[dict]:
 AUSFUEHRER = {
     "searxng": treffer_searxng,
     "duckduckgo": treffer_duckduckgo,
+    "duckduckgo_lite": treffer_duckduckgo_lite,
     "mojeek": treffer_mojeek,
     "wikipedia": treffer_wikipedia,
     "google_cse": treffer_google_cse,
@@ -1122,12 +1230,24 @@ def selbsttest() -> int:
     for aid in AUSFUEHRER:
         pruefe(aid in ANBIETER, f"Ausführer `{aid}` ist nicht registriert")
 
+    # 11) Kein freigegebener Host ohne Ausführer.
+    #     Ein Eintrag in ERLAUBTE_HOSTS, den niemand anfragt, ist eine
+    #     unwahre Aussage im Code und vergrößert die Angriffsfläche um
+    #     nichts. Genau so stand `api.duckduckgo.com` eine Weile hier –
+    #     freigegeben, ungenutzt, unentdeckt. Diese Prüfung ist der Grund,
+    #     warum das nicht noch einmal passiert.
+    quelle = (Path(__file__).read_text(encoding="utf-8")
+              .split("ERLAUBTE_HOSTS", 1)[-1])
+    for host in sorted(ERLAUBTE_HOSTS):
+        pruefe(quelle.count(f'"{host}"') > 0 or f"https://{host}" in quelle,
+               f"ERLAUBTE_HOSTS enthält `{host}`, aber kein Anbieter fragt ihn an")
+
     if problem:
         for zeile in problem:
             print("  ✗ " + zeile, file=sys.stderr)
         return 1
     print(f"serp_anbieter-Selbsttest bestanden: {len(ANBIETER)} Anbieter, "
-          f"10 Prüfblöcke, {len(AUSFUEHRER)} Ausführer.")
+          f"11 Prüfblöcke, {len(AUSFUEHRER)} Ausführer.")
     return 0
 
 

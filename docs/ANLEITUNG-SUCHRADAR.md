@@ -33,7 +33,7 @@ npm run suchradar:json             # Maschinenausgabe
 npm run suchradar:probe-lauf       # --dry-run: suchen, nichts schreiben
 npm run suchradar:cache            # abgelaufenen Zwischenspeicher löschen
 npm run suchradar:selftest         # Offline-Selbsttest (13 Prüfblöcke)
-npm run test:suchradar             # Selbsttest + 68 Unit-Tests
+npm run test:suchradar             # Selbsttest + 73 Unit-Tests
 ```
 
 Ad-hoc, ohne Konfiguration:
@@ -98,6 +98,7 @@ keine Budget-Grenze über Läufe hinweg. Der Zwischenspeicher
 |---|---|---|---|
 | `searxng` | keiner | ja | **Primärquelle.** Metasuche, bündelt u. a. den Google-Index |
 | `duckduckgo` | keiner | ja | HTML-Endpunkt, eigener Index plus Bing |
+| `duckduckgo_lite` | keiner | ja | schlanke Ausweichstufe derselben Quelle |
 | `mojeek` | keiner | ja | unabhängiger Index – der Kontrollwert |
 | `wikipedia` | keiner | nein | Wissens-Rückfall, damit ein Lauf nie leer ausgeht |
 | `google_cse` | ja | ja | offizieller Google-Weg, 100 Abfragen/Tag frei |
@@ -153,7 +154,8 @@ Das nennt jeden Anbieter einzeln mit Status, Antwortzeit und Fehler.
 | Befund | Ursache | Lösung |
 |---|---|---|
 | alle SearXNG-Instanzen `fehler` | Instanzen offline | Liste in `data/suchradar.yaml` gegen <https://searx.space> abgleichen |
-| `duckduckgo` leer, `mojeek` ok | Markup-Änderung oder Ratenlimit | Parser-Tests laufen lassen, Abstand erhöhen |
+| `duckduckgo` leer, `duckduckgo_lite` ok | HTML-Endpunkt blockt, Lite nicht | nichts – die Kette macht genau das |
+| beide DuckDuckGo-Wege leer | Markup-Änderung oder Ratenlimit | Parser-Tests laufen lassen, Abstand erhöhen |
 | alle `fehler` mit „robots.txt verbietet" | Regel der Quelle | Anbieter aus `reihenfolge` nehmen |
 | alles ok, aber Lauf leer | Budget erschöpft | `data/suchradar/quota.json` prüfen |
 
@@ -201,8 +203,13 @@ Probe ersetzen, Selektoren in `scripts/serp_anbieter.py` anpassen.
   Anbieter liefert etwas → Exit 3, nicht grünes Schweigen.
 - **Interne Kennzeichen bleiben intern.** `instanz:…` und `engine:…`
   steuern die Auswertung, erscheinen aber nicht im Bericht.
-- **Anzeigen zählen nicht.** `result--ad`, `result_ad` fallen raus – sonst
-  misst das Radar ein Werbebudget statt eines Rankings.
+- **Anzeigen zählen nicht.** `result--ad`, `result_ad` und die
+  `duckduckgo.com/y.js`-Links von Lite fallen raus – sonst misst das
+  Radar ein Werbebudget statt eines Rankings.
+- **Kein freigegebener Host ohne Ausführer.** Selbsttest-Block 11 in
+  `scripts/serp_anbieter.py` prüft, dass jeder Eintrag in
+  `ERLAUBTE_HOSTS` auch angefragt wird. Ein toter Eintrag ist eine
+  unwahre Aussage im Code und vergrößert die Angriffsfläche um nichts.
 - **Umleitungen werden ausgepackt.** DuckDuckGo liefert `/l/?uddg=…`;
   ohne Entpacken zählte die Wettbewerbs-Auswertung nur duckduckgo.com.
 - **`--dry-run` schreibt nichts.** Weder Zustand noch Cache noch Bericht.

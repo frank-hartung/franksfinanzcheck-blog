@@ -583,8 +583,55 @@ class TestParser(SandboxFall):
         self.assertTrue(all("mojeek.com" not in t["url"] for t in liste))
         self.assertEqual(liste[1]["domaene"], "franksfinanzcheck.de")
 
+    def test_lite_trennt_titel_und_snippet_aus_geschwisterzeilen(self):
+        liste = sa.parse_duckduckgo_lite("stromkosten senken",
+                                         probe("duckduckgo_lite.html"))
+        self.assertEqual(len(liste), 3, "Anzeige mitgezählt oder Treffer fehlt")
+        self.assertEqual(liste[0]["titel"], "Strom vergleichen und sparen")
+        self.assertIn("Preisgarantie", liste[0]["beschreibung"])
+        self.assertNotEqual(liste[0]["titel"], liste[0]["beschreibung"],
+                            "Titel und Snippet sind verrutscht")
+
+    def test_lite_filtert_anzeigen(self):
+        liste = sa.parse_duckduckgo_lite("x", probe("duckduckgo_lite.html"))
+        for t in liste:
+            self.assertNotIn("duckduckgo.com", t["url"])
+            self.assertNotIn("y.js", t["url"])
+            self.assertNotIn("Anzeige", t["titel"])
+
+    def test_lite_verschiebt_die_liste_nicht_bei_fehlendem_snippet(self):
+        """Ein Snippet weniger darf nicht alle folgenden Zuordnungen kippen.
+
+        Genau das wäre der stille Fehler: Der Lauf bliebe grün, nur die
+        Beschreibungen gehörten ab der Lücke zum jeweils vorherigen Titel.
+        """
+        html = probe("duckduckgo_lite.html").replace(
+            '<td class="result-snippet">Mit Rechnung: was Abschlag, Grundpreis und\n      Verbrauch wirklich ausmachen.</td>', "")
+        liste = sa.parse_duckduckgo_lite("x", html)
+        erster = next((t for t in liste if "franksfinanzcheck.de" in t["url"]), None)
+        if erster is not None:
+            self.assertEqual(erster["beschreibung"], "",
+                             "Fehlendes Snippet wurde aus der Nachbarzeile ergänzt")
+        letzter = next((t for t in liste if "stromspar-initiative.de" in t["url"]), None)
+        if letzter is not None:
+            self.assertIn("Rechnung dauerhaft", letzter["beschreibung"],
+                          "Zuordnung nach der Lücke ist verrutscht")
+
+    def test_lite_ist_als_anbieter_registriert_und_in_der_kette(self):
+        self.assertIn("duckduckgo_lite", sa.ANBIETER)
+        self.assertIn("duckduckgo_lite", sa.AUSFUEHRER)
+        self.assertIn("duckduckgo_lite", sa.STANDARD_REIHENFOLGE)
+        self.assertTrue(sa.ANBIETER["duckduckgo_lite"]["schluessellos"])
+
+    def test_lite_steht_vor_dem_fremden_index(self):
+        """Ausweichen innerhalb derselben Quelle, bevor der Index wechselt."""
+        reihe = sa.STANDARD_REIHENFOLGE
+        self.assertLess(reihe.index("duckduckgo_lite"), reihe.index("mojeek"))
+        self.assertGreater(reihe.index("duckduckgo_lite"), reihe.index("duckduckgo"))
+
     def test_leeres_html_liefert_leere_liste_statt_fehler(self):
         self.assertEqual(sa.parse_duckduckgo("x", ""), [])
+        self.assertEqual(sa.parse_duckduckgo_lite("x", ""), [])
         self.assertEqual(sa.parse_searxng("x", ""), [])
         self.assertEqual(sa.parse_mojeek("x", ""), [])
 
@@ -689,7 +736,9 @@ class TestCli(SandboxFall):
         with patch.dict(sa.AUSFUEHRER, fakes):
             befund = sr.probe(self.konfig(), "test")
         ok = [e for e in befund["anbieter"] if e["status"] == "ok"]
-        self.assertEqual(len(ok), 4, "Nicht jeder schlüssellose Anbieter wurde gemessen")
+        erwartet = sum(1 for a in sa.ANBIETER.values() if a["schluessellos"])
+        self.assertEqual(len(ok), erwartet,
+                         "Nicht jeder schlüssellose Anbieter wurde gemessen")
         self.assertTrue(all(e["treffer"] == 1 for e in ok))
 
     def test_probe_meldet_rot_bei_totalausfall(self):

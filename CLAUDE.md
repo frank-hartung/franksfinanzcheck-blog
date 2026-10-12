@@ -130,7 +130,7 @@ npm run test:robustheit                               # Robustheit: Gate-Selbstt
 npm run test:suche                                    # Suche: jsdom + Suchindex-Wache (Selbsttest) + Python-Verträge (#644)
 npm run test:suche:browser                            # Suche im Chromium: Trefferregel, Datenschutz, Tastatur, Mobil
 npm run suchradar:probe                               # Suchradar: welcher Suchanbieter antwortet heute? (schlüssellos, 0 €)
-npm run test:suchradar                                # Suchradar: Selbsttest (13 Blöcke) + 68 Unit-Tests (Budget, Cache, Kette, Parser)
+npm run test:suchradar                                # Suchradar: Selbsttest (24 Blöcke) + 73 Unit-Tests (Budget, Cache, Kette, Parser)
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
 npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (46 Regressionstests, C30)
@@ -274,8 +274,8 @@ Kosten. Getaktet von `.github/workflows/suchradar.yml` (täglich 07:52 MESZ).
 
 - **Warum nicht google.com direkt:** Nutzungsvertrag, Rechenzentrums-IP mit
   CAPTCHA-Antwort, verzerrte Treffer. Stattdessen Metasuche und offene
-  Indizes: `searxng` → `duckduckgo` → `mojeek` → `wikipedia`, alle
-  schlüssellos. Die Begründung im Einzelnen steht in
+  Indizes: `searxng` → `duckduckgo` → `duckduckgo_lite` → `mojeek` → `wikipedia`,
+  alle schlüssellos. Die Begründung im Einzelnen steht in
   `scripts/serp_anbieter.py` (Modulkopf).
 - **Drei Schichten über dem Abruf:** Rang-Verfolgung (Delta gegen den
   letzten Stand *derselben Anfrage*), Wettbewerbs-Radar (Häufigkeit und

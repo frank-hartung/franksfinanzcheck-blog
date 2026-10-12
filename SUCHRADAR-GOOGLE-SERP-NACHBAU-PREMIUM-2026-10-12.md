@@ -30,6 +30,7 @@ den maschinellen Zugriff gebaut sind und keinen Schlüssel verlangen:
 |---|---|---|---|
 | `searxng` | keiner | ja | **Primärquelle** – bündelt u. a. den Google-Index |
 | `duckduckgo` | keiner | ja | HTML-Endpunkt, eigener Index plus Bing |
+| `duckduckgo_lite` | keiner | ja | schlanke Ausweichstufe derselben Quelle |
 | `mojeek` | keiner | ja | unabhängiger Index – der Kontrollwert |
 | `wikipedia` | keiner | nein | Wissens-Rückfall, damit ein Lauf nie leer ausgeht |
 
@@ -53,13 +54,13 @@ Der Blog hatte bereits eine SERP-Anbindung, aber nicht die geforderte:
 | Baustein | Datei | Zeilen | Zweck |
 |---|---|---|---|
 | Engine | `scripts/suchradar.py` | 1146 | Anfragen, Cache, Quote, Auswertung, CLI, Selbsttest |
-| Anbieter | `scripts/serp_anbieter.py` | 1137 | 9 Adapter, HTTP, robots, Kostensperre, SSRF-Gatter |
+| Anbieter | `scripts/serp_anbieter.py` | 1257 | 10 Adapter, HTTP, robots, Kostensperre, SSRF-Gatter |
 | HTML-Baum | `scripts/serp_html.py` | 367 | Parser mit CSS-Teilmenge, Standardbibliothek |
 | Konfiguration | `data/suchradar.yaml` | 142 | SSOT: Suchbegriffe, Budget, Anbieter, Instanzen |
 | Taktgeber | `.github/workflows/suchradar.yml` | 235 | täglich 07:52 MESZ + manuell |
 | Anleitung | `docs/ANLEITUNG-SUCHRADAR.md` | 238 | Bedienung, Störungssuche, Leitplanken |
-| Tests | `scripts/tests/test_suchradar.py` | 720 | 68 Unit-Tests, sandbox-isoliert |
-| HTML-Proben | `scripts/tests/serp_proben/` | 3 | echte Markups der drei Suchmaschinen |
+| Tests | `scripts/tests/test_suchradar.py` | 769 | 73 Unit-Tests, sandbox-isoliert |
+| HTML-Proben | `scripts/tests/serp_proben/` | 4 | echte Markups aller vier Endpunkte |
 | Geldfläche | `data/kostensperre.yaml` | +33 | Fläche `serp_premium` registriert |
 
 ### Apify-Feldbild und seine Entsprechung
@@ -127,11 +128,11 @@ python3 scripts/suchradar.py --selftest
   ✅ 13 Prüfblöcke (Suchradar) + 10 Prüfblöcke (9 Anbieter, 9 Ausführer)
 
 python3 -m unittest scripts.tests.test_suchradar
-  ✅ Ran 68 tests in 0.534s – OK
+  ✅ Ran 73 tests in 0.522s – OK
 
 python3 scripts/selftest_ki.py --trap-workflows
-  ✅ KI-Probe grün: 107 Selbsttests urteilen ohne Modell und ohne Netz.
-     scripts/suchradar.py darin: 0.2s
+  ✅ KI-Probe grün: 108 Selbsttests urteilen ohne Modell und ohne Netz.
+     scripts/suchradar.py 0.2s · scripts/serp_anbieter.py 0.1s
 
 python3 scripts/kostensperre.py --selftest && --pruefen
   ✅ 11 Proben bestanden · Vertrag erfüllt: Fläche `serp_premium`
@@ -152,7 +153,7 @@ Berichtserzeugung mit simuliertem Anbieter
      echter Befund liegenbleiben)
 ```
 
-### Drei echte Fehler, die die Tests gefunden haben
+### Fünf echte Fehler, die die Tests gefunden haben
 
 Nicht zur Dekoration – jeder war ein Befund im ersten Entwurf:
 
@@ -172,6 +173,24 @@ rohes `python3 … ; echo "code=$?"` bricht also **vor** dem echo ab. Der
 Exit-Code wäre nie angekommen und der Exit-Vertrag tot gewesen – der Lauf
 erschiene grün.
 
+**Nachtrag 12.10.2026, zweite Runde** – zwei weitere, beide beim
+Nachsehen gefunden:
+
+4. **Toter Host im SSRF-Gatter.** `api.duckduckgo.com` stand in
+   `ERLAUBTE_HOSTS`, ohne dass ein Anbieter ihn anfragte. Eine unwahre
+   Aussage im Code, die die Angriffsfläche vergrößert und nichts bringt.
+   Entfernt – und Selbsttest-Block 11 prüft jetzt, dass jeder
+   freigegebene Host auch benutzt wird. Die Wache ist sabotagegeprüft:
+   Sie meldet sowohl einen künstlich eingeschleusten Host als auch genau
+   den ursprünglichen Eintrag.
+5. **Index-Paarung im Lite-Parser.** Der erste Entwurf sammelte Titel und
+   Snippets in zwei Listen und führte sie über `liste[i]` zusammen.
+   Funktioniert, solange jeder Link ein Snippet hat – und kippt danach
+   *still*: Ein fehlendes Snippet verschob jede folgende Zuordnung um
+   eins. Der Lauf blieb grün, nur die Beschreibungen gehörten zum
+   jeweils vorherigen Titel. Ersetzt durch einen zeilenweisen
+   Zustandsautomaten, der eine Lücke als leeres Feld verbucht.
+
 ## Nicht geprüft – und warum
 
 Ehrlich, weil sonst der nächste Fehler unsichtbar bleibt:
@@ -186,7 +205,7 @@ Was das bedeutet, im Einzelnen:
 
 | Geprüft | Nicht geprüft |
 |---|---|
-| Parser gegen echte HTML-Proben aller drei Suchmaschinen | dass die heutigen Live-Seiten noch dieses Markup haben |
+| Parser gegen echte HTML-Proben aller vier Endpunkte | dass die heutigen Live-Seiten noch dieses Markup haben |
 | HTTP-Schicht: Retry, 429, gzip, SSRF, robots | Antwortverhalten der echten Endpunkte |
 | Kette, Budget, Cache, Auswertung, Bericht | Latenz und Erfolgsquote der Instanzen |
 
