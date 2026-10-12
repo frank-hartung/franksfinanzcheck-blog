@@ -45,6 +45,8 @@ from html import unescape
 from html.parser import HTMLParser
 from urllib.parse import parse_qs, unquote, urljoin, urlparse
 
+from url_host import ist_host_oder_subdomain  # noqa: E402  (Host-exakte URL-Wahrheit)
+
 __all__ = ["baum", "Knoten", "attribut_url", "uddg_entpacken", "domaene_aus_url"]
 
 # Elemente ohne Inhalt. Ohne diese Liste würde <br> den Rest des Dokuments
@@ -337,7 +339,19 @@ def uddg_entpacken(url: str) -> str:
     if not url:
         return url
     parsed = urlparse(url)
-    if "duckduckgo.com" not in parsed.netloc or not parsed.path.startswith("/l/"):
+    # Host-Vergleich statt Teilzeichenkette: `"duckduckgo.com" in netloc`
+    # würde auch `https://duckduckgo.com.angreifer.example/l/?uddg=…`
+    # „auspacken" und damit eine fremde URL für eine DuckDuckGo-Umleitung
+    # halten (Code-Scanning-Alert #83,
+    # py/incomplete-url-substring-sanitization).
+    #
+    # Das LEERE Schema ist ausdrücklich zugelassen: DuckDuckGo liefert Treffer
+    # schema-relativ als `//duckduckgo.com/l/?uddg=…` (siehe Docstring oben).
+    # `url_saeubern` setzt zwar `https:` davor, diese Funktion ist aber
+    # öffentlich – sie darf auch am rohen Attribut nicht anders entscheiden.
+    if not ist_host_oder_subdomain(url, "duckduckgo.com",
+                                   schemata=("https", "http", "")) \
+            or not parsed.path.startswith("/l/"):
         return url
     werte = parse_qs(parsed.query)
     ziel = (werte.get("uddg") or [""])[0]

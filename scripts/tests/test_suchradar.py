@@ -34,7 +34,9 @@ from unittest.mock import patch
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import serp_anbieter as sa      # noqa: E402
+import serp_html as sh          # noqa: E402
 import suchradar as sr          # noqa: E402
+from url_host import ist_host_oder_subdomain  # noqa: E402
 
 PROBEN = Path(__file__).resolve().parent / "serp_proben"
 
@@ -580,8 +582,72 @@ class TestParser(SandboxFall):
     def test_mojeek_filtert_den_eigenlink(self):
         liste = sa.parse_mojeek("stromkosten senken", probe("mojeek.html"))
         self.assertEqual(len(liste), 3, "Mojeek-Eigenlink zählt als Treffer")
-        self.assertTrue(all("mojeek.com" not in t["url"] for t in liste))
+        self.assertTrue(all(not ist_host_oder_subdomain(t["url"], "mojeek.com")
+                            for t in liste))
         self.assertEqual(liste[1]["domaene"], "franksfinanzcheck.de")
+
+    def test_umleitung_auspacken_ist_host_exakt(self):
+        """Alert #83: `"duckduckgo.com" in netloc` ist eine Vermutung, keine Prüfung.
+
+        Beweis, dass die Lücke real war: Vor der Heilung wurde die Suffix-Domain
+        `duckduckgo.com.angreifer.example` zu `https://evil.example` „entpackt“.
+        Ein Angreifer-Ziel wäre damit als organischer Treffer in den
+        Suchradar-Bericht und in die Rang-Verfolgung gelangt.
+        """
+        ziel = "https%3A%2F%2Fexample.com%2Fa"
+        # Legitime Umleitung – absolut UND schema-relativ (so liefert DuckDuckGo
+        # die Treffer: `//duckduckgo.com/l/?uddg=…`).
+        self.assertEqual(
+            sh.uddg_entpacken(f"https://duckduckgo.com/l/?uddg={ziel}"),
+            "https://example.com/a")
+        self.assertEqual(
+            sh.uddg_entpacken(f"//duckduckgo.com/l/?uddg={ziel}"),
+            "https://example.com/a", "schema-relative Form wird nicht mehr ausgepackt")
+        # Echte Subdomain gehört dazu (html.duckduckgo.com ist die Lite-Variante).
+        self.assertEqual(
+            sh.uddg_entpacken(f"https://html.duckduckgo.com/l/?uddg={ziel}"),
+            "https://example.com/a")
+        # FEINDPROBE 1: Suffix-Domain – der Host ist angreifer.example.
+        suffix = ("https://duckduckgo.com.angreifer.example/l/"
+                  "?uddg=https%3A%2F%2Fevil.example")
+        self.assertEqual(sh.uddg_entpacken(suffix), suffix,
+                         "Suffix-Domain wurde als DuckDuckGo-Umleitung entpackt")
+        # FEINDPROBE 2: Hostname als Query-Parameter einer fremden URL.
+        param = ("https://angreifer.example/l/"
+                 "?x=duckduckgo.com&uddg=https%3A%2F%2Fevil.example")
+        self.assertEqual(sh.uddg_entpacken(param), param,
+                         "Query-Parameter wurde als DuckDuckGo-Host fehlgedeutet")
+        # Gegenprobe: fremde URLs bleiben unangetastet.
+        self.assertEqual(sh.uddg_entpacken("https://example.com/b"),
+                         "https://example.com/b")
+
+    def test_eigenlink_filter_ist_host_exakt(self):
+        """Alert #83: Der Eigenlink-Filter darf nicht per Teilzeichenkette entscheiden.
+
+        Zwei Richtungen, beide vorher falsch:
+          · eine fremde URL, die den Hostnamen nur im Query trägt, wurde
+            fälschlich als Eigenlink WEGGEWORFEN (stiller Trefferverlust),
+          · eine Suffix-Domain der Suchmaschine wurde fälschlich BEHALTEN.
+        """
+        html = """
+        <ul class="results-standard">
+          <li><a class="ob" href="https://franksfinanzcheck.de/strom-sparen/">Eigen</a>
+              <h2>Titel eins</h2><p class="s">Snippet eins</p></li>
+          <li><a class="ob" href="https://beispiel.example/?quelle=mojeek.com">Fremd</a>
+              <h2>Titel zwei</h2><p class="s">Snippet zwei</p></li>
+          <li><a class="ob" href="https://mojeek.com.einbrecher.example/x">Suffix</a>
+              <h2>Titel drei</h2><p class="s">Snippet drei</p></li>
+          <li><a class="ob" href="https://www.mojeek.com/about">Eigenlink</a>
+              <h2>Titel vier</h2><p class="s">Snippet vier</p></li>
+        </ul>"""
+        urls = [t["url"] for t in sa.parse_mojeek("stromkosten senken", html)]
+        self.assertIn("https://franksfinanzcheck.de/strom-sparen/", urls)
+        self.assertIn("https://beispiel.example/?quelle=mojeek.com", urls,
+                      "Query-Parameter wurde als Mojeek-Host fehlgedeutet")
+        self.assertIn("https://mojeek.com.einbrecher.example/x", urls,
+                      "Suffix-Domain wurde als Mojeek-Eigenlink weggeworfen")
+        self.assertNotIn("https://www.mojeek.com/about", urls,
+                         "Mojeek-Eigenlink zählt als Treffer")
 
     def test_lite_trennt_titel_und_snippet_aus_geschwisterzeilen(self):
         liste = sa.parse_duckduckgo_lite("stromkosten senken",

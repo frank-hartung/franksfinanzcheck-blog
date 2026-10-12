@@ -74,6 +74,7 @@ from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import serp_anbieter as sa                                # noqa: E402
+from url_host import ist_host_oder_subdomain              # noqa: E402
 
 try:                                                       # pragma: no cover
     import yaml
@@ -998,7 +999,7 @@ def selbsttest() -> int:
     ddg = sa.parse_duckduckgo("stromkosten senken",
                               (proben / "duckduckgo.html").read_text(encoding="utf-8"))
     pruefe(len(ddg) == 3, f"DuckDuckGo-Probe: {len(ddg)} statt 3 Treffer (Anzeige?)")
-    pruefe(all("duckduckgo.com" not in t["url"] for t in ddg),
+    pruefe(all(not ist_host_oder_subdomain(t["url"], "duckduckgo.com") for t in ddg),
            "DuckDuckGo-Umleitungen nicht ausgepackt")
     pruefe(any(t["domaene"] == "franksfinanzcheck.de" for t in ddg),
            "Eigene Domaene in der DuckDuckGo-Probe nicht gefunden")
