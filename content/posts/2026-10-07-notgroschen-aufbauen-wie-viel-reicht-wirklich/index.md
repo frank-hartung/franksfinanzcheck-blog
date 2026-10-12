@@ -27,6 +27,8 @@ faktencheck: 2026-10-08
 
 Du bekommst die Stromrechnung, das Auto macht ein seltsames Geräusch und das Lieblingshemd reißt im Wäschekorb. Solche kleinen Schocks zeigen, warum ein finanzielles Polster im Alltag Gold wert ist. In diesem Ratgeber erkläre ich dir, wie viel Notgroschen du wirklich brauchst, wie du ihn ohne Verzicht aufbaust und welche Stolperfallen du vermeiden solltest.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ## Was ist ein Notgroschen?
