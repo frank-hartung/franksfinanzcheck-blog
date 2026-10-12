@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 12.10.2026 00:58 (Europe/Berlin)  
+> Automatisch aktualisiert: 12.10.2026 15:16 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,15 +13,18 @@
 ## Kommende Beiträge
 
 ### Mo, 12. Oktober 2026
-- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _thread_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **17:30** ⏳ DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen — _mythos_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
+### Di, 13. Oktober 2026
+- **07:30** ⏳ Handyvertrag kündigen: Frist und Kosten richtig prüfen — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 ### Sa, 24. Oktober 2026
-- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _takeaway_ · Evergreen  
+- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _mythos_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zitat_ · Evergreen  
+- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _thread_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _frage_ · Evergreen  
+- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 
 ## Zuletzt veröffentlicht
@@ -39,7 +42,6 @@
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
-- 🚫 30.09. 11:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 06.10. 11:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 07.10. 07:30 · Budget app 2026 so beherrschst du deine ausgaben ohne auf · Artikel nicht mehr im Bestand
 - 🚫 07.10. 11:30 · Oekostrom anbieter wechseln clever sparen und gruen bleiben · Artikel nicht mehr im Bestand
@@ -47,6 +49,7 @@
 - 🚫 09.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 11.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 11.10. 20:00 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
+- 🚫 12.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*

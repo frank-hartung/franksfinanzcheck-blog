@@ -1,13 +1,13 @@
 {
-  "stand": "2026-10-11T11:34:26Z",
+  "stand": "2026-10-12T13:27:56Z",
   "urteil": "gruen",
   "probleme": [],
   "kpis": {
-    "live_artikel": 42,
-    "ki_artikel": 15,
-    "ki_anteil_prozent": 35.7,
+    "live_artikel": 44,
+    "ki_artikel": 17,
+    "ki_anteil_prozent": 38.6,
     "tempo_max_pro_tag": 2,
-    "tempo_letzte7_tage": 5,
+    "tempo_letzte7_tage": 6,
     "auto_freigaben_letzte7_tage": 0,
     "near_dup_paare": 0,
     "near_dup_beispiele": [],
