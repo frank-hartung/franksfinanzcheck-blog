@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
- endert:frage:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261012T131639Z
-DTSTART:20261012T160000Z
-DTEND:20261012T161500Z
-SUMMARY:Telegram (Kanal): Internet & DSL-Update: Was sich jetzt für di
- ch ändert (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Telegram (Kanal)\nA
- rtikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-up
- date-was-sich-jetzt-fuer-dich-aendert/
-URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
- was-sich-jetzt-fuer-dich-aendert/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
  son-richtig:takeaway:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261012T131639Z
+DTSTAMP:20261012T214631Z
 DTSTART:20261017T050000Z
 DTEND:20261017T051500Z
 SUMMARY:Telegram (Kanal): Gasabschlag berechnen: So planst du die Heiz
@@ -37,15 +22,15 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
- die-feiertage:nutzen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261012T131639Z
+ die-feiertage:takeaway:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261012T214631Z
 DTSTART:20261018T050000Z
 DTEND:20261018T051500Z
 SUMMARY:Telegram (Kanal): Weihnachten Budget planen: Ohne Schulden dur
- ch die Feiertage (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-bu
- dget-planen-ohne-schulden-durch-die-feiertage/
+ ch die Feiertage (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Telegram (Kanal)
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-
+ budget-planen-ohne-schulden-durch-die-feiertage/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
  lanen-ohne-schulden-durch-die-feiertage/
 STATUS:TENTATIVE
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
  sl-anschluss:vergleich:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261012T131639Z
+DTSTAMP:20261012T214631Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
 SUMMARY:Telegram (Kanal): Preiswert surfen: So findest du den optimale
