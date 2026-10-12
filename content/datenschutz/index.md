@@ -81,7 +81,7 @@ Partnerlinks in unseren Artikeln führen zunächst auf eine Übergabeseite unter
 
 Der Zählimpuls enthält nur:
 
-- den Partner-Schlüssel (z. B. „strom“ oder „haftpflicht“),
+- Den Partner-Schlüssel (z. B. „strom“ oder „haftpflicht“),
 - die Artikel-Kennung aus dem Link (den Artikel-Slug, z. B. „2026-10-02-gasabschlag-…“).
 
 ### Was nicht passiert
@@ -123,7 +123,7 @@ Beim Weiterleiten übergeben wir in der Link-Adresse:
 | **CHECK24** (Strom, Gas, DSL, Girokonto, Kredit, Kfz, Reisen, Mietwagen, Flüge) | CHECK24-Vergleichsportal GmbH, Erika-Mann-Str. 62, 80636 München | https://www.check24.de/datenschutz/ |
 | **Tarifcheck** (Versicherungen: Haftpflicht, Hausrat, Unfall, Zahnzusatz, Reisekranken) | Tarifcheck24 GmbH, Zollstr. 11b, 21465 Wentorf bei Hamburg | https://www.tarifcheck.de/datenschutz/ |
 
-- die **Artikel-Kennung** (SubID), damit sich Abschlüsse dem Artikel zuordnen lassen,
+- Die **Artikel-Kennung** (SubID), damit sich Abschlüsse dem Artikel zuordnen lassen,
 - **Kampagnen-Kennungen** (UTM-Parameter, z. B. `utm_source=franksfinanzcheck`, `utm_medium=affiliate`, `utm_campaign=<Kategorie>`).
 
 Wir übergeben keinen Namen, keine E-Mail-Adresse und keine Angaben aus dem Newsletter.
