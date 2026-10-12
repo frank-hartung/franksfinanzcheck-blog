@@ -252,6 +252,57 @@ class KandidatenTests(unittest.TestCase):
             self.assertIn(heute, Path(pfad).read_text(encoding="utf-8")[:400])
 
 
+class NachsorgeAuswahlTests(unittest.TestCase):
+    """Die `read_draft`-Klasse hat einen Adressaten (Issue #712).
+
+    Warum dieser Test existiert: Die Lesbarkeits-Wache meldete Woche für
+    Woche dieselben Entwürfe unter der Publish-Schwelle. Der Heiler kannte
+    sie aber gar nicht als Kandidaten – er lief auf Holds, Reserve-Zertifikat
+    und Artikel des Tages. `--entwuerfe` schließt die Lücke; dieser Test
+    friert die Auswahl ein: schlechteste zuerst, Entwürfe ja, Live-Bestand
+    nein, gesunde Entwürfe nein.
+    """
+
+    def _projekt(self, inhalt: str, name: str) -> str:
+        d = os.path.join(tempfile.mkdtemp(prefix="lesbarkeit-nachsorge-"), name)
+        os.makedirs(d)
+        pfad = os.path.join(d, "index.md")
+        Path(pfad).write_text(inhalt, encoding="utf-8")
+        return pfad
+
+    def _auswahl(self, pfade: list[str]) -> list[str]:
+        import post_utils
+        alt = post_utils.list_post_paths
+        post_utils.list_post_paths = lambda: list(pfade)
+        try:
+            return lh.hole_entwuerfe()
+        finally:
+            post_utils.list_post_paths = alt
+
+    def test_nur_entwuerfe_unter_der_schwelle_schlechteste_zuerst(self):
+        gesund = GUT.split("---", 2)[2]
+        schlimm = _fixture(
+            "Die Versicherungsgesellschaft dokumentiert die Beitragsanpassung "
+            "der Vertragsmodalitäten für die Verbraucherzentrale und die "
+            "Tarifberatung dokumentiert die Vereinbarung der Zahlungsmodalitäten.")
+        p_schl = self._projekt(SCHLECHT, "schlecht")
+        p_schlimm = self._projekt(schlimm, "schlimmer")
+        p_gut = self._projekt(GUT, "gut")
+        p_live = self._projekt(SCHLECHT.replace("draft: true", "draft: false"), "live")
+        gewaehlt = self._auswahl([p_gut, p_live, p_schl, p_schlimm])
+        self.assertEqual({p_schl, p_schlimm}, set(gewaehlt))
+        # Schlechteste zuerst – die Nachsorge beginnt, wo es am meisten fehlt.
+        self.assertEqual(
+            lh.flesch(Path(gewaehlt[0]).read_text(encoding="utf-8"), "probe"),
+            min(lh.flesch(Path(p).read_text(encoding="utf-8"), "probe")
+                for p in gewaehlt))
+        self.assertNotIn(p_gut, gewaehlt)
+        self.assertNotIn(p_live, gewaehlt)
+
+    def test_leere_auswahl_ist_kein_fehler(self):
+        self.assertEqual([], self._auswahl([]))
+
+
 class VerdrahtungTests(unittest.TestCase):
     """Deckung heißt Wirkung: Kette, Deckung und Vertrag kennen den Heiler."""
 
