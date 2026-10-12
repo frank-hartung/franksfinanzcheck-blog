@@ -23,7 +23,7 @@ redaktionelle_pruefung:
 
 inspiration: Wie du deine monatlichen Ausgaben reduzieren kannst
 cover:
-  image: "images/covers/2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg"
+  image: "images/covers/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg"
   alt: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
   caption: "Tipp von FranksFinanzcheck"
 quellen:

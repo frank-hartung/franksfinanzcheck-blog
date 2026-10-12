@@ -23,7 +23,7 @@ redaktionelle_pruefung:
 
 inspiration: "Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick"
 cover:
-  image: "images/covers/2026-10-06-energieausweis-was-das-dokument-fuer-deine-fixkosten.jpg"
+  image: "images/covers/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten.jpg"
   alt: "Energieausweis: Was er für deine Fixkosten bedeutet"
   caption: "Tipp von FranksFinanzcheck"
 quellen:

@@ -23,7 +23,7 @@ redaktionelle_pruefung:
 
 inspiration: Energiekosten senken mit kleinen Veränderungen
 cover:
-  image: "images/covers/2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg"
+  image: "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg"
   alt: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
   caption: "Tipp von FranksFinanzcheck"
 quellen:
