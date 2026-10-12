@@ -247,20 +247,36 @@ def main() -> int:
     state = load_state()
     state, fremd = bereinige_zustand(state, os.path.basename(basis_url().rstrip("/")))
     if fremd:
-        print(f"🧹 {fremd} Altlast-URL(s) der github.io-Auslieferung aus dem "
-              "Zustand entfernt (IndexNow prüft den Host – sie waren totes Gewicht).")
+        if dry_run:
+            print(f"🧹 {fremd} Altlast-URL(s) der github.io-Auslieferung stünden im "
+                  "Zustand zur Bereinigung an (Probelauf schreibt nichts).")
+        else:
+            print(f"🧹 {fremd} Altlast-URL(s) der github.io-Auslieferung aus dem "
+                  "Zustand entfernt (IndexNow prüft den Host – sie waren totes Gewicht).")
 
     neu = list(urls) if all_urls else [u for u in urls if u not in state]
 
     print(f"{len(urls)} indexierbare URLs aus der Sitemap, davon {len(neu)} neu für IndexNow.")
-    if kein_llms:
+    # EIN PROBELAUF SCHREIBT NICHTS – auch nicht die Begleitdatei.
+    #
+    # `static/llms.txt` ist versioniert und deploy-relevant (siehe Kommentar an
+    # `refresh_llms_txt`). Ein `--dry-run`, das sie erneuert, ändert den
+    # Arbeitsbaum und kann einen Deploy auslösen, obwohl niemand etwas
+    # eingereicht hat. Genau das passierte bis zum 12.10.2026: Die Vorschau
+    # stand HINTER der Pflege, also wurde „nur mal schauen" zum Schreibvorgang.
+    if dry_run:
+        print("ℹ️ Probelauf: llms.txt und Einreichungs-Zustand bleiben unangetastet.")
+    elif kein_llms:
         print("ℹ️ llms.txt bewusst nicht angefasst (--kein-llms): Pflege läuft "
               "wöchentlich in seo-weekly.yml, ein tägliches Neuschreiben würde "
               "jeden Tag einen Deploy auslösen.")
     else:
         refresh_llms_txt()
+
     if not neu:
-        if fremd:
+        # Auch die Zustands-Bereinigung ist ein Schreibvorgang – im Probelauf
+        # wird sie angekündigt, nicht ausgeführt.
+        if fremd and not dry_run:
             save_state(state)
         print("✅ Alles bereits eingereicht – nichts zu tun.")
         return 1 if sitemap_befunde else 0
@@ -271,6 +287,8 @@ def main() -> int:
             print(f"  • {u}")
         if len(neu) > 10:
             print(f"  … und {len(neu) - 10} weitere")
+        if fremd:
+            print(f"  ℹ️ würde außerdem {fremd} Altlast-URL(s) aus dem Zustand entfernen")
         return 1 if sitemap_befunde else 0
 
     rc = 0

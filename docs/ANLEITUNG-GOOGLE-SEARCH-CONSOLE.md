@@ -173,8 +173,18 @@ die bei jedem Wachstum bricht, ist kein Premium-Zustand.
 ```bash
 python3 scripts/indexierbare_seiten.py           # Bestand aus public/sitemap.xml
 python3 scripts/indexierbare_seiten.py --live    # Bestand der ausgelieferten Sitemap
-python3 scripts/submit_indexnow.py --dry-run     # IndexNow-Vorschau
+python3 scripts/submit_indexnow.py --dry-run     # IndexNow-Vorschau, schreibt nichts
 ```
+
+**Vertrag des Probelaufs.** `--dry-run` schreibt bei beiden Werkzeugen nichts –
+weder eine ausgelieferte Datei noch einen Zustand. Bei
+`gsc_indexierung.py` kehrt der Lauf vor der ersten Anfrage zurück
+(`status: dry_run`, geprüft im Selbsttest), bei `submit_indexnow.py` bleiben
+`static/llms.txt` und `.indexnow_submitted.json` unangetastet (geprüft durch
+drei Tests in `scripts/tests/test_gsc_indexierung_kette.py`, darunter eine
+Gegenprobe: ohne `--dry-run` muss geschrieben werden). Ein Probelauf, der den
+Arbeitsbaum ändert, ist keiner – er kann einen Deploy auslösen, obwohl niemand
+etwas eingereicht hat. Nachweis: Abschnitt 10 des Berichts vom 12.10.2026.
 
 ## 6. Leistungsdaten im Repo
 

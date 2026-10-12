@@ -532,6 +532,70 @@ class IndexNowTest(unittest.TestCase):
         teile = inow.batches(urls)
         self.assertEqual([len(t) for t in teile], [inow.MAX_URLS_PRO_ANFRAGE, 3])
 
+    # ---- Probelauf: `--dry-run` ist eine Vorschau, kein Schreibvorgang ----
+    def _main_probe(self, argv, *, zustand, urls):
+        """`inow.main()` hermetisch laufen lassen.
+
+        Rückgabe: (rc, llms-Mock, save_state-Mock, submit-Mock). Alles, was
+        schreiben oder ins Netz gehen könnte, ist ersetzt – die drei Mocks sind
+        die Zeugen.
+        """
+        with patch.object(sys, "argv", ["submit_indexnow.py"] + argv), \
+                patch.object(inow, "get_key", lambda: "testkey123"), \
+                patch.object(inow, "pruefe_schluesseldatei", lambda key: []), \
+                patch.object(inow, "queue_bauen", lambda live=False: (list(urls), [])), \
+                patch.object(inow, "load_state", lambda: set(zustand)), \
+                patch.object(inow, "basis_url", lambda: BASE), \
+                patch.object(inow, "refresh_llms_txt") as llms, \
+                patch.object(inow, "save_state") as speichern, \
+                patch.object(inow, "submit", return_value=200) as einreichen:
+            rc = inow.main()
+        return rc, llms, speichern, einreichen
+
+    def test_probelauf_schreibt_nichts(self):
+        """Bis 12.10.2026 stand die Vorschau HINTER der llms.txt-Pflege.
+
+        Folge: `--dry-run` erneuerte `static/llms.txt` – eine versionierte,
+        deploy-relevante Datei. „Nur mal schauen" wurde zum Schreibvorgang, der
+        einen Deploy auslösen kann, obwohl nichts eingereicht wurde.
+        """
+        rc, llms, speichern, einreichen = self._main_probe(
+            ["--dry-run"], zustand=set(), urls=[BASE, BASE + "posts/a/"])
+        self.assertEqual(rc, 0)
+        llms.assert_not_called()
+        speichern.assert_not_called()
+        einreichen.assert_not_called()
+
+    def test_probelauf_bereinigt_den_zustand_nicht(self):
+        """Der verdeckte zweite Schreibpfad.
+
+        Wenn alles schon eingereicht ist, räumt `main()` Altlast-URLs aus dem
+        Zustand und speichert ihn. Auch das ist ein Schreibvorgang – im
+        Probelauf darf er nicht passieren, nur angekündigt werden.
+        """
+        altlast = "https://frank-hartung.github.io/projekt/posts/a/"
+        rc, llms, speichern, einreichen = self._main_probe(
+            ["--dry-run"], zustand={altlast, BASE + "posts/a/"},
+            urls=[BASE + "posts/a/"])
+        self.assertEqual(rc, 0)
+        speichern.assert_not_called()
+        einreichen.assert_not_called()
+
+    def test_echtlauf_schreibt_wo_der_probelauf_schweigt(self):
+        """Gegenprobe: Ohne `--dry-run` muss dieselbe Lage schreiben.
+
+        Ohne diese Probe könnten die beiden Tests oben auch grün werden, weil
+        gar nichts mehr geschrieben wird – etwa weil der ganze Einreichungsweg
+        kaputt ist. Eine Wache, die nur das Verbot kennt, ist keine Wache.
+        """
+        altlast = "https://frank-hartung.github.io/projekt/posts/a/"
+        rc, llms, speichern, einreichen = self._main_probe(
+            [], zustand={altlast}, urls=[BASE + "posts/a/"])
+        self.assertEqual(rc, 0)
+        llms.assert_called_once()
+        speichern.assert_called_once()
+        einreichen.assert_called_once()
+
 
 class DrahtungTest(unittest.TestCase):
     """Die Kette muss verdrahtet sein, nicht nur vorhanden."""
