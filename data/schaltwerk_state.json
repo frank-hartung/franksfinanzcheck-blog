@@ -10,8 +10,13 @@
     "nacht-planung::planung:2026-10-10": "2026-10-10T07:43:46+02:00",
     "nacht-planung::planung:2026-10-11": "2026-10-11T08:23:12+02:00",
     "nacht-planung::planung:2026-10-12": "2026-10-12T03:43:26+02:00",
+    "reach-signale-kuratieren::signal:https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag": "2026-10-12T21:17:05+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/service/flugpreise-tickets-ab-deutschland-seit-2010-im-schnitt-verdoppelt-a-2a070709-c88f-4826-a4d7-5c7ecf35cff2#ref=rss": "2026-10-05T17:55:29+02:00",
+    "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/tabaksteuer-in-deutschland-union-und-spd-einigen-sich-auf-hoehere-preise-a-09d7ff68-9e7d-42c3-bbec-36efb8cb08cc#ref=rss": "2026-10-12T21:17:05+02:00",
+    "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/wirtschafsnobelpreis-geht-an-us-oekonomen-robert-e-hall-und-michael-woodford-a-c5499b28-236f-4315-85ac-3563147ba06b#ref=rss": "2026-10-12T21:17:05+02:00",
+    "reach-signale-kuratieren::signal:https://www.tagesschau.de/ausland/europa/ukraine-energie-waffenruhe-100.html": "2026-10-12T21:17:05+02:00",
+    "reach-signale-kuratieren::signal:https://www.tagesschau.de/inland/cdu-klausur-merz-hoppermann-100.html": "2026-10-12T21:17:05+02:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/verbraucher/luftfahrt-flugtickets-preise-100.html": "2026-10-05T17:55:29+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=Q3pvk9PyRs8": "2026-10-05T17:55:29+02:00",
@@ -29,6 +34,7 @@
     "standby-erinnerung::standby:reddit": "2026-10-04T23:53:19+02:00",
     "standby-erinnerung::standby:telegram": "2026-10-04T23:53:19+02:00",
     "standby-erinnerung::standby:threads": "2026-10-04T16:20:48+02:00",
+    "stiller-kanal::stille:mastodon": "2026-10-12T21:17:05+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-tarifverhandlungen-104.html": "2026-10-07T09:10:22+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/volkswagen-vw-arbeitskampf-tarifvertrag-100.html": "2026-10-04T16:20:48+02:00",
@@ -38,8 +44,9 @@
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-10-05T17:55:29+02:00",
     "nacht-planung": "2026-10-12T03:43:26+02:00",
-    "reach-signale-kuratieren": "2026-10-05T17:55:29+02:00",
+    "reach-signale-kuratieren": "2026-10-12T21:17:05+02:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
+    "stiller-kanal": "2026-10-12T21:17:05+02:00",
     "verbraucher-nachrichten": "2026-10-07T09:10:22+02:00"
   },
   "marker": {
@@ -74,10 +81,14 @@
     },
     "reach-signale-kuratieren": {
       "2026-10-04": 6,
-      "2026-10-05": 5
+      "2026-10-05": 5,
+      "2026-10-12": 5
     },
     "standby-erinnerung": {
       "2026-10-04": 8
+    },
+    "stiller-kanal": {
+      "2026-10-12": 1
     },
     "verbraucher-nachrichten": {
       "2026-10-04": 3,

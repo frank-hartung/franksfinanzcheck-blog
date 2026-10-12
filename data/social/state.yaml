@@ -660,6 +660,19 @@ history:
     #Mietwagen #Reise #CampingurlaubPlanen #Campingplatz'
   ref: '117417506719630424'
   ai: false
+- posted_at: '2026-10-12T21:17:05.339725+02:00'
+  channel: mastodon
+  slug: 2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet
+  title: 'DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen'
+  angle: mythos
+  url: https://mastodon.social/@FranksFinanzcheck/117429543158372236
+  ok: true
+  text: 'Spare bares Geld, indem du beim DSL‑Wechsel den Gesamtpreis prüfst. Vergleiche
+    Preis, Vertragslaufzeit, Router und Umstellungstermin, nicht nur den Werbepreis.
+    https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
+  ref: '117429543158372236'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -685,4 +698,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-12T15:16:38.878053+02:00'
+updated_at: '2026-10-12T21:17:09.347516+02:00'
