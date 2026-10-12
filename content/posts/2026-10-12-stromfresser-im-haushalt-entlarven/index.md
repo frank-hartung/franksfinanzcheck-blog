@@ -15,6 +15,8 @@ ki_redaktion_status: "review"
 
 Du hast im Herbst die Stromrechnung geöffnet und das Ergebnis lässt dich staunen. Die Zahlen steigen, obwohl du dein Nutzungsverhalten nicht merklich geändert hast. Der Verdacht: Unsichtbare Stromfresser saugen Energie, ohne dass du es bemerkst. In diesem Ratgeber zeige ich dir, wie du diese Energiediebe entlarvst, versteckte Kosten aufdeckst und deine monatliche Belastung merklich senkst.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Überblick: Welche Geräte werden zu Stromfressern
 
 Ein Stromfresser ist jedes Gerät, das mehr Energie verbraucht, als du bewusst nutzt. Oft steckt die Ursache in Geräten, die im Stand‑by-Modus bleiben oder veraltete Technik verwenden. Die folgende Tabelle gibt dir einen schnellen Überblick über die häufigsten Energiediebe im Haushalt.
