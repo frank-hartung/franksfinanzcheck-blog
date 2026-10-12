@@ -1,0 +1,229 @@
+{
+  "datum": "2026-10-12",
+  "erzeugt_utc": "2026-10-12 15:32 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Rücktritt von Bärbel Bas: Wollen wir so unerbittlich und gnadenlos sein?",
+            "url": "https://www.tagesschau.de/kommentar/ruecktritt-bas-102.html",
+            "datum": "2026-10-12T15:20",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Krieg gegen die Ukraine: Von \"Energie-Waffenruhe\" keine Spur",
+            "url": "https://www.tagesschau.de/ausland/europa/ukraine-energie-waffenruhe-100.html",
+            "datum": "2026-10-12T14:44",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Diskussion über Umgang der Union mit Bas",
+            "url": "https://www.tagesschau.de/inland/bas-attacken-union-100.html",
+            "datum": "2026-10-12T14:41",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "CDU will Stromsteuer absenken",
+            "url": "https://www.tagesschau.de/inland/cdu-klausur-merz-hoppermann-100.html",
+            "datum": "2026-10-12T13:11",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Reformagenda: Was Schweitzer als Arbeitsminister erwartet",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/schweitzer-arbeitsminister-reformen-rente-100.html",
+            "datum": "2026-10-12T12:24",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Tabaksteuer in Deutschland: Union und SPD einigen sich auf höhere Preise",
+            "url": "https://www.spiegel.de/wirtschaft/tabaksteuer-in-deutschland-union-und-spd-einigen-sich-auf-hoehere-preise-a-09d7ff68-9e7d-42c3-bbec-36efb8cb08cc#ref=rss",
+            "datum": "Mon, 12 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "EVP-Chef Manfred Weber stellt sich gegen Friedrich Merz - Verhandlungen über EU-Etat:",
+            "url": "https://www.spiegel.de/wirtschaft/evp-chef-manfred-weber-stellt-sich-gegen-friedrich-merz-verhandlungen-ueber-eu-etat-a-603cf43a-2ffb-488d-9193-e40dddf4c4a7#ref=rss",
+            "datum": "Mon, 12 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Wirtschafsnobelpreis geht an US-Ökonomen Robert E. Hall und Michael Woodford",
+            "url": "https://www.spiegel.de/wirtschaft/wirtschafsnobelpreis-geht-an-us-oekonomen-robert-e-hall-und-michael-woodford-a-c5499b28-236f-4315-85ac-3563147ba06b#ref=rss",
+            "datum": "Mon, 12 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Testflug der Valkyrie: Airbus will erste Kampfbomberdrohne für die Bundeswehr liefern",
+            "url": "https://www.spiegel.de/wirtschaft/testflug-der-valkyrie-airbus-will-erste-kampfbomberdrohne-fuer-die-bundeswehr-liefern-a-22861f0b-1d1b-4018-a5d1-9f529ca2aa85#ref=rss",
+            "datum": "Mon, 12 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Erbschaftsteuer: Bundesverfassungsgericht soll über Gerechtigkeit bei Firmenerben entscheiden",
+            "url": "https://www.spiegel.de/wirtschaft/soziales/erbschaftsteuer-bundesverfassungsgericht-soll-ueber-gerechtigkeit-bei-firmenerben-entscheiden-a-d6c2475d-2a50-4cb6-bc4e-dafacde45330#ref=rss",
+            "datum": "Mon, 12 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Smart #2 vorgestellt: Der Zweisitzer für die Stadt ist zurück",
+            "url": "https://www.heise.de/news/Smart-2-vorgestellt-Der-Zweisitzer-fuer-die-Stadt-ist-zurueck-11484609.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-12T17:16",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "c't-Podcast: \"Die ziehen einen digital aus\"",
+            "url": "https://www.heise.de/news/c-t-Podcast-Die-ziehen-einen-digital-aus-11484798.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-12T17:11",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Schulausschluss wegen Datenbrille in Österreich gekippt",
+            "url": "https://www.heise.de/news/Schulausschluss-wegen-Datenbrille-in-Oesterreich-gekippt-11484838.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-12T16:26",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Aufpreis möglich: Das plant Apple beim neuen iPad mini",
+            "url": "https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-12T16:10",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Mobiler Monitor Lenovo Thinkvision M16 im Test: mattes Display, 16 Zoll, 220 €",
+            "url": "https://www.heise.de/bestenlisten/testbericht/mobiler-monitor-lenovo-thinkvision-m16-im-test-mattes-display-16-zoll-220-euro/hes98w8?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-12T16:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Stromanbieter Wechsel mit Check24 I komplette Anleitung zum Stromtarif-Wechsel",
+            "url": "https://www.youtube.com/watch?v=Q3pvk9PyRs8",
+            "kanal": "Verbraucher-Info24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Strom als Luxusgut - So wehren Sie sich",
+            "url": "https://www.youtube.com/watch?v=2XE_qNb_ZIs",
+            "kanal": "Luisa Griese",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)",
+            "url": "https://www.youtube.com/watch?v=1ujV_wftSdA",
+            "kanal": "Strom & Gas Energievermittler24",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Investieren in ETFs: DAS musst du VORHER wissen!",
+            "url": "https://www.youtube.com/watch?v=b0jlsAiAT04",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarte ohne Jahresgebühr: Was kostenlos bedeutet | Finalarm",
+            "url": "https://www.youtube.com/watch?v=B9zQHu3ekzI",
+            "kanal": "Finalarm_de",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
