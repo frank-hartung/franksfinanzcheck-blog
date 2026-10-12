@@ -2016,7 +2016,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c34_auslieferung_vor_siegel(script_texts, wflows, root=root)
     checks += c35_meldetakt_an_den_ausfall(script_texts, wflows, root=root)
     checks += c36_nachsorge_beweist_die_kennzahl(
-        script_texts, root=root, python_bin=python_bin, quick=quick)
+        script_texts, root=root, python_bin=python_bin, quick=quick,
+        wflows=wflows)
     return checks
 
 
@@ -2216,6 +2217,10 @@ def c35_meldetakt_an_den_ausfall(script_texts, wflows, root=BLOG_DIR):
 #   f) Regressionstest: ein Vertrag ohne Test ist Prosa.
 C36_TESTS = ("test_endredaktion.py",)
 C36_SELFTEST_TAKT = "--selftest"
+# Die Kette, die die Nachsorge FAHREN muss: eine Auswahl ohne Aufrufer ist die
+# nächste „Deckung ohne Wirkung" (#609/#712) – sie sieht nur aus wie ein Weg.
+C36_KETTE_WORKFLOW = "content-engine-v2.yml"
+C36_KETTE_AUFRUF = "lesbarkeit_heiler.py --entwuerfe --fix"
 
 
 def _c36_funktionstext(quelltext: str, name: str) -> str:
@@ -2225,7 +2230,8 @@ def _c36_funktionstext(quelltext: str, name: str) -> str:
 
 
 def c36_nachsorge_beweist_die_kennzahl(script_texts, root=BLOG_DIR,
-                                       python_bin=None, quick=False):
+                                       python_bin=None, quick=False,
+                                       wflows=None):
     """Die Nachsorge muss die Kennzahl beweisen, für die sie gerufen wird."""
     out = []
     ed = script_texts.get("endredaktion.py", "")
@@ -2290,6 +2296,21 @@ def c36_nachsorge_beweist_die_kennzahl(script_texts, root=BLOG_DIR,
                            "`--entwuerfe` (alle Entwürfe unter der Schwelle) "
                            "fehlt – die gemeldete Klasse bliebe unbehandelt "
                            "(#712)."))
+    # (f2) Die Kette ruft die Nachsorge wirklich – eine Auswahl, die niemand
+    #      fährt, ist die nächste „Deckung ohne Wirkung" (#609): Der Befund
+    #      aus #712 verschwände dann nur so lange, bis der Vorrat wächst.
+    kette = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(pfad) == C36_KETTE_WORKFLOW:
+            kette = inhalt or ""
+    if not kette:
+        kette = _read(os.path.join(root, ".github", "workflows",
+                                   C36_KETTE_WORKFLOW))
+    if C36_KETTE_AUFRUF not in kette:
+        out.append(("C36", f".github/workflows/{C36_KETTE_WORKFLOW} ruft die "
+                           "Nachsorge-Auswahl nicht "
+                           f"(`{C36_KETTE_AUFRUF}`) – die read_draft-Klasse "
+                           "hätte wieder keinen Aufrufer (#712)."))
     # (g) Regressionstest – ein Vertrag ohne Test ist Prosa.
     for name in C36_TESTS:
         pfad = os.path.join(root, "scripts", "tests", name)
@@ -5785,6 +5806,24 @@ def _selftest():
             if "test_news_writer_lesbarkeit.py fehlt" in f[1]]:
         failures.append("C36: eine fehlende Schreibersicherungs-Testdatei "
                         "bleibt unentdeckt (#712).")
+
+    # (f) Die Kette verliert den Aufruf der Nachsorge: dann fährt niemand die
+    #     read_draft-Klasse, und der Report meldet sie Woche für Woche erneut.
+    kette_wurzel = tempfile.mkdtemp(prefix="c36-ohne-kette-")
+    os.makedirs(os.path.join(kette_wurzel, "scripts", "tests"))
+    for name in ("test_endredaktion.py", "test_news_writer_lesbarkeit.py"):
+        with open(os.path.join(kette_wurzel, "scripts", "tests", name), "w",
+                  encoding="utf-8") as fh:
+            fh.write(_read(os.path.join(BLOG_DIR, "scripts", "tests", name)))
+    os.makedirs(os.path.join(kette_wurzel, ".github", "workflows"))
+    with open(os.path.join(kette_wurzel, ".github", "workflows",
+                           C36_KETTE_WORKFLOW), "w", encoding="utf-8") as fh:
+        fh.write("# Sabotage: die Kette fährt die Nachsorge nicht.\n")
+    if not [f for f in c36_nachsorge_beweist_die_kennzahl(
+            echte_c36, root=kette_wurzel, quick=True)
+            if "ruft die Nachsorge-Auswahl nicht" in f[1]]:
+        failures.append("C36: eine Kette ohne Nachsorge-Aufruf bleibt "
+                        "unentdeckt (#712).")
 
     print("✅ KONTRAKT-SELFTEST bestanden (C1–C36 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
