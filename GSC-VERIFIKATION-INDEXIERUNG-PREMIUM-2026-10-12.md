@@ -194,7 +194,7 @@ npm run test:gsc
                             Wiedervorlage, 403/429, Zustands-Hygiene, Fail-closed
   ✅ gsc_import             JWT/RS256 mit openssl verifiziert, Paginierung, Merge, Geheimnisschutz
   ✅ submit_indexnow        Schlüsselvertrag, Queue aus der Sitemap, Batch-Grenze, Zustands-Hygiene
-  ✅ 54 Regressionstests (scripts/tests/test_gsc_indexierung_kette.py)
+  ✅ 57 Regressionstests (scripts/tests/test_gsc_indexierung_kette.py)
 ```
 
 Jede Regel hat eine Sabotage-Probe (muss anschlagen) und, wo es eine gültige Variante gibt, eine
@@ -223,7 +223,7 @@ python3 -W error::ResourceWarning …   alle fünf Selbsttests ohne offene Datei
 | Tote github.io-URLs im Zustand | 32 | 0 |
 | Aktive Indexierungs-Anfrage an Google | nicht vorhanden | täglich, bis 195/Tag |
 | Bewachte Regeln der Zugangsschicht | 0 | 13 (V1–V13) |
-| Regressionstests der Kette | 2 | 54 |
+| Regressionstests der Kette | 2 | 57 |
 
 Die 74 Seiten selbst sind unverändert – es wurden keine neuen erfunden und keine abgeschaltet.
 Geändert hat sich, was mit ihnen passiert.
@@ -296,7 +296,7 @@ python3 scripts/gsc_indexierung.py --live --plan   # 74 Seiten wären fällig �
 - `scripts/indexierbare_seiten.py` – eine Quelle für „welche Seiten sollen in den Index?"
 - `scripts/gsc_indexierung.py` – aktive Indexierungs-Anfrage (URL Inspection API)
 - `scripts/gsc_verifikations_guard.py` – V1–V13
-- `scripts/tests/test_gsc_indexierung_kette.py` – 54 Regressionstests
+- `scripts/tests/test_gsc_indexierung_kette.py` – 57 Regressionstests
 - `.github/workflows/gsc-import.yml` – täglicher Lauf (Daten + Anfragen)
 
 **Geändert**
@@ -373,3 +373,95 @@ eine Behauptung – und dieses Repository hat mit der KI-Probe eine Wache, die s
 Der Fund kam nicht aus dem Code-Review, sondern aus dem zweiten, upload-unabhängigen Gate.
 Er hätte ohne CI unbemerkt bleiben können, weil alle 52 Tests grün waren: Sie liefen über
 den `--urls`-Pfad und berührten die Sitemap-Naht nie.
+
+---
+
+## 10. Nachtrag 12.10.2026, später – der Probelauf schrieb mit
+
+Gefunden beim Nachmessen am Stand von `main` (`4bffca7`), nicht durch ein Gate:
+`python3 scripts/submit_indexnow.py --dry-run` veränderte den Arbeitsbaum.
+
+```
+$ git status --short
+ M static/llms.txt          ← nach einem PROBELAUF
+```
+
+**Ursache, zwei getrennte Schreibpfade.** In `main()` stand die Vorschau
+**hinter** der Pflege der Begleitdatei:
+
+1. `refresh_llms_txt()` lief unbedingt – außer bei `--kein-llms`. `--dry-run`
+   kannte die Funktion nicht. `static/llms.txt` ist **versioniert und
+   deploy-relevant** (es ist eine ausgelieferte Datei, kein Zwischenprodukt):
+   „nur mal schauen" änderte den Baum und konnte einen Deploy auslösen, obwohl
+   nichts eingereicht wurde.
+2. Verdeckter, weil seltener: Im Zweig „alles bereits eingereicht" räumt
+   `main()` Altlast-URLs aus dem Zustand und ruft `save_state(state)`. Mit
+   `--dry-run` und leerer Neu-Liste schrieb der Probelauf also
+   `.indexnow_submitted.json`. Im Trockenlauf am echten Bestand nicht
+   ausgelöst (24 URLs waren neu, der Zweig wurde nicht erreicht) – aber
+   erreichbar, und damit ein Defekt.
+
+Beides verletzt den Hausgrundsatz, den das Suchradar für sich selbst
+ausdrücklich festhält: *„Probelauf: `--dry-run` schreibt weder Zustand noch
+Bericht."*
+
+**Heilung.** `--dry-run` wird vor jede Schreibentscheidung gezogen. Die
+Meldungen sagen jetzt, was **geschehen würde**, statt es zu behaupten:
+
+```
+🧹 32 Altlast-URL(s) der github.io-Auslieferung stünden im Zustand zur
+   Bereinigung an (Probelauf schreibt nichts).
+74 indexierbare URLs aus der Sitemap, davon 24 neu für IndexNow.
+ℹ️ Probelauf: llms.txt und Einreichungs-Zustand bleiben unangetastet.
+```
+
+**Beweis am echten CLI**, nicht nur im Test:
+
+| | vor dem Probelauf | nach dem Probelauf |
+|---|---|---|
+| `static/llms.txt` (md5) | `936859ca…` | `936859ca…` |
+| `.indexnow_submitted.json` (md5) | `10e458bf…` | `10e458bf…` |
+| `git status --short` | 2 Quelldateien | dieselben 2, keine dritte |
+
+**Drei neue Tests**, davon einer als Gegenprobe:
+
+| Test | Was er nagelt |
+|---|---|
+| `test_probelauf_schreibt_nichts` | `--dry-run` ruft weder `refresh_llms_txt` noch `save_state` noch `submit` |
+| `test_probelauf_bereinigt_den_zustand_nicht` | der verdeckte zweite Pfad: alles eingereicht + Altlast → **kein** `save_state` |
+| `test_echtlauf_schreibt_wo_der_probelauf_schweigt` | Gegenprobe: ohne `--dry-run` muss dieselbe Lage **alle drei** Male schreiben |
+
+Ohne die Gegenprobe könnten die ersten beiden auch grün werden, weil überhaupt
+nichts mehr geschrieben wird – etwa weil der Einreichungsweg kaputt ist. Eine
+Wache, die nur das Verbot kennt, ist keine Wache.
+
+**Sabotage-Probe.** Beide Heilungen wurden probehalber zurückgebaut
+(`refresh_llms_txt()` unbedingt, `if fremd: save_state(state)`):
+
+```
+AssertionError: Expected 'save_state' to not have been called. Called 1 times.
+AssertionError: Expected 'refresh_llms_txt' to not have been called. Called 1 times.
+Ran 8 tests … FAILED (failures=2)
+```
+
+Die Gegenprobe blieb unter derselben Sabotage grün – genau wie verlangt.
+
+**Warum kein Gate das gefunden hat.** `--dry-run` war ein Hand-Befehl für den
+Menschen, kein Schritt in einem Workflow. Die KI-Probe prüft Selbsttests auf
+Netz- und Modellabhängigkeit, nicht auf Schreibvorgänge; `report_hygiene` und
+`history_guard` prüfen versionierte Berichte und Ledger, nicht `static/`.
+Gefunden hat es der Umweg über die Messung am `main`-Stand – der Grund, warum
+dieser Bericht seine Zahlen am gebauten Bestand misst und nicht aus dem Code
+abschreibt.
+
+**Der Kontrast ist die Lehre.** Beide Werkzeuge tragen dasselbe Flag mit
+derselben Absicht. `scripts/gsc_indexierung.py` kehrt bei `--dry-run` vor der
+ersten Anfrage zurück (`status: dry_run`), und der Selbsttest-Fall
+„dry-run reicht nichts ein" nagelt das fest. `scripts/submit_indexnow.py` hatte
+keine solche Probe – und schrieb, am selben Tag, von derselben Hand, mit
+derselben Absicht geschrieben, daneben. Unzuverlässig war nicht das Flag,
+sondern die Stelle, an der es nur dokumentiert und nicht geprüft war.
+
+**Zahlen danach.** Kette 57 Regressionstests statt 54 · Gesamtsuite 2818 Tests,
+0 Fehler · Selbsttest-Runner 190 Wachen, 380 Uhr-Proben, grün · URL-Wache 718
+Dateien, 0 Befunde · Governance 33 Regeln, beide Richtungen.
