@@ -2,7 +2,7 @@
 title: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
 description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis…"
 date: 2026-09-21T09:29:03Z
-lastmod: 2026-09-28
+lastmod: 2026-10-13
 draft: false
 reserve_published: 2026-09-21
 tags: ["Notgroschen"]
@@ -36,7 +36,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 

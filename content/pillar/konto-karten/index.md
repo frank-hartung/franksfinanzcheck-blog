@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-10-13
 title: "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen"
 description: "Banking ohne Gebühren: Kostenlose Girokonten, Kreditkarten ohne Jahresgebühr, Tagesgeld mit Top-Zinsen und Ratenkredite zum Bestzins."
 date: 2026-08-08
@@ -14,16 +14,16 @@ cover:
   alt: "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"
     url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
     herausgeber: "Deutsche Bundesbank"
-    datum: "2026-04-12"
+    datum: "2026-09-28"
   - titel: "Girokonto: Was Sie darüber wissen sollten"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
     herausgeber: "Verbraucherzentrale"
-    datum: "2025-12-10"
+    datum: "2026-09-28"
 ---
 Viele Filialbanken und Sparkassen erheben Monat für Monat Kontoführungsgebühren, berechnen Buchungszeilen oder verlangen teure Jahresgebühren für Kreditkarten. Im Laufe eines Jahres fließen so schnell 60&nbsp;€ bis 180&nbsp;€ für Standardleistungen vom Konto ab, die moderne Direkt- und Neobanken komplett kostenlos zur Verfügung stellen. Die gute Nachricht: Wer einmal umstellt, spart dauerhaft – das gesamte Banking auf null Euro Gebühren, die passende Kreditkarte für Reisen und die besten Zinsen für den Notgroschen.
 

@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-10-13
 title: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"
 description: "Handytarif-Vergleichen 2026: Allnet-Flats ab 4,99 €, 5G-Tarife unter 15 € und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste bis zu 360 € im Jahr sparen."
 date: 2026-09-02T04:05:51Z
@@ -25,7 +25,7 @@ quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-10-13"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
@@ -34,7 +34,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 Du willst Handytarif-vergleichen? Hast du deinen Handyvertrag schon genauer geprüft? Millionen zahlen Monat für Monat 25 bis 45 €. Für Leistung, die heute die Hälfte kostet.

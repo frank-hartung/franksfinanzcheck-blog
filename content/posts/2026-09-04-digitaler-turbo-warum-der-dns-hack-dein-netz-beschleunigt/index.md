@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-10-13
 title: "Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt"
 description: "Dns hack: Erfahre, wie der DNS-Hack deine Ladezeiten minimiert und die DNS Privatsphäre stärkt. Optimiere dein System für schnelleres WLAN und mehr Sicherheit."
 date: 2026-09-16T08:58:26Z
@@ -26,7 +26,7 @@ quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-10-13"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
@@ -35,7 +35,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 Klickst du auf einen Link und wartest Sekunden, bis die Seite endlich aufbaut? Kommt dir das träge vor, obwohl du schnelles Internet hast? Dann liegt es selten an der Leitung.

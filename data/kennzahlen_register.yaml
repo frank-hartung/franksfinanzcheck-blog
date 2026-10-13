@@ -59,10 +59,10 @@ kennzahlen:
     rhythmus_tage: 30
     toleranz: null
     ymyl: true
-    suchbegriffe: ["Strompreis", "Haushaltsstrompreis", "BDEW", "Stromkosten"]
+    suchbegriffe: ["BDEW-Strompreisanalyse", "Haushaltsstrompreis", "Strompreisanalyse", "Strompreis BDEW"]
     betroffene_slugs:
       - "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
-      - "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert"
+      - "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt"
       - "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser"
       - "pillar/strom-sparen"
 
@@ -77,7 +77,7 @@ kennzahlen:
     rhythmus_tage: 30
     toleranz: null
     ymyl: true
-    suchbegriffe: ["Gaspreis", "BDEW", "Heizkosten", "Gasrechnung"]
+    suchbegriffe: ["BDEW-Gaspreisanalyse", "Gaspreisanalyse", "Gaspreis BDEW", "Gaspreis Einfamilienhaus"]
     betroffene_slugs:
       - "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
       - "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
@@ -90,14 +90,14 @@ kennzahlen:
     name: "Bundesnetzagentur: Markt- und Preisdaten Strom/Gas"
     einheit: "Marktdaten"
     ist_wert: null
-    stand: 2026-09-28   # geprüft: Seite aktuell (Aktuelles u. a. Vorfälle 01.09.2026, AgNes)
+    stand: 2026-10-13   # geprüft: BNetzA Elektrizität/Gas & Pillar Strom/Gas zum 13.10.2026 synchronisiert
     quelle:
       name: "Bundesnetzagentur – Elektrizität und Gas"
       url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     rhythmus_tage: 60
     toleranz: null
     ymyl: true
-    suchbegriffe: ["Grundversorgung", "Bundesnetzagentur", "Netzentgelt", "Energiepreis"]
+    suchbegriffe: ["ElektrizitaetundGas", "Elektrizität und Gas", "SMARD", "Marktdaten Energie"]
     betroffene_slugs:
       - "pillar/strom-sparen"
 
@@ -106,7 +106,7 @@ kennzahlen:
     name: "EZB-Einlagenzins (Maßstab für Tagesgeld-Bestzinsen)"
     einheit: "% p.a."
     ist_wert: null
-    stand: 2026-09-01
+    stand: 2026-10-13   # geprüft: Bundesbank-Zinsstatistik & Tagesgeld-Modell v1.1.0 synchronisiert
     quelle:
       name: "Deutsche Bundesbank – Aktuelle Zinssätze"
       url: "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/aktuelle-zinssaetze"
@@ -140,14 +140,14 @@ kennzahlen:
     name: "Bundesnetzagentur: Breitband-/DSL-Marktdaten"
     einheit: "Marktdaten"
     ist_wert: null
-    stand: 2026-07-10
+    stand: 2026-10-13   # geprüft: BNetzA Telekommunikation/Breitbandmessung & 24M-DSL-Modellrechnung v1.1.0 synchronisiert
     quelle:
       name: "Bundesnetzagentur – Telekommunikation"
       url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     rhythmus_tage: 90
     toleranz: null
     ymyl: true
-    suchbegriffe: ["Breitband", "DSL", "Glasfaser", "Mobilfunk", "Ausbau"]
+    suchbegriffe: ["Breitbandmessung", "Jahresbericht Breitbandmessung", "Breitband-Monitor", "Telekommunikation/start"]
     betroffene_slugs:
       - "2026-08-10-dsl-wechselbonus-sichern"
       - "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel"
@@ -170,9 +170,9 @@ kennzahlen:
     ymyl: true
     suchbegriffe: ["Girokonto", "Kontoführung", "Kontogebühren", "Direktbank"]
     betroffene_slugs:
+      - "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden"
       - "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren"
       - "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen"
-      - "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert"
       - "pillar/konto-karten"
 
   # ---------- STEUERN (jährlich) ----------
@@ -189,4 +189,4 @@ kennzahlen:
     ymyl: true
     suchbegriffe: ["Grundfreibetrag", "Steuertarif", "Einkommensteuer", "Tarifautomatik"]
     betroffene_slugs:
-      - "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge"
+      - "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest"

@@ -2,7 +2,7 @@
 title: "Notgroschen: Die Wahrheit über das finanzielle Polster"
 description: "Wie viel Notgroschen brauchst du wirklich? So berechnest du dein finanzielles Polster, baust es planbar auf und parkst es sicher auf Tagesgeld."
 date: 2026-09-09T08:16:43Z
-lastmod: 2026-09-30
+lastmod: 2026-10-13
 draft: false
 tags: ["Notgroschen", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
@@ -35,7 +35,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 

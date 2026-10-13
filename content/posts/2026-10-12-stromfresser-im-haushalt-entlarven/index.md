@@ -18,6 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Stromfresser im Haushalt entlarven"
 pin_description: "*Werbung | Stromfresser im Haushalt entlarven – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
+kurzantwort: "Stromfresser findest du in zwei Schritten: Die Bundesnetzagentur bietet ein kostenloses Online-Tool zur Analyse deines Stromverbrauchs, ein Stecker-Messgerät (ab etwa 20 Euro) misst die einzelnen Geräte nach. Aktuelle Geräte ziehen im Stand-by meist nur 0,5 bis 2 Watt – ältere oft deutlich mehr. Bei rund 40 Cent pro Kilowattstunde lohnt sich ein Neukauf, wenn sich die Anschaffung in spätestens fünf Jahren rechnet."
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
@@ -50,28 +51,30 @@ Die folgende Tabelle zeigt die häufigsten Energiediebe im Haushalt.
 Der größte Hebel liegt im Umgang mit dem Stand-by. Viele Geräte schlafen nie richtig. Sobald du weißt, welche Geräte im Hintergrund ziehen, handelst du gezielt. Prüfe vor allem Geräte, die sich warm anfühlen. Wärme ist oft ein Zeichen für verschwendete Energie.
 
 > **Rechenbeispiel:**
-> Ein alter Fernseher verbraucht im Stand‑by etwa 5 Watt. Das Gerät läuft so 24 Stunden am Tag. Auf den Monat gerechnet sind das etwa 3,6 Kilowattstunden. Bei einem Strompreis von 30 Cent pro Einheit kostet das 1,08 Euro. Hast du fünf solcher Geräte, zahlst du über 5 Euro im Monat für nichts. Im Jahr summiert sich das auf über 60 Euro.
+> Ein älterer Fernseher verbraucht im Stand‑by schnell 5 Watt. Das Gerät läuft so 24 Stunden am Tag. Auf den Monat gerechnet sind das etwa 3,6 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde – dem Durchschnitt für Haushalte laut Bundesnetzagentur – kostet das 1,44 Euro. Hast du fünf solcher älteren Geräte, zahlst du über 7 Euro im Monat für nichts. Im Jahr summiert sich das auf rund 86 Euro. Aktuelle Geräte ziehen im Stand‑by meist deutlich weniger, oft nur zwischen 0,5 und 2 Watt.
 
 ## Standby und Geräte im Ruhezustand
 
 Viele Haushalte unterschätzen den Ruhezustand. Geräte bleiben oft am Netz, obwohl sie aus wirken. Ein rotes Licht am TV zeigt: Das Gerät wartet. Es braucht Strom, um sofort auf die Fernbedienung zu reagieren. Auch Netzteile von Laptops ziehen oft weiter Energie.
 
-Die Tabelle zeigt typische Werte und mögliche Einsparungen.
+Die gute Nachricht: Aktuelle Geräte müssen sich an strenge Grenzen halten. Unterhaltungselektronik zieht im Stand‑by meist nur zwischen 0,5 und 2 Watt, wie die Bundesnetzagentur erläutert. Verdächtig sind dagegen ältere Geräte, die nie richtig ausschalten.
 
-| Gerät | Stand‑by (W) | Jahr (kWh) | Ersparnis (Euro) |
+Die Tabelle zeigt typische Werte für aktuelle Geräte – und die Ersparnis pro Jahr, wenn du sie im Stand‑by ganz vom Netz trennst (bei 40 Cent je Kilowattstunde).
+
+| Gerät | Stand‑by (W) | Jahr (kWh) | Ersparnis pro Jahr (Euro) |
 | :--- | :--- | :--- | :--- |
-| Fernseher | 5 | 44 | 13,20 |
-| Spielkonsole | 3 | 26 | 7,80 |
-| Router | 7 | 61 | 18,30 |
-| Kaffeemaschine | 2 | 18 | 5,40 |
-| Ladegerät | 1 | 9 | 2,70 |
+| Fernseher | 2 | 18 | 7,20 |
+| Spielkonsole | 1 | 9 | 3,60 |
+| AV‑Receiver | 1,5 | 13 | 5,20 |
+| Kaffeemaschine (Uhr) | 1 | 9 | 3,60 |
+| Ladegerät | 0,5 | 4 | 1,60 |
 
 Ein typischer Denkfehler: Du hältst den kleinen Verbrauch für egal. In Wahrheit summieren sich viele Geräte zu einem hohen Betrag. Ein Router läuft zum Beispiel das ganze Jahr durch. Brauchst du WLAN wirklich auch nachts um drei Uhr? Viele Router haben einen Zeitplan für das Funknetz.
 
 Am einfachsten senkst du diese Kosten mit einer Leiste. Eine schaltbare Steckdose trennt alle Geräte mit einem Klick. Dann behältst du die volle Kontrolle. Du siehst die Einsparung schon bei der nächsten Rechnung.
 
 > **Rechenbeispiel:**
-> Du nutzt einen Smart‑Plug für deine TV-Ecke. Der Stecker kostet einmalig etwa 20 Euro. Er schaltet nachts den Fernseher, die Boxen und die Konsole ab. Zusammen sparen diese Geräte 10 Watt pro Stunde. In der Nacht (8 Stunden) sparst du so 80 Wattstunden. Das sind im Jahr rund 29 Kilowattstunden oder 8,70 Euro. Nach gut zwei Jahren hat sich der Stecker bezahlt gemacht.
+> Du nutzt einen Smart‑Plug für deine TV-Ecke mit älteren Geräten. Der Stecker kostet einmalig etwa 20 Euro. Er schaltet nachts den Fernseher, die Boxen und die Konsole ab. Zusammen ziehen diese Geräte 10 Watt. In der Nacht (8 Stunden) sparst du so 80 Wattstunden. Das sind im Jahr rund 29 Kilowattstunden oder knapp 12 Euro. Nach weniger als zwei Jahren hat sich der Stecker bezahlt gemacht.
 
 ## Alte Geräte und ineffiziente Technik
 
@@ -90,21 +93,22 @@ Die nächste Tabelle vergleicht typische Werte für den Verbrauch.
 Ein typischer Fehler: Du behältst das Gerät aus Gewohnheit. Ein Austausch wirkt im ersten Moment teuer. Doch die laufenden Kosten fressen dein Budget auf. Moderne Geräte der Klasse A sparen oft die Hälfte der Energie. Das schont die Umwelt und deinen Geldbeutel.
 
 > **Faustregel:**
-> Ein Austausch lohnt sich meistens sofort, wenn das neue Gerät die Kosten drastisch senkt. Bringt die jährliche Ersparnis mindestens ein Drittel der Kaufsumme ein? Dann solltest du nicht länger warten. Bei Kühlgeräten ist das oft nach acht bis zehn Jahren der Fall.
+> Ein Austausch lohnt sich, wenn das neue Gerät die Kosten spürbar senkt. Die Bundesnetzagentur empfiehlt als Orientierung: Investitionen in energieeffiziente Geräte sollten sich innerhalb von höchstens fünf Jahren rechnen. Bringt die jährliche Ersparnis also mindestens ein Fünftel der Kaufsumme ein, hast du den richtigen Kandidaten gefunden. Kühlgeräte, die rund um die Uhr laufen, schaffen das oft innerhalb der Frist – Geräte, die nur selten laufen, brauchen deutlich länger.
 
-Gezielte Erneuerung senkt deine Fixkosten dauerhaft. Achte beim Kauf auf die neuen Labels. Die Skala reicht heute von A bis G. Ein Gerät der Klasse D kann heute besser sein als ein altes Gerät mit drei Pluszeichen.
+Gezielte Erneuerung senkt deine Fixkosten dauerhaft. Achte beim Kauf auf das verpflichtende EU‑Energieeffizienzlabel. Es ordnet jedes neue Gerät in die Skala von A bis G ein und nennt den Jahresverbrauch direkt in Kilowattstunden – so lassen sich zwei Modelle auf einen Blick vergleichen. Ein Gerät der Klasse D kann heute besser sein als ein altes Gerät mit drei Pluszeichen.
 
 > **Rechenbeispiel:**
-> Ersetze einen alten Kühlschrank (300 kWh im Jahr) durch ein neues Modell (150 kWh im Jahr). Der Unterschied beträgt 150 Einheiten. Bei einem Preis von 30 Cent sparst du 45 Euro pro Jahr. Kostet das neue Gerät 450 Euro, ist es nach zehn Jahren bezahlt. Da Strompreise oft steigen, geht es meist noch schneller.
+> Ersetze einen alten Kühlschrank (300 kWh im Jahr) durch ein neues Modell (150 kWh im Jahr). Der Unterschied beträgt 150 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde sparst du 60 Euro pro Jahr. Kostet das neue Gerät 450 Euro, dauert es siebeneinhalb Jahre – zu lang für die Fünf-Jahres-Orientierung der Bundesnetzagentur. Ein gleichwertiges Modell für 300 Euro schafft die Frist genau, bei 280 Euro bist du nach gut viereinhalb Jahren aus den Kosten.
 
 ## Fehlende Messung und undurchsichtige Abrechnung
 
-Ohne klare Messwerte bleibt dein Sparplan im Dunkeln. Viele Rechnungen zeigen nur die Summe. Du siehst nicht, welcher Apparat wie viel zieht. Ein Messgerät schafft hier schnell Klarheit. Du steckst es einfach zwischen Dose und Stecker.
+Ohne klare Messwerte bleibt dein Sparplan im Dunkeln. Viele Rechnungen zeigen nur die Summe. Du siehst nicht, welcher Apparat wie viel zieht. Bevor du Geld ausgibst, starte kostenlos: Die Bundesnetzagentur stellt auf ihrer Website ein Online-Angebot bereit, mit dem du deinen Stromverbrauch analysieren und einordnen kannst – ohne einen Cent zu zahlen. Für den Feinschliff einzelner Geräte lohnt danach ein Messgerät. Du steckst es einfach zwischen Dose und Stecker.
 
 Die Tabelle zeigt Methoden für die Messung und ihre Vorteile.
 
 | Methode | Aufwand | Genauigkeit | Kosten (Euro) |
 | :--- | :--- | :--- | :--- |
+| Online-Analyse (Bundesnetzagentur) | gering | grob | 0 |
 | Smart‑Plug | gering | mittel | 20 – 30 |
 | Zähler‑Adapter | mittel | hoch | 50 – 80 |
 | App + Sensor | hoch | hoch | 100 – 150 |
@@ -115,7 +119,7 @@ Ohne echte Zahlen triffst du keine gute Entscheidung. Kennst du den Durst deiner
 Danach prüfst du die Zahlen mit einem Gerät. So findest du den Übeltäter in der Küche oder im Wohnzimmer. Oft ist es die alte Truhe im Keller. Sie läuft unbemerkt und verbraucht Unmengen an Strom. Einmal gemessen, fällt die Entscheidung zum Abschalten leicht.
 
 > **Rechenbeispiel:**
-> Du installierst einen Smart‑Plug an deinem Router. Das Gerät zeigt eine Leistung von 6 Watt an. Nach einem Monat misst der Stecker 4,3 Kilowattstunden. Bei 30 Cent pro Einheit kostet das 1,30 Euro. Schaltest du den Router nachts per Zeitschaltuhr aus, sparst du die Hälfte. Das sind 15,60 Euro im Jahr für eine kleine Einstellung.
+> Du installierst einen Smart‑Plug an deinem Router. Das Gerät zeigt eine Leistung von 6 Watt an. Nach einem Monat misst der Stecker 4,3 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde kostet das 1,70 Euro. Schaltest du den Router nachts per Zeitschaltuhr aus, sparst du die Hälfte. Das sind rund 10 Euro im Jahr für eine kleine Einstellung.
 
 ## Praktische Tools: Smart‑Plug und Messgeräte
 
@@ -136,7 +140,7 @@ Der Schlüssel liegt in der dauerhaften Nutzung. Im 4K‑Prüfpfad rechnest du d
 Vielleicht ist ein Filter verstopft. Das lässt den Motor schwerer arbeiten. Oder eine Dichtung ist defekt. Kleine Ursachen haben oft eine große Wirkung auf die Rechnung. Mit Technik behältst du den Überblick ohne Mühe.
 
 > **Rechenbeispiel:**
-> Du programmierst einen Stecker für die Kaffeemaschine. Sie schaltet sich nach dem Frühstück ganz aus. Die Maschine braucht im Stand‑by 2 Watt für die Uhr. Pro Monat sparst du so etwa 1,4 Kilowattstunden. Das sind zwar nur 42 Cent. Doch zusammen mit anderen Geräten sparst du so leicht 100 Euro im Jahr.
+> Du programmierst einen Stecker für die Kaffeemaschine. Sie schaltet sich nach dem Frühstück ganz aus. Die Maschine braucht im Stand‑by 2 Watt für die Uhr. Pro Monat sparst du so etwa 1,4 Kilowattstunden. Das sind zwar nur rund 60 Cent. Doch zusammen mit anderen Geräten sparst du so leicht 100 Euro im Jahr.
 
 ## Häufige Fehler und wie du sie vermeidest
 
@@ -159,11 +163,11 @@ Wenn du diese Schritte befolgst, bleibt dein Plan stabil. Du handelst mit Wissen
 
 ### Wie finde ich Stromfresser im Haushalt?
 
-Erstelle zuerst eine Liste aller elektrischen Geräte im Haus. Miss dann den Verbrauch im Ruhezustand mit einem Stecker. Geräte mit mehr als 5 Watt im Stand-by sind oft teuer. Achte auch auf Geräte, die im Betrieb sehr heiß werden. Das deutet oft auf einen schlechten Wirkungsgrad hin.
+Erstelle zuerst eine Liste aller elektrischen Geräte im Haus. Miss dann den Verbrauch im Ruhezustand mit einem Stecker. Aktuelle Geräte bleiben im Stand‑by meist zwischen 0,5 und 2 Watt; Geräte, die deutlich darüber liegen, sind Verdachtsfälle. Achte auch auf Geräte, die im Betrieb sehr heiß werden. Das deutet oft auf einen schlechten Wirkungsgrad hin.
 
 ### Lohnt sich der Austausch alter Geräte wirklich?
 
-Ja, das lohnt sich oft sehr schnell. Die Ersparnis sollte pro Jahr etwa ein Drittel des Preises betragen. Das gilt besonders für alte Kühlschränke oder Gefriertruhen. Auch alte Halogenlampen solltest du sofort durch LED ersetzen. Die Kosten für die neuen Birnen hast du oft nach wenigen Monaten wieder drin.
+Ja, das lohnt sich oft sehr schnell. Als Orientierung gilt: Die Ersparnis sollte den Kaufpreis in spätestens fünf Jahren wieder hereinbringen – also mindestens ein Fünftel des Preises pro Jahr. Das gilt besonders für alte Kühlschränke oder Gefriertruhen, die rund um die Uhr laufen. Auch alte Halogenlampen solltest du sofort durch LED ersetzen. Die Kosten für die neuen Birnen hast du oft nach wenigen Monaten wieder drin.
 
 ### Was kostet ein Smart‑Plug und lohnt er sich?
 
