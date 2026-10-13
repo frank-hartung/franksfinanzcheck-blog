@@ -46,12 +46,9 @@ kurzantwort: "Beim Abheben im Ausland rechnen in der Regel zwei Stellen ab: der 
 
 Am Strandautomaten in Portugal oder Kroatien dauert das Abheben keine Minute. Die Rechnung kommt später, und sie passt oft nicht zum abgehobenen Betrag. Genau an dieser Stelle entsteht der Eindruck, die Bank habe sich vertan. Meistens hat sie nicht.
 
-Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander. Der Betreiber des Automaten verlangt sein eigenes Entgelt. Deine Bank berechnet, was sie für die Nutzung deiner Karte außerhalb des Euro-Raums vorsieht. Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mit welcher Karte er unterwegs ist.
+Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander. Der Betreiber des Automaten verlangt sein eigenes Entgelt. Deine Bank berechnet, was sie für die Nutzung deiner Karte außerhalb des Euro-Raums vorsieht. Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mit welcher Karte er unterwegs ist. Geld abheben im Ausland ist eine Rechnung mit zwei Zeilen: der Automat und deine Bank. Wer beide kennt, gibt weniger Geld aus – und ärgert sich später seltener.
 
 ## Kurz gefasst
-
-
-Darum geht es hier konkret: Geld abheben im Ausland.
 
 * **Zwei Stellen rechnen ab:** Der Automatenbetreiber vor Ort und deine Bank zu Hause.
 * **Die Währungsfrage ist eine Entscheidung:** Bietet der Automat eine Abrechnung in Euro an, darfst du sie ablehnen.
@@ -168,8 +165,6 @@ Prüfe außerdem, ob die Karte im Ausland für Abhebungen freigegeben war. Fehlt
 * **Sperrnummern speichern.** Notiere die Nummer zum Sperren deiner Karte, nicht auf dem Handy allein.
 * **Belege sammeln.** Bewahre bis zur Schlussrechnung alle Automatenbelege auf.
 
-
-Genau das ist der Hebel: Geld abheben im Ausland.
 
 ## Häufige Fragen
 

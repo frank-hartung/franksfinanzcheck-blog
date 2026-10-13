@@ -570,6 +570,23 @@ def heal_article_file(path: str, include_drafts: bool = False) -> tuple[bool, li
             import casing_guard as cg
             hits = cg.Sink()
             new_title_cased = cg.apply_rules(title, cg.SEO_RULES, hits, 0, heading=True, continuation=False)
+            # SICHERUNG (13.10.2026, Live-Befund „Der stille posten“):
+            # Der Titel darf nie kleingeschrieben werden, was der Artikel
+            # selbst grossschreibt. Anlass: C12 senkte „Posten“ zum „posten“,
+            # weil der Wortschatz von einem mehrdeutigen Wort nur die
+            # Verbform kennt – der Artikel ist die verlaesslichere Quelle.
+            # Geprueft wird genau das Wort, das C12 senken wollte.
+            veto = []
+            for h in hits:
+                if h.get("regel") != "C12":
+                    continue
+                wort = h.get("vorher", "")
+                if wort and re.search(rf"(?<![A-Za-zÀ-ÿ]){re.escape(wort)}(?![A-Za-zÀ-ÿ])", new_body):
+                    veto.append(wort)
+            if veto:
+                new_title_cased = title
+                actions.append("Casing: Titel bleibt – "
+                               + ", ".join(veto) + " steht im Artikel gross (Nomen-Veto)")
             if new_title_cased != title:
                 new_content = fm_set(new_content, "title", new_title_cased)
                 actions.append(f"Casing: Titel -> {new_title_cased[:40]}")
