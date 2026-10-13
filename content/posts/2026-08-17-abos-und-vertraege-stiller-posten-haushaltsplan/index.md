@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Abos kündigen", "wiederkehrende Kosten", "Verträge prüfen", "Fixkosten senken"]
+keywords: ["Abos kündigen", "wiederkehrende Kosten", "Verträge prüfen", "Fixkosten senken", "Abos und Verträge", "Haushaltsplan"]
 pin_title: "Abos und Verträge: Der stille Posten im Haushaltsplan"
 pin_description: "*Werbung | Abos und Verträge fressen Budget, ohne aufzufallen. So findest du sie, kündigst richtig und rechnest nach, was ein einziger Klick pro Monat wirklich kostet. Mehr Spartipps auf FranksFinanzcheck! #aboskuendigen #fixkosten #haushaltsplan"
 ai_generated: true

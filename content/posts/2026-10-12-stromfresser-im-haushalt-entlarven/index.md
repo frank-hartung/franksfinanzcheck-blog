@@ -7,7 +7,7 @@ draft: true
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
+keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten", "Stromfresser im Haushalt entlarven"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -16,6 +16,8 @@ cover:
   image: "images/covers/2026-10-12-stromfresser-im-haushalt-entlarven.jpg"
   alt: "Stromfresser im Haushalt entlarven"
   caption: "Tipp von FranksFinanzcheck"
+pin_title: "Stromfresser im Haushalt entlarven"
+pin_description: "*Werbung | Stromfresser im Haushalt entlarven – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
 ---
 
 Du öffnest im Herbst deine Stromrechnung – und staunst. Die Zahl ist gestiegen, obwohl du kaum mehr verbraucht hast. Der Verdacht: Unsichtbare Stromfresser ziehen Energie, ohne dass du es merkst.

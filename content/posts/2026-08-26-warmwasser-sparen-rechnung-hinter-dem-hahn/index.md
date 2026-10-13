@@ -1,5 +1,5 @@
 ---
-title: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
+title: "Warmwasser sparen: Die Rechnung hinter"
 description: "Warmwasser ist der zweite große Posten im Haushalt und steht selten auf der Rechnung. So findest du deinen Verbrauch und drehst an den richtigen Stellen."
 date: 2026-08-26T06:10:00Z
 lastmod: 2026-10-13
@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gasrechnung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten"]
+keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten", "Warmwasser", "Frugalismus", "Geld sparen"]
 pin_title: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
 pin_description: "*Werbung | Warmwasser ist der zweitgrößte Posten im Haushalt und steht selten auf der Rechnung. So findest du deinen Verbrauch und drehst an den richtigen Stellen. Mehr Spartipps auf FranksFinanzcheck! #warmwasser #heizkosten #sparen"
 ai_generated: true

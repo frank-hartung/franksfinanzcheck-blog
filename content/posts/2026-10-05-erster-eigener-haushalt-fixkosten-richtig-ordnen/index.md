@@ -8,7 +8,7 @@ tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["erster eigener Haushalt", "Fixkosten ordnen", "Monatsbudget erstellen", "Wohnung anmelden"]
+keywords: ["erster eigener Haushalt", "Fixkosten ordnen", "Monatsbudget erstellen", "Wohnung anmelden", "Der erste eigene Haushalt"]
 pin_title: "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen"
 pin_description: "*Werbung | Erste Wohnung, erste Fixkosten: Welche Posten deinen Monat bestimmen, in welcher Reihenfolge du sie anmeldest und was die zweite Rechnung oft überrascht. Mehr Spartipps auf FranksFinanzcheck! #ersteWohnung #fixkosten #budget"
 ai_generated: true

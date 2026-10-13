@@ -9,7 +9,7 @@ tags: ["Internet und Mobilfunk", "DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Störung Internetanbieter", "Internetausfall melden", "Entstörung Frist", "Ausfall Entschädigung"]
+keywords: ["Störung Internetanbieter", "Internetausfall melden", "Entstörung Frist", "Ausfall Entschädigung", "Störung beim Internetanbieter", "Internetanbieter", "DSL-Vergleich", "Internetvertrag wechseln"]
 pin_title: "Störung beim Internetanbieter: So sicherst du deine Rechte"
 pin_description: "*Werbung | Internet weg und die Hotline schweigt? So meldest du eine Störung richtig, belegst den Ausfall und prüfst deinen Entschädigungsanspruch. Mehr Spartipps auf FranksFinanzcheck! #internetstoerung #dsl #verbraucherrechte"
 ai_generated: true

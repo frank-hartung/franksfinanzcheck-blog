@@ -1,6 +1,6 @@
 ---
 title: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
-description: "Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll landet – mit Modellrechnung."
+description: "Großeinkauf planen: Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll…"
 date: 2026-09-30T06:10:00Z
 lastmod: 2026-10-13
 draft: false
@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Großeinkauf planen", "Vorrat anlegen", "Grundpreis vergleichen", "Lebensmittel sparen"]
+keywords: ["Großeinkauf planen", "Vorrat anlegen", "Grundpreis vergleichen", "Lebensmittel sparen", "Großeinkauf und Vorrat", "Großeinkauf", "Bevorraten"]
 pin_title: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
 pin_description: "*Werbung | Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll landet. Mehr Spartipps auf FranksFinanzcheck! #grosseinkauf #vorrat #sparen"
 ai_generated: true

@@ -8,7 +8,7 @@ tags: ["Stromkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Grundversorgung Strom", "Grundversorgung Gas", "Ersatzversorgung Umzug", "Energievertrag ohne Tarif"]
+keywords: ["Grundversorgung Strom", "Grundversorgung Gas", "Ersatzversorgung Umzug", "Energievertrag ohne Tarif", "Grundversorgung Strom und Gas", "Grundversorgung", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Grundversorgung Strom und Gas: Was sie leistet"
 pin_description: "*Werbung | Die Grundversorgung ist das Auffangnetz der Energieversorgung und meist der teuerste Tarif. Wie du hineingerätst und wie du wieder herauskommst. Mehr Spartipps auf FranksFinanzcheck! #grundversorgung #strom #gas"
 ai_generated: true

@@ -8,7 +8,7 @@ tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Lastschrift prüfen", "Dauerauftrag", "Abbuchung widersprechen", "Kontoauszug kontrollieren"]
+keywords: ["Lastschrift prüfen", "Dauerauftrag", "Abbuchung widersprechen", "Kontoauszug kontrollieren", "Lastschrift und Dauerauftrag", "Lastschrift"]
 pin_title: "Lastschrift und Dauerauftrag: Was du prüfen solltest"
 pin_description: "*Werbung | Abbuchungen vom Konto laufen in drei Wegen. Wie du sie auseinanderhältst, erkennst, was du freigegeben hast, und richtig widersprichst. Mehr Spartipps auf FranksFinanzcheck! #lastschrift #dauerauftrag #kontoauszug"
 ai_generated: true

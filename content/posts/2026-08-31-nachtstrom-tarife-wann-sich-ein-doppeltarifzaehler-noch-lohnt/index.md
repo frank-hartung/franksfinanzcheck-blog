@@ -1,5 +1,5 @@
 ---
-title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch lohnt"
+title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch"
 description: "Nachtstrom kann günstiger sein, muss aber nicht. Wie Hoch- und Niedertarif funktionieren, welcher Nachtanteil sich rechnet und wann der Einheitstarif gewinnt."
 lastmod: 2026-10-13
 date: 2026-08-31T06:10:00Z
@@ -9,7 +9,7 @@ tags: ["Stromkosten senken", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Nachtstrom Tarif", "Doppeltarifzähler", "Hochtarif Niedertarif", "Stromtarif Zähler"]
+keywords: ["Nachtstrom Tarif", "Doppeltarifzähler", "Hochtarif Niedertarif", "Stromtarif Zähler", "Nachtstrom-Tarife", "Nachtstrom Tarife"]
 pin_title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch lohnt"
 pin_description: "*Werbung | Nachtstrom klingt günstig, rechnet sich aber nur mit dem passenden Verbrauch. Wir zeigen die Rechnung, den nötigen Nachtanteil und wann ein Einheitstarif gewinnt. Mehr Spartipps auf FranksFinanzcheck! #nachtstrom #stromtarif #stromsparen"
 ai_generated: true
