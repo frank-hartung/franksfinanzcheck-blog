@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-10-13
 title: "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet"
 description: "So wechselst du Internet und DSL ohne Stress: Effektivpreis sauber rechnen, Ausfallzeiten vermeiden und Bonus, Router sowie Laufzeit richtig prüfen."
 date: 2026-08-14T08:35:12Z
@@ -25,7 +25,7 @@ quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-10-13"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
@@ -34,7 +34,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 Viele zahlen beim Internet nicht deshalb zu viel, weil die Leitung so teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.

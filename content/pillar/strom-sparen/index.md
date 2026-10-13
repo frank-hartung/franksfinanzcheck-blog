@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-02
+lastmod: 2026-10-13
 title: "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten"
 description: "Strom-, Gas- und Heizkosten drastisch senken: Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln, dynamische Tarife einordnen und Rechner nutzen."
 date: 2026-08-08
@@ -15,14 +15,14 @@ cover:
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
 quellen:
-  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 36,8 ct/kWh"
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
-    datum: "2026-09-15"
-  - titel: "BDEW-Gaspreisanalyse: Erdgaspreise für Haushalte bei 10,2 ct/kWh"
+    datum: "2026-09-28"
+  - titel: "BDEW-Gaspreisanalyse: Erdgaspreise für Haushalte bei 11,93 ct/kWh"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
-    datum: "2026-09-15"
+    datum: "2026-09-28"
   - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
     herausgeber: "Verbraucherzentrale"
@@ -30,8 +30,8 @@ quellen:
   - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-09-01"
-faktencheck: "2026-10-02"
+    datum: "2026-09-28"
+faktencheck: "2026-10-13"
 ---
 
 Strom und Gas machen in deutschen Haushalten oft den größten Block der variablen Nebenkosten aus. Wer jahrelang im teuren Grundversorgungstarif bleibt oder veraltete Abschläge unhinterfragt abbuchen lässt, verliert Jahr für Jahr mehrere hundert Euro. Mit der richtigen Kombination aus verbrauchsreduzierenden Maßnahmen im Alltag und einem regelmäßigen, risikofreien Tarifwechsel holst du dir deine finanzielle Kontrolle zurück. In diesem umfassenden Ratgeber bündele ich alle Strategien für spürbar niedrigere Energiekosten – gestützt auf den 4K-Prüfpfad, konkrete Rechner, Praxis-Fallstudien und aktuelle Marktdaten für 2026.
@@ -58,12 +58,12 @@ Um eine fundierte Entscheidung zu treffen, benötigst du verlässliche Markt-Ben
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Strompreis Bundesdurchschnitt</div>
-      <div class="ff-radar-kpi__value">36,8 ct/kWh</div>
+      <div class="ff-radar-kpi__value">37,0 ct/kWh</div>
       <div class="ff-radar-kpi__source">Haushaltsstrom inkl. aller Abgaben &amp; Netzentgelte</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Gaspreis Bundesdurchschnitt</div>
-      <div class="ff-radar-kpi__value">10,2 ct/kWh</div>
+      <div class="ff-radar-kpi__value">11,93 ct/kWh</div>
       <div class="ff-radar-kpi__source">Einfamilienhaus / Mehrpersonen-Haushalt</div>
     </div>
     <div class="ff-radar-kpi">
