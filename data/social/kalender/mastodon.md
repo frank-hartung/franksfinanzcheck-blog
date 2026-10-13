@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 12.10.2026 23:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 13.10.2026 14:46 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,21 +13,50 @@
 ## Kommende Beiträge
 
 ### Di, 13. Oktober 2026
-- **07:30** ⏳ Handyvertrag kündigen: Frist und Kosten richtig prüfen — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
-- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _vergleich_ · Launch  
+- **17:30** ⏳ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/
+### Mi, 14. Oktober 2026
+- **07:30** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
+- **11:30** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
+### Do, 15. Oktober 2026
+- **07:30** ⏳ Warmwasser sparen: Die Rechnung hinter — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
+- **11:30** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+### Fr, 16. Oktober 2026
+- **07:30** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+- **11:30** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
+### Sa, 17. Oktober 2026
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **11:30** ⏳ Umzug mit Internet: Anschluss und Rufnummer mitnehmen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/
+### So, 18. Oktober 2026
+- **07:30** ⏳ Grundversorgung Strom und Gas: Was sie leistet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/
+- **11:30** ⏳ Einlagensicherung: Wie viel Guthaben geschützt ist — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/
+### Mo, 19. Oktober 2026
+- **07:30** ⏳ Zählerstand ablesen und melden: Schätzwerte vermeiden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/
+- **11:30** ⏳ Großeinkauf und Vorrat: Wann Bevorraten sich rechnet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/
 ### Sa, 24. Oktober 2026
-- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _frage_ · Evergreen  
+- **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _thread_ · Evergreen  
+- **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _takeaway_ · Evergreen  
+- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 13.10.2026 14:46 · Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer → https://mastodon.social/@FranksFinanzcheck/117433670652081666
 - ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
 - ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
 - ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
@@ -37,7 +66,6 @@
 - ✅ 06.10.2026 14:05 · Preiswert surfen: So findest du den optimalen DSL‑Anschluss → https://mastodon.social/@FranksFinanzcheck/117393872454593493
 - ✅ 05.10.2026 14:22 · Gasabschlag berechnen: So planst du die Heizsaison richtig → https://mastodon.social/@FranksFinanzcheck/117388279584058422
 - ✅ 04.10.2026 17:50 · Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp → https://mastodon.social/@FranksFinanzcheck/117383431263250864
-- ✅ 04.10.2026 10:52 · WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? → https://mastodon.social/@FranksFinanzcheck/117381789225405577
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

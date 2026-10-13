@@ -673,6 +673,20 @@ history:
     #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
   ref: '117429543158372236'
   ai: true
+- posted_at: '2026-10-13T14:46:44.421363+02:00'
+  channel: mastodon
+  slug: 2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung
+  title: 'Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer'
+  angle: takeaway
+  url: https://mastodon.social/@FranksFinanzcheck/117433670652081666
+  ok: true
+  text: "Vermeide unnötige Kosten – kündige rechtzeitig deinen Handyvertrag.  \nChecke\
+    \ \U0001F4C5 Laufzeit, Enddatum und den richtigen Kündigungsweg in deinen Unterlagen,\
+    \ denn eine automatische Verlängerung muss nicht gleich eine neue Langzeitbindung\
+    \ bedeuten.  \nMehr dazu: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#WLAN #Internet #DSL #Handytarif"
+  ref: '117433670652081666'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -698,4 +712,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-12T23:46:30.683620+02:00'
+updated_at: '2026-10-13T14:46:49.526353+02:00'
