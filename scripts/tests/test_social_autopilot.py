@@ -35,6 +35,7 @@ import social_images as images         # noqa: E402
 import social_planner as planner       # noqa: E402
 import social_calendar as calendar     # noqa: E402
 import social_studio as studio         # noqa: E402
+import schaltwerk_actions as act       # noqa: E402
 
 CFG = sch.load_config()
 CHANNELS = sch.channel_map(CFG)
@@ -120,10 +121,21 @@ class TestPlaybook(unittest.TestCase):
                 self.assertIsNotNone(sch.adapter_class(cid), f"{cid}: Adapter fehlt")
 
     def test_kein_kanal_ohne_link_regel(self):
+        # `destination` (seit Reparatur #716): Der Link reist als Ziel-Link des
+        # Beitrags – so arbeitet die Pinterest-API (`link` im Pin-Payload).
+        # Ein unbekannter Wert muss weiterhin durchfallen.
         for cid, ch in CHANNELS.items():
             with self.subTest(channel=cid):
                 self.assertIn((ch.get("text") or {}).get("link_position"),
-                              {"end", "first_comment", "none"})
+                              {"end", "first_comment", "none", "destination"})
+
+    def test_link_position_destination_braucht_linkpflicht(self):
+        for cid, ch in CHANNELS.items():
+            if (ch.get("text") or {}).get("link_position") != "destination":
+                continue
+            with self.subTest(channel=cid):
+                self.assertTrue((ch.get("text") or {}).get("link_required"),
+                                f"{cid}: destination ohne link_required ist sinnlos")
 
 
 class TestCopywriter(unittest.TestCase):
@@ -442,8 +454,12 @@ class TestStudioRollingPlan(unittest.TestCase):
              "scheduled_at": planner.iso(now + timedelta(hours=8)), "status": "planned"},
         ]}
         state = {"history": [], "failures": []}
-        healed, _ = studio.accelerate_recovery_slot(
-            schedule, state, CFG, "mastodon", now, {"mastodon"})
+        # Die Sofortheilung prüft seit #716 vor dem Vorziehen, ob der Slot das
+        # Freigabe-Gate besteht – dafür muss der Artikel im Bestand liegen.
+        with patch.object(studio.copy, "article_pool",
+                          return_value=[_article("eins"), _article("zwei")]):
+            healed, _ = studio.accelerate_recovery_slot(
+                schedule, state, CFG, "mastodon", now, {"mastodon"})
         self.assertTrue(healed)
         due = [it for it in planner.due_items(schedule, now=now)
                if it.get("channel") == "mastodon"]
@@ -599,6 +615,319 @@ class TestKalender(unittest.TestCase):
                                        {"history": []}, {}, {}, now)
         self.assertIn("Kanal-Kriterien", md)
         self.assertIn("Kommende Beiträge", md)
+
+
+# ============================================================  Dauerheilung #716
+#  Meldung #716 (12.10.2026): Kanal Mastodon 48 h stumm. Fünf verlorene Slots,
+#  jeder am Freigabe-Gate blockiert, niemand rückte nach. Diese Klassen halten
+#  die vier Hebel fest, die eine Wiederholung ausschließen:
+#    · Kanaltreue   – jeder Kanal hat für jeden Artikel einen sendbaren Winkel
+#    · Quarantäne   – wiederholt blockierte Paare belegen keinen Slot mehr
+#    · Nachrücken   – ein blockierter Slot kostet keinen Sendetermin
+#    · Ehrlichkeit  – „geheilt" heißt: es ist wirklich etwas rausgegangen
+
+
+class TestKanaltreue716(unittest.TestCase):
+    """Kein Kanal darf strukturell unsendbar sein (stiller Vollausfall)."""
+
+    @classmethod
+    def setUpClass(cls):
+        base = str(META.get("base_url") or copy.DEFAULT_BASE)
+        cls.pool = copy.article_pool(base_url=base)
+
+    def test_emoji_klassen_identisch_zum_gate(self):
+        # Der Texter baut Symbole zurück, das Gate zählt sie. Zwei Muster, die
+        # auseinanderlaufen, würden Beiträge bauen, die das eigene Gate ablehnt.
+        self.assertEqual(copy.EMOJI_RX.pattern, gate.EMOJI_RX.pattern)
+
+    def test_jeder_kanal_hat_mindestens_einen_sendbaren_winkel(self):
+        self.assertTrue(self.pool, "kein Artikel im Bestand")
+        for cid, ch in CHANNELS.items():
+            with self.subTest(kanal=cid):
+                unsendbar = []
+                for art in self.pool:
+                    frei = False
+                    for ang in (ch.get("angles") or ["nutzen"]):
+                        pkg = copy.compose(art, cid, ch, ang, META, use_llm=False)
+                        src = os.path.join(BLOG_DIR, "static", art.get("cover") or "")
+                        if os.path.isfile(src):
+                            pkg["media_path"] = src
+                            pkg["media_url"] = f"https://franksfinanzcheck.de/{art.get('cover')}"
+                        ok, _viol, _m = gate.check(pkg, ch, META, history=[])
+                        if ok:
+                            frei = True
+                            break
+                    if not frei:
+                        unsendbar.append(art["slug"])
+                self.assertEqual(unsendbar, [],
+                                 f"{cid}: {len(unsendbar)} Artikel in keinem Winkel sendbar")
+
+    def test_linkedin_haelt_hashtags_im_beitrag(self):
+        ch = CHANNELS["linkedin"]
+        minimum = int(((ch.get("text") or {}).get("hashtags") or {}).get("min") or 0)
+        pkg = copy.compose(_article("linkedin-probe"), "linkedin", ch, "nutzen",
+                           META, use_llm=False)
+        # Link im ersten Kommentar (Reichweiten-Standard), Hashtags im Text.
+        self.assertIn(pkg["url"], pkg.get("comment") or "")
+        self.assertGreaterEqual(len(gate.TAG_RX.findall(pkg["text"])), minimum)
+        ok, viol, _ = gate.check(pkg, ch, META, history=[])
+        self.assertTrue(ok, f"LinkedIn blockiert: {viol}")
+
+    def test_pinterest_link_reist_als_ziel_link(self):
+        ch = CHANNELS["pinterest"]
+        self.assertEqual((ch.get("text") or {}).get("link_position"), "destination")
+        pkg = copy.compose(_article("pin-probe"), "pinterest", ch, "nutzen",
+                           META, use_llm=False)
+        pkg["media_url"] = "https://franksfinanzcheck.de/cover.jpg"
+        self.assertNotIn("http", pkg["text"], "nackter Link in der Pin-Beschreibung")
+        ok, viol, _ = gate.check(pkg, ch, META, history=[])
+        self.assertTrue(ok, f"Pinterest blockiert: {viol}")
+
+    def test_emoji_budget_wird_eingehalten(self):
+        # Der Bestand enthält Pfeile („Kosten sehen → Konditionen rechnen").
+        # Auf Kanälen mit Symbol-Verbot dürfen sie nicht durchrutschen.
+        for cid in ("reddit", "linkedin"):
+            ch = CHANNELS[cid]
+            with self.subTest(kanal=cid):
+                pkg = copy.compose(_article("symbol-probe"), cid, ch, "nutzen",
+                                   META, use_llm=False)
+                self.assertEqual(copy.count_emoji(pkg["text"])
+                                 if hasattr(copy, "count_emoji") else
+                                 len(copy.EMOJI_RX.findall(pkg["text"])), 0)
+
+    def test_auffuellpool_erreicht_hashtag_minimum(self):
+        # Karger Artikel: ein Tag. Instagram verlangt fünf – der Schlusslicht-
+        # Pool muss die Lücke schließen, sonst blockiert L4 den Kanal komplett.
+        ch = CHANNELS["instagram"]
+        artikel = _article("arm-an-tags")
+        artikel["tags"] = ["Einziges Tag"]
+        artikel["keywords"] = []
+        tags = copy.pick_hashtags(artikel, ch)
+        minimum = int(((ch.get("text") or {}).get("hashtags") or {}).get("min") or 0)
+        self.assertGreaterEqual(len(tags), minimum, f"nur {tags}")
+
+
+class TestGateQuarantaene(unittest.TestCase):
+    """Wiederholt blockierte Paare belegen keinen Slot mehr."""
+
+    def setUp(self):
+        self.now = planner.localize(datetime(2026, 10, 12, 9, 0))
+
+    @staticmethod
+    def _state_mit_blockaden(slug: str, n: int, kanal: str = "mastodon") -> dict:
+        return {
+            "version": 1,
+            "history": [],
+            "failures": [{
+                "at": planner.iso(planner.localize(datetime(2026, 10, 11, 8, 0))
+                                  + timedelta(hours=i)),
+                "channel": kanal, "slug": slug,
+                "reason": "L9 Zahl ohne Beleg im Artikel: 503020",
+            } for i in range(n)],
+        }
+
+    def test_zwei_gate_blockaden_wirken_quarantaene(self):
+        state = self._state_mit_blockaden("blocker", 2)
+        quar = planner.quarantiniert(state, self.now)
+        self.assertIn(("mastodon", "blocker"), quar)
+        self.assertIn("L9", quar[("mastodon", "blocker")])
+
+    def test_einzelblockade_ist_noch_kein_befund(self):
+        state = self._state_mit_blockaden("blocker", 1)
+        self.assertEqual(planner.quarantiniert(state, self.now), {})
+
+    def test_alte_blockaden_verfallen(self):
+        state = self._state_mit_blockaden("blocker", 3)
+        for f in state["failures"]:
+            f["at"] = planner.iso(planner.localize(datetime(2026, 8, 1, 8, 0)))
+        self.assertEqual(planner.quarantiniert(state, self.now), {})
+
+    def test_sendefehler_zaehlen_nicht(self):
+        # API-Fehler sind Sache der Versuchszähler, nicht der Gate-Quarantäne.
+        state = {"version": 1, "history": [], "failures": [
+            {"at": planner.iso(self.now), "channel": "mastodon", "slug": "x",
+             "reason": "HTTP 401 unauthorized"} for _ in range(4)]}
+        self.assertEqual(planner.quarantiniert(state, self.now), {})
+
+    def test_quarantaene_nimmt_paar_aus_den_kandidaten(self):
+        state = self._state_mit_blockaden("artikel-01", 2)
+        pool = TestPlanner._pool(self.now)
+        pool[1]["slug"] = "artikel-01"
+        cands = planner._candidates(CFG, pool, state, self.now, {})
+        self.assertNotIn("artikel-01", {c["slug"] for c in cands
+                                        if c["channel"] == "mastodon"})
+        self.assertIn("artikel-02", {c["slug"] for c in cands
+                                     if c["channel"] == "mastodon"})
+
+    def test_geplante_slots_werden_ausgesetzt(self):
+        state = self._state_mit_blockaden("artikel-01", 2)
+        schedule = {"items": [{
+            "id": "mastodon:artikel-01:nutzen:2026-10-13", "channel": "mastodon",
+            "slug": "artikel-01", "angle": "nutzen", "kind": "launch",
+            "date": "2026-10-13", "time": "07:30",
+            "scheduled_at": planner.iso(self.now + timedelta(days=1)),
+            "status": "planned", "attempts": 0, "reason": ""}]}
+        with patch.object(planner, "load_schedule", return_value=schedule):
+            plan = planner.build_plan(CFG, TestPlanner._pool(self.now), state,
+                                      now=self.now, ready_channels={"mastodon"})
+        # Die Quarantäne gilt je (Kanal, Artikel): Facebook darf denselben
+        # Artikel weiter planen, Mastodon nicht.
+        geplant = [it for it in planner.planned_items(plan)
+                   if it.get("slug") == "artikel-01" and it.get("channel") == "mastodon"]
+        self.assertEqual(geplant, [], "Quarantäne-Paar bleibt im Plan")
+        self.assertIn("mastodon|artikel-01", plan.get("quarantaene") or {})
+
+
+    def test_quarantaene_hebt_sich_selbst_auf(self):
+        # Ein reparierter Artikel darf nicht 21 Tage gesperrt bleiben: Besteht
+        # er die Vorprüfung wieder, gibt der Planer ihn sofort frei.
+        state = self._state_mit_blockaden("artikel-01", 2)
+        pool = TestPlanner._pool(self.now)
+        pool[1]["slug"] = "artikel-01"
+        with patch.object(planner, "load_schedule", return_value={"items": []}):
+            plan = planner.build_plan(CFG, pool, state, now=self.now,
+                                      ready_channels={"mastodon"},
+                                      validator=lambda a, c, ch, w: (True, ""))
+        self.assertIn("mastodon|artikel-01", plan.get("quarantaene_gehoben") or [])
+        self.assertNotIn("mastodon|artikel-01", plan.get("quarantaene") or {})
+        self.assertTrue([it for it in planner.planned_items(plan)
+                         if it.get("slug") == "artikel-01"
+                         and it.get("channel") == "mastodon"],
+                        "freigegebenes Paar wurde nicht wieder eingeplant")
+
+    def test_ohne_vorpruefung_bleibt_quarantaene_stehen(self):
+        # Offline-Planung ohne Validator: keine Prüfung, keine Aufhebung.
+        state = self._state_mit_blockaden("artikel-01", 2)
+        pool = TestPlanner._pool(self.now)
+        pool[1]["slug"] = "artikel-01"
+        with patch.object(planner, "load_schedule", return_value={"items": []}):
+            plan = planner.build_plan(CFG, pool, state, now=self.now,
+                                      ready_channels={"mastodon"})
+        self.assertEqual(plan.get("quarantaene_gehoben"), None)
+        self.assertIn("mastodon|artikel-01", plan.get("quarantaene") or {})
+
+
+class TestNachruecken716(unittest.TestCase):
+    """Ein blockierter Slot kostet keinen Sendetermin mehr."""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp(prefix="social-backfill-")
+        self.old_schedule, self.old_state = planner.SCHEDULE_FILE, planner.STATE_FILE
+        planner.SCHEDULE_FILE = os.path.join(self.tmp, "schedule.yaml")
+        planner.STATE_FILE = os.path.join(self.tmp, "state.yaml")
+        # Uhr der Wanduhr entnehmen, nicht pinnen: `run_once()` ruft echt
+        # `planner.prune()` (berlin_now) und die Artikel-Fixtures datieren von
+        # der Wanduhr. Eine gepinnte Plan-Uhr wäre eine Zeitbombe – genau die
+        # Klasse, die scripts/selftest_clock.py --offset 97 aufspürt.
+        self.now = planner.berlin_now().replace(minute=30, second=0, microsecond=0)
+        # „Gift"-Artikel: Die Zahl steht NUR in den Textbausteinen, aus denen
+        # der Texter den Beitrag baut (hook/faq) – nicht im Belegmaterial des
+        # Gates (kurzantwort/description/takeaways/keywords/tags). Genau so
+        # entsteht eine echte L9-Blockade: 9999 ist nirgends gedeckt.
+        self.gift = _article("gift-artikel")
+        self.gift["title"] = "Stromkosten senken mit System für gift-artikel"
+        self.gift["hook"] = "Spare 9999 € sofort mit diesem einen Trick."
+        self.gift["hook_sentences"] = ["Spare 9999 € sofort mit diesem einen Trick.",
+                                       "Wer 9999 € zurücklegt, wechselt in zehn Minuten."]
+        self.gift["faq_question"] = "Wie sparst du 9999 € im Jahr?"
+        self.gift["faq_answer"] = "Mit 9999 € Ersparnis pro Jahr rechnest du so."
+        # takeaways leer → die Aufzählung fällt auf hook_sentences zurück und
+        # trägt dieselbe unbelegte Zahl. Damit ist der Artikel in JEDEM Winkel
+        # blockiert – genau der Zustand, der #716 ausgelöst hat.
+        self.gift["takeaways"] = []
+        self.gift["numbers"] = ["9999 €"]
+        self.pool = [self.gift, _article("guter-artikel")]
+
+    def tearDown(self):
+        planner.SCHEDULE_FILE, planner.STATE_FILE = self.old_schedule, self.old_state
+
+    def test_vorpruefung_erkennt_unsendbaren_artikel(self):
+        pruefen = studio.gate_validator(META, {"history": [], "failures": []})
+        ch = CHANNELS["mastodon"]
+        frei, grund = pruefen(self.gift, "mastodon", ch, "nutzen")
+        self.assertFalse(frei)
+        self.assertIn("L9", grund)
+        self.assertTrue(pruefen(self.pool[1], "mastodon", ch, "nutzen")[0])
+
+    def test_blockierter_slot_wird_nachbesetzt(self):
+        heute = self.now.date().isoformat()
+        schedule = {"items": [{
+            "id": f"mastodon:gift-artikel:nutzen:{heute}", "channel": "mastodon",
+            "slug": "gift-artikel", "angle": "nutzen", "kind": "launch",
+            "date": heute, "time": self.now.strftime("%H:%M"),
+            "scheduled_at": planner.iso(self.now - timedelta(minutes=5)),
+            "status": "planned", "attempts": 0, "reason": ""}]}
+        state = {"version": 1, "history": [], "failures": []}
+        gesendet = []
+
+        class StubAdapter:
+            def configured(self):
+                return True, ""
+
+            def publish(self, pkg):
+                gesendet.append(pkg["slug"])
+                return sch.PublishResult(ok=True, url="https://mastodon.social/@x/1",
+                                         ref="1")
+
+        with patch.object(studio.planner, "load_state", return_value=state), \
+             patch.object(studio.planner, "load_schedule", return_value=schedule), \
+             patch.object(studio.planner, "build_plan", return_value=schedule), \
+             patch.object(studio.copy, "article_pool", return_value=self.pool), \
+             patch.object(studio.sch, "get_adapter", return_value=StubAdapter()), \
+             patch.object(studio, "write_cockpit"):
+            out = studio.run_once(CFG, now=self.now, channel="mastodon")
+
+        self.assertEqual(gesendet, ["guter-artikel"], "Ersatzartikel ging nicht raus")
+        self.assertEqual(out["results"]["blocked"], 1)
+        self.assertEqual(out["results"]["backfilled"], 1)
+        self.assertEqual(out["results"]["sent"], 1)
+        self.assertEqual([e["slug"] for e in state["history"]], ["guter-artikel"])
+        blockiert = [it for it in schedule["items"] if it.get("status") == "blocked"]
+        self.assertEqual([it["slug"] for it in blockiert], ["gift-artikel"])
+        self.assertIn("L9", blockiert[0]["reason"])
+
+    def test_ohne_sendbaren_ersatz_bleibt_slot_leer_und_sichtbar(self):
+        heute = self.now.date().isoformat()
+        schedule = {"items": [{
+            "id": f"mastodon:gift-artikel:nutzen:{heute}", "channel": "mastodon",
+            "slug": "gift-artikel", "angle": "nutzen", "kind": "launch",
+            "date": heute, "time": self.now.strftime("%H:%M"),
+            "scheduled_at": planner.iso(self.now - timedelta(minutes=5)),
+            "status": "planned", "attempts": 0, "reason": ""}]}
+        state = {"version": 1, "history": [], "failures": []}
+        with patch.object(studio.planner, "load_state", return_value=state), \
+             patch.object(studio.planner, "load_schedule", return_value=schedule), \
+             patch.object(studio.planner, "build_plan", return_value=schedule), \
+             patch.object(studio.copy, "article_pool", return_value=[self.gift]), \
+             patch.object(studio.sch, "get_adapter", return_value=None), \
+             patch.object(studio, "write_cockpit"):
+            out = studio.run_once(CFG, now=self.now, channel="mastodon", dry_run=True)
+        self.assertEqual(out["results"]["backfilled"], 0)
+        self.assertEqual(out["results"]["sent"], 0)
+
+
+class TestHeilungEhrlichkeit(unittest.TestCase):
+    """„Geheilt" darf nur melden, wer wirklich gesendet hat."""
+
+    def test_recovery_ohne_versand_ist_kein_erfolg(self):
+        bericht = {"results": {"sent": 0, "failed": 0, "blocked": 1,
+                               "backfilled": 0, "standby": 0, "deferred": 0}}
+        with patch("social_channels.load_config", return_value=CFG), \
+             patch("social_studio.run_once", return_value=bericht):
+            res = act.aktion_social_autopilot_lauf(
+                {"modus": "recover", "kanal": "mastodon"}, {}, {"dry_run": False})
+        self.assertEqual(res["status"], "fehler")
+        self.assertIs(res["geheilt"], False)
+
+    def test_recovery_mit_versand_ist_geheilt(self):
+        bericht = {"results": {"sent": 1, "failed": 0, "blocked": 1,
+                               "backfilled": 1, "standby": 0, "deferred": 0}}
+        with patch("social_channels.load_config", return_value=CFG), \
+             patch("social_studio.run_once", return_value=bericht):
+            res = act.aktion_social_autopilot_lauf(
+                {"modus": "recover", "kanal": "mastodon"}, {}, {"dry_run": False})
+        self.assertEqual(res["status"], "ok")
+        self.assertIs(res["geheilt"], True)
 
 
 if __name__ == "__main__":  # pragma: no cover

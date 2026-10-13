@@ -67,6 +67,24 @@ KEYWORD_HINTS = [
 ]
 WEAK_TAG_RX = re.compile(r"gebuehren|fuehrungs|vergleich$|zuhause|vorbereitung|hacks$", re.I)
 
+# Schlusslicht-Pool: Reichen Titel, Keywords und Pillar nicht aus, um das
+# Hashtag-MINIMUM eines Kanals zu erfüllen (Instagram: 5, LinkedIn: 3),
+# wird aus dieser Liste aufgefüllt – thematisch nah, suchbar, markenkonform.
+# Ohne diesen Pool lief die alte Auffüll-Zeile `add("Finanzen")` ins Leere,
+# weil `add()` genau dieses Token ausschließt: LinkedIn war dadurch zu 100 %
+# vom Gate blockiert (Meldung #716, Nebenbefund).
+FALLBACK_TAGS = ["Finanzen", "Fixkosten", "Spartipps", "Geldsparen", "Haushaltsbudget",
+                 "Vorsorgen", "Tarifvergleich", "Alltagskosten", "BudgetPlanen",
+                 "Verbrauchertipps", "Finanzwissen"]
+
+# Gleiche Klassen wie social_gate.EMOJI_RX – bewusst doppelt gehalten, weil
+# das Gate den Texter nicht importieren darf (Zirkelschluss). Die Parität
+# bewacht scripts/tests/test_social_autopilot.py (TestKanaltreue).
+EMOJI_RX = re.compile(
+    "[" "\u2190-\u21FF" "\u2600-\u27BF" "\u2B00-\u2BFF" "\U0001F000-\U0001FAFF" "]"
+)
+PFEIL_RX = re.compile("[\u2190-\u21FF\u2794\u279C\u27A1]")
+
 # Kuratierte Mythen je Pillar (für den Winkel „mythos").
 # Bewusst allgemeingültig formuliert – der Fakt daneben kommt immer
 # aus dem Artikel selbst, nie aus dieser Liste.
@@ -289,10 +307,38 @@ def to_hashtag(phrase: str) -> str:
     return "".join(_tag_token(w) for w in re.split(r"[\s\-/]+", phrase or "") if w)
 
 
+def emoji_budget_halten(text: str, budget: int) -> str:
+    """Hält das Emoji-/Symbol-Budget des Kanals ein (L5 im Gate).
+
+    Artikel übernehmen Symbole aus dem Bestand (z. B. „Kosten sehen →
+    Konditionen rechnen"). Auf Reddit (Budget 0) oder Telegram (2) machte das
+    den Beitrag unsendbar. Pfeile werden zu Gedankenstrichen – sie tragen
+    Bedeutung –, übrige Symbole entfallen ersatzlos.
+    """
+    budget = max(0, int(budget or 0))
+    behalten = 0
+
+    def ersetze(m: "re.Match[str]") -> str:
+        nonlocal behalten
+        if behalten < budget:
+            behalten += 1
+            return m.group(0)
+        return "–" if PFEIL_RX.match(m.group(0)) else ""
+
+    out = EMOJI_RX.sub(ersetze, text or "")
+    return re.sub(r"[ \t]{2,}", " ", out)
+
+
 def pick_hashtags(article: dict, channel_cfg: dict) -> list[str]:
-    """Suchbare, kurze CamelCase-Tags – kanalweise begrenzt."""
+    """Suchbare, kurze CamelCase-Tags – kanalweise begrenzt UND minimumssicher.
+
+    Das Gate verlangt je Kanal eine Mindestzahl (Instagram 5, LinkedIn 3).
+    Reichen Artikel-Tags nicht, füllt `FALLBACK_TAGS` auf – sonst blockiert
+    L4 den Kanal vollständig, obwohl Text und Bild einwandfrei sind.
+    """
     ht = ((channel_cfg or {}).get("text") or {}).get("hashtags") or {}
     maximum = int(ht.get("max") or 3)
+    minimum = min(int(ht.get("min") or 0), maximum)
     max_len = int(ht.get("max_len") or 20)
     corpus = " ".join([
         article.get("title") or "", article.get("kurzantwort") or "",
@@ -329,8 +375,20 @@ def pick_hashtags(article: dict, channel_cfg: dict) -> list[str]:
     if len(picked) < 2:
         for h in PILLAR_TAGS.get(article.get("pillar") or "", []):
             add(h)
-    if len(picked) < maximum:
-        add("Finanzen")
+
+    # Minimums-Garantie: Der Schlusslicht-Pool darf auch „Finanzen" setzen,
+    # das `add()` aus dem Artikel-Korpus bewusst fernhält.
+    for token in FALLBACK_TAGS:
+        if len(picked) >= max(minimum, 1) or len(picked) >= maximum:
+            break
+        if len(token) > max_len:
+            continue
+        low = token.lower()
+        if low in seen or any(low.startswith(p.lower()) or p.lower().startswith(low)
+                              for p in picked):
+            continue
+        seen.add(low)
+        picked.append(token)
     return picked[:maximum]
 
 
@@ -487,6 +545,16 @@ def compose(article: dict, channel_id: str, channel_cfg: dict, angle: str,
     pkg["text"] = _fit_limit(pkg.get("text") or "", url, tags_txt, channel_cfg)
     if pkg.get("thread"):
         pkg["thread"] = [_fit_limit(t, url, tags_txt, channel_cfg) for t in pkg["thread"]]
+
+    # Kanaltreue: Das Emoji-/Symbol-Budget des Kanals gilt JEDEM Teil.
+    # Symbole aus dem Artikelbestand (Pfeile, Häkchen) dürfen einen Beitrag
+    # nicht unsendbar machen – sie werden kanalgerecht zurückgebaut.
+    budget = int(((channel_cfg or {}).get("text") or {}).get("emoji_max") or 0)
+    pkg["text"] = emoji_budget_halten(pkg.get("text") or "", budget)
+    if pkg.get("thread"):
+        pkg["thread"] = [emoji_budget_halten(t, budget) for t in pkg["thread"]]
+    if pkg.get("comment"):
+        pkg["comment"] = emoji_budget_halten(pkg["comment"], budget)
 
     pkg.update({
         "channel": channel_id,
@@ -681,7 +749,11 @@ def _compose_business(article, cfg, angle, url, tags, tags_txt, link_pos):
     parts = [opener, "", body, "", block, "", closer]
     if link_line:
         parts.append(link_line)
-    if tags_txt and link_pos != "first_comment":
+    # Hashtags bleiben IMMER im Beitrag: Bei `first_comment` wandert nur der
+    # LINK in den Kommentar (LinkedIn-Reichweitenstandard), die Tags gehören
+    # ans Textende. Vor der Reparatur #716 fielen sie dort ersatzlos weg –
+    # L4 „zu wenige Hashtags" blockierte damit jeden LinkedIn-Beitrag.
+    if tags_txt:
         parts.append(tags_txt)
     text = "\n".join(p for p in parts if p is not None).strip()
     text = re.sub(r"\n{3,}", "\n\n", text)
@@ -692,7 +764,7 @@ def _compose_business(article, cfg, angle, url, tags, tags_txt, link_pos):
         parts = [opener, "", body, "", block, "", closer]
         if link_line:
             parts.append(link_line)
-        if tags_txt and link_pos != "first_comment":
+        if tags_txt:
             parts.append(tags_txt)
         text = re.sub(r"\n{3,}", "\n\n", "\n".join(p for p in parts if p is not None).strip())
     if len(text) > max_chars:
@@ -789,12 +861,17 @@ def _compose_pin(article, cfg, angle, url, tags, tags_txt, link_pos):
     body = trim(f"{lead}{hook}", 260)
     cta = "Jetzt die Spartipps auf FranksFinanzcheck lesen!"
     parts = [body, cta]
+    # `destination` (Playbook-Standard für Pinterest): Die Artikel-URL reist
+    # als Ziel-Link des Pins, nicht durch die Beschreibung. Nur bei
+    # `end`/`first_comment` steht sie zusätzlich im Text.
+    if link_pos == "end" and url:
+        parts.append(url)
     if tags_txt:
         parts.append(tags_txt)
     text = " ".join(parts)
     max_chars = int((cfg.get("text") or {}).get("max_chars") or 500)
     if len(text) > max_chars:
-        text = _shrink(parts, max_chars, keep=(tags_txt,))
+        text = _shrink(parts, max_chars, keep=(tags_txt, url if link_pos == "end" else ""))
     return {"text": text, "headline": title}
 
 

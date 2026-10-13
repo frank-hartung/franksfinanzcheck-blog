@@ -97,6 +97,35 @@ Platzhalter (`{artikel.slug}`, `{{ titel }}`) ziehen ihre Werte aus dem, was
 der Trigger unter `daten` liefert. Unbekannte Platzhalter werden zu einer
 leeren Zeichenkette – sie reißen nichts ab.
 
+### Bedingte Schritte (`wenn:`)
+
+Eine Aktion darf von dem abhängen, was der Schritt davor **wirklich** erreicht
+hat – Zapiers „Only continue if". Die Bedingung nutzt dieselben Operatoren wie
+`filter:` und liest die Ergebnisse der Vorgänger unter `schritte.<nr>.<feld>`:
+
+```yaml
+    aktionen:
+      - typ: social_autopilot_lauf          # Schritt 1: selbst heilen
+        stoppe_bei_fehler: false
+        params: {modus: "recover", kanal: "{kanal}", limit: 1}
+      - typ: github_issue                   # Schritt 2: nur wenn Schritt 1 nichts brachte
+        wenn:
+          - feld: schritte.1.geheilt
+            operator: ist_falsch
+        params: {titel: "Kanal {kanal_label} sendet nicht"}
+```
+
+Fehlt das Feld – etwa weil der Vorgänger abgestürzt ist –, gilt es als falsch:
+`ist_falsch` greift, die Eskalation läuft. Die Fail-safe-Richtung ist Absicht,
+lieber einmal zu viel melden als einmal zu wenig.
+Übersprungene Schritte erscheinen im Protokoll als `uebersprungen` und im
+Laufbericht unter „bedingt übersprungen".
+
+Hintergrund ist Meldung #716: Das Issue „Kanal Mastodon sendet seit 48 h nicht"
+entstand sieben Sekunden, nachdem die Sofortheilung denselben Kanal wieder
+beliefert hatte. Seither meldet `social_autopilot_lauf` ehrlich `geheilt`
+(nur ein echter Versand zählt), und die Eskalation ist daran geknüpft.
+
 Danach **immer**: `python3 scripts/schaltwerk.py --selftest && \
 python3 scripts/schaltwerk.py --dry-run`.
 

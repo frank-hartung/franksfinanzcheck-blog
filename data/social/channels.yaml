@@ -397,7 +397,12 @@ channels:
       title_max_chars: 100
       hashtags: {min: 2, max: 5, style: "camel", max_len: 20}
       emoji_max: 0
-      link_position: "end"
+      # `destination`: Die Artikel-URL reist als ZIEL-LINK des Pins (so sieht
+      # es die Pinterest-API vor – `link` im Pin-Payload), nicht als nackter
+      # Link in der Beschreibung. Reparatur #716: Vorher stand hier `end`,
+      # der Texter baute den Link aber nie ein → L4/L2 blockierten 44 von 44
+      # Artikeln, der Kanal wäre bei hinterlegtem Token dauerhaft stumm.
+      link_position: "destination"         # end | first_comment | none | destination
       link_required: true
       thread: {supported: false, max_parts: 1}
     media:
