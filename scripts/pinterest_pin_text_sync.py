@@ -49,6 +49,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import yaml  # noqa: E402
+import pinterest_hashtags as ph  # noqa: E402  – Hashtag-SSOT (#729)
 from post_utils import (list_post_paths, slug_of, join_article,  # noqa: E402
                         doppel_freies_feld)
 
@@ -142,6 +143,12 @@ def clean_pin_description(beschreibung: str, affiliate: bool = False) -> str:
     t = re.sub(r"\s+", " ", t)
     if not t.lstrip().startswith("*Werbung"):
         t = "*Werbung | " + t
+    # Hashtag-Hygiene VOR der Längen-Kappung: Ein kuratierter Masterplan-Text
+    # darf nie mehr als drei Tags (oder Umlaute/Großbuchstaben) ins
+    # Frontmatter tragen – das ist die Quelle, aus der Button, Feed und
+    # Pin-API lesen (#729). Die Kappung unten würde Tags sonst mitten
+    # durchschneiden.
+    t, _aenderungen = ph.heile(t)
     # Kürzung an Wortgrenze
     if len(t) > PIN_DESC_MAX:
         cut = t[:PIN_DESC_MAX]
@@ -154,8 +161,10 @@ def clean_pin_description(beschreibung: str, affiliate: bool = False) -> str:
 
 
 def pin_desc_valid(d: str) -> bool:
+    """Gültig = Länge, kein rohes & UND Hashtag-Hygiene (P8, #729)."""
     d = (d or "").strip()
-    return len(d) >= PIN_DESC_MIN and len(d) <= PIN_DESC_MAX and "&" not in d
+    return (len(d) >= PIN_DESC_MIN and len(d) <= PIN_DESC_MAX and "&" not in d
+            and ph.ist_konform(d))
 
 
 def pin_target_slug(pin: dict) -> str:
@@ -302,6 +311,20 @@ def _selftest() -> list[str]:
     # &-Sanierung
     if "&" in clean_pin_description("Strom & Gas"):
         fehler.append("&-Sanierung defekt")
+    # Hashtag-Hygiene (P8, #729): Der Schreiber darf keinen Text erzeugen,
+    # den die nächste Prüfung als Befund meldet – und `pin_desc_valid` muss
+    # die Regel der SSOT fragen, nicht nur Länge und '&'.
+    d_ht = clean_pin_description("*Werbung | Text. #umzug #internet #rufnummer #dsl #wechsel")
+    if not ph.ist_konform(d_ht) or len(ph.tags_normalisiert(d_ht)) > ph.HASHTAG_MAX:
+        fehler.append(f"Hashtag-Kappung im Schreiber defekt: {d_ht[-40:]!r}")
+    d_umlaut = clean_pin_description("*Werbung | " + "Ein langer Satz über Gas und "
+                                     "Zählerstände. " * 6 + "#zählerstand #gas")
+    if "#zählerstand" in d_umlaut or "#zaehlerstand" not in d_umlaut:
+        fehler.append(f"Umlaut-Hashtag wird nicht kanonisiert (#729): {d_umlaut[-40:]!r}")
+    roh_umlaut = ("*Werbung | Ein langer Satz über Gas und Zählerstände. " * 6
+                  + "#zählerstand #gas")
+    if pin_desc_valid(roh_umlaut):
+        fehler.append("pin_desc_valid akzeptiert einen Umlaut-Hashtag (#729)")
     # Scoring: gleiche Themen müssen > MIN scoren
     p = {"titel": "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe",
          "keywords": "stromfresser finden, strom sparen tipps",

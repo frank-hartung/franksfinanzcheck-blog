@@ -11,7 +11,12 @@ Was geheilt wird (deterministisch, idempotent):
   H4  Cover-Alt           natürlicher Titel statt „Spar-Tipp: 2026 …"
   H5  Cover-Bilder        1000×1500 (2:3), Brand-Band, Stale-Titel → neu
   H6  Pin-SEO-Felder      pin_title (≤100, optimal 40–60), pin_description
-                          (≤500, Keyword + CTA + max. 3 ASCII-Hashtags)
+                          (≤500, Keyword + CTA + Hashtags nach
+                          scripts/pinterest_hashtags.py: max. 3, [a-z0-9],
+                          Block am Ende). Gültig heißt ab 13.10.2026 (#729)
+                          auch *hashtag-konform* – vorher galt ein Text mit
+                          fünf Tags als „Premium" und wurde nie geheilt,
+                          während der Report ihn täglich meldete.
   H7  Tags                aus dem kuratierten Register (Pinterest-/Related-Matching)
 
 Aufruf:
@@ -34,6 +39,7 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
+import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
 from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
 
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-SEO-HEALER-REPORT.md")
@@ -51,7 +57,9 @@ PIN_TITLE_OPT = 60
 PIN_DESC_MIN = 220
 PIN_DESC_MAX = 500
 KEYWORDS_MIN = 3
-HASHTAG_MAX = 3
+# Eine Wahrheit: die Zahl kommt aus der Hashtag-SSOT (scripts/pinterest_hashtags.py),
+# nicht aus einer zweiten Konstante in dieser Datei (#729).
+HASHTAG_MAX = ph.HASHTAG_MAX
 
 STOP = {
     "der", "die", "das", "den", "dem", "des", "ein", "eine", "einer", "eines",
@@ -405,17 +413,12 @@ def keywords_from_title(title: str, existing: list[str] | None = None) -> list[s
 
 
 def pin_hashtags(keywords: list[str], slug: str = "") -> list[str]:
-    """Max. 3 ASCII-Hashtags (Pinterest-SEO: keine Umlaute)."""
-    tags = []
-    pool = list(keywords) + [slug.replace("-", " ")]
-    for p in pool:
-        words = re.findall(r"[a-z0-9]+", _ascii(p).lower())
-        tag = "".join(words)
-        if 3 <= len(tag) <= 24 and tag not in tags:
-            tags.append(tag)
-        if len(tags) >= HASHTAG_MAX:
-            break
-    return tags
+    """Max. 3 ASCII-Hashtags – die Regel liegt in scripts/pinterest_hashtags.py.
+
+    Ein zweiter Wortlaut derselben Regel wäre genau die Bauart, die #729
+    erzeugt hat (Check, Heiler und Report zählten drei verschiedene Dinge).
+    """
+    return ph.tags_bauen(keywords, slug, max_tags=HASHTAG_MAX)
 
 
 def _ascii(s: str) -> str:
@@ -448,7 +451,7 @@ def build_pin_description(title: str, description: str, keywords: list[str], slu
     # Roh-& vermeiden (Pinterest-Check P4)
     desc = desc.replace("&", "und")
     tags = pin_hashtags(keywords, slug)
-    ht = " ".join("#" + t for t in tags)
+    ht = ph.als_text(tags)
     cta = "Mehr Spartipps auf FranksFinanzcheck!"
     text = f"*Werbung | {desc} {cta} {ht}".strip()
     if len(text) > PIN_DESC_MAX:
@@ -586,11 +589,11 @@ def audit_article(a: dict) -> list[str]:
             issues.append(f"pin_description zu lang ({len(pd)})")
         if "&" in pd:
             issues.append("pin_description enthält rohes &")
-        tags = re.findall(r"#([A-Za-z0-9]+)", pd)
-        if len(tags) > HASHTAG_MAX:
-            issues.append(f"zu viele Hashtags ({len(tags)})")
-        if any(re.search(r"[äöüß]", t) for t in tags):
-            issues.append("Umlaut-Hashtag")
+        # Hashtag-Hygiene: EINE Regel (scripts/pinterest_hashtags.py, P8).
+        # Die alte Zählung `[A-Za-z0-9]+` plus Umlaut-Suche daneben konnte den
+        # Umlaut-Fall nie melden (das Muster schließt Umlaute aus) – er stand
+        # als #zählerstand live im Bestand (#729).
+        issues.extend(ph.befunde(pd, max_tags=HASHTAG_MAX))
     return issues
 
 
@@ -734,19 +737,36 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
     # Titel: & ist erlaubt (nur Button-Beschreibungen müssen &-frei sein)
     pin_title_ok = (bool(a["pin_title"].strip())
                     and len(a["pin_title"]) <= PIN_TITLE_MAX)
-    pin_desc_ok = (bool(a["pin_description"].strip())
-                   and PIN_DESC_MIN <= len(a["pin_description"]) <= PIN_DESC_MAX
-                   and "&" not in a["pin_description"])
+    beschreibung = a["pin_description"].strip()
+    # „Gültig" heißt seit #729 auch hashtag-konform: Der Text ist sonst
+    # Premium-Material, das JEDEN Lauf erneut gemeldet wurde, ohne dass
+    # eine Stelle ihn heilen durfte (Audit und Heilung widersprachen sich).
+    pin_desc_ok = (bool(beschreibung)
+                   and PIN_DESC_MIN <= len(beschreibung) <= PIN_DESC_MAX
+                   and "&" not in beschreibung
+                   and ph.ist_konform(beschreibung, max_tags=HASHTAG_MAX))
     if not pin_title_ok:
         content = fm_set(content, "pin_title", pin_title)
         actions.append("pin_title gesetzt")
     else:
         pin_title = a["pin_title"].strip()  # Premium-Text behalten
     if not pin_desc_ok:
-        content = fm_set(content, "pin_description", pin_desc)
-        actions.append("pin_description gesetzt")
+        # Minimale Heilung zuerst: Lesbarer Premium-Text bleibt stehen, nur
+        # der Hashtag-Block wird geordnet (kappen/normalisieren). Erst wenn
+        # der Text selbst unbrauchbar ist (Länge, rohes &), wird er neu
+        # gebaut – ein Heiler darf nie mehr wegwerfen als den Defekt.
+        minimal, aenderungen = ph.heile(beschreibung, max_tags=HASHTAG_MAX)
+        if (beschreibung and aenderungen and minimal != beschreibung
+                and PIN_DESC_MIN <= len(minimal) <= PIN_DESC_MAX
+                and "&" not in minimal and ph.ist_konform(minimal, max_tags=HASHTAG_MAX)):
+            pin_desc = minimal
+            content = fm_set(content, "pin_description", pin_desc)
+            actions.append("pin_description Hashtags geheilt (" + "; ".join(aenderungen) + ")")
+        else:
+            content = fm_set(content, "pin_description", pin_desc)
+            actions.append("pin_description gesetzt")
     else:
-        pin_desc = a["pin_description"].strip()  # Premium-Text behalten
+        pin_desc = beschreibung  # Premium-Text behalten
 
     # Cover-Pfad sicherstellen
     if not a["cover"]:

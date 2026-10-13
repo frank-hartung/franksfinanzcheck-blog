@@ -11,7 +11,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Gasrechnung prüfen", "Gasrechnung Fehler", "Nachzahlung vermeiden", "Zählerstand kontrollieren", "Heizkostenabrechnung prüfen", "Nachzahlungen", "Gaspreisgarantie"]
 pin_title: "Gasrechnung prüfen: So vermeidest du die nächste Überraschung"
-pin_description: "*Werbung | Gasrechnung prüfen und Nachzahlungen vermeiden: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #nachzahlung #zählerstand"
+pin_description: "*Werbung | Gasrechnung prüfen und Nachzahlungen vermeiden: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #nachzahlung #zaehlerstand"
 ai_generated: false
 inspiration: "Heizperiode vorbereiten im Spätsommer"
 cover:

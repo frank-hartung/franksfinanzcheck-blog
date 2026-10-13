@@ -1,12 +1,12 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-10-13 16:13 UTC · Modus: FIX
+**Stand:** 2026-10-13 16:35 UTC · Modus: FIX
 
-**Report-Schema:** 3 · **Geprüfte Artikel:** 89
-**Quellfingerabdruck:** `be982da3d8a21728dd9b723c09571484fcac78461f4d1d6f7cabdd500fd61fc8`
+**Report-Schema:** 4 · **Geprüfte Artikel:** 89
+**Quellfingerabdruck:** `5129ee96f462eda34ae8a5b83d585afbc74498b323188d2bfbe4a52c0041336e`
 
-Probleme: 1 · Geheilt: 0
+Probleme: 0 · Geheilt: 0
 
-| Code | Artikel | Problem |
-|---|---|---|
-| P8 | 2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen | 5 Hashtags (max. 3) |
+**Nicht gemessen (kein Hugo-Build in `public/`):** P3, P6, P7, P10, P12 – dieser Report ist dort unbekannt, nicht grün (C2).
+
+✅ Keine Befunde in den gemessenen Prüfungen (P1/P2/P4/P4b/P5/P8/P9/P11/P13) – die HTML-Checks fehlen in diesem Lauf (s. o.).

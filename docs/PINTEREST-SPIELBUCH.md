@@ -81,40 +81,50 @@ Nach 48 h Pause + URL-Debugger ohne Klärung:
 ## 5. Automatisierte Überwachung (bereits aktiv)
 
 - **Pinterest-Watchdog** (`.github/workflows/pinterest-watchdog.yml`): täglich
-  05:30 UTC – baut die Site, läuft `pinterest_check.py --fix` (13 Checks),
-  committet PINTEREST-REPORT.md, öffnet bei Problemen ein Issue (Label `pinterest`).
+  05:30 UTC – baut die Site, läuft `pinterest_check.py --fix` (P1–P13),
+  committet PINTEREST-REPORT.md, öffnet bei Problemen ein Issue (Label `pinterest`)
+  und schließt es beim ersten grünen Lauf (Exit 0).
 - **Lokal:** `python3 scripts/pinterest_check.py` (Check) / `--fix` (Selbstheilung)
+- **Hashtags (P8, seit #729):** Die Regel H1–H6 (max. 3, nur `[a-z0-9]`,
+  3–24 Zeichen, Zahlenschilder wie `#1` sind keine Tags, Block am Textende)
+  steht in EINER Quelle: `scripts/pinterest_hashtags.py`. Die Regel ist als
+  Wache im Governance-Vertrag (C6), ihre Wirkung als C37: Jeder
+  Hashtag-Befund in einer `pin_description` wird deterministisch geheilt
+  (falten, hinten kappen, Block ans Ende – idempotent), und ein neuer Artikel
+  mit fünf Tags macht den Vertrag rot, bevor ein Issue entsteht. Beweise:
+  `python3 scripts/pinterest_hashtags.py --selftest|--wirkungsprobe` ·
+  `python3 -m unittest scripts.tests.test_pinterest_hashtags`.
 - **Report-Provenienz:** `PINTEREST-REPORT.md` enthält ab Schema 2 einen
-  Quellfingerabdruck. Der Bot-Watchdog verwirft alte oder ohne Nachweis
-  übernommene Reports, statt daraus einen Phantom-Alarm zu erzeugen (Fix für
-  Issue #390).
+  Quellfingerabdruck (Schema 4 seit #729, inklusive der Hashtag-Regel). Der
+  Bot-Watchdog verwirft alte oder ohne Nachweis übernommene Reports, statt
+  daraus einen Phantom-Alarm zu erzeugen (Fix für Issue #390).
 
 ---
 
 *Ergänzt am 12.08.2026 · Teil der FrankAutoOps-Dokumentation.*
 
-## 6. Trust-Shield (automatisch, Stand 24.08.2026)
+## 6. Trust-Shield: Prüfliste ja, Skript nein (Stand 13.10.2026)
 
-`python3 scripts/pinterest_trust_shield.py --fix` prüft und heilt 12 Anti-Spam-Signale:
+Die Prüfliste eines „Trust-Shield" (12 Anti-Spam-Signale T1–T12) ist als
+**Checkliste** entstanden; das zugehörige Skript `scripts/pinterest_trust_shield.py`
+und der Report `PINTEREST-TRUST-REPORT.md` sind nie in dieses Repository
+gekommen (Wahrheitsprobe: `git ls-files | grep -i trust` → nur
+`layouts/_partials/trust_box.html`). Eine Doku, die ein Skript beschreibt, das
+es nicht gibt, ist selbst ein Befund – deshalb steht hier, was tatsächlich läuft:
 
-| Code | Signal |
+| Signal | Wo es heute geprüft wird |
 |---|---|
-| T1 | Pin-Ziel = Artikel-URL (nie /go/, nie Shortener) |
-| T2 | Kein Meta-Refresh/JS-Redirect auf Artikeln |
-| T3 | max. 5 Affiliate-Links, nur über /go/ + sponsored |
-| T4 | Werbekennzeichnung (*Werbung \| in pin_description) |
-| T5 | E-E-A-T: author + erfahrung |
-| T6 | ≥2 interne Links, keine dünnen Seiten |
-| T7 | Cover 2:3 + pin_title/pin_description |
-| T8 | robots: Pinterestbot Allow, /go/ Disallow |
-| T9 | Rate-Limit max. 2–3 Pins/Lauf, ≥45 s Pause |
-| T10 | RSS mit Cover-Enclosure (Auto-Publish) |
-| T11 | /go/* noindex |
-| T12 | p:domain_verify |
+| T1 Pin-Ziel = Artikel-URL (nie /go/, nie Shortener) | `pinterest_check.py` P10 (Artikel-URLs ohne Redirect-Alias) + Pin-Button-Layout |
+| T2 Kein Meta-Refresh/JS-Redirect auf Artikeln | `pinterest_check.py` P10 |
+| T3 max. 5 Affiliate-Links, nur /go/ + sponsored | `pinterest_check.py` P11 (Dichte) + P12 (Attribute) |
+| T4 Werbekennzeichnung (`*Werbung \|`) | `pinterest_check.py` P4/P8, `spam_guard.py` B8 |
+| T7 Cover 2:3 + pin_title/pin_description | `pinterest_check.py` P4, P4b, P5, P7 |
+| T8 robots: Pinterestbot allow | `pinterest_check.py` P1 |
+| T11 /go/* noindex | `pinterest_check.py` P13 |
+| T12 p:domain_verify | `pinterest_check.py` P2 |
+| T9 Rate-Limit (2–3 Pins/Lauf, ≥45 s) | `scripts/pinterest_engine.py` (`PINS_PRO_TAG`, `PIN_PAUSE_S`) |
+| T10 RSS mit Cover-Enclosure | `layouts/rss.xml` (enclosure + media:content + media:thumbnail – Pinterest baut daraus Pins, deshalb ist die `pin_description` auch die Feed-Beschreibung) |
+| T5 E-E-A-T (author + erfahrung), T6 interne Links | Template/Content-Gates (`layouts/`, `editorial_review_gate.py`, `internal_linker.py`) – nicht im Pinterest-Check |
 
-Report: `PINTEREST-TRUST-REPORT.md`. Läuft im Pinterest-Watchdog (vor Hugo-Build).
-
-T9 wird in `scripts/pinterest_engine.py` gesetzt (`PINS_PRO_TAG`, `PIN_PAUSE_S`, per
-Environment korrigierbar). Der Watchdog-Aufruf des Shields selbst steht bewusst noch aus –
-die Workflow-Datei ist aus der betreuenden Arena-Session nicht schreibbar. Bis dahin prüft
-der Shield manuell (bzw. bei jedem Shield-Lauf) und meldet Befunde im Report.
+Wer den Shield als eigenes Skript will, baut ihn auf dieser Liste als
+**Bibliothek** neben `pinterest_check.py` – nicht als zweite Wahrheit daneben.

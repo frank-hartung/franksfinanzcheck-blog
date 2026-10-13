@@ -15,7 +15,10 @@ automatisch (deterministisch, mit Sabotage-Schutz).
   P5  MEDIA             Bild existiert, >= 10 KB, <= 5 MB
   P6  RICH-PIN-META     og:type/title/description/image/url vorhanden
   P7  RICH-PIN-MASSE    og:image:width + og:image:height (1000x1500)
-  P8  HASHTAGS          nur [a-z0-9], keine Umlaute, max. 3
+  P8  HASHTAGS          nur [a-z0-9], keine Umlaute, max. 3,
+                        Hashtags als Block am Ende der Beschreibung –
+                        gemessen an der QUELLE (pin_description) und am
+                        Build; Regel + Heiler: scripts/pinterest_hashtags.py
   P9  PROFIL-LINK       Pinterest-Profil im Footer/Startseite verlinkt
   P10 ARTIKEL-REDIRECT  Artikel-URLs sind keine Redirect-Aliase
   P11 AFFILIATE-DICHTE  max. 5 Affiliate-Links pro Artikel
@@ -30,7 +33,12 @@ SELBSTHEILUNG (--fix):
         Keywords des Artikels), & und Länge werden sanitized.
   - P4b: Pin-Titel-Duplikate werden ebenfalls geheilt
   - P7: og:image-Maße im opengraph-Partial ergänzen (einmalig)
-  - P8: Hashtag-Fehler im Partial beheben (einmalig, dann idempotent)
+  - P8: Hashtag-Fehler werden an der QUELLE geheilt (pin_description im
+        Frontmatter): normalisieren (Umlaut-Faltung, Kleinschreibung),
+        auf max. 3 kappen, als Block ans Ende stellen – idempotent.
+        Bis #729 (13.10.2026) meldete diese Prüfung die Klasse nur; der
+        Watchdog eröffnete damit ein Issue, das kein Heiler je schließen
+        konnte (ein Befund ohne Schließpfad).
 
 SABOTAGE-SCHUTZ: SELFTEST läuft VOR jeder Fix-Aktion – schlägt er
 fehl, wird NICHTS verändert (Exit 2, wie workspace_guard).
@@ -53,7 +61,8 @@ import unicodedata
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
+from post_utils import join_article, doppel_freies_feld  # noqa: E402 – Naht-SSOT (FM-Grenze)
+import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
 PUBLIC = os.path.join(BLOG_DIR, "public")
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -68,6 +77,13 @@ PROFILE_URL = "https://www.pinterest.de/franksfinanzcheck/"
 
 PROBLEMS = []   # (code, artikel, msg)
 FIXED = []
+
+# P8 (#729): Was die Quelltext-Prüfung in DIESEM Lauf gesehen und geheilt hat.
+# Der Build ist zu diesem Zeitpunkt älter als die Heilung (der Watchdog baut
+# vor dem Check) – ein Hashtag-Befund im HTML wäre danach kein Befund mehr,
+# sondern der Beleg für eine Heilung, die der nächste Build ausliefert.
+SOURCE_FINDINGS = {}   # slug -> [Befunde der Quelle]
+SOURCE_HEALED = {}     # slug -> [Änderungen der Heilung]
 
 # Der Report ist ein versioniertes Betriebsartefakt. Ein bloßes Zeitstempel-
 # Datum reicht nicht: Ein anderer Bot kann einen alten Report in einen neuen
@@ -89,7 +105,11 @@ FIXED = []
 # Keywords, Cover …) plus die Affiliate-Gateway-Links aus dem Fließtext
 # (Grundlage von P11/P12) – also exakt das, was die Prüfungen lesen.
 # Schema 3, weil alte Reports mit Schema-2-Abdruck nicht vergleichbar sind.
-REPORT_SCHEMA_VERSION = 3
+# Schema 4 (13.10.2026, #729): Die Hashtag-Regel (P8) liegt jetzt in
+# `scripts/pinterest_hashtags.py` – die Datei beeinflusst die Prüfung, also
+# gehört sie in den Fingerabdruck. Ein Schema-3-Report ist damit nicht mehr
+# vergleichbar (er bezeugt einen Quellenstand ohne diese Regel).
+REPORT_SCHEMA_VERSION = 4
 _REPORT_SOURCE_DIRS = ("layouts",)
 _REPORT_SOURCE_POSTS = "content/posts"
 _REPORT_SOURCE_FILES = (
@@ -97,6 +117,7 @@ _REPORT_SOURCE_FILES = (
     ".github/workflows/pinterest-watchdog.yml",
     "scripts/pinterest_check.py",
     "scripts/pinterest_duplicate_guard.py",
+    "scripts/pinterest_hashtags.py",
     "scripts/pinterest_pin_text_sync.py",
     "scripts/pinterest_seo_healer.py",
 )
@@ -296,11 +317,21 @@ def _fm_get_list(content, key):
     return [k.strip().strip("\"'") for k in raw.split(",") if k.strip()]
 
 def _fm_set(content, key, value):
-    """Setzt/ersetzt ein Frontmatter-Feld (quoted, YAML-sicher)."""
+    """Setzt/ersetzt ein Frontmatter-Feld (quoted, YAML-sicher).
+
+    Zwei Härtungen gegenüber der ersten Fassung:
+    * Das Ersetzen läuft über eine Funktion, nicht über den String direkt –
+      ein Backslash im Wert (z. B. in einer Marke) wurde von `re.sub` sonst
+      als Escape gelesen und veränderte den Text.
+    * Nach dem Schreiben greift die Haus-Regel `doppel_freies_feld` (F7/C32):
+      existiert der Schlüssel genau einmal? Ein doppelter Mapping-Schlüssel
+      lässt Hugo den Build abbrechen, während PyYAML ihn still liest.
+    """
     v = str(value).replace('"', '\\"')
     line = f'{key}: "{v}"'
     if re.search(rf"^{re.escape(key)}:\s*", content, re.M):
-        new_content = re.sub(rf"^{re.escape(key)}:\s*.*$", line, content, count=1, flags=re.M)
+        new_content = re.sub(rf"^{re.escape(key)}:\s*.*$", lambda _m: line,
+                             content, count=1, flags=re.M)
     else:
         if "---" in content:
             parts = content.split("---", 2)
@@ -313,29 +344,11 @@ def _fm_set(content, key, value):
                 new_content = content
         else:
             new_content = content
+    if new_content != content and "---" in new_content:
+        parts = new_content.split("---", 2)
+        if len(parts) >= 3:
+            new_content = join_article(doppel_freies_feld(parts[1], key), parts[2])
     return new_content
-
-def _ascii_tag(s):
-    s = s.lower()
-    for a, b in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
-        s = s.replace(a, b)
-    return s
-
-def _build_hashtags(keywords, slug):
-    pool = []
-    for kw in keywords:
-        if kw:
-            pool.append(kw)
-    pool.append(slug.replace("-", " "))
-    tags = []
-    for p in pool:
-        words = re.findall(r"[a-z0-9]+", _ascii_tag(p))
-        tag = "".join(words)
-        if 3 <= len(tag) <= 24 and tag not in tags:
-            tags.append(tag)
-        if len(tags) >= 3:
-            break
-    return tags
 
 def _build_unique_pin_description(slug, title, description, keywords, existing_descs, attempt=0):
     """Erzeugt eine einzigartige, Premium-konforme Pin-Beschreibung."""
@@ -353,8 +366,9 @@ def _build_unique_pin_description(slug, title, description, keywords, existing_d
     cta_idx = (sum(ord(c) for c in slug) + attempt) % len(ctas)
     cta = ctas[cta_idx]
 
-    hashtags = _build_hashtags(keywords, slug)
-    ht_str = " ".join("#" + t for t in hashtags[:3])
+    # Eine Regel für alle Pinterest-Schreiber: scripts/pinterest_hashtags.py
+    hashtags = ph.tags_bauen(keywords, slug)
+    ht_str = ph.als_text(hashtags)
 
     if attempt > 0:
         extras = [
@@ -380,6 +394,9 @@ def _build_unique_pin_description(slug, title, description, keywords, existing_d
         text = f"*Werbung | {truncated}… {cta}"
         if ht_str:
             text += f" {ht_str}"
+    # Schlusskontrolle über die SSOT: ein Block, höchstens drei Tags, ≤500 –
+    # ein erzeugter Text darf die Regel nicht erst nach dem Schreiben brechen.
+    text, _ = ph.heile(text)
     text = text[:DESC_MAX]
 
     if text in existing_descs and attempt < 10:
@@ -481,6 +498,54 @@ def _check_frontmatter_duplicates():
                         PROBLEMS.append(("P4b", g["slug"], f"Fix fehlgeschlagen: {e}"))
 
 
+def _check_pin_descriptions():
+    """P8 (Quelle): Hashtag-Hygiene der `pin_description` – prüfen UND heilen.
+
+    Warum an der Quelle? Die `pin_description` speist drei Auslieferungen:
+    den Pin-It-Button (Layout), die RSS-Beschreibung (index.xml, Quelle des
+    Pinterest-Auto-Publish) und den API-Pin (`pinterest_engine.pin_text`).
+    Ein Fehler hier ist also nicht „nur Frontmatter".
+
+    Warum mit Heiler? #729: Der Watchdog meldete fünf Hashtags täglich neu –
+    P8 heilte nichts (P1/P4/P4b/P7 sanieren andere Klassen), der Befund blieb
+    in jedem Lauf stehen, und der Watchdog schließt sein Issue nur bei Exit 0. Die Heilung ist deterministisch: normalisieren, auf drei
+    kappen, Block ans Ende, idempotent. Sie erfindet kein Thema (die
+    Reihenfolge im Text entscheidet, gekappt wird hinten) und sie schreibt
+    nur das eine Feld.
+    """
+    for slug in _post_slugs():
+        content, path = _read_post_file(slug)
+        if not content:
+            continue
+        pin_desc = _fm_get(content, "pin_description")
+        if not pin_desc:
+            continue  # „fehlt" ist P4/H6 – hier geht es nur um Hashtag-Hygiene
+        funde = ph.befunde(pin_desc)
+        if not funde:
+            continue
+        SOURCE_FINDINGS[slug] = funde
+        if not DO_FIX:
+            for f in funde:
+                PROBLEMS.append(("P8", slug, f))
+            continue
+        neu, aenderungen = ph.heile(pin_desc)
+        if neu == pin_desc:
+            # Heilung hat nichts verändert → der Befund bleibt stehen (fail-closed)
+            for f in funde:
+                PROBLEMS.append(("P8", slug, f))
+            continue
+        new_content = _fm_set(content, "pin_description", neu)
+        try:
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(new_content)
+        except OSError as e:
+            PROBLEMS.append(("P8", slug, f"Heilung nicht schreibbar: {e}"))
+            continue
+        SOURCE_HEALED[slug] = list(aenderungen)
+        FIXED.append(("P8", slug, "; ".join(aenderungen)
+                      + f" → {neu[-60:] if len(neu) > 60 else neu}"))
+
+
 def _check_pin_buttons():
     """P3 + P4 + P5 + P8: Pin-Button, Description, Media, Hashtags pro Artikel."""
     import urllib.parse
@@ -519,12 +584,24 @@ def _check_pin_buttons():
                 PROBLEMS.append(("P5", slug, f"Media zu klein ({size//1024} KB)"))
             if size > MEDIA_MAX:
                 PROBLEMS.append(("P5", slug, f"Media zu groß ({size//1024//1024} MB)"))
-        tags = re.findall(r"#([a-z0-9]+)", desc)
-        if len(tags) > 3:
-            PROBLEMS.append(("P8", slug, f"{len(tags)} Hashtags (max. 3)"))
-        for t in tags:
-            if re.search(r"[äöüß]", t):
-                PROBLEMS.append(("P8", slug, f"Umlaut-Hashtag #{t}"))
+        # P8 am Build: dieselbe Regel wie an der Quelle (scripts/pinterest_hashtags.py).
+        # Die alte Zählung `#([a-z0-9]+)` war für Umlaute und Großbuchstaben
+        # blind – `#zählerstand` galt als '#z', `#ersteWohnung` als '#erste',
+        # und die Umlaut-Prüfung dahinter konnte nie feuern (toter Code).
+        tags_problems = ph.befunde(desc)
+        if tags_problems:
+            if slug in SOURCE_HEALED:
+                # Die Quelle wurde in DIESEM Lauf geheilt; dieser Build stammt
+                # von davor. Kein offener Befund – der nächste Build liefert
+                # den geheilter Stand aus (und der ist im selben Lauf belegt).
+                FIXED.append(("P8", slug, "Build trägt den Stand von vor der "
+                                          "Heilung – nächster Build liefert den "
+                                          "geheilten Stand aus"))
+            elif slug in SOURCE_FINDINGS:
+                pass  # derselbe Text, schon quellseitig als P8 gemeldet
+            else:
+                PROBLEMS.append(("P8", slug, "Build weicht von der Quelle ab: "
+                                             + "; ".join(tags_problems)))
     for d, slugs in descs.items():
         if len(slugs) > 1:
             already = any(slugs[0] in p[1] for p in PROBLEMS if p[0] == "P4")
@@ -637,6 +714,30 @@ def _selftest():
         fehler.append("Schablonen-Regex zu aggressiv")
     if not re.search(r"[äöüß]", "#vögel"):
         fehler.append("Umlaut-Regex defekt")
+    # P8 (#729): die Hashtag-Regel liegt in scripts/pinterest_hashtags.py.
+    # Der Selbsttest friert die Kopplung ein – zwei Wahrheiten über dieselbe
+    # Regel waren die Ursache (der Check zählte [a-z0-9], der Heiler prüfte
+    # nur Länge und '&', und die Umlaut-Prüfung konnte nie feuern).
+    if DESC_MAX != ph.BESCHREIBUNG_MAX:
+        fehler.append("DESC_MAX ≠ pinterest_hashtags.BESCHREIBUNG_MAX (zwei Wahrheiten)")
+    if ph.HASHTAG_MAX != 3:
+        fehler.append("Hashtag-Maximum ≠ 3 (P8)")
+    # Vier Fälle: kappen (H1), Umlaut (H2), Großbuchstabe (H2), konform (still).
+    for text, muss_enthalten, muss_still_sein in (
+        ("*Werbung | Text. #umzug #internet #rufnummer #dsl #wechsel",
+         "5 Hashtags (max. 3)", False),
+        ("*Werbung | Text. #zählerstand #gas", "Umlaut-Hashtag", False),
+        ("*Werbung | Text. #ersteWohnung #fixkosten", "Großbuchstaben", False),
+        ("*Werbung | Text. #umzug #internet #rufnummer", None, True),
+    ):
+        funde = ph.befunde(text)
+        if muss_still_sein and funde:
+            fehler.append(f"P8: konformer Text beanstandet: {funde}")
+        if muss_enthalten and not any(muss_enthalten in f for f in funde):
+            fehler.append(f"P8: '{muss_enthalten}' nicht erkannt (toter Code?)")
+    geheilt = ph.heile("*Werbung | Text. #umzug #internet #rufnummer #dsl #wechsel")[0]
+    if not ph.ist_konform(geheilt) or ph.heile(geheilt)[0] != geheilt:
+        fehler.append("P8: Heilung nicht idempotent/konform")
     if SITE != "https://franksfinanzcheck.de":
         fehler.append("SITE verändert")
     if PROFILE_URL != "https://www.pinterest.de/franksfinanzcheck/":
@@ -670,13 +771,17 @@ def main():
     print(f"✅ Pinterest-Selbsttest ok (Modus: {'FIX' if DO_FIX else 'CHECK'})")
 
     public_ready = os.path.isdir(PUBLIC)
+    nicht_gemessen = [] if public_ready else ["P3", "P6", "P7", "P10", "P12"]
     if not public_ready:
         print("ℹ️  public/ fehlt (kein Hugo-Build) – HTML-Checks P3/P6/P7/P10/P12 übersprungen.")
+        print("   C2: Eine nicht ausgeführte Messung ist kein Grün – der Report nennt sie.")
 
     if DO_FIX:
         _check_robots()
     _check_domain_verify()
     _check_frontmatter_duplicates()
+    # P8 zuerst an der QUELLE (heilt vor dem HTML-Vergleich), danach am Build.
+    _check_pin_descriptions()
     if public_ready:
         _check_pin_buttons()
     _check_affiliate_density()
@@ -689,23 +794,7 @@ def main():
     if not DO_FIX:
         _check_robots()
 
-    lines = ["# 📌 PINTEREST-REPORT", "",
-             f"**Stand:** {datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d %H:%M} UTC · "
-             f"Modus: {'FIX' if DO_FIX else 'CHECK'}", "",
-             f"**Report-Schema:** {REPORT_SCHEMA_VERSION} · **Geprüfte Artikel:** {len(_post_slugs())}",
-             f"**Quellfingerabdruck:** `{source_fingerprint()}`", "",
-             f"Probleme: {len(PROBLEMS)} · Geheilt: {len(FIXED)}", ""]
-    if PROBLEMS:
-        lines.append("| Code | Artikel | Problem |")
-        lines.append("|---|---|---|")
-        for code, slug, msg in PROBLEMS:
-            lines.append(f"| {code} | {slug} | {msg} |")
-    else:
-        lines.append("✅ Alle Pinterest-Signale im Profi-Bereich.")
-    if FIXED:
-        lines += ["", "**Selbstheilung (diese Runde):**"]
-        for code, slug, msg in FIXED:
-            lines.append(f"- [{code}] {slug}: {msg}")
+    lines = _report_zeilen(nicht_gemessen)
     REPORT_PATH = os.path.join(BLOG_DIR, REPORT) if not os.path.isabs(REPORT) else REPORT
     with open(REPORT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
@@ -728,6 +817,41 @@ def main():
     if AS_JSON:
         print(json.dumps({"problems": PROBLEMS, "fixed": FIXED}, ensure_ascii=False))
     return 1 if PROBLEMS else 0
+
+
+def _report_zeilen(nicht_gemessen=()):
+    """Der Report-Text – auch als reine Funktion, damit er prüfbar ist.
+
+    Eine nicht ausgeführte Messung ist kein Grün (C2): Fehlt `public/`,
+    nennt der Report die übersprungenen HTML-Prüfungen ausdrücklich und
+    behauptet nicht „alle Signale im Profi-Bereich".
+    """
+    lines = ["# 📌 PINTEREST-REPORT", "",
+             f"**Stand:** {datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d %H:%M} UTC · "
+             f"Modus: {'FIX' if DO_FIX else 'CHECK'}", "",
+             f"**Report-Schema:** {REPORT_SCHEMA_VERSION} · **Geprüfte Artikel:** {len(_post_slugs())}",
+             f"**Quellfingerabdruck:** `{source_fingerprint()}`", "",
+             f"Probleme: {len(PROBLEMS)} · Geheilt: {len(FIXED)}", ""]
+    if nicht_gemessen:
+        lines += [f"**Nicht gemessen (kein Hugo-Build in `public/`):** "
+                  f"{', '.join(nicht_gemessen)} – dieser Report ist dort "
+                  f"unbekannt, nicht grün (C2).", ""]
+    if PROBLEMS:
+        lines.append("| Code | Artikel | Problem |")
+        lines.append("|---|---|---|")
+        for code, slug, msg in PROBLEMS:
+            lines.append(f"| {code} | {slug} | {msg} |")
+    elif nicht_gemessen:
+        lines.append("✅ Keine Befunde in den gemessenen Prüfungen "
+                     "(P1/P2/P4/P4b/P5/P8/P9/P11/P13) – die HTML-Checks fehlen "
+                     "in diesem Lauf (s. o.).")
+    else:
+        lines.append("✅ Alle Pinterest-Signale im Profi-Bereich.")
+    if FIXED:
+        lines += ["", "**Selbstheilung (diese Runde):**"]
+        for code, slug, msg in FIXED:
+            lines.append(f"- [{code}] {slug}: {msg}")
+    return lines
 
 
 if __name__ == "__main__":

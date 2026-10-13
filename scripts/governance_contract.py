@@ -417,7 +417,12 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           "indexierbare_seiten.py",
           "gsc_verifikations_guard.py",
           "gsc_indexierung.py",
-          "submit_indexnow.py"]
+          "submit_indexnow.py",
+          # Die Hashtag-Regel für Pin-Texte (#729): H1–H6 leben in EINER
+          # Quelle (max. 3, nur [a-z0-9], 3–24 Zeichen, Zahlenschilder sind
+          # keine Tags, Block am Textende). Alle Pinterest-Schreiber und der
+          # Watchdog hängen daran; `--selftest` friert die Regel ein.
+          "pinterest_hashtags.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -2018,6 +2023,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c36_nachsorge_beweist_die_kennzahl(
         script_texts, root=root, python_bin=python_bin, quick=quick,
         wflows=wflows)
+    checks += c37_befund_hat_einen_schliespfad(
+        script_texts, wflows, root=root, python_bin=python_bin, quick=quick)
     return checks
 
 
@@ -2368,6 +2375,205 @@ def c36_nachsorge_beweist_die_kennzahl(script_texts, root=BLOG_DIR,
                            + (zeilen[-1][:160] if zeilen
                               else f"Exit {lauf_ergebnis.returncode}")))
     return out
+
+
+# --- C37: Der Befund hat einen Schließpfad (Pinterest P8, #729, 13.10.2026) --
+#
+# Befund: Der Pinterest-Watchdog meldete „Pinterest-Check: Probleme gefunden“
+# mit genau EINEM offenen Posten – fünf Hashtags in einer `pin_description`
+# (P8, „5 Hashtags (max. 3)“). Es war der einzige offene Posten des Reports,
+# und P8 heilte nichts – der Watchdog schließt sein Issue aber nur bei Exit 0.
+# Der Befund wurde also jeden Tag neu gemessen und jeden Tag neu gemeldet:
+# dieselbe Bauart wie C29 (ein harter Blocker braucht einen Heiler).
+#
+# Beim Heilen kamen zwei blinde Flecken derselben Prüfung ans Licht:
+#
+#   1. Beide Prüfer zählten Hashtags mit einem Muster, das Umlaute
+#      ausschließt (`#([a-z0-9]+)` bzw. `[A-Za-z0-9]+`). `#zählerstand` galt
+#      damit als „#z“, `#ersteWohnung` als „#erste“ – die Umlaut-Regel
+#      dahinter war toter Code, und beide Tags standen im Bestand.
+#   2. `pinterest_seo_healer.py` (H6) sah die Klasse in seinem Audit, hielt
+#      den Text aber weiter für gültig (nur Länge und `&`) und überschrieb
+#      ihn nie: Prüfer und Heiler widersprachen sich.
+#
+# Der Vertrag in sieben Sätzen:
+#   a) EINE Quelle: die Regel H1–H6 (max. 3, nur [a-z0-9], 3–24 Zeichen,
+#      Zahlenschilder sind keine Tags, Block am Textende) lebt in
+#      `scripts/pinterest_hashtags.py` – und die Datei ist eine Wache (C6).
+#   b) Kein zweites Maximum: die Pinterest-Schreiber importieren die SSOT;
+#      eine eigene Zahl im Schreiber ist ein Befund (#585).
+#   c) Der Melder HEILT: P8 saniert die `pin_description` an der Quelle
+#      (`--fix`, idempotent, fail-closed ohne Wirkung) – das ist der
+#      Schließpfad, ohne den das Issue ein Dauerläufer bleibt.
+#   d) Der SEO-Heiler widerspricht sich nicht mehr: seine Gültigkeitsprüfung
+#      fragt dieselbe SSOT (`ph.ist_konform`).
+#   e) Die Wirkung steht am Bestand: keine `pin_description` im Repo trägt
+#      einen Hashtag-Fehler – ein neuer Artikel mit fünf Tags macht C37 rot,
+#      bevor der Watchdog ein Issue eröffnet.
+#   f) Der Quellfingerabdruck kennt die Regel (Report-Schema 4) – sonst wäre
+#      der PINTEREST-REPORT „frisch“ ohne diese Prüfung.
+#   g) Regressionstest + Selbsttest/Wirkungsprobe laufen JETZT (Exit 0).
+C37_MODUL = "pinterest_hashtags.py"
+#: Schreiber und Leser der Pin-Hashtags – eine Regel, keine Kopie.
+C37_NUTZER = ("pinterest_check.py", "pinterest_seo_healer.py",
+              "pinterest_duplicate_guard.py", "pinterest_pin_text_sync.py",
+              "pinterest_engine.py", "generate_pins.py", "engine_generate.py",
+              "spam_guard.py")
+#: Der Schließpfad: Prüfen UND heilen in einem Lauf.
+C37_SCHLIESSPFAD = "pinterest_check.py"
+#: Marker der Regel selbst (Modul) – fehlt einer, ist die Regel unvollständig.
+C37_REGEL_MARKER = ("HASHTAG_MAX = 3", "HASHTAG_MIN_LEN", "HASHTAG_MAX_LEN",
+                    "BESCHREIBUNG_MAX = 500", "def falte(", "def normalisiere(",
+                    "def ist_gueltig(", "def befunde(", "def heile(",
+                    "def tags_bauen(", "--selftest", "--wirkungsprobe")
+#: Marker des Schließpfads im Melder (Quelle prüfen, heilen, belegen).
+C37_SCHLIESS_MARKER = (
+    ("def _check_pin_descriptions(", "die Prüfung der Quelle fehlt"),
+    ("ph.befunde(", "die Quelle wird nicht gegen die SSOT gemessen"),
+    ("ph.heile(", "der Befund hat keinen Heiler – das Issue bliebe offen"),
+    ("SOURCE_HEALED", "die Heilung dieses Laufs ist nirgends belegt"),
+    ("def _report_zeilen(", "der Report ist nicht aus dem Lauf rekonstruierbar"),
+    ("scripts/pinterest_hashtags.py",
+     "der Quellfingerabdruck kennt die Hashtag-Regel nicht (Report-Schema)"),
+)
+#: Die Auslieferung, die den Heiler fahren muss (sonst gibt es kein Grün).
+C37_WORKFLOW = "pinterest-watchdog.yml"
+#: Testklassen, die den Vertrag tragen – ein Vertrag ohne Test ist Prosa.
+C37_TESTS = {"test_pinterest_hashtags.py": ("HashtagRegelTests", "HeilungTests",
+                                            "BestandsprobeTests", "ApiGrenzeTests",
+                                            "WirkungsprobeTests"),
+             "test_pinterest_check.py": ("PinterestHashtagHealingTests",
+                                         "PinterestP4ErzeugerTests",
+                                         "PinterestReportHonestyTests")}
+
+
+def _c37_hashtag_bestand(root=BLOG_DIR):
+    """Jede `pin_description` des Bestands gegen die SSOT-Regel (Wirkung)."""
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import pinterest_hashtags as ph  # noqa: PLC0415
+    except Exception as exc:  # noqa: BLE001 – Importfehler ist ein Befund
+        return [("C37", f"scripts/{C37_MODUL} nicht importierbar: {exc}")]
+    out = []
+    muster = re.compile(r'^pin_description:\s*"?(.*?)"?\s*$', re.M)
+    for pfad in sorted(glob.glob(os.path.join(root, "content", "posts", "*",
+                                              "index.md"))):
+        try:
+            with open(pfad, encoding="utf-8") as fh:
+                text = fh.read()
+        except OSError:
+            continue
+        treffer = muster.search(text)
+        if not treffer:
+            continue
+        funde = ph.befunde(treffer.group(1))
+        if funde:
+            out.append(("C37", f"{os.path.basename(os.path.dirname(pfad))}: "
+                               "pin_description nicht hashtag-konform – "
+                               + "; ".join(funde)))
+    return out
+
+
+def c37_befund_hat_einen_schliespfad(script_texts, wflows, root=BLOG_DIR,
+                                     python_bin=None, quick=False):
+    """Der P8-Befund muss heilbar sein – sonst ist das Melden ein Dauerläufer."""
+    out = []
+    modul = script_texts.get(C37_MODUL, "")
+    if not modul.strip():
+        out.append(("C37", f"scripts/{C37_MODUL} fehlt – die Hashtag-Regel "
+                           "hätte keine Quelle (#729)."))
+        return out
+    for marker in C37_REGEL_MARKER:
+        if marker not in modul:
+            out.append(("C37", f"scripts/{C37_MODUL}: `{marker}` fehlt – die "
+                               "Hashtag-Regel ist unvollständig (#729)."))
+    if C37_MODUL not in GUARDS:
+        out.append(("C37", f"scripts/{C37_MODUL} steht nicht im vertraglichen "
+                           "Minimum (GUARDS/C6) – sein Selbsttest liefe nie."))
+    # (b) Eine Regel, keine Kopie: jeder Schreiber importiert die SSOT und
+    #     führt kein eigenes Maximum.
+    for name in C37_NUTZER:
+        text = script_texts.get(name, "")
+        if not text.strip():
+            out.append(("C37", f"scripts/{name} nicht lesbar – die Bindung an "
+                               "die Hashtag-SSOT ist nicht prüfbar (#729)."))
+            continue
+        if "import pinterest_hashtags" not in text:
+            out.append(("C37", f"scripts/{name} importiert die Hashtag-SSOT "
+                               "nicht – ein zweiter Schreiber mit eigener Regel "
+                               "ist die Ursache, nicht die Heilung (#729)."))
+        elif re.search(r"HASHTAG_MAX\s*=\s*\d+", text):
+            out.append(("C37", f"scripts/{name} führt ein eigenes Hashtag-"
+                               "Maximum – die Zahl kommt aus der SSOT (#585)."))
+    # (c) Der Schließpfad im Melder.
+    melder = script_texts.get(C37_SCHLIESSPFAD, "")
+    for marker, befund in C37_SCHLIESS_MARKER:
+        if marker not in melder:
+            out.append(("C37", f"scripts/{C37_SCHLIESSPFAD}: `{marker}` fehlt – "
+                               f"{befund} (#729)."))
+    # (d) Der SEO-Heiler widerspricht sich nicht mehr.
+    heiler = script_texts.get("pinterest_seo_healer.py", "")
+    if "ph.ist_konform(" not in heiler:
+        out.append(("C37", "scripts/pinterest_seo_healer.py prüft die Hashtag-"
+                           "Konformität nicht über die SSOT – dann hält er einen "
+                           "falschen Text weiter für gültig (#729)."))
+    if "ph.HASHTAG_MAX" not in heiler:
+        out.append(("C37", "scripts/pinterest_seo_healer.py bezieht sein "
+                           "Hashtag-Maximum nicht aus der SSOT (#585)."))
+    # (e) Die Wirkung am Bestand – nicht die Absicht im Quelltext.
+    out.extend(_c37_hashtag_bestand(root))
+    # (f) Die Auslieferung fährt den Heiler.
+    wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(pfad) == C37_WORKFLOW:
+            wf = inhalt or ""
+    if not wf:
+        wf = _read(os.path.join(root, ".github", "workflows", C37_WORKFLOW))
+    if wf and f"{C37_SCHLIESSPFAD} --fix" not in wf:
+        out.append(("C37", f".github/workflows/{C37_WORKFLOW} ruft "
+                           f"`{C37_SCHLIESSPFAD} --fix` nicht – der Heiler "
+                           "hätte keinen Fahrer, der Befund bliebe stehen "
+                           "(#729)."))
+    # (g) Regressionstest – ein Vertrag ohne Test ist Prosa.
+    for name, klassen in C37_TESTS.items():
+        pfad = os.path.join(root, "scripts", "tests", name)
+        if not os.path.isfile(pfad):
+            out.append(("C37", f"scripts/tests/{name} fehlt – der Vertrag "
+                               "‚Der Befund hat einen Schließpfad‘ wäre "
+                               "ungetestet (#729)."))
+            continue
+        try:
+            with open(pfad, encoding="utf-8") as fh:
+                test_text = fh.read()
+        except OSError:
+            continue
+        for klasse in klassen:
+            if klasse not in test_text:
+                out.append(("C37", f"scripts/tests/{name}: die Testklasse "
+                                   f"`{klasse}` fehlt (#729)."))
+    # (h) Der scharfe Teil: Selbsttest und Wirkungsprobe laufen JETZT (Exit 0).
+    #     In `--quick` wird nur die Quelltext-/Bestandsprüfung gefahren.
+    if quick:
+        return out
+    bin_ = python_bin or sys.executable or "python3"
+    for takt, was in (("--selftest", "Selbsttest"),
+                      ("--wirkungsprobe", "Wirkungsprobe")):
+        try:
+            lauf = subprocess.run(
+                [bin_, os.path.join(root, "scripts", C37_MODUL), takt],
+                cwd=root, capture_output=True, text=True, timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C37", f"Hashtag-{was} nicht ausführbar "
+                               f"({exc.__class__.__name__}) – fail-closed."))
+            continue
+        if lauf.returncode != 0:
+            zeilen = ((lauf.stdout or "")
+                      + (lauf.stderr or "")).strip().splitlines()
+            out.append(("C37", f"Hashtag-{was} ROT: "
+                               + (zeilen[-1][:160] if zeilen
+                                  else f"Exit {lauf.returncode}")))
+    return out
+
 
 
 # --- C34: Auslieferung vor Siegel (Bot-Watchdog #676, 10.10.2026) ----------
@@ -4332,6 +4538,25 @@ RULE_TEXT = {
            "Vorfall vom 09.10.2026 (19 h 38 min ohne oeffentliche "
            "Auslieferung) lag zwischen zwei taeglichen Watchdog-Laeufen "
            "(Bot-Watchdog, #676 Teil 2).",
+    "C37": "Ein Befund ohne Schließpfad ist ein Dauerläufer: Der Pinterest-"
+           "Watchdog meldete P8 (fünf Hashtags) jeden Tag neu, weil P8 "
+           "keinen Heiler hatte und das Issue nur bei Exit 0 schließt. Jetzt: EINE Quelle für die Hashtag-Regel H1–H6 "
+           "(max. 3, nur [a-z0-9], 3–24 Zeichen, Zahlenschilder sind keine "
+           "Tags, Block am Textende) in scripts/pinterest_hashtags.py – als "
+           "Wache im vertraglichen Minimum (C6). Alle Pinterest-Schreiber "
+           "importieren die SSOT statt eigener Zahlen (#585); P8 heilt die "
+           "pin_description an der QUELLE (idempotent, fail-closed ohne "
+           "Wirkung) und belegt den geheilten Stand (SOURCE_HEALED); der "
+           "SEO-Heiler prüft die Gültigkeit über dieselbe SSOT statt über "
+           "Länge und '&'; der Bestand ist hashtag-konform, ein neuer "
+           "Artikel mit fünf Tags macht C37 rot, bevor ein Issue entsteht; "
+           "der Quellfingerabdruck kennt die Regel (Report-Schema 4). Neben-"
+           "befunde derselben Klasse: `#([a-z0-9]+)` war umlaut-blind "
+           "(#zählerstand galt als '#z', #ersteWohnung als '#erste' – die "
+           "Umlaut-Regel war toter Code), und der SEO-Heiler hielt den "
+           "falschen Text für gültig (Prüfer und Heiler widersprachen sich). "
+           "Regressionstest + Selbsttest/Wirkungsprobe laufen im Vertrag "
+           "(Pinterest P8, #729, 13.10.2026).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -4377,6 +4602,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C36": "Die Nachsorge beweist die Kennzahl (Wirkungsnachweis der "
                 "Politur, E6 rot ist heilbar, Schreiber misst vor dem "
                 "Schreiben, Nachsorge-Auswahl --entwuerfe)",
+         "C37": "Der Befund hat einen Schließpfad (Hashtag-Regel als eine "
+                "Quelle, P8 heilt an der Quelle, Wirkung am Bestand)",
          "C35": "Meldetakt an den Ausfall (stündliche Ausfall-Erkennung, "
                 "read-only-Takt, Stunden-Leiter statt 72-h-Schweigen)"}
 
@@ -5827,7 +6054,95 @@ def _selftest():
         failures.append("C36: eine Kette ohne Nachsorge-Aufruf bleibt "
                         "unentdeckt (#712).")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C36 mit Kunstbefunden: Fehler "
+    # --- C37: Der Befund hat einen Schließpfad (Pinterest P8, #729) --------
+    # Ein Befund ohne Heiler ist ein Dauerläufer: P8 zählte fünf Hashtags,
+    # heilte sie aber nie – der Watchdog schließt nur bei Exit 0, das Issue
+    # konnte also nie zugehen. Vier Sabotagen, ein Ergebnis.
+    echte_c37 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in (C37_MODUL, C37_SCHLIESSPFAD,
+                              "pinterest_seo_healer.py") + C37_NUTZER}
+    echte_wflows_c37 = {C37_WORKFLOW: _read(os.path.join(
+        BLOG_DIR, ".github", "workflows", C37_WORKFLOW))}
+    if c37_befund_hat_einen_schliespfad(echte_c37, echte_wflows_c37,
+                                        root=BLOG_DIR, quick=True):
+        failures.append("C37: der echte Zustand wird beanstandet: "
+                        f"{c37_befund_hat_einen_schliespfad(echte_c37, echte_wflows_c37, root=BLOG_DIR, quick=True)}")
+
+    # (a) Der Heiler verschwindet aus dem Melder: der Befund wäre wieder ein
+    #     Dauerläufer, das Issue könnte nie zugehen (#729).
+    ohne_heiler = dict(echte_c37, **{
+        C37_SCHLIESSPFAD: echte_c37[C37_SCHLIESSPFAD].replace(
+            "neu, aenderungen = ph.heile(pin_desc)", "neu, aenderungen = pin_desc, []", 1)})
+    if ohne_heiler[C37_SCHLIESSPFAD] == echte_c37[C37_SCHLIESSPFAD]:
+        failures.append("C37: Sabotage ‚Heiler entfernt‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt).")
+    elif not [f for f in c37_befund_hat_einen_schliespfad(
+            ohne_heiler, echte_wflows_c37, root=BLOG_DIR, quick=True)
+            if "ph.heile(" in f[1]]:
+        failures.append("C37: ein Melder ohne Heiler bleibt unentdeckt (#729).")
+
+    # (b) Ein Schreiber führt wieder ein eigenes Hashtag-Maximum: zwei Zahlen
+    #     im Haus, die auseinanderlaufen können (#585).
+    zweites_max = dict(echte_c37, **{
+        "pinterest_seo_healer.py": echte_c37["pinterest_seo_healer.py"].replace(
+            "HASHTAG_MAX = ph.HASHTAG_MAX", "HASHTAG_MAX = 3", 1)})
+    if zweites_max["pinterest_seo_healer.py"] == echte_c37["pinterest_seo_healer.py"]:
+        failures.append("C37: Sabotage ‚eigenes Maximum‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt).")
+    elif not [f for f in c37_befund_hat_einen_schliespfad(
+            zweites_max, echte_wflows_c37, root=BLOG_DIR, quick=True)
+            if "eigenes Hashtag-" in f[1]]:
+        failures.append("C37: ein zweites Hashtag-Maximum bleibt unentdeckt "
+                        "(#585).")
+
+    # (c) Der Heiler hält einen regelwidrigen Text wieder für gültig (der
+    #     Widerspruch Prüfer/Heiler aus #729).
+    blind_heiler = dict(echte_c37, **{
+        "pinterest_seo_healer.py": echte_c37["pinterest_seo_healer.py"].replace(
+            "ph.ist_konform(", "bool(", 1)})
+    if blind_heiler["pinterest_seo_healer.py"] == echte_c37["pinterest_seo_healer.py"]:
+        failures.append("C37: Sabotage ‚Heiler prüft Tags nicht‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt).")
+    elif not [f for f in c37_befund_hat_einen_schliespfad(
+            blind_heiler, echte_wflows_c37, root=BLOG_DIR, quick=True)
+            if "ph.ist_konform(" in f[1]]:
+        failures.append("C37: ein Heiler, der die Hashtag-Regel nicht mehr "
+                        "fragt, bleibt unentdeckt (#729).")
+
+    # (d) Ein Artikel wird mit fünf Hashtags geboren: die Wirkung am Bestand
+    #     muss C37 rot machen, BEVOR der Watchdog ein Issue eröffnet.
+    bestand_wurzel = tempfile.mkdtemp(prefix="c37-bestand-")
+    os.makedirs(os.path.join(bestand_wurzel, "content", "posts", "fixture"))
+    with open(os.path.join(bestand_wurzel, "content", "posts", "fixture",
+                           "index.md"), "w", encoding="utf-8") as fh:
+        fh.write('---\npin_description: "*Werbung | Text. #a1b #b2c #c3d #d4e"\n---\n\nText.\n')
+    if not [f for f in c37_befund_hat_einen_schliespfad(
+            echte_c37, echte_wflows_c37, root=bestand_wurzel, quick=True)
+            if "5 Hashtags" in f[1] and "pin_description" in f[1]]:
+        failures.append("C37: eine fehlerhafte pin_description im Bestand "
+                        "bleibt unentdeckt – der Vertrag wirkt nur auf Papier.")
+
+    # (e) Die Auslieferung fährt den Heiler nicht mehr: der beste Befund
+    #     bliebe stehen, weil ihn niemand saniert.
+    wf_ohne_fix = {C37_WORKFLOW: echte_wflows_c37[C37_WORKFLOW].replace(
+        "pinterest_check.py --fix", "pinterest_check.py", 1)}
+    if wf_ohne_fix[C37_WORKFLOW] == echte_wflows_c37[C37_WORKFLOW]:
+        failures.append("C37: Sabotage ‚Watchdog ohne --fix‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt).")
+    elif not [f for f in c37_befund_hat_einen_schliespfad(
+            echte_c37, wf_ohne_fix, root=BLOG_DIR, quick=True)
+            if "--fix" in f[1] and "ruft" in f[1]]:
+        failures.append("C37: ein Watchdog ohne Heiler-Aufruf bleibt "
+                        "unentdeckt (#729).")
+
+    # (f) Der Regressionstest verschwindet: das Versprechen wäre wieder Prosa.
+    leerer_wurzel_c37 = tempfile.mkdtemp(prefix="c37-ohne-test-")
+    if not [f for f in c37_befund_hat_einen_schliespfad(
+            echte_c37, echte_wflows_c37, root=leerer_wurzel_c37, quick=True)
+            if "ungetestet" in f[1] or "fehlt" in f[1]]:
+        failures.append("C37: eine fehlende Testdatei bleibt unentdeckt.")
+
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C37 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0
