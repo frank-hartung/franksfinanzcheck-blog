@@ -58,6 +58,7 @@ Niemals:
 Aufruf:
   python3 scripts/cadence_guard.py             # Audit (Alias: --check)
   python3 scripts/cadence_guard.py --check     # nur prüfen, Exit 1 bei Verstoß
+                                               #   ODER Fehltag im Prüffenster
   python3 scripts/cadence_guard.py --fix       # prüfen + heilen (Zurückstufung
                                                #   + Re-Queue + Report)
   python3 scripts/cadence_guard.py --integrity # nur Park-Zustände klären
@@ -69,8 +70,15 @@ Aufruf:
   python3 scripts/cadence_guard.py --selftest  # Selbsttest mit Fixtures
                                                #   (Exit 2 = Guard defekt)
 
+Fehltage (Auftrag #725, 13.10.2026): Bewertet wird der KALENDER seit
+BLOG_LAUNCH – jeder Mo/Mi/Fr, auch wenn er gar keinen Post hat. Ein Defizit
+an einem der letzten DEFIZIT_FENSTER_PUBLIKATIONSTAGE (6) Publikationstage
+lässt `--check` mit Exit 1 scheitern; ältere Defizite sind Altbefund im Report.
+`--fix` bleibt Heiler und endet nie mit Exit 1 wegen historischer Fehltage.
+
 Report: CADENCE-GATE-REPORT.md (im Repo-Root, commit-freundlich).
-Exit-Codes: 0 = sauber (oder geheilt) · 1 = Verstöße gefunden (--check)
+Exit-Codes: 0 = sauber (oder geheilt; Altbefund erlaubt) · 1 = Verstöße
+            oder Fehltag im Prüffenster (--check)
             · 2 = Selbsttest/Interna defekt (Gate muss abbrechen).
 """
 import datetime
@@ -98,6 +106,16 @@ HOLD_WARN_TAGE = 7
 # importieren von hier (keine zweite Kopie mehr, die sich driftet).
 # ---------------------------------------------------------------------------
 PUBLICATION_DAYS = {0, 2, 4}  # Montag, Mittwoch, Freitag (Python.weekday)
+
+# Blog-Launch (CADENCE-REPORT Regel 1). Ab diesem Datum zählt jeder Mo/Mi/Fr
+# als Publikationstag – auch wenn er KEINEN einzigen Post hat.
+BLOG_LAUNCH = datetime.date(2026, 8, 8)
+
+# Prüffenster für `--check` (Auftrag #725, 13.10.2026): Ein Mindestziel-
+# Defizit an einem der letzten N Publikationstage ist ein harter Befund
+# (Exit 1). Ältere Defizite sind Altbefund: Die Engine-Slots können sie nicht
+# mehr heilen, sie stehen nur im Report.
+DEFIZIT_FENSTER_PUBLIKATIONSTAGE = 6
 
 DAYS_DE = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag",
            "Samstag", "Sonntag"]
@@ -169,6 +187,43 @@ def publikationstage_zurueck(heute, anzahl=3):
     return tage
 
 
+def publikationstage_im_intervall(start, bis):
+    """Alle Publikationstage (Mo/Mi/Fr) im Intervall [start, bis).
+
+    Grundlage der Fehltag-Erkennung (Auftrag #725): Gemessen wird der
+    KALENDER, nicht die Menge der vorhandenen Posts. Ein Publikationstag ohne
+    einen einzigen Post taucht sonst in keiner Auswertung auf."""
+    tage = []
+    tag = start
+    while tag < bis:
+        if is_publication_day(tag):
+            tage.append(tag)
+        tag += datetime.timedelta(days=1)
+    return tage
+
+
+def defizit_fenster_start(heute=None, anzahl=DEFIZIT_FENSTER_PUBLIKATIONSTAGE):
+    """Ältester Publikationstag des Prüffensters: die letzten `anzahl`
+    Publikationstage STRIKT VOR `heute` (der laufende Tag ist noch offen und
+    wird vom Engine-Report geführt)."""
+    heute = heute or datetime.date.today()
+    tage = []
+    tag = heute - datetime.timedelta(days=1)
+    for _ in range(8 * max(1, anzahl)):
+        if is_publication_day(tag):
+            tage.append(tag)
+            if len(tage) >= anzahl:
+                break
+        tag -= datetime.timedelta(days=1)
+    return tage[-1] if tage else heute
+
+
+def defizit_im_fenster(under_days, heute=None):
+    """Die Mindestziel-Defizite aus `under_days`, die im Prüffenster liegen."""
+    start = defizit_fenster_start(heute)
+    return [(d, n) for d, n in under_days if d >= start]
+
+
 def now_utc_iso():
     """UTC-Zeitstempel (1 Minute zurück – nie ein Future-Post)."""
     return (datetime.datetime.now(datetime.timezone.utc)
@@ -232,13 +287,16 @@ def published_on(posts, day):
     return [p for p in posts if p["date"] == day and not p["draft"]]
 
 
-def find_violations(posts, min_d, max_d):
+def find_violations(posts, min_d, max_d, heute=None):
     """Liefert (off_day, over_cap, under_days):
       off_day:  [post]  – veröffentlicht an Di/Do/Sa/So
       over_cap: [post]  – Posts, die über dem Tages-Max liegen (so viele,
                           dass der Resttag exakt max_d hat)
-      under_days: [(day, count)] – Publikationstage unter Mindestziel
-                 (NUR Hinweis – die Engine-Slots heilen per Auffüllung)
+      under_days: [(day, count)] – JEDER Publikationstag seit BLOG_LAUNCH
+                 unter Mindestziel, count 0 eingeschlossen (Auftrag #725:
+                 ein leerer Publikationstag war vorher unsichtbar). Der
+                 laufende Tag zählt nicht. Ob ein Defizit im Prüffenster
+                 liegt, entscheidet defizit_im_fenster().
     Deterministische Sortierung: erst nach Zeitstempel, dann nach Slug."""
     off_day = [p for p in posts
                if not p["draft"] and not is_publication_day(p["date"])]
@@ -260,15 +318,15 @@ def find_violations(posts, min_d, max_d):
             over_cap.extend(live_sorted[-excess:])
 
     under_days = []
-    today = datetime.date.today()
-    for day in sorted(by_day):
-        if is_publication_day(day) and day <= today:
-            n = len(by_day[day])
-            # Nur volle Tage bewerten: heutiger Tag läuft bis zum
-            # letzten Slot (19:40 MESZ) noch – wird vom Engine-Report
-            # geführt, hier nicht doppelt.
-            if day < today and n < min_d:
-                under_days.append((day, n))
+    if heute is None:
+        heute = datetime.date.today()
+    # Kalender-Sicht: jeder Publikationstag seit Launch, auch ohne Post.
+    # Nur volle Tage bewerten: der heutige Tag läuft bis zum letzten Slot
+    # (19:40 MESZ) noch – er wird vom Engine-Report geführt, hier nicht doppelt.
+    for day in publikationstage_im_intervall(BLOG_LAUNCH, heute):
+        n = len(by_day.get(day, []))
+        if n < min_d:
+            under_days.append((day, n))
     return off_day, over_cap, under_days
 
 
@@ -440,11 +498,18 @@ def write_report(off_day, over_cap, under_days, healed, promoted,
     for p in over_cap:
         L.append(f"- 🛑 Über Tages-Max: `{p['slug']}` ({p['date'].isoformat()})")
     if under_days:
+        im_fenster = {d for d, _ in defizit_im_fenster(under_days)}
         L.append("")
-        L += ["### Mindestziel-Defizit (Engine-Slots füllen auf)", ""]
+        L += ["### Mindestziel-Defizit (Auftrag #725: jeder Publikationstag seit Launch)", ""]
         for day, n in under_days:
-            L.append(f"- ⚠️ {day.isoformat()} ({DAYS_DE[day.weekday()]}): "
-                     f"nur {n} von {min_d}–{max_d} (Fallback-Slots heilen nach)")
+            if day in im_fenster:
+                L.append(f"- 🛑 {day.isoformat()} ({DAYS_DE[day.weekday()]}): "
+                         f"nur {n} von {min_d}–{max_d} – im Prüffenster "
+                         f"(`--check` Exit 1, Nachlieferung nötig)")
+            else:
+                L.append(f"- ⚠️ {day.isoformat()} ({DAYS_DE[day.weekday()]}): "
+                         f"nur {n} von {min_d}–{max_d} – Altbefund "
+                         f"(außerhalb des Prüffensters)")
     # ---------- Re-Queue-Integrität (Park-Zustände) ----------
     posts_all = load_posts()
     states = {"queue": [], "hold": [], "manual": [], "lost": []}
@@ -500,11 +565,17 @@ def write_report(off_day, over_cap, under_days, healed, promoted,
     return REPORT_PATH
 
 
-def _count_by_day(posts):
+def _count_by_day(posts, heute=None):
+    """Live-Posts pro Tag. Publikationstage seit Launch ohne Post erscheinen
+    mit 0 (Auftrag #725) – sonst fehlt genau der Fehltag im Report."""
     c = {}
     for p in posts:
         if not p["draft"]:
             c[p["date"]] = c.get(p["date"], 0) + 1
+    if heute is None:
+        heute = datetime.date.today()
+    for day in publikationstage_im_intervall(BLOG_LAUNCH, heute):
+        c.setdefault(day, 0)
     return c
 
 
@@ -747,6 +818,51 @@ def run_selftest():
                 errors.append("Promotion hat Park-Felder nicht vollständig "
                               f"geräumt: {promoted_now}")
 
+    # Fehltag-Erkennung (Auftrag #725, 13.10.2026). Eigener, frischer Bestand:
+    # Mo 08-10 hat 1 Live, Mi 08-12 hat 1 Live + 1 Entwurf (Entwurf zählt
+    # nicht), Fr 08-14 hat KEINEN Post (der Fehltag, der vorher unsichtbar
+    # war), Mo 08-17 hat 2, Mi 08-19 hat 3. Vor dem Launch (Fr 08-07) darf
+    # nichts gezählt werden.
+    with tempfile.TemporaryDirectory() as tmp:
+        posts_root = os.path.join(tmp, "content", "posts")
+        mk(tmp, "2026-08-07-vor-launch-fr", "2026-08-07T06:00:00Z", False)
+        mk(tmp, "2026-08-10-mo-a", "2026-08-10T06:00:00Z", False)
+        mk(tmp, "2026-08-12-mi-a", "2026-08-12T06:00:00Z", False)
+        mk(tmp, "2026-08-12-mi-entwurf", "2026-08-12T06:10:00Z", True)
+        mk(tmp, "2026-08-14-fr-entwurf", "2026-08-14T06:00:00Z", True)
+        mk(tmp, "2026-08-17-mo-a", "2026-08-17T06:00:00Z", False)
+        mk(tmp, "2026-08-17-mo-b", "2026-08-17T06:10:00Z", False)
+        for i in range(3):
+            mk(tmp, f"2026-08-19-mi-{i}", f"2026-08-19T06:{i}0:00Z", False)
+        posts = load_posts(posts_root)
+        _, _, under = find_violations(posts, 2, 3, heute=datetime.date(2026, 8, 21))
+        if under != [(datetime.date(2026, 8, 10), 1),
+                     (datetime.date(2026, 8, 12), 1),
+                     (datetime.date(2026, 8, 14), 0)]:
+            errors.append(f"Fehltag-Erkennung falsch (Kalender-Sicht): {under}")
+        # Prüffenster: alle drei liegen im 6er-Fenster vor Fr 08-21.
+        if [d for d, _ in defizit_im_fenster(under, datetime.date(2026, 8, 21))] \
+                != [d for d, _ in under]:
+            errors.append("Prüffenster falsch: Fehltage vor 08-21 nicht im Fenster")
+        # Altbefund: drei Monate später liegen dieselben Tage außerhalb.
+        if defizit_im_fenster(under, datetime.date(2026, 10, 13)):
+            errors.append("Prüffenster falsch: Altbefund wird als Fenster-Fehltag gewertet")
+        # Laufender Tag zählt nicht als Defizit (Fr 08-21 selbst hat 0 Posts).
+        if any(d == datetime.date(2026, 8, 21) for d, _ in under):
+            errors.append("Laufender Tag wurde als Defizit gewertet")
+        # Launch-Grenze: der Freitag vor dem Launch wird nie bewertet.
+        if any(d < BLOG_LAUNCH for d, _ in under):
+            errors.append("Vor-Launch-Tag wurde bewertet")
+        # Fenster-Startpunkt: die letzten 6 Publikationstage strikt vor Fr 08-21
+        # sind Fr 08-14 … Fr 08-07 → Start Fr 08-07.
+        if defizit_fenster_start(datetime.date(2026, 8, 21), 6) != datetime.date(2026, 8, 7):
+            errors.append("Fensterstart falsch: "
+                          f"{defizit_fenster_start(datetime.date(2026, 8, 21), 6)}")
+        # Report-Sicht: Null-Tage erscheinen in der Tagesliste mit 0.
+        counts = _count_by_day(posts, heute=datetime.date(2026, 8, 21))
+        if counts.get(datetime.date(2026, 8, 14)) != 0:
+            errors.append("Report-Tagesliste zeigt den Null-Tag nicht")
+
     return errors
 
 
@@ -761,7 +877,7 @@ def main():
             sys.exit(2)
         print("✅ CADENCE-SELFTEST bestanden (Off-Day, Over-Cap, Re-Queue, "
               "Draft-Schutz, Park-Zustände queue/hold/manual/lost/stale, "
-              "Promotion-Hygiene, Idempotenz, Kalender-SSOT).")
+              "Promotion-Hygiene, Idempotenz, Kalender-SSOT, Fehltage/Prüffenster).")
         sys.exit(0)
 
     do_fix = "--fix" in args
@@ -825,13 +941,35 @@ def main():
               f"Post(s) länger als {HOLD_WARN_TAGE} Tage (siehe "
               f"CADENCE-GATE-REPORT.md).")
     total = len(off_day) + len(over_cap)
+    min_d_log = effective_limits()[0]
+    im_fenster = {d for d, _ in defizit_im_fenster(under_days)}
     if total == 0:
-        print(f"✅ Kadenz sauber: nur Mo/Mi/Fr, keine Über-Max-Tage "
-              f"({len(off_day)} Off-Day, {len(over_cap)} Over-Cap).")
-        if under_days:
-            for day, n in under_days:
-                print(f"   ⚠️ {day.isoformat()}: nur {n} Posts (Min {effective_limits()[0]}) "
-                      f"– Fallback-Slots heilen nach.")
+        if not under_days:
+            print(f"✅ Kadenz sauber: nur Mo/Mi/Fr, keine Über-Max-Tage "
+                  f"({len(off_day)} Off-Day, {len(over_cap)} Over-Cap), "
+                  f"kein Mindestziel-Defizit seit {BLOG_LAUNCH.isoformat()}.")
+            sys.exit(0)
+        print(f"✅ Kadenz ohne Off-Day/Über-Max: {len(off_day)} Off-Day, "
+              f"{len(over_cap)} Over-Cap.")
+        for day, n in under_days:
+            if day in im_fenster:
+                print(f"   🛑 {day.isoformat()}: nur {n} Posts (Min {min_d_log}) "
+                      f"– Fehltag im Prüffenster, nicht durch Fallback-Slots "
+                      f"heilbar, Nachlieferung nötig.")
+            else:
+                print(f"   ⚠️ {day.isoformat()}: nur {n} Posts (Min {min_d_log}) "
+                      f"– Altbefund außerhalb des Prüffensters.")
+        if do_fix:
+            # --fix ist Heiler, kein Gate: Deploy/Endkontrolle dürfen an
+            # historischen Fehltagen nicht scheitern. Der Befund steht im Log
+            # und im Report.
+            sys.exit(0)
+        if im_fenster:
+            print(f"🛑 {len(im_fenster)} Mindestziel-Fehltag/-tage im "
+                  f"Prüffenster ({DEFIZIT_FENSTER_PUBLIKATIONSTAGE} "
+                  f"Publikationstage). Nachlieferung über Redaktion/Engine, "
+                  f"danach erneut prüfen.")
+            sys.exit(1)
         sys.exit(0)
     if do_fix:
         print(f"✅ Kadenz-Heilung abgeschlossen: {len(healed)} Post(s) "
