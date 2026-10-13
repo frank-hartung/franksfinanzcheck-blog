@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
  endert:nutzen:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261013T124650Z
+DTSTAMP:20261013T124814Z
 DTSTART:20261013T160000Z
 DTEND:20261013T161500Z
 SUMMARY:Telegram (Kanal): Internet & DSL-Update: Was sich jetzt für di
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
  son-richtig:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261013T124650Z
+DTSTAMP:20261013T124814Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
 SUMMARY:Telegram (Kanal): Gasabschlag berechnen: So planst du die Heiz
