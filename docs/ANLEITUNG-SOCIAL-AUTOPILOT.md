@@ -209,6 +209,28 @@ Steuerung über die Variable **`SOCIAL_COPY_MODE`**: `auto` (Default) · `llm` �
 Fällt ein Beitrag durch, probiert der Autopilot **automatisch einen anderen Winkel** (bis zu 3).
 Bleibt er blockiert, steht der Grund im Cockpit – und der Beitrag wird **nicht** gesendet.
 
+Zwei Feinheiten, die seit der Dauerheilung #716 (12.10.2026) gelten:
+
+- **Threads zählen als ein Beitrag.** Link, Hashtags und Sprache werden über
+  alle Teile geprüft, die Längen- und Emoji-Grenze gilt jedem Teil einzeln –
+  die Plattform zählt jeden Teil als eigenen Post.
+- **Hashtags sind Schlagwörter, keine Behauptung.** L9 prüft den Fließtext ohne
+  Hashtag-Block; jedes Hashtag wird einzeln darauf geprüft, ob seine Zahlen im
+  Artikel belegt sind – wörtlich oder als Verkettung (`#503020Regel` ← 50/30/20).
+  Erfundene Zahlen blockieren weiterhin, im Text wie im Tag.
+
+### Was passiert, wenn ein Beitrag trotzdem nicht raus kann
+
+| Stufe | Verhalten |
+|---|---|
+| **Vorprüfung** | Der Plan enthält nur (Kanal × Artikel × Winkel), die das Gate bestehen. Nichts Sendbares belegt keinen Slot. |
+| **Winkel-Fallback** | Bis zu drei Winkel pro Beitrag, dann gilt er als blockiert. |
+| **Nachrücken** | Ein blockierter Slot wird im selben Lauf mit dem nächstbesten sendbaren Artikel besetzt – der Sendetermin bleibt erhalten. |
+| **Quarantäne** | Zwei Gate-Blockaden desselben Paares innerhalb von 21 Tagen setzen es aus. Besteht es die Vorprüfung wieder (Artikel oder Regel repariert), hebt der Planer die Sperre sofort auf. |
+
+Cockpit-Abschnitt **„Gate-Quarantäne & Vorprüfung"** zeigt beide Listen. Ein
+Kanal, der nichts Sendbares hat, ist damit nie wieder still – er ist sichtbar.
+
 ---
 
 ## 7 · Steuern, Testen, Eingreifen

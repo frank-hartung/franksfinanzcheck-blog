@@ -288,12 +288,29 @@ def aktion_social_autopilot_lauf(params: dict, daten: dict, ctx: dict) -> dict:
         # run_once() kapselt die Zähler unter ``results``. Die frühere flache
         # Auswertung meldete selbst nach echtem Versand stets „0 verarbeitet“.
         zaehler = bericht.get("results") if isinstance(bericht.get("results"), dict) else bericht
-        gesendet = zaehler.get("sent") or zaehler.get("gesendet") or 0
-        misslungen = zaehler.get("failed") or zaehler.get("fehler") or 0
+        gesendet = int(zaehler.get("sent") or zaehler.get("gesendet") or 0)
+        misslungen = int(zaehler.get("failed") or zaehler.get("fehler") or 0)
+        blockiert = int(zaehler.get("blocked") or 0)
+        nachgerueckt = int(zaehler.get("backfilled") or 0)
+        # GEHEILT heißt: Es ist wirklich etwas rausgegangen (Dauerheilung
+        # #716). Vorher galt ein Lauf mit „0 gesendet, 0 failed, 1 blockiert"
+        # als Erfolg – die Sofortheilung meldete grün, der Kanal blieb stumm
+        # und die Eskalation wusste nicht, dass sie gebraucht wird.
+        geheilt = gesendet > 0
+        zusatz = (f"{gesendet} gesendet, {blockiert} blockiert, "
+                  f"{misslungen} gescheitert, {nachgerueckt} nachgerückt")
+        if modus == "recover":
+            if geheilt:
+                return ok(f"Sofortheilung wirksam: {zusatz}", geheilt=True,
+                          gesendet=gesendet, blockiert=blockiert, modus=modus)
+            return fehler(f"Sofortheilung ohne Versand – {zusatz}", geheilt=False,
+                          gesendet=gesendet, blockiert=blockiert, modus=modus)
         if misslungen:
-            return fehler(f"Autopilot: {gesendet} gesendet, {misslungen} gescheitert")
-        return ok(f"Autopilot: {gesendet} Beiträge verarbeitet")
-    return ok("Autopilot-Lauf beendet")
+            return fehler(f"Autopilot: {zusatz}", geheilt=geheilt,
+                          gesendet=gesendet, blockiert=blockiert, modus=modus)
+        return ok(f"Autopilot: {zusatz}", geheilt=geheilt,
+                  gesendet=gesendet, blockiert=blockiert, modus=modus)
+    return ok("Autopilot-Lauf beendet", geheilt=False)
 
 
 # ================================================== 2 · Kuratierung (lesend)

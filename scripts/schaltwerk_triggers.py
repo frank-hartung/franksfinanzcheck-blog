@@ -307,6 +307,11 @@ def trigger_kanal_stille(params: dict, ctx: dict) -> list[dict]:
 
     Das ist der Wachhund gegen „läuft, postet aber nicht“.
     params: stunden (Standard 36)
+
+    DIAGNOSE STATT BAUCHGEFÜHL (Dauerheilung #716): Das Ereignis trägt die
+    wahrscheinliche Ursache mit – häufigste Gate-Blockade, Anzahl blockierter
+    Slots, Quarantäne-Stand und Planbestand. Die Meldung sagt damit sofort,
+    WER oder WAS den Kanal hält, statt nur „sendet nicht" zu melden.
     """
     import schaltwerk
     import schaltwerk_actions as act
@@ -317,6 +322,7 @@ def trigger_kanal_stille(params: dict, ctx: dict) -> list[dict]:
         import social_planner as planner
 
         state = planner.load_state()
+        plan = planner.planned_items(planner.load_schedule())
     except Exception:  # noqa: BLE001
         return []
 
@@ -329,11 +335,31 @@ def trigger_kanal_stille(params: dict, ctx: dict) -> list[dict]:
         letzter = _naiv(schaltwerk.parse_dt((verlauf[-1].get("posted_at") if verlauf else "") or ""))
         if letzter and _naiv(jetzt) - letzter < timedelta(hours=stunden):
             continue
+
+        cid = kanal["id"]
+        blockaden = [f for f in (state.get("failures") or [])
+                     if f.get("channel") == cid and planner.GATE_RULE_RX.match(
+                         str(f.get("reason") or "").strip())]
+        zaehler: dict[str, int] = {}
+        for f in blockaden:
+            grund = str(f.get("reason") or "").strip()[:120]
+            zaehler[grund] = zaehler.get(grund, 0) + 1
+        ursache = max(zaehler.items(), key=lambda kv: (kv[1], kv[0]))[0] if zaehler else ""
+        quar = sorted(slug for (kan, slug) in planner.quarantiniert(state) if kan == cid)
+
         events.append({
             "key": f"stille:{kanal['id']}:{jetzt.date().isoformat()}",
             "daten": {"kanal": kanal["id"], "kanal_label": kanal["label"],
                       "stunden": stunden,
-                      "letzter_post": verlauf[-1].get("posted_at") if verlauf else "nie"},
+                      "datum": jetzt.date().isoformat(),
+                      "letzter_post": verlauf[-1].get("posted_at") if verlauf else "nie",
+                      "stille_stunden": round((_naiv(jetzt) - letzter).total_seconds() / 3600, 1)
+                      if letzter else 0,
+                      "ursache": ursache or "keine Gate-Blockade protokolliert",
+                      "blockaden": len(blockaden),
+                      "quarantaene": len(quar),
+                      "quarantaene_liste": ", ".join(quar[:5]) or "–",
+                      "geplant": sum(1 for it in plan if it.get("channel") == cid)},
         })
     return events
 

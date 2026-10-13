@@ -216,7 +216,9 @@ class TestStandbyUndSelfHealing(unittest.TestCase):
             res = act.aktion_social_autopilot_lauf(
                 {"modus": "run"}, {}, {"dry_run": True})
         self.assertEqual(res["status"], "ok")
-        self.assertIn("2 Beiträge", res["meldung"])
+        # Seit #716 nennt die Meldung alle vier Zähler, nicht nur einen.
+        self.assertIn("2 gesendet", res["meldung"])
+        self.assertEqual(res["gesendet"], 2)
 
     def test_stiller_kanal_erneuert_plan_vor_escalation(self):
         regel = next(r for r in sw.load_regeln().get("regeln") or []
@@ -364,6 +366,129 @@ class TestStatePflege(unittest.TestCase):
     def test_render_arbeitet_rekursiv_in_params(self):
         out = sw.render({"a": "{n}", "b": ["{n}", {"c": "{n}"}]}, {"n": 5})
         self.assertEqual(out, {"a": "5", "b": ["5", {"c": "5"}]})
+
+
+class TestBedingteAktionen716(unittest.TestCase):
+    """`wenn:` – Zapiers „Only continue if" auf Aktionsebene.
+
+    Meldung #716: Das Issue „Kanal sendet seit 48 h nicht" entstand 7 Sekunden,
+    NACHDEM die Sofortheilung denselben Kanal wieder beliefert hatte. Die
+    Eskalation darf nur feuern, wenn Schritt 1 nichts gebracht hat.
+    """
+
+    def _kette(self, geheilt):
+        """Zwei Schritte: Heilung (Stub) → bedingte Eskalation."""
+        regeln = regelwerk(aktionen=[
+            {"typ": "probe_heilung", "params": {}},
+            {"typ": "protokoll",
+             "wenn": [{"feld": "schritte.1.geheilt", "operator": "ist_falsch"}],
+             "params": {"text": "eskalation"}},
+        ])
+        vorher = act.AKTION.get("probe_heilung")
+        act.AKTION["probe_heilung"] = (
+            lambda params, daten, ctx: act.ok("Sofortheilung", geheilt=geheilt))
+        try:
+            return sw.fuehre_aktionen(regeln["regeln"][0], {"daten": {}},
+                                      {"jetzt": JETZT, "dry_run": True})
+        finally:
+            if vorher is None:
+                act.AKTION.pop("probe_heilung", None)
+            else:
+                act.AKTION["probe_heilung"] = vorher
+
+    def test_schritt_wird_uebersprungen_wenn_bedingung_nicht_erfuellt(self):
+        # Schritt 1 hat wirklich gesendet → die Eskalation muss ausbleiben.
+        ergebnisse = self._kette(geheilt=True)
+        self.assertEqual(ergebnisse[0]["status"], "ok")
+        self.assertEqual(ergebnisse[1]["status"], "uebersprungen")
+        self.assertIn("Bedingung nicht erfüllt", ergebnisse[1]["meldung"])
+
+    def test_schritt_laeuft_wenn_bedingung_erfuellt(self):
+        # Schritt 1 ohne Versand → die Eskalation ist der richtige Weg.
+        ergebnisse = self._kette(geheilt=False)
+        self.assertEqual(ergebnisse[0]["status"], "ok")
+        self.assertEqual(ergebnisse[1]["status"], "ok")
+        self.assertIn("eskalation", ergebnisse[1]["meldung"])
+
+    def test_unbekanntes_ergebnis_eskaliert(self):
+        # Fail-safe: Fehlt das Feld (Aktion abgestürzt), gilt „nicht geheilt".
+        regeln = regelwerk(aktionen=[
+            {"typ": "protokoll", "wenn": [{"feld": "schritte.1.geheilt",
+                                           "operator": "ist_falsch"}],
+             "params": {"text": "eskalation"}},
+        ])
+        ergebnisse = sw.fuehre_aktionen(regeln["regeln"][0], {"daten": {}},
+                                        {"jetzt": JETZT, "dry_run": True})
+        self.assertEqual(ergebnisse[0]["status"], "ok")
+
+    def test_regelwerk_verdrahtet_die_eskalations_bedingung(self):
+        regel = next(r for r in sw.load_regeln().get("regeln") or []
+                     if r.get("id") == "stiller-kanal")
+        issue = next(a for a in regel["aktionen"] if a.get("typ") == "github_issue")
+        self.assertEqual(issue.get("wenn"),
+                         [{"feld": "schritte.1.geheilt", "operator": "ist_falsch"}])
+        protokoll = [a for a in regel["aktionen"] if a.get("typ") == "protokoll"]
+        self.assertTrue(protokoll, "kein Erfolgs-Pfad für eine gelungene Heilung")
+        self.assertEqual(protokoll[0].get("wenn"),
+                         [{"feld": "schritte.1.geheilt", "operator": "ist_wahr"}])
+
+    def test_dedupe_schluessel_traegt_datum(self):
+        # Ohne {datum} galt die Marke 45 Tage – ein zweiter Ausfall im
+        # Folgemonat wäre nie gemeldet worden.
+        regel = next(r for r in sw.load_regeln().get("regeln") or []
+                     if r.get("id") == "stiller-kanal")
+        self.assertEqual(regel.get("dedupe_key"), "stille:{kanal}:{datum}")
+        gerendert = sw.render(regel["dedupe_key"],
+                              {"kanal": "mastodon", "datum": "2026-10-12"})
+        self.assertEqual(gerendert, "stille:mastodon:2026-10-12")
+
+
+class TestStilleDiagnose716(unittest.TestCase):
+    """Der Alarm nennt die Ursache, nicht nur die Stille."""
+
+    def test_ereignis_traegt_ursache_und_befund(self):
+        import social_planner as planner
+
+        state = {
+            "version": 1,
+            "history": [],
+            "failures": [
+                {"at": sw.iso(JETZT - timedelta(hours=3)), "channel": "mastodon",
+                 "slug": "blocker", "reason": "L9 Zahl ohne Beleg im Artikel: 503020"},
+                {"at": sw.iso(JETZT - timedelta(hours=2)), "channel": "mastodon",
+                 "slug": "blocker", "reason": "L9 Zahl ohne Beleg im Artikel: 503020"},
+            ],
+        }
+        with patch.object(planner, "load_state", return_value=state), \
+             patch.object(planner, "load_schedule", return_value={"items": [
+                 {"channel": "mastodon", "status": "planned"}]}), \
+             patch.object(act, "kanal_zustand", return_value=[
+                 {"id": "mastodon", "label": "Mastodon", "bereit": True, "enabled": True,
+                  "grund": ""}]):
+            events = trg.trigger_kanal_stille({"stunden": 48}, {"jetzt": JETZT})
+
+        self.assertEqual(len(events), 1)
+        daten = events[0]["daten"]
+        self.assertIn("L9 Zahl ohne Beleg", daten["ursache"])
+        self.assertEqual(daten["blockaden"], 2)
+        self.assertEqual(daten["quarantaene"], 1)
+        self.assertEqual(daten["datum"], JETZT.date().isoformat())
+        self.assertEqual(daten["geplant"], 1)
+        self.assertEqual(events[0]["key"], f"stille:mastodon:{JETZT.date().isoformat()}")
+
+    def test_meldungstext_nennt_ursache_und_pruefpfad(self):
+        regel = next(r for r in sw.load_regeln().get("regeln") or []
+                     if r.get("id") == "stiller-kanal")
+        issue = next(a for a in regel["aktionen"] if a.get("typ") == "github_issue")
+        text = sw.render(issue["params"]["text"], {
+            "kanal": "mastodon", "kanal_label": "Mastodon", "stille_stunden": 51.5,
+            "letzter_post": "2026-10-10T18:15:58+02:00", "geplant": 3, "blockaden": 5,
+            "quarantaene": 1, "quarantaene_liste": "blocker",
+            "ursache": "L9 Zahl ohne Beleg im Artikel: 503020"})
+        self.assertIn("51.5", text)
+        self.assertIn("L9 Zahl ohne Beleg", text)
+        self.assertIn("--dry-run --channel mastodon", text)
+        self.assertNotIn("{", text, "Platzhalter blieb stehen")
 
 
 if __name__ == "__main__":

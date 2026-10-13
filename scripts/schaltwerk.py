@@ -410,6 +410,21 @@ def fuehre_aktionen(regel: dict, event: dict, ctx: dict) -> list[dict]:
         if not isinstance(aktion, dict):
             continue
         typ = (aktion.get("typ") or "").strip()
+        # BEDINGTER SCHRITT (Dauerheilung #716): `wenn:` ist Zapiers „Only
+        # continue if"-Pfad auf Aktionsebene. Die Eskalation einer Regel darf
+        # davon abhängen, was der Schritt davor WIRKLICH erreicht hat – hier:
+        # ob die Sofortheilung den Kanal wieder beliefert hat. Die Bedingung
+        # liest dieselben Felder wie `filter:` (inkl. `schritte.<nr>.<feld>`).
+        bedingungen = aktion.get("wenn")
+        if bedingungen:
+            liste = bedingungen if isinstance(bedingungen, list) else [bedingungen]
+            erfuellt, grund = filter_erfuellt({"filter": liste}, daten)
+            if not erfuellt:
+                res = {"schritt": nr, "typ": typ, "status": "uebersprungen",
+                       "meldung": f"Bedingung nicht erfüllt – {grund}"}
+                ergebnisse.append(res)
+                daten.setdefault("schritte", {})[str(nr)] = res
+                continue
         params = render(aktion.get("params") or {}, daten)
         handler = act.AKTION.get(typ)
         if not handler:
@@ -464,7 +479,8 @@ def run(regeln: dict, *, dry_run: bool = False, nur_regel: str = "",
     }
 
     bericht = {"zeit": iso(jetzt), "dry_run": dry_run, "regeln": [],
-               "aktionen_gesamt": 0, "fehler": 0, "standby": 0, "ausgefuehrt": 0}
+               "aktionen_gesamt": 0, "fehler": 0, "standby": 0, "ausgefuehrt": 0,
+               "aktionen_uebersprungen": 0}
     logzeilen = []
     budget = max_aktionen
 
@@ -539,6 +555,8 @@ def run(regeln: dict, *, dry_run: bool = False, nur_regel: str = "",
             bericht["fehler"] += sum(1 for r in ergebnisse if r.get("status") == "fehler")
             bericht["standby"] += sum(1 for r in ergebnisse if r.get("status") == "standby")
             bericht["ausgefuehrt"] += sum(1 for r in ergebnisse if r.get("status") == "ok")
+            bericht["aktionen_uebersprungen"] += sum(
+                1 for r in ergebnisse if r.get("status") == "uebersprungen")
 
             harter_fehler = any(r.get("status") == "fehler" for r in ergebnisse)
             for r in ergebnisse:
@@ -583,6 +601,7 @@ def drucke_bericht(bericht: dict) -> None:
     print("─" * 64)
     print(f" Aktionen: {bericht.get('aktionen_gesamt')} · ausgeführt "
           f"{bericht.get('ausgefuehrt')} · Standby {bericht.get('standby')} "
+          f"· bedingt übersprungen {bericht.get('aktionen_uebersprungen', 0)} "
           f"· Fehler {bericht.get('fehler')}")
 
 
@@ -656,7 +675,9 @@ def schreibe_cockpit(regeln: dict, state: dict | None = None,
                    f"- Modus: {'Probelauf' if bericht.get('dry_run') else 'scharf'}",
                    f"- Aktionen: {bericht.get('aktionen_gesamt')} "
                    f"(ausgeführt {bericht.get('ausgefuehrt')}, "
-                   f"Standby {bericht.get('standby')}, Fehler {bericht.get('fehler')})"]
+                   f"Standby {bericht.get('standby')}, "
+                   f"bedingt übersprungen {bericht.get('aktionen_uebersprungen', 0)}, "
+                   f"Fehler {bericht.get('fehler')})"]
 
     zeilen += ["", "---", "",
                "**Kanal scharf schalten:** Secret hinterlegen "

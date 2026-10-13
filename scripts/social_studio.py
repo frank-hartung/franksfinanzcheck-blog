@@ -107,6 +107,48 @@ def ready_channel_ids(cfg: dict, *, force: bool = False, channel: str = "") -> s
 
 
 # --------------------------------------------------------------------- Bilder
+def cover_source(article: dict) -> str:
+    """Lokaler Cover-Pfad, OHNE eine Format-Variante zu rendern.
+
+    Die Plan-Vorprüfung braucht nur die Aussage „liegt ein Bild vor" (Gate
+    L10). `resolve_media()` würde dafür bei jedem Kandidaten eine Variante
+    auf Platte erzeugen – bei 44 Artikeln × 10 Kanälen ein unnötiger
+    Schreiblauf in jedem Zweistunden-Takt.
+    """
+    rel = article.get("cover") or ""
+    src = os.path.join(BLOG_DIR, "static", rel) if rel else ""
+    if src and os.path.isfile(src):
+        return src
+    guess = os.path.join(BLOG_DIR, "static", "images", "covers",
+                         f"{article.get('slug') or ''}.jpg")
+    return guess if os.path.isfile(guess) else ""
+
+
+def gate_validator(meta: dict, state: dict):
+    """Vorprüfung für den Planer: gleiche Maßstäbe wie der Versand.
+
+    Der Planer bekommt damit dieselbe Instanz zu sehen, die später über den
+    Versand entscheidet – deterministisch, offline, ohne KI-Politur (die ist
+    ein Bonus, kein Ersatz). Ergebnis: (frei, grund).
+    """
+    base = str(meta.get("base_url") or copy.DEFAULT_BASE).rstrip("/")
+
+    def pruefen(article: dict, cid: str, ch: dict, angle: str) -> tuple[bool, str]:
+        try:
+            pkg = copy.compose(article, cid, ch, angle, meta, use_llm=False)
+        except Exception as exc:  # noqa: BLE001 – Vorprüfung darf nie killen
+            return False, f"Textbau gescheitert: {exc}"
+        src = cover_source(article)
+        if src and ((ch.get("media") or {}).get("supported", True)):
+            pkg["media_path"] = src
+            pkg["media_url"] = f"{base}/{images.static_rel(src)}"
+        ok, viol, _metrics = gate.check(pkg, ch, meta,
+                                        history=state.get("history") or [])
+        return bool(ok), ("; ".join(viol)[:200] if viol else "")
+
+    return pruefen
+
+
 def resolve_media(article: dict, channel_cfg: dict, meta: dict) -> tuple[str, str]:
     """Liefert (lokaler Pfad, öffentliche URL) für den Beitrag."""
     media_cfg = (channel_cfg or {}).get("media") or {}
@@ -136,6 +178,69 @@ def build_package(article: dict, cid: str, ch: dict, angle: str, meta: dict,
     pkg["media_path"] = path
     pkg["media_url"] = url if url and str(url).startswith("https://") else ""
     return pkg
+
+
+def backfill_candidate(cfg: dict, pool: list[dict], state: dict, schedule: dict,
+                       now, cid: str, meta: dict, *, skip: set[str]):
+    """Nächster sendbarer Ersatzartikel für denselben Kanal am selben Tag.
+
+    Dauerheilung #716: Fällt ein fälliger Beitrag am Gate aus, war der Slot
+    bisher weg – niemand rückte nach. Genau diese verlorenen Slots summierten
+    sich zur 48-Stunden-Stille. Der Ersatz hält jede Betriebsgrenze ein
+    (Sperrfrist, Tageszähler, Quarantäne, Vorprüfung) und wird nur genommen,
+    wenn er das Freigabe-Gate WIRKLICH besteht.
+    """
+    ch = sch.channel_map(cfg).get(cid) or {}
+    if not ch.get("enabled"):
+        return None
+    validator = gate_validator(meta, state)
+    quar = planner.quarantiniert(state, now)
+    heute = now.date().isoformat()
+    heute_verbaut = {it.get("slug") for it in (schedule.get("items") or [])
+                     if it.get("channel") == cid and it.get("date") == heute}
+    cands = planner._candidates(cfg, pool, state, now, planner.load_performance())
+    kandidat: list[dict] = [
+        c for c in cands
+        if c["channel"] == cid
+        and c["slug"] not in skip
+        and c["slug"] not in heute_verbaut
+        and (cid, c["slug"]) not in quar
+        and c["earliest"] <= now
+    ]
+    kandidat.sort(key=lambda c: (c["tier"], c["rank"], c["slug"]))
+    angles = list(ch.get("angles") or ["nutzen"])
+    for cand in kandidat:
+        genommen = planner.used_angles(state, cid, cand["slug"])
+        for winkel in ([a for a in angles if a not in genommen] or angles):
+            frei, grund = validator(cand["article"], cid, ch, winkel)
+            if frei:
+                return cand["article"], winkel, grund
+    return None
+
+
+def register_backfill(schedule: dict, cid: str, article: dict, angle: str,
+                      now, ersatz_fuer: str) -> dict:
+    """Trägt den nachgerückten Beitrag als eigenen Planposten ein.
+
+    Der blockierte Originalposten bleibt mit seinem Grund stehen – die
+    Planung bleibt damit vollständig auditierbar.
+    """
+    item = {
+        "id": f"{cid}:{article['slug']}:{angle}:{now.date().isoformat()}",
+        "channel": cid,
+        "slug": article["slug"],
+        "angle": angle,
+        "kind": "backfill",
+        "pillar": article.get("pillar") or "",
+        "date": now.date().isoformat(),
+        "time": now.strftime("%H:%M"),
+        "scheduled_at": planner.iso(now),
+        "status": "planned",
+        "attempts": 0,
+        "reason": f"nachgerückt für {ersatz_fuer}",
+    }
+    schedule.setdefault("items", []).append(item)
+    return item
 
 
 def accelerate_recovery_slot(schedule: dict, state: dict, cfg: dict, channel: str,
@@ -179,7 +284,30 @@ def accelerate_recovery_slot(schedule: dict, state: dict, cfg: dict, channel: st
     if not future:
         return False, "kein geeigneter Zukunftsslot"
 
-    item = future[0]
+    # Nur einen Slot vorziehen, der das Freigabe-Gate auch besteht: Eine
+    # Sofortheilung, die am Gate scheitert, heilt nichts und meldet trotzdem
+    # „versucht" (Meldung #716).
+    quar = planner.quarantiniert(state, now)
+    meta = sch.meta_of(cfg)
+    pruefen = gate_validator(meta, state)
+    by_slug = {a["slug"]: a for a in
+               copy.article_pool(base_url=str(meta.get("base_url") or copy.DEFAULT_BASE))}
+    sendbar = []
+    for it in future:
+        if (channel, it.get("slug")) in quar:
+            continue
+        art = by_slug.get(it.get("slug") or "")
+        if not art:
+            continue
+        frei, _grund = pruefen(art, channel,
+                               sch.channel_map(cfg).get(channel) or {},
+                               it.get("angle") or "nutzen")
+        if frei:
+            sendbar.append(it)
+    if not sendbar:
+        return False, "kein Zukunftsslot besteht die Vorprüfung"
+
+    item = sendbar[0]
     item["scheduled_at"] = planner.iso(now)
     item["date"] = now.date().isoformat()
     item["time"] = now.strftime("%H:%M")
@@ -209,7 +337,12 @@ def run_once(cfg: dict, *, dry_run: bool = False, channel: str = "",
     # und fehlende Kanäle deterministisch bis zum Horizont.
     planned_before = len(planner.planned_items(schedule))
     ready = ready_channel_ids(cfg, force=force, channel=channel)
-    schedule = planner.build_plan(cfg, pool, state, now=now, ready_channels=ready)
+    # Sendbarkeits-Vorprüfung (Dauerheilung #716): Der Plan enthält nur noch
+    # Beiträge, die das Freigabe-Gate bestehen. Vorher planten wir Artikel,
+    # die das Gate in JEDEM Winkel ablehnte – der Slot war damit verloren und
+    # der Kanal nach fünf solcher Slots 48 Stunden stumm.
+    schedule = planner.build_plan(cfg, pool, state, now=now, ready_channels=ready,
+                                  validator=gate_validator(meta, state))
     planner.prune(schedule)
     planned_after = len(planner.planned_items(schedule))
     print(f"🗓️  Plan gerollt: {planned_before} → {planned_after} geplante Beiträge "
@@ -230,7 +363,8 @@ def run_once(cfg: dict, *, dry_run: bool = False, channel: str = "",
     print(f"⏰ {len(due)} Beitrag/Beiträge jetzt fällig.")
 
     llm_left = int(((meta.get("llm") or {}).get("max_per_run")) or 0)
-    results = {"sent": 0, "failed": 0, "blocked": 0, "standby": 0, "deferred": 0}
+    results = {"sent": 0, "failed": 0, "blocked": 0, "standby": 0, "deferred": 0,
+               "backfilled": 0}
     log_lines: list[str] = []
 
     for item in due:
@@ -241,9 +375,21 @@ def run_once(cfg: dict, *, dry_run: bool = False, channel: str = "",
         slug = item.get("slug") or ""
         article = by_slug.get(slug)
         if not article:
-            planner.set_status(schedule, item["id"], "blocked", "Artikel nicht mehr im Bestand")
+            grund = "Artikel nicht mehr im Bestand"
+            planner.set_status(schedule, item["id"], "blocked", grund)
             results["blocked"] += 1
-            continue
+            ersatz = backfill_candidate(cfg, pool, state, schedule, now, cid, meta,
+                                        skip={slug})
+            if ersatz:
+                article, winkel, _ = ersatz
+                item = register_backfill(schedule, cid, article, winkel, now, slug)
+                slug = article["slug"]
+                item["angle"] = winkel
+                results["backfilled"] += 1
+                print(f"   🔁 {cid}: nachgerückt → {slug} ({winkel})")
+            else:
+                print(f"   🛑 {cid}/{slug}: {grund} – kein Ersatz sendbar.")
+                continue
 
         ad = sch.get_adapter(cid, cfg)
         if not ad:
@@ -302,7 +448,21 @@ def run_once(cfg: dict, *, dry_run: bool = False, channel: str = "",
                                            "slug": slug, "reason": "; ".join(violations)[:200]})
             results["blocked"] += 1
             print(f"   🛑 {cid}/{slug}: Gate blockiert – {violations[0] if violations else '?'}")
-            continue
+            # NACHRÜCKEN: Der Sendetermin bleibt erhalten, ein anderer Artikel
+            # übernimmt ihn. Ohne diesen Schritt kostet jede Gate-Blockade
+            # einen Slot – fünf davon machten Mastodon 48 h stumm (#716).
+            ersatz = backfill_candidate(cfg, pool, state, schedule, now, cid, meta,
+                                        skip={slug})
+            if not ersatz:
+                print(f"   ⚠ {cid}: kein Ersatzartikel sendbar – Slot bleibt leer.")
+                continue
+            alt = slug
+            article, used_angle, _ = ersatz
+            slug = article["slug"]
+            item = register_backfill(schedule, cid, article, used_angle, now, alt)
+            pkg = build_package(article, cid, ch, used_angle, meta, use_llm=False)
+            results["backfilled"] += 1
+            print(f"   🔁 {cid}: nachgerückt → {slug} ({used_angle}) statt {alt}")
 
         if dry_run:
             print("=" * 72)
@@ -446,11 +606,28 @@ def write_cockpit(cfg: dict, state: dict, schedule: dict, results: dict,
             lines.append(f"- {(f.get('at') or '')[:16]} · {f.get('channel')} · "
                          f"{f.get('slug')} · {f.get('reason')}")
 
+    # Sendbarkeits-Befund (Dauerheilung #716): Was der Planer NICHT einplant,
+    # muss sichtbar sein – sonst verhungert ein Kanal lautlos.
+    quar = schedule.get("quarantaene") or {}
+    sperrungen = schedule.get("gate_sperrungen") or {}
+    if quar or sperrungen:
+        lines += ["", "## Gate-Quarantäne & Vorprüfung", ""]
+        if quar:
+            lines += ["Wiederholt am Gate gescheitert – befristet ausgesetzt:", ""]
+            for key, grund in list(quar.items())[:12]:
+                kanal, _, slug = key.partition("|")
+                lines.append(f"- 🚧 `{kanal}` · {slug} · {grund}")
+        if sperrungen:
+            lines += ["", "In keinem Winkel sendbar (kein Slot vergeben):", ""]
+            for key, grund in list(sperrungen.items())[:12]:
+                kanal, _, slug = key.partition("|")
+                lines.append(f"- ⛔ `{kanal}` · {slug} · {grund}")
+
     r = results or {}
     lines += ["", "## Dieser Lauf", "",
               f"- gesendet: **{r.get('sent', 0)}** · fehlgeschlagen: {r.get('failed', 0)} · "
-              f"blockiert: {r.get('blocked', 0)} · Standby: {r.get('standby', 0)} · "
-              f"verschoben: {r.get('deferred', 0)}",
+              f"blockiert: {r.get('blocked', 0)} · nachgerückt: {r.get('backfilled', 0)} · "
+              f"Standby: {r.get('standby', 0)} · verschoben: {r.get('deferred', 0)}",
               "",
               "---",
               "*Erzeugt von scripts/social_studio.py · Kanal-Playbook: "
@@ -644,7 +821,8 @@ def main() -> int:
                    force=force, recover=recover, now=now)
     r = out["results"]
     print(f"\n📊 gesendet {r['sent']} · fehlgeschlagen {r['failed']} · "
-          f"blockiert {r['blocked']} · Standby {r['standby']} · verschoben {r['deferred']}")
+          f"blockiert {r['blocked']} · nachgerückt {r.get('backfilled', 0)} · "
+          f"Standby {r['standby']} · verschoben {r['deferred']}")
     print(f"📄 Cockpit: {os.path.basename(COCKPIT)}")
 
     # Vollausfall = echter Vorfall (Alarmierung greift). Standby zählt nicht.

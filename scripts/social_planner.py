@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import re
 import sys
 from datetime import date, datetime, timedelta, timezone
 
@@ -49,6 +50,17 @@ LATE_GRACE_HOURS = 48
 # Ein Artikel darf pro Tag auf maximal so vielen Kanälen erscheinen
 # (die Launch-Welle bewusst begrenzen – nie 10 Kanäle gleichzeitig).
 MAX_CHANNELS_PER_ARTICLE_PER_DAY = 2
+
+# GATE-QUARANTÄNE (Dauerheilung #716): Scheitert ein (Kanal, Artikel)-Paar
+# wiederholt am Freigabe-Gate, plant der Planer es für eine Weile nicht mehr
+# ein. Vorher kannte `_candidates()` die Fehlerliste überhaupt nicht: Der
+# 50-30-20-Ratgeber wurde fünfmal neu eingeplant und blockierte fünf Slots,
+# bis der Kanal Mastodon 48 Stunden stumm war. Gezählt werden NUR Gate-
+# Blockaden (Grund beginnt mit einer Regelkennung „L<n>"), keine Sende-
+# fehler der Plattform-API – die bleiben Sache der Versuchszähler.
+GATE_QUARANTINE_FAILS = 2
+GATE_QUARANTINE_DAYS = 21
+GATE_RULE_RX = re.compile(r"^L\d+\b")
 
 
 # ---------------------------------------------------------------- Zeitzonen
@@ -200,6 +212,50 @@ def total_on_day(state: dict, day: date) -> int:
                if (e.get("posted_at") or "").startswith(prefix) and e.get("ok"))
 
 
+def gate_blockaden(state: dict, kanal: str, slug: str, now: datetime | None = None,
+                   tage: int = GATE_QUARANTINE_DAYS) -> list[dict]:
+    """Gate-Blockaden für (Kanal, Artikel) innerhalb der letzten `tage` Tage."""
+    now = now or berlin_now()
+    grenze = now - timedelta(days=tage)
+    out = []
+    for e in state.get("failures") or []:
+        if e.get("channel") != kanal or e.get("slug") != slug:
+            continue
+        if not GATE_RULE_RX.match(str(e.get("reason") or "").strip()):
+            continue
+        at = parse_dt(e.get("at") or "")
+        if at and at < grenze:
+            continue
+        out.append(e)
+    return out
+
+
+def quarantiniert(state: dict, now: datetime | None = None,
+                  ab_fail: int = GATE_QUARANTINE_FAILS,
+                  tage: int = GATE_QUARANTINE_DAYS) -> dict[tuple[str, str], str]:
+    """(Kanal, Artikel)-Paare in Gate-Quarantäne → Begründung.
+
+    Die Schwelle ist bewusst niedrig: Zwei Blockaden derselben Regel sind kein
+    Zufall, sondern ein Befund am Artikel oder am Kanal. Die Quarantäne ist
+    befristet – nach `tage` Tagen darf das Paar erneut antreten, damit eine
+    reparierte Fassung wieder senden kann.
+    """
+    now = now or berlin_now()
+    grenze = now - timedelta(days=tage)
+    zaehler: dict[tuple[str, str], tuple[int, str]] = {}
+    for e in state.get("failures") or []:
+        grund = str(e.get("reason") or "").strip()
+        if not GATE_RULE_RX.match(grund):
+            continue
+        at = parse_dt(e.get("at") or "")
+        if at and at < grenze:
+            continue
+        key = (e.get("channel") or "", e.get("slug") or "")
+        n, erster = zaehler.get(key, (0, grund))
+        zaehler[key] = (n + 1, erster)
+    return {k: v[1] for k, v in zaehler.items() if v[0] >= ab_fail}
+
+
 def used_angles(state: dict, channel: str, slug: str) -> set[str]:
     return {e.get("angle") for e in (state.get("history") or [])
             if e.get("channel") == channel and e.get("slug") == slug and e.get("angle")}
@@ -266,11 +322,20 @@ def _cooldown_days(base_cooldown: int, pillar: str, channel_perf: dict | None) -
     return max(14, round(base_cooldown * factor))
 
 
-def _candidates(cfg, pool, state, now, performance: dict | None = None):
-    """Baut die (Kanal × Artikel)-Kandidaten mit Frühzeit und Rang."""
+def _candidates(cfg, pool, state, now, performance: dict | None = None,
+                quar: dict | None = None):
+    """Baut die (Kanal × Artikel)-Kandidaten mit Frühzeit und Rang.
+
+    Paare in Gate-Quarantäne fehlen vollständig: Wer das Freigabe-Gate nicht
+    besteht, darf keinen Slot belegen (Dauerheilung #716). `quar` darf der
+    Aufrufer reichen, wenn er die Quarantäne zuvor selbst geprüft hat
+    (build_plan hebt sie auf, sobald ein Artikel die Vorprüfung wieder
+    besteht) – sonst würden beide Stellen unabhängig voneinander urteilen.
+    """
     meta = cfg.get("meta") or {}
     window = int(meta.get("new_article_window_days") or 10)
     performance = performance or {}
+    quar = quarantiniert(state, now) if quar is None else quar
     cands = []
     for cid, ch in (cfg.get("channels") or {}).items():
         if not (ch or {}).get("enabled"):
@@ -283,6 +348,8 @@ def _candidates(cfg, pool, state, now, performance: dict | None = None):
         min_age = float(ch.get("min_article_age_days") or 0)
 
         for art in pool:
+            if (cid, art["slug"]) in quar:
+                continue
             published = parse_dt(art.get("published") or "")
             cooldown = _cooldown_days(base_cooldown, art.get("pillar") or "", channel_perf)
             last = last_post(state, cid, art["slug"])
@@ -332,10 +399,54 @@ def _not_in_cooldown(item: dict, cfg: dict, state: dict, now: datetime,
     return (now - at) >= timedelta(days=cooldown)
 
 
+def _sendbarer_winkel(validator, cache: dict, ch: dict, cid: str, kandidat: dict,
+                      state: dict, items: list[dict], day: date, sequenz: int,
+                      channel_perf: dict) -> tuple[str | None, str]:
+    """Wählt den Winkel – mit Validator nur einen, der das Gate besteht.
+
+    Ohne Validator (Offline-Planung, Alt-Aufrufer) verhält sich die Funktion
+    exakt wie die frühere direkte `pick_angle()`-Wahl. Mit Validator wird die
+    Wahl zur Vorprüfung: Der Plan enthält dann nur noch Beiträge, die das
+    Freigabe-Gate wirklich passieren. Das ist der Kern der Dauerheilung #716 –
+    ein Slot, der von vornherein nicht sendbar ist, kostet den Kanal einen
+    Sendetermin und am Ende die Reichweite.
+    """
+    slug = kandidat["slug"]
+    genommen = {it.get("angle") for it in items
+                if it.get("channel") == cid and it.get("slug") == slug}
+    gewichte = (channel_perf.get("angles") and {
+        a: d.get("score", 1.0) for a, d in channel_perf["angles"].items()})
+    primaer = pick_angle(ch, cid, slug, state, genommen, day, sequenz,
+                         angle_weights=gewichte)
+    if validator is None:
+        return primaer, ""
+
+    angles = list(ch.get("angles") or ["nutzen"])
+    benutzt = used_angles(state, cid, slug) | genommen
+    reihenfolge = [primaer] + [a for a in angles if a != primaer]
+    # Deterministisch: frische Winkel zuerst, dann Playbook-Reihenfolge.
+    reihenfolge.sort(key=lambda a: (a in benutzt,
+                                    angles.index(a) if a in angles else len(angles), a))
+    grund = ""
+    for winkel in reihenfolge:
+        schluessel = (cid, slug, winkel)
+        if schluessel not in cache:
+            try:
+                cache[schluessel] = validator(kandidat["article"], cid, ch, winkel)
+            except Exception as exc:  # noqa: BLE001 – Vorprüfung darf nie killen
+                cache[schluessel] = (False, f"Vorprüfung gescheitert: {exc}")
+        frei, warum = cache[schluessel]
+        if frei:
+            return winkel, ""
+        grund = str(warum or "")
+    return None, grund or "kein Winkel besteht das Freigabe-Gate"
+
+
 def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = None,
                horizon: int | None = None, keep_existing: bool = True,
                performance: dict | None = None,
-               ready_channels: set[str] | None = None) -> dict:
+               ready_channels: set[str] | None = None,
+               validator=None) -> dict:
     """Erzeugt den rollierenden Plan (heute + horizon Tage).
 
     `performance` ist der Rückkanal aus scripts/social_perf_feedback.py
@@ -349,6 +460,13 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
     Fremdkanal-Posten die globale Tageskapazität belegen, während Mastodon
     tagelang keinen Slot bekam (#549). ``None`` erhält das neutrale Verhalten
     für Offline-Planung und bestehende Aufrufer.
+
+    `validator` (Dauerheilung #716) ist eine Vorprüfung mit der Signatur
+    ``validator(artikel, kanal_id, kanal_cfg, winkel) -> (frei, grund)``.
+    Sie wird von scripts/social_studio.py aus dem echten Freigabe-Gate
+    gespeist. Ist sie gesetzt, plant build_plan ausschließlich Beiträge, die
+    das Gate bestehen – und meldet abgelehnte Paare in `gate_sperrungen`.
+    Ohne Validator bleibt das Verhalten unverändert.
     """
     import social_channels as sch
 
@@ -377,7 +495,44 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
     # stehen und würde trotz Sperrfrist rausgehen.
     items = [it for it in items if _not_in_cooldown(it, cfg, state, now, performance)]
 
-    cands = _candidates(cfg, pool, state, now, performance)
+    # Gate-Quarantäne gilt auch für bereits geplante Posten: Ein Slot, der
+    # sehenden Auges ins Gate läuft, ist ein verlorener Sendetermin.
+    quar = quarantiniert(state, now)
+
+    # SELBSTAUFHEBUNG: Die Quarantäne ist eine Sicherung, kein Urteil auf
+    # Dauer. Besteht ein ausgesetztes Paar die Vorprüfung wieder – weil der
+    # Artikel oder die Regel repariert wurde –, kommt es sofort zurück in die
+    # Rotation. Ohne diesen Schritt hätte genau der Ratgeber aus #716 nach
+    # der Reparatur noch bis zu 21 Tage gesperrt bleiben können.
+    aufgehoben: list[str] = []
+    if quar and validator is not None:
+        for (kanal, slug) in sorted(quar):
+            ch_quar = channels.get(kanal) or {}
+            art = next((a for a in pool if a.get("slug") == slug), None)
+            if not art or not ch_quar.get("enabled"):
+                continue
+            if any(validator(art, kanal, ch_quar, w)[0]
+                   for w in (ch_quar.get("angles") or ["nutzen"])):
+                aufgehoben.append(f"{kanal}|{slug}")
+        for key in aufgehoben:
+            kanal, _, slug = key.partition("|")
+            quar.pop((kanal, slug), None)
+        if aufgehoben:
+            print(f"   ✅ Gate-Quarantäne aufgehoben: {len(aufgehoben)} Paar/Paare "
+                  f"bestehen die Vorprüfung wieder.")
+
+    if quar:
+        vorher = len(items)
+        items = [it for it in items
+                 if it.get("status") != "planned"
+                 or (it.get("channel"), it.get("slug")) not in quar]
+        if len(items) != vorher:
+            print(f"   🚧 Gate-Quarantäne: {vorher - len(items)} geplante Posten "
+                  f"ausgesetzt ({len(quar)} Paar/Paare betroffen).")
+
+    cands = _candidates(cfg, pool, state, now, performance, quar=quar)
+    gate_cache: dict = {}
+    gate_sperrungen: dict[str, str] = {}
     used_pairs = {(it.get("channel"), it.get("slug")) for it in items
                   if it.get("status") == "planned"}
     day_count: dict[str, int] = {}          # "channel|YYYY-MM-DD" → Anzahl
@@ -447,14 +602,19 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
                 pick = chosen_pool[0]
 
                 channel_perf = (performance.get("channels") or {}).get(cid) or {}
-                angle = pick_angle(ch, cid, pick["slug"], state,
-                                   {it.get("angle") for it in items
-                                    if it.get("channel") == cid and it.get("slug") == pick["slug"]},
-                                   day, len(items),
-                                   angle_weights=channel_perf.get("angles") and {
-                                       a: d.get("score", 1.0)
-                                       for a, d in channel_perf["angles"].items()
-                                   })
+                pick, angle = None, ""
+                for kandidat in chosen_pool:
+                    winkel, grund = _sendbarer_winkel(
+                        validator, gate_cache, ch, cid, kandidat, state, items,
+                        day, len(items), channel_perf)
+                    if winkel:
+                        pick, angle = kandidat, winkel
+                        break
+                    gate_sperrungen[f"{cid}|{kandidat['slug']}"] = grund[:200]
+                if pick is None:
+                    # Kein Kandidat dieses Slots besteht die Vorprüfung – der
+                    # Slot bleibt frei, statt später das Gate zu blockieren.
+                    continue
                 item_id = f"{cid}:{pick['slug']}:{angle}:{day.isoformat()}"
                 if any(it.get("id") == item_id for it in items):
                     used_pairs.add((cid, pick["slug"]))
@@ -482,13 +642,23 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
                 last_slot_time[cid] = slot
 
     items.sort(key=lambda it: (it.get("scheduled_at") or "", it.get("channel") or ""))
-    return {
+    plan = {
         "version": 1,
         "generated_at": iso(now),
         "horizon_days": horizon,
         "timezone": "Europe/Berlin",
         "items": items,
     }
+    if validator is not None:
+        # Sichtbarer Befund statt stiller Auslassung: Welche (Kanal, Artikel)-
+        # Paare die Vorprüfung nicht bestanden und warum (Cockpit/Kalender).
+        plan["gate_sperrungen"] = dict(sorted(gate_sperrungen.items())[:60])
+    if quar:
+        plan["quarantaene"] = {f"{k[0]}|{k[1]}": v[:160]
+                               for k, v in sorted(quar.items())}
+    if aufgehoben:
+        plan["quarantaene_gehoben"] = aufgehoben[:40]
+    return plan
 
 
 def planned_items(schedule: dict) -> list[dict]:

@@ -167,41 +167,75 @@ regeln:
   #  ist ein Störungsfall – nicht Normalbetrieb.
   # ==========================================================
   - id: stiller-kanal
-    name: "Sendebereiter Kanal 48 h stumm → Issue"
+    name: "Sendebereiter Kanal 48 h stumm → erst heilen, nur bei Misserfolg eskalieren"
     enabled: true
     trigger:
       typ: kanal_stille
       params:
         stunden: 48
     aktionen:
-      # Erst selbst heilen, dann eskalieren: Plan rollen und genau einen Slot
-      # unter Tageslimit-/Mindestabstands-Schutz auf jetzt vorziehen. Die
-      # Eskalation läuft auch nach einem API-Fehler weiter und bleibt der
-      # sichtbare Incident-Nachweis.
+      # Schritt 1 – selbst heilen: Plan rollen und genau einen Slot unter
+      # Tageslimit-/Mindestabstands-Schutz auf jetzt vorziehen. Die Aktion
+      # meldet seit #716 ehrlich zurück, ob WIRKLICH etwas gesendet wurde
+      # (`schritte.1.geheilt`); „0 gesendet, 1 blockiert" gilt nicht mehr
+      # als Erfolg.
       - typ: social_autopilot_lauf
         stoppe_bei_fehler: false
         params:
           modus: "recover"
           kanal: "{kanal}"
           limit: 1
+      # Schritt 2 – eskalieren, aber NUR wenn die Heilung nichts gebracht hat.
+      # Vorher feuerte das Issue auch nach erfolgreicher Sofortheilung: Meldung
+      # #716 entstand 7 Sekunden, NACHDEM der Kanal wieder gesendet hatte.
       - typ: github_issue
+        wenn:
+          - feld: schritte.1.geheilt
+            operator: ist_falsch
         params:
           titel: "Schaltwerk: Kanal {kanal_label} sendet seit 48 h nicht"
           label: "schaltwerk"
           text: |
             Der Kanal **{kanal_label}** (`{kanal}`) ist eingerichtet und
-            sendebereit, hat aber seit über 48 Stunden nichts veröffentlicht.
+            sendebereit, hat aber seit **{stille_stunden} Stunden** nichts
+            veröffentlicht. Die automatische Sofortheilung lief unmittelbar
+            vorher und brachte keinen Beitrag zustande – es liegt also keine
+            vorübergehende Plattformstörung vor.
 
-            Letzter erfolgreicher Beitrag: {letzter_post}
+            | Befund | Wert |
+            |---|---|
+            | Letzter erfolgreicher Beitrag | {letzter_post} |
+            | Geplante Beiträge im Fenster | {geplant} |
+            | Protokolierte Gate-Blockaden | {blockaden} |
+            | Artikel in Gate-Quarantäne | {quarantaene} ({quarantaene_liste}) |
 
-            Das Schaltwerk hat vor dieser Eskalation automatisch eine
-            kontrollierte Sofortheilung versucht (Plan rollen, einen sicheren
-            Slot vorziehen und senden). Prüfen:
-            1. `SOCIAL-AUTOPILOT-STATUS.md` – wurde der Kanal wieder beliefert?
-            2. Actions → „Social-Autopilot“ – letzter Lauf grün?
-            3. `python3 scripts/social_studio.py --dry-run --channel {kanal}`
+            **Wahrscheinliche Ursache:** {ursache}
+
+            Prüfpfad:
+            1. `python3 scripts/social_studio.py --dry-run --channel {kanal}`
+               – welcher Beitrag fällt an welcher Regel durch?
+            2. `SOCIAL-AUTOPILOT-STATUS.md`, Abschnitt „Gate-Quarantäne &
+               Vorprüfung" – was plant der Autopilot bewusst nicht ein?
+            3. `python3 scripts/social_studio.py --run --recover --channel {kanal} --limit 1`
             4. Token noch gültig? → `docs/RUNBUCH-SOCIAL-SECRETS.md`
-    dedupe_key: "stille:{kanal}"
+
+            Dauerheilung dieser Fehlerklasse:
+            `MASTODON-SENDEAUSFALL-716-DAUERHEILUNG-PREMIUM-2026-10-12.md`
+      # Schritt 3 – Heilung erfolgreich: Nachweis in der Task-History, kein
+      # Incident. Ein Alarm, der das Problem schon gelöst hat, trainiert nur
+      # das Wegklicken.
+      - typ: protokoll
+        wenn:
+          - feld: schritte.1.geheilt
+            operator: ist_wahr
+        params:
+          text: >
+            Kanal {kanal_label} war {stille_stunden} h stumm – Sofortheilung
+            hat wieder beliefert, keine Eskalation nötig (Ursache: {ursache}).
+    # Datum im Schlüssel: Ein Kanal, der im nächsten Monat erneut verstummt,
+    # muss erneut gemeldet werden. Ohne {datum} galt die Marke 45 Tage
+    # (STATE_KEEP_DAYS) – der Wachhund hätte in dieser Zeit geschwiegen.
+    dedupe_key: "stille:{kanal}:{datum}"
     throttle:
       max_pro_tag: 3
 
