@@ -210,7 +210,19 @@ Ja. Gerade große Hotels senken den Preis kurzfristig. Sie brauchen Gäste, dami
 Das hängt vom Tarif ab. Billige Tarife sind meist starr. Viele Veranstalter bieten aber für 30 € bis 70 € eine flexible Buchung an.
 
 ### Was tun, wenn das Wetter plötzlich schlecht ist?
-Schlechtes Wetter ist dein Risiko. Bei Flügen in Europa darfst du nur bei einem Unwetter umbuchen. Flexible Hotel-Tarife lassen eine neue Reisezeit dagegen oft zu.
+Schlechtes Wetter ist dein Risiko. Bei Flügen in Europa darfst du nur bei einem Unwetter umbuchen. Flexible Hotel-Tarife lassen eine neue Reisezeit dagegen oft zu.### Lohnt sich Last Minute für Familien?
+
+Ja, wenn die Termine frei sind. Familiengänge sind oft günstig kurz vor Abreise. Prüfe, ob alle Personen im Angebot stecken. Kinderbetreuung vor Ort fragst du vorher.
+
+### Wie vergleiche ich Angebote richtig?
+
+Öffne zwei Portale nebeneinander. Gleiche Daten, gleiche Reisezeit. Der Preis allein genügt nicht. Lies Storno und Kaution, bevor du buchst.
+
+### Was ist mit Versicherung?
+
+Eine Reiserücktrittsversicherung lohnt sich erst ab einem hohen Preis. Für günstige Touren ist sie oft teurer als der Verlust. Lies die Fristen im Kleingedruckten.
+
+
 
 ---
 

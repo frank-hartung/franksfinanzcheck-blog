@@ -182,7 +182,39 @@ Wenn du selten reist, kann Leihen oder Gebrauchtkauf sinnvoll sein. Prüfe Preis
 Prüfe zuerst, was der Platz anbietet und wie abgerechnet wird. Nutze nur die Geräte, die du wirklich brauchst. Plane mit den Angaben des Betreibers statt mit einem pauschalen Betrag.
 
 ### Ist ein Mietwagen für Camping sinnvoll?
-Das hängt von Strecke, Ausrüstung und Ziel ab. Vergleiche den Gesamtpreis mit der Anreise im eigenen Auto oder mit öffentlichen Verkehrsmitteln. Prüfe die Mietbedingungen vor dem Buchen.
+Das hängt von Strecke, Ausrüstung und Ziel ab. Vergleiche den Gesamtpreis mit der Anreise im eigenen Auto oder mit öffentlichen Verkehrsmitteln. Prüfe die Mietbedingungen vor dem Buchen.### Wie finde ich einen ruhigen Stellplatz?
+
+Lies die Bewertungen der letzten Wochen. Achte auf Hinweise zu Zufahrt, Nachbarn und Straßenlärm. Ein Platz am Rand ist oft ruhiger als der nahe bei den Sanitärgebäuden.
+
+### Was kostet eine Nacht realistisch?
+
+Plane für Stellplatz und zwei Personen meist 20 bis 45 Euro. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
+
+### Wie halte ich Lebensmittel frisch?
+
+Kühle nur, was du wirklich brauchst. Ein guter Kühler hält mehrere Tage. Kaufe frisch auf dem Weg ein. Tiefkühlware ist unterwegs oft unnötiger Ballast.
+
+### Wie plane ich den Einkauf vor der Abreise?
+
+Mach eine Liste für die ersten drei Tage. Alles Frische kaufst du unterwegs. Trockenes wie Reis, Nudeln und Kaffee kommt von zu Hause. Das spart Platz und Geld.
+
+### Lohnt sich die längere Anreisezeit?
+
+Plane Pausen alle zwei Stunden ein. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
+
+### Was hilft gegen Regen auf der Tour?
+
+Plane einen Plan B für nasse Tage. Ein Museum, eine Bibliothek oder eine Halle kosten wenig. Trockene Kleidung liegt oben im Gepäck. Ein zweites Paar Schuhe ist Gold wert.
+
+### Wie spare ich beim Duschen auf dem Platz?
+
+Prüfe, ob Duschen im Preis steckt. Viele Plätze rechnen per Münze oder Karte ab. Ein kurzes Abspülen spart dann bares Geld. Warmwasser am Morgen ist oft am ruhigsten.
+
+### Was gehört in die Hausapotheke?
+
+Pflaster, Schmerzmittel und etwas gegen den Sonnenbrand. Prüfe das Verfallsdatum vor dem Start. Ein kleines Buch mit Notizen hilft. Den Rest kaufst du im Zweifel unterwegs.
+
+
 
 ---
 

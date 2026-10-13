@@ -88,7 +88,9 @@ Rechenweg für den Wasserbedarf: Vier Personen mal sechs Minuten ergeben 24 Minu
 
 Rechenweg für den Bedarf über ein Jahr: 0,192 Kubikmeter mal 365 Tage ergeben rund 70 Kubikmeter. Rechenweg für die Energie: 70 Kubikmeter mal 40 Kilowattstunden ergeben rund 2.800 Kilowattstunden für das Duschwasser.
 
-Jetzt die Gegenprobe. Angenommen, jede Person duscht nur noch vier Minuten statt sechs. Rechenweg: Vier Personen mal vier Minuten ergeben 16 Minuten. 16 Minuten mal acht Liter ergeben 128 Liter. Über das Jahr sind das rund 47 Kubikmeter. Rechenweg für die Energie: 47 mal 40 ergibt rund 1.870 Kilowattstunden. Modellrechnung: Der Unterschied zwischen beiden Varianten liegt bei rund 930 Kilowattstunden pro Jahr. Setze deinen eigenen Tarif ein, um die Ersparnis zu bewerten.
+Jetzt die Gegenprobe. Angenommen, jede Person duscht nur noch vier Minuten statt sechs. Rechenweg: Vier Personen mal vier Minuten ergeben 16 Minuten. 16 Minuten mal acht Liter ergeben 128 Liter. Über das Jahr sind das rund 47 Kubikmeter.
+
+Rechenweg für die Energie: 47 mal 40 ergibt rund 1.870 Kilowattstunden. Modellrechnung: Der Unterschied zwischen beiden Varianten liegt bei rund 930 Kilowattstunden pro Jahr. Setze deinen eigenen Tarif ein, um die Ersparnis zu bewerten.
 
 Diese Rechnung zeigt die Reihenfolge. Die Duschzeit ist der größte einzelne Hebel, weil sie in die Menge wirkt. Danach folgen Temperatur und Verluste.
 
@@ -110,7 +112,11 @@ Für dich heißt das: Die Temperatur ist kein freier Regler. Frage bei einer Än
 
 In einer Mietwohnung sind die Grenzen klar. Die Anlagentechnik, den Speicher und die Regelung betreut der Vermieter oder die Verwaltung. Für Mieter bleiben die Bereiche, die sie unmittelbar bedienen.
 
-Dazu gehören die eigene Duschzeit, das Absperren unnötiger Verbräuche und der Blick auf die Abrechnung. Was du nicht selbst steuern kannst, gehört in eine kurze Nachricht an die Verwaltung. Beschreibe das Verhalten, nicht die vermutete Ursache. Ein Beispiel: Das Wasser braucht morgens sehr lange, bis es warm wird. Diese Beobachtung ist eine gute Grundlage für eine Nachfrage zur Dämmung der Leitungen.
+Dazu gehören die eigene Duschzeit, das Absperren unnötiger Verbräuche und der Blick auf die Abrechnung.
+
+Was du nicht selbst steuern kannst, gehört in eine kurze Nachricht an die Verwaltung. Beschreibe das Verhalten, nicht die vermutete Ursache.
+
+Ein Beispiel: Das Wasser braucht morgens sehr lange, bis es warm wird. Diese Beobachtung ist eine gute Grundlage für eine Nachfrage zur Dämmung der Leitungen.
 
 Wer einen eigenen Durchlauferhitzer hat, entscheidet dagegen selbst. Dort lohnt der Blick auf die eingestellte Stufe und auf die Durchflussmenge am Gerät.
 

@@ -160,7 +160,39 @@ Nicht unbedingt. Prüfe, ob dein vorhandenes Gerät zum Anschluss passt. Verglei
 Der Anbieterwechsel soll den Anschluss möglichst ohne Unterbrechung ermöglichen. Für die Dauer gelten Regeln in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html). Halte den vereinbarten Termin fest und melde Probleme rasch.
 
 ### Wie vergleiche ich DSL-Angebote fair?
-Nutze denselben Zeitraum und addiere Grundpreis, Rabatt, Gebühren und Routerkosten. Prüfe außerdem die Leistung an deiner Adresse und die Vertragsbedingungen.
+Nutze denselben Zeitraum und addiere Grundpreis, Rabatt, Gebühren und Routerkosten. Prüfe außerdem die Leistung an deiner Adresse und die Vertragsbedingungen.### Was kostet ein Wechsel wirklich?
+
+Meist nichts. Der neue Anbieter übernimmt die Portierung. Prüfe nur die Schlussrechnung des alten Vertrags. Dort können Restgebühren stehen.
+
+### Wie lange dauert die Portierung?
+
+Oft zwei bis vier Wochen. Der Termin steht in der Bestätigung. Lege ihn auf eine ruhige Woche. Für den Übergang hilft mobiler Zugang.
+
+### Was mache ich mit dem alten Router?
+
+Schicke ihn zurück, wenn er geliehen ist. Bewahre den Versandbeleg. Eigene Geräte darfst du behalten oder verkaufen.
+
+### Bleibt meine Rufnummer erhalten?
+
+Ja, mit der Mitnahme. Sag sie bei der Bestellung an. Notiere dir die alte Kundenummer. So läuft der Wechsel ohne Umweg.
+
+### Wann lohnt ein Neukundenbonus?
+
+Wenn du ohnehin wechselst. Der Bonus ist ein Plus, nie der einzige Grund. Vergleiche zuerst den Preis nach dem ersten Jahr.
+
+### Was tun bei schlechtem Kundendienst nach dem Wechsel?
+
+Notiere Datum und Namen am Telefon. Frag nach einer Frist. Eine schriftliche Nachricht hilft bei der nächsten Stufe. Wer sachlich bleibt, kommt schneller ans Ziel.
+
+### Gilt der neue Preis dauerhaft?
+
+Meist nur für die erste Zeit. Lies, was danach gilt. Trag das Datum in den Kalender. So bist du der Preisbindung immer einen Schritt voraus.
+
+### Wie merke ich, dass mein Vertrag endet?
+
+Der Anbieter schreibt rechtzeitig vorher. Die Nachricht kann leicht untergehen. Notiere das Datum beim Abschluss. Dann überrascht dich das Ende nicht.
+
+
 
 ---
 

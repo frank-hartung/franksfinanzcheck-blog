@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T14:37:19Z",
-  "modus": "kandidaten",
-  "commit": "f9f16b08e7c3463030d8ce69dc22328d6ea67d80",
+  "generated_at": "2026-10-13T15:37:33Z",
+  "modus": "live",
+  "commit": null,
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -158,11 +158,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "091b837dc09fcfda777c4899564d6a1ce1eacb152ba9d184d31c140f8eff471d",
-      "urteil": "warnung",
+      "sha256": "b933392e9d1d56b301db5c10184f5e3ca307471b15965b3750bdf3182f962aed",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -345,11 +345,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "3e4a7b87293580a78938daf38487b88385379ceb96ab151cfafbdd1bd0a1cccc",
-      "urteil": "blockiert",
+      "sha256": "8d0b87a4b95af043a5bc6d3480a635d1cabb05c9c00ca4795444fab70ebff84f",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -430,11 +430,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
-      "sha256": "702d3bc07c3dafe76ba90ce2080ac1d9d196a0951a3dca99e52727a0b81f34c7",
-      "urteil": "warnung",
+      "sha256": "5e4ef86622348fd2f9e8f0e0aeecc04731210d3b898328b074f8217591267662",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -702,11 +702,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
-      "sha256": "e8d8e3a71a52f39d6b01fb34fa83b39a946c89686b9bdafbbb1b22794e44521d",
-      "urteil": "blockiert",
+      "sha256": "bbcaafae8e1017cee3691feef7bbe8ea503fee25b0a3a9a42cabaaf6e90ce0cf",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -753,11 +753,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
-      "sha256": "6a165a9bb91b847ac422dff8a0d316cd7a0c4cc153ce2ad57bce984ba99c2e14",
-      "urteil": "blockiert",
+      "sha256": "f2d4731213a43392c41d9f0998001b6a7dd45a22e74263daff5bd34166aef953",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -787,11 +787,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "8cabca5c9b718035dbd844f2584ddf5854ecc6b6d7e5eff77244d1100058f99c",
-      "urteil": "warnung",
+      "sha256": "2f35d336a94b72114232ffab53b192dbe989441ee7f43792600b7aa1a920c22d",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -804,12 +804,12 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "2baa26c16ea3bbddedcf93f832e4994bc11f5e7af49af68c09450f4d7fbd385a",
-      "urteil": "warnung",
+      "sha256": "f4ab90be6baca0902b4cafd9039fc5937d5b6e5c69047eff8c0ea29863eeca56",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
-        "quellen": "warnung",
+        "technik": "bestanden",
+        "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
@@ -821,12 +821,12 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
-      "sha256": "5b9e0658d3a1535c405e7391e1441bd2d51a87be07097edfdf898838fbf84e40",
-      "urteil": "warnung",
+      "sha256": "9b7b728601a0b4d46971fe072b6bf8ca7e5c8dd5c8e0c0c2e06fb0d1da8c918a",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
-        "quellen": "warnung",
+        "technik": "bestanden",
+        "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
@@ -838,12 +838,12 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
-      "sha256": "ab15b3240c38913fd1898e6f2145714660e8b60ab85dd4e0422a1a87a0a90b8f",
-      "urteil": "warnung",
+      "sha256": "fed8f7b3beffb7211bd3c4b015e898c98e8bec9b8ea7530038b8802ecca04824",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
-        "quellen": "warnung",
+        "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
@@ -855,11 +855,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
-      "sha256": "fc66fe1a7139bf7b29457c3530d1cc71b00b6d9ba3a5d9671cc0c134bb6dff5b",
-      "urteil": "warnung",
+      "sha256": "c2342b903d59becbe2eba0f51ff43150ae7a53a6f16145c621a2f506d2a0d1fa",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -872,11 +872,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
-      "sha256": "d706d94d859779e615b5b2e0225b9eae912e47955f80fb863617c21d886223f8",
-      "urteil": "blockiert",
+      "sha256": "586d4e5177cd8116fd23b4c0b1350295ace444c3e94d7bb524cc405961187ecd",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -889,11 +889,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "bbc72a437294bc7dc2a493eecc9f1ff61681feecfca51656f760d9e3ad1f7868",
-      "urteil": "warnung",
+      "sha256": "34dfcb89e3087c6e7b771841be3aec5a7ae397328ed55098891be3e8cceb310e",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -906,11 +906,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "2ce741fc19fd92ed0ef8c3d0441e76fe80966b365799c68cd0ba3679deb73e68",
-      "urteil": "warnung",
+      "sha256": "711bfd3f55011d86e7f9944a7256673ae889085deae4fda75e4b0682a3f48b2d",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -923,11 +923,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
-      "sha256": "9c0594ee0e765a9ebb0e1385f722f92754fb8a7963ece68af157d937c9295d5d",
-      "urteil": "warnung",
+      "sha256": "e22e6f8bcea7a58175deef840197d2546d7c69bb0125ffc7d3e78ce51b18fd3a",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
