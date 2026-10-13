@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 13.10.2026 14:48 (Europe/Berlin)  
+> Automatisch aktualisiert: 13.10.2026 21:54 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -12,19 +12,16 @@
 
 ## Kommende Beiträge
 
-### Di, 13. Oktober 2026
-- **19:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Mi, 14. Oktober 2026
-- **08:45** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
-- **13:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
+- **08:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
-- **19:15** ⏳ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
+- **13:15** ⏳ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/
-### Do, 15. Oktober 2026
-- **08:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zahl_ · Launch  
+- **19:15** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
+### Do, 15. Oktober 2026
+- **08:45** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 - **13:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 - **19:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  

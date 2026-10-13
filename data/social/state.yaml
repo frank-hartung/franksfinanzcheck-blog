@@ -687,6 +687,19 @@ history:
     \  \n#WLAN #Internet #DSL #Handytarif"
   ref: '117433670652081666'
   ai: true
+- posted_at: '2026-10-13T21:54:07.333454+02:00'
+  channel: mastodon
+  slug: 2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen
+  title: 'Der erste eigene Haushalt: Fixkosten von Anfang an ordnen'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117435351129525107
+  ok: true
+  text: '🔧 Fixkosten von Anfang an ordnen – so behältst du dein Monatsbudget im Griff.
+    Im ersten eigenen Haushalt entscheiden vier Blöcke (Wohnen, Energie, Verträge,
+    Alltag) über das Budget. https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #BudgetPlanen #FixkostenOrdnen'
+  ref: '117435351129525107'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -712,4 +725,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-13T14:46:49.526353+02:00'
+updated_at: '2026-10-13T21:54:12.189299+02:00'

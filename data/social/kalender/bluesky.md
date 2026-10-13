@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 13.10.2026 14:48 (Europe/Berlin)  
+> Automatisch aktualisiert: 13.10.2026 21:54 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -12,12 +12,9 @@
 
 ## Kommende Beiträge
 
-### Di, 13. Oktober 2026
-- **18:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Mi, 14. Oktober 2026
-- **08:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
+- **08:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 - **12:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### Do, 15. Oktober 2026

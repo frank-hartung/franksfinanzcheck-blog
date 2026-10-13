@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 13.10.2026 14:48 (Europe/Berlin)  
+> Automatisch aktualisiert: 13.10.2026 21:54 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 13. Oktober 2026
-- **17:30** ⏳ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/
 ### Mi, 14. Oktober 2026
 - **07:30** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
@@ -56,6 +53,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 13.10.2026 21:54 · Der erste eigene Haushalt: Fixkosten von Anfang an ordnen → https://mastodon.social/@FranksFinanzcheck/117435351129525107
 - ✅ 13.10.2026 14:46 · Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer → https://mastodon.social/@FranksFinanzcheck/117433670652081666
 - ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
 - ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
@@ -65,7 +63,6 @@
 - ✅ 06.10.2026 20:56 · Weihnachten Budget planen: Ohne Schulden durch die Feiertage → https://mastodon.social/@FranksFinanzcheck/117395489343468673
 - ✅ 06.10.2026 14:05 · Preiswert surfen: So findest du den optimalen DSL‑Anschluss → https://mastodon.social/@FranksFinanzcheck/117393872454593493
 - ✅ 05.10.2026 14:22 · Gasabschlag berechnen: So planst du die Heizsaison richtig → https://mastodon.social/@FranksFinanzcheck/117388279584058422
-- ✅ 04.10.2026 17:50 · Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp → https://mastodon.social/@FranksFinanzcheck/117383431263250864
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
