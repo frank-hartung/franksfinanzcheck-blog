@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T13:05:08Z",
+  "generated_at": "2026-10-13T14:37:19Z",
   "modus": "kandidaten",
-  "commit": "3b3a10be0bfb773b66b327eb6f2d3f4f89f04ace",
+  "commit": "f9f16b08e7c3463030d8ce69dc22328d6ea67d80",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
@@ -393,7 +393,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
       "sha256": "36bb495ee9fa452713387535ec6f4da6a5191162b005a1d980261b2a5405399c",
@@ -716,7 +716,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
       "sha256": "438265da3a565cc1f4ceb6a90ad7322e6c0ee15a8c236962e419a338dd8bf209",
