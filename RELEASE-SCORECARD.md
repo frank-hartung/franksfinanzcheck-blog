@@ -86,7 +86,7 @@
 
 ### `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` (blockiert, Risikoklasse standard)
 
-- **A2-intent** [affiliate]: IW3 Zeile 205: CTA-Marker benennt das Angebot falsch: Satz verspricht „vergleich“, das Ziel liefert aber ein Angebot der C24 Bank (CHECK24-Tochter), kein Marktvergleich
+- **A2-intent** [affiliate]: IW3 Zeile 200: CTA-Marker benennt das Angebot falsch: Satz verspricht „vergleich“, das Ziel liefert aber ein Angebot der C24 Bank (CHECK24-Tochter), kein Marktvergleich
 
 ### `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` (blockiert, Risikoklasse standard)
 
