@@ -1,0 +1,32 @@
+{
+  "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+  "titel": "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen",
+  "erzeugt": "2026-10-13 09:36 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "YMYL",
+    "grund": "62 Tage seit letzter Prüfung (Intervall 45 Tage, YMYL)",
+    "alter_tage": 62,
+    "intervall": 45
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "offline: keine Abrufe"
+  ]
+}

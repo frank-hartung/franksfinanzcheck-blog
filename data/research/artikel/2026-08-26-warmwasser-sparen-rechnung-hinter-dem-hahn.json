@@ -1,0 +1,32 @@
+{
+  "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+  "titel": "Warmwasser sparen: Die Rechnung hinter dem Hahn",
+  "erzeugt": "2026-10-13 09:36 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "48 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 48,
+    "intervall": 30
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "offline: keine Abrufe"
+  ]
+}

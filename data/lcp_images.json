@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-12T21:26:23+00:00",
+  "generatedAt": "2026-10-13T09:32:29+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -64,6 +64,22 @@
     },
     "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/": {
       "image": "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/": {
+      "image": "images/covers/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -144,6 +160,22 @@
     },
     "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/": {
       "image": "images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/": {
+      "image": "images/covers/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -334,6 +366,70 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/": {
+      "image": "images/covers/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/": {
+      "image": "images/covers/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/": {
+      "image": "images/covers/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/": {
+      "image": "images/covers/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/": {
       "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
       "type": "single",
@@ -384,6 +480,22 @@
     },
     "/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/": {
       "image": "images/covers/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/": {
+      "image": "images/covers/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -574,6 +686,38 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/": {
+      "image": "images/covers/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/": {
+      "image": "images/covers/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/": {
       "image": "images/covers/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert.jpg",
       "type": "single",
@@ -592,6 +736,38 @@
     },
     "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/": {
       "image": "images/covers/2026-09-26-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/": {
+      "image": "images/covers/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/": {
+      "image": "images/covers/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -672,6 +848,22 @@
     },
     "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/": {
       "image": "images/covers/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/": {
+      "image": "images/covers/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
