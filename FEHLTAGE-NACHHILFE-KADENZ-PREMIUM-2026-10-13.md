@@ -197,6 +197,15 @@ Assets sind gesperrt — `hugo-bin`-Pakete laden ihr Binary genau von dort). Die
 Kette bis zur Build-Grenze ist vollständig grün; die Build-Stufe läuft wie
 immer in CI. Das ist eine Umgebungsgrenze, kein offener Mangel am Inhalt.
 
+**CI-Nachweis auf dem Branch (Pull Request #725):** Der Push hat die
+Server-Gates gestartet; grün sind **gate (Build + publish_gate-Kette, 3 m 10 s)**,
+lesehilfen, Playwright-Suite (Desktop + Mobile), CodeQL (JS + Python),
+Integritäts-Siegel, „Quellen, Stand, Einheit und Methodik", URL-Wache,
+Klartext-Wache, navigation, beweis und auto-assign; `automerge` wird bewusst
+übersprungen. Damit ist auch die Stufe belegt, die lokal nicht laufen kann —
+inklusive des `offenlegung_gate` im `gate`-Job. Zum Berichtszeitpunkt lief die
+`regression`-Suite noch.
+
 ---
 
 ## Was bewusst **nicht** getan wurde
@@ -232,7 +241,8 @@ immer in CI. Das ist eine Umgebungsgrenze, kein offener Mangel am Inhalt.
    Zeichen, u. a. 02.10. und 30.09.): inhaltlich vollständig, aber unter
    12.000 — Kandidaten für die nächste Qualitäts-Runde, kein Kadenzthema.
 4. **Build-Stufe in CI**: `hugo --minify` → `publish_gate`/`offenlegung_gate`
-   laufen dort; lokal nicht reproduzierbar (siehe Belege).
+   laufen dort; in PR #725 grün nachgewiesen (`gate`-Job), lokal nicht
+   reproduzierbar (siehe Belege). Offen bleibt nur die `regression`-Suite.
 
 ## Bedienung / Reproduktion
 
