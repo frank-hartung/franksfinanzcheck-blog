@@ -49,7 +49,7 @@ quellen:
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
 
-Es beginnt harmlos. Ein Video ruckelt, eine Seite lädt nicht. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Und dann beginnt der unangenehme Teil, in dem viele Verbraucher aufgeben, obwohl sie im Recht sind.
+Störung Internetanbieter im Check: Es beginnt harmlos. Ein Video ruckelt, eine Seite lädt nicht. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Und dann beginnt der unangenehme Teil, in dem viele Verbraucher aufgeben, obwohl sie im Recht sind.
 
 Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht von der ersten Minute an dokumentiert, hat später eine Erinnerung und keine Unterlagen.
 

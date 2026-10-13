@@ -46,6 +46,8 @@ kurzantwort: "Ein Großeinkauf ist nur dann günstiger, wenn der Grundpreis je E
 
 Ein voller Einkaufswagen sieht nach kluger Planung aus. Er ist es nur, wenn die Rechnung am Ende stimmt. Großeinkauf ist kein Sparen, sondern eine Wette auf den eigenen Verbrauch.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Diese Wette lässt sich prüfen. Man braucht dafür keine App und kein Jahresbudget, sondern drei Zahlen pro Artikel: den Preis, die Menge und den Anteil, der tatsächlich gegessen wird.
 
 ## Drei Größen statt einer

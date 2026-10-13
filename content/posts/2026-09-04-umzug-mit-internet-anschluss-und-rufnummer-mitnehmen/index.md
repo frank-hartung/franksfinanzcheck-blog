@@ -51,6 +51,8 @@ kurzantwort: "Melde den Umzug dem Anbieter früh und schriftlich, am besten sech
 
 Umzugskartons sind planbar, der Router nicht. Zwischen alter und neuer Wohnung liegt eine Zeitspanne, in der sehr viel von einer funktionierenden Leitung abhängt: Homeoffice, Schule, Bankgeschäfte, die Telefonnummer für Handwerker.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Die meisten Probleme beim Umzug entstehen nicht an der Technik. Sie entstehen an der Reihenfolge. Wer zwei Wochen zu spät meldet, bekommt keinen Schadenersatz für verlorene Wochen, sondern einen neuen Termin.
 
 ## Zwei Fragen vor dem ersten Anruf

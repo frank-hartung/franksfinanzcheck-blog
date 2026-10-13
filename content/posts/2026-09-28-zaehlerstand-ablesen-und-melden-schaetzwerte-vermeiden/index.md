@@ -46,6 +46,8 @@ kurzantwort: "Zählerstände werden zum Ende des Abrechnungszeitraums abgelesen 
 
 Irgendwann im Jahr hängt eine Karte an der Wohnungstür oder es kommt eine E-Mail mit der Bitte, den Zählerstand zu übermitteln. Die meisten Menschen erledigen das in zwei Minuten. Die anderen zahlen im Zweifel dafür.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Der Zählerstand ist die einzige Zahl, die deinen Verbrauch wirklich beschreibt. Alles andere ist eine Ableitung. Wer ihn nicht liefert, überlässt die Ableitung dem Versorger.
 
 ## Warum überhaupt abgelesen wird

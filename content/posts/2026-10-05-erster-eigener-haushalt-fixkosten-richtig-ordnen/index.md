@@ -51,9 +51,14 @@ kurzantwort: "Im ersten eigenen Haushalt entscheiden vier Blöcke über das Mona
 
 Die erste Wohnung hat einen eigenen Geruch: Farbe, Karton, neue Möbel. Nach vier Wochen kommt per Post die erste Rechnung, die niemand im Blick hatte. Sie ist selten hoch. Sie ist nur überraschend.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Genau daran scheitern die meisten Anfänge, nicht an großen Summen. Es fehlt eine Ordnung, in der jeder Posten einen Platz hat. Wer diese Ordnung in den ersten Wochen herstellt, muss sie später nur noch pflegen.
 
 ## Die ersten vier Wochen entscheiden über das Jahr
+
+
+Darum geht es hier konkret: erster eigener Haushalt.
 
 In den ersten Wochen entstehen die Verträge, die dich lange begleiten: Energielieferung, Internet, Konto, Müllgebühren, Mitgliedschaften. Jeder einzelne Vertrag wird später zur Gewohnheit. Gewohnheiten prüft niemand mehr.
 
@@ -177,6 +182,9 @@ In einer Wohngemeinschaft verdoppelt sich die Zahl der Verträge, die geklärt w
 Die praktische Regel: Jeder Vertrag braucht genau einen Verantwortlichen. Eine gemeinsame Liste hält fest, wer welchen Posten trägt und wann er endet. Sonst bleibt beim Auszug ein Vertrag auf einem Namen hängen, den niemand mehr nutzt.
 
 Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in fünf Minuten klären.
+
+
+Genau das ist der Hebel: erster eigener Haushalt.
 
 ## Häufige Fragen
 
