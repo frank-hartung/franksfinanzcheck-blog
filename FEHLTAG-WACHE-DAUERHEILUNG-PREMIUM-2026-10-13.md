@@ -100,6 +100,16 @@ Fall A zeigt 10.07. mit, weil ein Post mit Frontmatter-Datum 10.07. in einem Ord
 
 ---
 
+## CI-Befund am PR (Nachtrag 13.10.2026)
+
+Die Job-Kette `publication-reliability-tests` war auf PR #726 rot (Job `regression`). Ursachen:
+
+- **IW3 (behoben):** Im Nachlieferungs-Artikel `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` (Zeile 205) versprach die CTA „Jetzt Konditionen **vergleichen**“, das Ziel ist aber ein einzelnes Angebot der C24 Bank (CHECK24-Tochter). Der Satz lautet jetzt „Jetzt Konditionen ansehen“. Der Affiliate-Intent-Test ist danach grün.
+- **C25 Wirkungsprobe (vorbestehend, nicht behoben):** `test_rechter_baum_hat_keine_befunde` meldet „Wirkungsprobe ROT … YMYL: Schreibprüfung nicht auswertbar (ParseError)“. Die Probe `lesbarkeit_heiler.py --wirkungsprobe` ist allein und im Subprozess grün. Der Fehler tritt nur im vollständigen Governance-Lauf auf und ist auf dem Basisstand `4f56de2` identisch. Die Ursache liegt außerhalb der Kadenz-Wache und wurde nicht weiterverfolgt.
+- **Uhr-Probe:** Schlägt nur an demselben C25-Test fehl.
+
+Vergleich mit Venv (PyYAML, Pillow, cryptography) gegen den Basisstand: Die Unit-Suite hat auf dem Basisstand 6 Fehler, auf dem Branch 2 (`test_bot_watchdog_meldetakt` und `test_affiliate_intent_guard` beim Stand vor der Korrektur). Keine neuen Fehler durch die Kadenz-Änderung.
+
 ## Offen (Entscheidung des Betreibers)
 
 - **CI-Verdrahtung des harten Gates.** Derzeit ruft **kein** Workflow `cadence_guard.py --check` auf. Die Workflows nutzen `--fix`, und dort greift das neue Gate bewusst nicht. Damit die Regel *automatisch* alarmiert, wäre ein `--check`-Schritt nötig, etwa in `blog-health-daily.yml` nach `--fix`. Das würde den Gesundheits-Job bei Fehltagen im Prüffenster rot schalten; welche Folgeprozesse daran hängen, sollte vorab geprüft werden. Ich habe das nicht eigenmächtig eingebaut.
