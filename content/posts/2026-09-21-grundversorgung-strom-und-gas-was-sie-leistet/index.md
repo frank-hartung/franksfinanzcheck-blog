@@ -46,6 +46,8 @@ kurzantwort: "Die Grundversorgung ist der Tarif, den der örtliche Energieversor
 
 Ein Tarif, den niemand bewusst auswählt, ist selten der günstigste. Genau das ist die Grundversorgung. Sie existiert, damit niemand ohne Strom dasteht. Sie kostet aber nichts weniger, nur weil sie selbstverständlich ist.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Wer wissen will, wo die eigene Rechnung steht, muss zwei Dinge auseinanderhalten: den Anbieter und den Tarif. Die Grundversorgung ist ein Tarif. Sie kann vom örtlichen Grundversorger stammen, also dem Unternehmen, das in deinem Netzgebiet zuständig ist.
 
 ## Wie du überhaupt in die Grundversorgung kommst

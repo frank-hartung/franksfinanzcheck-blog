@@ -46,6 +46,8 @@ kurzantwort: "Warmwasser entsteht entweder in der Heizungsanlage oder in einem e
 
 Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt so viel zusammen, dass Warmwasser in vielen Wohnungen hinter der Heizung den zweiten Platz belegt. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Der Posten ist deshalb so schwer zu greifen, weil er an mehreren Stellen gleichzeitig entsteht. Ein Teil verschwindet im Abfluss, ein Teil geht auf dem Weg zum Hahn verloren, ein Teil hängt an der eingestellten Temperatur. Wer alle drei Bereiche kennt, kann sehr genau steuern.
 
 ## Zwei Wege zum warmen Wasser

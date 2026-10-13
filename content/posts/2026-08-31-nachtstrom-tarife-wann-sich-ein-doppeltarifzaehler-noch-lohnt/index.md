@@ -55,6 +55,9 @@ Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil
 
 ## Das Wichtigste in Kürze
 
+
+Darum geht es hier konkret: Nachtstrom Tarif.
+
 * Ein Doppeltarifzähler hat zwei Zählwerke: **Hochtarif (HT)** für die teuren Zeiten und **Niedertarif (NT)** für die günstigen.
 * Der Vorteil wirkt nur über den **Nachtanteil** deines Verbrauchs, nicht über die Höhe des Rabatts allein.
 * Eine Orientierung liegt bei **30 bis 40 Prozent** Nachtanteil – darunter gewinnt meist der Einheitstarif.
@@ -184,6 +187,9 @@ Ein Doppeltarif ist nur ein Hebel unter mehreren. Bevor du dich für ein Zählwe
 **Drittens den Grundpreis.** Er ist der stille Bestandteil jeder Rechnung und fällt zwölfmal im Jahr an, ohne dass du ihn beeinflussen kannst.
 
 Diese Reihenfolge ist der Kern. Erst den Verbrauch, dann den Tarif, dann die Feinheiten wie das Zählwerk.
+
+
+Genau das ist der Hebel: Nachtstrom Tarif.
 
 ## Häufige Fragen
 

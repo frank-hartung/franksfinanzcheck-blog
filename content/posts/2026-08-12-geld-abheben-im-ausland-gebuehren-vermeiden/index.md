@@ -50,6 +50,9 @@ Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander
 
 ## Kurz gefasst
 
+
+Darum geht es hier konkret: Geld abheben im Ausland.
+
 * **Zwei Stellen rechnen ab:** Der Automatenbetreiber vor Ort und deine Bank zu Hause.
 * **Die Währungsfrage ist eine Entscheidung:** Bietet der Automat eine Abrechnung in Euro an, darfst du sie ablehnen.
 * **Deine Quelle ist das Preis- und Leistungsverzeichnis:** Dort steht, welche Entgelte für dein Konto gelten.
@@ -164,6 +167,9 @@ Prüfe außerdem, ob die Karte im Ausland für Abhebungen freigegeben war. Fehlt
 * **Freigaben kontrollieren.** Manche Banken verlangen eine Angabe vor der Reise.
 * **Sperrnummern speichern.** Notiere die Nummer zum Sperren deiner Karte, nicht auf dem Handy allein.
 * **Belege sammeln.** Bewahre bis zur Schlussrechnung alle Automatenbelege auf.
+
+
+Genau das ist der Hebel: Geld abheben im Ausland.
 
 ## Häufige Fragen
 
