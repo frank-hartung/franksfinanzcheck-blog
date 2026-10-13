@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-01
+lastmod: 2026-10-13
 title: "So findest du den richtigen: DSL-Tarif für dein Zuhause"
 description: "DSL Tarif finden: Welcher DSL-Tarif passt wirklich? Dieser Ratgeber zeigt dir, wie viel Bandbreite du brauchst, wie du den 24-Monats-Preis rechnest und welche…"
 date: 2026-09-18T19:09:52Z
@@ -25,7 +25,7 @@ quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-10-13"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
@@ -34,7 +34,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 DSL-Tarif finden im Check: Auch im Jahr 2026 greifen viele Haushalte beim Internet-Anschluss immer noch zu überdimensionierten Paketen. Oft steht im Vertrag eine prestigeträchtige Zahl wie 1.000 Mbit/s, während im Alltag lediglich ein paar smarte Geräte und zwei Laptops parallel funken. Das Resultat: Ein teurer Vertrag, dessen Leistung im heimischen WLAN oft gar nicht voll ausgeschöpft werden kann. (Stand: Oktober 2026)

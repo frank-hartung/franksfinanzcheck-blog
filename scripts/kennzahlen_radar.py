@@ -69,6 +69,14 @@ except ImportError:  # pragma: no cover
 
 _ISO_IN_NAME = re.compile(r"(\d{4}-\d{2}-\d{2})")
 _ISO_IN_TEXT = re.compile(r"(\d{4}-\d{2}-\d{2})")
+_GENERATED_DATE_RE = re.compile(
+    r"Automatisch erzeugt[^\n]*?\b(?:am|um)\s+(\d{4}-\d{2}-\d{2})"
+)
+_DOSSIER_META_RE = re.compile(
+    r"^-\s+\*\*(Vorheriger Faktencheck|Suchbegriffe|Kanäle|Verifizierte Quellen|"
+    r"Artikel|Themenwelt|Fälligkeit|GEO-Reife):\*\*"
+)
+_NAV_LINK_BULLET_RE = re.compile(r"^>\s*\*\s+\[[^\]]+\]\(https?://[^)]+\)\s*$")
 
 
 # ------------------------------------------------------------ Helfer
@@ -99,10 +107,16 @@ def _resolve_as_of():
 
 
 def _article_path(base_dir, slug):
-    """Slug -> Dateipfad. 'pillar/xyz' = Ratgeber-Seite, sonst Post."""
+    """Slug -> Dateipfad. 'pillar/xyz' = Ratgeber-Seite, sonst Post (Bundle oder .md)."""
     if slug.startswith("pillar/"):
         return os.path.join(base_dir, "content", "pillar", slug[len("pillar/"):], "index.md")
-    return os.path.join(base_dir, "content", "posts", slug, "index.md")
+    bundle = os.path.join(base_dir, "content", "posts", slug, "index.md")
+    if os.path.exists(bundle):
+        return bundle
+    flat = os.path.join(base_dir, "content", "posts", f"{slug}.md")
+    if os.path.exists(flat):
+        return flat
+    return bundle
 
 
 def _article_dates(path):
@@ -200,18 +214,73 @@ def _research_files(base_dir):
 
 
 def _research_date(path):
-    """Datum eines Briefs: erst Dateiname (2026-09-21-…), sonst erste
-    ISO-Datumszeile im Kopf („Automatisch erzeugt … am 2026-09-27“)."""
-    m = _ISO_IN_NAME.search(os.path.basename(path))
-    if m:
-        return _parse_date(m.group(1))
+    """Datum eines Briefs: erst expliziter Generator-Zeitstempel im Kopf
+    („Automatisch erzeugt … am/um 2026-09-27“, wichtig für Artikel-Dossiers
+    unter data/research/artikel/<slug>.md, deren Dateiname das alte
+    Artikel-Slug-Datum trägt), sonst Dateiname (2026-09-21-…), sonst erste
+    ISO-Datumszeile im Kopf."""
     try:
-        with open(path, encoding="utf-8") as f:
+        with open(path, encoding="utf-8", errors="ignore") as f:
             head = f.read(3000)
     except OSError:
-        return None
-    m = _ISO_IN_TEXT.search(head)
-    return _parse_date(m.group(1)) if m else None
+        head = ""
+    if head:
+        m = _GENERATED_DATE_RE.search(head)
+        if m:
+            d = _parse_date(m.group(1))
+            if d:
+                return d
+    m = _ISO_IN_NAME.search(os.path.basename(path))
+    if m:
+        d = _parse_date(m.group(1))
+        if d:
+            return d
+    if head:
+        m = _ISO_IN_TEXT.search(head)
+        if m:
+            return _parse_date(m.group(1))
+    return None
+
+
+def _extrakt_signal_text(raw):
+    """Extrahiert den echten Fundstellen-Text eines Recherche-Briefs/Dossiers.
+
+    Filtert Dossier-Metadaten (`- **Suchbegriffe:** …`), den eigenen
+    Artikeltitel (`# Faktenfrische: …`), Such-Überschriften (`### Suche: …`),
+    Leer-Platzhalter (`_Keine thematisch passende Fundstelle …_`),
+    Diagnose-Sektionen (`## Offene GEO-Punkte`, `## Kanal-Störungen`) sowie
+    gescrapte Navigationsmenü-Linklisten (`> * [Text](url)`) heraus, damit
+    leere Läufe oder eigene Suchbegriffe keine falschen P1/P3-Signale auslösen.
+    """
+    out = []
+    skip_section = False
+    for line in raw.splitlines():
+        s = line.strip()
+        if s.startswith("## "):
+            low_h = s.lower()
+            skip_section = (
+                "offene geo-punkte" in low_h
+                or "kanal-störungen" in low_h
+                or "kanal-stoerungen" in low_h
+            )
+            if skip_section:
+                continue
+        if skip_section:
+            continue
+        if s.startswith("# Faktenfrische:") or s.startswith("# Internet-Recherche"):
+            continue
+        if s.startswith("> Automatisch erzeugt") or s.startswith("> Agent-Reach-Kanäle"):
+            continue
+        if s.startswith("### Suche:"):
+            continue
+        if _DOSSIER_META_RE.match(s):
+            continue
+        if s.startswith("_Keine "):
+            continue
+        if _NAV_LINK_BULLET_RE.match(s):
+            continue
+        out.append(line)
+    return "\n".join(out).lower()
 
 
 def scan_signale(base_dir, suchbegriffe, stand, as_of):
@@ -227,7 +296,9 @@ def scan_signale(base_dir, suchbegriffe, stand, as_of):
             continue
         try:
             with open(path, encoding="utf-8") as f:
-                text = f.read().lower()
+                text = _extrakt_signal_text(f.read())
+        except OSError:
+            continue
         except OSError:
             continue
         treffer = sorted({b for b in suchbegriffe if b.lower() in text})
@@ -372,6 +443,9 @@ def render_report(regeln, as_of, fehler=()):
         "## 🟡 P3 – Signale beobachten",
         block(p3, "🟡"),
         "",
+        "## 🟢 OK – im Rhythmus",
+        block(ok, "🟢"),
+        "",
         "---",
         "",
         "### Nächste Schritte (Chefredakteur)",
@@ -389,14 +463,61 @@ def render_report(regeln, as_of, fehler=()):
     return "\n".join(lines) + "\n"
 
 
+def collect_coupling_warnings(regeln):
+    """Sammelt alle Artikel-Kopplungsprobleme (fehlende Slugs, hinterherhängende Stände)."""
+    warnungen = []
+    for r in regeln:
+        for a in r.get("artikel") or []:
+            if "problem" in a:
+                warnungen.append({
+                    "id": r["id"],
+                    "slug": a["slug"],
+                    "typ": "fehlt",
+                    "detail": a["problem"],
+                })
+            elif a.get("hinterher"):
+                warnungen.append({
+                    "id": r["id"],
+                    "slug": a["slug"],
+                    "typ": "hinterher",
+                    "detail": a["hinterher"],
+                })
+    return warnungen
+
+
 def write_queue(regeln, as_of, path=QUEUE_PATH):
     """P1/P2 als maschinenlesbare Queue (analog data/decay_queue.json)."""
     queue = [r for r in regeln if r["prioritaet"] in ("P1", "P2")]
+    warnungen = collect_coupling_warnings(regeln)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
-        json.dump({"generated": as_of.isoformat(), "count": len(queue), "queue": queue},
-                  f, ensure_ascii=False, indent=2)
+        json.dump(
+            {
+                "generated": as_of.isoformat(),
+                "count": len(queue),
+                "kopplungs_warnungen": warnungen,
+                "queue": queue,
+            },
+            f,
+            ensure_ascii=False,
+            indent=2,
+        )
     return queue
+
+
+def plan_issue_action(regeln, as_of, open_issue_numbers=(), schwelle=1):
+    """Entscheidet deterministisch über das GitHub-Issue (create/edit/close/none)."""
+    faellige = [r for r in regeln if r["prioritaet"] in ("P1", "P2")]
+    anzahl = len(faellige)
+    offene = list(open_issue_numbers or [])
+    titel = f"Kennzahlen-Radar: {anzahl} fällige Prüfungen ({as_of.isoformat()})"
+    if anzahl >= int(schwelle):
+        if offene:
+            return {"action": "edit", "issue": offene[0], "title": titel, "count": anzahl}
+        return {"action": "create", "issue": None, "title": titel, "count": anzahl}
+    if offene:
+        return {"action": "close", "issues": offene, "title": titel, "count": anzahl}
+    return {"action": "none", "issue": None, "title": titel, "count": anzahl}
 
 
 def issue_body(regeln, as_of, fehler=()):
@@ -510,10 +631,37 @@ def selftest():
         # Report + Queue + Issue
         rep = render_report(regeln, as_of)
         check("Report enthält P1-Kennzahl", "Strompreis" in rep and "P1" in rep)
+        check("Report enthält OK-Sektion inkl. Kopplungs-Warnungen",
+              "## 🟢 OK – im Rhythmus" in rep and "Evergreen" in rep)
         q = write_queue(regeln, as_of, path=os.path.join(tmp, "q.json"))
         check("Queue enthält nur P1/P2", {r["prioritaet"] for r in q} <= {"P1", "P2"})
         ib = issue_body(regeln, as_of)
         check("Issue-Body nennt Ablauf-Vertrag", "nie selbst" in ib)
+
+        # Leeres Faktenfrische-Dossier darf kein Fehlalarm-Signal auslösen
+        os.makedirs(os.path.join(tmp, "data", "research", "artikel"), exist_ok=True)
+        empty_dossier = os.path.join(tmp, "data", "research", "artikel", "2026-08-10-alt.md")
+        with open(empty_dossier, "w", encoding="utf-8") as f:
+            f.write(
+                "# Faktenfrische: Breitband und DSL\n"
+                "> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-09-27\n\n"
+                "- **Suchbegriffe:** Breitband, DSL, Glasfaser\n"
+                "- **Verifizierte Quellen (Whitelist):** 0\n\n"
+                "## Verifizierte Quellen\n\n"
+                "_Keine thematisch passende Fundstelle in diesem Lauf._\n\n"
+                "## Offene GEO-Punkte\n\n"
+                "- Breitband prüfen\n"
+            )
+        check("Generator-Datum schlägt altes Slug-Datum im Dateinamen",
+              _research_date(empty_dossier) == datetime.date(2026, 9, 27))
+        check("Leeres Dossier löst kein falsches Suchbegriff-Signal aus",
+              scan_signale(tmp, ["Breitband", "DSL"], datetime.date(2026, 9, 1), as_of) == [])
+
+        # Issue-Lifecycle-Entscheidung (create/edit/close/none)
+        check("Issue-Plan: create ohne offenes Ticket, close bei 0 Fälligen",
+              plan_issue_action(regeln, as_of, [])["action"] == "create"
+              and plan_issue_action(regeln, as_of, [730])["action"] == "edit"
+              and plan_issue_action([by_id["k2"]], as_of, [730])["action"] == "close")
 
         # Allowlist-Verstoß
         _, _, fehler = load_register(path=os.path.join(tmp, "reg.yaml")) if False else ({}, [], [])
