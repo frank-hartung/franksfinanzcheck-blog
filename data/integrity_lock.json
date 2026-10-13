@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-12T22:45:21.359303+00:00",
-  "head": "ad56631",
+  "signed_at": "2026-10-13T10:49:12.813126+00:00",
+  "head": "5dcbe27",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -28,7 +28,7 @@
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
     "scripts/brand_guard.py": "caad0d0abcf8506158218e4e7b51a97b35aec83aedf0055f9f653e9bc7ca5ba7",
-    "scripts/casing_guard.py": "c163d58f0856345b83aaa80511959e3031d168b116491b643ee50fb2f55b8d58",
+    "scripts/casing_guard.py": "7ab758725dd9a25d39f5d8d9d0021d5c7b72746de2de859ccbdb85a841b31aad",
     "scripts/check24_links.yaml": "054ec34a1b75703d5120b88094253b980a60136baec10358bae70b8705038946",
     "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "45e07881f24005e63decd400fd2974499511fcc7d45ae21c5973e997f55695e3",
@@ -53,47 +53,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "9b87ad71f54fb76c83566aae3e4999dbf5f36be17221ec8086b24ddf4ae4116b",
-  "audit_start_sha256": "d45b24b1473f7b363df3e23ed67f7127ad91acf311974e5880cabf5806252349",
+  "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1",
+  "audit_start_sha256": "a5105b591f5b76a88c75a81ac095f59faaa13c941a40c9a284621aa9dfca8d9e",
   "audit": [
-    {
-      "date": "2026-10-08",
-      "art": "set-current",
-      "head": "7da71fd",
-      "geaendert": [
-        "scripts/artefakt_waechter.py",
-        "scripts/reserve_artifacts.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/artefakt_waechter.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "7da71fd",
-              "datum": "2026-10-08",
-              "betreff": "Dauerheilung #661: Wache meldet „nicht geprüft“, nie „heil“, wenn ihr Werkzeug fehlt"
-            },
-            {
-              "sha": "70ed6d8",
-              "datum": "2026-10-08",
-              "betreff": "Dauerheilung #653 (WF-D4E0): Ein Artefakt-Defekt darf nicht mehr als leerer Vorrat aussehen (#662)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/reserve_artifacts.py",
-          "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
-          "commits": [],
-          "commits_art": "neu-unter-siegel"
-        }
-      ],
-      "files_sha256": "a7db47e1bbdb68d3615c63221b5250a436de0bf0134abeb16446d07bf18003bd",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-09",
       "art": "set-current",
@@ -127,7 +89,7 @@
         }
       ],
       "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
-      "prev_sha256": "d45b24b1473f7b363df3e23ed67f7127ad91acf311974e5880cabf5806252349"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-09",
@@ -625,8 +587,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "a3541667c6ad68ec5d45cefe8cac9a6e9334e942c4b511e42b313cfbcc099a06",
-      "files_sha256": "9b87ad71f54fb76c83566aae3e4999dbf5f36be17221ec8086b24ddf4ae4116b"
+      "files_sha256": "9b87ad71f54fb76c83566aae3e4999dbf5f36be17221ec8086b24ddf4ae4116b",
+      "prev_sha256": "a3541667c6ad68ec5d45cefe8cac9a6e9334e942c4b511e42b313cfbcc099a06"
+    },
+    {
+      "date": "2026-10-13",
+      "art": "set-current",
+      "head": "5dcbe27",
+      "geaendert": [
+        "scripts/casing_guard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/casing_guard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "5dcbe27",
+              "datum": "2026-10-13",
+              "betreff": "fix(content+casing): Nomen im Titel heilen – „Der stille posten“ und die Keyword-Ruinen"
+            },
+            {
+              "sha": "5f906a3",
+              "datum": "2026-10-13",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "8ed9b709acbf1703131ce8db385dfcbd4deb402ee403d341bac9a877370baaf1",
+      "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1"
     }
   ]
 }
