@@ -29,6 +29,12 @@
 #    (Mo/Mi/Fr, max. 2–3/Tag) ins Live-Blog. Die Gates der
 #    Content-Engine v2 bleiben damit der einzige Veröffentlichungsweg.
 #
+#  FACHFREIGABE-VERTRAG (seit 13.10.2026, Dauerheilung #734): Die Writer
+#  schreiben YMYL-Hochrisiko nur auf ausdrückliche Beauftragung
+#  (`--fachfreigabe`, WIP-Limit der Bahn) und immer mit Prüfgerüst;
+#  `--promote` verweigert Hochrisiko-Entwürfe ohne gültige redaktionelle
+#  Freigabe. Ein `--run` beauftragt nie – der Vertrag sitzt in ki_shared.
+#
 #  Nutzung:
 #    python3 scripts/ki_redaktion.py --run                # lang + SEO
 #    python3 scripts/ki_redaktion.py --run --rolle news
@@ -124,6 +130,32 @@ def cmd_status(_args) -> int:
     return 0
 
 
+def _fachfreigabe_fehlt(path: str) -> str:
+    """Leer, wenn der Entwurf promotet werden darf – sonst der Grund.
+
+    Fail-closed: Ist das Redaktions-Gate nicht ausführbar oder der Artikel
+    nicht lesbar, gilt das als fehlende Freigabe.
+    """
+    try:
+        import editorial_review_gate as erg
+        urteil = erg.evaluate_path(path)
+    except Exception as exc:  # noqa: BLE001 – ohne Messung keine Freigabe
+        return (f"Redaktions-Gate nicht ausführbar ({exc.__class__.__name__}: "
+                f"{exc}) – fail-closed, keine Freigabe.")
+    risiko = urteil.get("risk")
+    befunde = urteil.get("findings") or []
+    if urteil.get("approved") or risiko not in (erg.RISK_HIGH, "unbekannt"):
+        return ""
+    if risiko == "unbekannt":
+        detail = "; ".join(str(f.get("detail", "")) for f in befunde) or "–"
+        return (f"Redaktions-Gate kann den Entwurf nicht lesen ({detail}) – "
+                "Risikoklasse unbekannt, fail-closed, keine Freigabe.")
+    codes = ", ".join(sorted({f.get("code", "?") for f in befunde})) or "–"
+    return (f"YMYL-Hochrisiko ohne gültige redaktionelle Freigabe ({codes}). "
+            "Die KI-Redaktion legt solche Entwürfe nicht in die Re-Queue: "
+            "Das Publish-Gate würde sie dort nur fail-closed halten.")
+
+
 def cmd_promote(args) -> int:
     import re
     import park_state
@@ -155,6 +187,19 @@ def cmd_promote(args) -> int:
     if "TODO(KI-REDAKTION" in content:
         print("❌ Offline-Gerüst ohne Inhalt – erst fertigstellen, "
               "dann promoten.")
+        return 1
+    # FACHFREIGABE-SPERRE (13.10.2026, Dauerheilung #734): Ein Hochrisiko-
+    # Entwurf ohne gültige redaktionelle Freigabe hätte in der Re-Queue nur
+    # einen Publikationsslot belegt, bis das Publish-Gate ihn fail-closed
+    # hält. Gemessen wird mit der Messfunktion des Gates selbst
+    # (`evaluate_path`) – keine zweite Regel (C19).
+    ymyl_grund = _fachfreigabe_fehlt(path)
+    if ymyl_grund:
+        print(f"❌ {ymyl_grund}")
+        print("   Ablauf: Prüfer, Belegkette, Zahlenprotokoll, dann "
+              "`python3 scripts/editorial_review_gate.py --seal --file "
+              f"content/posts/{slug}/index.md` – siehe "
+              "docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md.")
         return 1
     try:
         import length_policy
@@ -235,14 +280,101 @@ def cmd_selftest(_args) -> int:
 
     try:
         t = ks.pick_topic()
-        print(f"  ✅ Themenpool lesbar (nächstes freies Thema: "
-              f"„{(t or {}).get('title', '– Pool leer –')}“)")
+        if t and ks.bahn_fuer(t.get("title"), t.get("keywords"),
+                              t.get("pillar")) != ks.BAHN_AUTO:
+            print(f"  ❌ Themenpool liefert ohne Beauftragung ein YMYL-Thema "
+                  f"(„{t.get('title')}“) – AUTO-Filter wirkungslos (#734)")
+            ok = False
+        else:
+            print(f"  ✅ Themenpool lesbar (nächstes freies AUTO-Thema: "
+                  f"„{(t or {}).get('title', '– Pool leer –')}“)")
     except Exception as e:  # noqa: BLE001
         print(f"  ❌ Themenpool defekt: {e}")
         ok = False
 
+    ok = _selbsttest_fachfreigabe() and ok
+
     print("\nErgebnis:", "ALLE PRÜFUNGEN OK ✅" if ok else "FEHLER ❌")
     return 0 if ok else 2
+
+
+# Material des Vorfalls vom 13.10.2026 (Issue #734): genau so hat der
+# News-Writer den Entwurf gebaut, der als E03 in der Prüfqueue landete.
+VORFALL_734 = {
+    "title": "Versicherung-Update: Was sich jetzt für dich ändert",
+    "keywords": ["Versicherung-Update: Was sich jetzt für dich ändert"],
+    "pillar": "versicherungen",
+    "tags": ["Versicherungen vergleichen"],
+}
+
+
+def _selbsttest_fachfreigabe() -> bool:
+    """Fachfreigabe-Vertrag der Writer – funktional, offline, ohne Bestand.
+
+    Die WIP-Lage wird für die Probe festgenagelt; der echte Bestand spielt
+    keine Rolle (uhrfest und unabhängig davon, wie voll der Prüfstapel ist).
+    """
+    v = VORFALL_734
+    fehler: list[str] = []
+
+    def frontmatter(beauftragt: bool) -> str:
+        return ks.build_frontmatter(
+            title=v["title"], description="Selbsttest Fachfreigabe-Vertrag",
+            tags=v["tags"], pillar=v["pillar"], keywords=v["keywords"],
+            rolle="chatgpt", news=True, kategorie="versicherung",
+            fachfreigabe=beauftragt)
+
+    try:
+        if ks.bahn_fuer(v["title"], v["keywords"], v["pillar"]) \
+                != ks.BAHN_FACHFREIGABE:
+            fehler.append("der Vorfall vom 13.10.2026 würde als AUTO "
+                          "eingestuft")
+        if ks.bahn_fuer("Stromfresser im Haushalt entlarven", [],
+                        "strom-sparen") != ks.BAHN_AUTO:
+            fehler.append("ein Spar-Thema landet fälschlich in der "
+                          "Fachfreigabe-Bahn")
+
+        # 1) Ohne Beauftragung entsteht kein YMYL-Frontmatter.
+        try:
+            frontmatter(False)
+            fehler.append("build_frontmatter schreibt YMYL ohne Beauftragung")
+        except ks.FachfreigabeErforderlich:
+            pass
+
+        # 2) Beauftragt + offene Bahn: Prüfgerüst hoch/ausstehend, nie
+        #    „freigegeben“ – die Freigabe bleibt beim Menschen.
+        alt = ks.fachfreigabe_lage
+        ks.fachfreigabe_lage = lambda: {"geoeffnet": True,
+                                        "grund": "Selbsttest"}
+        try:
+            fm = frontmatter(True)
+        finally:
+            ks.fachfreigabe_lage = alt
+        if ('risikoklasse: "hoch"' not in fm
+                or 'status: "ausstehend"' not in fm
+                or 'status: "freigegeben"' in fm):
+            fehler.append("beauftragter YMYL-Entwurf ohne korrektes "
+                          "Prüfgerüst (hoch/ausstehend)")
+
+        # 3) Geschlossene Bahn sperrt auch die Beauftragung (WIP-Limit).
+        try:
+            ks.fachfreigabe_pruefen(
+                title=v["title"], keywords=v["keywords"], pillar=v["pillar"],
+                beauftragt=True,
+                lage={"geoeffnet": False, "grund": "Selbsttest: Limit"})
+            fehler.append("WIP-Limit der Fachfreigabe-Bahn wirkungslos")
+        except ks.FachfreigabeErforderlich:
+            pass
+    except Exception as e:  # noqa: BLE001
+        fehler.append(f"Vertrag nicht prüfbar ({e.__class__.__name__}: {e})")
+
+    if fehler:
+        for f in fehler:
+            print(f"  ❌ Fachfreigabe-Vertrag (#734): {f}")
+        return False
+    print("  ✅ Fachfreigabe-Vertrag (#734): YMYL nur auf Beauftragung, mit "
+          "Prüfgerüst, WIP-Limit wirkt")
+    return True
 
 
 def main() -> int:

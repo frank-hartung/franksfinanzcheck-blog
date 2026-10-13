@@ -56,6 +56,15 @@ schließt die Bahn: Es bringt niemandem etwas, einen vierzehnten Entwurf auf
 einen Stapel von dreizehn zu legen. Die Bahn öffnet wieder, wenn der Stapel
 schrumpft — über den Workflow „Redaktionelle YMYL-Prüfqueue“.
 
+### Gilt auch für die KI-Redaktion (seit 13.10.2026, Issue #734)
+
+Dieselben Bahnen binden die Writer außerhalb der Engine
+(`claude_writer.py`, `news_writer.py`, `poppy_repurpose.py`). Sie fragen
+`engine_capacity` über `ki_shared.fachfreigabe_pruefen()`: AUTO schreiben sie
+selbst, YMYL nur mit `--fachfreigabe` und solange diese Bahn offen ist. Ohne
+das Flag wird ein YMYL-Aufhänger übersprungen und bleibt im Pool, statt einen
+Entwurf zu erzeugen, den niemand bestellt hat.
+
 ---
 
 ## Wenn die Kapazität knapp ist

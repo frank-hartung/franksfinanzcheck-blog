@@ -162,6 +162,13 @@ Zusätzlich jederzeit manuell über **Actions → KI-Redaktion → Run workflow*
 5. **Fail-closed** – `--selftest` (Exit 2) läuft im Workflow vor jeder
    Produktion; defekte Bausteine stoppen den Lauf, statt still „grün"
    zu melden.
+6. **YMYL nur auf Beauftragung** (seit 13.10.2026, Issue #734) – alle
+   Writer folgen den zwei Bahnen der Engine. Versicherung, Kredit,
+   Baufinanzierung und Altersvorsorge schreiben sie nur mit
+   `--fachfreigabe` und bei offenem WIP-Limit, immer mit Prüfgerüst
+   (`redaktionelle_pruefung`, status „ausstehend“). `--promote` verweigert
+   Hochrisiko ohne gültige Freigabe; der Selbsttest prüft den Vertrag vor
+   jedem Lauf. Details: `YMYL-PRUEFQUEUE-734-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
 
 ---
 

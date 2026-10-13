@@ -28,6 +28,10 @@
 #    python3 scripts/poppy_repurpose.py --neueste 2        # die 2 neuesten
 #    python3 scripts/poppy_repurpose.py --auto --nur-sozial  # ohne Blogartikel
 #    python3 scripts/poppy_repurpose.py --karte <id> --offline
+#    python3 scripts/poppy_repurpose.py --karte <id> --fachfreigabe
+#        # YMYL-Karte bewusst beauftragen (Fachfreigabe-Vertrag, #734):
+#        # ohne das Flag bleibt eine Versicherungs-/Kredit-/Vorsorge-Karte
+#        # „neu“ und wird nicht ausgeschrieben.
 # ============================================================
 from __future__ import annotations
 
@@ -225,16 +229,26 @@ def _brief(karte: dict) -> str:
     return "\n\n".join(t for t in teile if t)
 
 
-def blog_entwurf_schreiben(karte: dict, offline: bool) -> tuple[str, str, str]:
-    """(slug, provider, zeichen) – schreibt den Entwurf, gibt Slug zurück."""
+def blog_entwurf_schreiben(karte: dict, offline: bool, *,
+                           fachfreigabe: bool = False) -> tuple[str, str, str]:
+    """(slug, provider, zeichen) – schreibt den Entwurf, gibt Slug zurück.
+
+    Fachfreigabe-Vertrag (#734): Eine YMYL-Karte (Versicherung, Kredit,
+    Altersvorsorge …) wird ohne Beauftragung nicht ausgeschrieben –
+    `ks.FachfreigabeErforderlich` geht an den Aufrufer, VOR jeder
+    Generierung und ohne Ersatz-Frontmatter.
+    """
     quelle = karte.get("quelle", {})
     titel = (karte.get("artikel_titel")
              or karte.get("winkel")
              or quelle.get("titel") or "Quelle verwerten").strip()
     titel = post_utils.safe_title_cut(titel, 60)
-    if titel.lower() in ks.existing_titles():
+    if ks.titel_vergeben(titel):
         titel = post_utils.safe_title_cut(
             f"{titel} – was das für dich bedeutet", 60)
+    ks.fachfreigabe_pruefen(
+        title=titel, keywords=karte.get("schlagworte") or [titel],
+        pillar=karte.get("pillar") or None, beauftragt=fachfreigabe)
 
     if offline:
         body, provider = offline_geruest(karte), "offline"
@@ -260,7 +274,11 @@ def blog_entwurf_schreiben(karte: dict, offline: bool) -> tuple[str, str, str]:
             tags=karte.get("schlagworte") or [titel],
             pillar=karte.get("pillar") or None,
             keywords=karte.get("schlagworte") or [titel],
-            rolle=ROLLE)
+            rolle=ROLLE, fachfreigabe=fachfreigabe)
+    except ks.FachfreigabeErforderlich:
+        # Nie ins Ersatz-Frontmatter ausweichen: Das wäre genau der
+        # Umweg um den Fachfreigabe-Vertrag, den #734 schließt.
+        raise
     except Exception as e:  # noqa: BLE001 – Register-Grenze darf den Lauf bremsen,
         # aber nie die Karte zerstören: minimales, sicheres Frontmatter.
         print(f"  ⚠ Kanonisches Frontmatter nicht möglich ({e}) – "
@@ -276,7 +294,13 @@ def blog_entwurf_schreiben(karte: dict, offline: bool) -> tuple[str, str, str]:
             "ai_generated: true\n"
             f'ki_redaktion: "{ROLLE}"\n'
             'ki_redaktion_status: "review"\n'
-            "---\n\n")
+            # Auch das Ersatz-Frontmatter trägt das Prüfgerüst (#734) –
+            # mit der Klasse des vollen Karten-Materials. Sie ist nie
+            # niedriger als die, die das Gate am Titel allein ablesen kann
+            # (Höherstufen ist erlaubt, Herabstufen wäre E02).
+            + ks.pruefgeruest(titel, karte.get("schlagworte") or [titel],
+                              karte.get("pillar") or None)
+            + "---\n\n")
 
     content = fm + body
     if provider != "offline":
@@ -356,7 +380,8 @@ def sozial_texte_generieren(karte: dict, slug: str, offline: bool) -> dict:
 
 
 def karte_verwerten(karte: dict, *, nur_sozial: bool = False,
-                    offline: bool = False, dry_run: bool = False) -> bool:
+                    offline: bool = False, dry_run: bool = False,
+                    fachfreigabe: bool = False) -> bool:
     """Eine Karte verwerten → Entwurf + Social-Texte + Karte aktualisieren."""
     print(f"\n▶ Verwerte Karte {karte['id']}: "
           f"{lib.kuerze(karte.get('quelle', {}).get('titel', ''), 70)[0]}")
@@ -372,7 +397,16 @@ def karte_verwerten(karte: dict, *, nur_sozial: bool = False,
             print("  [Dry-Run] Blog-Entwurf würde jetzt geschrieben.")
             slug, provider, zeichen = "", "dry-run", 0
         else:
-            slug, provider, zeichen = blog_entwurf_schreiben(karte, offline)
+            try:
+                slug, provider, zeichen = blog_entwurf_schreiben(
+                    karte, offline, fachfreigabe=fachfreigabe)
+            except ks.FachfreigabeErforderlich as exc:
+                # Karte bleibt unverändert „neu“: Sie wartet sichtbar auf
+                # eine Beauftragung, statt mit Begleittexten ohne Artikel
+                # als „verwertet“ abgehakt zu werden.
+                print(f"  ⏭ Kein Blog-Entwurf (Fachfreigabe-Vertrag, #734): "
+                      f"{exc}")
+                return False
         erzeugnisse["blog"] = {
             "slug": slug, "provider": provider, "zeichen": zeichen,
             "erstellt": lib.now_utc_iso(),
@@ -444,6 +478,11 @@ def main() -> int:
                     help="Ohne KI-API: Gerüst/Vorlagen statt generierter Texte")
     ap.add_argument("--dry-run", action="store_true",
                     help="Nur anzeigen, nichts schreiben")
+    ap.add_argument(ks.FACHFREIGABE_FLAG, dest="fachfreigabe",
+                    action="store_true",
+                    help="YMYL-Karten bewusst beauftragen (nur bei offenem "
+                         "WIP-Limit; der Entwurf trägt das Prüfgerüst, die "
+                         "Freigabe bleibt menschlich)")
     ap.add_argument("--selftest", action="store_true",
                     help="Fail-closed-Selbsttest (Exit 2 bei Defekt)")
     args = ap.parse_args()
@@ -478,7 +517,8 @@ def main() -> int:
     erledigt = 0
     for karte in gewaehlt:
         if karte_verwerten(karte, nur_sozial=args.nur_sozial,
-                           offline=args.offline, dry_run=args.dry_run):
+                           offline=args.offline, dry_run=args.dry_run,
+                           fachfreigabe=args.fachfreigabe):
             erledigt += 1
 
     if not args.dry_run:

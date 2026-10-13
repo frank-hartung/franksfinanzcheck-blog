@@ -19,10 +19,19 @@
 #  Live-Blog. Anti-Halluzination: Thema + Faktenanker kommen nur aus
 #  kuratierten Repo-Daten (topics.yaml, AGC-Recherche).
 #
+#  FACHFREIGABE-VERTRAG (seit 13.10.2026, Dauerheilung #734): Aus dem
+#  Pool zieht die Automatik nur AUTO-Themen (derselbe Filter wie die
+#  Engine, `engine_capacity.nur_auto`). Ein YMYL-Hochrisiko-Thema –
+#  auch per --topic – braucht die bewusste Beauftragung --fachfreigabe
+#  und ein offenes WIP-Limit; der Entwurf trägt dann das Prüfgerüst
+#  `redaktionelle_pruefung` (status „ausstehend“).
+#
 #  Nutzung:
 #    python3 scripts/claude_writer.py                    # freies Thema
 #    python3 scripts/claude_writer.py --topic "Titel" --pillar strom-sparen
 #    python3 scripts/claude_writer.py --offline          # ohne KI-API
+#    python3 scripts/claude_writer.py --topic "Riester-Rente: …" \
+#        --fachfreigabe                                  # YMYL beauftragen
 # ============================================================
 from __future__ import annotations
 
@@ -224,17 +233,35 @@ def run(args) -> int:
                  "pillar": args.pillar or "",
                  "affiliate_url": ks.AFFILIATE_URL}
     else:
-        topic = ks.pick_topic(pillar=args.pillar)
+        # Ohne Beauftragung nur die AUTO-Bahn (#734) – derselbe Filter wie
+        # die Tagesquote der Engine.
+        topic = ks.pick_topic(pillar=args.pillar,
+                              fachfreigabe=args.fachfreigabe)
         if not topic:
-            print("❌ Kein freies Thema im Pool (data/topics.yaml) gefunden.")
+            print("❌ Kein freies Thema im Pool (data/topics.yaml) gefunden"
+                  + ("." if args.fachfreigabe else
+                     " – YMYL-Themen nur mit --fachfreigabe."))
             return 1
     title = topic["title"]
-    if title.lower() in ks.existing_titles():
-        print(f"❌ Thema bereits veröffentlicht: „{title}“ – übersprungen.")
+    if ks.titel_vergeben(title):
+        print(f"❌ Thema gibt es im Bestand schon (Titel oder Slug): "
+              f"„{title}“ – übersprungen.")
         return 1
 
     keywords = ([k.strip() for k in args.keywords.split(",") if k.strip()]
                 if args.keywords else topic.get("keywords") or [])
+
+    # ---------- Fachfreigabe-Vertrag VOR der Generierung (#734) ----------
+    # Dasselbe Material, das build_frontmatter und später das Redaktions-
+    # Gate lesen: Titel + die ersten zwei Keywords + Pillar.
+    try:
+        bahn = ks.fachfreigabe_pruefen(
+            title=title, keywords=keywords or [title],
+            pillar=topic.get("pillar"), beauftragt=args.fachfreigabe)
+    except ks.FachfreigabeErforderlich as exc:
+        print(f"⏭ Kein Entwurf: {exc}")
+        return 1
+    ymyl = bahn == ks.BAHN_FACHFREIGABE
 
     # ---------- Text erzeugen ----------
     if args.offline:
@@ -244,6 +271,8 @@ def run(args) -> int:
         if args.provider:
             chain = [args.provider]
         system = SYSTEM_PROMPT.format(min_z=min_z, ziel=ziel, max_z=max_z)
+        if ymyl:
+            system += ks.YMYL_ARBEITSAUFTRAG
         prompt = _brief(topic, keywords) + (
             f"\n\nSchreibe jetzt den vollständigen Artikel "
             f"(Ziel: ca. {ziel} Zeichen).")
@@ -264,7 +293,9 @@ def run(args) -> int:
         # `build_frontmatter` kanonisiert an der letzten Writer-Grenze
         # gegen data/seo/tag_register.yaml; Keywords bleiben separat.
         tags=keywords or [title], pillar=topic.get("pillar"),
-        keywords=keywords or [title], rolle=ROLLE)
+        keywords=keywords or [title], rolle=ROLLE,
+        # Zweite Prüfung an der Schreibgrenze (Defense in Depth, #734).
+        fachfreigabe=args.fachfreigabe)
     content = fm + body
     if provider != "offline":
         content += ("\n\n" + ks.cta_block(topic.get("affiliate_url"))
@@ -278,6 +309,10 @@ def run(args) -> int:
     print(f"   Pfad: {os.path.relpath(path, BLOG_DIR)}")
     print(f"   Provider: {provider} | Fließtext: {chars:,} Zeichen "
           f"(Ziel {ziel:,})")
+    if ymyl:
+        print("   ⚖ YMYL beauftragt: Prüfgerüst gesetzt (status „ausstehend“). "
+              "Vor --promote: Prüfer, Belegkette, Zahlenprotokoll, --seal "
+              "(docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md).")
     if chars < min_z and provider != "offline":
         print(f"   ⚠ Unter Floor ({min_z:,}) – die Engine hebtelt den Text "
               "beim nächsten Lauf nach (check_length). Vor --promote prüfen!")
@@ -303,6 +338,11 @@ def main() -> int:
                     choices=list(llm_client.PROVIDERS),
                     help="Provider erzwingen (alle kostenfrei)")
     ap.add_argument("--model", help="Modell-ID überschreiben")
+    ap.add_argument(ks.FACHFREIGABE_FLAG, dest="fachfreigabe",
+                    action="store_true",
+                    help="YMYL-Hochrisiko-Thema bewusst beauftragen (nur bei "
+                         "offenem WIP-Limit der Fachfreigabe-Bahn; der Entwurf "
+                         "trägt das Prüfgerüst, die Freigabe bleibt menschlich)")
     args = ap.parse_args()
     return run(args)
 
