@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-12T23:46:52Z",
+  "generated_at": "2026-10-13T00:25:24Z",
   "modus": "kandidaten",
-  "commit": "4f1935cc79ed7aaa4c803aa226db6a58bad11a08",
+  "commit": "7bb9a11ac465ef4dc46ddf61bb3c9a506d8f5480",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "702a7f288a5ef9bc5b970858ea80181fcf37ec263b14aff4a243484f9b2a3094",
@@ -733,7 +733,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
       "sha256": "34fb8eb8c5f347d9f7ef6acb4d5f0e148a8c1758f184afe0e120ec88ecb3ccc1",
@@ -750,7 +750,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     }
   }
 }
