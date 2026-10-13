@@ -100,6 +100,43 @@ redaktionelle_pruefung:
 - Affiliate-CTA vor 600 Wörtern und zwei H2-Abschnitten fachlicher Grundlage;
 - Herabstufung einer automatisch erkannten hohen Risikoklasse.
 
+## Woher Hochrisiko-Entwürfe kommen dürfen (seit 13.10.2026, #734)
+
+Ein Hochrisiko-Entwurf entsteht nur auf menschlichen Auftrag:
+
+- **Content-Engine:** produziert ausschließlich die AUTO-Bahn
+  (`engine_capacity.nur_auto`, Issue #521).
+- **KI-Redaktion und Poppy-Werkbank** (`claude_writer.py`, `news_writer.py`,
+  `poppy_repurpose.py`): YMYL nur mit `--fachfreigabe` und bei offenem
+  WIP-Limit (`YMYL_WIP_LIMIT`, Standard 3). Der Entwurf trägt dann das
+  Gerüst `redaktionelle_pruefung` (risikoklasse „hoch“, status
+  „ausstehend“). In der Queue steht er mit E05 („noch nicht freigegeben“),
+  nicht mit E03 („niemand wusste davon“).
+- `python3 scripts/ki_redaktion.py --promote <slug>` verweigert
+  Hochrisiko-Entwürfe ohne gültige Freigabe.
+
+Taucht trotzdem ein E03-Entwurf auf, ist das zuerst ein Produktionsfehler und
+erst danach ein Prüfauftrag: Herkunft klären (`ki_redaktion:`,
+`ai_generated:` im Frontmatter), die Ursache im Generator beheben, dann über
+den Entwurf entscheiden.
+
+## Freigeben oder verwerfen
+
+Eine Prüfung kann auch mit **Verwerfen** enden. Das ist eine
+Redaktionsentscheidung, keine Automatik. Verworfen wird, wenn die Freigabe in
+Wahrheit einen neuen Artikel verlangen würde, etwa bei:
+
+- fehlendem Anlass (eine „News“ ohne Ereignis) oder einer Titel-Dublette;
+- Kernaussagen, die die Belegkette widerlegt oder nicht trägt;
+- einem Kaufaufruf, der der eigenen Methodik widerspricht.
+
+Vorgehen: Befund mit Quellen im Prüfbericht festhalten
+(`YMYL-PRUEFQUEUE-<nr>-….md`) und den Entwurfsordner mit `git rm -r` entfernen
+(die Fassung bleibt in der Git-Historie). Wenn das Thema es wert ist, wird es
+als Brief für die FACHFREIGABE-Bahn neu beauftragt. Die Automatik löscht nie;
+bis zur Entscheidung bleibt ein Hochrisiko-Entwurf als manueller Review-Hold
+liegen.
+
 ## Befehle
 
 ```bash

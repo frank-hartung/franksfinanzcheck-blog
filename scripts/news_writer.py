@@ -27,10 +27,21 @@
 #
 #  Ergebnis ist IMMER ein Entwurf (draft: true, kein cadence_wait).
 #
+#  FACHFREIGABE-VERTRAG (seit 13.10.2026, Dauerheilung #734): Die
+#  Automatik schreibt nur Aufhänger der AUTO-Bahn. Ein YMYL-Aufhänger
+#  (z. B. Kategorie „versicherung“) wird übersprungen, NICHT verbraucht
+#  und bleibt für eine bewusste Beauftragung im Pool. Ebenso übersprungen:
+#  Aufhänger, deren Titel es im Bestand schon gibt (der Kategorie-Titel
+#  „<Kategorie>-Update: Was sich jetzt für dich ändert“ ist pro Kategorie
+#  nur einmal frei – ein eigener Titel kommt über das Feld `titel:` im
+#  Pool).
+#
 #  Nutzung:
 #    python3 scripts/news_writer.py                 # nächster Aufhänger
 #    python3 scripts/news_writer.py --offline       # ohne KI-API
 #    python3 scripts/news_writer.py --kategorie energie
+#    python3 scripts/news_writer.py --kategorie versicherung --fachfreigabe
+#                                   # YMYL bewusst beauftragen (WIP-Limit)
 # ============================================================
 from __future__ import annotations
 
@@ -271,6 +282,75 @@ Inhalt fehlt – API-Key nötig oder manuell fertigstellen. -->
 """
 
 
+def plane_artikel(hook: dict, args) -> dict:
+    """Was würde aus diesem Aufhänger geschrieben? (ohne Generierung)
+
+    Titel, Keywords und Pillar entstehen hier GENAU EINMAL – dieselben
+    Werte prüft `waehle_aufhaenger` gegen Bahn und Bestand und bekommt
+    später `build_frontmatter`. Zwei Rechenwege für dasselbe Material wären
+    zwei Wahrheiten.
+    """
+    kategorie = hook.get("kategorie", "saisonal")
+    title = (getattr(args, "title", None) or hook.get("titel")
+             or f"{_kategorie_wort(kategorie)}-Update: "
+                f"Was sich jetzt für dich ändert").strip()
+    roh = getattr(args, "keywords", None)
+    keywords = ([k.strip() for k in roh.split(",") if k.strip()]
+                if roh else [])
+    return {
+        "hook": hook,
+        "kategorie": kategorie,
+        "title": title,
+        "keywords": keywords,
+        # Material des Redaktions-Gates: Titel + die ersten zwei Keywords
+        # des Frontmatters – ohne eigene Keywords steht dort der Titel.
+        "fm_keywords": keywords or [title],
+        "pillar": _kategorie_pillar(kategorie),
+    }
+
+
+def waehle_aufhaenger(args, *, kandidaten: list | None = None,
+                      ist_vergeben=None,
+                      lage: dict | None = None) -> tuple[dict | None, list[str]]:
+    """Erster Aufhänger, den diese Rolle schreiben DARF – plus Begründungen.
+
+    Übersprungen (und NICHT verbraucht) werden:
+      * Dubletten: Den Artikel gibt es im Bestand schon (Titel oder Slug,
+        `ks.titel_vergeben`). Am 13.10.2026 entstand so ein zweites
+        „Versicherung-Update: Was sich jetzt für dich ändert“ neben dem
+        freigeprüften Entwurf vom 17.09.
+      * FACHFREIGABE ohne Beauftragung bzw. bei geschlossenem WIP-Limit
+        (`ks.fachfreigabe_pruefen`, Dauerheilung #734).
+    """
+    if kandidaten is None:
+        kandidaten = ks.news_hook_kandidaten(kategorie=args.kategorie)
+    if ist_vergeben is None:
+        titel, slugs = ks.existing_titles(), ks.bestands_slugs()
+
+        def ist_vergeben(t):
+            return ks.titel_vergeben(t, titel=titel, slugs=slugs)
+    beauftragt = bool(getattr(args, "fachfreigabe", False))
+    gruende: list[str] = []
+    for hook in kandidaten:
+        plan = plane_artikel(hook, args)
+        hid = hook.get("id") or "?"
+        if ist_vergeben(plan["title"]):
+            gruende.append(
+                f"`{hid}`: Titel „{plan['title']}“ gibt es im Bestand schon – "
+                "eine Dublette würde nur kannibalisieren. Eigenen Titel im "
+                "Pool setzen (Feld `titel:`).")
+            continue
+        try:
+            plan["bahn"] = ks.fachfreigabe_pruefen(
+                title=plan["title"], keywords=plan["fm_keywords"],
+                pillar=plan["pillar"], beauftragt=beauftragt, lage=lage)
+        except ks.FachfreigabeErforderlich as exc:
+            gruende.append(f"`{hid}`: {exc}")
+            continue
+        return plan, gruende
+    return None, gruende
+
+
 def run(args) -> int:
     cfg = ks.load_config()
     limits = cfg.get("zeichenvorgabe_news", {})
@@ -278,20 +358,25 @@ def run(args) -> int:
     ziel = int(limits.get("ziel", 12000))
     max_z = int(limits.get("max", 15000))
 
-    hook = ks.pick_news_hook(kategorie=args.kategorie)
-    if not hook:
-        print("❌ Kein gültiger, unverbrauchter News-Aufhänger in "
-              "data/aktuelle_entwicklungen.yaml – bitte Pool nachpflegen "
-              "(Anti-Halluzinations-Regel: nichts Erfundenes).")
+    plan, uebersprungen = waehle_aufhaenger(args)
+    for grund in uebersprungen:
+        print(f"⏭ Aufhänger übersprungen (bleibt im Pool): {grund}")
+    if not plan:
+        if uebersprungen:
+            print("❌ Kein Aufhänger, den die Automatik schreiben darf – "
+                  "siehe Gründe oben. Nichts verbraucht, nichts geschrieben.")
+        else:
+            print("❌ Kein gültiger, unverbrauchter News-Aufhänger in "
+                  "data/aktuelle_entwicklungen.yaml – bitte Pool nachpflegen "
+                  "(Anti-Halluzinations-Regel: nichts Erfundenes).")
         return 1
 
-    kategorie = hook.get("kategorie", "saisonal")
+    hook = plan["hook"]
+    kategorie = plan["kategorie"]
+    title = plan["title"]
+    keywords = plan["keywords"]
+    ymyl = plan["bahn"] == ks.BAHN_FACHFREIGABE
     today = datetime.date.today().strftime("%d.%m.%Y")
-    title = (args.title or f"{_kategorie_wort(kategorie)}-Update: "
-             f"Was sich jetzt für dich ändert").strip()
-
-    keywords = ([k.strip() for k in args.keywords.split(",") if k.strip()]
-                if args.keywords else [])
 
     if args.offline:
         body, provider = offline_skeleton(hook), "offline"
@@ -300,6 +385,8 @@ def run(args) -> int:
         if args.provider:
             chain = [args.provider]
         system = SYSTEM_PROMPT.format(min_z=min_z, ziel=ziel, max_z=max_z)
+        if ymyl:
+            system += ks.YMYL_ARBEITSAUFTRAG
         prompt = _brief(hook, keywords) + (
             f"\n\nARTIKEL-TITEL: {title}\nSchreibe jetzt den vollständigen "
             f"News-Kompakt-Artikel (Ziel: ca. {ziel} Zeichen).")
@@ -319,9 +406,11 @@ def run(args) -> int:
         # `build_frontmatter` übernimmt die Register-Kanonisierung; die
         # Keywords werden nicht direkt in URL-erzeugende Tags kopiert.
         tags=keywords or [title, _kategorie_wort(kategorie)],
-        pillar=_kategorie_pillar(kategorie),
-        keywords=keywords or [title], rolle=ROLLE, news=True,
-        kategorie=kategorie)
+        pillar=plan["pillar"],
+        keywords=plan["fm_keywords"], rolle=ROLLE, news=True,
+        kategorie=kategorie,
+        # Zweite Prüfung an der Schreibgrenze (Defense in Depth, #734).
+        fachfreigabe=bool(getattr(args, "fachfreigabe", False)))
     stand = STAND_INTRO.format(today=today)
     # Der Tail (CTA + Disclaimer) ist KEIN Fließtext: Er bleibt beim Messen
     # und Heilen draußen – sonst meldet der Schreiber eine Länge, die er nur
@@ -357,6 +446,10 @@ def run(args) -> int:
     print(f"   Provider: {provider} | Fließtext: {chars:,} Zeichen "
           f"(Ziel {ziel:,}) | Aufhänger: {hook.get('id')}")
     print(f"   Lesbarkeit: {lesbarkeit_status}")
+    if ymyl:
+        print("   ⚖ YMYL beauftragt: Prüfgerüst gesetzt (status „ausstehend“). "
+              "Vor --promote: Prüfer, Belegkette, Zahlenprotokoll, --seal "
+              "(docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md).")
     if chars < min_z and provider != "offline":
         print(f"   ⚠ Unter Floor ({min_z:,}) – vor --promote prüfen!")
     if (flesch is not None and rc is not None and flesch < rc.NEW_FLESCH_MIN
@@ -411,6 +504,11 @@ def main() -> int:
                     choices=list(llm_client.PROVIDERS),
                     help="Provider erzwingen (alle kostenfrei)")
     ap.add_argument("--model", help="Modell-ID überschreiben")
+    ap.add_argument(ks.FACHFREIGABE_FLAG, dest="fachfreigabe",
+                    action="store_true",
+                    help="YMYL-Aufhänger bewusst beauftragen (nur bei offenem "
+                         "WIP-Limit der Fachfreigabe-Bahn; der Entwurf trägt "
+                         "das Prüfgerüst, die Freigabe bleibt menschlich)")
     args = ap.parse_args()
     return run(args)
 

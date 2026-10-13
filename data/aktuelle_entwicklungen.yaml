@@ -30,6 +30,17 @@
 #              überprüfbare Einzelfakten wie Paragraphen/exakte Cent-
 #              Beträge enthaltende) Beobachtung, die die KI natürlich
 #              in 1 Satz einbauen darf/soll.
+#    titel     optional: eigener Artikeltitel für den News-Writer. Ohne
+#              Feld heißt der Artikel „<Kategorie>-Update: Was sich jetzt
+#              für dich ändert“ – diesen Titel gibt es pro Kategorie nur
+#              EINMAL. Ist er vergeben, bleibt der Aufhänger liegen
+#              (Dubletten-Schutz seit 13.10.2026, #734).
+#
+#  YMYL (seit 13.10.2026, #734): Aufhänger der Kategorie „versicherung“
+#  und jeder Titel mit Versicherungs-, Kredit-, Baufinanzierungs- oder
+#  Vorsorge-Bezug sind Hochrisiko. Der News-Writer schreibt sie nur auf
+#  ausdrückliche Beauftragung (`news_writer.py --fachfreigabe`); sonst
+#  bleiben sie unverbraucht im Pool.
 # ============================================================
 
 - id: energie-herbst-nachzahlung

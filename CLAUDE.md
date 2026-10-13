@@ -579,6 +579,22 @@ Am 02.10.2026 lief die Engine, schrieb vier Artikel und veröffentlichte
 - **Eine Klassifikation, nicht zwei:** `engine_capacity` ruft
   `editorial_review_gate.classify_text()`. Die Risikomuster nie kopieren –
   ein Test verbietet es.
+- **Die Bahnen gelten für jeden Produzenten, nicht nur für die Engine
+  (13.10.2026, Issue #734).** Der News-Writer der KI-Redaktion kannte sie
+  nicht: Er zog den Aufhänger „versicherung“ und legte einen Hochrisiko-
+  Entwurf ohne Prüfgerüst und ohne Quelle in die Prüfqueue (E03), dazu mit
+  dem Titel eines Entwurfs vom 17.09. Seitdem prüft
+  `ki_shared.fachfreigabe_pruefen()` vor jeder Generierung und
+  `ki_shared.build_frontmatter()` an der Schreibgrenze: YMYL nur mit
+  `--fachfreigabe` **und** offenem WIP-Limit, immer mit Gerüst
+  (`status: ausstehend`, nie `freigegeben`). Übersprungene Aufhänger bleiben
+  unverbraucht im Pool, Titel-Dubletten werden übersprungen, und
+  `ki_redaktion.py --promote` nimmt Hochrisiko ohne gültige Freigabe nicht
+  an. **Ein neuer Writer baut sein Frontmatter über
+  `ki_shared.build_frontmatter` – nie daneben**, und kein `except Exception`
+  darf `FachfreigabeErforderlich` schlucken. Pin:
+  `scripts/tests/test_ki_redaktion_fachfreigabe.py`; Bericht:
+  `YMYL-PRUEFQUEUE-734-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
 - **Ein Maß für „frei“:** `engine_capacity.lage()` zählt ausschließlich über
   `reserve_topics.disponieren`. Vorher maß der Pre-Flight mit einer laxen
   60-%-Token-Regel (`157 frei`), während der Disponent **3** fand. Nie eine
