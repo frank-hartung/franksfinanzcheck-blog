@@ -125,7 +125,7 @@ Die Zuordnung ist keine Detektivarbeit. Sie steht dort, wo Pflichtangaben stehen
 
 1. **Impressum der Webseite.** Dort steht die Firma mit Rechtsform.
 2. **Vertragsunterlagen.** Auf dem Kontoeröffnungsbogen steht die kontoführende Stelle.
-3. **Preis- und Leistungsverzeichnis.** Es wird von der Bank herausgegeben, die die Einlage führt.
+3. **Preis- und Leistungsverzeichnis.** Es wird von der Bank herausgegeben, die Einlage führt.
 4. **BaFin-Bereich zur Einlagensicherung.** Die Aufsicht erklärt, welches System für welche Bankengruppe zuständig ist.
 
 Wenn zwei Marken zu einem Institut gehören, steht das in den Unterlagen. Frage im Zweifel schriftlich nach, welchem Sicherungssystem die Einlage zugeordnet ist.

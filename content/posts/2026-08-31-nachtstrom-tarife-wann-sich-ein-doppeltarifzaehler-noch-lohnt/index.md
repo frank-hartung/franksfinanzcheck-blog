@@ -169,7 +169,7 @@ Kläre zusätzlich, ob für den Zählerwechsel eine Gebühr anfällt. Solche Bet
 
 Einige Tarifmodelle arbeiten mit Sperrzeiten für bestimmte Verbraucher. Wärmepumpen und Nachtspeichergeräte werden dann zu festen Zeiten vom Netz genommen, weil der Netzbetreiber sie steuert.
 
-Wenn in deinem Vertrag solche Zeiten stehen, gehören sie in deine Planung. Eine Wärmepumpe mit Sperrzeiten braucht eine Heizungsplanung, die die kalten Stunden überbrückt. Sonst wird es am Morgen kalt, und der Vergleich mit einem Einheitstarif fällt anders aus als gedacht.
+Wenn in deinem Vertrag solche Zeiten stehen, gehören sie in deine Planung. Eine Wärmepumpe mit Sperrzeiten braucht eine Heizungsplanung, die kalten Stunden überbrückt. Sonst wird es am Morgen kalt, und der Vergleich mit einem Einheitstarif fällt anders aus als gedacht.
 
 Für Haushalte ohne steuerbare Geräte ist dieser Punkt ohne Bedeutung. Er betrifft vor allem Gebäude mit elektrischer Heizung, also genau die Fälle, in denen ein Doppeltarif interessant ist.
 
