@@ -106,6 +106,27 @@
    (erster Zugriff sperrt die Seitenmenge und hat die Startseiten-Liste
    verfälscht).
 
+7. **Fehltag-Erkennung und Prüffenster (13.10.2026, Auftrag #725):**
+   Der Fund „12 Nachlieferungen für 11 Mo/Mi/Fr-Fehltage“ hatte zwei
+   strukturelle Ursachen im Guard selbst, nicht nur im Inhalt:
+   - **Leerer Publikationstag war unsichtbar.** `find_violations` zählte nur
+     Tage mit mindestens einem Post. Der Montag 31.08. mit 0/2 stand in keiner
+     Warnung. Jetzt bewertet der Guard den **Kalender** seit Launch
+     (`BLOG_LAUNCH` = 08.08.2026): jeder Mo/Mi/Fr zählt, auch mit 0 Posts.
+     Der Report-Tagesliste fehlen keine Null-Tage mehr.
+   - **Defizit blieb folgenlos.** `--check` endete mit Exit 0, sobald nur
+     Mindestziel-Defizite vorlagen. Jetzt gilt ein Prüffenster
+     (`DEFIZIT_FENSTER_PUBLIKATIONSTAGE` = 6, also rund zwei Wochen): Ein
+     Defizit an einem dieser Tage lässt `--check` mit **Exit 1** scheitern.
+     Ältere Defizite sind **Altbefund** im Report – sie lassen sich durch
+     Fallback-Slots nicht mehr heilen, nur durch bewusste Nachlieferung.
+   - `--fix` bleibt **Heiler, kein Gate**: Deploy, Endkontrolle und
+     Blog-Health brechen wegen historischer Fehltage nicht ab. Der Befund
+     steht im Log und im `CADENCE-GATE-REPORT.md`.
+   - Selbsttest: eigener Fixture-Bestand (Null-Tag, Entwurf zählt nicht,
+     Launch-Grenze, Laufender Tag, Fenster vs. Altbefund). Bericht:
+     `FEHLTAG-WACHE-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
+
 ## Empfohlene Zeichenlänge pro Blogartikel (Dauervorgabe, same Tag festgelegt)
 
 - **6.000–10.000 Zeichen Fließtext** (≈ 800–1.400 Wörter)
@@ -114,4 +135,4 @@
   via `LENGTH_OPT_CHARS_MIN/MAX`); harte Gates bleiben wortbasiert
 
 ---
-_Stand: 26.08.2026 · Bestand: 18 live (2–3 an jedem Publikationstag 08.10.–08.26.) + 7 Re-Queue-Entwürfe (`cadence_wait`) + 6 Pillar-Seiten · Hartes Gate + Selbstheilung aktiv (Regel 5, Report: `CADENCE-GATE-REPORT.md`)_
+_Stand: 13.10.2026 · Bestand: 56 live, 28/28 Publikationstage seit 08.08.2026 mit 2–3 Artikeln · Hartes Gate + Selbstheilung aktiv (Regel 5) · Fehltag-Prüffenster aktiv (Regel 7, Report: `CADENCE-GATE-REPORT.md`)_

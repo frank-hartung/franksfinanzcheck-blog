@@ -197,6 +197,6 @@ Melde den Verlust sofort über die Sperrnummer deiner Bank. Viele Institute biet
 
 ---
 
-👉 **Jetzt Konditionen vergleichen:** [**→ Kostenloses C24 Girokonto ansehen**](/go/girokonto/)
+👉 **Jetzt Konditionen ansehen:** [**→ Kostenloses C24 Girokonto ansehen**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
