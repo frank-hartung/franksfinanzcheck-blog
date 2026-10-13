@@ -762,7 +762,15 @@ C12_ART = {"der", "die", "das", "dem", "den", "des", "ein", "eine", "einem",
 
 
 C12_NOMINAL = {"zahlen", "nutzen", "sparen", "rechnen", "vergleichen", "teilen",
-               "mass", "werte", "teile", "laufen", "fallen", "steigen", "fahren"}
+               "mass", "werte", "teile", "laufen", "fallen", "steigen", "fahren",
+               # 13.10.2026 (Live-Befund): „Posten“ ist Nomen („der stille
+               # Posten im Haushaltsplan“) und zugleich Verbform („posten“).
+               # Der Wortschatz kennt nur die Verbform, C12 senkte deshalb den
+               # Nomen-Titel klein – der Artikel stand so live. Mehrdeutige
+               # Nomen der -en-Klasse gehören hier hinein, nicht als Sonderfall
+               # in den Aufrufer: die Liste wirkt für jede Ueberschrift und
+               # jeden Titel, der diese Regeln durchlaeuft.
+               "posten"}
 
 
 def r_c12(text: str, hits: Sink, line: int, glue=None) -> str:
@@ -1703,6 +1711,11 @@ GLUE_REPORT = [
 HEAD_KEEP = [
     ("## Strom sparen im Haushalt: Die 8 besten Tipps für den Herbst", BODY_RULES),
     ("## Mietwagen buchen: Kaution vergleichen und sparen", BODY_RULES),
+    # 13.10.2026 (Live-Befund): Dieser Titel stand als „Der stille posten …“
+    # auf franksfinanzcheck.de, weil C12 nur die Verbform „posten“ kannte.
+    # Der Fall bleibt ab jetzt im Schutz-Selbsttest – wer C12_NOMINAL oder die
+    # Wortschatz-Lesarten anfasst, sieht die Regression sofort hier.
+    ("Abos und Verträge: Der stille Posten im Haushaltsplan", SEO_RULES),
     # Laenge und Unterstitel sind kein Strukturfehler – die alte Laengen-Heuristik
     # meldete genau diese sauberen Ueberschriften.
     ("## Die Psychologie des Wartens: Warum du nicht bis zum letzten Tag warten "

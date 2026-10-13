@@ -44,7 +44,7 @@ faktencheck: 2026-10-13
 kurzantwort: "Gesetzlich geschützt sind Bankguthaben bis 100.000 Euro je Einleger und je Bank. Entscheidend ist nicht der Markenname, sondern das Institut, das die Einlage führt: Zwei Konten bei derselben Bank teilen sich den Schutzbetrag. Anlagen in Aktien, Fonds oder Anleihen fallen nicht unter die Einlagensicherung."
 ---
 
-Einlagensicherung im Check: Die Frage kommt selten vor dem Vertragsabschluss. Sie kommt, wenn eine Bank in Schwierigkeiten gerät und plötzlich in den Nachrichten steht. Dann ist sie allerdings akut, und dann ist es zu spät für die einfache Variante der Antwort.
+Die Einlagensicherung steht selten auf der Agenda, wenn ein Vertrag unterschrieben wird. Sie wird zum Thema, wenn eine Bank in Schwierigkeiten gerät und plötzlich in den Nachrichten steht. Dann ist sie allerdings akut, und dann ist es zu spät für die einfache Variante der Antwort.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

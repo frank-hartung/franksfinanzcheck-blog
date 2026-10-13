@@ -1,5 +1,5 @@
 ---
-title: "Abos und Verträge: Der stille posten im Haushaltsplan"
+title: "Abos und Verträge: Der stille Posten im Haushaltsplan"
 description: "Abos und Verträge fressen Budget, ohne aufzufallen. So findest du sie, kündigst richtig und rechnest nach, was ein einziger Klick pro Monat wirklich kostet."
 date: 2026-08-17T06:10:00Z
 lastmod: 2026-10-13
@@ -44,7 +44,7 @@ faktencheck: 2026-10-13
 kurzantwort: "Wiederkehrende Kosten sind im Haushaltsplan schwer zu sehen, weil jeder einzelne Betrag klein wirkt. Der wirksamste Weg ist eine vollständige Liste aller Abbuchungen der letzten zwölf Monate. Danach entscheidest du pro Posten, ob er bleibt. Verträge, die du online abgeschlossen hast, kannst du häufig über den vorgeschriebenen Kündigungsbutton beenden."
 ---
 
-Abos kündigen im Check: Es ist erstaunlich, wie wenig Aufmerksamkeit ein Betrag bekommt, der automatisch abgebucht wird. Genau das ist das Geschäftsmodell. Entscheidend ist nicht die Höhe des einzelnen Betrags, sondern dass er unbemerkt bleibt.
+Abos kündigen ist selten ein Erfolgserlebnis, und dabei ist es erstaunlich, wie wenig Aufmerksamkeit ein Betrag bekommt, der automatisch abgebucht wird. Genau das ist das Geschäftsmodell. Entscheidend ist nicht die Höhe des einzelnen Betrags, sondern dass er unbemerkt bleibt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

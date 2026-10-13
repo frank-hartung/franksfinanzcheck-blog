@@ -53,12 +53,10 @@ Die erste Wohnung hat einen eigenen Geruch: Farbe, Karton, neue Möbel. Nach vie
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Genau daran scheitern die meisten Anfänge, nicht an großen Summen. Es fehlt eine Ordnung, in der jeder Posten einen Platz hat. Wer diese Ordnung in den ersten Wochen herstellt, muss sie später nur noch pflegen.
+Genau daran scheitern die meisten Anfänge, nicht an großen Summen. Es fehlt eine Ordnung, in der jeder Posten einen Platz hat. Wer diese Ordnung in den ersten Wochen herstellt, muss sie später nur noch pflegen. Ein erster eigener Haushalt klingt nach Freiheit und fühlt sich nach Formularen an.
 
 ## Die ersten vier Wochen entscheiden über das Jahr
 
-
-Darum geht es hier konkret: erster eigener Haushalt.
 
 In den ersten Wochen entstehen die Verträge, die dich lange begleiten: Energielieferung, Internet, Konto, Müllgebühren, Mitgliedschaften. Jeder einzelne Vertrag wird später zur Gewohnheit. Gewohnheiten prüft niemand mehr.
 
@@ -100,7 +98,7 @@ Die Reihenfolge beim Einzug ist keine Geschmacksfrage. Manche Dinge müssen sofo
 4. **Terminieren.** Lege die Fälligkeiten auf eine Kalenderansicht. Achte darauf, dass sie sich möglichst nicht auf dieselbe Woche ballen.
 5. **Rhythmisieren.** Prüfe die Liste zweimal im Jahr und immer dann, wenn sich dein Leben ändert.
 
-Der dritte Schritt ist der wichtigste. Wer Fixkosten und Alltag auf einem Konto mischt, sieht am Monatsende eine Summe ohne Struktur. Getrennt ist erkennbar, welcher Teil unvermeidlich war.
+Ein erster eigener Haushalt ist in diesen fünf Schritten schneller geordnet als gedacht – gepflegt wird die Liste danach einmal im Monat. Der dritte Schritt ist der wichtigste. Wer Fixkosten und Alltag auf einem Konto mischt, sieht am Monatsende eine Summe ohne Struktur. Getrennt ist erkennbar, welcher Teil unvermeidlich war.
 
 ## Modellrechnung: Ein Monat für eine Person
 
@@ -139,7 +137,7 @@ Ein eigenes Konto für diesen Zweck hilft, weil es nicht im Alltag sichtbar ist.
 
 Den Unterschied zwischen Kontoführung und Kosten findest du im [Ratgeber Girokonto der Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990). Für den Puffer zählt vor allem, dass er nicht durch Gebühren und Kartenkosten aufgezehrt wird.
 
-## Typische Fehler in den ersten Monaten
+## Erster eigener Haushalt: typische Fehler in den ersten Monaten
 
 **Der Vertrag mit der längsten Laufzeit wird zuerst unterschrieben.** Genau umgekehrt wäre besser. Beginne mit monatlich kündbaren Verträgen und entscheide erst nach drei Monaten, ob du länger binden willst.
 
@@ -183,8 +181,6 @@ Die praktische Regel: Jeder Vertrag braucht genau einen Verantwortlichen. Eine g
 
 Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in fünf Minuten klären.
 
-
-Genau das ist der Hebel: erster eigener Haushalt.
 
 ## Häufige Fragen
 

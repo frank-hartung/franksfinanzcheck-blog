@@ -51,12 +51,9 @@ kurzantwort: "Ein Doppeltarifzähler erfasst Strom getrennt nach Zeiten: nachts 
 
 Die Idee klingt einleuchtend: Strom, der nachts fließt, ist billiger. Also verschiebe ich Waschmaschine, Trockner und Geschirrspüler in die Nacht und spare.
 
-Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil deines Verbrauchs, der tatsächlich in die günstigen Stunden fällt. Wer diesen Anteil nicht kennt, wettet auf einen Rabatt, den er nie erreicht.
+Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil deines Verbrauchs, der tatsächlich in die günstigen Stunden fällt. Wer diesen Anteil nicht kennt, wettet auf einen Rabatt, den er nie erreicht. Wer einen Nachtstromtarif prüft, misst deshalb zuerst den eigenen Nachtanteil – nicht den Rabatt auf dem Papier.
 
 ## Das Wichtigste in Kürze
-
-
-Darum geht es hier konkret: Nachtstrom Tarif.
 
 * Ein Doppeltarifzähler hat zwei Zählwerke: **Hochtarif (HT)** für die teuren Zeiten und **Niedertarif (NT)** für die günstigen.
 * Der Vorteil wirkt nur über den **Nachtanteil** deines Verbrauchs, nicht über die Höhe des Rabatts allein.
@@ -83,7 +80,7 @@ Die Aufteilung der Stunden ist nicht überall gleich. Sie hängt vom Netzgebiet 
 
 Typische Muster sind ein Fenster in den späten Abendstunden und eine längere Phase in der Nacht. Manche Tarife schalten an Wochenenden und Feiertagen zusätzlich auf den günstigen Preis. Andere arbeiten mit drei Stufen und einer Mittagsphase.
 
-Verbindlich ist, was in deinen Tarifunterlagen steht. Dort findest du die Zeitfenster, die Bezeichnung der Zählwerke und den Hinweis, an welchem Zählwerk welcher Preis gilt.
+Verbindlich ist, was in deinen Tarifunterlagen steht. Ein Nachtstromzähler kann die Zeiten nur so trennen, wie sie im Netzgebiet geschaltet sind. Dort findest du die Zeitfenster, die Bezeichnung der Zählwerke und den Hinweis, an welchem Zählwerk welcher Preis gilt.
 
 Prüfe diese Unterlagen, bevor du dein Verhalten änderst. Es bringt nichts, den Trockner um 22 Uhr zu starten, wenn dein günstiges Fenster erst um 23 Uhr beginnt.
 
@@ -105,7 +102,7 @@ Es gibt drei Konstellationen, in denen der Einheitstarif die bessere Wahl bleibt
 
 **Der Nachtanteil liegt niedrig.** Wer tagsüber zu Hause ist, kocht, wäscht und arbeitet, verteilt den Verbrauch über den Tag. Ein Doppeltarif bestraft diese Verteilung.
 
-**Der Aufwand ist zu hoch.** Geräte in die Nacht zu verschieben kostet Planung. Läuft der Trockner dann um 23 Uhr, wenn alle schlafen, sinkt der Nutzen. Ein Tarif, der Verhalten erzwingt, muss diesen Zwang mit Ersparnis bezahlen.
+**Der Aufwand ist zu hoch.** Geräte in die Nacht zu verschieben kostet Planung. Vergleiche zusätzlich die Nachtstrom-Angebote: Ein günstiger Nachttarif mit hohem Grundpreis frisst den Vorteil wieder auf. Läuft der Trockner dann um 23 Uhr, wenn alle schlafen, sinkt der Nutzen. Ein Tarif, der Verhalten erzwingt, muss diesen Zwang mit Ersparnis bezahlen.
 
 **Die Alternative wäre besser.** Wer sein Geld in einen günstigeren Gesamttarif oder in eine Verbrauchsreduktion steckt, hat oft mehr davon. Die Verbraucherzentrale nennt das den ersten Schritt jeder Stromsparstrategie: erst den Verbrauch senken, dann den Preis verhandeln ([Strom sparen im Haushalt](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/strom-sparen-im-haushalt-einfache-tipps-10734)).
 
@@ -188,8 +185,6 @@ Ein Doppeltarif ist nur ein Hebel unter mehreren. Bevor du dich für ein Zählwe
 
 Diese Reihenfolge ist der Kern. Erst den Verbrauch, dann den Tarif, dann die Feinheiten wie das Zählwerk.
 
-
-Genau das ist der Hebel: Nachtstrom Tarif.
 
 ## Häufige Fragen
 

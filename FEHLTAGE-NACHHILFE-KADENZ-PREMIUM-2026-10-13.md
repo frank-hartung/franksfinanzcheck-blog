@@ -236,6 +236,62 @@ nicht über gerendertes HTML.
   vertretbar, weil jeder die volle Kette (Recherche → Quellen → GEO-Kriterien →
   Gates) durchlaufen hat — nachweisbar oben je Artikel.
 
+## Nachtrag (nach dem Deploy): der automatische Heil-Lauf und seine Korrektur
+
+Nach dem Merge (Commit `d504176`) lief auf `main` der Selbstheilungs-Teil des
+Deploys und schrieb `2908ead` („fix(gate): Kadenz-/Titel-/Cover-Heilungen vor
+Veröffentlichung"). Er hat zwei Dinge getan – eines war richtig, eines war ein
+Fehler:
+
+1. **Richtig:** Je eine sichtbare **Transparenz-Zeile** in die zwölf
+   Nachlieferungen (Offenlegung vor dem ersten Partnerlink).
+2. **Fehler (live sichtbar):** Der Titel des 17.08.-Artikels stand danach als
+   „Abos und Verträge: **Der stille posten** im Haushaltsplan" – ein Nomen
+   kleingeschrieben, in Titel, Browsertitel und `image:title` der Sitemap.
+   Ursache: `keyword_optimizer` wendet nach einer Heilung `casing_guard.SEO_RULES`
+   auf den Titel an, und **C12 (Title-Case-Leak) senkte „Posten" zur Verbform
+   „posten"**, weil der Wortschatz von diesem mehrdeutigen Wort nur die
+   Verbform kennt (`classify("posten") == ('lower', …)`). Nur dieser eine Titel
+   war betroffen – eine Prüfung aller 88 Artikel ergab genau einen Treffer.
+3. **Nicht premium, ebenfalls automatisch erzeugt:** Satz-Ruinen wie „Darum
+   geht es hier konkret: erster eigener Haushalt." und „Genau das ist der
+   Hebel: Nachtstrom Tarif." (Dichte-Heilung) sowie „… im Check:"-Präfixe vor
+   vorhandenen Einstiegen. Sie standen live mitten im Text.
+
+**Korrektur (dieser Branch):**
+
+- Titel wiederhergestellt: „Abos und Verträge: Der stille Posten im
+  Haushaltsplan".
+- Sieben Artikel redaktionell überarbeitet: die Satz-Ruinen entfernt, die
+  „im Check"-Präfixe in echte Sätze übersetzt („Lastschrift prüfen heißt
+  zuerst: der Blick auf das Konto am Monatsende.", „Eine Störung beim
+  Internetanbieter beginnt harmlos:", „Die Einlagensicherung steht selten auf
+  der Agenda, wenn ein Vertrag unterschrieben wird.").
+- Damit die Dichte-Wache nicht erneut Stubs einsetzt, tragen die betroffenen
+  Artikel ihre Kernphrase jetzt **in echter Sprache**: „Geld abheben im Ausland
+  ist eine Rechnung mit zwei Zeilen …", „Wer einen Nachtstromtarif prüft,
+  misst deshalb zuerst den eigenen Nachtanteil …", „Ein erster eigener Haushalt
+  klingt nach Freiheit und fühlt sich nach Formularen an." (plus eine
+  Überschrift und ein Zwischensatz).
+- **Beweis der Idempotenz:** `keyword_optimizer.py --fix` und
+  `keyword_gate.py --fix` liefen danach erneut und meldeten „geheilt 0";
+  der anschließende `git diff` enthielt nur meine Änderungen. Der nächste
+  Deploy kann also nicht wieder Stubs einsetzen.
+
+**Dauerheilung (Regel statt Aufräumen):**
+
+| Ebene | Änderung | Beweis |
+|---|---|---|
+| Wortliste | `casing_guard.C12_NOMINAL` führt jetzt `posten` – mit Anlass im Kommentar | `apply_rules(titel, SEO_RULES, heading=True)` → unverändert, Funde `[]` |
+| Selbsttest | Der Titel steht als Schutz-Fall in `HEAD_KEEP` (26 statt 25) | `casing_guard --selftest` grün – wer die Liste anfasst, sieht die Regression sofort |
+| Aufrufer | `keyword_optimizer`: **Nomen-Veto** – was der Artikel großschreibt, darf der Titel nicht klein setzen | Ohne Wortlisten-Eintrag senkt C12 weiter, das Veto hält den Titel trotzdem (nachgestellt und belegt) |
+
+Die Klasse dahinter: Ein mehrdeutiges Wort (Nomen/Verb) kann eine Wortliste
+nur einseitig führen – der **Artikel selbst** ist die zweite, verlässlichere
+Quelle. Das Nomen-Veto macht genau diese Quelle nutzbar.
+
+---
+
 ## Offen (bewusst liegengelassen, mit Besitzer)
 
 1. **`cadence_guard --check` und Fehltage**: Vorschlag zur Entscheidung —
