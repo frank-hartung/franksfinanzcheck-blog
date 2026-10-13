@@ -17,6 +17,12 @@ cover:
   image: "images/covers/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit.jpg"
   alt: "7 Gewohnheiten für finanzielle Freiheit"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite destatis.de"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+faktencheck: 2026-10-13
 ---
 
 Am Monatsende fehlt dir immer wieder Geld? Du willst wissen, welche kleinen Gewohnheiten dir den Weg zur finanziellen Freiheit ebnen – ohne dein Leben radikal umzubauen?

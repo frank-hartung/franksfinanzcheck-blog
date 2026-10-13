@@ -1,7 +1,7 @@
 {
   "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
   "titel": "Energie-Update: Was sich jetzt für dich ändert",
-  "erzeugt": "2026-10-13 09:40 UTC",
+  "erzeugt": "2026-10-13 12:07 UTC",
   "faellig": {
     "faellig": true,
     "prio": 0,
@@ -30,9 +30,50 @@
       "faktencheck": false
     }
   },
-  "treffer": [],
-  "befunde": [],
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Fachthemen_](https://www.bundesnetzagentur.de/DE/Themen/start.html \"erster Klick öffnet das Untermenü, zweiter Klick geht zur Zielseite\")\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) \n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) \n        *   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html) \n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html) \n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html) \n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html) \n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html) \n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html) \n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html) \n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html) \n            *   [Allgemeines](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start2.html) \n            *   [Unterversorgungsfeststellung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/Unterversorgungsfeststellungen/start.html)\n\n*   [Verbraucherportal](https://www.bundesnetzagentur.de/DE/Vportal/vportal_node.html \"erster Klick ö",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass bei einem variablen Tarif das Marktrisiko beim Anbieter bleibt, ist falsch – nach Angaben der Bundesnetzagentur sind variable Tarife an die Spot‑Markt‑Preise gekoppelt, sodass das Preisrisiko beim Verbraucher liegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel erwähnt keine Möglichkeit von Preisobergrenzen bei variablen Tarifen, obwohl die Bundesnetzagentur erklärt, dass Anbieter solche Varianten mit Preisgarantien anbieten können.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "veraltet",
+      "text": "Der Hinweis „Stand: 08.10.2026“ suggeriert aktuelle Preisentwicklungen für 2026, doch die Bundesnetzagentur liefert nur Daten bis zum letzten veröffentlichten Jahr und keine gesicherten Prognosen für 2026.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Behauptung, Festpreisverträge schützen generell vor Preisspitzen, ist zu pauschal – die Bundesnetzagentur weist darauf hin, dass der Schutz nur für die Vertragslaufzeit gilt und danach Marktpreise wieder gelten können.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es fehlt ein Hinweis auf die regulatorischen Informationspflichten des Anbieters (z. B. Aufschlüsselung von Grund‑ und Arbeitspreis), die die Bundesnetzagentur für Transparenz vorschreibt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
   "fehler": [
-    "offline: keine Abrufe"
+    "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+    "Verbraucherzentrale – Energie: Feed nicht lesbar"
   ]
 }

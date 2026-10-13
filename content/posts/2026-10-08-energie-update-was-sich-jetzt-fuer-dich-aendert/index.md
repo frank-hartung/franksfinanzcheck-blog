@@ -18,6 +18,13 @@ cover:
   image: "images/covers/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Energie-Update: Was sich jetzt für dich ändert"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Bundesnetzagentur - Energie"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2024-01-01"
+faktencheck: 2026-10-13
 ---
 
 **Stand: 08.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

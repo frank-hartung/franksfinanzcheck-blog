@@ -18,6 +18,13 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Stromfresser im Haushalt entlarven"
 pin_description: "*Werbung | Stromfresser im Haushalt entlarven – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
+quellen:
+  - id: "Q1"
+    titel: "Bundesnetzagentur - Energie"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2024-01-01"
+faktencheck: 2026-10-13
 ---
 
 Du öffnest im Herbst deine Stromrechnung – und staunst. Die Zahl ist gestiegen, obwohl du kaum mehr verbraucht hast. Der Verdacht: Unsichtbare Stromfresser ziehen Energie, ohne dass du es merkst.

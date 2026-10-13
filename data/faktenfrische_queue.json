@@ -1,12 +1,12 @@
 {
-  "erzeugt": "2026-10-13 09:40 UTC",
+  "erzeugt": "2026-10-13 12:08 UTC",
   "uebersicht": {
     "gesamt": 94,
     "ratgeber": 6,
     "faellig": 3,
     "bearbeitet": 3,
     "geo_schnitt": 92,
-    "befunde": 0,
+    "befunde": 13,
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 6,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 11,
@@ -23,42 +23,121 @@
       "titel": "Energie-Update: Was sich jetzt für dich ändert",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "praezision",
+          "text": "Die Aussage, dass bei einem variablen Tarif das Marktrisiko beim Anbieter bleibt, ist falsch – nach Angaben der Bundesnetzagentur sind variable Tarife an die Spot‑Markt‑Preise gekoppelt, sodass das Preisrisiko beim Verbraucher liegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt keine Möglichkeit von Preisobergrenzen bei variablen Tarifen, obwohl die Bundesnetzagentur erklärt, dass Anbieter solche Varianten mit Preisgarantien anbieten können.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "veraltet",
+          "text": "Der Hinweis „Stand: 08.10.2026“ suggeriert aktuelle Preisentwicklungen für 2026, doch die Bundesnetzagentur liefert nur Daten bis zum letzten veröffentlichten Jahr und keine gesicherten Prognosen für 2026.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Behauptung, Festpreisverträge schützen generell vor Preisspitzen, ist zu pauschal – die Bundesnetzagentur weist darauf hin, dass der Schutz nur für die Vertragslaufzeit gilt und danach Marktpreise wieder gelten können.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Es fehlt ein Hinweis auf die regulatorischen Informationspflichten des Anbieters (z. B. Aufschlüsselung von Grund‑ und Arbeitspreis), die die Bundesnetzagentur für Transparenz vorschreibt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
       "geo": 17,
       "fehler": [
-        "offline: keine Abrufe"
+        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+        "Verbraucherzentrale – Energie: Feed nicht lesbar"
       ],
-      "aenderungen": []
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-13"
+      ]
     },
     {
       "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
       "titel": "7 Gewohnheiten für finanzielle Freiheit",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Artikel berücksichtigt nicht die Inflation von 3,3 % (nach Destatis), wodurch die reale Kaufkraft der angesparten 7 200 € nach einem Jahr geringer ist.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Die stark steigenden Energiepreise (+14,9 % laut Destatis) werden im Artikel nicht erwähnt, obwohl sie einen wesentlichen Einfluss auf die Fixkosten haben können.",
+          "beleg": ""
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Berechnung des ETF‑Endkapitals (5 000 € → ca. 9 800 € nach 10 Jahren) lässt die Inflation außen vor und gibt damit ein zu optimistisches Bild der zukünftigen Kaufkraft.",
+          "beleg": ""
+        }
+      ],
       "geo": 50,
       "fehler": [
-        "offline: keine Abrufe"
+        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
       ],
-      "aenderungen": []
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-13"
+      ]
     },
     {
       "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
       "titel": "Stromfresser im Haushalt entlarven",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "veraltet",
+          "text": "Der im Artikel genannte durchschnittliche Strompreis von 30 Cent pro kWh ist veraltet; die Bundesnetzagentur gibt aktuell einen durchschnittlichen Endkundenpreis von rund 40 Cent pro kWh an.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt nicht die verpflichtende EU-Energieeffizienzkennzeichnung, die von der Bundesnetzagentur gefordert wird und bei der Auswahl neuer Geräte hilft, Energie zu sparen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die angegebenen Stand‑by‑Leistungen (z. B. 5 W für einen Fernseher) sind zu hoch; die Bundesnetzagentur weist darauf hin, dass typische Stand‑by‑Werte von Unterhaltungselektronik meist zwischen 0,5 W und 2 W liegen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Artikel nennt nur kostenpflichtige Messgeräte, obwohl die Bundesnetzagentur ein kostenloses Online‑Tool zur Analyse des Stromverbrauchs bereitstellt, das hier nicht erwähnt wird.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Amortisationsrechnung für den Austausch eines alten Kühlschranks (9 Jahre) ist unpräzise; die Bundesnetzagentur empfiehlt, dass sich Investitionen in energieeffiziente Geräte innerhalb von maximal 5 Jahren amortisieren sollten.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
       "geo": 50,
       "fehler": [
-        "offline: keine Abrufe"
+        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+        "Verbraucherzentrale – Energie: Feed nicht lesbar"
       ],
-      "aenderungen": []
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-13"
+      ]
     }
   ]
 }
