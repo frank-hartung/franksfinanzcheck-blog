@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-13T15:44:54Z",
+  "generated_at": "2026-10-13T16:43:19Z",
   "modus": "live",
   "commit": null,
   "artikel": {
@@ -481,7 +481,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
-      "sha256": "9a1b34fe7cd43114c1b497bdc05074eb5705c65c83200c353502b6b2679278c2",
+      "sha256": "c0ed411764c663edcbd35041cd4e1d639ba07e8dfbc36627ad0e3e6c227aecd3",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -651,7 +651,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "fddfbddd09130735bf12e2a2e8163f1d5dadbbea8ff16552ddc05fcfb8dc4595",
+      "sha256": "59ac419489d9c56029680c25b6acfd83fd3e7a2a13c80f0a2608874fa7745b9d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -872,7 +872,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
-      "sha256": "586d4e5177cd8116fd23b4c0b1350295ace444c3e94d7bb524cc405961187ecd",
+      "sha256": "122af1ece76066cce19714f057ad5046806ce78cda1aae2be994d53b4a1ab643",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
