@@ -1,0 +1,36 @@
+{
+  "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
+  "titel": "7 Gewohnheiten für finanzielle Freiheit",
+  "erzeugt": "2026-10-13 09:29 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "standard",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 90
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "offline: keine Abrufe"
+  ]
+}

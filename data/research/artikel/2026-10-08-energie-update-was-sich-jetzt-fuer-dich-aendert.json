@@ -1,0 +1,38 @@
+{
+  "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
+  "titel": "Energie-Update: Was sich jetzt für dich ändert",
+  "erzeugt": "2026-10-13 09:29 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45
+  },
+  "geo": {
+    "punkte": 1,
+    "maximum": 6,
+    "prozent": 17,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)",
+      "Mindestens eine Tabelle (extrahierbare Struktur)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": false,
+      "tabelle": false,
+      "faktencheck": false
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "offline: keine Abrufe"
+  ]
+}

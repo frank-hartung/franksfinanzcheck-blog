@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-10-13
 title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
 description: "Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll."
 date: 2026-10-07T01:34:23Z
@@ -176,9 +176,13 @@ Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
 Ist der Router technisch noch okay?
 
-### 4. WLAN und Tarif trennen hast du ein Netzproblem oder ein Tarifproblem?
+### 4. WLAN und Tarif trennen
 
-### 5. Effektivpreis rechnen Nicht nur auf die ersten Rabattmonate schauen.
+Hast du ein Netzproblem oder ein Tarifproblem?
+
+### 5. Effektivpreis rechnen
+
+Nicht nur auf die ersten Rabattmonate schauen.
 
 ## Wann ein Tarifwechsel besonders sinnvoll ist
 
@@ -207,17 +211,25 @@ Dazu kommen mögliche Einsparungen durch geringere Routerkosten.
 
 ## Was viele Haushalte falsch machen
 
-### Fehler 1: nur auf die Mbit‑Zahl schauen Mehr ist nicht automatisch besser.
+### Fehler 1: Nur auf die Mbit‑Zahl schauen
+
+Mehr ist nicht automatisch besser.
 
 ### Fehler 2: WLAN‑Probleme mit teurem Tarif lösen wollen
 
 Das klappt oft nicht.
 
-### Fehler 3: alten Vertrag aus Bequemlichkeit weiterzahlen Genau dort verstecken sich stille Mehrkosten.
+### Fehler 3: Alten Vertrag aus Bequemlichkeit weiterzahlen
 
-### Fehler 4: nur den Startpreis vergleichen Entscheidend ist der Effektivpreis.
+Genau dort verstecken sich stille Mehrkosten.
 
-### Fehler 5: Routermiete ignorieren Über zwei Jahre ist das oft ein dreistelliger Betrag.
+### Fehler 4: Nur den Startpreis vergleichen
+
+Entscheidend ist der Effektivpreis.
+
+### Fehler 5: Routermiete ignorieren
+
+Über zwei Jahre ist das oft ein dreistelliger Betrag.
 
 ## DSL, Kabel oder Glasfaser – kurz eingeordnet
 

@@ -1123,5 +1123,122 @@
    "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
+ },
+ "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
+  "title": "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen",
+  "ts": "2026-10-13T09:21:15+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
+  "title": "Abos und Verträge: Der stille Posten im Haushaltsplan",
+  "ts": "2026-10-13T09:21:17+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
+  "title": "Warmwasser sparen: Die Rechnung hinter dem Hahn",
+  "ts": "2026-10-13T09:21:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
+  "title": "Lastschrift und Dauerauftrag: Was du prüfen solltest",
+  "ts": "2026-10-13T09:21:20+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
+  "title": "Umzug mit Internet: Anschluss und Rufnummer mitnehmen",
+  "ts": "2026-10-13T09:21:22+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
+  "title": "Grundversorgung Strom und Gas: Was sie leistet",
+  "ts": "2026-10-13T09:21:24+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
+  "title": "Einlagensicherung: Wie viel Guthaben geschützt ist",
+  "ts": "2026-10-13T09:21:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
+  "title": "Zählerstand ablesen und melden: Schätzwerte vermeiden",
+  "ts": "2026-10-13T09:21:27+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
+  "title": "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet",
+  "ts": "2026-10-13T09:21:28+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
+  "title": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
+  "ts": "2026-10-13T09:21:30+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-12-stromfresser-im-haushalt-entlarven": {
+  "title": "Stromfresser im Haushalt entlarven",
+  "ts": "2026-10-13T09:21:32+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
+  "title": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch lohnt",
+  "ts": "2026-10-13T09:30:48+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
+  "title": "Störung beim Internetanbieter: So sicherst du deine Rechte",
+  "ts": "2026-10-13T09:30:49+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  }
 }
