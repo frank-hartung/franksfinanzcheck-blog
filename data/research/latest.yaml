@@ -1,5 +1,5 @@
-generated_at: '2026-10-12T11:19:11Z'
-day: '2026-10-12'
+generated_at: '2026-10-13T11:05:07Z'
+day: '2026-10-13'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,63 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 'Depot eröffnen: Worauf Anfänger 2026 achten sollten'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Depot eröffnen: Worauf Anfänger 2026 achten sollten'
-    score: 0.55
-    keywords: []
-  - topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit
-      Wärmepumpe'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte
-      mit Wärmepumpe'
-    score: 0.55
-    keywords:
-    - Dynamische Stromtarife Vor Nachteile
-    - Wärmepumpenstrom Vergleich
-    - Tibber Alternative
-    - Stromvertrag Smart Meter
-  - topic: Energiekosten senken mit kleinen Veränderungen
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Energiekosten senken mit kleinen Veränderungen
-    score: 0.55
-    keywords:
-    - Energie
-    - Kosten
-    - SparTipps
-  - topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
+  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Hund & Katze: Lohnt sich eine Tierversicherung?'
+    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
     score: 0.55
     keywords:
-    - Tierversicherung
-    - Hundeversicherung
-    - Katzenversicherung
-  - topic: Jahreskosten fürs Auto minimieren
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Jahreskosten fürs Auto minimieren
-    score: 0.55
-    keywords:
-    - Autokosten
-    - Versicherungen
-    - Kraftstoff
-  - topic: 'Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+    - Hausratversicherung vergleichen
+    - Hausrat absichern
+    - Hausrat Kosten
+  - topic: 'Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am lukrativsten
+      ist'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+    source: 'topics:Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am
+      lukrativsten ist'
     score: 0.55
     keywords:
-    - Stromspeicher kaufen
-    - Batteriespeicher Solar
-    - Photovoltaik Speicher
+    - Heizperiode Beginn
+    - Gastarife vergleichen Oktober
+    - Neukundenbonus Gas
+    - Heizkosten senken Winter
+  - topic: 'Interrail und Bahncard: Günstig mit dem Zug durch Europa'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Interrail und Bahncard: Günstig mit dem Zug durch Europa'
+    score: 0.55
+    keywords:
+    - Interrail
+    - Bahncard sparen
+    - Zugreise Europa günstig
+  - topic: Kostenloses Girokonto ohne Gebühren finden
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Kostenloses Girokonto ohne Gebühren finden
+    score: 0.55
+    keywords:
+    - Kostenloses Girokonto
+    - Girokonto Vergleich
+    - Kontoführungsgebühren sparen
+  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
+    score: 0.55
+    keywords:
+    - E-Auto Mietwagen
+    - Elektromobilität
+    - Urlaub
+  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
+    score: 0.55
+    keywords:
+    - Smart-Plug
+    - Energie sparen
+    - Haushaltsgeräte
 live_web:
   enabled: false
   findings: []
