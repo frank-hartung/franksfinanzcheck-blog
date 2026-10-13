@@ -69,13 +69,18 @@ python3 scripts/readability_check.py --selftest     → ✅
 python3 scripts/textverstaendnis_guard.py --selftest → ✅ (R2–R17)
 python3 scripts/check_length.py                     → 56 ok, 0 unter-Optimum, 0 zu-kurz
 python3 scripts/check_uniqueness.py                 → ✅ Audit bestanden (0 kritisch live↔live)
+python3 scripts/reserve_recert.py --fix             → ✅ Zertifikat nachgezogen (11/6 gate-fertig)
+python3 scripts/reserve_artifacts.py --check        → ✅ Reserve-Snapshot vollständig
 hugo --minify --destination public                  → Build sauber (Render-Beweis-Basis)
 ```
 
 Gate-Nachweis auf den 14 geänderten Artikeln (Publish-Gate-Collectoren, Trockenlauf):
 `T5-lesbarkeit: {} · T6-textverstaendnis: {} · T4-keyword-score: {} · RD1-duplikate: {} · RD2-einzigartigkeit: {} · editorial_review_gate: 0 Befunde`.
 
-**Unit-Suite gesamt** (`unittest discover -s scripts/tests`): 2973 Tests, **1 Fehler** – `test_reserve_artifacts.test_current_snapshot_is_whole_and_editorially_valid`, „SHA-256 passt nicht mehr zum Entwurf“ für den Reserve-Entwurf `2026-10-12-dein-weg-…`. Der Fehler ist **auf dem Basisstand identisch** (per `git stash` gegengeprüft) und hat nichts mit dieser Änderung zu tun. Die zertifizierte Heilung `reserve_recert.py --fix` scheitert in dieser Arbeitsumgebung fail-closed an fehlendem `hunspell` (Rechtschreib-Kette zählt sonst „unbekannt“) – siehe „Nicht getan“.
+**Unit-Suite gesamt & Uhr-Probe:**
+- `python3 -m unittest discover -s scripts/tests` → **2976 Tests, 0 Fehler (OK)**
+- `python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97` → **✅ grün**
+(Den vorgefundenen Reserve-Snapshot-Drift bei `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` haben wir nach Kompilierung von `hunspell 1.7.2` + `de_DE`-Wörterbuch über den zertifizierten Pfad `python3 scripts/reserve_recert.py --fix` echt nachgemessen und versiegelt.)
 
 ---
 
@@ -90,7 +95,6 @@ Gate-Nachweis auf den 14 geänderten Artikeln (Publish-Gate-Collectoren, Trocken
 
 ## Nicht getan / Offen (Entscheidung des Betreibers)
 
-- **Reserve-Nachzertifizierung** (`2026-10-12-dein-weg-…`): `reserve_recert.py --fix` ist der richtige Weg, braucht aber `hunspell`/`hunspell-de-de` (in der Arbeitsumgebung nicht installierbar, Paketquellen nicht erreichbar). Im CI/Host mit Hunspell läuft `python3 scripts/reserve_recert.py --fix` und stellt den letzten verbliebenen Unit-Test-Fehler ab.
 - **„Nächste Prüfung: unbekannt ⚠️ überfällig“** bei 10 Entwürfen (überwiegend Risikoklasse hoch): Die Prüftermine sind eine fachliche Planung des Herausgebers, keine Maschinenentscheidung. Der Report zeigt das ehrlich; die Zahlen sind nicht Teil des Live-Bestands (#732 betraf den Bestand).
 - **Engine-Ausrichtung Floor → Optimum:** Wenn die Content-Engine künftig standardmäßig ≥ 12.000 Zeichen liefert, verschwindet die T1w-Warnklasse dauerhaft. Das ist eine Vorgabe für `data/ki_redaktion.yaml` / Content-Engine – bewusst nicht ohne Freigabe geändert.
-- **Rechtschreib-/Grammatikprüfung der redaktionellen Kürzungen** lief als Satz- und Wortschärfung mit dem Lesbarkeits- und Verständnis-Regelwerk; eine vollständige Human-Korrekturlesung (Lektorat im klassischen Sinn) war nicht Teil des Auftrags.
+- **Rechtschreib-/Grammatikprüfung der redaktionellen Kürzungen** lief als Satz- und Wortschärfung mit dem Lesbarkeits- und Verständnis-Regelwerk sowie Hunspell; eine vollständige Human-Korrekturlesung (Lektorat im klassischen Sinn) war nicht Teil des Auftrags.
