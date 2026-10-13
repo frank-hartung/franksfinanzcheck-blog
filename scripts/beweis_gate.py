@@ -259,6 +259,30 @@ def pruefe_content(register_index: dict, kennzahl_ids: set[str], fehler: list[st
     return statistik
 
 
+def pruefe_kennzahlen_slugs(kennzahlen: dict, fehler: list[str], content_dir: Path | None = None) -> int:
+    """B7: Jeder in data/kennzahlen_register.yaml gekoppelte Slug muss existieren."""
+    cdir = content_dir or CONTENT_DIR
+    geprueft = 0
+    for eintrag in (kennzahlen or {}).get("kennzahlen") or []:
+        kid = eintrag.get("id") or "?"
+        for slug in eintrag.get("betroffene_slugs") or []:
+            geprueft += 1
+            if str(slug).startswith("pillar/"):
+                pfad = cdir / "pillar" / str(slug)[len("pillar/"):] / "index.md"
+                existiert = pfad.is_file()
+            else:
+                existiert = (
+                    (cdir / "posts" / str(slug) / "index.md").is_file()
+                    or (cdir / "posts" / f"{slug}.md").is_file()
+                )
+            if not existiert:
+                fehler.append(
+                    f"B7 data/kennzahlen_register.yaml [{kid}]: "
+                    f"gekoppelter Slug '{slug}' existiert nicht unter content/"
+                )
+    return geprueft
+
+
 def lauf(history: bool) -> int:
     fehler: list[str] = []
     warnungen: list[str] = []
@@ -272,6 +296,7 @@ def lauf(history: bool) -> int:
     register_index = pruefe_register(register, fehler)
     pruefe_methodik(methodik, fehler)
     anzahl_korrekturen = pruefe_korrekturen(korrekturen, fehler)
+    pruefe_kennzahlen_slugs(kennzahlen, fehler)
     statistik = pruefe_content(register_index, kennzahl_ids, fehler, warnungen)
 
     belegt = sum(1 for e in register_index.values() if e.get("status") in OEFFENTLICH_ALS_BEWEIS)
@@ -364,6 +389,14 @@ def selftest() -> int:
     fehler = []
     pruefe_korrekturen(sab, fehler)
     proben.append(("Korrektur ohne Quelle fällt durch", any("'quelle' fehlt" in f for f in fehler)))
+
+    # Probe 6: Toter Slug im Kennzahlen-Register muss durchfallen.
+    fehler = []
+    pruefe_kennzahlen_slugs(
+        {"kennzahlen": [{"id": "sab-k", "betroffene_slugs": ["gibts-nicht-123"]}]},
+        fehler,
+    )
+    proben.append(("Toter Slug im Kennzahlen-Register fällt durch", any("B7 " in f for f in fehler)))
 
     alle_ok = True
     print("BEWEIS-WACHE – Selbsttest")

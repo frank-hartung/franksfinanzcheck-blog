@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-01
+lastmod: 2026-10-13
 title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
 description: "DSL-Vergleich 2026: Tarife, Geschwindigkeiten & versteckte Kostenfallen im Check. So findest du günstigeres Internet und sparst bis zu 360 €."
 date: 2026-08-19T08:35:12Z
@@ -25,7 +25,7 @@ quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-10-13"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
@@ -34,7 +34,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 

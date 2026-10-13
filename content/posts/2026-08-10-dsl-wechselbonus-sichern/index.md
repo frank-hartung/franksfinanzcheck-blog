@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-01
+lastmod: 2026-10-13
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
 description: "Wie du Wechselbonus, Startguthaben und Effektivpreis richtig rechnest, damit dein neuer DSL-Tarif nicht nur günstig aussieht, sondern es auch wirklich ist."
 date: 2026-08-10T10:20:09Z
@@ -25,7 +25,7 @@ quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-10-13"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
@@ -34,7 +34,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-13"
 ---
 
 DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch denselben Preis wie vor drei oder vier Jahren. Glasfaser und schnelle Leitungen sind längst Standard. Trotzdem bleiben viele im alten, teuren Vertrag. Der Grund: Der Wechsel klingt kompliziert – ist er aber meist nicht. Genau hier locken Anbieter mit Rabatten, Startguthaben und dem klassischen **DSL-Wechselbonus**. (Stand: Oktober 2026)

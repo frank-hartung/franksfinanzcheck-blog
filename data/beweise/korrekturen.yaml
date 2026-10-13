@@ -28,6 +28,32 @@ meta:
   angelegt: "2026-10-01"
 
 eintraege:
+  - datum: "2026-10-13"
+    typ: aktualisierung
+    titel: "Kennzahlen-Radar #730: BNetzA-Breitband, EZB-Zinsbezug & Pillar-Kennzahlen synchronisiert"
+    was: >-
+      Quartalsprüfung der Kennzahl bnetza-breitband (Bundesnetzagentur
+      Telekommunikation/Breitbandmessung) und Zyklus-Prüfung ezb-einlagenzins
+      durchgeführt; BNetzA-Quellenstände in allen gekoppelten DSL- und
+      Mobilfunk-Ratgebern nachgezogen. Im Pillar Strom & Gas die Marktradar-Karten
+      auf die verifizierten BDEW-Kennzahlen (37,0 ct/kWh Strom, 11,93 ct/kWh Gas)
+      synchronisiert; im Pillar Konto & Karten den Quellen- und Prüfstand
+      aktualisiert sowie drei verwaiste Slugs im Kennzahlen-Register bereinigt.
+    warum: >-
+      Fällige 90-Tage-Prüfung im Kennzahlen-Radar (#730) sowie Beseitigung
+      nachhängender Artikel-Stände und verwaister Slug-Kopplungen.
+    quelle:
+      name: "Bundesnetzagentur – Telekommunikation & Breitbandmessung"
+      url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    belegklasse: amtlich
+    seiten:
+      - pfad: "/pillar/internet-dsl/"
+        name: "Pillar Internet, DSL & Mobilfunk"
+      - pfad: "/pillar/strom-sparen/"
+        name: "Pillar Strom & Gas sparen"
+      - pfad: "/pillar/konto-karten/"
+        name: "Pillar Konto & Karten"
+
   - datum: "2026-10-03"
     typ: system
     titel: "Bewertungsraster veröffentlicht: So entstehen unsere Vergleiche"

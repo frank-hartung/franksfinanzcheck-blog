@@ -131,6 +131,51 @@ class TestBriefSignale(unittest.TestCase):
                                       datetime.date(2026, 1, 1), AS_OF)
             self.assertEqual(signale, [])
 
+    def test_generator_datum_schlaegt_slug_datum(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            art_dir = os.path.join(tmp, "data", "research", "artikel")
+            os.makedirs(art_dir, exist_ok=True)
+            pfad = os.path.join(art_dir, "2026-08-10-alter-slug.md")
+            with open(pfad, "w", encoding="utf-8") as f:
+                f.write(
+                    "# Faktenfrische: Alter Slug\n"
+                    "> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-09-27\n\n"
+                    "## Fundstellen\n\n"
+                    "- **[BDEW-Strompreisanalyse](https://www.bdew.de/x)**\n"
+                )
+            self.assertEqual(kr._research_date(pfad), datetime.date(2026, 9, 27))
+            signale = kr.scan_signale(tmp, ["BDEW-Strompreisanalyse"],
+                                      datetime.date(2026, 9, 1), AS_OF)
+            self.assertEqual(len(signale), 1)
+            self.assertEqual(signale[0]["datum"], "2026-09-27")
+
+    def test_leeres_dossier_und_nav_links_loesen_kein_signal_aus(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            art_dir = os.path.join(tmp, "data", "research", "artikel")
+            os.makedirs(art_dir, exist_ok=True)
+            pfad = os.path.join(art_dir, "internet-dsl.md")
+            with open(pfad, "w", encoding="utf-8") as f:
+                f.write(
+                    "# Faktenfrische: Internet, DSL & Mobilfunk 2026\n"
+                    "> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-09-27\n\n"
+                    "- **Suchbegriffe:** Breitbandmessung, DSL, Glasfaser\n"
+                    "- **Verifizierte Quellen (Whitelist):** 0\n\n"
+                    "## Verifizierte Quellen\n\n"
+                    "_Keine thematisch passende Fundstelle in diesem Lauf._\n\n"
+                    "### Suche: „Breitbandmessung Bundesnetzagentur 2026“\n"
+                    "_Keine Treffer (oder Kanal nicht erreichbar)._\n"
+                    "> * [Breitbandmessung](https://www.bundesnetzagentur.de/nav)\n\n"
+                    "## Offene GEO-Punkte\n\n"
+                    "- Breitbandmessung prüfen\n\n"
+                    "## Kanal-Störungen\n\n"
+                    "- Breitbandmessung offline\n"
+                )
+            signale = kr.scan_signale(
+                tmp, ["Breitbandmessung", "DSL", "Glasfaser"],
+                datetime.date(2026, 7, 10), AS_OF
+            )
+            self.assertEqual(signale, [])
+
 
 class TestArtikelKopplung(unittest.TestCase):
     def test_artikel_hinkt_hinterher(self):
@@ -209,8 +254,11 @@ class TestRegisterValidierung(unittest.TestCase):
         """Guard: das produktive Register muss die Validierung bestehen."""
         if not os.path.exists(kr.REGISTER_PATH):
             self.skipTest("Register noch nicht angelegt")
-        _, _, fehler = kr.load_register()
+        _, eintraege, fehler = kr.load_register()
         self.assertEqual(fehler, [], f"Register-Fehler: {fehler}")
+        regeln = kr.bewerte(kr.BLOG_DIR, eintraege, datetime.date(2026, 10, 13))
+        warnungen = kr.collect_coupling_warnings(regeln)
+        self.assertEqual(warnungen, [], f"Kopplungs-Warnungen im Produktiv-Register: {warnungen}")
 
 
 class TestAusgaben(unittest.TestCase):
@@ -238,8 +286,21 @@ class TestAusgaben(unittest.TestCase):
             _gruet(tmp)
             regeln = kr.bewerte(tmp, [_eintrag()], AS_OF, slug_check=False)
             rep = kr.render_report(regeln, AS_OF)
-            for marker in ("P1", "Prüfstand", "BDEW"):
+            for marker in ("P1", "Prüfstand", "BDEW", "## 🟢 OK – im Rhythmus"):
                 self.assertIn(marker, rep)
+
+    def test_issue_lifecycle_plan(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            _gruet(tmp)
+            regeln_faellig = kr.bewerte(tmp, [_eintrag()], AS_OF, slug_check=False)
+            regeln_ok = kr.bewerte(
+                tmp, [_eintrag(rhythmus_tage=365, suchbegriffe=["gibtsnicht"])],
+                AS_OF, slug_check=False
+            )
+            self.assertEqual(kr.plan_issue_action(regeln_faellig, AS_OF, [])["action"], "create")
+            self.assertEqual(kr.plan_issue_action(regeln_faellig, AS_OF, [730])["action"], "edit")
+            self.assertEqual(kr.plan_issue_action(regeln_ok, AS_OF, [730])["action"], "close")
+            self.assertEqual(kr.plan_issue_action(regeln_ok, AS_OF, [])["action"], "none")
 
 
 if __name__ == "__main__":
