@@ -91,7 +91,7 @@ Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
 - `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10941 Zeichen, Optimum 12.000–18.000)
 - `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10875 Zeichen, Optimum 12.000–18.000)
 - `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10386 Zeichen, Optimum 12.000–18.000)
-- `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10410 Zeichen, Optimum 12.000–18.000)
+- `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10605 Zeichen, Optimum 12.000–18.000)
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 
