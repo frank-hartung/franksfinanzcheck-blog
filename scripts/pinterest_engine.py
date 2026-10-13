@@ -42,6 +42,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
 from post_utils import list_post_paths  # noqa: E402
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
@@ -248,27 +249,14 @@ def load_posts():
     return posts
 
 
-def _ascii_tag(s):
-    s = s.lower()
-    for a, b in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
-        s = s.replace(a, b)
-    return s
-
-
 def hashtags_for(post):
-    """Erzeugt max. 3 ASCII-Hashtags (Pinterest 2026: keine Umlaute)."""
+    """Erzeugt max. 3 ASCII-Hashtags – Regel in scripts/pinterest_hashtags.py.
+
+    Reihenfolge des Pools bleibt: Tags, Keywords, Slug (Suchintent zuerst).
+    """
     pool = [t for t in (post.get("tags") or []) if t]
     pool += [t for t in (post.get("keywords") or []) if t]
-    pool += [post["slug"].replace("-", " ")]
-    tags = []
-    for p in pool:
-        words = re.findall(r"[a-z0-9]+", _ascii_tag(p))
-        tag = "".join(words)
-        if 3 <= len(tag) <= 24 and tag not in tags:
-            tags.append(tag)
-        if len(tags) >= 3:
-            break
-    return " ".join("#" + t for t in tags)
+    return ph.als_text(ph.tags_bauen(pool, post["slug"]))
 
 
 def pin_title_of(post):
@@ -289,6 +277,10 @@ def pin_text(post):
         text = post["pin_description"].replace("&", "und")
         if not text.lstrip().startswith("*Werbung"):
             text = "*Werbung | " + text
+        # Letzte Instanz vor der API: Ein Text, der ältere Fassungen der
+        # Hashtag-Regel passiert hat, darf nicht als Pin ausgeliefert werden
+        # (#729). `heile` ist bei konformen Texten byte-identisch.
+        text, _aenderungen = ph.heile(text)
         return text[:500]
     desc = post["description"] or post["title"]
     desc = desc.replace("&", "und")
@@ -296,6 +288,11 @@ def pin_text(post):
     # Agentur-Fix 31.08.2026: ALLE Pins mit Werbung-Kennzeichnung (UWG)
     # – auch der Fallback (deterministische Texte) muss compliant sein.
     text = f"*Werbung | {desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
+    # Auch der Fallback läuft durch die SSOT: Bei einem zu langen Text kürzt
+    # `heile` die PROSA und behält den Tag-Block – ein blindes `[:500]` konnte
+    # den letzten Tag zerschneiden ('… #geldspar'), was hier niemand messen
+    # würde (die Quelle im Frontmatter ist unauffällig, #729).
+    text, _ = ph.heile(text)
     return text[:500]
 
 

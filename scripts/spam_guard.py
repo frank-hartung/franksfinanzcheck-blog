@@ -71,6 +71,7 @@ from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
 from check_titles import check_title                      # noqa: E402
 import plagiat_guard as plag                               # noqa: E402
 import cadence_guard as cad                                # noqa: E402
+import pinterest_hashtags as ph                           # noqa: E402 – Hashtag-SSOT (#729)
 
 REPORT = os.path.join(BLOG_DIR, "SPAM-REPORT.md")
 STATE_FILE = os.path.join(BLOG_DIR, "data", "spam_state.json")
@@ -530,6 +531,10 @@ def fix_blog(findings):
                         cur = m.group(1)
                         new = cur if "Werbung" in cur else \
                             safe_word_cut("*Werbung | " + cur, 500)
+                        # Hashtag-Hygiene (SSOT, #729): Wer die Beschreibung
+                        # neu schreibt, schreibt sie regelkonform – ein
+                        # fünf-Tag-Text darf hier nicht zementiert werden.
+                        new = ph.heile(new)[0]
                         content = content.replace(
                             m.group(0),
                             'pin_description: "' + new.replace('"', "'")

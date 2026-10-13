@@ -1505,6 +1505,52 @@ Bauart wie #583 (Faktenfrische) und #674 (Duplikate).
 - Tests: `python3 -m unittest scripts.tests.test_publish_gate_uniqueness`
   (16) · Bericht: `EINZIGARTIGKEIT-BESTAND-714-DAUERHEILUNG-PREMIUM-2026-10-12.md`.
 
+## Ein Befund ohne Heiler ist ein Dauerläufer (Pinterest P8, C37, seit #729, 13.10.2026)
+
+Der Pinterest-Watchdog öffnete am 13.10.2026 das Issue #729 mit genau einem
+offenen Posten – „5 Hashtags (max. 3)" in einer `pin_description` – und hätte
+es nie wieder schließen können: Der Workflow schließt nur bei Exit 0, und P8
+heilte nichts – es war der **einzige offene Posten** des Laufs. Der Befund
+wurde täglich neu gemessen und täglich neu gemeldet. Dieselbe Bauart wie C29
+– ein harter Blocker braucht einen Heiler, sonst wird der Melder zum
+Dauerläufer.
+
+Beim Heilen kamen zwei blinde Flecken derselben Prüfung ans Licht:
+
+- Beide Prüfer zählten Hashtags mit einem Muster, das Umlaute ausschließt
+  (`#([a-z0-9]+)` bzw. `[A-Za-z0-9]+`): `#zählerstand` galt als „#z",
+  `#ersteWohnung` als „#erste" – die Umlaut-Regel dahinter war **toter Code**.
+- `pinterest_seo_healer.py` (H6) sah die Klasse in seinem Audit, hielt den
+  Text aber für gültig (nur Länge und `&`) und überschrieb ihn deshalb nie:
+  Prüfer und Heiler widersprachen sich.
+
+- **Eine Quelle.** `scripts/pinterest_hashtags.py` trägt die Regel H1–H6
+  (max. 3, nur `[a-z0-9]`, 3–24 Zeichen, Zahlenschilder wie `#1` sind keine
+  Tags, Block am Textende) und ist als Wache im vertraglichen Minimum
+  eingetragen (C6: `--selftest`), mit `--wirkungsprobe` daneben.
+- **Ein Schließpfad.** `pinterest_check.py --fix` heilt die `pin_description`
+  an der QUELLE: falten, hinten auf drei kappen (die Reihenfolge im Text ist
+  die Priorität – es wird nie ein Thema erfunden), Block ans Textende. Die
+  Heilung ist idempotent und fail-closed: ändert sie nichts, bleibt der Befund
+  stehen. Nach der Heilung ist der Build desselben Laufs älter als der Fix –
+  das ist kein offener Befund, sondern wird als FIX belegt.
+- **Keine zweite Zahl.** Alle Pinterest-Schreiber importieren die SSOT
+  (`pinterest_check`, `pinterest_seo_healer`, `pinterest_duplicate_guard`,
+  `pinterest_pin_text_sync`, `pinterest_engine`, `generate_pins`,
+  `engine_generate`, `spam_guard`); der SEO-Heiler prüft die Gültigkeit jetzt
+  ebenfalls über `ph.ist_konform` statt über Länge und `&`. Auch die
+  API-Grenze gehört dazu: `generate_pins.build_api_description()` hängte
+  früher drei CamelCase-Tags hinter jeden kuratierten Text (aus drei Tags
+  wurden sechs, aus 478 + Block über 500 Zeichen).
+- **Wirkung, nicht Absicht.** C37 prüft jede `pin_description` im Bestand
+  gegen die SSOT – ein neuer Artikel mit fünf Tags macht den Vertrag rot,
+  bevor der Watchdog ein Issue eröffnet. Der Quellfingerabdruck kennt die
+  Regel (Report-Schema 4), und `pinterest_check.py` weist übersprungene
+  HTML-Prüfungen im Report als „nicht gemessen" aus (C2), statt Grün zu
+  behaupten.
+- Tests: `python3 -m unittest scripts.tests.test_pinterest_hashtags scripts.tests.test_pinterest_check`
+  (45) · Bericht: `PINTEREST-729-HASHTAG-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

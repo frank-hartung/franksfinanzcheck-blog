@@ -6,6 +6,7 @@ Funktionsweise:
   - Liest alle Artikel aus content/posts/ mit "pinned: false" im Frontmatter
   - Erstellt für jeden Artikel einen Pin über die Pinterest API v5
     (Bild = Artikel-Cover, Beschreibung = Meta-Description + Hashtags,
+     Regel: scripts/pinterest_hashtags.py – höchstens drei, nur [a-z0-9]),
      Link = Artikel-URL)
   - Setzt danach "pinned: true" im Frontmatter (damit jeder Artikel nur
     EINMAL gepinnt wird)
@@ -29,12 +30,34 @@ import urllib.request
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
+import pinterest_hashtags as ph  # Hashtag-SSOT (#729) – eine Regel, eine Quelle
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 # UTM-Attribution (Premium 25.08.2026) – wie pinterest_engine.PIN_UTM:
 # Analytics-Kanalzuordnung in Umami, Affiliate-Links bleiben kanalneutral.
 PIN_UTM = "?utm_source=pinterest&utm_medium=social&utm_campaign=pins"
 API = "https://api.pinterest.com/v5"
+
+
+#: Haus-Tags, wenn eine Beschreibung noch keinen Block mitbringt.
+HAUS_TAGS = " #geldsparen #spartipps #franksfinanzcheck"
+
+
+def build_api_description(post):
+    """Pin-Beschreibung an der API-Grenze – ein Block, höchstens drei Tags.
+
+    Die Regel steht in `scripts/pinterest_hashtags.py` (SSOT, #729). Vorher
+    addierte diese Stelle blind `#GeldSparen #Spartipps #FranksFinanzcheck`
+    HINTER den kuratierten Block: Aus drei Quell-Tags wurden sechs Pin-Tags
+    in CamelCase, und `base[:478]` + Block überschritt das 500-Zeichen-Limit.
+    """
+    base = (post["description"] or post["title"]).strip().replace("&", "und")
+    if not base.lstrip().startswith("*Werbung"):
+        base = "*Werbung | " + base
+    desc, _ = ph.heile(base[:478])
+    if not ph.tags_normalisiert(desc):
+        desc = ph.heile(desc + HAUS_TAGS)[0]
+    return desc
 
 
 def load_posts():
@@ -209,11 +232,7 @@ def main():
         # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-
         # Links. Die kuratierte pin_description traegt bereits *Werbung;
         # nur der Fallback bekommt den Prefix (Doppel-Prefix vermeiden).
-        base = (p["description"] or p["title"]).strip().replace("&", "und")
-        if not base.lstrip().startswith("*Werbung"):
-            base = "*Werbung | " + base
-        desc = base[:478]
-        desc += "\n\n#GeldSparen #Spartipps #FranksFinanzcheck"
+        desc = build_api_description(p)
         try:
             result = create_pin(token, board_id, p["title"], desc, link, image)
             mark_pinned(p)

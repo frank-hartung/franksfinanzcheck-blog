@@ -17,7 +17,8 @@ Einbindung:
   - Workflows: pinterest-watchdog, redaktions-standard, premium-governance
 
 Agentur-Standard 2026: Jeder Pin-Text muss einzigartig sein – Titel ≤100,
-Description ≤500, *Werbung-Prefix, max. 3 ASCII-Hashtags.
+Description ≤500, *Werbung-Prefix, Hashtags nach scripts/pinterest_hashtags.py
+(max. 3, [a-z0-9], Block am Ende – eine Regel für alle Schreiber, #729).
 """
 import glob
 import os
@@ -27,6 +28,7 @@ from collections import defaultdict
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import pinterest_hashtags as ph  # noqa: E402  – Hashtag-SSOT (#729)
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 DO_FIX = "--fix" in sys.argv
 
@@ -66,23 +68,9 @@ def _read_posts():
         })
     return posts
 
-def _ascii_tag(s):
-    s = s.lower()
-    for a, b in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
-        s = s.replace(a, b)
-    return s
-
 def _build_hashtags(keywords, slug):
-    pool = keywords + [slug.replace("-", " ")]
-    tags = []
-    for p in pool:
-        words = re.findall(r"[a-z0-9]+", _ascii_tag(p))
-        tag = "".join(words)
-        if 3 <= len(tag) <= 24 and tag not in tags:
-            tags.append(tag)
-        if len(tags) >= 3:
-            break
-    return tags
+    """Hashtags für einen neu erzeugten Pin-Text – Regel in der SSOT (#729)."""
+    return ph.tags_bauen(keywords, slug)
 
 def _unique_desc(slug, title, description, keywords, existing, attempt=0):
     base = (description or title or slug).strip()
@@ -96,7 +84,7 @@ def _unique_desc(slug, title, description, keywords, existing, attempt=0):
     ]
     cta = ctas[(sum(ord(c) for c in slug) + attempt) % len(ctas)]
     hashtags = _build_hashtags(keywords, slug)
-    ht = " ".join("#"+t for t in hashtags[:3])
+    ht = ph.als_text(hashtags)
     if attempt>0:
         base = base.rstrip(".") + f" – Variante {attempt+1} mit Checkliste."
     text = f"*Werbung | {base} {cta}"
@@ -112,6 +100,10 @@ def _unique_desc(slug, title, description, keywords, existing, attempt=0):
         text = f"*Werbung | {trunc}… {cta}"
         if ht:
             text+=f" {ht}"
+    # Schlusskontrolle über die SSOT: ein Block, höchstens drei Tags, ≤500 –
+    # auch ein erzeugter Text darf die Regel nicht erst nach dem Schreiben
+    # verletzen (#729).
+    text, _ = ph.heile(text)
     text=text[:DESC_MAX]
     if text in existing and attempt<10:
         return _unique_desc(slug, title, description, keywords, existing, attempt+1)
