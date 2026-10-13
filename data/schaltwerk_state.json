@@ -1,6 +1,7 @@
 {
   "ausgeloest": {
     "kanal-konfig-drift::konfig:169bfa06fac2613f": "2026-10-05T17:55:29+02:00",
+    "kanal-konfig-drift::konfig:8d00d247daf49351": "2026-10-13T03:35:57+02:00",
     "nacht-planung::planung:2026-10-04": "2026-10-04T16:20:48+02:00",
     "nacht-planung::planung:2026-10-05": "2026-10-05T08:55:53+02:00",
     "nacht-planung::planung:2026-10-06": "2026-10-06T04:30:18+02:00",
@@ -42,7 +43,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html": "2026-10-06T00:34:19+02:00"
   },
   "letzter_lauf": {
-    "kanal-konfig-drift": "2026-10-05T17:55:29+02:00",
+    "kanal-konfig-drift": "2026-10-13T03:35:57+02:00",
     "nacht-planung": "2026-10-12T03:43:26+02:00",
     "reach-signale-kuratieren": "2026-10-12T21:17:05+02:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
@@ -50,7 +51,7 @@
     "verbraucher-nachrichten": "2026-10-07T09:10:22+02:00"
   },
   "marker": {
-    "datei:data/social/channels.yaml": "169bfa06fac2613f"
+    "datei:data/social/channels.yaml": "8d00d247daf49351"
   },
   "slots": {
     "slot:2026-10-04:03:40": "2026-10-04T16:20:48+02:00",
@@ -66,7 +67,8 @@
   "version": 1,
   "zaehler": {
     "kanal-konfig-drift": {
-      "2026-10-05": 1
+      "2026-10-05": 1,
+      "2026-10-13": 1
     },
     "nacht-planung": {
       "2026-10-04": 1,
