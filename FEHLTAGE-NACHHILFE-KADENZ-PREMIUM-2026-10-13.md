@@ -198,13 +198,22 @@ Kette bis zur Build-Grenze ist vollständig grün; die Build-Stufe läuft wie
 immer in CI. Das ist eine Umgebungsgrenze, kein offener Mangel am Inhalt.
 
 **CI-Nachweis auf dem Branch (Pull Request #725):** Der Push hat die
-Server-Gates gestartet; grün sind **gate (Build + publish_gate-Kette, 3 m 10 s)**,
-lesehilfen, Playwright-Suite (Desktop + Mobile), CodeQL (JS + Python),
-Integritäts-Siegel, „Quellen, Stand, Einheit und Methodik", URL-Wache,
-Klartext-Wache, navigation, beweis und auto-assign; `automerge` wird bewusst
-übersprungen. Damit ist auch die Stufe belegt, die lokal nicht laufen kann —
-inklusive des `offenlegung_gate` im `gate`-Job. Zum Berichtszeitpunkt lief die
-`regression`-Suite noch.
+Server-Gates gestartet; grün sind **Qualitäts-Gate (Build + interne Links:
+Hugo-Build-Vertrag → Build → `check_internal_links.sh`)**, E2E-Tests
+(Playwright, Desktop + Mobile), Themenwelten (Navigation & Darstellung),
+Lesehilfen-Gate, Beweis-Gate, Daten- und Visualisierungs-Gate, CodeQL
+(JS + Python), Integritäts-Lock, Klartext-Wache, URL-Wache, „Quellen, Stand,
+Einheit und Methodik" und auto-assign. Damit ist genau die Stufe belegt, die
+lokal nicht laufen kann: **das gebaute HTML** — inklusive interner Links.
+`automerge` wird bewusst übersprungen. Zum Berichtszeitpunkt lief die
+„Publication reliability regression tests"-Suite noch.
+
+**Was in CI bewusst noch nicht lief:** `publish_gate.py` — und damit sein
+Schritt 6, das `offenlegung_gate` (O1–O7 gegen `public/`) — hängt in
+`deploy.yml` und läuft erst beim Push auf `main`. Lokal unmöglich (Hugo),
+auf dem Branch nicht Teil der PR-Checks; die Offenlegung ist deshalb hier
+über die Quelltexte (Layout-Partial, Artikeltext, `/go/`-Register) belegt,
+nicht über gerendertes HTML.
 
 ---
 
@@ -240,9 +249,10 @@ inklusive des `offenlegung_gate` im `gate`-Job. Zum Berichtszeitpunkt lief die
 3. **Neun Live-Artikel im Altbestand unter dem Längenoptimum** (11.203–11.888
    Zeichen, u. a. 02.10. und 30.09.): inhaltlich vollständig, aber unter
    12.000 — Kandidaten für die nächste Qualitäts-Runde, kein Kadenzthema.
-4. **Build-Stufe in CI**: `hugo --minify` → `publish_gate`/`offenlegung_gate`
-   laufen dort; in PR #725 grün nachgewiesen (`gate`-Job), lokal nicht
-   reproduzierbar (siehe Belege). Offen bleibt nur die `regression`-Suite.
+4. **Build-Stufe**: In PR #725 ist der **Hugo-Build inklusive interner Links**
+   grün nachgewiesen; `publish_gate`/`offenlegung_gate` laufen erst im
+   `deploy.yml` auf `main` (und sind lokal nicht reproduzierbar, siehe Belege).
+   Offen bleibt auf dem Branch nur die `regression`-Suite.
 
 ## Bedienung / Reproduktion
 
