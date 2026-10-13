@@ -59,11 +59,12 @@ Geändert: `scripts/cadence_guard.py` (Code, Selbsttest, Report) und `docs/CADEN
 - **`BLOG_LAUNCH = 2026-08-08`**: Startdatum laut Regel 1. Davor zählt kein Tag.
 - **`publikationstage_im_intervall()`**: alle Mo/Mi/Fr im Intervall, Grundlage des Kalenders.
 - **`find_violations(..., heute=None)`**: bewertet **jeden** Publikationstag seit Launch, auch mit 0 Posts. Der laufende Tag bleibt ausgenommen (er läuft bis 19:40 MESZ). `heute` ist injizierbar, damit der Selbsttest deterministisch ist.
-- **`DEFIZIT_FENSTER_PUBLIKATIONSTAGE = 6`** und **`defizit_im_fenster()`**: Prüffenster = die letzten sechs Publikationstage strikt vor heute (rund zwei Wochen).
+- **`DEFIZIT_FENSTER_PUBLIKATIONSTAGE = 3`** und **`defizit_im_fenster()`**: Prüffenster = die letzten drei Publikationstage strikt vor heute (eine Kalenderwoche Mo/Mi/Fr). Ursprünglich 6; auf 3 verengt, als das Gate in `blog-health-daily` verdrahtet wurde (siehe unten).
 - **`main()` / `--check`**: Exit 1, wenn ein Defizit im Prüffenster liegt. Altbefund bleibt Exit 0, wird aber benannt.
-- **`--fix`**: bleibt Heiler. Historische Fehltage führen dort **nie** zu Exit 1. Deploy, Endkontrolle und Blog-Health bleiben also stabil.
+- **`--fix`**: bleibt Heiler. Historische Fehltage führen dort **nie** zu Exit 1. Deploy und Endkontrolle bleiben also stabil.
+- **`blog-health-daily.yml`**: ruft `cadence_guard.py --check` als **letzten Schritt nach Commit und Push** auf. Ein Fehltag im Prüffenster macht den täglichen Lauf rot, ohne dass die Heilungen davor verloren gehen.
 - **Report** (`CADENCE-GATE-REPORT.md`): Tagesliste zeigt Null-Tage mit 0; Defizite unterscheiden „im Prüffenster“ und „Altbefund“.
-- **Selbsttest**: neuer Block mit eigenem Bestand (Mo 08-10 mit 1 Live, Mi 08-12 mit 1 Live und 1 Entwurf, Fr 08-14 ohne Post, Mo 08-17 mit 2, Mi 08-19 mit 3, Fr 08-07 vor Launch). Geprüft werden: Null-Tag wird erkannt, Entwurf zählt nicht, Launch-Grenze, laufender Tag ausgenommen, Fenster vs. Altbefund, Fensterstart, Null-Tag im Report.
+- **Selbsttest**: neuer Block mit eigenem Bestand (Mo 08-10 mit 1 Live, Mi 08-12 mit 1 Live und 1 Entwurf, Fr 08-14 ohne Post, Mo 08-17 mit 2, Mi 08-19 mit 3, Fr 08-07 vor Launch). Geprüft werden: Null-Tag wird erkannt, Entwurf zählt nicht, Launch-Grenze, laufender Tag ausgenommen, Fenster vs. Altbefund (Mo 17.08.: alle drei im Fenster; Fr 21.08.: nur noch Fr 14.08.), Fensterstart (Default 3 und explizit 6), Null-Tag im Report.
 
 ---
 
@@ -94,7 +95,7 @@ Fall A zeigt 10.07. mit, weil ein Post mit Frontmatter-Datum 10.07. in einem Ord
 
 ## Entscheidungen (bewusst gesetzt, änderbar)
 
-1. **Prüffenster = 6 Publikationstage** (`DEFIZIT_FENSTER_PUBLIKATIONSTAGE`). Kürzer = schneller alarmiert, länger = mehr Zeit zum Nachliefern. Die Konstante ist die einzige Stelle.
+1. **Prüffenster = 3 Publikationstage** (`DEFIZIT_FENSTER_PUBLIKATIONSTAGE`). Kürzer = schneller alarmiert, länger = mehr Zeit zum Nachliefern – und länger rot nach einem Fehltag. Mit dem täglichen `--check` in `blog-health-daily` reicht eine Woche: Der Alarm kommt am Morgen nach dem Fehltag, die Nachlieferung (C23) ist in derselben Woche möglich. Die Konstante ist die einzige Stelle.
 2. **Exit 1 nur in `--check`, nicht in `--fix`.** Ein Heiler, der Deploy oder Endkontrolle wegen Vergangenheit rot macht, würde den Live-Betrieb blockieren, ohne dass heute etwas zu heilen wäre.
 3. **Altbefunde bleiben Exit 0.** Sonst wäre `--check` dauerhaft rot wegen Tagen, die nicht mehr heilbar sind. Die Altbefunde stehen trotzdem sichtbar im Report.
 
@@ -112,7 +113,7 @@ Vergleich mit Venv (PyYAML, Pillow, cryptography) gegen den Basisstand: Die Unit
 
 ## Offen (Entscheidung des Betreibers)
 
-- **CI-Verdrahtung des harten Gates.** Derzeit ruft **kein** Workflow `cadence_guard.py --check` auf. Die Workflows nutzen `--fix`, und dort greift das neue Gate bewusst nicht. Damit die Regel *automatisch* alarmiert, wäre ein `--check`-Schritt nötig, etwa in `blog-health-daily.yml` nach `--fix`. Das würde den Gesundheits-Job bei Fehltagen im Prüffenster rot schalten; welche Folgeprozesse daran hängen, sollte vorab geprüft werden. Ich habe das nicht eigenmächtig eingebaut.
+- **CI-Verdrahtung des harten Gates – erledigt (Nachtrag 13.10.2026).** `blog-health-daily.yml` ruft `cadence_guard.py --check` jetzt als letzten Schritt auf, **nach** Commit und Push der Heilungen. Damit hängt kein Folgeprozess an dem Gate: Ein roter Lauf verliert keine Heilung, er meldet nur den Fehltag. `content-engine`, Deploy und Endkontrolle nutzen weiter `--fix` und bleiben unberührt. Erster scharfer Lauf: der nächste Tag um 07:45 MESZ.
 - **Governance-Wortlaut.** `docs/GOVERNANCE-KONTRAKT.md` (C23) sagt: „Ein Fehltag wird NICHT nachgeholt.“ Die Nachlieferung von #725 war eine ausdrückliche Entscheidung Franks. Die Regel „Nachlieferung bei Fehltag“ ist im Kontrakt nicht formuliert und sollte dort ergänzt werden, falls sie gelten soll.
 
 ## Nicht getan

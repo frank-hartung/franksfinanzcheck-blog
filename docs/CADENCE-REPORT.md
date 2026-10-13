@@ -116,13 +116,21 @@
      Der Report-Tagesliste fehlen keine Null-Tage mehr.
    - **Defizit blieb folgenlos.** `--check` endete mit Exit 0, sobald nur
      Mindestziel-Defizite vorlagen. Jetzt gilt ein Prüffenster
-     (`DEFIZIT_FENSTER_PUBLIKATIONSTAGE` = 6, also rund zwei Wochen): Ein
-     Defizit an einem dieser Tage lässt `--check` mit **Exit 1** scheitern.
+     (`DEFIZIT_FENSTER_PUBLIKATIONSTAGE` = 3, also die drei letzten
+     Publikationstage = eine Kalenderwoche Mo/Mi/Fr): Ein Defizit an einem
+     dieser Tage lässt `--check` mit **Exit 1** scheitern.
      Ältere Defizite sind **Altbefund** im Report – sie lassen sich durch
      Fallback-Slots nicht mehr heilen, nur durch bewusste Nachlieferung.
-   - `--fix` bleibt **Heiler, kein Gate**: Deploy, Endkontrolle und
-     Blog-Health brechen wegen historischer Fehltage nicht ab. Der Befund
-     steht im Log und im `CADENCE-GATE-REPORT.md`.
+   - `--fix` bleibt **Heiler, kein Gate**: Deploy und Endkontrolle brechen
+     wegen historischer Fehltage nicht ab. Der Befund steht im Log und im
+     `CADENCE-GATE-REPORT.md`.
+   - **CI-Verdrahtung (Dauerheilung 13.10.2026):** `blog-health-daily.yml`
+     ruft `cadence_guard.py --check` als **letzten Schritt nach Commit und
+     Push** auf. Ein Fehltag im Prüffenster macht den täglichen
+     Gesundheitslauf (07:45 MESZ) **rot** – spätestens am Morgen nach dem
+     Fehltag, und so lange, bis die Nachlieferung (Governance-Regel C23)
+     erfolgt ist oder der Tag aus dem 3er-Fenster gerutscht ist. Die
+     Heilungen davor sind zu dem Zeitpunkt bereits gesichert.
    - Selbsttest: eigener Fixture-Bestand (Null-Tag, Entwurf zählt nicht,
      Launch-Grenze, Laufender Tag, Fenster vs. Altbefund). Bericht:
      `FEHLTAG-WACHE-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
@@ -135,4 +143,4 @@
   via `LENGTH_OPT_CHARS_MIN/MAX`); harte Gates bleiben wortbasiert
 
 ---
-_Stand: 13.10.2026 · Bestand: 56 live, 28/28 Publikationstage seit 08.08.2026 mit 2–3 Artikeln · Hartes Gate + Selbstheilung aktiv (Regel 5) · Fehltag-Prüffenster aktiv (Regel 7, Report: `CADENCE-GATE-REPORT.md`)_
+_Stand: 13.10.2026 · Bestand: 56 live, 28/28 Publikationstage seit 08.08.2026 mit 2–3 Artikeln · Hartes Gate + Selbstheilung aktiv (Regel 5) · Fehltag-Prüffenster aktiv (Regel 7, 3 Publikationstage, hartes Gate in `blog-health-daily`, Report: `CADENCE-GATE-REPORT.md`)_

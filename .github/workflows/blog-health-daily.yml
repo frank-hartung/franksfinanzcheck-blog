@@ -171,3 +171,13 @@ jobs:
             git commit -m "fix(auto): dauerhafte Blog-Gesundheit – Fehler geheilt"
             scripts/git_sync.sh --push-only
           fi
+
+      # FEHLTAG-WACHE (Dauerheilung #725, 13.10.2026): Als LETZTER Schritt –
+      # nach Commit und Push, damit alle Heilungen oben gesichert sind –
+      # prüft `--check` den Kalender. Ein Mindestziel-Fehltag (Mo/Mi/Fr mit
+      # < 2 Live-Artikeln) im Prüffenster der letzten 3 Publikationstage macht
+      # den Lauf ROT. `--fix` oben bleibt bewusst Heiler ohne Exit 1; erst
+      # hier wird aus dem Report ein sichtbarer Alarm. Nachlieferung: siehe
+      # Governance-Regel C23 und CADENCE-REPORT.md Regel 7.
+      - name: Fehltag-Wache (Kadenz-Prüffenster, hartes Gate)
+        run: python3 scripts/cadence_guard.py --check
