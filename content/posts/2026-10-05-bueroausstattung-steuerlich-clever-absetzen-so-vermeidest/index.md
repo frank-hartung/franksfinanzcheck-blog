@@ -199,7 +199,31 @@ Ja. Büroausstattung und Tagespauschale sind zwei getrennte Posten. Beide gehör
 
 Dann kann das Finanzamt die Ausgabe streichen. Hebe Nachweise bis zum fertigen Steuerbescheid auf. Läuft eine Abschreibung, hebe sie über die ganze Nutzungsdauer auf.
 
-Mit Inventur, sauberen Belegen und der 800-Euro-Grenze im Kopf kannst du deine Büroausstattung steuerlich clever absetzen. Dann macht dir auch das Finanzamt keinen Strich durch die Rechnung.
+Mit Inventur, sauberen Belegen und der 800-Euro-Grenze im Kopf kannst du deine Büroausstattung steuerlich clever absetzen. Dann macht dir auch das Finanzamt keinen Strich durch die Rechnung.### Zählt ein zweiter Bildschirm als Arbeitsmittel?
+
+Ja, wenn du ihn für die Arbeit nutzt. Notiere den Zweck zum Beleg. Bei gemischter Nutzung teilst du den Betrag auf.
+
+### Wie lange muss ich Belege aufbewahren?
+
+Bewahre sie so lange, wie das Finanzamt noch prüfen darf. Meist sind es vier Jahre ab Abgabe. Digitale Belege liegen in einem Ordner je Jahr. Das reicht für die meisten Fälle.
+
+### Was gilt für Geräte aus dem Job?
+
+Stellt der Arbeitgeber den Laptop, ist er nicht dein Arbeitsmittel. Eigene Käufe behandelst du wie Möbel: Beleg, Nutzung, Anteil. Dann spricht wenig gegen die Absetzung.
+
+### Was tun, wenn ich ein Gerät später verkaufe?
+
+Der Verkauf gehört ins selbe Jahr wie die Einnahme. Notiere Preis und Käufer. Kleinere Beträge bleiben oft unbedeutend. Im Zweifel fragst du nach.
+
+### Gilt das auch für berufliche Bücher und Kurse?
+
+Ja, soweit sie der Arbeit dienen. Fachliteratur zählt zu den Werbungskosten. Notiere Anlass und Titel. Für Fortbildung gilt dasselbe mit dem Kursbeleg.
+
+### Helfen Fotos von den Belegen?
+
+Ja. Ein Foto genügt oft als Kopie. Speichere es im Ordner des Jahres. So hast du den Beleg auch bei Tinte, die verblasst.
+
+
 
 ---
 

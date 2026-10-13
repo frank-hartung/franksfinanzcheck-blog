@@ -25,6 +25,22 @@ cover:
   image: "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg"
   alt: "Preiswert surfen: So findest du den optimalen DSL‑Anschluss"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Bundesnetzagentur – Fachthemen Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-10-02"
+  - id: "Q2"
+    titel: "Bundesnetzagentur – Internet und Telefon: Vertrag"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-10-02"
+  - id: "Q3"
+    titel: "Bundesnetzagentur – Anbieterwechsel im Internet- und Telefonbereich"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Wechsel/artikel.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-10-02"
 kurzantwort: "Den besten DSL‑Anschluss findest du, indem du regelmäßig vergleichst und dann wechselst. Neukunden bekommen die besten Preise. Mit Prämien und Cashback sparst du oft über 300 Euro in zwei Jahren. Wichtig ist außerdem die richtige Geschwindigkeit: Zahle nur für das Tempo, das du wirklich brauchst."
 ---
 
@@ -229,7 +245,27 @@ Nutze dein Kündigungsfenster aus dem 4K‑Prüfpfad. Hebe den Brief mit der Erh
 
 Jetzt hast du alles beisammen. Du findest einen günstigen Anschluss, umgehst die Fallen und senkst deine festen Kosten.
 
-Nutze den 4K‑Prüfpfad. Rechne die Summe für 24 Monate aus. Dann surfst du entspannt und sparsam.
+Nutze den 4K‑Prüfpfad. Rechne die Summe für 24 Monate aus. Dann surfst du entspannt und sparsam.### Welche Rolle spielt der Router beim Tempo?
+
+Viel. Ein alter Router bremst die Leitung. Stell ihn frei, nicht in einen Schrank. Per Kabel misst du am ehrlichsten.
+
+### Lohnt sich ein Glasfaser-Anschluss?
+
+Kommt auf deinen Ort an. Wo Glasfaser liegt, gibt es oft schnelle Tarife. Vergleiche Anschlusskosten und Monatsmiete. Rechne zwei Jahre durch, nicht nur den Start.
+
+### Was tun bei dauerhaftem Tempo-Mangel?
+
+Miss zuerst per Kabel direkt am Router. Bleibt das Ergebnis schlecht, melde den Fehler beim Anbieter. Schreibe Datum und Messwert auf. Bei dauerhaft zu wenig Tempo hast du Rechte.
+
+### Sollte ich einen DSL‑Tarif mit Festpreis wählen?
+
+Ein Festpreis bringt Ruhe. Du weißt, was die nächsten Monate kosten. Prüfe die Laufzeit. Am Ende des Zeitraums gilt der Preis oft neu.
+
+### Wie wichtig ist der Upload?
+
+Für Videocalls sehr. Guckst du nur Videos, genügt ein kleiner Wert. Arbeitest du von zu Hause, achte auf mindestens 10 Megabit pro Sekunde. Im Zweifel hilft die Auskunft des Anbieters.
+
+
 
 ---
 

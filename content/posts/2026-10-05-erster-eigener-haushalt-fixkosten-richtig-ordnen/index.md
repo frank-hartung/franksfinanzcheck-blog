@@ -104,7 +104,9 @@ Ein erster eigener Haushalt ist in diesen fünf Schritten schneller geordnet als
 
 Diese Modellrechnung nutzt angenommene Werte und keine Marktpreise. Sie zeigt die Struktur, nicht die Wahrheit deines Haushalts.
 
-Annahmen: Die Miete einschließlich Nebenkostenvorauszahlung beträgt 620 Euro. Strom kostet 55 Euro monatlich. Internet und Mobilfunk zusammen 45 Euro. Streaming und Software 20 Euro. Ein kleiner Vereins- und Clubbeitrag liegt bei 15 Euro. Lebensmittel und Drogerie im Alltag 240 Euro. Verkehr 60 Euro. Rücklagen für Anschaffungen 40 Euro.
+Annahmen: Die Miete einschließlich Nebenkostenvorauszahlung beträgt 620 Euro. Strom kostet 55 Euro monatlich. Internet und Mobilfunk zusammen 45 Euro. Streaming und Software 20 Euro.
+
+Ein kleiner Vereins- und Clubbeitrag liegt bei 15 Euro. Lebensmittel und Drogerie im Alltag 240 Euro. Verkehr 60 Euro. Rücklagen für Anschaffungen 40 Euro.
 
 Rechenweg Fixkosten: 620 plus 55 plus 45 plus 20 plus 15 ergeben 755 Euro. Rechenweg Alltag: 240 plus 60 ergeben 300 Euro. Rechenweg Rücklagen: 40 Euro. Modellrechnung: Die Summe liegt bei 1.095 Euro im Monat.
 
@@ -163,7 +165,9 @@ Die erste Rechnung nach dem Einzug kommt früh und ist meist kalkulierbar. Die �
 
 Diese Posten haben alle dasselbe Merkmal. Sie sind nicht Teil des Monatsrhythmus. Wer nur den Monat rechnet, übersieht sie vollständig.
 
-Die Gegenmaßnahme ist eine zweite Liste: die Jahresliste. Trage dort jeden Betrag ein, der einmal oder selten kommt. Ein Mitgliedsbeitrag, eine Gebühr, eine Zuzahlung. Teile jeden Betrag durch zwölf und überweise den Betrag monatlich auf ein Rücklagenkonto. Wenn die Rechnung kommt, ist das Geld da.
+Die Gegenmaßnahme ist eine zweite Liste: die Jahresliste. Trage dort jeden Betrag ein, der einmal oder selten kommt. Ein Mitgliedsbeitrag, eine Gebühr, eine Zuzahlung.
+
+Teile jeden Betrag durch zwölf und überweise den Betrag monatlich auf ein Rücklagenkonto. Wenn die Rechnung kommt, ist das Geld da.
 
 ## Der erste Vertrag mit langer Laufzeit
 

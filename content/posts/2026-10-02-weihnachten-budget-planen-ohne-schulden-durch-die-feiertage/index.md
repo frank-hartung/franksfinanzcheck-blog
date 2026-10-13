@@ -26,6 +26,22 @@ cover:
   image: "images/covers/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage.jpg"
   alt: "Weihnachten Budget planen: Ohne Schulden durch die Feiertage"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Verbraucherzentrale – Effektiv sparen auch mit kleinem Budget"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-10-02"
+  - id: "Q2"
+    titel: "Verbraucherzentrale – Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-10-02"
+  - id: "Q3"
+    titel: "Statistisches Bundesamt – Konsumausgaben und Lebenshaltungskosten"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt (Destatis)"
+    datum: "2026-10-02"
 kurzantwort: "Starte schon im Herbst: Schreibe alle Kosten auf, von Geschenken bis zur Fahrt. Teile sie auf sechs Töpfe auf und rechne die Summe auf die Wochen bis Heiligabend um. Lege das Geld auf ein eigenes Tagesgeldkonto, zahle nur aus diesem Topf und meide Dispo und Raten. So startest du ohne Schulden ins neue Jahr."
 ---
 
