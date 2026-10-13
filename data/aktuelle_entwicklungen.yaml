@@ -93,6 +93,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste Ergebnis nimmt, lässt oft bares Geld liegen."
+  ki_news_used: true
 
 - id: saisonal-fruehjahrsputz-vertraege
   kategorie: saisonal
