@@ -184,7 +184,9 @@ affiliate_profi_check: ✅ (keine Befunde an Live-Artikeln; A3 nur an 3 Entwürf
 link_guard: 🎉 Alle internen Links verifiziert – keine Totstellen.
 heading_anchor_guard: 36/36 Prüfungen bestanden ✅
 check_covers: 94 Covers | Probleme: 0 | Stale: 0 | Brand: 0 | Text: 0
-faktenfrische --offline (12 Nachlieferungen): 0 fällig · GEO-Reife 100 %
+faktenfrische --offline (ganzer Bestand): 94 Einträge | 3 fällig – alle drei sind
+  Engine-Entwürfe (08.10., 09.10., 12.10., Erstrecherche); die 12 Nachlieferungen
+  sind 0 fällig und stehen bei GEO-Reife 100 % (Bestands-Schnitt inkl. Entwürfe: 92 %)
 ```
 
 **Nicht lokal lauffähig (ehrlich benannt):** `publish_gate`,
@@ -253,10 +255,15 @@ python3 scripts/casing_guard.py && python3 scripts/dash_guard.py \
   && python3 scripts/link_guard.py
 ```
 
-**Geänderte Dateien (Commit `00ce426`, 233 Dateien):** 12 neue Artikel inkl.
-Covers und AVIF-Varianten, 4 Cover-Manifeste/Datenbänke, 6 Description-Fixes,
-1 HeadGlue-Heilung (09-24), `lastmod`/`faktencheck` in 12 Artikeln, Gate-Reports
-(`CADENCE-GATE-REPORT.md`, `FAKTENFRISCHE-REPORT.md`, Historien).
+**Geänderte Dateien (Commits `00ce426` + `861c8cd`, zusammen 235 Dateien):**
+12 neue Artikel (Markdown) plus 195 Cover-Dateien (JPG + neun Varianten +
+AVIF), die Cover-Manifeste (`data/covers_manifest.json`, `data/lcp_images.json`,
+`data/fcp_images.json`), 6 Description-Fixes, 1 HeadGlue-Heilung (09-24),
+`lastmod`/`faktencheck` in 12 Artikeln, die Gate-Historien/Audit-Daten
+(`data/audit/`, `data/*_history.jsonl`, `data/faktenfrische_queue.json`,
+`data/research/artikel/`) und dieser Bericht. Die generierten `*-REPORT.md`
+(u. a. `CADENCE-GATE-REPORT.md`, `FAKTENFRISCHE-REPORT.md`) sind per
+`.gitignore` lokal und werden nicht versioniert.
 
 _Werkzeuge sind die Wahrheit: Jede Zahl dieses Berichts stammt aus einem Lauf
 über den Bestand vom 13.10.2026, nicht aus einer Zusammenfassung._

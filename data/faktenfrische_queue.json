@@ -1,14 +1,64 @@
 {
-  "erzeugt": "2026-10-13 09:36 UTC",
+  "erzeugt": "2026-10-13 09:40 UTC",
   "uebersicht": {
-    "gesamt": 1,
-    "ratgeber": 0,
-    "faellig": 0,
-    "bearbeitet": 0,
-    "geo_schnitt": 100,
+    "gesamt": 94,
+    "ratgeber": 6,
+    "faellig": 3,
+    "bearbeitet": 3,
+    "geo_schnitt": 92,
     "befunde": 0,
-    "geo_luecken": {}
+    "geo_luecken": {
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 6,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 11,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 6,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 14,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 3,
+      "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
+    }
   },
   "offen": [],
-  "laeufe": []
+  "laeufe": [
+    {
+      "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Energie-Update: Was sich jetzt für dich ändert",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 17,
+      "fehler": [
+        "offline: keine Abrufe"
+      ],
+      "aenderungen": []
+    },
+    {
+      "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "titel": "7 Gewohnheiten für finanzielle Freiheit",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 50,
+      "fehler": [
+        "offline: keine Abrufe"
+      ],
+      "aenderungen": []
+    },
+    {
+      "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
+      "titel": "Stromfresser im Haushalt entlarven",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 50,
+      "fehler": [
+        "offline: keine Abrufe"
+      ],
+      "aenderungen": []
+    }
+  ]
 }

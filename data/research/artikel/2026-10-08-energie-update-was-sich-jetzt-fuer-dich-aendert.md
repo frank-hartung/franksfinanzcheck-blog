@@ -1,6 +1,6 @@
 # Faktenfrische: Energie-Update: Was sich jetzt für dich ändert
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-13 09:29 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-13 09:40 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md`
