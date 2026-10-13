@@ -72,7 +72,7 @@ Aufruf:
 
 Fehltage (Auftrag #725, 13.10.2026): Bewertet wird der KALENDER seit
 BLOG_LAUNCH – jeder Mo/Mi/Fr, auch wenn er gar keinen Post hat. Ein Defizit
-an einem der letzten DEFIZIT_FENSTER_PUBLIKATIONSTAGE (6) Publikationstage
+an einem der letzten DEFIZIT_FENSTER_PUBLIKATIONSTAGE (3) Publikationstage
 lässt `--check` mit Exit 1 scheitern; ältere Defizite sind Altbefund im Report.
 `--fix` bleibt Heiler und endet nie mit Exit 1 wegen historischer Fehltage.
 
@@ -115,7 +115,12 @@ BLOG_LAUNCH = datetime.date(2026, 8, 8)
 # Defizit an einem der letzten N Publikationstage ist ein harter Befund
 # (Exit 1). Ältere Defizite sind Altbefund: Die Engine-Slots können sie nicht
 # mehr heilen, sie stehen nur im Report.
-DEFIZIT_FENSTER_PUBLIKATIONSTAGE = 6
+# Fensterbreite 3 (= eine Kalenderwoche Mo/Mi/Fr, Dauerheilung 13.10.2026):
+# blog-health-daily ruft `--check` täglich auf – ein Fehltag macht den Lauf
+# spätestens am nächsten Morgen rot, solange die Nachlieferung (Governance
+# C23) noch in derselben Woche möglich ist. Breitere Fenster alarmierten
+# später und hielten den Lauf danach länger rot.
+DEFIZIT_FENSTER_PUBLIKATIONSTAGE = 3
 
 DAYS_DE = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag",
            "Samstag", "Sonntag"]
@@ -840,10 +845,16 @@ def run_selftest():
                      (datetime.date(2026, 8, 12), 1),
                      (datetime.date(2026, 8, 14), 0)]:
             errors.append(f"Fehltag-Erkennung falsch (Kalender-Sicht): {under}")
-        # Prüffenster: alle drei liegen im 6er-Fenster vor Fr 08-21.
-        if [d for d, _ in defizit_im_fenster(under, datetime.date(2026, 8, 21))] \
+        # Prüffenster am Mo 08-17 (die 3 Publikationstage davor: Fr 08-14,
+        # Mi 08-12, Mo 08-10): alle drei Defizite liegen darin.
+        if [d for d, _ in defizit_im_fenster(under, datetime.date(2026, 8, 17))] \
                 != [d for d, _ in under]:
-            errors.append("Prüffenster falsch: Fehltage vor 08-21 nicht im Fenster")
+            errors.append("Prüffenster falsch: Fehltage vor 08-17 nicht im Fenster")
+        # Am Fr 08-21 (Fenster: Mi 08-19, Mo 08-17, Fr 08-14) sind Mo 08-10 und
+        # Mi 08-12 bereits Altbefund – das Fenster ist strikt drei Publikationstage.
+        if [d for d, _ in defizit_im_fenster(under, datetime.date(2026, 8, 21))] \
+                != [datetime.date(2026, 8, 14)]:
+            errors.append("Prüffenster falsch: Fenster rutscht nicht um 3 Publikationstage")
         # Altbefund: drei Monate später liegen dieselben Tage außerhalb.
         if defizit_im_fenster(under, datetime.date(2026, 10, 13)):
             errors.append("Prüffenster falsch: Altbefund wird als Fenster-Fehltag gewertet")
@@ -853,10 +864,14 @@ def run_selftest():
         # Launch-Grenze: der Freitag vor dem Launch wird nie bewertet.
         if any(d < BLOG_LAUNCH for d, _ in under):
             errors.append("Vor-Launch-Tag wurde bewertet")
-        # Fenster-Startpunkt: die letzten 6 Publikationstage strikt vor Fr 08-21
-        # sind Fr 08-14 … Fr 08-07 → Start Fr 08-07.
-        if defizit_fenster_start(datetime.date(2026, 8, 21), 6) != datetime.date(2026, 8, 7):
+        # Fenster-Startpunkt: die letzten 3 Publikationstage strikt vor Fr 08-21
+        # sind Mi 08-19, Mo 08-17, Fr 08-14 → Start Fr 08-14 (Default-Breite).
+        if defizit_fenster_start(datetime.date(2026, 8, 21)) != datetime.date(2026, 8, 14):
             errors.append("Fensterstart falsch: "
+                          f"{defizit_fenster_start(datetime.date(2026, 8, 21))}")
+        # Explizite Breite bleibt parametrierbar (6 → Fr 08-07).
+        if defizit_fenster_start(datetime.date(2026, 8, 21), 6) != datetime.date(2026, 8, 7):
+            errors.append("Fensterstart (anzahl=6) falsch: "
                           f"{defizit_fenster_start(datetime.date(2026, 8, 21), 6)}")
         # Report-Sicht: Null-Tage erscheinen in der Tagesliste mit 0.
         counts = _count_by_day(posts, heute=datetime.date(2026, 8, 21))
