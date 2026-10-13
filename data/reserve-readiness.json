@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 11,
   "pool_size": 11,
-  "generated_at": "2026-10-13T10:57:45Z",
+  "generated_at": "2026-10-13T16:14:48Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -92,9 +92,9 @@
     {
       "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
       "ready": true,
-      "sha256": "a4eaca988a473689b1f441b633949fb22d0e2b14e594175b9dca46c0e3fc0681",
+      "sha256": "29e3403612427a32d30b9827e7c34984bfa6b8f2bbb9e506cb050a727cfe47f9",
       "flesch": 60.1,
-      "measured_at": "2026-10-13T10:55:34Z",
+      "measured_at": "2026-10-13T16:14:48Z",
       "score": 0.954,
       "parts": {
         "spelling": 0.8,
@@ -193,8 +193,13 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "38386068916",
-    "run_attempt": "1"
+    "kind": "partial"
+  },
+  "recert": {
+    "at": "2026-10-13T16:14:48Z",
+    "renewed": [
+      "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }

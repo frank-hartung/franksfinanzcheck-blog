@@ -184,6 +184,37 @@ Scope · `2` = Werkzeugfehler (fail-closed).
   `release_scorecard.ERG_CODE_ZU_CHECK` – unbekannte Codes sind Fehler, nie
   Still (eingefroren im Selbsttest ST5).
 
+### Bestands-Reparatur (wenn die Tageswache rot meldet)
+
+Die Wache meldet; die **Redaktion** heilt (Vorgang #732, 13.10.2026). Fester
+Weg für blockierende Bestandsbefunde – nie durch Ausnahme oder Schwächung:
+
+1. **Befund klären:** `python3 scripts/release_scorecard.py --slug <slug>`
+   nennt Check, Detail und Siegel-Drift. Für Roh-Messwerte:
+   `readability_check.py --file …`, `textverstaendnis_guard.py --json`.
+2. **Deterministische Heiler zuerst probieren** (alle fail-closed, schreiben
+   nur beweisbar besseren Text):
+   `r5_absatz_splitter.py --apply --file …` (Absätze > 4 Sätze),
+   `politur_heiler.py` (R14–R16, adjacentes R15),
+   `lesbarkeit_heiler.py --file … --auch-live --keine-ki` (Flesch-Klasse;
+   Stufe A + Tor T1–T4). Scheitert das Tor, bleibt die Datei byte-identisch –
+   dann ist Handarbeit angesagt (R15 nicht-adjacent, Flesch unter
+   Silben-Hebeln, fachliche Umformulierung).
+3. **Redaktionelle Regeln beim Handarbeiten:** Zahlen-Multiset, Linkziele,
+   Tabellen, Überschriften unverändert; Absätze ≤ 4 Sätze; Passiv meiden;
+   Flesch-Amstad ≥ 60 (besser ≥ 62); eine Idee pro Absatz. Für
+   Längen-Nachführung (T1w) eignen sich FAQ-Antworten im Artikelstil –
+   einzigartig formulieren (R15/U1 prüfen!). Quellen (Q2) nur aus der
+   etablierten Korpus-Belegkette nachpflegen, nie erfinden.
+4. **Nachweis führen, dann versiegeln:** Gate-Collectoren im Trockenlauf über
+   die geänderten Slugs (T4/T5/T6/RD1/RD2 + `editorial_review_gate`), dann
+   `python3 scripts/release_scorecard.py` (misst neu, aktualisiert Report,
+   Siegel `data/release_scorecard_state.json`, Historie, Audit).
+   `--live --streng` muss Exit 0 liefern.
+5. **Nie tun:** `ausnahmen` in der SSOT ohne Ablaufdatum/Unterschrift,
+   Schwellen absenken, zweite Messregel einführen, Scorecard-Artefakte von
+   Hand editieren.
+
 ## Zusammenhang mit den anderen Scorecards
 
 | Instrument | Frage | Takt |

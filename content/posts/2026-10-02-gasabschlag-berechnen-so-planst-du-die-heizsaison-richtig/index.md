@@ -27,6 +27,22 @@ cover:
   image: "images/covers/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig.jpg"
   alt: "Gasabschlag berechnen: So planst du die Heizsaison richtig"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Verbraucherzentrale – Heizung: 10 einfache Tipps zum Heizkosten-Sparen"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-10-02"
+  - id: "Q2"
+    titel: "Bundesnetzagentur – Verbraucherportal: Preise, Abschläge und Abrechnung"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/Preise-table.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-10-02"
+  - id: "Q3"
+    titel: "BDEW – Gaspreisanalyse"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
+    herausgeber: "Bundesverband der Energie- und Wasserwirtschaft (BDEW)"
+    datum: "2026-10-02"
 kurzantwort: "Dein Gasabschlag ist eine Vorauszahlung auf die Jahresrechnung: Multipliziere deinen Jahresverbrauch in kWh mit dem Arbeitspreis, addiere zwölf Monate Grundpreis und teile das Ergebnis durch zwölf. Liegt dein Abschlag deutlich über diesem Wert oder zahlst du teure Grundversorgung, solltest du Zählerstand melden, den Abschlag anpassen lassen und den Tarif vor der Heizsaison wechseln."
 ---
 
@@ -164,7 +180,35 @@ Nein. Fällt der neue Anbieter aus oder verzögert sich etwas, springt automatis
 
 ---
 
-Mit Formel, Zählerstand und Vergleichsrechner ist deine Heizsaison komplett planbar. Rechne deinen Abschlag heute nach, lass ihn bei Abweichung anpassen und prüfe, ob dein Tarif noch zum Markt passt – dann steht ein warmer Winter ohne Rechnungsschock nichts mehr im Weg.
+Mit Formel, Zählerstand und Vergleichsrechner ist deine Heizsaison komplett planbar. Rechne deinen Abschlag heute nach, lass ihn bei Abweichung anpassen und prüfe, ob dein Tarif noch zum Markt passt – dann steht ein warmer Winter ohne Rechnungsschock nichts mehr im Weg.### Was ist der Unterschied zwischen Abschlag und Vorauszahlung?
+
+Beides zahlt vor der Rechnung. Der Abschlag läuft monatlich. Eine Vorauszahlung buchst du einmal. Für die Jahresrechnung zählt beides zusammen.
+
+### Wie spare ich in der Heizsaison am schnellsten?
+
+Senke die Temperatur um ein Grad. Das spart nach Einschätzung der Verbraucherzentralen rund 6 Prozent Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
+
+### Was tun bei sehr hohem Abschlag?
+
+Rechne zuerst die Formel aus diesem Artikel. Liegst du deutlich darunter, ist dein Abschlag zu hoch. Bitte den Versorger um eine Senkung. Schriftlich, mit deinem Verbrauch als Beleg.
+
+### Bleibt mein Preis beim Wechsel stabil?
+
+Nein, nicht von allein. Prüfe die Preisgarantie im Vertrag. Ohne Garantie darf der Anbieter anheben. Wer rechtzeitig wechselt, setzt den Preis neu fest.
+
+### Wie oft lohnt der Tarifcheck?
+
+Einmal im Jahr reicht. Am besten vor der Heizsaison. Dann hast du Zeit zu wechseln. Notiere dir den Termin in den Kalender.
+
+### Was tun nach einer hohen Nachzahlung?
+
+Zahle die Rechnung, aber prüfe sie zugleich. Vergleiche Verbrauch und Preis mit dem Vorjahr. Passt beides zusammen, erhöhst du den Abschlag um einen kleinen Schritt. So überrascht dich das nächste Jahr nicht.
+
+### Hilft ein Thermostat beim Sparen?
+
+Ja. Es hält die Temperatur konstant. Du heizt nur, wenn du es brauchst. Stelle Räume abends etwas zurück.
+
+
 
 ---
 

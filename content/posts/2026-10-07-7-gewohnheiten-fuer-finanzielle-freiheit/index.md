@@ -209,7 +209,35 @@ Das hängt von deiner Lage und dem Zweck des Geldes ab. Ein Puffer für kurzfris
 Prüfe sie, wenn sich Preis oder Bedarf ändern und wenn ein Vertrag zur Verlängerung ansteht. Eine regelmäßige Erinnerung hilft. Sie ersetzt aber nicht den Blick in die Vertragsbedingungen.
 
 ### Ist ein Tagesgeldkonto für jede Rücklage nötig?
-Nein. Entscheidend ist, dass du den Betrag passend aufbewahrst und bei Bedarf erreichst. Vergleiche Bedingungen und Schutz, bevor du ein Konto auswählst.
+Nein. Entscheidend ist, dass du den Betrag passend aufbewahrst und bei Bedarf erreichst. Vergleiche Bedingungen und Schutz, bevor du ein Konto auswählst.### Wie bleibe ich nach der ersten Woche dran?
+
+Kopple die Gewohnheit an etwas Festes. Etwa den Kontoblick an den Montagskaffee. Nach einigen Wochen läuft es von allein. Ein verpasster Tag ist kein Abbruch.
+
+### Was mache ich in einem teuren Monat?
+
+Halte die Routine, auch wenn die Beträge sinken. Fünf Euro statt fünfzig zählen. Es geht um das Muster, nicht um die Summe.
+
+### Soll ich das Geld sofort aufteilen?
+
+Ja, am Tag des Eingangs. Erst zahlen, dann sparen, dann leben. Diese Reihenfolge schützt vor dem Rest am Monatsende.
+
+### Welche Gewohnheit wirkt am schnellsten?
+
+Der Blick auf die Fixkosten. Eine Anpassung wirkt jeden Monat neu. Dazu reicht eine halbe Stunde. Danach bleibt mehr vom Gehalt.
+
+### Wie starte ich mit wenig Zeit?
+
+Wähle eine einzige Gewohnheit. Sie muss unter fünf Minuten dauern. Der Start am Monatsersten ist ein guter Punkt. Alles Weitere kommt später dazu.
+
+### Brauche ich eine App dazu?
+
+Nein. Ein Zettel oder eine Notiz reicht völlig. Wer Apps mag, nimmt eine schlichte. Wichtig ist das tägliche Ansehen, nicht das Werkzeug.
+
+### Wie belohne ich mich ohne schlechtes Gewissen?
+
+Plane eine kleine Belohnung ein. Sie kommt vom Spaß-Budget, nicht von der Rücklage. So bleibt die Freude ohne Reue. Ein gutes Essen reicht oft völlig.
+
+
 
 ---
 

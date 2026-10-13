@@ -185,7 +185,11 @@ Eine gute Kreditkarte kostet im Jahr nichts und außerhalb Europas kein Vermöge
 
 **Was ist ein Kartenlimit und wie hoch sollte es sein?** Das Limit sagt, wie viel du ausgeben darfst, ohne vorher Geld einzuzahlen. Üblich sind 500 bis 5.000 €. Gut ist ein Limit für deinen Monatsumsatz plus Reserve. Bei einer Mietwagen-Reise können das 3.000 € sein. Ändern kannst du es meist in der App.
 
-**Was passiert, wenn ich die Kreditkartenrechnung nicht vollständig begleiche?** Der Rest wandert in den nächsten Zeitraum. Dafür zahlst du Zinsen von 12 bis 20 %. Bei Zahlungsverzug drohen Mahnungen und ein schlechter Score. Zahl darum nur aus, was du im nächsten Monat zurückzahlen kannst.
+**Was passiert, wenn ich die Kreditkartenrechnung nicht vollständig begleiche?** Der Rest wandert in den nächsten Zeitraum. Dafür zahlst du Zinsen von 12 bis 20 %. Bei Zahlungsverzug drohen Mahnungen und ein schlechter Score. Zahl darum nur aus, was du im nächsten Monat zurückzahlen kannst.**Wie schnell kommt die neue Karte?** Meist eine bis zwei Wochen per Post. Viele Apps zeigen eine virtuelle Karte sofort. Damit zahlst du online schon am selben Tag.
+
+**Kann ich zwei Karten parallel nutzen?** Ja, ohne Nachteil. Viele führen eine Karte für den Alltag und eine für Reisen. So bleibt der Überblick leichter.
+
+
 
 > 💡 **Mein Fazit:** Die richtige Kreditkarte kostet nichts, arbeitet im Hintergrund und [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) bei jeder Online-Zahlung. Die falsche Karte kostet dich Jahr für Jahr Gebühren, die du längst vergessen hast. Der Vergleich von fünf Minuten spart dir auf Dauer mehrere hundert Euro – das lohnt sich.
 

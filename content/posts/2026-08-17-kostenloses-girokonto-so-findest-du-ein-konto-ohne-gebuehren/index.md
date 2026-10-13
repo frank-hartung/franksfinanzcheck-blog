@@ -250,7 +250,13 @@ Das hängt von der Karte und vom Netz ab. Viele Konten erlauben gratis Abheben a
 Der Wechselservice erkennt die meisten Lastschriften von allein. Sag deinem Arbeitgeber und deinem Vermieter trotzdem selbst Bescheid.
 
 ### Lohnt sich der Wechsel nur wegen 5 € im Monat?
-Ja. Aus 5 € im Monat werden 60 € im Jahr. Der Wechsel kostet dich kaum Zeit und senkt deine festen Kosten dauerhaft.
+Ja. Aus 5 € im Monat werden 60 € im Jahr. Der Wechsel kostet dich kaum Zeit und senkt deine festen Kosten dauerhaft.### Was kostet ein Kontowechsel?
+Der Wechsel selbst ist meistens gratis. Die neue Bank zieht viele Lastschriften selbst um. Prüfe nur die Schlussabrechnung deiner alten Bank.
+
+### Funktioniert ein Gemeinschaftskonto ohne Aufpreis?
+Bei vielen Anbietern ja. Beide Personen bekommen eine eigene Karte. Das Mindestgehalt zählt dann für beide zusammen.
+
+
 
 ---
 
