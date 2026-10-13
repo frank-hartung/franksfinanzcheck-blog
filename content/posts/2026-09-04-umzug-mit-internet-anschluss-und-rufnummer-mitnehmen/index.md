@@ -10,7 +10,7 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Umzug Internet", "Rufnummer mitnehmen", "Internet ummelden", "DSL Umzug", "Umzug mit Internet"]
 pin_title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
-pin_description: "*Werbung | Beim Umzug entscheidet die Reihenfolge über zwei Wochen ohne Internet. Wie du Anschluss und Rufnummer mitnimmst und wo die Kosten sitzen. Mehr Spartipps auf FranksFinanzcheck! #umzug #internet #rufnummer #dsl #wechsel"
+pin_description: "*Werbung | Beim Umzug entscheidet die Reihenfolge über zwei Wochen ohne Internet. Wie du Anschluss und Rufnummer mitnimmst und wo die Kosten sitzen. Mehr Spartipps auf FranksFinanzcheck! #umzug #internet #rufnummer"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

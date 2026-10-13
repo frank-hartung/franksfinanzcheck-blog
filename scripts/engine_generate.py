@@ -46,6 +46,7 @@ import generate_drafts as g  # noqa: E402  (nutzt bestehende Generierungs-Logik)
 from check_titles import COMPOUND_FIXES, TIME_TAIL as RE_ANHAENGSEL  # noqa: E402 – Titel-Qualitätsgate (FrankAutoOps)
 from post_utils import safe_title_cut  # noqa: E402 – Wortgrenzen-Kürzung (nie Wortbruch)
 import cadence_guard  # noqa: E402 – Single Source of Truth für die Kadenz
+import pinterest_hashtags as _ph  # noqa: E402 – Hashtag-SSOT (#729)
 
 # PREMIUM-FIX 03.09.2026 (Mi 02.09.: nur 1 statt 2–3 LIVE): Jeder frisch
 # gespeicherte Artikel wird SOFORT deterministisch auf Leerzeichen-URLs
@@ -228,6 +229,10 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
             d = re.sub(r"\s+", " ", str(pin_description).strip()).replace("&", "und")
             if not d.startswith("*Werbung"):
                 d = f"*Werbung | {d}"
+            # Hashtag-Hygiene der kuratierten Masterplan-Texte (#729): Die
+            # Regel liegt in scripts/pinterest_hashtags.py – ein kuratierter
+            # Text darf nicht mit fünf Tags oder Umlauten geboren werden.
+            d, _ht_aenderungen = _ph.heile(d)
             if 40 <= len(d) <= 500:
                 pin_d = d[:500]
     except Exception as _seo_err:
@@ -341,6 +346,12 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         _tags = []
     tag_yaml = "[" + ", ".join(f'"{k}"' for k in _tags) + "]"
     pinwand_line = f"pinwand: {yaml_quote(pinwand)}\n" if pinwand else ""
+    # Schlussregel vor dem Schreiben: Ein Einzigartigkeits-Suffix landet
+    # HINTER dem Hashtag-Block (die Schleife oben hängt es an das Ende an).
+    # Hier wird der Block wieder dorthin gestellt, wo Pinterest ihn liest –
+    # idempotent, ohne ein Zeichen Prosa zu ändern (#729).
+    pin_d, _ht_schluss = _ph.heile(pin_d)
+
     try:
         import editorial_review_gate as _erg
         review_risk = _erg.classify_text(
