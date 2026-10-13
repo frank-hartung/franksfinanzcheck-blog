@@ -1,0 +1,154 @@
+{
+ "zeitstempel": "2026-10-13T15:02:55.554140+02:00",
+ "eigene_domaene": "franksfinanzcheck.de",
+ "anfragen_geplant": 13,
+ "zaehlung": {
+  "ok": 10,
+  "cache": 0,
+  "fehler": 3,
+  "uebersprungen": 0
+ },
+ "treffer_gesamt": 70,
+ "fehler": [
+  {
+   "anfrage": "franksfinanzcheck.de",
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://baresearch.org: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Gaskosten senken",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://baresearch.org: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "['Versicherung Selbstständige', 'Versicherungen', 'Versicherungen prüfen Jahresende', 'Versicherungsarten', 'Versicherungssumme berechnen', 'Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile']",
+   "fehler": "Kein Anbieter lieferte Treffer für \"['Versicherung Selbstständige', 'Versicherungen', 'Versicherungen prüfen Jahresende', 'Versicherungsarten', 'Versicherungssumme berechnen', 'Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treff"
+  }
+ ],
+ "rang": [
+  {
+   "anfrage": "DSL Anbieter Vergleich",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Fixkosten senken",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "FranksFinanzcheck",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Haushaltsbudget Rechner",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Kontogebühren vermeiden",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Kündigungsfristen Strom",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Mietwagen günstig buchen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Notgroschen aufbauen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Stromanbieter wechseln",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Versicherungen kündigen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  }
+ ],
+ "wettbewerb": {
+  "domaenen": [
+   {
+    "domaene": "wikipedia.org",
+    "treffer": 70,
+    "top3": 27,
+    "bester_rang": 1,
+    "durchschnitts_rang": 5.0,
+    "anfragen": [
+     "Fixkosten senken",
+     "FranksFinanzcheck",
+     "Stromanbieter wechseln",
+     "DSL Anbieter Vergleich",
+     "Versicherungen kündigen",
+     "Kontogebühren vermeiden"
+    ]
+   }
+  ],
+  "domaenen_gesamt": 1,
+  "merkmale": {
+   "wissensquelle": 70
+  }
+ },
+ "quota": {
+  "wikipedia": 10
+ }
+}

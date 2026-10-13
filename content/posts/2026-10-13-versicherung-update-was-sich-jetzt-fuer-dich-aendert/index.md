@@ -16,6 +16,8 @@ news_kategorie: "versicherung"
 
 **Stand: 13.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Vergleichsportale zeigen selten alle Anbieter am Markt.  
 Wer nur das erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.  
 Deshalb lohnt sich ein genauer Blick auf mehrere Angebote.

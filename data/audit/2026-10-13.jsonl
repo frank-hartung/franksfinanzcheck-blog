@@ -28,3 +28,6 @@
 {"ts": "2026-10-13T11:30:20Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "763f52a18e8ef5c0629fbe07429dbb06b12f3d79"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-10-13T11:58:21Z", "module": "pinterest_check", "action": "fix", "input": {}, "output": {"problems": 1, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-10-13T11:58:21Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
+{"ts": "2026-10-13T12:57:31Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 89}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-13T13:01:56Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-13T13:03:28Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "3b3a10be0bfb773b66b327eb6f2d3f4f89f04ace"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}

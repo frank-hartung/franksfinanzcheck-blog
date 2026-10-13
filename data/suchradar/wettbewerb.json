@@ -1,0 +1,24 @@
+{
+ "stand": "2026-10-13T15:02:55.554140+02:00",
+ "domaenen": [
+  {
+   "domaene": "wikipedia.org",
+   "treffer": 70,
+   "top3": 27,
+   "bester_rang": 1,
+   "durchschnitts_rang": 5.0,
+   "anfragen": [
+    "Fixkosten senken",
+    "FranksFinanzcheck",
+    "Stromanbieter wechseln",
+    "DSL Anbieter Vergleich",
+    "Versicherungen kündigen",
+    "Kontogebühren vermeiden"
+   ]
+  }
+ ],
+ "domaenen_gesamt": 1,
+ "merkmale": {
+  "wissensquelle": 70
+ }
+}
