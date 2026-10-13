@@ -1,5 +1,64 @@
 {
-  "generated": "2026-10-06",
-  "count": 0,
-  "queue": []
+  "generated": "2026-10-13",
+  "count": 1,
+  "queue": [
+    {
+      "id": "bnetza-breitband",
+      "name": "Bundesnetzagentur: Breitband-/DSL-Marktdaten",
+      "einheit": "Marktdaten",
+      "ist_wert": null,
+      "stand": "2026-07-10",
+      "rhythmus_tage": 90,
+      "alter_tage": 95,
+      "ymyl": true,
+      "quelle": "Bundesnetzagentur – Telekommunikation",
+      "quelle_url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "signale": [
+        {
+          "datei": "data/research/artikel/internet-dsl.md",
+          "datum": "2026-09-27",
+          "begriffe": [
+            "Breitband",
+            "DSL",
+            "Glasfaser",
+            "Mobilfunk"
+          ]
+        }
+      ],
+      "artikel": [
+        {
+          "slug": "2026-08-10-dsl-wechselbonus-sichern",
+          "titel": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+          "lastmod": "2026-10-01"
+        },
+        {
+          "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
+          "titel": "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+          "titel": "DSL-Vergleich: So findest du den günstigsten Internettarif",
+          "lastmod": "2026-10-01"
+        },
+        {
+          "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+          "titel": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
+          "lastmod": "2026-10-01"
+        },
+        {
+          "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+          "titel": "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "pillar/internet-dsl",
+          "titel": "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz",
+          "lastmod": "2026-10-02"
+        }
+      ],
+      "prioritaet": "P1",
+      "status": "AKTION (fällig + neues Brief-Signal)"
+    }
+  ]
 }
