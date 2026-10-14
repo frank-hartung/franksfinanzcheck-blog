@@ -154,7 +154,7 @@ class CommitSperre(unittest.TestCase):
                 with open(quelle, encoding="utf-8") as lies, \
                         open(os.path.join(ordner, ziel), "w", encoding="utf-8") as schreib:
                     schreib.write(lies.read())
-            os.chmod(os.path.join(ordner, ".githooks", "pre-commit"), 0o755)
+            os.chmod(os.path.join(ordner, ".githooks", "pre-commit"), 0o700)
             git("config", "core.hooksPath", ".githooks")
 
             with open(os.path.join(ordner, "README.md"), "w", encoding="utf-8") as datei:

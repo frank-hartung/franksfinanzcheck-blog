@@ -379,7 +379,7 @@ def _wegwerf_repo(ordner: str, mit_wache: bool = False) -> None:
     os.makedirs(os.path.join(ordner, ABLAGE), exist_ok=True)
     ziel = os.path.join(ordner, ABLAGE, HAKEN)
     shutil.copyfile(os.path.join(HIER, ABLAGE, HAKEN), ziel)
-    os.chmod(ziel, 0o644)   # bewusst ohne x-Bit: der Wächter soll es richten
+    os.chmod(ziel, 0o600)   # bewusst ohne x-Bit: der Wächter soll es richten
     if mit_wache:
         os.makedirs(os.path.join(ordner, "scripts"), exist_ok=True)
         shutil.copyfile(os.path.join(HIER, "scripts", "brand_surface_guard.py"),
@@ -444,7 +444,7 @@ def selftest() -> int:
         os.makedirs(os.path.dirname(eigener), exist_ok=True)
         with open(eigener, "w", encoding="utf-8") as datei:
             datei.write(f"#!/bin/sh\necho eigen >> {spur}\n")
-        os.chmod(eigener, 0o755)
+        os.chmod(eigener, 0o700)
         bewahrt_zustand, bewahrt_getan = scharfstellen(zwei)
         if not bewahrt_zustand["bewahrter_haken"]:
             fehler.append("F5: vorhandener Haken wurde nicht bewahrt")
@@ -459,7 +459,7 @@ def selftest() -> int:
         # F6: Altbestand core.hooksPath=.githooks gilt als scharf …
         drei = os.path.join(basis, "altbestand")
         _wegwerf_repo(drei, mit_wache=True)
-        os.chmod(os.path.join(drei, ABLAGE, HAKEN), 0o755)
+        os.chmod(os.path.join(drei, ABLAGE, HAKEN), 0o700)
         subprocess.run(["git", "-C", drei, "config", "core.hooksPath", ABLAGE],
                        check=True, timeout=30)
         alt = befund(drei)
@@ -471,7 +471,7 @@ def selftest() -> int:
         os.makedirs(os.path.dirname(stiller), exist_ok=True)
         with open(stiller, "w", encoding="utf-8") as datei:
             datei.write("#!/bin/sh\nexit 0\n")
-        os.chmod(stiller, 0o755)
+        os.chmod(stiller, 0o700)
         if "commit-msg" not in befund(drei)["verdeckte_haken"]:
             fehler.append("F7: stillgelegter Haken wird nicht gemeldet")
         umzug, umzug_getan = scharfstellen(drei)

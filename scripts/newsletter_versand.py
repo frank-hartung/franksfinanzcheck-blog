@@ -109,12 +109,16 @@ def _hash_schluessel() -> bytes:
       3. kein Schlüssel (Selbsttest/Trockenlauf ohne Secrets): Altverfahren
     """
     import hashlib
+    import hmac
     eigen = os.environ.get("NEWSLETTER_HASH_KEY", "").strip()
     if eigen:
         return eigen.encode("utf-8")
     resend = os.environ.get("RESEND_API_KEY", "").strip()
     if resend:
-        return hashlib.sha256(b"ff-newsletter-hash16|v1|" + resend.encode("utf-8")).digest()
+        # Ableitung per HMAC (Secret als Schlüssel, fester Kontext) – kein
+        # nackter Hash über das Secret (CodeQL py/weak-sensitive-data-hashing).
+        return hmac.new(resend.encode("utf-8"), b"ff-newsletter-hash16|v1",
+                        hashlib.sha256).digest()
     return b""
 
 

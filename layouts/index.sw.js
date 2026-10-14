@@ -137,7 +137,9 @@ self.addEventListener('activate', (event) => {
    neue Assets). Die Seite darf sich selbst befreien, ohne dass jemand neu
    laden muss – dieser Horcher ist der vereinbarte Weg dafür. */
 self.addEventListener('message', (event) => {
-  if (event && event.data === 'SKIP_WAITING') {
+  // Nur Nachrichten der eigenen Herkunft (CodeQL js/missing-origin-check).
+  if (!event || event.origin !== self.location.origin) return;
+  if (event.data === 'SKIP_WAITING') {
     try { self.skipWaiting(); } catch (e) {}
   }
 });

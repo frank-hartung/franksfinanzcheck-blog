@@ -22,13 +22,20 @@
 
   var ORIGIN = 'https://a.partner-versicherung.de';
 
+  // Feste Allowlist: Die Adresse, die der Rahmen lädt, stammt NIE aus dem
+  // DOM, sondern aus dieser Liste (CodeQL js/xss-through-dom). Das
+  // data-src-Attribut wählt nur einen Eintrag aus.
+  var ERLAUBTE_ZIELE = [
+    'https://a.partner-versicherung.de/filestore/ad/1166/index.php?partner_id=47086'
+  ];
+
   var knopf = document.querySelector('[data-ff-partner-laden]');
   var vorschalt = document.querySelector('[data-ff-partner-vorschalt]');
   if (knopf) {
     knopf.addEventListener('click', function () {
-      var ziel = frame.getAttribute('data-src') || '';
-      if (ziel.indexOf(ORIGIN + '/') !== 0) return;
-      frame.setAttribute('src', ziel);
+      var wahl = ERLAUBTE_ZIELE.indexOf(frame.getAttribute('data-src') || '');
+      if (wahl < 0) return;
+      frame.setAttribute('src', ERLAUBTE_ZIELE[wahl]);
       frame.hidden = false;
       if (vorschalt) vorschalt.hidden = true;
       try { frame.focus(); } catch (e) {}

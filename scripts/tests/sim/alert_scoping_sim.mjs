@@ -93,7 +93,9 @@ async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = nu
   // github-script liest die Identität pro Lauf aus einer Datei. Die Simulation
   // wechselt dieselbe Quelle passend zum simulierten Workflow statt etwa
   // Content-Engine-Fehler mit der Layout-AI-Identität zu testen.
-  const identityFile = join(tmpdir(), `alert-identity-${process.pid}-${count}.json`);
+  // Eigenes, nur für uns angelegtes Temp-Verzeichnis (mkdtemp, Rechte 0700)
+  // statt eines vorhersagbaren Namens im gemeinsamen /tmp.
+  const identityFile = join(fs.mkdtempSync(join(tmpdir(), 'alert-identity-')), `identity-${count}.json`);
   const previousIdentityFile = process.env.ALARM_IDENTITAET;
   fs.writeFileSync(identityFile, JSON.stringify(identity), { encoding: 'utf8', flag: 'wx' });
   process.env.ALARM_IDENTITAET = identityFile;
