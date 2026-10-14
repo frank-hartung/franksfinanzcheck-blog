@@ -45,6 +45,26 @@
 #  blockieren weiterhin, im Text wie im Hashtag. Tausendertrenner zählen
 #  als Schreibweise („2.800" belegt „2800").
 #
+#  REPARATUR 14.10.2026 (#716-Familie, Kanal Instagram – Ratgeber
+#  „DNS-Server wechseln“ in KEINEM Winkel sendbar, CI `regression` rot):
+#  L7 zählte jede Großbuchstabenfolge als Geschrei. Der Fließtext eines
+#  Technik-Ratgebers lebt aber von Fachkürzeln – „DNS over HTTPS“, „DNS over
+#  TLS“ – und kippte mit 13 % über die 12-%-Schwelle. Dieselbe Fehlerklasse
+#  wie die beiden Reparaturen vom 12.10. (Hashtag-Zahlen in L9, CamelCase-Tags
+#  in L7): ein Falschurteil in einer fail-closed-Wache, das ausgerechnet die
+#  präzisesten Texte aussperrt. Seither unterscheidet L7 FACHKÜRZEL von
+#  GESCHREI – nach demselben Prinzip wie L9 („Zahl mit Beleg“):
+#    · Fachkürzel ist, was der Haus-Kanon (`tag_casing`: Akronyme, Marken,
+#      Einheiten) in Versalien führt ODER was der Artikel selbst in Versalien
+#      schreibt (Titel, Kurzantwort, Beschreibung, Takeaways, Keywords, Tags).
+#    · Nie Fachkürzel: Schreiwörter (GRATIS, JETZT, SOFORT … – Kanon in
+#      `meta.gate.schrei_woerter`) und gewöhnliche Wörter, die der Artikel
+#      selbst klein oder als Nomen schreibt („Jetzt“ im Artikel macht „JETZT“
+#      im Beitrag nicht zum Kürzel). Länger als sechs Buchstaben ist kein
+#      Kürzel, sondern ein geschrienes Wort – es sei denn, der Kanon führt es.
+#  Geschrei bleibt Geschrei: Ein Satz in Versalien blockiert unverändert,
+#  auch wenn er ein belegtes Kürzel enthält.
+#
 #  Ergebnis: (freigabe: bool, verstöße: list[str], kennzahlen: dict)
 #  Das Gate ist deterministisch und offline lauffähig – es braucht
 #  weder Netz noch Token.
@@ -62,6 +82,7 @@ if SCRIPTS_DIR not in sys.path:
     sys.path.insert(0, SCRIPTS_DIR)
 
 import social_copywriter as copy  # noqa: E402
+import tag_casing  # noqa: E402  – EIN Wortschatz-Kanon für Kürzel und Marken
 
 # Härtung 2026-10 (py/overly-large-range, 2. Runde): Regionale Indikatoren
 # (1F1E6–1F1FF) liegen vollständig im Symbol-/Emoji-Block – als EIGENE Range
@@ -178,21 +199,82 @@ def count_emoji(text: str) -> int:
     return len(EMOJI_RX.findall(text or ""))
 
 
-def shouting_ratio(text: str) -> float:
+# Versalien-Folge ab drei Buchstaben – die Einheit, die L7 bewertet.
+VERSAL_RX = re.compile(r"[A-ZÄÖÜ]{3,}")
+# Längstes Kürzel, das ohne Kanon-Eintrag als Fachbegriff gelten darf
+# (DOCSIS, DSGVO, SCHUFA). Alles darüber ist ein geschrienes Wort.
+KUERZEL_MAX_LEN = 6
+# Werbe-Schreiwörter: in Versalien IMMER Geschrei, auch wenn ein Artikel sie
+# so schreibt. Erweiterbar über `meta.gate.schrei_woerter` (channels.yaml).
+SCHREI_WOERTER_STANDARD = frozenset({
+    "ACHTUNG", "AKTION", "BESTE", "CHANCE", "EXKLUSIV", "GRATIS", "HEUTE",
+    "JETZT", "KOSTENLOS", "LETZTE", "MEGA", "NEU", "NUR", "SOFORT", "SPAREN",
+    "STOPP", "SUPER", "TOP", "WICHTIG", "WOW",
+})
+
+
+def _kanon_kuerzel() -> frozenset[str]:
+    """Versalien-Folgen aus dem Haus-Kanon (Akronyme, Marken, Einheiten).
+
+    Eine Quelle für alle Werkzeuge: Was `tag_casing` als „DNS“, „HTTPS“ oder
+    „FRITZ!Box“ kanonisiert, ist per Definition kein Geschrei.
+    """
+    out: set[str] = set()
+    for lexikon in (tag_casing.ACRONYMS, tag_casing.BRANDS, tag_casing.UNITS):
+        for kanon in lexikon.values():
+            out.update(VERSAL_RX.findall(str(kanon)))
+    return frozenset(out)
+
+
+KANON_KUERZEL = _kanon_kuerzel()
+
+
+def schrei_woerter(gate_cfg: dict | None = None) -> frozenset[str]:
+    extra = ((gate_cfg or {}).get("schrei_woerter") or [])
+    return SCHREI_WOERTER_STANDARD | {str(w).strip().upper() for w in extra if str(w).strip()}
+
+
+def fachkuerzel(material: str, gate_cfg: dict | None = None) -> frozenset[str]:
+    """Versalien-Folgen, die in DIESEM Beitrag Fachsprache sind (mit Beleg).
+
+    Belegt ist ein Kürzel, wenn der Haus-Kanon es führt oder wenn der Artikel
+    es selbst in Versalien schreibt. Ausgeschlossen bleiben Schreiwörter und
+    gewöhnliche Wörter, die der Artikel klein oder als Nomen verwendet – ein
+    Artikel, der „Jetzt“ schreibt, belegt kein „JETZT“.
+    """
+    verboten = schrei_woerter(gate_cfg)
+    woerter = set(re.findall(r"[A-Za-zÄÖÜäöüß]+", material or ""))
+    belegt = set(KANON_KUERZEL)
+    for folge in set(VERSAL_RX.findall(material or "")):
+        if len(folge) > KUERZEL_MAX_LEN:
+            continue
+        if folge.lower() in woerter or folge.capitalize() in woerter:
+            continue
+        belegt.add(folge)
+    return frozenset(belegt - verboten)
+
+
+def shouting_ratio(text: str, fachkuerzel: Iterable[str] = ()) -> float:
     """Anteil geschriener Wörter am Fließtext.
 
     REPARATUR 12.10.2026 (Meldung #716, Nebenbefund): Hashtags und URLs
-    zählten mit. Hashtags sind aber bewusst CamelCase („#DNSServerWechseln")
-    und Acronym-Tags („#WLAN", „#DSL") sind Fachsprache, kein Geschrei. Auf
+    zählten mit. Hashtags sind aber bewusst CamelCase („#DNSServerWechseln\")
+    und Acronym-Tags („#WLAN\", „#DSL\") sind Fachsprache, kein Geschrei. Auf
     Instagram mit 8–11 Tags kippte die Kennzahl dadurch über die Schwelle und
     blockierte ausgerechnet die technikstarken Ratgeber. Seither misst die
     Regel nur den Fließtext – geschrien wird dort weiterhin erkannt.
+
+    REPARATUR 14.10.2026 (#716-Familie, Instagram): Belegte Fachkürzel im
+    Fließtext („DNS over HTTPS“) sind ebenfalls kein Geschrei. Ohne Beleg-
+    Menge (Altaufrufe) zählt der Kanon des Hauses; Schreiwörter zählen immer.
     """
     prose = URL_RX.sub(" ", TAG_RX.sub(" ", text or ""))
-    words = re.findall(r"[A-ZÄÖÜ]{3,}", prose)
     all_words = re.findall(r"\b\w{3,}\b", prose)
     if not all_words:
         return 0.0
+    erlaubt = (frozenset(fachkuerzel) if fachkuerzel
+               else KANON_KUERZEL - SCHREI_WOERTER_STANDARD)
+    words = [w for w in VERSAL_RX.findall(prose) if w not in erlaubt]
     return len(words) / max(1, len(all_words))
 
 
@@ -304,7 +386,18 @@ def check(pkg: dict, channel_cfg: dict, meta: dict,
     # -- L7 Shouting / Spam -------------------------------------------------
     if "!!!" in gesamt or "???" in gesamt:
         violations.append("L7 Ausrufezeichen-/Fragezeichen-Ketten")
-    ratio = shouting_ratio(gesamt)
+    # Belegmaterial = alles, was der Texter aus dem Artikel übernehmen darf.
+    # Die FAQ gehört dazu: Der Winkel `frage` zitiert Frage und Antwort
+    # wörtlich aus dem Artikel – ohne sie im Material galt jede Zahl der
+    # Antwort („§ 554 BGB“, „50 bis 100 Mbit/s“) als erfunden.
+    material = " ".join([
+        article.get("kurzantwort") or "", article.get("description") or "",
+        article.get("title") or "", " ".join(article.get("takeaways") or []),
+        " ".join(article.get("keywords") or []), " ".join(article.get("tags") or []),
+        article.get("faq_question") or "", article.get("faq_answer") or "",
+    ])
+    ratio = shouting_ratio(gesamt, fachkuerzel(material, gate_cfg))
+    metrics["shouting"] = round(ratio, 3)
     if ratio > float(gate_cfg.get("max_shouting_ratio") or 0.12):
         violations.append(f"L7 zu viele Großbuchstaben ({ratio:.0%})")
     if len(URL_RX.findall(gesamt)) > 2:
@@ -326,11 +419,7 @@ def check(pkg: dict, channel_cfg: dict, meta: dict,
     metrics["similarity"] = round(worst, 3)
 
     # -- L9 Fakten-Treue ----------------------------------------------------
-    material = " ".join([
-        article.get("kurzantwort") or "", article.get("description") or "",
-        article.get("title") or "", " ".join(article.get("takeaways") or []),
-        " ".join(article.get("keywords") or []), " ".join(article.get("tags") or []),
-    ])
+    # Dasselbe Material wie die Kürzel-Belege in L7: EINE Belegquelle je Beitrag.
     material_nums = set(NUM_RX.findall(material))
     # Fließtext OHNE Hashtag-Block: Ein Hashtag ist ein Schlagwort, keine
     # Behauptung im Satz. Seine Zahlen werden gleich einzeln geprüft.

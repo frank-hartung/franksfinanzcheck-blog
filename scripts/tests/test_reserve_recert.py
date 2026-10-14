@@ -186,5 +186,122 @@ class NachzertifizierungMisstNurDasNoetige(unittest.TestCase):
         self.assertEqual(neu["ready"], 0)
 
 
+class VerbrauchIstKeinDrift(unittest.TestCase):
+    """14.10.2026 (Folgeauftrag aus PR #747): Zwei zertifizierte Entwürfe vom
+    07./09.10. gingen am selben Tag über die Quote-Nachfüllung live. Der
+    Bericht nannte sie „verschwunden“ und verlangte eine Nachzertifizierung –
+    für Artikel, die keine Reserve-Entwürfe mehr sind. Verbrauch wird seither
+    erkannt, ehrlich benannt und OHNE Messung ausgebucht."""
+
+    def setUp(self):
+        self.tmp = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        self.posts = self.tmp / "content" / "posts"
+
+    def _post(self, slug, kopf):
+        d = self.posts / slug
+        d.mkdir(parents=True, exist_ok=True)
+        idx = d / "index.md"
+        idx.write_text(f"---\ntitle: \"T\"\n{kopf}---\nText\n", encoding="utf-8")
+        return idx
+
+    def _live(self, slug):
+        return self._post(slug, "draft: false\nreserve_published: 2026-10-14\n")
+
+    def test_veroeffentlichter_entwurf_ist_verbrauch_kein_drift(self):
+        self._live("live")
+        cert = _cert([{"slug": "live", "ready": True, "sha256": "a" * 64}])
+        befunde = rr.drift(cert, {}, posts_dir=self.posts)
+        self.assertEqual([b["art"] for b in befunde], ["veroeffentlicht"])
+        self.assertIn("2026-10-14", befunde[0]["ursache"])
+        text = rr.bericht(befunde)
+        self.assertNotIn("NICHT mehr zum Bestand", text)
+        self.assertIn("keine Nachzertifizierung", text)
+
+    def test_ohne_verbrauchsmarke_bleibt_es_verschwunden(self):
+        # draft: false allein ist kein belegter Verbrauch (z. B. Handarbeit).
+        self._post("ohne-marke", "draft: false\n")
+        cert = _cert([{"slug": "ohne-marke", "ready": True, "sha256": "a" * 64},
+                      {"slug": "geloescht", "ready": True, "sha256": "b" * 64}])
+        arten = {b["slug"]: b["art"] for b in rr.drift(cert, {}, posts_dir=self.posts)}
+        self.assertEqual(arten, {"ohne-marke": "verschwunden", "geloescht": "verschwunden"})
+
+    def test_geaenderter_entwurf_bleibt_messpflichtig(self):
+        idx = self._post("entwurf", "draft: true\nreserve: true\n")
+        cert = _cert([{"slug": "entwurf", "ready": True, "sha256": "c" * 64}])
+        befunde = rr.drift(cert, {"entwurf": idx}, posts_dir=self.posts)
+        self.assertEqual([b["art"] for b in befunde], ["geaendert"])
+        self.assertIn("NICHT mehr zum Bestand", rr.bericht(befunde))
+
+    def test_ausbuchung_verjuengt_keinen_nachweis(self):
+        self._live("live")
+        idx = self._post("bleibt", "draft: true\nreserve: true\n")
+        bleibt = {"slug": "bleibt", "ready": True, "sha256": rr.file_digest(idx),
+                  "measured_at": "2026-10-13T08:00:00Z"}
+        cert = _cert([{"slug": "live", "ready": True, "sha256": "a" * 64}, bleibt])
+        cert["measurement"] = {"kind": "full"}
+        drafts = {"bleibt": idx}
+        neu = rr.ausbuchen(cert, drafts, rr.drift(cert, drafts, posts_dir=self.posts))
+        self.assertEqual([r["slug"] for r in neu["candidates"]], ["bleibt"])
+        self.assertEqual(neu["candidates"][0], bleibt)          # bytegleich
+        self.assertEqual((neu["ready"], neu["pool_size"]), (1, 1))
+        self.assertEqual(neu["generated_at"], cert["generated_at"])
+        self.assertEqual(neu["measurement"], {"kind": "full"})
+        self.assertEqual(neu["ausgebucht"]["slugs"], ["live"])
+        self.assertNotIn("recert", neu)    # keine Messung behauptet
+
+    def test_nichts_auszubuchen_ergibt_none(self):
+        idx = self._post("bleibt", "draft: true\nreserve: true\n")
+        cert = _cert([{"slug": "bleibt", "ready": True, "sha256": rr.file_digest(idx)}])
+        self.assertIsNone(rr.ausbuchen(cert, {"bleibt": idx}, []))
+
+    def _main(self, cert, argv, gate=(False, "hunspell fehlt")):
+        ziel = self.tmp / "data" / "reserve-readiness.json"
+        ziel.parent.mkdir(parents=True, exist_ok=True)
+        ziel.write_text(json.dumps(cert), encoding="utf-8")
+        with patch.object(rr, "ROOT", self.tmp), \
+                patch.object(rr, "CERT", ziel), \
+                patch.object(rr, "load_cert", lambda *a, **k: json.loads(ziel.read_text())), \
+                patch.object(rr, "draft_paths", lambda *a, **k: {}), \
+                patch.object(rr, "gate_verfuegbar", lambda: gate):
+            code = rr.main(argv)
+        return code, json.loads(ziel.read_text(encoding="utf-8"))
+
+    def test_reiner_verbrauch_ist_im_check_gruen(self):
+        self._live("live")
+        cert = _cert([{"slug": "live", "ready": True, "sha256": "a" * 64}])
+        code, danach = self._main(cert, ["--check"])
+        self.assertEqual(code, 0)
+        self.assertEqual(danach, cert)       # --check schreibt nie
+
+    def test_fix_bucht_ohne_messkette_aus(self):
+        # Kein hunspell, kein hugo – die Ausbuchung braucht beides nicht.
+        self._live("live")
+        cert = _cert([{"slug": "live", "ready": True, "sha256": "a" * 64}])
+        code, danach = self._main(cert, ["--fix"])
+        self.assertEqual(code, 0)
+        self.assertEqual(danach["candidates"], [])
+        self.assertEqual(danach["ready"], 0)
+        self.assertEqual(danach["generated_at"], cert["generated_at"])
+
+    def test_messpflicht_bleibt_ohne_messkette_exit_3(self):
+        # Ausbuchung läuft, die echte Nachmessung aber NICHT ohne Werkzeug.
+        self._live("live")
+        cert = _cert([{"slug": "live", "ready": True, "sha256": "a" * 64}])
+        idx = self._post("neu", "draft: true\nreserve: true\n")
+        ziel = self.tmp / "data" / "reserve-readiness.json"
+        ziel.parent.mkdir(parents=True, exist_ok=True)
+        ziel.write_text(json.dumps(cert), encoding="utf-8")
+        with patch.object(rr, "ROOT", self.tmp), \
+                patch.object(rr, "CERT", ziel), \
+                patch.object(rr, "load_cert", lambda *a, **k: json.loads(ziel.read_text())), \
+                patch.object(rr, "draft_paths", lambda *a, **k: {"neu": idx}), \
+                patch.object(rr, "gate_verfuegbar", lambda: (False, "hunspell fehlt")):
+            code = rr.main(["--fix"])
+        danach = json.loads(ziel.read_text(encoding="utf-8"))
+        self.assertEqual(code, 3)
+        self.assertEqual(danach["candidates"], [])         # ausgebucht
+        self.assertNotIn("recert", danach)                  # nichts erfunden
+
+
 if __name__ == "__main__":
     unittest.main()

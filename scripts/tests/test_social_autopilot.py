@@ -820,17 +820,21 @@ class TestNachruecken716(unittest.TestCase):
         # der Wanduhr. Eine gepinnte Plan-Uhr wäre eine Zeitbombe – genau die
         # Klasse, die scripts/selftest_clock.py --offset 97 aufspürt.
         self.now = planner.berlin_now().replace(minute=30, second=0, microsecond=0)
-        # „Gift"-Artikel: Die Zahl steht NUR in den Textbausteinen, aus denen
-        # der Texter den Beitrag baut (hook/faq) – nicht im Belegmaterial des
-        # Gates (kurzantwort/description/takeaways/keywords/tags). Genau so
-        # entsteht eine echte L9-Blockade: 9999 ist nirgends gedeckt.
+        # „Gift"-Artikel: Die Zahl steht NUR im Aufhänger, aus dem der Texter
+        # den Beitrag baut – nicht im Belegmaterial des Gates (kurzantwort/
+        # description/takeaways/keywords/tags/FAQ). Genau so entsteht eine
+        # echte L9-Blockade: 9999 ist nirgends gedeckt. Seit 14.10.2026 ist die
+        # FAQ Belegmaterial (der Winkel `frage` zitiert sie wörtlich aus dem
+        # Artikel) – eine Gift-Zahl in der FAQ wäre also belegt. Die FAQ bleibt
+        # deshalb leer: `frage` fällt auf Titel + Aufhänger zurück und trägt
+        # dieselbe unbelegte Zahl.
         self.gift = _article("gift-artikel")
         self.gift["title"] = "Stromkosten senken mit System für gift-artikel"
         self.gift["hook"] = "Spare 9999 € sofort mit diesem einen Trick."
         self.gift["hook_sentences"] = ["Spare 9999 € sofort mit diesem einen Trick.",
                                        "Wer 9999 € zurücklegt, wechselt in zehn Minuten."]
-        self.gift["faq_question"] = "Wie sparst du 9999 € im Jahr?"
-        self.gift["faq_answer"] = "Mit 9999 € Ersparnis pro Jahr rechnest du so."
+        self.gift["faq_question"] = ""
+        self.gift["faq_answer"] = ""
         # takeaways leer → die Aufzählung fällt auf hook_sentences zurück und
         # trägt dieselbe unbelegte Zahl. Damit ist der Artikel in JEDEM Winkel
         # blockiert – genau der Zustand, der #716 ausgelöst hat.

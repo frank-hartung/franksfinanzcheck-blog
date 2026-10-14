@@ -45,9 +45,29 @@ VERWENDUNG
     python3 scripts/reserve_recert.py --fix --json
     python3 scripts/reserve_recert.py --selftest  # Sabotageschutz
 
+VERBRAUCH IST KEIN DRIFT (14.10.2026)
+------------------------------------
+Veröffentlicht die Quote-Nachfüllung einen zertifizierten Entwurf, bleibt
+seine Zeile im Zertifikat zurück. Bis dahin hieß das hier „verschwunden“ und
+„zählt ohne Nachzertifizierung NICHT mehr zum Bestand“ – ein Auftrag, der
+sich nicht erfüllen lässt: Ein Live-Artikel ist kein Reserve-Entwurf mehr,
+eine Reserve-Messung an ihm wäre ein Nachweis über etwas, das es nicht gibt.
+Genau so entstand am 14.10.2026 (PR #747) der Folgeauftrag, die beiden am
+selben Tag veröffentlichten Entwürfe vom 07./09.10. „nachzuzertifizieren“.
+
+Seither gilt:
+  · `veroeffentlicht` – Entwurf ist live (`draft: false` + `reserve_published`).
+    Planmäßiger Verbrauch, KEIN Drift, kein Bestandsverlust-Alarm.
+  · `verschwunden` – Entwurf ist weg (gelöscht/aussortiert). Altlast.
+  · Beide werden mit `--fix` AUSGEBUCHT: Zeile raus, Zähler neu. Das braucht
+    keine Messkette – es entsteht kein Nachweis, es fällt nur einer weg, und
+    die Mess-Zeitstempel (`generated_at`, `measured_at`) bleiben unberührt.
+    Eine Ausbuchung kann den Bestand nur kleiner rechnen, nie größer.
+
 EXIT-CODES
 ----------
-    0 = kein Drift (bzw. Drift vollständig nachzertifiziert)
+    0 = kein Drift (bzw. Drift vollständig nachzertifiziert); reiner
+        Verbrauch (`veroeffentlicht`) ist kein Drift
     1 = Drift vorhanden (--check) bzw. nach --fix weiterhin offen
     2 = Zertifikat fehlt/unlesbar (kein Nachweis – Volllauf nötig)
     3 = Nachzertifizierung nicht möglich (Gate-Werkzeug fehlt) – nichts getan
@@ -114,13 +134,35 @@ def load_cert(cert_path: Path = CERT) -> dict | None:
     return data
 
 
+# Befund-Arten, die AUSGEBUCHT werden (keine Messung, kein Nachweis nötig).
+AUSBUCHUNG = ("veroeffentlicht", "verschwunden")
+
+
+def veroeffentlicht_am(slug: str, posts_dir: Path | None = None) -> str | None:
+    """Datum der Veröffentlichung, wenn der Ex-Entwurf live ist – sonst None.
+
+    Live heißt: `draft: false` UND die Verbrauchsmarke `reserve_published`,
+    die die Quote-Nachfüllung beim Veröffentlichen setzt. Ohne beides ist es
+    kein belegter Verbrauch (dann bleibt es `verschwunden`).
+    """
+    index = (posts_dir or ROOT / "content" / "posts") / slug / "index.md"
+    try:
+        meta = artifacts.reserve_metadata(index.read_text(encoding="utf-8"))
+    except (OSError, ValueError, ImportError):
+        return None
+    if meta.get("draft") is not False or not meta.get("reserve_published"):
+        return None
+    return str(meta.get("reserve_published"))
+
+
 def drift(cert: dict, drafts: dict, *, refresh_stale: bool = False,
-          now=None) -> list[dict]:
+          now=None, posts_dir: Path | None = None) -> list[dict]:
     """Alle Zertifikatszeilen, deren Nachweis nicht mehr zum Entwurf passt.
 
-    Drei Drift-Arten, bewusst unterschieden:
+    Vier Arten, bewusst unterschieden:
       · `geaendert` – Entwurf existiert, Bytes anders (Heiler-Lauf)
-      · `verschwunden` – Entwurf ist weg/veröffentlicht (Zeile ist Altlast)
+      · `veroeffentlicht` – Entwurf ist live (planmäßiger Verbrauch, kein Drift)
+      · `verschwunden` – Entwurf ist weg (Zeile ist Altlast)
       · `unzertifiziert` – Entwurf ohne Zeile im Zertifikat (neuer Kandidat)
     """
     out: list[dict] = []
@@ -133,6 +175,12 @@ def drift(cert: dict, drafts: dict, *, refresh_stale: bool = False,
             continue
         gesehen.add(slug)
         path = drafts.get(slug)
+        if path is None and (live := veroeffentlicht_am(slug, posts_dir)):
+            out.append({"slug": slug, "art": "veroeffentlicht",
+                        "ready": bool(row.get("ready")),
+                        "ursache": f"live seit {live} – planmäßig verbraucht, "
+                                   f"keine Messung nötig"})
+            continue
         if path is None:
             out.append({"slug": slug, "art": "verschwunden",
                         "ready": bool(row.get("ready")),
@@ -274,6 +322,36 @@ def recertify(cert: dict, drafts: dict, betroffen: list[str]) -> dict:
     return neu_cert
 
 
+def ausbuchen(cert: dict, drafts: dict, befunde: list[dict]) -> dict | None:
+    """Entfernt Zeilen verbrauchter/verschwundener Entwürfe – ohne Messung.
+
+    Bewusst KEIN Teil von `recertify()`: Dort hängt alles an der vollständigen
+    Messkette (hugo + hunspell). Eine Ausbuchung erzeugt aber keinen Nachweis,
+    sie streicht nur einen, dessen Gegenstand nicht mehr im Bestand liegt.
+    Deshalb bleiben `generated_at`, `measurement` und jedes `measured_at`
+    unangetastet (keine verjüngte Frische), und `ready` kann nur sinken.
+    Rückgabe None = nichts auszubuchen.
+    """
+    weg = {b["slug"] for b in befunde
+           if b.get("art") in AUSBUCHUNG and b.get("slug") not in drafts}
+    if not weg:
+        return None
+    rows = [r for r in cert.get("candidates", [])
+            if not (isinstance(r, dict) and r.get("slug") in weg)]
+    neu = dict(cert)
+    neu["candidates"] = rows
+    neu["ready"] = sum(1 for r in rows if isinstance(r, dict) and r.get("ready") is True)
+    neu["pool_size"] = len(rows)
+    neu["ausgebucht"] = {"at": _now(), "slugs": sorted(weg),
+                         "tool": "scripts/reserve_recert.py"}
+    vorher = sum(1 for r in cert.get("candidates", [])
+                 if isinstance(r, dict) and r.get("ready") is True)
+    if neu["ready"] > vorher:    # Invariante: Ausbuchen rechnet nie Bestand herbei
+        raise Abwertungsverdacht("Ausbuchung würde den Bestand vergrößern – "
+                                 "Zertifikat bleibt unverändert")
+    return neu
+
+
 class Abwertungsverdacht(RuntimeError):
     """Massenabwertung mit EINEM gemeinsamen Muster – Werkzeug statt Qualität."""
 
@@ -317,17 +395,27 @@ def _abwertungs_bremse(alt: dict, neu_rows: list[dict],
 
 
 def bericht(befunde: list[dict]) -> str:
-    if not befunde:
-        return "✅ Zertifikat und Entwürfe stimmen überein (kein Drift)."
-    zeilen = [f"⚠ Zertifikats-Drift: {len(befunde)} Kandidat(en) ohne gültigen "
-              f"Nachweis"]
-    for b in befunde:
-        marke = "🔻" if b.get("ready") else "·"
-        zeilen.append(f"   {marke} {b['slug']} [{b['art']}] – {b['ursache']}")
-    verlust = sum(1 for b in befunde if b.get("ready"))
-    if verlust:
-        zeilen.append(f"   → {verlust} zuvor gate-fertige Artikel zählen ohne "
-                      f"Nachzertifizierung NICHT mehr zum Bestand.")
+    verbraucht = [b for b in befunde if b.get("art") == "veroeffentlicht"]
+    echt = [b for b in befunde if b.get("art") != "veroeffentlicht"]
+    zeilen: list[str] = []
+    if echt:
+        zeilen.append(f"⚠ Zertifikats-Drift: {len(echt)} Kandidat(en) ohne "
+                      f"gültigen Nachweis")
+        for b in echt:
+            marke = "🔻" if b.get("ready") else "·"
+            zeilen.append(f"   {marke} {b['slug']} [{b['art']}] – {b['ursache']}")
+        messen = sum(1 for b in echt if b.get("ready") and b["art"] not in AUSBUCHUNG)
+        if messen:
+            zeilen.append(f"   → {messen} zuvor gate-fertige Artikel zählen ohne "
+                          f"Nachzertifizierung NICHT mehr zum Bestand.")
+    else:
+        zeilen.append("✅ Zertifikat und Entwürfe stimmen überein (kein Drift).")
+    if verbraucht:
+        zeilen.append(f"ℹ Verbrauch: {len(verbraucht)} zertifizierte(r) Entwurf/"
+                      f"Entwürfe veröffentlicht – Ausbuchung mit `--fix`, keine "
+                      f"Nachzertifizierung (kein Reserve-Entwurf mehr):")
+        for b in verbraucht:
+            zeilen.append(f"   ✓ {b['slug']} – {b['ursache']}")
     return "\n".join(zeilen)
 
 
@@ -396,20 +484,43 @@ def main(argv=None) -> int:
     if args.json:
         print(json.dumps({"drift": befunde}, ensure_ascii=False))
 
-    if not befunde:
-        return 0
+    messen = [b for b in befunde if b["art"] not in AUSBUCHUNG]
     if not args.fix:
-        print("   Heilung: `python3 scripts/reserve_recert.py --fix` "
-              "(misst nur die betroffenen Kandidaten neu).")
-        return 1
+        if messen:
+            print("   Heilung: `python3 scripts/reserve_recert.py --fix` "
+                  "(misst nur die betroffenen Kandidaten neu).")
+            return 1
+        if any(b["art"] == "verschwunden" for b in befunde):
+            print("   Ausbuchung: `python3 scripts/reserve_recert.py --fix` "
+                  "(ohne Messung, Bestand wird nur kleiner gerechnet).")
+            return 1
+        return 0    # reiner Verbrauch ist kein Drift
 
+    # Schritt 1 – Ausbuchung: keine Messung, darum auch ohne Messkette.
+    try:
+        gebucht = ausbuchen(cert, drafts, befunde)
+    except Abwertungsverdacht as exc:
+        print(f"🛑 Ausbuchung abgebrochen: {exc}")
+        return 3
+    if gebucht is not None:
+        artifacts.certificate_rows(gebucht)
+        artifacts.write_object(CERT, gebucht)
+        cert = gebucht
+        print(f"✅ Ausgebucht (ohne Messung): {', '.join(gebucht['ausgebucht']['slugs'])}"
+              f" · {gebucht['ready']}/{gebucht.get('target', '?')} gate-fertig "
+              f"(Pool {gebucht['pool_size']}); Mess-Zeitstempel unverändert.")
+    if not messen:
+        return 0
+
+    # Schritt 2 – echte Nachmessung: nur mit vollständiger Messkette.
     ok, grund = gate_verfuegbar()
     if not ok:
         print(f"🛑 Nachzertifizierung nicht möglich: {grund}. "
-              f"Zertifikat bleibt unverändert (keine erfundene Reife).")
+              f"Nachweise der betroffenen Entwürfe bleiben unverändert "
+              f"(keine erfundene Reife).")
         return 3
 
-    betroffen = [b["slug"] for b in befunde if b["art"] != "verschwunden"]
+    betroffen = [b["slug"] for b in messen]
     from reserve_readiness import MeasurementUnavailable
     from reserve_operations import WorkInterrupted
     try:
