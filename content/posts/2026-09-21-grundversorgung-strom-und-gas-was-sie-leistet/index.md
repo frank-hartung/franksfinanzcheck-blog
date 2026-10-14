@@ -56,7 +56,7 @@ Der Weg hinein ist selten beabsichtigt. Es gibt vier typische Fälle.
 
 **Umzug.** Du meldest dich nicht rechtzeitig an und wirst nach dem Einzug automatisch versorgt. Der Vertrag entsteht dann über den Grundversorger.
 
-**Anbieterwechsel mit Verzögerung.** Ein Wechsel scheitert oder verzögert sich, währenddessen läuft die Belieferung über die Grundversorgung weiter.
+**[Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) mit Verzögerung.** Ein Wechsel scheitert oder verzögert sich, währenddessen läuft die Belieferung über die Grundversorgung weiter.
 
 **Zahlungsausfall.** Wird ein Liefervertrag beendet, fällt der Haushalt in die Grundversorgung. Die Belieferung wird also nicht eingestellt, solange die Versorgung läuft.
 
@@ -111,8 +111,8 @@ Die beiden Verbrauchsfälle aus der Modellrechnung im Vergleich:
 
 ## Der Ausweg in drei Schritten
 
-1. **Verbrauch notieren.** Zählerstand ablesen und den Jahresverbrauch aus der letzten Abrechnung übernehmen.
-2. **Sondertarife vergleichen.** Achte auf Laufzeit, Kündigungsfrist, Preisgarantie und Bonusbedingungen. Ein Neukundenbonus verzerrt den ersten Jahresvergleich.
+1. **Verbrauch notieren.** [Zählerstand ablesen](../../posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/) und den Jahresverbrauch aus der letzten Abrechnung übernehmen.
+2. **Sondertarife vergleichen.** Achte auf Laufzeit, [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), Preisgarantie und Bonusbedingungen. Ein Neukundenbonus verzerrt den ersten Jahresvergleich.
 3. **Auftrag erteilen und warten.** Der neue Anbieter meldet den Wechsel an. Du musst nichts selbst kündigen, solange du in der Grundversorgung bist und der Auftrag sauber erteilt ist.
 
 Kontrolliere nach zwei Wochen, ob du eine Bestätigung mit Lieferbeginn erhalten hast. Fehlt sie, frage nach.
@@ -135,7 +135,7 @@ Zwei Situationen tauchen in Beschwerden immer wieder auf.
 
 **Der Abschlag startet sofort und voll.** Das ist üblich, weil die Belieferung anläuft. Prüfe trotzdem, ob die Basis plausibel ist, und reiche deinen ersten Zählerstand nach.
 
-Für den zweiten Punkt gibt es eine einfache Vorkehrung. Fotografiere bei der Schlüsselübergabe den Zählerstand und notiere Tag und Uhrzeit. Diese Notiz brauchst du später bei der ersten Abrechnung. Sie schützt dich, wenn die Zuordnung strittig wird.
+Für den zweiten Punkt gibt es eine einfache Vorkehrung. Fotografiere bei der Schlüsselübergabe den Zählerstand und notiere Tag und Uhrzeit. Diese Notiz brauchst du später bei der ersten Abrechnung. Sie [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/), wenn die Zuordnung strittig wird.
 
 ## Wann die Grundversorgung trotzdem sinnvoll ist
 

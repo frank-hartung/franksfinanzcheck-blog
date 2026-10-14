@@ -156,7 +156,7 @@ Rechne jedes Angebot mit deiner tatsächlichen Jahresmenge durch. Wichtig sind:
 
 - Gesamtpreis im ersten Jahr,
 - Preis ohne Bonus,
-- Laufzeit und Kündigungsfrist,
+- Laufzeit und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
 - Umfang und Dauer einer Preisgarantie,
 - monatliche Zahlung statt Vorkasse.
 
@@ -176,7 +176,7 @@ Dreh nicht blind an der Vorlauftemperatur, nur weil du eine Zahl im Internet gel
 
 ## Warmwasser nicht übersehen
 
-Bei einer Gastherme oder zentralen Anlage macht Warmwasser oft einen echten Teil des Verbrauchs aus. Wer nur an der Raumtemperatur dreht, übersieht diesen Block leicht.
+Bei einer Gastherme oder zentralen Anlage macht [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oft einen echten Teil des Verbrauchs aus. Wer nur an der Raumtemperatur dreht, übersieht diesen Block leicht.
 
 Prüfe ohne Komforttheater:
 

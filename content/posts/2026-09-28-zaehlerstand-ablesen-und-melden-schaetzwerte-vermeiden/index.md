@@ -146,7 +146,7 @@ Modellrechnung: Aus der erwarteten Gutschrift entsteht eine Nachzahlung – obwo
 
 ## Beim Wechsel: zwei Stände statt einem
 
-Ein Anbieterwechsel macht zwei Zählerstände nötig. Einen zum Ende der Belieferung durch den alten Versorger und einen zum Beginn beim neuen.
+Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) macht zwei Zählerstände nötig. Einen zum Ende der Belieferung durch den alten Versorger und einen zum Beginn beim neuen.
 
 Der neue Anbieter stimmt den Wechsel meist mit dem alten ab. Notiere trotzdem beide Werte samt Datum. Verschiebt sich die Liefergrenze, bleibt sonst die Zuordnung unklar. Die Verbraucherzentrale beschreibt den Ablauf im Ratgeber [So läuft der Anbieterwechsel bei Strom und Gas ab](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645).
 

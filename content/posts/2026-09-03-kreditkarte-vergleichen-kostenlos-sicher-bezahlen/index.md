@@ -177,7 +177,7 @@ Eine gute Kreditkarte kostet im Jahr nichts und außerhalb Europas kein Vermöge
 
 **Welche Kreditkarte ist wirklich kostenlos?** Nur wenn Jahresgebühr, Auslandsgebühr und Bargeld-Gebühren bei null liegen. Viele Direktbanken bieten das inzwischen dauerhaft an.
 
-**Brauche ich eine Kreditkarte für den Urlaub?** Außerhalb Europas ja, am besten ohne Fremdwährungsgebühr. In Europa reicht meist eine Debitkarte.
+**Brauche ich eine Kreditkarte für den Urlaub?** Außerhalb Europas ja, am besten ohne [Fremdwährungsgebühr](../../posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/). In Europa reicht meist eine Debitkarte.
 
 **Was passiert bei Kartenverlust im Ausland?** Sperre die Karte sofort in der App und ruf die Bank an. Die kostenlose Nummer 116 sperrt alle Karten. Nimm auf Reisen immer eine Ersatzkarte oder Bargeld mit.
 

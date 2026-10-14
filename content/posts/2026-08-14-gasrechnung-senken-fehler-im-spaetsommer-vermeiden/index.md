@@ -60,7 +60,7 @@ Nimm dir heute zehn ruhige Minuten. Hol die letzte Rechnung und notiere drei Wer
 
 Mache dann ein Foto vom Gaszähler. Dieser Wert ist dein Startpunkt für jede spätere Rechnung. An der Technik musst du dafür nichts ändern.
 
-Sieh dir danach deinen Vertrag an. Wann endet die Preisgarantie? Wie lang ist die Kündigungsfrist?
+Sieh dir danach deinen Vertrag an. Wann endet die Preisgarantie? Wie lang ist die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/)?
 
 Vergleiche deinen Preis ohne Bonus mit dem Markt. Ein kleiner Abschlag spart kein Geld, er schiebt die Zahlung nur auf. Am Ende zählt die Summe für das ganze Jahr.
 
@@ -202,7 +202,7 @@ Diese Daten solltest du bereithalten:
 - Deinen geschätzten Jahresverbrauch,
 - die Zählernummer (zu finden auf dem Gerät oder der letzten Rechnung),
 - deine aktuelle Kundennummer beim jetzigen Versorger,
-- das genaue Enddatum deiner aktuellen Vertragslaufzeit.
+- das genaue Enddatum deiner aktuellen [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).
 
 Hat dein Anbieter gerade erhöht? Dann darfst du sofort kündigen. Schreibe die Kündigung in diesem Fall besser selbst, damit die Frist sicher gewahrt bleibt.
 

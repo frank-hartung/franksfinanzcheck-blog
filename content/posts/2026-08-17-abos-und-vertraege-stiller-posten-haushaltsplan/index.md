@@ -48,7 +48,7 @@ Abos kündigen ist selten ein Erfolgserlebnis, und dabei ist es erstaunlich, wie
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Der Unterschied zu einer normalen Ausgabe liegt im Mechanismus: Du entscheidest einmal, danach entscheidet der Dauerauftrag. Wer seine Kosten senken will, findet hier den größten Hebel mit dem geringsten Aufwand. Die Verbraucherzentrale zählt wiederkehrende Posten deshalb zu den ersten Stellen, an denen ein kleiner Haushalt ansetzt ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
+Der Unterschied zu einer normalen Ausgabe liegt im Mechanismus: Du entscheidest einmal, danach entscheidet der [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/). Wer seine Kosten senken will, findet hier den größten Hebel mit dem geringsten Aufwand. Die Verbraucherzentrale zählt wiederkehrende Posten deshalb zu den ersten Stellen, an denen ein kleiner Haushalt ansetzt ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
 
 ## Warum kleine Beträge so schwer zu greifen sind
 
@@ -74,7 +74,7 @@ Der Zwölf-Monats-Zeitraum ist kein Zufall. Ein Jahr enthält jeden Rhythmus min
 
 Nicht jeder Vertrag wird auf dieselbe Weise beendet. Die Unterscheidung spart Zeit und Fehler.
 
-**Laufzeiten mit Frist:** Hier gilt eine vertraglich vereinbarte Kündigungsfrist. Sie steht in der Vertragsbestätigung, nicht im Werbetext. Notiere die Frist und das späteste Datum, an dem du schreiben musst.
+**Laufzeiten mit Frist:** Hier gilt eine vertraglich vereinbarte [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Sie steht in der Vertragsbestätigung, nicht im Werbetext. Notiere die Frist und das späteste Datum, an dem du schreiben musst.
 
 **Monatlich kündbare Abos:** Diese Verträge lassen sich meist zum Monatsende beenden. Achte darauf, ob eine Frist von wenigen Tagen gilt. Ein Kündigungsdatum am Monatsletzten ist hier oft zu spät.
 

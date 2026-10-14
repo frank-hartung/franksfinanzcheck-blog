@@ -73,7 +73,7 @@ Beide Wege haben unterschiedliche Folgen. Die Entscheidung hängt weniger von de
 
 **Beenden.** Ist die Adresse nicht versorgt oder erbringt der Anbieter dort keine Leistung, endet der Vertrag häufig, ohne dass du die Restlaufzeit bezahlen musst. Kläre das mit dem Anbieter und lass dir die Bestätigung schriftlich geben.
 
-**Neu abschließen.** Zieht der Anbieter nicht mit, sucht du einen neuen Vertrag. Hier wird es interessant: Ein Neuvertrag ist oft günstiger als die Fortführung eines alten Tarifs. Wer ohnehin wechseln will, sollte die Kündigungsfrist deshalb zum Umzug passend planen.
+**Neu abschließen.** Zieht der Anbieter nicht mit, sucht du einen neuen Vertrag. Hier wird es interessant: Ein Neuvertrag ist oft günstiger als die Fortführung eines alten Tarifs. Wer ohnehin wechseln will, sollte die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) deshalb zum Umzug passend planen.
 
 ## Was das Gesetz vorgibt
 
@@ -198,7 +198,7 @@ In der Regel ja, wenn du die Mitnahme ausdrücklich beantragst und der neue Ansc
 
 ### Was mache ich, wenn der Techniker nicht kommt?
 
-Dokumentiere den Termin mit Zeitangabe und melde den Ausfall telefonisch und schriftlich. Lass dir einen neuen Termin bestätigen. Die Regeln zu Verzögerungen beim Anbieterwechsel stehen in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html).
+Dokumentiere den Termin mit Zeitangabe und melde den Ausfall telefonisch und schriftlich. Lass dir einen neuen Termin bestätigen. Die Regeln zu Verzögerungen beim [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) stehen in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html).
 
 ### Lohnt sich ein Neuvertrag statt der Fortführung?
 

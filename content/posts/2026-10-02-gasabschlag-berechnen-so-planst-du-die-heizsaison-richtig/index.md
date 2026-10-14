@@ -98,7 +98,7 @@ Zahlt dein Anbieter mit 150 € im Monat deutlich mehr, verschenkst du ein zins
 
 Der Heizbeginn verschiebt den Zähler in den Schnellgang. Wer seine Zahlen jetzt kennt, reagiert rechtzeitig statt erst bei der Jahresrechnung. Drei Gründe machen den Herbst zum Planungsmonat.
 
-Erstens verschicken viele Anbieter ihre Preisanpassungen zum Jahresende. Zweitens läuft bei vielen Verträgen die Kündigungsfrist zum Jahreswechsel aus. Drittens sitzt du in der Grundversorgung fast sicher im teuersten Tarif des Marktes – und diese Falle lässt sich innerhalb von zwei Wochen verlassen.
+Erstens verschicken viele Anbieter ihre Preisanpassungen zum Jahresende. Zweitens läuft bei vielen Verträgen die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) zum Jahreswechsel aus. Drittens sitzt du in der Grundversorgung fast sicher im teuersten Tarif des Marktes – und diese Falle lässt sich innerhalb von zwei Wochen verlassen.
 
 **Faustregel:** Wer seit über einem Jahr keinen Gastarif mehr verglichen hat, zahlt mit hoher Wahrscheinlichkeit zu viel.
 
@@ -152,7 +152,7 @@ Vor der Handarbeit die Grundsatzfrage: Lohnt der Wechsel überhaupt, oder ist de
 
 1. **Jahresrechnung suchen:** Notiere Verbrauch in kWh, Arbeitspreis und Grundpreis aus der letzten Abrechnung.
 2. **Abschlag nachrechnen:** Wende die Formel aus dem Modellteil an und vergleiche das Ergebnis mit deinem aktuellen Abschlag.
-3. **Zählerstand melden:** Übermittle den heutigen Stand im Kundenportal oder telefonisch und bitte bei Abweichung um Anpassung.
+3. **[Zählerstand melden](../../posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/):** Übermittle den heutigen Stand im Kundenportal oder telefonisch und bitte bei Abweichung um Anpassung.
 4. **Tarife vergleichen:** Gib Postleitzahl und Jahresverbrauch in einen Vergleichsrechner ein und filtere nach Preisgarantie und kurzer Laufzeit.
 5. **Wechseltermin setzen:** Beauftrage den neuen Anbieter mit der Anmeldung; er meldet dich beim Netzbetreiber um, die Versorgung läuft nahtlos weiter.
 

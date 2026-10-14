@@ -205,7 +205,7 @@ Es gibt drei mögliche Entscheidungen:
 - **Tarif beim selben Anbieter wechseln:** neue Bedingungen und Laufzeit wie einen Neuvertrag prüfen.
 - **Anbieter wechseln:** wenn Gesamtpreis oder Schutz klar besser sind.
 
-Rückholangebote sind nicht automatisch günstig. Rechne Arbeitspreis, Grundpreis und Bonus erneut. Achte darauf, ob mit dem Tarifwechsel eine neue Mindestlaufzeit beginnt.
+Rückholangebote sind nicht automatisch günstig. Rechne Arbeitspreis, Grundpreis und Bonus erneut. Achte darauf, ob mit dem [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) eine neue Mindestlaufzeit beginnt.
 
 Sende eine Kündigung erst, wenn du die Folgen kennst. Endet der Vertrag ohne neuen Lieferanten, fällst du in Grund- oder Ersatzversorgung. Die Versorgung bleibt zwar gesichert, der Preis kann aber höher sein.
 

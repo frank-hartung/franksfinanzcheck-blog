@@ -95,13 +95,13 @@ Der Schutzumfang im Überblick:
 
 Die folgende Rechnung nutzt angenommene Beträge. Sie beschreibt keinen Marktzustand, sondern die Mechanik.
 
-Annahmen: Du hast 70.000 Euro auf einem Tagesgeldkonto bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 Euro. Bei Institut B liegen 60.000 Euro auf einem zweiten Tagesgeldkonto. Alle drei Konten laufen auf deinen Namen.
+Annahmen: Du hast 70.000 Euro auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 Euro. Bei Institut B liegen 60.000 Euro auf einem zweiten Tagesgeldkonto. Alle drei Konten laufen auf deinen Namen.
 
 Rechenweg Institut A: 70.000 Euro plus 45.000 Euro ergeben 115.000 Euro. Beide Konten gehören zum selben Institut. Rechenweg Institut B: 60.000 Euro liegen unterhalb der Grenze.
 
 Modellrechnung: Bei Institut A liegen 15.000 Euro über dem gesetzlichen Schutzbetrag, bei Institut B nichts. Wenn du stattdessen 55.000 Euro zu Institut B verlagerst, wären beide Institute innerhalb des Betrags.
 
-Der zweite Teil der Rechnung betrifft die Praxis. Angenommen, dein Notgroschen beträgt sechs Monatsausgaben von 12.000 Euro. Rechenweg: Dieser Betrag liegt bei einem einzigen Institut weit im geschützten Bereich. Modellrechnung: Die Aufteilung ist dann keine Frage des Schutzes, sondern von Verfügbarkeit und Zins.
+Der zweite Teil der Rechnung betrifft die Praxis. Angenommen, dein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) beträgt sechs Monatsausgaben von 12.000 Euro. Rechenweg: Dieser Betrag liegt bei einem einzigen Institut weit im geschützten Bereich. Modellrechnung: Die Aufteilung ist dann keine Frage des Schutzes, sondern von Verfügbarkeit und Zins.
 
 ## Warum der Schutz pro Institut gerechnet wird
 

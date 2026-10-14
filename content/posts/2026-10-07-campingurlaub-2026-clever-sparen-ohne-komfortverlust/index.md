@@ -208,7 +208,7 @@ Plane einen Plan B für nasse Tage. Ein Museum, eine Bibliothek oder eine Halle 
 
 ### Wie spare ich beim Duschen auf dem Platz?
 
-Prüfe, ob Duschen im Preis steckt. Viele Plätze rechnen per Münze oder Karte ab. Ein kurzes Abspülen spart dann bares Geld. Warmwasser am Morgen ist oft am ruhigsten.
+Prüfe, ob Duschen im Preis steckt. Viele Plätze rechnen per Münze oder Karte ab. Ein kurzes Abspülen spart dann bares Geld. [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) am Morgen ist oft am ruhigsten.
 
 ### Was gehört in die Hausapotheke?
 

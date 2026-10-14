@@ -37,7 +37,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-Du willst Handytarif-vergleichen? Hast du deinen Handyvertrag schon genauer geprüft? Millionen zahlen Monat für Monat 25 bis 45 €. Für Leistung, die heute die Hälfte kostet.
+Du willst Handytarif-vergleichen? Hast du deinen [Handyvertrag](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) schon genauer geprüft? Millionen zahlen Monat für Monat 25 bis 45 €. Für Leistung, die heute die Hälfte kostet.
 
 Der Markt ist 2026 hart umkämpft. Discounter und Submarken unterbieten sich mit Allnet-Flats. Teilweise ist 5G für unter 10 € drin.
 
@@ -179,7 +179,7 @@ Manche Discounter nehmen Geld für den Telefon-Support. Oder es gibt nur einen C
 ## Rufnummernmitnahme: So funktioniert der Wechsel
 
 1. **Alten Vertrag kündigen**, oder bei einem Laufzeitvertrag unter Einhaltung der Frist.
-2. **Rufnummernmitnahme beantragen:** Beim neuen Anbieter während der Bestellung "Rufnummer mitnehmen" auswählen.
+2. **Rufnummernmitnahme beantragen:** Beim neuen Anbieter während der Bestellung "[Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/)" auswählen.
 3. **Opt-In bestätigen:** Bei sofortiger Mitnahme (vor Vertragsende) brauchst du vom alten Anbieter eine Opt-In-Erklärung.
 4. **Wechseltermin:** Die Mitnahme dauert in der Regel 1 Werktag. Du bekommst vorübergehend eine neue Nummer, die am Stichtag auf deine alte Nummer wechselt.
 5. **WhatsApp:** Nach dem Wechsel musst du ggf. in den WhatsApp-Einstellungen die Nummer ändern, damit Chatverläufe und Gruppen erhalten bleiben.
