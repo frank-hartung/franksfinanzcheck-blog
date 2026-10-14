@@ -22,7 +22,7 @@ crawl4ai>=0.7.0
 # Composio (https://composio.dev). Das SDK ist bequemer als der
 # REST-Weg, aber nicht zwingend: werkbank_adapters.py spricht notfalls
 # direkt mit backend.composio.dev/api/v3.1.
-composio>=0.22.1
+composio>=0.25.0
 
 # --- Querschnitt ----------------------------------------------------
 # YAML liest die SSOT (data/werkbank.yaml). Im Repo ohnehin überall
