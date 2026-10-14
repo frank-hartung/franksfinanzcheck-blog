@@ -1,6 +1,6 @@
 ---
-lastmod: 2026-10-02
-title: "Haushaltsbudget & Frugalismus: Der große Ratgeber für finanzielle Puffer"
+lastmod: 2026-10-14
+title: "Haushaltsbudget & Frugalismus: Ratgeber für Notgroschen"
 description: "Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen."
 date: 2026-08-08
 draft: false
