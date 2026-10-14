@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 14.10.2026 12:19 (Europe/Berlin)  
+> Automatisch aktualisiert: 14.10.2026 17:51 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,16 +12,13 @@
 
 ## Kommende Beiträge
 
-### Mi, 14. Oktober 2026
-- **11:30** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
 ### Do, 15. Oktober 2026
-- **07:30** ⏳ Warmwasser sparen: Die Rechnung hinter — _nutzen_ · Launch  
+- **07:30** ⏳ Warmwasser sparen: Die Rechnung hinter dem Hahn — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
 - **11:30** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
 ### Fr, 16. Oktober 2026
-- **07:30** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch — _nutzen_ · Launch  
+- **07:30** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
 - **11:30** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
@@ -40,6 +37,11 @@
   https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/
 - **11:30** ⏳ Großeinkauf und Vorrat: Wann Bevorraten sich rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/
+### Di, 20. Oktober 2026
+- **07:30** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
+- **11:30** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 ### Sa, 24. Oktober 2026
 - **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
@@ -49,13 +51,14 @@
 - **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
-- **11:30** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _zahl_ · Evergreen  
+- **11:30** ⏳ Internet & DSL wechseln: So gelingt der Anbieterwechsel — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 - **17:30** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 14.10.2026 17:51 · Abos und Verträge: Der stille Posten im Haushaltsplan → https://mastodon.social/@FranksFinanzcheck/117440058160848584
 - ✅ 14.10.2026 12:18 · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen → https://mastodon.social/@FranksFinanzcheck/117438751738382391
 - ✅ 13.10.2026 21:54 · Der erste eigene Haushalt: Fixkosten von Anfang an ordnen → https://mastodon.social/@FranksFinanzcheck/117435351129525107
 - ✅ 13.10.2026 14:46 · Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer → https://mastodon.social/@FranksFinanzcheck/117433670652081666
@@ -65,7 +68,6 @@
 - ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
 - ✅ 08.10.2026 14:05 · Internet & DSL-Update: Was sich jetzt für dich ändert → https://mastodon.social/@FranksFinanzcheck/117405198564655648
 - ✅ 06.10.2026 20:56 · Weihnachten Budget planen: Ohne Schulden durch die Feiertage → https://mastodon.social/@FranksFinanzcheck/117395489343468673
-- ✅ 06.10.2026 14:05 · Preiswert surfen: So findest du den optimalen DSL‑Anschluss → https://mastodon.social/@FranksFinanzcheck/117393872454593493
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

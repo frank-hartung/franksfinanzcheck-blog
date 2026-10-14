@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-10-14
 title: "Zahnzusatzversicherung 2026: Tarife & Erstattung"
 description: "Zahnzusatzversicherung 2026 im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig…"
 date: 2026-09-25T08:10:00Z
@@ -15,7 +15,7 @@ cover:
   image: "images/covers/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich.jpg"
   alt: "Zahnzusatzversicherung Vergleich 2026: Kosten und Leistungen im Überblick"
   caption: "Tipp von FranksFinanzcheck"
-savings: "bis zu 100 % Erstattung"
+savings: "oft 80 bis 100 % Erstattung"
 pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
 pin_description: "*Werbung | Zahnzusatzversicherung 2026 im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig… Mehr Spartipps auf FranksFinanzcheck! #zahnzusatzversicherung #zahnersatzkosten #implantatkosten"
 quellen:

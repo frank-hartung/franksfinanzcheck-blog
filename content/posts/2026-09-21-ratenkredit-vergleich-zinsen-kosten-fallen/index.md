@@ -1,6 +1,6 @@
 ---
 title: "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen"
-lastmod: 2026-09-28
+lastmod: 2026-10-14
 description: "Ratenkredit Vergleich 2026: Welche Zinsen realistisch sind, wann sich Umschuldung und Dispo-Ablösung lohnen und welche 5 Fallen du umgehen musst."
 date: 2026-09-23T08:00:00Z
 draft: true
@@ -17,8 +17,8 @@ cover:
   image: "images/covers/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen.jpg"
   alt: "Ratenkredit Vergleich 2026: Zinsen, Kosten und Fallen im Überblick"
   caption: "Tipp von FranksFinanzcheck"
-savings: "bis zu 2.000 € sparen"
-pin_title: "Ratenkredit 2026: Zinsen vergleichen & bis zu 2.000 € sparen"
+savings: "über 2.000 € Zinsdifferenz"
+pin_title: "Ratenkredit 2026: Zinsen vergleichen & Fallen umgehen"
 pin_description: "*Werbung | Ratenkredit Vergleich 2026: Welche Zinsen realistisch sind, wann sich Umschuldung und Dispo-Ablösung lohnen und welche 5 Fallen du umgehen musst. Mehr Spartipps auf FranksFinanzcheck! #ratenkredit #ratenkreditvergleich #ratenkreditzinsen"
 quellen:
   - id: "Q1"

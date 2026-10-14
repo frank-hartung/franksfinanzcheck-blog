@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-10-14
 title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten"
 description: "Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen."
 date: 2026-09-23T08:20:00Z
@@ -15,7 +15,6 @@ cover:
   image: "images/covers/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten.jpg"
   alt: "Unfallversicherung Vergleich 2026: Sinn, Kosten und Leistungen im Überblick"
   caption: "Tipp von FranksFinanzcheck"
-savings: "ab ca. 5 € im Monat"
 pin_title: "Unfallversicherung 2026: Sinnvoll? Kosten & Leistungen im Check"
 pin_description: "*Werbung | Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen. Mehr Spartipps auf FranksFinanzcheck! #unfallversicherung #unfallversicherungkosten #gliedertaxe"
 quellen:

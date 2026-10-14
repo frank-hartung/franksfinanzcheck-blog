@@ -1,6 +1,6 @@
 ---
-lastmod: 2026-10-13
-title: "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen"
+lastmod: 2026-10-14
+title: "Konto & Karten: Ratgeber für gebührenfreie Finanzen"
 description: "Banking ohne Gebühren: Kostenlose Girokonten, Kreditkarten ohne Jahresgebühr, Tagesgeld mit Top-Zinsen und Ratenkredite zum Bestzins."
 date: 2026-08-08
 draft: false

@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-13T10:49:12.813126+00:00",
-  "head": "5dcbe27",
+  "signed_at": "2026-10-14T16:18:40.309055+00:00",
+  "head": "e20b0519",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -33,7 +33,7 @@
     "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "45e07881f24005e63decd400fd2974499511fcc7d45ae21c5973e997f55695e3",
     "scripts/fazit_schmiede.py": "6061f841227adefff0105331ba13d1d10fad0cd87c7c3364fe35593158ab0ca4",
-    "scripts/generate_covers.py": "a4cc9448cb6ad5702e1d690078921a7a8633a1abac4166be169b5580efc59985",
+    "scripts/generate_covers.py": "e4bfaa4fe10a38f4039e3d083803d09e906f7c88e57b2af343f775f2b4f2fe58",
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "d19dee6b438ed06fb2b74718a90defc4b0ec0f5b40635254c5dd2c91ebdb0e14",
     "scripts/lektor_guard.py": "0f6eb11dbf468907eb24c460dfeff42833fe50dc855ab4345fa5dd35fa22a166",
@@ -53,44 +53,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1",
-  "audit_start_sha256": "a5105b591f5b76a88c75a81ac095f59faaa13c941a40c9a284621aa9dfca8d9e",
+  "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5",
+  "audit_start_sha256": "df45594a3dcb94975e0b9686df00fb3eaebb30b2788786dc71668e4e18bd044e",
   "audit": [
-    {
-      "date": "2026-10-09",
-      "art": "set-current",
-      "head": "f5975b11",
-      "geaendert": [
-        "layouts/_partials/extend_footer.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "01f55427",
-              "datum": "2026-10-09",
-              "betreff": "feat: Premium Content-Engine & Social-Media-Automatik (BOFU/E-E-A-T) (#673)"
-            },
-            {
-              "sha": "8c360de8",
-              "datum": "2026-09-23",
-              "betreff": "feat(newsletter): Versand auf zweimal pro Woche begrenzen und Anmeldung hervorheben"
-            },
-            {
-              "sha": "22079304",
-              "datum": "2026-09-22",
-              "betreff": "newsletter: Freischaltung Capture (Brevo-Formular) + Wache-/Doku-Sync"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-09",
       "art": "heal",
@@ -114,7 +79,7 @@
         }
       ],
       "files_sha256": "37171fa00528b12c314500536ad1045ad6f014892ccd2654fe2dbe13ece78c98",
-      "prev_sha256": "a5105b591f5b76a88c75a81ac095f59faaa13c941a40c9a284621aa9dfca8d9e"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-09",
@@ -617,8 +582,43 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "8ed9b709acbf1703131ce8db385dfcbd4deb402ee403d341bac9a877370baaf1",
-      "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1"
+      "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1",
+      "prev_sha256": "8ed9b709acbf1703131ce8db385dfcbd4deb402ee403d341bac9a877370baaf1"
+    },
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "e20b0519",
+      "geaendert": [
+        "scripts/generate_covers.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/generate_covers.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "cb9c2982",
+              "datum": "2026-10-14",
+              "betreff": "fix(metadaten): Cover-Wahrheit, Zahlenbelege und Metadaten dauerhaft heilen (#743)"
+            },
+            {
+              "sha": "8fca9035",
+              "datum": "2026-09-28",
+              "betreff": "fix: Blogbestand und Medienhygiene konsolidieren"
+            },
+            {
+              "sha": "ff6232e3",
+              "datum": "2026-09-18",
+              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38",
+      "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5"
     }
   ]
 }

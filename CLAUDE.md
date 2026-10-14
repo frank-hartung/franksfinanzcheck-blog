@@ -143,6 +143,10 @@ npm run vorgang:abschluss -- --pr <Nr>                # Abschlussvermerk an die 
 npm run test:vorgang                                  # Abschlussvermerk: 12 Fallgruppen + 15 Verfahrenstests
 npm run manifest:check                                # Manifest-Wache: package.json + Lockfile vor npm ci (J/K/F/D/L/P, Exit 1 bei Befund)
 npm run test:manifest                                 # Manifest-Wache: Selbsttest (Sabotage + Gegenprobe) + Unit-Tests (#654)
+npm run metadaten:check                          # Metadaten-Wache M1–M6: Titel, Description, lastmod, Pflichtfelder, Zahlenversprechen
+npm run test:metadaten                               # Metadaten-Wache: Selbsttest (11 Proben) + 13 Unit-Tests
+npm run covers:render-check                          # Cover-Render-Wache: jedes JPG gegen seinen Titel neu gerendert (pixelgenau)
+npm run test:covers:render                           # Cover-Render-Wache: Selbsttest (Sabotage + Gegenprobe)
 
 # 0 € Blogautomatik (Whisper lokal + n8n self-hosted + Pages, 03.10.2026) – Details: docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md
 npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)
@@ -1659,6 +1663,22 @@ Beim Heilen kamen zwei blinde Flecken derselben Prüfung ans Licht:
   behaupten.
 - Tests: `python3 -m unittest scripts.tests.test_pinterest_hashtags scripts.tests.test_pinterest_check`
   (45) · Bericht: `PINTEREST-729-HASHTAG-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
+
+## Metadaten und Cover-Wahrheit (seit 14.10.2026, Nachschärfung #743)
+
+- **Ein Cover ist nur wahr, wenn es aus seinem Titel neu rendert.** Der Generator
+  erneuerte früher nur bei Design-Drift; eine Titeländerung aktualisierte das
+  Manifest, nicht das Bild. `check_covers` meldete deshalb „Stale: 0“, obwohl
+  63 von 96 JPGs nicht mehr ihrem Titel entsprachen. Heute ist Titel-Drift ein
+  Neu-Render-Auslöser, und `covers:render-check` vergleicht jedes Bild pixelgenau.
+- **Zahlen statt Behauptungen gilt auch auf Covers.** Eine Spar-Pille (aus
+  `savings:` oder Description) braucht ihre Zahl MIT Einheit im Fließtext
+  (`metadaten_wache.py`, M6). „Schritt 5“ belegt kein „5 € im Monat“.
+- **`lastmod` ist die letzte inhaltliche Änderung**, nie vor `date`. Pillar-Titel
+  ≤ 60 Zeichen, Descriptions 100–160 Zeichen (M1/M2/M3).
+- **Reparatur eines Cover-Befunds nur über die Pipeline:**
+  `python3 scripts/generate_covers.py --slug <slug>` bzw.
+  `--pillars --slug pillar-<silo>`. Nie das JPG von Hand bearbeiten.
 
 ## Wichtige Konventionen
 

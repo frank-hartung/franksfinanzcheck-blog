@@ -1,0 +1,104 @@
+"""Unit-Tests der Metadaten-Wache (scripts/metadaten_wache.py).
+
+Die Fälle spiegeln die realen Befunde aus dem Audit #743 wider: zu lange
+Pillar-Titel, zu lange Description, lastmod vor date, unbelegte Spar-Pillen
+(„1.250 €“, „ab ca. 5 € im Monat“) und Entwürfe, die nicht bewertet werden.
+"""
+import unittest
+
+import scripts.metadaten_wache as w
+
+GOOD = """---
+title: "Strom sparen: Ratgeber für den Alltag"
+description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."
+date: 2026-09-01T06:00:00Z
+lastmod: 2026-09-02
+draft: false
+quellen:
+  - titel: "Quelle"
+    url: "https://example.org"
+kurzantwort: "Kurze, belastbare Antwort."
+faktencheck: "2026-10-01"
+cover:
+  image: "images/covers/gut.jpg"
+  alt: "Titelbild Strom sparen"
+---
+
+Im Text stehen 360 € im Jahr als Beleg.
+"""
+
+
+def rules(text, pill_fn=None, cover_exists=None, rel="content/posts/x/index.md"):
+    found = w.check_document(rel, text, cover_exists=cover_exists or (lambda p: True),
+                             pill_fn=pill_fn)
+    return sorted({f["rule"] for f in found})
+
+
+class MetadatenWacheTests(unittest.TestCase):
+    def test_sauberer_artikel_hat_keinen_befund(self):
+        self.assertEqual(rules(GOOD), [])
+
+    def test_titel_ueber_60_zeichen_ist_befund(self):
+        text = GOOD.replace('title: "Strom sparen: Ratgeber für den Alltag"',
+                            'title: "Strom sparen: Der sehr große Ratgeber für niedrige Energiekosten im Haushalt"')
+        self.assertIn("M1", rules(text))
+
+    def test_pillar_titel_mit_72_zeichen_ist_befund(self):
+        # Realer Befund: Pillar „Frugalismus“ vor der Kürzung
+        text = GOOD.replace('title: "Strom sparen: Ratgeber für den Alltag"',
+                            'title: "Haushaltsbudget & Frugalismus: Der große Ratgeber für finanzielle Puffer"')
+        self.assertIn("M1", rules(text))
+
+    def test_description_zu_lang_und_zu_kurz(self):
+        long_ = GOOD.replace("Mit einfachen Rechenbeispielen für jeden Haushalt.",
+                             "Mit einfachen Rechenbeispielen für jeden Haushalt und noch mehr Details dazu.")
+        self.assertIn("M2", rules(long_))
+        short = GOOD.replace('description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+                             'description: "Zu kurz."')
+        self.assertIn("M2", rules(short))
+
+    def test_lastmod_vor_date_ist_befund(self):
+        self.assertIn("M3", rules(GOOD.replace("lastmod: 2026-09-02", "lastmod: 2026-08-01")))
+
+    def test_veroeffentlicht_ohne_quelle_und_kurzantwort(self):
+        text = GOOD.replace('quellen:\n  - titel: "Quelle"\n    url: "https://example.org"\n', "quellen: []\n")
+        text = text.replace('kurzantwort: "Kurze, belastbare Antwort."\n', "")
+        self.assertEqual(rules(text), ["M4"])
+
+    def test_entwurf_wird_nicht_als_veroeffentlicht_bewertet(self):
+        text = GOOD.replace("draft: false", "draft: true").replace(
+            'kurzantwort: "Kurze, belastbare Antwort."\n', "").replace("quellen:", "quellen_x:")
+        self.assertEqual(rules(text), [])
+
+    def test_cover_datei_fehlt(self):
+        self.assertIn("M4", rules(GOOD, cover_exists=lambda p: False))
+
+    def test_zahlenversprechen_ohne_einheit_im_text_ist_befund(self):
+        # „Schritt 5“ im Text belegt kein „5 € im Monat“
+        text = GOOD.replace('---\n\nIm Text stehen 360 € im Jahr als Beleg.',
+                            '---\n\nSchritt 5 erklärt den Ablauf.')
+        text = text.replace('title: "Strom sparen: Ratgeber für den Alltag"',
+                            'title: "Strom sparen: Ratgeber für den Alltag"\nsavings: "ab ca. 5 € im Monat"')
+        self.assertIn("M6", rules(text, pill_fn=lambda t, d, e: e))
+
+    def test_zahlenversprechen_mit_einheit_im_text_ist_belegt(self):
+        text = GOOD.replace('title: "Strom sparen: Ratgeber für den Alltag"',
+                            'title: "Strom sparen: Ratgeber für den Alltag"\nsavings: "bis zu 360 € im Jahr sparen"')
+        self.assertNotIn("M6", rules(text, pill_fn=lambda t, d, e: e))
+
+    def test_claim_in_body_verlangt_einheit(self):
+        self.assertTrue(w._claim_in_body("360", "bis zu 360 € sparen", "Du sparst 360 € im Jahr."))
+        self.assertFalse(w._claim_in_body("5", "ab ca. 5 € im Monat", "Schritt 5 und 5 Fehler."))
+        self.assertTrue(w._claim_in_body("40", "bis zu 40 % sparen", "bis zu **40&nbsp;%** sparst"))
+
+    def test_eindeutigkeit_ueber_veroeffentlichte_dokumente(self):
+        found = w.check_uniqueness([("a.md", "Gleich", "d1"), ("b.md", "Gleich", "d2")])
+        self.assertEqual({f["rule"] for f in found}, {"M5"})
+        self.assertEqual(len(found), 2)
+
+    def test_selbsttest_ist_gruen(self):
+        self.assertEqual(w.run_selftest(), 0)
+
+
+if __name__ == "__main__":
+    unittest.main()

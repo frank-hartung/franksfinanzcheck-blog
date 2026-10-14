@@ -1,7 +1,7 @@
 ---
-lastmod: 2026-09-02
+lastmod: 2026-10-14
 title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-description: "Frugalismus-Tipps mit System: Die 50-30-20-Regel als Kompass, fünf Alltagshacks und eine Fallstudie mit bis zu 450 € Ersparnis im Monat."
+description: "Frugalismus-Tipps mit System: Die 50-30-20-Regel als Kompass, fünf Alltagshacks und eine Fallstudie mit rund 380 € Ersparnis im Monat."
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen", "Haushaltsbuch führen"]
@@ -19,7 +19,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
 pin_title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, fünf Hacks für den Alltag und eine Fallstudie mit bis zu 450 € Ersparnis pro Monat. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geld #sparen"
+pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, fünf Hacks für den Alltag und eine Fallstudie mit rund 380 € Ersparnis pro Monat. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geld #sparen"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

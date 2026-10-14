@@ -685,7 +685,10 @@ def ensure_pillar_covers(force=False, only=None):
                                   savings_m.group(1) if savings_m else None)
         design = {"v": DESIGN_VERSION, "badge": badge, "savings": savings or ""}
         manifest = load_manifest()
-        drift = manifest.get(slug, {}).get("design") != design
+        # Drift = Design-Fingerprint ODER Titel: Ein geänderter Titel muss das
+        # Cover neu rendern – sonst zeigt das JPG den alten Text (Bugfix 14.10.2026).
+        drift = (manifest.get(slug, {}).get("design") != design
+                 or manifest.get(slug, {}).get("title") != title)
         out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
         if force or not os.path.exists(out_path) or drift:
             make_cover(title, slug, out_path, force=force or drift,
@@ -772,7 +775,10 @@ def main():
                                   desc_m.group(1) if desc_m else "",
                                   savings_m.group(1) if savings_m else None)
         design = {"v": DESIGN_VERSION, "badge": badge, "savings": savings or ""}
-        design_drift = load_manifest().get(slug, {}).get("design") != design
+        # Drift = Design-Fingerprint ODER Titel (Titeländerung rendert neu).
+        _entry = load_manifest().get(slug, {})
+        design_drift = (_entry.get("design") != design
+                        or _entry.get("title") != title)
         out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
         if force or only_slug or not os.path.exists(out_path) or design_drift:
             make_cover(title, slug, out_path,
