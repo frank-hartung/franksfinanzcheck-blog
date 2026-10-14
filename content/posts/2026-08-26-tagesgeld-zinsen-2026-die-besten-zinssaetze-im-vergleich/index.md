@@ -64,7 +64,7 @@ Die wichtigsten Merkmale im Überblick (Stand: Oktober 2026):
 - **Kein Kursrisiko** – im Vergleich zu Aktien oder ETFs schwankt der Wert deines Guthabens nicht
 - **Variable Verzinsung** – die Bank kann den Zinssatz je nach Marktlage anpassen
 - **Kostenlose Kontoführung** – bei den meisten seriösen Anbietern fallen keine Gebühren an
-- **Gesetzliche Einlagensicherung** – Schutz bis zu 100.000 € pro Kunde innerhalb der EU
+- **Gesetzliche [Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/)** – Schutz bis zu 100.000 € pro Kunde innerhalb der EU
 
 ## Warum Tagesgeld 2026 (wieder) sinnvoll ist
 
@@ -203,7 +203,7 @@ Reich wirst du mit Tagesgeld nicht. Es gibt dir aber Geld in Reichweite und Ruhe
 
 Bewährt hat sich ein Modell mit mehreren Konten. Du nutzt das Tagesgeldkonto dabei nicht als einen Topf, sondern als drei:
 
-- **Konto A:** Der eiserne Notgroschen (wird nur im Notfall angefasst).
+- **Konto A:** Der eiserne [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) (wird nur im Notfall angefasst).
 - **Konto B (oder Unterkonto):** Jährliche Fixkosten wie Kfz-Steuer, Versicherungen oder GEZ.
 - **Konto C:** Sparen auf ein konkretes Konsumziel.
 

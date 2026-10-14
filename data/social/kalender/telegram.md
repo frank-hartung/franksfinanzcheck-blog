@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 13.10.2026 21:54 (Europe/Berlin)  
+> Automatisch aktualisiert: 14.10.2026 12:19 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -13,8 +13,8 @@
 ## Kommende Beiträge
 
 ### So, 25. Oktober 2026
-- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
+- **07:00** ⏳ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/
 
 ## Zuletzt veröffentlicht
 

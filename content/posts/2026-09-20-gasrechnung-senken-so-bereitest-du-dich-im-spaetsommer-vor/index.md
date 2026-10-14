@@ -84,7 +84,7 @@ Bei einer Zentralheizung im Mehrfamilienhaus läuft der Gasvertrag meist über d
 
 | Situation | Dein direkter Hebel |
 |---|---|
-| Eigener Gaszähler und Liefervertrag | Verbrauch, Tarif, Abschlag, Anbieterwechsel |
+| Eigener Gaszähler und Liefervertrag | Verbrauch, Tarif, Abschlag, [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) |
 | Zentrale Heizung im Mietshaus | Verbrauch, Heizkostenabrechnung, Vorauszahlung, Mängelmeldung |
 | Gas in Nebenkostenpauschale | Vertrag und Mietvereinbarung prüfen |
 
@@ -197,7 +197,7 @@ Vergleiche mit deinem echten Jahresverbrauch. Achte auf:
 
 - Gesamtpreis mit und ohne Bonus,
 - Arbeitspreis und Grundpreis,
-- Laufzeit und Kündigungsfrist,
+- Laufzeit und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
 - Umfang der Preisgarantie,
 - monatliche Zahlung statt Vorkasse.
 
@@ -251,7 +251,7 @@ Prüfe gleichzeitig, ob Anfang und Ende dieselbe Einheit verwenden. Der Gaszähl
 
 Zahle einen unstrittigen Betrag nicht einfach gar nicht. Bei einer strittigen Forderung hilft eine individuelle Beratung, damit Mahnung und Versorgungsrisiko nicht unnötig wachsen. Bewahre Einwendung und Versandnachweis auf.
 
-Auch ein ungewohnt hoher Verbrauch kann korrekt abgelesen sein. Kontrolliere dann Zeitraum, Bewohnerzahl, Wetter, Warmwasser und technische Auffälligkeiten. Läuft der Zähler weiter, obwohl nachweislich kein Gasgerät aktiv sein sollte, greifst du nicht selbst in die Anlage ein. Dokumentiere die Beobachtung und verständige Vermieter, Versorger oder Fachbetrieb.
+Auch ein ungewohnt hoher Verbrauch kann korrekt abgelesen sein. Kontrolliere dann Zeitraum, Bewohnerzahl, Wetter, [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) und technische Auffälligkeiten. Läuft der Zähler weiter, obwohl nachweislich kein Gasgerät aktiv sein sollte, greifst du nicht selbst in die Anlage ein. Dokumentiere die Beobachtung und verständige Vermieter, Versorger oder Fachbetrieb.
 
 Hefte die Antwort zur Abrechnung. So bleibt der Vorgang auch beim nächsten Jahreswechsel nachvollziehbar.
 

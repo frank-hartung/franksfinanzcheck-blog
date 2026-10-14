@@ -210,7 +210,7 @@ FRITZ!Box: Internet → Zugangsdaten → DNS-Server. Zuerst die bisherigen Adres
 48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-Dienste sind extra – sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen.
 
 
-Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen Tarifwechsel und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt.
+Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt.
 
 
 ## Extra: Wie der DNS-Server deinen Alltag beeinflusst

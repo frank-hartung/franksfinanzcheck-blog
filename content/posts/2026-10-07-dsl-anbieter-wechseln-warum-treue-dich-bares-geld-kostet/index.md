@@ -43,7 +43,7 @@ faktencheck: "2026-10-07"
 kurzantwort: "Vergleiche beim DSL-Wechsel den gesamten Preis, die Vertragslaufzeit, den Router und den Termin der Umstellung. Prüfe zuerst deinen Vertrag und beauftrage den neuen Anbieter mit der Koordination des Wechsels. Bewahre alle Bestätigungen auf."
 ---
 
-Ein DSL-Vertrag läuft leicht weiter, obwohl sich deine Nutzung geändert hat. Ein Wechsel kann passen, muss aber nicht automatisch Geld sparen. Prüfe erst Preis, Leistung und Ablauf. Dann kannst du entscheiden, ob ein neuer Anbieter zu deinem Haushalt passt.
+Ein DSL-Vertrag läuft leicht weiter, obwohl sich deine Nutzung geändert hat. Ein Wechsel kann passen, muss aber nicht automatisch [Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/). Prüfe erst Preis, Leistung und Ablauf. Dann kannst du entscheiden, ob ein neuer Anbieter zu deinem Haushalt passt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -115,11 +115,11 @@ Ein Wechsel ist kein Grund, jede Zusatzleistung anzunehmen. Fernsehen, Sicherhei
 
 ## Was bereitest du zu Hause vor?
 
-Prüfe, welche Geräte du mit dem Internet verbindest. Notiere, wo der Router steht und welche Geräte per Kabel laufen. Ein Tarifwechsel löst nicht jedes WLAN-Problem. Wenn die Verbindung nur in einem Zimmer schwach ist, kann der Standort des Routers wichtiger sein als ein teurerer Vertrag.
+Prüfe, welche Geräte du mit dem Internet verbindest. Notiere, wo der Router steht und welche Geräte per Kabel laufen. Ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) löst nicht jedes WLAN-Problem. Wenn die Verbindung nur in einem Zimmer schwach ist, kann der Standort des Routers wichtiger sein als ein teurerer Vertrag.
 
 Frag, ob du deinen Router weiter nutzen kannst. Sichere Zugangsdaten und Anleitung, bevor du etwas zurücksetzt. Wenn der Anbieter ein neues Gerät schickt, lies, wann du es anschließen sollst. Heb auch das Rücksendeetikett und die Frist für den alten Router auf, falls du ihn zurückgeben musst.
 
-Sag den anderen Personen im Haushalt Bescheid. Ein Wechsel kann Telefon, Fernsehen oder weitere Dienste berühren. Prüfe, welche Funktionen du nutzt und ob sie im neuen Angebot enthalten sind. So vermeidest du Überraschungen am Tag der Umstellung.
+Sag den anderen Personen im Haushalt Bescheid. Ein Wechsel kann Telefon, Fernsehen oder weitere Dienste berühren. Prüfe, welche Funktionen du nutzt und ob sie im neuen Angebot enthalten sind. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Überraschungen am Tag der Umstellung.
 
 ## Was machst du, wenn der Wechsel stockt?
 

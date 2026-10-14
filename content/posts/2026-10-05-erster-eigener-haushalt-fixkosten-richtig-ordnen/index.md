@@ -135,7 +135,7 @@ Dieser Trick klingt banal und wirkt sofort. Die Verbraucherzentrale beschreibt d
 
 Der erste Puffer muss nicht groß sein. Er muss existieren. Fang mit einem Betrag an, der eine kaputte Waschmaschine oder eine unerwartete Fahrt abdeckt, ohne dass du einen Kredit brauchst.
 
-Ein eigenes Konto für diesen Zweck hilft, weil es nicht im Alltag sichtbar ist. Wähle ein Konto, das du nicht täglich öffnest, und überweise einen festen Betrag. Auch kleine Beträge bauen auf, wenn der Rhythmus stimmt.
+Ein eigenes Konto für diesen Zweck hilft, weil es nicht im Alltag sichtbar ist. Wähle ein Konto, das du nicht täglich öffnest, und überweise einen festen Betrag. Auch [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) bauen auf, wenn der Rhythmus stimmt.
 
 Den Unterschied zwischen Kontoführung und Kosten findest du im [Ratgeber Girokonto der Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990). Für den Puffer zählt vor allem, dass er nicht durch Gebühren und Kartenkosten aufgezehrt wird.
 

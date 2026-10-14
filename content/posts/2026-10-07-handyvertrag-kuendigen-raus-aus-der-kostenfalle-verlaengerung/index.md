@@ -82,7 +82,7 @@ Prüfe auch die Bestätigung vor dem Klick.
 
 Die Bundesnetzagentur erklärt, welche Angaben zu Laufzeit und Kündigung in den Vertragsunterlagen wichtig sind. Ihre [Informationen zum Vertrag](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html) sind ein guter Start. Wenn du danach noch unsicher bist, lass dir den Beendigungszeitpunkt vom Anbieter bestätigen.
 
-Wenn dein Vertrag mehrere Leistungen bündelt, prüfe jede einzeln. Dazu können eine zweite SIM, ein Datenpaket oder ein Gerät gehören. Notiere, was weiterlaufen soll und was enden soll. So vermeidest du, dass du eine Leistung kündigst, die du behalten möchtest.
+Wenn dein Vertrag mehrere Leistungen bündelt, prüfe jede einzeln. Dazu können eine zweite SIM, ein Datenpaket oder ein Gerät gehören. Notiere, was weiterlaufen soll und was enden soll. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du, dass du eine Leistung kündigst, die du behalten möchtest.
 
 ## Wie kündigst du und behältst einen Nachweis?
 
@@ -144,7 +144,7 @@ Wenn du ein neues Telefon möchtest, vergleiche den Gesamtpreis mit einem Tarif 
 
 ## Wie wechselst du, ohne deine Rufnummer zu verlieren?
 
-Wenn du deine Nummer behalten möchtest, beauftrage die Mitnahme beim neuen Anbieter. Prüfe, dass die richtige Nummer im Auftrag steht und du eine Bestätigung bekommst. Anbieterwechsel und Rufnummernmitnahme sind in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) geregelt.
+Wenn du deine Nummer behalten möchtest, beauftrage die Mitnahme beim neuen Anbieter. Prüfe, dass die richtige Nummer im Auftrag steht und du eine Bestätigung bekommst. [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) und Rufnummernmitnahme sind in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) geregelt.
 
 Kündige den alten Vertrag nicht vorschnell selbst, wenn du zu einem neuen Anbieter wechselst. Die Bundesnetzagentur empfiehlt, den neuen Anbieter mit der Koordination zu beauftragen. Ihre [Informationen zum Vertrag und Anbieterwechsel](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html) erläutern die nötigen Angaben. So können beide Anbieter den Übergang abstimmen.
 

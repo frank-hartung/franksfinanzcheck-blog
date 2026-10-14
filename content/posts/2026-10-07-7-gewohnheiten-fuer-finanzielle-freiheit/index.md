@@ -38,7 +38,7 @@ quellen:
 faktencheck: "2026-10-07"
 ---
 
-7 Gewohnheiten für finanzielle Freiheit im Check: Finanzielle Freiheit klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
+7 Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: Finanzielle Freiheit klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -107,7 +107,7 @@ Die Verbraucherzentrale rät ebenfalls dazu, regelmäßige Kosten zu sichten und
 
 Eine Rücklage schützt vor dem Zwang, jede Überraschung sofort über einen Kredit zu lösen. Lege sie getrennt vom Alltagskonto ab, damit du ihren Zweck erkennst. Wie viel du brauchst, hängt von deiner Lage ab.
 
-Die Verbraucherzentrale nennt zwei bis drei Netto-Monatsgehälter als mögliche Orientierung für einen Notgroschen. Das ist ein Richtwert, kein Gesetz. Lies die [Einordnung der Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610) dazu.
+Die Verbraucherzentrale nennt zwei bis drei Netto-Monatsgehälter als mögliche Orientierung für einen [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/). Das ist ein Richtwert, kein Gesetz. Lies die [Einordnung der Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610) dazu.
 
 Lege außerdem fest, wann du die Rücklage nutzen willst. Eine notwendige Reparatur kann dazu gehören.
 
@@ -141,11 +141,11 @@ Achte auch auf Abos, Raten und Zusatzschutz. Ein kleiner Einzelbetrag kann über
 
 ## 6. Automatisiere nur einen tragbaren Betrag
 
-Ein Dauerauftrag kann eine gute Absicht in eine Routine verwandeln. Aber nur, wenn der Betrag zu deinem echten Spielraum passt. Richte ihn lieber nach vorhandenen Rücklagen und deinen regelmäßigen Ausgaben ein, statt dich in eine neue Verbindlichkeit zu treiben. So bleibt die Automatik ein Werkzeug, das dich entlastet – und kein zusätzlicher Druck, der dich aus dem Überblick wirft.
+Ein [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) kann eine gute Absicht in eine Routine verwandeln. Aber nur, wenn der Betrag zu deinem echten Spielraum passt. Richte ihn lieber nach vorhandenen Rücklagen und deinen regelmäßigen Ausgaben ein, statt dich in eine neue Verbindlichkeit zu treiben. So bleibt die Automatik ein Werkzeug, das dich entlastet – und kein zusätzlicher Druck, der dich aus dem Überblick wirft.
 
 Du kannst mehrere Ziele getrennt halten: Notfälle, eine geplante Anschaffung oder eine Reise. So bleibt sichtbar, wofür das Geld gedacht ist.
 
-Ein Tagesgeldkonto kann für kurzfristig verfügbare Rücklagen infrage kommen. Prüfe die Bedingungen, den Zugriff und den Schutz des Guthabens selbst.
+Ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) kann für kurzfristig verfügbare Rücklagen infrage kommen. Prüfe die Bedingungen, den Zugriff und den Schutz des Guthabens selbst.
 
 Ein Produkt ist nicht automatisch passend, nur weil es einen Zinssatz nennt.
 

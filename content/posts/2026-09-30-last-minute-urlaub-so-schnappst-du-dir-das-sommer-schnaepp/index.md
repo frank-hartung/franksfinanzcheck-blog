@@ -117,7 +117,7 @@ Dieses Geld fehlt dir dann im Urlaub. Prüfe also vorher, wie hoch dein Limit is
 
 Teuer sind auch die Extras am Schalter. Ein Navi oder ein Kindersitz kostet pro Tag mehr, als viele denken. Schau außerdem in deine Kreditkarte: Oft ist eine Vollkasko für Mietwagen schon dabei.
 
-**Faustregel:** Sollte die geforderte Kaution ca. 30 % der gesamten Reisekosten überschreiten, ist ein Anbieterwechsel meist wirtschaftlich sinnvoll.
+**Faustregel:** Sollte die geforderte Kaution ca. 30 % der gesamten Reisekosten überschreiten, ist ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) meist wirtschaftlich sinnvoll.
 
 ### Tipps zur Kostenreduktion
 

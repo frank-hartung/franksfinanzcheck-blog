@@ -56,7 +56,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - **15 Minuten:** Rechnung und Vertrag prüfen.
 - **10 Minuten:** Zählerstand und Zählernummer sichern.
 - **25 Minuten:** Heizkörper, Thermostate und Wärmeverluste kontrollieren.
-- **10 Minuten:** Aufgaben in selbst erledigen, Fachbetrieb und Tarifwechsel sortieren.
+- **10 Minuten:** Aufgaben in selbst erledigen, Fachbetrieb und [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) sortieren.
 - Nutze keine pauschalen Werte für Druck oder Vorlauftemperatur.
 - Rechne Einsparungen nicht doppelt und versprich dir keinen festen Eurobetrag.
 
@@ -111,7 +111,7 @@ Dieser Wert ist dein Start in die Saison. Lies danach einmal im Monat ab. So sie
 
 ### Der Nachtwert ist nur ein Hinweis
 
-Gasverbrauch über Nacht ist in der Heizperiode normal. Warmwasser und Raumheizung laufen schließlich weiter. Ein einzelner Wert beweist weder einen Defekt noch Verschwendung. Erst der Verlauf im Vergleich mit Nutzung und Wetter sagt wirklich etwas aus.
+Gasverbrauch über Nacht ist in der Heizperiode normal. [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) und Raumheizung laufen schließlich weiter. Ein einzelner Wert beweist weder einen Defekt noch Verschwendung. Erst der Verlauf im Vergleich mit Nutzung und Wetter sagt wirklich etwas aus.
 
 ## Minute 25 bis 50: Rundgang durch die Räume
 

@@ -153,7 +153,7 @@ Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summie
 
 ## Warum du nicht bis zur letzten Woche warten solltest
 
-Hektik ist beim Tarifwechsel ein schlechter Ratgeber. Wer erst kurz vor Ende der Kündigungsfrist sucht, übersieht oft das Kleingedruckte.
+Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der Kündigungsfrist sucht, übersieht oft das Kleingedruckte.
 
 Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:
 
@@ -210,7 +210,7 @@ Ein Anbieterwechsel läuft 2026 dank klarer Regeln und digitaler Prozesse meist 
 
 ### Typischer Ablauf
 
-1. Vertragslaufzeit und Kündigungsfrist des aktuellen Anschlusses prüfen.
+1. [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) und Kündigungsfrist des aktuellen Anschlusses prüfen.
 2. Unabhängigen Tarifvergleich durchführen und Effektivpreis berechnen.
 3. Neuen Wunschtarif inklusive Bonus auswählen.
 4. Den Wechselauftrag online beim neuen Anbieter einreichen (dieser kündigt in der Regel für dich).
