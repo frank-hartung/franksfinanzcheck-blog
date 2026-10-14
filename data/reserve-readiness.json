@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 11,
-  "pool_size": 11,
-  "generated_at": "2026-10-14T09:07:20Z",
+  "ready": 9,
+  "pool_size": 9,
+  "generated_at": "2026-10-14T18:35:45Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -19,40 +19,6 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
-      "ready": true,
-      "sha256": "2eb4aaeeaba61d89ff1bbc62a4e338819959c9a4759a75796de70025cb568d72",
-      "flesch": 62.5,
-      "measured_at": "2026-10-14T08:59:11Z",
-      "score": 0.984,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
-      "ready": true,
-      "sha256": "453160bfde9c704a7f2df745705ba843e7bb97ec5aebbf624d44c5eab236f767",
-      "flesch": 61.0,
-      "measured_at": "2026-10-14T09:00:07Z",
-      "score": 0.95,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
       }
     },
     {
@@ -193,8 +159,13 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "38538341065",
+    "kind": "partial",
+    "run_id": "38616183448",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-10-14T18:35:45Z",
+    "renewed": [],
+    "tool": "scripts/reserve_recert.py"
   }
 }
