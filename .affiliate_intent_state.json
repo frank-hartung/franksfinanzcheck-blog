@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13 11:19:52 UTC",
+ "generated_at": "2026-10-14 09:12:25 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 95,
@@ -10,7 +10,7 @@
   {
    "code": "IW4",
    "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
-   "line": 174,
+   "line": 182,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -21,7 +21,7 @@
   {
    "code": "IW2",
    "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
-   "line": 174,
+   "line": 182,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -32,7 +32,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-   "line": 149,
+   "line": 181,
    "route": "mietwagen",
    "slot": "end",
    "owner": "human",
@@ -43,7 +43,7 @@
   {
    "code": "IW4",
    "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 16,
+   "line": 14,
    "route": "strom",
    "slot": "top",
    "owner": "human",
@@ -54,7 +54,7 @@
   {
    "code": "IW4",
    "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 46,
+   "line": 42,
    "route": "strom",
    "slot": "mid",
    "owner": "human",
@@ -65,7 +65,7 @@
   {
    "code": "IW4",
    "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 118,
+   "line": 113,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -76,7 +76,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
-   "line": 88,
+   "line": 100,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -98,7 +98,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
-   "line": 154,
+   "line": 159,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
