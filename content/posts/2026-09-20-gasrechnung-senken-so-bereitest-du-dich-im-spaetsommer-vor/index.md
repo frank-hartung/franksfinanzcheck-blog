@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-10
-title: "Gasrechnung prüfen: Fehler finden und Nachzahlungen"
+title: "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden"
 description: "Gasrechnung prüfen statt nur auf die Endsumme schauen: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter."
 date: 2026-09-25T12:15:37Z
 draft: false
@@ -16,7 +16,7 @@ ai_generated: false
 inspiration: "Heizperiode vorbereiten im Spätsommer"
 cover:
   image: "images/covers/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor.jpg"
-  alt: "Gasrechnung senken: So bereitest du dich im Spätsommer vor"
+  alt: "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Prüfe vor der Heizperiode fünf Punkte: Abrechnungszeitraum, Anfangs- und Endzählerstand, Verbrauch in kWh, Arbeits- und Grundpreis sowie verbuchte Abschläge. Nur Haushalte mit eigenem Gasvertrag können den Anbieter selbst wechseln. Bei zentraler Heizung kontrollierst du Heizkostenabrechnung, Verbrauchswerte und Vorauszahlungen und meldest technische Mängel dem Vermieter."
 quellen:

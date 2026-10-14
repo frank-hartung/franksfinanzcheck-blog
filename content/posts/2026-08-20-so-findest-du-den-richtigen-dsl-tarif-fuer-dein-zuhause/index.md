@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
-title: "So findest du den richtigen: DSL-Tarif für dein Zuhause"
-description: "DSL Tarif finden: Welcher DSL-Tarif passt wirklich? Dieser Ratgeber zeigt dir, wie viel Bandbreite du brauchst, wie du den 24-Monats-Preis rechnest und welche…"
+title: "DSL-Tarif für dein Zuhause: Das passende Angebot finden"
+description: "DSL-Tarif finden: Prüfe deinen Bandbreitenbedarf, den Effektivpreis über 24 Monate und Routerkosten, damit das Angebot zu deinem Haushalt passt."
 date: 2026-09-18T19:09:52Z
 draft: false
 tags: ["DSL-Vergleich"]
@@ -12,7 +12,7 @@ author: "Frank Hartung"
 ai_generated: false
 cover:
   image: "images/covers/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.jpg"
-  alt: "So findest du den richtigen DSL-Tarif für dein Zuhause"
+  alt: "DSL-Tarif für dein Zuhause: Das passende Angebot finden"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Den passenden DSL-Tarif findest du nicht über die größte Werbezahl, sondern über deinen echten Bedarf. Für 1 bis 2 Personen reichen oft 50 bis 100 Mbit/s, Familien und Homeoffice-Haushalte fahren meist mit 100 bis 250 Mbit/s gut. Rechne immer den Effektivpreis über 24 Monate, sonst verstecken sich dort schnell 250 € bis 400 € Mehrkosten."
 

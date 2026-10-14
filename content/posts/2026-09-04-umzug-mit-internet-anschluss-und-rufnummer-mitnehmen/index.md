@@ -1,6 +1,6 @@
 ---
 title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
-description: "Beim Umzug entscheidet die Reihenfolge über zwei Wochen ohne Internet. Wie du Anschluss und Rufnummer mitnimmst und wo die Kosten sitzen."
+description: "Umzug mit Internet: Prüfe Verfügbarkeit, Fristen und Rufnummernmitnahme früh. So planst du den Wechsel und verringerst das Risiko einer Anschlusslücke."
 date: 2026-09-04T06:10:00Z
 lastmod: 2026-10-13
 draft: false

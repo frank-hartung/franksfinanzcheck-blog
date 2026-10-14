@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
-title: "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet"
-description: "So wechselst du Internet und DSL ohne Stress: Effektivpreis sauber rechnen, Ausfallzeiten vermeiden und Bonus, Router sowie Laufzeit richtig prüfen."
+title: "Internet & DSL wechseln: So gelingt der Anbieterwechsel"
+description: "So kannst du DSL wechseln, ohne Stress: Rechne den Effektivpreis, vermeide Ausfallzeiten und prüfe Bonus, Router und Laufzeit vor dem Anbieterwechsel."
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
@@ -12,7 +12,7 @@ author: "Frank Hartung"
 ai_generated: false
 cover:
   image: "images/covers/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel.jpg"
-  alt: "Internet & DSL wechseln: Praxis-Tipps für den Anbieterwechsel"
+  alt: "Internet & DSL wechseln: So gelingt der Anbieterwechsel"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwaltungsprozess, kein Technikdrama. Wer Effektivpreis, Bonus, Routerkosten und Laufzeit sauber vergleicht, spart über 24 Monate oft mehrere hundert Euro. Wichtig ist vor allem, den Wechsel möglichst über den neuen Anbieter laufen zu lassen und nicht nur auf die erste Rabattphase zu schauen."
 
