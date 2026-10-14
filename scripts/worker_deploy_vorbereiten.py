@@ -45,7 +45,7 @@ WORKER: dict[str, dict] = {
     },
     "klick-zaehler": {
         "verzeichnis": "cloudflare/klick-zaehler",
-        "ersatz": {"EINTRAGEN-NACH-wrangler-d1-create": ("D1_DATABASE_ID_KLICKS", D1_ID)},
+        "ersatz": {"EINTRAGEN-NACH-wrangler-d1-create": ("D1_DATABASE_ID", D1_ID)},
         "test": ["node", "--test", "test/worker.test.mjs"],
         "nur_manuell": False,
     },

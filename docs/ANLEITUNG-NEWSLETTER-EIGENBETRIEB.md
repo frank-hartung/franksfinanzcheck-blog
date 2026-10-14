@@ -188,7 +188,7 @@ Repository → **Settings → Secrets and variables → Actions**:
 | `NEWSLETTER_HASH_KEY` | Secret | 32+ Zeichen, zufällig (`openssl rand -hex 32`). Schlüssel der Empfänger-Hashes im Journal (HMAC statt ungesalzenem SHA-256, Audit H-04). Einmal setzen, **nie** wechseln – sonst greift der Duplikatsschutz einen Tag lang nicht. |
 | `KV_NAMESPACE_ID_ABO` | Variable | ID des KV-Namespace `ABO` (kein Geheimnis) – für Worker-Deploy und verschlüsseltes Backup |
 | `CF_WORKERS_DEPLOY_TOKEN` | Secret im Environment `cloudflare-produktion` | eigener Cloudflare-Token nur für Worker-Deploys (nicht der Workers-AI-Token) |
-| `CLOUDFLARE_ACCOUNT_ID` | Secret im Environment `cloudflare-produktion` | Konto-ID |
+| `CLOUDFLARE_ACCOUNT_ID` | Secret (vorhanden) | Konto-ID – das bestehende Repo-Secret wird auch für den Worker-Deploy genutzt |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | optional | nur wenn `NEWSLETTER_TRANSPORT=smtp` |
 | `NEWSLETTER_TRANSPORT` | Variable, optional | `smtp` (Default: `resend`) |
 

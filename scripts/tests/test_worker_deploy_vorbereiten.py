@@ -28,7 +28,7 @@ class Selbsttest(unittest.TestCase):
 
     def test_platzhalter_werden_mit_gueltigen_ids_ersetzt(self):
         umgebung = {"KV_NAMESPACE_ID_ABO": "0123456789abcdef0123456789abcdef",
-                    "D1_DATABASE_ID_KLICKS": "01234567-89ab-cdef-0123-456789abcdef"}
+                    "D1_DATABASE_ID": "01234567-89ab-cdef-0123-456789abcdef"}
         for name in ("newsletter-worker", "klick-zaehler"):
             ok, gruende, text = wdv.pruefe(name, umgebung)
             self.assertTrue(ok, f"{name}: {gruende}")

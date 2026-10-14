@@ -8,16 +8,17 @@
 #    · Jeder Deploy braucht die Freigabe im Environment
 #      `cloudflare-produktion` (Required reviewer, nur Branch main).
 #    · Ressourcen-IDs kommen aus Repository-Variablen (keine Geheimnisse):
-#      KV_NAMESPACE_ID_ABO (Newsletter), D1_DATABASE_ID_KLICKS (Klick-Zähler).
+#      KV_NAMESPACE_ID_ABO (Newsletter), D1_DATABASE_ID (Klick-Zähler).
 #      Fehlt eine ID, wird der Worker nicht deployt (Hinweis statt Fehler).
 #    · `workers_dev = false` ist Pflicht (scripts/worker_deploy_vorbereiten.py).
 #    · Vor dem Deploy laufen die Worker-Tests.
 #
-#  Secrets im Environment `cloudflare-produktion`:
-#    CF_WORKERS_DEPLOY_TOKEN  – eigener API-Token NUR für Worker-Deploys
-#                               (Workers Scripts: Edit, Workers KV: Edit,
-#                               D1: Edit, Workers Routes: Edit – eine Zone)
-#    CLOUDFLARE_ACCOUNT_ID    – Konto-ID
+#  Secrets:
+#    CF_WORKERS_DEPLOY_TOKEN  – im Environment `cloudflare-produktion`: eigener
+#                               API-Token NUR für Worker-Deploys (Vorlage
+#                               „Edit Cloudflare Workers“ + D1: Edit, nur
+#                               dieses Konto und die Zone franksfinanzcheck.de)
+#    CLOUDFLARE_ACCOUNT_ID    – Konto-ID (das vorhandene Repo-Secret genügt)
 #  Der Workers-AI-Token CLOUDFLARE_API_TOKEN wird hier bewusst NICHT benutzt.
 #
 #  Der KI-Assistent wird nur von Hand deployt (M-04: bewusst aus).
@@ -91,7 +92,7 @@ jobs:
           AUSWAHL: ${{ inputs.worker }}
           GEAENDERT: ${{ steps.diff.outputs.dateien }}
           KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
-          D1_DATABASE_ID_KLICKS: ${{ vars.D1_DATABASE_ID_KLICKS }}
+          D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
         run: |
           python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_deploy_vorbereiten.py --plan
@@ -145,7 +146,7 @@ jobs:
         env:
           WORKER: ${{ matrix.worker }}
           KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
-          D1_DATABASE_ID_KLICKS: ${{ vars.D1_DATABASE_ID_KLICKS }}
+          D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
         run: python3 scripts/worker_deploy_vorbereiten.py --vorbereiten "$WORKER"
 
       - name: Manifest-Wache (package.json & Lockfile vor npm ci)
