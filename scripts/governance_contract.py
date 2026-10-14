@@ -205,6 +205,16 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # von einem eingefrorenen Testdatum abhingen. Beide Wachen zusammen
           # machen „läuft an jedem Kalendertag" beweisbar statt gehofft.
           "selftest_clock.py", "selftest_runner.py",
+          # Dauerheilung #740 (14.10.2026, Vertrag C38): Die drei Wachen, die
+          # verhindern, dass ein WERKZEUG die oeffentliche Auslieferung
+          # blockiert – das Blustradius-Register (welcher Deploy-Schritt darf
+          # ueberhaupt anhalten?), der gemeinsame Meldeweg fuer
+          # Werkzeugbefunde und die Messketten-Wache (kein Messlauf ohne sein
+          # Werkzeug). Eine Wache, die niemand verlangt, fuehrt irgendwann
+          # niemand aus – deshalb stehen ihre Selbsttests im vertraglichen
+          # Minimum (C6).
+          "blustradius_register.py", "werkzeugbefund.py",
+          "measurement_chain.py",
           # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 2 des
           # Vorfall-Berichts): Beweis und Visite des Doktors sind jetzt
           # getrennt – sein --selftest ist ein reiner Logik-Beweis (kein
@@ -2025,6 +2035,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
         wflows=wflows)
     checks += c37_befund_hat_einen_schliespfad(
         script_texts, wflows, root=root, python_bin=python_bin, quick=quick)
+    checks += c38_werkzeug_blockiert_nie(script_texts, wflows, root=root,
+                                         python_bin=python_bin)
     return checks
 
 
@@ -2574,6 +2586,190 @@ def c37_befund_hat_einen_schliespfad(script_texts, wflows, root=BLOG_DIR,
                                   else f"Exit {lauf.returncode}")))
     return out
 
+
+# --- C38: Werkzeug blockiert nie die Auslieferung (#740, 14.10.2026) --------
+#
+# Befund: Zwischen 01:58 und 04:45 UTC am 14.10.2026 scheiterte der
+# `deploy`-Job zehnmal in Folge am Schritt „Quote-Nachfüllung nach
+# Gate-Verlust (Re-Queue + Reserve → Min)". Der Schritt steht VOR dem Upload
+# des Pages-Artefakts: Die Live-Site fror ein, obwohl kein einziger Artikel
+# beanstandet war. Die Ursache war ein fehlendes Wörterbuch – `hunspell` ist
+# in sechs Workflows installiert, im `deploy`-Job nie. Der Mess-Schritt
+# stürzte ab, der Exit-Code ging ungeprüft an GitHub, die Auslieferung starb
+# an einem WERKZEUG.
+#
+# Das ist nicht derselbe Fehler wie #676, sondern seine Klasse: C34 hat EINEN
+# Schritt (die Release-Scorecard) gelehrt, zwischen Inhalt und Werkzeug zu
+# unterscheiden. Die anderen 60 Schritte des Jobs haben es nie gelernt. Eine
+# Heilung, die nur den Schritt repariert, der gerade gebrannt hat, ist keine
+# Dauerheilung – sie ist eine Warteschlange.
+#
+# Der Vertrag in sechs Sätzen:
+#   a) REGISTER: Jeder Schritt des deploy-Jobs ist in
+#      `data/blustradius-deploy.yml` mit seiner Klasse deklariert
+#      (infra | inhalt | gate-selbsttest | werkzeug). Ein neuer Schritt ohne
+#      Eintrag ist ein Befund, kein Zufall.
+#   b) ZWEI AUSGÄNGE: Wer messen kann, wertet seinen Exit-Code aus. Exit 1 =
+#      Inhaltsbefund, stoppt hart. Alles andere = Werkzeugbefund, meldet und
+#      liefert weiter.
+#   c) EIN MELDEWEG: Werkzeugbefunde laufen über `scripts/werkzeugbefund.py`
+#      in EINEN Sammelkanal und EIN Output-Paar. Pro Schritt ein eigenes
+#      `*_werkzeugfehler`-Output zu bauen, ist die Copy-Paste-Klasse, die
+#      diesen Ausfall erzeugt hat.
+#   d) MESSKETTE: Kein Job ruft ein messendes Skript auf, ohne das Werkzeug
+#      vorher zu installieren (`measurement_chain.py --audit-workflows`), und
+#      der Mess-Einstieg fragt VOR dem ersten Kandidaten (Vorflug).
+#   e) URTEIL STATT FRAGE: Der Watchdog benennt bei einer Blockade die
+#      KLASSE des Schritts und sagt, was zu tun ist – ein Ticket, das fragt
+#      „darf das blockieren?", erzieht zum Wegsehen (Lektion WF-A535 #529).
+#   f) Regressionstest – ein Vertrag ohne Test ist Prosa.
+C38_REGISTER = os.path.join("data", "blustradius-deploy.yml")
+C38_MELDER = "werkzeugbefund.py"
+C38_WACHE = "blustradius_register.py"
+C38_MESSKETTE = "measurement_chain.py"
+C38_SAMMLER_ID = "id: werkzeugbefunde"
+C38_TESTS = ("test_blustradius_register.py", "test_werkzeugbefund.py",
+             "test_measurement_chain.py")
+
+
+def c38_werkzeug_blockiert_nie(script_texts, wflows, root=BLOG_DIR,
+                               python_bin=None):
+    out = []
+    bin_ = python_bin or "python3"
+    melder = (script_texts or {}).get(C38_MELDER, "")
+    wache = (script_texts or {}).get(C38_WACHE, "")
+    kette = (script_texts or {}).get(C38_MESSKETTE, "")
+    watchdog = (script_texts or {}).get("bot_watchdog.py", "")
+    release = (script_texts or {}).get("publication_release.py", "")
+    deploy = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == "deploy.yml":
+            deploy = inhalt or ""
+
+    # (a) Register ----------------------------------------------------------
+    if not os.path.isfile(os.path.join(root, C38_REGISTER)):
+        out.append(("C38", f"{C38_REGISTER} fehlt – ohne das Register weiß "
+                           "niemand, welcher Deploy-Schritt die Auslieferung "
+                           "anhalten DARF (#740)."))
+    if not wache:
+        out.append(("C38", f"scripts/{C38_WACHE} fehlt – das Register wäre "
+                           "Prosa ohne Prüfer (#740)."))
+    else:
+        for baustein, sinn in (
+                ("def pruefe(", "die Vollständigkeitsprüfung Register ↔ Workflow"),
+                ("def klassifiziere(", "die Klassenauskunft für den Watchdog"),
+                ("def urteil(", "das Urteil, das im Ticket steht"),
+                ("--check", "der CI-Aufruf"),
+                ("--selftest", "der Selbsttest (C6)")):
+            if baustein not in wache:
+                out.append(("C38", f"scripts/{C38_WACHE}: {baustein} fehlt – "
+                                   f"ohne {sinn} ist die Wache keine (#740)."))
+
+    # (b)+(c) Ein Meldeweg, ein Sammler, ein Output-Paar ---------------------
+    if not melder:
+        out.append(("C38", f"scripts/{C38_MELDER} fehlt – jeder Schritt baute "
+                           "sich seinen eigenen Meldeweg, und genau diese "
+                           "Copy-Paste-Klasse war der Ausfall (#740)."))
+    else:
+        if "--melden" not in melder or "--sammeln" not in melder:
+            out.append(("C38", f"scripts/{C38_MELDER}: --melden/--sammeln "
+                               "fehlen – der gemeinsame Kanal ist nicht "
+                               "benutzbar (#740)."))
+        if "return 0" not in melder and "SystemExit(0)" not in melder:
+            out.append(("C38", f"scripts/{C38_MELDER} kann mit != 0 enden – "
+                               "ein MELDER, der den Lauf abbricht, ist die "
+                               "Wiederholung des Befunds (#227/#740)."))
+    if deploy:
+        if C38_SAMMLER_ID not in deploy:
+            out.append(("C38", "deploy.yml: der Sammelschritt "
+                               "(`id: werkzeugbefunde`) fehlt – gemeldete "
+                               "Werkzeugbefunde erreichen das Siegel nicht "
+                               "(#740)."))
+        if "werkzeugbefunde_anzahl" not in deploy:
+            out.append(("C38", "deploy.yml: das Output-Paar der "
+                               "Werkzeugbefunde fehlt – `release-seal` kann "
+                               "sie nicht lesen (#740)."))
+        if "WERKZEUGBEFUNDE" not in deploy:
+            out.append(("C38", "deploy.yml: `release-seal` liest die "
+                               "Werkzeugbefunde nicht – ein Lauf mit totem "
+                               "Werkzeug bliebe still grün (#740)."))
+    else:
+        out.append(("C38", ".github/workflows/deploy.yml fehlt – der Vertrag "
+                           "ist nicht prüfbar."))
+
+    # (d) Messkette ---------------------------------------------------------
+    if not kette:
+        out.append(("C38", f"scripts/{C38_MESSKETTE} fehlt – dann misst "
+                           "wieder jeder Workflow nach Gedächtnis, ob er "
+                           "hunspell braucht (#740)."))
+    else:
+        for baustein, sinn in (("def status(", "die Laufzeit-Auskunft"),
+                               ("def require(", "der Vorflug vor dem ersten "
+                                                "Kandidaten"),
+                               ("def audit_workflows(", "die statische "
+                                                        "Vollständigkeit")):
+            if baustein not in kette:
+                out.append(("C38", f"scripts/{C38_MESSKETTE}: {baustein} fehlt "
+                                   f"– ohne {sinn} bleibt die Messkette eine "
+                                   f"Absichtserklärung (#740)."))
+        if "measurement_chain" not in release or "require(" not in release:
+            out.append(("C38", "publication_release.py fragt die Messkette "
+                               "nicht VOR der Nachfüllung – der Befund käme "
+                               "wieder als Traceback nach dem Hugo-Build "
+                               "(#740)."))
+    # Der echte Lauf: misst irgendwo jemand ohne Werkzeug?
+    pfad_kette = os.path.join(root, "scripts", C38_MESSKETTE)
+    if os.path.isfile(pfad_kette):
+        try:
+            lauf = subprocess.run([bin_, pfad_kette, "--audit-workflows"],
+                                  cwd=root, capture_output=True, text=True,
+                                  timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C38", f"Messketten-Audit nicht ausführbar "
+                               f"({exc.__class__.__name__}) – fail-closed."))
+        else:
+            if lauf.returncode != 0:
+                zeilen = [z.strip(" -") for z in (lauf.stdout or "").splitlines()
+                          if z.strip().startswith("-")]
+                out.append(("C38", "Messkette unvollständig: "
+                                   + (zeilen[0][:220] if zeilen
+                                      else f"Exit {lauf.returncode}")))
+
+    # Der echte Lauf: kennt das Register jeden Schritt?
+    pfad_wache = os.path.join(root, "scripts", C38_WACHE)
+    if os.path.isfile(pfad_wache):
+        try:
+            lauf = subprocess.run([bin_, pfad_wache, "--check"], cwd=root,
+                                  capture_output=True, text=True, timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C38", f"Blustradius-Register nicht prüfbar "
+                               f"({exc.__class__.__name__}) – fail-closed."))
+        else:
+            if lauf.returncode != 0:
+                zeilen = [z.strip(" -") for z in (lauf.stdout or "").splitlines()
+                          if z.strip().startswith("-")]
+                out.append(("C38", "Blustradius-Vertrag verletzt: "
+                                   + (zeilen[0][:220] if zeilen
+                                      else f"Exit {lauf.returncode}")))
+
+    # (e) Der Watchdog urteilt ----------------------------------------------
+    if "def blockade_klasse(" not in watchdog:
+        out.append(("C38", "bot_watchdog.py: `blockade_klasse()` fehlt – das "
+                           "Ticket könnte die Klasse des blockierenden "
+                           "Schritts nicht nennen und müsste wieder fragen "
+                           "(#740)."))
+    if "BLUSTRADIUS_KLASSE" not in watchdog:
+        out.append(("C38", "bot_watchdog.py: der Befund trägt die Klasse nicht "
+                           "als Beleg – ohne sie ist das Urteil nicht "
+                           "nachprüfbar (#740)."))
+
+    # (f) Regressionstests ---------------------------------------------------
+    for name in C38_TESTS:
+        if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
+            out.append(("C38", f"scripts/tests/{name} fehlt – der Vertrag "
+                               "„Werkzeug blockiert nie die Auslieferung“ "
+                               "wäre ungetestet (#740)."))
+    return out
 
 
 # --- C34: Auslieferung vor Siegel (Bot-Watchdog #676, 10.10.2026) ----------
@@ -4557,6 +4753,29 @@ RULE_TEXT = {
            "falschen Text für gültig (Prüfer und Heiler widersprachen sich). "
            "Regressionstest + Selbsttest/Wirkungsprobe laufen im Vertrag "
            "(Pinterest P8, #729, 13.10.2026).",
+    "C38": "Ein Werkzeugfehler blockiert nie die Auslieferung – und kein "
+           "Messlauf startet ohne sein Werkzeug. Am 14.10.2026 starb der "
+           "deploy-Job zehnmal in Folge an der Quote-Nachfuellung, weil im "
+           "Job `hunspell` fehlte (sechs Schwester-Workflows hatten es): ein "
+           "Mess-Schritt vor dem Pages-Upload fror die komplette Live-Site "
+           "ein, obwohl kein Artikel beanstandet war. C34 hatte diese Lehre "
+           "EINEM Schritt beigebracht, nicht dem Job. Jetzt: "
+           "data/blustradius-deploy.yml deklariert jeden Schritt des "
+           "deploy-Jobs mit Klasse (infra | inhalt | gate-selbsttest | "
+           "werkzeug) und Begruendung, scripts/blustradius_register.py "
+           "--check prueft Register gegen Workflow (ein neuer Schritt ohne "
+           "Eintrag ist ein Befund). Mess-Schritte werten ihren Exit-Code "
+           "aus: 1 = Inhaltsbefund (harter Stopp, fail-closed bleibt), alles "
+           "andere = Werkzeugbefund ueber den EINEN Meldeweg "
+           "scripts/werkzeugbefund.py in EIN Output-Paar, das `release-seal` "
+           "NACH der Veroeffentlichung rot macht. scripts/measurement_chain.py "
+           "ist die SSOT der Messkette und meldet per --audit-workflows jeden "
+           "Job, der ein Mess-Skript ohne vorherige Installation aufruft "
+           "(Fund dabei: frankautoops-report.yml mass den gesamten Bestand "
+           "taeglich ohne hunspell); publication_release.py fragt die Kette "
+           "im Vorflug, bevor der erste Kandidat gemessen wird. Der Watchdog "
+           "nennt die Klasse des blockierenden Schritts und urteilt, statt zu "
+           "fragen (Bot-Watchdog #740 Teil 2, 14.10.2026).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -4605,7 +4824,10 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C37": "Der Befund hat einen Schließpfad (Hashtag-Regel als eine "
                 "Quelle, P8 heilt an der Quelle, Wirkung am Bestand)",
          "C35": "Meldetakt an den Ausfall (stündliche Ausfall-Erkennung, "
-                "read-only-Takt, Stunden-Leiter statt 72-h-Schweigen)"}
+                "read-only-Takt, Stunden-Leiter statt 72-h-Schweigen)",
+         "C38": "Werkzeug blockiert nie die Auslieferung (Blustradius-Register "
+                "je Schritt, EIN Meldeweg für Werkzeugbefunde, Messkette vor "
+                "jedem Messlauf, Watchdog urteilt statt zu fragen)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -6142,7 +6364,69 @@ def _selftest():
             if "ungetestet" in f[1] or "fehlt" in f[1]]:
         failures.append("C37: eine fehlende Testdatei bleibt unentdeckt.")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C37 mit Kunstbefunden: Fehler "
+    # --- C38: Werkzeug blockiert nie die Auslieferung (#740) ---------------
+    # Der echte Baum muss still bleiben. Jede Sabotage stellt den Zustand vom
+    # 14.10.2026 wieder her: zehn rote Deploys hintereinander, Live-Stand
+    # eingefroren – wegen eines fehlenden Wörterbuchs.
+    c38_dateien = ("werkzeugbefund.py", "blustradius_register.py",
+                   "measurement_chain.py", "bot_watchdog.py",
+                   "publication_release.py")
+    echte_c38 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in c38_dateien}
+    echte_c38_befunde = c38_werkzeug_blockiert_nie(
+        echte_c38, wflows_echt, root=BLOG_DIR, python_bin=sys.executable)
+    if echte_c38_befunde:
+        failures.append(f"C38: der echte Zustand wird beanstandet: "
+                        f"{echte_c38_befunde}")
+    # (a) Der gemeinsame Meldeweg verschwindet – jeder Schritt bastelte sich
+    #     wieder seinen eigenen, und genau das war die Fehlerklasse.
+    ohne_melder = dict(echte_c38, **{"werkzeugbefund.py": ""})
+    if not [f for f in c38_werkzeug_blockiert_nie(
+            ohne_melder, wflows_echt, root=BLOG_DIR, python_bin=sys.executable)
+            if "werkzeugbefund.py" in f[1]]:
+        failures.append("C38: ein fehlender gemeinsamer Meldeweg bleibt "
+                        "unentdeckt (#740).")
+    # (b) Der Sammler fällt aus dem Deploy: gemeldete Werkzeugbefunde kämen
+    #     nie beim Siegel an – der Lauf wäre still grün.
+    ohne_sammler = dict(wflows_echt)
+    for pfad in list(ohne_sammler):
+        if os.path.basename(pfad) == "deploy.yml":
+            ohne_sammler[pfad] = ohne_sammler[pfad].replace(
+                C38_SAMMLER_ID, "id: irgendwas_anderes")
+    if not [f for f in c38_werkzeug_blockiert_nie(
+            echte_c38, ohne_sammler, root=BLOG_DIR, python_bin=sys.executable)
+            if "Sammelschritt" in f[1]]:
+        failures.append("C38: ein Deploy ohne Sammelschritt bleibt unentdeckt "
+                        "(#740).")
+    # (c) Der Release fragt die Messkette nicht mehr vorher: der Befund käme
+    #     wieder als Traceback nach dem Hugo-Build.
+    ohne_vorflug = dict(echte_c38, **{
+        "publication_release.py": echte_c38["publication_release.py"].replace(
+            "measurement_chain", "kein_vorflug")})
+    if not [f for f in c38_werkzeug_blockiert_nie(
+            ohne_vorflug, wflows_echt, root=BLOG_DIR, python_bin=sys.executable)
+            if "VOR der Nachfüllung" in f[1]]:
+        failures.append("C38: ein Release ohne Messketten-Vorflug bleibt "
+                        "unentdeckt (#740).")
+    # (d) Der Watchdog verliert die Klassenauskunft: sein Ticket müsste
+    #     wieder fragen, statt zu urteilen (Lektion WF-A535 #529).
+    ohne_klasse = dict(echte_c38, **{
+        "bot_watchdog.py": echte_c38["bot_watchdog.py"].replace(
+            "def blockade_klasse(", "def _stillgelegt(")})
+    if not [f for f in c38_werkzeug_blockiert_nie(
+            ohne_klasse, wflows_echt, root=BLOG_DIR, python_bin=sys.executable)
+            if "blockade_klasse" in f[1]]:
+        failures.append("C38: ein Watchdog ohne Klassenauskunft bleibt "
+                        "unentdeckt (#740).")
+    # (e) Der Regressionstest verschwindet: der Vertrag wäre wieder Prosa.
+    leerer_wurzel_c38 = tempfile.mkdtemp(prefix="c38-ohne-test-")
+    if not [f for f in c38_werkzeug_blockiert_nie(
+            echte_c38, wflows_echt, root=leerer_wurzel_c38,
+            python_bin=sys.executable)
+            if "ungetestet" in f[1]]:
+        failures.append("C38: eine fehlende Testdatei bleibt unentdeckt.")
+
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C38 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

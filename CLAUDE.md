@@ -1476,6 +1476,60 @@ Tests: `scripts/tests/test_publication_release_wache.py`
 Sektionen 4–6. Vorgangsbericht:
 `BOT-WATCHDOG-740-DAUERHEILUNG-PREMIUM-2026-10-14.md`.
 
+## Werkzeug blockiert nie die Auslieferung (C38, seit #740 Teil 2, 14.10.2026)
+
+Drei Stunden nach der ersten Heilung meldete der Watchdog #740 erneut: wieder
+eine eingefrorene Live-Site, wieder ein Mess-Schritt, der kein Inhalts-Gate
+ist. Die Lehre aus #676 war **einem** Schritt beigebracht worden (der
+Release-Scorecard), nicht dem Job. Von 64 Schritten des `deploy`-Jobs konnten
+60 die Auslieferung anhalten, ohne dass irgendwo stand, ob sie das dürfen. Eine
+Heilung, die nur den Schritt repariert, der gerade gebrannt hat, ist keine
+Dauerheilung – sie ist eine Warteschlange.
+
+- **Jeder Schritt kennt seinen Blustradius.** `data/blustradius-deploy.yml`
+  deklariert alle Schritte des `deploy`-Jobs mit Klasse und Begründung:
+  `infra` (ohne ihn gibt es keine Auslieferung) · `inhalt` (fachliches Gate,
+  darf hart stoppen) · `gate-selbsttest` (fail-closed gewollt) · `werkzeug`
+  (Mess-/Melde-Schritt, **darf nie** blockieren). `scripts/blustradius_register.py
+  --check` prüft Register gegen Workflow: ein neuer Schritt ohne Eintrag ist
+  ein Befund, kein Zufall – und ein `werkzeug`-Schritt, der hart aussteigt,
+  ebenfalls.
+- **Ein Meldeweg für alle.** `scripts/werkzeugbefund.py --melden <schritt>
+  <grund>` schreibt in EINEN Sammelkanal, der Sammelschritt
+  (`id: werkzeugbefunde`, vor dem Artefakt-Upload) macht daraus EIN Output-Paar
+  (`werkzeugbefunde`, `werkzeugbefunde_anzahl`), und `release-seal` macht den
+  Lauf **nach** der Veröffentlichung rot. Pro Schritt ein eigenes
+  `*_werkzeugfehler`-Output zu bauen, war die Copy-Paste-Klasse hinter dem
+  Ausfall; der Melder endet grundsätzlich mit Exit 0 (#227).
+- **Kein Messlauf ohne sein Werkzeug.** `scripts/measurement_chain.py` ist die
+  SSOT der Messkette (Binary, Wörterbuch, Installationszeile).
+  `--audit-workflows` liest ALLE Workflows und meldet jeden Job, der ein
+  registriertes Mess-Skript aufruft, ohne die Kette vorher im selben Job zu
+  installieren (`--selftest`-Aufrufe zählen nicht: Selbsttests laufen mit
+  Attrappen, vgl. KI-Probe #138). Das hat sofort einen zweiten, unsichtbaren
+  Fall gefunden: `frankautoops-report.yml` maß die Qualitätskennzahl des
+  **gesamten Bestands** täglich ohne `hunspell` – jeder Artikel fiel still auf
+  „Rechtschreibung unbekannt" zurück. Eine tote Messung ist gefährlicher als
+  keine: Sie liefert eine Zahl.
+- **Der Vorflug fragt vorher.** `refill_to_min()` ruft `measurement_chain.require()`
+  VOR dem ersten Kandidaten: Der Befund heißt dann „hunspell fehlt,
+  Installation: `sudo apt-get install -y -qq hunspell hunspell-de-de`" (Exit 3),
+  statt nach Vorheilung und Hugo-Build als Traceback aufzuschlagen.
+- **Der Watchdog urteilt, statt zu fragen.** `bot_watchdog.blockade_klasse()`
+  schlägt den blockierenden Schritt im Register nach; das Ticket nennt die
+  Klasse und den nächsten Schritt (Werkzeug → Exit-Code auswerten und melden ·
+  Inhalt → Fachkanal, kein Catchup · Infra → erst Werkzeug, dann Catchup ·
+  unbekannt → Register nachtragen). Ein Ticket, das fragt „darf das
+  blockieren?", erzieht zum Wegsehen (WF-A535 #529).
+- Tests: `scripts/tests/test_blustradius_register.py` (19 – inkl. Ausführung der
+  ECHTEN `run`-Blöcke aus `deploy.yml` gegen Attrappen),
+  `scripts/tests/test_measurement_chain.py` (23),
+  `scripts/tests/test_werkzeugbefund.py` (7).
+
+Vertrag: **C38** in `governance_contract.py` (Register vollständig · zwei
+Ausgänge · ein Meldeweg · Messkette verdrahtet · Watchdog urteilt ·
+Regressionstest) – mit fünf Sabotageproben im Kontrakt-Selbsttest.
+
 ## Meldetakt an den Ausfall (C35, seit #676 Teil 2, 10.10.2026)
 
 C34 baute den Befund `deploy-blockade`. Gesehen hat ihn trotzdem niemand: Der

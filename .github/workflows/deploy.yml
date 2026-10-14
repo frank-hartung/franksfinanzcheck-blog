@@ -350,6 +350,11 @@ jobs:
       # die Auslieferung nicht mehr (C34) – sie werden NACH der
       # Veröffentlichung vom Siegel rot gewertet (Dauerheilung #676).
       refill_werkzeugfehler: ${{ steps.quote_refill.outputs.werkzeugfehler }}
+      # C38 (#740 Teil 2): EIN Sammel-Output für alle Werkzeugbefunde des
+      # Laufs – jeder künftige Mess-Schritt meldet hier hinein, statt
+      # einen eigenen Output + eine eigene Siegel-Zeile zu brauchen.
+      werkzeugbefunde: ${{ steps.werkzeugbefunde.outputs.werkzeugbefunde }}
+      werkzeugbefunde_anzahl: ${{ steps.werkzeugbefunde.outputs.werkzeugbefunde_anzahl }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
@@ -798,26 +803,55 @@ jobs:
       # Konvergenz, danach prüft die Scorecard unten unverändert hart.
       #
       # KEIN `|| true`, KEIN continue-on-error: Exit 1 bleibt rot und stoppt
-      # den Deploy, Exit 2 (Werkzeugfehler) greift bewusst nicht – eine
-      # ausgefallene Messung ist kein Grün (C33). Isoliert wird Content,
-      # deshalb übernimmt der bestehende Gate-Diff-Pfad unten Commit und
-      # Rebuild; die finalen Veröffentlichungs-Gates sehen den neuen Stand.
+      # den Deploy. Isoliert wird Content, deshalb übernimmt der bestehende
+      # Gate-Diff-Pfad unten Commit und Rebuild; die finalen
+      # Veröffentlichungs-Gates sehen den neuen Stand.
       # Runbook: docs/ANLEITUNG-AUSLIEFERUNGS-ISOLATION.md
+      #
+      # DAUERHEILUNG #740 TEIL 2 (14.10.2026) – WERKZEUGZWEIG GETRENNT:
+      # Bis hierher reichte der Schritt seinen Exit-Code unevaluiert durch
+      # (`exit "$iso"`). Damit blockierte auch Exit 2 die Auslieferung –
+      # und Exit 2 heißt ausdrücklich „Werkzeugfehler, Messung nicht
+      # führbar", nicht „Inhalt nicht freigabefähig". Ein kaputtes
+      # Messwerkzeug fror so die gesamte Live-Site ein, exakt die Klasse
+      # aus #676 (Scorecard) und #740 (Quote-Nachfüllung).
+      # Jetzt gilt der Haus-Vertrag C38:
+      #   Exit 0 → weiter
+      #   Exit 1 → INHALTSBEFUND: harter Stopp, nichts Ungeprüftes geht live
+      #   sonst  → WERKZEUGBEFUND: Meldung an `release-seal`, Auslieferung
+      #            läuft weiter, Lauf wird NACH der Veröffentlichung rot
+      # Das Gleiche gilt für den eigenen Selbsttest: Eine Isolation, die
+      # sich nicht selbst beweisen kann, greift nicht – aber sie nimmt die
+      # Welt auch nicht als Geisel. Blockierte Kandidaten bleiben dann
+      # ungeparkt; die Release-Scorecard unten urteilt unverändert hart.
       - name: Auslieferungs-Isolation (blockierte Kandidaten → hold, Quote → Min)
+        id: isolation
         run: |
           set -uo pipefail
           if ! python3 scripts/release_isolation.py --selftest; then
-            echo "::error title=Auslieferungs-Isolation::Selbsttest rot – die Isolation darf nicht blind greifen (fail-closed)."
-            exit 2
+            python3 scripts/werkzeugbefund.py --melden "auslieferungs-isolation" \
+              "Selbsttest der Isolation rot – sie darf nicht blind greifen und blieb für diesen Lauf aus. Blockierte Kandidaten wurden nicht geparkt; die Release-Scorecard urteilt unverändert hart." \
+              || true
+            exit 0
           fi
+          set +e
           python3 scripts/release_isolation.py --commit-sha "$GITHUB_SHA" --runden 3
           iso=$?
-          if [ "$iso" -eq 1 ]; then
-            echo "::error title=Auslieferungs-Isolation::Nach 3 Runden bleiben Kandidaten blockiert – Deploy stoppt ehrlich, nichts Ungeprüftes geht live."
-          elif [ "$iso" -eq 2 ]; then
-            echo "::error title=Auslieferungs-Isolation::Werkzeugfehler – Messung nicht führbar, Deploy stoppt fail-closed (kein Scheingrün)."
-          fi
-          exit "$iso"
+          set -e
+          case "$iso" in
+            0)
+              echo "✅ Auslieferungs-Isolation: Deploy-Scope sauber (keine blockierten Kandidaten offen)."
+              ;;
+            1)
+              echo "::error title=Auslieferungs-Isolation::Nach 3 Runden bleiben Kandidaten blockiert – Deploy stoppt ehrlich, nichts Ungeprüftes geht live."
+              exit 1
+              ;;
+            *)
+              python3 scripts/werkzeugbefund.py --melden "auslieferungs-isolation" \
+                "Werkzeugfehler (Exit $iso) – die Isolation ist nicht messbar und hat nichts geparkt. Das ist KEIN Inhaltsbefund (der wäre Exit 1 und stoppt weiterhin hart)." \
+                || true
+              ;;
+          esac
 
       # Bestands-Sicherheitsnetz: publish_gate prüft Kandidaten des heutigen
       # Slots. Diese zweite Wache prüft ALLE tatsächlich veröffentlichten
@@ -1055,14 +1089,41 @@ jobs:
           python3 scripts/ff_voice_audio.py --engines || true
 
       - name: Kostensperre belegen (vor jeder Geldflaeche)
+        id: kostensperre
         # WARUM VOR DER VERTONUNG (03.10.2026)
         # Dieser Job reicht ELEVENLABS_API_KEY durch. Frueher genuegte
         # ein gesetztes Secret, damit kostenpflichtig vertont wird – ein
         # vergessenes Secret waere eine monatliche Rechnung ohne
         # Fehlermeldung gewesen. Jetzt entscheidet data/kostensperre.yaml,
         # und dieser Schritt beweist, dass der Riegel verdrahtet ist,
-        # BEVOR der teure Schritt laeuft. Fail-closed: Exit 1 stoppt.
-        run: python3 scripts/kostensperre.py --pruefen
+        # BEVOR der teure Schritt laeuft.
+        #
+        # DAUERHEILUNG #740 TEIL 2 (14.10.2026) – FAIL-CLOSED FÜR DAS GELD,
+        # NICHT FÜR DIE AUSLIEFERUNG:
+        # Bis hierher war dieser Schritt `python3 … --pruefen` ohne
+        # Auswertung. Ein roter Riegel hat damit die komplette öffentliche
+        # Auslieferung eingefroren – wegen einer KOSTENWACHE für eine
+        # Zusatzfläche (Vorlese-Audio), die gleich darunter ohnehin
+        # `continue-on-error` trägt. Das ist dieselbe Geiselhaftung wie
+        # #676/#740, nur mit anderem Werkzeug.
+        # Der Riegel bleibt vollständig fail-closed: Ist er nicht belegt,
+        # läuft die kostenpflichtige Vertonung NICHT (`if:`-Bedingung am
+        # Schritt darunter). Aber der Blog geht raus, und der Lauf wird
+        # nach der Veröffentlichung rot (Job `release-seal`).
+        run: |
+          set +e
+          python3 scripts/kostensperre.py --pruefen
+          sperre=$?
+          set -e
+          if [ "$sperre" -eq 0 ]; then
+            echo "gesperrt=false" >> "$GITHUB_OUTPUT"
+            echo "✅ Kostensperre belegt – die Geldfläche ist ordentlich verriegelt."
+          else
+            echo "gesperrt=true" >> "$GITHUB_OUTPUT"
+            python3 scripts/werkzeugbefund.py --melden "kostensperre" \
+              "Kostensperre nicht belegt (Exit $sperre) – die kostenpflichtige Vertonung bleibt für diesen Lauf AUS (fail-closed fürs Geld). Die Auslieferung läuft weiter: eine Kostenwache für eine Zusatzfläche darf die Live-Site nicht einfrieren." \
+              || true
+          fi
 
       - name: Vorlese-Tonspuren erzeugen (männlich, DE+EN ohne Umschalter – ElevenLabs Premium, kostenloser Fallback)
         # WANDUHR FÜR DEN SCHLIMMSTEN FALL (Härtung 10.09.2026):
@@ -1077,6 +1138,10 @@ jobs:
         # Livegang verzögern, aber nie verhindern.
         timeout-minutes: 120
         continue-on-error: true
+        # #740 Teil 2: Ist der Kostenriegel nicht belegt, läuft die
+        # Geldfläche gar nicht erst an – das ersetzt den harten Abbruch
+        # des Schritts davor, ohne die Auslieferung zu opfern.
+        if: steps.kostensperre.outputs.gesperrt != 'true'
         env:
           # Das Secret wird weiter durchgereicht – aber es allein kann
           # nichts mehr ausloesen. Der Schreibschutz in
@@ -1225,6 +1290,43 @@ jobs:
           test -s public/pagefind/pagefind-entry.json
           echo "Suchindex: $(find public/pagefind -type f | wc -l) Dateien, $(du -sh public/pagefind | cut -f1)"
 
+      # ============ WERKZEUGBEFUNDE EINSAMMELN (C38, #740 Teil 2) ==========
+      # EIN Meldeweg statt drei Sonderwege: Jeder Mess-Schritt, der an einem
+      # kaputten Werkzeug scheitert, meldet über
+      # `scripts/werkzeugbefund.py --melden`. Hier – als LETZTER Schritt vor
+      # der Auslieferung – wird daraus ein Job-Output, den `release-seal`
+      # NACH der Veröffentlichung rot färbt.
+      #
+      # Warum nicht je Schritt ein eigener Output? Weil genau diese Bauweise
+      # #740 erzeugt hat: Für die Scorecard (#676) und die Quote-Nachfüllung
+      # (#740) wurde der Dreiklang „Output deklarieren · im Siegel auswerten ·
+      # Blustradius erklären" je einzeln von Hand gebaut. Wer den vierten
+      # Mess-Schritt baut, soll nur noch EINE Zeile brauchen.
+      #
+      # Die beiden historischen Outputs bleiben unverändert bestehen (ihr
+      # Vertrag ist getestet) – sie werden hier zusätzlich eingesammelt,
+      # damit das Siegel EIN vollständiges Bild hat.
+      # Dieser Schritt darf selbst niemals röten: Ein Melder, der am Melden
+      # scheitert, ist die Schadensklasse #227.
+      - name: Werkzeugbefunde einsammeln (Material für das Siegel)
+        id: werkzeugbefunde
+        env:
+          SCORECARD_WERKZEUGFEHLER: ${{ steps.scorecard.outputs.werkzeugfehler }}
+          SCORECARD_EXIT: ${{ steps.scorecard.outputs.exit_code }}
+          REFILL_WERKZEUGFEHLER: ${{ steps.quote_refill.outputs.werkzeugfehler }}
+        run: |
+          set +e
+          if [ "${SCORECARD_WERKZEUGFEHLER:-false}" = "true" ]; then
+            python3 scripts/werkzeugbefund.py --melden "release-scorecard" \
+              "Produktionswahrheit nicht messbar (Exit ${SCORECARD_EXIT:-unbekannt}) – Siegel fehlt für diesen Stand (#676)."
+          fi
+          if [ "${REFILL_WERKZEUGFEHLER:-false}" = "true" ]; then
+            python3 scripts/werkzeugbefund.py --melden "quote_refill" \
+              "Quote-Nachfüllung nicht messbar – Refill blieb aus (#740). Ein echtes Tagesdefizit meldet publication_check/Endkontrolle."
+          fi
+          python3 scripts/werkzeugbefund.py --sammeln
+          exit 0
+
       - name: Deploy auf gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -1349,6 +1451,8 @@ jobs:
           SCORECARD_EXIT: ${{ needs.deploy.outputs.scorecard_exit }}
           SCORECARD_WERKZEUGFEHLER: ${{ needs.deploy.outputs.scorecard_werkzeugfehler }}
           REFILL_WERKZEUGFEHLER: ${{ needs.deploy.outputs.refill_werkzeugfehler }}
+          WERKZEUGBEFUNDE: ${{ needs.deploy.outputs.werkzeugbefunde }}
+          WERKZEUGBEFUNDE_ANZAHL: ${{ needs.deploy.outputs.werkzeugbefunde_anzahl }}
         run: |
           set -uo pipefail
           echo "## 🧾 Auslieferungs-Siegel (#676)" >> "$GITHUB_STEP_SUMMARY"
@@ -1360,6 +1464,7 @@ jobs:
           echo "| Auslieferungs-Artefakt | ${ARTEFAKT_OK:-nicht bestätigt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Release-Scorecard Exit | ${SCORECARD_EXIT:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Quote-Nachfüllung Werkzeugfehler | ${REFILL_WERKZEUGFEHLER:-nein} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Werkzeugbefunde (C38) | ${WERKZEUGBEFUNDE_ANZAHL:-0} |" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
           # Verdrängter Lauf (Issue #218): Ein `cancelled` ist gewolltes
@@ -1387,6 +1492,15 @@ jobs:
 
           if [ "$SCORECARD_WERKZEUGFEHLER" = "true" ]; then
             echo "::error::Release-Scorecard meldete einen WERKZEUGFEHLER (Exit ${SCORECARD_EXIT:-unbekannt}). Die Auslieferung ist bewusst weitergelaufen (Dauerheilung #676), das Siegel fehlt damit für diesen Stand – Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md"
+            fehler=1
+          fi
+
+          # C38 (#740 Teil 2): Der Sammelkanal. Jeder Mess-Schritt, der über
+          # `scripts/werkzeugbefund.py --melden` einen Werkzeugfehler
+          # gemeldet hat, steht hier – die Auslieferung ist bewusst
+          # weitergelaufen, das Siegel fehlt für diesen Stand.
+          if [ -n "${WERKZEUGBEFUNDE:-}" ]; then
+            echo "::error::Werkzeugbefunde in diesem Lauf (${WERKZEUGBEFUNDE_ANZAHL:-?}): ${WERKZEUGBEFUNDE}. Die Auslieferung lief bewusst weiter (C34/C38: ein kaputtes Messwerkzeug nimmt die Live-Site nicht als Geisel), das Siegel fehlt damit für diesen Stand. Heilung: das benannte Werkzeug reparieren – NICHT den Deploy blockieren."
             fehler=1
           fi
 

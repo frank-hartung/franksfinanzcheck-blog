@@ -1,0 +1,424 @@
+# ===========================================================================
+#  BLUSTRADIUS-REGISTER DER AUSLIEFERUNG  (Vertrag C38, Dauerheilung #740)
+# ===========================================================================
+#
+#  WOFÜR DIESE DATEI DA IST
+#  ------------------------
+#  Zweimal innerhalb von fünf Tagen hat ein KAPUTTES MESSWERKZEUG die
+#  gesamte öffentliche Auslieferung eingefroren:
+#
+#    · 09.10.2026 (#676) – „Release-Scorecard (fail-closed)" starb an einem
+#      Mess-Befund. 20 Läufe rot, 19 h 38 min ohne Auslieferung, 42 Live-
+#      Artikel auf dem Vortagsstand.
+#    · 14.10.2026 (#740) – „Quote-Nachfüllung nach Gate-Verlust" starb daran,
+#      dass im deploy-Job `hunspell` fehlte. 10 Läufe rot, kein Artikel live.
+#
+#  Beide Male war die Heilung richtig – und beide Male war sie EINE ZEILE in
+#  EINEM Schritt. Der deploy-Job hat 63 Schritte. Ein Vertrag, der nur für
+#  die zwei Schritte gilt, an denen es schon gebrannt hat, ist kein Vertrag,
+#  sondern eine Narbe.
+#
+#  Dieses Register kehrt die Beweislast um: JEDER Schritt des deploy-Jobs
+#  erklärt hier, was sein rotes Ergebnis BEDEUTET – und damit, ob er die
+#  öffentliche Auslieferung anhalten darf. Ein neuer Schritt ohne Eintrag
+#  macht `scripts/blustradius_register.py --check` rot (fail-closed): Wer
+#  einen Schritt in den Auslieferungsweg stellt, trifft die Blustradius-
+#  Entscheidung bewusst, nicht aus Versehen.
+#
+#  DIE VIER KLASSEN
+#  ----------------
+#    infra            Ohne diesen Schritt gibt es nichts auszuliefern
+#                     (Checkout, Abhängigkeiten, Hugo, Build, Upload).
+#                     Rot = es existiert kein Veröffentlichungsstand.
+#                     → darf blockieren.
+#
+#    inhalt           Inhalts-Gate. Rot = der Bestand ist fachlich nicht
+#                     freigabefähig. Genau dafür ist es da.
+#                     → darf (und muss) blockieren.
+#
+#    gate-selbsttest  Lauffähigkeits-Beweis eines Inhalts-Gates. Rot = das
+#                     Gate kann nicht urteilen, der Bestand wäre ungeprüft.
+#                     Fail-closed ist hier bewusst: Nicht-Messen ist kein
+#                     Grün (C2/C33). Das Feld `schuetzt:` nennt das Gate.
+#                     → darf blockieren.
+#
+#    werkzeug         Messung, Bericht, Siegel, Kostenwache – ein Schritt
+#                     OHNE Inhaltsentscheid. Rot = ein Werkzeug ist kaputt.
+#                     Ein kaputtes Werkzeug ist kein Grund, die Welt nicht
+#                     mehr zu beliefern (C34: erst liefern, dann siegeln).
+#                     → darf NIEMALS blockieren. Der Befund geht als
+#                       Werkzeugbefund an den Job `release-seal` und färbt
+#                       den Lauf NACH der Veröffentlichung rot.
+#
+#  DAS FELD `werkzeugzweig`
+#  ------------------------
+#  Manche Inhalts-Gates unterscheiden selbst zwischen Inhaltsbefund und
+#  Werkzeugfehler (eigener Exit-Code). Wo das Werkzeug diese Auskunft gibt,
+#  MUSS der Schritt sie auswerten: `werkzeugzweig: 2` heißt „Exit 2 dieses
+#  Schritts ist ein Werkzeugfehler und darf die Auslieferung nicht
+#  blockieren". Die Wache prüft, dass der Zweig existiert, dass er nicht
+#  hart beendet und dass er den Befund meldet.
+#
+#  PFLEGE
+#  ------
+#  `name:` ist der WIRKSAME Schrittname, wie GitHub Actions ihn parst und
+#  wie ihn die Jobs-API (und damit der Bot-Watchdog) zurückgibt. Ein ` #`
+#  in einem YAML-Klartext beginnt einen Kommentar – darum endet z. B. der
+#  Keyword-Gate-Name hier vor „#303". Die Wache vergleicht exakt; eine
+#  Umbenennung im Workflow ist ein roter Befund, kein stilles Durchrutschen.
+#
+#  Prüfen:   python3 scripts/blustradius_register.py --check
+#  Tabelle:  python3 scripts/blustradius_register.py --tabelle
+#  Probe:    python3 scripts/blustradius_register.py --selftest
+# ===========================================================================
+
+workflow: .github/workflows/deploy.yml
+job: deploy
+artefakt_schritt: Artefakt für offizielles Pages-Deployment hochladen
+beleg_schritt: Auslieferungs-Artefakt bestätigen (Beleg für das Siegel)
+siegel_job: release-seal
+# Sammelstelle: EIN Mechanismus für alle Werkzeugbefunde des Laufs.
+# Jeder werkzeug-Schritt meldet hierhin, ein Sammler-Schritt macht daraus
+# den Job-Output, den `release-seal` liest.
+befund_helfer: scripts/werkzeugbefund.py
+befund_sammler: Werkzeugbefunde einsammeln (Material für das Siegel)
+befund_output: werkzeugbefunde
+
+schritte:
+  - name: Repository auschecken
+    klasse: infra
+    grund: Ohne Arbeitskopie gibt es keinen Stand, der ausgeliefert werden könnte.
+
+  - name: Merge-Marker-Schutz
+    klasse: inhalt
+    grund: >-
+      Konfliktmarker im Baum sind ein echter Inhaltsbefund – sie würden
+      wörtlich auf der Seite landen.
+
+  - name: Manifest-Schutz (package.json & Lockfile – fail-closed)
+    klasse: inhalt
+    grund: >-
+      Ein manipuliertes Manifest ist ein Lieferketten-Befund; er darf nicht
+      gebaut werden.
+
+  - name: Py-Abhängigkeiten für Gate-Chain
+    klasse: infra
+    grund: >-
+      Hier entsteht die Messkette (inkl. hunspell, Dauerheilung #740). Ohne
+      sie kann KEIN Gate messen – das ist kein Werkzeugbefund eines
+      einzelnen Schritts, sondern eine leere Werkbank.
+
+  - name: Design-Varianten – Produktionswache (fail-closed)
+    klasse: inhalt
+    grund: Eine kaputte Variantenwahl ist eine kaputte Seite.
+
+  - name: Themenwelten – Quellvertrag (sechs Themen, saubere Texte)
+    klasse: inhalt
+    grund: Quellvertrag der Themenwelten – Befund ist fachlich gemeint.
+
+  - name: Fixkosten-Kompass – Quell- und Datenschutzvertrag
+    klasse: inhalt
+    grund: >-
+      Datenschutz- und Quellvertrag eines Produkts – rot heißt: nicht
+      ausliefern.
+
+  - name: Werkzeuge – Quell- und Datenschutzvertrag
+    klasse: inhalt
+    grund: >-
+      Datenschutz- und Quellvertrag eines Produkts – rot heißt: nicht
+      ausliefern.
+
+  - name: Robustheit – Laufzeit-Fangnetze (fail-closed)
+    klasse: inhalt
+    grund: C31-Robustheitsvertrag der ausgelieferten Laufzeit.
+
+  - name: H1-Wache – Quell- und Layoutvertrag (genau eine H1)
+    klasse: inhalt
+    grund: Überschriftenstruktur der Quelle – Barrierefreiheits-Befund.
+
+  - name: URL-Hygiene-Selbsttest (Heiler muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: URL-Hygiene-Gate (Leerzeichen-URLs selbstheilend)
+    grund: Ein blinder Heiler darf keine URLs anfassen.
+
+  - name: URL-Hygiene-Gate (Leerzeichen-URLs selbstheilend)
+    klasse: inhalt
+    grund: Kaputte URLs sind ein Inhaltsbefund mit Suchmaschinen-Folgen.
+
+  - name: URL-Hygiene – deterministisch heilbare holds entblocken
+    klasse: inhalt
+    grund: Entscheidet über den Veröffentlichungsstatus einzelner Artikel.
+
+  - name: Hold-Selbsttest (reife Holds erkennen, sonst kein Build)
+    klasse: gate-selbsttest
+    schuetzt: Hold-Requeue (geheilte Holds → Re-Queue, kein Direkt-Publish)
+    grund: Ohne lauffähige Reifeprüfung würden Holds blind freigegeben.
+
+  - name: Hold-Requeue (geheilte Holds → Re-Queue, kein Direkt-Publish)
+    klasse: inhalt
+    grund: Entscheidet über den Veröffentlichungsstatus einzelner Artikel.
+
+  - name: Kadenz-Selbsttest (Gate muss lauffähig sein, sonst kein Build)
+    klasse: gate-selbsttest
+    schuetzt: Kadenz-Gate (Mo/Mi/Fr, 2–3/Tag – heilt Verstöße, Report)
+    grund: Ein blindes Kadenz-Gate würde Artikel ohne Prüfung live stellen.
+
+  - name: Kadenz-Gate (Mo/Mi/Fr, 2–3/Tag – heilt Verstöße, Report)
+    klasse: inhalt
+    grund: Publikationsvertrag Mo/Mi/Fr – der Befund ist fachlich gemeint.
+
+  - name: Titel-Gate (R1–R5, inkl. Truncation-Wächter, selbstheilend)
+    klasse: inhalt
+    grund: Titelqualität des Bestands – selbstheilend, Befund bleibt fachlich.
+
+  - name: Cover-Gate (Varianten, Stale, Brand, C4 Text-Komplettheit – selbstheilend)
+    klasse: inhalt
+    grund: Bildwahrheit und Markenfläche – ein Befund gehört nicht live.
+
+  - name: Keyword-Gate (Premium
+    klasse: inhalt
+    grund: >-
+      Keyword-Vertrag (Premium #303). Der Name endet hier, weil YAML den
+      Rest ab „ #" als Kommentar liest – GitHub zeigt ihn genauso an.
+
+  - name: Draft-Link-Selbsttest (Gate muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)
+    grund: Ein blinder Entlinker würde gute Links zerstören.
+
+  - name: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)
+    klasse: inhalt
+    grund: Links auf Entwürfe sind tote Links – Inhaltsbefund.
+
+  - name: FM-Grenzen-Selbsttest (Wache muss lauffähig sein, sonst kein Build)
+    klasse: gate-selbsttest
+    schuetzt: FM-Gate (Frontmatter-Grenzen – selbstheilend, VOR dem Build)
+    grund: Ohne lauffähige Wache würde Frontmatter ungeprüft gebaut.
+
+  - name: FM-Gate (Frontmatter-Grenzen – selbstheilend, VOR dem Build)
+    klasse: inhalt
+    grund: Frontmatter-Grenzen entscheiden über Darstellung und Snippets.
+
+  - name: Taxonomie-Selbsttest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Taxonomie-Gate (Tags kanonisieren – selbstheilend, VOR dem Build)
+    grund: Eine blinde Kanonisierung würde Taxonomien verschmieren.
+
+  - name: Taxonomie-Gate (Tags kanonisieren – selbstheilend, VOR dem Build)
+    klasse: inhalt
+    grund: Tag-Flächen sind indexierte Seiten – Befund ist fachlich gemeint.
+
+  - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+    klasse: infra
+    grund: Ohne Hugo gibt es keinen Build und damit nichts auszuliefern.
+
+  - name: Build (für Publish-Gate + Publish)
+    klasse: infra
+    grund: Der Build IST der Auslieferungsstand.
+
+  - name: H1-Wache – gebaute Seiten (jede Seite genau eine H1)
+    klasse: inhalt
+    grund: Gebaute Seiten mit kaputter Überschriftenstruktur gehen nicht live.
+
+  - name: Index-Hygiene-Selbsttest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Index-Hygiene-Gate (Crawl-Fläche gegen Budget)
+    grund: Ohne lauffähige Wache bliebe die Crawl-Fläche ungemessen.
+
+  - name: Index-Hygiene-Gate (Crawl-Fläche gegen Budget)
+    klasse: inhalt
+    grund: Crawl-Budget-Überschreitung ist ein echter Veröffentlichungsbefund.
+
+  - name: GSC-Verifikations-Selbsttest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: GSC-Verifikations-Gate (Besitznachweis, robots.txt, Sitemap, Canonical)
+    grund: Ohne lauffähige Wache ginge der Besitznachweis ungeprüft live.
+
+  - name: GSC-Verifikations-Gate (Besitznachweis, robots.txt, Sitemap, Canonical)
+    klasse: inhalt
+    grund: Ein verlorener Besitznachweis kostet die Indexierung – Inhaltsbefund.
+
+  - name: Spam-Selftest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Spam-Gate (Blog, RSS-Feed, CSV, API – selbstheilend)
+    grund: Ein blindes Spam-Gate würde Spam durchlassen oder Gutes löschen.
+
+  - name: Spam-Gate (Blog, RSS-Feed, CSV, API – selbstheilend)
+    klasse: inhalt
+    grund: Spam in Feed/API ist ein Inhaltsbefund (heilt sich selbst, meldet in den Report).
+
+  - name: Faktenfrische-Selbsttest (Recherchevertrag vor Veröffentlichung)
+    klasse: gate-selbsttest
+    schuetzt: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
+    grund: Ohne lauffähigen Recherchevertrag ginge Ungeprüftes live (YMYL).
+
+  - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
+    klasse: inhalt
+    grund: >-
+      Das harte Freigabe-Gate. Rot heißt: Die heutigen Kandidaten sind nicht
+      freigabefähig – genau dafür steht es im Weg.
+
+  - name: Quote-Nachfüllung nach Gate-Verlust (Re-Queue + Reserve → Min)
+    klasse: werkzeug
+    id: quote_refill
+    grund: >-
+      Misst Re-Queue- und Reserve-Kandidaten und füllt die Tagesquote. Rot
+      heißt: Die Messung ist ausgefallen (Dauerheilung #740, 14.10.2026 –
+      fehlendes hunspell fror 10 Läufe ein). Ein echtes Tagesdefizit meldet
+      publication_check/Endkontrolle über den Fachkanal, nicht dieser Schritt.
+
+  - name: Auslieferungs-Isolation (blockierte Kandidaten → hold, Quote → Min)
+    klasse: inhalt
+    werkzeugzweig: 2
+    grund: >-
+      Exit 1 = nach drei Runden bleiben Kandidaten blockiert: echter
+      Inhaltsbefund, der Deploy stoppt ehrlich. Exit 2 = die Isolation selbst
+      ist nicht messbar (Selbsttest rot oder Werkzeugfehler) – das ist ein
+      Werkzeugbefund und nimmt die Live-Site NICHT als Geisel (#740 Teil 2).
+
+  - name: YMYL-Bestand – nur fachlich freigegebene Live-Artikel
+    klasse: inhalt
+    grund: Fachfreigabe für Geld-/Gesundheitsinhalte – härtester Inhaltsvertrag im Haus.
+
+  - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
+    klasse: infra
+    grund: Reine Zustandsfeststellung für den Commit-Schritt.
+
+  - name: Gate-Heilungen committen (konvergent)
+    klasse: infra
+    grund: >-
+      Persistiert die Heilungen der Gates. Ohne Commit liefe der Bestand
+      beim nächsten Lauf erneut in dieselben Befunde.
+
+  - name: Rebuild nach Heilungen (nur wenn sich Content geändert hat)
+    klasse: infra
+    grund: Erzeugt den endgültigen Auslieferungsstand nach den Heilungen.
+
+  - name: Themenwelten – finales Veröffentlichungs-Gate
+    klasse: inhalt
+    grund: Letzte fachliche Prüfung der gebauten Themenwelten.
+
+  - name: Fixkosten-Kompass – finales Produkt-Gate
+    klasse: inhalt
+    grund: Letzte fachliche Prüfung des gebauten Produkts.
+
+  - name: Werkzeuge – finales Produkt-Gate
+    klasse: inhalt
+    grund: Letzte fachliche Prüfung des gebauten Produkts.
+
+  - name: Vergleichs-Selbsttest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Vergleichsgrundsätze – finales Transparenz-Gate
+    grund: Ohne lauffähige Wache bliebe die Transparenzpflicht ungeprüft.
+
+  - name: Vergleichsgrundsätze – finales Transparenz-Gate
+    klasse: inhalt
+    grund: Transparenzpflicht bei Vergleichen – rechtlicher Inhaltsbefund.
+
+  - name: Anker-Wache – Selbsttest (Bau-Prüfung lauffähig)
+    klasse: gate-selbsttest
+    schuetzt: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
+    grund: Ohne lauffähige Wache blieben kaputte Sprungmarken unentdeckt.
+
+  - name: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
+    klasse: inhalt
+    grund: Kaputte Sprungmarken brechen Inhaltsverzeichnis und Vorlesefunktion.
+
+  - name: Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)
+    klasse: inhalt
+    id: scorecard
+    werkzeugzweig: 2
+    grund: >-
+      Exit 1 = heutige Kandidaten fachlich blockiert (Auslieferung stoppt
+      zu Recht). Exit 2 = Werkzeugfehler der Messung – seit #676 ausgewertet
+      statt durchgereicht: erst liefern, dann siegeln.
+
+  - name: Release-Scorecard committen (Report, Siegel, Historie)
+    klasse: infra
+    grund: Persistiert Report, Siegel und Historie (State-Persistenz ist best effort).
+
+  - name: Vorlese-Audio-Selbsttests (Generator + Stimmen-Kette + Parität)
+    klasse: werkzeug
+    meldet: false
+    meldet_grund: >-
+      Zusatzfläche Audio. Funde stehen im Schritt-Log und in der
+      Audio-Abdeckung; sie gehören nicht in das Auslieferungs-Siegel, sonst
+      färbt jede Tonspur-Macke den Lauf rot und das Siegel verliert Schärfe.
+    grund: >-
+      Prüft die Vertonungskette. Rot heißt: Audio-Werkzeug defekt – eine
+      Tonspur ist kein Grund, den Blog nicht auszuliefern.
+
+  - name: TTS-Backend installieren (Dekoder, edge-tts, optional piper-tts)
+    klasse: werkzeug
+    meldet: false
+    meldet_grund: >-
+      Jeder Installationszweig hat eine Reserve (ffmpeg → miniaudio,
+      edge-tts → piper → Browser). Ein fehlendes Backend wird im
+      Vertonungsschritt sichtbar, nicht hier.
+    grund: Installiert Vertonungs-Werkzeug; jeder Zweig hat eine Reserve.
+
+  - name: Kostensperre belegen (vor jeder Geldflaeche)
+    klasse: werkzeug
+    id: kostensperre
+    grund: >-
+      Schützt das GELD, nicht den Inhalt. Rot heißt: die Geldfläche ist nicht
+      freigegeben – dann unterbleibt die kostenpflichtige Vertonung, die
+      Auslieferung läuft weiter und der Lauf wird nach der Veröffentlichung
+      rot (#740 Teil 2). Vorher fror eine Kostenwache die ganze Seite ein.
+
+  - name: Vorlese-Tonspuren erzeugen (männlich, DE+EN ohne Umschalter – ElevenLabs Premium, kostenloser Fallback)
+    klasse: werkzeug
+    meldet: false
+    meldet_grund: >-
+      Zusatzfläche mit continue-on-error und eigener Abdeckungsmessung
+      (Schritt „Audio-Abdeckung"). Ton darf den Livegang verzögern, nie
+      verhindern – und auch das Siegel nicht röten.
+    grund: Vertonung ist eine Zusatzfläche (continue-on-error), nie ein Auslieferungsgrund.
+
+  - name: Tonspuren nachmessen und stumme Spuren entfernen
+    klasse: werkzeug
+    meldet: false
+    meldet_grund: >-
+      Die Nachmessung heilt selbst (--heal) und protokolliert den Rest;
+      Abdeckungszahlen stehen im nächsten Schritt.
+    grund: Nachmessung der Tonspuren – Funde gehen ins Log, nicht gegen die Auslieferung.
+
+  - name: Audio-Abdeckung in die Lauf-Zusammenfassung
+    klasse: werkzeug
+    meldet: false
+    meldet_grund: Reiner Bericht – er stellt fest, er urteilt nicht.
+    grund: Reiner Bericht (continue-on-error), ohne jede Entscheidung über den Stand.
+
+  - name: Suchindex bauen (Pagefind)
+    klasse: infra
+    grund: >-
+      Der Suchindex ist Teil des ausgelieferten Artefakts. Ein Stand ohne
+      Index liefert eine kaputte Seitensuche aus (#644) – das ist keine
+      Messung, sondern ein unvollständiger Bauzustand.
+
+  - name: Werkzeugbefunde einsammeln (Material für das Siegel)
+    klasse: werkzeug
+    id: werkzeugbefunde
+    meldet: false
+    meldet_grund: Dieser Schritt IST der Meldeweg – er meldet nicht an sich selbst.
+    grund: >-
+      Sammelstelle aller Werkzeugbefunde dieses Laufs. Sie darf selbst
+      niemals blockieren – ein Melder, der am Melden scheitert, ist die
+      Schadensklasse #227.
+
+  - name: Deploy auf gh-pages
+    klasse: infra
+    grund: Veröffentlichungszweig – das ist die Auslieferung selbst.
+
+  - name: GitHub Pages konfigurieren (Workflow-Quelle)
+    klasse: infra
+    grund: Voraussetzung des offiziellen Pages-Deployments.
+
+  - name: Artefakt für offizielles Pages-Deployment hochladen
+    klasse: infra
+    grund: Der Upload IST die öffentliche Auslieferung – ab hier darf nichts mehr röten.
+
+  - name: Auslieferungs-Artefakt bestätigen (Beleg für das Siegel)
+    klasse: infra
+    id: artefakt
+    grund: Reiner Beleg für `release-seal` (echo in GITHUB_OUTPUT, kann nicht fehlschlagen).

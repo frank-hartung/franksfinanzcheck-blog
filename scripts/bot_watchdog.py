@@ -606,6 +606,35 @@ def live_site_findings(slug, code, deploy_lage, block_schritt="", blockade_beleg
     return befunde
 
 
+def blockade_klasse(block_schritt):
+    """Blustradius-Klasse des blockierenden Schritts (C38, Dauerheilung #740).
+
+    Der Watchdog hat am 14.10.2026 zehn Stunden lang korrekt gemeldet, WAS
+    blockiert („Quote-Nachfüllung nach Gate-Verlust"), aber nicht, WAS DAS
+    BEDEUTET. Im Ticket stand eine Frage: „Ist es ein Inhalts-Gate …; ist es
+    ein Mess-/Siegel-Schritt …". Diese Frage beantwortet das Register
+    `data/blustradius-deploy.yml` maschinell – jeder Schritt des
+    Auslieferungswegs erklärt dort, ob sein rotes Ergebnis die Live-Site
+    anhalten DARF.
+
+    Rückgabe: ``(klasse, urteilstext)``. Fehlt das Register oder der
+    Schritt, bleibt es bei ``("unbekannt", "")`` – eine fehlende Auskunft
+    wird nie zu einer erfundenen (C2: nicht gemessen ist kein Grün).
+    """
+    name = str(block_schritt or "").strip()
+    if not name:
+        return "unbekannt", ""
+    try:
+        import blustradius_register as register
+        info = register.klassifiziere(name)
+        if not info.get("bekannt"):
+            return "unbekannt", ""
+        return str(info.get("klasse") or "unbekannt"), register.urteil(name)
+    except Exception as exc:  # noqa: BLE001 – eine Auskunft darf nie töten
+        print(f"   ⚠ Blustradius-Register nicht lesbar: {exc}")
+        return "unbekannt", ""
+
+
 def deploy_blockade_finding(block_schritt, blockade_beleg=""):
     """Der Ausfall-Befund „Auslieferung blockiert“ – EIN Bauplan, zwei Wege.
 
@@ -614,25 +643,73 @@ def deploy_blockade_finding(block_schritt, blockade_beleg=""):
     live ist, die Kette dahinter aber schon steht (#676 Teil 2). Ohne den
     zweiten Weg bliebe eine Blockade unsichtbar, bis der nächste Artikel
     erscheint – und genau dafür misst der Ausfall-Takt stündlich.
+
+    Seit #740 Teil 2 trägt der Befund zusätzlich die KLASSE des
+    blockierenden Schritts aus dem Blustradius-Register (C38) – damit im
+    Ticket ein Urteil steht statt einer Rückfrage.
     """
+    klasse, urteil = blockade_klasse(block_schritt)
+    # In JEDEM Zweig genannt: Ein Befund mit Besitzer `auto` ohne maschinellen
+    # Heilungsweg ist eine Sackgasse (C34/C35). Der Catchup heilt aber nur die
+    # transiente Blockade – das muss dabeistehen, sonst wird er zum Ritual.
+    heiler = ("Maschineller Heiler: `scripts/watchdog_recovery.py --live-site` "
+              "löst den Deploy-Catchup aus; er greift nur bei einer "
+              "vorübergehenden Blockade und scheitert bewusst (Exit 3) in eine "
+              "stehende Kette. Die Heilung oben ersetzt er nicht.")
+    if klasse == "werkzeug":
+        naechster = (f"WERKZEUG-BLOCKADE (Blustradius-Register C38): Der "
+                     f"Schritt „{block_schritt}“ ist ein Mess-/Melde-Schritt "
+                     f"ohne Inhaltsentscheid – er darf die Auslieferung NIE "
+                     f"blockieren. Kein Catchup: Ein Dispatch in eine "
+                     f"blockierte Kette scheitert am selben Schritt. Heilung "
+                     f"im Schritt selbst: Exit-Code auswerten (`set +e`/`$?`), "
+                     f"Befund über `scripts/werkzeugbefund.py --melden` an den "
+                     f"Job `release-seal` geben, Schritt mit 0 beenden – erst "
+                     f"liefern, dann siegeln (C34/C38). "
+                     f"Prüfbefehl: `python3 scripts/blustradius_register.py "
+                     f"--check`. {heiler}")
+    elif klasse in ("inhalt", "gate-selbsttest"):
+        naechster = (f"INHALTS-GATE (Blustradius-Register C38): Der Schritt "
+                     f"„{block_schritt}“ darf die Auslieferung anhalten – der "
+                     f"Befund ist fachlich gemeint und gehört in den Fachkanal "
+                     f"des Gates, nicht in den Deploy. Der Watchdog löst "
+                     f"deshalb KEINEN Catchup aus: Ein zweiter Lauf trifft "
+                     f"dasselbe Urteil. Heilung: den gemeldeten Inhaltsbefund "
+                     f"abarbeiten (Grund steht im Schritt-Log, meist mit "
+                     f"`cadence_grund`/Check-ID), danach liefert der nächste "
+                     f"Lauf von selbst aus. {heiler}")
+    elif klasse == "infra":
+        naechster = (f"INFRASTRUKTUR (Blustradius-Register C38): Ohne den "
+                     f"Schritt „{block_schritt}“ gibt es keinen "
+                     f"Auslieferungsstand (Checkout, Abhängigkeiten, Build, "
+                     f"Upload). Erst das Werkzeug wiederherstellen, dann "
+                     f"Catchup – ein Dispatch in eine kaputte Kette "
+                     f"wiederholt nur den Fehlschlag. {heiler}")
+    else:
+        naechster = (f"{heiler} Heilung: deploy.yml → "
+                     f"deploy-Job → Schritt „{block_schritt}“ öffnen. Ist es "
+                     f"ein Inhalts-Gate, ist der Befund fachlich gemeint; ist "
+                     f"es ein Mess-/Siegel-Schritt, darf er die Auslieferung "
+                     f"nicht blockieren (Dauerheilung #676: erst liefern, dann "
+                     f"siegeln – Job `release-seal`). Dieser Schritt steht in "
+                     f"keinem Blustradius-Register – nachtragen in "
+                     f"data/blustradius-deploy.yml (C38).")
+    belege = [f"BLOCKIERENDER_SCHRITT={block_schritt}",
+              f"BLUSTRADIUS_KLASSE={klasse}", blockade_beleg]
+    detail = (f"Der letzte deploy.yml-Lauf endete, bevor das "
+              f"Pages-Artefakt hochgeladen war – blockierender Schritt: "
+              f"„{block_schritt}“ (Blustradius-Klasse: {klasse}). "
+              f"{blockade_beleg}. Solange das steht, "
+              f"geht kein einziger Artikel live, egal wie oft der "
+              f"Deploy-Catchup läuft.")
+    if urteil:
+        detail += f" Urteil: {urteil}"
     return _f(
         "deploy-blockade", "Auslieferung blockiert (Live-Stand eingefroren)",
         "P1", "auto",
-        detail=(f"Der letzte deploy.yml-Lauf endete, bevor das "
-                f"Pages-Artefakt hochgeladen war – blockierender Schritt: "
-                f"„{block_schritt}“. {blockade_beleg}. Solange das steht, "
-                f"geht kein einziger Artikel live, egal wie oft der "
-                f"Deploy-Catchup läuft."),
-        next_step=(f"Der Watchdog löst Deploy-Catchup selbst aus "
-                   f"(`scripts/watchdog_recovery.py --live-site`) und LÄSST es "
-                   f"hier: ein Dispatch in eine blockierte Kette scheitert am "
-                   f"selben Schritt. Heilung: deploy.yml → deploy-Job → Schritt "
-                   f"„{block_schritt}“ öffnen. Ist es ein Inhalts-Gate, ist der "
-                   f"Befund fachlich gemeint; ist es ein Mess-/Siegel-Schritt, "
-                   f"darf er die Auslieferung nicht blockieren (Dauerheilung "
-                   f"#676: erst liefern, dann siegeln – Job `release-seal`)."),
-        evidence=[e for e in (f"BLOCKIERENDER_SCHRITT={block_schritt}",
-                              blockade_beleg) if e],
+        detail=detail,
+        next_step=naechster,
+        evidence=[e for e in belege if e],
         akut=True)
 
 
