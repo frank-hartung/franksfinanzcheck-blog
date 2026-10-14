@@ -22,7 +22,9 @@ version: "3.8"
 services:
   # --- n8n Workflow Automation Hub (Self-Hosted Community Edition) ---
   n8n:
-    image: docker.n8n.io/n8nio/n8n:2.43.5
+    # Docker Hub statt docker.n8n.io: dasselbe offizielle Image, aber Dependabot
+    # kann die Tags nur über die Registry-API von Docker Hub abfragen.
+    image: n8nio/n8n:2.43.5
     container_name: ff-n8n-automation
     restart: unless-stopped
     ports:
