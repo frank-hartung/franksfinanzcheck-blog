@@ -45,6 +45,8 @@ faktencheck: 2026-10-14
 
 Kurzfristige Angebote können günstiger sein, doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar; Nachlässe von bis zu 50 Prozent seien Einzelfälle, keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Nach der vom ZDF wiedergegebenen Definition des Deutschen Reiseverbands liegen bei einer Last-Minute-Reise höchstens 14 Tage zwischen Buchung und Abreise. Portale verwenden den Begriff teilweise breiter. Verlasse dich daher nicht auf die Überschrift des Angebots, sondern prüfe Abreise, Leistungen und Vertragsbedingungen ([ZDF-Ratgeber](https://www.zdfheute.de/ratgeber/last-minute-urlaub-angebote-sommer-100.html)).
 
 Flexibilität bei Ziel, Abflugort und Termin kann mehr passende Angebote eröffnen. Sie verspricht aber keinen Rabatt. Für einen fairen Vergleich zählen die Gesamtkosten und identische Leistungen: Anreise, Gepäck, Unterkunft, Verpflegung, Transfer, Mietwagen und Stornobedingungen.

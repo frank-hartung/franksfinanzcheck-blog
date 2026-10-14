@@ -1,9 +1,9 @@
 ---
 title: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
 description: Du willst Stromkosten senken? Wir zeigen, welche Balkonkraftwerk Förderung regional möglich ist und worauf du bei Antrag und Anmeldung achten musst.
-date: 2026-10-09T10:48:20Z
-draft: true
-reserve: true
+date: 2026-10-14T14:57:58Z
+draft: false
+reserve_published: 2026-10-14
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]

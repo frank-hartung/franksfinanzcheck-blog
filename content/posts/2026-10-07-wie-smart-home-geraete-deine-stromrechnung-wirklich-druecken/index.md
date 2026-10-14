@@ -1,9 +1,9 @@
 ---
 title: "Smart Home: So prüfst du echte Stromersparnis"
 description: "Smart Home spart nicht automatisch Strom. Erfahre, wie du Verbrauch misst, Schaltregeln sicher wählst und Kosten mit einem klaren Modell prüfst."
-date: 2026-10-07T10:31:02Z
-draft: true
-reserve: true
+date: 2026-10-14T14:57:12Z
+draft: false
+reserve_published: 2026-10-14
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): redaktionell neu aufgebaut; Fakten- und Quellenprüfung am 07.10.2026"
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]

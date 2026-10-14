@@ -62,6 +62,8 @@ faktencheck: "2026-10-14"
 
 Wenn du den DNS-Server wechseln möchtest, änderst du zunächst den Resolver, an den dein Gerät seine Namensanfragen schickt. Das kann Filter, Datenschutzbedingungen und die Antwortzeit bei einer Namensauflösung beeinflussen. Es macht deinen Internetanschluss aber nicht automatisch schneller oder anonymer.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**
 
 - DNS-Server übersetzen Domainnamen in IP‑Adressen, beeinflussen aber nicht die Bandbreite deines Anschlusses.  
