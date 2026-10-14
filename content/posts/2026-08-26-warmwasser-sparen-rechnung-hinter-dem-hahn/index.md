@@ -1,5 +1,5 @@
 ---
-title: "Warmwasser sparen: Die Rechnung hinter"
+title: "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten"
 description: "Warmwasser ist der zweite große Posten im Haushalt und steht selten auf der Rechnung. So findest du deinen Verbrauch und drehst an den richtigen Stellen."
 date: 2026-08-26T06:10:00Z
 lastmod: 2026-10-13
