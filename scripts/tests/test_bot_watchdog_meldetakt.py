@@ -469,10 +469,13 @@ class VertragC35TestCase(unittest.TestCase):
         self.assertTrue(any("Taktfeuer" in f[1] for f in funde))
 
     def test_blockade_ohne_ausfallklasse(self) -> None:
+        # Anker-Disziplin: Der Bauplan des Befunds wurde mit #740 (C38) um die
+        # Klassen-Zweige erweitert; die Sabotage greift unverändert die
+        # AKUT-Markierung an – nur an ihrer heutigen Stelle.
         funde = gc.c35_meldetakt_an_den_ausfall(
             self._nur_skript("bot_watchdog.py",
-                             '                              blockade_beleg) if e],\n        akut=True)',
-                             '                              blockade_beleg) if e])'),
+                             'evidence=[e for e in belege if e],\n        akut=True)',
+                             'evidence=[e for e in belege if e])'),
             self.wflows, root=BLOG_DIR)
         self.assertTrue(any("nicht als akut markiert" in f[1] for f in funde))
 
@@ -485,10 +488,13 @@ class VertragC35TestCase(unittest.TestCase):
         self.assertTrue(any("TRIAGE_SKIP enthält" in f[1] for f in funde))
 
     def test_blockade_ohne_maschinellen_heilungsweg(self) -> None:
+        # Seit #740 steht der Heiler-Hinweis in JEDEM Klassen-Zweig (eine
+        # lokale Variable im Bauplan) – die Sabotage entfernt genau sie.
         funde = gc.c35_meldetakt_an_den_ausfall(
             self._nur_skript("bot_watchdog.py",
-                             "`scripts/watchdog_recovery.py --live-site`) und LÄSST es ",
-                             "und LÄSST es "),
+                             'heiler = ("Maschineller Heiler: '
+                             '`scripts/watchdog_recovery.py --live-site` "',
+                             'heiler = ("Kein maschineller Heiler. "'),
             self.wflows, root=BLOG_DIR)
         self.assertTrue(any("Sackgasse" in f[1] for f in funde))
 

@@ -42,6 +42,20 @@ jobs:
         run: |
           python3 -m pip install -q pyyaml 2>/dev/null || true
 
+      # MESSKETTE (Vertrag C38, Dauerheilung #740, 14.10.2026)
+      # `ops_report.py` berechnet die Qualitätskennzahl des GESAMTEN
+      # Bestands über quality_score → spellcheck → hunspell. Ohne das
+      # Wörterbuch fiel die Rechtschreibmessung pro Artikel still auf
+      # „unbekannt" (0.5) zurück: Der Report zeigte jeden Tag einen
+      # Durchschnitt, der zum Teil gar nicht gemessen war. Eine tote
+      # Messung ist gefährlicher als keine – sie liefert eine Zahl.
+      # Gefunden hat das `scripts/measurement_chain.py --audit-workflows`.
+      - name: Messkette für die Qualitätskennzahl (hunspell)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq hunspell hunspell-de-de
+          python3 scripts/measurement_chain.py --check
+
       - name: Audit-Retention durchsetzen
         run: |
           python3 scripts/audit_log.py --cleanup || true

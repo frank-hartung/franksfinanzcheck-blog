@@ -371,6 +371,12 @@ def refill_to_min(posts_dir=None, validator=None, *, finalize: bool = True) -> l
     # by name – in `__main__`-Ausführung (Deploy, Engine) eine ZWEITE
     # Modulinstanz mit eigener ReleaseBuildCrash-Klasse, deren Crash dem
     # except-Haken in main() entkam (roher Traceback, Exit 1 statt Exit 3).
+    # Merken, BEVOR der Default aufgelöst wird: Nur dieser Standardpfad
+    # misst mit der Messkette (Vorflug unten). Wird die Reihenfolge
+    # getauscht, ist der Vorflug toter Code – genau das ist beim
+    # Schreiben dieser Heilung passiert und nur aufgefallen, weil der
+    # Test zusätzlich prüft, dass VOR dem Abbruch nichts gemessen wurde.
+    eigener_messpfad = validator is None
     validator = validator or accept_candidate
 
     posts_dir = posts_dir or ROOT / 'content' / 'posts'
@@ -382,6 +388,26 @@ def refill_to_min(posts_dir=None, validator=None, *, finalize: bool = True) -> l
     if live >= minimum:
         print(f"Quote-Nachfüllung: LIVE {live}/{minimum} bereits erfüllt – nichts zu tun.")
         return []
+
+    # VORFLUG DER MESSKETTE (Dauerheilung #740 Teil 2, Vertrag C38):
+    # Ab hier wird JEDER Kandidat gemessen (accept_candidate → quality_score
+    # → spellcheck → hunspell). Am 14.10.2026 fehlte hunspell im deploy-Job;
+    # der Befund kam erst beim ersten Kandidaten – nach Vorheilung und
+    # Hugo-Build, als roher Traceback, ohne zu sagen, was zu tun ist.
+    # Jetzt fragt der Refill VORHER und benennt Werkzeug und Heilungsweg in
+    # einem Satz. Die Regel bleibt C33: Keine Annahme ohne messbare
+    # Qualität – deshalb ein Release-Crash (Exit 3), kein stilles Weiter.
+    # Nur auf dem ECHTEN Messpfad: Wer einen eigenen Validator mitbringt
+    # (Tests, Selbsttests, Trockenläufe), misst nicht mit der Messkette und
+    # braucht sie folglich auch nicht.
+    if eigener_messpfad:
+        try:
+            import measurement_chain
+            measurement_chain.require("Quote-Nachfüllung (Re-Queue + Reserve)")
+        except ImportError:
+            pass  # Die Messung selbst meldet den Ausfall weiterhin (C33).
+        except Exception as exc:  # noqa: BLE001 – MesskettenFehler & Co.
+            raise ReleaseBuildCrash(str(exc)) from exc
 
     print(f"🛟 Quote-Nachfüllung (#287): LIVE {live}/{minimum} – "
           "Re-Queue, dann Reserve.")
@@ -626,6 +652,24 @@ def run_selftest() -> int:
     import unittest.mock as mock
 
     errors: list[str] = []
+    # ATTRAPPEN STATT MESSKETTE (Vertrag C38, #740 Teil 2):
+    # Selbsttests laufen im Haus ohne äußere Abhängigkeiten – dieselbe
+    # Regel, die die KI-Probe (#138) für Modell und Netz durchsetzt. Die
+    # Fixtures unten arbeiten mit Attrappen-Validatoren; der Vorflug der
+    # Messkette gilt dem PRODUKTIONSPFAD, nicht dieser Werkbank. Sonst
+    # wäre der Selbsttest auf jedem Rechner ohne hunspell rot – und ein
+    # Selbsttest, der an der Umgebung scheitert, erzieht zum Wegsehen.
+    _vorflug_alt = os.environ.get("MESSKETTE_VORFLUG")
+    os.environ["MESSKETTE_VORFLUG"] = "aus"
+    try:
+        return _run_selftest_inner(errors, tempfile, mock)
+    finally:
+        os.environ.pop("MESSKETTE_VORFLUG", None)
+        if _vorflug_alt is not None:
+            os.environ["MESSKETTE_VORFLUG"] = _vorflug_alt
+
+
+def _run_selftest_inner(errors, tempfile, mock) -> int:
     with tempfile.TemporaryDirectory() as tmp:
         posts = Path(tmp) / 'content' / 'posts'
         posts.mkdir(parents=True)

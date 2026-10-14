@@ -22,6 +22,15 @@ gesamte öffentliche Auslieferung als Geisel eines kaputten Messwerkzeugs. Exakt
 Klasse, die #676 bereits für die Release-Scorecard endgültig beseitigt hatte (C34):
 **erst liefern, dann siegeln.**
 
+> **Nachtrag vom selben Tag (Teil 2, Vertrag C38):** Teil 1 hat den Schritt geheilt,
+> der gebrannt hat. Die Prüfung danach zeigte, dass das nicht reicht: Von **64**
+> Schritten des `deploy`-Jobs konnten **60** die öffentliche Auslieferung anhalten,
+> ohne dass irgendwo stand, ob sie das dürfen. Teil 2 schließt deshalb die **Klasse**
+> – Register, ein gemeinsamer Meldeweg, eine Messketten-Wache über alle Workflows –
+> und hat dabei sofort einen zweiten, bis dahin unsichtbaren Fall gefunden
+> (`frankautoops-report.yml` maß den gesamten Bestand täglich ohne `hunspell`).
+> Details in **§8**.
+
 ---
 
 ## 1. Zeitleiste (UTC, 13./14.10.2026)
@@ -243,19 +252,39 @@ Befund bleibt `::error::`-Annotation und Job-Output.
   Catchup), nicht aus einer eigenen Anfrage.
 
 **Vorbestand, nicht aus diesem Vorgang heilbar (nachgewiesen auf cleanem
-`main`-Worktree, ohne jede Änderung dieses PRs rot):**
-`test_bot_watchdog_meldetakt` (C25-YMYL-Write-Prüfung, ParseError),
-`test_social_autopilot` (2 Kanäle ohne sendbaren Winkel, #716-Familie). Beide
-gehören in ihre eigenen Fachkanäle.
+`main`-Worktree, ohne jede Änderung dieses PRs rot – Stand nach Teil 2:
+2 Fehler):**
+
+| Test | Befund | Warum nicht hier geheilt |
+|---|---|---|
+| `test_reserve_artifacts` | `2026-10-07-wie-smart-home-geraete-…` und `2026-10-09-balkonkraftwerk-foerderung-…`: SHA-256 passt nicht mehr zum Entwurf | Nachzertifizierung läuft über `scripts/reserve_recert.py` – und die misst Rechtschreibung. In dieser Umgebung ist `hunspell` nicht installierbar; eine Zertifizierung ohne Messung wäre genau das Scheingrün, das dieser Vorgang abschafft. Gehört in `content-reserve.yml` (dort ist die Messkette vollständig). |
+| `test_social_autopilot` | `2026-08-26-dns-server-wechseln-…` hat für Instagram keinen sendbaren Winkel | Inhaltsbefund der #716-Familie mit eigenem Fachkanal – kein Werkzeugfehler. |
+
+Beide sind **Daten-**, keine Code-Befunde; kein Test wurde stummgeschaltet.
 
 ---
 
 ## 6. Betriebsabnahme
 
 ```bash
+# Teil 1 – der geheilte Schritt
 python3 scripts/publication_release.py --selftest          # Vertrag inkl. Sektionen 4–6
 python3 -m unittest scripts.tests.test_publication_release_wache -v
 python3 -m unittest scripts.tests.test_deploy_publication_priority scripts.tests.test_workflow_yaml -v
+
+# Teil 2 – die geschlossene Klasse (C38)
+python3 scripts/blustradius_register.py --check            # jeder Deploy-Schritt deklariert
+python3 scripts/blustradius_register.py --tabelle          # Klassenübersicht zum Mitlesen
+python3 scripts/blustradius_register.py --selftest
+python3 scripts/werkzeugbefund.py --selftest
+python3 scripts/measurement_chain.py --audit-workflows     # misst jemand ohne Werkzeug?
+python3 scripts/measurement_chain.py --selftest
+python3 -m unittest scripts.tests.test_blustradius_register \
+                    scripts.tests.test_measurement_chain \
+                    scripts.tests.test_werkzeugbefund -v
+python3 scripts/governance_contract.py --selftest          # C1–C38 mit Kunstbefunden
+
+# Gesamtlauf
 python3 -m unittest discover -s scripts/tests              # Gesamtsuite (publication-reliability-tests.yml)
 python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97   # Uhr-Probe
 ```
@@ -298,3 +327,179 @@ python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97   # 
   `DeployQuoteRefillVerdrahtungTests` (4 Tests)
 - `CLAUDE.md` – Leitplanke „Eine Messkette gehört in jeden Lauf, der misst, und ein
   Crash ist ein Crash (Dauerheilung #740)“
+
+---
+
+## 8. Teil 2 – Die Klasse schließen (Vertrag C38)
+
+### 8.1 Warum Teil 1 nicht reicht
+
+Teil 1 hat den Schritt geheilt, der gebrannt hat: `hunspell` in den Job, Crash als
+Crash, Exit-Code auswerten, Werkzeugbefund ans Siegel. Das war richtig – und zu
+klein. Die Prüfung danach stellte eine unangenehme Frage:
+
+> Wie viele andere Schritte im `deploy`-Job können dasselbe tun?
+
+Die Antwort: **60 von 64**. Sie konnten die öffentliche Auslieferung anhalten, und
+nirgendwo stand, ob sie das dürfen. Das ist exakt die Lage vom 09.10. (#676) und vom
+14.10. (#740) – zweimal dieselbe Klasse, zweimal eine Einzelfallheilung. Wer so
+heilt, baut eine Warteschlange: Der nächste Mess-Schritt, der an einem fehlenden
+Paket stirbt, friert die Seite wieder ein, und der nächste Bericht beginnt wieder
+mit „zehn rote Läufe".
+
+Zwei Konstruktionsfehler erzeugen diese Klasse immer wieder:
+
+1. **Die Erlaubnis zu blockieren war implizit.** Sie ergab sich daraus, ob jemand
+   an `set +e` und eine `case`-Auswertung gedacht hatte – nicht aus einer
+   Entscheidung. Eine Erlaubnis, die man vergessen kann, ist keine.
+2. **Jeder Melder war handgemacht.** Nach #676 gab es `scorecard.werkzeugfehler`,
+   nach Teil 1 zusätzlich `quote_refill.werkzeugfehler`. Beim dritten Schritt wäre
+   ein drittes Output entstanden, beim vierten ein viertes – und irgendwann eines,
+   das niemand ans Siegel verdrahtet. Copy-Paste ist hier nicht Stil, sondern die
+   Fehlerquelle.
+
+### 8.2 Jeder Schritt kennt seinen Blustradius (`data/blustradius-deploy.yml`)
+
+Alle 64 Schritte des `deploy`-Jobs sind deklariert – mit Klasse und Begründung:
+
+| Klasse | Anzahl | Darf die Auslieferung anhalten? | Bedeutung |
+|---|---|---|---|
+| `infra` | 13 | ja | Ohne ihn gibt es keinen Auslieferungsstand (Checkout, Abhängigkeiten, Build, Upload). |
+| `inhalt` | 31 | ja | Fachliches Gate. Ein Stopp ist hier gewollt: Ungeprüftes geht nicht live. |
+| `gate-selbsttest` | 12 | ja | Ein Inhalts-Gate ist nicht lauffähig – fail-closed bleibt (C2/C33). |
+| `werkzeug` | 8 | **nein** | Mess-/Melde-Schritt ohne Inhaltsentscheid. Er meldet und liefert weiter. |
+
+`scripts/blustradius_register.py --check` prüft das Register gegen den echten
+Workflow – in sechs Gruppen: Deckung in beide Richtungen (kein Schritt ohne
+Eintrag, kein Eintrag ohne Schritt), Reihenfolge, erlaubte Klassen, Begründungs-
+pflicht, Exit-Auswertung bei `werkzeug`-Schritten und Meldepflicht an den
+gemeinsamen Kanal. **Ein neuer Schritt ohne Eintrag ist ein Befund, kein Zufall.**
+
+### 8.3 Ein Meldeweg statt acht (`scripts/werkzeugbefund.py`)
+
+```
+Schritt  →  werkzeugbefund.py --melden <schritt> <grund>   (Exit immer 0, #227)
+         →  $RUNNER_TEMP/werkzeugbefunde.txt
+Sammler  →  werkzeugbefund.py --sammeln
+         →  Job-Outputs: werkzeugbefunde, werkzeugbefunde_anzahl
+release-seal →  Tabellenzeile + ::error:: + Lauf rot – NACH der Veröffentlichung
+```
+
+Der Sammelschritt steht **vor** dem Artefakt-Upload (damit er Material hat) und
+beendet sich immer mit 0 (damit er selbst nie blockiert). Die zwei Alt-Outputs aus
+#676 und Teil 1 bleiben bestehen – sie sind vertraglich getestet – und werden vom
+Sammler in denselben Kanal gefaltet, statt ein drittes Paar zu erzeugen.
+
+### 8.4 Kein Messlauf ohne sein Werkzeug (`scripts/measurement_chain.py`)
+
+Eine Quelle der Wahrheit für die Messkette (Binary, Wörterbuch, Installationszeile)
+mit drei Wirkungen:
+
+- **Laufzeit:** `status()` / `require(kontext)` – `refill_to_min()` fragt im
+  **Vorflug**, bevor der erste Kandidat gemessen wird. Der Befund lautet dann
+  „hunspell fehlt … `sudo apt-get install -y -qq hunspell hunspell-de-de`" (Exit 3)
+  statt eines Tracebacks nach Vorheilung und Hugo-Build.
+- **Statisch:** `--audit-workflows` liest **alle** Workflows und meldet jeden Job,
+  der ein registriertes Mess-Skript aufruft, ohne die Kette vorher **im selben Job**
+  zu installieren. Aufrufe mit `--selftest` zählen nicht: Selbsttests laufen im Haus
+  mit Attrappen (dieselbe Regel, die die KI-Probe #138 für Modell und Netz
+  durchsetzt).
+- **Gegen Verrotten:** Ein Drift-Detektor meldet jedes Skript, das `spellcheck`/
+  `quality_score` importiert oder eine Messfunktion aufruft, ohne in der Registry
+  zu stehen – und jede Registry-Zeile, deren Datei es nicht mehr gibt.
+
+**Der zweite Fund.** Das Audit war beim ersten Lauf rot – nicht wegen `deploy.yml`
+(das war geheilt), sondern wegen `frankautoops-report.yml`:
+
+> `ops_report.py` berechnet die Qualitätskennzahl des **gesamten Bestands** über
+> `quality_score.score_article` → `spellcheck` → `hunspell`. Der Job installierte
+> `hunspell` nie. Die Rechtschreibmessung fiel pro Artikel still auf „unbekannt"
+> zurück, der Fehler landete in einem `try/except` als `{"error": …}` – und der
+> tägliche Report zeigte trotzdem einen Durchschnitt.
+
+Das ist dieselbe Klasse wie #740, nur ohne Knall: Eine tote Messung ist gefährlicher
+als gar keine, denn sie liefert eine Zahl. Geheilt in derselben Änderung (Messkette
+vor dem Report-Schritt, inklusive `measurement_chain.py --check` als Beleg).
+
+Ein weiterer Riegel: Der Abschalter `MESSKETTE_VORFLUG=aus` ist für lokale
+Teilprüfungen gedacht. Taucht er in einem **Workflow** auf, ist das ein Befund –
+sonst wäre die Wache in CI still abgeschaltet.
+
+### 8.5 Der Watchdog urteilt, statt zu fragen
+
+`bot_watchdog.blockade_klasse()` schlägt den blockierenden Schritt im Register nach.
+Das Ticket nennt seitdem die Klasse (`BLUSTRADIUS_KLASSE=…` als Beleg) und einen
+konkreten nächsten Schritt:
+
+| Klasse | Was im Ticket steht |
+|---|---|
+| `werkzeug` | „Darf die Auslieferung NIE blockieren … Exit-Code auswerten, Befund über `scripts/werkzeugbefund.py --melden` an `release-seal`, Schritt mit 0 beenden." Kein Catchup. |
+| `inhalt` / `gate-selbsttest` | „Darf anhalten – der Befund ist fachlich gemeint und gehört in den Fachkanal des Gates." Kein Catchup. |
+| `infra` | „Erst das Werkzeug wiederherstellen, dann Catchup." |
+| unbekannt | „Schritt in `data/blustradius-deploy.yml` nachtragen (C38)." |
+
+Jeder Zweig nennt zusätzlich den maschinellen Heiler und seine Grenze
+(`watchdog_recovery.py --live-site` greift nur bei einer vorübergehenden Blockade
+und scheitert bewusst mit Exit 3 in eine stehende Kette). Vorher stand im Ticket
+die Rückfrage „Ist es ein Mess-Schritt, darf er nicht blockieren" – eine Frage, die
+der Leser beantworten musste. Ein Ticket, das fragt, erzieht zum Wegsehen
+(Lektion WF-A535 #529).
+
+### 8.6 Nachweise Teil 2
+
+| Prüfung | Befehl | Ergebnis |
+|---|---|---|
+| Register vollständig | `python3 scripts/blustradius_register.py --check` | ✅ 64 Schritte, 0 Befunde |
+| Register-Wache gegen Sabotage | `python3 scripts/blustradius_register.py --selftest` | ✅ grün (Positivprobe, Klassifikation, Shell-Analyse, 13 Sabotageproben) |
+| Meldeweg | `python3 scripts/werkzeugbefund.py --selftest` | ✅ grün |
+| Messkette statisch | `python3 scripts/measurement_chain.py --audit-workflows` | ✅ grün (vor der Heilung: 1 Befund – `frankautoops-report.yml`) |
+| Messketten-Wache | `python3 scripts/measurement_chain.py --selftest` | ✅ grün (7 Sabotageproben inkl. falscher Reihenfolge, fremdem Job, stillem Abschalter) |
+| **Schrittblöcke 1:1 ausgeführt** | `scripts.tests.test_blustradius_register` | ✅ Isolation Exit 2 → Schritt 0 + Befund · Exit 1 → Schritt **1** (Inhalt stoppt) · Kostensperre rot → `gesperrt=true`, Auslieferung läuft · Sammler faltet Altkanäle (`anzahl=2`) |
+| Messkette im Release | `scripts.tests.test_measurement_chain` | ✅ 24 Tests (Vorflug bricht **vor** der ersten Messung ab, Exit 3 nennt die Installationszeile, Artikel unangetastet) |
+| Vertrag C38 | `python3 scripts/governance_contract.py --selftest` | ✅ „C1–C38 mit Kunstbefunden" (5 C38-Sabotagen erkannt) |
+| Gesamtsuite | `python3 -m unittest discover -s scripts/tests` | **3110 Tests**, 2 Fehler – beides Vorbestand aus `main` (§5) |
+| Uhr-Probe (+97 Tage) | `scripts/selftest_clock.py --trap-discover scripts/tests --offset 97` | identisch: nur dieselben 2 Vorbestands-Fehler |
+
+### 8.7 Dateien Teil 2
+
+**Neu**
+
+- `data/blustradius-deploy.yml` – Register aller 64 Deploy-Schritte (Klasse + Grund)
+- `scripts/blustradius_register.py` – Wache über das Register (`--check`,
+  `--tabelle`, `--klasse`, `--selftest`)
+- `scripts/werkzeugbefund.py` – der eine Meldeweg (`--melden`, `--sammeln`,
+  `--liste`, `--selftest`)
+- `scripts/measurement_chain.py` – SSOT + Vorflug + Workflow-Audit der Messkette
+- `scripts/tests/test_blustradius_register.py` (19), `test_measurement_chain.py`
+  (24), `test_werkzeugbefund.py` (7)
+
+**Geändert**
+
+- `.github/workflows/deploy.yml` – Isolation und Kostensperre werten ihren
+  Exit-Code aus (Werkzeugzweig meldet, Inhaltszweig stoppt hart), bezahlte
+  Vertonung hängt an `steps.kostensperre.outputs.gesperrt`, neuer Sammelschritt vor
+  dem Artefakt-Upload, Job-Outputs `werkzeugbefunde`/`werkzeugbefunde_anzahl`,
+  `release-seal` wertet sie rot
+- `.github/workflows/frankautoops-report.yml` – Messkette vor dem Ops-Report
+- `scripts/publication_release.py` – Messketten-Vorflug in `refill_to_min()`,
+  Selbsttest läuft bewusst mit Attrappen
+- `scripts/bot_watchdog.py` – `blockade_klasse()` + klassenscharfes Urteil im
+  Blockade-Befund
+- `scripts/governance_contract.py` – Vertrag **C38** (Prüfung, Regeltext, Label,
+  fünf Sabotageproben im Kontrakt-Selbsttest), drei neue Wachen im vertraglichen
+  Minimum (C6)
+- `scripts/tests/test_bot_watchdog_meldetakt.py` – zwei Sabotage-Anker an die neue
+  Struktur des Blockade-Bauplans nachgezogen (gleiche Aussage, heutige Stelle)
+- `CLAUDE.md` – Leitplanke „Werkzeug blockiert nie die Auslieferung (C38)"
+
+### 8.8 Was Teil 2 bewusst NICHT tut
+
+- **Keine Gate-Schwelle bewegt, kein Inhalts-Gate entschärft.** Alle 43 Schritte der
+  Klassen `inhalt`/`gate-selbsttest` stoppen weiterhin hart.
+- **Kein `|| true`.** Werkzeugbefunde werden ausgewertet und gemeldet, nicht
+  geschluckt; der Lauf wird rot – nur eben **nach** der Veröffentlichung.
+- **Kein drittes `*_werkzeugfehler`-Output.** Die Altkanäle bleiben (sie sind
+  getestet) und fließen in den gemeinsamen Kanal.
+- **Keine Ausnahme ohne Begründung.** Die Ausnahmeliste der Messkette
+  (`AUSNAHMEN`) ist leer; jede künftige Ausnahme braucht einen Satz, warum sie
+  keine Lücke ist.
