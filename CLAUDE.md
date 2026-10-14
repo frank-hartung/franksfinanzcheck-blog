@@ -1680,6 +1680,37 @@ Beim Heilen kamen zwei blinde Flecken derselben Prüfung ans Licht:
   `python3 scripts/generate_covers.py --slug <slug>` bzw.
   `--pillars --slug pillar-<silo>`. Nie das JPG von Hand bearbeiten.
 
+## Ein Falschurteil darf nie alle Winkel treffen (#716-Familie, seit 14.10.2026)
+
+Der Ratgeber „DNS-Server wechseln“ war auf Instagram in **keinem** Winkel
+sendbar (CI `regression` rot seit #743). Zwei Ursachen verstärkten sich:
+L7 zählte die Fachkürzel DNS/HTTPS/TLS als Versalien-Geschrei (13 % > 12 %),
+und die Instagram-Caption war winkelblind – alle sechs Winkel ergaben Wort für
+Wort denselben Text, das Nachrücken auf einen anderen Winkel lief ins Leere.
+
+- **Ein fail-closed-Gate urteilt mit Beleg.** L7 unterscheidet Fachkürzel von
+  Geschrei wie L9 Zahlen: belegt ist, was der Haus-Kanon (`tag_casing`) in
+  Versalien führt oder der Artikel selbst so schreibt. Schreiwörter
+  (`meta.gate.schrei_woerter` + Standardliste), Versalwörter über sechs
+  Buchstaben und Wörter, die der Artikel normal schreibt, bleiben Geschrei.
+- **Belegmaterial = was der Texter zitieren darf.** Die FAQ zählt dazu, weil
+  der Winkel `frage` sie wörtlich aus dem Artikel übernimmt.
+- **Jeder Winkel ist ein eigener Zugang** (`_visual_winkel`): Fehlt einem
+  Winkel sein Material, fällt er auf den Nutzen-Text zurück, statt etwas zu
+  erfinden. `karussell` verspricht keine Folien, solange der Adapter ein
+  Einzelbild sendet.
+- **Frühwarnung statt Vollausfall:** `test_social_instagram_winkel` verlangt
+  je Kanal und Artikel mindestens zwei sendbare Winkel, auf Instagram drei
+  verschiedene sendbare Captions. Vorher stand Bluesky im selben Bestand bei
+  einem einzigen.
+- **Verbrauch ist kein Drift.** Ein veröffentlichter Reserve-Entwurf
+  (`draft: false` + `reserve_published`) wird nicht „nachzertifiziert“ – es
+  gibt keinen Entwurf mehr, an dem man messen könnte. `reserve_recert.py --fix`
+  bucht ihn **ohne Messkette** aus; `generated_at`/`measured_at` bleiben
+  unberührt, der Bestand kann dabei nur kleiner werden.
+- Tests: `python3 -m unittest scripts.tests.test_social_instagram_winkel scripts.tests.test_social_gate_l9 scripts.tests.test_reserve_recert`
+  · Bericht: `SOCIAL-INSTAGRAM-716-FAMILIE-DAUERHEILUNG-PREMIUM-2026-10-14.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

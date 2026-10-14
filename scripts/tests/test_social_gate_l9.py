@@ -178,5 +178,72 @@ class TestL7Kennzahl(unittest.TestCase):
         self.assertLess(gate.shouting_ratio(text), 0.12)
 
 
+DNS_SLUG = "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet"
+DNS_MATERIAL = ("DNS-Server wechseln: Datenschutz, Filter und Einrichtung "
+                "DNS over HTTPS DNS over TLS FRITZ!Box DNS ändern")
+DNS_PROSA = ("Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Für verschlüsselte "
+             "Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT).")
+
+
+class TestL7Fachkuerzel(unittest.TestCase):
+    """#716-Familie, 14.10.2026: Fachkürzel mit Beleg sind kein Geschrei.
+
+    Der Ratgeber „DNS-Server wechseln“ war auf Instagram in KEINEM Winkel
+    sendbar – „DNS over HTTPS“/„DNS over TLS“ ergaben 13 % Versalien und
+    rissen die 12-%-Schwelle. Beide Seiten des Vertrags werden festgehalten:
+    belegte Kürzel zählen nicht, Geschrei zählt weiterhin – auch neben einem
+    belegten Kürzel und auch, wenn der Artikel das Wort selbst verwendet.
+    """
+
+    def test_ohne_beleg_reisst_die_vorfall_prosa_die_schwelle(self):
+        # Der Vorfall als Gegenprobe: Ohne Kürzel-Beleg zählt jede Versalien-
+        # folge – genau so fiel der Ratgeber am 14.10. in jedem Winkel durch.
+        self.assertGreater(gate.shouting_ratio(DNS_PROSA, {"XYZ"}), 0.12)
+
+    def test_belegte_fachkuerzel_sind_kein_geschrei(self):
+        belegt = gate.fachkuerzel(DNS_MATERIAL)
+        self.assertTrue({"DNS", "HTTPS", "TLS", "FRITZ"} <= belegt, belegt)
+        self.assertEqual(gate.shouting_ratio(DNS_PROSA, belegt), 0.0)
+
+    def test_kuerzel_aus_dem_artikel_ohne_kanon_eintrag(self):
+        belegt = gate.fachkuerzel("Förderung über die BAFA beantragen")
+        self.assertIn("BAFA", belegt)
+
+    def test_schreiwoerter_sind_nie_belegt(self):
+        belegt = gate.fachkuerzel("GRATIS JETZT SOFORT DNS")
+        self.assertFalse({"GRATIS", "JETZT", "SOFORT"} & belegt)
+        laut = "JETZT GRATIS DNS WECHSELN – SOFORT SCHNELLER!"
+        self.assertGreater(gate.shouting_ratio(laut, belegt), 0.12)
+
+    def test_gewoehnliches_wort_des_artikels_belegt_keine_versalien(self):
+        # „Tarif“/„wechseln“ stehen im Artikel normal geschrieben – in
+        # Versalien sind sie Geschrei, keine Kürzel.
+        belegt = gate.fachkuerzel("Tarif wechseln: TARIF prüfen")
+        self.assertNotIn("TARIF", belegt)
+
+    def test_lange_versalwoerter_sind_keine_kuerzel(self):
+        belegt = gate.fachkuerzel("UNGLAUBLICH günstige Tarife")
+        self.assertNotIn("UNGLAUBLICH", belegt)
+
+    def test_versaliensatz_bleibt_trotz_belegtem_kuerzel_geschrei(self):
+        belegt = gate.fachkuerzel(DNS_MATERIAL)
+        laut = "DER BESTE DNS DEINES LEBENS, WECHSLE HEUTE NOCH!"
+        self.assertGreater(gate.shouting_ratio(laut, belegt), 0.5)
+
+    def test_konfigurierte_schreiwoerter_greifen(self):
+        belegt = gate.fachkuerzel("Der KRASS-Tarif", {"schrei_woerter": ["krass"]})
+        self.assertNotIn("KRASS", belegt)
+
+    def test_dns_ratgeber_ist_auf_instagram_in_jedem_winkel_sendbar(self):
+        art = _artikel(DNS_SLUG)
+        ch = CHANNELS["instagram"]
+        for winkel in ch.get("angles") or ["nutzen"]:
+            with self.subTest(winkel=winkel):
+                ok, viol, kennzahl = gate.check(_pkg(art, winkel, "instagram"),
+                                                ch, META, history=[])
+                self.assertTrue(ok, viol)
+                self.assertLessEqual(kennzahl["shouting"], 0.12)
+
+
 if __name__ == "__main__":
     unittest.main()

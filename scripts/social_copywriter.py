@@ -48,7 +48,7 @@ PILLAR_TAGS = {
     "frugalismus": ["Frugalismus", "Geldsparen"],
 }
 ACRONYMS = {"dsl", "etf", "kfz", "sepa", "wlan", "dns", "vpn", "gez", "agb",
-            "eeg", "kwh", "iban", "bic", "seo", "ai", "pkv", "ok", "eu"}
+            "eeg", "kwh", "iban", "bic", "seo", "ai", "pkv", "ok", "eu", "tls"}
 KEYWORD_HINTS = [
     (r"wechselbonus", ["DSL", "Wechselbonus"]),
     (r"preisgarantie|gaspreisgarantie|gaspreis", ["Gaspreis", "Preisgarantie"]),
@@ -137,12 +137,28 @@ def _fm_list(fm: str, name: str) -> list[str]:
     return [t.strip().strip('"').strip("'") for t in m.group(1).split(",") if t.strip()]
 
 
+# Punkte, die KEIN Satzende sind: Ordnungszahlen vor Monat oder kleinem Wort
+# („vom 1. Januar bis 31. Dezember“, „der 3. und letzte“) und gängige
+# Abkürzungen („z. B.“, „ca.“, „bzw.“). Ohne diesen Schutz riss der Texter
+# Sätze mitten im Datum ab und baute daraus Beiträge wie „… laufen vom 1.“.
+_MONATE = (r"(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|"
+           r"Oktober|November|Dezember|Jan|Feb|Mär|Apr|Jun|Jul|Aug|Sep|Sept|"
+           r"Okt|Nov|Dez)\b")
+_KEIN_SATZENDE_RX = re.compile(
+    r"(?:\b\d{1,2}\.(?=\s+(?:" + _MONATE + r"|[a-zäöüß]))"
+    r"|\b(?:z|d|u|o|s|v)\.\s?[a-zA-Z]\."
+    r"|\b(?:ca|bzw|ggf|inkl|zzgl|evtl|usw|etc|vgl|Nr|Abs|Art|Mio|Mrd|Tsd|max|min|bspw|sog)\.)")
+_PUNKT_PLATZHALTER = "\u2024"   # ONE DOT LEADER – unsichtbar für den Splitter
+
+
 def sentences(text: str) -> list[str]:
     text = re.sub(r"\s+", " ", (text or "").strip())
     if not text:
         return []
-    parts = re.split(r"(?<=[.!?])\s+", text)
-    return [p.strip() for p in parts if p.strip()]
+    geschuetzt = _KEIN_SATZENDE_RX.sub(
+        lambda m: m.group(0).replace(".", _PUNKT_PLATZHALTER), text)
+    parts = re.split(r"(?<=[.!?])\s+", geschuetzt)
+    return [p.replace(_PUNKT_PLATZHALTER, ".").strip() for p in parts if p.strip()]
 
 
 def clean_md(line: str) -> str:
@@ -204,16 +220,32 @@ def extract_faq(body: str) -> tuple[str, str]:
     """Erste FAQ-Frage + Antwort (für den Winkel „frage")."""
     if not body:
         return "", ""
-    m = re.search(r"(?im)^#{2,4}\s*(faq|häufige fragen|haeufige fragen).*?$(.{0,2500})", body)
+    # REPARATUR 14.10.2026: Ohne DOTALL fing `(.{0,2500})` nur den Rest der
+    # Überschriftenzeile – also nichts. Der Winkel `frage` lief dadurch auf
+    # JEDEM Kanal in den Titel-Rückfall, obwohl fast jeder Ratgeber einen
+    # FAQ-Block hat. Der Block ist jetzt das, was nach der Überschrift folgt.
+    m = re.search(r"(?im)^#{2,4}\s*(?:faq|häufige fragen|haeufige fragen)\b.*$", body)
     if not m:
         return "", ""
-    block = m.group(2)
+    block = body[m.end():m.end() + 2500]
     q = re.search(r"(?m)^#{3,4}\s*(.+?\?)\s*$", block)
     if not q:
         return "", ""
-    rest = block[q.end():]
-    ans = " ".join(clean_md(l) for l in rest.splitlines()[:6] if clean_md(l))
-    return clean_md(q.group(1)), sentences(ans)[0] if ans else ""
+    zeilen = []
+    for line in block[q.end():].splitlines():
+        if line.lstrip().startswith("#"):
+            break    # nächste Frage/Überschrift – nie in die Antwort ziehen
+        if clean_md(line):
+            zeilen.append(clean_md(line))
+        if len(zeilen) >= 6:
+            break
+    saetze = sentences(" ".join(zeilen))
+    # Eine Antwort wie „Nicht zwingend.“ ist ein Auftakt, keine Antwort: Sie
+    # bekommt den folgenden Satz dazu, der die Begründung trägt.
+    antwort = saetze[0] if saetze else ""
+    if antwort and len(antwort) < 60 and len(saetze) > 1:
+        antwort = f"{antwort} {saetze[1]}"
+    return clean_md(q.group(1)), antwort
 
 
 def load_article(path: str, base_url: str = DEFAULT_BASE) -> dict:
@@ -296,11 +328,36 @@ def umlaut_free(s: str) -> str:
              .replace("Ä", "Ae").replace("Ö", "Oe").replace("Ü", "Ue").replace("ß", "ss"))
 
 
+def _kanon_kuerzel_tags() -> dict[str, str]:
+    """Kürzel-Kanon des Hauses (`tag_casing`) für Hashtags: „https“ → „HTTPS“.
+
+    Die lokale Liste `ACRONYMS` bleibt vorrangig (bestehende Tags ändern sich
+    nicht); der Kanon schließt nur ihre Lücken. Vorher wurde aus „DNS over
+    HTTPS“ das Tag „#DNSOverHttps“ – auf dem Kanal, der Fachkompetenz zeigen
+    soll, eine sichtbar falsche Schreibweise.
+    """
+    try:
+        import tag_casing
+    except Exception:  # noqa: BLE001 – ohne Kanon gilt die lokale Liste
+        return {}
+    out = {}
+    for key, kanon in tag_casing.ACRONYMS.items():
+        token = re.sub(r"[^A-Za-z0-9]", "", str(kanon))
+        if token and token.lower() == key:
+            out[key] = token
+    return out
+
+
+KANON_TAG_KUERZEL = _kanon_kuerzel_tags()
+
+
 def _tag_token(word: str) -> str:
     core = re.sub(r"[^A-Za-z0-9]", "", umlaut_free(word or ""))
     if not core:
         return ""
-    return core.upper() if core.lower() in ACRONYMS else core.capitalize()
+    if core.lower() in ACRONYMS:
+        return core.upper()
+    return KANON_TAG_KUERZEL.get(core.lower()) or core.capitalize()
 
 
 def to_hashtag(phrase: str) -> str:
@@ -778,11 +835,94 @@ def _compose_business(article, cfg, angle, url, tags, tags_txt, link_pos):
 
 
 # --- visual (Instagram) ------------------------------------------------------
+# Satz, in dem der Artikel selbst eine verbreitete Annahme korrigiert
+# („erhöht weder … noch …“, „nicht automatisch“). Daraus entsteht der Winkel
+# `mythos` aus dem Artikel – statt einer Pillar-Behauptung, die zum konkreten
+# Thema gar nicht passen muss.
+KORREKTUR_RX = re.compile(
+    r"\b(?:weder|nicht automatisch|kein\w* automatisch|irrtum|mythos|"
+    r"entgegen|anders als (?:viele|oft))\b", re.I)
+VISUAL_OPENER_MAX = 125    # Instagram zeigt ~125 Zeichen vor „mehr“
+VISUAL_BODY_MAX = 380      # Caption bleibt unter dem soft_max des Kanals
+VISUAL_PUNKT_MAX = 180     # ganze Takeaway-Sätze statt abgerissener „…“
+
+
+def _visual_winkel(article: dict, angle: str) -> tuple[str, str]:
+    """(Erste Zeile, Körper) der Instagram-Caption – je Winkel eigenständig.
+
+    REPARATUR 14.10.2026 (#716-Familie): Die Caption war winkelBLIND – alle
+    sechs Instagram-Winkel lieferten Wort für Wort denselben Text, nur die
+    (nirgends gesendeten) Folien unterschieden sich. Ein einziges Falschurteil
+    des Gates sperrte damit den Artikel in JEDEM Winkel; das Nachrücken auf
+    einen anderen Winkel, das den Kanal vor dem Verhungern schützt, lief ins
+    Leere. Jetzt trägt jeder Winkel einen eigenen Zugang zum Thema – und nur
+    Material, das im Artikel steht (Kurzantwort, Takeaways, FAQ, Zahlen aus
+    Kurzantwort/Beschreibung/Titel). Fehlt einem Winkel sein Material, fällt
+    er ehrlich auf den Nutzen-Zugang zurück, statt etwas zu erfinden.
+    """
+    hook = article.get("hook") or article.get("description") or ""
+    saetze = list(article.get("hook_sentences") or ([hook] if hook else []))
+    numbers = article.get("numbers") or []
+
+    def koerper(teile: list[str]) -> str:
+        return trim(" ".join(t for t in teile if t), VISUAL_BODY_MAX)
+
+    if angle == "zahl" and numbers:
+        # Steht die Zahl in einem Folgesatz, rückt dieser Satz nach vorn. Steht
+        # sie schon im Aufhänger, wäre das der Nutzen-Text – dann führt die
+        # Zahl selbst (sie stammt aus Kurzantwort/Beschreibung/Titel, L9-belegt).
+        mit_zahl = next((x for x in saetze[1:] if re.search(r"\d", x)), "")
+        if mit_zahl:
+            rest = [x for x in saetze if x != mit_zahl][:2]
+            return trim(mit_zahl, VISUAL_OPENER_MAX), koerper(rest)
+        return (trim(f"{numbers[0]} – darum geht es bei „{_head_core(article)}“.",
+                     VISUAL_OPENER_MAX), koerper(saetze[:2]))
+
+    if angle in ("takeaway", "karussell"):
+        # `karussell` sendet (Stand Adapter) ein Einzelbild – die Caption
+        # verspricht deshalb keine Folien, sondern liefert die Merkliste, die
+        # man speichert. Ohne echte Takeaways gibt es keine Merkliste.
+        limit = 4 if angle == "karussell" else 3
+        punkte = bullets_of(article, limit, VISUAL_PUNKT_MAX)
+        if angle == "karussell" and not article.get("takeaways"):
+            punkte = []
+        if punkte:
+            if angle == "karussell":
+                liste = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(punkte))
+                return trim(hook, VISUAL_OPENER_MAX), f"Zum Speichern:\n{liste}"
+            liste = "\n".join(f"• {t}" for t in punkte)
+            return trim(hook, VISUAL_OPENER_MAX), f"Das Wichtigste in Kürze:\n{liste}"
+
+    if angle == "frage":
+        frage = (article.get("faq_question") or f"{_head_core(article)}?").strip()
+        antwort = article.get("faq_answer") or ""
+        return (trim(frage, VISUAL_OPENER_MAX),
+                koerper([antwort] if antwort else saetze[:2]))
+
+    if angle == "mythos":
+        idx = next((i for i, x in enumerate(saetze) if KORREKTUR_RX.search(x)), -1)
+        if idx >= 0:
+            korrektur = saetze[idx]
+            weiter = saetze[idx + 1:idx + 2]    # der Satz, der die Korrektur fortführt
+            return (trim(f"Was bei „{_head_core(article)}“ oft falsch eingeschätzt wird:",
+                         VISUAL_OPENER_MAX), koerper([korrektur, *weiter]))
+        myth = MYTHS.get(article.get("pillar") or "", GENERIC_MYTH)
+        return (trim(f"Mythos: „{myth}“", VISUAL_OPENER_MAX),
+                koerper([f"Fakt: {hook}"]) if hook else "")
+
+    # nutzen (Default) – und ehrlicher Rückfall jedes Winkels ohne Material.
+    return trim(hook, VISUAL_OPENER_MAX), koerper(saetze[1:3])
+
+
 def _compose_visual(article, cfg, angle, url, tags, tags_txt, link_pos):
     hook = article["hook"] or article["description"] or ""
     takeaways = article["takeaways"]
     numbers = article["numbers"]
-    cta = "Mehr Rechenwege findest du über den Link in der Bio."
+    # Die Rechenwege-Formel nur, wo der Artikel tatsächlich rechnet – ein
+    # Technik-Ratgeber ohne eine einzige Zahl verspricht sonst etwas, das er
+    # nicht hält.
+    cta = ("Mehr Rechenwege findest du über den Link in der Bio." if numbers
+           else "Den ganzen Ratgeber findest du über den Link in der Bio.")
     slides: list[str] = [article["title"]]
 
     if angle == "karussell" and takeaways:
@@ -795,9 +935,7 @@ def _compose_visual(article, cfg, angle, url, tags, tags_txt, link_pos):
         slides += bullets_of(article, 3, 120) or [trim(hook, 120)]
         slides.append("Link in der Bio")
 
-    opener = trim(hook, 125)
-    body = " ".join(article["hook_sentences"][1:3])
-    body = trim(body, 320)
+    opener, body = _visual_winkel(article, angle)
     parts = [opener, "", body, "", cta]
     if tags_txt:
         parts.append(tags_txt)
