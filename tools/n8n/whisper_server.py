@@ -69,8 +69,28 @@ def get_model() -> WhisperModel:
 
 
 def zugang_pruefen(authorization: str | None = Header(default=None)) -> None:
+    """Zugangsschlüssel prüfen – fail closed.
+
+    Sicherheitsaudit 15.10.2026 (F-04): Vorher kehrte diese Funktion SOFORT
+    zurück, wenn WHISPER_TOKEN leer war – der Dienst war dann offen. Genau
+    das war der Standardfall: docker-compose setzte `${WHISPER_TOKEN:-}`, die
+    Vorlage ließ den Wert leer. Da der Port auf 127.0.0.1 veröffentlicht ist,
+    konnte JEDE Webseite, die der Betreiber besucht, Transkriptionen auslösen
+    (ein `POST` mit FormData ist ein „simple request" ohne Preflight; die
+    Antwort ist für den Angreifer nicht lesbar, die Arbeit aber passiert).
+    Jetzt gilt: ohne konfigurierten Schlüssel wird nicht gearbeitet – außer
+    der Betreiber schaltet es für eine lokale Probe ausdrücklich frei
+    (WHISPER_OHNE_TOKEN_OK=1).
+    """
     if not TOKEN:
-        return
+        if os.environ.get("WHISPER_OHNE_TOKEN_OK") == "1":
+            return
+        raise HTTPException(
+            status_code=503,
+            detail="Dienst ohne Zugangsschlüssel gesperrt. WHISPER_TOKEN setzen "
+                   "(openssl rand -hex 32 in tools/n8n/.env); nur für lokale Proben: "
+                   "WHISPER_OHNE_TOKEN_OK=1",
+        )
     erwartet = f"Bearer {TOKEN}"
     if not authorization or not hmac.compare_digest(authorization.encode(), erwartet.encode()):
         raise HTTPException(status_code=401, detail="Nicht autorisiert.")

@@ -46,6 +46,10 @@ services:
       - GENERIC_TIMEZONE=Europe/Berlin
       - TZ=Europe/Berlin
       - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
+      # Webhook-Empfang nur mit Secret (F-04): n8n-Header-Auth je Webhook-Knoten
+      # plus dieses Secret fuer den Python-Bridge-Server. Fehlt es, nehmen weder
+      # n8n-Workflows noch die Bridge Anfragen an (fail closed).
+      - N8N_WEBHOOK_TOKEN=${N8N_WEBHOOK_TOKEN:?N8N_WEBHOOK_TOKEN fehlt – bitte openssl rand -hex 32 in tools/n8n/.env eintragen}
       - EXECUTIONS_DATA_SAVE_ON_ERROR=all
       - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
       - EXECUTIONS_DATA_PRUNE=true
@@ -78,7 +82,10 @@ services:
       - PORT=8765
       - HOST=0.0.0.0
       - MAX_UPLOAD_MB=${WHISPER_MAX_UPLOAD_MB:-50}
-      - WHISPER_TOKEN=${WHISPER_TOKEN:-}
+      # PFLICHT (Sicherheitsaudit 15.10.2026, F-04): Ohne Token verweigert
+      # der Dienst die Arbeit (fail closed) – vorher war der Leerfall der
+      # Standard und der Dienst damit offen für jede besuchte Webseite.
+      - WHISPER_TOKEN=${WHISPER_TOKEN:?WHISPER_TOKEN fehlt – bitte openssl rand -hex 32 in tools/n8n/.env eintragen}
       - TZ=Europe/Berlin
     volumes:
       - whisper_models:/home/whisper/.cache/huggingface

@@ -65,6 +65,8 @@ from __future__ import annotations
 import argparse
 import datetime
 import glob
+import contextlib
+import io
 import json
 import os
 import re
@@ -594,10 +596,33 @@ def worker_liste(base: str, key: str) -> list[dict]:
 
     → [{email, token, themen, bestaetigt}]. Netzwerkfehler werfen – der
     Aufrufer entscheidet, was damit ist (fail-closed beim Listen-Versand).
+
+    Token-Träger (Sicherheitsaudit 15.10.2026, F-08): Der Versand braucht je
+    Empfänger einen echten Abmeldelink, also den Token. Der Worker gibt ihn
+    nur mit dem SCHREIBSCHLÜSSEL UND der ausdrücklichen Anforderung
+    `mit_token=1` heraus – ein abgeflossener Leseschlüssel kann damit keine
+    Abmeldungen mehr auslösen. Fehlt der Schreibschlüssel in der Umgebung,
+    greift im Worker derselbe Wert wie beim Lesen (kein Bruch).
     """
-    antwort = versand.worker_abfrage("/export/abonnenten", None, base=base, key=key)
+    schreib = versand.worker_schreibschluessel()
+    antwort = versand.worker_abfrage("/export/abonnenten", {"mit_token": "1"},
+                                     base=base, key=schreib or key)
     liste = antwort.get("abonnenten")
-    return liste if isinstance(liste, list) else []
+    liste = liste if isinstance(liste, list) else []
+    # Fail-closed auf die WIRKUNG (F-08): Fehlt auch nur einem Empfänger der
+    # Abmelde-Token, trüge jede Mail einen leeren bzw. wirkungslosen
+    # Abmeldelink. Ein Newsletter ohne funktionierende Abmeldung ist kein
+    # Newsletter – dann lieber kein Versand und eine klare Ursache.
+    ohne_token = [e.get("email", "?") for e in liste if not e.get("token")]
+    if ohne_token:
+        raise RuntimeError(
+            "Worker liefert keine Abmelde-Token (%d von %d Empfängern). Ursache ist in "
+            "der Regel ein fehlender Schreibschluessel: NEWSLETTER_WORKER_WRITE_KEY "
+            "(= Cloudflare-Secret EXPORT_KEY_WRITE) setzen. Der Versand wird "
+            "abgebrochen, damit keine Mail ohne Abmeldelink hinausgeht."
+            % (len(ohne_token), len(liste))
+        )
+    return liste
 
 
 def email_aus_text(roh: str) -> str:
@@ -1396,9 +1421,14 @@ def _selftest() -> int:
     try:
         def fake_abfrage(pfad_g, param_g, *, base, key):
             pruefe(pfad_g == "/export/abonnenten", f"Worker-Pfad {pfad_g}")
+            # F-08 (Sicherheitsaudit 15.10.2026): Der Listen-Weg verlangt den
+            # Token ausdrücklich (`mit_token=1`) – ohne ihn liefert der Worker
+            # `mit_token: false` und jeder Abmeldelink im Versand wäre leer.
+            pruefe(param_g == {"mit_token": "1"}, f"mit_token fehlt: {param_g}")
             pruefe(base == "https://abos.franksfinanzcheck.de" and key == "key",
                    "Worker-Basis/Key falsch übergeben")
-            return {"abonnenten": abonnten_test, "anzahl": len(abonnten_test)}
+            return {"abonnenten": abonnten_test, "anzahl": len(abonnten_test),
+                    "mit_token": True}
 
         def fake_sende(datei_g, root=None, env=None, konf=None, schlafen=None):
             with open(datei_g, encoding="utf-8") as fh:
@@ -1482,6 +1512,36 @@ def _selftest() -> int:
         pruefe(sorted(state4["letzte_ausgabe"]["versendet"]) ==
                sorted([versand.hash16("eins@beispiel.de"), versand.hash16("zwei@beispiel.de")]),
                "Lauf 4: Endzustand unvollständig (Double-Send droht)")
+
+        # LAUF 5 (Gegenprobe, F-08): Der Worker liefert Einträge OHNE Token
+        # (weil der Schreibschluessel fehlt). Dann darf KEINE Mail rausgehen –
+        # ein Newsletter ohne Abmeldelink ist kein Newsletter. Erwartet:
+        # laute Ausnahme, kein Versand, keine stille Teilsendung.
+        gesammelte.clear()
+        modus.update(rc=0, liefern=None)
+        # WICHTIG: Hier wird NICHT `worker_liste` ersetzt – sonst umginge der
+        # Test genau die Prüfung, die er belegen soll. Ersetzt wird nur die
+        # Worker-Antwort (der äußere Rand): echte Funktion, echter Fail-closed-
+        # Pfad, gefälschte Daten.
+        original_abfrage_l5 = versand.worker_abfrage
+        def abfrage_ohne_token(pfad_g, param_g, *, base, key):
+            pruefe(pfad_g == "/export/abonnenten", f"Lauf 5: Pfad {pfad_g}")
+            return {"mit_token": False, "anzahl": 1,
+                    "abonnenten": [{"email": "ohne@beispiel.de", "themen": [],
+                                    "bestaetigt": "2026-09-01T00:00:00Z"}]}
+        versand.worker_abfrage = abfrage_ohne_token
+        try:
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                rc5 = _versand_liste(wq, artikel, ausgabe_mini["html"], ausgabe_mini["text"],
+                                     "Betreff Dritte", "Pre", "Versprechen.", konf_test, "2026-09-26")
+            meldung5 = puffer.getvalue()
+            pruefe(rc5 == 1, f"Lauf 5: rc {rc5} statt 1 (fail-closed erwartet)")
+            pruefe("Abmelde-Token" in meldung5 or "Schreibschluessel" in meldung5,
+                   f"Lauf 5: fehlender Token wurde nicht laut beklagt ({meldung5[:120]})")
+            pruefe(not gesammelte, "Lauf 5: trotz fehlendem Abmeldelink wurde gesendet")
+        finally:
+            versand.worker_abfrage = original_abfrage_l5
 
         # G1: Journal enthält Hash, keine Roh-Adresse.
         journal = os.path.join(wq, "data", "newsletter_journal.jsonl")

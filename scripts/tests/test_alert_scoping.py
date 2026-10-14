@@ -278,9 +278,15 @@ class VerhaltensSimulation(unittest.TestCase):
             # Simulation deckt mehrere echte Workflows ab, insbesondere die
             # markenneutrale Identität der Content-Engine (WF-A535 / #632).
             # E2E + Deploy: WF-7B6B / #654 (Install-Diagnose) und Veröffentlichung.
+            # F-09 (Sicherheitsaudit 15.10.2026): Der fünfte Name ist ABSICHTLICH
+            # feindlich (Markdown, Mention, Umbruch). Die Simulation beweist, dass
+            # er den Issue-Body nicht steuern kann – ein Test mit einem braven
+            # Namen würde genau die Lücke nicht prüfen.
+            boeser_name = "Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile"
             identitaeten = {name: ident_modul.identitaet(name)
                             for name in ("Layout-AI", "Content-Engine v2",
-                                         "E2E-Tests (Playwright)", "Deploy auf GitHub Pages")}
+                                         "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
+                                         boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

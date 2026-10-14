@@ -71,14 +71,40 @@ BESTAETIGUNG_TAGE = "14"
 # (Free-Plan: 1.000 Writes/Tag fuer das GANZE Konto, Audit H-03).
 FEEDBACK_MAX_PRO_TAG = "200"
 
+# TAGESDECKEL der Anmeldungen (F-03): Eine Anmeldung kostet vier KV-Writes
+# (abo, token, nachweis, budget). 100 Anmeldungen = 400 Writes; zusammen mit
+# 200 Feedback-Stimmen bleiben rund 400 der 1.000 Schreibzugriffe fuer
+# Bestaetigungen, Abmeldungen und den Pflegelauf. Ist der Deckel erreicht,
+# wird fail-closed abgelehnt (503) und einmal je Stunde laut gemeldet –
+# Anmeldung, Bestaetigung und Abmeldung bleiben dadurch erreichbar, auch
+# wenn ein Angreifer den Dienst maschinell befuellt.
+ANMELDUNG_MAX_PRO_TAG = "100"
+
+# Mengenregeln der LESENDEN Routen je Minute und Verbindung (F-03).
+# Bewusst grosszuegig: ein Mensch oeffnet Seiten, kein Skript in Schleife.
+RATE_LIMIT_LESEN = "60"       # /bestaetigung, /praeferenzen, /status
+RATE_LIMIT_FEEDBACK = "30"    # /feedback (GET und POST)
+RATE_LIMIT_EXPORT = "20"      # /export/... (geschuetzter Weg)
+
 # Secrets (NICHT hier eintragen):
 #   GITHUB_PAT        Fine-Grained, nur dieses Repo, "Actions: Read and write"
 #   EXPORT_KEY        32+ Zeichen Zufall, = GitHub-Secret NEWSLETTER_WORKER_EXPORT_KEY
-#   TURNSTILE_SECRET  optional (Audit M-02): sobald gesetzt, verlangt
-#                     /anmeldung ein gueltiges Feld `cf-turnstile-response`.
-#                     ERST setzen, wenn das Widget im Formular ausgeliefert
-#                     wird (Site-Key + Datenschutzerklaerung), sonst scheitert
-#                     jede Anmeldung.
+#                     Rolle LESEN: Listen ohne Token, Pending, Status, Kontakt.
+#   EXPORT_KEY_WRITE  optional (Audit 15.10.2026, F-08): eigener Schluessel fuer
+#                     token-tragende Massenexporte (?mit_token=1). Gesetzt =
+#                     getrennte Rollen; der Versand nutzt dann
+#                     NEWSLETTER_WORKER_WRITE_KEY. Fehlt er, gilt EXPORT_KEY
+#                     fuer beide Rollen (Rueckwaerts-Kompatibilitaet).
+#   TURNSTILE_SECRET  (Audit M-02, standardmaessig AKTIV seit 15.10.2026):
+#                     verlangt bei /anmeldung ein gueltiges Feld
+#                     `cf-turnstile-response`. Das Widget wird ausgeliefert,
+#                     sobald params.turnstileSiteKey in hugo.toml steht –
+#                     beide Werte gehoeren zusammen (Wache:
+#                     scripts/worker_betrieb_wache.py).
+#
+# Mengenregeln (15.10.2026, F-03): Das Binding RATE_LIMITER deckt die
+# Schreib-Routen ab; die folgenden Variablen deckeln die LESENDEN Routen
+# (Token-Seiten, Feedback, Export). Ohne Binding greift der KV-Notpfad.
 
 # Rate-Limiting ohne KV-Schreibzugriffe (Audit H-03): 5 Anfragen je IP und
 # Minute fuer /anmeldung und /abmeldung. namespace_id ist eine frei

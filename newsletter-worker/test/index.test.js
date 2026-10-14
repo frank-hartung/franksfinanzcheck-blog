@@ -19,7 +19,12 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen } from '../src/index.js';
+import worker, {
+  TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen,
+  limit_klasse, schluessel_pruefen, schreibschluessel_pruefen, tagesbudget_nehmen,
+  tagesbudget_stand, schluessel_fingerabdruck, ANMELDUNG_MAX_PRO_TAG_DEFAULT,
+  menge_speicher_pruefen, menge_speicher_zuruecksetzen,
+} from '../src/index.js';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -620,9 +625,10 @@ test('status: liefert Status+Themen, aber KEINE Adresse', async () => {
 });
 
 // ------------------------------------------------------------------ export
-function export_request(pfad, { key, token, koerper, methode = 'GET' } = {}) {
+function export_request(pfad, { key, token, koerper, methode = 'GET', ip = '' } = {}) {
   const header = { accept: 'application/json' };
   if (key) header['x-ff-key'] = key;
+  if (ip) header['cf-connecting-ip'] = ip;
   return new Request(`http://abos.test${pfad}`, {
     method: methode, headers: header, body: methode === 'POST' ? koerper : undefined,
   });
@@ -636,18 +642,140 @@ test('export: ohne Secret -> 403, mit falschem Secret -> 403', async () => {
   }
 });
 
-test('export/abonnenten: nur aktive, mit Token und Themen', async () => {
+test('export/abonnenten: nur aktive, mit Themen – Token NUR mit Schreibschluessel (F-08)', async () => {
   const kv = kvLeeren();
   await anmelden(kv, { email: 'akt@beispiel.de', consent: '1', themen: ['strom-sparen'] });
   await anmelden(kv, { email: 'offen@beispiel.de', consent: '1' });
   const eintrag = await kv.get('abo:akt@beispiel.de', 'json');
   await worker.fetch(form_request('/bestaetigung', { token: eintrag.token }), env_mit(kv));
-  const antwort = await worker.fetch(export_request('/export/abonnenten', { key: EXPORT_KEY }), env_mit(kv));
-  const daten = await antwort.json();
-  assert.equal(daten.anzahl, 1);
-  assert.equal(daten.abonnenten[0].email, 'akt@beispiel.de');
-  assert.ok(daten.abonnenten[0].token);
-  assert.deepEqual(daten.abonnenten[0].themen, ['strom-sparen']);
+
+  // 1. Standardexport: Adresse und Themen, aber KEIN Token (Gegenprobe).
+  const standard = await (await worker.fetch(
+    export_request('/export/abonnenten', { key: EXPORT_KEY }), env_mit(kv))).json();
+  assert.equal(standard.anzahl, 1);
+  assert.equal(standard.abonnenten[0].email, 'akt@beispiel.de');
+  assert.deepEqual(standard.abonnenten[0].themen, ['strom-sparen']);
+  assert.equal(standard.mit_token, false);
+  assert.ok(!('token' in standard.abonnenten[0]),
+    'Token im Massenexport nur mit dem zweiten Schluessel');
+
+  // 2. Getrennte Rollen: ?mit_token=1 mit dem LESESchluessel -> weiter ohne Token.
+  const env_getrennt = env_mit(kv, { EXPORT_KEY_WRITE: 'schreib-key-32-z------------' });
+  const lesend = await (await worker.fetch(
+    export_request('/export/abonnenten?mit_token=1', { key: EXPORT_KEY }), env_getrennt)).json();
+  assert.equal(lesend.mit_token, false);
+  assert.ok(!('token' in lesend.abonnenten[0]), 'Leseschluessel oeffnet keine Token');
+
+  // 3. Positivprobe: Schreibschluessel + ?mit_token=1 -> Token ist da.
+  const schreibend = await (await worker.fetch(
+    export_request('/export/abonnenten?mit_token=1', { key: 'schreib-key-32-z------------' }),
+    env_getrennt)).json();
+  assert.equal(schreibend.mit_token, true);
+  assert.equal(schreibend.abonnenten[0].token, eintrag.token);
+
+  // 4. Rueckfall: ohne EXPORT_KEY_WRITE gilt der Standardschluessel fuer beide
+  //    Rollen – bestehende Laeufe brechen durch die Trennung nicht.
+  const rueckfall = await (await worker.fetch(
+    export_request('/export/abonnenten?mit_token=1', { key: EXPORT_KEY }), env_mit(kv))).json();
+  assert.equal(rueckfall.mit_token, true);
+  assert.equal(rueckfall.abonnenten[0].token, eintrag.token);
+});
+
+test('export: jeder Aufruf wird protokolliert, Fehlversuche inbegriffen (F-08)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv);
+  // Der Mengenzaehler ist Prozesszustand: fuer diesen Test zuruecksetzen, damit
+  // er nicht von vorherigen Export-Aufrufen gebremst wird (Testproben-Trennung).
+  menge_speicher_zuruecksetzen();
+  await worker.fetch(export_request('/export/abonnenten', { key: 'falsch-falsch-falsch' }), env);
+  await worker.fetch(export_request('/export/pending', { key: EXPORT_KEY }), env);
+  const protokoll = [...kv.map.keys()].filter((k) => k.startsWith('exportlog:'));
+  assert.equal(protokoll.length, 2, 'auch der abgewiesene Zugriff ist ein Nachweis');
+  const eintraege = protokoll.map((k) => JSON.parse(kv.map.get(k)));
+  assert.ok(eintraege.some((e) => e.status === 403));
+  assert.ok(eintraege.some((e) => e.route === '/export/pending' && e.status === 200));
+  // Der Abdruck ist ein Kurz-Hash – NIE der Schluessel selbst.
+  for (const e of eintraege) {
+    assert.match(e.key, /^[0-9a-f]{8}$/);
+    assert.ok(!JSON.stringify(e).includes(EXPORT_KEY));
+  }
+  // Sichtbar fuer den Betreiber (healthz mit Schluessel), verborgen fuer alle anderen.
+  const oeffentlich = await (await worker.fetch(new Request('http://abos.test/healthz'), env)).json();
+  assert.ok(!('exporte' in oeffentlich), 'Betriebsbild nur mit Schluessel');
+  const intern = await (await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }), env)).json();
+  assert.equal(intern.exporte.length, 2);
+  assert.equal(intern.schluesselrollen, 'gemeinsam');
+});
+
+test('Anmeldung: Tagesbudget deckelt die Schreibzugriffe (F-03)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { ANMELDUNG_MAX_PRO_TAG: '2' });
+  const freilass = fetch_sperr();
+  const a = await worker.fetch(form_request('/anmeldung', { email: 'eins@beispiel.de', consent: '1' }), env);
+  const b = await worker.fetch(form_request('/anmeldung', { email: 'zwei@beispiel.de', consent: '1' }), env);
+  const c = await worker.fetch(form_request('/anmeldung', { email: 'drei@beispiel.de', consent: '1' }), env);
+  freilass();
+  assert.equal(a.status, 200);
+  assert.equal(b.status, 200);
+  assert.equal(c.status, 503, 'dritte Anmeldung wird fail-closed abgelehnt');
+  assert.equal(await kv.get('abo:drei@beispiel.de', 'json'), null, 'nichts geschrieben');
+  assert.equal(await kv.get('budget:anmeldung:' + new Date().toISOString().slice(0, 10)), '2');
+  // Genau EINE laute Meldung je Stunde – der Melder darf das Budget nicht fressen.
+  assert.ok(kv.map.has('warn:anmeldung:' + new Date().toISOString().slice(0, 10)));
+  const text = await c.text();
+  assert.ok(!text.includes('budget') && !text.includes('Kontingent'),
+    'die Antwort verraet keine Betriebsinterna');
+});
+
+test('Mengenklassen: jede Route hat eine Klasse (F-03)', () => {
+  assert.equal(limit_klasse('/bestaetigung', 'GET'), 'lesen');
+  assert.equal(limit_klasse('/praferenzen', 'GET'), 'lesen');
+  assert.equal(limit_klasse('/status', 'GET'), 'lesen');
+  assert.equal(limit_klasse('/feedback', 'GET'), 'feedback');
+  assert.equal(limit_klasse('/feedback', 'POST'), 'feedback');
+  assert.equal(limit_klasse('/export/abonnenten', 'GET'), 'export');
+  assert.equal(limit_klasse('/export/versuch', 'POST'), 'export');
+  // Die POST-Routen mit eigener Pruefung bleiben bei ihren strengeren Limits.
+  assert.equal(limit_klasse('/anmeldung', 'POST'), null);
+  assert.equal(limit_klasse('/abmeldung', 'POST'), null);
+});
+
+test('Mengenbegrenzung greift auf den Token-Seiten (F-03, Limbus ohne Binding)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { RATE_LIMIT_LESEN: '2' });
+  const hole = () => worker.fetch(new Request('http://abos.test/status?token=egal', {
+    headers: { accept: 'application/json', 'cf-connecting-ip': '203.0.113.9' },
+  }), env);
+  const eins = await hole();
+  const zwei = await hole();
+  const drei = await hole();
+  assert.equal(eins.status, 404, 'unbekannter Token – aber die Anfrage wird bearbeitet');
+  assert.equal(zwei.status, 404);
+  assert.equal(drei.status, 429, 'ab der Grenze wird gebremst');
+});
+
+test('Log-Hygiene: die E-Mail-Adresse steht nie im Klartext-Log (F-05)', async () => {
+  const kv = kvLeeren();
+  // Defekter Bestand (unbekannter Status) ist genau der Pfad, der vorher loggte.
+  await kv.put('abo:defekt@beispiel.de', JSON.stringify({
+    email: 'defekt@beispiel.de', norm: 'defekt@beispiel.de', status: 'kaputt',
+    token: 'x'.repeat(32), seit: new Date().toISOString(), themen: [],
+  }));
+  const meldungen = [];
+  const zuvor = console.warn;
+  console.warn = (...args) => meldungen.push(args.join(' '));
+  try {
+    const freilass = fetch_sperr();
+    await worker.fetch(form_request('/anmeldung', { email: 'defekt@beispiel.de', consent: '1' }),
+      env_mit(kv));
+    freilass();
+  } finally {
+    console.warn = zuvor;
+  }
+  assert.ok(meldungen.length >= 1, 'der Fall wird gemeldet');
+  const gesamt = meldungen.join('\n');
+  assert.ok(!gesamt.includes('defekt@beispiel.de'), 'keine Adresse im Log');
+  assert.match(gesamt, /sha256:[0-9a-f]{32}/);
 });
 
 test('export/pending + export/token: offene Liste und Einzel-Lookup', async () => {
@@ -717,6 +845,26 @@ function wrangler_crons() {
   assert.ok(m, 'wrangler.toml: [triggers] crons fehlt');
   return [...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]);
 }
+
+test('wrangler.toml traegt die Schutzwariablen des Audits 15.10.2026 (F-03)', () => {
+  const quelle = readFileSync(join(HIER, '..', 'wrangler.toml'), 'utf8');
+  // Ohne diese Variablen faellt der Worker auf die Defaults zurueck – die
+  // sind identisch, aber ein Deploy, der sie still verliert, soll auffallen.
+  for (const name of ['ANMELDUNG_MAX_PRO_TAG', 'RATE_LIMIT_LESEN', 'RATE_LIMIT_FEEDBACK',
+    'RATE_LIMIT_EXPORT', 'FEEDBACK_MAX_PRO_TAG']) {
+    assert.match(quelle, new RegExp(`^${name} = "\\d+"(\\s*#.*)?$`, 'm'), `${name} fehlt in wrangler.toml`);
+  }
+  // Der Tagesdeckel muss unter dem Schreibkontingent bleiben: 100 Anmeldungen
+  // x 4 Schreibzugriffe + 200 Feedback bleiben deutlich unter 1.000.
+  const deckel = Number(/^ANMELDUNG_MAX_PRO_TAG = "(\d+)"/m.exec(quelle)[1]);
+  const feedback = Number(/^FEEDBACK_MAX_PRO_TAG = "(\d+)"/m.exec(quelle)[1]);
+  assert.ok(deckel * 4 + feedback <= 1000,
+    `Tagesdeckel ${deckel} x 4 + ${feedback} Feedback sprengt die 1.000 Schreibzugriffe`);
+  // workers_dev bleibt aus (WAF/Zone), das Rate-Limit-Binding bleibt da.
+  assert.match(quelle, /workers_dev = false/);
+  assert.match(quelle, /preview_urls = false/);
+  assert.match(quelle, /\[\[ratelimits\]\]/);
+});
 
 test('taktgeber: wrangler.toml und TAKT decken sich (Wochentage als Namen, nicht 2,5)', () => {
   const crons = wrangler_crons();
@@ -1155,4 +1303,188 @@ test('Datenschutz-Pflege: Alt-IP/UA im Abo-Datensatz werden entfernt, Nachweis b
   assert.equal(nachher.status, 'active');
   assert.ok(!nachher.ip, 'keine IP mehr im Abo');
   assert.ok(!JSON.stringify(nachher).includes('1.2.3.4'), 'IP auch nicht in Unterobjekten');
+});
+
+// ------------------------------------------------- Schutzwachen (Audit 15.10.2026)
+test('export: jeder Aufruf wird protokolliert, Fehlversuche inbegriffen (F-08)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv);
+  await worker.fetch(export_request('/export/abonnenten', { key: 'falsch-falsch-falsch' }), env);
+  await worker.fetch(export_request('/export/pending', { key: EXPORT_KEY }), env);
+  const protokoll = [...kv.map.keys()].filter((k) => k.startsWith('exportlog:'));
+  assert.equal(protokoll.length, 2, 'auch der abgewiesene Zugriff ist ein Nachweis');
+  const eintraege = protokoll.map((k) => JSON.parse(kv.map.get(k)));
+  assert.ok(eintraege.some((e) => e.status === 403));
+  assert.ok(eintraege.some((e) => e.route === '/export/pending' && e.status === 200));
+  // Der Abdruck ist ein Kurz-Hash – NIE der Schluessel selbst.
+  for (const e of eintraege) {
+    assert.match(e.key, /^[0-9a-f]{8}$/);
+    assert.ok(!JSON.stringify(e).includes(EXPORT_KEY));
+  }
+  // Sichtbar fuer den Betreiber (healthz mit Schluessel), verborgen fuer alle anderen.
+  const oeffentlich = await (await worker.fetch(new Request('http://abos.test/healthz'), env)).json();
+  assert.ok(!('exporte' in oeffentlich), 'Betriebsbild nur mit Schluessel');
+  assert.ok(!('budget' in oeffentlich), 'Budgetstand nur mit Schluessel');
+  const intern = await (await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }), env)).json();
+  assert.equal(intern.exporte.length, 2);
+  assert.equal(intern.schluesselrollen, 'gemeinsam');
+  assert.equal(intern.turnstile, 'inaktiv');
+  assert.equal(intern.budget.anmeldung_heute, 0);
+});
+
+test('Export-Schluessel: Konstantzeitvergleich und Rollen-Rueckfall (F-08)', async () => {
+  const kv = kvLeeren();
+  const nur_lesen = env_mit(kv);
+  const getrennt = env_mit(kv, { EXPORT_KEY_WRITE: 'schreib-key-32-z------------' });
+  assert.equal(await schluessel_pruefen(nur_lesen, EXPORT_KEY), true);
+  assert.equal(await schluessel_pruefen(nur_lesen, EXPORT_KEY.slice(0, -1)), false,
+    'ein Zeichen weniger ist nicht der Schluessel');
+  assert.equal(await schluessel_pruefen(nur_lesen, ''), false);
+  assert.equal(await schluessel_pruefen(env_mit(kv), 'kurz'), false);
+  // Rueckfall: ohne eigenen Schreibschluessel gilt der Standardschluessel.
+  assert.equal(await schreibschluessel_pruefen(nur_lesen, EXPORT_KEY), true);
+  // Getrennt: der Leseschluessel oeffnet den Schreibweg NICHT.
+  assert.equal(await schreibschluessel_pruefen(getrennt, EXPORT_KEY), false);
+  assert.equal(await schreibschluessel_pruefen(getrennt, 'schreib-key-32-z------------'), true);
+  // Der Abdruck ist stabil, kurz und verraet den Wert nicht.
+  const abdruck = await schluessel_fingerabdruck(EXPORT_KEY);
+  assert.match(abdruck, /^[0-9a-f]{8}$/);
+  assert.ok(!EXPORT_KEY.includes(abdruck));
+  assert.equal(abdruck, await schluessel_fingerabdruck(EXPORT_KEY));
+  assert.notEqual(abdruck, await schluessel_fingerabdruck('anderer-schluessel-32-z------'));
+});
+
+test('Anmeldung: Tagesbudget deckelt die Schreibzugriffe (F-03)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { ANMELDUNG_MAX_PRO_TAG: '2' });
+  const freilass = fetch_sperr();
+  const a = await worker.fetch(form_request('/anmeldung', { email: 'eins@beispiel.de', consent: '1' }), env);
+  const b = await worker.fetch(form_request('/anmeldung', { email: 'zwei@beispiel.de', consent: '1' }), env);
+  const c = await worker.fetch(form_request('/anmeldung', { email: 'drei@beispiel.de', consent: '1' }), env);
+  freilass();
+  assert.equal(a.status, 200);
+  assert.equal(b.status, 200);
+  assert.equal(c.status, 503, 'die dritte Anmeldung wird fail-closed abgelehnt');
+  assert.equal(await kv.get('abo:drei@beispiel.de', 'json'), null, 'nichts geschrieben');
+  const heute = new Date().toISOString().slice(0, 10);
+  assert.equal(await kv.get(`budget:anmeldung:${heute}`), '2');
+  // Genau EINE laute Meldung je Stunde – der Melder darf das Budget nicht fressen.
+  assert.ok(kv.map.has(`warn:anmeldung:${heute}`));
+  const text = await c.text();
+  assert.ok(!text.includes('budget') && !text.includes('Kontingent') && !text.includes('KV'),
+    'die Antwort verraet keine Betriebsinterna');
+  assert.match(text, /ausgelastet/);
+  // Die Abmeldung bleibt erreichbar (Art. 7 Abs. 3 DSGVO) – sie hat kein Budget.
+  await kv.put('abo:eins@beispiel.de', JSON.stringify({
+    email: 'eins@beispiel.de', norm: 'eins@beispiel.de', status: 'active',
+    token: 't'.repeat(32), themen: [], seit: new Date().toISOString(),
+  }));
+  await kv.put(`token:${'t'.repeat(32)}`, 'eins@beispiel.de');
+  const weg = await worker.fetch(form_request('/abmeldung', { token: 't'.repeat(32) }), env);
+  assert.equal(weg.status, 200, 'Abmeldung darf nie am Tagesbudget scheitern');
+});
+
+test('Tagesbudget: zaehlt, kappt bei 0 nicht und kommt ohne Zahl klar (F-03)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv);
+  const erster = await tagesbudget_nehmen(env, 'anmeldung', 2);
+  const zweiter = await tagesbudget_nehmen(env, 'anmeldung', 2);
+  const dritter = await tagesbudget_nehmen(env, 'anmeldung', 2);
+  assert.deepEqual([erster.ok, zweiter.ok, dritter.ok], [true, true, false]);
+  assert.equal(dritter.stand, 2);
+  assert.equal(dritter.maximum, 2);
+  assert.equal(await tagesbudget_stand(env, 'anmeldung'), 2);
+  // maximum = 0 heisst „kein Deckel" – dann darf das Budget nie blocken.
+  const ohne = await tagesbudget_nehmen(env, 'ohne-deckel', 0);
+  assert.equal(ohne.ok, true);
+  // Der Standarddeckel muss deutlich unter dem Schreibkontingent liegen:
+  // eine Anmeldung kostet vier Schreibzugriffe.
+  assert.ok(ANMELDUNG_MAX_PRO_TAG_DEFAULT * 4 <= 1000,
+    'Standarddeckel sprengt das KV-Schreibkontingent des Free-Plans');
+});
+
+test('Mengenklassen: jede Route hat eine Klasse (F-03)', () => {
+  assert.equal(limit_klasse('/bestaetigung', 'GET'), 'lesen');
+  assert.equal(limit_klasse('/praferenzen', 'GET'), 'lesen');
+  assert.equal(limit_klasse('/status', 'GET'), 'lesen');
+  assert.equal(limit_klasse('/feedback', 'GET'), 'feedback');
+  assert.equal(limit_klasse('/feedback', 'POST'), 'feedback');
+  assert.equal(limit_klasse('/export/abonnenten', 'GET'), 'export');
+  assert.equal(limit_klasse('/export/versuch', 'POST'), 'export');
+  // Die POST-Routen mit eigener, strengerer Pruefung bleiben bei ihren Limits.
+  assert.equal(limit_klasse('/anmeldung', 'POST'), null);
+  assert.equal(limit_klasse('/abmeldung', 'POST'), null);
+});
+
+test('Mengenzaehler im Speicher: je Verbindung eigenes Fenster (F-03)', () => {
+  const jetzt = 1_760_000_000_000;
+  assert.equal(menge_speicher_pruefen('probe|1.2.3.4', 2, jetzt), true);
+  assert.equal(menge_speicher_pruefen('probe|1.2.3.4', 2, jetzt), true);
+  assert.equal(menge_speicher_pruefen('probe|1.2.3.4', 2, jetzt), false, 'dritter Aufruf gebremst');
+  assert.equal(menge_speicher_pruefen('probe|5.6.7.8', 2, jetzt), true,
+    'andere Verbindung, eigenes Fenster');
+  assert.equal(menge_speicher_pruefen('probe|1.2.3.4', 2, jetzt + 60_001), true,
+    'neues Minutenfenster beginnt wieder bei eins');
+});
+
+test('Mengenbegrenzung greift auch ohne Binding (Notpfad, F-03)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { RATE_LIMIT_LESEN: '2' });
+  menge_speicher_zuruecksetzen();
+  const hole = () => worker.fetch(new Request('http://abos.test/status?token=egal', {
+    headers: { accept: 'application/json', 'cf-connecting-ip': '203.0.113.9' },
+  }), env);
+  const eins = await hole();
+  const zwei = await hole();
+  const drei = await hole();
+  assert.equal(eins.status, 404, 'unbekannter Token – die Anfrage wird aber bearbeitet');
+  assert.equal(zwei.status, 404);
+  assert.equal(drei.status, 429, 'ab der Grenze wird gebremst');
+  // Eine andere Verbindung hat ihr eigenes Fenster.
+  const andere = await worker.fetch(new Request('http://abos.test/status?token=egal', {
+    headers: { accept: 'application/json', 'cf-connecting-ip': '198.51.100.4' },
+  }), env);
+  assert.equal(andere.status, 404);
+});
+
+test('Log-Hygiene: die E-Mail-Adresse steht nie im Klartext-Log (F-05)', async () => {
+  const kv = kvLeeren();
+  // Defekter Bestand (unbekannter Status) ist genau der Pfad, der vorher loggte.
+  await kv.put('abo:defekt@beispiel.de', JSON.stringify({
+    email: 'defekt@beispiel.de', norm: 'defekt@beispiel.de', status: 'kaputt',
+    token: 'x'.repeat(32), seit: new Date().toISOString(), themen: [],
+  }));
+  const meldungen = [];
+  const zuvor = console.warn;
+  console.warn = (...args) => meldungen.push(args.join(' '));
+  try {
+    const freilass = fetch_sperr();
+    const antwort = await worker.fetch(
+      form_request('/anmeldung', { email: 'defekt@beispiel.de', consent: '1' }), env_mit(kv));
+    freilass();
+    assert.equal(antwort.status, 500, 'unbekannter Zustand bleibt fail-closed');
+  } finally {
+    console.warn = zuvor;
+  }
+  assert.ok(meldungen.length >= 1, 'der Fall wird gemeldet');
+  const gesamt = meldungen.join('\n');
+  assert.ok(!gesamt.includes('defekt@beispiel.de'), 'keine Adresse im Log');
+  assert.match(gesamt, /sha256:[0-9a-f]{32}/);
+});
+
+test('Abmeldung mit Token: eigener Mengenzaehler (F-03)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { RATE_LIMITER: undefined });
+  const stoesse = [];
+  for (let i = 0; i < 8; i += 1) {
+    stoesse.push(await worker.fetch(new Request(
+      `http://abos.test/abmeldung?token=${'a'.repeat(32)}`,
+      { headers: { 'cf-connecting-ip': '203.0.113.77', accept: 'application/json' } }), env));
+  }
+  const zuviele = stoesse.filter((r) => r.status === 429);
+  assert.ok(zuviele.length >= 1, 'nach fuenf Rateversuchen wird gebremst');
+  // Ein anderer Token-Rater-Kanal (POST aus dem Formular) hat sein eigenes Limit.
+  const form = await worker.fetch(form_request('/abmeldung', { email: 'niemand@beispiel.de' },
+    { ip: '203.0.113.77' }), env);
+  assert.ok([200, 429].includes(form.status), 'Formularweg bleibt funktionsfaehig');
 });

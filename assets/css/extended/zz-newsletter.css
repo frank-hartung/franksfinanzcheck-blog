@@ -495,6 +495,24 @@
   line-height: 1.55;
 }
 
+/* Bot-Schutz (Cloudflare Turnstile, Sicherheitsaudit 15.10.2026 F-02).
+   Das Widget liefert der Shortcode nur mit Site-Key aus; hier steht nur der
+   Platz dafür. Feste Mindesthöhe = Widget-Höhe (65 px) minus Innenabstand,
+   damit die Prüfung beim Nachladen nichts verschiebt (PRODUCT.md §6, CLS ≈ 0).
+   Kein Rahmen, keine eigene Farbe: das Widget bringt sein Aussehen selbst mit
+   (data-theme="light" im Shortcode) – das ist der Anbieter-Rahmen, nicht
+   unser Design, und wird deshalb nicht überschrieben. */
+.ff-nl__turnstile {
+  display: grid;
+  gap: 8px;
+  min-height: 65px;
+  margin: 0;
+}
+
+.ff-nl__turnstile .cf-turnstile {
+  min-height: 65px; /* Slot vor dem Skript-Aufruf – kein Sprung beim Einblenden */
+}
+
 .ff-nl__leer {
   margin: 0;
   color: var(--secondary);
