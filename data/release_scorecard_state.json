@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T17:46:59Z",
+  "generated_at": "2026-10-14T19:00:23Z",
   "modus": "kandidaten",
-  "commit": "dc39dc1045037e922e73ffb8f6d1141ce7bf7451",
+  "commit": "37a2d4a63bf91d41d85a9e3583a858dff4b336a5",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "1c937db1aab4076f54b10d8e18916b4fc6c612c8dffe89e98914fa14bb488fb3",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "721309823ada12705f8e79be8ecbb58f29a99030ff4bd278730309628bdc3326",
