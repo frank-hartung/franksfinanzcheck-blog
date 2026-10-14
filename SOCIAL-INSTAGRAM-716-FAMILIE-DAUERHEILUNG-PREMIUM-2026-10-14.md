@@ -127,11 +127,14 @@ So ist der Folgeauftrag in PR #747 entstanden.
   Messkette (hugo + hunspell). Ohne sie gilt weiter Exit 3, und es wird
   nichts erfunden.
 
-**Daten:** `data/reserve-readiness.json` wurde mit genau diesem Werkzeug
-ausgebucht: 11 → 9 Zeilen, `ready` 9 / Ziel 6, `generated_at` und die Messung
-von Lauf 38538341065 sind unverändert. Damit ist
-`test_reserve_artifacts…test_current_snapshot_is_whole_and_editorially_valid`
-wieder grün (vorher auf `main` rot).
+**Daten:** Lokal hat dieses Werkzeug die beiden Zeilen ausgebucht (11 → 9,
+`generated_at` und die Messung unverändert). Noch vor dem Zusammenführen hat
+der Reserve-Lauf 38616183448 auf `main` (18:35 UTC) dieselben zwei Zeilen
+über den alten Pfad entfernt. Dafür brauchte er die vollständige Messkette,
+obwohl gar nichts zu messen war. Beim Abgleich wurde deshalb die Fassung von
+`main` übernommen; dieser PR ändert keine Zustandsdatei. Ergebnis ist
+derselbe Bestand: 9 Zeilen, 9 gate-fertig, Ziel 6. `reserve_recert.py --check`
+meldet keinen Drift, und `snapshot_findings` ist leer.
 
 **Neu:** 8 Tests in `test_reserve_recert.py` (`VerbrauchIstKeinDrift`):
 Unterscheidung von Verbrauch, Verschwinden und Änderung, bytegleiche Restzeilen,
@@ -144,7 +147,7 @@ Nachmessung ohne Messkette bleibt Exit 3.
 
 | Prüfung | Ergebnis |
 |---|---|
-| Gesamtsuite `unittest discover -s scripts/tests` | ✅ **3167 Tests, 0 Fehler** (12 übersprungen). Auf `main` vorher rot: `TestKanaltreue716` (instagram) und `test_reserve_artifacts` (Snapshot) |
+| Gesamtsuite `unittest discover -s scripts/tests` (nach Abgleich mit `main`) | ✅ **3167 Tests, 0 Fehler** (12 übersprungen). Auf `main` vorher rot: `TestKanaltreue716` (instagram) |
 | Fokus-Suiten (social × 3, reserve_recert, integrity_guard, reserve_artifacts) | ✅ 214 Tests grün |
 | `governance_contract.py` | ✅ alle 36 Regeln |
 | `measurement_chain.py --audit-workflows` | ✅ |
