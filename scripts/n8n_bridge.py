@@ -52,6 +52,7 @@ import tempfile
 import threading
 import time
 import urllib.error
+import hmac
 import urllib.request
 from typing import Any
 
@@ -69,6 +70,9 @@ DEFAULT_N8N_WEBHOOK_URL = os.environ.get(
     f"{DEFAULT_N8N_URL.rstrip('/')}/webhook/blog-events"
 )
 DEFAULT_WEBHOOK_TOKEN = os.environ.get("N8N_WEBHOOK_TOKEN", "")
+# Obergrenze fuers Webhook-Body (F-04, 15.10.2026): Der Bridge-Server
+# nahm jeden Body an – ein 1-GB-POST haette den Prozess gefressen.
+MAX_BRIDGE_BYTES = 256 * 1024
 
 
 # =====================================================================
@@ -309,33 +313,86 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
 #  LOKALER TEST- & MOCK-SERVER
 # =====================================================================
 
+def _webhook_sekret() -> str:
+    """Erwartetes Empfangs-Secret des Bridge-Servers (Sicherheitsaudit F-04)."""
+    return (os.environ.get("N8N_WEBHOOK_TOKEN") or DEFAULT_WEBHOOK_TOKEN or "").strip()
+
+
+def _browser_herkunft_erlaubt(herkunft: str | None) -> bool:
+    """Browser-Anfragen ohne eigene Herkunft ablehnen (lokaler CSRF-Schutz).
+
+    Der Bridge-Server läuft auf 127.0.0.1 – jede Webseite, die der Betreiber
+    besucht, kann ihn erreichen. Ein `POST` mit `Content-Type: text/plain` ist
+    ein „simple request" und läuft ohne Preflight; der Browser setzt dabei
+    `Origin` auf die fremde Seite. Fehlt der Kopf ganz, sendet kein Browser –
+    dann bleibt der Skript-Weg (n8n) offen. Das ist genau die Umkehr des
+    Vertrags, den der Newsletter-Worker seit Audit M-02 fährt.
+    """
+    if herkunft is None:
+        return True
+    erlaubt = {
+        f"http://127.0.0.1:{os.environ.get('N8N_BRIDGE_PORT', '5680')}",
+        f"http://localhost:{os.environ.get('N8N_BRIDGE_PORT', '5680')}",
+        (os.environ.get("N8N_URL") or "").rstrip("/"),
+    }
+    return herkunft.rstrip("/") in {e for e in erlaubt if e}
+
+
 class _BridgeHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
+    def _weiter(self, kod: int, nutzlast: dict[str, Any]) -> None:
+        daten = json.dumps(nutzlast, ensure_ascii=False).encode("utf-8")
+        self.send_response(kod)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(daten)))
+        self.end_headers()
+        self.wfile.write(daten)
+
     def do_POST(self) -> None:  # noqa: N802
-        length = int(self.headers.get("Content-Length", 0))
-        body = self.rfile.read(length).decode("utf-8")
+        # 1. Inhaltstyp erzwingen: Ein JSON-Body verlangt einen Preflight,
+        #    damit laeuft kein fremdes Formular mehr durch (F-04).
+        inhaltstyp = (self.headers.get("Content-Type") or "").split(";")[0].strip().lower()
+        if inhaltstyp != "application/json":
+            return self._weiter(415, {"error": "Content-Type muss application/json sein"})
+        # 2. Herkunft: Browser nur mit eigener Adresse (lokaler CSRF-Schutz).
+        if not _browser_herkunft_erlaubt(self.headers.get("Origin")):
+            return self._weiter(403, {"error": "Herkunft nicht erlaubt"})
+        # 3. Secret: Pflicht, sobald eines konfiguriert ist – und gemeldet,
+        #    wenn keines konfiguriert ist (fail-open nur im Entwicklungsmodus
+        #    mit ausdruecklichem Opt-in).
+        erwartet = _webhook_sekret()
+        if erwartet:
+            angeboten = (self.headers.get("X-Webhook-Secret") or "").strip()
+            if not hmac.compare_digest(angeboten.encode(), erwartet.encode()):
+                return self._weiter(401, {"error": "Nicht autorisiert"})
+        elif os.environ.get("N8N_BRIDGE_OHNE_SEKRET_OK") != "1":
+            return self._weiter(503, {
+                "error": "N8N_WEBHOOK_TOKEN ist nicht gesetzt",
+                "hinweis": "openssl rand -hex 32 in tools/n8n/.env eintragen; "
+                           "nur fuer lokale Proben: N8N_BRIDGE_OHNE_SEKRET_OK=1",
+            })
+        length = int(self.headers.get("Content-Length", 0) or 0)
+        if length > MAX_BRIDGE_BYTES:
+            return self._weiter(413, {"error": "Anfrage zu gross"})
+        body = self.rfile.read(length).decode("utf-8", errors="replace")
         try:
             payload = json.loads(body)
         except json.JSONDecodeError:
-            self.send_response(400)
-            self.end_headers()
-            self.wfile.write(b'{"error": "Invalid JSON"}')
-            return
+            return self._weiter(400, {"error": "Invalid JSON"})
 
         res = handle_inbound_payload(payload)
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps(res, ensure_ascii=False).encode("utf-8"))
+        self._weiter(200, res)
 
     def do_GET(self) -> None:  # noqa: N802
+        # Lebenszeichen ohne Secrets – Detailstand bleibt POST-Antworten
+        # vorbehalten (F-04).
         if self.path in ("/health", "/healthz", "/ping"):
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(b'{"status": "ok", "service": "n8n_bridge"}')
-        else:
-            self.send_response(404)
-            self.end_headers()
+            return self._weiter(200, {
+                "status": "ok", "service": "n8n_bridge",
+                "auth": "an" if _webhook_sekret() else "aus",
+            })
+        return self._weiter(404, {"error": "unbekannter Pfad"})
 
     def log_message(self, format: str, *args: Any) -> None:  # noqa: A002
         # Unterdrückt die Standard-HTTP-Log-Meldungen im Terminal
@@ -483,36 +540,83 @@ def _selftest_kern() -> bool:
     print("  ✅ Inbound Payload Handler (Voice-to-Draft) erfolgreich verifiziert.")
 
     # 4. Lokaler Server Kurz-Probe über dynamischen Port
+    #    Sicherheitsaudit 15.10.2026 (F-04): Der Empfang ist jetzt fail-closed.
+    #    Geprüft werden BEIDE Richtungen – was durchgehen MUSS und was nicht.
     class _ReusableTCPServer(socketserver.TCPServer):
         allow_reuse_address = True
 
+    sekret = "selbsttest-sekret-32-zeichen-ok"
+    zuvor_token = os.environ.get("N8N_WEBHOOK_TOKEN")
+    os.environ["N8N_WEBHOOK_TOKEN"] = sekret
     httpd = _ReusableTCPServer(("127.0.0.1", 0), _BridgeHTTPRequestHandler)
     test_port = httpd.server_address[1]
     srv_thread = threading.Thread(target=httpd.serve_forever, daemon=True)
     srv_thread.start()
 
+    def _ruf(headers: dict, koerper: dict | str = None, port: int = None) -> tuple[int, str]:
+        """Ein Webhook-Aufruf; gibt (Status, Body) zurueck – auch bei Fehlern."""
+        adresse = f"http://127.0.0.1:{port or test_port}/"
+        daten = koerper if isinstance(koerper, str) else json.dumps(koerper or {"typ": "ping"})
+        req = urllib.request.Request(adresse, data=daten.encode("utf-8"),
+                                     headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=2.0) as resp:
+                return resp.status, resp.read().decode("utf-8")
+        except urllib.error.HTTPError as fehler:
+            return fehler.code, fehler.read().decode("utf-8")
+
     try:
-        # GET /health testen
+        # GET /health testen (ohne Secret – nur ein Lebenszeichen)
         req = urllib.request.Request(f"http://127.0.0.1:{test_port}/health")
         with urllib.request.urlopen(req, timeout=2.0) as resp:
             assert resp.status == 200, "Health Check antwortet nicht mit 200"
+            assert json.loads(resp.read().decode("utf-8"))["auth"] == "an"
 
-        # POST Webhook testen
-        post_data = json.dumps({"typ": "ping"}).encode("utf-8")
-        req_post = urllib.request.Request(
-            f"http://127.0.0.1:{test_port}/",
-            data=post_data,
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        )
-        with urllib.request.urlopen(req_post, timeout=2.0) as resp:
-            assert resp.status == 200, "POST Webhook antwortet nicht mit 200"
-            body = json.loads(resp.read().decode("utf-8"))
-            assert body["status"] == "ok", "Inbound ping fehlerhaft"
-        print("  ✅ Lokaler HTTP Bridge Server & Webhook Handler erfolgreich getestet.")
+        # POSITIV: richtiges Secret, JSON, keine Herkunft (Skript-Weg)
+        kod, text = _ruf({"Content-Type": "application/json",
+                          "X-Webhook-Secret": sekret})
+        assert kod == 200, f"Gueltiger Webhook abgelehnt (HTTP {kod}: {text[:120]})"
+        assert json.loads(text)["status"] == "ok", "Inbound ping fehlerhaft"
+
+        # GEGENPROBE 1: ohne/falsches Secret -> 401
+        kod, _ = _ruf({"Content-Type": "application/json"})
+        assert kod == 401, f"Webhook ohne Secret wurde angenommen (HTTP {kod})"
+        kod, _ = _ruf({"Content-Type": "application/json", "X-Webhook-Secret": "falsch"})
+        assert kod == 401, f"Webhook mit falschem Secret wurde angenommen (HTTP {kod})"
+
+        # GEGENPROBE 2: fremde Browser-Herkunft -> 403 (lokaler CSRF-Schutz)
+        kod, _ = _ruf({"Content-Type": "application/json", "X-Webhook-Secret": sekret,
+                       "Origin": "https://boese.example"})
+        assert kod == 403, f"Webhook aus fremder Herkunft wurde angenommen (HTTP {kod})"
+
+        # GEGENPROBE 3: fremder Inhaltstyp -> 415 (erzwingt Preflight)
+        kod, _ = _ruf({"Content-Type": "text/plain", "X-Webhook-Secret": sekret})
+        assert kod == 415, f"Webhook mit fremdem Inhaltstyp wurde angenommen (HTTP {kod})"
+
+        # GEGENPROBE 4: zu grosser Body -> 413
+        kod, _ = _ruf({"Content-Type": "application/json", "X-Webhook-Secret": sekret},
+                      {"typ": "ping", "fuellung": "x" * (MAX_BRIDGE_BYTES + 64)})
+        assert kod == 413, f"Riesiger Body wurde angenommen (HTTP {kod})"
+
+        # GEGENPROBE 5: kein Secret konfiguriert -> 503 statt stiller Annahme
+        os.environ.pop("N8N_WEBHOOK_TOKEN", None)
+        kod, text = _ruf({"Content-Type": "application/json"})
+        assert kod == 503, f"Ohne konfiguriertes Secret wurde bedient (HTTP {kod})"
+        assert "N8N_WEBHOOK_TOKEN" in text, "Der Hinweis nennt die fehlende Variable"
+        # ... es sei denn, der Betreiber schaltet es fuer eine lokale Probe frei.
+        os.environ["N8N_BRIDGE_OHNE_SEKRET_OK"] = "1"
+        kod, _ = _ruf({"Content-Type": "application/json"})
+        assert kod == 200, "Ausdrueckliches Opt-in muss durchlassen"
+        os.environ.pop("N8N_BRIDGE_OHNE_SEKRET_OK", None)
+        print("  ✅ Lokaler HTTP Bridge Server & Webhook Handler erfolgreich getestet "
+              "(5 Gegenproben: 401, 403, 415, 413, 503).")
     finally:
         httpd.shutdown()
         httpd.server_close()
+        if zuvor_token is None:
+            os.environ.pop("N8N_WEBHOOK_TOKEN", None)
+        else:
+            os.environ["N8N_WEBHOOK_TOKEN"] = zuvor_token
 
     print("🎉 Alle n8n-Bridge Selbsttests BESTANDEN (0 € laufende Kosten gesichert)!")
     return True

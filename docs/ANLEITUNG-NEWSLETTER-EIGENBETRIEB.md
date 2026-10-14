@@ -53,14 +53,18 @@ Die drei Entscheide, die diese Form festlegen:
    ehrliche **Info-Seiten** (Rechtliches, Wege, Daten) mit dem
    Wegweiser „der Link in deiner Mail ist die Aktion“.
 
+> **Sicherheit:** Das Regressions-Runbook zu diesem Betrieb liegt in
+> `docs/SICHERHEIT-BETRIEB-RUNBOOK.md` (Header, Mengenregeln, Bot-Schutz,
+> Environment-Freigaben, Schlüsselrollen). Nachweise: `npm run test:sicherheit`.
+
 ## 2. Inventar – wo was lebt
 
 | Baustein | Ort | Secrets / Variablen | Wache |
 |---|---|---|---|
-| Capture-Worker | `newsletter-worker/` (Deploy nur per CI: `.github/workflows/worker-deploy.yml`, Freigabe im Environment `cloudflare-produktion`) | `GITHUB_PAT`, `EXPORT_KEY`, optional `TURNSTILE_SECRET` | Wache `--brand` (Themen), C7 (Endpunkt) |
+| Capture-Worker | `newsletter-worker/` (Deploy nur per CI: `.github/workflows/worker-deploy.yml`, Freigabe im Environment `cloudflare-produktion`) | `GITHUB_PAT`, `EXPORT_KEY` (lesen), `EXPORT_KEY_WRITE` (Token-Exporte, Audit F-08), `TURNSTILE_SECRET` (Audit F-02) | Wache `--brand` (Themen), C7 (Endpunkt), `scripts/worker_betrieb_wache.py` (Budget/Bot-Schutz/Exporte) |
 | Adressliste + Tokens | Cloudflare KV (`ABO`) | – | B2 (Export, unabhängig vom Resend-Key) |
-| Digest (Bau + Versand) | `scripts/newsletter_digest.py` | – | Selftest 50, Capture-Wache `--check` |
-| Mailer (Resend/SMTP) | `scripts/newsletter_versand.py` | – | Selftest 47 (inkl. Kopfzeilen/Kante, Worker-Schlüssel) |
+| Digest (Bau + Versand) | `scripts/newsletter_digest.py` | `NEWSLETTER_WORKER_WRITE_KEY` (optional, für Token-Exporte) | Selftest 62, Capture-Wache `--check` |
+| Mailer (Resend/SMTP) | `scripts/newsletter_versand.py` | `NEWSLETTER_WORKER_WRITE_KEY` (optional, für Nachgang-Token) | Selftest 64 (inkl. Kopfzeilen/Kante, Worker-Schlüssel, Rollen-Trennung) |
 | QA der Ausgabe | `scripts/newsletter_qa.py` | – | Selftest 40 (21 Regeln) |
 | Kadenz (Di/Fr-Vertrag) | `scripts/newsletter_schedule.py`, `scripts/newsletter_cadence.py` | – | Selftests 14 + site-Test |
 | Studio (Marke/Themen) | `scripts/newsletter_studio.py` + `data/newsletter_studio.json` | – | Selftest 48, `--brand` |
@@ -184,6 +188,7 @@ Repository → **Settings → Secrets and variables → Actions**:
 |---|---|---|
 | `RESEND_API_KEY` | Secret | Resend-API-Key |
 | `NEWSLETTER_WORKER_EXPORT_KEY` | Secret | = Worker-Secret `EXPORT_KEY` (derselbe Schlüssel, beide Seiten) |
+| `NEWSLETTER_WORKER_WRITE_KEY` | Secret (optional, empfohlen) | = Worker-Secret `EXPORT_KEY_WRITE`. Nur mit ihm liefert der Worker **Token** (`?mit_token=1`) für Abmeldelinks. Fehlt er, greift derselbe Wert wie beim Lesen (Rückwärts-Kompatibilität) – die Sicherheits-Wache meldet das als Warnung, weil dann ein abgeflossener Leseschlüssel jeden Abonnenten abmelden könnte (Audit F-08). |
 | `NEWSLETTER_WORKER_BASE` | Variable | `https://abos.franksfinanzcheck.de` |
 | `NEWSLETTER_HASH_KEY` | Secret | 32+ Zeichen, zufällig (`openssl rand -hex 32`). Schlüssel der Empfänger-Hashes im Journal (HMAC statt ungesalzenem SHA-256, Audit H-04). Einmal setzen, **nie** wechseln – sonst greift der Duplikatsschutz einen Tag lang nicht. |
 | `KV_NAMESPACE_ID_ABO` | Variable | ID des KV-Namespace `ABO` (kein Geheimnis) – für Worker-Deploy und verschlüsseltes Backup |
@@ -481,6 +486,7 @@ nach dem Beleg, keine zweite Liste.
 | `B0: API-Aufruf fehlgeschlagen (401/403)` | B0 | Key ungültig oder Domain nicht dem Key zugeordnet | Resend → API Keys prüfen |
 | `B1: Sende-Domain nicht verifiziert` | B1 | SPF/DKIM nicht komplett live | Resend-Dashboard → Domain → Einträge vervollständigen (C1/C2/C3 nachmessen) |
 | `B2: Worker-Export abgelehnt (401/403)` | B2 | `NEWSLETTER_WORKER_EXPORT_KEY` ≠ Worker-Secret `EXPORT_KEY`. Seit 25.09.2026 sendet der Mailer den Schlüssel als `x-ff-key` (vorher wurde der Parameter entgegengenommen und nie gesendet – jede Bestätigung/jeder Nachgang endete in „Worker-Antwort 403“). | Beide Schlüssel exakt abgleichen (derselbe, beide Seiten) |
+| `B2: Listen-Export ohne Abmelde-Token` | B2 | `mit_token: false` – es fehlt `NEWSLETTER_WORKER_WRITE_KEY` (oder Worker-Secret `EXPORT_KEY_WRITE`). Der Versand bricht dann bewusst ab: keine Mail ohne Abmeldelink (Audit F-08). | Schreibschlüssel setzen (Runbook A4) |
 | `C7: Worker-Domain löst sich nicht auf` | C7 | CNAME `abos` fehlt oder falsch | Cloudflare → DNS: CNAME auf Worker-Domain, orange cloud |
 | `C7: keine Antwort / 5xx` | C7 | CNAME steht, Worker antwortet nicht / ist kaputt | Cloudflare → Workers → Logs; Stand neu deployen |
 | Halt aktiv (`versand_unklar`) | S1 | Ein Sende-Aufruf ist ohne Beleg geblieben – kein zweiter Listen-Versand, bis ein Mensch nachgesehen hat | § 4 (Halt): Beleg suchen, Block auflösen, committen |

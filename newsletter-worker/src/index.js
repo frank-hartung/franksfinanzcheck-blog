@@ -34,7 +34,30 @@
  *   token:{token}        Rueckweg Token -> email-norm (gleiche TTL wie Abo)
  *   nachweis:{sha256}    Einwilligungsnachweis (IP, UA, Zeitpunkt), TTL 3 Jahre
  *   rat:{sha256(ip)}     Rate-Limit-Zaehler (15 Min)
+ *   budget:anmeldung:{tag}  Tagesbudget der Anmeldungen (Audit 15.10.2026, F-03)
+ *   warn:{bereich}:{tag}    Sperr-Melder, 1 Schreibzugriff je Stunde
+ *   exportlog:{ts}       Protokoll der Export-Aufrufe (TTL 30 Tage)
  *   metrik:falle        Bot-Fallen-Treffer (1 Tag)
+ *
+ * SCHUTZDECKEL (Sicherheitsaudit 15.10.2026, F-02/F-03/F-08):
+ *   Der Free-Plan erlaubt 1.000 KV-SCHREIBZugriffe pro Tag und KONTO. Eine
+ *   Anmeldung kostet vier. Ohne Deckel genuegten wenige hundert Anfragen, um
+ *   das Kontingent zu leeren – danach fallen Anmeldung, Bestaetigung, Abmeldung
+ *   (Art. 7 Abs. 3 DSGVO) und der Pflegelauf aus. Deshalb:
+ *     1. JEDE Route hat ein Mengenlimit (Binding RATE_LIMITER, kostenlos;
+ *        vorher nur /anmeldung und das Abmeldeformular).
+ *     2. Die Anmeldung hat zusaetzlich ein TAGESBUDGET (ANMELDUNG_MAX_PRO_TAG,
+ *        Standard 100). Ist es erschoepft, wird fail-closed abgelehnt und
+ *        genau einmal je Stunde laut protokolliert.
+ *     3. Token-tragende Massenexporte brauchen einen ZWEITEN Schluessel
+ *        (EXPORT_KEY_WRITE); mit dem Standardschluessel gibt es die Liste
+ *        ohne Token. Jeder Export wird protokolliert.
+ *   Restrisiko (bewusst, dokumentiert): Ein verteilter Lesesturm auf die
+ *   Token-Seiten laesst sich im Worker nicht zuverlaessig zaehlen, ohne genau
+ *   die Schreibzugriffe zu verbrauchen, die geschuetzt werden sollen. Dagegen
+ *   steht die WAF-Mengenregel der Zone (siehe cloudflare/waf-mengenregeln.md)
+ *   – sie zaehlt an der Edge, nicht im KV.
+
  *
  * BESTAETIGUNGS-MAIL: der Worker selbst versendet KEINE Mails (er hat
  * kein SMTP und soll keine Mail-Provider-Keys traegen). Er loest den
@@ -65,6 +88,18 @@ const FEEDBACK_SLUG_RE = /^[a-z0-9][a-z0-9-]{0,119}$/;
 // KV-Schreibzugriffe pro Tag und KONTO. Feedback darf davon hoechstens
 // FEEDBACK_MAX_PRO_TAG verbrauchen – Anmeldung und Abmeldung behalten immer
 // den Rest. Eine Stimme = genau EIN Schreibzugriff (Tagesschluessel).
+//
+// NACHTRAG 15.10.2026 (F-03): „den Rest behalten" war eine Absicht ohne
+// Deckel – die Anmeldung selbst hatte keine Obergrenze und konnte den Rest
+// allein aufbrauchen (vier Schreibzugriffe je Anmeldung: abo, token,
+// nachweis, budget). Jetzt gilt ein harter Tagesdeckel; ist er erreicht,
+// wird fail-closed abgelehnt statt weitergeschrieben. 100 Anmeldungen/Tag
+// = 400 der 1.000 Schreibzugriffe, 200 Feedback-Stimmen = 200, zusammen
+// 600 – der Rest bleibt fuer Bestaetigungen, Abmeldungen und den Pflegelauf.
+const ANMELDUNG_MAX_PRO_TAG_DEFAULT = 100;
+const TTL_BUDGET_SEK = 48 * 60 * 60;
+const TTL_WARN_SEK = 60 * 60;
+const TTL_EXPORTLOG_SEK = 30 * 24 * 60 * 60;
 const FEEDBACK_MAX_PRO_TAG_DEFAULT = 200;
 const BESTAETIGUNG_TAGE_DEFAULT = 14;
 const MAX_VERSEND_VERSUCHE = 3;
@@ -228,10 +263,24 @@ async function sha256_kurz(text) {
   return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('').slice(0, 32);
 }
 
-/** Konstantzeit-Vergleich fuer das Export-Secret (kein Zeitaugriff). */
+/**
+ * Konstantzeit-Vergleich fuer ein Export-Secret (kein Zeitaugriff).
+ * 15.10.2026 (F-08): Es gibt jetzt ZWEI Schluessel-Rollen – `EXPORT_KEY`
+ * (lesend: Listen ohne Token, Status, Pending) und `EXPORT_KEY_WRITE`
+ * (zusaetzlich Token-tragende Massenexporte). Ist der Schreibschluessel
+ * nicht gesetzt, gilt der Standardschluessel weiter fuer beide Rollen –
+ * bestehende Laeufe brechen also nicht, der Betreiber kann trennen.
+ */
 async function schluessel_pruefen(env, angebot) {
-  const sollen = String((env && env.EXPORT_KEY) || '');
-  const ist = String(angebot || '');
+  return konstantzeit_gleich(String((env && env.EXPORT_KEY) || ''), String(angebot || ''));
+}
+
+async function schreibschluessel_pruefen(env, angebot) {
+  const sollen = String((env && env.EXPORT_KEY_WRITE) || (env && env.EXPORT_KEY) || '');
+  return konstantzeit_gleich(sollen, String(angebot || ''));
+}
+
+async function konstantzeit_gleich(sollen, ist) {
   if (!sollen || !ist || sollen.length !== ist.length) return false;
   const a = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(sollen));
   const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ist));
@@ -244,7 +293,76 @@ async function schluessel_pruefen(env, angebot) {
   return unterschied === 0;
 }
 
+/** Fingerabdruck eines Schluessels fuer das Export-Protokoll – nie der Wert. */
+async function schluessel_fingerabdruck(angebot) {
+  return (await sha256_kurz(`ff-key|${String(angebot || '')}`)).slice(0, 8);
+}
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+/** Heutiger Kalendertag (UTC) – Bezug der Tagesbudgets. */
+function tagesstempel(zeit = Date.now()) {
+  return new Date(zeit).toISOString().slice(0, 10);
+}
+
+/**
+ * Tagesbudget (F-03): zieht EINEN Schreibzugriff, wenn noch Platz ist.
+ * Gibt { ok, stand, maximum } zurueck. KV ist letztlich konsistent, nicht
+ * streng atomar – zwei gleichzeitige Anfragen koennen denselben Stand lesen.
+ * Fuer einen Missbrauchsdeckel ist das ausreichend genau (die Alternative
+ * waere ein Durable Object oder D1 – bewusst nicht noetig).
+ */
+async function tagesbudget_nehmen(env, bereich, maximum, zeit = Date.now()) {
+  const schluessel = `budget:${bereich}:${tagesstempel(zeit)}`;
+  const stand = Number((await env.ABO.get(schluessel)) || 0);
+  if (maximum > 0 && stand >= maximum) return { ok: false, stand, maximum };
+  await env.ABO.put(schluessel, String(stand + 1), { expirationTtl: TTL_BUDGET_SEK });
+  return { ok: true, stand: stand + 1, maximum };
+}
+
+/** Tagesbudget lesen, ohne zu schreiben (fuer /healthz und Melder). */
+async function tagesbudget_stand(env, bereich, zeit = Date.now()) {
+  return Number((await env.ABO.get(`budget:${bereich}:${tagesstempel(zeit)}`)) || 0);
+}
+
+/**
+ * Laut, aber nicht teuer: Meldet ein Ereignis hoechstens EINMAL je Stunde
+ * (ein KV-Schreibzugriff). Ohne diese Daempfung wuerde der Melder selbst
+ * das Budget verbrauchen, das er schuetzt.
+ */
+async function warnen_einmal(env, bereich, meldung, zeit = Date.now()) {
+  const schluessel = `warn:${bereich}:${tagesstempel(zeit)}`;
+  try {
+    if (await env.ABO.get(schluessel)) return false;
+    await env.ABO.put(schluessel, new Date(zeit).toISOString(), { expirationTtl: TTL_WARN_SEK });
+  } catch (e) { /* Melder darf nie den Betrieb brechen */ }
+  console.warn(`ff-newsletter alarm ${bereich}: ${meldung}`);
+  return true;
+}
+
+/** Export-Aufrufe protokollieren (F-08) – Route, Umfang, Schluessel-Abdruck. */
+async function export_vermerken(env, route, umfang, angebot, status = 200, zeit = Date.now()) {
+  try {
+    const eintrag = {
+      ts: new Date(zeit).toISOString(),
+      route,
+      umfang,
+      status,
+      key: await schluessel_fingerabdruck(angebot),
+    };
+    await env.ABO.put(`exportlog:${new Date(zeit).toISOString()}`, JSON.stringify(eintrag),
+      { expirationTtl: TTL_EXPORTLOG_SEK });
+    console.log(`ff-newsletter export ${route}: ${umfang} (${status})`);
+  } catch (e) { /* Protokoll ist Nachweis, nicht Betriebsvoraussetzung */ }
+}
+
+/** Protokoll der Exporte – nur mit Schluessel (in /healthz). */
+async function export_log_lesen(env) {
+  const aus = [];
+  for (const key of await liste_mit_prefix(env.ABO, 'exportlog:')) aus.push(key.slice('exportlog:'.length));
+  return aus.sort().reverse().slice(0, 20);
+}
+
 
 /**
  * Rate-Limit je Schluessel. Bevorzugt das Cloudflare-Rate-Limiting-Binding
@@ -267,9 +385,14 @@ async function rate_erlaubt(env, ip, bereich = 'anmeldung') {
   return true;
 }
 
-/** Cloudflare Turnstile (optional, Audit M-02): aktiv, sobald das Secret
- *  TURNSTILE_SECRET gesetzt ist. Ohne Secret: keine Pruefung (Rueckwaerts-
- *  kompatibel, die Site rendert das Widget nur mit Site-Key). */
+/**
+ * Cloudflare Turnstile (Audit M-02, verschaerft 15.10.2026 / F-02):
+ * Ohne Secret bleibt die Pruefung aus (Rueckwaerts-Kompatibilitaet, die Site
+ * rendert das Widget nur mit Site-Key). Sobald das Secret gesetzt ist, ist
+ * die Pruefung PFLICHT – fail closed, wie beim KI-Assistenten.
+ * Welcher Zustand gilt, steht sichtbar in /healthz (mit X-FF-Key) und wird
+ * von scripts/worker_betrieb_wache.py taeglich gemeldet.
+ */
 async function turnstile_ok(env, antwort_token, ip) {
   const geheim = String((env && env.TURNSTILE_SECRET) || '').trim();
   if (!geheim) return true;
@@ -611,6 +734,8 @@ function feedback_max(env) {
 }
 
 async function feedback(request, env) {
+  // Eigene Mengenklasse (F-03): Der Router deckelt Feedback-Anfragen mit
+  // 30/Minute und Verbindung, der Slug-Zaehler bleibt der zweite Riegel.
   const daten = await koerper_lesen(request);
   if (!daten) return fehler(400, 'Unverständlicher Anfragekörper.', env, request);
   const slug = erstein(daten, 'slug').toLowerCase();
@@ -708,9 +833,22 @@ async function health(request, env) {
       { 'Cache-Control': 'no-store' });
   }
   const takt = kv_ok ? await takt_lesen(env) : {};
+  // Betriebsbild (F-03/F-08, 15.10.2026): Budgetstand, Turnstile-Zustand und
+  // die letzten Exporte. Alles NUR mit Schluessel – und ohne Personenbezug
+  // (der Export-Abdruck ist ein Kurz-Hash, keine Adresse).
+  const heute = kv_ok ? await tagesbudget_stand(env, 'anmeldung') : 0;
+  const exporte = kv_ok ? await export_log_lesen(env) : [];
   return json({
     ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler',
     takt: { crons: Object.keys(TAKT), letzte: takt },
+    budget: {
+      anmeldung_heute: heute,
+      anmeldung_max: Number(env.ANMELDUNG_MAX_PRO_TAG || ANMELDUNG_MAX_PRO_TAG_DEFAULT),
+      feedback_max: feedback_max(env),
+    },
+    turnstile: String(env.TURNSTILE_SECRET || '').trim() ? 'aktiv' : 'inaktiv',
+    schluesselrollen: String(env.EXPORT_KEY_WRITE || '').trim() ? 'getrennt' : 'gemeinsam',
+    exporte: exporte,
   }, kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
 }
 
@@ -752,6 +890,24 @@ async function anmeldung(request, env, url) {
     return antwort_mit('fehler', 'Zu viele Anmelde-Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen – oder schreib eine Mail an kontakt@franksfinanzcheck.de.', env, request, 429);
   }
 
+  // TAGESBUDGET (F-03, 15.10.2026): Der Deckel sitzt VOR jedem Schreibzugriff.
+  // Ist er erreicht, wird nichts angelegt, kein Nachweis geschrieben und kein
+  // Bestaetigungs-Dispatch ausgeloest. Die Meldung sagt einem Menschen die
+  // Wahrheit („ausgelastet, bitte spaeter oder per Mail") und verraet einem
+  // Angreifer nichts, was er nicht schon weiss: der Deckel erneuert sich um
+  // 00:00 UTC, also taeglich zu einer oeffentlich bekannten Zeit.
+  const budget = await tagesbudget_nehmen(
+    env, 'anmeldung',
+    Number((env && env.ANMELDUNG_MAX_PRO_TAG) || ANMELDUNG_MAX_PRO_TAG_DEFAULT));
+  if (!budget.ok) {
+    await warnen_einmal(env, 'anmeldung',
+      `Tagesbudget erreicht (${budget.stand}/${budget.maximum}) – weitere Anmeldungen werden bis 00:00 UTC nicht angenommen.`);
+    return antwort_mit('fehler',
+      'Der Anmeldedienst ist heute ausgelastet – bitte versuch es in ein paar Stunden erneut. ' +
+      'Ohne Wartezeit geht es formlos an kontakt@franksfinanzcheck.de.',
+      env, request, 503);
+  }
+
   const jetzt = new Date().toISOString();
   const bestehend = await abo_lesen(env.ABO, email);
   let eintrag;
@@ -781,7 +937,11 @@ async function anmeldung(request, env, url) {
     delete eintrag.user_agent;
   } else {
     // Unbekannter Status (defekte Daten): fail-closed, laut melden.
-    console.warn(`ff-newsletter: unbekannter Abo-Status "${bestehend.status}" für ${email}`);
+    // F-05 (15.10.2026): KEINE Adresse im Log – die Betriebszusage lautet
+    // „keine Adressen, keine Tokens, keine IPs". Zur Nachvollziehbarkeit
+    // genuegt der Kurz-Hash (derselbe Schluessel wie beim Nachweis).
+    console.warn(`ff-newsletter: unbekannter Abo-Status "${String(bestehend.status).slice(0, 24)}" ` +
+      `für sha256:${await sha256_kurz(`ff-nl|${email}|v1`)}`);
     return fehler(500, 'Unbekannter Zustand – bitte erneut versuchen oder kontakt@franksfinanzcheck.de schreiben.', env, request);
   }
 
@@ -903,6 +1063,14 @@ async function abmeldung(request, env, url) {
   }
 
   if (token && request.method === 'GET') {
+    // Token raten ist aussichtslos (24 Byte Zufall), aber NICHT kostenlos:
+    // Jeder Rateversuch ist ein KV-Lesevorgang. Deshalb eigenes Limit für den
+    // token-tragenden GET-Weg (F-03, Nachtrag 15.10.2026).
+    const ip_token = String(request.headers.get('cf-connecting-ip')
+      || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+    if (!await rate_erlaubt(env, ip_token, 'abmeldung_token')) {
+      return antwort_mit('fehler', 'Zu viele Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen.', env, request, 429);
+    }
     const eintrag = await token_eintrag(env, token);
     if (!eintrag) {
       return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – es wurde nichts geändert. Kürzester Weg: das Formular unter franksfinanzcheck.de/newsletter/abmelden/ oder formlos per Mail an kontakt@franksfinanzcheck.de.', env, request, 404);
@@ -915,6 +1083,13 @@ async function abmeldung(request, env, url) {
   }
 
   if (token) {
+    // Auch der POST-Weg mit Token wird gezählt (F-03): Der Token steht in der
+    // Mail, der Weg ist ohnehin nur für echte Empfänger gedacht.
+    const ip_token = String(request.headers.get('cf-connecting-ip')
+      || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+    if (!await rate_erlaubt(env, ip_token, 'abmeldung_token')) {
+      return antwort_mit('fehler', 'Zu viele Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen.', env, request, 429);
+    }
     const eintrag = await token_eintrag(env, token);
     if (!eintrag) {
       return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – es wurde nichts geändert. Kürzester Weg: das Formular unter franksfinanzcheck.de/newsletter/abmelden/ oder formlos per Mail an kontakt@franksfinanzcheck.de.', env, request, 404);
@@ -1065,32 +1240,71 @@ async function exportiert(request, env, p, url) {
   // NUR per Header (Audit N-01): Ein Schluessel in der URL landet in Logs,
   // Browser-Verlauf und Referrern.
   const angebot = request.headers.get('x-ff-key') || '';
-  if (!await schluessel_pruefen(env, angebot)) {
+  // Zwei Rollen (F-08): Der SCHREIBschluessel darf alles, der LESESchluessel
+  // nur die tokenfreien Ansichten. Ist nur EXPORT_KEY gesetzt, fallen beide
+  // Rollen zusammen (Rueckwaerts-Kompatibilitaet, siehe wrangler.toml).
+  // Zwei Rollen (F-08): Der SCHREIBschluessel darf alles, der LESESchluessel
+  // nur die tokenfreien Ansichten. Ist nur EXPORT_KEY gesetzt, fallen beide
+  // Rollen zusammen (Rueckwaerts-Kompatibilitaet). ACHTUNG: Der Leseschluessel
+  // darf hier NICHT als Schreibschluessel durchgehen – sonst waere die
+  // Trennung wirkungslos (Lehre aus dem Testlauf vom 15.10.2026).
+  const darfLesen = await schluessel_pruefen(env, angebot);
+  const darfSchreiben = await schreibschluessel_pruefen(env, angebot);
+  if (!darfLesen && !darfSchreiben) {
+    await export_vermerken(env, p, 0, angebot, 403);
     return new Response(JSON.stringify({ status: 'verboten' }), {
       status: 403, headers: { 'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
     });
   }
+  // Mengenbegrenzung auch auf den geschuetzten Exporten (F-08): Ein
+  // abgeflossener Schluessel darf die Liste nicht in Sekunden leerraeumen.
+  if (!await rate_erlaubt(env, String(request.headers.get('cf-connecting-ip') || 'export'), 'export')) {
+    await export_vermerken(env, p, 0, angebot, 429);
+    return new Response(JSON.stringify({ status: 'zu-viele-anfragen' }), {
+      status: 429, headers: { 'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
+    });
+  }
   if (p === '/export/abonnenten') {
+    // F-08 (15.10.2026): Token nur mit dem ZWEITEN Schluessel und nur auf
+    // ausdrueckliche Anforderung (?mit_token=1). Der Standard-Export liefert
+    // Adresse + Themen – damit ist ein abgeflossener Leseschluessel kein
+    // Generalschlüssel mehr, mit dem sich jeder Abonnent abmelden laesst.
+    const mitToken = url.searchParams.get('mit_token') === '1';
+    const darfToken = mitToken && darfSchreiben;
     const keys = await liste_mit_prefix(env.ABO, 'abo:');
     const aktiv = [];
     for (const key of keys) {
       const eintrag = await env.ABO.get(key, 'json');
       if (eintrag && eintrag.status === 'active') {
-        aktiv.push({ email: eintrag.email, token: eintrag.token, themen: eintrag.themen || [], bestaetigt: eintrag.bestaetigt });
+        const zeile = { email: eintrag.email, themen: eintrag.themen || [], bestaetigt: eintrag.bestaetigt };
+        if (darfToken) zeile.token = eintrag.token;
+        aktiv.push(zeile);
       }
     }
-    return json({ ts: new Date().toISOString(), anzahl: aktiv.length, abonnenten: aktiv }, 200, env);
+    await export_vermerken(env, p, aktiv.length, angebot, 200);
+    return json({
+      ts: new Date().toISOString(), anzahl: aktiv.length,
+      mit_token: darfToken, abonnenten: aktiv,
+    }, 200, env);
   }
   if (p === '/export/pending') {
+    const mitToken = url.searchParams.get('mit_token') === '1';
+    const darfToken = mitToken && darfSchreiben;
     const keys = await liste_mit_prefix(env.ABO, 'abo:');
     const offen = [];
     for (const key of keys) {
       const eintrag = await env.ABO.get(key, 'json');
       if (eintrag && eintrag.status === 'pending') {
-        offen.push({ email: eintrag.email, token: eintrag.token, seit: eintrag.seit, bestaetigung_gesendet: eintrag.bestaetigung_gesendet, versuche: eintrag.versuche || 0 });
+        const zeile = {
+          email: eintrag.email, seit: eintrag.seit,
+          bestaetigung_gesendet: eintrag.bestaetigung_gesendet, versuche: eintrag.versuche || 0,
+        };
+        if (darfToken) zeile.token = eintrag.token;
+        offen.push(zeile);
       }
     }
-    return json({ ts: new Date().toISOString(), anzahl: offen.length, offen }, 200, env);
+    await export_vermerken(env, p, offen.length, angebot, 200);
+    return json({ ts: new Date().toISOString(), anzahl: offen.length, mit_token: darfToken, offen }, 200, env);
   }
   if (p === '/export/token') {
     const eintrag = await token_eintrag(env, url.searchParams.get('token') || '');
@@ -1137,6 +1351,77 @@ async function exportiert(request, env, p, url) {
 }
 
 // ---------------------------------------------------------------- Einstieg
+/**
+ * Mengenbegrenzung je Route-Klasse (F-03, 15.10.2026): VORHER liefen
+ * `/bestaetigung`, `/praeferenzen`, `/status`, `/feedback` (GET) und der
+ * Export voellig ungebremst – 50.000 Anfragen genuegten, um das KV-Lesekontingent
+ * des Free-Plans zu leeren; danach fielen Anmeldung, Bestaetigung, Abmeldung
+ * und der Pflegelauf aus. Jetzt hat JEDE Route eine Klasse:
+ *   · lesen  – die Token-Seiten (GET): Standard 60 Anfragen je Minute
+ *   · feedback – Stimmen und Zaehlerstand: Standard 30 je Minute
+ *   · export – geschuetzte Exporte: Standard 20 je Minute
+ * Ohne Binding faellt die Pruefung auf den KV-Zaehler zurueck (Altverhalten);
+ * die Grenzen sind per Env-Variable justierbar (RATE_LIMIT_<KLASSE>).
+ */
+const LIMIT_KLASSEN = {
+  lesen: { standard: 60, env: 'RATE_LIMIT_LESEN' },
+  feedback: { standard: 30, env: 'RATE_LIMIT_FEEDBACK' },
+  export: { standard: 20, env: 'RATE_LIMIT_EXPORT' },
+};
+
+function limit_klasse(pfad, methode) {
+  if (pfad.startsWith('/export/')) return 'export';
+  if (pfad === '/feedback') return 'feedback';
+  if (methode === 'GET') return 'lesen';
+  return null; // POST-Routen haben ihre eigenen, strengeren Limits
+}
+
+/**
+ * Rueckfall-Zaehler im Speicher der Worker-Instanz (F-03).
+ * Kostenlos (kein KV-Schreibzugriff) und ohne Zustand zwischen Aufrufen –
+ * dafür gilt er nur je Instanz und nur für eine Minute. Genau dafür reicht er:
+ * Ein einzelner Absender trifft in der Regel dieselbe Instanz am selben Ort,
+ * und dort greift der Deckel sofort. Gegen einen verteilten Sturm steht die
+ * WAF-Mengenregel der Zone an der Edge (cloudflare/edge-schutz.md, A2) –
+ * die zaehlt, bevor ueberhaupt eine Instanz startet.
+ */
+const MENGE_SPEICHER = new Map();
+const MENGE_MAX_EINTRAEGE = 5000;
+
+function menge_speicher_pruefen(schluessel, grenze, jetzt = Date.now()) {
+  const fenster = Math.floor(jetzt / 60000);
+  const stand = MENGE_SPEICHER.get(schluessel);
+  if (!stand || stand.fenster !== fenster) {
+    if (MENGE_SPEICHER.size >= MENGE_MAX_EINTRAEGE) MENGE_SPEICHER.clear();
+    MENGE_SPEICHER.set(schluessel, { fenster, zaehler: 1 });
+    return true;
+  }
+  stand.zaehler += 1;
+  return stand.zaehler <= grenze;
+}
+
+/** Nur fuer Tests: Der Rueckfall-Zaehler ist Prozesszustand, kein KV-Wert. */
+function menge_speicher_zuruecksetzen() {
+  MENGE_SPEICHER.clear();
+}
+
+async function menge_erlaubt(env, klasse, request) {
+  if (!klasse) return true;
+  const grenze = Number((env && env[LIMIT_KLASSEN[klasse].env]) || 0)
+    || LIMIT_KLASSEN[klasse].standard;
+  const ip = String(request.headers.get('cf-connecting-ip')
+    || request.headers.get('x-forwarded-for') || 'unbekannt').split(',')[0].trim();
+  if (env && env.RATE_LIMITER && typeof env.RATE_LIMITER.limit === 'function') {
+    try {
+      const { success } = await env.RATE_LIMITER.limit({
+        key: await sha256_kurz(`menge|${klasse}|${ip}`),
+      });
+      return success !== false;
+    } catch (e) { /* Binding gestoert → Rueckfall unten */ }
+  }
+  return menge_speicher_pruefen(`${klasse}|${ip}`, grenze);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -1148,7 +1433,14 @@ export default {
       if (request.method === 'POST' && !p.startsWith('/export/') && !herkunft_erlaubt(request, env, url)) {
         return fehler(403, 'Anfrage von einer fremden Seite abgelehnt.', env, request);
       }
+      // Mengenbegrenzung (F-03) – greift fuer lesende Routen und den Export.
+      const klasse = limit_klasse(p, request.method);
+      if (!await menge_erlaubt(env, klasse, request)) {
+        return fehler(429, 'Zu viele Anfragen in kurzer Zeit – bitte einen Moment warten.',
+          env, request);
+      }
       if (p === '/anmeldung' && request.method === 'POST') return await anmeldung(request, env, url);
+
       if (p === '/feedback' && request.method === 'POST') return await feedback(request, env);
       if (p === '/feedback' && request.method === 'GET') return await feedback_lesen(request, env, url);
       if (p === '/bestaetigung' && request.method === 'GET') return await bestaetigung_seite(env, url);
@@ -1181,4 +1473,11 @@ export default {
 };
 
 // Fuer Tests (node --test): die Takt-Tabelle und der Ausfuehrer ohne Cloudflare.
-export { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen };
+export {
+  TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen,
+  // Sicherheitsrelevante Entscheidungen werden direkt geprueft, nicht ueber
+  // Umwege (Audit 15.10.2026): Schluesselrollen, Tagesbudget, Mengenklassen.
+  schluessel_pruefen, schreibschluessel_pruefen, tagesbudget_nehmen, tagesbudget_stand,
+  limit_klasse, warnen_einmal, schluessel_fingerabdruck, ANMELDUNG_MAX_PRO_TAG_DEFAULT,
+  menge_speicher_pruefen, menge_speicher_zuruecksetzen,
+};

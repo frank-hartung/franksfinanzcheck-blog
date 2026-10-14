@@ -71,6 +71,25 @@
       <input type="hidden" name="_zeit" value="" data-ff-nl-zeit>
     </p>
     {{- end -}}
+    {{- /* BOT-SCHUTZ (Sicherheitsaudit 15.10.2026, F-02): Cloudflare Turnstile.
+           Der Shortcode liefert das Widget NUR aus, wenn params.turnstileSiteKey
+           gesetzt ist. Grund für die Kopplung: Der Worker prüft fail-closed,
+           sobald sein TURNSTILE_SECRET gesetzt ist – und fail-open, solange
+           nicht. Beide Werte (Site-Key hier, Secret im Worker) gehören also
+           zusammen; ein einseitig gesetzter Wert würde entweder jede Anmeldung
+           scheitern lassen oder den Schutz still abschalten. Wache:
+           scripts/worker_betrieb_wache.py (meldet den Zustand täglich laut,
+           Live-Job der Sicherheits-Wache). */ -}}
+    {{- $turnstile := site.Params.turnstileSiteKey | default "" -}}
+    {{- if $turnstile -}}
+    <p class="ff-nl__turnstile">
+      <span class="cf-turnstile" data-sitekey="{{ $turnstile }}" data-action="newsletter"
+            data-theme="light" data-language="de" data-response-field-name="cf-turnstile-response"
+            data-ff-nl-turnstile></span>
+      <span class="ff-nl__hinweis">Kurzer Bot-Schutz von Cloudflare (ohne Cookie, ohne
+        Nutzerprofil). Erst nach dieser Prüfung geht deine Anmeldung raus.</span>
+    </p>
+    {{- end -}}
     <p class="ff-nl__consent">
       <label class="ff-nl__consent-zeile">
         <input class="ff-nl__check" type="checkbox" name="consent" value="1" required>
@@ -140,4 +159,11 @@
        den nächsten Termin rechnet der Browser, nie der letzte Build. */ -}}
 {{- if or $c.form_action $c.form_url -}}
 <script defer src="{{ partial "asset_url.html" "premium/ff-newsletter.js" }}"></script>
+{{- end -}}
+{{- /* Turnstile-Skript NUR laden, wenn das Widget ausgeliefert wird (F-02):
+       ohne Site-Key kein Drittanbieter-Request – und mit Widget genau einmal
+       je Seite, `defer`, ohne Vorabverbindung. */ -}}
+{{- if and $c.form_action site.Params.turnstileSiteKey -}}
+<script defer src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        data-ff-nl-turnstile-skript></script>
 {{- end -}}

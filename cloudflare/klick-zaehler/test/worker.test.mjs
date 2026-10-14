@@ -327,3 +327,39 @@ test("N-05: wrangler.toml – Rate-Limit-Binding und kein workers.dev", () => {
   assert.match(toml, /^workers_dev\s*=\s*false/m);
   assert.match(toml, /\[\[ratelimits\]\][\s\S]*name\s*=\s*"KLICK_LIMITER"/);
 });
+
+test("F-10: D1-Fehler beim Schreiben -> trotzdem 204, kein 500 im Leserbrowser", async () => {
+  // Vor dem Audit lief der Schreibpfad ungefangen: Ein volles Kontingent oder
+  // eine gesperrte Datenbank erzeugte einen 500er – der Leser sah eine
+  // Fehlermeldung im Weiterleitungsweg, obwohl der Klick selbst funktioniert.
+  const db = {
+    prepare() {
+      return { bind() { return { async run() { throw new Error("D1_ERROR: quota exceeded"); } }; } };
+    },
+  };
+  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }), { DB: db }, JETZT, bekannteArtikel);
+  assert.equal(r.status, 204);
+});
+
+test("F-10: fehlende DB-Bindung bricht den Klick nicht", async () => {
+  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }), {}, JETZT, bekannteArtikel);
+  assert.equal(r.status, 204, "ohne Binding darf der Klick nicht scheitern");
+});
+
+test("F-10: gestörter Limiter zählt weiter, bremst aber nicht falsch", async () => {
+  const db = fakeDb();
+  const kaputt = { limit: async () => { throw new Error("limiter down"); } };
+  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }),
+    { DB: db, KLICK_LIMITER: kaputt }, JETZT, bekannteArtikel);
+  assert.equal(r.status, 204);
+  assert.equal(db.aufrufe.length, 1, "gezählt wird trotzdem");
+});
+
+test("F-10: Limiter greift, wenn er arbeitet (Gegenprobe)", async () => {
+  const db = fakeDb();
+  const streng = { limit: async () => ({ success: false }) };
+  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }),
+    { DB: db, KLICK_LIMITER: streng }, JETZT, bekannteArtikel);
+  assert.equal(r.status, 429);
+  assert.equal(db.aufrufe.length, 0, "geblockt wird nichts geschrieben");
+});

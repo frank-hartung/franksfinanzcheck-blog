@@ -164,6 +164,12 @@ jobs:
           NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
+          # Schreibschluessel (Sicherheitsaudit 15.10.2026, F-08): Nur mit ihm
+          # liefert der Worker die Abmelde-Token (`?mit_token=1`). Fehlt das
+          # Secret, faellt der Worker auf den Leseschluessel zurueck – der
+          # Versand laeuft weiter, die Sicherheits-Wache meldet die fehlende
+          # Trennung als Warnung (Runbook A4).
+          NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
           # Als ENV, nicht als Interpolation im Skripttext (B3-Regel aus der
           # Kadenz-Absicherung: Eingaben sind Daten, niemals Code).
           SEND_AN: ${{ (inputs.live || inputs.planmaessig || github.event_name == 'schedule') && 'ja' || 'nein' }}
@@ -212,6 +218,12 @@ jobs:
           NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
+          # Schreibschluessel (Sicherheitsaudit 15.10.2026, F-08): Nur mit ihm
+          # liefert der Worker die Abmelde-Token (`?mit_token=1`). Fehlt das
+          # Secret, faellt der Worker auf den Leseschluessel zurueck – der
+          # Versand laeuft weiter, die Sicherheits-Wache meldet die fehlende
+          # Trennung als Warnung (Runbook A4).
+          NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
           NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
           # SMTP-Alternative (nur wenn Resend NICHT der Transport sein soll):
           # NEWSLETTER_TRANSPORT=smtp (Var) + diese vier Secrets setzen –

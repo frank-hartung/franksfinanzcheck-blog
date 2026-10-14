@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-14T21:53:39.967030+00:00",
-  "head": "0d76a34",
+  "signed_at": "2026-10-14T23:49:14.288914+00:00",
+  "head": "74570df",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "hugo.toml": "4fbdf9d703104e063ec1c7a63414cfc34c6536e709d7523078c9d53392b3b0e6",
+    "hugo.toml": "171a8d3348f345968ec5bdbefb5908949ab5919c4fcfaaebc5a6c33d536aa3c1",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8e56bc560a2c04e7b3e2a1d6c8ad69c19bf86f757c2197358b44f0197265fd6e",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -53,44 +53,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1",
-  "audit_start_sha256": "ec666bf10a4dc7b18f3b6a366c1bde85cdd9bc65d5a86f15cef3ece165bd7871",
+  "files_sha256": "a7bdf3d2e812f7bd1f4d060f3c8c8bd6929ced06447ff92816225692fd9be883",
+  "audit_start_sha256": "ee413b085995244d062e0e14b2033f9fe98cccd0ef218c24733966712c540397",
   "audit": [
-    {
-      "date": "2026-10-10",
-      "art": "set-current",
-      "head": "742b2fa8",
-      "geaendert": [
-        "scripts/affiliate_marketer.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_marketer.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "742b2fa8",
-              "datum": "2026-10-10",
-              "betreff": "fix(security): Alert #83 dauerhaft heilen – Host parsen statt Zeichenkette prüfen"
-            },
-            {
-              "sha": "08d22ab8",
-              "datum": "2026-10-04",
-              "betreff": "fix(security): Code-Scanning-Heilung – 50 Alerts dauerhaft auf 0 + Sicherheitswache-Pipeline (#569)"
-            },
-            {
-              "sha": "70879da8",
-              "datum": "2026-09-19",
-              "betreff": "feat(affiliate): Intent-Wache IW0–IW9 + ein Kontrakt für Anker, Satz und Route"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "76380dc44d3f24ca21e5072a285c67bd5e19d283e4ca03ccf8d926fb5ecb68d9",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-10",
       "art": "set-current",
@@ -138,7 +103,7 @@
         }
       ],
       "files_sha256": "3882a48befcdeb880909f209c8a7d7b7e89208765862870adb376fb2ca264956",
-      "prev_sha256": "ec666bf10a4dc7b18f3b6a366c1bde85cdd9bc65d5a86f15cef3ece165bd7871"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-11",
@@ -698,8 +663,38 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d",
-      "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1"
+      "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1",
+      "prev_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d"
+    },
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "74570df",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "74570df",
+              "datum": "2026-10-14",
+              "betreff": "sicherheit: Befunde F-01 bis F-10 beheben und dauerhaft absichern"
+            },
+            {
+              "sha": "424628f",
+              "datum": "2026-10-14",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "7625b594f34898c713138b46ad70685a87b3eb45ae811f056a06ad8f840e245c",
+      "files_sha256": "a7bdf3d2e812f7bd1f4d060f3c8c8bd6929ced06447ff92816225692fd9be883"
     }
   ]
 }

@@ -31,6 +31,12 @@
 //    - Rate-Limit: Binding KLICK_LIMITER (wrangler.toml, 30 Ereignisse je
 //      60 s und Verbindung) + optional WAF-Regel im Dashboard (Runbook).
 //      Die Origin-Prüfung allein ist per curl fälschbar – deshalb beides.
+//      REST (F-10b, laut Audit §5 auf „innerhalb 30 Tagen“ terminiert): ein
+//      Nonce je Artikel (?n=<HMAC(Slug, Build-SHA)>), damit nur echte
+//      /go/-Seiten zählen. Solange er fehlt, bleibt die Origin-Prüfung der
+//      einzige Herkunftsnachweis; ein gefälschter Zähler verfälscht die
+//      Statistik, nicht die Sicherheit. Der Nonce braucht einen Schlüssel im
+//      Hugo-Bau – Termin und Weg stehen im Runbook (A6).
 //
 //  Deploy/Betrieb: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md
 // ============================================================
@@ -172,12 +178,21 @@ export async function erfasse(request, env, now = new Date(), artikelQuelle = la
   if (!pruefeEreignis(daten).ok) return leer(400);
   const ev = pruefeEreignis(daten, GATEWAY_KEYS, await artikelQuelle(env));
 
-  await env.DB.prepare(
-    `INSERT INTO klicks (tag, go_key, artikel, anzahl) VALUES (?, ?, ?, 1)
-     ON CONFLICT(tag, go_key, artikel) DO UPDATE SET anzahl = anzahl + 1`,
-  )
-    .bind(berlinDatum(now), ev.k, ev.s)
-    .run();
+  // F-10 (Audit 15.10.2026): Fehler NIE durchreichen. Vorher lief der
+  // D1-Schreibpfad ungefangen – ein volles Kontingent, eine gesperrte
+  // Datenbank oder ein Bindungsfehler erzeugten einen 500er im Browser des
+  // Lesers (und damit eine Fehlermeldung im /go/-Weiterleitungsweg). Der
+  // Zaehler ist Komfort, nicht Funktion: er darf den Klick nicht brechen.
+  try {
+    await env.DB.prepare(
+      `INSERT INTO klicks (tag, go_key, artikel, anzahl) VALUES (?, ?, ?, 1)
+       ON CONFLICT(tag, go_key, artikel) DO UPDATE SET anzahl = anzahl + 1`,
+    )
+      .bind(berlinDatum(now), ev.k, ev.s)
+      .run();
+  } catch (e) {
+    console.warn(`klick-zaehler: Zaehlung nicht gespeichert (${(e && e.message) || e})`);
+  }
   return leer(204);
 }
 

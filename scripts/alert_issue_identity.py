@@ -111,9 +111,48 @@ def titel(workflow: str) -> str:
     return f"🔧 Wartung · {bereich(workflow)} · Vorgang {code(workflow)}"
 
 
+def saeubern(roh: str, max_laenge: int = 120) -> str:
+    """Fremdtext für die Ausgabe in einem Issue entschärfen (F-09, 15.10.2026).
+
+    Woher der Text kommt: `github.event.workflow_run.name` und `.head_branch`
+    stammen aus der Ferne. Zwar alarmiert der Lauf nur für Produktions-Zweige
+    (Gate: `head_branch == default_branch`), aber die Meldung wird von
+    Menschen und Bots gelesen – ein Zweig- oder Workflowname ist kein
+    vertrauenswürdiger Text.
+
+    Was passiert:
+      · Steuerzeichen (inkl. Zeilenumbrüche, Nullbreiten-Zeichen, Bidi-Tricks)
+        fliegen raus – damit ist kein Zeilen- oder Richtungswechsel möglich.
+      · HTML-/Markdown-Träger werden entschärft: `<` `>` `[` `]` `` ` `` `|`
+        und `*` werden zu Vollbreite-Zeichen bzw. entfernt.
+      · Ein `@` bekommt ein Nullbreiten-Zeichen nachgestellt – sonst löst ein
+        Zweigname wie `@alle` Benachrichtigungen aus (Spam über ein Issue).
+      · Länge begrenzt, damit ein Roman den Body nicht flutet.
+
+    Der Aufrufer sieht das Ergebnis sofort: Ein Name wie „Layout-AI“ bleibt
+    unverändert, ein Angriffsname wird sichtbar harmlos.
+    """
+    text = str(roh or "")
+    # Zeilenumbrüche und Tabulatoren werden zu EINEM Leerzeichen (ein Zweigname
+    # mit Umbruch bleibt lesbar, kann aber keine Zeile vortäuschen).
+    for trenner in ("\r\n", "\r", "\n", "\t", "\v", "\f"):
+        text = text.replace(trenner, " ")
+    # Steuerzeichen, Nullbreiten- und Bidi-Zeichen entfernen.
+    text = "".join(z for z in text if z.isprintable() and z not in "\u200b\u200c\u200d\u202a\u202b\u202c\u202d\u202e\ufeff")
+    for boese, ersatz in (("<", "‹"), (">", "›"), ("[", "("), ("]", ")"),
+                          ("`", "'"), ("|", "¦"), ("*", "∗")):
+        text = text.replace(boese, ersatz)
+    text = text.replace("@", "@\u200b")  # Mention-Schutz
+    text = " ".join(text.split())
+    if len(text) > max_laenge:
+        text = text[:max_laenge - 1].rstrip() + "…"
+    return text
+
+
 def identitaet(workflow: str) -> dict:
     return {
         "workflow": workflow,
+        "workflow_sauber": saeubern(workflow),
         "code": code(workflow),
         "bereich": bereich(workflow),
         "titel": titel(workflow),
@@ -253,6 +292,32 @@ def selftest() -> int:
     except ImportError as importfehler:  # pragma: no cover
         fehler.append(f"F3: Marken-Wache nicht importierbar ({importfehler})")
 
+    # F3b: Kanal-Hygiene (F-09) – Fremdtext wird entschärft, Eigenes bleibt lesbar.
+    import re as _re
+    faelle = [
+        # (Rohtext, muss enthalten, darf nicht enthalten)
+        ("Layout-AI", "Layout-AI", None),
+        ("Content-Engine v2", "Content-Engine v2", None),
+        ("Faktenfrische (Bestand)", "Faktenfrische (Bestand)", None),
+        ("x` @all [Klick](http://boese.example)", "(Klick)", "@all"),
+        ("x<y>z", "‹y›", None),
+        ("<img src=x onerror=alert(1)>", "‹img", "<"),
+        ("Zeile1\nZeile2", "Zeile1 Zeile2", None),
+        ("a\u200bb\u202ec", "abc", None),
+        ("A" * 300, "…", None),
+    ]
+    for roh, muss, darf_nicht in faelle:
+        sauber = saeubern(roh)
+        if muss not in sauber:
+            fehler.append(f"F3b: „{roh[:40]}“ ergibt „{sauber[:40]}“ – „{muss}“ fehlt")
+        if darf_nicht and darf_nicht in sauber:
+            fehler.append(f"F3b: „{darf_nicht}“ hat die Entschärfung überlebt ({sauber[:60]})")
+        if "\n" in sauber or len(sauber) > 120:
+            fehler.append(f"F3b: Ergebnis nicht einzeilig/kurz: {sauber[:60]!r}")
+    # Mentions müssen wirklich unterbrochen sein (sonst pingt ein Zweigname Dritte).
+    if _re.search(r"(?<!\u2060)@\w", saeubern("@alle bitte lesen")):
+        fehler.append("F3b: Mention-Schutz greift nicht")
+
     # F4: Alt-Titel werden erkannt, neue nicht (sonst migriert der Lauf endlos)
     if not ALT_TITEL.match("⚠️ Workflow fehlgeschlagen: KI-Redaktion (failure)"):
         fehler.append("F4: Alt-Titel wird nicht erkannt")
@@ -317,7 +382,7 @@ def selftest() -> int:
             print(f"::error::{f}")
         print(f"❌ Selbsttest Alarm-Identität: {len(fehler)} Fehler.")
         return 1
-    print(f"✅ Selbsttest Alarm-Identität: 9 Fallgruppen bestanden "
+    print(f"✅ Selbsttest Alarm-Identität: 10 Fallgruppen bestanden "
           f"({len(namen)} Workflows, {len(codes)} eindeutige Codes, "
           f"Titel markenfrei, Migration nur mit Nachprüfung).")
     return 0
@@ -330,6 +395,8 @@ def main(argv: list[str] | None = None) -> int:
     zerleger = argparse.ArgumentParser(
         description="Markenneutrale Identität für automatische Fehlermeldungen")
     zerleger.add_argument("--workflow", help="Workflow-Name → Titel, Marker, Code")
+    zerleger.add_argument("--saeubern", metavar="TEXT",
+                          help="Fremdtext für Issue-Ausgaben entschärfen (F-09)")
     zerleger.add_argument("--json", action="store_true", help="Ausgabe als JSON")
     zerleger.add_argument("--tabelle", action="store_true",
                           help="Zuordnung Vorgangscode → Workflow (für Menschen)")
@@ -341,6 +408,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.selftest:
         return selftest()
+
+    if args.saeubern is not None:
+        print(saeubern(args.saeubern))
+        return 0
 
     if args.workflow:
         daten = identitaet(args.workflow)

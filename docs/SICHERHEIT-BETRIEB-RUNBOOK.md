@@ -1,0 +1,331 @@
+# Sicherheits-Runbook — was nur im Dashboard geht
+
+**Stand:** 15. Oktober 2026 · **Grundlage:** `SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`
+(Findings F-01 bis F-10, Prüfpunkte P-1 bis P-8)
+
+**Wozu diese Datei:** Alles, was im Repository liegt, ist am 15.10.2026 behoben
+und durch Wachen gegen Rückfall gesichert. Die folgenden Schritte lassen sich
+**nicht** im Code erledigen — sie liegen in Cloudflare, GitHub oder auf dem
+eigenen Rechner. Jeder Schritt nennt Befehl, Prüfung und die Wache, die danach
+Alarm schlägt, wenn sich etwas zurückschleicht.
+
+**Reihenfolge:** A1 → A2 → A3 sind die wirkungsvollsten und dauern zusammen etwa
+20 Minuten. B und C sind Feinheiten, P ist Hygiene.
+
+**Nachweisführung:** Nach jedem Schritt den Prüfbefehl ausführen und das
+Ergebnis (Zeile, Screenshot) in `docs/SICHERHEITSNACHWEIS-2026-10-15.md`
+eintragen. Eine Behauptung ohne Messung ist keine Behauptung.
+
+---
+
+## A. Ohne diese Schritte bleiben Lücken offen
+
+### A1 · Sicherheits-Header aktivieren (Finding F-01) — 🔴 wichtigster Schritt
+
+**Lage:** Die Seite liegt auf GitHub Pages. GitHub Pages **ignoriert
+`static/_headers`** (steht als Kommentar in der Datei selbst). Deshalb fehlen
+live HSTS, Clickjacking-Schutz und `nosniff`. Die Meta-CSP im HTML kann
+`frame-ancestors` und HSTS nicht liefern — das geht **nur** als HTTP-Header.
+Deshalb: Proxy davor, Header per Transform Rule.
+
+**Schritt 1 — Proxy einschalten:** Cloudflare-Dashboard → Zone
+`franksfinanzcheck.de` → **DNS** → für `franksfinanzcheck.de` und `www` die
+Wolke auf **Proxied** (orange).
+
+**Schritt 2 — SSL-Modus prüfen:** **SSL/TLS → Overview** → `Full` (nicht
+`Flexible`; `Flexible` würde zwischen Cloudflare und GitHub unverschlüsselt
+übertragen und ist eine eigene Sicherheitslücke).
+
+**Schritt 3 — Header-Regel:** Die komplette Regel (Filter + acht Kopfzeilen)
+steht kopierfertig in `cloudflare/edge-schutz.md`, Abschnitt A1. Einfach
+übernehmen.
+
+**Schritt 4 — prüfen:**
+
+```bash
+curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'
+npm run header:check:live          # Selbsttest + Live-Messung, Exit 1 bei Befund
+```
+
+Erwartet: fünf Zeilen (`Strict-Transport-Security`, `X-Content-Type-Options`,
+`X-Frame-Options`, `Referrer-Policy`, `Content-Security-Policy`).
+
+**Danach zwingend B7 (Datenschutz anpassen)** — der Proxy ist rechtlich eine
+Änderung, nicht nur eine technische.
+
+**Wache:** `.github/workflows/sicherheits-wache.yml`, Job `live`, täglich 06:05
+UTC. Sie meldet fehlende Header als roten Lauf → automatische Meldung.
+
+---
+
+### A2 · Mengenregeln an der Edge (Finding F-03)
+
+**Lage:** Der Worker hat seit dem 15.10.2026 eigene Mengenklassen und ein
+Tagesbudget. Die Edge ist die frühere und billigere Schicht — sie zählt, bevor
+das KV-Kontingent überhaupt berührt wird (100.000 Lesevorgänge/Tag im Free-Plan;
+eine Anfrage an eine Token-Seite kostet einen, ein Token-Erraten also
+Lesevorgänge in Serie).
+
+**Schritt:** Cloudflare-Dashboard → **Security → WAF → Rate limiting rules** →
+die vier Regeln aus `cloudflare/edge-schutz.md`, Abschnitt A2 anlegen
+(Anmeldung/POST 20/min, Token-Seiten GET 120/min, Newsletter-Seiten 60/min,
+Zähler 60/min).
+
+**Prüfen:** Dashboard → **Security → Events**, nach Regelname filtern; danach
+`npm run betrieb:check:live` (mit `NEWSLETTER_WORKER_EXPORT_KEY` in der
+Umgebung) — der Bericht zeigt Budgetstand, Bot-Schutz-Zustand und die letzten
+Exportaufrufe.
+
+---
+
+### A3 · Bot-Schutz des Anmeldeformulars (Finding F-02)
+
+**Lage:** Das Formular war ohne Bot-Schutz; nur Honeypot, Zeitfalle und
+IP-Limit. Damit ließen sich fremde Adressen anmelden (Mail-Verstärker), bis das
+KV-Schreibkontingent leer war — dann fallen auch Abmeldung und Tagespflege aus.
+
+**Schritt (Reihenfolge zwingend):**
+
+1. Cloudflare → **Turnstile → Add widget**: Name `FF Newsletter`, Domains
+   `franksfinanzcheck.de`, `www.franksfinanzcheck.de`, Modus **Managed**.
+2. **Site Key** in `hugo.toml` eintragen:
+   `params.turnstileSiteKey = "0x4AAA…"` → commit → Deploy abwarten.
+3. **Secret Key** im Worker hinterlegen:
+   `cd newsletter-worker && npx wrangler secret put TURNSTILE_SECRET`
+
+**Warum diese Reihenfolge:** Der Worker prüft **fail-closed**, sobald sein
+Secret gesetzt ist. Ist das Secret zuerst da und das Widget noch nicht
+ausgeliefert, scheitert jede Anmeldung. Umgekehrt (nur Site Key) ist der Schutz
+eine Fassade — auch das meldet die Wache, und zwar als Fehler, nicht als
+Warnung.
+
+**Prüfen:** Formular auf `/newsletter/` absenden (Testadresse) → Widget
+erscheint, Anmeldung kommt an. Dann:
+
+```bash
+NEWSLETTER_WORKER_BASE=https://abos.franksfinanzcheck.de \
+NEWSLETTER_WORKER_EXPORT_KEY=… python3 scripts/worker_betrieb_wache.py
+```
+
+Erwartet: „Turnstile aktiv: Widget ausgeliefert UND Prüfung erzwungen."
+
+**Datenschutz** ist bereits ergänzt (`content/datenschutz/index.md`,
+Abschnitt Newsletter: Turnstile, kein Cookie, nur beim Absenden geladen).
+
+---
+
+### A4 · Schlüsselrollen trennen und Jobs in Environments einsperren (Findings F-07, F-08, P-1, P-4)
+
+**Lage:** Ein einziger Export-Schlüssel las Listen **mit** Token aller
+Abonnenten — wer ihn hatte, konnte jeden abmelden. Und die Workflows verlangen
+Environments (`cloudflare-produktion`, `brand-admin`, `backup`), die laut API
+nicht existieren: GitHub legt sie beim ersten Lauf **still und ohne
+Freigabepflicht** an.
+
+**Schritt 1 — zweiter Worker-Schlüssel:**
+
+```bash
+cd newsletter-worker
+openssl rand -base64 48            # neuer Schreibschlüssel
+npx wrangler secret put EXPORT_KEY_WRITE     # den Wert einsetzen
+```
+
+Dann in GitHub (Settings → Secrets and variables → Actions):
+`NEWSLETTER_WORKER_WRITE_KEY` = derselbe Wert.
+`NEWSLETTER_WORKER_EXPORT_KEY` bleibt der **Leseschlüssel** (Listen ohne Token).
+
+**Wirkung:** `/export/abonnenten?mit_token=1` liefert Token nur noch mit dem
+Schreibschlüssel; ein abgeflossener Leseschlüssel kann niemanden mehr abmelden.
+Fehlt der Schreibschlüssel, greift ausdrücklich der bisherige Zustand
+(Rückwärts-Kompatibilität) — deshalb meldet die Wache diesen Zustand als
+Warnung.
+
+**Schritt 2 — Environments:** Settings → **Environments** → New environment:
+
+| Name | Required reviewer | Deployment branches | Secrets dort ablegen |
+|---|---|---|---|
+| `cloudflare-produktion` | Frank Hartung | `main` | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` |
+| `brand-admin` | Frank Hartung | `main` | `BRAND_ADMIN_TOKEN` |
+| `backup` | Frank Hartung | `main` | `BACKUP_REPO_TOKEN`, `BACKUP_PASSPHRASE` |
+
+**Schritt 3 — aufräumen:** Das ungenutzte Environment `GITHUB_WORKFLOW_TOKEN`
+löschen (Audit P-4: es wird von keinem Workflow verwendet, existiert aber
+weiter).
+
+**Schritt 4 — Actions-Token entschärfen (P-4):** Settings → Actions → General →
+Workflow permissions: **Read repository contents**; „Allow GitHub Actions to
+create and approve pull requests" **aus**.
+
+**Prüfen:** `python3 scripts/worker_betrieb_wache.py --selftest && python3
+scripts/worker_betrieb_wache.py --offline` (Repo-Seite), danach einmal
+„Cloudflare-Worker deployen" über **Run workflow** starten — der Lauf zeigt, ob
+die Umgebung greift.
+
+---
+
+### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
+
+**Lage:** Drei Türen waren offen — Whisper ohne Token (jede besuchte Webseite
+konnte Transkriptionen auslösen), drei n8n-Webhooks ohne Authentifizierung,
+ein Bridge-Server auf `127.0.0.1:5680`, der jeden POST annahm.
+
+**Schritt 1 — Secrets erzeugen:**
+
+```bash
+cd tools/n8n
+cp .env.example .env        # falls noch nicht vorhanden
+openssl rand -hex 32        # WHISPER_TOKEN
+openssl rand -hex 32        # N8N_WEBHOOK_TOKEN
+$EDITOR .env                # beide Werte eintragen
+```
+
+`docker compose up` **startet nicht mehr**, wenn einer der beiden Werte fehlt
+(`${VAR:?…}`) — gewollt: fail-closed statt stiller Öffnung.
+
+**Schritt 2 — n8n-Credentials anlegen:** In n8n → **Credentials**:
+
+- `FF Webhook-Secret` — Typ **Header Auth**, Header-Name `X-Webhook-Secret`,
+  Wert = `N8N_WEBHOOK_TOKEN`. Wird von den drei Webhook-Knoten verwendet
+  (im Repository bereits verdrahtet).
+- `FF Whisper-Token` — Typ **Header Auth**, Header-Name `Authorization`,
+  Wert `Bearer <WHISPER_TOKEN>`. Hängt am Knoten „Lokales Whisper".
+
+**Schritt 3 — Workflows neu importieren:** `n8n/workflows/*.json` (und die
+identische Kopie in `tools/n8n/workflows/`) erneut importieren, damit die
+Credential-Verknüpfungen greifen.
+
+**Prüfen:**
+
+```bash
+python3 scripts/n8n_schutz_wache.py                 # Selbsttest + Prüfung
+python3 scripts/n8n_bridge.py --selftest            # 5 Gegenproben (401/403/415/413/503)
+docker compose exec whisper-api curl -s -o /dev/null -w '%{http_code}\n' \
+  -X POST http://localhost:8765/v1/audio/transcriptions   # erwartet: 503/401 ohne Token
+```
+
+**Wache:** `scripts/n8n_schutz_wache.py` läuft bei jeder Änderung an
+`n8n/`, `tools/n8n/` oder der Bridge (Workflow `sicherheits-wache.yml`).
+
+---
+
+### A6 · Zähler-Härtung (Finding F-10, Nachweis)
+
+**Lage:** Der Klickzähler ist per `curl` fälschbar (Origin-Kopf ist kein
+Geheimnis) und schrieb ungefangen in D1 — ein volles Kontingent erzeugte einen
+500er im Leserbrowser.
+
+**Bereits behoben im Repo:** `try/catch` um den Schreibpfad (ein Fehler beim
+Zählen bricht den Klick nicht mehr), Mengenbegrenzung bleibt, WAF-Regel in A2.
+
+**Rest (F-10b, laut Audit §5 auf „innerhalb 30 Tagen“ terminiert):** ein Nonce
+je Artikel (`?n=<HMAC(Slug, Build-SHA)>`) bindet `/e` an die ausgelieferte
+`/go/`-Seite. Der Wert entsteht beim Hugo-Bau, der Worker prüft ihn; erst
+danach ist die Origin-Prüfung nicht mehr der einzige Herkunftsnachweis. Wenn
+der Nonce steht: die 34 Zähler-Tests um den Nonce-Fall erweitern (Muster
+`cloudflare/klick-zaehler/test/worker.test.mjs`) und die WAF-Regel aus A2 auf
+den `/e`-Pfad nachschärfen.
+
+**Rest-Einschätzung:** Ein gefälschter Zähler verfälscht Statistik, nicht
+Sicherheit. Wer ihn zusätzlich härten will: `stats.franksfinanzcheck.de` per
+Cloudflare Access hinter die eigene E-Mail legen (dann zählt nur noch, wer
+angemeldet ist) — **nicht** empfohlen für den öffentlichen `/go/`-Weg.
+
+---
+
+## B. Datenschutz und Betrieb
+
+### B7 · Datenschutz-Text für den Cloudflare-Proxy (zu A1)
+
+Nach dem Einschalten des Proxys wird `content/datenschutz/index.md`,
+Abschnitt 3 („Hosting, Domain und Server-Logfiles") angepasst. **Ersetzen:**
+
+> Diese Website wird von **GitHub Pages** ausgeliefert (…). Die Domain
+> franksfinanzcheck.de zeigt direkt auf die Server von GitHub Pages. Zum Stand
+> 11. Oktober 2026 ist kein Proxy von Cloudflare vor die Website geschaltet.
+
+**durch:**
+
+> Diese Website wird von **GitHub Pages** ausgeliefert (GitHub, Inc., 88 Colin
+> P. Kelly Jr. Street, San Francisco, CA 94107, USA). **Vorgeschaltet ist das
+> CDN von Cloudflare, Inc.** (101 Townsend St., San Francisco, CA 94107, USA),
+> das Zugriffe entgegennimmt, technisch absichert und beschleunigt. Cloudflare
+> verarbeitet dabei technische Zugriffsdaten wie IP-Adresse, Zeitpunkt,
+> angeforderte Adresse, Browsertyp und Referrer sowie Sicherheitsmerkmale zur
+> Abwehr von Angriffen. Details: Cloudflare-Datenschutzhinweise. Die
+> Server-Logfiles und Aufbewahrungsfristen richten sich nach Cloudflare.
+
+Zusätzlich im Abschnitt „Domain und DNS" den Satz „Cloudflare erhält dabei
+keine Informationen über Seitenaufrufe" streichen — er stimmt mit Proxy nicht
+mehr.
+
+**Prüfen:** `grep -n "kein Proxy\|keine Informationen über Seitenaufrufe" content/datenschutz/index.md`
+→ muss leer sein.
+
+### B8 · Datenschutz und Cookie-Freiheit nachprüfen (P-5)
+
+- Cloudflare → **Caching → Tiered Cache** aus, **Speed → Optimization →
+  „Rocket Loader"** aus (verändert Skripte im Browser — für eine Seite mit
+  eigener CSP unnötiges Risiko).
+- **Workers KV** liegt in der EU? Workers KV ist an das Konto gebunden; die
+  Jurisdiktion ist im Konto zu prüfen und in der Datenschutzerklärung ehrlich zu
+  benennen (sie sagt derzeit „Drittländer möglich" — das ist der sichere,
+  zutreffende Satz, solange nicht anders belegt).
+- **Alarme:** Cloudflare → Notifications → „Usage Based Billing"/„Workers KV
+  reads" aktivieren, damit ein Kontingent-Sturm auffällt, bevor er den Dienst
+  lahmlegt.
+
+---
+
+## C. Repository — bereits erledigt, hier nur die Nachweise
+
+| Finding | Behebung im Repo | Nachweis |
+|---|---|---|
+| F-01 | Header-Vorlage + Wache + Proxy-Runbook (A1) | `npm run header:check` |
+| F-02 | Turnstile-Baustein (Shortcode, JS, `hugo.toml`), Worker fail-closed, Datenschutz | `npm run test:sicherheit`, `npm run betrieb:check` |
+| F-03 | Mengenklassen für alle Routen, Tagesbudget, Melder je Stunde, WAF-Vorlage | `newsletter-worker`: 91 Tests, `npm run betrieb:check` |
+| F-04 | Webhook-Auth, Whisper fail-closed, Bridge-Auth, Compose-Pflicht, `.env.example` | `npm run n8n:schutz`, `scripts/n8n_bridge.py --selftest` |
+| F-05 | Klartext-Log entfernt (Hash statt Adresse) | Test „Log-Hygiene" im Worker |
+| F-06 | `[security]` in `hugo.toml`, Inhalts-Wache mit 13 Proben | `npm run content:check` |
+| F-07 | Runbook A4 (Environments, Reviewers, Token) | Dashboard-Audit (P-1) |
+| F-08 | Zwei Schlüsselrollen, Export-Protokoll, `mit_token`, Fail-closed im Versand | Worker-Tests + `newsletter_digest`/`_versand`-Selbsttests |
+| F-09 | Kanal-Hygiene für Workflow-/Zweignamen, Simulationsfall | `python3 -m unittest scripts.tests.test_alert_scoping` |
+| F-10 | `try/catch` um D1-Schreibpfad, Tests für 3 Fehlerarten | `node --test` im Zähler-Ordner |
+
+**Ein Befehl für alles Quellseitige:**
+
+```bash
+npm run test:sicherheit
+```
+
+---
+
+## P. Prüfpunkte im Dashboard (P-1 bis P-8)
+
+| Nr. | Was | Wo | Prüfung |
+|---|---|---|---|
+| P-1 | Branch-Protection/Ruleset für `main`: Force-Push aus, Löschen aus, 1 Review, „Require approvals", kein Umgehen für Admins | GitHub → Settings → Rules → Rulesets | API: `gh api repos/:owner/:repo/rulesets` |
+| P-2 | Secret Scanning + **Push Protection** an; ggf. „Private Vulnerability Reporting" an | Settings → Code security | Screenshot der Schalter |
+| P-3 | Private Vulnerability Reporting aktiv | Settings → Code security | Status „Enabled" |
+| P-4 | Actions-Default-Token read-only; keine PR-Erzeugung; unnötiges Environment weg | Settings → Actions → General | erledigt in A4 |
+| P-5 | WAF-Regeln, KV-Jurisdiktion, Alarme | Cloudflare | A2, B8 |
+| P-6 | Deploy-Drift: `wrangler.toml` enthält Platzhalter-IDs → bei jedem Deploy prüfen | `newsletter-worker/wrangler.toml` | `npm run betrieb:check` |
+| P-7 | Tote Tokens widerrufen: `PINTEREST_ACCESS_TOKEN` (siehe `data/secrets_state.json`), alter `GH_PAT` | Anbieter-Dashboards | Token-Liste leer |
+| P-8 | `EXPORT_KEY`/`EXPORT_KEY_WRITE` ≥ 32 Zeichen, nicht wiederverwendet | `wrangler secret list` | nur Namen, Werte nirgends im Repo |
+
+---
+
+## Abschlussprüfung
+
+```bash
+npm run test:sicherheit                      # vier Wachen, Selbsttest + Quellprüfung
+npm run header:check:live                    # Header der echten Seite (A1)
+npm run betrieb:check:live                   # Worker-Betrieb (A2/A3/A4)
+python3 scripts/n8n_schutz_wache.py          # Automatik-Kette (A5)
+cd newsletter-worker && node --test          # 91 Tests
+cd ../cloudflare/klick-zaehler && node --test test/worker.test.mjs   # 34 Tests
+cd ../../cloudflare/ki-assistent && node --test                      # 17 Tests
+```
+
+Alle grün = der Stand aus dem Audit ist wiederhergestellt **und** gesichert.
+Rot = die Meldung nennt Datei, Zeile und Grund; ein roter Lauf ist ein Auftrag,
+kein Rauschen.

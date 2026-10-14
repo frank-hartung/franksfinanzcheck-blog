@@ -5,9 +5,18 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "voice-memo",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "node-webhook-in",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ff-webhook-secret",
+          "name": "FF Webhook-Secret"
+        }
+      },
+      "notes": "Zugang nur mit dem Header X-Webhook-Secret (Wert aus tools/n8n/.env, Variable N8N_WEBHOOK_TOKEN – nie im Repo). Hintergrund und Einrichtung: docs/SICHERHEIT-BETRIEB-RUNBOOK.md, Schritt A3. Ohne Credential „FF Webhook-Secret“ läuft dieser Workflow nicht (fail closed).",
+      "notesInFlow": false,
       "name": "Webhook Sprachmemo",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
@@ -22,6 +31,14 @@
         "options": {}
       },
       "id": "node-whisper-transcribe",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ff-whisper-token",
+          "name": "FF Whisper-Token"
+        }
+      },
+      "notes": "Zugang nur mit Authorization: Bearer <WHISPER_TOKEN> (Credential „FF Whisper-Token“, Header-Name Authorization, Wert Bearer …). Seit dem Sicherheitsaudit 15.10.2026 verweigert der Whisper-Dienst ohne Token die Arbeit (fail closed) – Anleitung: docs/SICHERHEIT-BETRIEB-RUNBOOK.md, Schritt A4.",
+      "notesInFlow": false,
       "name": "Lokales Whisper (0 €)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,

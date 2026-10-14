@@ -150,9 +150,64 @@
       });
     }
 
-    function senden() {
-      if (unterwegs) return;
-      var ziel = form.getAttribute('action');
+    /* ---------- Bot-Schutz (Cloudflare Turnstile) ----------
+       Sicherheitsaudit 15.10.2026 (F-02): Das Formular war ohne Bot-Schutz –
+       der Honeypot und die Zeitfalle halten Skripte nicht auf, und damit
+       konnte jeder fremde Adressen anmelden (Mail-Verstärker). Das Widget
+       liefert der Shortcode nur aus, wenn params.turnstileSiteKey gesetzt
+       ist; hier wird ausschließlich das Token eingesammelt und mitgeschickt.
+       Grundsätze:
+         · Kein Wirkungsverlust ohne Widget: fehlt es, bleibt alles wie vorher.
+         · Kein stiller Abbruch: Wer das Widget nicht lösen kann, bekommt einen
+           Satz, der sagt, was zu tun ist – nicht ein Formular, das schweigt.
+         · Kein Token-Cache: Turnstile-Token sind einmalig; jeder Versuch holt
+           ein frisches. */
+    function turnstileFeld() { return form.querySelector('[data-ff-nl-turnstile]'); }
+
+    function turnstileToken() {
+      var feld = turnstileFeld();
+      if (!feld) return '';
+      var input = form.querySelector('input[name="cf-turnstile-response"]');
+      return input && input.value ? input.value : '';
+    }
+
+    function turnstileBereit() {
+      var ts = window.turnstile;
+      return !!(ts && typeof ts.render === 'function' && typeof ts.execute === 'function');
+    }
+
+    function turnstileHolen() {
+      var feld = turnstileFeld();
+      if (!feld) return Promise.resolve('');
+      if (!turnstileBereit()) {
+        /* Skript nicht da (Blocker, Offline, alter Browser): NICHT blockieren.
+           Der Worker entscheidet – ist sein Secret gesetzt, erklärt er die
+           fehlende Prüfung; ist es nicht gesetzt, gilt die Anmeldung. */
+        return Promise.resolve('');
+      }
+      var alt = turnstileToken();
+      if (alt) return Promise.resolve(alt);
+      return new Promise(function (fertig) {
+        var abbruch = setTimeout(function () { fertig(''); }, 8000);
+        try {
+          window.turnstile.execute(feld, {
+            action: 'newsletter',
+            callback: function (token) { clearTimeout(abbruch); fertig(token || ''); },
+            'error-callback': function () { clearTimeout(abbruch); fertig(''); },
+            'timeout-callback': function () { clearTimeout(abbruch); fertig(''); }
+          });
+        } catch (e) {
+          clearTimeout(abbruch);
+          fertig('');
+        }
+      });
+    }
+
+    /* Formularfelder einsammeln. Das Turnstile-Token haengt NICHT als Feld im
+       Formular (Cloudflare rendert ein verstecktes Feld, das nach einem
+       fehlgeschlagenen Versuch leer stehen kann) – es wird ausdruecklich
+       uebergeben und ersetzt einen leeren Wert. */
+    function körperBauen(token) {
       var körper = [];
       try {
         var daten = new FormData(form);
@@ -162,14 +217,50 @@
           körper.push(encodeURIComponent(schlüssel) + '=' + encodeURIComponent(wert));
         });
       } catch (e) {
-        /* Ohne FormData (alter Browser) übernimmt der native POST: derselbe
-           Weg wie ohne JavaScript – die Anmeldung funktioniert trotzdem. */
+        /* Ohne FormData (alter Browser) uebernimmt der native POST: derselbe
+           Weg wie ohne JavaScript – die Anmeldung funktioniert trotzdem.
+           `null` sagt dem Aufrufer: hier ist nichts mehr zu tun. */
         try { form.submit(); } catch (e2) {}
-        return;
+        return null;
       }
+      if (token) {
+        var ersetzt = false;
+        for (var i = 0; i < körper.length; i += 1) {
+          if (körper[i].indexOf('cf-turnstile-response=') === 0) {
+            körper[i] = 'cf-turnstile-response=' + encodeURIComponent(token);
+            ersetzt = true;
+            break;
+          }
+        }
+        if (!ersetzt) körper.push('cf-turnstile-response=' + encodeURIComponent(token));
+      }
+      return körper;
+    }
+
+    /* Turnstile-Token sind EINMALIG: Nach einem Fehlversuch muss das Widget
+       zurueckgesetzt werden, sonst schickt der zweite Klick dasselbe,
+       verbrauchte Token – und der Leser sieht zweimal denselben Fehler. */
+    function turnstileZuruecksetzen() {
+      var feld = turnstileFeld();
+      var ts = window.turnstile;
+      if (!feld || !ts || typeof ts.reset !== 'function') return;
+      try { ts.reset(feld); } catch (e) { /* egal */ }
+    }
+
+    function senden() {
+      if (unterwegs) return;
       unterwegs = true;
       if (button) button.disabled = true;
       setzen('sendet', 'Wird übermittelt …');
+      // Bot-Schutz zuerst: Das Token muss innerhalb weniger Minuten ankommen –
+      // deshalb frisch holen und unmittelbar danach senden (F-02).
+      turnstileHolen().then(function (token) { return absenden(token); });
+    }
+
+    function absenden(token) {
+      var ziel = form.getAttribute('action');
+      var körper = körperBauen(token);
+      if (körper === null) return;
       anfragen(ziel, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
@@ -188,6 +279,7 @@
            Inhalt nicht lesbar", und genau so behandelt die Meldung unten sie. */
         if (ergebnis && ergebnis.ok === false) {
           if (button) button.disabled = false;
+          turnstileZuruecksetzen();
           form.dataset.status = 'fehler';
           if (status) {
             status.textContent = 'Die Übermittlung ist nicht durchgekommen – das liegt an der ' +
@@ -216,6 +308,7 @@
            gesperrt lassen. */
         unterwegs = false;
         if (button) button.disabled = false;
+        turnstileZuruecksetzen();
         form.dataset.status = 'fehler';
         if (status) {
           status.textContent = 'Die Übermittlung ist nicht durchgekommen – das liegt an der ' +

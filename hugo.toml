@@ -76,9 +76,59 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   [services.rss]
     limit = 50
 
+# ============================================================
+#  SICHERHEIT DES BAUS (Sicherheitsaudit 15.10.2026, F-06)
+#  ------------------------------------------------------------
+#  Warum das hier steht: `unsafe = true` unten lässt rohes HTML aus Markdown
+#  unverändert durch (nötig für die <div>-Blöcke im Bestand). Damit ist jedes
+#  Skript-Tag in einer Inhaltsdatei auch im gebauten HTML – gefährlich, weil
+#  Content in diesem Repo automatisch entsteht (Voice-Memo → Draft, KI-
+#  Redaktion, Bots) und die Meta-CSP der Seite kein `script-src` kennt.
+#  Diese vier Schalter verkleinern das Fenster auf der Bau-Ebene:
+#    · enableInlineShortcodes = false  – keine Kurzcodes IN Inhaltsdateien,
+#      die beliebigen Code ausführen (Default ist false; hier festgenagelt).
+#    · security.exec.allow/osEnv   – nur die erwarteten Programme (Sass,
+#      PostCSS, npx) und nur die Umgebungsvariablen, die der Bau wirklich
+#      braucht. Ein manipuliertes Template kann damit nicht mehr beliebige
+#      Prozesse oder Umgebungswerte anziehen.
+#    · security.http               – der Bau darf NICHTS Fremdes nachladen
+#      (es gibt heute keinen einzigen Remote-Abruf; ein späterer wäre ein
+#      bewusster Eintrag hier statt einer stillen Hintertür).
+#    · security.funcs.getenv       – nur HUGO_-Variablen sind im Template
+#      sichtbar (asset_url.html nutzt HUGO_JSDELIVR_SHA).
+#  Die Gegenprobe auf der Auslieferungsebene macht scripts/blog_header_gate.py
+#  (Security-Header + CSP), die Quelle prüft scripts/content_html_wache.py
+#  (kein <script>/onerror/javascript: in content/).
+#  Wachen-Doku: docs/SICHERHEIT-BETRIEB-RUNBOOK.md
+# ============================================================
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    # Die Hugo-Standardliste, hier ausgeschrieben statt unsichtbar: Nur diese
+    # Programme darf ein Template starten. Bewusst NICHT erweitert – was der
+    # Bau zusätzlich bräuchte, wäre ein bewusster, begründeter Eintrag.
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$', '^babel$']
+  [security.funcs]
+    # Nur HUGO_-Variablen sind im Template sichtbar (asset_url.html nutzt
+    # HUGO_JSDELIVR_SHA). Alles andere – Tokens, Kontodaten, Laufzeitpfade –
+    # bleibt dem Bau verborgen.
+    getenv = ['^HUGO_', '^CI$']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    # Der Bau lädt NICHTS Fremdes nach. Es gibt heute keinen einzigen
+    # Remote-Abruf; ein späterer muss hier bewusst mit Begründung stehen
+    # (der Bau bricht sonst laut ab – fail closed statt stiller Fremdladung).
+    urls = ['^https://([a-z0-9-]+\.)?franksfinanzcheck\.de/.*']
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
+      # BEGRÜNDUNG (F-06): Roh-HTML ist im Bestand produktiv (Tabellen- und
+      # Kachel-Blöcke in content/**). Der Ersatz wäre eine Tag-Allowlist
+      # (markup.goldmark.renderer.tagWhitelist) – die verträgt der Bestand
+      # noch nicht. Deshalb: unsafe bleibt, aber die Quelle wird bewacht
+      # (scripts/content_html_wache.py, fail-closed mit Selbsttest) und die
+      # Auslieferung bekommt eine echte CSP mit script-src über Cloudflare.
       unsafe = true
 
 [params]
@@ -151,6 +201,21 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   newsletterFormUrl = ""
   newsletterFormAction = "https://abos.franksfinanzcheck.de/anmeldung"
   newsletterPromise = "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags."
+  # BOT-SCHUTZ DES ANMELDEFORMULARS (Sicherheitsaudit 15.10.2026, F-02).
+  # Empfehlung: Cloudflare Turnstile – kostenlos, kein Cookie, keine
+  # Nutzerverfolgung (nur „Managed Challenge"); Datenschutzhinweise Abschnitt
+  # „Newsletter" nennen den Dienst.
+  #   turnstileSiteKey   öffentlicher Site-Key aus dem Cloudflare-Dashboard
+  #                      (Turnstile -> Website hinzufügen -> Domain
+  #                      franksfinanzcheck.de). Ist er gesetzt, liefert der
+  #                      Shortcode das Widget aus und ff-newsletter.js schickt
+  #                      das Token als `cf-turnstile-response` mit.
+  # Beide Werte gehören zusammen: Ohne Site-Key hier prüft der Worker nicht
+  # (turnstile_ok → fail-open), weil sonst jede Anmeldung scheiterte. Die
+  # Wache scripts/worker_betrieb_wache.py meldet genau diesen Zustand
+  # täglich laut (Live-Job der Sicherheits-Wache) – siehe
+  # docs/SICHERHEIT-BETRIEB-RUNBOOK.md, Schritt A3.
+  turnstileSiteKey = ""
   bingVerify = "5079875E367065FE09E09FC61BC077C6"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen solchen Link bei einem unserer Partner (z. B. CHECK24 oder TARIFCHECK24) etwas buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 

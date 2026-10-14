@@ -5,9 +5,18 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "blog-publish",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "node-webhook-publish",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ff-webhook-secret",
+          "name": "FF Webhook-Secret"
+        }
+      },
+      "notes": "Zugang nur mit dem Header X-Webhook-Secret (Wert aus tools/n8n/.env, Variable N8N_WEBHOOK_TOKEN – nie im Repo). Hintergrund und Einrichtung: docs/SICHERHEIT-BETRIEB-RUNBOOK.md, Schritt A3. Ohne Credential „FF Webhook-Secret“ läuft dieser Workflow nicht (fail closed).",
+      "notesInFlow": false,
       "name": "Webhook Blog Publish",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,

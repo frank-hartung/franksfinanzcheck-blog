@@ -475,6 +475,23 @@ def worker_konfig(env: dict | None = None) -> tuple[str, str]:
     return base, key
 
 
+def worker_schreibschluessel(env: dict | None = None) -> str:
+    """Schlüssel für token-tragende Exporte (Sicherheitsaudit 15.10.2026, F-08).
+
+    Der Worker trennt seit dem 15.10.2026 zwei Rollen: `EXPORT_KEY` liest
+    Listen OHNE Token, `EXPORT_KEY_WRITE` darf zusätzlich die Token
+    mitliefern (die der Versand für jeden Abmeldelink braucht). Ist kein
+    eigener Schreibschlüssel hinterlegt, fällt der Worker auf den
+    Standardschlüssel zurück – dann liefert diese Funktion denselben Wert,
+    und der Versand funktioniert unverändert.
+    """
+    env = env or os.environ
+    schreib = (env.get("NEWSLETTER_WORKER_WRITE_KEY") or "").strip()
+    if schreib:
+        return schreib
+    return env.get("NEWSLETTER_WORKER_EXPORT_KEY") or ""
+
+
 def worker_abfrage(pfad: str, param: dict | None = None, *, base: str, key: str) -> dict:
     """Geschützte Export-Abfrage am Worker – der Schlüssel geht MIT.
 
@@ -747,7 +764,13 @@ def sende_nachgang(root: str = BLOG_DIR, env: dict | None = None, schlafen=None)
     if not base or not key:
         print("ℹ️ Nachgang: Worker-Konfiguration fehlt – nichts zu tun.")
         return 0
-    antwort = worker_abfrage("/export/pending", None, base=base, key=key)
+    # Token-Träger (Sicherheitsaudit 15.10.2026, F-08): Der Nachgang erzeugt je
+    # offener Anmeldung eine neue Bestätigungsmail und braucht dafür den
+    # Token. Der Worker gibt ihn nur mit dem SCHREIBSCHLÜSSEL und der
+    # ausdrücklichen Anforderung heraus; ohne eigenen Schreibschlüssel greift
+    # derselbe Wert (Rückwärts-Kompatibilität).
+    antwort = worker_abfrage("/export/pending", {"mit_token": "1"},
+                             base=base, key=worker_schreibschluessel(env) or key)
     offen = antwort.get("offen") or []
     min_minuten = int(env.get("NEWSLETTER_NACHGANG_MIN_MINUTEN") or NACHGANG_MIN_MINUTEN_DEFAULT)
     nun = datetime.datetime.now(datetime.timezone.utc)
@@ -1149,6 +1172,37 @@ def _selftest() -> int:
     pruefe(gesehen["url"] == "https://abos.beispiel.de/export/abonnenten"
            and gesehen["methode"] == "GET",
            f"Worker-Export: falscher Aufruf {gesehen['methode']} {gesehen['url']}")
+
+    # 10b) Rollen-Trennung beim Nachgang (F-08): Der Aufruf muss den
+    #      Schreibschluessel UND `mit_token=1` tragen. Fehlt eines von beidem,
+    #      liefert der Worker keine Token (`mit_token: false`) – der Nachgang
+    #      liefe dann in „kein Token“ und überspränge still jeden Empfänger.
+    def open_nachgang(anfrage, timeout=None):
+        gesehen.clear()
+        gesehen.update({"url": anfrage.full_url, "methode": anfrage.get_method(),
+                        "headers": {k.lower(): v for k, v in anfrage.headers.items()}})
+        return _Antwort(b'{"ts":"2026-09-25T10:00:00Z","anzahl":0,"mit_token":true,"offen":[]}')
+    umgebung_nachgang = {
+        "NEWSLETTER_WORKER_BASE": "https://abos.beispiel.de",
+        "NEWSLETTER_WORKER_EXPORT_KEY": "lese-schluessel",
+        "NEWSLETTER_WORKER_WRITE_KEY": "schreib-schluessel",
+    }
+    urllib.request.urlopen = open_nachgang
+    try:
+        base_n, key_n = worker_konfig(umgebung_nachgang)
+        antwort_n = worker_abfrage("/export/pending", {"mit_token": "1"},
+                                   base=base_n, key=worker_schreibschluessel(umgebung_nachgang))
+    finally:
+        urllib.request.urlopen = echt_open
+    pruefe(gesehen["headers"].get("x-ff-key") == "schreib-schluessel",
+           f"Nachgang-Export: falscher Schlüssel ({gesehen['headers'].get('x-ff-key')})")
+    pruefe("mit_token=1" in gesehen["url"],
+           f"Nachgang-Export: mit_token fehlt ({gesehen['url']})")
+    pruefe(antwort_n.get("mit_token") is True, "Nachgang-Export: Token-Zusage fehlt")
+    # Ohne eigenen Schreibschluessel faellt der Worker auf den Standardschluessel
+    # zurueck – der Versand darf dadurch nicht brechen (Rueckwaerts-Kompatibilitaet).
+    pruefe(worker_schreibschluessel({"NEWSLETTER_WORKER_EXPORT_KEY": "nur-einer"}) == "nur-einer",
+           "Rückfall auf den Standardschlüssel fehlt")
 
     # 11) letzter_fehler: die Ursache für die ❌-Zeile des Digests – aus dem
     #     Journal, in dem nur Hashes und die Anbieter-Meldung stehen.

@@ -113,32 +113,47 @@ async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = nu
   const got = created.length > 0;
   const body = created[0] ? created[0].body : '';
   const title = created[0] ? created[0].title : '';
+  // Diagnose (20.09.2026-Nachtrag F-09): Jede verletzte Erwartung wird BENANNT
+  // gesammelt. Ein bloßes „falsch“ mit 400-Zeichen-Body-Slice hat schon einmal
+  // eine Stunde gekostet, weil die verletzte Nadel hinter dem Slice lag.
+  const gruende = [];
   let ok = got === expectIssue;
+  if (!ok) gruende.push(expectIssue ? 'kein Issue erstellt' : 'Issue erstellt, aber keiner erwartet');
   if (ok && expectIssue) {
     // Markenfläche: der Titel nennt weder Workflow noch „fehlgeschlagen“;
     // die Identität steckt unsichtbar als Marker im Body.
-    ok = title === identity.titel;
-    if (!body.includes(identity.marker)) ok = false;
-    if (/fehlgeschlagen|Layout-AI|Content-Engine/.test(title)) ok = false;
-    for (const needle of expectInBody) if (!body.includes(needle)) ok = false;
-    for (const needle of expectNotInBody) if (body.includes(needle)) ok = false;
-    if (created[0].labels && JSON.stringify(created[0].labels) !== JSON.stringify(['auto-report'])) ok = false;
+    if (title !== identity.titel) gruende.push('Titel ≠ Identität: ' + JSON.stringify(title));
+    if (!body.includes(identity.marker)) gruende.push('Marker fehlt im Body');
+    if (/fehlgeschlagen|Layout-AI|Content-Engine/.test(title)) gruende.push('Rohname im Titel');
+    for (const needle of expectInBody) {
+      if (!body.includes(needle)) gruende.push('erwartete Nadel fehlt: ' + JSON.stringify(needle));
+    }
+    for (const needle of expectNotInBody) {
+      if (body.includes(needle)) gruende.push('verbotene Nadel im Body: ' + JSON.stringify(needle));
+    }
+    if (created[0].labels && JSON.stringify(created[0].labels) !== JSON.stringify(['auto-report'])) {
+      gruende.push('Labels ≠ [auto-report]: ' + JSON.stringify(created[0].labels));
+    }
+    ok = gruende.length === 0;
   }
   if (ok && expectUpdates !== null) {
     ok = updated.length === expectUpdates.anzahl;
+    if (!ok) gruende.push('Updates: ' + updated.length + ' statt ' + expectUpdates.anzahl);
     if (ok && expectUpdates.anzahl > 0) {
       ok = updated[0].issue_number === expectUpdates.nummer &&
            updated[0].title === identity.titel &&
            String(updated[0].body).includes(identity.marker);
+      if (!ok) gruende.push('Update-Ziel/Titel/Marker stimmt nicht: ' + JSON.stringify(updated).slice(0, 200));
     }
   }
   console.log((ok ? '✅' : '❌') + ' ' + name + (got ? ' → Issue' : ' → kein Issue') +
     (logs[0] ? ' | ' + logs[0].slice(0, 95) : ''));
   if (!ok) {
     failed++;
+    console.log('   GRUND: ' + gruende.join(' · '));
     console.log('   ERWARTET: ' + (expectIssue ? 'Issue „' + identity.titel + '“ mit: ' + expectInBody.join(' / ') : 'KEIN Issue'));
     console.log('   TITEL: ' + title);
-    console.log('   BODY: ' + body.slice(0, 400));
+    console.log('   BODY: ' + body);
     console.log('   UPDATES: ' + JSON.stringify(updated).slice(0, 300));
   }
 }
@@ -329,6 +344,21 @@ await run('Gegenprobe: E2E-Suite rot ohne Install-Bezug → bisheriges Runbook',
     jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure', html_url: 'https://x/jobs/7',
              steps: [{ name: 'E2E-Suite ausführen', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen', 'API-Key abgelaufen'], null, ['Abhängigkeiten nicht installierbar']);
+
+// 12. KANAL-HYGIENE (Sicherheitsaudit 15.10.2026, F-09): Der Workflow-Name
+//    stammt aus dem Webhook. Er darf den Body nicht steuern – kein Markdown,
+//    keine Mention (@all würde Dritte benachrichtigen), kein HTML, kein
+//    Zeilenumbruch. Die Rohwerte bleiben nur dort stehen, wo exakt verglichen
+//    wird (Dedupe gegen den Alt-Titel, Content-Engine-Erkennung).
+const BOESER_NAME = 'Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile';
+await run('F-09: Markdown/Mention im Workflow-Namen wird entschärft',
+  { workflowName: BOESER_NAME, branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [] },
+  true, ['ist fehlgeschlagen', 'Layout-AI·'], null, ['@all', '[Klick]', '](http://boese']);
+// 13. Gegenprobe: saubere Namen kommen unverändert durch (die Entschärfung
+//     darf den Normalfall nicht verstümmeln).
+await run('F-09 Gegenprobe: sauberer Name bleibt lesbar',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'push', conclusion: 'failure', jobs: [] },
+  true, ['**Workflow:** Layout-AI', '**Branch:** main'], null, ['Layout-AI·']);
 
 console.log(failed === 0
   ? `\n✅ SIMULATION: alle ${count} Szenarien korrekt`

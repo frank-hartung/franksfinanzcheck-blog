@@ -107,6 +107,7 @@ on:
       - "Notfall-Deploy (ohne Redaktions-Gates)"
       - "Produktions-Wache (Content-Engine)"
       - "Premium-Governance"
+      - "Sicherheits-Wache"   # AUDIT 15.10.2026 (F-01..F-10): Header, Inhalts-HTML, Worker-Betrieb (Budget/Bot-Schutz/Exporte) und die n8n-Kette – ein still roter Lauf wäre der Rückfall in genau die Befunde, die das Audit belegt hat
       - "Lesehilfen-Gate (Vorlesen + Kurzfassung)"
       - "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)"
       - "Slot-Wache (Content-Slots nachziehen)"   # #601: holt verpasste Cron-Slots nach – kann sie das nicht, muss es laut werden
@@ -193,6 +194,31 @@ jobs:
             const runUrl = run.html_url;
             const branch = run.head_branch || '';
             const event = run.event || '?';
+
+            // ================================================================
+            //  KANAL-HYGIENE (Sicherheitsaudit 15.10.2026, F-09)
+            //  --------------------------------------------------------------
+            //  `workflow_run.name` und `.head_branch` stammen aus dem Webhook
+            //  und landeten unverändert in Titel und Body eines öffentlichen
+            //  Issues. Ein Zweigname wie  x` @name [Text](http://boese)  ist
+            //  damit Markdown-Eingabe von außen: gefälschte Links,
+            //  @-Benachrichtigungen (Spam an Dritte), gesprengte Zitatblöcke.
+            //  Das PRODUKTIONS-SCOPING unten verkleinert das Fenster, schließt
+            //  es aber nicht. Deshalb werden beide Werte EINMAL zentral
+            //  entschärft; die Rohwerte bleiben nur dort stehen, wo exakt
+            //  verglichen wird (Dedupe/Alt-Titel, Workflow-Erkennung).
+            // ================================================================
+            const kanalRein = (roh, grenze = 120) => {
+              const text = String(roh == null ? '' : roh)
+                .replace(/[\u0009\u000a\u000b\u000c\u000d]/g, ' ')
+                .replace(/[\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e\ufeff]/g, '')
+                .replace(/[`<>\[\]*_|]/g, '·')
+                .replace(/@/g, '@\u2060')   // Mention-Schutz (Word-Joiner trennt den Namen)
+                .trim();
+              return text.length > grenze ? text.slice(0, grenze - 1) + '…' : text;
+            };
+            const wfNameRein = kanalRein(wfName);
+            const branchRein = kanalRein(branch, 80);
             const created = new Date(run.created_at).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
             const headSha = run.head_sha ? run.head_sha.slice(0, 8) : '?';
 
@@ -215,7 +241,7 @@ jobs:
             const defaultBranch = (context.payload.repository && context.payload.repository.default_branch) || 'main';
             const isProdRun = branch === defaultBranch && event !== 'pull_request';
             if (!isProdRun) {
-              console.log('Kein Produktions-Lauf: Branch „' + (branch || '(leer)') + '“ ≠ „' + defaultBranch + '“ oder Event „' + event + '“.');
+              console.log('Kein Produktions-Lauf: Branch „' + (kanalRein(branch, 80) || '(leer)') + '“ ≠ „' + defaultBranch + '“ oder Event „' + kanalRein(event, 20) + '“.');
               console.log('Rote Dev-/PR-Läufe sind als Checks am PR/Zweig sichtbar – kein Owner-Alarm (Regel aus Fehlalarm #343, 21.09.2026).');
               return;
             }
@@ -405,10 +431,10 @@ jobs:
               '> Vorgang **' + ident.code + '** · Bereich *' + ident.bereich + '* · Zuordnung: ' +
                 '`python3 scripts/alert_issue_identity.py --tabelle`',
               '',
-              '## ' + wfName + ' ist fehlgeschlagen (' + conclusion + ')',
+              '## ' + wfNameRein + ' ist fehlgeschlagen (' + kanalRein(conclusion, 20) + ')',
               '',
-              '- **Workflow:** ' + wfName,
-              '- **Branch:** ' + branch + ' · **Commit:** `' + headSha + '`',
+              '- **Workflow:** ' + wfNameRein,
+              '- **Branch:** ' + branchRein + ' · **Commit:** `' + headSha + '`',
               '- **Zeit:** ' + created + ' · **Event:** `' + event + '`' + (run.run_attempt > 1 ? ' · **Versuch:** ' + run.run_attempt : ''),
               '- **Run:** [Details ansehen](' + runUrl + ')',
               ''
@@ -475,7 +501,7 @@ jobs:
               body: body,
               labels: ['auto-report']
             });
-            console.log('✅ Meldung erstellt: ' + ident.titel + ' (' + wfName + ')');
+            console.log('✅ Meldung erstellt: ' + ident.titel + ' (' + wfNameRein + ')');
 
   # ------------------------------------------------------------
   #  AUTO-CLOSE: Behobene Fehlermeldungen automatisch schließen
@@ -517,6 +543,12 @@ jobs:
           # Meldungen für immer offen stehen bleiben.
           MARKER="$(python3 scripts/alert_issue_identity.py --workflow "$WF_NAME" --json | jq -r .marker)"
           ALT_TITEL="⚠️ Workflow fehlgeschlagen: ${WF_NAME}"
+          # Kanal-Hygiene (Sicherheitsaudit 15.10.2026, F-09): Der Zweigname
+          # stammt aus dem Webhook und geht in einen Markdown-Kommentar. Beim
+          # VERGLEICH bleibt er unverändert (sonst passte er nicht mehr zum
+          # bestehenden Issue), in der AUSGABE wird er entschärft.
+          RUN_BRANCH_SAUBER="$(python3 scripts/alert_issue_identity.py --saeubern "$RUN_BRANCH")"
+          WF_NAME_SAUBER="$(python3 scripts/alert_issue_identity.py --saeubern "$WF_NAME")"
           echo "Schlüssel: ${MARKER} · Übergangsform: ${ALT_TITEL}"
 
           # Body UND Titel prüfen: Marker (neu) oder Alt-Titel (Übergang).
@@ -534,7 +566,7 @@ jobs:
 
           for n in $NUMMERN; do
             gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
-              --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \`${RUN_BRANCH}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+              --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \`${RUN_BRANCH_SAUBER}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
             echo "→ Issue #$n geschlossen."
           done
           echo "Auto-Close-Prüfung abgeschlossen."

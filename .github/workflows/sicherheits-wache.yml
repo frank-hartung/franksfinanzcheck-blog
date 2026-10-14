@@ -1,0 +1,128 @@
+# ============================================================
+#  SICHERHEITS-WACHE – Regressionsschutz für das Audit 15.10.2026
+#  ------------------------------------------------------------
+#  WARUM DIESER LAUF EXISTIERT
+#  Das Sicherheitsaudit (SICHERHEITSAUDIT-PREMIUM-2026-10-14.md) hat die
+#  Befunde F-01..F-10 belegt. Ein Befund ist aber erst dann behoben, wenn er
+#  NICHT zurückkommen kann. Vier Schichten schützen jetzt:
+#
+#    · content_html_wache.py     F-06 · rohes HTML in content/** (unsafe=true)
+#    · blog_header_gate.py       F-01 · Sicherheits-Header der Live-Seite
+#    · worker_betrieb_wache.py   F-02/F-03/F-08 · Turnstile, Tagesbudget,
+#                                Schlüsselrollen, Export-Protokoll
+#    · n8n_schutz_wache.py       F-04 · Webhooks, Whisper, Bridge, Kopien-Drift
+#
+#  Jede dieser Wachen hat einen ECHTEN Selbsttest (`--selftest`): Er baut
+#  Sabotage-Fälle und prüft, dass die Regel anschlägt. Erst danach läuft die
+#  Prüfung. Eine Wache ohne Gegenprobe ist ein Wunsch, keine Wache.
+#
+#  KADENZ: bei jedem Push/PR (Quellseite, offline, schnell) und täglich
+#  06:05 UTC mit LIVE-Messung (Header der echten Seite + Worker-Zustand).
+#  Fehlt der Export-Schlüssel als Secret, wird die Live-Messung ÜBERSPRUNGEN
+#  und das ausdrücklich protokolliert – sie meldet dann nicht „in Ordnung".
+# ============================================================
+name: Sicherheits-Wache
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "layouts/**"
+      - "static/**"
+      - "hugo.toml"
+      - "newsletter-worker/**"
+      - "cloudflare/**"
+      - "n8n/**"
+      - "tools/n8n/**"
+      - "scripts/blog_header_gate.py"
+      - "scripts/content_html_wache.py"
+      - "scripts/worker_betrieb_wache.py"
+      - "scripts/n8n_schutz_wache.py"
+      - "scripts/n8n_bridge.py"
+      - ".github/workflows/sicherheits-wache.yml"
+  pull_request:
+    paths:
+      - "content/**"
+      - "layouts/**"
+      - "static/**"
+      - "hugo.toml"
+      - "newsletter-worker/**"
+      - "cloudflare/**"
+      - "n8n/**"
+      - "tools/n8n/**"
+      - "scripts/blog_header_gate.py"
+      - "scripts/content_html_wache.py"
+      - "scripts/worker_betrieb_wache.py"
+      - "scripts/n8n_schutz_wache.py"
+      - ".github/workflows/sicherheits-wache.yml"
+  schedule:
+    - cron: "5 6 * * *"     # täglich 08:05 MESZ – nach der Spam-Wache, vor der Redaktion
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sicherheits-wache-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  quellseite:
+    name: Quellseite (offline, mit Selbsttests)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Inhalts-Wache – rohes HTML und Bau-Härtung (F-06)
+        run: |
+          set -euo pipefail
+          python3 scripts/content_html_wache.py --selftest
+          python3 scripts/content_html_wache.py
+
+      - name: Header-Wache – Vorlage und Meta-CSP (F-01, offline)
+        run: |
+          set -euo pipefail
+          python3 scripts/blog_header_gate.py --selftest
+          python3 scripts/blog_header_gate.py --offline
+
+      - name: Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)
+        run: |
+          set -euo pipefail
+          python3 scripts/worker_betrieb_wache.py --selftest
+          python3 scripts/worker_betrieb_wache.py --offline
+
+      - name: Automatik-Wache – n8n, Whisper, Bridge (F-04)
+        run: |
+          set -euo pipefail
+          python3 scripts/n8n_schutz_wache.py --selftest
+          python3 scripts/n8n_schutz_wache.py
+
+  live:
+    name: Live-Messung (täglich und auf Zuruf)
+    needs: quellseite
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Sicherheits-Header der echten Seite messen (F-01)
+        run: python3 scripts/blog_header_gate.py
+        # Befund = Exit 1 = roter Lauf = Meldung über alert-on-failure.
+        # Wichtig: Erst NACH der Cloudflare-Regel kann das hier grün sein.
+
+      - name: Worker-Zustand messen – Budget, Bot-Schutz, Exporte (F-02/F-03/F-08)
+        env:
+          NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE || 'https://abos.franksfinanzcheck.de' }}
+          NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${NEWSLETTER_WORKER_EXPORT_KEY}" ]; then
+            echo "::warning::NEWSLETTER_WORKER_EXPORT_KEY fehlt – der Betriebszustand wurde NICHT geprüft (kein Freibrief)."
+            exit 0
+          fi
+          python3 scripts/worker_betrieb_wache.py
