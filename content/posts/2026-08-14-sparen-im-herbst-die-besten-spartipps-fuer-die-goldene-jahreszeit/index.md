@@ -1,7 +1,7 @@
 ---
-lastmod: 2026-09-02
+lastmod: 2026-10-14
 title: "Sparen im Herbst: Spartipps für die goldene Jahreszeit"
-description: "Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du bis zu 1.250 €."
+description: "Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du jedes Jahr spürbar Geld."
 date: 2026-09-18T08:38:46Z
 draft: false
 tags: ["Heizkosten senken", "Geld sparen im Alltag", "Budget planen", "Kfz-Versicherung"]
@@ -14,7 +14,7 @@ cover:
   image: "images/covers/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit.jpg"
   alt: "Sparen im Herbst: Die besten Spartipps für die goldene Jahreszeit"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Der Herbst ist die lukrativste Spar-Saison des Jahres. Durch den Stichtag der Kfz-Versicherung (30. November), das Optimieren der Heizungsanlage, das Bündeln von Sachversicherungen und saisonale Vorratskäufe lassen sich bis zu 1.250 € an jährlichen Fix- und Konsumkosten einsparen."
+kurzantwort: "Der Herbst ist die lukrativste Spar-Saison des Jahres. Durch den Stichtag der Kfz-Versicherung (30. November), das Optimieren der Heizungsanlage, das Bündeln von Sachversicherungen und saisonale Vorratskäufe lassen sich jedes Jahr spürbare Summen an Fix- und Konsumkosten einsparen."
 
 social_posted: true
 keywords: ["Sparen im Herbst", "Herbst Spartipps", "Fixkosten senken", "Kfz Stichtag 30 November", "Finanzen optimieren", "Frugalismus", "Geld sparen"]

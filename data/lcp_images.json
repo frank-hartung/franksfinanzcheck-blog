@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-14T13:46:54+00:00",
+  "generatedAt": "2026-10-14T15:15:23+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg",
+      "image": "images/covers/2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg",
+      "image": "images/covers/2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -928,6 +928,38 @@
     },
     "/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/": {
       "image": "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/": {
+      "image": "images/covers/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/": {
+      "image": "images/covers/2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
