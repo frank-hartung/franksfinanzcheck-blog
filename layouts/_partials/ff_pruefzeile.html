@@ -89,7 +89,13 @@
   </span>
   <span class="ff-pruef__text">
     Verantwortlicher Autor: {{ $author }}
-    {{- if $ai }}<span class="ff-pruef__sep" aria-hidden="true">·</span> Mit KI-Unterstützung entworfen{{ end -}}
+    {{- /* KI-Kennzeichnung (EU-KI-Verordnung Art. 50 Abs. 4; Sicherheitsaudit
+         14.10.2026, M-17): Artikel ohne freigegebene menschliche Prüfung, die ein
+         KI-System erstellt hat, tragen das Label sichtbar am Artikelanfang. Die
+         Formulierung entspricht dem Impressum („Mit KI erstellt“). Ob ein
+         Bot-Artikel `ai_generated: true` trägt, erzwingt
+         scripts/ki_kennzeichnung_gate.py im Deploy. */ -}}
+    {{- if $ai }}<span class="ff-pruef__sep" aria-hidden="true">·</span> <strong class="ff-pruef__ki" data-ff-ki-label>Mit KI erstellt</strong>{{ end -}}
     {{- if and $review (eq ($review.risikoklasse | default "") "hoch") -}}
       <span class="ff-pruef__sep" aria-hidden="true">·</span> Fachliche Freigabe ausstehend
     {{- end -}}

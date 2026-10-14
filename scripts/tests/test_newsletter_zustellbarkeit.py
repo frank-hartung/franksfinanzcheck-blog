@@ -333,6 +333,30 @@ class WorkerRegelTest(unittest.TestCase):
         self.assertEqual((f["regel"], f["gewicht"]), ("C8", "fund"))
         self.assertIn("wrangler deploy", f["weg"])
 
+    def test_oeffentliche_kurzantwort_ist_nicht_messbar_statt_fund(self):
+        # Worker ab 14.10.2026 (Audit N-02): ohne x-ff-key nur {ok, ts}.
+        f = self._c8('{"ok": true, "ts": "2026-10-14T12:00:00Z"}')
+        self.assertEqual((f["regel"], f["gewicht"]), ("C8", "nicht messbar"))
+        self.assertIn("NEWSLETTER_WORKER_EXPORT_KEY", json.dumps(f, ensure_ascii=False))
+
+    def test_health_abruf_sendet_den_schluessel_als_header(self):
+        gesehen = {}
+        def netz(url, *, headers=None, timeout=15):
+            gesehen.setdefault("kopf", dict(headers or {}))
+            return 200, self._health()
+        zust.AUFLOESER = _gesunde_zone(None)
+        zust.NETZ_RUF = netz
+        alt = os.environ.get("NEWSLETTER_WORKER_EXPORT_KEY")
+        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "k-123"
+        try:
+            zust.pruefe_worker(self.td, mit_netz=True)
+        finally:
+            if alt is None:
+                os.environ.pop("NEWSLETTER_WORKER_EXPORT_KEY", None)
+            else:
+                os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = alt
+        self.assertEqual(gesehen["kopf"].get("x-ff-key"), "k-123")
+
     def test_lebender_endpunkt_alter_version_meldet_c7_ok_und_c8_fund(self):
         zust.AUFLOESER = _gesunde_zone(None)
         zust.NETZ_RUF = _netz((200, '{"ok": true, "kv": "ok"}'))

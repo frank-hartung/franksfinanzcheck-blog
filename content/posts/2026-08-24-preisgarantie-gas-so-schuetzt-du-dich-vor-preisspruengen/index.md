@@ -8,7 +8,7 @@ tags: ["Gastarif wechseln", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg"
   alt: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"

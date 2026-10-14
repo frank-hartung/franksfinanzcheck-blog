@@ -8,7 +8,15 @@
 #
 #   POST /repos/frank-hartung/franksfinanzcheck-blog/actions/workflows/
 #        newsletter-lifecycle.yml/dispatches
-#   Body: { "ref": "main", "inputs": { "aktion": "bestaetigung", "token": "…" } }
+#   Body: { "ref": "main", "inputs": { "aktion": "nachgang" } }
+#
+# SICHERHEIT (Audit 14.10.2026, H-05): Der Worker schickt KEINEN Token mehr.
+# Ein Token als workflow_dispatch-Input stand unmaskiert im (oeffentlichen)
+# Actions-Log – wer ihn liest, kann die Anmeldung bestaetigen oder abmelden.
+# Der Nachgang holt frische Anmeldungen sofort (ohne Wartezeit beim ersten
+# Versuch) ueber den geschuetzten Export /export/pending. Ein alter Worker,
+# der noch `token` mitschickt, bekommt von GitHub 422 (unbekannter Input) –
+# die Anmeldung bleibt im KV und der stuendliche Nachgang stellt zu.
 #
 # Der Worker braucht dafür ein Secret GITHUB_PAT (feingranular, nur dieses
 # Repo, Berechtigung „Actions: Read and write“ – NICHT „Workflows“, das ist
@@ -18,8 +26,6 @@
 # Seit 25.09.2026 ruft der Worker per Cron Trigger auch den stündlichen
 # NACHGANG (aktion=nachgang) – der schedule unten kommt an diesem Repo
 # Stunden zu spät oder gar nicht (Taktgeber, s. newsletter-worker/).
-# Im Workflow geht der Token als INPUTS-WERT (Daten, kein Code) in eine
-# env-Variable – nie als Interpolation in eine Shell-Zeile.
 #
 # Der stündliche NACHGANG (schedule) ist das Netz unter dem Dispatch:
 # erreicht der Dispatch den Workflow nicht (Rate-Limit, GitHub-Wartung) oder
@@ -35,16 +41,12 @@ on:
   workflow_dispatch:
     inputs:
       aktion:
-        description: 'Aktion: bestaetigung (eine Bestätigungsmail) oder nachgang (offene Bestätigungen nachholen)'
+        description: 'Aktion: nachgang (offene Bestätigungen senden). „bestaetigung“ ist ein Alias für nachgang.'
         type: choice
         options:
-          - bestaetigung
           - nachgang
-        default: 'bestaetigung'
-      token:
-        description: 'Token der Anmeldung (kommt vom Worker im Dispatch; leer bei nachgang)'
-        type: string
-        default: ''
+          - bestaetigung
+        default: 'nachgang'
 
 permissions:
   contents: write
@@ -55,11 +57,11 @@ concurrency:
 
 jobs:
   lifecycle:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
           ref: ${{ github.event.repository.default_branch }}
@@ -68,7 +70,7 @@ jobs:
         # Stand gehören zusammen, und ein Dispatch kommt nie mit Zweig.
 
       - name: Python bereitstellen
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11"
 
@@ -78,6 +80,7 @@ jobs:
       - name: Bestätigung senden oder Nachgang fahren
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
@@ -86,30 +89,14 @@ jobs:
           NEWSLETTER_SMTP_PORT: ${{ secrets.NEWSLETTER_SMTP_PORT }}
           NEWSLETTER_SMTP_USER: ${{ secrets.NEWSLETTER_SMTP_USER }}
           NEWSLETTER_SMTP_PASS: ${{ secrets.NEWSLETTER_SMTP_PASS }}
-          # Eingaben als ENV statt als Interpolation im Skripttext: der Token
-          # ist Daten (wie eine Adresse) und darf keine Shell-Zeile erfinden.
+          # Eingabe als ENV statt als Interpolation im Skripttext.
           EINGABE_AKTION: ${{ github.event_name == 'workflow_dispatch' && inputs.aktion || 'nachgang' }}
-          EINGABE_TOKEN: ${{ github.event_name == 'workflow_dispatch' && inputs.token || '' }}
         run: |
           AKTION="$EINGABE_AKTION"
           case "$AKTION" in
-            bestaetigung)
-              if [ -z "$EINGABE_TOKEN" ]; then
-                echo "⚠ Aktion bestaetigung ohne Token – nichts zu senden. (Der Worker dispatcht immer mit Token; ein manueller Lauf ohne Token ist ein Leerlauf.)"
-                exit 0
-              fi
-              set +e
-              python3 scripts/newsletter_versand.py --bestaetigung "$EINGABE_TOKEN" | tee /tmp/nl_lc.log
-              rc=${PIPESTATUS[0]}
-              set -e
-              if [ "$rc" -eq 1 ]; then
-                echo "::warning::Bestätigung nur TEILWEISE raus – der Nachgang (stündlich) holt nach."
-              elif [ "$rc" -ne 0 ]; then
-                echo "::error::Bestätigung fehlgeschlagen (Exit $rc). Der Nachgang wiederholt; max. 3 Versuche, dann „abgelaufen“ im Worker."
-                exit "$rc"
-              fi
-              ;;
-            nachgang)
+            bestaetigung|nachgang)
+              # Seit 14.10.2026 identisch: der Nachgang sendet frische
+              # Anmeldungen sofort (Token nie im Log, Audit H-05).
               set +e
               python3 scripts/newsletter_versand.py --nachgang | tee /tmp/nl_lc.log
               rc=${PIPESTATUS[0]}

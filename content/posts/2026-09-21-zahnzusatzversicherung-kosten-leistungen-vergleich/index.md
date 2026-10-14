@@ -10,7 +10,7 @@ pillar: "versicherungen"
 keywords: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnzusatzversicherung Kosten", "Zahnersatz Kosten", "Implantat Kosten", "Zahnstaffel", "Zahnzusatzversicherung ohne Wartezeit", "Krankenkasse Zahnersatz"]
 author: "Frank Hartung"
 kurzantwort: "Die gesetzliche Krankenkasse zahlt bei Zahnersatz meist nur einen Festzuschuss zur Regelversorgung. Für Implantate, hochwertige Kronen oder Inlays bleibt oft ein Eigenanteil von mehreren hundert bis mehreren tausend Euro. Eine gute Zahnzusatzversicherung kann diese Lücke deutlich schließen. Wichtig sind Erstattungssatz, GOZ-Höchstsatz, Zahnstaffel, Gesundheitsfragen und der Abschluss vor angeratenen Behandlungen."
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich.jpg"
   alt: "Zahnzusatzversicherung Vergleich 2026: Kosten und Leistungen im Überblick"

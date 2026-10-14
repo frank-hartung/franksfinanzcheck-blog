@@ -9,13 +9,13 @@ permissions:
 
 jobs:
   auto-assign:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     concurrency:
       group: auto-assign-pr-${{ github.event.pull_request.number }}
       cancel-in-progress: true
     steps:
-      - uses: actions/github-script@v9
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const actor = context.actor;

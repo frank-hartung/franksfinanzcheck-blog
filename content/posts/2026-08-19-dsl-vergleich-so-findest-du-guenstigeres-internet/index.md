@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg"
   alt: "DSL-Vergleich: So findest du günstigeres Internet"

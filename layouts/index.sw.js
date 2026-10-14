@@ -88,6 +88,8 @@ const PRECACHE = [
 /* H1 FAIL-OPEN: Der Cache ist ein Zusatz, nie eine Voraussetzung.
    Gibt es ihn nicht (Fehler, Quota, privater Modus), liefert `null` –
    und jeder Pfad darunter geht dann einfach ins Netz. */
+const PRIVAT_RE = /(?:^|[?&])(?:token|t|key|sluessel|schluessel|email|e)=/i;
+
 async function fach() {
   try {
     if (typeof caches === 'undefined') return null;
@@ -135,7 +137,9 @@ self.addEventListener('activate', (event) => {
    neue Assets). Die Seite darf sich selbst befreien, ohne dass jemand neu
    laden muss – dieser Horcher ist der vereinbarte Weg dafür. */
 self.addEventListener('message', (event) => {
-  if (event && event.data === 'SKIP_WAITING') {
+  // Nur Nachrichten der eigenen Herkunft (CodeQL js/missing-origin-check).
+  if (!event || event.origin !== self.location.origin) return;
+  if (event.data === 'SKIP_WAITING') {
     try { self.skipWaiting(); } catch (e) {}
   }
 });
@@ -154,6 +158,12 @@ self.addEventListener('fetch', (event) => {
 
   /* H4 EIGENDATEI: /sw.js verwaltet der Browser selbst. */
   if (url.pathname === EIGEN_PFAD) return;
+
+  /* H5 PRIVAT (Sicherheitsaudit 14.10.2026, I-06): Navigationen mit Token
+     oder Schlüssel im Query-String (z. B. /newsletter/praeferenzen/?token=…)
+     nie cachen. Sonst bliebe ein persönlicher Zugangslink im Gerät liegen –
+     auch nach der Abmeldung, auch für den nächsten Nutzer des Geräts. */
+  if (PRIVAT_RE.test(url.search)) return;
 
   if (req.mode === 'navigate') {
     event.respondWith(networkFirst(req));

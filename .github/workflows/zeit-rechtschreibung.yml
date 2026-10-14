@@ -66,14 +66,14 @@ concurrency:
 
 jobs:
   wache:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       ZR_API_URL: ${{ secrets.ZR_API_URL }}
       ZR_USERNAME: ${{ secrets.ZR_USERNAME }}
       ZR_API_KEY: ${{ secrets.ZR_API_KEY }}
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -105,9 +105,12 @@ jobs:
         run: python3 scripts/zeit_rechtschreibung.py --probe || echo "⚠ Probe nicht grün – Lauf prüft im ermittelten Modus weiter."
 
       - name: "Wachen-Lauf (Modus-Automatik: Premium → offline)"
+        env:
+          EINGABE_MODUS: ${{ github.event.inputs.modus || 'report' }}
+          EINGABE_MAX_ARTIKEL: ${{ github.event.inputs.max_artikel }}
         run: |
-          MODUS="${{ github.event.inputs.modus || 'report' }}"
-          MAXA="${{ github.event.inputs.max_artikel }}"
+          MODUS="${EINGABE_MODUS}"
+          MAXA="${EINGABE_MAX_ARTIKEL}"
           FLAGS=""
           [ "$MODUS" = "fix" ] && FLAGS="--fix"
           [ "$MODUS" = "strict" ] && FLAGS="--strict"

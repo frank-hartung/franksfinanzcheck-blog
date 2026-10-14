@@ -49,17 +49,17 @@ concurrency:
 
 jobs:
   governance:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       GOV_LABEL: governance
       GOV_TITLE: "🗞️ Governance-Report: Redaktionelle & technische Handlungsfelder"
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python-Abhängigkeiten
-        run: python3 -m pip install -q pyyaml cryptography pillow 2>/dev/null || true
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       # ---------- 0) PREFLIGHT: Wachen + Vertrag ----------
       # Schlägt ein Selbsttest fehl, ist der Messer kaputt – dann wäre jeder
@@ -337,10 +337,14 @@ jobs:
       - name: Governance-Issue (nur bei echtem Befund – aktualisieren statt duplizieren)
         env:
           GH_TOKEN: ${{ github.token }}
+          SCHRITT_DECIDE_ACTION: ${{ steps.decide.outputs.action }}
+          SCHRITT_DECIDE_VERDICT: ${{ steps.decide.outputs.verdict }}
+          SCHRITT_DECIDE_FINGERPRINT: ${{ steps.decide.outputs.fingerprint }}
+          SCHRITT_DECIDE_CHANGED: ${{ steps.decide.outputs.changed }}
         run: |
-          ACTION="${{ steps.decide.outputs.action }}"
-          VERDICT="${{ steps.decide.outputs.verdict }}"
-          FP="${{ steps.decide.outputs.fingerprint }}"
+          ACTION="${SCHRITT_DECIDE_ACTION}"
+          VERDICT="${SCHRITT_DECIDE_VERDICT}"
+          FP="${SCHRITT_DECIDE_FINGERPRINT}"
           RUN="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           OPEN="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label "$GOV_LABEL" \
                   --json number,title --jq '.[] | select(.title == env.GOV_TITLE) | .number' \
@@ -352,7 +356,7 @@ jobs:
                 gh issue comment "$OPEN" --repo "$GITHUB_REPOSITORY" \
                   --body "🔁 **${VERDICT}** – Befund bleibt offen (Fingerabdruck \`$FP\`). Neuer Lauf: [Run ${GITHUB_RUN_ID}](${RUN})."
                 # Body nur bei veränderter Befundlage überschreiben (kein Flush-Rauschen)
-                if [ "${{ steps.decide.outputs.changed }}" = "true" ]; then
+                if [ "${SCHRITT_DECIDE_CHANGED}" = "true" ]; then
                   gh issue edit "$OPEN" --repo "$GITHUB_REPOSITORY" --body-file /tmp/governance_issue_body.md
                   echo "→ Issue #${OPEN} aktualisiert (Befundlage geändert)."
                 else

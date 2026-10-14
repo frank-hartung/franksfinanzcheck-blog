@@ -19,8 +19,18 @@
 //    - Nur Anfragen mit Origin franksfinanzcheck.de (ohne/mit www).
 //    - Nur bekannte Gateway-Schlüssel (gateway-keys.mjs, generiert aus
 //      scripts/check24_links.yaml – Drift prüft test/worker.test.mjs).
-//    - Max. 512 Bytes Payload, kein Lesen von Headern außer Origin/DNT/GPC.
-//    - Rate-Limit: im Cloudflare-Dashboard als WAF-Regel (siehe Runbook).
+//    - Nur bekannte Artikel (Sicherheitsaudit 14.10.2026, N-05): Der
+//      Artikel-Slug zählt nur, wenn er in der LIVE-Sitemap von
+//      franksfinanzcheck.de steht (stündlich geladen, im Speicher gehalten).
+//      Erfundene Slugs werden zu "unbekannt" – die D1-Tabelle lässt sich
+//      nicht mehr mit Zufalls-Slugs fluten, und neue Artikel zählen ohne
+//      erneuten Worker-Deploy, sobald sie in der Sitemap stehen.
+//    - Max. 512 Bytes Payload, kein Lesen von Headern außer Origin/DNT/GPC
+//      und – nur flüchtig, nie gespeichert – CF-Connecting-IP als Schlüssel
+//      der Mengenbegrenzung.
+//    - Rate-Limit: Binding KLICK_LIMITER (wrangler.toml, 30 Ereignisse je
+//      60 s und Verbindung) + optional WAF-Regel im Dashboard (Runbook).
+//      Die Origin-Prüfung allein ist per curl fälschbar – deshalb beides.
 //
 //  Deploy/Betrieb: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md
 // ============================================================
@@ -34,6 +44,58 @@ export const ERLAUBTE_URSPRUNGE = new Set([
 export const MAX_BYTES = 512;
 const KEY_RE = /^[a-z0-9][a-z0-9-]{1,39}$/;
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{2,119}$/;
+export const SITEMAP_STANDARD = "https://franksfinanzcheck.de/sitemap.xml";
+const ARTIKEL_TTL_MS = 60 * 60 * 1000; // Sitemap höchstens stündlich laden
+const ARTIKEL_ALT_MS = 24 * 60 * 60 * 1000; // bei Ausfall: alte Liste ≤ 24 h weiter nutzen
+const ARTIKEL_PAUSE_MS = 5 * 60 * 1000; // nach Fehlschlag: 5 min kein neuer Abruf
+const SITEMAP_MAX_ZEICHEN = 5_000_000;
+const SITEMAP_LOC_RE =
+  /<loc>\s*https:\/\/(?:www\.)?franksfinanzcheck\.de\/posts\/([a-z0-9][a-z0-9-]{2,119})\/?\s*<\/loc>/g;
+
+let artikelCache = { liste: null, geladen: 0, pauseBis: 0 };
+
+/** Nur für Tests: Zwischenspeicher der Artikelliste leeren. */
+export function _artikelCacheLeeren() {
+  artikelCache = { liste: null, geladen: 0, pauseBis: 0 };
+}
+
+/** Artikel-Slugs aus der Hugo-Sitemap (nur /posts/<slug>/ der eigenen Domain). */
+export function artikelAusSitemap(xml) {
+  const liste = new Set();
+  for (const treffer of String(xml || "").matchAll(SITEMAP_LOC_RE)) liste.add(treffer[1]);
+  return liste;
+}
+
+/**
+ * Liste der veröffentlichten Artikel. Quelle ist die Live-Sitemap. Fällt sie
+ * aus, gilt die letzte bekannte Liste bis zu 24 h weiter; ohne Liste zählt
+ * jeder Klick nur noch für den Partner (Artikel "unbekannt") – fail closed.
+ */
+export async function ladeArtikel(env = {}, jetzt = Date.now(), holen = globalThis.fetch) {
+  const { liste, geladen, pauseBis } = artikelCache;
+  if (liste && jetzt - geladen < ARTIKEL_TTL_MS) return liste;
+  if (jetzt >= pauseBis && typeof holen === "function") {
+    try {
+      const antwort = await holen(env.SITEMAP_URL || SITEMAP_STANDARD, {
+        headers: { Accept: "application/xml,text/xml" },
+        signal: AbortSignal.timeout(3000),
+        cf: { cacheTtl: 900, cacheEverything: true },
+      });
+      if (antwort && antwort.ok) {
+        const neu = artikelAusSitemap((await antwort.text()).slice(0, SITEMAP_MAX_ZEICHEN));
+        if (neu.size > 0) {
+          artikelCache = { liste: neu, geladen: jetzt, pauseBis: 0 };
+          return neu;
+        }
+      }
+    } catch {
+      // Netzfehler/Zeitüberschreitung → unten weiter mit alter Liste
+    }
+    artikelCache = { ...artikelCache, pauseBis: jetzt + ARTIKEL_PAUSE_MS };
+  }
+  if (liste && jetzt - geladen < ARTIKEL_ALT_MS) return liste;
+  return new Set();
+}
 
 /** Kalendertag in Europe/Berlin als YYYY-MM-DD (Geschäftstag, nicht UTC). */
 export function berlinDatum(date = new Date()) {
@@ -50,16 +112,20 @@ export function berlinDatum(date = new Date()) {
 /**
  * Prüft die Nutzlast. Gibt { ok, k, s } zurück. Unbekannte oder ungültige
  * Artikel-Slugs werden zu "unbekannt" – der Klick zählt trotzdem für den
- * Partner, nur ohne Artikelzuordnung.
+ * Partner, nur ohne Artikelzuordnung. `bekannteArtikel` (Set) ist die
+ * Allowlist; erfasse() übergibt sie immer (N-05). Ohne Set wird nur das
+ * Format geprüft (reine Formatprüfung für Werkzeuge/Tests).
  */
-export function pruefeEreignis(daten, bekannteSchluessel = GATEWAY_KEYS) {
+export function pruefeEreignis(daten, bekannteSchluessel = GATEWAY_KEYS, bekannteArtikel = null) {
   if (!daten || typeof daten !== "object") return { ok: false, grund: "kein-objekt" };
   const k = typeof daten.k === "string" ? daten.k : "";
   if (!KEY_RE.test(k) || !bekannteSchluessel.includes(k)) {
     return { ok: false, grund: "unbekannter-schluessel" };
   }
   const s = typeof daten.s === "string" ? daten.s.trim() : "";
-  const artikel = SLUG_RE.test(s) ? s : "unbekannt";
+  const formatOk = SLUG_RE.test(s);
+  const bekannt = bekannteArtikel instanceof Set ? bekannteArtikel.has(s) : true;
+  const artikel = formatOk && bekannt ? s : "unbekannt";
   return { ok: true, k, s: artikel };
 }
 
@@ -72,13 +138,25 @@ function leer(status) {
  * Gibt immer 204 zurück, wenn eine gültige Anfrage verarbeitet wurde,
  * damit ein Browser nichts über die Zählung erfährt.
  */
-export async function erfasse(request, env, now = new Date()) {
+export async function erfasse(request, env, now = new Date(), artikelQuelle = ladeArtikel) {
   if (env.KLICKS_AUS === "1") return leer(204);
   if (request.headers.get("DNT") === "1" || request.headers.get("Sec-GPC") === "1") {
     return leer(204);
   }
   const origin = request.headers.get("Origin") || "";
   if (!ERLAUBTE_URSPRUNGE.has(origin)) return leer(403);
+
+  // Mengenbegrenzung (N-05): Origin ist per curl fälschbar. Der Schlüssel
+  // (Verbindungs-IP) wird nur flüchtig im Rate-Limiter gezählt, nie gespeichert.
+  if (env.KLICK_LIMITER && typeof env.KLICK_LIMITER.limit === "function") {
+    const schluessel = request.headers.get("CF-Connecting-IP") || "ohne-ip";
+    try {
+      const { success } = await env.KLICK_LIMITER.limit({ key: schluessel });
+      if (!success) return leer(429);
+    } catch {
+      // Limiter gestört → zählen erlaubt (Zähler ist nicht sicherheitskritisch)
+    }
+  }
 
   const laenge = Number(request.headers.get("Content-Length") || 0);
   if (laenge > MAX_BYTES) return leer(413);
@@ -91,8 +169,8 @@ export async function erfasse(request, env, now = new Date()) {
   } catch {
     return leer(400);
   }
-  const ev = pruefeEreignis(daten);
-  if (!ev.ok) return leer(400);
+  if (!pruefeEreignis(daten).ok) return leer(400);
+  const ev = pruefeEreignis(daten, GATEWAY_KEYS, await artikelQuelle(env));
 
   await env.DB.prepare(
     `INSERT INTO klicks (tag, go_key, artikel, anzahl) VALUES (?, ?, ?, 1)

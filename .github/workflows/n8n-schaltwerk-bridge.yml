@@ -44,12 +44,12 @@ concurrency:
 
 jobs:
   bridge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
 
     steps:
       - name: Code auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -57,7 +57,7 @@ jobs:
         # v7 nutzt die aktuelle Node-Runtime der Actions-Plattform. Kein
         # pip-cache: Der Bridge-Job ist klein; ein Cache-Ausfall darf den
         # produktiven Watchdog nicht bereits beim Runtime-Setup blockieren.
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11"
           check-latest: false
@@ -79,9 +79,10 @@ jobs:
           EVENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
           INPUT_ACTION: ${{ github.event.inputs.aktion }}
           INPUT_PAYLOAD: ${{ github.event.inputs.payload_json }}
+          EREIGNIS_ACTION: ${{ github.event.action }}
         run: |
           if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            echo "📥 Verarbeite repository_dispatch: ${{ github.event.action }}"
+            echo "📥 Verarbeite repository_dispatch: ${EREIGNIS_ACTION}"
             python3 scripts/n8n_bridge.py --receive-payload "$EVENT_PAYLOAD"
           elif [ "${INPUT_ACTION}" = "inbox_verarbeiten" ]; then
             echo "🎙 Verarbeite Whisper-Inbox..."

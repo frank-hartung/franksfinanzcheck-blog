@@ -152,7 +152,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   newsletterFormAction = "https://abos.franksfinanzcheck.de/anmeldung"
   newsletterPromise = "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags."
   bingVerify = "5079875E367065FE09E09FC61BC077C6"
-  disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
+  disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen solchen Link bei einem unserer Partner (z. B. CHECK24 oder TARIFCHECK24) etwas buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   # Der statische Willkommenstext (`homeInfoParams`) wurde am 27.09.2026
   # vollständig entfernt. Die einzige Startseiten-H1 und ihr GEO-Lead kommen

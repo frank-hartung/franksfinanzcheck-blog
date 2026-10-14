@@ -27,7 +27,29 @@
 name = "ff-newsletter"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
-workers_dev = true
+# Audit 14.10.2026 (M-14): Der Worker ist NUR ueber abos.franksfinanzcheck.de
+# erreichbar. Eine zweite Adresse (*.workers.dev, Preview-URLs) umginge
+# Zonen-Regeln (WAF, Bot-Schutz, Header-Transform) und Logs der Zone.
+# VOR dem ersten Deploy mit dieser Einstellung: Dashboard -> Workers ->
+# ff-newsletter -> Settings -> Domains & Routes muss abos.franksfinanzcheck.de
+# als "Custom Domain" zeigen (sonst zuerst den routes-Eintrag unten deployen).
+workers_dev = false
+preview_urls = false
+
+# Eigene Subdomain als Workers Custom Domain (TLS + DNS-Eintrag stellt
+# Cloudflare automatisch). Der fruehere Block [custom_domain] war kein
+# gueltiger wrangler-Schluessel und wurde beim Deploy still ignoriert.
+# Besteht fuer abos. noch ein manueller CNAME, verweigert wrangler das
+# Anlegen – dann den CNAME im Dashboard loeschen und erneut deployen.
+routes = [
+  { pattern = "abos.franksfinanzcheck.de", custom_domain = true }
+]
+
+# Workers Logs (Free: 200.000 Zeilen/Tag) – fuer Missbrauchs- und
+# Fehleranalyse. Der Worker loggt keine Adressen, keine Tokens, keine IPs.
+[observability]
+enabled = true
+head_sampling_rate = 1
 
 [vars]
 # Urspruenge, denen der Worker CORS antwortet (Komma getrennt).
@@ -45,7 +67,27 @@ THEMEN_LABELS = "{\"strom-sparen\":\"Strom & Gas sparen\",\"internet-dsl\":\"Int
 # Tage, bis eine offene Anmeldung ablaeuft (Double-Opt-In-Frist).
 BESTAETIGUNG_TAGE = "14"
 
-# Secrets (NICHT hier eintragen): GITHUB_PAT, EXPORT_KEY
+# Feedback darf hoechstens so viele KV-Schreibzugriffe pro Tag verbrauchen
+# (Free-Plan: 1.000 Writes/Tag fuer das GANZE Konto, Audit H-03).
+FEEDBACK_MAX_PRO_TAG = "200"
+
+# Secrets (NICHT hier eintragen):
+#   GITHUB_PAT        Fine-Grained, nur dieses Repo, "Actions: Read and write"
+#   EXPORT_KEY        32+ Zeichen Zufall, = GitHub-Secret NEWSLETTER_WORKER_EXPORT_KEY
+#   TURNSTILE_SECRET  optional (Audit M-02): sobald gesetzt, verlangt
+#                     /anmeldung ein gueltiges Feld `cf-turnstile-response`.
+#                     ERST setzen, wenn das Widget im Formular ausgeliefert
+#                     wird (Site-Key + Datenschutzerklaerung), sonst scheitert
+#                     jede Anmeldung.
+
+# Rate-Limiting ohne KV-Schreibzugriffe (Audit H-03): 5 Anfragen je IP und
+# Minute fuer /anmeldung und /abmeldung. namespace_id ist eine frei
+# gewaehlte, kontoweit eindeutige Zahl (kein Dashboard-Objekt noetig).
+# Fehlt das Binding, faellt der Worker auf den KV-Zaehler zurueck.
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1401"
+simple = { limit = 5, period = 60 }
 
 # TAKTGEBER (25.09.2026): GitHubs `schedule`-Ereignisse kamen an diesem
 # Repo 5-5,5 h zu spaet oder gar nicht (Fr 25.09.: kein Digest-Lauf, keine
@@ -69,12 +111,3 @@ crons = ["30 4 * * TUE,FRI", "5 5 * * TUE,FRI", "17 * * * *", "13 2 * * *"]
 [[kv_namespaces]]
 binding = "ABO"
 id = "HIER-DIE-ID-NACH-ERSTELLUNG"
-
-# Eigene Subdomain (TLS wird von Cloudflare automatisch gestellt).
-# zone_id: Dashboard -> Your Sites -> franksfinanzcheck.de -> API ID.
-# Alternativ ohne diesen Block: Custom Domain im Dashboard zuordnen,
-# dann bleibt die Adresse abos.franksfinanzcheck.de unveraendert.
-[custom_domain]
-zone_name = "franksfinanzcheck.de"
-zone_id = "HIER-DIE-ZONE-ID"
-hostname = "abos.franksfinanzcheck.de"

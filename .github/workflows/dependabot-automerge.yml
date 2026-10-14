@@ -1,20 +1,23 @@
 # ============================================================
-#  DEPENDABOT AUTO-MERGE (Vollautomatik, Profi-Sicherung)
+#  DEPENDABOT AUTO-MERGE – nur GitHub-Actions, nie Pakete
 #
-#  Wunsch: PRs der Dependabot-Routine sollen sich SELBST mergen.
-#  Sicherheitsregel (bewusste Entscheidung):
-#    ✅ PATCH + MINOR  -> automatisch approve + automerge
-#    🛡️ MAJOR          -> Kommentar „manuell prüfen" (Major-Updates
-#                         von Actions können Verhalten brechen –
-#                         kurzer Blick lohnt sich)
+#  Sicherheitsregel (Audit 14.10.2026, H-02 – PR #708 wurde nach 19 s
+#  gemergt, ein npm-Paket mit Install-Skripten):
+#    ✅ github_actions PATCH + MINOR -> approve + GitHub-Auto-Merge.
+#       Der Auto-Merge WARTET auf die Pflicht-Checks des Rulesets.
+#    🛡️ alles andere (npm, pip, Docker, jede MAJOR-Version) -> Kommentar,
+#       Mensch prüft und mergt.
+#    ❌ KEIN Direkt-Merge-Fallback mehr: Kann GitHub den Auto-Merge nicht
+#       aktivieren (keine Pflicht-Checks im Ruleset), bleibt der PR offen.
 #
 #  Technik:
-#    - pull_request_target: läuft mit Base-Repo-Rechten, checkoutet
-#      KEINEN PR-Code (sicheres Muster laut GitHub-Doku).
-#    - gh pr merge --auto: Falls „Allow auto-merge" im Repo aktiv ist,
-#      mergt GitHub, sobald Checks ok sind. Fallback: Direkt-Merge.
-#    - Nur Dependabot-PRs (Actor-Filter) – niemand kann den Workflow
-#      für Fremd-Code missbrauchen, denn es wird nichts ausgecheckt.
+#    - pull_request_target: läuft mit Base-Repo-Rechten und checkt KEINEN
+#      PR-Code aus (sicheres Muster laut GitHub-Doku).
+#    - Bedingung auf den PR-AUTOR (I-05), nicht auf github.actor – der ist
+#      bei einem Re-Run derjenige, der neu startet.
+#    - dependabot/fetch-metadata prüft zusätzlich, dass der PR wirklich von
+#      Dependabot stammt, und liefert Ökosystem + Semver-Stufe.
+#    - Alle Werte gehen per env in die Shell (keine Template-Injection).
 # ============================================================
 name: Dependabot Auto-Merge
 
@@ -28,39 +31,45 @@ permissions:
 
 jobs:
   automerge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
-    # NUR Dependabot-PRs, NUR github-actions-Updates:
-    if: github.actor == 'dependabot[bot]'
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
-      - name: Update-Typ ermitteln (Semver-Level)
+      - name: Update-Typ und Ökosystem ermitteln
         id: meta
-        uses: dependabot/fetch-metadata@v3
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Patch/Minor -> automatisch mergen
-        if: steps.meta.outputs.update-type != 'version-update:semver-major'
+      - name: GitHub-Actions Patch/Minor -> Auto-Merge (wartet auf Pflicht-Checks)
+        if: >-
+          steps.meta.outputs.package-ecosystem == 'github_actions' &&
+          steps.meta.outputs.update-type != 'version-update:semver-major'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
-          set -e
-          gh pr review --approve "$PR_URL" || true
-          # Bevorzugt: GitHub-Auto-Merge (wartet ggf. Checks ab).
-          if gh pr merge --auto --squash --delete-branch "$PR_URL" 2>/dev/null; then
-            echo "✔ Auto-Merge aktiviert – GitHub mergt sobald Checks fertig sind."
+          set -uo pipefail
+          gh pr review --approve "$PR_URL" \
+            || echo "::notice::Approve nicht möglich (Repo-Einstellung „Allow GitHub Actions to create and approve pull requests“)."
+          if ausgabe=$(gh pr merge --auto --squash --delete-branch "$PR_URL" 2>&1); then
+            echo "✔ Auto-Merge aktiviert – GitHub mergt, sobald die Pflicht-Checks grün sind."
           else
-            # Fallback: Direkt-Merge (keine Pflicht-Checks konfiguriert).
-            echo "Auto-Merge nicht verfügbar (Repo-Einstellung?) – mergen direkt."
-            gh pr merge --squash --delete-branch "$PR_URL"
+            echo "$ausgabe"
+            echo "::notice title=Auto-Merge nicht aktiviert::Ohne Pflicht-Checks im Ruleset kann GitHub nicht warten. Der PR bleibt offen und wird von Hand gemergt – bewusst KEIN Direkt-Merge (Audit H-02)."
           fi
 
-      - name: Major-Update -> kommentieren statt mergen
-        if: steps.meta.outputs.update-type == 'version-update:semver-major'
+      - name: Alles andere -> kommentieren statt mergen
+        if: >-
+          steps.meta.outputs.package-ecosystem != 'github_actions' ||
+          steps.meta.outputs.update-type == 'version-update:semver-major'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
+          PAKETE: ${{ steps.meta.outputs.dependency-names }}
+          OEKOSYSTEM: ${{ steps.meta.outputs.package-ecosystem }}
+          STUFE: ${{ steps.meta.outputs.update-type }}
         run: |
-          gh pr comment "$PR_URL" --body "🛡️ **Major-Update** (${{ steps.meta.outputs.dependency-names }}): Auto-Merge bewusst deaktiviert. Major-Sprünge von Actions können Verhalten ändern – bitte Changelog prüfen, dann manuell mergen."
-          echo "Major-Update erkannt – wartet auf manuelle Prüfung."
+          set -euo pipefail
+          gh pr comment "$PR_URL" --body "🛡️ **Manuelle Prüfung nötig** (${OEKOSYSTEM}, ${STUFE}: ${PAKETE}). Auto-Merge gilt nur für Patch-/Minor-Updates von GitHub-Actions. Bitte Changelog und Release-Herkunft prüfen, dann von Hand mergen."
+          echo "Wartet auf manuelle Prüfung: $OEKOSYSTEM / $STUFE"

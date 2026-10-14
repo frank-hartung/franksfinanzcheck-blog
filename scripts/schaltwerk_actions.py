@@ -544,6 +544,7 @@ def aktion_whisper_transkribieren(params: dict, daten: dict, ctx: dict) -> dict:
 
 def aktion_indexnow_ping(params: dict, daten: dict, ctx: dict) -> dict:
     """Sendet publizierte URLs an die IndexNow API (Bing/Yandex) – 0 € Kosten."""
+    import urllib.request  # fehlte – der Ping scheiterte bisher still mit NameError
     url = str(params.get("url") or daten.get("url") or "")
     if not url:
         slug = str(params.get("slug") or daten.get("artikel_slug") or daten.get("slug") or "")
@@ -555,7 +556,17 @@ def aktion_indexnow_ping(params: dict, daten: dict, ctx: dict) -> dict:
     if ctx.get("dry_run"):
         return uebersprungen(f"Probelauf: IndexNow Ping für {url}")
 
-    key = "f009361665a54db687353f8680e6f5c7"
+    # Audit 14.10.2026 (N-16): Der Schlüssel war hier fest und FALSCH
+    # (f0093616…, ausgeliefert wird nur static/<schluessel>.txt aus
+    # scripts/indexnow_key.txt) – IndexNow wies jede Meldung ab, und der
+    # Fehler wurde als „unkritisch“ verbucht. Jetzt eine Quelle der Wahrheit.
+    try:
+        with open(os.path.join(SCRIPTS_DIR, "indexnow_key.txt"), encoding="utf-8") as fh:
+            key = fh.read().strip()
+    except OSError:
+        key = ""
+    if not (8 <= len(key) <= 128 and all(c.isalnum() or c == "-" for c in key)):
+        return standby("IndexNow Ping: scripts/indexnow_key.txt fehlt oder ist ungültig")
     body = {
         "host": "franksfinanzcheck.de",
         "key": key,

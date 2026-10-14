@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg"
   alt: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"

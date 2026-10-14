@@ -29,6 +29,7 @@
 User-agent: *
 Content-Signal: search=yes,ai-train=no,use=reference
 Allow: /
+Disallow: /go/
 
 User-agent: Amazonbot
 Disallow: /
@@ -59,9 +60,11 @@ Disallow: /
 
 # END Cloudflare Managed Content
 
-User-agent: *
-Allow: /
-Disallow: /go/
+# Sicherheitsaudit 14.10.2026 (I-08): Es gibt nur noch EINE Gruppe
+# „User-agent: *“ (oben, inkl. Disallow: /go/). Zwei Gruppen führt Google
+# zusammen, einfache Crawler werten aber oft nur die erste – dann griff
+# Disallow: /go/ nicht. Bei einer Aktualisierung des Cloudflare-Blocks
+# Disallow: /go/ in der ersten Gruppe erhalten.
 
 Sitemap: https://franksfinanzcheck.de/sitemap.xml
 

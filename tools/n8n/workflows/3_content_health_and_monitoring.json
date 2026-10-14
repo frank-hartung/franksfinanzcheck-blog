@@ -20,13 +20,16 @@
     },
     {
       "parameters": {
-        "command": "python3 /workspace/blog/scripts/blog_health_gate.py --json"
+        "command": "echo 'deaktiviert – Sicherheitsaudit 14.10.2026 (H-06)'; exit 1"
       },
       "id": "node-health-gate",
       "name": "Blog Health Gate Ausführen",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [400, 240]
+      "position": [400, 240],
+      "disabled": true,
+      "notes": "DEAKTIVIERT (Sicherheitsaudit 14.10.2026, H-06): Shell-Befehl mit eingebetteten Webhook-/Ereignisdaten = Remote Code Execution auf dem n8n-Rechner, der das Repo eingehängt hat. Ersatz: GitHub repository_dispatch an schaltwerk.yml – Daten als JSON, nie in einer Shell-Zeile. Nicht wieder aktivieren.",
+      "notesInFlow": true
     },
     {
       "parameters": {
@@ -57,23 +60,29 @@
     },
     {
       "parameters": {
-        "command": "echo '✅ [HEALTH-OK]' $(date) >> /workspace/blog/data/health_heartbeat.log"
+        "command": "echo 'deaktiviert – Sicherheitsaudit 14.10.2026 (H-06)'; exit 1"
       },
       "id": "node-log-ok",
       "name": "Heartbeat Loggen",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [1080, 160]
+      "position": [1080, 160],
+      "disabled": true,
+      "notes": "DEAKTIVIERT (Sicherheitsaudit 14.10.2026, H-06): Shell-Befehl mit eingebetteten Webhook-/Ereignisdaten = Remote Code Execution auf dem n8n-Rechner, der das Repo eingehängt hat. Ersatz: GitHub repository_dispatch an schaltwerk.yml – Daten als JSON, nie in einer Shell-Zeile. Nicht wieder aktivieren.",
+      "notesInFlow": true
     },
     {
       "parameters": {
-        "command": "python3 /workspace/blog/scripts/alert_router.py --alarm \"Health-Gate meldet Fehler: {{ $json.fehlerAnzahl }}\""
+        "command": "echo 'deaktiviert – Sicherheitsaudit 14.10.2026 (H-06)'; exit 1"
       },
       "id": "node-alert-fail",
       "name": "Alarm Auslösen (Fail-Safe)",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [1080, 320]
+      "position": [1080, 320],
+      "disabled": true,
+      "notes": "DEAKTIVIERT (Sicherheitsaudit 14.10.2026, H-06): Shell-Befehl mit eingebetteten Webhook-/Ereignisdaten = Remote Code Execution auf dem n8n-Rechner, der das Repo eingehängt hat. Ersatz: GitHub repository_dispatch an schaltwerk.yml – Daten als JSON, nie in einer Shell-Zeile. Nicht wieder aktivieren.",
+      "notesInFlow": true
     }
   ],
   "connections": {
@@ -129,7 +138,7 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   }

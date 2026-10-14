@@ -43,7 +43,7 @@ concurrency:
 
 jobs:
   gate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     # PRs erhalten den vollen roten/grünen Check, aber nur ein Ergebnis vom
     # Produktionszweig darf das gemeinsame auto-report-Issue verändern.
@@ -52,7 +52,7 @@ jobs:
       REPORT_PRODUCTION: ${{ (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # ------------------------------------------------------------
       #  GOVERNANCE-VERTRAG + SELBSTTESTS (seit 07.09.2026, Befund #206)
@@ -61,7 +61,7 @@ jobs:
       # .duplizierendes Issue den main-Zweig nicht mehr erreichen kann.
       # ------------------------------------------------------------
       - name: Python-Abhängigkeiten (für Governance-Skripte)
-        run: python3 -m pip install -q --break-system-packages pyyaml pillow 2>/dev/null || python3 -m pip install -q pyyaml pillow 2>/dev/null || true
+        run: python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       - name: Governance-Selbsttests (alle Wachen – entdeckt, uhrfest, schreibfrei)
         # ------------------------------------------------------------

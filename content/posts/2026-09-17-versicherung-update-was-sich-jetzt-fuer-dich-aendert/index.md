@@ -9,7 +9,7 @@ categories: ["News"]
 pillar: "versicherungen"
 keywords: ["Versicherung-Update: Was sich jetzt für dich ändert", "Versicherung-Update", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung"]
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "versicherung"

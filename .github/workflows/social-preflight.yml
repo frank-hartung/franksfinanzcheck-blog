@@ -50,21 +50,21 @@ concurrency:
 
 jobs:
   preflight:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml \
-            || python3 -m pip install -q --break-system-packages pyyaml
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       # Fail-closed: Eine blinde Wache darf keinen grünen Haken setzen.
       - name: Selbsttest (fail-closed)
@@ -112,13 +112,15 @@ jobs:
           REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
           REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
           REDDIT_SUBREDDIT: ${{ vars.REDDIT_SUBREDDIT }}
+          EINGABE_KANAL: ${{ github.event.inputs.kanal }}
+          EINGABE_STRICT: ${{ github.event.inputs.strict }}
         run: |
           set -o pipefail
           ARGS=""
-          if [ -n "${{ github.event.inputs.kanal }}" ]; then
-            ARGS="$ARGS --kanal ${{ github.event.inputs.kanal }}"
+          if [ -n "${EINGABE_KANAL}" ]; then
+            ARGS="$ARGS --kanal ${EINGABE_KANAL}"
           fi
-          if [ "${{ github.event.inputs.strict }}" = "true" ]; then
+          if [ "${EINGABE_STRICT}" = "true" ]; then
             ARGS="$ARGS --strict"
           fi
           echo "Aufruf: python3 scripts/social_preflight.py $ARGS"

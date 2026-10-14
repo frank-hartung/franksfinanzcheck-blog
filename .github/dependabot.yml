@@ -1,15 +1,24 @@
-# Dependabot – hält die GitHub-Actions in den Workflows automatisch aktuell.
-# P1 aus AUTOMATION-AUDIT.md (2026-08-10). Erstellt wöchentliche PRs, die du
-# nur noch mergen musst (oder auto-mergen lassen kannst).
+# Dependabot – hält Actions, npm-, pip- und Docker-Abhängigkeiten aktuell.
+# P1 aus AUTOMATION-AUDIT.md (2026-08-10); ausgebaut nach Sicherheitsaudit
+# 14.10.2026 (N-12, H-02):
+#   - cooldown 7 Tage: Ein frisch veröffentlichtes (evtl. bösartiges) Release
+#     wird erst nach einer Woche vorgeschlagen – genug Zeit, bis die
+#     Community oder die Registry einen Supply-Chain-Angriff bemerkt.
+#     Sicherheitsupdates sind davon NICHT betroffen (kommen sofort).
+#   - Auto-Merge (dependabot-automerge.yml) gilt NUR für github_actions;
+#     npm/pip/Docker-PRs werden immer von Hand geprüft und gemergt.
 version: 2
 updates:
   - package-ecosystem: "github-actions"
-    directory: "/"
+    # "/" = .github/workflows; dazu die Composite-Actions.
+    directories: ["/", "/.github/actions/*"]
     schedule:
       interval: "weekly"
       day: "monday"
       time: "05:00"
       timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 3
     commit-message:
       prefix: "chore(deps)"
@@ -18,12 +27,13 @@ updates:
     # fuehrten zu Teil-Merges und damit zu Versions-Drift zwischen den
     # Workflows (setup-python@v6 neben @v7). Ein PR je Woche haelt den
     # Bestand einheitlich; scripts/actions_version_guard.py bewacht es.
+    # Seit 14.10.2026 sind alle Actions auf Commit-SHA gepinnt (M-09);
+    # Dependabot aktualisiert SHA und Versionskommentar gemeinsam.
     groups:
       github-actions:
         patterns: ["*"]
 
-  # E2E-Tests (Playwright) – Design-Skills-Rollout 12.09.2026:
-  # Root-Paket pflegen (@playwright/test), Minor/Patch automatisch.
+  # E2E-Tests (Playwright) – Design-Skills-Rollout 12.09.2026.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -31,7 +41,84 @@ updates:
       day: "monday"
       time: "05:00"
       timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
     open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
+
+  # Cloudflare-Worker und lokale Werkzeuge (Audit N-12).
+  - package-ecosystem: "npm"
+    directories:
+      - "/cloudflare/klick-zaehler"
+      - "/cloudflare/ki-assistent"
+      - "/newsletter-worker"
+      - "/tools/ff-voice-qa"
+      - "/tools/ff-voice-browser"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "05:30"
+      timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
+    groups:
+      npm-werkzeuge:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  # Python: requirements-*.txt im Repo-Root (Audit N-12, I-07).
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
+    groups:
+      python:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  # n8n-Host: Image-Tags in docker-compose.yml und das Whisper-Dockerfile.
+  - package-ecosystem: "docker-compose"
+    directory: "/tools/n8n"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:30"
+      timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
+
+  - package-ecosystem: "docker"
+    directory: "/tools/n8n"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:30"
+      timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 2
     commit-message:
       prefix: "chore(deps)"
     labels: ["dependencies"]

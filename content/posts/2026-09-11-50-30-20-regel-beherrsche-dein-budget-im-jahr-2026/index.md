@@ -12,7 +12,7 @@ author: "Frank Hartung"
 keywords: ["50-30-20-Regel", "50 30 20 Regel", "Budget planen", "Fixkosten senken", "Geld sparen", "Vermögensaufbau", "Beherrsche"]
 pin_title: "50-30-20-Regel: Beherrsche dein Budget"
 pin_description: "*Werbung | Die 50-30-20-Regel bringt Ordnung in dein Budget. So teilst du dein Nettoeinkommen sinnvoll auf, senkst Fixkosten und sparst Monat für Monat planbar Geld. Mehr Spartipps auf FranksFinanzcheck! #503020regel #budgetplanen #fixkostensenken"
-ai_generated: false
+ai_generated: true
 kurzantwort: "Die 50-30-20-Regel teilt dein Nettoeinkommen in drei Blöcke: 50 % für notwendige Ausgaben, 30 % für Wünsche und 20 % für Sparen oder Schuldenabbau. Die Methode funktioniert besonders gut, wenn du den Sparanteil direkt nach Gehaltseingang automatisierst und deinen Fixkostenblock regelmäßig prüfst. Schon bei 2.800 € netto entstehen so 560 € pro Monat für Rücklagen und Vermögensaufbau."
 inspiration: Die 50-30-20-Regel einfach erklärt
 cover:

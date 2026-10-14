@@ -1,0 +1,9 @@
+pyyaml
+cryptography
+pillow
+pillow-avif-plugin
+fonttools
+brotli
+feedparser
+requests
+pypdf

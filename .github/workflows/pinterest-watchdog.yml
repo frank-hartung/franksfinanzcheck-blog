@@ -28,14 +28,14 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     # Job-Ebene: Composite-Actions sehen Job-Variablen, Schritt-`env:` nicht.
     env:
       HUGO_JSDELIVR_SHA: ${{ github.sha }}
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
@@ -50,7 +50,7 @@ jobs:
         # behält. Idempotent, mit Selbsttest-Schutz.
         continue-on-error: true
         run: |
-          python3 -m pip install -q pyyaml 2>/dev/null || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
           python3 scripts/pinterest_duplicate_guard.py --fix || true
 
       - name: Pinterest/Google-SEO-Healer (Titel, Cover, Pin-Texte)
@@ -58,7 +58,7 @@ jobs:
         # pin_description/Titel aus dem geheilten Content.
         continue-on-error: true
         run: |
-          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin 2>/dev/null || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
           python3 scripts/pinterest_seo_healer.py --fix || true
           # Nach-Heilung: Duplikate erneut prüfen (Healer behält gültige Texte)
           python3 scripts/pinterest_duplicate_guard.py --fix || true
@@ -145,6 +145,7 @@ jobs:
         if: steps.check.outputs.exit != '0'
         env:
           GH_TOKEN: ${{ github.token }}
+          SCHRITT_CHECK_EXIT: ${{ steps.check.outputs.exit }}
         run: |
           EXISTING=$(gh issue list --state open --label pinterest \
             --json number --jq '.[0].number' 2>/dev/null || echo "")
@@ -152,11 +153,11 @@ jobs:
           if [ -z "$EXISTING" ]; then
             gh issue create --title "Pinterest-Check: Probleme gefunden" \
               --label pinterest \
-              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden (Exit ${{ steps.check.outputs.exit }}). Details im PINTEREST-REPORT.md."
+              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden (Exit ${SCHRITT_CHECK_EXIT}). Details im PINTEREST-REPORT.md."
             echo "Issue erstellt"
           else
             gh issue comment "$EXISTING" \
-              --body "**$TS** – weiterhin Probleme (Exit ${{ steps.check.outputs.exit }})."
+              --body "**$TS** – weiterhin Probleme (Exit ${SCHRITT_CHECK_EXIT})."
             echo "Issue kommentiert"
           fi
 

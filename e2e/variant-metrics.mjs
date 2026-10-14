@@ -68,13 +68,13 @@ function messdatei(id) {
 function schreibeTier(id, tier, daten) {
   const pfad = messdatei(id);
   mkdirSync(dirname(pfad), { recursive: true });
+  // Direkt lesen statt „existiert? → lesen“ (CodeQL js/file-system-race):
+  // fehlt die Datei, landet der Lauf im catch und beginnt leer.
   let bestand = {};
-  if (existsSync(pfad)) {
-    try {
-      bestand = JSON.parse(readFileSync(pfad, 'utf8'));
-    } catch {
-      bestand = {};
-    }
+  try {
+    bestand = JSON.parse(readFileSync(pfad, 'utf8'));
+  } catch {
+    bestand = {};
   }
   bestand.variante ??= id;
   bestand.tiers ??= {};

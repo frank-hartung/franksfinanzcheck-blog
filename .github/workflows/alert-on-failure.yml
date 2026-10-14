@@ -102,8 +102,9 @@ on:
       - "Mastodon-SEO"           # PREM-AUDIT: Social-Kanal still
       - "Offsite-Backup"         # PREM-AUDIT: Backup-Versagen wäre still fatal
       - "Issues aufräumen (Triage)"          # PREM-AUDIT: Vollabdeckung
-      - "Erledigte Fehlermeldungen dauerhaft löschen"
+      - "Erledigte Fehlermeldungen archivieren"
       - "Dependabot Auto-Merge"
+      - "Notfall-Deploy (ohne Redaktions-Gates)"
       - "Produktions-Wache (Content-Engine)"
       - "Premium-Governance"
       - "Lesehilfen-Gate (Vorlesen + Kurzfassung)"
@@ -140,7 +141,7 @@ permissions:
 
 jobs:
   alarm:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     if: >-
       ${{ github.event.workflow_run.conclusion == 'failure' ||
@@ -148,7 +149,7 @@ jobs:
           github.event.workflow_run.conclusion == 'cancelled' }}
     steps:
       - name: Repository auschecken (Identitäts-Quelle)
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Selbsttest der Namensgebung (ein blinder Namensgeber wäre schlimmer)
         run: python3 scripts/alert_issue_identity.py --selftest
@@ -163,7 +164,7 @@ jobs:
 
       - name: Issue bei fehlgeschlagenem Workflow erstellen
         # v7 – unveränderlich gepinnt (Supply-Chain-Schutz)
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             // Der workflow_run-Payload kann bei einem Scheduler-Abbruch einen
@@ -492,7 +493,7 @@ jobs:
   #  dass sich am Produktionsstand irgendetwas geändert hätte.
   # ------------------------------------------------------------
   resolve:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     if: >-
       ${{ github.event.workflow_run.conclusion == 'success' &&
@@ -500,7 +501,7 @@ jobs:
           github.event.workflow_run.event != 'pull_request' }}
     steps:
       - name: Repository auschecken (Identitäts-Quelle)
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Behobene Fehlermeldung schließen (Marker-Identität, Alt-Titel inbegriffen)
         env:

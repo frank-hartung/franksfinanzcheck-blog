@@ -1,0 +1,19 @@
+{{- /* layouts/shortcodes/klickmessung_status.html – ehrlicher Schaltstand der
+     /go/-Klickmessung (Sicherheitsaudit 14.10.2026, M-13).
+     Quelle: data/klickmessung.yaml (aktiv: true|false), gelesen per
+     os.ReadFile + transform.Unmarshal (Hausregel: kein Zugriff auf den
+     gesamten Daten-Baum, siehe affiliate_ziele_data.html). Derselbe Schalter
+     steuert den Beacon in den /go/-Seiten (scripts/affiliate_shield.py) und die
+     Prüfung in scripts/click_chain_guard.py – Rechtstext und Technik können
+     nicht auseinanderlaufen. Fehlt die Datei: „nicht in Betrieb“ (datensparsam). */ -}}
+{{- $aktiv := false -}}
+{{- $pfad := "data/klickmessung.yaml" -}}
+{{- if fileExists $pfad -}}
+  {{- $k := os.ReadFile $pfad | transform.Unmarshal (dict "format" "yaml") -}}
+  {{- with $k -}}{{- $aktiv = eq (printf "%v" .aktiv) "true" -}}{{- end -}}
+{{- end -}}
+{{- if $aktiv -}}
+<strong>Status: in Betrieb.</strong>
+{{- else -}}
+<strong>Status: derzeit nicht in Betrieb.</strong> Die Übergabeseiten senden zurzeit keinen Zählimpuls; es werden keine Klickdaten übermittelt oder gespeichert. Die folgende Beschreibung gilt erst, wenn der Zähler eingeschaltet wird.
+{{- end -}}

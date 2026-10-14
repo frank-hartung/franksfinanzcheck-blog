@@ -128,11 +128,17 @@ class BestandTestCase(unittest.TestCase):
         )
 
     def test_setup_python_is_uniform(self):
+        # Seit dem Sicherheitsaudit 14.10.2026 (M-09) sind alle Actions auf
+        # Commit-SHA gepinnt. Einheitlich heisst: genau EINE Referenz im Repo
+        # (Tag ODER SHA) – und bei Tags die Major-Version v7.
         refs = {
             u.ref for u in avg.collect(ROOT)
-            if u.action == "actions/setup-python" and not avg.is_pin(u.ref)
+            if u.action == "actions/setup-python"
         }
-        self.assertEqual(refs, {"v7"}, f"setup-python uneinheitlich: {refs}")
+        self.assertEqual(len(refs), 1, f"setup-python uneinheitlich: {refs}")
+        ref = next(iter(refs))
+        if not avg.is_pin(ref):
+            self.assertEqual(ref, "v7", f"setup-python uneinheitlich: {refs}")
 
     def test_gate_runs_in_pull_request_workflow(self):
         wf = (ROOT / ".github/workflows/integrity-lock.yml").read_text(encoding="utf-8")

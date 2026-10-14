@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg"
   alt: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"

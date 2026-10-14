@@ -1,20 +1,16 @@
 # ============================================================
-#  ERLEDIGTE FEHLERMELDUNGEN DAUERHAFT LÖSCHEN
+#  ERLEDIGTE FEHLERMELDUNGEN ARCHIVIEREN (sperren statt löschen)
 #
-#  Löscht geschlossene, automatisch erzeugte Issues (Autor
-#  github-actions[bot]), die älter als GRACE_DAYS sind, ENDGÜLTIG
-#  vom Repo. Ergebnis: Auf GitHub bleiben nur OFFENE Fehlermeldungen
-#  sichtbar – erledigte verschwinden dauerhaft.
+#  Sicherheitsaudit 14.10.2026 (M-08): Statt geschlossene Bot-Issues mit
+#  einem Admin-PAT endgültig zu löschen, werden sie nach der Schonfrist
+#  gesperrt und mit „archiviert“ gelabelt. Vorfallshistorie bleibt als
+#  Nachweis erhalten; der GITHUB_TOKEN (issues: write) genügt.
+#  Das Secret GH_PAT wird hier NICHT mehr benutzt – wenn kein anderer
+#  Workflow es braucht, im Repo löschen und den PAT widerrufen.
 #
-#  ACHTUNG:
-#    • Löschen ist endgültig und benötigt einen Admin-PAT (Secret GH_PAT).
-#    • Manuell geschriebene Issues von DIR sind nie betroffen
-#      (nur Bots als Autor).
-#    • Manuelle Ausführung ist standardmäßig ein DRY-RUN (zeigt nur,
-#      was gelöscht würde) – zum echten Löschen "false" setzen.
-#    • Zeitplan läuft automatisch mit echtem Löschen (Schonfrist 14 Tage).
+#  Manuelle Ausführung: standardmäßig DRY-RUN.
 # ============================================================
-name: Erledigte Fehlermeldungen dauerhaft löschen
+name: Erledigte Fehlermeldungen archivieren
 
 on:
   schedule:
@@ -22,29 +18,29 @@ on:
   workflow_dispatch:
     inputs:
       grace_days:
-        description: "Schonfrist in Tagen (0 = sofort löschen)"
+        description: "Schonfrist in Tagen (0 = sofort archivieren)"
         required: false
-        default: "0"
+        default: "14"
       dry_run:
-        description: "Nur anzeigen ohne zu löschen? (true/false)"
+        description: "Nur anzeigen ohne zu archivieren? (true/false)"
         required: false
-        default: "false"
+        default: "true"
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   cleanup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Geschlossene Fehlermeldungen dauerhaft löschen
+      - name: Geschlossene Fehlermeldungen archivieren (sperren + Label)
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-          # Zeitplan → 14 Tage Schonfrist · manueller Lauf → 0 Tage (sofort)
-          GRACE_DAYS: ${{ github.event_name == 'schedule' && '14' || (github.event.inputs.grace_days || '0') }}
-          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          GH_TOKEN: ${{ github.token }}
+          GRACE_DAYS: ${{ github.event_name == 'schedule' && '14' || (github.event.inputs.grace_days || '14') }}
+          DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || (github.event.inputs.dry_run || 'true') }}
         run: bash scripts/cleanup_issues.sh

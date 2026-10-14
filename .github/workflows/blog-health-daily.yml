@@ -18,12 +18,12 @@ concurrency:
 
 jobs:
   health:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v7.0.1
-      - uses: actions/setup-python@v7
-      - run: pip install -q pyyaml pillow pillow-avif-plugin
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      - run: pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       # KADENZ-SICHERUNG (26.08.2026): die tägliche Wache stellt sicher,
       # dass die Dauervorgabe (Mo/Mi/Fr, 2–3 Artikel/Tag – CADENCE-REPORT.md
@@ -142,8 +142,10 @@ jobs:
 
       - name: Audit-Sabotage-Schutz erzwingen
         if: steps.uniqueness.outputs.exit_code != '0' && steps.uniqueness.outputs.exit_code != '1'
+        env:
+          SCHRITT_UNIQUENESS_EXIT_CODE: ${{ steps.uniqueness.outputs.exit_code }}
         run: |
-          echo "🛑 Einzigartigkeits-Audit konnte sich nicht selbst beweisen (Exit ${{ steps.uniqueness.outputs.exit_code }})."
+          echo "🛑 Einzigartigkeits-Audit konnte sich nicht selbst beweisen (Exit ${SCHRITT_UNIQUENESS_EXIT_CODE})."
           exit 2
 
       - name: Kritischen Bestandsbefund als einen Vorgang führen

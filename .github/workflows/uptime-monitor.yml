@@ -34,7 +34,7 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: URLs prüfen
@@ -78,13 +78,13 @@ jobs:
           EXISTING=$(gh issue list --state open --label uptime \
             --json number --jq '.[0].number' 2>/dev/null || echo "")
           if [ -z "$EXISTING" ]; then
-            BODY=$(printf '**%s** – folgende URLs antworten nicht korrekt:%s\n\nDer Monitor prueft alle 30 Minuten. Das Issue wird automatisch geschlossen, sobald die Site wieder erreichbar ist.' "$TS" "${{ env.FAILED }}")
+            BODY=$(printf '**%s** – folgende URLs antworten nicht korrekt:%s\n\nDer Monitor prueft alle 30 Minuten. Das Issue wird automatisch geschlossen, sobald die Site wieder erreichbar ist.' "$TS" "${FAILED}")
             gh issue create --title "Uptime-Alarm: Site nicht erreichbar" \
               --label uptime \
               --body "$BODY"
             echo "Issue erstellt"
           else
-            BODY=$(printf '**%s** – weiterhin gestoert:%s' "$TS" "${{ env.FAILED }}")
+            BODY=$(printf '**%s** – weiterhin gestoert:%s' "$TS" "${FAILED}")
             gh issue comment "$EXISTING" --body "$BODY"
             echo "Issue #$EXISTING kommentiert"
           fi

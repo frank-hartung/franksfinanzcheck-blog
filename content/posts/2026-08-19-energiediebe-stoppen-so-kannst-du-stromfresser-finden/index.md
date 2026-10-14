@@ -8,7 +8,7 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg"
   alt: "Energiediebe stoppen: So kannst du Stromfresser finden"

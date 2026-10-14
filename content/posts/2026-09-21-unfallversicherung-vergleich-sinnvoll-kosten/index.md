@@ -10,7 +10,7 @@ pillar: "versicherungen"
 keywords: ["Unfallversicherung", "Unfallversicherung Vergleich", "Unfallversicherung sinnvoll", "Unfallversicherung Kosten", "Gliedertaxe", "Progression Unfallversicherung", "Invaliditätsleistung", "Kinder Unfallversicherung"]
 author: "Frank Hartung"
 kurzantwort: "Eine private Unfallversicherung zahlt bei dauerhaften Folgen nach einem Unfall. Meist gibt es eine Einmalzahlung, teils auch eine Unfallrente. Sie ersetzt aber keine BU, weil Krankheiten viel häufiger die Arbeitskraft bedrohen als Unfälle. Sinnvoll ist sie oft für Kinder, Senioren und Menschen ohne bezahlbare BU. Wichtig sind Grundsumme, Progression, Gliedertaxe und faire Fristen."
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten.jpg"
   alt: "Unfallversicherung Vergleich 2026: Sinn, Kosten und Leistungen im Überblick"

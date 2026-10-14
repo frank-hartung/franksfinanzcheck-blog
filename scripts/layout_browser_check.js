@@ -528,7 +528,12 @@ function buildSampleUrls(domAudit) {
     .sort().slice(-3).reverse();
   const urls = ['http://127.0.0.1:' + PORT + '/'];
   const seen = new Set(['/']);
+  // Nur strikt geformte Pfade ansteuern (CodeQL js/file-access-to-http):
+  // Slugs und Pfade stammen aus Dateien des Builds und gehen in Anfragen.
+  const SLUG_SICHER = /^[a-z0-9][a-z0-9-]{0,159}$/;
+  const PFAD_SICHER = /^\/[a-z0-9][a-z0-9\/._-]{0,239}$/;
   for (const s of slugs) {
+    if (!SLUG_SICHER.test(s)) continue;
     urls.push(`http://127.0.0.1:${PORT}/posts/${s}/`);
     seen.add(`/posts/${s}/`);
   }
@@ -541,7 +546,11 @@ function buildSampleUrls(domAudit) {
   [...rows].sort((a, b) => b.maxchildren - a.maxchildren).forEach(push);
   [...rows].sort((a, b) => b.elements - a.elements).forEach(push);
   const risk = ranked.slice(0, Math.max(0, EXTRA_RISK_PAGES));
-  for (const r of risk) urls.push(`http://127.0.0.1:${PORT}${r.rel}`);
+  for (const r of risk) {
+    const rel = typeof r.rel === 'string' ? r.rel : '';
+    if (!PFAD_SICHER.test(rel) || /\.\./.test(rel)) continue;
+    urls.push(`http://127.0.0.1:${PORT}${rel}`);
+  }
   return { urls, slugs, risk: risk.map(r => r.rel) };
 }
 

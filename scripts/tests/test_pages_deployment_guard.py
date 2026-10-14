@@ -46,15 +46,27 @@ class PagesDeploymentGuardTestCase(unittest.TestCase):
             self.workflow_text = f.read()
 
     def test_top_level_permissions_allow_pages_deployment(self) -> None:
+        # Sicherheitsaudit 14.10.2026 (M-09): Rechte je Job. Job-Rechte
+        # ersetzen die Workflow-Rechte vollständig – `pages: write` und
+        # `id-token: write` gehören deshalb an den Job, der actions/deploy-pages
+        # ausführt, nicht an alle Jobs (inkl. Dritt-Action peaceiris).
         perms = self.workflow.get("permissions") or {}
+        self.assertNotEqual(perms.get("id-token"), "write",
+                            "id-token: write gehört nur an den Job pages-deployment.")
+        job_perms = self.jobs["pages-deployment"].get("permissions") or {}
         self.assertEqual(
-            perms.get("pages"), "write",
-            "deploy.yml braucht 'pages: write' – sonst bleibt actions/deploy-pages wirkungslos.",
+            job_perms.get("pages"), "write",
+            "pages-deployment braucht 'pages: write' – sonst bleibt actions/deploy-pages wirkungslos.",
         )
         self.assertEqual(
-            perms.get("id-token"), "write",
-            "deploy.yml braucht 'id-token: write' – Voraussetzung für actions/deploy-pages.",
+            job_perms.get("id-token"), "write",
+            "pages-deployment braucht 'id-token: write' – Voraussetzung für actions/deploy-pages.",
         )
+        deploy_perms = self.jobs["deploy"].get("permissions") or {}
+        self.assertEqual(deploy_perms.get("contents"), "write",
+                         "Der Build-Job committet Heilungen und pflegt gh-pages.")
+        self.assertEqual(deploy_perms.get("pages"), "write",
+                         "configure-pages im Build-Job liest/konfiguriert Pages.")
 
     def test_build_job_uploads_pages_artifact(self) -> None:
         build_job = self.jobs["deploy"]

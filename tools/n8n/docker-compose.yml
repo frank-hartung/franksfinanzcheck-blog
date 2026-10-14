@@ -5,15 +5,37 @@ version: "3.8"
 #  Whisper lokal + n8n self-hosted + GitHub Pages
 # ============================================================
 
+# ------------------------------------------------------------
+#  SICHERHEIT (Sicherheitsaudit 14.10.2026, H-06 / N-11):
+#   · Ports nur auf 127.0.0.1 – n8n und Whisper sind NICHT aus dem Netz
+#     erreichbar. Zugriff von außen nur über einen Tunnel/Reverse-Proxy mit
+#     Anmeldung (z. B. Cloudflare Access), nie per Portfreigabe.
+#   · Image fest auf eine geprüfte Version (kein :latest).
+#   · Execute-Command/LocalFileTrigger hart gesperrt, kein Zugriff auf
+#     Umgebungsvariablen aus Ausdrücken/Code-Knoten, Dateizugriff nur in
+#     den beiden Arbeitsordnern.
+#   · Das Blog-Repo ist NUR LESEND eingehängt – n8n kann keine Dateien im
+#     Repo ändern und keine Skripte mit Schreibrecht ausführen.
+#   · Alle Workflows sind im Repo auf active:false gestellt; Abschaltung
+#     auf dem Rechner: tools/n8n/abschalten.sh
+# ------------------------------------------------------------
 services:
   # --- n8n Workflow Automation Hub (Self-Hosted Community Edition) ---
   n8n:
-    image: docker.n8n.io/n8nio/n8n:latest
+    image: docker.n8n.io/n8nio/n8n:2.43.5
     container_name: ff-n8n-automation
     restart: unless-stopped
     ports:
-      - "5678:5678"
+      - "127.0.0.1:5678:5678"
     environment:
+      - NODES_EXCLUDE=["n8n-nodes-base.executeCommand","n8n-nodes-base.localFileTrigger","n8n-nodes-base.ssh"]
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=true
+      - N8N_RESTRICT_FILE_ACCESS_TO=/home/node/workflows;/data/whisper_inbox
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_SECURE_COOKIE=${N8N_SECURE_COOKIE:-true}
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_PERSONALIZATION_ENABLED=false
+      - N8N_PUBLIC_API_DISABLED=true
       - N8N_HOST=${N8N_HOST:-localhost}
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
@@ -31,7 +53,7 @@ services:
       - n8n_data:/home/node/.n8n
       - ./workflows:/home/node/workflows:ro
       - ../../data/whisper_inbox:/data/whisper_inbox
-      - ../..:/workspace/blog:rw
+      - ../..:/workspace/blog:ro
     depends_on:
       whisper-api:
         condition: service_healthy
@@ -46,15 +68,18 @@ services:
     container_name: ff-whisper-api
     restart: unless-stopped
     ports:
-      - "8765:8765"
+      - "127.0.0.1:8765:8765"
     environment:
       - WHISPER_MODEL=${WHISPER_MODEL:-base}
       - WHISPER_DEVICE=${WHISPER_DEVICE:-cpu}
       - WHISPER_COMPUTE_TYPE=${WHISPER_COMPUTE_TYPE:-int8}
       - PORT=8765
+      - HOST=0.0.0.0
+      - MAX_UPLOAD_MB=${WHISPER_MAX_UPLOAD_MB:-50}
+      - WHISPER_TOKEN=${WHISPER_TOKEN:-}
       - TZ=Europe/Berlin
     volumes:
-      - whisper_models:/root/.cache/huggingface
+      - whisper_models:/home/whisper/.cache/huggingface
       - ../../data/whisper_inbox:/data/inbox:rw
     healthcheck:
       test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8765/health')"]

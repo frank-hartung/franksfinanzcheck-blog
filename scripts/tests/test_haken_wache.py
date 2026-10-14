@@ -124,7 +124,7 @@ class AndereHakenBleibenAmLeben(unittest.TestCase):
         pfad = os.path.join(ordner, name)
         with open(pfad, "w", encoding="utf-8") as datei:
             datei.write(f"#!/bin/sh\necho {name} >> {self.spur}\n")
-        os.chmod(pfad, 0o755)
+        os.chmod(pfad, 0o700)
         return pfad
 
     def test_vorhandener_pre_commit_wird_bewahrt_und_laeuft_weiter(self):

@@ -11,7 +11,7 @@ categories: ["News"]
 pillar: "internet-dsl"
 keywords: ["Internet & DSL-Update: Was sich jetzt für dich ändert", "Internet & DSL-Update", "Internet & DSL Update", "DSL-Update", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "internet"

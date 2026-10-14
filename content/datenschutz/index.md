@@ -75,6 +75,8 @@ Alle Skripte und Stylesheets dieser Website werden von unserem Hosting ausgelief
 
 ## 5. Klickzähler für Partnerlinks (`/go/`)
 
+{{< klickmessung_status >}}
+
 ### Was passiert
 
 Partnerlinks in unseren Artikeln führen zunächst auf eine Übergabeseite unter `/go/<partner>/` auf unserer Website. Diese Seite sendet beim Aufruf einen Zählimpuls an unseren eigenen Zähler unter `stats.franksfinanzcheck.de`, einen Cloudflare Worker. Danach leitet die Seite dich weiter zum Partner.
@@ -93,7 +95,7 @@ Der Zählimpuls enthält nur:
 
 ### Technischer Hinweis zur IP-Adresse
 
-Damit der Zählimpuls ankommt, wird deine IP-Adresse technisch über die Netzinfrastruktur von Cloudflare übermittelt. Cloudflare verarbeitet sie dabei zur Verbindung. Wir speichern sie nicht.
+Damit der Zählimpuls ankommt, wird deine IP-Adresse technisch über die Netzinfrastruktur von Cloudflare übermittelt. Cloudflare verarbeitet sie dabei zur Verbindung. Wir speichern sie nicht. Zum Schutz vor Missbrauch (massenhaft gefälschte Klicks) nutzt der Zähler die IP-Adresse außerdem kurzzeitig für eine Mengenbegrenzung: Cloudflare zählt dafür höchstens 60 Sekunden lang mit, wie viele Zählimpulse von derselben Verbindung kommen. Die IP-Adresse wird dabei nicht in unserer Datenbank gespeichert und nicht mit den Tageszählern verknüpft.
 
 ### Rechtsgrundlage und Speicherdauer
 
@@ -140,13 +142,13 @@ Wir erhalten von den Partnern Abrechnungsinformationen zu Provisionen. Welche An
 
 ### Eingebettete Anbieterkennzeichnung im Impressum
 
-Auf der Seite [Impressum](/impressum/) wird die Anbieterkennzeichnung des Tarifcheck-Partnerprogramms als eingebettetes Dokument geladen. Der Browser ruft dafür beim Seitenaufruf ein Dokument von a.partner-versicherung.de ab (Partner-ID 47086). Dabei werden technische Zugriffsdaten an diesen Server übermittelt, insbesondere IP-Adresse, Zeitpunkt, Browserkennung und die Herkunft des Abrufs.
+Auf der Seite [Impressum](/impressum/) kannst du die Anbieterkennzeichnung des Tarifcheck-Partnerprogramms als eingebettetes Dokument laden. Das Dokument wird nicht automatisch beim Seitenaufruf abgerufen, sondern erst, wenn du die Schaltfläche „Angaben des Partners hier laden“ wählst (Zwei-Klick-Lösung). Dann ruft dein Browser ein Dokument von a.partner-versicherung.de ab (Partner-ID 47086). Dabei werden technische Zugriffsdaten an diesen Server übermittelt, insbesondere IP-Adresse, Zeitpunkt, Browserkennung und die Herkunft des Abrufs. Das eingebettete Dokument läuft in einer eingeschränkten Umgebung (sandbox): Es kann diese Seite nicht umleiten und keine Formulare absenden.
 
 Ob der Anbieter dabei Cookies setzt, weitere Empfänger beteiligt oder Daten außerhalb der EU verarbeitet, ist anhand der Partnerunterlagen zu prüfen. Diese Erklärung behauptet das nicht.
 
 Zweck: die vom Partnerprogramm geforderte, stets aktuelle Kennzeichnung der Unternehmen, die für Vergleichsformulare und die Vermittlung der darüber angefragten Versicherungen zuständig sind. Die Einbindung erfolgt nur auf der Impressumsseite, nicht auf Artikeln, Werkzeugen oder der Startseite.
 
-Rechtsgrundlage unserer Einbindung: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer vollständigen Anbieterkennzeichnung und an der Einhaltung der Programmbedingungen). Für ein Speichern oder Auslesen auf deinem Endgerät durch den Partner ist § 25 TDDDG eigenständig zu prüfen. Eine Einwilligung ist erforderlich, soweit keine Ausnahme greift. Ob eine Ausnahme greift, ist an der konkreten Technik des Dokuments noch nicht geprüft.
+Rechtsgrundlage unserer Einbindung: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer vollständigen Anbieterkennzeichnung und an der Einhaltung der Programmbedingungen); der Abruf findet nur statt, wenn du ihn ausdrücklich anforderst. Für ein Speichern oder Auslesen auf deinem Endgerät durch den Partner ist § 25 TDDDG eigenständig zu prüfen. Eine Einwilligung ist erforderlich, soweit keine Ausnahme greift. Ob eine Ausnahme greift, ist an der konkreten Technik des Dokuments noch nicht geprüft.
 
 Die Kennzeichnung lässt sich auch direkt beim Partner öffnen, über den Link unter dem Dokument im Impressum.
 
@@ -155,7 +157,7 @@ Die Kennzeichnung lässt sich auch direkt beim Partner öffnen, über den Link u
 ## 7. Cookies und Speicher auf deinem Gerät
 
 **Wir setzen keine Cookies für Analyse, Reichweitenmessung oder Werbung.** Frühere Einwilligungs-Cookies (`ff_cookie_consent` und `ff_analytics_consent_v2`) aus der Zeit vor der Entfernung der Reichweitenmessung löscht die Website beim Besuch automatisch. Die Partnerseiten können nach einem Klick eigene Cookies setzen (siehe Abschnitt 6).
-Derzeit setzen wir **kein Analytics-Consent-Cookie** und zeigen keinen Analyse-Banner: Die Reichweitenmessung ist abgeschaltet. Ein noch vorhandenes früheres `ff_cookie_consent`-Cookie wird beim nächsten Besuch durch die Website gelöscht. Externe Partner können eigene Speichertechniken einsetzen, sobald du einen Partnerlink anklickst. Zusätzlich ruft die Impressumsseite ohne weiteren Klick das Kennzeichnungsdokument des Tarifcheck-Partnerprogramms ab; das steht in Abschnitt 4. Unsere Website kann die Einstellungen der Partner nicht verwalten.
+Derzeit setzen wir **kein Analytics-Consent-Cookie** und zeigen keinen Analyse-Banner: Die Reichweitenmessung ist abgeschaltet. Ein noch vorhandenes früheres `ff_cookie_consent`-Cookie wird beim nächsten Besuch durch die Website gelöscht. Externe Partner können eigene Speichertechniken einsetzen, sobald du einen Partnerlink anklickst. Das Kennzeichnungsdokument des Tarifcheck-Partnerprogramms im Impressum wird erst nach deiner Auswahl geladen (Zwei-Klick-Lösung, siehe oben). Unsere Website kann die Einstellungen der Partner nicht verwalten.
 
 Auf deinem Gerät können folgende lokale Speicherwerte liegen. Sie werden nur gesetzt, wenn du die jeweilige Funktion nutzt, und bleiben im Browser. Wir übertragen sie nicht an uns oder Dritte.
 
@@ -199,7 +201,7 @@ Zur Beschleunigung speichert ein Service Worker bereits geladene Schriftarten, B
 Unter jedem Ratgeber kannst du mit „Ja“ oder „Nein“ abstimmen. Dabei sendet dein Browser deine Auswahl und die Artikel-Kennung an `abos.franksfinanzcheck.de/feedback`, einen Cloudflare Worker. Ohne Klick findet keine Übermittlung statt.
 
 - **Zähler:** Der Worker speichert je Artikel nur die Anzahl der Ja- und Nein-Stimmen ohne Personenbezug.
-- **Missbrauchsschutz:** Damit eine Person nicht mehrfach abstimmt, wird ein aus IP-Adresse und Artikel-Kennung gebildeter Hash **6 Stunden** gespeichert. Der Hash ist kein Klartext. Er gilt dennoch als personenbezogenes Datum und wird nach 6 Stunden automatisch gelöscht.
+- **Missbrauchsschutz:** Damit eine Person nicht mehrfach am selben Tag abstimmt, wird ein aus IP-Adresse und Artikel-Kennung gebildeter, gekürzter Hash im Tageszähler gespeichert. Der Hash ist kein Klartext. Er gilt dennoch als personenbezogenes Datum und wird mit der täglichen Zusammenfassung gelöscht, in der Regel innerhalb von 48 Stunden, technisch spätestens nach 8 Tagen. Die Zahl der gezählten Stimmen pro Tag ist begrenzt.
 - **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (Verbesserung der Ratgeber und Schutz vor Mehrfachabgaben).
 
 ---
@@ -213,6 +215,7 @@ Die Suche läuft im Browser. Suchbegriffe werden nicht an einen Suchdienst über
 ## 11. Links und soziale Medien
 
 - **Pinterest und Mastodon:** Wir verlinken unsere Profile. Es werden keine Daten an Pinterest oder Mastodon übermittelt, solange du den Link nicht anklickst. Für Pinterest ist die **Pinterest Europe Ltd.** (Palmerston House, 2nd Floor, Fenian Street, Dublin 2, Irland) verantwortlich: https://policy.pinterest.com/de/privacy-policy
+- **Antworten auf Kommentare (Mastodon):** Wenn du unsere Beiträge öffentlich kommentierst, kann unser Antwort-Assistent deinen öffentlichen Kommentar abrufen, einordnen und einen Antwortentwurf vorbereiten; einfache Dankesantworten können automatisch gesendet werden, alles andere geben wir von Hand frei. Verarbeitet werden die Kommentar-Kennung, der Link zum Kommentar, der Kommentartext (gekürzt) und dein Benutzername. Den Benutzernamen speichern wir nur pseudonymisiert (verschlüsselter Hash), um dir nicht mehrfach kurz hintereinander zu antworten. Kommentartexte offener Vorgänge werden nach Erledigung bzw. spätestens nach Ablauf der Freigabefrist entfernt. Die Bearbeitungsdaten liegen – der Benutzername nur pseudonymisiert – in unserem öffentlich einsehbaren Code-Repository bei GitHub (siehe Abschnitt 12). Für die Antworttexte nutzen wir KI-Dienste; dabei wird der Kommentartext an den jeweiligen Anbieter übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Beantwortung öffentlicher Anfragen zu unseren Beiträgen). Du kannst jederzeit widersprechen, z. B. per E-Mail an kontakt@franksfinanzcheck.de.
 - **Kalender-Links:** Einzelne Seiten bieten Links zum Eintragen in einen Kalender an. Mit dem Klick öffnest du den jeweiligen Kalenderdienst, der die übergebenen Termindaten verarbeitet.
 - **Andere externe Links:** Auf die Datenverarbeitung auf verlinkten Seiten Dritter haben wir keinen Einfluss. Dafür ist der jeweilige Betreiber verantwortlich.
 

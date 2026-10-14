@@ -110,9 +110,9 @@ class VertragAmEchtenWorkflow(unittest.TestCase):
         mit_pfaden = self.text.replace("    branches: [main]\n",
                                        "    branches: [main]\n    paths-ignore:\n      - 'docs/**'\n")
         self.assertTrue(any("paths" in f for f in _c18(mit_pfaden)), _c18(mit_pfaden))
-        mit_if = self.text.replace("    runs-on: ubuntu-latest\n",
+        mit_if = self.text.replace("    runs-on: ubuntu-24.04\n",
                                    "    if: github.event.pull_request.draft == false\n"
-                                   "    runs-on: ubuntu-latest\n")
+                                   "    runs-on: ubuntu-24.04\n")
         self.assertTrue(any("`if:`" in f for f in _c18(mit_if)), _c18(mit_if))
         verschluckt = self.text.replace(
             "      - name: Integritäts-Siegel prüfen (HARD STOP – Sabotage-Schutz)\n",

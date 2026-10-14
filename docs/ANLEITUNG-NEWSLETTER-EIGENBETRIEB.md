@@ -57,7 +57,7 @@ Die drei Entscheide, die diese Form festlegen:
 
 | Baustein | Ort | Secrets / Variablen | Wache |
 |---|---|---|---|
-| Capture-Worker | `newsletter-worker/` (deploy: `wrangler deploy`) | `GITHUB_PAT`, `EXPORT_KEY` | Wache `--brand` (Themen), C7 (Endpunkt) |
+| Capture-Worker | `newsletter-worker/` (Deploy nur per CI: `.github/workflows/worker-deploy.yml`, Freigabe im Environment `cloudflare-produktion`) | `GITHUB_PAT`, `EXPORT_KEY`, optional `TURNSTILE_SECRET` | Wache `--brand` (Themen), C7 (Endpunkt) |
 | Adressliste + Tokens | Cloudflare KV (`ABO`) | – | B2 (Export, unabhängig vom Resend-Key) |
 | Digest (Bau + Versand) | `scripts/newsletter_digest.py` | – | Selftest 50, Capture-Wache `--check` |
 | Mailer (Resend/SMTP) | `scripts/newsletter_versand.py` | – | Selftest 47 (inkl. Kopfzeilen/Kante, Worker-Schlüssel) |
@@ -65,8 +65,8 @@ Die drei Entscheide, die diese Form festlegen:
 | Kadenz (Di/Fr-Vertrag) | `scripts/newsletter_schedule.py`, `scripts/newsletter_cadence.py` | – | Selftests 14 + site-Test |
 | Studio (Marke/Themen) | `scripts/newsletter_studio.py` + `data/newsletter_studio.json` | – | Selftest 48, `--brand` |
 | Zustellbarkeit | `scripts/newsletter_zustellbarkeit.py` | `RESEND_API_KEY` (optional) | Selftest 49 (B0 fragt mit der Signatur des Versands) |
-| Daily-Versand | `.github/workflows/newsletter-daily.yml` | `RESEND_API_KEY`, `NEWSLETTER_WORKER_EXPORT_KEY` | Wachen-Schritt im Lauf |
-| Lifecycle (Bestätigung/Nachgang) | `.github/workflows/newsletter-lifecycle.yml` | – | – |
+| Daily-Versand | `.github/workflows/newsletter-daily.yml` | `RESEND_API_KEY`, `NEWSLETTER_WORKER_EXPORT_KEY`, `NEWSLETTER_HASH_KEY` | Wachen-Schritt im Lauf |
+| Lifecycle (Bestätigung/Nachgang) | `.github/workflows/newsletter-lifecycle.yml` | `NEWSLETTER_HASH_KEY` (keine Tokens als Eingabe, Audit H-05) | – |
 | Cadence-Nachholung | `.github/workflows/newsletter-cadence.yml` | – | Cadence-Selftest |
 | Journal (Hashes) | `data/newsletter_journal.jsonl` | – | Zustellbarkeits-Wache S1 |
 | Status (Halt/Idempotenz) | `data/newsletter_state.json` | – | Zustellbarkeits-Wache S1–S3 |
@@ -76,6 +76,20 @@ Die drei Entscheide, die diese Form festlegen:
 ## 3. Einmaliges Setup (Reihenfolge zwingend)
 
 ### Schritt 1 – Cloudflare-Worker
+
+> **Stand nach dem Sicherheitsaudit vom 14.10.2026 (M-14, H-05):**
+> - `workers_dev = false` – der Worker ist **nicht** mehr unter
+>   `*.workers.dev` erreichbar (dort griffen WAF und Rate-Limits der Zone
+>   nicht). Er hängt als **Custom Domain** an `abos.franksfinanzcheck.de`
+>   (`routes` in `wrangler.toml`); Cloudflare legt DNS und Zertifikat selbst an.
+> - **Deploy nur per CI:** Actions → „Cloudflare-Worker deployen“ →
+>   `newsletter-worker`. Der Lauf wartet auf deine Freigabe im Environment
+>   `cloudflare-produktion` und setzt die KV-ID aus der Repository-Variable
+>   `KV_NAMESPACE_ID_ABO` ein. Ein lokales `wrangler deploy` ist nur noch
+>   für die Ersteinrichtung gedacht.
+> - Der Worker sendet beim Dispatch **keine Tokens und keine Adressen**
+>   mehr; der Lifecycle-Workflow hat keine `token`-Eingabe mehr (Tokens
+>   standen sonst unmaskiert in öffentlichen Logs).
 
 Eigener Cloudflare-Account (kostenlos; der Worker ist Teil des Free-Plans).
 
@@ -92,31 +106,38 @@ wrangler secret put GITHUB_PAT       # Fine-Grained-PAT, NUR dieses Repo, Berech
                                      # damit antwortet der Dispatch 403 und der Takt schlägt
                                      # ins Leere)
 wrangler secret put EXPORT_KEY       # 32+ Zeichen, zufällig (z. B. openssl rand -hex 24)
-wrangler deploy
+                                     # NUR als Header x-ff-key, nie als URL-Parameter (N-01)
+# optional, erst wenn das Turnstile-Widget im Formular ausgeliefert wird:
+# wrangler secret put TURNSTILE_SECRET
+wrangler deploy                      # Ersteinrichtung; danach nur noch per CI
 ```
 
 `wrangler deploy` aktiviert auch die **Cron-Triggers** (`[triggers]` in
 `wrangler.toml`, Free-Plan: max. 5 pro Account, hier 3) – der Worker ist
 seit 25.09.2026 der **Taktgeber** des Versands (§ 4a). Ob der Takt läuft:
-`https://abos.franksfinanzcheck.de/healthz` → Feld `takt` (Cloudflare →
-Worker → Settings → Trigger Events zeigt die Ausführungen).
+`https://abos.franksfinanzcheck.de/healthz` antwortet öffentlich nur noch
+`{"ok":true,"ts":…}` (Audit N-02); das Feld `takt` gibt es nur mit dem
+Header `x-ff-key: <EXPORT_KEY>` (Cloudflare → Worker → Settings → Trigger
+Events zeigt die Ausführungen).
 
-Die Worker-Domain (z. B. `ff-newsletter.<account>.workers.dev`) wird im
-nächsten Schritt zugeordnet. `SITE_ORIGIN`, `GITHUB_REPO`,
+Die Domain `abos.franksfinanzcheck.de` ordnet `wrangler.toml` selbst zu
+(Custom Domain, siehe Schritt 2). `SITE_ORIGIN`, `GITHUB_REPO`,
 `GITHUB_WORKFLOW`, `GITHUB_REF`, `THEMEN_IDS`, `THEMEN_LABELS`,
 `BESTAETIGUNG_TAGE` stehen in `wrangler.toml` (Variablen, keine Secrets).
 
-### Schritt 2 – CNAME auf die eigene Subdomain
+### Schritt 2 – Eigene Subdomain (Custom Domain statt CNAME)
 
-Im Cloudflare-Dashboard → **DNS → Records → Record**:
+Seit dem Audit (M-14) steht die Zuordnung im Repo:
+`routes = [{ pattern = "abos.franksfinanzcheck.de", custom_domain = true }]`.
+Beim Deploy legt Cloudflare den DNS-Eintrag und das Zertifikat selbst an.
 
-| Typ | Name | Ziel | Proxy |
-|---|---|---|---|
-| `CNAME` | `abos` | `<worker>.workers.dev` | orange cloud (proxiert) |
+**Einmalig vorher:** Gibt es im Dashboard (DNS → Records) noch einen von
+Hand angelegten `CNAME abos → <worker>.workers.dev`, diesen **löschen** –
+sonst lehnt Cloudflare die Custom Domain ab. Danach deployen.
 
-TLS stellt Cloudflare automatisch für `abos.franksfinanzcheck.de` aus.
 Verifizieren: `https://abos.franksfinanzcheck.de/healthz` muss
-`{"ok":true,"kv":"ok"}` antworten.
+`{"ok":true,…}` antworten; `https://<worker>.<konto>.workers.dev/` darf
+**nicht** mehr antworten.
 
 ### Schritt 3 – Resend-Konto und Domain-Authentifizierung
 
@@ -164,6 +185,10 @@ Repository → **Settings → Secrets and variables → Actions**:
 | `RESEND_API_KEY` | Secret | Resend-API-Key |
 | `NEWSLETTER_WORKER_EXPORT_KEY` | Secret | = Worker-Secret `EXPORT_KEY` (derselbe Schlüssel, beide Seiten) |
 | `NEWSLETTER_WORKER_BASE` | Variable | `https://abos.franksfinanzcheck.de` |
+| `NEWSLETTER_HASH_KEY` | Secret | 32+ Zeichen, zufällig (`openssl rand -hex 32`). Schlüssel der Empfänger-Hashes im Journal (HMAC statt ungesalzenem SHA-256, Audit H-04). Einmal setzen, **nie** wechseln – sonst greift der Duplikatsschutz einen Tag lang nicht. |
+| `KV_NAMESPACE_ID_ABO` | Variable | ID des KV-Namespace `ABO` (kein Geheimnis) – für Worker-Deploy und verschlüsseltes Backup |
+| `CF_WORKERS_DEPLOY_TOKEN` | Secret im Environment `cloudflare-produktion` | eigener Cloudflare-Token nur für Worker-Deploys (nicht der Workers-AI-Token) |
+| `CLOUDFLARE_ACCOUNT_ID` | Secret (vorhanden) | Konto-ID – das bestehende Repo-Secret wird auch für den Worker-Deploy genutzt |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | optional | nur wenn `NEWSLETTER_TRANSPORT=smtp` |
 | `NEWSLETTER_TRANSPORT` | Variable, optional | `smtp` (Default: `resend`) |
 
@@ -370,7 +395,7 @@ nachgewiesen werden kann:**
 | Di & Fr 04:30 / 08:11 | GitHub-`schedule` (drittes Netz; kommt an diesem Repo oft Stunden zu spät oder gar nicht) | `newsletter-daily.yml` / `newsletter-cadence.yml` | Wie oben; ein verspäteter Cron findet den Termin belegt („Versandpause“) – kein zweiter Versand |
 | stündlich :17 | Worker-Taktgeber (und GitHub-`schedule`) | `newsletter-lifecycle.yml` | Nachgang: Bestätigungs-Mails, deren Worker-Dispatch fehlgeschlagen ist (idempotent über Token) |
 | bei Merge, der die Wache selbst ändert | `push` auf main (nur `newsletter-cadence.yml` / `newsletter_cadence.py`) | `newsletter-cadence.yml` | Selbstbeweis: die geänderte Wache läuft sofort; an einem leeren Di/Fr nach 05:00 UTC holt sie den Planlauf nach |
-| manuell | Actions → Run workflow | `newsletter-lifecycle.yml` | `aktion=bestaetigung` + `token` (einzelne Bestätigung neu) bzw. `aktion=nachgang` |
+| manuell | Actions → Run workflow | `newsletter-lifecycle.yml` | `aktion=nachgang` (alle offenen Bestätigungen; `bestaetigung` ist ein Alias). **Kein** Token als Eingabe – Workflow-Eingaben stehen unmaskiert in öffentlichen Logs (Audit H-05). |
 | manuell | Actions → Run workflow | `newsletter-daily.yml` | `test_adresse` für jeden Probelauf |
 
 ### 4a. Der Taktgeber – warum der Worker die Uhr hält
@@ -460,7 +485,7 @@ nach dem Beleg, keine zweite Liste.
 | `C7: keine Antwort / 5xx` | C7 | CNAME steht, Worker antwortet nicht / ist kaputt | Cloudflare → Workers → Logs; Stand neu deployen |
 | Halt aktiv (`versand_unklar`) | S1 | Ein Sende-Aufruf ist ohne Beleg geblieben – kein zweiter Listen-Versand, bis ein Mensch nachgesehen hat | § 4 (Halt): Beleg suchen, Block auflösen, committen |
 | `S3: noch kein Versand protokolliert` | S3 | Normal vor der ersten Live-Ausgabe | – |
-| Bestätigung kommt nicht beim Leser | – | Spam-Ordner / Zehn Minuten / Neuanforderung | Info-Seite `/newsletter/bestaetigung/` sagt den Weg; manuell: Lifecycle `bestaetigung` + Token |
+| Bestätigung kommt nicht beim Leser | – | Spam-Ordner / Zehn Minuten / Neuanforderung | Info-Seite `/newsletter/bestaetigung/` sagt den Weg; manuell: Lifecycle `nachgang` (ohne Token) |
 | Dieselbe Ausgabe doppelt im Postfach? | – | **Nicht möglich über den Listenweg**: Idempotenz über `letzte_ausgabe` (Datum+Betreff) und versandene Artikel-Hashes; zweiter Lauf derselben Ausgabe springt bediente Empfänger über. Ein doppeltes Anlegen über den Testweg ist möglich und ok (Testadresse, kein Subscriber) | – |
 | Subdomain/Worker umgezogen | – | Studio `--brand` meldet den Widerspruch (hugo.toml vs. feste Basis) | hugo.toml + wrangler-Route + CNAME + Doku in einem Commit |
 

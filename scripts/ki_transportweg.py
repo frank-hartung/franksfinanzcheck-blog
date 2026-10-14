@@ -391,6 +391,9 @@ T6_QUELL_SUFFIXES = {".py", ".pyw", ".js", ".mjs", ".cjs", ".ts", ".tsx",
 T6_AUSGESCHLOSSENE_PFADE = {
     Path("scripts/llm_client.py"),  # der einzige erlaubte Transport
     Path("scripts/ki_transportweg.py"),  # Gate benennt die Muster selbst
+    # Kein Modellaufruf: Cloudflare-Verwaltungs-API (KV/D1-Export) fuer das
+    # verschluesselte Abonnenten-Backup (Sicherheitsaudit 14.10.2026, M-11).
+    Path("scripts/kv_backup.py"),
 }
 T6_AUSGESCHLOSSENE_ORDNER = {
     ".git", ".arena", ".cache", ".venv", "venv", "node_modules",

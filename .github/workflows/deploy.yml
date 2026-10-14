@@ -76,13 +76,15 @@ on:
         type: string
         default: ''
 
+# Sicherheitsaudit 14.10.2026 (M-09): Rechte je Job statt workflowweit.
+# Vorher hatte JEDER Job (inkl. Dritt-Action peaceiris) contents, pages
+# UND id-token write. Jetzt:
+#   deploy-gate       contents: read, deployments: read
+#   deploy            contents: write (Heil-Commits, gh-pages), pages: write
+#   pages-deployment  pages: write, id-token: write (Issue #537)
+#   release-seal      contents: read
 permissions:
-  contents: write
-  # Für das offizielle GitHub-Pages-Deployment (Job "pages-deployment",
-  # Issue #537 – ohne diese zwei Rechte bleibt `actions/deploy-pages`
-  # wirkungslos und die Site friert trotz "erfolgreichem" Lauf ein).
-  pages: write
-  id-token: write
+  contents: read
 
 # ============================================================
 #  WARTESCHLANGE (Befund Issue #218, 08.09.2026)
@@ -131,7 +133,10 @@ jobs:
   # ============================================================
   deploy-gate:
     name: Relevante Aenderungen pruefen (Deploy-Entlastung)
-    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     concurrency:
       group: pages-deploy-gate
@@ -307,7 +312,10 @@ jobs:
   deploy:
     needs: deploy-gate
     if: needs.deploy-gate.outputs.deploy == 'true'
-    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    runs-on: ubuntu-24.04
     # SICHERHEITSNETZ (Issue #218): Ohne eigenes Limit gilt GitHubs
     # Voreinstellung von 360 Minuten. Lauf 34140579736 hat sie voll
     # ausgeschoepft und die Deploy-Warteschlange SECHS STUNDEN blockiert –
@@ -357,7 +365,7 @@ jobs:
       werkzeugbefunde_anzahl: ${{ steps.werkzeugbefunde.outputs.werkzeugbefunde_anzahl }}
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: true
           fetch-depth: 0
@@ -404,7 +412,7 @@ jobs:
       # Folge-Deploy findet einen sauberen Zustand und pusht nichts mehr).
       - name: Py-Abhängigkeiten für Gate-Chain
         run: |
-          python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           # VOLLSTÄNDIGE Messkette im Deploy (Dauerheilung #740): Die
           # Quote-Nachfüllung misst jeden Re-Queue-/Reserve-Kandidaten mit
           # quality_score – dessen Rechtschreibmessung braucht hunspell.
@@ -717,6 +725,28 @@ jobs:
 
       - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
+
+      # SICHERHEIT (Audit 14.10.2026, M-06): hugo.toml rendert Roh-HTML
+      # (goldmark unsafe = true). Ein Artikel mit <script>, iframe oder
+      # Event-Handler wäre Stored XSS auf der eigenen Domain. Betroffene
+      # ARTIKEL gehen einzeln in Quarantäne (draft: true + Grund, Commit
+      # über den Gate-Heilungspfad unten) – die Auslieferung läuft weiter.
+      # Seiten außerhalb von posts/ zieht das Gate nie zurück: Dort bleibt
+      # es hart rot, bis ein Mensch entscheidet.
+      - name: Roh-HTML-Gate – Selbsttest
+        run: python3 scripts/roh_html_gate.py --selftest
+
+      - name: Roh-HTML-Gate – Quarantäne + hartes Gate (Sicherheit)
+        run: python3 scripts/roh_html_gate.py --quarantaene
+
+      # KI-KENNZEICHNUNG (Audit 14.10.2026, M-17; Art. 50 Abs. 4 KI-VO):
+      # Bot-Artikel tragen ai_generated: true → Label „Mit KI erstellt“.
+      # Selbstheilend (--fix), Commit über den Gate-Heilungspfad unten.
+      - name: KI-Kennzeichnung – Selbsttest
+        run: python3 scripts/ki_kennzeichnung_gate.py --selftest
+
+      - name: KI-Kennzeichnung – Register durchsetzen (selbstheilend)
+        run: python3 scripts/ki_kennzeichnung_gate.py --fix
 
       # ================= QUOTE-NACHFÜLLUNG NACH GATE-VERLUST (#287) =========
       # Kernbefund Mo 14.09.2026: publish_gate verwarf den neuen Tages-Artikel
@@ -1147,6 +1177,12 @@ jobs:
           # nichts mehr ausloesen. Der Schreibschutz in
           # data/kostensperre.yaml entscheidet (Schritt davor belegt es).
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          EINGABE_AUDIO_BACKEND: ${{ github.event.inputs.audio_backend || 'auto' }}
+          EINGABE_AUDIO_PROFILE: ${{ github.event.inputs.audio_profile || 'news' }}
+          EINGABE_AUDIO_ORDER: ${{ github.event.inputs.audio_order || 'newest' }}
+          EINGABE_AUDIO_LIMIT_NEW: ${{ github.event.inputs.audio_limit_new || '25' }}
+          EINGABE_AUDIO_BACKFILL: ${{ github.event.inputs.audio_backfill }}
+          EINGABE_AUDIO_MAX_MINUTES: ${{ github.event.inputs.audio_max_minutes || '' }}
         run: |
           mkdir -p /tmp/ff-voice-cache
           # Vorherige Tonspuren vom letzten Deploy holen (inkrementell).
@@ -1161,14 +1197,14 @@ jobs:
               rm -rf audio
             fi
           fi
-          AUDIO_BACKEND="${{ github.event.inputs.audio_backend || 'auto' }}"
-          AUDIO_PROFILE="${{ github.event.inputs.audio_profile || 'news' }}"
-          AUDIO_ORDER="${{ github.event.inputs.audio_order || 'newest' }}"
-          AUDIO_LIMIT_NEW="${{ github.event.inputs.audio_limit_new || '25' }}"
+          AUDIO_BACKEND="${EINGABE_AUDIO_BACKEND}"
+          AUDIO_PROFILE="${EINGABE_AUDIO_PROFILE}"
+          AUDIO_ORDER="${EINGABE_AUDIO_ORDER}"
+          AUDIO_LIMIT_NEW="${EINGABE_AUDIO_LIMIT_NEW}"
           case "$AUDIO_LIMIT_NEW" in
             ''|*[!0-9]*) AUDIO_LIMIT_NEW=25 ;;
           esac
-          if [ "${{ github.event.inputs.audio_backfill }}" = "true" ]; then
+          if [ "${EINGABE_AUDIO_BACKFILL}" = "true" ]; then
             LIMIT_NEW=0
           else
             LIMIT_NEW="$AUDIO_LIMIT_NEW"
@@ -1190,14 +1226,14 @@ jobs:
           # Spuren bleiben, alle uebrigen Artikel behalten ihre Spur aus
           # dem Cache, und der naechste Lauf setzt die Warteschlange genau
           # dort fort (konvergent, kein Verlust).
-          AUDIO_MAX_MINUTES="${{ github.event.inputs.audio_max_minutes || '' }}"
+          AUDIO_MAX_MINUTES="${EINGABE_AUDIO_MAX_MINUTES}"
           case "$AUDIO_MAX_MINUTES" in
             ''|*[!0-9]*) AUDIO_MAX_MINUTES=0 ;;
           esac
           if [ "$AUDIO_MAX_MINUTES" -eq 0 ]; then
             # Automatik: Ein bewusst angestossener Backfill darf laenger
             # arbeiten, der normale Push-Deploy bleibt schnell.
-            if [ "${{ github.event.inputs.audio_backfill }}" = "true" ]; then
+            if [ "${EINGABE_AUDIO_BACKFILL}" = "true" ]; then
               AUDIO_MAX_MINUTES=90
             else
               AUDIO_MAX_MINUTES=20
@@ -1328,7 +1364,7 @@ jobs:
           exit 0
 
       - name: Deploy auf gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -1355,10 +1391,10 @@ jobs:
       # Artefakt für `actions/deploy-pages`.
       # ------------------------------------------------------------
       - name: GitHub Pages konfigurieren (Workflow-Quelle)
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
       - name: Artefakt für offizielles Pages-Deployment hochladen
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./public
 
@@ -1398,7 +1434,7 @@ jobs:
     # und der Job würde NIE laufen (stiller Deploy-Ausfall, Issue-#537-Klasse).
     needs: [deploy-gate, deploy]
     if: needs.deploy-gate.outputs.deploy == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       pages: write
@@ -1412,7 +1448,7 @@ jobs:
     steps:
       - name: Deployment auslösen
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   # ============================================================
   #  AUSLIEFERUNGS-SIEGEL (Dauerheilung #676, 10.10.2026)
@@ -1440,7 +1476,9 @@ jobs:
     name: Auslieferungs-Siegel (Beweis nach der Veröffentlichung)
     needs: [deploy-gate, deploy, pages-deployment]
     if: always() && needs.deploy-gate.outputs.deploy == 'true'
-    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - name: Siegel auswerten (Auslieferung ist zu diesem Punkt bereits gelaufen)

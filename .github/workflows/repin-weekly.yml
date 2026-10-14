@@ -41,14 +41,14 @@ concurrency:          # AUDIT-FIX: gegen Doppelläufe
 
 jobs:
   nachpinnen:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Pins installieren
-        run: pip install -q pyyaml cryptography
+        run: pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Artikel bei Pinterest nachpinnen
         env:

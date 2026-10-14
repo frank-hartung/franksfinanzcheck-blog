@@ -30,13 +30,13 @@ concurrency:          # AUDIT-FIX
 
 jobs:
   seo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Repository auschecken
         # checkout@v5 (09.09.2026): v4 zielt auf Node.js 20 (deprecated,
         # erzeugte in jedem Lauf eine Warn-Annotation).
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -47,7 +47,7 @@ jobs:
 
       - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
         # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli
-        run: python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       # Vorher: `hugo --minify > /dev/null 2>&1`. Ein Schritt, der rot wird
       # und KEINE Zeile hinterlässt, ist die teuerste Variante von allen.
@@ -135,7 +135,7 @@ jobs:
         # verpuffte in continue-on-error. Jetzt dediziertes Issue mit
         # Dedupe (offenes Issue gleichen Titels -> Kommentar statt Duplikat).
         if: ${{ steps.kw.outcome == 'failure' && !cancelled() }}
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -421,7 +421,7 @@ jobs:
         # Betroffene Artikel werden NIE gelöscht (siehe bestand_gate.py) –
         # nur gemeldet, damit ein Mensch echte Textarbeit leisten kann.
         if: steps.bestand.outcome == 'failure'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -528,7 +528,7 @@ jobs:
         # übrig sind (Exit 1). Erstellt ein GitHub-Issue mit allen Details –
         # der wöchentliche Lauf ist damit zu 100 % autonom.
         if: steps.meta_gate.outcome == 'failure'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -562,7 +562,7 @@ jobs:
         # Lücke geschlossen: A11y-Fehler wurden bisher nur geloggt, nie
         # gemeldet. Jetzt automatisches Issue – konsistent zum SEO-Audit.
         if: steps.a11y.outcome == 'failure'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -621,7 +621,7 @@ jobs:
 
       - name: Issue bei kritischen SEO-Problemen erstellen
         if: steps.audit.outcome == 'failure'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');

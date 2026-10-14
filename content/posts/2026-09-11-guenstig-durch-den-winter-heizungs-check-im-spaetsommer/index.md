@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg"
   alt: "Günstig durch den Winter: Heizungs-Check im Spätsommer"

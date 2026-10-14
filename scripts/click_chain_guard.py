@@ -159,7 +159,17 @@ def check_gateway(root, key):
 KLICK_BEACON = "stats.franksfinanzcheck.de/e"
 
 
-def check_klick_beacon(root):
+def klickmessung_aktiv() -> bool:
+    """Schalter data/klickmessung.yaml (Audit 14.10.2026, M-13)."""
+    try:
+        schalter = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                     "data", "klickmessung.yaml"), encoding="utf-8").read()
+    except OSError:
+        return False
+    return re.search(r"(?m)^aktiv:\s*true\s*$", schalter) is not None
+
+
+def check_klick_beacon(root, aktiv=None):
     """Prüft am Build, dass jede /go/-Übergabeseite den Klick-Beacon trägt.
 
     Ohne Beacon wird kein Klick gezählt. Das ist eine Messlücke, kein Fehler
@@ -172,6 +182,18 @@ def check_klick_beacon(root):
     seiten = [p for p in seiten if os.path.isfile(p)]
     if not seiten:
         return "keine /go/-Übergabeseiten im Build"
+    # Audit 14.10.2026 (M-13): Messung nur, wenn data/klickmessung.yaml sie
+    # einschaltet. Ist sie aus, darf KEINE Seite einen Beacon tragen –
+    # sonst liefe eine Übermittlung, die die Datenschutzerklärung als
+    # „nicht in Betrieb“ ausweist.
+    if aktiv is None:
+        aktiv = klickmessung_aktiv()
+    if not aktiv:
+        mit = [p for p in seiten if KLICK_BEACON in read(p)]
+        if mit:
+            return (f"Klickmessung ist laut data/klickmessung.yaml AUS, aber {len(mit)} "
+                    f"/go/-Seite(n) senden einen Beacon ({KLICK_BEACON}) – Generator neu laufen lassen")
+        return ""
     ohne = [p for p in seiten if KLICK_BEACON not in read(p)]
     if ohne:
         return (f"{len(ohne)} von {len(seiten)} /go/-Seiten ohne Klick-Beacon "
@@ -369,17 +391,21 @@ def _selftest():
         # Klick-Beacon auf /go/-Seiten (eigenes Verzeichnis, damit andere Fixtures nicht stören)
         import tempfile as _tf
         with _tf.TemporaryDirectory() as bt:
-            if not check_klick_beacon(bt):
+            if not check_klick_beacon(bt, aktiv=True):
                 failures.append("fehlende Beacon-Lücke bleibt unentdeckt (kein /go/)")
             os.makedirs(os.path.join(bt, "go", "strom"), exist_ok=True)
             with open(os.path.join(bt, "go", "strom", "index.html"), "w", encoding="utf-8") as f:
                 f.write("<html><body>ohne Zähler</body></html>")
-            if not check_klick_beacon(bt):
+            if not check_klick_beacon(bt, aktiv=True):
                 failures.append("/go/-Seite ohne Beacon wird nicht als Lücke gemeldet")
+            if check_klick_beacon(bt, aktiv=False):
+                failures.append("Messung AUS: Seite ohne Beacon fälschlich gemeldet")
             with open(os.path.join(bt, "go", "strom", "index.html"), "w", encoding="utf-8") as f:
                 f.write('<script>navigator.sendBeacon("https://stats.franksfinanzcheck.de/e", b)</script>')
-            if check_klick_beacon(bt):
+            if check_klick_beacon(bt, aktiv=True):
                 failures.append("Seite mit Beacon wird als Lücke gemeldet")
+            if not check_klick_beacon(bt, aktiv=False):
+                failures.append("Messung AUS: Beacon trotzdem auf der Seite bleibt unentdeckt")
         # Startseite wieder anlegen (walk_site braucht sie)
         with open(os.path.join(td, "index.html"), "w", encoding="utf-8") as f:
             f.write(good)

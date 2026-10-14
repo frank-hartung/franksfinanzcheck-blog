@@ -39,20 +39,20 @@ concurrency:
 
 jobs:
   nachweis:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
       # Produktions-Latte, nicht Ticket-Latte: Das Zertifikat dieses Laufs
       # soll mit dem echten content-reserve.yml-Zertifikat vergleichbar sein.
       RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
-      - run: pip install -q pyyaml feedparser cryptography pillow pillow-avif-plugin fonttools brotli
+      - run: pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
       # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
       - uses: ./.github/actions/install-hugo
         with:

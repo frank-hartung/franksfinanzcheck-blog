@@ -25,13 +25,16 @@
     },
     {
       "parameters": {
-        "command": "python3 /workspace/blog/scripts/whisper_engine.py --verify-audio \"{{ $json.audioPath }}\" --article \"{{ $json.articlePath }}\" --json"
+        "command": "echo 'deaktiviert – Sicherheitsaudit 14.10.2026 (H-06)'; exit 1"
       },
       "id": "node-exec-qa",
       "name": "Whisper Audio QA (Lokal)",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [620, 240]
+      "position": [620, 240],
+      "disabled": true,
+      "notes": "DEAKTIVIERT (Sicherheitsaudit 14.10.2026, H-06): Shell-Befehl mit eingebetteten Webhook-/Ereignisdaten = Remote Code Execution auf dem n8n-Rechner, der das Repo eingehängt hat. Ersatz: GitHub repository_dispatch an schaltwerk.yml – Daten als JSON, nie in einer Shell-Zeile. Nicht wieder aktivieren.",
+      "notesInFlow": true
     },
     {
       "parameters": {
@@ -100,7 +103,7 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   }

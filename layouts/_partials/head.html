@@ -1,5 +1,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{{- /* SICHERHEIT (Sicherheitsaudit 14.10.2026, M-05): GitHub Pages erlaubt
+     keine eigenen HTTP-Header. Bis die Header über Cloudflare kommen (B.5),
+     setzt die Seite das, was per <meta> wirksam ist:
+       · base-uri 'self'  – ein eingeschleustes <base> kann keine relativen
+                            Links/Skripte auf fremde Server umbiegen
+       · object-src 'none' – keine Plugins (Flash/PDF-Objekte)
+       · form-action      – Formulare senden nur an die eigene Seite und an
+                            den Newsletter-Worker (Phishing-Formulare in
+                            Inhalten laufen ins Leere)
+     Die Referrer-Policy bleibt bewusst strict-origin-when-cross-origin:
+     no-referrer würde das Newsletter-Formular mit „Origin: null“ senden,
+     das der Worker (CSRF-Schutz) ablehnt. frame-ancestors/HSTS wirken nur
+     als HTTP-Header – siehe Runbook. */ -}}
+<meta http-equiv="Content-Security-Policy" content="base-uri 'self'; object-src 'none'; form-action 'self' https://abos.franksfinanzcheck.de">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 {{- /* Indexierung und Canonical nutzen Hugos echte Pager-URL, nicht .RelPermalink. */ -}}
 {{- $seo := partial "seo_context.html" . -}}
 {{- $prod     := hugo.IsProduction | or (eq site.Params.env "production") -}}

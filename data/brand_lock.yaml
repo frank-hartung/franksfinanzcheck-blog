@@ -6,7 +6,7 @@
 - key: params.description
   expected: "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung."
 - key: params.disclaimer
-  expected: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
+  expected: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen solchen Link bei einem unserer Partner (z. B. CHECK24 oder TARIFCHECK24) etwas buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 - key: asset:static/images/brand/logo.svg
   expected: "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
 - key: asset:static/images/brand/logo-light.svg

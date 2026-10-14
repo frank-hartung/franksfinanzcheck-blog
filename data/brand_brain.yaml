@@ -124,7 +124,7 @@ default_cta: "Jetzt bei CHECK24 vergleichen"
 # (brand_brain.py --selftest erzwingt das; bei Drift: --fix oder --set-current).
 canonical:
   description: "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung."
-  disclaimer: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
+  disclaimer: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen solchen Link bei einem unserer Partner (z. B. CHECK24 oder TARIFCHECK24) etwas buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
 frameworks:
   fixkosten_kompass:

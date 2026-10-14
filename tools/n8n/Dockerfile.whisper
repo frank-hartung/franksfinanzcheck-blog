@@ -16,13 +16,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
+# Sicherheitsaudit 14.10.2026 (N-11): aktuelle, gepatchte Web-Schicht
+# (python-multipart 0.0.9 und Starlette < 0.40 hatten bekannte DoS-Lücken
+# im Formular-Parser). Dependabot (docker/pip) pflegt die Versionen weiter.
 RUN pip install --no-cache-dir \
-    fastapi==0.115.0 \
-    uvicorn==0.30.6 \
-    python-multipart==0.0.9 \
+    fastapi==0.143.1 \
+    uvicorn==0.54.0 \
+    python-multipart==0.0.32 \
     faster-whisper==1.0.3
 
 COPY whisper_server.py /app/whisper_server.py
+
+# Nicht als root laufen; Modell-Cache im Home des Dienstnutzers.
+RUN useradd --create-home --uid 10001 whisper \
+    && mkdir -p /home/whisper/.cache/huggingface \
+    && chown -R whisper:whisper /home/whisper /app
+USER whisper
+ENV HOST=0.0.0.0
 
 EXPOSE 8765
 

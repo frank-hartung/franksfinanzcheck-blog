@@ -70,21 +70,21 @@ concurrency:
 
 jobs:
   autopilot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml pillow \
-            || python3 -m pip install -q --break-system-packages pyyaml pillow
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       # Fail-closed: Eine blinde Wache postet nichts. Der Selbsttest
       # prüft Kanäle, Zeichenlimits, Gate-Fälle, Duplikat-Schutz,
@@ -97,8 +97,10 @@ jobs:
 
       - name: Plan erneuern / Status schreiben
         if: ${{ github.event.inputs.modus == 'plan' || github.event.inputs.modus == 'status' }}
+        env:
+          EINGABE_MODUS: ${{ github.event.inputs.modus }}
         run: |
-          if [ "${{ github.event.inputs.modus }}" = "plan" ]; then
+          if [ "${EINGABE_MODUS}" = "plan" ]; then
             python3 scripts/social_studio.py --plan
           else
             python3 scripts/social_studio.py --status
@@ -150,13 +152,17 @@ jobs:
           SOCIAL_COPY_MODE: ${{ vars.SOCIAL_COPY_MODE }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EINGABE_MODUS: ${{ github.event.inputs.modus }}
+          EINGABE_KANAL: ${{ github.event.inputs.kanal }}
+          EINGABE_LIMIT: ${{ github.event.inputs.limit }}
+          EINGABE_FORCE: ${{ github.event.inputs.force }}
         run: |
           ARGS="--run"
-          [ "${{ github.event.inputs.modus }}" = "dry-run" ] && ARGS="$ARGS --dry-run"
-          [ "${{ github.event.inputs.modus }}" = "recover" ] && ARGS="$ARGS --recover"
-          [ -n "${{ github.event.inputs.kanal }}" ] && ARGS="$ARGS --channel ${{ github.event.inputs.kanal }}"
-          [ -n "${{ github.event.inputs.limit }}" ] && ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"
-          [ "${{ github.event.inputs.force }}" = "true" ] && ARGS="$ARGS --force"
+          [ "${EINGABE_MODUS}" = "dry-run" ] && ARGS="$ARGS --dry-run"
+          [ "${EINGABE_MODUS}" = "recover" ] && ARGS="$ARGS --recover"
+          [ -n "${EINGABE_KANAL}" ] && ARGS="$ARGS --channel ${EINGABE_KANAL}"
+          [ -n "${EINGABE_LIMIT}" ] && ARGS="$ARGS --limit ${EINGABE_LIMIT}"
+          [ "${EINGABE_FORCE}" = "true" ] && ARGS="$ARGS --force"
           echo "Aufruf: python3 scripts/social_studio.py $ARGS"
           python3 scripts/social_studio.py $ARGS
 

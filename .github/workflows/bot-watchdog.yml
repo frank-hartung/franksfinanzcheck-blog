@@ -115,11 +115,11 @@ env:
 
 jobs:
   watchdog:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -153,13 +153,13 @@ jobs:
           echo "Takt: ${modus} · Cron: '${CRON:-manuell}' · Wunsch: '${WUNSCH:-auto}'"
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Abhängigkeiten
         run: |
-          pip install --quiet pyyaml
+          pip install --quiet --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           # gh CLI ist auf ubuntu-latest vorinstalliert
 
       - name: Selftest (Wache muss sehen können)
@@ -173,10 +173,11 @@ jobs:
         id: checks
         env:
           GH_TOKEN: ${{ github.token }}
+          SCHRITT_TAKT_MODUS: ${{ steps.takt.outputs.modus }}
         run: |
           set -euo pipefail
-          echo "=== Bot-Watchdog – Takt: ${{ steps.takt.outputs.modus }} ==="
-          if [ "${{ steps.takt.outputs.modus }}" = "triage" ]; then
+          echo "=== Bot-Watchdog – Takt: ${SCHRITT_TAKT_MODUS} ==="
+          if [ "${SCHRITT_TAKT_MODUS}" = "triage" ]; then
             # AUSFALL-TAKT (#676): nur die Ausfall-Klasse. Nicht gemessene
             # Checks stehen als ÜBERSPRUNGEN in der Env, nie als OK (C2).
             python3 scripts/bot_watchdog.py --emit-env --triage
@@ -230,7 +231,7 @@ jobs:
         if: ${{ steps.takt.outputs.modus == 'voll' && contains(env.CHECK8, 'WARN') }}
         continue-on-error: true
         run: |
-          python3 -m pip install -q pyyaml 2>/dev/null || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
           # VOLLSTÄNDIGE Messkette – ohne hunspell wertet quality_score
           # spelling als „unbekannt" (0.5) und würde gesunde Kandidaten
           # abwerten. reserve_recert.py bricht dann fail-closed ab (Exit 3);
@@ -260,7 +261,7 @@ jobs:
       - name: Abhängigkeiten für den Pinterest-Report
         if: ${{ steps.takt.outputs.modus == 'voll' && (contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN')) }}
         continue-on-error: true
-        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       # Vorher: `hugo --minify || true`. Der Bau DARF hier scheitern (der
       # Watchdog soll trotzdem messen), aber er darf es nicht lautlos tun –
@@ -322,8 +323,9 @@ jobs:
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
+          SCHRITT_TAKT_MODUS: ${{ steps.takt.outputs.modus }}
         run: |
-          if [ "${{ steps.takt.outputs.modus }}" = "triage" ]; then
+          if [ "${SCHRITT_TAKT_MODUS}" = "triage" ]; then
             python3 scripts/bot_watchdog.py --emit-env --triage
           else
             python3 scripts/bot_watchdog.py --emit-env
@@ -379,7 +381,7 @@ jobs:
       - name: Issue bei fertigem GitHub-Zertifikat (Hinweis Full strict)
         if: ${{ env.CHECK4 == 'OK' }}
         continue-on-error: true
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             try {
@@ -433,9 +435,10 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          SCHRITT_TAKT_MODUS: ${{ steps.takt.outputs.modus }}
         run: |
           set +e
-          if [ "${{ steps.takt.outputs.modus }}" = "triage" ]; then
+          if [ "${SCHRITT_TAKT_MODUS}" = "triage" ]; then
             python3 scripts/bot_watchdog.py --route --triage
           else
             python3 scripts/bot_watchdog.py --route

@@ -12,7 +12,7 @@ keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten spare
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Standby-Kosten senken: Diese Gerätegruppen lohnen zuerst"
 pin_description: "*Werbung | Standby Kosten: Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige… Mehr Spartipps auf FranksFinanzcheck! #standbykosten #stromfresserentlarven #geraeteabschaltensparen"
-ai_generated: false
+ai_generated: true
 inspiration: "Standby-Falle & Co.: Die 5 schlimmsten Stromfresser im Check"
 cover:
   image: "images/covers/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser.jpg"

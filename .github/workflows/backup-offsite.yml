@@ -12,10 +12,24 @@
 #    auf ENTWURF gestuft (privat, Assets erhalten) – Wache:
 #    `scripts/brand_surface_guard.py` (fail-closed, mit Selbsttest).
 #
-#  WO DAS BACKUP JETZT HIN GEHT (zwei Wege, nie öffentlich):
-#    1. IMMER  – Workflow-Artefakt dieses Laufs. Artefakte sind nur
-#                für Zugriffsberechtigte sichtbar, nie für das Web.
-#                Das ist das Netz ohne Konfiguration.
+#  KORREKTUR SICHERHEITSAUDIT 14.10.2026 (M-11):
+#    · Artefakte ÖFFENTLICHER Repos kann jeder angemeldete GitHub-Nutzer
+#      herunterladen – sie sind NICHT privat. Und sie liegen im selben
+#      Konto: Bei Kontoverlust oder Repo-Löschung sind sie mit weg, also
+#      kein Offsite-Schutz. Das Artefakt heißt deshalb jetzt ehrlich
+#      „Kurzzeit-Kopie“, enthält nur unverschlüsselten öffentlichen Code
+#      und lebt 7 statt 90 Tage.
+#    · Die UNERSETZLICHEN Daten (Abonnenten, Einwilligungsnachweise nach
+#      Art. 7 Abs. 1 DSGVO, Zähler) liegen in Cloudflare KV/D1. Sie sichert
+#      der Job `kv-backup` – verschlüsselt und NUR in das private
+#      Backup-Repo, NIE als Artefakt. Fehlen Ziel, Passphrase oder
+#      Cloudflare-Zugang, wird der Job ROT (kein Schein-Grün).
+#
+#  WO DAS BACKUP HIN GEHT:
+#    1. Kurzzeit-Kopie – Artefakt dieses Laufs, nur wenn kein dauerhaftes
+#                Ziel konfiguriert ist und nur unverschlüsselter
+#                öffentlicher Code (sonst würde die Passphrase offline
+#                angreifbar). Kein Offsite-Schutz.
 #    2. DAUERHAFT – privates Backup-Repository, wenn konfiguriert:
 #                Repository-Variable `BACKUP_REPO` (z. B.
 #                `frank-hartung/franksfinanzcheck-backup`) plus Secret
@@ -58,7 +72,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: offsite-backup
@@ -66,7 +80,9 @@ concurrency:
 
 jobs:
   backup:
-    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
       SRC_BRANCH: main
@@ -79,7 +95,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - name: Repository auschecken (komplette History)
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -157,14 +173,20 @@ jobs:
           } >> "$GITHUB_ENV"
           echo "Backup-Dateien: $ARTEFAKTE · Soll: $ERWARTET"
 
-      - name: Backup als Workflow-Artefakt ablegen (immer, privat)
-        uses: actions/upload-artifact@v7
+      # Audit M-11: Artefakte öffentlicher Repos sind für jeden angemeldeten
+      # GitHub-Nutzer abrufbar und liegen im selben Konto. Deshalb nur als
+      # Kurzzeit-Kopie, nur ohne dauerhaftes Ziel und nur unverschlüsselt
+      # (öffentlicher Code) – verschlüsselte Dateien würden die Passphrase
+      # offline angreifbar machen.
+      - name: Kurzzeit-Kopie als Artefakt (öffentlicher Code, gleiches Konto – kein Offsite-Schutz)
+        if: env.ZIEL_REPO == '' && env.VERSCHLUESSELT != '1'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: backup-${{ github.run_number }}
+          name: repo-kurzzeitkopie-${{ github.run_number }}
           path: |
-            backup.bundle*
-            worktree.zip*
-          retention-days: 90
+            backup.bundle
+            worktree.zip
+          retention-days: 7
           if-no-files-found: error
 
       - name: "Dauerhaftes Ziel – privates Backup-Repository (nur wenn konfiguriert)"
@@ -174,7 +196,7 @@ jobs:
 
           if [ -z "${ZIEL_REPO:-}" ]; then
             echo "ZIEL=artefakt" >> "$GITHUB_OUTPUT"
-            echo "::warning::Kein dauerhaftes Offsite-Ziel gesetzt – das Backup lebt 90 Tage als Artefakt. Empfehlung: Repository-Variable BACKUP_REPO (privates Repo) + Secret BACKUP_REPO_TOKEN setzen, siehe Kopf dieser Datei."
+            echo "::warning::Kein dauerhaftes Offsite-Ziel gesetzt – es gibt nur eine 7-Tage-Kurzzeitkopie im selben Konto (kein Offsite-Schutz). Repository-Variable BACKUP_REPO (privates Repo) + Secret BACKUP_REPO_TOKEN setzen, siehe Kopf dieser Datei."
             exit 0
           fi
 
@@ -297,8 +319,109 @@ jobs:
             if [ -n "${ZIEL_REPO:-}" ]; then
               echo "- Dauerhaftes Ziel: \`$ZIEL_REPO\` (privat, Entwurf, nachgeprüft)"
             else
-              echo "- Dauerhaftes Ziel: **nicht konfiguriert** – Backup liegt 90 Tage als Artefakt (privat, aber nicht dauerhaft)."
+              echo "- Dauerhaftes Ziel: **nicht konfiguriert** – nur 7-Tage-Kurzzeitkopie als Artefakt (öffentlich abrufbar für angemeldete Nutzer, gleiches Konto, KEIN Offsite-Schutz)."
               echo "- Empfehlung: Variable \`BACKUP_REPO\` (privates Repo) + Secret \`BACKUP_REPO_TOKEN\` + Secret \`BACKUP_PASSPHRASE\`."
             fi
             echo "- Öffentliche Spur: keine (Regelprüfung \`brand_surface_guard.py\`)"
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # ============================================================
+  #  KV-/D1-BACKUP (Sicherheitsaudit 14.10.2026, M-11)
+  #  ------------------------------------------------------------
+  #  Sichert Abonnenten, Tokens und Einwilligungsnachweise aus Workers KV
+  #  (optional D1) – verschlüsselt (AES-256/PBKDF2) und ausschließlich in
+  #  das PRIVATE Backup-Repo (Entwurf-Release). NIE als Artefakt.
+  #  Fail-closed: Fehlt eine Voraussetzung, ist der Job rot.
+  #
+  #  Einrichtung (einmalig, siehe Runbook):
+  #    Secret   CF_KV_BACKUP_TOKEN   Cloudflare-API-Token NUR mit
+  #                                  „Workers KV Storage: Read“ (+ „D1: Read“)
+  #    Variable KV_NAMESPACE_ID_ABO  ID des KV-Namespace ABO
+  #    Variable D1_DATABASE_ID       optional (Klick-Zähler)
+  #    Secret   CLOUDFLARE_ACCOUNT_ID (vorhanden)
+  #    Variable BACKUP_REPO + Secret BACKUP_REPO_TOKEN + Secret BACKUP_PASSPHRASE
+  #  Empfehlung: Secrets in das Environment „backup“ verschieben.
+  # ============================================================
+  kv-backup:
+    name: KV-/D1-Backup (Abonnenten + Einwilligungsnachweise)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: backup
+    permissions:
+      contents: read
+    env:
+      ZIEL_REPO: ${{ vars.BACKUP_REPO }}
+      PASSWORT: ${{ secrets.BACKUP_PASSPHRASE }}
+      ZIEL_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+      CF_API_TOKEN: ${{ secrets.CF_KV_BACKUP_TOKEN }}
+      CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      KV_NAMESPACE_ID: ${{ vars.KV_NAMESPACE_ID_ABO }}
+      D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Selbsttest (Export, Probe, fail-closed)
+        run: python3 scripts/kv_backup.py --selftest
+
+      - name: Voraussetzungen prüfen (fail-closed – kein Schein-Grün)
+        run: |
+          set -euo pipefail
+          FEHLT=""
+          [ -n "${ZIEL_REPO:-}" ]       || FEHLT="$FEHLT Variable:BACKUP_REPO"
+          [ -n "${ZIEL_TOKEN:-}" ]      || FEHLT="$FEHLT Secret:BACKUP_REPO_TOKEN"
+          [ -n "${PASSWORT:-}" ]        || FEHLT="$FEHLT Secret:BACKUP_PASSPHRASE"
+          [ -n "${CF_API_TOKEN:-}" ]    || FEHLT="$FEHLT Secret:CF_KV_BACKUP_TOKEN"
+          [ -n "${CF_ACCOUNT_ID:-}" ]   || FEHLT="$FEHLT Secret:CLOUDFLARE_ACCOUNT_ID"
+          [ -n "${KV_NAMESPACE_ID:-}" ] || FEHLT="$FEHLT Variable:KV_NAMESPACE_ID_ABO"
+          if [ -n "$FEHLT" ]; then
+            echo "::error title=KV-Backup nicht eingerichtet::Abonnenten und Einwilligungsnachweise sind NICHT gesichert. Es fehlt:${FEHLT}. Siehe Kopf von backup-offsite.yml und das Umsetzungs-Runbook."
+            exit 1
+          fi
+          if [ "${#PASSWORT}" -lt 20 ]; then
+            echo "::error::BACKUP_PASSPHRASE ist kürzer als 20 Zeichen – zu schwach für ein Offline-Ziel."
+            exit 1
+          fi
+          SICHTBAR=$(curl -sS -H "Authorization: Bearer $ZIEL_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$ZIEL_REPO" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('private') if 'private' in d else 'UNBEKANNT')")
+          if [ "$SICHTBAR" != "True" ]; then
+            echo "::error::Ziel $ZIEL_REPO ist nicht nachweislich privat (Antwort: $SICHTBAR) – Abbruch."
+            exit 1
+          fi
+          echo "✅ Ziel privat, Passphrase und Cloudflare-Zugang vorhanden."
+
+      - name: Exportieren, verschlüsseln, Rückweg prüfen
+        run: |
+          set -euo pipefail
+          umask 077
+          python3 scripts/kv_backup.py --out kv-export.json
+          python3 scripts/kv_backup.py --pruefen kv-export.json
+          openssl enc -aes-256-cbc -pbkdf2 -iter 600000 -salt \
+            -in kv-export.json -out kv-export.json.enc -pass env:PASSWORT
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 600000 \
+            -in kv-export.json.enc -out kv-export.probe -pass env:PASSWORT
+          cmp -s kv-export.json kv-export.probe || { echo "::error::Verschlüsselung nicht umkehrbar – Abbruch."; exit 1; }
+          shred -u kv-export.json kv-export.probe 2>/dev/null || rm -f kv-export.json kv-export.probe
+          echo "🔐 kv-export.json.enc ($(stat -c%s kv-export.json.enc) Bytes) – Entschlüsseln: openssl enc -d -aes-256-cbc -pbkdf2 -iter 600000 -in kv-export.json.enc -out kv-export.json"
+
+      - name: Im privaten Backup-Repo ablegen (Entwurf) und nachprüfen
+        env:
+          GH_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="kv-backup-$(date -u +%Y%m%d-%H%M)"
+          gh release create "$TAG" kv-export.json.enc --repo "$ZIEL_REPO" --draft \
+            --title "$TAG" --notes "KV/D1-Export (verschlüsselt, AES-256/PBKDF2 600k). Lauf ${GITHUB_RUN_ID}."
+          GROESSE=$(gh release view "$TAG" --repo "$ZIEL_REPO" --json assets --jq '.assets[] | select(.name=="kv-export.json.enc") | .size')
+          SOLL=$(stat -c%s kv-export.json.enc)
+          if [ "$GROESSE" != "$SOLL" ]; then
+            echo "::error::Upload unvollständig ($GROESSE statt $SOLL Bytes)."
+            exit 1
+          fi
+          echo "✅ $TAG abgelegt und nachgeprüft ($SOLL Bytes)."
+          # Aufbewahrung: die letzten 35 KV-Backups (5 Wochen täglich).
+          gh api "repos/$ZIEL_REPO/releases?per_page=100" --jq '[.[] | select(.tag_name | startswith("kv-backup-"))] | sort_by(.created_at) | reverse | .[35:] | .[].tag_name' \
+            | while read -r alt; do gh release delete "$alt" --repo "$ZIEL_REPO" --yes --cleanup-tag || true; done
+

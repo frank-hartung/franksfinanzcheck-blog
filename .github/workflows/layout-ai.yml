@@ -77,7 +77,7 @@ concurrency:
 
 jobs:
   layout-audit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       # Job-Ebene: Composite-Actions sehen Job-Variablen, Schritt-`env:` nicht.
@@ -86,7 +86,7 @@ jobs:
       ISSUE_TITLE: "⚠ Layout-Automatisierung: Probleme gefunden"
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
@@ -122,7 +122,7 @@ jobs:
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         continue-on-error: true
         run: |
-          pip install -q pillow pillow-avif-plugin
+          pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           python3 scripts/check_covers.py --fix || true
           git config user.name "Layout-Bot"
           git config user.email "layout-bot@users.noreply.github.com"
@@ -147,9 +147,10 @@ jobs:
           sudo apt-get install -y -qq libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 \
             libxdamage1 libxkbcommon0 libasound2 libatspi2.0-0 libxcomposite1 libxrandr2 \
             libgbm1 libdrm2 libcups2 libpango-1.0-0 libcairo2 >/dev/null 2>&1 || true
-          npm install -g puppeteer-core >/dev/null 2>&1 || true
+          # Lieferkette (Audit 14.10.2026, M-09): Versionen fest, keine Install-Skripte.
+          npm install -g --ignore-scripts puppeteer-core@25.14.0 >/dev/null 2>&1 || true
           export NODE_PATH=$(npm root -g)
-          CHROME_DIR=$(npx -y @puppeteer/browsers install chrome-headless-shell@latest 2>/dev/null | grep -oE '/[^ ]+chrome-headless-shell$' | tail -1) || true
+          CHROME_DIR=$(npx -y @puppeteer/browsers@3.2.5 install chrome-headless-shell@stable 2>/dev/null | grep -oE '/[^ ]+chrome-headless-shell$' | tail -1) || true
           echo "CHROME: $CHROME_DIR"
           if [ -z "$CHROME_DIR" ]; then
             echo "::warning::Chrome konnte nicht installiert werden – Browser-Audit übersprungen (das statische DOM-Budget hat trotzdem JEDE Seite vermessen)."
@@ -202,7 +203,7 @@ jobs:
       # ============ ISSUE: AKTUALISIEREN / SCHLIESSEN ============
       - name: Issue aktualisieren oder schließen (Dedupe über Marker)
         if: ${{ always() && github.event_name != 'pull_request' }}
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         continue-on-error: true
         with:
           script: |

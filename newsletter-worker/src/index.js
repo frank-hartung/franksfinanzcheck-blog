@@ -11,12 +11,14 @@
  *   POST /abmeldung      Abmeldung per Token (Body ODER Query – RFC 8058
  *                        One-Click-POST traegt den Token in der URL) ODER
  *                        per E-Mail-Feld (Formular ohne Token, immer 200)
- *   GET  /abmeldung      One-Klick mit Token; ohne Token das Formular
+ *   GET  /abmeldung      mit Token: Bestaetigungsseite (POST-Knopf) – Link-
+ *                        Scanner von Mailprogrammen melden so niemanden ab;
+ *                        ohne Token das Formular
  *   POST /praferenzen    Themenwahl pro Abo (Token + themen[])
  *   GET  /status         Token -> {status, themen} (ohne Adresse!)
- *   GET  /healthz        Lebendigkeits-Pruefung fuer die Wache (+ `takt`:
- *                        letzter Dispatch je Cron-Takt, ohne Adressen)
- *   GET  /export/…       NUR mit Secret (X-FF-Key / ?sluessel=):
+ *   GET  /healthz        Lebendigkeits-Pruefung; Details (`takt`) nur mit
+ *                        X-FF-Key (oeffentlich nur ok/ts)
+ *   GET  /export/…       NUR mit Secret im Header X-FF-Key (nie per URL):
  *                        Abonnenten-Liste, Pending-Liste, Eintrag nach
  *                        Token, Eintrag nach E-Mail (/export/kontakt),
  *                        Versand-Versuche melden (Catch-up).
@@ -59,6 +61,11 @@ const MAX_ANMELDUNGEN_PRO_IP = 5;
 // IP-Hash + Slug, 6 h genau EINE Stimme (Hash nur kurzlebig, keine Klartext-IP).
 const TTL_FEEDBACK_RATE_SEK = 6 * 60 * 60;
 const FEEDBACK_SLUG_RE = /^[a-z0-9][a-z0-9-]{0,119}$/;
+// KV-Schreibbudget (Audit 14.10.2026, H-03): Der Free-Plan erlaubt 1.000
+// KV-Schreibzugriffe pro Tag und KONTO. Feedback darf davon hoechstens
+// FEEDBACK_MAX_PRO_TAG verbrauchen – Anmeldung und Abmeldung behalten immer
+// den Rest. Eine Stimme = genau EIN Schreibzugriff (Tagesschluessel).
+const FEEDBACK_MAX_PRO_TAG_DEFAULT = 200;
 const BESTAETIGUNG_TAGE_DEFAULT = 14;
 const MAX_VERSEND_VERSUCHE = 3;
 const TOKEN_LAENGE = 24; // 192 Bit, base64url
@@ -81,6 +88,19 @@ const HTML_KOPF = '<!doctype html><html lang="de"><head><meta charset="utf-8">' 
   '.fehler{color:#8C2F39}' +
   '</style></head><body><div class="k">';
 const HTML_FUSS = '</div></body></html>';
+// Sicherheitskopf fuer jede Antwort (Audit 14.10.2026, N-03): keine Skripte,
+// keine Einbettung in fremde Seiten, kein Referrer nach aussen (Token-URLs!).
+// `same-origin` statt `no-referrer`: Bei `no-referrer` schickt der Browser
+// fuer POST `Origin: null` – die eigenen Formulare scheiterten dann am
+// CSRF-Schutz. Nach aussen geht so weiterhin kein Referrer.
+const SICHERHEITS_KOPF = {
+  'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; form-action 'self'; frame-ancestors 'none'; base-uri 'none'",
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'same-origin',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+};
 
 // ---------------------------------------------------------------- Helfer
 /** CORS: nur die Site-Origin(s) dürfen mit dem Worker sprechen. */
@@ -92,7 +112,34 @@ function cors(umgebung) {
     'Access-Control-Allow-Headers': 'Content-Type, Accept, X-FF-Key',
     'Access-Control-Max-Age': '86400',
     'Cache-Control': 'no-store',
+    Vary: 'Origin',
+    ...SICHERHEITS_KOPF,
   };
+}
+
+/** Erlaubte Urspruenge fuer POST (CSRF-Schutz, Audit M-02): die Site-Origins
+ *  aus SITE_ORIGIN plus der Worker selbst (seine eigenen Formulare). */
+function herkunft_erlaubt(request, env, url) {
+  const herkunft = String(request.headers.get('origin') || '').trim();
+  // Fetch-Metadaten kann keine Webseite faelschen (verbotener Header).
+  const seite = String(request.headers.get('sec-fetch-site') || '').trim().toLowerCase();
+  // `Origin: null` (sandboxed iframe, data:-URL, Referrer-Policy no-referrer):
+  // nur akzeptieren, wenn der Browser selbst same-origin bescheinigt.
+  if (herkunft === 'null') return seite === 'same-origin';
+  // Ohne Origin: kein Browser-Kontext (Mailprogramm-One-Click nach RFC 8058,
+  // Skripte). CSRF setzt einen Browser voraus – der sendet bei POST immer
+  // Origin; bescheinigt er trotzdem cross-site, wird abgelehnt.
+  if (!herkunft) return seite !== 'cross-site';
+  const erlaubt = String((env && env.SITE_ORIGIN) || STAND_ORIGIN).split(',')
+    .map((o) => o.trim().replace(/\/$/, '')).filter(Boolean);
+  erlaubt.push(url.origin);
+  return erlaubt.includes(herkunft.replace(/\/$/, ''));
+}
+
+function html_antwort(seite, kod, env) {
+  return new Response(seite, {
+    status: kod, headers: { 'Content-Type': 'text/html; charset=utf-8', ...cors(env) },
+  });
 }
 
 function json(ereignis, kod = 200, env = null, extra = {}) {
@@ -199,6 +246,55 @@ async function schluessel_pruefen(env, angebot) {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+/**
+ * Rate-Limit je Schluessel. Bevorzugt das Cloudflare-Rate-Limiting-Binding
+ * `RATE_LIMITER` (wrangler.toml [[ratelimits]]) – es kostet KEINE
+ * KV-Schreibzugriffe (Audit H-03). Ohne Binding: der bisherige KV-Zaehler
+ * (15-Min-Fenster) als Rueckfall.
+ */
+async function rate_erlaubt(env, ip, bereich = 'anmeldung') {
+  const roh = `${bereich}|${ip || 'unbekannt'}`;
+  if (env && env.RATE_LIMITER && typeof env.RATE_LIMITER.limit === 'function') {
+    try {
+      const { success } = await env.RATE_LIMITER.limit({ key: await sha256_kurz(roh) });
+      return success !== false;
+    } catch (e) { /* Binding gestoert: KV-Rueckfall unten */ }
+  }
+  const ip_key = `rat:${await sha256_kurz(ip || 'unbekannt')}`;
+  const rate = (await env.ABO.get(ip_key, 'json')) || { z: 0 };
+  if (rate.z >= MAX_ANMELDUNGEN_PRO_IP) return false;
+  await env.ABO.put(ip_key, JSON.stringify({ z: rate.z + 1, ts: Date.now() }), { expirationTtl: TTL_RATE_SEK });
+  return true;
+}
+
+/** Cloudflare Turnstile (optional, Audit M-02): aktiv, sobald das Secret
+ *  TURNSTILE_SECRET gesetzt ist. Ohne Secret: keine Pruefung (Rueckwaerts-
+ *  kompatibel, die Site rendert das Widget nur mit Site-Key). */
+async function turnstile_ok(env, antwort_token, ip) {
+  const geheim = String((env && env.TURNSTILE_SECRET) || '').trim();
+  if (!geheim) return true;
+  const token = String(antwort_token || '').trim();
+  if (!token || token.length > 2048) return false;
+  try {
+    const form = new URLSearchParams({ secret: geheim, response: token });
+    if (ip) form.set('remoteip', ip);
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST', body: form,
+    });
+    const d = await r.json();
+    return !!(d && d.success === true);
+  } catch (e) {
+    return false;
+  }
+}
+
+/** `quelle` (Herkunftsseite) nur als eigene Site-URL, gekuerzt (Audit N-04). */
+function quelle_pruefen(roh, env) {
+  const basis = String((env && env.SITE_ORIGIN) || STAND_ORIGIN).split(',')[0].trim();
+  const q = String(roh || '').trim().slice(0, 300);
+  return q.startsWith(basis + '/') || q === basis ? q : basis;
+}
+
 function email_norm(adresse) {
   return String(adresse || '').trim().toLowerCase();
 }
@@ -251,13 +347,18 @@ async function abo_schreiben(kv, eintrag) {
   await kv.put(`token:${eintrag.token}`, eintrag.norm, optionen);
 }
 
-async function nachweis_schreiben(kv, eintrag) {
+async function nachweis_schreiben(kv, eintrag, kontext = null) {
+  // Einwilligungsnachweis (Art. 7 Abs. 1 DSGVO). IP und User-Agent stehen
+  // NUR hier (befristet), nicht im aktiven Abo-Datensatz (Audit N-04).
+  // Ohne `kontext` (Bestaetigung) bleiben die Anmeldedaten erhalten.
   const haetti = await sha256_kurz(`ff-nl|${eintrag.norm}|v1`);
+  const bisher = (await kv.get(`nachweis:${haetti}`, 'json')) || {};
+  const k = kontext || {};
   await kv.put(`nachweis:${haetti}`, JSON.stringify({
     email: eintrag.email,
-    ip: eintrag.ip || null,
-    user_agent: eintrag.user_agent || null,
-    seite: eintrag.seite || null,
+    ip: kontext ? (k.ip || null) : (bisher.ip || eintrag.ip || null),
+    user_agent: kontext ? (k.ua || null) : (bisher.user_agent || eintrag.user_agent || null),
+    seite: kontext ? (k.seite || null) : (bisher.seite || eintrag.seite || null),
     eingewilligt: eintrag.seit,
     bestaetigt: eintrag.bestaetigt || null,
     version: 1,
@@ -297,6 +398,29 @@ async function datenschutz_pflege(env, zeit = Date.now()) {
     if (eintrag.token) await env.ABO.delete(`token:${eintrag.token}`);
     geloescht += 1;
   }
+  // Altbestand (vor 14.10.2026) trug IP/UA im aktiven Abo – entfernen (N-04).
+  // Der Einwilligungsnachweis (nachweis:{hash}) behaelt sie befristet.
+  const PERSONENFELDER = ['ip', 'user_agent', 'ua'];
+  const bereinigen = (obj) => {
+    let geaendert = false;
+    if (!obj || typeof obj !== 'object') return false;
+    for (const feld of PERSONENFELDER) {
+      if (Object.prototype.hasOwnProperty.call(obj, feld)) { delete obj[feld]; geaendert = true; }
+    }
+    return geaendert;
+  };
+  // Hoechstens 50 Datensaetze (= 100 KV-Schreibzugriffe) je Lauf: ein grosser
+  // Altbestand verteilt sich auf mehrere Tage statt das Tagesbudget zu leeren.
+  let umgeschrieben = 0;
+  for (const key of await liste_mit_prefix(env.ABO, 'abo:')) {
+    if (umgeschrieben >= 50) break;
+    const eintrag = await env.ABO.get(key, 'json');
+    if (!eintrag) continue;
+    let geaendert = bereinigen(eintrag);
+    for (const unter of ['consents', 'nachweis']) geaendert = bereinigen(eintrag[unter]) || geaendert;
+    if (geaendert) { await abo_schreiben(env.ABO, eintrag); umgeschrieben += 1; }
+  }
+  await feedback_aufrollen(env, zeit);
   // Alte Token-Versionen und Waisen aus früheren Deploys beseitigen.
   for (const key of await liste_mit_prefix(env.ABO, 'token:')) {
     const norm = await env.ABO.get(key);
@@ -338,10 +462,13 @@ async function github_dispatch(env, workflow, inputs) {
   }
 }
 
-async function dispatch_bestuerung(env, token) {
-  // NUR der Token – keine Adresse im Event
+async function dispatch_bestuerung(env) {
+  // KEIN Token und keine Adresse im Event (Audit H-05): workflow_dispatch-
+  // Eingaben landen in oeffentlichen Logs. Der Nachgang holt offene
+  // Anmeldungen selbst ueber /export/pending (geschuetzt per X-FF-Key) und
+  // sendet frische Bestaetigungen sofort.
   return github_dispatch(env, env.GITHUB_WORKFLOW || 'newsletter-lifecycle.yml',
-    { aktion: 'bestaetigung', token });
+    { aktion: 'nachgang' });
 }
 
 // ---------------------------------------------------------------- Taktgeber
@@ -386,7 +513,7 @@ const TAKT = {
   },
   '17 * * * *': {
     name: 'nachgang', workflow: 'newsletter-lifecycle.yml',
-    inputs: { aktion: 'nachgang', token: '' },
+    inputs: { aktion: 'nachgang' },
   },
 };
 const TAKT_VERSUCHE = 3;
@@ -456,11 +583,9 @@ async function takt_ausfuehren(env, cron, geplant, schlafen = (ms) => new Promis
 }
 
 async function falle_zahlen(env) {
-  try {
-    const roh = await env.ABO.get('metrik:falle', 'json');
-    const z = (roh && Number(roh.z)) || 0;
-    await env.ABO.put('metrik:falle', JSON.stringify({ z: z + 1, ts: Date.now() }), { expirationTtl: 86400 });
-  } catch (e) { /* Zählen darf die Anmeldung nie brechen */ }
+  // Nur Log (Workers Logs), KEIN KV-Schreibzugriff: Bots duerfen das
+  // Tagesbudget nicht ueber die Falle aufbrauchen (Audit H-03).
+  console.log('ff-newsletter: Bot-Falle ausgeloest');
 }
 
 // ---------------------------------------------------------------- Feedback (H4)
@@ -468,12 +593,23 @@ async function falle_zahlen(env) {
  * POST /feedback – „War dieser Ratgeber hilfreich?" (Ja/Nein) je Artikel.
  *
  * Datenschutz by design: Body nur { slug, hilfreich: 'ja'|'nein' }.
- * Gespeichert wird AUSSCHLIESSLICH ein聚合 Zählerstand je Slug
+ * Gespeichert wird AUSSCHLIESSLICH ein aggregierter Zählerstand je Slug
  * (feedback:<slug> → { ja, nein, letzte }) – keine IPs, keine Cookies,
- * kein Fingerprinting. Missbrauchsschutz: kurzer IP-Hash-Schlüssel
- * (fb:<hash(ip|slug)>, TTL 6 h) verhindert Doppelzählen; erneuter Klick
- * innerhalb des Fensters ist idempotent (200, „bereits-gezaehlt").
+ * kein Fingerprinting. Missbrauchsschutz: ein gekürzter Hash aus IP und
+ * Slug liegt im Tagesschlüssel (fbtag:<datum>) und verhindert Doppelzählen
+ * am selben Tag; der tägliche Cron rollt den Tag auf und löscht ihn samt
+ * Hashes (spätestens TTL 8 Tage). Erneuter Klick ist idempotent
+ * (200, „bereits-gezaehlt").
  */
+function feedback_tag(zeit = Date.now()) {
+  return `fbtag:${new Date(zeit).toISOString().slice(0, 10)}`;
+}
+
+function feedback_max(env) {
+  const n = Number((env && env.FEEDBACK_MAX_PRO_TAG) || FEEDBACK_MAX_PRO_TAG_DEFAULT);
+  return Number.isFinite(n) && n >= 0 ? n : FEEDBACK_MAX_PRO_TAG_DEFAULT;
+}
+
 async function feedback(request, env) {
   const daten = await koerper_lesen(request);
   if (!daten) return fehler(400, 'Unverständlicher Anfragekörper.', env, request);
@@ -488,32 +624,74 @@ async function feedback(request, env) {
     return fehler(400, 'Feedback muss „ja" oder „nein" sein.', env, request);
   }
   const ip = request.headers.get('CF-Connecting-IP') || '';
-  const rate_key = `fb:${await sha256_kurz(`${ip}|${slug}`)}`;
-  if (await env.ABO.get(rate_key)) {
+  // EIN Schluessel pro UTC-Tag: Zaehler, Stimmen je Slug und die (gehashten)
+  // Doppelklick-Marker liegen zusammen – eine Stimme kostet genau einen
+  // KV-Schreibzugriff, und ab FEEDBACK_MAX_PRO_TAG wird nichts mehr
+  // geschrieben. So kann Feedback das Newsletter-Budget nie aufbrauchen.
+  const marke = await sha256_kurz(`${ip}|${slug}`);
+  const tag_key = feedback_tag();
+  const tag = (await env.ABO.get(tag_key, 'json')) || { n: 0, s: {}, d: {} };
+  if (tag.d && tag.d[marke]) {
     return json({ ok: true, status: 'bereits-gezaehlt' }, 200, env);
   }
-  const schluessel = `feedback:${slug}`;
-  const stand = (await env.ABO.get(schluessel, 'json')) || { ja: 0, nein: 0 };
+  if (Number(tag.n || 0) >= feedback_max(env)) {
+    // Budget erschoepft: freundlich annehmen, nichts schreiben.
+    return json({ ok: true, status: 'angenommen' }, 200, env);
+  }
+  tag.s = tag.s || {};
+  tag.d = tag.d || {};
+  const stand = tag.s[slug] || { ja: 0, nein: 0 };
   stand[stimme] = Number(stand[stimme] || 0) + 1;
-  stand.letzte = new Date().toISOString();
-  await env.ABO.put(schluessel, JSON.stringify(stand));
-  await env.ABO.put(rate_key, '1', { expirationTtl: TTL_FEEDBACK_RATE_SEK });
+  tag.s[slug] = stand;
+  tag.d[marke] = 1;
+  tag.n = Number(tag.n || 0) + 1;
+  try {
+    await env.ABO.put(tag_key, JSON.stringify(tag), { expirationTtl: 8 * 24 * 60 * 60 });
+  } catch (e) {
+    // KV begrenzt Schreibzugriffe auf denselben Schluessel (1/s) – eine
+    // verlorene Stimme ist hinnehmbar, ein Fehler fuer den Leser nicht.
+    console.warn(`ff-newsletter feedback: Stimme nicht gespeichert (${(e && e.message) || e})`);
+  }
   return json({ ok: true, status: 'gezaehlt' }, 200, env);
 }
 
-/** GET /feedback?slug=… – aggregierte Zähler (für spätere „X fanden … hilfreich“-Anzeige). */
+/** Cron (taeglich): abgeschlossene Tagesschluessel in die Summen je Slug
+ *  uebertragen und loeschen. Wiederholbar; der heutige Tag bleibt liegen. */
+async function feedback_aufrollen(env, zeit = Date.now()) {
+  const heute = feedback_tag(zeit);
+  for (const key of await liste_mit_prefix(env.ABO, 'fbtag:')) {
+    if (key >= heute) continue;
+    const tag = await env.ABO.get(key, 'json');
+    for (const [slug, st] of Object.entries((tag && tag.s) || {})) {
+      if (!FEEDBACK_SLUG_RE.test(slug)) continue;
+      const summe = (await env.ABO.get(`feedback:${slug}`, 'json')) || { ja: 0, nein: 0 };
+      summe.ja = Number(summe.ja || 0) + Number(st.ja || 0);
+      summe.nein = Number(summe.nein || 0) + Number(st.nein || 0);
+      summe.letzte = new Date(zeit).toISOString();
+      await env.ABO.put(`feedback:${slug}`, JSON.stringify(summe));
+    }
+    await env.ABO.delete(key);
+  }
+}
+
+/** GET /feedback?slug=… – aggregierte Zähler (Summe + heutiger Tag). */
 async function feedback_lesen(request, env, url) {
   const slug = String(url.searchParams.get('slug') || '').toLowerCase();
   if (!FEEDBACK_SLUG_RE.test(slug)) {
     return fehler(400, 'Unbekannter Artikel.', env, request);
   }
   const stand = (await env.ABO.get(`feedback:${slug}`, 'json')) || { ja: 0, nein: 0 };
-  return json({ ok: true, slug, ja: Number(stand.ja || 0), nein: Number(stand.nein || 0) },
-    200, env, { 'Cache-Control': 'no-store' });
+  const tag = (await env.ABO.get(feedback_tag(), 'json')) || {};
+  const heute = (tag.s && tag.s[slug]) || { ja: 0, nein: 0 };
+  return json({
+    ok: true, slug,
+    ja: Number(stand.ja || 0) + Number(heute.ja || 0),
+    nein: Number(stand.nein || 0) + Number(heute.nein || 0),
+  }, 200, env, { 'Cache-Control': 'no-store' });
 }
 
 // ---------------------------------------------------------------- Routen
-async function health(env) {
+async function health(request, env) {
   let kv_ok = false;
   try {
     await env.ABO.get('healthz');
@@ -523,6 +701,12 @@ async function health(env) {
   // Adressen, ohne Secrets. Die Zustellbarkeits-Wache (C8) liest hier, ob
   // der Taktgeber am letzten Versandtag wirklich gefeuert hat. Fehlt der
   // Schluessel ganz, laeuft eine Worker-Version ohne Cron-Triggers.
+  const angebot = request ? request.headers.get('x-ff-key') : '';
+  if (!angebot || !await schluessel_pruefen(env, angebot)) {
+    // Oeffentlich nur lebendig/tot – keine Cron-Namen, Workflows, Fehlertexte.
+    return json({ ok: kv_ok, ts: new Date().toISOString() }, kv_ok ? 200 : 503, env,
+      { 'Cache-Control': 'no-store' });
+  }
   const takt = kv_ok ? await takt_lesen(env) : {};
   return json({
     ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler',
@@ -543,7 +727,7 @@ async function anmeldung(request, env, url) {
   // ankommen – sonst verliert die Anmeldung die Themenwahl still.
   const themen_r = (daten.themen || daten['themen[]'] || [])
     .map((t) => String(t).trim()).filter(Boolean);
-  const seite = url.searchParams.get('quelle') || String(env.SITE_ORIGIN || STAND_ORIGIN).split(',')[0].trim();
+  const seite = quelle_pruefen(url.searchParams.get('quelle'), env);
   const ip = String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
   const ua = String(request.headers.get('user-agent') || '').slice(0, 300);
 
@@ -560,13 +744,13 @@ async function anmeldung(request, env, url) {
     return antwort_mit('fehler', 'Ohne das Einverstaendnis-Haekchen duerfen wir keine Mail schicken – bitte haekchen setzen und erneut absenden.', env, request, 400);
   }
 
-  // Rate-Limit pro IP (KV, 15-Min-Fenster): mehr als 5 = Botmuster.
-  const ip_key = `rat:${await sha256_kurz(ip || 'unbekannt')}`;
-  const rate = (await env.ABO.get(ip_key, 'json')) || { z: 0 };
-  if (rate.z >= MAX_ANMELDUNGEN_PRO_IP) {
+  if (!await turnstile_ok(env, erstein(daten, 'cf-turnstile-response'), ip)) {
+    return antwort_mit('fehler', 'Die Sicherheitsprüfung hat nicht geklappt – bitte Seite neu laden und erneut absenden.', env, request, 400);
+  }
+  // Rate-Limit pro IP: mehr als 5 in 15 Min = Botmuster.
+  if (!await rate_erlaubt(env, ip, 'anmeldung')) {
     return antwort_mit('fehler', 'Zu viele Anmelde-Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen – oder schreib eine Mail an kontakt@franksfinanzcheck.de.', env, request, 429);
   }
-  await env.ABO.put(ip_key, JSON.stringify({ z: rate.z + 1, ts: Date.now() }), { expirationTtl: TTL_RATE_SEK });
 
   const jetzt = new Date().toISOString();
   const bestehend = await abo_lesen(env.ABO, email);
@@ -574,26 +758,27 @@ async function anmeldung(request, env, url) {
   let status;
   let text;
 
+  // EINE Antwort fuer alle Faelle (Audit M-01): Ob eine Adresse schon
+  // angemeldet, offen oder neu ist, darf von aussen nicht erkennbar sein.
+  status = 'angemeldet';
+  text = ANMELDE_ANTWORT;
   if (!bestehend) {
     eintrag = {
       email, norm: email, status: 'pending', token: token_neu(), themen: themen_r,
-      seit: jetzt, ip, user_agent: ua, seite, bestaetigt: null,
+      seit: jetzt, seite, bestaetigt: null,
       bestaetigung_gesendet: null, versuche: 0, abbestellt: null, grund: null,
     };
-    status = 'angemeldet';
-    text = 'Fast geschafft – die Bestätigungsmail ist in den nächsten Minuten bei dir. Öffne den Link darin, um die Anmeldung abzuschließen (Double-Opt-In).';
-  } else if (bestehend.status === 'active') {
-    return antwort_mit('bereits-aktiv', 'Diese Adresse ist schon angemeldet und bestätigt – es kommt keine weitere Bestätigungsmail. Jede Ausgabe kommt wie vereinbart dienstags und freitags.', env, request);
+  } else if (bestehend.status === 'active' || bestehend.status === 'pending') {
+    // Aktiv: nichts tun. Offen: nicht neu triggern (kein Spam) – der
+    // Nachgang deckt ab. Antwort identisch zur Neuanmeldung.
+    return antwort_mit(status, text, env, request);
   } else if (bestehend.status === 'unsubscribed' || bestehend.status === 'abgelaufen') {
     // Neu- oder Wiederanmeldung: neuer Token, frischer Nachweis, frische Themen.
     eintrag = { ...bestehend, status: 'pending', token: token_neu(), themen: themen_r,
-      seit: jetzt, ip, user_agent: ua, seite, bestaetigt: null,
+      seit: jetzt, seite, bestaetigt: null,
       bestaetigung_gesendet: null, versuche: 0, abbestellt: null, grund: null };
-    status = 'wieder-angemeldet';
-    text = 'Willkommen zurück – die neue Bestätigungsmail ist in den nächsten Minuten bei dir. Öffne den Link darin, um die Anmeldung abzuschließen.';
-  } else if (bestehend.status === 'pending') {
-    // Bereits offen: nicht neu triggern (kein Spam) – der Nachgang deckt ab.
-    return antwort_mit('bereits-pending', 'Für diese Adresse ist eine Bestätigungsmail bereits unterwegs. Bitte Postfach und Spam-Ordner prüfen – ein erneutes Absenden ist nicht nötig.', env, request);
+    delete eintrag.ip;
+    delete eintrag.user_agent;
   } else {
     // Unbekannter Status (defekte Daten): fail-closed, laut melden.
     console.warn(`ff-newsletter: unbekannter Abo-Status "${bestehend.status}" für ${email}`);
@@ -602,11 +787,11 @@ async function anmeldung(request, env, url) {
 
   eintrag.themen = filtere_themen(themen_r, env);
   await abo_schreiben(env.ABO, eintrag);
-  await nachweis_schreiben(env.ABO, eintrag);
+  await nachweis_schreiben(env.ABO, eintrag, { ip, ua, seite });
 
   // Bestätigung auslösen. Scheitert der Dispatch, geht nichts verloren:
   // der Nachgang (schedule) sendet offene Bestätigungen nach.
-  const trigg = await dispatch_bestuerung(env, eintrag.token);
+  const trigg = await dispatch_bestuerung(env);
   if (!trigg.ok) {
     console.warn(`ff-newsletter: Dispatch fehlgeschlagen (Status ${trigg.status || trigg.warum}) – Nachgang holt die Bestätigung nach.`);
   }
@@ -662,6 +847,24 @@ async function bestaetigung(request, env) {
 }
 
 const ABMELDE_OK = 'Abgemeldet – ab sofort kommt keine Ausgabe mehr. Formlos geht es auch an kontakt@franksfinanzcheck.de.';
+const ANMELDE_ANTWORT = 'Fast geschafft – bitte sieh in dein Postfach. Ist die Adresse noch nicht bestätigt, kommt in den nächsten Minuten eine Bestätigungsmail (Double-Opt-In; auch im Spam-Ordner nachsehen).';
+
+/** GET /abmeldung?token=… zeigt nur eine Bestaetigungsseite (Audit M-03):
+ *  Link-Scanner von Mailprogrammen rufen Links per GET auf – sie duerfen
+ *  niemanden abmelden. Abgemeldet wird erst per POST (Knopf oder RFC 8058). */
+function abmelde_bestaetigung_seite(env, token) {
+  const html = HTML_KOPF
+    + '<h1>Newsletter abmelden?</h1>'
+    + '<p>Ein Klick genügt – danach kommt keine Ausgabe mehr.</p>'
+    + '<form method="post" action="/abmeldung">'
+    + '<input type="hidden" name="token" value="' + esc(token) + '">'
+    + '<button class="btn" type="submit">Ja, abmelden</button>'
+    + '</form>'
+    + '<p class="hinweis">Formlos geht es auch an '
+    + '<a href="mailto:kontakt@franksfinanzcheck.de?subject=Newsletter%20abmelden">kontakt@franksfinanzcheck.de</a>.</p>'
+    + HTML_FUSS;
+  return html_antwort(html, 200, env);
+}
 
 function abmelde_formular(env) {
   const html = HTML_KOPF
@@ -699,6 +902,18 @@ async function abmeldung(request, env, url) {
     falle = erstein(daten || {}, 'website');
   }
 
+  if (token && request.method === 'GET') {
+    const eintrag = await token_eintrag(env, token);
+    if (!eintrag) {
+      return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – es wurde nichts geändert. Kürzester Weg: das Formular unter franksfinanzcheck.de/newsletter/abmelden/ oder formlos per Mail an kontakt@franksfinanzcheck.de.', env, request, 404);
+    }
+    if (eintrag.status === 'unsubscribed') {
+      return antwort_mit('bereits-abgemeldet', 'Diese Adresse ist bereits abgemeldet – du bekommst keine Ausgabe mehr. Weitere Schritte sind nicht nötig.', env, request);
+    }
+    if (wantHtml(request)) return abmelde_bestaetigung_seite(env, token);
+    return json({ status: 'bestaetigen', text: 'Abmeldung bitte per POST bestätigen (Knopf auf der Seite oder RFC-8058-One-Click).' }, 200, env);
+  }
+
   if (token) {
     const eintrag = await token_eintrag(env, token);
     if (!eintrag) {
@@ -729,12 +944,9 @@ async function abmeldung(request, env, url) {
     return antwort_mit('abgemeldet', ABMELDE_OK, env, request);
   }
   const ip = String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
-  const ip_key = `rat:${await sha256_kurz(ip || 'unbekannt')}`;
-  const rate = (await env.ABO.get(ip_key, 'json')) || { z: 0 };
-  if (rate.z >= MAX_ANMELDUNGEN_PRO_IP) {
+  if (!await rate_erlaubt(env, ip, 'abmeldung')) {
     return antwort_mit('fehler', 'Zu viele Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen – oder schreib eine Mail an kontakt@franksfinanzcheck.de.', env, request, 429);
   }
-  await env.ABO.put(ip_key, JSON.stringify({ z: rate.z + 1, ts: Date.now() }), { expirationTtl: TTL_RATE_SEK });
   if (!EMAIL_RE.test(email) || email.length > 254) {
     return antwort_mit('fehler', 'Die E-Mail-Adresse sieht nicht gültig aus – bitte Adresse prüfen (z. B. du@beispiel.de).', env, request, 400);
   }
@@ -850,10 +1062,12 @@ async function praferenzen_seite(env, url) {
 
 // ---------------------------------------------------------------- Export (geschuetzt)
 async function exportiert(request, env, p, url) {
-  const angebot = request.headers.get('x-ff-key') || url.searchParams.get('sluessel') || '';
+  // NUR per Header (Audit N-01): Ein Schluessel in der URL landet in Logs,
+  // Browser-Verlauf und Referrern.
+  const angebot = request.headers.get('x-ff-key') || '';
   if (!await schluessel_pruefen(env, angebot)) {
     return new Response(JSON.stringify({ status: 'verboten' }), {
-      status: 403, headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      status: 403, headers: { 'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
     });
   }
   if (p === '/export/abonnenten') {
@@ -929,7 +1143,11 @@ export default {
     const p = url.pathname;
     if (request.method === 'OPTIONS') return vorabfrage(env);
     try {
-      if (p === '/' || p === '/healthz') return await health(env);
+      if (p === '/' || p === '/healthz') return await health(request, env);
+      // CSRF-Schutz (Audit M-02): POST aus fremden Browser-Urspruengen ablehnen.
+      if (request.method === 'POST' && !p.startsWith('/export/') && !herkunft_erlaubt(request, env, url)) {
+        return fehler(403, 'Anfrage von einer fremden Seite abgelehnt.', env, request);
+      }
       if (p === '/anmeldung' && request.method === 'POST') return await anmeldung(request, env, url);
       if (p === '/feedback' && request.method === 'POST') return await feedback(request, env);
       if (p === '/feedback' && request.method === 'GET') return await feedback_lesen(request, env, url);
@@ -963,4 +1181,4 @@ export default {
 };
 
 // Fuer Tests (node --test): die Takt-Tabelle und der Ausfuehrer ohne Cloudflare.
-export { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON };
+export { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen };

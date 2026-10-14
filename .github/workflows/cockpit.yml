@@ -37,21 +37,21 @@ concurrency:
 
 jobs:
   cockpit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: PyYAML installieren
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml \
-            || python3 -m pip install -q --break-system-packages pyyaml
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Selbsttest (fail-closed)
         run: python3 scripts/cockpit.py --selftest
@@ -107,7 +107,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Keine Änderungen – Cockpit ist aktuell."
           else
-            git commit -m "cockpit: Ampel-Übersicht aktualisiert (${{ env.LEVEL }})"
+            git commit -m "cockpit: Ampel-Übersicht aktualisiert (${LEVEL})"
             scripts/git_sync.sh --push-only
             echo "✅ Cockpit gepusht"
           fi

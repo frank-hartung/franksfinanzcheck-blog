@@ -18,7 +18,9 @@ docker compose up -d
 
 echo ""
 echo "✅ Dienste erfolgreich gestartet!"
-echo "   n8n Webhook- & Workflow-UI: http://localhost:5678"
-echo "   Whisper API Health-Check:   http://localhost:8765/health"
+echo "   n8n Webhook- & Workflow-UI: http://127.0.0.1:5678  (nur lokal erreichbar)"
+echo "   Whisper API Health-Check:   http://127.0.0.1:8765/health"
 echo ""
-echo "Importiere die Workflows aus tools/n8n/workflows/ in deine n8n-Instanz."
+echo "Die Workflows in tools/n8n/workflows/ sind seit dem Sicherheitsaudit"
+echo "(14.10.2026, H-06) deaktiviert und ohne Execute-Command. Abschalten:"
+echo "   bash tools/n8n/abschalten.sh"

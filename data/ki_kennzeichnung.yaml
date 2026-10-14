@@ -1,0 +1,62 @@
+# ============================================================
+#  KI-KENNZEICHNUNG – Register (EU-KI-Verordnung Art. 50 Abs. 4)
+#  Sicherheitsaudit 14.10.2026 (M-17). Gepflegt von Menschen, geprüft von
+#  scripts/ki_kennzeichnung_gate.py (im Deploy mit --fix).
+#
+#  REGEL: `ai_generated: false` ist nur erlaubt, wenn der Artikel
+#    a) hier unter `menschlich` steht (bewusste Entscheidung des Betreibers)
+#       ODER
+#    b) einen freigegebenen Block `redaktionelle_pruefung` hat (status:
+#       freigegeben) – dann hat ein Mensch die redaktionelle Verantwortung
+#       übernommen (Ausnahme nach Art. 50 Abs. 4 UAbs. 2).
+#  Alles andere setzt das Gate auf `ai_generated: true` („Mit KI erstellt“).
+#  Artikel unter `maschinell` dürfen NIE auf false gesetzt werden, auch nicht
+#  über `menschlich` (Lehre aus Commit 1a8a6d10, der 9 Bot-Artikel still
+#  auf false stellte).
+# ============================================================
+
+# Nachweislich maschinell erstellt (Commit-Historie: Content-Engine,
+# Content-Bot, KI-Redaktion, Coding-Agenten). Stand 14.10.2026.
+maschinell:
+  - 2026-08-10-dsl-wechselbonus-sichern
+  - 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  - 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+  - 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  - 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  - 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  - 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  - 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  - 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
+  - 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  - 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+  - 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  - 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  - 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  - 2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert
+  - 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  - 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  - 2026-09-21-tierkrankenversicherung-hund-katze-kosten
+  - 2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten
+  - 2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich
+  - 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  - 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert
+  - 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich
+
+# Unter dem Konto des Betreibers committet (frank-hartung), Herkunft aus
+# dem Repo allein NICHT belegbar – teils lauten die Commits „optimize
+# articles …“, was auf KI-Agenten hindeutet. BITTE PRÜFEN: Hat ein Mensch
+# den Text geschrieben oder vor Veröffentlichung geprüft, bleibt der Eintrag.
+# Sonst Eintrag löschen – das Gate setzt dann ai_generated: true.
+menschlich:
+  - 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  - 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+  - 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  - 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  - 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  - 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
+  - 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  - 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
+  - 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  - 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
+  - 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
