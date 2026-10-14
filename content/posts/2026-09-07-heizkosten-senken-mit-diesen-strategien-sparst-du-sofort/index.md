@@ -12,7 +12,7 @@ keywords: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen",
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
 pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
-ai_generated: false
+ai_generated: true
 inspiration: "Heizkosten senken: Diese 6 To-dos erledigst du am besten JETZT"
 cover:
   image: "images/covers/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort.jpg"

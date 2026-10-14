@@ -8,7 +8,7 @@ tags: ["Gastarif wechseln", "Heizkosten senken", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
   alt: "Preisgarantie Gas: So sicherst du günstige Tarife"

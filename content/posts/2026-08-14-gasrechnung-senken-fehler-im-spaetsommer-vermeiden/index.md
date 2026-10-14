@@ -8,7 +8,7 @@ tags: ["Gasrechnung prüfen", "Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg"
   alt: "Gasrechnung senken: Fehler im Spätsommer vermeiden"

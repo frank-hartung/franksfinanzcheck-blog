@@ -29,6 +29,14 @@
 -}}
 
 {{- $href := .Destination -}}
+{{- /* SICHERHEIT (Audit 14.10.2026, M-15): Schema pruefen, BEVOR weiter unten
+     safeURL Hugos eingebauten URL-Filter abschaltet. Erlaubt: relative Ziele,
+     Anker, http(s), mailto, tel. Steuer- und Leerzeichen werden vor der Pruefung
+     entfernt, weil Browser sie beim URL-Parsen ebenfalls verwerfen. */ -}}
+{{- $probe := $href | replaceRE `[\x00-\x20\x7f]+` "" | lower -}}
+{{- if and (findRE `^[a-z][a-z0-9+.\-]*:` $probe 1) (not (findRE `^(https?|mailto|tel):` $probe 1)) -}}
+  {{- $href = "#" -}}
+{{- end -}}
 {{- $isGo := strings.HasPrefix $href "/go/" -}}
 
 {{- /* 12.08.2026 (Frank, ROOT-CAUSE des grossen Link-Lecks):

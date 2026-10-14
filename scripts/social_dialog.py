@@ -107,6 +107,11 @@ def save_state(state: dict) -> None:
     state["gesehen"] = list(dict.fromkeys(state.get("gesehen") or []))[-4000:]
     state["verlauf"] = (state.get("verlauf") or [])[-1500:]
     state["chefsache"] = (state.get("chefsache") or [])[-300:]
+    # Datenminimierung (Audit M-18): auch Altbestand nie im Klartext speichern.
+    for liste in ("verlauf", "offen", "chefsache"):
+        for e in state.get(liste) or []:
+            if isinstance(e, dict) and e.get("autor"):
+                e["autor"] = _pseudonym(e["autor"], e.get("kanal") or "")
     with open(STATE_PATH, "w", encoding="utf-8") as fh:
         _yaml().safe_dump(state, fh, allow_unicode=True, sort_keys=False, width=100)
 
@@ -890,7 +895,8 @@ def lauf(dry_run: bool = False, nur_kanal: str = "", offline: bool = False) -> d
             if ok:
                 gesendet_in_lauf += 1
                 state.setdefault("verlauf", []).append(
-                    {"zeit": _berlin(), "kanal": item["kanal"], "autor": item.get("autor"),
+                    {"zeit": _berlin(), "kanal": item["kanal"],
+                     "autor": _pseudonym(item.get("autor") or "", item["kanal"]),
                      "klasse": klasse, "id": item["id"], "url": info, "text": text})
                 bericht["gesendet"].append(eintrag)
                 continue
@@ -914,20 +920,50 @@ def lauf(dry_run: bool = False, nur_kanal: str = "", offline: bool = False) -> d
     return bericht
 
 
+TEXT_MAX_ZUSTAND = 500
+
+
+def _pseudonym(autor: str, kanal: str) -> str:
+    """Benutzername Dritter -> Pseudonym (Sicherheitsaudit 14.10.2026, M-18).
+
+    dialog_state.yaml liegt im ÖFFENTLICHEN Repo. Klartext-Handles fremder
+    Personen gehören dort nicht hin. Mit Secret DIALOG_PSEUDONYM_KEY ist der
+    Hash verschlüsselt (HMAC) und nicht per Wörterbuch umkehrbar; ohne
+    Schlüssel bleibt es ein einfacher Hash (Warnung im Bericht).
+    Bereits pseudonymisierte Werte bleiben unverändert (idempotent).
+    """
+    import hashlib
+    import hmac
+    roh = str(autor or "").strip()
+    if not roh or roh.startswith("p-"):
+        return roh
+    schluessel = os.environ.get("DIALOG_PSEUDONYM_KEY", "").encode()
+    nachricht = f"{kanal}|{roh.lower()}".encode()
+    if schluessel:
+        return "p-" + hmac.new(schluessel, nachricht, hashlib.sha256).hexdigest()[:16]
+    return "p-" + hashlib.sha256(b"ff-dialog|" + nachricht).hexdigest()[:16]
+
+
 def _schlank(eintrag: dict) -> dict:
-    """Nur das, was für Freigabe und Nachvollzug nötig ist."""
-    return {k: eintrag.get(k) for k in
-            ("id", "kanal", "autor", "text", "permalink", "klasse", "klasse_label",
-             "modus", "antwort", "beleg", "beleg_titel", "verstoesse", "herkunft",
-             "erfasst", "remote_id", "ref", "begruendung")}
+    """Nur das, was für Freigabe und Nachvollzug nötig ist – Autor nur als
+    Pseudonym, fremder Text gekürzt (Datenminimierung, Audit M-18)."""
+    aus = {k: eintrag.get(k) for k in
+           ("id", "kanal", "autor", "text", "permalink", "klasse", "klasse_label",
+            "modus", "antwort", "beleg", "beleg_titel", "verstoesse", "herkunft",
+            "erfasst", "remote_id", "ref", "begruendung")}
+    aus["autor"] = _pseudonym(aus.get("autor") or "", aus.get("kanal") or "")
+    if isinstance(aus.get("text"), str) and len(aus["text"]) > TEXT_MAX_ZUSTAND:
+        aus["text"] = aus["text"][:TEXT_MAX_ZUSTAND] + " …"
+    return aus
 
 
 def _im_cooldown(autor: str, kanal: str, state: dict, stunden: int) -> bool:
     if not autor:
         return False
+    pseudo = _pseudonym(autor, kanal)
     grenze = _now() - _dt.timedelta(hours=stunden)
     for v in reversed(state.get("verlauf") or []):
-        if v.get("kanal") != kanal or v.get("autor") != autor:
+        if v.get("kanal") != kanal or v.get("autor") not in (autor, pseudo):
             continue
         try:
             wann = _dt.datetime.strptime(str(v.get("zeit")), "%d.%m.%Y %H:%M")
@@ -974,7 +1010,8 @@ def freigeben(ids: list[str], dry_run: bool = False) -> dict:
         ok, info = sende(o, o.get("antwort") or "")
         if ok:
             state.setdefault("verlauf", []).append(
-                {"zeit": _berlin(), "kanal": o.get("kanal"), "autor": o.get("autor"),
+                {"zeit": _berlin(), "kanal": o.get("kanal"),
+                 "autor": _pseudonym(o.get("autor") or "", o.get("kanal") or ""),
                  "klasse": o.get("klasse"), "id": o.get("id"), "url": info,
                  "text": o.get("antwort"), "freigabe": "manuell"})
             ergebnis["gesendet"].append(dict(o, ergebnis=info))

@@ -593,11 +593,13 @@ async function falle_zahlen(env) {
  * POST /feedback – „War dieser Ratgeber hilfreich?" (Ja/Nein) je Artikel.
  *
  * Datenschutz by design: Body nur { slug, hilfreich: 'ja'|'nein' }.
- * Gespeichert wird AUSSCHLIESSLICH ein聚合 Zählerstand je Slug
+ * Gespeichert wird AUSSCHLIESSLICH ein aggregierter Zählerstand je Slug
  * (feedback:<slug> → { ja, nein, letzte }) – keine IPs, keine Cookies,
- * kein Fingerprinting. Missbrauchsschutz: kurzer IP-Hash-Schlüssel
- * (fb:<hash(ip|slug)>, TTL 6 h) verhindert Doppelzählen; erneuter Klick
- * innerhalb des Fensters ist idempotent (200, „bereits-gezaehlt").
+ * kein Fingerprinting. Missbrauchsschutz: ein gekürzter Hash aus IP und
+ * Slug liegt im Tagesschlüssel (fbtag:<datum>) und verhindert Doppelzählen
+ * am selben Tag; der tägliche Cron rollt den Tag auf und löscht ihn samt
+ * Hashes (spätestens TTL 8 Tage). Erneuter Klick ist idempotent
+ * (200, „bereits-gezaehlt").
  */
 function feedback_tag(zeit = Date.now()) {
   return `fbtag:${new Date(zeit).toISOString().slice(0, 10)}`;

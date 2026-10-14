@@ -12,7 +12,7 @@ author: "Frank Hartung"
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbstvorbereitung", "Heizung prüfen", "Spätsommer-Check", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Gasrechnung senken: Der 60-Minuten-Spätsommer-Check"
 pin_description: "*Werbung | Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder… Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"
-ai_generated: false
+ai_generated: true
 inspiration: "Heizperiode vorbereiten im Spätsommer"
 cover:
   image: "images/covers/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro.jpg"

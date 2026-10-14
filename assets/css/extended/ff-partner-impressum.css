@@ -147,3 +147,45 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* Zwei-Klick-Vorschaltfläche (Sicherheitsaudit 14.10.2026, N-07) */
+.ff-partner-impressum__frame[hidden],
+.ff-partner-impressum__vorschalt[hidden] {
+  display: none;
+}
+
+.ff-partner-impressum__vorschalt {
+  padding: 18px 16px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ff-text, #1d2b25);
+}
+
+.ff-partner-impressum__vorschalt p {
+  margin: 0 0 12px;
+}
+
+.ff-partner-impressum__laden {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid var(--ff-emerald, #0E5A43);
+  border-radius: var(--ff-radius-sm, 8px);
+  background: var(--ff-surface, #fff);
+  color: var(--ff-emerald, #0E5A43);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ff-partner-impressum__laden:hover {
+  background: rgba(14, 90, 67, 0.06);
+}
+
+.ff-partner-impressum__laden:focus-visible {
+  outline: 3px solid var(--ff-yellow, #FFB300);
+  outline-offset: 3px;
+}
+
+:root[data-theme="dark"] .ff-partner-impressum__vorschalt {
+  color: #1d2b25;
+}

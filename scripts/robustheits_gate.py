@@ -430,6 +430,7 @@ SW_PFLICHTEN: tuple[tuple[str, str], ...] = (
     (r"status: 503", "offline ehrlich als 503 ausgeliefert"),
     (r"headers\.get\('range'\)", "Range-Anfragen gehen ins Netz (H3)"),
     (r"EIGEN_PFAD", "/sw.js wird nie cache-first bedient (H4)"),
+    (r"PRIVAT_RE\.test\(url\.search\)", "Token-/Schlüssel-URLs werden nie gecacht (H5, Audit I-06)"),
     (r"'SKIP_WAITING'", "Seite darf sich selbst befreien (message-Horcher)"),
     (r"try \{ self\.skipWaiting\(\); \} catch", "skipWaiting im Fangnetz – ein Wurf "
      "darf die Installation nicht blockieren"),

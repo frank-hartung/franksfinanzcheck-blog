@@ -1,25 +1,25 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-14T16:18:40.309055+00:00",
-  "head": "e20b0519",
+  "signed_at": "2026-10-14T21:11:14.411351+00:00",
+  "head": "7c5ff87",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
-    "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "8ad68cb9fc0a7d5afd776d622893c4e27bd52d246c7a9fae7a3607db82e9a8e6",
-    "layouts/_default/_markup/render-link.html": "bf3f44119c4fdf76624732c16db3bd27ee241125ddc1e01ce41d267ce1adb281",
+    "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
+    "hugo.toml": "4fbdf9d703104e063ec1c7a63414cfc34c6536e709d7523078c9d53392b3b0e6",
+    "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8e56bc560a2c04e7b3e2a1d6c8ad69c19bf86f757c2197358b44f0197265fd6e",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "900006a46c78debdaed747a8854bb9906f7d98562cfe8c080b00bafe7944b97f",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
-    "layouts/_partials/head.html": "e91bf0b087c2e541c2e27b78fe6f7e9c892cec4b29f105d0cffe8142776c5b03",
+    "layouts/_partials/head.html": "d007e5a0aeff091841f51dfe71116916428066c08a17032c93fd733bb2c9ea63",
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
-    "layouts/index.sw.js": "bedd9ae9b3e56d204a487137f90479feebb53395a4a046e738025321bd4ef5d8",
+    "layouts/index.sw.js": "918ed46bf410d959a09e71a42b6570c8a6d4732ccc97b60ee903ce2ec5161a95",
     "layouts/pillar/list.html": "435db5bd1741bde574bae2c547e75ff879fd7681ce26721513dc93a21800bac4",
     "layouts/pillar/single.html": "972b72f5d293b4fa5e041705197989cefd3015b581346eafedf408b76843cfff",
-    "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
+    "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
     "layouts/shortcodes/einspartabelle.html": "172a4812488cecfd147dc8d03ffba0971fbb12c2a5fa8b2dbd5771590ef2c393",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
     "scripts/affiliate_integrity_gate.py": "52ad31d85f97e4345678f35b13090be8807511bb1870c7a9aad9364d138b2aad",
@@ -53,34 +53,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5",
-  "audit_start_sha256": "df45594a3dcb94975e0b9686df00fb3eaebb30b2788786dc71668e4e18bd044e",
+  "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2",
+  "audit_start_sha256": "190877cf4ea3ac3b7590e820a6f7f43f6b1361aa09252307f2d8676325ab9748",
   "audit": [
-    {
-      "date": "2026-10-09",
-      "art": "heal",
-      "head": "683e847e",
-      "geaendert": [
-        "layouts/_partials/extend_footer.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "683e847e",
-              "datum": "2026-10-09",
-              "betreff": "test(integrity): extend_footer.html aendern (WF-A535-675 Test)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "37171fa00528b12c314500536ad1045ad6f014892ccd2654fe2dbe13ece78c98",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-09",
       "art": "set-current",
@@ -98,7 +73,7 @@
         }
       ],
       "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
-      "prev_sha256": "df45594a3dcb94975e0b9686df00fb3eaebb30b2788786dc71668e4e18bd044e"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-10",
@@ -617,8 +592,103 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38",
-      "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5"
+      "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5",
+      "prev_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38"
+    },
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "7c5ff87",
+      "geaendert": [
+        "data/brand_lock.yaml",
+        "hugo.toml",
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/head.html",
+        "layouts/index.sw.js",
+        "layouts/robots.txt"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_default/_markup/render-link.html",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/robots.txt",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "data/brand_lock.yaml",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/index.sw.js",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "80a251d5170c976c1f32ae6557575f0053ede33ab99731b27adaaccf18f7b85f",
+      "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2"
     }
   ]
 }

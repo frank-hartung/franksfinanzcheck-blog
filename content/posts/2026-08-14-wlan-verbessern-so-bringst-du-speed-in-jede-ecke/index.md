@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg"
   alt: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"

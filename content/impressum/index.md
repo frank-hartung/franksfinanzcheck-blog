@@ -28,7 +28,7 @@ Deutschland
 
 ## Verantwortliche für vermittelte Versicherungsangebote
 
-Für Vergleichsformulare und die Vermittlung der darüber angefragten Versicherungen gelten abweichende Verantwortlichkeiten. Zuständig sind die dort genannten Unternehmen, nicht der oben genannte Betreiber dieser Website. Diese Seite lädt die Angaben direkt vom Tarifcheck-Partnerprogramm, damit die Kennzeichnung aktuell bleibt.
+Für Vergleichsformulare und die Vermittlung der darüber angefragten Versicherungen gelten abweichende Verantwortlichkeiten. Zuständig sind die dort genannten Unternehmen, nicht der oben genannte Betreiber dieser Website. Die Angaben lassen sich hier direkt vom Tarifcheck-Partnerprogramm laden (erst nach deinem Klick, damit vorher keine Daten an den Partner gehen) oder über den Link darunter beim Partner öffnen – so bleibt die Kennzeichnung stets aktuell.
 
 {{< partner_impressum >}}
 
@@ -44,7 +44,9 @@ Alle Affiliate-Links sind als Werbung gekennzeichnet. Die redaktionellen Inhalte
 
 ## Hinweis zu KI-unterstützten Inhalten
 
-Dieser Blog nutzt KI-Werkzeuge (generative KI) als Unterstützung bei der Erstellung von Artikeln, Grafiken und Cover-Bildern. Alle Inhalte werden vor der Veröffentlichung vom Betreiber redaktionell geprüft und freigegeben; die inhaltliche Verantwortung für das Veröffentlichte liegt beim Betreiber. Die KI-Unterstützung wird hiermit im Sinne der Transparenzanliegen der EU-KI-Verordnung (Verordnung (EU) 2024/1689, Art. 50 – anwendbar seit 2. August 2026) offen ausgewiesen. Auf dieser Website selbst kommt keine KI zum Einsatz, die direkt mit Besuchern interagiert (insbesondere kein Chatbot).
+Dieser Blog entsteht mit Unterstützung generativer KI – bei Artikeln, Grafiken und Cover-Bildern. Einen Teil der Artikel entwirft ein automatisiertes System. Diese Artikel werden nach automatischen Qualitätsprüfungen veröffentlicht, ohne dass jeder Text vorher einzeln von einem Menschen geprüft wird, und sind am Artikelanfang als **„Mit KI erstellt“** gekennzeichnet. Artikel mit dem Hinweis „Redaktionell geprüft von …“ hat ein Mensch vor der Veröffentlichung fachlich geprüft und freigegeben. Verantwortlich für alle Inhalte ist der Betreiber. Fehler bitte an die oben genannte E-Mail-Adresse melden – wir korrigieren umgehend.
+
+Die Kennzeichnung erfolgt im Sinne der EU-KI-Verordnung (Verordnung (EU) 2024/1689, Art. 50). Auf dieser Website selbst kommt keine KI zum Einsatz, die direkt mit Besuchern interagiert (insbesondere kein Chatbot).
 
 ---
 

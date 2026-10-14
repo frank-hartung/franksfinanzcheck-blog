@@ -90,7 +90,9 @@
   <p class="ff-posts-eyebrow">FranksFinanzcheck · Der Blog</p>
   <h1>Weitere Ratgeber</h1>
   <p class="ff-posts-intro">Seite {{ $paginator.PageNumber }} von {{ $paginator.TotalPages }} · Alle Beiträge, neueste zuerst.</p>
-  <a class="ff-posts-jump" href="{{ "/" | relURL }}#deine-6-themenwelten"><span aria-hidden="true">←</span> Zurück zu den Themenwelten</a>
+  {{- /* Audit 14.10.2026 (I-08): Auf der Startseite heißt der Abschnitt
+       `home-themenwelten` (home_clusters.html) – der alte Anker lief ins Leere. */ -}}
+  <a class="ff-posts-jump" href="{{ "/" | relURL }}#home-themenwelten"><span aria-hidden="true">←</span> Zurück zu den Themenwelten</a>
 </header>
 {{- end }}
 

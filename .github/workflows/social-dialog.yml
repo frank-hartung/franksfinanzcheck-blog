@@ -88,6 +88,9 @@ jobs:
 
       - name: Lauf
         env:
+          # Audit 14.10.2026 (M-18): Schlüssel für pseudonymisierte Autor-Kennungen
+          # in data/social/dialog_state.yaml (öffentliches Repo).
+          DIALOG_PSEUDONYM_KEY: ${{ secrets.DIALOG_PSEUDONYM_KEY }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}

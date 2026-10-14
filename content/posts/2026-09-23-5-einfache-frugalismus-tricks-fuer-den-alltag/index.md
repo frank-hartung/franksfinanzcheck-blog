@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben", "5 einfache Frugalismus Tricks für den Alltag"]
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
 kurzantwort: "Frugalismus bedeutet nicht, dir alles zu verbieten. Es bedeutet, die größten Geldabflüsse bewusst zu steuern. Mit fünf einfachen Alltags-Tricks – Ausgaben sichtbar machen, Fixkosten prüfen, Konsum verlangsamen, Routinen bündeln und Ersparnisse automatisch sichern – sparst du oft mehrere hundert Euro pro Jahr, ohne dich kaputt zu verzichten."

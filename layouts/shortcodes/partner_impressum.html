@@ -18,7 +18,12 @@
      schmale Viewports bekommen über CSS mehr Höhe. scrolling="no"
      und border="0" bleiben, weil das Programm-Snippet sie so vorgibt.
 
-     Datenschutz: der Abruf passiert beim Seitenaufruf, nur hier.
+     Datenschutz (Sicherheitsaudit 14.10.2026, N-07): ZWEI-KLICK-LÖSUNG.
+     Der Rahmen lädt erst, wenn der Besucher „Angaben des Partners laden“
+     wählt – vorher geht keine IP-Adresse an den Partner. Ohne JavaScript
+     bleibt der direkte Link darunter (Kennzeichnung jederzeit erreichbar).
+     sandbox: Das fremde Dokument darf Skripte ausführen und Fenster öffnen,
+     aber weder die Seite oben umleiten noch Formulare senden.
      Offenlegung: content/datenschutz/index.md, Anker
      #partner-kennzeichnung.
    ============================================================ */ -}}
@@ -26,24 +31,30 @@
 {{- $hinweis := "/datenschutz/#partner-kennzeichnung" | relURL -}}
 <figure class="ff-partner-impressum" data-ff-partner-impressum="tarifcheck">
   <figcaption class="ff-partner-impressum__kicker">Angaben des Partners</figcaption>
-  <div class="ff-partner-impressum__frame-wrap">
+  <div class="ff-partner-impressum__frame-wrap" data-ff-zwei-klick>
+    <div class="ff-partner-impressum__vorschalt" data-ff-partner-vorschalt>
+      <p>Die Angaben kommen direkt vom Tarifcheck-Partnerprogramm. Erst wenn du sie hier lädst, ruft dein Browser das Dokument von a.partner-versicherung.de ab und übermittelt dabei technische Zugriffsdaten (u. a. deine IP-Adresse).</p>
+      <button type="button" class="ff-partner-impressum__laden" data-ff-partner-laden>Angaben des Partners hier laden</button>
+    </div>
     <iframe
       id="ff-partner-impressum-frame"
       class="ff-partner-impressum__frame"
-      src="{{ $src }}"
+      data-src="{{ $src }}"
       title="Impressum der TARIFCHECK24 GmbH und weiterer Vermittler für Versicherungsangebote"
       width="100%"
       height="736"
       scrolling="no"
       border="0"
       referrerpolicy="strict-origin-when-cross-origin"
+      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      hidden
     ></iframe>
   </div>
   <p class="ff-partner-impressum__meta">
     Quelle: Tarifcheck-Partnerprogramm.
     Wenn der Rahmen leer bleibt oder Text fehlt,
     <a href="{{ $src }}" rel="noopener noreferrer nofollow" target="_blank">Partner-Kennzeichnung direkt öffnen (Partnerseite)</a>.
-    Beim Abruf werden technische Zugriffsdaten an den Partner übermittelt.
+    Beim Laden oder Öffnen werden technische Zugriffsdaten an den Partner übermittelt.
     <a href="{{ $hinweis }}">Datenschutzhinweis</a>
   </p>
   <p class="ff-partner-impressum__print-url">{{ $src }}</p>

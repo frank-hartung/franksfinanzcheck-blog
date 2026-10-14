@@ -258,6 +258,38 @@ schritte:
       Das harte Freigabe-Gate. Rot heißt: Die heutigen Kandidaten sind nicht
       freigabefähig – genau dafür steht es im Weg.
 
+  - name: Roh-HTML-Gate – Selbsttest
+    klasse: gate-selbsttest
+    schuetzt: Roh-HTML-Gate – Quarantäne + hartes Gate (Sicherheit)
+    grund: >-
+      Sicherheitsaudit 14.10.2026 (M-06): Ein Roh-HTML-Gate, das seine
+      Angriffs- und Gegenproben nicht besteht, kann Stored XSS nicht
+      erkennen – dann ginge Ungeprüftes live.
+
+  - name: Roh-HTML-Gate – Quarantäne + hartes Gate (Sicherheit)
+    klasse: inhalt
+    grund: >-
+      Sicherheitsaudit 14.10.2026 (M-06): goldmark unsafe = true rendert
+      Roh-HTML. Betroffene Artikel gehen einzeln in Quarantäne (draft),
+      die Auslieferung läuft weiter. Rot nur, wenn eine Seite außerhalb von
+      posts/ (Impressum, Datenschutz …) gefährliches HTML enthält – das
+      darf nicht live gehen und braucht eine menschliche Entscheidung.
+
+  - name: KI-Kennzeichnung – Selbsttest
+    klasse: gate-selbsttest
+    schuetzt: KI-Kennzeichnung – Register durchsetzen (selbstheilend)
+    grund: >-
+      Sicherheitsaudit 14.10.2026 (M-17): Ohne lauffähiges Gate könnten
+      Bot-Artikel ohne das Pflichtlabel „Mit KI erstellt“ live gehen
+      (Art. 50 Abs. 4 KI-VO).
+
+  - name: KI-Kennzeichnung – Register durchsetzen (selbstheilend)
+    klasse: inhalt
+    grund: >-
+      Sicherheitsaudit 14.10.2026 (M-17): Heilt fehlende KI-Kennzeichnung
+      selbst (ai_generated: true). Rot nur, wenn die Heilung scheitert –
+      dann ginge ein Bot-Artikel ohne Pflichtlabel live.
+
   - name: Quote-Nachfüllung nach Gate-Verlust (Re-Queue + Reserve → Min)
     klasse: werkzeug
     id: quote_refill

@@ -739,6 +739,15 @@ jobs:
       - name: Roh-HTML-Gate – Quarantäne + hartes Gate (Sicherheit)
         run: python3 scripts/roh_html_gate.py --quarantaene
 
+      # KI-KENNZEICHNUNG (Audit 14.10.2026, M-17; Art. 50 Abs. 4 KI-VO):
+      # Bot-Artikel tragen ai_generated: true → Label „Mit KI erstellt“.
+      # Selbstheilend (--fix), Commit über den Gate-Heilungspfad unten.
+      - name: KI-Kennzeichnung – Selbsttest
+        run: python3 scripts/ki_kennzeichnung_gate.py --selftest
+
+      - name: KI-Kennzeichnung – Register durchsetzen (selbstheilend)
+        run: python3 scripts/ki_kennzeichnung_gate.py --fix
+
       # ================= QUOTE-NACHFÜLLUNG NACH GATE-VERLUST (#287) =========
       # Kernbefund Mo 14.09.2026: publish_gate verwarf den neuen Tages-Artikel
       # (FM-Korruption „---TITEL:“) und ließ nur 1 LIVE-Post stehen. Die

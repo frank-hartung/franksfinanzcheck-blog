@@ -8,7 +8,7 @@ tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg"
   alt: "Tierkrankenversicherung für Hund und Katze: Kosten realistisch einschätzen"
