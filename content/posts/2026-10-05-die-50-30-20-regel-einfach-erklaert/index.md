@@ -16,7 +16,7 @@ cover:
   alt: "Die 50-30-20-Regel einfach erklärt"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Die 50-30-20-Regel einfach erklärt"
-pin_description: "*Werbung | Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #503020regel"
+pin_description: "*Werbung | Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #die #503020regel #einfach"
 quellen:
   - id: "Q1"
     titel: "Referenzseite destatis.de"
