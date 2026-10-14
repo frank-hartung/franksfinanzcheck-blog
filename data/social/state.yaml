@@ -712,6 +712,19 @@ history:
     \  \n#Girokonto #Konto #KreditkarteUndKredit #GeldAbhebenImAusland"
   ref: '117438751738382391'
   ai: true
+- posted_at: '2026-10-14T17:51:11.375196+02:00'
+  channel: mastodon
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+  title: 'Abos und Verträge: Der stille Posten im Haushaltsplan'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117440058160848584
+  ok: true
+  text: 'Entdecke, wie du versteckte Abo‑Kosten aus deinem Haushaltsplan eliminierst.
+    Wiederkehrende Kosten sind schwer zu sehen, weil jeder einzelne Betrag klein wirkt.
+    https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #HaushaltsbuchFuehren #AbosKuendigen'
+  ref: '117440058160848584'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -737,4 +750,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-14T12:19:00.690403+02:00'
+updated_at: '2026-10-14T17:51:15.295928+02:00'
