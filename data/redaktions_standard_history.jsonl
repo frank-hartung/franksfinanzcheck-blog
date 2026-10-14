@@ -88,3 +88,4 @@
 {"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
 {"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "regel": "RS1-RS6", "aktion": "fix-ki"}
 {"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "V1 Lesbarkeit: Flesch 47.7 liegt unter der Publish-Schwelle 60 und verschlechtert den Text (47.9 → 47.7) – dieser Artikel würde vom Publish-Gate blockiert (Bel…"}
+{"zeit": "2026-10-14T18:36:56.134362+00:00", "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
