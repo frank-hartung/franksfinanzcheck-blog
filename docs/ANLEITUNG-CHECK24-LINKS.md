@@ -1,9 +1,23 @@
 # 🔗 Anleitung: CHECK24- & Tarifcheck-Links (zentrale Pflege)
 
 Die Affiliate-Links dieses Blogs liegen **zentral** in
-`scripts/check24_links.yaml`. Alle Artikel verlinken über das eigene
+`scripts/check24_links.yaml`. Monetarisierte Artikel verlinken über das eigene
 Gateway `https://franksfinanzcheck.de/go/<kategorie>/` – Artikel selbst
 bleiben sauber und unabhängig von PID/Deep-Änderungen.
+
+Reine Fach- und Messanleitungen ohne passendes Angebot bekommen **keinen
+sachfremden Werbe-CTA**. Solche Seiten werden im Frontmatter ausdrücklich
+und begründet markiert:
+
+```yaml
+affiliate_exempt: true
+affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot."
+```
+
+Die Ausnahme unterdrückt ausschließlich den Befund „kein Affiliate-Link“.
+Falls auf der Seite doch ein Affiliate-Link steht, prüft die Wache weiterhin
+Route, Deep-Link und Partner-ID. Eine fehlende oder leere Begründung bleibt
+fail-closed ein Fehler. Regressionen: `npm run test:affiliate-links`.
 
 **Wichtig:** Die frühere Anleitung mit `scripts/set_check24_links.py` ist
 **nicht mehr gültig** (das Skript existiert nicht mehr). Änderungen nimmt
@@ -72,17 +86,20 @@ für Bestand reicht Schritt 2 + 3.
 ## 5. Verifizieren
 
 ```bash
-# 0) Pflicht zuerst: Sehtest der Wache (Exit 2 = Detektor blind, fail-closed)
+# 0) Wöchentlicher Deep-Link-Vertrag + Ausnahmeregeln (Selbsttest + Regressionen)
+npm run test:affiliate-links
+
+# 1) Pflicht zuerst: Sehtest der Integritäts-Wache (Exit 2 = Detektor blind, fail-closed)
 python3 scripts/affiliate_integrity_gate.py --selftest
 
-# 1) Jede im Blog verwendete /go/-Route muss im Register stehen,
+# 2) Jede im Blog verwendete /go/-Route muss im Register stehen,
 #    jeder Link muss im gebauten HTML erscheinen (AI1-AI5, heilt sofort)
 python3 scripts/affiliate_integrity_gate.py
 
-# 2) E2E-Kette (Redirect-Ziel, Kategorie, PID, Gateway-Drift)
+# 3) E2E-Kette (Redirect-Ziel, Kategorie, PID, Gateway-Drift)
 python3 scripts/affiliate_health.py --no-net
 
-# 3) Intent-Wache (IW0-IW9): liefert jeder Link das Angebot, das Anker,
+# 4) Intent-Wache (IW0-IW9): liefert jeder Link das Angebot, das Anker,
 #    CTA-Satz und Artikelthema versprechen? (heilt deterministisch)
 python3 scripts/affiliate_intent_guard.py --selftest
 python3 scripts/affiliate_intent_guard.py --fix

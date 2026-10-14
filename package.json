@@ -9,6 +9,7 @@
     "test:suche": "node --test tools/ff-suche.test.mjs && python3 scripts/suchindex_check.py --selftest && python3 -m unittest scripts.tests.test_suche_pagefind",
     "test:suche:browser": "playwright test e2e/suche.spec.mjs",
     "provisionen:check": "python3 scripts/provisionen_check.py --summary",
+    "test:affiliate-links": "python3 scripts/affiliate_link_check.py --selftest && python3 -m unittest scripts.tests.test_affiliate_link_check",
     "mess:import": "python3 scripts/offline_import.py --selftest && python3 scripts/revenue_funnel.py --selftest && python3 scripts/offline_import.py",
     "mess:status": "python3 scripts/offline_import.py --status",
     "mess:vorlage": "python3 scripts/offline_import.py --template",

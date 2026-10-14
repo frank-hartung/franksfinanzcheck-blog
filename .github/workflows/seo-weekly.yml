@@ -308,6 +308,7 @@ jobs:
         # respektiert das und committet bei rotem Gate nichts Ungeprüftes.
         id: affiliate
         run: |
+          npm run test:affiliate-links
           python3 scripts/affiliate_link_check.py --fix | tee /tmp/aff_log.txt
           exit ${PIPESTATUS[0]}
 
