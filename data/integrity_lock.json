@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-14T21:11:14.411351+00:00",
-  "head": "7c5ff87",
+  "signed_at": "2026-10-14T21:53:39.967030+00:00",
+  "head": "0d76a34",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -16,7 +16,7 @@
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
-    "layouts/index.sw.js": "918ed46bf410d959a09e71a42b6570c8a6d4732ccc97b60ee903ce2ec5161a95",
+    "layouts/index.sw.js": "5363a44b377a53bb546731de2e9e19e0c5a154171ff09a04e5121b2012419ac1",
     "layouts/pillar/list.html": "435db5bd1741bde574bae2c547e75ff879fd7681ce26721513dc93a21800bac4",
     "layouts/pillar/single.html": "972b72f5d293b4fa5e041705197989cefd3015b581346eafedf408b76843cfff",
     "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
@@ -53,28 +53,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2",
-  "audit_start_sha256": "190877cf4ea3ac3b7590e820a6f7f43f6b1361aa09252307f2d8676325ab9748",
+  "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1",
+  "audit_start_sha256": "ec666bf10a4dc7b18f3b6a366c1bde85cdd9bc65d5a86f15cef3ece165bd7871",
   "audit": [
-    {
-      "date": "2026-10-09",
-      "art": "set-current",
-      "head": "3d650e8",
-      "geaendert": [
-        "layouts/_partials/extend_footer.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "1d7f00993566261593aa73f943e835dff4294ae7c2971540867b01657e16b678",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-10",
       "art": "set-current",
@@ -108,7 +89,7 @@
         }
       ],
       "files_sha256": "76380dc44d3f24ca21e5072a285c67bd5e19d283e4ca03ccf8d926fb5ecb68d9",
-      "prev_sha256": "190877cf4ea3ac3b7590e820a6f7f43f6b1361aa09252307f2d8676325ab9748"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-10",
@@ -687,8 +668,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "80a251d5170c976c1f32ae6557575f0053ede33ab99731b27adaaccf18f7b85f",
-      "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2"
+      "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2",
+      "prev_sha256": "80a251d5170c976c1f32ae6557575f0053ede33ab99731b27adaaccf18f7b85f"
+    },
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "0d76a34",
+      "geaendert": [
+        "layouts/index.sw.js"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/index.sw.js",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "0d76a34",
+              "datum": "2026-10-14",
+              "betreff": "fix(codeql): 13 Funde aus security-extended beheben"
+            },
+            {
+              "sha": "a7d33ec",
+              "datum": "2026-10-14",
+              "betreff": "fix(site): Website-Härtung und Rechtstexte nach Sicherheitsaudit 14.10.2026 (M-05, M-06, M-15, M-17, M-18, N-07, I-03, I-04, I-06, I-08)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d",
+      "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1"
     }
   ]
 }
