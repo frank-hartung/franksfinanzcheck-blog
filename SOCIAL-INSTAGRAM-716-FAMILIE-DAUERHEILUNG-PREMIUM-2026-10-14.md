@@ -5,7 +5,7 @@
 
 | Auftrag | Ergebnis |
 |---|---|
-| 1. `content-reserve.yml` soll die Reserve-Entwürfe vom 07./09.10. nachzertifizieren | **Nicht nötig, und gar nicht möglich:** Beide sind seit 14.10. 14:57 UTC **live** (Quote-Nachfüllung, `reserve_published: 2026-10-14`). Ihre Zeilen im Zertifikat waren Verbrauchsreste. Sie sind jetzt **ausgebucht**, ohne Messung und ohne verjüngte Frische. Das Werkzeug unterscheidet Verbrauch künftig von Drift. |
+| 1. `content-reserve.yml` soll die Reserve-Entwürfe vom 07./09.10. nachzertifizieren | **Nicht nötig, und gar nicht möglich:** Beide sind seit 14.10. 14:57 UTC **live** (Quote-Nachfüllung, `reserve_published: 2026-10-14`). Ihre Zeilen im Zertifikat waren Verbrauchsreste und sind inzwischen entfernt. Das Werkzeug unterscheidet Verbrauch künftig von Drift und bucht ihn **ohne Messkette** aus, ohne die Frische zu verjüngen. |
 | 2. Instagram-Winkel für `2026-08-26-dns-server-wechseln-…` | **Behoben:** 6 von 6 Winkeln sendbar (vorher 0). Im Bestand ist jetzt jeder Artikel auf Instagram in allen 6 Winkeln sendbar, mit mindestens 4 verschiedenen Captions (vorher eine einzige pro Artikel). |
 
 ---
