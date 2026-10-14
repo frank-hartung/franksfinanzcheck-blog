@@ -15,9 +15,15 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+cover:
+  image: "images/covers/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg"
+  alt: "Heizperiode vorbereiten im Spätsommer"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Die ersten kühlen Tage im September bringen oft einen kleinen Schock für das Konto. Der Verbrauch von Strom und Gas steigt plötzlich an. Die Rechnungen kommen erst später, doch die Kosten laufen bereits. Oft merkst du dann, dass dein alter Tarif gar nicht mehr zu deinem Leben passt. Wer die Planung für den Herbst jetzt angeht, spart im Winter viel Geld. Die kommenden Monate werden so deutlich günstiger für dich. In diesem Ratgeber zeige ich dir alle wichtigen Schritte. Du lernst, wie du deine Heizkosten senkst und die Gasrechnung drückst. Wir verzichten dabei auf schwere Fachwörter und nutzen keinen Verkaufsdruck.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ## 1. Überblick: Die wichtigsten Prüfpunkte vor der Heizperiode
 

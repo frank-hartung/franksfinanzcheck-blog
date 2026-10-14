@@ -1240,5 +1240,23 @@
    "badge": "INTERNET & DSL",
    "savings": ""
   }
+ },
+ "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
+  "title": "Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-14T11:50:51+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+  "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+  "ts": "2026-10-14T11:50:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
  }
 }
