@@ -27,7 +27,7 @@ composio>=0.22.1
 # --- Querschnitt ----------------------------------------------------
 # YAML liest die SSOT (data/werkbank.yaml). Im Repo ohnehin überall
 # vorausgesetzt; hier explizit, damit ein frisches venv sofort läuft.
-PyYAML>=6.0
+PyYAML>=6.0.3
 
 # NICHT hier gelistet und bewusst so:
 #   · Playwright        → kommt über package.json (@playwright/test),
