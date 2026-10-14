@@ -155,3 +155,15 @@ data/alt_texte/*.tmp
 .env
 .env.*
 !.env.example
+
+# .gitignore-Drift (Sicherheitsaudit 14.10.2026, I-02): Diese fünf Dateien
+# sind bewusst versioniert – Workflows committen sie (affiliate-integrity-daily,
+# seo-weekly, pinterest-watchdog, produktions-wache; .indexnow_submitted.json
+# verhindert Doppelmeldungen an IndexNow). Die Ausnahmen machen den Zustand
+# explizit, statt getrackte Dateien still zu „ignorieren“. Ob die Berichte
+# überhaupt öffentlich sein müssen: siehe I-01 (privates Betriebs-Repo).
+!/.indexnow_submitted.json
+!/AFFILIATE-INTEGRITY-REPORT.md
+!/AFFILIATE-INTENT-REPORT.md
+!/PINTEREST-REPORT.md
+!/PRODUKTIONS-STATUS.md
