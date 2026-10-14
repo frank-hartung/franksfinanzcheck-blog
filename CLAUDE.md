@@ -1437,6 +1437,45 @@ stoppt weiter · nichts nach dem Auslieferungs-Beleg · Siegel nach der
 Veröffentlichung · Ursachen-Nennung · Selbstheilung · Verdrahtung ·
 Regressionstest).
 
+## Eine Messkette gehört in jeden Lauf, der misst – und ein Crash ist ein Crash (Dauerheilung #740, 14.10.2026)
+
+Am 14.10.2026 fror die öffentliche Auslieferung über 14 h ein (10 rote
+`deploy.yml`-Läufe, nur ein grüner ohne neue Inhalte): Die Quote-Nachfüllung
+muss an einem Publikationstag mit `live < Minimum` Reserve-Kandidaten **messen** –
+und der `deploy`-Job trug die Messkette unvollständig (kein `hunspell`; die sechs
+Schwester-Workflows der Kette hatten es alle). Dazu ein Doppelmodul-Bug:
+`reserve_pool` importiert `publication_release` by name; in `__main__`-Ausführung
+baut das eine **zweite Instanz mit eigener `ReleaseBuildCrash`-Klasse**, deren
+Crash den `except`-Haken in `main()` verfehlte → roher Traceback, Exit 1 statt
+des Diagnose-Vertrags (Exit 3). Der Schritt reichte den Exit unevaluiert durch →
+geiselte die ganze Seite für ein kaputtes Messwerkzeug (Klasse #676).
+
+- **Jeder Workflow, der `quality_score`/`spellcheck` ausführt, installiert
+  `hunspell hunspell-de-de`** (apt, in der Abhängigkeits-Zeile, vor den Gates).
+  Neue Workflows in der Messkette ohne die Zeile sind ein Audit-Befund.
+- **Skripte, die als `python3 scripts/foo.py` laufen UND von Gate-Tools by name
+  importiert werden, registrieren vor `main()` den Alias**
+  `sys.modules['foo'] = sys.modules[__name__]` – sonst existiert pro Prozess eine
+  zweite Instanz mit eigenen Exception-Klassen, und `except`-Haken fangen
+  Import-Pfad-Crashs nicht (Selftest-Prüfung: Modul-Identität, Sektion 4 des
+  `publication_release`-Selbsttests).
+- **Auflösung von Defaults wie `validator or foo` gehört in den aufrufenden
+  Prozess** (`refill_to_min` löst `accept_candidate` explizit auf), nicht in
+  importierten Helfermodulen.
+- **Schritte, die VOR der Auslieferung stehen und MESSEN (statt Inhalten
+  zu heilen), werten ihren Exit-Code aus** (0/1/sonst) wie der Scorecard-Schritt:
+  Werkzeugfehler → `::error::` + Job-Output, Auslieferung läuft weiter,
+  `release-seal` macht den Lauf NACH der Veröffentlichung rot. Kein
+  `continue-on-error`, kein `|| true` – Auswertung statt Durchreichen (C34).
+- **Ein roter Schritt benennt die Ursache** (`Ursache: <Exception>`): Der
+  `ReleaseBuildCrash`-Haken in `main()` druckt sie für jeden Crash-Pfad, nicht
+  nur für `build_site()` (WF-A535-Lektion).
+
+Tests: `scripts/tests/test_publication_release_wache.py`
+(`DoppelmodulRegressionTests`, `DeployQuoteRefillVerdrahtungTests`) + Selftest-
+Sektionen 4–6. Vorgangsbericht:
+`BOT-WATCHDOG-740-DAUERHEILUNG-PREMIUM-2026-10-14.md`.
+
 ## Meldetakt an den Ausfall (C35, seit #676 Teil 2, 10.10.2026)
 
 C34 baute den Befund `deploy-blockade`. Gesehen hat ihn trotzdem niemand: Der
