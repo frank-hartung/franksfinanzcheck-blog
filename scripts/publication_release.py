@@ -365,6 +365,14 @@ def refill_to_min(posts_dir=None, validator=None, *, finalize: bool = True) -> l
     import cadence_guard as cg
     import reserve_pool
 
+    # Doppelmodul-Schutz (Dauerheilung #740): Der Validator kommt IMMER aus
+    # diesem Prozess. Früher wurde `validator=None` durchgereicht, und
+    # `reserve_pool.publish_to_min` importierte dann `publication_release`
+    # by name – in `__main__`-Ausführung (Deploy, Engine) eine ZWEITE
+    # Modulinstanz mit eigener ReleaseBuildCrash-Klasse, deren Crash dem
+    # except-Haken in main() entkam (roher Traceback, Exit 1 statt Exit 3).
+    validator = validator or accept_candidate
+
     posts_dir = posts_dir or ROOT / 'content' / 'posts'
     live, minimum, today = live_count_today(posts_dir)
     if today.weekday() not in cg.PUBLICATION_DAYS:
@@ -541,8 +549,17 @@ def main(argv=None):
 
     try:
         return _dispatch(args)
-    except ReleaseBuildCrash:
-        # build_site() hat bereits strukturiert diagnostiziert.
+    except ReleaseBuildCrash as exc:
+        # build_site() hat bereits strukturiert diagnostiziert; jeder andere
+        # Crash-Pfad (Qualitätsmessung, Gate-Werkzeug) muss die Ursache hier
+        # benennen – ein roter Schritt, der sie nicht nennt, erzieht zum
+        # Wegsehen (WF-A535 #529, Bau-Unfall 02.10.2026).
+        print()
+        print(f"🛑 PUBLICATION-RELEASE: Release-Crash – Endabnahme stoppt "
+              f"fail-closed (Exit {EXIT_CRASH}).")
+        print(f"    Ursache: {exc}")
+        print("    Das ist KEIN Tagesdefizit (Exit 1): Die Veröffentlichungskette")
+        print("    selbst ist blockiert; der Reserve-Refill lief nicht.")
         return EXIT_CRASH
     except subprocess.CalledProcessError as exc:
         _report_tool_crash(exc)
@@ -737,15 +754,121 @@ def run_selftest() -> int:
         except ReleaseBuildCrash:
             pass  # Vertrag: Crash wird diagnostiziert UND weitergereicht
 
+    # 4) Doppelmodul-Identität (Dauerheilung #740): Wenn die Refill-Kette
+    #    `publication_release` by name importiert (so macht es
+    #    `reserve_pool.publish_to_min` mit validator=None), muss im selben
+    #    Prozess DIESELBE Crash-Klasse sichtbar sein. Sonst entkommt ein
+    #    ReleaseBuildCrash aus dem Import-Pfad dem except-Haken in main()
+    #    und tötet den Deploy-Schritt mit rohem Traceback (Exit 1 statt
+    #    Exit 3) – genau der Befund #740 (eingefrorene Auslieferung).
+    me = sys.modules[__name__]
+    imported = sys.modules.get('publication_release')
+    if imported is None or imported.ReleaseBuildCrash is not ReleaseBuildCrash:
+        errors.append(
+            "Doppelmodul: Der by-name-Import liefert nicht die "
+            "ReleaseBuildCrash-Klasse dieses Prozesses (Befund #740)")
+
+    # 5) Crash-Vertrag über den Import-Pfad (Dauerheilung #740): Ein
+    #    ReleaseBuildCrash, der aus dem by-name-Import geworfen wird, muss
+    #    denselben Vertrag erfüllen wie einer aus diesem Modul – main()
+    #    liefert Exit 3 mit benannter Ursache, nie roher Traceback.
+    if imported is not None:
+        def _crash_import_pfad(args):
+            raise imported.ReleaseBuildCrash(
+                "Qualitätsmessung ausgefallen: {'spelling': "
+                "\"[Errno 2] No such file or directory: 'hunspell'\"}")
+        with mock.patch.object(me, 'heal_shortcode_damage', lambda: True), \
+             mock.patch.object(me, '_dispatch', _crash_import_pfad):
+            try:
+                rc = main(['--refill-only'])
+            except Exception as exc:  # noqa: BLE001 – Vertrag: kein Durchrutschen
+                rc = f'unbehandelt: {type(exc).__qualname__}'
+        if rc != EXIT_CRASH:
+            errors.append(
+                f"Import-Pfad-Crash entkommt dem except-Haken "
+                f"(Befund #740): {rc}")
+
+    # 6) Validator-Wiring (Dauerheilung #740): `refill_to_min` muss einen
+    #    fehlenden Validator aus DIESEM Prozess auflösen – nicht aus einem
+    #    by-name-Import von `reserve_pool` (der in `__main__`-Ausführung
+    #    eine zweite Modulinstanz baut). Der Sentinel beweist, dass der
+    #    lokale Validator die Kandidaten prüft. Eigene Temp-Daten: Die
+    #    Fixtures oben liegen in einem bereits gelöschten Verzeichnis.
+    class FixedDate6(dt.date):
+        @classmethod
+        def today(cls):
+            return cls(2026, 9, 21)  # Montag
+
+    class FixedDateTime6(dt.datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return cls(2026, 9, 21, 12, 0, tzinfo=dt.timezone.utc)
+
+    _wire_calls = []
+
+    def _sentinel_validator(index):
+        _wire_calls.append(index.parent.name)
+        return True
+
+    with tempfile.TemporaryDirectory() as tmp6:
+        posts6 = Path(tmp6) / 'content' / 'posts'
+        posts6.mkdir(parents=True)
+
+        def _write6(slug, titel):
+            p = posts6 / slug / 'index.md'
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(
+                f"---\ntitle: {titel}\ndate: 2026-09-21T12:00:00Z\n"
+                "draft: true\nreserve: true\n---\nBody\n",
+                encoding='utf-8',
+            )
+            return p
+
+        # Unterschiedliche Themen: Die Themen-Sperre (DUBLETTEN-Sperre)
+        # darf keinen Kandidaten vor dem Validator zurückstellen.
+        _write6('w6-reserve-b', 'Klimaanlage leasen 2026')
+        _write6('w6-reserve-c', 'Steuererklärung digital erledigen')
+
+        try:
+            with mock.patch.object(dt, 'date', FixedDate6), \
+                 mock.patch.object(dt, 'datetime', FixedDateTime6), \
+                 mock.patch('cadence_guard.now_utc_iso',
+                            lambda: '2026-09-21T12:00:00Z'), \
+                 mock.patch('reserve_pool.now_utc_iso',
+                            lambda: '2026-09-21T12:00:00Z'), \
+                 mock.patch('reserve_pool.datetime.date', FixedDate6), \
+                 mock.patch.object(me, 'accept_candidate', _sentinel_validator):
+                refill_to_min(posts_dir=posts6, validator=None, finalize=False)
+        except Exception as exc:  # noqa: BLE001 – Vertrag: crashfrei bis zum Min.
+            errors.append(
+                f"Validator-Wiring (#740): Refill-Pfad crascht statt dem "
+                f"lokalen Validator zu vertrauen ({type(exc).__name__})")
+    if not _wire_calls:
+        errors.append(
+            "refill_to_min nutzt nicht den Validator dieses Prozesses "
+            "(Doppelmodul-Risiko #740)")
+
     if errors:
         print("🛑 PUBLICATION-RELEASE-SELFTEST FEHLGESCHLAGEN:")
         for e in errors:
             print(f"   - {e}")
         return 2
     print("✅ publication_release-Selbsttest grün "
-          "(Refill bis Minimum, Off-Day-Schutz, WF-A535-Diagnose).")
+          "(Refill bis Minimum, Off-Day-Schutz, WF-A535-Diagnose, "
+          "#740-Modul-Identität).")
     return 0
 
 
 if __name__ == '__main__':
+    # Doppelmodul-Schutz (Dauerheilung #740): Im Deploy läuft dieses Skript als
+    # `python3 scripts/publication_release.py` → Modul `__main__`. Ruft die
+    # Refill-Kette dann ein Gate-Tool `publication_release` by name (so macht
+    # es `reserve_pool.publish_to_min` mit validator=None), würde Python ohne
+    # diese Alias-Zeile eine ZWEITE Modulinstanz mit eigener
+    # ReleaseBuildCrash-Klasse bauen – ein dort geworfener Crash entkommt dem
+    # `except ReleaseBuildCrash` in main() und tötet den Schritt mit rohem
+    # Traceback (Exit 1) statt des Diagnose-Vertrags (Exit 3). Mit dem Alias
+    # zeigt der Import-Name auf dieselbe Instanz: Ein Crash ist ein Crash,
+    # egal über welchen Pfad er kommt.
+    sys.modules['publication_release'] = sys.modules[__name__]
     raise SystemExit(main())

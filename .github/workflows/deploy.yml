@@ -346,6 +346,10 @@ jobs:
       artefakt_ok: ${{ steps.artefakt.outputs.artefakt_ok }}
       scorecard_exit: ${{ steps.scorecard.outputs.exit_code }}
       scorecard_werkzeugfehler: ${{ steps.scorecard.outputs.werkzeugfehler }}
+      # Dauerheilung #740: Werkzeugfehler der Quote-Nachfüllung blockieren
+      # die Auslieferung nicht mehr (C34) – sie werden NACH der
+      # Veröffentlichung vom Siegel rot gewertet (Dauerheilung #676).
+      refill_werkzeugfehler: ${{ steps.quote_refill.outputs.werkzeugfehler }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
@@ -394,7 +398,17 @@ jobs:
       # Die Heilungen werden gepusht (konvergent: der ausgelöste
       # Folge-Deploy findet einen sauberen Zustand und pusht nichts mehr).
       - name: Py-Abhängigkeiten für Gate-Chain
-        run: python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
+        run: |
+          python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
+          # VOLLSTÄNDIGE Messkette im Deploy (Dauerheilung #740): Die
+          # Quote-Nachfüllung misst jeden Re-Queue-/Reserve-Kandidaten mit
+          # quality_score – dessen Rechtschreibmessung braucht hunspell.
+          # Ohne die Pakete fällt die Messung aus (measurement_errors), und
+          # der Refill crashte am ersten Kandidaten. Alle übrigen Workflows
+          # der Messkette (Content-Engine, Content-Reserve,
+          # Kadenz-Endkontrolle, Bot-Watchdog, Affiliate-Integrity)
+          # installieren es bereits – nur dieser Job hatte es nie.
+          sudo apt-get install -y -qq hunspell hunspell-de-de
 
       # ---------------------------------------------------------------
       # PRODUKTIONSWACHE DESIGN-VARIANTEN (26.09.2026)
@@ -707,10 +721,58 @@ jobs:
       # unter dem Mindestziel. Ab sofort: nach JEDEM Gate-Lauf deterministisch
       # Re-Queue + Reserve bis LIVE-Minimum nachschieben (ohne KI, fail-closed
       # pro Kandidat). Commit/Rebuild übernimmt der bestehende Gate-Diff-Pfad.
+      #
+      # DAUERHEILUNG #740 (14.10.2026) – „Quote-Messung ohne Auslieferungs-
+      # geiselhaltung“, exakt wie der Scorecard-Schritt oben (Dauerheilung
+      # #676). Befund: Am 14.10.2026 stand an einem Publikationstag unter
+      # Minimum (0/2), der Refill musste erstmals Reserve-Kandidaten MESSEN –
+      # und der Deploy-Job hatte die Messkette unvollständig (kein hunspell),
+      # dazu baute `reserve_pool` in der `__main__`-Ausführung eine zweite
+      # Modulinstanz von `publication_release`, deren ReleaseBuildCrash dem
+      # except-Haken in main() entkam. Resultat: roher Traceback, Exit 1,
+      # DEPLOY TOT – 8 Läufe in Folge, nichts ging öffentlich raus, obwohl
+      # kein einziger Inhalts-Befund vorlag. Ein kaputtes Messwerkzeug ist
+      # kein Inhaltsbefund und darf die öffentliche Auslieferung nie als
+      # Geisel nehmen (C34). Der Schritt bewertet deshalb jetzt SEINE
+      # Exit-Codes statt sie durchzureichen:
+      #   0   = Quote gefüllt oder nichts zu tun (Defizit bleibt über
+      #         publication_check/Endkontrolle rot – unverändert, #287)
+      #   3   = Release-Crash (Mess-/Werkzeugfehler) → Auslieferung läuft
+      #         WETTER, Lauf wird NACH der Veröffentlichung rot
+      #         (release-seal)
+      #   sonst = unerwartet → gleiche Behandlung (laut, nie Geisel)
+      # Der Selbsttest bleibt die Fangnetz-Instanz: Ist der Refill-Vertrag
+      # selbst rot, wird der Refill übersprungen – ebenfalls ohne die
+      # Auslieferung zu blockieren.
       - name: Quote-Nachfüllung nach Gate-Verlust (Re-Queue + Reserve → Min)
+        id: quote_refill
         run: |
+          set +e
           python3 scripts/publication_release.py --selftest
+          selftest=$?
+          set -e
+          if [ "$selftest" -ne 0 ]; then
+            echo "::error::Quote-Nachfüllung-Selbsttest rot – der Refill-Vertrag ist nicht verifiziert, die Nachfüllung bleibt für diesen Lauf aus. Die Auslieferung läuft bewusst weiter; der Lauf wird nach der Veröffentlichung rot (Job release-seal, Dauerheilung #676/#740). Eine ausgefallene Messung ist kein Grün (C33)."
+            echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          set +e
           python3 scripts/publication_release.py --refill-only
+          refill=$?
+          set -e
+          case "$refill" in
+            0)
+              echo "✅ Quote-Nachfüllung: Refill-Vertrag erfüllt (Defizite bleiben über publication_check/Endkontrolle rot – #287)."
+              ;;
+            3)
+              echo "::error::Quote-Nachfüllung meldet WERKZEUGFEHLER (Exit 3 = Release-Crash) – die Quote ist für diesen Lauf nicht messbar, der Refill lief nicht. Das ist KEIN Inhaltsbefund: Die Auslieferung läuft bewusst weiter; der Lauf wird nach der Veröffentlichung rot (Job release-seal, Dauerheilung #676/#740). Eine ausgefallene Messung ist kein Grün (C33)."
+              echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::error::Quote-Nachfüllung Exit $refill – unerwarteter Exit-Code (Vertrag: 0 = ok, 3 = Crash). Die Auslieferung läuft bewusst weiter; der Lauf wird nach der Veröffentlichung rot (Job release-seal, Dauerheilung #676/#740)."
+              echo "werkzeugfehler=true" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
 
       # ============ AUSLIEFERUNGS-ISOLATION (Dauerheilung #676) ============
       # Befund 09.10.2026: Der neueste Artikel lag veröffentlichungsreif im
@@ -1286,6 +1348,7 @@ jobs:
           ARTEFAKT_OK: ${{ needs.deploy.outputs.artefakt_ok }}
           SCORECARD_EXIT: ${{ needs.deploy.outputs.scorecard_exit }}
           SCORECARD_WERKZEUGFEHLER: ${{ needs.deploy.outputs.scorecard_werkzeugfehler }}
+          REFILL_WERKZEUGFEHLER: ${{ needs.deploy.outputs.refill_werkzeugfehler }}
         run: |
           set -uo pipefail
           echo "## 🧾 Auslieferungs-Siegel (#676)" >> "$GITHUB_STEP_SUMMARY"
@@ -1296,6 +1359,7 @@ jobs:
           echo "| pages-deployment | ${PAGES_ERGEBNIS:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Auslieferungs-Artefakt | ${ARTEFAKT_OK:-nicht bestätigt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Release-Scorecard Exit | ${SCORECARD_EXIT:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Quote-Nachfüllung Werkzeugfehler | ${REFILL_WERKZEUGFEHLER:-nein} |" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
           # Verdrängter Lauf (Issue #218): Ein `cancelled` ist gewolltes
@@ -1323,6 +1387,11 @@ jobs:
 
           if [ "$SCORECARD_WERKZEUGFEHLER" = "true" ]; then
             echo "::error::Release-Scorecard meldete einen WERKZEUGFEHLER (Exit ${SCORECARD_EXIT:-unbekannt}). Die Auslieferung ist bewusst weitergelaufen (Dauerheilung #676), das Siegel fehlt damit für diesen Stand – Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md"
+            fehler=1
+          fi
+
+          if [ "$REFILL_WERKZEUGFEHLER" = "true" ]; then
+            echo "::error::Quote-Nachfüllung meldete einen WERKZEUGFEHLER (Selbsttest rot oder Release-Crash/Exit 3). Die Quote war für diesen Lauf nicht messbar und die Nachfüllung blieb aus – die Auslieferung ist bewusst weitergelaufen (Dauerheilung #676/#740: ein kaputtes Messwerkzeug ist kein Inhaltsbefund und nimmt die Live-Site nicht als Geisel), das Siegel fehlt damit für diesen Stand. Das ECHTE Defizit (falls vorhanden) meldet publication_check/Endkontrolle über ihren Fachkanal."
             fehler=1
           fi
 
