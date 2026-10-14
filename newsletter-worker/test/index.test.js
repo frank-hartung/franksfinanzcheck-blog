@@ -19,7 +19,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON } from '../src/index.js';
+import worker, { TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen } from '../src/index.js';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -115,7 +115,7 @@ test('healthz: KV erreichbar -> ok', async () => {
 });
 
 // ------------------------------------------------------------------ anmeldung
-test('anmeldung: neuer Absender -> pending + Token + Nachweis + Dispatch (nur Token)', async () => {
+test('anmeldung: neuer Absender -> pending + Token + Nachweis + Dispatch (ohne Token/Adresse)', async () => {
   const kv = kvLeeren();
   const antwort = await anmelden(kv, {
     email: 'Leser@Beispiel.DE', consent: '1', themen: ['strom-sparen', 'internet-dsl'],
@@ -128,7 +128,8 @@ test('anmeldung: neuer Absender -> pending + Token + Nachweis + Dispatch (nur To
   assert.equal(eintrag.status, 'pending');
   assert.equal(eintrag.themen.length, 2);
   assert.match(eintrag.token, /^[A-Za-z0-9_-]{32}$/);
-  assert.ok(eintrag.seit && eintrag.ip && eintrag.user_agent);
+  assert.ok(eintrag.seit);
+  assert.ok(!eintrag.ip && !eintrag.user_agent, 'IP/UA nur im befristeten Nachweis (Audit N-04)');
 
   // Token-Rueckweg und Nachweis (TTL 3 Jahre)
   assert.equal(await kv.get(`token:${eintrag.token}`), 'leser@beispiel.de');
@@ -144,8 +145,9 @@ test('anmeldung: neuer Absender -> pending + Token + Nachweis + Dispatch (nur To
   assert.match(dispatche[0].ziel, /api\.github\.com\/repos\/frank-hartung\/franksfinanzcheck-blog\/actions\/workflows\/newsletter-lifecycle\.yml\/dispatches$/);
   const body = JSON.parse(dispatche[0].opt.body);
   assert.equal(body.ref, 'main');
-  assert.equal(body.inputs.aktion, 'bestaetigung');
-  assert.equal(body.inputs.token, eintrag.token);
+  assert.equal(body.inputs.aktion, 'nachgang');
+  assert.equal(body.inputs.token, undefined, 'kein Token im Dispatch – er stuende im Actions-Log (Audit H-05)');
+  assert.ok(!JSON.stringify(body).includes(eintrag.token), 'Token nirgends im Dispatch-Body');
   assert.ok(!JSON.stringify(body).includes('@beispiel.de'), 'keine Adresse im Dispatch-Body');
 });
 
@@ -171,7 +173,7 @@ test('anmeldung: Honeypot gefuellt -> still "ok", nichts gespeichert', async () 
   assert.equal((await antwort.json()).status, 'ok');
   assert.equal(await kv.get('abo:bot@beispiel.de', 'json'), null);
   assert.equal(dispatche.length, 0, 'Bot triggert keine Bestätigung');
-  assert.ok([...kv.map.keys()].some((k) => k === 'metrik:falle'), 'Falle wird gezählt');
+  assert.ok(![...kv.map.keys()].some((k) => k.startsWith('metrik:')), 'Falle schreibt nichts ins KV (Schreibbudget, Audit H-03)');
 });
 
 test('anmeldung: Zeitfalle (Formular in < 1,5 s ausgefuellt) -> still ok, nichts gespeichert', async () => {
@@ -196,7 +198,7 @@ test('anmeldung: ungueltige Adresse -> 400', async () => {
   }
 });
 
-test('anmeldung: bereits pending -> bereits-pending, kein zweiter Dispatch', async () => {
+test('anmeldung: bereits pending -> gleiche Antwort wie neu, kein zweiter Dispatch', async () => {
   const kv = kvLeeren();
   dispatche = [];
   const erste = await anmelden(kv, { email: 'p@beispiel.de', consent: '1' });
@@ -204,29 +206,29 @@ test('anmeldung: bereits pending -> bereits-pending, kein zweiter Dispatch', asy
   const nachErstem = dispatche.length;
   assert.equal(nachErstem, 1, 'erster Lauf triggert genau ein Mal');
   const zweite = await anmelden(kv, { email: 'p@beispiel.de', consent: '1' });
-  assert.equal((await zweite.json()).status, 'bereits-pending');
+  assert.equal((await zweite.json()).status, 'angemeldet', 'keine Enumeration (Audit M-01)');
   assert.equal(dispatche.length, nachErstem, 'zweiter Lauf triggert NICHT (kein Spam)');
 });
 
-test('anmeldung: bereits aktiv -> bereits-aktiv, Token bleibt unveraendert', async () => {
+test('anmeldung: bereits aktiv -> gleiche Antwort wie neu, Token bleibt unveraendert', async () => {
   const kv = kvLeeren();
   await anmelden(kv, { email: 'a@beispiel.de', consent: '1' });
   const eintrag = await kv.get('abo:a@beispiel.de', 'json');
   await worker.fetch(form_request('/bestaetigung', { token: eintrag.token }), env_mit(kv));
   const wieder = await anmelden(kv, { email: 'a@beispiel.de', consent: '1' });
-  assert.equal((await wieder.json()).status, 'bereits-aktiv');
+  assert.equal((await wieder.json()).status, 'angemeldet', 'keine Enumeration (Audit M-01)');
   const nachher = await kv.get('abo:a@beispiel.de', 'json');
   assert.equal(nachher.token, eintrag.token);
   assert.equal(nachher.status, 'active');
 });
 
-test('anmeldung: Adresse war abgemeldet -> Wiederanmeldung mit NEUEM Token', async () => {
+test('anmeldung: Adresse war abgemeldet -> Wiederanmeldung mit NEUEM Token, gleiche Antwort', async () => {
   const kv = kvLeeren();
   await anmelden(kv, { email: 'w@beispiel.de', consent: '1' });
   const alt = await kv.get('abo:w@beispiel.de', 'json');
   await worker.fetch(form_request('/abmeldung', { token: alt.token }), env_mit(kv));
   const wieder = await anmelden(kv, { email: 'w@beispiel.de', consent: '1' });
-  assert.equal((await wieder.json()).status, 'wieder-angemeldet');
+  assert.equal((await wieder.json()).status, 'angemeldet', 'keine Enumeration (Audit M-01)');
   const neu = await kv.get('abo:w@beispiel.de', 'json');
   assert.equal(neu.status, 'pending');
   assert.notEqual(neu.token, alt.token);
@@ -326,21 +328,25 @@ test('abmeldung: POST aktiv -> unsubscribed (inkl. Nachweis-Zustand)', async () 
   assert.ok(nachher.abbestellt);
 });
 
-test('abmeldung: GET (One-Klick-Link) entfernt ebenso – Token bleibt nachweisbar', async () => {
+test('abmeldung: GET mit Token fragt nur nach – erst der POST meldet ab (Audit M-03)', async () => {
   const kv = kvLeeren();
   await anmelden(kv, { email: 'one@beispiel.de', consent: '1' });
   const eintrag = await kv.get('abo:one@beispiel.de', 'json');
   await worker.fetch(form_request('/bestaetigung', { token: eintrag.token }), env_mit(kv));
-  const antwort = await worker.fetch(
+  // Link-Scanner (Outlook Safe Links, Virenscanner) rufen GET auf – das darf
+  // niemanden abmelden.
+  const vorschau = await worker.fetch(
     new Request(`http://abos.test/abmeldung?token=${eintrag.token}`, { headers: { accept: 'application/json' } }),
     env_mit(kv),
   );
+  assert.equal(vorschau.status, 200);
+  assert.equal((await vorschau.json()).status, 'bestaetigen');
+  assert.equal((await kv.get('abo:one@beispiel.de', 'json')).status, 'active', 'GET aendert nichts');
+  // Der Klick auf „Abmelden“ (POST) meldet ab …
+  const antwort = await worker.fetch(form_request('/abmeldung', { token: eintrag.token }), env_mit(kv));
   assert.equal((await antwort.json()).status, 'abgemeldet');
-  // Zweiter Klick bleibt idempotent (kein Fehler, keine Datenverfälschung).
-  const wieder = await worker.fetch(
-    new Request(`http://abos.test/abmeldung?token=${eintrag.token}`, { headers: { accept: 'application/json' } }),
-    env_mit(kv),
-  );
+  // … und ein zweiter Klick bleibt idempotent.
+  const wieder = await worker.fetch(form_request('/abmeldung', { token: eintrag.token }), env_mit(kv));
   assert.equal((await wieder.json()).status, 'bereits-abgemeldet');
 });
 
@@ -583,11 +589,19 @@ test('GET /praferenzen: abgemeldet -> 410, unbekannt -> 404', async (t) => {
   assert.equal((await worker.fetch(get_request('/praferenzen?token=nix'), env, {})).status, 404);
 });
 
-test('GET /abmelden: One-Klick unverändert (regressionsschirm für die Journey-GETs)', async (t) => {
+test('GET /abmeldung: Bestaetigungsseite mit POST-Formular, Status unveraendert', async (t) => {
   const kv = kvLeeren();
   abo_sae(kv, 'marie@example.de', 'active', 'tok-OK');
   const antwort = await worker.fetch(get_request('/abmeldung?token=tok-OK'), env_mit(kv), {});
   assert.equal(antwort.status, 200);
+  assert.match(antwort.headers.get('content-type'), /text\/html/);
+  const html = await antwort.text();
+  assert.match(html, /<form[^>]+method="post"/i);
+  assert.match(html, /name="token" value="tok-OK"/);
+  assert.equal(JSON.parse(kv.map.get('abo:marie@example.de')).status, 'active', 'GET meldet nicht ab');
+  // Formular-Roundtrip ohne JavaScript
+  const post = await worker.fetch(form_request('/abmeldung', { token: 'tok-OK' }, { akzept: 'text/html' }), env_mit(kv));
+  assert.equal(post.status, 200);
   assert.equal(JSON.parse(kv.map.get('abo:marie@example.de')).status, 'unsubscribed');
 });
 
@@ -826,7 +840,10 @@ test('healthz: zeigt Cron-Takte und letzten Dispatch (ohne Adressen/Secrets)', a
   const freilass = fetch_sperr();
   await worker.scheduled({ cron: '30 4 * * TUE,FRI', scheduledTime: Date.UTC(2026, 8, 25, 4, 30) }, env_mit(kv), { waitUntil() {} });
   freilass();
-  const antwort = await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv));
+  // Oeffentlich: nur lebendig/tot – keine Workflow-Namen, keine Fehlertexte.
+  const offen = await (await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv))).json();
+  assert.deepEqual(Object.keys(offen).sort(), ['ok', 'ts']);
+  const antwort = await worker.fetch(new Request('http://abos.test/healthz', { headers: { 'X-FF-Key': EXPORT_KEY } }), env_mit(kv));
   const daten = await antwort.json();
   assert.deepEqual([...daten.takt.crons].sort(), Object.keys(TAKT).sort());
   assert.equal(daten.takt.letzte.digest.status, 'dispatched');
@@ -975,4 +992,167 @@ test('Abo und Token: TTL für pending/unsubscribed, aktives Abo ohne TTL', async
   await worker.fetch(form_request('/abmeldung', { token: pending.token }), env_mit(kv));
   assert.equal(kv.options.get('abo:ttl@beispiel.de').expirationTtl, 29 * 86400);
   assert.equal(kv.options.get(`token:${pending.token}`).expirationTtl, 29 * 86400);
+});
+
+// ------------------------------------------------------------------ Haertung (Audit 14.10.2026)
+function mit_kopf(request, kopf) {
+  const h = new Headers(request.headers);
+  for (const [k, v] of Object.entries(kopf)) h.set(k, v);
+  return new Request(request, { headers: h });
+}
+
+test('CSRF: POST aus fremdem Origin -> 403, nichts gespeichert (Audit M-02)', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr();
+  const req = mit_kopf(form_request('/anmeldung', { email: 'csrf@beispiel.de', consent: '1' }), { Origin: 'https://boese.example' });
+  const antwort = await worker.fetch(req, env_mit(kv));
+  freilass();
+  assert.equal(antwort.status, 403);
+  assert.equal(await kv.get('abo:csrf@beispiel.de', 'json'), null);
+  assert.equal(dispatche.length, 0);
+});
+
+test('CSRF: Abmeldung aus fremdem Origin -> 403, Abo bleibt aktiv', async () => {
+  const kv = kvLeeren();
+  abo_sae(kv, 'opfer@example.de', 'active', 'tok-OPFER');
+  const req = mit_kopf(form_request('/abmeldung', { token: 'tok-OPFER' }), { Origin: 'https://boese.example' });
+  const antwort = await worker.fetch(req, env_mit(kv));
+  assert.equal(antwort.status, 403);
+  assert.equal(JSON.parse(kv.map.get('abo:opfer@example.de')).status, 'active');
+});
+
+test('CSRF: Site-Origin, Worker-Origin und Mailprogramm (ohne Origin) bleiben erlaubt', async () => {
+  const kv = kvLeeren();
+  const site = await worker.fetch(mit_kopf(form_request('/anmeldung', { email: 's1@beispiel.de', consent: '1' }), { Origin: 'https://franksfinanzcheck.de' }), env_mit(kv));
+  assert.equal(site.status, 200);
+  abo_sae(kv, 'o1@example.de', 'active', 'tok-O1');
+  const eigen = await worker.fetch(mit_kopf(form_request('/abmeldung', { token: 'tok-O1' }), { Origin: 'http://abos.test' }), env_mit(kv));
+  assert.equal(eigen.status, 200);
+  abo_sae(kv, 'o2@example.de', 'active', 'tok-O2');
+  const mua = await worker.fetch(form_request('/abmeldung', { token: 'tok-O2' }), env_mit(kv));
+  assert.equal(mua.status, 200, 'RFC-8058-One-Click aus dem Mailprogramm sendet keinen Origin');
+  assert.equal(JSON.parse(kv.map.get('abo:o2@example.de')).status, 'unsubscribed');
+});
+
+test('CSRF: Origin "null" nur bei Sec-Fetch-Site same-origin', async () => {
+  const kv = kvLeeren();
+  abo_sae(kv, 'n1@example.de', 'active', 'tok-N1');
+  const fremd = await worker.fetch(mit_kopf(form_request('/abmeldung', { token: 'tok-N1' }), { Origin: 'null' }), env_mit(kv));
+  assert.equal(fremd.status, 403, 'sandboxed iframe / data:-URL');
+  const eigen = await worker.fetch(mit_kopf(form_request('/abmeldung', { token: 'tok-N1' }), { Origin: 'null', 'Sec-Fetch-Site': 'same-origin' }), env_mit(kv));
+  assert.equal(eigen.status, 200);
+});
+
+test('Enumeration: neu, pending, aktiv und abgemeldet liefern denselben Antwortkoerper (Audit M-01)', async () => {
+  const kv = kvLeeren();
+  const neu = await (await anmelden(kv, { email: 'e1@beispiel.de', consent: '1' })).text();
+  const pending = await (await anmelden(kv, { email: 'e1@beispiel.de', consent: '1' })).text();
+  abo_sae(kv, 'e2@beispiel.de', 'active', 'tok-E2');
+  const aktiv = await (await anmelden(kv, { email: 'e2@beispiel.de', consent: '1' })).text();
+  abo_sae(kv, 'e3@beispiel.de', 'unsubscribed', 'tok-E3');
+  const ab = await (await anmelden(kv, { email: 'e3@beispiel.de', consent: '1' })).text();
+  assert.equal(pending, neu);
+  assert.equal(aktiv, neu);
+  assert.equal(ab, neu);
+});
+
+test('Export: Schluessel per Query wird abgelehnt – nur Header (Audit N-01)', async () => {
+  const kv = kvLeeren();
+  const query = await worker.fetch(new Request(`http://abos.test/export/abonnenten?sluessel=${EXPORT_KEY}`), env_mit(kv));
+  assert.equal(query.status, 403);
+  const kopf = await worker.fetch(new Request('http://abos.test/export/abonnenten', { headers: { 'X-FF-Key': EXPORT_KEY } }), env_mit(kv));
+  assert.equal(kopf.status, 200);
+});
+
+test('Sicherheitskopf: CSP, nosniff, DENY, Referrer-Policy auf JSON und HTML', async () => {
+  const kv = kvLeeren();
+  abo_sae(kv, 'h@example.de', 'active', 'tok-H');
+  const antworten = [
+    await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv)),
+    await worker.fetch(get_request('/praferenzen?token=tok-H'), env_mit(kv)),
+    await worker.fetch(get_request('/abmeldung?token=tok-H'), env_mit(kv)),
+    await worker.fetch(new Request('http://abos.test/export/abonnenten'), env_mit(kv)),
+  ];
+  for (const a of antworten) {
+    assert.match(a.headers.get('content-security-policy') || '', /frame-ancestors 'none'/);
+    assert.equal(a.headers.get('x-content-type-options'), 'nosniff');
+    assert.equal(a.headers.get('x-frame-options'), 'DENY');
+    assert.equal(a.headers.get('referrer-policy'), 'same-origin');
+  }
+});
+
+test('Rate-Limit: Binding RATE_LIMITER entscheidet ohne KV-Schreibzugriff (Audit H-03)', async () => {
+  const kv = kvLeeren();
+  const schluessel = [];
+  const RATE_LIMITER = { async limit({ key }) { schluessel.push(key); return { success: false }; } };
+  const antwort = await anmelden(kv, { email: 'rl@beispiel.de', consent: '1' }, { env: { RATE_LIMITER } });
+  assert.equal(antwort.status, 429);
+  assert.equal(schluessel.length, 1);
+  assert.ok(!schluessel[0].includes('1.2.3.4'), 'Schluessel gehasht');
+  assert.equal(kv.map.size, 0, 'kein KV-Schreibzugriff');
+});
+
+test('Turnstile: mit TURNSTILE_SECRET ohne/mit falschem Token -> abgelehnt, mit gueltigem -> angemeldet', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { TURNSTILE_SECRET: 'ts-geheim' });
+  let geprueft = null;
+  const freilass = fetch_sperr((ziel, opt) => {
+    if (String(ziel).includes('challenges.cloudflare.com')) {
+      geprueft = new URLSearchParams(opt.body.toString());
+      return new Response(JSON.stringify({ success: geprueft.get('response') === 'gut' }), { status: 200 });
+    }
+    return new Response(null, { status: 204 });
+  });
+  const ohne = await worker.fetch(form_request('/anmeldung', { email: 't@beispiel.de', consent: '1' }), env);
+  const falsch = await worker.fetch(form_request('/anmeldung', { email: 't@beispiel.de', consent: '1', 'cf-turnstile-response': 'schlecht' }), env);
+  assert.equal(await kv.get('abo:t@beispiel.de', 'json'), null);
+  const gut = await worker.fetch(form_request('/anmeldung', { email: 't@beispiel.de', consent: '1', 'cf-turnstile-response': 'gut' }), env);
+  freilass();
+  assert.ok(ohne.status >= 400 && ohne.status < 500);
+  assert.ok(falsch.status >= 400 && falsch.status < 500);
+  assert.equal(gut.status, 200);
+  assert.equal(geprueft.get('secret'), 'ts-geheim');
+  assert.equal((await kv.get('abo:t@beispiel.de', 'json')).status, 'pending');
+});
+
+test('Feedback: Tagesobergrenze schuetzt das KV-Schreibbudget (Audit H-03)', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv, { FEEDBACK_MAX_PRO_TAG: '2' });
+  for (const ip of ['198.51.100.1', '198.51.100.2', '198.51.100.3', '198.51.100.4']) {
+    const a = await worker.fetch(feedback_request('pillar-strom-sparen', 'ja', ip), env);
+    assert.equal(a.status, 200, 'der Leser sieht nie einen Fehler');
+  }
+  const stand = await (await worker.fetch(new Request('http://abos.test/feedback?slug=pillar-strom-sparen'), env)).json();
+  assert.equal(stand.ja, 2, 'nur bis zur Obergrenze gezaehlt');
+  assert.equal([...kv.map.keys()].filter((k) => k.startsWith('fbtag:')).length, 1, 'genau EIN Tagesschluessel');
+});
+
+test('Feedback: Cron rollt Vortage in die Summe, Lesen bleibt gleich', async () => {
+  const kv = kvLeeren();
+  const env = env_mit(kv);
+  await worker.fetch(feedback_request('pillar-versicherungen', 'ja', '198.51.100.9'), env);
+  await worker.fetch(feedback_request('pillar-versicherungen', 'nein', '198.51.100.10'), env);
+  const vorher = await (await worker.fetch(new Request('http://abos.test/feedback?slug=pillar-versicherungen'), env)).json();
+  await feedback_aufrollen(env, Date.now() + 36 * 60 * 60 * 1000);
+  assert.equal([...kv.map.keys()].filter((k) => k.startsWith('fbtag:')).length, 0, 'Tagesschluessel geloescht');
+  const summe = JSON.parse(kv.map.get('feedback:pillar-versicherungen'));
+  assert.equal(summe.ja, 1);
+  assert.equal(summe.nein, 1);
+  const nachher = await (await worker.fetch(new Request('http://abos.test/feedback?slug=pillar-versicherungen'), env)).json();
+  assert.equal(nachher.ja, vorher.ja);
+  assert.equal(nachher.nein, vorher.nein);
+  // Wiederholbar: ein zweiter Lauf zaehlt nichts doppelt.
+  await feedback_aufrollen(env, Date.now() + 36 * 60 * 60 * 1000);
+  assert.equal(JSON.parse(kv.map.get('feedback:pillar-versicherungen')).ja, 1);
+});
+
+test('Datenschutz-Pflege: Alt-IP/UA im Abo-Datensatz werden entfernt, Nachweis bleibt (Audit N-04)', async () => {
+  const kv = kvLeeren();
+  abo_sae(kv, 'alt@example.de', 'active', 'tok-ALT');
+  await datenschutz_pflege(env_mit(kv), Date.now());
+  const nachher = JSON.parse(kv.map.get('abo:alt@example.de'));
+  assert.equal(nachher.status, 'active');
+  assert.ok(!nachher.ip, 'keine IP mehr im Abo');
+  assert.ok(!JSON.stringify(nachher).includes('1.2.3.4'), 'IP auch nicht in Unterobjekten');
 });

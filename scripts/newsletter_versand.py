@@ -443,7 +443,8 @@ def worker_konfig(env: dict | None = None) -> tuple[str, str]:
 def worker_abfrage(pfad: str, param: dict | None = None, *, base: str, key: str) -> dict:
     """Geschützte Export-Abfrage am Worker – der Schlüssel geht MIT.
 
-    Der Worker prüft `x-ff-key` (oder `?sluessel=`), vergleicht in
+    Der Worker prüft `x-ff-key` (nur als Header – seit 14.10.2026 nicht
+    mehr per `?sluessel=`, Schlüssel in URLs landen in Logs), vergleicht in
     Konstantzeit und antwortet sonst 403 `{"status":"verboten"}`. Bis
     25.09.2026 nahm diese Funktion `key` entgegen und sendete ihn nie:
     jede Bestätigung und jeder Nachgang endete in „Worker-Antwort 403“

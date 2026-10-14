@@ -585,6 +585,18 @@ def pruefe_taktgeber(health_roh: str, jetzt: "_dt.datetime | None" = None) -> di
                       "Worker-Version mit `takt` in /healthz deployen", weg_deploy,
                       "Ohne lesbare Antwort keine Aussage über den Takt.")
     takt = daten.get("takt")
+    if not isinstance(takt, dict) and set(daten) <= {"ok", "ts"}:
+        # Worker ab 14.10.2026: oeffentlich nur {ok, ts}; der Takt kommt
+        # nur mit gueltigem x-ff-key. Ohne/mit falschem Schluessel: keine
+        # Aussage – aber auch kein falscher Alarm „Taktgeber fehlt“.
+        return _regel("C8", "worker", "nicht messbar",
+                      "Taktgeber nur mit Schlüssel lesbar",
+                      "/healthz ohne `takt` (öffentliche Kurzantwort)",
+                      "Secret NEWSLETTER_WORKER_EXPORT_KEY setzen bzw. exakt auf den "
+                      "Worker-Secret EXPORT_KEY abgleichen",
+                      "Cloudflare → Workers → ff-newsletter → Settings → Variables",
+                      "Seit dem Sicherheitsaudit vom 14.10.2026 verrät /healthz "
+                      "öffentlich keine Cron- und Workflow-Namen mehr.")
     if not isinstance(takt, dict):
         return _regel("C8", "worker", "fund",
                       "Taktgeber fehlt – laufende Worker-Version kennt keine Cron-Triggers",
@@ -696,7 +708,13 @@ def pruefe_worker(root: str, *, mit_netz: bool) -> list[dict]:
                        "Ohne Auflösung geht keine einzige Anmeldung rein – der Hahn der "
                        "ganzen Kette zu.")]
     # Antwort: der Worker muss antworten (2xx = Formular-Seite)
-    code, antwort = NETZ_RUF(basis + "/", headers={"User-Agent": PRÜFER_KENNUNG})
+    # Seit 14.10.2026 (Audit N-02) zeigt der Worker den Takt nur mit
+    # Schluessel – oeffentlich antwortet er bloss {ok, ts}.
+    kopf = {"User-Agent": PRÜFER_KENNUNG}
+    wkey_takt = os.environ.get("NEWSLETTER_WORKER_EXPORT_KEY", "").strip()
+    if wkey_takt:
+        kopf["x-ff-key"] = wkey_takt
+    code, antwort = NETZ_RUF(basis + "/", headers=kopf)
     if code == 0:
         return [_regel("C7", "worker", "nicht messbar",
                        "Worker nicht erreichbar (DNS/TLS/Timeout)",
