@@ -140,7 +140,7 @@ jobs:
         run: |
           set +e
           # SICHERHEIT (Audit 14.10.2026, M-10): Eingaben und Dispatch-Nutzlast
-          # kommen ausschliesslich per env – nie als ${{ }} im Skripttext.
+          # kommen ausschliesslich per env – nie als Actions-Ausdruck im Skripttext.
           # Vorher beendete ein einziges ' in client_payload das Quoting
           # und erlaubte beliebige Shell-Befehle. Argumente als Array.
           ARGS=(--run)
