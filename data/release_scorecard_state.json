@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T15:36:31Z",
+  "generated_at": "2026-10-14T16:35:24Z",
   "modus": "kandidaten",
-  "commit": "894e9c88f8cfa83ff127ab7c9672558e466d3fbc",
+  "commit": "e141f163a329cf80189f5ae73a0492d490fa6d10",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "1c937db1aab4076f54b10d8e18916b4fc6c612c8dffe89e98914fa14bb488fb3",
@@ -107,7 +107,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
-      "sha256": "f067a452f3328f14ca9badd91b21d29091367b369fffafbf46c578b0c90eb416",
+      "sha256": "630926eeff250641cf28861e3395d4404dfb37ae047b59dbe8ec6e97f2176770",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -121,7 +121,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "sha256": "19909d9565e28a4d8e05521d9aaf38730c919934f2d95dbdf58c42d10c6b8fc4",
@@ -243,7 +243,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
-      "sha256": "145a59d5898962b3b76ee0bdf4d5d736467de7d374b8166dc4f85e9fde5e33c1",
+      "sha256": "6b39e56cb5aef36fed18ea5541e3cb84d3d6ddfffc8f124af62eb320d9da55ce",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -257,10 +257,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "b80af0971710e646d49c07b9e8a224fa39a4410ebcc2778df7ff7d16014be27d",
+      "sha256": "facdbd4845c637e54eceab0cfee997b55a66acf768ccc470ea9e0b2fd0960d21",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "cd3a25a07e5b4d4c289af4fc4933f82e6441150bd84224abfc328f99cd522123",
@@ -889,7 +889,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "707c2599d08b2431d76e8dcc3a243284c90f5c77e8cb648253b200a7de894117",
+      "sha256": "db381eeadb46159aca8634bf711127028c25d51bebf7a5a28e0229661a989865",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -903,7 +903,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
       "sha256": "6c3d7f581a8c48955d4262b39cdee1596d74dbc0f5e39302b7f570bcd07a6d4a",
