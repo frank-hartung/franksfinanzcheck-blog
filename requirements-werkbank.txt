@@ -16,7 +16,7 @@
 # Crawl4AI (https://crawl4ai.org) verwandelt eine Seite in sauberes,
 # LLM-taugliches Markdown. Bringt Playwright als Abhängigkeit mit –
 # derselbe Browser-Unterbau, den auch die E2E-Suite nutzt.
-crawl4ai>=0.7.0
+crawl4ai>=0.9.4
 
 # --- Gewerk „konnektor" ---------------------------------------------
 # Composio (https://composio.dev). Das SDK ist bequemer als der
