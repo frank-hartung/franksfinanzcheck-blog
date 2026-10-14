@@ -32,15 +32,15 @@ concurrency:
 
 jobs:
   report:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python-Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q pyyaml 2>/dev/null || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       # MESSKETTE (Vertrag C38, Dauerheilung #740, 14.10.2026)
       # `ops_report.py` berechnet die Qualitätskennzahl des GESAMTEN
@@ -72,7 +72,7 @@ jobs:
 
       - name: Reports als Artefakt sichern (bewusst nicht versioniert)
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: frankautoops-report-${{ github.run_id }}
           path: |

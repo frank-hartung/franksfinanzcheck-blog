@@ -43,14 +43,14 @@ concurrency:
 
 jobs:
   recherche:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
@@ -58,7 +58,7 @@ jobs:
         run: |
           # Kein Node/npm: Die Fachprüfung läuft über scripts/llm_client.py
           # (reine Standardbibliothek) mit den Schlüsseln der KI-Redaktion.
-          python3 -m pip install -q --disable-pip-version-check pyyaml feedparser
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Selbsttest (Sabotage-Schutz – kein Schreiben ohne grünen Lauf)
         run: python3 scripts/faktenfrische.py --selftest
@@ -72,9 +72,10 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EINGABE_MAX: ${{ github.event.inputs.max || '3' }}
         run: |
           python3 scripts/faktenfrische.py --apply \
-            --max "${{ github.event.inputs.max || '3' }}"
+            --max "${EINGABE_MAX}"
 
       - name: Belege & Dossiers committen
         env:
@@ -104,7 +105,7 @@ jobs:
           fi
 
       - name: Report als Artefakt sichern
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: faktenfrische-report
           path: |

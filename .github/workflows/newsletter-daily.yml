@@ -68,11 +68,28 @@ concurrency:
 
 jobs:
   newsletter:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
+      # Sicherheitsaudit 14.10.2026 (N-08): GitHub zeigt die env-Werte jedes
+      # Schritts im (öffentlichen) Log. Eine private Testadresse stand so in
+      # den Logs der Testläufe vom 24./25.09. Deshalb wird sie hier – ohne
+      # env, direkt aus der Ereignisdatei – maskiert, BEVOR ein späterer
+      # Schritt sie als env bekommt. Danach erscheint sie überall als ***.
+      - name: Testadresse im Log maskieren (Datenschutz)
+        run: |
+          ROH="$(jq -r '.inputs.test_adresse // ""' "$GITHUB_EVENT_PATH" 2>/dev/null || true)"
+          if [ -n "$ROH" ]; then
+            echo "::add-mask::$ROH"
+            IFS=',' read -ra TEILE <<< "$ROH"
+            for t in "${TEILE[@]}"; do
+              t="$(printf '%s' "$t" | xargs)"
+              [ -n "$t" ] && echo "::add-mask::$t"
+            done
+            echo "Testadresse(n) maskiert."
+          fi
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
           ref: ${{ github.ref_name }}
@@ -84,7 +101,7 @@ jobs:
           exit 1
 
       - name: Python bereitstellen
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11"
 

@@ -50,21 +50,21 @@ concurrency:
 
 jobs:
   suchradar:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: PyYAML installieren
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml \
-            || python3 -m pip install -q --break-system-packages pyyaml
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       # ------------------------------------------------------------
       # 1. Selbsttest VOR der ersten Anfrage.
@@ -127,16 +127,19 @@ jobs:
       - name: Suchlauf
         id: lauf
         continue-on-error: true
+        env:
+          EINGABE_ANFRAGEN: ${{ inputs.anfragen }}
+          EINGABE_MAX_ANFRAGEN: ${{ inputs.max_anfragen }}
         run: |
           ARGS=""
-          if [ -n "${{ inputs.anfragen }}" ]; then
-            IFS=',' read -ra LISTE <<< "${{ inputs.anfragen }}"
+          if [ -n "${EINGABE_ANFRAGEN}" ]; then
+            IFS=',' read -ra LISTE <<< "${EINGABE_ANFRAGEN}"
             for begriff in "${LISTE[@]}"; do
               ARGS="$ARGS --anfrage $(echo "$begriff" | xargs)"
             done
           fi
-          if [ "${{ inputs.max_anfragen }}" != "0" ] && [ -n "${{ inputs.max_anfragen }}" ]; then
-            ARGS="$ARGS --max-anfragen ${{ inputs.max_anfragen }}"
+          if [ "${EINGABE_MAX_ANFRAGEN}" != "0" ] && [ -n "${EINGABE_MAX_ANFRAGEN}" ]; then
+            ARGS="$ARGS --max-anfragen ${EINGABE_MAX_ANFRAGEN}"
           fi
           # `set +e` ist hier Pflicht, nicht Stil: GitHubs Standard-Shell
           # läuft mit `set -e`, ein rohes `python3 … ; echo "code=$?"`
@@ -205,7 +208,7 @@ jobs:
 
       - name: Cockpit als Artefakt sichern
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: suchradar-cockpit
           path: |
@@ -263,7 +266,9 @@ jobs:
       # ------------------------------------------------------------
       - name: Exit-Vertrag durchsetzen
         if: ${{ steps.lauf.outputs.code != '' && steps.lauf.outputs.code != '0' }}
+        env:
+          SCHRITT_LAUF_CODE: ${{ steps.lauf.outputs.code }}
         run: |
-          echo "::error::Suchradar meldet Exit ${{ steps.lauf.outputs.code }}."
+          echo "::error::Suchradar meldet Exit ${SCHRITT_LAUF_CODE}."
           echo "Exit 3 = kein Anbieter lieferte Treffer. Diagnose: --probe"
           exit 1

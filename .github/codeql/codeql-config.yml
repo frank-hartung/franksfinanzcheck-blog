@@ -23,6 +23,13 @@
 # laufen (die Default-Suite würde stillschweigend wegfallen).
 name: "CodeQL-Konfiguration Frank's Finanzcheck"
 
+# Sicherheitsaudit 14.10.2026 (I-10): Die Standard-Suite fand bei ~17
+# Laeufen/Tag 0 Fundstellen (JS 87, Python 43 Regeln). `security-extended`
+# ergaenzt die Sicherheitsregeln mittlerer Praezision (u. a. weitere
+# Injection-, Pfad- und Regex-Muster). Die Default-Suite laeuft weiter mit.
+queries:
+  - uses: security-extended
+
 packs:
   python:
     - codeql/python-queries:AlertSuppression.ql

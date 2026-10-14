@@ -91,11 +91,11 @@ concurrency:
 
 jobs:
   lesehilfen:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: true
 
@@ -108,24 +108,24 @@ jobs:
           python3 scripts/manifest_guard.py
 
       - name: Node bereitstellen
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
 
       - name: Python bereitstellen
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: QA-Abhängigkeiten installieren (jsdom)
         working-directory: tools/ff-voice-qa
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
 
       - name: Browser-QA installieren (Playwright + gebündeltes Chromium)
         working-directory: tools/ff-voice-browser
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
           node --input-type=module -e "import chromium from '@sparticuz/chromium'; const path = await chromium.executablePath(); console.log('Gebündeltes Chromium bereit:', path);"
 
       - name: Syntaxprüfung ff-voice.js

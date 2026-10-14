@@ -44,10 +44,10 @@ concurrency:
 
 jobs:
   politur:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
@@ -62,7 +62,7 @@ jobs:
           echo "✅ Sprach-Engines vorhanden (offline, ohne API)."
 
       - name: Python-Abhängigkeiten
-        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
         run: |

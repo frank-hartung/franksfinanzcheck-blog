@@ -100,20 +100,20 @@ env:
 
 jobs:
   integritaet:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Abhängigkeiten
         run: |
-          pip install --quiet pyyaml
+          pip install --quiet --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           # AI3 (Text-Plausibilität) ist optional – ein apt-Flake darf die Wache nicht töten.
           sudo apt-get install -y -qq hunspell hunspell-de-de >/dev/null 2>&1 || true
 
@@ -304,6 +304,7 @@ jobs:
           VERDICT_CHANGED: ${{ steps.state.outputs.verdict_changed }}
           INTENT_HEALED: ${{ steps.intent.outputs.healed }}
           INTENT_HEALED_COUNT: ${{ steps.intent.outputs.healed_count }}
+          SCHRITT_STATE_HEALED: ${{ steps.state.outputs.healed }}
         run: |
           set +e
           git config user.name "Affiliate-Integrity-Bot"
@@ -333,7 +334,7 @@ jobs:
           # Commit-Botschaft nach BEDEUTUNG: Heilung / geänderte Lage /
           # reines Lebenszeichen. `[skip ci]` nur am Herzschlag – ein
           # Lebenszeichen darf keinen Deploy anstoßen (#281).
-          if [ "${{ steps.state.outputs.healed }}" = "true" ]; then
+          if [ "${SCHRITT_STATE_HEALED}" = "true" ]; then
             MSG="fix(content): Affiliate-Integritäts-Wache – CTA-Boxen/Linkziele automatisch geheilt (${HEALED_COUNT} Artikel)"
           elif [ "$INTENT_HEALED" = "true" ]; then
             MSG="fix(content): Intent-Wache – Anker/Route/CTA-Satz auf das versprochene Angebot geheilt (${INTENT_HEALED_COUNT} Fundstellen)"
@@ -367,7 +368,7 @@ jobs:
 
       - name: Deploy anstoßen (nur wenn wirklich geheilt UND der Nachweis gepusht wurde)
         if: ${{ (steps.state.outputs.healed == 'true' || steps.intent.outputs.healed == 'true') && steps.commit.outputs.pushed == 'true' && steps.commit.outputs.push_verified == 'true' }}
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
         with:
@@ -383,7 +384,7 @@ jobs:
       # ============ STAGE 4: ISSUE-PFLEGE (idempotent) ============
       - name: Issue pflegen (öffnen/aktualisieren bei Rot, schließen bei Grün)
         if: ${{ always() && !cancelled() }}
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           GATE_EXIT: ${{ steps.gate.outputs.exit_code }}
           HEALED: ${{ steps.state.outputs.healed }}
@@ -556,23 +557,33 @@ jobs:
       # Heilungen – und ob der Nachweis im Repo angekommen ist (#281).
       - name: Beweis-Lage (Herzschlag, Frische-Nachweis) zusammenfassen
         if: ${{ always() && !cancelled() }}
+        env:
+          SCHRITT_STATE_HEARTBEAT: ${{ steps.state.outputs.heartbeat }}
+          SCHRITT_GATE_EXIT_CODE: ${{ steps.gate.outputs.exit_code }}
+          SCHRITT_STATE_HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
+          SCHRITT_STATE_UNRESOLVED_PROBLEMS: ${{ steps.state.outputs.unresolved_problems }}
+          SCHRITT_STATE_TOOL_ERRORS: ${{ steps.state.outputs.tool_errors }}
+          SCHRITT_COMMIT_PUSH_VERIFIED: ${{ steps.commit.outputs.push_verified }}
+          SCHRITT_INTENT_EXIT_CODE: ${{ steps.intent.outputs.exit_code }}
+          SCHRITT_INTENT_HEALED_COUNT: ${{ steps.intent.outputs.healed_count }}
+          SCHRITT_INTENT_HUMAN_FINDINGS: ${{ steps.intent.outputs.human_findings }}
         run: |
           {
             echo "## 🔗 Affiliate-Integritäts-Wache – Beweis-Lage"
             echo ""
             echo "| Feld | Wert |"
             echo "|---|---|"
-            echo "| Herzschlag (dieser Lauf) | \`${{ steps.state.outputs.heartbeat }}\` |"
+            echo "| Herzschlag (dieser Lauf) | \`${SCHRITT_STATE_HEARTBEAT}\` |"
             echo "| Lage gegenüber letztem Lauf | ${{ steps.state.outputs.verdict_changed == 'true' && 'GEÄNDERT' || 'unverändert' }} |"
-            echo "| Gate-Exit | ${{ steps.gate.outputs.exit_code }} |"
-            echo "| Automatisch geheilt | ${{ steps.state.outputs.healed_count }} Artikel |"
-            echo "| Offene Restfunde | ${{ steps.state.outputs.unresolved_problems }} |"
+            echo "| Gate-Exit | ${SCHRITT_GATE_EXIT_CODE} |"
+            echo "| Automatisch geheilt | ${SCHRITT_STATE_HEALED_COUNT} Artikel |"
+            echo "| Offene Restfunde | ${SCHRITT_STATE_UNRESOLVED_PROBLEMS} |"
             echo "| Zustandsvertrag | ${{ steps.state.outputs.state_contract_error == 'true' && 'beschädigt (fail-closed)' || 'gültig/Legacy' }} |"
-            echo "| Werkzeugfehler | ${{ steps.state.outputs.tool_errors }} |"
-            echo "| Nachweis in origin/main | ${{ steps.commit.outputs.push_verified }} |"
-            echo "| Intent-Wache (IW0–IW9) Exit | ${{ steps.intent.outputs.exit_code }} |"
-            echo "| Intent: automatisch geheilt | ${{ steps.intent.outputs.healed_count }} Fundstellen |"
-            echo "| Intent: Funde für Menschen | ${{ steps.intent.outputs.human_findings }} |"
+            echo "| Werkzeugfehler | ${SCHRITT_STATE_TOOL_ERRORS} |"
+            echo "| Nachweis in origin/main | ${SCHRITT_COMMIT_PUSH_VERIFIED} |"
+            echo "| Intent-Wache (IW0–IW9) Exit | ${SCHRITT_INTENT_EXIT_CODE} |"
+            echo "| Intent: automatisch geheilt | ${SCHRITT_INTENT_HEALED_COUNT} Fundstellen |"
+            echo "| Intent: Funde für Menschen | ${SCHRITT_INTENT_HUMAN_FINDINGS} |"
             echo ""
             echo "_Herzschlag = Lebenszeichen der Wache (jeder Lauf erneuert ihn) · Lage = Befund "
             echo "(nur bei Änderung); der Bot-Watchdog prüft beides getrennt (Issue #281)._"
@@ -580,7 +591,7 @@ jobs:
 
       - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
         if: always() && !cancelled() && (steps.gate.outputs.exit_code != '0' || steps.intent.outputs.exit_code != '0')
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: affiliate-integrity-run-${{ github.run_id }}
           path: |
@@ -595,14 +606,19 @@ jobs:
       # Werkzeugfehler nach allen Wiederholungen: Lauf rot, Alerting bleibt ehrlich.
       - name: Lauf bewerten (rot nur bei unheilbarem Werkzeugfehler)
         if: ${{ always() && !cancelled() }}
+        env:
+          SCHRITT_INTENT_EXIT_CODE: ${{ steps.intent.outputs.exit_code }}
+          SCHRITT_GATE_EXIT_CODE: ${{ steps.gate.outputs.exit_code }}
+          SCHRITT_COMMIT_PUSH_VERIFIED: ${{ steps.commit.outputs.push_verified }}
+          SCHRITT_COMMIT_PUSHED: ${{ steps.commit.outputs.pushed }}
         run: |
           SELF="${{ steps.selftest.outcome }}"
           INTENT_SELF="${{ steps.intent_selftest.outcome }}"
-          INTENT="${{ steps.intent.outputs.exit_code }}"
-          GATE="${{ steps.gate.outputs.exit_code }}"
+          INTENT="${SCHRITT_INTENT_EXIT_CODE}"
+          GATE="${SCHRITT_GATE_EXIT_CODE}"
           HUGO="${{ steps.hugo.outcome }}"
-          VERIFIED="${{ steps.commit.outputs.push_verified }}"
-          PUSHED="${{ steps.commit.outputs.pushed }}"
+          VERIFIED="${SCHRITT_COMMIT_PUSH_VERIFIED}"
+          PUSHED="${SCHRITT_COMMIT_PUSHED}"
           if [ "$SELF" != "success" ]; then
             echo "::error::Detektor-Selbsttest nicht bestanden – fail-closed."
             exit 1

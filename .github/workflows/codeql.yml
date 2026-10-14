@@ -56,7 +56,7 @@ permissions:
 jobs:
   analyze:
     name: CodeQL (${{ matrix.language }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
@@ -81,22 +81,22 @@ jobs:
       CODEQL_ACTION_DIFF_INFORMED_QUERIES: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: CodeQL initialisieren
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
         with:
           languages: ${{ matrix.language }}
           config-file: .github/codeql/codeql-config.yml
-          # Kein queries-Parameter => Standard-Query-Suite je Sprache
-          # (identisch zum bisherigen Default-Setup, Vergleichbarkeit bleibt).
+          # Kein queries-Parameter: Die Suiten stehen in der Config-Datei
+          # (Default-Suite + security-extended seit 14.10.2026, I-10).
           # AlertSuppression.ql wird ÜBER die Config-Datei geladen (dort mit
           # Sprach-Keys) – NICHT über den packs-Input: der Input überschreibt
           # die Konfiguration und ließ in einem Testlauf die Default-Suite
           # stillschweigend wegfallen (0 Funde trotz 14 realer Funde).
 
       - name: CodeQL analysieren
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
         with:
           category: /language:${{ matrix.language }}
           output: sarif-results
@@ -116,12 +116,11 @@ jobs:
             echo "${f}: gesamt=${GESAMT} unterdrueckt=${UNTER} regeln=${REGLER}"
           done
 
-      - name: SARIF als Diagnose-Artefakt sichern
-        uses: actions/upload-artifact@v7
-        with:
-          name: sarif-diagnose-${{ matrix.language }}
-          path: sarif-results/
-          retention-days: 7
+      # Kein SARIF-Artefakt mehr (Audit 14.10.2026, I-10): Artefakte
+      # oeffentlicher Repos kann jeder angemeldete GitHub-Nutzer laden –
+      # offene Fundstellen samt Datei und Zeile waeren vor dem Fix
+      # oeffentlich. Die Diagnose oben (Zahlen im Log) und die Security-Tab
+      # (nur Maintainer) reichen.
 
       - name: Unterdrückungen sind selbst ein Befund (Upload & Gate)
         run: |
@@ -177,7 +176,7 @@ jobs:
         id: upload
         if: github.ref == 'refs/heads/main'
         continue-on-error: true
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
         with:
           sarif_file: sarif-results/${{ matrix.language }}.sarif
           category: /language:${{ matrix.language }}
@@ -323,14 +322,14 @@ jobs:
 
   klartext-wache:
     name: Klartext-Wache (unabhängig vom SARIF-Upload)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python bereitstellen
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
@@ -345,7 +344,7 @@ jobs:
 
   url-wache:
     name: URL-Wache (unabhängig vom SARIF-Upload)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       # LEHRE AUS ALERT #83: Die beiden `incomplete-url-substring-sanitization`-
@@ -355,15 +354,15 @@ jobs:
       # Diese Wache prüft denselben Bestand lokal, fail-closed und ohne
       # jede Abhängigkeit von CodeQL, dessen Upload oder der Alert-API.
       - name: Checkout
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python bereitstellen
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Node bereitstellen (für die CORS-Tests des Workers)
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
 

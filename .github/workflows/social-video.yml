@@ -71,14 +71,14 @@ concurrency:
 
 jobs:
   shorts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
@@ -113,11 +113,14 @@ jobs:
           YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          EINGABE_MODUS: ${{ github.event.inputs.modus }}
+          EINGABE_SLUG: ${{ github.event.inputs.slug }}
+          EINGABE_LIMIT: ${{ github.event.inputs.limit }}
         run: |
-          MODUS="${{ github.event.inputs.modus }}"
+          MODUS="${EINGABE_MODUS}"
           [ -z "$MODUS" ] && MODUS="bauen-und-senden"
-          SLUG="${{ github.event.inputs.slug }}"
-          LIMIT="${{ github.event.inputs.limit }}"
+          SLUG="${EINGABE_SLUG}"
+          LIMIT="${EINGABE_LIMIT}"
           [ -z "$LIMIT" ] && LIMIT="1"
           case "$MODUS" in
             plan)     python3 scripts/social_video.py --plan ;;
@@ -131,7 +134,7 @@ jobs:
       # (TikTok, LinkedIn) von Hand hochladen willst.
       - name: Video als Artefakt sichern
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: shorts
           path: |
@@ -151,8 +154,8 @@ jobs:
       - name: Veröffentlichungskalender aktualisieren
         if: always()
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml \
-            || python3 -m pip install -q --break-system-packages pyyaml
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           python3 scripts/social_calendar.py --build
 
       - name: Stand sichern

@@ -43,7 +43,7 @@ concurrency:
 jobs:
   engine:
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     # WF-A535 (#590, 05.10.2026): Dieser Lauf schreibt 20–40 Minuten lang an
     # einem Bestand, an dem gleichzeitig Menschen (PR-Merges) und andere
@@ -57,7 +57,7 @@ jobs:
       GIT_SYNC_BESTAND_POLICY: bestand-gewinnt
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # COMMIT-IDENTITÄT FRÜH UND EINMAL (19.09.2026, Issue #316): Bisher setzte
       # jeder Commit-Schritt die Identität selbst. Läuft ein früher Schritt hart
@@ -106,7 +106,7 @@ jobs:
 
       - name: Python-Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           sudo apt-get update -qq
           sudo apt-get install -y -qq hunspell hunspell-de-de
 
@@ -343,7 +343,7 @@ jobs:
           python3 scripts/keyword_gate.py --selftest
           python3 scripts/keyword_gate.py --fix --new-only || echo "⚠ Keyword-Gate (Premium) – Funde im Log (selbstgeheilt)"
           echo "== Cover generieren =="
-          pip install -q pillow pillow-avif-plugin
+          pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
           echo "== Einzigartigkeit =="
           python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
@@ -361,7 +361,7 @@ jobs:
           echo "== Link-Integritaet (relative Ziele + /go/-Register, Selbsttest) =="
           python3 scripts/link_guard.py --fix --new-only || echo "⚠ Link-Guard geheilt/gemeldet (nicht kritisch)"
           echo "== Font-Vertrag (die Datei beweist ihr Gewicht, nicht ihr Name) =="
-          python3 -m pip install -q fonttools brotli 2>/dev/null || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
           python3 scripts/font_guard.py || echo "⚠ Font-Pakt (nicht kritisch)"
           echo "== Tabellen-Wache (Struktur + Zell-Splitter, Selbsttest) =="
           python3 scripts/table_guard.py --fix --new-only || echo "⚠ Tabellen-Funde gemeldet (nicht kritisch)"
@@ -533,7 +533,7 @@ jobs:
           # Der finale Publish-Gate-Collector ist dagegen hart: Ohne
           # `faktencheck` bleibt der Artikel als Hold erhalten und erreicht
           # weder Hugo-Auslieferung noch Release-Scorecard (WF-54C4/#583).
-          python3 -m pip install -q feedparser >/dev/null 2>&1 || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" >/dev/null 2>&1 || true
           python3 scripts/faktenfrische.py --selftest
           python3 scripts/faktenfrische.py --neu --apply || echo "⚠ Faktenfrische-Recherche nicht abgeschlossen – Publish-Gate hält Kandidaten zurück"
           echo "== Lesbarkeits-Heiler (Flesch >= 60, Tor T1-T4, fail-closed, WACHE-609) =="
@@ -716,8 +716,10 @@ jobs:
 
       - name: Do not report a quota deficit as success
         if: ${{ !cancelled() }}
+        env:
+          SCHRITT_FINAL_RELEASE_RC: ${{ steps.final_release.outputs.rc }}
         run: |
-          RC='${{ steps.final_release.outputs.rc }}'
+          RC="${SCHRITT_FINAL_RELEASE_RC}"
           # WF-A535 (#590): Die dritte ehrlich rote Klasse ist der
           # SYNCHRONVERLUST – fertige Arbeit, die main nie erreicht hat.
           # Sie wird zuerst geprüft, weil sie die teuerste ist: Ein Lauf, der

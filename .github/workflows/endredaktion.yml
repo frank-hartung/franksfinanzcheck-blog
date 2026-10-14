@@ -49,14 +49,14 @@ concurrency:
 
 jobs:
   endredaktion:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Abhängigkeiten installieren
-        run: python3 -m pip install -q pyyaml
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Selbsttest (fail-closed)
         run: |
@@ -72,8 +72,9 @@ jobs:
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+          EINGABE_AKTION: ${{ github.event.inputs.aktion }}
         run: |
-          AKTION="${{ github.event.inputs.aktion }}"
+          AKTION="${EINGABE_AKTION}"
           if [ -z "$AKTION" ]; then AKTION="komplett"; fi
           case "$AKTION" in
             nur_pruefen) python3 scripts/endredaktion.py --nur-pruefen ;;

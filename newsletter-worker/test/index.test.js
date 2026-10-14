@@ -1098,7 +1098,7 @@ test('Turnstile: mit TURNSTILE_SECRET ohne/mit falschem Token -> abgelehnt, mit 
   const env = env_mit(kv, { TURNSTILE_SECRET: 'ts-geheim' });
   let geprueft = null;
   const freilass = fetch_sperr((ziel, opt) => {
-    if (String(ziel).includes('challenges.cloudflare.com')) {
+    if (new URL(String(ziel)).hostname === 'challenges.cloudflare.com') {
       geprueft = new URLSearchParams(opt.body.toString());
       return new Response(JSON.stringify({ success: geprueft.get('response') === 'gut' }), { status: 200 });
     }

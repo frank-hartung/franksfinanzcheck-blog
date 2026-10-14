@@ -57,27 +57,27 @@ concurrency:
 
 jobs:
   werkbank:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Node einrichten
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
           cache: npm
 
       - name: Python-Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml \
-            || python3 -m pip install -q --break-system-packages pyyaml
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           # Crawl4AI ist optional (Vertrag B2): Scheitert die Installation,
           # läuft das Gewerk `leser` über Jina Reader weiter. Kein Abbruch.
           python3 -m pip install -q --disable-pip-version-check \
@@ -106,7 +106,7 @@ jobs:
         id: browser
         continue-on-error: true
         run: |
-          npm ci --no-audit --no-fund
+          npm ci --ignore-scripts --no-audit --no-fund
           npm run browser:setup
 
       # ---------------------------------------------------------------
@@ -176,9 +176,11 @@ jobs:
           # Konnektor bleibt lesend; schreibende Aktionen brauchen zusätzlich
           # eine Freigabe in data/werkbank.yaml (Vertrag B4).
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          EINGABE_MODUS: ${{ github.event.inputs.modus }}
+          EINGABE_FRAGE: ${{ github.event.inputs.frage }}
         run: |
-          MODUS="${{ github.event.inputs.modus }}"
-          FRAGE="${{ github.event.inputs.frage }}"
+          MODUS="${EINGABE_MODUS}"
+          FRAGE="${EINGABE_FRAGE}"
           if [ -n "$FRAGE" ]; then
             python3 scripts/antwortwerk.py --frage "$FRAGE"
           elif [ "$MODUS" = "alle" ]; then
@@ -218,7 +220,7 @@ jobs:
 
       - name: Cockpit und Dossiers als Artefakt sichern
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: werkbank
           path: |

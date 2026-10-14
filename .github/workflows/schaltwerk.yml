@@ -60,21 +60,21 @@ concurrency:
 
 jobs:
   schaltwerk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python einrichten
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml pillow \
-            || python3 -m pip install -q --break-system-packages pyyaml pillow
+          python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" \
+            || python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       # Fail-closed: Eine Engine, die ihren eigenen Regelvertrag nicht
       # erfüllt, darf nichts auslösen. Der Selbsttest prüft Operatoren,
@@ -134,20 +134,24 @@ jobs:
           # --- KI-Politur (ausschließlich Gratis-Zugänge) -------------------
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EINGABE_MODUS: ${{ github.event.inputs.modus }}
+          EINGABE_REGEL: ${{ github.event.inputs.regel }}
+          EREIGNIS_JSON: ${{ toJSON(github.event.client_payload) }}
         run: |
           set +e
-          MODUS="${{ github.event.inputs.modus }}"
-          REGEL="${{ github.event.inputs.regel }}"
-          ARGS="--run"
-          [ "$MODUS" = "dry-run" ] && ARGS="--dry-run"
-          [ -n "$REGEL" ] && ARGS="$ARGS --regel $REGEL"
+          # SICHERHEIT (Audit 14.10.2026, M-10): Eingaben und Dispatch-Nutzlast
+          # kommen ausschliesslich per env – nie als ${{ }} im Skripttext.
+          # Vorher beendete ein einziges ' in client_payload das Quoting
+          # und erlaubte beliebige Shell-Befehle. Argumente als Array.
+          ARGS=(--run)
+          [ "$EINGABE_MODUS" = "dry-run" ] && ARGS=(--dry-run)
+          [ -n "$EINGABE_REGEL" ] && ARGS+=(--regel "$EINGABE_REGEL")
 
           # Webhook-Nutzlast (repository_dispatch) an die Engine durchreichen.
-          EVENT='${{ toJSON(github.event.client_payload) }}'
-          if [ "${{ github.event_name }}" = "repository_dispatch" ] && [ -n "$EVENT" ] && [ "$EVENT" != "null" ]; then
-            python3 scripts/schaltwerk.py $ARGS --event "$EVENT"
+          if [ "$GITHUB_EVENT_NAME" = "repository_dispatch" ] && [ -n "$EREIGNIS_JSON" ] && [ "$EREIGNIS_JSON" != "null" ]; then
+            python3 scripts/schaltwerk.py "${ARGS[@]}" --event "$EREIGNIS_JSON"
           else
-            python3 scripts/schaltwerk.py $ARGS
+            python3 scripts/schaltwerk.py "${ARGS[@]}"
           fi
           echo "code=$?" >> "$GITHUB_OUTPUT"
 
@@ -194,7 +198,9 @@ jobs:
 
       - name: Exit-Vertrag durchsetzen
         if: ${{ steps.lauf.outputs.code != '' && steps.lauf.outputs.code != '0' }}
+        env:
+          SCHRITT_LAUF_CODE: ${{ steps.lauf.outputs.code }}
         run: |
-          echo "::error::Schaltwerk meldet Fehler (Exit ${{ steps.lauf.outputs.code }})."
+          echo "::error::Schaltwerk meldet Fehler (Exit ${SCHRITT_LAUF_CODE})."
           echo "Standby-Kanäle sind KEIN Fehler – siehe SCHALTWERK-STATUS.md."
           exit 1

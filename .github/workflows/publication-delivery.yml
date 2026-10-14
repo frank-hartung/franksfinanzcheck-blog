@@ -61,21 +61,21 @@ concurrency:
 jobs:
   verify:
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Includes one bounded source-recovery run (cadence + deploy) before the
     # final public receipt.  The old 12-minute budget allowed the check to
     # fail while its own recovery was still queued.
     timeout-minutes: 75
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
-      - run: pip install pyyaml
+      - run: pip install --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
       - name: Verify sitemap AND article HTML; retry CDN propagation
         id: receipt
         continue-on-error: true
         run: python3 scripts/publication_check.py --online --attempts 5 --delay 60
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: publication-receipt

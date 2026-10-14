@@ -88,14 +88,14 @@ env:
 
 jobs:
   token:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Krypto-Bibliothek
-        run: python3 -m pip install -q cryptography
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       # Ein kaputter Broker darf keinen Token anfassen – erst Selbsttest.
       - name: Selbsttest von Broker + Autorisierung (Sabotage-Schutz)

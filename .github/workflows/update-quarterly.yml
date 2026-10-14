@@ -40,15 +40,15 @@ concurrency:          # AUDIT-FIX
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python-Abhängigkeiten installieren
         run: |
-          python3 -m pip install -q pyyaml cryptography 2>/dev/null || true
+          python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
       - name: Top-Artikel aktualisieren (KI, Qualitäts-Verifikation)
         id: update
         continue-on-error: true
@@ -77,8 +77,10 @@ jobs:
 
       - name: Audit-Sabotage-Schutz erzwingen
         if: steps.uniqueness.outputs.exit_code != '0' && steps.uniqueness.outputs.exit_code != '1'
+        env:
+          SCHRITT_UNIQUENESS_EXIT_CODE: ${{ steps.uniqueness.outputs.exit_code }}
         run: |
-          echo "🛑 Einzigartigkeits-Audit konnte sich nicht selbst beweisen (Exit ${{ steps.uniqueness.outputs.exit_code }})."
+          echo "🛑 Einzigartigkeits-Audit konnte sich nicht selbst beweisen (Exit ${SCHRITT_UNIQUENESS_EXIT_CODE})."
           exit 2
 
       # Ein Skript für Tages- UND Quartalslauf: Aktualisiert denselben
@@ -126,7 +128,7 @@ jobs:
 
       - name: Issue bei Fehlern erstellen (nur wenn Update fehlschlug)
         if: steps.update.outcome == 'failure'
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');

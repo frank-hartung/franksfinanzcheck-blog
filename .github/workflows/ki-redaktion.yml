@@ -48,14 +48,14 @@ concurrency:
 
 jobs:
   redaktion:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Abhängigkeiten installieren
-        run: python3 -m pip install -q pyyaml
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Selbsttest (fail-closed)
         env:
@@ -68,8 +68,10 @@ jobs:
 
       - name: Rolle bestimmen
         id: rolle
+        env:
+          EINGABE_ROLLE: ${{ github.event.inputs.rolle }}
         run: |
-          ROLLE="${{ github.event.inputs.rolle }}"
+          ROLLE="${EINGABE_ROLLE}"
           if [ -z "$ROLLE" ]; then
             DOW=$(date -u +%u)   # 1=Mo … 7=So (UTC)
             if [ "$DOW" = "1" ] || [ "$DOW" = "3" ] || [ "$DOW" = "5" ]; then

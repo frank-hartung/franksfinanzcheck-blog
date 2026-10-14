@@ -76,11 +76,11 @@ concurrency:
 
 jobs:
   catchup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Live-Stand (gh-pages) und Deploy-Job-Erfolg mit main vergleichen, ggf. anstoßen
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const owner = context.repo.owner;

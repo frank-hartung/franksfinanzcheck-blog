@@ -57,12 +57,35 @@ runs:
     - name: "Quelle 1 – GitHub-Release (extended tarball, mit Retry)"
       if: steps.existing.outputs.ok != 'true'
       shell: bash
+      env:
+        EINGABE_VERSION: ${{ inputs.version }}
       run: |
         set -euo pipefail
-        VER="${{ inputs.version }}"
-        URL="https://github.com/gohugoio/hugo/releases/download/v${VER}/hugo_extended_${VER}_linux-amd64.tar.gz"
+        VER="${EINGABE_VERSION}"
+        DATEI="hugo_extended_${VER}_linux-amd64.tar.gz"
+        URL="https://github.com/gohugoio/hugo/releases/download/v${VER}/${DATEI}"
+        # LIEFERKETTE (Audit 14.10.2026, M-09): SHA-256 fest im Repo fuer die
+        # genutzte Version (Quelle: GitHub-Release-Asset-Digest). Unbekannte
+        # Versionen pruefen gegen die checksums.txt desselben Releases –
+        # schwaecher, faengt aber Korruption und Teil-Downloads ab. Bei einer
+        # Abweichung bricht der Schritt ab (fail-closed, KEIN PyPI-Fallback).
+        declare -A PRUEFSUMME=(
+          ["0.164.0"]="fea17b8c076f950bb2e9f9486667bdaa29422883888d509d63931c73e8a9b3a4"
+        )
+        ERWARTET="${PRUEFSUMME[$VER]:-}"
         echo "→ Download: ${URL}"
         if curl -fsSL --retry 3 --retry-delay 4 "$URL" -o /tmp/hugo.tgz; then
+          if [ -z "$ERWARTET" ]; then
+            echo "::warning::Hugo ${VER} ohne feste Prüfsumme im Repo – nutze checksums.txt des Releases. Bitte PRUEFSUMME in .github/actions/install-hugo/action.yml ergänzen."
+            ERWARTET="$(curl -fsSL --retry 3 "https://github.com/gohugoio/hugo/releases/download/v${VER}/hugo_${VER}_checksums.txt" | awk -v f="$DATEI" '$2==f {print $1}')"
+          fi
+          IST="$(sha256sum /tmp/hugo.tgz | cut -d' ' -f1)"
+          if [ -z "$ERWARTET" ] || [ "$IST" != "$ERWARTET" ]; then
+            echo "::error title=Hugo-Prüfsumme falsch::${DATEI}: erwartet ${ERWARTET:-unbekannt}, erhalten ${IST}. Abbruch (möglicher Lieferkettenangriff)."
+            rm -f /tmp/hugo.tgz
+            exit 3
+          fi
+          echo "✔ SHA-256 geprüft: ${IST}"
           tar -xzf /tmp/hugo.tgz -C /tmp hugo
           sudo install -m 0755 /tmp/hugo /usr/local/bin/hugo
           echo "GitHub-Quelle erfolgreich."
@@ -84,11 +107,23 @@ runs:
     - name: "Quelle 2 – PyPI-Fallback (hugo-python-distributions)"
       if: steps.verify1.outputs.ok != 'true'
       shell: bash
+      env:
+        EINGABE_VERSION: ${{ inputs.version }}
       run: |
         set -euo pipefail
-        VER="${{ inputs.version }}"
+        VER="${EINGABE_VERSION}"
         echo "→ PyPI-Fallback: hugo==${VER}"
-        python3 -m pip install --quiet --disable-pip-version-check --break-system-packages "hugo==${VER}" 2>/dev/null || python3 -m pip install --quiet --disable-pip-version-check "hugo==${VER}"
+        # Hash-gepinnt (M-09): nur das bekannte manylinux-x86_64-Wheel.
+        declare -A WHEEL=(
+          ["0.164.0"]="00b84fbe63dbd34c9a7cb15445d37e6f02ed6a167d171af3d7f90f74a501cf25"
+        )
+        if [ -z "${WHEEL[$VER]:-}" ]; then
+          echo "::error::Kein Wheel-Hash für hugo==${VER} hinterlegt – PyPI-Fallback verweigert (fail-closed)."
+          exit 3
+        fi
+        printf 'hugo==%s --hash=sha256:%s\n' "$VER" "${WHEEL[$VER]}" > /tmp/hugo-req.txt
+        python3 -m pip install --quiet --disable-pip-version-check --require-hashes --only-binary=:all: --break-system-packages -r /tmp/hugo-req.txt 2>/dev/null \
+          || python3 -m pip install --quiet --disable-pip-version-check --require-hashes --only-binary=:all: -r /tmp/hugo-req.txt
         BIN="$(python3 -c "import hugo, os; p = getattr(hugo, '__file__', None); base = os.path.dirname(p) if p else (hugo.__path__[0] if hasattr(hugo, '__path__') else ''); print(os.path.join(base, 'binaries', 'hugo'))")"
         if [ ! -x "$BIN" ]; then
           echo "❌ PyPI-Paket ohne Binary gefunden: $BIN"

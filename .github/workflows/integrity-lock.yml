@@ -86,15 +86,15 @@ jobs:
     # Anzeigename = Check-Name im Ruleset = governance_contract.PFLICHT_CHECK_NAME.
     # Nicht ohne Runbook ändern (docs/PFLICHT-CHECK-RUNBOOK.md).
     name: Integritäts-Siegel
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Repository auschecken (volle Historie für die Herkunft)
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
 
@@ -137,7 +137,7 @@ jobs:
       # dafür, dass sie hier gar nicht erst blind läuft. Jeder andere
       # Python-Job dieses Repos installiert PyYAML genauso.
       - name: Messwerkzeug vervollständigen (PyYAML)
-        run: python3 -m pip install -q --disable-pip-version-check pyyaml
+        run: python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Artefakt-Wächter (Maschinen-Artefakte strukturell heil)
         run: |

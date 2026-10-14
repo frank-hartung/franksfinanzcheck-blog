@@ -35,23 +35,25 @@ concurrency:
 
 jobs:
   seo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Mastodon-SEO prüfen + heilen
         env:
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          EINGABE_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          EINGABE_DELETE_DUPES: ${{ github.event.inputs.delete_dupes }}
         run: |
           ARGS=()
-          echo "inputs dry_run='${{ github.event.inputs.dry_run }}' delete_dupes='${{ github.event.inputs.delete_dupes }}'"
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          echo "inputs dry_run='${EINGABE_DRY_RUN}' delete_dupes='${EINGABE_DELETE_DUPES}'"
+          if [ "${EINGABE_DRY_RUN}" = "true" ]; then
             ARGS+=(--dry-run)
           fi
-          if [ "${{ github.event.inputs.delete_dupes }}" = "true" ]; then
+          if [ "${EINGABE_DELETE_DUPES}" = "true" ]; then
             ARGS+=(--delete-dupes)
           fi
           echo "starte: python3 scripts/mastodon_seo.py ${ARGS[*]}"

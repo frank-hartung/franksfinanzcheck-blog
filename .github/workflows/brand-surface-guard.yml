@@ -84,13 +84,13 @@ jobs:
   # ----------------------------------------------------------------
   markenflaeche:
     if: github.event_name == 'push' || github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Selbsttest der Wache (blind wäre schlimmer als keine)
         run: python3 scripts/brand_surface_guard.py --selftest
@@ -112,7 +112,7 @@ jobs:
 
   oberflaeche:
     if: github.event_name != 'push' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: write   # Releases/Tags heilen
@@ -121,7 +121,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # ----------------------------------------------------------------
       #  O6 – Markenfläche „öffentliche Issue-Titel" (Issue #496):

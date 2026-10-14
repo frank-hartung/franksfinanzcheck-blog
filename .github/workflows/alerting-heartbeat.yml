@@ -52,15 +52,15 @@ concurrency:
 
 jobs:
   herzschlag:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
         # v4 – unveränderlich gepinnt (der Wächter selbst darf keine bewegliche Abhängigkeit haben)
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Python-Abhängigkeit (PyYAML für die Wacht-Liste, Fallback im Skript)
-        run: python3 -m pip install -q --break-system-packages pyyaml 2>/dev/null || python3 -m pip install -q pyyaml 2>/dev/null || true
+        run: python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
       - name: Selbsttest der Herzschlag-Logik (vorm Messen)
         run: python3 scripts/alerting_heartbeat.py --selftest

@@ -221,7 +221,8 @@ class Repo(unittest.TestCase):
         self.assertEqual(text.count(aufruf), 1)
         self.assertIn("contents: read", text)
         self.assertIn("persist-credentials: false", text)
-        self.assertIn("actions/upload-artifact@v7", text)
+        # SHA-Pin mit Versionskommentar (Sicherheitsaudit 14.10.2026, M-09)
+        self.assertRegex(text, r"actions/upload-artifact@(v7|[0-9a-f]{40} # v7)")
         for verbot in ("git add ", "git commit", "git push"):
             self.assertNotIn(verbot, text)
 

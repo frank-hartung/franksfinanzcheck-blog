@@ -8,8 +8,9 @@
 #  "erledigt" oder "obsolet" eingestuften Meldungen.
 #  (#15 – leeres A11y-Issue – optional ergänzen: einfach "15" ans Ende.)
 #
-#  Danach löscht der Wochen-Cleanup ("Erledigte Fehlermeldungen
-#  dauerhaft löschen") diese geschlossenen Bot-Meldungen nach 14 Tagen.
+#  Danach archiviert der Wochen-Cleanup ("Erledigte Fehlermeldungen
+#  archivieren") diese geschlossenen Bot-Meldungen nach 14 Tagen
+#  (sperren + Label, seit 14.10.2026 kein Löschen mehr – Audit M-08).
 # ============================================================
 name: Issues aufräumen (Triage)
 
@@ -23,22 +24,24 @@ on:
       comment:
         description: "Kommentar beim Schließen"
         required: false
-        default: "✅ Erledigt bzw. obsolet – beim Triage-Durchgang automatisch geschlossen. Wird vom Wochen-Cleanup nach 14 Tagen dauerhaft gelöscht."
+        default: "✅ Erledigt bzw. obsolet – beim Triage-Durchgang automatisch geschlossen. Wird vom Wochen-Cleanup nach 14 Tagen archiviert (gesperrt, nicht gelöscht)."
 
 permissions:
   issues: write
 
 jobs:
   close:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Issues schließen
         env:
           GH_TOKEN: ${{ github.token }}
+          EINGABE_ISSUE_NUMBERS: ${{ github.event.inputs.issue_numbers }}
+          EINGABE_COMMENT: ${{ github.event.inputs.comment }}
         run: |
-          INPUT="${{ github.event.inputs.issue_numbers }}"
-          KOMMENTAR="${{ github.event.inputs.comment }}"
+          INPUT="${EINGABE_ISSUE_NUMBERS}"
+          KOMMENTAR="${EINGABE_COMMENT}"
           IFS=',' read -ra NUMS <<< "$INPUT"
           GESCHLOSSEN=0
           for n in "${NUMS[@]}"; do
