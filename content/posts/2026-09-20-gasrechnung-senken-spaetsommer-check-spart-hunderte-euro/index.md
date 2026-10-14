@@ -60,7 +60,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Nutze keine pauschalen Werte für Druck oder Vorlauftemperatur.
 - Rechne Einsparungen nicht doppelt und versprich dir keinen festen Eurobetrag.
 
-## Was du bereitlegst
+## Was du bereitlegst?
 
 - Letzte Gas- oder Heizkostenabrechnung,
 - aktuellen Vertrag,
@@ -181,7 +181,7 @@ Schreibe jeden Fund in eine von drei Spalten.
 
 Mehr als drei Sofortaufgaben brauchst du nicht. Der Rest bekommt einen Termin.
 
-## Wie du den Tarif fair vergleichst
+## Wie du den Tarif fair vergleichst?
 
 Der BDEW nennt für 2026 einen Durchschnitt von 11,93 Cent pro Kilowattstunde bei Einfamilienhäusern. Nimm das nur als grobe Orientierung. Postleitzahl, Jahresmenge und Vertragsbedingungen entscheiden, was am Ende wirklich auf deiner Rechnung steht.
 

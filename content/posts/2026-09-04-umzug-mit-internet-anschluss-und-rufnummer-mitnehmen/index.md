@@ -75,7 +75,7 @@ Beide Wege haben unterschiedliche Folgen. Die Entscheidung hängt weniger von de
 
 **Neu abschließen.** Zieht der Anbieter nicht mit, sucht du einen neuen Vertrag. Hier wird es interessant: Ein Neuvertrag ist oft günstiger als die Fortführung eines alten Tarifs. Wer ohnehin wechseln will, sollte die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) deshalb zum Umzug passend planen.
 
-## Was das Gesetz vorgibt
+## Was das Gesetz vorgibt?
 
 Für Internetverträge gilt das Telekommunikationsgesetz. Dein erster Vertrag darf höchstens zwei Jahre binden; danach bist du mit einem Monat Vorlauf wieder frei ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Zusätzlich gehört ein Angebot mit zwölf Monaten Laufzeit in die Auswahl – frag danach, bevor du unterschreibst.
 
@@ -123,7 +123,7 @@ Der Zeitplan für einen Umzug in der Übersicht:
 | eine Woche vorher | Technikertermin und Zugang klären | ein fehlender Zugang kostet einen zweiten Termin |
 | nach dem Einzug | Anschluss testen, Geschwindigkeit messen | ein Mangel lässt sich nur frisch belegen |
 
-## Was in der neuen Wohnung vorbereitet sein muss
+## Was in der neuen Wohnung vorbereitet sein muss?
 
 Der Technikertermin scheitert selten an der Technik. Er scheitert an fehlendem Zugang. Räume die Ecke frei, in der die Anschlussdose liegt, und stelle sicher, dass jemand die Tür öffnen kann.
 
@@ -181,6 +181,8 @@ Bei einem Wechsel kann es vorkommen, dass für denselben Zeitraum zwei Rechnunge
 Vergleiche die beiden Rechnungen Zeile für Zeile. Notiere, welcher Anbieter welchen Zeitraum abgerechnet hat und welcher Zählerstand jeweils genannt wird. Diese Gegenüberstellung klärt den Fall meist in einem Schreiben.
 
 Zahle nichts doppelt, ohne es zu prüfen. Melde die Überschneidung schriftlich und verweise auf beide Rechnungen. Behalte die Nachweise, bis die Sache geklärt ist.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

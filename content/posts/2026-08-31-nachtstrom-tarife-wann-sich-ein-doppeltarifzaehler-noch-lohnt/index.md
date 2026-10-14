@@ -66,7 +66,7 @@ Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil
 💡 **Schnell-Tipp von FranksFinanzcheck:** Bevor du über Zählwerke nachdenkst, gehört der Arbeitspreis geprüft: [**→ Stromtarife vergleichen und wechseln**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Was hinter dem Doppeltarif steckt
+## Was hinter dem Doppeltarif steckt?
 
 Bei einem Einheitstarif zahlst du für jede Kilowattstunde denselben Betrag. Bei einem Doppeltarif hängt der Preis von der Uhrzeit ab. Das wird nicht über einen anderen Zähler gemessen, sondern über zwei Zählwerke im selben Gerät.
 
@@ -84,7 +84,7 @@ Verbindlich ist, was in deinen Tarifunterlagen steht. Ein Nachtstromzähler kann
 
 Prüfe diese Unterlagen, bevor du dein Verhalten änderst. Es bringt nichts, den Trockner um 22 Uhr zu starten, wenn dein günstiges Fenster erst um 23 Uhr beginnt.
 
-## Wann sich ein Doppeltarif rechnet
+## Wann sich ein Doppeltarif rechnet?
 
 Ein Doppeltarif rechnet sich, wenn drei Bedingungen zusammenkommen.
 
@@ -185,6 +185,7 @@ Ein Doppeltarif ist nur ein Hebel unter mehreren. Bevor du dich für ein Zählwe
 
 Diese Reihenfolge ist der Kern. Erst den Verbrauch, dann den Tarif, dann die Feinheiten wie das Zählwerk.
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

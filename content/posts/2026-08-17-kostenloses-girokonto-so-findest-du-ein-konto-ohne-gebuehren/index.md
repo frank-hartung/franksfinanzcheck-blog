@@ -219,6 +219,8 @@ Ein Gratis-Konto ist kein Paket für alles. Schutz auf Reisen oder ein Platz in 
 
 Wichtig ist nur eines: Überweisen, Bezahlen und Abheben müssen ohne Zusatzkosten laufen. Alles Weitere bekommst du anderswo oft billiger.
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+
 ## Fazit: Kostenlos ist gut – wenn das Konto auch im Alltag kostenlos bleibt
 
 Ein **kostenloses Girokonto** bleibt die beste Wahl, wenn du auf den Preis achtest. Gute Alternativen zur teuren Filiale gibt es genug.

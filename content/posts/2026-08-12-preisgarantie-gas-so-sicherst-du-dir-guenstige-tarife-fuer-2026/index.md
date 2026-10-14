@@ -187,7 +187,7 @@ Ausnahmen: Bei sehr knapper Frist, bei Sonderkündigung wegen Preiserhöhung ode
 
 Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Kommt es zu Verzögerungen, greift die Grund- oder Ersatzversorgung.
 
-## Wie du die mögliche Ersparnis berechnest
+## Wie du die mögliche Ersparnis berechnest?
 
 > Alter Jahrespreis – neuer Jahrespreis = rechnerischer Vorteil
 
@@ -197,7 +197,7 @@ Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sp
 
 Der BDEW-Schnitt liegt bei 11,93 Cent pro kWh im Einfamilienhaus. Das zeigt nur die grobe Lage am Markt. Regionale Angebote und alte Verträge weichen davon ab.
 
-## Wann 24 Monate trotzdem passen können
+## Wann 24 Monate trotzdem passen können?
 
 Eine längere Laufzeit kann sinnvoll sein, wenn:
 
@@ -271,6 +271,8 @@ Halte auch den Abrufzeitpunkt und deine Postleitzahl fest. So bleibt später kla
 Kontrolliere deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grundpreis. Weicht die Vertragsbestätigung später ab, hast du mit Tabelle und Screenshot eine klare Grundlage für Rückfrage oder Widerruf.
 
 Bewahre die Tabelle mindestens bis zur ersten Rechnung auf. Dann kannst du Preis, Bonus und Abschlag mit dem ursprünglichen Angebot abgleichen.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Erst neutral vergleichen, dann Vorteile einrechnen
 

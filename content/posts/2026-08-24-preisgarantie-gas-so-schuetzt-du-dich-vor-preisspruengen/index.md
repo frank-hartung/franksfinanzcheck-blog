@@ -68,7 +68,7 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 - Kündige bei knapper Sonderfrist selbst und nachweisbar.
 - Schließe keinen teuren Tarif nur aus Angst vor einer Schlagzeile ab.
 
-## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht
+## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht?
 
 Versorger kaufen Gas zu verschiedenen Zeiten und über verschiedene Verträge ein. Dazu kommen Netz-Kosten, Vertrieb, Steuern, Abgaben und Umlagen. Dein Gaspreis ist also kein Live-Ticker vom Großhandel.
 
@@ -233,6 +233,8 @@ Passen Schutz und Erhöhungsgrund nicht zusammen, hol dir fachliche Unterstützu
 Setze eine realistische Antwortfrist und bleib sachlich. Ein Widerspruch ersetzt nicht automatisch eine Kündigung, und eine Kündigung löst nicht den Streit über bereits berechnete Preise. Behandle beides getrennt. So verlierst du weder die Wechselfrist noch den Überblick über deine Forderung.
 
 Prüfe nach dem Wechsel auch die Schlussrechnung. Ein sauberer neuer Vertrag heilt keinen falschen Endstand beim alten Anbieter.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Auf Schreiben reagieren, nicht auf Schlagzeilen
 

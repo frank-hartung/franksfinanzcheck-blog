@@ -57,7 +57,7 @@ Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das
 💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe nicht nur die Höhe des Bonus, sondern konzentriere dich auf den Preis über die gesamte Laufzeit von zwei Jahren. Dort versteckt sich die wahre Kostenfalle oder eben die echte Ersparnis: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Was ein DSL-Wechselbonus überhaupt ist
+## Was ein DSL-Wechselbonus überhaupt ist?
 
 Ein DSL-Wechselbonus ist eine Prämie für Neukunden. Sie gilt, wenn du deinen alten Vertrag beendest und zu einem neuen Anbieter wechselst. Die Anbieter nutzen den Bonus als Lockmittel. Er soll dir den Wechsel leichter machen.
 
@@ -253,6 +253,8 @@ Geh vor dem letzten Klick diese Liste durch:
 Diese kurze Prüfung sorgt dafür, dass der Wechselbonus auch wirklich in deinem Geldbeutel ankommt.
 
 > 💶 **Spar-Tipp zwischendurch:** Ein hoher Wechselbonus ist ein nettes Extra, aber ein dauerhaft niedriger Preis ist die Basis für echtes Sparen. Vergleiche jetzt die aktuellen Konditionen für Oktober 2026 und sichere dir das beste Gesamtpaket: [**DSL-Tarif prüfen & sparen**](/go/dsl/)
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Bonus mitnehmen ja – aber nur mit Taschenrechner im Kopf
 

@@ -50,7 +50,7 @@ Ein Tarif, den niemand bewusst auswählt, ist selten der günstigste. Genau das 
 
 Wer wissen will, wo die eigene Rechnung steht, muss zwei Dinge auseinanderhalten: den Anbieter und den Tarif. Die Grundversorgung ist ein Tarif. Sie kann vom örtlichen Grundversorger stammen, also dem Unternehmen, das in deinem Netzgebiet zuständig ist.
 
-## Wie du überhaupt in die Grundversorgung kommst
+## Wie du überhaupt in die Grundversorgung kommst?
 
 Der Weg hinein ist selten beabsichtigt. Es gibt vier typische Fälle.
 
@@ -74,7 +74,7 @@ Die **Grundversorgung** ist dauerhaft angelegt. Sie ist der Tarif, auf den ein H
 
 Praktisch wichtig ist der Preisunterschied zum Sondertarif. In der Übergangszeit gibt es kaum eine Alternative, denn die Belieferung muss laufen. Danach aber gilt: Der Zustand ist nicht festgeschrieben. Er ist eine Zwischenlösung, aus der du jederzeit herausgehen kannst.
 
-## Warum die Grundversorgung teurer ist
+## Warum die Grundversorgung teurer ist?
 
 Der Grund liegt nicht in einer Absicht, sondern in der Struktur. Ein Sondertarif wird für ein bestimmtes Kundenprofil kalkuliert: Haushaltsgröße, Verbrauch, Laufzeit. Die Grundversorgung muss dagegen für jedes Profil passen und jederzeit verfügbar sein.
 
@@ -174,6 +174,8 @@ Achte auf Absender und Betreffzeile. Wenn ein Schreiben die Abschlagshöhe, den 
 Prüfe zusätzlich deinen Kontostand gegen die Abschläge. Eine Änderung der Höhe fällt auch dort auf, manchmal früher als im Briefkasten. Bei einer Erhöhung lohnt sich der Vergleich mit anderen Anbietern. Bei einer Senkung lohnt sich die Frage, wie sich der Abschlag anpassen lässt.
 
 Wer jährlich einen Blick auf die Abrechnung wirft und die Werte notiert, erkennt Änderungen ohne Mühe. Wer sie nie notiert, beginnt jede Prüfung bei null.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

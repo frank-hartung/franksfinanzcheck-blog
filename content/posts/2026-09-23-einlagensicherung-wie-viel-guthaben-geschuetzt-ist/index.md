@@ -50,7 +50,7 @@ Die Einlagensicherung spielt bei der Unterschrift kaum eine Rolle. Erst wenn ein
 
 Die Sicherheit von Bankguthaben ist in Deutschland gesetzlich geregelt. Der Schutz bleibt nicht unbegrenzt und lässt sich nicht beliebig teilen. Wer das System einmal verstanden hat, ordnet Angebote viel besser ein.
 
-## Was geschützt ist
+## Was geschützt ist?
 
 Gesetzlich geschützt sind Guthaben auf Bankkonten. Dazu zählen Sicht-, Termin- und Spareinlagen.
 
@@ -60,7 +60,7 @@ Wichtig ist die Formulierung „pro Bank“. Sie bedeutet nicht pro Konto und ni
 
 Es gibt zudem Fälle mit höherem Schutz. Sie gelten für bestimmte Ereignisse und nur befristet. Die BaFin nennt sie in ihrem Ratgeber.
 
-## Warum zwei Konten nicht automatisch zwei Schutzbeträge bedeuten
+## Warum zwei Konten nicht automatisch zwei Schutzbeträge bedeuten?
 
 Viele Banken treten mit verschiedenen Marken auf. Ein Online-Angebot kann eine Marke eines größeren Instituts sein – und keine eigene Bank.
 
@@ -174,6 +174,8 @@ Das Ergebnis dieser Prüfung ist nicht immer ein Nachteil. Zwei Institute bedeut
 * **Jährlich prüfen.** Nach jedem Zinsangebot oder Kontowechsel erneut durchgehen.
 
 Die Verbraucherzentrale empfiehlt, beim Abschluss eines Girokontos Entgelte und Bedingungen zu lesen ([Ratgeber Girokonto](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990)). Dieselbe Sorgfalt hilft beim Tagesgeld: Der Zins bindet den Blick, die Regeln treten zurück.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

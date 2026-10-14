@@ -276,6 +276,8 @@ Diese Minute Aufmerksamkeit spart dir oft die ärgerlichsten Fehlentscheidungen.
 
 > 💶 **Spar-Tipp zwischendurch:** Wenn du nur auf den Monatsrabatt der ersten Monate schaust, vergleichst du oft falsch. Rechne den Tarif immer auf 24 Monate – erst dann zeigt sich die echte Ersparnis: [**DSL-Tarif prüfen & sparen**](/go/dsl/)
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+
 ## Fazit: Beim DSL-Wechsel gewinnt, wer sauber rechnet
 
 Ein **Internet Anbieterwechsel** ist heute deutlich einfacher, als viele denken. Die große Kunst liegt nicht in der Technik, sondern im Rechnen. Wer Bonus, Grundgebühr, Routerkosten und Laufzeit sauber zusammennimmt, spart oft mehrere hundert Euro über zwei Jahre.

@@ -58,7 +58,7 @@ Der zweite Wert ist die Menge, die du in einem üblichen Rhythmus verbrauchst. D
 
 Erst mit diesen drei Größen wird aus einem Angebot eine Rechnung. Die Verbraucherzentrale empfiehlt beim Sparen mit kleinen Budgets genau diese Reihenfolge: erst Überblick, dann Entscheidung ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
 
-## Wann ein Großeinkauf günstiger ist
+## Wann ein Großeinkauf günstiger ist?
 
 Ein Großeinkauf senkt die Kosten, wenn drei Bedingungen zusammenkommen.
 
@@ -70,7 +70,7 @@ Ein Großeinkauf senkt die Kosten, wenn drei Bedingungen zusammenkommen.
 
 Sind alle drei Bedingungen erfüllt, ist der Großeinkauf ein Rechenvorteil. Fehlt eine, wird aus dem Vorteil oft ein Risiko.
 
-## Wann er teurer wird
+## Wann er teurer wird?
 
 Ein Großeinkauf kostet zusätzlich Geld, wenn etwas verdirbt. Der Verderb wirkt wie ein Preisaufschlag auf die verbrauchte Menge.
 
@@ -185,6 +185,8 @@ Ein Notvorrat ist etwas anderes als ein Vorrat. Er wird nicht für den Alltag an
 Solche Unterbrechungen sind in der Regel kurz. Sie entstehen durch Krankheit, Wetter oder einen unerwarteten Termin. Ein Notvorrat aus haltbaren Grundnahrungsmitteln und Wasser überbrückt wenige Tage und verhindert, dass du in dieser Zeit zum teuren Nachbargeschäft gehst.
 
 Führe ihn getrennt von deinem Kochvorrat. Sonst wandert er in den Alltag ab und ist im Ernstfall leer. Prüfe die Haltbarkeit einmal im Jahr und ersetze, was abgelaufen ist.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

@@ -134,7 +134,7 @@ Beispiel: 16.000 kWh × 0,105 €/kWh + 180 € Grundpreis ergeben **1.860 �
 
 Ein Abschlag von 130 € macht den Tarif nicht günstiger. Er baut in diesem Beispiel nur eine mögliche Nachzahlung auf.
 
-## Was mehrere Maßnahmen zusammen bringen können
+## Was mehrere Maßnahmen zusammen bringen können?
 
 Prozentwerte lassen sich nicht einfach addieren. Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
 
@@ -162,7 +162,7 @@ Rechne jedes Angebot mit deiner tatsächlichen Jahresmenge durch. Wichtig sind:
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Vertrag deutlich teurer wirkt, kannst du hier aktuelle Angebote prüfen: [**Gasanbieter vergleichen & wechseln**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
-## Was Mieter selbst tun können
+## Was Mieter selbst tun können?
 
 Du beeinflusst Raumtemperatur, Lüftung, Möblierung und Verbrauch selbst. Technische Mängel meldest du schriftlich an Vermieter oder Hausverwaltung. Dazu zählen wiederkehrender Druckverlust, Leckagen, laute Geräusche oder Heizkörper, die trotz Entlüften kalt bleiben.
 
@@ -220,6 +220,8 @@ Miss, statt zu raten.
 
 
 Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizkosten senkst – ganz ohne Frieren. Für weitere Alltags-Spartricks lies auch: [Frugalismus-Tipps für mehr Freiheit](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

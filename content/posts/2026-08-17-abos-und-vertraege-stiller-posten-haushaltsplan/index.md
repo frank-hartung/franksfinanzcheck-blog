@@ -166,6 +166,8 @@ Zahlt der Anbieter danach weiter ab, hast du mehrere Möglichkeiten. Bei einer L
 
 Wichtig ist die Reihenfolge: erst reklamieren, dann zurückbuchen. Eine Rückgabe ohne vorherige Nachricht führt sonst schnell zu einem Mahnlauf, der zusätzliche Arbeit macht.
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+
 ## Häufige Fragen
 
 ### Wie finde ich Abos, die ich vergessen habe?

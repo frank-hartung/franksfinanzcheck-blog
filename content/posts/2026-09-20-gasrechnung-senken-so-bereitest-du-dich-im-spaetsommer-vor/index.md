@@ -261,6 +261,8 @@ Eine saubere Prüfung zeigt dir, ob Verbrauch, Tarif oder Abschläge die Rechnun
 
 Mit dem richtigen Vorgehen lässt sich die Gasrechnung prüfen um bis zu 15 % senken.
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+
 ## Fazit: Die Rechnung erzählt dir, welcher Hebel wirkt
 
 Markiere auf deiner letzten Rechnung fünf Stellen: Zeitraum, Zählerstände, kWh, Preise und Abschläge. Danach weißt du, ob der Tarif, der Verbrauch oder die Vorauszahlung das Problem ist.

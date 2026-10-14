@@ -87,7 +87,7 @@ Dann multiplizierst du mit deinem Preis pro kWh. Der BDEW-Schnitt von 37,0 Cent 
 
 Das zeigt auch, wo du anfangen solltest: Ein Ladegerät mit 0,1 Watt Leerlauf lohnt keine Mühe. Eine alte Gerätegruppe mit 18 Watt schon.
 
-## Wo sich die erste Messung meistens lohnt
+## Wo sich die erste Messung meistens lohnt?
 
 ### TV-Ecke
 
@@ -243,6 +243,8 @@ Vor einer Reise kannst du mehr abschalten als an einem normalen Abend. Drucker, 
 Nutze dafür eine kurze Abreise-Liste. Prüfe auch, ob Zeitschaltuhren oder automatische Routinen nach der Rückkehr noch stimmen. Das vermeidet den Klassiker: Zwei Wochen gut gespart und danach drei Monate WLAN oder TV-Zone im falschen Komfortmodus betrieben.
 
 Der Messwert zählt.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Nicht jedes Watt jagen
 

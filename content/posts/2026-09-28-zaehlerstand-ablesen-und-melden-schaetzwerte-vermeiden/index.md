@@ -50,7 +50,7 @@ Irgendwann im Jahr hängt eine Karte an der Wohnungstür oder es kommt eine E-Ma
 
 Der Zählerstand ist die einzige Zahl, die deinen Verbrauch wirklich beschreibt. Alles andere ist eine Ableitung. Wer ihn nicht liefert, überlässt die Ableitung dem Versorger.
 
-## Warum überhaupt abgelesen wird
+## Warum überhaupt abgelesen wird?
 
 Ein Abrechnungsjahr hat einen Anfang und ein Ende. Zu beiden Zeitpunkten braucht der Versorger einen Zählerstand, um die Differenz zu berechnen. Diese Differenz mal Arbeitspreis ergibt den Verbrauchsteil der Rechnung.
 
@@ -58,7 +58,7 @@ Fehlt ein Wert, ersetzt ihn der Versorger. Dann arbeitet er mit Vergleichswerten
 
 Die Bundesnetzagentur beschreibt im [Verbraucherportal zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/Preise-table.html), wie sich Abschlag, Verbrauch und Abrechnung zueinander verhalten und welche Rechte Verbraucher dabei haben.
 
-## Wann der Termin kommt
+## Wann der Termin kommt?
 
 Der Ablesetermin ist nicht überall gleich. Er folgt dem Abrechnungszeitraum deines Vertrags. Manche Versorger lesen zum Kalenderjahr ab, andere zum Lieferbeginn, wieder andere im festen Rhythmus.
 
@@ -188,6 +188,8 @@ Bei einer Ablesekarte füllst du dieselben Felder aus und fotografierst sie vor 
 Ein Ordner genügt. Pro Abrechnungsjahr ein Blatt mit: Datum, Zählerstand, Zählernummer und – falls vorhanden – dem gemeldeten Wert.
 
 Dazu kommen die Jahresrechnungen und bei Wechseln die Schlussabrechnung. Nach drei Jahren darfst du alte Jahre aussortieren – wenn keine Fragen offen sind.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

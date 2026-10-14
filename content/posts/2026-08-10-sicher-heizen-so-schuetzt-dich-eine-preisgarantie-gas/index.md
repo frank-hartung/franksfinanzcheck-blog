@@ -238,6 +238,8 @@ Der passende Tarif hängt von dir ab. Diese drei Fragen helfen dir weiter:
 
 Vergleiche immer den Preis im Jahr ohne Bonus. Setze dir dabei eine klare Grenze. Ein Beispiel: „Für den Schutz zahle ich 50 bis 100 € im Jahr mehr, aber keinen Cent darüber.“
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+
 ## Fazit: Kaufe keinen Namen, sondern einen klaren Schutz
 
 Eine [Gaspreisgarantie](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) bringt dir echten Nutzen, wenn der Preis fair ist. Sie muss zudem die großen Risiken abdecken. Dann ist sie ein guter Baustein für dein Budget.

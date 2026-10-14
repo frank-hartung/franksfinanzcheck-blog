@@ -35,7 +35,6 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-
 Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, sollte jetzt handeln. Die ersten kalten Nächte sind da. In diesen Wochen entscheidet sich, wie teuer dein Winter wird.
 
 Wer erst im Januar prüft, zahlt meist drauf. Wer jetzt startet, bekommt die besseren Preise (Stand: Oktober 2026).
@@ -165,7 +164,7 @@ Vorsicht gilt beim Nachfüllen von Wasser. Viele neue Geräte brauchen aufbereit
 4. Die Auswirkung über 2–3 Tage beobachten.
 5. Bei Unsicherheit die Einstellungen auf den Ursprungswert zurücksetzen.
 
-## Was Verbrauchsmaßnahmen realistisch bringen
+## Was Verbrauchsmaßnahmen realistisch bringen?
 
 Ein Grad weniger spart rechnerisch rund 6 %. Das klappt aber nur, wenn es dauerhaft kühler bleibt. Und wenn dein Haus das mitmacht.
 
@@ -244,6 +243,8 @@ Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 %. Kalt wird es dab
 
 
 Mit Temperatur, Abschlag und Tarif im Blick senkst du deine Gasrechnung spürbar – 10 bis 15 % sind realistisch.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

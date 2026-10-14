@@ -60,7 +60,7 @@ Wie dein Warmwasser entsteht, entscheidet über die Rechnung. Es gibt zwei Grund
 
 Wichtig ist, dass du weißt, welcher Weg in deiner Wohnung gilt. Wer im Bad einen kleinen Kasten mit Anzeige oder einen Warmwasserspeicher sieht, hat einen Durchlauferhitzer oder Boiler. Wer nur zwei Rohre sieht, hängt an der Zentralanlage.
 
-## Warum die Abrechnung oft eine eigene Zeile braucht
+## Warum die Abrechnung oft eine eigene Zeile braucht?
 
 Bei zentraler Versorgung wird Warmwasser üblicherweise mit Wärmemengenzählern oder über einen Brennstoffanteil gemessen. Daraus entsteht der Anteil am Gesamtverbrauch, der auf die Erwärmung des Wassers entfällt. Getrennt davon stehen die Heizkosten für die Räume.
 
@@ -102,7 +102,7 @@ Die beiden Varianten in der Übersicht. Der Euro-Wert ist eine Beispielrechnung 
 | Gegenprobe | 4 Minuten | rund 47 Kubikmeter | rund 1.870 Kilowattstunden | rund 561 Euro |
 | Unterschied | 2 Minuten | rund 23 Kubikmeter | rund 930 Kilowattstunden | rund 279 Euro |
 
-## Was Legionellen mit der Temperatur machen
+## Was Legionellen mit der Temperatur machen?
 
 Die Temperatur am Warmwasserspeicher lässt sich nicht beliebig senken. In einer zentralen Anlage gelten Vorgaben, um das Wachstum von Legionellen zu begrenzen. Fachbetriebe empfehlen deshalb üblicherweise, den Speicher nicht in einen Bereich abzusenken, in dem sich Keime wohlfühlen.
 
@@ -169,6 +169,8 @@ Diese Gegenüberstellung dauert fünf Minuten und ersetzt jede Vermutung über d
 **Sparen hört beim Duschkopf nicht auf.** Ein sparsamer Duschkopf reduziert die Menge, und das ist wirksam. Er ersetzt aber nicht die anderen Schrauben, Denn er ändert nichts an der Temperatur und nichts an den Leitungsverlusten im Speicher.
 
 **Ein voller Speicher ist nicht automatisch teuer.** Er verliert Wärme, aber er liefert auch sofort warmes Wasser. Wichtiger als die Größe ist die eingestellte Temperatur und die Dämmung.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

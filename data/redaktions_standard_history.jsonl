@@ -53,3 +53,38 @@
 {"zeit": "2026-10-14T11:49:49.704095+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
 {"zeit": "2026-10-14T11:49:49.842177+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}
 {"zeit": "2026-10-14T11:49:49.842177+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "GATE", "aktion": "draft (hold)"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-10-dsl-wechselbonus-sichern", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum", "regel": "RS2", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag", "regel": "RS2", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro", "regel": "RS2", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "regel": "RS1-RS6", "aktion": "fix-ki"}
+{"zeit": "2026-10-14T14:38:19.192212+00:00", "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "V1 Lesbarkeit: Flesch 47.7 liegt unter der Publish-Schwelle 60 und verschlechtert den Text (47.9 → 47.7) – dieser Artikel würde vom Publish-Gate blockiert (Bel…"}

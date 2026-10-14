@@ -60,7 +60,7 @@ Denn kleine Beträge haben eine unangenehme Eigenschaft: Sie fallen im Alltag ka
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn du heute nur eine Sache machst, dann diese: Prüfe deine festen Kosten. Strom, Internet, Kontogebühren und Abos bringen oft schneller Entlastung als jeder symbolische Verzicht: [**Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Was Frugalismus wirklich bedeutet
+## Was Frugalismus wirklich bedeutet?
 
 Viele verbinden [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) mit einem Leben, das nur noch aus Sparzwang besteht. Das ist die schlechte Karikatur davon.
 
@@ -68,7 +68,7 @@ In der Praxis geht es um etwas anderes: Du gibst weniger Geld für Dinge aus, di
 
 **Faustregel:** Spare zuerst dort, wo du wenig Lebensqualität verlierst und viel Geld gewinnst. Genau deshalb sind Fixkosten fast immer wichtiger als symbolische Mini-Verbote.
 
-## Warum kleine Beträge so oft unterschätzt werden
+## Warum kleine Beträge so oft unterschätzt werden?
 
 Große Anschaffungen werden geprüft. Kleine Ausgaben laufen dagegen fast unter dem Radar. Genau das macht sie gefährlich.
 

@@ -162,7 +162,7 @@ Frei liegende Heizungsrohre in kalten Räumen sollten gedämmt sein. Prüfe, ob 
 
 Alte Pumpen ohne Regelung können viel Strom brauchen. Notiere Hersteller und Typ, statt sie selbst auszubauen. Ein Fachbetrieb prüft, ob Tausch, neue Einstellung oder ein hydraulischer Abgleich sinnvoll ist.
 
-## Wann ein hydraulischer Abgleich in Frage kommt
+## Wann ein hydraulischer Abgleich in Frage kommt?
 
 Typische Hinweise sind:
 
@@ -250,7 +250,9 @@ Notiere außerdem den Komfort. Ein niedriger Verbrauch ist kein Erfolg, wenn ein
 
 Bleibt nur ein Raum auffällig, liegt die Ursache häufig in Ventil, Heizkörper oder Durchfluss. Betrifft es das ganze Haus, kommen Regelung, Pumpe oder Wärmeerzeuger eher in Frage. Diese Einordnung hilft dem Fachbetrieb und spart Diagnosezeit.
 
-## Fazit: Prüfen, dokumentieren, gezielt handeln
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+
+## Fazit: Was bedeutet das für Prüfen, dokumentieren, gezielt handeln?
 
 Ein guter Heizungs-Check findet Probleme, bevor sie teuer und dringend werden. Räume prüfen, Thermostate testen, typische Luftprobleme beheben und Werte dokumentieren: Das kannst du häufig selbst.
 

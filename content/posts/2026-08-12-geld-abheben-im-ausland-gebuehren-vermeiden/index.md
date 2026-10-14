@@ -58,7 +58,7 @@ Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn du vor der nächsten Reise ohnehin deine Fixkosten prüfst, gehört das Konto in dieselbe Liste. Hier kannst du ein dauerhaft gebührenfreies Modell ansehen: [**Kostenloses C24 Girokonto ansehen**](/go/girokonto/)
 *(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
-## Warum am Automaten zwei Rechnungen entstehen
+## Warum am Automaten zwei Rechnungen entstehen?
 
 Der Automat gehört selten deiner Bank. Im Ausland betreiben ihn lokale Institute, Wechselstuben oder selbstständige Netzbetreiber. Sie stellen ihre Infrastruktur bereit und verlangen dafür ein Nutzungsentgelt. Dieses Entgelt taucht nicht in deinem Kontopreisverzeichnis auf, weil es nicht deine Bank erhebt.
 
@@ -165,6 +165,7 @@ Prüfe außerdem, ob die Karte im Ausland für Abhebungen freigegeben war. Fehlt
 * **Sperrnummern speichern.** Notiere die Nummer zum Sperren deiner Karte, nicht auf dem Handy allein.
 * **Belege sammeln.** Bewahre bis zur Schlussrechnung alle Automatenbelege auf.
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

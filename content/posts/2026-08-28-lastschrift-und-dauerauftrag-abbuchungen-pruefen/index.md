@@ -60,7 +60,7 @@ Es gibt drei Wege, auf denen Geld ohne dein tägliches Zutun das Konto verlässt
 
 Der Unterschied ist praktisch relevant. Beim Dauerauftrag kennst du Höhe und Rhythmus, weil du beides festgelegt hast. Bei der Lastschrift kennt der Empfänger die Höhe. Das ist bei Stromabschlägen und Abos gewollt und bei Rechnungen üblich.
 
-## Was du beim Mandat wirklich erteilst
+## Was du beim Mandat wirklich erteilst?
 
 Ein Lastschriftmandat ist keine Einzelfreigabe, sondern eine Erlaubnis für einen Empfänger. Es enthält dessen Kennung und deine Kontodaten. Damit darf der Empfänger Beträge einziehen.
 
@@ -112,7 +112,7 @@ Die vier Wege, auf denen Geld dein Konto verlässt, in der Gegenüberstellung:
 | Überweisung | du selbst | Beleg und Verwendungszweck |
 | Kartenzahlung | du am Terminal | Beleg und Betrag auf dem Auszug |
 
-## Warum ein Umbau des Kontos hilft
+## Warum ein Umbau des Kontos hilft?
 
 Viele Haushalte mischen alle Wege auf einem Konto. Miete, Abschläge, Kartenzahlungen und spontane Einkäufe liegen in derselben Liste. Das ist bequem und macht jeden Fehler schwer sichtbar.
 
@@ -187,6 +187,8 @@ Eine brauchbare Antwort nennt drei Dinge: die Zuordnung der Buchung, die Grundla
 Fehlt einer dieser Punkte, frage genau danach. Eine allgemeine Auskunft über Bearbeitungszeiten ist keine Klärung. Frage damit nicht nach mehr Text, sondern nach genau dem fehlenden Stück.
 
 Wenn die Antwort nicht kommt, wiederhole sie einmal mit Verweis auf dein Schreiben und setze eine neue Frist. Behalte den Verlauf in einer Datei. Diese Datei ist später mehr wert als jede Erinnerung.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 

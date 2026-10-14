@@ -206,7 +206,7 @@ Starte die Rufnummernmitnahme parallel zum neuen Vertrag. Nicht erst danach. Die
 
 Rechne Combo-Tarife nur, wenn beide Teile allein teurer sind. Ein günstiger SIM-Only plus eigener DSL-Wechsel gewinnt oft. Vor allem, wenn ein Teil nach der Rabattphase teuer wird.
 
-## Wann Flex-Tarife statt 24 Monate sinnvoller sind
+## Wann Flex-Tarife statt 24 Monate sinnvoller sind?
 
 Der günstigste Vertrag ist nicht automatisch der beste Vertrag. Gerade im Mobilfunk kann Flexibilität viel wert sein.
 
@@ -231,6 +231,8 @@ Typische Vorteile:
 - Test eines zweiten Netzes ohne großes Risiko.
 
 Gerade wer viel reist oder beruflich erreichbar sein muss, kann dadurch flexibler werden. Das ändert nicht den Grundsatz des Vergleichs. Aber es erweitert die Möglichkeiten deutlich.
+
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Fazit: Jetzt vergleichen lohnt sich wie nie
 

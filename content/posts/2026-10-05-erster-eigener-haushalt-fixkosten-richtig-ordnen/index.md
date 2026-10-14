@@ -76,7 +76,7 @@ Teile deine Fixkosten in vier Blöcke. Diese Aufteilung hat einen praktischen Vo
 
 Wenn du diese vier Blöcke auf ein Blatt schreibst, hast du in zehn Minuten mehr Überblick als mit jeder App, die du nicht pflegst.
 
-## Was du wann anmeldest
+## Was du wann anmeldest?
 
 Die Reihenfolge beim Einzug ist keine Geschmacksfrage. Manche Dinge müssen sofort laufen, andere können warten.
 
@@ -159,7 +159,7 @@ Vergleiche die Vorauszahlungen, die du geleistet hast, mit den tatsächlichen Po
 
 Wenn du eine Position nicht nachvollziehen kannst, frage schriftlich nach. Diese Nachfrage ist kein Streit, sondern Teil der Abrechnung. Beschreibe die Position und bitte um die Berechnungsgrundlage.
 
-## Was die zweite Rechnung oft überrascht
+## Was die zweite Rechnung oft überrascht?
 
 Die erste Rechnung nach dem Einzug kommt früh und ist meist kalkulierbar. Die Überraschung liegt später: in der ersten Abrechnung über Nebenkosten, in der Anpassung der Vorauszahlung, in der Jahresgebühr einer Karte.
 
@@ -185,6 +185,7 @@ Die praktische Regel: Jeder Vertrag braucht genau einen Verantwortlichen. Eine g
 
 Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in fünf Minuten klären.
 
+**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
 
 ## Häufige Fragen
 
