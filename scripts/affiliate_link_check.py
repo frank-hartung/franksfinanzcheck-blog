@@ -1,11 +1,16 @@
 """Affiliate-Link-Checker (vollautomatisch, Top-Level) für FranksFinanzcheck.
 
 Prüft ALLE Posts auf:
-  1) Vorhandensein: Jeder Post braucht mindestens einen Affiliate-Link.
-  2) DEEP-LINK-KORREKTHEIT: Der Post muss auf den THEMATISCH PASSENDEN
-     Deep-Link verlinken (Slug-Mapping + Pillar-Fallback). Ein generischer
-     Link ohne deep= ist nur für thematisch breite Posts erlaubt
-     (frugalismus, tier) – dort wird er im Report markiert.
+  1) Vorhandensein: Jeder kommerzielle Post braucht einen Affiliate-Link.
+     Redaktionelle Fachseiten ohne passendes Angebot dürfen mit
+     `affiliate_exempt: true` UND einer Begründung ausdrücklich ausgenommen
+     werden. Ein unpassender CTA wird nicht automatisch in den Text gedrückt.
+  2) DEEP-LINK-KORREKTHEIT: Der Post muss auf den thematisch passenden
+     Deep-Link verweisen. Spezifische Bestandszuordnungen bleiben erhalten;
+     die eindeutige Produktklasse Handytarife wird zusätzlich über den
+     zentralen `affiliate_intent_contract` erkannt, bevor der grobe
+     Internet-Pillar-Fallback greift. Breitere Themen- und Cross-Selling-Fälle
+     bleiben bewusst kuratiert, statt aus beliebigen Textwörtern zu raten.
   3) PARTNER-IDS: pid=80968&aid=18 (CHECK24) bzw. partner_id=47086&ad_id=15
      (Tarifcheck) müssen korrekt sein – keine fremden/vertippten IDs.
 
@@ -22,8 +27,12 @@ import re
 import sys
 import json
 import glob
+import yaml
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import affiliate_intent_contract as affiliate_contract  # noqa: E402
+
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 REPORT_FILE = os.path.join(BLOG_DIR, "AFFILIATE-REPORT.md")
 JSON_FILE = os.path.join(BLOG_DIR, ".affiliate_report.json")
@@ -147,12 +156,51 @@ def norm_url(u):
     return u.replace("&amp;", "&").strip().rstrip(")")
 
 
+def affiliate_exemption(post):
+    """(ausgenommen, Grund, Metadatenfehler) – fail-closed bei halber Angabe."""
+    try:
+        metadata = yaml.safe_load(post.get("frontmatter", "")) or {}
+    except yaml.YAMLError as exc:
+        detail = str(exc).splitlines()[0] if str(exc) else "YAML-Fehler"
+        return False, "", f"Frontmatter ist kein gültiges YAML: {detail}"
+    if not isinstance(metadata, dict):
+        return False, "", "Frontmatter muss ein YAML-Objekt sein"
+
+    has_flag = "affiliate_exempt" in metadata
+    raw_exempt = metadata.get("affiliate_exempt")
+    raw_reason = metadata.get("affiliate_exempt_reason")
+    reason = raw_reason.strip() if isinstance(raw_reason, str) else ""
+
+    if not has_flag:
+        if raw_reason is None or (isinstance(raw_reason, str) and not reason):
+            return False, "", ""
+        return False, "", (
+            "affiliate_exempt_reason ist gesetzt, aber "
+            "affiliate_exempt: true fehlt"
+        )
+    if not isinstance(raw_exempt, bool):
+        return False, "", "affiliate_exempt muss ein YAML-Boolean true oder false sein"
+    if raw_exempt:
+        if not reason:
+            return False, "", "affiliate_exempt: true braucht eine nichtleere Begründung"
+        if not isinstance(raw_reason, str):
+            return False, "", "affiliate_exempt_reason muss Text sein"
+        return True, reason, ""
+    if raw_reason is not None and (not isinstance(raw_reason, str) or reason):
+        return False, "", (
+            "affiliate_exempt_reason darf nur mit affiliate_exempt: true "
+            "angegeben werden"
+        )
+    return False, "", ""
+
+
 def load_posts():
     posts = []
     pillar_dir = os.path.join(BLOG_DIR, "content", "pillar")
     for path in sorted(glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
                        + glob.glob(os.path.join(pillar_dir, "*", "index.md"))):
-        content = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as source:
+            content = source.read()
         parts = content.split("---", 2)
         if len(parts) < 3:
             continue
@@ -169,12 +217,10 @@ def load_posts():
         posts.append({
             "path": path, "slug": slug, "title": get("title"),
             "pillar": get("pillar").strip('"'), "body": body, "content": content,
-            "is_pillar": is_pillar,
+            "frontmatter": fm, "is_pillar": is_pillar,
         })
     return posts
 
-
-import yaml
 
 def _load_registry():
     yf = os.path.join(BLOG_DIR, "scripts", "check24_links.yaml")
@@ -185,6 +231,30 @@ def _load_registry():
     return {}
 
 _REGISTRY = _load_registry()
+
+
+def _target_from_registered_route(route):
+    """Leitet Zieltyp und Deep-Link aus dem zentralen Gateway-Register ab."""
+    url = _REGISTRY.get(route)
+    if not url:
+        return None
+    url = norm_url(url)
+    if url.startswith(CHECK24):
+        art = "check24"
+    elif url.startswith(TARIFCHECK):
+        art = "tarifcheck"
+    else:
+        return None
+
+    deep_match = re.search(r"(?:[?&])deep=([^&]+)(?:&cat=([^&]+))?", url)
+    ziel = affiliate_contract.ziel(route)
+    name = ziel.produkt if ziel else route
+    if not deep_match:
+        return ("generic_ok", None, f"Route {route}: generischer Link erlaubt")
+    deep = deep_match.group(1)
+    if deep_match.group(2):
+        deep += f"&cat={deep_match.group(2)}"
+    return (art, deep, name)
 
 
 def find_affiliate_links(body):
@@ -222,6 +292,25 @@ def expected_target(post):
     if slug in SLUG_DEEP:
         deep, name = SLUG_DEEP[slug]
         return ("check24", deep, name)
+    # Neue/umbenannte Ratgeber zuerst fachlich einordnen. Die zentrale
+    # Intent-Reihe kennt Produktbegriffe wie „Handyvertrag“; ein breiter
+    # Pillar wie `internet-dsl` darf diese konkrete Kaufabsicht nicht zu
+    # einem DSL-Deep-Link überschreiben. Nur Slug und Titel sind belastbare
+    # Themenbelege: Body/Weiterlesen-Links enthalten oft Cross-Selling und
+    # dürfen die eigene Artikelabsicht nicht überstimmen.
+    route = affiliate_contract.route_fuer_text(
+        text=slug.replace('-', ' '),
+        titel=post.get("title", ""),
+    )
+    # Der zentrale Vertrag enthält auch breite Stichwörter wie „Urlaub“,
+    # die im Bestand bewusst als sekundäres Cross-Selling verwendet werden.
+    # Nur die eindeutige Produktklasse Handytarife überschreibt deshalb
+    # derzeit den Pillar-Fallback automatisch; andere Spezialfälle bleiben
+    # kuratiert in den obenstehenden Slug-Mappings.
+    if route == "handytarife":
+        target = _target_from_registered_route(route)
+        if target:
+            return target
     # 3) Pillar-Fallback
     pillar = post["pillar"]
     if pillar in PILLAR_DEEP:
@@ -236,12 +325,25 @@ def expected_target(post):
 
 def check_post(post):
     """Liefert Liste von Problemen für einen Post."""
-    problems = []
+    exempt, exemption_reason, metadata_error = affiliate_exemption(post)
     links = find_affiliate_links(post["body"])
     if not links:
+        if exempt and not metadata_error:
+            return [{
+                "severity": "info",
+                "msg": f"Kein Affiliate-Link (redaktionell ausgenommen: {exemption_reason})",
+            }]
+        problems = []
+        if metadata_error:
+            problems.append({"severity": "error", "msg": metadata_error})
         problems.append({"severity": "error", "msg": "KEIN Affiliate-Link vorhanden"})
         return problems
 
+    problems = []
+    if metadata_error:
+        # Ein Metadatenfehler blockiert zwar den Lauf, darf aber die
+        # unabhängige Link-/Partner-ID-Prüfung nicht kurzschließen.
+        problems.append({"severity": "error", "msg": metadata_error})
     art, deep, name = expected_target(post)
 
     # Partner-IDs validieren
@@ -299,7 +401,6 @@ def fix_post(post, dry=True):
     expected_url = f"{CHECK24}&deep={deep}"
     content = post["content"]
     # Nur die GENERISCHE Basis-URL ersetzen (nicht vorhandene Deep-Links!)
-    generic = CHECK24  # ohne deep
     # Achtung: CHECK24 ist Präfix von expected_url – nur exakte generische Links ersetzen
     pattern = re.compile(r"https://a\.check24\.net/misc/click\.php\?pid=80968&aid=18(?![&\w])")
     new_content, n = pattern.subn(lambda m: expected_url, content)
@@ -310,7 +411,85 @@ def fix_post(post, dry=True):
     return 0
 
 
+def _selftest_post(slug, title, pillar, body, frontmatter=""):
+    return {
+        "path": "(selftest)", "slug": slug, "title": title,
+        "pillar": pillar, "body": body, "content": body,
+        "frontmatter": frontmatter, "is_pillar": False,
+    }
+
+
+def selftest():
+    """Eingefrorene Regressionen für Themen-vor-Pillar und Ausnahmen."""
+    failures = []
+    mobile = _selftest_post(
+        "2026-10-07-handyvertrag-kuendigen",
+        "Handyvertrag kündigen: Enddatum und Rufnummer",
+        "internet-dsl",
+        "👉 Jetzt Handytarife vergleichen: [Handytarife vergleichen](/go/handytarife/)",
+    )
+    expected = expected_target(mobile)
+    if expected != ("check24", "handytarife", "Handytarife"):
+        failures.append(f"Handytarif unter internet-dsl falsch zugeordnet: {expected}")
+    mobile_errors = [p["msg"] for p in check_post(mobile)
+                     if p["severity"] == "error"]
+    if mobile_errors:
+        failures.append(f"Handytarif-CTA fällt durch den Check: {mobile_errors}")
+
+    cross_sell = _selftest_post(
+        "wlan-mesh-ratgeber", "WLAN verbessern: Mesh und Empfang",
+        "internet-dsl", "Ein Stromtarif kann die Fixkosten senken.",
+    )
+    if expected_target(cross_sell) != (
+        "check24", "dsl-anbieterwechsel&cat=4", "DSL-Tarifvergleich"
+    ):
+        failures.append("Breite Text-/Cross-Selling-Wörter überschreiben den Pillar")
+
+    unmarked = _selftest_post("neuer-ratgeber", "Neuer Technikratgeber", "", "DNS-Tipps.")
+    if not any(p["msg"] == "KEIN Affiliate-Link vorhanden"
+               for p in check_post(unmarked)):
+        failures.append("Ein nicht ausgenommener Linkmangel wird nicht blockiert")
+
+    exempt = _selftest_post(
+        "dns-messtest", "DNS-Antwortzeiten testen", "internet-dsl", "Messanleitung.",
+        'affiliate_exempt: true\naffiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot."',
+    )
+    exempt_problems = check_post(exempt)
+    if any(p["severity"] == "error" for p in exempt_problems) or not any(
+        p["severity"] == "info" and "Reiner DNS-Messtest" in p["msg"]
+        for p in exempt_problems
+    ):
+        failures.append(f"Begründete redaktionelle Ausnahme greift nicht: {exempt_problems}")
+
+    malformed = _selftest_post(
+        "2026-10-07-handyvertrag-kuendigen",
+        "Handyvertrag kündigen: Enddatum und Rufnummer",
+        "internet-dsl",
+        "[Jetzt DSL vergleichen](/go/dsl/)",
+        "affiliate_exempt: true\n",
+    )
+    malformed_problems = [p["msg"] for p in check_post(malformed)
+                          if p["severity"] == "error"]
+    if not any("braucht eine nichtleere Begründung" in msg
+               for msg in malformed_problems):
+        failures.append("Eine Ausnahme ohne Begründung wird nicht fail-closed blockiert")
+    if not any("Fehlt der passende Deep-Link" in msg
+               for msg in malformed_problems):
+        failures.append("Ungültige Ausnahmemetadaten überspringen die Linkprüfung")
+
+    if failures:
+        print("Affiliate-Link-Check Selbsttest: FEHLER")
+        for failure in failures:
+            print(f"  ❌ {failure}")
+        return 2
+    print("Affiliate-Link-Check Selbsttest: 5 Verträge grün")
+    return 0
+
+
 def main():
+    if "--selftest" in sys.argv:
+        return selftest()
+
     fix = "--fix" in sys.argv
     as_json = "--json" in sys.argv
     posts = load_posts()
@@ -319,7 +498,7 @@ def main():
     for post in posts:
         problems = check_post(post)
         fixed = 0
-        if fix and problems:
+        if fix and any(p["severity"] == "error" for p in problems):
             fixed = fix_post(post, dry=False)
             if fixed:
                 # nach Fix neu prüfen
@@ -362,7 +541,7 @@ def main():
                 lines.append("")
     infos = [(r, i) for r in results for i in r["infos"]]
     if infos:
-        lines += ["## ℹ️ Generische Links (erlaubt, aber prüfen)", ""]
+        lines += ["## ℹ️ Hinweise", ""]
         for r, i in infos:
             lines.append(f"- {r['slug']}: {i}")
         lines.append("")

@@ -34,6 +34,8 @@ quellen:
     url: "https://developers.google.com/speed/public-dns/docs/using"
     herausgeber: "Google for Developers"
 faktencheck: "2026-10-14"
+affiliate_exempt: true
+affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot; ein Tarif-CTA wäre sachfremd."
 ---
 
 Ein DNS-Wechsel ist kein allgemeiner Internet-Turbo. Er ändert zunächst, welcher Resolver eine Domainanfrage beantwortet. Wenn du einen DNS-Server testen möchtest, kannst du einzelne Antwortzeiten vergleichen. Je nach Netz und Anbieter unterscheiden sich die Werte; ein einzelner Messwert belegt weder einen pauschalen Geschwindigkeitsgewinn noch kürzere Ladezeiten für alle Websites.
