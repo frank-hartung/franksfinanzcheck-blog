@@ -114,6 +114,12 @@ jobs:
     if: github.event_name != 'push' && github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    # Sicherheitsaudit 14.10.2026 (M-08): Das Verwaltungs-Token
+    # BRAND_ADMIN_TOKEN gehört als Environment-Secret in `brand-admin`
+    # (Deployment branches: nur main). Dann kann kein Workflow auf einem
+    # anderen Branch es anfordern. Solange das Environment nicht existiert,
+    # legt GitHub es beim ersten Lauf ohne Regeln an – nichts bricht.
+    environment: brand-admin
     permissions:
       contents: write   # Releases/Tags heilen
       issues: write     # O6: Alt-Titel der Fehlermeldungen neutral nachziehen
