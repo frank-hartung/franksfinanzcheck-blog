@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-14T16:35:24Z",
+  "generated_at": "2026-10-14T17:46:59Z",
   "modus": "kandidaten",
-  "commit": "e141f163a329cf80189f5ae73a0492d490fa6d10",
+  "commit": "dc39dc1045037e922e73ffb8f6d1141ce7bf7451",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "1c937db1aab4076f54b10d8e18916b4fc6c612c8dffe89e98914fa14bb488fb3",
@@ -121,7 +121,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "sha256": "19909d9565e28a4d8e05521d9aaf38730c919934f2d95dbdf58c42d10c6b8fc4",
@@ -257,7 +257,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
       "sha256": "facdbd4845c637e54eceab0cfee997b55a66acf768ccc470ea9e0b2fd0960d21",
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "cd3a25a07e5b4d4c289af4fc4933f82e6441150bd84224abfc328f99cd522123",
@@ -447,7 +447,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "72e8c8bbb998b73c9b0e076782ef703f0722bcae101c099d6a8082e13d5ce617",
+      "sha256": "8c6bfcc786fe48678cbb6045e926fd05eedc5e7c571a039e8f8758f33ec091c7",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "721309823ada12705f8e79be8ecbb58f29a99030ff4bd278730309628bdc3326",
@@ -903,7 +903,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
       "sha256": "6c3d7f581a8c48955d4262b39cdee1596d74dbc0f5e39302b7f570bcd07a6d4a",
