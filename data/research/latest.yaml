@@ -1,5 +1,5 @@
-generated_at: '2026-10-13T11:05:07Z'
-day: '2026-10-13'
+generated_at: '2026-10-14T09:01:22Z'
+day: '2026-10-14'
 mode: deterministic
 teams:
   trending:
@@ -238,27 +238,24 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
-    pillar: versicherungen
+  - topic: 10 Tipps für günstige Reisekreditkarten
+    pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: topics:10 Tipps für günstige Reisekreditkarten
     score: 0.55
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
-  - topic: 'Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am lukrativsten
-      ist'
+    - Reisekreditkarten
+    - günstige Karten
+    - Reisekosten sparen
+  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am
-      lukrativsten ist'
+    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
     score: 0.55
     keywords:
-    - Heizperiode Beginn
-    - Gastarife vergleichen Oktober
-    - Neukundenbonus Gas
-    - Heizkosten senken Winter
+    - Energieausweis
+    - Energieausweis Kosten
+    - Energieeffizienzklasse Haus
   - topic: 'Interrail und Bahncard: Günstig mit dem Zug durch Europa'
     pillar: mietwagen
     signal: niche_hook
@@ -268,33 +265,34 @@ teams:
     - Interrail
     - Bahncard sparen
     - Zugreise Europa günstig
-  - topic: Kostenloses Girokonto ohne Gebühren finden
-    pillar: konto-karten
+  - topic: 'Krankenzusatzversicherung: Welche Bausteine sich lohnen'
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Kostenloses Girokonto ohne Gebühren finden
+    source: 'topics:Krankenzusatzversicherung: Welche Bausteine sich lohnen'
     score: 0.55
     keywords:
-    - Kostenloses Girokonto
-    - Girokonto Vergleich
-    - Kontoführungsgebühren sparen
-  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
-    score: 0.55
-    keywords:
-    - E-Auto Mietwagen
-    - Elektromobilität
-    - Urlaub
-  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
+    - Krankenzusatz
+    - Versicherung
+    - Zahnzusatz
+  - topic: 'Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
+    source: 'topics:Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
     score: 0.55
     keywords:
-    - Smart-Plug
-    - Energie sparen
-    - Haushaltsgeräte
+    - Strompreis 2026
+    - Stromanbieter wechseln jetzt
+    - Strompreis Prognose
+    - Stromtarif wechseln Herbst
+  - topic: 'Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+    score: 0.55
+    keywords:
+    - Stromspeicher kaufen
+    - Batteriespeicher Solar
+    - Photovoltaik Speicher
 live_web:
   enabled: false
   findings: []
