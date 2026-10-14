@@ -2,7 +2,9 @@
 title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 description: Erfahre, wie du durch Cashback-Tipps und Fixkosten-Checks effektiv deine Reisekasse füllen kannst. Frank Hartung zeigt den Weg zum Urlaubsbudget 2026.
 date: 2026-10-14T10:35:54Z
-draft: false
+draft: true
+cadence_demoted: 2026-10-14T11:47:28Z
+cadence_grund: "quality-score: 0.801 < 0.85; finale Freigabe fehlt"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
