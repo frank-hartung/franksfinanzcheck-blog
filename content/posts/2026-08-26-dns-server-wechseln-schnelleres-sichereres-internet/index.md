@@ -1,7 +1,7 @@
 ---
-lastmod: 2026-10-13
-title: "DNS-Server wechseln: Schnelleres und sichereres Internet"
-description: "DNS-Server wechseln für mehr Tempo: Beste kostenlose DNS-Server 2026 (Cloudflare, Google, Quad9) + Anleitung für FRITZ!Box, Windows & Android."
+lastmod: 2026-10-14
+title: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
+description: "DNS-Server wechseln kann Datenschutz und Filter verändern, nicht die Bandbreite. So vergleichst du Resolver, DoH/DoT und richtest sie sicher ein."
 date: 2026-08-26T06:00:00Z
 draft: false
 tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
@@ -9,267 +9,142 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet.jpg"
-  alt: "DNS-Server wechseln für schnelleres und sichereres Internet"
+  alt: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Beim DNS-Server-Wechsel trägst du in FRITZ!Box, Router oder Endgerät zwei IP-Adressen eines schnellen öffentlichen DNS-Anbieters ein – etwa 1.1.1.1 (Cloudflare), 8.8.8.8 (Google) oder 9.9.9.9 (Quad9). Das beschleunigt das Aufrufen von Webseiten um 10 bis 30 Millisekunden, blockiert aktiv Malware- und Phishing-Domains und verhindert, dass dein Internetanbieter dein Surfverhalten mitliest. Die Einrichtung dauert pro Gerät 5 Minuten und ist kostenlos."
+kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält; er erhöht weder die Bandbreite noch verschlüsselt er DNS automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Dabei verlagert sich das Vertrauen auf den gewählten DNS-Anbieter."
 
 social_posted: true
-keywords: ["DNS-Server wechseln", "DNS-Server ändern", "Bester DNS-Server", "FRITZ!Box DNS ändern", "Cloudflare DNS", "Google DNS", "Schnelleres Internet", "DNS Sicherheit"]
-pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
-pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und FRITZ!Box – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
+keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern"]
+pin_title: "DNS-Server wechseln: Was es kann – und was nicht"
+pin_description: "*Werbung | Ein anderer DNS-Resolver kann Filter und Zuständigkeiten ändern, aber keine Bandbreite zaubern. Vergleiche Datenschutz, Verschlüsselung und Anbieterbedingungen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
-  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
-    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
-    herausgeber: "Bundesnetzagentur"
-    datum: "2026-10-13"
-  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
-    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
-    herausgeber: "Verbraucherzentrale"
-    datum: "2025-09-18"
-  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
-    url: "https://www.heise.de/thema/WLAN"
-    herausgeber: "heise online"
-    datum: "2026-08-05"
-faktencheck: "2026-10-13"
+  - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"
+    url: "https://developers.cloudflare.com/1.1.1.1/ip-addresses/"
+    herausgeber: "Cloudflare"
+    datum: "2026-04-30"
+  - titel: "DNS-Verkehr verschlüsseln: DoH und DoT"
+    url: "https://developers.cloudflare.com/1.1.1.1/encryption/"
+    herausgeber: "Cloudflare"
+    datum: "2026-05-05"
+  - titel: "Datenschutz beim öffentlichen DNS-Resolver 1.1.1.1"
+    url: "https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/"
+    herausgeber: "Cloudflare"
+    datum: "2026-05-06"
+  - titel: "Google Public DNS: Einrichtung und IP-Adressen"
+    url: "https://developers.google.com/speed/public-dns/docs/using"
+    herausgeber: "Google for Developers"
+  - titel: "Google Public DNS: Datenschutz und Protokollierung"
+    url: "https://developers.google.com/speed/public-dns/privacy"
+    herausgeber: "Google for Developers"
+    datum: "2024-09-03"
+  - titel: "Quad9-Dienste und DNS-Adressen"
+    url: "https://docs.quad9.net/services/"
+    herausgeber: "Quad9"
+  - titel: "Quad9: Datenschutz"
+    url: "https://quad9.net/service/privacy/"
+    herausgeber: "Quad9"
+  - titel: "Andere DNS-Server und DNS over TLS in der FRITZ!Box einrichten"
+    url: "https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box"
+    herausgeber: "FRITZ! Knowledge Base"
+  - titel: "Im Inkognitomodus surfen"
+    url: "https://support.google.com/chrome/answer/95464?hl=de"
+    herausgeber: "Google Chrome-Hilfe"
+  - titel: "Verschlüsseltes DNS unter Android einrichten"
+    url: "https://developers.cloudflare.com/1.1.1.1/setup/android/"
+    herausgeber: "Cloudflare"
+    datum: "2026-06-23"
+faktencheck: "2026-10-14"
 ---
 
-Wusstest du, dass dein Anbieter mitlesen kann? Er sieht jede Seite, die du aufrufst – auch im Inkognito-Modus.
+Wenn du den DNS-Server wechseln möchtest, änderst du zunächst den Resolver, an den dein Gerät seine Namensanfragen schickt. Das kann Filter, Datenschutzbedingungen und die Antwortzeit bei einer Namensauflösung beeinflussen. Es macht deinen Internetanschluss aber nicht automatisch schneller oder anonymer.
 
-Der Grund ist der **DNS-Server** deines Providers. Er ist das Telefonbuch des Internets. Er übersetzt Namen wie www.google.de in Zahlen.
+## Was ein DNS-Server macht
 
+DNS steht für Domain Name System. Ein Resolver übersetzt einen Domainnamen wie `example.de` in eine IP-Adresse, die dein Gerät für den Verbindungsaufbau benötigt. Betriebssystem, Router und Resolver können Antworten zwischenspeichern. Deshalb wird nicht bei jedem Seitenaufruf eine neue DNS-Anfrage gesendet.
 
-Die meisten nutzen automatisch den DNS-Server ihres Anbieters. Es gibt aber schnellere und sicherere Optionen.
+Die DNS-Auflösung ist nur ein Schritt vor der Verbindung zur Website. Ein anderer Resolver kann die Dauer dieses Schritts verändern, aber weder die vertragliche Bandbreite erhöhen noch ein schwaches WLAN reparieren. Das Ergebnis hängt unter anderem von deinem Anschluss, dem gewählten Dienst, der Route und dem Zwischenspeicher ab. Eine allgemeingültige Rangliste der schnellsten Anbieter gibt es für jeden Haushalt nicht.
 
-Der Wechsel ist kostenlos. Er dauert fünf Minuten. Und er verkürzt oft die Ladezeit.
+## Öffentliche DNS-Resolver im Vergleich
 
-Wenn du schon **39 € im Monat** für deinen Anschluss zahlst, solltest du keine unnötigen Umwege über einen langsamen DNS-Server mitfinanzieren. Schon **10 % bis 20 %** schnellere Antworten fühlen sich beim täglichen Surfen oft direkter an. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Die folgenden IPv4-Adressen stammen aus den aktuellen Anbieterunterlagen. Nutze für die zweite Adresse möglichst denselben Anbieter. So bleiben Filter- und Datenschutzregeln konsistent, falls dein Gerät beide Resolver verwendet.
 
-
-
----
-
-💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn du nach dem DNS-Tuning auch noch die Bandbreite und den Tarif optimieren möchtest: [**DSL-Tarife vergleichen**](/go/dsl/)  
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
-
-## Was macht ein DNS-Server überhaupt?
-
-Tippst du eine Adresse wie www.google.de ein, läuft im Hintergrund ein Vorgang ab:
-
-1. Dein Browser fragt den **DNS-Server** (standardmäßig den deines Internetanbieters): "Welche IP-Adresse gehört zu `www.google.de`?"
-2. Er schlägt die Adresse nach und antwortet mit `142.250.185.195`.
-3. Dein Browser baut eine verschlüsselte Verbindung zu dieser IP auf.
-
-Diese **DNS-Auflösung** dauert bei Standard-Servern 20 bis 120 Millisekunden. Bei 50 bis 100 Seiten am Tag summiert sich das. Moderne Anbieter wie Cloudflare schaffen es in **10 bis 20 Millisekunden**.
-
-## Drei Vorteile des DNS-Server-Wechsels
-
-### 1. Schnellere Ladezeiten
-
-DNSPerf misst täglich tausende Server weltweit. Im August 2026 lagen die Antwortzeiten in Deutschland bei:
-
-| Anbieter | Primärer DNS | Sekundärer DNS | Ø Antwortzeit DE |
-|:---|:---|:---|---:|
-| Cloudflare | 1.1.1.1 | 1.0.0.1 | 8 ms |
-| Google | 8.8.8.8 | 8.8.4.4 | 12 ms |
-| Quad9 | 9.9.9.9 | 149.112.112.112 | 14 ms |
-| Deutsche Telekom (Standard) | automatisch | automatisch | 24 ms |
-| Vodafone/1&1 (Standard) | automatisch | automatisch | 22–35 ms |
-
-*(Quellen: DNSPerf.com, eigene Messungen per `dig`/`nslookup`, August 2026)*
-
-### 2. Mehr Datenschutz
-
-Dein Anbieter sieht jede Domain, die du besuchst. Das gilt auch bei HTTPS.
-
-In Deutschland ist der Verkauf von Surf-Daten verboten. Doch Netzmanagement und Behörden können mitlesen. Öffentliche DNS-Anbieter speichern weniger. Sie schützen deine Privatsphäre besser.
-
-
-### 3. Eingebauter Phishing- und Malware-Schutz
-
-Quad9 (9.9.9.9) und Cloudflare (1.1.1.2) prüfen jede Anfrage. Auch der Family-Server (1.1.1.3) macht das.
-
-Bekannte Phishing- und Malware-Seiten werden direkt blockiert. Dein Gerät baut gar keine Verbindung auf. Das hilft Kindern und allen im Haushalt.
-
-
-## Die 3 attraktiven kostenlosen DNS-Server im Überblick
-
-### Cloudflare (1.1.1.1) – der Schnellste
-
-* **IPs:** 1.1.1.1 und 1.0.0.1 (IPv6: 2606:4700:4700:1111 und:1001)
-* **Besonderheit:** Sehr niedrige Latenz, strenges Datenschutz-Versprechen, keine Verkaufslogiken.
-* **Versionen:**
-  - `1.1.1.2 / 1.0.0.2` – mit Malware-Schutz
-  - `1.1.1.3 / 1.0.0.3` – mit Malware- und Jugendschutz-Filter
-
-### Google Public DNS (8.8.8.8) – der Zuverlässigste
-
-* **IPs:** 8.8.8.8 und 8.8.4.4 (IPv6: 2001:4860:4860:8888 und:8844)
-* **Besonderheit:** Hohe Verfügbarkeit, weltweit verteilt. Google erhebt aber Nutzungsdaten, auch wenn keine Werbeprofile daraus gebaut werden.
-
-### Quad9 (9.9.9.9) – der Sicherste
-
-* **IPs:** 9.9.9.9 und 149.112.112.112
-* **Besonderheit:** Gemeinnützige Stiftung, blockiert aktiv Bedrohungen (über 100 Mio. Einträge in der Bedrohungsdatenbank), keine Speicherung personenbezogener Daten.
-
-## Anleitung: DNS-Server an der FRITZ!Box ändern (empfohlen)
-
-Änderst du den DNS-Server im Router, gilt das für **alle Geräte**. Handy, Smart-TV, Laptop und Konsole profitieren. Bei einer FRITZ!Box geht es so:
-
-1. Browser öffnen, zu `http://fritz.box` navigieren und anmelden.
-2. Im linken Menü zu **Internet → Zugangsdaten → Namensserver** wechseln.
-3. Wähle **"Andere DNS-Server verwenden"**.
-4. Trage ein:
-   - **Bevorzugter Namensserver:** `1.1.1.1`
-   - **Verzögerter DNS-Server:** `1.0.0.1`
-5. Auf **"Übernehmen"** klicken. Die FRITZ!Box startet kurz die Internetverbindung neu.
-6. Test auf [https://1.1.1.1/help](https://1.1.1.1/help) oder mit `nslookup franksfinanzcheck.de` in der Windows-Kommandozeile.
-
-> 💡 **Tipp:** Bei anderen Routern (Telekom Speedport, Unitymedia Connect Box, Vodafone Station) findest du die DNS-Einstellungen im Menü unter "Netzwerk", "Internet" oder "LAN". Das Prinzip ist identisch.
-
-## DNS-Server unter Windows ändern
-
-1. `Windowstaste + R` drücken, `ncpa.cpl` eingeben und mit Enter bestätigen.
-2. Rechtsklick auf die aktuell genutzte Netzwerkverbindung → **Eigenschaften**.
-3. **Internetprotokoll, Version 4 (TCP/IPv4)** doppelklicken.
-4. **Folgende Namensserveradressen verwenden** auswählen und eintragen:
-   - Bevorzugter DNS-Server: `1.1.1.1`
-   - Alternativer Namensserver: `1.0.0.1`
-5. Mit **OK** bestätigen. Für die volle IPv6-Unterstützung dasselbe für "Internetprotokoll, Version 6 (TCP/IPv6)" mit `2606:4700:4700::1111` und `::1001` wiederholen.
-
-## DNS unter Android und iPhone ändern
-
-### Android
-
-Unter Android 13/14 ab Version 9 kannst du systemweit "Private DNS" festlegen:
-
-1. **Einstellungen → Netzwerk & Internet → Private Namensauflösung**.
-2. **Hostname des Private-DNS-Anbieters** auswählen.
-3. Eintragen: `one.one.one.one` (Cloudflare) oder `dns.google` (Google).
-4. Speichern.
-
-### iPhone / iPad
-
-1. **Einstellungen → WLAN** → neben dem verbundenen WLAN auf das "i"-Symbol tippen.
-2. Nach unten zu **Resolver** scrollen → **Namensauflösung konfigurieren**.
-3. Auf **Manuell** umstellen, ggf. vorhandene Server entfernen und `1.1.1.1` sowie `1.0.0.1` ergänzen.
-4. **Sichern**.
-
-## Gefahren und Fallstricke
-
-- **Keine echte Anonymität:** Der Wechsel verhindert das Mitlesen durch den Provider, macht dich aber nicht vollständig anonym. Dafür brauchst du zusätzlich ein VPN oder Tor.
-- **Jugendschutz-Versionen:** Cloudflare 1.1.1.3 und Quad9 blockieren auch legitime Seiten, die in ihrer Filterdatenbank landen. Familien profitieren, Single-User sind mit 1.1.1.1 besser beraten.
-- **Smart-Home-Probleme:** Einige ältere Smart-TVs, Drucker und IoT-Geräte kommen mit Dritt-Resolver nicht zurecht. Sollte ein Gerät aussteigen, wechsle testweise zurück oder trage den Namensauflösung nur am Endgerät ein.
-- **DoH/DoT aktivieren:** Wer ganz sicher gehen will, aktiviert in Windows 11, Firefox oder Chrome "DNS over HTTPS" (DoH) – dann ist die Resolver-Anfrage selbst verschlüsselt.
-
-## DNS-Wechsel + Tarif optimieren: Die doppelte Ersparnis
-
-Schnelle Resolver helfen nur bei den Antwortzeiten. Sie ersetzen keine schwache Bandbreite. Lädt dein Netz trotzdem langsam, ist oft der Tarif das Problem. Ein [DSL-Vergleich](/go/dsl/) zeigt dir in zwei Minuten, was du bekommst.
-
-| Optimierung | Aufwand | Effekt | Kosten |
-|:---|---:|:---|---:|
-| Namensserver wechseln | 5 Min. | 10–30 ms schnellere Antworten, mehr Sicherheit | 0 € |
-| WLAN optimieren (Mesh/Kanal) | 30 Min. | bessere Abdeckung, weniger Latenz im Funknetz | 0–120 € |
-| [DSL-Tarif wechseln](/go/dsl/) | 15 Min. | höhere Bandbreite, bis 380 € Ersparnis | 0 € |
-
-## Für wen sich der DNS-Wechsel besonders lohnt
-
-Der Wechsel ist kein Zaubertrick. Er vervielfacht nicht plötzlich deine Bandbreite. Aber er lohnt sich besonders für Menschen, die viele kurze Seitenaufrufe haben und sich über träge Reaktionszeiten ärgern.
-
-Typische Fälle sind:
-
-- Homeoffice mit vielen Browser-Tabs
-- Familien mit mehreren Geräten im WLAN
-- Haushalte mit Smart-TV, Konsole und Tablets
-- Nutzer, die mehr Privatsphäre wollen
-- Eltern, die einen einfachen Zusatzschutz gegen Phishing möchten
-
-Vor allem dann ist der Schritt stark, weil er **0 € kostet** und in wenigen Minuten erledigt ist. Wenn dein Anschluss zum Beispiel **39 € im Monat** kostet, möchtest du nicht schon bei der ersten DNS-Anfrage Zeit verschenken. Selbst wenn nur **20 %** der gefühlten Trägheit aus dem Resolver kommen, ist der Effekt im Alltag oft schnell spürbar.
-
-Wichtig ist nur, realistisch zu bleiben: Ein DNS-Wechsel ersetzt weder ein gutes WLAN noch einen passenden Tarif. Er macht aber aus einem ohnehin ordentlichen Anschluss oft die rundere Alltagslösung.
-
-## Was du real erwarten kannst
-
-Ein guter DNS-Server spart dir nicht plötzlich fünf Minuten Wartezeit pro Webseite. Realistisch ist eher, dass Seiten schneller anfangen zu laden und sich das Surfen direkter anfühlt.
-
-Gerade auf Nachrichtenseiten, Preisvergleichen, Foren oder Shops mit vielen externen Elementen summieren sich kleine Zeitgewinne. Dazu kommt ein zweiter Vorteil: Du gewinnst Kontrolle zurück. Statt einfach den Standard deines Providers hinzunehmen, entscheidest du bewusst, wer deine Namensauflösung übernimmt.
-
-Wenn du danach immer noch das Gefühl hast, dass dein Netz trotz gutem DNS zäh bleibt, ist der nächste Blick klar: WLAN prüfen, Endgerät testen und bei Bedarf den Tarif hinterfragen. Genau diese Reihenfolge spart Zeit und verhindert Fehlkäufe.
-
-<!-- premium-length-2026 -->
-
-## Wann der DNS-Server-Wechsel spürbar ist – und wann nicht
-
-Der DNS-Server ändert nichts an einem schwachen Funkloch. In einem guten Netz spürst du schnellere Seiten. Der Speedtest bleibt gleich. Das ist kein Widerspruch.
-
-FRITZ!Box: Internet → Zugangsdaten → DNS-Server. Zuerst die bisherigen Adressen deines Providers notieren, dann die zwei neuen Server eintragen (einer primär, einer sekundär).
-
-48 Stunden testen, bei Problemen mit VPN oder Banking zurück. Kinder-Filter und Ad-Blocking-Dienste sind extra – sie zerlegen manches Online-Banking. Dann Split-DNS oder Ausnahmen.
-
-
-Der Wechsel ist ein 5-Minuten-Hebel mit geringem Risiko. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) und kein Mesh. Er macht beides angenehmer, wenn die Basis stimmt.
-
-
-## Extra: Wie der DNS-Server deinen Alltag beeinflusst
-
-Viele merken den Unterschied erst beim genauen Hinsehen. Hinter jeder Seite steckt eine DNS-Anfrage. Ein schneller Anbieter spart so mehrere Sekunden am Tag.
-
-Manche Dienste filtern Werbung und Tracker. Andere bieten Jugendschutz.
-
-Das ersetzt keinen Adblocker. Doch es ist eine zweite Schicht. Gerade für Smart-TV und Konsole.
-
-
-Notiere deine alte Konfiguration. Mach einen Screenshot der Router-Seite. Stelle zwei unabhängige Anbieter ein. Teste 48 Stunden lang Banking, Streaming und VPN.
-
-Danach entscheidest du, ob du dabei bleibst. Die Änderung ist jederzeit in 30 Sekunden rückgängig zu machen.
-## Bonus: Die 10 DNS-Begriffe, die dir in Foren wirklich begegnen
-
-| Begriff | Was er bedeutet | Warum er dich betrifft |
+| Resolver | Standard-IPv4 | Schwerpunkt laut Anbieter |
 |---|---|---|
-| DNS | Domain Name System – übersetzt Namen in IP-Adressen | Das System, das du mit dem Wechsel anpasst |
-| DNS-Resolver | Der Server, der die Übersetzung für dich durchführt | Steht bei dir aktuell auf „automatisch“ |
-| Namensauflösung | Fachbegriff für die Übersetzung von Name zu Adresse | Synonym für DNS – gleiche Sache |
-| DNSSEC | Digitale Signatur für Antworten | Schützt vor Umleitung auf Fake-Seiten |
-| DNS over HTTPS (DoH) | Verschlüsselte Abfrage über Port 443 | Versteckt deine Anfragen auch vor dem Provider |
-| DNS over TLS (DoT) | Verschlüsselte Abfrage über Port 853 | Alternative zu DoH, etwas technischer |
-| TTL-Wert | Gibt an, wie lange eine Antwort zwischengespeichert wird | Kurze TTL = schnelle Umschaltung nach dem Wechsel |
-| Cache-Flush | Leert den lokalen Zwischenspeicher | Nötig, wenn nach dem Wechsel alte Adressen hängen |
-| Split-DNS | Verschiedene Resolver für verschiedene Netzwerke | Sinnvoll, wenn Firmen-VPN und Heimnetz kollidieren |
-| DNS-Leak | Gerät fragt doch den Provider statt des neuen Resolvers | Passiert bei falscher Router-Konfiguration |
+| Cloudflare 1.1.1.1 | `1.1.1.1`, `1.0.0.1` | Standard ohne Inhaltsfilter; optionale Familienvarianten filtern bekannte Malware- und Phishing-Domains, teils auch Erwachseneninhalte |
+| Google Public DNS | `8.8.8.8`, `8.8.4.4` | Öffentlicher Resolver; Googles Datenschutzseite beschreibt die Protokollierung von Anfragen |
+| Quad9 Secure | `9.9.9.9`, `149.112.112.112` | Blockiert laut Quad9 DNS-Anfragen an bekannte schädliche Domains |
 
-Miss die Latenz vor und nach dem Wechsel. Zum Beispiel mit ping 1.1.1.1. Dann siehst du den echten Unterschied.
+### Cloudflare 1.1.1.1
 
-## Fazit: 5 Minuten, die sich dauerhaft auszahlen
+Der Standardresolver löst DNS-Anfragen ohne Inhaltsfilter auf. Für IPv6 nennt Cloudflare `2606:4700:4700::1111` und `2606:4700:4700::1001`. Die Varianten `1.1.1.2` und `1.0.0.2` filtern laut Anbieter bekannte Malware- und Phishing-Domains. `1.1.1.3` und `1.0.0.3` ergänzen einen Filter für Erwachseneninhalte. Die entsprechenden IPv6-Adressen sind `2606:4700:4700::1112` und `2606:4700:4700::1002` beziehungsweise `2606:4700:4700::1113` und `2606:4700:4700::1003`. Wenn dein Gerät IPv6 nutzt, trage auch bei DNSv6 die passende Filtervariante ein; sonst können Anfragen über eine ungefilterte IPv6-Adresse laufen. Diese Filter sind keine vollständige Sicherheitssoftware und können erwünschte Domains blockieren. [Adressen und Filtervarianten](https://developers.cloudflare.com/1.1.1.1/ip-addresses/)
 
-Der Wechsel ist einfach und wirkt. Er kostet **null Euro**. Schnellere Seiten, mehr Privatsphäre und Schutz vor Malware sind drin.
+Cloudflare dokumentiert, dass der Resolver Anfragen verschlüsselt über DoH oder DoT entgegennehmen kann. Laut eigener Datenschutzbeschreibung werden bestimmte Resolver-Protokolldaten innerhalb von 25 Stunden gelöscht; anonymisierte aggregierte Auswertungen können länger bestehen bleiben. Lies die [Details zur Protokollierung](https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/), bevor du dich für den Dienst entscheidest.
 
-Mein Tipp: Stelle den Server im Router ein. Dann profitieren alle Geräte. Prüfe danach auch deinen Tarif. So holst du Tempo und Preis optimal heraus.
+### Google Public DNS
 
+Die IPv6-Adressen lauten `2001:4860:4860::8888` und `2001:4860:4860::8844`. Googles [Einrichtungsanleitung](https://developers.google.com/speed/public-dns/docs/using) erklärt die Konfiguration auf Routern und Endgeräten.
 
-**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+Googles Datenschutzseite beschreibt temporäre Protokolle, die IP-Adresse und DNS-Anfrage enthalten und normalerweise innerhalb von 24 bis 48 Stunden gelöscht werden. Für Sicherheits- oder Missbrauchsfälle kann eine begrenzte längere Speicherung nötig sein. Daneben nennt Google dauerhafte, stichprobenbasierte Protokolle ohne Geräte-IP, die unter anderem abgefragte Domains, technische DNS-Daten und grobe Standortangaben auf Stadt- oder Regionsebene enthalten. Google erklärt, Daten aus Public DNS nicht für personalisierte Werbung zu verwenden. Prüfe die [aktuelle Datenschutzbeschreibung](https://developers.google.com/speed/public-dns/privacy), wenn diese Bedingungen für deine Wahl wichtig sind.
+
+### Quad9
+
+Die IPv6-Adressen des Secure-Dienstes sind `2620:fe::fe` und `2620:fe::9`. Quad9 beschreibt den Dienst als Schutz vor DNS-Anfragen an bekannte schädliche Domains. Der Anbieter erklärt, keine personenbezogenen Nutzerdaten zu sammeln. Die konkreten [Dienstvarianten](https://docs.quad9.net/services/) und die [Datenschutzhinweise](https://quad9.net/service/privacy/) findest du bei Quad9. Auch ein DNS-Filter ersetzt weder Updates noch Virenschutz oder umsichtiges Verhalten.
+
+## DNS-Wechsel ist nicht automatisch Verschlüsselung
+
+Ein Wechsel von den DNS-Adressen deines Internetanbieters zu einem öffentlichen Resolver ändert, wer die Anfrage bearbeitet. Wird klassisches DNS verwendet, kann die Anfrage auf dem Weg zum Resolver weiterhin unverschlüsselt sein. Ein bloßer Wechsel der IP-Adresse verhindert daher nicht zuverlässig, dass dein lokales Netzwerk oder dein Internetanbieter DNS-Anfragen einsehen kann.
+
+DoH und DoT verschlüsseln die DNS-Verbindung zwischen deinem Gerät beziehungsweise Router und dem gewählten Resolver. Das erschwert das Mitlesen auf diesem Übertragungsweg. Der Resolver selbst muss die Anfrage aber verarbeiten. Außerdem bleiben andere Netzwerkdaten sichtbar, etwa die Verbindung zu einer Ziel-IP und Zeitpunkt oder Umfang des Datenverkehrs. HTTPS schützt den Inhalt der Verbindung zur Website, macht dich aber nicht vollständig anonym.
+
+Auch der Inkognitomodus ändert daran nichts: Er begrenzt vor allem, was der Browser lokal speichert. Google weist darauf hin, dass besuchte Websites und Netzwerkbetreiber wie Arbeitgeber oder Internetanbieter Aktivitäten dennoch beobachten können ([Chrome-Hilfe](https://support.google.com/chrome/answer/95464?hl=de)).
+
+## DNS auf Router oder Endgerät ändern
+
+Notiere zuerst die bisherigen Einstellungen oder mache einen Screenshot. So kannst du bei Problemen zum vorherigen Zustand zurückkehren. Ändere DNS-Einstellungen nicht auf einem verwalteten Arbeitsgerät oder in einem Firmennetz ohne Freigabe der IT.
+
+### FRITZ!Box als Beispiel
+
+Bei vielen FRITZ!Box-Modellen findest du die DNS-Einstellungen unter **Internet → Zugangsdaten** oder **Internet → Zugangsart → DNS-Server**. Die Bezeichnungen und verfügbaren Optionen unterscheiden sich nach Modell, FRITZ!OS und Anbieter. Aktiviere die Verwendung anderer DNSv4- beziehungsweise DNSv6-Server und trage die Adressen des gewählten Anbieters ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) beschreibt die Menüs für ein konkretes Modell.
+
+Wenn du verschlüsselte Anfragen nutzen möchtest, reicht die Eingabe einer IP-Adresse nicht immer aus. Bei DNS over TLS verlangt die FRITZ!Box zusätzlich den passenden Servernamen. Aktiviere diese Funktion nur, wenn dein Router und der gewählte Resolver sie unterstützen. Laut FRITZ! kann die Box für einzelne Dienste weiterhin die DNS-Server des Internetanbieters verwenden; bei manchen Kabelanschlüssen fehlt die Einstellung ganz.
+
+### Android und iPhone
+
+Android unterstützt ab Version 9 **Privates DNS** mit verschlüsselten Anfragen. Je nach Gerät findest du die Einstellung unter **Einstellungen → Netzwerk & Internet → Privates DNS**. Für Cloudflare lautet der dokumentierte Hostname `one.one.one.one`; Android verwendet diese Einstellung laut [Cloudflare-Anleitung](https://developers.cloudflare.com/1.1.1.1/setup/android/) auch in Mobilfunknetzen. Für andere Anbieter musst du den jeweiligen Hostnamen aus deren Anleitung verwenden. Menüs können je nach Hersteller anders heißen.
+
+Auf dem iPhone lässt sich DNS für ein einzelnes WLAN unter **Einstellungen → WLAN → Info-Symbol → DNS konfigurieren** manuell setzen. Diese Änderung gilt für das ausgewählte WLAN und wird nicht automatisch auf jedes andere Netz übertragen. Googles [Einrichtungsanleitung für iOS](https://developers.google.com/speed/public-dns/docs/using) zeigt die Schritte am Beispiel von Google Public DNS. Für andere Systeme nutze die jeweils aktuelle Anleitung des Geräte- oder Resolver-Anbieters.
+
+## Was du nach dem Wechsel testen solltest
+
+Prüfe anschließend mehrere Websites und Apps. Teste auch Onlinebanking, VPN, Videokonferenzen, Smart-Home-Geräte und gegebenenfalls Jugendschutzfilter. Wenn eine Anwendung nicht mehr funktioniert, stelle zunächst die vorher notierten Einstellungen wieder her. Bei einer FRITZ!Box kannst du die DNS-Adressen des Internetanbieters erneut automatisch beziehen lassen.
+
+Mische nicht unbedacht Resolver mit unterschiedlichen Filtern als primäre und alternative Adresse. Je nach Gerät kann die zweite Adresse ebenfalls verwendet werden; dadurch können Ergebnisse und Schutzregeln wechseln. In einem Firmen-VPN oder bei lokalen Diensten kann außerdem ein vorgegebener DNS-Resolver nötig sein.
 
 ## Häufige Fragen
 
-### Welcher DNS-Server ist der passende für Deutschland?
-Cloudflare (1.1.1.1) ist am schnellsten. Er liegt bei rund 8 Millisekunden. Google (8.8.8.8) folgt mit 12 ms. Quad9 (9.9.9.9) braucht 14 ms. Willst du maximalen Schutz, nimm Quad9.
+### Wird mein Internet durch einen anderen DNS-Server schneller?
+Nicht zwingend. Ein Resolver kann die Namensauflösung in manchen Situationen beschleunigen oder verlangsamen. Er erhöht aber nicht die Bandbreite und verbessert kein Funkloch. Vergleiche mehrere Tage unter denselben Bedingungen, statt dich auf einen pauschalen Millisekundenwert zu verlassen.
 
-### Ist der Wechsel des DNS-Servers gefährlich?
-Nein. Du änderst nur eine Einstellung. Bei Problemen stellst du alles zurück.
+### Kann mein Internetanbieter meine DNS-Anfragen danach noch sehen?
+Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum Resolver verschlüsselt; der gewählte Resolver verarbeitet die Anfrage trotzdem. Auch andere Verbindungsdaten bleiben sichtbar.
 
-### Bringt der DNS-Wechsel etwas beim Streaming?
-Wenig. Netflix und Co. Nutzen eigene Netze. Doch das Laden der App kann schneller werden. Auch die Navigation gewinnt.
+### Welcher DNS-Anbieter ist der beste?
+Es gibt keinen für alle passenden Testsieger. Vergleiche Filter, Datenschutzbedingungen, Unterstützung für DoH oder DoT und die Kompatibilität mit deinen Geräten. Die schnellste Option kann je nach Anschluss und Standort unterschiedlich sein.
 
-### Was ist der Unterschied zwischen DNS over HTTPS (DoH) und DNS over TLS (DoT)?
-Beide verschlüsseln deine DNS-Anfrage. DoH läuft über Port 443. DoT nutzt Port 853. Dein Anbieter kann nicht mehr mitlesen.
+### Schützt ein DNS-Filter vollständig vor Phishing und Schadsoftware?
+Nein. Ein Filter kann laut Anbieter bekannte schädliche Domains blockieren. Er ersetzt aber weder Virenschutz noch Browser-Schutz, Updates oder eine Prüfung verdächtiger Links. Auch Fehlblockaden sind möglich.
 
-### Gilt der neue DNS-Server für alle Geräte im Haushalt?
-Ja, wenn du ihn im Router einträgst. Stellst du nur den Laptop um, gilt er nur dort.
+### Wie mache ich die Änderung rückgängig?
+Trage die notierten vorherigen Adressen wieder ein oder stelle den automatischen DNS-Bezug des Routers beziehungsweise Geräts wieder her. Wenn du vorher DoH oder DoT aktiviert hast, deaktiviere auch diese Option.
 
----
+## Wenn die Verbindung langsam bleibt
 
-👉 **Jetzt vergleichen und sparen:** [**→ DSL-Tarife mit Top-Bandbreite vergleichen**](/go/dsl/)
+Wenn Seiten trotz eines funktionierenden Resolvers langsam laden, prüfe zuerst WLAN-Abdeckung, Router, Endgerät und Anschluss. DNS betrifft nur die Namensauflösung. Falls du anschließend deinen Tarif prüfen möchtest, kannst du [DSL-Angebote vergleichen](/go/dsl/). Der Vergleich betrifft den Internetvertrag, nicht die Leistung des DNS-Servers.
 
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+*(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
+
+**Weiterlesen:** [Der Ratgeber Internet & DSL](../../pillar/internet-dsl/)

@@ -102,6 +102,8 @@ Umgekehrt gilt derselbe Effekt in der Praxis: Ein Haushalt mit hohem Verbrauch z
 
 Derselbe Vertrag wird zum Nachteil, sobald die Preise am Markt fallen. Wer seinen Verbrauch kennt, kann diese Frage für sich selbst beantworten. Wer ihn nicht kennt, entscheidet leider blind.
 
+**Weiterlesen:** Der [Ratgeber zu Strom und Gas](../../pillar/strom-sparen/) erklärt weitere Wege zur Tarifwahl. Im Beitrag [Grundversorgung Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/) erfährst du, was gilt, wenn kein Sondervertrag greift.
+
 ## FAQ – die wichtigsten Fragen zur Meldung
 
 ### Wie erkenne ich, ob ein variabler Tarif für mich günstig ist?

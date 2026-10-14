@@ -45,13 +45,13 @@
   "ts": "2026-09-28T10:43:19+00:00"
  },
  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
+  "title": "Internet & DSL wechseln: So gelingt der Anbieterwechsel",
+  "ts": "2026-10-14T13:46:34+00:00",
   "design": {
+   "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet",
-  "ts": "2026-09-25T22:34:41+00:00"
+   "savings": ""
+  }
  },
  "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
   "design": {
@@ -117,13 +117,13 @@
   "ts": "2026-09-28T10:43:23+00:00"
  },
  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+  "title": "DSL-Tarif für dein Zuhause: Das passende Angebot finden",
+  "ts": "2026-10-14T13:46:34+00:00",
   "design": {
+   "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
-  "title": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
-  "ts": "2026-08-25T16:24:14+00:00"
+   "savings": ""
+  }
  },
  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
   "design": {
@@ -162,13 +162,13 @@
   "ts": "2026-09-28T10:43:27+00:00"
  },
  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
+  "title": "DNS-Server wechseln: Datenschutz, Filter und Einrichtung",
+  "ts": "2026-10-14T13:46:35+00:00",
   "design": {
+   "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
-  "title": "DNS-Server wechseln: Schnelleres und sichereres Internet",
-  "ts": "2026-08-26T00:39:20+00:00"
+   "savings": ""
+  }
  },
  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
   "design": {
@@ -216,22 +216,22 @@
   "ts": "2026-09-04T04:35:16+00:00"
  },
  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
+  "title": "DNS-Hack testen: Antwortzeit statt gefühltem Tempo",
+  "ts": "2026-10-14T13:46:36+00:00",
   "design": {
+   "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt",
-  "ts": "2026-09-04T14:33:58+00:00"
+   "savings": ""
+  }
  },
  "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
+  "title": "Finanzielle Freiheit erreichen: Denke dich reich",
+  "ts": "2026-10-14T13:46:36+00:00",
   "design": {
+   "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
-  "ts": "2026-09-16T13:24:18+00:00"
+   "savings": ""
+  }
  },
  "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
   "design": {
@@ -333,13 +333,13 @@
   "ts": "2026-09-20T08:52:31+00:00"
  },
  "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
+  "title": "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden",
+  "ts": "2026-10-14T13:46:37+00:00",
   "design": {
+   "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Gasrechnung prüfen: Fehler finden und Nachzahlungen",
-  "ts": "2026-09-29T10:48:09+00:00"
+   "savings": ""
+  }
  },
  "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
   "design": {
@@ -450,8 +450,8 @@
   "ts": "2026-09-29T15:09:43+00:00"
  },
  "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-  "title": "Last Minute Urlaub: So schnappst du dir das Sommer‑Schnäpp",
-  "ts": "2026-10-12T21:26:10+00:00",
+  "title": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
+  "ts": "2026-10-14T13:46:38+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1143,8 +1143,8 @@
   }
  },
  "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-  "title": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
-  "ts": "2026-10-14T13:29:54+00:00",
+  "title": "Warmwasser sparen: Die Rechnung hinter dem Hahn",
+  "ts": "2026-10-14T13:46:35+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1224,8 +1224,8 @@
   }
  },
  "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
-  "title": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch",
-  "ts": "2026-10-13T11:58:10+00:00",
+  "title": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt",
+  "ts": "2026-10-14T13:46:36+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",

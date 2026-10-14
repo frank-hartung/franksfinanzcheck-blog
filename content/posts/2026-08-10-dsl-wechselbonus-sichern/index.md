@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
-description: "Wie du Wechselbonus, Startguthaben und Effektivpreis richtig rechnest, damit dein neuer DSL-Tarif nicht nur günstig aussieht, sondern es auch wirklich ist."
+description: "So sicherst du den DSL-Wechselbonus: Rechne Startguthaben und Effektivpreis richtig, damit dein neuer Tarif wirklich günstig ist."
 date: 2026-08-10T10:20:09Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]

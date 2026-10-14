@@ -155,6 +155,8 @@ Nutze die Tabelle im Kapitel „Fixkosten prüfen“ und prüfe alle Faktoren. D
 
 Nenne klare Beträge und Termine, zum Beispiel „600 € Notgroschen bis zum Jahresende“. So bleibt das Ziel greifbar.
 
+**Weiterlesen:** Die [50-30-20-Regel im Detail](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) zeigt, wie du Einnahmen und Ausgaben aufteilst. Weitere Grundlagen findest du im [Ratgeber zu Haushaltsbudget und Frugalismus](../../pillar/frugalismus/).
+
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 Hier findest du Antworten auf häufige Fragen.

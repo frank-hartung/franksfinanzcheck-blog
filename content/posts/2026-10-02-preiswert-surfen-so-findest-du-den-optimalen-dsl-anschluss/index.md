@@ -1,6 +1,6 @@
 ---
 title: "Preiswert surfen: So findest du den optimalen DSL‑Anschluss"
-description: "Entdecke, wie ein preiswerter DSL‑Anschluss funktioniert, welche Tarife 2026 sinnvoll sind und wie du beim Wechsel Geld sparst."
+description: "Preiswert surfen mit DSL: Vergleiche Tarifkosten und Vertragsbedingungen, prüfe passende Angebote 2026 und berechne die mögliche Ersparnis beim Wechsel."
 date: 2026-10-05T19:22:11Z
 draft: false
 reserve_published: 2026-10-02

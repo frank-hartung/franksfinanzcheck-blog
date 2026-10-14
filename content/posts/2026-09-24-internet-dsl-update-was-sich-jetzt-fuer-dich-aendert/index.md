@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
 title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
-description: "Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll."
+description: "Internet & DSL-Update: Prüfe Bedarf, Effektivpreis und Wechseloptionen, bevor du für zu viel Leistung oder einen alten Vertrag zahlst."
 date: 2026-10-07T01:34:23Z
 draft: false
 reserve_published: 2026-10-07

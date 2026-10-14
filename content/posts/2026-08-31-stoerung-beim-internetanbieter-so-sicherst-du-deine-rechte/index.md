@@ -1,6 +1,6 @@
 ---
 title: "Störung beim Internetanbieter: So sicherst du deine Rechte"
-description: "Internet weg, Hotline in der Warteschleife: So meldest du eine Störung richtig, belegst den Ausfall und prüfst, was der Anbieter leisten muss."
+description: "Bei einer Störung beim Internetanbieter: So meldest du den Ausfall, hältst die Dauer fest und prüfst, was der Anbieter leisten muss."
 lastmod: 2026-10-13
 date: 2026-08-31T06:10:00Z
 draft: false

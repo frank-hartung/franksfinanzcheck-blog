@@ -159,6 +159,8 @@ Um diese Fallen zu umgehen, gehst du nach Plan vor:
 
 Wenn du diese Schritte befolgst, bleibt dein Plan stabil. Du handelst mit Wissen statt mit Vermutungen. So bleibt am Ende des Monats mehr Geld auf dem Konto.
 
+**Weiterlesen:** Im [Ratgeber zu Strom und Gas](../../pillar/strom-sparen/) findest du weitere Sparhebel. Der Beitrag [Standby-Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) führt tiefer in den Geräteverbrauch.
+
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ### Wie finde ich Stromfresser im Haushalt?

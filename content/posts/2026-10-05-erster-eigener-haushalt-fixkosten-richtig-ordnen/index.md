@@ -1,6 +1,6 @@
 ---
 title: "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen"
-description: "Erste Wohnung, erste Fixkosten: Welche Posten deinen Monat bestimmen, in welcher Reihenfolge du sie anmeldest und wie du die zweite Rechnung planst."
+description: "Der erste eigene Haushalt: Ordne deine Fixkosten von Anfang an, melde wichtige Verträge in der richtigen Reihenfolge an und plane die zweite Rechnung ein."
 date: 2026-10-05T06:10:00Z
 lastmod: 2026-10-13
 draft: false
