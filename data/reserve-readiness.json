@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 9,
   "pool_size": 9,
-  "generated_at": "2026-10-14T09:07:20Z",
+  "generated_at": "2026-10-14T18:35:45Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
@@ -159,16 +159,13 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "38538341065",
+    "kind": "partial",
+    "run_id": "38616183448",
     "run_attempt": "1"
   },
-  "ausgebucht": {
-    "at": "2026-10-14T18:30:40Z",
-    "slugs": [
-      "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
-      "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck"
-    ],
+  "recert": {
+    "at": "2026-10-14T18:35:45Z",
+    "renewed": [],
     "tool": "scripts/reserve_recert.py"
   }
 }
