@@ -75,6 +75,8 @@ Alle Skripte und Stylesheets dieser Website werden von unserem Hosting ausgelief
 
 ## 5. Klickzähler für Partnerlinks (`/go/`)
 
+{{< klickmessung_status >}}
+
 ### Was passiert
 
 Partnerlinks in unseren Artikeln führen zunächst auf eine Übergabeseite unter `/go/<partner>/` auf unserer Website. Diese Seite sendet beim Aufruf einen Zählimpuls an unseren eigenen Zähler unter `stats.franksfinanzcheck.de`, einen Cloudflare Worker. Danach leitet die Seite dich weiter zum Partner.

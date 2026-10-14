@@ -74,7 +74,7 @@ Was bewusst **nicht** in die Checkbox wandert (gehört in die DS, und steht dort
 ## 4. Beweise
 
 Die Wachen und Tests dieser Änderung; der nächste Testversand an
-`frankhartung@web.de` ist der Beweis im Postfach (Gmail-Knopf + Fuß-Link).
+`[private Testadresse – entfernt, Audit N-08]` ist der Beweis im Postfach (Gmail-Knopf + Fuß-Link).
 
 Siehe Selftests von `newsletter_versand.py`, `newsletter_digest.py`,
 `newsletter_qa.py`, `newsletter_studio.py` und `newsletter-worker/test`.

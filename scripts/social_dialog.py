@@ -611,7 +611,7 @@ def pruefe(text: str, item: dict, klasse: str, beleg: dict | None, cfg: dict) ->
         if phrase and phrase in t:
             verstoesse.append(f"Bot-Floskel: „{phrase}\"")
 
-    links = re.findall(r"https?://\S+", text)
+    links = _links_finden(text)
     if len(links) > int(g.get("max_links") or 1):
         verstoesse.append(f"zu viele Links ({len(links)})")
     erlaubt = tuple(g.get("erlaubte_link_praefixe") or [])
@@ -923,6 +923,31 @@ def lauf(dry_run: bool = False, nur_kanal: str = "", offline: bool = False) -> d
 TEXT_MAX_ZUSTAND = 500
 
 
+_URL_MIT_SCHEMA = re.compile(r"https?://\S+", re.I)
+_DOMAIN_OHNE_SCHEMA = re.compile(
+    r"(?<![@\w.\-/])(?:www\.)?(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+"
+    r"(?:[a-z]{2,24}|xn--[a-z0-9-]{2,59})\b(?::\d{2,5})?(?:/\S*)?", re.I)
+
+
+def _links_finden(text: str) -> list[str]:
+    """Alle Links einer Antwort – auch OHNE Schema (Audit 14.10.2026, N-10).
+
+    Mastodon, Bluesky & Co. verlinken „evil.example/x“ oder „www.foo.de“
+    automatisch. Bisher sah die Prüfung nur http(s)://, ein schemaloser
+    Fremdlink passierte das Gate. Schemalose Treffer werden zu https://…
+    normalisiert und durchlaufen dieselbe Präfix-/Muster-Prüfung.
+    Fehlalarme (z. B. Dateinamen) landen nur in der manuellen Freigabe –
+    das ist die sichere Richtung."""
+    links = _URL_MIT_SCHEMA.findall(text or "")
+    rest = _URL_MIT_SCHEMA.sub(" ", text or "")
+    for treffer in _DOMAIN_OHNE_SCHEMA.finditer(rest):
+        roh = treffer.group(0).rstrip(".,;:!?)»“\"'")
+        if "/" not in roh:
+            roh += "/"
+        links.append("https://" + roh)
+    return links
+
+
 def _pseudonym(autor: str, kanal: str) -> str:
     """Benutzername Dritter -> Pseudonym (Sicherheitsaudit 14.10.2026, M-18).
 
@@ -1172,6 +1197,8 @@ def selftest() -> int:
         ("Das ist garantiert günstiger.", "Versprechen"),
         ("Das kannst du steuerlich absetzen.", "erlaubnispflichtig"),
         ("Schau hier: https://example.com/angebot", "fremder Link"),
+        ("Schau hier: example.com/angebot", "fremder Link ohne Schema"),
+        ("Mehr bei www.beispiel-tarife.de", "fremder Link ohne Schema (www)"),
         ("Mehr dazu: https://franksfinanzcheck.de/go/check24", "verbotenes Linkmuster"),
         ("Melde dich unter frank@example.com bei mir.", "personenbezogene Daten"),
         ("Vielen Dank für deine Nachricht, gerne helfe ich dir weiter.", "Floskel"),

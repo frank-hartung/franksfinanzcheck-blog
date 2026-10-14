@@ -1,5 +1,7 @@
 # Anleitung: Klickmessung ohne Cookies (Eigenbetrieb)
 
+> **Stand 14.10.2026 (Sicherheitsaudit M-13): Messung AUS.** `stats.franksfinanzcheck.de` existiert nicht, deshalb senden die `/go/`-Seiten keinen Beacon mehr. Einschalten erst, wenn der Worker läuft: (1) Worker deployen und Custom Domain `stats.` anlegen, (2) in `data/klickmessung.yaml` `aktiv: true` setzen, (3) `python3 -c "import sys; sys.path.insert(0,'scripts'); import affiliate_shield as a; a.generate_go_pages(a.load_registry())"` ausführen und committen. Datenschutzerklärung und `click_chain_guard` folgen dem Schalter automatisch.
+
 Stand: 11.10.2026 · Status: **vorbereitet, nicht live.** Die Einführung braucht deine Freigabe,
 eine Datenschutz-Prüfung (siehe Abschnitt 7) und die Anpassung der Datenschutzerklärung.
 

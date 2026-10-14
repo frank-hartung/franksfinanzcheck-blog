@@ -2,7 +2,7 @@
 
 **Anlass:** Lauf **#26** von *Newsletter-Daily (Capture-Wache + Digest)*
 (Actions-Run `36024129599`, 24.09.2026, `workflow_dispatch` mit
-`test_adresse=frankhartung@web.de, kontakt@franksfinanzcheck.de`) endete rot:
+`test_adresse=[private Testadresse – entfernt, Audit N-08], kontakt@franksfinanzcheck.de`) endete rot:
 „Digest-Versand fehlgeschlagen (Exit 1) – es ist nichts versandt.
 ❌ Versand fehlgeschlagen (HTTP 400: Test emails cannot be sent to
 non-existent/blacklisted/without-contact-list users · invalid_parameter).“
@@ -125,11 +125,11 @@ andere nicht, ist es die Weiterleitung, kein Versandfehler.
 ## 4. Der Weg zur ersten Testmail (Reihenfolge zählt)
 
 1. Actions → *Newsletter-Daily (Capture-Wache + Digest)* → *Run workflow*:
-   `test_adresse` = `frankhartung@web.de, kontakt@franksfinanzcheck.de`,
+   `test_adresse` = `[private Testadresse – entfernt, Audit N-08], kontakt@franksfinanzcheck.de`,
    `live` **aus**, `tage` = 7, `test_kontakt` = **an** (Default).
 2. Erwartet im Log: `ℹ️ Testadresse … als Kontakt angelegt` und/oder
    `ℹ️ … VORAB in die Zielliste … aufgenommen` (je nur, falls nötig), dann
-   `✅ Testversand an frankhartung@web.de, kontakt@franksfinanzcheck.de
+   `✅ Testversand an [private Testadresse – entfernt, Audit N-08], kontakt@franksfinanzcheck.de
    (Kampagne …)` – plus je eine Mail: direkt in Frank's Postfach (web.de,
    auch Spam prüfen) und im Zielpostfach hinter `kontakt@…` (dort ebenfalls
    Spam + Cloudflare-Routing-Log prüfen).

@@ -130,6 +130,33 @@ def _kontrakt_names() -> dict:
 GO_NAMES = {**_FALLBACK_NAMES, **_kontrakt_names()}
 
 
+def klickmessung_aktiv() -> bool:
+    """Schalter data/klickmessung.yaml (Audit 14.10.2026, M-13): Beacon nur,
+    wenn der Zähler-Worker wirklich läuft. Fehlt/kaputt → aus (datensparsam)."""
+    try:
+        text = (Path(__file__).resolve().parent.parent / "data" / "klickmessung.yaml").read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return re.search(r"(?m)^aktiv:\s*true\s*$", text) is not None
+
+
+BEACON_BLOCK = """<script>
+// Klick-Zählung (11.10.2026): cookielos, nur Tagessummen je Gateway und Artikel.
+// sendBeacon an den eigenen Zähler (stats.franksfinanzcheck.de, Cloudflare Worker).
+// Respektiert Do-Not-Track und Global Privacy Control. Fällt bei Fehlern still aus –
+// die Weiterleitung unten läuft unabhängig davon. Details: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md
+(function () {
+  try {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) return;
+    if (!navigator.sendBeacon) return;
+    var s = new URLSearchParams(location.search).get('subid') || '';
+    navigator.sendBeacon('https://stats.franksfinanzcheck.de/e', new Blob([JSON.stringify({k: '{key}', s: s.slice(0, 120)})], {type: 'text/plain'}));
+  } catch (e) { /* Zählung ist optional */ }
+})();
+</script>
+"""
+
+
 def generate_go_pages(reg: dict) -> int:
     """Erzeugt die statischen Weiterleitungen static/go/<key>/index.html.
 
@@ -160,21 +187,7 @@ def generate_go_pages(reg: dict) -> int:
     tpl = """<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<script>
-// Klick-Zählung (11.10.2026): cookielos, nur Tagessummen je Gateway und Artikel.
-// sendBeacon an den eigenen Zähler (stats.franksfinanzcheck.de, Cloudflare Worker).
-// Respektiert Do-Not-Track und Global Privacy Control. Fällt bei Fehlern still aus –
-// die Weiterleitung unten läuft unabhängig davon. Details: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md
-(function () {
-  try {
-    if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) return;
-    if (!navigator.sendBeacon) return;
-    var s = new URLSearchParams(location.search).get('subid') || '';
-    navigator.sendBeacon('https://stats.franksfinanzcheck.de/e', new Blob([JSON.stringify({k: '{key}', s: s.slice(0, 120)})], {type: 'text/plain'}));
-  } catch (e) { /* Zählung ist optional */ }
-})();
-</script>
-<script>
+{beacon}<script>
 // SubID-Weitergabe (Klickzuordnung je Artikel, 01.09.2026): Der /go/-Link am
 // Artikel trägt ?subid=<artikelslug>. Dieses Script hängt sie vor dem Weiterleiten
 // als &subid= an die Affiliate-URL an. Führt SYNCHRON im head aus (läuft vor dem
@@ -207,7 +220,8 @@ def generate_go_pages(reg: dict) -> int:
         # Diese Seite sieht JEDER Affiliate-Klick – Ehrlichkeit + Deutsch
         # im Moment des Klicks.
         phrase = GO_PHRASEN.get(key) or f"zu {GO_NAMES.get(key, 'CHECK24')}"
-        dest.write_text(tpl.replace("{url}", url)
+        dest.write_text(tpl.replace("{beacon}", BEACON_BLOCK if klickmessung_aktiv() else "")
+                        .replace("{url}", url)
                         .replace("{zielname}", phrase)
                         .replace("{key}", key), encoding="utf-8")
         count += 1

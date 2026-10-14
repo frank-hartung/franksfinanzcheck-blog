@@ -1,0 +1,18 @@
+# ============================================================
+#  KLICKMESSUNG /go/ – Betriebsschalter (Sicherheitsaudit 14.10.2026, M-13)
+#
+#  Der Zähler-Worker (cloudflare/klick-zaehler) ist NICHT deployt:
+#  stats.franksfinanzcheck.de existiert nicht (NXDOMAIN). Bis dahin
+#  schickten alle /go/-Seiten trotzdem einen Beacon ins Leere, und die
+#  Datenschutzerklärung beschrieb eine Messung, die nicht stattfand.
+#
+#  aktiv: false  → /go/-Seiten ohne Beacon (scripts/affiliate_shield.py),
+#                  Datenschutzerklärung zeigt „nicht in Betrieb“
+#                  (Shortcode klickmessung_status), click_chain_guard
+#                  verlangt, dass KEINE Seite einen Beacon trägt.
+#  aktiv: true   → erst setzen, wenn der Worker unter
+#                  stats.franksfinanzcheck.de erreichbar ist
+#                  (Runbook: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md).
+# ============================================================
+aktiv: false
+endpunkt: "https://stats.franksfinanzcheck.de/e"

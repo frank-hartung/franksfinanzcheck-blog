@@ -98,13 +98,44 @@ def jetzt_iso() -> str:
     return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
 
-def hash16(adresse: str) -> str:
-    """Adress-Hash für das Journal – das Repo ist öffentlich, deshalb
-    NIE die Roh-Adresse in Git. 16 Hex-Zeichen (64 Bit) genügen, um
-    Duplikate und Reihenfolgen zu erkennen, nicht um jemanden zu
-    identifizieren (bewusst ohne Salts-Pflege: es ist ein Log, kein DB)."""
+def _hash_schluessel() -> bytes:
+    """Geheimer Schlüssel für hash16 (Sicherheitsaudit 14.10.2026, H-04).
+
+    Reihenfolge:
+      1. Secret NEWSLETTER_HASH_KEY (empfohlen, ≥ 32 Zeichen)
+      2. abgeleitet aus RESEND_API_KEY (ist in jedem Versandlauf gesetzt) –
+         stabil über Läufe, damit der Duplikatsschutz (letzte_ausgabe)
+         weiter greift, aber für Außenstehende nicht nachrechenbar
+      3. kein Schlüssel (Selbsttest/Trockenlauf ohne Secrets): Altverfahren
+    """
     import hashlib
-    return hashlib.sha256(adresse.lower().encode("utf-8")).hexdigest()[:16]
+    eigen = os.environ.get("NEWSLETTER_HASH_KEY", "").strip()
+    if eigen:
+        return eigen.encode("utf-8")
+    resend = os.environ.get("RESEND_API_KEY", "").strip()
+    if resend:
+        return hashlib.sha256(b"ff-newsletter-hash16|v1|" + resend.encode("utf-8")).digest()
+    return b""
+
+
+def hash16(adresse: str) -> str:
+    """Adress-Pseudonym für Journal und Versandstatus – das Repo ist
+    öffentlich, deshalb NIE die Roh-Adresse in Git.
+
+    SICHERHEIT (Audit 14.10.2026, H-04): Ein ungesalzener SHA-256 einer
+    E-Mail-Adresse ist KEIN Schutz – wer eine Adresse vermutet (oder eine
+    geleakte Adressliste hat), rechnet den Hash nach und weiß, dass diese
+    Person den Newsletter bekommt. Deshalb HMAC-SHA-256 mit geheimem
+    Schlüssel (siehe _hash_schluessel). 16 Hex-Zeichen (64 Bit) genügen für
+    Duplikate und Reihenfolgen. Ohne jeden Schlüssel (nur Selbsttest/
+    Trockenlauf) gilt das Altverfahren."""
+    import hashlib
+    import hmac
+    norm = adresse.lower().encode("utf-8")
+    schluessel = _hash_schluessel()
+    if schluessel:
+        return hmac.new(schluessel, norm, hashlib.sha256).hexdigest()[:16]
+    return hashlib.sha256(norm).hexdigest()[:16]
 
 
 def lese_json_datei(pfad: str) -> dict:

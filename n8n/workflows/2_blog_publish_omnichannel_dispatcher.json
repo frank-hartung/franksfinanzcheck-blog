@@ -15,7 +15,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const item = $json.body || $json;\nconst slug = item.slug || '2026-10-03-ratgeber';\nconst title = item.title || 'Neuer Ratgeber';\nconst url = `https://franksfinanzcheck.de/posts/${slug}/`;\n\nreturn [{\n  json: {\n    slug,\n    title,\n    url,\n    host: 'franksfinanzcheck.de',\n    key: 'f009361665a54db687353f8680e6f5c7',\n    keyLocation: 'https://franksfinanzcheck.de/f009361665a54db687353f8680e6f5c7.txt',\n    urlList: [url]\n  }\n}];"
+        "jsCode": "const item = $json.body || $json;\nconst slug = item.slug || '2026-10-03-ratgeber';\nconst title = item.title || 'Neuer Ratgeber';\nconst url = `https://franksfinanzcheck.de/posts/${slug}/`;\n\nreturn [{\n  json: {\n    slug,\n    title,\n    url,\n    host: 'franksfinanzcheck.de',\n    key: '6t77zzoan6sl5i4b9jwcvx073202rgm9',\n    keyLocation: 'https://franksfinanzcheck.de/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt',\n    urlList: [url]\n  }\n}];"
       },
       "id": "node-code-parse",
       "name": "Payload Aufbereiten",

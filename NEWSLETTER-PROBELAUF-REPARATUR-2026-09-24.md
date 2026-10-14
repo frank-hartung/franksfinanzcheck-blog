@@ -113,7 +113,7 @@ Betreibers, nicht des Werkzeugs.
    (Contacts → *Add a contact* / Kontakt → *Unblock*) – kein Rätseln.
 
 **Offen zum Redaktionsschluss:** Der Beweis am echten Konto ist der Lauf mit
-`test_adresse=frankhartung@web.de` selbst; er wird nach dem Merge dieses
+`test_adresse=[private Testadresse – entfernt, Audit N-08]` selbst; er wird nach dem Merge dieses
 Branches gefahren. Die Testlauf-Mechanik ist oben belegt, die Zustellung
 (Frank's Postfach) ist Sache des Laufs – ein Report, der sie vorwegnähme,
 wäre eine Behauptung.

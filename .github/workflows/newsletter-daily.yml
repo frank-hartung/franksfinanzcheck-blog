@@ -161,6 +161,7 @@ jobs:
       - name: Zustellbarkeit (Cloudflare-DNS + Resend + Worker)
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           # Als ENV, nicht als Interpolation im Skripttext (B3-Regel aus der
@@ -208,6 +209,7 @@ jobs:
       - name: Digest bauen (und senden, wenn Absender + Freigabe da sind)
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
