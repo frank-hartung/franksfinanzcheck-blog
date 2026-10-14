@@ -149,3 +149,9 @@ data/alt_texte/*.tmp
 
 # Wrangler-Lokalzustand (lokale D1-Kopie, Tests)
 .wrangler/
+
+# Lokale Zugangsdaten (Sicherheitsaudit 14.10.2026): tools/n8n/start.sh legt
+# .env aus .env.example an und dort landen Tokens – nie committen.
+.env
+.env.*
+!.env.example

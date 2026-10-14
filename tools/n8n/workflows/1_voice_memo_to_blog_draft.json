@@ -39,13 +39,16 @@
     },
     {
       "parameters": {
-        "command": "python3 /workspace/blog/scripts/n8n_bridge.py --receive-payload '{\"typ\":\"voice_memo\",\"data\":{\"titel\":\"'\"$title\"'\",\"inhalt\":\"'\"$cleanedText\"'\",\"kategorie\":\"'\"$kategorie\"'\"}}'"
+        "command": "echo 'deaktiviert – Sicherheitsaudit 14.10.2026 (H-06)'; exit 1"
       },
       "id": "node-exec-bridge",
       "name": "Blog Bridge (Draft anlegen)",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [840, 240]
+      "position": [840, 240],
+      "disabled": true,
+      "notes": "DEAKTIVIERT (Sicherheitsaudit 14.10.2026, H-06): Shell-Befehl mit eingebetteten Webhook-/Ereignisdaten = Remote Code Execution auf dem n8n-Rechner, der das Repo eingehängt hat. Ersatz: GitHub repository_dispatch an schaltwerk.yml – Daten als JSON, nie in einer Shell-Zeile. Nicht wieder aktivieren.",
+      "notesInFlow": true
     },
     {
       "parameters": {
@@ -104,7 +107,7 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   }
