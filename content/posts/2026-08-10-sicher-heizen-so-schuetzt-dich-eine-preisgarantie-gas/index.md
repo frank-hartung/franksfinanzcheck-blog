@@ -60,7 +60,7 @@ Schätze danach deinen Verbrauch im Jahr. Hole dir mit dieser Zahl mindestens zw
 
 Ein Haus braucht oft rund 18.000 kWh im Jahr. Schon 0,4 bis 0,8 Cent je kWh machen dann über 100 € im Jahr aus. Ein fairer Preis im zweiten Jahr ist mehr wert als ein hoher Rabatt am Anfang.
 
-Setze dir zwei Erinnerungen im Handy. Die erste acht Wochen vor dem Ende deines Preisschutzes. Die zweite zwei Wochen vor dem Ende deiner Kündigungsfrist.
+Setze dir zwei Erinnerungen im Handy. Die erste acht Wochen vor dem Ende deines Preisschutzes. Die zweite zwei Wochen vor dem Ende deiner [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 
 So bleibst du vorne und gerätst nicht in Eile. Prüfe zuletzt, ob dein Anbieter deine Adresse und E-Mail kennt. Wichtige Briefe landen sonst im Spam oder bei der alten Wohnung.
 

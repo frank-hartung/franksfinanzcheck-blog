@@ -201,7 +201,7 @@ Hier steht die Kostenoptimierung im Vordergrund. Oft ist ein dauerhaft günstige
 
 Bevor du buchst, investiere diese Viertelstunde:
 
-1. Aktuelle Kosten und Kündigungsfrist prüfen.
+1. Aktuelle Kosten und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen.
 2. Tatsächlichen Bedarf ehrlich einschätzen (Reichen 100 Mbit/s vielleicht doch?).
 3. Verfügbarkeitscheck für DSL, Kabel und Glasfaser machen.
 4. Router-Entscheidung treffen: Kauf-Hardware vorhanden?
@@ -236,7 +236,7 @@ Wirtschaftlich ist der Kauf eines eigenen Geräts meist nach etwa zwei Jahren im
 Führe einen Speedtest per LAN-Kabel direkt am Router durch. Ist dieser deutlich schneller als der Test über WLAN, liegt die Ursache an deiner Funkverbindung oder der Router-Position, nicht an deinem Tarif.
 
 ### Wann sollte ich mit dem Wechsel anfangen?
-Idealerweise prüfst du deine Optionen etwa drei bis vier Monate vor Ablauf deiner Vertragslaufzeit. So hast du genügend Zeit für den Vergleich und der neue Anbieter kann die Kündigungs- und Umschaltprozesse rechtzeitig einleiten.
+Idealerweise prüfst du deine Optionen etwa drei bis vier Monate vor Ablauf deiner [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/). So hast du genügend Zeit für den Vergleich und der neue Anbieter kann die Kündigungs- und Umschaltprozesse rechtzeitig einleiten.
 
 ---
 

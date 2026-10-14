@@ -1,5 +1,5 @@
 {
-  "stand": "2026-10-13T12:55:02Z",
+  "stand": "2026-10-14T10:33:07Z",
   "urteil": "gelb",
   "probleme": [
     "KI-Anteil live: 51.8 % (gelb ab 50 %)"
@@ -9,7 +9,7 @@
     "ki_artikel": 29,
     "ki_anteil_prozent": 51.8,
     "tempo_max_pro_tag": 2,
-    "tempo_letzte7_tage": 6,
+    "tempo_letzte7_tage": 4,
     "auto_freigaben_letzte7_tage": 0,
     "near_dup_paare": 0,
     "near_dup_beispiele": [],

@@ -39,7 +39,7 @@ faktencheck: "2026-10-13"
 
 Viele zahlen beim Internet nicht deshalb zu viel, weil die Leitung so teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.
 
-Der gute Teil: **Internet & DSL wechseln** ist heute viel einfacher als sein Ruf. Es wird kein Wohnzimmer aufgerissen, kein neues Kabel quer durch die Wohnung gezogen und in vielen Fällen nicht einmal selbst gekündigt. Der eigentliche Aufwand liegt eher im Vergleich als in der Technik.
+Der gute Teil: **Internet & [DSL wechseln](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)** ist heute viel einfacher als sein Ruf. Es wird kein Wohnzimmer aufgerissen, kein neues Kabel quer durch die Wohnung gezogen und in vielen Fällen nicht einmal selbst gekündigt. Der eigentliche Aufwand liegt eher im Vergleich als in der Technik.
 
 Wenn du sauber rechnest, sparst du über 24 Monate oft **280 € bis 380 €**, manchmal auch mehr. Genau dafür brauchst du aber einen klaren Blick auf Preis, Bonus, Router und Laufzeit – nicht nur auf die große Werbeziffer.
 
@@ -156,7 +156,7 @@ Prüfe zuerst, welche Technik an deiner Adresse überhaupt verfügbar ist. Vergl
 Jetzt vergleichst du nicht nur Geschwindigkeit, sondern den echten 24-Monats-Preis.
 
 ### Phase 3: Wechsel beauftragen
-In vielen Fällen ist es sinnvoll, den neuen Anbieter die Kündigung übernehmen zu lassen – besonders wenn du die Rufnummer mitnehmen willst.
+In vielen Fällen ist es sinnvoll, den neuen Anbieter die Kündigung übernehmen zu lassen – besonders wenn du die [Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/) willst.
 
 ### Phase 4: Router und Schalttermin vorbereiten
 Lege Zugangsdaten, Kabel und den möglichen Schalttermin bereit. Dann wird aus dem Wechsel kein Techniktheater.

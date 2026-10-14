@@ -6,41 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – LinkedIn
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:linkedin:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
- son-richtig:nutzen:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
-DTSTART:20261014T054500Z
-DTEND:20261014T060000Z
-SUMMARY:LinkedIn: Gasabschlag berechnen: So planst du die Heizsaison r
- ichtig (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-
- so-planst-du-die-heizsaison-richtig/
-URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
- n-so-planst-du-die-heizsaison-richtig/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
- sl-anschluss:nutzen:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
+UID:linkedin:2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordn
+ en:nutzen:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
 DTSTART:20261015T054500Z
 DTEND:20261015T060000Z
-SUMMARY:LinkedIn: Preiswert surfen: So findest du den optimalen DSL‑An
- schluss (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-fi
- ndest-du-den-optimalen-dsl-anschluss/
-URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
- findest-du-den-optimalen-dsl-anschluss/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordn
- en:nutzen:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
-DTSTART:20261016T054500Z
-DTEND:20261016T060000Z
 SUMMARY:LinkedIn: Der erste eigene Haushalt: Fixkosten von Anfang an o
  rdnen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -51,26 +21,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haush
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
- endert:nutzen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
-DTSTART:20261019T054500Z
-DTEND:20261019T060000Z
-SUMMARY:LinkedIn: Internet & DSL-Update: Was sich jetzt für dich änder
- t (nutzen)
+UID:linkedin:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
+ sl-anschluss:nutzen:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
+DTSTART:20261016T054500Z
+DTEND:20261016T060000Z
+SUMMARY:LinkedIn: Preiswert surfen: So findest du den optimalen DSL‑An
+ schluss (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-wa
- s-sich-jetzt-fuer-dich-aendert/
-URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
- was-sich-jetzt-fuer-dich-aendert/
+  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-fi
+ ndest-du-den-optimalen-dsl-anschluss/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
+ findest-du-den-optimalen-dsl-anschluss/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so
- -vermeidest:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
-DTSTART:20261020T054500Z
-DTEND:20261020T060000Z
+ -vermeidest:nutzen:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
+DTSTART:20261019T054500Z
+DTEND:20261019T060000Z
 SUMMARY:LinkedIn: Büroausstattung steuerlich clever absetzen: So geht'
  s (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -81,26 +51,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
- erlust:nutzen:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
-DTSTART:20261021T054500Z
-DTEND:20261021T060000Z
-SUMMARY:LinkedIn: Campingurlaub planen: Budget für Platz\, Fahrt und A
- usrüstung (nutzen)
+UID:linkedin:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
+ endert:nutzen:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
+DTSTART:20261020T054500Z
+DTEND:20261020T060000Z
+SUMMARY:LinkedIn: Internet & DSL-Update: Was sich jetzt für dich änder
+ t (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-cle
- ver-sparen-ohne-komfortverlust/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
- lever-sparen-ohne-komfortverlust/
+  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-wa
+ s-sich-jetzt-fuer-dich-aendert/
+URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
+ was-sich-jetzt-fuer-dich-aendert/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutze
- n:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
-DTSTART:20261022T054500Z
-DTEND:20261022T060000Z
+ n:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
+DTSTART:20261021T054500Z
+DTEND:20261021T060000Z
 SUMMARY:LinkedIn: 7 Gewohnheiten für finanzielle Freiheit: Geld bewuss
  t ordnen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -111,9 +81,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:linkedin:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
+ erlust:nutzen:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
+DTSTART:20261022T054500Z
+DTEND:20261022T060000Z
+SUMMARY:LinkedIn: Campingurlaub planen: Budget für Platz\, Fahrt und A
+ usrüstung (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-cle
+ ver-sparen-ohne-komfortverlust/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
+ lever-sparen-ohne-komfortverlust/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:linkedin:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-g
  eld-kostet:nutzen:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
+DTSTAMP:20261014T101901Z
 DTSTART:20261023T054500Z
 DTEND:20261023T060000Z
 SUMMARY:LinkedIn: DSL-Anbieter wechseln: Gesamtpreis\, Router und Scha
@@ -128,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
  tie-gas:nutzen:2026-10-26@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
+DTSTAMP:20261014T101901Z
 DTSTART:20261026T064500Z
 DTEND:20261026T070000Z
 SUMMARY:LinkedIn: Sicher heizen: So schützt dich eine Gaspreisgarantie
@@ -143,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
  e-verlaengerung:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261013T195412Z
+DTSTAMP:20261014T101901Z
 DTSTART:20261027T064500Z
 DTEND:20261027T070000Z
 SUMMARY:LinkedIn: Handyvertrag kündigen: Enddatum\, Nachweis und Rufnu
@@ -153,6 +138,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
  -raus-aus-der-kostenfalle-verlaengerung/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
  en-raus-aus-der-kostenfalle-verlaengerung/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
+ tzen:2026-10-28@franksfinanzcheck.de
+DTSTAMP:20261014T101901Z
+DTSTART:20261028T064500Z
+DTEND:20261028T070000Z
+SUMMARY:LinkedIn: Geld abheben im Ausland: Wo die Gebühren wirklich en
+ tstehen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-auslan
+ d-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

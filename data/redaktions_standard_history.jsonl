@@ -49,3 +49,7 @@
 {"zeit": "2026-10-09T13:13:22.583909+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}
 {"zeit": "2026-10-12T15:19:49.940865+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
 {"zeit": "2026-10-12T15:19:50.047727+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}
+{"zeit": "2026-10-14T11:49:49.704095+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
+{"zeit": "2026-10-14T11:49:49.704095+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
+{"zeit": "2026-10-14T11:49:49.842177+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}
+{"zeit": "2026-10-14T11:49:49.842177+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "GATE", "aktion": "draft (hold)"}

@@ -109,7 +109,7 @@ Halte den Text sachlich. Beschreibe den Zustand und verzichte auf Vermutungen ü
 
 ## Was der Anbieter leisten muss
 
-Verträge über Internetanschlüsse stehen unter dem Telekommunikationsgesetz. Der Rahmen reicht von der Vertragslaufzeit bis zur Umschaltung und zur Behandlung von Störungen. Die Regelungen zum Anbieterwechsel fasst [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) zusammen.
+Verträge über Internetanschlüsse stehen unter dem Telekommunikationsgesetz. Der Rahmen reicht von der [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) bis zur Umschaltung und zur Behandlung von Störungen. Die Regelungen zum Anbieterwechsel fasst [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) zusammen.
 
 Für dich sind drei Pflichten wichtig. Erstens: Der Anbieter muss auf eine Störungsmeldung reagieren und einen Weg zur Behebung anbieten. Zweitens: Er muss dir auf Nachfrage den Stand mitteilen. Drittens: Er darf die Störung nicht aussitzen, indem er auf eine „Prüfung" verweist, die nie endet.
 

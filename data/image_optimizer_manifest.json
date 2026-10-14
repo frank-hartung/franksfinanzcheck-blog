@@ -12825,6 +12825,216 @@
       ]
     },
     {
+      "source": "static/images/covers/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 17160
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 9844
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 5626
+        },
+        {
+          "path": "static/images/covers/480/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 25653
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 13952
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 7438
+        },
+        {
+          "path": "static/images/covers/620/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 36503
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 18334
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 9755
+        },
+        {
+          "path": "static/images/covers/720/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 44574
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 21058
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 11465
+        },
+        {
+          "path": "static/images/covers/webp/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 30354
+        },
+        {
+          "path": "static/images/covers/avif/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 14102
+        }
+      ]
+    },
+    {
+      "source": "static/images/covers/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+      "source_width": 1000,
+      "source_height": 1500,
+      "variants": [
+        {
+          "path": "static/images/covers/360/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+          "width": 360,
+          "height": 540,
+          "format": "jpg",
+          "bytes": 19647
+        },
+        {
+          "path": "static/images/covers/webp/360/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.webp",
+          "width": 360,
+          "height": 540,
+          "format": "webp",
+          "bytes": 11472
+        },
+        {
+          "path": "static/images/covers/avif/360/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.avif",
+          "width": 360,
+          "height": 540,
+          "format": "avif",
+          "bytes": 6519
+        },
+        {
+          "path": "static/images/covers/480/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+          "width": 480,
+          "height": 720,
+          "format": "jpg",
+          "bytes": 28739
+        },
+        {
+          "path": "static/images/covers/webp/480/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.webp",
+          "width": 480,
+          "height": 720,
+          "format": "webp",
+          "bytes": 16150
+        },
+        {
+          "path": "static/images/covers/avif/480/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.avif",
+          "width": 480,
+          "height": 720,
+          "format": "avif",
+          "bytes": 8682
+        },
+        {
+          "path": "static/images/covers/620/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+          "width": 620,
+          "height": 930,
+          "format": "jpg",
+          "bytes": 41445
+        },
+        {
+          "path": "static/images/covers/webp/620/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.webp",
+          "width": 620,
+          "height": 930,
+          "format": "webp",
+          "bytes": 21168
+        },
+        {
+          "path": "static/images/covers/avif/620/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.avif",
+          "width": 620,
+          "height": 930,
+          "format": "avif",
+          "bytes": 11388
+        },
+        {
+          "path": "static/images/covers/720/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+          "width": 720,
+          "height": 1080,
+          "format": "jpg",
+          "bytes": 50933
+        },
+        {
+          "path": "static/images/covers/webp/720/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.webp",
+          "width": 720,
+          "height": 1080,
+          "format": "webp",
+          "bytes": 24332
+        },
+        {
+          "path": "static/images/covers/avif/720/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.avif",
+          "width": 720,
+          "height": 1080,
+          "format": "avif",
+          "bytes": 13154
+        },
+        {
+          "path": "static/images/covers/webp/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.webp",
+          "width": 1000,
+          "height": 1500,
+          "format": "webp",
+          "bytes": 34542
+        },
+        {
+          "path": "static/images/covers/avif/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.avif",
+          "width": 1000,
+          "height": 1500,
+          "format": "avif",
+          "bytes": 16142
+        }
+      ]
+    },
+    {
       "source": "static/images/covers/brand-franksfinanzcheck.jpg",
       "source_width": 1000,
       "source_height": 1500,

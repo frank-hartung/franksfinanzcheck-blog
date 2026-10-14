@@ -135,7 +135,7 @@ Wiederhole denselben Test in dem Raum, in dem das WLAN schwächelt. Notiere auch
 |---|---|---|
 | Am Router schnell, im Raum langsam | klassisches **WLAN‑Problem** | Repeater oder Mesh lohnt sich |
 | Schon am Router langsam | **Vertrags‑ oder Leitungsproblem** | erst Tarif prüfen, keine Technik kaufen |
-| Überall mäßig, abends schlimmer | häufig **Auslastung** oder alter Router | Router‑Tausch oder Tarifwechsel prüfen |
+| Überall mäßig, abends schlimmer | häufig **Auslastung** oder alter Router | Router‑Tausch oder [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen |
 
 Genau der zweite Fall ist der teuerste Denkfehler: Da kaufen Menschen ein 300‑Euro‑Mesh‑System und merken danach, dass der Engpass gar nicht im WLAN lag, sondern in einem alten 16‑Mbit‑Vertrag. Neue Technik kann kein Tempo verteilen, das nie am Anschluss ankommt.
 

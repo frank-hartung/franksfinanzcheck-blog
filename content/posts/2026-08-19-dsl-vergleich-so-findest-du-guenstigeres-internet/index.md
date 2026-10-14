@@ -119,7 +119,7 @@ Nach 12 Monaten springt der Preis auf rund 49,99 €. Die Hardware-Miete liegt 
 
 **Gesamtkosten: 993,71 € / 24 = ca. 41,40 € effektiver Monatspreis.** Der beworbene Einstiegspreis von 24,99 € liegt also rund 40 % unter der Realität. Wer nur auf den Bannerpreis schaut, vergleicht Äpfel mit Birnen.
 
-Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein Wechsel auf einen optimierten Tarif für effektiv ca. 33 € spart dir somit ca. **288 €** über die Vertragslaufzeit.
+Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein Wechsel auf einen optimierten Tarif für effektiv ca. 33 € spart dir somit ca. **288 €** über die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).
 
 ## Vier Fallen, die im Kleingedruckten sitzen
 

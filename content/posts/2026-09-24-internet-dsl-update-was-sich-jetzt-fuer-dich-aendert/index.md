@@ -292,7 +292,7 @@ Darum zählt nicht nur der Startpreis, sondern die Summe über 24 Monate. Gena
 ## Meine Kurz‑Checkliste für heute
 
 - Aktuellen Monatspreis notieren
-- Vertragslaufzeit prüfen
+- [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) prüfen
 - Routerkosten prüfen
 - Haushaltsbedarf ehrlich einschätzen
 - WLAN‑Probleme getrennt betrachten
@@ -340,7 +340,7 @@ Nein. Häufig liegt das Problem eher am WLAN, am Router oder an der Wohnsituatio
 
 ### Lohnt sich ein Wechsel auch ohne Anbieterwechsel?
 
-Ja. Manchmal reicht schon ein interner Tarifwechsel oder ein kleineres Paket beim gleichen Anbieter.
+Ja. Manchmal reicht schon ein interner [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) oder ein kleineres Paket beim gleichen Anbieter.
 
 ### Warum ist der Effektivpreis so wichtig?
 

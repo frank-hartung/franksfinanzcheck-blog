@@ -27,13 +27,13 @@
   "ts": "2026-08-25T16:23:26+00:00"
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-  "design": {
-   "badge": "STROM & GAS SPAREN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-10-07T15:28:22+00:00"
+  "ts": "2026-10-14T13:29:52+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
  },
  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
   "design": {
@@ -46,7 +46,7 @@
  },
  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
   "title": "Internet & DSL wechseln: So gelingt der Anbieterwechsel",
-  "ts": "2026-10-14T12:47:37+00:00",
+  "ts": "2026-10-14T13:46:34+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -118,7 +118,7 @@
  },
  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
   "title": "DSL-Tarif für dein Zuhause: Das passende Angebot finden",
-  "ts": "2026-10-14T12:47:41+00:00",
+  "ts": "2026-10-14T13:46:34+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -163,7 +163,7 @@
  },
  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
   "title": "DNS-Server wechseln: Datenschutz, Filter und Einrichtung",
-  "ts": "2026-10-14T13:00:31+00:00",
+  "ts": "2026-10-14T13:46:35+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -217,7 +217,7 @@
  },
  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
   "title": "DNS-Hack testen: Antwortzeit statt gefühltem Tempo",
-  "ts": "2026-10-14T13:13:33+00:00",
+  "ts": "2026-10-14T13:46:36+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -226,7 +226,7 @@
  },
  "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
   "title": "Finanzielle Freiheit erreichen: Denke dich reich",
-  "ts": "2026-10-14T12:47:51+00:00",
+  "ts": "2026-10-14T13:46:36+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -334,7 +334,7 @@
  },
  "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
   "title": "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden",
-  "ts": "2026-10-14T12:47:54+00:00",
+  "ts": "2026-10-14T13:46:37+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -451,7 +451,7 @@
  },
  "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
   "title": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
-  "ts": "2026-10-14T12:47:58+00:00",
+  "ts": "2026-10-14T13:46:38+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1144,7 +1144,7 @@
  },
  "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
   "title": "Warmwasser sparen: Die Rechnung hinter dem Hahn",
-  "ts": "2026-10-14T12:47:44+00:00",
+  "ts": "2026-10-14T13:46:35+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1225,7 +1225,7 @@
  },
  "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
   "title": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt",
-  "ts": "2026-10-14T12:47:48+00:00",
+  "ts": "2026-10-14T13:46:36+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1238,6 +1238,24 @@
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
+  "title": "Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-14T11:50:51+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+  "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+  "ts": "2026-10-14T11:50:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
    "savings": ""
   }
  }

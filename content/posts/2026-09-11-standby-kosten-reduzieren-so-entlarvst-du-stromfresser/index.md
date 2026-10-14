@@ -267,7 +267,7 @@ Ja, wenn du dann weder Telefonie noch Smart Home, Sicherheitsfunktionen oder Upd
 Nutze geprüfte Produkte, beachte die maximale Belastung und schließe keine ungeeigneten Hochleistungsgeräte an. Beschädigte Leisten gehören ersetzt.
 
 ### Was bringt mehr: Standby senken oder Tarif wechseln?
-Beides wirkt an unterschiedlichen Stellen. Standby senkt den Verbrauch dauerhaft, ein Tarifwechsel den Preis jeder verbleibenden kWh.
+Beides wirkt an unterschiedlichen Stellen. Standby senkt den Verbrauch dauerhaft, ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) den Preis jeder verbleibenden kWh.
 
 ---
 

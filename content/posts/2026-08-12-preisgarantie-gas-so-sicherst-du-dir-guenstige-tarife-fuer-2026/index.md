@@ -109,7 +109,7 @@ Prüfe:
 
 - Wann beginnt die Mindestlaufzeit: Vertragsschluss oder Lieferbeginn?
 - Wie lange verlängert sich der Vertrag danach?
-- Welche Kündigungsfrist gilt?
+- Welche [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) gilt?
 - Wann endet die Preisgarantie?
 
 Zeitlich sollte die Garantie nicht deutlich vor der festen Bindung enden. Sonst kann der Preis steigen, während du noch nicht regulär wechseln kannst.

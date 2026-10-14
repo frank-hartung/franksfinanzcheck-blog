@@ -162,7 +162,7 @@ Bleibt der Anschluss auch per Kabel langsam, miss das Tempo an mehreren Tagen. L
 
 | Fehler | Warum er kostet | Wie du ihn [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) |
 |--------|----------------|-----------------------|
-| Kündigungsfrist übersehen | Vertragsbindung verlängert sich automatisch | Setze dir eine Erinnerungs‑E‑Mail 30 Tage vor Ablauf |
+| [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) übersehen | Vertragsbindung verlängert sich automatisch | Setze dir eine Erinnerungs‑E‑Mail 30 Tage vor Ablauf |
 | Mehrere Router gleichzeitig mieten | Doppelte Mietkosten | Nutze den vorhandenen Router, wenn er kompatibel ist |
 | Nur auf Werbe‑Speed achten | Grundpreis bleibt hoch | Vergleiche Grundpreise, nicht nur Max‑Speed |
 | Ignorieren von Anschlussgebühren | Einmalige Kosten erhöhen die Gesamtsumme | Addiere einmalige Kosten zur Jahresrechnung |
@@ -191,7 +191,7 @@ So gehst du vor:
 - Grundpreis: 25 € pro Monat
 - Router‑Miete: 5 € pro Monat
 - Einrichtungsgebühr: 30 € einmalig
-- Vertragslaufzeit: 24 Monate
+- [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/): 24 Monate
 
 **Formel**  
 Jahreskosten = (Grundpreis + Router‑Miete) × 12 + Einrichtungsgebühr  
