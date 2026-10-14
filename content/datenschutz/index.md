@@ -95,7 +95,7 @@ Der Zählimpuls enthält nur:
 
 ### Technischer Hinweis zur IP-Adresse
 
-Damit der Zählimpuls ankommt, wird deine IP-Adresse technisch über die Netzinfrastruktur von Cloudflare übermittelt. Cloudflare verarbeitet sie dabei zur Verbindung. Wir speichern sie nicht.
+Damit der Zählimpuls ankommt, wird deine IP-Adresse technisch über die Netzinfrastruktur von Cloudflare übermittelt. Cloudflare verarbeitet sie dabei zur Verbindung. Wir speichern sie nicht. Zum Schutz vor Missbrauch (massenhaft gefälschte Klicks) nutzt der Zähler die IP-Adresse außerdem kurzzeitig für eine Mengenbegrenzung: Cloudflare zählt dafür höchstens 60 Sekunden lang mit, wie viele Zählimpulse von derselben Verbindung kommen. Die IP-Adresse wird dabei nicht in unserer Datenbank gespeichert und nicht mit den Tageszählern verknüpft.
 
 ### Rechtsgrundlage und Speicherdauer
 

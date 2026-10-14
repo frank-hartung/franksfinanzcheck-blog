@@ -10,6 +10,11 @@ name = "klick-zaehler"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 
+# Sicherheitsaudit 14.10.2026 (M-14): KEIN *.workers.dev-Zugang – dort
+# greifen WAF- und Rate-Limit-Regeln der Zone nicht. Nur die eigene Domain.
+workers_dev = false
+preview_urls = false
+
 # Muss VOR den Tabellen stehen – sonst gehört es zu [vars] und wirkt nicht.
 routes = [
   { pattern = "stats.franksfinanzcheck.de", custom_domain = true }
@@ -19,6 +24,14 @@ routes = [
 binding = "DB"
 database_name = "ff-klicks"
 database_id = "EINTRAGEN-NACH-wrangler-d1-create"
+
+# Mengenbegrenzung (Sicherheitsaudit 14.10.2026, N-05): 30 Zählimpulse je
+# 60 s und Verbindung. namespace_id ist eine frei gewählte, im Konto
+# eindeutige Zahl (Newsletter-Worker nutzt 1401).
+[[ratelimits]]
+name = "KLICK_LIMITER"
+namespace_id = "1402"
+simple = { limit = 30, period = 60 }
 
 [vars]
 KLICKS_AUS = "0"   # "1" = Zählung sofort aus (Notschalter, siehe Runbook)

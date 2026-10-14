@@ -6,10 +6,21 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-import worker, { erfasse, pruefeEreignis, berlinDatum, MAX_BYTES } from "../worker.js";
+import worker, {
+  erfasse, pruefeEreignis, berlinDatum, MAX_BYTES,
+  artikelAusSitemap, ladeArtikel, _artikelCacheLeeren,
+} from "../worker.js";
 import { GATEWAY_KEYS } from "../gateway-keys.mjs";
 
 const HIER = dirname(fileURLToPath(import.meta.url));
+
+// Tests laufen ohne Netz: Ein versehentlicher Sitemap-Abruf scheitert sofort
+// (→ fail closed, Artikel "unbekannt") statt echte Anfragen zu schicken.
+globalThis.fetch = async () => {
+  throw new Error("kein Netz in Tests");
+};
+const ARTIKEL = new Set(["2026-10-02-gasabschlag-berechnen"]);
+const bekannteArtikel = async () => ARTIKEL;
 
 function fakeDb() {
   const aufrufe = [];
@@ -45,7 +56,7 @@ const JETZT = new Date("2026-10-11T10:00:00Z");
 
 test("gültiger Klick wird als Tageszähler upserted und 204 beantwortet", async () => {
   const db = fakeDb();
-  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }), { DB: db }, JETZT);
+  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }), { DB: db }, JETZT, bekannteArtikel);
   assert.equal(r.status, 204);
   assert.equal(db.aufrufe.length, 1);
   assert.match(db.aufrufe[0].sql, /ON CONFLICT\(tag, go_key, artikel\) DO UPDATE SET anzahl = anzahl \+ 1/);
@@ -205,4 +216,114 @@ test("scheduled-Handler ist exportiert und stößt den Löschlauf an", async () 
 test("wrangler.toml: täglicher Cron-Trigger für den Löschlauf ist gesetzt", () => {
   const toml = readFileSync(join(HIER, "..", "wrangler.toml"), "utf-8");
   assert.match(toml, /\[triggers\][\s\S]*crons\s*=\s*\["[^"]+"\]/);
+});
+
+// ---- Sicherheitsaudit 14.10.2026, N-05: Slug-Allowlist + Mengenbegrenzung ----
+
+test("N-05: erfundener, formal gültiger Slug zählt nur als 'unbekannt' (keine Tabellenflut)", async () => {
+  const db = fakeDb();
+  for (const s of ["2099-01-01-zufall-a1b2c3", "aaa-bbb-ccc", "2026-10-02-gasabschlag-berechnen-x"]) {
+    const r = await erfasse(anfrage({ k: "strom", s }), { DB: db }, JETZT, bekannteArtikel);
+    assert.equal(r.status, 204, s);
+  }
+  assert.deepEqual(db.aufrufe.map((a) => a.werte[2]), ["unbekannt", "unbekannt", "unbekannt"]);
+});
+
+test("N-05: ohne erreichbare Sitemap zählt der Klick nur für den Partner (fail closed)", async () => {
+  _artikelCacheLeeren();
+  const db = fakeDb();
+  const r = await erfasse(anfrage({ k: "gas", s: "2026-10-02-gasabschlag-berechnen" }), { DB: db }, JETZT);
+  assert.equal(r.status, 204);
+  assert.deepEqual(db.aufrufe[0].werte, ["2026-10-11", "gas", "unbekannt"]);
+});
+
+test("N-05: pruefeEreignis mit Allowlist – nur gelistete Slugs bleiben erhalten", () => {
+  assert.equal(pruefeEreignis({ k: "strom", s: "aaa-bbb" }, ["strom"], new Set(["aaa-bbb"])).s, "aaa-bbb");
+  assert.equal(pruefeEreignis({ k: "strom", s: "ccc-ddd" }, ["strom"], new Set(["aaa-bbb"])).s, "unbekannt");
+  assert.equal(pruefeEreignis({ k: "strom", s: "aaa-bbb" }, ["strom"], new Set()).s, "unbekannt");
+});
+
+test("N-05: artikelAusSitemap nimmt nur /posts/<slug>/ der eigenen Domain", () => {
+  const xml = `<urlset>
+    <url><loc>https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/</loc></url>
+    <url><loc>https://www.franksfinanzcheck.de/posts/zweiter-artikel/</loc></url>
+    <url><loc>https://franksfinanzcheck.de/impressum/</loc></url>
+    <url><loc>https://franksfinanzcheck.de.angreifer.example/posts/fremd-a/</loc></url>
+    <url><loc>http://franksfinanzcheck.de/posts/ohne-tls/</loc></url>
+    <url><loc>https://franksfinanzcheck.de/posts/GROSS-Buchstaben/</loc></url>
+  </urlset>`;
+  assert.deepEqual([...artikelAusSitemap(xml)].sort(), ["2026-08-10-dsl-wechselbonus-sichern", "zweiter-artikel"]);
+  assert.equal(artikelAusSitemap("").size, 0);
+  assert.equal(artikelAusSitemap(undefined).size, 0);
+});
+
+test("N-05: Sitemap wird höchstens stündlich geladen", async () => {
+  _artikelCacheLeeren();
+  let abrufe = 0;
+  const holen = async () => {
+    abrufe += 1;
+    return new Response("<loc>https://franksfinanzcheck.de/posts/aaa-bbb/</loc>", { status: 200 });
+  };
+  const t0 = Date.parse("2026-10-14T10:00:00Z");
+  assert.ok((await ladeArtikel({}, t0, holen)).has("aaa-bbb"));
+  await ladeArtikel({}, t0 + 59 * 60 * 1000, holen);
+  assert.equal(abrufe, 1);
+  await ladeArtikel({}, t0 + 61 * 60 * 1000, holen);
+  assert.equal(abrufe, 2);
+});
+
+test("N-05: Ausfall – alte Liste gilt bis 24 h weiter, Abruf pausiert 5 min, danach leer", async () => {
+  _artikelCacheLeeren();
+  let abrufe = 0;
+  const gut = async () => new Response("<loc>https://franksfinanzcheck.de/posts/aaa-bbb/</loc>");
+  const kaputt = async () => {
+    abrufe += 1;
+    throw new Error("Netz weg");
+  };
+  const t0 = Date.parse("2026-10-14T10:00:00Z");
+  await ladeArtikel({}, t0, gut);
+  const t1 = t0 + 2 * 60 * 60 * 1000;
+  assert.ok((await ladeArtikel({}, t1, kaputt)).has("aaa-bbb"), "alte Liste weiter nutzen");
+  await ladeArtikel({}, t1 + 60 * 1000, kaputt);
+  assert.equal(abrufe, 1, "innerhalb der Pause kein neuer Abruf");
+  assert.equal((await ladeArtikel({}, t0 + 25 * 60 * 60 * 1000, kaputt)).size, 0, "nach 24 h fail closed");
+  const leer = async () => new Response("<urlset></urlset>");
+  _artikelCacheLeeren();
+  assert.equal((await ladeArtikel({}, t0, leer)).size, 0, "leere Sitemap ersetzt keine Liste");
+});
+
+test("N-05: Mengenbegrenzung – Limit erreicht → 429, nichts gezählt", async () => {
+  const db = fakeDb();
+  const schluessel = [];
+  const env = {
+    DB: db,
+    KLICK_LIMITER: { async limit({ key }) { schluessel.push(key); return { success: false }; } },
+  };
+  const r = await erfasse(anfrage({ k: "strom", s: "" }, { "CF-Connecting-IP": "203.0.113.7" }), env, JETZT, bekannteArtikel);
+  assert.equal(r.status, 429);
+  assert.equal(db.aufrufe.length, 0);
+  assert.deepEqual(schluessel, ["203.0.113.7"]);
+});
+
+test("N-05: Mengenbegrenzung – unter dem Limit wird gezählt, die IP landet nie in der Datenbank", async () => {
+  const db = fakeDb();
+  const env = { DB: db, KLICK_LIMITER: { async limit() { return { success: true }; } } };
+  const r = await erfasse(anfrage({ k: "strom", s: "2026-10-02-gasabschlag-berechnen" }, { "CF-Connecting-IP": "203.0.113.7" }), env, JETZT, bekannteArtikel);
+  assert.equal(r.status, 204);
+  assert.equal(db.aufrufe.length, 1);
+  assert.ok(db.aufrufe.every((a) => a.werte.every((w) => w !== "203.0.113.7")));
+});
+
+test("N-05: gestörter Limiter blockiert den Zähler nicht", async () => {
+  const db = fakeDb();
+  const env = { DB: db, KLICK_LIMITER: { async limit() { throw new Error("gestört"); } } };
+  const r = await erfasse(anfrage({ k: "strom", s: "" }), env, JETZT, bekannteArtikel);
+  assert.equal(r.status, 204);
+  assert.equal(db.aufrufe.length, 1);
+});
+
+test("N-05: wrangler.toml – Rate-Limit-Binding und kein workers.dev", () => {
+  const toml = readFileSync(join(HIER, "..", "wrangler.toml"), "utf-8");
+  assert.match(toml, /^workers_dev\s*=\s*false/m);
+  assert.match(toml, /\[\[ratelimits\]\][\s\S]*name\s*=\s*"KLICK_LIMITER"/);
 });
