@@ -1,0 +1,80 @@
+{
+  "frage": "Wie entwickeln sich die Gaspreise für private Haushalte in Deutschland aktuell?",
+  "zeitpunkt": "2026-10-15T10:16:58Z",
+  "abrufdatum": "2026-10-15",
+  "begriffe": [
+    "entwickeln",
+    "gaspreise",
+    "private",
+    "haushalte"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [],
+  "verworfen": [
+    {
+      "url": "https://www.finanztip.de/gaspreisvergleich/gaspreis-gaskosten/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ndr.de/nachrichten/info/Gaspreis-aktuell-wie-viel-kostet-Kilowattstunde,gaspreis142.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verivox.de/gas/gaspreise/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.mein-eigenheim.de/heizen/gaspreisentwicklung.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.enpal.de/waermepumpe/gaspreisentwicklung",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://1-gasvergleich.com/gaspreise/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bundesregierung.de/breg-de/aktuelles/senkung-energiepreise-haushalt-2358526",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.gasag.de/magazin/energiemarkt/gaspreisentwicklung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.evm.de/privatkunden/gas/gaspreise/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.gasvermittlung.de/gaspreisentwicklung-deutschland",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/",
+      "grund": "keine Passage mit Bezug zur Frage"
+    },
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/gaspreis-strompreis-aktuell/",
+      "grund": "keine Passage mit Bezug zur Frage"
+    }
+  ],
+  "antwort": {
+    "weg": "extraktiv",
+    "text": "",
+    "aussagen": [],
+    "hinweis": "Keine belegfähige Fundstelle."
+  },
+  "browser_beweis": []
+}

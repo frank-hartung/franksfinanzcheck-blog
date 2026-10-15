@@ -1,0 +1,211 @@
+{
+  "frage": "Wie haben sich die Strompreise für Haushalte in Deutschland zuletzt entwickelt?",
+  "zeitpunkt": "2026-10-15T10:16:35Z",
+  "abrufdatum": "2026-10-15",
+  "begriffe": [
+    "strompreise",
+    "haushalte",
+    "zuletzt",
+    "entwickelt"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/",
+      "titel": "BDEW-Strompreisanalyse dokumentiert aktuelle Preistrends | BDEW",
+      "domain": "bdew.de",
+      "herausgeber": "BDEW Bundesverband der Energie- und Wasserwirtschaft",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-15",
+      "passagen": [
+        {
+          "satz": "Die Strom­preis­ana­ly­se steht am Ende dieser Seite zum Download zur Verfügung. ## Haushalte: So hat sich der Strom­preis in Deutsch­land ent­wi­ckelt Der durch­schnitt­li­che Strom­preis für Haushalte ist 2026 im Vergleich zum Vorjahr gesunken und beträgt bisher durch­schnitt­lich 37,0 ct/kWh.",
+          "punkte": 17,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    },
+    {
+      "url": "https://www.bdew.de/energie/strompreise-dossier/",
+      "titel": "Dossier Strompreise in Deutschland | BDEW",
+      "domain": "bdew.de",
+      "herausgeber": "BDEW Bundesverband der Energie- und Wasserwirtschaft",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-15",
+      "passagen": [
+        {
+          "satz": "Diese ist abhängig von der Gemeindegröße und reicht von 1,32 ct/kWh bis 2,39 ct/kWh für private Haushalte. ## Wie bildet sich der Preis an der Strombörse?",
+          "punkte": 16,
+          "deckung": 1
+        },
+        {
+          "satz": "Haben Sie Fehler entdeckt? [Dann weisen Sie uns gerne darauf hin.](mailto:online-team@bdew.de?subject=Fehler%20in%20Textzusammenfassung)_ ## Strompreisentwicklung: Was kostet Strom?",
+          "punkte": 14,
+          "deckung": 1
+        },
+        {
+          "satz": "Der durchschnittliche Strompreis für Haushalte ist 2026 im Vergleich zum Vorjahr deutlich gesunken.",
+          "punkte": 14,
+          "deckung": 1
+        },
+        {
+          "satz": "Der Strompreis setzt sich aus drei Bestandteilen zusammen: Diese vom Lieferanten beeinflussbaren Kosten machen rund 40 Prozent des Strompreises für Haushaltskunden aus.",
+          "punkte": 12,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    }
+  ],
+  "verworfen": [
+    {
+      "url": "https://www.stromvermittlung.de/strompreisentwicklung-deutschland-der-letzten-10-jahre",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.finanztip.de/stromvergleich/strompreis/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://strom-report.com/strompreisentwicklung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://de.statista.com/themen/12942/strompreise-in-deutschland/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.eon.de/de/pk/strom/strompreisentwicklung.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://wechselpilot.com/ratgeber/strompreisentwicklung",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.wattline.de/energiewissen/strompreisentwicklung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.yello.de/wissen/energiemarkt/strompreis-aktuell/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.stromauskunft.de/strompreise/strompreis-entwicklung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://elektronik-zeit.de/strompreis/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    }
+  ],
+  "antwort": {
+    "weg": "groq",
+    "text": "Der durchschnittliche Strompreis für private Haushalte ist im Jahr 2026 im Vergleich zum Vorjahr deutlich gesunken und liegt jetzt bei etwa 37,0 ct/kWh [1]. Auch das BDEW‑Dossier bestätigt, dass der Preis für Haushalte 2026 im Vergleich zum Vorjahr stark zurückgegangen ist [2].",
+    "hinweis": "Freier Groq-Zugang, streng an die Belege gebunden.",
+    "beleglage": {
+      "weg": "extraktiv",
+      "text": "- Die Strom­preis­ana­ly­se steht am Ende dieser Seite zum Download zur Verfügung. ## Haushalte: So hat sich der Strom­preis in Deutsch­land ent­wi­ckelt Der durch­schnitt­li­che Strom­preis für Haushalte ist 2026 im Vergleich zum Vorjahr gesunken und beträgt bisher durch­schnitt­lich 37,0 ct/kWh. [1]\n- Diese ist abhängig von der Gemeindegröße und reicht von 1,32 ct/kWh bis 2,39 ct/kWh für private Haushalte. ## Wie bildet sich der Preis an der Strombörse? [2]\n- Haben Sie Fehler entdeckt? [Dann weisen Sie uns gerne darauf hin.](mailto:online-team@bdew.de?subject=Fehler%20in%20Textzusammenfassung)_ ## Strompreisentwicklung: Was kostet Strom? [2]\n- Der durchschnittliche Strompreis für Haushalte ist 2026 im Vergleich zum Vorjahr deutlich gesunken. [2]\n- Der Strompreis setzt sich aus drei Bestandteilen zusammen: Diese vom Lieferanten beeinflussbaren Kosten machen rund 40 Prozent des Strompreises für Haushaltskunden aus. [2]",
+      "aussagen": [
+        {
+          "satz": "Die Strom­preis­ana­ly­se steht am Ende dieser Seite zum Download zur Verfügung. ## Haushalte: So hat sich der Strom­preis in Deutsch­land ent­wi­ckelt Der durch­schnitt­li­che Strom­preis für Haushalte ist 2026 im Vergleich zum Vorjahr gesunken und beträgt bisher durch­schnitt­lich 37,0 ct/kWh.",
+          "beleg": 1,
+          "punkte": 17
+        },
+        {
+          "satz": "Diese ist abhängig von der Gemeindegröße und reicht von 1,32 ct/kWh bis 2,39 ct/kWh für private Haushalte. ## Wie bildet sich der Preis an der Strombörse?",
+          "beleg": 2,
+          "punkte": 16
+        },
+        {
+          "satz": "Haben Sie Fehler entdeckt? [Dann weisen Sie uns gerne darauf hin.](mailto:online-team@bdew.de?subject=Fehler%20in%20Textzusammenfassung)_ ## Strompreisentwicklung: Was kostet Strom?",
+          "beleg": 2,
+          "punkte": 14
+        },
+        {
+          "satz": "Der durchschnittliche Strompreis für Haushalte ist 2026 im Vergleich zum Vorjahr deutlich gesunken.",
+          "beleg": 2,
+          "punkte": 14
+        },
+        {
+          "satz": "Der Strompreis setzt sich aus drei Bestandteilen zusammen: Diese vom Lieferanten beeinflussbaren Kosten machen rund 40 Prozent des Strompreises für Haushaltskunden aus.",
+          "beleg": 2,
+          "punkte": 12
+        }
+      ],
+      "hinweis": "Wörtliche Passagen, nach Relevanz geordnet. Keine Umformulierung."
+    }
+  },
+  "browser_beweis": [
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/",
+      "endstand_url": "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/",
+      "status": 200,
+      "titel": "BDEW-Strompreisanalyse dokumentiert aktuelle Preistrends | BDEW",
+      "text_laenge": 3099,
+      "auszug": "Verband Energie Wasser/Abwasser Presse Magazin Service Suche Mitgliederbereich Service Daten und Grafiken BDEW-Strompreisanalyse Herbst 2026 21.08.2026 Drucken BDEW-Strom­preis­ana­ly­se Herbst 2026 Die BDEW-Strom­preis­ana­ly­se zeigt die aktuelle Ent­wick­lung der Strom­prei­se in Deutsch­land. © Claudio Zaccherini / Shutterstock Zusammenfassung des Beitrages In der BDEW-Strom­preis­ana­ly­se werden die Preis­ent­wick­lung für Haus­halts­kun­den sowie das Preis­ni­veau für In­dus­trie­kun­den dar­ge­stellt und die ent­hal­te­nen Steuern, Abgaben und Umlagen de­tail­liert be­schrie­ben. Die d",
+      "treffer": [
+        {
+          "begriff": "strompreise",
+          "gefunden": true
+        },
+        {
+          "begriff": "haushalte",
+          "gefunden": true
+        },
+        {
+          "begriff": "zuletzt",
+          "gefunden": false
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [
+        "Cannot read properties of null (reading 'getAttribute')",
+        "Cannot read properties of null (reading 'addEventListener')"
+      ],
+      "gemessen_am": "2026-10-15T10:16:53.512Z",
+      "zustand": "bereit"
+    },
+    {
+      "url": "https://www.bdew.de/energie/strompreise-dossier/",
+      "endstand_url": "https://www.bdew.de/energie/strompreise-dossier/",
+      "status": 200,
+      "titel": "Dossier Strompreise in Deutschland | BDEW",
+      "text_laenge": 8140,
+      "auszug": "Verband Energie Wasser/Abwasser Presse Magazin Service Suche Mitgliederbereich 21.08.2026 Dossier: Strompreise Wie bilden sich Strompreise und was bedeutet das für Verbraucher? Dieser Überblick beantwortet die wichtigsten Fragen rund um den Strommarkt. Listen to this article: 00:00 / 15:45 1X AI Voice by BotTalk Zusammenfassung des Beitrages Strom­preis­ent­wick­lung: Was kostet Strom? Der durch­schnitt­li­che Strom­preis für Haushalte ist 2026 im Vergleich zum Vorjahr deutlich gesunken. Der Haus­halts­strom­preis un­ter­schei­det sich von dem Strom­preis für Wirt­schaft und Industrie. Aufgrun",
+      "treffer": [
+        {
+          "begriff": "strompreise",
+          "gefunden": true
+        },
+        {
+          "begriff": "haushalte",
+          "gefunden": true
+        },
+        {
+          "begriff": "zuletzt",
+          "gefunden": false
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [
+        "Cannot read properties of null (reading 'addEventListener')"
+      ],
+      "gemessen_am": "2026-10-15T10:16:57.276Z",
+      "zustand": "bereit"
+    }
+  ]
+}
