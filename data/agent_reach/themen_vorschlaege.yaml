@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: 'Marktbericht: Börsen zwischen KI-Euphorie und Inflationssorgen'
+  url: https://www.tagesschau.de/wirtschaft/finanzen/marktberichte/marktbericht-dax-asml-tsmc-berichtssaison-102.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-10-15T07:50:53'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Aufpreis möglich: Das plant Apple beim neuen iPad mini'
   url: https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag
   quelle: heise online (Internet/Telekommunikation)
@@ -156,4 +163,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-12T21:17:05'
+zuletzt_ergaenzt: '2026-10-15T07:50:53'
