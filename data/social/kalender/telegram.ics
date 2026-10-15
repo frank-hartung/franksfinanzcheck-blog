@@ -6,33 +6,18 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
- endert:nutzen:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261015T153830Z
-DTSTART:20261015T160000Z
-DTEND:20261015T161500Z
-SUMMARY:Telegram (Kanal): Internet & DSL-Update: Was sich jetzt für di
- ch ändert (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-u
- pdate-was-sich-jetzt-fuer-dich-aendert/
-URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
- was-sich-jetzt-fuer-dich-aendert/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordn
- en:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261015T153830Z
+UID:telegram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
+ sl-anschluss:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261015T202330Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): Der erste eigene Haushalt: Fixkosten von Anf
- ang an ordnen (nutzen)
+SUMMARY:Telegram (Kanal): Preiswert surfen: So findest du den optimale
+ n DSL‑Anschluss (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener
- -haushalt-fixkosten-richtig-ordnen/
-URL:https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haush
- alt-fixkosten-richtig-ordnen/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surf
+ en-so-findest-du-den-optimalen-dsl-anschluss/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
+ findest-du-den-optimalen-dsl-anschluss/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
