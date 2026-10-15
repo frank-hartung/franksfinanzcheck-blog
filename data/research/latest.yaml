@@ -1,5 +1,5 @@
-generated_at: '2026-10-14T09:01:22Z'
-day: '2026-10-14'
+generated_at: '2026-10-15T08:35:17Z'
+day: '2026-10-15'
 mode: deterministic
 teams:
   trending:
@@ -238,61 +238,57 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 10 Tipps für günstige Reisekreditkarten
-    pillar: konto-karten
+  - topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
+    pillar: internet-dsl
     signal: niche_hook
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:DSL-Tarife mit hoher Geschwindigkeit vergleichen
     score: 0.55
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-    score: 0.55
-    keywords:
-    - Energieausweis
-    - Energieausweis Kosten
-    - Energieeffizienzklasse Haus
-  - topic: 'Interrail und Bahncard: Günstig mit dem Zug durch Europa'
+    - DSL-Tarif
+    - Internetgeschwindigkeit
+    - Tarife vergleichen
+  - topic: Günstige Flüge für den Spätsommer finden
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Interrail und Bahncard: Günstig mit dem Zug durch Europa'
+    source: topics:Günstige Flüge für den Spätsommer finden
     score: 0.55
     keywords:
-    - Interrail
-    - Bahncard sparen
-    - Zugreise Europa günstig
-  - topic: 'Krankenzusatzversicherung: Welche Bausteine sich lohnen'
+    - Flugtickets günstig
+    - Flugvergleich
+    - Reisebudget sparen
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: 'Risikolebensversicherung für Familien: Die richtige Summe finden'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Krankenzusatzversicherung: Welche Bausteine sich lohnen'
+    source: 'topics:Risikolebensversicherung für Familien: Die richtige Summe finden'
     score: 0.55
     keywords:
-    - Krankenzusatz
-    - Versicherung
-    - Zahnzusatz
-  - topic: 'Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
+    - Risikolebensversicherung
+    - Versicherungssumme berechnen
+    - Familie absichern
+  - topic: Wie du deine monatlichen Ausgaben reduzieren kannst
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Wie du deine monatlichen Ausgaben reduzieren kannst
+    score: 0.55
+    keywords: []
+  - topic: 'Zweite Welle Gaspreis-Anpassung: Jetzt sichern'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
+    source: 'topics:Zweite Welle Gaspreis-Anpassung: Jetzt sichern'
     score: 0.55
     keywords:
-    - Strompreis 2026
-    - Stromanbieter wechseln jetzt
-    - Strompreis Prognose
-    - Stromtarif wechseln Herbst
-  - topic: 'Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
-    score: 0.55
-    keywords:
-    - Stromspeicher kaufen
-    - Batteriespeicher Solar
-    - Photovoltaik Speicher
+    - Gaspreis
+    - Gastarif wechseln
+    - Heizkosten senken
 live_web:
   enabled: false
   findings: []
