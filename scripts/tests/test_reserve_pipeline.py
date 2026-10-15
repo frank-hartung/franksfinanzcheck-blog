@@ -1234,8 +1234,17 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
         sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
         import reserve_gate as rg
         import reserve_pool as rp
+        import reserve_topics as rt
         self.rp = rp
         self.rg = rg
+        # #759: Fixtures und Produktionslogik bekommen dieselbe feste Uhr.
+        # Keine künstlichen Publikationstage und kein isolierter ISO-Stub:
+        # Die echte Rückdatierungs-Sperre bleibt Teil der Probe.
+        self.heute = dt.date(2026, 9, 28)  # Montag
+        self.enterContext(uhr_zwang.uhr(
+            dt.datetime.combine(self.heute, dt.time(12), tzinfo=dt.timezone.utc),
+            module=[rp, rp.cadence_guard, rp.cadence_guard.park_state,
+                    rp.artifacts, rt]))
 
     def test_dublette_wird_zurueckgestellt(self):
         frisch = {"2026-09-20-gas":
@@ -1253,9 +1262,10 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
         """Ein Pool aus EINEM Thema muss den Tag trotzdem tragen: lieber ein
         thematischer Nachbar als eine leere Kadenz – aber nie zwei am
         selben Tag (das erzeugte die fünf Rückläufer)."""
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp, \
+                patch.object(self.rp, "ROOT", Path(tmp)):
             posts = Path(tmp) / "posts"
-            gestern = (dt.date.today() - dt.timedelta(days=1)).isoformat()
+            gestern = (self.heute - dt.timedelta(days=1)).isoformat()
             for name, draft, titel in (
                     ("live-a", "false", "Stromfresser finden: Die "
                                         "teuersten Energiediebe"),
@@ -1270,22 +1280,17 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
                     f'---\ntitle: "{titel}"\ndate: {gestern}T06:00:00Z\n'
                     f"draft: {draft}\n{extra}---\n\nBody.\n",
                     encoding="utf-8")
-            # Diese Probe misst Themenvielfalt, nicht die Mitternachtssperre.
-            # now_utc_iso() zieht eine Minute ab; kurz nach 00:00 wäre der
-            # Zeitstempel deshalb gestern und die Veröffentlichung gesperrt.
-            with self.rp._als_publikationstag(), patch.object(
-                    self.rp, "now_utc_iso",
-                    return_value=f"{dt.date.today().isoformat()}T12:00:00Z"):
-                raus = self.rp.publish_to_min(2, posts_dir=posts,
-                                              validator=lambda i: True)
+            raus = self.rp.publish_to_min(2, posts_dir=posts,
+                                          validator=lambda i: True)
         self.assertEqual(len(raus), 1,
                          "genau ein Artikel: Kadenz gerettet, Dublette "
                          "am selben Tag vermieden")
 
     def test_gleiche_thema_am_selben_tag_bleibt_ausgeschlossen(self):
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp, \
+                patch.object(self.rp, "ROOT", Path(tmp)):
             posts = Path(tmp) / "posts"
-            heute = dt.date.today().isoformat()
+            heute = self.heute.isoformat()
             for name, draft, titel in (
                     ("live-gas", "false", "Gasrechnung senken: Dein "
                                           "Strategieplan"),
@@ -1298,9 +1303,8 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
                     f'---\ntitle: "{titel}"\ndate: {heute}T06:00:00Z\n'
                     f"draft: {draft}\n{extra}---\n\nBody.\n",
                     encoding="utf-8")
-            with self.rp._als_publikationstag():
-                raus = self.rp.publish_to_min(2, posts_dir=posts,
-                                              validator=lambda i: True)
+            raus = self.rp.publish_to_min(2, posts_dir=posts,
+                                          validator=lambda i: True)
         self.assertEqual(raus, [], "Dublette am selben Tag = Rückläufer "
                                    "von morgen (#387)")
 

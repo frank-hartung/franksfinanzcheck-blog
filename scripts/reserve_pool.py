@@ -33,7 +33,6 @@ MODI:
   python3 scripts/reserve_pool.py --selftest        # Sabotage-Schutz
 """
 
-import contextlib
 import datetime
 import json
 import os
@@ -462,24 +461,32 @@ def publish_to_min(min_per_day: int | None = None,
     return published
 
 
-@contextlib.contextmanager
-def _als_publikationstag():
-    """Selbsttest-Helfer: erklärt den HEUTIGEN Tag zum Publikationstag.
-
-    Bewusst wird der Wochentags-Kanon geliehen und NICHT die Uhr verstellt:
-    `publish_one` datiert auf die echte UTC-Zeit und vergleicht sie mit
-    `today` – eine gefälschte Uhr ließe den Test still ins Leere laufen.
-    So prüft er an jedem Kalendertag dieselbe Logik (Uhr-Zwang, C15).
-    """
-    original = cadence_guard.PUBLICATION_DAYS
-    cadence_guard.PUBLICATION_DAYS = tuple(range(7))
-    try:
-        yield
-    finally:
-        cadence_guard.PUBLICATION_DAYS = original
-
-
 def run_selftest() -> list:
+    """Logik-Beweis mit eigener Uhr und ohne Zugriff auf echte Zertifikate.
+
+    #759: In der ersten UTC-Minute liegt `now_utc_iso()` noch am Vortag.
+    Die Rückdatierungs-Sperre verweigert dann zu Recht die Veröffentlichung;
+    Fixtures von der Wanduhr machten daraus einen falschen Testbefund.
+    Deshalb Datum UND Zeitstempel auf denselben festen Montag pinnen, statt
+    den heutigen Tag künstlich zum Publikationstag zu erklären. Die echte
+    Mo/Mi/Fr-Regel und die Mitternachts-Sperren bleiben unverändert.
+    """
+    from unittest.mock import patch
+    from selftest_clock import uhr
+    # Vor der inneren Uhr importieren: auch diese Modulbindung wird nach
+    # dem Test restauriert, statt eine eingefrorene Uhr zurückzulassen.
+    import reserve_topics as rt
+
+    probe = datetime.datetime(2026, 9, 28, 12, tzinfo=datetime.timezone.utc)
+    module = sys.modules[__name__]  # funktioniert auch als CLI (__main__)
+    with tempfile.TemporaryDirectory(prefix="reserve-pool-selftest-") as tmp, \
+            patch.object(module, "ROOT", Path(tmp)), \
+            uhr(probe, module=[module, cadence_guard, cadence_guard.park_state,
+                               artifacts, rt]):
+        return _run_selftest(probe.date())
+
+
+def _run_selftest(heute: datetime.date) -> list:
     fehler = []
     # --- Vielfalts-Sperre (#387) --------------------------------------
     frisch = {"2026-09-20-gas": "Gasrechnung senken: Dein Strategieplan "
@@ -506,12 +513,11 @@ def run_selftest() -> list:
     #  Der reale Pool bestand am 26.09. zu 4/5 aus Varianten EINES Themas.
     #  Eine harte Sperre hätte an einem Ausfalltag drei fertige Artikel
     #  blockiert und die Zusage „2–3 LIVE an Mo/Mi/Fr" gerissen.
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
         fx = Path(tmp) / "content" / "posts"
         fx.mkdir(parents=True)
         # Gestern live: Thema Stromfresser. Pool: zwei Stromfresser-Varianten.
-        gestern = (datetime.date.today()
-                   - datetime.timedelta(days=1)).isoformat()
+        gestern = (heute - datetime.timedelta(days=1)).isoformat()
         d = fx / "live-stromfresser"
         d.mkdir()
         (d / "index.md").write_text(
@@ -533,8 +539,7 @@ def run_selftest() -> list:
             veroeffentlicht.append(index.parent.name)
             return True
 
-        with _als_publikationstag():
-            raus = publish_to_min(2, posts_dir=fx, validator=validator)
+        raus = publish_to_min(2, posts_dir=fx, validator=validator)
         # Ein Pool aus EINEM Thema trägt genau einen Artikel pro Tag: Der
         # erste geht raus (sonst wäre der Tag leer, obwohl fertige Arbeit
         # bereitliegt), der zweite wäre die Dublette, die der
@@ -542,11 +547,14 @@ def run_selftest() -> list:
         if len(raus) != 1:
             fehler.append(f"Ein-Thema-Pool: {len(raus)} Artikel statt genau "
                           "1 – entweder verschenkte Kadenz oder Dublette")
+        if veroeffentlicht != raus or live_count_today(fx) != len(raus):
+            fehler.append("Ein-Thema-Pool: Veröffentlichung nicht durch "
+                          "Validator und LIVE-Bestand belegt")
 
         # Harte Sperre: dasselbe Thema HEUTE live -> nie ein zweiter Artikel.
         fx2 = Path(tmp) / "posts2"
         fx2.mkdir(parents=True)
-        heute_iso = datetime.date.today().isoformat()
+        heute_iso = heute.isoformat()
         d = fx2 / "live-heute"
         d.mkdir()
         (d / "index.md").write_text(
@@ -559,13 +567,16 @@ def run_selftest() -> list:
             f'---\ntitle: "Gasrechnung senken: Clevere Herbst-Vorbereitung"\n'
             f"date: {heute_iso}T06:00:00Z\ndraft: true\nreserve: true\n"
             f"---\n\nBody.\n", encoding="utf-8")
-        with _als_publikationstag():
-            raus2 = publish_to_min(2, posts_dir=fx2, validator=lambda i: True)
-        if raus2:
-            fehler.append("Dublette am SELBEN Tag wurde veröffentlicht – "
-                          "genau das erzeugte die fünf Rückläufer (#387)")
+        gesperrter_entwurf = d / "index.md"
+        vorher = gesperrter_entwurf.read_bytes()
+        veroeffentlicht.clear()
+        raus2 = publish_to_min(2, posts_dir=fx2, validator=validator)
+        if raus2 or veroeffentlicht or gesperrter_entwurf.read_bytes() != vorher:
+            fehler.append("Dublette am SELBEN Tag wurde veröffentlicht oder "
+                          "angefasst – genau das erzeugte die fünf "
+                          "Rückläufer (#387)")
 
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
         fx = Path(tmp) / "content" / "posts"
         fx.mkdir(parents=True)
         for slug, datum, draft, titel in (
@@ -582,7 +593,7 @@ def run_selftest() -> list:
             fehler.append(f"Sperrliste falsch aufgebaut: {titel} "
                           "(erwartet: nur frische LIVE-Artikel)")
 
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
         fx = Path(tmp) / "content" / "posts"
         fx.mkdir(parents=True)
         # Reserve-Entwurf
