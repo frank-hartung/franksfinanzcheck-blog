@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-15T08:50:00Z",
+  "generated_at": "2026-10-15T09:28:33Z",
   "modus": "kandidaten",
-  "commit": "9b8d4787713d7f97d5de29f24c06c391e95ed548",
+  "commit": "3784d8032841c408e29d18752fb87fb67119b811",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "eafe79b3c677c67e15c6d3be4a96445f10ae8e24755baef7bff27c9a1aa10f7d",
@@ -209,7 +209,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "4be20737c9a91c55814691eb4eaf3961bac494552a21525b8c21b740145558eb",
+      "sha256": "4d65c9cf0d0e1989890703915217e5e72794ea67aae09a35b7d62764c6b9b07e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -223,7 +223,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "764b71c20c1037f0749701cd9f3c806bf918383b7fc8d507642dd02540a2762e",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "fa6939708537fda33e76e3def01df9eac6a1dfd410eabf32865b775e5a550ade",
+      "sha256": "3ff38bfed0585c26b25634fa5583d00b31077ed41b6ca146cf76134d14ddf01f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "2379d212868e445b46e7d40e3e90a89e87ecd817308026e479091683211b832c",
@@ -294,7 +294,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "fbe1951f436544e4567ac730c42bc81dbbf85b6ca98bcf38e11de0a57d532dbf",
+      "sha256": "ebc2ffb274607cafab594bcd9c17636581f46da90cc317a633e0db1b0302fd32",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -308,7 +308,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "d09476d2339e3132a8036dd80b4f0dd8cd56ded9474e1745d69c15a624402b10",
@@ -345,7 +345,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "b955f56a2f500a228e4c0b1b8f1004854bba97d44b151d4db3836c70099a6918",
+      "sha256": "1e9d6be3ce19c35d91e0738e3f512e05effb02f572db9e9f66efe8644ab91e74",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -359,7 +359,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
       "sha256": "6de8e92ff54ca09026da9891640f8b03cdcc59f2e0fa95ed5990e9e50721718f",
@@ -447,7 +447,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "8c6bfcc786fe48678cbb6045e926fd05eedc5e7c571a039e8f8758f33ec091c7",
+      "sha256": "a1479b03a4dd2507c3c8a207b74a8c0a4cfd97dfeb2766ac46303cb1619685c4",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "721309823ada12705f8e79be8ecbb58f29a99030ff4bd278730309628bdc3326",
@@ -481,7 +481,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
-      "sha256": "5d64f3b8361607c154278508b52507a58d045d482378d1ba16d2e4e760623fbb",
+      "sha256": "e18e2d2287cc753083c3d2879ed8d2a0aca784bbc378632d72089e3af5af1307",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -495,7 +495,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
       "sha256": "a25864dab78aad0a0026d15b08ef870cc7c44e06890af687507b35a782a23cc3",
@@ -787,7 +787,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "e870f9b31b33d2cdaf1678394675c9aa01872407d3c9221c19d8266ec2d02496",
+      "sha256": "16f42991c5a54161b81f52ec42d3afb3cded29f8227a76d08f4c91b1f9e07851",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -801,7 +801,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-13",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "49284ce93a14c5574d19188084f2631f79b533297ee0b5f306d3915911007212",

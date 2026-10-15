@@ -292,8 +292,8 @@
 | `2026-10-12-stromfresser-im-haushalt-entlarven` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-11-27 |
 | `2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 45 Tage) | 2026-11-21 |
 | `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 30 Tage) | 2026-11-06 |
-| `2026-10-14-heizperiode-vorbereiten-im-spaetsommer` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-14-heizperiode-vorbereiten-im-spaetsommer` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 30 Tage) | 2026-11-14 |
+| `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 30 Tage) | 2026-11-14 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
