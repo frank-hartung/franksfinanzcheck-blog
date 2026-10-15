@@ -119,6 +119,8 @@
 # Kernantwort selbstständig, quantifiziert und mit klarer Entity-Benennung
 # liefert, werden häufiger und korrekter zitiert. Sichere, allgemeine
 # Beobachtung ohne Einzelfakten – deshalb hier kuratiert eingetragen.
+  ki_news_used: true
+
 - id: seo-geo-antwort-zuerst
   kategorie: seo_qualitaet
   ab: "2026-09-27"
