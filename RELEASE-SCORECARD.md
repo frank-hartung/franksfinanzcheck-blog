@@ -94,7 +94,6 @@
 
 ### `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` (blockiert, Risikoklasse standard)
 
-- **A1-link-integritaet** [affiliate]: Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt oder wird nicht gerendert
 - **A4-profi-check** [affiliate]: A8: kein Affiliate-CTA (Monetarisierung)
 - **T1-zeichenlaenge** [technik]: Zeichenlänge zu-kurz/zu-lang (check_length.py)
 - **T5-lesbarkeit** [technik]: Flesch 48.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
