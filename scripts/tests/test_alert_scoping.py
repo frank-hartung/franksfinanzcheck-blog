@@ -347,10 +347,15 @@ class VerhaltensSimulation(unittest.TestCase):
             # Namen würde genau die Lücke nicht prüfen.
             # Offsite-Backup: WF-9E5A / #761 (Einrichtungs- und Fristklasse).
             boeser_name = "Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile"
+            # „Sicherheits-Wache": WF-E813 (15.10.2026) – die Simulation prüft,
+            # dass dieser Kanal seine eigene Triage bekommt und nicht den
+            # Schlüssel-Rat, der für eine reine Kopfzeilen-Messung nie zutreffen
+            # kann.
             identitaeten = {name: ident_modul.identitaet(name)
                             for name in ("Layout-AI", "Content-Engine v2",
                                          "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
-                                         "Offsite-Backup", boeser_name)}
+                                         "Offsite-Backup",
+                                         "Sicherheits-Wache", boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

@@ -362,6 +362,25 @@ jobs:
             // Manifest-Diagnose. Die übrigen Ratschläge bleiben unverändert.
             const installFailed = failedStepNames.some(s =>
               /Abhängigkeiten|npm ci|npm install|Manifest/i.test(String(s)));
+            // ================================================================
+            //  WF-E813 (15.10.2026): EIN RAT, DER NIE ZUTREFFEN KANN, IST
+            //  KEINE DIAGNOSE
+            //  --------------------------------------------------------------
+            //  Der erste planmäßige Lauf der Sicherheits-Wache wurde rot, und
+            //  die Meldung bot als „häufigste Ursachen" einen abgelaufenen
+            //  Schlüssel, einen GitHub-Ausfall und einen transienten Fehler
+            //  an. Diese Wache misst HTTP-Kopfzeilen der eigenen Seite: Sie
+            //  kennt keinen Schlüssel, kein Modell und keine Registry. Drei
+            //  angebotene Ursachen, von denen keine zutreffen kann, kosten
+            //  genau die Zeit, die der eine wirkliche Schritt braucht (A1 im
+            //  Cloudflare-Dashboard). Deshalb bekommt dieser Kanal eine eigene
+            //  Triage – abgeleitet aus der Klassifikation der Wache selbst,
+            //  die BEFUND (gemessen und mangelhaft) von STOERUNG (nicht
+            //  gemessen) unterscheidet.
+            // ================================================================
+            const istSicherheitsWache = wfName === 'Sicherheits-Wache';
+            const headerGateFailed = istSicherheitsWache &&
+              failedStepNames.some(s => String(s).includes('Sicherheits-Header'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -401,6 +420,13 @@ jobs:
               : backupFrist ? 'backup-frist'
               : isBackup ? 'backup'
               : installFailed ? 'installation'
+              // WF-E813 (15.10.2026): Eigene Namen für die Sicherheits-Wache.
+              // Die Header-Wache trennt BEFUND von STOERUNG; wechselt die
+              // Klasse in einer offenen Meldung, muss der Rat neu geschrieben
+              // werden. Ohne eigenen Namen bliebe er stehen (Schaden aus
+              // WF-9E5A #761) – deshalb ist die Kette hier die einzige Quelle.
+              : headerGateFailed ? 'sicherheit-header'
+              : istSicherheitsWache ? 'sicherheit-wache'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -558,15 +584,28 @@ jobs:
                       '1. **Abhängigkeiten nicht installierbar.** Zum Installieren braucht der Lauf keinen API-Key – die Ursache liegt im Paketstand. Bei npm ist meist `package.json` oder `package-lock.json` defekt (z. B. ein Merge-Rest): `python3 scripts/manifest_guard.py` (oder `npm run manifest:check`) nennt Datei, Zeile und Ursache.',
                       '2. Bei pip: Paketname und Version im roten Schritt prüfen. Erst danach einen Registry- oder GitHub-Ausfall prüfen (https://www.githubstatus.com) und den Lauf neu starten.'
                     ]
-                  : [
-                    failedJobs.length > 0
-                      ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
-                      : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
-                    '2. Häufigste Ursachen:',
-                    '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
-                    '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
-                    '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)'
-                  ];
+                  : runbookKlasse === 'sicherheit-header'
+                    ? [
+                        '1. **Einordnung:** Diese Wache misst ausschließlich HTTP-Kopfzeilen der eigenen Seite. Sie braucht keinen Schlüssel und kein Modell – ein abgelaufener GROQ- oder GEMINI-Schlüssel kann diesen Schritt nicht auslösen.',
+                        '2. **Die Klasse steht im Log und in der Lauf-Zusammenfassung.** BEFUND = es wurde gemessen, und etwas fehlt. STOERUNG = es wurde nichts gemessen; das ist ausdrücklich keine Aussage über die Sicherheit, sondern eine ausgefallene Messung.',
+                        '3. **Bei BEFUND:** Steht in der Zusammenfassung „Proxy nicht aktiv" (kein `cf-ray`), kann die Header-Regel gar nicht wirken → `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 Schritt 1 (Wolke auf *Proxied*) und Schritt 2 (SSL-Modus `Full`), danach Schritt 3. Steht dort „Proxy aktiv", ist die Regel unvollständig → `cloudflare/edge-schutz.md`, Abschnitt A1 (Regel `FF Sicherheits-Header`, acht Kopfzeilen).',
+                        '4. **Bei STOERUNG:** Erreichbarkeit prüfen (`curl -sI https://franksfinanzcheck.de/`) und den Lauf neu starten. Kein Eingriff in Cloudflare nötig – ohne Messung ist keine Lücke belegt.'
+                      ]
+                    : runbookKlasse === 'sicherheit-wache'
+                      ? [
+                          '1. **Einordnung:** Die Sicherheits-Wache prüft das Repository gegen die Befunde F-01 bis F-10 (`SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`). Rot heißt: eine Wache hat angeschlagen – kein Schlüssel- und kein Kapazitätsthema.',
+                          '2. Öffne das Log des oben rot markierten Schritts. Jede Wache nennt Fundstelle und Regel, nicht nur „rot".',
+                          '3. Alle vier Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Worker-Betrieb, n8n-Kette – jeweils mit Selbsttest, offline).'
+                        ]
+                      : [
+                        failedJobs.length > 0
+                          ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
+                          : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
+                        '2. Häufigste Ursachen:',
+                        '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
+                        '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
+                        '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)'
+                      ];
             lines.push(
               '### Was du tun solltest',
               ...handlung,
