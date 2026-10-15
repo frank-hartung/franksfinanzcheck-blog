@@ -234,7 +234,7 @@ Setze eine realistische Antwortfrist und bleib sachlich. Ein Widerspruch ersetzt
 
 Prüfe nach dem Wechsel auch die Schlussrechnung. Ein sauberer neuer Vertrag heilt keinen falschen Endstand beim alten Anbieter.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Belege gehören ins Ablagefach, nicht in die Schublade: Ohne Nachweis holt keine Erstattung Geld zurück.
 
 ## Fazit: Auf Schreiben reagieren, nicht auf Schlagzeilen
 

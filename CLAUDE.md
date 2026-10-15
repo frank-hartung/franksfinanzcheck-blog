@@ -1641,6 +1641,46 @@ Bauart wie #583 (Faktenfrische) und #674 (Duplikate).
 - Tests: `python3 -m unittest scripts.tests.test_publish_gate_uniqueness`
   (16) · Bericht: `EINZIGARTIGKEIT-BESTAND-714-DAUERHEILUNG-PREMIUM-2026-10-12.md`.
 
+## Ein Heiler darf keinen Massensatz schreiben (Einzigartigkeit, seit #766, 15.10.2026)
+
+Am 15.10.2026 meldete das tägliche Einzigartigkeits-Audit **435 kritische
+live↔live-Paare** – C(30,2). Die Ursache war nicht die Redaktion, sondern der
+eigene Heiler: `redaktions_standard.fix_rs2_rs3_deterministic()` hatte 30
+Artikeln ohne Faustregel **denselben** eingefrorenen Satz eingesetzt. Ein Satz,
+der per Konstruktion überall passt, ist per Konstruktion überall derselbe – die
+Regel war richtig, ihre Umsetzung erzeugte den Befund, den die Wache meldete.
+
+- **Der Heiler wählt, er setzt nicht.** `FAUSTREGEL_POOL` (44 eigene Sätze,
+  ohne Zahlen und ohne Behauptungen, paarweise unter der Audit-Schwelle) und
+  `waehle_faustregel()`: Bestand (`faustregel_kontext()` – Belegung plus
+  7-Gramm-Index aus `check_uniqueness.clean_body`, DIESELBE Messung wie das
+  Audit), Schwelle, Themenbezug, stabiler Hash. Kein freier Satz → **nichts
+  schreiben** und den Grund melden (fail-loud statt Massensatz).
+  `faustregel_vorrat()` + `FAUSTREGEL_VORRAT_WARNUNG = 5` warnen, bevor der
+  Vorrat endet; `_kontext_aktualisieren()` hält die Messung im Lauf aktuell,
+  damit `--dry-run` und Echtlauf dasselbe planen.
+- **Ausgeliefertes wird nicht neu vergeben.** `FAUSTREGEL_LEGACY` ist
+  eingefroren und kommt nie zurück; `ersetze_generische_faustregel()` ersetzt
+  den Altbestand idempotent und toleriert nur Typografie (Wortfolge exakt,
+  Satzpunkt gehört ins Muster).
+- **Haus-Formeln sind Format, kein Inhalt – in EINER Messung.** Der
+  Haus-Formel-Strip sitzt in `template_boilerplate` (Quelle ist die SSOT
+  `duplikat_guard.HAUS_TEXT_QUELLEN`, gelesen über `ssot_konstante()` ohne
+  Produzenten-Import) und gilt damit für Audit, Publish-Gate und Scorecard
+  gleich.
+- **Die Ausnahme ist eng und wehrhaft.** Nur literale Sätze ab
+  `HAUS_FORMEL_MIN_LAENGE = 40` Zeichen; Platzhalter werden getrennt (Daten
+  bleiben gemessen); eingeschobene eigene Wörter heben die Ausnahme auf;
+  unlesbare Quelle = Werkzeugbefund (fail-closed), lesbare Kurzquelle =
+  Absicht, gar keine auswertbare Formel = blinde Ausnahme = Befund.
+- **Keine Allow-List für Redaktionsschablonen.** Ein geteilter Tabellenkopf
+  (Heizperiode ↔ DSL) wurde umformuliert, nicht freigestellt – eine Liste
+  hätte jeden künftigen Kopf blind gemacht.
+- Tests: `python3 -m unittest scripts.tests.test_redaktions_standard` (14) ·
+  Selbsttests `redaktions_standard.py` (44 Fälle) · `template_boilerplate.py`
+  (12) · `duplikat_guard.py` (14) · Bericht:
+  `EINZIGARTIGKEIT-BESTAND-766-DAUERHEILUNG-PREMIUM-2026-10-15.md`.
+
 ## Ein Befund ohne Heiler ist ein Dauerläufer (Pinterest P8, C37, seit #729, 13.10.2026)
 
 Der Pinterest-Watchdog öffnete am 13.10.2026 das Issue #729 mit genau einem

@@ -13,6 +13,8 @@
 #         „**Das Wichtigste in Kürze**“ mit ≥ 3 Bullets         [HART]
 #    RS2  Capital-erklärt-Stil: ≥ 2 Frage-Überschriften (H2 mit „?“) [HART]
 #    RS3  Capital-Faustregel: ≥ 1 markierte „Faustregel: …“     [HART]
+#         – seit #766 (15.10.2026) aus einem POOL gewählt und gegen den
+#         Bestand gemessen; ein Satz darf nie zum Massensatz werden
 #    RS4  ZEIT-/Dossier-Struktur: ≥ 1 nummerierte Schrittfolge
 #         (≥ 3 Schritte) ODER ≥ 2 „Schritt“-Überschriften       [HART]
 #    RS5  WiWo-Verifikation: harte Zahlen ohne Einordnung
@@ -29,8 +31,11 @@
 #    ... --new-only                                       # nur heute publizierte
 #    ... --gate --new-only                                # harte Funde → draft
 #                                                         #   (Circuit-Breaker >3)
-#    ... --fix                                            # deterministisch (RS7)
+#    ... --fix                                            # deterministisch (RS7
+#                                                         #   + RS3-EINZIGARTIG)
 #    ... --fix --ai [--backlog N] [--ai-budget N]         # KI-Heilung
+#    ... --fix --nur-faustregel                            # nur RS3-Einzig-
+#                                                         #   artigkeit (#766)
 #    ... --selftest                                       # Sabotage-Schutz
 #    ... --register-korrektur --file X.md --grund "…"     # RS8-Log-Eintrag
 #
@@ -52,6 +57,7 @@
 # ============================================================
 
 import datetime
+import hashlib
 import json
 import os
 import re
@@ -108,6 +114,9 @@ KORREKTUR_LOG = os.path.join(BLOG_DIR, "data", "korrekturen.yaml")
 DO_FIX = "--fix" in sys.argv
 DO_AI = "--ai" in sys.argv
 DO_GATE = "--gate" in sys.argv
+# Nur die Einzigartigkeits-Klasse heilen (Issue #766): RS7/RS2 bleiben dem
+# Tageslauf überlassen, wenn genau EINE Klasse repariert werden soll.
+NUR_FAUSTREGEL = "--nur-faustregel" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
 DRY_RUN = "--dry-run" in sys.argv
 INCLUDE_DRAFTS = "--include-drafts" in sys.argv
@@ -477,14 +486,491 @@ _QUESTION_STARTS = (
 )
 
 
-def fix_rs2_rs3_deterministic(body: str) -> tuple[str, list[str]]:
+# ===========================================================================
+#  RS3-EINZIGARTIGKEIT (Issue #766, 15.10.2026)
+#  ---------------------------------------------------------------
+#  BEFUND. Der deterministische RS3-Heiler unten schrieb EINEN Satz in jedes
+#  Artikel-Loch, dem die Pflicht-Faustregel fehlte:
+#
+#      „Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle
+#       Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor
+#       du dich vertraglich festlegst.“
+#
+#  Am 15.10.2026 trugen ihn 30 live auslieferbare Artikel. Ein Satz dieser
+#  Länge sind 21 Sieben-Wort-Phrasen – das Tagesaudit zählte daraus
+#  C(30,2) = 435 „kritische“ Paare bei 30 beteiligten Artikeln. Der Befund
+#  war kein Redaktionsfehler, sondern ein Heiler, der nur die REGEL kannte
+#  („es muss eine Faustregel geben“) und nicht die MESSUNG („und sie darf
+#  sich nicht gleichen“).
+#
+#  DAUERHEILUNG. Die Regel bleibt, der Satz wird zur WAHL:
+#    · `FAUSTREGEL_POOL` – eigenständige, themenbezogene Faustregeln
+#      (zahlfrei, damit RS5 sie nicht bewerten muss; ohne Anspruch auf
+#      Belege, weil sie keine Tatsachen behaupten).
+#    · `waehle_faustregel()` – wählt deterministisch (stabiler Hash je Slug,
+#      nie Zufall) UND misst dabei mit DERSELBEN Messregel wie das
+#      Einzigartigkeits-Audit (`check_uniqueness`: clean_body + 7-Gramme +
+#      KRITISCH_AB): keiner der beiden Sätze, die ein Lauf in zwei Artikel
+#      schreibt, darf den Bestand über die Schwelle heben. Findet der Wähler
+#      keinen freien Satz, wird NICHTS geschrieben und der Grund gemeldet –
+#      lieber eine offene Faustregel als ein neuer Massensatz (#714-Lehre:
+#      grüner Schreiber, roter Nachlauf ist die teuerste Bauart dieses Repos).
+#    · `ersetze_generische_faustregel()` – derselbe Heiler räumt den
+#      Altbestand auf: Er erkennt den eingefrorenen Satz wieder (tolerant
+#      gegen Typografie) und ersetzt ihn durch eine freie, themenpassende
+#      Faustregel. Idempotent: danach findet er nichts mehr.
+#
+#  Der alte Satz bleibt als Konstante erhalten – nicht als Vorlage, sondern
+#  als Suchmuster für den Heiler und als eingefrorener Selbsttest-Fall: Er
+#  darf NIE wieder als „neuer“ Satz vergeben werden.
+# ===========================================================================
+FAUSTREGEL_MARKER = "**Faustregel:**"
+
+FAUSTREGEL_LEGACY = (
+    "Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle "
+    "Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor "
+    "du dich vertraglich festlegst."
+)
+
+# (thema, satz, stichwörter) – Stichwörter steuern die Themenwahl, nicht die
+# Messung. Alle Sätze sind zahlfrei (RS5) und behaupten keine Tatsachen
+# (RS6); sie sind Rat, keine Quelle.
+FAUSTREGEL_POOL: tuple[tuple[str, str, tuple[str, ...]], ...] = (
+    ("laufzeit",
+     "Wer Laufzeit und Kündigungsfrist vor dem Abschluss kennt, zahlt "
+     "seltener für einen Vertrag, den er längst nicht mehr nutzt.",
+     ("vertrag", "laufzeit", "kuendigung", "kündigung", "tarif", "abonnement",
+      "abo", "verlängerung", "verlaengerung")),
+    ("gesamtpreis",
+     "Rechne jedes Angebot auf den Gesamtpreis um, bevor du unterschreibst; "
+     "der beworbene Startpreis sagt wenig über das zweite Jahr.",
+     ("wechselbonus", "rabatt", "cashback", "startpreis", "neukunde",
+      "geschenk", "aktion", "sonderangebot")),
+    ("vertragscheck",
+     "Prüfe deine Verträge einmal im Jahr auf denselben drei Zeilen: Preis, "
+     "Laufzeit, Kündigungsfrist.",
+     ("fixkosten", "haushaltsplan", "budget", "dauerauftrag", "lastschrift",
+      "abbuchung", "vertrag")),
+    ("verbrauch",
+     "Miss den Verbrauch, bevor du den Tarif wechselst; die größere Ersparnis "
+     "sitzt meist nicht im Preis, sondern im Verbrauch.",
+     ("strom", "gas", "verbrauch", "kwh", "tarif", "energie", "strompreis")),
+    ("zaehlerstand",
+     "Wer den Zählerstand regelmäßig notiert, erkennt teure Ausreißer, bevor "
+     "die Jahresabrechnung sie erklärt.",
+     ("zaehler", "zähler", "ablesen", "abrechnung", "nachzahlung",
+      "abschlag", "schaetzung", "schätzung")),
+    ("heizung",
+     "Senke die Heizkosten in dieser Reihenfolge: erst Verbrauch verstehen, "
+     "dann Tarif prüfen, erst zuletzt Technik kaufen.",
+     ("heizung", "heizkosten", "waerme", "wärme", "gasheizung", "heizkoerper",
+      "heizkörper", "warmwasser", "daemmung", "dämmung")),
+    ("deckung",
+     "Versicherungen gehören bei jedem Umzug auf den Tisch: Deckung, "
+     "Selbstbeteiligung, Ausschlüsse – in dieser Reihenfolge.",
+     ("versicherung", "haftpflicht", "kasko", "police", "beitrag",
+      "versicherungsschutz")),
+    ("kontofuehrung",
+     "Ein Konto ohne Bedingungen ist selten wirklich kostenlos; vergleiche "
+     "Gebühren, Verfügbarkeit und Zinsstaffel zusammen.",
+     ("konto", "girokonto", "karte", "gebuehr", "gebühr", "dispo", "bank",
+      "zinsen")),
+    ("fixkosten",
+     "Trag einmal im Monat alle Fixkosten in eine Liste ein; was du schwarz "
+     "auf weiß siehst, kannst du verhandeln.",
+     ("fixkosten", "haushalt", "monatskosten", "ausgaben", "budget",
+      "einnahmen")),
+    ("verzicht",
+     "Spare zuerst dort, wo du dich nicht einschränkst: Verträge, Gebühren "
+     "und Doppelkäufe kosten mehr als der tägliche Kaffee.",
+     ("sparen", "spartipp", "frugalismus", "verzicht", "geld sparen",
+      "alltag")),
+    ("leistung",
+     "Vergleiche nie den Preis allein, sondern den Preis für die Leistung, "
+     "die du tatsächlich nutzt.",
+     ("vergleich", "vergleichen", "anbieter", "test", "bewertung", "qualitaet",
+      "qualität")),
+    ("ruecklage",
+     "Eine Rücklage in Höhe weniger Monatsausgaben verhindert mehr Kosten als "
+     "jede Jagd nach der besten Rendite.",
+     ("notgroschen", "ruecklage", "rücklage", "geldanlage", "etf", "tagesgeld",
+      "sparplan")),
+    ("standby",
+     "Geräte, die dauerhaft Strom ziehen, gehören an eine schaltbare Leiste "
+     "oder ganz aus der Wohnung.",
+     ("standby", "stromfresser", "geraet", "gerät", "haushaltsgeraete",
+      "haushaltsgeräte", "kuehlschrank", "kühlschrank")),
+    ("reisekosten",
+     "Bei Reisekosten entscheiden die Nebenkosten öfter als der beworbene "
+     "Preis: Kaution, Umrechnung und Zusatzfahrer gehören in den Vergleich.",
+     ("urlaub", "reise", "mietwagen", "kaution", "ausland", "flug",
+      "hotel")),
+    ("abos",
+     "Kündige, was du nicht mehr nutzt, bevor du nach neuen Angeboten "
+     "suchst; der günstigste Tarif bleibt teuer, wenn er ungenutzt läuft.",
+     ("abo", "abos", "mitgliedschaft", "kuendigen", "kündigen", "newsletter",
+      "streaming", "unnoetig", "unnötig")),
+    # --- zweite Reihe (15.10.2026): Der Altbestand allein brauchte 30 Sätze.
+    # Ein Pool, der nur für den Anlass reicht, wäre der nächste Dauerläufer.
+    ("eigene-rechnung",
+     "Ein Tarifvergleich ohne die eigene Rechnung bleibt Bauchgefühl; leg "
+     "beide Zahlen nebeneinander, bevor du wechselst.",
+     ("strompreis", "tarif", "wechseln", "anbieter", "vergleich")),
+    ("vertragsende",
+     "Notiere das Vertragsende dort, wo du montags hinsiehst; verpasste "
+     "Fristen kosten mehr als jeder Preisunterschied.",
+     ("frist", "kuendigungsfrist", "kündigungsfrist", "vertragsende",
+      "verlaengerung", "verlängerung", "laufzeit")),
+    ("policen-check",
+     "Ein Beitrag steigt leiser als ein Tarif: Prüfe einmal im Jahr, ob deine "
+     "Police noch zu deinem Leben passt.",
+     ("versicherung", "beitrag", "police", "versicherungsbeitrag")),
+    ("bindung",
+     "Zinsen sind kein Geschenk, sondern der Preis für deine Bindung; "
+     "entscheide erst die Bindung, dann den Zins.",
+     ("zinsen", "tagesgeld", "festgeld", "anlage", "einlagen")),
+    ("raten",
+     "Vor jeder Ratenzahlung gehört der Gesamtbetrag auf den Tisch: Zins, "
+     "Gebühren und Laufzeit zusammen.",
+     ("kredit", "rate", "finanzierung", "dispo", "ratenzahlung")),
+    ("umzug",
+     "Ein Umzug ist der beste Moment für den Vertragscheck: Was du jetzt "
+     "nicht kündigst, zahlst du auch am neuen Ort.",
+     ("umzug", "wohnung", "miete", "mietvertrag")),
+    ("rechnung",
+     "Lies eine Rechnung einmal mit dem Taschenrechner; was du nachrechnest, "
+     "korrigiert der Anbieter schneller als du denkst.",
+     ("rechnung", "abrechnung", "nachzahlung", "abschlag")),
+    ("festes-budget",
+     "Jeder Euro ohne festen Platz wird im Monat ausgegeben; ein schriftliches "
+     "Budget macht den Rest sichtbar.",
+     ("budget", "haushalt", "ausgaben", "monatskosten", "planung")),
+    ("kaufpause",
+     "Zwischen Wunsch und Kauf gehört eine Nacht Bedenkzeit; wer wartet, "
+     "bestellt seltener doppelt.",
+     ("kauf", "anschaffung", "konsum", "bestellen", "shopping")),
+    ("kalender",
+     "Abos verlängern sich von selbst, deine Kündigung nicht: Der Kalender "
+     "ist die wirksamste Sparmaßnahme.",
+     ("abos", "abo", "streaming", "mitgliedschaft", "kalender")),
+    ("erst-messen",
+     "Erst messen, dann investieren: Jede Effizienz-Ausgabe ohne "
+     "Verbrauchsdaten zahlt sich später aus – oder nie.",
+     ("effizienz", "sanierung", "investition", "waermepumpe", "wärmepumpe",
+      "daemmung", "dämmung")),
+    ("sparziel",
+     "Ein Sparziel ohne Endbetrag bleibt ein Vorsatz; nenne Summe und Termin, "
+     "dann trägt der Plan sich selbst.",
+     ("sparziel", "sparen", "vorsatz", "ziel", "sparplan")),
+    ("leistung-zuerst",
+     "Vergleiche zuerst die Leistung, dann den Preis; ein fehlender Baustein "
+     "kostet später mehr als der Aufpreis heute.",
+     ("vergleich", "preisvergleich", "angebot", "leistung", "tarif")),
+    ("selbstbeteiligung",
+     "Eine Selbstbeteiligung senkt den Beitrag und erhöht dein Risiko; "
+     "entscheide nach dem Betrag, den du im Zweifel zahlen kannst.",
+     ("selbstbeteiligung", "beitrag", "risiko", "versicherung", "kasko")),
+    ("belege",
+     "Belege gehören ins Ablagefach, nicht in die Schublade: Ohne Nachweis "
+     "holt keine Erstattung Geld zurück.",
+     ("steuer", "beleg", "erstattung", "werbungskosten", "unterlagen")),
+    ("bindung-dauer",
+     "Eine lange Bindung will begründet sein; prüfe vorher, wie sich dein "
+     "Bedarf in dieser Zeit ändern kann.",
+     ("laufzeit", "bindung", "vertragslaufzeit", "verlaengerung",
+      "verlängerung")),
+    ("zahlungsart",
+     "Die Zahlungsart entscheidet mit: Gebühren, Umrechnung und "
+     "Abbuchungsrhythmus gehören in denselben Vergleich.",
+     ("zahlung", "kreditkarte", "abbuchung", "gebuehren", "gebühren",
+      "umrechnung")),
+    # --- dritte Reihe (15.10.2026): Vorrat statt Engpass. Wer nur so viele
+    # Sätze schreibt, wie der Anlass braucht, plant den nächsten Stillstand
+    # (der Heiler schreibt dann NICHTS – fail-closed). Der Selbsttest prüft
+    # die Paar-Distanz über ALLE Reihen.
+    ("monatsbetrag",
+     "Kleine Beträge summieren sich leiser als große: Der Monatsbetrag zeigt, "
+     "was ein Vertrag wirklich kostet.",
+     ("monatlich", "monatskosten", "kleinbetrag", "summe", "abo")),
+    ("eigene-aufstellung",
+     "Notiere eine Woche lang, was du ausgibst; erst die eigene Aufstellung "
+     "schlägt jeden Spartipp.",
+     ("ausgaben", "aufstellung", "haushaltsbuch", "spartipp", "alltag")),
+    ("garantie",
+     "Eine Garantie ist nur so viel wert wie ihre Laufzeit; prüfe, was nach "
+     "dem Ende der Zusage gilt.",
+     ("garantie", "preisgarantie", "zusage", "laufzeit", "gewaehrleistung",
+      "gewährleistung")),
+    ("wechseltermin",
+     "Beim Wechsel zählt der Termin: Wer die Frist verpasst, zahlt ein "
+     "weiteres Jahr zum alten Preis.",
+     ("wechsel", "termin", "frist", "verlaengerung", "verlängerung")),
+    ("toepfe",
+     "Plane den Monat in feste Töpfe; Geld ohne Topf verschwindet zuerst.",
+     ("budget", "planung", "haushaltsplan", "monat", "fixkosten")),
+    ("doppelt-bezahlt",
+     "Prüfe zuerst, was du doppelt bezahlst: Doppelte Ausgaben kosten mehr "
+     "als jeder erhöhte Preis.",
+     ("doppelt", "abos", "ausgaben", "pruefen", "prüfen", "vertraege",
+      "verträge")),
+    ("zahlungsziel",
+     "Zahlungsziel und Zinsen gehören zusammen; eine Karte ohne Gebühren kann "
+     "trotzdem teuer werden.",
+     ("kreditkarte", "zinsen", "zahlungsziel", "gebuehren", "gebühren")),
+    ("nachtverbrauch",
+     "Ein zweiter Zähler lohnt nur, wenn dein Verbrauch wirklich in die Nacht "
+     "wandert.",
+     ("nachtstrom", "zaehler", "zähler", "doppeltarif", "verbrauch")),
+    ("sicherung",
+     "Prüfe die Sicherung, bevor du die Rendite prüfst; ein Zinsvorteil wiegt "
+     "keine offene Frage auf.",
+     ("einlagensicherung", "sicherung", "rendite", "zinsvorteil", "bank")),
+    ("gleichmaessig",
+     "Wer jeden Monat denselben Betrag zurücklegt, muss im Zweifel nicht "
+     "entscheiden, was gerade wichtiger ist.",
+     ("vorsorge", "sparplan", "ruecklage", "rücklage", "monatlich")),
+    ("bedarf",
+     "Ein Anschluss folgt dem Haushalt, nicht dem Angebot: Prüfe erst den "
+     "Bedarf, dann den Tarif.",
+     ("anschluss", "bedarf", "tarif", "haushalt", "dsl", "internet")),
+    ("rechter-zeitpunkt",
+     "Der beste Zeitpunkt für den Heizungscheck ist der Sommer; im Winter "
+     "zahlst du die Eile mit.",
+     ("heizung", "heizungscheck", "winter", "sommer", "vorbereitung")),
+)
+
+
+def faustregel_saetze() -> list[str]:
+    """Alle Pool-Sätze – die Liste, gegen die der Bestand geprüft wird."""
+    return [satz for _thema, satz, _stichworte in FAUSTREGEL_POOL]
+
+
+def _norm_satz(text: str) -> str:
+    """Vergleichsform eines Satzes (Kleinschreibung, Umlaute gefaltet).
+
+    Absichtlich dieselbe Normalisierung wie `check_uniqueness.norm`: Ein Satz
+    gilt als „im Bestand vorhanden“, wenn das Audit ihn als denselben Text
+    messen würde.
+    """
+    text = (text or "").lower()
+    for a, b in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
+        text = text.replace(a, b)
+    return re.sub(r"[^a-z0-9]+", " ", text).strip()
+
+
+def _messung():
+    """Die Messregel des Tagesaudits – dieselbe Funktion, keine zweite Zählung.
+
+    Lazy importiert: `check_uniqueness` liest beim Import nur Konstanten, aber
+    ein Import auf Modulebene würde die Wache in jede Umgebung mitziehen, die
+    nur diesen Schreiber braucht.
+    """
+    import check_uniqueness as cu  # noqa: PLC0415 – eine Messregel, lazy
+    return cu
+
+
+def faustregel_index(texte: dict) -> tuple:
+    """Bestands-Messung für die Satz-Wahl. → (belegung, index)
+
+    belegung  Menge der Pool-Sätze, die im Bestand (irgendwo) schon stehen.
+    index     {slug: 7-Gramm-Menge des sauberen Artikeltexts} – die Gramme
+              kommen aus `check_uniqueness.clean_body`, damit der Schreiber
+              exakt das sieht, was das Audit später misst.
+    """
+    cu = _messung()
+    belegung, index = set(), {}
+    saetze = faustregel_saetze()
+    for slug, inhalt in (texte or {}).items():
+        normal = _norm_satz(inhalt)
+        for satz in saetze:
+            if _norm_satz(satz) in normal:
+                belegung.add(satz)
+        index[slug] = cu.ngrams(cu.clean_body(inhalt), cu.PHRASE_LEN)
+    return belegung, index
+
+
+def faustregel_kontext(texte: dict) -> dict:
+    """Alles, was eine einzigartige Satz-Wahl braucht (ein Objekt, ein Lauf).
+
+    `texte` sind die ROHEN Content-Dateien (`{slug: Inhalt}`). Der Kontext
+    hält die Bestandsbelegung, den Gramm-Index und die im Lauf schon
+    vergebenen Sätze – so kann ein Lauf mit 30 Heilungen nicht 30-mal
+    denselben „freien“ Satz vergeben.
+    """
+    belegung, index = faustregel_index(texte)
+    return {"belegung": belegung, "index": index, "vermeiden": set()}
+
+
+FAUSTREGEL_VORRAT_WARNUNG = 5
+
+
+def faustregel_vorrat(kontext: dict) -> int:
+    """Wie viele Pool-Sätze sind noch frei? (Frühwarnung mit Vorlauf)
+
+    Der Heiler ist die Notversorgung, nicht die Versorgung: Schreibt die
+    Redaktion/KI die Faustregel selbst, bleibt er still. Ist der Vorrat
+    trotzdem fast leer, muss das VOR dem Stillstand sichtbar sein – sonst
+    steht plötzlich ein Artikel ohne RS3, und niemand weiß, warum.
+    """
+    belegt = set((kontext or {}).get("belegung") or set())
+    belegt |= set((kontext or {}).get("vermeiden") or set())
+    return len([s for s in faustregel_saetze() if s not in belegt])
+
+
+def _kontext_aktualisieren(kontext: dict, slug: str, inhalt: str) -> None:
+    """Hält die Bestands-Messung WÄHREND des Laufs aktuell.
+
+    Ohne diesen Schritt plant ein `--dry-run` falsch: Er schreibt nichts, der
+    nächste Artikel sähe den alten Bestand – und der Lauf meldete „kein freier
+    Satz“, obwohl der Pool reicht. Mit dem Schritt ist der Dry-Run die ehrliche
+    Vorschau auf den echten Lauf (gleiche Reihenfolge, gleiche Messung).
+    """
+    if kontext is None:
+        return
+    cu = _messung()
+    kontext.setdefault("index", {})[slug] = cu.ngrams(cu.clean_body(inhalt),
+                                                      cu.PHRASE_LEN)
+    normal = _norm_satz(inhalt)
+    belegung = kontext.setdefault("belegung", set())
+    for satz in faustregel_saetze():
+        if _norm_satz(satz) in normal:
+            belegung.add(satz)
+
+
+def _bestand_texte(paths=None) -> dict:
+    """{slug: roher Inhalt} aller Content-Dateien – EINE Leseregel.
+
+    Gelesen wird die Datei, nicht der `load_article`-Zwischenstand: Der
+    Kontext soll den Bestand sehen, wie er auf der Platte steht (inklusive
+    Entwürfe – ein Satz in der Reserve ist kein freier Satz, er wird
+    spätestens am Publikationstag gemessen).
+    """
+    texte = {}
+    for path in (paths if paths is not None else list_post_paths()):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                texte[slug_of(path)] = fh.read()
+        except OSError:
+            continue
+    return texte
+
+
+def _themen_score(satz: str, stichworte, artikel_text: str) -> int:
+    """Wie gut passt die Faustregel zum Thema? (Stichwort-Treffer)"""
+    text = _norm_satz(artikel_text)
+    return sum(1 for w in stichworte if _norm_satz(w) and _norm_satz(w) in text)
+
+
+def waehle_faustregel(artikel_text: str, eigene_gramme: set, slug: str = "",
+                      kontext: dict = None) -> tuple:
+    """Wählt eine freie, themenpassende Faustregel. → (satz, grund)
+
+    Auswahl in dieser Reihenfolge (deterministisch, nie zufällig):
+      1. kein Satz des Pools steht schon im Bestand oder im laufenden Lauf,
+      2. der Satz schiebt KEIN Artikelpaar über die Audit-Schwelle
+         (KRITISCH_AB geteilte 7-Gramme – dieselbe Messung wie das Audit),
+      3. höchster Themenbezug (Stichwörter aus dem Artikeltext),
+      4. stabiler Hash über (Slug, Satz) als Gleichstand-Entscheidung.
+    Ohne freien Satz: (None, Grund) – der Aufrufer schreibt dann nichts.
+    """
+    cu = _messung()
+    kontext = kontext or {}
+    belegung = kontext.get("belegung") or set()
+    vermeiden = kontext.get("vermeiden") if kontext.get("vermeiden") is not None else set()
+    index = kontext.get("index") or {}
+    schwelle = cu.KRITISCH_AB
+
+    kandidaten = []
+    for thema, satz, stichworte in FAUSTREGEL_POOL:
+        if satz in belegung or satz in vermeiden:
+            continue
+        satz_gramme = cu.ngrams(satz, cu.PHRASE_LEN)
+        kollision = False
+        for fremd_slug, fremd_gramme in index.items():
+            if fremd_slug == slug:
+                continue
+            if len((eigene_gramme | satz_gramme) & fremd_gramme) >= schwelle:
+                kollision = True
+                break
+        if kollision:
+            continue
+        rang = (-_themen_score(satz, stichworte, artikel_text), thema)
+        streuung = hashlib.sha1(f"{slug}|{satz}".encode("utf-8")).hexdigest()
+        kandidaten.append((rang, streuung, satz))
+    if not kandidaten:
+        return None, ("kein freier Faustregel-Satz im Pool – alle Varianten "
+                      "stehen schon im Bestand oder würden eine kritische "
+                      "Überlappung erzeugen (redaktionelle Aufgabe)")
+    kandidaten.sort(key=lambda k: (k[0], k[1]))
+    satz = kandidaten[0][2]
+    vermeiden.add(satz)
+    return satz, f"{len(kandidaten)} freie Variante(n), Themenbezug gewählt"
+
+
+def _faustregel_kandidaten(text: str, slug: str, kontext: dict,
+                           basis_ohne_satz: str) -> tuple:
+    """Satz + Grund; berechnet die Gramme des Artikels ohne den Alt-Satz."""
+    cu = _messung()
+    eigene = cu.ngrams(cu.clean_body(basis_ohne_satz), cu.PHRASE_LEN)
+    return waehle_faustregel(f"{slug} {text}", eigene, slug=slug, kontext=kontext)
+
+
+def _legacy_muster() -> re.Pattern:
+    """Tolerantes Suchmuster für den eingefrorenen Heiler-Satz.
+
+    Zwischen den Wörtern darf beliebige Typografie stehen (Leerzeichen,
+    geschütztes Leerzeichen, Binde-/Gedankenstriche, Satzzeichen) – der
+    Altbestand ist gewachsen, das Muster soll ihn finden, nicht bestrafen.
+    Wortfolge und Wortbestand bleiben exakt: Ein Satz mit eingeschobenen
+    eigenen Wörtern ist NICHT der Heiler-Satz und wird nicht angefasst.
+    """
+    worte = re.findall(r"\w+", FAUSTREGEL_LEGACY, re.UNICODE)
+    # Der Schlusspunkt gehört zum Satz: Ohne ihn bliebe beim Ersetzen ein
+    # doppelter Punkt stehen („… dann den Tarif..“ – im ersten echten Lauf
+    # gesehen und hier eingefroren).
+    return re.compile(r"(?<!\w)" + r"[^\w\n]{0,4}".join(re.escape(w) for w in worte)
+                      + r"(?!\w)[.!]?")
+
+
+def ersetze_generische_faustregel(body: str, slug: str = "", titel: str = "",
+                                  kontext: dict = None) -> tuple:
+    """Ersetzt den eingefrorenen Heiler-Satz durch eine freie Faustregel.
+
+    Rückgabe: (neuer Body, Anzahl Ersetzungen, Meldung). Idempotent: Beim
+    zweiten Lauf findet das Muster nichts mehr. Findet der Wähler keine freie
+    Variante, bleibt der Text UNVERÄNDERT (keine Ersetzung durch einen neuen
+    Massensatz) und die Meldung nennt den Grund.
+    """
+    cur = body or ""
+    treffer = list(_legacy_muster().finditer(cur))
+    if not treffer:
+        return cur, 0, ""
+    ohne = _legacy_muster().sub(" ", cur)
+    satz, grund = _faustregel_kandidaten(titel, slug, kontext or {}, ohne)
+    if not satz:
+        return cur, 0, f"RS3-EINZIGARTIG: {grund}"
+    neu = _legacy_muster().sub(satz, cur)
+    return neu, len(treffer), (f"RS3-EINZIGARTIG: {len(treffer)} generische "
+                               f"Faustregel(n) ersetzt ({grund})")
+
+
+def fix_rs2_rs3_deterministic(body: str, slug: str = "", kontext: dict = None,
+                              titel: str = "", nur_rs3: bool = False) -> tuple:
     """Heilt fehlende RS2 (Frage-H2) und RS3 (Faustregel) deterministisch,
-    ohne Links, H2-Anzahl oder Zahlen-Aussagen zu verändern."""
+    ohne Links, H2-Anzahl oder Zahlen-Aussagen zu verändern.
+
+    Die Faustregel kommt seit #766 aus `FAUSTREGEL_POOL` und wird gegen den
+    Bestand gemessen (`kontext`); ohne Kontext (Einzelaufruf, Tests) wählt
+    der Wähler nach Thema und Hash – deterministisch, aber ungemessen. Im
+    Betrieb ruft `main()` immer mit Kontext.
+    """
     healed: list[str] = []
     cur = body or ""
 
     # RS2: mindestens 2 Frage-H2 mit '?'
     r2_ok, _ = detect_rs2(cur)
+    if nur_rs3:
+        r2_ok = True  # Klasse abgewählt (--nur-faustregel): RS2 bleibt liegen
     if not r2_ok:
         lines = cur.splitlines()
         q_count = sum(1 for ln in lines if ln.startswith("## ") and ln.rstrip().endswith("?"))
@@ -522,20 +1008,19 @@ def fix_rs2_rs3_deterministic(body: str) -> tuple[str, list[str]]:
     # RS3: mindestens 1 markierte Faustregel
     r3_ok, _ = detect_rs3(cur)
     if not r3_ok:
-        faustregel_absatz = (
-            "\n\n**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten "
-            "über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, "
-            "bevor du dich vertraglich festlegst.\n\n"
-        )
-        m_faq = re.search(r"^##\s+(?:Häufige Fragen|FAQ|Fazit)\b", cur, re.M | re.I)
-        if m_faq:
-            pos = m_faq.start()
-            candidate = cur[:pos].rstrip() + faustregel_absatz + cur[pos:]
-        else:
-            candidate = cur.rstrip() + faustregel_absatz
-        if detect_rs3(candidate)[0] and _links(cur) == _links(candidate):
-            cur = candidate
-            healed.append("RS3")
+        # #766: Der Satz wird GEWÄHLT (Pool + Bestandsmessung), nicht gesetzt.
+        satz, _grund = _faustregel_kandidaten(titel, slug, kontext or {}, cur)
+        if satz:
+            faustregel_absatz = f"\n\n{FAUSTREGEL_MARKER} {satz}\n\n"
+            m_faq = re.search(r"^##\s+(?:Häufige Fragen|FAQ|Fazit)\b", cur, re.M | re.I)
+            if m_faq:
+                pos = m_faq.start()
+                candidate = cur[:pos].rstrip() + faustregel_absatz + cur[pos:]
+            else:
+                candidate = cur.rstrip() + faustregel_absatz
+            if detect_rs3(candidate)[0] and _links(cur) == _links(candidate):
+                cur = candidate
+                healed.append("RS3")
 
     return cur, healed
 
@@ -968,6 +1453,90 @@ SELFTEST = [
         "## Typische Fehler beim Tarifwechsel\n\nMehr Text.\n\n"
         "## Häufige Fragen\n\n### Frage 1?\nAntwort."
     )), True),
+    # --- RS3-EINZIGARTIGKEIT (Issue #766, 15.10.2026) -----------------------
+    # 435 „kritische“ Paare entstanden aus EINEM Satz, den der Heiler in 30
+    # Artikel schrieb. Diese Fälle frieren die Dauerheilung ein: ein Pool
+    # statt eines Satzes, eine Messung statt einer Hoffnung – und der alte
+    # Satz bleibt auffindbar, aber unvergebbar.
+    ("Faustregel-Pool-ist-gross-genug", lambda: (
+        len(FAUSTREGEL_POOL) >= 12
+        and len({satz for _t, satz, _w in FAUSTREGEL_POOL}) == len(FAUSTREGEL_POOL)
+    ), True),
+    ("Faustregel-Pool-ist-zahlfrei", lambda: all(
+        not re.search(r"\d", satz) for satz in faustregel_saetze()), True),
+    ("Faustregel-Pool-paare-sind-keine-Dopplung", lambda: (
+        lambda cu, saetze: max(
+            (len(cu.ngrams(a, cu.PHRASE_LEN) & cu.ngrams(b, cu.PHRASE_LEN))
+             for i, a in enumerate(saetze) for b in saetze[i + 1:]), default=0
+        ) < 5
+    )(_messung(), faustregel_saetze()), True),
+    ("Faustregel-Legacy-ist-nicht-im-Pool", lambda: (
+        FAUSTREGEL_LEGACY not in faustregel_saetze()), True),
+    ("Faustregel-Wahl-ist-deterministisch", lambda: (
+        lambda a, b: a == b and a is not None
+    )(waehle_faustregel("Strom sparen im Haushalt", set(), slug="strom")[0],
+      waehle_faustregel("Strom sparen im Haushalt", set(), slug="strom")[0]), True),
+    # Der eigentliche Regressionstest: Ein Lauf über N Artikel darf N-mal
+    # NICHT denselben Satz vergeben – genau das war der #766-Befund. Der
+    # gemeinsame Kontext ist der Betriebsfall (ein Lauf, ein Vermeidungs-Set).
+    ("Faustregel-Lauf-vergibt-keinen-Satz-zweimal", lambda: (
+        lambda ktx, pool: (
+            lambda saetze: len(set(saetze)) == len(saetze) == len(pool)
+        )([waehle_faustregel(f"Thema {i} im Haushalt", set(),
+                             slug=f"artikel-{i}", kontext=ktx)[0]
+           for i in range(len(pool))])
+    )({"belegung": set(), "index": {}, "vermeiden": set()},
+      FAUSTREGEL_POOL), True),
+    # Der Wähler MUSS den Bestand mitmessen: Steht ein Satz schon (auch nur
+    # als Fast-Kopie mit ≥ 5 geteilten 7-Grammen), wird er nicht vergeben.
+    ("Faustregel-Wahl-meidet-Bestandstreffer", lambda: (
+        lambda cu, satz: all(
+            waehle_faustregel("Energie und Strom im Haushalt", set(),
+                              slug=f"neu-{i}",
+                              kontext={"belegung": set(),
+                                       "index": {"alt": cu.ngrams(satz, cu.PHRASE_LEN)},
+                                       "vermeiden": set()})[0] != satz
+            for i in range(3))
+    )(_messung(), FAUSTREGEL_POOL[3][1]), True),
+    ("Fix-Legacy-Faustregel-wird-ersetzt", lambda: (
+        lambda out: (FAUSTREGEL_LEGACY not in out[0]
+                     and out[1] == 1
+                     and ".." not in out[0]
+                     and detect_rs3(out[0])[0]
+                     and _links(out[0]) == _links(
+                         f"**Faustregel:** {FAUSTREGEL_LEGACY}"))
+    )(ersetze_generische_faustregel(
+        f"Text davor.\n\n**Faustregel:** {FAUSTREGEL_LEGACY}\n\n## Fazit\n\nEnde.",
+        slug="dsl-wechselbonus", titel="DSL-Wechselbonus sichern")), True),
+    ("Fix-Legacy-Faustregel-ist-idempotent", lambda: (
+        lambda einmal: ersetze_generische_faustregel(
+            einmal, slug="x", titel="y")[1] == 0
+    )(ersetze_generische_faustregel(
+        f"**Faustregel:** {FAUSTREGEL_LEGACY}\n\nRest.", slug="x",
+        titel="Strom sparen")[0]), True),
+    ("Fix-Legacy-erkennt-auch-Typografie-Varianten", lambda: (
+        lambda out: out[1] == 1
+    )(ersetze_generische_faustregel(
+        "**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten\u00a0"
+        "über die volle Laufzeit und vergleiche mindestens zwei aktuelle "
+        "Alternativen, bevor du dich vertraglich festlegst.",
+        slug="konto", titel="Konto")), True),
+    # Gegenprobe: Ein EIGENER Satz, der nur so ähnlich klingt, bleibt stehen –
+    # sonst wäre der Heiler ein Freibrief für fremde Formulierungen.
+    ("Fix-Legacy-laesst-aehnlichen-Satz-stehen", lambda: (
+        lambda out: out[1] == 0 and "eigenen Worten" in out[0]
+    )(ersetze_generische_faustregel(
+        "**Faustregel:** Prüfe mit eigenen Worten zuerst die Gesamtkosten "
+        "über die ganze Laufzeit und vergleiche mehrere Alternativen.",
+        slug="konto", titel="Konto")), True),
+    # Ohne freien Satz wird NICHTS geschrieben (fail-closed, kein neuer
+    # Massensatz) – der Grund wird gemeldet.
+    ("Faustregel-ohne-freien-Satz-schreibt-nichts", lambda: (
+        lambda out: out[0] == out[1] and out[0] is not None and len(out[0]) > 0
+    )((lambda ktx, body: (ersetze_generische_faustregel(
+        body, slug="a", titel="Energie", kontext=ktx)[0], body))(
+        {"belegung": set(faustregel_saetze()), "vermeiden": set()},
+        f"**Faustregel:** {FAUSTREGEL_LEGACY}")), True),
 ]
 
 
@@ -1014,11 +1583,23 @@ def main():
 
     # --- Deterministische Heilung (RS7 + RS2/RS3), immer bei --fix ----------
     if DO_FIX:
+        # RS3-EINZIGARTIGKEIT (#766): Der Kontext misst den Bestand EINMAL vor
+        # dem Lauf (Belegung der Pool-Sätze + 7-Gramm-Index je Artikel). Damit
+        # kann kein Heiler-Schritt einen Satz vergeben, den das Tagesaudit
+        # gleich wieder als Dopplung melden müsste – und ein Lauf mit 30
+        # Heilungen vergibt 30 verschiedene Sätze.
+        kontext = faustregel_kontext(_bestand_texte())
+        offen = []
+        vorrat = faustregel_vorrat(kontext)
+        if vorrat < FAUSTREGEL_VORRAT_WARNUNG:
+            print(f"  ⚠ Faustregel-Vorrat fast leer: {vorrat} freie Variante(n) "
+                  f"– Pool erweitern, sonst kann der Heiler nichts mehr setzen "
+                  f"(#766).")
         for a in posts:
             if _is_ymyl_sealed(a["path"]):
                 print(f"  ⏭ YMYL-Siegel aktiv – RS7 übersprungen: {a['slug']}")
                 continue
-            neu = fix_rs7(a["path"], a)
+            neu = None if NUR_FAUSTREGEL else fix_rs7(a["path"], a)
             if neu and not DRY_RUN:
                 with open(a["path"], "w", encoding="utf-8") as fh:
                     fh.write(neu)
@@ -1026,19 +1607,53 @@ def main():
                 history.append({"slug": a["slug"], "regel": "RS7",
                                 "aktion": "fix-deterministisch"})
                 a = load_article(a["path"]) or a
-            neu_body, rs_det = fix_rs2_rs3_deterministic(a["body"])
-            if rs_det and neu_body != a["body"]:
-                vertrag_err = _vertrag_gruende(a, neu_body)
-                if not vertrag_err and not DRY_RUN:
-                    content = open(a["path"], encoding="utf-8").read()
-                    parts = content.split("---", 2)
+            content = open(a["path"], encoding="utf-8").read()
+            parts = content.split("---", 2)
+
+            def _schreibe(neu_body_inhalt: str, meldung: str, regel: str):
+                """Schreibt EINE Heilung (oder plant sie im Dry-Run)."""
+                nonlocal a
+                vertrag_err = _vertrag_gruende(a, neu_body_inhalt)
+                if vertrag_err:
+                    offen.append(f"{a['slug']}: {meldung} – vom Publikations-"
+                                 f"Vertrag gestoppt ({vertrag_err[0]})")
+                    return
+                neu_content = join_article(parts[1], neu_body_inhalt, parts[0])
+                if not DRY_RUN:
                     with open(a["path"], "w", encoding="utf-8") as fh:
-                        fh.write(join_article(parts[1], neu_body, parts[0]))
-                    gehärtet.append(f"{a['slug']}: {', '.join(rs_det)} (deterministisch)")
-                    history.append({"slug": a["slug"], "regel": "+".join(rs_det),
+                        fh.write(neu_content)
+                    gehärtet.append(f"{a['slug']}: {meldung}")
+                    history.append({"slug": a["slug"], "regel": regel,
                                     "aktion": "fix-deterministisch"})
+                    a = load_article(a["path"]) or a
+                _kontext_aktualisieren(kontext, a["slug"], neu_content)
+
+            # RS3-EINZIGARTIGKEIT (#766): eingefrorenen Heiler-Satz ersetzen
+            neu_body, n_ersetzt, meldung = ersetze_generische_faustregel(
+                a["body"], slug=a["slug"], titel=a["title"], kontext=kontext)
+            if n_ersetzt and neu_body != a["body"]:
+                _schreibe(neu_body, meldung, "RS3-EINZIGARTIG")
+            elif meldung:
+                # Kein freier Satz im Pool: NICHTS wird geschrieben. Ein
+                # zweiter Massensatz wäre schlimmer als der erste (#766).
+                offen.append(f"{a['slug']}: {meldung}")
+            neu_body, rs_det = fix_rs2_rs3_deterministic(
+                a["body"], slug=a["slug"], kontext=kontext, titel=a["title"],
+                nur_rs3=NUR_FAUSTREGEL)
+            if rs_det and neu_body != a["body"]:
+                _schreibe(neu_body, f"{', '.join(rs_det)} (deterministisch)",
+                          "+".join(rs_det))
         if not DRY_RUN and gehärtet:
             print(f"✅ Deterministisch geheilt: {len(gehärtet)} Schritt(e)")
+        # Ein offener RS3-EINZIGARTIG-Befund ist kein Betriebsgeräusch: Ohne
+        # freien Satz bleibt ein generischer Satz im Bestand und das Audit
+        # meldet ihn weiter. Sichtbar machen – in der CI als Annotation,
+        # sonst als Logzeile (Muster: #607, unsichtbare Ausgänge).
+        for eintrag in offen:
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::warning::RS3-EINZIGARTIG: {eintrag.replace('%', '%25')[:220]}")
+            else:
+                print(f"  ⚠ RS3-EINZIGARTIG offen: {eintrag}")
         posts = [load_article(p) for p in raw_paths]
         posts = [p for p in posts if p]
         if NEW_ONLY and not SINGLE_FILE:

@@ -244,7 +244,7 @@ Nutze dafür eine kurze Abreise-Liste. Prüfe auch, ob Zeitschaltuhren oder auto
 
 Der Messwert zählt.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Erst messen, dann investieren: Jede Effizienz-Ausgabe ohne Verbrauchsdaten zahlt sich später aus – oder nie.
 
 ## Fazit: Nicht jedes Watt jagen
 

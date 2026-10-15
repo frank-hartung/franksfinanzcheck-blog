@@ -254,7 +254,7 @@ Diese kurze Prüfung sorgt dafür, dass der Wechselbonus auch wirklich in deinem
 
 > 💶 **Spar-Tipp zwischendurch:** Ein hoher Wechselbonus ist ein nettes Extra, aber ein dauerhaft niedriger Preis ist die Basis für echtes Sparen. Vergleiche jetzt die aktuellen Konditionen für Oktober 2026 und sichere dir das beste Gesamtpaket: [**DSL-Tarif prüfen & sparen**](/go/dsl/)
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Ein Anschluss folgt dem Haushalt, nicht dem Angebot: Prüfe erst den Bedarf, dann den Tarif.
 
 ## Fazit: Bonus mitnehmen ja – aber nur mit Taschenrechner im Kopf
 

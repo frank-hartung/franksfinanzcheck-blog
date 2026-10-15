@@ -214,6 +214,19 @@ def _ssot_wert(modul: str, attribut: str):
     return None, f"{modul}.{attribut} nicht gefunden"
 
 
+def ssot_konstante(modul: str, attribut: str):
+    """Öffentlicher Zugang zum SSOT-Leser (Rückgabe: (wert, lücke)).
+
+    Warum nicht `_ssot_wert` von außen aufrufen (Issue #766, 15.10.2026):
+    Seit dem Einzigartigkeits-Audit liest eine ZWEITE Mess-Schicht dieselben
+    Haus-Formeln (`template_boilerplate.strip_house_formulas` → Phrasen-Audit,
+    Publish-Gate, Release-Scorecard). Zwei Leser derselben Quelle driften
+    auseinander, zwei Quellen erstreiten sich. Deshalb gibt es genau EINEN
+    Leser – hier – und einen benannten Zugang für die andere Schicht.
+    """
+    return _ssot_wert(modul, attribut)
+
+
 def haus_template_luecken() -> list:
     """Deklarierte SSOT-Quellen, die nicht gelesen werden konnten.
 

@@ -219,7 +219,7 @@ Ein Gratis-Konto ist kein Paket für alles. Schutz auf Reisen oder ein Platz in 
 
 Wichtig ist nur eines: Überweisen, Bezahlen und Abheben müssen ohne Zusatzkosten laufen. Alles Weitere bekommst du anderswo oft billiger.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Die Zahlungsart entscheidet mit: Gebühren, Umrechnung und Abbuchungsrhythmus gehören in denselben Vergleich.
 
 ## Fazit: Kostenlos ist gut – wenn das Konto auch im Alltag kostenlos bleibt
 

@@ -180,6 +180,8 @@ Prüfe erstens, ob der Ausfall in der Rechnung als voller Monat erscheint. Prüf
 
 Diese drei Punkte dauern fünf Minuten und betreffen dein Geld. Sie sind auch der Grund, warum ein schriftlicher Verlauf so nützlich ist: Nach sechs Wochen erinnert sich niemand mehr an das Telefonat.
 
+**Faustregel:** Zinsen sind kein Geschenk, sondern der Preis für deine Bindung; entscheide erst die Bindung, dann den Zins.
+
 ## Häufige Fragen
 
 ### Muss ich eine Störung überhaupt melden?
