@@ -498,6 +498,53 @@ await run('WF-9E5A-Gegenprobe: „Voraussetzungen prüfen“ in fremdem Workflow
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7613',
              steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen'], null, ['Einrichtung unvollständig', 'ANLEITUNG-OFFSITE-BACKUP']);
+// 12. WF-E813 (15.10.2026): Die Sicherheits-Wache misst nur HTTP-Kopfzeilen.
+//     Der Standardrat „API-Key abgelaufen" trifft auf diesen Kanal NIE zu und
+//     nannte nicht den einzigen Schritt, der hilft (A1 im Dashboard). Die
+//     Meldung muss die Klasse erklären (BEFUND vs. STOERUNG) statt zu raten.
+await run('WF-E813-Reproduktion: F-01-Header-Wache rot -> Header-Triage, kein Schluessel-Rat',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure',
+             html_url: 'https://x/jobs/116390346576',
+             steps: [{ name: 'Sicherheits-Header auswerten (F-01) · Befund · Störung · grün', conclusion: 'failure' }] }] },
+  true, ['Sicherheits-Header auswerten', 'BEFUND = es wurde gemessen',
+         'cloudflare/edge-schutz.md', 'docs/SICHERHEIT-BETRIEB-RUNBOOK.md',
+         'FF Sicherheits-Header', '### Fehlgeschlagene Schritte'],
+  null, ['API-Key abgelaufen', 'Häufigste Ursachen']);
+// 13. Dieselbe Wache, anderer Prüfschritt (Inhalts-/Betriebs-/Automatik-Wache):
+//     auch hier ist ein Schlüssel-Rat irreführend – der Verweis geht auf die
+//     vier Wachen und ihre Selbsttests.
+await run('Sicherheits-Wache: anderer Prüfschritt rot -> Wachen-Runbook, kein Schluessel-Rat',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Quellseite (offline, mit Selbsttests)', conclusion: 'failure',
+             html_url: 'https://x/jobs/2',
+             steps: [{ name: 'Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)', conclusion: 'failure' }] }] },
+  true, ['F-01 bis F-10', 'npm run test:sicherheit'], null, ['API-Key abgelaufen']);
+// 14. Gegenprobe: Ein Workflow OHNE Wachen-Bezug behält das bisherige Runbook
+//     (die neue Triage darf nicht zum neuen Standardrat werden).
+await run('Gegenprobe: Layout-AI rot -> bisheriges Runbook bleibt stehen',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/3',
+             steps: [{ name: 'Layout-Prüfung', conclusion: 'failure' }] }] },
+  true, ['Häufigste Ursachen', 'API-Key abgelaufen'], null, ['FF Sicherheits-Header']);
+
+// WF-E813 x WF-9E5A (15.10.2026): Der Nachfuehr-Mechanismus aus #761 muss auch
+//     fuer die Sicherheits-Wache greifen. Wechselt die Klasse des Rats in einer
+//     offenen Meldung (hier: allgemein -> sicherheit-header), wird sie neu
+//     geschrieben. Ohne eigenen Klassennamen bliebe „API-Key abgelaufen" in
+//     #767 stehen, obwohl die Wache laengst BEFUND von STOERUNG trennt.
+await run('WF-E813: offene Meldung bekommt beim Klassenwechsel den neuen Rat',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7670,
+    jobs: [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure',
+             html_url: 'https://x/jobs/116390346576',
+             steps: [{ name: 'Sicherheits-Header auswerten (F-01) · Befund · Störung · grün', conclusion: 'failure' }] }],
+    openIssues: [{ number: 767, title: IDENTITIES['Sicherheits-Wache'].titel,
+                   body: IDENTITIES['Sicherheits-Wache'].marker + '\nDetails', created_at: '2026-10-15T11:11:40Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 767,
+    imBody: ['<!-- alert-runbook: sicherheit-header -->', 'FF Sicherheits-Header',
+             'docs/SICHERHEIT-BETRIEB-RUNBOOK.md', 'Sicherheits-Header auswerten'],
+    nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen'] });
 
 // 12. KANAL-HYGIENE (Sicherheitsaudit 15.10.2026, F-09): Der Workflow-Name
 //    stammt aus dem Webhook. Er darf den Body nicht steuern – kein Markdown,

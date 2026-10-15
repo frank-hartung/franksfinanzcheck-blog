@@ -45,6 +45,12 @@ __pycache__/
 .zeit_rechtschreibung_report.json
 ops-report.json
 
+# Lauf-Artefakte der F-01-Live-Messung (Sicherheits-Wache, WF-E813):
+# entstehen im Workflow-Runner bzw. bei `npm run header:check:live:json`,
+# gehören nicht in die Versionsverwaltung.
+f01-live.md
+f01-live.json
+
 # Auto-generierte Reports (Profi-Cleanup 31.08.2026 – halten Root sauber)
 # Workflows schreiben diese bei Bedarf neu, sie müssen nicht versioniert werden
 # Nur im Root ignorieren, docs/ enthält strategische Dokumente

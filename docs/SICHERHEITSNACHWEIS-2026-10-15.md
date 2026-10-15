@@ -42,12 +42,14 @@ scripts/newsletter_digest.py --selftest     62 Fälle grün       (vorher 54)
 scripts/newsletter_zustellbarkeit.py --selftest  49 Fälle grün  (unverändert)
 scripts/robustheits_gate.py --selftest      14 Sabotage-Proben erkannt
 scripts/content_html_wache.py --selftest    13 Fälle grün
-scripts/blog_header_gate.py --selftest      10 Fälle grün
+scripts/blog_header_gate.py --selftest      19 Fälle grün      (vorher 10)
 scripts/worker_betrieb_wache.py --selftest  10 Fälle grün
 scripts/n8n_schutz_wache.py --selftest       9 Fälle grün
 scripts/n8n_bridge.py --selftest            5 Gegenproben (401/403/415/413/503)
 scripts/alert_issue_identity.py --selftest  10 Fallgruppen, 59 Workflows
-scripts/tests (unittest), test_alert_scoping 20 Tests, 20 grün
+scripts/tests (unittest), test_alert_scoping 22 Tests, 22 grün
+scripts/tests (unittest), test_blog_header_gate 24 Tests, 24 grün (neu, WF-E813)
+scripts/tests/sim/alert_scoping_sim.mjs     38 Szenarien, 38 grün (vorher 28)
 ```
 
 Jeder Selbsttest baut **Gegenproben**: Er sabotiert die Regel und prüft, dass
