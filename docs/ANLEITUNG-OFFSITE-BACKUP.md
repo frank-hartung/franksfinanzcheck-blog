@@ -309,7 +309,9 @@ Voraussetzungen fehlten. Dass er rot war, ist richtig – ein Grün ohne
 Sicherung wäre ein Schein-Grün. Behoben wurden die Umstände:
 
 - **Rat:** Die Meldung riet zu „API-Key (GROQ/GEMINI)“ und „neu starten“.
-  Jetzt nennt sie die Einrichtung und diese Anleitung.
+  Jetzt nennt sie die Einrichtung und verlinkt diese Anleitung. Ändert sich
+  die Einordnung, führt der nächste rote Lauf eine offene Meldung nach – auch
+  #761 selbst.
 - **Prüfung:** Die alte Prüfung sah nur, *ob* ein Wert gesetzt ist. Jetzt
   prüft sie, ob er wirkt (E1–E8).
 - **Verweis:** „siehe Umsetzungs-Runbook“ zeigte auf keine Datei. Jetzt

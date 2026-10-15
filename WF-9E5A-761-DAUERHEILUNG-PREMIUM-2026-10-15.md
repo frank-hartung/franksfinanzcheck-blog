@@ -52,6 +52,10 @@ Jede neue Anmeldung erzeugt aber einen Einwilligungsnachweis nach Art. 7 Abs. 1 
    liegen seit dem 20.09. keine Sicherungen mehr), konnte nicht entschlüsseln und ließ die
    KV-Daten ganz aus.
 8. **Veraltete Doku.** `INFRASTRUKTUR.md` und `ops_report.py` beschrieben noch einen S3-Plan.
+9. **Der falsche Rat wäre stehen geblieben.** Das Alerting fasste eine offene Meldung nie wieder
+   an (Dedupe → `return`). #761 hätte deshalb auch nach der Korrektur weiter zu GROQ/GEMINI
+   geraten und auf den Lauf von 07:53 verlinkt, der noch keine Checkliste hat – bis zum ersten
+   grünen Lauf. Dieselbe Lücke betraf jeden Vorgang, dessen Einordnung sich ändert.
 
 ## 2. Dauerhafte Korrektur
 
@@ -60,7 +64,8 @@ Jede neue Anmeldung erzeugt aber einen Einwilligungsnachweis nach Art. 7 Abs. 1 
 | `scripts/backup_einrichtung.py` (neu) | Prüft E1–E8 live: Ziel ≠ Quelle, Ziel **privat** und nicht archiviert, GitHub-Token gültig samt Ablaufdatum, Passphrase-Länge, Konto-ID, Cloudflare-Token aktiv (Nutzer- oder Konto-Token) samt Ablauf, Namespace mit **genau diesem** Token lesbar (Titel zur Kontrolle), D1 optional, Environment nur für `main` (Hinweis). 3 Versuche bei Netz-/5xx-Fehlern. | Jeder offene Punkt erscheint als Annotation **und** als Checkliste mit vorbelegtem Link in der Job-Zusammenfassung. Fail-closed bleibt (Exit 1). |
 | Fristen | Ablaufdaten wandern als `BACKUP_FRIST_TAGE` in die Job-Umgebung; neuer letzter Schritt „Fristwarnung“ (`--fristen`) | Unter 30 Tagen: Hinweis. Unter 14 Tagen: Schritt rot und das Alerting meldet sich – **nach** der Sicherung, nicht statt ihr. |
 | `backup-offsite.yml` | Die Inline-Prüfung wird durch den Prüfer ersetzt (Schrittname bleibt). Selbsttest im Job. Repo-Job mit `environment: backup`. KV-Ablage prüft Entwurf + Größe und räumt Teil-Releases ab. Ehrliche Fehlertexte (API-Antwort statt „UNBEKANNT“). Lesendes `actions: read` für E8. | Keine Schein-Grün-Lücke, keine halben Sicherungen in der Aufbewahrung, keine stille Environment-Falle. |
-| `alert-on-failure.yml` | Drei Klassen, gebunden an `wfName === 'Offsite-Backup'`: **Einrichtung unvollständig** (Neustart hilft nicht → Checkliste + Anleitung), **Fristwarnung** (Sicherung gelaufen, Zugang erneuern), übrige Backup-Fehler (Status-Seiten, Fehlerbilder) | Kein GROQ/GEMINI-Rat mehr für Backup-Fehler. Gleichnamige Schritte in anderen Workflows behalten ihr Runbook (Gegenprobe in der Simulation). |
+| `alert-on-failure.yml` | Drei Klassen, gebunden an `wfName === 'Offsite-Backup'`: **Einrichtung unvollständig** (Neustart hilft nicht → Checkliste + Anleitung), **Fristwarnung** (Sicherung gelaufen, Zugang erneuern), übrige Backup-Fehler (Status-Seiten, Fehlerbilder). Anleitung und Läufe sind verlinkt statt nur benannt. | Kein GROQ/GEMINI-Rat mehr für Backup-Fehler. Gleichnamige Schritte in anderen Workflows behalten ihr Runbook (Gegenprobe in der Simulation). |
+| `alert-on-failure.yml` – Lagebild nachführen | Jeder Body trägt die Klasse seines Rats (`<!-- alert-runbook: … -->`), eine Quelle für Marker **und** Runbook-Wahl. Ändert sich die Klasse, schreibt der nächste rote Lauf die offene Meldung neu: gleiche Nummer und Titel, aktueller Lauf, „Offen seit“, keine Benachrichtigung. Gleiche Klasse → keine Umschrift. Unbekannte Job-Lage → keine Umschrift. API-Fehler → fail-open. | #761 bekommt beim ersten roten Lauf nach dem Merge den Einrichtungs-Rat und den Link auf die Läufe mit Checkliste – ohne Handkommentar. Gilt für jeden Vorgang; offene Meldungen ohne Klassen-Marker (#761, #767) werden einmal nachgeführt. |
 | `docs/ANLEITUNG-OFFSITE-BACKUP.md` (neu) | Einrichtung in 7 Schritten mit vorbelegten Links, Prüfpunkt-Tabelle, Fehlerbilder, „Zugänge erneuern“, Probe und Notfall-Wiederherstellung | Ersetzt den toten Verweis. Die Links sind wörtlich dieselben wie im Prüfer (per Test erzwungen). |
 | `scripts/restore_drill.sh` | Holt die neuesten Entwürfe aus dem privaten Repo, entschlüsselt in ein 0700-Temp-Verzeichnis, beweist KV (`kv_backup.py --pruefen`) und Git (Clone + Struktur), warnt ab 48 h Alter. Läuft auch unter macOS. | Wiederherstellung wird beweisbar statt angenommen. |
 | `scripts/kv_backup.py` (nur Kopfkommentar) | Rückspielen mit `--remote`, mit Begründung | Die Notfall-Wiederherstellung schreibt wirklich nach Cloudflare. |
@@ -105,7 +110,8 @@ stehen in [`docs/ANLEITUNG-OFFSITE-BACKUP.md`](docs/ANLEITUNG-OFFSITE-BACKUP.md)
 | `backup_einrichtung.py --selftest` | 16 Fallgruppen grün (u. a. öffentliches Ziel, 401/404, Fristen, Konto-Token, KV-/D1-Rechte, Netzausfall + Wiederholung, vergiftete Secret-Werte, Kodierung) |
 | Mutationsproben am Prüfer | 4 von 4 eingebauten Fehlern erkannt (öffentliches Ziel, Secret in der Ausgabe, Wiederholung entfernt, Fristgrenze) |
 | `npm run test:backup` (`test_backup_einrichtung`) | 24 Tests grün; 6 Mutationsproben an Workflow, Anleitung, Namen und Transport erkannt |
-| Alarm-Simulation (`alert_scoping_sim.mjs`) | **28/28** Szenarien grün, davon 4 neu: #761-Nachstellung, Fristwarnung, Export-Fehler, Gegenprobe fremder Workflow |
+| Alarm-Simulation (`alert_scoping_sim.mjs`) | **34/34** Szenarien grün, davon 10 neu: #761-Nachstellung, Fristwarnung, Export-Fehler, Gegenprobe fremder Workflow; Nachführung des echten #761-Bodys, Idempotenz, Klassenwechsel, Job-API-Ausfall, API-Fehler beim Nachführen, Bestand eines fremden Workflows. Jede Klasse wird beim Anlegen auf ihren Marker geprüft; Abstürze zählen als benannter Fehler. |
+| Mutationsproben am Alarm-Skript | 8 von 8 erkannt (Nachführung fehlt, Job-Lage-Wächter fehlt, kein catch, tägliche Umschrift, Klassen vertauscht, Marker fehlt, falsche Zeitquelle, Duplikat trotz Nachführung); am Struktur-Test 7 von 7 |
 | `restore_drill.sh` mit echten Artefakten (gleiche openssl-Parameter wie der Workflow) | 6/6 Fälle korrekt: Bestanden · falsche Passphrase · verwaister Token · altes Aufrufformat · kein Ziel · kein Terminal; keine Klartext-Reste |
 | `selftest_ki.py --trap-workflows` | 123 Selbsttests ohne Netz grün (der neue wird erkannt) |
 | `selftest_clock.py` (Uhr +97 / −400 / +3650 Tage) | Selbsttest und Testmodul deterministisch grün |
@@ -130,3 +136,7 @@ Der Vorschlag nennt **`Refs #761`**, nicht `Closes #761`. Schlösse der Merge di
 dort „behoben“, während die Sicherung bis zur Einrichtung weiter rot wäre – ein Schein-Grün auf
 Vorgangsebene. Nachweis ist der erste grüne Lauf von „Offsite-Backup“; ihn erkennt der Job
 `resolve` in `alert-on-failure.yml` und schließt #761 dann selbst.
+
+Bis dahin hält sich #761 selbst aktuell: Der erste rote Lauf nach dem Merge ersetzt den
+GROQ/GEMINI-Rat durch den Einrichtungs-Rat und verlinkt die Läufe mit der Checkliste. Es entsteht
+keine neue Nummer und kein Kommentar.

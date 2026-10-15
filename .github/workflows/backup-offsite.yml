@@ -284,7 +284,7 @@ jobs:
           set -euo pipefail
           KEEP=14
           if [ -z "${ZIEL_REPO:-}" ]; then
-            echo "Kein dauerhaftes Ziel – Retention übernimmt GitHub (Artefakte, 90 Tage)."
+            echo "Kein dauerhaftes Ziel – nichts aufzuräumen (die Kurzzeit-Kopie löscht GitHub nach 7 Tagen selbst)."
             exit 0
           fi
           TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"

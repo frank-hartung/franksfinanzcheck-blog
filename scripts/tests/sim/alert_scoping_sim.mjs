@@ -10,7 +10,8 @@
 // Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall),
 // der #632-Frühabbruch-Diagnose für Phase 0.5 und der #602-#608-Fachkanal-
 // Regel für Tagesdefizite (ein Zustandskanal,
-// der auch an Ruhetagen belegt wird – sonst meldet das Alerting generisch).
+// der auch an Ruhetagen belegt wird – sonst meldet das Alerting generisch)
+// und der Nachführung offener Meldungen bei geändertem Rat (WF-9E5A / #761).
 //
 // Aufruf:  node scripts/tests/sim/alert_scoping_sim.mjs <pfad-zum-rohskript.js>
 // Exit 0 = alle Szenarien korrekt, Exit 1 = mindestens ein Szenario falsch.
@@ -44,7 +45,7 @@ if (!scriptPath) {
 }
 const raw = fs.readFileSync(scriptPath, 'utf8');
 
-function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId = 42, attempt = 1, jobs = null, jobsFail = false, openIssues = [] }) {
+function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId = 42, attempt = 1, jobs = null, jobsFail = false, updateFail = false, openIssues = [] }) {
   const created = [];
   const updated = [];
   const github = {
@@ -62,7 +63,8 @@ function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId 
         listForRepo: 'LIST_ISSUES',
         createLabel: async () => { throw new Error('Label existiert bereits'); },
         create: async (o) => { created.push(o); },
-        update: async (o) => { updated.push(o); },
+        // updateFail: Die Issue-API lehnt das Schreiben ab (Rechte, Ausfall).
+        update: async (o) => { if (updateFail) throw new Error('API down (update)'); updated.push(o); },
       },
     },
   };
@@ -103,8 +105,13 @@ async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = nu
   // genau das wird hier nachgebildet (return auf oberster Ebene ist dort legal).
   const fn = new Function('github', 'context', 'console', 'require', 'process',
     'return (async () => {' + raw + '\n})()');
+  // Ein Absturz des Skripts stellt in der Produktion das Alerting selbst rot –
+  // er wird deshalb als benannter Grund gezählt statt die Simulation abzubrechen.
+  let absturz = null;
   try {
     await fn(github, context, { log: (m) => logs.push(String(m)) }, requireShim, process);
+  } catch (e) {
+    absturz = e;
   } finally {
     if (previousIdentityFile === undefined) delete process.env.ALARM_IDENTITAET;
     else process.env.ALARM_IDENTITAET = previousIdentityFile;
@@ -119,6 +126,10 @@ async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = nu
   const gruende = [];
   let ok = got === expectIssue;
   if (!ok) gruende.push(expectIssue ? 'kein Issue erstellt' : 'Issue erstellt, aber keiner erwartet');
+  if (absturz) {
+    ok = false;
+    gruende.push('Skript abgestürzt: ' + absturz.message);
+  }
   if (ok && expectIssue) {
     // Markenfläche: der Titel nennt weder Workflow noch „fehlgeschlagen“;
     // die Identität steckt unsichtbar als Marker im Body.
@@ -144,6 +155,16 @@ async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = nu
            updated[0].title === identity.titel &&
            String(updated[0].body).includes(identity.marker);
       if (!ok) gruende.push('Update-Ziel/Titel/Marker stimmt nicht: ' + JSON.stringify(updated).slice(0, 200));
+      // Nachgeführte Meldungen (WF-9E5A / #761): Der neue Body wird genauso
+      // streng geprüft wie ein neu angelegter – Rat, Lauf, keine Altlasten.
+      const neuBody = String(updated[0].body);
+      for (const needle of expectUpdates.imBody || []) {
+        if (!neuBody.includes(needle)) gruende.push('Update: erwartete Nadel fehlt: ' + JSON.stringify(needle));
+      }
+      for (const needle of expectUpdates.nichtImBody || []) {
+        if (neuBody.includes(needle)) gruende.push('Update: verbotene Nadel im Body: ' + JSON.stringify(needle));
+      }
+      ok = ok && gruende.length === 0;
     }
   }
   console.log((ok ? '✅' : '❌') + ' ' + name + (got ? ' → Issue' : ' → kein Issue') +
@@ -176,7 +197,9 @@ await run('schedule-Lauf main rot → Alarm + Schritt-Diagnose',
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/9',
              steps: [{ name: 'Website bauen', conclusion: 'success' },
                      { name: 'Browser-Audit', conclusion: 'failure' }] }] },
-  true, ['### Fehlgeschlagene Schritte', 'Browser-Audit', 'https://x/jobs/9', '**Event:** `schedule`', 'Layout-AI']);
+  true, ['### Fehlgeschlagene Schritte', 'Browser-Audit', 'https://x/jobs/9', '**Event:** `schedule`', 'Layout-AI',
+         '<!-- alert-runbook: allgemein -->'],
+  null, ['Offen seit']);
 // 5. WF-A535 #632: Frühabbruch in Phase 0.5 darf nicht mit dem generischen
 //    API-Key-/GitHub-Runbook oder dem irreführenden Tagesdefizit-Label enden.
 await run('#632-Reproduktion: Phase 0.5 + Schlussklassifikation → präzises Runbook',
@@ -188,7 +211,8 @@ await run('#632-Reproduktion: Phase 0.5 + Schlussklassifikation → präzises Ru
              ] }] },
   true,
   ['Vorgang **WF-A535**', 'Frühabbruch vor der Endabnahme', 'Phase 0.5',
-   'Selbsttest-Exit 2', 'python3 scripts/selftest_ki.py --trap <skript>'],
+   'Selbsttest-Exit 2', 'python3 scripts/selftest_ki.py --trap <skript>',
+   '<!-- alert-runbook: engine-fruehabbruch -->'],
   null,
   ['Häufigste Ursachen', 'API-Key abgelaufen', 'GitHub-Ausfall', 'Transienter Fehler']);
 
@@ -199,7 +223,8 @@ await run('Content-Engine-Schluss-Classifier → Klassen-Runbook ohne Key-Raten'
     jobs: [{ name: 'engine', conclusion: 'failure', html_url: 'https://x/jobs/633',
              steps: [{ name: 'Do not report a quota deficit as success', conclusion: 'failure' }] }] },
   true,
-  ['Abschluss-Classifier', 'FRÜHABBRUCH', 'TAGESDEFIZIT', 'RELEASE-CRASH', 'SYNCHRONVERLUST'],
+  ['Abschluss-Classifier', 'FRÜHABBRUCH', 'TAGESDEFIZIT', 'RELEASE-CRASH', 'SYNCHRONVERLUST',
+   '<!-- alert-runbook: engine-schlussklassifikation -->'],
   null,
   ['Häufigste Ursachen', 'API-Key abgelaufen', 'GitHub-Ausfall', 'Transienter Fehler',
    'selftest_ki.py --trap']);
@@ -245,11 +270,12 @@ await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
   true, ['Häufigste Ursachen']);
 
 // 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
-//     und auch keine überflüssige Umbenennung.
+//     und auch keine überflüssige Umschrift – die Meldung trägt bereits den
+//     Rat dieses Laufs (Klassen-Marker seit WF-9E5A / #761).
 await run('Dedupe: offene Meldung mit Marker → kein Duplikat, keine Umschrift',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
     openIssues: [{ number: 100, title: IDENTITIES['Layout-AI'].titel,
-                   body: IDENTITIES['Layout-AI'].marker + '\nDetails' }] },
+                   body: IDENTITIES['Layout-AI'].marker + '\n<!-- alert-runbook: allgemein -->\nDetails' }] },
   false, [], { anzahl: 0 });
 // 14. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
 //     (die Dedupe-Vergiftung aus #218/#343 in neuer Gestalt).
@@ -330,7 +356,8 @@ await run('#654-Reproduktion: npm ci rot auf main → Manifest-Diagnose, kein AP
     jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure',
              html_url: 'https://x/jobs/113296822355',
              steps: [{ name: 'Abhängigkeiten installieren', conclusion: 'failure' }] }] },
-  true, ['Abhängigkeiten nicht installierbar', 'manifest_guard.py', '### Fehlgeschlagene Schritte'],
+  true, ['Abhängigkeiten nicht installierbar', 'manifest_guard.py', '### Fehlgeschlagene Schritte',
+         '<!-- alert-runbook: installation -->'],
   null, ['API-Key abgelaufen']);
 // 10. Deploy: die Manifest-Wache rot → dieselbe Diagnose (Produktionspfad).
 await run('Deploy: Manifest-Schutz rot → Manifest-Diagnose',
@@ -360,23 +387,111 @@ await run('#761-Reproduktion: KV-Backup ohne Einrichtung → Einrichtungs-Runboo
                 { name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
   true,
   ['Vorgang **WF-9E5A**', 'Einrichtung unvollständig – ein Neustart hilft nicht', 'E1–E8',
-   'docs/ANLEITUNG-OFFSITE-BACKUP.md', 'schließt diese Meldung automatisch', 'https://x/jobs/116311519313'],
+   'docs/ANLEITUNG-OFFSITE-BACKUP.md', 'schließt diese Meldung automatisch', 'https://x/jobs/116311519313',
+   '<!-- alert-runbook: backup-einrichtung -->',
+   // Links statt Pfadangaben: jüngster Lauf (aktuelle Checkliste) und Anleitung.
+   '(https://github.com/frank-hartung/franksfinanzcheck-blog/actions/workflows/backup-offsite.yml)',
+   '(https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/docs/ANLEITUNG-OFFSITE-BACKUP.md)'],
   null,
-  ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'Transienter Fehler']);
+  ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'Transienter Fehler', 'Offen seit']);
 // Fristwarnung: Sicherung gelaufen, nur ein Zugang läuft bald ab.
 await run('WF-9E5A: Fristwarnung rot → „Sicherung ist gelaufen“, Zugang erneuern',
   { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7611',
              steps: [{ name: 'Fristwarnung – Zugänge rechtzeitig erneuern', conclusion: 'failure' }] }] },
-  true, ['Die Sicherung ist gelaufen', 'Zugänge erneuern', 'Environment `backup`'],
+  true, ['Die Sicherung ist gelaufen', 'Zugänge erneuern', 'Environment `backup`',
+         '<!-- alert-runbook: backup-frist -->'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Einrichtung unvollständig']);
 // Andere Backup-Schritte: eigenes Runbook ohne GROQ/GEMINI-Rat.
 await run('WF-9E5A: Export rot → Backup-Runbook ohne GROQ/GEMINI-Rat',
   { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7612',
              steps: [{ name: 'Exportieren, verschlüsseln, Rückweg prüfen', conclusion: 'failure' }] }] },
-  true, ['Exportieren, verschlüsseln, Rückweg prüfen', 'cloudflarestatus', 'Abschnitt „Fehlerbilder“'],
+  true, ['Exportieren, verschlüsseln, Rückweg prüfen', 'cloudflarestatus', 'Abschnitt „Fehlerbilder“',
+         '<!-- alert-runbook: backup -->'],
   null, ['API-Key abgelaufen', 'GROQ', 'Einrichtung unvollständig', 'Die Sicherung ist gelaufen']);
+
+// LAGEBILD NACHFÜHREN (WF-9E5A / #761): #761 wurde geschrieben, bevor es die
+// Klasse „Einrichtung unvollständig“ gab, und riet deshalb zu GROQ/GEMINI.
+// Der Dedupe-Pfad fasste offene Meldungen nie an – der falsche Rat wäre bis zum
+// ersten grünen Lauf stehen geblieben. Nachgebildet ist der echte Body von #761
+// (Identitäts-Marker, KEIN Klassen-Marker, allgemeines Runbook).
+const BACKUP_IDENT = IDENTITIES['Offsite-Backup'];
+const ALT_761_BODY = BACKUP_IDENT.marker + '\n'
+  + '> Vorgang **WF-9E5A** · Bereich *Sicherung* · Zuordnung: `python3 scripts/alert_issue_identity.py --tabelle`\n\n'
+  + '## Offsite-Backup ist fehlgeschlagen (failure)\n\n'
+  + '- **Run:** [Details ansehen](https://x/runs/38701800402)\n\n'
+  + '### Was du tun solltest\n'
+  + '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.\n'
+  + '2. Häufigste Ursachen:\n'
+  + '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren\n'
+  + '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)';
+const KV_JOB_EINRICHTUNG_ROT = [
+  { name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7620',
+    steps: [{ name: 'Selbsttest (Export, Probe, Einrichtungsprüfung – fail-closed)', conclusion: 'success' },
+            { name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }];
+await run('#761-Nachführung: offene Meldung mit GROQ-Rat → gleiche Nummer, Einrichtungs-Rat, kein Duplikat',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7620,
+    jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel, body: ALT_761_BODY,
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 761,
+    imBody: ['<!-- alert-runbook: backup-einrichtung -->', 'Einrichtung unvollständig – ein Neustart hilft nicht',
+             'E1–E8', 'https://x/runs/7620', 'https://x/jobs/7620', 'Voraussetzungen prüfen',
+             '**Offen seit:** 15.10.2026, 09:54:25', 'actions/workflows/backup-offsite.yml'],
+    nichtImBody: ['GROQ', 'Häufigste Ursachen', 'API-Key abgelaufen', 'https://x/runs/38701800402'] });
+// Idempotenz: Steht der Rat schon drin, bleibt die Meldung unberührt – auch
+// wenn der Lauf ein anderer ist (keine tägliche Umschrift).
+await run('Nachführung idempotent: Rat steht schon drin → keine Umschrift',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7621,
+    jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\nRat von gestern',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [], { anzahl: 0 });
+// Klassenwechsel: Einrichtung erledigt, danach scheitert der Export → der
+// Einrichtungs-Rat wäre jetzt falsch und wird ersetzt.
+await run('Klassenwechsel: Einrichtungs-Rat offen, jetzt Export rot → Rat „backup“ ersetzt ihn',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7622,
+    jobs: [{ name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7622',
+             steps: [{ name: 'Exportieren, verschlüsseln, Rückweg prüfen', conclusion: 'failure' }] }],
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n1. **Einrichtung unvollständig – ein Neustart hilft nicht.**',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 761,
+    imBody: ['<!-- alert-runbook: backup -->', 'Abschnitt „Fehlerbilder“', 'Exportieren, verschlüsseln, Rückweg prüfen'],
+    nichtImBody: ['alert-runbook: backup-einrichtung', 'Einrichtung unvollständig', 'GROQ'] });
+// Unsichere Diagnose: Ohne Job-Lage fiele die Klasse auf den allgemeinen
+// Backup-Rat zurück. Ein präziser Rat darf davon nicht überschrieben werden.
+await run('Job-API-Ausfall bei offener Meldung → präziser Rat bleibt (keine Umschrift)',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\nRat',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [], { anzahl: 0 });
+// Fail-open: Lehnt die API das Nachführen ab, darf das Alerting nicht
+// abstürzen und kein Duplikat anlegen – die Meldung bleibt offen.
+await run('Nachführen scheitert an der API → kein Absturz, kein Duplikat',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', updateFail: true,
+    jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel, body: ALT_761_BODY,
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [], { anzahl: 0 });
+// Allgemein, nicht nur Backup: Bestand ohne Klassen-Marker (z. B. #767) wird
+// beim nächsten roten Lauf einmal nachgeführt und trägt danach den Marker.
+await run('Bestand ohne Klassen-Marker (fremder Workflow) → einmal nachgeführt mit Marker',
+  { branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7623,
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7623',
+             steps: [{ name: 'Browser-Audit', conclusion: 'failure' }] }],
+    openIssues: [{ number: 767, title: IDENTITIES['Layout-AI'].titel,
+                   body: IDENTITIES['Layout-AI'].marker + '\nDetails', created_at: '2026-10-15T11:11:40Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 767,
+    imBody: ['<!-- alert-runbook: allgemein -->', 'Häufigste Ursachen', 'Browser-Audit', 'https://x/runs/7623',
+             '**Offen seit:** 15.10.2026, 13:11:40'],
+    nichtImBody: ['Einrichtung unvollständig'] });
 // Gegenprobe: derselbe Schrittname in einem fremden Workflow → Standard-Runbook.
 await run('WF-9E5A-Gegenprobe: „Voraussetzungen prüfen“ in fremdem Workflow → Standard-Runbook',
   { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',

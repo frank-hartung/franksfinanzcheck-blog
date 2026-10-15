@@ -1754,6 +1754,13 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   (`alert-on-failure.yml`, `backupEinrichtung`): Er bekommt das
   Einrichtungs-Runbook statt des API-Key-Rats. „Fristwarnung“ meldet ablaufende
   Zugänge 14 Tage vorher – nach der Sicherung, nicht statt ihr.
+- **Offene Meldungen werden nachgeführt** (`alert-on-failure.yml`, Marker
+  `<!-- alert-runbook: … -->`): Ändert sich die Klasse des Rats, schreibt der
+  nächste rote Lauf die offene Meldung neu (gleiche Nummer, kein Kommentar,
+  keine Benachrichtigung). Eine neue Runbook-Klasse braucht deshalb einen
+  eigenen Namen in `runbookKlasse`; `test_alert_scoping` erzwingt, dass Klassen
+  und Ratschläge deckungsgleich bleiben. Offene Alarm-Issues nie von Hand
+  umschreiben – der nächste rote Lauf erledigt das.
 - **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
 - **KV zurückspielen nur mit `--remote`:** Wrangler 4 schreibt sonst in die
   lokale Simulation und meldet trotzdem Erfolg.
