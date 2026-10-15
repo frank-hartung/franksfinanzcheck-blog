@@ -7,10 +7,10 @@
   "letzte_dauer_ms": 7537.3
  },
  "https://opnxng.com": {
-  "erfolge": 1,
+  "erfolge": 2,
   "fehler": 0,
-  "letzte_antwort": "2026-10-14T12:38:56.989386+02:00",
+  "letzte_antwort": "2026-10-15T12:21:52.974878+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 8478.5
+  "letzte_dauer_ms": 11518.0
  }
 }
