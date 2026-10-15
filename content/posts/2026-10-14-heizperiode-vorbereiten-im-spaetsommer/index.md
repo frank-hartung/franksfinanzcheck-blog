@@ -20,7 +20,7 @@ cover:
   alt: "Heizperiode vorbereiten im Spätsommer"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Heizperiode vorbereiten im Spätsommer"
-pin_description: "Heizperiode vorbereiten: Heizkörper sicher prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mit transparenten Modellrechnungen statt Spargarantien."
+pin_description: "*Werbung | Heizperiode vorbereiten: Heizkörper sicher prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mit transparenten Modellrechnungen statt Spargarantien."
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
@@ -106,9 +106,9 @@ Auch die Heizkurve ist an Gebäude und Anlage anzupassen. Lass die Einstellung p
 
 ## Passende Beiträge zum Weiterlesen
 
-- [Gasrechnung senken: Fehler im Spätsommer vermeiden](../../posts/gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
-- [Warmwasser sparen: Die Rechnung hinter dem Hahn](../../posts/warmwasser-sparen-rechnung-hinter-dem-hahn/)
-- [Energiediebe stoppen: Stromfresser finden](../../posts/energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
+- Gasrechnung senken: Fehler im Spätsommer vermeiden
+- Warmwasser sparen: Die Rechnung hinter dem Hahn
+- Energiediebe stoppen: Stromfresser finden
 
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
