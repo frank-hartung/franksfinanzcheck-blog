@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 15.10.2026 12:03 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.10.2026 17:38 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,39 +12,36 @@
 
 ## Kommende Beiträge
 
-### Do, 15. Oktober 2026
-- **11:45** ⚪ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/
 ### Fr, 16. Oktober 2026
+- **07:45** ⏳ Der erste eigene Haushalt: Fixkosten von Anfang an ordnen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/
+### Mo, 19. Oktober 2026
 - **07:45** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
-### Mo, 19. Oktober 2026
+### Di, 20. Oktober 2026
 - **07:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
-### Di, 20. Oktober 2026
+### Mi, 21. Oktober 2026
 - **07:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
-### Mi, 21. Oktober 2026
+### Do, 22. Oktober 2026
 - **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
-### Do, 22. Oktober 2026
+### Fr, 23. Oktober 2026
 - **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-### Fr, 23. Oktober 2026
+### Mo, 26. Oktober 2026
 - **07:45** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
-### Mo, 26. Oktober 2026
+### Di, 27. Oktober 2026
 - **07:45** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
-### Di, 27. Oktober 2026
+### Mi, 28. Oktober 2026
 - **07:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
-### Mi, 28. Oktober 2026
+### Do, 29. Oktober 2026
 - **07:45** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
-### Do, 29. Oktober 2026
-- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
 
