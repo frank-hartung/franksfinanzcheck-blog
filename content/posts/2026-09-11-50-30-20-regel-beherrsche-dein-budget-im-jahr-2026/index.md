@@ -285,7 +285,7 @@ Darum fühlt sich die 50–30–20-Regel so wirksam an: Sie verbindet Alltag und
 
 > 💶 **Spar-Tipp zwischendurch:** Ein separates Sparkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum. Wenn du das System sauber aufsetzen willst, hilft ein Tagesgeldkonto oft mehr als die nächste Budget-App: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Trag einmal im Monat alle Fixkosten in eine Liste ein; was du schwarz auf weiß siehst, kannst du verhandeln.
 
 ## Fazit: Die 50-30-20-Regel macht Geld planbar
 

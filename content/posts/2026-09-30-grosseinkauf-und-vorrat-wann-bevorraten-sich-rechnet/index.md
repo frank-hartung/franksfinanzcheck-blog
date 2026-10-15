@@ -186,7 +186,7 @@ Solche Unterbrechungen sind in der Regel kurz. Sie entstehen durch Krankheit, We
 
 Führe ihn getrennt von deinem Kochvorrat. Sonst wandert er in den Alltag ab und ist im Ernstfall leer. Prüfe die Haltbarkeit einmal im Jahr und ersetze, was abgelaufen ist.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Zwischen Wunsch und Kauf gehört eine Nacht Bedenkzeit; wer wartet, bestellt seltener doppelt.
 
 ## Häufige Fragen
 

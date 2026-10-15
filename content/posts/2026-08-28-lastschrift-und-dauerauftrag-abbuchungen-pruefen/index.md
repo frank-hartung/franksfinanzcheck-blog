@@ -188,7 +188,7 @@ Fehlt einer dieser Punkte, frage genau danach. Eine allgemeine Auskunft über Be
 
 Wenn die Antwort nicht kommt, wiederhole sie einmal mit Verweis auf dein Schreiben und setze eine neue Frist. Behalte den Verlauf in einer Datei. Diese Datei ist später mehr wert als jede Erinnerung.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Prüfe deine Verträge einmal im Jahr auf denselben drei Zeilen: Preis, Laufzeit, Kündigungsfrist.
 
 ## Häufige Fragen
 

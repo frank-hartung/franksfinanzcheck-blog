@@ -14,7 +14,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+  aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt; Fehlerkapitel themeneigen gefasst (Überschrift und Tabellenkopf), damit es nicht die Schablone eines DSL-Ratgebers teilt (Einzigartigkeits-Audit #766)"
 cover:
   image: "images/covers/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg"
   alt: "Heizperiode vorbereiten im Spätsommer"
@@ -124,9 +124,9 @@ Unser System für deine Fixkosten nutzt vier klare Schritte. Diese helfen dir, d
 
 Der größte Hebel ist der regelmäßige Check deiner Daten. Wer nur einmal im Jahr auf die Zahlen schaut, verpasst oft gute Preise. Setze dir einen festen Termin für diese Aufgabe. Der 15. September ist ein idealer Tag dafür. Halte dich fest an diesen Termin, um dauerhaft zu sparen.
 
-## Häufige Fehler und wie du sie vermeidest
+## Welche Fehler dich im Herbst Geld kosten
 
-| Fehler | Warum er kostet | Wie du ihn vermeidest |
+| Denkfehler | Was er dich kostet | So vermeidest du ihn |
 |----------------------------|-----------------|-------------------------------------------|
 | Tarif erst spät prüfen | Hohe Nachzahlung droht | Check schon im August oder September |
 | Wartung erst im Winter | Verlust an Energie | Termin für die Wartung früh setzen |

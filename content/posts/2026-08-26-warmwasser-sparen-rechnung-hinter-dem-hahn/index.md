@@ -170,7 +170,7 @@ Diese Gegenüberstellung dauert fünf Minuten und ersetzt jede Vermutung über d
 
 **Ein voller Speicher ist nicht automatisch teuer.** Er verliert Wärme, aber er liefert auch sofort warmes Wasser. Wichtiger als die Größe ist die eingestellte Temperatur und die Dämmung.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Senke die Heizkosten in dieser Reihenfolge: erst Verbrauch verstehen, dann Tarif prüfen, erst zuletzt Technik kaufen.
 
 ## Häufige Fragen
 
