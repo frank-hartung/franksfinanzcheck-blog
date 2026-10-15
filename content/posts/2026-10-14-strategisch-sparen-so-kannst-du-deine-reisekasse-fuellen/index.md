@@ -39,6 +39,8 @@ kurzantwort: "Berechne die Sparrate aus Reisekosten minus vorhandenem Urlaubsgel
 
 Eine Reisekasse beginnt mit einem Ziel und einem realistischen Monatsbudget. Plane Unterkunft, Anreise, Verpflegung und Ausgaben vor Ort anhand konkreter Angebote für deine Reisedaten. Eine pauschale Aussage zur Entwicklung der Flug- oder Unterkunftspreise im Jahr 2026 hilft dabei nicht: Aus der verlinkten Verbraucherzentrale-Übersicht lässt sich keine allgemeine Preisstabilisierung ableiten.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Du brauchst weder einen neuen Vertrag noch ein Bonusprogramm, um anzufangen. Zuerst prüfst du, wie viel nach notwendigen Ausgaben, fälligen Rechnungen und einer passenden Rücklage übrig bleibt. Urlaubsgeld sollte nicht auf Kosten von Miete, Schuldentilgung oder notwendigen Versicherungen entstehen.
 
 **Transparenz:** Dieser Artikel enthält einen Affiliate-Link (Werbung). Beim Abschluss darüber erhalten wir eine Provision; für dich entstehen keine Mehrkosten. Die Verbraucherzentrale empfiehlt damit weder das verlinkte Vergleichsportal noch dessen Angebote.

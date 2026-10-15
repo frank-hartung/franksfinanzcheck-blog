@@ -33,6 +33,8 @@ kurzantwort: "Prüfe Heizkörper nach Bedarf, messe den Verbrauch und vergleiche
 
 Vor der Heizperiode lohnt sich ein strukturierter Check: Verbrauch dokumentieren, Heizkörper prüfen und Tarifkosten rechnen. Das kannst du im Spätsommer erledigen – oder im Oktober nachholen. Ob und wie viel du sparst, hängt von deinem bisherigen Verbrauch, dem Gebäude und den verfügbaren Tarifen ab. Eine niedrigere Rechnung ist nicht garantiert.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Dieser Artikel enthält einen Affiliate-Link (Werbung). Beim Abschluss darüber erhalten wir eine Provision; für dich entstehen keine Mehrkosten. Der Link ist kein fachlicher Beleg und keine Empfehlung der Bundesnetzagentur.
 
 ## Was du vor dem ersten Heizen prüfen kannst
