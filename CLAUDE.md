@@ -1802,6 +1802,10 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   und Ratschläge deckungsgleich bleiben. Offene Alarm-Issues nie von Hand
   umschreiben – der nächste rote Lauf erledigt das.
 - **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
+  Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1: nur
+  `main`). Solange Zugänge fehlen und ein fremder Branch an das Environment
+  käme, stellt der Prüfer „Zuerst E8“ über die Liste; die Reihenfolge der
+  Anleitung sichert `test_backup_einrichtung` ab.
 - **KV zurückspielen nur mit `--remote`:** Wrangler 4 schreibt sonst in die
   lokale Simulation und meldet trotzdem Erfolg.
 - **Wiederherstellung beweisen:** `bash scripts/restore_drill.sh --repo <privates Backup-Repo>`
