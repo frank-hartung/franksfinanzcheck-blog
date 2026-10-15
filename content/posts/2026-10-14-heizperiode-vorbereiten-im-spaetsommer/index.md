@@ -21,6 +21,13 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Heizperiode vorbereiten im Spätsommer"
 pin_description: "*Werbung | Heizperiode vorbereiten im Spätsommer – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
+quellen:
+  - id: "Q1"
+    titel: "Bundesnetzagentur - Energie"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2024-01-01"
+faktencheck: 2026-10-15
 ---
 
 Die ersten kühlen Tage im September bringen oft einen kleinen Schock für das Konto. Der Verbrauch von Strom und Gas steigt plötzlich an. Die Rechnungen kommen erst später, doch die Kosten laufen bereits. Oft merkst du dann, dass dein alter Tarif gar nicht mehr zu deinem Leben passt. Wer die Planung für den Herbst jetzt angeht, spart im Winter viel Geld. Die kommenden Monate werden so deutlich günstiger für dich. In diesem Ratgeber zeige ich dir alle wichtigen Schritte. Du lernst, wie du deine Heizkosten senkst und die Gasrechnung drückst. Wir verzichten dabei auf schwere Fachwörter und nutzen keinen Verkaufsdruck.

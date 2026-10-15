@@ -1,70 +1,26 @@
 {
-  "erzeugt": "2026-10-13 12:08 UTC",
+  "erzeugt": "2026-10-15 09:23 UTC",
   "uebersicht": {
-    "gesamt": 94,
+    "gesamt": 96,
     "ratgeber": 6,
-    "faellig": 3,
-    "bearbeitet": 3,
-    "geo_schnitt": 92,
-    "befunde": 13,
+    "faellig": 2,
+    "bearbeitet": 2,
+    "geo_schnitt": 94,
+    "befunde": 9,
     "geo_luecken": {
-      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 6,
-      "Mindestens eine Tabelle (extrahierbare Struktur)": 11,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 6,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 14,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 3,
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 7,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 10,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 13,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 2,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 2,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     }
   },
   "offen": [],
   "laeufe": [
     {
-      "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
-      "titel": "Energie-Update: Was sich jetzt für dich ändert",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "praezision",
-          "text": "Die Aussage, dass bei einem variablen Tarif das Marktrisiko beim Anbieter bleibt, ist falsch – nach Angaben der Bundesnetzagentur sind variable Tarife an die Spot‑Markt‑Preise gekoppelt, sodass das Preisrisiko beim Verbraucher liegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Der Artikel erwähnt keine Möglichkeit von Preisobergrenzen bei variablen Tarifen, obwohl die Bundesnetzagentur erklärt, dass Anbieter solche Varianten mit Preisgarantien anbieten können.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "veraltet",
-          "text": "Der Hinweis „Stand: 08.10.2026“ suggeriert aktuelle Preisentwicklungen für 2026, doch die Bundesnetzagentur liefert nur Daten bis zum letzten veröffentlichten Jahr und keine gesicherten Prognosen für 2026.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Behauptung, Festpreisverträge schützen generell vor Preisspitzen, ist zu pauschal – die Bundesnetzagentur weist darauf hin, dass der Schutz nur für die Vertragslaufzeit gilt und danach Marktpreise wieder gelten können.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Es fehlt ein Hinweis auf die regulatorischen Informationspflichten des Anbieters (z. B. Aufschlüsselung von Grund‑ und Arbeitspreis), die die Bundesnetzagentur für Transparenz vorschreibt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 17,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
-        "Verbraucherzentrale – Energie: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-13"
-      ]
-    },
-    {
-      "slug": "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit",
-      "titel": "7 Gewohnheiten für finanzielle Freiheit",
+      "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer",
+      "titel": "Heizperiode vorbereiten im Spätsommer",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
@@ -72,61 +28,23 @@
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Der Artikel berücksichtigt nicht die Inflation von 3,3 % (nach Destatis), wodurch die reale Kaufkraft der angesparten 7 200 € nach einem Jahr geringer ist.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Die stark steigenden Energiepreise (+14,9 % laut Destatis) werden im Artikel nicht erwähnt, obwohl sie einen wesentlichen Einfluss auf die Fixkosten haben können.",
-          "beleg": ""
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Berechnung des ETF‑Endkapitals (5 000 € → ca. 9 800 € nach 10 Jahren) lässt die Inflation außen vor und gibt damit ein zu optimistisches Bild der zukünftigen Kaufkraft.",
-          "beleg": ""
-        }
-      ],
-      "geo": 50,
-      "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-13"
-      ]
-    },
-    {
-      "slug": "2026-10-12-stromfresser-im-haushalt-entlarven",
-      "titel": "Stromfresser im Haushalt entlarven",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "veraltet",
-          "text": "Der im Artikel genannte durchschnittliche Strompreis von 30 Cent pro kWh ist veraltet; die Bundesnetzagentur gibt aktuell einen durchschnittlichen Endkundenpreis von rund 40 Cent pro kWh an.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Der Artikel erwähnt nicht die verpflichtende EU-Energieeffizienzkennzeichnung, die von der Bundesnetzagentur gefordert wird und bei der Auswahl neuer Geräte hilft, Energie zu sparen.",
+          "text": "Die Angabe, dass das Entlüften der Heizkörper 5 % Energie einspart, wird von der Bundesnetzagentur nicht belegt; dort gibt es keine konkrete Prozentangabe zum Einsparpotenzial beim Entlüften.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "praezision",
-          "text": "Die angegebenen Stand‑by‑Leistungen (z. B. 5 W für einen Fernseher) sind zu hoch; die Bundesnetzagentur weist darauf hin, dass typische Stand‑by‑Werte von Unterhaltungselektronik meist zwischen 0,5 W und 2 W liegen.",
+          "text": "Die pauschale Empfehlung, das Raumthermostat auf 20 °C zu stellen, ist zu unpräzise, weil die Bundesnetzagentur betont, dass die optimale Raumtemperatur von individuellen Faktoren wie Gebäudedämmung und persönlichem Komfort abhängt.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Der Artikel nennt nur kostenpflichtige Messgeräte, obwohl die Bundesnetzagentur ein kostenloses Online‑Tool zur Analyse des Stromverbrauchs bereitstellt, das hier nicht erwähnt wird.",
+          "text": "Die Aussage, dass ein Router im Standby‑Modus 5 W verbraucht, wird von der Bundesnetzagentur nicht bestätigt; in den bereitgestellten Informationen werden keine Watt‑Angaben zu einzelnen Geräten genannt.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Die Amortisationsrechnung für den Austausch eines alten Kühlschranks (9 Jahre) ist unpräzise; die Bundesnetzagentur empfiehlt, dass sich Investitionen in energieeffiziente Geräte innerhalb von maximal 5 Jahren amortisieren sollten.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "typ": "luecke",
+          "text": "Der Hinweis, den Tarifwechsel über das Vergleichsportal CHECK24 zu erledigen, ist nicht durch die Bundesnetzagentur unterstützt; die Behörde liefert lediglich allgemeine Informationen zum Anbieterwechsel, nicht zu konkreten Vergleichsportalen.",
+          "beleg": ""
         }
       ],
       "geo": 50,
@@ -136,7 +54,51 @@
       ],
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-13"
+        "faktencheck: 2026-10-15"
+      ]
+    },
+    {
+      "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "titel": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass sich im Jahr 2026 die Preise für Unterkünfte und Flüge stabilisiert haben, wird von der angegebenen Quelle nicht belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Behauptungen zu Cashback‑Programmen von Banken und deren Bedeutung für das Urlaubsbudget finden in der Quelle keine Erwähnung.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Verweis auf einen externen Mietwagen‑Preisvergleich (sponsored) ist nicht durch die angegebene Quelle gestützt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass die Transparenz digitaler Verträge 2026 ein zentraler Faktor sei, wird von der Quelle nicht unterstützt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Modellrechnung mit einer pauschalen Cashback‑Rate von 2 % ist nicht durch konkrete Daten aus der Quelle belegt und wirkt daher unpräzise.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        }
+      ],
+      "geo": 50,
+      "fehler": [
+        "Verbraucherzentrale – Reise: Feed nicht lesbar"
+      ],
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-15",
+        "faktenfrische-Hold: Re-Queue aktiviert"
       ]
     }
   ]

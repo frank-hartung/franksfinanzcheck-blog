@@ -3,8 +3,9 @@ title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 description: Erfahre, wie du durch Cashback-Tipps und Fixkosten-Checks effektiv deine Reisekasse füllen kannst. Frank Hartung zeigt den Weg zum Urlaubsbudget 2026.
 date: 2026-10-14T11:49:25Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-10-14T11:50:39Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+cadence_grund: "faktenfrische aufgehoben: quellen: 1 Belege; faktencheck: 2026-10-15 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -26,6 +27,12 @@ cover:
   image: "images/covers/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg"
   alt: "Strategisch sparen: So kannst du deine Reisekasse füllen"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Reise & Mobilität"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    herausgeber: "Verbraucherzentrale"
+faktencheck: 2026-10-15
 ---
 
 Reisekasse füllen im Check: Du sitzt am Küchentisch und starrst auf den Laptop. Die Bilder vom türkisblauen Meer und den schroffen Bergketten sehen verlockend aus. Doch ein kurzer Blick auf dein Online-Banking holt dich sofort zurück in die Realität. Der Kontostand reicht für die Miete und den Wocheneinkauf, aber der große Puffer für den Sommer fehlt.
