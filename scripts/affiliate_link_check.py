@@ -32,6 +32,7 @@ import yaml
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import affiliate_intent_contract as affiliate_contract  # noqa: E402
+import affiliate_exemption as exemption_contract  # noqa: E402 – Ausnahme-Vertrag (#762)
 
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 REPORT_FILE = os.path.join(BLOG_DIR, "AFFILIATE-REPORT.md")
@@ -157,41 +158,16 @@ def norm_url(u):
 
 
 def affiliate_exemption(post):
-    """(ausgenommen, Grund, Metadatenfehler) – fail-closed bei halber Angabe."""
-    try:
-        metadata = yaml.safe_load(post.get("frontmatter", "")) or {}
-    except yaml.YAMLError as exc:
-        detail = str(exc).splitlines()[0] if str(exc) else "YAML-Fehler"
-        return False, "", f"Frontmatter ist kein gültiges YAML: {detail}"
-    if not isinstance(metadata, dict):
-        return False, "", "Frontmatter muss ein YAML-Objekt sein"
+    """(ausgenommen, Grund, Metadatenfehler) – fail-closed bei halber Angabe.
 
-    has_flag = "affiliate_exempt" in metadata
-    raw_exempt = metadata.get("affiliate_exempt")
-    raw_reason = metadata.get("affiliate_exempt_reason")
-    reason = raw_reason.strip() if isinstance(raw_reason, str) else ""
-
-    if not has_flag:
-        if raw_reason is None or (isinstance(raw_reason, str) and not reason):
-            return False, "", ""
-        return False, "", (
-            "affiliate_exempt_reason ist gesetzt, aber "
-            "affiliate_exempt: true fehlt"
-        )
-    if not isinstance(raw_exempt, bool):
-        return False, "", "affiliate_exempt muss ein YAML-Boolean true oder false sein"
-    if raw_exempt:
-        if not reason:
-            return False, "", "affiliate_exempt: true braucht eine nichtleere Begründung"
-        if not isinstance(raw_reason, str):
-            return False, "", "affiliate_exempt_reason muss Text sein"
-        return True, reason, ""
-    if raw_reason is not None and (not isinstance(raw_reason, str) or reason):
-        return False, "", (
-            "affiliate_exempt_reason darf nur mit affiliate_exempt: true "
-            "angegeben werden"
-        )
-    return False, "", ""
+    Der VERTRAG liegt seit #762 in `scripts/affiliate_exemption.py` – dort, wo
+    auch die tägliche Integritäts-Wache ihn liest. Vorher stand die Regel
+    nur hier; die zweite Wache kannte die Ausnahme nicht und meldete den
+    redaktionell ausgenommenen Artikel täglich als Inhaltsschaden (Issue
+    #762). Diese Funktion bleibt als Adapter erhalten (Aufrufer und Tests
+    sprechen sie so an).
+    """
+    return exemption_contract.affiliate_exemption(post.get("frontmatter", ""))
 
 
 def load_posts():
