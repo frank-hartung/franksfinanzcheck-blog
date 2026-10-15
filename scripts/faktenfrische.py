@@ -587,7 +587,17 @@ Code-Fence, in diesem Schema:
  "kurzfazit":"ein Satz"}
 5. Maximal 5 Befunde, maximal 4 Quellen. Deutsche Sprache, konkret, ohne Floskeln.
 6. Ein Befund ist nur dann ein Befund, wenn er dem Leser Geld, Zeit oder einen \
-Fehler erspart."""
+Fehler erspart.
+7. Trenne Tatsachenbehauptungen, ausdrücklich als solche markierte \
+Modellannahmen und Werbung. Modellannahmen sind keine Marktdaten; prüfe ihre \
+Rechnung, Einheiten, Voraussetzungen und die Kennzeichnung, statt einen \
+Quellenbeleg für frei gewählte Eingabewerte zu verlangen.
+8. Eine Übersichtsseite belegt keine konkreten Prozent-, Geräte- oder \
+Marktwerte. Fehlende Erwähnung ist kein Gegenbeweis: Melde gegebenenfalls \
+eine Beleglücke, aber behaupte nicht, die Quelle widerlege den Artikel. \
+Ein klar gekennzeichneter Affiliate-Link braucht keine behördliche Empfehlung; \
+prüfe stattdessen unbelegte Preis-, Vollständigkeits- oder Empfehlungsaussagen. \
+Erfinde weder ein Quellen-Publikationsdatum noch eine Quellenempfehlung."""
 
 
 def verfuegbare_anbieter() -> list:
