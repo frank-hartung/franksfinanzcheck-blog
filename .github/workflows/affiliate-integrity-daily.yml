@@ -128,7 +128,9 @@ jobs:
       # ============ STAGE 1: DETEKTOR-SELBSTTEST (fail-closed) ============
       - name: Detektor-Selbsttest (Wache muss sehen können)
         id: selftest
-        run: python3 scripts/affiliate_integrity_gate.py --selftest
+        run: |
+          python3 scripts/affiliate_integrity_gate.py --selftest
+          python3 -m unittest scripts.tests.test_affiliate_exemption scripts.tests.test_affiliate_link_check
 
       # ============ STAGE 1a: INTENT-WACHE-SELBSTTEST (fail-closed) ======
       # 19.09.2026 (Auftrag Frank: „Falsche Affiliate-Ziele sofort

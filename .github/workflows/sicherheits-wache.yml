@@ -20,6 +20,28 @@
 #  06:05 UTC mit LIVE-Messung (Header der echten Seite + Worker-Zustand).
 #  Fehlt der Export-Schlüssel als Secret, wird die Live-Messung ÜBERSPRUNGEN
 #  und das ausdrücklich protokolliert – sie meldet dann nicht „in Ordnung".
+#
+#  MESS-SCHRITTE WERTEN IHREN EXIT AUS, SIE REICHEN IHN NICHT DURCH
+#  (Vertrag C34, Dauerheilung WF-E813, 15.10.2026):
+#  Der erste planmäßige Live-Lauf dieses Workflows wurde rot – und die
+#  automatische Meldung riet auf einen abgelaufenen API-Schlüssel, obwohl
+#  diese Wache keinen Schlüssel kennt. Ursache war die zweite Hälfte
+#  derselben Zeile: blog_header_gate.py zählte jede Netzstörung als
+#  fehlenden Pflicht-Header. Ein TLS-Abbruch wurde damit zu „Header fehlen"
+#  umgedeutet, obwohl daneben stand, dass ohne Messung der Stand UNGEPRÜFT
+#  gilt. Ungeprüft ist nicht fehlend.
+#  Seitdem liefert die Wache vier Klassen, und der Mess-Schritt bleibt
+#  neutral (der Exit wird nur festgehalten); der Auswerte-Schritt
+#  entscheidet, WAS gemeldet wird:
+#
+#    0  OK / TEILWEISE   -> grün, Auto-Close greift
+#    1  BEFUND           -> ::error:: + nächster Schritt (A1 im Dashboard)
+#    2  STOERUNG         -> ::error::, ausdrücklich KEIN Header-Befund
+#    sonst WACHE-FEHLER  -> ::error::, die Wache selbst ist defekt
+#
+#  Transiente Netzfehler heilt die Wache vorher selbst (vier Versuche mit
+#  2 s/8 s/30 s Pause, GET-Fallback bei HEAD-Fehlerstatus). Erst was danach
+#  noch rot ist, erreicht den Melder.
 # ============================================================
 name: Sicherheits-Wache
 
@@ -111,11 +133,59 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Sicherheits-Header der echten Seite messen (F-01)
-        run: python3 scripts/blog_header_gate.py
-        # Befund = Exit 1 = roter Lauf = Meldung über alert-on-failure.
+        id: header
+        # Der Mess-Schritt bleibt bewusst neutral: Er hält den Exit-Code nur
+        # fest, statt ihn an GitHub durchzureichen. Ein einziger Exit-1-Kanal
+        # zwänge den Melder, „nicht messbar“ und „Header fehlen“ gleich zu
+        # behandeln – genau das hat WF-E813 erzeugt (Vertrag C34).
         # Wichtig: Erst NACH der Cloudflare-Regel kann das hier grün sein.
+        run: |
+          set -uo pipefail
+          python3 scripts/blog_header_gate.py --json --report f01-live.md > f01-live.json
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Sicherheits-Header auswerten (F-01) · Befund · Störung · grün
+        if: always() && steps.header.outcome != 'skipped'
+        run: |
+          set -euo pipefail
+          if [ ! -f f01-live.md ]; then
+            echo "::error::F-01 WACHE-FEHLER: blog_header_gate.py hat keinen Bericht hinterlassen – die Wache selbst ist defekt."
+            exit 1
+          fi
+          # Der Bericht ist die Wahrheit für den Menschen – er steht in der
+          # Lauf-Zusammenfassung, nicht nur im Log (Lehre aus INCIDENT-2026-09-19).
+          {
+            echo "## F-01 · Sicherheits-Header der echten Seite"
+            echo ""
+            cat f01-live.md
+          } >> "$GITHUB_STEP_SUMMARY"
+          SCHRITT="$(python3 -c 'import json;print(json.load(open("f01-live.json")).get("naechster_schritt",""))')"
+          case "${{ steps.header.outputs.code }}" in
+            0)
+              echo "::notice::F-01 grün: alle gemessenen Pflicht-Header im Sollbereich."
+              ;;
+            1)
+              echo "::error::F-01 BEFUND: Pflicht-Header fehlen oder sind falsch. ${SCHRITT}"
+              exit 1
+              ;;
+            2)
+              # Keine Messung ist keine Aussage über die Sicherheit. Der Lauf
+              # bleibt rot (eine ausgefallene Messung darf nicht still
+              # verschwinden), aber die Meldung nennt die Klasse – sonst
+              # sucht der Mensch nach Headern, die niemand gemessen hat.
+              echo "::error::F-01 STOERUNG: Die Seite war nach mehreren Versuchen nicht messbar – ausdrücklich KEIN Header-Befund. ${SCHRITT}"
+              exit 1
+              ;;
+            *)
+              echo "::error::F-01 WACHE-FEHLER: blog_header_gate.py lieferte Exit ${{ steps.header.outputs.code }} – die Wache selbst ist defekt, nicht die Seite."
+              exit 1
+              ;;
+          esac
 
       - name: Worker-Zustand messen – Budget, Bot-Schutz, Exporte (F-02/F-03/F-08)
+        # Ein roter F-01 darf die zweite Messung nicht verdecken: sonst
+        # erfährt Frank am selben Tag nie, ob Budget und Bot-Schutz stehen.
+        if: always()
         env:
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE || 'https://abos.franksfinanzcheck.de' }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}

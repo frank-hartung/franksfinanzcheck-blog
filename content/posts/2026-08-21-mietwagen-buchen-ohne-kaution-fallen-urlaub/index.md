@@ -260,7 +260,7 @@ Drei Regeln zählen: **Vergleiche online. Buche Vollkasko ohne Selbstbeteiligung
 
 **Weiterlesen:** Geld sparen im Alltag · [Mehr Freiheit durch Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekranken­versicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Bei Reisekosten entscheiden die Nebenkosten öfter als der beworbene Preis: Kaution, Umrechnung und Zusatzfahrer gehören in den Vergleich.
 
 ## Fazit: Mietwagen ohne Kautionsfallen – So sparst du im Urlaub
 

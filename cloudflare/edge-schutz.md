@@ -50,6 +50,15 @@ tatsächlich passiert.
 **Prüfen:** `curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'`
 → fünf Zeilen. Automatisch mit Gegenproben: `npm run header:check`.
 
+**Live-Messung mit Klassifikation:** `npm run header:check:live` (bzw. der
+tägliche Job „Live-Messung“ der Sicherheits-Wache). Die Wache liefert vier
+Klassen statt „rot oder grün“ — `BEFUND` (gemessen und mangelhaft, Exit 1),
+`STOERUNG` (nicht messbar, Exit 2, **kein** Sicherheitsbefund), `TEILWEISE`
+(ein Ziel gemessen, eines nicht) und `OK`. Transiente Netzfehler heilt sie
+vorher selbst (vier Versuche, 2 s/8 s/30 s Pause). Steht in der Diagnose
+„Proxy nicht aktiv“ (kein `cf-ray`), kann diese Regel gar nicht wirken — dann
+ist Schritt 1 im Runbook fällig, nicht diese Regel hier.
+
 ---
 
 ## 2. A2 — Mengenregeln (Finding F-03)
@@ -128,4 +137,4 @@ erzeugten Beitrag zurückkommt.
 
 Empfehlung: **A**. Der Blog ist öffentlich und hat ein Anmeldeformular — ein
 fehlender Frame-Schutz ist hier die teurere Lücke. Die Wache
-`scripts/blog_header_gate.py` meldet in beiden Fällen ehrlich, was live fehlt.
+`scripts/blog_header_gate.py` meldet in beiden Fällen ehrlich, was live fehlt — und unterscheidet seit WF-E813 (15.10.2026) zwischen „es fehlt etwas“ (BEFUND) und „es konnte nichts gemessen werden“ (STOERUNG).

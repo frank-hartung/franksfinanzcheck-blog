@@ -165,7 +165,7 @@ Prüfe außerdem, ob die Karte im Ausland für Abhebungen freigegeben war. Fehlt
 * **Sperrnummern speichern.** Notiere die Nummer zum Sperren deiner Karte, nicht auf dem Handy allein.
 * **Belege sammeln.** Bewahre bis zur Schlussrechnung alle Automatenbelege auf.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Ein Konto ohne Bedingungen ist selten wirklich kostenlos; vergleiche Gebühren, Verfügbarkeit und Zinsstaffel zusammen.
 
 ## Häufige Fragen
 

@@ -14,7 +14,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Korrektur zu #763; redaktionelle Freigabe weiterhin ausstehend"
+  aenderungsgrund: "Fachliche Korrektur zu #763; themeneigene Gliederung gemäß Einzigartigkeits-Audit #766 statt generischer Fehlertabelle; redaktionelle Freigabe weiterhin ausstehend"
 cover:
   image: "images/covers/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg"
   alt: "Heizperiode vorbereiten im Spätsommer"

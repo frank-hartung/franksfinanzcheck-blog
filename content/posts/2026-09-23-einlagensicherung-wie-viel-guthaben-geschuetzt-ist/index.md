@@ -175,7 +175,7 @@ Das Ergebnis dieser Prüfung ist nicht immer ein Nachteil. Zwei Institute bedeut
 
 Die Verbraucherzentrale empfiehlt, beim Abschluss eines Girokontos Entgelte und Bedingungen zu lesen ([Ratgeber Girokonto](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990)). Dieselbe Sorgfalt hilft beim Tagesgeld: Der Zins bindet den Blick, die Regeln treten zurück.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Prüfe die Sicherung, bevor du die Rendite prüfst; ein Zinsvorteil wiegt keine offene Frage auf.
 
 ## Häufige Fragen
 

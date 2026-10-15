@@ -60,6 +60,16 @@
 #    · Ziel-Release nach dem Upload nachgelesen (Assets + Größen + `draft=true`)
 #    · Regelprüfung am Ende: keine öffentliche Backup-Spur im Quell-Repo
 #
+#  EINRICHTUNG & DIAGNOSE (Vorgang WF-9E5A / #761, 15.10.2026):
+#    Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md (10 Minuten, Links
+#    vorbelegt). Der KV-Job prüft jede Voraussetzung live mit
+#    `scripts/backup_einrichtung.py` (E1–E8) und nennt in der
+#    Job-Zusammenfassung zu jedem offenen Punkt den Link, unter dem er
+#    erledigt wird. Ablaufende Zugänge melden sich 14 Tage vorher
+#    (Schritt „Fristwarnung“) – nach der Sicherung, nicht statt ihr.
+#    Beide Jobs laufen im Environment „backup“: Dort liegen die Secrets,
+#    erreichbar nur für die freigegebenen Branches (Einstellung: nur main).
+#
 #  KOSTEN: 0 € (Artefakt-Speicher im Free-Kontingent, private Repos
 #  unbegrenzt). Trigger: täglich 03:00 UTC + manuell.
 # ============================================================
@@ -84,6 +94,9 @@ jobs:
       contents: write
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    # WF-9E5A: Ohne dieses Environment sähe der Job die dort abgelegten
+    # Secrets nicht und fiele still auf die Kurzzeit-Kopie zurück.
+    environment: backup
     env:
       SRC_BRANCH: main
       # Ziel-Repository (privat!) aus der Repository-Variable – leer = nur Artefakt
@@ -196,7 +209,7 @@ jobs:
 
           if [ -z "${ZIEL_REPO:-}" ]; then
             echo "ZIEL=artefakt" >> "$GITHUB_OUTPUT"
-            echo "::warning::Kein dauerhaftes Offsite-Ziel gesetzt – es gibt nur eine 7-Tage-Kurzzeitkopie im selben Konto (kein Offsite-Schutz). Repository-Variable BACKUP_REPO (privates Repo) + Secret BACKUP_REPO_TOKEN setzen, siehe Kopf dieser Datei."
+            echo "::warning::Kein dauerhaftes Offsite-Ziel gesetzt – es gibt nur eine 7-Tage-Kurzzeitkopie im selben Konto (kein Offsite-Schutz). Repository-Variable BACKUP_REPO (privates Repo) + Secret BACKUP_REPO_TOKEN setzen: docs/ANLEITUNG-OFFSITE-BACKUP.md"
             exit 0
           fi
 
@@ -204,11 +217,14 @@ jobs:
           echo "ZIEL=repo" >> "$GITHUB_OUTPUT"
 
           # 1) Privatheit des Ziels VOR dem Upload beweisen – fail-closed.
+          #    Bei Fehlern die echte API-Antwort nennen (WF-9E5A): „Not Found“
+          #    heißt Repo fehlt oder Token ohne Zugriff, „Bad credentials“
+          #    Token ungültig/abgelaufen – nicht „öffentlich“.
           SICHTBAR=$(curl -sS -H "Authorization: Bearer $TOKEN" \
             -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/$ZIEL_REPO" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('private') if 'private' in d else 'UNBEKANNT')")
+            "https://api.github.com/repos/$ZIEL_REPO" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('private') if 'private' in d else 'UNBEKANNT, API: ' + str(d.get('message', 'keine Antwort'))[:80])")
           if [ "$SICHTBAR" != "True" ]; then
-            echo "::error::Ziel $ZIEL_REPO ist nicht privat (Antwort: $SICHTBAR). Ein Backup wird nicht öffentlich abgelegt – Abbruch."
+            echo "::error::Ziel $ZIEL_REPO ist nicht nachweislich privat (Antwort: $SICHTBAR). Ein Backup wird nicht öffentlich abgelegt – Abbruch. Not Found = Repo fehlt oder BACKUP_REPO_TOKEN ohne Zugriff, Bad credentials = Token ungültig/abgelaufen. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
             exit 1
           fi
           echo "✅ Ziel $ZIEL_REPO ist privat (live geprüft über die API)."
@@ -268,7 +284,7 @@ jobs:
           set -euo pipefail
           KEEP=14
           if [ -z "${ZIEL_REPO:-}" ]; then
-            echo "Kein dauerhaftes Ziel – Retention übernimmt GitHub (Artefakte, 90 Tage)."
+            echo "Kein dauerhaftes Ziel – nichts aufzuräumen (die Kurzzeit-Kopie löscht GitHub nach 7 Tagen selbst)."
             exit 0
           fi
           TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"
@@ -333,14 +349,15 @@ jobs:
   #  das PRIVATE Backup-Repo (Entwurf-Release). NIE als Artefakt.
   #  Fail-closed: Fehlt eine Voraussetzung, ist der Job rot.
   #
-  #  Einrichtung (einmalig, siehe Runbook):
+  #  Einrichtung (einmalig): docs/ANLEITUNG-OFFSITE-BACKUP.md
   #    Secret   CF_KV_BACKUP_TOKEN   Cloudflare-API-Token NUR mit
   #                                  „Workers KV Storage: Read“ (+ „D1: Read“)
   #    Variable KV_NAMESPACE_ID_ABO  ID des KV-Namespace ABO
   #    Variable D1_DATABASE_ID       optional (Klick-Zähler)
   #    Secret   CLOUDFLARE_ACCOUNT_ID (vorhanden)
   #    Variable BACKUP_REPO + Secret BACKUP_REPO_TOKEN + Secret BACKUP_PASSPHRASE
-  #  Empfehlung: Secrets in das Environment „backup“ verschieben.
+  #  Secrets gehören in das Environment „backup“ (Branch-Regel: nur main).
+  #  Prüfung: scripts/backup_einrichtung.py (E1–E8, live, mit Abhilfe-Links).
   # ============================================================
   kv-backup:
     name: KV-/D1-Backup (Abonnenten + Einwilligungsnachweise)
@@ -349,6 +366,9 @@ jobs:
     environment: backup
     permissions:
       contents: read
+      # Nur lesend: Die Einrichtungsprüfung (E8) liest die Schutzregeln des
+      # Environments „backup“ – der Endpunkt verlangt „actions: read“.
+      actions: read
     env:
       ZIEL_REPO: ${{ vars.BACKUP_REPO }}
       PASSWORT: ${{ secrets.BACKUP_PASSPHRASE }}
@@ -363,34 +383,21 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Selbsttest (Export, Probe, fail-closed)
-        run: python3 scripts/kv_backup.py --selftest
-
-      - name: Voraussetzungen prüfen (fail-closed – kein Schein-Grün)
+      - name: Selbsttest (Export, Probe, Einrichtungsprüfung – fail-closed)
         run: |
-          set -euo pipefail
-          FEHLT=""
-          [ -n "${ZIEL_REPO:-}" ]       || FEHLT="$FEHLT Variable:BACKUP_REPO"
-          [ -n "${ZIEL_TOKEN:-}" ]      || FEHLT="$FEHLT Secret:BACKUP_REPO_TOKEN"
-          [ -n "${PASSWORT:-}" ]        || FEHLT="$FEHLT Secret:BACKUP_PASSPHRASE"
-          [ -n "${CF_API_TOKEN:-}" ]    || FEHLT="$FEHLT Secret:CF_KV_BACKUP_TOKEN"
-          [ -n "${CF_ACCOUNT_ID:-}" ]   || FEHLT="$FEHLT Secret:CLOUDFLARE_ACCOUNT_ID"
-          [ -n "${KV_NAMESPACE_ID:-}" ] || FEHLT="$FEHLT Variable:KV_NAMESPACE_ID_ABO"
-          if [ -n "$FEHLT" ]; then
-            echo "::error title=KV-Backup nicht eingerichtet::Abonnenten und Einwilligungsnachweise sind NICHT gesichert. Es fehlt:${FEHLT}. Siehe Kopf von backup-offsite.yml und das Umsetzungs-Runbook."
-            exit 1
-          fi
-          if [ "${#PASSWORT}" -lt 20 ]; then
-            echo "::error::BACKUP_PASSPHRASE ist kürzer als 20 Zeichen – zu schwach für ein Offline-Ziel."
-            exit 1
-          fi
-          SICHTBAR=$(curl -sS -H "Authorization: Bearer $ZIEL_TOKEN" -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/$ZIEL_REPO" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('private') if 'private' in d else 'UNBEKANNT')")
-          if [ "$SICHTBAR" != "True" ]; then
-            echo "::error::Ziel $ZIEL_REPO ist nicht nachweislich privat (Antwort: $SICHTBAR) – Abbruch."
-            exit 1
-          fi
-          echo "✅ Ziel privat, Passphrase und Cloudflare-Zugang vorhanden."
+          python3 scripts/kv_backup.py --selftest
+          python3 scripts/backup_einrichtung.py --selftest
+
+      # WF-9E5A / #761: Statt nur „gesetzt?“ prüft jeder Punkt live, ob er
+      # WIRKT (Ziel privat und erreichbar, Token aktiv, Namespace mit genau
+      # diesem Token lesbar, Ablaufdaten). Offene Punkte → Annotation plus
+      # Checkliste mit Links in der Job-Zusammenfassung, Exit 1. Der
+      # Schrittname bleibt stabil: Das Alerting erkennt daran die Klasse
+      # „Einrichtung unvollständig“ (Neustart hilft nicht).
+      - name: Voraussetzungen prüfen (fail-closed – kein Schein-Grün)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/backup_einrichtung.py --pruefen
 
       - name: Exportieren, verschlüsseln, Rückweg prüfen
         run: |
@@ -412,16 +419,35 @@ jobs:
         run: |
           set -euo pipefail
           TAG="kv-backup-$(date -u +%Y%m%d-%H%M)"
-          gh release create "$TAG" kv-export.json.enc --repo "$ZIEL_REPO" --draft \
-            --title "$TAG" --notes "KV/D1-Export (verschlüsselt, AES-256/PBKDF2 600k). Lauf ${GITHUB_RUN_ID}."
-          GROESSE=$(gh release view "$TAG" --repo "$ZIEL_REPO" --json assets --jq '.assets[] | select(.name=="kv-export.json.enc") | .size')
           SOLL=$(stat -c%s kv-export.json.enc)
-          if [ "$GROESSE" != "$SOLL" ]; then
-            echo "::error::Upload unvollständig ($GROESSE statt $SOLL Bytes)."
+          # Teil-Releases nie stehen lassen: Sonst zählte die Aufbewahrung
+          # unten eine kaputte Sicherung als gültige mit.
+          aufraeumen() {
+            gh release delete "$TAG" --repo "$ZIEL_REPO" --yes --cleanup-tag >/dev/null 2>&1 || true
+          }
+          if ! gh release create "$TAG" kv-export.json.enc --repo "$ZIEL_REPO" --draft \
+              --title "$TAG" --notes "KV/D1-Export (verschlüsselt, AES-256/PBKDF2 600k). Lauf ${GITHUB_RUN_ID}."; then
+            echo "::error::Ablage in $ZIEL_REPO fehlgeschlagen – hat BACKUP_REPO_TOKEN „Contents: Read and write“ auf genau dieses Repo? Teil-Release wird entfernt. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+            aufraeumen
             exit 1
           fi
-          echo "✅ $TAG abgelegt und nachgeprüft ($SOLL Bytes)."
+          # Nachprüfung wie im Repo-Job: Größe UND Entwurf werden gelesen, nicht behauptet.
+          GROESSE=$(gh release view "$TAG" --repo "$ZIEL_REPO" --json assets \
+            --jq '.assets[] | select(.name=="kv-export.json.enc") | .size' 2>/dev/null || echo "kein-zugriff")
+          ENTWURF=$(gh release view "$TAG" --repo "$ZIEL_REPO" --json isDraft --jq '.isDraft' 2>/dev/null || echo "kein-zugriff")
+          if [ "$GROESSE" != "$SOLL" ] || [ "$ENTWURF" != "true" ]; then
+            echo "::error::KV-Backup $TAG unvollständig oder kein Entwurf (Größe $GROESSE statt $SOLL Bytes · draft=$ENTWURF) – Teil-Release wird entfernt."
+            aufraeumen
+            exit 1
+          fi
+          echo "✅ $TAG abgelegt und nachgeprüft ($SOLL Bytes, Entwurf – privat)."
           # Aufbewahrung: die letzten 35 KV-Backups (5 Wochen täglich).
           gh api "repos/$ZIEL_REPO/releases?per_page=100" --jq '[.[] | select(.tag_name | startswith("kv-backup-"))] | sort_by(.created_at) | reverse | .[35:] | .[].tag_name' \
             | while read -r alt; do gh release delete "$alt" --repo "$ZIEL_REPO" --yes --cleanup-tag || true; done
 
+      # WF-9E5A: Ein auslaufender Zugang meldet sich 14 Tage VORHER über das
+      # normale Alerting – nach der Sicherung (nur wenn alles davor grün war),
+      # statt die Sicherung eines Nachts still zu beenden. Unter 30 Tagen:
+      # Hinweis; unter 14 Tagen: dieser Schritt rot, die Sicherung ist trotzdem da.
+      - name: Fristwarnung – Zugänge rechtzeitig erneuern
+        run: python3 scripts/backup_einrichtung.py --fristen

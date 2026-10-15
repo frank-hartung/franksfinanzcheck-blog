@@ -59,6 +59,16 @@
 #    Auto-Close greifen auf beiden Formen) und werden bei jedem Lauf
 #    still auf die neue Form migriert – kein Issue fällt durchs Raster.
 #
+#  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026):
+#    Eine offene Meldung blieb bis zum ersten grünen Lauf wörtlich so,
+#    wie der erste rote Lauf sie geschrieben hatte. #761 riet deshalb
+#    weiter zu GROQ/GEMINI-Schlüsseln, obwohl jeder neue Lauf längst
+#    „Einrichtung unvollständig“ erkannte. Seitdem trägt jeder Body die
+#    Klasse seines Rats (<!-- alert-runbook: … -->). Ändert sie sich,
+#    schreibt der nächste rote Lauf die Meldung mit Rat, Lauf und
+#    Schritten neu: gleiche Nummer, gleicher Titel, ohne Benachrichtigung.
+#    Gleiche Klasse oder unbekannte Job-Lage → keine Umschrift.
+#
 #  BEWUSST NICHT ÜBERWACHT:
 #    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)
 #    - "Textverständnis-Patches einspielen (einmalig)" (Einmal-Aktion)
@@ -352,6 +362,25 @@ jobs:
             // Manifest-Diagnose. Die übrigen Ratschläge bleiben unverändert.
             const installFailed = failedStepNames.some(s =>
               /Abhängigkeiten|npm ci|npm install|Manifest/i.test(String(s)));
+            // ================================================================
+            //  WF-E813 (15.10.2026): EIN RAT, DER NIE ZUTREFFEN KANN, IST
+            //  KEINE DIAGNOSE
+            //  --------------------------------------------------------------
+            //  Der erste planmäßige Lauf der Sicherheits-Wache wurde rot, und
+            //  die Meldung bot als „häufigste Ursachen" einen abgelaufenen
+            //  Schlüssel, einen GitHub-Ausfall und einen transienten Fehler
+            //  an. Diese Wache misst HTTP-Kopfzeilen der eigenen Seite: Sie
+            //  kennt keinen Schlüssel, kein Modell und keine Registry. Drei
+            //  angebotene Ursachen, von denen keine zutreffen kann, kosten
+            //  genau die Zeit, die der eine wirkliche Schritt braucht (A1 im
+            //  Cloudflare-Dashboard). Deshalb bekommt dieser Kanal eine eigene
+            //  Triage – abgeleitet aus der Klassifikation der Wache selbst,
+            //  die BEFUND (gemessen und mangelhaft) von STOERUNG (nicht
+            //  gemessen) unterscheidet.
+            // ================================================================
+            const istSicherheitsWache = wfName === 'Sicherheits-Wache';
+            const headerGateFailed = istSicherheitsWache &&
+              failedStepNames.some(s => String(s).includes('Sicherheits-Header'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -363,6 +392,43 @@ jobs:
               failedStepNames.some(s => String(s).includes('Phase 0.5 – Kadenz-Gate sicherstellen'));
             const engineFinalClassifierFailed = isContentEngine &&
               failedStepNames.some(s => String(s).includes('Do not report a quota deficit as success'));
+            // WF-9E5A / #761 (15.10.2026): Offsite-Backup. „Voraussetzungen
+            // prüfen“ ist absichtlich rot, solange ein Zugang fehlt, falsch oder
+            // abgelaufen ist (fail-closed) – eine Einrichtungsaufgabe, bei der
+            // weder ein Neustart noch GROQ/GEMINI-Schlüssel helfen. Die
+            // Job-Zusammenfassung nennt jeden offenen Punkt (E1–E8) mit Link.
+            // „Fristwarnung“ heißt: Sicherung gelaufen, ein Zugang läuft bald ab.
+            // Nur für diesen Workflow – gleichnamige Schritte anderswo behalten
+            // ihr eigenes Runbook.
+            const isBackup = wfName === 'Offsite-Backup';
+            const backupEinrichtung = isBackup &&
+              failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
+            const backupFrist = isBackup && !backupEinrichtung &&
+              failedStepNames.some(s => String(s).includes('Fristwarnung'));
+            // ================================================================
+            //  KLASSE DES RATS (WF-9E5A / #761, 15.10.2026)
+            //  --------------------------------------------------------------
+            //  Eine Quelle für beides: die Wahl des Runbooks unten UND den
+            //  unsichtbaren Marker im Body. Daran erkennt der nächste rote
+            //  Lauf, ob der Rat in einer offenen Meldung noch stimmt. Eine neue
+            //  Runbook-Klasse braucht hier einen eigenen Namen – sonst bliebe
+            //  in offenen Meldungen der alte Rat stehen.
+            // ================================================================
+            const runbookKlasse = enginePhase05Failed ? 'engine-fruehabbruch'
+              : engineFinalClassifierFailed ? 'engine-schlussklassifikation'
+              : backupEinrichtung ? 'backup-einrichtung'
+              : backupFrist ? 'backup-frist'
+              : isBackup ? 'backup'
+              : installFailed ? 'installation'
+              // WF-E813 (15.10.2026): Eigene Namen für die Sicherheits-Wache.
+              // Die Header-Wache trennt BEFUND von STOERUNG; wechselt die
+              // Klasse in einer offenen Meldung, muss der Rat neu geschrieben
+              // werden. Ohne eigenen Namen bliebe er stehen (Schaden aus
+              // WF-9E5A #761) – deshalb ist die Kette hier die einzige Quelle.
+              : headerGateFailed ? 'sicherheit-header'
+              : istSicherheitsWache ? 'sicherheit-wache'
+              : 'allgemein';
+            const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
               .map(l => typeof l === 'string' ? l : (l && l.name) || '')
               .filter(Boolean);
@@ -409,6 +475,7 @@ jobs:
               (i.body && i.body.indexOf(ident.marker) !== -1) ||
               (i.title && i.title.indexOf(altTitel) !== -1)
             ));
+            let nachzufuehren = null;
             if (open.length > 0) {
               const treffer = open[0];
               console.log('Offenes Issue existiert bereits (#' + treffer.number + ') – kein Duplikat.');
@@ -422,12 +489,32 @@ jobs:
                   body: ident.marker + '\n' + (treffer.body || '')
                 });
                 console.log('↻ Alt-Meldung #' + treffer.number + ' auf markenneutralen Titel migriert.');
+                return;
               }
-              return;
+              // ==============================================================
+              //  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026)
+              //  Steht der Rat dieses Laufs schon drin, bleibt die Meldung
+              //  unberührt – keine Umschrift bei jedem Lauf. Hat sich die
+              //  Klasse geändert (oder fehlt der Klassen-Marker noch: Bestand
+              //  vor dieser Regel), wird sie unten mit Rat, Lauf und Schritten
+              //  DIESES Laufs neu geschrieben. Nummer, Titel und Identität
+              //  bleiben; eine Body-Änderung benachrichtigt niemanden.
+              //  Nur bei bekannter Job-Lage: Ohne Schritte fiele jede Klasse auf
+              //  den allgemeinen Rat zurück und überschriebe einen präziseren.
+              // ==============================================================
+              if (!jobsKnown) {
+                console.log('Job-Lage unbekannt – der Rat in #' + treffer.number + ' bleibt unverändert.');
+                return;
+              }
+              if (treffer.body.indexOf(runbookMarker) !== -1) {
+                return;
+              }
+              nachzufuehren = treffer;
             }
 
             const lines = [
               ident.marker,
+              runbookMarker,
               '> Vorgang **' + ident.code + '** · Bereich *' + ident.bereich + '* · Zuordnung: ' +
                 '`python3 scripts/alert_issue_identity.py --tabelle`',
               '',
@@ -436,9 +523,15 @@ jobs:
               '- **Workflow:** ' + wfNameRein,
               '- **Branch:** ' + branchRein + ' · **Commit:** `' + headSha + '`',
               '- **Zeit:** ' + created + ' · **Event:** `' + event + '`' + (run.run_attempt > 1 ? ' · **Versuch:** ' + run.run_attempt : ''),
-              '- **Run:** [Details ansehen](' + runUrl + ')',
-              ''
+              '- **Run:** [Details ansehen](' + runUrl + ')'
             ];
+            if (nachzufuehren) {
+              const seit = Date.parse(nachzufuehren.created_at || '');
+              lines.push('- **Offen seit:** ' +
+                (Number.isNaN(seit) ? 'unbekannt' : new Date(seit).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })) +
+                ' · *Mit dem jüngsten Lauf nachgeführt – Rat und Lauf oben sind aktuell.*');
+            }
+            lines.push('');
             if (failedJobs.length > 0) {
               lines.push('### Fehlgeschlagene Schritte (direkt aus dem Lauf)');
               for (const j of failedJobs) {
@@ -447,32 +540,72 @@ jobs:
               }
               lines.push('');
             }
-            const handlung = enginePhase05Failed
+            // Links statt bloßer Pfade: Meldungen werden oft am Telefon gelesen.
+            // Workflow-Datei und Anleitung sichert test_alert_scoping.py ab.
+            const repoUrl = (context.serverUrl || 'https://github.com') + '/' +
+              context.repo.owner + '/' + context.repo.repo;
+            const backupAnleitung = '[`docs/ANLEITUNG-OFFSITE-BACKUP.md`](' + repoUrl +
+              '/blob/' + encodeURI(defaultBranch) + '/docs/ANLEITUNG-OFFSITE-BACKUP.md)';
+            const backupLaeufe = repoUrl + '/actions/workflows/backup-offsite.yml';
+            const handlung = runbookKlasse === 'engine-fruehabbruch'
               ? [
                   '1. **Frühabbruch vor der Endabnahme:** Phase 0.5 ist der fehlgeschlagene Pflichtschritt. Falls „Do not report a quota deficit as success“ ebenfalls rot ist, ist es nur die Schlussklassifikation. Das belegt weder ein Tagesdefizit noch einen API-Key-Ausfall.',
                   '2. Öffne das Log von „Phase 0.5 – Kadenz-Gate sicherstellen“. Die ERR-Annotation nennt den exakten Befehl und Exit-Code.',
                   '3. Bei einem Selbsttest-Exit 2: `python3 scripts/selftest_ki.py --trap <skript>` ausführen. Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
                 ]
-              : engineFinalClassifierFailed
+              : runbookKlasse === 'engine-schlussklassifikation'
                 ? [
                     '1. **Einordnung:** „Do not report a quota deficit as success“ ist der Abschluss-Classifier, nicht automatisch die Fehlerursache.',
                     '2. Öffne dessen Log und lies die `::error::`-Annotation. Sie unterscheidet FRÜHABBRUCH, TAGESDEFIZIT, RELEASE-CRASH und SYNCHRONVERLUST und nennt den zuständigen Schritt.',
                     '3. Folge der dort genannten Diagnose. API-Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
                   ]
-                : installFailed
+                : runbookKlasse === 'backup-einrichtung'
+                ? [
+                    '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
+                    '2. Den **jüngsten** Lauf öffnen ([Läufe von „Offsite-Backup“](' + backupLaeufe + '), oberster Eintrag) → **Summary**: Die Checkliste E1–E8 nennt jeden offenen Punkt mit dem Link, unter dem er erledigt wird. Schritt für Schritt: ' + backupAnleitung + '.',
+                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf schließt diese Meldung automatisch.'
+                  ]
+                : runbookKlasse === 'backup-frist'
+                ? [
+                    '1. **Die Sicherung ist gelaufen.** Rot ist nur die Fristwarnung: Ein Zugang läuft in weniger als 14 Tagen ab.',
+                    '2. Welcher, nennt die Annotation des Schritts „Fristwarnung“. Neuen Zugang erzeugen und das Secret im Environment `backup` ersetzen: ' + backupAnleitung + ', Abschnitt „Zugänge erneuern“.',
+                    '3. Der nächste grüne Lauf (nachts oder per „Run workflow“) schließt diese Meldung automatisch.'
+                  ]
+                : runbookKlasse === 'backup'
+                ? [
+                    failedJobs.length > 0
+                      ? '1. Öffne das Log des oben rot markierten Schritts – seine Annotation nennt die Ursache.'
+                      : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
+                    '2. Häufig: ein vorübergehender Ausfall von GitHub oder Cloudflare (https://www.githubstatus.com · https://www.cloudflarestatus.com) → Actions → „Offsite-Backup“ → „Run workflow“. Oder ein Zugang wurde widerrufen bzw. hat zu wenig Rechte – dann nennt ihn die Annotation.',
+                    '3. Fehlerbilder und Abhilfe: ' + backupAnleitung + ', Abschnitt „Fehlerbilder“.'
+                  ]
+                : runbookKlasse === 'installation'
                   ? [
                       '1. **Abhängigkeiten nicht installierbar.** Zum Installieren braucht der Lauf keinen API-Key – die Ursache liegt im Paketstand. Bei npm ist meist `package.json` oder `package-lock.json` defekt (z. B. ein Merge-Rest): `python3 scripts/manifest_guard.py` (oder `npm run manifest:check`) nennt Datei, Zeile und Ursache.',
                       '2. Bei pip: Paketname und Version im roten Schritt prüfen. Erst danach einen Registry- oder GitHub-Ausfall prüfen (https://www.githubstatus.com) und den Lauf neu starten.'
                     ]
-                  : [
-                    failedJobs.length > 0
-                      ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
-                      : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
-                    '2. Häufigste Ursachen:',
-                    '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
-                    '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
-                    '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)'
-                  ];
+                  : runbookKlasse === 'sicherheit-header'
+                    ? [
+                        '1. **Einordnung:** Diese Wache misst ausschließlich HTTP-Kopfzeilen der eigenen Seite. Sie braucht keinen Schlüssel und kein Modell – ein abgelaufener GROQ- oder GEMINI-Schlüssel kann diesen Schritt nicht auslösen.',
+                        '2. **Die Klasse steht im Log und in der Lauf-Zusammenfassung.** BEFUND = es wurde gemessen, und etwas fehlt. STOERUNG = es wurde nichts gemessen; das ist ausdrücklich keine Aussage über die Sicherheit, sondern eine ausgefallene Messung.',
+                        '3. **Bei BEFUND:** Steht in der Zusammenfassung „Proxy nicht aktiv" (kein `cf-ray`), kann die Header-Regel gar nicht wirken → `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 Schritt 1 (Wolke auf *Proxied*) und Schritt 2 (SSL-Modus `Full`), danach Schritt 3. Steht dort „Proxy aktiv", ist die Regel unvollständig → `cloudflare/edge-schutz.md`, Abschnitt A1 (Regel `FF Sicherheits-Header`, acht Kopfzeilen).',
+                        '4. **Bei STOERUNG:** Erreichbarkeit prüfen (`curl -sI https://franksfinanzcheck.de/`) und den Lauf neu starten. Kein Eingriff in Cloudflare nötig – ohne Messung ist keine Lücke belegt.'
+                      ]
+                    : runbookKlasse === 'sicherheit-wache'
+                      ? [
+                          '1. **Einordnung:** Die Sicherheits-Wache prüft das Repository gegen die Befunde F-01 bis F-10 (`SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`). Rot heißt: eine Wache hat angeschlagen – kein Schlüssel- und kein Kapazitätsthema.',
+                          '2. Öffne das Log des oben rot markierten Schritts. Jede Wache nennt Fundstelle und Regel, nicht nur „rot".',
+                          '3. Alle vier Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Worker-Betrieb, n8n-Kette – jeweils mit Selbsttest, offline).'
+                        ]
+                      : [
+                        failedJobs.length > 0
+                          ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
+                          : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
+                        '2. Häufigste Ursachen:',
+                        '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
+                        '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
+                        '   - **Transienter Fehler** → Workflow manuell neu starten (Actions → Run workflow)'
+                      ];
             lines.push(
               '### Was du tun solltest',
               ...handlung,
@@ -481,6 +614,23 @@ jobs:
               '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
             );
             const body = lines.join('\n');
+
+            if (nachzufuehren) {
+              try {
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: nachzufuehren.number,
+                  title: ident.titel,
+                  body: body
+                });
+                console.log('↻ Meldung #' + nachzufuehren.number + ' nachgeführt: Rat „' + runbookKlasse + '“ aus Lauf ' + run.id + '.');
+              } catch (e) {
+                // Fail-open: Die Meldung bleibt offen und auffindbar, nur ihr Rat
+                // bleibt alt. Ein Absturz hier stellte das Alerting selbst rot.
+                console.log('Nachführen von #' + nachzufuehren.number + ' fehlgeschlagen (' + e.message + ') – Meldung bleibt unverändert offen.');
+              }
+              return;
+            }
 
             // Label "auto-report" sicherstellen (zentrales Fehlermeldungs-Label).
             // Darüber werden erledigte Meldungen später automatisch aufgeräumt.

@@ -29,9 +29,13 @@
 #    python3 scripts/kv_backup.py --pruefen kv-export.json   # Wiederherstellungs-Probe
 #    python3 scripts/kv_backup.py --selftest
 #
-#  Wiederherstellung (Runbook): JSON entschlüsseln, dann
+#  Wiederherstellung (docs/ANLEITUNG-OFFSITE-BACKUP.md): JSON entschlüsseln, dann
 #    python3 scripts/kv_backup.py --wrangler-bulk kv-export.json > bulk.json
-#    npx wrangler kv bulk put bulk.json --namespace-id <ID>
+#    npx wrangler kv bulk put bulk.json --namespace-id <ID> --remote
+#  `--remote` ist Pflicht: Wrangler 4 (gepinnt 4.149.0) schreibt KV-Befehle
+#  ohne Angabe in die LOKALE Simulation (isLocal, Vorgabe true) und meldet
+#  trotzdem Erfolg – ein Rückspielen ohne `--remote` stellt nichts wieder her
+#  (geprüft 15.10.2026, WF-9E5A; Test: test_backup_einrichtung.py).
 # ============================================================
 from __future__ import annotations
 

@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "generated_at": "2026-10-15T13:17:39Z",
+  "generated_at": "2026-10-15T17:58:35Z",
   "modus": "kandidaten",
-  "commit": "494e1ab7196940f6b34d29e1dd52b2f449eefb5d",
+  "commit": "ce9b5a10040aa39e5cc2136d2c16c00e2b2da55b",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
-      "sha256": "eafe79b3c677c67e15c6d3be4a96445f10ae8e24755baef7bff27c9a1aa10f7d",
-      "urteil": "blockiert",
+      "sha256": "476b5c937d1e027b01e9dcd22897d4443681a8d0669d8702ae8e8809c9bfdf1b",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -22,15 +22,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-      "sha256": "e140be05e4ee902d26a49b0cc4379b795562762841d2057f5883a370273ca8e2",
-      "urteil": "blockiert",
+      "sha256": "9441a2af054c5f2968a24beb34e24e984acbfb83078594a8b1a4b6fe85298479",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -39,15 +39,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
-      "sha256": "e5a1bc79d0a3c6447a3b48bb355fc8826542756a438921b3d0260110eb0390d4",
-      "urteil": "blockiert",
+      "sha256": "21f096b19005bd3126b660a1cba3689a07c1569f0e02a1f0e71c2b5c07d4a337",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -56,15 +56,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "9dd0359844a4ab5dcd504646e2aa45234e7464e2cedcb4ad0f5aeba86cfab569",
-      "urteil": "blockiert",
+      "sha256": "f3bd93bbfcb171cd9210b5e1b47f31a5750fffbdf28e8bd29c3c119a4b81767f",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -73,15 +73,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "15d415ee763370413e861df2775b6e5e9e3cf118c6863db0ebfd8bdf06e468a6",
-      "urteil": "blockiert",
+      "sha256": "2323c555afa281c0b235074d924dbcfc75eb930a926302db819cf81569f27e5b",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -90,15 +90,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-      "sha256": "eb800b412fda2483cec560d084ede74ddf224e73ad12cc49a390d1a41ec7ea08",
-      "urteil": "blockiert",
+      "sha256": "36fd21b731a525b3c62038d3bf1e0ecd6818eb5521a79a3b20673c1d1f3e2d0f",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -124,15 +124,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-      "sha256": "f2ce123fad6f8756a6965ffc5bf5abbd385ed50eb2598201930f88c5e18d388f",
-      "urteil": "blockiert",
+      "sha256": "a7ad67d759f3c68c2a67bb3d002f9e391b2cbfa0452bc2679a132684e9b50522",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -141,15 +141,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
-      "sha256": "9ba67791b86424dbfa8985d16cce6b1d3d6765eb761836ac094f801c6d777d6a",
-      "urteil": "blockiert",
+      "sha256": "a95f73adb3832065b5cdf82c87fb33488535c40c638c4f1ea499b1d68ea82642",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -158,15 +158,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "b2ffb51fb89f40fd71715ad15187ae2ac8de7c5553a12ebea8060517580e4b21",
-      "urteil": "blockiert",
+      "sha256": "7588bcc57371b49e5e98973732975af502dd4b7d8ed616ab8da53041f02cf8cb",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -192,15 +192,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "b5b5fa0aa9e97bfc8ad68f015cb5196b65a7b20adcfb99dcc6b7aad7517740a1",
-      "urteil": "blockiert",
+      "sha256": "760027138bcb7d12e487162743ccb2f11a92cb27704190d77b6bab800cfa3eaa",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -209,15 +209,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "4d65c9cf0d0e1989890703915217e5e72794ea67aae09a35b7d62764c6b9b07e",
-      "urteil": "blockiert",
+      "sha256": "c3330edf6884d3009b2bcd6a5ae189a61d17953621bf32d43452bbf98a7bbdae",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -226,15 +226,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-      "sha256": "764b71c20c1037f0749701cd9f3c806bf918383b7fc8d507642dd02540a2762e",
-      "urteil": "blockiert",
+      "sha256": "c7912b6620ee003a979027f301c4506bdfcef8d938466aae9e33597987a332fc",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -243,15 +243,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
-      "sha256": "6b39e56cb5aef36fed18ea5541e3cb84d3d6ddfffc8f124af62eb320d9da55ce",
-      "urteil": "blockiert",
+      "sha256": "fe878a3c5b849a5b6c4f7b1c7d09aba0fa717db2a39399c1a1e032d5a62587c5",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -277,15 +277,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "2379d212868e445b46e7d40e3e90a89e87ecd817308026e479091683211b832c",
-      "urteil": "blockiert",
+      "sha256": "cef9b7b8d7cbb7fdceb86b0b5ce50f10e1fdfc6926a3ca0cb0a7865b13c40fc4",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -311,15 +311,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-      "sha256": "d09476d2339e3132a8036dd80b4f0dd8cd56ded9474e1745d69c15a624402b10",
-      "urteil": "blockiert",
+      "sha256": "e1ce03b00b547f8dc6a1fcc2389c0ca7cfafc4a825b019a40f690e30885e8873",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -345,15 +345,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "1e9d6be3ce19c35d91e0738e3f512e05effb02f572db9e9f66efe8644ab91e74",
-      "urteil": "blockiert",
+      "sha256": "6cda96469a0e96768b8d318852497b530b8de0cca0177ce6935b93b88e05a7c2",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -362,15 +362,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
-      "sha256": "6de8e92ff54ca09026da9891640f8b03cdcc59f2e0fa95ed5990e9e50721718f",
-      "urteil": "blockiert",
+      "sha256": "5f737373d87e96513c44599be7a7c2feb0fa0ce39e8d4affc183932372e70e47",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -379,15 +379,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
-      "sha256": "b23f07b426825d909d3ecc3df0e7ea071680ad6fcd065634c1832ef04d2ecac7",
-      "urteil": "blockiert",
+      "sha256": "62ffc577d041c6474282d4dcc6ee0c1a41d571a68e9a8ab5927d8bea83803d9a",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -396,7 +396,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
-      "sha256": "807baf8b91cc5ae6068a3049959183773f2eb065e7347db662ea695f17a08d83",
+      "sha256": "3221eb3a7e54c7b6cfc1a713d95ce365ae152a34d58750404f115dc1e999369b",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -430,15 +430,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
-      "sha256": "e032aea4d8f861660be5f1d1275f8fbd43da52073003f2fc40f68e032f8ae04e",
-      "urteil": "blockiert",
+      "sha256": "e0c369b2f29cc181275cfbb43eeaa3d5c966b549db81217b4c1968f235f6db48",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -447,7 +447,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "a1479b03a4dd2507c3c8a207b74a8c0a4cfd97dfeb2766ac46303cb1619685c4",
+      "sha256": "aec9a5649d412b75543e17130a7ea6eadfb1468be529f6d055989b47142a2fa6",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -481,15 +481,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
-      "sha256": "e18e2d2287cc753083c3d2879ed8d2a0aca784bbc378632d72089e3af5af1307",
-      "urteil": "blockiert",
+      "sha256": "2dbc3272b2ef228d710ff3618c959c0b168793eeb4c76410207e18f5abe1581c",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -532,15 +532,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "62771a08e8cf1c285b7470c249f8ee0afffc24e6ea3cda94493fb9b82e19bb7a",
-      "urteil": "blockiert",
+      "sha256": "d0b0f8d1cbae516c3a556e55c61d9f339b1db030379e528fc63f243179d4dea0",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -583,15 +583,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "d15bb0c61c2029ff3de98d6e65cafcec55fea0b160f3cb237201b08d3954edc0",
-      "urteil": "blockiert",
+      "sha256": "4fcf8733c9dc6872439f33c8cda50913df7102b29f878e407007ff03999f96c0",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -600,15 +600,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-      "sha256": "03accafb9039a7719572b0d3170b445aa61ac922f790c359eb89f462d7dc153d",
-      "urteil": "blockiert",
+      "sha256": "7d3ffaf5959b62524760046a13c0bc26fa0bb07719997586db5a234b1b8ffe9d",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -617,15 +617,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "f627263ce36458697a26b88bafa4e148cba85442c99864d9ac54de46f13fb012",
-      "urteil": "blockiert",
+      "sha256": "842bd03224fcfeac63f8d0b005c18cdd2a1e1e543c23e42af9440f85f3bcd5da",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -651,15 +651,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "2dbbc6db57dd2f73b577105e96ebe4bdfcb72e3538722564fcc02f98c077f56f",
-      "urteil": "blockiert",
+      "sha256": "bdba0347b3365da1b0a731269c527e8e7a1be15d825ab803b7478680707f2570",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -685,15 +685,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
-      "sha256": "e46153305df3973e232d61839e2efc8c0ad8ee224a2e03fc1ce089b985a7c91f",
-      "urteil": "blockiert",
+      "sha256": "5a6884648198c5b1cf1cedd92061df943274fd71c2689f5db883ee56ae0ad4ec",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -702,15 +702,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
-      "sha256": "6c1382709ddf60dd26e4282a2f5eea80d2e0e4220ae66c92caa132d0200ea132",
-      "urteil": "blockiert",
+      "sha256": "a883280623e51e8010bb0bccb6926702156ee345c64f0ccefcfdc7de961a5d50",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -753,15 +753,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
-      "sha256": "01aba627bbc7a261f83e678fba21787f7acec71641cd4df7dd5a7d59efd3fb71",
-      "urteil": "blockiert",
+      "sha256": "c09fd795c25449a633b0dabfbf59843c9cabdc1eb0269163e8f2abbe34f9d4da",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -770,15 +770,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
-      "sha256": "de666402a39454e5ebeda6098262d326907b872a5205ade7d4a119b5187ed97b",
-      "urteil": "blockiert",
+      "sha256": "a3f4e398cc2ba56d9d21fb26c741b808830f311e5b1535437bfb6aa84c4100c8",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -787,7 +787,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "16f42991c5a54161b81f52ec42d3afb3cded29f8227a76d08f4c91b1f9e07851",
+      "sha256": "a32ec32ebdd4c57731fc6d2c6506771a30c34fded7fd75b8fa821b36c151c20f",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -872,15 +872,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
-      "sha256": "ba1dd9d3450b26ab3fe4a5d77cf529fd301e6af1692ba9bf54b1f12d2e7ff719",
-      "urteil": "blockiert",
+      "sha256": "dad2b106c43631dcee370c446fe95c0fe10750d8d75b46dfd2cac705156eea6a",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"

@@ -15,6 +15,13 @@ Produktionsalarm WF-54C4). Diese Tests frieren die fehlende Stufe ein:
   3) Die Schwelle ist importiert, nicht kopiert: Wer `NEW_FLESCH_MIN` in
      `readability_check` anhebt, hebt auch das Urteil des Schreibers.
   4) Die gute Heilung bleibt möglich (kein Totstell-Test).
+  5) Die Faustregel wird GEWÄHLT, nicht gesetzt (#766): Der deterministische
+     Heiler darf nie wieder denselben Satz in den Bestand schreiben –
+     `ersetze_generische_faustregel` ersetzt den eingefrorenen Alt-Satz
+     einmalig und meldet Stillstand statt Massensatz, wenn der Pool belegt
+     ist.
+  6) Der Pool selbst erzeugt keinen Befund: Themen/Sätze eindeutig, ohne
+     Zahlen, untereinander unter der Audit-Schwelle.
 
 Alles läuft offline in temporären Verzeichnissen; die echten Artikel werden
 nicht angefasst.
@@ -179,6 +186,102 @@ class VorfallsmaterialTest(unittest.TestCase):
                         f"Flesch-Absturz des realen Vorfalls fehlt: {gruende}")
         self.assertTrue(any("R7-INTRO-FORMEL" in g for g in gruende),
                         f"R7-Fund des realen Vorfalls fehlt: {gruende}")
+
+
+class FaustregelDauerheilungTest(unittest.TestCase):
+    """#766: Ein Heiler darf nie wieder EINEN Satz in den Bestand schreiben.
+
+    Am 15.10.2026 meldete das Einzigartigkeits-Audit 435 kritische Paare –
+    C(30,2): `fix_rs2_rs3_deterministic()` hatte 30 Live-Artikeln denselben
+    generischen Heiler-Satz eingesetzt. Diese Tests frieren die Dauerheilung
+    ein: Der Satz wird GEWÄHLT (Pool + Bestandsmessung), der Altbestand
+    einmalig ersetzt, der Wiederholungsfall schreibt NICHTS.
+    """
+
+    def test_pool_ist_gross_eindeutig_und_nummernfrei(self):
+        pool = rs.FAUSTREGEL_POOL
+        self.assertGreaterEqual(
+            len(pool), 40,
+            "Pool zu klein für den Bestand – die Heilung endet im Stillstand")
+        themen = [thema for thema, _satz, _worte in pool]
+        saetze = rs.faustregel_saetze()
+        self.assertEqual(len(set(themen)), len(themen), f"Themen doppelt: {themen}")
+        self.assertEqual(len(set(saetze)), len(saetze), "Pool-Sätze doppelt")
+        for satz in saetze:
+            self.assertFalse(any(c.isdigit() for c in satz),
+                             f"Zahl im Faustregel-Satz (RS5): {satz}")
+        self.assertNotIn(rs.FAUSTREGEL_LEGACY, saetze,
+                         "der verbannte Alt-Satz steht wieder im Pool")
+        # Kein Paar teilt KRITISCH_AB 7-Gramme – sonst erzeugt der Pool den
+        # Befund selbst, den er heilt (eine Messregel, wie im Audit).
+        cu = rs._messung()
+        for i, a in enumerate(saetze):
+            for b in saetze[i + 1:]:
+                gemeinsam = len(cu.ngrams(a, cu.PHRASE_LEN)
+                                & cu.ngrams(b, cu.PHRASE_LEN))
+                self.assertLess(gemeinsam, cu.KRITISCH_AB,
+                                f"Pool-Paar über der Audit-Schwelle: {a} / {b}")
+
+    def test_legacy_satz_wird_ersetzt_und_punkt_bleibt_einfach(self):
+        body = ("Text davor.\n\n**Faustregel:** " + rs.FAUSTREGEL_LEGACY
+                + "\n\n## Fazit\n\nText danach.\n")
+        neu, n, meldung = rs.ersetze_generische_faustregel(
+            body, slug="test-artikel", titel="Testartikel")
+        self.assertEqual(1, n, meldung)
+        self.assertNotIn(rs.FAUSTREGEL_LEGACY, neu)
+        self.assertIn(rs.FAUSTREGEL_MARKER, neu)
+        self.assertNotIn("..", neu, "doppelter Satzpunkt (erster Echtlauf #766)")
+        self.assertIn("Text davor.", neu)
+        self.assertIn("## Fazit", neu)
+        # Idempotent: der zweite Lauf findet den Alt-Satz nicht mehr.
+        neu2, n2, meldung2 = rs.ersetze_generische_faustregel(
+            neu, slug="test-artikel", titel="Testartikel")
+        self.assertEqual(0, n2, meldung2)
+        self.assertEqual(neu, neu2)
+
+    def test_zwei_artikel_bekommen_verschiedene_saetze(self):
+        kontext = rs.faustregel_kontext({})
+        vorrat_vorher = rs.faustregel_vorrat(kontext)
+        genommen = []
+        for slug in ("artikel-a", "artikel-b", "artikel-c"):
+            body = "**Faustregel:** " + rs.FAUSTREGEL_LEGACY + "\n"
+            neu, n, meldung = rs.ersetze_generische_faustregel(
+                body, slug=slug, kontext=kontext)
+            self.assertEqual(1, n, meldung)
+            genommen.append(neu.replace(rs.FAUSTREGEL_MARKER, "").strip())
+            rs._kontext_aktualisieren(kontext, slug, neu)
+        self.assertEqual(len(set(genommen)), len(genommen),
+                         f"derselbe Satz mehrfach im Lauf: {genommen}")
+        self.assertEqual(vorrat_vorher - len(genommen),
+                         rs.faustregel_vorrat(kontext),
+                         "Vorrat zählt die vergebenen Sätze nicht")
+
+    def test_satz_aus_dem_bestand_wird_gemieden(self):
+        belegt = rs.faustregel_saetze()[0]
+        kontext = rs.faustregel_kontext(
+            {"fremder-artikel": "**Faustregel:** " + belegt + "\n"})
+        body = "**Faustregel:** " + rs.FAUSTREGEL_LEGACY + "\n"
+        neu, n, meldung = rs.ersetze_generische_faustregel(
+            body, slug="neuer-artikel", kontext=kontext)
+        self.assertEqual(1, n, meldung)
+        self.assertNotIn(belegt, neu, "Satz aus dem Bestand erneut vergeben")
+
+    def test_leerer_pool_schreibt_nichts(self):
+        kontext = {"belegung": set(), "index": {},
+                   "vermeiden": set(rs.faustregel_saetze())}
+        body = "**Faustregel:** " + rs.FAUSTREGEL_LEGACY + "\n"
+        neu, n, meldung = rs.ersetze_generische_faustregel(
+            body, slug="x", kontext=kontext)
+        self.assertEqual(0, n, "ohne freien Satz darf nichts geschrieben werden")
+        self.assertEqual(body, neu, "Text wurde ohne freien Satz verändert")
+        self.assertIn("RS3-EINZIGARTIG", meldung)
+
+    def test_eigener_satz_bleibt_unberuehrt(self):
+        body = ("**Faustregel:** Wer die Abschläge prüft und den Verbrauch "
+                "kennt, zahlt am Jahresende nicht drauf.\n")
+        neu, n, _meldung = rs.ersetze_generische_faustregel(body, slug="x")
+        self.assertEqual(0, n)
+        self.assertEqual(body, neu)
 
 
 if __name__ == "__main__":

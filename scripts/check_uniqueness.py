@@ -63,6 +63,13 @@ def clean_body(content):
     # Marketing-/Affiliate-Bausteine aus DERSELBEN Quelle wie quality_score
     # (keine Drift mehr): Werbekennzeichnung, Schnell-/Spar-Tipp, CTA-Zeilen.
     body = template_boilerplate.strip_marketing_boilerplate(body)
+    # HAUS-FORMELN (Issue #766): Format, kein Inhalt. Die News-Dateline und
+    # der Haus-Disclaimer stehen per Konstruktion in jedem passenden Artikel;
+    # `duplikat_guard` nimmt sie seit #676 von der Absatzmessung aus, dieses
+    # Audit maß sie weiter als Text – sieben „Dopplungen“ zwischen vier News-
+    # Entwürfen, die außer der Dateline nichts teilen. Die Formeln kommen aus
+    # DERSELBEN Quelle (SSOT), damit hier nie eine zweite Liste verrottet.
+    body = template_boilerplate.strip_house_formulas(body)
     # Werbekennzeichnung in umbrochenen Varianten (mehrzeilig, Altbestand)
     body = re.sub(r"\*?_?Dieser Artikel enthält Affiliate-Links.*?(?:Mehrkosten|Mehrkosten\.)_?\*?", " ", body, flags=re.S)
     body = re.sub(r"\(Dieser Artikel enthält Affiliate-Links.*?\)", " ", body, flags=re.S)

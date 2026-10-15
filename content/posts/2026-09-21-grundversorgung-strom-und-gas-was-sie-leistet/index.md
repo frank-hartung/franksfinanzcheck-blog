@@ -175,7 +175,7 @@ Prüfe zusätzlich deinen Kontostand gegen die Abschläge. Eine Änderung der H�
 
 Wer jährlich einen Blick auf die Abrechnung wirft und die Werte notiert, erkennt Änderungen ohne Mühe. Wer sie nie notiert, beginnt jede Prüfung bei null.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Jeder Euro ohne festen Platz wird im Monat ausgegeben; ein schriftliches Budget macht den Rest sichtbar.
 
 ## Häufige Fragen
 

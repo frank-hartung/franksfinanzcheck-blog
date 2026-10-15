@@ -232,7 +232,7 @@ Typische Vorteile:
 
 Gerade wer viel reist oder beruflich erreichbar sein muss, kann dadurch flexibler werden. Das ändert nicht den Grundsatz des Vergleichs. Aber es erweitert die Möglichkeiten deutlich.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Vergleiche nie den Preis allein, sondern den Preis für die Leistung, die du tatsächlich nutzt.
 
 ## Fazit: Jetzt vergleichen lohnt sich wie nie
 
