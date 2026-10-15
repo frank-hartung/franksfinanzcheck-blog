@@ -2,14 +2,14 @@
   "target": 6,
   "ready": 9,
   "pool_size": 9,
-  "generated_at": "2026-10-14T18:35:45Z",
+  "generated_at": "2026-10-15T08:41:05Z",
   "candidates": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": true,
       "sha256": "f3412b02755bab2af0b4929001bf07a368654ee703cadca3fb430f620a48e668",
       "flesch": 61.1,
-      "measured_at": "2026-10-14T08:58:16Z",
+      "measured_at": "2026-10-15T08:33:36Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -26,7 +26,7 @@
       "ready": true,
       "sha256": "ccbea17d34524846d71387e53e06c8d216adff33d83ed65d0af4c6ece6dded6f",
       "flesch": 60.0,
-      "measured_at": "2026-10-14T09:01:01Z",
+      "measured_at": "2026-10-15T08:34:33Z",
       "score": 0.91,
       "parts": {
         "spelling": 0.8,
@@ -43,7 +43,7 @@
       "ready": true,
       "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
       "flesch": 64.4,
-      "measured_at": "2026-10-14T09:01:55Z",
+      "measured_at": "2026-10-15T08:35:30Z",
       "score": 0.97,
       "parts": {
         "spelling": 0.9,
@@ -60,7 +60,7 @@
       "ready": true,
       "sha256": "29e3403612427a32d30b9827e7c34984bfa6b8f2bbb9e506cb050a727cfe47f9",
       "flesch": 60.1,
-      "measured_at": "2026-10-14T09:02:50Z",
+      "measured_at": "2026-10-15T08:36:28Z",
       "score": 0.954,
       "parts": {
         "spelling": 0.8,
@@ -77,7 +77,7 @@
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-14T09:03:43Z",
+      "measured_at": "2026-10-15T08:37:23Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -94,7 +94,7 @@
       "ready": true,
       "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
       "flesch": 60.8,
-      "measured_at": "2026-10-14T09:04:37Z",
+      "measured_at": "2026-10-15T08:38:18Z",
       "score": 0.978,
       "parts": {
         "spelling": 0.9,
@@ -111,7 +111,7 @@
       "ready": true,
       "sha256": "18e0fe1fb6fd54664894925da3a3e1c4c62eddc4ee7e31228569ba4067cd5981",
       "flesch": 63.2,
-      "measured_at": "2026-10-14T09:05:34Z",
+      "measured_at": "2026-10-15T08:39:17Z",
       "score": 0.96,
       "parts": {
         "spelling": 0.8,
@@ -128,7 +128,7 @@
       "ready": true,
       "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
       "flesch": 71.5,
-      "measured_at": "2026-10-14T09:06:26Z",
+      "measured_at": "2026-10-15T08:40:11Z",
       "score": 0.97,
       "parts": {
         "spelling": 0.9,
@@ -145,7 +145,7 @@
       "ready": true,
       "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
       "flesch": 65.1,
-      "measured_at": "2026-10-14T09:07:20Z",
+      "measured_at": "2026-10-15T08:41:05Z",
       "score": 0.982,
       "parts": {
         "spelling": 0.96,
@@ -159,13 +159,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "38616183448",
+    "kind": "full",
+    "run_id": "38705873777",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-10-14T18:35:45Z",
-    "renewed": [],
-    "tool": "scripts/reserve_recert.py"
   }
 }
