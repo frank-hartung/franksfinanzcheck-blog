@@ -44,6 +44,11 @@ dass die Regeln nicht still zurückgebaut werden:
      github-script-Kontext aus – die Produktionsszenarien inkl. exakter
      #343- und #632-Reproduktion, Phantom-Filter (#218), Dedupe,
      Fachkanal-Stummschaltung und Fail-open.
+  9. LAGEBILD (WF-9E5A / #761): Eine offene Meldung behält nicht für immer
+     den Rat des ersten roten Laufs. Die Klasse des Rats steht als Marker
+     im Body (<!-- alert-runbook: … -->); ändert sie sich, schreibt der
+     nächste rote Lauf die Meldung neu – nur bei bekannter Job-Lage und
+     fail-open.
 
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
@@ -123,6 +128,64 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("Do not report a quota deficit as success", self.code)
         self.assertIn("selftest_ki.py --trap <skript>", self.code)
         self.assertIn("weder ein Tagesdefizit noch einen API-Key-Ausfall", self.code)
+
+    def test_wf_9e5a_backup_einrichtung_hat_eigenes_runbook(self):
+        # Issue #761: Ein fail-closed roter „Voraussetzungen prüfen“-Schritt im
+        # Offsite-Backup ist eine Einrichtungsaufgabe. Der Rat „API-Key (GROQ/
+        # GEMINI) / neu starten“ führte in die Irre. Die Klassen sind an den
+        # Workflow gebunden und verweisen auf die Anleitung, die der Prüfer
+        # (scripts/backup_einrichtung.py) ebenfalls nennt.
+        self.assertIn("wfName === 'Offsite-Backup'", self.code)
+        self.assertIn("includes('Voraussetzungen prüfen')", self.code)
+        self.assertIn("includes('Fristwarnung')", self.code)
+        self.assertIn("Einrichtung unvollständig – ein Neustart hilft nicht", self.code)
+        anleitung = REPO / "docs" / "ANLEITUNG-OFFSITE-BACKUP.md"
+        self.assertIn("`docs/ANLEITUNG-OFFSITE-BACKUP.md`", self.code)
+        self.assertTrue(anleitung.is_file(), "Die im Alarm genannte Anleitung muss existieren.")
+        # Der Rat verlinkt die Läufe über den Dateinamen des Workflows. Wird die
+        # Datei umbenannt, zeigt der Link ins Leere; heißt der Workflow anders,
+        # greift die Bindung an wfName nicht mehr.
+        self.assertIn("/actions/workflows/backup-offsite.yml'", self.code)
+        workflow = REPO / ".github" / "workflows" / "backup-offsite.yml"
+        self.assertTrue(workflow.is_file(), "Link-Ziel backup-offsite.yml fehlt.")
+        self.assertRegex(workflow.read_text(encoding="utf-8"), r"(?m)^name:\s*Offsite-Backup\s*$",
+                         "backup-offsite.yml muss der Workflow „Offsite-Backup“ sein (wfName-Bindung).")
+
+    def test_offene_meldung_wird_bei_klassenwechsel_nachgefuehrt(self):
+        # WF-9E5A / #761: Die Meldung entstand, bevor es die Klasse
+        # „Einrichtung unvollständig“ gab, und riet zu GROQ/GEMINI. Der
+        # Dedupe-Pfad fasste offene Meldungen nie an – der falsche Rat wäre bis
+        # zum ersten grünen Lauf stehen geblieben. Vertrag: Die Klasse des Rats
+        # steht als Marker im Body; nachgeführt wird nur bei Klassenwechsel,
+        # nur bei bekannter Job-Lage und fail-open. Verhalten: Simulation.
+        self.assertIn("const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';", self.code)
+        m = re.search(r"const runbookKlasse = (.*?);", self.code, re.S)
+        self.assertIsNotNone(m, "runbookKlasse fehlt – ohne Klasse kein Nachführen")
+        deklariert = re.findall(r"'([a-z-]+)'", m.group(1))
+        self.assertEqual(deklariert[-1], "allgemein", "Rückfallklasse muss „allgemein“ sein")
+        self.assertEqual(len(deklariert), len(set(deklariert)), "Klassennamen doppelt vergeben")
+        gewaehlt = re.findall(r"runbookKlasse === '([a-z-]+)'", self.code)
+        # Jede Klasse hat genau einen Rat – und jeder Rat eine deklarierte Klasse.
+        self.assertEqual(sorted(gewaehlt), sorted(deklariert[:-1]),
+                         "Runbook-Wahl und Klassen laufen auseinander")
+        pos_dedupe = self.code.find("if (open.length > 0)")
+        pos_waechter = self.code.find("if (!jobsKnown)", pos_dedupe)
+        pos_gleich = self.code.find("treffer.body.indexOf(runbookMarker) !== -1", pos_dedupe)
+        pos_nach = self.code.find("nachzufuehren = treffer;", pos_dedupe)
+        self.assertTrue(-1 < pos_dedupe < pos_waechter < pos_gleich < pos_nach,
+                        "Reihenfolge im Dedupe-Pfad: Job-Lage → gleiche Klasse → nachführen")
+        self.assertRegex(self.code, r"ident\.marker,\s*\n\s*runbookMarker,",
+                         "Klassen-Marker gehört direkt hinter den Identitäts-Marker")
+        # Den Block exakt eingrenzen: vom Nachführen bis zum Anlegen. Ein
+        # großzügiges Fenster sähe sonst das catch der Label-Garantie dahinter.
+        start = self.code.find("if (nachzufuehren) {\n              try {")
+        ende = self.code.find("github.rest.issues.createLabel(", start)
+        self.assertTrue(-1 < start < ende < self.code.find("github.rest.issues.create(", ende),
+                        "Nachführen muss vor dem Anlegen entscheiden (sonst Duplikat)")
+        block = self.code[start:ende]
+        self.assertIn("github.rest.issues.update(", block)
+        self.assertIn("} catch (e) {", block, "Nachführen muss fail-open sein")
+        self.assertIn("return;", block, "Nach dem Nachführen darf kein Duplikat entstehen")
 
     def test_tagesdefizit_fachkanal_verhindert_duplikat(self):
         # Vertrag 6 (#602): Ein ehrlich roter Quotenschritt darf nur dann
@@ -282,11 +345,12 @@ class VerhaltensSimulation(unittest.TestCase):
             # feindlich (Markdown, Mention, Umbruch). Die Simulation beweist, dass
             # er den Issue-Body nicht steuern kann – ein Test mit einem braven
             # Namen würde genau die Lücke nicht prüfen.
+            # Offsite-Backup: WF-9E5A / #761 (Einrichtungs- und Fristklasse).
             boeser_name = "Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile"
             identitaeten = {name: ident_modul.identitaet(name)
                             for name in ("Layout-AI", "Content-Engine v2",
                                          "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
-                                         boeser_name)}
+                                         "Offsite-Backup", boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

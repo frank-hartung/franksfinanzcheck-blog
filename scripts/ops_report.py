@@ -43,8 +43,8 @@ INFRASTRUCTURE = {
     "cache_note": "Assets max-age=31536000 + ?v=<deploy-sha>; HTML dynamisch (max-age=600). KEIN Cache-Purge noetig.",
     "deploy_trigger": "github-only",
     "deploy_note": "push/workflow_dispatch; Content-Bot stoesst Deploy explizit an (GITHUB_TOKEN triggert keine Workflows)",
-    "backup": "github-repo-offsite",
-    "backup_note": "GitHub-Repo = Offsite-Backup (Code+Content+History); S3-Export geplant (Credentials fehlen)",
+    "backup": "privates-repo-verschluesselt",
+    "backup_note": "backup-offsite.yml naechtlich: Git-Bundle + Workers-KV (Abonnenten, Einwilligungsnachweise), AES-256, Entwurf im privaten Repo; Einrichtung: docs/ANLEITUNG-OFFSITE-BACKUP.md",
     "origin_url": "https://frank-hartung.github.io/franksfinanzcheck-blog/",
     "live_url": "https://franksfinanzcheck.de/",
 }
@@ -154,8 +154,8 @@ def _next_steps(q: dict, audit_stats: dict) -> list[dict]:
                   "detail": "GitHub-TLS-Zertifikat: Watchdog Check 4 meldet, sobald da → Cloudflare SSL auf Full (strict) (kein CF Pages/Workers)"})
     steps.append({"priority": 3, "action": "pinterest-token",
                   "detail": "PINTEREST_ACCESS_TOKEN fehlt → Pinterest-AI postet noch nicht"})
-    steps.append({"priority": 3, "action": "s3-backup",
-                  "detail": "S3-Export geplant (INFRASTRUKTUR.md §4.5) – Credentials fehlen; GitHub-Repo ist bereits Offsite-Backup"})
+    steps.append({"priority": 3, "action": "offsite-backup",
+                  "detail": "Offsite-Backup: Stand in der Einrichtungsprüfung (E1–E8) des letzten Laufs von backup-offsite.yml – Anleitung docs/ANLEITUNG-OFFSITE-BACKUP.md"})
     return steps
 
 
