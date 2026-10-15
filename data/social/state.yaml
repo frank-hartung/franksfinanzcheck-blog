@@ -725,6 +725,19 @@ history:
     #Frugalismus #Geldsparen #HaushaltsbuchFuehren #AbosKuendigen'
   ref: '117440058160848584'
   ai: true
+- posted_at: '2026-10-15T12:03:07.720626+02:00'
+  channel: mastodon
+  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  title: 'Warmwasser sparen: Die Rechnung hinter'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117444351878060801
+  ok: true
+  text: "\U0001F4B6 Warmwasser sparen: So senkst du deine Kosten.  \nWarmwasser entsteht\
+    \ entweder in der Heizungsanlage oder in einem elektrischen Gerät – prüfe, wo\
+    \ dein Verbrauch liegt.  \nhttps://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#Gasrechnung #Heizkosten #Frugalismus #Geldsparen"
+  ref: '117444351878060801'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -750,4 +763,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-14T22:45:47.899880+02:00'
+updated_at: '2026-10-15T12:03:12.092827+02:00'

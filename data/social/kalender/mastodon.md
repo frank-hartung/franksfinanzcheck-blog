@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 14.10.2026 22:45 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.10.2026 12:03 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Do, 15. Oktober 2026
-- **07:30** ⏳ Warmwasser sparen: Die Rechnung hinter dem Hahn — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
 - **11:30** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
 ### Fr, 16. Oktober 2026
@@ -58,6 +56,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 15.10.2026 12:03 · Warmwasser sparen: Die Rechnung hinter → https://mastodon.social/@FranksFinanzcheck/117444351878060801
 - ✅ 14.10.2026 17:51 · Abos und Verträge: Der stille Posten im Haushaltsplan → https://mastodon.social/@FranksFinanzcheck/117440058160848584
 - ✅ 14.10.2026 12:18 · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen → https://mastodon.social/@FranksFinanzcheck/117438751738382391
 - ✅ 13.10.2026 21:54 · Der erste eigene Haushalt: Fixkosten von Anfang an ordnen → https://mastodon.social/@FranksFinanzcheck/117435351129525107
@@ -67,7 +66,6 @@
 - ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
 - ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
 - ✅ 08.10.2026 14:05 · Internet & DSL-Update: Was sich jetzt für dich ändert → https://mastodon.social/@FranksFinanzcheck/117405198564655648
-- ✅ 06.10.2026 20:56 · Weihnachten Budget planen: Ohne Schulden durch die Feiertage → https://mastodon.social/@FranksFinanzcheck/117395489343468673
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

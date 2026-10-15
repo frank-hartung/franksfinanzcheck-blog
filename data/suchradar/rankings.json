@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-14T12:42:51.651256+02:00",
+ "stand": "2026-10-15T12:26:02.122689+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -18,7 +18,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "searxng",
+   "quelle": "wikipedia",
    "sichtbar": false
   },
   {

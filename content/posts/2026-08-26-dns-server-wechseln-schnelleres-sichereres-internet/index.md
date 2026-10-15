@@ -18,8 +18,8 @@ kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel 
 
 social_posted: true
 keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern", "DNS Server wechseln"]
-pin_title: "DNS-Server wechseln: Was es kann – und was nicht"
-pin_description: "*Werbung | DNS-Server wechseln kann Datenschutz und Filter verändern, nicht die Bandbreite. So vergleichst du Resolver, DoH/DoT und richtest sie sicher ein. Mehr Spartipps auf FranksFinanzcheck! #dnsserver #wechseln #dnsresolver"
+pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
+pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und FRITZ!Box – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"
@@ -118,7 +118,7 @@ Notiere zuerst die bisherigen Einstellungen oder mache einen Screenshot. So kann
 
 Bei vielen FRITZ!Box‑Modellen findest du die DNS‑Einstellungen unter **Internet → Zugangsdaten** oder **Internet → Zugangsart → DNS‑Server**. Die Bezeichnungen und verfügbaren Optionen unterscheiden sich nach Modell, FRITZ!OS und Anbieter. Aktiviere die Verwendung anderer DNSv4‑ beziehungsweise DNSv6‑Server und trage die Adressen des gewählten Anbieters ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) beschreibt die Menüs für ein konkretes Modell.
 
-Wenn du verschlüsselte Anfragen nutzen möchtest, reicht die Eingabe einer IP‑Adresse nicht immer aus. Bei DNS over TLS verlangt die FRITZ!Box zusätzlich den passenden Servernamen. Aktiviere diese Funktion nur, wenn dein Router und der gewählte Resolver sie unterstützen. Laut FRITZ! kann die Box für einzelne Dienste weiterhin die DNS‑Server des Internetanbieters verwenden; bei manchen Kabelanschlüssen fehlt die Einstellung ganz.
+Wenn du verschlüsselte Anfragen nutzen möchtest, reicht die Eingabe einer IP‑Adresse nicht immer aus. Bei DNS over TLS verlangt die FRITZ!Box zusätzlich den passenden Servernamen. Aktiviere diese Funktion nur, wenn dein Router und der gewählte Resolver sie unterstützen. Laut FRITZ! Kann die Box für einzelne Dienste weiterhin die DNS‑Server des Internetanbieters verwenden; bei manchen Kabelanschlüssen fehlt die Einstellung ganz.
 
 ### Android und iPhone
 
