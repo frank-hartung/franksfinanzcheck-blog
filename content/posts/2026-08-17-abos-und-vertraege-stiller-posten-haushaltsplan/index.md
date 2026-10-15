@@ -166,7 +166,7 @@ Zahlt der Anbieter danach weiter ab, hast du mehrere Möglichkeiten. Bei einer L
 
 Wichtig ist die Reihenfolge: erst reklamieren, dann zurückbuchen. Eine Rückgabe ohne vorherige Nachricht führt sonst schnell zu einem Mahnlauf, der zusätzliche Arbeit macht.
 
-**Faustregel:** Prüfe zuerst, was du doppelt bezahlst: Doppelte Ausgaben kosten mehr als jeder erhöhte Preis.
+**Faustregel:** Prüfe einmal im Quartal jede laufende Abbuchung auf deinem Kontoauszug – vergessene Abonnements summieren sich über Monate zu einem stillen Kostenblock.
 
 ## Häufige Fragen
 

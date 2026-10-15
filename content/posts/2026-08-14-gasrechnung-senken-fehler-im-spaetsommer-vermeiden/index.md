@@ -244,7 +244,7 @@ Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 %. Kalt wird es dab
 
 Mit Temperatur, Abschlag und Tarif im Blick senkst du deine Gasrechnung spürbar – 10 bis 15 % sind realistisch.
 
-**Faustregel:** Lies eine Rechnung einmal mit dem Taschenrechner; was du nachrechnest, korrigiert der Anbieter schneller als du denkst.
+**Faustregel:** Prüfe vor dem Vergleich den Arbeitspreis pro Kilowattstunde und den Jahresverbrauch der letzten Abrechnung – der Bonus allein sagt nichts über die Ersparnis.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

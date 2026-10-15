@@ -193,7 +193,7 @@ Wichtig sind dann vor allem:
 
 Oft reicht schon ein gemeinsamer Monatscheck von 15 Minuten. Genau dadurch wird das Haushaltsbuch nicht nur zur Ausgabenliste, sondern zu einem echten Gesprächswerkzeug für Geld im Alltag.
 
-**Faustregel:** Notiere eine Woche lang, was du ausgibst; erst die eigene Aufstellung schlägt jeden Spartipp.
+**Faustregel:** Notiere deine Ausgaben mindestens vier Wochen lang vollständig, bevor du Sparpotenziale einordnest – nur was dokumentiert ist, lässt sich auch gezielt senken.
 
 ## Fazit: Das passende Haushaltsbuch ist das, das du auch wirklich nutzt
 

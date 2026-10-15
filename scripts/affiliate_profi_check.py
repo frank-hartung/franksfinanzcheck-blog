@@ -326,7 +326,19 @@ def _check_autor():
 
 
 def _check_cta():
-    """A8: mind. 1 Affiliate-CTA pro Artikel (Monetarisierung)."""
+    """A8: mind. 1 Affiliate-CTA pro Artikel (Monetarisierung).
+
+    DAUERHEILUNG #764 (15.10.2026): `affiliate_exempt: true` mit Begründung
+    befreit einen Artikel redaktionell von der CTA-Pflicht (z. B. ein
+    reiner Messtest ohne passendes Tarifangebot). Die Regel war in
+    `affiliate_link_check` (A1) bereits korrekt umgesetzt, in _check_cta
+    (A8) fehlte die Ausnahme aber – zwei Wachen mit widersprüchlichen
+    Verträgen (identischer Root Cause wie #676), die dazu führten, dass
+    ein explizit als CTA-frei markierter DNS-Messtest den gesamten
+    Bestand blockierte. Die Ausnahme wird DIESELBE Messung aus der SSOT
+    (affiliate_exemption in affiliate_link_check.py) – keine zweite,
+    eigene Implementierung (Lektion #521).
+    """
     # Pillar → passender /go/-Key für deterministische Selbstheilung
     PILLAR_CTA = {
         "versicherungen": "hausrat",
@@ -336,12 +348,28 @@ def _check_cta():
         "strom-sparen": "strom",
         "mietwagen": "mietwagen",
     }
+    # SSOT-Import der Exemption (keine Abschreibung).
+    from affiliate_link_check import affiliate_exemption  # noqa: E402
     for slug in _post_slugs():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         c = open(p, encoding="utf-8").read()
         n = len(re.findall(r"\]\(/go/[\w-]+/\)", c)) \
             + len(re.findall(r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", c))
         if n > 0:
+            continue
+        # Redaktionelle Ausnahme berücksichtigen (A8 blockiert sonst
+        # Artikel, die A1 korrekt als exempt wertet – Root Cause #764).
+        # affiliate_exemption erwartet ein Post-Dict mit "frontmatter"-Feld
+        # (SSOT-Signatur), nicht einen Dateipfad.
+        try:
+            with open(p, encoding="utf-8") as _f:
+                _c = _f.read()
+            _parts = _c.split("---", 2)
+            _post_dict = {"frontmatter": _parts[1] if len(_parts) >= 2 else ""}
+            exempt, exempt_reason, exempt_err = affiliate_exemption(_post_dict)
+        except Exception:
+            exempt, exempt_err = False, True
+        if exempt and not exempt_err:
             continue
         if DO_FIX:
             pm = re.search(r"^pillar:\s*[\"']?([\w-]+)", c, re.M)

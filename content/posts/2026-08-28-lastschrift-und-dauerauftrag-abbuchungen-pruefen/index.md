@@ -188,7 +188,7 @@ Fehlt einer dieser Punkte, frage genau danach. Eine allgemeine Auskunft über Be
 
 Wenn die Antwort nicht kommt, wiederhole sie einmal mit Verweis auf dein Schreiben und setze eine neue Frist. Behalte den Verlauf in einer Datei. Diese Datei ist später mehr wert als jede Erinnerung.
 
-**Faustregel:** Prüfe deine Verträge einmal im Jahr auf denselben drei Zeilen: Preis, Laufzeit, Kündigungsfrist.
+**Faustregel:** Sieh dir vor der Freigabe einer Lastschrift zuerst Vertragsbedingung und Mandatsreferenz an – unberechtigte Abbuchungen kannst du innerhalb von acht Wochen zurückgeben.
 
 ## Häufige Fragen
 

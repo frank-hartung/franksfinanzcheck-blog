@@ -276,7 +276,7 @@ Diese Minute Aufmerksamkeit spart dir oft die ärgerlichsten Fehlentscheidungen.
 
 > 💶 **Spar-Tipp zwischendurch:** Wenn du nur auf den Monatsrabatt der ersten Monate schaust, vergleichst du oft falsch. Rechne den Tarif immer auf 24 Monate – erst dann zeigt sich die echte Ersparnis: [**DSL-Tarif prüfen & sparen**](/go/dsl/)
 
-**Faustregel:** Ein Tarifvergleich ohne die eigene Rechnung bleibt Bauchgefühl; leg beide Zahlen nebeneinander, bevor du wechselst.
+**Faustregel:** Prüfe vor einem Wechsel zuerst, welche Bandbreite an deiner Adresse wirklich ankommt – der beworbene Spitzenwert ist selten der Wert, der bei dir zu Hause ankommt.
 
 ## Fazit: Beim DSL-Wechsel gewinnt, wer sauber rechnet
 

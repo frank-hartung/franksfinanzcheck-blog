@@ -168,7 +168,7 @@ Notiere jeweils Download, Upload und Ping. Wiederhole das zu zwei Tageszeiten, e
 
 Gerade in Mehrfamilienhäusern zeigt dieser Vergleich oft sehr klar, ob ein freierer Funkkanal schon reicht oder ob du wirklich ein Mesh-System brauchst. Ohne diese Messung kaufst du schnell Hardware auf Verdacht.
 
-**Faustregel:** Kündige, was du nicht mehr nutzt, bevor du nach neuen Angeboten suchst; der günstigste Tarif bleibt teuer, wenn er ungenutzt läuft.
+**Faustregel:** Miss vor jedem Gerätekauf zuerst die Signalstärke am Aufstellort – ein stärkerer Router nutzt nichts, wenn das Funksignal durch Wände blockiert wird.
 
 ## Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN
 

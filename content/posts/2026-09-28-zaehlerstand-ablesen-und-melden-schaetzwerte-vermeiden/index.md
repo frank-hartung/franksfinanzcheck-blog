@@ -189,7 +189,7 @@ Ein Ordner genügt. Pro Abrechnungsjahr ein Blatt mit: Datum, Zählerstand, Zäh
 
 Dazu kommen die Jahresrechnungen und bei Wechseln die Schlussabrechnung. Nach drei Jahren darfst du alte Jahre aussortieren – wenn keine Fragen offen sind.
 
-**Faustregel:** Rechne jedes Angebot auf den Gesamtpreis um, bevor du unterschreibst; der beworbene Startpreis sagt wenig über das zweite Jahr.
+**Faustregel:** Lies den Zähler vor jeder Abrechnung selbst ab und dokumentiere den Stand mit Datum – Schätzwerte weichen systematisch von deinem echten Verbrauch ab.
 
 ## Häufige Fragen
 

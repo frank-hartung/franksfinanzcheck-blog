@@ -182,7 +182,7 @@ Vergleiche die beiden Rechnungen Zeile für Zeile. Notiere, welcher Anbieter wel
 
 Zahle nichts doppelt, ohne es zu prüfen. Melde die Überschneidung schriftlich und verweise auf beide Rechnungen. Behalte die Nachweise, bis die Sache geklärt ist.
 
-**Faustregel:** Ein Umzug ist der beste Moment für den Vertragscheck: Was du jetzt nicht kündigst, zahlst du auch am neuen Ort.
+**Faustregel:** Plane vor dem Umzug alle laufenden Verträge mindestens drei Monate im Voraus – Nachsendeauftrag, Versicherungen und Energieanbieter laufen sonst in die alte Wohnung weiter.
 
 ## Häufige Fragen
 

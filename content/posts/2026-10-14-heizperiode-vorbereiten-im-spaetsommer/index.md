@@ -103,7 +103,15 @@ Auch die Heizkurve ist an Gebäude und Anlage anzupassen. Lass die Einstellung p
 3. **Kündigungsfenster sichern:** Fristen und Wechseltermin vor einem Abschluss prüfen.
 4. **Kurs halten:** Verbrauch weiter dokumentieren und tatsächliche Kosten kontrollieren.
 
-Weitere Grundlagen findest du in unserem [Ratgeber zum Stromsparen](/pillar/strom-sparen/).
+
+## Passende Beiträge zum Weiterlesen
+
+- [Gasrechnung senken: Fehler im Spätsommer vermeiden](../../posts/gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
+- [Warmwasser sparen: Die Rechnung hinter dem Hahn](../../posts/warmwasser-sparen-rechnung-hinter-dem-hahn/)
+- [Energiediebe stoppen: Stromfresser finden](../../posts/energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
+
+
+## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ## Häufige Fragen
 

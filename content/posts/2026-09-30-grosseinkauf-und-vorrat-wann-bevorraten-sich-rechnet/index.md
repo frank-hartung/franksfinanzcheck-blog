@@ -186,7 +186,7 @@ Solche Unterbrechungen sind in der Regel kurz. Sie entstehen durch Krankheit, We
 
 Führe ihn getrennt von deinem Kochvorrat. Sonst wandert er in den Alltag ab und ist im Ernstfall leer. Prüfe die Haltbarkeit einmal im Jahr und ersetze, was abgelaufen ist.
 
-**Faustregel:** Zwischen Wunsch und Kauf gehört eine Nacht Bedenkzeit; wer wartet, bestellt seltener doppelt.
+**Faustregel:** Kauf nur so viel auf Vorrat, wie du innerhalb der Haltbarkeit sicher verbrauchst – ein Rabatt auf die Großpackung verliert seinen Wert im Mülleimer.
 
 ## Häufige Fragen
 

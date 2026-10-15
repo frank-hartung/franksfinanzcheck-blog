@@ -238,7 +238,7 @@ Der passende Tarif hängt von dir ab. Diese drei Fragen helfen dir weiter:
 
 Vergleiche immer den Preis im Jahr ohne Bonus. Setze dir dabei eine klare Grenze. Ein Beispiel: „Für den Schutz zahle ich 50 bis 100 € im Jahr mehr, aber keinen Cent darüber.“
 
-**Faustregel:** Eine Garantie ist nur so viel wert wie ihre Laufzeit; prüfe, was nach dem Ende der Zusage gilt.
+**Faustregel:** Eine Preisgarantie schützt dich nur dann vor Überraschungen, wenn sie Arbeitspreis, Grundpreis und Laufzeit lückenlos abdeckt – vergleiche auch das Kleingedruckte zu Preisanpassungen.
 
 ## Fazit: Kaufe keinen Namen, sondern einen klaren Schutz
 

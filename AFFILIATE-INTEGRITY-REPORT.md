@@ -1,10 +1,10 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-15 15:33:52 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-15 16:36:07 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 58 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 58 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
-**Build:** public/ aktuell (kein Rebuild nötig)
+**Build:** public/ veraltet → Hugo-Rebuild
 
 🎉 Alle CTA-Boxen sind strukturell intakt, jedes Linkziel ist in `scripts/check24_links.yaml` registriert, jeder Link erscheint tatsächlich im gebauten HTML (AI4) und jede `/go/`-Seite leitet auf die registrierte Partner-URL weiter (AI5).
 
@@ -38,7 +38,7 @@
 | 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte | 1 → 2 ✅ | /go/dsl/ |
 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | 2 → 2 ✅ | /go/mietwagen/ |
 | 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen | 2 → 3 ✅ | /go/kreditkarte/, /go/reisekrankenversicherung/ |
-| 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt | 0 → 0 redaktionelle Ausnahme | – |
+| 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt | 0 → 0 ✅ | – |
 | 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich | 3 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen | 0 → 1 ✅ | /go/dsl/ |
 | 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum | 3 → 3 ✅ | /go/allgemein/ |

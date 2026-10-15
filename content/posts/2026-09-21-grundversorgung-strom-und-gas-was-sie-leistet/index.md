@@ -175,7 +175,7 @@ Prüfe zusätzlich deinen Kontostand gegen die Abschläge. Eine Änderung der H�
 
 Wer jährlich einen Blick auf die Abrechnung wirft und die Werte notiert, erkennt Änderungen ohne Mühe. Wer sie nie notiert, beginnt jede Prüfung bei null.
 
-**Faustregel:** Jeder Euro ohne festen Platz wird im Monat ausgegeben; ein schriftliches Budget macht den Rest sichtbar.
+**Faustregel:** Prüfe nach einem Wechsel in die Grundversorgung sofort einen neuen Tarifvergleich – die Versorgung ist sicher, aber meist deutlich teurer als ein regulärer Vertrag.
 
 ## Häufige Fragen
 

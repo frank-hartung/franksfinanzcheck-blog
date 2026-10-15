@@ -185,7 +185,7 @@ Die praktische Regel: Jeder Vertrag braucht genau einen Verantwortlichen. Eine g
 
 Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in fünf Minuten klären.
 
-**Faustregel:** Plane den Monat in feste Töpfe; Geld ohne Topf verschwindet zuerst.
+**Faustregel:** Melde Verträge für Miete, Strom und Internet in den ersten vier Wochen nach dem Einzug in deinem Namen an – was nicht auf dich läuft, kann dich später teuer zu stehen kommen.
 
 ## Häufige Fragen
 

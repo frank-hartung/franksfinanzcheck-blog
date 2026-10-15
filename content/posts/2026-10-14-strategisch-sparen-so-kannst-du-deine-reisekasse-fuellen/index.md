@@ -117,6 +117,15 @@ Ein Vergleichsportal ist ein Suchweg, kein Nachweis für den günstigsten Preis 
 - [ ] Unbestätigte Boni und Cashback sind nicht fest eingeplant.
 - [ ] Stornierungs-, Zahlungs- und Mietbedingungen sind gelesen.
 
+
+## Passende Beiträge zum Weiterlesen
+
+- [Last-Minute-Urlaub: So schnappst du dir das Schnäppchen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
+- [Mietwagen buchen ohne Kaution: Fallen im Urlaub](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/)
+- [Sparen im Herbst: Die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
+- [Mehr Freiheit durch Verzicht: Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
+
+
 ## Häufige Fragen
 
 ### Wie viel sollte ich monatlich sparen?

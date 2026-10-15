@@ -210,7 +210,7 @@ Bevor du buchst, investiere diese Viertelstunde:
 
 > 💶 **Spar-Tipp zwischendurch:** Wer alle zwei Jahre konsequent wechselt, profitiert immer wieder von Neukunden-Vorteilen und spart im Schnitt **ca. 10 € bis 15 € pro Monat**. [**Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 
-**Faustregel:** Vergleiche zuerst die Leistung, dann den Preis; ein fehlender Baustein kostet später mehr als der Aufpreis heute.
+**Faustregel:** Ein Tarif ist erst dann der richtige für dein Zuhause, wenn Bandbreite, Effektivpreis über 24 Monate und Routerkosten zu deinem Nutzungsverhalten passen.
 
 ## Fazit: Der beste DSL-Tarif ist nicht der schnellste, sondern der passendste
 

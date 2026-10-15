@@ -234,7 +234,7 @@ Setze eine realistische Antwortfrist und bleib sachlich. Ein Widerspruch ersetzt
 
 Prüfe nach dem Wechsel auch die Schlussrechnung. Ein sauberer neuer Vertrag heilt keinen falschen Endstand beim alten Anbieter.
 
-**Faustregel:** Belege gehören ins Ablagefach, nicht in die Schublade: Ohne Nachweis holt keine Erstattung Geld zurück.
+**Faustregel:** Eine Preisgarantie federt kurzfristige Marktsprünge ab – ob sie dich dauerhaft günstig versorgt, zeigt erst der Arbeitspreis nach Ablauf der Festphase.
 
 ## Fazit: Auf Schreiben reagieren, nicht auf Schlagzeilen
 

@@ -244,7 +244,7 @@ Nutze dafür eine kurze Abreise-Liste. Prüfe auch, ob Zeitschaltuhren oder auto
 
 Der Messwert zählt.
 
-**Faustregel:** Erst messen, dann investieren: Jede Effizienz-Ausgabe ohne Verbrauchsdaten zahlt sich später aus – oder nie.
+**Faustregel:** Zieh Stecker nach Nutzung konsequent oder nutz eine schaltbare Steckdosenleiste – was ganz aus ist, verbraucht auch keinen Standby-Strom.
 
 ## Fazit: Nicht jedes Watt jagen
 

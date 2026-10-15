@@ -261,7 +261,7 @@ Eine saubere Prüfung zeigt dir, ob Verbrauch, Tarif oder Abschläge die Rechnun
 
 Mit dem richtigen Vorgehen lässt sich die Gasrechnung prüfen um bis zu 15 % senken.
 
-**Faustregel:** Wer den Zählerstand regelmäßig notiert, erkennt teure Ausreißer, bevor die Jahresabrechnung sie erklärt.
+**Faustregel:** Lies vor der Heizsaison Abschlagshöhe, Arbeitspreis und Zählerstand gemeinsam – ein zu niedriger Abschlag im Sommer endet sonst in einer bösen Nachzahlung.
 
 ## Fazit: Die Rechnung erzählt dir, welcher Hebel wirkt
 
