@@ -185,7 +185,7 @@ Die praktische Regel: Jeder Vertrag braucht genau einen Verantwortlichen. Eine g
 
 Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in fünf Minuten klären.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Plane den Monat in feste Töpfe; Geld ohne Topf verschwindet zuerst.
 
 ## Häufige Fragen
 

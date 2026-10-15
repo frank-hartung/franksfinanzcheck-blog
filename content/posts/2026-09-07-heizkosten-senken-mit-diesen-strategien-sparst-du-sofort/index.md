@@ -221,7 +221,7 @@ Miss, statt zu raten.
 
 Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizkosten senkst – ganz ohne Frieren. Für weitere Alltags-Spartricks lies auch: [Frugalismus-Tipps für mehr Freiheit](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Versicherungen gehören bei jedem Umzug auf den Tisch: Deckung, Selbstbeteiligung, Ausschlüsse – in dieser Reihenfolge.
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

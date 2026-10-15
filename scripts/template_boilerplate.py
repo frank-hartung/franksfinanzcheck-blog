@@ -99,6 +99,111 @@ def strip_internal_link_anchors(text: str) -> str:
     return INTERNAL_LINK_RE.sub(" ", text)
 
 
+# ------------------------------------------------------------------
+# HAUS-FORMELN: FORMAT ≠ INHALT (Issue #766, 15.10.2026)
+# ------------------------------------------------------------------
+# Der News-Desk schreibt in JEDEN News-Kompakt-Artikel dieselbe Dateline
+# (`news_writer.STAND_INTRO` – nur das Datum wechselt). `duplikat_guard`
+# kennt diese Formel seit #676 und nimmt sie dort von der Absatz-Duplikat-
+# messung aus – das Einzigartigkeits-Audit maß sie weiter als Inhalt und
+# meldete am 15.10.2026 sieben Paare „gleicher Text“ zwischen vier News-
+# Entwürfen, die außer der Dateline nichts teilen (17 gleiche 7-Wort-Phrasen
+# pro Paar). Das ist dieselbe Bauart, die #714 geheilt hat: ZWEI Messungen,
+# zwei Wahrheiten – die strengere gewinnt nicht, sie fällt später auf.
+#
+# Deshalb liest diese Datei (SSOT für den Uniqueness-Vergleich) dieselben
+# Haus-Formeln aus derselben Quelle wie `duplikat_guard` (AST-Zugriff auf die
+# Modulkonstanten, kein Import der Produzenten: die ziehen PyYAML nach).
+#
+# FREIBRIEF-SCHUTZ – die Ausnahme ist absichtlich eng:
+#   · Entfernt wird nur ein LITERALER Satz der Formel ab
+#     `HAUS_FORMEL_MIN_LAENGE` Zeichen. Kurze Fragmente („Stand:“) bleiben
+#     stehen – sonst wäre jedes Datum eine Lizenz.
+#   · Ein Platzhalter der Formel (`{today}`) wird NICHT zu „beliebigem Text“:
+#     Die Formel wird an ihren Platzhaltern geteilt, jeder Teil muss als
+#     eigener Satz wieder auftauchen.
+#   · Zwischen den Wörtern ist nur TYPOGRAFIE frei (Leerzeichen, geschützte
+#     Leerzeichen, Binde-/Gedankenstriche, Satzzeichen). Eingeschobene eigene
+#     Wörter heben die Ausnahme auf – der Satz wird dann wieder gemessen.
+#   · Alles, was der Artikel SELBST um die Formel herum schreibt, bleibt im
+#     Vergleich (Gegenprobe im Selbsttest).
+HAUS_FORMEL_MIN_LAENGE = 40
+
+
+def _formel_laeufe(wert: str) -> list:
+    """Literale Sätze einer Haus-Formel (Platzhalter getrennt, Markdown weg)."""
+    laeufe = []
+    for teil in re.split(r"\{[^{}]*\}", wert or ""):
+        teil = re.sub(r"[*_`>#]+", " ", teil)
+        for satz in re.split(r"(?<=[.!?])\s+", teil):
+            satz = satz.strip(" \t\r\n·:;,–—-")
+            if len(satz) >= HAUS_FORMEL_MIN_LAENGE:
+                laeufe.append(satz)
+    return laeufe
+
+
+def haus_formel_saetze() -> list:
+    """Registrierte Haus-Formeln als Literalsätze: [(quelle, satz), …]."""
+    import duplikat_guard as dg  # noqa: PLC0415 – stdlib-only, kein Zyklus
+    saetze = []
+    for modul, attribut in dg.HAUS_TEXT_QUELLEN:
+        wert, _luecke = dg.ssot_konstante(modul, attribut)
+        if not isinstance(wert, str):
+            continue
+        for satz in _formel_laeufe(wert):
+            saetze.append((f"{modul}.{attribut}", satz))
+    return saetze
+
+
+def haus_formel_luecken() -> list:
+    """Nicht lesbare/auswertbare Haus-Formeln – eine blinde Ausnahme.
+
+    Wird als Befund geführt (und im Selbsttest des Audits als Werkzeugfehler
+    gewertet): Eine Ausnahme, die ins Leere greift, lässt die Messung strenger
+    werden – und niemand wüsste, warum die Formel plötzlich „doppelt“ ist.
+    """
+    import duplikat_guard as dg  # noqa: PLC0415
+    luecken = []
+    for modul, attribut in dg.HAUS_TEXT_QUELLEN:
+        _wert, luecke = dg.ssot_konstante(modul, attribut)
+        if luecke:
+            luecken.append(f"{modul}.{attribut}: {luecke}")
+    # Eine zu KURZE Formel (z. B. das CTA-Fragment „Jetzt vergleichen und
+    # sparen:“) ist keine Lücke, sondern Absicht – sie ist unter der
+    # Mindestlänge und wird bewusst nicht entfernt. Wird dagegen GAR KEINE
+    # Formel mehr auswertbar, ist die Ausnahme blind und das ist ein Befund.
+    if not haus_formel_saetze():
+        luecken.append("keine einzige Haus-Formel auswertbar – die Ausnahme "
+                       "wäre blind (Messung ohne Ansage strenger)")
+    return luecken
+
+
+def _haus_formel_muster(satz: str):
+    """Tolerantes Muster EINES Formelsatzes (Wortfolge fest, Typografie frei)."""
+    worte = re.findall(r"\w+", satz, re.UNICODE)
+    return re.compile(r"(?<!\w)" + r"[^\w\n]{0,4}".join(re.escape(w) for w in worte)
+                      + r"(?!\w)[.!]?")
+
+
+_HAUS_FORMEL_MUSTER = None
+
+
+def haus_formel_muster() -> list:
+    """[(quelle, kompiliertes Muster)] – einmal gebaut, dann gecacht."""
+    global _HAUS_FORMEL_MUSTER
+    if _HAUS_FORMEL_MUSTER is None:
+        _HAUS_FORMEL_MUSTER = [(quelle, _haus_formel_muster(satz))
+                               for quelle, satz in haus_formel_saetze()]
+    return _HAUS_FORMEL_MUSTER
+
+
+def strip_house_formulas(text: str) -> str:
+    """Entfernt registrierte Haus-Formel-Sätze (Format, kein Inhalt)."""
+    for _quelle, muster in haus_formel_muster():
+        text = muster.sub(" ", text)
+    return text
+
+
 def strip_generated_conclusions(text: str) -> str:
     """Entfernt die deterministischen Fazit-/FAQ-Blöcke der Fazit-Schmiede.
 
@@ -119,8 +224,10 @@ def strip_marketing_boilerplate(text: str) -> str:
 
 
 def strip_template_boilerplate(text: str) -> str:
-    """Beide Schablonen-Klassen entfernen: Fazit/FAQ + Marketing/Affiliate."""
-    return strip_marketing_boilerplate(strip_generated_conclusions(text))
+    """Alle Schablonen-Klassen entfernen: Fazit/FAQ, Marketing, Haus-Formeln."""
+    text = strip_generated_conclusions(text)
+    text = strip_marketing_boilerplate(text)
+    return strip_house_formulas(text)
 
 
 def run_selftest() -> list:
@@ -205,6 +312,49 @@ def run_selftest() -> list:
     # Fall 8: Idempotenz – ein zweiter Lauf ändert nichts mehr.
     if strip_internal_link_anchors(stripped4) != stripped4:
         fehler.append("Fall 8: strip_internal_link_anchors ist nicht idempotent")
+
+    # --- Haus-Formeln (Issue #766, 15.10.2026) ---------------------------
+    # Fall 9: Die registrierte News-Dateline fällt weg, der eigene Satz des
+    # Artikels bleibt – sonst würde eine Formatzeile als Inhalt gemessen.
+    dateline = ("**Stand: 06.10.2026.** Dieser News-Kompakt-Artikel ordnet "
+                "eine aktuelle Entwicklung ein. Konditionen und Regeln können "
+                "sich ändern – prüfe Details immer beim jeweiligen Anbieter.\n"
+                "Der eigene Satz dieses Artikels bleibt stehen.")
+    ohne_dateline = strip_house_formulas(dateline)
+    if "Kompakt-Artikel" in ohne_dateline or "jeweiligen Anbieter" in ohne_dateline:
+        fehler.append("Fall 9: News-Dateline (Haus-Formel) wurde nicht entfernt")
+    if "eigene Satz dieses Artikels" not in ohne_dateline:
+        fehler.append("Fall 9: eigener Satz um die Haus-Formel wurde mitentfernt")
+
+    # Fall 10 (Freibrief-Schutz): Ein Satz, der nur ÄHNLICH klingt – hier mit
+    # eingeschobenem eigenen Wort – ist NICHT die Haus-Formel und bleibt
+    # gemessen. Sonst wäre „ordnet eine kurze aktuelle Entwicklung ein“
+    # eine Lizenz für beliebigen Text.
+    aehnlich = ("Dieser News-Kompakt-Artikel ordnet eine kurze aktuelle "
+                "Entwicklung ein. Konditionen und Regeln können sich ändern – "
+                "prüfe Details immer beim jeweiligen Anbieter.")
+    if "kurze aktuelle" not in strip_house_formulas(aehnlich):
+        fehler.append("Fall 10: Sätze, die der Haus-Formel nur ähneln, "
+                      "werden fälschlich entfernt (Freibrief)")
+
+    # Fall 11: Ein Zusatzsatz, den ZWEI Artikel teilen, bleibt gemessen –
+    # nur die Formel selbst ist Format. (Sonst verschwände echte Dopplung,
+    # die direkt an der Dateline klebt.)
+    zusatz = ("**Stand: 01.10.2026.** Dieser News-Kompakt-Artikel ordnet eine "
+              "aktuelle Entwicklung ein. Konditionen und Regeln können sich "
+              "ändern – prüfe Details immer beim jeweiligen Anbieter. "
+              "Belegbare Zahlen stammen aus den amtlichen Daten.")
+    if "Belegbare Zahlen" not in strip_house_formulas(zusatz):
+        fehler.append("Fall 11: eigener Zusatzsatz an der Dateline wurde "
+                      "mitentfernt")
+
+    # Fall 12: Die Formel-Quelle ist lesbar (eine blinde Ausnahme wäre eine
+    # strengere Messung ohne Ansage) und die Entfernung ist idempotent.
+    if haus_formel_luecken():
+        fehler.append(f"Fall 12: Haus-Formel-Quelle nicht lesbar: "
+                      f"{haus_formel_luecken()}")
+    if strip_house_formulas(ohne_dateline) != ohne_dateline:
+        fehler.append("Fall 12: strip_house_formulas ist nicht idempotent")
 
     return fehler
 

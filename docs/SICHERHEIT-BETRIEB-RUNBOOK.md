@@ -54,7 +54,28 @@ Erwartet: fünf Zeilen (`Strict-Transport-Security`, `X-Content-Type-Options`,
 Änderung, nicht nur eine technische.
 
 **Wache:** `.github/workflows/sicherheits-wache.yml`, Job `live`, täglich 06:05
-UTC. Sie meldet fehlende Header als roten Lauf → automatische Meldung.
+UTC. Sie misst, **klassifiziert** und meldet – und zwar so, dass die Meldung
+den nächsten Schritt nennt statt einer Ratliste (Dauerheilung WF-E813,
+15.10.2026). Vier Klassen, erkennbar am Exit-Code und an der
+Lauf-Zusammenfassung „F-01 · Sicherheits-Header“:
+
+| Klasse | Exit | Bedeutung | Was du tust |
+|---|---|---|---|
+| **OK** | 0 | beide Ziele gemessen, alles im Soll | nichts – die Meldung schließt sich von selbst |
+| **TEILWEISE** | 0 | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | nichts am Edge; das nicht gemessene Ziel steht ausdrücklich im Bericht. Die Regel aus A1 gilt je **Host**, nicht je Pfad – ein sauberes Ziel belegt sie. |
+| **BEFUND** | 1 | gemessen, und es fehlt etwas | je nach Diagnose Abschnitt A1 Schritt 1 (Proxy aus) oder Schritt 3 (Regel unvollständig) – der Bericht nennt es ausdrücklich |
+| **STOERUNG** | 2 | kein Ziel erreichbar | **kein** Sicherheitsbefund: Erreichbarkeit prüfen, Lauf neu starten |
+
+Die Wache heilt transiente Netzfehler vorher selbst (vier Versuche mit
+2 s/8 s/30 s Pause, `GET`-Nachfrage, wenn ein Proxy auf `HEAD` mit einem
+Fehlerstatus antwortet). Erst was danach noch rot ist, erreicht dich. Eine
+Netzstörung wird deshalb nie wieder als „fehlender Header“ gemeldet – das war
+der Fehler, der WF-E813 ausgelöst hat.
+
+**Solange A1 nicht aktiv ist, bleibt dieser Lauf rot – das ist gewollt und
+kein Code-Fehler.** Genau dafür steht die Diagnose: Fehlt `cf-ray` und
+`server: cloudflare` in der Antwort, liegt die Zone nicht hinter dem Proxy,
+und der Bericht verweist auf Schritt 1 statt auf die Regel.
 
 ---
 

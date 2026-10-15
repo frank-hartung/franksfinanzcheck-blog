@@ -98,6 +98,8 @@ Ein anderer Resolver ändert außerdem, welchem Betreiber du deine DNS-Anfragen 
 4. Ändere nicht gleichzeitig Router, DNS und WLAN-Kanal – sonst bleibt unklar, wodurch sich ein Ergebnis verändert hat.
 5. Wenn nach einer DNS-Umstellung Websites oder Apps nicht funktionieren, stelle die notierten vorherigen Einstellungen wieder her. Googles [Anleitung zum Testen und Rücksetzen der DNS-Konfiguration](https://developers.google.com/speed/public-dns/docs/using) beschreibt dieses Vorgehen für Google Public DNS.
 
+**Faustregel:** Eine lange Bindung will begründet sein; prüfe vorher, wie sich dein Bedarf in dieser Zeit ändern kann.
+
 ## Häufige Fragen
 
 ### Macht ein schnellerer DNS-Resolver Downloads schneller?

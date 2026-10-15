@@ -738,6 +738,18 @@ history:
     \  \n#Gasrechnung #Heizkosten #Frugalismus #Geldsparen"
   ref: '117444351878060801'
   ai: true
+- posted_at: '2026-10-15T17:38:23.624622+02:00'
+  channel: mastodon
+  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
+  title: 'Lastschrift und Dauerauftrag: Was du prüfen solltest'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117445670235708986
+  ok: true
+  text: 'Spare böse Überraschungen – prüfe, welche Abbuchungen wirklich von dir kommen.
+    Geld verlässt dein Konto über Überweisung, Dauerauftrag und Lastschrift. 👉 https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Girokonto #Konto #KreditkarteUndKredit #LastschriftPruefen'
+  ref: '117445670235708986'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -763,4 +775,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-15T12:03:12.092827+02:00'
+updated_at: '2026-10-15T17:38:28.691742+02:00'

@@ -272,7 +272,7 @@ Kontrolliere deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grund
 
 Bewahre die Tabelle mindestens bis zur ersten Rechnung auf. Dann kannst du Preis, Bonus und Abschlag mit dem ursprünglichen Angebot abgleichen.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Miss den Verbrauch, bevor du den Tarif wechselst; die größere Ersparnis sitzt meist nicht im Preis, sondern im Verbrauch.
 
 ## Fazit: Erst neutral vergleichen, dann Vorteile einrechnen
 

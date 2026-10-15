@@ -193,7 +193,7 @@ Wichtig sind dann vor allem:
 
 Oft reicht schon ein gemeinsamer Monatscheck von 15 Minuten. Genau dadurch wird das Haushaltsbuch nicht nur zur Ausgabenliste, sondern zu einem echten Gesprächswerkzeug für Geld im Alltag.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Notiere eine Woche lang, was du ausgibst; erst die eigene Aufstellung schlägt jeden Spartipp.
 
 ## Fazit: Das passende Haushaltsbuch ist das, das du auch wirklich nutzt
 

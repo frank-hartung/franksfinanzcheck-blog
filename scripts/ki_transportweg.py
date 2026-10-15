@@ -394,6 +394,11 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # Kein Modellaufruf: Cloudflare-Verwaltungs-API (KV/D1-Export) fuer das
     # verschluesselte Abonnenten-Backup (Sicherheitsaudit 14.10.2026, M-11).
     Path("scripts/kv_backup.py"),
+    # Kein Modellaufruf: Einrichtungspruefung desselben Backups (Token-Verify,
+    # KV-/D1-Metadaten; WF-9E5A / #761). Ausgleich fuer die Ausnahme:
+    # test_backup_einrichtung.TransportVertrag erlaubt dort nur diese
+    # Verwaltungspfade – kein /ai/, kein anderer Anbieter.
+    Path("scripts/backup_einrichtung.py"),
 }
 T6_AUSGESCHLOSSENE_ORDNER = {
     ".git", ".arena", ".cache", ".venv", "venv", "node_modules",

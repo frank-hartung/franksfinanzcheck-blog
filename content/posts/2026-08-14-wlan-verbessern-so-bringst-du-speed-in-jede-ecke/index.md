@@ -168,7 +168,7 @@ Notiere jeweils Download, Upload und Ping. Wiederhole das zu zwei Tageszeiten, e
 
 Gerade in Mehrfamilienhäusern zeigt dieser Vergleich oft sehr klar, ob ein freierer Funkkanal schon reicht oder ob du wirklich ein Mesh-System brauchst. Ohne diese Messung kaufst du schnell Hardware auf Verdacht.
 
-**Faustregel:** Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du dich vertraglich festlegst.
+**Faustregel:** Kündige, was du nicht mehr nutzt, bevor du nach neuen Angeboten suchst; der günstigste Tarif bleibt teuer, wenn er ungenutzt läuft.
 
 ## Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN
 

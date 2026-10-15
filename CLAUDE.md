@@ -1641,6 +1641,46 @@ Bauart wie #583 (Faktenfrische) und #674 (Duplikate).
 - Tests: `python3 -m unittest scripts.tests.test_publish_gate_uniqueness`
   (16) · Bericht: `EINZIGARTIGKEIT-BESTAND-714-DAUERHEILUNG-PREMIUM-2026-10-12.md`.
 
+## Ein Heiler darf keinen Massensatz schreiben (Einzigartigkeit, seit #766, 15.10.2026)
+
+Am 15.10.2026 meldete das tägliche Einzigartigkeits-Audit **435 kritische
+live↔live-Paare** – C(30,2). Die Ursache war nicht die Redaktion, sondern der
+eigene Heiler: `redaktions_standard.fix_rs2_rs3_deterministic()` hatte 30
+Artikeln ohne Faustregel **denselben** eingefrorenen Satz eingesetzt. Ein Satz,
+der per Konstruktion überall passt, ist per Konstruktion überall derselbe – die
+Regel war richtig, ihre Umsetzung erzeugte den Befund, den die Wache meldete.
+
+- **Der Heiler wählt, er setzt nicht.** `FAUSTREGEL_POOL` (44 eigene Sätze,
+  ohne Zahlen und ohne Behauptungen, paarweise unter der Audit-Schwelle) und
+  `waehle_faustregel()`: Bestand (`faustregel_kontext()` – Belegung plus
+  7-Gramm-Index aus `check_uniqueness.clean_body`, DIESELBE Messung wie das
+  Audit), Schwelle, Themenbezug, stabiler Hash. Kein freier Satz → **nichts
+  schreiben** und den Grund melden (fail-loud statt Massensatz).
+  `faustregel_vorrat()` + `FAUSTREGEL_VORRAT_WARNUNG = 5` warnen, bevor der
+  Vorrat endet; `_kontext_aktualisieren()` hält die Messung im Lauf aktuell,
+  damit `--dry-run` und Echtlauf dasselbe planen.
+- **Ausgeliefertes wird nicht neu vergeben.** `FAUSTREGEL_LEGACY` ist
+  eingefroren und kommt nie zurück; `ersetze_generische_faustregel()` ersetzt
+  den Altbestand idempotent und toleriert nur Typografie (Wortfolge exakt,
+  Satzpunkt gehört ins Muster).
+- **Haus-Formeln sind Format, kein Inhalt – in EINER Messung.** Der
+  Haus-Formel-Strip sitzt in `template_boilerplate` (Quelle ist die SSOT
+  `duplikat_guard.HAUS_TEXT_QUELLEN`, gelesen über `ssot_konstante()` ohne
+  Produzenten-Import) und gilt damit für Audit, Publish-Gate und Scorecard
+  gleich.
+- **Die Ausnahme ist eng und wehrhaft.** Nur literale Sätze ab
+  `HAUS_FORMEL_MIN_LAENGE = 40` Zeichen; Platzhalter werden getrennt (Daten
+  bleiben gemessen); eingeschobene eigene Wörter heben die Ausnahme auf;
+  unlesbare Quelle = Werkzeugbefund (fail-closed), lesbare Kurzquelle =
+  Absicht, gar keine auswertbare Formel = blinde Ausnahme = Befund.
+- **Keine Allow-List für Redaktionsschablonen.** Ein geteilter Tabellenkopf
+  (Heizperiode ↔ DSL) wurde umformuliert, nicht freigestellt – eine Liste
+  hätte jeden künftigen Kopf blind gemacht.
+- Tests: `python3 -m unittest scripts.tests.test_redaktions_standard` (14) ·
+  Selbsttests `redaktions_standard.py` (44 Fälle) · `template_boilerplate.py`
+  (12) · `duplikat_guard.py` (14) · Bericht:
+  `EINZIGARTIGKEIT-BESTAND-766-DAUERHEILUNG-PREMIUM-2026-10-15.md`.
+
 ## Ein Befund ohne Heiler ist ein Dauerläufer (Pinterest P8, C37, seit #729, 13.10.2026)
 
 Der Pinterest-Watchdog öffnete am 13.10.2026 das Issue #729 mit genau einem
@@ -1733,6 +1773,47 @@ Wort denselben Text, das Nachrücken auf einen anderen Winkel lief ins Leere.
   unberührt, der Bestand kann dabei nur kleiner werden.
 - Tests: `python3 -m unittest scripts.tests.test_social_instagram_winkel scripts.tests.test_social_gate_l9 scripts.tests.test_reserve_recert`
   · Bericht: `SOCIAL-INSTAGRAM-716-FAMILIE-DAUERHEILUNG-PREMIUM-2026-10-14.md`.
+
+## Ein Backup ohne Zugang ist kein Backup (Einrichtungsprüfung, seit WF-9E5A / #761, 15.10.2026)
+
+Am 15.10.2026 war der KV-Job von `backup-offsite.yml` (Audit M-11) ab seinem
+ersten Lauf rot: Ziel, Passphrase, Cloudflare-Lesezugang und Namespace-ID waren
+nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
+(GROQ/GEMINI)“ und „neu starten“, und die Prüfung kannte nur „gesetzt?“.
+
+- **Fail-closed bleibt.** Kein `continue-on-error`, keine Bedingung „nur wenn
+  das Secret gesetzt ist“, kein Überspringen: Ohne Sicherung ist der Lauf rot.
+  Die Einrichtung ist Inhaberaufgabe – Agenten können Secrets weder lesen noch
+  setzen.
+- **`scripts/backup_einrichtung.py --pruefen`** prüft jeden Zugang live (E1–E8):
+  Ziel privat und erreichbar, Token aktiv, Namespace mit genau diesem Token
+  lesbar, Environment nur für `main`. Jeder offene Punkt steht mit Abhilfe-Link
+  als Annotation und in der Job-Zusammenfassung. Kein Secret-Wert erscheint in
+  einer Ausgabe (Selbsttest mit vergifteten Werten).
+- **Der Schrittname „Voraussetzungen prüfen“ ist Alarmschlüssel**
+  (`alert-on-failure.yml`, `backupEinrichtung`): Er bekommt das
+  Einrichtungs-Runbook statt des API-Key-Rats. „Fristwarnung“ meldet ablaufende
+  Zugänge 14 Tage vorher – nach der Sicherung, nicht statt ihr.
+- **Offene Meldungen werden nachgeführt** (`alert-on-failure.yml`, Marker
+  `<!-- alert-runbook: … -->`): Ändert sich die Klasse des Rats, schreibt der
+  nächste rote Lauf die offene Meldung neu (gleiche Nummer, kein Kommentar,
+  keine Benachrichtigung). Eine neue Runbook-Klasse braucht deshalb einen
+  eigenen Namen in `runbookKlasse`; `test_alert_scoping` erzwingt, dass Klassen
+  und Ratschläge deckungsgleich bleiben. Offene Alarm-Issues nie von Hand
+  umschreiben – der nächste rote Lauf erledigt das.
+- **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
+  Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1: nur
+  `main`). Solange Zugänge fehlen und ein fremder Branch an das Environment
+  käme, stellt der Prüfer „Zuerst E8“ über die Liste; die Reihenfolge der
+  Anleitung sichert `test_backup_einrichtung` ab.
+- **KV zurückspielen nur mit `--remote`:** Wrangler 4 schreibt sonst in die
+  lokale Simulation und meldet trotzdem Erfolg.
+- **Wiederherstellung beweisen:** `bash scripts/restore_drill.sh --repo <privates Backup-Repo>`
+  (KV + Git, entschlüsselt in einem 0700-Temp-Verzeichnis).
+- Tests: `npm run test:backup` · Alarm-Szenarien #761 in
+  `scripts/tests/sim/alert_scoping_sim.mjs` · Anleitung
+  `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
+  `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md`.
 
 ## Wichtige Konventionen
 
