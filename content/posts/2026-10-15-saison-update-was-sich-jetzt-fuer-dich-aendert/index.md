@@ -20,6 +20,8 @@ redaktionelle_pruefung:
 
 **Stand: 15.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Einmal im Jahr ein kurzer Blick auf alle wichtigen Verträge kann viel Geld sparen. Meist liegen alte Papiere ungeprüft in der Schublade oder im digitalen Ordner. Wer sich die Zeit nimmt, findet oft hohe Summen, die jeden Monat unnötig vom Konto gehen. Strom, Versicherung, Konto und Internet prüfen lässt mehr Sparpotenzial erkennen als einzelne spontane Wechsel. Ein fester Termin im Kalender hilft dabei, diese Aufgabe nicht ständig vor sich her zu schieben. Wer seine Fixkosten im Blick behält, schafft sich neuen Spielraum für den Alltag oder die Altersvorsorge. Oft reicht schon ein einziger Nachmittag aus, um die Weichen für das nächste Jahr neu zu stellen.
 
 ## Was ist passiert?
