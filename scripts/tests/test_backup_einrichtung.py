@@ -123,6 +123,50 @@ class PrueferVerhalten(unittest.TestCase):
             self.assertNotIn(wert, texte)
         self.assertTrue(ergebnis.offen(), "abgelehnte Zugänge müssen rot sein")
 
+    def test_erst_absichern_dann_befuellen(self):
+        # Lage nach dem Merge von #769: Environment „backup“ ohne Branch-Regel,
+        # Zugänge fehlen. Wer die Prüfliste von oben abarbeitet, beginnt mit E8 –
+        # aber nur, wenn ein fremder Branch wirklich an die Zugänge käme.
+        nur_regeln = {"protected_branches": False, "custom_branch_policies": True}
+
+        def welt(status, politik=None, branches=(), regeln=()):
+            def antwort(url, kopf):
+                if url.endswith("/deployment-branch-policies"):
+                    return 200, {}, {"branch_policies": [{"name": n} for n in branches]}, ""
+                self.assertTrue(url.endswith("/environments/backup"), url)
+                return status, {}, {"protection_rules": [{"type": t} for t in regeln],
+                                    "deployment_branch_policy": politik}, ""
+            return antwort
+
+        teil = {"GITHUB_REPOSITORY": "frank-hartung/franksfinanzcheck-blog", "CF_ACCOUNT_ID": "a" * 32}
+        faelle = {
+            "ohne Branch-Regel (Stand 15.10.)": (welt(200, None), True),
+            "Environment fehlt": (welt(404), True),
+            "fremder Branch erlaubt": (welt(200, nur_regeln, ("main", "arena/*")), True),
+            "nur main": (welt(200, nur_regeln, ("main",)), False),
+            "nur Pflicht-Freigabe": (welt(200, nur_regeln, ("main",), ("required_reviewers",)), False),
+        }
+        for name, (antwort, erwartet) in faelle.items():
+            with self.subTest(name):
+                be.HTTP = _OhneNetz(antwort)
+                lage = be.pruefen(teil, JETZT)
+                self.assertEqual(lage.environment_offen, erwartet)
+                self.assertEqual(bool(be.reihenfolge_hinweis(lage)), erwartet)
+
+        be.HTTP = _OhneNetz(welt(200, None))
+        lage = be.pruefen(teil, JETZT)
+        konsole, summary = be.konsolen_bericht(lage), be.zusammenfassung(lage, "x/y")
+        self.assertLess(konsole.index("Zuerst E8"), konsole.index(" E1 "), "Hinweis gehört vor die Liste")
+        self.assertLess(summary.index("Zuerst E8"), summary.index("| Punkt |"), "Hinweis gehört vor die Tabelle")
+
+        # Fertig eingerichtet, Environment noch offen: kein Reihenfolge-Hinweis
+        # mehr (es gibt nichts mehr einzutragen) – E8 steht im Schlusssatz.
+        fertig = be.Ergebnis(environment_offen=True)
+        fertig.neu("E8", "Environment-Schutz", "warnung", "jeder Branch darf das Environment nutzen")
+        self.assertEqual(be.reihenfolge_hinweis(fertig), "")
+        self.assertIn("E8", be.schlusssatz(fertig))
+        self.assertNotIn("Zuerst E8", be.konsolen_bericht(fertig) + be.zusammenfassung(fertig))
+
     def test_fristen_grenzen(self):
         with redirect_stdout(io.StringIO()):
             self.assertEqual(be.befehl_fristen({"BACKUP_FRIST_TAGE": str(be.FRIST_ROT - 1)}), 1)
@@ -256,6 +300,19 @@ class AnleitungVertrag(unittest.TestCase):
         for nadel in ("Only select repositories", "Required reviewers", "Zugänge erneuern",
                       "Fehlerbilder", "restore_drill.sh", "--remote"):
             self._enthaelt(nadel)
+
+    def test_erst_absichern_dann_befuellen(self):
+        # Wer der Anleitung folgt, beschränkt das Environment auf main, bevor
+        # das erste Secret hineinkommt – sonst läge es offen für jeden Branch.
+        schritte = re.findall(r"(?m)^### Schritt (\d) – (.+)$", self.text)
+        self.assertEqual([n for n, _ in schritte], [str(i) for i in range(1, 8)], "Schritte 1–7 lückenlos")
+        self.assertEqual(schritte[0][1], "Environment `backup` absichern (E8)")
+        einrichtung = self.text.index("## Einrichtung Schritt für Schritt")
+        erstes_secret = min(self.text.index(f"`{name}`", einrichtung)
+                            for name in ("BACKUP_PASSPHRASE", "BACKUP_REPO_TOKEN", "CF_KV_BACKUP_TOKEN"))
+        self.assertLess(self.text.index("### Schritt 1 – Environment"), erstes_secret)
+        self.assertRegex(self.text, r"(?m)^\| 1 \| Environment `backup` absichern")
+        self.assertRegex(self.text, r"(?m)^\| E8 \|.*\| Schritt 1 \|$")
 
     def test_leitfaden_und_npm_skript(self):
         # Der Leitfaden für Agenten nennt Prüfer und Grundsatz – sonst „heilt“

@@ -14,14 +14,19 @@ alle Links sind vorbelegt.
 
 | # | Was | Wohin | Prüfpunkt |
 |---|---|---|---|
-| 1 | Privates Backup-Repository | Variable `BACKUP_REPO` (Repository) | E1 |
-| 2 | Passphrase (zufällig, 32+ Zeichen) | Secret `BACKUP_PASSPHRASE` (Environment `backup`) | E3 |
-| 3 | GitHub-Schreibzugang (fine-grained, 366 Tage) | Secret `BACKUP_REPO_TOKEN` (Environment `backup`) | E2 |
-| 4 | Cloudflare-Lesezugang (nur KV lesen) | Secret `CF_KV_BACKUP_TOKEN` (Environment `backup`) | E5 |
-| 5 | ID des KV-Namespace ABO | Variable `KV_NAMESPACE_ID_ABO` (Repository) | E6 |
-| 6 | Environment absichern (nur `main`) | Settings → Environments → `backup` | E8 |
+| 1 | Environment `backup` absichern (nur `main`) – **zuerst** | Settings → Environments → `backup` | E8 |
+| 2 | Privates Backup-Repository | Variable `BACKUP_REPO` (Repository) | E1 |
+| 3 | Passphrase (zufällig, 32+ Zeichen) | Secret `BACKUP_PASSPHRASE` (Environment `backup`) | E3 |
+| 4 | GitHub-Schreibzugang (fine-grained, 366 Tage) | Secret `BACKUP_REPO_TOKEN` (Environment `backup`) | E2 |
+| 5 | Cloudflare-Lesezugang (nur KV lesen) | Secret `CF_KV_BACKUP_TOKEN` (Environment `backup`) | E5 |
+| 6 | ID des KV-Namespace ABO | Variable `KV_NAMESPACE_ID_ABO` (Repository) | E6 |
 | – | Cloudflare-Konto-ID | Secret `CLOUDFLARE_ACCOUNT_ID` – **schon vorhanden** | E4 |
 | – | optional: D1-Datenbank (Klick-Zähler) | Variable `D1_DATABASE_ID` (Repository) – nur wenn der Klick-Zähler mitgesichert werden soll | E7 |
+
+**Erst absichern, dann befüllen:** Schritt 1 kommt vor jedes Secret. Sonst
+liegen die Zugänge, und sei es nur für Minuten, in einem Environment, das
+jeder Branch nutzen darf. Die Einrichtungsprüfung im Lauf setzt denselben
+Hinweis an den Anfang ihrer Liste („Zuerst E8“), solange das zutrifft.
 
 Danach: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Grün
 heißt gesichert. Die offene Meldung schließt sich beim ersten grünen Lauf
@@ -59,7 +64,26 @@ Ablage-Regel: **Secrets** ins Environment `backup` (Settings → Environments �
 (Settings → Secrets and variables → Actions → Variables). Beide Jobs des
 Workflows laufen im Environment `backup` und sehen deshalb beides.
 
-### Schritt 1 – Privates Backup-Repository anlegen (E1)
+### Schritt 1 – Environment `backup` absichern (E8)
+
+**Zuerst, bevor ein einziges Secret eingetragen wird.** Das Environment besteht
+seit dem ersten Lauf am 15.10.2026, steht aber jedem Branch offen. Wer erst
+befüllt und dann absichert, lässt die Zugänge eine Weile ungeschützt liegen.
+(Fehlt es, unter „New environment“ mit dem Namen `backup` anlegen.)
+
+Settings → Environments → `backup`: <https://github.com/frank-hartung/franksfinanzcheck-blog/settings/environments>
+
+- **Deployment branches and tags → „Selected branches and tags“ → nur `main`.**
+  Ohne diese Regel kommt jeder Branch an die Backup-Zugänge, etwa ein
+  Arbeitszweig mit geänderter Workflow-Datei (Sicherheitsaudit F-07).
+- **Keine „Required reviewers“.** Sonst wartet jeder nächtliche Lauf auf
+  einen Klick und bricht nach 30 Tagen ab.
+
+Der Prüfer liest diese Einstellungen bei jedem Lauf und meldet Abweichungen
+als Hinweis; die Sicherung läuft trotzdem. Solange Zugänge fehlen und das
+Environment offensteht, setzt er „Zuerst E8“ an den Anfang der Prüfliste.
+
+### Schritt 2 – Privates Backup-Repository anlegen (E1)
 
 1. Vorbelegtes Formular öffnen – Sichtbarkeit **Private** ist gesetzt:
    <https://github.com/new?owner=frank-hartung&name=franksfinanzcheck-backup&visibility=private&description=Private+Sicherungen+%28verschl%C3%BCsselt%29>
@@ -67,7 +91,7 @@ Workflows laufen im Environment `backup` und sehen deshalb beides.
 2. Repository-Variable anlegen: <https://github.com/frank-hartung/franksfinanzcheck-blog/settings/variables/actions> → „New repository
    variable“ → Name `BACKUP_REPO`, Wert `frank-hartung/franksfinanzcheck-backup`.
 
-### Schritt 2 – Passphrase erzeugen (E3)
+### Schritt 3 – Passphrase erzeugen (E3)
 
 1. Im Passwort-Manager einen Eintrag „FranksFinanzcheck – Backup-Passphrase“
    anlegen und ein zufälliges Passwort mit **mindestens 32 Zeichen** erzeugen
@@ -79,7 +103,7 @@ Workflows laufen im Environment `backup` und sehen deshalb beides.
 
 Der Prüfer verlangt mindestens 20 Zeichen (E3). Die Länge selbst gibt er nie aus.
 
-### Schritt 3 – GitHub-Schreibzugang (E2)
+### Schritt 4 – GitHub-Schreibzugang (E2)
 
 1. Vorbelegtes Formular öffnen:
    <https://github.com/settings/personal-access-tokens/new?name=ff-offsite-backup&description=Offsite-Backup%3A+Entwurfs-Releases+im+privaten+Backup-Repo+%28nur+dieses+Repo%29&target_name=frank-hartung&expires_in=366&contents=write>
@@ -97,7 +121,7 @@ nach einem Monat. Der Prüfer liest das Ablaufdatum bei jedem Lauf und weist ab
 „Zugänge erneuern“). Ein klassischer Token (`ghp_…`) funktioniert auch, sieht
 aber **alle** Repositories – der Prüfer markiert ihn mit einem Hinweis.
 
-### Schritt 4 – Cloudflare-Lesezugang (E5)
+### Schritt 5 – Cloudflare-Lesezugang (E5)
 
 1. Vorbelegte Vorlage für einen Konto-Token öffnen:
    <https://dash.cloudflare.com/?to=/:account/api-tokens&permissionGroupKeys=%5B%7B%22key%22%3A%22workers_kv_storage%22%2C%22type%22%3A%22read%22%7D%5D&name=ff-kv-backup+%28nur+lesen%29>
@@ -117,7 +141,7 @@ Hinweise:
 - Bewusst **nicht** wiederverwenden: `CLOUDFLARE_API_TOKEN` (Workers AI) und
   `CF_WORKERS_DEPLOY_TOKEN` (Deploy, schreibend). Ein Backup braucht nur Lesen.
 
-### Schritt 5 – ID des KV-Namespace ABO (E6)
+### Schritt 6 – ID des KV-Namespace ABO (E6)
 
 1. Die ID im Cloudflare-Dashboard holen: Workers & Pages → Worker
    `ff-newsletter` → Settings → Bindings → KV-Namespace **ABO**.
@@ -139,19 +163,6 @@ im Environment `cloudflare-produktion` (siehe
 Variable ist Absicht: So können Backup und Worker nie auf verschiedene
 Namespaces zeigen – auch nicht nach dem geplanten Umzug in einen EU-Namespace.
 
-### Schritt 6 – Environment `backup` absichern (E8)
-
-Settings → Environments → `backup`: <https://github.com/frank-hartung/franksfinanzcheck-blog/settings/environments>
-
-- **Deployment branches and tags → „Selected branches and tags“ → nur `main`.**
-  Ohne diese Regel kommt jeder Branch an die Backup-Zugänge, etwa ein
-  Arbeitszweig mit geänderter Workflow-Datei (Sicherheitsaudit F-07).
-- **Keine „Required reviewers“.** Sonst wartet jeder nächtliche Lauf auf
-  einen Klick und bricht nach 30 Tagen ab.
-
-Der Prüfer liest diese Einstellungen bei jedem Lauf und meldet Abweichungen
-als Hinweis. Die Sicherung läuft trotzdem.
-
 ### Schritt 7 – Lauf starten
 
 Actions → „Offsite-Backup“ → „Run workflow“ → Branch `main`. Danach:
@@ -167,14 +178,14 @@ Danach einmal die Wiederherstellung proben (Abschnitt „Wiederherstellung“).
 
 | Punkt | Prüfung | Typischer Befund | Abhilfe |
 |---|---|---|---|
-| E1 | `BACKUP_REPO` gesetzt, Format `besitzer/name`, nicht das Blog-Repo | fehlt · falsches Format | Schritt 1 |
-| E2 | Token gültig, Ziel erreichbar, **privat**, nicht archiviert, Ablaufdatum | 401: ungültig/abgelaufen · 404: Repo fehlt oder Token sieht es nicht · ÖFFENTLICH | Schritt 3 (bei 404: Repo im Token auswählen) |
-| E3 | Passphrase mit mindestens 20 Zeichen | fehlt · zu kurz | Schritt 2 |
+| E1 | `BACKUP_REPO` gesetzt, Format `besitzer/name`, nicht das Blog-Repo | fehlt · falsches Format | Schritt 2 |
+| E2 | Token gültig, Ziel erreichbar, **privat**, nicht archiviert, Ablaufdatum | 401: ungültig/abgelaufen · 404: Repo fehlt oder Token sieht es nicht · ÖFFENTLICH | Schritt 4 (bei 404: Repo im Token auswählen) |
+| E3 | Passphrase mit mindestens 20 Zeichen | fehlt · zu kurz | Schritt 3 |
 | E4 | Konto-ID mit 32 Hex-Zeichen | fehlt · Format | Dashboard → Workers & Pages, rechte Spalte |
-| E5 | Cloudflare-Token aktiv (Nutzer- oder Konto-Token), Ablaufdatum | nicht anerkannt · abgelaufen · deaktiviert | Schritt 4 |
-| E6 | Namespace-ID: Format, mit **diesem** Token lesbar | Name statt ID · 403: Recht fehlt · 404: falsches Konto | Schritt 5 bzw. Schritt 4 |
+| E5 | Cloudflare-Token aktiv (Nutzer- oder Konto-Token), Ablaufdatum | nicht anerkannt · abgelaufen · deaktiviert | Schritt 5 |
+| E6 | Namespace-ID: Format, mit **diesem** Token lesbar | Name statt ID · 403: Recht fehlt · 404: falsches Konto | Schritt 6 bzw. Schritt 5 |
 | E7 | optional: D1-Datenbank lesbar | nicht lesbar | D1: Read ergänzen oder Variable entfernen |
-| E8 | Environment nur für `main`, ohne Pflicht-Freigabe | Hinweis | Schritt 6 |
+| E8 | Environment nur für `main`, ohne Pflicht-Freigabe | Hinweis (vor dem Befüllen: „Zuerst E8“) | Schritt 1 |
 
 „GitHub-API nicht erreichbar“ oder „Cloudflare-API nicht erreichbar“ ist
 meist vorübergehend: den Lauf später neu starten.
@@ -185,7 +196,7 @@ Diese Fehler treten in den Schritten nach der Prüfung auf:
 
 - **„Ablage in … fehlgeschlagen“:** Der Token darf nicht schreiben. Prüfen,
   ob er „Contents: Read and write“ hat und das Backup-Repo ausgewählt ist
-  (Schritt 3).
+  (Schritt 4).
 - **„unvollständig oder kein Entwurf … Teil-Release wird entfernt“:** Der
   Upload ist abgebrochen; die halbe Sicherung wurde wieder entfernt. Meist
   vorübergehend, also neu starten.
@@ -286,7 +297,7 @@ git clone backup.bundle franksfinanzcheck-blog-wiederhergestellt
 ## Sicherheit
 
 - Die Secrets liegen im Environment `backup` und sind nur für `main`
-  erreichbar (Schritt 6).
+  erreichbar (Schritt 1).
 - Der GitHub-Token sieht nur das Backup-Repo. Der Cloudflare-Token darf nur lesen.
 - Der Prüfer gibt nie einen Secret-Wert aus, sondern nur Namen, Zustände und
   API-Antworten. Sein Selbsttest prüft das mit vergifteten Werten.

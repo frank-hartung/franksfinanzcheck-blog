@@ -86,17 +86,18 @@ Jede neue Anmeldung erzeugt aber einen Einwilligungsnachweis nach Art. 7 Abs. 1 
 Agenten können Secrets weder lesen noch setzen. Die Schritte im Einzelnen (mit vorbelegten Links)
 stehen in [`docs/ANLEITUNG-OFFSITE-BACKUP.md`](docs/ANLEITUNG-OFFSITE-BACKUP.md):
 
-1. Privates Repo `franksfinanzcheck-backup` anlegen und Repository-Variable `BACKUP_REPO` setzen.
-2. Passphrase (32+ Zeichen) **erst im Passwort-Manager speichern**, dann als Secret
+1. **Zuerst** Environment `backup` absichern: Deployment branches **nur `main`**, keine Required
+   reviewers. Erst danach kommt das erste Secret hinein (siehe Nachtrag, Abschnitt 6).
+2. Privates Repo `franksfinanzcheck-backup` anlegen und Repository-Variable `BACKUP_REPO` setzen.
+3. Passphrase (32+ Zeichen) **erst im Passwort-Manager speichern**, dann als Secret
    `BACKUP_PASSPHRASE` im Environment `backup` eintragen.
-3. Fine-grained Token anlegen: nur das Backup-Repo, Contents Read/Write, **366 Tage**. Als
+4. Fine-grained Token anlegen: nur das Backup-Repo, Contents Read/Write, **366 Tage**. Als
    `BACKUP_REPO_TOKEN` im Environment `backup` speichern.
-4. Cloudflare-Konto-Token anlegen, nur „Workers KV Storage: Read“. Als `CF_KV_BACKUP_TOKEN` im
+5. Cloudflare-Konto-Token anlegen, nur „Workers KV Storage: Read“. Als `CF_KV_BACKUP_TOKEN` im
    Environment `backup` speichern.
-5. ID des Namespace, den der laufende Worker `ff-newsletter` als `ABO` gebunden hat, als
+6. ID des Namespace, den der laufende Worker `ff-newsletter` als `ABO` gebunden hat, als
    Repository-Variable `KV_NAMESPACE_ID_ABO` eintragen. **Hinweis:** Damit gilt auch der
-   Worker-Deploy als bereit (siehe Anleitung, Schritt 5).
-6. Environment `backup`: Deployment branches **nur `main`**, keine Required reviewers.
+   Worker-Deploy als bereit (siehe Anleitung, Schritt 6).
 7. Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der grüne Lauf schließt #761
    automatisch (Job `resolve`). Danach einmal die Probe fahren:
    `bash scripts/restore_drill.sh --repo frank-hartung/franksfinanzcheck-backup`.
@@ -140,3 +141,43 @@ Vorgangsebene. Nachweis ist der erste grüne Lauf von „Offsite-Backup“; ihn 
 Bis dahin hält sich #761 selbst aktuell: Der erste rote Lauf nach dem Merge ersetzt den
 GROQ/GEMINI-Rat durch den Einrichtungs-Rat und verlinkt die Läufe mit der Checkliste. Es entsteht
 keine neue Nummer und kein Kommentar.
+
+## 6. Nachtrag nach dem Merge (15.10.2026, abends)
+
+**Merge.** #769 ging um 17:55 MESZ als Squash-Commit `30615d7` nach `main`. Die Dateien sind
+byte-gleich mit dem geprüften Stand `3e65ca5`. Auf `main` liefen CodeQL und das Qualitäts-Gate
+grün. Im Deploy waren alle Prüf- und Bauschritte grün, darunter der Manifest-Schutz für die
+geänderte `package.json`; der Lauf war bei Redaktionsschluss noch in der Tonspur-Erzeugung.
+`vorgangs-abschluss.yml` lief beim Merge und schrieb wie vorgesehen nichts, denn `Refs` ist kein
+Schließwort. #761 bleibt offen, ohne Kommentar.
+
+**Kein Handstart.** Dem Agenten-Zugang ist das Auslösen von Workflows verwehrt (HTTP 403,
+„Resource not accessible by integration“). Den ersten Lauf mit dem neuen Stand liefert deshalb der
+Zeitplan (`cron: "0 3 * * *"`, also 05:00 MESZ), sofern der Inhaber nicht vorher selbst „Run
+workflow“ klickt. GitHub hat den Plan zuletzt mit Verspätung gestartet: an den acht Tagen bis zum
+15.10. zwischen 09:53 und 12:03 MESZ.
+
+**Live-Teilabnahme.** Der Prüfer lief lokal gegen die echte GitHub-API. Cloudflare ist aus der
+Sandbox nicht erreichbar. Ergebnis: Exit 1 (fail-closed), jeder offene Punkt mit Handlung und
+vorbelegtem Link, kein Zugangswert in Ausgabe oder Zusammenfassung. E8 meldete gegen das echte
+Environment „jeder Branch darf das Environment nutzen“.
+
+**Befund 10 – Reihenfolge.** Genau das legte eine Lücke offen. Die Anleitung ließ die Secrets
+eintragen (Schritte 2–4) und das Environment erst danach absichern (Schritt 6). Der Prüfer listet
+in der Reihenfolge E1 … E8 und stellt E8 damit ebenfalls ans Ende. Weil E8 bewusst nicht
+blockiert, wird der Lauf auch ohne diesen Schritt grün. Wer „grün = fertig“ liest, vergisst ihn
+also leicht, und bis dahin liegen die Zugänge in einem Environment, das jeder Branch nutzen darf
+(Audit F-07).
+
+| Datei | Korrektur |
+|---|---|
+| `docs/ANLEITUNG-OFFSITE-BACKUP.md` | Schritt 1 ist jetzt „Environment `backup` absichern (E8)“ – vor jedem Secret; Kurztabelle, Prüftabelle und Querverweise umnummeriert |
+| `scripts/backup_einrichtung.py` | `reihenfolge_hinweis()`: Solange Pflichtpunkte offen sind **und** ein fremder Branch an die Zugänge käme (Environment fehlt, keine Branch-Regel, Regel erlaubt mehr als `main`), steht „Zuerst E8“ über der Prüfliste – in Log und Job-Zusammenfassung. Eine reine Pflicht-Freigabe löst ihn nicht aus; nach fertiger Einrichtung steht E8 wie bisher im Schlusssatz. Selbsttest-Gruppe F17 |
+| `scripts/tests/test_backup_einrichtung.py` | Fünf E8-Lagen einzeln, Position vor der Liste, fertige Einrichtung ohne Hinweis; Vertrag „Schritt 1 = absichern, vor dem ersten Secret“ |
+
+**Verifikation des Nachtrags.** Der Selbsttest hat jetzt 17 Fallgruppen, die Unit-Tests 26 (+2).
+Von 10 Mutationen fangen die Tests alle 10, darunter Hinweis ohne offene Pflichtpunkte,
+Pflicht-Freigabe als „offen“, Hinweis hinter der Liste und alte Reihenfolge in der Anleitung.
+Die Fälle „Environment fehlt“ und „fremder Branch“ fängt auch der Selbsttest im Workflow.
+Gegenprobe gegen das echte Environment: „Zuerst E8“ steht direkt unter der Überschrift und vor
+der Tabelle.

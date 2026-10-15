@@ -168,6 +168,10 @@ class Ergebnis:
     befunde: list[Befund] = field(default_factory=list)
     # (Name der Einstellung, Resttage) – Namen, nie Werte
     fristen: list[tuple[str, int]] = field(default_factory=list)
+    # E8: Käme ein fremder Branch an die Backup-Zugänge? (Environment fehlt,
+    # keine Branch-Regel oder Regel erlaubt mehr als main.) Eine reine
+    # Pflicht-Freigabe zählt nicht – sie bremst Läufe, öffnet aber nichts.
+    environment_offen: bool = False
 
     def neu(self, *args, **kwargs) -> Befund:
         befund = Befund(*args, **kwargs)
@@ -574,6 +578,7 @@ def _e8_environment(ergebnis: Ergebnis, umgebung: dict) -> None:
         status, _k, antwort, _netz = HTTP("GET", basis, kopf)
     einstellungen = link_einstellungen(quelle, "environments")
     if status == 404:
+        ergebnis.environment_offen = True
         ergebnis.neu("E8", titel, "warnung", "Environment fehlt – GitHub legt es beim ersten Lauf OHNE Schutz an",
                      "Environment „backup“ anlegen, Deployment branches: nur main.", einstellungen)
         return
@@ -587,6 +592,7 @@ def _e8_environment(ergebnis: Ergebnis, umgebung: dict) -> None:
                         "nach 30 Tagen ab – für „backup“ entfernen, Schutz über die Branch-Regel")
     politik = antwort.get("deployment_branch_policy")
     if politik is None:
+        ergebnis.environment_offen = True
         hinweise.append("jeder Branch darf das Environment nutzen – ein Arbeitszweig mit geänderter "
                         "Workflow-Datei käme an die Backup-Zugänge")
     elif politik.get("custom_branch_policies"):
@@ -594,6 +600,8 @@ def _e8_environment(ergebnis: Ergebnis, umgebung: dict) -> None:
         if status2 == 200 and isinstance(liste, dict):
             namen = sorted(str((p or {}).get("name")) for p in (liste.get("branch_policies") or []))
             fremde = [n for n in namen if n != "main"]
+            if fremde:
+                ergebnis.environment_offen = True
             if fremde or not namen:
                 hinweise.append("Branch-Regel erlaubt mehr als main: " + _kurz(", ".join(fremde) or "(leer)", 80))
     if hinweise:
@@ -636,8 +644,25 @@ def _md(text: str) -> str:
     return " ".join(str(text).split()).replace("|", "\\|")
 
 
+def reihenfolge_hinweis(ergebnis: Ergebnis) -> str:
+    """Erst absichern, dann befüllen.
+
+    Die Prüfliste steht in Kennungs-Reihenfolge (E1 … E8). Wer sie während der
+    Einrichtung von oben nach unten abarbeitet, legte die Secrets in ein
+    Environment, das noch jeder Branch nutzen darf. Solange Pflichtpunkte offen
+    sind und das Environment offensteht, gehört E8 deshalb an den Anfang.
+    """
+    if ergebnis.offen() and ergebnis.environment_offen:
+        return ("Zuerst E8: das Environment „backup“ auf main beschränken, dann die Zugänge eintragen – "
+                "so liegt kein Secret in einem Environment, das jeder Branch nutzen darf.")
+    return ""
+
+
 def konsolen_bericht(ergebnis: Ergebnis) -> str:
     zeilen = ["Offsite-Backup – Einrichtungsprüfung (Vorgang WF-9E5A)"]
+    hinweis = reihenfolge_hinweis(ergebnis)
+    if hinweis:
+        zeilen.append(f"  👉 {hinweis}")
     for b in ergebnis.befunde:
         zeilen.append(f"  {SYMBOL[b.stufe]} {b.kennung} {b.titel}: {b.text}")
         if b.abhilfe and b.stufe != "ok":
@@ -681,9 +706,11 @@ def annotationen(ergebnis: Ergebnis) -> list[str]:
 def zusammenfassung(ergebnis: Ergebnis, quelle: str = "") -> str:
     anleitung = (f"[`{ANLEITUNG}`](https://github.com/{quelle}/blob/main/{ANLEITUNG})"
                  if quelle else f"`{ANLEITUNG}`")
-    zeilen = [
-        "## Offsite-Backup – Einrichtungsprüfung",
-        "",
+    zeilen = ["## Offsite-Backup – Einrichtungsprüfung", ""]
+    hinweis = reihenfolge_hinweis(ergebnis)
+    if hinweis:
+        zeilen += [f"> 👉 **{_md(hinweis)}**", ""]
+    zeilen += [
         "| Punkt | Stand | Befund | Was tun |",
         "|---|:-:|---|---|",
     ]
@@ -990,6 +1017,33 @@ def selbsttest() -> int:  # noqa: C901 – bewusst ein Block: jede Fallgruppe si
         for roh in ("2027-10-15 07:00:00 UTC", "2027-10-15 07:00:00 +0000", "2027-10-15T07:00:00Z"):
             if gh_ablauf_lesen(roh) != dt.datetime(2027, 10, 15, 7, 0, tzinfo=dt.timezone.utc):
                 fehler.append(f"F16: Ablauf-Header nicht lesbar: {roh}")
+
+        # F17: Erst absichern, dann befüllen – die Lage nach dem Merge von #769
+        # (Environment ohne Branch-Regel, Zugänge fehlen) stellt E8 nach vorn;
+        # eine reine Pflicht-Freigabe oder eine fertige Einrichtung nicht.
+        ohne_regel = (200, {}, {"protection_rules": [], "deployment_branch_policy": None})
+        teil = {"GITHUB_REPOSITORY": voll["GITHUB_REPOSITORY"], "CF_ACCOUNT_ID": konto}
+        offen_env = lauf(teil, env=ohne_regel)
+        konsole, summary = konsolen_bericht(offen_env), zusammenfassung(offen_env, "x/y")
+        if not (offen_env.environment_offen and offen_env.stufe_von("E8") == "warnung"):
+            fehler.append("F17: Environment ohne Branch-Regel nicht als offen erkannt")
+        elif not (0 <= konsole.find("Zuerst E8") < konsole.find(" E1 ")) or \
+                not (0 <= summary.find("Zuerst E8") < summary.find("| Punkt |")):
+            fehler.append("F17: Reihenfolge-Hinweis fehlt oder steht nicht vor der Prüfliste")
+        fehlt = lauf(teil, env=(404, {}, {"message": "Not Found"}))
+        fremd = lauf(teil, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                          {"protected_branches": False, "custom_branch_policies": True}}),
+                     env_politik=(200, {}, {"branch_policies": [{"name": "main"}, {"name": "arena/*"}]}))
+        if not (reihenfolge_hinweis(fehlt) and reihenfolge_hinweis(fremd)):
+            fehler.append("F17: fehlendes Environment / fremder Branch stellt E8 nicht nach vorn")
+        freigabe = lauf(teil, env=(200, {}, {"protection_rules": [{"type": "required_reviewers"}],
+                                             "deployment_branch_policy": {"protected_branches": False,
+                                                                          "custom_branch_policies": True}}))
+        if freigabe.stufe_von("E8") != "warnung" or freigabe.environment_offen or reihenfolge_hinweis(freigabe):
+            fehler.append("F17: reine Pflicht-Freigabe darf keinen Reihenfolge-Hinweis auslösen")
+        fertig = lauf(voll, env=ohne_regel)
+        if fertig.offen() or reihenfolge_hinweis(fertig) or "E8" not in schlusssatz(fertig):
+            fehler.append("F17: fertige Einrichtung – E8 gehört in den Schlusssatz, nicht nach vorn")
     finally:
         HTTP, SCHLAF, _http_einmal = echt_http, echt_schlaf, echt_einmal
 
@@ -998,9 +1052,10 @@ def selbsttest() -> int:  # noqa: C901 – bewusst ein Block: jede Fallgruppe si
             print(f"❌ {eintrag}")
         print(f"🛑 backup_einrichtung-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_einrichtung-Selbsttest: 16 Fallgruppen – Leerstand (#761), gesunde Einrichtung, "
+    print("✅ backup_einrichtung-Selbsttest: 17 Fallgruppen – Leerstand (#761), gesunde Einrichtung, "
           "öffentliches Ziel, 401/404, Fristen, Passphrase-Grenze, Konto-Token, KV-/D1-Rechte, "
-          "Environment-Schutz, Netzausfall + Wiederholung, keine Secret-Werte in der Ausgabe, Kodierung.")
+          "Environment-Schutz, Netzausfall + Wiederholung, keine Secret-Werte in der Ausgabe, Kodierung, "
+          "Reihenfolge „erst absichern, dann befüllen“.")
     return 0
 
 
