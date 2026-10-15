@@ -272,7 +272,7 @@ Kontrolliere deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grund
 
 Bewahre die Tabelle mindestens bis zur ersten Rechnung auf. Dann kannst du Preis, Bonus und Abschlag mit dem ursprünglichen Angebot abgleichen.
 
-**Faustregel:** Miss den Verbrauch, bevor du den Tarif wechselst; die größere Ersparnis sitzt meist nicht im Preis, sondern im Verbrauch.
+**Faustregel:** Eine Preisgarantie über die volle Vertragslaufzeit ist mehr wert als ein hoher Start-Rabatt – ohne festen Arbeitspreis kann der Vorteil ab Jahr zwei verpuffen.
 
 ## Fazit: Erst neutral vergleichen, dann Vorteile einrechnen
 

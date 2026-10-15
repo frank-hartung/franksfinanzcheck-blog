@@ -249,7 +249,7 @@ Speichere Messwert, Datum und Strompreis gemeinsam. Sonst vergleichst du später
 
 So entlarvst du Energiediebe Schritt für Schritt: erst messen, dann rechnen, dann handeln. Wer so vorgeht, findet die teuren Geräte ohne Rätselraten. Mehr clevere Spar-Hebel für den Alltag liest du hier: [Frugalismus-Tipps für mehr Freiheit](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
-**Faustregel:** Geräte, die dauerhaft Strom ziehen, gehören an eine schaltbare Leiste oder ganz aus der Wohnung.
+**Faustregel:** Miss den Verbrauch verdächtiger Geräte einzeln mit einem Messgerät – nur was dauerhaft und unnötig läuft, kostet dich wirklich Geld.
 
 ## Fazit: Der größte Stromfresser ist der ungeprüfte
 

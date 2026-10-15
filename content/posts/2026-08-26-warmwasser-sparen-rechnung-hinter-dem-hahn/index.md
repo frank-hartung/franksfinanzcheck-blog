@@ -170,7 +170,7 @@ Diese Gegenüberstellung dauert fünf Minuten und ersetzt jede Vermutung über d
 
 **Ein voller Speicher ist nicht automatisch teuer.** Er verliert Wärme, aber er liefert auch sofort warmes Wasser. Wichtiger als die Größe ist die eingestellte Temperatur und die Dämmung.
 
-**Faustregel:** Senke die Heizkosten in dieser Reihenfolge: erst Verbrauch verstehen, dann Tarif prüfen, erst zuletzt Technik kaufen.
+**Faustregel:** Prüfe vor der Anschaffung von Spararmaturen erst den tatsächlichen Warmwasserverbrauch pro Person im Haushalt – die Armatur amortisiert sich nur bei regelmäßigem Verbrauch.
 
 ## Häufige Fragen
 

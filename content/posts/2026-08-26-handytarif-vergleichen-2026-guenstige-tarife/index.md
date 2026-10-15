@@ -232,7 +232,7 @@ Typische Vorteile:
 
 Gerade wer viel reist oder beruflich erreichbar sein muss, kann dadurch flexibler werden. Das ändert nicht den Grundsatz des Vergleichs. Aber es erweitert die Möglichkeiten deutlich.
 
-**Faustregel:** Vergleiche nie den Preis allein, sondern den Preis für die Leistung, die du tatsächlich nutzt.
+**Faustregel:** Prüfe vor einem Handytarif-Wechsel zuerst deinen echten Datenverbrauch der letzten drei Monate – eine großzügige Flatrate lohnt nicht, wenn du einen Bruchteil davon nutzt.
 
 ## Fazit: Jetzt vergleichen lohnt sich wie nie
 

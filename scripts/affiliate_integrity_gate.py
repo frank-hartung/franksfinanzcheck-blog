@@ -994,21 +994,26 @@ def verify_article_render(article: dict, reg: dict,
 
     # --- Mindestbestand: ein Artikel ohne gerenderten Affiliate-Link
     #     monetarisiert nicht und ist kein Beweis-fähiger Zustand.
-    #     AUSNAHME (#762): Ein Artikel mit `affiliate_exempt: true` + nichtleerer
-    #     Begründung trägt bewusst KEINEN Affiliate-CTA (redaktionelle
-    #     Entscheidung, z. B. reiner Messtest ohne passendes Tarifangebot).
-    #     Für ihn ist „kein Link im HTML“ kein Schaden, sondern der
-    #     dokumentierte Zustand. Wichtig: Die Ausnahme unterdrückt AUSSCHLIESSLICH
-    #     diesen einen Befund – Route, Deep-Link, Partner-ID, rel=sponsored und
-    #     der Gateway-Beweis werden für jeden vorhandenen Link weiterhin
-    #     geprüft (unten).
+    # DAUERHEILUNG #764 (15.10.2026): `affiliate_exempt: true` mit
+    # Begründung befreit redaktionell (reine Messtests, technische
+    # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
+    # affiliate_link_check – keine zweite Messregel (Root Cause
+    # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
     if not gateway_anchors:
-        if exempt and not exempt_error:
-            result["notes"].append(
-                "Redaktionell von einem Affiliate-CTA ausgenommen (Begründung: "
-                f"{exemption_contract.exemption_label(reason)})"
-                " – kein Link im HTML ist hier der dokumentierte Zustand")
-        elif not exempt_error:
+        exempt = False
+        try:
+            from affiliate_link_check import affiliate_exemption  # noqa: E402
+            # affiliate_exemption erwartet Post-Dict mit "frontmatter"-Feld.
+            with open(article["path"], encoding="utf-8") as _f:
+                _c = _f.read()
+            _parts = _c.split("---", 2)
+            _post_dict = {"frontmatter": _parts[1] if len(_parts) >= 2 else ""}
+            ex_ok, _ex_reason, ex_err = affiliate_exemption(_post_dict)
+            if ex_ok and not ex_err:
+                exempt = True
+        except Exception:
+            exempt = False
+        if not exempt:
             result["problems"].append(
                 "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
                 "oder wird nicht gerendert")

@@ -185,7 +185,7 @@ Ein Doppeltarif ist nur ein Hebel unter mehreren. Bevor du dich für ein Zählwe
 
 Diese Reihenfolge ist der Kern. Erst den Verbrauch, dann den Tarif, dann die Feinheiten wie das Zählwerk.
 
-**Faustregel:** Ein zweiter Zähler lohnt nur, wenn dein Verbrauch wirklich in die Nacht wandert.
+**Faustregel:** Prüfe vor einem Nachtstromtarif, ob sich genug Verbrauch in die Niedertarifzeit verlagern lässt – sonst zahlt du den höheren Grundpreis ohne echte Ersparnis.
 
 ## Häufige Fragen
 

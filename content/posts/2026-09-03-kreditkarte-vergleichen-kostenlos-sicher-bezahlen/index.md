@@ -169,7 +169,7 @@ Wichtig ist nur: Zwei Karten sind nur dann sinnvoll, wenn du beide bewusst verwa
 
 Mit dieser Liste findest du eine Karte, die im Alltag nichts kostet. Wer sein Geld gut parken will, findet im [Tagesgeld-Vergleich](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) passende Tipps.
 
-**Faustregel:** Vor jeder Ratenzahlung gehört der Gesamtbetrag auf den Tisch: Zins, Gebühren und Laufzeit zusammen.
+**Faustregel:** Prüfe vor der Wahl einer Kreditkarte Jahresgebühr, Auslandseinsatzentgelt und Teilzahlungszinsen zusammen – die vermeintlich kostenlose Karte wird teuer bei Revolving-Kredit.
 
 ## Fazit: Kreditkarte vergleichen – Kostenlos und sicher zahlen
 

@@ -250,7 +250,7 @@ Notiere außerdem den Komfort. Ein niedriger Verbrauch ist kein Erfolg, wenn ein
 
 Bleibt nur ein Raum auffällig, liegt die Ursache häufig in Ventil, Heizkörper oder Durchfluss. Betrifft es das ganze Haus, kommen Regelung, Pumpe oder Wärmeerzeuger eher in Frage. Diese Einordnung hilft dem Fachbetrieb und spart Diagnosezeit.
 
-**Faustregel:** Der beste Zeitpunkt für den Heizungscheck ist der Sommer; im Winter zahlst du die Eile mit.
+**Faustregel:** Ein Heiz-Check im Spätsommer kostet wenig und entlarvt Luft in den Heizkörpern, falsch eingestellte Thermostate und alte Dichtungen, bevor die Rechnung steigt.
 
 ## Fazit: Was bedeutet das für Prüfen, dokumentieren, gezielt handeln?
 

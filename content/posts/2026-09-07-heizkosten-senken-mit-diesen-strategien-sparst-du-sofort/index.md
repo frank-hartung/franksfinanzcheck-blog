@@ -221,7 +221,7 @@ Miss, statt zu raten.
 
 Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizkosten senkst – ganz ohne Frieren. Für weitere Alltags-Spartricks lies auch: [Frugalismus-Tipps für mehr Freiheit](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
-**Faustregel:** Versicherungen gehören bei jedem Umzug auf den Tisch: Deckung, Selbstbeteiligung, Ausschlüsse – in dieser Reihenfolge.
+**Faustregel:** Stell vor der Heizsaison zuerst Thermostat, Entlüftung und Dämmung der Rohre richtig ein – die richtige Technik spart mehr als jeder kurzfristige Tarifwechsel.
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

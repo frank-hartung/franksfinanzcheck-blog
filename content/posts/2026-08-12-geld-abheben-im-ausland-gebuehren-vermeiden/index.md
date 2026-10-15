@@ -44,9 +44,11 @@ faktencheck: 2026-10-13
 kurzantwort: "Beim Abheben im Ausland rechnen in der Regel zwei Stellen ab: der Betreiber des Automaten und deine Bank. Ob und wie viel deine Bank für Abhebungen außerhalb des Euro-Raums verlangt, steht im Preis- und Leistungsverzeichnis deines Kontos. Bietet der Automat zusätzlich eine Abrechnung in Euro an, entscheidest du selbst, ob du sie annimmst."
 ---
 
-Am Strandautomaten in Portugal oder Kroatien dauert das Abheben keine Minute. Die Rechnung kommt später, und sie passt oft nicht zum abgehobenen Betrag. Genau an dieser Stelle entsteht der Eindruck, die Bank habe sich vertan. Meistens hat sie nicht.
+Am Strandautomaten in Portugal oder Kroatien dauert das Abheben keine Minute. Die Rechnung kommt später. Sie passt oft nicht zum abgehobenen Betrag. Genau an dieser Stelle entsteht der Eindruck, die Bank habe sich vertan. Meistens hat sie nicht.
 
-Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander. Der Betreiber des Automaten verlangt sein eigenes Entgelt. Deine Bank berechnet, was sie für die Nutzung deiner Karte außerhalb des Euro-Raums vorsieht. Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mit welcher Karte er unterwegs ist. Geld abheben im Ausland ist eine Rechnung mit zwei Zeilen: der Automat und deine Bank. Wer beide kennt, gibt weniger Geld aus – und ärgert sich später seltener.
+Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander. Der Betreiber des Automaten verlangt sein eigenes Entgelt. Deine Bank berechnet, was sie für die Nutzung deiner Karte außerhalb des Euro-Raums vorsieht.
+
+Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mit welcher Karte er unterwegs ist. Geld abheben im Ausland ist eine Rechnung mit zwei Zeilen: der Automat und deine Bank. Wer beide kennt, gibt weniger Geld aus. Und er ärgert sich später seltener.
 
 ## Kurz gefasst
 
@@ -60,7 +62,7 @@ Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander
 
 ## Warum am Automaten zwei Rechnungen entstehen?
 
-Der Automat gehört selten deiner Bank. Im Ausland betreiben ihn lokale Institute, Wechselstuben oder selbstständige Netzbetreiber. Sie stellen ihre Infrastruktur bereit und verlangen dafür ein Nutzungsentgelt. Dieses Entgelt taucht nicht in deinem Kontopreisverzeichnis auf, weil es nicht deine Bank erhebt.
+Der Automat gehört selten deiner Bank. Im Ausland betreiben ihn lokale Institute, Wechselstuben oder selbstständige Netzbetreiber. Sie stellen ihre Infrastruktur bereit. Dafür verlangen sie ein Nutzungsentgelt. Dieses Entgelt taucht nicht in deinem Kontopreisverzeichnis auf. Es wird nicht von deiner Bank erhoben.
 
 Der zweite Posten entsteht zu Hause. Manche Banken berechnen für jede Abhebung außerhalb des Euro-Raums eine feste Gebühr. Andere arbeiten mit einem prozentualen Aufschlag. Wieder andere verlangen gar nichts, haben dafür aber andere Preise. Das ist keine Frage von gut oder böse, sondern eine Frage der Kalkulation.
 
@@ -165,7 +167,7 @@ Prüfe außerdem, ob die Karte im Ausland für Abhebungen freigegeben war. Fehlt
 * **Sperrnummern speichern.** Notiere die Nummer zum Sperren deiner Karte, nicht auf dem Handy allein.
 * **Belege sammeln.** Bewahre bis zur Schlussrechnung alle Automatenbelege auf.
 
-**Faustregel:** Ein Konto ohne Bedingungen ist selten wirklich kostenlos; vergleiche Gebühren, Verfügbarkeit und Zinsstaffel zusammen.
+**Faustregel:** Vergleiche vor einer Auslandsreise die Gebühren für Abhebung und Kartenzahlung deiner bestehenden Karten – der günstigste Reisekurs gewinnt nichts, wenn jede Abhebung fünf Euro kostet.
 
 ## Häufige Fragen
 
