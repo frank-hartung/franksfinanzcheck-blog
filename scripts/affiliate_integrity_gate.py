@@ -173,6 +173,7 @@ from affiliate_integrity_state import (  # noqa: E402 – State-Vertrag (#446)
     STATE_SCHEMA_VERSION,
     state_contract_error,
 )
+import affiliate_exemption as exemption_contract  # noqa: E402 – Ausnahme-Vertrag (#762)
 
 EXIT_OK = 0
 EXIT_CONTENT = 1
@@ -938,14 +939,16 @@ def verify_article_render(article: dict, reg: dict,
     """Beweist, dass JEDER Affiliate-Link des Artikels wirklich im gebauten
     HTML erscheint – schlüsselgenau, nicht nur als Anzahl."""
     slug = article["slug"]
+    exempt, reason, exempt_error = exemption_contract.exemption_for_article(article)
     result = {"slug": slug, "problems": [], "notes": [],
               "expected_keys": [], "rendered_keys": [],
-              "expected": 0, "rendered": 0, "html_found": False}
+              "expected": 0, "rendered": 0, "html_found": False,
+              "exempt": exempt, "exempt_reason": reason}
 
     html_path = article_html_path(slug, public)
     if not html_path.is_file():
         result["problems"].append(
-            f"Gebaute Seite fehlt: {html_path.relative_to(ROOT)} "
+            f"Gebaute Seite fehlt: {os.path.relpath(html_path, ROOT)} "
             "(Hugo-Build gelaufen? Artikel evtl. draft/zukünftig)")
         return result
     html_text = html_path.read_text(encoding="utf-8", errors="ignore")
@@ -979,12 +982,36 @@ def verify_article_render(article: dict, reg: dict,
             "im gebauten HTML (Link verloren – z. B. durch Publikations-Guard "
             "oder Layout-Änderung)")
 
+    # --- Affiliate-Ausnahme (#762) – Formprüfung, unabhängig vom Linkbestand.
+    #     Eine HALBE Angabe (Flag ohne Grund, Grund ohne Flag, Flag als Text,
+    #     ungültiges YAML) ist fail-closed ein Fund – auch dann, wenn der
+    #     Artikel (zufällig) einen Link hat. Sonst würde eine halb getippte
+    #     Ausnahme unbemerkt durchrutschen.
+    if exempt_error:
+        result["problems"].append(
+            "Affiliate-Ausnahme ungültig – der Artikel kann nicht als "
+            f"ausgenommen gelten: {exempt_error}")
+
     # --- Mindestbestand: ein Artikel ohne gerenderten Affiliate-Link
     #     monetarisiert nicht und ist kein Beweis-fähiger Zustand.
+    #     AUSNAHME (#762): Ein Artikel mit `affiliate_exempt: true` + nichtleerer
+    #     Begründung trägt bewusst KEINEN Affiliate-CTA (redaktionelle
+    #     Entscheidung, z. B. reiner Messtest ohne passendes Tarifangebot).
+    #     Für ihn ist „kein Link im HTML“ kein Schaden, sondern der
+    #     dokumentierte Zustand. Wichtig: Die Ausnahme unterdrückt AUSSCHLIESSLICH
+    #     diesen einen Befund – Route, Deep-Link, Partner-ID, rel=sponsored und
+    #     der Gateway-Beweis werden für jeden vorhandenen Link weiterhin
+    #     geprüft (unten).
     if not gateway_anchors:
-        result["problems"].append(
-            "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
-            "oder wird nicht gerendert")
+        if exempt and not exempt_error:
+            result["notes"].append(
+                "Redaktionell von einem Affiliate-CTA ausgenommen (Begründung: "
+                f"{exemption_contract.exemption_label(reason)})"
+                " – kein Link im HTML ist hier der dokumentierte Zustand")
+        elif not exempt_error:
+            result["problems"].append(
+                "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
+                "oder wird nicht gerendert")
 
     # --- Compliance/Attribution der gerenderten Gateway-Links
     unregistered = sorted({k for k in rendered_keys if k not in reg})
@@ -1050,6 +1077,9 @@ def markdown_findings(articles: list[dict], reg_keys: set) -> dict[str, dict]:
     for a in articles:
         problems: list[str] = []
         broken_kinds: set[str] = set()
+        _exempt, _reason, metadata_error = exemption_contract.exemption_for_article(a)
+        if metadata_error:
+            problems.append("Affiliate-Ausnahme ungültig: " + metadata_error)
         for marker, kind, line, *_ in find_cta_lines(a["body"]):
             line_problems = check_cta_line(marker, line, reg_keys)
             if line_problems:
@@ -1098,10 +1128,8 @@ def heal_markdown(articles: list[dict], reg: dict,
             # Nach Heilung neu prüfen (Markdown-Ebene)
             f["healed"] = actions
             healed_slugs.append(a["slug"])
-            remaining = []
-            for marker, kind, line, *_ in find_cta_lines(a["body"]):
-                remaining.extend(check_cta_line(marker, line, reg_keys))
-            f["problems"] = sorted(set(remaining))
+            remaining = markdown_findings([a], reg_keys).get(a["slug"], {})
+            f["problems"] = remaining.get("problems", [])
     return healed_slugs
 
 
@@ -1186,6 +1214,15 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
     render_problems: dict[str, str] = {}
     per_article: list[dict] = []
     build_info = {"built": False, "reason": "übersprungen", "ok": True}
+    # ---- Begründete Ausnahmen (#762) --------------------------------
+    # Sichtbar, nicht versteckt: Jeder redaktionell ausgenommene Artikel
+    # erscheint mit seiner Begründung im Report und im Zustand. Eine
+    # Ausnahme, die niemand sieht, ist kein Vertrag, sondern eine Lücke.
+    exemptions = {}
+    for a in articles:
+        exempt, reason, _error = exemption_contract.exemption_for_article(a)
+        if exempt:
+            exemptions[a["slug"]] = reason
 
     if articles:
         if allow_build and not NO_BUILD:
@@ -1242,6 +1279,7 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
         "healed_count": len(healed_slugs),
         "render_problems": render_problems,
         "per_article": per_article,
+        "exemptions": exemptions,
         "build": build_info,
         "registry_routes": len(reg),
         "errors": errors,
@@ -1286,6 +1324,7 @@ def write_report(result: dict) -> str:
     render_problems = result["render_problems"]
     per_article = {r["slug"]: r for r in result["per_article"]}
     healed = result["healed"]
+    exemptions = result.get("exemptions") or {}
 
     status_icon = {EXIT_OK: "🟢", EXIT_CONTENT: "🔴", EXIT_TOOL: "🟠"}[result["exit_code"]]
     status_text = {
@@ -1304,7 +1343,8 @@ def write_report(result: dict) -> str:
         f"({', '.join(healed) if healed else '–'}) · "
         f"**Struktur-Funde:** {len(findings)} · "
         f"**Render-Funde:** {len(render_problems)} · "
-        f"**Registry-Routen:** {result['registry_routes']}",
+        f"**Registry-Routen:** {result['registry_routes']} · "
+        f"**Begründete Ausnahmen:** {len(exemptions)}",
         "",
         f"**Build:** {result['build'].get('reason', '–')}",
         "",
@@ -1347,8 +1387,10 @@ def write_report(result: dict) -> str:
                   "|:---|:---:|:---|"]
         for slug in sorted(per_article):
             r = per_article[slug]
+            label = ("redaktionelle Ausnahme" if r.get("exempt")
+                     and r["expected"] == 0 and r["rendered"] == 0 else "✅")
             lines.append(
-                f"| {slug} | {r['expected']} → {r['rendered']} ✅ | "
+                f"| {slug} | {r['expected']} → {r['rendered']} {label} | "
                 f"{', '.join('/go/' + k + '/' for k in r['rendered_keys']) or '–'} |")
         lines.append("")
 
@@ -1356,6 +1398,24 @@ def write_report(result: dict) -> str:
     if notes:
         lines += ["## Hinweise (nicht blockierend)", ""]
         lines += [f"- {slug}: {n}" for slug, n in notes]
+        lines.append("")
+
+    if exemptions:
+        lines += [
+            "## Begründete Ausnahmen (kein Affiliate-CTA – redaktionelle "
+            "Entscheidung)",
+            "",
+            "Für diese Artikel besteht keine Affiliate-CTA-Pflicht. Die Ausnahme "
+            "unterdrückt ausschließlich den Befund „kein Affiliate-Link“ – "
+            "Route, Deep-Link, Partner-ID, `rel=sponsored` und der "
+            "Gateway-Beweis werden für jeden vorhandenen Link weiterhin "
+            "geprüft. Eine halbe Angabe (Flag ohne Begründung, Begründung "
+            "ohne Flag) ist fail-closed ein Fund.",
+            "",
+        ]
+        for slug in sorted(exemptions):
+            lines.append(
+                f"- `{slug}` – {exemption_contract.exemption_label(exemptions[slug])}")
         lines.append("")
 
     lines += [
@@ -1408,6 +1468,10 @@ def write_state(result: dict) -> None:
         "unresolved_problems": unresolved_problems,
         "errors": result["errors"],
         "build": result["build"],
+        # Begründete Ausnahmen (#762): sichtbar im Zustand, damit niemand
+        # eine stillschweigende Lücke entdecken muss. Sie sind KEIN Fund –
+        # die Restmenge (`unresolved_problems`) bleibt davon unberührt.
+        "exemptions": result.get("exemptions") or {},
     }
     contract_error = state_contract_error(payload)
     if contract_error:
@@ -1786,6 +1850,65 @@ def run_selftest() -> list[str]:
     finally:
         globals()["find_hugo"] = old_find
 
+    # 8b) AFFILIATE-AUSNAHME (#762) – der Vertrag, an dem die tägliche
+    #     Wache vorher scheiterte: Der redaktionell ausgenommene Artikel
+    #     wurde JEDEN TAG als „Kein einziger Affiliate-Link im gebauten HTML“
+    #     gemeldet und konnte nicht geheilt werden (ein sachfremder
+    #     Tarif-CTA darf nicht erzwungen werden). Der Selbsttest friert
+    #     BEIDE Seiten ein: Die Ausnahme unterdrückt den einen Befund –
+    #     und NUR diesen.
+    with tempfile.TemporaryDirectory() as tmp5:
+        root5 = Path(tmp5)
+        (root5 / "public" / "posts" / "2026-09-04-messtest").mkdir(parents=True)
+        (root5 / "public" / "posts" / "2026-09-04-messtest" / "index.html").write_text(
+            "<html><body><p>Reiner Messtest, kein CTA.</p></body></html>",
+            encoding="utf-8")
+        (root5 / "public" / "posts" / "2026-09-05-mit-link").mkdir(parents=True)
+        (root5 / "public" / "posts" / "2026-09-05-mit-link" / "index.html").write_text(
+            "<html><body><p>" + FIXTURE_CURRENT + "</p></body></html>",
+            encoding="utf-8")
+        (root5 / "public" / "posts" / "2026-09-06-halbe-ausnahme").mkdir(parents=True)
+        (root5 / "public" / "posts" / "2026-09-06-halbe-ausnahme" / "index.html").write_text(
+            "<html><body><p>Kein Link, aber die Ausnahme ist kaputt.</p></body></html>",
+            encoding="utf-8")
+
+        def _art(slug: str, frontmatter: str) -> dict:
+            art = {"slug": slug, "path": root5 / "content" / "posts" / slug / "index.md",
+                   "content": "", "fm": frontmatter, "body": "", "pillar": "internet-dsl"}
+            return art
+
+        grund = "Reiner DNS-Messtest ohne passendes Tarifangebot."
+        # a) Gültige Ausnahme, kein Link im HTML → KEIN Fund.
+        a_exempt = _art("2026-09-04-messtest",
+                        f'affiliate_exempt: true\naffiliate_exempt_reason: "{grund}"\n')
+        res_exempt = verify_article_render(a_exempt, {}, root5 / "public")
+        expect(not res_exempt["problems"],
+               "eine gültige Ausnahme darf keinen 'kein Affiliate-Link'-Fund "
+               f"erzeugen (#762): {res_exempt['problems']}")
+        expect(any("ausgenommen" in n for n in res_exempt["notes"]),
+               "die Ausnahme muss als Hinweis sichtbar bleiben (nicht versteckt)")
+
+        # b) OHNE Ausnahme bleibt der Befund bestehen (kein Fehlalarm-Refix).
+        a_ohne = _art("2026-09-04-messtest", "pillar: \"internet-dsl\"\n")
+        res_ohne = verify_article_render(a_ohne, {}, root5 / "public")
+        expect(any("Kein einziger Affiliate-Link" in p for p in res_ohne["problems"]),
+               "ohne Ausnahme muss der Mindestbestand weiterhin ein Fund sein")
+
+        # c) AUSNAHME MIT LINK: Der Link wird weiterhin vollständig geprüft –
+        #    die Ausnahme darf keine vorhandene kaputte CTA-Box verstecken.
+        a_mit_link = _art("2026-09-05-mit-link",
+                          f'affiliate_exempt: true\naffiliate_exempt_reason: "{grund}"\n')
+        res_mit_link = verify_article_render(a_mit_link, {}, root5 / "public")
+        expect(any("registriert" in p for p in res_mit_link["problems"]),
+               "eine Ausnahme darf die Register-/Route-Prüfung vorhandener Links "
+               f"nicht abschalten: {res_mit_link['problems']}")
+
+        # d) HALBE AUSNAHME ist fail-closed ein Fund.
+        a_halbe = _art("2026-09-06-halbe-ausnahme", "affiliate_exempt: true\n")
+        res_halbe = verify_article_render(a_halbe, {}, root5 / "public")
+        expect(any("Affiliate-Ausnahme ungültig" in p for p in res_halbe["problems"]),
+               "eine Ausnahme ohne Begründung muss fail-closed ein Fund sein")
+
     # 9) HERZSCHLAG vs. BEFUND (Reparatur #281) – der Kern der dauerhaften
     #    Behebung. Ein zweiter Lauf mit UNVERÄNDERTEM Befund MUSS den
     #    Zeitstempel erneuern (sonst liest der Bot-Watchdog wieder einen
@@ -1909,7 +2032,8 @@ def main() -> int:
               "AI1–AI3-Schadensbilder, Deduplikation, AI5-Gateway-Beweis, "
               "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext, "
               "Herzschlag vs. Befund aus #281, geheilte Historie vs. offene "
-              "Restmenge aus #446, CTA-Heilung für Entwürfe #295).")
+              "Restmenge aus #446, CTA-Heilung für Entwürfe #295, "
+              "Affiliate-Ausnahme #762 inkl. fail-closed Halbangabe).")
         return EXIT_OK
 
     # ---- Datei-bezirkelte Heilung (#295) ------------------------------

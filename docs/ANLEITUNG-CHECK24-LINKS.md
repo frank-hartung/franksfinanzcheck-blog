@@ -17,7 +17,13 @@ affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot."
 Die Ausnahme unterdrückt ausschließlich den Befund „kein Affiliate-Link“.
 Falls auf der Seite doch ein Affiliate-Link steht, prüft die Wache weiterhin
 Route, Deep-Link und Partner-ID. Eine fehlende oder leere Begründung bleibt
-fail-closed ein Fehler. Regressionen: `npm run test:affiliate-links`.
+fail-closed ein Fehler. Der gemeinsame Vertrag liegt in
+`scripts/affiliate_exemption.py`: Sowohl der wöchentliche Link-Checker als
+auch die tägliche Integritäts-Wache verwenden ihn. Die tägliche Wache prüft
+weiterhin die Existenz der gebauten Seite, jede vorhandene CTA, `rel=sponsored`
+und Gateway-Weiterleitungen. Begründete Ausnahmen stehen mit Artikel und Grund
+im Integritätsreport sowie im Zustandsfeld `exemptions`; sie zählen nicht als
+offener Schaden. Regressionen: `npm run test:affiliate-links`.
 
 **Wichtig:** Die frühere Anleitung mit `scripts/set_check24_links.py` ist
 **nicht mehr gültig** (das Skript existiert nicht mehr). Änderungen nimmt
