@@ -33,7 +33,7 @@ GitHub Repo frank-hartung/franksfinanzcheck-blog (main = Quelle)
 | **E-Mail** | **Cloudflare Email Routing** | Weiterleitung `kontakt@franksfinanzcheck.de` an persönliche Zieladresse (keine eigene Mailbox, keine MX-Konkurrenz zu Website) – Doku: [E-MAIL-WEITERLEITUNG-CLOUDFLARE.md](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md) |
 | **Hosting** | **GitHub Pages** (Branch `gh-pages`) | Statische Auslieferung, global via Fastly |
 | Quellcode | GitHub Repo (`main`) | Build-Quelle, Automatisierung |
-| Backup | Objektspeicher (S3-kompatibel) | **Geplant, noch nicht eingerichtet** |
+| Backup | Privates GitHub-Repo, verschlüsselt (`backup-offsite.yml`: Repo + Abonnenten-KV, nächtlich) | Einrichtung, Prüfung (E1–E8), Wiederherstellung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md) |
 
 ---
 
@@ -86,9 +86,12 @@ Ein Purge wäre nur nötig, wenn ohne SHA-Buster deployed würde (nie).
    Cloudflare-API-Purge anbietet → deaktiviert lassen.
 4. **SSL-Automation:** „Full" bis Watchdog-Issue → dann Umstellung auf
    „Full (strict)" (manuell 1 Min oder per Cloudflare-API mit Token).
-5. **Backup:** GitHub-Repo ist bereits Offsite-Backup (Code+Content+History).
-   Zusätzlich geplant: täglicher Export (public/ + content/) auf S3-kompatiblen
-   Objektstore (Workflow vorbereitet, Credentials fehlen).
+5. **Backup:** Nächtlich `backup-offsite.yml` – Git-Bundle von `main` und die
+   Abonnenten- und Einwilligungsdaten aus Workers KV, AES-256 verschlüsselt,
+   als Entwurfs-Releases in ein privates Repo (Audit M-11). Das Blog-Repo
+   selbst ist kein Offsite-Backup (gleiches Konto). Der frühere S3-Plan ist
+   damit ersetzt. Einrichtung und Wiederherstellung:
+   [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md).
 6. **Monitoring:** Uptime-Checks gegen `https://franksfinanzcheck.de` (über
    Cloudflare-Proxy) + `https://frank-hartung.github.io/franksfinanzcheck-blog/`
    (Origin, ohne Proxy) – so wird zwischen CF- und Origin-Problemen unterschieden.

@@ -124,6 +124,20 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("selftest_ki.py --trap <skript>", self.code)
         self.assertIn("weder ein Tagesdefizit noch einen API-Key-Ausfall", self.code)
 
+    def test_wf_9e5a_backup_einrichtung_hat_eigenes_runbook(self):
+        # Issue #761: Ein fail-closed roter „Voraussetzungen prüfen“-Schritt im
+        # Offsite-Backup ist eine Einrichtungsaufgabe. Der Rat „API-Key (GROQ/
+        # GEMINI) / neu starten“ führte in die Irre. Die Klassen sind an den
+        # Workflow gebunden und verweisen auf die Anleitung, die der Prüfer
+        # (scripts/backup_einrichtung.py) ebenfalls nennt.
+        self.assertIn("wfName === 'Offsite-Backup'", self.code)
+        self.assertIn("includes('Voraussetzungen prüfen')", self.code)
+        self.assertIn("includes('Fristwarnung')", self.code)
+        self.assertIn("Einrichtung unvollständig – ein Neustart hilft nicht", self.code)
+        anleitung = REPO / "docs" / "ANLEITUNG-OFFSITE-BACKUP.md"
+        self.assertIn("`docs/ANLEITUNG-OFFSITE-BACKUP.md`", self.code)
+        self.assertTrue(anleitung.is_file(), "Die im Alarm genannte Anleitung muss existieren.")
+
     def test_tagesdefizit_fachkanal_verhindert_duplikat(self):
         # Vertrag 6 (#602): Ein ehrlich roter Quotenschritt darf nur dann
         # stummgeschaltet werden, wenn das engine-deficit-Fach-Issue mit
@@ -282,11 +296,12 @@ class VerhaltensSimulation(unittest.TestCase):
             # feindlich (Markdown, Mention, Umbruch). Die Simulation beweist, dass
             # er den Issue-Body nicht steuern kann – ein Test mit einem braven
             # Namen würde genau die Lücke nicht prüfen.
+            # Offsite-Backup: WF-9E5A / #761 (Einrichtungs- und Fristklasse).
             boeser_name = "Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile"
             identitaeten = {name: ident_modul.identitaet(name)
                             for name in ("Layout-AI", "Content-Engine v2",
                                          "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
-                                         boeser_name)}
+                                         "Offsite-Backup", boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

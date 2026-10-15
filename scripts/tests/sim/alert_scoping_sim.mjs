@@ -345,6 +345,45 @@ await run('Gegenprobe: E2E-Suite rot ohne Install-Bezug → bisheriges Runbook',
              steps: [{ name: 'E2E-Suite ausführen', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen', 'API-Key abgelaufen'], null, ['Abhängigkeiten nicht installierbar']);
 
+// WF-9E5A / #761 (15.10.2026): Offsite-Backup. Exakte Konstellation des
+// Vorfalls: Repo-Job grün, KV-Job rot in „Voraussetzungen prüfen“, weil Ziel,
+// Zugänge und Namespace-ID nie eingerichtet wurden. Die Meldung riet zu
+// GROQ/GEMINI-Schlüsseln und „neu starten“ – beides hilft hier nicht.
+const BACKUP_KV_JOB = 'KV-/D1-Backup (Abonnenten + Einwilligungsnachweise)';
+await run('#761-Reproduktion: KV-Backup ohne Einrichtung → Einrichtungs-Runbook, kein Neustart-/Key-Rat',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [
+      { name: 'backup', conclusion: 'success', html_url: 'https://x/jobs/116311519162',
+        steps: [{ name: 'Bundle + Arbeitskopie erstellen, verifizieren, verschlüsseln', conclusion: 'success' }] },
+      { name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/116311519313',
+        steps: [{ name: 'Selbsttest (Export, Probe, Einrichtungsprüfung – fail-closed)', conclusion: 'success' },
+                { name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
+  true,
+  ['Vorgang **WF-9E5A**', 'Einrichtung unvollständig – ein Neustart hilft nicht', 'E1–E8',
+   'docs/ANLEITUNG-OFFSITE-BACKUP.md', 'schließt diese Meldung automatisch', 'https://x/jobs/116311519313'],
+  null,
+  ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'Transienter Fehler']);
+// Fristwarnung: Sicherung gelaufen, nur ein Zugang läuft bald ab.
+await run('WF-9E5A: Fristwarnung rot → „Sicherung ist gelaufen“, Zugang erneuern',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7611',
+             steps: [{ name: 'Fristwarnung – Zugänge rechtzeitig erneuern', conclusion: 'failure' }] }] },
+  true, ['Die Sicherung ist gelaufen', 'Zugänge erneuern', 'Environment `backup`'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Einrichtung unvollständig']);
+// Andere Backup-Schritte: eigenes Runbook ohne GROQ/GEMINI-Rat.
+await run('WF-9E5A: Export rot → Backup-Runbook ohne GROQ/GEMINI-Rat',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7612',
+             steps: [{ name: 'Exportieren, verschlüsseln, Rückweg prüfen', conclusion: 'failure' }] }] },
+  true, ['Exportieren, verschlüsseln, Rückweg prüfen', 'cloudflarestatus', 'Abschnitt „Fehlerbilder“'],
+  null, ['API-Key abgelaufen', 'GROQ', 'Einrichtung unvollständig', 'Die Sicherung ist gelaufen']);
+// Gegenprobe: derselbe Schrittname in einem fremden Workflow → Standard-Runbook.
+await run('WF-9E5A-Gegenprobe: „Voraussetzungen prüfen“ in fremdem Workflow → Standard-Runbook',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7613',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
+  true, ['Häufigste Ursachen'], null, ['Einrichtung unvollständig', 'ANLEITUNG-OFFSITE-BACKUP']);
+
 // 12. KANAL-HYGIENE (Sicherheitsaudit 15.10.2026, F-09): Der Workflow-Name
 //    stammt aus dem Webhook. Er darf den Body nicht steuern – kein Markdown,
 //    keine Mention (@all würde Dritte benachrichtigen), kein HTML, kein

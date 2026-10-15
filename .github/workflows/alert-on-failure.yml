@@ -363,6 +363,19 @@ jobs:
               failedStepNames.some(s => String(s).includes('Phase 0.5 – Kadenz-Gate sicherstellen'));
             const engineFinalClassifierFailed = isContentEngine &&
               failedStepNames.some(s => String(s).includes('Do not report a quota deficit as success'));
+            // WF-9E5A / #761 (15.10.2026): Offsite-Backup. „Voraussetzungen
+            // prüfen“ ist absichtlich rot, solange ein Zugang fehlt, falsch oder
+            // abgelaufen ist (fail-closed) – eine Einrichtungsaufgabe, bei der
+            // weder ein Neustart noch GROQ/GEMINI-Schlüssel helfen. Die
+            // Job-Zusammenfassung nennt jeden offenen Punkt (E1–E8) mit Link.
+            // „Fristwarnung“ heißt: Sicherung gelaufen, ein Zugang läuft bald ab.
+            // Nur für diesen Workflow – gleichnamige Schritte anderswo behalten
+            // ihr eigenes Runbook.
+            const isBackup = wfName === 'Offsite-Backup';
+            const backupEinrichtung = isBackup &&
+              failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
+            const backupFrist = isBackup && !backupEinrichtung &&
+              failedStepNames.some(s => String(s).includes('Fristwarnung'));
             const labelsOf = issue => (issue.labels || [])
               .map(l => typeof l === 'string' ? l : (l && l.name) || '')
               .filter(Boolean);
@@ -458,6 +471,26 @@ jobs:
                     '1. **Einordnung:** „Do not report a quota deficit as success“ ist der Abschluss-Classifier, nicht automatisch die Fehlerursache.',
                     '2. Öffne dessen Log und lies die `::error::`-Annotation. Sie unterscheidet FRÜHABBRUCH, TAGESDEFIZIT, RELEASE-CRASH und SYNCHRONVERLUST und nennt den zuständigen Schritt.',
                     '3. Folge der dort genannten Diagnose. API-Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
+                  ]
+                : backupEinrichtung
+                ? [
+                    '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
+                    '2. Run-Link oben öffnen → **Summary**: Die Checkliste E1–E8 nennt jeden offenen Punkt mit dem Link, unter dem er erledigt wird. Schritt für Schritt: `docs/ANLEITUNG-OFFSITE-BACKUP.md`.',
+                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf schließt diese Meldung automatisch.'
+                  ]
+                : backupFrist
+                ? [
+                    '1. **Die Sicherung ist gelaufen.** Rot ist nur die Fristwarnung: Ein Zugang läuft in weniger als 14 Tagen ab.',
+                    '2. Welcher, nennt die Annotation des Schritts „Fristwarnung“. Neuen Zugang erzeugen und das Secret im Environment `backup` ersetzen: `docs/ANLEITUNG-OFFSITE-BACKUP.md`, Abschnitt „Zugänge erneuern“.',
+                    '3. Der nächste grüne Lauf (nachts oder per „Run workflow“) schließt diese Meldung automatisch.'
+                  ]
+                : isBackup
+                ? [
+                    failedJobs.length > 0
+                      ? '1. Öffne das Log des oben rot markierten Schritts – seine Annotation nennt die Ursache.'
+                      : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
+                    '2. Häufig: ein vorübergehender Ausfall von GitHub oder Cloudflare (https://www.githubstatus.com · https://www.cloudflarestatus.com) → Actions → „Offsite-Backup“ → „Run workflow“. Oder ein Zugang wurde widerrufen bzw. hat zu wenig Rechte – dann nennt ihn die Annotation.',
+                    '3. Fehlerbilder und Abhilfe: `docs/ANLEITUNG-OFFSITE-BACKUP.md`, Abschnitt „Fehlerbilder“.'
                   ]
                 : installFailed
                   ? [

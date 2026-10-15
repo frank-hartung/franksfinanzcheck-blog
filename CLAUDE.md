@@ -1734,6 +1734,36 @@ Wort denselben Text, das Nachrücken auf einen anderen Winkel lief ins Leere.
 - Tests: `python3 -m unittest scripts.tests.test_social_instagram_winkel scripts.tests.test_social_gate_l9 scripts.tests.test_reserve_recert`
   · Bericht: `SOCIAL-INSTAGRAM-716-FAMILIE-DAUERHEILUNG-PREMIUM-2026-10-14.md`.
 
+## Ein Backup ohne Zugang ist kein Backup (Einrichtungsprüfung, seit WF-9E5A / #761, 15.10.2026)
+
+Am 15.10.2026 war der KV-Job von `backup-offsite.yml` (Audit M-11) ab seinem
+ersten Lauf rot: Ziel, Passphrase, Cloudflare-Lesezugang und Namespace-ID waren
+nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
+(GROQ/GEMINI)“ und „neu starten“, und die Prüfung kannte nur „gesetzt?“.
+
+- **Fail-closed bleibt.** Kein `continue-on-error`, keine Bedingung „nur wenn
+  das Secret gesetzt ist“, kein Überspringen: Ohne Sicherung ist der Lauf rot.
+  Die Einrichtung ist Inhaberaufgabe – Agenten können Secrets weder lesen noch
+  setzen.
+- **`scripts/backup_einrichtung.py --pruefen`** prüft jeden Zugang live (E1–E8):
+  Ziel privat und erreichbar, Token aktiv, Namespace mit genau diesem Token
+  lesbar, Environment nur für `main`. Jeder offene Punkt steht mit Abhilfe-Link
+  als Annotation und in der Job-Zusammenfassung. Kein Secret-Wert erscheint in
+  einer Ausgabe (Selbsttest mit vergifteten Werten).
+- **Der Schrittname „Voraussetzungen prüfen“ ist Alarmschlüssel**
+  (`alert-on-failure.yml`, `backupEinrichtung`): Er bekommt das
+  Einrichtungs-Runbook statt des API-Key-Rats. „Fristwarnung“ meldet ablaufende
+  Zugänge 14 Tage vorher – nach der Sicherung, nicht statt ihr.
+- **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
+- **KV zurückspielen nur mit `--remote`:** Wrangler 4 schreibt sonst in die
+  lokale Simulation und meldet trotzdem Erfolg.
+- **Wiederherstellung beweisen:** `bash scripts/restore_drill.sh --repo <privates Backup-Repo>`
+  (KV + Git, entschlüsselt in einem 0700-Temp-Verzeichnis).
+- Tests: `npm run test:backup` · Alarm-Szenarien #761 in
+  `scripts/tests/sim/alert_scoping_sim.mjs` · Anleitung
+  `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
+  `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
