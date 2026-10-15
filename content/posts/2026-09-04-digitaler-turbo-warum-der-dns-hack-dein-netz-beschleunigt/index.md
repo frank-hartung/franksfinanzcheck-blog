@@ -8,9 +8,9 @@ tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DNS-Server testen", "DNS-Antwortzeit messen", "DNS-Hack", "dig DNS", "DNS over HTTPS", "DNS over TLS"]
+keywords: ["DNS-Server testen", "DNS-Antwortzeit messen", "DNS-Hack", "dig DNS", "DNS over HTTPS", "DNS over TLS", "DNS-Hack testen", "DNS Hack testen"]
 pin_title: "DNS-Hack testen: Antwortzeit richtig einordnen"
-pin_description: "DNS-Antwortzeiten messen statt Turbo versprechen: Was dig zeigt, was ein Messwert nicht beweist und wie du Resolver fair vergleichst."
+pin_description: "*Werbung | DNS-Hack testen: Vergleiche DNS-Antwortzeiten mit dig. Was Messwerte aussagen – und warum sie weder mehr Bandbreite noch schnellere Seiten garantieren. Mehr Spartipps auf FranksFinanzcheck! #dnsserver #testen #dnsantwortzeit"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ai_generated: true
 cover:

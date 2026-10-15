@@ -17,7 +17,7 @@ cover:
 kurzantwort: "Den passenden DSL-Tarif findest du nicht über die größte Werbezahl, sondern über deinen echten Bedarf. Für 1 bis 2 Personen reichen oft 50 bis 100 Mbit/s, Familien und Homeoffice-Haushalte fahren meist mit 100 bis 250 Mbit/s gut. Rechne immer den Effektivpreis über 24 Monate, sonst verstecken sich dort schnell 250 € bis 400 € Mehrkosten."
 
 social_posted: true
-keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "So findest du den richtigen", "DSL-Tarif"]
+keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "So findest du den richtigen", "DSL-Tarif", "DSL-Tarif für dein Zuhause"]
 pin_title: "Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen"
 pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"

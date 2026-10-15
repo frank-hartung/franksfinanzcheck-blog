@@ -12,7 +12,7 @@ author: "Frank Hartung"
 
 keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Reiseschnäppchen"]
 pin_title: "Last Minute Urlaub: So findest du echte Reiseschnäppchen"
-pin_description: "*Werbung | Last Minute Urlaub kann sich lohnen, ist aber keine Spargarantie. Vergleiche flexible Termine, Ziel, Gesamtpreis und Bedingungen. Mehr Spartipps auf FranksFinanzcheck! #lastminute #reise #urlaubskosten"
+pin_description: "*Werbung | Last Minute Urlaub: Vergleiche Gesamtpreis und Bedingungen, bleib bei Ziel und Termin flexibel. Rabatte sind möglich, aber nicht planbar. Mehr Spartipps auf FranksFinanzcheck! #last #minute #urlaub"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
