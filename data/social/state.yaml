@@ -750,6 +750,26 @@ history:
     #Girokonto #Konto #KreditkarteUndKredit #LastschriftPruefen'
   ref: '117445670235708986'
   ai: true
+- posted_at: '2026-10-16T11:55:14.848777+02:00'
+  channel: mastodon
+  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
+  title: 'Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117449983499442917
+  ok: true
+  text: '💶 Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
+
+
+    Ein Doppeltarifzähler erfasst Strom getrennt nach Zeiten: nachts günstiger, tagsüber
+    teurer.
+
+
+    https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gasrechnung #Heizkosten #StromkostenSenken #NachtstromTarif'
+  ref: '117449983499442917'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -775,4 +795,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-15T22:23:29.603672+02:00'
+updated_at: '2026-10-16T11:55:24.047485+02:00'

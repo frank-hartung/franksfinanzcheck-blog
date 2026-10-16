@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 15.10.2026 22:23 (Europe/Berlin)  
+> Automatisch aktualisiert: 16.10.2026 11:55 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,13 +13,11 @@
 ## Kommende Beiträge
 
 ### Fr, 16. Oktober 2026
-- **07:30** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
 - **11:30** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
 ### Sa, 17. Oktober 2026
-- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **07:30** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
 - **11:30** ⏳ Umzug mit Internet: Anschluss und Rufnummer mitnehmen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/
 ### So, 18. Oktober 2026
@@ -37,13 +35,18 @@
   https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
 - **11:30** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
+### Mi, 21. Oktober 2026
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Sa, 24. Oktober 2026
 - **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
+- **11:30** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
+- **17:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
 - **11:30** ⏳ Internet & DSL wechseln: So gelingt der Anbieterwechsel — _zahl_ · Evergreen  
@@ -53,6 +56,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 16.10.2026 11:55 · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt → https://mastodon.social/@FranksFinanzcheck/117449983499442917
 - ✅ 15.10.2026 17:38 · Lastschrift und Dauerauftrag: Was du prüfen solltest → https://mastodon.social/@FranksFinanzcheck/117445670235708986
 - ✅ 15.10.2026 12:03 · Warmwasser sparen: Die Rechnung hinter → https://mastodon.social/@FranksFinanzcheck/117444351878060801
 - ✅ 14.10.2026 17:51 · Abos und Verträge: Der stille Posten im Haushaltsplan → https://mastodon.social/@FranksFinanzcheck/117440058160848584
@@ -62,7 +66,6 @@
 - ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
 - ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
 - ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
-- ✅ 09.10.2026 13:57 · Büroausstattung steuerlich clever absetzen: So geht's → https://mastodon.social/@FranksFinanzcheck/117410830633382287
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
