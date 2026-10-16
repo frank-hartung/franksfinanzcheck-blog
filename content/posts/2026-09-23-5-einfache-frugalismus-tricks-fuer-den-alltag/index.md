@@ -311,6 +311,8 @@ Wenn du dein Gesamtbudget strukturieren willst, passt auch dieser Artikel gut: [
 
 > 💶 **Spar-Tipp zwischendurch:** Der stärkste Frugalismus-Trick ist oft nicht das Weglassen, sondern das Absichern. Wenn du gesparte Beträge sofort separat parkst, bleiben sie nicht im Alltagsrauschen hängen: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
+**Faustregel:** Setz dir vor dem Sparen ein konkretes Ziel mit Datum und Betrag – ohne Messgröße verpuffen die kleinen Verzichte im Alltag.
+
 ## Fazit: Frugalismus wird stark, wenn er einfach bleibt
 
 Diese **5 einfachen Frugalismus-Tricks für den Alltag** funktionieren nicht, weil sie spektakulär wären. Sie funktionieren, weil sie wiederholbar sind. Geld sichtbar machen, Fixkosten prüfen, Käufe verlangsamen, Routinen bündeln und Ersparnisse sichern – das ist kein Glamour. Aber es wirkt.

@@ -147,6 +147,8 @@ Der Brenner und die Filter sind keine Dinge für Laien. Am Außenfühler solltes
 - [Warmwasser sparen: Die Rechnung hinter dem Hahn](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/)
 - [Energiediebe stoppen: So kannst du Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
 
+**Faustregel:** Schlafe eine Nacht über große Anschaffungen – der Preis, der am nächsten Morgen noch überzeugt, ist selten der falsche.
+
 ## Häufige Fragen
 
 ### Wie viel spare ich durch Entlüften?

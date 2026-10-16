@@ -42,6 +42,8 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 
 ## Wie viel musst du für deine Reise sparen?
 
+Darum geht es hier konkret: Reisekasse füllen.
+
 Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle alles zusammen: Gepäck, Transfer, Parken, Gebühren, Puffer. Wer nur Flug und Hotel rechnet, plant halb.
 
 **Modellrechnung mit frei gewählten Annahmen:** Die Reise soll 1.800 € kosten. 600 € sind schon da. Bis zur Zahlung bleiben zehn Monate. Dann fehlen 1.200 €, also 120 € im Monat. Zinsen und neue Preise sind nicht drin. Diese Zahlen sind frei gewählt und gelten nicht für jede Familie.
@@ -147,6 +149,10 @@ Nach drei Monaten folgt der Zwischencheck. Läuft das Projekt, lass alles stehen
 - [Mietwagen buchen ohne Kaution: Fallen im Urlaub](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/)
 - [Sparen im Herbst: Die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
 - [Mehr Freiheit durch Verzicht: Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
+
+Genau das ist der Hebel: Reisekasse füllen.
+
+**Faustregel:** Ein Dispozins ist der teuerste Kredit im Haushalt – tilge ihn vor jeder Anlagerunde, sonst frisst der Zins die Rendite auf.
 
 ## Häufige Fragen
 
