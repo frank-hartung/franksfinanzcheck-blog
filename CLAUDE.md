@@ -786,6 +786,51 @@ verkettete Akte, eigene Prüfsummen. Es wird ausschließlich von
   `WF-D4E0-653-DAUERHEILUNG-PREMIUM-2026-10-08.md` und
   „Eine fehlgeschlagene Messung ist kein leerer Vorrat“ (C33) weiter unten.
 
+## Eine Wache ist ganz oder gar nicht (DAUERVORGABE, seit WF-6F7F/#783, 16.10.2026)
+
+Am 15.10.2026 hat ein Rebase in PR #776 die Redaktions-Wache halbiert. Die
+Commit-Nachricht nennt es selbst: „Faustregel-Konflikte zugunsten der
+themenspezifischen Varianten aufgelöst". In `scripts/redaktions_standard.py`
+blieben Kopf und 14 eingefrorene Selbsttest-Fälle aus der neueren Fassung
+(#766, `FAUSTREGEL_POOL` + Bestandsmessung), der RS3-Rumpf kam aus der
+älteren. Die Datei war syntaktisch gültig und in sich widersprüchlich:
+`main()` rief fünf Funktionen, die es nicht mehr gab, der Selbsttest las drei
+Konstanten, die es nicht mehr gab. Der Selbsttest schlug an (Meldung #783),
+das Qualitäts-Gate war ab 15.10. 18:19 rot, der Regressionstest ebenfalls –
+und der Heilpfad der Wache war für jeden echten Lauf ein `NameError`: eine
+tote Wache, die aussah, als wäre sie da.
+
+- **Niemals zusammensetzen – auch Quelltext nicht.** Die Regel aus
+  „Maschinen-Artefakte niemals mergen" (#346) gilt für die Wachen selbst:
+  Bei einem Konflikt wird EINE Fassung gewählt
+  (`git checkout <rev> -- <pfad>`), nie Kopf von hier, Rumpf von dort.
+  `.gitattributes` setzt dafür `merge=binary` auf alle signierten
+  `scripts/*.py` (Liste = Signaturliste aus `data/integrity_lock.json`) –
+  ein stiller Text-Zusammenschnitt ist damit technisch nicht mehr möglich.
+- **Beweis vor dem Commit.** Nach jeder Konflikt-Auflösung läuft der
+  Selbsttest der betroffenen Wache: `python3 scripts/<wache>.py --selftest`.
+  Rot heißt: Die Fassung stimmt in sich nicht – dann wird nicht committet.
+- **Die Wache dafür:** `scripts/wachen_vertrag.py` (W1–W4) liest den Quelltext
+  ALLER Skripte, ohne einen davon auszuführen, und meldet: **W1**
+  Konfliktmarker (Paar-Regel: ein Docstring-`=======` ist keiner), **W2**
+  halbe Aufrufe (`foo(...)` ohne Definition in derselben Datei), **W3** halbe
+  Konstanten (GROSSBUCHSTABEN-Name ohne Definition), **W4** Ausnahmen, die
+  unbekannt, unbegründet, undatiert oder abgelaufen sind.
+  Bedienung: `python3 scripts/wachen_vertrag.py` · `npm run test:wachen` ·
+  Report `WACHEN-VERTRAG-REPORT.md` (gitignoriert) · Hintergrund:
+  `WF-6F7F-783-DAUERHEILUNG-PREMIUM-2026-10-16.md`.
+- **Ausnahmen sind sichtbar und altern.** Dynamische Namensräume
+  (`globals()`/`setattr`) gehören nach `data/wachen_vertrag_ausnahmen.yaml` –
+  mit `grund` und `seit: JJJJ-MM-TT`. Eine Ausnahme, die keinen Befund mehr
+  deckt, wird selbst zum Befund. Einen Konfliktmarker deckt keine Ausnahme.
+- **Vertrag statt Vertrauen.** `wachen_vertrag.py` UND
+  `redaktions_standard.py` stehen im vertraglichen Minimum (`GUARDS`, C6);
+  der Lauf hängt als **C39** im Governance-Vertrag und läuft mit dem
+  Qualitäts-Gate (`governance_contract.py --quick`). Regression:
+  `scripts/tests/test_wachen_vertrag.py`, `npm run test:redaktion`.
+  Die #766-Dauerheilung (`FAUSTREGEL_POOL`, Wähler, Bestandsmessung, keine
+  zweite RS3-Implementierung) bleibt unangetastet.
+
 ## Die Messlatte der Reserve gehört nicht dem Gemessenen (seit 26.09.2026, #393)
 
 Zielbestand und Alarmschwelle der Content-Reserve haben **einen** Besitzer:

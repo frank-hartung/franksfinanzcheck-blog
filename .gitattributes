@@ -35,6 +35,45 @@ content/posts/*-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/in
 content/posts/*-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md merge=binary
 content/posts/*-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md merge=binary
 
+# Die QUELLTEXT-Wachen unter dem Siegel (16.10.2026, Vorgang WF-6F7F / #783):
+# Am 15.10.2026 wurden in `scripts/redaktions_standard.py` bei einem Rebase
+# Kopf und eingefrorene Selbsttest-Faelle aus der neueren Fassung (#766) und
+# der Rumpf aus der aelteren zusammengesetzt – syntaktisch gueltig, in sich
+# widerspruechlich: `main()` rief fuenf nicht mehr existierende Funktionen,
+# der Selbsttest las drei nicht mehr existierende Konstanten. Der Selbsttest
+# schlug an (Meldung #783), das Qualitaets-Gate war einen Tag rot, und der
+# Heilpfad der Wache war ein NameError. Dieselbe Regel wie beim Siegel (#346)
+# und den Reserve-Snapshots (#634) gilt deshalb jetzt auch fuer die Wachen
+# selbst: `merge=binary` macht den Text-Zusammenschnitt technisch unmoeglich –
+# bei parallelen Aenderungen entscheidet EINE Fassung, und der Selbsttest der
+# Wache beweist danach, dass sie in sich stimmt (scripts/wachen_vertrag.py).
+# Die Liste ist die Signaturliste aus data/integrity_lock.json.
+scripts/affiliate_integrity_gate.py merge=binary
+scripts/affiliate_marketer.py merge=binary
+scripts/artefakt_waechter.py merge=binary
+scripts/bake_brand.py merge=binary
+scripts/blog_doctor.py merge=binary
+scripts/brand_guard.py merge=binary
+scripts/casing_guard.py merge=binary
+scripts/check_covers.py merge=binary
+scripts/content_audit.py merge=binary
+scripts/fazit_schmiede.py merge=binary
+scripts/generate_covers.py merge=binary
+scripts/hardcases_guard.py merge=binary
+scripts/internal_linker.py merge=binary
+scripts/lektor_guard.py merge=binary
+scripts/lesbarkeit_heiler.py merge=binary
+scripts/link_density_guard.py merge=binary
+scripts/plagiat_guard.py merge=binary
+scripts/politur_ruine_heiler.py merge=binary
+scripts/publikations_vertrag.py merge=binary
+scripts/redaktions_standard.py merge=binary
+scripts/reserve_artifacts.py merge=binary
+scripts/shortcode_guard.py merge=binary
+scripts/stil_guard.py merge=binary
+scripts/tag_casing.py merge=binary
+scripts/wachen_vertrag.py merge=binary
+
 # Root-Reports sind Maschinenausgaben der Wachen: als CI-Dashboard versioniert,
 # aber nicht als Diff gelesen. Ohne diese Zeilen bläht jeder Lauf jeden PR-Diff
 # (70 Dateien, meiste Zeilen = Zeitstempel). linguist-generated blendet sie zudem
