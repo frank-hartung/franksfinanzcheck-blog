@@ -994,29 +994,27 @@ def verify_article_render(article: dict, reg: dict,
 
     # --- Mindestbestand: ein Artikel ohne gerenderten Affiliate-Link
     #     monetarisiert nicht und ist kein Beweis-fähiger Zustand.
-    # DAUERHEILUNG #764 (15.10.2026): `affiliate_exempt: true` mit
+    # DAUERHEILUNG #762 (16.10.2026): `affiliate_exempt: true` mit
     # Begründung befreit redaktionell (reine Messtests, technische
-    # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
-    # affiliate_link_check – keine zweite Messregel (Root Cause
-    # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
-    if not gateway_anchors:
-        exempt = False
-        try:
-            from affiliate_link_check import affiliate_exemption  # noqa: E402
-            # affiliate_exemption erwartet Post-Dict mit "frontmatter"-Feld.
-            with open(article["path"], encoding="utf-8") as _f:
-                _c = _f.read()
-            _parts = _c.split("---", 2)
-            _post_dict = {"frontmatter": _parts[1] if len(_parts) >= 2 else ""}
-            ex_ok, _ex_reason, ex_err = affiliate_exemption(_post_dict)
-            if ex_ok and not ex_err:
-                exempt = True
-        except Exception:
-            exempt = False
-        if not exempt:
-            result["problems"].append(
-                "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
-                "oder wird nicht gerendert")
+    # Erläuterungen ohne passendes Tarifangebot). Die Ausnahme kommt
+    # AUSSCHLIESSLICH aus dem gemeinsamen Vertrag `affiliate_exemption.py`
+    # (oben in `exempt` gemessen) – hier stand bis heute ein zweiter,
+    # dateibezirkelter Ableseweg (#764), der das Vertragsergebnis
+    # überschrieb, sobald die Datei nicht lesbar war (z. B. im Selbsttest
+    # mit In-Memory-Artikeln) und die gültige Ausnahme still verlor.
+    # Zwei Ablesewege, zwei Wahrheiten – Fehlerklasse #714/#766.
+    if not gateway_anchors and not exempt:
+        result["problems"].append(
+            "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
+            "oder wird nicht gerendert")
+    # Die Ausnahme ist kein Überspringen des Artikels: sichtbar als Hinweis,
+    # mit Begründung – eine Ausnahme, die niemand sieht, ist keine (#762).
+    if exempt and not exempt_error:
+        result["notes"].append(
+            "Redaktionelle Affiliate-Ausnahme "
+            f"({exemption_contract.exemption_label(reason)}): gilt als ausgenommen – die "
+            "Mindestanforderung eines Affiliate-Links entfällt, alle "
+            "übrigen Prüfungen laufen weiter.")
 
     # --- Compliance/Attribution der gerenderten Gateway-Links
     unregistered = sorted({k for k in rendered_keys if k not in reg})

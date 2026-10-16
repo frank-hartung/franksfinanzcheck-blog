@@ -215,5 +215,56 @@ class IntegrityExemptionTests(unittest.TestCase):
         self.assertFalse(gate.markdown_findings([article], set(gate.load_registry())))
 
 
+class RenderProofSinglePathTests(unittest.TestCase):
+    """#778: Der Render-Beweis liest die Ausnahme AUSSCHLIESSLICH aus dem
+    Vertrag `affiliate_exemption.py` – nie ein zweites Mal von der Platte.
+
+    Am 16.10.2026 (WF-D4E0 #778) lag in `verify_article_render` zusätzlich
+    ein dateibezirkelter Zweitausnahmeweg (#764): er überschrieb das
+    Vertragsergebnis mit `exempt = False`, sobald `article['path']` nicht
+    lesbar war, und warf die gültige Ausnahme still weg – der Selbsttest
+    meldete „Kein einziger Affiliate-Link“ für einen redaktionell
+    ausgenommenen Artikel. Zwei Ablesewege, zwei Wahrheiten (#714/#766).
+    """
+
+    def _artikel(self, fm):
+        return {"slug": "messtest", "path": "/existiert/nicht/index.md",
+                "content": "", "fm": fm, "body": "", "pillar": "internet-dsl"}
+
+    def _public(self, tmp):
+        public = Path(tmp) / "public"
+        ziel = public / "posts" / "messtest"
+        ziel.mkdir(parents=True)
+        (ziel / "index.html").write_text(
+            "<html><body><p>Reiner Messtest, kein CTA.</p></body></html>",
+            encoding="utf-8")
+        return public
+
+    def test_in_memory_ausnahme_ohne_datei_bleibt_gueltig(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp)
+            res = gate.verify_article_render(self._artikel(EXEMPT), {}, public)
+        self.assertFalse(
+            any("Kein einziger Affiliate-Link" in p for p in res["problems"]),
+            f"gültige Ausnahme ohne lesbare Datei verloren (#778): {res['problems']}")
+        self.assertTrue(res["exempt"])
+
+    def test_ausnahme_ist_als_hinweis_sichtbar(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp)
+            res = gate.verify_article_render(self._artikel(EXEMPT), {}, public)
+        self.assertTrue(any("ausgenommen" in n for n in res["notes"]),
+                        f"Ausnahme unsichtbar (#762/#778): {res['notes']}")
+        self.assertTrue(any(REASON in n for n in res["notes"]),
+                        f"Begründung fehlt im Hinweis: {res['notes']}")
+
+    def test_ohne_ausnahme_bleibt_der_mindestbestand_ein_fund(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp)
+            res = gate.verify_article_render(self._artikel(""), {}, public)
+        self.assertTrue(any("Kein einziger Affiliate-Link" in p
+                            for p in res["problems"]), res["problems"])
+
+
 if __name__ == "__main__":
     unittest.main()
