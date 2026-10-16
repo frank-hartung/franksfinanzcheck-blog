@@ -1002,6 +1002,12 @@ def verify_article_render(article: dict, reg: dict,
 
     # --- Mindestbestand: ein Artikel ohne gerenderten Affiliate-Link
     #     monetarisiert nicht und ist kein Beweis-fähiger Zustand.
+    # DAUERHEILUNG #764 (15.10.2026): `affiliate_exempt: true` mit
+    # Begründung befreit redaktionell (reine Messtests, technische
+    # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
+    # affiliate_link_check – keine zweite Messregel (Root Cause
+    # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
+    if not gateway_anchors and not (exempt and not exempt_error):
     #     AUSNAHME (#762): Ein Artikel mit `affiliate_exempt: true` + nichtleerer
     #     Begründung trägt bewusst KEINEN Affiliate-CTA (redaktionelle
     #     Entscheidung, z. B. reiner Messtest ohne passendes Tarifangebot).

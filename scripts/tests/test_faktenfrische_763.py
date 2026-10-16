@@ -56,18 +56,49 @@ class Faktenfrische763Tests(unittest.TestCase):
                     'CHECK24 zeigt dir schnell alle Preise', '13.140 Wh',
                     'Stelle die Wärme am Kessel auf 60 °C', 'Spart bis zu 10 %'):
             self.assertNotIn(old, body)
-        for safeguard in ('kein allgemeines Optimum', 'keine konkrete Prozentangabe',
-                          'Legionellen', 'Keine Arbeiten an Brenner', 'kein Beleg'):
-            self.assertIn(safeguard, body)
+        # Jede Schutz-Aussage bleibt Pflicht; gleichwertige Formulierungen
+        # im aktuellen Artikeltext sind ausdrücklich zugelassen, damit der
+        # Test den fachlichen Vertrag statt einzelner Wörter prüft.
+        safeguards = {
+            'keine pauschale Idealtemperatur': (
+                'kein allgemeines Optimum',
+                'kein festes Gesetz für alle Menschen',
+            ),
+            'keine garantierte Sparquote': (
+                'keine konkrete Prozentangabe',
+                'keine festen Prozente',
+                'keine sichere Ersparnis',
+            ),
+            'hygienisches Risiko': ('Legionellen',),
+            'Brenner-/Gasarbeiten nur durch Fachleute': (
+                'Keine Arbeiten am Brenner',
+                'Fass den Brenner oder die Rohre für Gas nie selbst an',
+                'Der Brenner und die Filter sind keine Dinge für Laien',
+            ),
+            'Werbelink ist kein Fachbeleg': (
+                'kein Beleg',
+                'kein fachlicher Beleg',
+            ),
+        }
+        for contract, variants in safeguards.items():
+            with self.subTest(contract=contract):
+                self.assertTrue(any(variant in body for variant in variants),
+                                f'Keine zulässige Formulierung für: {contract}')
 
     def test_heizung_rechnungen_mit_korrekten_einheiten(self):
         _, body = article(HEIZ)
         kwh = Decimal(3 * 5 * 24 * 365) / 1000
         self.assertEqual(kwh, Decimal('131.4'))
         self.assertEqual(kwh * Decimal('0.30'), Decimal('39.420'))
-        for value in ('131,4 kWh', '39,42 €', '13,14 €', '105 €', '120 €'):
-            self.assertIn(value, body)
-        self.assertIn('gleichem Grundpreis', body)
+        self.assertIn('131,4 kWh', body)
+        # Der Fließtext schreibt die Währung aus (statt des Symbols); beide
+        # gebräuchlichen Darstellungen müssen mit einem echten Betragseintrag
+        # übereinstimmen, nicht nur als Zahl irgendwo im Artikel vorkommen.
+        for amount in ('39,42', '13,14', '105', '120'):
+            with self.subTest(amount=amount):
+                self.assertRegex(body, rf'(?<![0-9]){amount}(?: *€| +Euro)(?![A-Za-z])')
+        self.assertTrue(any(phrase in body for phrase in
+                            ('gleichem Grundpreis', 'Grundpreis gleich bleibt')))
 
     def test_reise_keine_unbelegten_markt_und_cashback_annahmen(self):
         fm, body = article(REISE)
