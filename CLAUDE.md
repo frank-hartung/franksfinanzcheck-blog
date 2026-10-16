@@ -1815,6 +1815,51 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
   `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md`.
 
+## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
+
+PR #776 wurde am 15.10.2026 auf `main` umgesetzt (zwei Konflikte) und **22
+Sekunden** nach dem Push dieses Stands gemergt – bevor ein Check des Commits
+fertig war. Danach waren drei rot (Qualitäts-Gate, Regressionstests,
+Integritäts-Siegel). Die Konflikte waren „zugunsten“ einer Seite aufgelöst und
+überschrieben damit zwei schon gemergte Heilungen: den Ausnahme-Vertrag aus
+#762 (zweite Auswertung in Gate und A8, sichtbarer Hinweis gelöscht) und den
+Faustregel-Pool aus #766 (Code weg, Selbsttests und Aufrufer geblieben). Das
+Qualitäts-Gate meldete es um 18:22 UTC als „Qualitätsprüfung rot“ (#777); am
+16.10. folgten #778, #779, #780 und #783, die Affiliate-Wache stand fail-closed.
+Am 16.10. wiederholte sich das Muster binnen Minuten: Die parallelen
+Reparaturen #785 und #784 gingen 58 s bzw. 77 s auseinander rot nach `main`;
+ihre Zusammenführung ließ in `affiliate_integrity_gate.py` zwei `if`-Köpfe und
+zwei Hinweistexte stehen – ein **IndentationError auf `main`**, an dem jeder
+Aufrufer (Wache, Publish-Gate, Bestand-Gate, CodeQL-Wachen) abstürzte.
+
+- **Kein Merge vor dem grünen Abschluss DIESES Commits.** Nach jedem Push –
+  auch Rebase und Force-Push – `gh pr checks <nr> --watch --fail-fast`
+  abwarten. Rot oder ausstehend heißt: nicht mergen. Der Branch-Schutz verlangt
+  die Checks hier nicht (Dauerzustand, `docs/PFLICHT-CHECK-RUNBOOK.md`); bis er
+  es tut, ersetzt diese Regel ihn. Eine offene „Qualitätsprüfung rot“ ist der
+  früheste Alarm – sie geht jeder weiteren Arbeit vor.
+- **Konflikt zwischen zwei Heilungen = beide behalten.** Eine Auflösung
+  „zugunsten“ einer Seite nimmt die andere zurück und braucht deren Vorgang.
+  Danach `python3 scripts/selftest_runner.py` (alle Wachen, wenige Minuten) –
+  er hätte #776 vor dem Merge gestoppt.
+- **Ein Vertrag, ein Auswerter.** `affiliate_exempt` liest nur
+  `scripts/affiliate_exemption.py` (`affiliate_exemption`,
+  `exemption_for_article`, `exemption_for_text`). Kein eigenes
+  Frontmatter-Splitten, kein Import über eine andere Wache, kein
+  `except Exception` um den Vertrag – ein verschluckter Fehler wird still zu
+  „keine Ausnahme“. `test_affiliate_exemption.SingleEvaluatorStructureTests`
+  erzwingt das am Code; der Render-Beweis wertet nur das geladene `fm` aus.
+- **Ungültige Ausnahme = Fund, nie Heilung.** A8
+  (`affiliate_profi_check.py --fix`) setzt einem Artikel mit kaputter Ausnahme
+  keine Werbe-CTA ein; der Render-Beweis meldet dafür genau einen Fund.
+- **Ein roter Selbsttest ist Code.** Alarm-Klasse `selbsttest` in
+  `alert-on-failure.yml` (maßgeblich ist der erste rote Schritt): Rat =
+  `selftest_runner.py` und `git log` der Wache – kein Schlüssel-, kein
+  Neustart-Rat.
+- Tests: `npm run test:affiliate-links` · Szenarien #780 in
+  `scripts/tests/sim/alert_scoping_sim.mjs` · Bericht
+  `WF-53E2-780-DAUERHEILUNG-PREMIUM-2026-10-16.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

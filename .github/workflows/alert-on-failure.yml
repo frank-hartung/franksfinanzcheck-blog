@@ -406,6 +406,24 @@ jobs:
             const backupFrist = isBackup && !backupEinrichtung &&
               failedStepNames.some(s => String(s).includes('Fristwarnung'));
             // ================================================================
+            //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
+            //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART
+            //  --------------------------------------------------------------
+            //  Die Affiliate-Wache stand fail-closed, weil ihr Detektor-
+            //  Selbsttest seit einem Merge rot war (#776 hatte den geprüften
+            //  Vertrag umgeschrieben). Die Meldung riet zu GROQ/GEMINI und zum
+            //  Neustart – beides kann einen Selbsttest nicht rot machen und
+            //  nicht grün: Selbsttests laufen offline, mit Attrappen-Schlüsseln
+            //  (KI-Probe, #138), und urteilen über den Code. Am selben Tag gab
+            //  derselbe Merge drei weitere Meldungen mit demselben falschen Rat
+            //  (#777, #778, #783). Maßgeblich ist der ERSTE rote Schritt – die
+            //  Schlussbewertung danach („Lauf bewerten“) ist nur die Folge.
+            //  Spezifische Klassen oben (Engine, Backup, Installation,
+            //  Sicherheits-Wache) behalten Vorrang.
+            // ================================================================
+            const ersterRoterSchritt = String(failedStepNames[0] || '');
+            const selbsttestFailed = /Selbsttest|Selftest/i.test(ersterRoterSchritt);
+            // ================================================================
             //  KLASSE DES RATS (WF-9E5A / #761, 15.10.2026)
             //  --------------------------------------------------------------
             //  Eine Quelle für beides: die Wahl des Runbooks unten UND den
@@ -427,6 +445,8 @@ jobs:
               // WF-9E5A #761) – deshalb ist die Kette hier die einzige Quelle.
               : headerGateFailed ? 'sicherheit-header'
               : istSicherheitsWache ? 'sicherheit-wache'
+              // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
+              : selbsttestFailed ? 'selbsttest'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -598,6 +618,13 @@ jobs:
                           '2. Öffne das Log des oben rot markierten Schritts. Jede Wache nennt Fundstelle und Regel, nicht nur „rot".',
                           '3. Alle vier Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Worker-Betrieb, n8n-Kette – jeweils mit Selbsttest, offline).'
                         ]
+                      : runbookKlasse === 'selbsttest'
+                        ? [
+                            '1. **Einordnung: Code-Regression, kein Betriebsausfall.** Rot ist ein Selbsttest – die Wache hat ihr eigenes Prüfwerkzeug geprüft und für defekt befunden. Selbsttests laufen offline und mit Attrappen-Schlüsseln (KI-Probe, #138): Ein abgelaufener GROQ-/GEMINI-Schlüssel oder ein GitHub-Ausfall löst diesen Schritt nicht aus, und ein Neustart liefert dasselbe Rot.',
+                            '2. **Nachfahren:** `python3 scripts/selftest_runner.py` prüft alle Wachen wie das Qualitäts-Gate; die Zeile mit ❌ nennt Skript und gebrochenen Vertrag. Einzeln: `python3 scripts/<wache>.py --selftest`.',
+                            '3. **Ursache eingrenzen:** `git log -5 --format="%h %ad %s" --date=short -- scripts/<wache>.py`. Ist zugleich die Meldung „Qualitätsprüfung rot (Selbsttests, Vertrag oder Aufbau)“ offen, kam der Fehler mit einem Merge – der Qualitäts-Gate-Lauf jenes Commits zeigt dieselbe Zeile.',
+                            '4. **Heilen:** den Code reparieren und erst mit grünen Checks mergen. Diese Meldung schließt sich beim nächsten grünen Lauf auf `main` selbst.'
+                          ]
                       : [
                         failedJobs.length > 0
                           ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
