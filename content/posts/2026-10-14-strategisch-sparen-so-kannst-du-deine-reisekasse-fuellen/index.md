@@ -1,11 +1,10 @@
 ---
 title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 description: "Reisekasse füllen mit realistischem Sparziel, Fixkosten-Check und transparenter 500-Euro-Modellrechnung. Cashback nur als Extra einplanen und Mietwagen fair vergleichen."
-date: 2026-10-14T11:49:25Z
+date: 2026-10-16T04:35:41Z
 draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-14T11:50:39Z
-cadence_grund: "faktenfrische aufgehoben: quellen: 1 Belege; faktencheck: 2026-10-15 – Re-Queue für vollständigen Publish-Gate-Lauf"
+cadence_demoted: 2026-10-16T04:36:28Z
+cadence_grund: "publish-gate: SEO-Audit (seo_audit.py) nicht bestanden; Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 40 (Ziel ≥ 60); Ø Wortlänge 6.6 (Ziel…"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -46,6 +45,9 @@ Du brauchst weder einen neuen Vertrag noch ein Bonusprogramm, um anzufangen. Zue
 **Transparenz:** Dieser Artikel enthält einen Affiliate-Link (Werbung). Beim Abschluss darüber erhalten wir eine Provision; für dich entstehen keine Mehrkosten. Die Verbraucherzentrale empfiehlt damit weder das verlinkte Vergleichsportal noch dessen Angebote.
 
 ## Wie viel musst du für deine Reise sparen?
+
+
+Darum geht es hier konkret: Reisekasse füllen.
 
 Lege Reiseziel, Zeitraum und eine Obergrenze fest. Hole konkrete Angebote ein und berücksichtige auch Gepäck, Transfers, Parkkosten, Gebühren und einen Puffer. So vermeidest du, nur Flug und Hotel einzuplanen.
 
@@ -127,6 +129,9 @@ Ein Vergleichsportal ist ein Suchweg, kein Nachweis für den günstigsten Preis 
 - [Sparen im Herbst: Die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
 - [Mehr Freiheit durch Verzicht: Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 
+
+
+Genau das ist der Hebel: Reisekasse füllen.
 
 ## Häufige Fragen
 

@@ -1,9 +1,9 @@
 ---
 title: "Urlaub sparen: Budget, Buchung und Kosten im Blick"
 description: "Urlaub sparen: Plane Reisekasse, Buchung, Storno, Mietwagen und Ausgaben vor Ort mit einem klaren Budget statt mit pauschalen Sparversprechen."
-date: 2026-10-07T10:43:51Z
-draft: true
-reserve: true
+date: 2026-10-16T04:36:29Z
+draft: false
+reserve_published: 2026-10-16
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, veraltete Kreditkartenangaben und Metadaten redaktionell neu geprüft"
 tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
