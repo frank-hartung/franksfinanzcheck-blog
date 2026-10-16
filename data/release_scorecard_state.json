@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-16T17:35:16Z",
+  "generated_at": "2026-10-16T18:09:40Z",
   "modus": "kandidaten",
-  "commit": "cdf99122113d7c7e3ef8e0d133fde75464d4985e",
+  "commit": "8111a3a4d6b02f55d48bb2319bf1111499d71b5c",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -36,23 +36,6 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
-    },
-    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-      "sha256": "92e5b82d566c2cccd047609523a30ca42826722cfc32acf83a5c453034e190d3",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
@@ -189,23 +172,6 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
-    },
-    "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-      "sha256": "9459d541e0f3ec23246806d8ff7fbae30339477c303308a5f60b5fd272514b8c",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
