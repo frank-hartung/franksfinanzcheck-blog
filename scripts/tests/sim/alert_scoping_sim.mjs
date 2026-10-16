@@ -231,7 +231,11 @@ await run('Content-Engine-Schluss-Classifier → Klassen-Runbook ohne Key-Raten'
 
 // 7. Identische Schritttexte in einem anderen Workflow dürfen nicht in die
 //    Content-Engine-Sonderbehandlung geraten.
-await run('gleichnamige Schritte in fremdem Workflow → Standard-Runbook',
+//    WF-53E2 / #780 (16.10.2026): Der erste rote Schritt ist hier ein
+//    Selbsttest-Schritt – seitdem bekommt er den Selbsttest-Rat statt des
+//    Standardrats. Die Zusage des Szenarios bleibt unverändert: kein
+//    Engine-Runbook außerhalb der Content-Engine.
+await run('gleichnamige Schritte in fremdem Workflow → kein Engine-Runbook (Selbsttest-Rat)',
   { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/634',
              steps: [
@@ -239,9 +243,9 @@ await run('gleichnamige Schritte in fremdem Workflow → Standard-Runbook',
                { name: 'Do not report a quota deficit as success', conclusion: 'failure' },
              ] }] },
   true,
-  ['Häufigste Ursachen'],
+  ['<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall'],
   null,
-  ['Frühabbruch vor der Endabnahme', 'selftest_ki.py --trap <skript>']);
+  ['Frühabbruch vor der Endabnahme', 'selftest_ki.py --trap <skript>', 'API-Key abgelaufen']);
 
 // 8. push auf main rot → Alarm (Produktion)
 await run('push-Lauf main rot → Alarm',
@@ -545,6 +549,76 @@ await run('WF-E813: offene Meldung bekommt beim Klassenwechsel den neuen Rat',
     imBody: ['<!-- alert-runbook: sicherheit-header -->', 'FF Sicherheits-Header',
              'docs/SICHERHEIT-BETRIEB-RUNBOOK.md', 'Sicherheits-Header auswerten'],
     nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen'] });
+
+// WF-53E2 / #780 (16.10.2026): Ein roter Selbsttest ist eine Code-Regression.
+//     Exakte Konstellation des Vorfalls: Der Detektor-Selbsttest der
+//     Affiliate-Wache war seit dem Merge von #776 rot, danach scheiterte nur
+//     noch die Schlussbewertung. Die Meldung riet zu GROQ/GEMINI und zum
+//     Neustart – beides kann einen Offline-Selbsttest weder rot noch grün
+//     machen. Derselbe Merge erzeugte am selben Tag #777, #778 und #783.
+const AFFILIATE_WACHE = 'Affiliate-Integritäts-Wache (täglich)';
+const SELBSTTEST_780 = [{ name: 'integritaet', conclusion: 'failure',
+  html_url: 'https://x/jobs/116888354398',
+  steps: [{ name: 'Hugo installieren (Extended, verifiziert, mehrquellig)', conclusion: 'success' },
+          { name: 'Detektor-Selbsttest (Wache muss sehen können)', conclusion: 'failure' },
+          { name: 'Lauf bewerten (rot nur bei unheilbarem Werkzeugfehler)', conclusion: 'failure' }] }];
+await run('#780-Reproduktion: Detektor-Selbsttest rot → Selbsttest-Rat, kein Schlüssel-/Neustart-Rat',
+  { workflowName: AFFILIATE_WACHE, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: SELBSTTEST_780 },
+  true,
+  ['Vorgang **WF-53E2**', '<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall',
+   'python3 scripts/selftest_runner.py', 'Detektor-Selbsttest (Wache muss sehen können)',
+   'https://x/jobs/116888354398', 'schließt sich beim nächsten grünen Lauf'],
+  null,
+  ['Häufigste Ursachen', 'API-Key abgelaufen', 'Transienter Fehler', 'Workflow manuell neu starten']);
+// #778 (gleicher Merge): die Content-Reserve starb an ihren Selbsttests –
+// der Rat muss derselbe sein, nicht „Schlüssel prüfen“.
+await run('#778-Reproduktion: „Selbsttests aller Wachen“ rot → Selbsttest-Rat',
+  { workflowName: 'Content-Reserve (täglicher Vorrat)', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'reserve', conclusion: 'failure', html_url: 'https://x/jobs/116881739147',
+             steps: [{ name: 'Selbsttests aller Wachen (entdeckt, uhrfest, schreibfrei)', conclusion: 'failure' },
+                     { name: 'Stock shortage must not look successful', conclusion: 'failure' }] }] },
+  true, ['Vorgang **WF-D4E0**', '<!-- alert-runbook: selbsttest -->', 'selftest_runner.py'],
+  null, ['API-Key abgelaufen', 'Häufigste Ursachen']);
+// Der ERSTE rote Schritt entscheidet: Ein Selbsttest, der nur als Folge
+// eines früheren Fehlers rot wird, macht daraus keine Code-Regression.
+await run('#780-Gegenprobe: erster roter Schritt ist kein Selbsttest → bisheriger Rat',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7801',
+             steps: [{ name: 'Browser-Audit', conclusion: 'failure' },
+                     { name: 'Selbsttest der Wache (Sabotage-Proben)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: allgemein -->', 'Häufigste Ursachen'],
+  null, ['alert-runbook: selbsttest', 'Code-Regression, kein Betriebsausfall']);
+// Vorrang: Spezifische Klassen schlagen den Selbsttest-Rat (Installation
+// kennt die Ursache genauer; das Backup hat seine eigene Anleitung).
+await run('#780-Vorrang: Install-Schritt rot vor dem Selbsttest → Installations-Rat',
+  { workflowName: AFFILIATE_WACHE, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'integritaet', conclusion: 'failure', html_url: 'https://x/jobs/7802',
+             steps: [{ name: 'Abhängigkeiten', conclusion: 'failure' },
+                     { name: 'Detektor-Selbsttest (Wache muss sehen können)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: installation -->', 'Abhängigkeiten nicht installierbar'],
+  null, ['alert-runbook: selbsttest', 'API-Key abgelaufen']);
+await run('#780-Vorrang: Backup-Selbsttest rot → Backup-Rat bleibt',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: BACKUP_KV_JOB, conclusion: 'failure', html_url: 'https://x/jobs/7803',
+             steps: [{ name: 'Selbsttest (Export, Probe, Einrichtungsprüfung – fail-closed)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup -->'], null, ['alert-runbook: selbsttest', 'API-Key abgelaufen']);
+// Lagebild (#761-Mechanismus): #780 steht mit dem allgemeinen Rat offen.
+// Der nächste rote Lauf schreibt dieselbe Meldung mit dem Selbsttest-Rat
+// neu – keine zweite Meldung, kein Schlüssel-Rat mehr.
+const AFFILIATE_IDENT = IDENTITIES[AFFILIATE_WACHE];
+await run('#780-Nachführung: offene Meldung mit allgemeinem Rat → gleiche Nummer, Selbsttest-Rat',
+  { workflowName: AFFILIATE_WACHE, branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7804,
+    jobs: SELBSTTEST_780,
+    openIssues: [{ number: 780, title: AFFILIATE_IDENT.titel,
+                   body: AFFILIATE_IDENT.marker + '\n<!-- alert-runbook: allgemein -->\n'
+                     + '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
+                   created_at: '2026-10-16T08:40:23Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 780,
+    imBody: ['<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall',
+             'https://x/runs/7804', '**Offen seit:** 16.10.2026, 10:40:23'],
+    nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen', 'alert-runbook: allgemein'] });
 
 // 12. KANAL-HYGIENE (Sicherheitsaudit 15.10.2026, F-09): Der Workflow-Name
 //    stammt aus dem Webhook. Er darf den Body nicht steuern – kein Markdown,

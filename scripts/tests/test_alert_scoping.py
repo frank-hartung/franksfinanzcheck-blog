@@ -151,6 +151,26 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertRegex(workflow.read_text(encoding="utf-8"), r"(?m)^name:\s*Offsite-Backup\s*$",
                          "backup-offsite.yml muss der Workflow „Offsite-Backup“ sein (wfName-Bindung).")
 
+    def test_wf_53e2_roter_selbsttest_hat_eigenes_runbook(self):
+        # WF-53E2 / #780 (16.10.2026): Der Detektor-Selbsttest der Affiliate-
+        # Wache war nach einem Merge rot; die Meldung riet zu GROQ/GEMINI und
+        # zum Neustart. Selbsttests laufen offline mit Attrappen-Schlüsseln –
+        # rot ist dort immer Code. Entscheidend ist der ERSTE rote Schritt
+        # (die Schlussbewertung danach ist Folge), und jede spezifische
+        # Klasse behält Vorrang: der Selbsttest-Rat steht direkt vor dem
+        # Rückfall „allgemein“. Verhalten: Simulation (#780-Szenarien).
+        self.assertIn("const ersterRoterSchritt = String(failedStepNames[0] || '');", self.code)
+        self.assertIn("/Selbsttest|Selftest/i.test(ersterRoterSchritt)", self.code)
+        m = re.search(r"const runbookKlasse = (.*?);", self.code, re.S)
+        self.assertIsNotNone(m)
+        klassen = re.findall(r"'([a-z-]+)'", m.group(1))
+        self.assertEqual(klassen[-2:], ["selbsttest", "allgemein"],
+                         "Selbsttest-Rat gehört hinter alle spezifischen Klassen, vor den Rückfall")
+        self.assertIn("python3 scripts/selftest_runner.py", self.code)
+        self.assertIn("ein Neustart liefert dasselbe Rot", self.code)
+        self.assertTrue((REPO / "scripts" / "selftest_runner.py").is_file(),
+                        "der im Rat genannte Runner muss existieren")
+
     def test_offene_meldung_wird_bei_klassenwechsel_nachgefuehrt(self):
         # WF-9E5A / #761: Die Meldung entstand, bevor es die Klasse
         # „Einrichtung unvollständig“ gab, und riet zu GROQ/GEMINI. Der
@@ -351,11 +371,17 @@ class VerhaltensSimulation(unittest.TestCase):
             # dass dieser Kanal seine eigene Triage bekommt und nicht den
             # Schlüssel-Rat, der für eine reine Kopfzeilen-Messung nie zutreffen
             # kann.
+            # WF-53E2 / #780 (16.10.2026): Affiliate-Wache und Content-Reserve –
+            # beide fielen am 16.10. an roten Selbsttests (ein Merge), beide
+            # bekamen den Schlüssel-Rat. Die Simulation prüft den Selbsttest-Rat
+            # an genau diesen zwei echten Kanälen.
             identitaeten = {name: ident_modul.identitaet(name)
                             for name in ("Layout-AI", "Content-Engine v2",
                                          "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
                                          "Offsite-Backup",
-                                         "Sicherheits-Wache", boeser_name)}
+                                         "Sicherheits-Wache",
+                                         "Affiliate-Integritäts-Wache (täglich)",
+                                         "Content-Reserve (täglicher Vorrat)", boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

@@ -312,3 +312,4 @@
 {"date": "2026-10-15", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py"]}
 {"date": "2026-10-16", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["scripts/affiliate_integrity_gate.py", "scripts/redaktions_standard.py"], "head": "9d7a556"}
 {"date": "2026-10-16", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py", "scripts/redaktions_standard.py"]}
+{"date": "2026-10-16", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py"]}
