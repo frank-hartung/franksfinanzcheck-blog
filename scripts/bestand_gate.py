@@ -115,7 +115,7 @@ def detector_selftest() -> tuple[bool, str]:
     """Vorbeweis (Premium 02.09.2026, Issue #149): Die Wache muss erst SEHEN
     können, bevor sie urteilt. Läuft der Detektor-Selbsttest
     (affiliate_integrity_gate.py --selftest) nicht grün, gilt das als
-    Detektor-Drift: fail-closed, nichts wird geheilt oder verworfen."""
+    Werkzeugfehler: fail-closed, nichts wird geheilt oder verworfen."""
     try:
         r = subprocess.run(
             [sys.executable, str(SCRIPTS / "affiliate_integrity_gate.py"), "--selftest"],
@@ -126,10 +126,12 @@ def detector_selftest() -> tuple[bool, str]:
     if r.returncode != 0:
         tail = ((r.stdout or "") + "\n" + (r.stderr or "")).strip()[-1200:]
         return False, (
-            "Detektor-Drift: `scripts/affiliate_integrity_gate.py --selftest` "
+            "Affiliate-Detektor nicht verifiziert: "
+            "`scripts/affiliate_integrity_gate.py --selftest` "
             f"fehlgeschlagen (Exit {r.returncode}). NICHTS wurde geheilt oder "
-            "verworfen. Anpassung des Detektors an den Render-Hook nötig "
-            "(Drift-Wächter, siehe AFFILIATE-INTEGRITY-GATE-REPORT.md).\n"
+            "verworfen. Der Affiliate-Integritätsdetektor erfüllt seinen "
+            "Selbsttestvertrag nicht; die Bestandsbewertung bleibt fail-closed. "
+            "Ursachenhinweis siehe unten und AFFILIATE-INTEGRITY-REPORT.md.\n"
             f"```\n{tail}\n```"
         )
     return True, "✅ Detektor-Selbsttest (affiliate_integrity_gate.py --selftest) grün."
@@ -177,7 +179,8 @@ def run_gate():
             keyword_err = None
             keyword_tool_error = False
             for path in list_post_paths():
-                content = open(path, encoding="utf-8").read()
+                with open(path, encoding="utf-8") as fh:
+                    content = fh.read()
                 fm = content.split("---", 2)[1] if len(content.split("---", 2))==3 else ""
                 if "draft: true" in fm:
                     continue

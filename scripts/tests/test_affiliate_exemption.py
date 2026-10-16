@@ -10,6 +10,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -95,6 +96,11 @@ class IntegrityExemptionTests(unittest.TestCase):
         self.assertEqual(first["checked"], 1)
         self.assertEqual(first["exemptions"], {"messtest": REASON})
         self.assertFalse(first["healed"])
+        notes = first["per_article"][0]["notes"]
+        self.assertTrue(
+            any("ausgenommen" in note.lower() and REASON in note for note in notes),
+            f"gültige Ausnahme samt Begründung muss im Artikelbefund sichtbar sein: {notes}",
+        )
         text = gate.write_report(first)
         gate.write_state(first)
         self.assertIn(REASON, text)
@@ -247,6 +253,35 @@ class IntegrityExemptionTests(unittest.TestCase):
         self.assertIn("passendes Tarifangebot", reason)
         self.assertEqual(error, "")
         self.assertFalse(gate.markdown_findings([article], set(gate.load_registry())))
+
+
+class BestandGateSelftestDependencyTests(unittest.TestCase):
+    def test_bestand_gate_reports_underlying_integrity_selftest_failure(self):
+        import bestand_gate as bestand
+
+        failure = SimpleNamespace(
+            returncode=2,
+            stdout="fixture output",
+            stderr="fixture diagnostic",
+        )
+        with patch.object(bestand.subprocess, "run", return_value=failure) as run:
+            ok, message = bestand.detector_selftest()
+
+        self.assertFalse(ok)
+        self.assertIn("fixture output", message)
+        self.assertIn("fixture diagnostic", message)
+        self.assertIn("affiliate_integrity_gate.py --selftest", message)
+        self.assertNotIn("Render-Hook nötig", message,
+                         "ein beliebiger Selbsttestfehler darf nicht als Hook-Drift etikettiert werden")
+        run.assert_called_once()
+
+    def test_bestand_gate_uses_the_current_green_integrity_contract(self):
+        import bestand_gate as bestand
+
+        ok, message = bestand.detector_selftest()
+
+        self.assertTrue(ok, message)
+        self.assertIn("grün", message)
 
 
 if __name__ == "__main__":

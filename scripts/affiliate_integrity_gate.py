@@ -946,6 +946,8 @@ def verify_article_render(article: dict, reg: dict,
               "exempt": exempt, "exempt_reason": reason}
     if exempt and not exempt_error:
         result["notes"].append(
+            "Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: "
+            f"{exemption_contract.exemption_label(reason)}")
             "Affiliate-CTA-Pflicht ist redaktionell ausgenommen: "
             + exemption_contract.exemption_label(reason))
 
@@ -997,6 +999,13 @@ def verify_article_render(article: dict, reg: dict,
             f"ausgenommen gelten: {exempt_error}")
 
     # --- Mindestbestand: ein Artikel ohne gerenderten Affiliate-Link
+    #     monetarisiert nicht und ist kein Beweis-fähiger Zustand.
+    # DAUERHEILUNG #764 (15.10.2026): `affiliate_exempt: true` mit
+    # Begründung befreit redaktionell (reine Messtests, technische
+    # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
+    # affiliate_link_check – keine zweite Messregel (Root Cause
+    # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
+    if not gateway_anchors and not (exempt and not exempt_error):
     #     braucht entweder einen Beleg-fähigen CTA oder die ausdrücklich
     #     begründete redaktionelle Ausnahme aus derselben Frontmatter-Prüfung
     #     wie oben. Die Ausnahme hebt NUR diese Mindestpflicht auf; alle
@@ -1881,8 +1890,9 @@ def run_selftest() -> list[str]:
         expect(not res_exempt["problems"],
                "eine gültige Ausnahme darf keinen 'kein Affiliate-Link'-Fund "
                f"erzeugen (#762): {res_exempt['problems']}")
-        expect(any("ausgenommen" in n for n in res_exempt["notes"]),
-               "die Ausnahme muss als Hinweis sichtbar bleiben (nicht versteckt)")
+        expect(any("ausgenommen" in n.lower() and grund in n
+                   for n in res_exempt["notes"]),
+               "die gültige Ausnahme samt Begründung muss als Hinweis sichtbar bleiben")
 
         # b) OHNE Ausnahme bleibt der Befund bestehen (kein Fehlalarm-Refix).
         a_ohne = _art("2026-09-04-messtest", "pillar: \"internet-dsl\"\n")
@@ -1904,6 +1914,8 @@ def run_selftest() -> list[str]:
         res_halbe = verify_article_render(a_halbe, {}, root5 / "public")
         expect(any("Affiliate-Ausnahme ungültig" in p for p in res_halbe["problems"]),
                "eine Ausnahme ohne Begründung muss fail-closed ein Fund sein")
+        expect(not any("ausgenommen" in n.lower() for n in res_halbe["notes"]),
+               "eine ungültige Ausnahme darf nicht als genehmigt erscheinen")
 
     # 9) HERZSCHLAG vs. BEFUND (Reparatur #281) – der Kern der dauerhaften
     #    Behebung. Ein zweiter Lauf mit UNVERÄNDERTEM Befund MUSS den
