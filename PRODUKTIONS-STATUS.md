@@ -1,17 +1,17 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-15 22:59 UTC  
+**Stand:** 2026-10-16 11:21 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-14): 2 Artikel – Ziel erfüllt. – Bestand: 2 förderfähig in der Re-Queue, 1 von Gates gehalten (ältester 1 Tage: Redaktions-Standard: RS2, RS3)
+**Befund:** Letzter Publikationstag (2026-10-16): 3 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 0 Tage: publish-gate: SEO-Audit (seo_audit.py) nicht bestanden; Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 40 (Ziel ≥ 60); Ø Wortlänge 6.6 (Ziel…)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-10-15 (Donnerstag) |
-| Publikationstag heute | nein |
-| Artikel letzter Publikationstag (2026-10-14) | 2 |
-| Letzter Artikel überhaupt | 2026-10-14 (1 Tage her) |
-| Live-Artikel gesamt | 58 |
-| Förderfähig in der Re-Queue | 2 |
+| Heute | 2026-10-16 (Freitag) |
+| Publikationstag heute | ja |
+| Artikel letzter Publikationstag (2026-10-16) | 3 |
+| Letzter Artikel überhaupt | 2026-10-16 (0 Tage her) |
+| Live-Artikel gesamt | 61 |
+| Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 1 |
 | Mindestziel/Tag | 2 |
 
