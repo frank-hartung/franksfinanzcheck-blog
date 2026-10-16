@@ -1,26 +1,9 @@
 {
   "target": 6,
-  "ready": 8,
-  "pool_size": 8,
+  "ready": 7,
+  "pool_size": 7,
   "generated_at": "2026-10-16T08:33:56Z",
   "candidates": [
-    {
-      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
-      "ready": true,
-      "sha256": "ccbea17d34524846d71387e53e06c8d216adff33d83ed65d0af4c6ece6dded6f",
-      "flesch": 60.0,
-      "measured_at": "2026-10-16T08:26:57Z",
-      "score": 0.91,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
     {
       "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
       "ready": true,
@@ -145,5 +128,12 @@
     "kind": "full",
     "run_id": "38873132768",
     "run_attempt": "1"
+  },
+  "ausgebucht": {
+    "at": "2026-10-16T20:05:48Z",
+    "slugs": [
+      "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
