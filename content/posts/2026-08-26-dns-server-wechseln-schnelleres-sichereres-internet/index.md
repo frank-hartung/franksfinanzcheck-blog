@@ -14,7 +14,7 @@ cover:
   image: "images/covers/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet.jpg"
   alt: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält. er erhöht weder die Bandbreite noch verschlüsselt er DNS automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Dabei verlagert sich das Vertrauen auf den gewählten DNS-Anbieter."
+kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält. Er erhöht weder die Bandbreite noch verschlüsselt er DNS automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Dabei verlagert sich das Vertrauen auf den gewählten DNS-Anbieter."
 
 social_posted: true
 keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern", "DNS Server wechseln"]
@@ -68,7 +68,7 @@ Wenn du den DNS-Server wechseln möchtest, änderst du zunächst den DNS-Server,
 
 - DNS-Server übersetzen Domainnamen in IP‑Adressen, beeinflussen aber nicht die Bandbreite deines Anschlusses.  
 - Öffentliche DNS-Server können DNS‑Anfragen verschlüsseln (DoH/DoT), schützen jedoch nicht vor allen Netzwerkdaten.  
-- Filterfunktionen der Anbieter unterscheiden sich. sie blockieren nur bekannte schädliche Domains und ersetzen keinen Virenschutz.  
+- Filterfunktionen der Anbieter unterscheiden sich. Sie blockieren nur bekannte schädliche Domains und ersetzen keinen Virenschutz.  
 
 ## Was macht ein DNS-Server?
 
@@ -82,7 +82,7 @@ Die folgenden IPv4‑Adressen stammen aus den aktuellen Anbieterunterlagen. Nutz
 
 | DNS-Server | Standard‑IPv4 | Schwerpunkt laut Anbieter |
 |---|---|---|
-| Cloudflare 1.1.1.1 | `1.1.1.1`, `1.0.0.1` | Standard ohne Inhaltsfilter. optionale Familienvarianten filtern bekannte Malware‑ und Phishing‑Domains, teils auch Erwachseneninhalte |
+| Cloudflare 1.1.1.1 | `1.1.1.1`, `1.0.0.1` | Standard ohne Inhaltsfilter. Optionale Familienvarianten filtern bekannte Malware‑ und Phishing‑Domains, teils auch Erwachseneninhalte |
 | Google Public DNS | `8.8.8.8`, `8.8.4.4` | Öffentlicher DNS-Server. Googles Datenschutzseite beschreibt die Protokollierung von Anfragen |
 | Quad9 Secure | `9.9.9.9`, `149.112.112.112` | Blockiert laut Quad9 DNS‑Anfragen an bekannte schädliche Domains |
 
@@ -92,7 +92,7 @@ Der Standardresolver löst DNS‑Anfragen ohne Inhaltsfilter auf. Für IPv6 nenn
 
 Wenn dein Gerät IPv6 nutzt, trage auch bei DNSv6 die passende Filtervariante ein. Sonst können Anfragen über eine ungefilterte IPv6‑Adresse laufen. Diese Filter sind keine vollständige Sicherheitssoftware. Sie können erwünschte Domains blockieren. [Adressen und Filtervarianten](https://developers.cloudflare.com/1.1.1.1/ip-addresses/)
 
-Cloudflare dokumentiert, dass der DNS-Server Anfragen verschlüsselt über DoH oder DoT entgegennehmen kann. Laut eigener Datenschutzbeschreibung werden bestimmte DNS-Server‑Protokolldaten nach kurzer Zeit gelöscht. anonymisierte aggregierte Auswertungen können länger bestehen bleiben. Lies die [Details zur Protokollierung](https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/), bevor du dich für den Dienst entscheidest.
+Cloudflare dokumentiert, dass der DNS-Server Anfragen verschlüsselt über DoH oder DoT entgegennehmen kann. Laut eigener Datenschutzbeschreibung werden bestimmte DNS-Server‑Protokolldaten nach kurzer Zeit gelöscht. Anonymisierte aggregierte Auswertungen können länger bestehen bleiben. Lies die [Details zur Protokollierung](https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/), bevor du dich für den Dienst entscheidest.
 
 ### Google Public DNS
 
@@ -122,7 +122,7 @@ Notiere zuerst die bisherigen Einstellungen oder mache einen Screenshot. So kann
 
 Bei vielen FRITZ!Box‑Modellen findest du die DNS‑Einstellungen unter **Internet → Zugangsdaten** oder **Internet → Zugangsart → DNS‑Server**. Die Bezeichnungen und verfügbaren Optionen unterscheiden sich nach Modell, FRITZ!OS und Anbieter. Aktiviere die Verwendung anderer DNSv4‑ beziehungsweise DNSv6‑Server und trage die Adressen des gewählten Anbieters ein. Die [FRITZ! Knowledge Base](https://fritz.com/en-at/apps/knowledge-base/fritz-box-6591-cable/165_Configuring-different-DNS-servers-in-the-FRITZ-Box) beschreibt die Menüs für ein konkretes Modell.
 
-Wenn du verschlüsselte Anfragen nutzen möchtest, reicht die Eingabe einer IP‑Adresse nicht immer aus. Bei DNS over TLS verlangt die FRITZ!Box zusätzlich den passenden Servernamen. Aktiviere diese Funktion nur, wenn dein Router und der gewählte DNS-Server sie unterstützen. Laut FRITZ! Kann die Box für einzelne Dienste weiterhin die DNS‑Server des Internetanbieters verwenden. bei manchen Kabelanschlüssen fehlt die Einstellung ganz.
+Wenn du verschlüsselte Anfragen nutzen möchtest, reicht die Eingabe einer IP‑Adresse nicht immer aus. Bei DNS over TLS verlangt die FRITZ!Box zusätzlich den passenden Servernamen. Aktiviere diese Funktion nur, wenn dein Router und der gewählte DNS-Server sie unterstützen. Laut FRITZ! Kann die Box für einzelne Dienste weiterhin die DNS‑Server des Internetanbieters verwenden. Bei manchen Kabelanschlüssen fehlt die Einstellung ganz.
 
 ### Android und iPhone
 
@@ -134,7 +134,7 @@ Auf dem iPhone lässt sich DNS für ein einzelnes WLAN unter **Einstellungen →
 
 Prüfe anschließend mehrere Websites und Apps. Teste auch Onlinebanking, VPN, Videokonferenzen, Smart‑Home‑Geräte und gegebenenfalls Jugendschutzfilter. Wenn eine Anwendung nicht mehr funktioniert, stelle zunächst die vorher notierten Einstellungen wieder her. Bei einer FRITZ!Box kannst du die DNS‑Adressen des Internetanbieters erneut automatisch beziehen lassen.
 
-Mische nicht unbedacht DNS-Server mit unterschiedlichen Filtern als primäre und alternative Adresse. Je nach Gerät kann die zweite Adresse ebenfalls verwendet werden. dadurch können Ergebnisse und Schutzregeln wechseln. In einem Firmen‑VPN oder bei lokalen Diensten kann außerdem ein vorgegebener DNS‑DNS-Server nötig sein.
+Mische nicht unbedacht DNS-Server mit unterschiedlichen Filtern als primäre und alternative Adresse. Je nach Gerät kann die zweite Adresse ebenfalls verwendet werden. Dadurch können Ergebnisse und Schutzregeln wechseln. In einem Firmen‑VPN oder bei lokalen Diensten kann außerdem ein vorgegebener DNS‑DNS-Server nötig sein.
 
 **So gehst du vor**
 
@@ -224,7 +224,7 @@ Nicht zwingend. Ein DNS-Server kann die DNS-Abfrage in manchen Situationen besch
 
 ### Kann mein Internetanbieter meine DNS‑Anfragen danach noch sehen?
 
-Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum DNS-Server verschlüsselt. der gewählte DNS-Server verarbeitet die Anfrage trotzdem. Auch andere Verbindungsdaten bleiben sichtbar.
+Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum DNS-Server verschlüsselt. Der gewählte DNS-Server verarbeitet die Anfrage trotzdem. Auch andere Verbindungsdaten bleiben sichtbar.
 
 ### Welcher DNS‑Anbieter ist der beste?
 

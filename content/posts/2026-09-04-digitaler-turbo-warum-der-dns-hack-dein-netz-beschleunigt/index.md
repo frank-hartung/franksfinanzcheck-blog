@@ -67,7 +67,7 @@ dig @8.8.8.8 example.org A +tries=1 +time=2 +stats
 dig @9.9.9.9 example.org A +tries=1 +time=2 +stats
 ```
 
-In der Ausgabe achtest du auf `Query time` und `SERVER`. `@1.1.1.1`, `@8.8.8.8` und `@9.9.9.9` sprechen die Standard-DNS-Server von Cloudflare, Google und Quad9 an. die Anbieter führen die Adressen in ihren aktuellen Unterlagen auf ([Cloudflare](https://developers.cloudflare.com/1.1.1.1/ip-addresses/), [Google](https://developers.google.com/speed/public-dns/docs/using), [Quad9](https://docs.quad9.net/services/)).
+In der Ausgabe achtest du auf `Query time` und `SERVER`. `@1.1.1.1`, `@8.8.8.8` und `@9.9.9.9` sprechen die Standard-DNS-Server von Cloudflare, Google und Quad9 an. Die Anbieter führen die Adressen in ihren aktuellen Unterlagen auf ([Cloudflare](https://developers.cloudflare.com/1.1.1.1/ip-addresses/), [Google](https://developers.google.com/speed/public-dns/docs/using), [Quad9](https://docs.quad9.net/services/)).
 
 Für einen aussagekräftigeren Vergleich:
 
@@ -75,7 +75,7 @@ Für einen aussagekräftigeren Vergleich:
 - Wiederhole die Abfragen zu mehreren Zeitpunkten und notiere eher den mittleren Wert als den schnellsten Ausreißer.
 - Teste zusätzlich einige andere öffentliche Domains. Ein einzelner Name kann bereits im DNS-Server-Cache liegen.
 - Lass Gerät, WLAN beziehungsweise LAN und sonstige Bedingungen gleich. Ein Wechsel des Netzes macht die Messungen schlecht vergleichbar.
-- Halte fest, ob ein Timeout oder eine Fehlermeldung auftritt. ersetze einen fehlenden Wert nicht durch eine geschätzte Zeit.
+- Halte fest, ob ein Timeout oder eine Fehlermeldung auftritt. Ersetze einen fehlenden Wert nicht durch eine geschätzte Zeit.
 
 Die Werte gelten nur für deinen Standort und Messzeitpunkt. Netzwerkroute, Auslastung, Zwischenspeicher und die konkrete Anfrage können sie beeinflussen. Ein DNS-Server kann bei einer Domain vorne liegen und bei einer anderen nicht. Für DNS-Filter nutze nur die dokumentierten Testmöglichkeiten des jeweiligen Anbieters – nicht echte schädliche Domains.
 
@@ -160,7 +160,7 @@ Tipps zur Fehlersuche, wenn nach einem Wechsel etwas nicht funktioniert, findest
 ## Häufige Fragen
 
 ### Macht ein schnellerer DNS-Server Downloads schneller?
-Nein. Die DNS-Antwort hilft dem Gerät, eine Domain einem Server zuzuordnen. Sie erhöht weder die vertragliche Bandbreite noch die WLAN-Geschwindigkeit. Bei einzelnen Abläufen kann eine andere Auflösungszeit auffallen. einen pauschalen Vorteil belegt das nicht.
+Nein. Die DNS-Antwort hilft dem Gerät, eine Domain einem Server zuzuordnen. Sie erhöht weder die vertragliche Bandbreite noch die WLAN-Geschwindigkeit. Bei einzelnen Abläufen kann eine andere Auflösungszeit auffallen. Einen pauschalen Vorteil belegt das nicht.
 
 ### Bedeutet ein niedriger Messwert, dass meine Daten verschlüsselt sind?
 Nein. `Query time` ist ein Zeitwert, keine Datenschutzprüfung. Die gezeigten `dig`-Befehle fragen klassisches DNS ab. DoH und DoT sind getrennte Protokolle und müssen auf Gerät oder Router passend eingerichtet sein.

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-16T09:44:12Z",
-  "modus": "live",
-  "commit": "e2cb49b8d85da96518dc0d3f09884cb7d24211e3",
+  "generated_at": "2026-10-16T12:46:13Z",
+  "modus": "kandidaten",
+  "commit": "2e8b6f9de898e249a692f23a26d7e721250b1fac",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -191,6 +191,23 @@
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
     },
+    "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+      "sha256": "753b25f657368b3b1546b999a54400663ff4c8e5ce657976fb2471c096a73f84",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "unverändert"
+    },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "f5f5d83aa0b12ce4e00d3de82df61b4c5b7761d5f09d8f227abc7896bc0a335d",
       "urteil": "freigabe-reif",
@@ -277,7 +294,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "3ff38bfed0585c26b25634fa5583d00b31077ed41b6ca146cf76134d14ddf01f",
+      "sha256": "f2c7a3a7918d79603fbd4e57856ab1f63a5a53070908cc624a7b0914d63a0d52",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -311,7 +328,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "6e419e8a97962c203a518379a5bbbe13f6a91ec1fae1e67df3743d440efc3c78",
+      "sha256": "88b48b3da78123a2c88c09d9c4f1255230e3457509012841b1796898dc74f110",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -464,7 +481,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "442881dfb9233e6e86e344862ccbce327cdd91feb3c401a921ef74e48152d577",
+      "sha256": "bdd677f53ec15bf7afb8d0bdf38945f5ed3c9621fe21b32986cafba9ed3d943c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -804,7 +821,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "50cf285f08e686216c57ac463f18c0169c8dd806022ec8d0cd9b1fbbfdfeddbd",
+      "sha256": "789962051f3af4ac9e5dcbb47301540229021a8d10faf98a351171f9b0d72a71",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

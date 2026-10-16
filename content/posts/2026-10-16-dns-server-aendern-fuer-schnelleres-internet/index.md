@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast gerade einen Film gestartet, das Bild lädt stockend und das Laden der Seite dauert ewig. Der Ärger liegt selten am Anbieter‑Tarif, sondern häufig an einem unsichtbaren Baustein im Hintergrund: dem DNS‑Server. Wenn du den DNS‑Server wechselst, kannst du das Surfen spürbar beschleunigen, ohne neue Hardware zu kaufen. In diesem Ratgeber zeige ich dir, warum das funktioniert, wie du den Wechsel sicher durchführst und welche Stolperfallen du vermeiden solltest.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Was ist DNS und warum es die Geschwindigkeit beeinflusst  
 
 Das Domain‑Name‑System (DNS) übersetzt die von dir eingegebene Webadresse in die zugehörige IP‑Nummer. Ohne diese Übersetzung würdest du jede Seite nur über eine Zahlenfolge erreichen. Jeder Aufruf startet eine DNS‑Abfrage, die ein paar Millisekunden dauert. Wenn dein Anbieter‑DNS langsam reagiert, summieren sich die Verzögerungen über viele Seiten hinweg und das Surfen wirkt träge.  

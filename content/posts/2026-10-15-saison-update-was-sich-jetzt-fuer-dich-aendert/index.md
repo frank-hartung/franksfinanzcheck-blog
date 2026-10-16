@@ -70,7 +70,7 @@ Banken verdienen ihr Geld vor allem an Kontoführungsgebühren, Zinsen für Kred
 **Rechenbeispiel zum Konto:**
 Eine Bank verlangt 9,90 Euro Grundgebühr pro Monat und 15 Euro im Jahr für die Kreditkarte. Das summiert sich auf 133,80 Euro an fixen Kosten pro Jahr. Ein Wechsel zu einer Direktbank mit kostenloser Kontoführung spart diesen Betrag komplett ein. Über zehn Jahre gesehen sind das mehr als 1.300 Euro Ersparnis allein durch ein anderes Konto.
 
-Internet-Anbieter bieten häufig sehr attraktive Aktionen für Neukunden an, um Marktanteile zu gewinnen. Die Vertragslaufzeit ist meist 24 Monate, danach kann der Preis für den Anschluss massiv steigen. Ein jährlicher Check hilft, den besten Preis zu sichern, bevor die teure Phase des Vertrags beginnt. Oft reicht auch ein Anruf beim aktuellen Anbieter, um nach einem Treue-Rabatt zu fragen und so den Preis zu senken. Wer bereit ist zu wechseln, hat am Telefon meist eine sehr gute Position für Verhandlungen.
+Internet-Anbieter bieten häufig sehr attraktive Aktionen für Neukunden an, um Marktanteile zu gewinnen. Die Vertragslaufzeit ist meist 24 Monate, danach kann der Preis für den Anschluss massiv steigen. Ein jährlicher Check hilft, den besten Preis zu sichern, bevor die teure Phase des Vertrags beginnt. Oft reicht auch ein Anruf beim aktuellen Anbieter, um nach einem Treue-Rabatt zu Fragen und so den Preis zu senken. Wer bereit ist zu wechseln, hat am Telefon meist eine sehr gute Position für Verhandlungen.
 
 
 ## Passende Beiträge zum Weiterlesen

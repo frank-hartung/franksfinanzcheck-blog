@@ -31,80 +31,79 @@ lastmod: 2026-10-15
 kurzantwort: "Prüfe Heizkörper nach Bedarf, messe den Verbrauch und vergleiche Jahreskosten inklusive Grundpreis. Entlüften hat keine garantierte Sparquote; 20 °C sind nur eine mögliche Orientierung. Technische und hygienische Einstellungen gehören in fachkundige Hände."
 ---
 
-Vor der Heizperiode lohnt sich ein strukturierter Check: Verbrauch dokumentieren, Heizkörper prüfen und Tarifkosten rechnen. Das kannst du im Spätsommer erledigen – oder im Oktober nachholen. Ob und wie viel du sparst, hängt von deinem bisherigen Verbrauch, dem Gebäude und den verfügbaren Tarifen ab. Eine niedrigere Rechnung ist nicht garantiert.
+Vor der Heizzeit lohnt sich ein genauer Blick auf die Kosten. Schreib deinen Verbrauch auf und prüfe alle Heizkörper im Haus. Rechne die Kosten für deinen Tarif in Ruhe nach. Das kannst du gut im späten Sommer erledigen. Auch im Oktober ist dafür noch genug Zeit. Wie viel Geld du sparst, hängt von vielen Dingen ab. Dein alter Verbrauch und die Art des Hauses spielen eine Rolle. Auch die Preise am Markt sind wichtig. Eine kleine Rechnung am Ende ist nicht sicher.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision. Für dich entstehen dabei keine Mehrkosten.
 
-**Transparenz:** Dieser Artikel enthält einen Affiliate-Link (Werbung). Beim Abschluss darüber erhalten wir eine Provision; für dich entstehen keine Mehrkosten. Der Link ist kein fachlicher Beleg und keine Empfehlung der Bundesnetzagentur.
+**Transparenz:** Dieser Artikel enthält einen Affiliate-Link (Werbung). Beim Abschluss darüber erhalten wir eine Provision. Für dich entstehen keine Mehrkosten. Der Link ist kein fachlicher Beleg. Er ist auch keine Empfehlung der Behörde.
 
-## Was du vor dem ersten Heizen prüfen kannst
+## Was du vor dem ersten heizen prüfen kannst
 
-| Aufgabe | Vorgehen | Grenze |
+| Aufgabe | So gehst du am besten vor | Hier liegt die Grenze |
 |---|---|---|
-| Verbrauch erfassen | Strom- und Gaszähler mit Datum fotografieren | Abschläge sind nicht der tatsächliche Verbrauch |
-| Heizkörper prüfen | Auf Gluckern, ungleichmäßige Wärme und freie Luftzirkulation achten | Keine pauschale Einsparquote durch Entlüften |
-| Raumtemperatur beobachten | Thermometer nutzen und raumweise einstellen | Komfort, Feuchtigkeit und Gebäude berücksichtigen |
-| Wartung planen | Zuständigkeit mit Vermietung oder Fachbetrieb klären | Keine Arbeiten an Brenner oder Gasleitungen selbst ausführen |
-| Tarifkosten rechnen | Arbeitspreis, Grundpreis, Laufzeit und Bonusbedingungen erfassen | Portal zeigt nicht zwingend alle verfügbaren Angebote |
+| Verbrauch prüfen | Mach Fotos vom Zähler für Strom und Gas. Notiere dir dazu das Datum. | Die monatliche Zahlung ist nicht dein echter Verbrauch. |
+| Heizkörper prüfen | Hör auf ein Gluckern im Rohr. Prüfe die Wärme mit der Hand. Lass die Luft frei fließen. | Das Entlüften spart nicht immer eine feste Summe Geld. |
+| Wärme im Raum prüfen | Stell ein Thermometer in jedes Zimmer. Stell die Ventile für jeden Raum passend ein. | Achte auf dein Wohlbefinden und auf die Feuchte im Haus. |
+| Pflege der Anlage | Frag beim Vermieter nach dem Termin für die Wartung. Such dir sonst einen Fachbetrieb. | Fass den Brenner oder die Rohre für Gas nie selbst an. |
+| Kosten für den Tarif | Schreib den Preis für die Arbeit und den Grundpreis auf. Prüf die Zeit und den Bonus. | Ein Portal zeigt nicht immer alle Angebote am Markt. |
 
-Zählerstände in regelmäßigen Abständen helfen dir, Veränderungen zu erkennen. Vergleiche möglichst ähnliche Zeiträume. Ein kalter Winter kann den Heizverbrauch erhöhen, auch wenn du bewusster heizt. Bei einer Mietwohnung kannst du nicht jede technische Einstellung selbst ändern. Melde Störungen der Hausverwaltung oder Vermietung.
+Zählerstände in festen Abständen helfen dir sehr. So erkennst du jede Änderung beim Verbrauch sofort. Vergleiche am besten immer die gleichen Monate aus dem Vorjahr. Ein kalter Winter treibt die Kosten für Gas nach oben. Das passiert auch, wenn du beim Heizen sehr sparsam bist. In einer Wohnung zur Miete darfst du nicht alles selbst ändern. Melde Fehler an der Heizung immer der Hausverwaltung. Auch dein Vermieter ist ein guter Ansprechpartner bei Problemen.
 
 ## Heizkörper entlüften: nach Bedarf statt nach Sparversprechen
 
-Gluckern oder eine ungleichmäßige Erwärmung können auf Luft im Heizkörper hindeuten. Andere Ursachen sind ebenfalls möglich. Entlüfte nur, wenn das für deine Anlage vorgesehen ist und du das Vorgehen kennst. Beachte die Bedienungsanleitung; heißes Wasser kann austreten. Bei Unsicherheit hilft der Fachbetrieb.
+Ein Gluckern im Rohr kann ein Zeichen für Luft sein. Auch wenn die Heizung ungleich warm wird, ist oft Luft die Ursache. Es gibt aber noch andere Gründe für diese Fehler. Entlüfte die Anlage nur, wenn das bei dir so vorgesehen ist. Du musst den Ablauf dafür genau kennen. Lies vorher die Anleitung für deine Heizung. Aus dem Ventil kann sehr heißes Wasser spritzen. Wenn du unsicher bist, ruf lieber einen Fachbetrieb an.
 
-Entlüften kann die Wärmeverteilung verbessern, wenn Luft die Ursache ist. Ein bestimmter Energiegewinn lässt sich daraus nicht ableiten. Die hier verlinkte Energie-Übersicht der Bundesnetzagentur belegt keine konkrete Prozentangabe für diese Maßnahme. Deshalb rechnen wir keine vermeintlich sichere Entlüftungsersparnis vor.
+Das Entlüften kann die Verteilung der Wärme im Haus verbessern. Das klappt aber nur, wenn wirklich Luft im System war. Ein fester Gewinn an Energie lässt sich daraus nicht ableiten. Die hier verlinkte Übersicht der Bundesnetzagentur nennt keine festen Prozente für diese Tat. Wir rechnen dir deshalb keine sichere Ersparnis vor. Das wäre nicht ehrlich und hängt von zu vielen Dingen ab.
 
-Wenn Heizkörper trotz Entlüften kalt bleiben oder der Druck wiederholt fällt, lass die Ursache prüfen. Fülle nicht ohne Kenntnis der Anlage Wasser nach. Wartung, Brennereinstellung und Arbeiten an Gasleitungen gehören in fachkundige Hände.
+Bleibt der Heizkörper trotz Entlüften kalt? Oder fällt der Druck in der Anlage immer wieder ab? Dann lass einen Profi nach der Ursache suchen. Fülle niemals ohne Wissen Wasser in die Anlage nach. Die Wartung und die Einstellung vom Brenner sind Aufgaben für Profis. Auch alle Arbeiten an den Leitungen für Gas gehören in fachkundige Hände.
 
 ## Welche Raumtemperatur passt?
 
-20 °C können ein Ausgangspunkt für einen genutzten Wohnraum sein, sind aber kein allgemeines Optimum und keine behördliche Vorgabe. Passe die Einstellung an Nutzung, persönliche Bedürfnisse, Dämmung und Feuchtigkeit an. Menschen mit erhöhtem Wärmebedarf brauchen gegebenenfalls andere Temperaturen.
+Ein Wert von 20 Grad kann ein guter Start für den Wohnraum sein. Das ist aber kein festes Gesetz für alle Menschen. Es gibt auch keine Vorgabe von einem Amt für deine Wohnung. Passe die Wärme an deine Nutzung und deine Wünsche an. Auch die Dämmung der Wände und die Feuchte sind wichtig. Menschen mit hohem Bedarf an Wärme brauchen oft höhere Werte.
 
-Ein Thermostat misst nicht die Temperatur an jeder Stelle des Raums. Kontrolliere deshalb mit einem Thermometer, statt dich allein auf die Stellung am Ventil zu verlassen. Halte Heizkörper frei von Möbeln und Vorhängen. Lüfte bedarfsgerecht und beobachte Feuchtigkeit sowie kalte Außenwände. Starkes Auskühlen kann Feuchteprobleme begünstigen; eine pauschale Absenktemperatur geben wir hier nicht vor.
+Ein Ventil am Heizkörper misst die Wärme nicht im ganzen Raum. Prüfe die Lage deshalb mit einem eigenen Thermometer. Verlass dich nicht nur auf die Zahl am Griff vom Ventil. Stell keine Möbel direkt vor die Heizung. Auch lange Vorhänge stören den Fluss der Wärme im Raum. Lüfte immer nach Bedarf und achte auf feuchte Stellen. Kalte Außenwände brauchen Schutz vor Schimmel. Ein starkes Auskühlen der Räume kann Probleme mit Feuchte fördern. Eine feste Zahl für das Absenken der Wärme nennen wir hier nicht.
 
 ## Stromverbrauch messen statt Gerätewerte schätzen
 
-Ein Router im Betrieb ist nicht einfach ein Gerät im Standby. Sein Verbrauch hängt unter anderem vom Modell und den aktiven Funktionen ab. Für dein Gerät findest du Hinweise in den Herstellerangaben; mit einem geeigneten Strommessgerät kannst du den tatsächlichen Verbrauch erfassen. Eine allgemeine Wattzahl für Router lässt sich aus der verlinkten Bundesnetzagentur-Übersicht nicht ableiten.
+Ein Router im Betrieb braucht mehr Strom als ein Gerät im Standby. Der echte Hunger nach Strom hängt vom Modell ab. Auch die aktiven Funktionen spielen eine große Rolle. Hinweise dazu findest du oft in den Daten vom Hersteller. Mit einem Messgerät für die Steckdose erfährst du den echten Wert. Eine allgemeine Zahl für alle Router gibt es nicht. Auch die Liste der Bundesnetzagentur liefert hier keinen festen Wert für dein Gerät.
 
-Trenne nur Geräte vom Netz, deren Funktionen du in dieser Zeit nicht brauchst. Beim Router können Telefonie, Erreichbarkeit und vernetzte Geräte betroffen sein. Kühlschränke, medizinische Geräte oder sicherheitsrelevante Technik sind keine Kandidaten für eine pauschale Nachtabschaltung.
+Trenne nur solche Geräte vom Netz, die du gerade nicht brauchst. Beim Router hängen oft viele Dienste an der Leitung. Das können das Telefon oder auch Geräte im Smart-Home sein. Kühlschränke dürfen niemals einfach so vom Strom. Auch Geräte für die Medizin oder Technik für die Sicherheit bleiben an. Diese Dinge sind keine Kandidaten für das Ausschalten in der Nacht.
 
 ### Modellrechnung: Watt in Jahreskosten umrechnen
 
-Die folgenden Werte sind **frei gewählte Rechenannahmen, keine Messwerte oder Marktpreise**. Angenommen, drei abschaltbare Geräte verbrauchen jeweils 5 W und dieser Verbrauch entfällt vollständig für 24 Stunden täglich:
+Die folgenden Werte sind frei gewählte Annahmen für eine Rechnung. Es sind keine echten Messwerte oder Preise vom Markt. Wir nehmen an, dass drei Geräte jeweils 5 Watt brauchen. Dieser Verbrauch fällt durch das Ausschalten für 24 Stunden am Tag weg:
 
-| Rechenschritt | Rechnung | Ergebnis |
+| Schritt der Rechnung | Die Rechnung im Detail | Das Ergebnis |
 |---|---|---|
-| Gemeinsame Leistung | 3 × 5 W | 15 W |
-| Jahresverbrauch | 15 W × 24 h × 365 ÷ 1.000 | 131,4 kWh |
-| Jahreskosten bei angenommenen 0,30 €/kWh | 131,4 × 0,30 € | 39,42 € |
-| Abschaltung nur für 8 Stunden täglich | 15 W × 8 h × 365 ÷ 1.000 × 0,30 €/kWh | 13,14 € |
+| Leistung aller Geräte | 3 Geräte mal 5 Watt | 15 Watt |
+| Verbrauch im Jahr | 15 Watt mal 24 Stunden mal 365 Tage durch 1.000 | 131,4 kWh |
+| Kosten im Jahr bei 0,30 Euro pro kWh | 131,4 kWh mal 0,30 Euro | 39,42 Euro |
+| Aus für 8 Stunden am Tag | 15 Watt mal 8 Stunden mal 365 Tage durch 1.000 mal 0,30 Euro | 13,14 Euro |
 
-Die tatsächliche Ersparnis hängt von gemessener Leistung und Abschaltdauer ab. Eigenverbrauch und Kaufpreis einer zusätzlichen Zeitschaltuhr oder schaltbaren Steckdose sind hier nicht enthalten. Eine kürzere Nutzung spart weniger als die vollständige Abschaltung im ersten Beispiel.
+Deine echte Ersparnis hängt von der gemessenen Leistung ab. Auch die Dauer der Abschaltung ist für das Ergebnis wichtig. Eine Zeitschaltuhr kostet in der Anschaffung auch Geld. Zudem braucht sie selbst ein wenig Strom für den Betrieb. Diese Kosten sind in der Tabelle oben nicht enthalten. Eine kurze Zeit ohne Strom spart weniger Geld als im ersten Beispiel.
 
 ## Strom- und Gastarife fair vergleichen
 
-Vergleiche nicht nur den Arbeitspreis. Rechne den jährlichen Grundpreis hinzu und prüfe Laufzeit, Kündigungsfrist, Preisgarantie sowie Bonusbedingungen. Ein niedriger Abschlag ist kein Nachweis für einen günstigen Tarif. Er kann später eine Nachzahlung nach sich ziehen.
+Schau beim Vergleich nicht nur auf den Preis für die Arbeit. Rechne immer den Grundpreis für das ganze Jahr dazu. Prüfe die Laufzeit und die Frist für die Kündigung genau. Auch eine Garantie für den Preis und die Regeln für den Bonus sind wichtig. Ein niedriger Abschlag im Monat sagt nichts über den Preis aus. Er kann am Ende des Jahres zu einer hohen Nachzahlung führen.
 
-**Modellrechnung Strom:** Bei angenommenen 3.500 kWh pro Jahr und 0,30 €/kWh betragen die Verbrauchskosten 1.050 €. Bei 0,27 €/kWh sind es 945 €. Die Differenz beträgt 105 €. Nur bei gleichem Grundpreis und sonst gleichen Kosten entspricht sie auch der Jahresersparnis. Bezogen allein auf die Verbrauchskosten sind es 10 %, nicht ein Anteil an der unbekannten Gesamtrechnung.
+**Modellrechnung für Strom:** Wir nehmen einen Verbrauch von 3.500 kWh im Jahr an. Bei einem Preis von 0,30 Euro pro kWh liegen die Kosten bei 1.050 Euro. Sinkt der Preis auf 0,27 Euro pro kWh, sind es nur noch 945 Euro. Der Unterschied liegt bei 105 Euro im Jahr. Das gilt aber nur, wenn der Grundpreis gleich bleibt. Die Ersparnis von 10 Prozent bezieht sich nur auf den Preis für den Verbrauch.
 
-**Modellrechnung Gas:** Angenommene 12.000 kWh kosten bei 0,09 €/kWh 1.080 € und bei 0,08 €/kWh 960 €. Die Differenz beträgt 120 €. Ein um 60 € höherer jährlicher Grundpreis würde den Vorteil auf 60 € reduzieren. Alle Preise in diesen Beispielen sind Annahmen, keine aktuellen Angebote.
+**Modellrechnung für Gas:** Wir nehmen einen Verbrauch von 12.000 kWh an. Bei 0,09 Euro pro kWh kostet das 1.080 Euro. Bei 0,08 Euro pro kWh sind es 960 Euro. Hier sparst du 120 Euro im Jahr. Ist der Grundpreis beim neuen Anbieter aber um 60 Euro höher? Dann schrumpft dein Vorteil auf nur noch 60 Euro zusammen. Alle Preise in diesen Beispielen sind nur Annahmen.
 
-Vergleiche mehrere Informationswege, etwa die Anbieter selbst und unterschiedliche Portale. Kein einzelner Vergleich garantiert den niedrigsten Preis. Einen Einstieg in behördliche Energieinformationen bietet die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html). Die Übersichtsseite ist kein Beleg für konkrete Einsparquoten, Gerätewerte oder eine Empfehlung für CHECK24.
+Nutze für deine Suche nach Infos viele verschiedene Wege. Schau direkt bei den Anbietern und auf Portalen nach. Kein Weg allein zeigt dir sicher den kleinsten Preis. Einen guten Einstieg bietet die Seite der [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html). Diese Seite ist aber kein Beleg für feste Quoten beim Sparen. Sie ist auch keine Empfehlung für den Dienst von CHECK24.
 
 ## Warmwasser und Heizkurve: keine pauschalen Eingriffe
 
-Verändere die Warmwassertemperatur nicht allein aufgrund eines Spartipps. Die hygienisch erforderliche Betriebsweise hängt von der Anlage ab; insbesondere in zentralen Systemen muss der Schutz vor Legionellen berücksichtigt werden. Kläre Einstellungen mit dem Fachbetrieb beziehungsweise der Vermietung. Eine feste Gasersparnis durch eine bestimmte Temperatureinstellung versprechen wir nicht.
+Ändere die Wärme für das Wasser nicht einfach durch einen Tipp. Die richtige Wärme ist wichtig für deine Gesundheit. In den Rohren können sich sonst Keime wie Legionellen bilden. Das ist vor allem in großen Häusern eine Gefahr. Kläre alle Einstellungen mit einem Profi oder deinem Vermieter ab. Wir versprechen dir keine feste Ersparnis durch das Senken der Wärme.
 
-Auch die Heizkurve ist an Gebäude und Anlage anzupassen. Lass die Einstellung prüfen, wenn Räume dauerhaft zu warm oder nicht ausreichend warm werden. Brenner, Filter oder Außenfühler sind keine allgemeine Heimwerker-Checkliste.
+Auch die Kurve für die Heizung muss zum Haus passen. Lass diese Einstellung von einem Fachmann prüfen. Das ist sinnvoll, wenn die Räume zu warm oder zu kalt bleiben. Der Brenner und die Filter sind keine Dinge für Laien. Auch am Außenfühler solltest du nicht ohne Wissen drehen. Das gehört nicht auf eine Liste für Heimwerker.
 
 ## Dein 4K-Prüfpfad
 
-1. **Kosten sehen:** Abrechnung, Zählerstände und laufende Verträge zusammentragen.
-2. **Konditionen rechnen:** Jahreskosten inklusive Grundpreis und Bedingungen vergleichen.
-3. **Kündigungsfenster sichern:** Fristen und Wechseltermin vor einem Abschluss prüfen.
-4. **Kurs halten:** Verbrauch weiter dokumentieren und tatsächliche Kosten kontrollieren.
-
+1. **Kosten sehen:** Such deine alten Rechnungen raus. Schau auf die Zähler im Keller. Schreib dir alle Daten deiner Verträge auf. So hast du den vollen Durchblick.
+2. **Konditionen rechnen:** Vergleiche die Kosten für das ganze Jahr. Achte dabei auf den Grundpreis und alle Regeln im Vertrag. Nur die Gesamtsumme zählt am Ende.
+3. **Kündigungsfenster sichern:** Prüfe die Fristen für deinen alten Vertrag. Schau dir den Termin für den Wechsel genau an. Mach das alles vor einem neuen Abschluss.
+4. **Kurs halten:** Schreib deinen Verbrauch weiter regelmäßig auf. Kontrolliere die echten Kosten für Energie. So erlebst du keine böse Überraschung bei der Abrechnung.
 
 ## Passende Beiträge zum Weiterlesen
 
@@ -112,25 +111,26 @@ Auch die Heizkurve ist an Gebäude und Anlage anzupassen. Lass die Einstellung p
 - Warmwasser sparen: Die Rechnung hinter dem Hahn
 - Energiediebe stoppen: Stromfresser finden
 
-
 ## FAQ – die wichtigsten Fragen kurz beantwortet
+
+In diesem Bereich findest du kurze Antworten auf große Fragen. Wir haben die wichtigsten Punkte für dich zusammengefasst. So bekommst du schnell einen Überblick über das Thema Heizen und Strom. Nutze diese Infos als ersten Schritt für deine eigene Planung.
 
 ## Häufige Fragen
 
 ### Wie viel spare ich durch Entlüften?
-Eine allgemeine Quote lässt sich nicht nennen. Entlüften hilft nur dann gegen die betreffende Störung, wenn Luft die Ursache ist. Für die Kostenwirkung brauchst du belastbare Verbrauchsdaten; Wetter und Nutzung beeinflussen den Vergleich.
+Eine feste Summe für alle Haushalte gibt es nicht. Das Entlüften hilft nur, wenn wirklich Luft den Fluss stört. Ohne Luft im Rohr bringt die Maßnahme keinen Vorteil beim Geld. Du brauchst Daten von deinem Zähler, um den Erfolg zu prüfen. Auch das Wetter und dein Verhalten beim Heizen ändern das Ergebnis.
 
-### Muss jeder Wohnraum 20 °C haben?
-Nein. Der Wert kann eine Orientierung sein. Entscheidend sind Nutzung, persönliche Bedürfnisse sowie die Bedingungen im Gebäude. Vermeide problematisches Auskühlen und beobachte die Feuchtigkeit.
+### Muss jeder Wohnraum 20 Grad haben?
+Nein, das ist kein Gesetz und keine Pflicht. Der Wert dient nur als grobe Hilfe für die Einstellung. Jeder Mensch fühlt Wärme anders. Wichtig ist die Nutzung vom Zimmer. In der Küche erzeugen Geräte oft eigene Wärme. Achte aber immer darauf, dass die Wände trocken bleiben. So verhinderst du Schimmel im Haus.
 
 ### Ist ein Tarifwechsel immer günstiger?
-Nein. Rechne die Gesamtkosten für denselben Verbrauch und Zeitraum. Bonusbedingungen, Grundpreise und Vertragslaufzeiten können einen vermeintlichen Vorteil aufheben.
+Nein, das lässt sich nicht pauschal sagen. Du musst immer die Kosten für das ganze Jahr rechnen. Nutze dafür deinen echten Verbrauch aus dem letzten Jahr. Prüfe die Regeln für den Bonus und den Grundpreis. Oft heben hohe Fixkosten den Vorteil beim Preis für die Arbeit wieder auf. Auch die Laufzeit vom Vertrag ist ein wichtiger Punkt.
 
 ### Soll ich Warmwasser selbst herunterstellen?
-Nicht pauschal. Prüfe die Anlagenvorgaben und kläre hygienisch sichere Einstellungen mit einer Fachperson. Bei einer Mietwohnung liegt die Zuständigkeit häufig nicht bei dir.
+Mach das bitte nicht ohne Prüfung der Anlage. Zu kaltes Wasser kann Keime fördern. Das ist gefährlich für die Lunge. Frag einen Profi nach der sicheren Grenze für deine Technik. In einer Wohnung zur Miete darfst du oft gar nichts an der Anlage ändern. Dort liegt die Pflicht für die Technik beim Vermieter.
 
 ## Quellen und Einordnung
 
-Redaktionell überarbeitet am **15. Oktober 2026** zu Issue #763. Die verlinkte Bundesnetzagentur-Seite dient als behördlicher Einstieg zum Thema Energie, nicht als Nachweis aller Haushaltstipps. Rechenbeispiele sind eigene Modellrechnungen mit ausdrücklich genannten Annahmen. Es wurden keine aktuellen Tarifangebote oder gerätespezifischen Messwerte erhoben.
+Dieser Text wurde am **15. Oktober 2026** für die Ausgabe #763 überarbeitet. Die Seite der Bundesnetzagentur dient als Start für Infos vom Amt. Sie ist kein Beweis für alle Tipps im Haushalt. Die Beispiele für die Rechnung nutzen eigene Annahmen. Wir haben dafür fiktive Zahlen gewählt. Es wurden keine Preise von echten Anbietern für diesen Text genutzt. Auch Messwerte für einzelne Geräte stammen nicht aus einer neuen Studie.
 
-**Werbung – optionaler Vergleich:** [Strom- und Gasangebote über CHECK24 prüfen](/go/allgemein/). Das ist ein kommerzieller Vermittlungslink, kein neutraler Quellenbeleg. Prüfe die Angebote auch direkt beim Anbieter und vergleiche die Bedingungen.
+**Werbung – optionaler Vergleich:** [Strom- und Gasangebote über CHECK24 prüfen](/go/allgemein/). Das ist ein Link für eine Vermittlung gegen Provision. Er ist kein neutraler Beleg für eine Quelle. Prüfe alle Angebote auch direkt bei den Firmen. Vergleiche die Regeln für den Vertrag in aller Ruhe.

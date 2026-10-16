@@ -90,7 +90,7 @@ Setze vor der Suche ein Gesamtbudget. Prüfe bei jedem Treffer, ob der angezeigt
 | **Preisalarme** | Preisänderungen für gespeicherte Strecken oder Termine beobachten | Melden nicht zwingend jeden Anbieter und versprechen keinen Tiefstpreis |
 | **Flexible Datumssuche** | Benachbarte Abreisetage vergleichen | Die günstigere Verbindung kann zusätzliche Anreise- oder Übernachtungskosten auslösen |
 | **Karten- und Zielsuchen** | Alternativen sichtbar machen, wenn das Reiseziel offen ist | Ausstattung und Vertragsbedingungen musst du beim Anbieter prüfen |
-| **Privatmodus oder VPN** | Privatsphäre beim Surfen erhöhen | Garantieren keinen niedrigeren Reisepreis. rechne nicht mit einem festen Rabatt |
+| **Privatmodus oder VPN** | Privatsphäre beim Surfen erhöhen | Garantieren keinen niedrigeren Reisepreis. Rechne nicht mit einem festen Rabatt |
 
 ### Gesamtpreis statt Lockpreis
 
@@ -149,7 +149,7 @@ Vergleiche nur Angebote mit ähnlichen Leistungen. Prüfe bei Mietwagen Kaution,
 
 ## Rechenbeispiel: So vergleichst du den Gesamtpreis
 
-Die folgenden Zahlen sind frei gewählte Rechenannahmen und keine aktuellen Marktpreise. Angebot A kostet 500 € für Flug und Unterkunft, dazu kommen 60 € für Gepäck und 40 € für Transfers: zusammen 600 €. Angebot B kostet 540 € und enthält das Gepäck. der Transfer kostet 20 €: zusammen 560 €.
+Die folgenden Zahlen sind frei gewählte Rechenannahmen und keine aktuellen Marktpreise. Angebot A kostet 500 € für Flug und Unterkunft, dazu kommen 60 € für Gepäck und 40 € für Transfers: zusammen 600 €. Angebot B kostet 540 € und enthält das Gepäck. Der Transfer kostet 20 €: zusammen 560 €.
 
 Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Reisedauer, Unterkunft, Verpflegung und Stornobedingungen ebenfalls vergleichbar sind. Ein niedrigerer Einstiegspreis allein reicht nicht für die Entscheidung.
 
@@ -188,7 +188,7 @@ Brauchst du am Reiseziel einen Mietwagen, vergleiche für deine Reisedaten den G
 
 [**Mietwagenpreise vergleichen**](/go/mietwagen/)
 
-*(Werbelink: Beim Abschluss über diesen Link erhalten wir eine Provision. für dich entstehen keine Mehrkosten.)*
+*(Werbelink: Beim Abschluss über diesen Link erhalten wir eine Provision. Für dich entstehen keine Mehrkosten.)*
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) **Lesetipp:** [September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen](../../posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/)
 
@@ -231,7 +231,7 @@ Lass es. Gute Reisen buchen sich nicht unter Druck. Wenn der Preis stimmt, aber 
 
 Prüfe den Namen. Prüfe das Datum. Prüfe den Flughafen. Ein Tippfehler kann teuer werden. Ein falscher Tag auch. Ein falscher Flughafen auch. Das sind Kleinigkeiten. Sie kosten schnell viel Geld. Nimm dir zehn Sekunden Zeit.
 
-## Danke fürs Lesen
+## Danke fürs lesen
 
 Bis hierhin hast du die wichtigsten Regeln. Du weißt, worauf du achten musst. Du weißt, wo Fallen lauern. Du weißt, wie du fair vergleichst. Das ist viel mehr als das, was viele Schnellbucher wissen.
 
