@@ -6,7 +6,7 @@ draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["News"]
 pillar: "frugalismus"
-keywords: ["Saison-Update: Was sich jetzt für dich ändert"]
+keywords: ["Saison-Update: Was sich jetzt für dich ändert", "Saison-Update", "Saison Update"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -16,6 +16,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Saison-Update: Was sich jetzt für dich ändert"
+pin_description: "*Werbung | Saison-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #saisonupdate #was #sich"
+cover:
+  image: "images/covers/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert.jpg"
+  alt: "Saison-Update: Was sich jetzt für dich ändert"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 **Stand: 15.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

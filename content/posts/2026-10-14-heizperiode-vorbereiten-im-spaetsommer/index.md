@@ -1,6 +1,6 @@
 ---
 title: "Heizperiode vorbereiten im Spätsommer"
-description: "Heizperiode vorbereiten: Heizkörper sicher prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mit transparenten Modellrechnungen statt Spargarantien."
+description: "Gasrechnung senken: Heizperiode vorbereiten: Heizkörper sicher prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mit transparenten…"
 date: 2026-10-14T09:48:27Z
 draft: true
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
@@ -20,7 +20,7 @@ cover:
   alt: "Heizperiode vorbereiten im Spätsommer"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Heizperiode vorbereiten im Spätsommer"
-pin_description: "*Werbung | Heizperiode vorbereiten: Heizkörper sicher prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mit transparenten Modellrechnungen statt Spargarantien."
+pin_description: "*Werbung | Gasrechnung senken: Heizperiode vorbereiten: Heizkörper sicher prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mit transparenten… Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
