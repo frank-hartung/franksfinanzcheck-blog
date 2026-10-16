@@ -12,3 +12,4 @@
 {"ts": "2026-10-13T10:57:50Z", "ready": 11, "target": 6, "pool": 11, "lauf": "38386068916", "versuch": "1", "klasse": "ok", "blocker": [], "themen": 10}
 {"ts": "2026-10-14T09:07:29Z", "ready": 11, "target": 6, "pool": 11, "lauf": "38538341065", "versuch": "1", "klasse": "ok", "blocker": [], "themen": 10}
 {"ts": "2026-10-15T08:41:14Z", "ready": 9, "target": 6, "pool": 9, "lauf": "38705873777", "versuch": "1", "klasse": "ok", "blocker": [], "themen": 8}
+{"ts": "2026-10-16T08:34:03Z", "ready": 8, "target": 6, "pool": 8, "lauf": "38873132768", "versuch": "1", "klasse": "wachen", "blocker": [], "themen": 7}
