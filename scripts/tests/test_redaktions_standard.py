@@ -284,5 +284,40 @@ class FaustregelDauerheilungTest(unittest.TestCase):
         self.assertEqual(body, neu)
 
 
+class HeilerAufrufVertragTest(unittest.TestCase):
+    """#778 (WF-D4E0): Der Heiler-Aufruf aus `main()` muss zur Signatur von
+    `fix_rs2_rs3_deterministic` passen; `nur_rs3=True` (Faustregel-Modus)
+    berührt ausschließlich RS3.
+
+    Am 16.10.2026 brach der Publikationslauf, weil die #766-Schicht
+    (inkl. Parameter `nur_rs3`) verloren ging: `main()` rief mit
+    `nur_rs3=` auf, die alte Funktion kannte nur `(body, slug, kontext)` –
+    ein Vertrag ohne Prüfe. Dieser Test friert den Aufrufvertrag ein.
+    """
+
+    def test_aufruf_mit_nur_rs3_heilt_nur_rs3(self):
+        slug = "2026-10-16-aufrufvertrag-test"
+        titel = "Aufrufvertrag testen"
+        body = ("## Einleitung\n\nEin Einstieg ohne besonderen Merksatz. "
+                "Hier fehlt die markierte Handlungsregel komplett.\n\n"
+                "### B\n\nNeu, ungenau, auffällig. Nicht weiterempfehlen, "
+                "einfach vergessen, alle sagen.\n\n### C\n\nSchön. "
+                "Ein gutes Beispiel. Ein Beispiel. Sehr gut. Gut.\n")
+        self.assertFalse(rs.detect_rs3(body)[0])
+        kontext = rs.faustregel_kontext({slug: body})
+        vorher = rs.faustregel_vorrat(kontext)
+        # identischer Aufruf wie in main() (Fix-Pfad, kein Dry-Run)
+        neu, heilungen = rs.fix_rs2_rs3_deterministic(
+            body, slug=slug, kontext=kontext, titel=titel, nur_rs3=True)
+        self.assertEqual(heilungen, ["RS3"])
+        self.assertTrue(rs.detect_rs3(neu)[0])
+        self.assertIn(rs.FAUSTREGEL_MARKER, neu)
+        # Vergabeschutz: die verwendete Faustregel gilt als vergeben
+        self.assertLess(rs.faustregel_vorrat(kontext), vorher)
+        # RS2 bleibt im Faustregel-Modus unangetastet
+        self.assertFalse(rs.detect_rs2(neu)[0],
+                         "nur_rs3 darf RS2 nicht still mitheilen")
+
+
 if __name__ == "__main__":
     unittest.main()

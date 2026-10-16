@@ -486,190 +486,460 @@ _QUESTION_STARTS = (
 )
 
 
-# Themen-spezifische Faustregeln (Dauerheilung #764): Jede Kernaussage ist
-# auf den Themenkreis zugeschnitten – nie Einheitstext über 30 Artikel.
-# Schlüssel sind lowercase-Teilstrings, die in Titel oder Body vorkommen.
-# Die erste passende Regel gewinnt; am Ende ein neutraler Fallback für
-# Themen ohne eigenes Stichwort.
-_THEMEN_FAUSTREGELN: list[tuple[tuple[str, ...], str]] = [
-    # Spezifische Themen zuerst – damit eng umgrenzte Artikel nicht an einem
-    # breiten Stichwort wie „vertrag" oder „internet" hängen bleiben.
-    (("warmwasser", "wasserhahn", "wassersparen", "duschkopf"),
+# ---------------------------------------------------------------------------
+# RS3-EINZIGARTIGKEIT – Faustregel-Pool (Dauerheilung #766, 15.10.2026)
+# ---------------------------------------------------------------------------
+# WARUM (Vorgang #766): `fix_rs2_rs3_deterministic()` setzte in jeden Artikel
+# ohne RS3 EINEN eingefrorenen Heiler-Satz. 30 Live-Artikel trugen ihn
+# wortgleich – das Einzigartigkeits-Audit meldete C(30,2) = 435 kritische
+# Paare. Die Regel war richtig, ihre Umsetzung der Fehler: ein Satz, der per
+# Konstruktion in jedem Artikel passen muss, ist per Konstruktion in jedem
+# Artikel derselbe. Seitdem gilt:
+#
+#   POOL statt Einheitssatz – `FAUSTREGEL_POOL` trägt eigenständige,
+#   themenbezogene Faustregeln. Alle Sätze sind zahlfrei (RS5), ohne
+#   Quellenbehauptung (RS6), untereinander ohne geteilte 7-Gramme über der
+#   Audit-Schwelle – der Pool kann den Befund nicht selbst erzeugen, den er
+#   heilt. Der eingefrorene Alt-Satz (`FAUSTREGEL_LEGACY`) bleibt auffindbar,
+#   aber unvergebbar.
+#
+#   WÄHLEN statt Setzen – `waehle_faustregel()` entscheidet nach vier Regeln:
+#   (1) weder im Bestand noch im laufenden Lauf vergeben, (2) der Satz schiebt
+#   kein Artikelpaar über die Audit-Schwelle (dieselbe 7-Gramm-Messung wie das
+#   Audit, `check_uniqueness.clean_body`), (3) höchster Themenbezug,
+#   (4) stabiler Hash über (Slug, Satz) als Gleichstand.
+#
+#   MESSEN statt Hoffen – `faustregel_kontext()` / `_kontext_aktualisieren()`
+#   ziehen die Bestandsmessung mit; ein Lauf vergibt nie zweimal denselben
+#   Satz, und `--dry-run` ist die ehrliche Vorschau auf denselben Lauf.
+#
+#   FAIL-CLOSED – ist kein freier Satz übrig, schreibt `ersetze_…` nichts und
+#   meldet den Grund: lieber eine offene Faustregel als ein neuer Massensatz.
+#   `faustregel_vorrat()` + `FAUSTREGEL_VORRAT_WARNUNG` machen den Stillstand
+#   sichtbar, bevor er eintritt.
+#
+# Vorgeschichte (#764, 15.10.2026): eine themenbezogene Einzeltabelle
+# (`_THEMEN_FAUSTREGELN`) löste denselben Befund über eine feste Zuordnung –
+# ohne Pool, ohne Bestandsmessung, ohne Vergebungs-Sperre. Sie wurde am
+# selben Tag vom Pool abgelöst; ihre Themen- und Stichwortkenntnis steht in
+# den `worte`-Tupeln unten fort. Der Alt-Satz blieb bis #766 in 30 Artikeln.
+
+FAUSTREGEL_MARKER = "**Faustregel:**"
+
+# Der eingefrorene Einheitssatz (Wortfolge exakt, Schreibweise egal). Er wird
+# über `ersetze_generische_faustregel` ersetzt und darf nie in den Pool.
+FAUSTREGEL_LEGACY = (
+    "Prüfe vor jeder Entscheidung zuerst die Gesamtkosten über die volle "
+    "Laufzeit und vergleiche mindestens zwei aktuelle Alternativen, bevor du "
+    "dich vertraglich festlegst."
+)
+
+# Ab so vielen freien Varianten ist der Pool gesund; darunter meldet main()
+# den Engpass, bevor der Heiler nichts mehr setzen kann (#766).
+FAUSTREGEL_VORRAT_WARNUNG = 5
+
+# (Thema, Satz, Stichworte) – Themen und Sätze eindeutig, Sätze zahlfrei,
+# paarweise ohne geteilte 7-Gramme (Selbsttest „Faustregel-Pool-paare-…“).
+# Übernommene Bestandssätze (Lauf 2026-10-15) stehen bewusst mit im Pool:
+# `faustregel_kontext` sperrt sie über den Bestand und vergibt sie nie doppelt.
+FAUSTREGEL_POOL: list[tuple[str, str, tuple[str, ...]]] = [
+    ("Warmwasser",
      "Prüfe vor der Anschaffung von Spararmaturen erst den tatsächlichen "
      "Warmwasserverbrauch pro Person im Haushalt – die Armatur amortisiert "
-     "sich nur bei regelmäßigem Verbrauch."),
-    (("zaehlerstand", "zählerstand", "ablesen", "schätzwert", "jahresverbrauch",
-      "ablesung"),
+     "sich nur bei regelmäßigem Verbrauch.",
+     ("warmwasser", "wasserhahn", "wassersparen", "duschkopf", "spararmatur")),
+    ("Zählerablesen",
      "Lies den Zähler vor jeder Abrechnung selbst ab und dokumentiere den "
      "Stand mit Datum – Schätzwerte weichen systematisch von deinem echten "
-     "Verbrauch ab."),
-    (("grosseinkauf", "bevorraten", "vorratskauf"),
+     "Verbrauch ab.",
+     ("zähler", "zählerstand", "ablesen", "abrechnung", "schätzwert")),
+    ("Vorrat",
      "Kauf nur so viel auf Vorrat, wie du innerhalb der Haltbarkeit sicher "
      "verbrauchst – ein Rabatt auf die Großpackung verliert seinen Wert im "
-     "Mülleimer."),
-    (("mietwagen", "kaution", "selbstbehalt", "tankregel"),
+     "Mülleimer.",
+     ("vorrat", "bevorraten", "großpackung", "haltbarkeit", "grosseinkauf")),
+    ("Mietwagen",
      "Vergleiche vor der Buchung Gesamtpreis, Tankregel, Selbstbehalt und "
-     "Kaution gemeinsam – der niedrigste Tagespreis ist selten der günstigste "
-     "Gesamtpreis."),
-    (("last-minute", "last minute", "reiseschnäppchen", "urlaubsschnäppchen",
-      "sommer-schnaepp", "sommer-schnäpp"),
-     "Vergleiche vor der Buchung den Gesamtpreis aus Flug, Unterkunft, Gepäck, "
-     "Transfer und Versicherung gemeinsam – der prozentuale Rabatt auf dem "
-     "Banner sagt nichts über den Endpreis."),
-    (("einlagensicherung", "guthaben geschützt"),
+     "Kaution gemeinsam – der niedrigste Tagespreis ist selten der "
+     "günstigste Gesamtpreis.",
+     ("mietwagen", "kaution", "tankregel", "selbstbehalt", "autovermietung")),
+    ("Reisepreis",
+     "Vergleiche vor der Buchung den Gesamtpreis aus Flug, Unterkunft, "
+     "Gepäck, Transfer und Versicherung gemeinsam – der prozentuale Rabatt "
+     "auf dem Banner sagt nichts über den Endpreis.",
+     ("urlaub", "reise", "flug", "unterkunft", "last-minute", "reisebuchung")),
+    ("Einlagensicherung",
      "Verteile größere Guthaben auf mehrere Banken innerhalb des "
      "Einlagensicherungsfonds – die gesetzliche Sicherung gilt pro Kunde und "
-     "pro Institut, nicht pro Kontotyp."),
-    (("kreditkarte", "karte bezahlen"),
-     "Prüfe vor der Wahl einer Kreditkarte Jahresgebühr, Auslandseinsatzentgelt "
-     "und Teilzahlungszinsen zusammen – die vermeintlich kostenlose Karte "
-     "wird teuer bei Revolving-Kredit."),
-    (("geld abheben", "ausland gebühr", "gebühren im ausland", "abheben im ausland"),
+     "pro Institut, nicht pro Kontotyp.",
+     ("einlagensicherung", "guthaben", "bankguthaben", "sparguthaben")),
+    ("Kreditkarte",
+     "Prüfe vor der Wahl einer Kreditkarte Jahresgebühr, "
+     "Auslandseinsatzentgelt und Teilzahlungszinsen zusammen – die "
+     "vermeintlich kostenlose Karte wird teuer bei Revolving-Kredit.",
+     ("kreditkarte", "revolving", "auslandseinsatz", "karte")),
+    ("Bargeld im Ausland",
      "Vergleiche vor einer Auslandsreise die Gebühren für Abhebung und "
      "Kartenzahlung deiner bestehenden Karten – der günstigste Reisekurs "
-     "gewinnt nichts, wenn jede Abhebung fünf Euro kostet."),
-    (("girokonto", "kontoführungsgebühr"),
+     "gewinnt nichts, wenn jede Abhebung fünf Euro kostet.",
+     ("auslandsreise", "abheben", "gebühren", "bargeld", "reisekarte")),
+    ("Girokonto",
      "Vergleiche vor der Kontoeröffnung die Jahreskosten inklusive Abhebe-, "
      "Karten- und Überweisungsgebühren – ein kostenloses Konto ist nicht "
-     "günstig, wenn jede Leistung extra kostet."),
-    (("abos", "abonnement", "stiller posten"),
-     "Prüfe einmal im Quartal jede laufende Abbuchung auf deinem Kontoauszug – "
-     "vergessene Abonnements summieren sich über Monate zu einem stillen "
-     "Kostenblock."),
-    (("umzug", "umziehen", "wohnungswechsel"),
+     "günstig, wenn jede Leistung extra kostet.",
+     ("girokonto", "konto", "kontogebühren", "kontoeröffnung")),
+    ("Abonnements",
+     "Prüfe einmal im Quartal jede laufende Abbuchung auf deinem Kontoauszug "
+     "– vergessene Abonnements summieren sich über Monate zu einem stillen "
+     "Kostenblock.",
+     ("abo", "abonnement", "abbuchung", "kontoauszug", "streaming")),
+    ("Umzug",
      "Plane vor dem Umzug alle laufenden Verträge mindestens drei Monate im "
      "Voraus – Nachsendeauftrag, Versicherungen und Energieanbieter laufen "
-     "sonst in die alte Wohnung weiter."),
-    (("handy", "mobilfunk", "smartphone-tarif", "handytarif", "sim-karte"),
+     "sonst in die alte Wohnung weiter.",
+     ("umzug", "wohnungswechsel", "nachsendeauftrag", "umziehen")),
+    ("Handytarif",
      "Prüfe vor einem Handytarif-Wechsel zuerst deinen echten Datenverbrauch "
-     "der letzten drei Monate – eine großzügige Flatrate lohnt nicht, wenn "
-     "du einen Bruchteil davon nutzt."),
-    (("nachtstrom", "doppeltarif", "heizstrom"),
+     "der letzten drei Monate – eine großzügige Flatrate lohnt nicht, wenn du "
+     "einen Bruchteil davon nutzt.",
+     ("handy", "mobilfunk", "smartphone", "handytarif", "sim")),
+    ("Nachtstrom",
      "Prüfe vor einem Nachtstromtarif, ob sich genug Verbrauch in die "
      "Niedertarifzeit verlagern lässt – sonst zahlt du den höheren Grundpreis "
-     "ohne echte Ersparnis."),
-    (("standby", "stromfresser", "energiedieb"),
-     "Miss den Verbrauch verdächtiger Geräte einzeln vor dem Kauf von "
-     "Steckdosen-Adaptern – nur was dauerhaft läuft, kostet dich auch Geld."),
-    (("haushaltsbuch", "budget planen", "50-30-20", "fixkosten richtig ordnen",
-      "erster eigener haushalt", "haushaltsplan"),
+     "ohne echte Ersparnis.",
+     ("nachtstrom", "doppeltarif", "heizstrom", "speicherheizung")),
+    ("Standby-Strom",
+     "Zieh Stecker nach Nutzung konsequent oder nutz eine schaltbare "
+     "Steckdosenleiste – was ganz aus ist, verbraucht auch keinen "
+     "Standby-Strom.",
+     ("standby", "stromfresser", "steckdosenleiste", "standby-strom")),
+    ("Stromfresser",
+     "Miss den Verbrauch verdächtiger Geräte einzeln mit einem Messgerät – "
+     "nur was dauerhaft und unnötig läuft, kostet dich wirklich Geld.",
+     ("energiedieb", "stromfresser", "messgerät", "verbrauch messen")),
+    ("Haushaltsbuch",
+     "Notiere deine Ausgaben mindestens vier Wochen lang vollständig, bevor "
+     "du Sparpotenziale einordnest – nur was dokumentiert ist, lässt sich "
+     "auch gezielt senken.",
+     ("haushaltsbuch", "ausgaben", "budget", "sparpotenzial")),
+    ("Haushaltsplan",
      "Zieh vor dem Sparen zuerst alle festen Ausgaben und laufenden "
      "Lebenshaltungskosten von den Nettoeinnahmen ab – was übrig bleibt, ist "
-     "der echte Sparbetrag."),
-    (("grundversorgung", "ersatzversorgung", "ersatzgas"),
+     "der echte Sparbetrag.",
+     ("haushaltsplan", "fixkosten", "nettoeinnahmen", "budgetplanung")),
+    ("Grundversorgung",
      "Prüfe nach einem Wechsel in die Grundversorgung sofort einen neuen "
      "Tarifvergleich – die Versorgung ist sicher, aber meist deutlich teurer "
-     "als ein regulärer Vertrag."),
-    (("heizkosten senken", "guenstig durch den winter", "günstig durch den winter",
-      "heizkosten", "heizsaison"),
+     "als ein regulärer Vertrag.",
+     ("grundversorgung", "ersatzversorgung", "ersatzgas", "notversorgung")),
+    ("Heizung einstellen",
      "Stell vor der Heizsaison zuerst Thermostat, Entlüftung und Dämmung der "
-     "Rohre richtig ein – die Einstellung der Technik spart mehr als jeder "
-     "kurzfristige Tarifwechsel."),
-    (("gasrechnung senken", "gasrechnung"),
+     "Rohre richtig ein – die richtige Technik spart mehr als jeder "
+     "kurzfristige Tarifwechsel.",
+     ("heizkosten", "heizsaison", "thermostate", "heizung", "heizkörper")),
+    ("Heiz-Check",
+     "Ein Heiz-Check im Spätsommer kostet wenig und entlarvt Luft in den "
+     "Heizkörpern, falsch eingestellte Thermostate und alte Dichtungen, "
+     "bevor die Rechnung steigt.",
+     ("heizcheck", "heizung prüfen", "heizperiode", "dichtungen", "spätsommer")),
+    ("Gasabschlag",
+     "Lies vor der Heizsaison Abschlagshöhe, Arbeitspreis und Zählerstand "
+     "gemeinsam – ein zu niedriger Abschlag im Sommer endet sonst in einer "
+     "bösen Nachzahlung.",
+     ("gasrechnung", "abschlag", "nachzahlung", "heizkostenabrechnung")),
+    ("Gasvergleich",
      "Prüfe vor dem Vergleich den Arbeitspreis pro Kilowattstunde und den "
      "Jahresverbrauch der letzten Abrechnung – der Bonus allein sagt nichts "
-     "über die Ersparnis."),
-    (("dauerauftrag", "lastschrift", "abbuchung"),
-     "Sieh dir vor der Freigabe einer Lastschrift zuerst Vertragsbedingung "
-     "und Mandatsreferenz an – unberechtigte Abbuchungen kannst du innerhalb "
-     "von acht Wochen zurückgeben."),
-    (("wlan", "empfang", "wlan-verbessern", "wlan verbessern"),
-     "Miss vor jedem Gerätekauf zuerst die Signalstärke am Aufstellort – ein "
-     "stärkerer Router nutzt nichts, wenn das Funksignal durch Wände "
-     "blockiert wird."),
-    (("dns", "resolver", "nameserver"),
-     "Prüfe nach einem DNS-Wechsel Filterwirkung und Datenschutzbedingungen "
-     "des gewählten Resolvers – ein anderer Server ändert weder Bandbreite "
-     "noch Anonymität von allein."),
-    (("dsl-wechselbonus", "wechselbonus", "cashback dsl"),
-     "Prüfe vor einem Wechsel zuerst den Effektivpreis über 24 Monate inklusive "
-     "Router, Bereitstellung und laufender Rabatte – nicht nur den Bonus des "
-     "ersten Jahres."),
-    (("dsl", "internet-tarif", "breitband", "glasfaser", "internetanbieter",
-      "tarifvergleich internet", "anbieterwechsel"),
+     "über die Ersparnis.",
+     ("gasrechnung", "arbeitspreis", "kilowattstunde", "gasvergleich")),
+    ("Gasvertrag",
+     "Vergleiche vor einem Gasvertrag den Arbeitspreis pro Kilowattstunde "
+     "über mehrere Abrechnungsperioden – ein kurzer Rabatt wiegt weniger als "
+     "der laufende Preis.",
+     ("gasvertrag", "gasanbieter", "gaspreis", "heizsaison")),
+    ("Preisgarantie-Deckung",
+     "Eine Preisgarantie schützt dich nur dann vor Überraschungen, wenn sie "
+     "Arbeitspreis, Grundpreis und Laufzeit lückenlos abdeckt – vergleiche "
+     "auch das Kleingedruckte zu Preisanpassungen.",
+     ("preisgarantie", "preissicherheit", "preisanpassung")),
+    ("Preisgarantie-Laufzeit",
+     "Eine Preisgarantie über die volle Vertragslaufzeit ist mehr wert als "
+     "ein hoher Start-Rabatt – ohne festen Arbeitspreis kann der Vorteil ab "
+     "Jahr zwei verpuffen.",
+     ("preisgarantie", "vertragslaufzeit", "start-rabatt", "anbieterwechsel")),
+    ("Preisgarantie-Grenzen",
+     "Eine Preisgarantie federt kurzfristige Marktsprünge ab – ob sie dich "
+     "dauerhaft günstig versorgt, zeigt erst der Arbeitspreis nach Ablauf "
+     "der Festphase.",
+     ("preisgarantie", "marktpreis", "festphase", "energetarif")),
+    ("Tagesgeld",
+     "Vergleiche vor der Anlage Zinssatz, Einlagensicherung und "
+     "Kündigungsfrist zusammen – der höchste Nominalzins nützt wenig bei "
+     "schlechter Sicherung oder langer Bindung.",
+     ("tagesgeld", "festgeld", "zinssatz", "anlegen", "nominalzins")),
+    ("Stromverbrauch",
+     "Miss den Verbrauch am Gerät, bevor du Tarife vergleichst – ein Wechsel "
+     "bringt nur dann echte Ersparnis, wenn du weißt, wo dein Zähler "
+     "wirklich läuft.",
+     ("stromverbrauch", "stromtarif", "tarifwechsel", "verbrauch", "strom")),
+    ("Sparziel",
+     "Setz dir vor dem Sparen ein konkretes Ziel mit Datum und Betrag – ohne "
+     "Messgröße verpuffen die kleinen Verzichte im Alltag.",
+     ("sparen", "sparziel", "verzicht", "frugalismus", "sparmotivation")),
+    ("Zinsbindung",
+     "Zinsen sind kein Geschenk, sondern der Preis für deine Bindung; "
+     "entscheide erst die Bindung, dann den Zins.",
+     ("zinsen", "zinsbindung", "festgeld", "baufinanzierung", "kreditzinsen")),
+    ("Erster Haushalt",
+     "Melde Verträge für Miete, Strom und Internet in den ersten vier Wochen "
+     "nach dem Einzug in deinem Namen an – was nicht auf dich läuft, kann "
+     "dich später teuer zu stehen kommen.",
+     ("erster eigener haushalt", "einzug", "verträge anmelden",
+      "haushaltsstart")),
+    ("Effektivpreis",
+     "Rechne beim Tarifwechsel den Effektivpreis über die volle "
+     "Vertragslaufzeit zusammen – Anschlusskosten, Mietgeräte und "
+     "Bonuszahlungen gehören in dieselbe Rechnung.",
+     ("effektivpreis", "tarifwechsel", "anschlusskosten", "bonuszahlung",
+      "wechselbonus")),
+    ("Internetwechsel",
      "Prüfe vor einem Internetwechsel zuerst die verfügbare Bandbreite an "
      "deiner Adresse – der beste Tarif nützt nichts, wenn die Leitung die "
-     "Geschwindigkeit nicht hergibt."),
-    (("preisgarantie gas", "preisgarantie"),
-     "Eine Preisgarantie schützt nur vor Preiserhöhungen während der Laufzeit – "
-     "vergleiche trotzdem den Arbeitspreis, die Laufzeit und mögliche "
-     "Anpassungsklauseln."),
-    (("gas", "heizöl"),
-     "Vergleiche vor einem Gasvertrag den Arbeitspreis pro Kilowattstunde über "
-     "mehrere Abrechnungsperioden – ein kurzer Rabatt wiegt weniger als der "
-     "laufende Preis."),
-    (("notgroschen", "notgrosch", "finanzieller puffer"),
-     "Baue den Notgroschen auf einem leicht zugänglichen Tagesgeldkonto auf, "
-     "bevor du in riskantere Anlageformen investierst – Liquidität geht vor "
-     "Rendite."),
-    (("tagesgeld", "festgeld", "zinssatz"),
-     "Vergleiche vor der Anlage Zinssatz, Einlagensicherung und Kündigungsfrist "
-     "zusammen – der höchste Nominalzins nützt wenig bei schlechter Sicherung "
-     "oder langer Bindung."),
-    (("stromverbrauch", "strom"),
-     "Miss den Verbrauch am Gerät, bevor du Tarife vergleichst – ein Wechsel "
-     "bringt nur dann echte Ersparnis, wenn du weißt, wo dein Zähler wirklich "
-     "läuft."),
-    (("frugalismus", "verzicht", "sparen"),
-     "Setz dir vor dem Sparen ein konkretes Ziel mit Datum und Betrag – ohne "
-     "Messgröße verpuffen die kleinen Verzichte im Alltag."),
-    # Breite Rückfälle ganz zum Schluss.
-    (("internet", "festnetz", "router", "anschluss"),
-     "Prüfe vor einem Wechsel zuerst den Effektivpreis über 24 Monate inklusive "
-     "Router, Bereitstellung und laufender Rabatte – nicht nur den Bonus des "
-     "ersten Jahres."),
+     "Geschwindigkeit nicht hergibt.",
+     ("internet", "dsl", "glasfaser", "breitband", "internetwechsel",
+      "bandbreite")),
+    ("Internet-Störung",
+     "Melde eine Störung sofort und notiere dir Uhrzeit, Ticketnummer und "
+     "Gesprächspartner – nur dokumentierte Ausfallzeiten lassen sich "
+     "gegenüber dem Anbieter durchsetzen.",
+     ("störung", "ausfall", "internetstörung", "reklamation", "gutschrift",
+      "anbieterbeschwerde")),
+    ("DNS-Wechsel",
+     "Prüfe nach einem DNS-Wechsel Filterwirkung und "
+     "Datenschutzbedingungen des gewählten Resolvers – ein anderer Server "
+     "ändert weder Bandbreite noch Anonymität von allein.",
+     ("dns", "resolver", "nameserver", "dns-server")),
+    ("WLAN-Empfang",
+     "Miss vor jedem Gerätekauf zuerst die Signalstärke am Aufstellort – ein "
+     "stärkerer Router nutzt nichts, wenn das Funksignal durch Wände "
+     "blockiert wird.",
+     ("wlan", "router", "empfang", "wlan verbessern", "signalstärke")),
+    ("Lastschrift",
+     "Sieh dir vor der Freigabe einer Lastschrift zuerst Vertragsbedingung "
+     "und Mandatsreferenz an – unberechtigte Abbuchungen kannst du innerhalb "
+     "von acht Wochen zurückgeben.",
+     ("lastschrift", "dauerauftrag", "abbuchung", "mandat")),
+    ("Notgroschen",
+     "Baue den Notgroschen auf einem leicht zugänglichen Tagesgeldkonto "
+     "auf, bevor du in riskantere Anlageformen investierst – Liquidität geht "
+     "vor Rendite.",
+     ("notgroschen", "finanzieller puffer", "liquidität", "reserve")),
+    ("Kündigungsfrist",
+     "Prüfe vor jedem Vertragsabschluss die Kündigungsfrist und die "
+     "automatische Verlängerung – die kürzeste Laufzeit ist oft der "
+     "wertvollste Vertragsbestandteil.",
+     ("kündigungsfrist", "verlängerung", "vertragsabschluss", "laufzeit",
+      "widerruf")),
+    ("Haftpflicht",
+     "Eine Haftpflichtversicherung kostet im Jahr weniger als ein einziger "
+     "Schaden, den du selbst begleichst – prüfe Deckungssumme und "
+     "mitversicherte Personen gemeinsam.",
+     ("haftpflicht", "haftpflichtversicherung", "deckungssumme",
+      "versicherung")),
+    ("Kfz-Versicherung",
+     "Vergleiche bei der Kfz-Versicherung Selbstbeteiligung, Werkstattwahl "
+     "und Jahrespaket gemeinsam – der günstigste Beitrag sagt wenig über den "
+     "Schadenfall aus.",
+     ("kfz", "autoversicherung", "selbstbeteiligung", "werkstattwahl",
+      "versicherungsbeitrag")),
+    ("Hausrat",
+     "Versichere den Hausrat nach dem Wiederbeschaffungswert, nicht nach dem "
+     "Gefühl – Zimmer für Zimmer aufgenommen fehlt im Schadenfall nichts.",
+     ("hausrat", "hausratversicherung", "wiederbeschaffungswert",
+      "versicherungssumme")),
+    ("Dispozins",
+     "Ein Dispozins ist der teuerste Kredit im Haushalt – tilge ihn vor "
+     "jeder Anlagerunde, sonst frisst der Zins die Rendite auf.",
+     ("dispo", "dispokredit", "überziehung", "kredit", "tilgen")),
+    ("Altersvorsorge",
+     "Beginne die Altersvorsorge mit den Kosten, die du kontrollieren kannst "
+     "– Gebühren und Vertragsstruktur stehen vor der Fondsauswahl.",
+     ("altersvorsorge", "rente", "riester", "rürup", "fonds", "vorsorge")),
+    ("Große Anschaffung",
+     "Schlafe eine Nacht über große Anschaffungen – der Preis, der am "
+     "nächsten Morgen noch überzeugt, ist selten der falsche.",
+     ("anschaffung", "konsum", "kaufentscheidung", "schnäppchen", "angebot")),
 ]
 
 
-def _themen_spezifische_faustregel(body: str) -> str:
-    """Leitet eine themenspezifische Faustregel aus dem Text ab.
+def faustregel_saetze() -> list[str]:
+    """Nur die Sätze des Pools – die eine Wahrheit für alle Messungen."""
+    return [satz for _thema, satz, _worte in FAUSTREGEL_POOL]
 
-    Jede Regel ist ein eigenständiger, nicht-duplizierbarer Merksatz – nie
-    der gleiche Satz über mehrere Themenbereiche (Befund #764: der alte
-    Einheitssatz erzeugte 30-fache D3/D4-Duplikate). Die Funktion ist
-    deterministisch und kennt keine KI-Abhängigkeit.
 
-    Matching in drei Stufen (Präzision vor Reichweite, um Fehlzuordnungen
-    durch beiläufige Stichwörter zu vermeiden):
-      1. Titel-Zeile (`title:` im Frontmatter bzw. H1 am Anfang)
-      2. Beschreibung und die ersten 1.000 Zeichen Fließtext nach dem
-         Frontmatter (Lead, „Das Wichtigste", erste Überschriften)
-      3. Gesamter Text als Rückfallebene
-    Ein Keyword muss in der früheren Stufe auftauchen, sonst bleibt die
-    Regel unberücksichtigt.
+def _messung():
+    """Die EINE Unabhängigkeits-Messung (`check_uniqueness`), dieselbe wie im
+    Audit und in `quality_score` – nie eine zweite Gramm-Regel (#714)."""
+    import check_uniqueness as cu  # noqa: PLC0415 – schlank halten, kein Zyklus
+    return cu
+
+
+def _wahl_schluessel(slug: str, satz: str) -> str:
+    """Stabiler Gleichstands-Treiber über (Slug, Satz) – hashlib, nicht
+    `hash()`: das Salz von hash() würde deterministische Wahl unmachen."""
+    return hashlib.sha256(f"{slug}\u0000{satz}".encode("utf-8")).hexdigest()
+
+
+def _token_norm(text: str) -> str:
+    """Wortfolge ohne Typografie – für den Satz-im-Bestand-Vergleich."""
+    return " ".join(re.findall(r"\w+", (text or "").lower()))
+
+
+def _legacy_muster():
+    """Tolerantes Muster für `FAUSTREGEL_LEGACY`: Wortfolge exakt, zwischen
+    den Wörtern nur Typografie frei (Leerzeichen, geschützte Leerzeichen,
+    Binde-/Gedankenstriche, Satzzeichen). Der Satzpunkt gehört zum Muster –
+    sonst steht nach der Ersetzung „… dann der Satz..“ (erster Echtlauf)."""
+    worte = [re.escape(w) for w in re.findall(r"\w+", FAUSTREGEL_LEGACY)]
+    luecke = (r"[\s\u00a0\u202f\u2009\u00ad\u2010\u2011\u2012\u2013\u2014"
+              r"\u2015\.,;:!\?„“”‚‘’«»()\[\]]*")
+    return re.compile(luecke.join(worte) + r"[\.\u2026]{0,2}", re.IGNORECASE)
+
+
+def _freie_poolsaetze(kontext=None, vermeiden=()) -> list[tuple[str, str, tuple[str, ...]]]:
+    """Alle Sätze, die `waehle_faustregel` gerade vergeben darf (Regel 1+2)."""
+    cu = _messung()
+    ktx = kontext or {}
+    belegt = set(ktx.get("belegung") or ())
+    gesperrt = set(ktx.get("vermeiden") or ()) | set(vermeiden or ())
+    index_g = list((ktx.get("index") or {}).values())
+    frei = []
+    for eintrag in FAUSTREGEL_POOL:
+        _thema, satz, _worte = eintrag
+        if satz in belegt or satz in gesperrt:
+            continue
+        g = cu.ngrams(satz, cu.PHRASE_LEN)
+        if any((g and g <= ig) or len(g & ig) >= cu.KRITISCH_AB
+               for ig in index_g):
+            continue
+        frei.append(eintrag)
+    return frei
+
+
+def faustregel_vorrat(kontext=None) -> int:
+    """Wieviele Varianten der Wähler JETZT noch vergeben kann."""
+    return len(_freie_poolsaetze(kontext))
+
+
+def waehle_faustregel(thema, vermeiden, slug="", kontext=None):
+    """Wählt GENAU EINEN freien Pool-Satz und liefert `(satz|None, info)`.
+
+    Ohne Kontext (Einzelaufruf, Tests) deterministisch nach Thema und Hash –
+    aber ungemessen. Mit Kontext wird die Wahl in `kontext['belegung']`
+    eingetragen: ein Lauf vergibt nie zweimal denselben Satz (#766).
+    """
+    frei = _freie_poolsaetze(kontext, vermeiden)
+    if not frei:
+        return None, "kein freier Satz im Pool (belegt, gesperrt oder im Bestand)"
+    thema_low = (thema or "").lower()
+
+    def rang(eintrag):
+        _t, satz, worte = eintrag
+        bezug = sum(1 for kw in worte if kw and kw.lower() in thema_low)
+        return (-bezug, _wahl_schluessel(slug or "", satz))
+
+    frei.sort(key=rang)
+    thema_name, satz, _worte = frei[0]
+    if kontext is not None:
+        kontext.setdefault("belegung", set()).add(satz)
+    return satz, f"Thema {thema_name}"
+
+
+def faustregel_kontext(bestand_texte) -> dict:
+    """Misst den Bestand EINMAL vor dem Lauf: welche Pool-Sätze stehen schon
+    (Belegung) und wie sehen die 7-Gramme jedes Artikels aus (Index)."""
+    cu = _messung()
+    index: dict[str, set] = {}
+    belegung: set[str] = set()
+    saetze = faustregel_saetze()
+    for slug, text in (bestand_texte or {}).items():
+        index[slug] = cu.ngrams(cu.clean_body(text), cu.PHRASE_LEN)
+        flach = _token_norm(text)
+        for satz in saetze:
+            if _token_norm(satz) in flach:
+                belegung.add(satz)
+    return {"belegung": belegung, "index": index, "vermeiden": set()}
+
+
+def _kontext_aktualisieren(kontext, slug, content) -> None:
+    """Zieht die Bestandsmessung NACH jeder Schreibung nach – `--dry-run` und
+    Lauf laufen damit gegen dieselbe Wahrheit (#766)."""
+    if kontext is None:
+        return
+    cu = _messung()
+    kontext.setdefault("index", {})[slug] = cu.ngrams(
+        cu.clean_body(content or ""), cu.PHRASE_LEN)
+    flach = _token_norm(content or "")
+    belegung = kontext.setdefault("belegung", set())
+    for satz in faustregel_saetze():
+        if _token_norm(satz) in flach:
+            belegung.add(satz)
+
+
+def ersetze_generische_faustregel(body, slug="", titel="", kontext=None):
+    """Ersetzt den eingefrorenen Alt-Satz `FAUSTREGEL_LEGACY` einmalig durch
+    einen gewählten Pool-Satz – `(neu_body, n, meldung)`.
+
+    * Der Satzpunkt gehört zum Muster (kein „..“ im Ergebnis).
+    * Idempotent: der zweite Lauf findet den Alt-Satz nicht mehr.
+    * Ähnliche eigene Sätze bleiben stehen (kein Freibrief für fremde
+      Formulierungen).
+    * Ohne freien Satz wird NICHTS geschrieben; die Meldung nennt den Grund.
     """
     text = body or ""
-    # Titel extrahieren (frontmatter `title:` oder erste H1-Überschrift)
-    title = ""
-    if text.startswith("---"):
-        end = text.find("\n---", 3)
-        if end > 0:
-            fm = text[3:end]
-            tm = re.search(r'(?m)^title:\s*"?([^"\n]+)"?', fm)
-            if tm:
-                title = tm.group(1).strip().lower()
-            body_only = text[end + 4:]
-        else:
-            body_only = text
-    else:
-        body_only = text
-    title_low = title
-    head_len = min(1000, len(body_only))
-    head = body_only[:head_len].lower()
-    low = body_only.lower()
-
-    for stufe in (title_low, head, low):
-        for schluesselwoerter, satz in _THEMEN_FAUSTREGELN:
-            if any(kw in stufe for kw in schluesselwoerter):
-                return satz
-    # Neuer, nicht-duplizierbarer Fallback (Unterscheidbarkeit zum alten
-    # Einheitssatz sichergestellt: andere Worte, anderer Aufbau).
-    return ("Bevor du eine Entscheidung triffst, vergleiche mindestens zwei "
-            "Optionen anhand der für deinen Fall relevanten Kennzahlen – "
-            "pauschal Empfehlungen ersetzen keine eigene Rechnung.")
+    muster = _legacy_muster()
+    if not muster.search(text):
+        return text, 0, ""
+    satz, hinweis = waehle_faustregel(titel or text, set(), slug=slug or "",
+                                      kontext=kontext)
+    if not satz:
+        return text, 0, ("RS3-EINZIGARTIG: kein freier Satz im Pool – der "
+                         f"eingefrorene Alt-Satz bleibt stehen ({hinweis})")
+    n = 0
+    teile: list[str] = []
+    letzte = 0
+    for m in muster.finditer(text):
+        n += 1
+        teile.append(text[letzte:m.start()])
+        teile.append(satz if n == 1 else "")
+        letzte = m.end()
+    teile.append(text[letzte:])
+    neu = "".join(teile)
+    if n > 1:
+        # Pathologisch: weitere Alt-Satz-Zeilen fallen komplett weg – eine
+        # Marker-Waise wäre ein halber Zustand (C15: nie halb reparieren).
+        neu = re.sub(r"(?m)^[ \t]*\*?\*?Faustregel\*?\*?:[ \t]*\n?", "", neu)
+    meldung = f"RS3-EINZIGARTIG (eingefrorener Alt-Satz ersetzt, Variante „{hinweis}“)"
+    if n > 1:
+        meldung += f" – {n - 1} weitere Alt-Zeile(n) entfernt"
+    return neu, n, meldung
 
 
-def fix_rs2_rs3_deterministic(body: str) -> tuple[str, list[str]]:
+def _bestand_texte() -> dict[str, str]:
+    """Alle Artikel-Texte (live und Entwurf) als `{slug: rohtext}`."""
+    texte: dict[str, str] = {}
+    for pfad in list_post_paths():
+        try:
+            with open(pfad, encoding="utf-8") as fh:
+                texte[slug_of(pfad)] = fh.read()
+        except OSError:
+            continue
+    return texte
+
+
+def fix_rs2_rs3_deterministic(body: str, slug: str | None = None,
+                              kontext=None, titel: str | None = None,
+                              nur_rs3: bool = False) -> tuple[str, list[str]]:
     """Heilt fehlende RS2 (Frage-H2) und RS3 (Faustregel) deterministisch,
     ohne Links, H2-Anzahl oder Zahlen-Aussagen zu verändern.
 
@@ -720,27 +990,20 @@ def fix_rs2_rs3_deterministic(body: str) -> tuple[str, list[str]]:
             healed.append("RS2")
 
     # RS3: mindestens 1 markierte Faustregel
-    # DAUERHEILUNG #764 (15.10.2026): Vorher wurde hier EINE generische
-    # Faustregel für alle Artikel eingeklinkt („Gesamtkosten über die volle
-    # Laufzeit …"). Die Duplikat-Wache (RD1/RD2) meldete diesen Satz als
-    # D3-X wortgleich in bis zu 30 Artikeln und blockierte den gesamten
-    # Bestand – ein scheinbar harter Redaktionsbaustein fror die Produktion
-    # ein (Root Cause identisch zu #676: ein in die Breite gerollter
-    # Template-Satz, der nicht zur BOILERPLATE_RE gehörte).
-    #
-    # Die Heilung: themenspezifische Faustregel statt Einheitstext. Die
-    # Phrase wird aus Titel- und Inhalts-Stichwörtern abgeleitet – jedes
-    # Thema bekommt seine eigene Kernaussage. Die Auswahlbank deckt die
-    # im Bestand aktiven Themenbereiche ab; unbekannte Themen fallen auf
-    # eine thematisch neutrale, aber nicht-duplizierbare Formulierung
-    # zurück. Bestehende Artikel mit dem alten Einheitssatz werden über
-    # den Bestands-Reparaturlauf dieses Vorgangs umgestellt – die
-    # nachfolgende Engine-Generation nutzt dann automatisch die neue,
-    # eindeutige Fassung.
+    # DAUERHEILUNG #766 (15.10.2026): Vorher (seit #764) setzte dieser Block
+    # eine thematisch geratene, aber feste Formulierung in jeden Artikel ohne
+    # RS3 – 30-mal derselbe Satz, 435 kritische Paare im Audit. Jetzt wird
+    # GEWÄHLT (Pool + Bestandsmessung), nicht gesetzt: kein freier Satz heißt
+    # offen lassen, nicht erfinden.
     r3_ok, _ = detect_rs3(cur)
     if not r3_ok:
-        faustregel_text = _themen_spezifische_faustregel(cur)
-        faustregel_absatz = f"\n\n**Faustregel:** {faustregel_text}\n\n"
+        satz, hinweis = waehle_faustregel(titel or cur, set(),
+                                          slug=slug or "", kontext=kontext)
+        if not satz:
+            # Fail-closed sichtbar machen (Muster #607: unsichtbare Ausgänge).
+            print(f"  ⚠ RS3-EINZIGARTIG offen ({slug or 'ohne Slug'}): {hinweis}")
+            return cur, healed
+        faustregel_absatz = f"\n\n{FAUSTREGEL_MARKER} {satz}\n\n"
         m_faq = re.search(r"^##\s+(?:Häufige Fragen|FAQ|Fazit)\b", cur, re.M | re.I)
         if m_faq:
             pos = m_faq.start()
