@@ -35,7 +35,7 @@ quellen:
     herausgeber: "Google for Developers"
 faktencheck: "2026-10-14"
 affiliate_exempt: true
-affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot. ein Tarif-CTA wäre sachfremd."
+affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd."
 ---
 
 Ein DNS-Wechsel ist kein allgemeiner Internet-Turbo. Er ändert zunächst, welcher DNS-Server eine Domainanfrage beantwortet. Wenn du einen DNS-Server testen möchtest, kannst du einzelne Antwortzeiten vergleichen. Je nach Netz und Anbieter unterscheiden sich die Werte. Ein einzelner Messwert belegt keinen pauschalen Geschwindigkeitsgewinn. Er belegt auch keine kürzeren Ladezeiten für alle Websites.
@@ -156,6 +156,7 @@ Wenn du unsicher bist, belasse es bei den Standardeinstellungen deines Anbieters
 
 Tipps zur Fehlersuche, wenn nach einem Wechsel etwas nicht funktioniert, findest du ebenfalls im Hauptartikel. Eine Schritt-für-Schritt-Anleitung zum Rückgängigmachen gehört dort auch dazu.
 
+**Faustregel:** Prüfe nach einem DNS-Wechsel Filterwirkung und Datenschutzbedingungen des gewählten Resolvers – ein anderer Server ändert weder Bandbreite noch Anonymität von allein.
 
 ## Häufige Fragen
 

@@ -2,9 +2,22 @@
 
 Temporary content/build fixtures exercise the public gate path including healing,
 report and state. No network, Hugo installation or repository writes required.
+
+WF-53E2 / #780 (16.10.2026): PR #776 added a second evaluation of the same
+contract in two guards (re-read the file from disk, own ``split("---")``,
+``except Exception`` → "not exempt") and dropped the visible note. The 27
+tests here stayed green because every fixture wrote the post to disk; the
+detector self-test (articles held in memory) went red and the daily guard
+stood fail-closed. The classes below pin what was missing: the visible note,
+one source of truth, one evaluation, the profi check A8 path and a structural
+rule that keeps a second evaluator from coming back. The parallel repairs
+#785 (in-memory proof, invalid exemption = both findings) and #784 (note with
+reason, bestand gate) are kept as they are – their merge had left the gate
+with an IndentationError, the selftest test below catches exactly that.
 """
 from __future__ import annotations
 
+import ast
 import json
 import sys
 import tempfile
@@ -13,10 +26,12 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+SCRIPTS = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SCRIPTS))
 import affiliate_exemption as contract
 import affiliate_integrity_gate as gate
 import affiliate_link_check as weekly
+import affiliate_profi_check as profi
 
 REASON = "Reiner DNS-Messtest ohne passendes Tarifangebot."
 EXEMPT = f'affiliate_exempt: true\naffiliate_exempt_reason: "{REASON}"\n'
@@ -50,6 +65,19 @@ class SharedContractTests(unittest.TestCase):
                 self.assertEqual(bool(expected[2]), error)
                 self.assertEqual(weekly.affiliate_exemption({"frontmatter": fm}), expected)
                 self.assertEqual(contract.exemption_for_article({"fm": fm}), expected)
+                # #780: the raw-file adapter (profi check A8) reaches the
+                # same verdict – Hugo's frontmatter boundary, no own split.
+                self.assertEqual(contract.exemption_for_text(f"---\n{fm}---\n\nText\n"),
+                                 expected)
+
+    def test_text_adapter_without_frontmatter_has_no_exemption(self):
+        self.assertEqual(contract.exemption_for_text(""), (False, "", ""))
+        self.assertEqual(contract.exemption_for_text("Nur Text, kein Frontmatter."),
+                         (False, "", ""))
+        # A "---" inside a value is no boundary (a naive split("---", 2) would
+        # cut the title in half and read garbage as frontmatter).
+        text = f'---\ntitle: "DNS --- Messtest"\n{EXEMPT}---\n\nText\n'
+        self.assertEqual(contract.exemption_for_text(text), (True, REASON, ""))
 
 
 class IntegrityExemptionTests(unittest.TestCase):
@@ -253,6 +281,263 @@ class IntegrityExemptionTests(unittest.TestCase):
         self.assertIn("passendes Tarifangebot", reason)
         self.assertEqual(error, "")
         self.assertFalse(gate.markdown_findings([article], set(gate.load_registry())))
+
+    def test_gate_run_keeps_the_exemption_note_visible(self):
+        # #780: The note is part of the contract ("a hidden exemption is a
+        # gap, not a contract"). #776 deleted it while every test stayed green.
+        result = self.run_gate()
+        notes = result["per_article"][0]["notes"]
+        self.assertEqual(len([n for n in notes if "ausgenommen" in n.lower()]), 1,
+                         f"genau EIN Ausnahme-Hinweis (zwei Texte waren der Merge-Bruch): {notes}")
+        self.assertTrue(any("ausgenommen" in n.lower() and REASON in n for n in notes), notes)
+        self.assertIn("## Hinweise (nicht blockierend)", gate.write_report(result))
+
+
+class RenderProofSingleSourceTests(unittest.TestCase):
+    """WF-53E2 / #780: the render proof judges the frontmatter the run LOADED.
+
+    No second reading of ``article["path"]``, no own parser, no swallowed
+    error. The file-less case itself is pinned by #785
+    (``test_render_proof_uses_shared_exemption_without_reopening_source_file``);
+    here the disk deliberately CONTRADICTS the loaded state in both
+    directions – a re-read flips exactly one of them.
+    """
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root = Path(tmp.name)
+        self.public = self.root / "public"
+        html = self.public / "posts" / "messtest" / "index.html"
+        html.parent.mkdir(parents=True)
+        html.write_text("<html><body><p>Reiner Messtest, kein CTA.</p></body></html>",
+                        encoding="utf-8")
+        self.md = self.root / "content" / "posts" / "messtest" / "index.md"
+
+    def article(self, fm: str) -> dict:
+        return {"slug": "messtest", "path": self.md, "content": "", "fm": fm,
+                "body": "", "pillar": "internet-dsl"}
+
+    def verify(self, fm: str) -> dict:
+        return gate.verify_article_render(self.article(fm), {}, self.public)
+
+    def write_md(self, fm: str) -> None:
+        self.md.parent.mkdir(parents=True, exist_ok=True)
+        self.md.write_text(f'---\ntitle: "Messtest"\n{fm}---\n\nKein CTA.\n',
+                           encoding="utf-8")
+
+    def test_disk_without_exemption_cannot_overrule_loaded_exemption(self):
+        self.write_md("")
+        result = self.verify(EXEMPT)
+        self.assertEqual(result["problems"], [])
+        self.assertTrue(any("ausgenommen" in n for n in result["notes"]))
+
+    def test_exemption_only_on_disk_cannot_overrule_loaded_state(self):
+        self.write_md(EXEMPT)
+        result = self.verify("pillar: internet-dsl\n")
+        self.assertTrue(any("Kein einziger Affiliate-Link" in p for p in result["problems"]))
+        self.assertEqual(result["notes"], [])
+
+    def test_contract_is_asked_exactly_once(self):
+        with patch.object(contract, "affiliate_exemption",
+                          wraps=contract.affiliate_exemption) as spy:
+            self.verify(EXEMPT)
+        self.assertEqual(spy.call_count, 1,
+                         "one evaluation per article – a second one is a second truth")
+
+    def test_contract_errors_are_not_swallowed_into_not_exempt(self):
+        with patch.object(contract, "affiliate_exemption",
+                          side_effect=RuntimeError("Vertrag defekt")):
+            with self.assertRaises(RuntimeError):
+                self.verify(EXEMPT)
+
+    def test_detector_selftest_is_green(self):
+        # The daily guard runs this file next to `--selftest`; the selftest's
+        # in-memory cases are exactly what #776 broke. One red line here and
+        # the unit layer knows it too.
+        self.assertEqual(gate.run_selftest(), [])
+
+
+class ProfiCheckA8ContractTests(unittest.TestCase):
+    """#764/#780: A8 (minimum one CTA) reads the exemption from the contract.
+
+    Valid → nothing written; invalid → finding and NO injected CTA even in
+    FIX mode (the flag states the editorial intent); none → CTA as before.
+    """
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.blog = Path(tmp.name)
+        self.files = {}
+        for slug, fm in (("gueltig", EXEMPT), ("halb", "affiliate_exempt: true\n"),
+                         ("ohne", "")):
+            path = self.blog / "content" / "posts" / slug / "index.md"
+            path.parent.mkdir(parents=True)
+            path.write_text(f'---\ntitle: "{slug}"\npillar: "internet-dsl"\n{fm}---\n\n'
+                            "Text ohne Partnerlink.\n\n## Häufige Fragen\n\nFrage?\n",
+                            encoding="utf-8")
+            self.files[slug] = path
+        self.before = {slug: p.read_bytes() for slug, p in self.files.items()}
+
+    def run_a8(self, fix: bool):
+        problems, fixed = [], []
+        with patch.object(profi, "BLOG_DIR", str(self.blog)), \
+                patch.object(profi, "DO_FIX", fix), \
+                patch.object(profi, "PROBLEMS", problems), \
+                patch.object(profi, "FIXED", fixed):
+            profi._check_cta()
+        return problems, fixed
+
+    def test_fix_mode_respects_valid_and_invalid_exemptions(self):
+        problems, fixed = self.run_a8(fix=True)
+        self.assertEqual(self.files["gueltig"].read_bytes(), self.before["gueltig"])
+        self.assertEqual(self.files["halb"].read_bytes(), self.before["halb"],
+                         "an invalid exemption must never get an injected CTA")
+        self.assertEqual([(c, s) for c, s, _m in problems], [("A8", "halb")])
+        self.assertIn("Affiliate-Ausnahme ungültig", problems[0][2])
+        self.assertEqual([(c, s) for c, s, _m in fixed], [("A8", "ohne")])
+        self.assertIn("](/go/dsl/)", self.files["ohne"].read_text(encoding="utf-8"))
+
+    def test_check_mode_writes_nothing(self):
+        problems, fixed = self.run_a8(fix=False)
+        self.assertEqual(fixed, [])
+        self.assertEqual(sorted(s for _c, s, _m in problems), ["halb", "ohne"])
+        for slug, path in self.files.items():
+            self.assertEqual(path.read_bytes(), self.before[slug], slug)
+
+    def test_profi_selftest_covers_the_a8_contract(self):
+        self.assertEqual(profi._selftest(), [])
+
+
+class SingleEvaluatorStructureTests(unittest.TestCase):
+    """WF-53E2 / #780: one contract, one evaluator – enforced on the code.
+
+    Behaviour tests prove today's code. This class keeps the #776 pattern from
+    coming back in any guard: reading the keys itself, importing the
+    exemption through another guard, or wrapping the contract in a catch-all
+    that turns "could not evaluate" into "not exempt".
+    """
+
+    CONTRACT = "affiliate_exemption.py"
+    KEYS = {"affiliate_exempt", "affiliate_exempt_reason"}
+    ENTRY_POINTS = {"affiliate_exemption", "exemption_for_article", "exemption_for_text"}
+    BROAD = {"Exception", "BaseException"}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.modules = {}
+        for path in sorted(SCRIPTS.glob("*.py")):
+            text = path.read_text(encoding="utf-8")
+            if "affiliate_exempt" in text or "exemption" in text:
+                cls.modules[path.name] = ast.parse(text, filename=str(path))
+
+    @staticmethod
+    def _call_name(node: ast.Call):
+        func = node.func
+        if isinstance(func, ast.Attribute):
+            return func.attr
+        return func.id if isinstance(func, ast.Name) else None
+
+    def _is_broad(self, handler: ast.ExceptHandler) -> bool:
+        kind = handler.type
+        if kind is None:
+            return True
+        names = kind.elts if isinstance(kind, ast.Tuple) else [kind]
+        return any(isinstance(n, ast.Name) and n.id in self.BROAD for n in names)
+
+    def test_scan_sees_the_known_consumers(self):
+        for name in (self.CONTRACT, "affiliate_integrity_gate.py",
+                     "affiliate_link_check.py", "affiliate_profi_check.py"):
+            self.assertIn(name, self.modules, "the scan must cover " + name)
+
+    def test_only_the_contract_reads_the_exemption_keys(self):
+        verstoesse = [
+            f"{name}:{node.lineno} liest {node.value!r} selbst"
+            for name, tree in self.modules.items() if name != self.CONTRACT
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Constant) and node.value in self.KEYS]
+        self.assertEqual(verstoesse, [], "second evaluator – use affiliate_exemption.py")
+
+    def test_exemption_is_imported_from_the_contract_only(self):
+        verstoesse = [
+            f"{name}:{node.lineno} importiert {alias.name} aus {node.module}"
+            for name, tree in self.modules.items()
+            for node in ast.walk(tree) if isinstance(node, ast.ImportFrom)
+            for alias in node.names
+            if alias.name in self.ENTRY_POINTS and node.module != "affiliate_exemption"]
+        self.assertEqual(verstoesse, [], "import the contract, not another guard's adapter")
+
+    def test_contract_calls_are_never_wrapped_in_a_catch_all(self):
+        verstoesse = []
+        for name, tree in self.modules.items():
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Try):
+                    continue
+                calls = {self._call_name(c) for stmt in node.body
+                         for c in ast.walk(stmt) if isinstance(c, ast.Call)}
+                if calls & self.ENTRY_POINTS and any(self._is_broad(h) for h in node.handlers):
+                    verstoesse.append(f"{name}:{node.lineno}")
+        self.assertEqual(verstoesse, [],
+                         "a swallowed contract error silently becomes 'not exempt' (#780)")
+
+    def test_guards_import_the_contract_module(self):
+        for name in ("affiliate_integrity_gate.py", "affiliate_link_check.py",
+                     "affiliate_profi_check.py"):
+            imports = {alias.name for node in ast.walk(self.modules[name])
+                       if isinstance(node, ast.Import) for alias in node.names}
+            self.assertIn("affiliate_exemption", imports, name)
+
+
+class RenderProofSinglePathTests(unittest.TestCase):
+    """#778: Der Render-Beweis liest die Ausnahme AUSSCHLIESSLICH aus dem
+    Vertrag `affiliate_exemption.py` – nie ein zweites Mal von der Platte.
+
+    Am 16.10.2026 (WF-D4E0 #778) lag in `verify_article_render` zusätzlich
+    ein dateibezirkelter Zweitausnahmeweg (#764): er überschrieb das
+    Vertragsergebnis mit `exempt = False`, sobald `article['path']` nicht
+    lesbar war, und warf die gültige Ausnahme still weg – der Selbsttest
+    meldete „Kein einziger Affiliate-Link“ für einen redaktionell
+    ausgenommenen Artikel. Zwei Ablesewege, zwei Wahrheiten (#714/#766).
+    """
+
+    def _artikel(self, fm):
+        return {"slug": "messtest", "path": "/existiert/nicht/index.md",
+                "content": "", "fm": fm, "body": "", "pillar": "internet-dsl"}
+
+    def _public(self, tmp):
+        public = Path(tmp) / "public"
+        ziel = public / "posts" / "messtest"
+        ziel.mkdir(parents=True)
+        (ziel / "index.html").write_text(
+            "<html><body><p>Reiner Messtest, kein CTA.</p></body></html>",
+            encoding="utf-8")
+        return public
+
+    def test_in_memory_ausnahme_ohne_datei_bleibt_gueltig(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp)
+            res = gate.verify_article_render(self._artikel(EXEMPT), {}, public)
+        self.assertFalse(
+            any("Kein einziger Affiliate-Link" in p for p in res["problems"]),
+            f"gültige Ausnahme ohne lesbare Datei verloren (#778): {res['problems']}")
+        self.assertTrue(res["exempt"])
+
+    def test_ausnahme_ist_als_hinweis_sichtbar(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp)
+            res = gate.verify_article_render(self._artikel(EXEMPT), {}, public)
+        self.assertTrue(any("ausgenommen" in n for n in res["notes"]),
+                        f"Ausnahme unsichtbar (#762/#778): {res['notes']}")
+        self.assertTrue(any(REASON in n for n in res["notes"]),
+                        f"Begründung fehlt im Hinweis: {res['notes']}")
+
+    def test_ohne_ausnahme_bleibt_der_mindestbestand_ein_fund(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = self._public(tmp)
+            res = gate.verify_article_render(self._artikel(""), {}, public)
+        self.assertTrue(any("Kein einziger Affiliate-Link" in p
+                            for p in res["problems"]), res["problems"])
 
 
 class BestandGateSelftestDependencyTests(unittest.TestCase):

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-16T15:22:16Z",
+  "generated_at": "2026-10-16T18:45:02Z",
   "modus": "kandidaten",
-  "commit": "195bf5d2854461f8743c281f4002dd090c357044",
+  "commit": "c91dabf8d9eb6a5253cb3ff0ba00fb1ab48f6308",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -36,23 +36,6 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
-    },
-    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-      "sha256": "92e5b82d566c2cccd047609523a30ca42826722cfc32acf83a5c453034e190d3",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
@@ -190,23 +173,6 @@
       },
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
-    },
-    "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-      "sha256": "9459d541e0f3ec23246806d8ff7fbae30339477c303308a5f60b5fd272514b8c",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "f5f5d83aa0b12ce4e00d3de82df61b4c5b7761d5f09d8f227abc7896bc0a335d",
@@ -430,11 +396,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
-      "sha256": "3221eb3a7e54c7b6cfc1a713d95ce365ae152a34d58750404f115dc1e999369b",
-      "urteil": "freigabe-reif",
+      "sha256": "d01e04003137ce460cbd4dfe68e519bc44bd80cb648d3ff87240fe80cb51c786",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -481,7 +447,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "bdd677f53ec15bf7afb8d0bdf38945f5ed3c9621fe21b32986cafba9ed3d943c",
+      "sha256": "fdc84930de2baae0857aac8ec17c77a040f785b1df436eb6d1e48a5cc5ed40b4",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -821,11 +787,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "789962051f3af4ac9e5dcbb47301540229021a8d10faf98a351171f9b0d72a71",
-      "urteil": "freigabe-reif",
+      "sha256": "1e50c8e70f811ab027e88d0f739c8050aad7d0c599308aa70a678baa92c608a3",
+      "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "warnung",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1040,6 +1006,23 @@
       },
       "naechste_pruefung": "2026-11-23",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
+      "sha256": "59221d8425f7b6825a20cd4f3a040b44bb76a1b52cfd64e1145780931ca95657",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }

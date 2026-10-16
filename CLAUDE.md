@@ -786,6 +786,51 @@ verkettete Akte, eigene Prüfsummen. Es wird ausschließlich von
   `WF-D4E0-653-DAUERHEILUNG-PREMIUM-2026-10-08.md` und
   „Eine fehlgeschlagene Messung ist kein leerer Vorrat“ (C33) weiter unten.
 
+## Eine Wache ist ganz oder gar nicht (DAUERVORGABE, seit WF-6F7F/#783, 16.10.2026)
+
+Am 15.10.2026 hat ein Rebase in PR #776 die Redaktions-Wache halbiert. Die
+Commit-Nachricht nennt es selbst: „Faustregel-Konflikte zugunsten der
+themenspezifischen Varianten aufgelöst". In `scripts/redaktions_standard.py`
+blieben Kopf und 14 eingefrorene Selbsttest-Fälle aus der neueren Fassung
+(#766, `FAUSTREGEL_POOL` + Bestandsmessung), der RS3-Rumpf kam aus der
+älteren. Die Datei war syntaktisch gültig und in sich widersprüchlich:
+`main()` rief fünf Funktionen, die es nicht mehr gab, der Selbsttest las drei
+Konstanten, die es nicht mehr gab. Der Selbsttest schlug an (Meldung #783),
+das Qualitäts-Gate war ab 15.10. 18:19 rot, der Regressionstest ebenfalls –
+und der Heilpfad der Wache war für jeden echten Lauf ein `NameError`: eine
+tote Wache, die aussah, als wäre sie da.
+
+- **Niemals zusammensetzen – auch Quelltext nicht.** Die Regel aus
+  „Maschinen-Artefakte niemals mergen" (#346) gilt für die Wachen selbst:
+  Bei einem Konflikt wird EINE Fassung gewählt
+  (`git checkout <rev> -- <pfad>`), nie Kopf von hier, Rumpf von dort.
+  `.gitattributes` setzt dafür `merge=binary` auf alle signierten
+  `scripts/*.py` (Liste = Signaturliste aus `data/integrity_lock.json`) –
+  ein stiller Text-Zusammenschnitt ist damit technisch nicht mehr möglich.
+- **Beweis vor dem Commit.** Nach jeder Konflikt-Auflösung läuft der
+  Selbsttest der betroffenen Wache: `python3 scripts/<wache>.py --selftest`.
+  Rot heißt: Die Fassung stimmt in sich nicht – dann wird nicht committet.
+- **Die Wache dafür:** `scripts/wachen_vertrag.py` (W1–W4) liest den Quelltext
+  ALLER Skripte, ohne einen davon auszuführen, und meldet: **W1**
+  Konfliktmarker (Paar-Regel: ein Docstring-`=======` ist keiner), **W2**
+  halbe Aufrufe (`foo(...)` ohne Definition in derselben Datei), **W3** halbe
+  Konstanten (GROSSBUCHSTABEN-Name ohne Definition), **W4** Ausnahmen, die
+  unbekannt, unbegründet, undatiert oder abgelaufen sind.
+  Bedienung: `python3 scripts/wachen_vertrag.py` · `npm run test:wachen` ·
+  Report `WACHEN-VERTRAG-REPORT.md` (gitignoriert) · Hintergrund:
+  `WF-6F7F-783-DAUERHEILUNG-PREMIUM-2026-10-16.md`.
+- **Ausnahmen sind sichtbar und altern.** Dynamische Namensräume
+  (`globals()`/`setattr`) gehören nach `data/wachen_vertrag_ausnahmen.yaml` –
+  mit `grund` und `seit: JJJJ-MM-TT`. Eine Ausnahme, die keinen Befund mehr
+  deckt, wird selbst zum Befund. Einen Konfliktmarker deckt keine Ausnahme.
+- **Vertrag statt Vertrauen.** `wachen_vertrag.py` UND
+  `redaktions_standard.py` stehen im vertraglichen Minimum (`GUARDS`, C6);
+  der Lauf hängt als **C39** im Governance-Vertrag und läuft mit dem
+  Qualitäts-Gate (`governance_contract.py --quick`). Regression:
+  `scripts/tests/test_wachen_vertrag.py`, `npm run test:redaktion`.
+  Die #766-Dauerheilung (`FAUSTREGEL_POOL`, Wähler, Bestandsmessung, keine
+  zweite RS3-Implementierung) bleibt unangetastet.
+
 ## Die Messlatte der Reserve gehört nicht dem Gemessenen (seit 26.09.2026, #393)
 
 Zielbestand und Alarmschwelle der Content-Reserve haben **einen** Besitzer:
@@ -1814,6 +1859,51 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   `scripts/tests/sim/alert_scoping_sim.mjs` · Anleitung
   `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
   `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md`.
+
+## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
+
+PR #776 wurde am 15.10.2026 auf `main` umgesetzt (zwei Konflikte) und **22
+Sekunden** nach dem Push dieses Stands gemergt – bevor ein Check des Commits
+fertig war. Danach waren drei rot (Qualitäts-Gate, Regressionstests,
+Integritäts-Siegel). Die Konflikte waren „zugunsten“ einer Seite aufgelöst und
+überschrieben damit zwei schon gemergte Heilungen: den Ausnahme-Vertrag aus
+#762 (zweite Auswertung in Gate und A8, sichtbarer Hinweis gelöscht) und den
+Faustregel-Pool aus #766 (Code weg, Selbsttests und Aufrufer geblieben). Das
+Qualitäts-Gate meldete es um 18:22 UTC als „Qualitätsprüfung rot“ (#777); am
+16.10. folgten #778, #779, #780 und #783, die Affiliate-Wache stand fail-closed.
+Am 16.10. wiederholte sich das Muster binnen Minuten: Die parallelen
+Reparaturen #785 und #784 gingen 58 s bzw. 77 s auseinander rot nach `main`;
+ihre Zusammenführung ließ in `affiliate_integrity_gate.py` zwei `if`-Köpfe und
+zwei Hinweistexte stehen – ein **IndentationError auf `main`**, an dem jeder
+Aufrufer (Wache, Publish-Gate, Bestand-Gate, CodeQL-Wachen) abstürzte.
+
+- **Kein Merge vor dem grünen Abschluss DIESES Commits.** Nach jedem Push –
+  auch Rebase und Force-Push – `gh pr checks <nr> --watch --fail-fast`
+  abwarten. Rot oder ausstehend heißt: nicht mergen. Der Branch-Schutz verlangt
+  die Checks hier nicht (Dauerzustand, `docs/PFLICHT-CHECK-RUNBOOK.md`); bis er
+  es tut, ersetzt diese Regel ihn. Eine offene „Qualitätsprüfung rot“ ist der
+  früheste Alarm – sie geht jeder weiteren Arbeit vor.
+- **Konflikt zwischen zwei Heilungen = beide behalten.** Eine Auflösung
+  „zugunsten“ einer Seite nimmt die andere zurück und braucht deren Vorgang.
+  Danach `python3 scripts/selftest_runner.py` (alle Wachen, wenige Minuten) –
+  er hätte #776 vor dem Merge gestoppt.
+- **Ein Vertrag, ein Auswerter.** `affiliate_exempt` liest nur
+  `scripts/affiliate_exemption.py` (`affiliate_exemption`,
+  `exemption_for_article`, `exemption_for_text`). Kein eigenes
+  Frontmatter-Splitten, kein Import über eine andere Wache, kein
+  `except Exception` um den Vertrag – ein verschluckter Fehler wird still zu
+  „keine Ausnahme“. `test_affiliate_exemption.SingleEvaluatorStructureTests`
+  erzwingt das am Code; der Render-Beweis wertet nur das geladene `fm` aus.
+- **Ungültige Ausnahme = Fund, nie Heilung.** A8
+  (`affiliate_profi_check.py --fix`) setzt einem Artikel mit kaputter Ausnahme
+  keine Werbe-CTA ein; der Render-Beweis meldet dafür genau einen Fund.
+- **Ein roter Selbsttest ist Code.** Alarm-Klasse `selbsttest` in
+  `alert-on-failure.yml` (maßgeblich ist der erste rote Schritt): Rat =
+  `selftest_runner.py` und `git log` der Wache – kein Schlüssel-, kein
+  Neustart-Rat.
+- Tests: `npm run test:affiliate-links` · Szenarien #780 in
+  `scripts/tests/sim/alert_scoping_sim.mjs` · Bericht
+  `WF-53E2-780-DAUERHEILUNG-PREMIUM-2026-10-16.md`.
 
 ## Wichtige Konventionen
 

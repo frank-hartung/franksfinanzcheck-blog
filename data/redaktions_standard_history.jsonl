@@ -123,3 +123,12 @@
 {"zeit": "2026-10-15T15:37:20.443099+00:00", "slug": "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet", "regel": "RS3-EINZIGARTIG", "aktion": "fix-deterministisch"}
 {"zeit": "2026-10-15T15:37:20.443099+00:00", "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp", "regel": "RS3", "aktion": "fix-deterministisch"}
 {"zeit": "2026-10-15T15:37:20.443099+00:00", "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen", "regel": "RS3-EINZIGARTIG", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-16T15:49:47.212658+00:00", "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-16T15:49:47.212658+00:00", "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-16T15:50:29.904412+00:00", "slug": "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-16T15:50:29.904412+00:00", "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-16T15:50:29.904412+00:00", "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-16T18:03:46.095095+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
+{"zeit": "2026-10-16T18:03:46.095095+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
+{"zeit": "2026-10-16T18:03:46.224548+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}
+{"zeit": "2026-10-16T18:03:46.224548+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "GATE", "aktion": "draft (hold)"}

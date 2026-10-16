@@ -1,9 +1,9 @@
 ---
 title: "Energiekosten senken: Smarte Helfer für den Haushalt"
 description: Reduziere deine Energiekosten mit gezielten Smart-Home-Geräten. Frank Hartung zeigt dir, wie du Technik und den 4K-Prüfpfad für deine Fixkosten nutzt.
-date: 2026-10-09T10:48:20Z
-draft: true
-reserve: true
+date: 2026-10-16T18:36:02Z
+draft: false
+reserve_published: 2026-10-16
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
