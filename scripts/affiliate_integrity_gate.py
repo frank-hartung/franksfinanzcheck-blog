@@ -1888,8 +1888,9 @@ def run_selftest() -> list[str]:
         expect(not res_exempt["problems"],
                "eine gültige Ausnahme darf keinen 'kein Affiliate-Link'-Fund "
                f"erzeugen (#762): {res_exempt['problems']}")
-        expect(any("ausgenommen" in n for n in res_exempt["notes"]),
-               "die Ausnahme muss als Hinweis sichtbar bleiben (nicht versteckt)")
+        expect(any("ausgenommen" in n.lower() and grund in n
+                   for n in res_exempt["notes"]),
+               "die gültige Ausnahme samt Begründung muss als Hinweis sichtbar bleiben")
 
         # b) OHNE Ausnahme bleibt der Befund bestehen (kein Fehlalarm-Refix).
         a_ohne = _art("2026-09-04-messtest", "pillar: \"internet-dsl\"\n")
@@ -1911,6 +1912,8 @@ def run_selftest() -> list[str]:
         res_halbe = verify_article_render(a_halbe, {}, root5 / "public")
         expect(any("Affiliate-Ausnahme ungültig" in p for p in res_halbe["problems"]),
                "eine Ausnahme ohne Begründung muss fail-closed ein Fund sein")
+        expect(not any("ausgenommen" in n.lower() for n in res_halbe["notes"]),
+               "eine ungültige Ausnahme darf nicht als genehmigt erscheinen")
 
     # 9) HERZSCHLAG vs. BEFUND (Reparatur #281) – der Kern der dauerhaften
     #    Behebung. Ein zweiter Lauf mit UNVERÄNDERTEM Befund MUSS den

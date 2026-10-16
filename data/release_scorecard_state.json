@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-16T14:49:05Z",
+  "generated_at": "2026-10-16T15:22:16Z",
   "modus": "kandidaten",
-  "commit": "5ca03889d88c7d2d98a18554e6c2d0ed6bd7328b",
+  "commit": "195bf5d2854461f8743c281f4002dd090c357044",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -192,7 +192,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-      "sha256": "753b25f657368b3b1546b999a54400663ff4c8e5ce657976fb2471c096a73f84",
+      "sha256": "9459d541e0f3ec23246806d8ff7fbae30339477c303308a5f60b5fd272514b8c",
       "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
@@ -206,7 +206,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "f5f5d83aa0b12ce4e00d3de82df61b4c5b7761d5f09d8f227abc7896bc0a335d",

@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-16T16:09:29.344121+00:00",
-  "head": "d8acace",
+  "signed_at": "2026-10-16T15:12:34.518839+00:00",
+  "head": "974f9d7",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -22,7 +22,7 @@
     "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
     "layouts/shortcodes/einspartabelle.html": "172a4812488cecfd147dc8d03ffba0971fbb12c2a5fa8b2dbd5771590ef2c393",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
-    "scripts/affiliate_integrity_gate.py": "a6cc0cd26283c6a47afbaa0fd900724cdcab259de8e0e68bebb784201e6cca42",
+    "scripts/affiliate_integrity_gate.py": "e931dd4645b9b50e3b4205c9d23da70b401ff8c489468751ebea394dced630c2",
     "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -42,7 +42,7 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
-    "scripts/redaktions_standard.py": "e9218de427fa067c7d63a3cec59246878856725b5ab9c232f26d6e8ece34eefd",
+    "scripts/redaktions_standard.py": "ae0d3ecc8326a8e80a7d8ed076e3f94a12fb081aea9932f542170e34162a1243",
     "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
@@ -53,7 +53,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "3e482ac78963cb6557729cce967144d895f23794358a1d460f57ac3f2a734127",
+  "files_sha256": "d840361859827ce5ae002c300906a54a9076c206585893b1173c87104af30916",
   "audit_start_sha256": "a40ffa80ab696404649270d2d27950e03c61ddae6ce424d6921a111766d4a7de",
   "audit": [
     {
@@ -507,8 +507,8 @@
     },
     {
       "date": "2026-10-16",
-      "art": "heal",
-      "head": "d8acace",
+      "art": "set-current",
+      "head": "974f9d7",
       "geaendert": [
         "scripts/affiliate_integrity_gate.py",
         "scripts/redaktions_standard.py"
@@ -520,9 +520,9 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "d9ce722",
+              "sha": "974f9d7",
               "datum": "2026-10-16",
-              "betreff": "fix(affiliate): Ausnahme im Render-Beweis einstellig halten (#778)"
+              "betreff": "fix: restore quality gate contracts for #777"
             },
             {
               "sha": "e662cf0",
@@ -538,9 +538,9 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "179a521",
+              "sha": "974f9d7",
               "datum": "2026-10-16",
-              "betreff": "fix(redaktions-standard): Faustregel-Wähler #766 wiederhergestellt (#778)"
+              "betreff": "fix: restore quality gate contracts for #777"
             },
             {
               "sha": "e662cf0",
@@ -552,7 +552,7 @@
         }
       ],
       "prev_sha256": "64b2f264d9265aa1e1fa94731ca309b0465cc54ef7d228a5ccb068cbabddaa76",
-      "files_sha256": "3e482ac78963cb6557729cce967144d895f23794358a1d460f57ac3f2a734127"
+      "files_sha256": "d840361859827ce5ae002c300906a54a9076c206585893b1173c87104af30916"
     }
   ]
 }

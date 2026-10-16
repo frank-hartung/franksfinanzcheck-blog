@@ -29,9 +29,11 @@ nicht angefasst.
 from __future__ import annotations
 
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 from unittest import mock
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
@@ -103,6 +105,7 @@ def _artikel(tmpdir):
 class VertragImSchreiberTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
         self.pfad, self.a = _artikel(self.tmp.name)
         self.res = rs.analyse_article(self.a)
         # Nur RS1 offen – die Heilung hat genau einen Auftrag.
@@ -157,10 +160,12 @@ class VertragImSchreiberTest(unittest.TestCase):
                         f"angehobene SSOT-Schwelle greift nicht: {gruende}")
 
     def test_datei_bleibt_bei_ablehnung_unberuehrt(self):
-        vorher = open(self.pfad, encoding="utf-8").read()
+        with open(self.pfad, encoding="utf-8") as fh:
+            vorher = fh.read()
         neu, _ = self._heile(ANTWORT_INTRO)
         self.assertIsNone(neu)
-        nachher = open(self.pfad, encoding="utf-8").read()
+        with open(self.pfad, encoding="utf-8") as fh:
+            nachher = fh.read()
         self.assertEqual(vorher, nachher)
 
 
@@ -282,6 +287,114 @@ class FaustregelDauerheilungTest(unittest.TestCase):
         neu, n, _meldung = rs.ersetze_generische_faustregel(body, slug="x")
         self.assertEqual(0, n)
         self.assertEqual(body, neu)
+
+    def test_unmarkierte_erwaehnung_erfuellt_rs3_nicht(self):
+        ok, detail = rs.detect_rs3("Die Faustregel steht im Fließtext.\n")
+        self.assertFalse(ok)
+        self.assertIn("markierte", detail)
+
+    def test_markierte_blockquote_mit_folgezeile_erfuellt_rs3(self):
+        body = "> **Faustregel:**\n> Prüfe erst den Bedarf und dann den Tarif.\n"
+        self.assertEqual((True, "1 markierte Faustregel(n)"), rs.detect_rs3(body))
+
+    def test_benannte_faustregel_marker_bleiben_kompatibel(self):
+        examples = (
+            "**Faustregel für deine Sparguthaben:**\nTeile das Risiko passend auf.\n",
+            "**Meine Faustregel aus der Praxis:** Miss erst, dann kauf.\n",
+        )
+        for body in examples:
+            with self.subTest(body=body):
+                self.assertTrue(rs.detect_rs3(body)[0], body)
+
+    def test_produktionsaufruf_akzeptiert_kontext_und_nur_faustregel(self):
+        """Friert die Keywords ein, die der tägliche --fix-Lauf übergibt."""
+        context = rs.faustregel_kontext({})
+        body = "## Was kostet der Anschluss?\n\nDer Text enthält keine Regel.\n"
+        neu, geheilt = rs.fix_rs2_rs3_deterministic(
+            body, slug="warmwasser-sparen", kontext=context,
+            titel="Warmwasser sparen", nur_rs3=True)
+        self.assertEqual(["RS3"], geheilt)
+        satz = next(
+            line[len(rs.FAUSTREGEL_MARKER):].strip()
+            for line in neu.splitlines()
+            if line.startswith(rs.FAUSTREGEL_MARKER)
+        )
+        self.assertIn(satz, rs.faustregel_saetze(),
+                      "der Produktionspfad muss nur geprüfte Pool-Sätze schreiben")
+        self.assertIn("## Was kostet der Anschluss?", neu,
+                      "--nur-faustregel darf RS2 nicht verändern")
+
+    def test_main_produktionslauf_heilt_rs3_und_wahrt_den_publish_vertrag(self):
+        """Der echte --fix-Pfad schreibt nur nach bestandenem Vertrag."""
+        body = (
+            "## Wie nutzt du warmes Wasser?\n\n"
+            "Warmes Wasser gehört zum Alltag. Wir nutzen es beim Duschen, "
+            "Waschen und Spülen. Der Bedarf ist in jedem Haushalt anders. "
+            "Prüfe deinen Verbrauch regelmäßig. Ein Blick auf den Zähler hilft. "
+            "Notiere den Stand, wenn du ihn abliest. So erkennst du Änderungen. "
+            "Achte auch auf die Dauer der Dusche. Ein kürzeres Bad senkt den "
+            "Bedarf. Beim Händewaschen reicht oft wenig Wasser.\n\n"
+            "## Welche Spararmatur passt?\n\n"
+            "Warmes Wasser gehört zum Alltag. Wir nutzen es beim Duschen, "
+            "Waschen und Spülen. Der Bedarf ist in jedem Haushalt anders. "
+            "Prüfe deinen Verbrauch regelmäßig. Ein Blick auf den Zähler hilft. "
+            "Notiere den Stand, wenn du ihn abliest. So erkennst du Änderungen. "
+            "Achte auch auf die Dauer der Dusche. Ein kürzeres Bad senkt den "
+            "Bedarf. Beim Händewaschen reicht oft wenig Wasser.\n\n"
+            "## Was kannst du prüfen?\n\n"
+            "1. Prüfe deinen Verbrauch.\n"
+            "2. Achte auf deine Nutzung.\n"
+            "3. Wähle eine passende Armatur.\n"
+        )
+        frontmatter = (
+            'title: "Warmwasser sparen"\n'
+            'description: "Warmwasser prüfen und passende Spararmaturen wählen."\n'
+            'date: "2026-10-16T12:00:00Z"\n'
+            'author: "Test"\n'
+        )
+        with tempfile.TemporaryDirectory(prefix="rs3-production-") as temp_dir:
+            article = Path(temp_dir) / "warmwasser-sparen.md"
+            article.write_text(f"---\n{frontmatter}---\n{body}", encoding="utf-8")
+            original_article = rs.load_article(str(article))
+            result = subprocess.run(
+                [sys.executable, os.path.join(BLOG_DIR, "scripts",
+                                              "redaktions_standard.py"),
+                 "--fix", "--nur-faustregel", "--file", str(article)],
+                cwd=BLOG_DIR, capture_output=True, text=True, timeout=120,
+            )
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            self.assertIn("Deterministisch geheilt", result.stdout)
+            self.assertNotIn("RS3-EINZIGARTIG offen", result.stdout)
+            updated = article.read_text(encoding="utf-8")
+            self.assertIn(body, updated, "der bestehende Artikeltext muss erhalten bleiben")
+            selected = next(
+                line[len(rs.FAUSTREGEL_MARKER):].strip()
+                for line in updated.splitlines()
+                if line.startswith(rs.FAUSTREGEL_MARKER)
+            )
+            self.assertIn(selected, rs.faustregel_saetze(),
+                          "der Produktionspfad darf nur geprüfte Pool-Sätze schreiben")
+            updated_body = updated.split("---", 2)[2]
+            self.assertFalse(rs._vertrag_gruende(original_article, updated_body))
+
+    def test_themenhinweis_steuert_die_auswahl_ohne_freie_textausgabe(self):
+        context = rs.faustregel_kontext({})
+        artikel = (
+            "Warmwasser sparen: Warmwasserverbrauch und Spararmaturen. "
+            "Prüfe den Verbrauch und vergleiche passende Spararmaturen "
+            "für deinen Haushalt."
+        )
+        satz, grund = rs.waehle_faustregel(
+            artikel, set(), slug="warmwasser-sparen", kontext=context)
+        warmwasser = next(s for thema, s, _keys in rs.FAUSTREGEL_POOL
+                          if thema == "warmwasser")
+        self.assertEqual(warmwasser, satz,
+                         f"spezifischer Warmwasser-Pool-Satz wurde nicht priorisiert: {grund}")
+        self.assertIn(satz, rs.faustregel_saetze())
+
+    def test_eingebetteter_selbsttest_bleibt_gruen(self):
+        """Der Unit-Lauf soll Strukturdrift der Selbsttest-Fixtures mitfangen."""
+        self.assertEqual(0, rs.selftest())
 
 
 class HeilerAufrufVertragTest(unittest.TestCase):

@@ -65,6 +65,7 @@ Lauf-Zusammenfassung „F-01 · Sicherheits-Header“:
 | **TEILWEISE** | 0 | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | nichts am Edge; das nicht gemessene Ziel steht ausdrücklich im Bericht. Die Regel aus A1 gilt je **Host**, nicht je Pfad – ein sauberes Ziel belegt sie. |
 | **BEFUND** | 1 | gemessen, und es fehlt etwas | je nach Diagnose Abschnitt A1 Schritt 1 (Proxy aus) oder Schritt 3 (Regel unvollständig) – der Bericht nennt es ausdrücklich |
 | **STOERUNG** | 2 | kein Ziel erreichbar | **kein** Sicherheitsbefund: Erreichbarkeit prüfen, Lauf neu starten |
+| **WACHE-FEHLER** | sonst / leer | Prüfung selbst defekt, z. B. fehlender Bericht oder Exit-Code | Workflow/Skript prüfen; keine Edge-Änderung auf Verdacht |
 
 Die Wache heilt transiente Netzfehler vorher selbst (vier Versuche mit
 2 s/8 s/30 s Pause, `GET`-Nachfrage, wenn ein Proxy auf `HEAD` mit einem
@@ -350,3 +351,36 @@ cd ../../cloudflare/ki-assistent && node --test                      # 17 Tests
 Alle grün = der Stand aus dem Audit ist wiederhergestellt **und** gesichert.
 Rot = die Meldung nennt Datei, Zeile und Grund; ein roter Lauf ist ein Auftrag,
 kein Rauschen.
+
+
+## Wartungsnachweis #782 · WF-E813 · 16.10.2026
+
+**Belegt:** Lauf `38891475692`, Job `116941814761`, meldete
+„F-01 WACHE-FEHLER: blog_header_gate.py lieferte Exit [leer]“.
+Der Messschritt selbst war bereits fehlgeschlagen. GitHub führt `run` unter
+Bash mit `-e` aus; `set -uo pipefail` deaktiviert dieses geerbte `errexit`
+nicht. Ein fachlich erwarteter Exit 1 oder 2 brach deshalb den Schritt vor
+`GITHUB_OUTPUT` ab. Die vorherigen Textprüfungen erkannten das nicht.
+
+**Korrektur:** Der Messaufruf steht jetzt in einem expliziten `if/else`;
+sein unveränderter Exit wird gespeichert, während echte Infrastrukturfehler
+(z. B. nicht schreibbares `GITHUB_OUTPUT`) weiterhin den Schritt abbrechen.
+BEFUND und STOERUNG bleiben rot, die Messung selbst bleibt neutral.
+Die unabhängige Worker-Prüfung schreibt ihren Bericht nun auch bei Fehlern
+in die Lauf-Zusammenfassung und erhält ihren ursprünglichen Exit-Code.
+Ein fehlender Export-Schlüssel bleibt ausdrücklich **NICHT GEPRÜFT**.
+
+**Rückfallschutz:** `python3 -m unittest scripts.tests.test_blog_header_gate`
+führt die tatsächlichen YAML-Shellblöcke mit `bash -e -o pipefail` aus:
+Exit 0/1/2/3/127, Auswertung, fehlender Bericht, Output-Schreibfehler sowie
+Worker-Erfolg/Befund/Störung/Wachenfehler und fehlender Schlüssel. Diese Tests
+laufen im Offline-Job; Änderungen an der Testdatei lösen den Workflow aus.
+
+**Abgrenzung:** Der vollständige historische Job-Log war in der
+Bearbeitungsumgebung nicht abrufbar; die Befunde oben stammen aus der
+GitHub-Jobs-API und den Check-Annotations. Der Worker-Schritt war ebenfalls
+rot, seine konkrete Live-Ursache ist damit noch nicht belegt. Keine Aussage,
+dass Live-Header oder Worker jetzt gesund seien; nach Übernahme den Workflow
+„Sicherheits-Wache“ auf `main` manuell starten und beide Zusammenfassungen
+prüfen. Ein verbleibender fachlicher Befund ist nach A1/A3 zu beheben, nicht
+durch Unterdrücken des Alarms.

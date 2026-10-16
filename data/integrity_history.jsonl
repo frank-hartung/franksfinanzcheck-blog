@@ -314,3 +314,4 @@
 {"date": "2026-10-16", "kritisch": 0, "fest": 2, "modus": "verify"}
 {"date": "2026-10-16", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["scripts/affiliate_integrity_gate.py", "scripts/redaktions_standard.py"], "head": "d8acace"}
 {"date": "2026-10-16", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-16", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py", "scripts/redaktions_standard.py"]}

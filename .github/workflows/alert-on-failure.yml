@@ -589,7 +589,8 @@ jobs:
                         '1. **Einordnung:** Diese Wache misst ausschließlich HTTP-Kopfzeilen der eigenen Seite. Sie braucht keinen Schlüssel und kein Modell – ein abgelaufener GROQ- oder GEMINI-Schlüssel kann diesen Schritt nicht auslösen.',
                         '2. **Die Klasse steht im Log und in der Lauf-Zusammenfassung.** BEFUND = es wurde gemessen, und etwas fehlt. STOERUNG = es wurde nichts gemessen; das ist ausdrücklich keine Aussage über die Sicherheit, sondern eine ausgefallene Messung.',
                         '3. **Bei BEFUND:** Steht in der Zusammenfassung „Proxy nicht aktiv" (kein `cf-ray`), kann die Header-Regel gar nicht wirken → `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 Schritt 1 (Wolke auf *Proxied*) und Schritt 2 (SSL-Modus `Full`), danach Schritt 3. Steht dort „Proxy aktiv", ist die Regel unvollständig → `cloudflare/edge-schutz.md`, Abschnitt A1 (Regel `FF Sicherheits-Header`, acht Kopfzeilen).',
-                        '4. **Bei STOERUNG:** Erreichbarkeit prüfen (`curl -sI https://franksfinanzcheck.de/`) und den Lauf neu starten. Kein Eingriff in Cloudflare nötig – ohne Messung ist keine Lücke belegt.'
+                        '4. **Bei STOERUNG:** Erreichbarkeit prüfen (`curl -sI https://franksfinanzcheck.de/`) und den Lauf neu starten. Kein Eingriff in Cloudflare nötig – ohne Messung ist keine Lücke belegt.',
+                        '5. **Bei WACHE-FEHLER:** Die Prüfung selbst ist defekt (z. B. leerer Exit-Code oder fehlender Bericht). Workflow und Skript prüfen; keine Cloudflare-Regel auf Verdacht ändern. Regressionstest: `python3 -m unittest scripts.tests.test_blog_header_gate` (einschließlich echter Shell-Ausführung mit Bash `-e`).'
                       ]
                     : runbookKlasse === 'sicherheit-wache'
                       ? [
