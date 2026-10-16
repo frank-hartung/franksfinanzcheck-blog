@@ -156,6 +156,7 @@ Wenn du unsicher bist, belasse es bei den Standardeinstellungen deines Anbieters
 
 Tipps zur Fehlersuche, wenn nach einem Wechsel etwas nicht funktioniert, findest du ebenfalls im Hauptartikel. Eine Schritt-für-Schritt-Anleitung zum Rückgängigmachen gehört dort auch dazu.
 
+**Faustregel:** Prüfe nach einem DNS-Wechsel Filterwirkung und Datenschutzbedingungen des gewählten Resolvers – ein anderer Server ändert weder Bandbreite noch Anonymität von allein.
 
 ## Häufige Fragen
 

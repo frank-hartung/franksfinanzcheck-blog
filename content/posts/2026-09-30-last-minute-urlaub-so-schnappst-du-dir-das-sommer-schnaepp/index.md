@@ -236,6 +236,9 @@ Prüfe den Namen. Prüfe das Datum. Prüfe den Flughafen. Ein Tippfehler kann te
 Bis hierhin hast du die wichtigsten Regeln. Du weißt, worauf du achten musst. Du weißt, wo Fallen lauern. Du weißt, wie du fair vergleichst. Das ist viel mehr als das, was viele Schnellbucher wissen.
 
 Buche klug. Buche fair. Und hab eine schöne Reise.
+
+**Faustregel:** Vergleiche vor der Buchung den Gesamtpreis aus Flug, Unterkunft, Gepäck, Transfer und Versicherung gemeinsam – der prozentuale Rabatt auf dem Banner sagt nichts über den Endpreis.
+
 ## Häufige Fragen
 
 ### Wie kurzfristig kann ich noch buchen?

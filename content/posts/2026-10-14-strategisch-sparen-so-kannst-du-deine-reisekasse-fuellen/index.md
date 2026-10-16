@@ -133,6 +133,8 @@ Ein Vergleichsportal ist ein Suchweg, kein Nachweis für den günstigsten Preis 
 
 Genau das ist der Hebel: Reisekasse füllen.
 
+**Faustregel:** Ein Dispozins ist der teuerste Kredit im Haushalt – tilge ihn vor jeder Anlagerunde, sonst frisst der Zins die Rendite auf.
+
 ## Häufige Fragen
 
 ### Wie viel sollte ich monatlich sparen?

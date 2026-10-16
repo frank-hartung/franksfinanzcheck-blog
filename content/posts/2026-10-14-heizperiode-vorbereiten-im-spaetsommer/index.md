@@ -44,7 +44,7 @@ Vor der Heizzeit lohnt sich ein genauer Blick auf die Kosten. Schreib deinen Ver
 | Verbrauch prüfen | Mach Fotos vom Zähler für Strom und Gas. Notiere dir dazu das Datum. | Die monatliche Zahlung ist nicht dein echter Verbrauch. |
 | Heizkörper prüfen | Hör auf ein Gluckern im Rohr. Prüfe die Wärme mit der Hand. Lass die Luft frei fließen. | Das Entlüften spart nicht immer eine feste Summe Geld. |
 | Wärme im Raum prüfen | Stell ein Thermometer in jedes Zimmer. Stell die Ventile für jeden Raum passend ein. | Achte auf dein Wohlbefinden und auf die Feuchte im Haus. |
-| Pflege der Anlage | Frag beim Vermieter nach dem Termin für die Wartung. Such dir sonst einen Fachbetrieb. | Fass den Brenner oder die Rohre für Gas nie selbst an. |
+| Pflege der Anlage | Frag beim Vermieter nach dem Termin für die Wartung. Such dir sonst einen Fachbetrieb. | Keine Arbeiten an Brenner oder Gasleitungen in Eigenregie – fass sie nie selbst an. |
 | Kosten für den Tarif | Schreib den Preis für die Arbeit und den Grundpreis auf. Prüf die Zeit und den Bonus. | Ein Portal zeigt nicht immer alle Angebote am Markt. |
 
 Zählerstände in festen Abständen helfen dir sehr. So erkennst du jede Änderung beim Verbrauch sofort. Vergleiche am besten immer die gleichen Monate aus dem Vorjahr. Ein kalter Winter treibt die Kosten für Gas nach oben. Das passiert auch, wenn du beim Heizen sehr sparsam bist. In einer Wohnung zur Miete darfst du nicht alles selbst ändern. Melde Fehler an der Heizung immer der Hausverwaltung. Auch dein Vermieter ist ein guter Ansprechpartner bei Problemen.
@@ -53,13 +53,13 @@ Zählerstände in festen Abständen helfen dir sehr. So erkennst du jede Änderu
 
 Ein Gluckern im Rohr kann ein Zeichen für Luft sein. Auch wenn die Heizung ungleich warm wird, ist oft Luft die Ursache. Es gibt aber noch andere Gründe für diese Fehler. Entlüfte die Anlage nur, wenn das bei dir so vorgesehen ist. Du musst den Ablauf dafür genau kennen. Lies vorher die Anleitung für deine Heizung. Aus dem Ventil kann sehr heißes Wasser spritzen. Wenn du unsicher bist, ruf lieber einen Fachbetrieb an.
 
-Das Entlüften kann die Verteilung der Wärme im Haus verbessern. Das klappt aber nur, wenn wirklich Luft im System war. Ein fester Gewinn an Energie lässt sich daraus nicht ableiten. Die hier verlinkte Übersicht der Bundesnetzagentur nennt keine festen Prozente für diese Tat. Wir rechnen dir deshalb keine sichere Ersparnis vor. Das wäre nicht ehrlich und hängt von zu vielen Dingen ab.
+Das Entlüften kann die Verteilung der Wärme im Haus verbessern. Das klappt aber nur, wenn wirklich Luft im System war. Ein fester Gewinn an Energie lässt sich daraus nicht ableiten. Die hier verlinkte Übersicht der Bundesnetzagentur nennt keine festen Prozente für diese Tat. Wir nennen hier deshalb keine konkrete Prozentangabe und rechnen dir keine sichere Ersparnis vor. Das wäre nicht ehrlich und hängt von zu vielen Dingen ab.
 
 Bleibt der Heizkörper trotz Entlüften kalt? Oder fällt der Druck in der Anlage immer wieder ab? Dann lass einen Profi nach der Ursache suchen. Fülle niemals ohne Wissen Wasser in die Anlage nach. Die Wartung und die Einstellung vom Brenner sind Aufgaben für Profis. Auch alle Arbeiten an den Leitungen für Gas gehören in fachkundige Hände.
 
 ## Welche Raumtemperatur passt?
 
-Ein Wert von 20 Grad kann ein guter Start für den Wohnraum sein. Das ist aber kein festes Gesetz für alle Menschen. Es gibt auch keine Vorgabe von einem Amt für deine Wohnung. Passe die Wärme an deine Nutzung und deine Wünsche an. Auch die Dämmung der Wände und die Feuchte sind wichtig. Menschen mit hohem Bedarf an Wärme brauchen oft höhere Werte.
+Ein Wert von 20 Grad kann ein guter Start für den Wohnraum sein. Es gibt jedoch kein allgemeines Optimum für alle Menschen – der Wert ist kein festes Gesetz. Es gibt auch keine Vorgabe von einem Amt für deine Wohnung. Passe die Wärme an deine Nutzung und deine Wünsche an. Auch die Dämmung der Wände und die Feuchte sind wichtig. Menschen mit hohem Bedarf an Wärme brauchen oft höhere Werte.
 
 Ein Ventil am Heizkörper misst die Wärme nicht im ganzen Raum. Prüfe die Lage deshalb mit einem eigenen Thermometer. Verlass dich nicht nur auf die Zahl am Griff vom Ventil. Stell keine Möbel direkt vor die Heizung. Auch lange Vorhänge stören den Fluss der Wärme im Raum. Lüfte immer nach Bedarf und achte auf feuchte Stellen. Kalte Außenwände brauchen Schutz vor Schimmel. Ein starkes Auskühlen der Räume kann Probleme mit Feuchte fördern. Eine feste Zahl für das Absenken der Wärme nennen wir hier nicht.
 
@@ -77,8 +77,8 @@ Die folgenden Werte sind frei gewählte Annahmen für eine Rechnung. Es sind kei
 |---|---|---|
 | Leistung aller Geräte | 3 Geräte mal 5 Watt | 15 Watt |
 | Verbrauch im Jahr | 15 Watt mal 24 Stunden mal 365 Tage durch 1.000 | 131,4 kWh |
-| Kosten im Jahr bei 0,30 Euro pro kWh | 131,4 kWh mal 0,30 Euro | 39,42 Euro |
-| Aus für 8 Stunden am Tag | 15 Watt mal 8 Stunden mal 365 Tage durch 1.000 mal 0,30 Euro | 13,14 Euro |
+| Kosten im Jahr bei 0,30 € pro kWh | 131,4 kWh mal 0,30 € | 39,42 € |
+| Aus für 8 Stunden am Tag | 15 Watt mal 8 Stunden mal 365 Tage durch 1.000 mal 0,30 € | 13,14 € |
 
 Deine echte Ersparnis hängt von der gemessenen Leistung ab. Auch die Dauer der Abschaltung ist für das Ergebnis wichtig. Eine Zeitschaltuhr kostet in der Anschaffung auch Geld. Zudem braucht sie selbst ein wenig Strom für den Betrieb. Diese Kosten sind in der Tabelle oben nicht enthalten. Eine kurze Zeit ohne Strom spart weniger Geld als im ersten Beispiel.
 
@@ -86,9 +86,9 @@ Deine echte Ersparnis hängt von der gemessenen Leistung ab. Auch die Dauer der 
 
 Schau beim Vergleich nicht nur auf den Preis für die Arbeit. Rechne immer den Grundpreis für das ganze Jahr dazu. Prüfe die Laufzeit und die Frist für die Kündigung genau. Auch eine Garantie für den Preis und die Regeln für den Bonus sind wichtig. Ein niedriger Abschlag im Monat sagt nichts über den Preis aus. Er kann am Ende des Jahres zu einer hohen Nachzahlung führen.
 
-**Modellrechnung für Strom:** Wir nehmen einen Verbrauch von 3.500 kWh im Jahr an. Bei einem Preis von 0,30 Euro pro kWh liegen die Kosten bei 1.050 Euro. Sinkt der Preis auf 0,27 Euro pro kWh, sind es nur noch 945 Euro. Der Unterschied liegt bei 105 Euro im Jahr. Das gilt aber nur, wenn der Grundpreis gleich bleibt. Die Ersparnis von 10 Prozent bezieht sich nur auf den Preis für den Verbrauch.
+**Modellrechnung für Strom:** Wir nehmen einen Verbrauch von 3.500 kWh im Jahr an. Bei einem Preis von 0,30 € pro kWh liegen die Kosten bei 1.050 €. Sinkt der Preis auf 0,27 € pro kWh, sind es nur noch 945 €. Der Unterschied liegt bei 105 € im Jahr. Das gilt aber nur bei gleichem Grundpreis. Die Ersparnis von 10 Prozent bezieht sich nur auf den Preis für den Verbrauch.
 
-**Modellrechnung für Gas:** Wir nehmen einen Verbrauch von 12.000 kWh an. Bei 0,09 Euro pro kWh kostet das 1.080 Euro. Bei 0,08 Euro pro kWh sind es 960 Euro. Hier sparst du 120 Euro im Jahr. Ist der Grundpreis beim neuen Anbieter aber um 60 Euro höher? Dann schrumpft dein Vorteil auf nur noch 60 Euro zusammen. Alle Preise in diesen Beispielen sind nur Annahmen.
+**Modellrechnung für Gas:** Wir nehmen einen Verbrauch von 12.000 kWh an. Bei 0,09 € pro kWh kostet das 1.080 €. Bei 0,08 € pro kWh sind es 960 €. Hier sparst du 120 € im Jahr. Ist der Grundpreis beim neuen Anbieter aber um 60 € höher? Dann schrumpft dein Vorteil auf nur noch 60 € zusammen. Alle Preise in diesen Beispielen sind nur Annahmen.
 
 Nutze für deine Suche nach Infos viele verschiedene Wege. Schau direkt bei den Anbietern und auf Portalen nach. Kein Weg allein zeigt dir sicher den kleinsten Preis. Einen guten Einstieg bietet die Seite der [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html). Diese Seite ist aber kein Beleg für feste Quoten beim Sparen. Sie ist auch keine Empfehlung für den Dienst von CHECK24.
 
@@ -110,6 +110,8 @@ Auch die Kurve für die Heizung muss zum Haus passen. Lass diese Einstellung von
 - Gasrechnung senken: Fehler im Spätsommer vermeiden
 - Warmwasser sparen: Die Rechnung hinter dem Hahn
 - Energiediebe stoppen: Stromfresser finden
+
+**Faustregel:** Schlafe eine Nacht über große Anschaffungen – der Preis, der am nächsten Morgen noch überzeugt, ist selten der falsche.
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
