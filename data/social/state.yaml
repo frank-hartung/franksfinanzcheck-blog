@@ -770,6 +770,26 @@ history:
     #Gasrechnung #Heizkosten #StromkostenSenken #NachtstromTarif'
   ref: '117449983499442917'
   ai: false
+- posted_at: '2026-10-16T17:24:06.752226+02:00'
+  channel: mastodon
+  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
+  title: 'Störung beim Internetanbieter: So sicherst du deine Rechte'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117451276649054529
+  ok: true
+  text: '💶 Störung beim Internetanbieter: So sicherst du deine Rechte
+
+
+    Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer
+    geben.
+
+
+    https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
+  ref: '117451276649054529'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -795,4 +815,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-16T11:55:24.047485+02:00'
+updated_at: '2026-10-16T17:24:16.061757+02:00'

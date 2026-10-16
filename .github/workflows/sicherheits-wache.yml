@@ -58,6 +58,7 @@ on:
       - "n8n/**"
       - "tools/n8n/**"
       - "scripts/blog_header_gate.py"
+      - "scripts/tests/test_blog_header_gate.py"
       - "scripts/content_html_wache.py"
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
@@ -74,6 +75,7 @@ on:
       - "n8n/**"
       - "tools/n8n/**"
       - "scripts/blog_header_gate.py"
+      - "scripts/tests/test_blog_header_gate.py"
       - "scripts/content_html_wache.py"
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
@@ -107,6 +109,7 @@ jobs:
       - name: Header-Wache – Vorlage und Meta-CSP (F-01, offline)
         run: |
           set -euo pipefail
+          python3 -m unittest scripts.tests.test_blog_header_gate
           python3 scripts/blog_header_gate.py --selftest
           python3 scripts/blog_header_gate.py --offline
 
@@ -140,9 +143,17 @@ jobs:
         # behandeln – genau das hat WF-E813 erzeugt (Vertrag C34).
         # Wichtig: Erst NACH der Cloudflare-Regel kann das hier grün sein.
         run: |
-          set -uo pipefail
-          python3 scripts/blog_header_gate.py --json --report f01-live.md > f01-live.json
-          echo "code=$?" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          # GitHub startet bash mit -e. set -uo schaltet -e NICHT aus.
+          # Nur der erwartbar nicht-null liefernde Messaufruf steht im if;
+          # Schreibfehler beim Output bleiben echte Schrittfehler (#782).
+          code=0
+          if python3 scripts/blog_header_gate.py --json --report f01-live.md > f01-live.json; then
+            code=0
+          else
+            code=$?
+          fi
+          echo "code=$code" >> "$GITHUB_OUTPUT"
 
       - name: Sicherheits-Header auswerten (F-01) · Befund · Störung · grün
         if: always() && steps.header.outcome != 'skipped'
@@ -193,6 +204,25 @@ jobs:
           set -euo pipefail
           if [ -z "${NEWSLETTER_WORKER_EXPORT_KEY}" ]; then
             echo "::warning::NEWSLETTER_WORKER_EXPORT_KEY fehlt – der Betriebszustand wurde NICHT geprüft (kein Freibrief)."
+            echo "## F-02/F-03/F-08 · NICHT GEPRÜFT: Export-Schlüssel fehlt" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
-          python3 scripts/worker_betrieb_wache.py
+          code=0
+          if python3 scripts/worker_betrieb_wache.py > worker-live.md 2>&1; then
+            code=0
+          else
+            code=$?
+          fi
+          cat worker-live.md
+          {
+            echo "## F-02/F-03/F-08 · Worker-Zustand"
+            echo ""
+            cat worker-live.md
+          } >> "$GITHUB_STEP_SUMMARY"
+          case "$code" in
+            0) echo "::notice::Worker-Zustand gemessen; Details siehe Zusammenfassung." ;;
+            1) echo "::error::Worker BEFUND: Betriebszustand verfehlt das Soll; siehe Zusammenfassung." ;;
+            2) echo "::error::Worker STOERUNG: Betriebszustand NICHT geprüft; siehe Zusammenfassung." ;;
+            *) echo "::error::Worker WACHE-FEHLER: unerwarteter Exit $code." ;;
+          esac
+          exit "$code"
