@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-16T18:09:40Z",
+  "generated_at": "2026-10-16T18:45:02Z",
   "modus": "kandidaten",
-  "commit": "8111a3a4d6b02f55d48bb2319bf1111499d71b5c",
+  "commit": "c91dabf8d9eb6a5253cb3ff0ba00fb1ab48f6308",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -1006,6 +1006,23 @@
       },
       "naechste_pruefung": "2026-11-23",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
+      "sha256": "59221d8425f7b6825a20cd4f3a040b44bb76a1b52cfd64e1145780931ca95657",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
