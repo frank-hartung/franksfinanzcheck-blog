@@ -25,6 +25,10 @@ Läuft deterministisch ohne Netz
 from __future__ import annotations
 
 import os
+import json
+import subprocess
+import tempfile
+import textwrap
 import sys
 import unittest
 from pathlib import Path
@@ -237,6 +241,92 @@ class WorkflowVerdrahtung(unittest.TestCase):
         self.assertIn("if: always()", self.text)
 
 
+class WorkflowShellRegression(unittest.TestCase):
+    """Execute the real YAML run blocks with the runner's implicit bash -e.
+
+    No YAML dependency: these literal blocks have fixed ten-space indentation.
+    A fake python3 only replaces the external measurement, not its shell wrapper.
+    """
+
+    @staticmethod
+    def block(marker):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        step = text.split(marker, 1)[1]
+        lines = step.split("        run: |\n", 1)[1].splitlines()
+        body = []
+        for line in lines:
+            if line and not line.startswith("          "):
+                break
+            body.append(line)
+        return textwrap.dedent("\n".join(body))
+
+    def run_block(self, block, root, env):
+        return subprocess.run(
+            ["bash", "--noprofile", "--norc", "-e", "-o", "pipefail", "-c", block],
+            cwd=root, env={**os.environ, **env}, capture_output=True, text=True,
+            timeout=10)
+
+    def test_header_capture_and_evaluation_under_errexit(self):
+        measure = self.block("id: header")
+        evaluate = self.block("- name: Sicherheits-Header auswerten")
+        for code, expected in ((0, "grün"), (1, "BEFUND"), (2, "STOERUNG"),
+                               (3, "WACHE-FEHLER"), (127, "WACHE-FEHLER")):
+            with self.subTest(code=code), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                env = {"GITHUB_OUTPUT": str(root / "output"),
+                       "GITHUB_STEP_SUMMARY": str(root / "summary")}
+                (root / "f01-live.md").write_text("Messbericht", encoding="utf-8")
+                payload = json.dumps({"naechster_schritt": "Runbook prüfen"})
+                fake = f"python3() {{ printf '%s' '{payload}'; return {code}; }}\n"
+                result = self.run_block(fake + measure, root, env)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual((root / "output").read_text(), f"code={code}\n")
+                rendered = evaluate.replace("${{ steps.header.outputs.code }}", str(code))
+                result = self.run_block(rendered, root, env)
+                self.assertEqual(result.returncode, 0 if code == 0 else 1, result.stderr)
+                self.assertIn(expected, result.stdout)
+                self.assertIn("Messbericht", (root / "summary").read_text())
+
+    def test_missing_header_report_is_not_green(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            block = self.block("- name: Sicherheits-Header auswerten")
+            result = self.run_block(block.replace("${{ steps.header.outputs.code }}", "0"),
+                                    root, {"GITHUB_STEP_SUMMARY": str(root / "summary")})
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("WACHE-FEHLER", result.stdout)
+
+    def test_output_write_failure_is_not_swallowed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            result = self.run_block("python3() { return 0; }\n" + self.block("id: header"),
+                                    root, {"GITHUB_OUTPUT": str(root / "missing" / "output")})
+            self.assertNotEqual(result.returncode, 0)
+
+    def test_worker_keeps_exit_and_summary(self):
+        block = self.block("- name: Worker-Zustand messen")
+        for code, expected in ((0, "gemessen"), (1, "BEFUND"),
+                               (2, "STOERUNG"), (3, "WACHE-FEHLER")):
+            with self.subTest(code=code), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                env = {"GITHUB_STEP_SUMMARY": str(root / "summary"),
+                       "NEWSLETTER_WORKER_EXPORT_KEY": "test-only"}
+                fake = f"python3() {{ echo Workerbericht; return {code}; }}\n"
+                result = self.run_block(fake + block, root, env)
+                self.assertEqual(result.returncode, code, result.stderr)
+                self.assertIn(expected, result.stdout)
+                self.assertIn("Workerbericht", (root / "summary").read_text())
+
+    def test_missing_worker_key_is_explicitly_unchecked(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            result = self.run_block(self.block("- name: Worker-Zustand messen"), root,
+                                    {"GITHUB_STEP_SUMMARY": str(root / "summary"),
+                                     "NEWSLETTER_WORKER_EXPORT_KEY": ""})
+            self.assertEqual(result.returncode, 0)
+            self.assertIn("NICHT GEPRÜFT", (root / "summary").read_text())
+
+
 class AlarmRouting(unittest.TestCase):
     """Die Meldung darf nicht auf einen Schlüssel raten (WF-E813, zweiter Fehler)."""
 
@@ -249,6 +339,7 @@ class AlarmRouting(unittest.TestCase):
     def test_sicherheits_wache_hat_eigene_triage(self):
         self.assertIn("istSicherheitsWache", self.text)
         self.assertIn("headerGateFailed", self.text)
+        self.assertIn("Bei WACHE-FEHLER", self.text)
         self.assertIn("wfName === 'Sicherheits-Wache'", self.text)
 
     def test_die_triage_haengt_an_der_runbook_klasse(self):
