@@ -948,8 +948,6 @@ def verify_article_render(article: dict, reg: dict,
         result["notes"].append(
             "Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: "
             f"{exemption_contract.exemption_label(reason)}")
-            "Affiliate-CTA-Pflicht ist redaktionell ausgenommen: "
-            + exemption_contract.exemption_label(reason))
 
     html_path = article_html_path(slug, public)
     if not html_path.is_file():
@@ -1005,7 +1003,6 @@ def verify_article_render(article: dict, reg: dict,
     # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
     # affiliate_link_check – keine zweite Messregel (Root Cause
     # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
-    if not gateway_anchors and not (exempt and not exempt_error):
     #     braucht entweder einen Beleg-fähigen CTA oder die ausdrücklich
     #     begründete redaktionelle Ausnahme aus derselben Frontmatter-Prüfung
     #     wie oben. Die Ausnahme hebt NUR diese Mindestpflicht auf; alle
@@ -1013,7 +1010,7 @@ def verify_article_render(article: dict, reg: dict,
     #     Prüfungen bleiben aktiv. Insbesondere darf dieser Pfad den
     #     Artikel nicht ein zweites Mal über einen anderen Adapter/die Datei
     #     lesen: `article["fm"]` ist hier bereits die geprüfte SSOT.
-    if not gateway_anchors and not exempt:
+    if not gateway_anchors and not (exempt and not exempt_error):
         result["problems"].append(
             "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
             "oder wird nicht gerendert")
