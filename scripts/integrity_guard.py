@@ -288,6 +288,11 @@ FEST = {
     # Prüfung (oder ein eingeschleustes `return []`) hätte genau den
     # Vorfall wiederholt, deshalb unter dasselbe Siegel.
     "scripts/publikations_vertrag.py",
+    # Wachen-Vertrag (16.10.2026, WF-6F7F/#783): Die Wache bewacht die Wachen
+    # selbst – halbe Aufrufe, halbe Konstanten, Konfliktmarker, Ausnahmen,
+    # Syntax. Wer sie halb macht, nimmt jeder anderen Wache ihren Beweis;
+    # deshalb unter dasselbe Siegel wie die Schwellen-Wachen.
+    "scripts/wachen_vertrag.py",
 }
 
 NEU_OHNE_SIGNATUR = " (neu ohne Signatur)"
@@ -1796,6 +1801,20 @@ def main():
         rp = ROOT / ADD_PATH
         if not rp.exists():
             print(f"🔴 Ziel nicht da: {ADD_PATH}"); sys.exit(2)
+        # Fail-closed seit 16.10.2026 (WF-6F7F/#783): `signieren()` baut die
+        # Datei-Map AUS KRITISCH|FEST. Ein Pfad, der nur per `--add` in die
+        # Map kommt, verschwindet bei der nächsten Signatur (heal/set-current)
+        # stillschweigend wieder – der Aufrufer glaubt, versiegelt zu haben,
+        # und hat nichts. Belegt am 16.10.2026 an `scripts/wachen_vertrag.py`.
+        # Deshalb: erst die Quelle (FEST/KRITISCH), dann zeichnen.
+        if ADD_PATH not in KRITISCH and ADD_PATH not in FEST:
+            print(f"🛑 {ADD_PATH} steht nicht in KRITISCH oder FEST – der Lock "
+                  "wird aus diesen Gruppen gebaut, ein Eintrag ohne Quelle "
+                  "wäre bei der nächsten Signatur wieder weg.")
+            print("   Weg: den Pfad in scripts/integrity_guard.py unter FEST "
+                  "(oder KRITISCH) eintragen und dann signieren:")
+            print("   python3 scripts/integrity_guard.py --set-current")
+            sys.exit(2)
         lock = load_lock(LOCK)
         vorher = sha256_file(rp)
         files = {**lock.get("files", {}), ADD_PATH: vorher}
