@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 16.10.2026 11:55 (Europe/Berlin)  
+> Automatisch aktualisiert: 16.10.2026 17:24 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,6 +12,9 @@
 
 ## Kommende Beiträge
 
+### Fr, 16. Oktober 2026
+- **18:00** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 ### So, 25. Oktober 2026
 - **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/

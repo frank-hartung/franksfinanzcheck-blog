@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 16.10.2026 11:55 (Europe/Berlin)  
+> Automatisch aktualisiert: 16.10.2026 17:24 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 16. Oktober 2026
-- **11:30** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
 ### Sa, 17. Oktober 2026
 - **07:30** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
@@ -56,6 +53,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 16.10.2026 17:24 · Störung beim Internetanbieter: So sicherst du deine Rechte → https://mastodon.social/@FranksFinanzcheck/117451276649054529
 - ✅ 16.10.2026 11:55 · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt → https://mastodon.social/@FranksFinanzcheck/117449983499442917
 - ✅ 15.10.2026 17:38 · Lastschrift und Dauerauftrag: Was du prüfen solltest → https://mastodon.social/@FranksFinanzcheck/117445670235708986
 - ✅ 15.10.2026 12:03 · Warmwasser sparen: Die Rechnung hinter → https://mastodon.social/@FranksFinanzcheck/117444351878060801
@@ -65,7 +63,6 @@
 - ✅ 13.10.2026 14:46 · Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer → https://mastodon.social/@FranksFinanzcheck/117433670652081666
 - ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
 - ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
-- ✅ 10.10.2026 13:14 · 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen → https://mastodon.social/@FranksFinanzcheck/117416320264126149
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
