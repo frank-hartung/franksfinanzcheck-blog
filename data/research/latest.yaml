@@ -1,5 +1,5 @@
-generated_at: '2026-10-15T08:35:17Z'
-day: '2026-10-15'
+generated_at: '2026-10-16T08:29:44Z'
+day: '2026-10-16'
 mode: deterministic
 teams:
   trending:
@@ -238,57 +238,61 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
+  - topic: 'Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    score: 0.55
+    keywords:
+    - Auslandskrankenversicherung Familie
+    - Reisekrankenversicherung Kosten
+    - Familienreiseschutz
+  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:DSL-Tarife mit hoher Geschwindigkeit vergleichen
+    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
     score: 0.55
     keywords:
-    - DSL-Tarif
-    - Internetgeschwindigkeit
-    - Tarife vergleichen
-  - topic: Günstige Flüge für den Spätsommer finden
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Günstige Flüge für den Spätsommer finden
-    score: 0.55
-    keywords:
-    - Flugtickets günstig
-    - Flugvergleich
-    - Reisebudget sparen
-  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
-    score: 0.55
-    keywords:
-    - Mietwagen
-    - Tarife
-    - Vergleich
-  - topic: 'Risikolebensversicherung für Familien: Die richtige Summe finden'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Risikolebensversicherung für Familien: Die richtige Summe finden'
-    score: 0.55
-    keywords:
-    - Risikolebensversicherung
-    - Versicherungssumme berechnen
-    - Familie absichern
-  - topic: Wie du deine monatlichen Ausgaben reduzieren kannst
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Wie du deine monatlichen Ausgaben reduzieren kannst
-    score: 0.55
-    keywords: []
-  - topic: 'Zweite Welle Gaspreis-Anpassung: Jetzt sichern'
+    - günstiges Handy-Abonnement
+    - Tarifvergleich
+    - Mobilfunk
+  - topic: Energiekosten senken mit Smart-Home-Geräten
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Zweite Welle Gaspreis-Anpassung: Jetzt sichern'
+    source: topics:Energiekosten senken mit Smart-Home-Geräten
     score: 0.55
     keywords:
-    - Gaspreis
-    - Gastarif wechseln
-    - Heizkosten senken
+    - Smart-Home
+    - Energiekosten
+    - Strom sparen
+  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    score: 0.55
+    keywords:
+    - Stromanbieter Pleite
+    - Grundversorgung Strom
+    - Anbieterinsolvenz
+  - topic: 'Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen
+      kannst'
+    score: 0.55
+    keywords:
+    - Strompreis
+    - Entwicklung
+    - Kosten sparen
+  - topic: 'Störung beim Internetanbieter: Diese Rechte hast du'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Störung beim Internetanbieter: Diese Rechte hast du'
+    score: 0.55
+    keywords:
+    - Internetstörung Rechte
+    - Minderung Internetausfall
+    - Anbieter Entschädigung
 live_web:
   enabled: false
   findings: []
