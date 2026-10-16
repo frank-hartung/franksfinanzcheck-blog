@@ -86,21 +86,24 @@
 
 ### 3.1 Code – `scripts/redaktions_standard.py` (Ursache A)
 
-* **#766-Schicht wiederhergestellt** (dokumenttreu aus Berichtsspezifikation + Selbsttest-Vertrag):
-  * `FAUSTREGEL_POOL`: **45 eindeutige, zahlenfreie, untereinander audit-sichere Sätze**.
-    Zusammensetzung aus Belegen: 28 der 33 Sätze des 15.10.-Massensatzlaufs sind **im Bestand
-    belegt** (ungewollt „vergeben“ – Kollisionsvermeidung verbietet ihre Wiedervergabe) und
-    wurden rekonstruiert; 10 thematische Ergänzungen aus dem Verdrängungs-Artefakt
-    `_THEMEN_FAUSTREGELN`; 7 neu formuliert für die Themen ohne eigenen Satz.
-    Damit stehen den 33 belegten Bestandssätzen **nie wieder identische Sätze** zur Verfügung –
-    die Wiederholungssperre ist nicht nur Code, sondern auch Datenlage.
-  * `faustregel_kontext`/`_kontext_aktualisieren`: misst den Bestand (6-gram-Index), sperrt
-    bereits vergebene Sätze (`kontext['belegung']`) und verhindert Anschluss-Kollisionen.
-  * `waehle_faustregel`/`faustregel_vorrat`/`ersetzte_generische_faustregel`/`_freie_poolsaetze`.
+* **#766-Schicht wiederhergestellt.** Zwei Linien trafen zusammen und wurden im Merge vereint
+  (Konfliktlösung 16.10.2026): die #778-Rekonstruktion aus der Berichtsspezifikation und die
+  auf `main` parallel entstandene Wiederherstellung (#777/#784, `f7517a5`). Übernommen wurde
+  die `main`-Fassung – ihr Wähler misst Kandidaten direkt gegen die Audit-Schwelle
+  (`check_uniqueness.KRITISCH_AB`, geteilte 7-Gramme) und ihr Testsuite ist umfangreicher;
+  die #778-Arbeit ergänzt den eingefrorenen Aufrufvertrag-Test und die Inhaltssichtfläche:
+  * `FAUSTREGEL_POOL` – eigenständige, themenbezogene, zahlenfreie Faustregeln; der Wähler
+    (`waehle_faustregel`) vergibt nur Sätze, die **weder im Bestand stehen noch ein
+    Artikelpaar über die Audit-Schwelle schieben** – die Wiederholungssperre ist damit sowohl
+    Code als auch Datenlage (die 33 Sätze des 15.10.-Massensatzlaufs stehen im Bestand und
+    werden nie wieder vergeben).
+  * `faustregel_kontext`/`faustregel_vorrat`: Verwaltung der Belegung im laufenden Lauf
+    (kein Satz zweimal), `ersetzte_generische_faustregel` ersetzt den eingefrorenen
+    #764-Alt-Satz einmalig und meldet Stillstand statt Massensatz bei leerem Pool.
   * `fix_rs2_rs3_deterministic` mit **`nur_rs3`** (Faustregel-Modus berührt RS2 nie), Aufruf-
     vertrag `main()` ↔ Funktion wieder stimmig; Fail-closed-Meldung bei leerem Pool.
-  * **Selbsttest 44/44** (Pool 6 · Vergabe 14 · Kontext 6 · Einsetzer 8 · RS2 10) einschließlich
-    der #766-Kernfälle (30 freie Wahlen ohne Wiederholung; Massensatz-Sperre; Vergabeschutz;
+  * **Selbsttest 44/44** (Pool · Vergabe · Kontext · Einsetzer · RS2) einschließlich der
+    #766-Kernfälle (freie Wahlen ohne Wiederholung; Massensatz-Sperre; Vergabeschutz;
     Pool selbst audit-sauber; `--selftest` überschreibt keinen Bestand).
 * **Neuer Regressionstest** `HeilerAufrufVertragTest` in `test_redaktions_standard.py`:
   friert den Aufrufvertrag `fix_rs2_rs3_deterministic(..., kontext, titel, nur_rs3=True)` ein
@@ -146,15 +149,32 @@
 | Prüfung | Ergebnis |
 |---|---|
 | `redaktions_standard.py --selftest` | ✅ **44/44** |
-| `unittest scripts.tests.test_redaktions_standard` | ✅ **15/15** (inkl. neuem Aufrufvertrag-Test) |
+| `unittest scripts.tests.test_redaktions_standard` | ✅ **22/22** (inkl. neuem Aufrufvertrag-Test) |
 | `unittest scripts.tests.test_faktenfrische_763` | ✅ **7/7** |
-| `affiliate_integrity_gate.py --selftest` | ✅ (inkl. 8b/8c) |
+| `affiliate_integrity_gate.py --selftest` | ✅ (inkl. 8b/8c, verschärft um Begründungsnachweis) |
 | `bestand_gate.py --selftest` | ✅ |
-| `unittest scripts.tests.test_affiliate_exemption` | ✅ **19/19** (inkl. 3 neuer Single-Path-Tests) |
+| `unittest scripts.tests.test_affiliate_exemption` | ✅ **23/23** (Single-Path-Tests + BestandGate-Dependency) |
 | `check_uniqueness.py` | ✅ 0 kritisch (live↔live) |
 | `selftest_runner.py` (voll, mit Uhr-Proben) | ✅ **208 Wachen · 416 Uhr-Proben** (war: 3 Ausnahmen) |
-| `unittest discover -s scripts/tests` | ✅ **3277 Tests, 0 Fehler** nach Siegelneustand (Klasse FEST, eigener `chore(integrity)`-Commit) |
+| `unittest discover -s scripts/tests` | ✅ **3293 Tests, 0 Fehler** (nach Merge mit `main` + Siegelneustand) |
 | FEST-Siegel (`integrity_guard.py`) | ✅ `--heal` auf committetem Drift, verkettet, Stufe 4 |
+
+### 4.1 Merge mit `main` (16.10.2026, Konfliktlösung)
+
+`main` hatte während der Arbeit sieben Commits aufgenommen; drei Konflikte betrafen diese
+Dauerheilung. Auflösung nach Nutzen und Beweislage:
+
+* `scripts/redaktions_standard.py`: übernommen wurde die **`main`-Fassung** (#777/#784) – die
+  parallele Wiederherstellung desselben #766-Vertrags mit Audit-Messung im Wähler und
+  größeren Testsuite (52 grüne Tests in der Vereinigung, Selbsttest 44/44).
+* `scripts/affiliate_integrity_gate.py`: übernommen wurde die **#778-Fassung** – die
+  `main`-Fassung war an dieser Stelle **syntaktisch defekt** (IndentationError,
+  doppelte Notiz-Anweisung aus einem Artefakt). Die auf `main` verschärften
+  Selbsttest-Erwartungen (Hinweis enthält Begründung; ungültige Ausnahme zeigt keinen
+  „ausgenommen“-Hinweis) sind in die #778-Fassung portiert.
+* `scripts/tests/test_affiliate_exemption.py`: **Vereinigung** beider Testklassen
+  (`RenderProofSinglePathTests` + `BestandGateSelftestDependencyTests`).
+* `data/integrity_lock.json`: über `integrity_guard.py --heal` nach dem Merge neu versiegelt.
 
 ## 5. Abgrenzung
 
