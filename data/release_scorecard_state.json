@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-16T15:22:16Z",
+  "generated_at": "2026-10-16T16:25:23Z",
   "modus": "kandidaten",
-  "commit": "195bf5d2854461f8743c281f4002dd090c357044",
+  "commit": "3cb1f52eb1c31b1bb3f8ecd2103a8b476610c562",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -206,7 +206,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "f5f5d83aa0b12ce4e00d3de82df61b4c5b7761d5f09d8f227abc7896bc0a335d",
@@ -481,7 +481,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "bdd677f53ec15bf7afb8d0bdf38945f5ed3c9621fe21b32986cafba9ed3d943c",
+      "sha256": "4dc9a934e8686edbd438fe34de14f916db1a814ee159fa1a993b2801fcabf6b0",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -495,7 +495,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "721309823ada12705f8e79be8ecbb58f29a99030ff4bd278730309628bdc3326",
