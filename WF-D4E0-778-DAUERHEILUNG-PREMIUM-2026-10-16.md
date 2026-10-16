@@ -156,7 +156,7 @@
 | `unittest scripts.tests.test_affiliate_exemption` | ✅ **23/23** (Single-Path-Tests + BestandGate-Dependency) |
 | `check_uniqueness.py` | ✅ 0 kritisch (live↔live) |
 | `selftest_runner.py` (voll, mit Uhr-Proben) | ✅ **208 Wachen · 416 Uhr-Proben** (war: 3 Ausnahmen) |
-| `unittest discover -s scripts/tests` | ✅ **3293 Tests, 0 Fehler** (nach Merge mit `main` + Siegelneustand) |
+| `unittest discover -s scripts/tests` | ✅ **3309 Tests, 0 Fehler** (nach beiden Merges mit `main` + Siegelstand) |
 | FEST-Siegel (`integrity_guard.py`) | ✅ `--heal` auf committetem Drift, verkettet, Stufe 4 |
 
 ### 4.1 Merge mit `main` (16.10.2026, Konfliktlösung)
@@ -175,6 +175,12 @@ Dauerheilung. Auflösung nach Nutzen und Beweislage:
 * `scripts/tests/test_affiliate_exemption.py`: **Vereinigung** beider Testklassen
   (`RenderProofSinglePathTests` + `BestandGateSelftestDependencyTests`).
 * `data/integrity_lock.json`: über `integrity_guard.py --heal` nach dem Merge neu versiegelt.
+
+Ein zweiter Merge desselben Tages brachte zusätzlich den WF-53E2-Fix des Affiliate-Gates
+(`3cb1f52`, „ein Auswerter“ – identische Zielrichtung wie die #778-Fassung); übernommen wurde
+die `main`-Fassung, die #778-Regressionstests (`RenderProofSinglePathTests`) laufen gegen
+beide Fassungen und sperren die Fehlerklasse. Finale Batterie nach beiden Merges:
+**3309 Tests, 0 Fehler**.
 
 ## 5. Abgrenzung
 
