@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 16.10.2026 17:24 (Europe/Berlin)  
+> Automatisch aktualisiert: 16.10.2026 21:58 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -35,15 +35,15 @@
 ### Mi, 21. Oktober 2026
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **07:30** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
 ### Sa, 24. Oktober 2026
 - **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **11:30** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
-- **17:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
+- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
 - **11:30** ⏳ Internet & DSL wechseln: So gelingt der Anbieterwechsel — _zahl_ · Evergreen  
