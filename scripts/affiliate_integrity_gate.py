@@ -944,6 +944,10 @@ def verify_article_render(article: dict, reg: dict,
               "expected_keys": [], "rendered_keys": [],
               "expected": 0, "rendered": 0, "html_found": False,
               "exempt": exempt, "exempt_reason": reason}
+    # Sichtbar, nicht versteckt (#762, #779/#785, #777/#784): Eine GÜLTIGE
+    # Ausnahme steht samt Begründung als nicht blockierender Hinweis im Befund
+    # – auch wenn der Artikel zusätzlich Links trägt (die bleiben voll
+    # geprüft). Eine ungültige erscheint nie als genehmigt.
     if exempt and not exempt_error:
         result["notes"].append(
             "Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: "
@@ -998,19 +1002,35 @@ def verify_article_render(article: dict, reg: dict,
 
     # --- Mindestbestand: ein Artikel ohne gerenderten Affiliate-Link
     #     monetarisiert nicht und ist kein Beweis-fähiger Zustand.
-    # DAUERHEILUNG #764 (15.10.2026): `affiliate_exempt: true` mit
-    # Begründung befreit redaktionell (reine Messtests, technische
-    # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
-    # affiliate_link_check – keine zweite Messregel (Root Cause
-    # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
-    #     braucht entweder einen Beleg-fähigen CTA oder die ausdrücklich
-    #     begründete redaktionelle Ausnahme aus derselben Frontmatter-Prüfung
-    #     wie oben. Die Ausnahme hebt NUR diese Mindestpflicht auf; alle
-    #     Markdown-/HTML-, Registry-, Gateway-, Sponsoring- und Metadaten-
-    #     Prüfungen bleiben aktiv. Insbesondere darf dieser Pfad den
-    #     Artikel nicht ein zweites Mal über einen anderen Adapter/die Datei
-    #     lesen: `article["fm"]` ist hier bereits die geprüfte SSOT.
-    if not gateway_anchors and not (exempt and not exempt_error):
+    #     AUSNAHME (#762): Ein Artikel mit `affiliate_exempt: true` + nichtleerer
+    #     Begründung trägt bewusst KEINEN Affiliate-CTA (redaktionelle
+    #     Entscheidung, z. B. reiner Messtest ohne passendes Tarifangebot).
+    #     Für ihn ist „kein Link im HTML“ kein Schaden, sondern der
+    #     dokumentierte Zustand. Die Ausnahme hebt AUSSCHLIESSLICH diese
+    #     Mindestpflicht auf – Route, Deep-Link, Partner-ID, rel=sponsored,
+    #     Gateway-Beweis und Metadaten werden für jeden vorhandenen Link
+    #     weiterhin geprüft (unten). Eine UNGÜLTIGE Ausnahme hebt nichts auf:
+    #     Dann stehen beide Funde – „Ausnahme ungültig“ (oben) und „kein
+    #     Link“ (hier); wer nur das Flag entfernt, ist noch nicht fertig (#785).
+    #
+    # EIN VERTRAG, EIN AUSWERTER (WF-53E2 / #780, 16.10.2026)
+    # ---------------------------------------------------------------
+    # Die Ausnahme wird GENAU EINMAL ausgewertet: oben, über den Vertrag
+    # (`exemption_contract.exemption_for_article`) und aus dem Frontmatter,
+    # das der Lauf geladen hat (`article["fm"]`). Hier wird nur verzweigt.
+    # PR #776 hatte an dieser Stelle eine zweite Auswertung eingebaut – die
+    # Datei unter `article["path"]` erneut gelesen, selbst gesplittet und
+    # JEDEN Fehler mit `except Exception: exempt = False` verschluckt; der
+    # sichtbare Hinweis entfiel. Der Detektor-Selbsttest (Artikel aus dem
+    # Speicher, ohne Datei) war ab dem Merge rot, die tägliche Wache stand
+    # am 16.10. fail-closed (#780). Die beiden parallelen Reparaturen #785
+    # und #784 wurden danach binnen 77 Sekunden gemergt; ihre Zusammen-
+    # führung hinterließ zwei `if`-Köpfe und zwei Hinweistexte – ein
+    # IndentationError auf `main`, an dem jeder Aufrufer abstürzte.
+    # Deshalb: kein Dateizugriff, kein zweiter Parser, kein Sammel-except,
+    # genau EIN Hinweis und EINE Bedingung. Bewacht durch Selbsttest 8b
+    # (d/e) und test_affiliate_exemption.py.
+    if not gateway_anchors and not exempt:
         result["problems"].append(
             "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
             "oder wird nicht gerendert")
@@ -1890,6 +1910,10 @@ def run_selftest() -> list[str]:
         expect(any("ausgenommen" in n.lower() and grund in n
                    for n in res_exempt["notes"]),
                "die gültige Ausnahme samt Begründung muss als Hinweis sichtbar bleiben")
+        # … und zwar GENAU EINMAL: Zwei Hinweistexte waren die Spur der
+        # verunglückten Zusammenführung von #785/#784 (#780).
+        expect(len([n for n in res_exempt["notes"] if "ausgenommen" in n.lower()]) == 1,
+               f"genau EIN Ausnahme-Hinweis erwartet: {res_exempt['notes']}")
 
         # b) OHNE Ausnahme bleibt der Befund bestehen (kein Fehlalarm-Refix).
         a_ohne = _art("2026-09-04-messtest", "pillar: \"internet-dsl\"\n")
@@ -1913,6 +1937,35 @@ def run_selftest() -> list[str]:
                "eine Ausnahme ohne Begründung muss fail-closed ein Fund sein")
         expect(not any("ausgenommen" in n.lower() for n in res_halbe["notes"]),
                "eine ungültige Ausnahme darf nicht als genehmigt erscheinen")
+        # … und sie hebt die Mindestpflicht NICHT auf: ohne Link stehen beide
+        # Funde (#785) – Metadaten reparieren UND Link oder gültige Ausnahme.
+        expect(any("Kein einziger Affiliate-Link" in p for p in res_halbe["problems"]),
+               "eine ungültige Ausnahme darf den 'kein Affiliate-Link'-Fund nicht "
+               f"aufheben: {res_halbe['problems']}")
+
+        # e) EINE QUELLE (WF-53E2 / #780): Der Render-Beweis urteilt über das
+        #    Frontmatter, das der Lauf GELADEN hat – nie über eine zweite
+        #    Lesung der Datei. Die Fälle a–d laufen ohne Datei (Artikel aus
+        #    dem Speicher, wie publish_gate/bestand_gate sie auch reichen);
+        #    hier widerspricht die Platte dem geladenen Stand absichtlich in
+        #    beide Richtungen. Eine Zweitlesung fiele in genau einer davon um.
+        md_pfad = root5 / "content" / "posts" / "2026-09-04-messtest" / "index.md"
+        md_pfad.parent.mkdir(parents=True, exist_ok=True)
+        md_pfad.write_text("---\ntitle: \"Messtest\"\n---\n\nKein CTA.\n",
+                           encoding="utf-8")
+        res_platte = verify_article_render(a_exempt, {}, root5 / "public")
+        expect(not res_platte["problems"]
+               and any("ausgenommen" in n.lower() for n in res_platte["notes"]),
+               "der Render-Beweis muss das GELADENE Frontmatter auswerten, nicht "
+               f"die Datei erneut lesen (#780): {res_platte['problems']}")
+        md_pfad.write_text(
+            f'---\naffiliate_exempt: true\naffiliate_exempt_reason: "{grund}"\n'
+            "---\n\nKein CTA.\n", encoding="utf-8")
+        res_platte_ohne = verify_article_render(a_ohne, {}, root5 / "public")
+        expect(any("Kein einziger Affiliate-Link" in p
+                   for p in res_platte_ohne["problems"]),
+               "eine Ausnahme, die nur in der Datei steht, darf den geladenen "
+               "Stand nicht überstimmen (eine Quelle, #780)")
 
     # 9) HERZSCHLAG vs. BEFUND (Reparatur #281) – der Kern der dauerhaften
     #    Behebung. Ein zweiter Lauf mit UNVERÄNDERTEM Befund MUSS den
@@ -2038,7 +2091,8 @@ def main() -> int:
               "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext, "
               "Herzschlag vs. Befund aus #281, geheilte Historie vs. offene "
               "Restmenge aus #446, CTA-Heilung für Entwürfe #295, "
-              "Affiliate-Ausnahme #762 inkl. fail-closed Halbangabe).")
+              "Affiliate-Ausnahme #762 inkl. fail-closed Halbangabe, "
+              "eine Quelle ohne Zweitlesung #780).")
         return EXIT_OK
 
     # ---- Datei-bezirkelte Heilung (#295) ------------------------------

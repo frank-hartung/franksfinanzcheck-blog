@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-16T15:50:55.129100+00:00",
-  "head": "3d2887c",
+  "signed_at": "2026-10-16T15:39:17.629144+00:00",
+  "head": "0c13fb3",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -22,7 +22,7 @@
     "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
     "layouts/shortcodes/einspartabelle.html": "172a4812488cecfd147dc8d03ffba0971fbb12c2a5fa8b2dbd5771590ef2c393",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
-    "scripts/affiliate_integrity_gate.py": "c4a7f1f06559539acf791338d51add00cb007a7295405ec16937af88a0cb50b3",
+    "scripts/affiliate_integrity_gate.py": "7a1f1d3ba81cb46e720558f3ed6447af45a477110ef05f689126188b5cba91fc",
     "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -53,9 +53,39 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "f3f443c8d5eba67be54f3313e3931dca0307862e7c648a81e65e733970639591",
-  "audit_start_sha256": "8ed9b709acbf1703131ce8db385dfcbd4deb402ee403d341bac9a877370baaf1",
+  "files_sha256": "be8e9e02f1b372aa3171ba925be786fefae8ae6140b9cf2e86ef591222b8922b",
+  "audit_start_sha256": "a3541667c6ad68ec5d45cefe8cac9a6e9334e942c4b511e42b313cfbcc099a06",
   "audit": [
+    {
+      "date": "2026-10-12",
+      "art": "heal",
+      "head": "123b6a3",
+      "geaendert": [
+        "scripts/lesbarkeit_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "fd16147",
+              "datum": "2026-10-12",
+              "betreff": "feat(heiler): Nachsorge-Auswahl --entwuerfe für Entwürfe unter der Schwelle (#712)"
+            },
+            {
+              "sha": "6e8162c",
+              "datum": "2026-10-12",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "ee9606650f8c2d32674ae4448a1f57fa5d10cb1ce56ae5b1868b96630189fc84",
+      "prev_sha256": null
+    },
     {
       "date": "2026-10-12",
       "art": "heal",
@@ -146,7 +176,7 @@
         }
       ],
       "files_sha256": "9b87ad71f54fb76c83566aae3e4999dbf5f36be17221ec8086b24ddf4ae4116b",
-      "prev_sha256": null
+      "prev_sha256": "a3541667c6ad68ec5d45cefe8cac9a6e9334e942c4b511e42b313cfbcc099a06"
     },
     {
       "date": "2026-10-13",
@@ -519,7 +549,7 @@
     {
       "date": "2026-10-16",
       "art": "set-current",
-      "head": "3d2887c",
+      "head": "0c13fb3",
       "geaendert": [
         "scripts/affiliate_integrity_gate.py"
       ],
@@ -530,6 +560,11 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
+              "sha": "0c13fb3",
+              "datum": "2026-10-16",
+              "betreff": "fix(affiliate): Ausnahme-Vertrag mit einem Auswerter – Wache wieder sehend (WF-53E2, #780)"
+            },
+            {
               "sha": "f7517a5",
               "datum": "2026-10-16",
               "betreff": "Fix quality-gate self-tests and preserve fail-closed contracts (#777) (#784)"
@@ -538,37 +573,13 @@
               "sha": "1a44e39",
               "datum": "2026-10-16",
               "betreff": "fix(affiliate): restore fail-closed render proof (#779) (#785)"
-            },
-            {
-              "sha": "b774e34",
-              "datum": "2026-10-16",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
             }
           ],
           "commits_art": "letzte-commits"
         }
       ],
-      "files_sha256": "6b9a10468376a9e32d611c0e20438529b70d471eda48a1b1d89349a2e52deef3",
-      "prev_sha256": "002f74b5c4fcc4de1dd158371580cff4bc7d33218185dcd43a7e5cddddb22ab6"
-    },
-    {
-      "date": "2026-10-16",
-      "art": "set-current",
-      "head": "3d2887c",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "prev_sha256": "0bd92fb4430eccb64acab868e9d49aa02b7bdc758718bfd1aa8dd9b34a736c35",
-      "files_sha256": "f3f443c8d5eba67be54f3313e3931dca0307862e7c648a81e65e733970639591"
+      "prev_sha256": "002f74b5c4fcc4de1dd158371580cff4bc7d33218185dcd43a7e5cddddb22ab6",
+      "files_sha256": "be8e9e02f1b372aa3171ba925be786fefae8ae6140b9cf2e86ef591222b8922b"
     }
   ]
 }

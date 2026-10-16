@@ -335,9 +335,22 @@ def _check_cta():
     (A8) fehlte die Ausnahme aber – zwei Wachen mit widersprüchlichen
     Verträgen (identischer Root Cause wie #676), die dazu führten, dass
     ein explizit als CTA-frei markierter DNS-Messtest den gesamten
-    Bestand blockierte. Die Ausnahme wird DIESELBE Messung aus der SSOT
-    (affiliate_exemption in affiliate_link_check.py) – keine zweite,
-    eigene Implementierung (Lektion #521).
+    Bestand blockierte.
+
+    EIN VERTRAG, EIN AUSWERTER (WF-53E2 / #780, 16.10.2026): Die Ausnahme
+    kommt direkt aus `scripts/affiliate_exemption.py` (`exemption_for_text`
+    auf dem schon gelesenen Text, Frontmatter-Grenze wie Hugo) – nicht über
+    den Umweg einer anderen Wache, ohne zweites Lesen der Datei, ohne
+    eigenes `split("---")` und ohne `except Exception`. Die Fassung aus #776
+    verschluckte jeden Fehler zu „keine Ausnahme“ – und im FIX-Modus folgte
+    daraus eine eingefügte Werbe-CTA. Seitdem gilt fail-closed in die
+    richtige Richtung:
+      · gültige Ausnahme     → keine CTA-Pflicht, nichts wird geschrieben
+      · ungültige Ausnahme   → Fund A8, auch im FIX-Modus KEINE CTA: Wer das
+                               Flag setzt, will keinen CTA; ob Begründung
+                               nachgetragen oder Flag entfernt wird, ist eine
+                               Redaktionsentscheidung (#762-Vertrag)
+      · keine Ausnahme       → wie bisher: CTA-Baustein ergänzen (FIX)
     """
     # Pillar → passender /go/-Key für deterministische Selbstheilung
     PILLAR_CTA = {
@@ -348,28 +361,28 @@ def _check_cta():
         "strom-sparen": "strom",
         "mietwagen": "mietwagen",
     }
-    # SSOT-Import der Exemption (keine Abschreibung).
-    from affiliate_link_check import affiliate_exemption  # noqa: E402
+    # Der Vertrag selbst – nicht der Adapter einer anderen Wache (#780).
+    # Bewusst hier importiert: Nur A8 braucht PyYAML; fehlt es, scheitert
+    # der Check laut statt still „keine Ausnahme“ anzunehmen.
+    import affiliate_exemption as exemption_contract  # noqa: PLC0415
     for slug in _post_slugs():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
-        c = open(p, encoding="utf-8").read()
+        with open(p, encoding="utf-8") as fh:
+            c = fh.read()
         n = len(re.findall(r"\]\(/go/[\w-]+/\)", c)) \
             + len(re.findall(r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", c))
         if n > 0:
             continue
-        # Redaktionelle Ausnahme berücksichtigen (A8 blockiert sonst
-        # Artikel, die A1 korrekt als exempt wertet – Root Cause #764).
-        # affiliate_exemption erwartet ein Post-Dict mit "frontmatter"-Feld
-        # (SSOT-Signatur), nicht einen Dateipfad.
-        try:
-            with open(p, encoding="utf-8") as _f:
-                _c = _f.read()
-            _parts = _c.split("---", 2)
-            _post_dict = {"frontmatter": _parts[1] if len(_parts) >= 2 else ""}
-            exempt, exempt_reason, exempt_err = affiliate_exemption(_post_dict)
-        except Exception:
-            exempt, exempt_err = False, True
-        if exempt and not exempt_err:
+        # Redaktionelle Ausnahme (#762/#764): EINE Auswertung über den
+        # Vertrag, auf dem Text, der hier ohnehin gelesen ist.
+        exempt, _reason, exempt_error = exemption_contract.exemption_for_text(c)
+        if exempt_error:
+            PROBLEMS.append(("A8", slug,
+                             "Affiliate-Ausnahme ungültig – keine automatische "
+                             "CTA-Ergänzung (Redaktionsentscheidung: Begründung "
+                             f"nachtragen oder Flag entfernen): {exempt_error}"))
+            continue
+        if exempt:
             continue
         if DO_FIX:
             pm = re.search(r"^pillar:\s*[\"']?([\w-]+)", c, re.M)
@@ -392,8 +405,8 @@ def _check_cta():
                    f"[**Jetzt {label}**](/go/{go_key}/) – in wenigen Minuten "
                    f"siehst du, was du sparst.\n")
             parts[2] = body[:ip] + cta + body[ip:]
-            open(p, "w", encoding="utf-8").write(
-                join_article(parts[1], parts[2], parts[0]))
+            with open(p, "w", encoding="utf-8") as fh:
+                fh.write(join_article(parts[1], parts[2], parts[0]))
             FIXED.append(("A8", slug, f"Affiliate-CTA ergänzt (→ /go/{go_key}/)"))
             continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
         PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))
@@ -417,6 +430,27 @@ def _selftest():
         fehler.append("interner Link-Zähler defekt")
     if not re.search(r"^draft:\s*true", "draft: true", re.M):
         fehler.append("Draft-Regex defekt (Live-Ziel-Filter)")
+    # A8-Ausnahme (#762/#780): derselbe Vertrag wie die Integritäts-Wache.
+    # Ist er nicht ladbar, wäre A8 blind und würde im FIX-Modus einem
+    # ausgenommenen Artikel eine Werbe-CTA einsetzen – dann lieber gar nichts
+    # ändern (Exit 2) als falsch heilen.
+    try:
+        import affiliate_exemption as exemption_contract  # noqa: PLC0415
+    except ImportError as exc:
+        fehler.append(f"Ausnahme-Vertrag nicht ladbar – A8 wäre blind: {exc}")
+    else:
+        gueltig = exemption_contract.exemption_for_text(
+            '---\naffiliate_exempt: true\naffiliate_exempt_reason: "Messtest"\n'
+            "---\n\nText")
+        halb = exemption_contract.exemption_for_text(
+            "---\naffiliate_exempt: true\n---\n\nText")
+        ohne = exemption_contract.exemption_for_text('---\ntitle: "x"\n---\n\nText')
+        if gueltig != (True, "Messtest", ""):
+            fehler.append("A8: gültige Ausnahme wird nicht erkannt")
+        if halb[0] or not halb[2]:
+            fehler.append("A8: halbe Ausnahme wird nicht als Fund erkannt")
+        if ohne != (False, "", ""):
+            fehler.append("A8: Artikel ohne Angabe wird fälschlich ausgenommen")
     return fehler
 
 
