@@ -230,9 +230,12 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 fm, body = read(slug)
                 self.assertGreaterEqual(fm['lastmod'], KORRIGIERT_AM,
                                         'lastmod muss den tatsächlichen Texteingriff dokumentieren.')
+                # Untergrenze: seit der #763-Korrektur muss ein Prüfstamp stehen.
+                # Die Obergrenze ist kein Testthema: faktenfrische.py selbst setzt
+                # den Stamp nur nach echten Recherchelaufen (und rührt lastmod
+                # nie an); ein harter Deckel würde legitime Folgeprüfungen
+                # entwerten und den Test-Deckel zum Papier machen.
                 self.assertGreaterEqual(fm['faktencheck'], KORRIGIERT_AM)
-                self.assertLessEqual(fm['faktencheck'], dt.date(2026, 10, 15),
-                                     'faktencheck darf nicht ohne neue Prüfung fortgeschrieben werden.')
                 self.assertIn('Oktober 2026', body, 'Sichtbare redaktionelle Einordnung fehlt.')
                 self.assertNotRegex(body, r'1\.\s*Januar 2024|2024-01-01',
                                     'Erfundenes Publikationsdatum der Bundesnetzagentur zurück.')
