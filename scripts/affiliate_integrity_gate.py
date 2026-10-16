@@ -944,6 +944,10 @@ def verify_article_render(article: dict, reg: dict,
               "expected_keys": [], "rendered_keys": [],
               "expected": 0, "rendered": 0, "html_found": False,
               "exempt": exempt, "exempt_reason": reason}
+    if exempt and not exempt_error:
+        result["notes"].append(
+            "Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: "
+            f"{exemption_contract.exemption_label(reason)}")
 
     html_path = article_html_path(slug, public)
     if not html_path.is_file():
@@ -999,24 +1003,10 @@ def verify_article_render(article: dict, reg: dict,
     # Erläuterungen ohne passendes Tarifangebot). Dieselbe SSOT wie in
     # affiliate_link_check – keine zweite Messregel (Root Cause
     # identisch zu #676: zwei Wachen, ein Vertrag, zwei Wahrheiten).
-    if not gateway_anchors:
-        exempt = False
-        try:
-            from affiliate_link_check import affiliate_exemption  # noqa: E402
-            # affiliate_exemption erwartet Post-Dict mit "frontmatter"-Feld.
-            with open(article["path"], encoding="utf-8") as _f:
-                _c = _f.read()
-            _parts = _c.split("---", 2)
-            _post_dict = {"frontmatter": _parts[1] if len(_parts) >= 2 else ""}
-            ex_ok, _ex_reason, ex_err = affiliate_exemption(_post_dict)
-            if ex_ok and not ex_err:
-                exempt = True
-        except Exception:
-            exempt = False
-        if not exempt:
-            result["problems"].append(
-                "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
-                "oder wird nicht gerendert")
+    if not gateway_anchors and not (exempt and not exempt_error):
+        result["problems"].append(
+            "Kein einziger Affiliate-Link im gebauten HTML – CTA fehlt "
+            "oder wird nicht gerendert")
 
     # --- Compliance/Attribution der gerenderten Gateway-Links
     unregistered = sorted({k for k in rendered_keys if k not in reg})
@@ -1890,8 +1880,9 @@ def run_selftest() -> list[str]:
         expect(not res_exempt["problems"],
                "eine gültige Ausnahme darf keinen 'kein Affiliate-Link'-Fund "
                f"erzeugen (#762): {res_exempt['problems']}")
-        expect(any("ausgenommen" in n for n in res_exempt["notes"]),
-               "die Ausnahme muss als Hinweis sichtbar bleiben (nicht versteckt)")
+        expect(any("ausgenommen" in n.lower() and grund in n
+                   for n in res_exempt["notes"]),
+               "die gültige Ausnahme samt Begründung muss als Hinweis sichtbar bleiben")
 
         # b) OHNE Ausnahme bleibt der Befund bestehen (kein Fehlalarm-Refix).
         a_ohne = _art("2026-09-04-messtest", "pillar: \"internet-dsl\"\n")
@@ -1913,6 +1904,8 @@ def run_selftest() -> list[str]:
         res_halbe = verify_article_render(a_halbe, {}, root5 / "public")
         expect(any("Affiliate-Ausnahme ungültig" in p for p in res_halbe["problems"]),
                "eine Ausnahme ohne Begründung muss fail-closed ein Fund sein")
+        expect(not any("ausgenommen" in n.lower() for n in res_halbe["notes"]),
+               "eine ungültige Ausnahme darf nicht als genehmigt erscheinen")
 
     # 9) HERZSCHLAG vs. BEFUND (Reparatur #281) – der Kern der dauerhaften
     #    Behebung. Ein zweiter Lauf mit UNVERÄNDERTEM Befund MUSS den
