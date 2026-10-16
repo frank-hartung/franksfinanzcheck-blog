@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-15T23:46:09Z",
+  "generated_at": "2026-10-16T04:41:57Z",
   "modus": "kandidaten",
-  "commit": "052c63266d2054c57ed7151c710137cedf53b4b3",
+  "commit": "1811a6aecd329ef210cabf41feb7b2f92f4b58f5",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -37,6 +37,23 @@
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
+      "sha256": "92e5b82d566c2cccd047609523a30ca42826722cfc32acf83a5c453034e190d3",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "f190e11b4d81595c0fad81015986a105f2ad70c32447fec3846c0c7ced1a967b",
@@ -955,6 +972,23 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
+      "sha256": "a03a48b146e8cd419447ffa338bef7bb96abdc4ec0fb2e95d97fb757fb7c7b26",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-06",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "83f31a18eccb479158577dfc8df20e68cfcadd2bca4338b958889ba1842b403b",
