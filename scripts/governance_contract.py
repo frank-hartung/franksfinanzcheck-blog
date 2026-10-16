@@ -167,6 +167,13 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # erst vom Deploy-Lauf. Diese Wache haelt den Vertrag selbst,
           # damit die Schreib-Seite nie ohne pruefbare Schwelle heilt.
           "publikations_vertrag.py",
+          # Redaktions-Standard-Wache (16.10.2026, WF-6F7F / #783): Sie
+          # entscheidet, welcher Artikel Entwurf bleibt und welcher live geht,
+          # und heilt RS1-RS8. Bis heute stand sie NICHT im vertraglichen
+          # Minimum – ihr Selbsttest lief nur über die Entdeckung des Runners.
+          # Genau dieser Selbsttest hat den Vorfall #783 aufgedeckt; dass er
+          # Pflicht ist, war nirgends zugesichert. Nachgetragen (C6).
+          "redaktions_standard.py",
           "umami_clicks.py", "click_attribution.py",
           # Umsatz-Messkette (19.09.2026): Views-Nenner, Wochen-Trichter und
           # Ketten-Guard sind Wachen wie alle anderen –
@@ -401,6 +408,18 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Install. Eine Wache, die niemand verlangt, führt niemand aus –
           # deshalb steht ihr Selbsttest im vertraglichen Minimum (C6).
           "manifest_guard.py",
+          # Wachen-Vertrag (16.10.2026, WF-6F7F / #783): PR #776 hat beim
+          # Rebase Kopf und Selbsttest der Redaktions-Wache aus der neueren
+          # Fassung genommen und den Rumpf aus der älteren – eine Datei, die
+          # syntaktisch gültig war und deren `main()` fünf nicht mehr
+          # existierende Funktionen rief. Der Selbsttest schlug an (Exit 2),
+          # der Heilpfad war trotzdem für jeden Lauf ein NameError: Diese
+          # Klasse („zusammengesetzte Fassung“) hatte keine Wache. `wachen_
+          # vertrag.py` liest den Quelltext ALLER Skripte und meldet jeden
+          # aufgerufenen Namen und jede gelesene Konstante ohne Definition in
+          # ihrer Datei – ohne den Prüfling auszuführen. Ohne Eintrag hier
+          # liefe ihr Selbsttest in keinem Gate (C6).
+          "wachen_vertrag.py",
           # SEARCH-CONSOLE-KETTE (12.10.2026, Auftrag „alle Seiten verifiziert
           # und indexiert auf Premium-Level"): drei Wachen, eine Zuständigkeit
           # je Wache – und alle drei im vertraglichen Minimum, weil eine
@@ -2037,6 +2056,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
         script_texts, wflows, root=root, python_bin=python_bin, quick=quick)
     checks += c38_werkzeug_blockiert_nie(script_texts, wflows, root=root,
                                          python_bin=python_bin)
+    checks += c39_wache_ist_ganz_oder_gar_nicht(script_texts, wflows, root=root)
     return checks
 
 
@@ -2769,6 +2789,94 @@ def c38_werkzeug_blockiert_nie(script_texts, wflows, root=BLOG_DIR,
             out.append(("C38", f"scripts/tests/{name} fehlt – der Vertrag "
                                "„Werkzeug blockiert nie die Auslieferung“ "
                                "wäre ungetestet (#740)."))
+    return out
+
+
+# --- C39: Eine Wache ist ganz oder gar nicht (WF-6F7F / #783, 16.10.2026) --
+#
+# Befund: PR #776 hat beim Rebase in `scripts/redaktions_standard.py` Kopf und
+# Selbsttest aus der neueren Fassung (#766, Faustregel-POOL) behalten und den
+# RS3-Rumpf aus der älteren genommen („Faustregel-Konflikte zugunsten der
+# themenspezifischen Varianten aufgelöst"). Ergebnis: eine syntaktisch gültige,
+# in sich widersprüchliche Datei. `main()` rief fünf Funktionen auf, die es
+# nicht mehr gab; der eingefrorene Selbsttest las drei Konstanten, die es nicht
+# mehr gab. Folgen: `--selftest` Exit 2 (Lauf 38893209063 → Meldung #783),
+# Qualitäts-Gate rot ab 15.10. 18:19 (Lauf 38784603892, Schritt
+# „Governance-Selbsttests …"), Regression rot (38784546132), und der Heilpfad
+# der Redaktions-Wache war für jeden echten Lauf ein `NameError`.
+#
+# Der Vertrag hat vier Teile:
+#   a) Die Wache ist da, prüft die drei Klassen und hat einen Selbsttest.
+#   b) Sie steht im vertraglichen Minimum (GUARDS/C6) – sonst liefe ihr
+#      Selbsttest in keinem Gate.
+#   c) Der LIVE-Lauf über den echten Quelltext ist still – gerufen über
+#      DIESELBE Funktion, die auch die Wache benutzt (`befunde`); eine zweite
+#      Messung wäre die nächste Doppel-Wahrheit.
+#   d) Sie ist verdrahtet: Das Qualitäts-Gate ruft `governance_contract.py
+#      --quick` (hier läuft C39), und der Regressionstest existiert.
+C39_WACHE = "wachen_vertrag.py"
+C39_KLASSEN = ("W1-KONFLIKT-MARKER", "W2-HALBER-AUFRUF", "W3-HALBE-KONSTANTE")
+C39_TEST = "test_wachen_vertrag.py"
+C39_GATE = "link-check.yml"
+C39_GATE_AUFRUF = "governance_contract.py --quick"
+
+
+def _c39_modul(root=BLOG_DIR):
+    """Die Wache importieren (ein Fehler ist ein Befund, kein Absturz)."""
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import wachen_vertrag  # noqa: PLC0415
+        return wachen_vertrag, ""
+    except Exception as exc:  # noqa: BLE001
+        return None, (f"scripts/{C39_WACHE} nicht importierbar: "
+                      f"{exc.__class__.__name__}: {exc}")
+
+
+def c39_wache_ist_ganz_oder_gar_nicht(script_texts, wflows, root=BLOG_DIR,
+                                      live=True):
+    out = []
+    quelle = (script_texts or {}).get(C39_WACHE, "")
+    if not quelle.strip():
+        out.append(("C39", f"scripts/{C39_WACHE} fehlt – eine halbe Wache wäre "
+                           "wieder unbewacht (#783)."))
+        return out
+    for klasse in C39_KLASSEN:
+        if klasse not in quelle:
+            out.append(("C39", f"scripts/{C39_WACHE}: Klasse {klasse} fehlt – "
+                               "wer eine Klasse entfernt, entfernt den Vertrag "
+                               "(#783)."))
+    if '"--selftest"' not in quelle and "'--selftest'" not in quelle:
+        out.append(("C39", f"scripts/{C39_WACHE} hat keinen `--selftest` (C6)."))
+    if C39_WACHE not in GUARDS:
+        out.append(("C39", f"scripts/{C39_WACHE} steht nicht im vertraglichen "
+                           "Minimum (GUARDS/C6) – sein Selbsttest liefe nie."))
+    if not os.path.isfile(os.path.join(root, "scripts", "tests", C39_TEST)):
+        out.append(("C39", f"scripts/tests/{C39_TEST} fehlt – ein Vertrag ohne "
+                           "Regressionstest ist Prosa (#783)."))
+    gate = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C39_GATE:
+            gate = inhalt or ""
+    if C39_GATE_AUFRUF not in gate:
+        out.append(("C39", f"{C39_GATE} ruft `{C39_GATE_AUFRUF}` nicht – dann "
+                           "läuft C39 in keinem Gate (#783)."))
+    if live:
+        from pathlib import Path  # noqa: PLC0415 – nur für diesen Aufruf
+        modul, fehler = _c39_modul(root)
+        if modul is None:
+            out.append(("C39", fehler))
+        else:
+            try:
+                funde = modul.befunde(Path(root))
+            except Exception as exc:  # noqa: BLE001 – ein Absturz ist ein Befund
+                out.append(("C39", f"scripts/{C39_WACHE}: Lauf nicht auswertbar: "
+                                   f"{exc.__class__.__name__}: {exc}"))
+                funde = []
+            for f in funde[:12]:
+                out.append(("C39", f"{f.klasse} {f.pfad}:{f.stelle} – {f.meldung}"))
+            if len(funde) > 12:
+                out.append(("C39", f"… und {len(funde) - 12} weitere Fund(e) – "
+                                   f"Report: {modul.REPORT.name}"))
     return out
 
 
@@ -4753,6 +4861,28 @@ RULE_TEXT = {
            "falschen Text für gültig (Prüfer und Heiler widersprachen sich). "
            "Regressionstest + Selbsttest/Wirkungsprobe laufen im Vertrag "
            "(Pinterest P8, #729, 13.10.2026).",
+    "C39": "Eine Wache ist ganz oder gar nicht: Am 15.10.2026 hat PR #776 beim "
+           "Rebase in scripts/redaktions_standard.py Kopf und eingefrorene "
+           "Selbsttest-Faelle aus der neueren Fassung (#766, Faustregel-POOL) "
+           "behalten und den RS3-Rumpf aus der aelteren genommen "
+           "(Konflikt-Aufloesung 'zugunsten der themenspezifischen Varianten'). "
+           "Die Datei war syntaktisch gueltig und in sich widerspruechlich: "
+           "main() rief fuenf nicht mehr existierende Funktionen, der "
+           "Selbsttest las drei nicht mehr existierende Konstanten. Der "
+           "Selbsttest schlug an (Exit 2, Meldung #783), das Qualitaets-Gate "
+           "war ab 15.10. 18:19 rot, der Regressionstest ebenfalls - und der "
+           "Heilpfad der Redaktions-Wache war fuer jeden echten Lauf ein "
+           "NameError. Diese Klasse ('zusammengesetzte Fassung') hatte keine "
+           "Wache: alle bisherigen Pruefungen setzen voraus, dass eine Datei "
+           "funktioniert. Jetzt liest scripts/wachen_vertrag.py den Quelltext "
+           "aller Skripte (ohne sie auszufuehren) und meldet W1 "
+           "Konfliktmarker, W2 halbe Aufrufe und W3 halbe Konstanten - hart, "
+           "mit Paar-Regel fuer die Marker, mit begruendeten, datierten und "
+           "alternden Ausnahmen in data/wachen_vertrag_ausnahmen.yaml und mit "
+           "dem Vorfall als eingefrorenem Selbsttest-Fall. Die signierten "
+           "Kerndateien koennen textuell gar nicht mehr zusammengesetzt werden "
+           "(.gitattributes: merge=binary). Der Vertrag laeuft als C39 im "
+           "Qualitaets-Gate und woechtlich in der Governance (WF-6F7F, 16.10.2026).",
     "C38": "Ein Werkzeugfehler blockiert nie die Auslieferung – und kein "
            "Messlauf startet ohne sein Werkzeug. Am 14.10.2026 starb der "
            "deploy-Job zehnmal in Folge an der Quote-Nachfuellung, weil im "
@@ -4827,7 +4957,11 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                 "read-only-Takt, Stunden-Leiter statt 72-h-Schweigen)",
          "C38": "Werkzeug blockiert nie die Auslieferung (Blustradius-Register "
                 "je Schritt, EIN Meldeweg für Werkzeugbefunde, Messkette vor "
-                "jedem Messlauf, Watchdog urteilt statt zu fragen)"}
+                "jedem Messlauf, Watchdog urteilt statt zu fragen)",
+         "C39": "Eine Wache ist ganz oder gar nicht (halbe Fassungen nach einer "
+                "Konflikt-Auflösung: Aufrufe und Konstanten ohne Definition, "
+                "Konfliktmarker, begründete und alternde Ausnahmen, "
+                "merge=binary für die signierten Kerndateien)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -6426,7 +6560,65 @@ def _selftest():
             if "ungetestet" in f[1]]:
         failures.append("C38: eine fehlende Testdatei bleibt unentdeckt.")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C38 mit Kunstbefunden: Fehler "
+    # --- C39: Eine Wache ist ganz oder gar nicht (#783) --------------------
+    # Vier Proben: halbe Wache, ganze Wache, fehlende Wache, fehlende
+    # Verdrahtung. Die ersten beiden laufen über einen echten Mini-Baum – die
+    # Wache wird dabei NICHT ausgeführt, nur gelesen.
+    echte_c39 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in (C39_WACHE,) + tuple(
+                     os.path.basename(p) for p in sorted(
+                         glob.glob(os.path.join(BLOG_DIR, "scripts", "*.py"))))}
+    if c39_wache_ist_ganz_oder_gar_nicht(echte_c39, wflows_echt, root=BLOG_DIR):
+        failures.append("C39: der echte Zustand wird beanstandet: "
+                        f"{c39_wache_ist_ganz_oder_gar_nicht(echte_c39, wflows_echt, root=BLOG_DIR)}")
+    # (a) Die Wache fehlt: der Vertrag muss laut werden, nicht still.
+    ohne_wache = dict(echte_c39, **{C39_WACHE: ""})
+    if not [f for f in c39_wache_ist_ganz_oder_gar_nicht(
+            ohne_wache, wflows_echt, root=BLOG_DIR, live=False)
+            if "fehlt" in f[1]]:
+        failures.append("C39: eine fehlende Wachen-Vertrag-Wache bleibt unentdeckt (#783).")
+    # (b) Eine Klasse verschwindet aus der Wache.
+    ohne_klasse = dict(echte_c39, **{
+        C39_WACHE: echte_c39[C39_WACHE].replace("W2-HALBER-AUFRUF",
+                                                "W2-STILLGELEGT")})
+    if not [f for f in c39_wache_ist_ganz_oder_gar_nicht(
+            ohne_klasse, wflows_echt, root=BLOG_DIR, live=False)
+            if "W2-HALBER-AUFRUF" in f[1]]:
+        failures.append("C39: eine entfernte Wachen-Klasse bleibt unentdeckt (#783).")
+    # (c) Die Verdrahtung fällt: das Gate ruft den Vertrag nicht mehr.
+    ohne_gate = {k: (v.replace(C39_GATE_AUFRUF, "governance_contract.py")
+                     if os.path.basename(str(k)) == C39_GATE else v)
+                 for k, v in wflows_echt.items()}
+    if not [f for f in c39_wache_ist_ganz_oder_gar_nicht(
+            echte_c39, ohne_gate, root=BLOG_DIR, live=False)
+            if "läuft C39 in keinem Gate" in f[1]]:
+        failures.append("C39: ein Gate ohne Vertrags-Aufruf bleibt unentdeckt (#783).")
+    # (d) LIVE-Probe auf einem Mini-Baum: halbe Wache wird gemeldet, ganze
+    #     Wache bleibt still – sonst wäre der Vertrag ein Fehlalarm-Generator.
+    mini = tempfile.mkdtemp(prefix="c39-mini-")
+    os.makedirs(os.path.join(mini, "scripts", "tests"), exist_ok=True)
+    with open(os.path.join(mini, "scripts", "tests", C39_TEST), "w",
+              encoding="utf-8") as fh:
+        fh.write("# Platzhalter: nur die Existenz wird geprüft.\n")
+    with open(os.path.join(mini, "scripts", "halbe.py"), "w", encoding="utf-8") as fh:
+        fh.write("def main():\n    return faustregel_kontext(_bestand_texte())\n\n"
+                 "main()\n")
+    if not [f for f in c39_wache_ist_ganz_oder_gar_nicht(
+            echte_c39, wflows_echt, root=mini)
+            if "W2-HALBER-AUFRUF" in f[1]]:
+        failures.append("C39: eine halbe Wache im Mini-Baum bleibt unentdeckt (#783).")
+    with open(os.path.join(mini, "scripts", "halbe.py"), "w", encoding="utf-8") as fh:
+        fh.write("def _bestand_texte():\n    return {}\n\n\n"
+                 "def faustregel_kontext(texte):\n    return texte\n\n\n"
+                 "def main():\n    return faustregel_kontext(_bestand_texte())\n\n\n"
+                 "main()\n")
+    if [f for f in c39_wache_ist_ganz_oder_gar_nicht(
+            echte_c39, wflows_echt, root=mini)
+            if "W2-HALBER-AUFRUF" in f[1] or "W3-HALBE-KONSTANTE" in f[1]]:
+        failures.append("C39: eine VOLLSTÄNDIGE Wache im Mini-Baum wird "
+                        "beanstandet – der Vertrag wäre ein Fehlalarm (#783).")
+
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C39 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0
