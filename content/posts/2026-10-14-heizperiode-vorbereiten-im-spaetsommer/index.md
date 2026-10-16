@@ -37,7 +37,7 @@ Vor der Heizperiode lohnt sich ein strukturierter Check: Verbrauch dokumentieren
 
 **Transparenz:** Dieser Artikel enthält einen Affiliate-Link (Werbung). Beim Abschluss darüber erhalten wir eine Provision; für dich entstehen keine Mehrkosten. Der Link ist kein fachlicher Beleg und keine Empfehlung der Bundesnetzagentur.
 
-## Was du vor dem ersten Heizen prüfen kannst
+## Was du vor dem ersten heizen prüfen kannst
 
 | Aufgabe | Vorgehen | Grenze |
 |---|---|---|
