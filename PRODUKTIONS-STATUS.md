@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-16 11:21 UTC  
+**Stand:** 2026-10-16 18:03 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-10-16): 3 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 0 Tage: publish-gate: SEO-Audit (seo_audit.py) nicht bestanden; Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 40 (Ziel ≥ 60); Ø Wortlänge 6.6 (Ziel…)
 
