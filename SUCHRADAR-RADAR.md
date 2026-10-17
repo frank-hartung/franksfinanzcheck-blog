@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-16 12:13:39 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-10-17 11:47:36 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -19,8 +19,7 @@
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| searxng | 1 | 400 |
-| wikipedia | 9 | 300 |
+| wikipedia | 10 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -30,23 +29,13 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 
 | Domäne | Treffer | Top 3 | Ø Rang | Bester Rang |
 |---|---|---|---|---|
-| wikipedia.org | 60 | 24 | 4.92 | 1 |
-| ing.de | 1 | 1 | 1.0 | 1 |
-| lexware.de | 1 | 1 | 2.0 | 2 |
-| mlp-financify.de | 1 | 1 | 3.0 | 3 |
-| fixkostensenker.com | 1 | 0 | 4.0 | 4 |
-| peaks.com | 1 | 0 | 5.0 | 5 |
-| sparkasse.de | 1 | 0 | 6.0 | 6 |
-| meetadam.io | 1 | 0 | 7.0 | 7 |
-| ndr.de | 1 | 0 | 8.0 | 8 |
-| accountable.de | 1 | 0 | 9.0 | 9 |
-| finanzenfroh.com | 1 | 0 | 10.0 | 10 |
+| wikipedia.org | 70 | 27 | 5.0 | 1 |
 
 ## Sonderflächen auf den Ergebnisseiten
 
 | Merkmal | Vorkommen |
 |---|---|
-| wissensquelle | 60 |
+| wissensquelle | 70 |
 
 ## Störungen
 
@@ -54,7 +43,7 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
-| ['Versicherungsarten', 'Versicherungssumme berechnen', 'Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen'] | Kein Anbieter lieferte Treffer für "['Versicherungsarten', 'Versicherungssumme berechnen', 'Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditge |
+| ['Versicherungssumme berechnen', 'Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel'] | Kein Anbieter lieferte Treffer für "['Versicherungssumme berechnen', 'Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfall |
 
 ## Einordnung
 
