@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-15 08:44:42 UTC",
+ "generated_at": "2026-10-17 08:11:09 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 97,
- "checked_links": 236,
+ "checked_articles": 99,
+ "checked_links": 237,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -108,25 +108,14 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer",
-   "line": 131,
+   "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
+   "line": 99,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW4",
-   "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
-   "line": 128,
-   "route": "kfz-versicherung",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "Verbotenes Paar: Artikelthema „Mietwagen“ → Route „Kfz-Versicherung“. Fund 19.09.2026: Mietwagen-Ratgeber, erster UND letzter CTA „Mietwagen vergleichen“ → /go/kfz-versicherung/. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/mietwagen/?"
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

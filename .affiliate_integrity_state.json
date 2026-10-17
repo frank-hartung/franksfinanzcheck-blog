@@ -1,20 +1,20 @@
 {
- "generated_at": "2026-10-15 16:36:07 UTC",
+ "generated_at": "2026-10-17 08:11:07 UTC",
  "verdict_changed": true,
  "state_schema_version": 2,
  "exit_code": 0,
- "checked": 58,
+ "checked": 60,
  "healed": [],
  "healed_count": 0,
  "content_problems": [],
  "unresolved_problems": [],
  "errors": [],
  "build": {
-  "built": true,
-  "reason": "public/ veraltet → Hugo-Rebuild",
+  "built": false,
+  "reason": "public/ aktuell (kein Rebuild nötig)",
   "ok": true
  },
  "exemptions": {
-  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": "Reiner DNS-Messtest ohne passendes Tarifangebot; ein Tarif-CTA wäre sachfremd."
+  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": "Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd."
  }
 }
