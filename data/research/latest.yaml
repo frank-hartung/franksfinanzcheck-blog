@@ -1,5 +1,5 @@
-generated_at: '2026-10-16T08:29:44Z'
-day: '2026-10-16'
+generated_at: '2026-10-17T08:02:16Z'
+day: '2026-10-17'
 mode: deterministic
 teams:
   trending:
@@ -238,61 +238,60 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 'Auslandskrankenversicherung für Familien: Was sie kosten darf'
-    pillar: mietwagen
+  - topic: 10 Tipps für günstige Reiseversicherungen
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    source: topics:10 Tipps für günstige Reiseversicherungen
     score: 0.55
     keywords:
-    - Auslandskrankenversicherung Familie
-    - Reisekrankenversicherung Kosten
-    - Familienreiseschutz
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
+    - Reiseversicherung
+    - Versicherungsvergleich
+    - Günstige Versicherungen
+  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
+    score: 0.55
+    keywords:
+    - Energieausweis
+    - Energieausweis Kosten
+    - Energieeffizienzklasse Haus
+  - topic: Internet-Speed optimieren mit dem richtigen Router
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: topics:Internet-Speed optimieren mit dem richtigen Router
     score: 0.55
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: Energiekosten senken mit Smart-Home-Geräten
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Energiekosten senken mit Smart-Home-Geräten
-    score: 0.55
-    keywords:
-    - Smart-Home
-    - Energiekosten
-    - Strom sparen
-  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
-    score: 0.55
-    keywords:
-    - Stromanbieter Pleite
-    - Grundversorgung Strom
-    - Anbieterinsolvenz
-  - topic: 'Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen
-      kannst'
-    score: 0.55
-    keywords:
-    - Strompreis
-    - Entwicklung
-    - Kosten sparen
-  - topic: 'Störung beim Internetanbieter: Diese Rechte hast du'
+    - Internet-Speed
+    - Router
+    - Optimieren
+  - topic: Internet-Tarife im Vergleich
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Störung beim Internetanbieter: Diese Rechte hast du'
+    source: topics:Internet-Tarife im Vergleich
     score: 0.55
     keywords:
-    - Internetstörung Rechte
-    - Minderung Internetausfall
-    - Anbieter Entschädigung
+    - Internet
+    - Tarif
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Kontoeröffnung mit günstigen Gebühren
+    score: 0.55
+    keywords:
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    score: 0.55
+    keywords:
+    - Kreditkarten
+    - Bonusprogramm
+    - Kreditkartenvergleich
 live_web:
   enabled: false
   findings: []

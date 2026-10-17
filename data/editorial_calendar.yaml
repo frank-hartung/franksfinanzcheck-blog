@@ -1,5 +1,5 @@
-generated_at: '2026-10-16T08:29:45Z'
-start_date: '2026-10-17'
+generated_at: '2026-10-17T08:02:16Z'
+start_date: '2026-10-18'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
 - date: '2026-10-19'
@@ -92,29 +92,6 @@ slots:
 - date: '2026-10-28'
   weekday: Wed
   slot: 5
-  topic: Günstige Gasanbieter für den Haushalt finden
-  pillar: strom-sparen
-  source: topics
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
-
-    - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
-    neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
-    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
-    auf den eigenen Verbrauch an.'
-- date: '2026-10-30'
-  weekday: Fri
-  slot: 6
   topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
   pillar: konto-karten
   source: topics
@@ -132,49 +109,10 @@ slots:
 
     - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
     unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
-- date: '2026-11-02'
-  weekday: Mon
-  slot: 7
-  topic: So kannst du deine Heizkosten um 20 % senken
-  pillar: strom-sparen
-  source: topics
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Wie du mit einem Smart-Plug Energie sparen kannst
-
-    - [niche_hook] Energiekosten senken mit Smart-Home-Geräten
-
-    - [niche_hook] Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst
-
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.'
-- date: '2026-11-04'
-  weekday: Wed
-  slot: 8
-  topic: Energiekosten senken mit Smart-Home-Geräten
-  pillar: strom-sparen
-  source: topics
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] Energiekosten senken mit Smart-Home-Geräten
-
-    - [evergreen] Wie du mit einem Smart-Plug Energie sparen kannst
-
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.'
-- date: '2026-11-06'
+- date: '2026-10-30'
   weekday: Fri
-  slot: 9
-  topic: Haushaltskosten reduzieren mit einfachen Mitteln
+  slot: 6
+  topic: 5 einfache Schritte zum Aufbau eines Notgroschens
   pillar: frugalismus
   source: topics
   campaign: null
@@ -187,33 +125,16 @@ slots:
     - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
     geht es um bewussten Konsum, nicht um Askese.
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [pain_point] Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt
+    es nicht am Anbieter, sondern an Router und WLAN-Aufbau.
 
-    - [evergreen] Wie du mit einem Smart-Plug Energie sparen kannst'
-- date: '2026-11-09'
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.'
+- date: '2026-11-02'
   weekday: Mon
-  slot: 10
-  topic: Reise- und Unfallversicherungen im Vergleich
-  pillar: versicherungen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
-
-    - [evergreen] Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab
-
-    - [viral_outlier] Dein Haus sicher schützen: Das Vorsorge-Update 2026
-
-    - [viral_outlier] Privathaftpflicht: Warum sie unverzichtbar ist'
-- date: '2026-11-11'
-  weekday: Wed
-  slot: 11
-  topic: 'Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
+  slot: 7
+  topic: Kostenloses Girokonto ohne Gebühren finden
   pillar: konto-karten
   source: topics
   campaign: null
@@ -221,36 +142,119 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
-    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
-    Monaten wieder fallen.
-
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+    inzwischen öfter als nur beim Kontowechsel.
 
     - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
     vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
 
-    - [evergreen] 10 Tipps für günstige Reisekreditkarten'
-- date: '2026-11-13'
+    - [evergreen] 10 Tipps für günstige Reisekreditkarten
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
+- date: '2026-11-04'
+  weekday: Wed
+  slot: 8
+  topic: 'Grundversorgung raus: So entkommst du dem teuersten Stromtarif'
+  pillar: strom-sparen
+  source: topics
+  campaign: herbst-energiewechsel-2026
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+
+    - [niche_hook] Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+- date: '2026-11-06'
   weekday: Fri
-  slot: 12
-  topic: Günstige Reiseversicherungen für den Urlaub vergleichen
-  pillar: versicherungen
+  slot: 9
+  topic: 'Weihnachtsgeld clever umschulden: So nutzt du die Prämie für eine Sondertilgung'
+  pillar: konto-karten
   source: topics
   campaign: null
   cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
 
-    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
-    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.
+    - [evergreen] 10 Tipps für günstige Reisekreditkarten
 
-    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
+    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+    inzwischen öfter als nur beim Kontowechsel.
 
-    - [evergreen] Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.'
+- date: '2026-11-09'
+  weekday: Mon
+  slot: 10
+  topic: Wie du deine monatlichen Bankgebühren reduzieren kannst
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] 10 Tipps für günstige Reisekreditkarten
+
+    - [viral_outlier] Haushaltsbuch führen: App, Excel oder Papier?
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
+- date: '2026-11-11'
+  weekday: Wed
+  slot: 11
+  topic: Mietwagen-Kosten im Ausland minimieren
+  pillar: mietwagen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Versteckte Kosten im Mietwagenvertrag entschlüsseln
+
+    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
+    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+
+    - [niche_hook] Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick
+
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.'
+- date: '2026-11-13'
+  weekday: Fri
+  slot: 12
+  topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Kreditkarten mit Bonusprogramm: Welche sind die besten?
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] 10 Tipps für günstige Reisekreditkarten
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
