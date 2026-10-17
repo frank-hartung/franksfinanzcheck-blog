@@ -6,7 +6,7 @@ draft: true
 tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps"]
+keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps", "DNS-Server ändern für schnelleres Internet", "DNS Server ändern für schnelleres Internet", "DNS-Server", "schnelleres"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "DNS-Server ändern für schnelleres Internet"
+pin_description: "*Werbung | DNS-Server ändern für schnelleres Internet – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #dns #server #wechseln"
+cover:
+  image: "images/covers/2026-10-16-dns-server-aendern-fuer-schnelleres-internet.jpg"
+  alt: "DNS-Server ändern für schnelleres Internet"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast gerade einen Film gestartet, das Bild lädt stockend und das Laden der Seite dauert ewig. Der Ärger liegt selten am Anbieter‑Tarif, sondern häufig an einem unsichtbaren Baustein im Hintergrund: dem DNS‑Server. Wenn du den DNS‑Server wechselst, kannst du das Surfen spürbar beschleunigen, ohne neue Hardware zu kaufen. In diesem Ratgeber zeige ich dir, warum das funktioniert, wie du den Wechsel sicher durchführst und welche Stolperfallen du vermeiden solltest.  

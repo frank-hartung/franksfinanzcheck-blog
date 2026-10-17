@@ -1267,5 +1267,14 @@
    "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
+ },
+ "2026-10-16-dns-server-aendern-fuer-schnelleres-internet": {
+  "title": "DNS-Server ändern für schnelleres Internet",
+  "ts": "2026-10-17T08:40:45+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  }
 }

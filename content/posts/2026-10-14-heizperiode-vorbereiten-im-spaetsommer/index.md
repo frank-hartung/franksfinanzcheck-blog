@@ -20,7 +20,7 @@ cover:
   alt: "Heizperiode vorbereiten im Spätsommer"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Heizperiode vorbereiten im Spätsommer"
-pin_description: "*Werbung | Heizperiode vorbereiten: Heizkörper nach Bedarf prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
+pin_description: "*Werbung | Heizperiode vorbereiten: Heizkörper nach Bedarf prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Rechenwege offen, ohne Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
