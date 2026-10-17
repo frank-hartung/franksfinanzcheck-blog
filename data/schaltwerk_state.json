@@ -46,6 +46,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/volkswagen-vw-arbeitskampf-tarifvertrag-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/energie-heizen-winter-100.html": "2026-10-17T13:08:39+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html": "2026-10-06T00:34:19+02:00"
   },
   "letzter_lauf": {
@@ -54,7 +55,7 @@
     "reach-signale-kuratieren": "2026-10-12T21:17:05+02:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-10-12T21:17:05+02:00",
-    "verbraucher-nachrichten": "2026-10-15T07:50:53+02:00"
+    "verbraucher-nachrichten": "2026-10-17T13:08:39+02:00"
   },
   "marker": {
     "datei:data/social/channels.yaml": "8d00d247daf49351"
@@ -112,7 +113,8 @@
       "2026-10-04": 3,
       "2026-10-06": 1,
       "2026-10-07": 1,
-      "2026-10-15": 1
+      "2026-10-15": 1,
+      "2026-10-17": 1
     }
   }
 }

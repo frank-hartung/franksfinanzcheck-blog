@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Steigende Preise für Benzin, Heizöl, Gas - wie teuer wird der Winter?
+  url: https://www.tagesschau.de/wirtschaft/verbraucher/energie-heizen-winter-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-10-17T13:08:39'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Marktbericht: Börsen zwischen KI-Euphorie und Inflationssorgen'
   url: https://www.tagesschau.de/wirtschaft/finanzen/marktberichte/marktbericht-dax-asml-tsmc-berichtssaison-102.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -163,4 +170,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-15T07:50:53'
+zuletzt_ergaenzt: '2026-10-17T13:08:39'
