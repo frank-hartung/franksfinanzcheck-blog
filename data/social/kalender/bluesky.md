@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 17.10.2026 11:28 (Europe/Berlin)  
+> Automatisch aktualisiert: 17.10.2026 11:30 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 

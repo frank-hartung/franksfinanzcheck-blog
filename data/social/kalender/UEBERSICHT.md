@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 17.10.2026 11:28 (Europe/Berlin)
+> Automatisch aktualisiert: 17.10.2026 11:30 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -209,6 +209,7 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **09:15** ⏳ Threads · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
 - **09:45** ⏳ Facebook (Seite) · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
 - **10:15** ⏳ Pinterest · _nutzen_ · Kostenloses Girokonto: So findest du ein Konto ohne Gebühren
+- **11:30** ⏳ Mastodon · _zahl_ · Kostenloses Girokonto: So findest du ein Konto ohne Gebühren
 
 ---
 *Legende: ⏳ geplant · ✅ veröffentlicht · ⚪ Standby (Zugang fehlt) · 🚫 zurückgestellt.*  
