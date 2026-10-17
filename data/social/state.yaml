@@ -803,6 +803,26 @@ history:
     \ #Mietwagen #Reise #Frugalismus #Geldsparen"
   ref: '117455541616253764'
   ai: true
+- posted_at: '2026-10-17T16:16:02.257531+02:00'
+  channel: mastodon
+  slug: 2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen
+  title: 'Umzug mit Internet: Anschluss und Rufnummer mitnehmen'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117456671179488695
+  ok: true
+  text: '💶 Umzug mit Internet: Anschluss und Rufnummer mitnehmen
+
+
+    Melde den Umzug dem Anbieter früh und schriftlich, am besten sechs bis acht Wochen
+    vorher.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
+  ref: '117456671179488695'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -828,4 +848,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-17T11:28:54.096559+02:00'
+updated_at: '2026-10-17T16:16:09.691833+02:00'

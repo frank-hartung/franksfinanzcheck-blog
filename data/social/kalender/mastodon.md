@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 17.10.2026 11:30 (Europe/Berlin)  
+> Automatisch aktualisiert: 17.10.2026 16:16 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Sa, 17. Oktober 2026
-- **11:30** ⏳ Umzug mit Internet: Anschluss und Rufnummer mitnehmen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/
 ### So, 18. Oktober 2026
 - **07:30** ⏳ Grundversorgung Strom und Gas: Was sie leistet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/
@@ -54,6 +51,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
 - ✅ 17.10.2026 11:28 · Urlaub sparen: Budget, Buchung und Kosten im Blick → https://mastodon.social/@FranksFinanzcheck/117455541616253764
 - ✅ 16.10.2026 17:24 · Störung beim Internetanbieter: So sicherst du deine Rechte → https://mastodon.social/@FranksFinanzcheck/117451276649054529
 - ✅ 16.10.2026 11:55 · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt → https://mastodon.social/@FranksFinanzcheck/117449983499442917
@@ -63,7 +61,6 @@
 - ✅ 14.10.2026 12:18 · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen → https://mastodon.social/@FranksFinanzcheck/117438751738382391
 - ✅ 13.10.2026 21:54 · Der erste eigene Haushalt: Fixkosten von Anfang an ordnen → https://mastodon.social/@FranksFinanzcheck/117435351129525107
 - ✅ 13.10.2026 14:46 · Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer → https://mastodon.social/@FranksFinanzcheck/117433670652081666
-- ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
