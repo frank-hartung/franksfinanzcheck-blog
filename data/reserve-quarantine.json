@@ -1,1 +1,13 @@
-{}
+{
+  "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+    "first": "2026-10-17T08:08:05Z",
+    "grund": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
+    "hits": 1,
+    "laeufe": [
+      "run:39015488535"
+    ],
+    "last": "2026-10-17T08:08:05Z",
+    "lauf": "run:39015488535",
+    "signatur": "reserve-qualitäts-gate: rs<n>: kein „das wichtigste in kürze“-modul"
+  }
+}
