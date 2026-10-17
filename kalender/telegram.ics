@@ -1,0 +1,38 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Social-Autopilot Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:telegram:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutze
+ n:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261017T141610Z
+DTSTART:20261017T160000Z
+DTEND:20261017T161500Z
+SUMMARY:Telegram (Kanal): 7 Gewohnheiten für finanzielle Freiheit: Gel
+ d bewusst ordnen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten
+ -fuer-finanzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
+ endert:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261017T141610Z
+DTSTART:20261025T060000Z
+DTEND:20261025T061500Z
+SUMMARY:Telegram (Kanal): Internet & DSL-Update: Was sich jetzt für di
+ ch ändert (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-u
+ pdate-was-sich-jetzt-fuer-dich-aendert/
+URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
+ was-sich-jetzt-fuer-dich-aendert/
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR
