@@ -261,3 +261,4 @@
 {"blockiert": ["2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte"], "commit": "82cff8dd89a78c8a4763c4e81e0f776ef28596c1", "freigabe_reif": 56, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T11:45:11Z", "warnung": 3}
 {"blockiert": [], "commit": "d2fa8e6bb371a60fd20ddfc8f9405a48b6c39403", "freigabe_reif": 60, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T12:19:28Z", "warnung": 0}
 {"blockiert": [], "commit": "395ff8454e887443dbe0c9905965bc0e16c90739", "freigabe_reif": 60, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T14:40:06Z", "warnung": 0}
+{"blockiert": [], "commit": "ed3f40990c8a5ff4ef8f5bfba9e491270091b497", "freigabe_reif": 60, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T18:13:49Z", "warnung": 0}
