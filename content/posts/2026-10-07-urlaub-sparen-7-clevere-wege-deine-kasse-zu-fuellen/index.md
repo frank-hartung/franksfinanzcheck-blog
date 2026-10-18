@@ -176,6 +176,18 @@ Das hängt vom Preis der Reise, den versicherten Gründen und deinen persönlich
 ### Wie spare ich bei der Reise vor Ort?
 Plane Essen, Wege und Aktivitäten vor, ohne jeden Moment festzulegen. Prüfe, was deine Unterkunft bereits bietet. Lass Platz für spontane Wünsche, die in dein Budget passen.
 
+### Wie behalte ich unterwegs den Überblick über die Reisekasse?
+Führe eine einfache Liste: abends die Ausgaben von heute, dazu die Belege. Lege für Essen, Ausflüge und Pannen drei getrennte Töpfe an. Ist einer leer, holst du nichts aus dem anderen. So bleibt dein Urlaubssparen realistisch und wächst nicht nur auf dem Papier.
+
+### Welche Zahlungsart passt zur Reisekasse?
+Mische Karte und Bargeld. Prüfe vor der Abreise, was Abhebungen im Ausland kosten und welche Gebühren deine Bank erhebt. Halte eine zweite Karte getrennt auf dem Zimmer. Verlorenes lässt du sperren; Ersatzgeld kommt meist langsamer als zu Hause.
+
+### Wie organisiere ich die Kasse in einer Gruppe?
+Eine Person führt die Liste, der feste Beitrag pro Person steht vorher fest. Wer vorstreckt, notiert den Betrag am selben Tag. Nach der Reise rechnet ihr nach Liste ab, nicht nach Erinnerung. Streit entsteht fast immer durch vergessene Kleinbeträge.
+
+### Lohnt sich Sparen auch bei kurzen Reisen?
+Ja, weil schon ein Tag im Budget den Unterschied macht. Rechne bei jedem Kurztrip Fahrt, Essen und Eintritt zusammen. Wer die Reisekosten klein hält, kann Geld sparen, ohne aufs Erlebnis zu verzichten – und plant den nächsten Trip aus dem Rest.
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Pauschalreisen vergleichen**](/go/reisen/)

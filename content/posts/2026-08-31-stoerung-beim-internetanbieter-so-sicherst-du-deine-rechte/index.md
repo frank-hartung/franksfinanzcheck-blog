@@ -49,9 +49,9 @@ quellen:
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
 
-Eine Störung beim Internetanbieter beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Und dann beginnt der unangenehme Teil, in dem viele Verbraucher aufgeben, obwohl sie im Recht sind.
+Eine Störung beim Internetanbieter beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
 
-Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht von der ersten Minute an dokumentiert, hat später eine Erinnerung und keine Unterlagen.
+Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht ab der ersten Minute festhält, hat später eine Erinnerung und keine Unterlagen.
 
 ## Das Wichtigste in Kürze
 
@@ -68,34 +68,34 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was als Störung gilt und was nicht
 
-Nicht jedes Ärgernis ist eine Störung. Die Unterscheidung entscheidet darüber, ob der Anbieter tätig wird und ob du Ansprüche prüfen kannst.
+Nicht jedes Ärgernis ist eine Störung. Entscheidend ist, ob der Anbieter reagieren muss und ob du Ansprüche hast.
 
-**Eine Störung liegt vor:** kein Signal auf der Leitung, ständige Abbrüche, ein Defekt am Anschluss oder deutlich zu niedrige Geschwindigkeit gegenüber dem vereinbarten Wert. Auch ein Totalausfall nach Arbeiten am Netz zählt dazu.
+**Eine Störung liegt vor:** kein Signal, ständige Abbrüche, ein Defekt am Anschluss oder eine Geschwindigkeit weit unter dem vereinbarten Wert. Auch ein Totalausfall nach Arbeiten am Netz zählt dazu.
 
-**Kein Störungsfall ist:** ein zu schwaches WLAN in einem entfernten Zimmer, ein alter Router im Vertrag, ein langsamer Rechner oder eine Spitze in der Auslastung am Abend. Diese Punkte liegen in deinem eigenen Einflussbereich – und sind häufig die eigentliche Ursache.
+**Kein Störungsfall ist:** ein zu schwaches WLAN im Nebenraum, ein alter Router im Vertrag, ein langsamer Rechner oder ein volles Netz am Abend. Das liegt in deinem Bereich – und ist häufig die eigentliche Ursache.
 
-Bevor du anrufst, hilft diese Einordnung. Ein Anruf mit einer echten Störung wird schneller bearbeitet als ein Anruf mit einem Verdacht.
+Rufe erst nach diesem Check an. Der Anbieter bearbeitet echte Störungen schneller als bloßen Verdacht.
 
 ## Die ersten 30 Minuten: Selbstcheck vor dem Anruf
 
-Der erste Schritt kostet keine Wartezeit und ersetzt viele Servicetelefonate. Gehe die vier Punkte der Reihe nach durch.
+Der erste Schritt kostet keine Wartezeit. Er spart oft den Anruf. Gehe die vier Punkte der Reihe nach durch.
 
 1. **Router neu starten.** Netzstecker ziehen, dreißig Sekunden warten, wieder einstecken. Das klingt banal und löst einen erheblichen Teil der Fälle.
 2. **Zweites Gerät testen.** Ein zweites Gerät im selben Netz zeigt, ob der Fehler am Anschluss liegt oder an einem Gerät.
 3. **Kabel prüfen.** Sitzt der Stecker richtig? Gibt es einen Knick, ein geknicktes Kabel oder eine lose Dose?
 4. **Anbieterstatus prüfen.** Viele Anbieter melden bekannte Störungen im Netz auf einer Statusseite oder in einer App. Steht dort eine Störung mit Zeitfenster, sparst du dir das Warten in der Hotline.
 
-Wenn diese vier Punkte nichts ändern, liegt der Verdacht nah, dass es nicht deine Verkabelung ist. Dann wird der Anruf fällig – und mit ihm die Dokumentation.
+Ändern diese vier Punkte nichts, liegt der Verdacht nahe: Dein Kabel ist nicht das Problem. Dann folgt der Anruf – und mit ihm die Dokumentation.
 
 ## So meldest du richtig
 
 Die Meldung entscheidet über den weiteren Verlauf. Sie muss drei Dinge leisten: den Ausfall beschreiben, ihn zeitlich einordnen und einen Vorgang erzeugen.
 
-**Erstens: schriftlich melden.** Nutze das Kontaktformular oder die E-Mail-Adresse aus den Vertragsunterlagen. Ein Telefonat ist schneller, hinterlässt aber keine Spur. Wenn du telefonisch meldest, schreibe unmittelbar danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung."
+**Erstens: schriftlich melden.** Nutze das Kontaktformular oder die Adresse aus den Vertragsunterlagen. Ein Anruf ist schnell, hinterlässt aber keine Spur. Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung."
 
 **Zweitens: alles notieren.** Datum, Uhrzeit, Symptom, Dauer der Warteschleife, Name des Mitarbeiters, Vorgangsnummer. Ein Zettel oder eine Notiz auf dem Handy reicht. Diese Liste ist später mehr wert als jede Erinnerung.
 
-**Drittens: Messwerte sichern.** Führe einen Geschwindigkeitstest am Kabel durch und halte das Ergebnis als Screenshot fest. Wiederhole den Test an zwei verschiedenen Tagen, damit du eine Reihe und keinen Einzelwert hast.
+**Drittens: Messwerte sichern.** Führe einen Speedtest am Kabel durch und speichere das Ergebnis als Bild. Wiederhole den Test an zwei Tagen. So hast du eine Reihe und keinen Einzelwert.
 
 Für den schriftlichen Weg hat sich eine kurze Struktur bewährt. Sie passt in jedes Formular und in jede E-Mail.
 
@@ -105,41 +105,43 @@ Für den schriftlichen Weg hat sich eine kurze Struktur bewährt. Sie passt in j
 * **Absatz drei:** Vorgangsnummer aus dem Telefonat, falls vorhanden
 * **Absatz vier:** was du erwartest, etwa eine Bestätigung mit Zeitplan
 
-Halte den Text sachlich. Beschreibe den Zustand und verzichte auf Vermutungen über die Ursache.
+Halte den Text sachlich. Beschreibe, was du siehst – nicht, was du vermutest.
 
 ## Was der Anbieter leisten muss
 
-Verträge über Internetanschlüsse stehen unter dem Telekommunikationsgesetz. Der Rahmen reicht von der [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) bis zur Umschaltung und zur Behandlung von Störungen. Die Regelungen zum Anbieterwechsel fasst [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) zusammen.
+Jeder Internetvertrag steht unter dem Telekommunikationsgesetz (TKG). Der Rahmen reicht von der [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) über die Umschaltung bis zur Störungsbearbeitung. Die Regeln zum Wechsel fasst [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) zusammen.
 
-Für dich sind drei Pflichten wichtig. Erstens: Der Anbieter muss auf eine Störungsmeldung reagieren und einen Weg zur Behebung anbieten. Zweitens: Er muss dir auf Nachfrage den Stand mitteilen. Drittens: Er darf die Störung nicht aussitzen, indem er auf eine „Prüfung" verweist, die nie endet.
+Für dich sind drei Pflichten wichtig. Erstens: Der Anbieter muss auf deine Meldung reagieren und einen Weg zur Behebung nennen. Zweitens: Er muss dir auf Nachfrage den Stand sagen. Drittens: Er darf die Störung nicht aussitzen – mit einer „Prüfung", die nie endet.
 
-Eine feste Frist für die Entstörung nennt das Gesetz nicht. Genau deshalb ist die Dokumentation so wichtig: Ohne Zeitachse gibt es kein Argument. Mit Zeitachse ist nachvollziehbar, wie lange die Leistung nicht erbracht wurde.
+Eine feste Frist für die Entstörung nennt das Gesetz nicht. Genau deshalb zählt die Dokumentation: Ohne Zeitachse gibt es kein Argument. Mit Zeitachse siehst du, wie lange die Leistung fehlte.
 
-Hilfreich ist die Unterscheidung zwischen Termin und Leistung. Ein Technikertermin kann sich verschieben. Die Leistung fehlt aber schon vorher. Zählt man beide Dinge getrennt, wird die Lage sichtbar.
+Hilfreich ist die Unterscheidung zwischen Termin und Leistung. Ein Termin für den Techniker kann sich verschieben. Die Leistung fehlt aber schon vorher.
+
+Zähle beides getrennt. Dann siehst du die Lage klar.
 
 ## Der Technikertermin
 
-Wenn der Anbieter einen Termin vergibt, hole drei Angaben: Zeitfenster, Auftragsnummer und die Information, ob jemand zu Hause sein muss.
+Vergibt der Anbieter einen Termin, hole drei Angaben: Zeitfenster, Auftragsnummer und den Hinweis, ob jemand zu Hause sein muss.
 
-Bereite den Termin vor. Räume die Ecke mit der Anschlussdose frei, halte das Zugangstor offen und entferne Gegenstände vor dem Übergabepunkt. Ein großer Teil der gescheiterten Termine hat keine technische Ursache, sondern eine fehlende Zugangsmöglichkeit.
+Bereite den Termin vor. Räume die Ecke mit der Dose frei, halte den Zugang offen und schaffe Platz bis zum Übergabepunkt. Viele Termine scheitern nicht an der Technik, sondern am Zugang.
 
-Fotografiere vor dem Termin die Dose und den Router. Nach dem Termin halte das Ergebnis fest: Was wurde getauscht, was wurde gemessen, welche Werte kamen heraus? Lass dir das Ergebnis notieren, zumindest als Nachricht.
+Fotografiere vor dem Termin die Dose und den Router. Halte danach das Ergebnis fest: Was hat der Techniker getauscht, welche Werte kamen heraus? Lass dir das notieren, zumindest als Nachricht.
 
-Wichtig ist die Regel für verpasste Termine. Wenn der Techniker ohne Absage nicht kommt, melde das noch am selben Tag. Ein unentschuldigter no-show wird nur dann berücksichtigt, wenn er zeitnah gemeldet ist.
+Wichtig ist die Regel für verpasste Termine. Kommt der Techniker ohne Absage nicht, melde das noch am selben Tag. Ein unentschuldigter no-show zählt nur, wenn du ihn zeitnah meldest.
 
 ## Wann du Geld geltend machst
 
-Bei einem längeren Ausfall hast du zwei Hebel: eine Gutschrift für die nicht erbrachte Leistung und, bei bestimmten Verzögerungen, eine Entschädigung. Die Einzelheiten hängen vom Anlass ab.
+Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung. Die Details hängen vom Anlass ab.
 
-Für den Anbieterwechsel regelt [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) ausdrücklich die Entschädigung bei Verzögerungen. Bei einem laufenden Vertrag ist der Weg über die Reklamation meist der erste. Verlange eine Gutschrift für den Zeitraum, in dem die Leistung nicht erbracht wurde, und nenne dabei die Anzahl der Tage.
+Für den Anbieterwechsel regelt [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) die Entschädigung bei Verzögerungen ausdrücklich. Bei einem laufenden Vertrag ist die Reklamation meist der erste Weg. Verlange eine Gutschrift für die Tage ohne Leistung und nenne ihre Zahl.
 
-Das Muster für diese Nachricht ist einfach. Beschreibe den Ausfallzeitraum, nenne die Vorgangsnummer, beziehe dich auf die vertraglich zugesagte Leistung und bitte um eine Gutschrift. Setze eine Antwortfrist.
+Das Muster für diese Nachricht ist einfach. Beschreibe den Zeitraum des Ausfalls und nenne die Vorgangsnummer. Beziehe dich auf die zugesagte Leistung und bitte um eine Gutschrift. Setze eine Frist für die Antwort.
 
 Wichtig: Verlange nur, was belegbar ist. Wer „Schmerzensgeld" verlangt oder mit einem Anwalt droht, macht sich angreifbar. Wer Tage zählt und eine Gutschrift fordert, bleibt im Rahmen.
 
 ## Modellrechnung: Fünf Tage ohne Anschluss
 
-Die folgende Rechnung arbeitet mit Annahmen. Sie zeigt, wie sich der Ausfall zusammensetzt, und nennt keine Marktpreise.
+Diese Rechnung arbeitet mit Annahmen. Sie zeigt, wie sich der Ausfall zusammensetzt – und nennt keine Preise.
 
 Annahmen: Der Vertrag kostet 40 Euro im Monat. Der Anschluss fällt fünf Tage aus. Für die Überbrückung buchst du einen mobilen Datenpass für 10 Euro.
 
@@ -147,7 +149,7 @@ Rechenweg Tagesanteil: 40 Euro geteilt durch 30 Tage ergeben rund 1,33 Euro je T
 
 Modellrechnung: Von den 16,67 Euro entfallen rund 6,67 Euro auf bezahlte, aber nicht gelieferte Leistung. Rund 10 Euro sind Aufwand für die Überbrückung.
 
-Der zweite Betrag ist in der Regel nicht erstattungsfähig. Der erste Betrag ist es – über eine Gutschrift, wenn du den Zeitraum belegen kannst. Die Rechnung zeigt also nicht, wie viel du zurückbekommst. Sie zeigt, warum die Zeitachse zählt: Jeder weitere belegte Tag erhöht den Anteil, den du geltend machen kannst.
+Den zweiten Betrag bekommst du meist nicht zurück. Den ersten schon – über eine Gutschrift, wenn du den Zeitraum belegen kannst. Die Rechnung zeigt also nicht, wie viel du zurückbekommst. Sie zeigt, warum die Zeitachse zählt: Jeder belegte Tag erhöht deinen Anteil.
 
 Die Eskalation in vier Stufen, mit dem Ziel jeder Stufe:
 
@@ -160,27 +162,27 @@ Die Eskalation in vier Stufen, mit dem Ziel jeder Stufe:
 
 ## Wenn nichts passiert
 
-Nicht jede Störung wird beim ersten Anruf behoben. Wenn mehrere Wochen ins Land gehen, hilft eine Eskalation in Stufen.
+Manche Störung bleibt nach dem ersten Anruf bestehen. Vergehen mehrere Wochen, hilft eine Eskalation in Stufen.
 
-**Stufe eins:** Erinnerung mit Frist. Nenne die Vorgangsnummer, den Ausfallzeitraum und die bisherigen Reaktionen. Bitte um eine schriftliche Antwort mit Zeitplan.
+**Stufe eins:** Erinnerung mit Frist. Nenne Vorgangsnummer, Ausfallzeitraum und die bisherigen Reaktionen. Bitte um eine Antwort mit Zeitplan.
 
-**Stufe zwei:** Beschwerde beim Anbieter, ausdrücklich als Beschwerde bezeichnet. Formuliere das Ziel: Behebung, Gutschrift oder beides. Eine Beschwerde wird in der Regel in einem anderen Verfahren geführt als eine Störungsmeldung.
+**Stufe zwei:** Beschwerde beim Anbieter – nenne sie ausdrücklich so. Formuliere das Ziel: Behebung, Gutschrift oder beides. Eine Beschwerde läuft meist über ein anderes Verfahren als die Störungsmeldung.
 
-**Stufe drei:** Weg zur Bundesnetzagentur. Die Aufsicht nimmt Beschwerden zu Telekommunikationsdiensten entgegen und beschreibt das Verfahren in ihren [Verbraucherinformationen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html). Ein Nachweisverlauf aus Meldungen, Vorgangsnummern und Messwerten macht die Beschwerde belastbar.
+**Stufe drei:** Weg zur Bundesnetzagentur. Die Aufsicht nimmt Beschwerden zu Internet und Telefon an und erklärt ihr Verfahren in den [Verbraucherinformationen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html). Ein Nachweis aus Meldungen, Vorgangsnummern und Messwerten macht deine Beschwerde stärker.
 
-**Stufe vier:** Verbraucherberatung. Sie prüft den Einzelfall, wenn sich der Streit um Gutschriften, Vertragsverlängerungen oder Abschläge dreht. Die Verbraucherzentrale beschreibt das Vorgehen in ihrem Ratgeber [Probleme beim Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658).
+**Stufe vier:** Verbraucherberatung. Sie prüft deinen Fall, wenn es um Gutschriften, Verlängerungen oder Abschläge geht. Die Verbraucherzentrale beschreibt das Vorgehen im Ratgeber [Probleme beim Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658).
 
-Ein Sonderkündigungsrecht ist der letzte Hebel und kein erster. Es setzt in der Regel einen erheblichen, nicht behobenen Mangel voraus. Kläre diesen Weg mit einer Beratung, bevor du kündigst. Sonst verlierst du den Anschluss und bleibst auf dem Streit sitzen.
+Das Recht auf Sonderkündigung ist der letzte Hebel, nicht der erste. Es verlangt einen erheblichen Mangel, den der Anbieter nicht behebt. Kläre diesen Weg mit einer Beratung, bevor du kündigst. Sonst verlierst du den Anschluss und trägst den Streit allein.
 
 ## Was du nach der Behebung prüfen solltest
 
 Die Störung ist behoben, der Techniker weg, alles läuft. Ein Blick auf die nächste Rechnung lohnt trotzdem.
 
-Prüfe erstens, ob der Ausfall in der Rechnung als voller Monat erscheint. Prüfe zweitens, ob eine zugesagte Gutschrift abgezogen wurde. Und prüfe drittens, ob eine Vertragsverlängerung „als Ausgleich" im Vertrag gelandet ist, die du nicht wolltest.
+Prüfe erstens, ob die Rechnung den vollen Monat zeigt. Prüfe zweitens, ob die zugesagte Gutschrift fehlt. Prüfe drittens, ob eine Verlängerung „als Ausgleich" im Vertrag steht, die du nicht wolltest.
 
-Diese drei Punkte dauern fünf Minuten und betreffen dein Geld. Sie sind auch der Grund, warum ein schriftlicher Verlauf so nützlich ist: Nach sechs Wochen erinnert sich niemand mehr an das Telefonat.
+Diese drei Punkte dauern fünf Minuten und gehen ums Geld. Sie zeigen auch, warum ein schriftlicher Verlauf hilft: Nach sechs Wochen kennt niemand mehr das Telefonat.
 
-**Faustregel:** Notiere bei jeder Störung Uhrzeit, Ticketnummer und Gesprächspartner – eine lückenlose Störungsdokumentation ist dein Nachweis, wenn es um Erstattung oder Vertragswechsel geht.
+**Faustregel:** Notiere bei jeder Störung Uhrzeit, Ticketnummer und wer am Telefon sprach. Eine vollständige Ablage ist dein Nachweis – bei der Erstattung wie beim Wechsel.
 
 ## Häufige Fragen
 
@@ -190,23 +192,23 @@ Ja. Wer eine Störung nicht meldet und später Geld fordert, hat ein Problem mit
 
 ### Wie lange darf eine Störung dauern?
 
-Eine feste Zahl nennt das Gesetz nicht. Relevant ist, dass der Anbieter zeitnah reagiert und den Ausfall behebt. Deshalb zählt die Dokumentation mit Datum und Uhrzeit.
+Eine feste Zahl nennt das Gesetz nicht. Wichtig ist, dass der Anbieter zeitnah reagiert und den Ausfall behebt. Deshalb zählt die Dokumentation mit Datum und Uhrzeit.
 
 ### Bekomme ich automatisch Geld zurück?
 
-Nicht automatisch. Du musst den Ausfall geltend machen und den Zeitraum belegen. Bei einer bestätigten Störung und dokumentierten Tagen ist eine Gutschrift der übliche Weg.
+Nicht automatisch. Du musst den Ausfall geltend machen und den Zeitraum belegen. Bei einer bestätigten Störung und notierten Tagen ist eine Gutschrift der übliche Weg.
 
 ### Gilt das auch bei Kabel-Internet und Glasfaser?
 
-Die Pflichten aus dem Telekommunikationsgesetz gelten für alle Zugangsarten. Der technische Weg zur Behebung unterscheidet sich, die Dokumentation bleibt gleich.
+Die Pflichten aus dem TKG gelten für alle Zugangsarten. Der Weg zur Behebung ist je nach Technik verschieden. Die Dokumentation bleibt gleich.
 
 ### Was mache ich, wenn der Anbieter nicht erreichbar ist?
 
-Melde den Ausfall per E-Mail oder Kontaktformular und sichere den Versandnachweis. Nach mehreren erfolglosen Versuchen ist das ein Punkt für die Beschwerde bei der Bundesnetzagentur.
+Melde den Ausfall per E-Mail oder Kontaktformular und bewahre den Beleg. Nach mehreren erfolglosen Versuchen zählt das für die Beschwerde bei der Bundesnetzagentur.
 
 ### Kann ich wegen eines Ausfalls fristlos kündigen?
 
-Das ist ein Einzelfall und an strenge Voraussetzungen gebunden. Nimm dafür eine Beratung in Anspruch, statt selbst zu kündigen. Ein gekündigter Anschluss ist schwerer zu reparieren als ein laufender.
+Das ist ein Einzelfall mit strengen Voraussetzungen. Hol dafür eine Beratung, statt selbst zu kündigen. Ein gekündigter Anschluss ist schwerer zu reparieren als ein laufender.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/)
 **Lesetipp:** [Umzug mit Internet: Anschluss und Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/)

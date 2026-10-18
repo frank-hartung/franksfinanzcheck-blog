@@ -181,6 +181,21 @@ Nein. Die Funktion hängt vom Gerät ab. Prüfe, ob die Anzeige einen Momentwert
 ### Lohnt sich ein System im Altbau?
 Das lässt sich nicht allein am Baujahr erkennen. Miss zuerst, wo Strom anfällt, und prüfe, welche Regel etwas verändert. Wenn du keine klare Aufgabe findest, brauchst du kein neues System.
 
+### Wie lange sollte ich messen, bevor ich kaufe?
+Zwei Wochen sind ein guter Anfang, besser ist ein voller Zyklus des Geräts. Lass die Waschmaschine laufen, heize einen Tag normal, nutze den Fernseher wie immer. Ein Abend zeigt nur den Moment. Zwei Wochen zeigen deinen Rhythmus – und ob eine smarte Steckdose daran überhaupt etwas ändert.
+
+### Welche Geräte eignen sich für eine Automatik?
+Geeignet sind Verbraucher mit klaren Pausen: Beleuchtung, Fernseher, Ladegeräte. Ungeeignet sind Geräte, die laufen müssen: Gefrierschrank, Router, Heizungspumpe. Trennst du sie zur falschen Zeit, riskierst du verdorbene Lebensmittel und Fehlerbilder, die mehr kosten, als jede Stromersparnis einbringt.
+
+### Wie prüfe ich, ob die Ersparnis echt ist?
+Vergleich Wochen unter gleichen Bedingungen: ähnliche Temperaturen, gleiche Räume, gleicher Alltag. Ein milder Herbst senkt den Verbrauch auch ohne jede Automatik. Rechne deinen Strompreis dazu und ziehe die Kosten der Lösung ab. Erst dann zeigt sich, ob die Technik beim Strom sparen wirklich hilft.
+
+### Was gilt beim Umzug oder in der Mietwohnung?
+Nimm mit, was dir gehört und ohne Umbau funktioniert. Prüfe vor dem Kauf, ob du Veränderungen sauber rückgängig machen kannst und ob die Erlaubnis der Verwaltung nötig ist. Verkabelte Lösungen bleiben oft im Gebäude – dann profitiert der Vermieter von den Verbesserungen, nicht dein Stromtarif.
+
+### Reicht nicht auch eine schaltbare Steckdosenleiste?
+Für viele Standby-Fälle: ja. Eine Leiste mit Schalter trennt mehrere Geräte mit einem Handgriff vom Netz. Eine smarte Lösung lohnt dagegen dort, wo ein Zeitplan oder ein echter Messwert weiterhilft. Prüfe nach zwei Wochen, ob die Regel noch zu deinem Alltag passt; wenn nicht, stell sie um oder nimm sie zurück.
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)

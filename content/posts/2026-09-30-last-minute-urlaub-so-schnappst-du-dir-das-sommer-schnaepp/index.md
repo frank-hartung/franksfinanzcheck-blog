@@ -79,7 +79,7 @@ Flexibilität verbessert vor allem deine Auswahl. Sie garantiert weder einen fre
 
 ## So vergleichst du Reiseangebote fair
 
-Nutze Vergleichsportale, um mögliche Termine, Ziele und Anbieter zu entdecken. Ein Portal bildet aber nicht zwingend alle Leistungen oder Anbieter ab. Öffne deshalb das konkrete Angebot beim Veranstalter. Vergleiche denselben Reisezeitraum. Vergleiche dieselbe Personenanzahl. Vergleiche dieselben Leistungen.
+Nutze Vergleichsportale, um mögliche Termine, Ziele und Anbieter zu entdecken. Ein Portal bildet aber nicht alle Leistungen oder Anbieter ab. Öffne deshalb das konkrete Angebot beim Veranstalter. Vergleiche denselben Reisezeitraum, dieselbe Personenanzahl und dieselben Leistungen.
 
 Setze vor der Suche ein Gesamtbudget. Prüfe bei jedem Treffer, ob der angezeigte Einstiegspreis für deine Reisedaten gilt. Prüfe, welche Kosten hinzukommen. Ein Rabatt-Aufdruck ersetzt diesen Vergleich nicht.
 
@@ -226,7 +226,7 @@ Setz dir ein Limit. Such mehrere Anbieter. Rechne den Gesamtpreis. Lies die Rege
 
 ## Wenn du dich unsicher fühlst
 
-Lass es. Gute Reisen buchen sich nicht unter Druck. Wenn der Preis stimmt, aber dein Bauch nein sagt, hör auf ihn. Es gibt immer ein anderes Angebot. Es gibt immer einen anderen Tag. Es gibt immer eine andere Option. Du entscheidest. Kein Countdown. Kein Pop-up. Kein Verkäufer. Nur du.
+Lass es. Gute Reisen buchen sich nicht unter Druck. Wenn der Preis stimmt, aber dein Bauch nein sagt, hör auf ihn. Es gibt immer ein anderes Angebot oder einen anderen Tag. Du entscheidest. Kein Countdown. Kein Pop-up. Kein Verkäufer. Nur du.
 ## Kurze Tipps für den Buchungs-Check
 
 Prüfe den Namen. Prüfe das Datum. Prüfe den Flughafen. Ein Tippfehler kann teuer werden. Ein falscher Tag auch. Ein falscher Flughafen auch. Das sind Kleinigkeiten. Sie kosten schnell viel Geld. Nimm dir zehn Sekunden Zeit.
