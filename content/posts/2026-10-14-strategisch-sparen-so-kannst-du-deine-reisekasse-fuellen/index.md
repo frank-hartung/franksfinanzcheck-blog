@@ -184,7 +184,7 @@ Rechne erst durch, ob du den Verlust selbst tragen kannst. Hole die Bedingungen 
 
 ### Was, wenn die Sparrate nicht reicht?
 
-Ändere Umfang, Termin oder Ziel. Plane nicht mit ungewissen Boni und nicht mit fallenden Preisen. Kleiner zu reisen ist planbarer, als den Alltag zu überziehen.
+Ändere Umfang, Termin oder Ziel. Plane nicht mit ungewissen Boni und nicht mit fallenden Preisen. Kleiner zu Reisen ist planbarer, als den Alltag zu überziehen.
 
 ## Was dieser Ratgeber nicht kann
 

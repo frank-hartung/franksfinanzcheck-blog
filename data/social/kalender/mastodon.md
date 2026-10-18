@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 16.10.2026 21:58 (Europe/Berlin)  
+> Automatisch aktualisiert: 17.10.2026 23:31 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,11 +12,6 @@
 
 ## Kommende Beiträge
 
-### Sa, 17. Oktober 2026
-- **07:30** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
-- **11:30** ⏳ Umzug mit Internet: Anschluss und Rufnummer mitnehmen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/
 ### So, 18. Oktober 2026
 - **07:30** ⏳ Grundversorgung Strom und Gas: Was sie leistet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/
@@ -33,10 +28,10 @@
 - **11:30** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 ### Mi, 21. Oktober 2026
-- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 - **07:30** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Sa, 24. Oktober 2026
 - **11:30** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
@@ -50,9 +45,14 @@
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 - **17:30** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
+### Sa, 31. Oktober 2026
+- **11:30** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
+- ✅ 17.10.2026 11:28 · Urlaub sparen: Budget, Buchung und Kosten im Blick → https://mastodon.social/@FranksFinanzcheck/117455541616253764
 - ✅ 16.10.2026 17:24 · Störung beim Internetanbieter: So sicherst du deine Rechte → https://mastodon.social/@FranksFinanzcheck/117451276649054529
 - ✅ 16.10.2026 11:55 · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt → https://mastodon.social/@FranksFinanzcheck/117449983499442917
 - ✅ 15.10.2026 17:38 · Lastschrift und Dauerauftrag: Was du prüfen solltest → https://mastodon.social/@FranksFinanzcheck/117445670235708986
@@ -61,8 +61,6 @@
 - ✅ 14.10.2026 12:18 · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen → https://mastodon.social/@FranksFinanzcheck/117438751738382391
 - ✅ 13.10.2026 21:54 · Der erste eigene Haushalt: Fixkosten von Anfang an ordnen → https://mastodon.social/@FranksFinanzcheck/117435351129525107
 - ✅ 13.10.2026 14:46 · Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer → https://mastodon.social/@FranksFinanzcheck/117433670652081666
-- ✅ 12.10.2026 21:17 · DSL-Anbieter wechseln: Kosten und Fristen richtig prüfen → https://mastodon.social/@FranksFinanzcheck/117429543158372236
-- ✅ 10.10.2026 18:15 · Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung → https://mastodon.social/@FranksFinanzcheck/117417506719630424
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

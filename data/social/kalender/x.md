@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 16.10.2026 21:58 (Europe/Berlin)  
+> Automatisch aktualisiert: 17.10.2026 23:31 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -12,98 +12,98 @@
 
 ## Kommende Beiträge
 
-### Sa, 17. Oktober 2026
+### So, 18. Oktober 2026
 - **08:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 - **13:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 - **19:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-### So, 18. Oktober 2026
+### Mo, 19. Oktober 2026
 - **08:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 - **13:15** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 - **19:15** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
-### Mo, 19. Oktober 2026
+### Di, 20. Oktober 2026
 - **08:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 - **13:15** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 - **19:15** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
-### Di, 20. Oktober 2026
+### Mi, 21. Oktober 2026
 - **08:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
 - **13:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 - **19:15** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-### Mi, 21. Oktober 2026
+### Do, 22. Oktober 2026
 - **08:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
 - **13:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 - **19:15** ⏳ Internet & DSL wechseln: So gelingt der Anbieterwechsel — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-### Do, 22. Oktober 2026
+### Fr, 23. Oktober 2026
 - **08:45** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 - **13:15** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
 - **19:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
-### Fr, 23. Oktober 2026
+### Sa, 24. Oktober 2026
 - **08:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 - **13:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
 - **19:15** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
-### Sa, 24. Oktober 2026
+### So, 25. Oktober 2026
 - **08:45** ⏳ Mietwagen ohne Kautionsfallen: So sparst du im Urlaub — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/
 - **13:15** ⏳ Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
 - **19:15** ⏳ Preisgarantie Gas: So schützt du dich vor Preissprüngen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/
-### So, 25. Oktober 2026
+### Mo, 26. Oktober 2026
 - **08:45** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
 - **13:15** ⏳ Warmwasser sparen: Die Rechnung hinter — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
 - **19:15** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
-### Mo, 26. Oktober 2026
+### Di, 27. Oktober 2026
 - **08:45** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
 - **13:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
 - **19:15** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
-### Di, 27. Oktober 2026
+### Mi, 28. Oktober 2026
 - **08:45** ⏳ September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/
 - **13:15** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 - **19:15** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
-### Mi, 28. Oktober 2026
+### Do, 29. Oktober 2026
 - **08:45** ⏳ Umzug mit Internet: Anschluss und Rufnummer mitnehmen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/
 - **13:15** ⏳ Kleine Beträge, große Wirkung: Frugalismus für den Einstieg — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
 - **19:15** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
-### Do, 29. Oktober 2026
+### Fr, 30. Oktober 2026
 - **08:45** ⏳ Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
 - **13:15** ⏳ Günstig durch den Winter: Heizungs-Check im Spätsommer — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
 - **19:15** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
-### Fr, 30. Oktober 2026
+### Sa, 31. Oktober 2026
 - **08:45** ⏳ Standby Kosten reduzieren: So entlarvst du Stromfresser — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/
 - **13:15** ⏳ 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen — _nutzen_ · Launch  
