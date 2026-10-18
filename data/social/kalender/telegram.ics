@@ -6,24 +6,39 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so
- -vermeidest:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+UID:telegram:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
+ e-verlaengerung:nutzen:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261018T143935Z
+DTSTART:20261018T160000Z
+DTEND:20261018T161500Z
+SUMMARY:Telegram (Kanal): Handyvertrag kündigen: Enddatum\, Nachweis u
+ nd Rufnummer (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-k
+ uendigen-raus-aus-der-kostenfalle-verlaengerung/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
+ en-raus-aus-der-kostenfalle-verlaengerung/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutze
+ n:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261018T143935Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): Büroausstattung steuerlich clever absetzen: 
- So geht's (nutzen)
+SUMMARY:Telegram (Kanal): 7 Gewohnheiten für finanzielle Freiheit: Gel
+ d bewusst ordnen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattu
- ng-steuerlich-clever-absetzen-so-vermeidest/
-URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
- uerlich-clever-absetzen-so-vermeidest/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten
+ -fuer-finanzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
  erlust:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Campingurlaub planen: Budget für Platz\, Fah

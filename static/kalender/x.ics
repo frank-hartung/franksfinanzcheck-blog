@@ -6,41 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – X (Twitter)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:x:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermei
- dest:nutzen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
-DTSTART:20261018T111500Z
-DTEND:20261018T113000Z
-SUMMARY:X (Twitter): Büroausstattung steuerlich clever absetzen: So ge
- ht's (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: X (Twitter)\nArtik
- el: https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-st
- euerlich-clever-absetzen-so-vermeidest/
-URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
- uerlich-clever-absetzen-so-vermeidest/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:x:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust:
- nutzen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+UID:x:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutzen:2026-
+ 10-18@franksfinanzcheck.de
+DTSTAMP:20261018T143935Z
 DTSTART:20261018T171500Z
 DTEND:20261018T173000Z
-SUMMARY:X (Twitter): Campingurlaub planen: Budget für Platz\, Fahrt un
- d Ausrüstung (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: X (Twitter)\nArtik
- el: https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-
- clever-sparen-ohne-komfortverlust/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
- lever-sparen-ohne-komfortverlust/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:x:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutzen:2026-
- 10-19@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
-DTSTART:20261019T064500Z
-DTEND:20261019T070000Z
 SUMMARY:X (Twitter): 7 Gewohnheiten für finanzielle Freiheit: Geld bew
  usst ordnen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: X (Twitter)\nArtik
@@ -51,9 +21,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:x:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust:
+ nutzen:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261018T143935Z
+DTSTART:20261019T064500Z
+DTEND:20261019T070000Z
+SUMMARY:X (Twitter): Campingurlaub planen: Budget für Platz\, Fahrt un
+ d Ausrüstung (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: X (Twitter)\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-
+ clever-sparen-ohne-komfortverlust/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
+ lever-sparen-ohne-komfortverlust/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:x:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kos
  tet:nutzen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261019T111500Z
 DTEND:20261019T113000Z
 SUMMARY:X (Twitter): DSL-Anbieter wechseln: Gesamtpreis\, Router und S
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-d
  ruecken:nutzen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261019T171500Z
 DTEND:20261019T173000Z
 SUMMARY:X (Twitter): Smart Home: So prüfst du echte Stromersparnis (nu
@@ -83,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verla
  engerung:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261020T064500Z
 DTEND:20261020T070000Z
 SUMMARY:X (Twitter): Handyvertrag kündigen: Enddatum\, Nachweis und Ru
@@ -98,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurue
  ck:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261020T111500Z
 DTEND:20261020T113000Z
 SUMMARY:X (Twitter): Balkonkraftwerk Förderung: So holst du dir Geld z
@@ -113,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen:n
  utzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261020T171500Z
 DTEND:20261020T173000Z
 SUMMARY:X (Twitter): Urlaub sparen: Budget\, Buchung und Kosten im Bli
@@ -128,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt:
  nutzen:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261021T064500Z
 DTEND:20261021T070000Z
 SUMMARY:X (Twitter): Energiekosten senken: Smarte Helfer für den Haush
@@ -143,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-21@franksfina
  nzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261021T111500Z
 DTEND:20261021T113000Z
 SUMMARY:X (Twitter): DSL-Wechselbonus sichern: So sparst du beim Inter
@@ -158,7 +143,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
  :nutzen:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261021T171500Z
 DTEND:20261021T173000Z
 SUMMARY:X (Twitter): Sicher heizen: So schützt dich eine Gaspreisgaran
@@ -173,7 +158,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:20
  26-10-22@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261022T064500Z
 DTEND:20261022T070000Z
 SUMMARY:X (Twitter): Geld abheben im Ausland: Wo die Gebühren wirklich
@@ -188,7 +173,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife
  -fuer-2026:nutzen:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261022T111500Z
 DTEND:20261022T113000Z
 SUMMARY:X (Twitter): Preisgarantie Gas: So sicherst du günstige Tarife
@@ -203,7 +188,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterw
  echsel:nutzen:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261022T171500Z
 DTEND:20261022T173000Z
 SUMMARY:X (Twitter): Internet & DSL wechseln: So gelingt der Anbieterw
@@ -218,7 +203,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nu
  tzen:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261023T064500Z
 DTEND:20261023T070000Z
 SUMMARY:X (Twitter): Gasrechnung senken: Fehler im Spätsommer vermeide
@@ -233,7 +218,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutze
  n:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261023T111500Z
 DTEND:20261023T113000Z
 SUMMARY:X (Twitter): Abos und Verträge: Der stille Posten im Haushalts
@@ -248,7 +233,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-ge
  buehren:nutzen:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261023T171500Z
 DTEND:20261023T173000Z
 SUMMARY:X (Twitter): Kostenloses Girokonto: So findest du ein Konto oh
@@ -263,7 +248,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nut
  zen:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261024T064500Z
 DTEND:20261024T070000Z
 SUMMARY:X (Twitter): DSL-Vergleich: So findest du den günstigsten Inte
@@ -278,7 +263,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
  :nutzen:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261024T111500Z
 DTEND:20261024T113000Z
 SUMMARY:X (Twitter): Energiediebe stoppen: So kannst du Stromfresser f
@@ -293,7 +278,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:20
  26-10-24@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261024T171500Z
 DTEND:20261024T173000Z
 SUMMARY:X (Twitter): Haushaltsbuch führen: App\, Excel oder Stift im V
@@ -308,7 +293,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nutzen:20
  26-10-25@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261025T074500Z
 DTEND:20261025T080000Z
 SUMMARY:X (Twitter): Mietwagen ohne Kautionsfallen: So sparst du im Ur
@@ -323,7 +308,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipp
  s:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261025T121500Z
 DTEND:20261025T123000Z
 SUMMARY:X (Twitter): Frugalismus-Tipps: Mehr Freiheit durch klugen Ver
@@ -338,7 +323,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruen
  gen:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261025T181500Z
 DTEND:20261025T183000Z
 SUMMARY:X (Twitter): Preisgarantie Gas: So schützt du dich vor Preissp
@@ -353,7 +338,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:t
  akeaway:2026-10-26@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261026T074500Z
 DTEND:20261026T080000Z
 SUMMARY:X (Twitter): DNS-Server wechseln: Datenschutz\, Filter und Ein
@@ -368,7 +353,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutzen:202
  6-10-26@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261026T121500Z
 DTEND:20261026T123000Z
 SUMMARY:X (Twitter): Warmwasser sparen: Die Rechnung hinter (nutzen)
@@ -382,7 +367,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:nutz
  en:2026-10-26@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261026T181500Z
 DTEND:20261026T183000Z
 SUMMARY:X (Twitter): WLAN verbessern: So bringst du stabilen Speed in 
@@ -397,7 +382,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:nutz
  en:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261027T074500Z
 DTEND:20261027T080000Z
 SUMMARY:X (Twitter): Lastschrift und Dauerauftrag: Was du prüfen sollt
@@ -412,7 +397,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-no
  ch-lohnt:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261027T121500Z
 DTEND:20261027T123000Z
 SUMMARY:X (Twitter): Nachtstrom-Tarife: Wann sich ein Doppeltarifzähle
@@ -427,7 +412,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-r
  echte:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261027T181500Z
 DTEND:20261027T183000Z
 SUMMARY:X (Twitter): Störung beim Internetanbieter: So sicherst du dei
@@ -442,7 +427,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaep
  pchen:nutzen:2026-10-28@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261028T074500Z
 DTEND:20261028T080000Z
 SUMMARY:X (Twitter): September-Roadtrip: Clevere Wege zum Mietwagen-Sc
@@ -457,7 +442,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:zahl:202
  6-10-28@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261028T121500Z
 DTEND:20261028T123000Z
 SUMMARY:X (Twitter): Handytarif 2026 vergleichen: Günstige Tarife ab 4
@@ -472,7 +457,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:nut
  zen:2026-10-28@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261028T181500Z
 DTEND:20261028T183000Z
 SUMMARY:X (Twitter): Kreditkarte vergleichen: Kostenlos und sicher zah
@@ -487,7 +472,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen:
  nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261029T074500Z
 DTEND:20261029T080000Z
 SUMMARY:X (Twitter): Umzug mit Internet: Anschluss und Rufnummer mitne
@@ -502,7 +487,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsu
  m:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261029T121500Z
 DTEND:20261029T123000Z
 SUMMARY:X (Twitter): Kleine Beträge\, große Wirkung: Frugalismus für d
@@ -517,7 +502,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergle
  ich:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261029T181500Z
 DTEND:20261029T183000Z
 SUMMARY:X (Twitter): Tagesgeld-Zinsen 2026: Die besten Zinssätze im Ve
@@ -532,7 +517,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehle
  r:zahl:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261030T074500Z
 DTEND:20261030T080000Z
 SUMMARY:X (Twitter): Frugalismus-Tipps: Vier Tricks gegen teure Alltag
@@ -547,7 +532,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsomm
  er:takeaway:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261030T121500Z
 DTEND:20261030T123000Z
 SUMMARY:X (Twitter): Günstig durch den Winter: Heizungs-Check im Späts
@@ -562,7 +547,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polste
  r:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261030T181500Z
 DTEND:20261030T183000Z
 SUMMARY:X (Twitter): Notgroschen: Die Wahrheit über das finanzielle Po
@@ -577,7 +562,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresse
  r:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261031T074500Z
 DTEND:20261031T080000Z
 SUMMARY:X (Twitter): Standby Kosten reduzieren: So entlarvst du Stromf
@@ -592,7 +577,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag:nutzen:
  2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261031T121500Z
 DTEND:20261031T123000Z
 SUMMARY:X (Twitter): 5 einfache Frugalismus-Tricks für den Alltag: Gel
@@ -607,7 +592,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleu
  nigt:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261031T181500Z
 DTEND:20261031T183000Z
 SUMMARY:X (Twitter): DNS-Hack testen: Antwortzeit statt gefühltem Temp
@@ -622,7 +607,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026:nu
  tzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261101T074500Z
 DTEND:20261101T080000Z
 SUMMARY:X (Twitter): 50-30-20-Regel: Beherrsche dein Budget – Fixkoste
@@ -637,7 +622,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhau
  se:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261101T121500Z
 DTEND:20261101T123000Z
 SUMMARY:X (Twitter): DSL-Tarif für dein Zuhause: Das passende Angebot 
@@ -652,7 +637,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:x:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich:takea
  way:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261018T094228Z
+DTSTAMP:20261018T143935Z
 DTSTART:20261101T181500Z
 DTEND:20261101T183000Z
 SUMMARY:X (Twitter): Finanzielle Freiheit erreichen: Denke dich reich 

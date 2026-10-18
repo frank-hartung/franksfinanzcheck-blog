@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 18.10.2026 11:42 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.10.2026 16:39 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### So, 18. Oktober 2026
-- **11:30** ⏳ Einlagensicherung: Wie viel Guthaben geschützt ist — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/
 ### Mo, 19. Oktober 2026
 - **07:30** ⏳ Zählerstand ablesen und melden: Schätzwerte vermeiden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/
@@ -49,6 +46,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 18.10.2026 16:39 · Einlagensicherung: Wie viel Guthaben geschützt ist → https://mastodon.social/@FranksFinanzcheck/117462425507126261
 - ✅ 18.10.2026 11:42 · Grundversorgung Strom und Gas: Was sie leistet → https://mastodon.social/@FranksFinanzcheck/117461257247875450
 - ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
 - ✅ 17.10.2026 11:28 · Urlaub sparen: Budget, Buchung und Kosten im Blick → https://mastodon.social/@FranksFinanzcheck/117455541616253764
@@ -58,7 +56,6 @@
 - ✅ 15.10.2026 12:03 · Warmwasser sparen: Die Rechnung hinter → https://mastodon.social/@FranksFinanzcheck/117444351878060801
 - ✅ 14.10.2026 17:51 · Abos und Verträge: Der stille Posten im Haushaltsplan → https://mastodon.social/@FranksFinanzcheck/117440058160848584
 - ✅ 14.10.2026 12:18 · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen → https://mastodon.social/@FranksFinanzcheck/117438751738382391
-- ✅ 13.10.2026 21:54 · Der erste eigene Haushalt: Fixkosten von Anfang an ordnen → https://mastodon.social/@FranksFinanzcheck/117435351129525107
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

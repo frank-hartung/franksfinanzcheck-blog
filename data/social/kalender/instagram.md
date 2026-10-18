@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 18.10.2026 11:42 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.10.2026 16:39 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -13,38 +13,38 @@
 ## Kommende Beiträge
 
 ### So, 18. Oktober 2026
-- **11:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
+- **18:45** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 ### Do, 22. Oktober 2026
-- **11:45** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+- **11:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 ### Fr, 23. Oktober 2026
 - **11:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### Sa, 24. Oktober 2026
-- **11:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
+- **11:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 ### So, 25. Oktober 2026
-- **11:45** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
-### Mo, 26. Oktober 2026
 - **11:45** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
-### Di, 27. Oktober 2026
+### Mo, 26. Oktober 2026
 - **11:45** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
-### Do, 29. Oktober 2026
+### Di, 27. Oktober 2026
 - **11:45** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
-### Fr, 30. Oktober 2026
+### Do, 29. Oktober 2026
 - **11:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-### Sa, 31. Oktober 2026
+### Fr, 30. Oktober 2026
 - **11:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
-### So, 01. November 2026
+### Sa, 31. Oktober 2026
 - **11:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
+### So, 01. November 2026
+- **11:45** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 
 ## Zuletzt veröffentlicht
 

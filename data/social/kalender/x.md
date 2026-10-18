@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 18.10.2026 11:42 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.10.2026 16:39 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,13 +13,11 @@
 ## Kommende Beiträge
 
 ### So, 18. Oktober 2026
-- **13:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
-- **19:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-### Mo, 19. Oktober 2026
-- **08:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
+- **19:15** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
+### Mo, 19. Oktober 2026
+- **08:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 - **13:15** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 - **19:15** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
