@@ -1,20 +1,23 @@
 {
-  "stand": "2026-10-14T10:33:07Z",
-  "urteil": "gelb",
+  "stand": "2026-10-18T11:33:49Z",
+  "urteil": "rot",
   "probleme": [
-    "KI-Anteil live: 51.8 % (gelb ab 50 %)"
+    "KI-Anteil live: 85.0 % (rot ab 65 %)",
+    "KI-Artikel ohne Werbe-Offenlegung: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt"
   ],
   "kpis": {
-    "live_artikel": 56,
-    "ki_artikel": 29,
-    "ki_anteil_prozent": 51.8,
+    "live_artikel": 60,
+    "ki_artikel": 51,
+    "ki_anteil_prozent": 85.0,
     "tempo_max_pro_tag": 2,
-    "tempo_letzte7_tage": 4,
+    "tempo_letzte7_tage": 6,
     "auto_freigaben_letzte7_tage": 0,
     "near_dup_paare": 0,
     "near_dup_beispiele": [],
     "thin_live": [],
     "titel_duplikate": [],
-    "offenlegung_fehlt": []
+    "offenlegung_fehlt": [
+      "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt"
+    ]
   }
 }

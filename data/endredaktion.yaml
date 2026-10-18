@@ -22,7 +22,7 @@
 # automatisch = grüne Entwürfe wandern vollautomatisch in die Re-Queue.
 # manuell    = Kill-Switch: nur Bericht (Empfehlung, wenn du jede
 #              Veröffentlichung selbst abnicken willst).
-modus: automatisch
+modus: manuell  # NOTBREMSE (spam-schutz-wache 2026-10-18 – automatisch gesperrt, siehe SPAM-SCHUTZ-REPORT.md)
 
 # Sicherheitsdecken (bewusst konservativ starten):
 max_freigaben_pro_lauf: 1      # pro Lauf maximal 1 Entwurf freigeben

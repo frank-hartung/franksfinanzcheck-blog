@@ -461,10 +461,17 @@ def main() -> int:
         print(f"  ⚠ {p}")
     print(f"  {notbremse}")
     print(f"Report: {os.path.relpath(REPORT_FILE, BLOG_DIR)}")
+
+    # GitHub Actions: Aufgabe als "Erfolg" markieren (der Alert kommt
+    # via ::warning:: und den Status in status.json). Exit 2 nur bei
+    # echten Fehlern (Script-Defekt), nie bei messungsbedingtem ROT.
     if urteil == "rot":
-        print("::error::Spam-Budget rot – Notbremse aktiv, "
-              "Auto-Veröffentlichung gestoppt.")
-        return 2
+        print("::warning::Spam-Budget ROT – Notbremse aktiv, "
+              "Auto-Veröffentlichung gestoppt. "
+              "Siehe reports/spam_schutz_status.json")
+    elif urteil == "gelb":
+        print("::notice::Spam-Budget GELB – Auffälligkeiten vorhanden, "
+              "bitte prüfen. Siehe SPAM-SCHUTZ-REPORT.md")
     return 0
 
 
