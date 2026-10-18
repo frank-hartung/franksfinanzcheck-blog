@@ -823,6 +823,18 @@ history:
     #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
   ref: '117456671179488695'
   ai: false
+- posted_at: '2026-10-18T11:42:23.880434+02:00'
+  channel: mastodon
+  slug: 2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet
+  title: 'Grundversorgung Strom und Gas: Was sie leistet'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117461257247875450
+  ok: true
+  text: '✅ Keine Vertragsbindung – sofortiger Zugang zu Strom & Gas. Der örtliche
+    Energieversorger bietet Grundversorgung jedem Haushalt ohne Vertrag an. https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Gaspreis #Preisgarantie #StromkostenSenken #GastarifWechseln'
+  ref: '117461257247875450'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -848,4 +860,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-17T23:31:03.995374+02:00'
+updated_at: '2026-10-18T11:42:27.546505+02:00'
