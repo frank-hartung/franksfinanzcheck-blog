@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 17.10.2026 23:31 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.10.2026 11:42 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### So, 18. Oktober 2026
-- **08:45** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 - **13:15** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 - **19:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
@@ -110,6 +108,13 @@
   https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/
 - **19:15** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
+### So, 01. November 2026
+- **08:45** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **13:15** ⏳ DSL-Tarif für dein Zuhause: Das passende Angebot finden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
+- **19:15** ⏳ Finanzielle Freiheit erreichen: Denke dich reich — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 
 ## Zuletzt veröffentlicht
 
