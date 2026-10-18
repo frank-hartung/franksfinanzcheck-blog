@@ -22,7 +22,7 @@ name: Spam-Schutz-Wache
 
 on:
   schedule:
-    - cron: "41 5 * * *"    # täglich 07:41 MESZ
+    - cron: "38 11 * * *"    # täglich 07:41 MESZ (TEST: sofortiger Auslöser für 11:38 UTC)
   workflow_dispatch:
     inputs:
       aktion:
