@@ -1,24 +1,24 @@
 ---
-title: "Energie-Update: Was sich jetzt für dich ändert"
-description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
+title: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
+description: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
 date: 2026-10-08T11:38:36Z
 lastmod: 2026-10-13
 draft: true
 tags: ["Stromkosten senken"]
 categories: ["News"]
 pillar: "strom-sparen"
-keywords: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]
+keywords: ["Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest", "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest", "Energie Update"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "energie"
 kurzantwort: "Variable Tarife geben Marktpreise direkt an dich weiter – das Preisrisiko trägst du, nicht der Anbieter. Ein Festpreis kehrt das Verhältnis um, gilt aber nur für die Laufzeit des Vertrags und kostet meist einen Aufschlag. Vergleiche deshalb den Gesamtpreis aus Grund- und Arbeitspreis, achte auf Preisdeckel und Kündigungsfristen und rechne mit deinem echten Jahresverbrauch."
-pin_title: "Energie-Update: Was sich jetzt für dich ändert"
-pin_description: "*Werbung | Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #energieupdate"
+pin_title: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
+pin_description: "*Werbung | Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #energieupdate"
 cover:
   image: "images/covers/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg"
-  alt: "Energie-Update: Was sich jetzt für dich ändert"
+  alt: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
   caption: "Tipp von FranksFinanzcheck"
 quellen:
   - id: "Q1"

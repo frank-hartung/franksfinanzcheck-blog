@@ -1,12 +1,12 @@
 ---
-title: "Saison-Update: Was sich jetzt für dich ändert"
-description: "Saison-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
+title: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
+description: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
 date: 2026-10-15T09:28:52Z
 draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["News"]
 pillar: "frugalismus"
-keywords: ["Saison-Update: Was sich jetzt für dich ändert", "Saison-Update", "Saison Update"]
+keywords: ["Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen", "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen", "Saison Update"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -16,11 +16,11 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
-pin_title: "Saison-Update: Was sich jetzt für dich ändert"
-pin_description: "*Werbung | Saison-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #saisonupdate #was #sich"
+pin_title: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
+pin_description: "*Werbung | Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #saisonupdate #was #sich"
 cover:
   image: "images/covers/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert.jpg"
-  alt: "Saison-Update: Was sich jetzt für dich ändert"
+  alt: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
   caption: "Tipp von FranksFinanzcheck"
 ---
 

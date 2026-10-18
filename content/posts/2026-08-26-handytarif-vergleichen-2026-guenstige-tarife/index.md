@@ -127,7 +127,7 @@ Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
 | Power-User (HD-Streaming, Hotspot, Cloud) | 25–50 GB | 12,99–24,99 € |
 | Familie / mehrere Karten | 20+ GB + Multi-SIM | ab 14,99 € |
 
-## Mein Sparbeispiel: 25 € pro Monat gespart
+## Beispielrechnung: 25 € pro Monat sparen
 
 | Merkmal | Alter Vertrag | Neuer Vertrag |
 |:---|:---|:---|
@@ -141,9 +141,9 @@ Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
 | **Ersparnis pro Jahr** | – | **300 €** |
 | **Ersparnis über 24 Monate** | – | **600 €** |
 
-Mein Wechsel zeigt: Mehr Leistung muss nicht mehr kosten. Ich habe doppeltes Volumen und 5G bekommen.
+Die Beispielrechnung zeigt: Mehr Leistung muss nicht mehr kosten. Im Beispiel verdoppelt sich das Datenvolumen, und 5G ist enthalten.
 
-Der Monatsbeitrag sank um 25 €. Der Wechsel dauerte 15 Minuten. Auch die Rufnummernmitnahme lief reibungslos.
+Im Beispiel sinkt der Monatsbeitrag um 25 €. Die Rufnummer lässt sich in der Regel mitnehmen; was dabei anfällt, hängt vom Anbieter ab.
 
 
 ## Die 5 häufigsten Fallstricke beim Vertragsabschluss
@@ -266,5 +266,9 @@ Prepaid lädst du im Voraus auf. Das gibt volle Kontrolle ohne Bindung. Ein Vert
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Handytarife 2026 vergleichen**](/go/handytarife/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

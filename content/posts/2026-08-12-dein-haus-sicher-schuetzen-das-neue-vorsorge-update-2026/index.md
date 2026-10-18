@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-14
-title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
+title: "Dein Haus sicher schützen: Wohngebäude, Hausrat und Elementarschutz"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
 date: 2026-10-16T04:35:41Z
 draft: true
@@ -15,7 +15,7 @@ author: "Frank Hartung"
 ai_generated: true
 cover:
   image: "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg"
-  alt: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
+  alt: "Dein Haus sicher schützen: Wohngebäude, Hausrat und Elementarschutz"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Guter Schutz für dein Zuhause hat drei Teile: die passende Police für Gebäude oder Hausrat, einen Schutz gegen Naturgefahren und eine Summe, die zum heutigen Wert passt. Alte Verträge lassen gerade bei Starkregen und Rückstau Lücken. Wer seine Klauseln kennt, steht besser da und zahlt oft nicht mehr."
 social_posted: true

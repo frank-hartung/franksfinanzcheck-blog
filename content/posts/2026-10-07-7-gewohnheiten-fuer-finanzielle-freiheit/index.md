@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-14
-title: "7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen"
+title: "Sieben Geldgewohnheiten: Welche Routinen wirklich Geld bringen"
 description: "Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen."
 date: 2026-10-09T02:12:31Z
 draft: false
@@ -242,5 +242,9 @@ Plane eine kleine Belohnung ein. Sie kommt vom Spaß-Budget, nicht von der Rück
 ---
 
 👉 **Rücklagen flexibel parken:** [**→ C24-Tagesgeld mit aktuellem Zins prüfen**](/go/tagesgeld/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

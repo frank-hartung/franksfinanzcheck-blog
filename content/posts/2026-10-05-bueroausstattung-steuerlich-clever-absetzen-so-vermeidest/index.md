@@ -230,3 +230,7 @@ Ja. Ein Foto genügt oft als Kopie. Speichere es im Ordner des Jahres. So hast d
 👉 **Jetzt das Tagesgeld‑Angebot der C24 Bank ansehen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)

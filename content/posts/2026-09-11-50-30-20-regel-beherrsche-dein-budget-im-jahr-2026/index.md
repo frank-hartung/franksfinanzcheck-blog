@@ -322,4 +322,8 @@ Oft schon im ersten oder zweiten Monat. Vor allem dann, wenn du Sparen automatis
 
 👉 **Jetzt Budget sauber aufstellen:** [**→ Tagesgeld der C24 Bank eröffnen**](/go/tagesgeld/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl](../../werkzeuge/fixkosten-scanner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -9,7 +9,7 @@ tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN"]
+keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN"]
 pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!"
 ai_generated: true
@@ -218,3 +218,7 @@ Nein, genau das ist der Punkt. Deine Geräte sehen ein einziges Netz, und die St
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)

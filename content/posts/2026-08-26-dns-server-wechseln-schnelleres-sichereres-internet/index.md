@@ -70,6 +70,10 @@ Wenn du den DNS-Server wechseln möchtest, änderst du zunächst den DNS-Server,
 - Öffentliche DNS-Server können DNS‑Anfragen verschlüsseln (DoH/DoT), schützen jedoch nicht vor allen Netzwerkdaten.  
 - Filterfunktionen der Anbieter unterscheiden sich. Sie blockieren nur bekannte schädliche Domains und ersetzen keinen Virenschutz.  
 
+![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Was macht ein DNS-Server?
 
 DNS steht für Domain Name System. Ein DNS-Server übersetzt einen Domainnamen wie `example.de` in eine IP‑Adresse, die dein Gerät für den Verbindungsaufbau benötigt. Betriebssystem, Router und DNS-Server können Antworten zwischenspeichern. Deshalb wird nicht bei jedem Seitenaufruf eine neue DNS‑Anfrage gesendet.
@@ -182,6 +186,10 @@ Wechseln ist leicht. Das Risiko ist niedrig. Der Nutzen ist oft spürbar. Die Ei
 
 Du brauchst dafür kein teures Abo. Du brauchst keine neue Hardware. Du brauchst keine Fachkenntnisse. Alles, was du brauchst, ist auf deinem Rechner schon da.
 
+![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## Das ändert sich für dich
 
 Dein Internet wird nicht plötzlich doppelt so schnell. Dein WLAN wird nicht automatisch besser. Dein Router bekommt keine neue Antenne. Aber die DNS-Abfrage wird schneller. Und das spürst du bei jedem Klick.
@@ -245,3 +253,7 @@ Wenn Seiten trotz eines funktionierenden DNS-Servers langsam laden, prüfe zuers
 *(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
 **Weiterlesen:** [Der Ratgeber Internet & DSL](../../pillar/internet-dsl/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)

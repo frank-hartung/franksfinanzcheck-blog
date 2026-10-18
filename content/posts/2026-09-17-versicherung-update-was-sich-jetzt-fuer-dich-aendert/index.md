@@ -1,13 +1,13 @@
 ---
 lastmod: 2026-09-25
-title: "Versicherung-Update: Was sich jetzt für dich ändert"
+title: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
 description: "Zum Jahresende steigen oft Beiträge oder Bedingungen ändern sich. So prüfst du Versicherungen klug, nutzt Fristen und vermeidest unnötige Mehrkosten."
 date: 2026-09-25T08:00:00Z
 draft: true
 tags: ["Versicherungen vergleichen", "Kfz-Versicherung"]
 categories: ["News"]
 pillar: "versicherungen"
-keywords: ["Versicherung-Update: Was sich jetzt für dich ändert", "Versicherung-Update", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung"]
+keywords: ["Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen", "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -16,9 +16,9 @@ news_kategorie: "versicherung"
 kurzantwort: "Beim aktuellen Versicherung-Update geht es vor allem um Beitragsanpassungen, Jahresendfristen und unnötig teure Altverträge. Besonders wichtig ist der 30. November bei der Kfz-Versicherung. Wer jetzt Leistungen, Selbstbeteiligung und Beitrag prüft, spart oft 100 € bis 500 € pro Jahr – manchmal mehr."
 cover:
   image: "images/covers/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert.jpg"
-  alt: "Versicherung-Update: Was sich jetzt für dich ändert"
+  alt: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "Versicherung-Update: Was sich jetzt für dich ändert"
+pin_title: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
 pin_description: "*Werbung | Zum Jahresende steigen oft Beiträge oder Bedingungen ändern sich. So prüfst du Versicherungen klug, nutzt Fristen und vermeidest unnötige Mehrkosten. Mehr Spartipps auf FranksFinanzcheck! #versicherungupdate #versicherungenpruefen"
 quellen:
   - id: "Q1"

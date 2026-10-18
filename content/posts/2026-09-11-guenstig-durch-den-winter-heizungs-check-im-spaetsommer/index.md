@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Günstig durch den Winter: Heizungs-Check im Spätsommer"
+title: "Heizungs-Check vor dem ersten Frost: Probelauf, Thermostate, Anlagendruck"
 description: "Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung sicher – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb."
 date: 2026-09-11T08:45:00Z
 draft: false
@@ -280,5 +280,9 @@ Nein. Er kann unnötige Verluste und Defekte aufdecken. Die Wirkung hängt vom A
 ---
 
 👉 **Gastarif prüfen:** [**→ Gasanbieter vergleichen**](/go/gas/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -223,4 +223,8 @@ Ein Screenshot ist ein guter Anfang. Besser ist ein PDF aus dem Online-Banking, 
 
 👉 **Jetzt Konditionen prüfen:** [**→ Kostenloses C24 Girokonto ansehen**](/go/girokonto/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl](../../werkzeuge/fixkosten-scanner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

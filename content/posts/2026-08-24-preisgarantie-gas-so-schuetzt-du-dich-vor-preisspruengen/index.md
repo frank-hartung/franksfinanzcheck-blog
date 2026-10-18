@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
+title: "Gaspreis-Erhöhung im Brief: Was du jetzt prüfen und tun kannst"
 description: "Preisgarantie Gas: Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder…"
 date: 2026-08-24T08:35:12Z
 draft: false
@@ -49,6 +49,10 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
+![Merkkarte: Kernaussagen zu Gaspreis-Erhöhung im Brief: Was du jetzt prüfen und tun kannst](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
 
 ## Wenn ein neuer Preis im Brief steht
 
@@ -142,6 +146,10 @@ Steigt der Arbeitspreis von 10,5 auf 12,0 Cent, beträgt der Unterschied 1,5 Cen
 Bei 18.000 kWh wären das für ein volles Jahr **270 €**. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig oder – besser – anhand tatsächlicher Zählerstände aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
 
 Notiere deshalb zum Änderungsdatum den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
+
+![Gliederung des Beitrags: Gaspreis-Erhöhung im Brief: Was du jetzt prüfen und tun kannst](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Wechsel ohne Versorgungslücke
 
@@ -264,5 +272,9 @@ Widersprich nachweisbar, prüfe Sonderkündigung und hol Unterstützung bei Verb
 ---
 
 👉 **Neuen Jahrespreis vergleichen:** [**→ Gastarife prüfen**](/go/gas/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

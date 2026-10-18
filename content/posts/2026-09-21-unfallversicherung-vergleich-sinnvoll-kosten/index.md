@@ -497,7 +497,7 @@ Dazu passen auch diese Artikel:
 
 - [Privathaftpflicht: Warum sie so wichtig ist](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
 - [Zahnzusatzversicherung 2026](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/)
-- [Versicherung-Update: Was sich jetzt für dich ändert](../../posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/)
+- [Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen](../../posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/)
 
 > 🛡️ **Spar-Tipp:** Günstig ist nicht automatisch gut. Prüfe immer erst Leistung und Bedingungen. Dann erst den Beitrag. Den direkten Vergleich findest du hier: [**Jetzt Unfallversicherung vergleichen**](/go/unfallversicherung/)
 

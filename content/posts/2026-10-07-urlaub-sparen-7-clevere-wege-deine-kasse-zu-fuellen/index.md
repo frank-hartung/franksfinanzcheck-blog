@@ -192,4 +192,8 @@ Ja, weil schon ein Tag im Budget den Unterschied macht. Rechne bei jedem Kurztri
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Pauschalreisen vergleichen**](/go/reisen/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

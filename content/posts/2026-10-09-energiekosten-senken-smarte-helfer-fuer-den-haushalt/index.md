@@ -200,4 +200,8 @@ Achte auf Anbieter mit Ende-zu-Ende-Verschlüsselung. Serverstandorte in der EU 
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

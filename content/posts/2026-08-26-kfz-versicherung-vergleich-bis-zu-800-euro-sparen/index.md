@@ -280,7 +280,7 @@ Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung
 
 Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen September und November**.
 
-**30. November 2026, ein Montag:** bis dahin muss deine Kündigung beim alten Versicherer **eingegangen** sein – entscheidend ist der Eingang, nicht der Versand. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
+**30. November 2026, ein Montag:** bis dahin muss deine Kündigung beim alten Versicherer **eingegangen** sein – entscheidend ist der Eingang, nicht der Versand. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ein Wechsel lohnt sich vor allem dann, wenn Beitrag und Leistung nicht mehr zusammenpassen. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
 
 **Das Wichtigste in Kürze**
 
@@ -326,19 +326,19 @@ Bevor du vergleichst, solltest du verstehen, was du überhaupt vergleichst. Eine
 
 **Faustregel:** Auto bis 5 Jahre? Dann Vollkasko. 5 bis 10 Jahre? Teilkasko reicht. Älter als 10 Jahre? Dann genügt oft die Haftpflicht. Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist.
 
-## Mein eigener Spar-Erfolg: von 1.040 € auf 412 €
+## Rechenbeispiel mit fiktiven Werten: von 1.040 € auf 412 €
 
-| Merkmal | Alte Versicherung (2016) | Optimierter Vertrag (2026) |
+| Merkmal | Altvertrag (Beispiel) | Neuer Tarif (Beispiel) |
 |:---|:---|:---|
 | Jahresbeitrag | 1.040 € | 412 € |
 | Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |
 | Werkstattbindung | nein | ja |
 | Jahreskilometer | 15.000 km (tatsächlich 11.800) | 12.000 km |
-| Fahrerkreis | beliebig | Partner + ich (ü30) |
+| Fahrerkreis | beliebig | Partner + Hauptfahrer (ü30) |
 | Tarifgruppe | Klassisch | Direktversicherer mit Telematik-Option |
 | SF-Klasse | SF 12 | SF 22 |
 
-Die Ersparnis hat zwei Quellen. Ein Teil kommt von der höheren Schadenfreiheitsklasse. Der größere Teil kommt von der Optimierung. Ich habe Tarifmerkmale angepasst und regelmäßig gewechselt.
+Die Ersparnis hat zwei Quellen. Ein Teil kommt von der höheren Schadenfreiheitsklasse. Der größere Teil kommt von der Optimierung. Im Beispiel werden Tarifmerkmale angepasst und der Tarif gewechselt. Die Werte sind zur Veranschaulichung gewählt, keine Erfahrungswerte.
 
 ## Die 7 größten Sparhebel im Kfz-Versicherungsvergleich
 

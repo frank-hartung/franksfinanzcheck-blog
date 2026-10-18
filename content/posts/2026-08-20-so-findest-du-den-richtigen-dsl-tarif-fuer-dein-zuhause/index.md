@@ -244,4 +244,8 @@ Idealerweise prüfst du deine Optionen etwa drei bis vier Monate vor Ablauf dein
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

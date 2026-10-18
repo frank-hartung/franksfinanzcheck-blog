@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
+title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
 description: "Internet & DSL-Update: Prüfe Bedarf, Effektivpreis und Wechseloptionen, bevor du für zu viel Leistung oder einen alten Vertrag zahlst."
 date: 2026-10-07T01:34:23Z
 draft: false
@@ -9,7 +9,7 @@ reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, REL
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["News"]
 pillar: "internet-dsl"
-keywords: ["Internet & DSL-Update: Was sich jetzt für dich ändert", "Internet & DSL-Update", "Internet & DSL Update", "DSL-Update", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
+keywords: ["DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick", "Internet & DSL-Update", "Internet & DSL Update", "DSL-Update", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -18,9 +18,9 @@ news_kategorie: "internet"
 kurzantwort: "Beim aktuellen Internet & DSL-Update geht es vor allem um zwei Punkte: Viele Haushalte buchen mehr Geschwindigkeit, als sie wirklich brauchen, und viele Altverträge sind unnötig teuer geworden. Wer Bedarf, Router-Situation und 24-Monats-Preis sauber prüft, spart oft 120 € bis 300 € pro Jahr – manchmal sogar mehr."
 cover:
   image: "images/covers/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert.jpg"
-  alt: "Internet & DSL-Update: Was sich jetzt für dich ändert"
+  alt: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
+pin_title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
 pin_description: "*Werbung | Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll. Mehr Spartipps auf FranksFinanzcheck! #internetdslupdate #dslupdate #dslvergleich"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -363,3 +363,7 @@ Der Markt wird weiter mit hohen Geschwindigkeiten werben. Für Verbraucher wird 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)

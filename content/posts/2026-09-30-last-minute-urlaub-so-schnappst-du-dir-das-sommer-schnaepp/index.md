@@ -273,3 +273,7 @@ Prüfe zunächst vorhandene Policen und Kartenleistungen. Entscheidend sind vers
 
 ### Kurzer Merksatz vor der Buchung
 Nimm dir Zeit. Der Rabatt auf dem Banner ist selten der echte Preis. Rechne nach. Frag nach. Vergleiche in Ruhe. So buchst du günstig. Und so vermeidest du Überraschungen nach der Reise.
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)

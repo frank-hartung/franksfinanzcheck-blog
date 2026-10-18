@@ -280,4 +280,8 @@ Nur wenn Telefonie, Smart Home, Updates und andere Dienste dadurch nicht gestör
 
 👉 **Preis pro Kilowattstunde prüfen:** [**→ Stromanbieter vergleichen**](/go/strom/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

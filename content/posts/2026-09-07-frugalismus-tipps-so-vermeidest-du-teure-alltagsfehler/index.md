@@ -1,5 +1,5 @@
 ---
-title: "Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler"
+title: "Teure Alltagsfehler vermeiden: Fünf Frugalismus-Tipps im Überblick"
 description: "Vier Frugalismus-Tipps gegen teure Alltagsfehler: 24-Stunden-Regel, No-Spend-Wochenende, Abo-Revision und Meal Prep – mit 7-Tage-Plan."
 date: 2026-09-07T23:25:42Z
 lastmod: 2026-09-30
@@ -238,5 +238,9 @@ Es gibt keinen falschen Zeitpunkt. Je früher du beginnst, desto stärker wirkt 
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

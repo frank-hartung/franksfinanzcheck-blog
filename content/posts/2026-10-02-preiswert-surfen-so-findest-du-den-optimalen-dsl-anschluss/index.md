@@ -1,5 +1,5 @@
 ---
-title: "Preiswert surfen: So findest du den optimalen DSL‑Anschluss"
+title: "Preiswert surfen: DSL, Kabel oder Glasfaser – was zu dir passt"
 description: "Preiswert surfen mit DSL: Vergleiche Tarifkosten und Vertragsbedingungen, prüfe passende Angebote 2026 und berechne die mögliche Ersparnis beim Wechsel."
 date: 2026-10-05T19:22:11Z
 draft: false
@@ -270,5 +270,9 @@ Für Videocalls sehr. Guckst du nur Videos, genügt ein kleiner Wert. Arbeitest 
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

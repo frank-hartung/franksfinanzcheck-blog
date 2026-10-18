@@ -302,3 +302,7 @@ Achte auf die Gesamtkostenquote, die Fondsgröße und die Replikationsmethode (p
 👉 **Jetzt vergleichen und sparen:** [**→ Tagesgeld der C24 Bank eröffnen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)

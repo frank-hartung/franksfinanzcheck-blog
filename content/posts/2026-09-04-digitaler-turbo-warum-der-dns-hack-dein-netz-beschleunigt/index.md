@@ -173,3 +173,7 @@ Das kann sich nach Standort, Netz, Domain und Zeitpunkt unterscheiden. Wiederhol
 Die Schritt-für-Schritt-Anleitung für Anbieterwahl und Einstellungen auf Router und Endgeräten steht im [Ratgeber zum DNS-Server-Wechsel](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/).
 
 **Weiterlesen:** [Internet & DSL – der Ratgeber](../../pillar/internet-dsl/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)

@@ -1,5 +1,5 @@
 ---
-title: "Gasrechnung senken: Spätsommer-Check für Tarif und Heizung"
+title: "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung"
 description: "Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder…"
 date: 2026-09-25T12:15:40Z
 lastmod: 2026-09-28
@@ -300,5 +300,9 @@ Beides multipliziert sich. Beginne mit dem klarsten Befund: teurer Vertrag oder 
 ---
 
 👉 **Tarif mit echten Verbrauchsdaten prüfen:** [**→ Gasanbieter vergleichen**](/go/gas/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

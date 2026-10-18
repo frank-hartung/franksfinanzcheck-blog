@@ -237,4 +237,8 @@ Dann erfüllt sie genau ihren Zweck. Setze danach das Auffüllen wieder an erste
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen](../../werkzeuge/notgroschen-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
