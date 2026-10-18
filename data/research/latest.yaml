@@ -1,5 +1,5 @@
-generated_at: '2026-10-17T08:02:16Z'
-day: '2026-10-17'
+generated_at: '2026-10-18T08:19:58Z'
+day: '2026-10-18'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,58 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 10 Tipps für günstige Reiseversicherungen
+  - topic: 'Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    score: 0.55
+    keywords:
+    - Auslandskrankenversicherung Familie
+    - Reisekrankenversicherung Kosten
+    - Familienreiseschutz
+  - topic: Die 50-30-20-Regel einfach erklärt
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Die 50-30-20-Regel einfach erklärt
+    score: 0.55
+    keywords: []
+  - topic: Die Vorteile einer Kreditkarten-Versicherung
     pillar: versicherungen
     signal: niche_hook
-    source: topics:10 Tipps für günstige Reiseversicherungen
+    source: topics:Die Vorteile einer Kreditkarten-Versicherung
     score: 0.55
     keywords:
+    - Kreditkarten-Versicherung
     - Reiseversicherung
-    - Versicherungsvergleich
-    - Günstige Versicherungen
-  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
+    - Kreditkarten-Schutz
+  - topic: 'Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
+    score: 0.55
+    keywords:
+    - Girokonto Dispozins Vergleich
+    - Kontoführungsgebühren zurückfordern
+    - Kontowechsel Prämie
+    - Bestes Girokonto 2026
+  - topic: 'Energieeffizienz im Haushalt: 5 einfache Maßnahmen'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
+    source: 'topics:Energieeffizienz im Haushalt: 5 einfache Maßnahmen'
     score: 0.55
     keywords:
-    - Energieausweis
-    - Energieausweis Kosten
-    - Energieeffizienzklasse Haus
-  - topic: Internet-Speed optimieren mit dem richtigen Router
-    pillar: internet-dsl
+    - Energieeffizienz
+    - Haushalt
+    - Energie sparen
+  - topic: Energiekosten senken mit Smart-Home-Geräten
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:Internet-Speed optimieren mit dem richtigen Router
+    source: topics:Energiekosten senken mit Smart-Home-Geräten
     score: 0.55
     keywords:
-    - Internet-Speed
-    - Router
-    - Optimieren
-  - topic: Internet-Tarife im Vergleich
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:Internet-Tarife im Vergleich
-    score: 0.55
-    keywords:
-    - Internet
-    - Tarif
-    - Vergleich
-  - topic: Kontoeröffnung mit günstigen Gebühren
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Kontoeröffnung mit günstigen Gebühren
-    score: 0.55
-    keywords:
-    - Kontoeröffnung
-    - Günstige Gebühren
-    - Kontenvergleich
-  - topic: 'Kreditkarten mit Bonusprogramm: Welche sind die besten?'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Kreditkarten mit Bonusprogramm: Welche sind die besten?'
-    score: 0.55
-    keywords:
-    - Kreditkarten
-    - Bonusprogramm
-    - Kreditkartenvergleich
+    - Smart-Home
+    - Energiekosten
+    - Strom sparen
 live_web:
   enabled: false
   findings: []
