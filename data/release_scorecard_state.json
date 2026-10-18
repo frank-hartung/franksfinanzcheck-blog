@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-18T11:45:11Z",
+  "generated_at": "2026-10-18T12:19:28Z",
   "modus": "kandidaten",
-  "commit": "82cff8dd89a78c8a4763c4e81e0f776ef28596c1",
+  "commit": "d2fa8e6bb371a60fd20ddfc8f9405a48b6c39403",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -396,11 +396,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
-      "sha256": "d01e04003137ce460cbd4dfe68e519bc44bd80cb648d3ff87240fe80cb51c786",
-      "urteil": "blockiert",
+      "sha256": "93cf26de8eb8fbd27067bf26213bc8a3ce9275ed9e63410bcb559f910c528de4",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -410,7 +410,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
       "sha256": "80770eaed25afbf478ba421ae51ae2f610da20e0892d24aced2d83ccb71a18bc",
@@ -787,11 +787,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "1e50c8e70f811ab027e88d0f739c8050aad7d0c599308aa70a678baa92c608a3",
-      "urteil": "warnung",
+      "sha256": "7bd769ea015de7a1edd5b1e1bf30d54c8cbc4241933b0f0e504c82f44a4fe0be",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -801,7 +801,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-13",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "49284ce93a14c5574d19188084f2631f79b533297ee0b5f306d3915911007212",
@@ -957,11 +957,11 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
-      "sha256": "a03a48b146e8cd419447ffa338bef7bb96abdc4ec0fb2e95d97fb757fb7c7b26",
-      "urteil": "warnung",
+      "sha256": "f72267ee59d7726655bf178011e524838cfeaaadb58fef1d1b23a865db6a8951",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -971,14 +971,14 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-      "sha256": "83f31a18eccb479158577dfc8df20e68cfcadd2bca4338b958889ba1842b403b",
-      "urteil": "warnung",
+      "sha256": "d9dbdacb55a9c4fe6681c8ddc6316d3c64294bafb973343f322ba7c44ddb2445",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -988,7 +988,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
       "sha256": "559e7fbdf784c49b5b5bdffeba903c3c7c5083fa88243eb96e8ad9a105036aac",
