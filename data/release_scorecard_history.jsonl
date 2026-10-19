@@ -264,3 +264,4 @@
 {"blockiert": [], "commit": "ed3f40990c8a5ff4ef8f5bfba9e491270091b497", "freigabe_reif": 60, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T18:13:49Z", "warnung": 0}
 {"blockiert": [], "commit": "403f1758bf16339d4a8bb35b6d0e1fd30d0f2fe3", "freigabe_reif": 60, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T20:52:33Z", "warnung": 0}
 {"blockiert": [], "commit": "141f39d853a9a0e2b23fae1399c1321b3bebd571", "freigabe_reif": 60, "kandidaten": [], "live": 60, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-18T23:20:13Z", "warnung": 0}
+{"blockiert": [], "commit": "258fd51ed1d4eeb90eefe8b3ef460c54d5897380", "freigabe_reif": 62, "kandidaten": ["2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt"], "live": 62, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-19T01:27:33Z", "warnung": 0}

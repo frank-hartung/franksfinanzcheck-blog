@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-18T23:20:13Z",
+  "generated_at": "2026-10-19T01:27:33Z",
   "modus": "kandidaten",
-  "commit": "141f39d853a9a0e2b23fae1399c1321b3bebd571",
+  "commit": "258fd51ed1d4eeb90eefe8b3ef460c54d5897380",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -37,6 +37,23 @@
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
+      "sha256": "57067c232b9b20b92add78fac045f5f9417fb9f6514bda60e88316a28906690e",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "f190e11b4d81595c0fad81015986a105f2ad70c32447fec3846c0c7ced1a967b",
@@ -1023,6 +1040,23 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+      "sha256": "8b61df1853b2b3d5271d7fb92e6bc132110c908589b35de1fde60480bde08eb5",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2027-01-05",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
