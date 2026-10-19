@@ -1,17 +1,17 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-18 22:21 UTC  
+**Stand:** 2026-10-19 13:10 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-16): 2 Artikel – Ziel erfüllt. – Bestand: 1 förderfähig in der Re-Queue, 1 von Gates gehalten (ältester 2 Tage: Redaktions-Standard: RS2, RS3)
+**Befund:** Letzter Publikationstag (2026-10-19): 2 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 3 Tage: Redaktions-Standard: RS2, RS3)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-10-18 (Sonntag) |
-| Publikationstag heute | nein |
-| Artikel letzter Publikationstag (2026-10-16) | 2 |
-| Letzter Artikel überhaupt | 2026-10-16 (2 Tage her) |
-| Live-Artikel gesamt | 60 |
-| Förderfähig in der Re-Queue | 1 |
+| Heute | 2026-10-19 (Montag) |
+| Publikationstag heute | ja |
+| Artikel letzter Publikationstag (2026-10-19) | 2 |
+| Letzter Artikel überhaupt | 2026-10-19 (0 Tage her) |
+| Live-Artikel gesamt | 62 |
+| Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 1 |
 | Mindestziel/Tag | 2 |
 
