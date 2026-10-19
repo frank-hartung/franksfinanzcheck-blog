@@ -230,7 +230,6 @@ ausdrückliche Schritt nach dem Proxy – der Text steht fertig im Runbook.
 
 ```
 python3 scripts/alert_resolve_gate.py --selftest          11 Fälle grün (neu)
-<<<<<<< HEAD
 python3 -m unittest scripts.tests.test_alert_resolve_gate 19 Tests grün (neu)
 python3 -m unittest scripts.tests.test_alert_scoping      26 Tests grün
 python3 -m unittest scripts.tests.test_sicherheits_nachweis 24 Tests grün (Paralleldurchgang)
@@ -250,22 +249,6 @@ python3 scripts/integrity_guard.py --gate                 grün (Kern signiert)
 python3 scripts/ki_transportweg.py --selftest             grün (T6-Ausnahme mit Ausgleich)
 python3 scripts/selftest_runner.py                        215 Wachen grün (430 Uhr-Proben)
 python3 scripts/governance_contract.py --quick            38 Regeln erfüllt
-=======
-python3 -m unittest scripts.tests.test_alert_resolve_gate 19 Tests, 19 grün (neu)
-python3 -m unittest scripts.tests.test_alert_scoping      24 Tests, 24 grün
-node scripts/tests/sim/alert_scoping_sim.mjs              44 Szenarien, 44 grün
-python3 scripts/worker_betrieb_wache.py --selftest        13 Fälle grün (vorher 10)
-python3 scripts/worker_betrieb_wache.py --offline         grün (Spiegel geprüft)
-cd newsletter-worker && node --test                       92 Tests, 92 grün
-npm run test:sicherheit                                   alle vier Wachen grün
-python3 scripts/cloudflare_edge_freigabe.py --selftest    4 Fälle grün (neu)
-python3 -m unittest scripts.tests.test_cloudflare_edge_freigabe  6 Tests grün (T6-Ausgleich)
-npm run edge:check                                        grün
-python3 scripts/url_substring_guard.py                    885 Dateien, 0 Befunde
-python3 scripts/integrity_guard.py --gate                 grün (Kern neu signiert)
-python3 scripts/ki_transportweg.py --selftest             grün (T6-Ausnahme mit Ausgleich)
-python3 scripts/selftest_runner.py                        215 Wachen grün (430 Uhr-Proben)
->>>>>>> origin/main
 ```
 
 Belegt aus den Laufsachen (Actions-API, unveränderlich):
@@ -276,7 +259,6 @@ Belegt aus den Laufsachen (Actions-API, unveränderlich):
 - Run `39254264963` (19.10., `schedule`): Annotationen
   „F-01 BEFUND … Proxy nicht aktiv“ und „Worker BEFUND“.
 
-<<<<<<< HEAD
 **Nachtrag 1 – Vorlauf-Befunde der Content-Ebene (inzwischen geheilt):**
 Der erste Regression-Lauf dieses Vorschlags trug zwei Befunde, die am
 Basis-Commit `1021d45` identisch auftraten (dort nachgestellt – Vorläufigkeit
@@ -305,24 +287,14 @@ Unverändert **eigenständig** in diesem Vorschlag: das Turnstile-**Paar**
 (der Anmelde-Ausfall seit 15.10. ist im Code abstellbar – die parallele
 Heilung meldete den Widerspruch weiterhin als Befund) und das
 **A1-Edge-Werkzeug** (`npm run edge:freigabe[:apply]`).
-=======
-**Nachtrag – Vorlauf-Befunde der Content-Ebene, bewusst nicht hier geheilt:**
-Der Regression-Lauf dieses Vorschlags trägt zwei Befunde, die mit WF-E813
-nichts zu tun haben und am Basis-Commit `1021d45` **identisch** auftreten
-(wiederholt im Arbeitsbaum des Basisstands nachgestellt – Vorläufigkeit
-bewiesen, nicht behauptet):
-`test_inhalts_register.test_live_wache_ist_gruen` meldet „FF3 … kein
-Rechner-Link“ für den am 19.10. 16:43Z scharf geschalteten Reserve-Beitrag
-`2026-10-12-haushaltskosten…`, und
-`test_weiterleitungen.test_snapshot_ist_aktuell` meldet „Live-URL
-verschwunden ohne Weiterleitung“ für
-`/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/`
-(Klasse #812 „SEO live404“). Beide Befunde sind `owner: human`, Kanal
-`seo-technik`; die Testnotiz verlangt ausdrücklich „Befund prüfen und erst
-danach `python3 scripts/url_wache.py --snapshot`“ – ein Triager-Handgriff.
-Dieser Vorschlag grätscht deshalb weder in die Content-Pipeline noch in den
-Snapshot und behauptet keine grüne Gesamtsuite.
->>>>>>> origin/main
+
+**Nachtrag 3 – Instandsetzung nach dem Squash von #813:** Die automatische
+Zusammenführung des Vorschlags in `main` (`1089d1c0`) stapelte in
+`scripts/worker_betrieb_wache.py` die Reste beider Turnstile-Matrizen
+übereinander (Syntaxfehler, Zeile 255) – die Worker-Ebene war auf `main`
+nicht importierbar. Diese Fassung enthält die aufgelöste Integration
+(beide Matrizen, `vorlagen_fehler`, Spiegelprüfung) und stellt die
+Gesamtsuite wieder her.
 
 ---
 
