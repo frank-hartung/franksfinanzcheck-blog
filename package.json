@@ -71,7 +71,7 @@
     "betrieb:check": "python3 scripts/worker_betrieb_wache.py --selftest && python3 scripts/worker_betrieb_wache.py --offline",
     "betrieb:check:live": "python3 scripts/worker_betrieb_wache.py",
     "n8n:schutz": "python3 scripts/n8n_schutz_wache.py --selftest",
-    "test:sicherheit": "python3 scripts/blog_header_gate.py --selftest && python3 scripts/content_html_wache.py --selftest && python3 scripts/worker_betrieb_wache.py --selftest && python3 scripts/n8n_schutz_wache.py --selftest && python3 -m unittest scripts.tests.test_blog_header_gate && python3 scripts/content_html_wache.py && python3 scripts/worker_betrieb_wache.py --offline && python3 scripts/blog_header_gate.py --offline && python3 scripts/n8n_schutz_wache.py",
+    "test:sicherheit": "python3 scripts/blog_header_gate.py --selftest && python3 scripts/content_html_wache.py --selftest && python3 scripts/worker_betrieb_wache.py --selftest && python3 scripts/n8n_schutz_wache.py --selftest && python3 scripts/sicherheits_nachweis.py --selftest && python3 -m unittest scripts.tests.test_blog_header_gate scripts.tests.test_worker_betrieb_wache scripts.tests.test_sicherheits_nachweis scripts.tests.test_alert_scoping && python3 scripts/content_html_wache.py && python3 scripts/worker_betrieb_wache.py --offline && python3 scripts/blog_header_gate.py --offline && python3 scripts/n8n_schutz_wache.py",
     "header:check:live:json": "python3 scripts/blog_header_gate.py --selftest && python3 scripts/blog_header_gate.py --json --report f01-live.md",
     "edge:check": "python3 scripts/cloudflare_edge_freigabe.py --selftest",
     "edge:freigabe": "python3 scripts/cloudflare_edge_freigabe.py --selftest && python3 scripts/cloudflare_edge_freigabe.py --pruefen",

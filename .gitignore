@@ -173,3 +173,10 @@ data/alt_texte/*.tmp
 !/AFFILIATE-INTENT-REPORT.md
 !/PINTEREST-REPORT.md
 !/PRODUKTIONS-STATUS.md
+
+# Sicherheits-Wache: bereinigte Live-Messungen bleiben Lauf-Artefakte (#809).
+/f01-live.md
+/f01-live.json
+/worker-live.md
+/worker-live.json
+/sicherheits-jobs.json
