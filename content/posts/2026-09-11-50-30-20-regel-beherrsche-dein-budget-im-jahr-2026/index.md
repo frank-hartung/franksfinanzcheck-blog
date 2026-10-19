@@ -46,6 +46,10 @@ Die Idee ist simpel: Du gibst deinem Geld von Anfang an Aufgaben. Ein Teil deckt
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Budget endlich planbar werden soll, trenne Sparen konsequent vom Girokonto-Alltag. Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) macht genau das leichter: [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Das Wichtigste in Kürze
 
 - Die 50–30–20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
@@ -212,6 +216,10 @@ Wer aus dem Nichts sofort perfekt bei 50–30–20 landen will, bricht oft wiede
 
 ### Fehler 4: Gehaltserhöhungen komplett verleben
 Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), wenn sofort alles in höhere Ausgaben fließt.
+
+![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 

@@ -1,5 +1,5 @@
 ---
-title: "Teure Alltagsfehler vermeiden: Fünf Frugalismus-Tipps im Überblick"
+title: "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick"
 description: "Vier Frugalismus-Tipps gegen teure Alltagsfehler: 24-Stunden-Regel, No-Spend-Wochenende, Abo-Revision und Meal Prep – mit 7-Tage-Plan."
 date: 2026-09-07T23:25:42Z
 lastmod: 2026-09-30
@@ -48,6 +48,10 @@ faktencheck: "2026-09-27"
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
 
 Gute **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** setzen deshalb nicht auf Geiz, sondern auf weniger Reibungsverlust. Sie bremsen Impulskäufe, machen laufende Kosten sichtbar und lenken dein Geld stärker in Dinge, die dir wirklich wichtig sind.
+
+![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
 
 ## Das Wichtigste in Kürze
 
@@ -126,6 +130,10 @@ Wir leben in einer Abo-Wirtschaft: Software, Streaming, Fitnessstudio oder Zeits
 Gehe deshalb einmal im Quartal deine Kontoauszüge durch. Identifiziere jede automatische Abbuchung. Frage dich bei jedem Posten: „Habe ich diesen Dienst im letzten Monat wirklich genutzt?“ Wenn die Antwort nein lautet, kündige sofort. Viele Anbieter lassen dich monatlich aussteigen, was dir maximale Flexibilität gibt.
 
 Häufig gibt es kostenlose Alternativen: Die örtliche Bibliothek verleiht Filme, Magazine und teils sogar Streaming-Zugänge. Wer Fixkosten so drückt, gewinnt Spielraum ohne täglichen Verzicht-Stress – einer der stärksten Hebel beim **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)**.
+
+![Gliederung des Beitrags: Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Trick 4: Meal Prepping und der Wocheneinkauf
 

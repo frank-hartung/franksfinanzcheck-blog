@@ -40,15 +40,14 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "15ed1e0d9bf8e4801d8933b4a5c4b82ea703642fbdee759a78e3f9ceb2d273ba"
+  status: "ausstehend"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV, § 40 VVG); Regionalklassen-Angabe auf GDV-Zahlen korrigiert, SF-Tabelle bereinigt, Eigenvergleiche dokumentiert"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Prüfqueue #586: Regionalklassen-Fakt korrigiert (99 von 413 Bezirken), SF-0-Zeile auf belegten Grundbeitragssatz korrigiert, Belegkette ersetzt, CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
+  aenderungsgrund: "Freigabe 05.10.2026 entfällt: Text nach Freigabe geändert (Erfahrungsaussagen und Titel korrigiert, 19.10.2026). Erneute Prüfung durch einen benannten Prüfer nötig. Vorherige Fassung: Prüfqueue #586: Regionalklassen-Fakt korrigiert (99 von 413 Bezirken), SF-0-Zeile auf belegten Grundbeitragssatz korrigiert, Belegkette ersetzt, CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
   gepruefte_aussagen:
     - textanker: "entscheidend ist der Eingang, nicht der Versand"
       pruefung: "Bestätigt: Die Kündigung muss spätestens bis 30. November beim Versicherer eingegangen sein (Verbraucherzentrale)"

@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-14
-title: "Sieben Geldgewohnheiten: Welche Routinen wirklich Geld bringen"
+title: "Sieben Geldgewohnheiten: Welche Routinen wirklich wirken"
 description: "Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen."
 date: 2026-10-09T02:12:31Z
 draft: false

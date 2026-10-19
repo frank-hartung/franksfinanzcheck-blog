@@ -41,6 +41,10 @@ quellen:
 faktencheck: 2026-10-14
 ---
 
+![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
 
 Kurzfristige Angebote können günstiger sein. Doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar. Nachlässe von bis zu 50 Prozent seien Einzelfälle. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
@@ -165,6 +169,10 @@ Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Rei
 - [ ] Buchungsbestätigung und Kontaktdaten gespeichert
 
 Diese Punkte machen den Endpreis nachvollziehbar. Sie garantieren keinen Rabatt, helfen aber, Zusatzkosten und unpassende Bedingungen vor der Zahlung zu erkennen.
+
+![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Kurzer Merksatz vor der Reise
 

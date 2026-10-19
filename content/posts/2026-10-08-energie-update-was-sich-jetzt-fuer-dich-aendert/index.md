@@ -1,6 +1,6 @@
 ---
-title: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
-description: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
+title: "Energiepreise 2026: Strom- und Gasvertrag prüfen"
+description: "Strom- und Gasverträge im Herbst prüfen: Preisgarantie, Abschlag und Kündigungsfristen im Überblick."
 date: 2026-10-08T11:38:36Z
 lastmod: 2026-10-13
 draft: true

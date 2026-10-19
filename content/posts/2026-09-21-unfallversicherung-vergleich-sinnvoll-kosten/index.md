@@ -31,15 +31,14 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "54148463ac4637bd4dfc1c7f1f6329ba24f71792128d16838f50cc231e372239"
+  status: "ausstehend"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Abgrenzung Unfall/Krankheit/BU belegt, Progressions- und Gliedertaxe-Rechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Prüfqueue #586: Belegkette auf Verbraucherzentrale umgestellt, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Rechenbeispiele nachgerechnet"
+  aenderungsgrund: "Freigabe 05.10.2026 entfällt: Text nach Freigabe geändert (Erfahrungsaussagen und Titel korrigiert, 19.10.2026). Erneute Prüfung durch einen benannten Prüfer nötig. Vorherige Fassung: Prüfqueue #586: Belegkette auf Verbraucherzentrale umgestellt, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Rechenbeispiele nachgerechnet"
   gepruefte_aussagen:
     - textanker: "Rücken, Psyche, Krebs oder andere Krankheiten gehören in der Regel nicht zum Schutzkern"
       pruefung: "Bestätigt: Die private Unfallversicherung leistet nur bei Unfallfolgen, nicht bei Krankheit (Verbraucherzentrale)"

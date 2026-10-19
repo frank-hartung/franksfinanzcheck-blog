@@ -15,7 +15,7 @@ ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
 redaktionelle_pruefung:
-  risikoklasse: "standard"
+  risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Unbelegte Geschwindigkeits- und Sparwerte entfernt; Rechtsangaben mit amtlichen Quellen geprüft; Laufzeit-Abschnitt (§ 56 TKG) eigenständig neu gefasst und Titel geschärft (Einzigartigkeits-Audit #714, 12.10.2026)"
 inspiration: "DSL-Anbieter wechseln: Gesamtpreis und Übergang planen"

@@ -1,6 +1,6 @@
 ---
 title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
-description: "Haushaltsbuch führen leicht gemacht: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – und wie dir die 50-30-20-Regel hilft, Ausgaben sichtbar zu ordnen."
+description: "Haushaltsbuch führen: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – mit der 50-30-20-Regel als Ordnungshilfe."
 date: 2026-08-21T06:10:00Z
 lastmod: 2026-09-28
 draft: false

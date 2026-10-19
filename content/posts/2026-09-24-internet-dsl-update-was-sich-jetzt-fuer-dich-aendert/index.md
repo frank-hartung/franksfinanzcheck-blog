@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
+title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis"
 description: "Internet & DSL-Update: Prüfe Bedarf, Effektivpreis und Wechseloptionen, bevor du für zu viel Leistung oder einen alten Vertrag zahlst."
 date: 2026-10-07T01:34:23Z
 draft: false

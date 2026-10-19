@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-25
-title: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
+title: "Versicherungsbeiträge steigen: Sonderkündigung prüfen"
 description: "Zum Jahresende steigen oft Beiträge oder Bedingungen ändern sich. So prüfst du Versicherungen klug, nutzt Fristen und vermeidest unnötige Mehrkosten."
 date: 2026-09-25T08:00:00Z
 draft: true
@@ -49,15 +49,14 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "9c0b0d564df2a0fc43ef118127d7a1ac6a2a7f53bc48158d8d702aac8d1082b7"
+  status: "ausstehend"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, § 40 VVG); Fristen- und Sonderkündigungs-Aussagen belegt, Beispielrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Prüfqueue #586: Belegkette ersetzt (tote URLs), Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Summen nachgerechnet"
+  aenderungsgrund: "Freigabe 05.10.2026 entfällt: Text nach Freigabe geändert (Erfahrungsaussagen und Titel korrigiert, 19.10.2026). Erneute Prüfung durch einen benannten Prüfer nötig. Vorherige Fassung: Prüfqueue #586: Belegkette ersetzt (tote URLs), Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Summen nachgerechnet"
   gepruefte_aussagen:
     - textanker: "regulär zum Jahresende kündigen"
       pruefung: "Bestätigt: Die Kfz-Versicherung ist jährlich kündbar, Kündigung muss spätestens am 30. November eingehen (Verbraucherzentrale)"

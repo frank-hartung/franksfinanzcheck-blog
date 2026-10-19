@@ -1,6 +1,6 @@
 ---
-title: "Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen"
-description: "Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
+title: "Google-Regeln für Ratgeber: Erfahrung und Quellen"
+description: "Was die Google-Regeln für Ratgeber für Finanztexte bedeuten, erklärt dieser Entwurf. Noch nicht zur Veröffentlichung freigegeben."
 date: 2026-10-06T11:33:15Z
 draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]

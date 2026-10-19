@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Heizungs-Check vor dem ersten Frost: Probelauf, Thermostate, Anlagendruck"
+title: "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck"
 description: "Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung sicher – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb."
 date: 2026-09-11T08:45:00Z
 draft: false

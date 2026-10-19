@@ -50,6 +50,10 @@ Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander
 
 Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mit welcher Karte er unterwegs ist. Geld abheben im Ausland ist eine Rechnung mit zwei Zeilen: der Automat und deine Bank. Wer beide kennt, gibt weniger Geld aus. Und er ärgert sich später seltener.
 
+![Merkkarte: Kernaussagen zu Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Kurz gefasst
 
 * **Zwei Stellen rechnen ab:** Der Automatenbetreiber vor Ort und deine Bank zu Hause.
@@ -121,6 +125,10 @@ Die drei Gebührenarten, die dir am Automaten begegnen, auf einen Blick:
 3. **Heb in einem Zug den Bedarf mehrerer Tage ab.** Jeder Vorgang kostet erneut.
 4. **Nutze Automaten von Banken, nicht von Aufstellern in Touristenzonen.** Das ist keine Garantie, aber ein guter Anfang.
 5. **Prüfe den Beleg, bevor du ihn wegwirfst.** Betrag in Landeswährung, angezeigter Kurs und Entgelt stehen darauf.
+
+![Gliederung des Beitrags: Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Wechselstube oder Automat?
 
@@ -204,6 +212,6 @@ Melde den Verlust sofort über die Sperrnummer deiner Bank. Viele Institute biet
 
 ## Weiterrechnen und vertiefen
 
-- **Rechner:** [Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl](../../werkzeuge/fixkosten-scanner/)
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

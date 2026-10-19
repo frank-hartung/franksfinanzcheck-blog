@@ -54,6 +54,10 @@ Dieser Ratgeber hilft dir dabei, im Tarif-Dschungel den Durchblick zu behalten. 
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe zuerst, welche Tarife an deiner Adresse überhaupt verfügbar sind. Danach vergleichst du Preise, Boni und Routerkosten: [**DSL-Tarife vergleichen**](/go/dsl/) _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Wie viel Internet-Geschwindigkeit brauchst du wirklich?
 
 Die entscheidende Frage bei der Tarifwahl im Oktober 2026 lautet nicht mehr, was technisch möglich ist, sondern was dein Haushalt in der Spitze gleichzeitig abruft. Die benötigte Bandbreite steigt zwar stetig, aber oft langsamer, als die Werbung uns glauben machen will.
@@ -168,6 +172,10 @@ Prüfe vor einem Wechsel:
 | Verbindung stabil, aber teuer | Altvertrag ohne Rabatte | Tarifvergleich und Wechsel |
 
 Falls dein WLAN das Nadelöhr ist, schau hier rein: [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
+
+![Gliederung des Beitrags: DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Vier Regeln vor der Unterschrift
 

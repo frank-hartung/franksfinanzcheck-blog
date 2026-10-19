@@ -49,6 +49,10 @@ Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehör
 - Prüfe Gebühren, Regeln und Ausstattung vor der Buchung.
 - Leihe oder nutze Ausrüstung weiter, bevor du neu kaufst.
 
+![Merkkarte: Kernaussagen zu Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Welche Kosten gehören in ein Campingbudget?
 
 
@@ -123,6 +127,10 @@ Mach auch eine Liste für Wetter und Alltag. Prüfe, ob du Licht, Kleidung für 
 Vermeide doppelte Dinge, die du am Platz nicht nutzt. Wenn du mit Kindern oder einem Tier reist, plane deren Bedarf gleich mit ein.
 
 So kaufst du unterwegs weniger aus Zeitdruck.
+
+![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Wie planst du Fahrt und Essen ohne Schönrechnen?
 

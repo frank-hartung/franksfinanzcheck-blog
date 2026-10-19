@@ -158,3 +158,33 @@ Empfehlung für den nächsten Schritt: einmal mit dem Build-Skript (`npm run seo
 **Live-Zahlen (60 Beiträge):** Werkzeug-Links vorher 0, jetzt 60. Pillar-Links vorher 58, jetzt 60. Formel-Titel live vorher 1, jetzt 0. Erfahrungsaussagen im Live-Text: entfernt oder als Modell gekennzeichnet.
 
 **Nicht geprüft:** Ein Hugo-Build und ein Render-Test sind in dieser Umgebung nicht möglich (kein Hugo-Binary, kein GitHub-Zugriff). Die Frontmatter-Prüfung für alle 92 Beiträge ist erfolgreich (YAML gültig). Eine Sichtprüfung der Seiten nach dem Deploy steht aus.
+
+### 7b. Nachtrag 19.10.2026: Entscheidungen auf Dauer gesichert
+
+Die offenen Entscheidungen aus Punkt 2–6 sind jetzt als Repo-Artefakte festgehalten. Der Stand ist prüfbar, nicht nur behauptet.
+
+| Artefakt | Zweck |
+|---|---|
+| `data/entscheidungen.yaml` | Entscheidungsregister E-01 bis E-15: Entscheidung, Begründung, Status, Verantwortlicher, Nachweis |
+| `data/kannibalisierung_map.yaml` | Suchabsicht je Beitrag in den Clustern K1 bis K7; Regeln R1 bis R4 |
+| `data/fachpruefung_register.yaml` | Prüfpaket für 17 Live-Beiträge mit erhöhtem Risiko oder Konto-/Karten-Pillar. Feld `pruefer` leer. Erzeugt durch `scripts/fachpruefung_register.py` |
+| `data/top20_abbildungen.yaml` | Top-20-Auswahl und Regel (Dateikopf) |
+| `scripts/ff_inhalts_wache.py` | Inhalts-Wache FF1–FF5 (Erfahrungsaussagen, Formel-Titel, Rechner-/Pillar-Links, Dubletten, Abbildungen) |
+| `scripts/abbildungen_ableiten.py` | Erzeugt und prüft je 2 Abbildungen für die 20 Top-Beiträge |
+| `scripts/tests/test_inhalts_register.py` | 16 Tests für Wache, Register und Map |
+
+**Stand je Punkt**
+
+| # | Punkt | Stand | Was offen bleibt (Entscheidung bei Ihnen) |
+|---|---|---|---|
+| 2 | Kannibalisierung, Formel-Titel | Titel umgesetzt, Map steht. Live-Formel-Titel: 0 (Wache FF2). | Drei Keyword-Bereinigungen (E-01). Entwürfe 09-23, 10-07 Notgroschen, 10-14, 10-16 nicht veröffentlichen; Verwerfen nur mit Ihrer Entscheidung (E-14). |
+| 3 | Erfahrungsaussagen | Live bereinigt, Fallstudie als fiktiv gekennzeichnet, Wache FF1 grün. | README-Pauschalen „über zehn Jahre Praxis“ und „Hunderte … Tarifvergleiche“: nur Sie können sie belegen oder ersetzen (E-09). |
+| 3 | Konto-/Kreditkarten-Fachprüfung | Prüfpaket erstellt, Status ausstehend, kein Prüfer. | Prüfer benennen (E-05). Empfohlene Reihenfolge im Register. |
+| 4 | Abbildungen Top-20 | 20 von 20 Beiträgen mit je 2 eigenen SVG-Abbildungen, `--check` ohne Befund. | Die Abbildungen sind Schemata aus dem eigenen Text, keine Datengrafiken. Datengrafiken würden echte Zahlen brauchen (E-08). |
+| 5 | Rechner und Pillar | 60 von 60 Live-Beiträge mit Rechner- und Pillar-Link. Drei Rechner-Zuordnungen korrigiert. | Stichprobe von 10 weiteren Beiträgen steht aus (E-10). |
+| 6 | Autorität | Nur Entwürfe und Recherche, nichts versendet. | Redaktionskontakt (Digital-PR), Finanztip-Profil (nur durch Sie) (E-11, E-12). |
+| – | Verbraucherkredit-Neuregelung 20.11.2026 | Kein Bestandsbeitrag betroffen. | Themenentwurf ja/nein (E-13). |
+
+**Gate-Stand 19.10.:** Live-Blockaden 0. Veröffentlichte Beiträge (`--published --strict`): 60 Artikel, 0 Hochrisiko. Entwürfe: 10 Hochrisiko, davon 5 blockiert, bis ein benannter Prüfer freigibt.
+
+**Gates, die in dieser Umgebung laufen:** `python3 -m unittest discover -s scripts/tests` mit dem Venv-Python (`/tmp/gv/bin/python`) ergibt 3359 Tests mit 1 Fehlschlag (`test_bot_watchdog_meldetakt`, Wirkungsprobe C25). Der gleiche Fehlschlag tritt im Ausgangsstand 258fd51 auf und wird nicht durch diese Arbeit verursacht. **Nicht ausführbar:** `layout_audit.py` braucht einen Hugo-Build; Hugo fehlt hier.

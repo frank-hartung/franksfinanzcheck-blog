@@ -1,0 +1,186 @@
+# Entscheidungsregister: Punkte 2–6 aus SEO-BEWERTUNG-PREMIUM-2026-10-18.md
+# Stand: 19.10.2026
+#
+# Felder je Eintrag:
+#   entscheidung   – was festgelegt wurde (oder welche Frage offen ist)
+#   begruendung    – warum (Regel, Quelle, Repo-Vorgabe)
+#   status         – umgesetzt | teilweise | offen | nicht_umgesetzt_absichtlich
+#   verantwortlich – auto (Repo-Mechanik) oder human (Frank Hartung bzw. benannte Person)
+#   nachweis       – Datei, Skript oder Befehl, mit dem der Stand prüfbar ist
+#   befund         – nur bei offenen Punkten: owner / severity / channel (CLAUDE.md, Alarm-Routing)
+#
+# Keine Freigabe, keine Veröffentlichung, kein Versand wird durch dieses Register ausgelöst.
+
+stand: "2026-10-19"
+
+entscheidungen:
+
+  - id: E-01
+    punkt: "2 – Kannibalisierung"
+    entscheidung: "Kannibalisierung wird über Suchabsicht-Rollen je Cluster gelöst (data/kannibalisierung_map.yaml, K1–K7). Keine Löschung, keine Zusammenführung und keine URL-Änderung, solange keine Weiterleitungen existieren."
+    begruendung: "hugo.toml setzt disableAliases = true. Punkt 1 (301-Weiterleitungen) ist nicht beauftragt. CLAUDE.md und Nutzervorgabe verbieten Löschen/Zusammenführen ohne Weiterleitungen."
+    status: "teilweise"
+    verantwortlich: auto
+    nachweis: "data/kannibalisierung_map.yaml; Titel-Stand: scripts/ff_inhalts_wache.py (FF2, FF4)"
+    befund:
+      owner: auto
+      severity: P2
+      channel: "seo-inhalt"
+      offen: "Keyword-Schlagwörter in 3 Live-Beiträgen (2026-09-20 Spätsommer-Check, 2026-09-11 Heizungs-Check, 2026-10-02 Preiswert surfen) noch mit Primärbegriffen der Nachbarrolle. Keywords sind nur intern (R2). Änderung ist Metadaten, kein Body."
+
+  - id: E-02
+    punkt: "2 – Formel-Titel"
+    entscheidung: "Titel dürfen keine Formel-Muster tragen: „Internet & DSL …“ als Präfix, „… Was sich jetzt für dich ändert“ und identische Präfixe bei Dubletten. Live: alle Internet-&-DSL-Formeltitel umbenannt (19.10. zusätzlich 2026-08-14 Anbieterwechsel). Entwürfe: 6 Update-Titel ersetzt."
+    begruendung: "Formel-Titel erzeugen Suchkannibalisierung und austauschbare SERP-Snippets. Die Wache FF2 prüft das Muster dauerhaft."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "python3 scripts/ff_inhalts_wache.py (FF2); grep -l '^title:.*was sich jetzt' content/posts/*/index.md → 0"
+
+  - id: E-03
+    punkt: "3 – Erfahrungsaussagen"
+    entscheidung: "Erfahrungsbehauptungen in der Ich-Form werden nur mit nachprüfbarem Beleg (Datum, Vorgang, Quelle) geschrieben. Ohne Beleg werden sie als Modellrechnung mit fiktiven Werten gekennzeichnet oder gestrichen. Vorlagen in Zitaten (z. B. E-Mail-Text an den Anbieter) sind zulässig, wenn sie als Vorlage erkennbar sind."
+    begruendung: "Vorgabe des Nutzers und Repo-Regel: keine Schein-Erfahrung. Ein Beispiel „Mein Sparbeispiel“ oder „Meine Erfahrung“ ohne Beleg ist eine unbelegte Behauptung (E-17-Risiko)."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "Live bereinigt: 2026-08-21-haushaltsbuch (Modellrechnung, 430-€-Behauptung entfernt), 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife (Beispielrechnung), 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen (Faustregel). Entwurf 2026-08-26-kfz-versicherung: Ich-Aussagen entfernt, Siegel nicht neu gesetzt. Prüfung: python3 scripts/ff_inhalts_wache.py (FF1)."
+    befund:
+      owner: auto
+      severity: P2
+      channel: "seo-inhalt"
+      offen: "Keine. FF1 meldet am 19.10. 0 Befunde. Die Prüfung erkennt Muster; sie ersetzt keine inhaltliche Durchsicht."
+
+  - id: E-04
+    punkt: "3 – Fallstudie Max (2026-08-24)"
+    entscheidung: "Fallstudie wird als fiktiv gekennzeichnet. Überschrift „Rechenbeispiel mit einer fiktiven Person: Max, 28, Software-Entwickler“, Text „fiktive Werte zur Veranschaulichung“ und pin_description „fiktive Person“."
+    begruendung: "Erfundene Zahlen dürfen nicht als Erfahrungsbericht erscheinen."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md (Zeilen 4, 22, 152, 162)"
+
+  - id: E-05
+    punkt: "3 – Konto-/Kreditkarten-Fachprüfung"
+    entscheidung: "Keine Freigabe durch Automatik oder KI. Prüfpaket: data/fachpruefung_register.yaml (17 Beiträge, 7 davon Pillar konto-karten, 13 mit Risikoklasse erhoeht). Jeder Eintrag hat Status „ausstehend“ und ein leeres Feld pruefer. Freigabe erst, wenn ein Mensch mit Typ fachpruefer oder redaktion-mit-externer-belegkette eingetragen ist."
+    begruendung: "docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md: Automatik darf keinen Prüfer erfinden und nicht selbst freigeben. Nutzervorgabe: fehlender Prüfer ist eine offene Entscheidung für den Nutzer."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "python3 scripts/fachpruefung_register.py --check; data/fachpruefung_register.yaml"
+    befund:
+      owner: human
+      severity: P1
+      channel: "fachpruefung"
+      offen: "Frank Hartung benennt einen Prüfer (Name, Rolle, Typ, Datum). Vorschlag: fachpruefer extern mit Nachweis der Qualifikation, oder redaktion-mit-externer-belegkette: jede Zahl mit Quelle und Abrufdatum. Empfohlene Reihenfolge: 2026-09-23 Einlagensicherung, 2026-08-12 Geld abheben, 2026-08-28 Lastschrift, 2026-08-17 Girokonto, 2026-09-03 Kreditkarte."
+
+  - id: E-06
+    punkt: "3 / Gate – Redaktions-Gate"
+    entscheidung: "Live-Blockaden sind 0. Fünf Entwürfe bleiben blockiert, bis ein benannter Prüfer freigibt. Vier Entwürfe (dein-haus, kfz-versicherung, versicherung-update, unfallversicherung) stehen auf ausstehend, der Hash ist entfernt. Der Live-Beitrag dsl-anbieter-wechseln ist erhoeht/ausstehend. Der Saison-Entwurf ist hoch/ausstehend."
+    begruendung: "Gate-Korrektur: Die E02-Fälle waren durch die Titeländerungen ausgelöst. Freigaben wurden nicht erneut gesetzt (kein --seal)."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "python3 scripts/editorial_review_gate.py --all --report (Ergebnis: 92 Artikel · 10 Hochrisiko · 5 freigegeben · 5 blockiert; Live-Blockaden 0)"
+
+  - id: E-07
+    punkt: "4 – Top-20-Auswahl"
+    entscheidung: "Top-20 = 8 Beiträge mit GSC-Impressionen, 10 Pillar-Tiefe, 2 Auffüller. Die Regel steht im Dateikopf. Sie ist die Quelle für die Abbildungen."
+    begruendung: "Die Auswahl folgt Search-Console-Daten und der Pillar-Struktur, nicht dem Geschmack. Auffüller sind nur für fehlende Pillar-Beiträge."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "data/top20_abbildungen.yaml"
+
+  - id: E-08
+    punkt: "4 – Abbildungen"
+    entscheidung: "Je Top-20-Beitrag zwei eigene Abbildungen (Merkkarte und Ablauf, SVG). Sie werden aus dem Text erzeugt, mit Alt-Text. Keine Stockfotos und keine fremden Grafiken."
+    begruendung: "Vorgabe 2–3 eigene Abbildungen je Top-20-Beitrag. Zwei ist das Minimum; eine dritte Darstellung wäre nur mit Mehrwert zu rechtfertigen."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "python3 scripts/abbildungen_ableiten.py --check (20 Beiträge, 0 Befunde); python3 scripts/abbildungen_ableiten.py --selftest; python3 scripts/ff_inhalts_wache.py (FF5)"
+
+  - id: E-09
+    punkt: "3 / README – Wer dahintersteht"
+    entscheidung: "README wird NICHT vom Agenten geändert (Markenfläche, CLAUDE.md). Die Pauschalen „Über zehn Jahre Praxis“ und „Hunderte selbst durchgeführte Tarifvergleiche“ sind persönliche Angaben von Frank. Ihre Richtigkeit kann nur er bestätigen."
+    begruendung: "Unbelegte Erfahrungsangaben sind genau die Schwäche aus E-03. Vorschlag: Stimmen die Zahlen, ist ein Beleg nötig (z. B. Anzahl dokumentierter Vergleiche mit Datum). Stimmen sie nicht, Ersatz nutzen."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "README.md Zeilen 47–56"
+    befund:
+      owner: human
+      severity: P1
+      channel: "marke"
+      offen: "Frank wählt: (a) Belegbare Zahlen mit Datum nennen oder (b) Ersatz: „Ich vergleiche Tarife und Konditionen selbst und dokumentiere die Rechenwege mit Quelle und Stand.“ Danach npm run marke:check ausführen."
+
+  - id: E-10
+    punkt: "5 – Rechner und Pillar-Verlinkung"
+    entscheidung: "Jeder Live-Beitrag hat genau einen Rechner-Link im Block „Weiterrechnen und vertiefen“ und eine Pillar-Seite. Drei Rechner-Zuordnungen wurden korrigiert: Kreditkarte und Auslandsabhebung auf effektivpreis-rechner, Einlagensicherung auf notgroschen-rechner."
+    begruendung: "Stichprobe: die Titel-Regel zuordnete Kreditkarte zu Fixkosten-Scanner. Gebühren sind ein Effektivpreis-Thema."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "grep -l 'werkzeuge/' content/posts/*/index.md — 60 Live-Beiträge mit je einem Rechner-Link; keine gebrochenen internen Links."
+    befund:
+      owner: auto
+      severity: P3
+      channel: "seo-inhalt"
+      offen: "Die Zuordnung ist eine Titelregel. Bei Tagesgeld (notgroschen-rechner) und Smart Home/Standby (abschlag-nachzahlung-rechner) ist der Bezug schwach. Nächster Schritt: Stichprobe von 10 weiteren Beiträgen."
+
+  - id: E-11
+    punkt: "6 – Redaktionskontakt Digital-PR (Fixkosten-Index)"
+    entscheidung: "Kein Versand ohne verifizierten Kontakt. Adressen werden nur aus Impressum oder offizieller Presseseite der Redaktion übernommen. Nichts wird geraten."
+    begruendung: "Kein Kontakt ist im Repo oder in den Quellen verifiziert. Outreach-Limit: max. 5 Aktionen pro Woche; bisher 0 versendet."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "AUTORITAET-ENTWUERFE-2026-10-19.md (Priorität 1)"
+    befund:
+      owner: human
+      severity: P2
+      channel: "autorität"
+      offen: "Frank liefert den Redaktionskontakt oder entscheidet, ob der Versand unterbleibt."
+
+  - id: E-12
+    punkt: "6 – Finanztip-Community"
+    entscheidung: "Frank legt das Profil persönlich an. Keine Affiliate-Links, keine Linkwünsche, keine Links in Beiträgen. Der Agent legt keine Accounts an."
+    begruendung: "Finanztip-Forenregeln (finanztip.de) und Links-Richtlinie lassen Eigenwerbung und Linkwerbung nicht zu. Nutzervorgabe: keine Outreach-Aktionen ohne Freigabe."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "AUTORITAET-ENTWUERFE-2026-10-19.md (Priorität 2)"
+    befund:
+      owner: human
+      severity: P3
+      channel: "autorität"
+      offen: "Frank entscheidet über das Profil. Der Agent liefert nur Entwurf und Forenregel-Check."
+
+  - id: E-13
+    punkt: "6 – Verbraucherkredit-Thema (Neuregelung 20.11.2026)"
+    entscheidung: "Kein Bestandsbeitrag im Repo behandelt Verbraucherkredite. Es wird kein Bestandsbeitrag umgeschrieben. Ein Themenbeitrag ist ein Entwurf (draft: true), der erst nach Fachprüfung und Freigabe von Frank erscheint."
+    begruendung: "Aktualität ist ein Vertrauenssignal. Ein Umbau bestehender Beiträge ohne Bezug wäre unbelegt. Quelle: evz.de (Verbraucherkredit ab 20.11.2026)."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "grep -rli verbraucherkredit content/ → 0 Treffer"
+    befund:
+      owner: human
+      severity: P2
+      channel: "inhalt-themen"
+      offen: "Frank entscheidet, ob ein Themenentwurf entsteht. Frist: 20.11.2026."
+
+  - id: E-14
+    punkt: "2 – Entwürfe mit Dubletten"
+    entscheidung: "Vier Entwürfe bleiben unveröffentlicht, weil sie Rollen von Live-Beiträgen doppeln: 2026-09-23 (Dublette 09-11), 2026-10-07 Notgroschen (Ansparplan, überschneidet 09-20), 2026-10-14 Heizperiode (überschneidet 09-11 und 09-20), 2026-10-16 DNS (Dublette 08-26). Verwerfen ist nicht entschieden, weil Löschen ohne Weiterleitung verboten ist."
+    begruendung: "Die Veröffentlichung wäre Kannibalisierung. Ein Entwurf ohne Veröffentlichung schadet nicht."
+    status: "umgesetzt"
+    verantwortlich: human
+    nachweis: "data/kannibalisierung_map.yaml (K2, K3, K4, K6)"
+    befund:
+      owner: human
+      severity: P2
+      channel: "seo-inhalt"
+      offen: "Frank entscheidet je Entwurf: überarbeiten (Rolle abgrenzen) oder verwerfen (nach Punkt 1)."
+
+  - id: E-15
+    punkt: "Metadaten – Lastmod-Befund"
+    entscheidung: "Die Wache meldet 1 Befund: 2026-08-17 Privathaftpflicht, lastmod 2026-10-14 liegt vor date 2026-10-16. Diese Abweichung stammt aus dem Ausgangsstand. Sie wird nicht geändert, bis die Frage geklärt ist, ob der Beitrag am 16.10. oder am 14.10. veröffentlicht wurde."
+    begruendung: "Ein stiller Eingriff in ein Veröffentlichungsdatum wäre eine Fälschung der Historie. Der Befund bleibt offen."
+    status: "offen"
+    verantwortlich: auto
+    nachweis: "python3 scripts/metadaten_wache.py (mit /tmp/gv/bin/python)"
+    befund:
+      owner: auto
+      severity: P3
+      channel: "seo-inhalt"
+      offen: "Datumsklärung im Betrieb; Korrektur über Frontmatter, sobald geklärt."

@@ -1,6 +1,6 @@
 ---
-title: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
-description: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du …"
+title: "Girocard, Debitkarte oder Maestro: Welche Karte passt?"
+description: "Girocard, Debitkarte oder Maestro im Vergleich: Einsatz, Kosten und Prüfpunkte für dein Konto. Einordnung mit Prüfhinweisen."
 date: 2026-09-29T10:48:18Z
 draft: true
 tags: ["Girokonto"]

@@ -1,5 +1,5 @@
 ---
-title: "Preiswert surfen: DSL, Kabel oder Glasfaser – was zu dir passt"
+title: "Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich"
 description: "Preiswert surfen mit DSL: Vergleiche Tarifkosten und Vertragsbedingungen, prüfe passende Angebote 2026 und berechne die mögliche Ersparnis beim Wechsel."
 date: 2026-10-05T19:22:11Z
 draft: false

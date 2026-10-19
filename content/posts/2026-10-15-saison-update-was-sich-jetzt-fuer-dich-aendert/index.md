@@ -1,6 +1,6 @@
 ---
-title: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
-description: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
+title: "Herbst-Check: Strom, Versicherung, Konto und Internet"
+description: "Im Herbst lohnt ein Blick auf Strom, Versicherung, Konto und Internet. So gehst du den Vertrags-Check an."
 date: 2026-10-15T09:28:52Z
 draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
@@ -13,7 +13,7 @@ ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "saisonal"
 redaktionelle_pruefung:
-  risikoklasse: "standard"
+  risikoklasse: "hoch"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 pin_title: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
