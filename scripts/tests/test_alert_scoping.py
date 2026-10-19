@@ -49,6 +49,13 @@ dass die Regeln nicht still zurückgebaut werden:
      im Body (<!-- alert-runbook: … -->); ändert sie sich, schreibt der
      nächste rote Lauf die Meldung neu – nur bei bekannter Job-Lage und
      fail-open.
+ 10. JOBBEWEIS (WF-E813 / #809): „Behoben“ schließt nur noch Meldungen,
+     deren gemeldete Jobs im auflösenden Lauf vorhanden und `success` sind
+     (Marker <!-- alert-jobs: [...] -->, scripts/alert_resolve_gate.py).
+     Ein grüner Push-Lauf, der die bedingte Live-Messung aussparte, schloss
+     zuvor #782/#798 mit „läuft wieder fehlerfrei“ – WF-E813 meldete sich
+     deshalb viermal in fünf Tagen. Verhalten: eigene Unit-Tests in
+     scripts/tests/test_alert_resolve_gate.py.
 
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
@@ -331,6 +338,18 @@ class TitelUndLabelVertrag(unittest.TestCase):
         self.assertIn('contains($m)', roh)
         self.assertIn('startswith($t)', roh)
         self.assertIn(TITEL_PRÄFIX, roh)
+
+    def test_resolve_schliesst_nur_mit_jobbeweis(self):
+        """Vertrag 10 (WF-E813 / #809): Ein grüner Lauf genügt nicht – der
+        Job, der rot war, muss im Lauf vorhanden und grün sein. Sonst
+        wiederholt sich #809 bei jedem bedingt ausgeführten Job."""
+        roh = _text()
+        self.assertIn("alert_resolve_gate.py", roh)
+        self.assertIn("alert-jobs:", roh)
+        pos_gate = roh.find("alert_resolve_gate.py")
+        pos_close = roh.find("gh issue close")
+        self.assertLess(pos_gate, pos_close,
+                        "die Job-Prüfung muss vor `gh issue close` fallen")
 
 
 class VerhaltensSimulation(unittest.TestCase):

@@ -1,11 +1,13 @@
 {
   "schema": 2,
+  "signed_at": "2026-10-19T18:28:06.790592+00:00",
+  "head": "d0e57b4",
   "signed_at": "2026-10-19T18:21:38.586056+00:00",
   "head": "383e2fa",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "hugo.toml": "171a8d3348f345968ec5bdbefb5908949ab5919c4fcfaaebc5a6c33d536aa3c1",
+    "hugo.toml": "73561a9168ed132b9a0cbfc5d65f4594e3d2b79a93ea1b0954c678c610d571b5",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -54,6 +56,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
+  "files_sha256": "0cb8102131cf67a8afbfbd952d29cd89c211e4ea531fea7e85ff393d9a390520",
   "files_sha256": "7eed8d05bd354f9542f9af33218b7955ab42a4fa00cd119599acd79295ee46d2",
   "audit_start_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38",
   "audit": [
@@ -481,6 +484,21 @@
     },
     {
       "date": "2026-10-19",
+      "art": "set-current",
+      "head": "d0e57b4",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "d0e57b4",
+              "datum": "2026-10-19",
+              "betreff": "fix(betriebspflege): WF-E813/#809 dauerhaft heilen – Job-Beweis beim Auto-Close, Turnstile-Paar atomar, A1 in einem Griff"
       "art": "heal",
       "head": "383e2fa",
       "geaendert": [
@@ -583,6 +601,7 @@
         }
       ],
       "prev_sha256": "1848c87159c8b0c3f931a2526e573e17a57dffec749c4546c375f75ce4fdbf3f",
+      "files_sha256": "0cb8102131cf67a8afbfbd952d29cd89c211e4ea531fea7e85ff393d9a390520"
       "files_sha256": "7eed8d05bd354f9542f9af33218b7955ab42a4fa00cd119599acd79295ee46d2"
     }
   ]

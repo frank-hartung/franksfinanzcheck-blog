@@ -12,7 +12,14 @@ bekommen, die **nur im Betrieb** wirken und dort auch still ausfallen können:
 2. **Turnstile** (F-02) — wirkt nur, wenn Site-Key (Website) **und** Secret
    (Worker) gesetzt sind. Ein einseitig gesetzter Wert ist der teuerste
    Fehlerzustand: entweder scheitert jede Anmeldung, oder der Schutz ist
-   aus und niemand merkt es.
+   aus und niemand merkt es. Seit dem Paar-Vertrag vom 19.10.2026
+   (WF-E813 / #809) kennt der Worker drei Zustände – `aktiv` (beide
+   Werte, Prüfung erzwungen), `wartet` (nur Secret: Anmeldung läuft,
+   Prüfung steht aus) und `inaktiv` – und diese Wache vergleicht sie mit
+   dem **Spiegel** des Site-Keys in `hugo.toml` und
+   `newsletter-worker/wrangler.toml`. Der halbgesetzte Zustand „nur
+   Secret“ war der Anmelde-Ausfall vom 15.10.2026: jede Anmeldung
+   scheiterte an einer Sicherheitsprüfung ohne Widget, fünf Tage lang.
 3. **Getrennte Schlüsselrollen** (F-08) — Liest der Versand mit dem
    Schreibschlüssel, ist die Trennung wirkungslos; fehlt der Schreibschlüssel
    ganz, fällt der Worker auf den Standardschlüssel zurück.
@@ -171,12 +178,32 @@ def repo_stand() -> dict:
     wrangler_pfad = WURZEL / "newsletter-worker" / "wrangler.toml"
     wrangler = wrangler_pfad.read_text(encoding="utf-8") if wrangler_pfad.exists() else ""
     deckel = re.search(r'^ANMELDUNG_MAX_PRO_TAG\s*=\s*"(\d+)"', wrangler, re.M)
+    spiegel = re.search(r'^TURNSTILE_SITEKEY\s*=\s*"([^"]*)"', wrangler, re.M)
     vorlage = (WURZEL / "cloudflare" / "edge-schutz.md")
     return {
         "site_key": (site_key.group(1).strip() if site_key else ""),
+        "sitekey_spiegel": (spiegel.group(1).strip() if spiegel else None),
         "deckel": int(deckel.group(1)) if deckel else DECKEL_STANDARD,
         "edge_vorlage": vorlage.read_text(encoding="utf-8") if vorlage.exists() else "",
     }
+
+
+def spiegel_fehler(site_key: str, spiegel: str | None) -> list[str]:
+    """Paar-Vertrag (WF-E813 / #809): hugo.toml und wrangler.toml tragen
+    denselben Site-Key. Zwei Quellen ohne Spiegelprüfung waren der
+    Anmelde-Ausfall vom 15.10.2026 – der Schlüssel lag im Worker, das
+    Widget in keiner einzigen ausgelieferten Seite."""
+    if spiegel is None:
+        return ["`TURNSTILE_SITEKEY` fehlt in newsletter-worker/wrangler.toml – "
+                "ohne den Spiegel kann der Paar-Vertrag (Widget + Prüfung "
+                "gemeinsam deployt) nicht greifen."]
+    if spiegel != site_key:
+        return ["Site-Key-Spiegel gebrochen: `hugo.toml` ("
+                + (site_key or "leer") + ") ≠ `newsletter-worker/wrangler.toml` ("
+                + (spiegel or "leer") + "). Beide tragen denselben Wert – "
+                "sonst liefert die Website das Widget, ohne dass der Worker "
+                "prüft (Fassade), oder umgekehrt (jede Anmeldung scheitert)."]
+    return []
 
 
 def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
@@ -193,11 +220,38 @@ def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
         return fehler, warnungen, ok
     ok.append("Worker erreichbar, authentifizierter KV-Zustand in Ordnung.")
 
-    # 2. Turnstile — der teuerste stille Fehlerzustand (F-02)
+    # 2. Turnstile — Paar-Vertrag (F-02, WF-E813 / #809): Widget und Prüfung
+    #    gehören zusammen. Zwei halbgesetzte Zustände, zwei verschiedene
+    #    Schäden: „Secret ohne Widget“ ließ JEDEN Anmeldeversuch an einer
+    #    nicht bestehbaren Prüfung scheitern (Ausfall 15.–19.10.2026);
+    #    „Widget ohne Secret“ ist eine Fassade. Beides ist ein Fehler mit
+    #    klarem nächsten Schritt, kein Bauchgefühl.
     turnstile = str(stand.get("turnstile", "inaktiv"))
     site_key = repo.get("site_key", "")
     if turnstile == "aktiv" and not site_key:
         fehler.append("**Turnstile-Zustand widersprüchlich:** Der Worker prüft "
+                      "(`TURNSTILE_SECRET` und `TURNSTILE_SITEKEY` gesetzt), aber "
+                      "`hugo.toml` liefert **kein** Widget (`turnstileSiteKey` "
+                      "leer). Folge: Jede Anmeldung scheitert an der "
+                      "Sicherheitsprüfung. Site-Key eintragen "
+                      "(cloudflare/edge-schutz.md, A3, Schritt 2) oder "
+                      "`TURNSTILE_SITEKEY` im Worker leeren, bis das Widget steht.")
+    elif turnstile == "wartet" and site_key:
+        fehler.append("**Turnstile-Zustand widersprüchlich:** Das Widget wird "
+                      "ausgeliefert (Site-Key in `hugo.toml` gesetzt), aber der "
+                      "Worker prüft nicht (`TURNSTILE_SITEKEY` dort fehlt, Secret "
+                      "liegt bereit). Folge: Der Bot-Schutz ist nur Fassade. "
+                      "Spiegel herstellen: `TURNSTILE_SITEKEY` in "
+                      "newsletter-worker/wrangler.toml eintragen und deployen "
+                      "(A3, Schritt 2).")
+    elif turnstile == "wartet":
+        warnungen.append("**Turnstile wartet auf seinen Site-Key:** Das Secret "
+                         "liegt bereit, aber es gibt noch kein Widget – die "
+                         "Anmeldung läuft OHNE Bot-Prüfung weiter (Honeypot, "
+                         "Zeitfalle, Mengenklassen und Tagesbudget bleiben "
+                         "aktiv). Paar vervollständigen: Widget anlegen, Site-Key "
+                         "in `hugo.toml` UND `newsletter-worker/wrangler.toml` "
+                         "eintragen, deployen (A3, Schritt 1–2).")
                       "(Secret gesetzt), aber `hugo.toml` liefert **kein** Widget "
                       "(`turnstileSiteKey` leer). Folge: Jede Anmeldung scheitert an "
                       "der Sicherheitsprüfung. Site-Key eintragen "
@@ -205,10 +259,11 @@ def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
                       "Die Prüfung nicht durch Entfernen des Secrets abschalten.")
     elif turnstile == "inaktiv" and site_key:
         fehler.append("**Turnstile-Zustand widersprüchlich:** Das Widget wird "
-                      "ausgeliefert (Site-Key gesetzt), aber der Worker prüft nicht "
-                      "(kein `TURNSTILE_SECRET`). Folge: Der Bot-Schutz ist nur Fassade. "
-                      "`npx wrangler secret put TURNSTILE_SECRET` (A3, Schritt 3).")
-    elif turnstile == "aktiv" and site_key:
+                      "ausgeliefert (Site-Key gesetzt), aber der Worker prüft "
+                      "nicht (kein `TURNSTILE_SECRET`). Folge: Der Bot-Schutz "
+                      "ist nur Fassade. `npx wrangler secret put TURNSTILE_SECRET` "
+                      "(A3, Schritt 3).")
+    elif turnstile == "aktiv":
         ok.append("Turnstile aktiv: Widget ausgeliefert UND Prüfung erzwungen.")
     else:
         warnungen.append("**Turnstile inaktiv** — das Anmeldeformular ist nur durch "
@@ -305,9 +360,15 @@ def offline_pruefen() -> tuple[int, str]:
     if repo["deckel"] * 4 + FEEDBACK_STANDARD > 1000:
         fehler.append(f"Tagesdeckel {repo['deckel']} × 4 Schreibzugriffe + "
                       f"{FEEDBACK_STANDARD} Feedback sprengt die 1.000/Tag.")
+    # Paar-Vertrag Turnstile (WF-E813 / #809): Der Site-Key hat ZUHAUSE zwei
+    # Adressen (hugo.toml liefert das Widget, wrangler.toml spiegelt es dem
+    # Worker). Ohne Spiegelprüfung rutschten sie auseinander – der halb-
+    # gesetzte Zustand war fünf Tage lang ein Anmelde-Ausfall.
+    fehler += spiegel_fehler(repo["site_key"], repo["sitekey_spiegel"])
     # Die Wache selbst muss die Standardwerte des Workers kennen.
     index = (WURZEL / "newsletter-worker" / "src" / "index.js").read_text(encoding="utf-8")
-    for name in ("ANMELDUNG_MAX_PRO_TAG_DEFAULT", "TAGESBUDGET", "exportlog:"):
+    for name in ("ANMELDUNG_MAX_PRO_TAG_DEFAULT", "TAGESBUDGET", "exportlog:",
+                 "turnstile_zustand"):
         if name not in index:
             fehler.append(f"`{name}` fehlt im Worker — die Wache prüft Werte, die es "
                           "nicht mehr gibt.")
@@ -424,6 +485,27 @@ def selftest() -> int:
     # Gegenprobe 2: Worker prüft, Website liefert nichts -> jede Anmeldung scheitert.
     f, _, _ = bewerte({**gut}, {**repo, "site_key": ""})
     assert any("scheitert" in x for x in f), "Einseitiges Turnstile (nur Secret) nicht erkannt"
+    faelle += 1
+
+    # Gegenprobe 2a (Paar-Vertrag WF-E813 / #809): „wartet“ OHNE Widget ist
+    # KEIN Fehler mehr, sondern eine laute Warnung – die Anmeldung läuft.
+    f, w, _ = bewerte({**gut, "turnstile": "wartet"}, {**repo, "site_key": ""})
+    assert not f and any("wartet" in x.lower() for x in w), \
+        "Zustand „wartet“ ohne Widget muss warnen, nicht scheitern"
+    faelle += 1
+
+    # Gegenprobe 2b: „wartet“ MIT Widget = Fassade (Spiegel gebrochen).
+    f, _, _ = bewerte({**gut, "turnstile": "wartet"}, repo)
+    assert any("Fassade" in x for x in f), "Widget ohne Prüfung (wartet) nicht als Fassade erkannt"
+    faelle += 1
+
+    # Gegenprobe 2c: Spiegel des Site-Keys (hugo.toml ↔ wrangler.toml).
+    assert spiegel_fehler("0x4AAA", "0x4AAA") == []
+    assert spiegel_fehler("", "") == []
+    f = spiegel_fehler("0x4AAA", "")
+    assert f and "Spiegel gebrochen" in f[0], "Abweichender Spiegel nicht erkannt"
+    f = spiegel_fehler("", None)
+    assert f and "fehlt" in f[0], "Fehlende Spiegel-Variable nicht erkannt"
     faelle += 1
 
     # Gegenprobe 3: KV tot ist ein Fehler, keine Warnung.

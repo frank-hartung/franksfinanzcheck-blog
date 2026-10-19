@@ -71,6 +71,19 @@ BESTAETIGUNG_TAGE = "14"
 # (Free-Plan: 1.000 Writes/Tag fuer das GANZE Konto, Audit H-03).
 FEEDBACK_MAX_PRO_TAG = "200"
 
+# TURNSTILE-SITE-KEY (Paar-Vertrag 19.10.2026, WF-E813 / #809):
+# Der OEFFENTLICHE Site-Key des Turnstile-Widgets – exakter Spiegel von
+# hugo.toml `params.turnstileSiteKey`. Beide Werte gehoeren zusammen: erst
+# wenn BEIDE gesetzt sind (hier der Site-Key, dazu das Secret
+# TURNSTILE_SECRET), liefert die Website das Widget aus UND der Worker
+# prueft fail-closed. Der halbgesetzte Zustand „nur Secret“ war der
+# Anmelde-Ausfall vom 15.10.2026 (jede Anmeldung scheiterte an einer
+# Pruefung ohne Widget) – seitdem heisst er „wartet“: Anmeldung laeuft,
+# die Betriebs-Wache (scripts/worker_betrieb_wache.py) meldet ihn taeglich,
+# und der Spiegel-Abgleich (hugo.toml == diese Variable) ist Teil des
+# Offline-Jobs der Sicherheits-Wache.
+TURNSTILE_SITEKEY = ""
+
 # TAGESDECKEL der Anmeldungen (F-03): Eine Anmeldung kostet vier KV-Writes
 # (abo, token, nachweis, budget). 100 Anmeldungen = 400 Writes; zusammen mit
 # 200 Feedback-Stimmen bleiben rund 400 der 1.000 Schreibzugriffe fuer
@@ -95,11 +108,12 @@ RATE_LIMIT_EXPORT = "20"      # /export/... (geschuetzter Weg)
 #                     getrennte Rollen; der Versand nutzt dann
 #                     NEWSLETTER_WORKER_WRITE_KEY. Fehlt er, gilt EXPORT_KEY
 #                     fuer beide Rollen (Rueckwaerts-Kompatibilitaet).
-#   TURNSTILE_SECRET  (Audit M-02, standardmaessig AKTIV seit 15.10.2026):
-#                     verlangt bei /anmeldung ein gueltiges Feld
-#                     `cf-turnstile-response`. Das Widget wird ausgeliefert,
-#                     sobald params.turnstileSiteKey in hugo.toml steht –
-#                     beide Werte gehoeren zusammen (Wache:
+#   TURNSTILE_SECRET  (Audit M-02; Paar-Vertrag seit 19.10.2026): verlangt
+#                     bei /anmeldung ein gueltiges Feld
+#                     `cf-turnstile-response` – ABER erst zusammen mit dem
+#                     Site-Key (TURNSTILE_SITEKEY oben). Beide Werte sind EIN
+#                     Vertrag und werden gemeinsam deployt; der Zustand steht
+#                     sichtbar in /healthz (aktiv/wartet/inaktiv, Wache:
 #                     scripts/worker_betrieb_wache.py).
 #
 # Mengenregeln (15.10.2026, F-03): Das Binding RATE_LIMITER deckt die

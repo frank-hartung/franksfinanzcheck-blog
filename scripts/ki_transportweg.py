@@ -399,6 +399,12 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # test_backup_einrichtung.TransportVertrag erlaubt dort nur diese
     # Verwaltungspfade – kein /ai/, kein anderer Anbieter.
     Path("scripts/backup_einrichtung.py"),
+    # Kein Modellaufruf: Cloudflare-Verwaltungs-API (Zone/DNS/SSL/Transform
+    # Rules) fuer die Edge-Freigabe A1 (WF-E813 / #809). Ausgleich fuer die
+    # Ausnahme: scripts/tests/test_cloudflare_edge_freigabe.TransportVertrag
+    # erlaubt dort ausschliesslich /zones-Pfade – kein /ai/, kein Modell-
+    # Endpunkt, kein zweiter Anbieter.
+    Path("scripts/cloudflare_edge_freigabe.py"),
 }
 T6_AUSGESCHLOSSENE_ORDNER = {
     ".git", ".arena", ".cache", ".venv", "venv", "node_modules",

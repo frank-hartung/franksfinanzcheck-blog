@@ -513,7 +513,10 @@ await run('WF-E813-Reproduktion: F-01-Header-Wache rot -> Header-Triage, kein Sc
              steps: [{ name: 'Sicherheits-Header auswerten (F-01) · Befund · Störung · grün', conclusion: 'failure' }] }] },
   true, ['Sicherheits-Header auswerten', 'BEFUND = es wurde gemessen',
          'cloudflare/edge-schutz.md', 'docs/SICHERHEIT-BETRIEB-RUNBOOK.md',
-         'FF Sicherheits-Header', '### Fehlgeschlagene Schritte'],
+         'FF Sicherheits-Header', '### Fehlgeschlagene Schritte',
+         // WF-E813 / #809 (19.10.2026): Der Body trägt die fehlgeschlagenen
+         // Jobs maschinenlesbar – die Schließseite prüft genau dagegen.
+         '<!-- alert-jobs: ["Live-Messung (täglich und auf Zuruf)"]'],
   null, ['API-Key abgelaufen', 'Häufigste Ursachen']);
 // 13. Dieselbe Wache, anderer Prüfschritt (Inhalts-/Betriebs-/Automatik-Wache):
 //     auch hier ist ein Schlüssel-Rat irreführend – der Verweis geht auf die

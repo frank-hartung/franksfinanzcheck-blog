@@ -69,6 +69,18 @@
 #    Schritten neu: gleiche Nummer, gleicher Titel, ohne Benachrichtigung.
 #    Gleiche Klasse oder unbekannte Job-Lage → keine Umschrift.
 #
+#  AUTO-CLOSE NUR MIT JOB-BEWEIS (WF-E813 / #809, 19.10.2026):
+#    „Behoben“ schrieb bisher jeder grüne Lauf des Workflows auf main –
+#    auch ein Push-Lauf, der nur den Offline-Job ausführte und den Job,
+#    der rot war, aussparte (bedingte Jobs wie die Live-Messung der
+#    Sicherheits-Wache). Vier Meldungen in fünf Tagen (#767, #782, #798,
+#    #809) für denselben offenen Befund waren die Folge: grüner
+#    Push-Lauf → „✅ Behoben“ → nächster Live-Lauf → neue Meldung.
+#    Seitdem trägt jeder Body seine fehlgeschlagenen Jobs maschinenlesbar
+#    (<!-- alert-jobs: [...] -->), und resolve schließt NUR, wenn jeder
+#    genannte Job im auflösenden Lauf vorhanden und `success` ist
+#    (scripts/alert_resolve_gate.py). Kein Beweis → offen, mit Grund.
+#
 #  BEWUSST NICHT ÜBERWACHT:
 #    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)
 #    - "Textverständnis-Patches einspielen (einmalig)" (Einmal-Aktion)
@@ -544,6 +556,16 @@ jobs:
             const lines = [
               ident.marker,
               runbookMarker,
+              // JOB-MARKER FÜR DEN AUTO-CLOSE (WF-E813 / #809, 19.10.2026):
+              // „Behoben“ heißt künftig: jeder hier genannte Job ist im
+              // auflösenden Lauf vorhanden und grün (scripts/alert_resolve_gate.py).
+              // Ohne diesen Marker kennt resolve nur den Workflow-Namen – genau
+              // so schloss ein Push-Lauf die Meldung der Sicherheits-Wache,
+              // deren Live-Job in jenem Lauf ausgesetzt war (#782/#798/#809).
+              // `<` und `>` gehen als JSON-Escapes in den Kommentar, damit kein
+              // Job-Name die HTML-Kommentar-Schranke sprengen kann (F-09).
+              '<!-- alert-jobs: ' + JSON.stringify(failedJobs.map(j => String(j.name)))
+                .replace(/</g, '\\u003c').replace(/>/g, '\\u003e') + ' -->',
               '> Vorgang **' + ident.code + '** · Bereich *' + ident.bereich + '* · Zuordnung: ' +
                 '`python3 scripts/alert_issue_identity.py --tabelle`',
               '',
@@ -728,6 +750,20 @@ jobs:
   #  PR-Lauf beweist nichts über die Produktion; genau so wurde #343
   #  von einem Lauf des Zweigs arena/01a0c4dc-… geschlossen, ohne
   #  dass sich am Produktionsstand irgendetwas geändert hätte.
+  #
+  #  JOBBEWEIS (WF-E813 / #809, 19.10.2026) – die zweite Hälfte
+  #  derselben Regel: Ein grüner Lauf beweist auch dann nichts über
+  #  den Fehler der Meldung, wenn er den betroffenen Job gar nicht
+  #  ausgeführt hat. Die Sicherheits-Wache führt ihren Live-Job nur
+  #  bei schedule/workflow_dispatch aus; Push-Läufe sind grün, ohne
+  #  je gemessen zu haben – und schlossen #782 und #798 mit „✅
+  #  Behoben: Der Vorgang läuft wieder fehlerfrei“. WF-E813 meldete
+  #  sich daraufhin innerhalb von fünf Tagen zum vierten Mal (#809).
+  #  Seitdem entscheidet scripts/alert_resolve_gate.py: Jeder Job,
+  #  den die Meldung als fehlgeschlagen benannt hat (Marker
+  #  <!-- alert-jobs: [...] -->, Altform: die Job-Zeilen im Body),
+  #  muss im auflösenden Lauf vorhanden und `success` sein. Sonst
+  #  bleibt die Meldung offen – mit Grund, statt mit einer Lüge.
   # ------------------------------------------------------------
   resolve:
     runs-on: ubuntu-24.04
@@ -740,7 +776,7 @@ jobs:
       - name: Repository auschecken (Identitäts-Quelle)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Behobene Fehlermeldung schließen (Marker-Identität, Alt-Titel inbegriffen)
+      - name: Behobene Fehlermeldung schließen (Marker-Identität, Job-Beweis, Alt-Titel inbegriffen)
         env:
           GH_TOKEN: ${{ github.token }}
           WF_NAME: ${{ github.event.workflow_run.name }}
@@ -783,19 +819,45 @@ jobs:
           # Body UND Titel prüfen: Marker (neu) oder Alt-Titel (Übergang).
           # Ohne den Alt-Pfad bliebe jede vor der Umstellung erzeugte Meldung
           # für immer offen – genau der Fehler, den diese Umstellung vermeiden soll.
-          NUMMERN="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
-            --label auto-report --limit 200 --json number,title,body \
-            | jq -r --arg m "$MARKER" --arg t "$ALT_TITEL" \
-              '.[] | select((.body // "" | contains($m)) or (.title // "" | startswith($t))) | .number')"
+          gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label auto-report --limit 200 --json number,title,body > /tmp/offene.json
+          NUMMERN="$(jq -r --arg m "$MARKER" --arg t "$ALT_TITEL" \
+              '.[] | select((.body // "" | contains($m)) or (.title // "" | startswith($t))) | .number' \
+              /tmp/offene.json)"
 
           if [ -z "$NUMMERN" ]; then
             echo "Keine offene Meldung zu diesem Vorgang – nichts zu schließen."
             exit 0
           fi
 
+          # JOBBEWEIS DIESES LAUFS (WF-E813 / #809): „Behoben“ braucht den
+          # Job, der rot war – nicht irgendeinen grünen Lauf. Die Job-Liste
+          # wird EINMAL geholt und pro Meldung gegen deren Nennungen
+          # geprüft (scripts/alert_resolve_gate.py). Scheitert die Abfrage,
+          # entsteht ein Werkzeugfehler des Gates – und der lautet
+          # fail-safe: offen, nie „Behoben“ ohne Beweis.
+          if ! gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs" \
+               --paginate --jq '.jobs[] | {name, conclusion}' \
+               | jq -s '{jobs: .}' > /tmp/lauf-jobs.json; then
+            echo '{ "jobs": [] }' > /tmp/lauf-jobs.json
+            echo "::notice::Job-Liste des Laufs nicht abrufbar – ohne Beweis bleibt jede Meldung offen."
+          fi
+
           for n in $NUMMERN; do
-            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
-              --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \`${RUN_BRANCH_SAUBER}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
-            echo "→ Issue #$n geschlossen."
+            jq -r --argjson nr "$n" \
+              '.[] | select(.number == $nr) | .body // ""' /tmp/offene.json \
+              > "/tmp/meldung-${n}.md"
+            ENTSCHEID="$(python3 scripts/alert_resolve_gate.py \
+              --body "/tmp/meldung-${n}.md" --jobs /tmp/lauf-jobs.json --json \
+              || echo '{"schliessen": false, "grund": "Entscheidung nicht möglich (Werkzeugfehler) – ohne Beweis kein Behoben."}')"
+            if [ "$(jq -r '.schliessen' <<<"$ENTSCHEID")" = "true" ]; then
+              gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+                --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \`${RUN_BRANCH_SAUBER}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+              echo "→ Issue #$n geschlossen: $(jq -r '.grund' <<<"$ENTSCHEID")"
+            else
+              GRUND="$(jq -r '.grund' <<<"$ENTSCHEID")"
+              echo "::notice::Issue #${n} bleibt offen: ${GRUND}"
+              echo "→ Issue #${n} bleibt offen: ${GRUND}"
+            fi
           done
           echo "Auto-Close-Prüfung abgeschlossen."
