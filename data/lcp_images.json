@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-19T11:16:45+00:00",
+  "generatedAt": "2026-10-19T13:11:45+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -751,7 +751,7 @@
       "decoding": "async"
     },
     "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/": {
-      "image": "images/covers/2026-09-26-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg",
+      "image": "images/covers/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
