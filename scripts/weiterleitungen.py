@@ -24,7 +24,8 @@ Nutzung:
     python3 scripts/weiterleitungen.py --check      Quelle validieren (exit 1 bei Fehlern)
     python3 scripts/weiterleitungen.py --build      static/<von>/index.html erzeugen, eigene veraltete Seiten entfernen
     python3 scripts/weiterleitungen.py --verify     erzeugte Seiten gegen Quelle prüfen (schreibt nichts)
-    python3 scripts/weiterleitungen.py --cloudflare Bulk-CSV erzeugen (nur bei aktivem Proxy)
+    python3 scripts/weiterleitungen.py --proxy-check  Cloudflare-Proxy per cf-ray prüfen (braucht Internet)
+    python3 scripts/weiterleitungen.py --cloudflare Bulk-CSV erzeugen (nur bei nachweislich aktivem Proxy)
     python3 scripts/weiterleitungen.py --selftest   Selbsttest (exit 2 bei Fehlschlag)
 
 Exit: 0 = grün · 1 = Befund · 2 = Fehler (z. B. PyYAML fehlt)
@@ -36,6 +37,7 @@ import os
 import re
 import sys
 import tempfile
+import urllib.request
 
 try:
     import yaml
@@ -249,6 +251,37 @@ def verify(root: str, eintraege: list[dict]) -> list[str]:
     return f
 
 
+def _kopfzeilen_holen(url: str) -> dict[str, str]:
+    """HEAD-Anfrage, gibt Antwort-Header klein geschrieben zurück. Wirft bei Netzfehler."""
+    req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "ff-proxy-check/1.0"})
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        return {k.lower(): v for k, v in resp.headers.items()}
+
+
+def proxy_status(holen=None, url: str = SITE + "/") -> tuple[str, str]:
+    """Prüft, ob der Cloudflare-Proxy vor der Seite aktiv ist.
+
+    Ergebnis (Status, Begründung):
+      aktiv       – Antwort trägt den Header cf-ray (Cloudflare antwortet)
+      inaktiv     – Antwort ohne cf-ray (direkt GitHub Pages)
+      unbekannt   – Anfrage gescheitert. Das ist KEIN Beleg für inaktiv.
+    Ohne nachgewiesen aktiven Proxy erzeugt --cloudflare keine CSV.
+    """
+    holen = holen or _kopfzeilen_holen
+    try:
+        kopf = holen(url)
+    except Exception as exc:  # Netzfehler, Timeout, TLS …
+        return "unbekannt", f"Anfrage an {url} gescheitert ({type(exc).__name__})"
+    if "cf-ray" in {k.lower() for k in kopf}:
+        return "aktiv", f"cf-ray: {kopf.get('cf-ray', kopf.get('CF-Ray'))}"
+    return "inaktiv", "kein cf-ray-Header in der Antwort"
+
+
+def cloudflare_freigabe(status: str) -> bool:
+    """Nur ein nachweislich aktiver Proxy gibt die Bulk-CSV frei."""
+    return status == "aktiv"
+
+
 def cloudflare_csv(eintraege: list[dict]) -> str:
     """Bulk-Redirect-CSV (ohne Kopfzeile, Format laut Cloudflare-Doku:
     <SOURCE_URL>,<TARGET_URL>[,<STATUS_CODE>,<PRESERVE_QUERY_STRING>,<INCLUDE_SUBDOMAINS>,<SUBPATH_MATCHING>,<PRESERVE_PATH_SUFFIX>])."""
@@ -331,12 +364,22 @@ def selftest() -> int:
     csv = cloudflare_csv(gut_live).strip().split("\n")
     check("CSV ohne Kopfzeile, Quelle ohne Schema", csv[0].startswith("franksfinanzcheck.de/posts/") and csv[0].endswith(",301,FALSE,FALSE,FALSE,FALSE"))
 
+    # 14–18 Proxy-Status und Freigabe
+    check("proxy aktiv bei cf-ray", proxy_status(lambda u: {"CF-Ray": "abc-FRA", "server": "cloudflare"})[0] == "aktiv")
+    check("proxy inaktiv ohne cf-ray", proxy_status(lambda u: {"server": "GitHub.com"})[0] == "inaktiv")
+
+    def _fehler(u):
+        raise OSError("keine Verbindung")
+    check("proxy unbekannt bei Netzfehler (nicht inaktiv)", proxy_status(_fehler)[0] == "unbekannt")
+    check("CSV nur bei aktivem Proxy freigegeben",
+          cloudflare_freigabe("aktiv") is True and cloudflare_freigabe("inaktiv") is False and cloudflare_freigabe("unbekannt") is False)
+
     if fehler:
         print("SELBSTTEST FEHLGESCHLAGEN:")
         for x in fehler:
             print("  -", x)
         return 2
-    print("weiterleitungen.py Selbsttest ok (13 Fälle)")
+    print("weiterleitungen.py Selbsttest ok (18 Fälle)")
     return 0
 
 
@@ -348,11 +391,16 @@ def main() -> int:
     ap.add_argument("--build", action="store_true", help="static/-Seiten erzeugen")
     ap.add_argument("--verify", action="store_true", help="erzeugte Seiten prüfen")
     ap.add_argument("--cloudflare", action="store_true", help="Bulk-CSV erzeugen (nur bei aktivem Proxy)")
+    ap.add_argument("--proxy-check", action="store_true", help="Cloudflare-Proxy per cf-ray-Header prüfen (braucht Internet)")
     ap.add_argument("--selftest", action="store_true", help="Selbsttest")
     a = ap.parse_args()
 
     if a.selftest:
         return selftest()
+    if a.proxy_check:
+        status, grund = proxy_status()
+        print(f"proxy: {status} – {grund}")
+        return 0 if status == "aktiv" else 1
     if not any([a.check, a.build, a.verify, a.cloudflare]):
         ap.print_help()
         return 0
@@ -382,6 +430,10 @@ def main() -> int:
             print(f"verify: {len(eintraege)} Seiten stimmen mit der Quelle überein")
 
     if a.cloudflare:
+        status, grund = proxy_status()
+        if not cloudflare_freigabe(status):
+            print(f"cloudflare: verweigert – Proxy ist {status} ({grund}). Erst cf-ray nachweisen (--proxy-check).")
+            return 1
         ziel = os.path.join(BLOG_DIR, "cloudflare", "redirects", "bulk-redirects.csv")
         os.makedirs(os.path.dirname(ziel), exist_ok=True)
         with open(ziel, "w", encoding="utf-8") as fh:

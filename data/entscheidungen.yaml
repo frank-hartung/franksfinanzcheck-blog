@@ -196,7 +196,7 @@ entscheidungen:
       owner: human
       severity: P1
       channel: "seo-technik"
-      offen: "(a) Cloudflare-Proxy: Prüfung per cf-ray-Header durch den Betreiber; Aktivierung ist Betriebsentscheidung (Datenschutztext B7). (b) Regel-B-Einträge (73) gegenlesen. (c) Tag-Archiv-Entscheidung im Abschlussbericht bestätigen."
+      offen: "(a) Cloudflare-Proxy: `python3 scripts/weiterleitungen.py --proxy-check` auf dem Rechner des Betreibers ausführen. `--cloudflare` erzeugt die CSV nur bei aktiv. Aktivierung ist Betriebsentscheidung (Datenschutztext B7). (b) Regel-B-Einträge (73) gegenlesen. (c) Tag-Archiv-Entscheidung im Abschlussbericht bestätigen."
 
   - id: E-17
     punkt: "1 – Durchsetzung der Weiterleitungen"

@@ -49,6 +49,7 @@ Harte Regeln, die der Generator erzwingt:
 python3 scripts/weiterleitungen.py --check      # Quelle validieren (Ziele live, keine Ketten, Regeln)
 python3 scripts/weiterleitungen.py --build      # static/<von>/index.html erzeugen, veraltete eigene Seiten entfernen
 python3 scripts/weiterleitungen.py --verify     # erzeugte Seiten gegen die Quelle prüfen (schreibt nichts)
+python3 scripts/weiterleitungen.py --proxy-check # Cloudflare-Proxy per cf-ray prüfen (braucht Internet)
 python3 scripts/url_wache.py                    # verschwundene Live-URLs melden (exit 1 bei Befund)
 python3 scripts/url_wache.py --snapshot         # Snapshot neu schreiben, nur nach bewusster Änderung
 python3 scripts/weiterleitungen.py --selftest   # Selbsttest
@@ -79,8 +80,8 @@ Aktuell zeigt `franksfinanzcheck.de` ohne Proxy direkt auf GitHub Pages. Ein ech
 
 Vorgehen, wenn der Proxy aktiv ist:
 
-1. Prüfen, ob die Antwort einen `cf-ray`-Header trägt. Ohne ihn ist der Proxy nicht aktiv.
-2. `python3 scripts/weiterleitungen.py --cloudflare`. Erzeugt `cloudflare/redirects/bulk-redirects.csv`.
+1. `python3 scripts/weiterleitungen.py --proxy-check` (auf deinem Rechner, braucht Internet). Ausgabe `aktiv` heißt: Antwort trägt `cf-ray`. `unbekannt` heißt: Anfrage gescheitert, das ist kein Beleg für „inaktiv“. Die Sandbox kann diese Prüfung nicht ausführen.
+2. Nur bei `aktiv`: `python3 scripts/weiterleitungen.py --cloudflare`. Erzeugt `cloudflare/redirects/bulk-redirects.csv`. Ohne nachgewiesen aktiven Proxy verweigert der Befehl die Ausgabe.
 3. CSV-Format (laut Cloudflare-Doku, ohne Kopfzeile): `<Quelle>,<Ziel>,301,FALSE,FALSE,FALSE,FALSE`. Die Quelle hat kein `https://`, das Ziel schon.
 4. CSV im Dashboard unter *Bulk Redirects* importieren. Der Upload ist **eine Außenwirkung**, deshalb macht ihn die Redaktion, nicht die Sandbox.
 5. Nach dem Import eine Stichprobe mit `curl -I` prüfen: `301` und `location`.

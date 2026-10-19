@@ -203,7 +203,7 @@ Dieser Abschnitt fasst den Stand nach dem Auftrag „auf Highend-Level einer Pro
 - **Grenze:** GitHub Pages kann keine echten 301 setzen. Die Seiten sind Meta-Refresh (0 s, canonical, noindex,follow). Der echte 301 entsteht erst mit dem Cloudflare-Proxy.
 - **Ehrlich zu den Zuordnungen:** Die Ziele beruhen auf Titel, Thema und Stichproben. Nicht jeder Text wurde einzeln gelesen. Die Regel-B-Einträge sollte die Redaktion gegenlesen.
 - **Durchsetzung:** Gate H9 läuft im Deploy und stoppt bei harten Funden. Die Quellprüfung und der Test laufen nicht in der CI. Das wäre eine Workflow-Änderung und braucht einen Auftrag.
-- **Offen für dich:** (a) Ob der Cloudflare-Proxy aktiv ist, prüfst du mit dem Header `cf-ray` bei einer Anfrage an franksfinanzcheck.de. Ich kann das aus der Sandbox nicht sehen. (b) Die CSV-Aktivierung ist eine Außenwirkung und liegt bei dir. (c) Entscheidung, ob `--check` und der Test in `deploy.yml` aufgenommen werden.
+- **Offen für dich:** (a) Proxy-Status: `python3 scripts/weiterleitungen.py --proxy-check` auf deinem Rechner. `--cloudflare` erzeugt die CSV nur bei `aktiv` (eingebaut, 19.10.). Die Sandbox kann die Prüfung nicht ausführen. (b) Die CSV-Aktivierung im Cloudflare-Dashboard ist eine Außenwirkung und liegt bei dir. (c) Entscheidung, ob `--check` und der Test in `deploy.yml` aufgenommen werden.
 
 ### Punkt 2 – Kannibalisierung und Formel-Titel
 
@@ -235,7 +235,7 @@ Dieser Abschnitt fasst den Stand nach dem Auftrag „auf Highend-Level einer Pro
 
 ### Offene Punkte und Befunde (Stand 19.10.2026)
 
-- **Live-Aktualität ungeklärt:** Die Startseite zeigt den Stand 09.10. bzw. 25.09. Der Repo-Stand ist 16.10. Ob der Deploy zurückliegt, ist nicht verifiziert.
+- **Live-Aktualität geklärt (19.10.):** Der letzte Deploy auf `main` ist erfolgreich (19.10., 06:18 UTC). Die Seite `/posts/` zeigt den Beitrag vom 12.10. Die frühere Beobachtung „Stand 09.10. bzw. 25.09.“ war überholt.
 - **Vorbestehender Testfehlschlag (E-21):** `test_bot_watchdog_meldetakt.test_rechter_baum_hat_keine_befunde`, Wirkungsprobe C25 (fail-closed). Identisch im Ausgangsstand 258fd51. Das Gate wurde nicht abgeschwächt.
 - **Metadaten-Befund (E-15):** Privathaftpflicht, lastmod vor date. Ausgangsstand, unverändert.
 - **Commit-Sperre:** Nicht scharf. `core.hooksPath` wird laut CLAUDE.md nicht gesetzt. Die README ist unverändert.
