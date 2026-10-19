@@ -271,3 +271,20 @@ Auftrag: die Empfehlungen aus 7c vollständig und dauerhaft umsetzen. Was im Rep
 - Strompreis als Ersparnis-Näherung: 0,35 €/kWh (Verbraucherzentrale-Zitat bei photovoltaikanbieter.com).
 
 **Verifikation dieser Runde:** Werkzeug-Gate Quelle grün, Gate-Selbsttest grün, Gate-Unit-Tests grün, 62 Rechenkern-Tests grün (jsdom, npm ci). Abbildungen 0, Inhalts-Wache 0, Beweis-Gate 0/0, Editorial-Gate Live 60 Artikel, 0 Hochrisiko, 0 blockiert, Weiterleitungen 114/114, URL-Wache 95 (Snapshot aktualisiert, nur die neue Seite hinzugekommen), Metadaten 1 Befund (E-15, Ausgangsstand), Index-Hygiene-Selbsttest 18/0.
+
+## 7e. Entscheidungsvorlagen für die offenen Punkte (19.10.2026, dritte Runde)
+
+Die Empfehlungen je Punkt stehen in `docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md`, der Prüfauftrag in `docs/FACHPRUEFUNG-AUFTRAG-2026-10-19.md`. Im Register sind die Verweise eingetragen.
+
+| Punkt | Empfehlung | Status |
+|---|---|---|
+| E-16 Cloudflare-Proxy | Variante A, erst nach Anpassung des Datenschutztexts B7 und Prüfung des AVV. Reihenfolge und Abnahme dokumentiert. | teilweise, Entscheidung bei Frank |
+| E-18 Internet-Rechner | Kein neuer Rechner. Grund: 4 Suchbegriffe in 28 Tagen, 0 Klicks, keiner zu Internetkosten. Wiedervorlage bei mindestens 30 Impressionen in 90 Tagen. | umgesetzt (Entscheidung nachvollziehbar, überstimmbar) |
+| E-05 Konto-Prüfer | Externe Fachprüfung durch eine namentlich benannte Person. Auftrag für 17 Beiträge, Konto/Karten zuerst (6). Keine Prüfung wird fingiert. | offen, Prüfer fehlt |
+| E-09 README-Pauschalen | Streichen oder belegen. Formulierungsvorschlag ohne unbelegte Angaben. Änderung an der Markenfläche nur auf Auftrag. | offen |
+| E-11 Redaktionskontakt | Vorhandene Adresse auf Lesbarkeit prüfen, dann Presse-Kontaktblock. Keine erfundenen Ansprechpartner. | offen |
+| E-12 Finanztip-Profil | Nicht als Kanal nutzen, bis die Forenregeln vollständig gelesen sind. Nur privat, ohne Werbung. | offen |
+| E-13 Verbraucherkredit | Keine Maßnahme im Bestand. Wiedervorlage vor dem 20.11.2026. | offen, Wiedervorlage |
+| E-20 Pitch-Versand | Noch nicht senden. Fünf Bedingungen, zuerst eine Redaktion. | teilweise, Versand bei Frank |
+
+**Lage der Live-Seite:** Die Seite zeigt keinen `cf-ray`-Header, das ist mit dem Repo-Stand konsistent. Die Live-`robots.txt` enthält Content-Signal-Zeilen, sie stammen aber aus der eigenen Vorlage `layouts/robots.txt` und beweisen den Proxy nicht.

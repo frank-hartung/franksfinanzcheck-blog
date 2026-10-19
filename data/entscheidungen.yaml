@@ -68,7 +68,7 @@ entscheidungen:
       owner: human
       severity: P1
       channel: "fachpruefung"
-      offen: "Frank Hartung benennt einen Prüfer (Name, Rolle, Typ, Datum). Vorschlag: fachpruefer extern mit Nachweis der Qualifikation, oder redaktion-mit-externer-belegkette: jede Zahl mit Quelle und Abrufdatum. Empfohlene Reihenfolge: 2026-09-23 Einlagensicherung, 2026-08-12 Geld abheben, 2026-08-28 Lastschrift, 2026-08-17 Girokonto, 2026-09-03 Kreditkarte."
+      offen: "Empfehlung: externe Fachprüfung durch eine namentlich benannte Person. Auftrag mit Kriterien, Reihenfolge (Konto/Karten zuerst) und Protokoll: docs/FACHPRUEFUNG-AUFTRAG-2026-10-19.md. Prüfer nennt Frank. Erledigt, wenn Protokolle vorliegen und fachpruefung_register --check grün ist."
 
   - id: E-06
     punkt: "3 / Gate – Redaktions-Gate"
@@ -105,7 +105,7 @@ entscheidungen:
       owner: human
       severity: P1
       channel: "marke"
-      offen: "Frank wählt: (a) Belegbare Zahlen mit Datum nennen oder (b) Ersatz: „Ich vergleiche Tarife und Konditionen selbst und dokumentiere die Rechenwege mit Quelle und Stand.“ Danach npm run marke:check ausführen."
+      offen: "Empfehlung: die beiden Pauschalen (zehn Jahre Praxis, hunderte Tarifvergleiche) streichen oder belegen. Formulierungsvorschlag in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md. README nur auf Auftrag von Frank ändern."
 
   - id: E-10
     punkt: "5 – Rechner und Pillar-Verlinkung"
@@ -131,7 +131,7 @@ entscheidungen:
       owner: human
       severity: P2
       channel: "autorität"
-      offen: "Frank liefert den Redaktionskontakt oder entscheidet, ob der Versand unterbleibt."
+      offen: "Empfehlung: Adresse kontakt@franksfinanzcheck.de auf Lesbarkeit prüfen, dann Presse-Kontaktblock ergänzen. Keine erfundenen Ansprechpartner. Details in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md."
 
   - id: E-12
     punkt: "6 – Finanztip-Community"
@@ -144,7 +144,7 @@ entscheidungen:
       owner: human
       severity: P3
       channel: "autorität"
-      offen: "Frank entscheidet über das Profil. Der Agent liefert nur Entwurf und Forenregel-Check."
+      offen: "Empfehlung: nicht als Kanal nutzen, bis die Forenregeln vollständig gelesen sind. Profil nur privat, ohne Link und Werbung. Details in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md."
 
   - id: E-13
     punkt: "6 – Verbraucherkredit-Thema (Neuregelung 20.11.2026)"
@@ -157,7 +157,7 @@ entscheidungen:
       owner: human
       severity: P2
       channel: "inhalt-themen"
-      offen: "Frank entscheidet, ob ein Themenentwurf entsteht. Frist: 20.11.2026."
+      offen: "Empfehlung: keine Maßnahme im Bestand, kein Beitrag betroffen. Wiedervorlage vor dem 20.11.2026, vor einem neuen Beitrag zum Thema. Details in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md."
 
   - id: E-14
     punkt: "2 – Entwürfe mit Dubletten"
@@ -196,7 +196,7 @@ entscheidungen:
       owner: human
       severity: P1
       channel: "seo-technik"
-      offen: "(a) Cloudflare-Proxy: `python3 scripts/weiterleitungen.py --proxy-check` auf dem Rechner des Betreibers ausführen. `--cloudflare` erzeugt die CSV nur bei aktiv. Aktivierung ist Betriebsentscheidung (Datenschutztext B7). (b) Regel-B-Einträge (73) gegenlesen. (c) Tag-Archiv-Entscheidung im Abschlussbericht bestätigen."
+      offen: "Empfehlung: Variante A (Proxy aktivieren), erst nach Anpassung des Datenschutztexts B7 und AVV-Prüfung. Reihenfolge und Abnahme in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md. --proxy-check erwartet vor der Aktivierung inaktiv."
 
   - id: E-17
     punkt: "1 – Durchsetzung der Weiterleitungen"
@@ -214,14 +214,14 @@ entscheidungen:
     punkt: "5 – Rechner-Stichprobe"
     entscheidung: "Stichprobe 2026-10-19 über 11 Beiträge. Passend: Heizkosten senken, Kostenloses Girokonto, Grundversorgung, Mietwagen ohne Kaution, Energiediebe, Smart Home. Campingurlaub von Effektivpreis-Rechner auf Haushaltsbudget korrigiert. Balkonkraftwerk: neues Werkzeug „Balkonkraftwerk-Rechner“ (Ertrag, Ersparnis, Amortisation, Einspeisung optional, Förderung optional) gebaut und im Beitrag und im Pillar verlinkt. DNS-Server, WLAN, WLAN-Verstärker vs. Mesh und Störung beim Internetanbieter: Die Rechner-Zeile zeigte auf den Effektivpreis-Rechner und war thematisch falsch. Sie zeigt jetzt auf den Fixkosten-Scanner, der die Kategorie Internet, Mobilfunk und Streaming führt."
     begruendung: "Maßnahme 5 verlangt einen Rechner je Beitrag, Inhalts-Wache FF3 prüft das. Ein Werkzeug, das nicht zum Thema passt, schadet dem Vertrauen mehr als eine schwächere Verlinkung. Der Fixkosten-Scanner ist die passendste vorhandene Zuordnung für Internetthemen."
-    status: "teilweise"
+    status: "umgesetzt"
     verantwortlich: human
     nachweis: "Rechner-Zeilen per grep: grep -l '/werkzeuge/' content/posts/*/index.md; data/werkzeuge.yaml (balkonkraftwerk); FF3 0 Befunde; test_werkzeuge: 62/0"
     befund:
       owner: human
       severity: P2
       channel: "seo-inhalt"
-      offen: "Frank entscheidet, ob für Internetanschluss-Kosten ein eigener Rechner gebaut wird. Der Fixkosten-Scanner trifft das Thema nur grob, bei DNS und WLAN-Technik ist der Bezug schwach."
+      offen: "Entscheidung (Empfehlung der Agentur): kein eigener Internet-Rechner. Grund: GSC 28 Tage vier Suchbegriffe, null Klicks, keiner zu Internetkosten. Fixkosten-Scanner deckt Internet ab. Wiedervorlage bei mindestens 30 Impressionen zu Internetkosten in 90 Tagen. Details in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md."
   - id: E-19
     punkt: "Fixkosten-Index – Methodik"
     entscheidung: "Der Strompreis (37,0 ct/kWh) ist der BDEW-Durchschnitt für 3.500 kWh inkl. anteiligem Grundpreis. Das Modell rechnet mit 2.500 kWh. Die Abweichung steht jetzt im Studientext unter Grenzen der Aussage. Im Änderungsprotokoll (2026-10-19) eingetragen. Zahlen unverändert. BDEW-Werte geprüft: Strom 37,0 ct/kWh (BDEW-Strompreisanalyse 2026), Gas 11,93 ct/kWh (BDEW-Gaspreisanalyse August 2026, Einfamilienhäuser)."
@@ -239,14 +239,14 @@ entscheidungen:
     punkt: "Fixkosten-Index – Name und Pressepitch"
     entscheidung: "Entschieden: Name „Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“ bleibt. Der Umfang steht im Titel, im Dataset-Namen, in der Quellenzeile der Presseseite und im Betreff des Pressepitches. Die Grenzen (nur Strom und Gas) stehen im Abschnitt „Grenzen der Aussage“."
     begruendung: "Der volle Name nennt den Umfang und verspricht nicht mehr als die Studie. Eine Umbenennung hätte URL, CSV-Name, Pressegrafik und Verlinkungen betroffen, ohne den Inhalt zu verbessern."
-    status: "umgesetzt"
+    status: "teilweise"
     verantwortlich: human
     nachweis: "content/studien/fixkosten-index-2026-q4/index.md (Titel, Figcaption, Grenzen); content/presse/index.md; AUTORITAET-ENTWUERFE-2026-10-19.md (Entwurf A, Betreff)"
     befund:
       owner: human
       severity: P2
       channel: "marke"
-      offen: "Keine. Der Versand des Pressepitches bleibt eine Außenwirkung und liegt bei Frank."
+      offen: "Empfehlung: noch nicht senden. Fünf Bedingungen (echter Redaktionskontakt, Umfang im Pitch, Strompreisbasis offen, Wochengrenze, Freigabe durch Frank). Erst eine Redaktion, dann Rückmeldung abwarten. Details in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md."
   - id: E-21
     punkt: "Testsuite – vorbestehender Fehlschlag"
     entscheidung: "test_bot_watchdog_meldetakt.test_rechter_baum_hat_keine_befunde schlägt fehl: Wirkungsprobe C25 „YMYL: Schreibprüfung nicht auswertbar (ParseError) – fail-closed“ (scripts/editorial_review_gate.py, Zeile 291). Der Fehler ist im Ausgangsstand 258fd51 identisch. Das Verhalten (fail-closed) ist richtig. Die Ursache im Testfixture oder in der Eingabe ist nicht geklärt."
