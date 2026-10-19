@@ -155,3 +155,46 @@ Eintrag als *toten Eintrag* — so wächst hier kein Regal voller Altlasten.
 3-fach-Wiederholung mit `rm -rf public` bei endgültigem Fehlschlag, damit
 `ensure_build()` nicht gegen ein halbfertiges Artefakt „aktuell" beweist. Die
 Fehlerausgabe ist dort bereits vollständig.
+
+## Lokaler vollständiger Nachweis (C25/E-21, 19.10.2026)
+
+Auf Linux x86_64 mit Python und venv:
+
+```bash
+bash scripts/verify_local.sh
+```
+
+Der Einstieg installiert die CI-Abhängigkeiten und Hugo Extended 0.164.0
+hash-gepinnt in `.venv`, prüft Version und Extended-Merkmal, führt die gesamte
+Python-Suite und die C25-Wirkungsprobe aus und baut anschließend mit dem echten
+Hugo in ein frisches temporäres Ziel. Jeder Fehler bricht ab. Keine globale
+pip-Installation, kein `|| true`, kein Überspringen wegen fehlendem Hugo.
+Das Ziel wird anschließend entfernt; bestehendes `public/` bleibt unberührt.
+Dieser Nachweis umfasst nicht Pagefind oder Playwright (`npm run test:e2e`).
+
+**Diagnose:** Ein Lauf ohne `requirements-ci.txt` ist kein gültiger
+Regressionsnachweis: Fehlendes PyYAML führt u. a. zu einer fail-closed
+YMYL-ParseError-Meldung in der C25-Wirkungsprobe. Nicht das Gate abschwächen,
+sondern die Umgebung über den obigen Einstieg einrichten.
+
+Der PR-Regressionsworkflow installiert jetzt ebenfalls Hugo Extended und führt
+einen echten Produktionsbuild über die bestehende `hugo-build`-Action aus.
+Der Build läuft mit `!cancelled()` unabhängig von vorherigen Befunden und
+ersetzt nicht die Python-Suite. Template-, Asset-, Theme-, Konfigurations- und
+Abhängigkeitsänderungen lösen den Workflow ebenfalls aus.
+
+### Verifizierter Stand dieser Reparatur
+
+- Vollständige Python-Suite mit installierten CI-Abhängigkeiten: **3343 Tests,
+  OK, 6 bestehende Skips**, Laufzeit 307,749 s. Keine neuen Skips eingeführt.
+- Neue Absicherung des lokalen Einstiegs/CI-Builds: **3 Tests, OK** (separat
+  ausgeführt, nach dem Start der vollständigen Suite hinzugefügt).
+- Hugo-Build-Vertrag und Lesbarkeits-Heiler: **51 Tests, OK**.
+- C25-Wirkungsprobe: Flesch **51,3 → 72,3**, Schwelle 60, T1–T4 erfüllt.
+- Echter Hugo Extended 0.164.0 Build: **Exit 0**, 102 Seiten,
+  14 Paginator-Seiten, 2107 statische Dateien, 3394 ms.
+- `bash -n scripts/verify_local.sh` und `git diff --check`: erfolgreich.
+
+Die GitHub-Ausführung der geänderten Workflow-Datei ist damit nicht behauptet;
+sie erfolgt nach Push/PR. Die sechs Suite-Skips sowie vorhandene
+Resource-/Deprecation-Warnungen sind kein hier neu eingeführtes Verhalten.

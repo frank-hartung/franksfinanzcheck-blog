@@ -6,6 +6,12 @@ on:
       # (u. a. Affiliate-Intent). Content-only-Korrekturen müssen sie deshalb
       # genauso auslösen wie Änderungen am Detektor selbst (#493).
       - 'content/**'
+      - 'layouts/**'
+      - 'assets/**'
+      - 'themes/**'
+      - 'hugo.toml'
+      - 'requirements*.txt'
+      - '.github/actions/**'
       # #634: Auch reine Zustands-/Merge-Vertragsänderungen brauchen den
       # Offline-Nachweis; content-reserve läuft auf PR-Refs absichtlich nicht.
       - 'data/reserve-*.json'
@@ -34,6 +40,15 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+      - name: Hugo Extended installieren
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+      - name: Echter Hugo-Produktionsbuild (kein Mock)
+        if: ${{ !cancelled() }}
+        uses: ./.github/actions/hugo-build
+        with:
+          args: --minify --destination public --cleanDestinationDir
       # Harte, verständliche Vorprüfung für die Actions-Kontrollfläche. Das
       # Unit-Test-Netz darunter enthält zusätzlich Sabotageproben des Audits.
       - name: Workflow-Permissions und Betriebsverträge prüfen

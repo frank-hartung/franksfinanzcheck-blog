@@ -1,0 +1,2 @@
+# Linux x86_64: identisch zum verifizierten PyPI-Fallback der install-hugo Action.
+hugo==0.164.0 --hash=sha256:00b84fbe63dbd34c9a7cb15445d37e6f02ed6a167d171af3d7f90f74a501cf25

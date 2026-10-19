@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 18.10.2026 23:34 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.10.2026 12:54 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Mo, 19. Oktober 2026
-- **07:30** ⏳ Zählerstand ablesen und melden: Schätzwerte vermeiden — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/
 - **11:30** ⏳ Großeinkauf und Vorrat: Wann Bevorraten sich rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/
 ### Di, 20. Oktober 2026
@@ -25,6 +23,9 @@
 ### Mi, 21. Oktober 2026
 - **07:30** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
+- **07:30** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
+### Do, 22. Oktober 2026
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Sa, 24. Oktober 2026
@@ -33,7 +34,9 @@
 - **17:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
+- **11:30** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
+- **17:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
 - **11:30** ⏳ Internet & DSL wechseln: So gelingt der Anbieterwechsel — _zahl_ · Evergreen  
@@ -43,9 +46,15 @@
 ### Sa, 31. Oktober 2026
 - **11:30** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
+### Mo, 02. November 2026
+- **11:30** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
+- **17:30** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 19.10.2026 12:54 · Zählerstand ablesen und melden: Schätzwerte vermeiden → https://mastodon.social/@FranksFinanzcheck/117467203191745299
 - ✅ 18.10.2026 16:39 · Einlagensicherung: Wie viel Guthaben geschützt ist → https://mastodon.social/@FranksFinanzcheck/117462425507126261
 - ✅ 18.10.2026 11:42 · Grundversorgung Strom und Gas: Was sie leistet → https://mastodon.social/@FranksFinanzcheck/117461257247875450
 - ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
@@ -55,7 +64,6 @@
 - ✅ 15.10.2026 17:38 · Lastschrift und Dauerauftrag: Was du prüfen solltest → https://mastodon.social/@FranksFinanzcheck/117445670235708986
 - ✅ 15.10.2026 12:03 · Warmwasser sparen: Die Rechnung hinter → https://mastodon.social/@FranksFinanzcheck/117444351878060801
 - ✅ 14.10.2026 17:51 · Abos und Verträge: Der stille Posten im Haushaltsplan → https://mastodon.social/@FranksFinanzcheck/117440058160848584
-- ✅ 14.10.2026 12:18 · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen → https://mastodon.social/@FranksFinanzcheck/117438751738382391
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

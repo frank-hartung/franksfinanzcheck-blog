@@ -136,6 +136,7 @@ Keine.
 | `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | frisch geprüft vor 4 Tagen (Intervall 30 Tage) | 2026-11-14 |
 | `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 | `2026-10-16-dns-server-aendern-fuer-schnelleres-internet` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-19-urlaubskasse-clever-aufbessern` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 

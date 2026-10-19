@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 18.10.2026 23:34 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.10.2026 12:54 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,36 +12,36 @@
 
 ## Kommende Beiträge
 
-### Mo, 19. Oktober 2026
+### Di, 20. Oktober 2026
 - **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
-### Di, 20. Oktober 2026
+### Mi, 21. Oktober 2026
 - **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-### Mi, 21. Oktober 2026
+### Do, 22. Oktober 2026
 - **07:45** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
-### Do, 22. Oktober 2026
+### Fr, 23. Oktober 2026
 - **07:45** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
-### Fr, 23. Oktober 2026
+### Mo, 26. Oktober 2026
 - **07:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
-### Mo, 26. Oktober 2026
+### Di, 27. Oktober 2026
 - **07:45** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
-### Di, 27. Oktober 2026
+### Mi, 28. Oktober 2026
 - **07:45** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
-### Mi, 28. Oktober 2026
+### Do, 29. Oktober 2026
 - **07:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
-### Do, 29. Oktober 2026
-- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Fr, 30. Oktober 2026
-- **07:45** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+- **07:45** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
+### Mo, 02. November 2026
+- **07:45** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
 
 ## Zuletzt veröffentlicht
 

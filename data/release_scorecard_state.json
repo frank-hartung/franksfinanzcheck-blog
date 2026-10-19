@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-19T10:10:39Z",
+  "generated_at": "2026-10-19T11:57:32Z",
   "modus": "kandidaten",
-  "commit": "fa4f60019c16b341041e733ddb764f5e4c92c824",
+  "commit": "ff40f772ef3916c8547855e546d7f4a376ef4f0c",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -277,7 +277,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "3ff38bfed0585c26b25634fa5583d00b31077ed41b6ca146cf76134d14ddf01f",
+      "sha256": "f2c7a3a7918d79603fbd4e57856ab1f63a5a53070908cc624a7b0914d63a0d52",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

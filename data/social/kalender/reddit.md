@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 18.10.2026 23:34 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.10.2026 12:54 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
