@@ -71,8 +71,8 @@ Prüfungen Build (B1–B7) gegen public/index.html:
      Link löst auf eine existente Datei unter public/ auf (kein toter
      Link), Titel nicht leer
   B4 Messung: jeder Saison-Link trägt cta_click mit slug, placement
-     „start-saison“ und der Saison-Property – sonst ist der
-     Revenue-Trichter (scripts/revenue_funnel.py) für diese Platzierung blind
+     „start-saison“ und der Saison-Property – sonst wäre jede künftige
+     Klick-Auswertung für diese Platzierung blind
   B5 das gebaute CSS-Bundle enthält die Saison-Klassen (Datei wirklich
      eingebunden, nicht nur im Repo)
   B6 Datenpfad: kein Layout der saisonalen Startseite fasst

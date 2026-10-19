@@ -94,12 +94,11 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
   Bis zu **sechs** Meta-Tags pro Artikel, die nachweislich kein Konsument mehr
   auswertet: dieselben Begriffe stehen als `keywords` im Article-JSON-LD und
   sichtbar in der Tag-Navigation. Der größte Einzelposten am Budget.
-* **Analytics + Service-Worker ans Body-Ende**
+* **Service-Worker ans Body-Ende**
   (`layouts/_partials/deferred_scripts.html`, eingebunden von `footer.html`).
-  Umami (cookieless) und die SW-Registrierung blockieren nichts und gehören
-  nicht in den kritischen Pfad. Das Consent-Gate ist **unverändert**: geladen
-  wird nur nach „Alle akzeptieren" (`ff_cookie_consent=all`), der
-  `ffConsentChange`-Horcher bleibt.
+  Die SW-Registrierung blockiert nichts und gehört nicht in den kritischen
+  Pfad. (Stand 11.10.2026: Der früher dort mitgeladene Analytics-Loader und
+  das Consent-Gate sind entfernt – es gibt kein Reichweiten-Tracking mehr.)
 * **`apple-mobile-web-app-status-bar-style` entfernt** – der gesetzte Wert
   `default` *ist* das Plattformverhalten, das Tag änderte nichts.
 * **Doppelte hreflang-Selbstreferenz entfernt** (`extend_head.html`). Das

@@ -90,15 +90,26 @@ class BucketContentTest(unittest.TestCase):
 
 
 class BucketSeoTest(unittest.TestCase):
-    def test_info_only_bleibt_gruen(self):
+    def test_gruene_kernwerte_bleiben_gruen(self):
         gov = {"steps": {
             "cwv": {"level": "green", "message": "ok"},
             "build": {"level": "green", "message": "ok"},
-            "umami": {"level": "info", "message": "keine Daten"},
+            "live-policy": {"level": "green", "message": "ok"},
         }}
         lvl, lines, _ = cockpit.bucket_seo(gov)
         self.assertEqual(lvl, "gruen")
-        self.assertTrue(any("Standby" in l for l in lines))
+        self.assertEqual(lines[0], "in Ordnung")
+
+    def test_fremde_info_schritte_zaehlen_nicht_zum_seo_bereich(self):
+        """Nur CWV/Build/Live-Policy gehören in den SEO-Bereich – ein Info-Schritt
+        einer anderen Messkette färbt ihn weder ein noch erzeugt er eine Zeile."""
+        gov = {"steps": {
+            "cwv": {"level": "green", "message": "ok"},
+            "clicks": {"level": "info", "message": "keine Daten"},
+        }}
+        lvl, lines, _ = cockpit.bucket_seo(gov)
+        self.assertEqual(lvl, "gruen")
+        self.assertEqual(lines, ["in Ordnung"])
 
     def test_rotes_cwv_zieht_auf_rot(self):
         gov = {"steps": {"cwv": {"level": "red", "message": "LCP zu langsam"}}}

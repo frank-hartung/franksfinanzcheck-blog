@@ -2,7 +2,7 @@
   "counts": {
     "amber": 1,
     "green": 9,
-    "info": 4,
+    "info": 2,
     "red": 0
   },
   "fingerprint": "63facd5d7c6d",
@@ -134,26 +134,6 @@
       "message": "in Ordnung",
       "report": "SECRETS-REPORT.md",
       "ts": "2026-10-19T10:49:02+00:00"
-    },
-    "umami": {
-      "actionable": false,
-      "code": "no_data",
-      "exit": 0,
-      "findings": 0,
-      "level": "info",
-      "message": "Datenlage offen (noch kein Export/Import)",
-      "report": "data/umami_clicks.meta.json",
-      "ts": "2026-10-19T10:49:03+00:00"
-    },
-    "umami-views": {
-      "actionable": false,
-      "code": "no_data",
-      "exit": 0,
-      "findings": 0,
-      "level": "info",
-      "message": "Datenlage offen (noch kein Export/Import)",
-      "report": "data/umami_views.meta.json",
-      "ts": "2026-10-19T10:49:03+00:00"
     }
   },
   "verdict": "AMBER",

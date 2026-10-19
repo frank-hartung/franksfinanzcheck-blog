@@ -5,8 +5,8 @@
 Stand: 11.10.2026 · Status: **vorbereitet, nicht live.** Die Einführung braucht deine Freigabe,
 eine Datenschutz-Prüfung (siehe Abschnitt 7) und die Anpassung der Datenschutzerklärung.
 
-Dieses Dokument ersetzt die Umami-Abhängigkeit für die Messung der Partnerklicks. Umami ist abgeschaltet,
-weil die Umami-API im kostenfreien Plan kostenpflichtig ist.
+Dieses Dokument beschreibt die Messung der Partnerklicks ohne Fremdanbieter. Eine Reichweitenmessung durch
+einen Drittanbieter gibt es auf dem Blog nicht mehr (abgeschaltet am 11.10.2026).
 
 ---
 

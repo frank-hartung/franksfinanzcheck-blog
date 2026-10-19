@@ -15,7 +15,7 @@ Issue #149 erzeugt haben:
 
 1. **Fehlersemantik war nicht eindeutig.** Der Render-Beweis AI4 hing früher
    an einer starren Attribut-Reihenfolge der HTML-Ausgabe. Nach der
-   Render-Hook-Erweiterung (`?subid=`, Umami-Kontext) zählte die alte
+   Render-Hook-Erweiterung (`?subid=`, Klick-Kontext) zählte die alte
    Auswertung in **24/24 Artikeln** exakt `0` gerenderte Affiliate-Links,
    obwohl alle Links korrekt im gebauten HTML standen. Ergebnis:
    `BESTAND-REPORT.md` meldete „Selbstheilung fehlgeschlagen“ bei jedem

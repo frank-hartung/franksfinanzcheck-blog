@@ -9,7 +9,7 @@
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
 | Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) |
-| SEO & Technik | 🟢 | Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby) |
+| SEO & Technik | 🟢 | in Ordnung |
 | Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
 | Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
@@ -27,7 +27,7 @@
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
 ### SEO & Technik — 🟢 GRÜN
-- Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby)
+- in Ordnung
 
 Quellen: `data/governance_status.json`
 

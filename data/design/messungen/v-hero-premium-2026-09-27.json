@@ -73,7 +73,7 @@
         "seiten_gewicht_bytes_max": 219154,
         "stylesheet_bytes": 143471,
         "cta_anzahl": 3,
-        "cta_ohne_umami": 0,
+        "cta_ohne_klickmarke": 0,
         "pflicht_bausteine_fehlen": [],
         "newsletter_einstieg": true,
         "variante_im_markup": true,

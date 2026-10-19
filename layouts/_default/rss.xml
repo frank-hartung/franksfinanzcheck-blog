@@ -53,7 +53,7 @@
       <title>{{ printf "%s" (.Title | plainify) | html }}</title>
       {{- /* UTM (Premium 25.08.2026): Dieser Feed läuft AUSSCHLIESSLICH über
              Pinterests Auto-publish → Item-Links tragen die Kanal-Markierung,
-             damit Umami Pin-Traffic sauber zuordnet. Die <guid> bleibt bewusst
+             damit Pinterest Analytics den Pin-Traffic sauber zuordnet. Die <guid> bleibt bewusst
              die reine Permalink (stabile Identität, kein Re-Crawl-Flattern). */ -}}
       <link>{{ .Permalink }}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=rss-autopublish</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>

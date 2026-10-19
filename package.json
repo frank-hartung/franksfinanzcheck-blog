@@ -197,6 +197,7 @@
     "duplikate:check": "python3 scripts/duplikat_guard.py",
     "test:duplikate": "python3 scripts/duplikat_guard.py --selftest && python3 -m unittest scripts.tests.test_duplikat_guard",
     "test:wachen": "python3 scripts/wachen_vertrag.py --selftest && python3 -m unittest scripts.tests.test_wachen_vertrag",
+    "test:fremdmessung": "python3 scripts/fremdmessung_sperre.py --selftest && python3 scripts/fremdmessung_sperre.py && python3 -m unittest scripts.tests.test_fremdmessung_sperre",
     "test:redaktion": "python3 scripts/redaktions_standard.py --selftest && python3 -m unittest scripts.tests.test_redaktions_standard",
     "spam:check": "python3 scripts/spam_schutz_wache.py",
     "spam:messen": "python3 scripts/spam_schutz_wache.py --nur-messen",

@@ -265,7 +265,7 @@ FEST = {
     # Diese Dateien emittieren bzw. beweisen die Affiliate-Links. Der
     # Render-Hook (KRITISCH) deckt nur die Markdown-Link-Pipeline ab –
     # Shortcode-CTAs laufen daran vorbei, und genau dort fehlten
-    # rel="sponsored" + Umami-Attribution (Fund AI4, 02.09.2026).
+    # rel="sponsored" + Klick-Attribution (Fund AI4, 02.09.2026).
     # Deshalb: zentraler Attribut-Vertrag + die beiden CTA-Shortcodes +
     # die Wache selbst unter Siegel. Aenderung nur mit Neu-Signatur.
     "layouts/_partials/affiliate_anchor_attrs.html",

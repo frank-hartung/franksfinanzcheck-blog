@@ -107,7 +107,7 @@ test.describe('Affiliate-Integrität', () => {
     expect(probleme, 'Externe _blank-Links schützen mit noopener').toEqual([]);
   });
 
-  // Umsatz-Messung (19.09.2026): Der Messvertrag zwischen Template und Umami –
+  // Umsatz-Messung (19.09.2026): Der Messvertrag zwischen Template und Klickzähler –
   // ohne Event + Slug + SubID + Platzierung an jedem CTA wäre der Funnel blind.
   // Dieser Test prüft das gerenderte Markup (Build-Wahrheit); die Kette
   // dahinter (/go/-Stumpf → Gateway-SubID-Durchreichung) prüft der

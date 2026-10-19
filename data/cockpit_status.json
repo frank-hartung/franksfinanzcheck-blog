@@ -18,7 +18,7 @@
     "SEO & Technik": {
       "level": "gruen",
       "lines": [
-        "Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby)"
+        "in Ordnung"
       ],
       "sources": [
         "data/governance_status.json"

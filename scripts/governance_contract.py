@@ -174,11 +174,11 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Genau dieser Selbsttest hat den Vorfall #783 aufgedeckt; dass er
           # Pflicht ist, war nirgends zugesichert. Nachgetragen (C6).
           "redaktions_standard.py",
-          "umami_clicks.py", "click_attribution.py",
-          # Umsatz-Messkette (19.09.2026): Views-Nenner, Wochen-Trichter und
-          # Ketten-Guard sind Wachen wie alle anderen –
+          "click_attribution.py",
+          # Umsatz-Messkette (19.09.2026): Wochen-Trichter und Ketten-Guard
+          # sind Wachen wie alle anderen –
           # ohne sie wäre „unbekannt“ wieder eine Fußnote statt ein Befund.
-          "umami_views.py", "revenue_funnel.py",
+          "revenue_funnel.py",
           "click_chain_guard.py",
           "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py",
           "schema_seo_gate.py", "generate_pwa_icons.py", "report_hygiene.py",
@@ -451,7 +451,13 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Quelle (max. 3, nur [a-z0-9], 3–24 Zeichen, Zahlenschilder sind
           # keine Tags, Block am Textende). Alle Pinterest-Schreiber und der
           # Watchdog hängen daran; `--selftest` friert die Regel ein.
-          "pinterest_hashtags.py"]
+          "pinterest_hashtags.py",
+          # Fremdmessung-Sperre (19.10.2026, #806): Der am 11.10.2026 entfernte
+          # Reichweiten-Dienst lebte als ANBINDUNG weiter (Skripte, Workflow-
+          # Schritte, Secret, Datenstände) und täuschte eine Messung vor. Die
+          # Wache liest den Quelltext und meldet jede Spur; ohne vertragliches
+          # Minimum liefe ihr Selbsttest in keinem Gate (C40).
+          "fremdmessung_sperre.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -470,7 +476,7 @@ TOKEN_WORKFLOW = "pinterest-token.yml"
 
 # Reihenfolge-Vertrag: diese Schritte sind Messungen, die vor der Sicht liegen müssen
 MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks",
-                 "live-policy", "umami-views", "revenue-funnel",
+                 "live-policy", "revenue-funnel",
                  "click-chain")
 VIEW_STEP = "scorecard"
 
@@ -513,8 +519,7 @@ STEP_SIGNATURES = {
     "clicks":    (r"--emit\s+clicks\b", r"click_attribution\.py"),
     "live-policy": (r"--emit\s+live-policy\b", r"live_policy_guard\.py"),
     # Umsatz-Messkette: eigene Signaturen, damit die Reihenfolge (Messung vor
-    # Sicht) auch für Views-Nenner, API-Abruf, Trichter und Ketten-Guard gilt.
-    "umami-views": (r"--emit\s+umami-views\b", r"umami_views\.py"),
+    # Sicht) auch für Trichter und Ketten-Guard gilt.
     "revenue-funnel": (r"--emit\s+revenue-funnel\b", r"revenue_funnel\.py"),
     "click-chain": (r"--emit\s+click-chain\b", r"click_chain_guard\.py"),
     "scorecard": (r"--emit\s+scorecard\b", r"editorial_scorecard\.py"),
@@ -2057,6 +2062,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c38_werkzeug_blockiert_nie(script_texts, wflows, root=root,
                                          python_bin=python_bin)
     checks += c39_wache_ist_ganz_oder_gar_nicht(script_texts, wflows, root=root)
+    checks += c40_keine_fremdmessung(script_texts, wflows, root=root)
     return checks
 
 
@@ -2877,6 +2883,90 @@ def c39_wache_ist_ganz_oder_gar_nicht(script_texts, wflows, root=BLOG_DIR,
             if len(funde) > 12:
                 out.append(("C39", f"… und {len(funde) - 12} weitere Fund(e) – "
                                    f"Report: {modul.REPORT.name}"))
+    return out
+
+
+# --- C40: Keine Fremdmessung (Governance-Report #806, 19.10.2026) ----------
+#
+# Befund: Am 11.10.2026 wurde der Reichweiten-Dienst aus dem Frontend genommen
+# (Skript, Einwilligungs-Banner). Seine ANBINDUNG lebte weiter: zwei Import-
+# Skripte, je zwei Workflow-Schritte in zwei Workflows, ein Secret samt Live-
+# Probe, vier Datenstände, ein Trichter, der eine Erfassung behauptete, die nicht
+# stattfand – und zwei Info-Zeilen im Governance-Issue, jede Woche. Es gab keinen
+# Ort, an dem „Anbindung ohne Dienst“ auffällt, und die Entfernung des Frontends
+# hat die Anbindung nicht mitgenommen.
+#
+# Der Vertrag in vier Sätzen:
+#   a) Die Wache ist da, kennt ihre fünf Klassen und hat einen Selbsttest.
+#   b) Sie steht im vertraglichen Minimum (GUARDS/C6) – sonst liefe ihr
+#      Selbsttest in keinem Gate.
+#   c) Der LIVE-Lauf über den echten Quelltext ist still – gerufen über
+#      DIESELBE Funktion, die auch die Wache benutzt (`befunde`); eine zweite
+#      Messung wäre die nächste Doppel-Wahrheit.
+#   d) Sie ist verdrahtet: Das Qualitäts-Gate ruft `governance_contract.py
+#      --quick` (hier läuft C40) auf jeden Push und jede PR, und der
+#      Regressionstest existiert. Kein Workflow musste dafür geändert werden.
+C40_WACHE = "fremdmessung_sperre.py"
+C40_KLASSEN = ("F1-DATEI", "F2-ANBINDUNG", "F3-ERWAEHNUNG", "F4-GEBAUT", "F5-AUSNAHME")
+C40_TEST = "test_fremdmessung_sperre.py"
+C40_GATE = "link-check.yml"
+C40_GATE_AUFRUF = "governance_contract.py --quick"
+
+
+def _c40_modul(root=BLOG_DIR):
+    """Die Wache importieren (ein Fehler ist ein Befund, kein Absturz)."""
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import fremdmessung_sperre  # noqa: PLC0415
+        return fremdmessung_sperre, ""
+    except Exception as exc:  # noqa: BLE001
+        return None, (f"scripts/{C40_WACHE} nicht importierbar: "
+                      f"{exc.__class__.__name__}: {exc}")
+
+
+def c40_keine_fremdmessung(script_texts, wflows, root=BLOG_DIR, live=True):
+    out = []
+    quelle = (script_texts or {}).get(C40_WACHE, "")
+    if not quelle.strip():
+        out.append(("C40", f"scripts/{C40_WACHE} fehlt – ohne die Sperre kehrt eine "
+                           "Anbindung ohne Dienst unbemerkt zurück (#806)."))
+        return out
+    for klasse in C40_KLASSEN:
+        if klasse not in quelle:
+            out.append(("C40", f"scripts/{C40_WACHE}: Klasse {klasse} fehlt – "
+                               "wer eine Klasse entfernt, entfernt die Sperre (#806)."))
+    if '"--selftest"' not in quelle and "'--selftest'" not in quelle:
+        out.append(("C40", f"scripts/{C40_WACHE} hat keinen `--selftest` (C6)."))
+    if C40_WACHE not in GUARDS:
+        out.append(("C40", f"scripts/{C40_WACHE} steht nicht im vertraglichen "
+                           "Minimum (GUARDS/C6) – sein Selbsttest liefe nie."))
+    if not os.path.isfile(os.path.join(root, "scripts", "tests", C40_TEST)):
+        out.append(("C40", f"scripts/tests/{C40_TEST} fehlt – ein Vertrag ohne "
+                           "Regressionstest ist Prosa (#806)."))
+    gate = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C40_GATE:
+            gate = inhalt or ""
+    if C40_GATE_AUFRUF not in gate:
+        out.append(("C40", f"{C40_GATE} ruft `{C40_GATE_AUFRUF}` nicht – dann "
+                           "läuft C40 in keinem Gate (#806)."))
+    if live:
+        from pathlib import Path  # noqa: PLC0415 – nur für diesen Aufruf
+        modul, fehler = _c40_modul(root)
+        if modul is None:
+            out.append(("C40", fehler))
+        else:
+            try:
+                funde = modul.befunde(Path(root))
+            except Exception as exc:  # noqa: BLE001 – ein Absturz ist ein Befund
+                out.append(("C40", f"scripts/{C40_WACHE}: Lauf nicht auswertbar: "
+                                   f"{exc.__class__.__name__}: {exc}"))
+                funde = []
+            for f in funde[:12]:
+                out.append(("C40", f"{f.klasse} {f.pfad}:{f.stelle} – {f.meldung}"))
+            if len(funde) > 12:
+                out.append(("C40", f"… und {len(funde) - 12} weitere Fund(e) – "
+                                   f"`python3 scripts/{C40_WACHE}` zeigt sie alle."))
     return out
 
 
@@ -4883,6 +4973,24 @@ RULE_TEXT = {
            "Kerndateien koennen textuell gar nicht mehr zusammengesetzt werden "
            "(.gitattributes: merge=binary). Der Vertrag laeuft als C39 im "
            "Qualitaets-Gate und woechtlich in der Governance (WF-6F7F, 16.10.2026).",
+    "C40": "Keine Fremdmessung: Am 11.10.2026 wurde der Reichweiten-Dienst aus "
+           "dem Frontend genommen – seine ANBINDUNG lebte weiter: zwei Import-"
+           "Skripte, je zwei Workflow-Schritte in zwei Workflows, ein Secret "
+           "samt Live-Probe, vier Datenstände und ein Trichter, der eine "
+           "Erfassung behauptete, die nicht stattfand. Zwei Info-Zeilen im "
+           "Governance-Issue (#806) hielten es jede Woche sichtbar, ohne dass "
+           "irgendetwas gemessen wurde. Es gab keinen Ort, an dem 'Anbindung "
+           "ohne Dienst' auffällt. Jetzt liest scripts/fremdmessung_sperre.py "
+           "den Quelltext (und mit --public den gebauten Baum), ohne etwas "
+           "auszuführen, und meldet F1 Dateiname, F2 Anbindungs-Merkmal "
+           "(Skript-Host, Ereignis-Attribut, Website-ID, Secret, Konfig-"
+           "Schlüssel), F3 Erwähnung in lebenden technischen Dateien, F4 Spur "
+           "im gebauten Baum und F5 unbegründete oder veraltete Ausnahmen - "
+           "hart, mit begründeten und alternden Ausnahmen, ohne die Historie "
+           "umzuschreiben und ohne die Geschmacksrichtung in Artikeln zu "
+           "verbieten. Der Vertrag läuft als C40 im Qualitäts-Gate (jeder "
+           "Push, jede PR, ohne Workflow-Änderung) und wöchentlich in der "
+           "Governance (#806, 19.10.2026).",
     "C38": "Ein Werkzeugfehler blockiert nie die Auslieferung – und kein "
            "Messlauf startet ohne sein Werkzeug. Am 14.10.2026 starb der "
            "deploy-Job zehnmal in Folge an der Quote-Nachfuellung, weil im "
@@ -4961,7 +5069,10 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C39": "Eine Wache ist ganz oder gar nicht (halbe Fassungen nach einer "
                 "Konflikt-Auflösung: Aufrufe und Konstanten ohne Definition, "
                 "Konfliktmarker, begründete und alternde Ausnahmen, "
-                "merge=binary für die signierten Kerndateien)"}
+                "merge=binary für die signierten Kerndateien)",
+         "C40": "Keine Fremdmessung (die entfernte Reichweiten-Anbindung kehrt "
+                "weder als Datei, Skript, Workflow-Schritt, Secret noch im "
+                "gebauten Baum zurück; Ausnahmen begründet und alternd)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -6618,7 +6729,83 @@ def _selftest():
         failures.append("C39: eine VOLLSTÄNDIGE Wache im Mini-Baum wird "
                         "beanstandet – der Vertrag wäre ein Fehlalarm (#783).")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C39 mit Kunstbefunden: Fehler "
+    # --- C40: Keine Fremdmessung (#806) -------------------------------------
+    # Sechs Proben: der echte Aufbau ist heil, und jede Sabotage wird laut – Wache
+    # fehlt, Klasse entfernt, Gate ruft den Vertrag nicht, nicht im vertraglichen
+    # Minimum, Regressionstest fehlt, Live-Lauf über einen Mini-Baum (Spur wird
+    # gemeldet, sauberer Baum bleibt still – sonst wäre der Vertrag ein
+    # Fehlalarm-Generator).
+    echte_c40 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in (C40_WACHE,) + tuple(
+                     os.path.basename(p) for p in sorted(
+                         glob.glob(os.path.join(BLOG_DIR, "scripts", "*.py"))))}
+    heil_c40 = c40_keine_fremdmessung(echte_c40, wflows_echt, root=BLOG_DIR, live=False)
+    if heil_c40:
+        failures.append(f"C40: der echte Aufbau wird beanstandet: {heil_c40}")
+    # (a) Die Wache fehlt: der Vertrag muss laut werden, nicht still.
+    if not [f for f in c40_keine_fremdmessung(
+            dict(echte_c40, **{C40_WACHE: ""}), wflows_echt, root=BLOG_DIR, live=False)
+            if "fehlt" in f[1]]:
+        failures.append("C40: eine fehlende Fremdmessung-Sperre bleibt unentdeckt (#806).")
+    # (b) Eine Klasse verschwindet aus der Wache.
+    ohne_klasse_c40 = dict(echte_c40, **{
+        C40_WACHE: echte_c40[C40_WACHE].replace("F4-GEBAUT", "F4-STILLGELEGT")})
+    if not [f for f in c40_keine_fremdmessung(
+            ohne_klasse_c40, wflows_echt, root=BLOG_DIR, live=False)
+            if "F4-GEBAUT" in f[1]]:
+        failures.append("C40: eine entfernte Klasse der Sperre bleibt unentdeckt (#806).")
+    # (c) Die Verdrahtung fällt: das Gate ruft den Vertrag nicht mehr.
+    ohne_gate_c40 = {k: (v.replace(C40_GATE_AUFRUF, "governance_contract.py")
+                         if os.path.basename(str(k)) == C40_GATE else v)
+                     for k, v in wflows_echt.items()}
+    if not [f for f in c40_keine_fremdmessung(
+            echte_c40, ohne_gate_c40, root=BLOG_DIR, live=False)
+            if "läuft C40 in keinem Gate" in f[1]]:
+        failures.append("C40: ein Gate ohne Vertrags-Aufruf bleibt unentdeckt (#806).")
+    # (d) Die Sperre fällt aus dem vertraglichen Minimum: ihr Selbsttest liefe nie.
+    _guards_vorher = list(GUARDS)
+    try:
+        GUARDS.remove(C40_WACHE)
+        if not [f for f in c40_keine_fremdmessung(
+                echte_c40, wflows_echt, root=BLOG_DIR, live=False)
+                if "vertraglichen Minimum" in f[1]]:
+            failures.append("C40: eine Sperre außerhalb des vertraglichen Minimums bleibt "
+                            "unentdeckt (#806).")
+    finally:
+        GUARDS[:] = _guards_vorher
+    # (e) Der Regressionstest verschwindet: der Vertrag wäre wieder Prosa.
+    leere_wurzel_c40 = tempfile.mkdtemp(prefix="c40-ohne-test-")
+    if not [f for f in c40_keine_fremdmessung(
+            echte_c40, wflows_echt, root=leere_wurzel_c40, live=False)
+            if "Regressionstest" in f[1]]:
+        failures.append("C40: eine fehlende Testdatei bleibt unentdeckt (#806).")
+    # (f) LIVE-Probe auf einem Mini-Baum: Spur wird gemeldet, sauberer Baum bleibt still.
+    mini_c40 = tempfile.mkdtemp(prefix="c40-mini-")
+    os.makedirs(os.path.join(mini_c40, "scripts", "tests"), exist_ok=True)
+    with open(os.path.join(mini_c40, "scripts", "tests", C40_TEST), "w",
+              encoding="utf-8") as fh:
+        fh.write("# Platzhalter: nur die Existenz wird geprüft.\n")
+    with open(os.path.join(mini_c40, "scripts", "ok.py"), "w", encoding="utf-8") as fh:
+        fh.write("print('sauber')\n")
+    laut_c40 = [f for f in c40_keine_fremdmessung(
+        echte_c40, wflows_echt, root=mini_c40)
+        if f[1].startswith(("F1-", "F2-", "F3-", "F4-"))]
+    if laut_c40:
+        failures.append("C40: ein SAUBERER Mini-Baum wird beanstandet – der Vertrag "
+                        f"wäre ein Fehlalarm: {laut_c40}")
+    _c40_mod, _c40_fehler = _c40_modul(BLOG_DIR)
+    if _c40_mod is None:
+        failures.append(f"C40: {_c40_fehler}")
+        _c40_beispiel = "x"
+    else:
+        _c40_beispiel = _c40_mod.BEISPIEL_ANBINDUNG
+    with open(os.path.join(mini_c40, "scripts", "leck.py"), "w", encoding="utf-8") as fh:
+        fh.write("# " + _c40_beispiel + "\n")
+    if not [f for f in c40_keine_fremdmessung(echte_c40, wflows_echt, root=mini_c40)
+            if f[1].startswith("F2-ANBINDUNG")]:
+        failures.append("C40: eine Anbindung im Mini-Baum bleibt unentdeckt (#806).")
+
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C40 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

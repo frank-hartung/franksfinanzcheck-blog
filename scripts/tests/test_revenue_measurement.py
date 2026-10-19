@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
-"""Regressionstest: die komplette Umsatz-Messkette (19.09.2026).
+"""Regressionstest: die Umsatz-Messkette (19.09.2026, quellenehrlich seit 19.10.2026).
 
-Vier Rückschritte sind hier dauerhaft verankert – jeder einzelne hat schon
+Fünf Rückschritte sind hier dauerhaft verankert – jeder einzelne hat schon
 einmal Daten UNsinn erzeugt oder Lücken unsichtbar gemacht:
 
-  1. Null vs. „unbekannt": Eine nicht gemessene Quelle darf NIE als 0
+  1. Null vs. „unbekannt\": Eine nicht gemessene Quelle darf NIE als 0
      erscheinen – sonst optimiert die Redaktion gegen eine Geisterzahl.
-  2. Kaufnahe Schiene: Home ist Reichweiten-Seite, kein Wechsel-Traffic –
-     sie gehört in den Nenner der Outbound-CTR nicht hinein.
+  2. Klicks je Seite: Provision ist nicht je Seite messbar (die Abrechnung
+     kennt nur Monatssummen) – sie darf keiner Seite zugeschrieben werden.
   3. Report-Protokoll: Der Governance-Gate klassifiziert über die
      Befund-Zeilen `| AMBER | funnel_gap | … |` und die Zeile
      `Messlücken: N`. Ändert jemand das Format, stirbt die Eskalation
      still – hier beißt der Test sofort.
-  4. Verdrahtung: neue Mess-Schritte MÜSSEN im Gate (STEPS), im Vertrag
-     (MEASURE_STEPS + Signaturen) und vor der Scorecard laufen; die
-     CTA-Platzierungs-Pflicht gehört in Guard UND Workflow-Commit-Liste.
+  4. Betriebsgrenze statt Lücke: Ein bewusst ausgeschalteter Weg (Klickzähler
+     `aktiv: false`, Provisions-Tabelle noch nie befüllt) ist INFO und hält die
+     Ampel grün; eine Quelle, die laufen SOLL und nicht liefert, ist eine Lücke.
+  5. Verdrahtung: Mess-Schritte MÜSSEN im Gate (STEPS), im Vertrag
+     (MEASURE_STEPS + Signaturen) und vor der Scorecard laufen.
 
 Dazu: CTA-Messvertrag (Event/Slug/SubID/Placement) und Gateway-Drift als
 direkte Aufrufe – dieselben Fälle wie im --selftest, aber als dauerhafter
@@ -25,6 +27,7 @@ from __future__ import annotations
 import importlib.util
 import os
 import sys
+import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -43,64 +46,69 @@ rf = _load("revenue_funnel", os.path.join(SCRIPTS, "revenue_funnel.py"))
 cc = _load("click_chain_guard", os.path.join(SCRIPTS, "click_chain_guard.py"))
 gg = _load("governance_gate", os.path.join(SCRIPTS, "governance_gate.py"))
 gc = _load("governance_contract", os.path.join(SCRIPTS, "governance_contract.py"))
-uc = _load("umami_clicks", os.path.join(SCRIPTS, "umami_clicks.py"))
-uv = _load("umami_views", os.path.join(SCRIPTS, "umami_views.py"))
-sa = _load("secrets_age_guard", os.path.join(SCRIPTS, "secrets_age_guard.py"))
 
-MEIN_GUTES_SETUP = {"views": True, "clicks": True}
+MEIN_GUTES_SETUP = {"clicks": True}
 
 
 class TestNullVsUnbekannt(unittest.TestCase):
     """Hausregel: nicht gemessen ⇒ unbekannt (None), NIE eine 0."""
 
     def test_alle_quellen_fehlen_ist_nichts_null(self):
-        f = rf.compute({}, [], [], set(), measured={
-            "views": False, "clicks": False})
+        f = rf.compute([], set(), measured={"clicks": False})
         self.assertIsNone(f["affiliate_klicks"])
-        self.assertIsNone(f["views"]["kaufnah"])
-        self.assertIsNone(f["views"]["total"])
         self.assertIsNone(f["transaktionen"]["antraege"])
         self.assertIsNone(f["provision"]["gesamt"])
         for k, v in f["raten"].items():
             self.assertIsNone(v, f"Rate {k} trotz ungemessener Quelle nicht None")
 
     def test_gemessen_und_leer_ist_echte_null(self):
-        f = rf.compute({"pages": []}, [], [], set(), measured=MEIN_GUTES_SETUP)
+        f = rf.compute([], set(), measured=MEIN_GUTES_SETUP)
         self.assertEqual(f["affiliate_klicks"], 0)          # gemessen, wirklich 0
-        self.assertEqual(f["views"]["kaufnah"], 0)
         # Ohne Provisions-Tabelle gibt es keine Anträge – unbekannt, nicht 0.
         self.assertIsNone(f["transaktionen"]["antraege"])
         # Provision ohne Wert im Dokument bleibt unbekannt – nicht erfunden.
         self.assertIsNone(f["provision"]["gesamt"])
 
+    def test_keine_kennzahl_ohne_quelle(self):
+        """Besuche gibt es nicht mehr – und damit weder CTR noch Provision je Besuch."""
+        f = rf.compute([], set(), measured=MEIN_GUTES_SETUP)
+        self.assertEqual(sorted(f["raten"]),
+                         ["antrag_abschluss", "epc", "klick_antrag", "stornoquote"])
+        self.assertNotIn("views", f)
+        self.assertNotIn("platzierungen", f)
 
-class TestKaufnaheSchiene(unittest.TestCase):
+    def test_muell_in_den_zeilen_crashed_nicht(self):
+        f = rf.compute([{"event": "affiliate_click", "count": "viel"},
+                        {"event": "affiliate_click", "count": -5},
+                        {"event": "affiliate_click", "count": None},
+                        {"event": "affiliate_click", "count": "7"}, "kein dict", None],
+                       set(), measured=MEIN_GUTES_SETUP)
+        self.assertEqual(f["affiliate_klicks"], 7)
+
+
+class TestKlicksJeSeite(unittest.TestCase):
     def _fixtures(self):
-        views = {"totals": {"visits": 1000, "pageviews": 2400},
-                 "pages": [{"path": "/posts/a/", "views": 150, "visits": 100},
-                           {"path": "/", "views": 900, "visits": 700},
-                           {"path": "/pillar/strom/", "views": 80, "visits": 50},
-                           {"path": "/posts/b/", "views": 7, "visits": 5}]}
         clicks = [{"event": "affiliate_click", "article": "posts/a", "count": 3},
                   {"event": "affiliate_click", "article": "pillar/strom/index.md",
                    "count": 1},
-                  {"event": "affiliate_click", "article": "", "count": 2}]
-        ctas = [{"event": "cta_click", "slug": "home-ratgeber", "count": 9}]
+                  {"event": "affiliate_click", "article": "", "count": 2},
+                  {"event": "cta_click", "article": "home", "slug": "home-ratgeber",
+                   "count": 9}]
         # Provisions-Tabelle (einzige Provisionsquelle): 3 Abschlüsse, 0 Stornos, 12 €.
         mp = {"summe": {"abschluesse": 3, "stornos": 0, "provision_eur": 12.0},
               "monate": ["2026-10"], "letzter_monat": "2026-10", "partner": ["CHECK24"]}
         paths = {"/posts/a/", "/pillar/strom/", "/pillar/"}
-        return views, clicks, mp, ctas, paths
+        return clicks, mp, paths
 
-    def test_kaufnah_nenner_und_ctr(self):
-        views, clicks, mp, ctas, paths = self._fixtures()
-        f = rf.compute(views, clicks, ctas, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
-        # Home (700 Besuche) und ferne Seite /posts/b/ (5) bleiben draußen.
-        self.assertEqual(f["views"]["kaufnah"], 150)  # a(100)+strom(50); b fehlt in paths = nicht kaufnah
-        # Klicks gesamt = ALLE affiliate_clicks (6), cta_click nie mitzählen.
+    def test_klicks_gesamt_zaehlt_nur_affiliate_ereignisse(self):
+        clicks, mp, paths = self._fixtures()
+        f = rf.compute(clicks, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
+        # Klicks gesamt = ALLE affiliate_clicks (6), fremde Ereignisse nie mitzählen.
         self.assertEqual(f["affiliate_klicks"], 6)
-        self.assertAlmostEqual(f["raten"]["outbound_ctr"], 6 / 150.0 * 100, places=4)  # Prozent-Skala (4 %)
-        # Trichter-Raten aus der Provisions-Tabelle: 3 Anträge, 3 bestätigt, Storno 0.
+
+    def test_trichter_raten_aus_klicks_und_tabelle(self):
+        clicks, mp, paths = self._fixtures()
+        f = rf.compute(clicks, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
         self.assertEqual(f["transaktionen"]["antraege"], 3)
         self.assertEqual(f["transaktionen"]["bestaetigt"], 3)
         self.assertAlmostEqual(f["raten"]["klick_antrag"], 3 / 6.0 * 100, places=4)
@@ -108,29 +116,27 @@ class TestKaufnaheSchiene(unittest.TestCase):
         self.assertAlmostEqual(f["raten"]["epc"], 12.0 / 6.0, places=4)
 
     def test_seitentabelle_heimat_und_ausschluss(self):
-        views, clicks, mp, ctas, paths = self._fixtures()
-        f = rf.compute(views, clicks, ctas, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
+        clicks, mp, paths = self._fixtures()
+        f = rf.compute(clicks, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
         by = {p["path"]: p for p in f["seiten"]}
-        self.assertIn("/posts/a/", by)      # Klicks + Provision zugeordnet
-        self.assertNotIn("/", by)            # Home ist keine Trichter-Seite
-        self.assertNotIn("/posts/b/", by)    # ohne Messwert → gar nicht erst zeigen
         self.assertEqual(by["/posts/a/"]["clicks"], 3)
+        self.assertEqual(by["/pillar/strom/"]["clicks"], 1)
+        self.assertNotIn("/", by)            # Home ist keine kaufnahe Seite
+        self.assertNotIn("/posts/b/", by)    # ohne Klicks → gar nicht erst zeigen
         # Monatssumme wird keiner Seite zugeschrieben – die Tabelle kennt keine Artikel.
-        self.assertIsNone(by["/posts/a/"]["revenue"])
+        for seite in f["seiten"]:
+            self.assertNotIn("revenue", seite)
+            self.assertNotIn("epc", seite)
 
-    def test_platzierungstabellen_aus_cta_und_markdown_klicks(self):
-        views, clicks, mp, ctas, paths = self._fixtures()
-        clicks = clicks + [{"event": "cta_click", "article": "home", "count": 4,
-                            "slug": "home-strom"}]
-        f = rf.compute(views, clicks, ctas, paths, measured=MEIN_GUTES_SETUP, manual_prov=mp)
-        self.assertEqual(f["platzierungen"]["home-ratgeber"], 9)
-        self.assertEqual(f["platzierungen"]["home-strom"], 4)
-        # …und trotzdem KEIN Affiliate-Klick:
-        self.assertEqual(f["affiliate_klicks"], 6)
+    def test_klicks_von_seiten_ausserhalb_der_kaufnahen_menge_fehlen_in_der_tabelle(self):
+        f = rf.compute([{"event": "affiliate_click", "article": "posts/zufall", "count": 4}],
+                       {"/pillar/"}, measured=MEIN_GUTES_SETUP)
+        self.assertEqual(f["affiliate_klicks"], 4)       # gezählt …
+        self.assertEqual(f["seiten"], [])                # … aber keiner kaufnahen Seite zugeordnet
 
 
 class TestArtikelPfad(unittest.TestCase):
-    """SubID/Umami-`article` → Blog-Pfad: die Brücke zwischen beiden Systemen."""
+    """SubID/`article` → Blog-Pfad: die Brücke zwischen Zähler und Seiten."""
 
     def test_pfade(self):
         cases = {"home": "/", "pillar/_index": "/pillar/", "pillar": "/pillar/",
@@ -145,18 +151,17 @@ class TestReportProtokoll(unittest.TestCase):
     """Gate-Klassifikation hängt an diesen Markern – Format = Vertrag."""
 
     def _f(self):
-        return rf.compute({"pages": [], "totals": {"visits": 0, "pageviews": 0}},
-                          [], [], set(), measured=MEIN_GUTES_SETUP)
+        return rf.compute([], set(), measured=MEIN_GUTES_SETUP)
 
     def test_luecke_meldet_amber_zeile_und_marker(self):
-        out = rf.render(self._f(), ["Views: Import übersprungen (Secret fehlt)"],
-                        ["UMAMI_API_TOKEN anlegen (docs/UMSATZ-MESSUNG-PREMIUM.md)"])
+        out = rf.render(self._f(), ["Klicks: Import übersprungen (Zugang oder Konfiguration fehlt)"],
+                        ["Zähler-Worker einrichten (docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md)"])
         self.assertIn("## 🚦 Gesamt-Ampel: **AMBER**", out)
         self.assertIn("**Messlücken: 1**", out)
         zeilen = [l for l in out.splitlines() if l.startswith("| AMBER | funnel_gap |")]
         self.assertEqual(len(zeilen), 1)
         zelle = zeilen[0].split("|")[3].strip()
-        self.assertEqual(zelle, "Views: Import übersprungen (Secret fehlt)")
+        self.assertEqual(zelle, "Klicks: Import übersprungen (Zugang oder Konfiguration fehlt)")
         self.assertNotIn("|", zelle)  # Pipe im Befund würde die Tabelle sprengen
 
     def test_ohne_luecken_gruen_ohne_findings(self):
@@ -165,81 +170,80 @@ class TestReportProtokoll(unittest.TestCase):
         self.assertNotIn("funnel_gap", out)
 
     def test_unbekannt_wird_nicht_als_null_formatiert(self):
-        f = rf.compute({}, [], [], set(), measured={
-            "views": False, "clicks": False})
+        f = rf.compute([], set(), measured={"clicks": False})
         out = rf.render(f, [], [])
         self.assertIn("unbekannt", out)
         self.assertNotIn("| Affiliate-Klicks | 0 |", out)
 
-    def test_umami_free_operating_boundary_ist_gruen_ohne_luecke(self):
-        out = rf.render(self._f(), [], [], operating_boundaries=["Umami Analytics: API-Import deaktiviert (Umami Free)"])
+    def test_betriebsgrenze_ist_gruen_ohne_luecke(self):
+        grenze = "Klickzähler aus (`aktiv: false` in `data/klickmessung.yaml`)"
+        out = rf.render(self._f(), [], [], operating_boundaries=[grenze])
         self.assertIn("## 🚦 Gesamt-Ampel: **GREEN**", out)
         self.assertIn("**Messlücken: 0**", out)
-        self.assertIn("| INFO | operating_boundary | Umami Analytics: API-Import deaktiviert (Umami Free) |", out)
+        self.assertIn(f"| INFO | operating_boundary | {grenze} |", out)
         self.assertNotIn("funnel_gap", out)
 
+    def test_report_nennt_keine_besuchszahlen(self):
+        out = rf.render(self._f(), [], [])
+        for wort in ("Besuche", "Outbound-CTR", "pro 100 Besuche"):
+            self.assertNotIn(wort + " ", out + " ", f"„{wort}“ ist eine Kennzahl ohne Quelle")
 
-class TestUmamiFreeBoundary(unittest.TestCase):
-    """Option 3: Umami Free als explizite Betriebsgrenze."""
 
-    def test_website_id_vertrag_prueft_aktiv_und_privacy_stopp(self):
-        import tempfile
-        from unittest.mock import patch
-        with tempfile.TemporaryDirectory() as tmp:
-            hugo = os.path.join(tmp, "hugo.toml")
-            monetization = os.path.join(tmp, "monetization.yaml")
-            with open(monetization, "w", encoding="utf-8") as f:
-                f.write("umami_api_import_enabled: true\n")
-            with open(hugo, "w", encoding="utf-8") as f:
-                f.write('[params.umami]\nwebsiteId = ""\n')
-            # Der Selftest darf nicht durch ein CI-Environment-Override grün werden.
-            with patch.dict(os.environ, {"UMAMI_WEBSITE_ID": "abcdef12"}):
-                self.assertEqual(uc.website_id(config_path=hugo), "abcdef12")
-                self.assertTrue(uc.website_config_errors(hugo, monetization))
-            with open(hugo, "w", encoding="utf-8") as f:
-                f.write('websiteId = "deadbeef-dead-beef"\n[params.umami]\n'
-                        'websiteId = "12345678-abcd-1234"\n')
-            self.assertEqual(uc.website_id(config_path=hugo, use_env=False),
-                             "12345678-abcd-1234")
-            self.assertEqual(uc.website_config_errors(hugo, monetization), [])
-            with open(hugo, "w", encoding="utf-8") as f:
-                f.write('websiteId = "deadbeef-dead-beef"\n[params.other]\n')
-            self.assertTrue(uc.website_config_errors(hugo, monetization))
-            with open(monetization, "w", encoding="utf-8") as f:
-                f.write("umami_api_import_enabled: false\n")
-            self.assertEqual(uc.website_config_errors(hugo, monetization), [])
-            with open(hugo, "w", encoding="utf-8") as f:
-                f.write('[params.umami]\nwebsiteId = ""\n')
-            self.assertEqual(uc.website_config_errors(hugo, monetization), [])
+class TestBetriebsgrenzeStattLuecke(unittest.TestCase):
+    """Ein bewusst ausgeschalteter Weg ist INFO; eine Quelle, die laufen SOLL, nicht."""
 
-    def test_umami_free_deaktiviert_api_import_und_meldet_disabled(self):
-        import tempfile
-        with tempfile.NamedTemporaryFile("w+", encoding="utf-8") as tf:
-            tf.write("umami_api_import_enabled: false\n")
-            tf.flush()
-            _, c_meta = uc.fetch(days=30, config_path=tf.name)
-            self.assertEqual(c_meta.get("status"), "disabled")
-            self.assertIn("Umami Free", c_meta.get("reason", ""))
+    def test_zaehler_aus_und_tabelle_leer_ist_gruen_mit_zwei_hinweisen(self):
+        src, measured, grenzen = rf.lage([], {}, {}, {}, zaehler_aktiv=False)
+        self.assertEqual(rf.evaluate(src), [])
+        self.assertFalse(measured["clicks"])
+        self.assertEqual(len(grenzen), 2)
 
-            _, v_meta = uv.fetch(days=30, config_path=tf.name)
-            self.assertEqual(v_meta.get("status"), "disabled")
-            self.assertIn("Umami Free", v_meta.get("reason", ""))
+    def test_alte_zeilen_zaehlen_nicht_wenn_der_zaehler_aus_ist(self):
+        _src, measured, _g = rf.lage([{"count": 9}], {"status": "ok", "stand": "2026-10-01T00:00:00Z"},
+                                     {}, {}, zaehler_aktiv=False)
+        self.assertFalse(measured["clicks"], "ausgeschaltet heißt nicht gemessen")
 
-            # Revenue Funnel evaluiert 'disabled' als 0 Lücken
-            gaps = rf.evaluate([("views", "V", "disabled", None), ("clicks", "C", "disabled", None)])
-            self.assertEqual(gaps, [])
+    def test_zaehler_an_ohne_lieferung_ist_eine_luecke(self):
+        for meta, text in (({}, "noch nie importiert"),
+                           ({"status": "nicht_konfiguriert"}, "übersprungen"),
+                           ({"status": "fehler"}, "fehlgeschlagen")):
+            src, _m, _g = rf.lage([], dict(meta, stand=rf.TODAY.isoformat() + "T06:00:00Z")
+                                  if meta else {}, {}, {}, zaehler_aktiv=True)
+            gaps = rf.evaluate(src)
+            self.assertEqual(len(gaps), 1, f"meta={meta}")
+            self.assertIn("Klickzähler", gaps[0])
+            self.assertIn(text, gaps[0])
 
-            # Secrets Guard meldet BEWUSST DEAKTIVIERT (Umami Free)
-            status, _, finding = sa.classify(
-                "UMAMI_API_TOKEN",
-                {"days": 45, "label": "Umami Analytics-API-Token", "probe": "umami", "optional": True},
-                {},
-                config_path=tf.name,
-            )
-            self.assertEqual(status, "BEWUSST DEAKTIVIERT (Umami Free)")
-            self.assertIsNotNone(finding)
-            self.assertEqual(finding.get("level"), "info")
-            self.assertEqual(finding.get("code"), "operating_boundary")
+    def test_frischer_leerer_import_ist_eine_echte_null(self):
+        src, measured, _g = rf.lage([], {"status": "ok", "stand": rf.TODAY.isoformat() + "T06:00:00Z"},
+                                    {}, {}, zaehler_aktiv=True)
+        self.assertEqual(rf.evaluate(src), [])
+        self.assertTrue(measured["clicks"])
+
+    def test_befuellte_aber_veraltete_tabelle_bleibt_eine_luecke(self):
+        alt = (rf.TODAY.toordinal() - rf.STALE_DAYS - 1)
+        alt_iso = rf.datetime.date.fromordinal(alt).isoformat()
+        src, _m, _g = rf.lage([], {}, {"summe": {"abschluesse": 1}},
+                              {"status": "ok", "written": alt_iso}, zaehler_aktiv=False)
+        gaps = rf.evaluate(src)
+        self.assertEqual(len(gaps), 1)
+        self.assertIn("Provisions-Tabelle", gaps[0])
+
+    def test_schalterdatei_aktiv_true_false_fehlt(self):
+        with tempfile.TemporaryDirectory() as td:
+            pfad = os.path.join(td, "klickmessung.yaml")
+            for text, soll in (("aktiv: true\n", True), ("aktiv: false\n", False),
+                               ("# aktiv: true\naktiv: false\n", False), ("", False)):
+                with open(pfad, "w", encoding="utf-8") as fh:
+                    fh.write(text)
+                self.assertIs(rf.klickmessung_aktiv(pfad), soll, text)
+            self.assertIs(rf.klickmessung_aktiv(os.path.join(td, "fehlt.yaml")), False)
+
+    def test_schalter_im_repo_deckt_sich_mit_den_beiden_anderen_lesern(self):
+        """Eine Wahrheit: Funnel, Klick-Ketten-Guard und /go/-Generator lesen denselben Schalter."""
+        ags = _load("affiliate_shield_fuer_schalter", os.path.join(SCRIPTS, "affiliate_shield.py"))
+        self.assertIs(rf.klickmessung_aktiv(), cc.klickmessung_aktiv())
+        self.assertIs(rf.klickmessung_aktiv(), ags.klickmessung_aktiv())
 
 
 class TestCtaMessvertrag(unittest.TestCase):
@@ -279,7 +283,7 @@ class TestCtaMessvertrag(unittest.TestCase):
         self.assertEqual(cc.scan_page(html, "t"), [])
 
     def test_hugo_minify_ohne_attribut_anfuehrungszeichen_ist_sauber(self):
-        """Hugo darf sichere Analytics-Werte ohne Anführungszeichen ausgeben."""
+        """Hugo darf sichere Attribut-Werte ohne Anführungszeichen ausgeben."""
         html = ('<a href="/go/strom/?subid=posts-x" rel="sponsored nofollow noopener" '
                 'data-klick=affiliate_click data-klick-slug=strom '
                 'data-klick-placement=artikel>↔</a>')
@@ -287,15 +291,27 @@ class TestCtaMessvertrag(unittest.TestCase):
 
 
 class TestVerdrahtung(unittest.TestCase):
-    """Ohne diese Koppelungen melden die neuen Wachen nie – oder zu spät."""
+    """Ohne diese Koppelungen melden die Wachen nie – oder zu spät."""
 
-    NEUE_SCHRITTE = ("umami-views", "revenue-funnel", "click-chain")
+    NEUE_SCHRITTE = ("revenue-funnel", "click-chain")
 
     def test_gate_und_vertrag_kennen_die_messschritte(self):
         for step in self.NEUE_SCHRITTE:
             self.assertIn(step, gg.STEPS, f"gate STEPS fehlt {step}")
             self.assertIn(step, gc.MEASURE_STEPS, f"Vertrag MEASURE_STEPS fehlt {step}")
             self.assertIn(step, gc.STEP_SIGNATURES, f"STEP_SIGNATURES fehlt {step}")
+
+    def test_gate_und_vertrag_sind_deckungsgleich(self):
+        """Jede Gate-Kennung hat eine Vertrags-Signatur und umgekehrt – sonst
+        meldet ein Schritt, den der Vertrag nie prüft (oder umgekehrt)."""
+        # `automation` und `build` meldet der Workflow über eigene Schritte
+        # (Branch-Schutz-Wache bzw. Hugo-Build); alles andere ist eine Messung
+        # mit Signatur im Vertrag.
+        gate = set(gg.STEPS) - {"automation", "build"}
+        self.assertEqual(sorted(gate - set(gc.STEP_SIGNATURES)), [],
+                         "Gate-Kennung ohne Signatur im Vertrag")
+        self.assertEqual(sorted(set(gc.STEP_SIGNATURES) - gate), [],
+                         "Signatur im Vertrag ohne Gate-Kennung")
 
     def test_findings_codes_sind_actionable(self):
         # funnel_gap/chain_gap müssen das Gate zur Issue-Aktion zwingen –
@@ -304,7 +320,6 @@ class TestVerdrahtung(unittest.TestCase):
         self.assertIn("chain_gap", gg.ACTIONABLE_AMBER)
 
     def test_workflow_reihenfolge_und_selbsttestliste(self):
-        import re as _re
         with open(os.path.join(ROOT, ".github", "workflows",
                                "premium-governance.yml"), encoding="utf-8") as fh:
             wf = fh.read()
@@ -329,9 +344,40 @@ class TestVerdrahtung(unittest.TestCase):
             wf = fh.read()
         self.assertNotIn("--emit", wf,
                          "Der reine Import darf das Wochen-Ledger nicht zufüllen")
-        for datendatei in ("data/revenue_funnel.json", "data/umami_views.json",
-                           "data/umami_ctas.json"):
+        for datendatei in ("data/revenue_funnel.json", "data/offline_import.meta.json",
+                           "data/provisionen_aggregat.json"):
             self.assertIn(datendatei, wf, f"Commit-Liste fehlt {datendatei}")
+        # Die Roh-Tabelle ist gitignored und darf nie in den Commit wandern. Geprüft
+        # werden die `git add`-Zeilen, nicht die Kommentare (die sie nennen dürfen).
+        git_add = [z for z in wf.splitlines() if z.strip().startswith("git add")]
+        self.assertGreaterEqual(len(git_add), 2, "Commit-Schritt ohne git-add-Zeilen")
+        for zeile in git_add:
+            self.assertNotIn("provisionen/provisionen.csv", zeile,
+                             "die gitignorierte Roh-Tabelle darf nie gestaged werden")
+
+    def test_revenue_import_preflight_prueft_die_vorhandenen_skripte(self):
+        """Der Preflight darf kein Skript nennen, das es nicht (mehr) gibt –
+        sonst stirbt der Lauf am ersten Schritt, bevor irgendetwas gemessen wird."""
+        import re
+        with open(os.path.join(ROOT, ".github", "workflows", "revenue-import.yml"),
+                  encoding="utf-8") as fh:
+            wf = fh.read()
+        schleife = re.search(r"for s in ([^;]+); do", wf)
+        self.assertIsNotNone(schleife, "Selbsttest-Schleife fehlt")
+        for s in schleife.group(1).replace("\\", " ").split():
+            self.assertTrue(os.path.isfile(os.path.join(SCRIPTS, f"{s}.py")),
+                            f"Preflight nennt scripts/{s}.py – die Datei gibt es nicht")
+
+    def test_governance_preflight_nennt_nur_vorhandene_skripte(self):
+        import re
+        with open(os.path.join(ROOT, ".github", "workflows", "premium-governance.yml"),
+                  encoding="utf-8") as fh:
+            wf = fh.read()
+        schleife = re.search(r"for s in ([^;]+); do", wf)
+        self.assertIsNotNone(schleife, "Selbsttest-Schleife fehlt")
+        for s in schleife.group(1).replace("\\", " ").split():
+            self.assertTrue(os.path.isfile(os.path.join(SCRIPTS, f"{s}.py")),
+                            f"Preflight nennt scripts/{s}.py – die Datei gibt es nicht")
 
     def test_gate_report_pfade_fuer_funnel_und_chain(self):
         # Falscher Pfad = Gate liest einen Report, den es nie gab: Stille statt Alarm.

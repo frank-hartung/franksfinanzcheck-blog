@@ -21,8 +21,8 @@
       Render-Hook layouts/_default/_markup/render-link.html greift dort
       nicht. Die Folge waren CTA-Buttons auf /go/<key>/ OHNE
       rel="sponsored nofollow noopener" (Werbekennzeichnung nach
-      Google-Richtlinie / § 5a UWG fehlt) und OHNE Umami-Ereignis
-      affiliate_click (Klicks in der Umsatz-Messung unsichtbar).
+      Google-Richtlinie / § 5a UWG fehlt) und OHNE Klick-Marke
+      data-klick="affiliate_click" (Klicks in der Umsatz-Messung unsichtbar).
       Hier steht derselbe Vertrag wie im Render-Hook – an einer Stelle,
       von allen Shortcode-CTAs genutzt, und die Wache beweist das
       Ergebnis anschließend im gebauten HTML.
@@ -36,7 +36,7 @@
 
     Placement (19.09.2026, Premium-Messkette): „wo wurde geklickt" – artikel,
     pillar, start, ratgeber-zentrale oder ein Call-eigener Wert (z. B.
-    spar-matrix). zusammen mit `subid` (auch als Event-Eigenschaft, damit der
+    spar-matrix). zusammen mit `subid` (auch als `data-klick-subid`, damit der
     Testklick ohne Export verifizierbar ist) schließt sie die
     Lücke „Start-/Pillar-CTAs waren unsichtbar".
    ============================================================ */ -}}
