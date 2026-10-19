@@ -1,0 +1,186 @@
+{
+  "datum": "2026-10-19",
+  "erzeugt_utc": "2026-10-19 13:56 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 5,
+  "kanal_fehler": 2,
+  "ergebnisse": {
+    "rss": {
+      "web.dev – Blog (Core Web Vitals, Baseline)": {
+        "treffer": [
+          {
+            "titel": "New to the web platform in September",
+            "url": "https://web.dev/blog/web-platform-09-2026?hl=en",
+            "datum": "Fri, 02 Oct 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "August 2026 Baseline monthly digest",
+            "url": "https://web.dev/blog/baseline-digest-aug-2026?hl=en",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "Find features to support for Interop 2027 with your coding agent",
+            "url": "https://web.dev/blog/coding-agents-interop-proposals?hl=en",
+            "datum": "Fri, 18 Sep 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "Submit your proposals for Interop 2027",
+            "url": "https://web.dev/blog/interop-2027-proposals?hl=en",
+            "datum": "Thu, 03 Sep 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "New to the web platform in August",
+            "url": "https://web.dev/blog/web-platform-08-2026?hl=en",
+            "datum": "Fri, 28 Aug 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "July 2026 Baseline monthly digest",
+            "url": "https://web.dev/blog/baseline-digest-jul-2026?hl=en",
+            "datum": "Mon, 10 Aug 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          }
+        ],
+        "fehler": null
+      },
+      "Chrome Developers – Blog (Lighthouse, DevTools)": {
+        "treffer": [
+          {
+            "titel": "What's New in WebGPU (Chrome 155-156)",
+            "url": "https://developer.chrome.com/blog/new-in-webgpu-155-156?hl=en",
+            "datum": "Wed, 07 Oct 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Shipping JPEG XL in Chrome",
+            "url": "https://developer.chrome.com/blog/jpeg-xl-in-chrome?hl=en",
+            "datum": "Tue, 06 Oct 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Email verification updates, October 2026",
+            "url": "https://developer.chrome.com/blog/email-verification-october-2026?hl=en",
+            "datum": "Mon, 05 Oct 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Chrome 156 beta",
+            "url": "https://developer.chrome.com/blog/chrome-156-beta?hl=en",
+            "datum": "Wed, 30 Sep 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "HTML-in-Canvas updates: Iterating toward a better Web API",
+            "url": "https://developer.chrome.com/blog/html-in-canvas-ot-changes?hl=en",
+            "datum": "Tue, 29 Sep 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Connection allowlists: Secure your web application's network access",
+            "url": "https://developer.chrome.com/blog/connection-allowlist-announcement?hl=en",
+            "datum": "Wed, 23 Sep 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          }
+        ],
+        "fehler": null
+      },
+      "Smashing Magazine (UI/UX-Handwerk)": {
+        "treffer": [
+          {
+            "titel": "Is Your Organization Messing Up AI Adoption?",
+            "url": "https://smashingmagazine.com/2026/10/is-your-organization-messing-up-ai-adoption/",
+            "datum": "Fri, 16 Oct 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "A Practical Guide To Naming Things",
+            "url": "https://smashingmagazine.com/2026/10/how-name-things/",
+            "datum": "Tue, 06 Oct 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Under Autumn’s Spell (October 2026 Wallpapers Edition)",
+            "url": "https://smashingmagazine.com/2026/09/desktop-wallpaper-calendars-october-2026/",
+            "datum": "Wed, 30 Sep 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Stop Treating CSS Container Queries Like Traditional Media Queries",
+            "url": "https://smashingmagazine.com/2026/09/stop-treating-css-container-queries-traditional-media-queries/",
+            "datum": "Wed, 16 Sep 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Building A UX ROI Case That Survives The Boardroom",
+            "url": "https://smashingmagazine.com/2026/09/building-ux-roi-case-survives-boardroom/",
+            "datum": "Fri, 11 Sep 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "The Death Of The Button: Why The Best Interface Is No Interface",
+            "url": "https://smashingmagazine.com/2026/09/death-button-why-best-interface-is-no-interface/",
+            "datum": "Wed, 09 Sep 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          }
+        ],
+        "fehler": null
+      },
+      "Nielsen Norman Group (Usability-Forschung)": {
+        "treffer": [
+          {
+            "titel": "UX Maps: Glossary",
+            "url": "https://www.nngroup.com/articles/ux-maps-glossary/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 16 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "Synthetic Users vs. Human Respondents: Same Conclusion, Less Variation",
+            "url": "https://www.nngroup.com/articles/synthetic-users-vs-human-respondents/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 16 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "The New Siri’s Biggest Strength Is Not Intelligence",
+            "url": "https://www.nngroup.com/articles/ai-assistant-context/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 09 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "Context Libraries: How AI Power Users Manage Context Engineering",
+            "url": "https://www.nngroup.com/articles/context-libraries/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 09 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "Empathy Mapping: The First Step in Design Thinking",
+            "url": "https://www.nngroup.com/articles/empathy-mapping/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 02 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "The New Big Ball of Mud: Why Agentic AI Systems Turn Fragile",
+            "url": "https://www.nngroup.com/articles/big-ball-of-mud-ai/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 02 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {},
+    "github": {
+      "lighthouse-ci performance budget": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      },
+      "design tokens css variables": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
