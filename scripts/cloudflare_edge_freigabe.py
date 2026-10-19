@@ -68,7 +68,8 @@ def vorlage_kopfzeilen(text: str | None = None) -> list[tuple[str, str]]:
     haben dasselbe Aussehen und wären sonst Verunreinigung."""
     roh = text if text is not None else VORLAGE.read_text(encoding="utf-8")
     abschnitte = re.split(r"^## ", roh, flags=re.M)
-    a1 = next((a for a in abschnitte if "A1" in a.splitlines()[0]), "")
+    a1 = next((a for a in abschnitte
+               if "A1" in ((a.splitlines() or [""])[0])), "")
     return [(m.group("name").strip(), m.group("wert").strip())
             for m in TABELLE.finditer(a1)]
 
@@ -285,8 +286,15 @@ def selftest() -> int:
     assert ab == ["franksfinanzcheck.de"], ab
     faelle += 1
 
-    # 4. Der Selbsttest selbst braucht kein Netz und keinen Token.
-    assert "api.cloudflare.com" not in json.dumps(kopfzeilen)
+    # 4. Nur die A1-Tabelle zählt: Die Tabellen der Abschnitte A2/A3 sehen
+    #    genauso aus (Zeile | `Name` | `Wert` |) und würden den Sollstand
+    #    verunreinigen – bewusste Gegenprobe gegen die Verwechslung.
+    gemischt = ("## 1. A1 — Sicherheits-Header (Finding F-01)\n\n"
+                "| Kopfzeile | Wert |\n|---|---|\n| `X-Test` | `wert` |\n\n"
+                "## 2. A2 — Mengenregeln (Finding F-03)\n\n"
+                "| Name | Ausdruck (Filter) |\n|---|---|\n"
+                "| `FF Anmeldung/Tor` | `(http.host eq \"abos.example\")` |\n")
+    assert vorlage_kopfzeilen(gemischt) == [("X-Test", "wert")], vorlage_kopfzeilen(gemischt)
     faelle += 1
 
     print(f"✅ SELBSTTEST OK — {faelle} Fälle grün (Vorlage {VORLAGE.name}: "
