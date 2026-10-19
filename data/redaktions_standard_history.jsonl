@@ -133,3 +133,6 @@
 {"zeit": "2026-10-16T18:03:46.224548+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}
 {"zeit": "2026-10-16T18:03:46.224548+00:00", "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet", "regel": "GATE", "aktion": "draft (hold)"}
 {"zeit": "2026-10-16T20:06:39.423540+00:00", "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-10-19T13:10:54.589373+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
+{"zeit": "2026-10-19T13:10:54.589373+00:00", "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-10-19T13:10:54.719665+00:00", "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026", "regel": "GATE", "aktion": "draft (hold)"}

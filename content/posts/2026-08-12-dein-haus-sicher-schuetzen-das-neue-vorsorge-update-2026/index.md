@@ -3,7 +3,9 @@ lastmod: 2026-10-14
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
 date: 2026-10-19T01:19:44Z
-draft: false
+draft: true
+cadence_demoted: 2026-10-19T13:09:54Z
+cadence_grund: "Redaktions-Standard: RS1, RS2, RS3"
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
