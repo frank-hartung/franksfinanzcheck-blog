@@ -17,8 +17,7 @@
   {{- end -}}
   {{- if $gewaehlt -}}
   <aside class="ff-weiterrechnen" role="complementary" aria-label="Passendes Werkzeug" style="margin:1.25rem 0;padding:1rem 1.25rem;border:1px solid var(--border,rgba(15,23,42,.12));border-radius:12px;">
-    <strong>Weiterrechnen:</strong>
-    <a href="{{ printf "werkzeuge/%s/" $gewaehlt.slug | relURL }}">{{ $gewaehlt.name }} – {{ $gewaehlt.kurz }}</a>
+    Weiterrechnen: <a href="{{ printf "werkzeuge/%s/" $gewaehlt.slug | relURL }}">{{ $gewaehlt.name }} – {{ $gewaehlt.kurz }}</a>
   </aside>
   {{- end -}}
 {{- end -}}

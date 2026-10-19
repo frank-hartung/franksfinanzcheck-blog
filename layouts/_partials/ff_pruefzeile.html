@@ -43,35 +43,25 @@
 
   <dl class="ff-review-card__facts">
     <div><dt>Autor</dt><dd>{{ $author }}</dd></div>
-    <div><dt>Prüfdatum</dt><dd><time datetime="{{ $review.pruefdatum }}">{{ dateFormat "02.01.2006" $review.pruefdatum }}</time></dd></div>
+    <div><dt>Prüfdatum</dt><dd>{{ dateFormat "02.01.2006" $review.pruefdatum }}</dd></div>
     <div><dt>Geprüfte Zahlen</dt><dd>{{ len $claims }}</dd></div>
-    <div><dt>Nächste Prüfung</dt><dd><time datetime="{{ $review.naechste_pruefung }}">{{ dateFormat "02.01.2006" $review.naechste_pruefung }}</time></dd></div>
+    <div><dt>Nächste Prüfung</dt><dd>{{ dateFormat "02.01.2006" $review.naechste_pruefung }}</dd></div>
   </dl>
 
   <details class="ff-review-card__details">
     <summary>Prüfumfang und Änderungsgrund</summary>
-    <p><strong>Anlass:</strong> {{ $review.aenderungsgrund }}</p>
+    <p>Anlass: {{ $review.aenderungsgrund }}</p>
     {{- if gt (len $coreClaims) 0 }}
-    <p><strong>Geprüfte Kernaussagen:</strong></p>
-    <ul>
+    <ul aria-label="Geprüfte Kernaussagen">
       {{- range $coreClaims }}
-      <li>
-        <q>{{ .textanker }}</q>
-        {{- with .pruefung }}<span> – {{ . }}</span>{{ end -}}
-        {{- with .quellen }}<small>Belege: {{ delimit . ", " }}</small>{{ end -}}
-      </li>
+      <li>„{{ .textanker }}“{{- with .pruefung }} – {{ . }}{{ end -}}{{- with .quellen }} (Belege: {{ delimit . ", " }}){{ end -}}</li>
       {{- end }}
     </ul>
     {{- end }}
     {{- if gt (len $claims) 0 }}
-    <p><strong>Geprüfte Zahlen und Annahmen:</strong></p>
-    <ul>
+    <ul aria-label="Geprüfte Zahlen und Annahmen">
       {{- range $claims }}
-      <li>
-        <strong>{{ .aussage }}</strong>{{ with .wert }}: {{ . }}{{ end }}
-        {{- with .pruefung }}<span> – {{ . }}</span>{{ end -}}
-        {{- with .quellen }}<small>Belege: {{ delimit . ", " }}</small>{{ end -}}
-      </li>
+      <li>{{ .aussage }}{{ with .wert }}: {{ . }}{{ end }}{{- with .pruefung }} – {{ . }}{{ end -}}{{- with .quellen }} (Belege: {{ delimit . ", " }}){{ end -}}</li>
       {{- end }}
     </ul>
     {{- end }}
