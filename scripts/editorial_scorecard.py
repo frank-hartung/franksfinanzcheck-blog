@@ -508,7 +508,7 @@ def _funnel_datalage():
     if not f:
         return ("Umsatz-Funnel", "data/revenue_funnel.json", "fehlt",
                 "nie berechnet – `scripts/revenue_funnel.py` läuft im "
-                "revenue-import-Workflow (Secrets siehe docs/UMSATZ-MESSUNG-PREMIUM.md)")
+                "revenue-import-Workflow (Setup siehe docs/UMSATZ-MESSUNG-PREMIUM.md)")
     gaps = int(f.get("messluecken") or 0)
     alt = f.get("generated") or ""
     try:

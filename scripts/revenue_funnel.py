@@ -385,8 +385,8 @@ def quellen_text(src, offline_meta, clicks_meta=None):
         teile.append(f"Provision: Abrechnungstabelle (`scripts/offline_import.py`, Stand {stand}{extra})")
     if teile:
         return " · ".join(teile)
-    return ("keine – Klickzähler aus und Provisions-Tabelle noch nicht befüllt "
-            "(Zahlen bleiben „unbekannt“, docs/UMSATZ-MESSUNG-PREMIUM.md)")
+    return ("keine – derzeit liefert keine Quelle Zahlen (Grund: Datenqualität unten; "
+            "Zahlen bleiben „unbekannt“, docs/UMSATZ-MESSUNG-PREMIUM.md)")
 
 
 def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, quellen=None,
@@ -825,9 +825,10 @@ def _selftest():
         failures.append("Report verschweigt die Herkunft der Zahlen")
     if rep_m.count(" * |") != 2 or "_* Diese beiden Zeilen mischen zwei Zeitbezüge" not in rep_m:
         failures.append("gemischter Zeitbezug wird nicht mit Sternchen + Fußnote markiert")
-    q_leer = quellen_text([("offline", "P", "disabled", None), ("clicks", "K", "disabled", None)], {}, {})
-    if not q_leer.startswith("keine –"):
-        failures.append("ohne jede Quelle muss der Report „keine“ als Herkunft nennen")
+    for zustand_clk in ("disabled", "skipped", "fehler", "fehlt"):
+        q_leer = quellen_text([("offline", "P", "disabled", None), ("clicks", "K", zustand_clk, None)], {}, {})
+        if not q_leer.startswith("keine –") or "aus " in q_leer:
+            failures.append(f"ohne jede Quelle muss der Report „keine“ ohne falschen Grund nennen ({zustand_clk}): {q_leer}")
     q_beide = quellen_text([("offline", "P", "ok", 0), ("clicks", "K", "ok", 0)],
                            {"written": vor(0), "provisionen_monate": 3},
                            {"stand": vor(0) + "T06:00:00Z"})
