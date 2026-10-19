@@ -1,7 +1,7 @@
 {
   "target": 6,
-  "ready": 6,
-  "pool_size": 7,
+  "ready": 5,
+  "pool_size": 6,
   "generated_at": "2026-10-19T09:20:10Z",
   "candidates": [
     {
@@ -33,23 +33,6 @@
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
-      "ready": true,
-      "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
-      "flesch": 60.8,
-      "measured_at": "2026-10-19T09:17:05Z",
-      "score": 0.978,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -148,5 +131,12 @@
       ],
       "warum": "Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py und lesbarkeit_heiler.py in der Reserve-Kette (#710)."
     }
-  ]
+  ],
+  "ausgebucht": {
+    "at": "2026-10-19T16:45:08Z",
+    "slugs": [
+      "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }

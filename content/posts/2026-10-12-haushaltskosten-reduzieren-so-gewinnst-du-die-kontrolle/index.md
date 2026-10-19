@@ -1,9 +1,9 @@
 ---
 title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
 description: Willst du effektiv deine Haushaltskosten reduzieren? Frank Hartung zeigt dir, wie du mit einfachen Mitteln und dem 4K-Prüfpfad deine Fixkosten senkst.
-date: 2026-10-12T11:17:49Z
-draft: true
-reserve: true
+date: 2026-10-19T16:43:01Z
+draft: false
+reserve_published: 2026-10-19
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
@@ -36,7 +36,7 @@ faktencheck: 2026-10-07
 kurzantwort: "Ja, du kannst deine Haushaltskosten sofort senken, indem du den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) anwendest. Analysiere jede Ausgabe, streiche unwichtige Abos und wechsle zu günstigeren Anbietern. Die Beispielrechnung im Artikel zeigt, wie dabei vierstellige Beträge im Jahr zusammenkommen können. Der Schlüssel liegt in konsequenter Kontrolle und regelmäßiger Nachprüfung."
 ---
 
-Wusstest du, wie viel Geld Jahr für Jahr in veralteten Verträgen stecken bleibt, ohne dass du es merkst? Oft belasten nicht die großen Einmalkäufe dein Budget. Es ist die Summe kleiner, regelmäßiger Abbuchungen. Ein vergessener Streaming-Dienst oder ein teurer Stromtarif fressen dein Geld.
+Haushaltskosten im Check: Wusstest du, wie viel Geld Jahr für Jahr in veralteten Verträgen stecken bleibt, ohne dass du es merkst? Oft belasten nicht die großen Einmalkäufe dein Budget. Es ist die Summe kleiner, regelmäßiger Abbuchungen. Ein vergessener Streaming-Dienst oder ein teurer Stromtarif fressen dein Geld.
 
 Mit System schaffst du dir finanziellen Spielraum. Du gewinnst die Kontrolle über dein Konto zurück.
 
