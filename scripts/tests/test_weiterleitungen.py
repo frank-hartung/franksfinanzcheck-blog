@@ -24,9 +24,16 @@ class QuelleBestand(unittest.TestCase):
         self.assertEqual(wl.pruefe(self.eintraege, self.entfallen, self.live), [])
 
     def test_umfang(self):
-        # 117 Alt-URLs waren veröffentlicht: 114 mit Ziel, 3 bewusst 404 (Regel D)
-        self.assertEqual(len(self.eintraege), 114)
+        # 118 ehemals veröffentlichte URLs: 115 mit Ziel, 3 bewusst 404 (Regel D)
+        self.assertEqual(len(self.eintraege), 115)
         self.assertEqual(sum(1 for e in self.entfallen if e["regel"] == "D"), 3)
+
+    def test_geparkter_hausvorsorge_beitrag_hat_pillar_fallback(self):
+        url = "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/"
+        route = next((e for e in self.eintraege if e["von"] == url), None)
+        self.assertIsNotNone(route)
+        self.assertEqual(route["nach"], "/pillar/versicherungen/")
+        self.assertEqual(route["regel"], "C")
 
     def test_tags_nie_weitergeleitet(self):
         self.assertFalse(any(e["von"].startswith("/tags/") for e in self.eintraege))
