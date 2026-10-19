@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-18T22:23:05Z",
+  "generated": "2026-10-19T23:32:50Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit)",
-        "lesbarkeit: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md (Entwurf) – Flesch 38.2 < Publish-Schwelle 60; 2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aende…",
-        "Artikel-Reserve 7/6 bereit"
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig",
+        "lesbarkeit: 2026-10-19-urlaubskasse-clever-aufbessern/index.md (Entwurf) – Flesch 54.2 < Publish-Schwelle 60; 2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md (Entwu…",
+        "Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -53,7 +53,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.3 Tag(en)",
+        "letzter erfolgreicher Post vor 0.2 Tag(en)",
         "5 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
@@ -67,7 +67,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 67 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 68 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
