@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-10
-title: "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden"
+title: "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen"
 description: "Gasrechnung prüfen statt nur auf die Endsumme schauen: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter."
 date: 2026-09-25T12:15:37Z
 draft: false
@@ -291,5 +291,9 @@ Prüfe Preisgarantie, Änderungsgrund und Frist. In der Regel kannst du zum Wirk
 ---
 
 👉 **Eigenen Gastarif prüfen:** [**→ Gasanbieter vergleichen**](/go/gas/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

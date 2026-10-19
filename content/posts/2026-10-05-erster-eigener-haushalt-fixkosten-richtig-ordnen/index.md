@@ -220,4 +220,8 @@ Für gemeinsame Fixkosten ist ein separates Konto praktisch. Achte darauf, dass 
 
 👉 **Jetzt die Fixkosten in den Blick nehmen:** [**→ Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl](../../werkzeuge/fixkosten-scanner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

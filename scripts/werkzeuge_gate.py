@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Produktvertrag für Franks Werkzeuge (eigenständige Finanz-Rechner).
 
-Die acht Werkzeuge unter /werkzeuge/ sind der zweite Produktkern des Blogs
+Die neun Werkzeuge unter /werkzeuge/ sind der zweite Produktkern des Blogs
 neben dem Fixkosten-Cockpit. Ihr Wert hängt an Eigenschaften, die man einer
 Seite nicht ansieht und die beim nächsten Umbau still verschwinden könnten:
 vollständige Nutzbarkeit ohne Affiliate-Klick, Rechnen ohne Datenabfluss,
@@ -17,7 +17,7 @@ Aufruf:
 W1 VERSPRECHEN   Der Vertrauenssatz steht wörtlich auf dem Hub und auf jeder
                  Werkzeugseite – im Markup und maschinenlesbar im Schema.
 W2 VOLLSTÄNDIG   Zu jedem Werkzeug der SSOT existiert genau eine Seite und
-                 umgekehrt; der Hub verlinkt alle acht.
+                 umgekehrt; der Hub verlinkt alle neun.
 W3 WERBEFREI     Unter /werkzeuge/ gibt es keinen Partnerlink – weder /go/,
                  noch rel=sponsored, noch eine Partner-Domain.
 W4 VERDRAHTUNG   Jede Seite bindet {{< werkzeug >}} ein; Frontmatter-ID,
@@ -66,7 +66,7 @@ HUGO_CONFIG = ROOT / "hugo.toml"
 # Der Satz ist das Produktversprechen. Er steht hier wörtlich, damit eine
 # „kleine Umformulierung" in der YAML nicht unbemerkt durchrutscht.
 VERSPRECHEN = "Du kannst das Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken."
-ANZAHL_WERKZEUGE = 8
+ANZAHL_WERKZEUGE = 9
 ERLAUBTE_TYPEN = {"euro", "zahl", "prozent", "datum", "auswahl"}
 ERLAUBTE_BUCKETS = {"einnahme", "bedarf", "wunsch", "sparen"}
 PFLICHT_EXPORTE = {"csv", "pdf"}
@@ -313,7 +313,7 @@ def einbettungen(root: Path = ROOT) -> dict[Path, list[str]]:
 
 
 def validate_embedding(data: dict[str, Any], root: Path = ROOT) -> list[str]:
-    """W8 VERDRAHTUNG: acht Werkzeugseiten, die niemand verlinkt, sind acht
+    """W8 VERDRAHTUNG: neun Werkzeugseiten, die niemand verlinkt, sind neun
     ungenutzte Rechner. Der Befund vom 10.10.2026: 0 Links aus `content/` auf
     `/werkzeuge/`, 0 Einbettungen – die Seiten waren ein Silo für sich. Diese
     Regel verhindert, dass der Zustand zurückkehrt, ohne die Werbefreiheit der

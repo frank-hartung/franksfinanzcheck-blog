@@ -218,4 +218,8 @@ Der Ernstfall ist selten. Die zuständige Sicherung zahlt dein Guthaben bis zur 
 
 👉 **Jetzt Zinsen ansehen:** [**→ Tagesgeldkonto der C24 Bank ansehen**](/go/tagesgeld/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen](../../werkzeuge/notgroschen-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

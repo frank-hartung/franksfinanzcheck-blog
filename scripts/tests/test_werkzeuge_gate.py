@@ -55,7 +55,7 @@ class WerkzeugeVertragTests(unittest.TestCase):
         self.assertEqual(guard.validate_source(), [])
         self.assertEqual(guard.selftest(), [])
 
-    def test_acht_werkzeuge_mit_eindeutigen_ids_und_slugs(self):
+    def test_neun_werkzeuge_mit_eindeutigen_ids_und_slugs(self):
         werkzeuge = self.data["werkzeuge"]
         self.assertEqual(len(werkzeuge), guard.ANZAHL_WERKZEUGE)
         self.assertEqual(len({w["id"] for w in werkzeuge}), guard.ANZAHL_WERKZEUGE)

@@ -303,4 +303,8 @@ Der Wechsel ist ein kaufmännischer Prozess. Die Versorgung bleibt über Netz so
 
 👉 **Vergleich mit neutralen Filtern starten:** [**→ Gastarife prüfen**](/go/gas/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Tarifwechsel-Entscheidungsbaum: Wechseln oder bleiben?](../../werkzeuge/tarifwechsel-entscheidungsbaum/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

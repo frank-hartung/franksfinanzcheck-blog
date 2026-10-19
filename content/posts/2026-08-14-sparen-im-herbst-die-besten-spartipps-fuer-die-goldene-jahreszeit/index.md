@@ -60,6 +60,10 @@ Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca. 
 💡 **Schnell‑Tipp von FranksFinanzcheck:** Überprüfe deine Absicherung und spare bei den großen Policen – allen voran der Kfz-Versicherung (Wechselstichtag 30. November): [**Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Welche Sparhebel lohnen sich im Herbst besonders?
 
 ### 1. Kfz‑Versicherungswechsel zum Stichtag 30. November
@@ -262,6 +266,10 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 <!-- premium-length-2026-b -->
 
+![Gliederung des Beitrags: Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## Weihnachtskonto im September
 
 Ein Unterkonto oder Umschlag „Dezember“ ab 1.9. Führen: 4 × ca. 50–150 € je nach Haushalt zurücklegen. Geschenke, Bahnfahrten, Festessen einplanen.
@@ -331,3 +339,7 @@ Ja. Die meisten Hebel wirken in unterschiedlichen Kostenkategorien (Versicherung
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)

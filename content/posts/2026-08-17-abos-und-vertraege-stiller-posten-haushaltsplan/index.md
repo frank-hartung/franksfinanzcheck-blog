@@ -201,4 +201,8 @@ Zweimal im Jahr reicht. Ein Termin nach dem Jahreswechsel und einer vor der Somm
 
 👉 **Jetzt den Bestand prüfen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl](../../werkzeuge/fixkosten-scanner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

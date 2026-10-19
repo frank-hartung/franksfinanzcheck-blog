@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "Internet & DSL wechseln: So gelingt der Anbieterwechsel"
+title: "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis"
 description: "So kannst du DSL wechseln, ohne Stress: Rechne den Effektivpreis, vermeide Ausfallzeiten und prüfe Bonus, Router und Laufzeit vor dem Anbieterwechsel."
 date: 2026-08-14T08:35:12Z
 draft: false
@@ -309,5 +309,9 @@ Mit etwas Vorbereitung meist nicht. Gerade mit frühem Start, geordnetem Ablauf 
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

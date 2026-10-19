@@ -48,6 +48,10 @@ Das meiste Geld bleibt aus einem Grund liegen: Viele werfen **Preis, Verbrauch u
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Starte mit einem kleinen Check
 
 
@@ -172,6 +176,10 @@ Bei 2.000 € Gaskosten im Jahr sind das rund 120 €. Auch kurzes Lüften mit
 
 Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden Monat ab. So siehst du schwarz auf weiß, was deine Schritte wirklich bringen.
 
+![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## Dein Spätsommer-Check in 45 Minuten
 
 | Zeit | Aufgabe |
@@ -276,5 +284,9 @@ Ja. Du darfst jederzeit wechseln, wenn du die Frist einhältst. Oder wenn du ein
 ---
 
 👉 **Gastarif mit echten Zahlen prüfen:** [**→ Gasanbieter vergleichen**](/go/gas/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

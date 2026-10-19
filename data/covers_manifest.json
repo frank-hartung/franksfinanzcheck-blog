@@ -9,8 +9,8 @@
   }
  },
  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-  "title": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
-  "ts": "2026-10-14T15:12:24+00:00",
+  "title": "Gaspreisgarantie: Was sie abdeckt und wie lange sie läuft",
+  "ts": "2026-10-19T00:06:53+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -18,13 +18,13 @@
   }
  },
  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
+  "title": "Haus sicher schützen: Gebäude, Hausrat, Elementarschutz",
+  "ts": "2026-10-19T00:09:32+00:00",
   "design": {
+   "v": 3,
    "badge": "VERSICHERUNGEN",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
-  "ts": "2026-08-25T16:23:26+00:00"
+   "savings": ""
+  }
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
@@ -45,8 +45,8 @@
   }
  },
  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-  "title": "Internet & DSL wechseln: So gelingt der Anbieterwechsel",
-  "ts": "2026-10-14T13:46:34+00:00",
+  "title": "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis",
+  "ts": "2026-10-19T00:12:53+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -127,11 +127,11 @@
  },
  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
   "title": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
-  "ts": "2026-10-14T15:12:48+00:00",
+  "ts": "2026-10-19T00:06:56+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
-   "savings": "bis zu 430 € im Monat sparen"
+   "savings": ""
   }
  },
  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
@@ -153,8 +153,8 @@
   }
  },
  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-  "title": "Preisgarantie Gas: So schützt du dich vor Preissprüngen",
-  "ts": "2026-10-14T15:12:57+00:00",
+  "title": "Gaspreis-Erhöhung im Brief: Was du jetzt tun kannst",
+  "ts": "2026-10-19T00:09:33+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -243,8 +243,8 @@
   }
  },
  "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
-  "title": "Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler",
-  "ts": "2026-10-14T15:13:09+00:00",
+  "title": "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick",
+  "ts": "2026-10-19T00:09:35+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -297,8 +297,8 @@
   "ts": "2026-09-11T08:21:39+00:00"
  },
  "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-  "title": "Günstig durch den Winter: Heizungs-Check im Spätsommer",
-  "ts": "2026-10-14T15:13:24+00:00",
+  "title": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+  "ts": "2026-10-19T00:09:36+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -315,8 +315,8 @@
   }
  },
  "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Versicherung-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-10-14T15:13:29+00:00",
+  "title": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
+  "ts": "2026-10-19T00:09:37+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -324,8 +324,8 @@
   }
  },
  "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
-  "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
-  "ts": "2026-10-14T15:13:32+00:00",
+  "title": "Notgroschen berechnen: Der Rechenweg in fünf Minuten",
+  "ts": "2026-10-19T00:07:05+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -333,8 +333,8 @@
   }
  },
  "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-  "title": "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden",
-  "ts": "2026-10-14T13:46:37+00:00",
+  "title": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+  "ts": "2026-10-19T00:07:06+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -342,13 +342,13 @@
   }
  },
  "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
+  "title": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+  "ts": "2026-10-19T00:07:07+00:00",
   "design": {
+   "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": "",
-   "v": 3
-  },
-  "title": "Gasrechnung senken: Spätsommer-Check für Tarif und Heizung",
-  "ts": "2026-09-25T14:49:48+00:00"
+   "savings": ""
+  }
  },
  "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
   "design": {
@@ -405,8 +405,8 @@
   }
  },
  "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Internet & DSL-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-10-14T15:13:50+00:00",
+  "title": "DSL-Tarif prüfen: Effektivpreis statt Lockpreis",
+  "ts": "2026-10-19T00:09:39+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -441,8 +441,8 @@
   }
  },
  "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Konto & Karten-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-10-14T15:13:56+00:00",
+  "title": "Girocard, Debitkarte oder Maestro: Welche Karte passt?",
+  "ts": "2026-10-19T00:09:40+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -477,8 +477,8 @@
   "ts": "2026-10-02T12:41:20+00:00"
  },
  "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
-  "title": "Preiswert surfen: So findest du den optimalen DSL‑Anschluss",
-  "ts": "2026-10-14T15:13:58+00:00",
+  "title": "Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich",
+  "ts": "2026-10-19T00:09:42+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -603,8 +603,8 @@
   "ts": "2026-10-06T15:31:56+00:00"
  },
  "2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Markt-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-10-14T15:14:13+00:00",
+  "title": "Google-Regeln für Ratgeber: Erfahrung und Quellen",
+  "ts": "2026-10-19T00:09:43+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -612,8 +612,8 @@
   }
  },
  "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-  "title": "7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen",
-  "ts": "2026-10-14T15:14:16+00:00",
+  "title": "Sieben Geldgewohnheiten: Welche Routinen wirklich wirken",
+  "ts": "2026-10-19T00:09:44+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -648,8 +648,8 @@
   "ts": "2026-10-07T22:34:01+00:00"
  },
  "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
-  "title": "DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin",
-  "ts": "2026-10-12T23:03:31+00:00",
+  "title": "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet",
+  "ts": "2026-10-19T00:07:16+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -999,8 +999,8 @@
   }
  },
  "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Energie-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-10-14T15:14:36+00:00",
+  "title": "Energiepreise 2026: Strom- und Gasvertrag prüfen",
+  "ts": "2026-10-19T00:09:46+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1144,7 +1144,7 @@
  },
  "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
   "title": "Warmwasser sparen: Die Rechnung hinter",
-  "ts": "2026-10-15T09:15:12+00:00",
+  "ts": "2026-10-19T00:06:59+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1260,8 +1260,8 @@
   }
  },
  "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Saison-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-10-16T09:08:23+00:00",
+  "title": "Herbst-Check: Strom, Versicherung, Konto und Internet",
+  "ts": "2026-10-19T00:09:47+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1270,7 +1270,7 @@
  },
  "2026-10-16-dns-server-aendern-fuer-schnelleres-internet": {
   "title": "DNS-Server ändern für schnelleres Internet",
-  "ts": "2026-10-17T08:40:45+00:00",
+  "ts": "2026-10-19T00:07:20+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",

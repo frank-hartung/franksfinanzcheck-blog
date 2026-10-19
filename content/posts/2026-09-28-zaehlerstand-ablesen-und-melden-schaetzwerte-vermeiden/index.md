@@ -228,4 +228,8 @@ Ja. Gib den Stand zum Auszugstag an beide Stellen weiter. So endet die eine Rech
 
 👉 **Jetzt Verbrauch gegenrechnen:** [**→ Stromtarife vergleichen und wechseln**](/go/strom/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

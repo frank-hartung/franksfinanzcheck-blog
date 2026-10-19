@@ -23,7 +23,7 @@ Startseite. Gemessen am Build vom 12.10.2026:
     54 URLs in der Meldeliste
     20 indexierbare Seiten, die NIE gemeldet wurden
 
-Darunter die acht Werkzeug-Rechner, das Fixkosten-Cockpit, die Studien-Seite,
+Darunter alle Werkzeug-Rechner, das Fixkosten-Cockpit, die Studien-Seite,
 `/ueber/`, `/transparenz/`, `/impressum/` und `/datenschutz/`. Genau dieselbe
 Fehlerklasse, die `layouts/sitemap.xml` am 01.10.2026 schon einmal erledigt
 hat: Eine Namensliste bricht bei jedem Wachstum – jede neue Seite fällt still

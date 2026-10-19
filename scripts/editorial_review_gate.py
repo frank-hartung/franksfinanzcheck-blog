@@ -288,7 +288,7 @@ def automatic_change_findings(old_raw: str, new_raw: str) -> list[str]:
         ):
             return ["YMYL: versiegelter Inhalt/Prüfprotokoll verändert – redaktionelle Prüfung erforderlich"]
     except Exception as exc:
-        return [f"YMYL: Schreibprüfung nicht auswertbar ({type(exc).__name__}) – fail-closed"]
+        return [f"YMYL: Schreibprüfung nicht auswertbar ({type(exc).__name__}: {exc}) – fail-closed"]
     return []
 
 

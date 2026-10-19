@@ -475,6 +475,68 @@
     return { kennzahlen: kennzahlen, zeilen: zeilen, hinweise: hinweise };
   };
 
+  // -------------------------------------------------------- Balkonkraftwerk
+  // Konstanten (Quellen: data/werkzeuge.yaml, Abschnitt quellen):
+  //   Referenz 800 Wp = 750 kWh Südertrag; Vergütung 0,077 € je kWh;
+  //   Zählergebühr 22 € im Jahr; Wechselrichter 800 VA.
+  logik.balkonkraftwerk = function (felder) {
+    var wp = wertVon(felder, 'leistung');
+    var kosten = wertVon(felder, 'anschaffung');
+    if (!(wp > 0) || !(kosten >= 0)) return fehlt(['Modulleistung und Anschaffungskosten']);
+
+    var faktor = auswahlZahl(felder, 'ausrichtung', 1);
+    var eigenAnteil = wertOder(felder, 'eigenverbrauch', 35);
+    if (!(eigenAnteil >= 0) || eigenAnteil > 100) eigenAnteil = 35;
+    var strompreis = wertOder(felder, 'strompreis', 0.35);
+    if (!(strompreis >= 0) || strompreis > 1) strompreis = 0.35;
+    var einspeisen = auswahlZahl(felder, 'einspeisung', 0) === 1;
+    var foerderung = Math.max(0, wertOder(felder, 'foerderung', 0));
+
+    var nutzbar = Math.min(wp, 800);
+    var ertrag = nutzbar / 800 * 750 * faktor;
+    var eigen = ertrag * eigenAnteil / 100;
+    var ersparnis = eigen * strompreis;
+    var ueberschuss = Math.max(0, ertrag - eigen);
+    var verguetung = einspeisen ? Math.max(0, ueberschuss * 0.077 - 22) : 0;
+    var jahresnutzen = ersparnis + verguetung;
+    var netto = Math.max(0, kosten - foerderung);
+    var amortisation = jahresnutzen > 0 ? netto / jahresnutzen : NaN;
+    var gewinn20 = 20 * jahresnutzen - netto;
+
+    var kennzahlen = [
+      kennzahl('Jahresertrag', nummer(ertrag, 0) + ' kWh', true),
+      kennzahl('Ersparnis pro Jahr', euro(ersparnis, 0), true),
+      kennzahl('Amortisation', isFinite(amortisation) ? nummer(amortisation, 1) + ' Jahre' : 'nicht erreichbar', false),
+      kennzahl('Gewinn nach 20 Jahren', euro(gewinn20, 0), false)
+    ];
+
+    var zeilen = [
+      { label: 'Nutzbare Leistung', wert: nummer(nutzbar, 0) + ' Wp' },
+      { label: 'Eigenverbrauch', wert: nummer(eigen, 0) + ' kWh' },
+      { label: 'Eingespeister Überschuss', wert: nummer(ueberschuss, 0) + ' kWh' },
+      { label: 'Einspeisevergütung nach Zählergebühr', wert: einspeisen ? euro(verguetung, 0) : 'nicht beantragt' },
+      { label: 'Investition nach Förderung', wert: euro(netto, 0) },
+      { label: 'Jahresnutzen gesamt', wert: euro(jahresnutzen, 0) }
+    ];
+
+    var hinweise = [];
+    if (wp > 800) {
+      hinweise.push(hinweis('info', 'Der Wechselrichter nutzt höchstens 800 VA. Die Rechnung zählt daher nur 800 Wp.'));
+    }
+    if (einspeisen && verguetung === 0) {
+      hinweise.push(hinweis('warnung', 'Der Überschuss ist so klein, dass die Vergütung unter der Zählergebühr liegt. Ohne Vergütung ist der Verzicht die bessere Wahl.'));
+    }
+    if (faktor < 0.5) {
+      hinweise.push(hinweis('warnung', 'Ein Nordbalkon liefert kaum die Hälfte des Südertrags. Die Amortisation wird entsprechend länger.'));
+    }
+    if (isFinite(amortisation) && amortisation > 10) {
+      hinweise.push(hinweis('achtung', 'Mehr als zehn Jahre bis zur Amortisation. Ein Wechselrichter-Ersatz würde das Ergebnis dann spürbar drücken.'));
+    }
+    hinweise.push(hinweis('info', 'Die Rechnung hat keine Strompreissteigerung und keinen Wechselrichter-Ersatz. Beide Posten verschieben das Ergebnis, nicht die Richtung.'));
+
+    return { kennzahlen: kennzahlen, zeilen: zeilen, hinweise: hinweise };
+  };
+
   // -------------------------------------------------------- Notgroschen
   logik.notgroschen = function (felder, kontext) {
     var fehler = pflicht(felder, ['ausgaben']);

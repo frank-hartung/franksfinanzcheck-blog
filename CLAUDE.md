@@ -681,7 +681,7 @@ ein Layout-/Registerdefekt für einen Menschen (C15). Runbuch:
 
 ## Werkzeuge sind ein Produkt, kein Shortcode (Wache seit 02.10.2026)
 
-Die acht Rechner unter `/werkzeuge/` sind der **zweite Produktkern** neben dem
+Die neun Rechner unter `/werkzeuge/` sind der **zweite Produktkern** neben dem
 Fixkosten-Cockpit. Ihr Wert hängt an Eigenschaften, die man einer Seite nicht
 ansieht: vollständige Nutzbarkeit **ohne Affiliate-Klick**, Rechnen ohne
 Datenabfluss, offengelegte Formeln und Quellen, Export als CSV/PDF/ICS.

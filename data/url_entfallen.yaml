@@ -1,0 +1,21 @@
+# Alt-URLs, die bewusst 404 bleiben (Regel D und E) – Quelle der Wahrheit
+# Stand: 19.10.2026
+#
+# Regel D: kein Themenbezug zu einem Pillar oder kein Ersatz. Eine Weiterleitung würde Nutzer
+#          in die Irre führen. Ein 404 ist hier die ehrliche Antwort.
+# Regel E: Tag-Archive (/tags/…/). Entscheidung "Index-Hygiene" vom 29.09.2026: Die Taxonomie
+#          `tags` ist abgeschaltet. Tag-Archive sind noindex, nicht in der Sitemap und haben keine
+#          externen Links. Eine Weiterleitung würde Tags nur künstlich verlängern.
+#          Hinweis: Die Entscheidung gehört in den Abschlussbericht, damit sie offengelegt bleibt.
+#
+# Die Wache (scripts/url_wache.py) akzeptiert eine verschwundene URL nur mit Eintrag in
+# weiterleitungen.yaml ODER url_entfallen.yaml. Ein Eintrag hier macht die URL nicht wieder live.
+
+eintraege:
+  - {von: "/posts/2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge/", regel: "D", grund: "Altersvorsorge/Rente: kein Pillar-Thema, keine Suchnachfrage (R-D)"}
+  - {von: "/posts/nebenverdienst-ideen-2026-zweites-standbein/", regel: "D", grund: "Nebenverdienst: kein Pillar-Thema (R-D)"}
+  - {von: "/posts/riester-rente-2026-lohnt-sich/", regel: "D", grund: "Riester/Altersvorsorge: kein Pillar-Thema (R-D)"}
+  - {von: "/tags/frugalismus-tipps/", regel: "E", grund: "GSC: 3 Impressionen, Position 64,7 (28 Tage). Tag-Archiv, bleibt 404 (Regel E)"}
+  - {von: "/tags/haushaltsbuch/", regel: "E", grund: "GSC: 1 Impression (28 Tage). Tag-Archiv, bleibt 404 (Regel E)"}
+  - {von: "/tags/reiseruecktritt/", regel: "E", grund: "GSC: 1 Impression (28 Tage). Tag-Archiv, bleibt 404 (Regel E)"}
+  - {von: "/tags/stromfresser-finden/", regel: "E", grund: "GSC: 1 Impression (28 Tage). Tag-Archiv, bleibt 404 (Regel E)"}

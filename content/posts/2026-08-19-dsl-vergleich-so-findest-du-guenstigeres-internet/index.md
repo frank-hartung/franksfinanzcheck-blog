@@ -55,6 +55,10 @@ Ein unabhängiger **[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-f
 💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt alle verfügbaren DSL-, Kabel- und Glasfaser-Tarife an deiner Adresse auf Basis der echten 24-Monats-Effektivkosten: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Wie berechnest du den echten Effektivpreis?
 
 Verlasse dich nicht auf die plakative Grundgebühr der ersten Monate. Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate:
@@ -131,6 +135,10 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein W
 
 **Stille Vertragsverlängerungen.** Zwar ist nach 24 Monaten eine monatliche Kündigung gesetzlich Standard, aber Provider bieten oft „Tarif-Optimierungen“ an, die eine neue 24-monatige Bindung auslösen. Prüfe solche Angebote kritisch auf ihre Flexibilität.
 
+![Gliederung des Beitrags: DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## So vergleichst du in 20 Minuten sauber
 
 1. Nutze immer die genaue Adresse, da die Verfügbarkeit von Hausnummer zu Hausnummer variieren kann.
@@ -200,5 +208,9 @@ Das hängt vom Anschluss ab. Viele moderne Router können über einen LAN-Port a
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -52,6 +52,10 @@ Welche Geräte sparen im Alltag wirklich messbar Strom? Ab wann rechnen sich die
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Warum steigen die Energiekosten trotz Sparbemühungen oft weiter?
 
 Viele Menschen in Deutschland gehen bereits bewusst mit Ressourcen um. Du schaltest das Licht aus oder wäschst bei niedrigen Temperaturen. Dennoch bleiben die **Energiekosten** oft stabil oder steigen sogar an. Das liegt häufig an der sogenannten Phantomlast.
@@ -121,6 +125,10 @@ Vermeide den Effekt des Over-Engineerings. Wer jedes kleinste Nachtlicht smart m
 Ein weiteres Risiko ist mangelnde Kompatibilität. Produkte von fünf Herstellern benötigen oft fünf verschiedene Apps. Das macht die Bedienung im Alltag zu umständlich. Setze lieber auf Standards wie Matter für eine zukunftssichere Lösung.
 
 Vernachlässige niemals die Sicherheit deiner Geräte. Billigprodukte ohne Updates sind oft ein Einfallstor für Hacker. Investiere in etablierte Marken mit langfristigem Support für ihre Hardware.
+
+![Gliederung des Beitrags: Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Modellrechnung: Smarte Thermostate vs. Manuelle Regelung
 
@@ -199,5 +207,9 @@ Achte auf Anbieter mit Ende-zu-Ende-Verschlüsselung. Serverstandorte in der EU 
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

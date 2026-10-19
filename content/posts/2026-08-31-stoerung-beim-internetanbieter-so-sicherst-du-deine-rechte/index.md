@@ -101,7 +101,7 @@ Für den schriftlichen Weg hat sich eine kurze Struktur bewährt. Sie passt in j
 
 * **Betreff:** Störung, Anschluss und Vertragsnummer, Datum
 * **Absatz eins:** Symptom und Beginn, mit Uhrzeit
-* **Absatz zwei:** was du selbst geprüft hast, mit Ergebnis
+* **Absatz zwei:** welche Prüfungen du durchgeführt hast, mit Ergebnis
 * **Absatz drei:** Vorgangsnummer aus dem Telefonat, falls vorhanden
 * **Absatz vier:** was du erwartest, etwa eine Bestätigung mit Zeitplan
 
@@ -218,3 +218,7 @@ Das ist ein Einzelfall mit strengen Voraussetzungen. Hol dafür eine Beratung, s
 👉 **Jetzt Tarif prüfen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: alle laufenden Kosten, Internet inklusive, in einer Zahl](../../werkzeuge/fixkosten-scanner/)

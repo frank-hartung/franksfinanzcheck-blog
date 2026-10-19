@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-01
-title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
+title: "Gaspreisgarantie: Was sie abdeckt und wie lange sie läuft"
 description: "Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche…"
 date: 2026-08-10T09:29:05Z
 draft: false
@@ -268,5 +268,9 @@ Die Garantie hält nur den Preis fest. Verbrauchst du mehr Gas, als dein Abschla
 ---
 
 👉 **Garantie und Gesamtpreis vergleichen:** [**→ Gastarife prüfen**](/go/gas/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
