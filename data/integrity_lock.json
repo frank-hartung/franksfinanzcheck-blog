@@ -1,9 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-19T18:28:06.790592+00:00",
-  "head": "d0e57b4",
-  "signed_at": "2026-10-19T18:21:38.586056+00:00",
-  "head": "383e2fa",
+  "signed_at": "2026-10-19T19:53:12.322903+00:00",
+  "head": "1089d1c",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -56,8 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "0cb8102131cf67a8afbfbd952d29cd89c211e4ea531fea7e85ff393d9a390520",
-  "files_sha256": "7eed8d05bd354f9542f9af33218b7955ab42a4fa00cd119599acd79295ee46d2",
+  "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
   "audit_start_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38",
   "audit": [
     {
@@ -484,125 +481,27 @@
     },
     {
       "date": "2026-10-19",
-      "art": "set-current",
-      "head": "d0e57b4",
-      "geaendert": [
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "d0e57b4",
-              "datum": "2026-10-19",
-              "betreff": "fix(betriebspflege): WF-E813/#809 dauerhaft heilen – Job-Beweis beim Auto-Close, Turnstile-Paar atomar, A1 in einem Griff"
-      "art": "heal",
-      "head": "383e2fa",
-      "geaendert": [
-        "layouts/_partials/affiliate_anchor_attrs.html",
-        "layouts/_partials/extend_footer.html",
-        "layouts/pillar/list.html",
-        "layouts/shortcodes/einspartabelle.html",
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/affiliate_anchor_attrs.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "383e2fa",
-              "datum": "2026-10-19",
-              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
-            },
-            {
-              "sha": "1021d45",
-              "datum": "2026-10-19",
-              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "383e2fa",
-              "datum": "2026-10-19",
-              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
-            },
-            {
-              "sha": "1021d45",
-              "datum": "2026-10-19",
-              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/list.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "383e2fa",
-              "datum": "2026-10-19",
-              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
-            },
-            {
-              "sha": "1021d45",
-              "datum": "2026-10-19",
-              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/shortcodes/einspartabelle.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "383e2fa",
-              "datum": "2026-10-19",
-              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
-            },
-            {
-              "sha": "1021d45",
-              "datum": "2026-10-19",
-              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "383e2fa",
-              "datum": "2026-10-19",
-              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
-            },
-            {
-              "sha": "1021d45",
-              "datum": "2026-10-19",
-              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
+      "art": "repair",
+      "head": "1089d1c",
+      "geaendert": [],
+      "quelle": {
+        "art": "bergung",
+        "beschreibung": "Bergung aus dem beschädigten Artefakt (11 lesbare Akteneinträge, Map deckt den Baum exakt)",
+        "geborgene_akteneintraege": 11
+      },
+      "beschaedigung": {
+        "zustand": "beschaedigt",
+        "groesse": 23456,
+        "offset": 19807,
+        "verdacht": "abbruch",
+        "detail": [
+          "JSON nicht lesbar: Expecting ',' delimiter: line 502 column 7 (char 19807)",
+          "Bruchstelle: Byte 19807 von 23456 (Zeile 502)",
+          "Die Datei endet AN der Bruchstelle – Muster: ein Schreibvorgang wurde abgebrochen (halbes Siegel)."
+        ]
+      },
       "prev_sha256": "1848c87159c8b0c3f931a2526e573e17a57dffec749c4546c375f75ce4fdbf3f",
-      "files_sha256": "0cb8102131cf67a8afbfbd952d29cd89c211e4ea531fea7e85ff393d9a390520"
-      "files_sha256": "7eed8d05bd354f9542f9af33218b7955ab42a4fa00cd119599acd79295ee46d2"
+      "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517"
     }
   ]
 }
