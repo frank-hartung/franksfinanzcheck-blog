@@ -2,11 +2,8 @@
 lastmod: 2026-10-19
 title: "Haus sicher schützen: Gebäude, Hausrat, Elementarschutz"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
-date: 2026-10-16T04:35:41Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-16T18:02:46Z
-cadence_grund: "Endredaktion: alle Gates grün – automatisch freigegeben (2026-10-17)"
+date: 2026-10-19T01:19:44Z
+draft: false
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]

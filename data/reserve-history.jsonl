@@ -15,3 +15,4 @@
 {"ts": "2026-10-16T08:34:03Z", "ready": 8, "target": 6, "pool": 8, "lauf": "38873132768", "versuch": "1", "klasse": "wachen", "blocker": [], "themen": 7}
 {"ts": "2026-10-17T08:08:14Z", "ready": 7, "target": 6, "pool": 8, "lauf": "39015488535", "versuch": "1", "klasse": "ok", "blocker": ["2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 6}
 {"ts": "2026-10-18T08:23:11Z", "ready": 7, "target": 6, "pool": 8, "lauf": "39110491344", "versuch": "1", "klasse": "ok", "blocker": ["2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 6}
+{"ts": "2026-10-19T09:20:19Z", "ready": 6, "target": 6, "pool": 7, "lauf": "39227877167", "versuch": "1", "klasse": "ok", "blocker": ["2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 5}

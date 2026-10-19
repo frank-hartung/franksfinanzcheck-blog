@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 7,
-  "pool_size": 8,
-  "generated_at": "2026-10-18T08:23:01Z",
+  "ready": 6,
+  "pool_size": 7,
+  "generated_at": "2026-10-19T09:20:10Z",
   "candidates": [
     {
       "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
       "ready": true,
       "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
       "flesch": 64.4,
-      "measured_at": "2026-10-18T08:17:05Z",
+      "measured_at": "2026-10-19T09:15:03Z",
       "score": 0.97,
       "parts": {
         "spelling": 0.9,
@@ -22,28 +22,11 @@
       }
     },
     {
-      "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
-      "ready": true,
-      "sha256": "29e3403612427a32d30b9827e7c34984bfa6b8f2bbb9e506cb050a727cfe47f9",
-      "flesch": 60.1,
-      "measured_at": "2026-10-18T08:18:06Z",
-      "score": 0.954,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-18T08:19:04Z",
+      "measured_at": "2026-10-19T09:16:04Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -60,7 +43,7 @@
       "ready": true,
       "sha256": "7bddbb1fadcd4de7b37615be2eee14f95f3b7c488ae120d22445b24a8a19010a",
       "flesch": 60.8,
-      "measured_at": "2026-10-18T08:20:03Z",
+      "measured_at": "2026-10-19T09:17:05Z",
       "score": 0.978,
       "parts": {
         "spelling": 0.9,
@@ -77,7 +60,7 @@
       "ready": true,
       "sha256": "18e0fe1fb6fd54664894925da3a3e1c4c62eddc4ee7e31228569ba4067cd5981",
       "flesch": 63.2,
-      "measured_at": "2026-10-18T08:21:04Z",
+      "measured_at": "2026-10-19T09:18:08Z",
       "score": 0.96,
       "parts": {
         "spelling": 0.8,
@@ -94,7 +77,7 @@
       "ready": true,
       "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
       "flesch": 71.5,
-      "measured_at": "2026-10-18T08:22:01Z",
+      "measured_at": "2026-10-19T09:19:08Z",
       "score": 0.97,
       "parts": {
         "spelling": 0.9,
@@ -111,7 +94,7 @@
       "ready": true,
       "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
       "flesch": 65.1,
-      "measured_at": "2026-10-18T08:22:58Z",
+      "measured_at": "2026-10-19T09:20:07Z",
       "score": 0.982,
       "parts": {
         "spelling": 0.96,
@@ -128,7 +111,7 @@
       "ready": false,
       "sha256": "2bf7901e36ab2f022da0f31ce3ad06edb8f534fc31dd41e3ade685f9c489816c",
       "flesch": 65.2,
-      "measured_at": "2026-10-18T08:23:01Z",
+      "measured_at": "2026-10-19T09:20:10Z",
       "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
       "details": [
         "RS1: kein „Das Wichtigste in Kürze“-Modul",
@@ -149,14 +132,14 @@
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "39110491344",
+    "run_id": "39227877167",
     "run_attempt": "1"
   },
   "geschont": [
     {
       "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
       "klasse": "heilbar",
-      "hits": 2,
+      "hits": 3,
       "heiler": [
         "redaktions_standard.py",
         "check_titles.py",

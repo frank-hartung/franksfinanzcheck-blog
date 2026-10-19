@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-18T23:20:13Z",
+  "generated_at": "2026-10-19T10:10:39Z",
   "modus": "kandidaten",
-  "commit": "141f39d853a9a0e2b23fae1399c1321b3bebd571",
+  "commit": "fa4f60019c16b341041e733ddb764f5e4c92c824",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "f386c598af8488fa06875ccf82bd12d759d29f38a1db7ccf421e1f438d3f4ffd",
@@ -36,6 +36,23 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
+      "sha256": "57067c232b9b20b92add78fac045f5f9417fb9f6514bda60e88316a28906690e",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
@@ -260,7 +277,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f2c7a3a7918d79603fbd4e57856ab1f63a5a53070908cc624a7b0914d63a0d52",
+      "sha256": "3ff38bfed0585c26b25634fa5583d00b31077ed41b6ca146cf76134d14ddf01f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "4c7c4b3a756f5b54ea6634277995516643ef7b2522a826bc7a2f9496c1c96a25",
@@ -1022,6 +1039,23 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+      "sha256": "8b61df1853b2b3d5271d7fb92e6bc132110c908589b35de1fde60480bde08eb5",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2027-01-05",
       "siegel_drift": "unverändert"
     }
   }

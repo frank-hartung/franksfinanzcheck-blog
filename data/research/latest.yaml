@@ -1,5 +1,5 @@
-generated_at: '2026-10-18T08:19:58Z'
-day: '2026-10-18'
+generated_at: '2026-10-19T09:17:53Z'
+day: '2026-10-19'
 mode: deterministic
 teams:
   trending:
@@ -238,58 +238,63 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 'Auslandskrankenversicherung für Familien: Was sie kosten darf'
-    pillar: mietwagen
+  - topic: Internet-Speed optimieren mit dem richtigen Router
+    pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    source: topics:Internet-Speed optimieren mit dem richtigen Router
     score: 0.55
     keywords:
-    - Auslandskrankenversicherung Familie
-    - Reisekrankenversicherung Kosten
-    - Familienreiseschutz
-  - topic: Die 50-30-20-Regel einfach erklärt
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Die 50-30-20-Regel einfach erklärt
-    score: 0.55
-    keywords: []
-  - topic: Die Vorteile einer Kreditkarten-Versicherung
+    - Internet-Speed
+    - Router
+    - Optimieren
+  - topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+      kündigen'
     pillar: versicherungen
     signal: niche_hook
-    source: topics:Die Vorteile einer Kreditkarten-Versicherung
+    source: 'topics:Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+      kündigen'
     score: 0.55
     keywords:
-    - Kreditkarten-Versicherung
-    - Reiseversicherung
-    - Kreditkarten-Schutz
-  - topic: 'Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
-    pillar: konto-karten
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - Unnötige Versicherungen kündigen
+    - Doppelversicherung vermeiden
+  - topic: Mietwagen-Verträge vor dem Urlaub checken
+    pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
+    source: topics:Mietwagen-Verträge vor dem Urlaub checken
     score: 0.55
     keywords:
-    - Girokonto Dispozins Vergleich
-    - Kontoführungsgebühren zurückfordern
-    - Kontowechsel Prämie
-    - Bestes Girokonto 2026
-  - topic: 'Energieeffizienz im Haushalt: 5 einfache Maßnahmen'
+    - Mietwagen
+    - Verträge
+    - Urlaub
+  - topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Private Unfallversicherung: Für wen sie sich wirklich lohnt'
+    score: 0.55
+    keywords:
+    - Unfallversicherung
+    - Private Unfallversicherung
+    - Absicherung
+  - topic: 'Reisekrankenversicherung: Wann sie sich wirklich lohnt'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Reisekrankenversicherung: Wann sie sich wirklich lohnt'
+    score: 0.55
+    keywords:
+    - Reisekrankenversicherung
+    - Auslandskrankenversicherung
+    - Reiseschutz
+  - topic: 'Smart Home: Diese Geräte sparen wirklich Strom'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Energieeffizienz im Haushalt: 5 einfache Maßnahmen'
+    source: 'topics:Smart Home: Diese Geräte sparen wirklich Strom'
     score: 0.55
     keywords:
-    - Energieeffizienz
-    - Haushalt
+    - Smart Home
     - Energie sparen
-  - topic: Energiekosten senken mit Smart-Home-Geräten
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Energiekosten senken mit Smart-Home-Geräten
-    score: 0.55
-    keywords:
-    - Smart-Home
-    - Energiekosten
-    - Strom sparen
+    - Smarte Steckdosen
 live_web:
   enabled: false
   findings: []
