@@ -301,7 +301,21 @@ def check_alts():
 
 
 def check_schema_and_meta():
-    pages = glob.glob(os.path.join(BASE, "posts", "*", "index.html"))
+    alle = glob.glob(os.path.join(BASE, "posts", "*", "index.html"))
+    # Weiterleitungsstubs (scripts/weiterleitungen.py, Marker ff-weiterleitung)
+    # sind keine Inhaltsseiten: noindex, nur Verweis auf die neue Adresse,
+    # ohne Beschreibung, Bild oder Article-Schema. Ihre Vollständigkeit prüft
+    # weiterleitungen.py --verify gegen data/weiterleitungen.yaml. Ohne diese
+    # Ausnahme meldete die Layout-Wache 114 Stubs als kritische Befunde
+    # (19.10.2026, layout-audit im PR #803).
+    pages, stubs = [], 0
+    for page in alle:
+        with open(page, encoding="utf-8", errors="ignore") as fh:
+            kopf = fh.read()
+        if re.search(r'<meta[^>]+name\s*=\s*["\']?ff-weiterleitung', kopf, re.I):
+            stubs += 1
+            continue
+        pages.append(page)
     no_schema, no_og, no_meta, no_h1 = [], [], [], []
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
@@ -319,7 +333,8 @@ def check_schema_and_meta():
     if no_schema:
         WARN.append(f"Schema Article fehlt auf {len(no_schema)} Seiten: {', '.join(no_schema[:6])}")
     else:
-        OK.append(f"Schema-JSON-LD (Article) auf allen {len(pages)} Artikel-Seiten.")
+        OK.append(f"Schema-JSON-LD (Article) auf allen {len(pages)} Artikel-Seiten "
+                  f"({stubs} Weiterleitungsstubs ausgenommen).")
     if no_og:
         WARN.append(f"og:image fehlt auf {len(no_og)} Seiten.")
     else:
