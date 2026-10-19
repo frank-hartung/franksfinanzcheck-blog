@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-18T11:59:39.543804+02:00",
+ "stand": "2026-10-19T13:22:15.381282+02:00",
  "domaenen": [
   {
    "domaene": "wikipedia.org",
@@ -47,7 +47,7 @@
    ]
   },
   {
-   "domaene": "finanz-echo.de",
+   "domaene": "twyler.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 4,
@@ -57,7 +57,7 @@
    ]
   },
   {
-   "domaene": "twyler.de",
+   "domaene": "finanz-echo.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 5,
@@ -87,7 +87,7 @@
    ]
   },
   {
-   "domaene": "geldfinanzen24.de",
+   "domaene": "nurgeld.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 8,
@@ -97,7 +97,7 @@
    ]
   },
   {
-   "domaene": "nurgeld.de",
+   "domaene": "genialetricks.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 9,
@@ -107,7 +107,7 @@
    ]
   },
   {
-   "domaene": "geldkiste.blog",
+   "domaene": "sparschweinclub.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 10,

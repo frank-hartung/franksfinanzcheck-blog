@@ -857,6 +857,26 @@ history:
     #Girokonto #Konto #Tagesgeld #Zinsen'
   ref: '117462425507126261'
   ai: false
+- posted_at: '2026-10-19T12:54:27.493723+02:00'
+  channel: mastodon
+  slug: 2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden
+  title: 'Zählerstand ablesen und melden: Schätzwerte vermeiden'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117467203191745299
+  ok: true
+  text: '💶 Zählerstand ablesen und melden: Schätzwerte vermeiden
+
+
+    Zählerstände werden zum Ende des Abrechnungszeitraums abgelesen und dem Versorger
+    gemeldet.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gasrechnung #Heizkosten #StromkostenSenken #ZaehlerstandAblesen'
+  ref: '117467203191745299'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -882,4 +902,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-18T23:34:38.599111+02:00'
+updated_at: '2026-10-19T12:54:35.442982+02:00'

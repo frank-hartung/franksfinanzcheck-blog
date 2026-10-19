@@ -1,25 +1,25 @@
 {
-  "generated": "2026-10-12",
+  "generated": "2026-10-19",
   "verdict": "GREEN",
   "build_measured": true,
   "strict_build": true,
   "static": {
-    "total_img_bytes": 47888727,
-    "count_img": 1765,
-    "count_covers": 1741,
-    "worst_cover_bytes": 138530
+    "total_img_bytes": 54071174,
+    "count_img": 2034,
+    "count_covers": 2010,
+    "worst_cover_bytes": 130973
   },
   "public": {
-    "html_files": 115,
+    "html_files": 137,
     "js_files": 15,
     "css_files": 0,
-    "js_bytes": 495762,
+    "js_bytes": 500993,
     "css_bytes": 0,
-    "html_bytes": 28614826,
+    "html_bytes": 36028797,
     "inline_styles": 0,
     "blocking_js": 0,
-    "inline_js": 426,
-    "structured_data_scripts": 214,
+    "inline_js": 404,
+    "structured_data_scripts": 206,
     "inline_scripts_plain": 0,
     "img_nosize": 0
   },

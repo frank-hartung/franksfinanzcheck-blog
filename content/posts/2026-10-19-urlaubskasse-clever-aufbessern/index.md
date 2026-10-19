@@ -23,6 +23,8 @@ cover:
 
 Du planst den nächsten Sommerurlaub, hast das Reiseziel im Kopf und willst die Urlaubskasse aufbessern. Oft bleibt das Geld für den Mietwagen ein unbemerktes Loch im Reisebudget. Dieser Ratgeber zeigt dir, wie du den Mietwagen clever nutzt, versteckte Kosten eliminierst und so mehr Geld für Sonne, Strand und Erlebnisse behältst.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Überblick: Mietwagen und dein Urlaubskassen‑Plan  
 
 Ein Mietwagen ist häufig das teuerste Einzelposten nach Flug und Unterkunft. Wenn du die Kosten transparent machst, lässt sich das Budget besser steuern. Die folgende Tabelle fasst die typischen Kostenbestandteile zusammen und gibt dir einen Überblick, welche Posten du prüfen solltest.  
