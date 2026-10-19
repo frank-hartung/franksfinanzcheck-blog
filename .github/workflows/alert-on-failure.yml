@@ -832,6 +832,7 @@ jobs:
 
           # JOBBEWEIS DIESES LAUFS (WF-E813 / #809): „Behoben“ braucht den
           # Job, der rot war – nicht irgendeinen grünen Lauf. Die Job-Liste
+<<<<<<< HEAD
           # wird nur geholt, wenn eine Meldung überhaupt Jobs nennt
           # (scripts/alert_resolve_gate.py --nennt-jobs); Meldungen der
           # Übergangsform ohne Job-Nennung behalten ihren bisherigen
@@ -839,11 +840,24 @@ jobs:
           # Abschlussweg). Scheitert die Abfrage, lautet die Entscheidung
           # fail-safe: offen, nie „Behoben“ ohne Beweis.
           LAUF_JOBS=""
+=======
+          # wird EINMAL geholt und pro Meldung gegen deren Nennungen
+          # geprüft (scripts/alert_resolve_gate.py). Scheitert die Abfrage,
+          # entsteht ein Werkzeugfehler des Gates – und der lautet
+          # fail-safe: offen, nie „Behoben“ ohne Beweis.
+          if ! gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs" \
+               --paginate --jq '.jobs[] | {name, conclusion}' \
+               | jq -s '{jobs: .}' > /tmp/lauf-jobs.json; then
+            echo '{ "jobs": [] }' > /tmp/lauf-jobs.json
+            echo "::notice::Job-Liste des Laufs nicht abrufbar – ohne Beweis bleibt jede Meldung offen."
+          fi
+>>>>>>> origin/main
 
           for n in $NUMMERN; do
             jq -r --argjson nr "$n" \
               '.[] | select(.number == $nr) | .body // ""' /tmp/offene.json \
               > "/tmp/meldung-${n}.md"
+<<<<<<< HEAD
             if ! python3 scripts/alert_resolve_gate.py \
                  --body "/tmp/meldung-${n}.md" --nennt-jobs; then
               gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
@@ -862,6 +876,8 @@ jobs:
                 echo "::notice::Job-Liste des Laufs nicht abrufbar – ohne Beweis bleibt jede Meldung offen."
               fi
             fi
+=======
+>>>>>>> origin/main
             ENTSCHEID="$(python3 scripts/alert_resolve_gate.py \
               --body "/tmp/meldung-${n}.md" --jobs /tmp/lauf-jobs.json --json \
               || echo '{"schliessen": false, "grund": "Entscheidung nicht möglich (Werkzeugfehler) – ohne Beweis kein Behoben."}')"
