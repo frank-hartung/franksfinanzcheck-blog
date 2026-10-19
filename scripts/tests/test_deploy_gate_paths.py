@@ -74,7 +74,7 @@ class DeployGatePfadTestCase(unittest.TestCase):
                      "data/revenue_funnel_history.jsonl",
                      "data/cwv_history.jsonl",
                      "data/cwv_state.json",
-                     "data/umami_clicks.meta.json",
+                     "data/klicks_eigen.meta.json",
                      "data/governance_status.json",
                      "data/governance_history.jsonl",
                      "data/alerting_heartbeat.json",

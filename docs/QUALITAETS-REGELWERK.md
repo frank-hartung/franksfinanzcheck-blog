@@ -1038,8 +1038,8 @@ python3 scripts/sprachglatt.py --fix
       integrity_guard.py als SHA-256-Siegelschloss ueber 16 Kerndateien
       (Kritisch=fest stopft, Fest=meldet Sichtung), Deploy-Preflight gegen
       Merge-Marker erweitert (nie wieder roter Build wegen '<'), blog_doctor
-      auf 13 Wachen inkl. Lock. ANMERKUNG: Umami bleibt deaktiviert bis die
-      Website-ID eingetragen wird (Frank-Handlung, siehe docs/ANLEITUNG-UMAMI-ANALYTICS.md).
+      auf 13 Wachen inkl. Lock. (Die damals offene Reichweitenmessung wurde
+      am 11.10.2026 ersatzlos entfernt.)
 - **12.08.2026 (4):** Brand-Chip auf Covern (Frank: „Markenname nicht
   scharf genug abgebildet"): gold-gerahmter Chip, weisser Text + goldener
   „check"-Ausweis (44 px Inter Bold), Punkte nie mehr in der Textzone.

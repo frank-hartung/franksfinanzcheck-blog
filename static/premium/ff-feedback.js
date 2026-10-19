@@ -8,8 +8,8 @@
  *   POST {endpoint} mit { slug, hilfreich: 'ja'|'nein' } – der eigene
  *   Newsletter-Worker (abos.franksfinanzcheck.de) zählt NUR aggregiert
  *   je Slug hoch (feedback:<slug> -> { ja, nein }). Keine Cookies, kein
- *   localStorage, kein Umami (Feedback soll unabhängig von der
- *   Analytics-Einwilligung funktionieren – Datenschutz by design).
+ *   localStorage, kein Tracking-Dienst (nur der eigene Worker –
+ *   Datenschutz by design).
  *
  * FEHLERVERTRAG:
  *   * Endpoint nicht erreichbar (z. B. Worker noch nicht neu deployt):

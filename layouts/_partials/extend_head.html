@@ -109,7 +109,7 @@
        Runbook: docs/ANLEITUNG-ROBUSTHEIT.md · Wache: scripts/robustheits_gate.py */ -}}
 <script>
 (function () {
-  /* Altlast Einwilligungs-Cookie (Umami/Analyse-Banner entfernt, 11.10.2026): nur aufräumen. */
+  /* Altlast Einwilligungs-Cookie (Analyse-Banner und Reichweitenmessung entfernt, 11.10.2026): nur aufräumen. */
   try { document.cookie = 'ff_analytics_consent_v2=;max-age=0;path=/;SameSite=Lax'; } catch (e) {}
 })();
 
@@ -450,7 +450,7 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- /* ---------- Service Worker (Analyse-Banner und Umami entfernt, 11.10.2026) ---------- */ -}}
+{{- /* ---------- Service Worker (Analyse-Banner und Reichweitenmessung entfernt, 11.10.2026) ---------- */ -}}
 {{- /* HEAD-DOM-BUDGET (Issue #338, 21.09.2026): Beide Blöcke stehen jetzt am
        Ende des <body> – layouts/_partials/deferred_scripts.html, eingebunden
        von footer.html. Sie waren die letzten zwei direkten <script>-Kinder im

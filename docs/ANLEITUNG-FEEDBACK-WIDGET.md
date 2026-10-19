@@ -14,8 +14,7 @@
 Finanztip zeigt unter jedem Ratgeber „War dieser Ratgeber hilfreich?"
 mit öffentlicher Quote („81 % fanden diesen Ratgeber hilfreich") –
 Leserqualität wird am Nutzerverhalten gespiegelt. Franks Variante
-misst dasselbe, aber **ohne Tracking**: kein Umami (das ist
-consent-geprüft und würde Feedback ohne Einwilligung verlieren),
+misst dasselbe, aber **ohne Tracking**: kein Tracking-Dienst,
 keine Cookies, kein Fingerprinting.
 
 ## Architektur

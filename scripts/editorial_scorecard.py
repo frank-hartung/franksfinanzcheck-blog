@@ -44,7 +44,8 @@ _DECAY_Q = DATA("decay_queue.json")
 _CWV_M = DATA("cwv_manifest.json")
 _SECRETS_S = DATA("secrets_state.json")
 _CLICK_S = DATA("click_stats.json")
-_CLICK_META = DATA("umami_clicks.meta.json")
+_CLICK_META = DATA("klicks_eigen.meta.json")
+_KLICKMESSUNG = DATA("klickmessung.yaml")
 _FUNNEL = DATA("revenue_funnel.json")
 _HISTORY = DATA("scorecard_history.jsonl")
 _SECRETS_REPORT = os.path.join(BLOG_DIR, "SECRETS-REPORT.md")
@@ -66,16 +67,28 @@ except Exception:  # pragma: no cover – Fallback hält die Scorecard lauffähi
 STALE_AFTER_DAYS = 9
 
 
-def _umami_api_import_enabled():
-    path = os.path.join(BLOG_DIR, "data", "monetization.yaml")
+def _klickmessung_aktiv(pfad=None):
+    """Betriebsschalter des eigenen Klickzählers (`data/klickmessung.yaml`).
+
+    Dieselbe Regel wie in revenue_funnel.py, click_chain_guard.py und
+    affiliate_shield.py: fehlt die Datei oder ist sie kaputt, gilt der Zähler
+    als AUS – und dann heißt „keine Klicks“ nicht „niemand klickt“, sondern
+    „nicht gemessen“."""
     try:
-        with open(path, encoding="utf-8") as f:
-            txt = f.read()
-        if re.search(r"^umami_api_import_enabled:\s*false\s*$", txt, re.M):
-            return False
+        with open(pfad or _KLICKMESSUNG, encoding="utf-8") as f:
+            return re.search(r"(?m)^aktiv:\s*true\s*$", f.read()) is not None
     except OSError:
-        pass
-    return True
+        return False
+
+
+def _klick_pipeline(meta, aktiv=None):
+    """Zustand der Klick-Pipeline: aus | ok | nicht_konfiguriert | fehler | nie.
+
+    Ein ausgeschalteter Zähler ist „aus“ – auch wenn noch eine alte Meta
+    herumliegt (ausgeschaltet heißt nicht gemessen)."""
+    if not (_klickmessung_aktiv() if aktiv is None else aktiv):
+        return "aus"
+    return (meta or {}).get("status") or "nie"
 
 
 def _read_text(path):
@@ -435,9 +448,9 @@ def collect():
         "click_articles": len(click_articles),
         "total_clicks": total_clicks,
         "top_article": top_article,
-        "clicks_pipeline": clicks_meta.get("status") or ("disabled" if not _umami_api_import_enabled() else "nie"),
-        "clicks_reason": clicks_meta.get("reason") or "",
-        "clicks_stand": clicks_meta.get("written") or clicks_meta.get("attempted") or "nie",
+        "clicks_pipeline": _klick_pipeline(clicks_meta),
+        "clicks_reason": clicks_meta.get("grund") or "",
+        "clicks_stand": str(clicks_meta.get("stand") or "nie")[:10],
     }
 
 
@@ -535,13 +548,13 @@ def _render_datalage(d):
          f"{d['casing_hist'] or 0} Tage Historie"
          if d.get("casing") is not None else "Bericht noch nicht erzeugt "
          "(`casing_guard.py --json`)"),
-        ("Affiliate-Klicks", "data/umami_clicks.json (via scripts/umami_clicks.py)",
+        ("Affiliate-Klicks", "data/klicks_eigen.json (via scripts/klick_import.py)",
          d.get("clicks_stand", "nie"),
-         {"ok": "automatisch befüllt",
-          "skipped": "Pipeline wartet auf Secret `UMAMI_API_TOKEN`",
-          "disabled": "Umami Free aktiv (Auswertung im Umami-Dashboard)"}.get(
-              d.get("clicks_pipeline"),
-              "Umami Free aktiv (Auswertung im Umami-Dashboard)" if not _umami_api_import_enabled() else "Import nie gelaufen")),
+         {"ok": "automatisch befüllt (eigener Klickzähler)",
+          "aus": "Klickzähler aus (`aktiv: false` in `data/klickmessung.yaml`) – nicht gemessen",
+          "nicht_konfiguriert": "Zähler an, Import aber nicht konfiguriert (Zugang/database_id fehlt)",
+          "fehler": "letzter Import fehlgeschlagen"}.get(
+              d.get("clicks_pipeline"), "Import nie gelaufen")),
         _funnel_datalage(),
     ]
     out = ["| Kennzahl | Quelle | Stand | Bewertung |", "|---|---|---|---|"]
@@ -754,10 +767,10 @@ def render(d, score):
         recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – Freigabe "
                     "prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). "
                     "Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.")
-    if d.get("clicks_pipeline") in (None, "nie", "skipped") and _umami_api_import_enabled():
-        recs.append("Umsatz-Daten fehlen, weil die Pipeline nie gefüllt wurde – nicht, "
-                    "weil niemand klickt: `python3 scripts/umami_clicks.py --fetch` "
-                    "(Secret `UMAMI_API_TOKEN`; Website-ID steht schon in `hugo.toml`).")
+    if d.get("clicks_pipeline") in ("nie", "nicht_konfiguriert", "fehler"):
+        recs.append("Klick-Daten fehlen, obwohl der Klickzähler eingeschaltet ist – nicht, "
+                    "weil niemand klickt: `python3 scripts/klick_import.py` "
+                    "(Zugang und database_id: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md).")
     if not recs:
         recs.append("Keine akuten Handlungsfelder – Frequenz halten (Mo/Mi/Fr), "
                     "Decay & CWV weiter beobachten.")
@@ -770,11 +783,11 @@ def render(d, score):
 def _render_clicks(d):
     """Zeigt den Umsatz-Hebel (Affiliate-Klicks) kompakt an."""
     if d.get("click_articles", 0) == 0:
-        if not _umami_api_import_enabled():
-            return "_Umami Free aktiv – Klicks werden im Browser erfasst und können im " \
-                   "Umami-Dashboard eingesehen werden (kein API-Import)._"
-        return "_Noch keine Klick-Daten – Umami-Export nach `data/umami_clicks.json` legen, " \
-               "dann `scripts/click_attribution.py` ausführen._"
+        if d.get("clicks_pipeline") == "aus":
+            return "_Klickzähler aus (`data/klickmessung.yaml`) – Klicks werden nicht " \
+                   "gemessen; „0“ heißt hier unbekannt, nicht „niemand klickt“._"
+        return "_Noch keine Klick-Daten – `scripts/klick_import.py` ausführen, " \
+               "dann `scripts/click_attribution.py`._"
     top = d.get("top_article") or "-"
     top = top.rsplit("/", 2)[-2] if top else "-"
     return (f"- **{d['total_clicks']}** Affiliate-Klicks über **{d['click_articles']}** Artikel.\n"
@@ -797,6 +810,29 @@ def _selftest():
     # _ampel Grenzen
     if _ampel(90) != "GREEN" or _ampel(75) != "AMBER" or _ampel(50) != "RED":
         failures.append("Ampel-Grenzen")
+    # --- Klick-Pipeline: ausgeschaltet ≠ nicht gemessen-Panne ≠ gemessen
+    for meta, aktiv, soll in (({}, False, "aus"),
+                              ({"status": "ok"}, False, "aus"),     # alte Meta zählt nicht
+                              ({}, True, "nie"),
+                              ({"status": "ok"}, True, "ok"),
+                              ({"status": "nicht_konfiguriert"}, True, "nicht_konfiguriert"),
+                              ({"status": "fehler"}, True, "fehler"),
+                              (None, True, "nie")):
+        if _klick_pipeline(meta, aktiv=aktiv) != soll:
+            failures.append(f"_klick_pipeline({meta!r}, aktiv={aktiv}) = "
+                            f"{_klick_pipeline(meta, aktiv=aktiv)!r}, erwartet {soll!r}")
+    import tempfile
+    with tempfile.TemporaryDirectory() as _td:
+        _p = os.path.join(_td, "klickmessung.yaml")
+        for _t, _w in (("aktiv: true\n", True), ("aktiv: false\n", False), ("", False)):
+            with open(_p, "w", encoding="utf-8") as _fh:
+                _fh.write(_t)
+            if _klickmessung_aktiv(_p) is not _w:
+                failures.append(f"_klickmessung_aktiv({_t!r}) ≠ {_w}")
+        if _klickmessung_aktiv(os.path.join(_td, "fehlt.yaml")) is not False:
+            failures.append("fehlende Schalter-Datei muss AUS heißen")
+    if "nicht gemessen" not in _render_clicks({"click_articles": 0, "clicks_pipeline": "aus"}):
+        failures.append("ausgeschalteter Zähler wird als „0 Klicks“ statt „nicht gemessen“ dargestellt")
     # --- _age_days: tolerierend, nie ratend
     ref = datetime.date(2026, 9, 7)
     if _age_days("2026-09-01", ref) != 6:

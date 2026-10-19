@@ -1,31 +1,31 @@
 #!/usr/bin/env python3
-"""Regressionstest: manueller Offline-Messimport → Trichter (10.10.2026).
+"""Regressionstest: manueller Provisions-Import → Trichter.
 
-Die Messkette hat zwei Brücken (Umami-API, manuelle Messstand-Datei) und eine
-Provisions-Tabelle (Monatssummen aus den Partnerabrechnungen).
-Der Free-Plan von Umami lässt die API-Brücke dauerhaft ausfallen – ohne die
-manuelle Brücke meldete `data/revenue_funnel.json` seit Bestehen nur `null`
-und die Redaktion optimierte gegen eine Geisterzahl. Diese Fälle sind hier
-dauerhaft verankert:
+Die Provision ist die einzige Zahl der Messkette, die kein Automat liefert: Sie
+steht in den Abrechnungen der Partner. Ohne den Import meldete
+`data/revenue_funnel.json` seit Bestehen nur `null` und die Redaktion
+optimierte gegen eine Geisterzahl. Diese Fälle sind hier dauerhaft verankert:
 
-  1. leer ≠ 0 – fehlt die Messstand-Datei, darf nirgends eine Null stehen.
-  2. Herkunft – jede Meta-Datei muss `import: offline` + Dateinamen tragen,
-     sonst ist nicht mehr unterscheidbar, ob die API oder ein Mensch gemessen hat.
-  3. Datenschutz – UTM-Splitting wird zusammengeführt, IP-/Mail-Zeilen fallen
-     raus (Repo ist öffentlich).
-  4. replace vs. merge – Dashboard-Export ersetzt, Teilimport summiert.
-  5. Provisions-Tabelle – Monatsaggregate werden übernommen (einzige Wahrheit
+  1. leer ≠ 0 – fehlt die Tabelle (oder hat sie nur die Kopfzeile), darf
+     nirgends eine Null stehen und nichts geschrieben werden.
+  2. Herkunft – die Meta-Datei trägt Stand, Status und Zahl der Monate, sonst
+     ist nicht mehr nachvollziehbar, woher die Zahlen kommen.
+  3. Datenschutz – ins öffentliche Aggregat gehören nur Summen je Monat und
+     Partner: keine Abrechnungsnummern, keine Notizen.
+  4. Provisions-Tabelle – Monatsaggregate werden übernommen (einzige Wahrheit
      für Provision), und sie werden keinem Artikel zugeschrieben.
-  6. Misch-Stern – Raten aus Monats-Sicht müssen im Report als solche
-     gekennzeichnet sein (sonst liest jemand 176 €/100 Besuche wie eine Woche).
+  5. Misch-Stern – Raten aus Monats-Sicht müssen im Report als solche
+     gekennzeichnet sein (sonst liest jemand eine Monatsrate wie eine Woche).
+  6. Abwesenheit – der Import kennt keinen Messstand-/Dashboard-Export mehr;
+     die Dashboard-Export-Brücke ist entfernt und kommt nicht zurück
+     (fremdmessung_sperre.py).
 """
 from __future__ import annotations
 
+import datetime
 import importlib.util
 import json
-import datetime
 import os
-import re
 import shutil
 import sys
 import tempfile
@@ -49,10 +49,6 @@ rf = _load("revenue_funnel_regress", os.path.join(SCRIPTS, "revenue_funnel.py"))
 HEUTE = datetime.date.today()
 
 
-def tag(tage_vorher=0):
-    return (HEUTE - datetime.timedelta(days=tage_vorher)).isoformat()
-
-
 def monat(rueckwaerts=0):
     """JJJJ-MM `rueckwaerts` Monate vor dem aktuellen Monat – Fixtures dürfen
     nie auf einen Kalender geheftet sein (scripts/selftest_clock.py)."""
@@ -60,174 +56,90 @@ def monat(rueckwaerts=0):
     return f"{m // 12:04d}-{m % 12 + 1:02d}"
 
 
-IPV4 = re.compile(r"\A\d{1,3}(?:\.\d{1,3}){3}\Z")   # Netzadresse statt Seitenpfad
-
 MONAT_A, MONAT_B = monat(2), monat(1)          # zwei aufeinanderfolgende Monate
-FENSTER_ANFANG = tag(90)                        # 90-Tage-Fenster endet heute
-
-
-MESSSTAND = {
-    # Mitlaufendes Fenster – siehe `monat()`/`tag()` oben: Eine Fixture mit
-    # festen Kalenderdaten („2026-07-12"/„2026-10-10") wäre ab dem Folgetag
-    # falsch. Genau dieser Doppelblock stand am 10.10.2026 unvollständig im
-    # Bestand und machte die Datei syntaktisch unlesbar (Reparatur im Zuge
-    # von Code-Scanning-Alert #83: jede fail-closed Wache bricht daran ab).
-    "window": {"start": FENSTER_ANFANG, "ende": HEUTE.isoformat(), "tage": 90},
-    "totals": {"aufrufe": 412, "besuche": 268},
-    "views": [
-        {"pfad": "/posts/x/", "aufrufe": 96, "besuche": 61},
-        {"pfad": "/posts/x/?utm_source=newsletter", "aufrufe": 14, "besuche": 9},
-        {"pfad": "/pillar/strom-sparen/", "aufrufe": 88, "besuche": 57},
-        {"pfad": "frank@example.com", "aufrufe": 999, "besuche": 999},
-        {"pfad": "10.0.0.7", "aufrufe": 999, "besuche": 999},
-    ],
-    "klicks": [{"event": "affiliate_click", "slug": "gas",
-                "article": "posts/x/index.md", "pillar": "strom-sparen", "zahl": 11}],
-    "ctas": [{"event": "cta_click", "slug": "home-strom", "article": "home", "zahl": 7}],
-}
+KOPF = "monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n"
 
 
 class Sandbox(unittest.TestCase):
     """Import in eine Wegwerf-Kopie der Datenpfade (echter Repo-Bestand bleibt).
 
-    `offline_import.import_messstand()` nimmt `ziele` + `provisionen` als
+    `offline_import.import_provisionen()` nimmt `ziele` + `provisionen` als
     Überschreibung – genau das nutzen die Tests. So bleibt der echte
-    Repo-Bestand (data/umami_*.json, data/provisionen/) unberührt, und die
-    Tests sind in jeder Umgebung gleich (kein Abhängig-vom-Zufallsbestand).
+    Repo-Bestand (data/provisionen/, data/provisionen_aggregat.json) unberührt,
+    und die Tests sind in jeder Umgebung gleich.
     """
 
     def setUp(self):
         self.td = tempfile.mkdtemp(prefix="offline-import-")
         d = lambda n: os.path.join(self.td, n)  # noqa: E731
-        self.ziele = {"views": d("views.json"), "views_meta": d("views.meta.json"),
-                      "clicks": d("clicks.json"), "clicks_meta": d("clicks.meta.json"),
-                      "ctas": d("ctas.json"), "ctas_meta": d("ctas.meta.json"),
-                      "provisionen_agg": d("provisionen_aggregat.json"),
+        self.ziele = {"provisionen_agg": d("provisionen_aggregat.json"),
                       "offline_meta": d("offline_import.meta.json")}
         self.prov = d("provisionen.csv")
-        self.datei = d("messstand.json")
-        with open(self.datei, "w", encoding="utf-8") as fh:
-            json.dump(MESSSTAND, fh, ensure_ascii=False)
 
     def tearDown(self):
         shutil.rmtree(self.td, ignore_errors=True)
 
+    def tabelle(self, *zeilen):
+        with open(self.prov, "w", encoding="utf-8") as fh:
+            fh.write(KOPF)
+            for z in zeilen:
+                fh.write(z + "\n")
+
     def imp(self, **kw):
-        kw.setdefault("datei", self.datei)
         kw.setdefault("provisionen", self.prov)
         kw.setdefault("ziele", self.ziele)
-        return oi.import_messstand(**kw)
+        return oi.import_provisionen(**kw)
 
     def read(self, key):
         with open(self.ziele[key], encoding="utf-8") as fh:
             return json.load(fh)
 
-    # ------------------------------------------------------------- 1 + 2
-    def test_leere_quelle_erfindet_nichts(self):
-        res = self.imp(datei=os.path.join(self.td, "fehlt.json"))
+    # ------------------------------------------------------------- 1
+    def test_fehlende_tabelle_erfindet_nichts(self):
+        res = self.imp()
         self.assertEqual(res["status"], "leer")
         for p in self.ziele.values():
-            self.assertFalse(os.path.exists(p), f"{p} wurde trotz leerer Quelle geschrieben")
+            self.assertFalse(os.path.exists(p), f"{p} wurde trotz fehlender Tabelle geschrieben")
 
-    def test_leere_datei_ist_keine_null(self):
-        leer = os.path.join(self.td, "leer.json")
-        with open(leer, "w", encoding="utf-8") as fh:
-            fh.write("   \n")
-        self.assertEqual(self.imp(datei=leer)["status"], "leer")
+    def test_tabelle_nur_mit_kopfzeile_ist_keine_null(self):
+        self.tabelle()
+        self.assertEqual(self.imp()["status"], "leer")
+        for p in self.ziele.values():
+            self.assertFalse(os.path.exists(p))
 
-    def test_meta_traegt_herkunft_ohne_api_meta_anzufassen(self):
+    def test_kaputte_tabelle_crashed_nicht(self):
+        with open(self.prov, "w", encoding="utf-8") as fh:
+            fh.write("das,ist\nkein,schema\n")
+        self.assertEqual(self.imp()["status"], "leer")
+        with open(self.prov, "wb") as fh:
+            fh.write(b"\xff\xfe\x00 kein utf-8")
+        self.assertEqual(self.imp()["status"], "leer")
+
+    # ------------------------------------------------------------- 2
+    def test_meta_traegt_herkunft(self):
+        self.tabelle(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},")
         self.imp()
         meta = self.read("offline_meta")
         self.assertEqual(meta["status"], "ok")
-        self.assertEqual(meta["modus"], "ueberschreiben")
-        self.assertTrue(meta["datei"].endswith("messstand.json"))
-        self.assertEqual(meta["days"], 90)
-        self.assertEqual(meta["window_start"], FENSTER_ANFANG)
-        self.assertEqual(len(meta["written_files"]), 3)
-        # Die Meta der API-Skripte gehört denen allein – sie darf hier nicht
-        # entstehen, sonst verliert die Kette ihr Gedächtnis (falscher Alarm
-        # „Import zu alt“, obwohl der API-Schritt nie gelaufen ist).
-        self.assertFalse(os.path.exists(self.ziele["views_meta"]))
-        self.assertFalse(os.path.exists(self.ziele["clicks_meta"]))
+        self.assertEqual(meta["written"], HEUTE.isoformat())
+        self.assertEqual(meta["provisionen_monate"], 1)
+        self.assertEqual(meta["letzter_monat"], MONAT_B)
+        self.assertEqual(len(meta["written_files"]), 1)
 
     # ------------------------------------------------------------- 3
-    def test_utm_wird_nicht_zwei_seiten_und_datenmuell_faellt_raus(self):
+    def test_aggregat_enthaelt_keine_abrechnungsdetails(self):
+        self.tabelle(f"{MONAT_B},CHECK24,3,1,49.50,GEHEIME-REF-4711,Notiz mit Details")
         self.imp()
-        views = self.read("views")
-        pfade = [p["path"] for p in views["pages"]]
-        self.assertEqual(pfade.count("/posts/x/"), 1, "UTM-Variante spaltet die Seite")
-        x = next(p for p in views["pages"] if p["path"] == "/posts/x/")
-        self.assertEqual(x["views"], 110)
-        self.assertEqual(x["visits"], 70)
-        # Datenschutz: Geprüft wird die EIGENSCHAFT der Zeile (Personenbezug,
-        # Netzadresse), nicht das Vorkommen einer Beispiel-Domain. Die frühere
-        # Fassung suchte `"example.com" in p` – eine unvollständige
-        # URL-Substring-Prüfung (Code-Scanning-Alert #83) und obendrein blind
-        # für jede andere Mail-Domain im Messstand.
-        verseucht = [p for p in pfade if "@" in p or IPV4.match(p.strip("/"))]
-        self.assertEqual(verseucht, [],
-                         "personenbezogene/Netz-Zeilen sind im Repo gelandet")
-
-    def test_klicks_aggregieren_und_ctas_seit_trennt_sich(self):
-        self.imp()
-        clicks = self.read("clicks")
-        ctas = self.read("ctas")
-        self.assertEqual(sum(c["count"] for c in clicks), 11)
-        self.assertEqual(sum(c["count"] for c in ctas), 7)
-        self.assertTrue(all(c["event"] == "affiliate_click" for c in clicks))
+        roh = json.dumps(self.read("provisionen_agg"))
+        for verboten in ("GEHEIME-REF-4711", "Notiz mit Details", "abrechnung_ref"):
+            self.assertNotIn(verboten, roh, f"{verboten} gehört nicht ins öffentliche Aggregat")
 
     # ------------------------------------------------------------- 4
-    def test_eigener_bestand_ersetzt_teilimport_summiert(self):
-        self.imp()
-        teil = os.path.join(self.td, "teil.json")
-        json.dump({"views": [{"pfad": "/posts/y/", "aufrufe": 5, "besuche": 4}],
-                   "totals": {"aufrufe": 5, "besuche": 4}},
-                  open(teil, "w", encoding="utf-8"))
-        self.imp(datei=teil)
-        views = self.read("views")
-        self.assertEqual([p["path"] for p in views["pages"]], ["/posts/y/"],
-                         "eigener Vorgänger-Bestand muss ersetzt werden")
-        self.imp(ueberschreiben=False)
-        views = self.read("views")
-        pfade = {p["path"]: p["views"] for p in views["pages"]}
-        self.assertEqual(pfade["/posts/y/"], 5, "merge darf bestehende Seiten löschen")
-        self.assertEqual(pfade["/posts/x/"], 110)
-        self.assertEqual(views["totals"]["pageviews"], 417, "merge muss totals summieren")
-
-    def test_api_bestand_bleibt_stehen(self):
-        """Die manuelle Brücke darf einen frischen API-Lauf nie löschen."""
-        with open(self.ziele["views_meta"], "w", encoding="utf-8") as fh:
-            json.dump({"status": "ok", "written": str(rf.TODAY)}, fh)
-        with open(self.ziele["views"], "w", encoding="utf-8") as fh:
-            json.dump({"totals": {"pageviews": 500, "visits": 300},
-                       "pages": [{"path": "/posts/api-seite/",
-                                   "views": 500, "visits": 300}]}, fh)
-        self.imp()
-        views = self.read("views")
-        pfade = {p["path"]: p["views"] for p in views["pages"]}
-        self.assertEqual(pfade.get("/posts/api-seite/"), 500,
-                         "API-Zeile wurde von der manuellen Datei überschrieben")
-        self.assertEqual(pfade.get("/posts/x/"), 110)
-
-    def test_unbekanntes_format_crashed_nicht(self):
-        kaputt = os.path.join(self.td, "kaputt.json")
-        with open(kaputt, "w", encoding="utf-8") as fh:
-            fh.write('{"views": [1, null, "text"]}')
-        self.assertEqual(self.imp(datei=kaputt)["status"], "leer")
-        schief = os.path.join(self.td, "schief.csv")
-        with open(schief, "w", encoding="utf-8") as fh:
-            fh.write("url,pageViews\n/posts/a/,7\n")
-        res = self.imp(datei=schief)
-        self.assertEqual(res["seiten"], 1)
-
-    # ------------------------------------------------------------- 5
     def test_provisionstabelle_aggregiert_nach_monat_und_partner(self):
-        with open(self.prov, "w", encoding="utf-8") as fh:
-            fh.write("monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n")
-            fh.write(f"{MONAT_A},CHECK24,2,0,33.00,A-{MONAT_A[-2:]},\n")
-            fh.write(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},\n")
-            fh.write(f"{MONAT_B},Tarifcheck,1,0,18.00,B-{MONAT_B[-2:]},\n")
-            fh.write("falsch,CHECK24,9,9,9.00,x,\n")
+        self.tabelle(f"{MONAT_A},CHECK24,2,0,33.00,A-{MONAT_A[-2:]},",
+                     f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},",
+                     f"{MONAT_B},Tarifcheck,1,0,18.00,B-{MONAT_B[-2:]},",
+                     "falsch,CHECK24,9,9,9.00,x,")
         prov = oi.read_provisionen(self.prov)
         self.assertEqual(prov["letzter_monat"], MONAT_B)
         self.assertEqual(prov["summe"]["abschluesse"], 6)
@@ -236,29 +148,24 @@ class Sandbox(unittest.TestCase):
         self.assertEqual(prov["monate"][1]["partner"], ["CHECK24", "Tarifcheck"])
         self.assertEqual(oi.read_provisionen(os.path.join(self.td, "none.csv")), {})
 
-    def test_aggregat_wird_beim_import_geschrieben(self):
-        with open(self.prov, "w", encoding="utf-8") as fh:
-            fh.write("monat,partner,abschluesse,stornos,provision_eur,abrechnung_ref,notiz\n")
-            fh.write(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},\n")
+    def test_aggregat_wird_beim_import_geschrieben_und_vom_trichter_gelesen(self):
+        self.tabelle(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},")
         self.imp()
         agg = self.read("provisionen_agg")
         self.assertEqual(agg["summe"]["provision_eur"], 49.5)
         # und der Trichter übernimmt sie, ohne sie einer Seite zuzuschreiben
-        f = rf.compute({"totals": {"visits": 268, "pageviews": 412},
-                        "pages": [{"path": "/posts/x/", "views": 110, "visits": 70}]},
-                       [{"event": "affiliate_click", "slug": "gas",
+        f = rf.compute([{"event": "affiliate_click", "slug": "gas",
                          "article": "posts/x/index.md", "count": 11}],
-                       [], {"/posts/x/"},
-                       measured={"views": True, "clicks": True},
-                       manual_prov=agg)
+                       {"/posts/x/"}, measured={"clicks": True}, manual_prov=agg)
         self.assertEqual(f["provision"]["gesamt"], 49.5)
         self.assertEqual(f["provision"]["quelle"], "provisionen-tabelle")
         self.assertEqual(f["provision"]["zeitbezug"], "monat")
-        self.assertIsNone(f["seiten"][0]["revenue"],
-                          "Monats-Aggregat darf nicht auf eine Seite fallen")
+        self.assertNotIn("revenue", f["seiten"][0],
+                         "Monats-Aggregat darf nicht auf eine Seite fallen")
+        # 5) Misch-Stern: Klicks (Zähler) und Provision (Monat) mischen zwei Bezüge
         rep = rf.render(f, [], [], [], prov_monate=agg["monate"])
         self.assertIn("Abrechnungstabelle", rep)
-        self.assertIn("* Diese drei Zeilen mischen zwei Zeitbezüge", rep,
+        self.assertIn("_* Diese beiden Zeilen mischen zwei Zeitbezüge", rep,
                       "Misch-Stern fehlt – jemand läse die Rate als Wochenwert")
 
     def test_monatsalter_der_buchfuehrung(self):
@@ -271,23 +178,50 @@ class Sandbox(unittest.TestCase):
                 rf._month_age(schlecht)
 
     def test_dry_run_schreibt_nicht(self):
+        self.tabelle(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},")
         for p in self.ziele.values():
             self.assertFalse(os.path.exists(p))
         res = self.imp(dry_run=True)
         self.assertEqual(res["status"], "ok")
         for p in self.ziele.values():
             self.assertFalse(os.path.exists(p), "dry-run hat geschrieben")
-        self.assertEqual(self.imp(dry_run=True)["affiliate_klicks"], res["affiliate_klicks"])
 
     def test_status_in_sandbox(self):
+        self.tabelle(f"{MONAT_B},CHECK24,3,1,49.50,A-{MONAT_B[-2:]},")
         self.imp()
-        st = oi.status(datei=self.datei, provisionen=self.prov, ziele=self.ziele)
-        self.assertTrue(st["datei_da"])
+        st = oi.status(provisionen=self.prov, ziele=self.ziele,
+                       klick_meta=os.path.join(self.td, "keine.meta.json"))
+        self.assertTrue(st["tabelle_da"])
         self.assertEqual(st["import_status"], "ok")
-        self.assertEqual(st["seiten"], 2)
-        self.assertEqual(st["affiliate_klicks"], 11)
-        self.assertEqual(st["api_views_status"], "nie versucht",
-                         "status() darf der API-Brücke nichts erfinden")
+        self.assertEqual(st["provision_monate"], 1)
+        self.assertEqual(st["klickzaehler_status"], "nie versucht",
+                         "status() darf dem Klickzähler nichts erfinden")
+
+    # ------------------------------------------------------------- 6
+    def test_import_kennt_keinen_messstand_export_mehr(self):
+        for name in ("import_messstand", "from_json", "from_csv", "merge_views",
+                     "merge_rows", "norm_path", "STANDARD_DATEI", "VIEWS", "CLICKS", "CTAS"):
+            self.assertFalse(hasattr(oi, name),
+                             f"{name}: die Dashboard-Export-Brücke ist entfernt und kommt nicht zurück")
+
+    def test_vorlage_wird_angelegt_ohne_bestand_zu_ueberschreiben(self):
+        vorlage = os.path.join(self.td, "vorlage.csv")
+        with open(vorlage, "w", encoding="utf-8") as fh:
+            fh.write(KOPF)
+        ziel = os.path.join(self.td, "neu", "provisionen.csv")
+        self.assertEqual(oi.anlegen(ziel=ziel, vorlage=vorlage), 0)
+        with open(ziel, encoding="utf-8") as fh:
+            self.assertEqual(fh.read(), KOPF)
+        with open(ziel, "a", encoding="utf-8") as fh:
+            fh.write(f"{MONAT_B},CHECK24,1,0,5.00,x,\n")
+        self.assertEqual(oi.anlegen(ziel=ziel, vorlage=vorlage), 1)
+        with open(ziel, encoding="utf-8") as fh:
+            self.assertIn("CHECK24", fh.read(), "bestehende Tabelle wurde überschrieben")
+        self.assertEqual(oi.anlegen(ziel=ziel, vorlage=vorlage, force=True), 0)
+
+    def test_echte_vorlage_im_repo_ist_nur_die_kopfzeile(self):
+        with open(oi.VORLAGE, encoding="utf-8") as fh:
+            self.assertEqual(fh.read(), KOPF, "die Vorlage darf keine echten Daten tragen")
 
 
 class TestSelbsttest(unittest.TestCase):

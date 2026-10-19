@@ -5,7 +5,7 @@ GOVERNANCE-GATE – eine Wahrheit, wann die Governance wirklich melden darf.
 WARUM (Governance-Report #206, 07.09.2026):
 Der Premium-Governance-Lauf hat jede Woche ein Issue geöffnet – auch wenn gar
 nichts kaputt war. Ursache: Das Issue wurde an **Exit-Codes** der Schritte
-festgemacht. Ein Schritt, der nur „noch keine Daten“ meldet (Umami-Export
+festgemacht. Ein Schritt, der nur „noch keine Daten“ meldet (Klick-Export
 fehlt, Pinterest-Analytics leer), lief mit Exit 1 und war damit
 für die Pipeline ein Fehler. Ergebnis: Alarm-Müdigkeit – und die echten roten
 Befunde gehen im Rauschen unter. Genau das ist für einen Betrieb mit 30+
@@ -68,9 +68,6 @@ STEPS = {
     "cwv":     {"report": "CWV-REPORT.md",        "label": "Core-Web-Vitals"},
     "secrets": {"report": "SECRETS-REPORT.md",    "label": "Secrets-/Token-Wache"},
     "pinperf": {"report": "PINTEREST-PERF-REPORT.md", "label": "Pinterest-Performance"},
-    "umami":   {"report": "data/umami_clicks.meta.json", "label": "Umami-Datenimport"},
-    "umami-views": {"report": "data/umami_views.meta.json",
-                    "label": "Umami-Seitenaufrufe (Trichter-Nenner)"},
     "clicks":  {"report": "CLICK-REPORT.md",      "label": "Affiliate-Klick-Attribution"},
     # Umsatz-Messkette (19.09.2026): der Trichter ist die Antwort auf „0 Klicks,
     # 0.00 €“ – er meldet beides als Lücke, wenn er NICHTS messen kann. Beide
@@ -78,7 +75,7 @@ STEPS = {
     # schweigen – so wird die Datenlücke sichtbar, ohne dass ein Exit-Code sie
     # erfindet (#206-Policy bleibt).
     "revenue-funnel": {"report": "REVENUE-FUNNEL-REPORT.md",
-                       "label": "Umsatz-Funnel (Besuch→Klick→Antrag→Provision)"},
+                       "label": "Umsatz-Funnel (Klick→Antrag→Provision)"},
     "click-chain": {"report": "CLICK-CHAIN-REPORT.md",
                     "label": "Klick-Messkette (CTA→Event→Gateway→SubID)"},
     # Lesbarkeits-Wache: Befundtabelle aus readability_check --gate-bestand
@@ -133,15 +130,14 @@ STEP_MARKERS = {
 
 # Report-Zeilen, die „Datenlage offen“ bedeuten – kein Fehler, nie ein Issue.
 DATA_GAP_PATTERNS = (
-    "kein umami_api_token", "keine websiteid", "umami-klicks nicht geladen",
     "noch keine daten", "keine klick-daten",
     "einträge analysiert: **0**", "noch keine pin-", "kein Datensatz",
-    # Umsatz-Messkette: Secret-/Export-Lücken sind Konfigurationslage, keine
+    # Umsatz-Messkette: ein bewusst ausgeschalteter Weg (Klickzähler aus,
+    # Provisions-Tabelle noch nicht befüllt) ist Betriebsgrenze, keine
     # Laufzeit-Panne. Die ESKALATION übernimmt der Funnel selbst (funnel_gap in
-    # seiner Befundtabelle) – der Meta-Schritt bleibt Info, damit nicht zwei
-    # Schritte dieselbe Lücke doppelt ins Issue schreiben.
-    "umami-views nicht geladen", "umami free", "operating_boundary",
-    "api-import in data/monetization.yaml bewusst deaktiviert",
+    # seiner Befundtabelle) – so schreiben nicht zwei Schritte dieselbe Lücke
+    # doppelt ins Issue.
+    "operating_boundary",
 )
 
 
@@ -549,7 +545,7 @@ def _selftest():
         ("cwv", "## 🤖 Gesamt-Ampel: **GREEN**\n\n## Befunde\n\n_Alle Soll-Werte eingehalten._", "", 0, "green"),
         ("cwv", "## 🤖 Gesamt-Ampel: **AMBER**\n\n| AMBER | img_soft | Bild optimierbar |", "", 1, "info"),
         ("cwv", "## 🤖 Gesamt-Ampel: **RED**\n\n| RED | img_over | Bild 900 KB |", "", 1, "red"),
-        ("clicks", "_Noch keine Daten – Umami-Export …_", "ℹ️ Keine Klick-Daten gefunden.", 0, "info"),
+        ("clicks", "_Noch keine Klick-Daten – der eigene Klickzähler ist nicht in Betrieb …_", "ℹ️ Keine Klick-Daten gefunden.", 0, "info"),
         ("secrets", "## Gesamt-Ampel: **RED**\n\n| RED | dead | `PINTEREST` – tot |", "", 1, "red"),
         ("secrets", "## Gesamt-Ampel: **AMBER**\n\n| AMBER | aging | `MASTODON` – 30d |", "", 1, "amber"),
         # Transienter Probe-Ausfall darf kein Wochen-Issue werden (sonst hätte die
@@ -559,7 +555,7 @@ def _selftest():
         ("decay", "- 🔴 **STALE** (sofort aktualisieren): **3**\n- 🟢 **FRESH** (ok): **27**", "", 1, "red"),
         ("decay", "- 🔴 **STALE** (sofort aktualisieren): **0**\n- 🟢 **FRESH** (ok): **30**", "", 0, "green"),
         ("scorecard", "## Gesamt-Score: **83/100** · Ampel: **AMBER**", "", 0, "info"),
-        ("revenue-funnel", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n| INFO | operating_boundary | Umami Free aktiv |\n", "", 0, "green"),
+        ("revenue-funnel", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n| INFO | operating_boundary | Klickzähler aus (`aktiv: false`) |\n", "", 0, "green"),
         # Lesbarkeits-Wache: Report liefert Ampel + Befundtabelle, Exit-Code
         # allein darf NICHT alarmieren (exit_only-Policy, vgl. #206).
         ("lesbarkeit", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n", "", 0, "green"),
@@ -657,9 +653,13 @@ def _selftest():
     cv = classify("click-chain", chain, "", 1)
     if cv["level"] != "amber" or not cv["actionable"]:
         failures.append("Klick-Kette: CTA-Vertragsbruch bleibt ohne Alarm")
-    views_meta = json.dumps({"status": "skipped", "reason": "kein UMAMI_API_TOKEN"})
-    if classify("umami-views", views_meta, "", 0)["level"] != "info":
-        failures.append("Umami-Views ohne Token muss Info bleiben (Meta dokumentiert genug)")
+    # Betriebsgrenze allein (Klickzähler aus, Tabelle leer) bleibt grün – keine Lücke.
+    grenze = ("## 🚦 Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n"
+              "| INFO | operating_boundary | Klickzähler aus |\n"
+              "| INFO | operating_boundary | Provisions-Tabelle noch nicht befüllt |\n")
+    gv = classify("revenue-funnel", grenze, "", 0)
+    if gv["level"] != "green" or gv["actionable"]:
+        failures.append("Betriebsgrenze (INFO operating_boundary) darf den Funnel nicht einfärben")
     # 7) decide_policy: keine Zombie-Issues, kein Schließen ohne Messung
     if decide_policy({}) != ("GREEN", "none", {"red": 0, "amber": 0, "info": 0, "green": 0}):
         failures.append("leeres Ledger darf nichts schließen (Messung fehlt!)")
@@ -720,9 +720,8 @@ def _render_from(state):
               "- Scorecard: `python3 scripts/editorial_scorecard.py`",
               "- CWV: `python3 scripts/cwv_guard.py --public public/ --strict-build`",
               "- Secrets live: `python3 scripts/secrets_age_guard.py --verify`",
-              "- Klick-Daten füllen: `python3 scripts/umami_clicks.py --fetch` "
-              "(Secret `UMAMI_API_TOKEN` einmalig setzen – "
-              "docs/UMSATZ-MESSUNG-PREMIUM.md, 2 Minuten)",
+              "- Klick-Daten (eigener, cookieloser Zähler): `python3 scripts/klick_import.py` – "
+              "Einrichtung und Schalter: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md",
               "- Umsatz-Funnel: `python3 scripts/revenue_funnel.py --print` "
               "(alle Kennzahlen + welche Quelle fehlt)",
               "- Kette prüfen: `python3 scripts/click_chain_guard.py` "

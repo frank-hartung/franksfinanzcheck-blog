@@ -425,7 +425,7 @@ def run_selftest() -> list[str]:
         "data/revenue_funnel_history.jsonl",
         "data/cwv_history.jsonl",
         "data/cwv_state.json",
-        "data/umami_clicks.meta.json",
+        "data/klicks_eigen.meta.json",
         "data/social/plan.json",
         "data/research/brief.md",
         "data/audit/2026-09-15.jsonl",

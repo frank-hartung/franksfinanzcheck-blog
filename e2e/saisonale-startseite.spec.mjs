@@ -195,7 +195,7 @@ test.describe('Saisonale Startseite', () => {
       const zeit = await karte.locator('time').getAttribute('datetime');
       expect(zeit, `Karte ${i + 1}: <time datetime> fehlt`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
 
-      // Messkette (scripts/revenue_funnel.py aggregiert cta_click per Slug)
+      // Messvertrag der Auszeichnung (data-klick-*): Ereignis, Platzierung, Saison, Slug
       expect(await karte.getAttribute('data-klick'), `Karte ${i + 1}: Event fehlt`).toBe('cta_click');
       expect(await karte.getAttribute('data-klick-placement')).toBe('start-saison');
       expect(await karte.getAttribute('data-klick-saison')).toBe(saison);

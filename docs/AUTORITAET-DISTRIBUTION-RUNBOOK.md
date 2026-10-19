@@ -28,15 +28,14 @@ Der Import speichert nur Summen und Marken-Summen unter `data/authority_measurem
 
 ### 2. Weitere Kennzahlen belegen
 
-Newsletter-Abonnenten und Klickrate, Returning-Reader-Rate sowie Conversions immer mit Zeitraum und Export-/Dashboard-Beleg erfassen. Dafür eine lokale, nicht zu committende Datei anlegen:
+Newsletter-Abonnenten und Klickrate sowie Conversions immer mit Zeitraum und Export-/Dashboard-Beleg erfassen. Die Returning-Reader-Rate bleibt `null`, solange kein Besucherzähler läuft (es gibt bewusst keinen). Dafür eine lokale, nicht zu committende Datei anlegen:
 
 ```json
 {
   "newsletter_subscribers": 120,
   "newsletter_click_rate": 0.084,
-  "returning_reader_rate": 0.21,
   "conversions": 7,
-  "provenance": "Newsletter-Studio + Umami Monatsauszug 2026-10"
+  "provenance": "Newsletter-Studio + Partner-Dashboard Monatsauszug 2026-10"
 }
 ```
 
