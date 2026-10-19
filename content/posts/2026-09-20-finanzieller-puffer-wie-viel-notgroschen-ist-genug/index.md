@@ -1,5 +1,5 @@
 ---
-title: "Notgroschen berechnen: Der Rechenweg in fünf Minuten"
+title: "Finanzieller Puffer: Der Rechenweg in fünf Minuten"
 description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis…"
 date: 2026-09-21T09:29:03Z
 lastmod: 2026-10-13
@@ -38,9 +38,6 @@ quellen:
     datum: "2026-08-14"
 faktencheck: "2026-10-13"
 ---
-
-
-
 
 Finanzieller Puffer im Check: Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 

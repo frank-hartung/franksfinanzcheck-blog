@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Gaspreis-Erhöhung im Brief: Was du jetzt tun kannst"
+title: "Preisgarantie Gas: Was du jetzt tun kannst"
 description: "Preisgarantie Gas: Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder…"
 date: 2026-08-24T08:35:12Z
 draft: false
