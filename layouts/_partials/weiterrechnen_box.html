@@ -1,0 +1,24 @@
+{{- /* ============================================================
+    weiterrechnen_box.html – automatischer Werkzeug-Querverweis für
+    Ratgeber-Artikel, deren Markdown-Body (z. B. wegen YMYL-Siegel
+    inhalt_sha256 oder Reserve-Zertifikat) keinen expliziten Link
+    auf /werkzeuge/ enthält. Liest ausschließlich die SSOT über
+    werkzeuge_data.html.
+============================================================ */ -}}
+{{- if and (eq .Section "posts") (not (strings.Contains .RawContent "/werkzeuge/")) -}}
+  {{- $daten := partial "werkzeuge_data.html" . -}}
+  {{- $pillar := .Params.pillar | default "strom-sparen" -}}
+  {{- $gewaehlt := index $daten.werkzeuge 0 -}}
+  {{- range $daten.werkzeuge -}}
+    {{- if eq .pillar $pillar -}}
+      {{- $gewaehlt = . -}}
+      {{- break -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $gewaehlt -}}
+  <aside class="ff-weiterrechnen" role="complementary" aria-label="Passendes Werkzeug" style="margin:1.25rem 0;padding:1rem 1.25rem;border:1px solid var(--border,rgba(15,23,42,.12));border-radius:12px;">
+    <strong>Weiterrechnen:</strong>
+    <a href="{{ printf "werkzeuge/%s/" $gewaehlt.slug | relURL }}">{{ $gewaehlt.name }} – {{ $gewaehlt.kurz }}</a>
+  </aside>
+  {{- end -}}
+{{- end -}}

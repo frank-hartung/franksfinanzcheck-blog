@@ -198,4 +198,9 @@ Eine gute Kreditkarte kostet im Jahr nichts und außerhalb Europas kein Vermöge
 ---
 👉 **Jetzt vergleichen und sparen:** [**→ Kreditkarten jetzt vergleichen**](/go/kreditkarte/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+- **Themenseite:** [Konto & Karten: Ratgeber für gebührenfreie Finanzen](../../pillar/konto-karten/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

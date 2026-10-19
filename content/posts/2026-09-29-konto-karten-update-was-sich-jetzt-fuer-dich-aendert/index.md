@@ -1,11 +1,11 @@
 ---
-title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
-description: "Konto & Karten-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du …"
+title: "Girocard, Debitkarte oder Maestro: Welche Karte passt?"
+description: "Girocard, Debitkarte oder Maestro im Vergleich: Einsatz, Kosten und Prüfpunkte für dein Konto. Einordnung mit Prüfhinweisen."
 date: 2026-09-29T10:48:18Z
 draft: true
 tags: ["Girokonto"]
 categories: ["News"]
-keywords: ["Konto & Karten-Update: Was sich jetzt für dich ändert", "Konto & Karten-Update", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren"]
+keywords: ["Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren"]
 author: "Frank Hartung"
 
 ai_generated: true
@@ -14,10 +14,10 @@ ki_redaktion_status: "review"
 news_kategorie: "konto"
 cover:
   image: "images/covers/2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert.jpg"
-  alt: "Konto & Karten-Update: Was sich jetzt für dich ändert"
+  alt: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
-pin_description: "*Werbung | Konto und Karten-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du … Mehr Spartipps auf FranksFinanzcheck! #kontokartenupdate #kartenupdate #girokontovergleichen"
+pin_title: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
+pin_description: "*Werbung | Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du … Mehr Spartipps auf FranksFinanzcheck! #kontokartenupdate #kartenupdate #girokontovergleichen"
 quellen:
   - id: "Q1"
     titel: "Referenzseite verbraucherzentrale.de"

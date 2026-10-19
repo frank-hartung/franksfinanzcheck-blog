@@ -127,6 +127,25 @@ def ist_alias(html: str) -> bool:
                for a in meta_attributes(html))
 
 
+# Weiterleitungsseiten aus scripts/weiterleitungen.py (Marker ff-weiterleitung, Meta-Refresh).
+# Sie sind Aliase, aber KEINE ungewollte Crawl-Fläche: Jede steht als bewusste Entscheidung in
+# data/weiterleitungen.yaml. Deshalb zählen sie nicht in das Verhältnis (H5). H9 prüft jedes Ziel.
+def ist_weiterleitung(html: str) -> bool:
+    return "ff-weiterleitung" in html[:2000]
+
+
+def ziel_pfad(html: str) -> str | None:
+    for a in meta_attributes(html):
+        if a.get("http-equiv", "").lower() == "refresh":
+            m = re.search(r"url=(\S+)", a.get("content", ""), re.I)
+            if m:
+                pfad = urlparse(m.group(1).strip("'\"")).path or "/"
+                if not pfad.endswith("/") and "." not in pfad.rsplit("/", 1)[-1]:
+                    pfad += "/"
+                return pfad
+    return None
+
+
 def robots_wert(html: str) -> str:
     values = [a.get("content", "") for a in meta_attributes(html)
               if a.get("name", "").lower() == "robots"]
@@ -196,6 +215,8 @@ def sammle(basis: str) -> dict:
                 "alias": alias,
                 "robots": rb,
                 "indexierbar": (not alias) and "noindex" not in rb,
+                "weiterleitung": ist_weiterleitung(html),
+                "ziel": ziel_pfad(html) if ist_weiterleitung(html) else None,
             }
             if not alias:
                 verlinkt |= interne_ziele(html)
@@ -236,6 +257,7 @@ def pruefe(basis: str = PUBLIC, budget: dict | None = None) -> tuple[Funde, dict
     pager = {u for u in seiten if re.search(r"/page/\d+/$", u)}
     pager_eins = {u for u in seiten if re.search(r"/page/1/$", u)}
     go = {u for u in aliase if u.startswith("/go/")}
+    weiter = {u for u, d in seiten.items() if d.get("weiterleitung")}
 
     # ---- H1: Sitemap-Deckung ----
     if sm is None:
@@ -255,6 +277,20 @@ def pruefe(basis: str = PUBLIC, budget: dict | None = None) -> tuple[Funde, dict
             elif not d["indexierbar"]:
                 F.add("H8", u, "nicht indexierbare URL steht in der Sitemap "
                                "(widersprüchliches Signal an Google)")
+
+    # ---- H9: Weiterleitungsseiten – Ziel vorhanden, live, keine Kette, keine Schleife ----
+    for u in sorted(weiter):
+        z = seiten[u].get("ziel")
+        if not z:
+            F.add("H9", u, "Weiterleitungsseite ohne Ziel (meta refresh fehlt)")
+        elif z == u:
+            F.add("H9", u, "Weiterleitung zeigt auf sich selbst (Schleife)")
+        elif z not in seiten:
+            F.add("H9", u, f"Ziel {z} fehlt im Build – data/weiterleitungen.yaml prüfen")
+        elif z in weiter:
+            F.add("H9", u, f"Kette: Ziel {z} ist selbst eine Weiterleitung")
+        elif not seiten[z]["indexierbar"]:
+            F.add("H9", u, f"Ziel {z} ist nicht indexierbar (keine Live-Seite)")
 
     # ---- H2: /page/1/-Aliase ----
     for u in sorted(pager_eins):
@@ -279,7 +315,7 @@ def pruefe(basis: str = PUBLIC, budget: dict | None = None) -> tuple[Funde, dict
                        "ist in hugo.toml bewusst abgeschaltet")
 
     # ---- H5: Verhältnis ----
-    nicht_idx = len(seiten) - len(indexierbar)
+    nicht_idx = len(seiten) - len(indexierbar) - len(weiter)
     verh = (nicht_idx / len(indexierbar)) if indexierbar else float("inf")
     if verh > b["max_verhaeltnis"]:
         F.add("H5", "/",
@@ -315,6 +351,7 @@ def pruefe(basis: str = PUBLIC, budget: dict | None = None) -> tuple[Funde, dict
         "pager_eins": len(pager_eins),
         "aliase": len(aliase),
         "go_weiterleitungen": len(go),
+        "weiterleitungen": len(weiter),
         "noindex": len(noindex),
         "sitemap_eintraege": len(sm) if sm is not None else None,
         "budget": b,
@@ -340,6 +377,7 @@ def drucke(F: Funde, b: dict) -> None:
     print(f"    Pager-Seiten ............. {b['pager']:4d}")
     print(f"    /page/1/-Aliase .......... {b['pager_eins']:4d}")
     print(f"    /go/-Weiterleitungen ..... {b['go_weiterleitungen']:4d}   (gewollt)")
+    print(f"    Weiterleitungsseiten ..... {b.get('weiterleitungen', 0):4d}   (bewusst, data/weiterleitungen.yaml, nicht im Verhältnis)")
     print(f"    Sitemap-Einträge ......... {b['sitemap_eintraege']}")
     if F.weich:
         print(f"\n  Hinweise ({len(F.weich)}):")
@@ -474,6 +512,43 @@ def selftest() -> int:
         baue(t, {"/": IDX.format(links="/x/"), "/x/": NOIDX}, ["/", "/x/"])
         F, _ = pruefe(t)
         check("H8 noindex in Sitemap", any(r == "H8" for r, _, _ in F.hart))
+
+    # 9 Weiterleitungsseiten zählen nicht in H5 (sonst Budget gesprengt)
+    REDIR = ('<html><head><meta name="ff-weiterleitung" content="regel-B">'
+             '<meta name="robots" content="noindex,follow">'
+             '<meta http-equiv="refresh" content="0; url=https://franksfinanzcheck.de{z}">'
+             '</head></html>')
+    with tempfile.TemporaryDirectory() as t:
+        seiten9 = {"/": IDX.format(links="/a/"), "/a/": IDX.format(links="/")}
+        for i in range(4):
+            seiten9[f"/posts/alt-{i}/"] = REDIR.format(z="/a/")
+        baue(t, seiten9, ["/", "/a/"])
+        F, b9 = pruefe(t)
+        check("Weiterleitungen zählen nicht in H5", not any(r == "H5" for r, _, _ in F.hart))
+        check("Weiterleitungen werden gezählt", b9.get("weiterleitungen") == 4)
+        check("gültige Weiterleitungen sind grün für H9", not any(r == "H9" for r, _, _ in F.hart))
+
+    # 10 H9: Ziel fehlt
+    with tempfile.TemporaryDirectory() as t:
+        baue(t, {"/": IDX.format(links="/x/"), "/x/": IDX.format(links="/"),
+                 "/posts/alt/": REDIR.format(z="/gibt-es-nicht/")}, ["/", "/x/"])
+        F, _ = pruefe(t)
+        check("H9 Ziel fehlt", any(r == "H9" for r, _, _ in F.hart))
+
+    # 11 H9: Kette
+    with tempfile.TemporaryDirectory() as t:
+        baue(t, {"/": IDX.format(links="/x/"), "/x/": IDX.format(links="/"),
+                 "/posts/a/": REDIR.format(z="/posts/b/"),
+                 "/posts/b/": REDIR.format(z="/x/")}, ["/", "/x/"])
+        F, _ = pruefe(t)
+        check("H9 Kette", any(r == "H9" and "Kette" in t_ for r, _, t_ in F.hart))
+
+    # 12 H9: Ziel nicht indexierbar (noindex)
+    with tempfile.TemporaryDirectory() as t:
+        baue(t, {"/": IDX.format(links="/x/"), "/x/": IDX.format(links="/"),
+                 "/y/": NOIDX, "/posts/alt/": REDIR.format(z="/y/")}, ["/", "/x/"])
+        F, _ = pruefe(t)
+        check("H9 Ziel nicht indexierbar", any(r == "H9" and "nicht indexierbar" in t_ for r, _, t_ in F.hart))
 
     print(f"Selbsttest: {ok} bestanden, {len(fehl)} fehlgeschlagen")
     for f in fehl:

@@ -224,4 +224,8 @@ Dann feierst du im Dezember ohne Sorge. Und der Kontoauszug im Januar hält kein
 
 👉 **Jetzt Budget starten:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

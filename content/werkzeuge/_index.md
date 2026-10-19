@@ -1,7 +1,7 @@
 ---
 title: "Werkzeuge: Rechnen, bevor du entscheidest"
-seoTitle: "Finanz-Werkzeuge: 8 kostenlose Rechner ohne Anmeldung | FranksFinanzcheck"
-description: "Acht eigenständige Rechner für Fixkosten, Tarife, Abschläge, Fristen und Budget. Alles läuft lokal im Browser, mit offener Formel und Export als CSV oder PDF – ohne Anmeldung und ohne Affiliate-Klick."
+seoTitle: "Finanz-Werkzeuge: 9 kostenlose Rechner ohne Anmeldung | FranksFinanzcheck"
+description: "Neun eigenständige Rechner für Fixkosten, Tarife, Abschläge, Fristen und Budget. Alles läuft lokal im Browser, mit offener Formel und Export als CSV oder PDF – ohne Anmeldung und ohne Affiliate-Klick."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false
@@ -15,7 +15,7 @@ sitemap:
 
 Die meisten Finanzrechner im Netz sind keine Werkzeuge, sondern Türsteher. Sie fragen drei Zahlen ab, zeigen ein halbes Ergebnis und schicken dich für den Rest zu einem Vergleichsportal. Das ist kein Service, das ist eine Lead-Strecke mit Rechenschieber-Optik.
 
-Hier läuft es umgekehrt. Jedes dieser acht Werkzeuge beantwortet die Frage, für die es gebaut wurde – vollständig, bis zur letzten Zeile. Es gibt kein gesperrtes Ergebnis, keine Pflicht-Weiterleitung und keinen Button, der erst nach einem Klick auf einen Partnerlink funktioniert. Du kannst jedes Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken. Dieser Satz ist keine Marketingzeile, sondern eine geprüfte Eigenschaft: Eine Wache im Veröffentlichungsprozess bricht den Deploy ab, wenn auf einer Werkzeugseite ein Partnerlink auftaucht.
+Hier läuft es umgekehrt. Jedes dieser neun Werkzeuge beantwortet die Frage, für die es gebaut wurde – vollständig, bis zur letzten Zeile. Es gibt kein gesperrtes Ergebnis, keine Pflicht-Weiterleitung und keinen Button, der erst nach einem Klick auf einen Partnerlink funktioniert. Du kannst jedes Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken. Dieser Satz ist keine Marketingzeile, sondern eine geprüfte Eigenschaft: Eine Wache im Veröffentlichungsprozess bricht den Deploy ab, wenn auf einer Werkzeugseite ein Partnerlink auftaucht.
 
 ## Drei Dinge, die hier anders sind
 
@@ -31,7 +31,7 @@ Kein Konto, keine E-Mail-Adresse, keine Postleitzahl, kein Name auf einer Rechnu
 
 ## Welches Werkzeug wann
 
-Die acht Werkzeuge folgen demselben Prüfpfad wie alle Ratgeber auf dieser Seite: erst sehen, was läuft, dann rechnen, dann Fristen sichern, dann Kurs halten.
+Die neun Werkzeuge folgen demselben Prüfpfad wie alle Ratgeber auf dieser Seite: erst sehen, was läuft, dann rechnen, dann Fristen sichern, dann Kurs halten.
 
 Beginne mit dem **Fixkosten-Scanner**, wenn du nicht weißt, wo du anfangen sollst – er sortiert deine Posten nach Wirkung, nicht nach Gefühl. Der **Abschlagsrechner** und der **Effektivpreis-Rechner** beantworten die beiden teuersten Einzelfragen: Stimmt mein Abschlag, und was kostet dieser Tarif wirklich? Der **Selbstbehalt-Rechner** zeigt, ob ein Eigenanteil gekaufte Ersparnis oder verschobenes Risiko ist. Der **Entscheidungsbaum** hilft dort, wo die Zahl allein nicht reicht. **Kündigungsfristen-Kalender**, **Notgroschen-Rechner** und **Haushaltsbudget** sorgen dafür, dass aus einer einmaligen Rechnung eine Gewohnheit wird.
 

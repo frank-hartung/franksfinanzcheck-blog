@@ -62,6 +62,10 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt es bei der C24 Bank (CHECK24-Tochter): [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 
+![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?
 
 Viele halten hohes Einkommen für Wohlstand. Du siehst den Sportwagen vom Nachbarn.
@@ -187,6 +191,10 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 6. **Finanz‑App installieren** und Kategorien anpassen.
 7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.
 
+![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## Welche Fehler kosten dich am meisten Geld?
 
 Viele warten auf den perfekten Moment. Sie hoffen auf Crash oder tiefe Kurse.
@@ -302,3 +310,7 @@ Achte auf die Gesamtkostenquote, die Fondsgröße und die Replikationsmethode (p
 👉 **Jetzt vergleichen und sparen:** [**→ Tagesgeld der C24 Bank eröffnen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)

@@ -1,5 +1,5 @@
 ---
-title: "DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin"
+title: "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet"
 description: "DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen."
 date: 2026-10-12T06:02:26Z
 draft: false
@@ -15,7 +15,7 @@ ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
 redaktionelle_pruefung:
-  risikoklasse: "standard"
+  risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Unbelegte Geschwindigkeits- und Sparwerte entfernt; Rechtsangaben mit amtlichen Quellen geprüft; Laufzeit-Abschnitt (§ 56 TKG) eigenständig neu gefasst und Titel geschärft (Einzigartigkeits-Audit #714, 12.10.2026)"
 inspiration: "DSL-Anbieter wechseln: Gesamtpreis und Übergang planen"
@@ -197,5 +197,9 @@ Der Anbieter schreibt rechtzeitig vorher. Die Nachricht kann leicht untergehen. 
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -196,4 +196,8 @@ Ob mehrere Anlagen gefördert werden, regelt jede Richtlinie selbst. Frag bei de
 
 👉 **Jetzt Stromtarif vergleichen:** [**→ Stromanbieter vergleichen**](/go/strom/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Balkonkraftwerk-Rechner: Ertrag, Ersparnis und Amortisation](../../werkzeuge/balkonkraftwerk-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

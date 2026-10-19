@@ -28,6 +28,26 @@ meta:
   angelegt: "2026-10-01"
 
 eintraege:
+  - datum: "2026-10-19"
+    typ: korrektur
+    titel: "Fixkosten-Index Q4 2026: Bezug des Strompreises offengelegt"
+    was: >-
+      Die Energie-Baseline Q4 2026 rechnet den BDEW-Haushaltsstrompreis (37,0 ct/kWh)
+      mit 2.500 kWh. Der BDEW-Wert bezieht sich auf 3.500 kWh Jahresverbrauch und
+      enthält einen anteiligen Grundpreis. Diese Abweichung stand bisher nicht im Text.
+      Ergänzt wurde ein Hinweis unter „Grenzen der Aussage“. Die Zahlen (925,00 €
+      Strom, 1.431,60 € Gas, 2.356,60 € gesamt) bleiben unverändert.
+    warum: >-
+      Prüfung der Methodik vor einer Veröffentlichung in Medien. Ein Modell, das den
+      Bezug seiner Preisquelle verschweigt, ist nicht transparent genug.
+    quelle:
+      name: "BDEW – Strompreisanalyse 2026 (Haushalte, 37,0 ct/kWh)"
+      url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    belegklasse: amtlich
+    seiten:
+      - pfad: "/studien/fixkosten-index-2026-q4/"
+        name: "Studie Fixkosten-Index Q4 2026"
+
   - datum: "2026-10-13"
     typ: aktualisierung
     titel: "Kennzahlen-Radar #730: BNetzA-Breitband, EZB-Zinsbezug & Pillar-Kennzahlen synchronisiert"

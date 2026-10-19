@@ -1,5 +1,5 @@
 ---
-title: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
+title: "Notgroschen berechnen: Der Rechenweg in fünf Minuten"
 description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis…"
 date: 2026-09-21T09:29:03Z
 lastmod: 2026-10-13
@@ -19,8 +19,8 @@ engine_level: "draft"
 
 inspiration: "Notgroschen aufbauen: Wie viel reicht wirklich?"
 cover:
-  image: "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg"
-  alt: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
+  image: "images/covers/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg"
+  alt: "Notgroschen berechnen: Der Rechenweg in fünf Minuten"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Notgroschen sollte meist drei bis sechs Monate deiner festen Lebenshaltungskosten abdecken. Bei 1.500 € monatlichen Fixkosten sind das grob 4.500 € bis 9.000 €. So fängst du Reparaturen, kaputte Geräte oder kurze Einkommenslücken ab, ohne sofort den Dispo zu nutzen."
 quellen:
@@ -281,5 +281,9 @@ Nein. Ein ETF schwankt. Für Vermögensaufbau ist das okay, für den Notfall nic
 
 ### Wie wirkt sich Inflation auf meinen Notgroschen aus?
 Inflation frisst Kaufkraft. Deshalb solltest du die Zielsumme regelmäßig prüfen. Trotzdem bleibt ein Tagesgeldkonto meist der beste Platz, weil Verfügbarkeit hier wichtiger ist als Maximalrendite.
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen](../../werkzeuge/notgroschen-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

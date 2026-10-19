@@ -122,7 +122,7 @@ Nutze die beiden Rechner, um deinen fairen Monatsabschlag für Strom und Gas zu 
 
 {{< rechner typ="gas-abschlag" quelle="BDEW-Gaspreisanalyse 2026" stand="Oktober 2026" >}}
 
-Die vollständigen Werkzeuge dazu – mit eigenen Eingabefeldern, offengelegter Formel und Export als CSV oder PDF: [Strom- und Gas-Abschlagsrechner](/werkzeuge/abschlag-nachzahlung-rechner/), [24-Monats-Effektivpreis-Rechner](/werkzeuge/effektivpreis-rechner/) und [Tarifwechsel-Entscheidungsbaum](/werkzeuge/tarifwechsel-entscheidungsbaum/). Alle drei rechnen im Browser: keine Anmeldung, keine personenbezogenen Daten, kein Affiliate-Link, den man klicken müsste.
+Die vollständigen Werkzeuge dazu – mit eigenen Eingabefeldern, offengelegter Formel und Export als CSV oder PDF: [Strom- und Gas-Abschlagsrechner](/werkzeuge/abschlag-nachzahlung-rechner/), [24-Monats-Effektivpreis-Rechner](/werkzeuge/effektivpreis-rechner/), [Tarifwechsel-Entscheidungsbaum](/werkzeuge/tarifwechsel-entscheidungsbaum/) und [Balkonkraftwerk-Rechner](/werkzeuge/balkonkraftwerk-rechner/). Alle rechnen im Browser: keine Anmeldung, keine personenbezogenen Daten, kein Affiliate-Link, den man klicken müsste.
 
 ---
 

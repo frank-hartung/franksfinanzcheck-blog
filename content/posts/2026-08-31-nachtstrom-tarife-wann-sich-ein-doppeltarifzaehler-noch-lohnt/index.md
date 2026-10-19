@@ -220,4 +220,8 @@ Dann bleiben die Kilowattstunden im teuren Fenster. Bei einem niedrigen Nachtant
 
 👉 **Jetzt Tarif prüfen:** [**→ Stromtarife vergleichen und wechseln**](/go/strom/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Tarifwechsel-Entscheidungsbaum: Wechseln oder bleiben?](../../werkzeuge/tarifwechsel-entscheidungsbaum/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

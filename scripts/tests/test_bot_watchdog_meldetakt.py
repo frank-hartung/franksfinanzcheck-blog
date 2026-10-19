@@ -525,7 +525,11 @@ class AnkerDisziplinTestCase(unittest.TestCase):
         self.assertTrue(hasattr(gc, "c34_blustradius"))
 
     def test_rechter_baum_hat_keine_befunde(self) -> None:
-        self.assertEqual(gc.run_all(quick=True), [])
+        # Gleicher Interpreter wie die CLI (`main` nimmt sys.executable). Mit
+        # dem Standard „python3“ lief die Wirkungsprobe unter einem Python
+        # ohne PyYAML und meldete fail-closed einen Vertragsbruch, obwohl der
+        # Baum in Ordnung war (C25/C38, E-21).
+        self.assertEqual(gc.run_all(python_bin=sys.executable, quick=True), [])
 
     def test_scorecard_anker_trifft_den_schritt_nicht_den_kommentar(self) -> None:
         with open(os.path.join(BLOG_DIR, ".github", "workflows", "deploy.yml"),

@@ -132,7 +132,7 @@ class VertragAmEchtenWorkflow(unittest.TestCase):
         self.assertIn("C18", gc.RULE_TEXT)
         self.assertIn(gc.PFLICHT_CHECK_NAME, gc.RULE_TEXT["C18"])
         # run_all bindet C18 ein – der echte Baum muss den Vertrag erfüllen
-        befunde = [b for b in gc.run_all(quick=True) if b[0] == "C18"]
+        befunde = [b for b in gc.run_all(python_bin=sys.executable, quick=True) if b[0] == "C18"]
         self.assertEqual([], befunde)
 
 

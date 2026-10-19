@@ -18,7 +18,7 @@ datasetLicense: "/studien/fixkosten-index-2026-q4/#nutzung-und-zitierweise"
 
 <figure>
   <img src="/downloads/fixkosten-index-2026-q4-pressegrafik.svg" alt="Modellrechnung mit 925 Euro Stromkosten, 1.431,60 Euro Gaskosten und 2.356,60 Euro Energiekosten pro Jahr" width="1200" height="628" loading="eager">
-  <figcaption>FranksFinanzcheck, Fixkosten-Index Q4 2026. Quelle: BDEW-Preisanalysen; eigene Rechnung.</figcaption>
+  <figcaption>FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026. Quelle: BDEW-Preisanalysen; eigene Rechnung.</figcaption>
 </figure>
 
 [CSV-Datensatz herunterladen](/downloads/fixkosten-index-2026-q4.csv) · [Pressegrafik herunterladen](/downloads/fixkosten-index-2026-q4-pressegrafik.svg)
@@ -56,6 +56,7 @@ Die Verbrauchswerte sind **Szenarioannahmen**, keine vom BDEW übernommene Aussa
 ## Grenzen der Aussage
 
 - Der Report bildet nur Strom und Gas ab, nicht Miete, Internet, Mobilität oder Versicherungen.
+- Der Strompreis ist der BDEW-Durchschnittswert für Haushalte. Er bezieht sich auf einen Jahresverbrauch von 3.500 kWh und enthält einen anteiligen Grundpreis. Das Modell rechnet mit 2.500 kWh. Bei geringerem Verbrauch steigt der Preis pro kWh, deshalb kann die Strom-Zahl des Modells zu niedrig liegen. Die Zahlen bleiben unverändert, die Abweichung ist im Modell nicht korrigiert.
 - Grundpreis, Bonus, Preisgarantie, Region, Wohnfläche und Heizart können den individuellen Betrag verändern.
 - Nicht jeder Zwei-Personen-Haushalt heizt mit Gas. Strom- und Gasannahme beschreiben ein Modell, keine Personengruppe.
 - Der Wert ist keine Prognose und kein Tarifangebot.

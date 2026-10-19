@@ -295,4 +295,8 @@ Leite es direkt auf ein separates Konto oder Unterkonto weiter. Sonst verschwind
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

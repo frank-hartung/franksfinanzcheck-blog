@@ -19,7 +19,7 @@ async function rechnen(werkzeug) {
 }
 
 test.describe('Werkzeuge', () => {
-  test('der Hub ist über die Navigation erreichbar und führt zu allen acht Werkzeugen', async ({ page }) => {
+  test('der Hub ist über die Navigation erreichbar und führt zu allen neun Werkzeugen', async ({ page }) => {
     await page.goto('/');
     const navLink = page.locator('nav a[href*="/werkzeuge/"]').first();
     await expect(navLink, 'Hauptnavigation führt zu den Werkzeugen').toBeVisible();
@@ -30,10 +30,10 @@ test.describe('Werkzeuge', () => {
     await expect(page.getByText(VERSPRECHEN).first()).toBeVisible();
 
     const karten = page.locator('.ff-wz-raster a[href*="/werkzeuge/"]');
-    await expect(karten, 'acht Werkzeuge im Raster').toHaveCount(8);
+    await expect(karten, 'neun Werkzeuge im Raster').toHaveCount(9);
 
     const ziele = await karten.evaluateAll((nodes) => nodes.map((n) => new URL(n.href).pathname));
-    expect(new Set(ziele).size, 'jede Karte führt woanders hin').toBe(8);
+    expect(new Set(ziele).size, 'jede Karte führt woanders hin').toBe(9);
     for (const ziel of ziele) {
       const antwort = await page.request.get(ziel);
       expect(antwort.status(), `${ziel} ist erreichbar`).toBe(200);

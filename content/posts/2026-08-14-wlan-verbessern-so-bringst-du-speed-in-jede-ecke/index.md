@@ -48,6 +48,10 @@ Die folgenden Schritte zeigen dir, wie du dein **[WLAN verbessern](../../posts/2
 💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe jetzt, ob an deiner Adresse schnellere Tarife mit modernen Wi-Fi-6-Routern günstiger verfügbar sind: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Die häufigsten WLAN-Bremsen im Haushalt
 
 Bevor du Geld für neue Hardware ausgibst, prüfe die Störfaktoren in der Wohnung. Diese Punkte bremsen WLAN am häufigsten:
@@ -130,6 +134,10 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 6. **Gäste-WLAN an, IoT getrennt.** Kameras und Staubsaugerroboter gehören nicht ins Arbeitsnetz.
 7. **Nach 7 Tagen erneut messen.** Dieselbe Uhrzeit, dieselben drei Orte. Nur Zahlen beweisen, dass die Maßnahme wirkt.
 
+![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## Was Mesh, Repeater und Powerline 2026 konkret unterscheiden?
 
 Mesh-Systeme (WLAN 6/6E) nutzen eine gemeinsame SSID. Sie reichen dich an den stärksten Knoten weiter. Zoom bricht nicht ab. Repeater schaffen das oft nicht.
@@ -200,3 +208,7 @@ Ja. Fehlt dem Router ein Gigabit-LAN-Port, bremst er. 100 bis 250 Mbit/s kommen 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: alle laufenden Kosten, Internet inklusive, in einer Zahl](../../werkzeuge/fixkosten-scanner/)

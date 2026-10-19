@@ -47,6 +47,10 @@ Wie du einen **Mietwagen ohne Kaution** buchst (oder die Kaution klein hältst),
 💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere dir vor der Buchung einen Preisvergleich inklusive Vollkasko ohne Selbstbeteiligung: [**Jetzt Mietwagen vergleichen**](/go/mietwagen/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Was ist die Mietwagen-Kaution überhaupt?
 
 Die Kaution ist eine **Sicherheit**, die der Vermieter während der Mietzeit auf deiner Kreditkarte blockiert. Sie dient dazu, drei Risiken abzudecken:
@@ -164,6 +168,10 @@ Hol dir die Bestätigung „keine neuen Schäden“. Kommt später eine Abbuchun
 
 Am günstigsten ist die Buchung, die schnell geht. Die Rückgabe dauert 12 Minuten, weil du vorbereitet bist. Das Banner mit 9 € pro Tag wird am Schalter gern zu 41 €.
 
+
+![Gliederung des Beitrags: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Bonus: Nebenkosten, die oft vergessen werden
 
@@ -286,5 +294,9 @@ Sichere Fotos und das Protokoll helfen. Widersprich schriftlich und setze eine F
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen**](/go/mietwagen/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

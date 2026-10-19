@@ -52,6 +52,10 @@ Ein Punkt bleibt wichtig: Lies das Kleingedruckte. Viele Banken haben ihre Preis
 💡 **Schnell-Tipp von FranksFinanzcheck:** Ein dauerhaft günstiges Konto mit starker App und guten Alltagsfunktionen kannst du direkt prüfen: [**Kostenloses C24 Girokonto eröffnen**](/go/girokonto/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Das Wichtigste in Kürze
 
 - Ein echtes kostenloses Konto zeichnet sich durch 0 € Kontoführung aus, oft gekoppelt an einen Mindestgeldeingang.
@@ -173,6 +177,10 @@ Der typische Ablauf ist heute kinderleicht:
 
 Lass dein altes Konto noch zwei bis drei Monate offen. So siehst du, ob auch der Beitrag für die Versicherung sauber umzieht. Erst danach kündigst du.
 
+![Gliederung des Beitrags: Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+
 ## Welche Extras ein gutes Konto 2026 haben darf
 
 Ein gutes Konto ist mehr als ein Geldbeutel auf dem Handy. Diese Dinge gehören heute zum Standard.
@@ -263,5 +271,9 @@ Bei vielen Anbietern ja. Beide Personen bekommen eine eigene Karte. Das Mindestg
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Kostenloses Girokonto bei der C24 Bank eröffnen**](/go/girokonto/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl](../../werkzeuge/fixkosten-scanner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

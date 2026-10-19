@@ -233,4 +233,8 @@ Prüfe zuerst Enddatum, Kündigungsweg und Rufnummernmitnahme, bevor du den Hand
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Handytarife vergleichen**](/go/handytarife/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Kündigungsfristen-Kalender: Den letzten Tag nicht verpassen](../../werkzeuge/kuendigungsfristen-kalender/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

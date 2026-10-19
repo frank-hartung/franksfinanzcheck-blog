@@ -210,4 +210,8 @@ Wenn ein Anschluss gesperrt wurde, fallen dafür Entgelte an, die im Preisblatt 
 
 👉 **Jetzt den Tarif prüfen:** [**→ Stromtarife vergleichen und wechseln**](/go/strom/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
+
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

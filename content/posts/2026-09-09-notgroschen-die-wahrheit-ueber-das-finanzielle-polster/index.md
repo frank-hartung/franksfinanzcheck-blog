@@ -58,6 +58,10 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere deine Notfallreserve getrennt vom Girokonto: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
+![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+
 ## Warum die klassische Drei-Monats-Regel oft zu grob ist
 
 Viele Ratgeber nennen pauschal drei Netto-Monatsgehälter. Das wirkt griffig, hilft dir aber nur begrenzt. Zwei Menschen mit identischem Gehalt können völlig unterschiedliche Risiken haben. Eine alleinstehende Person ohne Auto und ohne Kinder braucht meist weniger Reserve als eine Familie mit Haus, Auto und hoher monatlicher Belastung.
@@ -138,6 +142,10 @@ Die 50–30–20-Regel ist dafür ein praxistauglicher Start:
 * **20 % für Sparen:** Erst den [Notgroschen aufbauen](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), danach investieren.
 
 Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen Hebel prüfen. Ein günstigerer Stromtarif, ein besserer Handyvertrag oder eine sauberere Versicherungsstruktur können sofort Geld freimachen. Genau dieser freie Betrag finanziert später deinen Notgroschen.
+
+![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
 
 ## Wann 1.000 € ein guter Start sind – aber nicht das Endziel
 
@@ -236,5 +244,9 @@ Dann erfüllt sie genau ihren Zweck. Setze danach das Auffüllen wieder an erste
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
+
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen](../../werkzeuge/notgroschen-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

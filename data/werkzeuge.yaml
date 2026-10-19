@@ -35,9 +35,9 @@ version: 1
 name: "Franks Werkzeuge"
 short_name: "Werkzeuge"
 hub_titel: "Werkzeuge: Rechnen, bevor du entscheidest"
-hub_kicker: "Acht eigenständige Werkzeuge"
+hub_kicker: "Neun eigenständige Werkzeuge"
 positionierung: >-
-  Acht eigenständige Rechner für die Entscheidungen, die deine Fixkosten wirklich
+  Neun eigenständige Rechner für die Entscheidungen, die deine Fixkosten wirklich
   bewegen. Jedes Werkzeug läuft vollständig in deinem Browser, legt seine Formel
   offen und lässt sich als CSV oder PDF mitnehmen.
 versprechen: "Du kannst das Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken."
@@ -741,3 +741,113 @@ werkzeuge:
         herausgeber: "Verbraucherzentrale Bundesverband"
         stand: "2026-09"
     faq_hinweis: "Ein Budget ist eine Entscheidung, keine Tabelle."
+
+  # ----------------------------------------------------------------
+  - id: "balkonkraftwerk"
+    slug: "balkonkraftwerk-rechner"
+    engine: "balkonkraftwerk"
+    name: "Balkonkraftwerk-Rechner"
+    kurz: "Jahresertrag, Ersparnis und Amortisation deines Steckersolargeräts – mit Einspeisung und lokaler Förderung als Option."
+    icon: "☀"
+    kompass: "konditionen"
+    pillar: "strom-sparen"
+    pillar_label: "Strom sparen"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "leistung"
+        label: "Modulleistung"
+        typ: "zahl"
+        einheit: "Wp"
+        standard: "800"
+        hilfe: "Summe aller Module, z. B. 800 Wp für zwei 400-Watt-Module. Der Wechselrichter begrenzt die Einspeisung auf 800 VA, mehr zählt nicht."
+      - id: "anschaffung"
+        label: "Anschaffungskosten"
+        typ: "euro"
+        einheit: "€"
+        hilfe: "Preis des Komplettsets inkl. Halterung und Kabel. Die Mehrwertsteuer ist seit 2023 bereits 0 %."
+      - id: "ausrichtung"
+        label: "Ausrichtung"
+        typ: "auswahl"
+        standard: "sued"
+        optionen:
+          - wert: "sued"
+            label: "Süd"
+            zahl: 1
+          - wert: "suedwest"
+            label: "Südwest oder Südost"
+            zahl: 0.89
+          - wert: "west-ost"
+            label: "West oder Ost"
+            zahl: 0.77
+          - wert: "nord"
+            label: "Nord"
+            zahl: 0.43
+        hilfe: "Ertragsfaktor nach Ausrichtung. Ein Ost- oder Westbalkon liefert rund drei Viertel des Südertrags."
+      - id: "eigenverbrauch"
+        label: "Eigenverbrauchsanteil"
+        typ: "prozent"
+        einheit: "%"
+        standard: "35"
+        optional: true
+        hilfe: "Anteil des Solarstroms, den du im Haushalt selbst nutzt. Ohne Speicher meist 30 bis 40 %. Ohne Angabe: 35 %."
+      - id: "strompreis"
+        label: "Strompreis, den du ersetzt"
+        typ: "euro"
+        einheit: "€/kWh"
+        standard: "0,35"
+        optional: true
+        hilfe: "Was eine selbst verbrauchte Kilowattstunde spart. Ohne Angabe: 0,35 €."
+      - id: "einspeisung"
+        label: "Überschuss ins Netz einspeisen und vergüten lassen"
+        typ: "auswahl"
+        standard: "nein"
+        optionen:
+          - wert: "nein"
+            label: "Nein, der Überschuss bleibt unvergütet"
+            zahl: 0
+          - wert: "ja"
+            label: "Ja, mit Einspeisevergütung"
+            zahl: 1
+        hilfe: "Die Vergütung ist klein. Der Zweirichtungszähler kostet rund 20 bis 25 € im Jahr und wird hier abgezogen."
+      - id: "foerderung"
+        label: "Lokale Förderung"
+        typ: "euro"
+        einheit: "€"
+        optional: true
+        hilfe: "Zuschuss von Kommune oder Stadtwerk. Eine bundesweite Förderung gibt es nicht. Ohne Angabe: 0 €."
+    formel:
+      - "Nutzbare Leistung = Modulleistung, höchstens 800 Wp (Wechselrichter)."
+      - "Jahresertrag = nutzbare Leistung ÷ 800 × 750 kWh × Ausrichtungsfaktor."
+      - "Eigenverbrauch = Jahresertrag × Eigenverbrauchsanteil. Ersparnis = Eigenverbrauch × Strompreis."
+      - "Einspeisevergütung = (Jahresertrag − Eigenverbrauch) × 0,077 € − 22 € Zählergebühr, nur bei „ja“ und nie unter 0 €."
+      - "Amortisation = (Anschaffung − Förderung) ÷ (Ersparnis + Einspeisevergütung)."
+      - "Gewinn nach 20 Jahren = 20 × Jahresnutzen − (Anschaffung − Förderung)."
+    annahmen:
+      - "750 kWh Jahresertrag je 800 Wp sind ein Modellwert für ein Südsystem in Deutschland. Die Spanne liegt bei 650 bis 850 kWh. Verschattung und Neigung ändern den Wert spürbar."
+      - "Der Ertrag skaliert linear mit der Leistung. Das ist eine Näherung."
+      - "Die Vergütung von 7,70 ct/kWh gilt für Anlagen, die ab August 2026 ans Netz gehen. Sie sinkt jährlich um rund 1 %."
+      - "Die Rechnung nennt die Lebensdauer von 20 Jahren. Preissteigerungen beim Strom und ein Wechselrichter-Ersatz nach 10 bis 15 Jahren sind nicht eingerechnet."
+      - "Mieter brauchen die Zustimmung des Vermieters, Wohnungseigentümer die der Gemeinschaft. Das ist keine Rechengröße, sondern Voraussetzung."
+    quellen:
+      - titel: "reduco: Balkonkraftwerk 2026 – Jahresertrag nach Ausrichtung"
+        url: "https://reduco.ai/blog/balkonkraftwerk-2026-regeln-kosten"
+        herausgeber: "reduco"
+        stand: "2026-10"
+      - titel: "solago: Balkonkraftwerk Einspeisevergütung 2026/27"
+        url: "https://solago.de/blogs/news/balkonkraftwerk-einspeiseverguetung"
+        herausgeber: "solago"
+        stand: "2026-10"
+      - titel: "elektronik-zeit: Balkonkraftwerk 2026 – Kosten, Eigenverbrauch, Amortisation"
+        url: "https://elektronik-zeit.de/balkonkraftwerk/"
+        herausgeber: "elektronik-zeit"
+        stand: "2026-10"
+      - titel: "enerix: Balkonkraftwerk Einspeisevergütung – Zweirichtungszähler 20 bis 25 € im Jahr"
+        url: "https://www.enerix.de/ratgeber/balkonkraftwerk-2025/balkonkraftwerk-einspeiseverguetung-2025/"
+        herausgeber: "enerix"
+        stand: "2026-10"
+      - titel: "Aktion Eigenstrom: Balkonkraftwerk Förderung 2026"
+        url: "https://aktion-eigenstrom.de/ratgeber/balkonkraftwerk-foerderung"
+        herausgeber: "Aktion Eigenstrom"
+        stand: "2026-10"
+    faq_hinweis: "Der Eigenverbrauch ist der Hebel, die Einspeisevergütung ist nur ein Nebenertrag."

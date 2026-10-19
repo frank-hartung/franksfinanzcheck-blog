@@ -1,8 +1,133 @@
 {
-  "generated_at": "2026-10-12",
-  "high_risk_total": 9,
-  "approved": 9,
+  "generated_at": "2026-10-19",
+  "high_risk_total": 10,
+  "approved": 6,
   "open_live": 0,
-  "open_drafts": 0,
-  "items": []
+  "open_drafts": 4,
+  "items": [
+    {
+      "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+      "path": "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+      "path": "content/posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten",
+      "path": "content/posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "path": "content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "sichtbare Belegkette braucht mindestens 2 Quellen"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Im alten Tarif kostet die Einheit 42 Cent, was Kosten von 1.470 Euro ergibt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein neuer Anbieter verlangt nur 30 Cent pro Einheit, was die Kosten auf 1.050 Euro senkt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Durch den Wechsel spart der Haushalt also 420 Euro im Jahr, ohne weniger Strom zu verbrauchen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Eine Bank verlangt 9,90 Euro Grundgebühr pro Monat und 15 Euro im Jahr für die Kreditkarte.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Eine Bank verlangt 9,90 Euro Grundgebühr pro Monat und 15 Euro im Jahr für die Kreditkarte.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das summiert sich auf 133,80 Euro an fixen Kosten pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Über zehn Jahre gesehen sind das mehr als 1.300 Euro Ersparnis allein durch ein anderes Konto.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    }
+  ]
 }
