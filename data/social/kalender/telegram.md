@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 19.10.2026 12:54 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.10.2026 19:34 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,11 +12,8 @@
 
 ## Kommende Beiträge
 
-### Mo, 19. Oktober 2026
-- **18:00** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 ### So, 25. Oktober 2026
-- **07:00** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
+- **07:00** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Welche Routinen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 ### So, 01. November 2026
 - **07:00** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
@@ -25,10 +22,6 @@
 ## Zuletzt veröffentlicht
 
 _Noch nichts über diesen Kanal versendet._
-
-## Zurückgestellt (Autopilot hat blockiert)
-
-- 🚫 19.09. 18:00 · Wlan probleme loesen mesh oder repeater im vergleich · Artikel nicht mehr im Bestand
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*

@@ -4,7 +4,7 @@ Stand: 19.10.2026 · Gilt für: `data/weiterleitungen.yaml`, `data/url_entfallen
 
 ## 1. Warum es das gibt
 
-117 Beiträge waren veröffentlicht und sind heute nicht mehr erreichbar. Die Ursachen sind Datums-Korrekturen beim Ordnernamen, Dubletten mit Suffix `(1)` und ersetzte Beiträge. Ohne Weiterleitung gehen Besucher und Suchmaschinen-Signale verloren.
+118 ehemals veröffentlichte Beitrags-URLs fehlen aktuell im Build: 115 haben ein passendes Weiterleitungsziel, 3 bleiben aus fachlichen Gründen bewusst 404 (Regel D). Ursachen sind Datums-Korrekturen beim Ordnernamen, Dubletten mit Suffix `(1)`, ersetzte Beiträge und einzelne Qualitäts-Holds. Ohne passende Route gehen Besucher und Suchmaschinen-Signale verloren.
 
 Die Hugo-Aliase sind absichtlich abgeschaltet (`hugo.toml`: `disableAliases = true`). Deshalb liegen die Weiterleitungen als eigene Seiten unter `static/` und entstehen aus einer einzigen Quelle.
 
@@ -94,12 +94,12 @@ Die Datenschutz-Folgen des Proxys stehen in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`
 |---|---|---|
 | `scripts/index_hygiene_gate.py` (H9) | Jede Weiterleitungsseite hat ein Ziel, das im Build existiert, indexierbar ist, keine Kette und keine Schleife bildet | Im Deploy nach dem Build (`deploy.yml`). Harter Fund stoppt den Deploy. |
 | Gate H5 | Weiterleitungsseiten zählen nicht in das Verhältnis indexierbar : nicht indexierbar | Im Deploy |
-| `scripts/tests/test_weiterleitungen.py` | Quelle grün, Seiten stimmen, Snapshot aktuell | Lokal über `npm run test:weiterleitungen`. In der CI läuft dieser Test **nicht** automatisch (die Workflows führen `unittest` nur für benannte Module aus). |
+| `scripts/tests/test_weiterleitungen.py` | Quelle grün, erzeugte Seiten stimmen, Snapshot-Verluste sind entschieden | Lokal über `npm run test:weiterleitungen` und im Deploy vor Hugo. |
 
-Die Quellprüfung `--check` läuft in der CI nicht. Eine Aufnahme in `deploy.yml` ist eine Workflow-Änderung und braucht einen ausdrücklichen Auftrag (CLAUDE.md).
+`deploy.yml` führt vor dem Build `--selftest`, `--check`, `--verify` und `python3 -m unittest scripts.tests.test_weiterleitungen` aus. Nur `--proxy-check` bleibt wegen seiner netzabhängigen Betreiberprüfung außerhalb der CI.
 
 ## 8. Bekannte Grenzen
 
 - Ohne Cloudflare-Proxy ist die Weiterleitung eine Meta-Refresh-Seite. Google behandelt sie als Weiterleitung, aber die Signalübertragung ist schwächer als bei einem echten 301.
 - Der Snapshot umfasst alle Live-URLs aus `content/`. Änderungen an `layouts/` oder `static/` erscheinen nicht darin.
-- Die Zuordnung der 114 Ziele beruht auf Titel, Thema und Stichproben. Nicht jeder Text wurde einzeln gelesen. Jeder Eintrag hat eine Begründung. Vor dem Cloudflare-Import (Abschnitt 6) sollte die Redaktion die Regel-B-Einträge gegenlesen.
+- Die Zuordnung der 115 Ziele beruht auf Titel, Thema und Stichproben. Nicht jeder Text wurde einzeln gelesen. Jeder Eintrag hat eine Begründung. Vor dem Cloudflare-Import (Abschnitt 6) sollte die Redaktion die Regel-B-Einträge gegenlesen.

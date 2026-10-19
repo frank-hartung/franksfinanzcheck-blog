@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 19.10.2026 12:54 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.10.2026 19:34 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
@@ -22,7 +22,7 @@
 
 ## Zuletzt produziert
 
-- ✅  · Preiswert surfen: So findest du den optimalen DSL‑Anschluss
+- ✅  · Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich
 
 ---
 *Erzeugt von `scripts/social_calendar.py`. Regie: `data/social/video.yaml` · Produktion: `scripts/social_video.py` (Workflow „Shorts-Schmiede“).*

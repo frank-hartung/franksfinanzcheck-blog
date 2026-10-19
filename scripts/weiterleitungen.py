@@ -2,7 +2,7 @@
 """weiterleitungen.py – Weiterleitungen für verschobene Beiträge (Quelle: data/weiterleitungen.yaml).
 
 WARUM DIESES SKRIPT EXISTIERT (19.10.2026)
-Der Blog hat 117 Alt-URLs, die früher veröffentlicht waren und heute fehlen. Ohne Weiterleitung
+Der Blog hat 118 ehemals veröffentlichte Post-URLs, die im aktuellen Build fehlen. Ohne Weiterleitung
 gehen Suchmaschinen-Signale verloren, und Leser landen auf 404. Die Hugo-Aliase sind abgeschaltet
 (hugo.toml: disableAliases = true, Entscheidung „Index-Hygiene“). Deshalb liegen die Weiterleitungen
 als eigene, geprüfte Seiten unter static/ und werden hieraus erzeugt.

@@ -9,6 +9,20 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: 'ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan'
+  url: https://www.youtube.com/watch?v=JoQ9_KliPWk
+  quelle: YouTube
+  erfasst: '2026-10-19T19:44:50'
+  brief: 2026-10-19-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-19-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)
+  url: https://www.youtube.com/watch?v=1ujV_wftSdA
+  quelle: YouTube
+  erfasst: '2026-10-19T19:44:50'
+  brief: 2026-10-19-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-19-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: Steigende Preise für Benzin, Heizöl, Gas - wie teuer wird der Winter?
   url: https://www.tagesschau.de/wirtschaft/verbraucher/energie-heizen-winter-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -170,4 +184,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-17T13:08:39'
+zuletzt_ergaenzt: '2026-10-19T19:44:50'

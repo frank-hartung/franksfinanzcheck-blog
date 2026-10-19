@@ -207,6 +207,14 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("} catch (e) {", block, "Nachführen muss fail-open sein")
         self.assertIn("return;", block, "Nach dem Nachführen darf kein Duplikat entstehen")
 
+    def test_809_gleichzeitige_header_und_worker_befunde_haben_vorrang(self):
+        code = _kommentarfrei(_text())
+        self.assertIn("headerGateFailed && workerGateFailed ? 'sicherheit-live'", code)
+        klassen = re.search(r"const runbookKlasse = (.*?);", code, re.S).group(1)
+        self.assertLess(klassen.index("'sicherheit-live'"), klassen.index("'sicherheit-header'"))
+        self.assertIn("workerGateFailed ? 'sicherheit-worker'", code)
+        self.assertIn("liveNachweisFailed ? 'sicherheit-nachweis'", code)
+
     def test_tagesdefizit_fachkanal_verhindert_duplikat(self):
         # Vertrag 6 (#602): Ein ehrlich roter Quotenschritt darf nur dann
         # stummgeschaltet werden, wenn das engine-deficit-Fach-Issue mit
@@ -259,6 +267,14 @@ class ProdScopingResolve(unittest.TestCase):
         self.assertIn("default_branch", cond_norm)
         self.assertIn("!= 'pull_request'", cond_norm.replace("event != 'pull_request'",
                                                              "!= 'pull_request'"))
+
+    def test_809_live_nachweis_wird_vor_jedem_issue_abschluss_geprueft(self):
+        resolve = self.raw.split("  resolve:", 1)[1]
+        self.assertIn('if [ "$WF_NAME" = "Sicherheits-Wache" ]; then', resolve)
+        self.assertIn("sicherheits_nachweis.py --abschluss", resolve)
+        self.assertIn("RUN_EVENT:", resolve)
+        self.assertIn("RUN_ID:", resolve)
+        self.assertLess(resolve.index("sicherheits_nachweis.py --abschluss"), resolve.index("gh issue close"))
 
 
 class TitelUndLabelVertrag(unittest.TestCase):
@@ -322,7 +338,7 @@ class VerhaltensSimulation(unittest.TestCase):
     gestubbtem github-script-Kontext WIRKLICH ausgeführt – alle Kern-
     Szenarien inkl. der exakten #343-Konstellation. Harness:
     scripts/tests/sim/alert_scoping_sim.mjs (node; GitHub-Runner bringen es
-    mit, lokal ohne node/pyyaml → Skip, kein Scheingrün)."""
+    mit; PyYAML ist für die Verhaltensprobe nicht erforderlich)."""
 
     def test_kern_szenarien(self):
         import shutil
@@ -335,16 +351,25 @@ class VerhaltensSimulation(unittest.TestCase):
         try:
             import yaml
         except ImportError:
-            self.skipTest("PyYAML lokal nicht installiert (CI installiert es)")
-
-        daten = yaml.safe_load(_text())
-        # Den github-script-Schritt suchen statt auf eine Position zu wetten:
-        # vor ihm stehen Checkout, Selbsttest und Identitäts-Schritt.
-        schritte = daten["jobs"]["alarm"]["steps"]
-        kandidaten = [s for s in schritte if "github-script" in str(s.get("uses", ""))]
-        self.assertEqual(len(kandidaten), 1,
-                         "genau ein github-script-Schritt im alarm-Job erwartet")
-        skript = kandidaten[0]["with"]["script"]
+            # Der Sicherheits-Offline-Job braucht keine pip-Abhängigkeit.
+            # Den einen literalen script-Block einlesen statt die wichtigste
+            # Verhaltensprobe auf einem Standard-Python still zu überspringen.
+            import textwrap
+            zeilen = _text().split("          script: |\n", 1)[1].splitlines()
+            block = []
+            for zeile in zeilen:
+                if zeile and not zeile.startswith("            "):
+                    break
+                block.append(zeile)
+            skript = textwrap.dedent("\n".join(block))
+            self.assertTrue(skript.strip(), "alarm-Skript fehlt")
+        else:
+            daten = yaml.safe_load(_text())
+            schritte = daten["jobs"]["alarm"]["steps"]
+            kandidaten = [s for s in schritte if "github-script" in str(s.get("uses", ""))]
+            self.assertEqual(len(kandidaten), 1,
+                             "genau ein github-script-Schritt im alarm-Job erwartet")
+            skript = kandidaten[0]["with"]["script"]
         harness = REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs"
         self.assertTrue(harness.exists(), f"Simulations-Harness fehlt: {harness}")
         with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False,
