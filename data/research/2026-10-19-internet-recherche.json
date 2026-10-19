@@ -1,0 +1,229 @@
+{
+  "datum": "2026-10-19",
+  "erzeugt_utc": "2026-10-19 13:23 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Merz lädt zu Investitionsgipfel in Berlin",
+            "url": "https://www.tagesschau.de/wirtschaft/wirtschaft-investitionsgipfel-nvidia-ki-100.html",
+            "datum": "2026-10-19T13:12",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Auschwitz-Überlebender Höllenreiner im Alter von 92 gestorben",
+            "url": "https://www.tagesschau.de/inland/auschwitz-ueberlebender-hoellenreiner-gestorben-100.html",
+            "datum": "2026-10-19T13:04",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Reiche verspricht Milliarden für Wasserstoff-Ausbau",
+            "url": "https://www.tagesschau.de/wirtschaft/reiche-wasserstoff-ausbau-millarden-100.html",
+            "datum": "2026-10-19T12:34",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Anteil weiblicher Führungskräfte in Deutschland weiterhin niedrig",
+            "url": "https://www.tagesschau.de/inland/gesellschaft/frauen-anteil-fuehrungspositionen-100.html",
+            "datum": "2026-10-19T12:19",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Zwölf Migranten bei zwei Bootsunglücken in der Ägäis gestorben",
+            "url": "https://www.tagesschau.de/ausland/aegaeis-bootsunglueck-100.html",
+            "datum": "2026-10-19T12:07",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Elon Musk: Techmilliardär verspricht jedem US-Kind eine SpaceX-Aktie",
+            "url": "https://www.spiegel.de/wirtschaft/elon-musk-techmilliardaer-verspricht-jedem-us-kind-eine-spacex-aktie-a-953bf991-f366-474f-a8f2-c4f49abcd2aa#ref=rss",
+            "datum": "Mon, 19 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Lindt & Sprüngli entlässt Konzernchef Adalbert Lechner",
+            "url": "https://www.spiegel.de/wirtschaft/lindt-spruengli-entlaesst-konzernchef-adalbert-lechner-a-7e490637-b245-4350-8674-6c9d9f7ea578#ref=rss",
+            "datum": "Mon, 19 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Einkommen in Deutschland: Gehören Sie zu den obersten vier Prozent?",
+            "url": "https://www.spiegel.de/wirtschaft/service/einkommen-in-deutschland-gehoeren-sie-zu-den-obersten-vier-prozent-a-089e7bbd-0a3c-4c21-8daa-c6626d3c719e#ref=rss",
+            "datum": "Mon, 19 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Volkswagen diskutiert über Stopp des Lohnwachstums bis 2030",
+            "url": "https://www.spiegel.de/wirtschaft/volkswagen-diskutiert-ueber-stopp-des-lohnwachstums-bis-2030-a-4a6e840d-8527-4f0a-876c-0890af546fda#ref=rss",
+            "datum": "Mon, 19 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Fachkräftemangel wird Infrastruktur-Projekte deutlich ausbremsen",
+            "url": "https://www.spiegel.de/wirtschaft/fachkraeftemangel-wird-infrastruktur-projekte-deutlich-ausbremsen-a-a118f8e2-d616-47fa-8324-23e1e5ac770d#ref=rss",
+            "datum": "Mon, 19 Oct 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Telekom, Vodafone, Telefónica und Orange planen gemeinsames Satelliten-Gebot",
+            "url": "https://www.heise.de/news/Telekom-Vodafone-Telefonica-und-Orange-planen-gemeinsames-Satelliten-Gebot-11492848.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-19T15:10",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise+ | OpenWiki im Test: Gedächtnis für Coding-Agenten",
+            "url": "https://www.heise.de/tests/OpenWiki-im-Test-Gedaechtnis-fuer-Coding-Agenten-11485587.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+            "datum": "2026-10-19T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise-Angebot: heise security Webinar: KI für Verteidiger – Hype vs. Nutzen für die Praxis",
+            "url": "https://www.heise.de/news/heise-security-Webinar-KI-fuer-Verteidiger-Hype-vs-Nutzen-fuer-die-Praxis-11485713.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-19T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "KI-Update kompakt: Urheberrecht, Apple Intelligence, KI-Geschmack, RTX Spark",
+            "url": "https://www.heise.de/news/KI-Update-kompakt-Urheberrecht-Apple-Intelligence-KI-Geschmack-RTX-Spark-11492021.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-19T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "iPhone Duo: Was es im Vergleich zum iPhone 18 Pro weniger kann",
+            "url": "https://www.heise.de/news/iPhone-Duo-Was-es-im-Vergleich-zum-iPhone-18-Pro-weniger-kann-11491146.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-19T14:56",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Stromanbieter Wechsel mit Check24 I komplette Anleitung zum Stromtarif-Wechsel",
+            "url": "https://www.youtube.com/watch?v=Q3pvk9PyRs8",
+            "kanal": "Verbraucher-Info24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)",
+            "url": "https://www.youtube.com/watch?v=1ujV_wftSdA",
+            "kanal": "Strom & Gas Energievermittler24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Ich wechsel meinen Stromanbieter live in diesem Video und zahle dann nur noch 36,88 Cent / kWh",
+            "url": "https://www.youtube.com/watch?v=uO2lRAkhLHE",
+            "kanal": "Smart2Finance",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF einfach erklärt (explainity® Erklärvideo)",
+            "url": "https://www.youtube.com/watch?v=YVB2TV0ziIE",
+            "kanal": "explainity ® Erklärvideos",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 kostenlose Kreditkarten (2026) Welche ist die Beste?",
+            "url": "https://www.youtube.com/watch?v=X9JIX97yF34",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
