@@ -502,7 +502,7 @@ await run('WF-9E5A-Gegenprobe: „Voraussetzungen prüfen“ in fremdem Workflow
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7613',
              steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen'], null, ['Einrichtung unvollständig', 'ANLEITUNG-OFFSITE-BACKUP']);
-// 12. WF-E813 (15.10.2026): Die Sicherheits-Wache misst nur HTTP-Kopfzeilen.
+// 12. WF-E813 (15.10.2026): Der F-01-Schritt misst nur HTTP-Kopfzeilen.
 //     Der Standardrat „API-Key abgelaufen" trifft auf diesen Kanal NIE zu und
 //     nannte nicht den einzigen Schritt, der hilft (A1 im Dashboard). Die
 //     Meldung muss die Klasse erklären (BEFUND vs. STOERUNG) statt zu raten.
@@ -549,6 +549,51 @@ await run('WF-E813: offene Meldung bekommt beim Klassenwechsel den neuen Rat',
     imBody: ['<!-- alert-runbook: sicherheit-header -->', 'FF Sicherheits-Header',
              'docs/SICHERHEIT-BETRIEB-RUNBOOK.md', 'Sicherheits-Header auswerten'],
     nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen'] });
+
+// #809 (19.10.2026): Im echten Lauf waren F-01 UND Worker rot. Der
+// bisherige Header-Vorrang behauptete trotzdem „ausschließlich HTTP“.
+const LIVE_809 = [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure',
+  html_url: 'https://x/jobs/118065546628', steps: [
+    { name: 'Sicherheits-Header auswerten (F-01) · Befund · Störung · grün', conclusion: 'failure' },
+    { name: 'Worker-Zustand messen – Budget, Bot-Schutz, Exporte (F-02/F-03/F-08)', conclusion: 'failure' },
+    { name: 'Live-Nachweis abschließen (F-01/F-02/F-03/F-08)', conclusion: 'failure' }
+  ] }];
+await run('#809-Reproduktion: Header UND Worker rot → beide Handlungswege',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure', jobs: LIVE_809 },
+  true, ['<!-- alert-runbook: sicherheit-live -->', 'Zwei unabhängige Live-Prüfungen',
+         'FF Sicherheits-Header', '**Worker:**', 'A3/A4 und D2', 'vollständiger erfolgreicher Live-Nachweis'],
+  null, ['ausschließlich HTTP-Kopfzeilen', 'API-Key abgelaufen', 'du musst nichts manuell prüfen']);
+
+await run('#809: nur Worker-Auswertung rot → Worker-Triage, keine Header-Reparatur',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    jobs: [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure', html_url: 'https://x/jobs/8091',
+      steps: [{ name: 'Worker-Zustand auswerten (F-02/F-03/F-08) · Befund · Störung · grün', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: sicherheit-worker -->', 'authentifizierte Betriebsbild', 'STOERUNG',
+         'öffentliche/minimale oder veraltete /healthz-Antwort', 'Kein Secret entfernen'],
+  null, ['FF Sicherheits-Header', 'ausschließlich HTTP-Kopfzeilen', 'API-Key abgelaufen']);
+
+await run('#809: Einzelmessungen grün, Nachweis unvollständig → Nachweis-Triage',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure', html_url: 'https://x/jobs/8092',
+      steps: [{ name: 'Live-Nachweis abschließen (F-01/F-02/F-03/F-08)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: sicherheit-nachweis -->', 'Live-Nachweis unvollständig', 'TEILWEISE',
+         'kein zusätzlicher Sicherheitsbefund', 'test_sicherheits_nachweis'],
+  null, ['FF Sicherheits-Header', 'API-Key abgelaufen']);
+
+await run('#809: bestehender Header-Rat wird bei zwei roten Messungen nachgeführt',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: LIVE_809, openIssues: [{ number: 809, title: IDENTITIES['Sicherheits-Wache'].titel,
+      body: IDENTITIES['Sicherheits-Wache'].marker + '\n<!-- alert-runbook: sicherheit-header -->',
+      created_at: '2026-10-19T12:43:55Z' }] },
+  false, [], { anzahl: 1, nummer: 809,
+    imBody: ['<!-- alert-runbook: sicherheit-live -->', 'Zwei unabhängige Live-Prüfungen', '**Worker:**'],
+    nichtImBody: ['ausschließlich HTTP-Kopfzeilen', 'API-Key abgelaufen'] });
+
+await run('#809-Gegenprobe: gleicher Worker-Schritt in fremdem Workflow bleibt Standard',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'anderer Lauf', conclusion: 'failure', html_url: 'https://x/jobs/8093',
+      steps: [{ name: 'Worker-Zustand auswerten', conclusion: 'failure' }] }] },
+  true, ['Häufigste Ursachen'], null, ['<!-- alert-runbook: sicherheit-worker -->']);
 
 // WF-53E2 / #780 (16.10.2026): Ein roter Selbsttest ist eine Code-Regression.
 //     Exakte Konstellation des Vorfalls: Der Detektor-Selbsttest der

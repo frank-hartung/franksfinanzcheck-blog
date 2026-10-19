@@ -92,7 +92,7 @@ Ein weiterer Fehler ist das Gießkannen-Prinzip. Man versucht an allen Ecken gle
 
 Man kauft die günstige Butter oder fährt zum billigen Supermarkt. Dabei übersiehst du leicht eine hohe Ersparnis. Ein Wechsel der Versicherung hilft dir.
 
-Zudem fehlt oft die klare Dokumentation. Wer seine Erfolge nicht sieht, verliert schnell die Lust. Nutze ein einfaches Haushaltsbuch oder eine Tabelle für deine Ersparnisse. Wenn du schwarz auf weiß deine monatliche Ersparnis siehst, motiviert dich das.
+Zudem fehlt oft die klare Dokumentation. Wer seine Erfolge nicht sieht, verliert schnell die Lust. Nutze ein einfaches Haushaltsbuch oder den [Haushaltsbudget-Rechner](/werkzeuge/haushaltsbudget/), um Einnahmen und Ausgaben gegenüberzustellen. Wenn du schwarz auf weiß deine monatliche Ersparnis siehst, motiviert dich das.
 
 ## Praktische Mittel für die sofortige Umsetzung
 
