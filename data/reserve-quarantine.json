@@ -9,14 +9,15 @@
       "lesbarkeit_heiler.py",
       "profi_polish.py"
     ],
-    "hits": 2,
+    "hits": 3,
     "klasse": "heilbar",
     "laeufe": [
       "run:39015488535",
-      "run:39110491344"
+      "run:39110491344",
+      "run:39227877167"
     ],
-    "last": "2026-10-18T08:23:01Z",
-    "lauf": "run:39110491344",
+    "last": "2026-10-19T09:20:10Z",
+    "lauf": "run:39227877167",
     "signatur": "reserve-qualitäts-gate: rs<n>: kein „das wichtigste in kürze“-modul"
   }
 }
