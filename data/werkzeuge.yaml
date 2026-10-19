@@ -35,9 +35,9 @@ version: 1
 name: "Franks Werkzeuge"
 short_name: "Werkzeuge"
 hub_titel: "Werkzeuge: Rechnen, bevor du entscheidest"
-hub_kicker: "Acht eigenständige Werkzeuge"
+hub_kicker: "Neun eigenständige Werkzeuge"
 positionierung: >-
-  Acht eigenständige Rechner für die Entscheidungen, die deine Fixkosten wirklich
+  Neun eigenständige Rechner für die Entscheidungen, die deine Fixkosten wirklich
   bewegen. Jedes Werkzeug läuft vollständig in deinem Browser, legt seine Formel
   offen und lässt sich als CSV oder PDF mitnehmen.
 versprechen: "Du kannst das Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken."

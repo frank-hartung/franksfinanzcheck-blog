@@ -14,5 +14,16 @@
     {{- $number = .PageNumber -}}
     {{- if gt $number 1 -}}{{- $url = .URL | absURL -}}{{- end -}}
   {{- end -}}
+{{- /* Alle anderen Sektionen (z. B. /werkzeuge/): Hugo legt Blätterseiten an,
+       sobald eine Sektion mehr Seiten hat als pagerSize. Die Übersicht selbst
+       paginiert nicht, /werkzeuge/page/2/ wäre aber eine Dublette. 19.10.2026:
+       Mit dem neunten Werkzeug bei pagerSize 8 entstand genau das, indexierbar
+       und ohne Sitemap-Eintrag (H1). Darum gilt hier dieselbe Regel wie für
+       Posts: Blätterseite ab 2 = Pager = noindex und nicht in der Sitemap. */ -}}
+{{- else if eq .Kind "section" -}}
+  {{- with .Paginator -}}
+    {{- $number = .PageNumber -}}
+    {{- if gt $number 1 -}}{{- $url = .URL | absURL -}}{{- end -}}
+  {{- end -}}
 {{- end -}}
 {{- return (dict "number" $number "isPager" (gt $number 1) "url" $url) -}}

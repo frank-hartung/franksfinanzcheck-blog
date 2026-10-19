@@ -248,14 +248,26 @@ entscheidungen:
       channel: "marke"
       offen: "Empfehlung: noch nicht senden. Fünf Bedingungen (echter Redaktionskontakt, Umfang im Pitch, Strompreisbasis offen, Wochengrenze, Freigabe durch Frank). Erst eine Redaktion, dann Rückmeldung abwarten. Details in docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.md."
   - id: E-21
-    punkt: "Testsuite – vorbestehender Fehlschlag"
-    entscheidung: "test_bot_watchdog_meldetakt.test_rechter_baum_hat_keine_befunde schlägt fehl: Wirkungsprobe C25 „YMYL: Schreibprüfung nicht auswertbar (ParseError) – fail-closed“ (scripts/editorial_review_gate.py, Zeile 291). Der Fehler ist im Ausgangsstand 258fd51 identisch. Das Verhalten (fail-closed) ist richtig. Die Ursache im Testfixture oder in der Eingabe ist nicht geklärt."
-    begruendung: "Vorbestehend, nicht durch diese Arbeit ausgelöst. Der Code wurde nicht geändert, damit die Sicherung nicht aufgeweicht wird."
-    status: "offen"
+    punkt: "Testsuite – C25 und C38 (Wirkungsprobe ohne PyYAML)"
+    entscheidung: "Ursache geklärt und behoben. Die Tests riefen run_all(python_bin=„python3“) auf, die CLI nutzt sys.executable. Das Systempython3 der Sandbox hat kein PyYAML. Die Wirkungsprobe von lesbarkeit_heiler.py lief dadurch ohne Parser, editorial_review_gate brach fail-closed mit ParseError ab. Die Gate-Logik war richtig, der Fehler lag im Test-Fixture. Die beiden C38-Befunde (PyYAML fehlt) hatten dieselbe Ursache. Umgesetzt: Tests nutzen sys.executable (test_bot_watchdog_meldetakt, test_pflichtcheck). Der Meldetext nennt jetzt die Ursache (Exception-Typ und Meldung). Fail-closed bleibt unverändert."
+    begruendung: "Die Sicherung wurde nicht abgeschwächt. Die Tests prüfen jetzt denselben Interpreter wie die CLI. Die Lücke im Ausgangsstand 258fd51 bestand, weil der Test-Interpreter vom CLI-Interpreter abwich."
+    status: "umgesetzt"
     verantwortlich: auto
-    nachweis: "python3 -m unittest scripts.tests.test_bot_watchdog_meldetakt (1 Fehler). Vergleichslauf: /tmp/ut_base.log (258fd51)."
+    nachweis: "unittest discover -s scripts/tests (19.10.2026): 3377 Tests, OK, 11 übersprungen, 0 Fehlschläge. Integritäts-Siegel grün. editorial_review_gate --selftest rc 0."
     befund:
       owner: auto
       severity: P2
       channel: "repo-betrieb"
-      offen: "Fixture oder Parser-Eingabe prüfen, Fehler reproduzieren. Gate-Verhalten (fail-closed) nicht abschwächen."
+      offen: "Keine offenen Schritte."
+  - id: E-22
+    punkt: "Werkzeug-Übersicht – Blätterseite /werkzeuge/page/2/"
+    entscheidung: "Blätterseiten jeder Sektion gelten als Pager: noindex, nicht in der Sitemap. Umsetzung in layouts/_partials/seo_context.html (Sektions-Zweig). hugo.toml bleibt unverändert, weil es im Integritäts-Siegel als kritisch geführt wird. pagerSize 8 → 12 wäre nur mit Signatur durch Frank möglich und wurde nicht gewählt, weil es Posts und Startseite betrifft."
+    begruendung: "Mit dem neunten Werkzeug (E-18) erzeugte Hugo bei pagerSize 8 eine Dublette der Übersicht. Sie war indexierbar und ohne Sitemap-Eintrag: harter Fund H1 der Index-Hygiene, Deploy-Gate rot. Die Regel gilt bereits für Startseite und Posts. Die Sektions-Regel schließt die Lücke an der Stelle, an der sie entsteht."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: "Hugo 0.164.0 extended (PyPI-Wheel hugo-python-distributions, nicht die offizielle GitHub-Binärdatei) lokal: Build 101 Seiten, rc 0. /werkzeuge/page/2/ trägt noindex, follow und fehlt in der Sitemap. index_hygiene_gate --base: 0 harte Funde. Test scripts/tests/test_werkzeuge_hub.py."
+    befund:
+      owner: auto
+      severity: P1
+      channel: "repo-betrieb"
+      offen: "Kommentar in hugo.toml (Zeile 249) nennt noch „die acht“ Rechner. Die Datei ist im Siegel, die Änderung nur signiert. Nur ein Kommentar, ohne Wirkung auf den Build."

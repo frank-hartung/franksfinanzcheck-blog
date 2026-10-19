@@ -16,7 +16,7 @@ Die dritte Stelle war die Lücke. Gemessen am Build vom 12.10.2026:
     54 URLs, die IndexNow je gemeldet hat
     20 indexierbare Seiten, die NIE an eine Suchmaschine gemeldet wurden
 
-Darunter die acht Werkzeug-Rechner (`/werkzeuge/*/`), das Fixkosten-Cockpit
+Darunter alle Werkzeug-Rechner (`/werkzeuge/*/`), das Fixkosten-Cockpit
 (`/cockpit/`), die Studien-Seite, `/ueber/`, `/transparenz/`, `/impressum/`
 und `/datenschutz/` – also genau die Seiten, die Vertrauen und Umsatz tragen.
 Die Klasse ist dieselbe, die `layouts/sitemap.xml` am 01.10.2026 schon einmal
