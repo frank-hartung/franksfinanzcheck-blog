@@ -188,6 +188,10 @@ Nimm dir den nächsten freien Nachmittag Zeit dafür. Setz dich mit einem Kaffee
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** [Weihnachten Budget planen: Ohne Schulden durch die Feiertage](../../posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/)
 
+## Weiterrechnen und vertiefen
+
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)
+
 ## Häufige Fragen
 
 ### Wie viel Zeit muss ich für die Optimierung einplanen?
