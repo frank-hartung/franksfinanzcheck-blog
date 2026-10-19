@@ -238,7 +238,12 @@ python3 scripts/worker_betrieb_wache.py --offline         grün (Spiegel geprüf
 cd newsletter-worker && node --test                       92 Tests, 92 grün
 npm run test:sicherheit                                   alle vier Wachen grün
 python3 scripts/cloudflare_edge_freigabe.py --selftest    4 Fälle grün (neu)
+python3 -m unittest scripts.tests.test_cloudflare_edge_freigabe  6 Tests grün (T6-Ausgleich)
 npm run edge:check                                        grün
+python3 scripts/url_substring_guard.py                    885 Dateien, 0 Befunde
+python3 scripts/integrity_guard.py --gate                 grün (Kern neu signiert)
+python3 scripts/ki_transportweg.py --selftest             grün (T6-Ausnahme mit Ausgleich)
+python3 scripts/selftest_runner.py                        215 Wachen grün (430 Uhr-Proben)
 ```
 
 Belegt aus den Laufsachen (Actions-API, unveränderlich):
@@ -248,6 +253,23 @@ Belegt aus den Laufsachen (Actions-API, unveränderlich):
   Abschlusskommentare auf #782/#798 „läuft wieder fehlerfrei“.
 - Run `39254264963` (19.10., `schedule`): Annotationen
   „F-01 BEFUND … Proxy nicht aktiv“ und „Worker BEFUND“.
+
+**Nachtrag – Vorlauf-Befunde der Content-Ebene, bewusst nicht hier geheilt:**
+Der Regression-Lauf dieses Vorschlags trägt zwei Befunde, die mit WF-E813
+nichts zu tun haben und am Basis-Commit `1021d45` **identisch** auftreten
+(wiederholt im Arbeitsbaum des Basisstands nachgestellt – Vorläufigkeit
+bewiesen, nicht behauptet):
+`test_inhalts_register.test_live_wache_ist_gruen` meldet „FF3 … kein
+Rechner-Link“ für den am 19.10. 16:43Z scharf geschalteten Reserve-Beitrag
+`2026-10-12-haushaltskosten…`, und
+`test_weiterleitungen.test_snapshot_ist_aktuell` meldet „Live-URL
+verschwunden ohne Weiterleitung“ für
+`/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/`
+(Klasse #812 „SEO live404“). Beide Befunde sind `owner: human`, Kanal
+`seo-technik`; die Testnotiz verlangt ausdrücklich „Befund prüfen und erst
+danach `python3 scripts/url_wache.py --snapshot`“ – ein Triager-Handgriff.
+Dieser Vorschlag grätscht deshalb weder in die Content-Pipeline noch in den
+Snapshot und behauptet keine grüne Gesamtsuite.
 
 ---
 
