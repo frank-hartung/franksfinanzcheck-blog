@@ -270,18 +270,28 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--body", help="Body der Meldung (Datei oder - für stdin)")
     parser.add_argument("--jobs", help="Jobs des Laufs als JSON-Datei")
     parser.add_argument("--json", action="store_true", help="Entscheidung als JSON")
+    parser.add_argument("--nennt-jobs", action="store_true",
+                        help="Nur prüfen, OB die Meldung Jobs nennt (Exit 0/1) – "
+                             "der Aufrufer holt die Job-Liste nur dann, wie es "
+                             "der Übergangsvertrag verlangt (WF-E813 / #809).")
     parser.add_argument("--selftest", action="store_true", help="prüft die Prüfung")
     args = parser.parse_args(argv)
 
     if args.selftest:
         return selftest()
-    if not args.body or not args.jobs:
-        print("❌ --body und --jobs werden benötigt (oder --selftest).",
+    if not args.body or (not args.jobs and not args.nennt_jobs):
+        print("❌ --body und --jobs werden benötigt (oder --nennt-jobs, --selftest).",
               file=sys.stderr)
         return 2
     try:
         body = (sys.stdin.read() if args.body == "-"
                 else open(args.body, encoding="utf-8").read())
+        if args.nennt_jobs:
+            # Übergangsvertrag: Meldungen ohne jede Job-Nennung behalten ihren
+            # bisherigen Schließpfad (andere Workflows), der Job-Beweis greift
+            # ab der ersten Nennung. Der Aufrufer entscheidet so, OB er die
+            # Job-Liste des Laufs überhaupt abruft.
+            return 0 if jobs_aus_body(body) else 1
         with open(args.jobs, encoding="utf-8") as f:
             lauf_jobs = json.load(f)
     except OSError as fehler:
