@@ -1,13 +1,13 @@
-# Sicherheits-Runbook — was nur im Dashboard geht
+# Sicherheits-Runbook — Einrichtung und belastbare Betriebsnachweise
 
-**Stand:** 15. Oktober 2026 · **Grundlage:** `SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`
+**Stand:** 19. Oktober 2026 (WF-E813/#809) · **Grundlage:** `SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`
 (Findings F-01 bis F-10, Prüfpunkte P-1 bis P-8)
 
-**Wozu diese Datei:** Alles, was im Repository liegt, ist am 15.10.2026 behoben
-und durch Wachen gegen Rückfall gesichert. Die folgenden Schritte lassen sich
-**nicht** im Code erledigen — sie liegen in Cloudflare, GitHub oder auf dem
-eigenen Rechner. Jeder Schritt nennt Befehl, Prüfung und die Wache, die danach
-Alarm schlägt, wenn sich etwas zurückschleicht.
+**Wozu diese Datei:** Quellseitige Schutzmaßnahmen und ihre Regressionstests
+ersetzen keine Einrichtung in Cloudflare, GitHub oder auf dem eigenen Rechner.
+Die Abschnitte A–C beschreiben diese Einrichtung; D beschreibt den nachweisbaren
+Betrieb und den Abschluss einer Meldung. Grün im Offline-Lauf belegt nur den
+Repo-Stand — niemals funktionierende Live-Header oder einen ausgeführten Deploy.
 
 **Reihenfolge:** A1 → A2 → A3 sind die wirkungsvollsten und dauern zusammen etwa
 20 Minuten. B und C sind Feinheiten, P ist Hygiene.
@@ -32,9 +32,10 @@ Deshalb: Proxy davor, Header per Transform Rule.
 `franksfinanzcheck.de` → **DNS** → für `franksfinanzcheck.de` und `www` die
 Wolke auf **Proxied** (orange).
 
-**Schritt 2 — SSL-Modus prüfen:** **SSL/TLS → Overview** → `Full` (nicht
-`Flexible`; `Flexible` würde zwischen Cloudflare und GitHub unverschlüsselt
-übertragen und ist eine eigene Sicherheitslücke).
+**Schritt 2 — SSL-Modus prüfen:** **SSL/TLS → Overview** → bevorzugt
+`Full (strict)` mit gültigem GitHub-Pages-Ursprungszertifikat, mindestens `Full`.
+Ein vorhandenes `Full (strict)` nicht herunterstufen. Niemals `Flexible`:
+Das überträgt zwischen Cloudflare und GitHub unverschlüsselt.
 
 **Schritt 3 — Header-Regel:** Die komplette Regel (Filter + acht Kopfzeilen)
 steht kopierfertig in `cloudflare/edge-schutz.md`, Abschnitt A1. Einfach
@@ -61,8 +62,8 @@ Lauf-Zusammenfassung „F-01 · Sicherheits-Header“:
 
 | Klasse | Exit | Bedeutung | Was du tust |
 |---|---|---|---|
-| **OK** | 0 | beide Ziele gemessen, alles im Soll | nichts – die Meldung schließt sich von selbst |
-| **TEILWEISE** | 0 | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | nichts am Edge; das nicht gemessene Ziel steht ausdrücklich im Bericht. Die Regel aus A1 gilt je **Host**, nicht je Pfad – ein sauberes Ziel belegt sie. |
+| **OK** | 0 | beide Ziele gemessen, alle Pflicht-Header im Soll | F-01 belegt; die Meldung schließt erst, wenn zusätzlich Worker und vollständiger Live-Nachweis grün sind (D1) |
+| **TEILWEISE** | 0 (Mess-CLI) | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | kein neuer Header-Befund, aber **kein Abschlussnachweis**. Der abschließende Live-Nachweis bleibt rot; das nicht gemessene Ziel erneut messen. Eine Messung auf dem Haupt-Host belegt nicht die Einrichtung des `www`-Hosts. |
 | **BEFUND** | 1 | gemessen, und es fehlt etwas | je nach Diagnose Abschnitt A1 Schritt 1 (Proxy aus) oder Schritt 3 (Regel unvollständig) – der Bericht nennt es ausdrücklich |
 | **STOERUNG** | 2 | kein Ziel erreichbar | **kein** Sicherheitsbefund: Erreichbarkeit prüfen, Lauf neu starten |
 | **WACHE-FEHLER** | sonst / leer | Prüfung selbst defekt, z. B. fehlender Bericht oder Exit-Code | Workflow/Skript prüfen; keine Edge-Änderung auf Verdacht |
@@ -166,7 +167,7 @@ Warnung.
 
 | Name | Required reviewer | Deployment branches | Secrets dort ablegen |
 |---|---|---|---|
-| `cloudflare-produktion` | Frank Hartung | `main` | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` |
+| `cloudflare-produktion` | Frank Hartung | `main` | `CF_WORKERS_DEPLOY_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` |
 | `brand-admin` | Frank Hartung | `main` | `BRAND_ADMIN_TOKEN` |
 | `backup` | Frank Hartung | `main` | `BACKUP_REPO_TOKEN`, `BACKUP_PASSPHRASE` |
 
@@ -336,6 +337,101 @@ npm run test:sicherheit
 
 ---
 
+## D. Live-Nachweis und Abschlussvertrag (WF-E813/#809)
+
+### D1 · Offline-Grün ist kein Produktionsnachweis
+
+**Belegt am 18./19.10.2026:** Die Meldung #798 wurde nach dem grünen Push-Lauf
+[39125154809](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/39125154809)
+geschlossen, obwohl der Job „Live-Messung“ **skipped** war. Der tägliche Lauf
+[39254264963](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/39254264963)
+meldete dieselben offenen Prüfpfade erneut als #809. Das war kein Nachweis einer
+Heilung, sondern ein falscher Abschluss.
+
+**Seit der Korrektur gilt:**
+
+- `main` und ein erfolgreicher Workflow sind notwendig, reichen aber nicht.
+- Nur `schedule` oder `workflow_dispatch` mit erfolgreich ausgeführtem Job
+  „Live-Messung (täglich und auf Zuruf)“ dürfen WF-E813 schließen.
+- Beide Messschritte, beide Auswertungen und der Schritt
+  **„Live-Nachweis abschließen (F-01/F-02/F-03/F-08)“** müssen erfolgreich sein.
+  Fehlende/übersprungene Schritte und eine nicht abrufbare Job-Lage schließen
+  ausdrücklich **nicht**. Andere Workflows behalten ihren bisherigen Schließpfad.
+- Der Nachweis verlangt F-01 **OK** für alle vorgesehenen Ziele mit HTTP 2xx
+  und ein vollständiges, authentifiziertes Worker-Betriebsbild. `TEILWEISE`,
+  ein fehlender Leseschlüssel und eine öffentliche/alte Health-Antwort genügen
+  nicht. Warnungen bleiben sichtbar; sie sind keine ungeprüften Messwerte.
+- JSON, Markdown-Bericht und echter Prozess-Exit müssen zusammenpassen.
+  Fehlende, alte oder beschädigte Dateien sind **WACHE-FEHLER**, kein neuer
+  Sicherheitsbefund. Der Messschritt selbst bleibt neutral und speichert den Exit
+  auch unter Bash `-e`; die Auswertung entscheidet.
+- Jeder belegte Befund steht einzeln als gegen Kommando-Injektion geschützte
+  Check-Annotation in GitHub, außerdem in der Lauf-Zusammenfassung. Bereinigte
+  Berichte bleiben sieben Tage als Artefakt `sicherheits-live-nachweis` erhalten.
+  Keine rohen Health-Antworten, Export-Einträge, Adressen oder Cookies hochladen.
+
+**Nach Übernahme der Korrektur und Einrichtung nach A1/A3/A4:**
+
+```bash
+gh workflow run sicherheits-wache.yml --ref main
+```
+
+In Actions beide Live-Auswertungen und den vollständigen Live-Nachweis prüfen.
+Erst dieser erfolgreiche Lauf ist der Abschlussbeweis. Ein PR-Merge oder ein
+erfolgreicher Offline-Push darf die weiterhin offene Einrichtung nicht erledigen.
+
+### D2 · Worker-Rot ohne Ratespiel eingrenzen
+
+| Klasse | Bedeutung | Nächster Schritt |
+|---|---|---|
+| **BEFUND** | Vollständiges authentifiziertes Betriebsbild belegt eine Abweichung | Konkrete Annotation abarbeiten: KV-Ausfall, Turnstile-Widerspruch, fehlender/abweichender Tagesdeckel oder sprengendes Schreibbudget; A3/A4. Nie Bot-Schutz entfernen, um Grün zu erzeugen. |
+| **STOERUNG** | Kein vollständiges Betriebsbild | Zugang/Netz/Deploy anhand der Annotation prüfen. Auch HTTP 200 mit nur `ok`/`ts` ist ausdrücklich ungeprüft; der öffentliche Healthcheck verrät keinen Schutzstatus. |
+| **WACHE-FEHLER** | Prozess, JSON und Bericht passen nicht zusammen | Prüfung reparieren und erneut messen; keine Infrastrukturänderung auf Verdacht. |
+| **OK** | Alle verlangten Betriebsfelder wurden gemessen; kein harter Befund | Sichtbare Warnungen beachten. Der Gesamtabschluss braucht zusätzlich F-01 und den vollständigen Live-Nachweis. |
+
+**Vollständiger Health-Vertrag:** `ok` (Boolean), `kv` (`ok`/`fehler`),
+`budget.anmeldung_heute`, `budget.anmeldung_max`, `budget.feedback_max`
+(Ganzzahlen), `turnstile` (`aktiv`/`inaktiv`), `schluesselrollen`
+(`getrennt`/`gemeinsam`) und `exporte` (Liste mit gültigen HTTP-Statuswerten).
+Fehlende oder falsch typisierte Werte werden nicht durch Repo-Sollwerte ersetzt.
+Ein geschütztes HTTP-503-JSON mit `ok:false`/`kv:fehler` belegt einen KV-Ausfall;
+eine 503-HTML-Seite dagegen nicht. Transiente Netz-/5xx-/429-Störungen werden
+begrenzt wiederholt. Weiterleitungen tragen den Leseschlüssel niemals weiter;
+der Messzugang geht ausschließlich an `https://abos.franksfinanzcheck.de`.
+
+**Falls der Worker-Deploy fehlt/veraltet ist:**
+
+1. Repository-Variable `KV_NAMESPACE_ID_ABO` auf die vorhandene Namespace-ID
+   setzen (32 Hex-Zeichen; keinen neuen Speicher ohne Migrationsplan anlegen).
+2. Environment `cloudflare-produktion` nach A4 mit Freigabe und Beschränkung
+   auf `main` einrichten. `CF_WORKERS_DEPLOY_TOKEN` und `CLOUDFLARE_ACCOUNT_ID`
+   dort sicher hinterlegen; keine Werte in Issues/Chat/Reports schreiben.
+3. Actions → **„Cloudflare-Worker deployen“** → `newsletter-worker` von `main`.
+   Der Job **„Deploy newsletter-worker“** muss tatsächlich gelaufen sein.
+   Ein grüner Job „Deploy planen“ mit **übersprungenem Deploy** beweist nichts
+   (so im Lauf `38657279461` vom 14.10.2026).
+4. Danach die Sicherheits-Wache von `main` mit Live-Messung starten. Nur das
+   vollständige authentifizierte Betriebsbild bestätigt den neuen Stand.
+   Site-Key und Turnstile-Secret bleiben in der Reihenfolge aus A3 gekoppelt.
+
+**Zusätzliche Repo-Regressionsursache #809:** Der Live-Prüfer verlangte das
+Wort `Environments` in `cloudflare/edge-schutz.md`, die Vorlage enthielt aber
+keinen A4-Abschnitt. Selbst ein gesunder Worker wurde dadurch beanstandet,
+während die Offline-Prüfung Grün zeigte. A4 ist jetzt ergänzt, und **dieselbe**
+Funktion `vorlagen_fehler()` läuft offline und bei der Betriebsbewertung.
+Der Regressionstest wertet einen gesunden Stand gegen das **echte Repository**
+aus und sabotiert anschließend jede erforderliche Vorlagenkomponente.
+
+**Rückfallschutz:**
+
+```bash
+npm run test:sicherheit
+# einschließlich echter Workflow-Shellblöcke mit Bash -e und lokaler gh-Attrappe
+python3 -m unittest scripts.tests.test_sicherheits_nachweis scripts.tests.test_worker_betrieb_wache
+```
+
+---
+
 ## Abschlussprüfung
 
 ```bash
@@ -348,9 +444,11 @@ cd ../cloudflare/klick-zaehler && node --test test/worker.test.mjs   # 34 Tests
 cd ../../cloudflare/ki-assistent && node --test                      # 17 Tests
 ```
 
-Alle grün = der Stand aus dem Audit ist wiederhergestellt **und** gesichert.
-Rot = die Meldung nennt Datei, Zeile und Grund; ein roter Lauf ist ein Auftrag,
-kein Rauschen.
+Quellseitiges Grün belegt die Regressionstests, nicht die Dashboard-Einrichtung.
+Erst vollständiges Live-Grün nach D1 belegt die gemessenen Schutzmaßnahmen;
+verbleibende Dashboard-Prüfpunkte und Warnungen sind weiterhin abzuarbeiten.
+Rot nennt den fehlenden Nachweis oder die belegte Abweichung — nicht beides
+als denselben Sicherheitsbefund.
 
 
 ## Wartungsnachweis #782 · WF-E813 · 16.10.2026

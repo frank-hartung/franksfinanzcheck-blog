@@ -132,6 +132,38 @@ class Selbstheilung(unittest.TestCase):
                         "Die Selbstheilung muss in den 15-Minuten-Job passen")
 
 
+class HTTPFehlerSindKeineSeitenmessung(unittest.TestCase):
+    def test_fehler_und_challenge_seiten_bleiben_stoerung(self):
+        for status in (301, 403, 404, 408, 429, 500, 502, 503, 504):
+            with self.subTest(status=status):
+                (code, _, daten), probe = _messen(
+                    [(status, {**PROXY, **GUT})], pausen=(0,), ziele=[gate.ZIELE[0]])
+                self.assertEqual(code, gate.EXIT_STOERUNG)
+                self.assertEqual(daten["gemessen"], 0)
+                self.assertEqual(daten["fehlend"], [])
+                self.assertEqual(probe.anzahl, 4)
+
+    def test_get_5xx_wird_wiederholt_bis_die_seite_wieder_da_ist(self):
+        (code, _, daten), probe = _messen(
+            [(503, {}), (503, {}), (200, {**PROXY, **GUT})],
+            pausen=(0,), ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_OK)
+        self.assertEqual(probe.wege, ["HEAD", "GET", "HEAD"])
+        self.assertEqual(daten["ziele"][0]["versuche"], 2)
+
+    def test_programmfehler_wird_nicht_als_netzstoerung_kaschiert(self):
+        with self.assertRaises(NameError):
+            _messen([NameError("Code kaputt")], ziele=[gate.ZIELE[0]])
+
+    def test_rohe_cookies_werden_nicht_in_json_artefakte_kopiert(self):
+        (code, bericht, daten), _ = _messen(
+            [(200, {**PROXY, **GUT, "set-cookie": "GIFT_COOKIE", "x-debug": "GIFT_DEBUG"})],
+            ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_OK)
+        self.assertNotIn("GIFT_COOKIE", json.dumps(daten) + bericht)
+        self.assertNotIn("GIFT_DEBUG", json.dumps(daten) + bericht)
+
+
 class TeilweiseGemessen(unittest.TestCase):
     """Ein Ziel sauber, ein Ziel tot: kein Alarm, aber kein Freibrief."""
 
@@ -228,7 +260,9 @@ class WorkflowVerdrahtung(unittest.TestCase):
     def test_bericht_geht_in_die_zusammenfassung(self):
         # Lehre aus INCIDENT-2026-09-19: Die Wahrheit steht in der
         # Zusammenfassung, nicht versteckt im Log.
-        self.assertIn("GITHUB_STEP_SUMMARY", self.text)
+        self.assertIn("sicherheits_nachweis.py --auswerten", self.text)
+        auswertung = (REPO / "scripts" / "sicherheits_nachweis.py").read_text()
+        self.assertIn("GITHUB_STEP_SUMMARY", auswertung)
 
     def test_auswerte_schritt_bleibt_vom_alarm_routing_findbar(self):
         # Das Fehler-Alerting ordnet die Sicherheits-Wache über die Zeichen-
@@ -238,15 +272,13 @@ class WorkflowVerdrahtung(unittest.TestCase):
         self.assertIn("Sicherheits-Header auswerten", self.text)
 
     def test_worker_messung_wird_von_rotem_f01_nicht_verdeckt(self):
-        self.assertIn("if: always()", self.text)
+        worker = self.text.split("- name: Worker-Zustand messen", 1)[1].split("        run:", 1)[0]
+        self.assertIn("!cancelled()", worker)
+        self.assertNotIn("steps.header", worker)
 
 
 class WorkflowShellRegression(unittest.TestCase):
-    """Execute the real YAML run blocks with the runner's implicit bash -e.
-
-    No YAML dependency: these literal blocks have fixed ten-space indentation.
-    A fake python3 only replaces the external measurement, not its shell wrapper.
-    """
+    """Echte run-Blöcke mit Runner-Bash -e; nur die HTTP-Messung ist ersetzt."""
 
     @staticmethod
     def block(marker):
@@ -261,10 +293,24 @@ class WorkflowShellRegression(unittest.TestCase):
         return textwrap.dedent("\n".join(body))
 
     def run_block(self, block, root, env):
+        if not (root / "scripts").exists():
+            (root / "scripts").symlink_to(REPO / "scripts", target_is_directory=True)
         return subprocess.run(
             ["bash", "--noprofile", "--norc", "-e", "-o", "pipefail", "-c", block],
             cwd=root, env={**os.environ, **env}, capture_output=True, text=True,
             timeout=10)
+
+    @staticmethod
+    def fake_measure(code, prefix):
+        daten = {"exit": code, "klasse": {0: "OK", 1: "BEFUND", 2: "STOERUNG"}.get(code, "UNBEKANNT"),
+                 "gemessen": 0 if code == 2 else 1, "fehlend": ["Testbefund"] if code == 1 else [],
+                 "warnungen": [], "stoerung": ["NICHT geprüft"] if code == 2 else [],
+                 "bericht": "Messbericht", "naechster_schritt": "Runbook prüfen"}
+        # Der run-Block entfernt alte Berichte vor dem Messaufruf. Daher
+        # erzeugt die Attrappe sie im Aufruf, wie das echte --report.
+        payload = json.dumps(daten)
+        return (f"python3() {{ printf '%s' '{payload}'; "
+                f"printf '%s' 'Messbericht' > {prefix}.md; return {code}; }}\n")
 
     def test_header_capture_and_evaluation_under_errexit(self):
         measure = self.block("id: header")
@@ -274,25 +320,21 @@ class WorkflowShellRegression(unittest.TestCase):
             with self.subTest(code=code), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 env = {"GITHUB_OUTPUT": str(root / "output"),
-                       "GITHUB_STEP_SUMMARY": str(root / "summary")}
-                (root / "f01-live.md").write_text("Messbericht", encoding="utf-8")
-                payload = json.dumps({"naechster_schritt": "Runbook prüfen"})
-                fake = f"python3() {{ printf '%s' '{payload}'; return {code}; }}\n"
-                result = self.run_block(fake + measure, root, env)
+                       "GITHUB_STEP_SUMMARY": str(root / "summary"), "MESS_CODE": str(code)}
+                result = self.run_block(self.fake_measure(code, "f01-live") + measure, root, env)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual((root / "output").read_text(), f"code={code}\n")
-                rendered = evaluate.replace("${{ steps.header.outputs.code }}", str(code))
-                result = self.run_block(rendered, root, env)
+                result = self.run_block(evaluate, root, env)
                 self.assertEqual(result.returncode, 0 if code == 0 else 1, result.stderr)
                 self.assertIn(expected, result.stdout)
-                self.assertIn("Messbericht", (root / "summary").read_text())
+                summary = (root / "summary").read_text()
+                self.assertIn("Messbericht" if code in (0, 1, 2) else "WACHE-FEHLER", summary)
 
     def test_missing_header_report_is_not_green(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            block = self.block("- name: Sicherheits-Header auswerten")
-            result = self.run_block(block.replace("${{ steps.header.outputs.code }}", "0"),
-                                    root, {"GITHUB_STEP_SUMMARY": str(root / "summary")})
+            result = self.run_block(self.block("- name: Sicherheits-Header auswerten"), root,
+                                    {"GITHUB_STEP_SUMMARY": str(root / "summary"), "MESS_CODE": "0"})
             self.assertEqual(result.returncode, 1)
             self.assertIn("WACHE-FEHLER", result.stdout)
 
@@ -304,27 +346,50 @@ class WorkflowShellRegression(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
 
     def test_worker_keeps_exit_and_summary(self):
-        block = self.block("- name: Worker-Zustand messen")
-        for code, expected in ((0, "gemessen"), (1, "BEFUND"),
+        measure = self.block("id: worker")
+        evaluate = self.block("- name: Worker-Zustand auswerten")
+        for code, expected in ((0, "grün"), (1, "BEFUND"),
                                (2, "STOERUNG"), (3, "WACHE-FEHLER")):
             with self.subTest(code=code), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
-                env = {"GITHUB_STEP_SUMMARY": str(root / "summary"),
-                       "NEWSLETTER_WORKER_EXPORT_KEY": "test-only"}
-                fake = f"python3() {{ echo Workerbericht; return {code}; }}\n"
-                result = self.run_block(fake + block, root, env)
-                self.assertEqual(result.returncode, code, result.stderr)
+                env = {"GITHUB_OUTPUT": str(root / "output"),
+                       "GITHUB_STEP_SUMMARY": str(root / "summary"), "MESS_CODE": str(code)}
+                result = self.run_block(self.fake_measure(code, "worker-live") + measure, root, env)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual((root / "output").read_text(), f"code={code}\n")
+                result = self.run_block(evaluate, root, env)
+                self.assertEqual(result.returncode, 0 if code == 0 else 1, result.stderr)
                 self.assertIn(expected, result.stdout)
-                self.assertIn("Workerbericht", (root / "summary").read_text())
+                self.assertIn("Messbericht" if code in (0, 1, 2) else "WACHE-FEHLER",
+                              (root / "summary").read_text())
 
-    def test_missing_worker_key_is_explicitly_unchecked(self):
+    def test_alte_berichte_werden_vor_jeder_messung_entfernt(self):
+        for marker, prefix in (("id: header", "f01-live"), ("id: worker", "worker-live")):
+            with self.subTest(marker=marker), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                (root / f"{prefix}.md").write_text("alter Bericht")
+                (root / f"{prefix}.json").write_text('{"klasse":"OK"}')
+                env = {"GITHUB_OUTPUT": str(root / "output")}
+                result = self.run_block("python3() { return 127; }\n" + self.block(marker), root, env)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertFalse((root / f"{prefix}.md").exists())
+                self.assertEqual((root / f"{prefix}.json").read_text(), "")
+                self.assertEqual((root / "output").read_text(), "code=127\n")
+
+    def test_missing_worker_key_is_explicitly_unchecked_and_red(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            result = self.run_block(self.block("- name: Worker-Zustand messen"), root,
-                                    {"GITHUB_STEP_SUMMARY": str(root / "summary"),
-                                     "NEWSLETTER_WORKER_EXPORT_KEY": ""})
-            self.assertEqual(result.returncode, 0)
-            self.assertIn("NICHT GEPRÜFT", (root / "summary").read_text())
+            env = {"GITHUB_OUTPUT": str(root / "output"),
+                   "GITHUB_STEP_SUMMARY": str(root / "summary"), "MESS_CODE": "2",
+                   "NEWSLETTER_WORKER_BASE": "https://abos.franksfinanzcheck.de",
+                   "NEWSLETTER_WORKER_EXPORT_KEY": ""}
+            result = self.run_block(self.block("id: worker"), root, env)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual((root / "output").read_text(), "code=2\n")
+            result = self.run_block(self.block("- name: Worker-Zustand auswerten"), root, env)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            self.assertIn("Worker STOERUNG", result.stdout)
+            self.assertIn("NICHT geprüft", (root / "summary").read_text())
 
 
 class AlarmRouting(unittest.TestCase):

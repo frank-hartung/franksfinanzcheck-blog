@@ -9,8 +9,8 @@ Grund, warum live jahrelang HSTS, `X-Frame-Options` und `nosniff` fehlten:
 Der Blog war in fremde Seiten einbettbar (Clickjacking auf „Jetzt anmelden“),
 und der erste Aufruf über `http://` blieb ungeschützt.
 
-Seit 15.10.2026 liegt die Zone hinter Cloudflare, und die Header kommen aus
-einer **Transform Rule** (`cloudflare/edge-schutz.md`, Abschnitt A1). Diese
+Seit 15.10.2026 soll die Zone hinter Cloudflare liegen; die Header sind in
+einer **Transform Rule** beschrieben (`cloudflare/edge-schutz.md`, Abschnitt A1). Diese
 Wache prüft die Wirkung, nicht die Absicht: Sie holt die Startseite und eine
 Unterseite und vergleicht die Kopfzeilen mit dem Soll.
 
@@ -24,7 +24,7 @@ Ausgabe: Markdown-Bericht, Exit-Code nach Klasse (siehe unten). Optionale
 Header (Permissions-Policy, COOP/CORP) werden gemeldet, aber nicht erzwungen —
 sie sind Härtung, kein Muss.
 
-EIN MELLDER DARF NICHT RATEN, WAS ER GEMESSEN HAT (Dauerheilung WF-E813,
+EIN MELDER DARF NICHT RATEN, WAS ER GEMESSEN HAT (Dauerheilung WF-E813,
 15.10.2026)
 ------------------------------------------------------------------------
 Der erste planmäßige Live-Lauf der Sicherheits-Wache (15.10.2026, 11:11 UTC)
@@ -66,6 +66,7 @@ Dashboard (Runbook A1, Schritt 1), nicht die Regel selbst.
 from __future__ import annotations
 
 import argparse
+from http.client import HTTPException
 import json
 import re
 import sys
@@ -237,13 +238,20 @@ def ziel_messen(url: str, *, holen=kopfzeilen_holen, pausen=PAUSEN,
         for weg in ("HEAD", "GET"):
             try:
                 status, kopf = holen(url, weg)
-            except Exception as fehler:  # noqa: BLE001 – jede Netzstörung zählt
+            except (OSError, HTTPException) as fehler:
                 letzter_fehler = f"{type(fehler).__name__}: {fehler}"
                 protokoll.append(f"Versuch {nr + 1} · {weg}: {letzter_fehler}")
                 continue
             if status >= 400 and weg == "HEAD":
                 protokoll.append(f"Versuch {nr + 1} · HEAD: HTTP {status} "
                                  "– per GET nachgefragt")
+                continue
+            if not 200 <= status < 300:
+                # Eine Fehler-/Challenge-Seite ist kein Nachweis für die
+                # Sicherheits-Header der Website (#809). Auch GET-5xx/429
+                # müssen erneut gemessen werden, nicht zu BEFUND werden.
+                letzter_fehler = f"HTTP {status} – keine erfolgreiche Seitenantwort"
+                protokoll.append(f"Versuch {nr + 1} · {weg}: {letzter_fehler}")
                 continue
             return {
                 "url": url, "status": status, "weg": weg, "kopf": kopf,
@@ -268,7 +276,8 @@ def naechster_schritt(klasse: str, proxy: str) -> str:
         if proxy == PROXY_FEHLT:
             return ("docs/SICHERHEIT-BETRIEB-RUNBOOK.md → A1 Schritt 1: die Zone "
                     "franksfinanzcheck.de in Cloudflare auf *Proxied* (orange Wolke) "
-                    "stellen, Schritt 2 (SSL-Modus `Full`), danach Schritt 3 "
+                    "stellen, Schritt 2 (SSL-Modus `Full (strict)` oder `Full`, "
+                    "niemals `Flexible`), danach Schritt 3 "
                     "(Transform Rule aus cloudflare/edge-schutz.md). Ohne Proxy "
                     "kann die Regel nicht wirken.")
         if proxy == PROXY_AKTIV:
@@ -451,7 +460,11 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
         "warnungen": warnungen_gesamt,
         "stoerung": stoerung_gesamt,
         "naechster_schritt": schritt,
-        "ziele": messungen,
+        # Keine Cookies/sonstigen Roh-Header in öffentliche Messartefakte.
+        "ziele": [{**m, "kopf": {k: v for k, v in m["kopf"].items()
+                                 if k in PFLICHT or k in OPTIONAL
+                                 or k in PROXY_SPUREN or k == "server"}}
+                  for m in messungen],
     }
     return code, "\n".join(zeilen), daten
 
@@ -691,6 +704,16 @@ def selftest() -> int:
     assert daten["ziele"][0]["versuche"] == 3, daten["ziele"][0]["versuche"]
     assert "Versuch 3" in bericht, "Das Versuchsprotokoll fehlt im Bericht"
     faelle += 1
+
+    # #809: Auch eine erreichbare Fehler-/Challenge-Seite ist keine
+    # erfolgreiche Messung der Website. Sie darf nicht als Header-Befund
+    # oder (mit zufällig guten Headern) als geheilt gelten.
+    for status in (403, 429, 503):
+        probe = _Probe([(status, {**PROXY_KENNUNG, **gut})])
+        code, _, daten = netz_pruefen(holen=probe.holen, pausen=(),
+                                      schlaf=lambda _: None, ziele=_ein_ziel())
+        assert code == EXIT_STOERUNG and daten["gemessen"] == 0 and not daten["fehlend"]
+        faelle += 1
 
     print(f"✅ SELBSTTEST OK — {faelle} Fälle grün (Pflicht-Header, CSP-Anweisungen, "
           "Clickjacking, HSTS-Frist, Repo-Stand, Netz-Klassen BEFUND/STOERUNG/"
