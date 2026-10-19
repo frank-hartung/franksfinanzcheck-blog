@@ -188,3 +188,55 @@ Die offenen Entscheidungen aus Punkt 2–6 sind jetzt als Repo-Artefakte festgeh
 **Gate-Stand 19.10.:** Live-Blockaden 0. Veröffentlichte Beiträge (`--published --strict`): 60 Artikel, 0 Hochrisiko. Entwürfe: 10 Hochrisiko, davon 5 blockiert, bis ein benannter Prüfer freigibt.
 
 **Gates, die in dieser Umgebung laufen:** `python3 -m unittest discover -s scripts/tests` mit dem Venv-Python (`/tmp/gv/bin/python`) ergibt 3359 Tests mit 1 Fehlschlag (`test_bot_watchdog_meldetakt`, Wirkungsprobe C25). Der gleiche Fehlschlag tritt im Ausgangsstand 258fd51 auf und wird nicht durch diese Arbeit verursacht. **Nicht ausführbar:** `layout_audit.py` braucht einen Hugo-Build; Hugo fehlt hier.
+
+## 7c. Abschlussbericht 19.10.2026: Punkte 1–6
+
+Dieser Abschnitt fasst den Stand nach dem Auftrag „auf Highend-Level einer Profi-Agentur, dauerhaft beheben“ zusammen. Die Befehle für jeden Punkt stehen im Register `data/entscheidungen.yaml` (E-01 bis E-21).
+
+**Grundsatz:** Die Umsetzung liegt im Repo als Artefakt, nicht als Einzelmaßnahme. Nichts wurde veröffentlicht, versendet oder gelöscht. Entwürfe bleiben `draft: true`.
+
+### Punkt 1 – 301-Weiterleitungen (E-16, E-17)
+
+- **Befund:** 117 Alt-URLs waren veröffentlicht und sind heute nicht mehr erreichbar. Vier davon hatten im Zeitraum Nachfrage (GSC).
+- **Umsetzung:** `data/weiterleitungen.yaml` ist die einzige Quelle: 114 Weiterleitungen, Regel A 6, B 73, C 35. 3 Alt-URLs stehen bewusst auf 404 (Regel D). Tag-Archive bleiben 404 (Regel E). Die Entscheidung „Index-Hygiene“ vom 29.09.2026 gilt weiter. Sie wird hier offengelegt, damit sie bestätigt werden kann.
+- **Werkzeuge:** `scripts/weiterleitungen.py` (Check, Build, Verify, Cloudflare-CSV nur mit Flag), `scripts/url_wache.py` (Snapshot der 94 Live-URLs), Gate H9 in `scripts/index_hygiene_gate.py`, Anleitung `docs/ANLEITUNG-WEITERLEITUNGEN.md`.
+- **Grenze:** GitHub Pages kann keine echten 301 setzen. Die Seiten sind Meta-Refresh (0 s, canonical, noindex,follow). Der echte 301 entsteht erst mit dem Cloudflare-Proxy.
+- **Ehrlich zu den Zuordnungen:** Die Ziele beruhen auf Titel, Thema und Stichproben. Nicht jeder Text wurde einzeln gelesen. Die Regel-B-Einträge sollte die Redaktion gegenlesen.
+- **Durchsetzung:** Gate H9 läuft im Deploy und stoppt bei harten Funden. Die Quellprüfung und der Test laufen nicht in der CI. Das wäre eine Workflow-Änderung und braucht einen Auftrag.
+- **Offen für dich:** (a) Ob der Cloudflare-Proxy aktiv ist, prüfst du mit dem Header `cf-ray` bei einer Anfrage an franksfinanzcheck.de. Ich kann das aus der Sandbox nicht sehen. (b) Die CSV-Aktivierung ist eine Außenwirkung und liegt bei dir. (c) Entscheidung, ob `--check` und der Test in `deploy.yml` aufgenommen werden.
+
+### Punkt 2 – Kannibalisierung und Formel-Titel
+
+- **Umsetzung:** 8 Live-Titel und 6 Entwurfs-Titel sind von Formeln befreit. Beispiel: „DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis“.
+- **Entwürfe mit Dubletten** bleiben unveröffentlicht (E-14). Nichts wurde verworfen. Die Entscheidung über Überarbeitung oder Verwerfen liegt bei dir.
+
+### Punkt 3 – Erfahrungsaussagen und Fachprüfung (E-03, E-05, E-09)
+
+- **Umsetzung:** Unbelegte Ich-Aussagen im Live-Bestand sind entfernt oder als Modellrechnung gekennzeichnet. Die Fallstudie ist als fiktiv gekennzeichnet. Die Warnung der Beweis-Wache (Störungs-Beitrag) war ein Fehlalarm. Der Satz ist jetzt eindeutig.
+- **Fachprüfung:** 17 Beiträge stehen im Register `data/fachpruefung_register.yaml`, alle ausstehend, kein Prüfer benannt. Eine Freigabe durch Automatik oder KI erfolgt nicht (E-05).
+- **Offen bei dir:** Prüfer für Konto und Kreditkarte. README-Pauschalen („Über zehn Jahre Praxis“, „Hunderte selbst durchgeführte Tarifvergleiche“) sind deine persönlichen Angaben (E-09). Ich habe die README nicht verändert.
+
+### Punkt 4 – Eigene Abbildungen
+
+- **Umsetzung:** 20 Top-20-Beiträge haben je zwei eigene SVG-Abbildungen (Merkkarte und Ablaufgrafik). Erzeugt mit `scripts/abbildungen_ableiten.py`, Prüfung `--check` ohne Befund.
+
+### Punkt 5 – Rechner und Pillar-Verlinkung (E-10, E-18)
+
+- **Umsetzung:** 60 Live-Beiträge haben einen Rechner-Block und einen Pillar-Link. Drei Fehlzuordnungen sind korrigiert, dazu Campingurlaub: vom Effektivpreis-Rechner auf das Haushaltsbudget.
+- **Stichprobe (11 Beiträge):** 6 passen. 4 haben keinen passenden Rechner: Balkonkraftwerk (Förderung und Amortisation), DNS-Server, WLAN-Verstärker vs. Mesh, Störung beim Internetanbieter. Ein fachlich falscher Rechner schadet mehr als ein fehlender. Die Entscheidung liegt bei dir (E-18): neues Werkzeug, Beibehalten oder Entfernen.
+
+### Punkt 6 – Autorität (E-11, E-12, E-13, E-19, E-20)
+
+- **Umsetzung:** Entwürfe und Recherche liegen in `AUTORITAET-ENTWUERFE-2026-10-19.md` (nicht versendet). Priorität 1: Digital-PR zum Fixkosten-Index. Priorität 2: Finanztip-Community (Profil nur durch dich).
+- **Versand:** Kein Versand durch den Agenten. Redaktionskontakt, Community-Profil und Verbraucherkredit-Thema bleiben bei dir (E-11, E-12, E-13).
+- **Methodik Fixkosten-Index:** Die BDEW-Werte sind geprüft: Strom 37,0 ct/kWh (BDEW-Strompreisanalyse 2026), Gas 11,93 ct/kWh (BDEW-Gaspreisanalyse August 2026). Die Rechnung stimmt. Der Strompreis bezieht sich laut BDEW auf 3.500 kWh inkl. anteiligem Grundpreis, das Modell rechnet mit 2.500 kWh. Das steht jetzt im Studientext. Die Zahlen bleiben unverändert (E-19, Änderungsprotokoll 19.10.2026).
+- **Name (offen):** „Fixkosten-Index“ misst nur Strom und Gas. Vor dem Pitch entscheidest du, ob der Name bleibt oder ob die Seite umbenannt wird (E-20). Eine Umbenennung braucht eine Weiterleitung der alten URL, die Punkt 1 jetzt technisch ermöglicht.
+- **Verbraucherkredit-Hinweis (20.11.2026):** Kein Bestandsbeitrag im Repo behandelt Verbraucherkredite. Ein Themenbeitrag wäre ein Entwurf und braucht deine Freigabe nach Fachprüfung (E-13).
+
+### Offene Punkte und Befunde (Stand 19.10.2026)
+
+- **Live-Aktualität ungeklärt:** Die Startseite zeigt den Stand 09.10. bzw. 25.09. Der Repo-Stand ist 16.10. Ob der Deploy zurückliegt, ist nicht verifiziert.
+- **Vorbestehender Testfehlschlag (E-21):** `test_bot_watchdog_meldetakt.test_rechter_baum_hat_keine_befunde`, Wirkungsprobe C25 (fail-closed). Identisch im Ausgangsstand 258fd51. Das Gate wurde nicht abgeschwächt.
+- **Metadaten-Befund (E-15):** Privathaftpflicht, lastmod vor date. Ausgangsstand, unverändert.
+- **Commit-Sperre:** Nicht scharf. `core.hooksPath` wird laut CLAUDE.md nicht gesetzt. Die README ist unverändert.
+- **Sandbox-Grenze:** Hugo ist nicht installierbar. Die Gate-Prüfung H9 wurde gegen einen simulierten Build mit den echten 114 Zielen geprüft, nicht gegen einen echten Hugo-Build.

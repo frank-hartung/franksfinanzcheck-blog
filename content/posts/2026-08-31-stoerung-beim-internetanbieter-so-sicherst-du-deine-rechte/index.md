@@ -101,7 +101,7 @@ Für den schriftlichen Weg hat sich eine kurze Struktur bewährt. Sie passt in j
 
 * **Betreff:** Störung, Anschluss und Vertragsnummer, Datum
 * **Absatz eins:** Symptom und Beginn, mit Uhrzeit
-* **Absatz zwei:** was du selbst geprüft hast, mit Ergebnis
+* **Absatz zwei:** welche Prüfungen du durchgeführt hast, mit Ergebnis
 * **Absatz drei:** Vorgangsnummer aus dem Telefonat, falls vorhanden
 * **Absatz vier:** was du erwartest, etwa eine Bestätigung mit Zeitplan
 

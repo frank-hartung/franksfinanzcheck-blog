@@ -1,0 +1,146 @@
+# Weiterleitungen (301-Ziel je Alt-URL) – Quelle der Wahrheit
+# Stand: 19.10.2026
+#
+# Was daraus wird (nicht von Hand ändern, siehe scripts/weiterleitungen.py):
+#   static/<von>/index.html  → Weiterleitungsseite (Meta-Refresh 0 s, canonical, noindex,follow).
+#                              GitHub Pages kann keine echten HTTP-301 setzen. Diese Seite ist ein
+#                              Ersatz, kein Äquivalent zum 301.
+#   cloudflare/redirects/    → Bulk-CSV für echte 301 über Cloudflare. Wird NUR erzeugt, wenn der
+#                              Cloudflare-Proxy vor franksfinanzcheck.de aktiv ist (Flag --cloudflare).
+#
+# Befehle:
+#   python3 scripts/weiterleitungen.py --check     Quelle validieren (Ziele live, keine Ketten, keine Schleifen)
+#   python3 scripts/weiterleitungen.py --build     static/-Seiten erzeugen (Überschreiben nur eigener Seiten)
+#   python3 scripts/weiterleitungen.py --verify    erzeugte Seiten gegen Quelle prüfen (kein Schreiben)
+#   python3 scripts/weiterleitungen.py --selftest  Selbsttest
+#
+# Regeln (Zuordnung je Eintrag, Feld "regel"):
+#   A  Gleicher Artikel, nur Ordner umbenannt (Datumskorrektur) oder Dublette "(1)" mit gleichem Titel.
+#   B  Gleiches Thema und gleiche Suchabsicht. Ziel ist ein Live-Beitrag. Zuordnung manuell geprüft.
+#      Die Begründung steht je Eintrag im Feld "grund". Bei Teilüberschneidung steht das ausdrücklich dabei.
+#   C  Kein gleichwertiger Live-Beitrag. Ziel ist die Pillar-Seite des Themas, NIE die Startseite.
+#   Ziele sind immer Live-Seiten (draft: false). Entwürfe sind als Ziel verboten.
+#   Ketten (Ziel ist selbst Quelle) und Schleifen sind verboten.
+#   Alt-URLs ohne passendes Ziel stehen in data/url_entfallen.yaml (bewusst 404, Regel D) und
+#   tag-Archive (Regel E). Tag-Archive bleiben nach der Entscheidung "Index-Hygiene" (29.09.2026) 404.
+#
+# Umfang: 117 Alt-URLs waren veröffentlicht (draft: false) und fehlen heute. 114 davon haben hier ein Ziel,
+# 3 stehen bewusst 404 in data/url_entfallen.yaml (Regel D).
+# Quelle der Liste: Git-Historie (git log --all -M -- content/posts). Stand 19.10.2026.
+
+stand: "2026-10-19"
+eintraege:
+  - {von: "/posts/2026-08-28-handytarif-vergleichen-2026-guenstige-tarife/", nach: "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/", regel: "A", grund: "Ordner nach Datumskorrektur umbenannt (Historie-Kette)"}
+  - {von: "/posts/2026-08-28-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/", nach: "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/", regel: "A", grund: "Ordner nach Datumskorrektur umbenannt (Historie-Kette)"}
+  - {von: "/posts/2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit/", nach: "/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/", regel: "A", grund: "Ordner nach Datumskorrektur umbenannt (Historie-Kette)"}
+  - {von: "/posts/2026-08-05-etf-sparplan-fuer-einsteiger-so-startest-du-monatlich/", nach: "/pillar/konto-karten/", regel: "C", grund: "Depot/ETF-Sparplan: Thema im Pillar, kein eigener Live-Beitrag"}
+  - {von: "/posts/2026-08-05-internet-turbo-warum-ich-meinen-dns-server-getauscht-habe/", nach: "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/", regel: "B", grund: "DNS-Wechsel, gleiche Absicht"}
+  - {von: "/posts/2026-08-06-frugalismus-im-alltag/", nach: "/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/", regel: "B", grund: "Frugalismus-Alltagstipps"}
+  - {von: "/posts/2026-08-06-turbo-fuers-netz/", nach: "/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/", regel: "B", grund: "Internet schneller machen per DNS"}
+  - {von: "/posts/2026-08-07-frugalismus-fuer-den-erfolg/", nach: "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/", regel: "B", grund: "Frugalismus-Konzept; GSC: 7 Impressionen, Position 4,9 (28 Tage)"}
+  - {von: "/posts/2026-08-07-mietwagen-fuer-den-spaetsommer/", nach: "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/", regel: "B", grund: "Mietwagen-Schnäppchen im Spätsommer"}
+  - {von: "/posts/2026-08-08-dein-tier-im-krankheitsfall/", nach: "/pillar/versicherungen/", regel: "C", grund: "Tierversicherung: kein Live-Beitrag"}
+  - {von: "/posts/2026-08-08-stromtarif-fuer-waermepumpe-so-sparst-du-beim-heizen/", nach: "/pillar/strom-sparen/", regel: "C", grund: "Stromtarif Wärmepumpe: Thema im Pillar"}
+  - {von: "/posts/2026-08-09-depot-2026-dein-smarter-start-in-den-vermoegensaufbau/", nach: "/pillar/konto-karten/", regel: "C", grund: "Depot: Thema im Pillar, kein Live-Beitrag"}
+  - {von: "/posts/2026-08-09-energiekosten-senken-mit-intelligenten-heizsystemen/", nach: "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/", regel: "B", grund: "Energiekosten im Haushalt senken"}
+  - {von: "/posts/2026-08-11-gaspreisschock-so-nutzt-du-die-preisgarantie-gas-richtig/", nach: "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/", regel: "B", grund: "Gaspreisgarantie richtig nutzen"}
+  - {von: "/posts/2026-08-11-lastschrift-zurueckbuchen-so-holst-du-dir-dein-geld-zurueck/", nach: "/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/", regel: "B", grund: "Teilüberschneidung: Zielbeitrag behandelt Prüfen von Abbuchungen, Rückbuchung nur am Rande"}
+  - {von: "/posts/2026-08-11-preisgarantie-gas-so-schuetzt-du-dich-vor-preiserhoehungen/", nach: "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/", regel: "B", grund: "Preiserhöhung Gas"}
+  - {von: "/posts/2026-08-11-preisgarantie-gas-so-sicherst-du-dich-gegen-preisspruenge-ab/", nach: "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/", regel: "B", grund: "Preissprünge Gas"}
+  - {von: "/posts/2026-08-11-schufa-score-verstehen-so-liest-du-deine-bonitaetsauskunft/", nach: "/pillar/konto-karten/", regel: "C", grund: "Schufa/Bonität: Thema im Pillar, kein Live-Beitrag"}
+  - {von: "/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/", nach: "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/", regel: "B", grund: "Gastarif wechseln"}
+  - {von: "/posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/", nach: "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/", regel: "B", grund: "Strom sparen im Haushalt"}
+  - {von: "/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/", nach: "/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/", regel: "B", grund: "Geld sparen im Alltag"}
+  - {von: "/posts/2026-08-21-gasrechnung-senken-clevere-tipps-fuer-den-spaetsommer/", nach: "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/", regel: "B", grund: "Gasrechnung im Spätsommer"}
+  - {von: "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier(1)/", nach: "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/", regel: "A", grund: "Dublette mit Suffix (1), gleicher Titel"}
+  - {von: "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub(1)/", nach: "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/", regel: "A", grund: "Dublette mit Suffix (1), gleicher Titel"}
+  - {von: "/posts/2026-08-21-watt-diebe-stoppen-stromfresser-finden-und-geld-sparen/", nach: "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/", regel: "B", grund: "Stromfresser finden"}
+  - {von: "/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/", nach: "/pillar/versicherungen/", regel: "C", grund: "Hausratversicherung: kein Live-Beitrag"}
+  - {von: "/posts/2026-09-04-flugtickets-guenstig-buchen-strategien-fuer-deine-reise/", nach: "/pillar/mietwagen/", regel: "C", grund: "Flugtickets: Thema im Pillar (Flüge)"}
+  - {von: "/posts/2026-09-04-so-bekommst-du-wlan-in-jeden-winkel-repeater-oder-mesh/", nach: "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/", regel: "B", grund: "Repeater oder Mesh"}
+  - {von: "/posts/2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor/", nach: "/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/", regel: "B", grund: "Heizung vor der Saison prüfen"}
+  - {von: "/posts/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen/", nach: "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/", regel: "B", grund: "Stromfresser finden"}
+  - {von: "/posts/2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/", nach: "/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/", regel: "A", grund: "Ordner nach Datumskorrektur umbenannt (gleicher Slug-Rest)"}
+  - {von: "/posts/2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer/", nach: "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/", regel: "B", grund: "Mietwagen-Fallen und Kaution"}
+  - {von: "/posts/2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert/", nach: "/pillar/strom-sparen/", regel: "C", grund: "Energie-Update: Thema im Pillar, kein Live-Nachfolger"}
+  - {von: "/posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/", nach: "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/", regel: "B", grund: "Gastarif-Wechsel, Fehler vermeiden"}
+  - {von: "/posts/2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget/", nach: "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/", regel: "B", grund: "Reisebudget sparen"}
+  - {von: "/posts/2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt/", nach: "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/", regel: "B", grund: "50-30-20-Regel"}
+  - {von: "/posts/2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich/", nach: "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/", regel: "B", grund: "Mesh oder Repeater"}
+  - {von: "/posts/2026-09-14-finanzplan-mit-der-50-30-20-regel-wohin-mit-dem-gehalt/", nach: "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/", regel: "B", grund: "50-30-20-Regel"}
+  - {von: "/posts/2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026/", nach: "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/", regel: "B", grund: "50-30-20-Regel"}
+  - {von: "/posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/", nach: "/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/", regel: "B", grund: "Gasrechnung im Herbst, Spätsommer-Check"}
+  - {von: "/posts/2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer/", nach: "/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/", regel: "B", grund: "Gasrechnung, Strategieplan Spätsommer"}
+  - {von: "/posts/2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026/", nach: "/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/", regel: "B", grund: "Gasrechnung, Strategie Winter"}
+  - {von: "/posts/2026-09-22-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe/", nach: "/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/", regel: "B", grund: "Heizung vor dem Winter prüfen"}
+  - {von: "/posts/2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert/", nach: "/pillar/konto-karten/", regel: "C", grund: "Konto-Update: Thema im Pillar, kein Live-Nachfolger"}
+  - {von: "/posts/2026-09-25-stromfresser-finden-so-stoppst-du-die-energie-lecks/", nach: "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/", regel: "B", grund: "Stromfresser finden"}
+  - {von: "/posts/2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich/", nach: "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/", regel: "B", grund: "Notgroschen berechnen"}
+  - {von: "/posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/", nach: "/pillar/frugalismus/", regel: "C", grund: "Autokosten/Fixkosten senken: Thema im Pillar"}
+  - {von: "/posts/2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v/", nach: "/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/", regel: "B", grund: "Handyvertrag kündigen"}
+  - {von: "/posts/2026-10-02-die-50-30-20-regel-einfach-erklaert/", nach: "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/", regel: "B", grund: "50-30-20-Regel"}
+  - {von: "/posts/2026-10-02-notgroschen-aufbauen-dein-finanzielles-sicherheitsnetz/", nach: "/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/", regel: "B", grund: "Notgroschen als Sicherheitsnetz"}
+  - {von: "/posts/2026-10-02-stromfresser-finden-so-stoppst-du-den-energiediebstahl/", nach: "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/", regel: "B", grund: "Stromfresser finden"}
+  - {von: "/posts/2026-10-02-stromfresser-finden-so-stoppst-du-heimliche-energiediebe/", nach: "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/", regel: "B", grund: "Stromfresser finden"}
+  - {von: "/posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/", nach: "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/", regel: "B", grund: "Reisebudget sparen"}
+  - {von: "/posts/2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf/", nach: "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/", regel: "B", grund: "Haushalts-App im Vergleich"}
+  - {von: "/posts/2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben/", nach: "/pillar/strom-sparen/", regel: "C", grund: "Ökostrom-Wechsel: Thema im Pillar"}
+  - {von: "/posts/50-30-20-regel-einfach-erklaert/", nach: "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/", regel: "B", grund: "50-30-20-Regel (Altbestand ohne Datum)"}
+  - {von: "/posts/5g-home-router-oder-dsl/", nach: "/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/", regel: "B", grund: "Anschlussart DSL, Kabel, Mobilfunk"}
+  - {von: "/posts/7-gewohnheiten-finanzielle-freiheit/", nach: "/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/", regel: "B", grund: "7 Gewohnheiten (Altbestand ohne Datum)"}
+  - {von: "/posts/balkonkraftwerk-2026-lohnt-sich/", nach: "/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/", regel: "B", grund: "Balkonkraftwerk: gleiches Thema, Förderung statt Wirtschaftlichkeit"}
+  - {von: "/posts/berufsunfaehigkeitsversicherung-lohnt-sich/", nach: "/pillar/versicherungen/", regel: "C", grund: "Berufsunfähigkeit: Thema im Versicherungs-Pillar"}
+  - {von: "/posts/depot-umzug-steuerfrei-wechseln/", nach: "/pillar/konto-karten/", regel: "C", grund: "Depotwechsel: Thema im Pillar; GSC: 1 Impression (28 Tage)"}
+  - {von: "/posts/dispozinsen-verstehen-alternativen/", nach: "/pillar/konto-karten/", regel: "C", grund: "Dispozinsen: Thema im Pillar"}
+  - {von: "/posts/dns-server-aendern-schnelleres-internet/", nach: "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/", regel: "B", grund: "DNS-Wechsel"}
+  - {von: "/posts/dsl-internet-flat-guenstig-sichern/", nach: "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/", regel: "B", grund: "Günstiges Internet, DSL-Vergleich"}
+  - {von: "/posts/e-auto-laden-stromkosten-senken/", nach: "/pillar/strom-sparen/", regel: "C", grund: "E-Auto laden: Thema im Pillar"}
+  - {von: "/posts/elementarschadenversicherung-hochwasser-starkregen/", nach: "/pillar/versicherungen/", regel: "C", grund: "Elementarschaden: kein Live-Beitrag (Zielbeitrag 2026-08-18 ist Entwurf); GSC: 1 Impression, Position 80"}
+  - {von: "/posts/festgeld-oder-tagesgeld-2026/", nach: "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/", regel: "B", grund: "Tagesgeld und Festgeld"}
+  - {von: "/posts/flug-buchen-9-tricks-guenstige-tickets/", nach: "/pillar/mietwagen/", regel: "C", grund: "Flugtickets: Thema im Pillar"}
+  - {von: "/posts/frugalismus-tricks-alltag-200-euro-sparen/", nach: "/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/", regel: "B", grund: "Frugalismus-Alltagstricks"}
+  - {von: "/posts/gastarife-vergleichen-vor-dem-herbst/", nach: "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/", regel: "B", grund: "Gastarif-Vergleich"}
+  - {von: "/posts/gebuehrenfallen-banking-vermeiden/", nach: "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/", regel: "B", grund: "Kontogebühren vermeiden"}
+  - {von: "/posts/glasfaser-dsl-kabel-anschluss-vergleich/", nach: "/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/", regel: "B", grund: "Anschlussvergleich DSL, Kabel, Glasfaser"}
+  - {von: "/posts/guenstige-fluege-spaetsommer-finden/", nach: "/pillar/mietwagen/", regel: "C", grund: "Flugtickets: Thema im Pillar"}
+  - {von: "/posts/handytarife-vergleichen-guenstigster-tarif/", nach: "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/", regel: "B", grund: "Handytarif-Vergleich"}
+  - {von: "/posts/haushaltsbuch-fuehren-app-excel-oder-stift/", nach: "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/", regel: "B", grund: "Haushaltsbuch führen"}
+  - {von: "/posts/hausratversicherung-wer-braucht-leistung/", nach: "/pillar/versicherungen/", regel: "C", grund: "Hausratversicherung: kein Live-Beitrag"}
+  - {von: "/posts/heizkosten-senken-10-massnahmen/", nach: "/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/", regel: "B", grund: "Heizkosten senken"}
+  - {von: "/posts/heizperiode-vorbereiten-spaetsommer/", nach: "/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/", regel: "B", grund: "Heizperiode vorbereiten"}
+  - {von: "/posts/impulskaeufe-vermeiden-7-psychologische-tricks/", nach: "/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/", regel: "B", grund: "Alltagsfehler, Konsum"}
+  - {von: "/posts/internet-anbieter-wechseln-kuendigung/", nach: "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/", regel: "B", grund: "DSL-Anbieterwechsel und Kündigung"}
+  - {von: "/posts/kfz-versicherung-sf-klasse-erklaert/", nach: "/pillar/versicherungen/", regel: "C", grund: "Kfz-Versicherung: Thema im Pillar, kein Live-Beitrag"}
+  - {von: "/posts/kfz-versicherung-wechseln/", nach: "/pillar/versicherungen/", regel: "C", grund: "Kfz-Versicherung: Thema im Pillar, kein Live-Beitrag"}
+  - {von: "/posts/kontowechsel-in-20-minuten-wechselservice/", nach: "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/", regel: "B", grund: "Kontowechsel"}
+  - {von: "/posts/kostenloses-girokonto-finden/", nach: "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/", regel: "B", grund: "Kostenloses Girokonto"}
+  - {von: "/posts/kreditkarte-ohne-jahresgebuehr/", nach: "/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/", regel: "B", grund: "Kreditkarte ohne Jahresgebühr"}
+  - {von: "/posts/kuehlschrank-strom-sparen-einstellung/", nach: "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/", regel: "B", grund: "Kühlschrank-Stromverbrauch; GSC: 10 Impressionen, Position 21,6 (28 Tage)"}
+  - {von: "/posts/last-minute-urlaubsangebote-sichern/", nach: "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/", regel: "B", grund: "Last-Minute-Angebote"}
+  - {von: "/posts/mietwagen-buchen-so-sparst-du/", nach: "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/", regel: "B", grund: "Mietwagen günstig buchen"}
+  - {von: "/posts/mietwagen-fallen-vermeiden/", nach: "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/", regel: "B", grund: "Mietwagen-Fallen"}
+  - {von: "/posts/mietwagen-im-winter-schnaeppchen-tricks/", nach: "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/", regel: "B", grund: "Mietwagen-Schnäppchen"}
+  - {von: "/posts/monatsbudget-erstellen-schritt-fuer-schritt/", nach: "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/", regel: "B", grund: "Monatsbudget und Fixkosten"}
+  - {von: "/posts/nachtspeicherheizung-wechseln-oder-behalten/", nach: "/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/", regel: "B", grund: "Nachtspeicherheizung und Nachtstrom"}
+  - {von: "/posts/notgroschen-aufbauen-wie-viel-reicht/", nach: "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/", regel: "B", grund: "Notgroschen berechnen"}
+  - {von: "/posts/pauschalreise-buchen-bester-zeitpunkt/", nach: "/pillar/mietwagen/", regel: "C", grund: "Pauschalreisen: Thema im Pillar"}
+  - {von: "/posts/private-unfallversicherung-fuer-wen-sie-sich-wirklich-lohnt/", nach: "/pillar/versicherungen/", regel: "C", grund: "Unfallversicherung: Thema im Pillar"}
+  - {von: "/posts/privathaftpflicht-warum-pflicht-kosten/", nach: "/pillar/versicherungen/", regel: "C", grund: "Privathaftpflicht: Thema im Pillar, kein Live-Beitrag"}
+  - {von: "/posts/ratenkredit-bestszins-vergleichen/", nach: "/pillar/konto-karten/", regel: "C", grund: "Ratenkredit: Thema im Pillar"}
+  - {von: "/posts/reisekrankenversicherung-wann-lohnt/", nach: "/pillar/versicherungen/", regel: "C", grund: "Reisekrankenversicherung: Thema im Versicherungs-Pillar"}
+  - {von: "/posts/reiseversicherung-richtig-kombinieren/", nach: "/pillar/versicherungen/", regel: "C", grund: "Reiseversicherung: Thema im Versicherungs-Pillar"}
+  - {von: "/posts/router-kaufen-oder-mieten-rechnung/", nach: "/pillar/internet-dsl/", regel: "C", grund: "Router im DSL-Vertrag: Thema im Internet-Pillar"}
+  - {von: "/posts/sparquote-berechnen-und-steigern/", nach: "/pillar/frugalismus/", regel: "C", grund: "Sparquote: Thema im Pillar"}
+  - {von: "/posts/strom-sparen-haushalt-20-tipps/", nach: "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/", regel: "B", grund: "Strom sparen im Haushalt"}
+  - {von: "/posts/stromanbieter-wechseln-2026/", nach: "/pillar/strom-sparen/", regel: "C", grund: "Stromanbieter: Thema im Pillar"}
+  - {von: "/posts/stromfresser-im-haushalt-entlarven/", nach: "/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/", regel: "B", grund: "Stromfresser entlarven"}
+  - {von: "/posts/stromvergleich-richtig-lesen-tarif-finden/", nach: "/pillar/strom-sparen/", regel: "C", grund: "Stromvergleich: Thema im Pillar"}
+  - {von: "/posts/tagesgeld-zinsen-sicher-anlegen/", nach: "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/", regel: "B", grund: "Tagesgeld-Zinsen"}
+  - {von: "/posts/urlaub-mit-kindern-guenstig-spartricks/", nach: "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/", regel: "B", grund: "Urlaub günstig planen"}
+  - {von: "/posts/urlaubskasse-aufbessern-spartipps/", nach: "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/", regel: "B", grund: "Urlaubskasse aufbessern"}
+  - {von: "/posts/versicherungen-kuendigen-diese-5-policen/", nach: "/pillar/versicherungen/", regel: "C", grund: "Versicherungen kündigen: Thema im Pillar"}
+  - {von: "/posts/waermepumpe-vs-gasheizung-2026/", nach: "/pillar/strom-sparen/", regel: "C", grund: "Wärmepumpe oder Gas: Thema im Pillar"}
+  - {von: "/posts/wlan-verbessern-ohne-neue-hardware/", nach: "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/", regel: "B", grund: "WLAN verbessern"}
+  - {von: "/posts/wlan-verstaerker-vs-mesh-wlan/", nach: "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/", regel: "B", grund: "Verstärker oder Mesh"}
+  - {von: "/posts/zahnzusatzversicherung-lohnt-sich/", nach: "/pillar/versicherungen/", regel: "C", grund: "Zahnzusatz: Thema im Pillar, kein Live-Beitrag"}
+  - {von: "/posts/zinseszinseffekt-formel-erklaert/", nach: "/pillar/frugalismus/", regel: "C", grund: "Zinseszins: Thema im Pillar"}

@@ -230,6 +230,6 @@ Pflaster, Schmerzmittel und etwas gegen den Sonnenbrand. Prüfe das Verfallsdatu
 
 ## Weiterrechnen und vertiefen
 
-- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+- **Rechner:** [Haushaltsbudget: Verteilung sehen, lokal gespeichert](../../werkzeuge/haushaltsbudget/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

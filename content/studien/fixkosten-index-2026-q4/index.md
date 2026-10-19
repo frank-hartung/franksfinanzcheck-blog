@@ -56,6 +56,7 @@ Die Verbrauchswerte sind **Szenarioannahmen**, keine vom BDEW übernommene Aussa
 ## Grenzen der Aussage
 
 - Der Report bildet nur Strom und Gas ab, nicht Miete, Internet, Mobilität oder Versicherungen.
+- Der Strompreis ist der BDEW-Durchschnittswert für Haushalte. Er bezieht sich auf einen Jahresverbrauch von 3.500 kWh und enthält einen anteiligen Grundpreis. Das Modell rechnet mit 2.500 kWh. Bei geringerem Verbrauch steigt der Preis pro kWh, deshalb kann die Strom-Zahl des Modells zu niedrig liegen. Die Zahlen bleiben unverändert, die Abweichung ist im Modell nicht korrigiert.
 - Grundpreis, Bonus, Preisgarantie, Region, Wohnfläche und Heizart können den individuellen Betrag verändern.
 - Nicht jeder Zwei-Personen-Haushalt heizt mit Gas. Strom- und Gasannahme beschreiben ein Modell, keine Personengruppe.
 - Der Wert ist keine Prognose und kein Tarifangebot.

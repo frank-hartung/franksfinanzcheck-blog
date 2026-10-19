@@ -184,3 +184,81 @@ entscheidungen:
       severity: P3
       channel: "seo-inhalt"
       offen: "Datumsklärung im Betrieb; Korrektur über Frontmatter, sobald geklärt."
+
+  - id: E-16
+    punkt: "1 – 301-Weiterleitungen"
+    entscheidung: "Alt-URLs werden aus einer Quelle (data/weiterleitungen.yaml) erzeugt: 114 Weiterleitungen (Regel A 6, B 73, C 35), 3 bewusst 404 (Regel D). Tag-Archive bleiben 404 (Regel E, Entscheidung Index-Hygiene vom 29.09.2026). Umsetzung als static/-Seiten mit Meta-Refresh, noindex,follow, canonical. Echte 301 nur über Cloudflare-Proxy."
+    begruendung: "Hugo-Aliase sind abgeschaltet (disableAliases = true). Ziele sind ausschließlich Live-Seiten, Ketten und Schleifen sind verboten. Jeder Eintrag hat eine Begründung im Feld grund."
+    status: "teilweise"
+    verantwortlich: human
+    nachweis: "npm run weiterleitungen:check; npm run test:weiterleitungen; python3 scripts/index_hygiene_gate.py (H9, mit Simulation geprüft)"
+    befund:
+      owner: human
+      severity: P1
+      channel: "seo-technik"
+      offen: "(a) Cloudflare-Proxy: Prüfung per cf-ray-Header durch den Betreiber; Aktivierung ist Betriebsentscheidung (Datenschutztext B7). (b) Regel-B-Einträge (73) gegenlesen. (c) Tag-Archiv-Entscheidung im Abschlussbericht bestätigen."
+
+  - id: E-17
+    punkt: "1 – Durchsetzung der Weiterleitungen"
+    entscheidung: "Die Quellprüfung (--check) und der Test laufen nicht in der CI. Im Deploy wirkt das Gate H9 (Ziel vorhanden, live, keine Kette, keine Schleife). H5 zählt Weiterleitungsseiten nicht in das Verhältnis. Eine Workflow-Änderung ist nicht erfolgt."
+    begruendung: "CLAUDE.md: .github/workflows/** nur mit ausdrücklichem Auftrag ändern. Die Workflows führen unittest nur für benannte Module aus."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "grep unittest .github/workflows/*.yml; scripts/index_hygiene_gate.py --selftest (18 Fälle)"
+    befund:
+      owner: human
+      severity: P2
+      channel: "seo-technik"
+      offen: "Entscheidung: scripts.tests.test_weiterleitungen und den Befehl --check in deploy.yml aufnehmen (Auftrag nötig)."
+
+  - id: E-18
+    punkt: "5 – Rechner-Stichprobe"
+    entscheidung: "Stichprobe 2026-10-19 über 11 Beiträge. Passend: Heizkosten senken, Kostenloses Girokonto, Grundversorgung, Mietwagen ohne Kaution, Energiediebe, Smart Home. Korrigiert: Campingurlaub von Effektivpreis-Rechner auf Haushaltsbudget. Ohne passenden Rechner: Balkonkraftwerk (Förderung und Amortisation), DNS-Server, WLAN-Verstärker vs. Mesh, Störung beim Internetanbieter. Diese vier tragen einen Rechner-Link mit schwachem Bezug."
+    begruendung: "Maßnahme 5 verlangt einen Rechner je Beitrag. Ein thematisch falscher Rechner schadet Vertrauen mehr als ein fehlender. Ein Amortisations-Rechner für Balkonkraftwerk wäre ein neues Werkzeug."
+    status: "teilweise"
+    verantwortlich: human
+    nachweis: "Rechner-Zeilen per grep: grep -l werkzeuge content/posts/*/index.md; Stichprobe in dieser Zeile"
+    befund:
+      owner: human
+      severity: P2
+      channel: "seo-inhalt"
+      offen: "Frank entscheidet je Beitrag: (a) neues Werkzeug bauen (Balkonkraftwerk-Amortisation), (b) bestehenden Rechner beibehalten, (c) Rechner-Zeile entfernen und die Regel für diesen Beitrag aussetzen."
+
+  - id: E-19
+    punkt: "Fixkosten-Index – Methodik"
+    entscheidung: "Der Strompreis (37,0 ct/kWh) ist der BDEW-Durchschnitt für 3.500 kWh inkl. anteiligem Grundpreis. Das Modell rechnet mit 2.500 kWh. Die Abweichung steht jetzt im Studientext unter Grenzen der Aussage. Im Änderungsprotokoll (2026-10-19) eingetragen. Zahlen unverändert. BDEW-Werte geprüft: Strom 37,0 ct/kWh (BDEW-Strompreisanalyse 2026), Gas 11,93 ct/kWh (BDEW-Gaspreisanalyse August 2026, Einfamilienhäuser)."
+    begruendung: "Eine Modellrechnung, die den Bezug ihrer Preisquelle verschweigt, ist nicht transparent genug. Eine Änderung der Zahlen wäre eine Veröffentlichungsentscheidung und liegt nicht bei dieser Arbeit."
+    status: "umgesetzt"
+    verantwortlich: human
+    nachweis: "content/studien/fixkosten-index-2026-q4/index.md (Grenzen der Aussage); data/beweise/korrekturen.yaml (Eintrag 2026-10-19); python3 scripts/beweis_gate.py (0 Fehler, 0 Warnungen)"
+    befund:
+      owner: human
+      severity: P3
+      channel: "seo-inhalt"
+      offen: "Keine Pflicht. Bei nächster Revision Grundpreis-Anteil für 2.500 kWh einrechnen."
+
+  - id: E-20
+    punkt: "Fixkosten-Index – Name und Pressepitch"
+    entscheidung: "Der Name „Fixkosten-Index“ misst nur Strom und Gas. Die Seite selbst nennt sie „Energie-Baseline Q4 2026“. Miete, Internet, Mobilität und Versicherungen fehlen. Der Pressepitch (Entwurf A) nutzt den Namen „Fixkosten-Index“."
+    begruendung: "Ein Name, der mehr verspricht als der Umfang, ist für Presse und YMYL ein Risiko. Eine Umbenennung betrifft URL, CSV-Name, Pressegrafik und Verlinkungen."
+    status: "offen"
+    verantwortlich: human
+    nachweis: "content/studien/fixkosten-index-2026-q4/index.md (Titel, Kernergebnisse, Grenzen); AUTORITAET-ENTWUERFE-2026-10-19.md (Entwurf A)"
+    befund:
+      owner: human
+      severity: P2
+      channel: "marke"
+      offen: "Frank entscheidet: (a) Name beibehalten und Umfang im Titel nennen (z. B. „Energie-Baseline“), oder (b) Umbenennung mit Weiterleitung der alten URL. Erst danach Pitch versenden."
+
+  - id: E-21
+    punkt: "Testsuite – vorbestehender Fehlschlag"
+    entscheidung: "test_bot_watchdog_meldetakt.test_rechter_baum_hat_keine_befunde schlägt fehl: Wirkungsprobe C25 „YMYL: Schreibprüfung nicht auswertbar (ParseError) – fail-closed“ (scripts/editorial_review_gate.py, Zeile 291). Der Fehler ist im Ausgangsstand 258fd51 identisch. Das Verhalten (fail-closed) ist richtig. Die Ursache im Testfixture oder in der Eingabe ist nicht geklärt."
+    begruendung: "Vorbestehend, nicht durch diese Arbeit ausgelöst. Der Code wurde nicht geändert, damit die Sicherung nicht aufgeweicht wird."
+    status: "offen"
+    verantwortlich: auto
+    nachweis: "python3 -m unittest scripts.tests.test_bot_watchdog_meldetakt (1 Fehler). Vergleichslauf: /tmp/ut_base.log (258fd51)."
+    befund:
+      owner: auto
+      severity: P2
+      channel: "repo-betrieb"
+      offen: "Fixture oder Parser-Eingabe prüfen, Fehler reproduzieren. Gate-Verhalten (fail-closed) nicht abschwächen."
