@@ -240,8 +240,8 @@ Zahlensätze driften garantiert auseinander – unbemerkt, weil beide
 „grün" melden.
 
 **Conversion-Ziele schützen zuerst die Messkette.**
-Ein `data-umami-event` weniger, und die Variante „gewinnt" jeden Test,
-weil niemand mehr die Klicks sieht. Deshalb sind fehlende Umami-Events,
+Eine `data-klick`-Marke weniger, und die Variante „gewinnt" jeden Test,
+weil niemand mehr die Klicks sieht. Deshalb sind fehlende Klick-Marken,
 unvollständige Affiliate-`rel`-Attribute und verschwundene Pflicht-
 Bausteine P1 – vor allen Geschmacksfragen.
 
@@ -294,7 +294,9 @@ python3 scripts/design_variant_gate.py --selftest
   `netz_kbps`, `benchmark_index`) – eine Messung ohne Selbstauskunft ist
   deutbar und damit wertlos.
 * **Sie misst keine echten Nutzer.** Tier B ist Labor. Ob die Hypothese
-  stimmt, zeigt erst Umami über 14 Tage (`cta_click` je `slug`). Die
+  stimmt, zeigt erst eine Klick-Messung über 14 Tage (`cta_click` je `slug`) –
+  derzeit läuft keine: ohne Reichweiten-Tracking bleibt die Wirkung einer
+  Variante eine Annahme. Die
   Werkbank stellt nur sicher, dass eine Variante ausgeliefert werden
   *darf* – nicht, dass sie besser *ist*.
 * **Sie ersetzt kein Auge.** Kontrast 4,6:1 kann messbar in Ordnung und

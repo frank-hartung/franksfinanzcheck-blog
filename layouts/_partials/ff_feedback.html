@@ -9,8 +9,8 @@
          (abos.franksfinanzcheck.de/feedback), der NUR einen
          aggregierten Zählerstand je Slug speichert (keine IP,
          keine Cookies; Missbrauchschutz über kurzen IP-Hash, 6 h).
-       * Umami wird bewusst NICHT benutzt (consent-geprüft – Feedback
-         soll auch ohne Analytics-Einwilligung funktionieren).
+       * Kein Tracking-Dienst im Spiel: Das Feedback geht nur an den
+         eigenen Worker (aggregierter Zähler, keine Cookies).
        * Endpoint wird aus site.Params.newsletterFormAction abgeleitet
          (…/anmeldung -> …/feedback) – deshalb braucht diese Datei
          KEINEN eigenen hugo.toml-Parameter.

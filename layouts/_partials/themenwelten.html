@@ -38,8 +38,9 @@
       {{- /* cta_click (19.09.2026): Themenkarten sind der wichtigste Weg von der
              Startseite zu den kaufnahen Ratgebern – ohne Event wäre der erste
              Trichter-Schritt („Startseite → Ratgeber") unsichtbar. Eigenschaft
-             `slug` = Platzierungs-ID, damit der Import (umami_ctas.json) sie
-             ohne Sonderbehandlung aggregiert. */ -}}
+             `slug` = Platzierungs-ID, damit eine spätere Klick-Auswertung sie
+             ohne Sonderbehandlung aggregieren kann (die Marke ist der Mess-
+             vertrag der Auszeichnung; derzeit wertet kein Zähler interne CTAs aus). */ -}}
       <a class="ff-topic-card" href="{{ $target.RelPermalink }}" data-topic="{{ .id }}"
          data-klick="cta_click" data-klick-cta="thema-{{ .id }}"
          data-klick-slug="thema-{{ .id }}"

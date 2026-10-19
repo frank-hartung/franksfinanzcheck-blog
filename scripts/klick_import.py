@@ -3,9 +3,11 @@
 KLICK-IMPORT – holt die cookielosen /go/-Tageszähler aus Cloudflare D1
 und legt sie im Format ab, das `scripts/click_attribution.py` bereits liest.
 
-WARUM: Die Umami-API ist im kostenfreien Plan nicht verfügbar (kostenpflichtig),
-deshalb ist der Umami-Import abgeschaltet. Dieser Import ersetzt ihn durch eine eigene,
-kostenlose Zählung am /go/-Beacon (Worker: cloudflare/klick-zaehler).
+WARUM: Die Klickzahlen kommen aus einer eigenen, kostenlosen und cookielosen Zählung
+am /go/-Beacon (Worker: cloudflare/klick-zaehler) – kein Fremdanbieter, keine laufenden
+Kosten. Die Datenschutz-Prüfung vor dem Einschalten steht in
+docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md (Abschnitt 7). Fehlt der Zähler, bleiben
+die Klicks „unbekannt“.
 
 AUFRUF:
   python3 scripts/klick_import.py                 # Import (Zeitraum: alle Tage)

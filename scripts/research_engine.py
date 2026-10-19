@@ -57,7 +57,6 @@ PAIN = os.path.join(RESEARCH_DIR, "pain_points.yaml")
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 PINTEREST_PERF = os.path.join(BLOG_DIR, "data", "pinterest_perf.yaml")
 KEYWORD_SUGG = os.path.join(BLOG_DIR, ".keyword_suggestions.json")
-UMAMI_CLICKS = os.path.join(BLOG_DIR, "data", "umami_clicks.json")
 
 PILLARS = ["strom-sparen", "internet-dsl", "konto-karten",
            "versicherungen", "mietwagen", "frugalismus"]
@@ -157,11 +156,6 @@ def load_pinterest_perf():
     data = _load_yaml(PINTEREST_PERF)
     entries = data.get("entries", []) if isinstance(data, dict) else []
     return [e for e in entries if isinstance(e, dict)]
-
-
-def load_umami_clicks():
-    data = _load_json(UMAMI_CLICKS)
-    return data if isinstance(data, list) else []
 
 
 # ---------------------------------------------------------------- Signal-Hilfen

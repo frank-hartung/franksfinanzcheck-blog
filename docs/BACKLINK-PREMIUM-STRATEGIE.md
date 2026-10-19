@@ -65,7 +65,7 @@ Finanztip Community, r/Finanzen, r/de_EDV, Gutefrage, Stiftung Warentest Communi
 
 **Premium-Verhalten:** Profil mit Klarnamen. 10 nützliche Antworten, bevor der erste Link fällt. Link nur, wenn die Frage eine Anleitung verlangt.
 
-**Warum trotz nofollow/ugc:** Referral-Sessions (messbar in Umami), Branded Search, Autor als Entity. Google braucht den Menschen hinter dem KI-Blog – Community ist der billigste E-E-A-T-Beweis.
+**Warum trotz nofollow/ugc:** Referral-Sessions (derzeit nicht messbar – kein Besucherzähler; Indiz: neue verweisende Domains in der GSC), Branded Search, Autor als Entity. Google braucht den Menschen hinter dem KI-Blog – Community ist der billigste E-E-A-T-Beweis.
 
 **Anti-Muster:** Serienkommentare mit identischem Link, „schaut mal meinen Blog an“, Finanztip-Threads mit Affiliate-URLs.
 
@@ -149,7 +149,7 @@ Jedes Asset braucht: Stand-Datum, Quellenzeile, 1000×1500-Pin, 1200×628-Press-
 ```
 
 - **Pinterest-Analytics** sagt, welcher Pin Outbound bringt (North Star bleibt Outbound-CTR ≥ 1,5 %).
-- **Umami** sagt, welche Referral-Domain Sessions + `affiliate_click` bringt.
+- **Der eigene Klickzähler** (sobald aktiv) sagt, welche Artikel `affiliate_click`s bringen; welche Referral-Domain Besucher schickt, ist ohne Besucherzähler nicht messbar – ein Indiz liefert der GSC-Links-Bericht.
 - **GSC** sagt, welche Domain als Link zählt.
 - Wo alle drei Spitzen zeigen, liegt der Gewinner – den als Asset/Pin/PR verdoppeln.
 
@@ -238,7 +238,7 @@ Follow-up: bei Gastbeitrag/PR nach 7/5 Tagen **eine** 4-Zeilen-Mail, dann Schlus
 **Tage 61–90 (Ernte, Nov = Peak)**
 - [ ] Kfz-Kampagne: PR-Zitate recyceln, nicht neu erfinden
 - [ ] DSL-Checkliste vor Black Friday
-- [ ] Auswertung: welche Domain brachte Umami-Sessions + `affiliate_click`?
+- [ ] Auswertung: welche Domain ist neu verweisend (GSC-Links-Bericht), und stiegen die `affiliate_click`s (Klickzähler, falls aktiv)?
 - [ ] Nur dort nachlegen. Flops nicht mit mehr Mails zuschütten
 
 ---
@@ -248,10 +248,10 @@ Follow-up: bei Gastbeitrag/PR nach 7/5 Tagen **eine** 4-Zeilen-Mail, dann Schlus
 | KPI | Ziel | Messpunkt |
 |---|---|---|
 | Editorial dofollow, thematisch DE | ≥ 4 Referring Domains | manuell + später GSC Links |
-| Community-Referral-Sessions | messbare Linie > 0 | Umami Referrer |
+| Community-Referral-Sessions | messbare Linie > 0 | derzeit nicht messbar (kein Besucherzähler); Ersatz: neue verweisende Domains in der GSC |
 | PR-Erwähnungen (auch nofollow) | ≥ 2 | Brand-Search |
 | Pinterest Outbound-CTR | ≥ 1,5 % | Pinterest Analytics |
-| Affiliate-Klicks aus Referral | Baseline dokumentieren, dann + | Umami Event `affiliate_click` |
+| Affiliate-Klicks aus Referral | Baseline dokumentieren, dann + | eigener Klickzähler (`data/klicks_eigen.json`), sobald aktiv |
 | Outreach-Antwortquote | ≥ 15 % auf PR/Gast | CRM-Notizen |
 | Spam-Fußabdruck | 0 Verzeichnisse, 0 Tausch, 0 Farmen | YAML `ungeeignet` bleibt ungeeignet |
 

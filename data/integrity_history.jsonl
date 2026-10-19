@@ -322,3 +322,4 @@
 {"date": "2026-10-16", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-16", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/affiliate_integrity_gate.py"], "head": "bd5eb09"}
 {"date": "2026-10-16", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": [], "head": "61691b6"}
+{"date": "2026-10-19", "kritisch": 0, "fest": 5, "modus": "heal", "geheilt": ["layouts/_partials/affiliate_anchor_attrs.html", "layouts/_partials/extend_footer.html", "layouts/pillar/list.html", "layouts/shortcodes/einspartabelle.html", "scripts/affiliate_integrity_gate.py"], "head": "383e2fa"}

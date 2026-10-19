@@ -200,7 +200,7 @@ def attrs_von(tag: str) -> dict[str, str]:
     Warum nicht ein eigener Regex: Der Deploy baut mit `hugo --minify`,
     und minifiziertes HTML schreibt `class=ff-btn` statt `class="ff-btn"`.
     Die erste Fassung hier verlangte Anführungszeichen und sah auf einem
-    Produktionsbau schlicht NICHTS – CTA-Zählung, Umami-Vollständigkeit,
+    Produktionsbau schlicht NICHTS – CTA-Zählung, Klickmarken-Vollständigkeit,
     Affiliate-rel und width/height hätten alle 0 gemeldet, also
     „alles in Ordnung". Ein blindes Gate ist schlimmer als gar keins.
 
@@ -304,13 +304,13 @@ def messen_statisch(vid: str, public: Path, regelwerk: dict) -> dict:
     start_html = (public / "index.html").read_text(encoding="utf-8", errors="ignore")
     stylesheet_bytes = sum(len(m.encode("utf-8")) for m in RE_STYLE.findall(start_html))
 
-    cta_anzahl = cta_ohne_umami = 0
+    cta_anzahl = cta_ohne_klickmarke = 0
     for tag in RE_ANKER.findall(start_html):
         a = attrs_von(tag)
         if "ff-btn" in a.get("class", ""):
             cta_anzahl += 1
             if not a.get("data-klick"):
-                cta_ohne_umami += 1
+                cta_ohne_klickmarke += 1
 
     fehlende_bausteine = [b for b in pflicht_bausteine
                           if b.lstrip(".#") not in start_html]
@@ -327,7 +327,7 @@ def messen_statisch(vid: str, public: Path, regelwerk: dict) -> dict:
         "seiten_gewicht_bytes_max": seiten_gewicht_max,
         "stylesheet_bytes": stylesheet_bytes,
         "cta_anzahl": cta_anzahl,
-        "cta_ohne_umami": cta_ohne_umami,
+        "cta_ohne_klickmarke": cta_ohne_klickmarke,
         "pflicht_bausteine_fehlen": fehlende_bausteine,
         "newsletter_einstieg": newsletter,
         "variante_im_markup": variante_markiert,
@@ -528,7 +528,7 @@ VERGLEICHSFELDER = [
     ("seiten_gewicht_bytes_max", "Seitengewicht (max)", "kleiner"),
     ("interne_links", "Interne Links (Stichprobe)", "groesser"),
     ("cta_anzahl", "CTAs (Startseite)", "groesser"),
-    ("cta_ohne_umami", "CTAs ohne Umami-Event", "kleiner"),
+    ("cta_ohne_klickmarke", "CTAs ohne Klick-Marke (data-klick)", "kleiner"),
     ("affiliate_rel_fehler", "Affiliate-Links ohne rel", "kleiner"),
     ("bilder_ohne_masse", "Bilder ohne width/height", "kleiner"),
     ("alt_luecken", "Bilder ohne alt", "kleiner"),
@@ -749,7 +749,7 @@ def _selftest() -> int:
         assert m["status"] == "ok", m
         w = m["werte"]
         assert w["cta_anzahl"] == 2, w["cta_anzahl"]
-        assert w["cta_ohne_umami"] == 1, w["cta_ohne_umami"]
+        assert w["cta_ohne_klickmarke"] == 1, w["cta_ohne_klickmarke"]
         # rel ohne noopener -> Befund
         assert w["affiliate_rel_fehler"] == 1, w["affiliate_rel_fehler"]
         assert w["bilder_ohne_masse"] == 1 and w["alt_luecken"] == 1
@@ -785,7 +785,7 @@ def _selftest() -> int:
         m = messen_statisch("v-x", public, regelwerk)
         w = m["werte"]
         assert w["cta_anzahl"] == 2, w["cta_anzahl"]
-        assert w["cta_ohne_umami"] == 1, w["cta_ohne_umami"]
+        assert w["cta_ohne_klickmarke"] == 1, w["cta_ohne_klickmarke"]
         assert w["affiliate_rel_fehler"] == 1, w["affiliate_rel_fehler"]
         assert w["bilder_ohne_masse"] == 1 and w["alt_luecken"] == 1
         assert w["variante_im_markup"] is True, "Marke ohne Anführungszeichen übersehen"

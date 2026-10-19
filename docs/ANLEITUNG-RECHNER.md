@@ -41,7 +41,7 @@ Finanztips Breite kopieren):
 ## Vertrag (CLAUDE.md / PRODUCT.md)
 
 * **100 % lokal:** rechnet im Browser, kein Netz, kein Tracking, keine
-  Cookies – bewusst KEIN Umami (consent-unabhängig, siehe H4-Doku).
+  Cookies – kein Tracking-Dienst (siehe H4-Doku).
 * **Ehrlichkeit vor Buzz:** unter jedem Rechner steht ein Methodik-Block
   „So rechnet dieser Rechner" mit der offenen Formel. Keine versteckten
   Annahmen, keine erfundenen Durchschnitte – der Vorbelegungs-Preis

@@ -16,7 +16,8 @@
 #    A4  SELBSTHEILUNG: neue KI-Artikel kommen mit rohen pid-Links ->
 #        naechster Engine-Lauf routet sie automatisch ueber /go/.
 #        Doppelroute (/go/x/ erneut) erkennt uns ueberspringen – idempotent.
-#    A5  REICHWEITEN-MESSUNG: Umami-Events „affiliate_click" mit Thema.
+#    A5  KLICK-MARKEN: `data-klick="affiliate_click"` mit Thema (Auswertung:
+#        eigener Klickzähler, sobald aktiv).
 #
 #  Aufruf:
 #    python3 scripts/affiliate_shield.py             # Report + /go/ generieren

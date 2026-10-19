@@ -1,28 +1,28 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-16T16:31:30.497779+00:00",
-  "head": "1e9f69f",
+  "signed_at": "2026-10-19T18:21:38.586056+00:00",
+  "head": "383e2fa",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
     "hugo.toml": "171a8d3348f345968ec5bdbefb5908949ab5919c4fcfaaebc5a6c33d536aa3c1",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
-    "layouts/_partials/affiliate_anchor_attrs.html": "8e56bc560a2c04e7b3e2a1d6c8ad69c19bf86f757c2197358b44f0197265fd6e",
+    "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
-    "layouts/_partials/extend_footer.html": "900006a46c78debdaed747a8854bb9906f7d98562cfe8c080b00bafe7944b97f",
+    "layouts/_partials/extend_footer.html": "2719a5b0947d6e16643f08e8688175c9845da4a66a2111d22eaa0dcf49bba13c",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
     "layouts/_partials/head.html": "d007e5a0aeff091841f51dfe71116916428066c08a17032c93fd733bb2c9ea63",
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "5363a44b377a53bb546731de2e9e19e0c5a154171ff09a04e5121b2012419ac1",
-    "layouts/pillar/list.html": "435db5bd1741bde574bae2c547e75ff879fd7681ce26721513dc93a21800bac4",
+    "layouts/pillar/list.html": "eaa48324e16d5b9ca314782881399733e8539010c4fb266c7ecddaf331ae4d91",
     "layouts/pillar/single.html": "972b72f5d293b4fa5e041705197989cefd3015b581346eafedf408b76843cfff",
     "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
-    "layouts/shortcodes/einspartabelle.html": "172a4812488cecfd147dc8d03ffba0971fbb12c2a5fa8b2dbd5771590ef2c393",
+    "layouts/shortcodes/einspartabelle.html": "7c5a4b0b4b8847e4dc2582d107a08fad5fa34ab7313ab6eb155cb687acfd8c6a",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
-    "scripts/affiliate_integrity_gate.py": "7a1f1d3ba81cb46e720558f3ed6447af45a477110ef05f689126188b5cba91fc",
+    "scripts/affiliate_integrity_gate.py": "954af7a875e1ffb54daf397bf9bdc9ff31198145207a8664d124225ed0a3a36f",
     "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -47,108 +47,16 @@
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
+    "scripts/wachen_vertrag.py": "9288fd85a130a8d73aa27cc3a9d14a3b09f8c161f57193a801e74c20ded7ba14",
     "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2",
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
-    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
-    "scripts/wachen_vertrag.py": "9288fd85a130a8d73aa27cc3a9d14a3b09f8c161f57193a801e74c20ded7ba14"
+    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "c1029b7da710f9c49cd5197e3752572a81251709bd73054d7cc50f99fc2dc22d",
-  "audit_start_sha256": "8ed9b709acbf1703131ce8db385dfcbd4deb402ee403d341bac9a877370baaf1",
+  "files_sha256": "7eed8d05bd354f9542f9af33218b7955ab42a4fa00cd119599acd79295ee46d2",
+  "audit_start_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38",
   "audit": [
-    {
-      "date": "2026-10-12",
-      "art": "heal",
-      "head": "ad56631",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/publikations_vertrag.py",
-        "scripts/redaktions_standard.py",
-        "scripts/reserve_artifacts.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "65d891f",
-              "datum": "2026-10-12",
-              "betreff": "feat(reserve): Vorratsproduktion und Messnachweise dauerhaft absichern"
-            },
-            {
-              "sha": "0af015f",
-              "datum": "2026-10-12",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/publikations_vertrag.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "05178f3",
-              "datum": "2026-10-13",
-              "betreff": "fix(ymyl): preserve editorial seals across automated writers (#713) (#721)"
-            },
-            {
-              "sha": "0af015f",
-              "datum": "2026-10-12",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "05178f3",
-              "datum": "2026-10-13",
-              "betreff": "fix(ymyl): preserve editorial seals across automated writers (#713) (#721)"
-            },
-            {
-              "sha": "3d25fc3",
-              "datum": "2026-10-12",
-              "betreff": "fix(reserve): WF-D4E0 (#710) – 11/11 Pool-Reife & Heiler-/Vertrags-Dauerheilung (#719)"
-            },
-            {
-              "sha": "0af015f",
-              "datum": "2026-10-12",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/reserve_artifacts.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "65d891f",
-              "datum": "2026-10-12",
-              "betreff": "feat(reserve): Vorratsproduktion und Messnachweise dauerhaft absichern"
-            },
-            {
-              "sha": "0af015f",
-              "datum": "2026-10-12",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "9b87ad71f54fb76c83566aae3e4999dbf5f36be17221ec8086b24ddf4ae4116b",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-13",
       "art": "set-current",
@@ -177,7 +85,7 @@
         }
       ],
       "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1",
-      "prev_sha256": "8ed9b709acbf1703131ce8db385dfcbd4deb402ee403d341bac9a877370baaf1"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-14",
@@ -568,8 +476,114 @@
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "b3a260e31a9d4a15d70664f98d9f26be3d3831738f99be3ea20a6f38550b776e",
-      "files_sha256": "c1029b7da710f9c49cd5197e3752572a81251709bd73054d7cc50f99fc2dc22d"
+      "files_sha256": "c1029b7da710f9c49cd5197e3752572a81251709bd73054d7cc50f99fc2dc22d",
+      "prev_sha256": "b3a260e31a9d4a15d70664f98d9f26be3d3831738f99be3ea20a6f38550b776e"
+    },
+    {
+      "date": "2026-10-19",
+      "art": "heal",
+      "head": "383e2fa",
+      "geaendert": [
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/_partials/extend_footer.html",
+        "layouts/pillar/list.html",
+        "layouts/shortcodes/einspartabelle.html",
+        "scripts/affiliate_integrity_gate.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/affiliate_anchor_attrs.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "383e2fa",
+              "datum": "2026-10-19",
+              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
+            },
+            {
+              "sha": "1021d45",
+              "datum": "2026-10-19",
+              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/extend_footer.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "383e2fa",
+              "datum": "2026-10-19",
+              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
+            },
+            {
+              "sha": "1021d45",
+              "datum": "2026-10-19",
+              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/pillar/list.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "383e2fa",
+              "datum": "2026-10-19",
+              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
+            },
+            {
+              "sha": "1021d45",
+              "datum": "2026-10-19",
+              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/shortcodes/einspartabelle.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "383e2fa",
+              "datum": "2026-10-19",
+              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
+            },
+            {
+              "sha": "1021d45",
+              "datum": "2026-10-19",
+              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/affiliate_integrity_gate.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "383e2fa",
+              "datum": "2026-10-19",
+              "betreff": "fix(governance): Umami restlos entfernt, Sperre gegen Rückkehr (Refs #806)"
+            },
+            {
+              "sha": "1021d45",
+              "datum": "2026-10-19",
+              "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "1848c87159c8b0c3f931a2526e573e17a57dffec749c4546c375f75ce4fdbf3f",
+      "files_sha256": "7eed8d05bd354f9542f9af33218b7955ab42a4fa00cd119599acd79295ee46d2"
     }
   ]
 }

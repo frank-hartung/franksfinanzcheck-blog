@@ -131,7 +131,7 @@
 | # | Idee | Warum | Aufwand |
 |---|---|---|---|
 | 11 | **Eigene Domain-E-Mail + Google Workspace** | Maximale Seriosität für E-E-A-T & Outreach (statt Free-Mail im Impressum) | 1 Tag |
-| 12 | **Umami-Selfhosting / Analytics-Ausbau** | Aktuell cookieless – mit Umami-Dashboard Conversion-Pfade (Affiliate-Klicks) messen | 1 Tag |
+| 12 | **Klickmessung ohne Fremdanbieter** | Aktuell kein Tracking – Affiliate-Klicks über den eigenen cookielosen Zähler messen (`docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md`) | 1 Tag |
 | 13 | **Mehrsprachigkeit (EN)** | Englische Version der Top-20-Artikel → internationaler Traffic (Nische „Frugalismus“ ist global) | groß |
 | 14 | **Digitaler Produktverkauf** | Z. B. „Sparplan-Excel“ oder „CHECK24-Wechsel-Checkliste“ als PDF (5–15 €) – erste Monetarisierung unabhängig von Affiliate | 1–2 Tage |
 | 15 | **Pinterest voll ausrollen** | 73-Pin-Plan liegt bereit – sobald API-Token da: automatisierte Pins, Board-Strategie, Pin-Optimierung nach Impressions | laufend |

@@ -1,27 +1,36 @@
 #!/usr/bin/env python3
 """
-REVENUE-FUNNEL – die komplette Umsatzmessung: Besuch → Klick → Antrag → Provision
+REVENUE-FUNNEL – die Umsatzmessung: Klick → Antrag → Provision
 
 WARUM: Eine Profi-Agentur investiert keinen Euro in Reichweite, bevor der
-Monetarisierungs-Trichter sichtbar ist. Die Einzelteile existieren (Umami-
-Klickimport, Provisions-Tabelle, Klick-Attribution), aber die EINHEIT – der
-Trichter mit allen acht Kennzahlen je Woche – fehlte. Ohne ihn heißt es
+Monetarisierungs-Trichter sichtbar ist. Die Einzelteile existieren (eigener
+Klickzähler, Provisions-Tabelle, Klick-Attribution), aber die EINHEIT – der
+Trichter mit seinen Kennzahlen je Woche – fehlte. Ohne ihn heißt es
 „0 Klicks, 0.00 €“ – und das ist kein Messwert, sondern Unwissen. Dieses
 Skript übersetzt Unwissen in eine dokumentierte Datenlücke und misst alles,
 was messbar ist:
 
-  1. Besuche je kaufnaher Seite   (Umami /pages ÷ Seiten mit /go/-CTA)
-  2. Affiliate-Klicks             (Umami `affiliate_click` je Stelle/Artikel)
-  3. Outbound-CTR                 (Klicks ÷ Besuche kaufnaher Seiten)
-  4. Klick → Antrag               (Abschlüsse aus der Provisions-Tabelle ÷ Klicks)
-  5. Antrag → bestätigter Abschluss (approved ÷ alle Anträge)
-  6. Stornoquote                  (declined ÷ abgeschlossene Anträge)
-  7. Provision pro 100 Besuche    (Provision ÷ Besuche × 100)
-  8. EPC                          (Provision ÷ Affiliate-Klicks)
+  1. Affiliate-Klicks             (eigener cookieloser /go/-Zähler je Stelle/Artikel)
+  2. Klick → Antrag               (Abschlüsse aus der Provisions-Tabelle ÷ Klicks)
+  3. Antrag → bestätigter Abschluss (approved ÷ alle Anträge)
+  4. Stornoquote                  (declined ÷ abgeschlossene Anträge)
+  5. EPC                          (Provision ÷ Affiliate-Klicks)
+  dazu Provision gesamt/bezahlt   (Provisions-Tabelle, Monatssicht)
 
-EHRLICHE REGELN (Hausrecht der Messkette, siehe umami_clicks.py):
+KEINE BESUCHE – mit Absicht: Seit 11.10.2026 läuft auf dem Blog kein
+Besucherzähler und kein Reichweiten-Tracking (Datenschutzentscheidung). Eine
+Kennzahl ohne Quelle wäre für immer „unbekannt“, also Dekoration – darum gibt
+es weder Besuchszahlen noch Outbound-CTR noch „Provision pro 100 Besuche“. Der
+Trichter beginnt beim Klick. Kommt je ein datenschutzgeprüfter Zähler, ist das
+eine eigene Entscheidung samt Quelle, Meta-Datei und Test – kein stiller
+Wiedereinbau (Sperre: scripts/fremdmessung_sperre.py).
+
+EHRLICHE REGELN (Hausrecht der Messkette):
   - Fehlende Quelle ⇒ Kennzahl = „unbekannt“, NIE eine 0. Eine 0 ist eine
     Aussage über die Realität; „unbekannt“ ist eine Aussage über unsere Pipeline.
+  - Eine bewusst ausgeschaltete oder noch nie befüllte Quelle ist eine
+    BETRIEBSGRENZE (INFO, Ampel bleibt grün), keine Lücke. Eine Quelle, die
+    laufen SOLL (Klickzähler `aktiv: true`) und nicht liefert, ist eine Lücke.
   - Jede Quelle trägt Alter + Status ins Report; der Governance-Gate macht aus
     „Messlücken: N“ einen gelben, handlungsbedürftigen Befund – das bleibt
     sichtbar, bis die Lücke zu ist. Kein Dauer-Alarm-Müll, aber auch kein
@@ -38,8 +47,8 @@ Nutzung:
   python3 scripts/revenue_funnel.py --print    # nur stdout (lokal, ohne Schreiblast)
   python3 scripts/revenue_funnel.py --selftest # Logik-Beweis, schreibt nichts ins Repo
 
-Exit: 0 = kompletter Trichter gemessen, 1 = Messlücken dokumentiert (kein Crash,
-      aber Handlungsbedarf), 2 = Selbsttest/Hausfehler.
+Exit: 0 = kompletter Trichter gemessen oder bewusst begrenzt, 1 = Messlücken
+      dokumentiert (kein Crash, aber Handlungsbedarf), 2 = Selbsttest/Hausfehler.
 """
 import datetime
 import glob
@@ -52,16 +61,19 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 DATA = os.path.join(BLOG_DIR, "data")
-VIEWS = os.path.join(DATA, "umami_views.json")
-VIEWS_META = os.path.join(DATA, "umami_views.meta.json")
-CLICKS = os.path.join(DATA, "umami_clicks.json")
-CLICKS_META = os.path.join(DATA, "umami_clicks.meta.json")
-CTAS = os.path.join(DATA, "umami_ctas.json")
+# Eigener cookieloser /go/-Zähler: `scripts/klick_import.py` schreibt Zeilen im
+# Format von click_attribution.py plus eine Meta-Datei (status ok |
+# nicht_konfiguriert | fehler, stand = Zeitstempel). Der Betriebsschalter steht
+# in `data/klickmessung.yaml` – derselbe, den click_chain_guard.py und
+# affiliate_shield.py lesen.
+CLICKS = os.path.join(DATA, "klicks_eigen.json")
+CLICKS_META = os.path.join(DATA, "klicks_eigen.meta.json")
+KLICKMESSUNG = os.path.join(DATA, "klickmessung.yaml")
 # Manuelle Provisions-Monatssummen (Abgeleitetes aus `data/provisionen/provisionen.csv`,
 # geschrieben von `scripts/offline_import.py`). Die CSV selbst ist gitignored –
 # versioniert wird nur das Aggregat, weil es keine Abrechnungs-Details enthält.
 PROVISIONEN = os.path.join(DATA, "provisionen_aggregat.json")
-# Eigene Provenienz-Datei der manuellen Messbrücke (NIEMALS die API-Meta-Dateien).
+# Eigene Provenienz-Datei des Provisions-Imports.
 OFFLINE_META = os.path.join(DATA, "offline_import.meta.json")
 PROV_STALE_MONATE = 2      # letzter befüllter Monat älter als 2 Monate ⇒ Hinweis
 OUT_JSON = os.path.join(DATA, "revenue_funnel.json")
@@ -74,34 +86,27 @@ MAX_HISTORY = 260       # gut 5 Jahre Wochenläufe
 
 SOURCES = (
     # (Schlüssel, menschenlesbarer Name, Daten-/Meta-Pfade, Behebung)
-    # Reihenfolge = Vorrang: die manuelle Brücke steht zuerst, weil sie die
-    # einzige ist, die ohne Secrets und ohne API-Zugang läuft.
-    ("offline", "Manuelle Messbrücke (Offline-Import)",
-     os.path.join(DATA, "provisionen_aggregat.json"), OFFLINE_META,
-     "Export aus dem Umami-Dashboard nach `data/offline/messstand.json` legen "
-     "und `npm run mess:import` ausführen (Vorlage: "
-     "`python3 scripts/offline_import.py --template`) "
-     "– oder API-Import aktivieren: docs/UMSATZ-MESSUNG-PREMIUM.md"),
-    ("views", "Besuche (Umami /pages)", VIEWS, VIEWS_META,
-     "Secret `UMAMI_API_TOKEN` setzen, dann `python3 scripts/umami_views.py --fetch` ausführen"),
-    ("clicks", "Affiliate-Klicks (Umami event-data)", CLICKS, CLICKS_META,
-     "Secret `UMAMI_API_TOKEN` setzen, dann `python3 scripts/umami_clicks.py --fetch` ausführen"),
+    ("offline", "Provisions-Tabelle (Offline-Import)", PROVISIONEN, OFFLINE_META,
+     "Abrechnung eintragen (`npm run mess:vorlage` legt die Tabelle an, Schema: "
+     "docs/ANLEITUNG-PROVISIONEN.md) und `npm run mess:import` ausführen"),
+    ("clicks", "Affiliate-Klicks (eigener Klickzähler)", CLICKS, CLICKS_META,
+     "Zähler-Worker einrichten, `aktiv: true` in `data/klickmessung.yaml` setzen und "
+     "`python3 scripts/klick_import.py` ausführen "
+     "(docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md)"),
 )
 
 
-def umami_api_import_enabled(config_path=None):
-    """Prüft, ob der Umami-API-Import in data/monetization.yaml aktiv ist.
-    Default ist True; `umami_api_import_enabled: false` markiert die bewusste
-    Betriebsgrenze (Umami Free im Browser aktiv, kein Cloud-API-Import)."""
-    path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
+def klickmessung_aktiv(config_path=None):
+    """Betriebsschalter des eigenen Klickzählers (`data/klickmessung.yaml`,
+    Sicherheitsaudit 14.10.2026, M-13). Gleiches Muster wie click_chain_guard.py
+    und affiliate_shield.py: fehlt die Datei oder ist sie kaputt, gilt der
+    Zähler als AUS (datensparsam) – und dann ist „keine Klicks“ keine Lücke,
+    sondern eine Betriebsgrenze."""
     try:
-        with open(path, encoding="utf-8") as f:
-            txt = f.read()
-        if re.search(r"^umami_api_import_enabled:\s*false\s*$", txt, re.M):
-            return False
+        with open(config_path or KLICKMESSUNG, encoding="utf-8") as f:
+            return re.search(r"(?m)^aktiv:\s*true\s*$", f.read()) is not None
     except OSError:
-        pass
-    return True
+        return False
 
 
 # ------------------------------------------------------------------ IO-Helfer
@@ -115,35 +120,21 @@ def _read_json(path, default=None):
         return default
 
 
-def _age_days(meta, keys=("written", "generated", "attempted")):
-    """Alter einer Messung in Tagen (robust gegen Formatsuppe, None wenn unbekannt)."""
+def _age_days(meta, keys=("written", "generated", "attempted", "stand")):
+    """Alter einer Messung in Tagen (robust gegen Formatsuppe, None wenn unbekannt).
+
+    `stand` ist der Zeitstempel der Meta des eigenen Klickzählers
+    (klick_import.py), die übrigen Schlüssel die des Provisions-Imports."""
+    if not isinstance(meta, dict):
+        return None
     for k in keys:
-        v = (meta or {}).get(k)
+        v = meta.get(k)
         if isinstance(v, str):
             try:
                 return (TODAY - datetime.date.fromisoformat(v[:10])).days
             except ValueError:
                 continue
     return None
-
-
-def bruecke_frisch(offline_meta) -> bool:
-    """Hat der Manuell-Import innerhalb der Frist geliefert?
-
-    Die API-Meta (`data/umami_*.meta.json`) gehört den API-Skripten und meldet
-    im Umami-Free-Betrieb `disabled`, obwohl die Bestandsdateien frisch aus dem
-    Offline-Import stammen. Ohne den Blick auf die eigene Meta der manuellen
-    Brücke galten frische Zahlen als „nicht gemessen“ – Schein-Lücke."""
-    if not isinstance(offline_meta, dict) or offline_meta.get("status") != "ok":
-        return False
-    alt = _age_days(offline_meta)
-    return alt is not None and alt <= STALE_DAYS
-
-
-def zustand_mit_bruecke(state, bruecke):
-    """`disabled`/`skipped`/`fehlt` werden zu `ok`, wenn die manuelle Brücke
-    frisch gemessen hat. `alt` bleibt `alt` – zwei Zeitstände sind kein Bild."""
-    return "ok" if bruecke and state in ("disabled", "skipped", "fehlt") else state
 
 
 def _month_age(jjjj_mm: str) -> int:
@@ -158,12 +149,22 @@ def _month_age(jjjj_mm: str) -> int:
 
 
 def _source_state(data, meta):
-    """→ (status, age_days). status: ok | alt | skipped | disabled | fehlt."""
-    if meta and meta.get("status") in ("skipped", "disabled"):
-        return meta.get("status"), _age_days(meta)
-    if not data:
+    """→ (status, age_days). status: ok | alt | skipped | fehler | disabled | fehlt.
+
+    Meta-Vokabular: `skipped`/`disabled` (allgemein) sowie `nicht_konfiguriert`
+    und `fehler` aus klick_import.py. Eine Meta mit `ok` und leerer Datei ist
+    eine MESSUNG (echte 0), kein Loch – deshalb zählt bei `ok` nur das Alter."""
+    meta = meta if isinstance(meta, dict) else {}
+    status = meta.get("status")
+    if status in ("skipped", "disabled"):
+        return status, _age_days(meta)
+    if status == "nicht_konfiguriert":
+        return "skipped", _age_days(meta)
+    if status == "fehler":
+        return "fehler", _age_days(meta)
+    if status != "ok" and not data:
         return "fehlt", None
-    age = _age_days(meta or data)
+    age = _age_days(meta) if meta else (_age_days(data) if isinstance(data, dict) else None)
     if age is not None and age > STALE_DAYS:
         return "alt", age
     return "ok", age
@@ -177,10 +178,9 @@ def kaufnahe_paths(root=None):
     Spar-Matrix mit sechs Gateway-Buttons).
 
     Die Startseite ist bewusst NICHT dabei: sie führt zu den kaufnahen Seiten,
-    verkauft aber nichts direkt – ihre Wirkung misst der Trichter über die
-    cta_click-Platzierungen, ihr Traffic steht in „Besuche gesamt“.
+    verkauft aber nichts direkt.
     Deterministisch aus dem Content-Scan (keine Laufzeit-Abhängigkeit von
-    Umami-Namenskonventionen); die Layout-Plätze sind fix, weil ihre
+    Namenskonventionen einer Messquelle); die Layout-Plätze sind fix, weil ihre
     CTA-Verträge (pillar/list.html, render-link.html) bei jedem Build
     getestet werden (click_chain_guard.py + E2E)."""
     root = root or BLOG_DIR
@@ -203,8 +203,9 @@ def kaufnahe_paths(root=None):
 
 
 def article_to_path(article):
-    """Umami-`article`-Attribut („posts/<slug>/index.md“, „pillar/<k>/index.md“
-    oder Layout-Platzierungen) → Blog-Pfad. Leeres Ergebnis = Sonstiges."""
+    """`article`-Attribut („posts/<slug>/index.md“, „pillar/<k>/index.md“ – die
+    Form von `data-klick-article` und der Zeilen in `klicks_eigen.json`) →
+    Blog-Pfad. Leeres Ergebnis = Sonstiges."""
     a = str(article or "").strip().strip("/")
     if not a:
         return ""
@@ -233,10 +234,14 @@ def _rate(num, den):
     return round(100.0 * num / den, 2)
 
 
-def _per100(revenue, visits):
-    if revenue is None or not visits:
-        return None
-    return round(100.0 * revenue / visits, 2)
+def _count(row):
+    """Zähler einer Klick-Zeile; Müll (Text, negativ, None) zählt als 0 statt
+    den Trichter abstürzen zu lassen – eine kaputte Zeile darf nie den Report
+    der übrigen verhindern."""
+    try:
+        return max(0, int(float(row.get("count") or 0)))
+    except (TypeError, ValueError, OverflowError):
+        return 0
 
 
 def _per_unit(revenue, clicks):
@@ -257,55 +262,29 @@ def fmt(v, kind="int"):
     return f"{v:.4f}".replace(".", ",")
 
 
-def compute(views_doc, clicks_rows, cta_rows, paths, measured=None,
-            manual_prov=None):
+def compute(clicks_rows, paths, measured=None, manual_prov=None):
     """Reine Trichter-Rechnung (testbar, ohne Dateizugriff).
 
-    `measured` = {views, clicks: bool}: „die Quelle wurde erfolgreich
-    importiert“. Nur dann darf eine 0 als echte Null stehen – sonst gilt
-    überall die Hausregel: nicht gemessen ⇒ unbekannt, nie eine Null.
+    `measured` = {clicks: bool}: „der Klickzähler hat erfolgreich geliefert“.
+    Nur dann darf eine 0 als echte Null stehen – sonst gilt überall die
+    Hausregel: nicht gemessen ⇒ unbekannt, nie eine Null.
 
     `manual_prov` = Monatsaggregate der Partnerabrechnungen (manuelle
     Provisions-Tabelle). Sie ist die einzige Provisionsquelle und wird überall
     als „provisionen-tabelle“ gekennzeichnet – eine Abrechnungs-
-    summe ist kein API-Transaktionszähler und darf auch nicht wie einer
+    summe ist kein Transaktionszähler und darf auch nicht wie einer
     aussehen (Monats-, nicht Fenster-Sicht)."""
-    views = (views_doc or {}).get("pages") if isinstance(views_doc, dict) else None
-    views = views if isinstance(views, list) else []
-    totals = (views_doc or {}).get("totals") if isinstance(views_doc, dict) else None
-    totals = totals if isinstance(totals, dict) else {}
     clicks_rows = [r for r in (clicks_rows or []) if isinstance(r, dict)]
-    m = measured or {"views": bool(views_doc), "clicks": bool(clicks_rows)}
+    m = measured or {"clicks": bool(clicks_rows)}
 
-    # Besuche: ganze Seite + kaufnahe Teileschiene
-    views_total = totals.get("visits") or 0
-    pageviews_total = totals.get("pageviews") or 0
-    per_path = {}
-    for row in views:
-        if isinstance(row, dict):
-            per_path[row.get("path")] = {"views": int(row.get("views") or 0),
-                                         "visits": int(row.get("visits") or 0)}
-    views_kaufnah = sum(d["visits"] for p, d in per_path.items() if p in paths) \
-        if m.get("views") else None
-    if m.get("views") and views_kaufnah is None:
-        views_kaufnah = 0 if views else None
-
-    # Klicks je Pfad + gesamt (nur Affiliate-Events – cta_click bleibt draußen)
+    # Klicks je Pfad + gesamt (nur Affiliate-Ereignisse)
     aff = [r for r in clicks_rows if "affiliate_click" in str(r.get("event") or "affiliate_click")]
-    clicks_total = sum(int(r.get("count") or 0) for r in aff) if m.get("clicks") else None
+    clicks_total = sum(_count(r) for r in aff) if m.get("clicks") else None
     clicks_by_path = {}
     for r in aff:
         p = article_to_path(r.get("article"))
         if p:
-            clicks_by_path[p] = clicks_by_path.get(p, 0) + int(r.get("count") or 0)
-
-    # Platzierungen (cta_click-Import von Start-/Pillar-CTAs)
-    placements = {}
-    cta_rows = cta_rows if isinstance(cta_rows, list) else []
-    for r in [x for x in cta_rows + clicks_rows if isinstance(x, dict)]:
-        if str(r.get("event") or "") == "cta_click":
-            label = str(r.get("slug") or "unbenannt")[:60]
-            placements[label] = placements.get(label, 0) + int(r.get("count") or 0)
+            clicks_by_path[p] = clicks_by_path.get(p, 0) + _count(r)
 
     # Trichter-Kennzahlen starten als „unbekannt“ (None). Nur die Provisions-
     # Tabelle füllt sie – nie eine Null, die es nicht gibt.
@@ -339,43 +318,24 @@ def compute(views_doc, clicks_rows, cta_rows, paths, measured=None,
         except (ValueError, TypeError):
             prov_monats_alter = None
 
-    # Provision je Seite ist nicht messbar: die Tabelle liefert nur Monatssummen.
-    per_article_rev = {}
-
-
     # Kennzahlen – None heißt „unbekannt“, das ist der ganze Witz.
     rates = {
-        "outbound_ctr": _rate(clicks_total, views_kaufnah),
         "klick_antrag": _rate(antraege, clicks_total),
         "antrag_abschluss": _rate(confirmed, antraege),
         "stornoquote": _rate(declined, (confirmed or 0) + (declined or 0) if prov_quelle else None),
-        "rev_per_100_visits": _per100(revenue, views_total if m.get("views") else None),
-        "rev_per_100_kaufnah": _per100(revenue, views_kaufnah),
         "epc": _per_unit(revenue, clicks_total),
     }
 
-    # Top-Seiten des Trichters (kaufnahe Seiten mit Messwerten)
-    per_page = []
-    for p in sorted(paths):
-        v = per_path.get(p, {}).get("visits")
-        pv = per_path.get(p, {}).get("views")
-        c = clicks_by_path.get(p)
-        rev = per_article_rev.get(p, {}).get("revenue")
-        if v is None and c is None and rev is None:
-            continue
-        per_page.append({"path": p, "views": pv, "visits": v, "clicks": c,
-                         "ctr": _rate(c, pv),
-                         "revenue": round(rev, 2) if rev is not None else None,
-                         "epc": _per_unit(rev, c)})
+    # Klicks je kaufnahe Seite. Die Provision je Seite ist NICHT messbar: die
+    # Tabelle liefert nur Monatssummen – eine Monatssumme einer Seite zu
+    # buchen wäre erfunden und bleibt verboten (kein revenue-/epc-Feld).
+    per_page = [{"path": p, "clicks": clicks_by_path[p]}
+                for p in sorted(paths) if p in clicks_by_path]
     per_page.sort(key=lambda d: -(d.get("clicks") or 0))
 
     return {
         "generated": TODAY.isoformat(),
-        "window_days": 90,
         "kaufnah_seiten": len(paths),
-        "views": {"total": views_total if m.get("views") else None,
-                  "pageviews": pageviews_total if m.get("views") else None,
-                  "kaufnah": views_kaufnah},
         "affiliate_klicks": clicks_total,
         "transaktionen": {"antraege": antraege, "pending": pending, "bestaetigt": confirmed,
                           "stornos": declined, "quelle": prov_quelle},
@@ -387,84 +347,70 @@ def compute(views_doc, clicks_rows, cta_rows, paths, measured=None,
                                     else None),
                       "monats_alter": prov_monats_alter},
         "raten": rates,
-        "platzierungen": dict(sorted(placements.items(), key=lambda kv: -kv[1])),
         "seiten": per_page,
     }
 
 
 def evaluate(sources):
-    """→ (gaps, notations): welche Quellen sind Löcher, was kostet die Behebung?"""
+    """→ gaps: welche Quellen sind Löcher, was kostet die Behebung?
+
+    `ok` und `disabled` (bewusste Betriebsgrenze, siehe main) sind keine Lücke.
+    Alles andere schon: eine Quelle, die liefern SOLL und es nicht tut."""
     gaps = []
-    # Eine funktionierende Brücke ersetzt die andere – aber NUR, wenn die andere
-    # nachweislich liefert. Umgekehrt wird nichts überblendet: fehlt die manuelle
-    # Brücke und ist die API deaktiviert, bleiben die Lücken sichtbar. Eine
-    # Schein-Null-Messlücke ist genau der Fehler, den #514 dokumentiert.
-    offline_ok = any(k == "offline" and st == "ok" for k, _l, st, _a in sources)
-    ersetzte = {"views", "clicks"} if offline_ok else set()
-    for key, label, data_state, age in sources:
+    for _key, label, data_state, age in sources:
         if data_state in ("ok", "disabled"):
             continue
-        if key in ersetzte and data_state in ("fehlt", "skipped"):
-            continue
-        why = {"fehlt": "noch nie importiert", "skipped": "Import übersprungen (Secret fehlt)",
+        why = {"fehlt": "noch nie importiert",
+               "skipped": "Import übersprungen (Zugang oder Konfiguration fehlt)",
+               "fehler": "letzter Import fehlgeschlagen",
                "alt": f"Import {age or '?'}d alt (Frist {STALE_DAYS}d)"}.get(data_state, data_state)
-        if key == "offline" and data_state in ("fehlt", "skipped"):
-            why += " – weder API-Import noch Manuell-Import gemessen " \
-                   "(docs/UMSATZ-MESSUNG-PREMIUM.md, Abschnitt 5a)"
         gaps.append(f"{label}: {why}")
     return gaps
 
 
 # ------------------------------------------------------------------ Report
 
-def bruecken_text(src, offline_meta, umami_api_enabled):
+def quellen_text(src, offline_meta, clicks_meta=None):
     """Zeile im Report: WOHER kommen die Zahlen gerade? (Agentur-Standard: jede
     Kennzahl braucht ihre Quelle – eine Zahl ohne Herkunft ist ein Gerücht.)"""
-    state = next((st for k, _l, st, _a in src if k == "offline"), "unbekannt")
-    if state == "ok":
+    state = {k: st for k, _l, st, _a in src}
+    teile = []
+    if state.get("clicks") in ("ok", "alt"):
+        stand = str((clicks_meta or {}).get("stand") or "unbekannt")[:10]
+        teile.append(f"Klicks: eigener Zähler (`scripts/klick_import.py`, Stand {stand})")
+    if state.get("offline") in ("ok", "alt"):
         stand = (offline_meta or {}).get("written") or "unbekannt"
-        seiten = (offline_meta or {}).get("seiten")
-        modus = (offline_meta or {}).get("modus")
-        extra = f", {seiten} Seiten" if isinstance(seiten, int) else ""
-        extra += f", Modus {modus}" if modus else ""
-        return (f"manuell (`scripts/offline_import.py`, Stand {stand}{extra})")
-    if umami_api_enabled:
-        return "Umami-API (`scripts/umami_views.py` / `umami_clicks.py`)"
-    return ("keine – API-Import deaktiviert und kein Manuell-Import gelaufen "
-            "(Zahlen bleiben „unbekannt“, docs/UMSATZ-MESSUNG-PREMIUM.md Abschnitt 5a)")
+        monate = (offline_meta or {}).get("provisionen_monate")
+        extra = f", {monate} Monate" if isinstance(monate, int) else ""
+        teile.append(f"Provision: Abrechnungstabelle (`scripts/offline_import.py`, Stand {stand}{extra})")
+    if teile:
+        return " · ".join(teile)
+    return ("keine – derzeit liefert keine Quelle Zahlen (Grund: Datenqualität unten; "
+            "Zahlen bleiben „unbekannt“, docs/UMSATZ-MESSUNG-PREMIUM.md)")
 
 
-def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None,
+def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, quellen=None,
            prov_monate=None):
     """Markdown-Wochenseite. Enthält die Markerzeile `Messlücken: N` und die
     Gesamt-Ampel – der Governance-Gate liest beides (kein Exit-Code-Raten)."""
     rate = f["raten"]
     tx = f["transaktionen"]
     rows = [
-        ("Besuche gesamt", fmt(f["views"]["total"])),
-        ("Besuche kaufnaher Seiten", fmt(f["views"]["kaufnah"])),
         ("Affiliate-Klicks", fmt(f["affiliate_klicks"])),
-        ("Outbound-CTR (Klicks ÷ Besuche kaufnah)", fmt(rate["outbound_ctr"], "pct")),
         ("Vermittelte Abschlüsse (alle Status)", fmt(tx["antraege"])),
         ("Klick → Antrag", fmt(rate["klick_antrag"], "pct")),
         ("Antrag → bestätigter Abschluss", fmt(rate["antrag_abschluss"], "pct")),
         ("Stornoquote (declined ÷ abgeschlossene)", fmt(rate["stornoquote"], "pct")),
         ("Provision (gesamt)", fmt(f["provision"]["gesamt"], "eur")),
         ("Provision bezahlt", fmt(f["provision"]["bezahlt"], "eur")),
-        ("Provision pro 100 Besuche (gesamte Site)",
-         fmt(rate["rev_per_100_visits"], "eur")),
-        ("Provision pro 100 Besuche (kaufnahe Seiten)",
-         fmt(rate["rev_per_100_kaufnah"], "eur")),
         ("EPC (Einnahmen pro Affiliate-Klick)", fmt(rate["epc"], "eur")),
     ]
-    # Monats-Sicht überlagert Fenster-Sicht ⇒ drei Zeilen mischen zwei Bezüge.
+    # Monats-Sicht überlagert Klick-Sicht ⇒ zwei Zeilen mischen zwei Bezüge.
     # Ehrliche Beschriftung statt stiller Rundung: Sternchen + Fußnote.
     mischt = f["provision"].get("quelle") == "provisionen-tabelle"
     if mischt:
         stand = f["provision"].get("monat") or "Stand unbekannt"
-        rows = [(k + (" *" if k in ("Klick → Antrag", "Antrag → bestätigter Abschluss",
-                                    "Provision pro 100 Besuche (gesamte Site)",
-                                    "Provision pro 100 Besuche (kaufnahe Seiten)",
+        rows = [(k + (" *" if k in ("Klick → Antrag",
                                     "EPC (Einnahmen pro Affiliate-Klick)") else ""), v)
                 for k, v in rows]
         rows = [(k.replace("Provision (gesamt)", f"Provision (Abrechnungstabelle, Stand {stand})")
@@ -472,9 +418,9 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
                           "Provision bezahlt (lt. Abrechnungstabelle)"), v)
                 for k, v in rows]
     ampel = "GREEN" if not gaps else "AMBER"
-    out = ["# 📈 Umsatz-Funnel – Besuch → Klick → Antrag → Provision",
-           f"**Stand:** {f['generated']} · **Fenster:** {f['window_days']} Tage · "
-           f"**Ampel:** **{ampel}** · **Messlücken: {len(gaps)}**",
+    out = ["# 📈 Umsatz-Funnel – Klick → Antrag → Provision",
+           f"**Stand:** {f['generated']} · **Ampel:** **{ampel}** · "
+           f"**Messlücken: {len(gaps)}**",
            "",
            "## 🚦 Gesamt-Ampel: **" + ampel + "**",
            "",
@@ -482,14 +428,12 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
            "|---|---|"]
     out += [f"| {k} | {v} |" for k, v in rows]
     if mischt:
-        out += ["", "_* Diese drei Zeilen mischen zwei Zeitbezüge: Klicks und Besuche "
-                "aus dem Messfenster (oben), Abschlüsse und Provision aus der "
-                "**abgerechneten Monatssicht** der Provisions-Tabelle. Sie taugen als "
-                "Größenordnung, nicht als Wochenvergleich – der exakte "
-                "Klick→Antrag→Euro-Hebel braucht die API-Brücke "
-                "(`docs/UMSATZ-MESSUNG-PREMIUM.md`)._", ""]
-    if bruecke:
-        out += [f"**Messbrücke:** {bruecke}", ""]
+        out += ["", "_* Diese beiden Zeilen mischen zwei Zeitbezüge: Klicks aus dem "
+                "Zähler, Abschlüsse und Provision aus der **abgerechneten "
+                "Monatssicht** der Provisions-Tabelle. Sie taugen als "
+                "Größenordnung, nicht als Wochenvergleich._", ""]
+    if quellen:
+        out += [f"**Quellen:** {quellen}", ""]
     if prov_monate:
         out += ["## 🧾 Abrechnungstabelle (Provision je Monat)", "",
                 "| Monat | Partner | Abschlüsse | Stornos | Provision |", "|---|---|---|---|---|"]
@@ -506,17 +450,13 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
                 "| Kennzahl | letzte Woche | Δ |", "|---|---|---|"]
         out += [f"| {k} | {prev} | {d} |" for k, prev, d in wow]
     if f["seiten"]:
-        out += ["", "## 🧭 Trichter je kaufnahe Seite (Top 15)", "",
-                "| Seite | Besuche | Klicks | Outbound-CTR | Provision | EPC |",
-                "|---|---|---|---|---|---|"]
+        out += ["", "## 🧭 Klicks je kaufnahe Seite (Top 15)", "",
+                "| Seite | Klicks |",
+                "|---|---|"]
         for p in f["seiten"][:15]:
-            out.append(f"| `{p['path']}` | {fmt(p['visits'])} | {fmt(p['clicks'])} | "
-                       f"{fmt(p['ctr'], 'pct')} | {fmt(p['revenue'], 'eur')} | "
-                       f"{fmt(p['epc'], 'eur')} |")
-    if f["platzierungen"]:
-        out += ["", "## 🎯 CTA-Platzierungen (cta_click: Start-/Pillar-CTAs)", "",
-                "| Platzierung | Klicks |", "|---|---|"]
-        out += [f"| `{k}` | {v} |" for k, v in list(f["platzierungen"].items())[:15]]
+            out.append(f"| `{p['path']}` | {fmt(p['clicks'])} |")
+        out += ["", "_Provision je Seite ist nicht messbar: die Abrechnungstabelle "
+                "kennt nur Monatssummen._"]
     out += ["", "## 🧾 Datenqualität der Messkette", ""]
     if gaps or operating_boundaries:
         out += ["| Level | Code | Befund |", "|---|---|---|"]
@@ -534,14 +474,13 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
             "   kaufnahen Seite ⇒ CTA/Anker überarbeiten, BEVOR Traffic gekauft wird.",
             "2. **Storno > 15 %** ⇒ Partner-Ziel prüfen (falsches Produkt versprochen?",
             "   Intent-Gate IW3) – Stornos sind verlorene Margen, keine Petitesse.",
-            "3. **Outbound-CTR < 1 % bei hohem Traffic** ⇒ Seite ist Leser-, keine",
-            "   Wechsel-Seite: CTA nach oben, Vergleichs-Shortcode setzen, Fazit-Anker.",
-            "4. **Antrag → Abschluss < 40 %** ⇒ Erwartungsmanagement am Link prüfen",
+            "3. **Antrag → Abschluss < 40 %** ⇒ Erwartungsmanagement am Link prüfen",
             "   (Tooltip/Anker müssen halten, was sie versprechen – siehe Intent-Wache).",
             "",
-            "_Erzeugt von `scripts/revenue_funnel.py`; Quelle der Zahlen: Umami-API +",
-            "Provisions-Tabelle. „unbekannt“ heißt: Messkette noch nicht befüllt –",
-            "siehe Datenqualität oben, nicht „nichts verdient“._",
+            "_Erzeugt von `scripts/revenue_funnel.py`; Quellen der Zahlen: eigener",
+            "Klickzähler + Provisions-Tabelle. Besucherzahlen gibt es bewusst nicht",
+            "(kein Reichweiten-Tracking). „unbekannt“ heißt: Messkette noch nicht",
+            "befüllt – siehe Datenqualität oben, nicht „nichts verdient“._",
             ""]
     return "\n".join(out) + "\n"
 
@@ -551,12 +490,11 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, bruecke=None
 def _history_row(f):
     r = f["raten"]
     return {"date": f["generated"],
-            "views_total": f["views"]["total"], "views_kaufnah": f["views"]["kaufnah"],
-            "clicks": f["affiliate_klicks"], "ctr_pct": r["outbound_ctr"],
+            "clicks": f["affiliate_klicks"],
             "antraege": f["transaktionen"]["antraege"],
             "confirmed": f["transaktionen"]["bestaetigt"],
             "storno_pct": r["stornoquote"], "revenue": f["provision"]["gesamt"],
-            "epc": r["epc"], "rev_per_100": r["rev_per_100_visits"]}
+            "epc": r["epc"]}
 
 
 def _prev_metrics():
@@ -576,24 +514,57 @@ def _prev_metrics():
 
 
 def _wow(cur, prev):
-    """Zeilen (Kennzahl, Vorwoche, Δ) – Δ bleibt None, wenn eine Seite fehlt."""
+    """Zeilen (Kennzahl, Vorwoche, Δ) – Δ bleibt None, wenn eine Seite fehlt.
+
+    Ältere History-Zeilen tragen noch Spalten, die es nicht mehr gibt
+    (Besuchs-Kennzahlen): gelesen wird nur, was die Tabelle unten nennt."""
     if not prev:
         return []
     out = []
-    for label, key, kind in (("Besuche gesamt", "views_total", "int"),
-                             ("Besuche kaufnah", "views_kaufnah", "int"),
-                             ("Affiliate-Klicks", "clicks", "int"),
-                             ("Outbound-CTR (%)", "ctr_pct", "pct"),
+    for label, key, kind in (("Affiliate-Klicks", "clicks", "int"),
                              ("Anträge", "antraege", "int"),
                              ("Stornoquote (%)", "storno_pct", "pct"),
                              ("Provision (€)", "revenue", "eur"),
-                             ("EPC (€)", "epc", "eur"),
-                             ("Provision/100 Besuche (€)", "rev_per_100", "eur")):
+                             ("EPC (€)", "epc", "eur")):
         a, b = cur.get(key), prev.get(key)
         diff = round(a - b, 2) if isinstance(a, (int, float)) and isinstance(b, (int, float)) else None
         delta = "unbekannt" if diff is None else ("+" if diff >= 0 else "") + fmt(diff, kind)
         out.append((label, fmt(b, kind), delta))
     return out
+
+
+def lage(clicks_rows, clicks_meta, prov_doc, offline_meta, zaehler_aktiv):
+    """Messlage der beiden Quellen → (src, measured, operating_boundaries).
+
+    Reine Funktion (ohne Dateizugriff), damit Selbsttest und Unit-Tests dieselbe
+    Entscheidung prüfen wie der echte Lauf:
+
+      · Provisions-Tabelle noch NIE befüllt  → Betriebsgrenze (INFO), keine Lücke:
+        ein manueller, freiwilliger Weg meldet sein Nichtvorhandensein nicht
+        als Störung. Ist sie befüllt, aber der Import veraltet, ist es eine Lücke.
+      · Klickzähler AUS (`aktiv: false`)     → Betriebsgrenze (INFO). Auch alte
+        Zeilen zählen dann NICHT: ausgeschaltet heißt nicht gemessen.
+      · Klickzähler AN und liefert nicht      → Lücke (AMBER, `funnel_gap`)."""
+    st_prov, age_prov = _source_state(prov_doc or {}, offline_meta or {})
+    boundaries = []
+    if st_prov == "fehlt":
+        st_prov = "disabled"
+        boundaries.append(
+            "Provisions-Tabelle noch nicht befüllt – Anträge, Abschlüsse, Provision "
+            "und EPC bleiben „unbekannt“ (Abrechnung eintragen: `npm run mess:vorlage`, "
+            "danach `npm run mess:import`)")
+    if zaehler_aktiv:
+        st_clk, age_clk = _source_state(clicks_rows, clicks_meta or {})
+        measured_clicks = (clicks_meta or {}).get("status") == "ok"
+    else:
+        st_clk, age_clk, measured_clicks = "disabled", None, False
+        boundaries.append(
+            "Klickzähler aus (`aktiv: false` in `data/klickmessung.yaml`) – Klicks, "
+            "Klick → Antrag und EPC bleiben „unbekannt“ "
+            "(Einschalten: docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md)")
+    src = [("offline", SOURCES[0][1], st_prov, age_prov),
+           ("clicks", SOURCES[1][1], st_clk, age_clk)]
+    return src, {"clicks": measured_clicks}, boundaries
 
 
 def main(argv=None):
@@ -602,72 +573,34 @@ def main(argv=None):
         return _selftest()
     print_only = "--print" in argv
     paths = kaufnahe_paths()
-    views_doc = _read_json(VIEWS, {}) or {}
-    views_meta = _read_json(VIEWS_META, {}) or {}
     clicks_rows = _read_json(CLICKS, []) or []
     clicks_meta = _read_json(CLICKS_META, {}) or {}
-    cta_rows = _read_json(CTAS, []) or []
     prov_doc = _read_json(PROVISIONEN, {}) or {}
     offline_meta = _read_json(OFFLINE_META, {}) or {}
 
-    umami_api_enabled = umami_api_import_enabled()
-    bruecke = bruecke_frisch(offline_meta)
-    # „gemessen“ = Import sagt ok ODER Bestand mit Datum (manueller Export zählt
-    # auch – seit 10.10.2026 mit dokumentierter Herkunft in data/offline_import.meta.json).
-    measured = {
-        "views": bool(views_doc) and ((views_meta.get("status") or "ok")
-                                      not in ("skipped", "disabled") or bruecke),
-        "clicks": ((clicks_meta.get("status") or ("ok" if clicks_rows else "fehlt")) == "ok")
-                  or bruecke,
-    }
-    src = [("offline", SOURCES[0][1], *_source_state(prov_doc or {}, offline_meta)),
-           ("views", SOURCES[1][1], *_source_state(views_doc, views_meta)),
-           ("clicks", SOURCES[2][1], *_source_state(clicks_rows, clicks_meta))]
-    if not umami_api_enabled:
-        src = [(k, label, "disabled" if state in ("fehlt", "skipped", "disabled") else state, age)
-               for k, label, state, age in src]
-    # Frische manuelle Brücke ⇒ die abgeleiteten Bestände zählen als Messung.
-    if bruecke:
-        src = [(k, label, zustand_mit_bruecke(state, True), age) for k, label, state, age in src]
-    # Ein leeres, aber frisch als ok geschriebenes Import-File ist eine MES-SUNG
-    # (echte 0), kein Loch – evaluate darf das nicht doppelt zählen.
-    def _state_of(state, age, key):
-        if state == "fehlt" and measured[key]:
-            return "ok", age
-        return state, age
-    src = [(k, label, *_state_of(state, age, k)) for k, label, state, age in src]
+    src, measured, operating_boundaries = lage(
+        clicks_rows, clicks_meta, prov_doc, offline_meta, klickmessung_aktiv())
     gaps = evaluate(src)
-    prov_info = []          # wird nach compute() mit der Tabelle gefüllt (s.u.)
-    operating_boundaries = list(prov_info)
-    if not umami_api_enabled or any(state == "disabled" for _, _, state, _ in src):
-        operating_boundaries.append(
-            "Umami Analytics: API-Import deaktiviert (Umami Free – Klicks und Besuche werden im Umami-Dashboard erfasst)"
-        )
-    source_fixes = {k: SOURCES[i][4] for i, k in enumerate(("offline", "views", "clicks"))}
+    source_fixes = {k: SOURCES[i][4] for i, k in enumerate(("offline", "clicks"))}
     fixes = [source_fixes[k] for k, _l, state, _a in src if state not in ("ok", "disabled")]
-    f = compute(views_doc, clicks_rows, cta_rows, paths, measured=measured,
+    f = compute(clicks_rows if measured["clicks"] else [], paths, measured=measured,
                 manual_prov=prov_doc)
     # Info-Grenze (keine Lücke): Abrechnungstabelle zu lange nicht nachgetragen.
     alter = f["provision"].get("monats_alter")
     if f["provision"].get("quelle") == "provisionen-tabelle" \
             and isinstance(alter, int) and alter > PROV_STALE_MONATE:
-        prov_info.append(f"Provisions-Tabelle: letzter befüllter Monat "
-                         f"{f['provision'].get('monat')} ist {alter} Monate her – "
-                         f"abrechnen und nachtragen (`data/provisionen/provisionen.csv`) "
-                         f"und `npm run mess:import`)")
-    # Fenster ehrlich machen: die Importe schreiben ihr Zeitfenster in die Meta.
-    for meta in (clicks_meta, views_meta, offline_meta):
-        if isinstance(meta, dict) and isinstance(meta.get("days"), int):
-            f["window_days"] = meta["days"]
-            break
+        operating_boundaries.append(
+            f"Provisions-Tabelle: letzter befüllter Monat "
+            f"{f['provision'].get('monat')} ist {alter} Monate her – "
+            f"abrechnen und nachtragen (`data/provisionen/provisionen.csv`) "
+            f"und `npm run mess:import`)")
     f["quellen"] = [{"quelle": k, "status": state, "alter_tage": age}
                    for k, _l, state, age in src]
 
     prev = _prev_metrics()
     wow = _wow(_history_row(f), prev)
-    bruecke_txt = bruecken_text(src, offline_meta, umami_api_enabled)
     body = render(f, gaps, fixes, wow, operating_boundaries=operating_boundaries,
-                  bruecke=bruecke_txt,
+                  quellen=quellen_text(src, offline_meta, clicks_meta),
                   prov_monate=(prov_doc.get("monate") if isinstance(prov_doc, dict) else None))
 
     if print_only:
@@ -704,8 +637,7 @@ def main(argv=None):
         def _zustand(key, fallback):
             return next((st for k, _l, st, _a in src if k == key), fallback)
         log_event(module="revenue_funnel", action="report",
-                  input={"views": _zustand("views", "unknown"),
-                         "clicks": _zustand("clicks", "unknown"),
+                  input={"clicks": _zustand("clicks", "unknown"),
                          "offline": _zustand("offline", "unknown")},
                   output={"gaps": len(gaps), "clicks": f["affiliate_klicks"],
                           "revenue": f["provision"]["gesamt"]}, status="ok")
@@ -734,6 +666,8 @@ def _selftest():
     der CI: `python3 scripts/selftest_clock.py --trap scripts/revenue_funnel.py
     --offset 1461` (Verbrannt am 10.10.2026: ein auf 2030-01 eingefrorener
     Zukunfts-Monat wurde vier Jahre später zum Vergangenheits-Monat)."""
+    import tempfile
+
     def vor(tage):
         return (TODAY - datetime.timedelta(days=tage)).isoformat()
 
@@ -743,7 +677,7 @@ def _selftest():
         return f"{m // 12:04d}-{m % 12 + 1:02d}"
 
     failures = []
-    # --- Artikel-Attribut → Pfad (die Brücke Klick↔Besuch muss sitzen)
+    # --- Artikel-Attribut → Pfad (die Brücke Klick↔Seite muss sitzen)
     for art, want in (("posts/2026-08-16-gas-anbieter-wechseln/index.md",
                        "/posts/2026-08-16-gas-anbieter-wechseln/"),
                       ("pillar/strom-sparen/index.md", "/pillar/strom-sparen/"),
@@ -758,16 +692,10 @@ def _selftest():
     if "/pillar/" not in k:
         failures.append("Ratgeber-Zentrale fehlt in der kaufnahen Menge")
     if "/" in k:
-        failures.append("Startseite gehört nicht in den CTR-Nenner (kein direkter Verkauf) – "
-                        "ihre CTA-Wirkung läuft über cta_click-Platzierungen")
+        failures.append("Startseite gehört nicht in die kaufnahen Seiten (kein direkter Verkauf)")
     if not any(p.startswith("/pillar/") and p != "/pillar/" for p in k):
         failures.append("Pillar-Ratgeber fehlen in der kaufnahen Menge")
-    # --- Trichter-Synthese: alle acht Kennzahlen mit Absichtswerten
-    views = {"totals": {"visits": 1000, "pageviews": 1500},
-             "pages": [{"path": "/posts/2026-08-16-gas-anbieter-wechseln/",
-                        "views": 200, "visits": 150},
-                       {"path": "/pillar/strom-sparen/", "views": 100, "visits": 80},
-                       {"path": "/", "views": 500, "visits": 400}]}
+    # --- Trichter-Synthese: alle Kennzahlen mit Absichtswerten
     clicks = [{"event": "affiliate_click", "slug": "gas",
                "article": "posts/2026-08-16-gas-anbieter-wechseln/index.md",
                "pillar": "", "count": 40},
@@ -775,46 +703,45 @@ def _selftest():
     # Provisions-Tabelle als einzige Quelle: 20 Abschlüsse, 5 Stornos, 210 € Provision.
     mp1 = {"summe": {"abschluesse": 20, "stornos": 5, "provision_eur": 210.0},
            "monate": [f"{TODAY:%Y-%m}"], "letzter_monat": f"{TODAY:%Y-%m}", "partner": ["CHECK24"]}
-    f = compute(views, clicks, [], {"/pillar/", "/posts/2026-08-16-gas-anbieter-wechseln/",
-                                    "/pillar/strom-sparen/"}, manual_prov=mp1)
+    f = compute(clicks, {"/pillar/", "/posts/2026-08-16-gas-anbieter-wechseln/",
+                         "/pillar/strom-sparen/"}, manual_prov=mp1)
     r = f["raten"]
     if f["affiliate_klicks"] != 40:
-        failures.append(f"cta_click verunreinigt Affiliate-Zähler: {f['affiliate_klicks']}")
-    if f["views"]["kaufnah"] != 150 + 80:
-        failures.append(f"Besuche kaufnah: {f['views']['kaufnah']}")
-    if abs(r["outbound_ctr"] - 100 * 40 / 230) > 0.01:
-        failures.append(f"Outbound-CTR: {r['outbound_ctr']}")
+        failures.append(f"fremdes Ereignis (cta_click) verunreinigt den Affiliate-Zähler: {f['affiliate_klicks']}")
     if f["transaktionen"]["antraege"] != 20:
         failures.append(f"Anträge gesamt: {f['transaktionen']['antraege']}")
+    if abs(r["klick_antrag"] - 50.0) > 0.01:
+        failures.append(f"Klick→Antrag: {r['klick_antrag']}")
     if abs(r["antrag_abschluss"] - 75.0) > 0.01:
         failures.append(f"Antrag→Abschluss: {r['antrag_abschluss']}")
     if abs(r["stornoquote"] - 25.0) > 0.01:
         failures.append(f"Stornoquote: {r['stornoquote']}")
     if abs(r["epc"] - 5.25) > 0.01:
         failures.append(f"EPC: {r['epc']}")
-    if abs(r["rev_per_100_visits"] - 21.0) > 0.01:
-        failures.append(f"Provision/100 gesamt: {r['rev_per_100_visits']}")
-    if f["platzierungen"].get("home-strom") != 25:
-        failures.append(f"Platzierungen: {f['platzierungen']}")
     top = f["seiten"][0]
     if (top["path"] != "/posts/2026-08-16-gas-anbieter-wechseln/" or top["clicks"] != 40
-            or top["revenue"] is not None or top["epc"] is not None):
-        failures.append(f"Seiten-Trichter Top: {top}")
-    if top["ctr"] != 20.0:
-        failures.append(f"Seiten-CTR (Klicks ÷ Seitenaufrufe): {top['ctr']}")
+            or "revenue" in top or "epc" in top):
+        failures.append(f"Seiten-Trichter Top (Provision je Seite wäre erfunden): {top}")
+    # Keine Besuchs-Kennzahlen mehr – ohne Quelle wären sie für immer „unbekannt“.
+    verboten = {"outbound_ctr", "rev_per_100_visits", "rev_per_100_kaufnah"}
+    if verboten & set(r) or "views" in f or "platzierungen" in f:
+        failures.append("Kennzahl ohne Quelle (Besuche/Platzierungen) ist wieder im Trichter")
     # --- „unbekannt“ ≠ 0: leere Quellen dürfen nirgends Nullen gebären
-    empty = compute({}, [], [], {"/", "/pillar/"})
+    empty = compute([], {"/", "/pillar/"}, measured={"clicks": False})
     for name, v in list(empty["raten"].items()) + [("klicks", empty["affiliate_klicks"]),
                                                    ("prov", empty["provision"]["gesamt"]),
                                                    ("antraege", empty["transaktionen"]["antraege"])]:
         if v is not None:
             failures.append(f"ohne Quellen erfindet der Trichter {name}={v} (soll unbekannt)")
-    if "unbekannt" not in render(empty, ["Besuche: fehlt", "Klicks: fehlt", "Provisionen: fehlt"],
-                                 ["Secrets setzen"], []):
+    if "unbekannt" not in render(empty, ["Klicks: fehlt", "Provisionen: fehlt"],
+                                 ["Quelle einrichten"], []):
         failures.append("Report versteckt das Wort „unbekannt“")
+    gemessen_leer = compute([], {"/pillar/"}, measured={"clicks": True})
+    if gemessen_leer["affiliate_klicks"] != 0 or gemessen_leer["transaktionen"]["antraege"] is not None:
+        failures.append("gemessen-und-leer muss echte 0 Klicks, aber unbekannte Anträge liefern")
     # --- Ampel + Marker + Befundtabelle für den Governance-Gate
-    rep = render(empty, ["a", "b", "c"], ["d"], [])
-    if "Messlücken: 3" not in rep or "**AMBER**" not in rep:
+    rep = render(empty, ["a", "b"], ["d"], [])
+    if "Messlücken: 2" not in rep or "**AMBER**" not in rep:
         failures.append("Report-Linie `Messlücken: N` / Ampel fehlt (Gate wäre blind)")
     if "funnel_gap" not in rep:
         failures.append("Lücken stehen nicht als AMBER/funnel_gap-Befunde da – "
@@ -822,76 +749,91 @@ def _selftest():
     rep_ok = render(f, [], [], [])
     if "Messlücken: 0" not in rep_ok or "GREEN" not in rep_ok:
         failures.append("grüner Trichter meldet nicht grün")
-    # --- Operating boundary (Umami Free)
-    rep_bound = render(empty, [], [], operating_boundaries=["Umami Free aktiv"])
+    # --- Betriebsgrenze: INFO, keine Lücke, Ampel bleibt grün
+    rep_bound = render(empty, [], [], operating_boundaries=["Klickzähler aus"])
     if "Messlücken: 0" not in rep_bound or "GREEN" not in rep_bound or "operating_boundary" not in rep_bound:
         failures.append("Betriebsgrenze (operating_boundary) wird nicht grün als INFO formatiert")
-    if evaluate([("views", "V", "disabled", None), ("clicks", "K", "disabled", None)]) != []:
-        failures.append("deaktivierte Quellen (disabled) dürfen nicht als Lücke gemeldet werden")
-    # --- Manuelle Brücke: zweite Messquelle, gleiche Hausregeln ---------------
+    if evaluate([("offline", "P", "disabled", None), ("clicks", "K", "disabled", None)]) != []:
+        failures.append("bewusst begrenzte Quellen (disabled) dürfen nicht als Lücke gemeldet werden")
+    # --- Messlage: Betriebsschalter statt stiller Annahmen --------------------
+    s, m_, b_ = lage([], {}, {}, {}, zaehler_aktiv=False)
+    if evaluate(s) != [] or m_["clicks"] or len(b_) != 2:
+        failures.append(f"Zähler aus + leere Tabelle: erwartet GREEN mit 2 Betriebsgrenzen, bekam {s} {b_}")
+    s, m_, b_ = lage([{"count": 9}], {"status": "ok", "stand": vor(0) + "T06:00:00Z"},
+                     {}, {}, zaehler_aktiv=False)
+    if m_["clicks"]:
+        failures.append("ausgeschalteter Zähler: alte Zeilen dürfen nicht als Messung zählen")
+    s, m_, b_ = lage([], {}, {}, {}, zaehler_aktiv=True)
+    if len(evaluate(s)) != 1 or "Klickzähler" not in evaluate(s)[0] or m_["clicks"]:
+        failures.append("Zähler AN aber ohne Lieferung muss genau eine Lücke melden")
+    s, m_, b_ = lage([], {"status": "nicht_konfiguriert", "stand": vor(0) + "T06:00:00Z"},
+                     {}, {}, zaehler_aktiv=True)
+    if len(evaluate(s)) != 1 or "übersprungen" not in evaluate(s)[0]:
+        failures.append("nicht_konfiguriert bei laufendem Zähler muss als Lücke (skipped) erscheinen")
+    s, m_, b_ = lage([], {"status": "fehler", "stand": vor(0) + "T06:00:00Z"},
+                     {}, {}, zaehler_aktiv=True)
+    if len(evaluate(s)) != 1 or "fehlgeschlagen" not in evaluate(s)[0]:
+        failures.append("Import-Fehler bei laufendem Zähler muss als Lücke erscheinen")
+    s, m_, b_ = lage([], {"status": "ok", "stand": vor(0) + "T06:00:00Z"},
+                     {}, {}, zaehler_aktiv=True)
+    if evaluate(s) != [] or not m_["clicks"]:
+        failures.append("frischer Import mit leerer Zeilenliste ist eine echte 0, keine Lücke")
+    s, m_, b_ = lage([], {"status": "ok", "stand": vor(STALE_DAYS + 5) + "T06:00:00Z"},
+                     {}, {}, zaehler_aktiv=True)
+    if len(evaluate(s)) != 1 or f"{STALE_DAYS + 5}d" not in evaluate(s)[0]:
+        failures.append("veralteter Klick-Import muss als Lücke mit Alter erscheinen")
+    s, m_, b_ = lage([], {}, {"summe": {"abschluesse": 1}},
+                     {"status": "ok", "written": vor(STALE_DAYS + 1)}, zaehler_aktiv=False)
+    if len(evaluate(s)) != 1 or "Provisions-Tabelle" not in evaluate(s)[0]:
+        failures.append("befüllte, aber veraltete Provisions-Tabelle muss eine Lücke bleiben")
+    # --- Schalter-Datei: aktiv: true / false / fehlt -------------------------
+    with tempfile.TemporaryDirectory() as td:
+        pfad = os.path.join(td, "klickmessung.yaml")
+        for text, soll in (("aktiv: true\n", True), ("aktiv: false\n", False),
+                           ("# aktiv: true\naktiv: false\n", False), ("", False)):
+            with open(pfad, "w", encoding="utf-8") as fh:
+                fh.write(text)
+            if klickmessung_aktiv(pfad) is not soll:
+                failures.append(f"klickmessung_aktiv({text!r}) ≠ {soll}")
+        if klickmessung_aktiv(os.path.join(td, "fehlt.yaml")) is not False:
+            failures.append("fehlende Schalter-Datei muss AUS heißen (datensparsam)")
+    # --- Provisions-Tabelle: zweite Quelle, gleiche Hausregeln ---------------
     AB_RECHNUNG = monat_rel(1)           # relativ: der zuletzt abgerechnete Monat
     mp = {"summe": {"abschluesse": 4, "stornos": 1, "provision_eur": 67.5},
           "monate": [AB_RECHNUNG], "letzter_monat": AB_RECHNUNG, "partner": ["CHECK24"]}
-    mp = {"summe": {"abschluesse": 4, "stornos": 1, "provision_eur": 67.5},
-          "monate": ["2026-09"], "letzter_monat": "2026-09", "partner": ["CHECK24"]}
-    fm = compute({"totals": {"visits": 200, "pageviews": 300},
-                  "pages": [{"path": "/pillar/strom-sparen/", "views": 90, "visits": 60}]},
-                 [{"event": "affiliate_click", "count": 12, "article": "pillar/strom-sparen/index.md"}],
-                 [], {"/pillar/strom-sparen/"},
-                 measured={"views": True, "clicks": True}, manual_prov=mp)
+    fm = compute([{"event": "affiliate_click", "count": 12, "article": "pillar/strom-sparen/index.md"}],
+                 {"/pillar/strom-sparen/"}, measured={"clicks": True}, manual_prov=mp)
     if fm["provision"]["gesamt"] != 67.5 or fm["provision"]["quelle"] != "provisionen-tabelle":
-        failures.append(f"manuelle Provisionstabelle wird nicht genutzt: {fm['provision']}")
+        failures.append(f"Provisionstabelle wird nicht genutzt: {fm['provision']}")
     if fm["provision"]["zeitbezug"] != "monat" or fm["transaktionen"]["antraege"] != 4:
-        failures.append(f"Zeitbezug/Anträge der manuellen Brücke falsch: {fm['provision']}")
+        failures.append(f"Zeitbezug/Anträge der Provisionstabelle falsch: {fm['provision']}")
     if fm["transaktionen"]["stornos"] != 1 or fm["transaktionen"]["bestaetigt"] != 3:
         failures.append(f"Storno/Abschluss-Zerlegung fehlt: {fm['transaktionen']}")
-    if fm["seiten"][0]["revenue"] is not None:
+    if "revenue" in fm["seiten"][0]:
         failures.append("Monatssumme wird auf eine Seite gebucht (erfunden) – verboten")
     if abs(fm["raten"]["epc"] - 67.5 / 12) > 0.01:
-        failures.append(f"EPC mit manuellen Zahlen: {fm['raten']['epc']}")
+        failures.append(f"EPC mit Tabellenzahlen: {fm['raten']['epc']}")
     rep_m = render(fm, [], [], [],
-                   bruecke=f"manuell (`scripts/offline_import.py`, Stand {vor(0)})",
+                   quellen=f"Provision: Abrechnungstabelle (`scripts/offline_import.py`, Stand {vor(0)})",
                    prov_monate=[dict(mp, monat=AB_RECHNUNG)])
     if AB_RECHNUNG not in rep_m:
         failures.append(f"Monatsmarke {AB_RECHNUNG} steht nicht im Report – "
                         f"die Monatsbasis wäre ohne Datum nicht prüfbar")
-    rep_m = render(fm, [], [], [], bruecke="manuell (`scripts/offline_import.py`, Stand 2026-10-10)",
-                   prov_monate=mp["monate"] and [dict(mp, monat="2026-09")])
     if "Abrechnungstabelle (Provision je Monat)" not in rep_m:
         failures.append("Provisions-Tabelle fehlt im Report – Monatsbasis ist nicht belegbar")
-    if rep_m.count("Abrechnungstabelle") < 2:
-        failures.append("Provisions-Tabelle wird nicht als eigene Sektion ausgewiesen")
-    if "Abrechnungstabelle" not in rep_m or "Messbrücke:** manuell" not in rep_m:
-        failures.append("Report verschweigt Herkunft ‚Abrechnungstabelle‘ bzw. die Messbrücke")
-    if rep_m.count("*") < 3:
+    if "**Quellen:** Provision: Abrechnungstabelle" not in rep_m:
+        failures.append("Report verschweigt die Herkunft der Zahlen")
+    if rep_m.count(" * |") != 2 or "_* Diese beiden Zeilen mischen zwei Zeitbezüge" not in rep_m:
         failures.append("gemischter Zeitbezug wird nicht mit Sternchen + Fußnote markiert")
-    if len(evaluate([("offline", "Manuelle Messbrücke", "ok", 0),
-                     ("views", "Besuche", "fehlt", None),
-                     ("clicks", "Klicks", "skipped", None)])) != 0:
-        failures.append("eine funktionierende Brücke lässt die Lücke der anderen offen")
-    if len(evaluate([("offline", "Manuelle Messbrücke", "alt", 30),
-                     ("views", "Besuche", "fehlt", None)])) != 2:
-        failures.append("überblendung gilt auch für ‚alt‘ – muss als Lücke bleiben")
-    g_beide = evaluate([("views", "Besuche", "skipped", None),
-                        ("clicks", "Klicks", "skipped", None),
-                        ("offline", "Manuelle Messbrücke", "fehlt", None)])
-    if len(g_beide) != 3 or "weder API-Import noch Manuell-Import" not in g_beide[-1]:
-        failures.append(f"beide Brücken leer ⇒ jede Lücke bleibt sichtbar: {g_beide}")
-    g_free = evaluate([("views", "Besuche", "disabled", None),
-                       ("clicks", "Klicks", "disabled", None),
-                       ("offline", "Manuelle Messbrücke", "fehlt", None)])
-    if len(g_free) != 1 or "Manuelle Messbrücke" not in g_free[0]:
-        failures.append(f"Umami Free ohne Manuell-Import meldet keine Lücke: {g_free}")
-    if not bruecke_frisch({"status": "ok", "written": TODAY.isoformat()}) \
-            or bruecke_frisch({"status": "ok", "written": vor(STALE_DAYS + 1)}) \
-            or not bruecke_frisch({"status": "ok", "written": vor(STALE_DAYS)}) \
-            or bruecke_frisch({"status": "ok", "written": "2026-01-01"}) \
-            or bruecke_frisch({}) or bruecke_frisch(None):
-        failures.append("bruecke_frisch() erkennt die Frist nicht")
-    if zustand_mit_bruecke("disabled", True) != "ok" \
-            or zustand_mit_bruecke("alt", True) != "alt" \
-            or zustand_mit_bruecke("fehlt", False) != "fehlt":
-        failures.append("Zustands-Korrektur der Brücke verletzt die Hausregeln")
+    for zustand_clk in ("disabled", "skipped", "fehler", "fehlt"):
+        q_leer = quellen_text([("offline", "P", "disabled", None), ("clicks", "K", zustand_clk, None)], {}, {})
+        if not q_leer.startswith("keine –") or "aus " in q_leer:
+            failures.append(f"ohne jede Quelle muss der Report „keine“ ohne falschen Grund nennen ({zustand_clk}): {q_leer}")
+    q_beide = quellen_text([("offline", "P", "ok", 0), ("clicks", "K", "ok", 0)],
+                           {"written": vor(0), "provisionen_monate": 3},
+                           {"stand": vor(0) + "T06:00:00Z"})
+    if "eigener Zähler" not in q_beide or "Abrechnungstabelle" not in q_beide or "3 Monate" not in q_beide:
+        failures.append(f"Herkunftszeile unvollständig: {q_beide}")
     if _month_age(TODAY.strftime("%Y-%m")) != 0:
         failures.append("_month_age(aktueller Monat) ≠ 0")
     n = TODAY.year * 12 + TODAY.month          # der Monat NACH heute
@@ -913,25 +855,33 @@ def _selftest():
     except ValueError:
         pass
     # --- Datenqualitäts-Logik
-    if evaluate([("views", "V", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
+    if evaluate([("offline", "P", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
         failures.append("frische Quellen werden als Lücke gemeldet")
-    g = evaluate([("views", "V", "alt", 30), ("clicks", "K", "skipped", 1)])
+    g = evaluate([("offline", "P", "alt", 30), ("clicks", "K", "skipped", 1)])
     if len(g) != 2 or "30d" not in " ".join(g):
         failures.append(f"Lückentext unvollständig: {g}")
-    # --- Alter aus Meta
-    if _age_days({"written": TODAY.isoformat()}) != 0:
-        failures.append("_age_days heute ≠ 0")
+    # --- Alter aus Meta (beide Meta-Dialekte) + History-Altlast
+    if _age_days({"written": TODAY.isoformat()}) != 0 or _age_days({"stand": vor(3) + "T01:02:03Z"}) != 3:
+        failures.append("_age_days kennt `written` und `stand` nicht")
+    if _age_days([1, 2]) is not None or _age_days(None) is not None:
+        failures.append("_age_days muss bei Nicht-Dict None liefern (nicht crashen)")
     if _source_state([], {"status": "skipped", "attempted": "2026-01-01"})[0] != "skipped":
         failures.append("skipped-Meta muss als skipped durchkommen (nie als „fehlt“)")
     if _source_state({"pages": []}, {"generated": "2026-01-01"})[0] != "alt":
         failures.append("uralt-Bestand muss „alt“ heißen")
+    alt_prev = {"date": vor(7), "views_total": 5, "ctr_pct": 1.0, "clicks": 3, "revenue": 10.0}
+    wow_zeilen = _wow({"clicks": 5, "antraege": None, "storno_pct": None, "revenue": 12.0, "epc": None}, alt_prev)
+    if [z[0] for z in wow_zeilen] != ["Affiliate-Klicks", "Anträge", "Stornoquote (%)", "Provision (€)", "EPC (€)"]:
+        failures.append(f"Vorwochen-Tabelle trägt Altlasten oder fehlt: {[z[0] for z in wow_zeilen]}")
+    if wow_zeilen and wow_zeilen[0][2] != "+2":
+        failures.append(f"Δ Klicks falsch gerechnet: {wow_zeilen[0]}")
     # --- Zahlenformat
     if fmt(None) != "unbekannt" or fmt(1234) != "1.234" or fmt(12.5, "eur") != "12,50 €":
         failures.append("fmt-Formatierung (1.234 / 12,50 € / unbekannt)")
     # --- Müll crashet nie
-    for bad in (None, {}, [], {"pages": "apfelsaft", "totals": 7}):
+    for bad in (None, {}, [], "apfelsaft", [1, None, "x"], [{"count": "viel"}]):
         try:
-            compute(bad, bad if isinstance(bad, list) else [], bad, [], set())
+            compute(bad, set(), measured={"clicks": True}, manual_prov=bad)
         except Exception as exc:  # noqa: BLE001
             failures.append(f"Müll {bad!r} wirft {exc.__class__.__name__}")
     if failures:
@@ -940,7 +890,7 @@ def _selftest():
             print("   -", x)
         return 2
     print("✅ REVENUE-FUNNEL-SELFTEST bestanden (Trichter-Rechnung, unbekannt≠0, "
-          "Ampel+Marker für den Gate, Platzierungen, manuelle Provisions-Brücke, "
+          "Ampel+Marker für den Gate, Betriebsgrenze vs. Lücke, Provisions-Tabelle, "
           "Robustheit).")
     return 0
 

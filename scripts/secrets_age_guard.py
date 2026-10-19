@@ -122,15 +122,6 @@ CONFIG_ENV_VARS = {
         "optional": True, "probe": None,
         "proof_by": ("pinterest-token",),
     },
-    # 07.09.2026 (#206): Die Klick-Datenbank der Monetarisierungs-Schleife war
-    # dauerhaft „0 Klicks“, ohne dass jemand sagte, WORAN das liegt (Export
-    # fehlt? Token fehlt? API tot?). Mit registriert => die Wache unterscheidet
-    # „Kanal tot" von „Kanal nie eingerichtet“.
-    "UMAMI_API_TOKEN": {
-        "days": 45, "label": "Umami Analytics-API-Token", "probe": "umami",
-        "optional": True,
-        "proof_by": ("premium-governance", "revenue-import"),
-    },
 }
 
 SECRETS = CONFIG_ENV_VARS
@@ -426,16 +417,6 @@ def _probe_mastodon(secret):
     return "error", _sanitize(err or f"Mastodon HTTP {code}", secret)
 
 
-def _probe_umami(secret):
-    base = (os.environ.get("UMAMI_API_BASE") or "https://api.umami.is/v1").strip().rstrip("/")
-    code, err = _http_status(f"{base}/websites", {"x-umami-api-key": secret})
-    if code == 200:
-        return "ok", "Umami /websites 200"
-    if code in (401, 403):
-        return "dead", f"Umami-API-Token abgelehnt ({code})"
-    return "error", _sanitize(err or f"Umami HTTP {code}", secret)
-
-
 def _probe_none(_secret):
     return "skipped", "kein Live-Check für dieses Secret definiert"
 
@@ -445,21 +426,8 @@ PROBES = {
     "gemini": _probe_gemini,
     "pinterest": _probe_pinterest,
     "mastodon": _probe_mastodon,
-    "umami": _probe_umami,
     None: _probe_none,
 }
-
-
-def _umami_api_import_enabled(config_path=None):
-    path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
-    try:
-        with open(path, encoding="utf-8") as f:
-            txt = f.read()
-        if re.search(r"^umami_api_import_enabled:\s*false\s*$", txt, re.M):
-            return False
-    except OSError:
-        pass
-    return True
 
 
 def _secret_value(var):
@@ -472,10 +440,8 @@ def _secret_value(var):
     return ""
 
 
-def verify_secret(var, retries=PROBE_RETRIES, config_path=None):
+def verify_secret(var, retries=PROBE_RETRIES):
     """Ein Live-Check pro Secret. → dict(ok, kind, detail, http_like)."""
-    if var == "UMAMI_API_TOKEN" and not _umami_api_import_enabled(config_path):
-        return {"ran": False, "kind": "disabled", "detail": "API-Import in data/monetization.yaml bewusst deaktiviert (Umami Free)"}
     reg = SECRETS.get(var) or {}
     probe = PROBES.get(reg.get("probe"))
     secret = _secret_value(var)
@@ -569,7 +535,7 @@ def _alt_active(meta):
     return bool(alt and _present(alt))
 
 
-def classify(var, meta, ent, today=None, verification=None, live_check_available=False, config_path=None):
+def classify(var, meta, ent, today=None, verification=None, live_check_available=False):
     """Ein Secret → (status_text, nachweis_text, finding|None).
 
     `finding` = None (grün) oder dict(level, code, msg).
@@ -579,11 +545,6 @@ def classify(var, meta, ent, today=None, verification=None, live_check_available
         verification = {}
     present = _present(var)
     if not present:
-        if var == "UMAMI_API_TOKEN" and not _umami_api_import_enabled(config_path):
-            return ("BEWUSST DEAKTIVIERT (Umami Free)", "–", {
-                "level": "info", "code": "operating_boundary", "var": var,
-                "msg": f"{meta['label']} (`{var}`) ist in data/monetization.yaml bewusst "
-                       f"deaktiviert (Umami Free – Tracking im Browser aktiv, kein API-Import)"})
         if meta.get("optional"):
             if _alt_active(meta):
                 return (f"NICHT GENUTZT (via {meta['alt_of']})", "–", None)
@@ -1077,24 +1038,13 @@ def _selftest():
             failures.append("untracked_optional wird als handlungsbedürftig gezählt")
         # --- optional + nirgends eingerichtet -> info, nicht red
         globals()["_present"] = lambda var: False
-        import tempfile as _tf_sec
-        with _tf_sec.NamedTemporaryFile("w+", encoding="utf-8") as _tf_sec_cfg:
-            _tf_sec_cfg.write("umami_api_import_enabled: true\n")
-            _tf_sec_cfg.flush()
-            st = classify("UMAMI_API_TOKEN",
-                          {"days": 45, "label": "Umami Analytics-API-Token", "probe": "umami",
-                           "optional": True}, ent(), today=today, config_path=_tf_sec_cfg.name)
-            if not st[2] or st[2]["level"] != "info":
-                failures.append("nicht eingerichteter optionaler Kanal meldet keinen info-Hinweis")
-
-        with _tf_sec.NamedTemporaryFile("w+", encoding="utf-8") as _tf_sec_cfg2:
-            _tf_sec_cfg2.write("umami_api_import_enabled: false\n")
-            _tf_sec_cfg2.flush()
-            st_free = classify("UMAMI_API_TOKEN",
-                               {"days": 45, "label": "Umami Analytics-API-Token", "probe": "umami",
-                                "optional": True}, ent(), today=today, config_path=_tf_sec_cfg2.name)
-            if st_free[0] != "BEWUSST DEAKTIVIERT (Umami Free)" or not st_free[2] or st_free[2]["code"] != "operating_boundary":
-                failures.append(f"Umami Free Modus liefert nicht BEWUSST DEAKTIVIERT: {st_free}")
+        st = classify("OPTIONALER_TEST_KANAL",
+                      {"days": 45, "label": "Optionaler Test-Kanal", "probe": None,
+                       "optional": True}, ent(), today=today)
+        if not st[2] or st[2]["level"] != "info" or st[2]["code"] != "not_configured":
+            failures.append("nicht eingerichteter optionaler Kanal meldet keinen info-Hinweis")
+        if actionable([st[2]]):
+            failures.append("nicht eingerichteter optionaler Kanal wird als handlungsbedürftig gezählt")
         # --- Pflicht-Secret fehlt -> ROT (harter Kanal-Ausfall bleibt sichtbar)
         st = classify("GROQ_API_KEY", {"days": 60, "label": "Groq KI-Key", "probe": "groq"},
                       ent(), today=today)

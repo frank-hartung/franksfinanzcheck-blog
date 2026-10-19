@@ -47,9 +47,11 @@ from post_utils import list_post_paths  # noqa: E402
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 # UTM-Attribution (Premium 25.08.2026): Pins verlinken Artikel MIT
-# Kanal-Markierung → Umami weist Sessions/Absprünge/Events dem Kanal
-# „pinterest" sauber zu (Transaktions-Attribution = Analytics-Ebene, die
-# Affiliate-Links selbst bleiben kanalneutral, siehe check24_links.yaml).
+# Kanal-Markierung → jede Auswertung außerhalb des Blogs (Pinterest
+# Analytics, Partner-Dashboard) ordnet den Kanal „pinterest" sauber zu. Der
+# Blog selbst zählt keine Besuche (kein Reichweiten-Tracking seit
+# 11.10.2026); die Affiliate-Links bleiben kanalneutral, siehe
+# check24_links.yaml.
 PIN_UTM = "?utm_source=pinterest&utm_medium=social&utm_campaign=pins"
 API = "https://api.pinterest.com/v5"
 # EINE Token-Wahrheit (#206, 07.09.2026): Der Broker scripts/pinterest_token.py

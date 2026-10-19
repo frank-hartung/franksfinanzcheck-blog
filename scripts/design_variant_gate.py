@@ -878,11 +878,11 @@ def pruefe_messwerte(reg: dict, rw: dict, bericht: Bericht, nur: str | None) -> 
                         conv.get("cta_anzahl_min_anteil_basis"))
 
             # Conversion-Erhaltungsregeln – hart, weil sie die Messkette schützen
-            if conv.get("umami_events_vollstaendig") and w.get("cta_ohne_umami"):
+            if conv.get("klickmarken_vollstaendig") and w.get("cta_ohne_klickmarke"):
                 bericht.melde(
-                    regel="conversion.umami_events_vollstaendig", variante=vid,
+                    regel="conversion.klickmarken_vollstaendig", variante=vid,
                     schwere="P1", besitzer="human",
-                    text=f"{w['cta_ohne_umami']} CTA(s) ohne data-klick. "
+                    text=f"{w['cta_ohne_klickmarke']} CTA(s) ohne data-klick. "
                          "Wer die Messkette kappt, gewinnt jeden A/B-Test – "
                          "auf dem Papier.")
             if conv.get("affiliate_rel_attribute_intakt") and w.get("affiliate_rel_fehler"):

@@ -29,10 +29,10 @@
  *     der Grund, warum diese Datei auch nach dem Umbau DOM misst.
  *
  * Zulässige Abweichung (TOLERANCE): Der Browser sieht zur Laufzeit mehr als
- * der Parser – der Umami-Loader hängt sich per JS als zusätzliches
- * `<script>` in den `<head>` (+1 Kind), Konsent-/Theme-Klassen ändern nur
- * Attribute. Unterschiede darüber hinaus sind Parser-Drift und werden als
- * Befund gemeldet.
+ * der Parser – Skripte hängen Knoten in den `<head>` (z. B. das
+ * `<link rel="prefetch">` des Hover-Prefetch in static/premium/ff-premium.js,
+ * +1 Kind), Theme-Klassen ändern nur Attribute. Unterschiede darüber hinaus
+ * sind Parser-Drift und werden als Befund gemeldet.
  *
  * ZWEI MESSUNGEN, ZWEI ZUSTÄNDIGKEITEN (Lehre aus dem ersten PR-Gate-Lauf,
  * 21.09.2026):
@@ -103,8 +103,9 @@ const CHROME = process.env.CHROME_PATH || '';
 const DOM_JSON = process.env.LAYOUT_DOM_JSON ||
   path.join(__dirname, '..', '.cache', 'layout', 'dom-audit.json');
 const EXTRA_RISK_PAGES = parseInt(process.env.LAYOUT_RISK_PAGES || '3', 10);
-// Laufzeit-Zugaben des Browsers (siehe Kopf): Umami-Loader im <head>, ggf.
-// Sentinel-Div aus dem Top-Link-Skript (Body-Ebene, zählt nur in „elements").
+// Laufzeit-Zugaben des Browsers (siehe Kopf): nachträglich eingehängte
+// Prefetch-Links im <head>, ggf. Sentinel-Div aus dem Top-Link-Skript
+// (Body-Ebene, zählt nur in „elements").
 const TOLERANCE = {
   headchildren: 2,
   maxChildren: 2,

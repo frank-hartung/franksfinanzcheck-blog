@@ -346,11 +346,11 @@ utm_source=franksfinanzcheck · utm_medium=affiliate · utm_campaign=<kategorie>
 ```
 → Im Partner-Dashboard wertest du Klicks/Abschlüsse **je Kategorie** aus (`utm_campaign=strom`, `…=kfz-versicherung`, `…=dsl` …). So siehst du, ob z. B. die Kfz-Herbstkampagne die Conversion liefert.
 
-### Ebene 2: Kanal & Pin in Umami (Analytics)
+### Ebene 2: Kanal & Pin (Pinterest Analytics)
 
 - Pinterest-Engine & RSS pinnen Artikel-Links mit `?utm_source=pinterest&utm_medium=social&utm_campaign=pins` bzw. `…=rss-autopublish`.
-- **Auswertung in Umami:** Reports → **UTM** → `utm_source=pinterest` zeigt Sessions, Engagement und Top-Seiten pro Pin. Da jeder Pin genau einen Artikel verlinkt, identifiziert die Landingpage im Seiten-Report den Pin eindeutig.
-- **Pin → Provision lesen:** Umami sagt dir *welcher Pin Besucher brachte* (Seite + Event `affiliate_click` mit Thema, A5 im Shield), das Partner-Dashboard sagt dir *welche Kategorie Geld brachte*. Wo beide Spitzen zeigen, steckt dein Gewinner-Pin.
+- **Auswertung in Pinterest Analytics:** Pin-Klicks, Outbound-Klicks und Top-Pins zeigen, welcher Pin Besucher auf den Blog brachte. Da jeder Pin genau einen Artikel verlinkt, identifiziert die Landingpage den Pin eindeutig. Auf dem Blog selbst läuft kein Reichweiten-Tracking – die UTM-Parameter dienen der Zuordnung in Auswertungen außerhalb des Blogs.
+- **Pin → Provision lesen:** Pinterest Analytics sagt dir *welcher Pin Besucher brachte*, das Partner-Dashboard sagt dir *welche Kategorie Geld brachte*. Wo beide Spitzen zeigen, steckt dein Gewinner-Pin. Klicks je Artikel und Thema (`data-klick="affiliate_click"`, A5 im Shield) zählt der eigene Klickzähler, sobald er aktiv ist (`docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md`).
 
 ### ⚠️ Regeln (wichtig)
 
