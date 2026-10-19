@@ -8,3 +8,4 @@
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1509, "findings": 0, "generated": "2026-09-28", "html_files": 395, "img_nosize": 0, "inline_js": 415, "verdict": "GREEN", "worst_cover_bytes": 138530}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1075, "findings": 0, "generated": "2026-10-05", "html_files": 107, "img_nosize": 0, "inline_js": 463, "verdict": "GREEN", "worst_cover_bytes": 138530}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1765, "findings": 0, "generated": "2026-10-12", "html_files": 115, "img_nosize": 0, "inline_js": 426, "verdict": "GREEN", "worst_cover_bytes": 138530}
+{"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 2034, "findings": 0, "generated": "2026-10-19", "html_files": 137, "img_nosize": 0, "inline_js": 404, "verdict": "GREEN", "worst_cover_bytes": 130973}
