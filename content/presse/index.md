@@ -28,7 +28,7 @@ Ich liefere auf Anfrage kurze Zitate, Rechenwege und Quellen. Wo eine individuel
 - [Redaktions- und Quellenmethodik](/methodik/)
 - [Transparenz und Finanzierung](/transparenz/)
 
-Die Grafik darf in redaktionellen Beiträgen unverändert genutzt werden. Bitte mit Quellenzeile **„FranksFinanzcheck, Fixkosten-Index Q4 2026“** und Link auf die Ausgabeseite. Die Daten stehen zur Prüfung und Berichterstattung bereit; eine Freigabe redaktioneller Texte ist nicht erforderlich.
+Die Grafik darf in redaktionellen Beiträgen unverändert genutzt werden. Bitte mit Quellenzeile **„FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“** und Link auf die Ausgabeseite. Die Daten stehen zur Prüfung und Berichterstattung bereit; eine Freigabe redaktioneller Texte ist nicht erforderlich.
 
 ## Interviews und Kooperationen
 

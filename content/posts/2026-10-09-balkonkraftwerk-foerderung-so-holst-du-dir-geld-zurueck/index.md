@@ -198,6 +198,6 @@ Ob mehrere Anlagen gefördert werden, regelt jede Richtlinie selbst. Frag bei de
 
 ## Weiterrechnen und vertiefen
 
-- **Rechner:** [Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen](../../werkzeuge/abschlag-nachzahlung-rechner/)
+- **Rechner:** [Balkonkraftwerk-Rechner: Ertrag, Ersparnis und Amortisation](../../werkzeuge/balkonkraftwerk-rechner/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

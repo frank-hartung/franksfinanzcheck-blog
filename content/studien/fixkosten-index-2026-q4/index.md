@@ -18,7 +18,7 @@ datasetLicense: "/studien/fixkosten-index-2026-q4/#nutzung-und-zitierweise"
 
 <figure>
   <img src="/downloads/fixkosten-index-2026-q4-pressegrafik.svg" alt="Modellrechnung mit 925 Euro Stromkosten, 1.431,60 Euro Gaskosten und 2.356,60 Euro Energiekosten pro Jahr" width="1200" height="628" loading="eager">
-  <figcaption>FranksFinanzcheck, Fixkosten-Index Q4 2026. Quelle: BDEW-Preisanalysen; eigene Rechnung.</figcaption>
+  <figcaption>FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026. Quelle: BDEW-Preisanalysen; eigene Rechnung.</figcaption>
 </figure>
 
 [CSV-Datensatz herunterladen](/downloads/fixkosten-index-2026-q4.csv) · [Pressegrafik herunterladen](/downloads/fixkosten-index-2026-q4-pressegrafik.svg)

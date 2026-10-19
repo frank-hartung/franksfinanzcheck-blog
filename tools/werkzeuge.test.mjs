@@ -84,7 +84,7 @@ const HEUTE = new Date(2026, 9, 2, 12, 0, 0, 0); // 02.10.2026, fester Testtag
 test('jede Engine aus data/werkzeuge.yaml ist implementiert – und keine mehr', () => {
   const ausSsot = [...SSOT.matchAll(/^\s*engine:\s*"?([a-z0-9_]+)"?\s*$/gm)].map((m) => m[1]).sort();
   const imKern = Object.keys(logik).sort();
-  assert.equal(ausSsot.length, 8, 'Die SSOT soll genau acht Werkzeuge beschreiben.');
+  assert.equal(ausSsot.length, 9, 'Die SSOT soll genau neun Werkzeuge beschreiben.');
   assert.deepEqual(imKern, ausSsot);
 });
 
@@ -388,6 +388,74 @@ test('Notgroschen verkürzt mit Zins, aber nur geringfügig', () => {
   assert.equal(ohne.kennzahlen[2].wert, '1 Jahr und 8 Monate'); // 6000 / 300 = 20
   assert.equal(mit.kennzahlen[2].wert, '1 Jahr und 8 Monate');
   assert.ok(mit.zeilen.some((z) => z.label.startsWith('Zinsbeitrag')));
+});
+
+// ===================================================================
+// 6b. Balkonkraftwerk (Modellrechnung, Quellen in data/werkzeuge.yaml)
+// ===================================================================
+
+function balkonFelder(extra = {}) {
+  const v = {
+    leistung: '800', anschaffung: '350', ausrichtung: 'sued', eigenverbrauch: '35',
+    strompreis: '0,35', einspeisung: 'nein', foerderung: '0', ...extra,
+  };
+  return [
+    f('leistung', v.leistung, { typ: 'zahl', einheit: 'Wp' }),
+    f('anschaffung', v.anschaffung),
+    f('ausrichtung', v.ausrichtung, { typ: 'auswahl', auswahlZahl: { sued: 1, suedwest: 0.89, 'west-ost': 0.77, nord: 0.43 }[v.ausrichtung] }),
+    f('eigenverbrauch', v.eigenverbrauch, { typ: 'prozent' }),
+    f('strompreis', v.strompreis, { typ: 'euro' }),
+    f('einspeisung', v.einspeisung, { typ: 'auswahl', auswahlZahl: v.einspeisung === 'ja' ? 1 : 0 }),
+    f('foerderung', v.foerderung),
+  ];
+}
+
+test('Balkonkraftwerk rechnet Ertrag, Ersparnis und Amortisation (800 Wp, Süd)', () => {
+  const e = logik.balkonkraftwerk(balkonFelder());
+  assert.equal(betrag(kennzahl(e, 'Jahresertrag').wert), 750);
+  assert.ok(Math.abs(betrag(kennzahl(e, 'Ersparnis').wert) - 91.875) <= 0.5);
+  assert.ok(Math.abs(betrag(kennzahl(e, 'Amortisation').wert) - 3.8) <= 0.05);
+  // 20 × 91,875 − 350 = 1.487,50 €
+  assert.ok(Math.abs(betrag(kennzahl(e, 'Gewinn nach 20').wert) - 1487.5) <= 1);
+});
+
+test('Balkonkraftwerk kappt die Leistung auf 800 Wp (Wechselrichter)', () => {
+  const e = logik.balkonkraftwerk(balkonFelder({ leistung: '1600' }));
+  assert.equal(betrag(kennzahl(e, 'Jahresertrag').wert), 750);
+  assert.ok(e.hinweise.some((h) => h.art === 'info' && h.text.includes('800 VA')));
+});
+
+test('Balkonkraftwerk: Nordbalkon liefert weniger und warnt', () => {
+  const e = logik.balkonkraftwerk(balkonFelder({ ausrichtung: 'nord' }));
+  const ertrag = betrag(kennzahl(e, 'Jahresertrag').wert);
+  assert.ok(ertrag >= 320 && ertrag <= 325, `Ertrag ${ertrag}`);
+  assert.ok(e.hinweise.some((h) => h.art === 'warnung'));
+});
+
+test('Balkonkraftwerk: Einspeisevergütung nach Zählergebühr, nie negativ', () => {
+  const mit = logik.balkonkraftwerk(balkonFelder({ einspeisung: 'ja' }));
+  const verguetung = betrag(mit.zeilen.find((z) => z.label.startsWith('Einspeisevergütung')).wert);
+  assert.ok(Math.abs(verguetung - 15.54) <= 0.5, `Vergütung ${verguetung}`);
+
+  // 200 Wp, 80 % Eigenverbrauch: Überschuss zu klein für die Zählergebühr
+  const klein = logik.balkonkraftwerk(balkonFelder({ leistung: '200', eigenverbrauch: '80', einspeisung: 'ja' }));
+  assert.equal(betrag(klein.zeilen.find((z) => z.label.startsWith('Einspeisevergütung')).wert), 0);
+  assert.ok(klein.hinweise.some((h) => h.art === 'warnung'));
+});
+
+test('Balkonkraftwerk: Förderung senkt die Investition und die Amortisation', () => {
+  const e = logik.balkonkraftwerk(balkonFelder({ foerderung: '150' }));
+  assert.ok(Math.abs(betrag(kennzahl(e, 'Amortisation').wert) - 2.2) <= 0.05);
+});
+
+test('Balkonkraftwerk: ungültiger Eigenverbrauch fällt auf 35 % zurück', () => {
+  const e = logik.balkonkraftwerk(balkonFelder({ eigenverbrauch: '150' }));
+  assert.ok(Math.abs(betrag(kennzahl(e, 'Ersparnis').wert) - 91.875) <= 0.5);
+});
+
+test('Balkonkraftwerk: fehlende Pflichtangabe liefert Fehler statt Ergebnis', () => {
+  const e = logik.balkonkraftwerk(balkonFelder({ anschaffung: '' }));
+  assert.ok(e.fehler && e.fehler.length > 0);
 });
 
 // ===================================================================

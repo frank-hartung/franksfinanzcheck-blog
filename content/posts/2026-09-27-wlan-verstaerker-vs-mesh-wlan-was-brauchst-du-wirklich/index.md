@@ -221,4 +221,4 @@ Nein, genau das ist der Punkt. Deine Geräte sehen ein einziges Netz, und die St
 
 ## Weiterrechnen und vertiefen
 
-- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+- **Rechner:** [Fixkosten-Scanner: alle laufenden Kosten, Internet inklusive, in einer Zahl](../../werkzeuge/fixkosten-scanner/)

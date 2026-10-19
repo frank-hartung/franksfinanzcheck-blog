@@ -200,30 +200,28 @@ entscheidungen:
 
   - id: E-17
     punkt: "1 – Durchsetzung der Weiterleitungen"
-    entscheidung: "Die Quellprüfung (--check) und der Test laufen nicht in der CI. Im Deploy wirkt das Gate H9 (Ziel vorhanden, live, keine Kette, keine Schleife). H5 zählt Weiterleitungsseiten nicht in das Verhältnis. Eine Workflow-Änderung ist nicht erfolgt."
-    begruendung: "CLAUDE.md: .github/workflows/** nur mit ausdrücklichem Auftrag ändern. Die Workflows führen unittest nur für benannte Module aus."
-    status: "offen"
-    verantwortlich: human
-    nachweis: "grep unittest .github/workflows/*.yml; scripts/index_hygiene_gate.py --selftest (18 Fälle)"
+    entscheidung: "Umgesetzt auf Auftrag vom 19.10.: deploy.yml führt vor dem Hugo-Build den Selbsttest, die Quellprüfung (--check, --verify) und test_weiterleitungen aus, fail-closed, ohne Netz. Der Proxy-Check (cf-ray) bleibt bewusst außerhalb der CI, weil er eine Betreiberprüfung mit Internetzugriff ist."
+    begruendung: "Die Weiterleitungen sollen im Deploy dauerhaft gegen Quellfehler abgesichert sein, nicht nur lokal. Der Schritt steht vor dem Build und ergänzt das Gate H9."
+    status: "umgesetzt"
+    verantwortlich: auto
+    nachweis: ".github/workflows/deploy.yml: Schritt „Weiterleitungen – Selbsttest, Quelle und Unit-Tests“ nach „Taxonomie-Gate“; lokal grün: --selftest 18/0, --check, --verify 114, test_weiterleitungen OK"
     befund:
-      owner: human
+      owner: auto
       severity: P2
       channel: "seo-technik"
-      offen: "Entscheidung: scripts.tests.test_weiterleitungen und den Befehl --check in deploy.yml aufnehmen (Auftrag nötig)."
-
+      offen: "Wirksam nach dem Merge in main. Der erste Deploy-Lauf in GitHub Actions ist zu beobachten; lokal nicht ausführbar, weil Hugo in der Sandbox fehlt."
   - id: E-18
     punkt: "5 – Rechner-Stichprobe"
-    entscheidung: "Stichprobe 2026-10-19 über 11 Beiträge. Passend: Heizkosten senken, Kostenloses Girokonto, Grundversorgung, Mietwagen ohne Kaution, Energiediebe, Smart Home. Korrigiert: Campingurlaub von Effektivpreis-Rechner auf Haushaltsbudget. Ohne passenden Rechner: Balkonkraftwerk (Förderung und Amortisation), DNS-Server, WLAN-Verstärker vs. Mesh, Störung beim Internetanbieter. Diese vier tragen einen Rechner-Link mit schwachem Bezug."
-    begruendung: "Maßnahme 5 verlangt einen Rechner je Beitrag. Ein thematisch falscher Rechner schadet Vertrauen mehr als ein fehlender. Ein Amortisations-Rechner für Balkonkraftwerk wäre ein neues Werkzeug."
+    entscheidung: "Stichprobe 2026-10-19 über 11 Beiträge. Passend: Heizkosten senken, Kostenloses Girokonto, Grundversorgung, Mietwagen ohne Kaution, Energiediebe, Smart Home. Campingurlaub von Effektivpreis-Rechner auf Haushaltsbudget korrigiert. Balkonkraftwerk: neues Werkzeug „Balkonkraftwerk-Rechner“ (Ertrag, Ersparnis, Amortisation, Einspeisung optional, Förderung optional) gebaut und im Beitrag und im Pillar verlinkt. DNS-Server, WLAN, WLAN-Verstärker vs. Mesh und Störung beim Internetanbieter: Die Rechner-Zeile zeigte auf den Effektivpreis-Rechner und war thematisch falsch. Sie zeigt jetzt auf den Fixkosten-Scanner, der die Kategorie Internet, Mobilfunk und Streaming führt."
+    begruendung: "Maßnahme 5 verlangt einen Rechner je Beitrag, Inhalts-Wache FF3 prüft das. Ein Werkzeug, das nicht zum Thema passt, schadet dem Vertrauen mehr als eine schwächere Verlinkung. Der Fixkosten-Scanner ist die passendste vorhandene Zuordnung für Internetthemen."
     status: "teilweise"
     verantwortlich: human
-    nachweis: "Rechner-Zeilen per grep: grep -l werkzeuge content/posts/*/index.md; Stichprobe in dieser Zeile"
+    nachweis: "Rechner-Zeilen per grep: grep -l '/werkzeuge/' content/posts/*/index.md; data/werkzeuge.yaml (balkonkraftwerk); FF3 0 Befunde; test_werkzeuge: 62/0"
     befund:
       owner: human
       severity: P2
       channel: "seo-inhalt"
-      offen: "Frank entscheidet je Beitrag: (a) neues Werkzeug bauen (Balkonkraftwerk-Amortisation), (b) bestehenden Rechner beibehalten, (c) Rechner-Zeile entfernen und die Regel für diesen Beitrag aussetzen."
-
+      offen: "Frank entscheidet, ob für Internetanschluss-Kosten ein eigener Rechner gebaut wird. Der Fixkosten-Scanner trifft das Thema nur grob, bei DNS und WLAN-Technik ist der Bezug schwach."
   - id: E-19
     punkt: "Fixkosten-Index – Methodik"
     entscheidung: "Der Strompreis (37,0 ct/kWh) ist der BDEW-Durchschnitt für 3.500 kWh inkl. anteiligem Grundpreis. Das Modell rechnet mit 2.500 kWh. Die Abweichung steht jetzt im Studientext unter Grenzen der Aussage. Im Änderungsprotokoll (2026-10-19) eingetragen. Zahlen unverändert. BDEW-Werte geprüft: Strom 37,0 ct/kWh (BDEW-Strompreisanalyse 2026), Gas 11,93 ct/kWh (BDEW-Gaspreisanalyse August 2026, Einfamilienhäuser)."
@@ -239,17 +237,16 @@ entscheidungen:
 
   - id: E-20
     punkt: "Fixkosten-Index – Name und Pressepitch"
-    entscheidung: "Der Name „Fixkosten-Index“ misst nur Strom und Gas. Die Seite selbst nennt sie „Energie-Baseline Q4 2026“. Miete, Internet, Mobilität und Versicherungen fehlen. Der Pressepitch (Entwurf A) nutzt den Namen „Fixkosten-Index“."
-    begruendung: "Ein Name, der mehr verspricht als der Umfang, ist für Presse und YMYL ein Risiko. Eine Umbenennung betrifft URL, CSV-Name, Pressegrafik und Verlinkungen."
-    status: "offen"
+    entscheidung: "Entschieden: Name „Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“ bleibt. Der Umfang steht im Titel, im Dataset-Namen, in der Quellenzeile der Presseseite und im Betreff des Pressepitches. Die Grenzen (nur Strom und Gas) stehen im Abschnitt „Grenzen der Aussage“."
+    begruendung: "Der volle Name nennt den Umfang und verspricht nicht mehr als die Studie. Eine Umbenennung hätte URL, CSV-Name, Pressegrafik und Verlinkungen betroffen, ohne den Inhalt zu verbessern."
+    status: "umgesetzt"
     verantwortlich: human
-    nachweis: "content/studien/fixkosten-index-2026-q4/index.md (Titel, Kernergebnisse, Grenzen); AUTORITAET-ENTWUERFE-2026-10-19.md (Entwurf A)"
+    nachweis: "content/studien/fixkosten-index-2026-q4/index.md (Titel, Figcaption, Grenzen); content/presse/index.md; AUTORITAET-ENTWUERFE-2026-10-19.md (Entwurf A, Betreff)"
     befund:
       owner: human
       severity: P2
       channel: "marke"
-      offen: "Frank entscheidet: (a) Name beibehalten und Umfang im Titel nennen (z. B. „Energie-Baseline“), oder (b) Umbenennung mit Weiterleitung der alten URL. Erst danach Pitch versenden."
-
+      offen: "Keine. Der Versand des Pressepitches bleibt eine Außenwirkung und liegt bei Frank."
   - id: E-21
     punkt: "Testsuite – vorbestehender Fehlschlag"
     entscheidung: "test_bot_watchdog_meldetakt.test_rechter_baum_hat_keine_befunde schlägt fehl: Wirkungsprobe C25 „YMYL: Schreibprüfung nicht auswertbar (ParseError) – fail-closed“ (scripts/editorial_review_gate.py, Zeile 291). Der Fehler ist im Ausgangsstand 258fd51 identisch. Das Verhalten (fail-closed) ist richtig. Die Ursache im Testfixture oder in der Eingabe ist nicht geklärt."

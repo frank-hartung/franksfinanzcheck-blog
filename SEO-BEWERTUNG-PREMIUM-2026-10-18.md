@@ -240,3 +240,34 @@ Dieser Abschnitt fasst den Stand nach dem Auftrag „auf Highend-Level einer Pro
 - **Metadaten-Befund (E-15):** Privathaftpflicht, lastmod vor date. Ausgangsstand, unverändert.
 - **Commit-Sperre:** Nicht scharf. `core.hooksPath` wird laut CLAUDE.md nicht gesetzt. Die README ist unverändert.
 - **Sandbox-Grenze:** Hugo ist nicht installierbar. Die Gate-Prüfung H9 wurde gegen einen simulierten Build mit den echten 114 Zielen geprüft, nicht gegen einen echten Hugo-Build.
+
+## 7d. Umsetzung der Entscheidungen (19.10.2026, zweite Runde)
+
+Auftrag: die Empfehlungen aus 7c vollständig und dauerhaft umsetzen. Was im Repo liegt, ist geprüft. Was außerhalb liegt, bleibt bei Frank.
+
+| Punkt | Umsetzung | Status |
+|---|---|---|
+| Cloudflare-Proxy (E-16) | `scripts/weiterleitungen.py --proxy-check` prüft den Header `cf-ray` und liefert `aktiv`, `inaktiv` oder `unbekannt`. `--cloudflare` erzeugt die CSV nur bei `aktiv`. Selbsttest 18/0. Die Sandbox kann die Prüfung nicht ausführen. | Werkzeug fertig, Prüfung offen bei Frank |
+| CI (E-17) | `.github/workflows/deploy.yml`: Schritt „Weiterleitungen – Selbsttest, Quelle und Unit-Tests“ vor „Hugo installieren“, fail-closed, ohne Netz. Proxy-Check bewusst nicht in der CI. | umgesetzt, wirksam nach Merge in main |
+| Name (E-20) | Name „Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“ bleibt. Kurzformen in Figcaption, Presse-Quellenzeile und Pitch-Betreff auf den vollen Namen gebracht. Grenzen (nur Strom und Gas) stehen im Text. | umgesetzt. Versand des Pitches bleibt bei Frank |
+| Rechner (E-18) | Neues Werkzeug „Balkonkraftwerk-Rechner“ (`data/werkzeuge.yaml`, Rechenkern, Seite, Pillar-Link, Beitrag verlinkt). Sieben neue Rechenkern-Tests, 62/0 insgesamt. Die Rechner-Zeile bei DNS, WLAN, WLAN-Verstärker und Störung zeigt jetzt auf den Fixkosten-Scanner (Kategorie Internet). | Balkon fertig. Internet-Zuordnung thematisch schwächer, Frank entscheidet über einen eigenen Rechner |
+| Live-Aktualität | Letzter Deploy auf `main` erfolgreich (19.10., 06:18 UTC). Die Seite `/posts/` zeigt den Beitrag vom 12.10. | geklärt |
+
+**Korrektur gegenüber 7c:** Die Empfehlung, die Rechner-Zeile bei DNS, WLAN und Störung ersatzlos zu entfernen, hätte die Inhalts-Wache FF3 verletzt. FF3 verlangt einen Rechner-Link in jedem Beitrag. Deshalb zeigt die Zeile jetzt auf den Fixkosten-Scanner, statt zu verschwinden.
+
+**Zusätzlich korrigiert:** Die Zählung „acht Werkzeuge“ stand in Test, E2E-Test, Gate, Anleitung und CLAUDE.md. Alle Stellen zeigen jetzt neun.
+
+**Offen, bei Frank (Außenwirkung oder Betreiberprüfung):**
+- Proxy-Status per `python3 scripts/weiterleitungen.py --proxy-check` auf deinem Rechner. Erst danach `--cloudflare` und die Aktivierung im Dashboard.
+- Eigener Rechner für Internetanschluss-Kosten, ja oder nein (E-18).
+- Konto-Prüfer (E-05), README-Pauschalen (E-09), Redaktionskontakt (E-11), Finanztip-Profil (E-12), Verbraucherkredit-Thema (E-13).
+- Versand des Pressepitches (E-20), und zwar nur nach deiner Freigabe.
+
+**Quellen für den Balkon-Rechner** (Stand Oktober 2026, Eckwerte aus der Recherche):
+- Einspeisevergütung 7,70 ct/kWh ab August 2026 mit jährlicher Degression von rund 1 % (solago, Quelle in der Werkzeugdatei).
+- Jahresertrag 650 bis 850 kWh bei 800 Wp Süd, Ausrichtungsfaktoren aus derselben Tabelle (reduco).
+- Zweirichtungszähler 20 bis 25 € im Jahr (enerix).
+- Keine bundesweite Förderung (Aktion Eigenstrom). Mehrwertsteuer 0 % seit 2023.
+- Strompreis als Ersparnis-Näherung: 0,35 €/kWh (Verbraucherzentrale-Zitat bei photovoltaikanbieter.com).
+
+**Verifikation dieser Runde:** Werkzeug-Gate Quelle grün, Gate-Selbsttest grün, Gate-Unit-Tests grün, 62 Rechenkern-Tests grün (jsdom, npm ci). Abbildungen 0, Inhalts-Wache 0, Beweis-Gate 0/0, Editorial-Gate Live 60 Artikel, 0 Hochrisiko, 0 blockiert, Weiterleitungen 114/114, URL-Wache 95 (Snapshot aktualisiert, nur die neue Seite hinzugekommen), Metadaten 1 Befund (E-15, Ausgangsstand), Index-Hygiene-Selbsttest 18/0.

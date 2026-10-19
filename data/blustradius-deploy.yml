@@ -208,6 +208,10 @@ schritte:
     klasse: inhalt
     grund: Tag-Flächen sind indexierte Seiten – Befund ist fachlich gemeint.
 
+  - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
+    klasse: infra
+    grund: Eine kaputte Weiterleitungsquelle oder fehlende Zielseiten sind technische Fehler. Ohne sie wäre die Auslieferung der 301-Ersatzseiten nicht konsistent. Der Befund ist kein fachlicher Inhalt.
+
   - name: Hugo installieren (Extended, verifiziert, mehrquellig)
     klasse: infra
     grund: Ohne Hugo gibt es keinen Build und damit nichts auszuliefern.

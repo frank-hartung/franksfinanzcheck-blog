@@ -7,7 +7,7 @@
 
 Vor dem Rollout gab es Rechner nur **im** Artikel (`rechner.html`,
 `tarifvergleich.html`, `einspartabelle.html`). Wer rechnen wollte, musste
-erst einen Text finden. Die acht Werkzeuge drehen das um: eigene Seiten,
+erst einen Text finden. Die neun Werkzeuge drehen das um: eigene Seiten,
 eigene Navigation, eigener Einstieg über `/werkzeuge/` – benutzbar, ohne
 vorher etwas zu lesen und ohne einen Empfehlungslink anzuklicken.
 
@@ -17,7 +17,7 @@ Der bindende Satz, der auf dem Hub und auf **jeder** Werkzeugseite steht:
 
 Er ist kein Marketingtext, sondern eine geprüfte Zusage (Gate-Regel W1/W3).
 
-## Die acht Werkzeuge
+## Die neun Werkzeuge
 
 | Slug (`/werkzeuge/<slug>/`) | Engine | Was es beantwortet | Speicher | Export |
 |---|---|---|---|---|
@@ -29,6 +29,7 @@ Er ist kein Marketingtext, sondern eine geprüfte Zusage (Gate-Regel W1/W3).
 | `kuendigungsfristen-kalender` | `fristen` | Wann ist der letzte Tag für die Kündigung? | ja | **ICS**, CSV, PDF |
 | `tarifwechsel-entscheidungsbaum` | `entscheidung` | Wechseln, verhandeln oder bleiben? | **nein** | CSV, PDF |
 | `haushaltsbudget` | `budget` | Wie teilt sich das Einkommen auf (50-30-20), und was bleibt übrig? | ja | CSV, PDF |
+| `balkonkraftwerk-rechner` | `balkonkraftwerk` | Was spart ein Balkonkraftwerk im Jahr, und wann amortisiert es sich? | ja | CSV, PDF |
 
 ## Architektur in einem Bild
 

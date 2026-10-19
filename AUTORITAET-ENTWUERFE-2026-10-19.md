@@ -38,7 +38,7 @@ Nicht empfohlen: **pressebox** und **openpr**. Das sind Presseverteil-Plattforme
 
 ### Entwurf A – Digital-PR: Fixkosten-Index Q4 2026 (Prio 1)
 
-**Betreff:** Fixkosten-Index Q4 2026: Was ein Zwei-Personen-Haushalt für Strom und Gas einplanen muss
+**Betreff:** Energie-Baseline Q4 2026 (Fixkosten-Index Deutschland): Was ein Zwei-Personen-Haushalt für Strom und Gas einplanen muss
 
 **Text (Entwurf):**
 
@@ -95,4 +95,4 @@ Nur Recherche. Kein Entwurf, bis Ziel und Angebot geklärt sind.
 2. **Finanztip-Profil:** Soll das Profil angelegt werden? Die Regeln erlauben es, aber es ist eine Entscheidung über den Kanal.
 3. **Themen-Anlass Verbraucherkredit (20.11.2026):** Soll dazu ein Ratgeber-Update entstehen? Das wäre eine neue Veröffentlichung und nicht Teil dieses Auftrags.
 4. **Fachprüfung Konto-/Kreditkarten-Beiträge:** Es gibt keinen benannten Prüfer. Ohne Prüfer werden diese Beiträge nicht als „fachlich geprüft“ gekennzeichnet (siehe SEO-BEWERTUNG, Punkt 3).
-5. **Pressewinkel „Fixkosten-Index“:** Die Methodik sollte vor einem Pitch gegengeprüft werden.
+5. **Pressewinkel „Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“ (Umfang: nur Strom und Gas):** Die Methodik sollte vor einem Pitch gegengeprüft werden.

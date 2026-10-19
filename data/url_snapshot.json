@@ -1,7 +1,7 @@
 {
  "stand": "2026-10-19",
  "hinweis": "Generiert von scripts/url_wache.py --snapshot. Nur nach bewusster Änderung neu schreiben.",
- "anzahl": 94,
+ "anzahl": 95,
  "urls": [
   "/aenderungsprotokoll/",
   "/cockpit/",
@@ -90,6 +90,7 @@
   "/ueber/",
   "/werkzeuge/",
   "/werkzeuge/abschlag-nachzahlung-rechner/",
+  "/werkzeuge/balkonkraftwerk-rechner/",
   "/werkzeuge/effektivpreis-rechner/",
   "/werkzeuge/fixkosten-scanner/",
   "/werkzeuge/haushaltsbudget/",

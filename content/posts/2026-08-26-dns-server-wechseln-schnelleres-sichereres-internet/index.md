@@ -256,4 +256,4 @@ Wenn Seiten trotz eines funktionierenden DNS-Servers langsam laden, prüfe zuers
 
 ## Weiterrechnen und vertiefen
 
-- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+- **Rechner:** [Fixkosten-Scanner: alle laufenden Kosten, Internet inklusive, in einer Zahl](../../werkzeuge/fixkosten-scanner/)
