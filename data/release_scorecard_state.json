@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-19T19:03:52Z",
+  "generated_at": "2026-10-19T19:33:45Z",
   "modus": "kandidaten",
-  "commit": "799b33226aefc7b71f1d224e21cfa0a3267e91d7",
+  "commit": "f9cac767691318a25b742bf4be9b09ae6f5ebaa9",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -1042,7 +1042,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
-      "sha256": "9e62214ab20a8367f487120a9f014b0b1ad33f519b4b0068d09ba144776fee2d",
+      "sha256": "da052a451fe583afae1f697755d24ae316c3aac1caec6a6e89b250b46f42e191",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1056,7 +1056,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "geändert – neu geprüft"
     }
   }
 }
