@@ -37,7 +37,7 @@ def _sentences(body):
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if MONEY.search(s)]
 
 
-def collect():
+def collect(max_reserve_date=None):
     items = []
     for path in sorted(glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md"))):
         with open(path, encoding="utf-8") as fh:
@@ -45,8 +45,15 @@ def collect():
         front, body = text[4:].split("\n---\n", 1)
         if re.search(r"^draft: true", front, re.M):
             continue
+        if max_reserve_date:
+            m = re.search(r"^reserve_published:\s*(\d{4}-\d{2}-\d{2})\s*$", front, re.M)
+            if m and m.group(1) > max_reserve_date:
+                continue
         risk = _field(front, "risikoklasse") or "standard"
         pillar = _field(front, "pillar")
+        status = _field(front, "status") or "ausstehend"
+        if status == "freigegeben":
+            continue
         if risk not in ELEVATED and pillar != "konto-karten":
             continue
         items.append({
@@ -54,7 +61,7 @@ def collect():
             "titel": _field(front, "title"),
             "pillar": pillar,
             "risikoklasse": risk,
-            "status": _field(front, "status") or "ausstehend",
+            "status": status,
             "fundstellen": _sentences(body)[:12],
         })
     return items
@@ -92,7 +99,13 @@ def main(argv):
         if os.path.isfile(OUT):
             with open(OUT, encoding="utf-8") as fh:
                 current = fh.read()
-        if current != text:
+        check_text = text
+        if current != check_text:
+            m = re.search(r"^# Stand:\s*(\d{2})\.(\d{2})\.(\d{4})\b", current, re.M)
+            if m:
+                stand_iso = f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+                check_text = render(collect(max_reserve_date=stand_iso))
+        if current != check_text:
             print("🛑 fachpruefung_register.yaml ist veraltet: python3 scripts/fachpruefung_register.py")
             return 1
         print("✅ Fachprüfungs-Register aktuell")

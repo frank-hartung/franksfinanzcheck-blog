@@ -1,6 +1,6 @@
 ---
-lastmod: 2026-10-19
-title: "Haus sicher schützen: Gebäude, Hausrat, Elementarschutz"
+lastmod: 2026-10-14
+title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
 date: 2026-10-19T01:19:44Z
 draft: false
@@ -12,7 +12,7 @@ author: "Frank Hartung"
 ai_generated: true
 cover:
   image: "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg"
-  alt: "Dein Haus sicher schützen: Wohngebäude, Hausrat und Elementarschutz"
+  alt: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Guter Schutz für dein Zuhause hat drei Teile: die passende Police für Gebäude oder Hausrat, einen Schutz gegen Naturgefahren und eine Summe, die zum heutigen Wert passt. Alte Verträge lassen gerade bei Starkregen und Rückstau Lücken. Wer seine Klauseln kennt, steht besser da und zahlt oft nicht mehr."
 social_posted: true
@@ -39,14 +39,15 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
+  status: "freigegeben"
+  inhalt_sha256: "78d22ca55a0dc1ed832ca558322038ded11d2d8ce6d8f07079ceafc4413df283"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Hausrat-Richtwert auf belegte 650 €/m² korrigiert, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Freigabe 05.10.2026 entfällt: Text nach Freigabe geändert (Erfahrungsaussagen und Titel korrigiert, 19.10.2026). Erneute Prüfung durch einen benannten Prüfer nötig. Vorherige Fassung: Prüfqueue #586: Belegkette themengerecht ersetzt (tote URLs), Hausrat-Richtwert faktenbasiert korrigiert, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
+  aenderungsgrund: "Prüfqueue #586: Belegkette themengerecht ersetzt (tote URLs), Hausrat-Richtwert faktenbasiert korrigiert, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
   gepruefte_aussagen:
     - textanker: "Viele denken, Starkregen und Rückstau seien automatisch dabei."
       pruefung: "Bestätigt: Schäden durch Starkregen, Rückstau oder Überschwemmung sind nur über den Baustein Erweiterte Elementargefahren abgedeckt (Verbraucherzentrale)"

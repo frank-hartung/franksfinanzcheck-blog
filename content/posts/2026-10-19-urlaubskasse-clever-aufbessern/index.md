@@ -15,6 +15,10 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+cover:
+  image: "images/covers/2026-10-19-urlaubskasse-clever-aufbessern.jpg"
+  alt: "Urlaubskasse clever aufbessern"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du planst den nächsten Sommerurlaub, hast das Reiseziel im Kopf und willst die Urlaubskasse aufbessern. Oft bleibt das Geld für den Mietwagen ein unbemerktes Loch im Reisebudget. Dieser Ratgeber zeigt dir, wie du den Mietwagen clever nutzt, versteckte Kosten eliminierst und so mehr Geld für Sonne, Strand und Erlebnisse behältst.  

@@ -66,6 +66,12 @@ class WerkzeugeHubTestCase(unittest.TestCase):
         self.assertIsNotNone(m, "seoTitle der Werkzeug-Übersicht nicht gefunden")
         self.assertEqual(int(m.group(1)), anzahl, "seoTitle nennt eine andere Anzahl")
 
+    def test_e2e_spec_prueft_richtige_werkzeug_anzahl(self) -> None:
+        anzahl = len(_werkzeuge())
+        spec = (ROOT / "e2e" / "werkzeuge.spec.mjs").read_text(encoding="utf-8")
+        self.assertIn(f".toHaveCount({anzahl})", spec)
+        self.assertIn(f"expect(new Set(ziele).size, 'jede Karte führt woanders hin').toBe({anzahl})", spec)
+
 
 if __name__ == "__main__":
     unittest.main()

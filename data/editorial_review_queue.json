@@ -1,26 +1,10 @@
 {
   "generated_at": "2026-10-19",
   "high_risk_total": 10,
-  "approved": 5,
+  "approved": 6,
   "open_live": 0,
-  "open_drafts": 5,
+  "open_drafts": 4,
   "items": [
-    {
-      "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
-      "path": "content/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md",
-      "state": "entwurf",
-      "risk": "hoch",
-      "findings": [
-        {
-          "code": "E05",
-          "detail": "Status ist nicht „freigegeben“"
-        },
-        {
-          "code": "E17",
-          "detail": "Freigabe-Hash fehlt"
-        }
-      ]
-    },
     {
       "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
       "path": "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md",

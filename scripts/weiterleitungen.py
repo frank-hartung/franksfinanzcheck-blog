@@ -184,8 +184,11 @@ def seiten_html(von: str, nach: str, regel: str) -> str:
         '<title>Diese Seite ist umgezogen | FranksFinanzcheck</title>\n'
         '</head>\n'
         '<body style="font-family:sans-serif;max-width:640px;margin:60px auto;padding:0 20px;color:#19324c">\n'
+        '<a class="skip-link" href="#main-content" style="position:absolute;left:-9999px">Direkt zum Inhalt</a>\n'
+        '<main id="main-content">\n'
         '<h1 style="font-size:22px">Diese Seite ist umgezogen</h1>\n'
         f'<p>Du wirst weitergeleitet. Falls nicht, <a href="{nach}">geht es hier weiter</a>.</p>\n'
+        '</main>\n'
         '</body>\n'
         '</html>\n'
     )

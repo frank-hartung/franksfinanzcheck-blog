@@ -48,6 +48,24 @@ def _is_live(front):
     return not re.search(r"^draft: true", front, re.M)
 
 
+def _has_template_links(front):
+    """Beiträge mit fassungsgebundenem YMYL-Siegel (inhalt_sha256) oder
+    späterer Reserve-Veröffentlichung dürfen im Markdown-Body nicht
+    nachträglich verändert werden (C25 / Reserve-Zertifikat). Für sie
+    liefern weiterrechnen_box.html und pillar_box.html den Rechner- und
+    Pillar-Link im gerenderten HTML, sofern `pillar` gesetzt ist."""
+    if not _field(front, "pillar"):
+        return False
+    w_box = os.path.join(BLOG_DIR, "layouts", "_partials", "weiterrechnen_box.html")
+    p_box = os.path.join(BLOG_DIR, "layouts", "_partials", "pillar_box.html")
+    if not (os.path.isfile(w_box) and os.path.isfile(p_box)):
+        return False
+    if re.search(r"^\s*inhalt_sha256:\s*\"?[0-9a-f]{64}\"?\s*$", front, re.M):
+        return True
+    m = re.search(r"^reserve_published:\s*(\d{4}-\d{2}-\d{2})\s*$", front, re.M)
+    return bool(m and m.group(1) > "2026-10-19")
+
+
 def find_experience(body):
     findings = []
     for lineno, line in enumerate(body.split("\n"), 1):
@@ -82,9 +100,10 @@ def run_checks():
         if live:
             title = _field(front, "title")
             live_titles.setdefault(title, []).append(rel)
-            if "](../../werkzeuge/" not in body and "](/werkzeuge/" not in body:
+            tpl_ok = _has_template_links(front)
+            if "](../../werkzeuge/" not in body and "](/werkzeuge/" not in body and not tpl_ok:
                 findings.append(f"FF3 {rel}: kein Rechner-Link")
-            if "](../../pillar/" not in body and "](/pillar/" not in body:
+            if "](../../pillar/" not in body and "](/pillar/" not in body and not tpl_ok:
                 findings.append(f"FF3 {rel}: kein Pillar-Link")
     for title, paths in live_titles.items():
         if len(paths) > 1:

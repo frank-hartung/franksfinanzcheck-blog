@@ -52,6 +52,16 @@ class FormulaAndLiveTests(unittest.TestCase):
         self.assertFalse(ff._is_live(front))
         self.assertEqual(body.strip(), "Text")
 
+    def test_template_links_fuer_versiegelte_und_reserve_beitraege(self):
+        sealed = 'pillar: "versicherungen"\nredaktionelle_pruefung:\n  inhalt_sha256: "' + ("a" * 64) + '"'
+        self.assertTrue(ff._has_template_links(sealed))
+        reserve_future = 'pillar: "strom-sparen"\nreserve_published: 2026-10-21'
+        self.assertTrue(ff._has_template_links(reserve_future))
+        reserve_old = 'pillar: "strom-sparen"\nreserve_published: 2026-10-10'
+        self.assertFalse(ff._has_template_links(reserve_old))
+        no_pillar = 'inhalt_sha256: "' + ("a" * 64) + '"'
+        self.assertFalse(ff._has_template_links(no_pillar))
+
     def test_live_wache_ist_gruen(self):
         """Der Repo-Stand muss die Wache bestehen (FF1–FF5)."""
         self.assertEqual(ff.run_checks(), [])

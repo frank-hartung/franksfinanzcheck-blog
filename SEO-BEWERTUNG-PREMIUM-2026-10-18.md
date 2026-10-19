@@ -299,3 +299,23 @@ Die Empfehlungen je Punkt stehen in `docs/ENTSCHEIDUNGS-EMPFEHLUNGEN-2026-10-19.
 - **Korrektur zu 7e:** Die Aussage „Die Seite zeigt keinen `cf-ray`-Header“ ist ungeprüft und wird zurückgenommen (siehe Abschnitt Lage der Live-Seite).
 - **Werkzeug-Texte** auf neun gezogen: Seitentitel, Beschreibung, Fließtext im Hub, `data/werkzeuge.yaml`. Test `scripts/tests/test_werkzeuge_hub.py` prüft die Zahl gegen die Anzahl der Werkzeuge.
 - **Layout-Audit im PR #803 rot, behoben.** Ursache: Der Audit prüfte die 114 Weiterleitungsstubs aus Punkt 1 wie Inhaltsseiten und meldete „Meta-Description fehlt auf 114 Seiten“ (kritisch). Die Stubs sind absichtlich noindex und ohne Beschreibung. `scripts/layout_audit.py` nimmt Seiten mit Marker `ff-weiterleitung` aus der Inhaltsprüfung aus und zählt sie sichtbar. Vollständigkeit prüft `weiterleitungen.py --verify`. Test `scripts/tests/test_layout_audit_stubs.py`. Lokaler Lauf: rc 0. Offen bleibt eine Warnung zu Hreflang auf den Blätterseiten (Posts und Startseite). Sie stammt aus dem versiegelten `head.html` und ist eine Entscheidung für Frank.
+
+## 7g. Dauerheilung PR #803 (19.10.2026): Merge-Artefakte, YMYL-Siegel, E2E und Kadenz-Festigkeit
+
+1. **Merge-Artefakte aus `18cc0452` beseitigt (`artefakt_waechter.py`):**
+   - `content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md`: doppelten Frontmatter-Schlüssel `pin_description` (`A6-FRONTMATTER`) zusammengeführt (Primär-Keyword `Frugalismus-Tipps`, CTA, 3 Hashtags und `fiktive Person` ohne `Fallstudie`).
+   - `data/fcp_images.json` und `data/lcp_images.json`: doppelte Schlüssel `"generatedAt"` (`A2-JSON-DOPPELT`) bereinigt.
+2. **Playwright-E2E-Suite (`e2e/werkzeuge.spec.mjs`) und Regressionstest (`test_werkzeuge_hub.py`):**
+   - `e2e/werkzeuge.spec.mjs` Zeile 36 prüfte bei neun Werkzeug-Karten noch `expect(new Set(ziele).size).toBe(8)` statt `9`. Auf `9` gehoben und in `scripts/tests/test_werkzeuge_hub.py` gegen `len(werkzeuge)` aus `data/werkzeuge.yaml` verdrahtet. Alle 108 Playwright-Tests (Desktop + Mobile) laufen grün.
+3. **Barrierefreiheit der 114 Weiterleitungsstubs (`scripts/weiterleitungen.py`, `a11y_audit.py`):**
+   - `seiten_html()` erzeugt jetzt `<a class="skip-link" href="#main-content">` und `<main id="main-content">` in allen 114 Stubs. `a11y_audit.py` prüft 229 Seiten mit **0 Problemen**.
+4. **YMYL-Siegel für Live-Beitrag `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026`:**
+   - Der Beitrag wurde auf `main` am 19.10.2026 veröffentlicht (`draft: false`) und trug ein gültiges YMYL-Siegel (`status: "freigegeben"`, `inhalt_sha256: "78d22ca5…"`). Die versiegelte Fassung samt Cover-Bild aus `main` ist wiederhergestellt (`editorial_review_gate.py --published --strict`: 62 Live-Artikel, 1 Hochrisiko freigegeben, 0 blockiert).
+5. **Dauerhafte Kadenz-Festigkeit für `ff_inhalts_wache.py` (FF3) und `fachpruefung_register.py`:**
+   - Neuer Baustein `layouts/_partials/weiterrechnen_box.html` (eingebunden in `layouts/_partials/artikel_einzeln.html`) rendert für Beiträge, deren Markdown-Body wegen YMYL-Siegel (`inhalt_sha256`) oder Reserve-Zertifikat keinen direkten `/werkzeuge/`-Link trägt, automatisch den passenden Rechner-Link aus der SSOT (`werkzeuge_data.html`).
+   - `content/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/index.md` hat den Rechner-Link im Markdown erhalten.
+   - `scripts/fachpruefung_register.py` nimmt bereits freigegebene Beiträge (`status: "freigegeben"`) aus dem offenen Prüfregister aus und bleibt bei künftigen Reserve-Veröffentlichungen (`reserve_published` nach Register-Stand) stabil.
+6. **Cover-Konsistenz (`check_covers.py`, `cover_render_check.py`):**
+   - `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug`: `cover.image` und `cover.alt` auf den kanonischen Slug/Titel gezogen.
+   - `2026-10-19-urlaubskasse-clever-aufbessern`: fehlendes Cover samt 14 responsiven AVIF/WebP-Varianten generiert. Alle 99 Covers in `check_covers.py` und `cover_render_check.py` mit 0 Befunden.
+

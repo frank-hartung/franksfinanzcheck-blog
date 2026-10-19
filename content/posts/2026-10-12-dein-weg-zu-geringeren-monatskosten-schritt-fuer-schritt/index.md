@@ -193,6 +193,8 @@ Bei höheren Preisen darfst du fast immer sofort kündigen. Du kannst den Vertra
 ### Lohnt sich ein Kontowechsel für wenige Euro Ersparnis im Monat?
 Selbst kleine monatliche Beträge summieren sich über die Jahre zu einem spürbaren Betrag auf deinem Konto. Moderne Banken bieten zudem bessere Apps für dein Haushaltsbuch an. Es geht immer um die Summe vieler kleiner Optimierungen – wer konsequent [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) zur Seite legt, erreicht schnell einen dreistelligen Betrag.
 
+- **Rechner:** [Fixkosten-Scanner: alle Verträge in 90 Sekunden nach Sparhebel sortieren](../../werkzeuge/fixkosten-scanner/)
+
 ---
 
 👉 **Jetzt vergleichen und sparen:** [**→ Stromanbieter vergleichen & wechseln**](/go/strom/)

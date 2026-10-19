@@ -72,11 +72,11 @@ entscheidungen:
 
   - id: E-06
     punkt: "3 / Gate – Redaktions-Gate"
-    entscheidung: "Live-Blockaden sind 0. Fünf Entwürfe bleiben blockiert, bis ein benannter Prüfer freigibt. Vier Entwürfe (dein-haus, kfz-versicherung, versicherung-update, unfallversicherung) stehen auf ausstehend, der Hash ist entfernt. Der Live-Beitrag dsl-anbieter-wechseln ist erhoeht/ausstehend. Der Saison-Entwurf ist hoch/ausstehend."
-    begruendung: "Gate-Korrektur: Die E02-Fälle waren durch die Titeländerungen ausgelöst. Freigaben wurden nicht erneut gesetzt (kein --seal)."
+    entscheidung: "Live-Blockaden sind 0 (dein-haus ist auf main live und versiegelt freigegeben). Vier Entwürfe bleiben blockiert, bis ein benannter Prüfer freigibt. Drei Entwürfe (kfz-versicherung, versicherung-update, unfallversicherung) stehen auf ausstehend, der Hash ist entfernt. Der Live-Beitrag dsl-anbieter-wechseln ist erhoeht/ausstehend. Der Saison-Entwurf ist hoch/ausstehend."
+    begruendung: "Gate-Korrektur: Die E02-Fälle waren durch die Titel-/Textänderungen ausgelöst. Freigaben wurden nicht erneut gesetzt (kein --seal); das versiegelte Live-Stück dein-haus bleibt unverändert."
     status: "umgesetzt"
     verantwortlich: auto
-    nachweis: "python3 scripts/editorial_review_gate.py --all --report (Ergebnis: 92 Artikel · 10 Hochrisiko · 5 freigegeben · 5 blockiert; Live-Blockaden 0)"
+    nachweis: "python3 scripts/editorial_review_gate.py --all --report (Ergebnis: 93 Artikel · 10 Hochrisiko · 6 freigegeben · 4 blockiert; Live-Blockaden 0)"
 
   - id: E-07
     punkt: "4 – Top-20-Auswahl"

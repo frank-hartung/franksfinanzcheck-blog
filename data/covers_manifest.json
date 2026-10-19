@@ -18,13 +18,13 @@
   }
  },
  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-  "title": "Haus sicher schützen: Gebäude, Hausrat, Elementarschutz",
-  "ts": "2026-10-19T00:09:32+00:00",
   "design": {
-   "v": 3,
    "badge": "VERSICHERUNGEN",
-   "savings": ""
-  }
+   "savings": "",
+   "v": 3
+  },
+  "title": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
+  "ts": "2026-08-25T16:23:26+00:00"
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
@@ -1274,6 +1274,15 @@
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-19-urlaubskasse-clever-aufbessern": {
+  "title": "Urlaubskasse clever aufbessern",
+  "ts": "2026-10-19T11:08:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
    "savings": ""
   }
  }

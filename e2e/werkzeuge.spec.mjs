@@ -33,7 +33,7 @@ test.describe('Werkzeuge', () => {
     await expect(karten, 'neun Werkzeuge im Raster').toHaveCount(9);
 
     const ziele = await karten.evaluateAll((nodes) => nodes.map((n) => new URL(n.href).pathname));
-    expect(new Set(ziele).size, 'jede Karte führt woanders hin').toBe(8);
+    expect(new Set(ziele).size, 'jede Karte führt woanders hin').toBe(9);
     for (const ziel of ziele) {
       const antwort = await page.request.get(ziel);
       expect(antwort.status(), `${ziel} ist erreichbar`).toBe(200);
