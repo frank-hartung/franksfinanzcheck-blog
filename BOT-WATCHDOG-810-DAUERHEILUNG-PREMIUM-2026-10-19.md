@@ -39,3 +39,9 @@ Vor der Korrektur reproduzierte `Snapshot.test_snapshot_ist_aktuell` den Blocker
 - `git diff --check`: grün.
 
 Ein Hugo-Produktionsbuild war lokal nicht ausführbar, da das Hugo-Binary in der Sandbox nicht installiert ist. Der behobene Schritt liegt vor dem Build; Quellvertrag, Snapshot-Entscheidung und statisches Artefakt sind lokal vollständig geprüft.
+
+## Pull-Request- und CI-Status
+
+PR [#811](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/811) wurde gegen `main` erstellt und ist offen. GitHub Actions hat den echten Hugo-Produktionsbuild sowie die Qualitäts- und Integritäts-Gates, Playwright, CodeQL, URL-Wache und Quellseiten-Prüfung bestanden. Der gesamte Check `regression` ist jedoch rot; auch seine Uhr-Probe scheitert.
+
+Die lokale Vollsuite unter Python 3.11 reproduziert den konkreten Befund: 3.386 Tests, ein Fehler und 12 übersprungene Tests. `test_inhalts_register.FormulaAndLiveTests.test_live_wache_ist_gruen` meldet FF3 für `content/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/index.md`, weil dort ein Rechner-Link fehlt. Die Uhr-Probe wiederholt dieselbe Suite mit verschobenem Datum und fällt aus demselben Grund. Diese Datei wurde von PR #811 nicht geändert; eine redaktionelle Korrektur ist nicht Teil der Dauerheilung #810 und sollte separat entschieden werden.

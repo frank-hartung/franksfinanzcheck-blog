@@ -187,7 +187,7 @@ entscheidungen:
 
   - id: E-16
     punkt: "1 – 301-Weiterleitungen"
-    entscheidung: "Alt-URLs werden aus einer Quelle (data/weiterleitungen.yaml) erzeugt: 114 Weiterleitungen (Regel A 6, B 73, C 35), 3 bewusst 404 (Regel D). Tag-Archive bleiben 404 (Regel E, Entscheidung Index-Hygiene vom 29.09.2026). Umsetzung als static/-Seiten mit Meta-Refresh, noindex,follow, canonical. Echte 301 nur über Cloudflare-Proxy."
+    entscheidung: "Alt-URLs werden aus einer Quelle (data/weiterleitungen.yaml) erzeugt: 115 Weiterleitungen (Regel A 6, B 73, C 36), 3 bewusst 404 (Regel D). Tag-Archive bleiben 404 (Regel E, Entscheidung Index-Hygiene vom 29.09.2026). Umsetzung als static/-Seiten mit Meta-Refresh, noindex,follow, canonical. Echte 301 nur über Cloudflare-Proxy."
     begruendung: "Hugo-Aliase sind abgeschaltet (disableAliases = true). Ziele sind ausschließlich Live-Seiten, Ketten und Schleifen sind verboten. Jeder Eintrag hat eine Begründung im Feld grund."
     status: "teilweise"
     verantwortlich: human
@@ -204,7 +204,7 @@ entscheidungen:
     begruendung: "Die Weiterleitungen sollen im Deploy dauerhaft gegen Quellfehler abgesichert sein, nicht nur lokal. Der Schritt steht vor dem Build und ergänzt das Gate H9."
     status: "umgesetzt"
     verantwortlich: auto
-    nachweis: ".github/workflows/deploy.yml: Schritt „Weiterleitungen – Selbsttest, Quelle und Unit-Tests“ nach „Taxonomie-Gate“; lokal grün: --selftest 18/0, --check, --verify 114, test_weiterleitungen OK"
+    nachweis: ".github/workflows/deploy.yml: Schritt „Weiterleitungen – Selbsttest, Quelle und Unit-Tests“ nach „Taxonomie-Gate“; lokal grün: --selftest 18/0, --check, --verify 115, test_weiterleitungen OK"
     befund:
       owner: auto
       severity: P2

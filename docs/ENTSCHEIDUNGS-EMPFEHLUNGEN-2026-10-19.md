@@ -12,7 +12,7 @@ Legende: **Außenwirkung** = Veröffentlichung, Versand, Kontakt mit Dritten ode
 
 **Empfehlung: Variante A (Proxy aktivieren), in genau dieser Reihenfolge.**
 
-Begründung: GitHub Pages liefert keine echten 301-Antworten und keinen `cf-ray`-Header. Die 114 Ersatzseiten arbeiten als Meta-Refresh. Echte Weiterleitungen und der Schutz vor Einbettung (Frame-Schutz, HSTS, nosniff) brauchen den Proxy. Der Blog hat ein Anmeldeformular, deshalb ist ein fehlender Frame-Schutz die größere Lücke. `cloudflare/edge-schutz.md`, Abschnitt 5, kommt zum gleichen Ergebnis.
+Begründung: GitHub Pages liefert keine echten 301-Antworten und keinen `cf-ray`-Header. Die 115 Ersatzseiten arbeiten als Meta-Refresh. Echte Weiterleitungen und der Schutz vor Einbettung (Frame-Schutz, HSTS, nosniff) brauchen den Proxy. Der Blog hat ein Anmeldeformular, deshalb ist ein fehlender Frame-Schutz die größere Lücke. `cloudflare/edge-schutz.md`, Abschnitt 5, kommt zum gleichen Ergebnis.
 
 Der Proxy ändert die Rechtslage. Die Zugriffsdaten laufen dann über Cloudflare. Deshalb kommt der Schritt erst nach dem Datenschutz-Schritt.
 
@@ -23,7 +23,7 @@ Der Proxy ändert die Rechtslage. Die Zugriffsdaten laufen dann über Cloudflare
 | 3. `python3 scripts/weiterleitungen.py --proxy-check` | Frank | Ausgabe `aktiv` |
 | 4. `python3 scripts/weiterleitungen.py --cloudflare` erzeugt die Bulk-CSV, Import ins Dashboard | Frank | CSV importiert |
 | 5. Stichprobe: Alt-URL aus `data/weiterleitungen.yaml` liefert 301 mit `Location` | Frank | 5 von 5 Stichproben stimmen |
-| 6. Die 114 Meta-Refresh-Seiten bleiben als Fallback im Build | Agentur | keine Änderung nötig |
+| 6. Die 115 Meta-Refresh-Seiten bleiben als Fallback im Build | Agentur | keine Änderung nötig |
 
 **Vor dem Schritt 2 erwartet `--proxy-check` den Status `inaktiv`.** Das ist normal und kein Fehler.
 
