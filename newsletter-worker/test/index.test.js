@@ -1241,9 +1241,9 @@ test('Rate-Limit: Binding RATE_LIMITER entscheidet ohne KV-Schreibzugriff (Audit
   assert.equal(kv.map.size, 0, 'kein KV-Schreibzugriff');
 });
 
-test('Turnstile: mit TURNSTILE_SECRET ohne/mit falschem Token -> abgelehnt, mit gueltigem -> angemeldet', async () => {
+test('Turnstile: Paar aus Secret UND Site-Key prueft – ohne/mit falschem Token abgelehnt, mit gueltigem angemeldet', async () => {
   const kv = kvLeeren();
-  const env = env_mit(kv, { TURNSTILE_SECRET: 'ts-geheim' });
+  const env = env_mit(kv, { TURNSTILE_SECRET: 'ts-geheim', TURNSTILE_SITEKEY: '0x4AAA' });
   let geprueft = null;
   const freilass = fetch_sperr((ziel, opt) => {
     if (new URL(String(ziel)).hostname === 'challenges.cloudflare.com') {
@@ -1262,6 +1262,36 @@ test('Turnstile: mit TURNSTILE_SECRET ohne/mit falschem Token -> abgelehnt, mit 
   assert.equal(gut.status, 200);
   assert.equal(geprueft.get('secret'), 'ts-geheim');
   assert.equal((await kv.get('abo:t@beispiel.de', 'json')).status, 'pending');
+});
+
+test('Turnstile (Paar-Vertrag WF-E813/#809): nur Secret ohne Site-Key heisst „wartet“ – Anmeldung laeuft, Pruefung bleibt aus', async () => {
+  // Der Zustand „Secret ohne Widget“ war der Anmelde-Ausfall vom 15.10.2026:
+  // JEDER Anmeldeversuch scheiterte an einer Pruefung, die ohne Widget kein
+  // Mensch bestehen konnte. Seitdem gilt das Paar als ein Vertrag – der
+  // halbgesetzte Zustand darf die Anmeldung NICHT mehr abwürgen, aber er
+  // meldet sich laut (healthz „wartet“, Betriebs-Wache, Tagesbudget-Warnung).
+  const kv = kvLeeren();
+  const env = env_mit(kv, { TURNSTILE_SECRET: 'ts-geheim' });
+  let geprueft = false;
+  const freilass = fetch_sperr((ziel, opt) => {
+    if (new URL(String(ziel)).hostname === 'challenges.cloudflare.com') geprueft = true;
+    return new Response(JSON.stringify({ success: false }), { status: 200 });
+  });
+  const antwort = await worker.fetch(form_request('/anmeldung', { email: 'wartet@beispiel.de', consent: '1' }), env);
+  freilass();
+  assert.equal(antwort.status, 200, 'Anmeldung darf im Zustand „wartet“ nicht scheitern');
+  assert.equal(geprueft, false, 'ohne Site-Key wird keine siteverify-Pruefung ausgeloest');
+  assert.equal((await kv.get('abo:wartet@beispiel.de', 'json')).status, 'pending');
+  const intern = await (await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }), env)).json();
+  assert.equal(intern.turnstile, 'wartet');
+  // Und der umgekehrte Halbzustand bleibt sichtbar: Widget ohne Secret.
+  const intern2 = await (await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }),
+    env_mit(kvLeeren(), { TURNSTILE_SITEKEY: '0x4AAA' }))).json();
+  assert.equal(intern2.turnstile, 'inaktiv');
+  // Beide Werte zusammen: aktiv.
+  const intern3 = await (await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }),
+    env_mit(kvLeeren(), { TURNSTILE_SECRET: 'ts-geheim', TURNSTILE_SITEKEY: '0x4AAA' }))).json();
+  assert.equal(intern3.turnstile, 'aktiv');
 });
 
 test('Feedback: Tagesobergrenze schuetzt das KV-Schreibbudget (Audit H-03)', async () => {

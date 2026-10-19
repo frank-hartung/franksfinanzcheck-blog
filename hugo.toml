@@ -210,10 +210,17 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   #                      franksfinanzcheck.de). Ist er gesetzt, liefert der
   #                      Shortcode das Widget aus und ff-newsletter.js schickt
   #                      das Token als `cf-turnstile-response` mit.
-  # Beide Werte gehören zusammen: Ohne Site-Key hier prüft der Worker nicht
-  # (turnstile_ok → fail-open), weil sonst jede Anmeldung scheiterte. Die
-  # Wache scripts/worker_betrieb_wache.py meldet genau diesen Zustand
-  # täglich laut (Live-Job der Sicherheits-Wache) – siehe
+  # Beide Werte gehören zusammen (Paar-Vertrag 19.10.2026, WF-E813 / #809):
+  # dieser Site-Key UND das Secret TURNSTILE_SECRET im Newsletter-Worker –
+  # der Site-Key wird zusätzlich als Variable TURNSTILE_SITEKEY in
+  # newsletter-worker/wrangler.toml gespiegelt (Wache prüft den Spiegel).
+  # Erst wenn BEIDE gesetzt sind, liefert das Formular das Widget aus und
+  # der Worker prüft fail-closed. Der halbgesetzte Zustand „nur Secret“ war
+  # der Anmelde-Ausfall vom 15.10.2026: jede Anmeldung scheiterte an einer
+  # Sicherheitsprüfung ohne Widget. Seitdem heißt er „wartet“ – die
+  # Anmeldung läuft weiter, und die Wache
+  # scripts/worker_betrieb_wache.py meldet den Zustand täglich laut
+  # (Live-Job der Sicherheits-Wache), bis das Paar komplett ist – siehe
   # docs/SICHERHEIT-BETRIEB-RUNBOOK.md, Schritt A3.
   turnstileSiteKey = ""
   bingVerify = "5079875E367065FE09E09FC61BC077C6"

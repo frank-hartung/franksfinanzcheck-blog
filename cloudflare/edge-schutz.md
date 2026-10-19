@@ -49,6 +49,11 @@ tatsächlich passiert.
 
 **Prüfen:** `curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'`
 → fünf Zeilen. Automatisch mit Gegenproben: `npm run header:check`.
+**Ein Befehl für die ganze Regel (seit 19.10.2026, WF-E813 / #809):**
+`npm run edge:freigabe` misst DNS-Proxy, SSL-Modus und genau diese acht
+Kopfzeilen gegen die Cloudflare-API; `npm run edge:freigabe:apply` stellt
+sie idempotent her (`scripts/cloudflare_edge_freigabe.py`, Sollstand wird
+aus der Tabelle oben gelesen – eine Quelle).
 
 **Live-Messung mit Klassifikation:** `npm run header:check:live` (bzw. der
 tägliche Job „Live-Messung“ der Sicherheits-Wache). Die Wache liefert vier
@@ -91,7 +96,9 @@ Bot-Schutz-Zustand und die letzten Exportaufrufe).
 1. Cloudflare-Dashboard → **Turnstile → Add widget**: Name `FF Newsletter`,
    Domains `franksfinanzcheck.de`, `www.franksfinanzcheck.de`, Widget-Modus
    **Managed**.
-2. **Site Key** in `hugo.toml` eintragen: `params.turnstileSiteKey = "0x4AAA…"`.
+2. **Site Key** an **zwei** Stellen eintragen (derselbe Wert): `hugo.toml`
+   `params.turnstileSiteKey = "0x4AAA…"` **und** `newsletter-worker/wrangler.toml`
+   `TURNSTILE_SITEKEY = "0x4AAA…"` (Paar-Vertrag, Spiegel für den Worker).
    Damit liefert `layouts/shortcodes/newsletter_form.html` das Widget aus und
    `static/premium/ff-newsletter.js` schickt das Token mit.
 3. **Secret Key** im Worker hinterlegen:
@@ -99,10 +106,15 @@ Bot-Schutz-Zustand und die letzten Exportaufrufe).
 4. Datenschutz-Hinweis ist bereits eingearbeitet (`content/datenschutz/index.md`,
    Abschnitt Newsletter) — der Dienst wird nur beim Absenden geladen.
 
-**Reihenfolge ist zwingend:** erst 2., dann 3. Der Worker prüft fail-closed,
-sobald sein Secret gesetzt ist — ohne Widget im Formular scheitert dann jede
-Anmeldung. Genau diesen Widerspruch erkennt `scripts/worker_betrieb_wache.py`
-(„Fassade" / „jede Anmeldung scheitert") und meldet ihn täglich.
+**Paar-Vertrag (seit 19.10.2026, WF-E813 / #809):** Der Worker prüft
+fail-closed, sobald Secret **und** Site-Key gesetzt sind. Der halbgesetzte
+Zustand „nur Secret“ war der Anmelde-Ausfall vom 15.10.2026 — jede Anmeldung
+scheiterte an einer Sicherheitsprüfung ohne Widget. Seitdem heißt er
+**„wartet“**: Die Anmeldung läuft weiter (Honeypot, Zeitfalle,
+Mengenklassen, Tagesbudget), `/healthz` meldet den Zustand, und
+`scripts/worker_betrieb_wache.py` meldet ihn täglich als Warnung — nebst
+Spiegel-Prüfung beider Site-Key-Stellen. „Widget ohne Secret“ bleibt ein
+**Fehler** („Fassade“).
 
 **Ohne Turnstile?** Möglich, aber dann bleibt der Schutz bei Honeypot,
 Zeitfalle, Mengenklassen und dem Tagesbudget (max. 100 Anmeldungen/Tag). Der

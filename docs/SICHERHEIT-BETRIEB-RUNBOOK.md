@@ -28,6 +28,21 @@ live HSTS, Clickjacking-Schutz und `nosniff`. Die Meta-CSP im HTML kann
 `frame-ancestors` und HSTS nicht liefern — das geht **nur** als HTTP-Header.
 Deshalb: Proxy davor, Header per Transform Rule.
 
+**Variante mit einem Griff (seit 19.10.2026, WF-E813 / #809):** Statt drei
+Dashboard-Wegen genügt ein Werkzeug, das die Schritte 1–3 kennt, misst und –
+ausdrücklich auf Zuruf – herstellt:
+
+```bash
+npm run edge:freigabe          # misst DNS-Proxy, SSL-Modus und Regel A1 gegen die Vorlage
+npm run edge:freigabe:apply    # stellt den Sollstand idempotent her (braucht Token)
+```
+
+`scripts/cloudflare_edge_freigabe.py` liest den Sollstand aus der Tabelle in
+`cloudflare/edge-schutz.md` (eine Quelle), misst gegen die Cloudflare-API und
+meldet Exit 0 (im Soll) / 1 (offen, mit genauem nächsten Schritt) / 2 (Werkzeug-
+fehler). Token: `CLOUDFLARE_API_TOKEN` mit `Zone.DNS:Edit`, `Zone.Settings:Edit`,
+`Zone.Transform Rules:Edit` für diese Zone. **Danach zwingend B7.**
+
 **Schritt 1 — Proxy einschalten:** Cloudflare-Dashboard → Zone
 `franksfinanzcheck.de` → **DNS** → für `franksfinanzcheck.de` und `www` die
 Wolke auf **Proxied** (orange).
@@ -45,6 +60,7 @@ steht kopierfertig in `cloudflare/edge-schutz.md`, Abschnitt A1. Einfach
 ```bash
 curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'
 npm run header:check:live          # Selbsttest + Live-Messung, Exit 1 bei Befund
+npm run edge:freigabe              # dasselbe auf Cloudflare-Ebene (DNS, SSL, Regel)
 ```
 
 Erwartet: fünf Zeilen (`Strict-Transport-Security`, `X-Content-Type-Options`,
@@ -106,20 +122,28 @@ Exportaufrufe.
 IP-Limit. Damit ließen sich fremde Adressen anmelden (Mail-Verstärker), bis das
 KV-Schreibkontingent leer war — dann fallen auch Abmeldung und Tagespflege aus.
 
-**Schritt (Reihenfolge zwingend):**
+**Schritt (Paar-Vertrag seit 19.10.2026, WF-E813 / #809):** Site-Key und
+Secret sind **ein** Vertrag und werden gemeinsam wirksam:
 
 1. Cloudflare → **Turnstile → Add widget**: Name `FF Newsletter`, Domains
    `franksfinanzcheck.de`, `www.franksfinanzcheck.de`, Modus **Managed**.
-2. **Site Key** in `hugo.toml` eintragen:
-   `params.turnstileSiteKey = "0x4AAA…"` → commit → Deploy abwarten.
+2. **Site Key** an **zwei** Stellen eintragen – derselbe Wert:
+   `hugo.toml` `params.turnstileSiteKey = "0x4AAA…"` **und**
+   `newsletter-worker/wrangler.toml` `TURNSTILE_SITEKEY = "0x4AAA…"` →
+   commit → Deploy abwarten. Die Betriebs-Wache vergleicht beide Stellen
+   (Spiegel) und meldet jede Abweichung als Fehler.
 3. **Secret Key** im Worker hinterlegen:
    `cd newsletter-worker && npx wrangler secret put TURNSTILE_SECRET`
 
-**Warum diese Reihenfolge:** Der Worker prüft **fail-closed**, sobald sein
-Secret gesetzt ist. Ist das Secret zuerst da und das Widget noch nicht
-ausgeliefert, scheitert jede Anmeldung. Umgekehrt (nur Site Key) ist der Schutz
-eine Fassade — auch das meldet die Wache, und zwar als Fehler, nicht als
-Warnung.
+**Warum das Paar:** Erst wenn beide Seiten gesetzt sind (Widget auf der
+Website, Secret im Worker), prüft der Worker **fail-closed**. Der
+halbgesetzte Zustand „nur Secret“ war der Anmelde-Ausfall vom 15.10.2026:
+Jede Anmeldung scheiterte an einer Sicherheitsprüfung ohne Widget – fünf
+Tage lang, täglich gemeldet, aber im Code nicht abstellbar. Seitdem heißt
+dieser Zustand **„wartet“**: Die Anmeldung läuft weiter (Honeypot,
+Zeitfalle, Mengenklassen, Tagesbudget bleiben aktiv), `/healthz` meldet den
+Zustand, und die Wache warnt täglich, bis das Paar komplett ist. „Widget
+ohne Secret“ bleibt ein **Fehler** (Fassade), keine Warnung.
 
 **Prüfen:** Formular auf `/newsletter/` absenden (Testadresse) → Widget
 erscheint, Anmeldung kommt an. Dann:

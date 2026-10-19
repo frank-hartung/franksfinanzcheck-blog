@@ -386,16 +386,36 @@ async function rate_erlaubt(env, ip, bereich = 'anmeldung') {
 }
 
 /**
- * Cloudflare Turnstile (Audit M-02, verschaerft 15.10.2026 / F-02):
- * Ohne Secret bleibt die Pruefung aus (Rueckwaerts-Kompatibilitaet, die Site
- * rendert das Widget nur mit Site-Key). Sobald das Secret gesetzt ist, ist
- * die Pruefung PFLICHT – fail closed, wie beim KI-Assistenten.
- * Welcher Zustand gilt, steht sichtbar in /healthz (mit X-FF-Key) und wird
- * von scripts/worker_betrieb_wache.py taeglich gemeldet.
+ * Cloudflare Turnstile (Audit M-02; Paar-Vertrag 19.10.2026, WF-E813 / #809):
+ * Die Pruefung haengt an BEIDEN Werten – Secret (Worker) UND Site-Key
+ * (Website, params.turnstileSiteKey in hugo.toml, gespiegelt als Variable
+ * TURNSTILE_SITEKEY). Der halbgesetzte Zustand war der teuerste Fehler:
+ * „Secret gesetzt, aber kein Widget ausgeliefert“ liess JEDEN
+ * Anmeldeversuch an einer Sicherheitspruefung scheitern, die kein Mensch
+ * bestehen konnte – seit 15.10.2026, laut gemeldet von der taeglichen
+ * Betriebs-Wache („jede Anmeldung scheitert“), aber ohne Behebung im Code.
+ * Gegengelesen: Secret ohne Site-Key war bis dahin als fail-closed gedacht;
+ * fail-closed gegen MENSCHEN ist kein Schutz, sondern ein Ausfall.
+ *
+ * Deshalb das Paar als EIN Vertrag: erst wenn BEIDE gesetzt sind, wird
+ * fail-closed geprueft (wie beim KI-Assistenten). Der halbgesetzte Zustand
+ * heisst jetzt „wartet“: die Anmeldung laeuft weiter (Honeypot, Zeitfalle,
+ * Mengenklassen, Tagesbudget bleiben), /healthz meldet den Zustand laut,
+ * und scripts/worker_betrieb_wache.py meldet ihn taeglich, bis das Paar
+ * komplett ist. Site-Key und Secret gehoeren in einem Deploy zusammen –
+ * die Wache prueft den Spiegel (hugo.toml == TURNSTILE_SITEKEY).
  */
-async function turnstile_ok(env, antwort_token, ip) {
+function turnstile_zustand(env) {
   const geheim = String((env && env.TURNSTILE_SECRET) || '').trim();
-  if (!geheim) return true;
+  const sitekey = String((env && env.TURNSTILE_SITEKEY) || '').trim();
+  if (geheim && sitekey) return 'aktiv';
+  if (geheim) return 'wartet';
+  return 'inaktiv';
+}
+
+async function turnstile_ok(env, antwort_token, ip) {
+  if (turnstile_zustand(env) !== 'aktiv') return true;
+  const geheim = String((env && env.TURNSTILE_SECRET) || '').trim();
   const token = String(antwort_token || '').trim();
   if (!token || token.length > 2048) return false;
   try {
@@ -846,7 +866,7 @@ async function health(request, env) {
       anmeldung_max: Number(env.ANMELDUNG_MAX_PRO_TAG || ANMELDUNG_MAX_PRO_TAG_DEFAULT),
       feedback_max: feedback_max(env),
     },
-    turnstile: String(env.TURNSTILE_SECRET || '').trim() ? 'aktiv' : 'inaktiv',
+    turnstile: turnstile_zustand(env),
     schluesselrollen: String(env.EXPORT_KEY_WRITE || '').trim() ? 'getrennt' : 'gemeinsam',
     exporte: exporte,
   }, kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
@@ -1480,4 +1500,7 @@ export {
   schluessel_pruefen, schreibschluessel_pruefen, tagesbudget_nehmen, tagesbudget_stand,
   limit_klasse, warnen_einmal, schluessel_fingerabdruck, ANMELDUNG_MAX_PRO_TAG_DEFAULT,
   menge_speicher_pruefen, menge_speicher_zuruecksetzen,
+  // Paar-Vertrag Turnstile (WF-E813 / #809): der Zustand ist eine eigene
+  // sicherheitsrelevante Entscheidung und wird direkt geprueft.
+  turnstile_zustand,
 };
