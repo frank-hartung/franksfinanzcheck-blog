@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-10-18T11:59:39.543804+02:00",
+ "zeitstempel": "2026-10-19T13:22:15.381282+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 13,
  "zaehlung": {
@@ -12,15 +12,15 @@
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Gaskosten senken",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "['Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus']",
-   "fehler": "Kein Anbieter lieferte Treffer für \"['Versicherungstipps', 'Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org"
+   "anfrage": "['Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif']",
+   "fehler": "Kein Anbieter lieferte Treffer für \"['Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://baresearc"
   }
  ],
  "rang": [
@@ -173,7 +173,7 @@
     ]
    },
    {
-    "domaene": "finanz-echo.de",
+    "domaene": "twyler.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 4,
@@ -183,7 +183,7 @@
     ]
    },
    {
-    "domaene": "twyler.de",
+    "domaene": "finanz-echo.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 5,
@@ -213,7 +213,7 @@
     ]
    },
    {
-    "domaene": "geldfinanzen24.de",
+    "domaene": "nurgeld.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 8,
@@ -223,7 +223,7 @@
     ]
    },
    {
-    "domaene": "nurgeld.de",
+    "domaene": "genialetricks.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 9,
@@ -233,7 +233,7 @@
     ]
    },
    {
-    "domaene": "geldkiste.blog",
+    "domaene": "sparschweinclub.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 10,
