@@ -206,9 +206,14 @@ class Entfernung(unittest.TestCase):
                     "data/umami_ctas.json", "data/umami_ctas.meta.json", "data/monetization.yaml",
                     "docs/ANLEITUNG-UMAMI-ANALYTICS.md"):
             self.assertFalse((ROOT / rel).exists(), f"{rel} ist zurück")
-        namen = [p for p in fs.dateien(ROOT) if fs.NAME_RE.search(p.rsplit("/", 1)[-1])
+        # Historie (datierte Berichte wie der Vorgangsbericht dieser Entfernung) darf den
+        # Namen tragen – dieselbe Zone wie in der Wache, keine zweite Definition.
+        namen = [p for p in fs.dateien(ROOT) if not fs._historisch(p)
+                 and fs.NAME_RE.search(p.rsplit("/", 1)[-1])
                  and os.path.splitext(p)[1].lower() in fs.TEXT_ENDUNGEN]
         self.assertEqual(namen, [], f"Dateien mit dem Namen des entfernten Dienstes: {namen}")
+        bericht = "UMAMI-ENTFERNUNG-806-DAUERHEILUNG-PREMIUM-2026-10-19.md"
+        self.assertTrue(fs._historisch(bericht), "der Vorgangsbericht muss in der Historie-Zone liegen")
 
     def test_workflows_nennen_weder_skript_noch_secret(self):
         for pfad in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
