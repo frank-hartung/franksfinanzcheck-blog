@@ -55,7 +55,7 @@ function bootstrapQuelltext() {
   assert.ok(block.includes('ff_analytics_consent_v2'),
     'Der Bootstrap muss sich das vorhandene Head-Skript teilen (DOM-Budget 58)');
   // Der Bootstrap enthält keine Hugo-Direktiven mehr (Analyse-Banner und
-  // Umami entfernt, 11.10.2026). jsdom wertet ausschließlich JavaScript aus.
+  // Reichweitenmessung entfernt, 11.10.2026). jsdom wertet ausschließlich JavaScript aus.
   return block;
 }
 

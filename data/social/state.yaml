@@ -877,6 +877,19 @@ history:
     #Gasrechnung #Heizkosten #StromkostenSenken #ZaehlerstandAblesen'
   ref: '117467203191745299'
   ai: false
+- posted_at: '2026-10-19T19:34:08.299524+02:00'
+  channel: mastodon
+  slug: 2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet
+  title: 'Großeinkauf und Vorrat: Wann Bevorraten sich rechnet'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117468774583193688
+  ok: true
+  text: '🛒 Spare beim Großeinkauf, wenn du den Stückpreis senkst und Lebensmittel
+    nicht verfaulen lässt. Ein Großeinkauf ist nur dann günstiger, wenn der Grundpreis
+    je Einheit sinkt und nichts verdirbt. https://franksfinanzcheck.de/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #HaushaltsbuchFuehren #GrosseinkaufPlanen'
+  ref: '117468774583193688'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -902,4 +915,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-19T12:54:35.442982+02:00'
+updated_at: '2026-10-19T19:34:13.016434+02:00'

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-19T13:17:15Z",
+  "generated_at": "2026-10-19T19:33:45Z",
   "modus": "kandidaten",
-  "commit": "208ba450ed13cc0949fbdcad6fdd8057601ac341",
+  "commit": "f9cac767691318a25b742bf4be9b09ae6f5ebaa9",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -750,7 +750,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "44ec6363a9580a45c7e373b17a6af1409c151d85f7034cb0dbd9c065bd295456",
@@ -1040,6 +1040,23 @@
       },
       "naechste_pruefung": "2027-01-05",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
+      "sha256": "da052a451fe583afae1f697755d24ae316c3aac1caec6a6e89b250b46f42e191",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2027-01-05",
+      "siegel_drift": "geändert – neu geprüft"
     }
   }
 }

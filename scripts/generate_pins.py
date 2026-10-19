@@ -34,7 +34,8 @@ import pinterest_hashtags as ph  # Hashtag-SSOT (#729) – eine Regel, eine Quel
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 # UTM-Attribution (Premium 25.08.2026) – wie pinterest_engine.PIN_UTM:
-# Analytics-Kanalzuordnung in Umami, Affiliate-Links bleiben kanalneutral.
+# Kanalzuordnung für Auswertungen außerhalb des Blogs (Pinterest Analytics),
+# Affiliate-Links bleiben kanalneutral.
 PIN_UTM = "?utm_source=pinterest&utm_medium=social&utm_campaign=pins"
 API = "https://api.pinterest.com/v5"
 

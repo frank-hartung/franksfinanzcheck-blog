@@ -393,6 +393,12 @@ jobs:
             const istSicherheitsWache = wfName === 'Sicherheits-Wache';
             const headerGateFailed = istSicherheitsWache &&
               failedStepNames.some(s => String(s).includes('Sicherheits-Header'));
+            // #809: Zwei rote Messungen brauchen zwei Handlungswege. Der
+            // Header-Rat darf den unabhängigen Worker-Befund nicht verdecken.
+            const workerGateFailed = istSicherheitsWache &&
+              failedStepNames.some(s => String(s).includes('Worker-Zustand'));
+            const liveNachweisFailed = istSicherheitsWache &&
+              failedStepNames.some(s => String(s).includes('Live-Nachweis abschließen'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -455,7 +461,10 @@ jobs:
               // Klasse in einer offenen Meldung, muss der Rat neu geschrieben
               // werden. Ohne eigenen Namen bliebe er stehen (Schaden aus
               // WF-9E5A #761) – deshalb ist die Kette hier die einzige Quelle.
+              : headerGateFailed && workerGateFailed ? 'sicherheit-live'
               : headerGateFailed ? 'sicherheit-header'
+              : workerGateFailed ? 'sicherheit-worker'
+              : liveNachweisFailed ? 'sicherheit-nachweis'
               : istSicherheitsWache ? 'sicherheit-wache'
               // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
               : selbsttestFailed ? 'selbsttest'
@@ -626,13 +635,35 @@ jobs:
                       '1. **Abhängigkeiten nicht installierbar.** Zum Installieren braucht der Lauf keinen API-Key – die Ursache liegt im Paketstand. Bei npm ist meist `package.json` oder `package-lock.json` defekt (z. B. ein Merge-Rest): `python3 scripts/manifest_guard.py` (oder `npm run manifest:check`) nennt Datei, Zeile und Ursache.',
                       '2. Bei pip: Paketname und Version im roten Schritt prüfen. Erst danach einen Registry- oder GitHub-Ausfall prüfen (https://www.githubstatus.com) und den Lauf neu starten.'
                     ]
+                  : runbookKlasse === 'sicherheit-live'
+                    ? [
+                        '1. **Zwei unabhängige Live-Prüfungen sind rot:** F-01 (Sicherheits-Header) UND Worker-Zustand (F-02/F-03/F-08). Nur die Header zu reparieren reicht nicht. Die einzelnen Messbefunde stehen als Annotationen und in der Lauf-Zusammenfassung; die bereinigten Berichte liegen im Artefakt `sicherheits-live-nachweis`.',
+                        '2. **F-01:** BEFUND = es wurde gemessen, und etwas fehlt. Ohne aktiven Proxy kann die Header-Regel nicht wirken: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 (beide DNS-Hosts Proxied, SSL Full oder Full (strict), Regel `FF Sicherheits-Header` mit acht Kopfzeilen aus `cloudflare/edge-schutz.md`). Bei STOERUNG nichts an Cloudflare auf Verdacht ändern.',
+                        '3. **Worker:** Die Worker-Annotation nennt die konkrete Abweichung oder STOERUNG. Runbook A3/A4 und D2: Widget UND Prüfung abgleichen, Tagesdeckel prüfen, bei unvollständigem authentifiziertem Betriebsbild den Leseschlüssel und den tatsächlich ausgeführten Worker-Deploy prüfen. Ein grüner Plan mit übersprungenem Deploy ist kein Deploy-Nachweis. Keine Schlüssel veröffentlichen und keinen Bot-Schutz abschalten.',
+                        '4. **Abschluss:** Nach den belegten Korrekturen die Sicherheits-Wache auf `main` manuell starten. Nur ein vollständiger erfolgreicher Live-Nachweis schließt diesen Vorgang; ein grüner Offline-/Push-Lauf, fehlender Leseschlüssel oder TEILWEISE genügt nicht.'
+                      ]
+                  : runbookKlasse === 'sicherheit-worker'
+                    ? [
+                        '1. **Worker-Zustand (F-02/F-03/F-08):** Dieser Schritt prüft das authentifizierte Betriebsbild, nicht die HTTP-Kopfzeilen des Blogs. Die einzelne Worker-Annotation und die Lauf-Zusammenfassung nennen die Ursache; `worker-live.md/json` im Artefakt `sicherheits-live-nachweis` enthalten keine Abonnentendaten oder Schlüssel.',
+                        '2. **BEFUND:** Den belegten Widerspruch beheben: Turnstile-Site-Key und Worker-Secret müssen zusammenpassen (A3); Budget und Schlüsselrollen mit dem Soll abgleichen (A4/D2 in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`). Kein Secret entfernen, um die Prüfung grün zu bekommen.',
+                        '3. **STOERUNG:** Fehlender/abgelehnter Leseschlüssel, öffentliche/minimale oder veraltete /healthz-Antwort und Netzstörung sind ausdrücklich NICHT geprüft, kein belegter Sicherheitsbefund. Zugang bzw. tatsächlichen Worker-Deploy anhand der Annotation prüfen, nicht GROQ/GEMINI und nicht die Header-Regel.',
+                        '4. **WACHE-FEHLER:** Fehlender/kaputter Bericht oder widersprüchlicher Exit-Code bedeutet eine defekte Prüfung. Diese reparieren; keine Worker-Einstellung auf Verdacht ändern.',
+                        '5. Danach die Sicherheits-Wache auf `main` mit Live-Messung starten; nur ihr vollständiger erfolgreicher Live-Nachweis schließt die Meldung.'
+                      ]
+                  : runbookKlasse === 'sicherheit-nachweis'
+                    ? [
+                        '1. **Live-Nachweis unvollständig:** Die Einzelmessungen sind kein vollständiger Abschlussbeweis (zum Beispiel F-01 TEILWEISE oder ein fehlender/ungültiger Messbericht). Das ist kein zusätzlicher Sicherheitsbefund.',
+                        '2. Lauf-Zusammenfassung „Live-Nachweis“ prüfen; sie nennt das fehlende Ziel oder den WACHE-FEHLER. Messung/Prüfung wiederherstellen und erneut live messen; keine Sicherheitsregel auf Verdacht abschalten.',
+                        '3. Abschlussvertrag und Rückfallschutz: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, D1/D2; `python3 -m unittest scripts.tests.test_sicherheits_nachweis`.'
+                      ]
                   : runbookKlasse === 'sicherheit-header'
                     ? [
-                        '1. **Einordnung:** Diese Wache misst ausschließlich HTTP-Kopfzeilen der eigenen Seite. Sie braucht keinen Schlüssel und kein Modell – ein abgelaufener GROQ- oder GEMINI-Schlüssel kann diesen Schritt nicht auslösen.',
+                        '1. **Einordnung:** Dieser F-01-Schritt misst ausschließlich HTTP-Kopfzeilen der eigenen Seite. Sie braucht keinen Schlüssel und kein Modell – ein abgelaufener GROQ- oder GEMINI-Schlüssel kann diesen Schritt nicht auslösen.',
                         '2. **Die Klasse steht im Log und in der Lauf-Zusammenfassung.** BEFUND = es wurde gemessen, und etwas fehlt. STOERUNG = es wurde nichts gemessen; das ist ausdrücklich keine Aussage über die Sicherheit, sondern eine ausgefallene Messung.',
-                        '3. **Bei BEFUND:** Steht in der Zusammenfassung „Proxy nicht aktiv" (kein `cf-ray`), kann die Header-Regel gar nicht wirken → `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 Schritt 1 (Wolke auf *Proxied*) und Schritt 2 (SSL-Modus `Full`), danach Schritt 3. Steht dort „Proxy aktiv", ist die Regel unvollständig → `cloudflare/edge-schutz.md`, Abschnitt A1 (Regel `FF Sicherheits-Header`, acht Kopfzeilen).',
+                        '3. **Bei BEFUND:** Steht in der Zusammenfassung „Proxy nicht aktiv" (kein `cf-ray`), kann die Header-Regel gar nicht wirken → `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 Schritt 1 (Wolke auf *Proxied*) und Schritt 2 (SSL-Modus `Full (strict)` oder `Full`, niemals `Flexible`), danach Schritt 3. Steht dort „Proxy aktiv", ist die Regel unvollständig → `cloudflare/edge-schutz.md`, Abschnitt A1 (Regel `FF Sicherheits-Header`, acht Kopfzeilen).',
                         '4. **Bei STOERUNG:** Erreichbarkeit prüfen (`curl -sI https://franksfinanzcheck.de/`) und den Lauf neu starten. Kein Eingriff in Cloudflare nötig – ohne Messung ist keine Lücke belegt.',
-                        '5. **Bei WACHE-FEHLER:** Die Prüfung selbst ist defekt (z. B. leerer Exit-Code oder fehlender Bericht). Workflow und Skript prüfen; keine Cloudflare-Regel auf Verdacht ändern. Regressionstest: `python3 -m unittest scripts.tests.test_blog_header_gate` (einschließlich echter Shell-Ausführung mit Bash `-e`).'
+                        '5. **Bei WACHE-FEHLER:** Die Prüfung selbst ist defekt (z. B. leerer Exit-Code oder fehlender Bericht). Workflow und Skript prüfen; keine Cloudflare-Regel auf Verdacht ändern. Regressionstest: `python3 -m unittest scripts.tests.test_blog_header_gate scripts.tests.test_sicherheits_nachweis` (einschließlich echter Shell-Ausführung mit Bash `-e`).',
+                        '6. **Abschluss nur mit Live-Nachweis:** Ein grüner Offline-/Push-Lauf schließt diesen Vorgang nicht. Nach der Korrektur die Sicherheits-Wache auf `main` mit Live-Messung starten.'
                       ]
                     : runbookKlasse === 'sicherheit-wache'
                       ? [
@@ -661,7 +692,9 @@ jobs:
               ...handlung,
               '',
               '---',
-              '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
+              istSicherheitsWache
+                ? '*Automatisch erstellt. Der Vorgang bleibt bis zum vollständigen erfolgreichen Live-Nachweis offen.*'
+                : '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
             );
             const body = lines.join('\n');
 
@@ -750,8 +783,25 @@ jobs:
           RUN_URL: ${{ github.event.workflow_run.html_url }}
           RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
           RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_EVENT: ${{ github.event.workflow_run.event }}
         run: |
           set -euo pipefail
+
+          # WF-E813/#809: Ein Offline-Push auf main schloss #798, obwohl
+          # der Live-Job übersprungen war. Erfolg ist nur mit ausgeführten
+          # Messungen UND erfolgreichem Live-Nachweis ein Abschlussbeweis.
+          # Die API-Lage ist fail-closed: ohne Nachweis bleibt das Issue offen.
+          if [ "$WF_NAME" = "Sicherheits-Wache" ]; then
+            if ! gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs?filter=latest&per_page=100" \
+              --jq '.jobs[]' | jq -s . > sicherheits-jobs.json; then
+              echo "::warning::Live-Job-Lage nicht abrufbar – Sicherheitsmeldung bleibt offen."
+              exit 0
+            fi
+            if ! python3 scripts/sicherheits_nachweis.py --abschluss sicherheits-jobs.json --ereignis "$RUN_EVENT"; then
+              echo "Kein vollständiger Live-Nachweis – Sicherheitsmeldung bleibt offen."
+              exit 0
+            fi
+          fi
 
           # Identität aus derselben Quelle wie beim Anlegen – ein zweiter,
           # abweichender Namensgeber wäre die klassische Stelle, an der

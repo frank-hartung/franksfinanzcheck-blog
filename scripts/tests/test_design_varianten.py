@@ -483,7 +483,7 @@ class WerkbankMessung(unittest.TestCase):
             m = lab.messen_statisch("v", public, {})
         self.assertEqual(m["werte"]["affiliate_rel_fehler"], 1)
 
-    def test_cta_ohne_umami_faellt_auf(self):
+    def test_cta_ohne_klickmarke_faellt_auf(self):
         with tempfile.TemporaryDirectory() as tmp:
             public = Path(tmp) / "public"
             public.mkdir()
@@ -491,7 +491,7 @@ class WerkbankMessung(unittest.TestCase):
                 '<html><body><a class="ff-btn ff-btn-primary" href="/a/">A</a>'
                 '</body></html>', encoding="utf-8")
             m = lab.messen_statisch("v", public, {})
-        self.assertEqual(m["werte"]["cta_ohne_umami"], 1)
+        self.assertEqual(m["werte"]["cta_ohne_klickmarke"], 1)
 
     def test_fehlende_variantenmarke_wird_erkannt(self):
         """Sonst vermisst man die Basis und hält sie für die Variante."""

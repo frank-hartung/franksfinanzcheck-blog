@@ -5,7 +5,7 @@
   "generator_version": 1,
   "sources": {
     "data/design/handoff.yaml": "2c6b86864fdbf40aaae7994547294727dc444ff0122710ff6afc1afcceb79daa",
-    "data/design/regelwerk.yaml": "dd8220f62cce4a610bceddd10d193125d427456c6f8b9a89c08ee32d84fe8359",
+    "data/design/regelwerk.yaml": "05ef6296a04acb8d7e986082a784b625c5ad5bc68eb726005b6545f2a7e741ce",
     "DESIGN.md": "082144ed9ad2ee96a82b00ef4b6f71bafbd301d3f20c268987cb62a1def1c6bc",
     "PRODUCT.md": "3073948f7c99aa67e0126a1870c7d329738d2353b7b7bcd948e3a433f5ec6010",
     "scripts/design_handoff.py": "1d810d17db7d0855432bbb8479e9ed914ac5c2d8330657a91577b2b1073d444f"

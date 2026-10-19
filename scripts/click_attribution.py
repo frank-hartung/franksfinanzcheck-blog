@@ -8,20 +8,21 @@ Investitionsschritt laut eigener Audit-Roadmap genau das: Content nach
 **Umsatz-Hebel** priorisieren statt nach Bauchgefühl / nur Traffic.
 
 DSGVO-GRUNDLAGE:
-  - Umami ist cookielos (kein Consent-Zwang), setzt `data-do-not-track=true`
-    und respektiert DNT. Das Event `affiliate_click` wird am **Artikel-Link**
-    gefeuert (vor der Navigation), trägt Ziel-/go/-Key + Quelle-Artikel + Pillar
-    (seit 01.09.2026, siehe layouts/_default/_markup/render-link.html).
+  - Gezählt wird cookielos am /go/-Gateway (eigener Zähler: nur Tagessummen je
+    Gateway-Schlüssel und Artikel, keine IP, keine Kennung – siehe
+    docs/ANLEITUNG-KLICKMESSUNG-OHNE-COOKIES.md). Der Artikel-Link trägt dafür
+    Ziel-/go/-Key + Quell-Artikel + Pillar (`data-klick-*`, seit 01.09.2026,
+    siehe layouts/_default/_markup/render-link.html).
   - Dieses Skript liest NUR aggregierte Indikatoren (Counts je
     Artikel/Stelle/Pillar) – keine IPs, keine Profile. Es enthält einen
     Identifikator-Schutz, der URL-/Artikelfelder kürzt/escaped.
 
 DATENQUELLEN (jede wählbar):
-  1. `--umami-file <json|csv>`  – Export der Umami-`affiliate_click`-Events.
+  1. `--klick-datei <json|csv>`  – Export von `affiliate_click`-Zeilen.
      Erwartet Felder: event, slug (oder /go/<key>), article (optional),
      pillar (optional), count oder x/Zeilen.
-  2. `data/umami_clicks.json`    – Standardpfad (wird von einem manuellen
-     Umami-Export oder einem Fetch-Job dorthin gelegt).
+  2. `data/klicks_eigen.json`    – Standardpfad (schreibt
+     `scripts/klick_import.py` aus dem eigenen Klickzähler).
   3. `data/click_stats.yaml`     – kuratierte Zusammenfassung (manuell).
 
 AUSGABE:
@@ -44,7 +45,7 @@ from pathlib import Path
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPORT = os.path.join(BLOG_DIR, "CLICK-REPORT.md")
 STATS = os.path.join(BLOG_DIR, "data", "click_stats.json")
-DEFAULT_UMA = os.path.join(BLOG_DIR, "data", "umami_clicks.json")
+DEFAULT_KLICKS = os.path.join(BLOG_DIR, "data", "klicks_eigen.json")
 TODAY = datetime.date.today()
 
 # Sensitive Feldlängen/Kürzung (Datenschutz: keine langen URLs/Slugs
@@ -70,8 +71,8 @@ def _norm_go_key(raw):
     return _safe(s)
 
 
-def _read_umami(path):
-    """Liest Umami-Export (JSON-Array von Events ODER CSV)."""
+def _read_klicks(path):
+    """Liest Klick-Zeilen (JSON-Array von Events ODER CSV)."""
     path = Path(path)
     if not path.exists():
         return []
@@ -198,7 +199,7 @@ def _render(per_article, per_pillar, per_go, source):
               "2. **Niedrige = Nachfrage-Lücke:** Themen mit wenig Klicks, aber viel",
               "   Traffic → Anzeige-Problem statt Content-Problem (CTA platzieren).",
               "3. **Datenpflege:** `data/click_stats.json` speist die Scorecard;",
-              "   Quelle ist der eigene Klickzähler (`scripts/klick_import.py`) oder ein manueller Export; Umami ist abgeschaltet.",
+              "   Quelle ist der eigene Klickzähler (`scripts/klick_import.py`) oder ein manueller Export.",
               "",
               f"_Erzeugt von `scripts/click_attribution.py` am {TODAY.isoformat()}._",
     ]
@@ -229,6 +230,27 @@ def _selftest():
     # Datenschutz: _safe kürzt
     if len(_safe("x" * 200)) > MAX_FIELD:
         failures.append("_safe kürzt nicht")
+    # Einlesen: JSON (nur affiliate_click zählt), CSV, fehlende/kaputte Datei → leer
+    with tempfile.TemporaryDirectory() as td:
+        pj = os.path.join(td, "k.json")
+        with open(pj, "w", encoding="utf-8") as fh:
+            json.dump([{"event": "affiliate_click", "slug": "gas", "article": "posts/x/index.md", "count": 4},
+                       {"event": "cta_click", "slug": "home", "count": 9}], fh)
+        r = _read_klicks(pj)
+        if len(r) != 1 or r[0]["count"] != 4:
+            failures.append(f"JSON-Einlesen (cta_click darf nicht zählen): {r}")
+        pc = os.path.join(td, "k.csv")
+        with open(pc, "w", encoding="utf-8") as fh:
+            fh.write("event,slug,article,count\naffiliate_click,strom,posts/y/index.md,2\n")
+        if len(_read_klicks(pc)) != 1:
+            failures.append("CSV-Einlesen")
+        if _read_klicks(os.path.join(td, "fehlt.json")) != []:
+            failures.append("fehlende Datei muss leer sein, nie crashen")
+        pk = os.path.join(td, "kaputt.json")
+        with open(pk, "w", encoding="utf-8") as fh:
+            fh.write("{nicht json")
+        if _read_klicks(pk) != []:
+            failures.append("kaputtes JSON muss leer sein, nie crashen")
     if failures:
         print("❌ CLICK-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
@@ -241,20 +263,15 @@ def _selftest():
 def main():
     if "--selftest" in sys.argv:
         return _selftest()
-    # Quelle wählen
-    source = "data/umami_clicks.json"
-    path = DEFAULT_UMA
-    # Eigener Klickzähler (Cloudflare Worker + D1, scripts/klick_import.py) hat Vorrang,
-    # sobald er Daten geliefert hat. Umami ist seit der Free-Plan-Umstellung abgeschaltet.
-    eigen = os.path.join(BLOG_DIR, "data", "klicks_eigen.json")
-    if os.path.exists(eigen) and os.path.getsize(eigen) > 2:
-        path = eigen
-        source = "data/klicks_eigen.json"
+    # Quelle wählen: der eigene Klickzähler (Cloudflare Worker + D1,
+    # scripts/klick_import.py) ist der Standard; `--klick-datei` überschreibt ihn.
+    source = "data/klicks_eigen.json"
+    path = DEFAULT_KLICKS
     for i, arg in enumerate(sys.argv):
-        if arg == "--umami-file" and i + 1 < len(sys.argv):
+        if arg == "--klick-datei" and i + 1 < len(sys.argv):
             path = sys.argv[i + 1]
             source = path
-    rows = _read_umami(path)
+    rows = _read_klicks(path)
     if not rows:
         # Fallback: kuratierte click_stats.yaml (manuell)
         import yaml as _yaml
@@ -274,11 +291,12 @@ def main():
                 print(f"⚠ click_stats.yaml nicht lesbar: {exc}")
     if not rows:
         print("ℹ️ Keine Klick-Daten gefunden. Erwarte Daten in "
-              "data/umami_clicks.json (oder --umami-file).")
+              "data/klicks_eigen.json (eigener Klickzähler, scripts/klick_import.py) "
+              "oder per --klick-datei.")
         Path(REPORT).write_text(
             f"# 🖱️ Affiliate-Klick-Attribution\n\n**Stand:** {TODAY.isoformat()}\n\n"
-            "_Noch keine Daten – Umami-Export (events=affiliate_click) einmalig "
-            "nach `data/umami_clicks.json` legen._\n", encoding="utf-8")
+            "_Noch keine Klick-Daten – der eigene Klickzähler ist nicht in Betrieb "
+            "(`data/klickmessung.yaml`) oder hat noch nichts geliefert._\n", encoding="utf-8")
         return 0
     per_article, per_pillar, per_go = _aggregate(rows)
     report = _render(per_article, per_pillar, per_go, source)

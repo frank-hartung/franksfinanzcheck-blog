@@ -43,10 +43,9 @@ test.describe('Werkzeuge', () => {
   test('rechnet im Browser, ohne die Seite zu verlassen und ohne einen Netzaufruf', async ({ page }) => {
     // Jede aktive Anfrage mitschreiben – inklusive Rumpf, denn die eigentliche
     // Zusage lautet: Die eingetippten Zahlen verlassen das Gerät nicht.
-    // Die seitenweite Reichweitenmessung (EXTERNAL_NOISE, z. B. umami) gehört
-    // nicht zum Rechner; sie läuft auf jeder Seite und hat ihre eigene
-    // Einwilligung. Sie wird hier getrennt, aber nicht ignoriert: Auch sie
-    // darf keine Eingabe tragen.
+    // Fremde Hintergrundanfragen (EXTERNAL_NOISE) gehören nicht zum Rechner.
+    // Sie werden hier getrennt, aber nicht ignoriert: Auch sie dürfen keine
+    // Eingabe tragen.
     const anfragen = [];
     page.on('request', (request) => {
       if (!['xhr', 'fetch', 'websocket'].includes(request.resourceType())) return;

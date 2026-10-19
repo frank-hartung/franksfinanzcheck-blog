@@ -6,28 +6,13 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
- e-verlaengerung:nutzen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261019T105436Z
-DTSTART:20261019T160000Z
-DTEND:20261019T161500Z
-SUMMARY:Telegram (Kanal): Handyvertrag kündigen: Enddatum\, Nachweis u
- nd Rufnummer (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-k
- uendigen-raus-aus-der-kostenfalle-verlaengerung/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
- en-raus-aus-der-kostenfalle-verlaengerung/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutze
  n:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261019T105436Z
+DTSTAMP:20261019T173413Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): 7 Gewohnheiten für finanzielle Freiheit: Gel
- d bewusst ordnen (nutzen)
+SUMMARY:Telegram (Kanal): 7 Gewohnheiten für finanzielle Freiheit: Wel
+ che Routinen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  Artikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten
  -fuer-finanzielle-freiheit/
@@ -38,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
  erlust:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261019T105436Z
+DTSTAMP:20261019T173413Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Campingurlaub planen: Budget für Platz\, Fah

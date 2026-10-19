@@ -82,8 +82,9 @@ varianten:
       Primärhandlung ist und die beiden Themen-Einstiege als ruhigere
       Sekundärwege danebenstehen, steigt die Klickrate auf
       cta_click/home-ratgeber, ohne dass die Themen-CTAs einbrechen.
-      Messbar an Umami (cta_click je slug) über 14 Tage; Abbruch, wenn
-      die Summe aller drei CTAs sinkt.
+      Messbar an den Klick-Ereignissen (cta_click je slug, damals über das
+      inzwischen abgeschaltete Reichweiten-Tracking) über 14 Tage; Abbruch,
+      wenn die Summe aller drei CTAs sinkt.
     oberflaeche:
       - "/"
     herkunft: "KI-Entwurf (Relume-Muster „Hero mit Primär-/Sekundärhandlung“), von Hand auf die Marken-Tokens zurückgeschnitten"
@@ -102,7 +103,8 @@ varianten:
       Schritt 6): `aktiv: "v-hero-conversion"` hier, dazu
       `designVariante = "v-hero-conversion"` in hugo.toml. Beide
       Stellen müssen übereinstimmen – die Produktionswache prüft das.
-      BEOBACHTUNGSFENSTER bis 10.10.2026: cta_click je slug in Umami.
+      BEOBACHTUNGSFENSTER bis 10.10.2026: cta_click je slug (Reichweiten-
+      Tracking, seit 11.10.2026 abgeschaltet).
       Rückbau, wenn die Summe aller drei Hero-CTAs sinkt.
     freigabe:
       mensch: false
@@ -136,7 +138,7 @@ varianten:
       Desktop-Grid als ruhiges Fakten-Panel mit Trennlinien, der
       Primär-CTA bestätigt den Druck sauber. Erwartung: Die Klickrate
       auf cta_click/home-ratgeber bleibt stabil oder steigt, die
-      Summe aller drei Hero-CTAs sinkt nicht (Umami, 14 Tage nach
+      Summe aller drei Hero-CTAs sinkt nicht (Klick-Ereignisse, 14 Tage nach
       einer Scharfschaltung; Abbruch und Rückbau bei sinkender
       Gesamt-Rate). Technisch bleiben alle Regelwerks-Budgets grün
       (Kontrast hell+dunkel ≥ 4,5, Tap ≥ 24 px, CLS ≤ 0,1,
@@ -161,7 +163,8 @@ varianten:
       Scharf geschaltet am 27.09.2026 (Runbook Schritt 5+6) als
       Nachfolgerin von v-hero-conversion (seitdem auf `gemessen`;
       deren Hierarchie ist hier vollständig geerbt). Beobachtungs-
-      fenster bis 11.10.2026: cta_click je slug in Umami; Abbruch
+      fenster bis 11.10.2026: cta_click je slug (Reichweiten-Tracking, seit
+      11.10.2026 abgeschaltet); Abbruch
       und Rückbau, wenn die Summe aller drei Hero-CTAs sinkt.
       Am 03.10.2026 wurde die tragfähige Hierarchie in die kanonische
       Markenebene überführt und um das Kostenprofil ergänzt. Die Variante

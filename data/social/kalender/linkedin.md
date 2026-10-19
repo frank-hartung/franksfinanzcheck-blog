@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 19.10.2026 12:54 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.10.2026 19:34 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -13,13 +13,13 @@
 ## Kommende Beiträge
 
 ### Di, 20. Oktober 2026
-- **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen — _nutzen_ · Launch  
+- **07:45** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Welche Routinen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
 ### Mi, 21. Oktober 2026
 - **07:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### Do, 22. Oktober 2026
-- **07:45** ⏳ DSL-Anbieter wechseln: Gesamtpreis, Router und Schalttermin — _nutzen_ · Launch  
+- **07:45** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 ### Fr, 23. Oktober 2026
 - **07:45** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
@@ -37,11 +37,11 @@
 - **07:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
 ### Fr, 30. Oktober 2026
-- **07:45** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
-### Mo, 02. November 2026
 - **07:45** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
+### Mo, 02. November 2026
+- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
 

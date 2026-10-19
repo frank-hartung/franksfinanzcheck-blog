@@ -25,7 +25,7 @@ fasst sie zu sechs Bereichen zusammen:
 | Bereich | Liest aus | Worum geht's |
 |---|---|---|
 | **Content-Pipeline** | `data/governance_status.json` (Lesbarkeit/Decay/Scorecard/Automation), `data/reserve-readiness.json` | Ist der Artikel-Vorrat gesund, Texte lesbar, Automation fehlerfrei? |
-| **SEO & Technik** | `data/governance_status.json` (CWV/Build/Live-Policy/Umami) | Lädt die Seite schnell, baut sie fehlerfrei, ist die Live-Policy sauber? |
+| **SEO & Technik** | `data/governance_status.json` (CWV/Build/Live-Policy) | Lädt die Seite schnell, baut sie fehlerfrei, ist die Live-Policy sauber? |
 | **Affiliate & Umsatz** | `data/governance_status.json` (Click-Chain/Revenue-Funnel/Clicks/Pinperf) | Ist die Klick-Kette lückenlos messbar, ist die Umsatz-Pipeline intakt? |
 | **Secrets & Zugänge** | `data/governance_status.json` (Secrets), `data/secrets_state.json` | Welche API-Zugänge sind live geprüft, welche abgelehnt/tot? |
 | **Social-Automation** | `data/social/state.yaml`, `data/social/channels.yaml`, `data/secrets_state.json` | Wie viele der 10 Kanäle sind live vs. Standby vs. tot, wann der letzte erfolgreiche Post? |
@@ -41,7 +41,7 @@ fasst sie zu sechs Bereichen zusammen:
   das ist **kein Fehler**, siehe `docs/RUNBUCH-SOCIAL-SECRETS.md`).
 
 Das **Gesamtbild** oben in `COCKPIT.md` ist die schlechteste Einzelampel
-(Grau zählt dabei nicht als „schlecht“ – ein Blog ohne Umami-Daten ist nicht
+(Grau zählt dabei nicht als „schlecht“ – ein Blog ohne Klick-Daten ist nicht
 kaputt, er hat nur noch keine Daten).
 
 **Workflow:** `.github/workflows/cockpit.yml` – täglich 20:10 UTC (nachdem die
@@ -72,7 +72,7 @@ wichtigsten Tages-Erzeuger schon gelaufen sind), zusätzlich manuell startbar
 Das Cockpit zeigt den Blog so, wie er wirklich dasteht – auch unbequem:
 
 - 🔴 **Content-Pipeline:** 3 Artikel unter der Lesbarkeits-Schwelle (Flesch).
-- 🟢 **SEO & Technik:** Kernwerte in Ordnung, Umami-Daten noch nicht importiert.
+- 🟢 **SEO & Technik:** Kernwerte (CWV/Build/Live-Policy) in Ordnung.
 - 🟡 **Affiliate & Umsatz:** Klick-Kette an zwei Zielseiten (`/go/strom/`,
   `/go/dsl/`) ohne vollständiges Tracking-Attribut.
 - 🔴 **Secrets & Zugänge:** Pinterest-Token abgelehnt, Re-Auth nötig

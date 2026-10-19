@@ -123,7 +123,28 @@ Ordnung".
 
 ---
 
-## 4. Optionaler Ausbauschritt (empfohlen, 1 Sitzung)
+## 4. A4 — Schlüsselrollen und Freigabe-Environments (F-07/F-08)
+
+**Schlüsselrollen:** `EXPORT_KEY` ist der Leseschlüssel; der optionale,
+verschiedene `EXPORT_KEY_WRITE` berechtigt token-tragende Massenexporte.
+Der Versand verwendet dafür `NEWSLETTER_WORKER_WRITE_KEY`. Ein Leseschlüssel
+allein belegt keine Rollentrennung. Einrichtung und Prüfung stehen in
+[`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4](../docs/SICHERHEIT-BETRIEB-RUNBOOK.md#a4--schlüsselrollen-trennen-und-jobs-in-environments-einsperren-findings-f-07-f-08-p-1-p-4).
+
+**Environments:** Produktive Worker-Deploys gehören nach
+`cloudflare-produktion`, mit Freigabe durch den Inhaber und Beschränkung auf
+`main`. Eigener Deploy-Zugang: `CF_WORKERS_DEPLOY_TOKEN`; der Workers-AI-Zugang
+`CLOUDFLARE_API_TOKEN` ist ausdrücklich kein Ersatz. Ohne Ressourcen-ID oder
+Zugang ist ein grüner Plan mit übersprungenem Deploy **kein** erfolgreicher
+Deploy. Siehe Runbook A4 und D2 sowie `.github/workflows/worker-deploy.yml`.
+
+Die Betriebs-Wache prüft die Vollständigkeit dieser Vorlage **auch offline**.
+Damit fällt eine verlorene Einrichtungsanleitung schon im Quellseiten-Lauf
+auf, statt erst täglich als vermeintlicher Worker-Defekt (#809).
+
+---
+
+## 5. Optionaler Ausbauschritt (empfohlen, 1 Sitzung)
 
 `script-src 'unsafe-inline'` durch Hashes ersetzen (Hugo berechnet sie mit
 `resources.FromString` + `sha256`), danach:
@@ -138,7 +159,7 @@ erzeugten Beitrag zurückkommt.
 
 ---
 
-## 5. Proxy-Entscheidung (Finding F-01)
+## 6. Proxy-Entscheidung (Finding F-01)
 
 | | **A: Cloudflare-Proxy an** (orange Wolke) | **B: Ohne Proxy bleiben** |
 |---|---|---|

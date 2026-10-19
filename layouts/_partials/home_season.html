@@ -33,9 +33,10 @@
          · kein JS, keine Reveal-Animation → ab Paint 1 sichtbar
          · Übergänge nur auf transform/Farbe, reduced-motion → aus
 
-       Messung: jeder Link trägt cta_click mit eigener Saison-Property,
-       damit der Revenue-Import (scripts/revenue_funnel.py aggregiert per
-       Slug) Saison-Klicks von den dauerhaften Hero-CTAs trennen kann.
+       Messung: jeder Link trägt `data-klick="cta_click"` mit eigener
+       Saison-Property (Messvertrag der Auszeichnung), damit eine Klick-
+       Auswertung Saison-Klicks von den dauerhaften Hero-CTAs trennen kann –
+       derzeit wertet kein Zähler interne CTAs aus.
        ============================================================ */ -}}
 {{- $modus := .modus | default "block" -}}
 {{- $leicht := ne $modus "block" -}}

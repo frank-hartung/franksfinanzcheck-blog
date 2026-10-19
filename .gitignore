@@ -140,14 +140,10 @@ playwright-report/
 data/integrity_lock.json.tmp
 
 # Provisionsdaten (08.10.2026): echte Monatssummen je Partner bleiben lokal –
-# das Repo ist öffentlich. Versioniert ist nur die Vorlage (nur Kopfzeile).
+# das Repo ist öffentlich. Versioniert ist nur die Vorlage (nur Kopfzeile) und
+# das daraus gezogene Aggregat (data/provisionen_aggregat.json: nur Monats-
+# summen je Partner, keine Abrechnungs-Details, keine Personenbezüge).
 data/provisionen/provisionen.csv
-
-# Manuelle Messstände (10.10.2026, docs/UMSATZ-MESSUNG-PREMIUM.md „Weg 3“):
-# Der Export aus dem Umami-Dashboard ist Roheingang – er bleibt lokal. Das
-# daraus gezogene Aggregat (data/provisionen_aggregat.json) ist versioniert:
-# nur Monatssummen je Partner, keine Abrechnungs-Details, keine Personenbezüge.
-data/offline/
 
 # KI-Alt-Texte (08.10.2026): die Vorschlagsdatei wird atomar über eine .tmp-Datei
 # geschrieben. Bleibt sie nach einem Abbruch liegen, darf sie nie in einen Commit.
@@ -173,3 +169,10 @@ data/alt_texte/*.tmp
 !/AFFILIATE-INTENT-REPORT.md
 !/PINTEREST-REPORT.md
 !/PRODUKTIONS-STATUS.md
+
+# Sicherheits-Wache: bereinigte Live-Messungen bleiben Lauf-Artefakte (#809).
+/f01-live.md
+/f01-live.json
+/worker-live.md
+/worker-live.json
+/sicherheits-jobs.json

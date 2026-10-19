@@ -35,7 +35,7 @@ AMPEL-LOGIK (pro Bereich, Details in den jeweiligen bucket_*-Funktionen):
   🟢 grün  – im Rahmen der Erwartung
   ⚪ grau  – (noch) keine Daten / bewusster Standby (z. B. Kanal ohne Token)
   Die Gesamtampel ist die schlechteste Einzelampel (grau zählt nicht als
-  schlecht – ein Blog ohne Umami-Daten ist nicht „kaputt").
+  schlecht – ein Blog ohne Klick-Daten ist nicht „kaputt").
 
 AUSGABE:
   COCKPIT.md               – die eine Seite zum täglichen Lesen
@@ -253,7 +253,7 @@ def bucket_content(governance: dict, reserve: dict):
 
 def bucket_seo(governance: dict):
     steps = governance.get("steps", {}) or {}
-    keys = ["cwv", "build", "live-policy", "umami", "umami-views"]
+    keys = ["cwv", "build", "live-policy"]
     present = [steps[k] for k in keys if k in steps]
     lvl = worst(_level_from_governance(s.get("level")) for s in present)
     bad_keys = [
@@ -261,12 +261,9 @@ def bucket_seo(governance: dict):
         if k in steps and str(steps[k].get("level", "")).lower() in ("red", "amber", "orange", "yellow")
     ]
     details = [f"{k}: {_short(steps[k].get('message', ''))}" for k in bad_keys]
-    info_only = [k for k in ("umami", "umami-views") if k in steps and str(steps[k].get("level")).lower() == "info"]
 
     if bad_keys:
         headline = f"{len(bad_keys)} Prüfpunkt(e) auffällig ({', '.join(bad_keys)})"
-    elif info_only:
-        headline = "Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby)"
     else:
         headline = "in Ordnung"
     return lvl, [headline] + details, ["data/governance_status.json"]
@@ -580,12 +577,17 @@ def selftest() -> bool:
         "cwv": {"level": "green", "message": "in Ordnung"},
         "build": {"level": "green", "message": "in Ordnung"},
         "live-policy": {"level": "green", "message": "in Ordnung"},
-        "umami": {"level": "info", "message": "Datenlage offen"},
-        "umami-views": {"level": "info", "message": "Datenlage offen"},
     }}
     lvl3, bl3, _ = bucket_seo(gov_seo_ok)
-    check("bucket_seo: nur info-Umami bei sonst grün bleibt grün (Standby != Fehler)",
-          lvl3 == "gruen")
+    check("bucket_seo: grüne Kernwerte (CWV/Build/Live-Policy) bleiben grün",
+          lvl3 == "gruen" and bl3[0] == "in Ordnung")
+    gov_seo_gelb = {"steps": {
+        "cwv": {"level": "amber", "message": "Bild optimierbar"},
+        "build": {"level": "green", "message": "in Ordnung"},
+    }}
+    lvl3b, bl3b, _ = bucket_seo(gov_seo_gelb)
+    check("bucket_seo: ein gelber Kernwert zieht den Bereich auf gelb und wird genannt",
+          lvl3b == "gelb" and "cwv" in bl3b[0])
 
     # -- bucket_zugaenge ---------------------------------------------------
     zugang_mixed = {"entries": {

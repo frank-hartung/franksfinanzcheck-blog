@@ -24,9 +24,10 @@
 #   Alt-URLs ohne passendes Ziel stehen in data/url_entfallen.yaml (bewusst 404, Regel D) und
 #   tag-Archive (Regel E). Tag-Archive bleiben nach der Entscheidung "Index-Hygiene" (29.09.2026) 404.
 #
-# Umfang: 117 Alt-URLs waren veröffentlicht (draft: false) und fehlen heute. 114 davon haben hier ein Ziel,
-# 3 stehen bewusst 404 in data/url_entfallen.yaml (Regel D).
-# Quelle der Liste: Git-Historie (git log --all -M -- content/posts). Stand 19.10.2026.
+# Umfang: 118 ehemals veröffentlichte Post-URLs fehlen aktuell im Build. 115 haben hier ein passendes Ziel,
+# 3 bleiben bewusst 404 in data/url_entfallen.yaml (Regel D).
+# Quelle der Liste: Git-Historie (git log --all -M -- content/posts), ergänzt um die geprüften
+# Alt-URLs aus data/url_snapshot.json. Stand 19.10.2026.
 
 stand: "2026-10-19"
 eintraege:
@@ -96,6 +97,7 @@ eintraege:
   - {von: "/posts/dsl-internet-flat-guenstig-sichern/", nach: "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/", regel: "B", grund: "Günstiges Internet, DSL-Vergleich"}
   - {von: "/posts/e-auto-laden-stromkosten-senken/", nach: "/pillar/strom-sparen/", regel: "C", grund: "E-Auto laden: Thema im Pillar"}
   - {von: "/posts/elementarschadenversicherung-hochwasser-starkregen/", nach: "/pillar/versicherungen/", regel: "C", grund: "Elementarschaden: kein Live-Beitrag (Zielbeitrag 2026-08-18 ist Entwurf); GSC: 1 Impression, Position 80"}
+  - {von: "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/", nach: "/pillar/versicherungen/", regel: "C", grund: "Redaktions-Standard (RS1–RS3) hat den ehemals live Beitrag geparkt; kein gleichwertiger Live-Beitrag, Versicherungs-Pillar als fachlicher Fallback (19.10.2026)"}
   - {von: "/posts/festgeld-oder-tagesgeld-2026/", nach: "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/", regel: "B", grund: "Tagesgeld und Festgeld"}
   - {von: "/posts/flug-buchen-9-tricks-guenstige-tickets/", nach: "/pillar/mietwagen/", regel: "C", grund: "Flugtickets: Thema im Pillar"}
   - {von: "/posts/frugalismus-tricks-alltag-200-euro-sparen/", nach: "/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/", regel: "B", grund: "Frugalismus-Alltagstricks"}

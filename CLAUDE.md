@@ -831,6 +831,50 @@ tote Wache, die aussah, als wäre sie da.
   Die #766-Dauerheilung (`FAUSTREGEL_POOL`, Wähler, Bestandsmessung, keine
   zweite RS3-Implementierung) bleibt unangetastet.
 
+## Keine Fremdmessung (DAUERVORGABE, seit #806, 19.10.2026)
+
+Umami wurde am 11.10.2026 aus dem Frontend genommen. Die **Anbindung** lebte
+weiter – Import-Skripte, Workflow-Schritte, ein Secret samt Live-Probe,
+Datenstände, ein Trichter, der „Klicks und Besuche werden im Umami-Dashboard
+erfasst“ behauptete (falsch), und zwei Info-Zeilen im Governance-Issue. Nichts
+davon hat etwas gemessen; alles hat eine Messung vorgetäuscht. Am 19.10.2026
+ist das restlos entfernt (Governance-Report #806).
+
+- **Es gibt keine Besucher-Messung.** Weder im Frontend noch in einer Pipeline.
+  Der Umsatz-Funnel beginnt deshalb beim Klick (eigener, cookieloser Zähler,
+  derzeit aus: `data/klickmessung.yaml`) und der Provisions-Tabelle;
+  Besuchs-Kennzahlen (Outbound-CTR, Provision je 100 Besuche) gibt es nicht –
+  eine Kennzahl ohne Quelle wäre für immer „unbekannt“. Ein bewusst
+  ausgeschalteter Weg ist INFO (grün), eine Quelle, die laufen soll und nicht
+  liefert, ist `funnel_gap` (AMBER).
+- **Nichts davon wieder einbauen – nicht „vorsorglich“, nicht als
+  Auskommentiertes, nicht als Konfig-Schalter.** Eine neue Messung ist eine
+  Entscheidung des Inhabers mit Datenschutz-Prüfung (Bericht vom 10.10.2026),
+  Quelle, Meta-Datei und Test – nie ein Nebeneffekt.
+- **Die Wache dafür:** `scripts/fremdmessung_sperre.py` liest den Quelltext
+  (und mit `--public public/` den gebauten Baum), ohne etwas auszuführen, und
+  meldet F1 Dateiname, F2 Anbindungs-Merkmal (Skript-Host, `data-…-event`,
+  `data-website-id`, Secret, Konfig-Schlüssel), F3 Erwähnung in lebenden
+  technischen Dateien, F4 Spur im gebauten Baum, F5 unbegründete oder
+  **veraltete** Ausnahme. Das Wort als Geschmacksrichtung in `content/` und
+  `data/` ist erlaubt; die Anbindungs-Merkmale nie. Historie (datierte Berichte,
+  `docs/archiv/`, Ledger `data/**/*.jsonl`) wird nicht umgeschrieben.
+  Bedienung: `npm run test:fremdmessung` · Runbook:
+  `docs/ANLEITUNG-FREMDMESSUNG-SPERRE.md`.
+- **Vertrag statt Vertrauen.** Die Wache steht im vertraglichen Minimum
+  (`GUARDS`, C6); der Live-Lauf hängt als **C40** im Governance-Vertrag und
+  läuft mit dem Qualitäts-Gate (`governance_contract.py --quick`) auf jeden Push
+  und jede PR – ohne Workflow-Änderung. Regression:
+  `scripts/tests/test_fremdmessung_sperre.py` (in der PR-Regression nach dem
+  echten Hugo-Bau, inklusive `public/`).
+- **Ausnahmen sind sichtbar und altern** (`ERLAUBT` in der Wache, jede mit
+  Grund). Eine Ausnahme, die keinen Fund mehr deckt, wird selbst zum Befund.
+  Zwei sind offen: Kommentar-Altlasten in den KRITISCH gesiegelten Dateien
+  `layouts/_default/_markup/render-link.html` und `scripts/check24_links.yaml`
+  – sie zu bereinigen verlangt die menschliche Neu-Signatur (`integrity_guard.py
+  --set-current`), die kein Agent ersetzt. Beim nächsten Siegel-Termin
+  bereinigen und die Einträge löschen.
+
 ## Die Messlatte der Reserve gehört nicht dem Gemessenen (seit 26.09.2026, #393)
 
 Zielbestand und Alarmschwelle der Content-Reserve haben **einen** Besitzer:

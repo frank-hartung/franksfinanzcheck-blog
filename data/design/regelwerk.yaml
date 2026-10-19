@@ -223,7 +223,7 @@ performance:
 conversion:
   erhalten:
     cta_anzahl_min_anteil_basis: 1.0        # kein CTA darf verschwinden
-    umami_events_vollstaendig: true         # data-umami-event bleibt an JEDEM CTA
+    klickmarken_vollstaendig: true          # data-klick bleibt an JEDEM CTA
     affiliate_rel_attribute_intakt: true    # rel="sponsored nofollow noopener"
     newsletter_einstieg_vorhanden: true
     pflicht_bausteine:
@@ -236,7 +236,7 @@ conversion:
   begruendung: >
     „Conversion-Ziel“ heißt hier nicht „mehr Klicks um jeden Preis“,
     sondern: Der Weg zum Ratgeber ist auf dem Telefon ohne Scrollen
-    sichtbar, messbar (Umami) und rechtlich sauber (rel-Attribute).
+    sichtbar, messbar (data-klick-Marken) und rechtlich sauber (rel-Attribute).
 
 # ------------------------------------------------------------------
 # 6) FREIGABE – der menschliche Vorbehalt. Ohne diesen Abschnitt wäre
