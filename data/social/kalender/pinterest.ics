@@ -6,11 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Pinterest
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-22@fr
+UID:pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-19@fr
  anksfinanzcheck.de
-DTSTAMP:20261018T213439Z
-DTSTART:20261022T081500Z
-DTEND:20261022T083000Z
+DTSTAMP:20261019T105436Z
+DTSTART:20261019T191500Z
+DTEND:20261019T193000Z
 SUMMARY:Pinterest: DSL-Wechselbonus sichern: So sparst du beim Interne
  tvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -21,26 +21,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
- utzen:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
+UID:pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
+ ntie-gas:nutzen:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261019T105436Z
 DTSTART:20261023T081500Z
 DTEND:20261023T083000Z
-SUMMARY:Pinterest: Geld abheben im Ausland: Wo die Gebühren wirklich e
- ntstehen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
- nd-gebuehren-vermeiden/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
- and-gebuehren-vermeiden/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
- ntie-gas:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
-DTSTART:20261025T091500Z
-DTEND:20261025T093000Z
 SUMMARY:Pinterest: Sicher heizen: So schützt dich eine Gaspreisgaranti
  e (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -51,26 +36,26 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
- nbieterwechsel:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
-DTSTART:20261027T091500Z
-DTEND:20261027T093000Z
-SUMMARY:Pinterest: Internet & DSL wechseln: So gelingt der Anbieterwec
- hsel (nutzen)
+UID:pinterest:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
+ utzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261019T105436Z
+DTSTART:20261025T091500Z
+DTEND:20261025T093000Z
+SUMMARY:Pinterest: Geld abheben im Ausland: Wo die Gebühren wirklich e
+ ntstehen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
- -praxis-tipps-fuer-den-anbieterwechsel/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
- n-praxis-tipps-fuer-den-anbieterwechsel/
+ : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
+ nd-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstig
- e-tarife-fuer-2026:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
-DTSTART:20261029T091500Z
-DTEND:20261029T093000Z
+ e-tarife-fuer-2026:nutzen:2026-10-27@franksfinanzcheck.de
+DTSTAMP:20261019T105436Z
+DTSTART:20261027T091500Z
+DTEND:20261027T093000Z
 SUMMARY:Pinterest: Preisgarantie Gas: So sicherst du günstige Tarife (
  nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -81,26 +66,26 @@ URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspl
- an:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
-DTSTART:20261030T091500Z
-DTEND:20261030T093000Z
-SUMMARY:Pinterest: Abos und Verträge: Der stille Posten im Haushaltspl
- an (nutzen)
+UID:pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
+ nbieterwechsel:nutzen:2026-10-29@franksfinanzcheck.de
+DTSTAMP:20261019T105436Z
+DTSTART:20261029T091500Z
+DTEND:20261029T093000Z
+SUMMARY:Pinterest: Internet & DSL wechseln: So gelingt der Anbieterwec
+ hsel (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-st
- iller-posten-haushaltsplan/
-URL:https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-s
- tiller-posten-haushaltsplan/
+ : https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln
+ -praxis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verm
- eiden:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
-DTSTART:20261031T091500Z
-DTEND:20261031T093000Z
+ eiden:nutzen:2026-10-30@franksfinanzcheck.de
+DTSTAMP:20261019T105436Z
+DTSTART:20261030T091500Z
+DTEND:20261030T093000Z
 SUMMARY:Pinterest: Gasrechnung senken: Fehler im Spätsommer vermeiden 
  (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
@@ -111,9 +96,24 @@ URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspl
+ an:nutzen:2026-10-31@franksfinanzcheck.de
+DTSTAMP:20261019T105436Z
+DTSTART:20261031T091500Z
+DTEND:20261031T093000Z
+SUMMARY:Pinterest: Abos und Verträge: Der stille Posten im Haushaltspl
+ an (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Pinterest\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-st
+ iller-posten-haushaltsplan/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-s
+ tiller-posten-haushaltsplan/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto
  -ohne-gebuehren:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261018T213439Z
+DTSTAMP:20261019T105436Z
 DTSTART:20261101T091500Z
 DTEND:20261101T093000Z
 SUMMARY:Pinterest: Kostenloses Girokonto: So findest du ein Konto ohne
