@@ -1,0 +1,72 @@
+{
+  "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+  "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
+  "erzeugt": "2026-10-20 09:36 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "saisonal",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 30
+  },
+  "geo": {
+    "punkte": 2,
+    "maximum": 6,
+    "prozent": 33,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Mindestens eine Tabelle (extrahierbare Struktur)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": false,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite destatis.de",
+      "url": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "datum": "",
+      "quelle": "destatis.de",
+      "kanal": "web",
+      "auszug": "Title: Verbraucherpreisindex und Inflationsrate\n\n1.   [Startseite](https://www.destatis.de/DE/Home/_inhalt.html \"Startseite\")\n2.   [Themen](https://www.destatis.de/DE/Themen/_inhalt.html)\n3.   [Wirtschaft](https://www.destatis.de/DE/Themen/_inhalt.html#themaHeadline_1425464_3)\n4.   [Preise](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/_inhalt.html)\n5.   **Verbraucherpreisindex und Inflationsrate**\n\n# Verbraucherpreisindex und Inflationsrate\n\n[**+3,3%**Inflations­rate](https://www.destatis.de/DE/Themen/Wirtschaft/Konjunkturindikatoren/Basisdaten/vpi001j.html \"Verbraucherpreisindex für Deutschland\")\n\n[**+14,9%** Verbraucherpreise Energie](https://www.destatis.de/DE/Themen/Wirtschaft/Konjunkturindikatoren/Basisdaten/vpi042j.html \"Verbraucherpreisindex für Deutschland\")\n\n[**+0,4%** Verbraucherpreise Nahrungsmittel](https://www.destatis.de/DE/Themen/Wirtschaft/Konjunkturindikatoren/Basisdaten/vpi041j.html \"Verbraucherpreisindex für Deutschland\")\n\nDer Verbraucherpreisindex misst monatlich die **durchschnittliche Preisentwicklung** aller Waren und Dienstleistungen, die private Haushalte in Deutschland für Konsumzwecke kaufen. Die Veränderung des Verbraucherpreisindex zum Vorjahresmonat bzw. zum Vorjahr wird als Teuerungsrate oder als **Inflationsrate** bezeichnet.   \n Beim Berechnen des Verbraucherpreisindex bzw. der **Inflationsrate** verwenden wir einen \"**Warenkorb**\", der rund 700 Güterarten umfasst und sämtliche von privaten Haushalten in Deutschland gekauften Waren und Dienstleistungen repräsentiert. Mit welchen Gewichten diese Güterarten in den Gesamtindex einfließen, ist im [Wägungsschema](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/Methoden/Downloads/waegungsschema-2020.html \"Verbraucherpreisindex für Deutschland / Consumer price i",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Statistisches Bundesamt",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "veraltet",
+      "text": "Der Artikel behauptet, dass die Strompreise für Neukunden stark nach unten gegangen sind, während das Statistische Bundesamt für 2026 einen Anstieg der Energieverbraucherpreise von +14,9 % ausweist.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Die angegebenen konkreten Einsparungen von 420 € jährlich beim Stromwechsel (3.500 kWh × 42 ct → 30 ct) werden nicht durch die bereitgestellte Quelle belegt.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Die genannten Kontoführungsgebühren von 9,90 € pro Monat und die daraus resultierende Jahresersparnis von über 1.300 € fehlen einer Quellenangabe; die destatis‑Seite liefert hierzu keine Daten.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass Internet‑Verträge nach 24 Monaten deutlich teurer werden, wird nicht durch die bereitgestellte Quelle unterstützt, die ausschließlich Energie‑ und Gesamtinflationsraten enthält.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [
+    "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
+  ]
+}

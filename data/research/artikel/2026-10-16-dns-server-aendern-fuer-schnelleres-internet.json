@@ -1,0 +1,78 @@
+{
+  "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
+  "titel": "DNS-Server ändern für schnelleres Internet",
+  "erzeugt": "2026-10-20 09:36 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "standard",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 90
+  },
+  "geo": {
+    "punkte": 2,
+    "maximum": 6,
+    "prozent": 33,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": false,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammer",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    },
+    {
+      "titel": "heise+ | Neue Fritzbox mit Wi-Fi 7: Sparsam, aber mit WLAN-Kompromissen",
+      "url": "https://www.heise.de/tests/Neue-Fritzbox-mit-Wi-Fi-7-Sparsam-aber-mit-WLAN-Kompromissen-11481243.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "datum": "2026-10-20T09:00",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Bei der Fritzbox DSL/Fiber 7-90 macht der Hersteller ein paar Hardware-Kompromisse. Die schaden der Performance erstaunlich wenig, senken aber den Stromdurst.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Artikel erwähnt nicht, dass DNS‑Server in Deutschland regulatorischen Vorgaben der Bundesnetzagentur unterliegen (z. B. Unternehmenspflichten), wodurch mögliche Einschränkungen oder Auflagen fehlen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass ein DNS‑Wechsel das Internet „spürbar schneller“ macht, ignoriert hardwarebedingte Engpässe; aktuelle Router‑Modelle (z. B. Fritzbox Wi‑Fi 7) zeigen, dass selbst bei optimierten DNS‑Servern die Gesamtperformance durch Router‑Hardware begrenzt sein kann.",
+      "beleg": "https://www.heise.de/tests/Neue-Fritzbox-mit-Wi-Fi-7-Sparsam-aber-mit-WLAN-Kompromissen-11481243.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Tabelle behauptet, Cloudflare sei „oft die beste Wahl für hohes Tempo“, ohne messbare Daten oder Vergleichsstudien zu liefern; die Quelle liefert keine Leistungszahlen, sodass die Aussage zu pauschal bleibt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    }
+  ],
+  "fehler": []
+}

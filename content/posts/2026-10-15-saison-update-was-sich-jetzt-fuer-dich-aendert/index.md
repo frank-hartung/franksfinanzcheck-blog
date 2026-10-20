@@ -22,6 +22,12 @@ cover:
   image: "images/covers/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite destatis.de"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+faktencheck: 2026-10-20
 ---
 
 **Stand: 15.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

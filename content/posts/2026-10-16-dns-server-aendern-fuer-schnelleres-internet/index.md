@@ -21,6 +21,17 @@ cover:
   image: "images/covers/2026-10-16-dns-server-aendern-fuer-schnelleres-internet.jpg"
   alt: "DNS-Server ändern für schnelleres Internet"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Bundesnetzagentur – Fachthemen Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+  - id: "Q2"
+    titel: "Neue Fritzbox mit Wi‑Fi 7: Sparsam, aber mit WLAN‑Kompromissen"
+    url: "https://www.heise.de/tests/Neue-Fritzbox-mit-Wi-Fi-7-Sparsam-aber-mit-WLAN-Kompromissen-11481243.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus"
+    herausgeber: "heise online"
+    datum: "2026-10-20"
+faktencheck: 2026-10-20
 ---
 
 Du hast gerade einen Film gestartet. Das Bild lädt stockend. Die Seite braucht ewig für den Aufbau. Der Ärger liegt selten am Tarif deines Anbieters. Oft ist ein kleiner Baustein im Hintergrund schuld: der DNS-Server. Wenn du diesen Server wechselst, läuft dein Netz spürbar schneller. Du musst dafür keine neue Hardware kaufen. In diesem Ratgeber zeige ich dir den Weg. Du lernst, warum der Wechsel hilft. Ich erkläre dir den sicheren Umstieg. Zudem erfährst du, welche Fehler du vermeiden solltest.

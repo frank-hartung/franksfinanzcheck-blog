@@ -1,104 +1,107 @@
 {
-  "erzeugt": "2026-10-15 09:23 UTC",
+  "erzeugt": "2026-10-20 09:37 UTC",
   "uebersicht": {
-    "gesamt": 96,
+    "gesamt": 99,
     "ratgeber": 6,
-    "faellig": 2,
-    "bearbeitet": 2,
-    "geo_schnitt": 94,
-    "befunde": 9,
+    "faellig": 3,
+    "bearbeitet": 3,
+    "geo_schnitt": 93,
+    "befunde": 7,
     "geo_luecken": {
-      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 7,
-      "Mindestens eine Tabelle (extrahierbare Struktur)": 10,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 13,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 2,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 2,
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 8,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 11,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 14,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 3,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     }
   },
   "offen": [],
   "laeufe": [
     {
-      "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer",
-      "titel": "Heizperiode vorbereiten im Spätsommer",
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
-          "typ": "luecke",
-          "text": "Die Angabe, dass das Entlüften der Heizkörper 5 % Energie einspart, wird von der Bundesnetzagentur nicht belegt; dort gibt es keine konkrete Prozentangabe zum Einsparpotenzial beim Entlüften.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die pauschale Empfehlung, das Raumthermostat auf 20 °C zu stellen, ist zu unpräzise, weil die Bundesnetzagentur betont, dass die optimale Raumtemperatur von individuellen Faktoren wie Gebäudedämmung und persönlichem Komfort abhängt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "typ": "veraltet",
+          "text": "Der Artikel behauptet, dass die Strompreise für Neukunden stark nach unten gegangen sind, während das Statistische Bundesamt für 2026 einen Anstieg der Energieverbraucherpreise von +14,9 % ausweist.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Die Aussage, dass ein Router im Standby‑Modus 5 W verbraucht, wird von der Bundesnetzagentur nicht bestätigt; in den bereitgestellten Informationen werden keine Watt‑Angaben zu einzelnen Geräten genannt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Die angegebenen konkreten Einsparungen von 420 € jährlich beim Stromwechsel (3.500 kWh × 42 ct → 30 ct) werden nicht durch die bereitgestellte Quelle belegt.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Der Hinweis, den Tarifwechsel über das Vergleichsportal CHECK24 zu erledigen, ist nicht durch die Bundesnetzagentur unterstützt; die Behörde liefert lediglich allgemeine Informationen zum Anbieterwechsel, nicht zu konkreten Vergleichsportalen.",
+          "text": "Die genannten Kontoführungsgebühren von 9,90 € pro Monat und die daraus resultierende Jahresersparnis von über 1.300 € fehlen einer Quellenangabe; die destatis‑Seite liefert hierzu keine Daten.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass Internet‑Verträge nach 24 Monaten deutlich teurer werden, wird nicht durch die bereitgestellte Quelle unterstützt, die ausschließlich Energie‑ und Gesamtinflationsraten enthält.",
           "beleg": ""
         }
       ],
-      "geo": 50,
+      "geo": 33,
       "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
-        "Verbraucherzentrale – Energie: Feed nicht lesbar"
+        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
       ],
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-15"
+        "faktencheck: 2026-10-20"
       ]
     },
     {
-      "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
-      "titel": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+      "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
+      "titel": "DNS-Server ändern für schnelleres Internet",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 2,
+      "quellen": 2,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt nicht, dass DNS‑Server in Deutschland regulatorischen Vorgaben der Bundesnetzagentur unterliegen (z. B. Unternehmenspflichten), wodurch mögliche Einschränkungen oder Auflagen fehlen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Aussage, dass ein DNS‑Wechsel das Internet „spürbar schneller“ macht, ignoriert hardwarebedingte Engpässe; aktuelle Router‑Modelle (z. B. Fritzbox Wi‑Fi 7) zeigen, dass selbst bei optimierten DNS‑Servern die Gesamtperformance durch Router‑Hardware begrenzt sein kann.",
+          "beleg": "https://www.heise.de/tests/Neue-Fritzbox-mit-Wi-Fi-7-Sparsam-aber-mit-WLAN-Kompromissen-11481243.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Tabelle behauptet, Cloudflare sei „oft die beste Wahl für hohes Tempo“, ohne messbare Daten oder Vergleichsstudien zu liefern; die Quelle liefert keine Leistungszahlen, sodass die Aussage zu pauschal bleibt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+        }
+      ],
+      "geo": 33,
+      "fehler": [],
+      "aenderungen": [
+        "quellen: 2 Belege",
+        "faktencheck: 2026-10-20"
+      ]
+    },
+    {
+      "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
+      "titel": "Urlaubskasse clever aufbessern",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Die Aussage, dass sich im Jahr 2026 die Preise für Unterkünfte und Flüge stabilisiert haben, wird von der angegebenen Quelle nicht belegt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-        },
-        {
-          "typ": "luecke",
-          "text": "Behauptungen zu Cashback‑Programmen von Banken und deren Bedeutung für das Urlaubsbudget finden in der Quelle keine Erwähnung.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-        },
-        {
-          "typ": "luecke",
-          "text": "Der Verweis auf einen externen Mietwagen‑Preisvergleich (sponsored) ist nicht durch die angegebene Quelle gestützt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Aussage, dass die Transparenz digitaler Verträge 2026 ein zentraler Faktor sei, wird von der Quelle nicht unterstützt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Modellrechnung mit einer pauschalen Cashback‑Rate von 2 % ist nicht durch konkrete Daten aus der Quelle belegt und wirkt daher unpräzise.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-        }
-      ],
+      "befunde": [],
       "geo": 50,
       "fehler": [
         "Verbraucherzentrale – Reise: Feed nicht lesbar"
       ],
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-15",
-        "faktenfrische-Hold: Re-Queue aktiviert"
+        "faktencheck: 2026-10-20"
       ]
     }
   ]

@@ -21,6 +21,12 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Urlaubskasse clever aufbessern"
 pin_description: "*Werbung | Urlaubskasse clever aufbessern – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #urlaub #sparen #reisebudget"
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite verbraucherzentrale.de"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    herausgeber: "Verbraucherzentrale"
+faktencheck: 2026-10-20
 ---
 
 Du planst den nächsten Sommerurlaub, hast das Reiseziel im Kopf und willst die Urlaubskasse aufbessern. Oft bleibt das Geld für den Mietwagen ein unbemerktes Loch im Reisebudget. Dieser Ratgeber zeigt dir, wie du den Mietwagen clever nutzt, versteckte Kosten eliminierst und so mehr Geld für Sonne, Strand und Erlebnisse behältst.  
