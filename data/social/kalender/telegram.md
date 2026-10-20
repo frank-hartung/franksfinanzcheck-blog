@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 20.10.2026 00:55 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.10.2026 12:09 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -13,11 +13,11 @@
 ## Kommende Beiträge
 
 ### So, 25. Oktober 2026
-- **07:00** ⏳ 7 Gewohnheiten für finanzielle Freiheit: Welche Routinen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/
-### So, 01. November 2026
 - **07:00** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
+### So, 01. November 2026
+- **07:00** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 
 ## Zuletzt veröffentlicht
 

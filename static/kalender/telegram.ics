@@ -6,26 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutze
- n:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+UID:telegram:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
+ erlust:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): 7 Gewohnheiten für finanzielle Freiheit: Wel
- che Routinen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten
- -fuer-finanzielle-freiheit/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
- finanzielle-freiheit/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
- erlust:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
-DTSTART:20261101T060000Z
-DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Campingurlaub planen: Budget für Platz\, Fah
  rt und Ausrüstung (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -33,6 +18,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  2026-clever-sparen-ohne-komfortverlust/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
  lever-sparen-ohne-komfortverlust/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-g
+ eld-kostet:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
+DTSTART:20261101T060000Z
+DTEND:20261101T061500Z
+SUMMARY:Telegram (Kanal): Treue-Falle beim DSL-Vertrag: Wann sich der 
+ Wechsel rechnet (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-w
+ echseln-warum-treue-dich-bares-geld-kostet/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechsel
+ n-warum-treue-dich-bares-geld-kostet/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

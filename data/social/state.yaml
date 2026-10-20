@@ -890,6 +890,25 @@ history:
     #Frugalismus #Geldsparen #HaushaltsbuchFuehren #GrosseinkaufPlanen'
   ref: '117468774583193688'
   ai: true
+- posted_at: '2026-10-20T12:09:36.876513+02:00'
+  channel: mastodon
+  slug: 2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken
+  title: 'Smart Home: So prüfst du echte Stromersparnis'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117472689432509536
+  ok: true
+  text: '💶 Smart Home: So prüfst du echte Stromersparnis
+
+
+    Ein Smart-Home-Gerät spart nicht automatisch Strom.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #StromkostenSenken #SmartHome #StromSparen #SmarteSteckdose'
+  ref: '117472689432509536'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -915,4 +934,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-20T00:55:40.604298+02:00'
+updated_at: '2026-10-20T12:09:48.851167+02:00'

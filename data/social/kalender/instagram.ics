@@ -6,24 +6,39 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:nutz
- en:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+UID:instagram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-f
+ uellen:nutzen:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
+DTSTART:20261020T094500Z
+DTEND:20261020T100000Z
+SUMMARY:Instagram: Urlaub sparen: Budget\, Buchung und Kosten im Blick
+  (nutzen)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Ins
+ tagram\nArtikel: https://franksfinanzcheck.de/posts/2026-10-07-urlaub
+ -sparen-7-clevere-wege-deine-kasse-zu-fuellen/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clev
+ ere-wege-deine-kasse-zu-fuellen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-
+ geld-kostet:nutzen:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
 DTSTART:20261023T094500Z
 DTEND:20261023T100000Z
-SUMMARY:Instagram: 7 Gewohnheiten für finanzielle Freiheit: Welche Rou
- tinen (nutzen)
+SUMMARY:Instagram: Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel
+  rechnet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-f
- inanzielle-freiheit/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
- finanzielle-freiheit/
+ : https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln
+ -warum-treue-dich-bares-geld-kostet/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechsel
+ n-warum-treue-dich-bares-geld-kostet/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfort
  verlust:nutzen:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+DTSTAMP:20261020T100949Z
 DTSTART:20261024T094500Z
 DTEND:20261024T100000Z
 SUMMARY:Instagram: Campingurlaub planen: Budget für Platz\, Fahrt und 
@@ -36,24 +51,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-
- geld-kostet:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+UID:instagram:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfal
+ le-verlaengerung:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
 DTSTART:20261025T104500Z
 DTEND:20261025T110000Z
-SUMMARY:Instagram: Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel
-  rechnet (nutzen)
+SUMMARY:Instagram: Handyvertrag kündigen: Enddatum\, Nachweis und Rufn
+ ummer (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln
- -warum-treue-dich-bares-geld-kostet/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechsel
- n-warum-treue-dich-bares-geld-kostet/
+ : https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendige
+ n-raus-aus-der-kostenfalle-verlaengerung/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
+ en-raus-aus-der-kostenfalle-verlaengerung/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wi
  rklich-druecken:nutzen:2026-10-26@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+DTSTAMP:20261020T100949Z
 DTSTART:20261026T104500Z
 DTEND:20261026T110000Z
 SUMMARY:Instagram: Smart Home: So prüfst du echte Stromersparnis (nutz
@@ -66,24 +81,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-gerae
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfal
- le-verlaengerung:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+UID:instagram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-f
+ uer-schritt:nutzen:2026-10-27@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
 DTSTART:20261027T104500Z
 DTEND:20261027T110000Z
-SUMMARY:Instagram: Handyvertrag kündigen: Enddatum\, Nachweis und Rufn
- ummer (nutzen)
+SUMMARY:Instagram: Dein Weg zu geringeren Monatskosten: Schritt für Sc
+ hritt (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendige
- n-raus-aus-der-kostenfalle-verlaengerung/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
- en-raus-aus-der-kostenfalle-verlaengerung/
+ : https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringere
+ n-monatskosten-schritt-fuer-schritt/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringer
+ en-monatskosten-schritt-fuer-schritt/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-ge
  ld-zurueck:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+DTSTAMP:20261020T100949Z
 DTSTART:20261029T104500Z
 DTEND:20261029T110000Z
 SUMMARY:Instagram: Balkonkraftwerk Förderung: So holst du dir Geld zur
@@ -96,24 +111,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foer
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-f
- uellen:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+UID:instagram:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die
+ -kontrolle:nutzen:2026-10-30@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
 DTSTART:20261030T104500Z
 DTEND:20261030T110000Z
-SUMMARY:Instagram: Urlaub sparen: Budget\, Buchung und Kosten im Blick
-  (nutzen)
+SUMMARY:Instagram: Haushaltskosten reduzieren: So gewinnst du die Kont
+ rolle (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-cleve
- re-wege-deine-kasse-zu-fuellen/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clev
- ere-wege-deine-kasse-zu-fuellen/
+ : https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduz
+ ieren-so-gewinnst-du-die-kontrolle/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-redu
+ zieren-so-gewinnst-du-die-kontrolle/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-h
  aushalt:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+DTSTAMP:20261020T100949Z
 DTSTART:20261031T104500Z
 DTEND:20261031T110000Z
 SUMMARY:Instagram: Energiekosten senken: Smarte Helfer für den Haushal
@@ -126,26 +141,11 @@ URL:https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-f
- uer-schritt:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261019T225542Z
+UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-01@fr
+ anksfinanzcheck.de
+DTSTAMP:20261020T100949Z
 DTSTART:20261101T104500Z
 DTEND:20261101T110000Z
-SUMMARY:Instagram: Dein Weg zu geringeren Monatskosten: Schritt für Sc
- hritt (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringere
- n-monatskosten-schritt-fuer-schritt/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringer
- en-monatskosten-schritt-fuer-schritt/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-03@fr
- anksfinanzcheck.de
-DTSTAMP:20261019T225542Z
-DTSTART:20261103T104500Z
-DTEND:20261103T110000Z
 SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
  tvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -153,6 +153,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
  ern/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
  hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
+ ntie-gas:nutzen:2026-11-03@franksfinanzcheck.de
+DTSTAMP:20261020T100949Z
+DTSTART:20261103T104500Z
+DTEND:20261103T110000Z
+SUMMARY:Instagram: Sicher heizen: Was sie abdeckt und wie lange sie lä
+ uft (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schu
+ etzt-dich-eine-preisgarantie-gas/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
+ uetzt-dich-eine-preisgarantie-gas/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
