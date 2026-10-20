@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-19 09:29:33 UTC",
+ "generated_at": "2026-10-20 09:03:29 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 99,
- "checked_links": 237,
+ "checked_articles": 100,
+ "checked_links": 238,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -32,7 +32,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-   "line": 181,
+   "line": 189,
    "route": "mietwagen",
    "slot": "end",
    "owner": "human",
@@ -108,14 +108,36 @@
   },
   {
    "code": "IW2",
+   "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+   "line": 78,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
    "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
-   "line": 99,
+   "line": 102,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
+   "line": 104,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

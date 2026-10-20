@@ -1,6 +1,6 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-19 09:29:31 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-20 09:03:26 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
 **Geprüfte Live-Artikel:** 62 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
@@ -14,7 +14,6 @@
 |:---|:---:|:---|
 | 2026-08-10-dsl-wechselbonus-sichern | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas | 2 → 3 ✅ | /go/gas/ |
-| 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden | 1 → 2 ✅ | /go/girokonto/ |
 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | 2 → 3 ✅ | /go/gas/ |
@@ -74,6 +73,7 @@
 | 2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck | 2 → 3 ✅ | /go/strom/ |
 | 2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt | 2 → 3 ✅ | /go/strom/ |
 | 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt | 3 → 3 ✅ | /go/strom/ |
+| 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle | 3 → 3 ✅ | /go/unfallversicherung/ |
 
 ## Hinweise (nicht blockierend)
 
