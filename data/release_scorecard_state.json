@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T09:09:08Z",
+  "generated_at": "2026-10-20T09:43:03Z",
   "modus": "kandidaten",
-  "commit": "04fd3b67f0e8dc5128e6f87bba31b6eed29b0377",
+  "commit": "77b6a6763f2e1254ee246a3d73d814bbb0b1e8ea",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -90,7 +90,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-      "sha256": "7c228aff454999e19a77b369dc1af0493b56941473a81285ecc216970611aa55",
+      "sha256": "40fd8e6515ab5c8ff3f0e98c872d5b12d194340148fcd2de098ca62f57461371",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -104,7 +104,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "4902cb30d91018a0fa526aac2ee9ebe8a934c7c2fa4b1b2a6c0d994a6e13158e",
@@ -600,7 +600,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-      "sha256": "e119d01fc86778efb746cffc628ff8203795f9f50f60db6a6364351de6502ab3",
+      "sha256": "610181d91d6851ff84ddeefe22f9c5faa5d03ef1f67ef10847702eedf96beb7a",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -614,7 +614,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
       "sha256": "5af60fcd58f90dba657e2167610712951de823ae9942aa29c75c5be38f420851",
@@ -651,7 +651,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "d7ca674131745ec8467bdbd043c0fef0e800985b3eb041d06b7337ffe7afcdba",
+      "sha256": "b32c31bca73eb57811cbbba3fcc7c6c9c661ec2e6f20b9de88b25fb99ab2164f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -665,10 +665,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
-      "sha256": "69fe7066d8fe501e5f12bbd0886d89641002f36bbd3fa43f2c6abd1ff0588f59",
+      "sha256": "e3a0a04667fac83019da0073943c1473072a9c3b14bee6512de7cc397c584ca8",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -682,7 +682,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "e9f5357b4e6267232f83369c389b07e6cb8ddef25edf8a2c41f118bbb1611726",
@@ -923,7 +923,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
-      "sha256": "6899dd4c406a4543612c11f3c7a46a836ed3986be61e64b93391a89fc0505214",
+      "sha256": "fc70b60b29e0658f002c6c5ed32184bdc943e4b817852dcd6df5d55932e7c847",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -937,7 +937,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
       "sha256": "853d951fe602864489386dd069afffd0730336bc996c94827878044c064d9c05",
