@@ -15,7 +15,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein guter Heizungs-Check beginnt vor dem ersten Dauerbetrieb: Probelauf starten, Heizkörper und Thermostate prüfen, sichtbare Lecks ausschließen und den Anlagendruck mit dem Sollwert der Anlage vergleichen. Entlüften kannst du nach Anleitung oft selbst. Wiederkehrender Druckverlust, Störungen, Gas- oder Abgasgeruch und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
-keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energie sparen Winter", "Thermostat prüfen", "Günstig durch den Winter", "Gaspreisgarantie"]
+keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energie sparen Winter", "Thermostat prüfen", "Günstig durch den Winter", "Gaspreisgarantie", "Heizungs-Check vor dem Frost"]
 pin_title: "Heizungs-Check vor dem Winter: sicher und systematisch"
 pin_description: "*Werbung | Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung sicher – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb. Mehr Spartipps auf FranksFinanzcheck! #heizungscheck #heizkostensenken #heizungvorbereiten"
 pinwand: "Energie | Heizen & Sparen"

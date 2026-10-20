@@ -6,7 +6,7 @@ draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["News"]
 pillar: "frugalismus"
-keywords: ["Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen", "Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen", "Markt Update"]
+keywords: ["Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen", "Markt Update", "Google-Regeln für Ratgeber", "Google Regeln für Ratgeber", "Google-Regeln"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"

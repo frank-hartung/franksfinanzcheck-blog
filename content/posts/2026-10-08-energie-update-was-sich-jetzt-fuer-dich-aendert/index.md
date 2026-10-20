@@ -1,13 +1,13 @@
 ---
 title: "Energiepreise 2026: Strom- und Gasvertrag prüfen"
-description: "Strom- und Gasverträge im Herbst prüfen: Preisgarantie, Abschlag und Kündigungsfristen im Überblick."
+description: "Strom- und Gasverträge im Herbst prüfen: Preisgarantie, Abschlag und Kündigungsfristen im Überblick. So sparst du jeden Monat bares Geld."
 date: 2026-10-08T11:38:36Z
 lastmod: 2026-10-13
 draft: true
-tags: ["Stromkosten senken"]
+tags: ["Gastarif wechseln"]
 categories: ["News"]
 pillar: "strom-sparen"
-keywords: ["Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest", "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest", "Energie Update"]
+keywords: ["Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest", "Energie Update", "Energiepreise 2026", "Energiepreise", "Strom-", "Gasvertrag", "Gaspreisgarantie", "Gastarif wechseln"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"

@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel", "DSL Anbieter wechseln", "DSL-Anbieter"]
+keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel", "DSL Anbieter wechseln", "DSL-Anbieter", "Treue-Falle beim DSL-Vertrag"]
 pin_title: "DSL-Anbieter wechseln: Gesamtpreis statt Lockpreis"
 pin_description: "*Werbung | DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen. Mehr Spartipps auf FranksFinanzcheck! #dslanbieterwechseln #dslwechseln #internetanbieter"
 ai_generated: true

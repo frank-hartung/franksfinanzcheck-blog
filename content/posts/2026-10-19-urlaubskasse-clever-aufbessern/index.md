@@ -6,7 +6,7 @@ draft: true
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
-keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen"]
+keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig reisen", "Urlaubskasse clever aufbessern", "Urlaubskasse", "aufbessern"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -19,6 +19,8 @@ cover:
   image: "images/covers/2026-10-19-urlaubskasse-clever-aufbessern.jpg"
   alt: "Urlaubskasse clever aufbessern"
   caption: "Tipp von FranksFinanzcheck"
+pin_title: "Urlaubskasse clever aufbessern"
+pin_description: "*Werbung | Urlaubskasse clever aufbessern – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #urlaub #sparen #reisebudget"
 ---
 
 Du planst den nächsten Sommerurlaub, hast das Reiseziel im Kopf und willst die Urlaubskasse aufbessern. Oft bleibt das Geld für den Mietwagen ein unbemerktes Loch im Reisebudget. Dieser Ratgeber zeigt dir, wie du den Mietwagen clever nutzt, versteckte Kosten eliminierst und so mehr Geld für Sonne, Strand und Erlebnisse behältst.  

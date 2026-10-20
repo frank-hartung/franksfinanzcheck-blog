@@ -5,7 +5,7 @@ date: 2026-09-29T10:48:18Z
 draft: true
 tags: ["Girokonto"]
 categories: ["News"]
-keywords: ["Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren"]
+keywords: ["Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren", "Girocard, Debitkarte oder Maestro", "Debitkarte"]
 author: "Frank Hartung"
 
 ai_generated: true

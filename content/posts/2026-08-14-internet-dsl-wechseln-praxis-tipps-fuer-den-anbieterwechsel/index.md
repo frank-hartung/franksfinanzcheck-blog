@@ -17,7 +17,7 @@ cover:
 kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwaltungsprozess, kein Technikdrama. Wer Effektivpreis, Bonus, Routerkosten und Laufzeit sauber vergleicht, spart über 24 Monate oft mehrere hundert Euro. Wichtig ist vor allem, den Wechsel möglichst über den neuen Anbieter laufen zu lassen und nicht nur auf die erste Rabattphase zu schauen."
 
 social_posted: true
-keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln"]
+keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln", "DSL-Anbieterwechsel", "DSL Anbieterwechsel"]
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
 pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"

@@ -1,12 +1,12 @@
 ---
 title: "Herbst-Check: Strom, Versicherung, Konto und Internet"
-description: "Im Herbst lohnt ein Blick auf Strom, Versicherung, Konto und Internet. So gehst du den Vertrags-Check an."
+description: "Vertrags-Check im Herbst: Strom: Im Herbst lohnt ein Blick auf Strom, Versicherung, Konto und Internet. So gehst du den Vertrags-Check an."
 date: 2026-10-15T09:28:52Z
 draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["News"]
 pillar: "frugalismus"
-keywords: ["Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen", "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen", "Saison Update"]
+keywords: ["Vertrags-Check im Herbst: Strom", "Versicherung", "Konto und Internet prüfen", "Saison Update", "Herbst-Check", "Herbst Check", "DSL-Vergleich"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"

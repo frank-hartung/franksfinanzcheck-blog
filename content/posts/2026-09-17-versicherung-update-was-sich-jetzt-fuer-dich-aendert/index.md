@@ -7,7 +7,7 @@ draft: true
 tags: ["Versicherungen vergleichen", "Kfz-Versicherung"]
 categories: ["News"]
 pillar: "versicherungen"
-keywords: ["Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen", "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung"]
+keywords: ["Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung", "Versicherungsbeiträge steigen", "Versicherungsbeiträge", "Sonderkündigung"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
