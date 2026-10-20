@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T09:59:44Z",
-  "modus": "live",
-  "commit": "eb3b3784a74a0f2dcebf2d106a12def2384feaec",
+  "generated_at": "2026-10-20T10:34:11Z",
+  "modus": "kandidaten",
+  "commit": "c496591d4c7ac6bb4df21180adba5236649dc70a",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -226,7 +226,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-      "sha256": "0ff75374c85aaa3887151b1033d4391e4b19e9eb23fdbe828338046fc6bbdd3a",
+      "sha256": "6234b35b2abd1f985c20f53efb4f1923a369873b622609f1b26a8bdaa3a76c61",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "e1b249f2de3d98fad2cc6e0537ceb65089dd96d136e69af5e731d0941553e90b",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "d6cf96220bd6aa02ee1fec95c015411915e64d80613eb69d4b0dcea9a87f2fc4",
+      "sha256": "ac52dfb30df41b71c9379d46e04b37cd98a0aefa29b900206a2385c260d10376",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "ae7e13f32b7f7e7bdd292f09bad477896a38d4df1ac3aee28993719a0356f9d6",
