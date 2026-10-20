@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-19 13:22:15 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-10-20 12:31:03 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -36,11 +36,11 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 | falk-ratgeber.de | 1 | 1 | 3.0 | 3 |
 | twyler.de | 1 | 0 | 4.0 | 4 |
 | finanz-echo.de | 1 | 0 | 5.0 | 5 |
-| mlp-financify.de | 1 | 0 | 6.0 | 6 |
-| wegweisermagazin.de | 1 | 0 | 7.0 | 7 |
-| nurgeld.de | 1 | 0 | 8.0 | 8 |
-| genialetricks.de | 1 | 0 | 9.0 | 9 |
-| sparschweinclub.de | 1 | 0 | 10.0 | 10 |
+| wegweisermagazin.de | 1 | 0 | 6.0 | 6 |
+| mlp-financify.de | 1 | 0 | 7.0 | 7 |
+| moneyfulmind.de | 1 | 0 | 8.0 | 8 |
+| nurgeld.de | 1 | 0 | 9.0 | 9 |
+| geldfinanzen24.de | 1 | 0 | 10.0 | 10 |
 
 ## Sonderflächen auf den Ergebnisseiten
 
@@ -54,7 +54,7 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
-| ['Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif'] | Kein Anbieter lieferte Treffer für "['Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Ma |
+| ['versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln'] | Kein Anbieter lieferte Treffer für "['versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', ' |
 
 ## Einordnung
 
