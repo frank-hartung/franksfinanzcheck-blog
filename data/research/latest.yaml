@@ -1,5 +1,5 @@
-generated_at: '2026-10-19T09:17:53Z'
-day: '2026-10-19'
+generated_at: '2026-10-20T08:52:13Z'
+day: '2026-10-20'
 mode: deterministic
 teams:
   trending:
@@ -247,54 +247,51 @@ teams:
     - Internet-Speed
     - Router
     - Optimieren
-  - topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
-      kündigen'
-    pillar: versicherungen
+  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
-      kündigen'
+    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
     score: 0.55
     keywords:
-    - Versicherungen prüfen Jahresende
-    - Policen kündigen Dezember
-    - Unnötige Versicherungen kündigen
-    - Doppelversicherung vermeiden
-  - topic: Mietwagen-Verträge vor dem Urlaub checken
+    - Konto eröffnen
+    - Schufa
+    - Konto ohne Schufa
+  - topic: Mietwagen-Fallen im Urlaub vermeiden
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Mietwagen-Verträge vor dem Urlaub checken
+    source: topics:Mietwagen-Fallen im Urlaub vermeiden
+    score: 0.55
+    keywords:
+    - Mietwagen Tipps
+    - Urlaub Mietwagen
+    - Reisekosten sparen
+  - topic: Mietwagen-Kosten im Ausland minimieren
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Mietwagen-Kosten im Ausland minimieren
     score: 0.55
     keywords:
     - Mietwagen
-    - Verträge
-    - Urlaub
-  - topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
+    - Ausland
+    - Kosten minimieren
+  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    score: 0.55
+    keywords:
+    - Schufa Eintrag löschen
+    - Negativeintrag entfernen
+    - Bonität verbessern
+  - topic: 'Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Private Unfallversicherung: Für wen sie sich wirklich lohnt'
+    source: 'topics:Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
     score: 0.55
     keywords:
-    - Unfallversicherung
-    - Private Unfallversicherung
-    - Absicherung
-  - topic: 'Reisekrankenversicherung: Wann sie sich wirklich lohnt'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Reisekrankenversicherung: Wann sie sich wirklich lohnt'
-    score: 0.55
-    keywords:
-    - Reisekrankenversicherung
-    - Auslandskrankenversicherung
-    - Reiseschutz
-  - topic: 'Smart Home: Diese Geräte sparen wirklich Strom'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Smart Home: Diese Geräte sparen wirklich Strom'
-    score: 0.55
-    keywords:
-    - Smart Home
-    - Energie sparen
-    - Smarte Steckdosen
+    - Versicherung Selbstständige
+    - Absicherung Freiberufler
+    - Existenzgründer Versicherung
 live_web:
   enabled: false
   findings: []

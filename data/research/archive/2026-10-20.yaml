@@ -1,5 +1,5 @@
-generated_at: '2026-09-20T08:48:47Z'
-day: '2026-09-20'
+generated_at: '2026-10-20T08:52:13Z'
+day: '2026-10-20'
 mode: deterministic
 teams:
   trending:
@@ -22,20 +22,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.75
-  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
-      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-      als der reine Anbieterwechsel.
-    pillar: internet-dsl
-    signal: trending
-    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
-    score: 0.65
   - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
       ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
       statt sie automatisch zu verlängern.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.6
+    score: 0.65
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: trending
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.65
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -43,18 +42,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:konto-gebuehren-transparenz
     score: 0.6
+  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
+      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+      als der reine Anbieterwechsel.
+    pillar: internet-dsl
+    signal: trending
+    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
+    score: 0.6
   - topic: Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue
       Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten
       wieder fallen.
     pillar: konto-karten
     signal: trending
     source: aktuelle_entwicklungen:zinsumfeld-tagesgeld
-    score: 0.6
-  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
-      Ergebnis nimmt, lässt oft bares Geld liegen.
-    pillar: versicherungen
-    signal: trending
-    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
     score: 0.6
   - topic: Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an
       einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
@@ -84,57 +84,57 @@ teams:
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
   evergreen:
-  - topic: Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
     pillar: frugalismus
     signal: evergreen
-    source: topics:Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
     score: 0.85
     keywords: []
-  - topic: Energieeffiziente Geräte für dein Zuhause
+  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Energieeffiziente Geräte für dein Zuhause
+    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
     score: 0.85
     keywords:
-    - Energieeffiziente
-    - Geräte
-    - Zuhause
-  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    - Smart-Plug
+    - Energie sparen
+    - Haushaltsgeräte
+  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
     pillar: internet-dsl
     signal: evergreen
-    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
     score: 0.85
     keywords:
-    - DSL-Tarife
-    - günstige Anbieter
-    - Internetvergleich
-  - topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    - günstiges Handy-Abonnement
+    - Tarifvergleich
+    - Mobilfunk
+  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
     pillar: mietwagen
     signal: evergreen
-    source: topics:5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
     score: 0.85
     keywords:
-    - Mietwagen
-    - Fehler
-    - vermeiden
-  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    - Mietwagenvertrag
+    - versteckte Kosten
+    - Urlaubskasse
+  - topic: 10 Tipps für günstige Reisekreditkarten
     pillar: konto-karten
     signal: evergreen
-    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    source: topics:10 Tipps für günstige Reisekreditkarten
     score: 0.85
     keywords:
-    - Kreditkarte Ausland
-    - Auslandsgebühren vermeiden
-    - Reisekreditkarte
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
+    - Reisekreditkarten
+    - günstige Karten
+    - Reisekosten sparen
+  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     score: 0.85
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
+    - Rechtsschutzversicherung
+    - Rechtsschutz Leistungen
+    - Rechtsstreit versichern
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -238,58 +238,60 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: Günstige Gasanbieter für den Haushalt finden
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Günstige Gasanbieter für den Haushalt finden
-    score: 0.55
-    keywords:
-    - Gasanbieter
-    - Günstige Anbieter
-    - Haushalt
-  - topic: 'Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?'
+  - topic: Internet-Speed optimieren mit dem richtigen Router
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten
-      was?'
+    source: topics:Internet-Speed optimieren mit dem richtigen Router
     score: 0.55
     keywords:
-    - Internetflat
-    - Hohe Geschwindigkeit
-    - Anbietervergleich
-  - topic: 'Notgroschen aufbauen: Wie viel reicht wirklich?'
-    pillar: frugalismus
+    - Internet-Speed
+    - Router
+    - Optimieren
+  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Notgroschen aufbauen: Wie viel reicht wirklich?'
-    score: 0.55
-    keywords: []
-  - topic: 'Smart Home: Diese Geräte sparen wirklich Strom'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Smart Home: Diese Geräte sparen wirklich Strom'
+    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
     score: 0.55
     keywords:
-    - Smart Home
-    - Energie sparen
-    - Smarte Steckdosen
-  - topic: 'Umzug: Diese Versicherungen und Verträge musst du ummelden'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Umzug: Diese Versicherungen und Verträge musst du ummelden'
-    score: 0.55
-    keywords:
-    - Umzug Checkliste
-    - Verträge ummelden
-    - Umzug sparen
-  - topic: Wie du beim Mietwagenkauf Geld sparen kannst
+    - Konto eröffnen
+    - Schufa
+    - Konto ohne Schufa
+  - topic: Mietwagen-Fallen im Urlaub vermeiden
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Wie du beim Mietwagenkauf Geld sparen kannst
+    source: topics:Mietwagen-Fallen im Urlaub vermeiden
     score: 0.55
     keywords:
-    - Mietwagenkauf
-    - Geld sparen
-    - Tipps
+    - Mietwagen Tipps
+    - Urlaub Mietwagen
+    - Reisekosten sparen
+  - topic: Mietwagen-Kosten im Ausland minimieren
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Mietwagen-Kosten im Ausland minimieren
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Ausland
+    - Kosten minimieren
+  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    score: 0.55
+    keywords:
+    - Schufa Eintrag löschen
+    - Negativeintrag entfernen
+    - Bonität verbessern
+  - topic: 'Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
+    score: 0.55
+    keywords:
+    - Versicherung Selbstständige
+    - Absicherung Freiberufler
+    - Existenzgründer Versicherung
 live_web:
   enabled: false
   findings: []
