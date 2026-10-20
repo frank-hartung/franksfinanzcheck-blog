@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T10:34:11Z",
+  "generated_at": "2026-10-20T15:11:10Z",
   "modus": "kandidaten",
-  "commit": "c496591d4c7ac6bb4df21180adba5236649dc70a",
+  "commit": "ab5886e95c26296e4dc265faa4af1dd0c7aacadf",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "e1b249f2de3d98fad2cc6e0537ceb65089dd96d136e69af5e731d0941553e90b",
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "ae7e13f32b7f7e7bdd292f09bad477896a38d4df1ac3aee28993719a0356f9d6",
