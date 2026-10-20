@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 20.10.2026 12:11 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.10.2026 17:41 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -13,43 +13,41 @@
 ## Kommende Beiträge
 
 ### Di, 20. Oktober 2026
-- **15:15** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
+- **19:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
-- **19:45** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
 ### Mi, 21. Oktober 2026
-- **09:45** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
-- **15:15** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
-### Do, 22. Oktober 2026
-- **09:45** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
-- **15:15** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
-### Fr, 23. Oktober 2026
-- **09:45** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
-- **15:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
-### Sa, 24. Oktober 2026
-- **09:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
+- **09:45** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
+- **15:15** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
-- **15:15** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
+### Do, 22. Oktober 2026
+- **09:45** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
+- **15:15** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
+### Fr, 23. Oktober 2026
+- **09:45** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
+- **15:15** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
+### Sa, 24. Oktober 2026
+- **09:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
+- **15:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### So, 25. Oktober 2026
-- **09:45** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+- **09:45** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 - **15:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
-- **09:45** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
+- **09:45** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **15:15** ⏳ Abos und Verträge: Der stille Posten im Haushaltsplan — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/
 ### Di, 27. Oktober 2026
-- **09:45** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
+- **09:45** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 - **15:15** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 ### Mi, 28. Oktober 2026

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 20.10.2026 12:11 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.10.2026 17:41 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,13 +13,11 @@
 ## Kommende Beiträge
 
 ### Di, 20. Oktober 2026
-- **16:15** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
+- **20:30** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
-- **20:30** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 ### Mi, 21. Oktober 2026
-- **09:15** ⏳ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
+- **09:15** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 - **16:15** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 ### Do, 22. Oktober 2026
@@ -35,11 +33,11 @@
 ### Sa, 24. Oktober 2026
 - **09:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
-- **16:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-### So, 25. Oktober 2026
-- **09:15** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
+- **16:15** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+### So, 25. Oktober 2026
+- **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 - **16:15** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
 ### Mo, 26. Oktober 2026

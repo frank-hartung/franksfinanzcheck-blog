@@ -6,26 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
- erlust:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261020T101156Z
-DTSTART:20261025T060000Z
-DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): Campingurlaub planen: Budget für Platz\, Fah
- rt und Ausrüstung (nutzen)
+UID:telegram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
+ klich-druecken:nutzen:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261020T154123Z
+DTSTART:20261020T160000Z
+DTEND:20261020T161500Z
+SUMMARY:Telegram (Kanal): Smart Home: So prüfst du echte Stromersparni
+ s (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-
- 2026-clever-sparen-ohne-komfortverlust/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
- lever-sparen-ohne-komfortverlust/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home
+ -geraete-deine-stromrechnung-wirklich-druecken/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-gerae
+ te-deine-stromrechnung-wirklich-druecken/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-g
- eld-kostet:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261020T101156Z
-DTSTART:20261101T060000Z
-DTEND:20261101T061500Z
+ eld-kostet:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261020T154123Z
+DTSTART:20261025T060000Z
+DTEND:20261025T061500Z
 SUMMARY:Telegram (Kanal): Treue-Falle beim DSL-Vertrag: Wann sich der 
  Wechsel rechnet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -33,6 +33,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  echseln-warum-treue-dich-bares-geld-kostet/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechsel
  n-warum-treue-dich-bares-geld-kostet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-gel
+ d-zurueck:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261020T154123Z
+DTSTART:20261101T060000Z
+DTEND:20261101T061500Z
+SUMMARY:Telegram (Kanal): Balkonkraftwerk Förderung: So holst du dir G
+ eld zurück (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwer
+ k-foerderung-so-holst-du-dir-geld-zurueck/
+URL:https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foer
+ derung-so-holst-du-dir-geld-zurueck/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

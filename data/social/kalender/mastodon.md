@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 20.10.2026 12:11 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.10.2026 17:41 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 20. Oktober 2026
-- **11:30** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 ### Mi, 21. Oktober 2026
 - **07:30** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
@@ -49,6 +46,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 20.10.2026 17:40 · Balkonkraftwerk Förderung: So holst du dir Geld zurück → https://mastodon.social/@FranksFinanzcheck/117473993182890841
 - ✅ 20.10.2026 12:09 · Smart Home: So prüfst du echte Stromersparnis → https://mastodon.social/@FranksFinanzcheck/117472689432509536
 - ✅ 19.10.2026 19:34 · Großeinkauf und Vorrat: Wann Bevorraten sich rechnet → https://mastodon.social/@FranksFinanzcheck/117468774583193688
 - ✅ 19.10.2026 12:54 · Zählerstand ablesen und melden: Schätzwerte vermeiden → https://mastodon.social/@FranksFinanzcheck/117467203191745299
@@ -58,7 +56,6 @@
 - ✅ 17.10.2026 11:28 · Urlaub sparen: Budget, Buchung und Kosten im Blick → https://mastodon.social/@FranksFinanzcheck/117455541616253764
 - ✅ 16.10.2026 17:24 · Störung beim Internetanbieter: So sicherst du deine Rechte → https://mastodon.social/@FranksFinanzcheck/117451276649054529
 - ✅ 16.10.2026 11:55 · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt → https://mastodon.social/@FranksFinanzcheck/117449983499442917
-- ✅ 15.10.2026 17:38 · Lastschrift und Dauerauftrag: Was du prüfen solltest → https://mastodon.social/@FranksFinanzcheck/117445670235708986
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

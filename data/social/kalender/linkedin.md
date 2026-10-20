@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 20.10.2026 12:11 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.10.2026 17:41 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 20. Oktober 2026
-- **11:45** ⚪ Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/
 ### Mi, 21. Oktober 2026
 - **07:45** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
@@ -37,14 +34,14 @@
 - **07:45** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
 ### Fr, 30. Oktober 2026
-- **07:45** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 02. November 2026
 - **07:45** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 ### Di, 03. November 2026
-- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+- **07:45** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 
 ## Zuletzt veröffentlicht
 
