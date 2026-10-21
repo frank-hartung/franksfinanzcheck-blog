@@ -928,6 +928,27 @@ history:
     #Gasrechnung #Heizkosten #Photovoltaik #Energiekosten'
   ref: '117473993182890841'
   ai: false
+- posted_at: '2026-10-21T12:17:31.560024+02:00'
+  channel: mastodon
+  slug: 2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt
+  title: 'Energiekosten senken: Smarte Helfer für den Haushalt'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117478382629994026
+  ok: true
+  text: '💶 Energiekosten senken: Smarte Helfer für den Haushalt
+
+
+    Ein intelligenter Thermostat kombiniert mit einem Energie‑Monitor reduziert den
+    Haushaltsstromverbrauch um etwa 12 % – das entspricht bei einem durchschnittlichen
+    Verbrauch von 2 500 kWh rund 150 € …
+
+
+    https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gasrechnung #Heizkosten #GastarifWechseln #StromkostenSenken'
+  ref: '117478382629994026'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -953,4 +974,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-20T22:40:48.108345+02:00'
+updated_at: '2026-10-21T12:17:40.121460+02:00'

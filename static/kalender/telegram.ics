@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-g
  eld-kostet:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261020T204049Z
+DTSTAMP:20261021T101740Z
 DTSTART:20261025T060000Z
 DTEND:20261025T061500Z
 SUMMARY:Telegram (Kanal): Treue-Falle beim DSL-Vertrag: Wann sich der 
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
  klich-druecken:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261020T204049Z
+DTSTAMP:20261021T101740Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Smart Home: So prüfst du echte Stromersparni
