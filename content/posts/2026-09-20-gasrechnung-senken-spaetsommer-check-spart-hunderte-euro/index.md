@@ -62,7 +62,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was du bereitlegst?
 
-- Letzte Gas- oder Heizkostenabrechnung,
+- Letzte Gas- oder [Heizkostenabrechnung](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/),
 - aktuellen Vertrag,
 - Smartphone für Fotos,
 - Raumthermometer, falls vorhanden,
@@ -96,7 +96,7 @@ Der aktuelle Abschlag kann davon abweichen. Eine kleinere Rate macht die Energie
 Notiere außerdem:
 
 - Ende der Mindestlaufzeit,
-- Kündigungsfrist,
+- [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
 - Ende der Preisgarantie,
 - Kosten ohne Bonus,
 - Zahlungsweise.

@@ -70,7 +70,7 @@ Die folgende Übersicht zeigt eine Beispielrechnung mit typischen Annahmen für 
 | Strom (LED‑Umrüstung) | 100 € – 140 € | etwa 8 % |
 | Stand‑by‑Reduktion | 30 € – 60 € | etwa 3 % |
 | Heizung (Thermostat‑Optimierung) | 150 € – 220 € | etwa 7 % |
-| Warmwasser (Durchflussbegrenzer) | 50 € – 90 € | etwa 6 % |
+| [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) (Durchflussbegrenzer) | 50 € – 90 € | etwa 6 % |
 | **Gesamteinsparung (Modell)** | **≈ 330 € – 510 €** | **≈ 12 %** |
 
 Diese Beispielwerte gelten in unserer Modellrechnung für einen normalen Haushalt mit mehreren Personen. Du profitierst besonders stark, wenn du noch alte Geräte nutzt. Bereits kleine Anpassungen summieren sich über das Jahr zu einer beachtlichen Summe. Dein Energiespar-Erfolg hängt direkt von deiner Konsequenz ab.
@@ -175,7 +175,7 @@ Schließe Rollos und Vorhänge, um die Wärme im Raum zu halten. Das isoliert de
 | Stoßlüften statt Kipp | Kurz weit öffnen, Heizung abdrehen | etwa 2 % |
 | Wasserkocher nutzen | Wasser für Nudeln im Kocher vorwärmen | etwa 1 % |
 
-Diese Tricks reduzieren deinen Jahresverbrauch ohne teure Investitionen. Die Summe vieler kleiner Schritte macht den Erfolg deiner Strategie aus. Du wirst staunen, wie viel am Ende übrig bleibt.
+Diese Tricks [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) deinen Jahresverbrauch ohne teure Investitionen. Die Summe vieler kleiner Schritte macht den Erfolg deiner Strategie aus. Du wirst staunen, wie viel am Ende übrig bleibt.
 
 ## Energiesparen in Mietwohnungen
 

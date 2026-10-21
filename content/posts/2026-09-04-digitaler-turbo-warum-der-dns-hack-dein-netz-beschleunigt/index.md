@@ -52,7 +52,7 @@ Das Programm `dig` fragt einen DNS-Server nach einem bestimmten Eintrag ab. Mit 
 | Mehrere Abfragen an verschiedene DNS-Server | Unterschiede für genau diese Domains, diesen Anschluss und diesen Zeitpunkt | Einen allgemeingültigen Testsieger oder künftige Werte |
 | Ein Website-Aufruf im Browser | Gesamteindruck aus DNS, Verbindungsaufbau, Serverantwort und geladenen Inhalten | Den isolierten Anteil der DNS-Auflösung |
 
-`dig` fragt in der folgenden Standardform klassisches DNS ab. Der Befehl testet damit **nicht** automatisch DNS over HTTPS (DoH). Er testet auch nicht DNS over TLS (DoT). Eine verschlüsselte Verbindung zum DNS-Server muss separat eingerichtet werden. Sie muss separat geprüft werden. Die Unterschiede erklärt [Cloudflare in seiner DoH-/DoT-Übersicht](https://developers.cloudflare.com/1.1.1.1/encryption/).
+`dig` fragt in der folgenden Standardform klassisches DNS ab. Der Befehl testet damit **nicht** automatisch DNS over HTTPS (DoH). Er testet auch nicht [DNS over TLS](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/) (DoT). Eine verschlüsselte Verbindung zum DNS-Server muss separat eingerichtet werden. Sie muss separat geprüft werden. Die Unterschiede erklärt [Cloudflare in seiner DoH-/DoT-Übersicht](https://developers.cloudflare.com/1.1.1.1/encryption/).
 
 ### Warum klassisches DNS für den Test reicht
 Für einen reinen Zeitvergleich zwischen zwei DNS-Servern reicht klassisches DNS völlig aus. Du willst nur wissen, welcher DNS-Server schneller antwortet. Du willst in diesem Schritt noch keine Verschlüsselung prüfen. Die Verschlüsselung ist ein eigenes Thema. Sie hat mit der reinen Antwortzeit wenig zu tun.
@@ -87,7 +87,7 @@ Eine DNS-Abfrage ist nur ein Schritt beim Aufrufen einer Website. Danach folgen 
 
 Deshalb lassen sich mehrere Einzelwerte nicht einfach addieren. Sie ergeben keine verlässliche Ersparnis pro Seite oder pro Jahr.
 
-Ein niedriger `Query time`-Wert beweist also nicht, dass eine Website sichtbar schneller lädt. Umgekehrt bedeutet eine einzelne langsamere Abfrage nicht automatisch, dass dein Anschluss schlecht ist. Prüfe bei einem realen Problem auch WLAN-Empfang, Router und Endgerät. Prüfe VPN und den gebuchten Zugang.
+Ein niedriger `Query time`-Wert beweist also nicht, dass eine Website sichtbar schneller lädt. Umgekehrt bedeutet eine einzelne langsamere Abfrage nicht automatisch, dass dein Anschluss schlecht ist. Prüfe bei einem realen Problem auch [WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/), Router und Endgerät. Prüfe VPN und den gebuchten Zugang.
 
 ## DNS-Antwortzeit ist nicht DNS-Datenschutz
 
@@ -144,7 +144,7 @@ Schreibe dir die Werte auf. Notiere auch den Wochentag und die Uhrzeit. Nur so k
 Dein Betriebssystem speichert Antworten zwischen. Das ist sinnvoll für den Alltag. Für den Messvergleich kann es aber verfälschen. Leere den lokalen DNS-Cache vor dem Test, wenn du sicher gehen willst. Ansonsten wiederhole die Abfrage einfach ein zweites Mal. Der zweite Wert ist oft der aussagekräftigere.
 
 ### Was du nicht erwarten solltest
-Ein Wechsel des DNS-Servers macht aus einer 16-Mbit-Leitung kein 100-Mbit-Netz. Er verbessert nicht den WLAN-Empfang im hinteren Zimmer. Er ersetzt keinen Tarifwechsel, wenn dein Anschluss grundsätzlich zu langsam ist. Er kann aber in manchen Fällen die Zeit bis zum ersten Laden einer Seite verkürzen.
+Ein Wechsel des DNS-Servers macht aus einer 16-Mbit-Leitung kein 100-Mbit-Netz. Er verbessert nicht den WLAN-Empfang im hinteren Zimmer. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), wenn dein Anschluss grundsätzlich zu langsam ist. Er kann aber in manchen Fällen die Zeit bis zum ersten Laden einer Seite verkürzen.
 
 Das ist ein kleiner Effekt. Er ist manchmal spürbar. Er ist aber kein Wundermittel.
 

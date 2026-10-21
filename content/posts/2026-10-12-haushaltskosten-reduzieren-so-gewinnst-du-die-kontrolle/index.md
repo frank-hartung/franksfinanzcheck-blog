@@ -71,7 +71,7 @@ Du willst deine Ausgaben nachhaltig in den Griff bekommen. Dafür hat sich bei F
 Dieses System hilft dir. Damit kannst du deine Kosten nach und nach senken. Es basiert auf Logik und klaren Zahlen statt auf vagen Versprechungen.
 
 ### 1. Kosten sehen
-Zuerst erfasst du alle laufenden Beträge. Nimm dir deine Kontoauszüge des letzten vollen Jahres vor. Liste jeden Dauerauftrag und jede Lastschrift genau auf. Nur wer weiß, wohin das Geld fließt, kann effektiv gegensteuern.
+Zuerst erfasst du alle laufenden Beträge. Nimm dir deine Kontoauszüge des letzten vollen Jahres vor. Liste jeden [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) und jede Lastschrift genau auf. Nur wer weiß, wohin das Geld fließt, kann effektiv gegensteuern.
 
 ### 2. Konditionen rechnen
 Jetzt wird es konkret für dich. Prüfe nicht nur den monatlichen Abschlag deines Vertrags. Rechne die Kosten auf das ganze Jahr hoch. Beachte Laufzeiten und mögliche Boni. Ein Bonus macht Verträge im ersten Jahr oft attraktiv – im zweiten Jahr steigen die Kosten oft.

@@ -93,7 +93,7 @@ Ein verpasster Termin ist kein Drama. Er ist nur ein Anlass zum Handeln.
 
 Reiche den Stand nach, sobald du ihn abliest. Viele Versorger akzeptieren eine Selbstablesung außerhalb des Fensters. Ein echter Wert ist ihnen lieber als eine Schätzung. Notiere beim Nachreichen das Datum des Stands und erkläre kurz die Verzögerung.
 
-Liegt bereits eine Schätzung vor und du siehst das anders, sende den echten Wert und bitte um Korrektur. Lege das Foto bei. Die Nachricht dauert fünf Minuten und erspart eine Diskussion über Monate.
+Liegt bereits eine Schätzung vor und du siehst das anders, sende den echten Wert und bitte um Korrektur. Lege das Foto bei. Die Nachricht dauert [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) und erspart eine Diskussion über Monate.
 
 ## Warum Ablesetermine nicht beliebig sind
 

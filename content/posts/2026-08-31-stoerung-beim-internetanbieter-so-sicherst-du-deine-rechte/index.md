@@ -49,7 +49,7 @@ quellen:
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
 
-Eine Störung beim Internetanbieter beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
+Eine Störung beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
 
 Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht ab der ersten Minute festhält, hat später eine Erinnerung und keine Unterlagen.
 
@@ -180,7 +180,7 @@ Die Störung ist behoben, der Techniker weg, alles läuft. Ein Blick auf die nä
 
 Prüfe erstens, ob die Rechnung den vollen Monat zeigt. Prüfe zweitens, ob die zugesagte Gutschrift fehlt. Prüfe drittens, ob eine Verlängerung „als Ausgleich" im Vertrag steht, die du nicht wolltest.
 
-Diese drei Punkte dauern fünf Minuten und gehen ums Geld. Sie zeigen auch, warum ein schriftlicher Verlauf hilft: Nach sechs Wochen kennt niemand mehr das Telefonat.
+Diese drei Punkte dauern [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) und gehen ums Geld. Sie zeigen auch, warum ein schriftlicher Verlauf hilft: Nach sechs Wochen kennt niemand mehr das Telefonat.
 
 **Faustregel:** Notiere bei jeder Störung Uhrzeit, Ticketnummer und wer am Telefon sprach. Eine vollständige Ablage ist dein Nachweis – bei der Erstattung wie beim Wechsel.
 

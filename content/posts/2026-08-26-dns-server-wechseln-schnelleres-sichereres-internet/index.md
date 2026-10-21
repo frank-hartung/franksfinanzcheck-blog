@@ -110,7 +110,7 @@ Die IPv6‑Adressen des Secure‑Dienstes sind `2620:fe::fe` und `2620:fe::9`. Q
 
 ## DNS‑Wechsel ist nicht automatisch Verschlüsselung
 
-Ein Wechsel von den DNS‑Adressen deines Internetanbieters zu einem öffentlichen DNS-Server ändert, wer die Anfrage bearbeitet. Wird klassisches DNS verwendet, kann die Anfrage auf dem Weg zum DNS-Server weiterhin unverschlüsselt sein. Ein bloßer Wechsel der IP‑Adresse verhindert daher nicht zuverlässig, dass dein lokales Netzwerk oder dein Internetanbieter DNS‑Anfragen einsehen kann.
+Ein Wechsel von den DNS‑Adressen deines Internetanbieters zu einem öffentlichen DNS-Server ändert, wer die Anfrage bearbeitet. Wird klassisches DNS verwendet, kann die Anfrage auf dem Weg zum DNS-Server weiterhin unverschlüsselt sein. Ein bloßer Wechsel der IP‑Adresse verhindert daher nicht zuverlässig, dass dein lokales Netzwerk oder dein [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) DNS‑Anfragen einsehen kann.
 
 DoH und DoT verschlüsseln die DNS‑Verbindung zwischen deinem Gerät beziehungsweise Router und dem gewählten DNS-Server. Das erschwert das Mitlesen auf diesem Übertragungsweg. Der DNS-Server selbst muss die Anfrage aber verarbeiten.
 
@@ -145,7 +145,7 @@ Mische nicht unbedacht DNS-Server mit unterschiedlichen Filtern als primäre und
 1. Notiere die aktuellen DNS‑Einstellungen deines Routers oder Geräts (z. B. per Screenshot).  
 2. Wähle den gewünschten öffentlichen DNS-Server und notiere dessen IPv4‑ beziehungsweise IPv6‑Adressen.  
 3. Trage die neuen Adressen in den DNS‑Einstellungen deines Routers oder Endgeräts ein.  
-4. Aktiviere, falls unterstützt, DNS over TLS oder DNS over HTTPS und gib den zugehörigen Servernamen an.  
+4. Aktiviere, falls unterstützt, DNS over TLS oder [DNS over HTTPS](../../posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/) und gib den zugehörigen Servernamen an.  
 5. Prüfe nach dem Speichern, ob die DNS-Abfrage funktioniert und ob gewünschte Filter greifen.  
 
 **Faustregel:** Wer nur den primären DNS‑Server ändert und die alternative Adresse unverändert lässt, spart Zeit beim Testen, weil das System nicht zwischen zwei unterschiedlichen Filtern hin‑ und herwechselt.
@@ -166,7 +166,7 @@ Drittens: Teste nach dem Wechsel. Öffne ein paar bekannte Seiten. Lädt alles w
 
 ## Kleine Anleitung für den ersten Test
 
-Du willst es ausprobieren? Dann brauchst du nur drei Dinge. Einen Computer. Ein Terminal. Und fünf Minuten Zeit.
+Du willst es ausprobieren? Dann brauchst du nur drei Dinge. Einen Computer. Ein Terminal. Und [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Zeit.
 
 Öffne das Terminal. Gib den ersten Befehl ein. Drücke Enter. Schau auf die Zahl bei Query time. Notiere sie. Fertig.
 

@@ -104,7 +104,7 @@ Kabel-Internet lockt oft mit hohen Downloadraten zu attraktiven Preisen. Besonde
 
 ### Wann Glasfaser Sinn ergibt
 
-Glasfaser (FTTH) ist die Premium-Variante. Sie bietet nicht nur enorme Download-Raten, sondern vor allem einen überlegenen Upload. Wer beruflich mit Videoproduktion zu tun hat, ständig große Dateien in die Cloud schiebt oder ein Smart Home mit Dutzenden Geräten betreibt, sollte hier zugreifen, sofern verfügbar.
+Glasfaser (FTTH) ist die Premium-Variante. Sie bietet nicht nur enorme Download-Raten, sondern vor allem einen überlegenen Upload. Wer beruflich mit Videoproduktion zu tun hat, ständig große Dateien in die Cloud schiebt oder ein [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) mit Dutzenden Geräten betreibt, sollte hier zugreifen, sofern verfügbar.
 
 ## Der größte Fehler: Nur auf den Startpreis schauen
 
@@ -142,7 +142,7 @@ Die Miete beim Provider ist bequem: Geht das Gerät kaputt, gibt es Ersatz. Doch
 
 - Du planst, länger als zwei Jahre beim selben Standard zu bleiben.
 - Du Wert auf spezifische Funktionen (VPN, Mesh-Optimierung) legst.
-- Du bei einem Anbieterwechsel nicht jedes Mal die Hardware zurückschicken willst.
+- Du bei einem [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) nicht jedes Mal die Hardware zurückschicken willst.
 
 ### Miete kann okay sein, wenn …
 

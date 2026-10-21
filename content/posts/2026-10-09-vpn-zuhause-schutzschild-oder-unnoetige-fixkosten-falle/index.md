@@ -70,8 +70,8 @@ Häufig verwechselt wird das VPN mit HTTPS (der verschlüsselten Webverbindung).
 Dein Heimnetz ist schon ohne VPN geschützt, sofern der Router verschlüsselt und aktuell ist. Ein VPN setzt deshalb dort an, wo du das eigene Netz verlässt. Drei Situationen sind typisch:
 
 - Du greifst unterwegs über ein fremdes WLAN auf Dokumente oder Dateien im Heimnetz zu.
-- Du willst nicht, dass dein Internetanbieter jede Seite sieht, die du aufrufst.
-- Du steuerst Smart-Home-Geräte, ohne jeden Befehl über eine fremde Cloud zu schicken.
+- Du willst nicht, dass dein [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) jede Seite sieht, die du aufrufst.
+- Du steuerst [Smart-Home-Geräte](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/), ohne jeden Befehl über eine fremde Cloud zu schicken.
 
 Das BSI nennt genau diese Einsatzfelder, wenn es über öffentliche Hotspots und den Zugriff auf das Heimnetz spricht. Für Online-Banking und Einkäufe im eigenen WLAN bringt ein zusätzlicher Tunnel dagegen meist wenig, weil diese Seiten bereits verschlüsselt laufen.
 
@@ -99,7 +99,7 @@ Die Preise schwanken stark, je nach Anbieter, Laufzeit und Anzahl der erlaubten 
 
 Angenommen, ein Abo kostet 5 € im Monat; dann sind das 60 € im Jahr.
 
-Der Preis im ersten Vertragsjahr ist häufig nicht der Preis, den du später zahlst. Lockangebote gelten oft nur für die erste Laufzeit. Danach springt der Vertrag in einen teureren Standardtarif, wenn du nicht rechtzeitig kündigst. Notiere dir deshalb das Vertragsende und die Kündigungsfrist direkt bei Vertragsbeginn.
+Der Preis im ersten Vertragsjahr ist häufig nicht der Preis, den du später zahlst. Lockangebote gelten oft nur für die erste Laufzeit. Danach springt der Vertrag in einen teureren Standardtarif, wenn du nicht rechtzeitig kündigst. Notiere dir deshalb das Vertragsende und die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) direkt bei Vertragsbeginn.
 
 Ein zweiter Kostenpunkt ist die Geräteanzahl. Ein Tarif für ein Gerät wird schnell teuer, wenn Laptop, Smartphone, Tablet und Fernseher alle den Tunnel nutzen sollen. Zähle deshalb zuerst, wie viele Geräte wirklich verbunden werden müssen, und vergleiche erst dann die Preise.
 
@@ -119,7 +119,7 @@ Der erste Punkt ist die Datenschutzzusage. Eine nachvollziehbare No-Logs-Richtli
 
 Der zweite Punkt ist der Preis der Gratis-Dienste. Das BSI weist darauf hin, dass Gratis-VPNs meist Funktionseinschränkungen haben, oft eine schlechtere Verbindungsqualität bieten und nicht selten mit persönlichen Daten bezahlt werden. Das passt schlecht zu dem Zweck, den du mit einem VPN verfolgst.
 
-Der dritte Punkt ist der Serverstandort. Für ausländische Server gilt kein deutsches Datenschutzrecht, und in vielen Ländern außerhalb der Europäischen Union hat Datenschutz einen geringeren Stellenwert. Das BSI betont zudem, dass die Wahl des Anbieters Vertrauenssache ist, weil dein gesamter Datenverkehr über dessen Server läuft.
+Der dritte Punkt ist der Serverstandort. Für ausländische Server gilt kein deutsches Datenschutzrecht, und in vielen Ländern außerhalb der Europäischen Union hat Datenschutz einen [geringeren](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) Stellenwert. Das BSI betont zudem, dass die Wahl des Anbieters Vertrauenssache ist, weil dein gesamter Datenverkehr über dessen Server läuft.
 
 ## Alternativen, die oft mehr bringen
 

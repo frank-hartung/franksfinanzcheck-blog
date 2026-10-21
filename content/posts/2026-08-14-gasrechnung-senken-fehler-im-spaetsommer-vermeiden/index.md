@@ -239,7 +239,7 @@ Auch ein kurzer Check spart dir hunderte Euro. Achte dabei nur auf das Wichtigst
 3. **Funktionstest (4 Min):** Werden die wichtigsten Heizkörper warm, wenn du sie kurz aufdrehst?
 4. **Termin setzen (3 Min):** Trage dir einen festen Termin für den Tarifvergleich in den Kalender ein.
 
-Gehe Schritt für Schritt vor. Wer am selben Tag den Anbieter wechselt, die Heizung herunterdreht und neue Thermostate einbaut, weiß am Ende nichts.
+Gehe [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) vor. Wer am selben Tag den Anbieter wechselt, die Heizung herunterdreht und neue Thermostate einbaut, weiß am Ende nichts.
 
 Welcher Schritt hat gewirkt? Das lässt sich dann nicht mehr sagen. Ein Schritt nach dem anderen bringt dir mehr.
 

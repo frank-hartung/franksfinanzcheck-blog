@@ -184,13 +184,13 @@ Prüfe ohne Komforttheater:
 - tropfende Warmwasserhähne reparieren,
 - Speicherzeiten an die Nutzung anpassen,
 - unnötige Zirkulationszeiten fachlich prüfen,
-- Temperatur aus Hygienegründen nicht beliebig reduzieren.
+- Temperatur aus Hygienegründen nicht beliebig [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/).
 
 An Speichertemperatur und Zirkulation solltest du nicht blind drehen. Zu niedrige Temperaturen schaffen hygienische Risiken. Falsche Zeitpläne stören Komfort und Leitungsnetz. Eigentümer besprechen größere Änderungen mit dem Fachbetrieb, Mieter melden Auffälligkeiten.
 
 ### Sommerverbrauch als Hinweis
 
-Lies den Gaszähler in einem Monat ohne Heizung ab. Die Differenz zeigt grob den Sockel für Warmwasser und eventuell Kochen. Ziehst du diesen Sockel vom Winterverbrauch ab, wird der Anteil der Raumheizung klarer.
+Lies den Gaszähler in einem Monat ohne Heizung ab. Die Differenz zeigt grob den Sockel für [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) und eventuell Kochen. Ziehst du diesen Sockel vom Winterverbrauch ab, wird der Anteil der Raumheizung klarer.
 
 Beispiel: Im Juli verbrauchst du 45 kWh Gas. Im Januar sind es 2.000 kWh. Der Sommerwert ist keine perfekte Korrektur. Er zeigt aber: Der große Winterhebel liegt bei der Raumwärme. Ist der Sommerverbrauch überraschend hoch, lohnt ein Blick auf Warmwasser, Speicher und Zirkulation.
 
@@ -221,7 +221,7 @@ Miss, statt zu raten.
 
 Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizkosten senkst – ganz ohne Frieren. Für weitere Alltags-Spartricks lies auch: [Frugalismus-Tipps für mehr Freiheit](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
-**Faustregel:** Stell vor der Heizsaison zuerst Thermostat, Entlüftung und Dämmung der Rohre richtig ein – die richtige Technik spart mehr als jeder kurzfristige Tarifwechsel.
+**Faustregel:** Stell vor der Heizsaison zuerst Thermostat, Entlüftung und Dämmung der Rohre richtig ein – die richtige Technik spart mehr als jeder kurzfristige [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

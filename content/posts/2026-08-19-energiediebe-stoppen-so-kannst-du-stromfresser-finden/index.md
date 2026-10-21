@@ -61,7 +61,7 @@ Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffä
 
 So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger.
 
-Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
+Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
 
 
 ![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
@@ -265,7 +265,7 @@ Stromfresser findest du nicht am Alter oder an einer warmen Oberfläche, sondern
 
 Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und häng es für 24 Stunden an das verdächtigste Kühlgerät. Danach hast du eine Zahl statt eines Verdachts.
 
-**Weiterlesen:** Standby-Kosten gezielt reduzieren · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** Standby-Kosten gezielt [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 
 ## Häufige Fragen
 
@@ -282,7 +282,7 @@ Nicht mit einem normalen Zwischenstecker. Arbeiten an elektrischen Anschlüssen 
 Es zeigt, dass Energie umgesetzt wird, verrät aber nicht wie viel. Erst die Messung liefert eine brauchbare Zahl.
 
 ### Soll ich den Router nachts ausschalten?
-Nur wenn Telefonie, Smart Home, Updates und andere Dienste dadurch nicht gestört werden. Prüfe zuerst die Energiesparoptionen des Routers.
+Nur wenn Telefonie, [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/), Updates und andere Dienste dadurch nicht gestört werden. Prüfe zuerst die Energiesparoptionen des Routers.
 
 ---
 

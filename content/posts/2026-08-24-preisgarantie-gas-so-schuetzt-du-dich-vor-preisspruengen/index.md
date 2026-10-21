@@ -173,7 +173,7 @@ Prüfe beim neuen Tarif:
 - genauer Garantieumfang,
 - Garantiebeginn und -ende,
 - Mindestlaufzeit,
-- Kündigungsfrist,
+- [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
 - Zahlungsweise,
 - Preis im Folgejahr.
 

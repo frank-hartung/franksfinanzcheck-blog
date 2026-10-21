@@ -118,7 +118,7 @@ Bei FranksFinanzcheck prüfen wir Verträge mit dem 4K-Prüfpfad. Er funktionier
 
 1. **Kosten sehen:** Hole die letzte Jahresrechnung hervor. Notiere Jahresverbrauch, Arbeitspreis, Grundpreis und den aktuellen Abschlag.
 2. **Konditionen rechnen:** Setze deine echten kWh in einen Vergleichsrechner ein. Achte auf Preisgarantie, Laufzeit und Boni statt auf den schönsten Monatspreis.
-3. **Kündigungsfenster sichern:** Notiere die Kündigungsfrist des Altvertrags und trage dir den spätesten Wechselzeitpunkt in den Kalender ein.
+3. **Kündigungsfenster sichern:** Notiere die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) des Altvertrags und trage dir den spätesten Wechselzeitpunkt in den Kalender ein.
 4. **Kurs halten:** Lies monatlich den Zählerstand ab und vergleiche nach drei Monaten, ob der neue Abschlag zum Verbrauch passt.
 
 Mit dieser Routine wird die Heizsaison planbar. Du weißt vor der ersten kalten Woche, was das Jahr kostet, statt im Frühjahr vom Abrechnungsbrief überrascht zu werden.

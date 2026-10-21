@@ -221,7 +221,7 @@ Während der ersten festen Laufzeit gelten die vereinbarten Bedingungen. Nach ei
 Nicht jeder Vertrag verlangt denselben Weg. Nutze den zulässigen Kündigungsweg und bewahre einen Nachweis auf. Bei einer Kündigung über das Kundenkonto solltest du die Bestätigung speichern.
 
 ### Kann ich meine Rufnummer beim Wechsel behalten?
-Das Telekommunikationsgesetz regelt die Mitnahme beim Anbieterwechsel. Beauftrage den neuen Anbieter damit und prüfe, dass deine Nummer im Auftrag steht. Die Details findest du in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html).
+Das Telekommunikationsgesetz regelt die Mitnahme beim [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/). Beauftrage den neuen Anbieter damit und prüfe, dass deine Nummer im Auftrag steht. Die Details findest du in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html).
 
 ### Gilt der Kündigungsbutton für meinen Vertrag?
 Die Pflicht betrifft bestimmte entgeltliche Verträge, die Verbraucher online abschließen können. Es gibt gesetzliche Ausnahmen. Prüfe den Anwendungsbereich in [§ 312k BGB](https://www.gesetze-im-internet.de/bgb/__312k.html).

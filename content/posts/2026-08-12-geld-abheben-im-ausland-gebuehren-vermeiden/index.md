@@ -148,7 +148,7 @@ Dasselbe gilt für den Bearbeitungstag. Deine Bank bucht die Abhebung nicht imme
 
 ## Selbstcheck in fünf Minuten
 
-Wenn du heute nur wenig Zeit hast, reichen fünf Minuten für die wichtigsten Antworten. Halte dafür deine Preisliste und deine Karten bereit.
+Wenn du heute nur wenig Zeit hast, reichen [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) für die wichtigsten Antworten. Halte dafür deine Preisliste und deine Karten bereit.
 
 1. **Zeile eins suchen:** Welches Entgelt gilt für Abhebungen außerhalb des Euro-Raums?
 2. **Zeile zwei suchen:** Gilt dasselbe für Kartenzahlungen im Handel?

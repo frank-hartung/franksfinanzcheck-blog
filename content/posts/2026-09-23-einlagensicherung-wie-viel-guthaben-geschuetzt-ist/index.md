@@ -95,7 +95,7 @@ Der Schutzumfang im Überblick:
 
 Die folgende Rechnung nutzt angenommene Beträge. Sie beschreibt keinen Marktzustand, sondern die Mechanik.
 
-Annahmen: Du hast 70.000 Euro auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 Euro. Bei Institut B liegen 60.000 Euro auf einem zweiten Tagesgeldkonto. Alle drei Konten laufen auf deinen Namen.
+Annahmen: Du hast 70.000 Euro auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 Euro. Bei Institut B liegen 60.000 Euro auf einem zweiten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Alle drei Konten laufen auf deinen Namen.
 
 Rechenweg Institut A: 70.000 Euro plus 45.000 Euro ergeben 115.000 Euro. Beide Konten gehören zum selben Institut. Rechenweg Institut B: 60.000 Euro liegen unterhalb der Grenze.
 
@@ -107,7 +107,7 @@ Der zweite Teil der Rechnung betrifft die Praxis. Angenommen, dein [Notgroschen]
 
 Die Grenze pro Institut klingt willkürlich, folgt aber einer Logik. Die Einlagensicherung ist ein System für den Ausfall eines einzelnen Instituts. Verteilten sich die Ansprüche auf beliebig viele Institute, wäre die Rechnung nicht mehr machbar.
 
-Für dich entsteht daraus eine praktische Aufgabe. Wer größere Beträge parkt, muss trennen. Ein Notgroschen bei einem Institut ist unkritisch. Ein mehrjähriger Sparbetrag gehört auf mehrere Schultern, sobald er die Grenze berührt.
+Für dich entsteht daraus eine praktische Aufgabe. Wer größere Beträge parkt, muss trennen. Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) bei einem Institut ist unkritisch. Ein mehrjähriger Sparbetrag gehört auf mehrere Schultern, sobald er die Grenze berührt.
 
 Achte dabei auf denselben Punkt wie beim Erkennen des Instituts: die Zuordnung, nicht die Marke. Zwei Angebote mit anderen Namen sind kein Schutzgewinn, wenn dahinter ein Institut steht. Umgekehrt verdoppelst du mit zwei echten Instituten den Schutz.
 

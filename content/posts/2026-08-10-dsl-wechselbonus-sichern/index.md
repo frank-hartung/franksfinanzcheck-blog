@@ -157,7 +157,7 @@ Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summie
 
 ## Warum du nicht bis zur letzten Woche warten solltest
 
-Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der Kündigungsfrist sucht, übersieht oft das Kleingedruckte.
+Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) sucht, übersieht oft das Kleingedruckte.
 
 Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:
 
@@ -214,7 +214,7 @@ Ein Bonus für 1.000 Mbit nützt wenig, wenn für dein Homeoffice auch 100 Mbit 
 
 ## Wie der Wechsel in der Praxis abläuft
 
-Ein Anbieterwechsel läuft 2026 dank klarer Regeln und digitaler Prozesse meist glatt.
+Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) läuft 2026 dank klarer Regeln und digitaler Prozesse meist glatt.
 
 ### Typischer Ablauf
 

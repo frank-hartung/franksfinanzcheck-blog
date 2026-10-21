@@ -182,7 +182,7 @@ So gehst du vor:
 1. **Bedarf ermitteln:** Notiere, welche Geräte du hast und wie viel Bandbreite du im Alltag nutzt.
 2. **Tarife recherchieren:** Nutze Vergleichsportale, filtere nach Grundpreis < 30 € und Mindestlaufzeit ≤ 12 Monate.
 3. **Kosten kalkulieren:** Erstelle eine Mini‑Tabelle mit Grundpreis, Zusatzgebühren und möglichen Einrichtungs‑Aufwendungen.
-4. **Kündigungsfrist prüfen:** Trage das Datum des nächsten möglichen Wechsels in deinen Kalender ein.
+4. **[Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen:** Trage das Datum des nächsten möglichen Wechsels in deinen Kalender ein.
 5. **Vertrag unterschreiben:** Achte darauf, dass alle besprochenen Konditionen schriftlich festgehalten sind.
 
 ## Modellrechnung: Was kostet ein DSL‑Anschluss bei 50 Mbps?
