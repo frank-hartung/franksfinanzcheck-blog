@@ -1,5 +1,5 @@
-generated_at: '2026-10-20T08:52:13Z'
-day: '2026-10-20'
+generated_at: '2026-10-21T08:52:17Z'
+day: '2026-10-21'
 mode: deterministic
 teams:
   trending:
@@ -238,42 +238,42 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: Internet-Speed optimieren mit dem richtigen Router
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:Internet-Speed optimieren mit dem richtigen Router
-    score: 0.55
-    keywords:
-    - Internet-Speed
-    - Router
-    - Optimieren
-  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
     score: 0.55
     keywords:
-    - Konto eröffnen
-    - Schufa
-    - Konto ohne Schufa
-  - topic: Mietwagen-Fallen im Urlaub vermeiden
-    pillar: mietwagen
+    - Kreditkarte Ausland
+    - Auslandsgebühren vermeiden
+    - Reisekreditkarte
+  - topic: Die richtige Absicherung für dein Haus
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Mietwagen-Fallen im Urlaub vermeiden
+    source: topics:Die richtige Absicherung für dein Haus
     score: 0.55
     keywords:
-    - Mietwagen Tipps
-    - Urlaub Mietwagen
-    - Reisekosten sparen
-  - topic: Mietwagen-Kosten im Ausland minimieren
-    pillar: mietwagen
+    - Haus
+    - Versicherung
+    - Schutz
+  - topic: 'Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Mietwagen-Kosten im Ausland minimieren
+    source: 'topics:Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
     score: 0.55
     keywords:
-    - Mietwagen
-    - Ausland
-    - Kosten minimieren
+    - Dispozinsen senken
+    - Überziehungszinsen
+    - Bank verhandeln
+  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    score: 0.55
+    keywords:
+    - Hausratversicherung vergleichen
+    - Hausrat absichern
+    - Hausrat Kosten
   - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
     pillar: konto-karten
     signal: niche_hook
@@ -283,15 +283,15 @@ teams:
     - Schufa Eintrag löschen
     - Negativeintrag entfernen
     - Bonität verbessern
-  - topic: 'Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
-    pillar: versicherungen
+  - topic: Wie du deine monatlichen Bankgebühren reduzieren kannst
+    pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
+    source: topics:Wie du deine monatlichen Bankgebühren reduzieren kannst
     score: 0.55
     keywords:
-    - Versicherung Selbstständige
-    - Absicherung Freiberufler
-    - Existenzgründer Versicherung
+    - Bankgebühren
+    - reduzieren
+    - Konto
 live_web:
   enabled: false
   findings: []
