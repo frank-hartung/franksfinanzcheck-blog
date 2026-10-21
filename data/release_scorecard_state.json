@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T01:46:15Z",
+  "generated_at": "2026-10-21T07:48:51Z",
   "modus": "kandidaten",
-  "commit": "491302903a412ec9f07a78480baeae2e83749e03",
+  "commit": "c2a9d3d4d4d56754ad52d1b4b37bb42f6d8ab09c",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -1039,7 +1039,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
       "sha256": "67a70c823dbb97c7ff1900821205e07007d77280b96d867e6232d42330881989",
@@ -1090,7 +1090,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     }
   }
 }
