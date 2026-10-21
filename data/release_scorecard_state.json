@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T10:04:34Z",
-  "modus": "live",
-  "commit": "8360ffa7d61343fc96470ccb565e55674e323310",
+  "generated_at": "2026-10-21T10:47:13Z",
+  "modus": "kandidaten",
+  "commit": "371f0c723be638073c8af5d3e3bd0bc91de699a8",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "7870298ce11fcb60132aa78aefa746b9dc0609f36f35e76204a43a9e6db6753e",
+      "sha256": "ac52dfb30df41b71c9379d46e04b37cd98a0aefa29b900206a2385c260d10376",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "ae7e13f32b7f7e7bdd292f09bad477896a38d4df1ac3aee28993719a0356f9d6",
