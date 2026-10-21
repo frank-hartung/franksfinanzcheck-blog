@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-10-20 23:07 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-10-21 23:11 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -8,7 +8,7 @@
 
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
-| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig |
+| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig |
 | SEO & Technik | 🟢 | in Ordnung |
 | Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
@@ -20,9 +20,9 @@
 ## Details
 
 ### Content-Pipeline — 🟡 GELB
-- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig
+- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig
 - lesbarkeit: 2026-10-19-urlaubskasse-clever-aufbessern/index.md (Entwurf) – Flesch 54.2 < Publish-Schwelle 60; 2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md (Entwu…
-- Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig
+- Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
@@ -53,7 +53,7 @@ Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REP
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 13 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 14 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 
