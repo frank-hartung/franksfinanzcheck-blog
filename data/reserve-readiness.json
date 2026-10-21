@@ -1,32 +1,15 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 6,
-  "generated_at": "2026-10-20T08:51:14Z",
+  "ready": 2,
+  "pool_size": 4,
+  "generated_at": "2026-10-21T08:50:52Z",
   "candidates": [
-    {
-      "slug": "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
-      "ready": true,
-      "sha256": "ed3d1e882770481f460a85ba13a7c3cab028439252bfc53fa8caf44b32897f69",
-      "flesch": 64.4,
-      "measured_at": "2026-10-20T08:48:51Z",
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-20T08:49:26Z",
+      "measured_at": "2026-10-21T08:49:27Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -39,28 +22,17 @@
       }
     },
     {
-      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
-      "ready": true,
-      "sha256": "18e0fe1fb6fd54664894925da3a3e1c4c62eddc4ee7e31228569ba4067cd5981",
-      "flesch": 63.2,
-      "measured_at": "2026-10-20T08:50:03Z",
-      "score": 0.96,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
-      "ready": true,
+      "ready": false,
       "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
       "flesch": 71.5,
-      "measured_at": "2026-10-20T08:50:37Z",
+      "measured_at": "2026-10-21T08:50:09Z",
+      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U2-ZWILLING: Titel-Zwilling am 2026-10-12 mit 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken („Stromkosten senken: Cl",
+      "details": [
+        "🛑 2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U2-ZWILLING: Titel-Zwilling am 2026-10-12 mit 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken („Stromkosten senken: Clevere Haushaltsger“ ↔ „Kleine Energiespar‑Tricks: Deine Kosten “) – Thema zusammenführen oder Titel schärfen",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
       "score": 0.97,
       "parts": {
         "spelling": 0.9,
@@ -77,7 +49,7 @@
       "ready": true,
       "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
       "flesch": 65.1,
-      "measured_at": "2026-10-20T08:51:12Z",
+      "measured_at": "2026-10-21T08:50:50Z",
       "score": 0.982,
       "parts": {
         "spelling": 0.96,
@@ -94,7 +66,7 @@
       "ready": false,
       "sha256": "2bf7901e36ab2f022da0f31ce3ad06edb8f534fc31dd41e3ade685f9c489816c",
       "flesch": 65.2,
-      "measured_at": "2026-10-20T08:51:14Z",
+      "measured_at": "2026-10-21T08:50:52Z",
       "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
       "details": [
         "RS1: kein „Das Wichtigste in Kürze“-Modul",
@@ -115,7 +87,7 @@
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "39395552430",
+    "run_id": "39571616796",
     "run_attempt": "1"
   }
 }
