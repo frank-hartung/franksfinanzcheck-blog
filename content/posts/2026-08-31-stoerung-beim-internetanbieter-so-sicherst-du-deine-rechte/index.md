@@ -66,7 +66,7 @@ Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nich
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Anschluss dauerhaft zu teuer oder zu langsam ist, lohnt der Vergleich über unseren Partner: [**Jetzt Internet & DSL vergleichen**](/go/dsl/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Was als Störung gilt und was nicht
+## Was als Störung gilt und was nicht?
 
 Nicht jedes Ärgernis ist eine Störung. Entscheidend ist, ob der Anbieter reagieren muss und ob du Ansprüche hast.
 
@@ -107,7 +107,7 @@ Für den schriftlichen Weg hat sich eine kurze Struktur bewährt. Sie passt in j
 
 Halte den Text sachlich. Beschreibe, was du siehst – nicht, was du vermutest.
 
-## Was der Anbieter leisten muss
+## Was der Anbieter leisten muss?
 
 Jeder Internetvertrag steht unter dem Telekommunikationsgesetz (TKG). Der Rahmen reicht von der [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) über die Umschaltung bis zur Störungsbearbeitung. Die Regeln zum Wechsel fasst [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) zusammen.
 

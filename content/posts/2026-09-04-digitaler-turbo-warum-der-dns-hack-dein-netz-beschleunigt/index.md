@@ -42,7 +42,7 @@ Ein DNS-Wechsel ist kein allgemeiner Internet-Turbo. Er ändert zunächst, welch
 
 Dieser ergänzende Ratgeber zeigt, wie du einzelne DNS-Antworten vergleichst. Er zeigt, wie du die Ergebnisse richtig einordnest. Für den eigentlichen Wechsel, für Anbieterbedingungen und für Router-Einstellungen lies auch den [DNS-Server-Ratgeber](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/). Tipps für besseres WLAN findest du im Beitrag [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
 
-## Was ein DNS-Test misst – und was nicht
+## Was ein DNS-Test misst – und was nicht?
 
 Das Programm `dig` fragt einen DNS-Server nach einem bestimmten Eintrag ab. Mit `@1.1.1.1` gibst du den DNS-Server direkt vor. `+stats` zeigt unter anderem die gemessene Anfragezeit. Die [BIND-9-Dokumentation](https://bind9.readthedocs.io/en/v9.20.5/manpages.html) beschreibt `dig` als Werkzeug. Es dient dazu, DNS-Server abzufragen und ihre Antworten anzuzeigen.
 

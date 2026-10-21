@@ -62,7 +62,7 @@ Flexibilität bei Ziel, Abflugort und Termin kann mehr passende Angebote eröffn
 - **Mietwagen separat prüfen:** Kaution, Selbstbehalt, Kraftstoffregel und Zusatzfahrer verändern den Endpreis.
 - **In Ruhe vergleichen:** Ein Preisalarm ist ein Hinweis, aber kein Beleg für den niedrigsten verfügbaren Preis.
 
-## Wann Last-Minute-Angebote günstiger sein können – und wann nicht
+## Wann Last-Minute-Angebote günstiger sein können – und wann nicht?
 
 Ein Preisvorteil kann entstehen, wenn kurz vor der Abreise noch Plätze oder Zimmer frei sind. Das ist aber keine feste Preisregel. Anbieter können Angebote [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/). Sie können sie unverändert lassen. Sie können sie bei hoher Nachfrage auch verteuern. Auch eine vermeintliche Ersparnis ist nur dann aussagekräftig, wenn Reisezeit, Unterkunft, Verpflegung, Gepäck und Umbuchungsbedingungen vergleichbar sind.
 

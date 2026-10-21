@@ -272,6 +272,8 @@ Ein fester Rhythmus verhindert auch falsche Reaktionen. Der hohe Januarverbrauch
 
 Notiere pro Termin nur eine Entscheidung, einen Verantwortlichen und eine Frist. So bleibt auch in einem Mehrpersonenhaushalt klar, wer den Zähler abliest oder den Termin vereinbart. Zu viele gleichzeitige Maßnahmen erschweren den Vergleich. Energie sparen ist hier erstaunlich unspektakulär: wenige Zahlen, feste Termine, saubere Zuständigkeit.
 
+**Faustregel:** Miss den Verbrauch, bevor du den Tarif wechselst; die größere Ersparnis sitzt meist nicht im Preis, sondern im Verbrauch.
+
 ## Fazit: Eine Stunde, drei Entscheidungen
 
 Nach dem Check solltest du drei Dinge wissen: Passt der Abschlag? Braucht die Heizung Hilfe? Ist der Tarif konkurrenzfähig?

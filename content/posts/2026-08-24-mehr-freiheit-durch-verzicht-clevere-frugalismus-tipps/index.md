@@ -200,6 +200,8 @@ Wer verbraucht am wenigsten? Und wer 8 Stunden für 12 € Ersparnis opfert,
 
 Die kluge Version ist langweilig: automatisierte Rate, wenige bewusste Freuden, Rest in Ruhe lassen. Genau daraus entsteht die Freiheit, die der Titel verspricht – nicht aus dem 15. Lifehack.
 
+**Faustregel:** Wer jeden Monat denselben Betrag zurücklegt, muss im Zweifel nicht entscheiden, was gerade wichtiger ist.
+
 ## Fazit: Durch klugen Konsumverzicht mehr Lebensqualität gewinnen
 
 Frugalismus ist kein Verzichtsprogramm. Er ist ein Werkzeug für **Finanzielle Freiheit**. Streichst du unnötige Ausgaben und prüfst deine Verträge, hast du mehr Spielraum. Jeden Monat.
