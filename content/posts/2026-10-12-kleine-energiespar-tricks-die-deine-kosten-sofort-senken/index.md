@@ -1,9 +1,9 @@
 ---
 title: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
 description: Praktische SparTipps, wie du mit kleinen Änderungen den Energieverbrauch reduzierst und deine Kosten im Griff behältst. So sparst du jeden Monat bares Geld.
-date: 2026-10-12T11:17:49Z
-draft: true
-reserve: true
+date: 2026-10-21T01:39:08Z
+draft: false
+reserve_published: 2026-10-21
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["Stromkosten senken", "Geld sparen im Alltag"]

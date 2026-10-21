@@ -1,9 +1,9 @@
 ---
 title: "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?"
 description: Lohnt sich ein VPN Zuhause für mehr Internet Sicherheit? Wir prüfen Kosten, Nutzen und ob ein VPN sinnvoll für deinen Haushalt ist.
-date: 2026-10-09T10:48:20Z
-draft: true
-reserve: true
+date: 2026-10-21T01:38:17Z
+draft: false
+reserve_published: 2026-10-21
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["DNS und Netzsicherheit"]
