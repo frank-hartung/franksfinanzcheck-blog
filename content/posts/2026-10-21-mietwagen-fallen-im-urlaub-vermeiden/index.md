@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast endlich den Urlaub geplant. Das Hotel steht und die Koffer sind fast gepackt. Der nächste Schritt ist ein Auto für die Reise. Doch noch bevor du das erste Angebot anklickst, kommen Fragen auf. Welche Kosten kommen wirklich auf dich zu? In diesem Ratgeber zeige ich dir die Fallen im Kleingedruckten. Du lernst mit klaren Schritten, wie du deine Kosten für die Reise senkst. So bleibt am Ende mehr Geld für die Urlaubskasse übrig.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Kosten im Überblick
 
 Ein Auto zur Miete besteht aus vielen Preisbausteinen. Viele Reisende achten nur auf den Preis pro Tag. Sie übersehen jedoch die anderen Posten. Diese beeinflussen den Endpreis oft sehr stark. Wer hier nicht genau hinschaut, zahlt am Ende drauf.
