@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T14:43:00Z",
+  "generated_at": "2026-10-21T15:43:10Z",
   "modus": "kandidaten",
-  "commit": "4c021d46fdb1e4984371a517396a7c0c50ef030d",
+  "commit": "277771d435c1ed571b29519cb683d5fb125f53a6",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "a698732c8582e60b1a3acf8e375f4915fae0466a8e1406ea1ff9a863f090f3ef",
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "5b1cf5363a2ade5b51bb1d19195c0d17fc80d2b0d24433e158c0a8aa967285de",
@@ -410,7 +410,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
       "sha256": "3bbefa3401abe8c992af28d4cd6e92ff45c0553498c2c2f7ce1909e9a6b16263",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "3a39cd354b5cfec8d1009dc836efb6bb82c3abe55845e7af9ed550417564fa86",
@@ -682,7 +682,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "e9f5357b4e6267232f83369c389b07e6cb8ddef25edf8a2c41f118bbb1611726",
@@ -801,7 +801,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-13",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "3ee05ef28d31f9bc69174a59f101d0a34cd4556d2f7642b5f21e288af25b7473",
