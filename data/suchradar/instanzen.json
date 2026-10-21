@@ -1,16 +1,16 @@
 {
  "https://paulgo.io": {
-  "erfolge": 6,
-  "fehler": 0,
-  "letzte_antwort": "2026-10-20T12:27:07.285563+02:00",
-  "letzter_fehler": "",
-  "letzte_dauer_ms": 6971.0
- },
- "https://opnxng.com": {
   "erfolge": 7,
   "fehler": 0,
-  "letzte_antwort": "2026-10-20T12:27:11.434447+02:00",
+  "letzte_antwort": "2026-10-21T12:37:39.140330+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 3077.6
+  "letzte_dauer_ms": 7022.8
+ },
+ "https://opnxng.com": {
+  "erfolge": 8,
+  "fehler": 0,
+  "letzte_antwort": "2026-10-21T12:37:43.742109+02:00",
+  "letzter_fehler": "",
+  "letzte_dauer_ms": 3484.5
  }
 }
