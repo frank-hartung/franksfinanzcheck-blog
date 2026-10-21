@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 21.10.2026 12:17 (Europe/Berlin)  
+> Automatisch aktualisiert: 21.10.2026 17:59 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Mi, 21. Oktober 2026
-- **07:30** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
 ### Do, 22. Oktober 2026
 - **07:30** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
@@ -54,6 +51,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 21.10.2026 17:59 · Dein Weg zu geringeren Monatskosten: Schritt für Schritt → https://mastodon.social/@FranksFinanzcheck/117479727634173619
 - ✅ 21.10.2026 12:17 · Energiekosten senken: Smarte Helfer für den Haushalt → https://mastodon.social/@FranksFinanzcheck/117478382629994026
 - ✅ 20.10.2026 17:40 · Balkonkraftwerk Förderung: So holst du dir Geld zurück → https://mastodon.social/@FranksFinanzcheck/117473993182890841
 - ✅ 20.10.2026 12:09 · Smart Home: So prüfst du echte Stromersparnis → https://mastodon.social/@FranksFinanzcheck/117472689432509536
@@ -63,7 +61,6 @@
 - ✅ 18.10.2026 11:42 · Grundversorgung Strom und Gas: Was sie leistet → https://mastodon.social/@FranksFinanzcheck/117461257247875450
 - ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
 - ✅ 17.10.2026 11:28 · Urlaub sparen: Budget, Buchung und Kosten im Blick → https://mastodon.social/@FranksFinanzcheck/117455541616253764
-- ✅ 16.10.2026 17:24 · Störung beim Internetanbieter: So sicherst du deine Rechte → https://mastodon.social/@FranksFinanzcheck/117451276649054529
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

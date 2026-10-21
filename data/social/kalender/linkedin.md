@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 21.10.2026 12:17 (Europe/Berlin)  
+> Automatisch aktualisiert: 21.10.2026 17:59 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -16,7 +16,7 @@
 - **07:45** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
 ### Fr, 23. Oktober 2026
-- **07:45** ⏳ Smart Home: So prüfst du echte Stromersparnis — _nutzen_ · Launch  
+- **07:45** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
 ### Mo, 26. Oktober 2026
 - **07:45** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
