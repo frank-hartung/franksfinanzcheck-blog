@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T22:29:12Z",
+  "generated_at": "2026-10-21T01:46:15Z",
   "modus": "kandidaten",
-  "commit": "c8878432acf99529a63422e84f13b461dbdaa5e5",
+  "commit": "491302903a412ec9f07a78480baeae2e83749e03",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "b5244821a0be23a8670606e2396268337840a23a3e4bb7c86fe4c7eca5b2a650",
@@ -1024,6 +1024,23 @@
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert"
     },
+    "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
+      "sha256": "c39b20442525b03a2975ce9bedfa8a752051e960945cff7a6cbeb6739eb87342",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2027-01-07",
+      "siegel_drift": "neu versiegelt"
+    },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
       "sha256": "67a70c823dbb97c7ff1900821205e07007d77280b96d867e6232d42330881989",
       "urteil": "freigabe-reif",
@@ -1057,6 +1074,23 @@
       },
       "naechste_pruefung": "2027-01-05",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
+      "sha256": "13678d578b9f3b690d1961a596affe9758021f75328e238c2bcd577b10bd4135",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
