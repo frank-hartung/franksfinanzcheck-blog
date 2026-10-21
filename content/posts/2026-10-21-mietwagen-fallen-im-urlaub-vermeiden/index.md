@@ -6,7 +6,7 @@ draft: true
 tags: ["Reisekosten sparen", "Mietwagen und Wohnmobil"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
-keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen"]
+keywords: ["Mietwagen Tipps", "Urlaub Mietwagen", "Reisekosten sparen", "Mietwagen-Fallen im Urlaub vermeiden", "Mietwagen Fallen im Urlaub vermeiden", "Mietwagen-Fallen", "Mietwagen buchen", "Mietwagen Kaution"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Mietwagen-Fallen im Urlaub vermeiden"
+pin_description: "*Werbung | Mietwagen-Fallen im Urlaub vermeiden – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #mietwagen #tipps #urlaub"
+cover:
+  image: "images/covers/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden.jpg"
+  alt: "Mietwagen-Fallen im Urlaub vermeiden"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast endlich den Urlaub geplant. Das Hotel steht und die Koffer sind fast gepackt. Der nächste Schritt ist ein Auto für die Reise. Doch noch bevor du das erste Angebot anklickst, kommen Fragen auf. Welche Kosten kommen wirklich auf dich zu? In diesem Ratgeber zeige ich dir die Fallen im Kleingedruckten. Du lernst mit klaren Schritten, wie du deine Kosten für die Reise senkst. So bleibt am Ende mehr Geld für die Urlaubskasse übrig.
