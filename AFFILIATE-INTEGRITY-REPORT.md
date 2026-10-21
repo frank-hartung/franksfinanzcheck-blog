@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-20 09:03:26 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-21 09:02:20 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 62 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 64 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -72,8 +72,10 @@
 | 2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken | 1 → 1 ✅ | /go/strom/ |
 | 2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck | 2 → 3 ✅ | /go/strom/ |
 | 2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt | 2 → 3 ✅ | /go/strom/ |
+| 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle | 2 → 3 ✅ | /go/dsl/ |
 | 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle | 3 → 3 ✅ | /go/unfallversicherung/ |
+| 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken | 3 → 3 ✅ | /go/strom/ |
 
 ## Hinweise (nicht blockierend)
 
