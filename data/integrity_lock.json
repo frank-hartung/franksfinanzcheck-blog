@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-19T19:53:12.322903+00:00",
-  "head": "1089d1c",
+  "signed_at": "2026-10-19T20:01:57.310747+00:00",
+  "head": "aacb7514",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -55,38 +55,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
-  "audit_start_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38",
+  "audit_start_sha256": "80a251d5170c976c1f32ae6557575f0053ede33ab99731b27adaaccf18f7b85f",
   "audit": [
-    {
-      "date": "2026-10-13",
-      "art": "set-current",
-      "head": "5dcbe27",
-      "geaendert": [
-        "scripts/casing_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/casing_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "5dcbe27",
-              "datum": "2026-10-13",
-              "betreff": "fix(content+casing): Nomen im Titel heilen – „Der stille posten“ und die Keyword-Ruinen"
-            },
-            {
-              "sha": "5f906a3",
-              "datum": "2026-10-13",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "e7c5f6a96a805cb6c7b9c3eba64b76067f8b0ea57b897284137fea0e9880a4f1",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-14",
       "art": "set-current",
@@ -120,7 +90,7 @@
         }
       ],
       "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5",
-      "prev_sha256": "e962028c7f6c1a681564a4f4a5ce67daf038e904dc866c9f942fced7a599eb38"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-14",
@@ -500,7 +470,15 @@
           "Die Datei endet AN der Bruchstelle – Muster: ein Schreibvorgang wurde abgebrochen (halbes Siegel)."
         ]
       },
-      "prev_sha256": "1848c87159c8b0c3f931a2526e573e17a57dffec749c4546c375f75ce4fdbf3f",
+      "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
+      "prev_sha256": "1848c87159c8b0c3f931a2526e573e17a57dffec749c4546c375f75ce4fdbf3f"
+    },
+    {
+      "date": "2026-10-19",
+      "art": "set-current",
+      "head": "aacb7514",
+      "geaendert": [],
+      "prev_sha256": "1f83b5d6846c243354352e6dc4471102b342c2f10d5758fb27826474b9a51a51",
       "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517"
     }
   ]
