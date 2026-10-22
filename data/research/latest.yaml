@@ -1,5 +1,5 @@
-generated_at: '2026-10-21T08:52:17Z'
-day: '2026-10-21'
+generated_at: '2026-10-22T08:55:04Z'
+day: '2026-10-22'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,60 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+  - topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+    score: 0.55
+    keywords:
+    - 5G Router
+    - DSL Alternative
+    - Mobilfunk statt DSL
+  - topic: Die Vorteile von Online-Konten und wie du sie nutzt
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    source: topics:Die Vorteile von Online-Konten und wie du sie nutzt
     score: 0.55
     keywords:
-    - Kreditkarte Ausland
-    - Auslandsgebühren vermeiden
-    - Reisekreditkarte
-  - topic: Die richtige Absicherung für dein Haus
-    pillar: versicherungen
+    - Online-Konten
+    - Vorteile
+    - nutzen
+  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:Die richtige Absicherung für dein Haus
+    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
     score: 0.55
     keywords:
-    - Haus
-    - Versicherung
-    - Schutz
-  - topic: 'Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
-    pillar: konto-karten
+    - Energieausweis
+    - Energieausweis Kosten
+    - Energieeffizienzklasse Haus
+  - topic: 'Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+    pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
+    source: 'topics:Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
     score: 0.55
     keywords:
-    - Dispozinsen senken
-    - Überziehungszinsen
-    - Bank verhandeln
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
-    pillar: versicherungen
+    - Frugalismus Familie
+    - Sparen mit Kindern
+    - Familienbudget
+  - topic: 'Photovoltaik: Lohnt sich eine Solaranlage 2026?'
+    pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: 'topics:Photovoltaik: Lohnt sich eine Solaranlage 2026?'
     score: 0.55
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
-  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
-    pillar: konto-karten
+    - Photovoltaik
+    - Solaranlage Kosten
+    - Strom selbst erzeugen
+  - topic: Stromspar-Apps im Test für den Haushalt
+    pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    source: topics:Stromspar-Apps im Test für den Haushalt
     score: 0.55
     keywords:
-    - Schufa Eintrag löschen
-    - Negativeintrag entfernen
-    - Bonität verbessern
-  - topic: Wie du deine monatlichen Bankgebühren reduzieren kannst
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Wie du deine monatlichen Bankgebühren reduzieren kannst
-    score: 0.55
-    keywords:
-    - Bankgebühren
-    - reduzieren
-    - Konto
+    - Stromspar-Apps
+    - Haushalt
+    - Test
 live_web:
   enabled: false
   findings: []
