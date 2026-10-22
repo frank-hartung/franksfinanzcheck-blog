@@ -9,9 +9,13 @@
 #      Einwilligungsnachweise (nachweis:) – Nachweispflicht nach
 #      Art. 7 Abs. 1 DSGVO
 #    · optional D1 (Klick-Zähler)
+#    · zusätzlich alle Betriebspräfixe (budget:, exportlog:, takt:, feedback:/fbtag:) –
+#      nicht personenbezogen, aber betriebskritisch (Highend 22.10.2026,
+#      vollständige Abdeckung siehe docs/ANLEITUNG-OFFSITE-BACKUP.md)
 #
 #  Dieses Skript exportiert beides über die Cloudflare-API in EINE
-#  JSON-Datei. Verschlüsselung und Ablage übernimmt der Workflow
+#  JSON-Datei (alle KV-Schlüssel, kein Präfix-Filter – vollständiger Export).
+#  Verschlüsselung und Ablage übernimmt der Workflow
 #  (backup-offsite.yml, Job „kv-backup“) – und zwar NUR in ein privates
 #  Ziel. NIEMALS als Actions-Artefakt: Artefakte öffentlicher Repos kann
 #  jeder angemeldete GitHub-Nutzer laden, und eine verschlüsselte Datei

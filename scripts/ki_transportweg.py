@@ -405,6 +405,10 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # erlaubt dort ausschliesslich /zones-Pfade – kein /ai/, kein Modell-
     # Endpunkt, kein zweiter Anbieter.
     Path("scripts/cloudflare_edge_freigabe.py"),
+    # Kein Modellaufruf: Backup-Frische liest nur GitHub-Releases (operative
+    # Luecke zu E1–E8; WF-9E5A-Highend 22.10.2026). Ausgleich: TransportVertrag
+    # erlaubt dort ausschliesslich api.github.com/repos/…/releases.
+    Path("scripts/backup_freshness_guard.py"),
 }
 T6_AUSGESCHLOSSENE_ORDNER = {
     ".git", ".arena", ".cache", ".venv", "venv", "node_modules",
