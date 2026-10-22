@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 21.10.2026 22:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.10.2026 12:18 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -12,6 +12,9 @@
 
 ## Kommende Beiträge
 
+### Do, 22. Oktober 2026
+- **18:45** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
 ### Sa, 24. Oktober 2026
 - **11:45** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
@@ -25,20 +28,23 @@
 - **11:45** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
 ### Do, 29. Oktober 2026
-- **11:45** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
+- **11:45** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
 ### Fr, 30. Oktober 2026
 - **11:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
 ### Sa, 31. Oktober 2026
-- **11:45** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
+- **11:45** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 ### So, 01. November 2026
 - **11:45** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/
 ### Di, 03. November 2026
-- **11:45** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
+- **11:45** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
+### Do, 05. November 2026
+- **11:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
 

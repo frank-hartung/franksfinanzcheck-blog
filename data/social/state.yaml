@@ -969,6 +969,19 @@ history:
     #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
   ref: '117479727634173619'
   ai: false
+- posted_at: '2026-10-22T12:18:17.347974+02:00'
+  channel: mastodon
+  slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
+  title: 'Haushaltskosten reduzieren: So gewinnst du die Kontrolle'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117484047623058483
+  ok: true
+  text: "\U0001F4B6 Haushaltskosten senken und die Kontrolle zurückgewinnen  \nNutze\
+    \ den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) für sofortige Transparenz.\
+    \  \nhttps://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen"
+  ref: '117484047623058483'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -994,4 +1007,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-21T22:41:42.270993+02:00'
+updated_at: '2026-10-22T12:18:21.036432+02:00'
