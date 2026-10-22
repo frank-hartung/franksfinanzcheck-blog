@@ -1,0 +1,221 @@
+{
+  "frage": "Wie entwickeln sich die Gaspreise für private Haushalte in Deutschland aktuell?",
+  "zeitpunkt": "2026-10-22T10:34:44Z",
+  "abrufdatum": "2026-10-22",
+  "begriffe": [
+    "entwickeln",
+    "gaspreise",
+    "private",
+    "haushalte"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/",
+      "titel": "BDEW-Gaspreisanalyse – Entwicklung & Einflussfaktoren | BDEW",
+      "domain": "bdew.de",
+      "herausgeber": "BDEW Bundesverband der Energie- und Wasserwirtschaft",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-22",
+      "passagen": [
+        {
+          "satz": "Das Dokument mit höherer De­tail­tie­fe und me­tho­di­scher Er­läu­te­rung steht weiter unten zum Download zur Verfügung. ## So ent­wi­ckelt sich der Erd­gas­preis Der durch­schnitt­li­che Gaspreis für Haushalte in Ein­fa­mi­li­en­häu­sern beträgt 2026 bisher 11,93 ct/kWh.",
+          "punkte": 18,
+          "deckung": 1
+        },
+        {
+          "satz": "Der Gaspreis für Haushalte in Mehr­fa­mi­li­en­häu­sern beträgt 11,17 ct/kWh.",
+          "punkte": 14,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    },
+    {
+      "url": "https://www.bdew.de/energie/gaspreise/",
+      "titel": "Gaspreise in Deutschland – Entwicklung & Hintergründe | BDEW",
+      "domain": "bdew.de",
+      "herausgeber": "BDEW Bundesverband der Energie- und Wasserwirtschaft",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-22",
+      "passagen": [
+        {
+          "satz": "Endkundenpreise folgen dieser Entwicklung zeitversetzt, weil Energieversorger einen Großteil ihres erwarteten Gasbedarfs langfristig am Terminmarkt beschaffen und so kurzfristige Preisschwankungen abfedern. 2024 entfielen bei Haushalten 54 bis 55 Prozent des Gaspreises auf Beschaffung und Vertrieb, 16 bis 18 Prozent auf Netzentgelte und 28 bis 29 Prozent auf Steuern und Abgaben.",
+          "punkte": 32,
+          "deckung": 2
+        },
+        {
+          "satz": "Die interaktive Grafik zeigt die durchschnittliche Preisentwicklung für Heizkunden in **Mehrfamilienhäusern** mit einem Jahresverbrauch von 80.000 Kilowattstunden. ## Gaspreisentwicklung in Deutschland seit 2022 Die Großhandelspreise für Gas sind seit dem Höhepunkt der Energiekrise im Jahr 2022 zwar deutlich zurückgegangen, bleiben aber weiterhin etwa doppelt so hoch wie vor der Krise.",
+          "punkte": 22,
+          "deckung": 1
+        },
+        {
+          "satz": "Im Jahr 2024 machen Steuern und Abgaben durchschnittlich 28 Prozent des Gaspreises bei einem Jahresverbrauch von 20.000 kWh (Einfamilienhaus) und 29 Prozent bei 80.000 kWh (Mehrfamilienhaus) aus.",
+          "punkte": 22,
+          "deckung": 1
+        },
+        {
+          "satz": "Dieser Bereich umfasst die Kosten für den Einkauf und Verkauf von Gas, die von den Gasversorgern beeinflusst werden können. 2024 machten diese Kosten 54 Prozent des Gaspreises für Einfamilienhäuser und 55 Prozent für Mehrfamilienhäuser aus. ## Wo kommt Erdgas überall zum Einsatz?",
+          "punkte": 18,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    }
+  ],
+  "verworfen": [
+    {
+      "url": "https://www.finanztip.de/gaspreisvergleich/gaspreis-gaskosten/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ndr.de/nachrichten/info/Gaspreis-aktuell-wie-viel-kostet-Kilowattstunde,gaspreis142.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.vergleich.de/gaspreise.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.mein-eigenheim.de/heizen/gaspreisentwicklung.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verivox.de/gas/gaspreisentwicklung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.gasag.de/magazin/energiemarkt/gaspreisentwicklung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://de.statista.com/statistik/daten/studie/1459097/umfrage/gaspreis-privathaushalte-deutschland-taeglich/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.evm.de/privatkunden/gas/gaspreise/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.gasvermittlung.de/gaspreisentwicklung-deutschland",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/gaspreis-strompreis-aktuell/",
+      "grund": "keine Passage mit Bezug zur Frage"
+    }
+  ],
+  "antwort": {
+    "weg": "groq",
+    "text": "Der durchschnittliche Gaspreis für private Haushalte liegt im Jahr 2026 bei 11,93 ct/kWh für Einfamilienhäuser und bei 11,17 ct/kWh für Mehrfamilienhäuser [1]. Seit dem Höchststand der Energiekrise 2022 sind die Großhandelspreise deutlich gesunken, liegen jedoch weiterhin etwa doppelt so hoch wie vor der Krise [2]. Damit ist die aktuelle Preisentwicklung gekennzeichnet durch einen Rückgang gegenüber dem 2022‑Spitzenwert, aber einem noch deutlich über dem Vor‑Krisenniveau [2]. Die Zusammensetzung des Endkundenpreises bleibt ähnlich: rund 54‑55 % entfallen auf Beschaffung und Vertrieb, 16‑18 % auf Netzentgelte und 28‑29 % auf Steuern und Abgaben [2].",
+    "hinweis": "Freier Groq-Zugang, streng an die Belege gebunden.",
+    "beleglage": {
+      "weg": "extraktiv",
+      "text": "- Endkundenpreise folgen dieser Entwicklung zeitversetzt, weil Energieversorger einen Großteil ihres erwarteten Gasbedarfs langfristig am Terminmarkt beschaffen und so kurzfristige Preisschwankungen abfedern. 2024 entfielen bei Haushalten 54 bis 55 Prozent des Gaspreises auf Beschaffung und Vertrieb, 16 bis 18 Prozent auf Netzentgelte und 28 bis 29 Prozent auf Steuern und Abgaben. [2]\n- Die interaktive Grafik zeigt die durchschnittliche Preisentwicklung für Heizkunden in **Mehrfamilienhäusern** mit einem Jahresverbrauch von 80.000 Kilowattstunden. ## Gaspreisentwicklung in Deutschland seit 2022 Die Großhandelspreise für Gas sind seit dem Höhepunkt der Energiekrise im Jahr 2022 zwar deutlich zurückgegangen, bleiben aber weiterhin etwa doppelt so hoch wie vor der Krise. [2]\n- Im Jahr 2024 machen Steuern und Abgaben durchschnittlich 28 Prozent des Gaspreises bei einem Jahresverbrauch von 20.000 kWh (Einfamilienhaus) und 29 Prozent bei 80.000 kWh (Mehrfamilienhaus) aus. [2]\n- Das Dokument mit höherer De­tail­tie­fe und me­tho­di­scher Er­läu­te­rung steht weiter unten zum Download zur Verfügung. ## So ent­wi­ckelt sich der Erd­gas­preis Der durch­schnitt­li­che Gaspreis für Haushalte in Ein­fa­mi­li­en­häu­sern beträgt 2026 bisher 11,93 ct/kWh. [1]\n- Dieser Bereich umfasst die Kosten für den Einkauf und Verkauf von Gas, die von den Gasversorgern beeinflusst werden können. 2024 machten diese Kosten 54 Prozent des Gaspreises für Einfamilienhäuser und 55 Prozent für Mehrfamilienhäuser aus. ## Wo kommt Erdgas überall zum Einsatz? [2]\n- Der Gaspreis für Haushalte in Mehr­fa­mi­li­en­häu­sern beträgt 11,17 ct/kWh. [1]",
+      "aussagen": [
+        {
+          "satz": "Endkundenpreise folgen dieser Entwicklung zeitversetzt, weil Energieversorger einen Großteil ihres erwarteten Gasbedarfs langfristig am Terminmarkt beschaffen und so kurzfristige Preisschwankungen abfedern. 2024 entfielen bei Haushalten 54 bis 55 Prozent des Gaspreises auf Beschaffung und Vertrieb, 16 bis 18 Prozent auf Netzentgelte und 28 bis 29 Prozent auf Steuern und Abgaben.",
+          "beleg": 2,
+          "punkte": 32
+        },
+        {
+          "satz": "Die interaktive Grafik zeigt die durchschnittliche Preisentwicklung für Heizkunden in **Mehrfamilienhäusern** mit einem Jahresverbrauch von 80.000 Kilowattstunden. ## Gaspreisentwicklung in Deutschland seit 2022 Die Großhandelspreise für Gas sind seit dem Höhepunkt der Energiekrise im Jahr 2022 zwar deutlich zurückgegangen, bleiben aber weiterhin etwa doppelt so hoch wie vor der Krise.",
+          "beleg": 2,
+          "punkte": 22
+        },
+        {
+          "satz": "Im Jahr 2024 machen Steuern und Abgaben durchschnittlich 28 Prozent des Gaspreises bei einem Jahresverbrauch von 20.000 kWh (Einfamilienhaus) und 29 Prozent bei 80.000 kWh (Mehrfamilienhaus) aus.",
+          "beleg": 2,
+          "punkte": 22
+        },
+        {
+          "satz": "Das Dokument mit höherer De­tail­tie­fe und me­tho­di­scher Er­läu­te­rung steht weiter unten zum Download zur Verfügung. ## So ent­wi­ckelt sich der Erd­gas­preis Der durch­schnitt­li­che Gaspreis für Haushalte in Ein­fa­mi­li­en­häu­sern beträgt 2026 bisher 11,93 ct/kWh.",
+          "beleg": 1,
+          "punkte": 18
+        },
+        {
+          "satz": "Dieser Bereich umfasst die Kosten für den Einkauf und Verkauf von Gas, die von den Gasversorgern beeinflusst werden können. 2024 machten diese Kosten 54 Prozent des Gaspreises für Einfamilienhäuser und 55 Prozent für Mehrfamilienhäuser aus. ## Wo kommt Erdgas überall zum Einsatz?",
+          "beleg": 2,
+          "punkte": 18
+        },
+        {
+          "satz": "Der Gaspreis für Haushalte in Mehr­fa­mi­li­en­häu­sern beträgt 11,17 ct/kWh.",
+          "beleg": 1,
+          "punkte": 14
+        }
+      ],
+      "hinweis": "Wörtliche Passagen, nach Relevanz geordnet. Keine Umformulierung."
+    }
+  },
+  "browser_beweis": [
+    {
+      "url": "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/",
+      "endstand_url": "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/",
+      "status": 200,
+      "titel": "BDEW-Gaspreisanalyse – Entwicklung & Einflussfaktoren | BDEW",
+      "text_laenge": 2241,
+      "auszug": "Verband Energie Wasser/Abwasser Presse Magazin Service Suche Mitgliederbereich Service Daten und Grafiken BDEW-Gaspreisanalyse August 2026 24.08.2026 Drucken BDEW-Gas­preis­ana­ly­se August 2026 Die BDEW-Gas­preis­ana­ly­se zeigt die aktuelle Ent­wick­lung der Gaspreise für Haus­halts­kun­den in Deutsch­land. © Ricardo Javier / Shutterstock Zusammenfassung des Beitrages Be­trach­tet wird die durch­schnitt­li­che Preis­ent­wick­lung für Heiz­kun­den in Ein- und Mehr­fa­mi­li­en­häu­sern. Die dar­ge­stell­ten Preise bilden den Durch­schnitt der im Markt ver­füg­ba­ren Tarife für Gas für den je­w",
+      "treffer": [
+        {
+          "begriff": "entwickeln",
+          "gefunden": false
+        },
+        {
+          "begriff": "gaspreise",
+          "gefunden": true
+        },
+        {
+          "begriff": "private",
+          "gefunden": false
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [
+        "Cannot read properties of null (reading 'getAttribute')",
+        "Cannot read properties of null (reading 'addEventListener')"
+      ],
+      "gemessen_am": "2026-10-22T10:35:07.267Z",
+      "zustand": "bereit"
+    },
+    {
+      "url": "https://www.bdew.de/energie/gaspreise/",
+      "endstand_url": "https://www.bdew.de/energie/gaspreise/",
+      "status": 200,
+      "titel": "Gaspreise in Deutschland – Entwicklung & Hintergründe | BDEW",
+      "text_laenge": 6301,
+      "auszug": "Verband Energie Wasser/Abwasser Presse Magazin Service Suche Mitgliederbereich 25.08.2026 Dossier: Gaspreise Diese Übersicht zeichnet die Entwicklung der Gaspreise der vergangenen Jahre nach und erklärt, wie sich der Gaspreis zusammensetzt. Listen to this article: 00:00 / 11:43 1X AI Voice by BotTalk Zusammenfassung des Beitrages Gas­preis­ent­wick­lung: Was kostet Gas im Schnitt für Endkunden? Die in­ter­ak­ti­ve Grafik zeigt die durch­schnitt­li­che Preis­ent­wick­lung für Heiz­kun­den in Ein­fa­mi­li­en­häu­sern mit einem Jah­res­ver­brauch von 20.000 Ki­lo­watt­stun­den. Die Kosten für Be­",
+      "treffer": [
+        {
+          "begriff": "entwickeln",
+          "gefunden": false
+        },
+        {
+          "begriff": "gaspreise",
+          "gefunden": true
+        },
+        {
+          "begriff": "private",
+          "gefunden": false
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [
+        "Cannot read properties of null (reading 'addEventListener')"
+      ],
+      "gemessen_am": "2026-10-22T10:35:12.028Z",
+      "zustand": "bereit"
+    }
+  ]
+}

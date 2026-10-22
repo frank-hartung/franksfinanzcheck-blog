@@ -1,0 +1,276 @@
+{
+  "frage": "Welche Rechte haben Verbraucher bei Preiserhöhungen von Strom- und Gasanbietern?",
+  "zeitpunkt": "2026-10-22T10:35:22Z",
+  "abrufdatum": "2026-10-22",
+  "begriffe": [
+    "rechte",
+    "verbraucher",
+    "preiserhöhungen",
+    "strom",
+    "gasanbietern"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [
+    {
+      "url": "http://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html",
+      "titel": "Preise und Abschläge - Bundesnetzagentur",
+      "domain": "bundesnetzagentur.de",
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-22",
+      "passagen": [
+        {
+          "satz": "Title: Bundesnetzagentur - Preise und Abschläge URL Source: http://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html Markdown Content: ## Preise und Ab­schlä­ge Aus welchen Bestandteilen setzen sich Strom- und Gaspreis zusammen?",
+          "punkte": 10,
+          "deckung": 1
+        },
+        {
+          "satz": "Wir beantworten Ihre Fragen rund um Preise und Abschlagszahlungen. ## Strom- und Gaspreise Jeder Lieferant kalkuliert seine Tarife selbst.",
+          "punkte": 10,
+          "deckung": 1
+        },
+        {
+          "satz": "Sollte der Lieferant nicht auf Ihr Schreiben reagieren, können Sie [ein Beschwerde- und anschließendes Schlichtungsverfahren](http://www.bundesnetzagentur.de/DE/Vportal/Energie/BeschwerdeSchlichtung/start.html \"Beschwerde und Schlichtung\") durchführen. ### **FAQ** ## Wo bekomme ich Informationen über aktuelle Strom- und Gaspreise?",
+          "punkte": 10,
+          "deckung": 1
+        },
+        {
+          "satz": "Gaspreise und zu Wechselmöglichkeiten erhalten Sie über verschiedene Online-Energievergleichsportale, Verbraucherberatungsstellen, Energieverbände und bestimmte Behörden.",
+          "punkte": 10,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    },
+    {
+      "url": "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Preiserhoehungen/start.html",
+      "titel": "Bundesnetzagentur - Preiserhöhungen",
+      "domain": "bundesnetzagentur.de",
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-22",
+      "passagen": [
+        {
+          "satz": "Title: Bundesnetzagentur - Preiserhöhungen URL Source: https://www.bundesnetzagentur.de/DE/Vportal/Energie/Preiserhoehungen/start.html Markdown Content: Ihr Energielieferant hat die Preise erhöht und Ihnen mitgeteilt, dass Ihr monatlicher Abschlag wegen der höheren Beschaffungskosten angepasst wird?",
+          "punkte": 10,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    },
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen/preiserhoehungen-bei-strom-und-gas-was-ist-erlaubt-13201",
+      "titel": "Preiserhöhungen bei Strom und Gas – was ist erlaubt? | ...",
+      "domain": "verbraucherzentrale.de",
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-10-22",
+      "passagen": [
+        {
+          "satz": "URL Source: https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen/preiserhoehungen-bei-strom-und-gas-was-ist-erlaubt-13201 Published Time: Thu, 22 Oct 2026 10:35:45 GMT Markdown Content: Stand: 19.",
+          "punkte": 32,
+          "deckung": 2
+        },
+        {
+          "satz": "Sie möchten der [Preiserhöhung widersprechen](https://www.verbraucherzentrale.de/sites/default/files/2025-02/musterbrief-musterbrief-widerspruch-gegen-strom-gaspreiserhohung-mitteilung-nicht-erhalten.pdf), da Sie keine Mitteilung erhalten haben?",
+          "punkte": 26,
+          "deckung": 2
+        },
+        {
+          "satz": "Unser [Musterbrief](https://www.verbraucherzentrale.de/sites/default/files/2023-12/mb-sonderkundigung-nach-energiepreiserhohung-oder-senkung.pdf) hilft Ihnen dabei.",
+          "punkte": 16,
+          "deckung": 1
+        },
+        {
+          "satz": "Berücksichtigen Sie dabei, dass Sie eventuell einen [Bonus](https://www.verbraucherzentrale.de/node/6435) verlieren könnten, wenn dieser zum Beispiel eine einjährige Belieferung zur Bedingung hat.",
+          "punkte": 14,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    }
+  ],
+  "verworfen": [
+    {
+      "url": "https://www.vis.bayern.de/produkte_energie/preise_kosten/preiserhoehungen.htm",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.klugo.de/blog/preiserhoehung-bei-strom-und-gas",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.anwalt.de/rechtstipps/horrende-erhoehungen-der-strom-und-gaspreise-was-sind-ihre-rechte-223926.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verbraucherzentrale-sachsen-anhalt.de/wissen/energie/preise-tarife-anbieterwechsel/strom-und-gas-unzulaessige-anbietermethoden-66544",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verbraucherzentrale.nrw/wissen/energie/preise-tarife-anbieterwechsel/strom-und-gas-unzulaessige-anbietermethoden-66544",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.friedrich.legal/sonderkuendigungsrecht-bei-preiserhoehungen-des-strom-gasanbieters/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "http://www.merkur.de/wirtschaft/abschlagszahlung-preiserhoehung-versorger-strom-gas-verbraucher-verbraucherzentrale-rechte-einspruch-zr-91785340.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.stromauskunft.de/stromanbieter-wechsel/stromanbieter-wechsel-faq/preiserhoehungen-strom-und-gas/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verbraucherzentrale-finanzen.org/preiserhoehungen-unzulaessig/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    }
+  ],
+  "antwort": {
+    "weg": "groq",
+    "text": "Bei einer Preiserhöhung muss dein Lieferant dich darüber informieren und den monatlichen Abschlag an die höheren Beschaffungskosten anpassen [2]. Du hast das Recht, der Erhöhung zu widersprechen, wenn du keine Mitteilung erhalten hast [3]. Dafür kannst du ein Muster‑Beschwerdeschreiben nutzen [3]. Bleibt die Reaktion aus, kannst du ein Beschwerde‑ und anschließend ein Schlichtungsverfahren bei der Bundesnetzagentur einleiten [1]. Zusätzlich kannst du dich über aktuelle Preise und Wechselmöglichkeiten bei Vergleichsportalen, Verbraucherberatungen oder Energieverbänden informieren [1]. Beachte, dass ein Widerspruch eventuell den Verlust eines Bonus zur Folge haben kann, wenn dieser an eine einjährige Belieferung geknüpft ist [3].",
+    "hinweis": "Freier Groq-Zugang, streng an die Belege gebunden.",
+    "beleglage": {
+      "weg": "extraktiv",
+      "text": "- URL Source: https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen/preiserhoehungen-bei-strom-und-gas-was-ist-erlaubt-13201 Published Time: Thu, 22 Oct 2026 10:35:45 GMT Markdown Content: Stand: 19. [3]\n- Sie möchten der [Preiserhöhung widersprechen](https://www.verbraucherzentrale.de/sites/default/files/2025-02/musterbrief-musterbrief-widerspruch-gegen-strom-gaspreiserhohung-mitteilung-nicht-erhalten.pdf), da Sie keine Mitteilung erhalten haben? [3]\n- Unser [Musterbrief](https://www.verbraucherzentrale.de/sites/default/files/2023-12/mb-sonderkundigung-nach-energiepreiserhohung-oder-senkung.pdf) hilft Ihnen dabei. [3]\n- Berücksichtigen Sie dabei, dass Sie eventuell einen [Bonus](https://www.verbraucherzentrale.de/node/6435) verlieren könnten, wenn dieser zum Beispiel eine einjährige Belieferung zur Bedingung hat. [3]\n- Title: Bundesnetzagentur - Preise und Abschläge URL Source: http://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html Markdown Content: ## Preise und Ab­schlä­ge Aus welchen Bestandteilen setzen sich Strom- und Gaspreis zusammen? [1]\n- Wir beantworten Ihre Fragen rund um Preise und Abschlagszahlungen. ## Strom- und Gaspreise Jeder Lieferant kalkuliert seine Tarife selbst. [1]\n- Sollte der Lieferant nicht auf Ihr Schreiben reagieren, können Sie [ein Beschwerde- und anschließendes Schlichtungsverfahren](http://www.bundesnetzagentur.de/DE/Vportal/Energie/BeschwerdeSchlichtung/start.html \"Beschwerde und Schlichtung\") durchführen. ### **FAQ** ## Wo bekomme ich Informationen über aktuelle Strom- und Gaspreise? [1]\n- Gaspreise und zu Wechselmöglichkeiten erhalten Sie über verschiedene Online-Energievergleichsportale, Verbraucherberatungsstellen, Energieverbände und bestimmte Behörden. [1]",
+      "aussagen": [
+        {
+          "satz": "URL Source: https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen/preiserhoehungen-bei-strom-und-gas-was-ist-erlaubt-13201 Published Time: Thu, 22 Oct 2026 10:35:45 GMT Markdown Content: Stand: 19.",
+          "beleg": 3,
+          "punkte": 32
+        },
+        {
+          "satz": "Sie möchten der [Preiserhöhung widersprechen](https://www.verbraucherzentrale.de/sites/default/files/2025-02/musterbrief-musterbrief-widerspruch-gegen-strom-gaspreiserhohung-mitteilung-nicht-erhalten.pdf), da Sie keine Mitteilung erhalten haben?",
+          "beleg": 3,
+          "punkte": 26
+        },
+        {
+          "satz": "Unser [Musterbrief](https://www.verbraucherzentrale.de/sites/default/files/2023-12/mb-sonderkundigung-nach-energiepreiserhohung-oder-senkung.pdf) hilft Ihnen dabei.",
+          "beleg": 3,
+          "punkte": 16
+        },
+        {
+          "satz": "Berücksichtigen Sie dabei, dass Sie eventuell einen [Bonus](https://www.verbraucherzentrale.de/node/6435) verlieren könnten, wenn dieser zum Beispiel eine einjährige Belieferung zur Bedingung hat.",
+          "beleg": 3,
+          "punkte": 14
+        },
+        {
+          "satz": "Title: Bundesnetzagentur - Preise und Abschläge URL Source: http://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html Markdown Content: ## Preise und Ab­schlä­ge Aus welchen Bestandteilen setzen sich Strom- und Gaspreis zusammen?",
+          "beleg": 1,
+          "punkte": 10
+        },
+        {
+          "satz": "Wir beantworten Ihre Fragen rund um Preise und Abschlagszahlungen. ## Strom- und Gaspreise Jeder Lieferant kalkuliert seine Tarife selbst.",
+          "beleg": 1,
+          "punkte": 10
+        },
+        {
+          "satz": "Sollte der Lieferant nicht auf Ihr Schreiben reagieren, können Sie [ein Beschwerde- und anschließendes Schlichtungsverfahren](http://www.bundesnetzagentur.de/DE/Vportal/Energie/BeschwerdeSchlichtung/start.html \"Beschwerde und Schlichtung\") durchführen. ### **FAQ** ## Wo bekomme ich Informationen über aktuelle Strom- und Gaspreise?",
+          "beleg": 1,
+          "punkte": 10
+        },
+        {
+          "satz": "Gaspreise und zu Wechselmöglichkeiten erhalten Sie über verschiedene Online-Energievergleichsportale, Verbraucherberatungsstellen, Energieverbände und bestimmte Behörden.",
+          "beleg": 1,
+          "punkte": 10
+        }
+      ],
+      "hinweis": "Wörtliche Passagen, nach Relevanz geordnet. Keine Umformulierung."
+    }
+  },
+  "browser_beweis": [
+    {
+      "url": "http://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html",
+      "endstand_url": "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html",
+      "status": 200,
+      "titel": "Bundesnetzagentur - Preise und Abschläge",
+      "text_laenge": 4200,
+      "auszug": "Navigation und Service Springe direkt zu: Inhalt Hauptmenu Suche Service KONTAKT ENGLISH LEICHTE SPRACHE GEBÄRDENSPRACHE VIDEOS RSS Sie sind hier: Homepage Verbraucherportal UntermenuOeffnen Energie UntermenuOeffnen Preise und Abschläge Preise und Ab­schlä­ge Strom- und Gaspreise Abschläge Preisbestandteile und Tarife Hintergrundinformationen zu Preisen bzw. Preisbestandteilen Preise und Ab­schlä­ge Aus welchen Bestandteilen setzen sich Strom- und Gaspreis zusammen? Wie kann der Abschlag berechnet werden? Wir beantworten Ihre Fragen rund um Preise und Abschlagszahlungen. Strom- und Gaspreise J",
+      "treffer": [
+        {
+          "begriff": "rechte",
+          "gefunden": false
+        },
+        {
+          "begriff": "verbraucher",
+          "gefunden": true
+        },
+        {
+          "begriff": "preiserhöhungen",
+          "gefunden": false
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [],
+      "gemessen_am": "2026-10-22T10:36:11.299Z",
+      "zustand": "bereit"
+    },
+    {
+      "url": "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Preiserhoehungen/start.html",
+      "endstand_url": "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Preiserhoehungen/start.html",
+      "status": 200,
+      "titel": "Bundesnetzagentur - Preiserhöhungen",
+      "text_laenge": 4297,
+      "auszug": "Navigation und Service Springe direkt zu: Inhalt Hauptmenu Suche Service KONTAKT ENGLISH LEICHTE SPRACHE GEBÄRDENSPRACHE VIDEOS RSS Sie sind hier: Homepage Verbraucherportal UntermenuOeffnen Energie UntermenuOeffnen Preiserhöhungen Ak­tu­el­les - Preis­er­hö­hun­gen Preiserhöhung Abschlagsberechnung Der Widerspruch gegen die Abschlagserhöhung wurde als Kündigung interpretiert Lieferant hat gekündigt Lieferantenwechsel Beschwerde und anschließendes Schlichtungsverfahren Ak­tu­el­les - Preis­er­hö­hun­gen Ihr Energielieferant hat die Preise erhöht und Ihnen mitgeteilt, dass Ihr monatlicher Absch",
+      "treffer": [
+        {
+          "begriff": "rechte",
+          "gefunden": false
+        },
+        {
+          "begriff": "verbraucher",
+          "gefunden": true
+        },
+        {
+          "begriff": "preiserhöhungen",
+          "gefunden": true
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [],
+      "gemessen_am": "2026-10-22T10:36:19.926Z",
+      "zustand": "bereit"
+    },
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen/preiserhoehungen-bei-strom-und-gas-was-ist-erlaubt-13201",
+      "endstand_url": "https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen/preiserhoehungen-bei-strom-und-gas-was-ist-erlaubt-13201",
+      "status": 200,
+      "titel": "Preiserhöhungen bei Strom und Gas – was ist erlaubt? | Verbraucherzentrale.de",
+      "text_laenge": 28237,
+      "auszug": "Direkt zum Inhalt Suche Menü Beratung Beschwerde einreichen Bildung Klagen Politik Shop Finanzen Digitales Lebensmittel Umwelt Gesundheit Energie Reise Verträge Preiserhöhungen bei Strom und Gas – was ist erlaubt? Stand: 19. November 2025 Wenn Ihr Energieanbieter die Preise erhöht, haben Sie in der Regel ein Sonderkündigungsrecht. Manchmal wird die Info über eine Preiserhöhung aber regelrecht versteckt. Und nicht jede Erhöhung ist zulässig. Drucken Teilen Beratung & Angebote Das Wichtigste in Kürze: Bei Preiserhöhungen für Strom oder Gas können Sie in den meisten Fällen fristlos kündigen und z",
+      "treffer": [
+        {
+          "begriff": "rechte",
+          "gefunden": true
+        },
+        {
+          "begriff": "verbraucher",
+          "gefunden": true
+        },
+        {
+          "begriff": "preiserhöhungen",
+          "gefunden": true
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [],
+      "gemessen_am": "2026-10-22T10:36:26.555Z",
+      "zustand": "bereit"
+    }
+  ]
+}
