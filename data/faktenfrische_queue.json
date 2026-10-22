@@ -1,107 +1,64 @@
 {
-  "erzeugt": "2026-10-20 09:37 UTC",
+  "erzeugt": "2026-10-22 09:35 UTC",
   "uebersicht": {
-    "gesamt": 99,
+    "gesamt": 100,
     "ratgeber": 6,
-    "faellig": 3,
-    "bearbeitet": 3,
+    "faellig": 1,
+    "bearbeitet": 1,
     "geo_schnitt": 93,
-    "befunde": 7,
+    "befunde": 5,
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 8,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 11,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 14,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 3,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 15,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 1,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     }
   },
   "offen": [],
   "laeufe": [
     {
-      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
-      "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
+      "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
+      "titel": "Mietwagen-Fallen im Urlaub vermeiden",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
-          "typ": "veraltet",
-          "text": "Der Artikel behauptet, dass die Strompreise für Neukunden stark nach unten gegangen sind, während das Statistische Bundesamt für 2026 einen Anstieg der Energieverbraucherpreise von +14,9 % ausweist.",
-          "beleg": ""
+          "typ": "luecke",
+          "text": "Die Aussage, dass jede Zusatzoption höchstens ein Drittel der Miete kosten sollte, ist nicht durch die Verbraucherzentrale belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Die angegebenen konkreten Einsparungen von 420 € jährlich beim Stromwechsel (3.500 kWh × 42 ct → 30 ct) werden nicht durch die bereitgestellte Quelle belegt.",
-          "beleg": ""
+          "text": "Die Behauptung, dass die Voll‑zu‑Voll‑Tankregel meist die beste Wahl ist, wird von der Quelle nicht bestätigt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Die genannten Kontoführungsgebühren von 9,90 € pro Monat und die daraus resultierende Jahresersparnis von über 1.300 € fehlen einer Quellenangabe; die destatis‑Seite liefert hierzu keine Daten.",
-          "beleg": ""
+          "text": "Die Angabe, dass ein Navigationsgerät zehn Euro oder mehr pro Tag kostet, fehlt in der Quelle.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Die Aussage, dass Internet‑Verträge nach 24 Monaten deutlich teurer werden, wird nicht durch die bereitgestellte Quelle unterstützt, die ausschließlich Energie‑ und Gesamtinflationsraten enthält.",
-          "beleg": ""
+          "text": "Die Aussage, dass ein Frühbucherrabatt nur bis zu einer bestimmten Anzahl von Tagen vor Mietbeginn gilt, ist nicht durch die Quelle belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Empfehlung, ausschließlich CHECK24 zu nutzen, wird von der Quelle nicht unterstützt und lässt andere Vergleichsplattformen außen vor.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         }
       ],
-      "geo": 33,
-      "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-20"
-      ]
-    },
-    {
-      "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
-      "titel": "DNS-Server ändern für schnelleres Internet",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 2,
-      "quellen": 2,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Der Artikel erwähnt nicht, dass DNS‑Server in Deutschland regulatorischen Vorgaben der Bundesnetzagentur unterliegen (z. B. Unternehmenspflichten), wodurch mögliche Einschränkungen oder Auflagen fehlen.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Aussage, dass ein DNS‑Wechsel das Internet „spürbar schneller“ macht, ignoriert hardwarebedingte Engpässe; aktuelle Router‑Modelle (z. B. Fritzbox Wi‑Fi 7) zeigen, dass selbst bei optimierten DNS‑Servern die Gesamtperformance durch Router‑Hardware begrenzt sein kann.",
-          "beleg": "https://www.heise.de/tests/Neue-Fritzbox-mit-Wi-Fi-7-Sparsam-aber-mit-WLAN-Kompromissen-11481243.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Tabelle behauptet, Cloudflare sei „oft die beste Wahl für hohes Tempo“, ohne messbare Daten oder Vergleichsstudien zu liefern; die Quelle liefert keine Leistungszahlen, sodass die Aussage zu pauschal bleibt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
-        }
-      ],
-      "geo": 33,
-      "fehler": [],
-      "aenderungen": [
-        "quellen: 2 Belege",
-        "faktencheck: 2026-10-20"
-      ]
-    },
-    {
-      "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
-      "titel": "Urlaubskasse clever aufbessern",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [],
       "geo": 50,
       "fehler": [
         "Verbraucherzentrale – Reise: Feed nicht lesbar"
       ],
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-20"
+        "faktencheck: 2026-10-22"
       ]
     }
   ]

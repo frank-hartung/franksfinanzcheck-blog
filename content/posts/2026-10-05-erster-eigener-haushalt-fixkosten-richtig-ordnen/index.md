@@ -183,7 +183,7 @@ In einer Wohngemeinschaft verdoppelt sich die Zahl der Verträge, die geklärt w
 
 Die praktische Regel: Jeder Vertrag braucht genau einen Verantwortlichen. Eine gemeinsame Liste hält fest, wer welchen Posten trägt und wann er endet. Sonst bleibt beim Auszug ein Vertrag auf einem Namen hängen, den niemand mehr nutzt.
 
-Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in fünf Minuten klären.
+Für gemeinsame Kosten ist ein separates Konto mit festen Beiträgen die klarste Lösung. Alle zahlen monatlich denselben Betrag ein, alle Abbuchungen laufen dort. Beim Auszug lässt sich der Saldo in [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) klären.
 
 **Faustregel:** Melde Verträge für Miete, Strom und Internet in den ersten vier Wochen nach dem Einzug in deinem Namen an – was nicht auf dich läuft, kann dich später teuer zu stehen kommen.
 

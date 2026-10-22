@@ -107,7 +107,7 @@ Selten genutzte Geräte fallen im Alltag kaum auf. Genau deshalb laufen sie manc
 
 ## Messen: kurz genug für den Alltag, lang genug für eine gute Zahl
 
-Ein Strommessgerät kommt zwischen Steckdose und Gerät. Für Standby reichen bei stabilen Werten oft 30 bis 60 Minuten. Bei wechselnder Netzwerk-Aktivität misst du besser über Nacht.
+Ein Strommessgerät kommt zwischen Steckdose und Gerät. Für Standby reichen bei stabilen Werten oft 30 bis [60 Minuten](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/). Bei wechselnder Netzwerk-Aktivität misst du besser über Nacht.
 
 ### Mein Ablauf
 
@@ -136,7 +136,7 @@ Eine Funksteckdose braucht selbst etwas Strom. Sie lohnt sich nur, wenn sie deut
 
 **OLED-Fernseher:** Manche Modelle laufen nach der Nutzung kurz weiter, um sich zu pflegen. Beachte die Hinweise vom Hersteller. Trenn den Strom nicht sofort nach jedem Ausschalten.
 
-**Router:** Telefon, Alarmanlage, Smart Home und nächtliche Sicherungen können daran hängen. Oft ist ein WLAN-Zeitplan besser als ein komplettes Abschalten.
+**Router:** Telefon, Alarmanlage, [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) und nächtliche Sicherungen können daran hängen. Oft ist ein WLAN-Zeitplan besser als ein komplettes Abschalten.
 
 **Recorder und Receiver:** Geplante Aufnahmen oder Programmdaten brauchen Bereitschaft.
 
@@ -263,7 +263,7 @@ Bei Dauerbetrieb sind es 87,6 kWh. Mit 37 Cent pro kWh zahlst du rund 32 € im
 Für Standby sollte es kleine Leistungen im niedrigen Wattbereich erfassen. Prüfe Messbereich und Auflösung in der Anleitung.
 
 ### Darf ich den Router nachts abschalten?
-Ja, wenn du dann weder Telefonie noch Smart Home, Sicherheitsfunktionen oder Updates brauchst. Prüfe zuerst den Energiespar- oder WLAN-Zeitplan.
+Ja, wenn du dann weder Telefonie noch Smart Home, Sicherheitsfunktionen oder Updates brauchst. Prüfe zuerst den [Energiespar](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/)- oder WLAN-Zeitplan.
 
 ### Sind schaltbare Steckdosenleisten sicher?
 Nutze geprüfte Produkte, beachte die maximale Belastung und schließe keine ungeeigneten Hochleistungsgeräte an. Beschädigte Leisten gehören ersetzt.

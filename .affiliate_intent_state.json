@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-21 09:02:22 UTC",
+ "generated_at": "2026-10-22 09:04:49 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 100,
- "checked_links": 238,
+ "checked_articles": 101,
+ "checked_links": 239,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -131,13 +131,24 @@
   {
    "code": "IW2",
    "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
-   "line": 104,
+   "line": 108,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
+   "line": 123,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

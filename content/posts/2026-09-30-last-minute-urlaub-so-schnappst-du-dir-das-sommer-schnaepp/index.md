@@ -62,9 +62,9 @@ Flexibilität bei Ziel, Abflugort und Termin kann mehr passende Angebote eröffn
 - **Mietwagen separat prüfen:** Kaution, Selbstbehalt, Kraftstoffregel und Zusatzfahrer verändern den Endpreis.
 - **In Ruhe vergleichen:** Ein Preisalarm ist ein Hinweis, aber kein Beleg für den niedrigsten verfügbaren Preis.
 
-## Wann Last-Minute-Angebote günstiger sein können – und wann nicht
+## Wann Last-Minute-Angebote günstiger sein können – und wann nicht?
 
-Ein Preisvorteil kann entstehen, wenn kurz vor der Abreise noch Plätze oder Zimmer frei sind. Das ist aber keine feste Preisregel. Anbieter können Angebote reduzieren. Sie können sie unverändert lassen. Sie können sie bei hoher Nachfrage auch verteuern. Auch eine vermeintliche Ersparnis ist nur dann aussagekräftig, wenn Reisezeit, Unterkunft, Verpflegung, Gepäck und Umbuchungsbedingungen vergleichbar sind.
+Ein Preisvorteil kann entstehen, wenn kurz vor der Abreise noch Plätze oder Zimmer frei sind. Das ist aber keine feste Preisregel. Anbieter können Angebote [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/). Sie können sie unverändert lassen. Sie können sie bei hoher Nachfrage auch verteuern. Auch eine vermeintliche Ersparnis ist nur dann aussagekräftig, wenn Reisezeit, Unterkunft, Verpflegung, Gepäck und Umbuchungsbedingungen vergleichbar sind.
 
 Flexibilität verbessert vor allem deine Auswahl. Sie garantiert weder einen freien Platz noch den günstigsten Preis. In Ferienzeiten oder auf beliebten Strecken kann die Auswahl kleiner sein. Prüfe deshalb zuerst, welche Bedingungen für dich unverzichtbar sind. Danach vergleiche mehrere passende Angebote.
 
@@ -220,7 +220,7 @@ Ein gutes Angebot kommt wieder. Eine schlechte Buchung bleibt.
 
 ### Nach der Buchung
 
-Druck die Bestätigung aus. Speichere sie als PDF. Prüfe noch einmal das Datum. Prüfe den Namen. Prüfe die Anzahl der Reisenden. So vermeidest du böse Überraschungen am Schalter.
+Druck die Bestätigung aus. Speichere sie als PDF. Prüfe noch einmal das Datum. Prüfe den Namen. Prüfe die Anzahl der Reisenden. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du böse Überraschungen am Schalter.
 
 Und dann? Dann freu dich auf die Reise. Du hast gut verglichen. Du hast fair gebucht. Das ist gutes Reise-Gefühl.
 

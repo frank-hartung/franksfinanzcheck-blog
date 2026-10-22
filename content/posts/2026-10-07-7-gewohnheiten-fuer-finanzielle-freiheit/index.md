@@ -38,7 +38,7 @@ quellen:
 faktencheck: "2026-10-07"
 ---
 
-7 Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: Finanzielle Freiheit klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
+7 Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -227,7 +227,7 @@ Der Blick auf die Fixkosten. Eine Anpassung wirkt jeden Monat neu. Dazu reicht e
 
 ### Wie starte ich mit wenig Zeit?
 
-Wähle eine einzige Gewohnheit. Sie muss unter fünf Minuten dauern. Der Start am Monatsersten ist ein guter Punkt. Alles Weitere kommt später dazu.
+Wähle eine einzige Gewohnheit. Sie muss unter [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) dauern. Der Start am Monatsersten ist ein guter Punkt. Alles Weitere kommt später dazu.
 
 ### Brauche ich eine App dazu?
 

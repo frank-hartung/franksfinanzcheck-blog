@@ -62,7 +62,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was du bereitlegst?
 
-- Letzte Gas- oder Heizkostenabrechnung,
+- Letzte Gas- oder [Heizkostenabrechnung](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/),
 - aktuellen Vertrag,
 - Smartphone für Fotos,
 - Raumthermometer, falls vorhanden,
@@ -96,7 +96,7 @@ Der aktuelle Abschlag kann davon abweichen. Eine kleinere Rate macht die Energie
 Notiere außerdem:
 
 - Ende der Mindestlaufzeit,
-- Kündigungsfrist,
+- [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
 - Ende der Preisgarantie,
 - Kosten ohne Bonus,
 - Zahlungsweise.
@@ -271,6 +271,8 @@ Jeder Termin dauert höchstens 15 Minuten. Hinterlege beim Kalendereintrag ein F
 Ein fester Rhythmus verhindert auch falsche Reaktionen. Der hohe Januarverbrauch ist bei Frost normal und kein Grund, sofort an fünf Einstellungen zu drehen. Ein steigender Preis trotz stabilem Verbrauch weist dagegen eher zum Vertrag.
 
 Notiere pro Termin nur eine Entscheidung, einen Verantwortlichen und eine Frist. So bleibt auch in einem Mehrpersonenhaushalt klar, wer den Zähler abliest oder den Termin vereinbart. Zu viele gleichzeitige Maßnahmen erschweren den Vergleich. Energie sparen ist hier erstaunlich unspektakulär: wenige Zahlen, feste Termine, saubere Zuständigkeit.
+
+**Faustregel:** Miss den Verbrauch, bevor du den Tarif wechselst; die größere Ersparnis sitzt meist nicht im Preis, sondern im Verbrauch.
 
 ## Fazit: Eine Stunde, drei Entscheidungen
 

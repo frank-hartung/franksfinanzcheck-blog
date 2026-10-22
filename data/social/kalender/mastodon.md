@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 20.10.2026 22:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.10.2026 17:55 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,14 +12,9 @@
 
 ## Kommende Beiträge
 
-### Mi, 21. Oktober 2026
-- **07:30** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
-- **07:30** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
-### Do, 22. Oktober 2026
-- **07:30** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
+### Fr, 23. Oktober 2026
+- **07:30** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Sa, 24. Oktober 2026
@@ -43,19 +38,24 @@
   https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 - **17:30** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
+### Mi, 04. November 2026
+- **07:30** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
+- **11:30** ⏳ Mietwagen ohne Kautionsfallen: So sparst du im Urlaub — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 22.10.2026 17:55 · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? → https://mastodon.social/@FranksFinanzcheck/117485372935493916
+- ✅ 22.10.2026 12:18 · Haushaltskosten reduzieren: So gewinnst du die Kontrolle → https://mastodon.social/@FranksFinanzcheck/117484047623058483
+- ✅ 21.10.2026 17:59 · Dein Weg zu geringeren Monatskosten: Schritt für Schritt → https://mastodon.social/@FranksFinanzcheck/117479727634173619
+- ✅ 21.10.2026 12:17 · Energiekosten senken: Smarte Helfer für den Haushalt → https://mastodon.social/@FranksFinanzcheck/117478382629994026
 - ✅ 20.10.2026 17:40 · Balkonkraftwerk Förderung: So holst du dir Geld zurück → https://mastodon.social/@FranksFinanzcheck/117473993182890841
 - ✅ 20.10.2026 12:09 · Smart Home: So prüfst du echte Stromersparnis → https://mastodon.social/@FranksFinanzcheck/117472689432509536
 - ✅ 19.10.2026 19:34 · Großeinkauf und Vorrat: Wann Bevorraten sich rechnet → https://mastodon.social/@FranksFinanzcheck/117468774583193688
 - ✅ 19.10.2026 12:54 · Zählerstand ablesen und melden: Schätzwerte vermeiden → https://mastodon.social/@FranksFinanzcheck/117467203191745299
 - ✅ 18.10.2026 16:39 · Einlagensicherung: Wie viel Guthaben geschützt ist → https://mastodon.social/@FranksFinanzcheck/117462425507126261
 - ✅ 18.10.2026 11:42 · Grundversorgung Strom und Gas: Was sie leistet → https://mastodon.social/@FranksFinanzcheck/117461257247875450
-- ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
-- ✅ 17.10.2026 11:28 · Urlaub sparen: Budget, Buchung und Kosten im Blick → https://mastodon.social/@FranksFinanzcheck/117455541616253764
-- ✅ 16.10.2026 17:24 · Störung beim Internetanbieter: So sicherst du deine Rechte → https://mastodon.social/@FranksFinanzcheck/117451276649054529
-- ✅ 16.10.2026 11:55 · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt → https://mastodon.social/@FranksFinanzcheck/117449983499442917
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

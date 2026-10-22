@@ -1,5 +1,5 @@
 ---
-title: "Smart Home: So prüfst du echte Stromersparnis"
+title: "Smart Home: So prüfst du echte Stromersparnis – Smarte"
 description: "Smart Home spart nicht automatisch Strom. Erfahre, wie du Verbrauch misst, Schaltregeln sicher wählst und Kosten mit einem klaren Modell prüfst."
 date: 2026-10-14T14:57:12Z
 draft: false

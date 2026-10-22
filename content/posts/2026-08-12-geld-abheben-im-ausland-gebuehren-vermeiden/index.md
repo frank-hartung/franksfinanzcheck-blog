@@ -8,7 +8,7 @@ tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Geld abheben im Ausland", "Auslandsgebühren Karte", "Automatengebühr", "Fremdwährungsgebühr"]
+keywords: ["Geld abheben im Ausland", "Auslandsgebühren Karte", "Automatengebühr", "Fremdwährungsgebühr", "Kreditkarte oh", "e Ausla"]
 pin_title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
 pin_description: "*Werbung | Geld abheben im Ausland: welche zwei Gebühren am Automaten zusammenkommen, was die Abrechnung in Euro bedeutet und wie du vor der Reise deine Karte prüfst. Mehr Spartipps auf FranksFinanzcheck! #geldabheben #auslandsgebuehren #girokonto"
 ai_generated: true
@@ -148,7 +148,7 @@ Dasselbe gilt für den Bearbeitungstag. Deine Bank bucht die Abhebung nicht imme
 
 ## Selbstcheck in fünf Minuten
 
-Wenn du heute nur wenig Zeit hast, reichen fünf Minuten für die wichtigsten Antworten. Halte dafür deine Preisliste und deine Karten bereit.
+Wenn du heute nur wenig Zeit hast, reichen [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) für die wichtigsten Antworten. Halte dafür deine Preisliste und deine Karten bereit.
 
 1. **Zeile eins suchen:** Welches Entgelt gilt für Abhebungen außerhalb des Euro-Raums?
 2. **Zeile zwei suchen:** Gilt dasselbe für Kartenzahlungen im Handel?
