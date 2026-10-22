@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 22.10.2026 17:55 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.10.2026 22:36 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,15 +12,12 @@
 
 ## Kommende Beiträge
 
-### Do, 22. Oktober 2026
-- **18:00** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
 ### So, 25. Oktober 2026
-- **07:00** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
+- **07:00** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 ### So, 01. November 2026
-- **07:00** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
+- **07:00** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
 
 ## Zuletzt veröffentlicht
 

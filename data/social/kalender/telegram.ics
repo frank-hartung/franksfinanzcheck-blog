@@ -6,11 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
+UID:telegram:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
+ e-verlaengerung:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261022T203614Z
+DTSTART:20261025T060000Z
+DTEND:20261025T061500Z
+SUMMARY:Telegram (Kanal): Handyvertrag kündigen: Enddatum\, Nachweis u
+ nd Rufnummer (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-k
+ uendigen-raus-aus-der-kostenfalle-verlaengerung/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
+ en-raus-aus-der-kostenfalle-verlaengerung/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:telegram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
- klich-druecken:nutzen:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261022T155524Z
-DTSTART:20261022T160000Z
-DTEND:20261022T161500Z
+ klich-druecken:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261022T203614Z
+DTSTART:20261101T060000Z
+DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Smart Home: So prüfst du echte Stromersparni
  s – Smarte (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -18,36 +33,6 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  -geraete-deine-stromrechnung-wirklich-druecken/
 URL:https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-gerae
  te-deine-stromrechnung-wirklich-druecken/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-g
- eld-kostet:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261022T155524Z
-DTSTART:20261025T060000Z
-DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): Treue-Falle beim DSL-Vertrag: Wann sich der 
- Wechsel rechnet (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-w
- echseln-warum-treue-dich-bares-geld-kostet/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechsel
- n-warum-treue-dich-bares-geld-kostet/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-gel
- d-zurueck:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261022T155524Z
-DTSTART:20261101T060000Z
-DTEND:20261101T061500Z
-SUMMARY:Telegram (Kanal): Balkonkraftwerk Förderung: So holst du dir G
- eld zurück (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwer
- k-foerderung-so-holst-du-dir-geld-zurueck/
-URL:https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foer
- derung-so-holst-du-dir-geld-zurueck/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

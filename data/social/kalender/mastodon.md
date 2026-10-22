@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 22.10.2026 17:55 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.10.2026 22:36 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
