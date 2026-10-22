@@ -230,20 +230,25 @@ ausdrückliche Schritt nach dem Proxy – der Text steht fertig im Runbook.
 
 ```
 python3 scripts/alert_resolve_gate.py --selftest          11 Fälle grün (neu)
-python3 -m unittest scripts.tests.test_alert_resolve_gate 19 Tests, 19 grün (neu)
-python3 -m unittest scripts.tests.test_alert_scoping      24 Tests, 24 grün
-node scripts/tests/sim/alert_scoping_sim.mjs              44 Szenarien, 44 grün
-python3 scripts/worker_betrieb_wache.py --selftest        13 Fälle grün (vorher 10)
+python3 -m unittest scripts.tests.test_alert_resolve_gate 19 Tests grün (neu)
+python3 -m unittest scripts.tests.test_alert_scoping      26 Tests grün
+python3 -m unittest scripts.tests.test_sicherheits_nachweis 24 Tests grün (Paralleldurchgang)
+python3 -m unittest scripts.tests.test_worker_betrieb_wache 30 Tests grün (beide Durchgänge)
+python3 -m unittest scripts.tests.test_blog_header_gate   34 Tests grün
+python3 -m unittest scripts.tests.test_cloudflare_edge_freigabe 6 Tests grün (T6-Ausgleich)
+python3 -m unittest discover -s scripts/tests             3512 Tests, 0 Fehler
+node scripts/tests/sim/alert_scoping_sim.mjs              44 Szenarien (via test_alert_scoping)
+python3 scripts/worker_betrieb_wache.py --selftest        18 Fälle grün
 python3 scripts/worker_betrieb_wache.py --offline         grün (Spiegel geprüft)
 cd newsletter-worker && node --test                       92 Tests, 92 grün
-npm run test:sicherheit                                   alle vier Wachen grün
+npm run test:sicherheit                                   alle Wachen grün
+npm run test:vorgang · test:wachen · test:urlwache        grün
 python3 scripts/cloudflare_edge_freigabe.py --selftest    4 Fälle grün (neu)
-python3 -m unittest scripts.tests.test_cloudflare_edge_freigabe  6 Tests grün (T6-Ausgleich)
 npm run edge:check                                        grün
-python3 scripts/url_substring_guard.py                    885 Dateien, 0 Befunde
-python3 scripts/integrity_guard.py --gate                 grün (Kern neu signiert)
+python3 scripts/integrity_guard.py --gate                 grün (Kern signiert)
 python3 scripts/ki_transportweg.py --selftest             grün (T6-Ausnahme mit Ausgleich)
 python3 scripts/selftest_runner.py                        215 Wachen grün (430 Uhr-Proben)
+python3 scripts/governance_contract.py --quick            38 Regeln erfüllt
 ```
 
 Belegt aus den Laufsachen (Actions-API, unveränderlich):
@@ -254,22 +259,42 @@ Belegt aus den Laufsachen (Actions-API, unveränderlich):
 - Run `39254264963` (19.10., `schedule`): Annotationen
   „F-01 BEFUND … Proxy nicht aktiv“ und „Worker BEFUND“.
 
-**Nachtrag – Vorlauf-Befunde der Content-Ebene, bewusst nicht hier geheilt:**
-Der Regression-Lauf dieses Vorschlags trägt zwei Befunde, die mit WF-E813
-nichts zu tun haben und am Basis-Commit `1021d45` **identisch** auftreten
-(wiederholt im Arbeitsbaum des Basisstands nachgestellt – Vorläufigkeit
-bewiesen, nicht behauptet):
-`test_inhalts_register.test_live_wache_ist_gruen` meldet „FF3 … kein
-Rechner-Link“ für den am 19.10. 16:43Z scharf geschalteten Reserve-Beitrag
-`2026-10-12-haushaltskosten…`, und
-`test_weiterleitungen.test_snapshot_ist_aktuell` meldet „Live-URL
-verschwunden ohne Weiterleitung“ für
-`/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/`
-(Klasse #812 „SEO live404“). Beide Befunde sind `owner: human`, Kanal
-`seo-technik`; die Testnotiz verlangt ausdrücklich „Befund prüfen und erst
-danach `python3 scripts/url_wache.py --snapshot`“ – ein Triager-Handgriff.
-Dieser Vorschlag grätscht deshalb weder in die Content-Pipeline noch in den
-Snapshot und behauptet keine grüne Gesamtsuite.
+**Nachtrag 1 – Vorlauf-Befunde der Content-Ebene (inzwischen geheilt):**
+Der erste Regression-Lauf dieses Vorschlags trug zwei Befunde, die am
+Basis-Commit `1021d45` identisch auftraten (dort nachgestellt – Vorläufigkeit
+bewiesen, nicht behauptet): „FF3 … kein Rechner-Link“ für den Reserve-Beitrag
+`2026-10-12-haushaltskosten…` und „Live-URL verschwunden ohne Weiterleitung“
+(Klasse #812 „SEO live404“). Beide sind zwischenzeitlich auf `main` geheilt
+(#811/#812); die Gesamtsuite ist mit diesem Vorschlag vollständig grün
+(3512 Tests, 0 Fehler).
+
+**Nachtrag 2 – Integration der parallelen Heilung #812 (f9cac76):**
+Während dieses Vorgangs wurde auf `main` eine zweite, breiter angelegte
+Heilung desselben Vorgangs zusammengeführt (`scripts/sicherheits_nachweis.py`:
+Abschluss nur mit vollständigem Live-Nachweis für die Sicherheits-Wache,
+Vorlagen-Fehlalarm A4 behoben, Health-Bild gehärtet). Dieser Vorschlag wurde
+auf diesen Stand **integriert, nicht dagegen gestellt** – beide Schließsperren
+wirken in Kette in `alert-on-failure.yml`:
+1. Für die Sicherheits-Wache der Live-Beweis (`sicherheits_nachweis.py`):
+   ausgeführte Mess- und Nachweisschritte, sonst bleibt die Meldung offen.
+2. Für **jede** Meldung mit Job-Nennung der Job-Beweis
+   (`alert_resolve_gate.py`): jeder als fehlgeschlagen benannte Job muss im
+   auflösenden Lauf vorhanden und grün sein. Meldungen der Übergangsform
+   ohne Job-Nennung behalten ihren bisherigen Schließpfad (Vertrag der
+   Haupt-Heilung: „die übrigen Workflows behalten ihren Abschlussweg“);
+   die Job-Liste wird nur bei Bedarf abgerufen.
+Unverändert **eigenständig** in diesem Vorschlag: das Turnstile-**Paar**
+(der Anmelde-Ausfall seit 15.10. ist im Code abstellbar – die parallele
+Heilung meldete den Widerspruch weiterhin als Befund) und das
+**A1-Edge-Werkzeug** (`npm run edge:freigabe[:apply]`).
+
+**Nachtrag 3 – Instandsetzung nach dem Squash von #813:** Die automatische
+Zusammenführung des Vorschlags in `main` (`1089d1c0`) stapelte in
+`scripts/worker_betrieb_wache.py` die Reste beider Turnstile-Matrizen
+übereinander (Syntaxfehler, Zeile 255) – die Worker-Ebene war auf `main`
+nicht importierbar. Diese Fassung enthält die aufgelöste Integration
+(beide Matrizen, `vorlagen_fehler`, Spiegelprüfung) und stellt die
+Gesamtsuite wieder her.
 
 ---
 

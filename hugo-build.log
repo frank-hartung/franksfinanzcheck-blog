@@ -4,12 +4,12 @@ hugo v0.164.0-ce2470e7012b5ab5fc4e10ebe4027e9f8d9e00dc+extended linux/amd64 Buil
 
                   │  DE  
 ──────────────────┼──────
- Pages            │  103 
+ Pages            │  105 
  Paginator pages  │   15 
  Non-page files   │   40 
- Static files     │ 2237 
+ Static files     │ 2252 
  Processed images │    0 
  Aliases          │    0 
  Cleaned          │    0 
 
-Total in 1724 ms
+Total in 1851 ms

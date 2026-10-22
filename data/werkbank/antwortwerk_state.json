@@ -1,5 +1,11 @@
 {
   "strompreis-entwicklung": {
     "zuletzt": "2026-10-15"
+  },
+  "gaspreis-entwicklung": {
+    "zuletzt": "2026-10-22"
+  },
+  "tarifwechsel-rechtslage": {
+    "zuletzt": "2026-10-22"
   }
 }

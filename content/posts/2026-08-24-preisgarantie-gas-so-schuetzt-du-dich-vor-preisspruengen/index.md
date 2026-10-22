@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Preisgarantie Gas: Was du jetzt tun kannst"
+title: "Preisgarantie Gas: Was du jetzt tun kannst – Gaspreissprünge"
 description: "Preisgarantie Gas: Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder…"
 date: 2026-08-24T08:35:12Z
 draft: false
@@ -173,7 +173,7 @@ Prüfe beim neuen Tarif:
 - genauer Garantieumfang,
 - Garantiebeginn und -ende,
 - Mindestlaufzeit,
-- Kündigungsfrist,
+- [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
 - Zahlungsweise,
 - Preis im Folgejahr.
 

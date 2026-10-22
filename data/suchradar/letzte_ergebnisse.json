@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-10-19T13:22:15.381282+02:00",
+ "zeitstempel": "2026-10-22T12:44:58.262348+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 13,
  "zaehlung": {
@@ -12,15 +12,15 @@
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Gaskosten senken",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "['Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif']",
-   "fehler": "Kein Anbieter lieferte Treffer für \"['Versicherungsvergleich', 'versteckte Kosten', 'Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://baresearc"
+   "anfrage": "['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen']",
+   "fehler": "Kein Anbieter lieferte Treffer für \"['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: ke"
   }
  ],
  "rang": [
@@ -41,7 +41,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "searxng",
+   "quelle": "wikipedia",
    "sichtbar": false
   },
   {
@@ -129,127 +129,26 @@
   "domaenen": [
    {
     "domaene": "wikipedia.org",
-    "treffer": 60,
-    "top3": 24,
+    "treffer": 70,
+    "top3": 27,
     "bester_rang": 1,
-    "durchschnitts_rang": 4.92,
+    "durchschnitts_rang": 5.0,
     "anfragen": [
+     "Fixkosten senken",
      "FranksFinanzcheck",
      "Stromanbieter wechseln",
      "DSL Anbieter Vergleich",
      "Versicherungen kündigen",
-     "Kontogebühren vermeiden",
-     "Kündigungsfristen Strom"
-    ]
-   },
-   {
-    "domaene": "ing.de",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 1,
-    "durchschnitts_rang": 1.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "finanzenfroh.com",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 2,
-    "durchschnitts_rang": 2.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "falk-ratgeber.de",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 3,
-    "durchschnitts_rang": 3.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "twyler.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 4,
-    "durchschnitts_rang": 4.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "finanz-echo.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 5,
-    "durchschnitts_rang": 5.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "mlp-financify.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 6,
-    "durchschnitts_rang": 6.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "wegweisermagazin.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 7,
-    "durchschnitts_rang": 7.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "nurgeld.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 8,
-    "durchschnitts_rang": 8.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "genialetricks.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 9,
-    "durchschnitts_rang": 9.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "sparschweinclub.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 10,
-    "durchschnitts_rang": 10.0,
-    "anfragen": [
-     "Fixkosten senken"
+     "Kontogebühren vermeiden"
     ]
    }
   ],
-  "domaenen_gesamt": 11,
+  "domaenen_gesamt": 1,
   "merkmale": {
-   "wissensquelle": 60
+   "wissensquelle": 70
   }
  },
  "quota": {
-  "searxng": 1,
-  "wikipedia": 9
+  "wikipedia": 10
  }
 }

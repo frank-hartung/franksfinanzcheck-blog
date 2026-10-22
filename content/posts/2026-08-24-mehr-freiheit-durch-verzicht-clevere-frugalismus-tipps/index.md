@@ -19,7 +19,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
 pin_title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-pin_description: "*Werbung | Frugalismus-Tipps mit System: Die 50-30-20-Regel als Kompass, fünf Alltagshacks und ein Rechenbeispiel mit einer fiktiven Person (rund 380 € Ersparnis im Monat). Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geld #sparen"
+pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, 5 Hacks für den Alltag und eine Fallstudie mit rund 380 € Ersparnis pro Monat. So gewinnst du Zeit und finanzielle Freiheit. Jetzt Guide lesen!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
@@ -199,6 +199,8 @@ Wer verbraucht am wenigsten? Und wer 8 Stunden für 12 € Ersparnis opfert,
 
 
 Die kluge Version ist langweilig: automatisierte Rate, wenige bewusste Freuden, Rest in Ruhe lassen. Genau daraus entsteht die Freiheit, die der Titel verspricht – nicht aus dem 15. Lifehack.
+
+**Faustregel:** Wer jeden Monat denselben Betrag zurücklegt, muss im Zweifel nicht entscheiden, was gerade wichtiger ist.
 
 ## Fazit: Durch klugen Konsumverzicht mehr Lebensqualität gewinnen
 

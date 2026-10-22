@@ -69,7 +69,7 @@ Genau deshalb ist ein **DSL Tarifvergleich** alle ein bis zwei Jahre sinnvoll. N
 - Cashback oder Wechselbonus
 - moderne Router oder bessere Hardware-Angebote
 - manchmal höhere Geschwindigkeit zum ähnlichen Preis
-- neue Technikoptionen wie Kabel oder Glasfaser am Standort
+- neue Technikoptionen wie [Kabel oder Glasfaser](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) am Standort
 
 Kurz gesagt: Du prüfst nicht nur, ob es billiger geht, sondern auch, ob du für dein Geld inzwischen mehr bekommst.
 
@@ -122,7 +122,7 @@ Wenn du wechseln willst, lohnt also nicht nur der Preisvergleich, sondern auch e
 
 ## So rechnest du den echten Effektivpreis
 
-Der größte Denkfehler beim **Internet Anbieterwechsel** ist simpel: Viele schauen nur auf die ersten sechs Monate. Genau dort sind Tarife oft künstlich billig.
+Der größte Denkfehler beim **Internet [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)** ist simpel: Viele schauen nur auf die ersten sechs Monate. Genau dort sind Tarife oft künstlich billig.
 
 ### Der Effektivpreis ist die faire Vergleichsgröße
 

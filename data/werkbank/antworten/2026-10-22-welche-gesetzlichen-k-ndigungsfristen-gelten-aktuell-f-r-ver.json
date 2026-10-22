@@ -1,0 +1,80 @@
+{
+  "frage": "Welche gesetzlichen Kündigungsfristen gelten aktuell für Verbraucherverträge in Deutschland?",
+  "zeitpunkt": "2026-10-22T10:35:13Z",
+  "abrufdatum": "2026-10-22",
+  "begriffe": [
+    "gesetzlichen",
+    "kündigungsfristen",
+    "gelten",
+    "verbraucherverträge"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [],
+  "verworfen": [
+    {
+      "url": "https://smartvertragscheck.de/ratgeber/kuendigungsfristen",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.rain-brandt.de/%F0%9F%93%85-kuendigungsfrist-nur-noch-1-monat-was-verbraucher-jetzt-zu-abovertraegen-wissen-muessen/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://easyrechtssicher.de/blog/gesetz-fuer-faire-verbrauchervertraege",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.anwalt.org/kuendigung/kuendigungsfristen/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.deurag.de/blog/gesetz-fuer-faire-verbrauchervertraege/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.oekotest.de/geld-versicherungen/Faire-Verbrauchervertraege-Gesetz-kuerzt-Vertragslaufzeiten-und-Kuendigungsfristen_11951_1.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://blog.orgamax.de/unternehmer-news/verbrauchervertr%C3%A4ge-mit-laufzeit-das-gilt-f%C3%BCr-k%C3%BCndigung-und-verl%C3%A4ngerung",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.e-recht24.de/ecommerce/13100-vertragslaufzeit-und-kuendigungsbutton.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://deutschland-vorlagen.de/ratgeber/kuendigungsfristen-uebersicht/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.schuldnerberatung.de/verbrauchervertrag/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/gesetz-fuer-fairere-vertraege-mehr-schutz-bei-kosten-und-laufzeiten-55274",
+      "grund": "keine Passage mit Bezug zur Frage"
+    }
+  ],
+  "antwort": {
+    "weg": "extraktiv",
+    "text": "",
+    "aussagen": [],
+    "hinweis": "Keine belegfähige Fundstelle."
+  },
+  "browser_beweis": []
+}

@@ -1,5 +1,5 @@
-generated_at: '2026-10-20T08:52:13Z'
-day: '2026-10-20'
+generated_at: '2026-10-22T08:55:04Z'
+day: '2026-10-22'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,60 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: Internet-Speed optimieren mit dem richtigen Router
+  - topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Internet-Speed optimieren mit dem richtigen Router
+    source: 'topics:5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
     score: 0.55
     keywords:
-    - Internet-Speed
-    - Router
-    - Optimieren
-  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    - 5G Router
+    - DSL Alternative
+    - Mobilfunk statt DSL
+  - topic: Die Vorteile von Online-Konten und wie du sie nutzt
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    source: topics:Die Vorteile von Online-Konten und wie du sie nutzt
     score: 0.55
     keywords:
-    - Konto eröffnen
-    - Schufa
-    - Konto ohne Schufa
-  - topic: Mietwagen-Fallen im Urlaub vermeiden
-    pillar: mietwagen
+    - Online-Konten
+    - Vorteile
+    - nutzen
+  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:Mietwagen-Fallen im Urlaub vermeiden
+    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
     score: 0.55
     keywords:
-    - Mietwagen Tipps
-    - Urlaub Mietwagen
-    - Reisekosten sparen
-  - topic: Mietwagen-Kosten im Ausland minimieren
-    pillar: mietwagen
+    - Energieausweis
+    - Energieausweis Kosten
+    - Energieeffizienzklasse Haus
+  - topic: 'Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+    pillar: frugalismus
     signal: niche_hook
-    source: topics:Mietwagen-Kosten im Ausland minimieren
+    source: 'topics:Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
     score: 0.55
     keywords:
-    - Mietwagen
-    - Ausland
-    - Kosten minimieren
-  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
-    pillar: konto-karten
+    - Frugalismus Familie
+    - Sparen mit Kindern
+    - Familienbudget
+  - topic: 'Photovoltaik: Lohnt sich eine Solaranlage 2026?'
+    pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    source: 'topics:Photovoltaik: Lohnt sich eine Solaranlage 2026?'
     score: 0.55
     keywords:
-    - Schufa Eintrag löschen
-    - Negativeintrag entfernen
-    - Bonität verbessern
-  - topic: 'Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
-    pillar: versicherungen
+    - Photovoltaik
+    - Solaranlage Kosten
+    - Strom selbst erzeugen
+  - topic: Stromspar-Apps im Test für den Haushalt
+    pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
+    source: topics:Stromspar-Apps im Test für den Haushalt
     score: 0.55
     keywords:
-    - Versicherung Selbstständige
-    - Absicherung Freiberufler
-    - Existenzgründer Versicherung
+    - Stromspar-Apps
+    - Haushalt
+    - Test
 live_web:
   enabled: false
   findings: []

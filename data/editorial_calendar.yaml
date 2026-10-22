@@ -1,9 +1,9 @@
-generated_at: '2026-10-20T08:52:14Z'
-start_date: '2026-10-21'
+generated_at: '2026-10-22T08:55:05Z'
+start_date: '2026-10-23'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
-- date: '2026-10-21'
-  weekday: Wed
+- date: '2026-10-23'
+  weekday: Fri
   slot: 1
   topic: Stromanbieter wechseln und bis zu 300 Euro sparen
   pillar: strom-sparen
@@ -24,8 +24,8 @@ slots:
 
     - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-10-23'
-  weekday: Fri
+- date: '2026-10-26'
+  weekday: Mon
   slot: 2
   topic: 'Strom-Nachzahlung vermeiden: So berechnest du die richtigen Abschläge'
   pillar: strom-sparen
@@ -45,8 +45,8 @@ slots:
 
     - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-10-26'
-  weekday: Mon
+- date: '2026-10-28'
+  weekday: Wed
   slot: 3
   topic: 'Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
   pillar: strom-sparen
@@ -68,8 +68,8 @@ slots:
 
     - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-10-28'
-  weekday: Wed
+- date: '2026-10-30'
+  weekday: Fri
   slot: 4
   topic: 'Gas-Abschlag winterfest: So planst du die Heizsaison richtig'
   pillar: strom-sparen
@@ -89,50 +89,50 @@ slots:
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
 
     - [viral_outlier] Preisgarantie Gas: So schützt du dich vor Preissprüngen'
-- date: '2026-10-30'
-  weekday: Fri
+- date: '2026-11-02'
+  weekday: Mon
   slot: 5
-  topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+  topic: DSL- und Internet-Flat günstig sichern
   pillar: internet-dsl
   source: topics
   campaign: null
   cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
 
     - [evergreen] Die besten Tarife für ein günstiges Handy-Abonnement
 
     - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
     Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
-- date: '2026-11-02'
-  weekday: Mon
-  slot: 6
-  topic: 'DSL-Wechselbonus mitnehmen: So klappt der Anbieterwechsel'
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
-    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.
-
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
 
     - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
 - date: '2026-11-04'
   weekday: Wed
+  slot: 6
+  topic: Jahreskosten fürs Auto minimieren
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] 5 einfache Schritte zum Aufbau eines Notgroschens
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
+
+    - [niche_hook] Frugal leben mit Familie: So klappt Sparen auch mit Kindern
+
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.'
+- date: '2026-11-06'
+  weekday: Fri
   slot: 7
-  topic: 'Kabel-Internet vs. DSL: Was ist 2026 die bessere Wahl?'
+  topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
   pillar: internet-dsl
   source: topics
   campaign: null
@@ -140,18 +140,39 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
+    - [niche_hook] 5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt
 
     - [evergreen] Die besten Tarife für ein günstiges Handy-Abonnement
 
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
-- date: '2026-11-06'
-  weekday: Fri
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
+- date: '2026-11-09'
+  weekday: Mon
   slot: 8
-  topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
+  topic: 'Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Frugal leben mit Familie: So klappt Sparen auch mit Kindern
+
+    - [evergreen] 5 einfache Schritte zum Aufbau eines Notgroschens
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
+
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.'
+- date: '2026-11-11'
+  weekday: Wed
+  slot: 9
+  topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
   pillar: versicherungen
   source: topics
   campaign: null
@@ -159,20 +180,59 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
+    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
+    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
+
     - [evergreen] Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab
 
-    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
+    - [viral_outlier] Dein Haus sicher schützen: Das Vorsorge-Update 2026
 
-    - [niche_hook] Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick
+    - [viral_outlier] Privathaftpflicht: Warum sie unverzichtbar ist'
+- date: '2026-11-13'
+  weekday: Fri
+  slot: 10
+  topic: 'Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
 
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
-- date: '2026-11-09'
+    - [niche_hook] Frugal leben mit Familie: So klappt Sparen auch mit Kindern
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
+
+    - [evergreen] 5 einfache Schritte zum Aufbau eines Notgroschens
+
+    - [evergreen] Wie du mit einem Smart-Plug Energie sparen kannst'
+- date: '2026-11-16'
   weekday: Mon
-  slot: 9
-  topic: 'Dynamische vs. fixe Stromtarife: Ein Rechenbeispiel für Haushalte mit Wärmepumpe'
+  slot: 11
+  topic: 'Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] 10 Tipps für günstige Reisekreditkarten'
+- date: '2026-11-18'
+  weekday: Wed
+  slot: 12
+  topic: Energiekosten im Haushalt senken mit Smart-Home-Geräten
   pillar: strom-sparen
   source: topics
   campaign: herbst-energiewechsel-2026
@@ -182,72 +242,9 @@ slots:
 
     - [evergreen] Wie du mit einem Smart-Plug Energie sparen kannst
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
     - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
     höher aus als erwartet – der Schock kommt mit der Heizperiode.
 
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-11-11'
-  weekday: Wed
-  slot: 10
-  topic: Günstige Angebote für Internet und TV
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
+    - [viral_outlier] Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe
 
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
-
-    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
-    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.
-
-    - [evergreen] Die besten Tarife für ein günstiges Handy-Abonnement'
-- date: '2026-11-13'
-  weekday: Fri
-  slot: 11
-  topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
-
-    - [evergreen] Die besten Tarife für ein günstiges Handy-Abonnement
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
-
-    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
-    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.'
-- date: '2026-11-16'
-  weekday: Mon
-  slot: 12
-  topic: 10 Tipps für günstige Reiseversicherungen
-  pillar: versicherungen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick
-
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
-
-    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
-    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.
-
-    - [evergreen] Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    - [niche_hook] Stromspar-Apps im Test für den Haushalt'

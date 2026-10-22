@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-20T09:31:55+00:00",
+  "generatedAt": "2026-10-22T10:39:33+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg",
+      "image": "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg",
+      "image": "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -1006,6 +1006,22 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/": {
+      "image": "images/covers/2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/": {
       "image": "images/covers/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg",
       "type": "single",
@@ -1024,6 +1040,22 @@
     },
     "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/": {
       "image": "images/covers/2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/": {
+      "image": "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

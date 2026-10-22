@@ -85,7 +85,7 @@ Bei einer Zentralheizung im Mehrfamilienhaus läuft der Gasvertrag meist über d
 | Situation | Dein direkter Hebel |
 |---|---|
 | Eigener Gaszähler und Liefervertrag | Verbrauch, Tarif, Abschlag, [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) |
-| Zentrale Heizung im Mietshaus | Verbrauch, Heizkostenabrechnung, Vorauszahlung, Mängelmeldung |
+| Zentrale Heizung im Mietshaus | Verbrauch, [Heizkostenabrechnung](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/), Vorauszahlung, Mängelmeldung |
 | Gas in Nebenkostenpauschale | Vertrag und Mietvereinbarung prüfen |
 
 Diese Unterscheidung verhindert, dass du nach einem Anbieter suchst, den nur dein Vermieter wechseln kann.

@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-10-14T15:12:27+00:00",
+  "ts": "2026-10-21T13:40:22+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -153,8 +153,8 @@
   }
  },
  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-  "title": "Preisgarantie Gas: Was du jetzt tun kannst",
-  "ts": "2026-10-19T13:11:36+00:00",
+  "title": "Preisgarantie Gas: Was du jetzt tun kannst – Gaspreissprünge",
+  "ts": "2026-10-21T13:40:27+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -225,8 +225,8 @@
   }
  },
  "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-  "title": "Finanzielle Freiheit erreichen: Denke dich reich",
-  "ts": "2026-10-14T13:46:36+00:00",
+  "title": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
+  "ts": "2026-10-21T13:40:35+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -432,8 +432,8 @@
   "ts": "2026-09-26T18:36:22+00:00"
  },
  "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-  "title": "DSL Hacks: Was brauchst du wirklich?",
-  "ts": "2026-10-19T13:11:42+00:00",
+  "title": "DSL Hacks: Was brauchst du wirklich? – Schnelles Internet",
+  "ts": "2026-10-21T13:40:40+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -765,8 +765,8 @@
   "ts": "2026-10-07T22:34:30+00:00"
  },
  "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-  "title": "Smart Home: So prüfst du echte Stromersparnis",
-  "ts": "2026-10-14T15:14:33+00:00",
+  "title": "Smart Home: So prüfst du echte Stromersparnis – Smarte",
+  "ts": "2026-10-21T13:40:44+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1143,8 +1143,8 @@
   }
  },
  "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-  "title": "Warmwasser sparen: Die Rechnung hinter",
-  "ts": "2026-10-19T00:06:59+00:00",
+  "title": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
+  "ts": "2026-10-21T13:40:31+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1280,6 +1280,15 @@
  "2026-10-19-urlaubskasse-clever-aufbessern": {
   "title": "Urlaubskasse clever aufbessern",
   "ts": "2026-10-19T11:08:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden": {
+  "title": "Mietwagen-Fallen im Urlaub vermeiden",
+  "ts": "2026-10-21T13:40:49+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",

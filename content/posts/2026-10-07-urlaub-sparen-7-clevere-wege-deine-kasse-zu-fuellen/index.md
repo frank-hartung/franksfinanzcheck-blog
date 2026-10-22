@@ -186,7 +186,7 @@ Mische Karte und Bargeld. Prüfe vor der Abreise, was Abhebungen im Ausland kost
 Eine Person führt die Liste, der feste Beitrag pro Person steht vorher fest. Wer vorstreckt, notiert den Betrag am selben Tag. Nach der Reise rechnet ihr nach Liste ab, nicht nach Erinnerung. Streit entsteht fast immer durch vergessene Kleinbeträge.
 
 ### Lohnt sich Sparen auch bei kurzen Reisen?
-Ja, weil schon ein Tag im Budget den Unterschied macht. Rechne bei jedem Kurztrip Fahrt, Essen und Eintritt zusammen. Wer die Reisekosten klein hält, kann Geld sparen, ohne aufs Erlebnis zu verzichten – und plant den nächsten Trip aus dem Rest.
+Ja, weil schon ein Tag im Budget den Unterschied macht. Rechne bei jedem Kurztrip Fahrt, Essen und Eintritt zusammen. Wer die Reisekosten klein hält, kann [Geld sparen](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/), ohne aufs Erlebnis zu verzichten – und plant den nächsten Trip aus dem Rest.
 
 ---
 

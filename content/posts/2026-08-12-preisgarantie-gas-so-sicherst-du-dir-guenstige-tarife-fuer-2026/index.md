@@ -15,7 +15,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
-keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas"]
+keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas", "bieter mit Preisgar"]
 pin_title: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
 pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
@@ -250,7 +250,7 @@ Erst wenn alter Vertrag abgerechnet und neuer Vertrag bestätigt ist, ist der We
 
 ## Drei Angebote auf einem Blatt vergleichen
 
-Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie in eine eigene Tabelle. Das dauert fünf Minuten und verhindert, dass Sortierung oder Werbeflächen deine Entscheidung lenken.
+Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie in eine eigene Tabelle. Das dauert [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) und verhindert, dass Sortierung oder Werbeflächen deine Entscheidung lenken.
 
 | Prüffeld | Tarif A | Tarif B | Tarif C |
 |---|---|---|---|
@@ -259,7 +259,7 @@ Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie i
 | Preisgarantie von/bis |  |  |  |
 | ausgeschlossene Bestandteile |  |  |  |
 | Mindestlaufzeit |  |  |  |
-| Kündigungsfrist |  |  |  |
+| [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) |  |  |  |
 | Vorkasse oder Paket |  |  |  |
 
 Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und ob eine Paketmenge enthalten ist.
@@ -272,7 +272,7 @@ Kontrolliere deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grund
 
 Bewahre die Tabelle mindestens bis zur ersten Rechnung auf. Dann kannst du Preis, Bonus und Abschlag mit dem ursprünglichen Angebot abgleichen.
 
-**Faustregel:** Eine Preisgarantie über die volle Vertragslaufzeit ist mehr wert als ein hoher Start-Rabatt – ohne festen Arbeitspreis kann der Vorteil ab Jahr zwei verpuffen.
+**Faustregel:** Eine Preisgarantie über die volle [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) ist mehr wert als ein hoher Start-Rabatt – ohne festen Arbeitspreis kann der Vorteil ab Jahr zwei verpuffen.
 
 ## Fazit: Erst neutral vergleichen, dann Vorteile einrechnen
 
