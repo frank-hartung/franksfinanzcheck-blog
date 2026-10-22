@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-21 12:41:45 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-10-22 12:44:58 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -19,8 +19,7 @@
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| searxng | 1 | 400 |
-| wikipedia | 9 | 300 |
+| wikipedia | 10 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -30,31 +29,21 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 
 | Domäne | Treffer | Top 3 | Ø Rang | Bester Rang |
 |---|---|---|---|---|
-| wikipedia.org | 60 | 24 | 4.92 | 1 |
-| ing.de | 1 | 1 | 1.0 | 1 |
-| finanzenfroh.com | 1 | 1 | 2.0 | 2 |
-| falk-ratgeber.de | 1 | 1 | 3.0 | 3 |
-| twyler.de | 1 | 0 | 4.0 | 4 |
-| finanz-echo.de | 1 | 0 | 5.0 | 5 |
-| geldfinanzen24.de | 1 | 0 | 6.0 | 6 |
-| wegweisermagazin.de | 1 | 0 | 7.0 | 7 |
-| geldio.de | 1 | 0 | 8.0 | 8 |
-| genialetricks.de | 1 | 0 | 9.0 | 9 |
-| geldkiste.blog | 1 | 0 | 10.0 | 10 |
+| wikipedia.org | 70 | 27 | 5.0 | 1 |
 
 ## Sonderflächen auf den Ergebnisseiten
 
 | Merkmal | Vorkommen |
 |---|---|
-| wissensquelle | 60 |
+| wissensquelle | 70 |
 
 ## Störungen
 
 | Suchbegriff | Meldung |
 |---|---|
-| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
-| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
-| ['Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November'] | Kein Anbieter lieferte Treffer für "['Versteckte Kreditgebühren', 'Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschä |
+| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
+| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / htt |
+| ['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen'] | Kein Anbieter lieferte Treffer für "['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile',  |
 
 ## Einordnung
 

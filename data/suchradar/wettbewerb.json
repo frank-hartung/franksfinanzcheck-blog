@@ -1,124 +1,24 @@
 {
- "stand": "2026-10-21T12:41:45.530689+02:00",
+ "stand": "2026-10-22T12:44:58.262348+02:00",
  "domaenen": [
   {
    "domaene": "wikipedia.org",
-   "treffer": 60,
-   "top3": 24,
+   "treffer": 70,
+   "top3": 27,
    "bester_rang": 1,
-   "durchschnitts_rang": 4.92,
+   "durchschnitts_rang": 5.0,
    "anfragen": [
+    "Fixkosten senken",
     "FranksFinanzcheck",
     "Stromanbieter wechseln",
     "DSL Anbieter Vergleich",
     "Versicherungen kündigen",
-    "Kontogebühren vermeiden",
-    "Kündigungsfristen Strom"
-   ]
-  },
-  {
-   "domaene": "ing.de",
-   "treffer": 1,
-   "top3": 1,
-   "bester_rang": 1,
-   "durchschnitts_rang": 1.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "finanzenfroh.com",
-   "treffer": 1,
-   "top3": 1,
-   "bester_rang": 2,
-   "durchschnitts_rang": 2.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "falk-ratgeber.de",
-   "treffer": 1,
-   "top3": 1,
-   "bester_rang": 3,
-   "durchschnitts_rang": 3.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "twyler.de",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 4,
-   "durchschnitts_rang": 4.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "finanz-echo.de",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 5,
-   "durchschnitts_rang": 5.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "geldfinanzen24.de",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 6,
-   "durchschnitts_rang": 6.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "wegweisermagazin.de",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 7,
-   "durchschnitts_rang": 7.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "geldio.de",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 8,
-   "durchschnitts_rang": 8.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "genialetricks.de",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 9,
-   "durchschnitts_rang": 9.0,
-   "anfragen": [
-    "Fixkosten senken"
-   ]
-  },
-  {
-   "domaene": "geldkiste.blog",
-   "treffer": 1,
-   "top3": 0,
-   "bester_rang": 10,
-   "durchschnitts_rang": 10.0,
-   "anfragen": [
-    "Fixkosten senken"
+    "Kontogebühren vermeiden"
    ]
   }
  ],
- "domaenen_gesamt": 11,
+ "domaenen_gesamt": 1,
  "merkmale": {
-  "wissensquelle": 60
+  "wissensquelle": 70
  }
 }
