@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 22.10.2026 12:18 (Europe/Berlin)  
+> Automatisch aktualisiert: 22.10.2026 17:55 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Do, 22. Oktober 2026
-- **07:30** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/
 ### Fr, 23. Oktober 2026
 - **07:30** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
@@ -49,6 +46,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 22.10.2026 17:55 · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? → https://mastodon.social/@FranksFinanzcheck/117485372935493916
 - ✅ 22.10.2026 12:18 · Haushaltskosten reduzieren: So gewinnst du die Kontrolle → https://mastodon.social/@FranksFinanzcheck/117484047623058483
 - ✅ 21.10.2026 17:59 · Dein Weg zu geringeren Monatskosten: Schritt für Schritt → https://mastodon.social/@FranksFinanzcheck/117479727634173619
 - ✅ 21.10.2026 12:17 · Energiekosten senken: Smarte Helfer für den Haushalt → https://mastodon.social/@FranksFinanzcheck/117478382629994026
@@ -58,7 +56,6 @@
 - ✅ 19.10.2026 12:54 · Zählerstand ablesen und melden: Schätzwerte vermeiden → https://mastodon.social/@FranksFinanzcheck/117467203191745299
 - ✅ 18.10.2026 16:39 · Einlagensicherung: Wie viel Guthaben geschützt ist → https://mastodon.social/@FranksFinanzcheck/117462425507126261
 - ✅ 18.10.2026 11:42 · Grundversorgung Strom und Gas: Was sie leistet → https://mastodon.social/@FranksFinanzcheck/117461257247875450
-- ✅ 17.10.2026 16:16 · Umzug mit Internet: Anschluss und Rufnummer mitnehmen → https://mastodon.social/@FranksFinanzcheck/117456671179488695
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
