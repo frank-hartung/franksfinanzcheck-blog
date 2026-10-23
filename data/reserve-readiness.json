@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 1,
   "pool_size": 2,
-  "generated_at": "2026-10-23T09:11:08Z",
+  "generated_at": "2026-10-23T13:41:53Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -22,11 +22,16 @@
       }
     },
     {
-      "slug": "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
-      "ready": true,
-      "sha256": "8edf643646d9b0082b85fd10b50d7a7f7959b61ee80ef9014729279d46f113a0",
-      "flesch": 71.5,
-      "measured_at": "2026-10-23T09:11:08Z",
+      "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "ready": false,
+      "sha256": "12d7bcae80b1e51328b1838fca04c39693174532b9dfadd002313477c60baa2d",
+      "flesch": 65.2,
+      "measured_at": "2026-10-23T13:41:53Z",
+      "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
+      "details": [
+        "RS1: kein „Das Wichtigste in Kürze“-Modul",
+        "RS5: 15 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
+      ],
       "score": 0.98,
       "parts": {
         "spelling": 0.9,
@@ -40,8 +45,22 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "39926598560",
+    "kind": "partial",
+    "run_id": "39963263941",
     "run_attempt": "1"
+  },
+  "ausgebucht": {
+    "at": "2026-10-23T13:41:51Z",
+    "slugs": [
+      "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  },
+  "recert": {
+    "at": "2026-10-23T13:41:53Z",
+    "renewed": [
+      "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
