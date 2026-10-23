@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 23.10.2026 12:12 (Europe/Berlin)  
+> Automatisch aktualisiert: 23.10.2026 17:46 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,20 +12,18 @@
 
 ## Kommende Beiträge
 
-### Fr, 23. Oktober 2026
-- **07:30** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
 ### Sa, 24. Oktober 2026
-- **07:30** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
+- **07:30** ⏳ Strategisch sparen so kannst du deine reisekasse fuellen — _frage_ · Launch
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### So, 25. Oktober 2026
-- **07:30** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
+- **07:30** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
 - **11:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
+- **07:30** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
@@ -49,6 +47,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 23.10.2026 17:46 · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig → https://mastodon.social/@FranksFinanzcheck/117491000820019813
 - ✅ 23.10.2026 12:12 · Kleine Energiespar‑Tricks: Deine Kosten sofort senken → https://mastodon.social/@FranksFinanzcheck/117489686600605060
 - ✅ 22.10.2026 17:55 · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? → https://mastodon.social/@FranksFinanzcheck/117485372935493916
 - ✅ 22.10.2026 12:18 · Haushaltskosten reduzieren: So gewinnst du die Kontrolle → https://mastodon.social/@FranksFinanzcheck/117484047623058483
@@ -58,7 +57,6 @@
 - ✅ 20.10.2026 12:09 · Smart Home: So prüfst du echte Stromersparnis → https://mastodon.social/@FranksFinanzcheck/117472689432509536
 - ✅ 19.10.2026 19:34 · Großeinkauf und Vorrat: Wann Bevorraten sich rechnet → https://mastodon.social/@FranksFinanzcheck/117468774583193688
 - ✅ 19.10.2026 12:54 · Zählerstand ablesen und melden: Schätzwerte vermeiden → https://mastodon.social/@FranksFinanzcheck/117467203191745299
-- ✅ 18.10.2026 16:39 · Einlagensicherung: Wie viel Guthaben geschützt ist → https://mastodon.social/@FranksFinanzcheck/117462425507126261
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

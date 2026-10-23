@@ -1021,6 +1021,26 @@ history:
     #StromkostenSenken #GeldSparenImAlltag #Energiespar'
   ref: '117489686600605060'
   ai: false
+- posted_at: '2026-10-23T17:46:29.276991+02:00'
+  channel: mastodon
+  slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
+  title: 'Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig'
+  angle: vergleich
+  url: https://mastodon.social/@FranksFinanzcheck/117491000820019813
+  ok: true
+  text: 'Wärmepumpe vs. Gasheizung 2026 oder So entscheidest du richtig?
+
+
+    Die Beispielrechnung im Artikel zeigt, ab welchem Wärmebedarf und Förderanteil
+    sich der höhere Kaufpreis für dein Haus rechnet.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
+  ref: '117491000820019813'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1046,4 +1066,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-23T12:12:25.244234+02:00'
+updated_at: '2026-10-23T17:46:38.411195+02:00'
