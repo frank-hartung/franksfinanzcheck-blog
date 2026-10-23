@@ -2,7 +2,9 @@
 title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 description: "Reisekasse füllen mit realistischem Sparplan: Fixkosten prüfen, Sparrate rechnen, Cashback nur als Extra. Modellrechnungen mit offen genannten Annahmen."
 date: 2026-10-23T01:35:03Z
-draft: false
+draft: true
+cadence_demoted: 2026-10-23T11:36:31Z
+cadence_grund: "Redaktions-Standard: RS1"
 reserve_published: 2026-10-23
 reserve_intake: "2026-10-17 – herrenlose Reife (automatische Bestandsaufnahme)"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
@@ -186,7 +188,7 @@ Rechne erst durch, ob du den Verlust selbst tragen kannst. Hole die Bedingungen 
 
 Ändere Umfang, Termin oder Ziel. Plane nicht mit ungewissen Boni und nicht mit fallenden Preisen. Kleiner zu Reisen ist planbarer, als den Alltag zu überziehen.
 
-## Was dieser Ratgeber nicht kann
+## Was dieser Ratgeber nicht kann?
 
 Wir nennen dir hier keine aktuellen Preise für Hotels, Karten oder Programme. Solche Zahlen veralten schnell, und wir haben sie für diesen Text nicht bei Anbietern erhoben. Wir versprechen auch keine Ersparnis in fester Höhe.
 
