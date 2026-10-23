@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-23T10:01:03Z",
-  "modus": "live",
-  "commit": "25c8783c21c0398233450a3d54d79120120808d3",
+  "generated_at": "2026-10-23T10:42:02Z",
+  "modus": "kandidaten",
+  "commit": "683d7e280c9dbda356780827a88d083461c199ab",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "a698732c8582e60b1a3acf8e375f4915fae0466a8e1406ea1ff9a863f090f3ef",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "86e69f13b360c2ec53d6cc50ffe3bf1a7d37764465ab7e3a9f81e22b0a8724ad",
+      "sha256": "18e34d0afa3f37b9f6c65b1fc6b554fe599d6cb70f72c9497accebe6231a6993",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "5b1cf5363a2ade5b51bb1d19195c0d17fc80d2b0d24433e158c0a8aa967285de",
@@ -1110,7 +1110,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "48e92f6ae487da72aaadc6cdb402f284aafaeefb4514e437839603a04cb07986",
+      "sha256": "aa3d46c2f278ce69369bab17c284347033c5cdc09ea9b3d45e1e785f7ba4a0a0",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1124,7 +1124,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     }
   }
 }
