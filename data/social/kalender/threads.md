@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 22.10.2026 22:36 (Europe/Berlin)  
+> Automatisch aktualisiert: 23.10.2026 12:12 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,30 +13,30 @@
 ## Kommende Beiträge
 
 ### Fr, 23. Oktober 2026
-- **09:15** ⏳ Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/
 - **16:15** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
-### Sa, 24. Oktober 2026
-- **09:15** ⏳ Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/
-- **16:15** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
-### So, 25. Oktober 2026
-- **09:15** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
-- **16:15** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
+- **20:30** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
-### Mo, 26. Oktober 2026
+### Sa, 24. Oktober 2026
+- **09:15** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
+- **16:15** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
+### So, 25. Oktober 2026
 - **09:15** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
-- **16:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
-### Di, 27. Oktober 2026
-- **09:15** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
+- **16:15** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/
+### Mo, 26. Oktober 2026
+- **09:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 - **16:15** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
+### Di, 27. Oktober 2026
+- **09:15** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
+- **16:15** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
 ### Mi, 28. Oktober 2026
 - **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
@@ -82,6 +82,11 @@
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 - **16:15** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+### Fr, 06. November 2026
+- **09:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+- **16:15** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
 
 ## Zuletzt veröffentlicht
 

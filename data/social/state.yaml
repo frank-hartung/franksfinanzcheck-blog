@@ -1002,6 +1002,25 @@ history:
     #WLAN #Internet #DNSUndNetzsicherheit #VPNSinnvoll'
   ref: '117485372935493916'
   ai: false
+- posted_at: '2026-10-23T12:12:15.388391+02:00'
+  channel: mastodon
+  slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
+  title: 'Kleine Energiespar‑Tricks: Deine Kosten sofort senken'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117489686600605060
+  ok: true
+  text: 'Wie schnell zeigen sich die ersten Einsparungen?
+
+
+    Du siehst den Erfolg sofort am Zähler. Er zeigt sich auch bei der nächsten Abrechnung.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #StromkostenSenken #GeldSparenImAlltag #Energiespar'
+  ref: '117489686600605060'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1027,4 +1046,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-22T22:36:13.006818+02:00'
+updated_at: '2026-10-23T12:12:25.244234+02:00'

@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
- e-verlaengerung:nutzen:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261022T203614Z
-DTSTART:20261025T060000Z
-DTEND:20261025T061500Z
-SUMMARY:Telegram (Kanal): Handyvertrag kündigen: Enddatum\, Nachweis u
- nd Rufnummer (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-k
- uendigen-raus-aus-der-kostenfalle-verlaengerung/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
- en-raus-aus-der-kostenfalle-verlaengerung/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
  klich-druecken:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261022T203614Z
+DTSTAMP:20261023T101226Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Smart Home: So prüfst du echte Stromersparni
