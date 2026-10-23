@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 23.10.2026 17:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 23.10.2026 22:30 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -19,7 +19,7 @@
 ### So, 25. Oktober 2026
 - **07:30** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
-- **11:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
+- **07:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mo, 26. Oktober 2026
 - **07:30** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _zahl_ · Evergreen  
