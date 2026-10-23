@@ -152,3 +152,4 @@
 {"zeit": "2026-10-23T11:37:31.173662+00:00", "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "regel": "RS2", "aktion": "fix-deterministisch"}
 {"zeit": "2026-10-23T11:37:31.173662+00:00", "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-10-23T11:37:31.306007+00:00", "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "regel": "GATE", "aktion": "draft (hold)"}
+{"zeit": "2026-10-23T18:19:55.305318+00:00", "slug": "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
