@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-22T22:27:20Z",
+  "generated_at": "2026-10-23T01:42:10Z",
   "modus": "kandidaten",
-  "commit": "d84a03c07eb71f04e24630cede2ade18056130f3",
+  "commit": "9dd5a19478ee691b0fec921ccb98f14d083f40de",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "a698732c8582e60b1a3acf8e375f4915fae0466a8e1406ea1ff9a863f090f3ef",
@@ -1091,6 +1091,40 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
+      "sha256": "e13aa31f22a99590e1751a8a8705f233dda9d754d7978086dc997d6a2e289b89",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-06",
+      "siegel_drift": "neu versiegelt"
+    },
+    "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+      "sha256": "48e92f6ae487da72aaadc6cdb402f284aafaeefb4514e437839603a04cb07986",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-14",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
