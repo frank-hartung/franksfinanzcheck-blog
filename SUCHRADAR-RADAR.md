@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-22 12:44:58 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-10-23 12:37:12 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -43,7 +43,7 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / htt |
-| ['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen'] | Kein Anbieter lieferte Treffer für "['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile',  |
+| ['Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden'] | Kein Anbieter lieferte Treffer für "['Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhau |
 
 ## Einordnung
 

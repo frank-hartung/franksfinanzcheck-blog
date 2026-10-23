@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-10-22T12:44:58.262348+02:00",
+ "zeitstempel": "2026-10-23T12:37:12.276752+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 13,
  "zaehlung": {
@@ -19,8 +19,8 @@
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | https://priv.au: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen']",
-   "fehler": "Kein Anbieter lieferte Treffer für \"['Vertragsfalle Internet', 'Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: ke"
+   "anfrage": "['Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden']",
+   "fehler": "Kein Anbieter lieferte Treffer für \"['Verträge', 'Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org:"
   }
  ],
  "rang": [
