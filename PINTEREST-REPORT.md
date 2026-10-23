@@ -1,9 +1,9 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-10-22 09:31 UTC · Modus: FIX
+**Stand:** 2026-10-23 09:27 UTC · Modus: FIX
 
 **Report-Schema:** 4 · **Geprüfte Artikel:** 94
-**Quellfingerabdruck:** `707213f9846a3ecc1a9ff732b9757e592e62ddce9764b3950a92094261fd144b`
+**Quellfingerabdruck:** `7ec6acac15d8af980431d134ab560932cfeb0c0a67bb0dc2b3932cc725f60257`
 
 Probleme: 1 · Geheilt: 0
 
