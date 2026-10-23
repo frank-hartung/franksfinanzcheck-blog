@@ -21,3 +21,4 @@
 {"ts": "2026-10-22T08:55:15Z", "ready": 2, "target": 6, "pool": 4, "lauf": "39750351231", "versuch": "1", "klasse": "wachen", "blocker": ["2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick", "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 2}
 {"ts": "2026-10-23T09:11:16Z", "ready": 2, "target": 6, "pool": 2, "lauf": "39926598560", "versuch": "1", "klasse": "engpass", "blocker": [], "themen": 2}
 {"ts": "2026-10-23T12:50:39Z", "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "ereignis": "zurueck_in_den_pool", "grund": "Redaktions-Standard: RS1"}
+{"ts": "2026-10-23T14:14:11Z", "ready": 1, "target": 6, "pool": 2, "lauf": "39963409430", "versuch": "1", "klasse": "engpass", "blocker": ["2026-10-23-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 1}

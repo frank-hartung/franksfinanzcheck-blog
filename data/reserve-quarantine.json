@@ -1,1 +1,13 @@
-{}
+{
+  "2026-10-23-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+    "first": "2026-10-23T14:00:14Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 10 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
+    "hits": 1,
+    "laeufe": [
+      "run:39963409430"
+    ],
+    "last": "2026-10-23T14:14:01Z",
+    "lauf": "run:39963409430",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: pauschale aussagen zu den preisen im jahr <n> bringen dir nichts."
+  }
+}

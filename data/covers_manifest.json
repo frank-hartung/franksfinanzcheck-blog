@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-10-23T09:26:56+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-23T13:58:34+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1260,8 +1260,8 @@
   }
  },
  "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "ts": "2026-10-23T09:26:59+00:00",
+  "title": "Vertrags-Check im Herbst: Strom: Strom, Versicherung, Konto",
+  "ts": "2026-10-23T13:58:37+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1301,6 +1301,15 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-23-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+  "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+  "ts": "2026-10-23T14:12:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
    "savings": ""
   }
  }

@@ -2,14 +2,14 @@
   "target": 6,
   "ready": 1,
   "pool_size": 2,
-  "generated_at": "2026-10-23T13:41:53Z",
+  "generated_at": "2026-10-23T14:14:01Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-23T09:10:18Z",
+      "measured_at": "2026-10-23T14:13:59Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -22,15 +22,14 @@
       }
     },
     {
-      "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "slug": "2026-10-23-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
       "ready": false,
-      "sha256": "12d7bcae80b1e51328b1838fca04c39693174532b9dfadd002313477c60baa2d",
-      "flesch": 65.2,
-      "measured_at": "2026-10-23T13:41:53Z",
-      "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
+      "sha256": "efafefca39f12e179d879fbfdd0498c15e6e6957243f908fcb833bed53a15111",
+      "flesch": 64.0,
+      "measured_at": "2026-10-23T14:14:01Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 10 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
       "details": [
-        "RS1: kein „Das Wichtigste in Kürze“-Modul",
-        "RS5: 15 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
+        "RS5: 10 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
       ],
       "score": 0.98,
       "parts": {
@@ -45,22 +44,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "39963263941",
+    "kind": "full",
+    "run_id": "39963409430",
     "run_attempt": "1"
-  },
-  "ausgebucht": {
-    "at": "2026-10-23T13:41:51Z",
-    "slugs": [
-      "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  },
-  "recert": {
-    "at": "2026-10-23T13:41:53Z",
-    "renewed": [
-      "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }
