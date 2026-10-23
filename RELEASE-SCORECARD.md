@@ -25,8 +25,8 @@
 
 | Artikel | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung | Urteil |
 |---|---|---|---|---|---|---|---|---|---|
+| `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
 | `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-06 | **freigabe-reif** |
-| `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-14 | **warnung** |
 
 ## Live-Bestand (Artikel für Artikel)
 
@@ -97,7 +97,7 @@
 | `2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-05 | **freigabe-reif** |
 | `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
 | `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-06 | **freigabe-reif** |
-| `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-14 | **warnung** |
+| `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
 
 ## Blockierende Funde (25 Artikel)
 
@@ -214,9 +214,9 @@
 - **RD2-einzigartigkeit** [redundanz]: U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-10-dsl-wechselbonus-sichern (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 8 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 8 gleiche 7-Wort-Phrasen mit 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026 (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust (z. B. „abbildung gliederung des beitrags in seinen zwischenueberschriften“) – ab 5 ist es Dopplung, Passage umschreiben
 - **T5-lesbarkeit** [technik]: Flesch 59.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
 
-## Warnungen ohne Blockade (1 Artikel)
+## Warnungen ohne Blockade (0 Artikel)
 
-- `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11862 Zeichen, Optimum 12.000–18.000)
+Keine.
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 
@@ -245,12 +245,12 @@
 | `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 17 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-12-stromfresser-im-haushalt-entlarven` | standard | nicht erforderlich | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | 2026-11-27 |
 | `2026-10-14-heizperiode-vorbereiten-im-spaetsommer` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 30 Tage) | 2026-11-14 |
+| `2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 30 Tage) | 2026-11-14 |
 | `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` | hoch | ausstehend | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
 | `2026-10-16-dns-server-aendern-fuer-schnelleres-internet` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 90 Tage) | 2027-01-18 |
 | `2026-10-19-urlaubskasse-clever-aufbessern` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-11-19 |
 | `2026-10-21-mietwagen-fallen-im-urlaub-vermeiden` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 30 Tage) | 2026-11-21 |
 | `2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | standard | nicht erforderlich | frisch geprüft vor 16 Tagen (Intervall 45 Tage) | 2026-11-21 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 

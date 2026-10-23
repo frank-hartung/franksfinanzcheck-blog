@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-23T10:42:02Z",
+  "generated_at": "2026-10-23T12:55:14Z",
   "modus": "kandidaten",
-  "commit": "683d7e280c9dbda356780827a88d083461c199ab",
+  "commit": "e4d7750674779c6b6bd827e68939d7f782a94064",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "a698732c8582e60b1a3acf8e375f4915fae0466a8e1406ea1ff9a863f090f3ef",
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "5b1cf5363a2ade5b51bb1d19195c0d17fc80d2b0d24433e158c0a8aa967285de",
@@ -1109,12 +1109,12 @@
       "naechste_pruefung": "2026-11-06",
       "siegel_drift": "unverändert"
     },
-    "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "aa3d46c2f278ce69369bab17c284347033c5cdc09ea9b3d45e1e785f7ba4a0a0",
-      "urteil": "warnung",
+    "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+      "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1123,8 +1123,8 @@
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "geändert – neu geprüft"
+      "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
