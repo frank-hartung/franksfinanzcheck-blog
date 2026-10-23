@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-10-14T15:15:08+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-23T08:54:02+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1260,8 +1260,8 @@
   }
  },
  "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "ts": "2026-10-19T00:09:47+00:00",
+  "title": "Vertrags-Check im Herbst: Strom: Strom, Versicherung, Konto",
+  "ts": "2026-10-23T08:54:05+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1292,6 +1292,15 @@
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+  "title": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
+  "ts": "2026-10-23T08:53:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }

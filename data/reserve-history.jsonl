@@ -19,3 +19,4 @@
 {"ts": "2026-10-20T08:51:18Z", "ready": 5, "target": 6, "pool": 6, "lauf": "39395552430", "versuch": "1", "klasse": "wachen", "blocker": ["2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 4}
 {"ts": "2026-10-21T08:50:57Z", "ready": 2, "target": 6, "pool": 4, "lauf": "39571616796", "versuch": "1", "klasse": "wachen", "blocker": ["2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick", "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 2}
 {"ts": "2026-10-22T08:55:15Z", "ready": 2, "target": 6, "pool": 4, "lauf": "39750351231", "versuch": "1", "klasse": "wachen", "blocker": ["2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick", "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"], "themen": 2}
+{"ts": "2026-10-23T09:11:16Z", "ready": 2, "target": 6, "pool": 2, "lauf": "39926598560", "versuch": "1", "klasse": "engpass", "blocker": [], "themen": 2}

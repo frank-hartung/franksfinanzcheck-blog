@@ -20,6 +20,13 @@
     "letzter_versuch": "2026-10-06",
     "sperre_bis": "2027-04-04"
   },
+  "Billig fliegen im Winter: 10 Geheimtipps": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 5 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nutze für deine Planung diese Checkliste: | Faktor | Check | Sparpotenzial | | :--- | ",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
+  },
   "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich": {
     "abgleich_fehler": 1,
     "fehler": 1,
@@ -79,17 +86,19 @@
   },
   "Die Vorteile von Online-Konten und wie du sie nutzt": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (digital-banking-vorteile-moderner-online-konten-nutzen) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 620 Wörter / 4794 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 48.5 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-05"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Die besten Apps für das Sparen von Geld": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (apps-die-dein-sparschwein-digital-aufruesten) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 18 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: **Faustregel:** Deine fixen Kosten sollten idealerweise nicht mehr als 50 Prozent dei",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-04"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Die verschiedenen Arten von Reiseversicherungen im Vergleich": {
     "abgleich_fehler": 1,
@@ -138,10 +147,11 @@
     "sperre_bis": "2027-04-04"
   },
   "Energieeffiziente Geräte für dein Zuhause": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-10-06",
-    "sperre_bis": "2026-10-07"
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 775 Wörter / 5819 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 56.0 < 60 (hartes Publish-Kriterium ",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Energieeffizienz im Haushalt: 5 einfache Maßnahmen": {
     "fehler": 0,
@@ -199,10 +209,11 @@
   },
   "Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GROQ); Profi-Gate: RS5: 17 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Wir schauen uns an, wie du 2027 deine Lasten senkst.; Keyword „",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-04"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Glasfaserausbau: Wann lohnt sich der Anschluss?": {
     "abgleich_fehler": 1,
@@ -262,11 +273,11 @@
   },
   "Interrail und Bahncard: Günstig mit dem Zug durch Europa": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-10-06",
-    "sperre_bis": "2026-10-07"
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 916 Wörter / 6634 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); RS5: 9 Zahlenbehauptung(en) ohne Satzbeleg oder klare M",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Jahreskosten fürs Auto minimieren": {
     "abgleich_fehler": 1,
@@ -380,18 +391,26 @@
     "sperre_bis": "2026-10-15"
   },
   "Strom sparen im Sommer: 10 Tipps für heiße Monate": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 812 Wörter / 5787 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 11 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ein Kühlschrank muss bei 30 Grad Raumtemperatur viel härter arbeiten als bei 18 Grad.",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Strom und Gas vergleichen und sparen": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (strom-und-gas-teure-fehler-beim-vergleichen-vermeiden) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 774 Wörter / 5970 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 55.6 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-05"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
+  },
+  "Strom-Nachzahlung vermeiden: So berechnest du die richtigen Abschläge": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 886 Wörter / 6956 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 56.7 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Stromanbieter wechseln und bis zu 300 Euro sparen": {
     "abgleich_fehler": 2,
@@ -403,11 +422,11 @@
   },
   "Stromanbieter-Insolvenz: Was du jetzt wissen musst": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-10-06",
-    "sperre_bis": "2026-10-07"
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 967 Wörter / 7457 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 55.4 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Stromkosten senken mit cleveren Haushaltsgeräten": {
     "abgleich_fehler": 1,
@@ -419,11 +438,18 @@
     "sperre_bis": "2027-04-05"
   },
   "Strompreis-Anpassung im Sommer ausnutzen": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 825 Wörter / 6057 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 776 Wörter / 5853 Zeichen (Premium: ≥1.",
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 739 Wörter / 5377 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 54.1 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätze",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
+  },
+  "Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 729 Wörter / 5267 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); RS5: 5 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Setze dir ",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Stromspar-Apps im Test für den Haushalt": {
     "abgleich_fehler": 1,
@@ -480,6 +506,13 @@
     "letzter_versuch": "2026-10-12",
     "sperre_bis": "2026-10-15"
   },
+  "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 9 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: 2026 hat sich technisch viel getan.; Profi-Gate: nur 759 Wörter / 5423 Zeichen (Premiu",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
+  },
   "Weihnachtsbudget planen: Ohne Schulden durch die Feiertage": {
     "abgleich_fehler": 1,
     "fehler": 0,
@@ -489,10 +522,11 @@
   },
   "Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?": {
     "abgleich_fehler": 1,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 7 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Fachleute raten oft zu einem Anlagehorizont von mindestens zehn Jahren.; RS6: 1 Phanto",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-04"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   },
   "Wie du deine Bankgebühren um 50 % reduzieren kannst": {
     "abgleich_fehler": 1,
@@ -546,9 +580,10 @@
   },
   "Ökostrom wechseln: Günstig und seriös im Vergleich": {
     "abgleich_fehler": 2,
-    "fehler": 0,
-    "grund": "Artefakt fehlt (oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 23 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ein Vergleich lohnt sich daher fast immer, wenn dein aktueller Vertrag älter als zwöl",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-05"
+    "letzter_versuch": "2026-10-23",
+    "sperre_bis": "2026-10-26"
   }
 }

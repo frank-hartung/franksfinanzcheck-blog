@@ -1,15 +1,15 @@
 {
   "target": 6,
   "ready": 2,
-  "pool_size": 4,
-  "generated_at": "2026-10-22T08:55:08Z",
+  "pool_size": 2,
+  "generated_at": "2026-10-23T09:11:08Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-22T08:53:08Z",
+      "measured_at": "2026-10-23T09:10:18Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -22,57 +22,11 @@
       }
     },
     {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "slug": "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
       "ready": true,
-      "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
-      "flesch": 65.1,
-      "measured_at": "2026-10-22T08:54:06Z",
-      "score": 0.982,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
-      "ready": false,
-      "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
+      "sha256": "8edf643646d9b0082b85fd10b50d7a7f7959b61ee80ef9014729279d46f113a0",
       "flesch": 71.5,
-      "measured_at": "2026-10-22T08:55:05Z",
-      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U2-ZWILLING: Titel-Zwilling am 2026-10-12 mit 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken („Stromkosten senken: Cl",
-      "details": [
-        "🛑 2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U2-ZWILLING: Titel-Zwilling am 2026-10-12 mit 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken („Stromkosten senken: Clevere Haushaltsger“ ↔ „Kleine Energiespar‑Tricks: Deine Kosten “) – Thema zusammenführen oder Titel schärfen",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
-      "ready": false,
-      "sha256": "2bf7901e36ab2f022da0f31ce3ad06edb8f534fc31dd41e3ade685f9c489816c",
-      "flesch": 65.2,
-      "measured_at": "2026-10-22T08:55:08Z",
-      "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
-      "details": [
-        "RS1: kein „Das Wichtigste in Kürze“-Modul",
-        "RS2: nur 1 Frage-H2 von 13 H2 (Standard: ≥ 2)",
-        "RS5: 15 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
-      ],
+      "measured_at": "2026-10-23T09:11:08Z",
       "score": 0.98,
       "parts": {
         "spelling": 0.9,
@@ -87,7 +41,7 @@
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "39750351231",
+    "run_id": "39926598560",
     "run_attempt": "1"
   }
 }
