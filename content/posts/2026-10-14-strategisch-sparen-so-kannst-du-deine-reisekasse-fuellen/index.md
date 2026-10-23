@@ -1,9 +1,9 @@
 ---
 title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 description: "Reisekasse füllen mit realistischem Sparplan: Fixkosten prüfen, Sparrate rechnen, Cashback nur als Extra. Modellrechnungen mit offen genannten Annahmen."
-date: 2026-10-16T04:35:41Z
-draft: true
-reserve: true
+date: 2026-10-23T01:35:03Z
+draft: false
+reserve_published: 2026-10-23
 reserve_intake: "2026-10-17 – herrenlose Reife (automatische Bestandsaufnahme)"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
