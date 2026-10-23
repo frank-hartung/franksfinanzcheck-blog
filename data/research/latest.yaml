@@ -1,5 +1,5 @@
-generated_at: '2026-10-22T08:55:04Z'
-day: '2026-10-22'
+generated_at: '2026-10-23T08:49:55Z'
+day: '2026-10-23'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,59 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+  - topic: Günstigen Mietwagen für den Urlaub buchen
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Günstigen Mietwagen für den Urlaub buchen
+    score: 0.55
+    keywords:
+    - Mietwagen buchen
+    - Günstige Mietwagen
+    - Mietwagen Vergleich
+  - topic: 'Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt'
+    score: 0.55
+    keywords:
+    - Strompreis
+    - Anpassung
+    - schützen
+  - topic: 'VPN für Zuhause: Brauchst du das wirklich?'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+    source: 'topics:VPN für Zuhause: Brauchst du das wirklich?'
     score: 0.55
     keywords:
-    - 5G Router
-    - DSL Alternative
-    - Mobilfunk statt DSL
-  - topic: Die Vorteile von Online-Konten und wie du sie nutzt
+    - VPN Zuhause
+    - VPN sinnvoll
+    - Internet Sicherheit
+  - topic: 'Weihnachtsgeld clever umschulden: So nutzt du die Prämie für eine Sondertilgung'
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Die Vorteile von Online-Konten und wie du sie nutzt
+    source: 'topics:Weihnachtsgeld clever umschulden: So nutzt du die Prämie für eine
+      Sondertilgung'
     score: 0.55
     keywords:
-    - Online-Konten
-    - Vorteile
-    - nutzen
-  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-    score: 0.55
-    keywords:
-    - Energieausweis
-    - Energieausweis Kosten
-    - Energieeffizienzklasse Haus
-  - topic: 'Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+    - Weihnachtsgeld Sondertilgung
+    - Ratenkredit umschulden Jahresende
+    - Schuldenfrei ins neue Jahr
+    - Vorfälligkeitsentschädigung umgehen
+  - topic: Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+    source: topics:Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
     score: 0.55
-    keywords:
-    - Frugalismus Familie
-    - Sparen mit Kindern
-    - Familienbudget
-  - topic: 'Photovoltaik: Lohnt sich eine Solaranlage 2026?'
-    pillar: strom-sparen
+    keywords: []
+  - topic: 'Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Photovoltaik: Lohnt sich eine Solaranlage 2026?'
+    source: 'topics:Zahnzusatzversicherung: Lohnt sich der Abschluss?'
     score: 0.55
     keywords:
-    - Photovoltaik
-    - Solaranlage Kosten
-    - Strom selbst erzeugen
-  - topic: Stromspar-Apps im Test für den Haushalt
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Stromspar-Apps im Test für den Haushalt
-    score: 0.55
-    keywords:
-    - Stromspar-Apps
-    - Haushalt
-    - Test
+    - Zahnzusatzversicherung
+    - Zahnarztkosten sparen
+    - Zahnersatz versichern
 live_web:
   enabled: false
   findings: []
