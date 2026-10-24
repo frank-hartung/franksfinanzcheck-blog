@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Was ist Tagesgeld eigentlich?
 
@@ -183,7 +183,7 @@ Diese Summe deckt fast einen Monat Versicherungen. Oder einen kurzen Urlaub.
 
 ![Gliederung des Beitrags: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich“ – 5 Stationen von „Was ist Tagesgeld eigentlich?“ bis „Aktuelle Zinslandschaft im Oktober 2026“ (eigene Darstellung).*
 
 ## Tagesgeld und Notgroschen: So hoch sollte er sein
 

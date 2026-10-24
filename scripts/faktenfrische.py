@@ -597,7 +597,20 @@ Marktwerte. Fehlende Erwähnung ist kein Gegenbeweis: Melde gegebenenfalls \
 eine Beleglücke, aber behaupte nicht, die Quelle widerlege den Artikel. \
 Ein klar gekennzeichneter Affiliate-Link braucht keine behördliche Empfehlung; \
 prüfe stattdessen unbelegte Preis-, Vollständigkeits- oder Empfehlungsaussagen. \
-Erfinde weder ein Quellen-Publikationsdatum noch eine Quellenempfehlung."""
+Erfinde weder ein Quellen-Publikationsdatum noch eine Quellenempfehlung.
+9. Befund-Klassen aus #823 (20.10.2026) ausdrücklich mitprüfen: \
+(a) Preis-Trends und Markt-Pauschalen („Neukundenpreise sind stark gesunken“, \
+„nach 24 Monaten wird es massiv teurer“) sind Marktdaten – ohne Fundstelle \
+sind sie veraltet oder luecke. (b) Zahlen in Marktfakten-Positur (Preise, \
+Gebühren, Ersparnisse) brauchen eine Fundstelle ODER die klare Kennzeichnung \
+als Modellrechnung mit frei gewählten Annahmen; fehlt beides, melde luecke. \
+(c) Fehlt ein für das Thema relevanter Regulierungsrahmen, den die Fundstellen \
+nahelegen (Aufsichtsbehörde, Pflichten für Unternehmen), melde luecke. \
+(d) Leistungsversprechen müssen den betroffenen Mechanismus nennen und \
+Systemgrenzen einräumen (Namensauflösung ist nicht Bandbreite; Router, WLAN \
+und Hardware setzen Obergrenzen) – sonst praezision. (e) Anbieter-Rankings \
+und Superlative ohne messbare Daten („oft die beste Wahl für hohes Tempo“) \
+sind praezision-Befunde; verlange eigene Messung statt Pauschalurteil."""
 
 
 def verfuegbare_anbieter() -> list:

@@ -27,6 +27,12 @@ on:
       # Regressionstests auslösen, sonst könnte das Feld `pflicht_env:`
       # unbemerkt wieder `secrets:` heißen.
       - 'data/social/**'
+      # Search-Console-Daten (24.10.2026): Am 21.10. reiste eine Datei nach
+      # main, die zwei Läufe übereinander enthielt. Der PR, der sie brachte,
+      # hat KEINEN Test ausgelöst – `data/gsc/` stand in keiner Pfadliste.
+      # tests/test_gsc_artefakte.py prüft genau diese Dateien; ohne diesen
+      # Eintrag liefe der Test bei genau den Änderungen nicht, für die er da ist.
+      - 'data/gsc/**'
   workflow_dispatch: {}
 permissions:
   contents: read

@@ -239,6 +239,24 @@ jobs:
       #     und ein automatischer Merge auf main würde unbemerkt Zahlen in
       #     den Bestand schreiben, die niemand geprüft hat.
       # ------------------------------------------------------------
+      # ------------------------------------------------------------
+      #  KEIN KAPUTTES ARTEFAKT VERLÄSST DIESEN LAUF (24.10.2026, #853)
+      #
+      #  Der Schaden vom 21.10.2026 ist nicht beim Import entstanden (der
+      #  schreibt jede Datei vollständig), sondern beim Zusammenführen der
+      #  Bot-Branches. Trotzdem gehört die Prüfung hierher: Wer schreibt, muss
+      #  belegen, dass das Geschriebene lesbar, eindeutig und in sich stimmig
+      #  ist. Ohne `continue-on-error` – ein Befund stoppt den Lauf VOR dem
+      #  Commit, also bevor ein PR mit unlesbaren Zahlen entstehen kann.
+      #  Zweite Schicht: `data/gsc/*.json merge=binary` (.gitattributes) macht
+      #  den Text-Merge technisch unmöglich.
+      # ------------------------------------------------------------
+      - name: Leistungsdaten prüfen, bevor sie als PR gehen
+        run: |
+          python3 scripts/gsc_artefakte_guard.py --selftest
+          python3 scripts/gsc_artefakte_guard.py --check
+          python3 scripts/gsc_artefakte_guard.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
       - name: Indexierungs-Zustand direkt sichern (Kontingent-Gedächtnis)
         continue-on-error: true
         run: |

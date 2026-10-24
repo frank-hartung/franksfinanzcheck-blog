@@ -2,8 +2,9 @@
 
 **Datum:** 24.10.2026 · **Auslöser:** Issue #826 (Report vom 23.10.2026)
 **Verdikt:** Prüfqueue leer (Gate `0 blockiert`), **fünf tote und eine umgeleitete
-Belegadresse repariert**, ein KI-Entwurf **verworfen**, vier Schreib- und Prüfwege
-so gehärtet, dass dieselben Fehler nicht wieder entstehen.
+Belegadresse repariert**, der letzte offene KI-Entwurf mit einer **echten
+Belegkette freigegeben**, vier Schreib- und Prüfwege so gehärtet, dass dieselben
+Fehler nicht wieder entstehen.
 
 > Hausregeln dieses Laufs: kein Prüfer erfunden, kein Siegel ohne echte Prüfung,
 > keine Gate-Regel abgeschwächt. Wo etwas nur „unklar“ war, steht „unklar“.
@@ -14,10 +15,10 @@ so gehärtet, dass dieselben Fehler nicht wieder entstehen.
 
 | Bereich | Vorher (23.10.2026) | Nachher (24.10.2026) |
 | --- | --- | --- |
-| Hochrisiko-Artikel | 9, davon 3 textlich nach der Freigabe geändert, 1 KI-Entwurf offen | 9, **alle freigegeben**, 0 blockiert |
-| Gate-Status | `--strict` rot, Ticket bleibt offen | `94 Artikel · 9 Hochrisiko · 9 freigegeben · 0 blockiert`, Exit 0 |
+| Hochrisiko-Artikel | 9, davon 3 textlich nach der Freigabe geändert, 1 KI-Entwurf offen | 10, **alle freigegeben**, 0 blockiert |
+| Gate-Status | `--strict` rot, Ticket bleibt offen | `95 Artikel · 10 Hochrisiko · 10 freigegeben · 0 blockiert`, Exit 0 |
 | Zitierte Belegadressen (Hochrisiko) | 22 eindeutige URLs, **5 × 404**, 1 × fremde Zielseite | alle 22 erreichbar, Inhalte abgeglichen |
-| Entwurf „Saison-Update“ | offener, unsiegelbarer KI-Entwurf | verworfen, Ordner entfernt (Git-Historie bleibt) |
+| Entwurf „Saison-Update“ | offener, unsiegelbarer KI-Entwurf (1 Platzhalterquelle) | amtliche Belegkette ergänzt, Zahlenprotokoll geschrieben, **versiegelt** |
 | Wächter | Gate prüft Text, niemand prüft das Netz | neue **Belegketten-Wache** + Kopplung im Workflow |
 | Automatik-Schreibgrenze | `faktenfrische` schrieb Recherche-Signale als `quellen` | schreibt bei `risikoklasse: hoch` keine Quellen, bricht versiegelte Fassungen ab |
 
@@ -33,7 +34,7 @@ Vier Hochrisiko-Artikel standen mit `status: ausstehend` in der Queue. Sie waren
 | `2026-08-26-kfz-versicherung-vergleich…` | Regionalklassen-Abschnitt beschrieb 2026, zitiert war eine GDV-Adresse, die inzwischen **andere Zahlen (2027)** ausliefert | Textänderung 19.10. nach der Freigabe vom 05.10. | Text auf Regional-/Typklassen 2027 umgestellt, Zahlen protokolliert, neu versiegelt |
 | `2026-09-21-unfallversicherung-vergleich…` | Gliedertaxe als Marktstandard behauptet, Beitragsspannen ohne Beleg | Textänderung nach der Freigabe | Gliedertaxe als GDV-Empfehlung gekennzeichnet, Spannen als redaktionelle Orientierung, neu versiegelt |
 | `2026-09-17-versicherung-update…` | Hausrat-Beitrag ohne belastbare Fundstelle, § 11 VVG als Fristanker | Textänderung nach der Freigabe | Hausrat 650 €/m² belegt, Rechenbeispiele nachgerechnet, neu versiegelt |
-| `2026-10-15-saison-update…` | KI-Entwurf ohne Anlass, ohne echte Belegkette (1 Pseudo-Quelle) | Automatik schrieb „Signal“ als Quelle | **verworfen**, Ordner per `git rm -r` entfernt |
+| `2026-10-15-saison-update…` | KI-Entwurf mit einer Pseudo-Quelle („Referenzseite destatis.de“), 10 Gate-Blocker | Automatik schrieb ein Signal als Quelle | Belegkette auf die amtliche Destatis-Pressemitteilung umgestellt, alle Modellrechnungen protokolliert, **versiegelt** |
 
 Die drei reparierten Artikel wurden nach der Korrektur einzeln geprüft
 (`--file`) und neu versiegelt (`--seal`). Siegel vom 24.10.2026:
@@ -47,6 +48,7 @@ Die drei reparierten Artikel wurden nach der Korrektur einzeln geprüft
 | ratenkredit | `5f2d7d78…` |
 | zahnzusatzversicherung | `dd4a3d76…` |
 | privathaftpflicht | `f91c27c6…` |
+| saison-update | `742e8e3d…` |
 
 Volltexte append-only in `data/editorial_review_history.jsonl`.
 
@@ -94,11 +96,12 @@ ist jetzt geschlossen (Abschnitt 5.2).
 
 ### W1 – Ein Signal ist kein Beweis
 `scripts/faktenfrische.py` schrieb die aus Feeds und Referenzseiten gesammelten
-„Recherche-Signale“ als `quellen` in den Artikel. Der verworfene Entwurf vom
+„Recherche-Signale“ als `quellen` in den Artikel. Der Entwurf vom
 15.10.2026 trug danach genau eine Quelle: *„Referenzseite destatis.de“* – ohne
 Datum, ohne Aussage, ohne Prüfung. Ergebnis: Der Entwurf war **strukturell
 unsiegelbar** (Gate verlangt mindestens zwei belastbare Quellen) und blockierte
-damit die Queue, obwohl niemand etwas falsch geprüft hatte.
+damit die Queue, obwohl niemand etwas falsch geprüft hatte; 11 Gate-Blocker
+standen gegen ihn.
 
 **Lehre:** `quellen` ist ein **Beweisfeld**, kein Signal-Feld. Signale gehören ins
 Dossier (`data/research/…`), nicht in die Belegkette.
@@ -118,6 +121,33 @@ die Korrektur an `kfz-versicherung` die Frontmatter über die Grenze schob und
 ist mehr wert als zehn, die nur Bestand zählen.
 
 ---
+
+### 4.1 Korrektur der ersten Entscheidung: behalten statt verwerfen
+
+Der erste Entwurf dieses Laufs verwarf den Saison-Update-Entwurf
+(`git rm -r`). Beim Zusammenführen mit `main` zeigte sich, dass eine parallele
+Redaktionsrunde (#857) denselben Entwurf am 24.10.2026 fachlich geheilt und
+dafür Regressionstests angelegt hatte – inklusive der amtlichen Destatis-Zahl.
+Die Verwerfung war damit die schlechtere Entscheidung. Sie wurde zurückgenommen:
+Der Artikel steht wieder im Bestand, hat jetzt eine echte Belegkette und ist
+versiegelt. Der Sachbefund bleibt gültig – die Pseudo-Quelle war das Problem,
+nicht der Text.
+
+**Belegkette (alle am 24.10.2026 abgerufen und gelesen):**
+
+- **Q1 Destatis**, Pressemitteilung Nr. 364 vom 13.10.2026: Energieprodukte im
+  September 2026 **+14,9 %** gegenüber September 2025, höchster Anstieg seit
+  Februar 2023. Genau diese Zahl steht im Artikel – und ausdrücklich **nicht**
+  als Preistrend für Neukunden.
+- **Q2 Verbraucherzentrale**, „Welche Versicherung brauche ich?“ – trägt die
+  Aussage, dass Leistungsvergleich vor Preisvergleich geht.
+- **Q3 BaFin-Kontenvergleich** – trägt die Aussage, dass Kontoführung,
+  Kartenkosten und Dispozins je Anbieter nachlesbar sind.
+
+Zehn Zahlen aus dem Text (14,9 %; 3.500 kWh; 0,42 €/kWh; 1.470 €; 0,30 €/kWh;
+1.050 €; 420 €; 35 € je Cent; 9,90 €/Monat; 118,80 €; 15 €; 133,80 €;
+1.338 €) sind mit Fundstelle, Prüfung und Rechenweg protokolliert; jede
+Modellrechnung ist nachgerechnet, jede ist als frei gewählte Annahme markiert.
 
 ## 5. Dauerheilung im Code
 
@@ -178,7 +208,7 @@ dass `quellen` ein Beweisfeld ist. Ergänzt um die Begründung, warum
 | Prüfung | Ergebnis |
 | --- | --- |
 | `editorial_review_gate.py --selftest` | bestanden |
-| `editorial_review_gate.py --all --report --strict` | `94 Artikel · 9 Hochrisiko · 9 freigegeben · 0 blockiert`, Exit 0 |
+| `editorial_review_gate.py --all --report --strict` | `95 Artikel · 10 Hochrisiko · 10 freigegeben · 0 blockiert`, Exit 0 |
 | `belegketten_wache.py --selftest` | bestanden (8 Fälle) |
 | `belegketten_wache.py --nur-hochrisiko` | 22 eindeutige URLs, 30 Zitatstellen, 0 `tot`, 0 `umgeleitet` (nach der Reparatur; im Sandbox ohne Netz sind alle „unklar“ – die Prüfung erfolgte einzeln über den Abruf) |
 | `test_belegketten_wache.py` (neu) | 8 Tests: Statuskette, Nicht-HTTPS, Netzfehler blockiert nicht, `--strict` nur bei tot, Selbsttest, Hochrisiko ohne Quellen, versiegelte Fassung unangetastet, AUTO-Bahn bekommt Quellen |
@@ -242,7 +272,7 @@ gekennzeichnete Abschnitt „Werbung – optionaler Suchweg“ bleibt.
 - **Die Wache erkennt keine stille Ersetzung**, wenn die Gegenseite unter
   derselben Adresse bleibt und nur der Inhalt wechselt. Sie meldet dann „ok“.
   Schutz dagegen bleibt redaktionell (Zitat-Fingerprint wäre der nächste Schritt).
-- **Alle 9 Hochrisiko-Artikel tragen `draft: true`.** Das ist ein eigener
+- **Alle 10 Hochrisiko-Artikel tragen `draft: true`.** Das ist ein eigener
   Hygiene-Punkt (Entwurfs-Flag vs. versiegelte Fassung) und wurde hier bewusst
   nicht mitverändert, um den Prüfumfang nicht zu verwischen.
 

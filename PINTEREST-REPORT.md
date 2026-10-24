@@ -1,12 +1,12 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-10-24 12:51 UTC · Modus: FIX
+**Stand:** 2026-10-24 17:15 UTC · Modus: FIX
 
-**Report-Schema:** 4 · **Geprüfte Artikel:** 95
-**Quellfingerabdruck:** `ce2338f0d09009754e996158e8cc0afff2b7b9b7987257ece51079b0ed3587b8`
+**Report-Schema:** 5 · **Geprüfte Artikel:** 95 (live: 66 · geparkt: 29)
+**Quellfingerabdruck:** `05502336495cc347c9377f039bae48ef6917c4fe8d37b899455dc9fe34721fd3`
 
-Probleme: 1 · Geheilt: 0
+Probleme: 0 · Geheilt: 0
 
-| Code | Artikel | Problem |
-|---|---|---|
-| P10 | 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | Artikel-Seite ist ein Meta-Refresh-Alias – nicht direkt pinnen |
+**Nicht gemessen (kein Hugo-Build in `public/`):** P3, P6, P7, P10, P12 – dieser Report ist dort unbekannt, nicht grün (C2).
+
+✅ Keine Befunde in den gemessenen Prüfungen (P1/P2/P4/P4b/P5/P8/P9/P11/P13) – die HTML-Checks fehlen in diesem Lauf (s. o.).

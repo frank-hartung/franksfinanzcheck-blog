@@ -66,7 +66,7 @@ Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/202
 
 ![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Ein Messplan für den ersten Abend
 
@@ -177,7 +177,7 @@ Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleib
 
 ![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Ein Messplan für den ersten Abend“ bis „Kühlgeräte: erst messen, dann über Ersatz reden“ (eigene Darstellung).*
 
 ## Eine Messwoche ohne Zettelchaos
 

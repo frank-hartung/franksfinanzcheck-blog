@@ -47,7 +47,9 @@ Das ist keine Behauptung, sondern maschinell durchgesetzt:
 **Alle Checks mit `wirkung: warnung`** – aktuell:
 
 - `T1w-zeichenlaenge-optimum`: Länge außerhalb des Optimums (12.000–18.000),
-  aber über dem Floor
+  aber über dem Floor. Der Befund nennt die Richtung:
+  `unter-optimum` (< 12.000) oder `ueber-optimum` (> 18.000, bis zur harten
+  Grenze 22.000)
 - `Q2-quellen-vorhanden`: Artikel ohne Belegkette (Risikoklasse standard/
   erhöht – für „hoch“ ist Q1 hart)
 
@@ -200,12 +202,37 @@ Weg für blockierende Bestandsbefunde – nie durch Ausnahme oder Schwächung:
    Stufe A + Tor T1–T4). Scheitert das Tor, bleibt die Datei byte-identisch –
    dann ist Handarbeit angesagt (R15 nicht-adjacent, Flesch unter
    Silben-Hebeln, fachliche Umformulierung).
+   `abbildungen_ableiten.py` (Merkkarte/Gliederung samt artikelgenauer
+   Bildzeile; `--check` beweist Einbindung, Artikelgenauigkeit und
+   Eindeutigkeit). Bildzeilen sind Metadaten: Sie tragen den Titel, aber
+   keine Beträge – Zahlen gehören in den Text, wo der YMYL-Prüfpfad sie
+   sieht (sonst wandern ungeprüfte Werte in `fachpruefung_register.yaml`).
 3. **Redaktionelle Regeln beim Handarbeiten:** Zahlen-Multiset, Linkziele,
    Tabellen, Überschriften unverändert; Absätze ≤ 4 Sätze; Passiv meiden;
    Flesch-Amstad ≥ 60 (besser ≥ 62); eine Idee pro Absatz. Für
    Längen-Nachführung (T1w) eignen sich FAQ-Antworten im Artikelstil –
    einzigartig formulieren (R15/U1 prüfen!). Quellen (Q2) nur aus der
    etablierten Korpus-Belegkette nachpflegen, nie erfinden.
+
+   **T1w in Richtung `ueber-optimum` ist kein Kürzungsauftrag.** Ein Beitrag
+   über 18.000 Zeichen wird nur gekürzt, wenn der Flesch-Wert dabei ≥ 60
+   bleibt – sonst tauscht die Kürzung einen Hinweis gegen einen echten
+   Befund. Beim Bestandsdurchgang vom 24.10.2026 (#824) lagen genau zwei
+   Beiträge über dem Optimum; beide wurden redaktionell verdichtet, ohne den
+   Flesch-Wert zu senken:
+
+   | Beitrag | Zeichen | Flesch |
+   |---|---|---|
+   | `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | 18.331 → 17.854 | 62,1 → 61,9 |
+   | `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` | 18.849 → 17.949 | 60,6 → 61,0 |
+
+   Gestrichen wurden ausschließlich Doppelungen: im Last-Minute-Beitrag ein
+   zweiter Absatz zur Flexibilität (der Abschnitt darunter sagt dasselbe),
+   eine Füllzeile nach der Checkliste und zwei aufeinanderfolgende
+   Zusammenfassungen; im Frugalismus-Beitrag ein Absatz, der den „großen
+   Hebel“ ein zweites Mal erklärte, und die Erklärung der Plan-Reihenfolge,
+   die die Tabelle darüber selbst trägt. Zahlen, Quellen, Links und
+   Überschriften blieben unverändert.
 4. **Nachweis führen, dann versiegeln:** Gate-Collectoren im Trockenlauf über
    die geänderten Slugs (T4/T5/T6/RD1/RD2 + `editorial_review_gate`), dann
    `python3 scripts/release_scorecard.py` (misst neu, aktualisiert Report,

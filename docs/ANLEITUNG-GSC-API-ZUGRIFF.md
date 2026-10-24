@@ -208,3 +208,67 @@ python3 scripts/gsc_import.py --selftest
 
 Prüft: echte RS256-Signatur mit `openssl` (Gegenprobe mit `openssl dgst -verify`), Paginierung, Merge
 der Tage, Geheimnisschutz in `meta.json`, Status „nicht konfiguriert“.
+
+## Wenn ein Artefakt kaputt ist: die Wache und ihr Heilweg (24.10.2026)
+
+Am 21.10.2026 hat Git drei Dateien aus `data/gsc/` **als Text** zusammengeführt.
+Danach trug `meta.json` vier `stand`-Schlüssel in einem Objekt, und in den
+Top-Listen standen zwei Läufe ohne Trennkomma hintereinander. Vier Tage lang war
+das `Integritäts-Siegel` für **jeden** Pull-Request rot – die Annotation nannte
+nur `.github#30 – Process completed with exit code 1`.
+
+### 1. Messen
+
+```bash
+python3 scripts/gsc_artefakte_guard.py --check
+```
+
+Vier Prüfungen, alle hart:
+
+| Prüfung | Frage |
+|---|---|
+| **G1** | Ist `meta.json` vollständig und plausibel (Pflichtfelder, `stand` als ISO-UTC, `zeitraum.von <= bis`, `status` bekannt)? |
+| **G2** | Tragen beide Top-Listen genau die Schlüssel des Erzeugers, Zahlen in gültigen Bereichen – und ist jeder Suchbegriff/jede Seite **nur einmal** enthalten? |
+| **G3** | Ist jede Ledger-Zeile gültig und läuft das Datum **streng aufsteigend ohne Doppel**? |
+| **G4** | Passt der Kopf zu den Zahlen (`zeitraum.bis` nicht hinter dem letzten Tag, `tage_gesamt` nicht über der Zahl der gemessenen Tage)? |
+
+G2/G3/G4 sind der Grund, warum diese Wache existiert: Zwei **gültige** Top-Listen
+hintereinander sind weiterhin gültiges JSON. Nur die Bedeutung ist kaputt.
+
+Der Selbsttest (`--selftest`, 20 Fälle) sabotiert jede dieser Klassen in einem
+temporären Baum und beweist, dass die Wache anschlägt – auch, dass sie **nicht**
+anschlägt, wenn wirklich alles in Ordnung ist (C15: ein Prüf-Aufruf heilt nie).
+
+### 2. Heilen – nur mit Beleg
+
+```bash
+# a) jede Datei für sich: jüngster Stand im Git, der die volle Prüfung besteht
+python3 scripts/gsc_artefakte_guard.py --heal
+
+# b) besser: EIN Lauf = EINE Messung, alle Kopfdaten aus demselben Commit
+python3 scripts/gsc_artefakte_guard.py --heal --rev <sha>
+```
+
+Was die Heilung **nie** tut:
+
+- Sie rekonstruiert nichts. Ein zusammengesetztes Artefakt lässt sich nicht
+  zurückrechnen, ohne Zahlen zu erfinden; ohne belegbaren Stand bleibt der Fund
+  stehen (Exit 1).
+- Sie rollt den **Tagesledger nie zurück**. `tagesdaten.jsonl` ist append-only:
+  Jeder Tag ist eine eigene Messung, die durch einen Merge nicht falsch wird.
+- Sie schreibt kein Teilstück. Besteht eine der drei Kopfdaten im gewählten
+  Commit die Prüfung nicht, wird **keine** geschrieben – ein halber Gesamtstand
+  wäre schlimmer als der Befund.
+- Sie schreibt nicht, ohne danach erneut zu prüfen („signiert, ohne zu messen“
+  ist im Repo keine Option).
+
+### 3. Verhindern – die drei Schichten
+
+| Schicht | Wo | Wirkung |
+|---|---|---|
+| **Struktur** | `.gitattributes`: `data/gsc/*.json merge=binary` | Git kann die Dateien nicht mehr als Text zusammensetzen; bei parallelen Änderungen bleibt **ein** vollständiger Stand. Der Ledger (`*.jsonl merge=union`) ist bewusst ausgenommen – Tage sind unabhängige Messungen. |
+| **Bedeutung** | `scripts/gsc_artefakte_guard.py` in `integrity-lock.yml` und in `gsc-import.yml` **vor** jedem Commit | Kein kaputtes Artefakt verlässt den schreibenden Lauf; jeder PR prüft den Bestand zusätzlich zur Syntax. |
+| **Herkunft** | `--heal --rev`, `scripts/tests/test_gsc_artefakte.py` | Die Reparatur ist belegbar, und `regression` prüft die echten Dateien bei jeder Änderung unter `data/gsc/**`. |
+
+Der alte Befund bleibt nachlesbar:
+`GSC-DATEN-INTEGRITAET-HIGHEND-2026-10-24.md` (Ursache, Belege, Grenzen).

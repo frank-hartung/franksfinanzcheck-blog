@@ -64,7 +64,7 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 ![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?
 
@@ -193,7 +193,7 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 
 ![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
 
 ## Welche Fehler kosten dich am meisten Geld?
 

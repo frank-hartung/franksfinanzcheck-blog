@@ -72,7 +72,7 @@ Wenn du den DNS-Server wechseln möchtest, änderst du zunächst den DNS-Server,
 
 ![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Was macht ein DNS-Server?
 
@@ -188,7 +188,7 @@ Du brauchst dafür kein teures Abo. Du brauchst keine neue Hardware. Du brauchst
 
 ![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ – 5 Stationen von „Was macht ein DNS-Server?“ bis „Was du nach dem Wechsel testen solltest“ (eigene Darstellung).*
 
 ## Das ändert sich für dich
 

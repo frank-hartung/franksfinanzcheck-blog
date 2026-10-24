@@ -56,7 +56,7 @@ Dieser Ratgeber hilft dir dabei, im Tarif-Dschungel den Durchblick zu behalten. 
 
 ![Merkkarte: Kernaussagen zu DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „DSL-Tarif für dein Zuhause: Das passende Angebot finden“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Wie viel Internet-Geschwindigkeit brauchst du wirklich?
 
@@ -175,7 +175,7 @@ Falls dein WLAN das Nadelöhr ist, schau hier rein: [WLAN verbessern: So bringst
 
 ![Gliederung des Beitrags: DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „DSL-Tarif für dein Zuhause: Das passende Angebot finden“ – 5 Stationen von „Wie viel Internet-Geschwindigkeit brauchst du wirklich?“ bis „Nicht jedes Internetproblem ist ein Tarifproblem“ (eigene Darstellung).*
 
 ## Vier Regeln vor der Unterschrift
 

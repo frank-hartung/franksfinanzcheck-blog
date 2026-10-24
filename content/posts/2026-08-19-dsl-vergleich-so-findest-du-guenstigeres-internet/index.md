@@ -57,7 +57,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Wie berechnest du den echten Effektivpreis?
 
@@ -137,7 +137,7 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein W
 
 ![Gliederung des Beitrags: DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ – 5 Stationen von „Wie berechnest du den echten Effektivpreis?“ bis „In drei Schritten zum neuen Internetanschluss“ (eigene Darstellung).*
 
 ## So vergleichst du in 20 Minuten sauber
 

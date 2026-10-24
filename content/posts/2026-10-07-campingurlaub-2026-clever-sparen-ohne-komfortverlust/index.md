@@ -51,7 +51,7 @@ Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehör
 
 ![Merkkarte: Kernaussagen zu Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Welche Kosten gehören in ein Campingbudget?
 
@@ -130,7 +130,7 @@ So kaufst du unterwegs weniger aus Zeitdruck.
 
 ![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
 
 ## Wie planst du Fahrt und Essen ohne Schönrechnen?
 

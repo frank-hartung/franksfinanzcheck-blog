@@ -13,6 +13,25 @@
 # Kein `merge=union`: Ein Vereinigen der Akten wäre hier eine Fälschung.
 data/integrity_lock.json merge=binary
 
+# SEARCH-CONSOLE-DATEN SIND EINE MESSUNG, KEIN TEXT (24.10.2026)
+# Am 21.10.2026 trafen zwei Bot-Branches (`automation/gsc-tagesdaten-*`) auf
+# denselben drei Dateien aufeinander, und Git hat sie als Text zusammengesetzt:
+# `meta.json` trug danach vier `stand`-Schlüssel in einem Objekt, die beiden
+# Top-Listen je zwei Läufe ohne Trennkomma. Ergebnis: gültiges JSON war es nie
+# mehr, und der Artefakt-Wächter im Integritäts-Siegel stand vier Tage lang auf
+# Rot – für jeden Pull-Request des Repos (Integritäts-Schritt „Artefakt-
+# Wächter“, A1-JSON-SYNTAX, drei Funde).
+# `gsc_import.py` schreibt jede Datei vollständig neu; ein Zeilen-Merge kann
+# deshalb nie richtig sein. `merge=binary` erzwingt EINE vollständige Fassung –
+# entweder den Stand des Laufs oder den aus main, nie eine Mischung. Dieselbe
+# Regel wie beim Siegel (#346), den Reserve-Snapshots (#634) und den
+# Quelltext-Wachen (#783).
+# Der Tagesledger ist bewusst NICHT dabei: `*.jsonl merge=union` oben gilt
+# weiter – Tage sind unabhängige Messungen, ihre Vereinigung ist korrekt.
+data/gsc/meta.json merge=binary
+data/gsc/top_seiten_28t.json merge=binary
+data/gsc/top_suchbegriffe_28t.json merge=binary
+
 # Reserve-Snapshots sind ebenfalls ganze Beweise, keine Textbausteine (#634).
 # Ein paralleler Merge hatte Zeitstempel, Kandidaten und Quarantäne-Akten zu
 # ungültigem JSON vermischt. Ganze Fassung wählen, Readiness danach erneuern;
