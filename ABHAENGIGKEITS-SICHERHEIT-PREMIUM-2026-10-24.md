@@ -252,3 +252,32 @@ sondern ein Befund.
    Lockfile (A3).
 
 Vollständige Betriebsanleitung: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt E.
+
+---
+
+## 10 · Nachtrag: was nach dem Merge gemessen wurde (24.10.2026, 15:30 UTC)
+
+- **#848 ist gemergt.** Die Pins, die Lockfile, die Wache und das CI-Gate
+  stehen auf `main`; der Job *Abhängigkeiten (Pins offline · Audit online)*
+  läuft dort bei jedem Push und im Tageslauf.
+- **Code-Scanning: 0 offene Alarme.** Mit dem Repository-Token gemessen
+  (`code-scanning/alerts`) — die 58 stammen also nicht aus dieser Quelle.
+- **Dependabot- und Secret-Scanning-Endpunkte: 403.** Weder das Agenten-Token
+  noch das `GITHUB_TOKEN` eines eigens gebauten Diagnose-Laufs dürfen sie
+  lesen. Die Alarmliste ist damit **nicht maschinell prüfbar** — nur die
+  Anzeige im Repository.
+- **Der Zähler stand nach dem Merge weiter auf 58** (7/30/18/3). Das ist
+  erwartbar, wenn die Alarme an eine **früher aufgelöste** Fassung der
+  Requirements gebunden sind (U1): Sie fallen erst, wenn Dependabot die
+  Manifeste neu auflöst. Es ist **nicht** so, dass die Heilung nichts bewirkt
+  hat — der Bestand war schon vorher sauber; geändert hat sich, dass er es
+  bleibt und dass es nachweisbar ist.
+
+**Der Satz, der hier stehen darf:** Jede ausgelieferte Version ist gegen
+dieselbe Advisory-Datenbank geprüft und sauber; jede Anforderung ist gepinnt;
+jede Lockfile existiert; jede Abweichung ist ab jetzt rot.
+
+**Der Satz, der hier nicht stehen darf:** „Die 58 sind weg." Das kann erst
+behauptet werden, wenn die Anzeige fällt oder die Liste einzeln abgeglichen
+ist. Wer sie abgleichen will: Security → Dependabot → *Export as CSV*; die
+Wache nennt zu jedem Paket die Herkunftsdatei und den Fix.

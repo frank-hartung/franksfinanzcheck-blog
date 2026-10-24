@@ -536,8 +536,8 @@ npm run deps:audit     # online: jede ausgelieferte Version gegen die Advisory-D
 npm run test:deps      # Sabotage- und Gegenproben der Wache
 ```
 
-Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). 304 Abfragen, rund
-70 Sekunden, Exit 0 sauber · 1 Befund · 2 Störung.
+Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). Rund 310
+Versionen, etwa 70 Sekunden, Exit 0 sauber · 1 Befund · 2 Störung.
 
 ### E2 · Befund heilen (Exit 1)
 
