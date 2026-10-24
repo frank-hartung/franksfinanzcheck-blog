@@ -1,4 +1,10 @@
 {
+  "stand": "2026-10-22T10:09:09Z",
+  "quelle": "google-search-console-api (Dienstkonto, nur lesen)",
+  "site": "sc-domain:franksfinanzcheck.de",
+  "zeitraum": {
+    "von": "2026-07-22",
+    "bis": "2026-10-19"
   "stand": "2026-10-21T10:06:23Z",
   "quelle": "google-search-console-api (Dienstkonto, nur lesen)",
   "site": "sc-domain:franksfinanzcheck.de",
@@ -15,6 +21,8 @@
   "status": "ok",
   "grund": "",
   "datenschutz": "nur aggregierte Kennzahlen je Tag, Seite oder Suchbegriff; keine Nutzerkennungen",
+  "tage_neu": 30,
+  "tage_gesamt": 30,
   "tage_neu": 29,
   "tage_gesamt": 29,
   "tage_neu": 28,
