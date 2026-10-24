@@ -175,8 +175,9 @@ Danach in dieser Reihenfolge:
 1. `python3 scripts/newsletter_digest.py --check` → `aktiv`, keine N-Funde.
 2. `hugo` (bzw. den Deploy-Build) und `npx playwright test e2e/newsletter.spec.mjs`.
 3. `python3 scripts/newsletter_qa.py --build --days 1` → 100/100.
-4. Secrets in den GitHub-Actions-Settings: `RESEND_API_KEY` und
-   `NEWSLETTER_WORKER_EXPORT_KEY` (beide *Secrets*), dazu die Variable
+4. Secrets in den GitHub-Actions-Settings: `RESEND_API_KEY`,
+   `NEWSLETTER_WORKER_EXPORT_KEY` und ein davon verschiedener
+   `NEWSLETTER_WORKER_WRITE_KEY` (alle *Secrets*), dazu die Variable
    `NEWSLETTER_WORKER_BASE` – Details in
    [ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md](ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md) § 3.
 5. Actions → *Newsletter-Daily* → `test_adresse` = deine Adresse → echter

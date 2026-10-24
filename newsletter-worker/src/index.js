@@ -18,10 +18,10 @@
  *   GET  /status         Token -> {status, themen} (ohne Adresse!)
  *   GET  /healthz        Lebendigkeits-Pruefung; Details (`takt`) nur mit
  *                        X-FF-Key (oeffentlich nur ok/ts)
- *   GET  /export/…       NUR mit Secret im Header X-FF-Key (nie per URL):
- *                        Abonnenten-Liste, Pending-Liste, Eintrag nach
- *                        Token, Eintrag nach E-Mail (/export/kontakt),
- *                        Versand-Versuche melden (Catch-up).
+ *   GET  /export/abonnenten, /export/pending: Leseschluessel im Header.
+ *   POST /export/token, /export/kontakt, /export/versuch: getrennter
+ *                        Schreibschluessel; Token/E-Mail nur im Request-Body.
+ *                        Schreibzugriffe melden Versand-Versuche (Catch-up).
  *   scheduled()          TAKTGEBER (seit 25.09.2026): Cloudflare Cron
  *                        Triggers starten den Digest (Di/Fr 04:30 UTC),
  *                        die Kadenz-Wache (05:05 UTC) und den Nachgang
@@ -49,9 +49,13 @@
  *     2. Die Anmeldung hat zusaetzlich ein TAGESBUDGET (ANMELDUNG_MAX_PRO_TAG,
  *        Standard 100). Ist es erschoepft, wird fail-closed abgelehnt und
  *        genau einmal je Stunde laut protokolliert.
- *     3. Token-tragende Massenexporte brauchen einen ZWEITEN Schluessel
- *        (EXPORT_KEY_WRITE); mit dem Standardschluessel gibt es die Liste
- *        ohne Token. Jeder Export wird protokolliert.
+ *     3. Jeder Zugang zu Token oder personenbezogenen Exportdaten braucht
+ *        den ZWEITEN, vom Leseschluessel verschiedenen Schluessel
+ *        (EXPORT_KEY_WRITE). Ohne den zweiten Schluessel sind diese Wege
+ *        gesperrt; es gibt keinen Rueckfall. Token und E-Mail stehen bei
+ *        Einzel-Lookups ausschliesslich im POST-Body, nie in der URL.
+ *        Abgewiesene Exportversuche werden je Stunde begrenzt protokolliert,
+ *        damit ein anonymer 403-Sturm das KV-Schreibbudget nicht aufbraucht.
  *   Restrisiko (bewusst, dokumentiert): Ein verteilter Lesesturm auf die
  *   Token-Seiten laesst sich im Worker nicht zuverlaessig zaehlen, ohne genau
  *   die Schreibzugriffe zu verbrauchen, die geschuetzt werden sollen. Dagegen
@@ -100,6 +104,8 @@ const ANMELDUNG_MAX_PRO_TAG_DEFAULT = 100;
 const TTL_BUDGET_SEK = 48 * 60 * 60;
 const TTL_WARN_SEK = 60 * 60;
 const TTL_EXPORTLOG_SEK = 30 * 24 * 60 * 60;
+const TTL_EXPORT_DENIED_LOG_SEK = 48 * 60 * 60;
+const MAX_FORM_BODY_BYTES = 64 * 1024;
 const FEEDBACK_MAX_PRO_TAG_DEFAULT = 200;
 const BESTAETIGUNG_TAGE_DEFAULT = 14;
 const MAX_VERSEND_VERSUCHE = 3;
@@ -265,19 +271,21 @@ async function sha256_kurz(text) {
 
 /**
  * Konstantzeit-Vergleich fuer ein Export-Secret (kein Zeitaugriff).
- * 15.10.2026 (F-08): Es gibt jetzt ZWEI Schluessel-Rollen – `EXPORT_KEY`
- * (lesend: Listen ohne Token, Status, Pending) und `EXPORT_KEY_WRITE`
- * (zusaetzlich Token-tragende Massenexporte). Ist der Schreibschluessel
- * nicht gesetzt, gilt der Standardschluessel weiter fuer beide Rollen –
- * bestehende Laeufe brechen also nicht, der Betreiber kann trennen.
+ * `EXPORT_KEY` ist ausschliesslich lesend und liefert keine Bearer-Token.
+ * Token- und personenbezogene Endpunkte verlangen `EXPORT_KEY_WRITE`, das
+ * gesetzt und vom Leseschluessel verschieden sein MUSS. Kein Rueckfall:
+ * fehlt die zweite Rolle oder ist sie gleich dem Leseschluessel, bleibt der
+ * schreibende Export gesperrt (F-08).
  */
 async function schluessel_pruefen(env, angebot) {
   return konstantzeit_gleich(String((env && env.EXPORT_KEY) || ''), String(angebot || ''));
 }
 
 async function schreibschluessel_pruefen(env, angebot) {
-  const sollen = String((env && env.EXPORT_KEY_WRITE) || (env && env.EXPORT_KEY) || '');
-  return konstantzeit_gleich(sollen, String(angebot || ''));
+  const lesen = String((env && env.EXPORT_KEY) || '');
+  const schreiben = String((env && env.EXPORT_KEY_WRITE) || '');
+  if (!lesen || !schreiben || lesen === schreiben) return false;
+  return konstantzeit_gleich(schreiben, String(angebot || ''));
 }
 
 async function konstantzeit_gleich(sollen, ist) {
@@ -340,20 +348,45 @@ async function warnen_einmal(env, bereich, meldung, zeit = Date.now()) {
   return true;
 }
 
-/** Export-Aufrufe protokollieren (F-08) – Route, Umfang, Schluessel-Abdruck. */
+// Fehlversuche sind global je Stunde zusammengefasst (zusaetzlich per Isolat
+// dedupliziert). So bleibt der Nachweis erhalten, ohne dass anonyme 403er pro
+// Anfrage einen KV-Schreibzugriff ausloesen koennen.
+const EXPORT_DENIED_LOGGED = new Set();
+
 async function export_vermerken(env, route, umfang, angebot, status = 200, zeit = Date.now()) {
+  const ts = new Date(zeit).toISOString();
+  const abgewiesen = status === 403;
+  const stunden_key = abgewiesen ? `exportlog:denied:${ts.slice(0, 13)}` : null;
+  if (stunden_key && EXPORT_DENIED_LOGGED.has(stunden_key)) return;
+  if (stunden_key) {
+    if (EXPORT_DENIED_LOGGED.size >= 24) EXPORT_DENIED_LOGGED.clear();
+    // Vor dem ersten await markieren: auch parallele Requests in derselben
+    // Worker-Instanz koennen so nicht je einen KV-Write ausloesen.
+    EXPORT_DENIED_LOGGED.add(stunden_key);
+  }
   try {
+    if (stunden_key && await env.ABO.get(stunden_key)) return;
     const eintrag = {
-      ts: new Date(zeit).toISOString(),
+      ts,
       route,
       umfang,
       status,
       key: await schluessel_fingerabdruck(angebot),
     };
-    await env.ABO.put(`exportlog:${new Date(zeit).toISOString()}`, JSON.stringify(eintrag),
-      { expirationTtl: TTL_EXPORTLOG_SEK });
-    console.log(`ff-newsletter export ${route}: ${umfang} (${status})`);
-  } catch (e) { /* Protokoll ist Nachweis, nicht Betriebsvoraussetzung */ }
+    const key = stunden_key || `exportlog:${ts}`;
+    await env.ABO.put(key, JSON.stringify(eintrag), {
+      expirationTtl: abgewiesen ? TTL_EXPORT_DENIED_LOG_SEK : TTL_EXPORTLOG_SEK,
+    });
+    if (!abgewiesen) console.log(`ff-newsletter export ${route}: ${umfang} (${status})`);
+  } catch (e) {
+    if (stunden_key) EXPORT_DENIED_LOGGED.delete(stunden_key);
+    // Das Protokoll ist Nachweis, nicht Betriebsvoraussetzung. Insbesondere
+    // darf ein KV-Fehler die Export-Antwort nicht veraendern.
+  }
+}
+
+function export_speicher_zuruecksetzen() {
+  EXPORT_DENIED_LOGGED.clear();
 }
 
 /** Protokoll der Exporte – nur mit Schluessel (in /healthz). */
@@ -449,7 +482,42 @@ function email_norm(adresse) {
  */
 async function koerper_lesen(request) {
   const ct = String(request.headers.get('content-type') || '');
-  const roh = await request.text();
+  // Formulare brauchen nur wenige KiB. Cappe den Stream selbst statt nur
+  // Content-Length zu vertrauen (kann fehlen oder falsch sein), damit ein
+  // beliebig großer POST nicht den Worker-Isolate-Speicher belegt.
+  const laenge = request.headers.get('content-length');
+  if (laenge !== null && /^\d+$/.test(laenge) && Number(laenge) > MAX_FORM_BODY_BYTES) {
+    try { await request.body?.cancel(); } catch (e) { /* Body wird verworfen. */ }
+    return null;
+  }
+  const reader = request.body?.getReader();
+  const teile = [];
+  let bytes = 0;
+  if (reader) {
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_FORM_BODY_BYTES) {
+          try { await reader.cancel(); } catch (e) { /* Body wird verworfen. */ }
+          return null;
+        }
+        teile.push(value);
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+  const rohBytes = new Uint8Array(bytes);
+  let versatz = 0;
+  for (const teil of teile) { rohBytes.set(teil, versatz); versatz += teil.byteLength; }
+  let roh;
+  try {
+    roh = new TextDecoder('utf-8', { fatal: true }).decode(rohBytes);
+  } catch (e) {
+    return null;
+  }
   if (ct.includes('application/json') || roh.trimStart().startsWith('{')) {
     try {
       const daten = JSON.parse(roh);
@@ -858,6 +926,10 @@ async function health(request, env) {
   // (der Export-Abdruck ist ein Kurz-Hash, keine Adresse).
   const heute = kv_ok ? await tagesbudget_stand(env, 'anmeldung') : 0;
   const exporte = kv_ok ? await export_log_lesen(env) : [];
+  const leseschluessel = String((env && env.EXPORT_KEY) || '');
+  const schreibschluessel = String((env && env.EXPORT_KEY_WRITE) || '');
+  const rollenGetrennt = Boolean(leseschluessel && schreibschluessel
+    && leseschluessel !== schreibschluessel);
   return json({
     ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler',
     takt: { crons: Object.keys(TAKT), letzte: takt },
@@ -867,7 +939,7 @@ async function health(request, env) {
       feedback_max: feedback_max(env),
     },
     turnstile: turnstile_zustand(env),
-    schluesselrollen: String(env.EXPORT_KEY_WRITE || '').trim() ? 'getrennt' : 'gemeinsam',
+    schluesselrollen: rollenGetrennt ? 'getrennt' : 'gemeinsam',
     exporte: exporte,
   }, kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
 }
@@ -1257,27 +1329,28 @@ async function praferenzen_seite(env, url) {
 
 // ---------------------------------------------------------------- Export (geschuetzt)
 async function exportiert(request, env, p, url) {
-  // NUR per Header (Audit N-01): Ein Schluessel in der URL landet in Logs,
-  // Browser-Verlauf und Referrern.
+  // Der API-Schluessel steht ausschliesslich im Header. Tokens und E-Mail-
+  // Adressen fuer Einzel-Lookups werden nur im POST-Body angenommen.
   const angebot = request.headers.get('x-ff-key') || '';
-  // Zwei Rollen (F-08): Der SCHREIBschluessel darf alles, der LESESchluessel
-  // nur die tokenfreien Ansichten. Ist nur EXPORT_KEY gesetzt, fallen beide
-  // Rollen zusammen (Rueckwaerts-Kompatibilitaet, siehe wrangler.toml).
-  // Zwei Rollen (F-08): Der SCHREIBschluessel darf alles, der LESESchluessel
-  // nur die tokenfreien Ansichten. Ist nur EXPORT_KEY gesetzt, fallen beide
-  // Rollen zusammen (Rueckwaerts-Kompatibilitaet). ACHTUNG: Der Leseschluessel
-  // darf hier NICHT als Schreibschluessel durchgehen – sonst waere die
-  // Trennung wirkungslos (Lehre aus dem Testlauf vom 15.10.2026).
+  const schreib_route = ['/export/token', '/export/kontakt', '/export/versuch'].includes(p);
   const darfLesen = await schluessel_pruefen(env, angebot);
   const darfSchreiben = await schreibschluessel_pruefen(env, angebot);
-  if (!darfLesen && !darfSchreiben) {
+  if (schreib_route ? !darfSchreiben : (!darfLesen && !darfSchreiben)) {
     await export_vermerken(env, p, 0, angebot, 403);
     return new Response(JSON.stringify({ status: 'verboten' }), {
       status: 403, headers: { 'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
     });
   }
+  if ((p === '/export/abonnenten' || p === '/export/pending') && request.method !== 'GET'
+      || (schreib_route && request.method !== 'POST')) {
+    return new Response(JSON.stringify({ status: 'methode-nicht-erlaubt' }), {
+      status: 405,
+      headers: { 'Allow': schreib_route ? 'POST' : 'GET',
+        'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
+    });
+  }
   // Mengenbegrenzung auch auf den geschuetzten Exporten (F-08): Ein
-  // abgeflossener Schluessel darf die Liste nicht in Sekunden leerraeumen.
+  // abgeflossener Schluessel darf die Liste nicht in Sekunden leeren.
   if (!await rate_erlaubt(env, String(request.headers.get('cf-connecting-ip') || 'export'), 'export')) {
     await export_vermerken(env, p, 0, angebot, 429);
     return new Response(JSON.stringify({ status: 'zu-viele-anfragen' }), {
@@ -1285,12 +1358,9 @@ async function exportiert(request, env, p, url) {
     });
   }
   if (p === '/export/abonnenten') {
-    // F-08 (15.10.2026): Token nur mit dem ZWEITEN Schluessel und nur auf
-    // ausdrueckliche Anforderung (?mit_token=1). Der Standard-Export liefert
-    // Adresse + Themen – damit ist ein abgeflossener Leseschluessel kein
-    // Generalschlüssel mehr, mit dem sich jeder Abonnent abmelden laesst.
-    const mitToken = url.searchParams.get('mit_token') === '1';
-    const darfToken = mitToken && darfSchreiben;
+    // Der Leseschluessel liefert Adressen/Themen, aber nie Token. Auch bei
+    // ausdruecklichem `mit_token=1` ist der zweite, getrennte Schluessel Pflicht.
+    const darfToken = url.searchParams.get('mit_token') === '1' && darfSchreiben;
     const keys = await liste_mit_prefix(env.ABO, 'abo:');
     const aktiv = [];
     for (const key of keys) {
@@ -1308,8 +1378,7 @@ async function exportiert(request, env, p, url) {
     }, 200, env);
   }
   if (p === '/export/pending') {
-    const mitToken = url.searchParams.get('mit_token') === '1';
-    const darfToken = mitToken && darfSchreiben;
+    const darfToken = url.searchParams.get('mit_token') === '1' && darfSchreiben;
     const keys = await liste_mit_prefix(env.ABO, 'abo:');
     const offen = [];
     for (const key of keys) {
@@ -1327,8 +1396,11 @@ async function exportiert(request, env, p, url) {
     return json({ ts: new Date().toISOString(), anzahl: offen.length, mit_token: darfToken, offen }, 200, env);
   }
   if (p === '/export/token') {
-    const eintrag = await token_eintrag(env, url.searchParams.get('token') || '');
+    const daten = await koerper_lesen(request);
+    const token = String((daten && daten.token && daten.token[0]) || '').trim();
+    const eintrag = token ? await token_eintrag(env, token) : null;
     if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
+    await export_vermerken(env, p, 1, angebot, 200);
     return json({
       status: eintrag.status, email: eintrag.email, token: eintrag.token,
       themen: eintrag.themen || [], seit: eintrag.seit, bestaetigt: eintrag.bestaetigt,
@@ -1336,19 +1408,26 @@ async function exportiert(request, env, p, url) {
     }, 200, env);
   }
   if (p === '/export/kontakt') {
-    const email = email_norm(url.searchParams.get('email') || '');
+    const daten = await koerper_lesen(request);
+    const email = email_norm(String((daten && daten.email && daten.email[0]) || ''));
     const eintrag = email ? await abo_lesen(env.ABO, email) : null;
     if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
+    await export_vermerken(env, p, 1, angebot, 200);
     return json({
       status: eintrag.status, email: eintrag.email, token: eintrag.token,
       themen: eintrag.themen || [],
     }, 200, env);
   }
-  if (p === '/export/versuch' && request.method === 'POST') {
+  if (p === '/export/versuch') {
     const daten = await koerper_lesen(request);
     const token = String((daten && daten.token && daten.token[0]) || '').trim();
     const ergebnis = String((daten && daten.ergebnis && daten.ergebnis[0]) || 'gesendet');
-    const eintrag = await token_eintrag(env, token);
+    if (!['gesendet', 'abgelaufen', 'bounce'].includes(ergebnis)) {
+      return new Response(JSON.stringify({ status: 'ungueltiges-ergebnis' }), {
+        status: 400, headers: { 'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
+      });
+    }
+    const eintrag = token ? await token_eintrag(env, token) : null;
     if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
     const jetzt = new Date().toISOString();
     if (ergebnis === 'gesendet' && eintrag.status === 'pending') {
@@ -1365,9 +1444,12 @@ async function exportiert(request, env, p, url) {
       eintrag.grund = 'bounce';
     }
     await abo_schreiben(env.ABO, eintrag);
+    await export_vermerken(env, p, 1, angebot, 200);
     return json({ status: 'ok', abo_status: eintrag.status, versuche: eintrag.versuche || 0 }, 200, env);
   }
-  return new Response(JSON.stringify({ status: 'unbekannt' }), { status: 404, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  return new Response(JSON.stringify({ status: 'unbekannt' }), {
+    status: 404, headers: { 'Content-Type': 'application/json; charset=utf-8', ...SICHERHEITS_KOPF },
+  });
 }
 
 // ---------------------------------------------------------------- Einstieg
@@ -1450,7 +1532,9 @@ export default {
     try {
       if (p === '/' || p === '/healthz') return await health(request, env);
       // CSRF-Schutz (Audit M-02): POST aus fremden Browser-Urspruengen ablehnen.
-      if (request.method === 'POST' && !p.startsWith('/export/') && !herkunft_erlaubt(request, env, url)) {
+      // Server-zu-Server-Exporte ohne Origin bleiben erlaubt; Browser-Aufrufe
+      // aus fremden Origins werden auch dort vor der Schluesselpruefung gestoppt.
+      if (request.method === 'POST' && !herkunft_erlaubt(request, env, url)) {
         return fehler(403, 'Anfrage von einer fremden Seite abgelehnt.', env, request);
       }
       // Mengenbegrenzung (F-03) – greift fuer lesende Routen und den Export.
@@ -1499,7 +1583,7 @@ export {
   // Umwege (Audit 15.10.2026): Schluesselrollen, Tagesbudget, Mengenklassen.
   schluessel_pruefen, schreibschluessel_pruefen, tagesbudget_nehmen, tagesbudget_stand,
   limit_klasse, warnen_einmal, schluessel_fingerabdruck, ANMELDUNG_MAX_PRO_TAG_DEFAULT,
-  menge_speicher_pruefen, menge_speicher_zuruecksetzen,
+  menge_speicher_pruefen, menge_speicher_zuruecksetzen, export_speicher_zuruecksetzen,
   // Paar-Vertrag Turnstile (WF-E813 / #809): der Zustand ist eine eigene
   // sicherheitsrelevante Entscheidung und wird direkt geprueft.
   turnstile_zustand,

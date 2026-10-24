@@ -30,8 +30,9 @@ Umgabe (vom Workflow als env gesetzt, nie als Skripttext-Interpolation):
   RESEND_API_KEY               für transport=resend
   NEWSLETTER_SMTP_HOST/PORT/USER/PASS/SECURE   für transport=smtp
   NEWSLETTER_WORKER_BASE       https://abos.franksfinanzcheck.de
-  NEWSLETTER_WORKER_EXPORT_KEY Secret des Worker-Export (auch als Secret
-                               NEWSLETTER_WORKER_EXPORT_KEY im Repo)
+  NEWSLETTER_WORKER_EXPORT_KEY Leseschlüssel (gleich Worker-Secret EXPORT_KEY)
+  NEWSLETTER_WORKER_WRITE_KEY  Pflicht für Token-/Personen-Exporte; eigener,
+                               vom Leseschlüssel verschiedener Schlüssel
 
 Exit: 0 = alles zugestellt (oder dry-run) · 1 = Teilversand · 2 = Fehler.
 """
@@ -219,7 +220,7 @@ def _http_json(url: str, payload: dict | None = None, key: str | None = None,
 # ------------------------------------------------------------------ Transport
 def transport_waehle(root: str, konf: dict, env: dict | None = None) -> tuple[str, dict]:
     """→ (Name, Einstellungen). Präzedenz: env > Studio-JSON > Default resend."""
-    env = env or os.environ
+    env = env if env is not None else os.environ
     versand = (konf.get("email") or {}).get("versand") or {}
     name = env.get("NEWSLETTER_TRANSPORT") or versand.get("transport") or "resend"
     if name not in ("resend", "smtp", "dryrun"):
@@ -265,7 +266,7 @@ def one_klick_https(token: str, env: dict | None = None) -> str:
     token = (token or "").strip()
     if not token:
         return ""
-    env = env or os.environ
+    env = env if env is not None else os.environ
     base = (env.get("NEWSLETTER_WORKER_BASE") or "").rstrip("/")
     if not base:
         return ""
@@ -469,45 +470,44 @@ def smtp_senden(empfaenger: dict, konf: dict, einstellungen: dict,
 
 # ------------------------------------------------------------------ Worker-Export
 def worker_konfig(env: dict | None = None) -> tuple[str, str]:
-    env = env or os.environ
+    env = env if env is not None else os.environ
     base = (env.get("NEWSLETTER_WORKER_BASE") or "").rstrip("/")
     key = env.get("NEWSLETTER_WORKER_EXPORT_KEY") or ""
     return base, key
 
 
 def worker_schreibschluessel(env: dict | None = None) -> str:
-    """Schlüssel für token-tragende Exporte (Sicherheitsaudit 15.10.2026, F-08).
+    """Separater Schlüssel für jeden token-tragenden Worker-Endpunkt (F-08).
 
-    Der Worker trennt seit dem 15.10.2026 zwei Rollen: `EXPORT_KEY` liest
-    Listen OHNE Token, `EXPORT_KEY_WRITE` darf zusätzlich die Token
-    mitliefern (die der Versand für jeden Abmeldelink braucht). Ist kein
-    eigener Schreibschlüssel hinterlegt, fällt der Worker auf den
-    Standardschlüssel zurück – dann liefert diese Funktion denselben Wert,
-    und der Versand funktioniert unverändert.
+    Der Schreibschlüssel muss explizit gesetzt und vom Leseschlüssel
+    verschieden sein. Fehlt er oder ist er identisch, gibt es keinen
+    Rückfall: Token-Exporte und Statusänderungen bleiben gesperrt.
     """
-    env = env or os.environ
-    schreib = (env.get("NEWSLETTER_WORKER_WRITE_KEY") or "").strip()
-    if schreib:
-        return schreib
-    return env.get("NEWSLETTER_WORKER_EXPORT_KEY") or ""
+    env = env if env is not None else os.environ
+    lesen = (env.get("NEWSLETTER_WORKER_EXPORT_KEY") or "").strip()
+    schreiben = (env.get("NEWSLETTER_WORKER_WRITE_KEY") or "").strip()
+    if not lesen or not schreiben or lesen == schreiben:
+        return ""
+    return schreiben
 
 
-def worker_abfrage(pfad: str, param: dict | None = None, *, base: str, key: str) -> dict:
-    """Geschützte Export-Abfrage am Worker – der Schlüssel geht MIT.
+def worker_abfrage(pfad: str, param: dict | None = None, *, base: str, key: str,
+                   methode: str = "GET") -> dict:
+    """Geschützte Export-Abfrage am Worker – Schlüssel nur im Header.
 
-    Der Worker prüft `x-ff-key` (nur als Header – seit 14.10.2026 nicht
-    mehr per `?sluessel=`, Schlüssel in URLs landen in Logs), vergleicht in
-    Konstantzeit und antwortet sonst 403 `{"status":"verboten"}`. Bis
-    25.09.2026 nahm diese Funktion `key` entgegen und sendete ihn nie:
-    jede Bestätigung und jeder Nachgang endete in „Worker-Antwort 403“
-    (Lauf `Nachgang unvollständig (Exit 1)`), und der Listen-Export wäre
-    beim ersten echten Versand am selben Punkt gestorben. Ein Parameter,
-    der nicht ankommt, sieht wie Konfiguration aus und ist Code.
+    GET-Filter (z. B. `mit_token=1`) bleiben unkritische Query-Parameter.
+    Personenbezogene Werte wie Token/E-Mail gehen bei POST im JSON-Body,
+    damit sie nicht in URL-, Proxy- oder Worker-Access-Logs geraten.
     """
+    methode = methode.upper()
     url = base + pfad
+    payload = None
     if param:
-        url += "?" + urllib.parse.urlencode(param)
-    status, antwort = _http_json(url, None, methode="GET",
+        if methode == "GET":
+            url += "?" + urllib.parse.urlencode(param)
+        else:
+            payload = param
+    status, antwort = _http_json(url, payload, methode=methode,
                                  headers={"x-ff-key": key} if key else None)
     if status == 200 and isinstance(antwort, dict):
         return antwort
@@ -543,7 +543,7 @@ def sende_datei(datei: str, root: str = BLOG_DIR, env: dict | None = None,
     Empfänger senden (Rate-Limit) → Journal → Exit-Code.
 
     schlafen = Zeitverschiebung (Tests: kein echtes Warten)."""
-    env = env or os.environ
+    env = env if env is not None else os.environ
     schlafen = schlafen or time.sleep
     konf = konf or studio.konfiguration(root, streng=False)
     daten = lese_json_datei(datei)
@@ -561,7 +561,8 @@ def sende_datei(datei: str, root: str = BLOG_DIR, env: dict | None = None,
     ausgabe = daten.get("ausgabe") or "ohne-nummer"
     betreff = daten.get("betreff") or ""
     preheader = daten.get("preheader") or ""
-    base, key = worker_konfig(env)
+    base, _ = worker_konfig(env)
+    schreibschluessel = worker_schreibschluessel(env)
     rat = einstellungen["rat_pro_minute"]
     interval = 60.0 / rat
 
@@ -595,8 +596,8 @@ def sende_datei(datei: str, root: str = BLOG_DIR, env: dict | None = None,
         elif status == "hart" or (status == "fehler" and HAERT_BOUNCE_MUSTER.search(meldung or "")):
             bounces += 1
             status = "bounce"
-            if base and key and mail["token"]:
-                worker_melden(base, key, mail["token"], "bounce")
+            if base and schreibschluessel and mail["token"]:
+                worker_melden(base, schreibschluessel, mail["token"], "bounce")
         else:
             fehler += 1
         journal_zeile(root, {
@@ -625,7 +626,7 @@ def bestaetigung_html(token: str, konf: dict, env: dict | None = None) -> tuple[
     """Bestätigungs-Mail (Double-Opt-In): eigene Domain, eigener Takt,
     eigener Token – die Adresse verlässt den Worker nie einen zweiten
     Weg. → (html, text, betreff)."""
-    env = env or os.environ
+    env = env if env is not None else os.environ
     e_mail = (konf.get("email") or {})
     design = ((konf.get("design") or {}).get("hell")) or {}
     text_primary = design.get("text", "#2E2E33")
@@ -705,14 +706,17 @@ def sende_bestaetigung(token: str, root: str = BLOG_DIR, env: dict | None = None
                        schlafen=None) -> int:
     """Bestätigungs-Mail für EINEN Token: Worker-Abfrage → Versand →
     Versuch melden. Exit 0 = raus, 1 = Teilzustand (Adresse offen), 2 = Fehler."""
-    env = env or os.environ
+    env = env if env is not None else os.environ
     konf = studio.konfiguration(root, streng=False)
-    base, key = worker_konfig(env)
-    if not base or not key:
-        raise SystemExit("❌ Bestätigung: NEWSLETTER_WORKER_BASE / "
-                         "NEWSLETTER_WORKER_EXPORT_KEY fehlen – die Adresse ist "
-                         "im Worker, nicht im Repo.")
-    antwort = worker_abfrage("/export/token", {"token": token}, base=base, key=key)
+    base, _ = worker_konfig(env)
+    schreibschluessel = worker_schreibschluessel(env)
+    if not base or not schreibschluessel:
+        raise SystemExit("❌ Bestätigung: NEWSLETTER_WORKER_BASE und ein von "
+                         "NEWSLETTER_WORKER_EXPORT_KEY verschiedener "
+                         "NEWSLETTER_WORKER_WRITE_KEY sind erforderlich. "
+                         "Ohne getrennte Schreibrolle wird kein Token geladen.")
+    antwort = worker_abfrage("/export/token", {"token": token}, base=base,
+                             key=schreibschluessel, methode="POST")
     status = antwort.get("status")
     email = antwort.get("email") or ""
     if status == "unbekannt":
@@ -726,27 +730,34 @@ def sende_bestaetigung(token: str, root: str = BLOG_DIR, env: dict | None = None
               "Worker-Zustand prüfen.")
         return 2
     html_seite, text_alt, betreff = bestaetigung_html(token, konf, env)
-    datei = os.path.join(tempfile.gettempdir(), "ff-bestaetigung.json")
-    with open(datei, "w", encoding="utf-8") as fh:
-        json.dump({
-            "ausgabe": f"bestaetigung-{token[:8]}",
-            "betreff": betreff,
-            "empfaenger": [{"email": email, "token": token,
-                            "html": html_seite, "text": text_alt,
-                            "transaktional": True}],
-        }, fh, ensure_ascii=False)
+    # Empfängeradresse und Token stehen in dieser temporären Payload. Nutze
+    # eine exklusive, zufällige Datei (0600), nicht einen vorhersagbaren Namen:
+    # verhindert Symlink-Überschreiben und Kollision paralleler Nachgänge.
+    datei = None
     try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8",
+                                         prefix="ff-bestaetigung-", suffix=".json",
+                                         delete=False) as fh:
+            datei = fh.name
+            json.dump({
+                "ausgabe": f"bestaetigung-{token[:8]}",
+                "betreff": betreff,
+                "empfaenger": [{"email": email, "token": token,
+                                "html": html_seite, "text": text_alt,
+                                "transaktional": True}],
+            }, fh, ensure_ascii=False)
         rc = sende_datei(datei, root=root, env=env, konf=konf, schlafen=schlafen)
     finally:
-        try:
-            os.remove(datei)
-        except OSError:
-            pass
+        if datei:
+            try:
+                os.remove(datei)
+            except OSError:
+                pass
     if rc == 0:
-        worker_melden(base, key, token, "gesendet")
+        worker_melden(base, schreibschluessel, token, "gesendet")
         print(f"✅ Bestätigungsmail versendet an {hash16(email)} (Ref {hash16(token)[:8]}).")
     elif rc == 1:
-        worker_melden(base, key, token, "gesendet")
+        worker_melden(base, schreibschluessel, token, "gesendet")
         print(f"⚠ Bestätigungsmail TEILWEISE an {hash16(email)} – Nachgang holt nach.")
     return rc
 
@@ -757,20 +768,22 @@ def sende_nachgang(root: str = BLOG_DIR, env: dict | None = None, schlafen=None)
     erreicht haben (Rate-Limit, GitHub-Wartung) oder deren Mail nie ankam.
     Regeln: erst nach NACHGANG_MIN_MINUTEN, max. NACHGANG_MAX_VERSUCHE,
     danach „abgelaufen“ im Worker. Exit 0 = nichts übrig, 1 = Rest offen."""
-    env = env or os.environ
+    env = env if env is not None else os.environ
     schlafen = schlafen or time.sleep
     konf = studio.konfiguration(root, streng=False)
-    base, key = worker_konfig(env)
-    if not base or not key:
+    base, _ = worker_konfig(env)
+    schreibschluessel = worker_schreibschluessel(env)
+    if not base:
         print("ℹ️ Nachgang: Worker-Konfiguration fehlt – nichts zu tun.")
         return 0
-    # Token-Träger (Sicherheitsaudit 15.10.2026, F-08): Der Nachgang erzeugt je
-    # offener Anmeldung eine neue Bestätigungsmail und braucht dafür den
-    # Token. Der Worker gibt ihn nur mit dem SCHREIBSCHLÜSSEL und der
-    # ausdrücklichen Anforderung heraus; ohne eigenen Schreibschlüssel greift
-    # derselbe Wert (Rückwärts-Kompatibilität).
+    if not schreibschluessel:
+        print("❌ Nachgang: Getrennter NEWSLETTER_WORKER_WRITE_KEY fehlt oder "
+              "ist identisch mit dem Leseschlüssel. Token bleiben gesperrt.")
+        return 2
+    # Token-Träger (F-08): Ein eigener, vom Leseschlüssel verschiedener
+    # Schreibschlüssel ist Pflicht. Ohne ihn wird kein Token angefordert.
     antwort = worker_abfrage("/export/pending", {"mit_token": "1"},
-                             base=base, key=worker_schreibschluessel(env) or key)
+                             base=base, key=schreibschluessel)
     offen = antwort.get("offen") or []
     min_minuten = int(env.get("NEWSLETTER_NACHGANG_MIN_MINUTEN") or NACHGANG_MIN_MINUTEN_DEFAULT)
     nun = datetime.datetime.now(datetime.timezone.utc)
@@ -781,7 +794,7 @@ def sende_nachgang(root: str = BLOG_DIR, env: dict | None = None, schlafen=None)
         letzter_versuch = person.get("bestaetigung_gesendet") or ""
         versuche = int(person.get("versuche") or 0)
         if versuche >= NACHGANG_MAX_VERSUCHE:
-            worker_melden(base, key, token, "abgelaufen")
+            worker_melden(base, schreibschluessel, token, "abgelaufen")
             print(f"🚫 Nachgang: {hash16(person.get('email', ''))} abgelaufen "
                   f"(≥{NACHGANG_MAX_VERSUCHE} Versuche ohne Klick) – nicht wiederholt.")
             continue
@@ -817,11 +830,11 @@ def sende_nachgang(root: str = BLOG_DIR, env: dict | None = None, schlafen=None)
             except OSError:
                 pass
         if rc == 0:
-            worker_melden(base, key, token, "gesendet")
+            worker_melden(base, schreibschluessel, token, "gesendet")
             zugestellt += 1
             print(f"✅ Nachgang: Bestätigung an {hash16(person['email'])} (Versuch {versuche + 1}).")
         else:
-            worker_melden(base, key, token, "gesendet")
+            worker_melden(base, schreibschluessel, token, "gesendet")
             print(f"⚠ Nachgang: Bestätigung an {hash16(person['email'])} unvollständig "
                   f"(Versuch {versuche + 1}) – nächster Durchgang wiederholt.")
         schlafen(5)
@@ -1173,10 +1186,32 @@ def _selftest() -> int:
            and gesehen["methode"] == "GET",
            f"Worker-Export: falscher Aufruf {gesehen['methode']} {gesehen['url']}")
 
-    # 10b) Rollen-Trennung beim Nachgang (F-08): Der Aufruf muss den
-    #      Schreibschluessel UND `mit_token=1` tragen. Fehlt eines von beidem,
-    #      liefert der Worker keine Token (`mit_token: false`) – der Nachgang
-    #      liefe dann in „kein Token“ und überspränge still jeden Empfänger.
+    # 10b) Token-Retrieval: POST-Body statt URL (keine Tokens in Access-Logs)
+    #      und ein vom Leseschluessel verschiedener Schreibschluessel.
+    def open_token(anfrage, timeout=None):
+        gesehen.clear()
+        gesehen.update({"url": anfrage.full_url, "methode": anfrage.get_method(),
+                        "headers": {k.lower(): v for k, v in anfrage.headers.items()},
+                        "body": anfrage.data})
+        return _Antwort(b'{"status":"pending","email":"a@beispiel.de","token":"secret-token"}')
+    urllib.request.urlopen = open_token
+    try:
+        antwort_token = worker_abfrage("/export/token", {"token": "secret-token"},
+                                       base="https://abos.beispiel.de", key="schreib-key",
+                                       methode="POST")
+    finally:
+        urllib.request.urlopen = echt_open
+    pruefe(gesehen["url"] == "https://abos.beispiel.de/export/token"
+           and gesehen["methode"] == "POST",
+           "Token-Export: personenbezogener Token darf nicht in der URL stehen")
+    pruefe(json.loads(gesehen["body"]) == {"token": "secret-token"},
+           "Token-Export: POST-Body enthält den Token nicht")
+    pruefe(gesehen["headers"].get("x-ff-key") == "schreib-key",
+           "Token-Export: Schreibschlüssel fehlt im Header")
+    pruefe(antwort_token.get("token") == "secret-token", "Token-Export: Antwort nicht durchgereicht")
+
+    # 10c) Rollen-Trennung beim Nachgang: Der Aufruf muss den
+    #      Schreibschluessel UND `mit_token=1` tragen.
     def open_nachgang(anfrage, timeout=None):
         gesehen.clear()
         gesehen.update({"url": anfrage.full_url, "methode": anfrage.get_method(),
@@ -1199,10 +1234,16 @@ def _selftest() -> int:
     pruefe("mit_token=1" in gesehen["url"],
            f"Nachgang-Export: mit_token fehlt ({gesehen['url']})")
     pruefe(antwort_n.get("mit_token") is True, "Nachgang-Export: Token-Zusage fehlt")
-    # Ohne eigenen Schreibschluessel faellt der Worker auf den Standardschluessel
-    # zurueck – der Versand darf dadurch nicht brechen (Rueckwaerts-Kompatibilitaet).
-    pruefe(worker_schreibschluessel({"NEWSLETTER_WORKER_EXPORT_KEY": "nur-einer"}) == "nur-einer",
-           "Rückfall auf den Standardschlüssel fehlt")
+    # Ohne separaten Schreibschluessel gibt es keinen Rueckfall. Auch ein
+    # versehentlich identischer Schreib-/Leseschluessel bleibt ungueltig.
+    pruefe(worker_schreibschluessel({"NEWSLETTER_WORKER_EXPORT_KEY": "nur-einer"}) == "",
+           "Leseschluessel darf nicht als Schreibschluessel zurueckfallen")
+    pruefe(worker_schreibschluessel({"NEWSLETTER_WORKER_EXPORT_KEY": "gleich",
+                                     "NEWSLETTER_WORKER_WRITE_KEY": "gleich"}) == "",
+           "identische Rollen muessen fail-closed bleiben")
+    pruefe(worker_schreibschluessel({"NEWSLETTER_WORKER_EXPORT_KEY": "lesen",
+                                     "NEWSLETTER_WORKER_WRITE_KEY": "schreiben"}) == "schreiben",
+           "getrennte Rollen werden nicht erkannt")
 
     # 11) letzter_fehler: die Ursache für die ❌-Zeile des Digests – aus dem
     #     Journal, in dem nur Hashes und die Anbieter-Meldung stehen.

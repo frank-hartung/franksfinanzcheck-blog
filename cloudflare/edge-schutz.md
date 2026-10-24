@@ -125,11 +125,15 @@ Ordnung".
 
 ## 4. A4 — Schlüsselrollen und Freigabe-Environments (F-07/F-08)
 
-**Schlüsselrollen:** `EXPORT_KEY` ist der Leseschlüssel; der optionale,
-verschiedene `EXPORT_KEY_WRITE` berechtigt token-tragende Massenexporte.
-Der Versand verwendet dafür `NEWSLETTER_WORKER_WRITE_KEY`. Ein Leseschlüssel
-allein belegt keine Rollentrennung. Einrichtung und Prüfung stehen in
-[`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4](../docs/SICHERHEIT-BETRIEB-RUNBOOK.md#a4--schlüsselrollen-trennen-und-jobs-in-environments-einsperren-findings-f-07-f-08-p-1-p-4).
+**Schlüsselrollen (F-08, gehärtet):** `EXPORT_KEY` darf tokenfreie Listen
+lesen. Ein expliziter, davon verschiedener `EXPORT_KEY_WRITE` ist Pflicht für
+Token- und personenbezogene Einzel-Lookups (`/export/token`, `/export/kontakt`),
+Statusänderungen (`/export/versuch`) sowie Massenexporte mit Tokens. Fehlt der
+Schreibschlüssel oder ist er mit dem Leseschlüssel identisch, bleiben diese
+Wege fail-closed gesperrt; es gibt keinen Rückfall. Token/E-Mail für die
+Einzel-Lookups werden per POST-Body, nicht in der URL übertragen. Einrichtung
+und Prüfung stehen in
+[`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4](../docs/SICHERHEIT-BETRIEB-RUNBOOK.md#a4--schlüsselrollen-trennen-und-jobs-in-environments-einsperren-findings-f-07-f-08-p-1-p-4). Der Code-Stand im Repository ist kein Beleg für einen Live-Deploy.
 
 **Environments:** Produktive Worker-Deploys gehören nach
 `cloudflare-produktion`, mit Freigabe durch den Inhaber und Beschränkung auf

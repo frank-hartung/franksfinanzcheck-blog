@@ -78,3 +78,9 @@ Die Wachen und Tests dieser Änderung; der nächste Testversand an
 
 Siehe Selftests von `newsletter_versand.py`, `newsletter_digest.py`,
 `newsletter_qa.py`, `newsletter_studio.py` und `newsletter-worker/test`.
+
+## Nachtrag 24.10.2026 — API-Rollen und Transport
+
+Der damalige Verweis auf `GET /export/kontakt` ist **historisch** und nicht mehr der unterstützte API-Vertrag. Im gehärteten Repository verlangen `/export/token`, `/export/kontakt` und `/export/versuch` einen explizit gesetzten, vom Leseschlüssel verschiedenen `EXPORT_KEY_WRITE`; Token-Lookup und Kontakt-Lookup sind POST und übertragen Token/E-Mail im Body statt in der URL. Ein fehlender oder identischer Schreibschlüssel wird fail-closed abgewiesen. Tests prüfen, dass Leseschlüsselzugriffe abgelehnt werden und der Abozustand unverändert bleibt.
+
+Der Code wurde hier nicht live deployt und Cloudflare-/GitHub-Secrets sind nicht bestätigt. Dieser Nachtrag belegt daher den Repository-Stand, nicht den Produktionszustand.

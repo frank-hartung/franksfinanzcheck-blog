@@ -9,7 +9,7 @@
 #              existieren“-Zustand (die ganze Brevo-Baustelle ist weg).
 #
 # Sicherheitshierarchie (bleibt dreifach, nur der Transport unter dem Boden):
-#   1. ohne Secrets (RESEND_API_KEY + NEWSLETTER_WORKER_EXPORT_KEY) wird
+#   1. Ohne Secrets (RESEND_API_KEY + beide getrennten Worker-Schlüssel) wird
 #      kein Listen-Versand gemacht – der Digest meldet es fail-closed
 #   2. ohne workflow_dispatch-Eingabe („live“, „planmaessig“ ODER test_adresse)
 #      wird nur gebaut, nicht gesendet – ein Testversand trifft NUR die
@@ -164,11 +164,9 @@ jobs:
           NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
-          # Schreibschluessel (Sicherheitsaudit 15.10.2026, F-08): Nur mit ihm
-          # liefert der Worker die Abmelde-Token (`?mit_token=1`). Fehlt das
-          # Secret, faellt der Worker auf den Leseschluessel zurueck – der
-          # Versand laeuft weiter, die Sicherheits-Wache meldet die fehlende
-          # Trennung als Warnung (Runbook A4).
+          # Getrennter Schreibschluessel (F-08): Tokenhaltige Exporte sind nur
+          # damit freigegeben. Fehlt das Secret oder ist es identisch mit dem
+          # Leseschluessel, stoppt der Versand fail-closed; kein Rueckfall.
           NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
           # Als ENV, nicht als Interpolation im Skripttext (B3-Regel aus der
           # Kadenz-Absicherung: Eingaben sind Daten, niemals Code).
@@ -218,11 +216,9 @@ jobs:
           NEWSLETTER_HASH_KEY: ${{ secrets.NEWSLETTER_HASH_KEY }}
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
-          # Schreibschluessel (Sicherheitsaudit 15.10.2026, F-08): Nur mit ihm
-          # liefert der Worker die Abmelde-Token (`?mit_token=1`). Fehlt das
-          # Secret, faellt der Worker auf den Leseschluessel zurueck – der
-          # Versand laeuft weiter, die Sicherheits-Wache meldet die fehlende
-          # Trennung als Warnung (Runbook A4).
+          # Getrennter Schreibschluessel (F-08): Tokenhaltige Exporte sind nur
+          # damit freigegeben. Fehlt das Secret oder ist es identisch mit dem
+          # Leseschluessel, stoppt der Versand fail-closed; kein Rueckfall.
           NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
           NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
           # SMTP-Alternative (nur wenn Resend NICHT der Transport sein soll):
