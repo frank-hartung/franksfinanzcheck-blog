@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-22T17:06:21Z",
+  "generated_at": "2026-10-24T11:11:32Z",
   "modus": "kandidaten",
-  "commit": "8e8f2119948a37a37ac4891d20c545bfb54f6570",
+  "commit": "e4bb999f37e7f76e6a337b4a9ce81f8299a0244e",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "a698732c8582e60b1a3acf8e375f4915fae0466a8e1406ea1ff9a863f090f3ef",
@@ -1090,6 +1090,40 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
+      "sha256": "e13aa31f22a99590e1751a8a8705f233dda9d754d7978086dc997d6a2e289b89",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-06",
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+      "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert"
     }
   }

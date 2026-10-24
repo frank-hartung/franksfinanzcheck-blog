@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-10-14T15:15:08+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-24T12:56:10+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1260,8 +1260,8 @@
   }
  },
  "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "ts": "2026-10-19T00:09:47+00:00",
+  "title": "Vertrags-Check im Herbst: Strom: Strom, Versicherung, Konto",
+  "ts": "2026-10-24T12:56:13+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1292,6 +1292,42 @@
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+  "title": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
+  "ts": "2026-10-23T08:53:54+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-23-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+  "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+  "ts": "2026-10-23T14:12:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+  "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+  "ts": "2026-10-24T12:57:47+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen": {
+  "title": "Stromanbieter wechseln: Und bis zu 300 Euro sparen",
+  "ts": "2026-10-24T08:58:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }

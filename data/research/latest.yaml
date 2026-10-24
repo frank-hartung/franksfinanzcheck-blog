@@ -1,5 +1,5 @@
-generated_at: '2026-10-22T08:55:04Z'
-day: '2026-10-22'
+generated_at: '2026-10-24T08:23:59Z'
+day: '2026-10-24'
 mode: deterministic
 teams:
   trending:
@@ -238,60 +238,58 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
-    score: 0.55
-    keywords:
-    - 5G Router
-    - DSL Alternative
-    - Mobilfunk statt DSL
-  - topic: Die Vorteile von Online-Konten und wie du sie nutzt
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Die Vorteile von Online-Konten und wie du sie nutzt
-    score: 0.55
-    keywords:
-    - Online-Konten
-    - Vorteile
-    - nutzen
-  - topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-    score: 0.55
-    keywords:
-    - Energieausweis
-    - Energieausweis Kosten
-    - Energieeffizienzklasse Haus
-  - topic: 'Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+  - topic: Die 50-30-20-Regel einfach erklärt
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Frugal leben mit Familie: So klappt Sparen auch mit Kindern'
+    source: topics:Die 50-30-20-Regel einfach erklärt
     score: 0.55
-    keywords:
-    - Frugalismus Familie
-    - Sparen mit Kindern
-    - Familienbudget
-  - topic: 'Photovoltaik: Lohnt sich eine Solaranlage 2026?'
+    keywords: []
+  - topic: Heizperiode vorbereiten im Spätsommer
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Photovoltaik: Lohnt sich eine Solaranlage 2026?'
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.55
     keywords:
-    - Photovoltaik
-    - Solaranlage Kosten
-    - Strom selbst erzeugen
-  - topic: Stromspar-Apps im Test für den Haushalt
-    pillar: strom-sparen
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: 'Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Stromspar-Apps im Test für den Haushalt
+    source: 'topics:Kreditkarten mit Bonusprogramm: Welche sind die besten?'
     score: 0.55
     keywords:
-    - Stromspar-Apps
-    - Haushalt
-    - Test
+    - Kreditkarten
+    - Bonusprogramm
+    - Kreditkartenvergleich
+  - topic: 'Privathaftpflicht: Warum sie Pflicht ist und was sie kostet'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Privathaftpflicht: Warum sie Pflicht ist und was sie kostet'
+    score: 0.55
+    keywords:
+    - Privathaftpflicht
+    - Haftpflichtversicherung Vergleich
+    - Haftpflicht Kosten
+  - topic: 'Riester-Rente: Lohnt sie sich 2026 noch?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Riester-Rente: Lohnt sie sich 2026 noch?'
+    score: 0.55
+    keywords: []
+  - topic: 'Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung richtig
+      kündigst'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung
+      richtig kündigst'
+    score: 0.55
+    keywords:
+    - Kfz Versicherung kündigen Frist
+    - Wechselsaison November
+    - Sonderkündigungsrecht Autoversicherung
+    - Stichtag 30. November
 live_web:
   enabled: false
   findings: []
