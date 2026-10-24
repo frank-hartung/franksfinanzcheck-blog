@@ -158,6 +158,15 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # der breite deckt die uebrige Familie (R7/R15/R16) und wirkt als
           # Auffangnetz. Beide mit Wirkungsprobe (C25) und Selbsttest (C6).
           "politur_ruine_heiler.py",
+          # Search-Console-Artefakte (24.10.2026, Blockade von #853): Seit dem
+          # 21.10. lag in `main` eine aus zwei Läufen zusammengesetzte
+          # `data/gsc/meta.json` – gültig war sie nie mehr, und der
+          # Artefakt-Wächter im Integritäts-Siegel stand für JEDEN Pull-Request
+          # auf Rot. Diese Wache prüft Bedeutung statt nur Syntax (Schema,
+          # Eindeutigkeit, Kopf gegen Tagesledger) und heilt ausschließlich mit
+          # belegbarem Git-Stand. Sie steht hier, weil eine Wache, die niemand
+          # verlangt, irgendwann niemand mehr ausführt (C6).
+          "gsc_artefakte_guard.py",
           # Satz-Heiler (07.10.2026, BOT-WATCHDOG #614): Der Lesbarkeits-
           # Heiler kann die Schwelle (< 60) mit Stufe A nicht erreichen und
           # mit Stufe B (Ganztext) nicht schreiben - die Klasse war damit

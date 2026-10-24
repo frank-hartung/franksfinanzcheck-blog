@@ -145,6 +145,24 @@ jobs:
           python3 scripts/artefakt_waechter.py
           python3 scripts/artefakt_waechter.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
+      # BEDEUTUNG STATT NUR SYNTAX (24.10.2026, Blockade des GSC-Bestands)
+      # Der Artefakt-Wächter oben hat den Schaden vom 21.10.2026 gefunden –
+      # drei Search-Console-Dateien, in denen Git zwei Läufe übereinander
+      # geklebt hatte. Er hat ihn nur SYNTAKTISCH gefunden. Zwei gültige
+      # Top-Listen hintereinander sind ebenfalls gültiges JSON: doppelte
+      # Suchbegriffe, Zahlen aus zwei 28-Tage-Fenstern, kein Werkzeug merkt es.
+      # `gsc_artefakte_guard.py` stellt die zweite Frage (G1–G4): Stimmt der
+      # Kopf der Messung, sind die Einträge eindeutig, läuft der Tagesledger
+      # streng aufsteigend, und passt `meta.json` noch zu den gemessenen Tagen?
+      # Fail-closed: Ein Befund macht dieses Gate rot. `--heal` holt den
+      # letzten belegbar gültigen Git-Stand zurück (erfindet nichts) und
+      # steht im Runbook docs/ANLEITUNG-GSC-API-ZUGRIFF.md.
+      - name: Search-Console-Artefakte (gültig, eindeutig, zueinander passend)
+        run: |
+          python3 scripts/gsc_artefakte_guard.py --selftest
+          python3 scripts/gsc_artefakte_guard.py --check
+          python3 scripts/gsc_artefakte_guard.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
       - name: Pflicht-Check-Vertrag prüfen (verlangt der Branch-Schutz dieses Siegel?)
         env:
           GH_TOKEN: ${{ github.token }}

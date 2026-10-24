@@ -2089,3 +2089,40 @@ ohne Wirkung“.
   ist der Politur-Layer und bleibt zuletzt.
 - Bilder: immer `width`/`height` (CLS-Gate), Varianten via
   `scripts/check_covers.py --fix`.
+
+## Ein Messartefakt ist eine ganze Messung, kein Text (seit 24.10.2026, #853)
+
+Seit dem 21.10.2026 stand das `Integritäts-Siegel` für **jeden** Pull-Request
+rot. Die Annotation sagte nur `.github#30 – Process completed with exit code 1`;
+der Lauf-Log war über die API nicht lesbar (`results-receiver … EOF`). Die
+Ursache stand im Repo, nicht im Netz: `artefakt_waechter.py` meldete drei
+`A1-JSON-SYNTAX`-Funde in `data/gsc/` – alle drei Dateien waren aus **mehreren
+Läufen** zusammengesetzt (`meta.json`: vier `stand`-Schlüssel in einem Objekt;
+Top-Listen: zwei Läufe ohne Trennkomma hintereinander).
+
+Der Import konnte das nicht sein (`write_text(json.dumps(...)` schreibt immer
+vollständig). Entstanden ist es beim **Zusammenführen** der Bot-Branches:
+PR #828 enthält zwei manuelle `Merge branch 'main'`-Commits, und Git hat die
+drei JSON-Dateien als Text gemergt. Ein Text-Merge auf einem Messartefakt hat
+keine Zeile, die zu beiden Läufen gehört.
+
+Vier Regeln halten die Klasse jetzt:
+
+- **Struktur:** `data/gsc/*.json merge=binary` in `.gitattributes` – wie beim
+  Siegel (#346), den Reserve-Snapshots (#634) und den Quelltext-Wachen (#783).
+  Der Tagesledger bleibt `merge=union`: Tage sind unabhängige Messungen.
+- **Bedeutung:** `scripts/gsc_artefakte_guard.py` prüft vier Klassen – G1 Kopf,
+  G2 Schema + Eindeutigkeit der Top-Listen, G3 Ledger streng aufsteigend, G4
+  Kopf gegen gemessene Tage. G2–G4 fangen die Fälle, die **gültiges JSON**
+  erzeugen und trotzdem falsch sind; der Selbsttest sabotiert 20 Fälle.
+- **Herkunft:** `--heal` holt den letzten belegbar gültigen Git-Stand zurück
+  (nie rekonstruieren, nie den Ledger zurückrollen, nie ein Teilstück
+  schreiben); `--heal --rev <sha>` setzt alle Kopfdaten aus EINEM Lauf.
+- **Verdrahtung:** die Wache läuft in `integrity-lock.yml` (jeder PR) und in
+  `gsc-import.yml` **vor** jedem Commit; `data/gsc/**` löst jetzt `regression`
+  aus, `scripts/tests/test_gsc_artefakte.py` prüft die echten Dateien; der
+  Selbsttest steht im vertraglichen Minimum (C6).
+
+Vertrag: **C6** (`GUARDS`) · Runbook `docs/ANLEITUNG-GSC-API-ZUGRIFF.md`,
+Abschnitt „Wenn ein Artefakt kaputt ist“ · Bericht
+`GSC-DATEN-INTEGRITAET-HIGHEND-2026-10-24.md`.
