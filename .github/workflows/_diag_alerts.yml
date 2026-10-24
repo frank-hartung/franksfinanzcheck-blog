@@ -1,8 +1,9 @@
 # TEMPORÄR · Diagnose (24.10.2026) · wird vor dem Merge gelöscht.
 # WARUM: Der REST-Zugriff des Agenten-Tokens auf die Alarm-Endpunkte ist
-# 403 (fehlende security-events-Berechtigung). Dieser Lauf holt die
-# Wahrheit mit dem GITHUB_TOKEN des Repositories und legt sie als Datei
-# im Branch ab – damit wird gemessen statt geraten.
+# 403 (fehlende security-events-Berechtigung), Job-Logs und Artefakte sind
+# aus der Arbeitsumgebung nicht abrufbar. Dieser Lauf holt die Wahrheit mit
+# dem GITHUB_TOKEN und legt sie als Check-Run-Zusammenfassung ab – lesbar
+# über die Checks-API. Gemessen wird mit dem Bestand, nicht mit dem Gefühl.
 name: _Diagnose Alarme
 
 on:
@@ -11,8 +12,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   security-events: read
+  checks: write
 
 jobs:
   lesen:
@@ -23,23 +25,18 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Alarme lesen
+      - name: Alarme lesen und als Check-Run ablegen
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KOPF_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          mkdir -p data/security
           python3 - <<'PY'
-          import json, os, urllib.request, urllib.parse
+          import json, os, urllib.request
 
           token = os.environ["GH_TOKEN"]
           repo = os.environ["GITHUB_REPOSITORY"]
-          ziele = {
-              "dependabot-alerts.json": "dependabot/alerts?state=open&per_page=100",
-              "code-scanning-alerts.json": "code-scanning/alerts?state=open&per_page=100",
-              "secret-scanning-alerts.json": "secret-scanning/alerts?state=open&per_page=100",
-              "code-scanning-analyses.json": "code-scanning/analyses?per_page=100",
-          }
+          sha = os.environ["KOPF_SHA"]
 
           def hole(pfad):
               url = f"https://api.github.com/repos/{repo}/{pfad}"
@@ -54,20 +51,71 @@ jobs:
               except Exception as fehler:  # noqa: BLE001 – Diagnose, kein Betrieb
                   return {"fehler": f"{type(fehler).__name__}: {fehler}"}
 
-          for datei, pfad in ziele.items():
-              daten = hole(pfad)
-              with open(f"data/security/{datei}", "w", encoding="utf-8") as f:
-                  json.dump(daten, f, ensure_ascii=False, indent=1)
-              anzahl = len(daten) if isinstance(daten, list) else daten
-              print(datei, "→", anzahl)
-          PY
+          dep = hole("dependabot/alerts?state=open&per_page=100")
+          cs = hole("code-scanning/alerts?state=open&per_page=100")
+          sec = hole("secret-scanning/alerts?state=open&per_page=100")
 
-      - name: Ergebnis in den Branch legen
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/security
-          git diff --cached --quiet && exit 0
-          git commit -m "chore(diag): Alarmbestand gelesen [skip ci]"
-          git push
+          def schlank(alert):
+              adv = alert.get("security_advisory") or {}
+              vuln = alert.get("security_vulnerability") or {}
+              paket = (vuln.get("package") or {})
+              return {
+                  "nummer": alert.get("number"),
+                  "schwere": adv.get("severity"),
+                  "ghsa": adv.get("ghsa_id"),
+                  "paket": paket.get("name"),
+                  "oekosystem": paket.get("ecosystem"),
+                  "bereich": vuln.get("vulnerable_version_range"),
+                  "fix": (vuln.get("first_patched_version") or {}).get("identifier"),
+                  "manifest": alert.get("dependency", {}).get("manifest_path"),
+                  "scope": alert.get("dependency", {}).get("scope"),
+                  "titel": (adv.get("summary") or "")[:120],
+              }
+
+          zusammenfassung = {
+              "dependabot": [schlank(a) for a in dep] if isinstance(dep, list) else dep,
+              "code_scanning": [
+                  {"nummer": a.get("number"), "regel": (a.get("rule") or {}).get("id"),
+                   "schwere": (a.get("rule") or {}).get("security_severity_level"),
+                   "pfad": (a.get("most_recent_instance") or {}).get("location", {}).get("path"),
+                   "zeile": (a.get("most_recent_instance") or {}).get("location", {}).get("start_line")}
+                  for a in cs
+              ] if isinstance(cs, list) else cs,
+              "secret_scanning": [
+                  {"nummer": a.get("number"), "typ": a.get("secret_type"),
+                   "pfad": (a.get("first_location_detected") or {}).get("path")}
+                  for a in sec
+              ] if isinstance(sec, list) else sec,
+          }
+
+          text = json.dumps(zusammenfassung, ensure_ascii=False, indent=1)
+          print(text)
+
+          if len(text) > 60000:
+              text = text[:60000] + "\n… (gekürzt)"
+
+          kopf = {
+              "name": "DIAGNOSE Alarmbestand",
+              "head_sha": sha,
+              "status": "completed",
+              "conclusion": "neutral",
+              "output": {
+                  "title": f"{len(zusammenfassung['dependabot']) if isinstance(zusammenfassung['dependabot'], list) else '?'} offene Dependabot-Alarme",
+                  "summary": "Vollständiger Alarmbestand des Default-Branch, gelesen mit dem Repository-Token (Diagnose 24.10.2026).",
+                  "text": text,
+              },
+          }
+          anfrage = urllib.request.Request(
+              f"https://api.github.com/repos/{repo}/check-runs",
+              data=json.dumps(kopf).encode(),
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Accept": "application/vnd.github+json",
+                  "Content-Type": "application/json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+              },
+              method="POST",
+          )
+          with urllib.request.urlopen(anfrage, timeout=60) as antwort:
+              print("Check-Run:", antwort.status)
+          PY
