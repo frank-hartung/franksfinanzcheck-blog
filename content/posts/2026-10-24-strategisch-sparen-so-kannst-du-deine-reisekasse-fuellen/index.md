@@ -122,6 +122,8 @@ Du willst Gerümpel verkaufen? Setze den Erlös nach Versand und Gebühren an, n
 
 
 
+
+
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt Mietwagen vergleichen**](/go/mietwagen/)
 
 

@@ -9,14 +9,15 @@
       "lesbarkeit_heiler.py",
       "profi_polish.py"
     ],
-    "hits": 2,
+    "hits": 3,
     "klasse": "heilbar",
     "laeufe": [
       "run:39963409430",
-      "run:40077480495"
+      "run:40077480495",
+      "run:40095647943"
     ],
-    "last": "2026-10-24T08:24:58Z",
-    "lauf": "run:40077480495",
+    "last": "2026-10-24T12:59:12Z",
+    "lauf": "run:40095647943",
     "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: pauschale aussagen zu den preisen im jahr <n> bringen dir nichts."
   }
 }

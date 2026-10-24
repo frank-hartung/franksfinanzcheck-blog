@@ -20,3 +20,22 @@
 {"ts": "2026-10-24T08:36:49Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "76dbc6c4f3fed41275cffc4bf41238ed8a33cebe"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-10-24T08:58:37Z", "module": "pinterest_check", "action": "fix", "input": {}, "output": {"problems": 1, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-10-24T08:58:37Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
+{"ts": "2026-10-24T09:48:08Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 95}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T09:54:02Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-24T09:56:09Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "2dcc748eccc471fea2b8a9680fb577f56940bd7d"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T11:07:09Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-24T11:09:16Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "e4bb999f37e7f76e6a337b4a9ce81f8299a0244e"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:55:55Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:55:55Z", "module": "fix_dash_und", "action": "apply", "input": {"files": 2}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:55:56Z", "module": "fix_spaces", "action": "apply", "input": {"files": 101}, "output": {"fixes": 135}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:56:39Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 8}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:56:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:56:49Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:57:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:57:39Z", "module": "fix_dash_und", "action": "apply", "input": {"files": 2}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:57:40Z", "module": "fix_spaces", "action": "apply", "input": {"files": 101}, "output": {"fixes": 135}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:58:19Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 8}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:58:19Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-24T12:58:28Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-24T13:39:43Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-24T13:41:50Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "d0f9db91e0d296c3c85d58862e6e92c6406406e9"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
