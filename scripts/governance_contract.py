@@ -134,6 +134,13 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # verlangt, fuehrt irgendwann niemand aus - deshalb steht sein
           # Selbsttest hier im vertraglichen Minimum (C6).
           "lesbarkeit_heiler.py",
+          # Schreiber-Garantie (24.10.2026, #806): Der Lesbarkeits-Heiler heilt
+          # den Vorrat, aber die NEUEN Entwuerfe kamen ungemessen in die
+          # Ablage (Rolle „Claude“: Flesch 54,2 / 54,9). Diese Wache ist die
+          # Hausgarantie fuer ALLE Schreiberbahnen und steht deshalb im
+          # vertraglichen Minimum (C6) – ein Selbsttest, den niemand laesst,
+          # ist keine Wache.
+          "lesbarkeit_schreiber.py",
           # Politur-Heiler (07.10.2026, BOT-WATCHDOG #614): Er heilt die
           # Maschinen-Reste, fuer die es bis dahin KEINEN Heiler gab (R7-Intro-
           # Formel, R11/R13 Zahlen-Datums-Ruinen, R14-Marker, R15-PHrasen-Doppel,
@@ -2069,6 +2076,10 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                                          python_bin=python_bin)
     checks += c39_wache_ist_ganz_oder_gar_nicht(script_texts, wflows, root=root)
     checks += c40_keine_fremdmessung(script_texts, wflows, root=root)
+    checks += c41_schreiber_misst_vor_dem_schreiben(
+        script_texts, root=root, python_bin=python_bin, quick=quick)
+    schritte, _fehler = _gate_schritte(root)
+    checks += c42_gate_schritt_hat_erzeuger(schritte, STEP_SIGNATURES, root=root)
     return checks
 
 
@@ -2315,7 +2326,13 @@ def c36_nachsorge_beweist_die_kennzahl(script_texts, root=BLOG_DIR,
                            "die Wirkung bleibt unbelegt (#712)."))
     # (c) Die rote Lesbarkeits-Klasse bekommt die Politur.
     lauf = _c36_funktionstext(ed, "lauf")
-    if "heilbares_rot" not in lauf:
+    # Der Vergleich ist SEMANTISCH, nicht nur ein Substring: die Zuweisung
+    # muss aus den roten Codes UND der Klasse E6 berechnet werden. Ein
+    # `heilbares_rot = False` (Sabotage) enthaelt den Substring "heilbares_rot"
+    # - der alte Vergleich haette die Sackgasse nicht gesehen.
+    m_heilbar = re.search(r"heilbares_rot\s*=\s*([^\n]+)", lauf)
+    if (not m_heilbar or "rote_codes" not in m_heilbar.group(1)
+            or '"E6"' not in m_heilbar.group(1)):
         out.append(("C36", "scripts/endredaktion.py: E6 rot (Flesch < 45) "
                            "läuft ohne Politur – die Lesbarkeits-Klasse wäre "
                            "wieder eine Sackgasse (#712)."))
@@ -2337,7 +2354,9 @@ def c36_nachsorge_beweist_die_kennzahl(script_texts, root=BLOG_DIR,
         out.append(("C36", "scripts/news_writer.py misst die Lesbarkeit nicht "
                            "vor dem Schreiben – Ausschuss entsteht im "
                            "Generator (#712)."))
-    if "lesbarkeit_sichern(content" not in news:
+    # Der Aufruf zaehlt, nicht die Definition: `def lesbarkeit_sichern(content...`
+    # enthielt den gesuchten Substring und liess die Pruefung immer gruen.
+    if not re.search(r"=\s*lesbarkeit_sichern\(", news):
         out.append(("C36", "scripts/news_writer.py: `lesbarkeit_sichern` ist "
                            "nicht verdrahtet – die Messung wäre toter Code "
                            "(#712)."))
@@ -3010,6 +3029,221 @@ def _c34_zweig(block, marker):
     start = block.index(marker)
     ende = block.find(";;", start)
     return block[start:] if ende < 0 else block[start:ende]
+
+
+# --- C41: Der Schreiber misst vor dem Schreiben – auf JEDER Bahn (#806) ----
+#
+# DER BEFUND: Der Governance-Report #806 (19.10.2026) nannte als einzigen
+# handlungsbedürftigen Befund zwei Entwuerfe unter der Publish-Schwelle 60
+# (Flesch 54,2 / 54,9). Beide trugen `ki_redaktion: "claude"` – sie kamen aus
+# der Rolle „Claude“ (`scripts/claude_writer.py`), dem Hauptproduzenten der
+# langen Premium-Artikel.
+#
+# DIE URSACHE (dieselbe Bauart wie #612 und #712): Die Lehre „Wer schreibt,
+# muss messen, was ueber ihn entscheidet“ war nur EINER Rolle gegeben worden.
+# `news_writer.py` (Rolle „ChatGPT/News“) bekam `lesbarkeit_sichern()`;
+# die Rolle „Claude“ und die Werkbank-Recycling-Bahn (`poppy_repurpose.py`)
+# schrieben ungemessen in den Vorrat. Der Ausschuss entstand im Generator –
+# und wurde Wochen spaeter von drei Wachen eingesammelt, bis der woechentliche
+# Report die Klasse Woche fuer Woche namentlich meldete: #712 (12.10.) und
+# #806 (19.10.) sind dieselbe Klasse in zwei Wochen. Ein Befund ohne
+# Produzenten-Schutz ist ein Dauerlaeufer (C37).
+#
+# DER VERTRAG in fuenf Saetzen:
+#   a) EINE Garantie fuer alle Schreiber: `scripts/lesbarkeit_schreiber.py`
+#      (messen → Stufe A → Tor T1–T4 → ehrliche Restluecke).
+#   b) Die Schwelle kommt aus der SSOT (`readability_check.NEW_FLESCH_MIN`) –
+#      keine zweite Flesch-Zahl im Haus (Lehre #585).
+#   c) Jeder Schreiber sichert VOR dem Schreiben: der Aufruf steht vor
+#      `write_post` – sonst waere die Messung eine Nachricht.
+#   d) Der Heiler laeuft als BIBLIOTHEK (keine zweite Satz-Zerlegung) und das
+#      Tor entscheidet, was geschrieben wird.
+#   e) Regressionstest + Selbsttest des Moduls laufen JETZT (Exit 0).
+C41_MODUL = "lesbarkeit_schreiber.py"
+#: Jede Bahn, die einen Artikel schreibt – ohne Ausnahme.
+C41_SCHREIBER = ("news_writer.py", "claude_writer.py", "poppy_repurpose.py")
+#: Regressionstest: ein Vertrag ohne Test ist Prosa.
+C41_TESTS = ("test_lesbarkeit_schreiber.py",)
+#: Der Aufruf der Garantie – Definitionen zaehlen nicht.
+C41_AUFRUF = re.compile(r"(?:lesbarkeit_schreiber\.sichern|lesbarkeit_sichern)\s*\(")
+#: Wo der Artikel gespeichert wird – danach ist „gemessen“ zu spaet.
+C41_SCHREIBEN = re.compile(r"\bwrite_post\s*\(")
+
+
+def _c41_aufrufe(text: str):
+    """Alle Aufrufe der Garantie – ohne die Definition."""
+    treffer = []
+    for m in C41_AUFRUF.finditer(text):
+        davor = text[:m.start()].rstrip()
+        if davor.endswith("def") or davor.endswith("def "):
+            continue
+        treffer.append(m.start())
+    return treffer
+
+
+def c41_schreiber_misst_vor_dem_schreiben(script_texts, root=BLOG_DIR,
+                                          python_bin=None, quick=False):
+    """Jeder Weg, der einen Artikel schreibt, misst die Publish-Schwelle."""
+    out = []
+    modul = (script_texts or {}).get(C41_MODUL, "")
+    if not modul.strip():
+        out.append(("C41", f"scripts/{C41_MODUL} fehlt – ohne die Hausgarantie "
+                           "schreibt jede Rolle ungemessen in den Vorrat (#806)."))
+        return out
+    # (a) Die Schwelle kommt aus der SSOT – keine zweite Zahl im Haus.
+    if "readability_check" not in modul:
+        out.append(("C41", f"scripts/{C41_MODUL} misst nicht über die SSOT "
+                           "`readability_check` – eine eigene Messung wäre eine "
+                           "zweite Wahrheit (#585/#806)."))
+    if "NEW_FLESCH_MIN" not in modul:
+        out.append(("C41", f"scripts/{C41_MODUL} liest die Schwelle nicht aus der "
+                           "SSOT `readability_check.NEW_FLESCH_MIN` (#585)."))
+    if re.search(r"NEW_FLESCH_MIN\s*=\s*[0-9]", modul):
+        out.append(("C41", f"scripts/{C41_MODUL} definiert die Flesch-Schwelle "
+                           "selbst – zweite Wahrheit (#585)."))
+    # (b) Der Heiler laeuft als Bibliothek mit Tor – keine zweite Zerlegung.
+    if "lesbarkeit_heiler" not in modul:
+        out.append(("C41", f"scripts/{C41_MODUL} nutzt den Lesbarkeits-Heiler "
+                           "nicht – der Schreiber baute eine eigene Satz-Zerlegung "
+                           "(#612/#806)."))
+    # Der Tor-AUFRUF zaehlt, nicht das Wort im Kommentar und nicht der
+    # Selbsttest: geprueft wird die Funktion, die den Artikel schreibt.
+    sichern_text = _c36_funktionstext(modul, "sichern")
+    if not re.search(r"\.verifiziere\s*\(", sichern_text):
+        out.append(("C41", f"scripts/{C41_MODUL} ruft das Tor "
+                           "(`lesbarkeit_heiler.verifiziere`) nicht – eine Heilung "
+                           "ohne Wirkungsnachweis ist Papier (C25/#806)."))
+    # (c) Jeder Schreiber sichert VOR dem Schreiben.
+    for name in C41_SCHREIBER:
+        text = (script_texts or {}).get(name, "")
+        if not text.strip():
+            out.append(("C41", f"scripts/{name} nicht lesbar – die Bahn "
+                               "„gemessen vor dem Schreiben“ ist nicht prüfbar "
+                               "(#806)."))
+            continue
+        if "lesbarkeit_schreiber" not in text:
+            out.append(("C41", f"scripts/{name} nutzt die Schreiber-Garantie "
+                               "nicht – Ausschuss entsteht im Generator und "
+                               "wird erst Wochen später gemeldet (#806)."))
+            continue
+        aufrufe = _c41_aufrufe(text)
+        schreib = C41_SCHREIBEN.search(text)
+        if not aufrufe:
+            out.append(("C41", f"scripts/{name}: die Garantie ist nicht "
+                               "verdrahtet – die Messung wäre toter Code (#806)."))
+            continue
+        if schreib and min(aufrufe) > schreib.start():
+            out.append(("C41", f"scripts/{name} schreibt den Artikel, BEVOR er "
+                               "misst – der Befund käme erst nach dem Schreiben "
+                               "(#806)."))
+    # (d) Regressionstest – ein Vertrag ohne Test ist Prosa.
+    for name in C41_TESTS:
+        pfad = os.path.join(root, "scripts", "tests", name)
+        if not os.path.isfile(pfad):
+            out.append(("C41", f"scripts/tests/{name} fehlt – die Zusage „jeder "
+                               "Schreiber misst“ wäre ungetestet (#806)."))
+            continue
+        try:
+            with open(pfad, encoding="utf-8") as fh:
+                test_text = fh.read()
+        except OSError:
+            continue
+        for pflicht in ("lesbarkeit_schreiber", "NEW_FLESCH_MIN"):
+            if pflicht not in test_text:
+                out.append(("C41", f"scripts/tests/{name} prüft `{pflicht}` nicht "
+                                   "– der Wirkungsvertrag des Schreibers bliebe "
+                                   "behauptet (#806)."))
+    # (e) Der Selbsttest der Garantie laeuft JETZT (Exit 0). In `--quick` wird
+    #     nur der Quelltext geprueft.
+    if quick:
+        return out
+    bin_ = python_bin or sys.executable or "python3"
+    try:
+        lauf = subprocess.run(
+            [bin_, os.path.join(root, "scripts", C41_MODUL), "--selftest"],
+            cwd=root, capture_output=True, text=True, timeout=300)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        out.append(("C41", f"Selbsttest der Schreiber-Garantie nicht "
+                           f"ausführbar ({exc.__class__.__name__}) – fail-closed."))
+        return out
+    if lauf.returncode != 0:
+        zeilen = ((lauf.stdout or "")
+                  + (lauf.stderr or "")).strip().splitlines()
+        out.append(("C41", "Selbsttest der Schreiber-Garantie ROT: "
+                   + (zeilen[-1][:160] if zeilen
+                      else f"Exit {lauf.returncode}")))
+    return out
+
+
+# --- C42: Jeder Schritt des Governance-Gates hat einen lebenden Erzeuger ---
+#
+# DER BEFUND (Issue #806, 19.10.2026): Der Governance-Report #806 fuehrte
+# zwei Info-Zeilen unter „Datenlagen & Status“ – beide zu einem Messweg, der
+# es nicht (mehr) gab: ein Datenimport ohne Dienst und die Seitenaufrufe als
+# Trichter-Nenner. Beide Zeilen kamen aus Schritten des Governance-Gates, deren
+# Messquelle entfernt war. Ein Schritt ohne Erzeuger ist ein Schritt, der IMMER
+# „Datenlage offen“ meldet: er sieht nie, wird nie gruen und beendet die
+# Meldung nie – ein Dauerlaeufer im Report, eine Anbindung ohne Dienst.
+#
+# (Der Dienstname steht hier bewusst nicht: die Fremdmessung-Sperre C40
+# verbietet ihn in lebenden technischen Dateien – auch in diesem Vertrag.
+# Sie hat beim Bau dieser Regel den Autor selbst erwischt. Das ist die
+# Wache, die man haben will.)
+#
+# DIE LEHRE (allgemeiner als der Dienstname): Ein Gate-Schritt darf nur
+# existieren, solange sein Erzeuger lebt. Sonst produziert er eine Info-
+# Zeile, die nichts misst und nichts beendet – und niemand merkt, dass die
+# Quelle schon lange weg ist.
+#
+# DER VERTRAG in drei Saetzen:
+#   a) Jeder Schritt mit Report benennt einen Erzeuger (Signatur + Skript).
+#   b) Das Skript existiert noch – sonst „Datenlage offen“ ohne Ende.
+#   c) Schritte ohne Report sind Ausnahmen und werden namentlich genannt
+#      (C42_OHNE_ERZEUGER) – kein stiller Sammelplatz fuer Tote Schritte.
+C42_OHNE_ERZEUGER = ("automation", "build")
+
+
+def _gate_schritte(root=BLOG_DIR):
+    """Die Schrittliste des Gates – ohne Nebenwirkung (nur der Import)."""
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import governance_gate  # noqa: PLC0415
+    except Exception as exc:  # noqa: BLE001
+        return None, f"scripts/governance_gate.py nicht importierbar: {exc}"
+    return getattr(governance_gate, "STEPS", None) or {}, ""
+
+
+def c42_gate_schritt_hat_erzeuger(steps, signaturen, root=BLOG_DIR):
+    """Jeder Gate-Schritt braucht einen lebenden Erzeuger (rein, testbar)."""
+    out = []
+    if steps is None:
+        return [("C42", "Die Schrittliste des Governance-Gates ist nicht lesbar "
+                       "– ein toter Schritt wäre unsichtbar (#806).")]
+    skripte = sorted(os.path.basename(p) for p in
+                     glob.glob(os.path.join(root, "scripts", "*.py")))
+    for name, meta in sorted(steps.items()):
+        report = ""
+        if isinstance(meta, dict):
+            report = str(meta.get("report") or "")
+        if not report:
+            if name not in C42_OHNE_ERZEUGER:
+                out.append(("C42", f"Gate-Schritt `{name}` hat keinen Report und "
+                                   "keinen erklärten Erzeuger – er wäre eine "
+                                   "Zeile ohne Messung (#806)."))
+            continue
+        sig = (signaturen or {}).get(name)
+        if not sig:
+            out.append(("C42", f"Gate-Schritt `{name}` (Report `{report}`) "
+                               "benennt keinen Erzeuger – ohne Erzeuger meldet "
+                               "er dauerhaft „Datenlage offen“ (#806)."))
+            continue
+        muster = sig[1] if len(sig) > 1 else ""
+        if not any(re.search(muster, datei) for datei in skripte):
+            out.append(("C42", f"Gate-Schritt `{name}` hat keinen lebenden "
+                               f"Erzeuger mehr (Muster `{muster}` trifft keine "
+                               "Datei in scripts/) – der Schritt würde dauerhaft "
+                               "„Datenlage offen“ melden (#806)."))
+    return out
 
 
 def c34_auslieferung_vor_siegel(script_texts, wflows, root=BLOG_DIR):
@@ -5020,6 +5254,31 @@ RULE_TEXT = {
            "im Vorflug, bevor der erste Kandidat gemessen wird. Der Watchdog "
            "nennt die Klasse des blockierenden Schritts und urteilt, statt zu "
            "fragen (Bot-Watchdog #740 Teil 2, 14.10.2026).",
+    "C41": "Der Schreiber misst vor dem Schreiben: Der Governance-Report #806 "
+           "meldete zwei Entwuerfe unter der Publish-Schwelle 60 (Flesch 54,2 "
+           "und 54,9) – beide aus der Rolle „Claude“, dem Hauptproduzenten "
+           "der langen Premium-Artikel. Die Lehre aus #612 und #712 („Wer "
+           "schreibt, muss messen, was ueber ihn entscheidet“) war nur EINER "
+           "Rolle gegeben worden: news_writer.py bekam eine Sicherung, die "
+           "Rolle „Claude“ und die Werkbank-Recycling-Bahn nicht. Der "
+           "Ausschuss entstand also im Generator und wurde Wochen spaeter von "
+           "drei Wachen eingesammelt – #712 (12.10.) und #806 (19.10.) sind "
+           "dieselbe Klasse in zwei Wochen. Jetzt: EINE Hausgarantie "
+           "(scripts/lesbarkeit_schreiber.py) fuer alle drei Schreiberbahnen "
+           "(messen ueber die SSOT, Stufe A als Bibliothek, Tor T1–T4, "
+           "ehrliche Restluecke), der Aufruf VOR write_post, die Schwelle "
+           "importiert statt eigenstaendig (Lehre #585), Regressionstest und "
+           "Selbsttest im vertraglichen Minimum (C6).",
+    "C42": "Jeder Gate-Schritt hat einen lebenden Erzeuger: Der "
+           "Governance-Report #806 fuehrte zwei Info-Zeilen unter „Datenlagen & "
+           "Status“ – einen Datenimport ohne Dienst und die Seitenaufrufe als "
+           "Trichter-Nenner, beide „Datenlage offen“. Sie kamen aus "
+           "Gate-Schritten, deren Messquelle es nicht (mehr) gab: Ein Schritt "
+           "ohne Erzeuger sieht nie, wird nie gruen und beendet die Meldung "
+           "nie – eine Anbindung ohne Dienst im Report. Der Vertrag verlangt "
+           "darum fuer jeden Schritt mit Report einen benannten Erzeuger, dessen "
+           "Skript noch existiert; Schritte ohne Report sind namentlich "
+           "genannte Ausnahmen (kein stiller Sammelplatz fuer Tote Schritte).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -5078,7 +5337,11 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                 "merge=binary für die signierten Kerndateien)",
          "C40": "Keine Fremdmessung (die entfernte Reichweiten-Anbindung kehrt "
                 "weder als Datei, Skript, Workflow-Schritt, Secret noch im "
-                "gebauten Baum zurück; Ausnahmen begründet und alternd)"}
+                "gebauten Baum zurück; Ausnahmen begründet und alternd)",
+         "C41": "Der Schreiber misst vor dem Schreiben (eine Garantie für alle "
+                "Schreiberbahnen, SSOT-Schwelle, Tor T1–T4, ehrliche Restlücke)",
+         "C42": "Jeder Gate-Schritt hat einen lebenden Erzeuger (kein Schritt ohne "
+                "Quelle, keine dauerhafte „Datenlage offen“-Zeile)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -6224,11 +6487,15 @@ def _selftest():
         failures.append("C34: eine übersprungene Unit-Test-Suite bleibt "
                         "unentdeckt – ein Daten-Befund schaltet die "
                         "Code-Prüfung aus (#676).")
-    if failures:
-        print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
-        for f in failures:
-            print("   -", f)
-        return 2
+    # KEIN Zwischenurteil (Dauerheilung #806, 24.10.2026):
+    # Bis hierher endete der Selbsttest nach dem C34-Blustradius-Abschnitt mit
+    # einem FRÜHEN `return 2`. Alles, was danach folgt – die Sabotage-Proben
+    # von C34 (Auslieferung vor Siegel), C35, C36, C37, C38, C39 und C40 –
+    # wurde ausgeführt, aber sein Ergebnis NIE ausgewertet: `failures` wurde
+    # nicht mehr geprüft, der Lauf meldete am Ende „bestanden“. Das war
+    # Schein-Sicherheit: eine Wache, die tot ist, meldet sich als wach
+    # (Grundsatz „Eine Wache ist ganz oder gar nicht“, C39).
+    # Der Selbsttest entscheidet jetzt EINMAL am Ende über alle Kunstbefunde.
     # --- C34: Auslieferung vor Siegel (Bot-Watchdog #676) -------------------
     # Der echte Baum muss still bleiben; jede Sabotage muss genau ihren Zweig
     # treffen. 15,5 Stunden eingefrorene Live-Site waren der Preis dafür, dass
@@ -6394,10 +6661,8 @@ def _selftest():
     # (e) Ausfall-Befund verliert die Ausfall-Klasse.
     stumme_blockade = dict(echte_c35, **{
         "bot_watchdog.py": echte_c35["bot_watchdog.py"].replace(
-            'evidence=[e for e in (f"BLOCKIERENDER_SCHRITT={block_schritt}",\n'
-            '                              blockade_beleg) if e],\n        akut=True)',
-            'evidence=[e for e in (f"BLOCKIERENDER_SCHRITT={block_schritt}",\n'
-            '                              blockade_beleg) if e])')})
+            '        evidence=[e for e in belege if e],\n        akut=True)',
+            '        evidence=[e for e in belege if e])')})
     if stumme_blockade["bot_watchdog.py"] == echte_c35["bot_watchdog.py"]:
         failures.append("C35: Sabotage ‚akut=True entfernt‘ konnte nicht "
                         "eingespielt werden (Anker fehlt in bot_watchdog.py).")
@@ -6474,8 +6739,8 @@ def _selftest():
     # (d) Der Schreiber misst nicht mehr vor dem Schreiben (#612-Lehre).
     blinder_schreiber = dict(echte_c36, **{
         "news_writer.py": echte_c36["news_writer.py"].replace(
-            "        content, flesch, lesbarkeit_status = lesbarkeit_sichern"
-            "(content, slug)",
+            "        rumpf, flesch, lesbarkeit_status = lesbarkeit_sichern"
+            "(rumpf, slug)",
             "        flesch, lesbarkeit_status = None, 'ungeprüft'", 1)})
     if blinder_schreiber["news_writer.py"] == echte_c36["news_writer.py"]:
         failures.append("C36: Sabotage ‚Schreiber misst nicht‘ konnte nicht "
@@ -6544,8 +6809,11 @@ def _selftest():
     # (a) Der Heiler verschwindet aus dem Melder: der Befund wäre wieder ein
     #     Dauerläufer, das Issue könnte nie zugehen (#729).
     ohne_heiler = dict(echte_c37, **{
+        # ALLE Heiler-Aufrufe des Melders entfernen: der Melder hat zwei
+        # Stellen (Pruefung und Selbsttest) - wer nur eine sabotiert, laesst
+        # die andere stehen und die Regel schweigt zu Unrecht.
         C37_SCHLIESSPFAD: echte_c37[C37_SCHLIESSPFAD].replace(
-            "neu, aenderungen = ph.heile(pin_desc)", "neu, aenderungen = pin_desc, []", 1)})
+            "ph.heile(", "kein_heiler(")})
     if ohne_heiler[C37_SCHLIESSPFAD] == echte_c37[C37_SCHLIESSPFAD]:
         failures.append("C37: Sabotage ‚Heiler entfernt‘ konnte nicht "
                         "eingespielt werden (Anker fehlt).")
@@ -6572,13 +6840,13 @@ def _selftest():
     #     Widerspruch Prüfer/Heiler aus #729).
     blind_heiler = dict(echte_c37, **{
         "pinterest_seo_healer.py": echte_c37["pinterest_seo_healer.py"].replace(
-            "ph.ist_konform(", "bool(", 1)})
+            "ph.ist_konform(", "bool(")})
     if blind_heiler["pinterest_seo_healer.py"] == echte_c37["pinterest_seo_healer.py"]:
         failures.append("C37: Sabotage ‚Heiler prüft Tags nicht‘ konnte nicht "
                         "eingespielt werden (Anker fehlt).")
     elif not [f for f in c37_befund_hat_einen_schliespfad(
             blind_heiler, echte_wflows_c37, root=BLOG_DIR, quick=True)
-            if "ph.ist_konform(" in f[1]]:
+            if "Konformität nicht über die SSOT" in f[1]]:
         failures.append("C37: ein Heiler, der die Hashtag-Regel nicht mehr "
                         "fragt, bleibt unentdeckt (#729).")
 
@@ -6588,7 +6856,7 @@ def _selftest():
     os.makedirs(os.path.join(bestand_wurzel, "content", "posts", "fixture"))
     with open(os.path.join(bestand_wurzel, "content", "posts", "fixture",
                            "index.md"), "w", encoding="utf-8") as fh:
-        fh.write('---\npin_description: "*Werbung | Text. #a1b #b2c #c3d #d4e"\n---\n\nText.\n')
+        fh.write('---\npin_description: "*Werbung | Text. #a1b #b2c #c3d #d4e #e5f"\n---\n\nText.\n')
     if not [f for f in c37_befund_hat_einen_schliespfad(
             echte_c37, echte_wflows_c37, root=bestand_wurzel, quick=True)
             if "5 Hashtags" in f[1] and "pin_description" in f[1]]:
@@ -6597,8 +6865,10 @@ def _selftest():
 
     # (e) Die Auslieferung fährt den Heiler nicht mehr: der beste Befund
     #     bliebe stehen, weil ihn niemand saniert.
+    # Der Kommentar im Workflow zaehlt nicht: der Aufruf muss ALLE im
+    # Workflow verschwinden, sonst bleibt ein Fahrer stehen.
     wf_ohne_fix = {C37_WORKFLOW: echte_wflows_c37[C37_WORKFLOW].replace(
-        "pinterest_check.py --fix", "pinterest_check.py", 1)}
+        "pinterest_check.py --fix", "pinterest_check.py")}
     if wf_ohne_fix[C37_WORKFLOW] == echte_wflows_c37[C37_WORKFLOW]:
         failures.append("C37: Sabotage ‚Watchdog ohne --fix‘ konnte nicht "
                         "eingespielt werden (Anker fehlt).")
@@ -6811,7 +7081,134 @@ def _selftest():
             if f[1].startswith("F2-ANBINDUNG")]:
         failures.append("C40: eine Anbindung im Mini-Baum bleibt unentdeckt (#806).")
 
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C40 mit Kunstbefunden: Fehler "
+    # --- C41: Der Schreiber misst vor dem Schreiben (Issue #806) -----------
+    # Der Report #806 nannte zwei Entwuerfe unter der Publish-Schwelle – beide
+    # aus der Rolle „Claude“, die ohne Messung in den Vorrat schrieb. Fuenf
+    # Sabotagen, ein Ergebnis: kein Schreiber darf ohne Garantie schreiben,
+    # und die Messung muss VOR dem Schreiben sitzen.
+    echte_c41 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in (C41_MODUL,) + C41_SCHREIBER}
+    if c41_schreiber_misst_vor_dem_schreiben(echte_c41, root=BLOG_DIR,
+                                              quick=True):
+        failures.append("C41: der echte Zustand wird beanstandet: "
+                        f"{c41_schreiber_misst_vor_dem_schreiben(echte_c41, root=BLOG_DIR, quick=True)}")
+
+    # (a) Die Garantie verschwindet aus einer Bahn: der Ausschuss entsteht
+    #     wieder im Generator und wird erst Wochen später gemeldet.
+    ohne_garantie = dict(echte_c41, **{
+        "claude_writer.py": echte_c41["claude_writer.py"].replace(
+            "    if provider != \"offline\" and lesbarkeit_schreiber is not None:\n"
+            "        rumpf, flesch, lesbarkeit_status = lesbarkeit_schreiber.sichern(rumpf, slug)\n",
+            "    if provider != \"offline\":\n"
+            "        pass\n", 1)})
+    if ohne_garantie["claude_writer.py"] == echte_c41["claude_writer.py"]:
+        failures.append("C41: Sabotage ‚Garantie entfernt‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in claude_writer.py).")
+    elif not [f for f in c41_schreiber_misst_vor_dem_schreiben(
+            ohne_garantie, root=BLOG_DIR, quick=True)
+            if "nutzt die Schreiber-Garantie nicht" in f[1]
+            or "nicht verdrahtet" in f[1]]:
+        failures.append("C41: ein Schreiber ohne Garantie bleibt unentdeckt (#806).")
+
+    # (b) Die Messung kommt NACH dem Schreiben: der Befund käme zu spät.
+    spaeter_gemessen = dict(echte_c41, **{
+        "claude_writer.py": echte_c41["claude_writer.py"].replace(
+            "        rumpf, flesch, lesbarkeit_status = lesbarkeit_schreiber.sichern(rumpf, slug)\n",
+            "        rumpf = rumpf\n", 1).replace(
+            "    path = post_utils.write_post(slug, content)\n",
+            "    path = post_utils.write_post(slug, content)\n"
+            "    rumpf, flesch, lesbarkeit_status = lesbarkeit_schreiber.sichern(rumpf, slug)\n", 1)})
+    if spaeter_gemessen["claude_writer.py"] == echte_c41["claude_writer.py"]:
+        failures.append("C41: Sabotage ‚Messung nach dem Schreiben‘ konnte "
+                        "nicht eingespielt werden (Anker fehlt in claude_writer.py).")
+    elif not [f for f in c41_schreiber_misst_vor_dem_schreiben(
+            spaeter_gemessen, root=BLOG_DIR, quick=True)
+            if "BEVOR er misst" in f[1]]:
+        failures.append("C41: ein Schreiber, der erst nach dem Schreiben misst, "
+                        "bleibt unentdeckt (#806).")
+
+    # (c) Die Garantie fuehrt eine eigene Schwelle: zweite Wahrheit im Haus.
+    eigene_zahl_c41 = dict(echte_c41, **{
+        C41_MODUL: echte_c41[C41_MODUL].replace(
+            "r = rc if rc_mod is _STD else rc_mod",
+            "NEW_FLESCH_MIN = 60.0\n    r = rc if rc_mod is _STD else rc_mod", 1)})
+    if eigene_zahl_c41[C41_MODUL] == echte_c41[C41_MODUL]:
+        failures.append("C41: Sabotage ‚eigene Schwelle‘ konnte nicht "
+                        "eingespielt werden (Anker fehlt in lesbarkeit_schreiber.py).")
+    elif not [f for f in c41_schreiber_misst_vor_dem_schreiben(
+            eigene_zahl_c41, root=BLOG_DIR, quick=True)
+            if "definiert die Flesch-Schwelle selbst" in f[1]]:
+        failures.append("C41: eine zweite Flesch-Zahl bleibt unentdeckt (#585).")
+
+    # (d) Das Tor verschwindet: eine Heilung ohne Wirkungsnachweis ist Papier.
+    ohne_tor = dict(echte_c41, **{
+        C41_MODUL: echte_c41[C41_MODUL].replace(
+            "        gruende = h.verifiziere(slug, content, neu)\n",
+            "        gruende = []\n", 1)})
+    if ohne_tor[C41_MODUL] == echte_c41[C41_MODUL]:
+        failures.append("C41: Sabotage ‚Tor entfernt‘ konnte nicht eingespielt "
+                        "werden (Anker fehlt in lesbarkeit_schreiber.py).")
+    elif not [f for f in c41_schreiber_misst_vor_dem_schreiben(
+            ohne_tor, root=BLOG_DIR, quick=True)
+            if "ruft das Tor" in f[1]]:
+        failures.append("C41: eine Garantie ohne Tor bleibt unentdeckt (C25/#806).")
+
+    # (e) Der Regressionstest verschwindet: das Versprechen waere wieder Prosa.
+    leere_wurzel_c41 = tempfile.mkdtemp(prefix="c41-ohne-test-")
+    if not [f for f in c41_schreiber_misst_vor_dem_schreiben(
+            echte_c41, root=leere_wurzel_c41, quick=True)
+            if "fehlt" in f[1] and "ungetestet" in f[1]]:
+        failures.append("C41: eine fehlende Testdatei bleibt unentdeckt (#806).")
+
+    # --- C42: Jeder Gate-Schritt hat einen lebenden Erzeuger (Issue #806) ----
+    # Der Report #806 fuehrte zwei „Datenlage offen“-Zeilen, die aus Schritten
+    # kamen, deren Messquelle es nicht (mehr) gab. Drei Sabotagen, ein Ergebnis.
+    echte_schritte_c42, _fehler_c42 = _gate_schritte(BLOG_DIR)
+    if c42_gate_schritt_hat_erzeuger(echte_schritte_c42, STEP_SIGNATURES,
+                                     root=BLOG_DIR):
+        failures.append("C42: der echte Zustand wird beanstandet: "
+                        f"{c42_gate_schritt_hat_erzeuger(echte_schritte_c42, STEP_SIGNATURES, root=BLOG_DIR)}")
+
+    # (a) Ein Schritt ohne Erzeuger: die Zeile „Datenlage offen“ käme zurück.
+    toter_schritt = dict(echte_schritte_c42 or {}, **{
+        "datenimport-alt": {"report": "DATENIMPORT-ALT-REPORT.md",
+                            "label": "Datenimport (entfernter Dienst)"}})
+    if not [f for f in c42_gate_schritt_hat_erzeuger(
+            toter_schritt, STEP_SIGNATURES, root=BLOG_DIR)
+            if "benennt keinen Erzeuger" in f[1]]:
+        failures.append("C42: ein Gate-Schritt ohne Erzeuger bleibt unentdeckt "
+                        "(#806).")
+
+    # (b) Der Erzeuger existiert nicht mehr: die Quelle ist weg, der Schritt
+    #     meldet trotzdem weiter.
+    with_signature = dict(STEP_SIGNATURES, **{
+        "datenimport-alt": (r"--emit\s+datenimport-alt\b",
+                            r"entfernter_import\.py")})
+    if not [f for f in c42_gate_schritt_hat_erzeuger(
+            toter_schritt, with_signature, root=BLOG_DIR)
+            if "keinen lebenden Erzeuger mehr" in f[1]]:
+        failures.append("C42: ein Schritt ohne lebenden Erzeuger bleibt "
+                        "unentdeckt (#806).")
+
+    # (c) Ein Schritt ohne Report und ohne erklärte Ausnahme: ein stiller
+    #     Sammelplatz für Schritte, die nichts messen.
+    stiller_schritt = dict(echte_schritte_c42 or {}, **{
+        "ohne-erzeuger": {"report": "", "label": "Nirgends"}})
+    if not [f for f in c42_gate_schritt_hat_erzeuger(
+            stiller_schritt, STEP_SIGNATURES, root=BLOG_DIR)
+            if "keinen erklärten Erzeuger" in f[1]]:
+        failures.append("C42: ein Schritt ohne Report und ohne Ausnahme bleibt "
+                        "unentdeckt (#806).")
+
+    # Die EINZIGE Urteilsstelle des Selbsttests (Dauerheilung #806): erst
+    # hier wird über alle Kunstbefunde entschieden – die Abschnitte sammeln,
+    # dieser Abschluss urteilt.
+    if failures:
+        print("❌ KONTRAKT-SELBSTEST FEHLGESCHLAGEN:")
+        for f in failures:
+            print("   -", f)
+        return 2
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C42 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

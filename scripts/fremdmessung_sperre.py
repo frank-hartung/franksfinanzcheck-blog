@@ -108,6 +108,9 @@ BEISPIEL_ANBINDUNG = '<script defer src="https://cloud.umami.is/script.js"></scr
 # Dateiname: Wortgrenze im Namen, nur für text-/code-artige Endungen (ein Foto
 # „umami-pilze.jpg" zu einem Kochartikel ist keine Anbindung).
 NAME_RE = re.compile(r"(?:^|[-_.])umami(?:[-_.]|$)", re.IGNORECASE)
+# Fuer die Schwaerzung: jede Nennung des Namens, ohne Wortgrenze (Dienst,
+# Skript, Datei, Konfiguration) - so bleibt der Befund namenlos.
+NAME_FREI_RE = re.compile(r"umami", re.IGNORECASE)
 TEXT_ENDUNGEN = {".py", ".js", ".mjs", ".cjs", ".ts", ".json", ".yaml", ".yml", ".toml",
                  ".html", ".md", ".txt", ".sh", ".css", ".xml", ".patch", ".csv"}
 
@@ -140,6 +143,11 @@ GENERIERT = {
         "Maschinenlesbare Cockpit-Momentaufnahme (scripts/cockpit.py, täglich) – wird komplett neu geschrieben.",
     "data/governance_status.json":
         "Ledger des letzten Governance-Laufs (scripts/governance_gate.py, wöchentlich; --reset leert es zu Laufbeginn).",
+    "docs/GOVERNANCE-KONTRAKT.md":
+        "Vertrags-Report (scripts/governance_contract.py --md) - wird bei jedem Lauf "
+        "vollstaendig neu geschrieben; sein Inhalt stammt aus den gescannten "
+        "Quellen. Ihn selbst zu scannen waere die Rueckkopplung: Der Befund "
+        "stuende dann in der Datei, die er meldet (#806).",
 }
 
 # ERLAUBT: Pfad → Grund. Jede Ausnahme muss einen Fund decken, sonst ist sie ein
@@ -239,7 +247,20 @@ def _kurz(zeile: str, m) -> str:
     """Fundstelle als kurzer Ausschnitt (nie die ganze Zeile: keine Geheimnisse ins Log)."""
     a = max(0, m.start() - 24)
     b = min(len(zeile), m.end() + 24)
-    return zeile[a:b].strip()[:90]
+    return _schwaerze(zeile[a:b].strip()[:90])
+
+
+def _schwaerze(text: str) -> str:
+    """Fundstellen ohne den Namen des entfernten Dienstes.
+
+    Die Wache schreibt ihren Befund in lebende Dateien (Vertrags-Report,
+    Issue-Text). Wuerde sie den Namen mitschreiben, erzeugte ihr eigener
+    Befund die Spur, die sie verbietet - eine Meldung, die sich selbst
+    erzeugt und nie wieder still wird (#806: eine Zeile "Datenlage offen"
+    ohne jeden Dienst).
+    Der Fund bleibt benannt (Pfad, Zeile, Klasse); nur der Name fehlt.
+    """
+    return NAME_FREI_RE.sub("[entfernter Dienst]", text)
 
 
 # ---------------------------------------------------------------- Prüfung

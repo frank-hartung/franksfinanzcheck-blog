@@ -50,6 +50,16 @@ import poppy_lib as lib  # noqa: E402
 import ki_shared as ks  # noqa: E402
 import post_utils  # noqa: E402
 
+# Die Schreiber-Garantie (#806): Auch diese Bahn schrieb Artikel in den
+# Vorrat, ohne die Publish-Schwelle zu messen – der Entwurf landete dann
+# unter 60 und wurde vom wöchentlichen Governance-Report namentlich gemeldet.
+try:
+    import lesbarkeit_schreiber
+    import readability_check as rc
+except Exception:  # noqa: BLE001 – ohne Messung darf der Lauf nicht sterben
+    lesbarkeit_schreiber = None
+    rc = None
+
 try:
     import length_policy  # noqa: E402
 except Exception:  # noqa: BLE001
@@ -302,20 +312,35 @@ def blog_entwurf_schreiben(karte: dict, offline: bool, *,
                               karte.get("pillar") or None)
             + "---\n\n")
 
-    content = fm + body
+    slug = ks.unique_bundle_slug(titel)
+    # LESBARKEITS-GATE VOR DEM SCHREIBEN (Issue #806): messen, deterministisch
+    # heilen (Tor T1–T4), dann erst schreiben. Der Werbeblock bleibt draußen.
+    rumpf = fm + body
+    if provider != "offline" and lesbarkeit_schreiber is not None:
+        rumpf, flesch, lesbarkeit_status = lesbarkeit_schreiber.sichern(rumpf, slug)
+    else:
+        flesch, lesbarkeit_status = None, "Offline-Gerüst – keine Messung"
+    content = rumpf
     if provider != "offline":
         content += ("\n\n" + ks.cta_block(karte.get("affiliate_url"))
                     + "\n" + ks.DISCLAIMER + "\n")
 
-    slug = ks.unique_bundle_slug(titel)
     pfad = post_utils.write_post(slug, content)
-    zeichen = len(re.sub(r"\s+", " ", body))
+    kern = rumpf.split("---", 2)[2] if rumpf.startswith("---") else rumpf
+    zeichen = len(re.sub(r"\s+", " ", kern))
     print(f"  ✅ Blog-Entwurf „{titel}“")
     print(f"     Pfad: {os.path.relpath(pfad, BLOG_DIR)}")
     print(f"     Provider: {provider} | Fließtext: {zeichen:,} Zeichen")
+    print(f"     Lesbarkeit: {lesbarkeit_status}")
     if zeichen < MIN_ZEICHEN and provider != "offline":
         print(f"     ⚠ Unter Floor ({MIN_ZEICHEN:,}) – die Content-Engine "
               "hebelt beim nächsten Lauf nach. Vor --promote prüfen!")
+    if (flesch is not None and rc is not None and flesch < rc.NEW_FLESCH_MIN
+            and provider != "offline"):
+        print("     ⚠ Unter der Publish-Schwelle – Nachsorge nötig "
+              "(`python3 scripts/endredaktion.py --slug "
+              f"{slug}` oder `python3 scripts/lesbarkeit_heiler.py "
+              "--entwuerfe`)")
     return slug, provider, zeichen
 
 
