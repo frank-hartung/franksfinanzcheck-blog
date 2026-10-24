@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-21T23:11:35Z",
+  "generated": "2026-10-23T23:03:15Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 1/6 bereit – Nachschub nötig",
         "lesbarkeit: 2026-10-19-urlaubskasse-clever-aufbessern/index.md (Entwurf) – Flesch 54.2 < Publish-Schwelle 60; 2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md (Entwu…",
-        "Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig"
+        "Artikel-Reserve knapp: 1/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -54,7 +54,7 @@
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
         "letzter erfolgreicher Post vor 0.3 Tag(en)",
-        "4 Fehlversuch(e) in den letzten 14 Tagen"
+        "3 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
         "data/social/state.yaml",

@@ -16,6 +16,12 @@
   {
     "seite": "https://franksfinanzcheck.de/impressum/",
     "clicks": 0,
+    "impressions": 8,
+    "ctr": 0.0,
+    "position": 11.38
+    "impressions": 4,
+    "ctr": 0.0,
+    "position": 7.25
     "impressions": 3,
     "ctr": 0.0,
     "position": 3.67
@@ -26,6 +32,20 @@
     "impressions": 3,
     "ctr": 0.0,
     "position": 2.33
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/pillar/internet-dsl/",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 6.5
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/pillar/konto-karten/",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 71.0
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/versicherungen/",
@@ -58,9 +78,9 @@
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 8.0
+    "position": 6.5
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
@@ -128,9 +148,9 @@
   {
     "seite": "https://franksfinanzcheck.de/tags/frugalismus-tipps/",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 1,
     "ctr": 0.0,
-    "position": 64.67
+    "position": 57.0
   },
   {
     "seite": "https://franksfinanzcheck.de/tags/haushaltsbuch/",
