@@ -43,6 +43,7 @@ on:
       - "cloudflare/klick-zaehler/**"
       - "cloudflare/ki-assistent/**"
       - "tools/wrangler/**"
+      - "scripts/worker_deploy_vorbereiten.py"
       - ".github/workflows/worker-deploy.yml"
 
 permissions:
@@ -175,6 +176,7 @@ jobs:
             *) echo "::error::Unbekannter Worker: $WORKER"; exit 1 ;;
           esac
           WRANGLER_SEND_METRICS=false tools/wrangler/node_modules/.bin/wrangler deploy --config "$VERZ/wrangler.toml"
+          python3 scripts/worker_deploy_vorbereiten.py --nachweis "$WORKER"
           {
             echo "## ✅ Worker deployt: $WORKER"
             echo ""

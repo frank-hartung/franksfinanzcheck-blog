@@ -62,10 +62,17 @@ on:
       - "scripts/tests/test_blog_header_gate.py"
       - "scripts/sicherheits_nachweis.py"
       - "scripts/tests/test_sicherheits_nachweis.py"
+      - "scripts/cloudflare_edge_freigabe.py"
+      - "scripts/tests/test_cloudflare_edge_freigabe.py"
+      - "scripts/worker_deploy_vorbereiten.py"
+      - "scripts/tests/test_worker_deploy_vorbereiten.py"
+      - "scripts/alert_resolve_gate.py"
+      - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
       - "scripts/tests/test_alert_scoping.py"
       - "scripts/tests/sim/alert_scoping_sim.mjs"
       - ".github/workflows/alert-on-failure.yml"
+      - ".github/workflows/worker-deploy.yml"
       - "scripts/content_html_wache.py"
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
@@ -96,10 +103,17 @@ on:
       - "scripts/tests/test_blog_header_gate.py"
       - "scripts/sicherheits_nachweis.py"
       - "scripts/tests/test_sicherheits_nachweis.py"
+      - "scripts/cloudflare_edge_freigabe.py"
+      - "scripts/tests/test_cloudflare_edge_freigabe.py"
+      - "scripts/worker_deploy_vorbereiten.py"
+      - "scripts/tests/test_worker_deploy_vorbereiten.py"
+      - "scripts/alert_resolve_gate.py"
+      - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
       - "scripts/tests/test_alert_scoping.py"
       - "scripts/tests/sim/alert_scoping_sim.mjs"
       - ".github/workflows/alert-on-failure.yml"
+      - ".github/workflows/worker-deploy.yml"
       - "scripts/content_html_wache.py"
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
@@ -146,15 +160,18 @@ jobs:
       - name: Header-Wache – Vorlage und Meta-CSP (F-01, offline)
         run: |
           set -euo pipefail
-          python3 -m unittest scripts.tests.test_blog_header_gate scripts.tests.test_sicherheits_nachweis scripts.tests.test_alert_scoping
+          python3 -m unittest scripts.tests.test_blog_header_gate scripts.tests.test_sicherheits_nachweis scripts.tests.test_alert_scoping scripts.tests.test_alert_resolve_gate scripts.tests.test_cloudflare_edge_freigabe
           python3 scripts/sicherheits_nachweis.py --selftest
+          python3 scripts/alert_resolve_gate.py --selftest
+          python3 scripts/cloudflare_edge_freigabe.py --selftest
           python3 scripts/blog_header_gate.py --selftest
           python3 scripts/blog_header_gate.py --offline
 
       - name: Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)
         run: |
           set -euo pipefail
-          python3 -m unittest scripts.tests.test_worker_betrieb_wache
+          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten
+          python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_betrieb_wache.py --selftest
           python3 scripts/worker_betrieb_wache.py --offline
 
@@ -277,6 +294,7 @@ jobs:
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE || 'https://abos.franksfinanzcheck.de' }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
+          KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
         run: |
           set -euo pipefail
           rm -f worker-live.md worker-live.json

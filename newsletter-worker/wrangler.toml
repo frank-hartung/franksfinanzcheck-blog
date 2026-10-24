@@ -52,6 +52,14 @@ enabled = true
 head_sampling_rate = 1
 
 [vars]
+# BUILD-STAMPEL (Deploy-Nachweis, WF-E813 / #815, 24.10.2026): Der Wert steht
+# in JEDER /healthz-Antwort (oeffentlich – er verraet nichts). Die
+# Betriebs-Wache vergleicht ihn mit dem Repo und kann damit erstmals
+# unterscheiden: „falscher Leseschluessel" (Stempel stimmt, Betriebsbild
+# fehlt) oder „veralteter Deploy" (Stempel fehlt/weicht ab). Ein gruener
+# Plan mit uebersprungenem Deploy war bisher KEIN Deploy-Nachweis.
+# Bei jeder Aenderung am Worker-Code hochziehen, zusammen mit dem Deploy.
+BUILD = "ff-newsletter-2026-10-24"
 # Urspruenge, denen der Worker CORS antwortet (Komma getrennt).
 SITE_ORIGIN = "https://franksfinanzcheck.de"
 # Repo + Workflow, die die Bestaetigungs-Mail senden (workflow_dispatch).

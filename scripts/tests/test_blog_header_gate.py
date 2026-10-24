@@ -229,6 +229,13 @@ class ProxyDiagnose(unittest.TestCase):
         self.assertIn("FF Sicherheits-Header", daten["naechster_schritt"])
         self.assertNotIn("Proxied", daten["naechster_schritt"])
 
+    def test_815_proxy_aktiv_erinnert_an_offenen_datenschutz_b7(self):
+        (code, bericht, daten), _ = _messen(
+            [(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_OK)
+        self.assertTrue(any("Datenschutz-Folge B7 offen" in w for w in daten["warnungen"]))
+        self.assertIn("edge:b7:apply", bericht)
+
 
 class WorkflowVerdrahtung(unittest.TestCase):
     """Vertrag C34: Der Workflow wertet aus, er reicht nicht durch.

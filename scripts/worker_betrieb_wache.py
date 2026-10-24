@@ -66,6 +66,8 @@ WURZEL = Path(__file__).resolve().parents[1]
 DECKEL_STANDARD = 100
 FEEDBACK_STANDARD = 200
 WARNSCHWELLE = 0.8  # ab 80 % Auslastung wird gemeldet (Handlungsspielraum)
+TURNSTILE_ZUSTAENDE = ("aktiv", "wartet", "inaktiv")
+KV_ID_RE = re.compile(r"^[0-9a-f]{32}$")
 
 
 PAUSEN = (2.0, 8.0, 30.0)
@@ -153,7 +155,7 @@ def schema_fehler(stand) -> list[str]:
         fehler.append("Worker meldet keinen gültigen KV-Zustand.")
     elif stand["ok"] != (stand["kv"] == "ok"):
         fehler.append("Worker meldet widersprüchliche KV-Zustände.")
-    if stand["turnstile"] not in ("aktiv", "inaktiv"):
+    if stand["turnstile"] not in TURNSTILE_ZUSTAENDE:
         fehler.append("Turnstile-Zustand ist unbekannt.")
     if stand["schluesselrollen"] not in ("getrennt", "gemeinsam"):
         fehler.append("Schlüsselrollen sind unbekannt.")
@@ -173,6 +175,71 @@ def schema_fehler(stand) -> list[str]:
     return fehler
 
 
+def diagnose_unvollstaendiges_bild(
+    stand, *, repo_build: str = "", kv_namespace_id: str | None = None
+) -> list[str]:
+    """Trennt deterministisch „veralteter Deploy“ von „falscher Leseschlüssel“ (WF-E813 / #815).
+
+    Sicherheitsregel: NIEMALS Rohwerte aus `stand` oder `kv_namespace_id` in den
+    Bericht kopieren (Geheimnis- und Kanalhygiene). Geprüft wird ausschließlich
+    in Python gegen den vertrauenswürdigen Repo-Wert `repo_build` und das 32-Hex-Muster.
+    """
+    if not isinstance(stand, dict):
+        return []
+    pflicht = ("ok", "kv", "budget", "turnstile", "schluesselrollen", "exporte")
+    if all(name in stand for name in pflicht):
+        return []
+    bau_roh = stand.get("bau")
+    bau = bau_roh.strip() if isinstance(bau_roh, str) else ""
+    soll = (repo_build or "").strip()
+
+    if not bau:
+        if kv_namespace_id is not None:
+            kvid = kv_namespace_id.strip()
+            if not kvid:
+                return [
+                    "Deploy-Diagnose: Build-Stempel (`bau`) fehlt in `/healthz` UND "
+                    "Repository-Variable `KV_NAMESPACE_ID_ABO` ist in GitHub leer – "
+                    "`worker-deploy.yml` hat den Deploy von `newsletter-worker` deshalb "
+                    "übersprungen. Zuerst `KV_NAMESPACE_ID_ABO` als Repository-Variable "
+                    "(Settings → Secrets and variables → Actions → Tab „Variables“, "
+                    "nicht Secrets) setzen und `newsletter-worker` von `main` deployen "
+                    "(docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
+                ]
+            if not KV_ID_RE.match(kvid):
+                return [
+                    "Deploy-Diagnose: Build-Stempel (`bau`) fehlt in `/healthz` UND "
+                    "Repository-Variable `KV_NAMESPACE_ID_ABO` hat kein gültiges "
+                    "32-Hex-Format – `worker-deploy.yml` konnte `newsletter-worker` "
+                    "nicht deployen (docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
+                ]
+        if soll:
+            return [
+                f"Deploy-Diagnose: Build-Stempel (`bau`) fehlt in `/healthz` – live "
+                f"antwortet noch ein veralteter Worker-Deploy vor Repo-Stand `{soll}`. "
+                "Zuerst Workflow „Cloudflare-Worker deployen“ für `newsletter-worker` "
+                "auf `main` ausführen, nicht den Leseschlüssel auf Verdacht ändern "
+                "(docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
+            ]
+        return []
+
+    if soll and bau != soll:
+        return [
+            f"Deploy-Diagnose: Build-Stempel in `/healthz` weicht vom Repo-Soll "
+            f"`{soll}` ab – veralteter Worker-Deploy. Workflow „Cloudflare-Worker "
+            "deployen“ für `newsletter-worker` auf `main` ausführen (Runbook D2)."
+        ]
+
+    if soll and bau == soll:
+        return [
+            f"Zugangs-Diagnose: Aktueller Worker-Build (`{soll}`) läuft live, "
+            "liefert aber nur die öffentliche `/healthz`-Antwort – GitHub-Secret "
+            "`NEWSLETTER_WORKER_EXPORT_KEY` stimmt nicht mit `EXPORT_KEY` im Worker "
+            "überein (docs/SICHERHEIT-BETRIEB-RUNBOOK.md, A4)."
+        ]
+    return []
+
+
 def repo_stand() -> dict:
     """Was sagt das Repository: Turnstile-Site-Key, Edge-Vorlage, Worker-Variablen."""
     hugo = (WURZEL / "hugo.toml").read_text(encoding="utf-8")
@@ -181,10 +248,12 @@ def repo_stand() -> dict:
     wrangler = wrangler_pfad.read_text(encoding="utf-8") if wrangler_pfad.exists() else ""
     deckel = re.search(r'^ANMELDUNG_MAX_PRO_TAG\s*=\s*"(\d+)"', wrangler, re.M)
     spiegel = re.search(r'^TURNSTILE_SITEKEY\s*=\s*"([^"]*)"', wrangler, re.M)
+    build = re.search(r'^BUILD\s*=\s*"([^"]*)"', wrangler, re.M)
     vorlage = (WURZEL / "cloudflare" / "edge-schutz.md")
     return {
         "site_key": (site_key.group(1).strip() if site_key else ""),
         "sitekey_spiegel": (spiegel.group(1).strip() if spiegel else None),
+        "build": (build.group(1).strip() if build else ""),
         "deckel": int(deckel.group(1)) if deckel else DECKEL_STANDARD,
         "edge_vorlage": vorlage.read_text(encoding="utf-8") if vorlage.exists() else "",
     }
@@ -330,7 +399,20 @@ def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
                              "jemand probiert einen Schlüssel aus. Bei anhaltendem "
                              "Muster: Schlüssel rotieren (A4).")
 
-    # 6. Dieselbe Dokumentationsprüfung läuft schon offline. Eine gesunde
+    # 6. Build-Stempel (Deploy-Nachweis WF-E813 / #815): nur prüfen, wenn
+    # sowohl Repo-Soll als auch Live-Feld vorhanden sind (niemals Rohwert loggen).
+    soll_build = str(repo.get("build") or "").strip()
+    ist_bau = stand.get("bau")
+    if soll_build and isinstance(ist_bau, str) and ist_bau.strip():
+        if ist_bau.strip() == soll_build:
+            ok.append(f"Deploy-Nachweis: Worker-Build entspricht dem Repo-Stand (`{soll_build}`).")
+        else:
+            warnungen.append(
+                f"**Worker-Deploy hinter Repo-Stand** (Soll `{soll_build}`) — "
+                "Änderungen aus `newsletter-worker/` über `worker-deploy.yml` ausrollen."
+            )
+
+    # 7. Dieselbe Dokumentationsprüfung läuft schon offline. Eine gesunde
     # Worker-Antwort darf keinen erst live entdeckten Repo-Fehler bekommen.
     fehler.extend(vorlagen_fehler(repo.get("edge_vorlage", "")))
 
@@ -363,10 +445,13 @@ def offline_pruefen() -> tuple[int, str]:
     # Worker). Ohne Spiegelprüfung rutschten sie auseinander – der halb-
     # gesetzte Zustand war fünf Tage lang ein Anmelde-Ausfall.
     fehler += spiegel_fehler(repo["site_key"], repo["sitekey_spiegel"])
+    if "build" in repo and not repo["build"]:
+        fehler.append("`BUILD` fehlt in newsletter-worker/wrangler.toml – "
+                      "ohne den Build-Stempel fehlt der Deploy-Nachweis (WF-E813 / #815).")
     # Die Wache selbst muss die Standardwerte des Workers kennen.
     index = (WURZEL / "newsletter-worker" / "src" / "index.js").read_text(encoding="utf-8")
     for name in ("ANMELDUNG_MAX_PRO_TAG_DEFAULT", "TAGESBUDGET", "exportlog:",
-                 "turnstile_zustand"):
+                 "turnstile_zustand", "build_stempel"):
         if name not in index:
             fehler.append(f"`{name}` fehlt im Worker — die Wache prüft Werte, die es "
                           "nicht mehr gibt.")
@@ -374,14 +459,17 @@ def offline_pruefen() -> tuple[int, str]:
         zeilen += ["## Befunde", ""] + [f"- ❌ {f}" for f in fehler]
         return 1, "\n".join(zeilen)
     zeilen.append(f"✅ Repo-Seite in Ordnung: Deckel {repo['deckel']}/Tag, "
+                  f"Build {repo.get('build') or 'offen'}, "
                   f"Turnstile-Site-Key {'gesetzt' if repo['site_key'] else 'offen'}, "
                   "Edge-Vorlage vollständig.")
     return 0, "\n".join(zeilen)
 
 
 def netz_pruefen(base: str, key: str, *, schreibschluessel: str = "",
+                 kv_namespace_id: str | None = None,
                  holen=hole_healthz, repo=None, pausen=PAUSEN,
                  schlaf=time.sleep) -> tuple[int, str, dict]:
+    repo_effektiv = repo if repo is not None else repo_stand()
     stoerungen: list[str] = []
     protokoll: list[str] = []
     versuche = 0
@@ -396,6 +484,12 @@ def netz_pruefen(base: str, key: str, *, schreibschluessel: str = "",
             try:
                 stand = holen(base, key)
                 stoerungen = schema_fehler(stand)
+                if stoerungen:
+                    stoerungen.extend(diagnose_unvollstaendiges_bild(
+                        stand,
+                        repo_build=str(repo_effektiv.get("build") or ""),
+                        kv_namespace_id=kv_namespace_id,
+                    ))
                 break  # Schema-/Zugangsfehler heilt kein identischer HTTP-Aufruf.
             except (MessStoerung, OSError, HTTPException) as fehler:
                 grund = (str(fehler) if isinstance(fehler, MessStoerung)
@@ -412,7 +506,7 @@ def netz_pruefen(base: str, key: str, *, schreibschluessel: str = "",
                    "abgleichen (docs/SICHERHEIT-BETRIEB-RUNBOOK.md, A3/A4 und D2). "
                    "Kein Turnstile-Secret löschen und keinen Tagesdeckel auf Verdacht ändern.")
     else:
-        fehler_liste, warnungen, ok = bewerte(stand, repo if repo is not None else repo_stand())
+        fehler_liste, warnungen, ok = bewerte(stand, repo_effektiv)
         lesewert = (key or "").strip()
         schreibwert = (schreibschluessel or "").strip()
         if not schreibwert:
@@ -461,7 +555,9 @@ def main(argv: list[str] | None = None) -> int:
         code, bericht, daten = netz_pruefen(
             (os.environ.get("NEWSLETTER_WORKER_BASE") or "").rstrip("/"),
             os.environ.get("NEWSLETTER_WORKER_EXPORT_KEY") or "",
-            schreibschluessel=os.environ.get("NEWSLETTER_WORKER_WRITE_KEY") or "")
+            schreibschluessel=os.environ.get("NEWSLETTER_WORKER_WRITE_KEY") or "",
+            kv_namespace_id=os.environ.get("KV_NAMESPACE_ID_ABO"),
+        )
     if args.report:
         Path(args.report).write_text(bericht, encoding="utf-8")
     if args.json:
@@ -569,6 +665,39 @@ def selftest() -> int:
                               schreibschluessel="schreib-attrappe",
                               holen=lambda *_: vollstaendig, repo=repo, pausen=())
     assert code == 0, "Vollständiges Betriebsbild nicht erkannt"
+    faelle += 1
+
+    # Gegenprobe 9 (WF-E813 / #815): „wartet“ im echten netz_pruefen()-Durchlauf
+    # (inkl. schema_fehler!) muss ohne Site-Key Exit 0 + Warnung liefern, statt
+    # an einer veralteten Schema-Whitelist mit Exit 2 (STOERUNG) abzustürzen.
+    code, bericht, daten = netz_pruefen(
+        "https://abos.franksfinanzcheck.de", "attrappe",
+        schreibschluessel="schreib-attrappe",
+        holen=lambda *_: {**vollstaendig, "turnstile": "wartet"},
+        repo={**repo, "site_key": ""}, pausen=(),
+    )
+    assert code == 0 and daten["klasse"] == "OK" and daten["warnungen"], \
+        f"Zustand „wartet“ muss durch schema_fehler + netz_pruefen laufen: {daten}"
+    faelle += 1
+
+    # Gegenprobe 10 (WF-E813 / #815): Deploy-Nachweis vs. Leseschlüssel-Fehler
+    # deterministisch getrennt – ohne Rohwerte aus der Antwort auszugeben.
+    repo_mit_build = {**repo, "build": "ff-newsletter-soll"}
+    _, bericht_kv, _ = netz_pruefen(
+        "https://abos.franksfinanzcheck.de", "attrappe",
+        kv_namespace_id="",
+        holen=lambda *_: {"ok": True, "ts": "2026-10-24T10:00:00Z"},
+        repo=repo_mit_build, pausen=(),
+    )
+    assert "KV_NAMESPACE_ID_ABO" in bericht_kv, "Fehlende KV-Variable nicht diagnostiziert"
+    _, bericht_key, _ = netz_pruefen(
+        "https://abos.franksfinanzcheck.de", "attrappe",
+        kv_namespace_id="a" * 32,
+        holen=lambda *_: {"ok": True, "ts": "2026-10-24T10:00:00Z", "bau": "ff-newsletter-soll"},
+        repo=repo_mit_build, pausen=(),
+    )
+    assert "Zugangs-Diagnose" in bericht_key and "NEWSLETTER_WORKER_EXPORT_KEY" in bericht_key, \
+        "Falscher Leseschlüssel bei aktuellem Build nicht diagnostiziert"
     faelle += 1
     for stand in ({"ok": True, "ts": "2026-10-19T12:00:00Z"},
                   {**vollstaendig, "budget": {}}, {**vollstaendig, "turnstile": "unbekannt"}):

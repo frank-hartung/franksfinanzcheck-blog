@@ -161,6 +161,61 @@ class RepoUndLiveVertrag(unittest.TestCase):
         self.assertEqual(fehler, [])
         self.assertEqual(gate.offline_pruefen()[0], 0)
 
+    def test_815_turnstile_wartet_passiert_schema_und_netz_pruefen(self):
+        """Squash-Kollision #809/#815: Worker liefert „wartet“, sobald TURNSTILE_SECRET
+        gesetzt und TURNSTILE_SITEKEY noch leer ist. schema_fehler() darf diesen
+        vertraglichen Zustand niemals als unbekannte STOERUNG ablehnen."""
+        repo = gate.repo_stand()
+        stand = {**GUT, "turnstile": "wartet", "bau": repo["build"],
+                 "budget": {**GUT["budget"], "anmeldung_max": repo["deckel"]}}
+        code, bericht, daten = gate.netz_pruefen(
+            BASE, "test-only", schreibschluessel="test-write-only",
+            holen=lambda *_: stand, repo={**repo, "site_key": ""}, pausen=())
+        self.assertEqual(code, 0, bericht)
+        self.assertEqual(daten["klasse"], "OK")
+        self.assertEqual(daten["fehlend"], [])
+        self.assertTrue(any("wartet" in w.lower() for w in daten["warnungen"]))
+        self.assertIn(repo["build"], bericht)
+
+    def test_815_unvollstaendiges_bild_trennt_deploy_lücke_von_falschem_leseschluessel(self):
+        repo_b = {**REPO, "build": "ff-newsletter-2026-10-24"}
+        gift_bau = "GIFT_BAU_AUS_NETZ"
+        gift_kvid = "GIFT_KVID_UNGUELTIG"
+
+        # Fall 1: Kein bau-Stempel + KV_NAMESPACE_ID_ABO leer -> übersprungener Deploy
+        code, bericht, daten = gate.netz_pruefen(
+            BASE, "test-only", kv_namespace_id="",
+            holen=lambda *_: {"ok": True, "ts": GUT["ts"]}, repo=repo_b, pausen=())
+        self.assertEqual(code, 2)
+        self.assertIn("KV_NAMESPACE_ID_ABO", bericht)
+        self.assertIn("worker-deploy.yml", bericht)
+
+        # Fall 2: Fremder/alter bau-Stempel -> veralteter Deploy, KEIN Rohwert im Bericht
+        code, bericht, daten = gate.netz_pruefen(
+            BASE, "test-only", kv_namespace_id=gift_kvid,
+            holen=lambda *_: {"ok": True, "ts": GUT["ts"], "bau": gift_bau},
+            repo=repo_b, pausen=())
+        self.assertEqual(code, 2)
+        self.assertIn("weicht vom Repo-Soll", bericht)
+        self.assertNotIn(gift_bau, bericht + json.dumps(daten))
+        self.assertNotIn(gift_kvid, bericht + json.dumps(daten))
+
+        # Fall 3: Aktueller bau-Stempel + nur öffentliche Antwort -> Leseschlüssel falsch
+        code, bericht, _ = gate.netz_pruefen(
+            BASE, "test-only", kv_namespace_id="a" * 32,
+            holen=lambda *_: {"ok": True, "ts": GUT["ts"], "bau": "ff-newsletter-2026-10-24"},
+            repo=repo_b, pausen=())
+        self.assertEqual(code, 2)
+        self.assertIn("Zugangs-Diagnose", bericht)
+        self.assertIn("NEWSLETTER_WORKER_EXPORT_KEY", bericht)
+
+    def test_815_fehlender_build_stempel_in_wrangler_faellt_offline_auf(self):
+        repo = {**gate.repo_stand(), "build": ""}
+        with patch.object(gate, "repo_stand", return_value=repo):
+            code, bericht = gate.offline_pruefen()
+        self.assertEqual(code, 1)
+        self.assertIn("BUILD", bericht)
+
     def test_809_reproduktion_verlorene_environments_anleitung_faellt_schon_offline_auf(self):
         for stichwort in ("Rate limiting", "Turnstile", "Strict-Transport-Security", "Environments"):
             with self.subTest(stichwort=stichwort):

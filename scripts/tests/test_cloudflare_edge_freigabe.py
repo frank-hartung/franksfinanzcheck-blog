@@ -85,5 +85,116 @@ class Selbststand(unittest.TestCase):
         self.assertIn("CLOUDFLARE_API_TOKEN", proc.stderr)
 
 
+class HighendHaertung815(unittest.TestCase):
+    """WF-E813 / #815: Kein SSL-Downgrade, Regel-Vollprüfung, Token-Hygiene, B7."""
+
+    def _mock_api_antworten(self, *, ssl="strict", proxied=True, regel="ok"):
+        kopf = edge.vorlage_kopfzeilen()
+        regel_obj = edge.regel_koerper(kopf)
+        if regel == "deaktiviert":
+            regel_obj["enabled"] = False
+        elif regel == "falscher_filter":
+            regel_obj["expression"] = '(http.host eq "franksfinanzcheck.de")'
+        elif regel == "fehlt":
+            regel_obj = None
+
+        aufrufe = []
+
+        def fake_api(token, weg, *, methode="GET", daten=None):
+            aufrufe.append((methode, weg, daten))
+            if weg.startswith("/zones?name="):
+                return {"success": True, "result": [{"id": "zone123456"}]}
+            if weg == "/zones/zone123456/dns_records" and methode == "GET":
+                return {"success": True, "result": [
+                    {"id": "dns1", "name": "franksfinanzcheck.de", "proxied": proxied},
+                    {"id": "dns2", "name": "www.franksfinanzcheck.de", "proxied": proxied},
+                ]}
+            if weg.startswith("/zones/zone123456/dns_records/") and methode == "PATCH":
+                return {"success": True, "result": {"id": "dns", "proxied": True}}
+            if weg == "/zones/zone123456/settings/ssl" and methode == "GET":
+                return {"success": True, "result": {"value": ssl}}
+            if weg == "/zones/zone123456/settings/ssl" and methode == "PATCH":
+                return {"success": True, "result": {"value": daten["value"]}}
+            if weg.endswith("/entrypoint") and methode == "GET":
+                if regel_obj is None:
+                    raise RuntimeError("HTTP 404")
+                return {"success": True, "result": {
+                    "id": "rs1",
+                    "rules": [{"id": "fremd", "description": "Bestehende Regel"}, regel_obj],
+                }}
+            if weg == "/zones/zone123456/rulesets/rs1" and methode == "PUT":
+                return {"success": True, "result": {"id": "rs1"}}
+            if weg == "/zones/zone123456/rulesets" and methode == "POST":
+                return {"success": True, "result": {"id": "rs1"}}
+            raise AssertionError(f"Unerwarteter API-Aufruf: {methode} {weg}")
+
+        return fake_api, aufrufe
+
+    def test_ssl_strict_wird_bei_pruefen_akzeptiert_und_bei_apply_nie_herabgestuft(self):
+        from unittest.mock import patch
+        fake_api, aufrufe = self._mock_api_antworten(ssl="strict", proxied=True, regel="ok")
+        with patch.object(edge, "_api", side_effect=fake_api):
+            code, bericht = edge.pruefen("attrappen-token", "franksfinanzcheck.de")
+            self.assertEqual(code, 0, bericht)
+            self.assertIn("strict", bericht)
+            code_apply, bericht_apply = edge.anwenden("attrappen-token", "franksfinanzcheck.de")
+            self.assertEqual(code_apply, 0, bericht_apply)
+            self.assertIn("kein Downgrade", bericht_apply)
+        ssl_patches = [a for a in aufrufe if a[0] == "PATCH" and "settings/ssl" in a[1]]
+        self.assertEqual(ssl_patches, [], "strict darf niemals auf full herabgestuft werden!")
+
+    def test_deaktivierte_oder_falsch_gefilterte_regel_faellt_bei_pruefen_auf(self):
+        from unittest.mock import patch
+        for modus, stichwort in (("deaktiviert", "deaktiviert"), ("falscher_filter", "Host-Filter")):
+            with self.subTest(modus=modus):
+                fake_api, _ = self._mock_api_antworten(ssl="strict", proxied=True, regel=modus)
+                with patch.object(edge, "_api", side_effect=fake_api):
+                    code, bericht = edge.pruefen("attrappen-token", "franksfinanzcheck.de")
+                self.assertEqual(code, 1, bericht)
+                self.assertIn(stichwort, bericht)
+
+    def test_apply_hebt_flexible_an_und_erhaelt_fremde_regeln(self):
+        from unittest.mock import patch
+        fake_api, aufrufe = self._mock_api_antworten(ssl="flexible", proxied=False, regel="deaktiviert")
+        with patch.object(edge, "_api", side_effect=fake_api):
+            code, bericht = edge.anwenden("attrappen-token", "franksfinanzcheck.de")
+        self.assertEqual(code, 0, bericht)
+        ssl_patches = [a for a in aufrufe if a[0] == "PATCH" and "settings/ssl" in a[1]]
+        self.assertEqual(len(ssl_patches), 1)
+        self.assertEqual(ssl_patches[0][2], {"value": "full"})
+        put_calls = [a for a in aufrufe if a[0] == "PUT" and "rulesets/rs1" in a[1]]
+        self.assertEqual(len(put_calls), 1)
+        regeln = put_calls[0][2]["rules"]
+        self.assertEqual(len(regeln), 2, "bestehende andere Regel muss erhalten bleiben")
+        eigene = next(r for r in regeln if r["description"] == edge.REGEL)
+        self.assertIs(eigene["enabled"], True)
+
+    def test_ungueltiger_token_und_fremder_pfad_scheitern_ohne_leak(self):
+        gift = "GIFT_BEARER_NIE_LOGGEN\nZWEITE_ZEILE"
+        with self.assertRaises(RuntimeError) as cm:
+            edge._api(gift, "/zones")
+        self.assertNotIn("GIFT_BEARER", str(cm.exception))
+        with self.assertRaises(RuntimeError):
+            edge._api("sauberer-token", "/accounts")
+
+    def test_b7_transformation_bleibt_kompatibel_mit_datenschutz_quellvertrag(self):
+        import tempfile
+        original = (REPO / "content" / "datenschutz" / "index.md").read_text(encoding="utf-8")
+        with tempfile.TemporaryDirectory() as tmp:
+            ziel = Path(tmp) / "index.md"
+            ziel.write_text(original, encoding="utf-8")
+            code_vor, _ = edge.b7_kommando(ziel, schreiben=False)
+            self.assertEqual(code_vor, 1)
+            code_apply, _ = edge.b7_kommando(ziel, schreiben=True)
+            self.assertEqual(code_apply, 0)
+            umgestellt = ziel.read_text(encoding="utf-8")
+            self.assertNotIn("kein Proxy von Cloudflare", umgestellt)
+            self.assertNotIn("keine Informationen über Seitenaufrufe", umgestellt)
+            self.assertNotIn("Cloudflare-CDN", umgestellt)
+            self.assertIn("CDN von Cloudflare, Inc.", umgestellt)
+            self.assertIn("stats.franksfinanzcheck.de", umgestellt)
+            self.assertIn("GitHub-Actions-Läufe", umgestellt)
+
+
 if __name__ == "__main__":
     unittest.main()
