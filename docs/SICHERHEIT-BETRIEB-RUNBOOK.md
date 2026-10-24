@@ -151,7 +151,8 @@ erscheint, Anmeldung kommt an. Dann:
 
 ```bash
 NEWSLETTER_WORKER_BASE=https://abos.franksfinanzcheck.de \
-NEWSLETTER_WORKER_EXPORT_KEY=… python3 scripts/worker_betrieb_wache.py
+NEWSLETTER_WORKER_EXPORT_KEY=… \
+NEWSLETTER_WORKER_WRITE_KEY=… python3 scripts/worker_betrieb_wache.py
 ```
 
 Erwartet: „Turnstile aktiv: Widget ausgeliefert UND Prüfung erzwungen."
@@ -163,29 +164,38 @@ Abschnitt Newsletter: Turnstile, kein Cookie, nur beim Absenden geladen).
 
 ### A4 · Schlüsselrollen trennen und Jobs in Environments einsperren (Findings F-07, F-08, P-1, P-4)
 
-**Lage:** Ein einziger Export-Schlüssel las Listen **mit** Token aller
-Abonnenten — wer ihn hatte, konnte jeden abmelden. Und die Workflows verlangen
-Environments (`cloudflare-produktion`, `brand-admin`, `backup`), die laut API
-nicht existieren: GitHub legt sie beim ersten Lauf **still und ohne
-Freigabepflicht** an.
+**Lage:** Der erste F-08-Fix schützte nur `?mit_token=1`. Die Einzelrouten
+`/export/token` und `/export/kontakt` gaben mit dem Leseschlüssel weiterhin
+Bearer-Token zurück; `/export/versuch` akzeptierte ihn außerdem für
+Statusänderungen. Auch ein fehlender Schreibschlüssel fiel auf den Leseschlüssel
+zurück. Das war eine echte Umgehung der Rollen-Trennung und ist im Repository
+behoben. **Der Worker wurde in dieser Prüfung nicht live deployt; Dashboard-
+Secrets und Produktionszustand sind nicht bestätigt.**
 
-**Schritt 1 — zweiter Worker-Schlüssel:**
+**Schritt 1 — zwei zwingend verschiedene Worker-Schlüssel:**
 
 ```bash
 cd newsletter-worker
-openssl rand -base64 48            # neuer Schreibschlüssel
-npx wrangler secret put EXPORT_KEY_WRITE     # den Wert einsetzen
+openssl rand -hex 32                    # neuen Schreibschlüssel erzeugen
+npx wrangler secret put EXPORT_KEY_WRITE  # Wert sicher eingeben
 ```
 
-Dann in GitHub (Settings → Secrets and variables → Actions):
-`NEWSLETTER_WORKER_WRITE_KEY` = derselbe Wert.
-`NEWSLETTER_WORKER_EXPORT_KEY` bleibt der **Leseschlüssel** (Listen ohne Token).
+In GitHub (Settings → Secrets and variables → Actions):
+`NEWSLETTER_WORKER_WRITE_KEY` exakt auf denselben neuen Wert setzen.
+Er muss sich von `EXPORT_KEY` / `NEWSLETTER_WORKER_EXPORT_KEY` unterscheiden.
+`NEWSLETTER_WORKER_EXPORT_KEY` bleibt ausschließlich der Leseschlüssel.
 
-**Wirkung:** `/export/abonnenten?mit_token=1` liefert Token nur noch mit dem
-Schreibschlüssel; ein abgeflossener Leseschlüssel kann niemanden mehr abmelden.
-Fehlt der Schreibschlüssel, greift ausdrücklich der bisherige Zustand
-(Rückwärts-Kompatibilität) — deshalb meldet die Wache diesen Zustand als
-Warnung.
+**Wirkung im gehärteten Code:** Der Leseschlüssel kann Listen/Pending ohne
+Token lesen, aber keine Einzeladresse zu einem Token auflösen und keinen
+Versandstatus ändern. `/export/token` und `/export/kontakt` verlangen POST;
+Token und E-Mail stehen im Request-Body statt in URLs. `EXPORT_KEY_WRITE` fehlt
+oder ist identisch? Dann werden Token- und Status-Endpunkte gesperrt und der
+Versand bricht fail-closed ab. Es gibt keinen Rückfall und keine Warnungs-
+Freigabe.
+
+Nach dem Deploy müssen Worker-Health (`schluesselrollen: getrennt`), ein
+kontrollierter Token-Export und die GitHub-Secrets getrennt verifiziert werden.
+Bis dahin gilt die Produktionswirkung als **unbestätigt**.
 
 **Schritt 2 — Environments:** Settings → **Environments** → New environment:
 

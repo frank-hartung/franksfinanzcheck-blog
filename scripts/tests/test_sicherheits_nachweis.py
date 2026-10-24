@@ -36,7 +36,8 @@ def gute_messungen():
     stand = {"ok": True, "kv": "ok", "turnstile": "inaktiv", "schluesselrollen": "getrennt",
              "budget": {"anmeldung_heute": 3, "anmeldung_max": 100, "feedback_max": 200}, "exporte": []}
     _, _, betrieb = worker.netz_pruefen(
-        "https://abos.franksfinanzcheck.de", "test-only", holen=lambda *_: stand, pausen=())
+        "https://abos.franksfinanzcheck.de", "test-only",
+        schreibschluessel="test-write-only", holen=lambda *_: stand, pausen=())
     return kopf, betrieb
 
 

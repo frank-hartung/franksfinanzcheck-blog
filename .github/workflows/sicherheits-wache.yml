@@ -194,6 +194,7 @@ jobs:
         env:
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE || 'https://abos.franksfinanzcheck.de' }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
+          NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
         run: |
           set -euo pipefail
           rm -f worker-live.md worker-live.json

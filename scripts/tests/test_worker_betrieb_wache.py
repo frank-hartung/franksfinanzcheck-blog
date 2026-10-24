@@ -28,8 +28,8 @@ GUT = {"ok": True, "kv": "ok", "ts": "2026-10-19T12:00:00Z", "turnstile": "aktiv
 
 
 def messen(stand, **kwargs):
-    return gate.netz_pruefen(BASE, "test-only", holen=lambda *_: stand,
-                             repo=REPO, pausen=(), **kwargs)
+    return gate.netz_pruefen(BASE, "test-only", schreibschluessel="test-write-only",
+                             holen=lambda *_: stand, repo=REPO, pausen=(), **kwargs)
 
 
 class AuthentifiziertesBetriebsbild(unittest.TestCase):
@@ -39,6 +39,17 @@ class AuthentifiziertesBetriebsbild(unittest.TestCase):
         self.assertEqual(daten["klasse"], "OK")
         self.assertEqual(daten["gemessen"], 1)
         self.assertEqual(daten["fehlend"], [])
+
+    def test_github_schreibschluessel_muss_vorhanden_und_getrennt_sein(self):
+        for schreibschluessel, erwartung in (("", "fehlt"), ("test-only", "identisch")):
+            with self.subTest(schreibschluessel=erwartung):
+                code, bericht, daten = gate.netz_pruefen(
+                    BASE, "test-only", schreibschluessel=schreibschluessel,
+                    holen=lambda *_: GUT, repo=REPO, pausen=())
+                self.assertEqual(code, 1)
+                self.assertEqual(daten["klasse"], "BEFUND")
+                self.assertIn("NEWSLETTER_WORKER_WRITE_KEY", bericht)
+                self.assertIn(erwartung, bericht)
 
     def test_oeffentliche_200_antwort_ist_nicht_geprueft(self):
         code, bericht, daten = messen({"ok": True, "ts": GUT["ts"]})
@@ -103,8 +114,8 @@ class AuthentifiziertesBetriebsbild(unittest.TestCase):
         self.assertIn("Fassade", bericht)
         self.assertTrue(daten["fehlend"])
         code, bericht, _ = gate.netz_pruefen(
-            BASE, "test-only", holen=lambda *_: GUT,
-            repo={**REPO, "site_key": ""}, pausen=())
+            BASE, "test-only", schreibschluessel="test-write-only",
+            holen=lambda *_: GUT, repo={**REPO, "site_key": ""}, pausen=())
         self.assertEqual(code, 1)
         self.assertIn("nicht durch Entfernen des Secrets abschalten", bericht)
         self.assertNotIn("oder Secret entfernen", bericht)
@@ -130,14 +141,14 @@ class AuthentifiziertesBetriebsbild(unittest.TestCase):
         self.assertIn("Repo-Stand ab", bericht)
         self.assertIn("Schreibbudget gefährdet", bericht)
 
-    def test_ausgeschoepftes_budget_und_geteilter_schluessel_bleiben_sichtbare_warnungen(self):
+    def test_ausgeschoepftes_budget_warnt_aber_geteilter_schluessel_ist_befund(self):
         code, bericht, daten = messen({**GUT, "schluesselrollen": "gemeinsam",
                                       "budget": {**GUT["budget"], "anmeldung_heute": 100}})
-        self.assertEqual(code, 0)
-        self.assertEqual(daten["klasse"], "OK")
+        self.assertEqual(code, 1)
+        self.assertEqual(daten["klasse"], "BEFUND")
         self.assertIn("ausgeschöpft", bericht)
-        self.assertIn("Nur EIN Export-Schlüssel", bericht)
-        self.assertGreaterEqual(len(daten["warnungen"]), 2)
+        self.assertIn("Getrennte Export-Schlüssel fehlen oder sind identisch", bericht)
+        self.assertEqual(len(daten["warnungen"]), 1, "nur der ausgeschöpfte Budgetstand ist eine Warnung")
 
 
 class RepoUndLiveVertrag(unittest.TestCase):
@@ -177,7 +188,8 @@ class WiederholungUndZugang(unittest.TestCase):
         holen = Mock(side_effect=[OSError("GIFT_GEHEIMNIS"), TimeoutError(), GUT])
         schlaf = Mock()
         code, bericht, daten = gate.netz_pruefen(
-            BASE, "test-only", holen=holen, repo=REPO, pausen=(2, 8), schlaf=schlaf)
+            BASE, "test-only", schreibschluessel="test-write-only",
+            holen=holen, repo=REPO, pausen=(2, 8), schlaf=schlaf)
         self.assertEqual(code, 0)
         self.assertEqual(daten["versuche"], 3)
         self.assertEqual(holen.call_count, 3)

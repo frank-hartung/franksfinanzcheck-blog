@@ -20,9 +20,10 @@ bekommen, die **nur im Betrieb** wirken und dort auch still ausfallen können:
    `newsletter-worker/wrangler.toml`. Der halbgesetzte Zustand „nur
    Secret“ war der Anmelde-Ausfall vom 15.10.2026: jede Anmeldung
    scheiterte an einer Sicherheitsprüfung ohne Widget, fünf Tage lang.
-3. **Getrennte Schlüsselrollen** (F-08) — Liest der Versand mit dem
-   Schreibschlüssel, ist die Trennung wirkungslos; fehlt der Schreibschlüssel
-   ganz, fällt der Worker auf den Standardschlüssel zurück.
+3. **Getrennte Schlüsselrollen** (F-08) — Token- und personenbezogene
+   Exporte sind nur mit einem explizit gesetzten, vom Leseschlüssel
+   verschiedenen Schreibschlüssel erreichbar. Fehlt er oder ist er identisch,
+   sind diese Endpunkte gesperrt; ein Rückfall wäre eine Datenfreigabe.
 
 Dazu die Exporte selbst: Wer die vollständige Liste gezogen hat, steht im
 Protokoll (KV, 30 Tage, mit Schlüsselabdruck). Diese Wache liest beides —
@@ -35,7 +36,8 @@ Bauarten
   --offline    prüft nur die Repo-Seite (Konfiguration/Vorlage)
   (Vorgabe)    fragt /healthz des Workers ab (Netz nötig, Schluessel aus Umgebung)
 
-Umgebung: NEWSLETTER_WORKER_BASE, NEWSLETTER_WORKER_EXPORT_KEY
+Umgebung: NEWSLETTER_WORKER_BASE, NEWSLETTER_WORKER_EXPORT_KEY,
+NEWSLETTER_WORKER_WRITE_KEY (muss vorhanden und vom Leseschlüssel verschieden sein).
 Exit 0 = gemessen/OK, 1 = belegter BEFUND, 2 = STOERUNG (nicht geprüft).
 --json/--report liefern in JEDEM dieser Fälle einen auswertbaren Nachweis.
 Eine öffentliche/minimale oder alte /healthz-Antwort ist kein Betriebsbild;
@@ -308,11 +310,11 @@ def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
         ok.append("Export-Schlüssel getrennt: Lesen und Schreiben sind verschiedene "
                   "Geheimnisse.")
     else:
-        warnungen.append("**Nur EIN Export-Schlüssel** (`EXPORT_KEY_WRITE` nicht gesetzt): "
-                         "Wer ihn liest, bekommt auch die Token aller Abonnenten und kann "
-                         "sie abmelden. Trennung: "
-                         "`npx wrangler secret put EXPORT_KEY_WRITE` + GitHub-Secret "
-                         "`NEWSLETTER_WORKER_WRITE_KEY` (cloudflare/edge-schutz.md, A4).")
+        fehler.append("**Getrennte Export-Schlüssel fehlen oder sind identisch:** "
+                      "Token- und personenbezogene Einzel-Lookups sind gesperrt, "
+                      "und der Versand muss fail-closed stoppen. `EXPORT_KEY_WRITE` "
+                      "muss sich von `EXPORT_KEY` unterscheiden; denselben getrennten "
+                      "Wert als GitHub-Secret `NEWSLETTER_WORKER_WRITE_KEY` setzen.")
 
     # 5. Export-Protokoll (F-08) — wer hat wann die Liste gezogen?
     exporte = stand.get("exporte") or []
@@ -377,8 +379,9 @@ def offline_pruefen() -> tuple[int, str]:
     return 0, "\n".join(zeilen)
 
 
-def netz_pruefen(base: str, key: str, *, holen=hole_healthz, repo=None,
-                 pausen=PAUSEN, schlaf=time.sleep) -> tuple[int, str, dict]:
+def netz_pruefen(base: str, key: str, *, schreibschluessel: str = "",
+                 holen=hole_healthz, repo=None, pausen=PAUSEN,
+                 schlaf=time.sleep) -> tuple[int, str, dict]:
     stoerungen: list[str] = []
     protokoll: list[str] = []
     versuche = 0
@@ -410,6 +413,14 @@ def netz_pruefen(base: str, key: str, *, holen=hole_healthz, repo=None,
                    "Kein Turnstile-Secret löschen und keinen Tagesdeckel auf Verdacht ändern.")
     else:
         fehler_liste, warnungen, ok = bewerte(stand, repo if repo is not None else repo_stand())
+        lesewert = (key or "").strip()
+        schreibwert = (schreibschluessel or "").strip()
+        if not schreibwert:
+            fehler_liste.append("GitHub-Secrets: NEWSLETTER_WORKER_WRITE_KEY fehlt; "
+                                "tokenhaltige Aufrufe bleiben fail-closed.")
+        elif schreibwert == lesewert:
+            fehler_liste.append("GitHub-Secrets: NEWSLETTER_WORKER_WRITE_KEY ist "
+                                "identisch mit dem Leseschlüssel; die Rollen sind nicht getrennt.")
         code, klasse = (1, "BEFUND") if fehler_liste else (0, "OK")
         schritt = ("Die einzeln belegten Abweichungen beheben (docs/SICHERHEIT-BETRIEB-RUNBOOK.md, "
                    "A3/A4 und D2), danach die Sicherheits-Wache mit Live-Messung starten."
@@ -449,7 +460,8 @@ def main(argv: list[str] | None = None) -> int:
     else:
         code, bericht, daten = netz_pruefen(
             (os.environ.get("NEWSLETTER_WORKER_BASE") or "").rstrip("/"),
-            os.environ.get("NEWSLETTER_WORKER_EXPORT_KEY") or "")
+            os.environ.get("NEWSLETTER_WORKER_EXPORT_KEY") or "",
+            schreibschluessel=os.environ.get("NEWSLETTER_WORKER_WRITE_KEY") or "")
     if args.report:
         Path(args.report).write_text(bericht, encoding="utf-8")
     if args.json:
@@ -519,10 +531,22 @@ def selftest() -> int:
     assert any("Tagesdeckel" in x for x in f), "Fehlender Deckel nicht als Fehler erkannt"
     faelle += 1
 
-    # Gegenprobe 6: geteilter Schlüssel -> Warnung.
-    f, w, _ = bewerte({**gut, "schluesselrollen": "gemeinsam"}, repo)
-    assert not f and any("EXPORT_KEY_WRITE" in x for x in w), "Geteilter Schlüssel nicht gemeldet"
+    # Gegenprobe 6: Worker-seitiger geteilter/fehlender Schlüssel -> Befund.
+    f, _, _ = bewerte({**gut, "schluesselrollen": "gemeinsam"}, repo)
+    assert any("EXPORT_KEY_WRITE" in x for x in f), "Geteilter Worker-Schlüssel nicht fail-closed gemeldet"
     faelle += 1
+
+    # Gegenprobe 6a: GitHub-Aufrufer braucht ebenfalls einen eigenen Write-Key.
+    schluesselstand = {**gut, "kv": "ok",
+                       "budget": {**gut["budget"], "feedback_max": 200}}
+    for write_key, marker in (("", "fehlt"), ("attrappe", "identisch")):
+        code, bericht, daten = netz_pruefen(
+            "https://abos.franksfinanzcheck.de", "attrappe",
+            schreibschluessel=write_key, holen=lambda *_: schluesselstand,
+            repo=repo, pausen=())
+        assert code == 1 and daten["klasse"] == "BEFUND"
+        assert marker in bericht and "NEWSLETTER_WORKER_WRITE_KEY" in bericht
+        faelle += 1
 
     # Gegenprobe 7: Brute-Force auf den Export -> Warnung.
     viele = [{"ts": f"2026-10-15T0{i}:00:00Z", "route": "/export/abonnenten", "umfang": 0,
@@ -542,12 +566,14 @@ def selftest() -> int:
 
     vollstaendig = {**gut, "kv": "ok", "budget": {**gut["budget"], "feedback_max": 200}}
     code, _, _ = netz_pruefen("https://abos.franksfinanzcheck.de", "attrappe",
+                              schreibschluessel="schreib-attrappe",
                               holen=lambda *_: vollstaendig, repo=repo, pausen=())
     assert code == 0, "Vollständiges Betriebsbild nicht erkannt"
     faelle += 1
     for stand in ({"ok": True, "ts": "2026-10-19T12:00:00Z"},
                   {**vollstaendig, "budget": {}}, {**vollstaendig, "turnstile": "unbekannt"}):
         code, _, daten = netz_pruefen("https://abos.franksfinanzcheck.de", "attrappe",
+                                      schreibschluessel="schreib-attrappe",
                                       holen=lambda *_, stand=stand: stand, repo=repo, pausen=())
         assert code == 2 and daten["klasse"] == "STOERUNG" and not daten["fehlend"]
         faelle += 1

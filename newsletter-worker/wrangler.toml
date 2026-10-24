@@ -102,12 +102,13 @@ RATE_LIMIT_EXPORT = "20"      # /export/... (geschuetzter Weg)
 # Secrets (NICHT hier eintragen):
 #   GITHUB_PAT        Fine-Grained, nur dieses Repo, "Actions: Read and write"
 #   EXPORT_KEY        32+ Zeichen Zufall, = GitHub-Secret NEWSLETTER_WORKER_EXPORT_KEY
-#                     Rolle LESEN: Listen ohne Token, Pending, Status, Kontakt.
-#   EXPORT_KEY_WRITE  optional (Audit 15.10.2026, F-08): eigener Schluessel fuer
-#                     token-tragende Massenexporte (?mit_token=1). Gesetzt =
-#                     getrennte Rollen; der Versand nutzt dann
-#                     NEWSLETTER_WORKER_WRITE_KEY. Fehlt er, gilt EXPORT_KEY
-#                     fuer beide Rollen (Rueckwaerts-Kompatibilitaet).
+#                     Rolle LESEN: Abonnenten/Pending ohne Token.
+#   EXPORT_KEY_WRITE  Pflicht fuer Token- und personenbezogene Einzel-Lookups
+#                     (/export/token, /export/kontakt, /export/versuch und
+#                     Massenexport mit ?mit_token=1). Muss sich von EXPORT_KEY
+#                     unterscheiden; ohne ihn oder bei gleichem Wert fail-closed.
+#                     Derselbe separate Wert als GitHub-Secret
+#                     NEWSLETTER_WORKER_WRITE_KEY. Kein Rueckfall.
 #   TURNSTILE_SECRET  (Audit M-02; Paar-Vertrag seit 19.10.2026): verlangt
 #                     bei /anmeldung ein gueltiges Feld
 #                     `cf-turnstile-response` – ABER erst zusammen mit dem

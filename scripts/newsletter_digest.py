@@ -35,8 +35,9 @@ konnte. Deshalb gilt jetzt:
              anlegt werden“-Zustand mehr, weil es kein fremdes Konto gibt.
 
 Verriegelung (bleibt wie gehabt, nur der Transport unter dem Boden):
-  1. Ohne Worker-Konfiguration (NEWSLETTER_WORKER_BASE/EXPORT_KEY) kein
-     Listen-Versand – fail-closed, mit Klickweg.
+  1. Listen-Versand nur mit Worker-Basis, Leseschlüssel und einem davon
+     verschiedenen NEWSLETTER_WORKER_WRITE_KEY (Token-/Abmeldelinks); sonst
+     fail-closed.
   2. LISTEN-Versand nur über NEWSLETTER_SEND=ja (Cron/live/planmaessig)
      ODER --live; ein --test-adresse trifft NUR die eingegebenen Adressen.
   3. QA (scripts/newsletter_qa.py) vor JEDEM Versand, auch Test.
@@ -435,6 +436,10 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
                                 "NEWSLETTER_WORKER_EXPORT_KEY nicht – der "
                                 "Listen-Versand wäre für immer leer (keine "
                                 "Abonnenten-Liste abholbar)", "workflow-blind"))
+        if "NEWSLETTER_WORKER_WRITE_KEY" not in wf:
+            funde.append(("N8", "Workflow konfiguriert keinen separaten "
+                                "NEWSLETTER_WORKER_WRITE_KEY – Token-Exporte "
+                                "und der Listenversand bleiben fail-closed", "workflow-write-key"))
         if "RESEND_API_KEY" not in wf and "NEWSLETTER_SMTP_HOST" not in wf:
             funde.append(("N8", "Workflow existiert, konfiguriert aber weder "
                                 "RESEND_API_KEY noch NEWSLETTER_SMTP_HOST – kein "
@@ -548,7 +553,7 @@ def test_token_fuer(adresse: str, base: str, key: str) -> str:
         return ""
     try:
         antwort = versand.worker_abfrage("/export/kontakt", {"email": adresse},
-                                         base=base, key=key)
+                                         base=base, key=key, methode="POST")
     except (RuntimeError, OSError):
         return ""
     if not isinstance(antwort, dict):
@@ -597,16 +602,20 @@ def worker_liste(base: str, key: str) -> list[dict]:
     → [{email, token, themen, bestaetigt}]. Netzwerkfehler werfen – der
     Aufrufer entscheidet, was damit ist (fail-closed beim Listen-Versand).
 
-    Token-Träger (Sicherheitsaudit 15.10.2026, F-08): Der Versand braucht je
-    Empfänger einen echten Abmeldelink, also den Token. Der Worker gibt ihn
-    nur mit dem SCHREIBSCHLÜSSEL UND der ausdrücklichen Anforderung
-    `mit_token=1` heraus – ein abgeflossener Leseschlüssel kann damit keine
-    Abmeldungen mehr auslösen. Fehlt der Schreibschlüssel in der Umgebung,
-    greift im Worker derselbe Wert wie beim Lesen (kein Bruch).
+    Token-Träger (F-08): Der Versand braucht je Empfänger einen echten
+    Abmeldelink, also den Token. Der Worker gibt ihn nur mit einem vom
+    Leseschlüssel verschiedenen SCHREIBSCHLÜSSEL und `mit_token=1` heraus.
+    Ohne getrennten Schreibschlüssel bricht der Versand fail-closed ab.
     """
     schreib = versand.worker_schreibschluessel()
+    if not schreib:
+        raise RuntimeError(
+            "Getrennter NEWSLETTER_WORKER_WRITE_KEY fehlt oder ist identisch "
+            "mit dem Leseschlüssel; tokenhaltiger Export ist gesperrt. "
+            "Kein Listenversand ohne getrennte Schlüsselrollen."
+        )
     antwort = versand.worker_abfrage("/export/abonnenten", {"mit_token": "1"},
-                                     base=base, key=schreib or key)
+                                     base=base, key=schreib)
     liste = antwort.get("abonnenten")
     liste = liste if isinstance(liste, list) else []
     # Fail-closed auf die WIRKUNG (F-08): Fehlt auch nur einem Empfänger der
@@ -805,10 +814,11 @@ def _versand_test(root: str, html: str, text: str, betreff: str,
     if roh_reply and not email_aus_text(roh_reply):
         print(f"   ⚠️  Antwortadresse {roh_reply!r} ist keine gültige E-Mail – "
               f"Versand nutzt die Absenderadresse {absender['email']}.")
-    base, key = versand.worker_konfig()
+    base, _ = versand.worker_konfig()
+    schreibschluessel = versand.worker_schreibschluessel()
     empfaenger = []
     for adresse in adressen:
-        token = test_token_fuer(adresse, base, key)
+        token = test_token_fuer(adresse, base, schreibschluessel)
         html_t, text_t = marken_einsetzen(html, text, token,
                                           worker_basis=base if token else "")
         pflicht = marken_pflicht(html_t, text_t)
@@ -1258,6 +1268,7 @@ def _selftest() -> int:
                  "<form><input name=\"email\"></form></body></html>")
     FOOTER_GUT = '<div class="newsletter-footer">Abonniere</div>'
     WF_GUT = ("name: newsletter-daily\nenv:\n  NEWSLETTER_WORKER_EXPORT_KEY: secret\n"
+              "  NEWSLETTER_WORKER_WRITE_KEY: separate-secret\n"
               "  RESEND_API_KEY: secret\nrun: --strict-inert\n")
     LC_GUT = "name: newsletter-lifecycle\non: workflow_dispatch\n"
 
@@ -1425,8 +1436,8 @@ def _selftest() -> int:
             # Token ausdrücklich (`mit_token=1`) – ohne ihn liefert der Worker
             # `mit_token: false` und jeder Abmeldelink im Versand wäre leer.
             pruefe(param_g == {"mit_token": "1"}, f"mit_token fehlt: {param_g}")
-            pruefe(base == "https://abos.franksfinanzcheck.de" and key == "key",
-                   "Worker-Basis/Key falsch übergeben")
+            pruefe(base == "https://abos.franksfinanzcheck.de" and key == "write-key",
+                   "Worker-Basis/Schreibschlüssel falsch übergeben")
             return {"abonnenten": abonnten_test, "anzahl": len(abonnten_test),
                     "mit_token": True}
 
@@ -1452,7 +1463,8 @@ def _selftest() -> int:
         _modul.baue_ausgabe = fake_bau
         _modul.qa = types.SimpleNamespace(pruefe=fake_qa_pruefe)
         os.environ["NEWSLETTER_WORKER_BASE"] = "https://abos.franksfinanzcheck.de"
-        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "key"
+        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "read-key"
+        os.environ["NEWSLETTER_WORKER_WRITE_KEY"] = "write-key"
         os.environ["NEWSLETTER_TRANSPORT"] = "dryrun"
         ausgabe_mini = _mini_ausgabe(artikel)
 
@@ -1556,6 +1568,7 @@ def _selftest() -> int:
         _modul.qa = original_qa
         os.environ.pop("NEWSLETTER_WORKER_BASE", None)
         os.environ.pop("NEWSLETTER_WORKER_EXPORT_KEY", None)
+        os.environ.pop("NEWSLETTER_WORKER_WRITE_KEY", None)
         os.environ.pop("NEWSLETTER_TRANSPORT", None)
 
     # F1: Sperre setzt, liest, hebt.
