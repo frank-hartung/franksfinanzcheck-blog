@@ -1802,7 +1802,13 @@ def c23_zustandskanal(script_texts, wflows, root=BLOG_DIR):
     if not re.search(r'cron:\s*"0 20 \* \* \*"', pw):
         out.append(("C23", "produktions-wache.yml hat keinen täglichen Takt mehr – "
                            "der Zustandskanal braucht einen Beleg an jedem Kalendertag."))
-    if "env.LEVEL != 'WARTEND'" not in pw:
+    # 24.10.2026 (#846): Die Stufe wird nicht mehr über GITHUB_ENV weitergereicht
+    # (Text aus redaktionellen Inhalten gehört nicht in Environment-Zeilen),
+    # sondern als Step-Output. Der Vertrag prüft deshalb die BEDEUTUNG – dass
+    # der Melde-Schritt an einer WARTEND-Bedingung hängt – und nicht mehr die
+    # eine historische Schreibweise. Beide Formen sind zulässig; die neuere
+    # (`steps.check.outputs.level`) ist die sicherere.
+    if not re.search(r"if:\s*(?:env\.LEVEL|steps\.check\.outputs\.level)\s*!=\s*'WARTEND'", pw):
         out.append(("C23", "produktions-wache.yml kennt die WARTEND-Frist nicht mehr – "
                            "in den Fallback-Slots (14:10/17:40) darf kein Defizit "
                            "gemeldet werden, die Slots laufen noch."))
