@@ -397,6 +397,21 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
     else:
         proxy = PROXY_UNBEKANNT
 
+    if proxy == PROXY_AKTIV:
+        ds_pfad = WURZEL / "content" / "datenschutz" / "index.md"
+        if ds_pfad.is_file():
+            ds_text = ds_pfad.read_text(encoding="utf-8")
+            if ("kein Proxy von Cloudflare" in ds_text
+                    or "keine Informationen über Seitenaufrufe" in ds_text):
+                b7_hinweis = (
+                    "**Datenschutz-Folge B7 offen:** Der Cloudflare-Proxy ist live "
+                    "aktiv, aber `content/datenschutz/index.md` beschreibt noch den "
+                    "Vor-Proxy-Stand („kein Proxy“ / „keine Informationen über "
+                    "Seitenaufrufe“). Mit `npm run edge:b7:apply` (Runbook B7) "
+                    "angleichen und committen."
+                )
+                warnungen_gesamt.append(b7_hinweis)
+
     if not gemessen:
         klasse = KLASSE_STOERUNG
         code = EXIT_STOERUNG
@@ -444,6 +459,9 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
                           f"({len(gemessen)} von {len(ziele)} Zielen gemessen).")
         if warnungen_gesamt:
             zeilen.append(f"⚠️ {len(warnungen_gesamt)} Hinweise (Härtung, kein Fehler).")
+            for w in warnungen_gesamt:
+                if "Datenschutz-Folge B7 offen" in w:
+                    zeilen.append(f"  - {w}")
 
     schritt = naechster_schritt(klasse, proxy)
     if schritt:

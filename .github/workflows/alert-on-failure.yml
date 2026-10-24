@@ -651,15 +651,15 @@ jobs:
                   : runbookKlasse === 'sicherheit-live'
                     ? [
                         '1. **Zwei unabhängige Live-Prüfungen sind rot:** F-01 (Sicherheits-Header) UND Worker-Zustand (F-02/F-03/F-08). Nur die Header zu reparieren reicht nicht. Die einzelnen Messbefunde stehen als Annotationen und in der Lauf-Zusammenfassung; die bereinigten Berichte liegen im Artefakt `sicherheits-live-nachweis`.',
-                        '2. **F-01:** BEFUND = es wurde gemessen, und etwas fehlt. Ohne aktiven Proxy kann die Header-Regel nicht wirken: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 (beide DNS-Hosts Proxied, SSL Full oder Full (strict), Regel `FF Sicherheits-Header` mit acht Kopfzeilen aus `cloudflare/edge-schutz.md`). Bei STOERUNG nichts an Cloudflare auf Verdacht ändern.',
-                        '3. **Worker:** Die Worker-Annotation nennt die konkrete Abweichung oder STOERUNG. Runbook A3/A4 und D2: Widget UND Prüfung abgleichen, Tagesdeckel prüfen, bei unvollständigem authentifiziertem Betriebsbild den Leseschlüssel und den tatsächlich ausgeführten Worker-Deploy prüfen. Ein grüner Plan mit übersprungenem Deploy ist kein Deploy-Nachweis. Keine Schlüssel veröffentlichen und keinen Bot-Schutz abschalten.',
+                        '2. **F-01:** BEFUND = es wurde gemessen, und etwas fehlt. Ohne aktiven Proxy kann die Header-Regel nicht wirken: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 (beide DNS-Hosts Proxied, SSL Full oder Full (strict), Regel `FF Sicherheits-Header` mit acht Kopfzeilen aus `cloudflare/edge-schutz.md` – per `npm run edge:freigabe:apply`, danach `npm run edge:b7:apply`). Bei STOERUNG nichts an Cloudflare auf Verdacht ändern.',
+                        '3. **Worker:** Die Worker-Annotation nennt die konkrete Abweichung oder STOERUNG (Deploy-Diagnose über `/healthz`-Build-Stempel `bau` und Variable `KV_NAMESPACE_ID_ABO` vs. Zugangs-Diagnose `NEWSLETTER_WORKER_EXPORT_KEY`). Runbook A3/A4 und D2: Widget UND Prüfung abgleichen, Tagesdeckel prüfen, bei unvollständigem authentifiziertem Betriebsbild die Repository-Variable `KV_NAMESPACE_ID_ABO`, den tatsächlich ausgeführten Worker-Deploy und den Leseschlüssel prüfen. Ein grüner Plan mit übersprungenem Deploy ist kein Deploy-Nachweis. Keine Schlüssel veröffentlichen und keinen Bot-Schutz abschalten.',
                         '4. **Abschluss:** Nach den belegten Korrekturen die Sicherheits-Wache auf `main` manuell starten. Nur ein vollständiger erfolgreicher Live-Nachweis schließt diesen Vorgang; ein grüner Offline-/Push-Lauf, fehlender Leseschlüssel oder TEILWEISE genügt nicht.'
                       ]
                   : runbookKlasse === 'sicherheit-worker'
                     ? [
                         '1. **Worker-Zustand (F-02/F-03/F-08):** Dieser Schritt prüft das authentifizierte Betriebsbild, nicht die HTTP-Kopfzeilen des Blogs. Die einzelne Worker-Annotation und die Lauf-Zusammenfassung nennen die Ursache; `worker-live.md/json` im Artefakt `sicherheits-live-nachweis` enthalten keine Abonnentendaten oder Schlüssel.',
                         '2. **BEFUND:** Den belegten Widerspruch beheben: Turnstile-Site-Key und Worker-Secret müssen zusammenpassen (A3); Budget und Schlüsselrollen mit dem Soll abgleichen (A4/D2 in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`). Kein Secret entfernen, um die Prüfung grün zu bekommen.',
-                        '3. **STOERUNG:** Fehlender/abgelehnter Leseschlüssel, öffentliche/minimale oder veraltete /healthz-Antwort und Netzstörung sind ausdrücklich NICHT geprüft, kein belegter Sicherheitsbefund. Zugang bzw. tatsächlichen Worker-Deploy anhand der Annotation prüfen, nicht GROQ/GEMINI und nicht die Header-Regel.',
+                        '3. **STOERUNG:** Fehlender/abgelehnter Leseschlüssel, öffentliche/minimale oder veraltete /healthz-Antwort und Netzstörung sind ausdrücklich NICHT geprüft, kein belegter Sicherheitsbefund. Die Deploy-/Zugangs-Annotation unterscheidet anhand von `bau` und `KV_NAMESPACE_ID_ABO` deterministisch zwischen übersprungenem/altem Worker-Deploy und falschem Leseschlüssel – nicht GROQ/GEMINI und nicht die Header-Regel.',
                         '4. **WACHE-FEHLER:** Fehlender/kaputter Bericht oder widersprüchlicher Exit-Code bedeutet eine defekte Prüfung. Diese reparieren; keine Worker-Einstellung auf Verdacht ändern.',
                         '5. Danach die Sicherheits-Wache auf `main` mit Live-Messung starten; nur ihr vollständiger erfolgreicher Live-Nachweis schließt die Meldung.'
                       ]
@@ -680,9 +680,9 @@ jobs:
                       ]
                     : runbookKlasse === 'sicherheit-wache'
                       ? [
-                          '1. **Einordnung:** Die Sicherheits-Wache prüft das Repository gegen die Befunde F-01 bis F-10 (`SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`). Rot heißt: eine Wache hat angeschlagen – kein Schlüssel- und kein Kapazitätsthema.',
+                          '1. **Einordnung:** Die Sicherheits-Wache prüft das Repository gegen die Befunde F-01 bis F-10 (`SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`) sowie die gepinnten Abhängigkeiten (`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt E). Rot heißt: eine Wache hat angeschlagen – kein Schlüssel- und kein Kapazitätsthema.',
                           '2. Öffne das Log des oben rot markierten Schritts. Jede Wache nennt Fundstelle und Regel, nicht nur „rot".',
-                          '3. Alle vier Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Worker-Betrieb, n8n-Kette – jeweils mit Selbsttest, offline).'
+                          '3. Alle Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Edge-Freigabe, Worker-Betrieb, Deploy-Vorbereitung, n8n-Kette und Abhängigkeits-Pins – jeweils mit Selbsttest, offline; Online-Advisory-Audit: `npm run deps:audit`).'
                         ]
                       : runbookKlasse === 'selbsttest'
                         ? [

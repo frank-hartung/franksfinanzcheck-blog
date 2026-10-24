@@ -5,7 +5,10 @@ import sys
 import unittest
 from pathlib import Path
 
-import yaml
+try:
+    import yaml
+except ImportError:  # pragma: no cover - stdlib-Fallback für reine Offline-Runner
+    yaml = None
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -44,18 +47,26 @@ class WorkflowVertrag(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.text = WORKFLOW.read_text(encoding="utf-8")
-        cls.wf = yaml.safe_load(cls.text)
+        cls.wf = yaml.safe_load(cls.text) if yaml is not None else None
 
     def test_deploy_braucht_environment_freigabe(self):
-        job = self.wf["jobs"]["deploy"]
-        self.assertEqual(job["environment"]["name"], "cloudflare-produktion")
+        if self.wf is not None:
+            job = self.wf["jobs"]["deploy"]
+            self.assertEqual(job["environment"]["name"], "cloudflare-produktion")
+        else:
+            self.assertRegex(self.text, r"environment:\s*\n\s+name:\s*cloudflare-produktion")
 
     def test_minimalrechte_und_keine_persistierten_credentials(self):
-        self.assertEqual(self.wf["permissions"], {"contents": "read"})
-        for job in self.wf["jobs"].values():
-            for schritt in job["steps"]:
-                if str(schritt.get("uses", "")).startswith("actions/checkout@"):
-                    self.assertIs(schritt["with"]["persist-credentials"], False)
+        if self.wf is not None:
+            self.assertEqual(self.wf["permissions"], {"contents": "read"})
+            for job in self.wf["jobs"].values():
+                for schritt in job["steps"]:
+                    if str(schritt.get("uses", "")).startswith("actions/checkout@"):
+                        self.assertIs(schritt["with"]["persist-credentials"], False)
+        else:
+            self.assertRegex(self.text, r"permissions:\s*\n\s+contents:\s*read")
+            self.assertEqual(self.text.count("actions/checkout@"),
+                             self.text.count("persist-credentials: false"))
 
     def test_eigener_deploy_token_nicht_der_workers_ai_token(self):
         self.assertIn("secrets.CF_WORKERS_DEPLOY_TOKEN", self.text)
@@ -66,6 +77,47 @@ class WorkflowVertrag(unittest.TestCase):
         self.assertNotIn("npx wrangler", self.text)
         paket = (ROOT / "tools" / "wrangler" / "package.json").read_text(encoding="utf-8")
         self.assertRegex(paket, r'"wrangler":\s*"\d+\.\d+\.\d+"')
+
+    def test_815_deploy_job_prueft_live_nachweis_nach_wrangler(self):
+        pos_deploy = self.text.find("wrangler deploy")
+        pos_nachweis = self.text.find('worker_deploy_vorbereiten.py --nachweis "$WORKER"')
+        self.assertGreater(pos_deploy, -1)
+        self.assertGreater(pos_nachweis, pos_deploy,
+                           "Nach wrangler deploy muss der Live-Build-Stempel geprüft werden")
+
+
+class KeinScheinGruen815(unittest.TestCase):
+    """WF-E813 / #815: Ein manuell angeforderter Deploy ohne Variable darf nie grün lügen."""
+
+    def test_manueller_deploy_ohne_kv_variable_ist_fail_closed(self):
+        code, bereit, ann, summary = wdv.plan_auswerten(
+            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker"})
+        self.assertEqual(code, 1)
+        self.assertEqual(bereit, [])
+        self.assertTrue(any("::error::" in a and "KV_NAMESPACE_ID_ABO" in a for a in ann))
+        self.assertIn("Tab „Variables“", summary)
+
+    def test_push_ohne_kv_variable_schreibt_sichtbare_warnung_und_summary(self):
+        code, bereit, ann, summary = wdv.plan_auswerten(
+            {"EREIGNIS": "push", "GEAENDERT": "newsletter-worker/src/index.js"})
+        self.assertEqual(code, 0)
+        self.assertEqual(bereit, [])
+        self.assertTrue(any("::warning::" in a and "KV_NAMESPACE_ID_ABO" in a for a in ann))
+        self.assertIn("NICHT deployt", summary)
+
+    def test_newsletter_worker_traegt_build_stempel_und_nachweis_prueft_ihn(self):
+        wrangler = (ROOT / "newsletter-worker" / "wrangler.toml").read_text(encoding="utf-8")
+        m = wdv.BUILD_RE.search(wdv._toml_ohne_kommentare(wrangler))
+        self.assertIsNotNone(m, "BUILD fehlt in newsletter-worker/wrangler.toml")
+        soll = m.group(1)
+        code_ok, text_ok = wdv.deploy_nachweis(
+            "newsletter-worker", holen=lambda: soll, pausen=(), schlaf=lambda _: None)
+        self.assertEqual(code_ok, 0)
+        self.assertIn(soll, text_ok)
+        code_alt, text_alt = wdv.deploy_nachweis(
+            "newsletter-worker", holen=lambda: "alt", pausen=(0.0,), schlaf=lambda _: None)
+        self.assertEqual(code_alt, 1)
+        self.assertIn("fehlgeschlagen", text_alt)
 
 
 if __name__ == "__main__":

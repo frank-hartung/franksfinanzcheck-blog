@@ -67,6 +67,7 @@ function env_mit(kv, extra = {}) {
     GITHUB_REF: 'main',
     THEMEN_IDS: 'strom-sparen,internet-dsl,versicherungen,konto-karten,frugalismus,mietwagen',
     BESTAETIGUNG_TAGE: '14',
+    BUILD: 'ff-newsletter-test',
     EXPORT_KEY,
     ...extra,
   };
@@ -122,6 +123,22 @@ test('healthz: KV erreichbar -> ok und Schlüsselrollen korrekt ausgewiesen', as
   const intern = await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }), env);
   assert.equal(intern.status, 200);
   assert.equal((await intern.json()).schluesselrollen, 'getrennt');
+});
+
+// WF-E813 / #815: Der Build-Stempel ist der Deploy-Nachweis. Er steht in
+// BEIDEN Antworten (öffentlich und authentifiziert), verrät keine Details –
+// und fehlt er, ist der laufende Stand nachweislich alt.
+test('healthz: Build-Stempel belegt öffentlich und intern, welcher Stand läuft', async () => {
+  const kv = kvLeeren();
+  const oeffentlich = await (await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv))).json();
+  assert.equal(oeffentlich.bau, 'ff-newsletter-test');
+  assert.ok(!('budget' in oeffentlich) && !('exporte' in oeffentlich),
+    'der Stempel öffnet keine Betriebsdetails');
+  const intern = await (await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }), env_mit(kv))).json();
+  assert.equal(intern.bau, 'ff-newsletter-test');
+  const ohne = await (await worker.fetch(
+    new Request('http://abos.test/healthz'), env_mit(kv, { BUILD: undefined }))).json();
+  assert.equal(ohne.bau, '', 'ohne BUILD-Variable bleibt das Feld leer, niemals geraten');
 });
 
 // ------------------------------------------------------------------ anmeldung
@@ -1053,7 +1070,7 @@ test('healthz: zeigt Cron-Takte und letzten Dispatch (ohne Adressen/Secrets)', a
   freilass();
   // Oeffentlich: nur lebendig/tot – keine Workflow-Namen, keine Fehlertexte.
   const offen = await (await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv))).json();
-  assert.deepEqual(Object.keys(offen).sort(), ['ok', 'ts']);
+  assert.deepEqual(Object.keys(offen).sort(), ['bau', 'ok', 'ts']);
   const antwort = await worker.fetch(new Request('http://abos.test/healthz', { headers: { 'X-FF-Key': EXPORT_KEY } }), env_mit(kv));
   const daten = await antwort.json();
   assert.deepEqual([...daten.takt.crons].sort(), Object.keys(TAKT).sort());

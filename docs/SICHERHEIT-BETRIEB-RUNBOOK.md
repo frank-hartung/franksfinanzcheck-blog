@@ -1,6 +1,6 @@
 # Sicherheits-Runbook — Einrichtung und belastbare Betriebsnachweise
 
-**Stand:** 19. Oktober 2026 (WF-E813/#809) · **Grundlage:** `SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`
+**Stand:** 24. Oktober 2026 (WF-E813/#815, Highend-Härtung) · **Grundlage:** `SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`
 (Findings F-01 bis F-10, Prüfpunkte P-1 bis P-8)
 
 **Wozu diese Datei:** Quellseitige Schutzmaßnahmen und ihre Regressionstests
@@ -33,15 +33,19 @@ Dashboard-Wegen genügt ein Werkzeug, das die Schritte 1–3 kennt, misst und �
 ausdrücklich auf Zuruf – herstellt:
 
 ```bash
-npm run edge:freigabe          # misst DNS-Proxy, SSL-Modus und Regel A1 gegen die Vorlage
-npm run edge:freigabe:apply    # stellt den Sollstand idempotent her (braucht Token)
+npm run edge:freigabe          # misst DNS-Proxy, SSL-Modus (strict/full) und Regel A1
+npm run edge:freigabe:apply    # stellt den Sollstand idempotent her (ohne TLS-Downgrade!)
+npm run edge:b7:apply          # stellt content/datenschutz/index.md idempotent auf Proxy um
 ```
 
 `scripts/cloudflare_edge_freigabe.py` liest den Sollstand aus der Tabelle in
-`cloudflare/edge-schutz.md` (eine Quelle), misst gegen die Cloudflare-API und
-meldet Exit 0 (im Soll) / 1 (offen, mit genauem nächsten Schritt) / 2 (Werkzeug-
-fehler). Token: `CLOUDFLARE_API_TOKEN` mit `Zone.DNS:Edit`, `Zone.Settings:Edit`,
-`Zone.Transform Rules:Edit` für diese Zone. **Danach zwingend B7.**
+`cloudflare/edge-schutz.md` (eine Quelle), misst gegen die Cloudflare-API (inkl.
+`enabled != false`, Host-Filter und `operation == set`) und meldet Exit 0 (im
+Soll) / 1 (offen, mit genauem nächsten Schritt) / 2 (Werkzeugfehler). Ein
+vorhandenes `Full (strict)` (`strict`) wird akzeptiert und bei `--apply`
+**niemals** auf `Full` herabgestuft (#815). Token: `CLOUDFLARE_API_TOKEN` mit
+`Zone.DNS:Edit`, `Zone.Settings:Edit`, `Zone.Transform Rules:Edit` für diese
+Zone. **Danach zwingend B7 (`npm run edge:b7:apply` + Commit).**
 
 **Schritt 1 — Proxy einschalten:** Cloudflare-Dashboard → Zone
 `franksfinanzcheck.de` → **DNS** → für `franksfinanzcheck.de` und `www` die
@@ -315,6 +319,13 @@ Zusätzlich im Abschnitt „Domain und DNS" den Satz „Cloudflare erhält dabei
 keine Informationen über Seitenaufrufe" streichen — er stimmt mit Proxy nicht
 mehr.
 
+**Mit einem Befehl (seit 24.10.2026, WF-E813 / #815):**
+`npm run edge:b7:apply` wendet genau diese Anpassung idempotent auf
+`content/datenschutz/index.md` an (Abschnitte 2, 3 und 12); `npm run edge:b7`
+prüft den Stand. Zudem warnt `blog_header_gate.py` live automatisch, falls
+`cf-ray` aktiv ist, aber `content/datenschutz/index.md` noch den Vor-Proxy-Text
+trägt.
+
 **Prüfen:** `grep -n "kein Proxy\|keine Informationen über Seitenaufrufe" content/datenschutz/index.md`
 → muss leer sein.
 
@@ -424,9 +435,14 @@ erfolgreicher Offline-Push darf die weiterhin offene Einrichtung nicht erledigen
 | **OK** | Alle verlangten Betriebsfelder wurden gemessen; kein harter Befund | Sichtbare Warnungen beachten. Der Gesamtabschluss braucht zusätzlich F-01 und den vollständigen Live-Nachweis. |
 
 **Vollständiger Health-Vertrag:** `ok` (Boolean), `kv` (`ok`/`fehler`),
-`budget.anmeldung_heute`, `budget.anmeldung_max`, `budget.feedback_max`
-(Ganzzahlen), `turnstile` (`aktiv`/`inaktiv`), `schluesselrollen`
-(`getrennt`/`gemeinsam`) und `exporte` (Liste mit gültigen HTTP-Statuswerten).
+`bau` (Build-Stempel aus `newsletter-worker/wrangler.toml`, auch öffentlich in
+`/healthz`), `budget.anmeldung_heute`, `budget.anmeldung_max`,
+`budget.feedback_max` (Ganzzahlen), `turnstile` (`aktiv`/`wartet`/`inaktiv`),
+`schluesselrollen` (`getrennt`/`gemeinsam`) und `exporte` (Liste mit gültigen
+HTTP-Statuswerten). Anhand von `bau` und der Repository-Variable
+`KV_NAMESPACE_ID_ABO` trennt die Wache seit #815 deterministisch zwischen einem
+übersprungenen/veralteten Worker-Deploy und einem abweichenden Leseschlüssel
+(`NEWSLETTER_WORKER_EXPORT_KEY`).
 Fehlende oder falsch typisierte Werte werden nicht durch Repo-Sollwerte ersetzt.
 Ein geschütztes HTTP-503-JSON mit `ok:false`/`kv:fehler` belegt einen KV-Ausfall;
 eine 503-HTML-Seite dagegen nicht. Transiente Netz-/5xx-/429-Störungen werden
@@ -435,15 +451,19 @@ der Messzugang geht ausschließlich an `https://abos.franksfinanzcheck.de`.
 
 **Falls der Worker-Deploy fehlt/veraltet ist:**
 
-1. Repository-Variable `KV_NAMESPACE_ID_ABO` auf die vorhandene Namespace-ID
-   setzen (32 Hex-Zeichen; keinen neuen Speicher ohne Migrationsplan anlegen).
+1. Repository-Variable `KV_NAMESPACE_ID_ABO` unter **Settings → Secrets and
+   variables → Actions → Tab „Variables“** (ausdrücklich als Repository-Variable,
+   nicht unter *Secrets* und nicht ausschließlich im Environment) auf die
+   vorhandene Namespace-ID setzen (32 Hex-Zeichen; keinen neuen Speicher ohne
+   Migrationsplan anlegen).
 2. Environment `cloudflare-produktion` nach A4 mit Freigabe und Beschränkung
    auf `main` einrichten. `CF_WORKERS_DEPLOY_TOKEN` und `CLOUDFLARE_ACCOUNT_ID`
    dort sicher hinterlegen; keine Werte in Issues/Chat/Reports schreiben.
 3. Actions → **„Cloudflare-Worker deployen“** → `newsletter-worker` von `main`.
-   Der Job **„Deploy newsletter-worker“** muss tatsächlich gelaufen sein.
-   Ein grüner Job „Deploy planen“ mit **übersprungenem Deploy** beweist nichts
-   (so im Lauf `38657279461` vom 14.10.2026).
+   Ein manueller Aufruf (`workflow_dispatch`) schlägt seit #815 fail-closed fehl,
+   falls `KV_NAMESPACE_ID_ABO` fehlt (kein still übersprungener grüner Lauf mehr),
+   und prüft unmittelbar nach `wrangler deploy` live gegen `/healthz`, dass der
+   neue `BUILD`-Stempel aus `newsletter-worker/wrangler.toml` antwortet.
 4. Danach die Sicherheits-Wache von `main` mit Live-Messung starten. Nur das
    vollständige authentifizierte Betriebsbild bestätigt den neuen Stand.
    Site-Key und Turnstile-Secret bleiben in der Reihenfolge aus A3 gekoppelt.

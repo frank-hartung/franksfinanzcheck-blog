@@ -564,7 +564,9 @@ const LIVE_809 = [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: '
 await run('#809-Reproduktion: Header UND Worker rot → beide Handlungswege',
   { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure', jobs: LIVE_809 },
   true, ['<!-- alert-runbook: sicherheit-live -->', 'Zwei unabhängige Live-Prüfungen',
-         'FF Sicherheits-Header', '**Worker:**', 'A3/A4 und D2', 'vollständiger erfolgreicher Live-Nachweis'],
+         'FF Sicherheits-Header', '**Worker:**', 'A3/A4 und D2',
+         'KV_NAMESPACE_ID_ABO', 'edge:freigabe:apply', 'edge:b7:apply',
+         'vollständiger erfolgreicher Live-Nachweis'],
   null, ['ausschließlich HTTP-Kopfzeilen', 'API-Key abgelaufen', 'du musst nichts manuell prüfen']);
 
 await run('#809: nur Worker-Auswertung rot → Worker-Triage, keine Header-Reparatur',

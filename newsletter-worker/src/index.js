@@ -17,7 +17,9 @@
  *   POST /praferenzen    Themenwahl pro Abo (Token + themen[])
  *   GET  /status         Token -> {status, themen} (ohne Adresse!)
  *   GET  /healthz        Lebendigkeits-Pruefung; Details (`takt`) nur mit
- *                        X-FF-Key (oeffentlich nur ok/ts)
+ *                        X-FF-Key (oeffentlich nur ok/ts/bau). `bau` ist der
+ *                        Build-Stempel aus wrangler.toml – er macht den
+ *                        Deploy-NACHWEIS moeglich (WF-E813 / #815).
  *   GET  /export/abonnenten, /export/pending: Leseschluessel im Header.
  *   POST /export/token, /export/kontakt, /export/versuch: getrennter
  *                        Schreibschluessel; Token/E-Mail nur im Request-Body.
@@ -904,6 +906,19 @@ async function feedback_lesen(request, env, url) {
 }
 
 // ---------------------------------------------------------------- Routen
+/**
+ * Build-Stempel (WF-E813 / #815, 24.10.2026): `BUILD` steht in
+ * newsletter-worker/wrangler.toml und wird von /healthz ausgeliefert –
+ * OEFFENTLICH, denn er verraet nichts, aber er belegt, WELCHER Stand live
+ * laeuft. Ohne ihn konnte die Betriebs-Wache „falscher Leseschluessel" und
+ * „veralteter Deploy" nicht unterscheiden; der Befund blieb taeglich bei
+ * „eines von beidem" stehen. Fehlt die Variable, bleibt das Feld leer –
+ * die Wache wertet genau das als „nicht deployt".
+ */
+function build_stempel(env) {
+  return String((env && env.BUILD) || '').trim().slice(0, 64);
+}
+
 async function health(request, env) {
   let kv_ok = false;
   try {
@@ -916,9 +931,10 @@ async function health(request, env) {
   // Schluessel ganz, laeuft eine Worker-Version ohne Cron-Triggers.
   const angebot = request ? request.headers.get('x-ff-key') : '';
   if (!angebot || !await schluessel_pruefen(env, angebot)) {
-    // Oeffentlich nur lebendig/tot – keine Cron-Namen, Workflows, Fehlertexte.
-    return json({ ok: kv_ok, ts: new Date().toISOString() }, kv_ok ? 200 : 503, env,
-      { 'Cache-Control': 'no-store' });
+    // Oeffentlich nur lebendig/tot + Build-Stempel – keine Cron-Namen,
+    // Workflows, Fehlertexte. Der Stempel ist der Deploy-Nachweis.
+    return json({ ok: kv_ok, ts: new Date().toISOString(), bau: build_stempel(env) },
+      kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
   }
   const takt = kv_ok ? await takt_lesen(env) : {};
   // Betriebsbild (F-03/F-08, 15.10.2026): Budgetstand, Turnstile-Zustand und
@@ -932,6 +948,7 @@ async function health(request, env) {
     && leseschluessel !== schreibschluessel);
   return json({
     ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler',
+    bau: build_stempel(env),
     takt: { crons: Object.keys(TAKT), letzte: takt },
     budget: {
       anmeldung_heute: heute,

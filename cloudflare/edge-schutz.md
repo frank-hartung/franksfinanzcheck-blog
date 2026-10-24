@@ -49,11 +49,15 @@ tatsächlich passiert.
 
 **Prüfen:** `curl -sI https://franksfinanzcheck.de/ | grep -Ei 'strict-transport|x-frame|nosniff|content-security'`
 → fünf Zeilen. Automatisch mit Gegenproben: `npm run header:check`.
-**Ein Befehl für die ganze Regel (seit 19.10.2026, WF-E813 / #809):**
-`npm run edge:freigabe` misst DNS-Proxy, SSL-Modus und genau diese acht
-Kopfzeilen gegen die Cloudflare-API; `npm run edge:freigabe:apply` stellt
-sie idempotent her (`scripts/cloudflare_edge_freigabe.py`, Sollstand wird
-aus der Tabelle oben gelesen – eine Quelle).
+**Ein Befehl für die ganze Regel (seit 19.10.2026, gehärtet 24.10.2026 für WF-E813 / #815):**
+`npm run edge:freigabe` misst DNS-Proxy, SSL-Modus (`Full (strict)` bevorzugt,
+`Full` zulässig, niemals `Flexible`) und genau diese acht Kopfzeilen samt
+Aktivierungsstatus und Host-Filter gegen die Cloudflare-API;
+`npm run edge:freigabe:apply` stellt sie idempotent her, ohne ein bestehendes
+`Full (strict)` je herabzustufen (`scripts/cloudflare_edge_freigabe.py`,
+Sollstand wird aus der Tabelle oben gelesen – eine Quelle). Unmittelbar nach dem
+Proxy-Start aktualisiert `npm run edge:b7:apply` idempotent die
+Datenschutzerklärung (Runbook B7).
 
 **Live-Messung mit Klassifikation:** `npm run header:check:live` (bzw. der
 tägliche Job „Live-Messung“ der Sicherheits-Wache). Die Wache liefert vier

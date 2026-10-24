@@ -125,6 +125,33 @@ class Messvertrag(unittest.TestCase):
             with self.subTest(wert=wert):
                 self.assertFalse(nachweis.live_pruefen({**kopf, "ziele": wert}, betrieb)[0])
 
+    def test_815_live_pruefen_nennt_beide_roten_saeulen_und_deckt_worker_wachefehler_auf(self):
+        kopf, betrieb = gute_messungen()
+        kopf_rot = {**kopf, "exit": 1, "klasse": "BEFUND", "fehlend": ["HSTS fehlt"]}
+        worker_stoerung = {**betrieb, "exit": 2, "klasse": "STOERUNG", "gemessen": 0,
+                           "fehlend": [], "stoerung": ["Öffentliche /healthz-Antwort"]}
+        ok, grund = nachweis.live_pruefen(kopf_rot, worker_stoerung)
+        self.assertFalse(ok)
+        self.assertIn("header: BEFUND", grund)
+        self.assertIn("worker: STOERUNG", grund)
+        # Ein kaputtes Worker-JSON darf hinter einem roten Header-Befund nicht verschwinden.
+        ok2, grund2 = nachweis.live_pruefen(kopf_rot, {})
+        self.assertFalse(ok2)
+        self.assertIn("Messklasse", grund2)
+
+    def test_815_frisch_deployter_worker_im_zustand_wartet_erlaubt_live_nachweis(self):
+        kopf, _ = gute_messungen()
+        stand = {"ok": True, "kv": "ok", "turnstile": "wartet", "schluesselrollen": "getrennt",
+                 "bau": worker.repo_stand()["build"],
+                 "budget": {"anmeldung_heute": 1, "anmeldung_max": 100, "feedback_max": 200},
+                 "exporte": []}
+        _, bericht, betrieb = worker.netz_pruefen(
+            "https://abos.franksfinanzcheck.de", "test-only",
+            schreibschluessel="test-write-only", holen=lambda *_: stand, pausen=())
+        betrieb["bericht"] = bericht
+        ok, grund = nachweis.live_pruefen(kopf, betrieb)
+        self.assertTrue(ok, grund)
+
 
 class Auswertung(unittest.TestCase):
     def auswerten(self, daten, code="0", *, json_text=None, markdown=None):

@@ -120,10 +120,18 @@ def auswerten(quelle: str, code: str, datenpfad: str, berichtpfad: str) -> int:
 
 def live_pruefen(header: dict, worker: dict) -> tuple[bool, str]:
     try:
+        # WF-E813 / #815: BEIDE Messdateien immer vollständig validieren, damit
+        # ein F-01-Befund niemals einen kaputten Worker-Nachweis (WACHE-FEHLER)
+        # oder eine gleichzeitige Worker-Störung im Gesamturteil verschluckt.
         for quelle, daten in (("header", header), ("worker", worker)):
             pruefe_messung(daten, quelle, str(daten.get("exit")) if isinstance(daten, dict) else "")
-            if daten["klasse"] != "OK":
-                return False, f"{quelle}: {daten['klasse']} – kein vollständiger Live-Nachweis."
+        offen = [
+            f"{quelle}: {daten['klasse']}"
+            for quelle, daten in (("header", header), ("worker", worker))
+            if daten["klasse"] != "OK"
+        ]
+        if offen:
+            return False, ", ".join(offen) + " – kein vollständiger Live-Nachweis."
         ziele = header.get("ziele")
         if (not isinstance(ziele, list) or len(ziele) != len(ZIELE)
                 or any(not isinstance(ziel, dict) or not isinstance(ziel.get("url"), str)
