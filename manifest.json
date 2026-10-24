@@ -1,0 +1,66 @@
+{
+  "id": "https://franksfinanzcheck.de/",
+  "name": "FranksFinanzcheck",
+  "short_name": "Finanzcheck",
+  "description": "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung.",
+  "start_url": "https://franksfinanzcheck.de/?utm_source=pwa&utm_medium=app",
+  "scope": "https://franksfinanzcheck.de/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0E5A43",
+  "lang": "de-DE",
+  "dir": "ltr",
+  "categories": [
+    "finance",
+    "news",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/images/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/pwa/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Fixkosten-Cockpit",
+      "url": "https://franksfinanzcheck.de/cockpit/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Strom & Gas sparen",
+      "url": "https://franksfinanzcheck.de/pillar/strom-sparen/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Internet & DSL",
+      "url": "https://franksfinanzcheck.de/pillar/internet-dsl/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Versicherungen",
+      "url": "https://franksfinanzcheck.de/pillar/versicherungen/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
+    {
+      "name": "Frugalismus & Budget",
+      "url": "https://franksfinanzcheck.de/pillar/frugalismus/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    }
+  ]
+}

@@ -1,0 +1,841 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Social-Autopilot Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – Mastodon
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:mastodon:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-b
+ eschleunigt:vergleich:2026-09-26@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260926T093000Z
+DTEND:20260926T094500Z
+SUMMARY:Mastodon: DNS-Hack testen: Antwortzeit statt gefühltem Tempo (
+ vergleich)
+DESCRIPTION:Status: veröffentlicht\nWinkel: vergleich\nKanal: Mastodon
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-09-04-digitaler-tu
+ rbo-warum-der-dns-hack-dein-netz-beschleunigt/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-waru
+ m-der-dns-hack-dein-netz-beschleunigt/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reic
+ h:nutzen:2026-09-26@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260926T153000Z
+DTEND:20260926T154500Z
+SUMMARY:Mastodon: Finanzielle Freiheit erreichen: Denke dich reich – G
+ eld (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-fre
+ iheit-erreichen-denke-dich-reich/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit
+ -erreichen-denke-dich-reich/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dei
+ n-zuhause:vergleich:2026-09-27@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260927T053000Z
+DTEND:20260927T054500Z
+SUMMARY:Mastodon: DSL-Tarif für dein Zuhause: Das passende Angebot fin
+ den (vergleich)
+DESCRIPTION:Status: veröffentlicht\nWinkel: vergleich\nKanal: Mastodon
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-08-20-so-findest-d
+ u-den-richtigen-dsl-tarif-fuer-dein-zuhause/
+URL:https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-ri
+ chtigen-dsl-tarif-fuer-dein-zuhause/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die
+ -goldene-jahreszeit:zahl:2026-09-27@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260927T093000Z
+DTEND:20260927T094500Z
+SUMMARY:Mastodon: Sparen im Herbst: Spartipps für die goldene Jahresze
+ it (zahl)
+DESCRIPTION:Status: veröffentlicht\nWinkel: zahl\nKanal: Mastodon\nArt
+ ikel: https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-
+ die-besten-spartipps-fuer-die-goldene-jahreszeit/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die
+ -besten-spartipps-fuer-die-goldene-jahreszeit/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-21-tierkrankenversicherung-hund-katze-kosten:verg
+ leich:2026-09-28@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260928T053000Z
+DTEND:20260928T054500Z
+SUMMARY:Mastodon: Tierkrankenversicherung hund katze kosten (vergleich)
+DESCRIPTION:Status: veröffentlicht\nWinkel: vergleich\nKanal: Mastodon
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-g
+ enug:thread:2026-09-28@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260928T093000Z
+DTEND:20260928T094500Z
+SUMMARY:Mastodon: Finanzieller Puffer: Der Rechenweg in fünf Minuten (
+ thread)
+DESCRIPTION:Status: veröffentlicht\nWinkel: thread\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-pu
+ ffer-wie-viel-notgroschen-ist-genug/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-
+ wie-viel-notgroschen-ist-genug/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst
+ -du-sofort:vergleich:2026-09-29@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260929T053000Z
+DTEND:20260929T054500Z
+SUMMARY:Mastodon: Heizkosten senken: Mit diesen Strategien sparst du s
+ ofort (vergleich)
+DESCRIPTION:Status: veröffentlicht\nWinkel: vergleich\nKanal: Mastodon
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-s
+ enken-mit-diesen-strategien-sparst-du-sofort/
+URL:https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mi
+ t-diesen-strategien-sparst-du-sofort/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag:
+ takeaway:2026-09-29@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260929T093000Z
+DTEND:20260929T094500Z
+SUMMARY:Mastodon: 5 einfache Frugalismus-Tricks für den Alltag: Geld s
+ paren (takeaway)
+DESCRIPTION:Status: veröffentlicht\nWinkel: takeaway\nKanal: Mastodon\
+ nArtikel: https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-fr
+ ugalismus-tricks-fuer-den-alltag/
+URL:https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalism
+ us-tricks-fuer-den-alltag/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spa
+ etsommer-vor:nutzen:2026-09-30@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20260930T053000Z
+DTEND:20260930T054500Z
+SUMMARY:Mastodon: Gasrechnung lesen: Zählerstand\, kWh und Abschlag ei
+ nordnen (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-sen
+ ken-so-bereitest-du-dich-im-spaetsommer-vor/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
+ o-bereitest-du-dich-im-spaetsommer-vor/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hun
+ derte-euro:nutzen:2026-10-01@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261001T053000Z
+DTEND:20261001T054500Z
+SUMMARY:Mastodon: Gasrechnung in 60 Minuten: Ablauf für Tarif und Heiz
+ ung (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-sen
+ ken-spaetsommer-check-spart-hunderte-euro/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
+ paetsommer-check-spart-hunderte-euro/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-
+ wirklich:frage:2026-10-04@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261004T085232Z
+DTEND:20261004T090732Z
+SUMMARY:Mastodon: DSL Hacks: Was brauchst du wirklich? – Schnelles Int
+ ernet (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker
+ -vs-mesh-wlan-was-brauchst-du-wirklich/
+URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
+ mesh-wlan-was-brauchst-du-wirklich/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-som
+ mer-schnaepp:frage:2026-10-04@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261004T153000Z
+DTEND:20261004T154500Z
+SUMMARY:Mastodon: Last Minute Urlaub: So findest du echte Reiseschnäpp
+ chen (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urla
+ ub-so-schnappst-du-dir-das-sommer-schnaepp/
+URL:https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-s
+ o-schnappst-du-dir-das-sommer-schnaepp/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
+ son-richtig:frage:2026-10-05@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261005T053000Z
+DTEND:20261005T054500Z
+SUMMARY:Mastodon: Gasabschlag berechnen: So planst du die Heizsaison r
+ ichtig (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-bere
+ chnen-so-planst-du-die-heizsaison-richtig/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
+ n-so-planst-du-die-heizsaison-richtig/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
+ sl-anschluss:vergleich:2026-10-05@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261005T093000Z
+DTEND:20261005T094500Z
+SUMMARY:Mastodon: Preiswert surfen: DSL\, Kabel oder Glasfaser im Verg
+ leich (vergleich)
+DESCRIPTION:Status: veröffentlicht\nWinkel: vergleich\nKanal: Mastodon
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-su
+ rfen-so-findest-du-den-optimalen-dsl-anschluss/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
+ findest-du-den-optimalen-dsl-anschluss/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
+ die-feiertage:frage:2026-10-06@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261006T053000Z
+DTEND:20261006T054500Z
+SUMMARY:Mastodon: Weihnachten Budget planen: Ohne Schulden durch die F
+ eiertage (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budg
+ et-planen-ohne-schulden-durch-die-feiertage/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
+ lanen-ohne-schulden-durch-die-feiertage/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
+ endert:frage:2026-10-08@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261008T093000Z
+DTEND:20261008T094500Z
+SUMMARY:Mastodon: DSL-Tarif prüfen: Effektivpreis statt Lockpreis (fra
+ ge)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-upd
+ ate-was-sich-jetzt-fuer-dich-aendert/
+URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
+ was-sich-jetzt-fuer-dich-aendert/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so
+ -vermeidest:frage:2026-10-09@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261009T053000Z
+DTEND:20261009T054500Z
+SUMMARY:Mastodon: Büroausstattung steuerlich clever absetzen: So geht'
+ s (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung
+ -steuerlich-clever-absetzen-so-vermeidest/
+URL:https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-ste
+ uerlich-clever-absetzen-so-vermeidest/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit:frage
+ :2026-10-10@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261010T053000Z
+DTEND:20261010T054500Z
+SUMMARY:Mastodon: 7 Gewohnheiten für finanzielle Freiheit: Welche Rout
+ inen (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-f
+ uer-finanzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortv
+ erlust:frage:2026-10-10@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261010T053000Z
+DTEND:20261010T054500Z
+SUMMARY:Mastodon: Campingurlaub planen: Budget für Platz\, Fahrt und A
+ usrüstung (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-20
+ 26-clever-sparen-ohne-komfortverlust/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-campingurlaub-2026-c
+ lever-sparen-ohne-komfortverlust/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-g
+ eld-kostet:mythos:2026-10-12@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261012T153000Z
+DTEND:20261012T154500Z
+SUMMARY:Mastodon: Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel 
+ rechnet (mythos)
+DESCRIPTION:Status: veröffentlicht\nWinkel: mythos\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-we
+ chseln-warum-treue-dich-bares-geld-kostet/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-dsl-anbieter-wechsel
+ n-warum-treue-dich-bares-geld-kostet/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
+ e-verlaengerung:takeaway:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261013T053000Z
+DTEND:20261013T054500Z
+SUMMARY:Mastodon: Handyvertrag kündigen: Enddatum\, Nachweis und Rufnu
+ mmer (takeaway)
+DESCRIPTION:Status: veröffentlicht\nWinkel: takeaway\nKanal: Mastodon\
+ nArtikel: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-
+ kuendigen-raus-aus-der-kostenfalle-verlaengerung/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
+ en-raus-aus-der-kostenfalle-verlaengerung/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordn
+ en:nutzen:2026-10-13@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261013T153000Z
+DTEND:20261013T154500Z
+SUMMARY:Mastodon: Der erste eigene Haushalt: Fixkosten von Anfang an o
+ rdnen (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-
+ haushalt-fixkosten-richtig-ordnen/
+URL:https://franksfinanzcheck.de/posts/2026-10-05-erster-eigener-haush
+ alt-fixkosten-richtig-ordnen/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
+ tzen:2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261014T053000Z
+DTEND:20261014T054500Z
+SUMMARY:Mastodon: Geld abheben im Ausland: Wo die Gebühren wirklich en
+ tstehen (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im
+ -ausland-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspla
+ n:nutzen:2026-10-14@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261014T093000Z
+DTEND:20261014T094500Z
+SUMMARY:Mastodon: Abos und Verträge: Der stille Posten im Haushaltspla
+ n (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertra
+ ege-stiller-posten-haushaltsplan/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-s
+ tiller-posten-haushaltsplan/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nut
+ zen:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261015T053000Z
+DTEND:20261015T054500Z
+SUMMARY:Mastodon: Warmwasser sparen: Die Rechnung hinter – Warmwasserk
+ osten (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-spar
+ en-rechnung-hinter-dem-hahn/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-re
+ chnung-hinter-dem-hahn/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruef
+ en:nutzen:2026-10-15@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261015T093000Z
+DTEND:20261015T094500Z
+SUMMARY:Mastodon: Lastschrift und Dauerauftrag: Was du prüfen solltest
+  (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und
+ -dauerauftrag-abbuchungen-pruefen/
+URL:https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-daue
+ rauftrag-abbuchungen-pruefen/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzae
+ hler-noch-lohnt:nutzen:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261016T053000Z
+DTEND:20261016T054500Z
+SUMMARY:Mastodon: Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler l
+ ohnt (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tari
+ fe-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+URL:https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wa
+ nn-sich-ein-doppeltarifzaehler-noch-lohnt/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-
+ deine-rechte:nutzen:2026-10-16@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261016T093000Z
+DTEND:20261016T094500Z
+SUMMARY:Mastodon: Störung beim Internetanbieter: So sicherst du deine 
+ Rechte (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-i
+ nternetanbieter-so-sicherst-du-deine-rechte/
+URL:https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-intern
+ etanbieter-so-sicherst-du-deine-rechte/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fu
+ ellen:takeaway:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261017T053000Z
+DTEND:20261017T054500Z
+SUMMARY:Mastodon: Urlaub sparen: Budget\, Buchung und Kosten im Blick 
+ (takeaway)
+DESCRIPTION:Status: veröffentlicht\nWinkel: takeaway\nKanal: Mastodon\
+ nArtikel: https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen
+ -7-clevere-wege-deine-kasse-zu-fuellen/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clev
+ ere-wege-deine-kasse-zu-fuellen/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mit
+ nehmen:nutzen:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261017T093000Z
+DTEND:20261017T094500Z
+SUMMARY:Mastodon: Umzug mit Internet: Anschluss und Rufnummer mitnehme
+ n (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-inter
+ net-anschluss-und-rufnummer-mitnehmen/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-umzug-mit-internet-a
+ nschluss-und-rufnummer-mitnehmen/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet:
+ nutzen:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261018T053000Z
+DTEND:20261018T054500Z
+SUMMARY:Mastodon: Grundversorgung Strom und Gas: Was sie leistet (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung
+ -strom-und-gas-was-sie-leistet/
+URL:https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-stro
+ m-und-gas-was-sie-leistet/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt
+ -ist:nutzen:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261018T093000Z
+DTEND:20261018T094500Z
+SUMMARY:Mastodon: Einlagensicherung: Wie viel Guthaben geschützt ist (
+ nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-23-einlagensicheru
+ ng-wie-viel-guthaben-geschuetzt-ist/
+URL:https://franksfinanzcheck.de/posts/2026-09-23-einlagensicherung-wi
+ e-viel-guthaben-geschuetzt-ist/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-v
+ ermeiden:nutzen:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261019T053000Z
+DTEND:20261019T054500Z
+SUMMARY:Mastodon: Zählerstand ablesen und melden: Schätzwerte vermeide
+ n (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ab
+ lesen-und-melden-schaetzwerte-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-09-28-zaehlerstand-ablesen
+ -und-melden-schaetzwerte-vermeiden/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-r
+ echnet:nutzen:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261019T093000Z
+DTEND:20261019T094500Z
+SUMMARY:Mastodon: Großeinkauf und Vorrat: Wann Bevorraten sich rechnet
+  (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-30-grosseinkauf-un
+ d-vorrat-wann-bevorraten-sich-rechnet/
+URL:https://franksfinanzcheck.de/posts/2026-09-30-grosseinkauf-und-vor
+ rat-wann-bevorraten-sich-rechnet/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
+ klich-druecken:nutzen:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261020T053000Z
+DTEND:20261020T054500Z
+SUMMARY:Mastodon: Smart Home: So prüfst du echte Stromersparnis – Smar
+ te (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-
+ geraete-deine-stromrechnung-wirklich-druecken/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-gerae
+ te-deine-stromrechnung-wirklich-druecken/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-gel
+ d-zurueck:nutzen:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261020T093000Z
+DTEND:20261020T094500Z
+SUMMARY:Mastodon: Balkonkraftwerk Förderung: So holst du dir Geld zurü
+ ck (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk
+ -foerderung-so-holst-du-dir-geld-zurueck/
+URL:https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foer
+ derung-so-holst-du-dir-geld-zurueck/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
+ ushalt:nutzen:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261021T053000Z
+DTEND:20261021T054500Z
+SUMMARY:Mastodon: Energiekosten senken: Smarte Helfer für den Haushalt
+  (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-s
+ enken-smarte-helfer-fuer-den-haushalt/
+URL:https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken
+ -smarte-helfer-fuer-den-haushalt/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
+ er-schritt:frage:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261021T053000Z
+DTEND:20261021T054500Z
+SUMMARY:Mastodon: Dein Weg zu geringeren Monatskosten: Schritt für Sch
+ ritt (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geri
+ ngeren-monatskosten-schritt-fuer-schritt/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringer
+ en-monatskosten-schritt-fuer-schritt/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
+ kontrolle:nutzen:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261022T053000Z
+DTEND:20261022T054500Z
+SUMMARY:Mastodon: Haushaltskosten reduzieren: So gewinnst du die Kontr
+ olle (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten
+ -reduzieren-so-gewinnst-du-die-kontrolle/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-redu
+ zieren-so-gewinnst-du-die-kontrolle/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
+ ten-falle:nutzen:2026-10-22@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261022T053000Z
+DTEND:20261022T054500Z
+SUMMARY:Mastodon: VPN Zuhause: Schutzschild oder unnötige Fixkosten-Fa
+ lle? (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-sch
+ utzschild-oder-unnoetige-fixkosten-falle/
+URL:https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzsc
+ hild-oder-unnoetige-fixkosten-falle/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
+ ort-senken:frage:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261023T053000Z
+DTEND:20261023T054500Z
+SUMMARY:Mastodon: Kleine Energiespar‑Tricks: Deine Kosten sofort senke
+ n (frage)
+DESCRIPTION:Status: veröffentlicht\nWinkel: frage\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiesp
+ ar-tricks-die-deine-kosten-sofort-senken/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-t
+ ricks-die-deine-kosten-sofort-senken/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
+ -du-richtig:vergleich:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261023T053000Z
+DTEND:20261023T054500Z
+SUMMARY:Mastodon: Wärmepumpe vs. Gasheizung 2026: So entscheidest du r
+ ichtig (vergleich)
+DESCRIPTION:Status: veröffentlicht\nWinkel: vergleich\nKanal: Mastodon
+ \nArtikel: https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-
+ vs-gasheizung-2026-so-entscheidest-du-richtig/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
+ izung-2026-so-entscheidest-du-richtig/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
+ tie-gas:zitat:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261024T093000Z
+DTEND:20261024T094500Z
+SUMMARY:Mastodon: Sicher heizen: Was sie abdeckt und wie lange sie läu
+ ft (zitat)
+DESCRIPTION:Status: veröffentlicht\nWinkel: zitat\nKanal: Mastodon\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so
+ -schuetzt-dich-eine-preisgarantie-gas/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
+ uetzt-dich-eine-preisgarantie-gas/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
+ -ueberblick:nutzen:2026-10-24@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261024T093705Z
+DTEND:20261024T095205Z
+SUMMARY:Mastodon: Stromkosten senken: Clevere Haushaltsgeräte im Überb
+ lick (nutzen)
+DESCRIPTION:Status: veröffentlicht\nWinkel: nutzen\nKanal: Mastodon\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-sen
+ ken-clevere-haushaltsgeraete-im-ueberblick/
+URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
+ levere-haushaltsgeraete-im-ueberblick/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-
+ 2026:zitat:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261025T063000Z
+DTEND:20261025T064500Z
+SUMMARY:Mastodon: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten s
+ enken (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: Mastodon\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsc
+ he-dein-budget-im-jahr-2026/
+URL:https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beher
+ rsche-dein-budget-im-jahr-2026/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-10-dsl-wechselbonus-sichern:zahl:2026-10-26@frank
+ sfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261026T063000Z
+DTEND:20261026T064500Z
+SUMMARY:Mastodon: DSL-Wechselbonus sichern: So sparst du beim Internet
+ vertrag (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
+ -tarife-fuer-2026:zahl:2026-10-26@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261026T103000Z
+DTEND:20261026T104500Z
+SUMMARY:Mastodon: Preisgarantie Gas: So sicherst du günstige Tarife (z
+ ahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sic
+ herst-du-dir-guenstige-tarife-fuer-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
+ -sicherst-du-dir-guenstige-tarife-fuer-2026/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
+ bieterwechsel:zahl:2026-10-28@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261028T103000Z
+DTEND:20261028T104500Z
+SUMMARY:Mastodon: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Effe
+ ktivpreis (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-pr
+ axis-tipps-fuer-den-anbieterwechsel/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
+ n-praxis-tipps-fuer-den-anbieterwechsel/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verme
+ iden:zahl:2026-10-28@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261028T163000Z
+DTEND:20261028T164500Z
+SUMMARY:Mastodon: Gasrechnung senken: Fehler im Spätsommer vermeiden (
+ zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehle
+ r-im-spaetsommer-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-f
+ ehler-im-spaetsommer-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-
+ ohne-gebuehren:zahl:2026-10-31@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261031T103000Z
+DTEND:20261031T104500Z
+SUMMARY:Mastodon: Kostenloses Girokonto: So findest du ein Konto ohne 
+ Gebühren (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so
+ -findest-du-ein-konto-ohne-gebuehren/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
+ o-so-findest-du-ein-konto-ohne-gebuehren/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
+ net:zahl:2026-11-02@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261102T103000Z
+DTEND:20261102T104500Z
+SUMMARY:Mastodon: DSL-Vergleich: So findest du den günstigsten Interne
+ ttarif (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest
+ -du-guenstigeres-internet/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
+ dest-du-guenstigeres-internet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser
+ -finden:zahl:2026-11-02@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261102T163000Z
+DTEND:20261102T164500Z
+SUMMARY:Mastodon: Energiediebe stoppen: So kannst du Stromfresser find
+ en (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-
+ kannst-du-stromfresser-finden/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
+ -so-kannst-du-stromfresser-finden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:za
+ hl:2026-11-04@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261104T063000Z
+DTEND:20261104T064500Z
+SUMMARY:Mastodon: Haushaltsbuch führen: App\, Excel oder Stift im Verg
+ leich (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-ap
+ p-excel-oder-papier/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
+ n-app-excel-oder-papier/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:za
+ hl:2026-11-04@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261104T103000Z
+DTEND:20261104T104500Z
+SUMMARY:Mastodon: Mietwagen ohne Kautionsfallen: So sparst du im Urlau
+ b (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-ka
+ ution-fallen-urlaub/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohn
+ e-kaution-fallen-urlaub/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
+ us-tipps:zahl:2026-11-07@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261107T103000Z
+DTEND:20261107T104500Z
+SUMMARY:Mastodon: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzic
+ ht (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verz
+ icht-clevere-frugalismus-tipps/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
+ verzicht-clevere-frugalismus-tipps/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:mastodon:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-prei
+ sspruengen:zahl:2026-11-07@franksfinanzcheck.de
+DTSTAMP:20261024T181359Z
+DTSTART:20261107T163000Z
+DTEND:20261107T164500Z
+SUMMARY:Mastodon: Preisgarantie Gas: Was du jetzt tun kannst – Gasprei
+ ssprünge (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Mastodon\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-sch
+ uetzt-du-dich-vor-preisspruengen/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so
+ -schuetzt-du-dich-vor-preisspruengen/
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR
