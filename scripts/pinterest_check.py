@@ -20,10 +20,16 @@ automatisch (deterministisch, mit Sabotage-Schutz).
                         gemessen an der QUELLE (pin_description) und am
                         Build; Regel + Heiler: scripts/pinterest_hashtags.py
   P9  PROFIL-LINK       Pinterest-Profil im Footer/Startseite verlinkt
-  P10 ARTIKEL-REDIRECT  Artikel-URLs sind keine Redirect-Aliase
+  P10 ARTIKEL-REDIRECT  LIVE-Artikel-URLs liefern Inhalt. Eine geparkte URL
+                        (draft: true) darf weiterleiten – aber nur, wenn
+                        data/weiterleitungen.yaml das erklärt (#822)
   P11 AFFILIATE-DICHTE  max. 5 Affiliate-Links pro Artikel
   P12 LINK-ATTRIBUTE   /go/-Links tragen sponsored/nofollow
   P13 GATEWAY-NOINDEX  /go/-Ziele sind noindex
+  P14 PIN-ZIEL          kein Pin zeigt auf Weiterleitung/Entwurf/fehlendes
+                        Ziel – Regel + Heiler: scripts/pinterest_ziele.py
+                        (Retarget nur auf erklärten Live-Nachfolger, sonst
+                        parken; Queue-Einträge werden entfernt)
 
 SELBSTHEILUNG (--fix):
   - P1: robots.txt anlegen/reparieren
@@ -33,6 +39,16 @@ SELBSTHEILUNG (--fix):
         Keywords des Artikels), & und Länge werden sanitized.
   - P4b: Pin-Titel-Duplikate werden ebenfalls geheilt
   - P7: og:image-Maße im opengraph-Partial ergänzen (einmalig)
+  - P10: Überdeckt eine Weiterleitung einen LIVE-Artikel, wird der ungültige
+        SSOT-Eintrag entfernt und die erzeugte Alias-Seite gelöscht (der
+        Live-Artikel gewinnt). Eine verwaiste Alias-Seite ohne SSOT-Eintrag
+        wird entfernt. Fail-closed, wenn der Eintrag kein eindeutiger
+        Einzeiler ist – dann bleibt der Befund stehen (#822).
+  - P14: Pin-Ziele werden gegen die Live-SSOT gemessen. Heilung ohne
+        Erfindung: Weiterleitungen der Regeln A/B (gleichwertiger, geprüfter
+        Live-Nachfolger) werden umgeschrieben; alles andere wird nach
+        data/pinterest_plan_parked.yaml geparkt (kein Content-Verlust),
+        Queue-Einträge entfernt (#822).
   - P8: Hashtag-Fehler werden an der QUELLE geheilt (pin_description im
         Frontmatter): normalisieren (Umlaut-Faltung, Kleinschreibung),
         auf max. 3 kappen, als Block ans Ende stellen – idempotent.
@@ -63,6 +79,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import join_article, doppel_freies_feld  # noqa: E402 – Naht-SSOT (FM-Grenze)
 import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
+import pinterest_ziele as pz  # noqa: E402 – Ziel-SSOT (#822)
 PUBLIC = os.path.join(BLOG_DIR, "public")
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -84,6 +101,10 @@ FIXED = []
 # sondern der Beleg für eine Heilung, die der nächste Build ausliefert.
 SOURCE_FINDINGS = {}   # slug -> [Befunde der Quelle]
 SOURCE_HEALED = {}     # slug -> [Änderungen der Heilung]
+# P10 (#822): geparkte URLs mit ERKLÄRTER Weiterleitung sind Betriebszustand,
+# kein Befund. Sie werden gezählt und im Report genannt – „kein Befund" heißt
+# nicht „nicht gemessen" (C2).
+ERKLAERT = []          # (slug, ziel, regel)
 
 # Der Report ist ein versioniertes Betriebsartefakt. Ein bloßes Zeitstempel-
 # Datum reicht nicht: Ein anderer Bot kann einen alten Report in einen neuen
@@ -109,17 +130,31 @@ SOURCE_HEALED = {}     # slug -> [Änderungen der Heilung]
 # `scripts/pinterest_hashtags.py` – die Datei beeinflusst die Prüfung, also
 # gehört sie in den Fingerabdruck. Ein Schema-3-Report ist damit nicht mehr
 # vergleichbar (er bezeugt einen Quellenstand ohne diese Regel).
-REPORT_SCHEMA_VERSION = 4
+# Schema 5 (24.10.2026, #822): P10 misst jetzt die pin-relevante Menge
+# (Live-Artikel vs. geparkte URL mit erklärter Weiterleitung), und P14 misst
+# die Pin-Ziele von Masterplan und Queue gegen dieselbe Live-SSOT. Der
+# Fingerabdruck kennt deshalb `data/weiterleitungen.yaml`, die Zieldaten und
+# `scripts/pinterest_ziele.py`; ein Schema-4-Report bezeugt einen
+# Quellenstand, der diese beiden Prüfungen nicht enthielt.
+REPORT_SCHEMA_VERSION = 5
 _REPORT_SOURCE_DIRS = ("layouts",)
 _REPORT_SOURCE_POSTS = "content/posts"
 _REPORT_SOURCE_FILES = (
     "hugo.toml",
     ".github/workflows/pinterest-watchdog.yml",
     "scripts/pinterest_check.py",
+    "scripts/pinterest_ziele.py",
+    "scripts/weiterleitungen.py",
     "scripts/pinterest_duplicate_guard.py",
     "scripts/pinterest_hashtags.py",
     "scripts/pinterest_pin_text_sync.py",
     "scripts/pinterest_seo_healer.py",
+    # P10/P14 (#822): Urteil hängt an der Weiterleitungs-SSOT und den Zieldaten.
+    "data/weiterleitungen.yaml",
+    "data/url_entfallen.yaml",
+    "data/pinterest_plan.yaml",
+    "data/pinterest_plan_parked.yaml",
+    "data/pin_queue.yaml",
 )
 _REPORT_SOURCE_ASSETS = ("static/images/pins",)
 
@@ -212,10 +247,12 @@ def report_source_fingerprint(report_text: str) -> str | None:
 
 # ------------------------------------------------------------ Helfer
 
-def _post_slugs():
-    """Echte Artikel-Slugs (keine Redirect-Aliase)."""
+def _post_slugs(root=None):
+    """Echte Artikel-Slugs aus `content/posts` (auch Entwürfe – die Auswahl
+    trifft jede Prüfung selbst; P10 und P14 brauchen den Unterschied)."""
+    root = root or BLOG_DIR
     return sorted(os.path.basename(os.path.dirname(f))
-                  for f in glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")))
+                  for f in glob.glob(os.path.join(root, "content", "posts", "*", "index.md")))
 
 
 def _is_redirect_html(path):
@@ -275,12 +312,12 @@ def _check_domain_verify():
     PROBLEMS.append(("P2", "-", "pinterestVerify fehlt in hugo.toml"))
 
 
-def _is_draft(slug):
+def _is_draft(slug, root=None):
     """PREM-AUDIT 26.08.2026: Draft-Erkennung – Drafts werden mit
     buildDrafts=false NICHT gebaut (bewusst!). Sie dürfen in KEINEM
     HTML-Check als 'Seite nicht gebaut' auffallen (Falschalarm; die
     Kadenz-Wache re-queued sie, sie gehen später wieder live)."""
-    p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
+    p = os.path.join(root or BLOG_DIR, "content", "posts", slug, "index.md")
     try:
         head = open(p, encoding="utf-8").read(4000)
     except OSError:
@@ -609,14 +646,124 @@ def _check_pin_buttons():
                 PROBLEMS.append(("P4", ", ".join(slugs), "DUPLIKAT-Description (Spam-Risiko)"))
 
 
-def _check_no_redirect_on_article():
-    """P10: Artikel-Seiten dürfen KEINEN eigenen Meta-Refresh/Redirect haben"""
-    for slug in _post_slugs():
-        html_path = os.path.join(PUBLIC, "posts", slug, "index.html")
-        if not os.path.exists(html_path):
+def _alias_art(pfad):
+    """'generiert' (weiterleitungen.py), 'fremd' (Handarbeit) oder 'fehlt'."""
+    if not os.path.exists(pfad):
+        return "fehlt"
+    with open(pfad, encoding="utf-8", errors="ignore") as fh:
+        return "generiert" if "ff-weiterleitung" in fh.read(1500) else "fremd"
+
+
+def _entferne_alias(verzeichnis, slug):
+    """Entfernt eine erzeugte Alias-Seite (static/ und public/ getrennt)."""
+    pfad = os.path.join(verzeichnis, "posts", slug, "index.html")
+    art = _alias_art(pfad)
+    if art != "generiert":
+        return art == "fehlt", f"Seite {art} – nicht gelöscht"
+    os.remove(pfad)
+    try:
+        os.rmdir(os.path.dirname(pfad))  # leeres Verzeichnis aufräumen
+    except OSError:
+        pass
+    return True, "erzeugte Alias-Seite gelöscht"
+
+
+def _p10_pruefen(root=None, public=None, fix=False):
+    """P10: Pin-relevante URLs liefern Inhalt, geparkte URLs eine erklärte Weiterleitung.
+
+    Die Regel in Zahlen (#822): `content/posts/<slug>` mit `draft: true` ist
+    GEPARKT – Hugo baut es nicht, eine erklärte Weiterleitung in
+    `data/weiterleitungen.yaml` ist dann die gewollte Auslieferung. Ein
+    LIVE-Artikel dagegen darf niemals von einer Weiterleitung überdeckt
+    werden: Dann ist die Seite für Besucher, für Pinterest und für Google
+    kein Artikel mehr, obwohl das Frontmatter „live“ sagt. Genau diesen
+    Unterschied hat P10 bis zum 24.10.2026 nicht gemacht – es meldete den
+    geparkten Bestand täglich als Defekt, ohne Heiler und ohne Schließpfad.
+    """
+    root, public = root or BLOG_DIR, public or PUBLIC
+    probleme, heilungen, erklaert = [], [], []
+    try:
+        weiter = pz.lade_weiterleitungen(root)
+    except pz.QuellenFehler as exc:
+        return ([("P10", "-", f"Weiterleitungs-Quelle nicht lesbar ({exc}) – "
+                             "Alias-Herkunft nicht nachweisbar")], [], [])
+    for slug in _post_slugs(root):
+        html_path = os.path.join(public, "posts", slug, "index.html")
+        if not os.path.exists(html_path) or not _is_redirect_html(html_path):
             continue
-        if _is_redirect_html(html_path):
-            PROBLEMS.append(("P10", slug, "Artikel-Seite ist ein Meta-Refresh-Alias – nicht direkt pinnen"))
+        pfad = f"/posts/{slug}/"
+        eintrag = weiter.get(pfad)
+        geparkt = _is_draft(slug, root)
+        if geparkt and eintrag:
+            # Betriebszustand: geparkt + erklärte Weiterleitung = Absicht.
+            erklaert.append((slug, eintrag.get("nach") or "?", eintrag.get("regel") or "?"))
+            continue
+        if geparkt:
+            befund = ("geparkte URL liefert eine verwaiste Weiterleitung ohne Eintrag "
+                      "in data/weiterleitungen.yaml")
+        else:
+            befund = ("LIVE-Artikel wird von einer Weiterleitung überdeckt – die URL "
+                      "ist kein Artikel mehr (data/weiterleitungen.yaml)")
+        quelle = os.path.join(root, "static")
+        if _alias_art(os.path.join(quelle, "posts", slug, "index.html")) == "fremd":
+            probleme.append(("P10", slug, f"{befund}; die Seite ist Handarbeit "
+                                          "(kein Generator-Marker) – Handentscheidung"))
+            continue
+        if not fix:
+            probleme.append(("P10", slug, befund))
+            continue
+        if eintrag:
+            ok, meldung = pz.entferne_weiterleitung(root, pfad, fix=True)
+            if not ok:
+                probleme.append(("P10", slug, f"{befund} – {meldung} (fail-closed)"))
+                continue
+        ok_q, _ = _entferne_alias(quelle, slug)
+        _entferne_alias(public, slug)
+        if not ok_q:
+            probleme.append(("P10", slug, f"{befund} – Alias-Seite in static/ nicht "
+                                          "entfernbar (fail-closed)"))
+            continue
+        heilungen.append(("P10", slug, ("LIVE-Artikel gewinnt: SSOT-Eintrag und "
+                                        "Alias-Seite entfernt" if not geparkt else
+                                        "verwaiste Alias-Seite entfernt "
+                                        "(Herkunft nicht in der SSOT)")))
+    return probleme, heilungen, erklaert
+
+
+def _check_no_redirect_on_article():
+    """P10 über den echten Baum (public/ + static/) – Befunde und Heilungen."""
+    probleme, heilungen, erklaert = _p10_pruefen(BLOG_DIR, PUBLIC, DO_FIX)
+    PROBLEMS.extend(probleme)
+    FIXED.extend(heilungen)
+    ERKLAERT.extend(erklaert)
+
+
+def _check_pin_ziele():
+    """P14: Kein Pin zeigt auf eine Weiterleitung, einen Entwurf oder ins Leere.
+
+    Die Ziel-Auflösung ist SSOT (`scripts/pinterest_ziele.py`): live heißt
+    live nach `weiterleitungen.live_urls()`. Geheilt wird ohne Erfindung –
+    Retarget nur bei erklärten Regeln A/B, sonst parken.
+    """
+    try:
+        offen, geheilt = pz.heile(BLOG_DIR, fix=DO_FIX)
+    except (pz.QuellenFehler, OSError) as exc:
+        PROBLEMS.append(("P14", "-", f"Pin-Ziele nicht messbar ({exc}) – fail-closed"))
+        return
+    for h in geheilt:
+        ziel = f"Tag {h['tag']}"
+        if h["aktion"] == "retarget":
+            FIXED.append(("P14", ziel, f"{h['von']} → {h['nach']} (Regel {h['regel']}: "
+                                       "gleichwertiger Live-Beitrag)"))
+        elif h["aktion"] == "queue":
+            FIXED.append(("P14", ziel, f"Queue-Ziel {h['von']} war {h['status']} – "
+                                       "Eintrag entfernt"))
+        else:
+            FIXED.append(("P14", ziel, f"{h['von']} war {h['status']} – Pin geparkt "
+                                       "(data/pinterest_plan_parked.yaml, kein Verlust)"))
+    for o in offen:
+        PROBLEMS.append(("P14", f"Tag {o['tag']}",
+                         f"{o['pfad'] or 'ohne Ziel'} ist {o['status']} – kein Pin-Ziel"))
 
 
 def _check_affiliate_density():
@@ -756,7 +903,80 @@ def _selftest():
     gen_t = _build_unique_pin_title("test-slug", "Test Titel", {"Test Titel"})
     if gen_t == "Test Titel" or len(gen_t) > 100:
         fehler.append("Title-Unique-Generator defekt")
+    # P14 (#822): Die Ziel-Regel hat EINE Quelle – ihr Selbsttest läuft hier mit.
+    for e in pz._selftest():
+        fehler.append(f"P14-Ziel-SSOT: {e}")
+    fehler.extend(_p10_selftest())
     return fehler
+
+
+def _p10_selftest():
+    """P10 (#822): geparkt+erklärt ist kein Befund, live+Alias ist einer.
+
+    Eingefroren wird beides – die Erkennung UND die Heilung –, weil der
+    Unterschied zwischen „Betriebszustand“ und „Defekt“ genau der Fehler war,
+    der #822 fünf Tage lang täglich gemeldet hat.
+    """
+    import tempfile as _tf
+    f = []
+    with _tf.TemporaryDirectory() as tmp:
+        def baue(slug, draft, ssot, alias=True):
+            d = os.path.join(tmp, "content", "posts", slug)
+            os.makedirs(d, exist_ok=True)
+            with open(os.path.join(d, "index.md"), "w", encoding="utf-8") as fh:
+                fh.write("---\ntitle: X\n" + ("draft: true\n" if draft else "") + "---\n")
+            if alias:
+                for basis in (os.path.join(tmp, "static"), os.path.join(tmp, "public")):
+                    p = os.path.join(basis, "posts", slug, "index.html")
+                    os.makedirs(os.path.dirname(p), exist_ok=True)
+                    with open(p, "w", encoding="utf-8") as fh:
+                        fh.write('<meta name="ff-weiterleitung" content="regel-C">'
+                                 '<meta http-equiv="refresh" content="0; url=/x/">')
+            return f"/posts/{slug}/"
+
+        os.makedirs(os.path.join(tmp, "data"))
+        with open(os.path.join(tmp, "data", "url_entfallen.yaml"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("eintraege: []\n")
+        eintraege = ["/posts/geparkt/", "/posts/live/"]
+        with open(os.path.join(tmp, "data", "weiterleitungen.yaml"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("eintraege:\n" + "".join(
+                f'  - {{von: "{e}", nach: "/pillar/x/", regel: "C", grund: "Test"}}\n'
+                for e in eintraege))
+        baue("geparkt", True, True)
+        baue("live", False, True)
+        baue("ohne", True, False)
+        pub = os.path.join(tmp, "public")
+        probleme, heilungen, erklaert = _p10_pruefen(tmp, pub, fix=False)
+        gemeldet = {s for _c, s, _m in probleme}
+        if "geparkt" in gemeldet:
+            f.append("P10: geparkte URL mit erklärter Weiterleitung gilt als Befund "
+                     "(genau #822)")
+        if not {"live", "ohne"} <= gemeldet:
+            f.append(f"P10: echte Defekte nicht erkannt ({gemeldet})")
+        if [e[0] for e in erklaert] != ["geparkt"]:
+            f.append("P10: erklärte Weiterleitung nicht als Betriebszustand belegt")
+        probleme, heilungen, _ = _p10_pruefen(tmp, pub, fix=True)
+        if probleme:
+            f.append(f"P10: Heilung ließ Befunde stehen ({probleme})")
+        if len(heilungen) != 2:
+            f.append(f"P10: {len(heilungen)} Heilungen, erwartet 2")
+        for basis in (os.path.join(tmp, "static"), pub):
+            for slug in ("live", "ohne"):
+                if os.path.exists(os.path.join(basis, "posts", slug, "index.html")):
+                    f.append(f"P10: Alias-Seite {basis}/{slug} nicht entfernt")
+        with open(os.path.join(tmp, "data", "weiterleitungen.yaml"),
+                  encoding="utf-8") as fh:
+            ssot = fh.read()
+        if "/posts/live/" in ssot:
+            f.append("P10: SSOT-Eintrag des LIVE-Artikels nicht entfernt")
+        if "/posts/geparkt/" not in ssot:
+            f.append("P10: geparkte, erklärte Weiterleitung wurde angefasst")
+        probleme, _, erklaert = _p10_pruefen(tmp, pub, fix=True)
+        if probleme:
+            f.append(f"P10: Heilung ist nicht idempotent ({probleme})")
+    return f
 
 
 # ------------------------------------------------------------ main
@@ -785,6 +1005,9 @@ def main():
     if public_ready:
         _check_pin_buttons()
     _check_affiliate_density()
+    # P14 (#822): Pin-Ziele gegen die Live-SSOT – Quelle ist der Masterplan,
+    # kein Build nötig. Läuft VOR P10, damit die geheilten Ziele schon stehen.
+    _check_pin_ziele()
     _check_go_noindex()
     if public_ready:
         _check_no_redirect_on_article()
@@ -826,12 +1049,22 @@ def _report_zeilen(nicht_gemessen=()):
     nennt der Report die übersprungenen HTML-Prüfungen ausdrücklich und
     behauptet nicht „alle Signale im Profi-Bereich".
     """
+    alle = _post_slugs()
+    live = len([s for s in alle if not _is_draft(s)])
     lines = ["# 📌 PINTEREST-REPORT", "",
              f"**Stand:** {datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d %H:%M} UTC · "
              f"Modus: {'FIX' if DO_FIX else 'CHECK'}", "",
-             f"**Report-Schema:** {REPORT_SCHEMA_VERSION} · **Geprüfte Artikel:** {len(_post_slugs())}",
+             f"**Report-Schema:** {REPORT_SCHEMA_VERSION} · **Geprüfte Artikel:** {len(alle)} "
+             f"(live: {live} · geparkt: {len(alle) - live})",
              f"**Quellfingerabdruck:** `{source_fingerprint()}`", "",
              f"Probleme: {len(PROBLEMS)} · Geheilt: {len(FIXED)}", ""]
+    if ERKLAERT:
+        lines += [f"**Geparkte URLs mit erklärter Weiterleitung:** {len(ERKLAERT)} "
+                  f"(`data/weiterleitungen.yaml`, bewusst kein Pin-Ziel – kein "
+                  f"Befund):", ""]
+        for slug, ziel, regel in ERKLAERT:
+            lines.append(f"- `{slug}` → `{ziel}` (Regel {regel}, geparkt)")
+        lines.append("")
     if nicht_gemessen:
         lines += [f"**Nicht gemessen (kein Hugo-Build in `public/`):** "
                   f"{', '.join(nicht_gemessen)} – dieser Report ist dort "

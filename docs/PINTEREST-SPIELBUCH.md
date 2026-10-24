@@ -13,12 +13,16 @@ Weiterleitungskette) als verdächtig einstuft. Wichtige Einordnung:
 | Mögliche Ursache | Wahrscheinlichkeit | Lösung |
 |---|---|---|
 | Domain nach früheren Massen-Pin-Versuchen auf Pinterest-Blocklist | **hoch** | Pinterest-Support/Business-Konto, siehe §4 |
-| Die gepinnte URL leitet selbst weiter (Meta-Refresh) | niedrig | ausgeschlossen – Artikel liefern direkt aus (Check P10) |
+| Die gepinnte URL leitet selbst weiter (Meta-Refresh) | niedrig | ab 24.10.2026 gemessen: Live-Artikel liefern direkt aus (P10), **Pin-Ziele** werden zusätzlich gegen die Live-SSOT geprüft (P14) – ein geparktes Ziel kommt nicht in den Plan |
 | Zu viele Affiliate-Links / unmarkierte Affiliate-Links | niedrig | höchstens 5 je Artikel; sparsame Platzierung bevorzugt, `rel="sponsored nofollow"` (P11/P12) |
 | Blockierte Affiliate-Domain als Pin-Ziel | niedrig | Pins zeigen auf Artikel, nicht auf /go/ |
 
 **Unsere technischen Checks (automatisiert, `pinterest_check.py`):**
-- P10: Artikel-Seiten haben KEINEN eigenen Redirect ✅
+- P10: **Live**-Artikel-Seiten haben KEINEN eigenen Redirect ✅; eine geparkte URL
+  (draft: true) darf weiterleiten, aber nur wenn `data/weiterleitungen.yaml` das
+  erklärt – der Report nennt sie ausdrücklich (#822)
+- P14: kein Pin-Ziel ist eine Weiterleitung, ein Entwurf oder fehlend ✅
+  (Masterplan + Queue; Heilung nur über die SSOT, s. u.)
 - P11: höchstens 5 Affiliate-Links pro Artikel; Überschreitungen werden gemeldet, nicht automatisch aus dem redaktionellen Text entfernt ✅
 - P12: /go/-Links mit `rel="sponsored nofollow"` ✅
 - P13: /go/-Seiten sind noindex (keine dünnen Seiten) ✅
@@ -81,7 +85,9 @@ Nach 48 h Pause + URL-Debugger ohne Klärung:
 ## 5. Automatisierte Überwachung (bereits aktiv)
 
 - **Pinterest-Watchdog** (`.github/workflows/pinterest-watchdog.yml`): täglich
-  05:30 UTC – baut die Site, läuft `pinterest_check.py --fix` (P1–P13),
+  05:30 UTC – baut die Site, läuft `pinterest_check.py --fix` (P1–P14),
+  danach die unabhängige Zielwache `pinterest_link_guard.py` (L1/L2: jedes
+  Pin-Ziel gegen den Bestand),
   committet PINTEREST-REPORT.md, öffnet bei Problemen ein Issue (Label `pinterest`)
   und schließt es beim ersten grünen Lauf (Exit 0).
 - **Lokal:** `python3 scripts/pinterest_check.py` (Check) / `--fix` (Selbstheilung)
@@ -94,10 +100,20 @@ Nach 48 h Pause + URL-Debugger ohne Klärung:
   mit fünf Tags macht den Vertrag rot, bevor ein Issue entsteht. Beweise:
   `python3 scripts/pinterest_hashtags.py --selftest|--wirkungsprobe` ·
   `python3 -m unittest scripts.tests.test_pinterest_hashtags`.
+- **Pin-Ziele (P14, seit #822):** Die Frage „ist dieses Ziel noch ein
+  Artikel?“ beantwortet EINE Quelle: `scripts/pinterest_ziele.py` – über
+  `weiterleitungen.live_urls()`, also dieselbe Live-Definition wie
+  `url_wache.py`. Geheilt wird ohne Erfindung: Erklärt die SSOT einen
+  gleichwertigen Live-Nachfolger (Regel A/B), wird der Pin umgeschrieben;
+  sonst wandert er nach `data/pinterest_plan_parked.yaml` (kein
+  Content-Verlust, wartet auf seinen eigenen Artikel). Queue-Einträge werden
+  entfernt. Beweise: `python3 scripts/pinterest_ziele.py --selftest` ·
+  `python3 -m unittest scripts.tests.test_pinterest_ziele`.
 - **Report-Provenienz:** `PINTEREST-REPORT.md` enthält ab Schema 2 einen
-  Quellfingerabdruck (Schema 4 seit #729, inklusive der Hashtag-Regel). Der
-  Bot-Watchdog verwirft alte oder ohne Nachweis übernommene Reports, statt
-  daraus einen Phantom-Alarm zu erzeugen (Fix für Issue #390).
+  Quellfingerabdruck (Schema 5 seit #822, inklusive Hashtag-Regel,
+  Weiterleitungs-SSOT, Masterplan/Queue und Zielwache). Der Bot-Watchdog
+  verwirft alte oder ohne Nachweis übernommene Reports, statt daraus einen
+  Phantom-Alarm zu erzeugen (Fix für Issue #390).
 
 ---
 
@@ -114,8 +130,8 @@ es nicht gibt, ist selbst ein Befund – deshalb steht hier, was tatsächlich l�
 
 | Signal | Wo es heute geprüft wird |
 |---|---|
-| T1 Pin-Ziel = Artikel-URL (nie /go/, nie Shortener) | `pinterest_check.py` P10 (Artikel-URLs ohne Redirect-Alias) + Pin-Button-Layout |
-| T2 Kein Meta-Refresh/JS-Redirect auf Artikeln | `pinterest_check.py` P10 |
+| T1 Pin-Ziel = Artikel-URL (nie /go/, nie Shortener) | `pinterest_check.py` P14 (Ziel gegen Live-SSOT) + `pinterest_link_guard.py` L1–L5 + Pin-Button-Layout |
+| T2 Kein Meta-Refresh/JS-Redirect auf Artikeln | `pinterest_check.py` P10 (nur LIVE-Artikel; geparkt + erklärt ist Betriebszustand) + P14 |
 | T3 max. 5 Affiliate-Links, nur /go/ + sponsored | `pinterest_check.py` P11 (Dichte) + P12 (Attribute) |
 | T4 Werbekennzeichnung (`*Werbung \|`) | `pinterest_check.py` P4/P8, `spam_guard.py` B8 |
 | T7 Cover 2:3 + pin_title/pin_description | `pinterest_check.py` P4, P4b, P5, P7 |

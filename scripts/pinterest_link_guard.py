@@ -210,6 +210,12 @@ def main() -> int:
         for e in st:
             print(f"   {e}")
         return 2
+    if "--selftest" in sys.argv:
+        # C6 (#822): Die Wache steht jetzt im vertraglichen Minimum – dann muss
+        # `--selftest` NUR den Selbsttest fahren (und nicht nebenbei den
+        # Bestand messen und den Report schreiben).
+        print("✅ Pinterest-Link-Guard-Selbsttest ok")
+        return 0
 
     # -- Sammle alle zu prüfenden URLs --
     urls: list[tuple[str, str]] = []  # (url, quelle)
