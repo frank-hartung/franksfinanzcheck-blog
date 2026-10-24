@@ -108,11 +108,11 @@
     "letzter_versuch": "2026-09-29"
   },
   "Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-10-23",
-    "sperre_bis": "2026-10-24"
+    "fehler": 2,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 1131 Wörter / 8354 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Lesbarkeit: Flesch 50.2 < 60 (hartes Publish-Kriterium R6/#585) – kürzere Sätz",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-24",
+    "sperre_bis": "2026-10-27"
   },
   "E-Auto laden: So senkst du deine Stromkosten": {
     "abgleich_fehler": 2,
