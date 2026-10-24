@@ -1,5 +1,18 @@
 {
   "stand": "2026-10-23T10:01:50Z",
+  "stand": "2026-10-22T10:09:09Z",
+  "quelle": "google-search-console-api (Dienstkonto, nur lesen)",
+  "site": "sc-domain:franksfinanzcheck.de",
+  "zeitraum": {
+    "von": "2026-07-22",
+    "bis": "2026-10-19"
+  "stand": "2026-10-21T10:06:23Z",
+  "quelle": "google-search-console-api (Dienstkonto, nur lesen)",
+  "site": "sc-domain:franksfinanzcheck.de",
+  "zeitraum": {
+    "von": "2026-07-21",
+    "bis": "2026-10-18"
+  "stand": "2026-10-20T10:01:45Z",
   "quelle": "google-search-console-api (Dienstkonto, nur lesen)",
   "site": "sc-domain:franksfinanzcheck.de",
   "zeitraum": {
@@ -11,5 +24,11 @@
   "datenschutz": "nur aggregierte Kennzahlen je Tag, Seite oder Suchbegriff; keine Nutzerkennungen",
   "tage_neu": 31,
   "tage_gesamt": 31,
+  "tage_neu": 30,
+  "tage_gesamt": 30,
+  "tage_neu": 29,
+  "tage_gesamt": 29,
+  "tage_neu": 28,
+  "tage_gesamt": 28,
   "klicks_zeitraum": 0
 }

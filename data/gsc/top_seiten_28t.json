@@ -19,6 +19,12 @@
     "impressions": 8,
     "ctr": 0.0,
     "position": 11.38
+    "impressions": 4,
+    "ctr": 0.0,
+    "position": 7.25
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 11.38
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/",
@@ -40,6 +46,20 @@
     "impressions": 4,
     "ctr": 0.0,
     "position": 81.25
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/pillar/internet-dsl/",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 6.5
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/pillar/konto-karten/",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 71.0
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/versicherungen/",
@@ -138,6 +158,16 @@
     "impressions": 9,
     "ctr": 0.0,
     "position": 16.89
+    "impressions": 10,
+    "ctr": 0.0,
+    "position": 21.6
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/tags/frugalismus-tipps/",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 57.0
   },
   {
     "seite": "https://franksfinanzcheck.de/tags/haushaltsbuch/",

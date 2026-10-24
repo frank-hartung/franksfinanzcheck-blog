@@ -1,9 +1,9 @@
 ---
 title: "Stromkosten senken: Clevere Haushaltsgeräte im Überblick"
 description: Entdecke, wie du mit energieeffizienten Geräten deine Stromkosten dauerhaft reduzierst – praxisnah und ohne Fachchinesisch.
-date: 2026-10-23T08:52:22Z
-draft: true
-reserve: true
+date: 2026-10-23T12:49:18Z
+draft: false
+reserve_published: 2026-10-23
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["Stromkosten senken"]

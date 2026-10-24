@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-23T10:01:03Z",
-  "modus": "live",
-  "commit": "25c8783c21c0398233450a3d54d79120120808d3",
+  "generated_at": "2026-10-24T11:11:32Z",
+  "modus": "kandidaten",
+  "commit": "e4bb999f37e7f76e6a337b4a9ce81f8299a0244e",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "a698732c8582e60b1a3acf8e375f4915fae0466a8e1406ea1ff9a863f090f3ef",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "86e69f13b360c2ec53d6cc50ffe3bf1a7d37764465ab7e3a9f81e22b0a8724ad",
+      "sha256": "18e34d0afa3f37b9f6c65b1fc6b554fe599d6cb70f72c9497accebe6231a6993",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1109,12 +1109,12 @@
       "naechste_pruefung": "2026-11-06",
       "siegel_drift": "unverändert"
     },
-    "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "48e92f6ae487da72aaadc6cdb402f284aafaeefb4514e437839603a04cb07986",
-      "urteil": "warnung",
+    "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+      "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1123,7 +1123,7 @@
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-14",
+      "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert"
     }
   }
