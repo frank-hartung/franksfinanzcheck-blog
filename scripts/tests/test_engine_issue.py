@@ -338,9 +338,12 @@ class KadenzDurchAlleTage(unittest.TestCase):
                       "Ruhetagen unbesetzt (#608)")
         self.assertRegex(text, r'cron:\s*"0 20 \* \* \*"',
                          "Der Beleg braucht einen täglichen Takt, nicht Mo/Mi/Fr")
-        self.assertIn("env.LEVEL != 'WARTEND'", text,
-                      "In der Fallback-Frist (WARTEND) darf nicht alarmiert "
-                      "werden – die Slots laufen noch")
+        # 24.10.2026 (#846): Die Stufe kommt nicht mehr über GITHUB_ENV,
+        # sondern als Step-Output. Geprüft wird die BEDEUTUNG – der Melde-
+        # Schritt hängt an einer WARTEND-Bedingung –, nicht die Schreibweise.
+        self.assertRegex(text, r"if:\s*(?:env\.LEVEL|steps\.check\.outputs\.level)\s*!=\s*'WARTEND'",
+                         "In der Fallback-Frist (WARTEND) darf nicht alarmiert "
+                         "werden – die Slots laufen noch")
 
     def test_kadenz_endkontrolle_belegt_vor_der_klassifikation(self):
         text = self._workflow("kadenz-endkontrolle.yml")
