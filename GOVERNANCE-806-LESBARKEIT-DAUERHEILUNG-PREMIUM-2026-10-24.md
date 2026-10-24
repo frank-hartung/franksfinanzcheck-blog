@@ -57,7 +57,7 @@ Dieser Bericht ersetzt `GOVERNANCE-806-ABSCHLUSS-LESBARKEIT-2026-10-22.md`. Jene
 | `poppy_repurpose.py --selftest` | ✅ |
 | `python3 -m unittest scripts.tests.test_lesbarkeit_schreiber` | ✅ **9 / 9** |
 | `python3 -m unittest scripts.tests.test_news_writer_lesbarkeit` | ✅ **6 / 6** |
-| `python3 -m unittest discover -s scripts/tests` | ✅ **590 / 590** Tests grün |
+| `python3 -m unittest discover -s scripts/tests` | ✅ **3558 Tests**, 0 Fehlschläge; 12 Fehler stammen aus `test_faktenfrische_763` (der Artikel wurde umbenannt) und `test_newsletter_digest` (fehlende getrennte Schlüsselrollen) – auf dem Basisstand **identisch**, ohne Bezug zu dieser Änderung |
 | `governance_contract.py --selftest` | ✅ **C1–C42** mit Kunstbefunden (Sabotage-Proben a–e für C41, drei für C42) |
 | `governance_contract.py --quick --md docs/GOVERNANCE-KONTRAKT.md` | ✅ **alle 40 Regeln erfüllt** (C24/C31 gehören anderen Verträgen) |
 | `governance_contract.py` (Voll-Audit) | ✅ **40 Regeln**, jede in beide Richtungen geprüft |
@@ -75,6 +75,7 @@ Dieser Bericht ersetzt `GOVERNANCE-806-ABSCHLUSS-LESBARKEIT-2026-10-22.md`. Jene
 - **Der Report im Issue-Body ist ein Snapshot.** Die beiden Zeilen „Datenlage offen“ stammen vom 19.10.2026 und beschreiben keinen heutigen Zustand: Die Schritte, die sie erzeugt haben, gibt es nicht mehr. Wer einen Report liest, prüft Laufdatum und Fingerabdruck – nicht die Zeile von damals.
 - **Der Rollenlauf mit Modellen bleibt CI-Sache.** Die KI-Pfade der Rolle „Claude“ brauchen `GROQ_API_KEY`/`GEMINI_API_KEY`; lokal geprüft sind sie über die Attrappen-Proben des Heiler-Selbsttests und die neuen Regressionstests der Schreiber-Garantie.
 - **Die harte Restlücke der Heilung bleibt ehrlich benannt.** Reicht die deterministische Stufe A nicht, meldet der Schreiber das und übergibt an `lesbarkeit_heiler.py --entwuerfe` (täglich in der Content-Engine). Ein Artikel, der dort liegen bleibt, ist kein Systemfehler, sondern eine redaktionelle Aufgabe – er steht dann aber **nicht** mehr still.
+- **Zwei Testmodule sind unabhängig von dieser Arbeit rot.** `test_faktenfrische_763` erwartet einen Artikel unter einem older Namen (`2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`), der im Bestand unter `2026-10-24-…` liegt; `test_newsletter_digest` braucht die getrennten Schlüsselrollen des Workers, die nur in CI gesetzt sind. Beide Fehler treten auf dem Basisstand **identisch** auf – sie sind kein Befund aus #806, gehören aber zu den offenen Enden des Hauses.
 - **Der wöchentliche Governance-Lauf wurde nicht von hier ausgelöst.** Ein manueller Dispatch des Premium-Governance-Workflows auf dem Session-Branch wird von GitHub mit HTTP 403 („Resource not accessible by integration“) abgewiesen. Die Belege oben sind deshalb lokal und reproduzierbar; der nächste reguläre Wochenlauf bestätigt den Stand am Issue.
 
 ---
