@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 24.10.2026 11:38 (Europe/Berlin)  
+> Automatisch aktualisiert: 24.10.2026 16:38 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,12 +12,7 @@
 
 ## Kommende Beiträge
 
-### Sa, 24. Oktober 2026
-- **11:30** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _zitat_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 ### So, 25. Oktober 2026
-- **07:30** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Mo, 26. Oktober 2026
@@ -51,6 +46,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 24.10.2026 16:38 · Sicher heizen: Was sie abdeckt und wie lange sie läuft → https://mastodon.social/@FranksFinanzcheck/117496395618697602
 - ✅ 24.10.2026 11:37 · Stromkosten senken: Clevere Haushaltsgeräte im Überblick → https://mastodon.social/@FranksFinanzcheck/117495210407092416
 - ✅ 23.10.2026 17:46 · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig → https://mastodon.social/@FranksFinanzcheck/117491000820019813
 - ✅ 23.10.2026 12:12 · Kleine Energiespar‑Tricks: Deine Kosten sofort senken → https://mastodon.social/@FranksFinanzcheck/117489686600605060
@@ -60,7 +56,6 @@
 - ✅ 21.10.2026 12:17 · Energiekosten senken: Smarte Helfer für den Haushalt → https://mastodon.social/@FranksFinanzcheck/117478382629994026
 - ✅ 20.10.2026 17:40 · Balkonkraftwerk Förderung: So holst du dir Geld zurück → https://mastodon.social/@FranksFinanzcheck/117473993182890841
 - ✅ 20.10.2026 12:09 · Smart Home: So prüfst du echte Stromersparnis → https://mastodon.social/@FranksFinanzcheck/117472689432509536
-- ✅ 19.10.2026 19:34 · Großeinkauf und Vorrat: Wann Bevorraten sich rechnet → https://mastodon.social/@FranksFinanzcheck/117468774583193688
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
