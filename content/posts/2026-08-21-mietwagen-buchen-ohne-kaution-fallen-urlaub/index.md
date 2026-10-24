@@ -49,7 +49,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Was ist die Mietwagen-Kaution überhaupt?
 
@@ -171,7 +171,7 @@ Am günstigsten ist die Buchung, die schnell geht. Die Rückgabe dauert 12 Minut
 
 ![Gliederung des Beitrags: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ – 5 Stationen von „Was ist die Mietwagen-Kaution überhaupt?“ bis „Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich“ (eigene Darstellung).*
 
 ## Bonus: Nebenkosten, die oft vergessen werden
 

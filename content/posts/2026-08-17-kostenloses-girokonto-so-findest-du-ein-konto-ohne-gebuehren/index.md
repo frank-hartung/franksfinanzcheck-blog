@@ -54,7 +54,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Kostenloses Girokonto: So findest du ein Konto ohne Gebühren“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Das Wichtigste in Kürze
 
@@ -179,7 +179,7 @@ Lass dein altes Konto noch zwei bis drei Monate offen. So siehst du, ob auch der
 
 ![Gliederung des Beitrags: Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Kostenloses Girokonto: So findest du ein Konto ohne Gebühren“ – 5 Stationen von „Was ein Girokonto wirklich teuer macht“ bis „Girocard oder Debitkarte – was brauchst du wirklich?“ (eigene Darstellung).*
 
 ## Welche Extras ein gutes Konto 2026 haben darf
 

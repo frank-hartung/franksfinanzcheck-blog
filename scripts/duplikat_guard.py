@@ -52,6 +52,18 @@ HISTORY = ROOT / "data" / "duplikat_history.jsonl"
 if str(Path(__file__).resolve().parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+# Die Navigations-SSOT (#824) liegt bewusst als Schwestermodul daneben: sie
+# ist die EINE Definition davon, was ein interner Verweis ist – dieselbe, die
+# `check_uniqueness.clean_body()` benutzt. Zwei Definitionen wären zwei
+# Messregeln; genau daran sind #676, #714 und #766 gescheitert.
+try:
+    import template_boilerplate as _tb  # noqa: PLC0415
+except Exception as _exc:  # noqa: BLE001 – Lücke wird unten laut gemeldet
+    _tb = None
+    _TB_FEHLER = f"template_boilerplate nicht importierbar: {_exc}"
+else:
+    _TB_FEHLER = ""
+
 DO_FIX = "--fix" in sys.argv
 AS_JSON = "--json" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
@@ -238,6 +250,11 @@ def haus_template_luecken() -> list:
         _wert, grund = _ssot_wert(modul, attribut)
         if grund:
             luecken.append(f"{modul}.{attribut}: {grund}")
+    # Seit #824 ist `template_boilerplate` die zweite Pflichtquelle: ohne sie
+    # fehlt die Navigations-Ausnahme, und alle Rechner-Link-Blöcke des
+    # Bestands werden wieder als Duplikat gemessen (25 blockierte Artikel).
+    if _TB_FEHLER:
+        luecken.append(_TB_FEHLER)
     return luecken
 
 
@@ -362,6 +379,32 @@ def ist_haus_cta(text: str) -> bool:
     return REST_SCHMUCK_RE.sub("", rest) == ""
 
 
+# Bildzeile (`![Alt](datei.svg)`) oder Bildunterschrift (`*Abbildung: …*`).
+# Der Generator schreibt beides; beide sind Figuren-Metadaten und kein
+# Fließtext-Absatz. Über Artikel hinweg werden sie weiter gemessen (#824) –
+# nur die INNERE Premium-Anhang-Regel D6 zählt sie nicht als „wiederholten
+# Text“, weil eine Gliederungs-Unterschrift die H2-Zeilen des eigenen
+# Beitrags zwangsläufig nennt.
+ABBILDUNG_RE = re.compile(r"^(?:!\[[^\]]*\]\([^)]*\)|\*Abbildung:[^*]*\*)$")
+
+
+def ist_abbildung(text: str) -> bool:
+    """Bildzeile oder Bildunterschrift (Figuren-Metadaten, kein Absatz)."""
+    return bool(ABBILDUNG_RE.match((text or "").strip()))
+
+
+def ist_navigation(text: str) -> bool:
+    """Block aus internen Verweisen (Rechner-/Pillar-/Lesetipp-Zeile)?
+
+    Delegiert an die SSOT `template_boilerplate.ist_nur_navigation` – dieselbe
+    Definition, die `check_uniqueness` über `strip_internal_link_anchors`
+    benutzt. Ohne die SSOT gibt es KEINE Ausnahme (fail-closed: lieber ein
+    Fehlalarm als ein stiller Freibrief)."""
+    if _tb is None:
+        return False
+    return _tb.ist_nur_navigation(text)
+
+
 def haus_template_grund(text: str) -> str:
     """Warum ein Block ausgenommen ist – Ausnahmen müssen sichtbar sein.
 
@@ -380,6 +423,9 @@ def haus_template_grund(text: str) -> str:
             return f"Haus-Text (`{quelle}`)"
     if ist_haus_cta(text):
         return "Haus-CTA (Bausteine aus affiliate_intent_contract)"
+    if ist_navigation(text):
+        return ("Navigation (interner Link, kein Fließtext – SSOT "
+                "template_boilerplate.ist_nur_navigation, Issue #824)")
     for muster in BOILERPLATE_RE:
         if re.search(muster, t):
             return f"Haus-Formel `{muster}`"
@@ -508,9 +554,17 @@ def check_article(path: Path, articles: list, *, root: Path = ROOT) -> list:
                     finds.append((rel, "D5-SEKTION",
                                   f"Kapitel fast identisch (Ratio {r:.2f}): {s1[:80]}…", 0))
 
-    # D6 (Premium-Anhänge): Blöcke nach dem Marker gegen frühere Blöcke
-    premium_blocks = [b for b in blocks if b[2] and not is_boilerplate(b[0])]
-    early_blocks = [b for b in blocks if not b[2] and not is_boilerplate(b[0])]
+    # D6 (Premium-Anhänge): Blöcke nach dem Marker gegen frühere Blöcke.
+    # Abbildungen samt Unterschrift bleiben hier draußen (#824): Eine
+    # Bildzeile BENENNT per Konstruktion die Abschnitte und den Titel des
+    # eigenen Beitrags – die Shingle-Überlappung mit den H2-Zeilen ist damit
+    # kein „Premium-Anhang, der alten Text wiederholt“, sondern eine
+    # Bildunterschrift. Über Artikel hinweg werden Bildzeilen weiter gemessen
+    # (D3/D4, Zeile oben) – nur diese INNERE Regel ist keine Inhaltsmessung.
+    premium_blocks = [b for b in blocks
+                      if b[2] and not is_boilerplate(b[0]) and not ist_abbildung(b[0])]
+    early_blocks = [b for b in blocks
+                    if not b[2] and not is_boilerplate(b[0]) and not ist_abbildung(b[0])]
     if premium_blocks and early_blocks:
         early_ng = {ng for b in early_blocks for ng in ngrams(b[0], SHINGLE)}
         for text, pos, _ in premium_blocks:
@@ -874,6 +928,58 @@ def run_selftest() -> list:
     if not grund:
         fehler.append("Fall 14 (Lücken-Meldung): eine fehlende SSOT-Konstante "
                       "wurde nicht als Lücke gemeldet")
+
+    # ------------------------------------------------------------
+    # Fälle 15–17: NAVIGATION ≠ ABSATZ (Dauerheilung Issue #824, 24.10.2026)
+    # ------------------------------------------------------------
+    # Der Rechner-Link-Block steht wortgleich in 15 Artikeln: Sein Ankertext
+    # IST der Titel der Zielseite. RD1-duplikate meldete ihn als D3-X, 25
+    # Live-Artikel standen dauerhaft auf „blockiert“, obwohl kein Satz
+    # Fließtext doppelt war. Dieselbe Messung wie #490/#676.
+    rechner_block = ("- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was "
+                     "der Tarif wirklich kostet](../../werkzeuge/"
+                     "effektivpreis-rechner/)")
+    if not is_boilerplate(rechner_block):
+        fehler.append("Fall 15 (#824 Navigation): Rechner-Link-Block wird "
+                      "wieder als Absatz gemessen")
+    grund15 = haus_template_grund(rechner_block)
+    if "template_boilerplate" not in grund15:
+        fehler.append(f"Fall 15 (#824 Begründung): Ausnahme nennt nicht die "
+                      f"Navigations-SSOT („{grund15}“)")
+    # Fall 16: Kein Freibrief – derselbe Link in einem Redaktionssatz bleibt
+    # messbar. Sonst könnte beliebiger Text an einem Link kleben.
+    mit_satz = ("- **Rechner:** [Effektivpreis](../../werkzeuge/"
+                "effektivpreis-rechner/) hilft dir nur, wenn du die "
+                "Grundgebühr über die volle Laufzeit mitrechnest.")
+    if is_boilerplate(mit_satz):
+        fehler.append("Fall 16 (#824 Freibrief): Redaktionssatz mit internem "
+                      "Link wurde als Navigation ausgenommen")
+    # Fall 17: Externe Quellenlinks sind Inhalt (redaktionelle Formulierung),
+    # keine Navigation – auch als reiner Link-Block.
+    extern = ("[Breitbandmessung der Bundesnetzagentur]"
+              "(https://www.bundesnetzagentur.de/DE/Fachthemen/start.html)")
+    if is_boilerplate(extern):
+        fehler.append("Fall 17 (#824 externer Link): Quellenlink wurde als "
+                      "Haus-Template ausgenommen")
+
+    # Fall 18 (#824): Bildzeile und Bildunterschrift sind Figuren-Metadaten.
+    # D6 (Premium-Anhang) darf aus einer Gliederungs-Unterschrift keinen
+    # „wiederholten Text“ machen – sie nennt die H2-Zeilen des eigenen
+    # Beitrags. Über Artikel hinweg bleiben Bildzeilen aber MESSBAR: Genau
+    # die wörtlich gleiche Unterschrift in 20 Artikeln war der Befund.
+    bildzeile = "![Gliederung des Beitrags: Test](abbildung-ablauf.svg)"
+    unterschrift = ("*Abbildung: Gliederung zu „Test“ in 2 Abschnitten – von "
+                    "„Kosten sehen“ bis „Fazit“ (eigene Darstellung).*")
+    if not (ist_abbildung(bildzeile) and ist_abbildung(unterschrift)):
+        fehler.append("Fall 18 (#824 Abbildung): Bildzeile/Unterschrift nicht "
+                      "als Figuren-Metadaten erkannt")
+    if ist_abbildung(redaktion):
+        fehler.append("Fall 18b (#824 Abbildung): Fließtext wurde als "
+                      "Bildzeile eingeordnet")
+    if is_boilerplate(unterschrift):
+        fehler.append("Fall 18c (#824 Abbildung): Bildunterschrift wurde "
+                      "allgemein ausgenommen – über Artikel hinweg muss sie "
+                      "gemessen bleiben")
     return fehler
 
 
@@ -885,9 +991,10 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Duplikat-Selbsttest: 14 Fälle grün (Trennlinien-Muster, "
+        print("✅ Duplikat-Selbsttest: 18 Fälle grün (Trennlinien-Muster, "
               "Index-Drift, Haus-Templates aus der CTA-/News-SSOT #676, "
-              "kein Freibrief für Redaktionssätze, SSOT ohne Import-Kette).")
+              "kein Freibrief für Redaktionssätze, SSOT ohne Import-Kette, "
+              "Navigation ≠ Absatz aus der SSOT #824).")
         return 0
 
     # FAIL-CLOSED VOR JEDER MESSUNG (#676): Die Haus-Template-Ausnahme wird

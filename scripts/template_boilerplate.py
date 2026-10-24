@@ -100,6 +100,63 @@ def strip_internal_link_anchors(text: str) -> str:
 
 
 # ------------------------------------------------------------------
+#  NAVIGATIONS-BLOCK ≠ ABSATZ (Dauerheilung #824, 24.10.2026)
+# ------------------------------------------------------------------
+#  Am 24.10.2026 stand die Release-Scorecard für 25 von 62 Live-Artikeln
+#  auf „blockiert“ – ausschließlich in der Dimension „Redundanz“. Die
+#  Ursache war kein Duplicate Content, sondern die Toolbox am Artikelende:
+#
+#      - **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif
+#        wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
+#
+#  Der Ankertext IST der Titel der Zielseite. Zwei Ratgeber, die denselben
+#  Rechner verlinken – der Zweck eines Rechner-Hubs –, tragen dadurch
+#  zwangsläufig denselben Satz. `check_uniqueness.py` nimmt solche Anker
+#  seit #490 von der Messung aus (`strip_internal_link_anchors`),
+#  `duplikat_guard` maß sie weiter: ZWEI Messungen, zwei Wahrheiten – genau
+#  die Bauart, die #676, #714 und #766 nacheinander geheilt haben.
+#
+#  Deshalb ist die Ausnahme hier definiert – EINMAL, für beide Wachen:
+#  Ein Block ist Navigation, wenn er (a) mindestens einen internen Link
+#  trägt, (b) keinen externen Link enthält (der wäre redaktionelle
+#  Formulierung) und (c) nach dem Entfernen aller internen Links höchstens
+#  `NAVIGATION_REST_MAX_WOERTER` Wörter übrig lässt (Feldetikett wie
+#  „Rechner:“/„Lesetipp:“). Ein einziger eigener Satz hebt die Ausnahme
+#  auf – gemessen wird dann wieder alles (Freibrief-Schutz).
+NAVIGATION_REST_MAX_WOERTER = 3
+
+# Externe Ziele machen aus einem Link-Block redaktionellen Text. `mailto:`
+# und `tel:` zählen mit: eine Kontaktzeile ist Inhalt, keine Navigation.
+EXTERNAL_LINK_RE = re.compile(r"(?:https?://|www\.|mailto:|tel:)", re.I)
+
+
+def navigation_rest(text: str) -> str:
+    """Was von einem Block übrig bleibt, wenn alle internen Links weg sind."""
+    return strip_internal_link_anchors(text or "")
+
+
+def ist_nur_navigation(text: str) -> bool:
+    """True, wenn der Block ausschließlich interne Verweise trägt.
+
+    Bewusst streng (kein Inhalts-Freibrief): ohne internen Link keine
+    Ausnahme, mit externem Link keine Ausnahme, und sobald mehr als
+    `NAVIGATION_REST_MAX_WOERTER` Wörter Prosa übrig bleiben, wird der
+    Block wieder voll gemessen.
+    """
+    text = text or ""
+    if not INTERNAL_LINK_RE.search(text):
+        return False
+    if EXTERNAL_LINK_RE.search(INTERNAL_LINK_RE.sub(" ", text)):
+        return False
+    rest = navigation_rest(text)
+    # Markdown-Schmuck, Aufzählungs- und Aufgaben-Marker sind keine Wörter.
+    rest = re.sub(r"^\s*(?:[-*+]\s+|\[[ xX]\]\s*)", " ", rest, flags=re.M)
+    rest = re.sub(r"[*_`>#|]+", " ", rest)
+    worte = re.findall(r"[A-Za-zÄÖÜäöüß0-9]+", rest)
+    return len(worte) <= NAVIGATION_REST_MAX_WOERTER
+
+
+# ------------------------------------------------------------------
 # HAUS-FORMELN: FORMAT ≠ INHALT (Issue #766, 15.10.2026)
 # ------------------------------------------------------------------
 # Der News-Desk schreibt in JEDEN News-Kompakt-Artikel dieselbe Dateline
@@ -355,6 +412,45 @@ def run_selftest() -> list:
                       f"{haus_formel_luecken()}")
     if strip_house_formulas(ohne_dateline) != ohne_dateline:
         fehler.append("Fall 12: strip_house_formulas ist nicht idempotent")
+
+    # --- Navigations-Blöcke (Issue #824, 24.10.2026) ---------------------
+    # Fall 13: Der Rechner-Link-Block ist Navigation – sein Ankertext IST der
+    # Titel der Zielseite (#490). Er darf nicht als Fließtext-Absatz gelten.
+    rechner_block = ("- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was "
+                     "der Tarif wirklich kostet](../../werkzeuge/"
+                     "effektivpreis-rechner/)")
+    if not ist_nur_navigation(rechner_block):
+        fehler.append("Fall 13: Rechner-Link-Block wurde nicht als Navigation "
+                      "erkannt – zwei Artikel mit demselben Werkzeug teilen "
+                      "sonst zwangsläufig denselben Absatz (#824)")
+    # Fall 14 (Freibrief-Schutz): Derselbe Link IN einem Redaktionssatz ist
+    # Inhalt und bleibt messbar – sonst verschwände beliebiger Text hinter
+    # einem Link.
+    redaktionell = ("- **Rechner:** [Effektivpreis](../../werkzeuge/"
+                    "effektivpreis-rechner/) hilft dir nur, wenn du die "
+                    "Grundgebühr über die volle Laufzeit mitrechnest.")
+    if ist_nur_navigation(redaktionell):
+        fehler.append("Fall 14: Redaktionssatz mit internem Link wurde als "
+                      "Navigation ausgenommen (Freibrief)")
+    # Fall 15: Externe Ziele sind redaktionelle Formulierung – keine
+    # Navigation, auch wenn der Block nur aus einem Link besteht.
+    extern_block = ("[Bundesnetzagentur – Breitbandmessung]"
+                    "(https://www.bundesnetzagentur.de/DE/Fachthemen/start.html)")
+    if ist_nur_navigation(extern_block):
+        fehler.append("Fall 15: externer Quellenlink wurde als Navigation "
+                      "ausgenommen")
+    # Fall 16: Ohne internen Link gibt es keine Ausnahme (leerer Text,
+    # Bildzeile, Fließtext).
+    for harmlos in ("", "*Abbildung: Merkkarte mit den Kernaussagen.*",
+                    "Der Notgroschen ist kein Sparziel, sondern ein Puffer."):
+        if ist_nur_navigation(harmlos):
+            fehler.append(f"Fall 16: harmloser Block als Navigation "
+                          f"ausgenommen: {harmlos[:40]!r}")
+    # Fall 17: Idempotenz – das Entfernen der Verweise ändert beim zweiten
+    # Lauf nichts mehr (sonst wäre die Messung nicht reproduzierbar).
+    einmal = navigation_rest(rechner_block)
+    if navigation_rest(einmal) != einmal:
+        fehler.append("Fall 17: navigation_rest ist nicht idempotent")
 
     return fehler
 

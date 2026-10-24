@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Gaspreis-Erhöhung im Brief: Was du jetzt prüfen und tun kannst](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Preisgarantie Gas: Was du jetzt tun kannst – Gaspreissprünge“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Wenn ein neuer Preis im Brief steht
 
@@ -149,7 +149,7 @@ Notiere deshalb zum Änderungsdatum den Zählerstand und übermittle ihn nach Vo
 
 ![Gliederung des Beitrags: Gaspreis-Erhöhung im Brief: Was du jetzt prüfen und tun kannst](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Preisgarantie Gas: Was du jetzt tun kannst – Gaspreissprünge“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Wechsel ohne Versorgungslücke
 

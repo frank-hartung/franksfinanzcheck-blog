@@ -43,7 +43,7 @@ faktencheck: 2026-10-14
 
 ![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
 
@@ -52,8 +52,6 @@ Kurzfristige Angebote können günstiger sein. Doch ein Preisvorteil ist nicht p
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Der Deutsche Reiseverband definiert Last Minute so: höchstens 14 Tage zwischen Buchung und Abreise. Das ZDF gibt diese Definition wieder. Portale verwenden den Begriff teilweise breiter. Verlasse dich deshalb nicht auf die Überschrift des Angebots. Prüfe Abreise, Leistungen und Vertragsbedingungen ([ZDF-Ratgeber](https://www.zdfheute.de/ratgeber/last-minute-urlaub-angebote-sommer-100.html)).
-
-Flexibilität bei Ziel, Abflugort und Termin kann mehr passende Angebote eröffnen. Sie verspricht aber keinen Rabatt. Für einen fairen Vergleich zählen die Gesamtkosten und identische Leistungen. Dazu gehören Anreise, Gepäck, Unterkunft, Verpflegung, Transfer, Mietwagen und Stornobedingungen.
 
 **Das Wichtigste in Kürze**  
 - **Keine Spargarantie:** Kurzfristige Angebote können günstiger sein, müssen es aber nicht.
@@ -168,11 +166,9 @@ Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Rei
 - [ ] Versicherungsschutz und Ausschlüsse anhand der Vertragsbedingungen geprüft
 - [ ] Buchungsbestätigung und Kontaktdaten gespeichert
 
-Diese Punkte machen den Endpreis nachvollziehbar. Sie garantieren keinen Rabatt, helfen aber, Zusatzkosten und unpassende Bedingungen vor der Zahlung zu erkennen.
-
 ![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das Urlaubsbudget belasten“ (eigene Darstellung).*
 
 ## Kurzer Merksatz vor der Reise
 
@@ -224,17 +220,10 @@ Druck die Bestätigung aus. Speichere sie als PDF. Prüfe noch einmal das Datum.
 
 Und dann? Dann freu dich auf die Reise. Du hast gut verglichen. Du hast fair gebucht. Das ist gutes Reise-Gefühl.
 
-## Fünf Sätze zum Mitnehmen
-
-Vergleichen lohnt sich immer. Der beste Preis ist nicht immer der günstigste. Flexibilität hat einen Wert. Stornobedingungen sind wichtiger als der Rabatt. Und buchen soll Spaß machen, nicht Stress.
-
-## Das Wichtigste auf einen Blick
-
-Setz dir ein Limit. Such mehrere Anbieter. Rechne den Gesamtpreis. Lies die Regeln. Schlaf eine Nacht drüber. Das ist keine Zauberformel. Das ist einfaches Handwerk. Es funktioniert.
-
 ## Wenn du dich unsicher fühlst
 
 Lass es. Gute Reisen buchen sich nicht unter Druck. Wenn der Preis stimmt, aber dein Bauch nein sagt, hör auf ihn. Es gibt immer ein anderes Angebot oder einen anderen Tag. Du entscheidest. Kein Countdown. Kein Pop-up. Kein Verkäufer. Nur du.
+
 ## Kurze Tipps für den Buchungs-Check
 
 Prüfe den Namen. Prüfe das Datum. Prüfe den Flughafen. Ein Tippfehler kann teuer werden. Ein falscher Tag auch. Ein falscher Flughafen auch. Das sind Kleinigkeiten. Sie kosten schnell viel Geld. Nimm dir zehn Sekunden Zeit.
