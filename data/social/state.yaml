@@ -1041,6 +1041,19 @@ history:
     #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
   ref: '117491000820019813'
   ai: false
+- posted_at: '2026-10-24T11:37:05.885580+02:00'
+  channel: mastodon
+  slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
+  title: 'Stromkosten senken: Clevere Haushaltsgeräte im Überblick'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117495210407092416
+  ok: true
+  text: "Spare bis zu 40 % Stromkosten.  \nSparsame Geräte senken in der Beispielrechnung\
+    \ den Verbrauch um bis zu 40 % – Kühlschrank und Waschmaschine machen rund 30 %\
+    \ der Haushaltskosten aus.  \nhttps://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#StromkostenSenken #Haushaltsgeraete #Energieeffizienz"
+  ref: '117495210407092416'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1066,4 +1079,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-23T22:30:21.757493+02:00'
+updated_at: '2026-10-24T11:37:11.734428+02:00'

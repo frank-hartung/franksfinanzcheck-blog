@@ -6,7 +6,7 @@ draft: true
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026"]
+keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026", "Stromanbieter", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Stromanbieter wechseln: Und bis zu 300 Euro sparen"
+pin_description: "*Werbung | Stromanbieter wechseln und bis zu 300 Euro sparen – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten … Mehr Spartipps auf FranksFinanzcheck! #stromanbieter #wechseln #stromvergleich"
+cover:
+  image: "images/covers/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen.jpg"
+  alt: "Stromanbieter wechseln: Und bis zu 300 Euro sparen"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du öffnest den Brief der Post und siehst die neue Abrechnung für deinen Strom. Die Zahl unter dem Strich lässt dich kurz innehalten. Die Kosten sind stark gestiegen, obwohl du deinen Alltag nicht geändert hast. Du hast nicht mehr Licht genutzt und auch nicht mehr geheizt. Trotzdem verlangt die Firma nun viel mehr Geld von dir. Das ist ein Schock für die Kasse im Haushalt. Viele Menschen erleben das gerade in diesen Zeiten. Besonders im Herbst und im Winter gehen die Preise oft nach oben. Doch du bist nicht machtlos gegen diese hohen Kosten. Ein Wechsel der Firma hilft dir sofort und ohne Risiko. Es ist der schnellste Weg zu mehr Geld in deiner Tasche.
