@@ -879,6 +879,12 @@ ist das restlos entfernt (Governance-Report #806).
   – sie zu bereinigen verlangt die menschliche Neu-Signatur (`integrity_guard.py
   --set-current`), die kein Agent ersetzt. Beim nächsten Siegel-Termin
   bereinigen und die Einträge löschen.
+- **Die Wache schreibt ihren Befund nicht in eine lebende Datei zurück.**
+  Seit 24.10.2026 (Issue #806) schwärzt `scripts/fremdmessung_sperre.py` den
+  Namen in den Fundstellen, und der automatisch neu geschriebene
+  Vertrags-Report `docs/GOVERNANCE-KONTRAKT.md` ist erklärte generierte Zone.
+  Sonst erzeugt der Befund die Spur, die er verbietet – und die Zeile
+  „Datenlage offen“ wäre eine Selbstverstärkung ohne Ende.
 
 ## Die Messlatte der Reserve gehört nicht dem Gemessenen (seit 26.09.2026, #393)
 
@@ -1962,6 +1968,71 @@ Aufrufer (Wache, Publish-Gate, Bestand-Gate, CodeQL-Wachen) abstürzte.
 - Tests: `npm run test:affiliate-links` · Szenarien #780 in
   `scripts/tests/sim/alert_scoping_sim.mjs` · Bericht
   `WF-53E2-780-DAUERHEILUNG-PREMIUM-2026-10-16.md`.
+
+## Wer schreibt, misst vor dem Schreiben (DAUERVORGABE, seit #806, 24.10.2026)
+
+Der Governance-Report #806 vom 19.10.2026 nannte zwei Entwürfe unter der
+Publish-Schwelle 60 (Flesch **54,2** und **54,9**) – beide aus der Rolle
+„Claude“. Die Lehre aus #612 und #712 („Wer schreibt, muss messen, was über
+ihn entscheidet“) war nur **einer** Rolle gegeben worden: `news_writer.py`
+bekam 2026 die Sicherung `lesbarkeit_sichern()`, die Hauptproduzenten der
+langen Premium-Artikel (`claude_writer.py`) und die Werkbank-Recycling-Bahn
+(`poppy_repurpose.py`) schrieben ungemessen. Der Ausschuss entstand also im
+Generator und wurde Wochen später von drei Wachen eingesammelt – #712 (12.10.)
+und #806 (19.10.) sind dieselbe Klasse in zwei Wochen.
+
+- **Jede Schreiberbahn misst VOR dem Schreiben.** Eine Bahn, die den Aufruf
+  umgeht, produziert den Befund und wird von C41 als Befund gemeldet.
+- **Eine Hausgarantie für alle Bahnen:** `scripts/lesbarkeit_schreiber.py`
+  misst über die SSOT (`readability_check.NEW_FLESCH_MIN` – importiert, keine
+  zweite Zahl), heilt deterministisch über die Stufe A des **versiegelten**
+  `lesbarkeit_heiler.py` (als Bibliothek, nicht als Zweitzritt) und prüft das
+  Ergebnis am Tor T1–T4 (`verifiziere`). Reicht die Stufe nicht, meldet der
+  Schreiber **ehrlich**: „deterministische Stufe reicht nicht, redaktionelle
+  Nachsorge nötig“ – mit dem Aufrufhinweis (`lesbarkeit_heiler.py --entwuerfe`).
+  Der CTA-/Disclaimer-Tail bleibt außerhalb von Messung und Heilung.
+- **Ein Aufruf, drei Bahnen:** `news_writer.py`, `claude_writer.py` und
+  `poppy_repurpose.py` rufen `sichern()` jeweils **vor** `write_post` und
+  geben den Status in die eigene Ausgabe (Log/Kurier-Report) durch.
+- **Ein neuer Schreiber ruft die Garantie.** Sonst ist der nächste Ausschuss
+  schon programmiert – und fällt dann wieder wochenlang durch die Wache, bis
+  jemand ihn von Hand heilt.
+- **Vertrag statt Vertrauen (C41):** `scripts/governance_contract.py` prüft
+  Modul, SSOT-Bindung, echten Tor-Aufruf, die drei Bahnen samt Aufruf vor
+  `write_post`, den Regressionstest und den Modul-Selbsttest; fünf
+  Sabotage-Proben (a–e) beweisen die Wirkung. Regression:
+  `scripts/tests/test_lesbarkeit_schreiber.py` (9 Tests) und
+  `scripts/tests/test_news_writer_lesbarkeit.py` (6 Tests) –
+  `npm run test:lesbarkeit`.
+
+## Jeder Schritt hat einen lebenden Erzeuger (DAUERVORGABE, seit #806, 24.10.2026)
+
+Der Report #806 führte unter „Datenlagen & Status“ zwei Zeilen mit
+„Datenlage offen“ – aus Gate-Schritten, deren Messquelle es nicht (mehr) gab
+(der Reichweiten-Dienst war am 19.10.2026 restlos entfernt). Ein Schritt ohne
+Erzeuger ist ein Schritt, der **immer** „Datenlage offen“ meldet: er sieht nie,
+wird nie grün und beendet die Meldung nie. Das ist die Report-Form von „Deckung
+ohne Wirkung“.
+
+- **Jeder Report-Schritt braucht einen benannten Erzeuger, dessen Skript
+  existiert.** Schritte ohne Report sind namentliche Ausnahmen
+  (`C42_OHNE_ERZEUGER` in `scripts/governance_contract.py`) – kein stiller
+  Sammelplatz für Schritte, die nichts messen. Der Vertrag prüft die Schritte
+  des Governance-Gates gegen ihre Signaturen: heute 12 Schritte, davon 10 mit
+  Report – alle 10 mit existierendem Skript.
+- **Ein Befund darf nicht seine eigene Spur erzeugen.** Die
+  Fremdmessung-Sperre schwärzt den Namen des entfernten Dienstes in ihren
+  Fundstellen (Pfad, Zeile und Klasse bleiben lesbar), und der Vertrags-Report
+  `docs/GOVERNANCE-KONTRAKT.md` steht als **generierte Zone** in der Sperre:
+  Er wird bei jedem Lauf vollständig neu geschrieben und stammt aus den
+  gescannten Quellen. Ohne diese beiden Regeln trägt der Report die Spur, die
+  er meldet – der Befund „Datenlage offen“ wäre eine Selbstverstärkung, die
+  niemand mehr beenden kann.
+- **Was das für den Report heißt:** Die beiden Zeilen aus dem Issue-Body waren
+  ein **Snapshot vom 19.10.2026**. Sie beschreiben keinen heutigen Zustand –
+  die Schritte, die sie erzeugt haben, gibt es nicht mehr. Wer einen Report
+  liest, prüft den Fingerabdruck und den Laufdatum, nicht die Zeile von
+  damals.
 
 ## Wichtige Konventionen
 

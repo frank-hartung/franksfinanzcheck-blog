@@ -56,6 +56,18 @@ try:
 except Exception:  # noqa: BLE001
     length_policy = None
 
+# Die Schreiber-Garantie (#806): Diese Rolle ist der Hauptproduzent der
+# langen Premium-Artikel – und sie schrieb bis zum 24.10.2026 OHNE
+# Lesbarkeits-Messung in den Vorrat. Beide Entwürfe aus Governance-Report
+# #806 (Flesch 54,2 / 54,9) tragen `ki_redaktion: "claude"`. Seitdem misst
+# die Rolle vor dem Schreiben – über dieselbe Bibliothek wie die News-Rolle.
+try:
+    import lesbarkeit_schreiber
+    import readability_check as rc
+except Exception:  # noqa: BLE001 – ohne Messung darf der Lauf nicht sterben
+    lesbarkeit_schreiber = None
+    rc = None
+
 ROLLE = "claude"
 
 SYSTEM_PROMPT = """Du bist die Leitfigur der Redaktion von FranksFinanzcheck: \
@@ -296,15 +308,24 @@ def run(args) -> int:
         keywords=keywords or [title], rolle=ROLLE,
         # Zweite Prüfung an der Schreibgrenze (Defense in Depth, #734).
         fachfreigabe=args.fachfreigabe)
-    content = fm + body
+    slug = ks.unique_bundle_slug(title)
+    # LESBARKEITS-GATE VOR DEM SCHREIBEN (Issue #806): messen, deterministisch
+    # heilen (Tor T1–T4 des Lesbarkeits-Heilers), dann erst schreiben. Der
+    # Werbeblock (CTA/Disclaimer) bleibt draußen – er ist kein Fließtext.
+    rumpf = fm + body
+    if provider != "offline" and lesbarkeit_schreiber is not None:
+        rumpf, flesch, lesbarkeit_status = lesbarkeit_schreiber.sichern(rumpf, slug)
+    else:
+        flesch, lesbarkeit_status = None, "Offline-Gerüst – keine Messung"
+    content = rumpf
     if provider != "offline":
         content += ("\n\n" + ks.cta_block(topic.get("affiliate_url"))
                     + "\n" + ks.DISCLAIMER + "\n")
-    slug = ks.unique_bundle_slug(title)
     import post_utils  # noqa: E402
     path = post_utils.write_post(slug, content)
 
-    chars = _measure(body)
+    kern = rumpf.split("---", 2)[2] if rumpf.startswith("---") else rumpf
+    chars = _measure(kern)
     print(f"✅ Rolle Claude: Entwurf „{title}“")
     print(f"   Pfad: {os.path.relpath(path, BLOG_DIR)}")
     print(f"   Provider: {provider} | Fließtext: {chars:,} Zeichen "
@@ -313,13 +334,21 @@ def run(args) -> int:
         print("   ⚖ YMYL beauftragt: Prüfgerüst gesetzt (status „ausstehend“). "
               "Vor --promote: Prüfer, Belegkette, Zahlenprotokoll, --seal "
               "(docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md).")
+    print(f"   Lesbarkeit: {lesbarkeit_status}")
     if chars < min_z and provider != "offline":
         print(f"   ⚠ Unter Floor ({min_z:,}) – die Engine hebtelt den Text "
               "beim nächsten Lauf nach (check_length). Vor --promote prüfen!")
+    if (flesch is not None and rc is not None and flesch < rc.NEW_FLESCH_MIN
+            and provider != "offline"):
+        print("   ⚠ Unter der Publish-Schwelle – Nachsorge nötig "
+              "(`python3 scripts/endredaktion.py --slug "
+              f"{slug}` oder `python3 scripts/lesbarkeit_heiler.py "
+              "--entwuerfe`)")
     ks.write_report([
         f"- **Letzter Lauf (Rolle Claude):** Entwurf „{title}“ "
         f"({provider}, {chars:,} Zeichen) – Status: Review erforderlich.",
         f"- Pfad: `{os.path.relpath(path, BLOG_DIR)}`",
+        f"- Lesbarkeit: {lesbarkeit_status}",
         "- Veröffentlichung: NIE automatisch – Freigabe über "
         "`python3 scripts/ki_redaktion.py --promote <slug>`.",
     ])

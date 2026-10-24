@@ -78,6 +78,15 @@ except Exception:  # noqa: BLE001 – fehlende Messung darf den Lauf nicht töte
     rc = None
     lesbarkeit_heiler = None
 
+# Die Schreiber-Garantie liegt seit #806 im eigenen Modul: eine Messung, eine
+# Heilung, ein Tor – für ALLE Schreiberbahnen (Rolle „ChatGPT/News“, Rolle
+# „Claude“, Werkbank-Recycling). Vorher hatte nur diese Rolle eine Sicherung;
+# die beiden anderen schrieben ungemessen in den Vorrat (Issue #806).
+try:
+    import lesbarkeit_schreiber
+except Exception:  # noqa: BLE001 – ohne Garantie meldet der Aufruf ehrlich
+    lesbarkeit_schreiber = None
+
 ROLLE = "chatgpt"
 
 # ============================================================
@@ -217,33 +226,16 @@ def lesbarkeit_sichern(content: str, slug: str) -> tuple[str, float | None, str]
     reicht (Flesch < 60 nach dem Lauf): Dann steht die Zahl ehrlich im Log,
     und `endredaktion.py` bzw. `lesbarkeit_heiler.py --entwuerfe` heilen
     redaktionell nach. Ein stiller Ausschuss ist die einzige verbotene Sorte.
+
+    SEIT #806 liegt die Umsetzung in `scripts/lesbarkeit_schreiber.py` – dort
+    liegt sie für ALLE Schreiberbahnen (Rolle „Claude“, Werkbank-Recycling).
+    Diese Hülle reicht den Modulzustand durch, damit eine Sabotage im Test
+    sichtbar bleibt; der Vertrag C41 prüft beide Seiten.
     """
-    if rc is None or lesbarkeit_heiler is None:
+    if lesbarkeit_schreiber is None:
         return content, None, "Lesbarkeits-Messung nicht verfügbar (Modul fehlt)"
-    vorher = _flesch_von(content, slug)
-    if vorher is None:
-        return content, None, "Lesbarkeit nicht messbar (fail-open im Schreiber)"
-    if vorher >= rc.NEW_FLESCH_MIN:
-        return content, vorher, (f"Flesch {vorher:.1f} ≥ {rc.NEW_FLESCH_MIN:g} "
-                                 "– Publish-Schwelle erfüllt")
-    try:
-        neu, protokoll = lesbarkeit_heiler.stufe_a(content)
-    except Exception as exc:  # noqa: BLE001
-        return content, vorher, (f"Flesch {vorher:.1f} < {rc.NEW_FLESCH_MIN:g}, "
-                                 f"Heiler nicht ausführbar ({exc.__class__.__name__})")
-    if neu != content:
-        gruende = lesbarkeit_heiler.verifiziere(slug, content, neu)
-        if not gruende:
-            content = neu
-            nachher = _flesch_von(content, slug)
-            return content, nachher, (
-                f"Flesch {vorher:.1f} → {nachher if nachher is not None else float('nan'):.1f} "
-                f"(Stufe A: Lexikon {protokoll.get('lexikon', 0)}, "
-                f"Satzschnitte {protokoll.get('saetze', 0)})")
-    return content, vorher, (f"Flesch {vorher:.1f} < {rc.NEW_FLESCH_MIN:g} – "
-                             "deterministische Stufe reicht nicht, "
-                             "redaktionelle Nachsorge nötig "
-                             "(`endredaktion.py --slug " + slug + "`)")
+    return lesbarkeit_schreiber.sichern(content, slug, rc_mod=rc,
+                                       heiler=lesbarkeit_heiler)
 
 
 def offline_skeleton(hook: dict) -> str:

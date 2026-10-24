@@ -188,7 +188,7 @@
     "lesbarkeit:heiler": "python3 scripts/lesbarkeit_heiler.py --blocked",
     "lesbarkeit:nachsorge": "python3 scripts/lesbarkeit_heiler.py --entwuerfe --fix",
     "lesbarkeit:probe": "python3 scripts/lesbarkeit_heiler.py --wirkungsprobe",
-    "test:lesbarkeit": "python3 scripts/lesbarkeit_heiler.py --selftest && python3 -m unittest scripts.tests.test_lesbarkeit_heiler",
+    "test:lesbarkeit": "python3 scripts/lesbarkeit_heiler.py --selftest && python3 scripts/lesbarkeit_schreiber.py --selftest && python3 -m unittest scripts.tests.test_lesbarkeit_heiler scripts.tests.test_lesbarkeit_schreiber",
     "test:prompt:echo": "python3 scripts/textverstaendnis_guard.py --selftest && python3 -m unittest scripts.tests.test_prompt_echo",
     "release:scorecard": "python3 scripts/release_scorecard.py",
     "release:bestand": "python3 scripts/release_scorecard.py --live --streng",
