@@ -372,6 +372,51 @@ class TransportVertrag(unittest.TestCase):
         self.assertEqual(cf_pfade, erlaubt, f"Cloudflare-Pfade weichen ab: {cf_pfade ^ erlaubt}")
 
 
+class FrischwacheVertrag(unittest.TestCase):
+    """Operative RPO-Wache (Highend 24.10.2026): Der Konfigurations-Check
+    (E1–E8) und die Fristwarnung dürfen nicht mit \"jüngst gelaufen\"
+    verwechselt werden. Diese Wache schließt die operative Lücke – ein
+    ausgesetzter nächtlicher Lauf ohne ablaufenden Token bliebe sonst still."""
+
+    def test_workflow_existiert_und_laueft_taeglich(self):
+        wf = REPO / ".github" / "workflows" / "backup-frischwache.yml"
+        self.assertTrue(wf.is_file(), "backup-frischwache.yml fehlt – RPO wäre unbewacht")
+        data = yaml.safe_load(wf.read_text(encoding="utf-8"))
+        # PyYAML 1.1: `on` wird als bool True geparst – GitHub meint den Trigger.
+        on = data.get("on", data.get(True, {}))
+        self.assertIn("schedule", on, "Frischwache muss täglich laufen (schedule)")
+        crons = [e.get("cron", "") for e in on["schedule"]]
+        self.assertTrue(any("13" in c for c in crons), f"Frischwache soll nach dem 03:00-Backup laufen (13:00 UTC): {crons}")
+        job = data["jobs"]["frischwache"]
+        self.assertEqual(job.get("environment"), "backup", "Secrets liegen im Environment backup")
+        schritte = {s.get("name", ""): s for s in job.get("steps", [])}
+        self.assertIn("Selbsttest (Wache prueft sich selbst – fail-closed)", schritte)
+        self.assertIn("Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)", schritte)
+        # Fail-closed: kein continue-on-error darf die RPO-Wache still grün halten.
+        for s in job["steps"]:
+            self.assertNotIn("continue-on-error", str(s), "RPO-Wache darf nicht mit continue-on-error still grün werden")
+
+    def test_ueberwacht_beide_familien_mit_gelben_und_roten_grenzen(self):
+        wf_text = (REPO / ".github" / "workflows" / "backup-frischwache.yml").read_text(encoding="utf-8")
+        self.assertIn("backup_freshness_guard.py", wf_text)
+        self.assertIn("BACKUP_REPO", wf_text)
+        self.assertIn("GH_TOKEN", wf_text)
+        guard = (SCRIPTS / "backup_freshness_guard.py").read_text(encoding="utf-8")
+        # Grenzen müssen zu ANLEITUNG und SLAs passen (36/52), sonst ist die Anleitung falsch.
+        self.assertIn("MAX_ALTER_GELB_H = 36", guard)
+        self.assertIn("MAX_ALTER_ROT_H = 52", guard)
+        anleitung = ANLEITUNG.read_text(encoding="utf-8")
+        self.assertIn("52 h", anleitung)
+        self.assertIn("36 h", anleitung)
+        self.assertIn("backup-frischwache.yml", anleitung)
+
+    def test_alerting_kennt_die_frischklasse(self):
+        alert = (REPO / ".github" / "workflows" / "alert-on-failure.yml").read_text(encoding="utf-8")
+        self.assertIn("Backup-Frischwache", alert)
+        self.assertIn("backup-frisch", alert)
+        self.assertIn("RPO", alert)
+
+
 class NamensVertrag(unittest.TestCase):
     """Kein Name im Prüfer darf unter die CodeQL-Heuristik fallen (Alert-Klasse #78)."""
 
