@@ -33,7 +33,7 @@ GitHub Repo frank-hartung/franksfinanzcheck-blog (main = Quelle)
 | **E-Mail** | **Cloudflare Email Routing** | Weiterleitung `kontakt@franksfinanzcheck.de` an persönliche Zieladresse (keine eigene Mailbox, keine MX-Konkurrenz zu Website) – Doku: [E-MAIL-WEITERLEITUNG-CLOUDFLARE.md](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md) |
 | **Hosting** | **GitHub Pages** (Branch `gh-pages`) | Statische Auslieferung, global via Fastly |
 | Quellcode | GitHub Repo (`main`) | Build-Quelle, Automatisierung |
-| Backup | Privates GitHub-Repo, verschlüsselt (`backup-offsite.yml`: Repo + Abonnenten-KV, nächtlich, SLA RPO 24h/52h, RTO <60 Min.) | Einrichtung, Prüfung (E1–E8), Frische-Wache, Wiederherstellung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md) |
+| Backup | Privates GitHub-Repo, verschlüsselt (`backup-offsite.yml` + `backup-frischwache.yml`: Repo + Abonnenten-KV, nächtlich, SLA RPO 24h/52h, RTO <60 Min.) | Einrichtung, Prüfung (E1–E8), operative Frischwache (52 h/36 h), Wiederherstellung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md) |
 
 ---
 
@@ -86,16 +86,16 @@ Ein Purge wäre nur nötig, wenn ohne SHA-Buster deployed würde (nie).
    Cloudflare-API-Purge anbietet → deaktiviert lassen.
 4. **SSL-Automation:** „Full" bis Watchdog-Issue → dann Umstellung auf
    „Full (strict)" (manuell 1 Min oder per Cloudflare-API mit Token).
-5. **Backup:** Nächtlich `backup-offsite.yml` – Git-Bundle von `main` und die
+5. **Backup:** Nächtlich `backup-offsite.yml` (03:00 UTC) – Git-Bundle von `main` und die
    Abonnenten- und Einwilligungsdaten aus Workers KV (alle Präfixe: `abo:`,
    `token:`, `nachweis:` + `budget:`/`takt:`/`feedback:`/`exportlog:` + opt. D1),
    AES-256 verschlüsselt, als Entwurfs-Releases in ein privates Repo (Audit
    M-11). SLA: RPO 24 h (52 h Toleranz), RTO < 60 Min. Konfigurationsprüfung
-   E1–E8 + operative Frische-Wache (52 h rot/36 h gelb) + beweisbare
-   Wiederherstellung `restore_drill.sh` (Highend 22.10.2026). Das Blog-Repo
-   selbst ist kein Offsite-Backup (gleiches Konto). Der frühere S3-Plan ist
-   damit ersetzt. Einrichtung, SLA und Abdeckung:
-   [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md).
+   E1–E8 + **automatisierte** operative Frischwache `backup-frischwache.yml`
+   (13:00 UTC, 52 h rot/36 h gelb, beide Familien) + beweisbare Wiederherstellung
+   `restore_drill.sh` (Highend 24.10.2026). Das Blog-Repo selbst ist kein
+   Offsite-Backup (gleiches Konto). Der frühere S3-Plan ist damit ersetzt.
+   Einrichtung, SLA und Abdeckung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md).
 6. **Monitoring:** Uptime-Checks gegen `https://franksfinanzcheck.de` (über
    Cloudflare-Proxy) + `https://frank-hartung.github.io/franksfinanzcheck-blog/`
    (Origin, ohne Proxy) – so wird zwischen CF- und Origin-Problemen unterschieden.

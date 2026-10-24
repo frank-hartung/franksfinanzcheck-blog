@@ -123,6 +123,7 @@ on:
       - "Mastodon-Profil-Sync"   # PREM-AUDIT: Social-Kanal still
       - "Mastodon-SEO"           # PREM-AUDIT: Social-Kanal still
       - "Offsite-Backup"         # PREM-AUDIT: Backup-Versagen wäre still fatal
+      - "Backup-Frischwache (operative RPO-Wache)"  # HIGHEND 24.10.2026: operative RPO-Lücke – Scheduler-Hänger ohne Token-Ablauf bliebe sonst bis zur Anleger-Frage unbemerkt
       - "Issues aufräumen (Triage)"          # PREM-AUDIT: Vollabdeckung
       - "Erledigte Fehlermeldungen archivieren"
       - "Dependabot Auto-Merge"
@@ -423,6 +424,10 @@ jobs:
               failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
             const backupFrist = isBackup && !backupEinrichtung &&
               failedStepNames.some(s => String(s).includes('Fristwarnung'));
+            // HIGHEND 24.10.2026: Operative RPO-Wache – misst ob JÜNGST gesichert wurde.
+            // E1–E8 prüfen Konfiguration, Fristen prüfen Ablauf, Frischwache prüft Ausführung.
+            const isBackupFrisch = wfName === 'Backup-Frischwache (operative RPO-Wache)';
+            const backupFrisch = isBackupFrisch;
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
             //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART
@@ -455,6 +460,7 @@ jobs:
               : backupEinrichtung ? 'backup-einrichtung'
               : backupFrist ? 'backup-frist'
               : isBackup ? 'backup'
+              : backupFrisch ? 'backup-frisch'
               : installFailed ? 'installation'
               // WF-E813 (15.10.2026): Eigene Namen für die Sicherheits-Wache.
               // Die Header-Wache trennt BEFUND von STOERUNG; wechselt die
@@ -629,6 +635,13 @@ jobs:
                       : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
                     '2. Häufig: ein vorübergehender Ausfall von GitHub oder Cloudflare (https://www.githubstatus.com · https://www.cloudflarestatus.com) → Actions → „Offsite-Backup“ → „Run workflow“. Oder ein Zugang wurde widerrufen bzw. hat zu wenig Rechte – dann nennt ihn die Annotation.',
                     '3. Fehlerbilder und Abhilfe: ' + backupAnleitung + ', Abschnitt „Fehlerbilder“.'
+                  ]
+                : runbookKlasse === 'backup-frisch'
+                ? [
+                    '1. **Operative RPO-Wache rot:** Die Konfiguration (E1–E8) kann grün sein, aber die Sicherung hat seit >52 h kein frisches Release erzeugt. RPO von 24 h ist verletzt – kein Scheduler-Problem ignorieren.',
+                    '2. In der Job-Zusammenfassung des Laufs „Backup-Frischwache“ steht, welche Familie fehlt oder wie alt sie ist (`backup-*` / `kv-backup-*`). Läuft „Offsite-Backup“ noch täglich 03:00 UTC? Scheduler-Verspätungen bis 12:03 MESZ sind belegt – ab 13:00 UTC muss dennoch ein Release da sein.',
+                    '3. Häufigste Ursachen: Scheduler-Hänger (Actions → „Offsite-Backup“ → jüngster Lauf fehlt → `Run workflow` auf `main`), still widerrufenes Token ohne Ablaufdatum (E2/E5 prüfen), Branch-Regel am Environment `backup` blockiert `main`. Details: ' + backupAnleitung + ', Abschnitte „Fehlerbilder“ und „Betriebszusagen (SLA·RPO·RTO)“. ' + backupLaeufe + ' liefert die Gegenseite.',
+                    '4. Nach der Korrektur liefert der nächste grüne Lauf von „Backup-Frischwache“ den Beweis – er schließt diese Meldung automatisch. Gelb (>36 h) ist nur Frühwarnung, noch kein Ausfall.'
                   ]
                 : runbookKlasse === 'installation'
                   ? [

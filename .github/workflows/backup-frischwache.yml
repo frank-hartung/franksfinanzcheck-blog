@@ -1,0 +1,150 @@
+# ============================================================
+#  BACKUP-FRISCHWACHE – operative RPO-Wache (Highend-Ergänzung)
+#  ------------------------------------------------------------
+#  WARUM (Profi-Agentur-Niveau, WF-9E5A #761 Dauerheilung 24.10.2026):
+#    `backup-offsite.yml` (E1–E8) prüft OB die Sicherung laufen KANN,
+#    `Fristwarnung` meldet ablaufende Tokens. Beides ist konfigurativ.
+#    Fehlt der nächtliche Lauf aber ganz (Scheduler-Hänger, GitHub-
+#    Verspätung, still widerrufenes Token ohne Ablaufdatum, Branch-
+#    Regel unglücklich), bleibt das bis zur nächsten manuellen Frage
+#    unbemerkt – RPO-Verletzung ohne Alarm.
+#
+#    Diese Wache schließt die operative Lücke: Sie liest nach dem
+#    täglichen Sicherungsfenster die neuesten Releases im privaten
+#    Backup-Repo (Entwürfe eingeschlossen, wie restore_drill.sh) und
+#    misst deren Alter. 52 h rot (täglicher Lauf + belegte Scheduler-
+#    Verspätung 09:53–12:03 MESZ vom 07.–15.10.2026), 36 h gelb. Das
+#    Alerting kennt die Klasse `backup-frisch` mit eigenem Runbook.
+#
+#    Design-Prinzipien:
+#      · Fail-closed wie die Einrichtungsprüfung (kein Schein-Grün)
+#      · Keine zweite Sicherung, nur Messung (0 €, keine Secrets lecken)
+#      · Selbsttest zuerst (defekte Wache darf nicht grün melden)
+#      · Environment `backup` – Secrets nie in Klartext-Logs
+#      · Branch-Filter: nur main ist Produktionsbeweis (alert-on-failure
+#        schließt nur nach grünem main-Lauf)
+#
+#  BETRIEB:
+#    Schedule: täglich 13:00 UTC (15:00 MESZ) – nach dem 03:00 UTC
+#    Sicherungslauf plus Puffer für GitHub-Scheduler-Verspätung.
+#    Manuell: Actions → Backup-Frischwache → Run workflow
+#    Lokal:  npm run backup:frische
+#            python3 scripts/backup_freshness_guard.py --selftest
+#
+#  SLA-Bezug: docs/ANLEITUNG-OFFSITE-BACKUP.md (RPO 24 h / 52 h)
+#             docs/INFRASTRUKTUR.md Punkt 5
+# ============================================================
+name: Backup-Frischwache (operative RPO-Wache)
+
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/backup_freshness_guard.py"
+      - "scripts/tests/test_backup_einrichtung.py"
+      - ".github/workflows/backup-frischwache.yml"
+      - ".github/workflows/backup-offsite.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backup-frischwache-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frischwache:
+    name: Backup-Frische pruefen (RPO 24 h / 52 h)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: backup
+    env:
+      BACKUP_REPO: ${{ vars.BACKUP_REPO }}
+      GH_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Selbsttest (Wache prueft sich selbst – fail-closed)
+        run: |
+          python3 scripts/backup_freshness_guard.py --selftest
+          python3 scripts/kv_backup.py --selftest
+          python3 scripts/backup_einrichtung.py --selftest
+
+      - name: Einrichtung als Kontext (kein Block, nur Einordnung)
+        run: |
+          python3 scripts/backup_einrichtung.py --pruefen || {
+            echo "::notice::Einrichtungspruefung rot – Frischwache kann erst nach gruenem Offsite-Backup aussagekraeftig messen. Siehe docs/ANLEITUNG-OFFSITE-BACKUP.md (E1–E8)."
+          }
+          exit 0
+
+      - name: Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)
+        run: |
+          set -euo pipefail
+          if [ -z "${BACKUP_REPO:-}" ] || [ -z "${GH_TOKEN:-}" ]; then
+            {
+              echo "## Backup-Frischwache"
+              echo ""
+              echo "Warnung: BACKUP_REPO oder BACKUP_REPO_TOKEN fehlt im Environment backup."
+              echo "Die Frische kann nicht gemessen werden – das ist derselbe Zustand wie E1/E2 in der Einrichtungspruefung."
+              echo "Einrichtung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+              echo ""
+              echo "- RPO-Soll: 24 h (Toleranz 52 h) · RTO: unter 60 Min."
+              echo "- Erwartete Releases: backup-* + kv-backup-* (Entwuerfe, privat)"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::Backup-Frische nicht pruefbar – BACKUP_REPO oder BACKUP_REPO_TOKEN fehlt (E1/E2 offen)."
+            exit 0
+          fi
+          set +e
+          python3 scripts/backup_freshness_guard.py --repo "$BACKUP_REPO" --json > /tmp/frische.json 2>&1
+          RC=$?
+          set -e
+          {
+            echo "## Backup-Frischwache (RPO 24 h / Toleranz 52 h)"
+            echo ""
+            python3 << 'PYEOF'
+          import json, pathlib
+          p = pathlib.Path('/tmp/frische.json')
+          try:
+              d = json.loads(p.read_text())
+              print(f"**Urteil:** {d.get('urteil','?')} – {d.get('text','')}")
+              print("")
+              for b in d.get('befunde', []):
+                  sym = {'ok': 'OK', 'warnung': 'WARN', 'fehler': 'FEHLER'}.get(b.get('stufe'), '-')
+                  print(f"- {sym} {b.get('praefix')} {b.get('text')}")
+              if d.get('urteil') == 'warnung':
+                  print("")
+                  print("Gelb = Fruehwarnung (ueber 36 h), noch kein Ausfall. Scheduler-Haenger pruefen: Actions -> Offsite-Backup -> letzter Lauf.")
+              print("")
+              print("Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md (RPO/RTO, Wiederherstellung)")
+          except Exception as e:
+              print(p.read_text() if p.exists() else str(e))
+          PYEOF
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ $RC -eq 1 ]; then
+            echo "::error::Backup ueberfaellig oder unpruefbar (ueber 52 h oder fehlende Familie) – RPO verletzt. Details in Summary."
+            exit 1
+          elif [ $RC -eq 0 ]; then
+            if python3 -c "import json; d=json.loads(open('/tmp/frische.json').read()); exit(0 if d.get('urteil')=='warnung' else 1)" 2>/dev/null; then
+              echo "::warning::Backup-Fruehwarnung (ueber 36 h) – ein Tag ohne frisches Release. Noch kein Ausfall, aber beobachten."
+            fi
+            exit 0
+          else
+            echo "::error::Frische-Pruefung fehlgeschlagen (Exit $RC) – Hilfe: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+            exit 1
+          fi
+
+      - name: Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)
+        if: always()
+        run: |
+          bash -n scripts/restore_drill.sh
+          python3 scripts/kv_backup.py --selftest
+          echo "Restore-Drill-Code geprueft (Syntax + Selbsttest gruen)."

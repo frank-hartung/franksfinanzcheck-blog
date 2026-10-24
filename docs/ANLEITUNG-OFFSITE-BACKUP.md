@@ -1,8 +1,8 @@
 # Anleitung: Offsite-Backup einrichten, prüfen, wiederherstellen
 
-> Vorgang WF-9E5A · Meldung #761 · Stand 15.10.2026
-> Workflow `.github/workflows/backup-offsite.yml` · Prüfer `scripts/backup_einrichtung.py` ·
-> Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py`
+> Vorgang WF-9E5A · Meldung #761 · Stand 24.10.2026 (Highend-Dauerheilung)
+> Workflows `.github/workflows/backup-offsite.yml` + `backup-frischwache.yml` · Prüfer `scripts/backup_einrichtung.py` ·
+> Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py`
 
 ## Kurz: Was ist zu tun?
 
@@ -61,12 +61,13 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 
 | Zusage | Wert | Beleg |
 |---|---|---|
-| **RPO** (max. Datenverlust) | 24 h + Scheduler-Toleranz (52 h) | Täglich 03:00 UTC; GitHub-Scheduler belegt 09:53–12:03 MESZ; Frische-Wache `backup_freshness_guard.py` rot ab 52 h, gelb ab 36 h |
+| **RPO** (max. Datenverlust) | 24 h + Scheduler-Toleranz (52 h) | Täglich 03:00 UTC; GitHub-Scheduler belegt 09:53–12:03 MESZ; **automatisierte** Frischwache `backup-frischwache.yml` (13:00 UTC) rot ab 52 h, gelb ab 36 h |
 | **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
 | **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
 | **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
 | **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 17 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (26 Tests) |
 | **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
+| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*` | `backup_freshness_guard.py` (12 Fälle) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
 
 **Was gesichert wird – vollständig:**
 
@@ -95,7 +96,7 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 | `gh-pages` Branch | Regenerierbar (Build-Artefakt) | Quelle `main` ist gesichert; `deploy.yml` baut neu |
 | Worker-Logs (> 200k Zeilen/Tag) | Flüchtig (Free 1 d) | Nicht kritisch; bei Incident vorher exportieren |
 
-**Frische operativ überwachen:**
+**Frische operativ überwachen (automatisiert seit 24.10.2026):**
 
 ```bash
 # Lokal oder in CI (braucht Lese-Token auf Backup-Repo):
@@ -104,11 +105,16 @@ python3 scripts/backup_freshness_guard.py --selftest   # 12 Fälle offline
 npm run backup:frische   # Kurzform
 ```
 
+- **Automatisch:** Workflow `backup-frischwache.yml` läuft täglich **13:00 UTC** (nach
+  dem 03:00 UTC-Sicherungslauf + Puffer für GitHub-Scheduler-Verspätung bis 12:03 MESZ).
+  Urteil `fehler` (>52 h oder fehlende Familie) → Workflow rot → Alerting `backup-frisch`
+  mit RPO-Rat; `warnung` (>36 h) → gelber Hinweis in der Summary (Frühwarnung).
+- **Manuell:** Zusätzlich vor Releases oder nach Token-Tausch: `npm run backup:frische`.
+
 Die Frische-Wache ergänzt E1–E8: Sie misst, ob die Sicherung *jüngst* wirklich
-lief (täglich erwartet, 52 h Toleranz). Eingerichtet gehört sie in einen
-täglichen Watchdog-Lauf oder als manueller Check vor Releases. Ein grünes
-`backup_einrichtung` ohne frisches Backup ist eine Konfigurations-, aber keine
-Betriebsgarantie.
+lief (täglich erwartet, 52 h Toleranz). Ein grünes `backup_einrichtung` ohne
+frisches Backup ist eine Konfigurations-, aber keine Betriebsgarantie – deshalb
+laufen beide Wachen unabhängig.
 
 ## Einrichtung Schritt für Schritt
 
