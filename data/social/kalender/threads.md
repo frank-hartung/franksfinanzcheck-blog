@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 23.10.2026 22:30 (Europe/Berlin)  
+> Automatisch aktualisiert: 24.10.2026 11:37 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,9 +13,9 @@
 ## Kommende Beiträge
 
 ### Sa, 24. Oktober 2026
-- **09:15** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
+- **16:15** ⏳ Balkonkraftwerk Förderung: So holst du dir Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/
-- **16:15** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
+- **20:30** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
 ### So, 25. Oktober 2026
 - **09:15** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
@@ -25,11 +25,11 @@
 ### Mo, 26. Oktober 2026
 - **09:15** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
-- **16:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
-### Di, 27. Oktober 2026
-- **09:15** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
+- **16:15** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/
+### Di, 27. Oktober 2026
+- **09:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 - **16:15** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
 ### Mi, 28. Oktober 2026
@@ -82,6 +82,11 @@
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 - **16:15** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+### Sa, 07. November 2026
+- **09:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+- **16:15** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
 
 ## Zuletzt veröffentlicht
 
