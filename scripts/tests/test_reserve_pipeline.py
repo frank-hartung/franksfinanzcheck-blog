@@ -2346,3 +2346,54 @@ class RuinenKlassenDeckungTests(unittest.TestCase):
         self.assertEqual(b["klasse"], rbk.HEILBAR)
         self.assertIn("politur_heiler.py", b["heiler"],
                       "die breite Familie braucht ihren Schreiber (#614)")
+
+
+class WfD4e0Issue821Tests(unittest.TestCase):
+    """#821: Reserve-Vorstufe (Umfang), Cover-Isolation und R5-Splitter-Vertrag."""
+
+    def test_reserve_vorstufe_akzeptiert_umfang_und_nur_befund(self):
+        import engine_generate as eg
+        body = (
+            "## Abschnitt 1\n" + " ".join(["Wort"] * 300) + "\n\n"
+            "## Abschnitt 2\n" + " ".join(["Wort"] * 300) + "\n\n"
+            "## Abschnitt 3\n" + " ".join(["Wort"] * 300) + "\n\n"
+            "## Abschnitt 4\n" + " ".join(["Wort"] * 150) + "\n"
+        )
+        probleme = [
+            "nur 1058 Wörter / 7800 Zeichen (Premium: ≥ 1400 Wörter / ≥ 9000 Zeichen)",
+            "Umfang: 1058 Wörter / 7800 Zeichen; Premium verlangt 1400–2500 Wörter und 9000–22000 Zeichen",
+        ]
+        ok, aufschub = eg._reserve_vorstufe_ok(body, probleme)
+        self.assertTrue(ok, "heilbarer Umfang-Befund ab 950 Wörtern muss an Reserve-Finisher gehen")
+        self.assertEqual(aufschub, ["Länge"])
+
+    def test_finisher_isolation_erlaubt_kandidaten_cover_varianten(self):
+        slug = "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto"
+        allowed = rf.allowed_paths_for([Path(f"content/posts/{slug}/index.md")])
+        self.assertTrue(rf._is_allowed(f"static/images/covers/{slug}.jpg", allowed))
+        self.assertTrue(rf._is_allowed(f"static/images/covers/360/{slug}.jpg", allowed))
+        self.assertTrue(rf._is_allowed(f"static/images/covers/webp/480/{slug}.webp", allowed))
+        self.assertTrue(rf._is_allowed(f"static/images/covers/avif/720/{slug}.avif", allowed))
+        self.assertFalse(rf._is_allowed("static/images/covers/2026-09-01-live.jpg", allowed))
+        self.assertFalse(rf._is_allowed("static/images/covers/fremd-neu.jpg", allowed))
+
+    def test_r5_splitter_erhoeht_keine_rs5_zahlenbehauptungen(self):
+        import r5_absatz_splitter as r5
+        import redaktions_standard as rs
+        para = (
+            "Modellrechnung: Du zahlst jeden Monat 50 Euro auf dein Konto ein. "
+            "Nach einem Jahr hast du bereits einen Puffer aufgebaut. "
+            "Das System funktioniert automatisch im Hintergrund. "
+            "Ein Dauerauftrag nimmt dir die monatliche Entscheidung ab. "
+            "Wer monatlich 150 Euro zurücklegt, erreicht nach zwei Jahren 3.600 Euro. "
+            "Zusätzlich sparst du durch den Tarifwechsel weitere 120 Euro pro Jahr. "
+            "So wächst deine Rücklage Schritt für Schritt ohne großen Aufwand.\n"
+        )
+        self.assertEqual(rs._reserve_numeric_claim_findings(para), [])
+        split_body, total, _ = r5.split_body_text(para)
+        self.assertGreaterEqual(total, 1)
+        self.assertEqual(rs._reserve_numeric_claim_findings(split_body), [])
+
+
+if __name__ == "__main__":
+    unittest.main()

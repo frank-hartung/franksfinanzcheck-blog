@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-10-24T13:39:25+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-24T17:43:40+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1260,8 +1260,8 @@
   }
  },
  "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "ts": "2026-10-24T13:39:28+00:00",
+  "title": "Vertrags-Check im Herbst: Strom: Strom, Versicherung, Konto",
+  "ts": "2026-10-24T17:43:44+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1315,7 +1315,7 @@
  },
  "2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
   "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
-  "ts": "2026-10-24T12:57:47+00:00",
+  "ts": "2026-10-24T17:43:28+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1325,6 +1325,42 @@
  "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen": {
   "title": "Stromanbieter wechseln: Und bis zu 300 Euro sparen",
   "ts": "2026-10-24T08:58:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
+  "title": "Bankgebühren senken: 7 Schritte zum günstigeren Konto",
+  "ts": "2026-10-24T17:43:14+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
+  "title": "Energieeffizienz im Haushalt: 5 schnelle Spartricks",
+  "ts": "2026-10-24T17:43:18+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
+  "title": "ETF‑Sparplan starten: Schritt‑für‑Schritt zum Sparplan",
+  "ts": "2026-10-24T17:43:37+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+  "title": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
+  "ts": "2026-10-24T17:43:48+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",

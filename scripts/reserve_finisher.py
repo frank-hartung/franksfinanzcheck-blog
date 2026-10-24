@@ -308,17 +308,18 @@ HEALER_CHAIN = [
     # Live-Frontmatter können so nicht mehr „nebenbei“ mitgepusht werden.
     ("check_covers.py", ["--fix"]),
     ("generate_kurzantworten.py", [], "file"),
-    # WF-D4E0 (#710): Redaktions-Standard datei-bezirkelt + entwurfsfähig
-    # (deterministisch RS7 + RS2-Frage-H2 + RS3-Faustregel sowie KI-Heilung
-    # für RS1–RS6 unter Schutz des Publikations-Vertrags).
+    # REPARATUR 11.09.2026 (Reserve #5, #247) & WF-D4E0 (#821): Der
+    # deterministische R5-Absatz-Splitter läuft VOR redaktions_standard.py,
+    # damit neu entstandene Teil-Absätze im darauffolgenden Schritt je Absatz
+    # für RS5 (Modell-/Beispielwert-Kennzeichnung) geheilt werden und der
+    # Schritt-Vertrag den Absatz-Split nicht wegen fehlender Modell-Markierung
+    # in der zweiten Absatzhälfte zurückrollt.
+    ("r5_absatz_splitter.py", ["--apply"], "file"),
+    # WF-D4E0 (#710, #821): Redaktions-Standard datei-bezirkelt + entwurfsfähig
+    # (deterministisch RS7 + RS2-Frage-H2 + RS3-Faustregel + RS4/RS5 sowie
+    # KI-Heilung für RS1–RS6 unter Schutz des Publikations-Vertrags).
     ("redaktions_standard.py", ["--fix", "--ai", "--include-drafts"], "file"),
     ("affiliate_profi_check.py", ["--fix"]),
-    # REPARATUR 11.09.2026 (Reserve #5, #247): Der deterministische
-    # R5-Absatz-Splitter war vorher in KEINEM Workflow verdrahtet – frische
-    # KI-Artikel mit >6 Sätzen/Absatz scheiterten dauerhaft am harten
-    # R5-ABSATZ-HART-Gate der Publish-Gate-Prüfung. Datei-bezirkelt, damit
-    # der Live-Bestand in der Reserve-Queue nicht angefasst wird.
-    ("r5_absatz_splitter.py", ["--apply"], "file"),
     # Zweiter Zeilenumbruch-Pass NACH allen KI-Umschreibungen: entfernt
     # verwaiste Hard-Break-Spuren in Listen/FAQ/Überschriften (Typografie-
     # Score), ohne dass KI-Quota gebraucht wird (reine Selbstheilung).
@@ -526,6 +527,12 @@ def _is_allowed(path: str, allowed: set) -> bool:
         return True
     for a in allowed:
         if path == a or path.startswith(a.rstrip("/") + "/"):
+            return True
+        if (
+            a.startswith("static/images/covers/")
+            and path.startswith("static/images/covers/")
+            and Path(path).stem == a.rsplit("/", 1)[-1]
+        ):
             return True
     return False
 
