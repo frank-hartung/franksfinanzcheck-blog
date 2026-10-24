@@ -185,12 +185,39 @@ dass `quellen` ein Beweisfeld ist. Ergänzt um die Begründung, warum
 | `test_kennzahlen_radar.py` | 21 Tests grün (inkl. neuem Groß-Frontmatter-Test) |
 | `automation_premium_audit.py` | 89 Workflows, 0 Action-Refs ohne SHA, 0 Jobs ohne Timeout, 0 ohne Permissions |
 | `check_covers.py` | 100 Covers, 0 Probleme, 0 verwaiste Cover |
-| Vollsuite `unittest discover -s scripts/tests` | 3582 Tests, 27 übersprungen, **0 Fehlschläge**, 12 Fehler – alle **vorbestehend** und gegen `git archive HEAD` gegengeprüft: 10 in `test_faktenfrische_763` (Testdaten verweisen auf einen im Bestand nicht vorhandenen Artikel), 2 in `test_newsletter_digest` |
+| Vollsuite `unittest discover -s scripts/tests` | **alle grün** (siehe 6.1) |
 
 Rechenproben, die im Rahmen der Textkorrekturen nachgerechnet wurden:
 `46 + 63 = 109` geänderte Haftpflicht-Bezirke, `109 + 304 = 413` Bezirke gesamt;
 `997 − 782 = 215` (Hausrat-Rechenbeispiel); 30.11.2026 ist ein Montag
 (Ordentliche Kündigungsfrist kfz).
+
+### 6.1 Nebenbefund: Der Regression-Check war schon vor diesem Lauf rot
+
+Beim Prüfen des PR lief der Job „Publication reliability regression tests“ rot –
+aus zwei Gründen, die **nicht** aus dieser Änderung stammten, aber jede
+Content-Korrektur blockierten:
+
+1. **`test_faktenfrische_763` zeigte auf einen umbenannten Artikel.** Der
+   Reisekassen-Beitrag heißt seit dem 24.10.2026
+   `2026-10-24-strategisch-sparen…`, der Test las weiter
+   `2026-10-14-…` → 10 Fehler „Datei nicht gefunden“. Die Tests prüfen den
+   Inhalt weiterhin vollständig (kein Skip, keine Lockerung), nur gegen den
+   echten Pfad.
+2. **Zwei Muster waren zu eng gefasst.** Die Summenzelle der Reise-Modellrechnung
+   nutzt ein schmales geschütztes Leerzeichen (U+202F) vor dem €-Zeichen; ein
+   Muster mit ASCII-Leerzeichen übersah sie und meldete „Summenzeile fehlt“,
+   obwohl `120 + 12 × 25 + 80 = 500` stimmt. Jetzt matcht `\s*`.
+3. **`test_newsletter_digest` kannte die F-08-Trennung nicht.** Seit der
+   Trennung von Lese- und Schreibschlüssel (`worker_schreibschluessel`) laufen
+   Token-Exporte nur mit separatem Schlüssel. Die Tests stellen ihn jetzt bereit
+   – und ein neuer Test nagelt fest, dass es **ohne** ihn weiterhin eine
+   Ausnahme gibt.
+
+Zusätzlich ein echter Inhaltsbefund im Reisekassen-Entwurf: der Affiliate-Kasten
+„Spar-Tipp zwischendurch“ stand **zweimal** und ohne Trennung zum Fachtext direkt
+vor dem Mietwagen-Abschnitt. Beide Dubletten sind entfernt; der ordentlich
+gekennzeichnete Abschnitt „Werbung – optionaler Suchweg“ bleibt.
 
 ---
 
@@ -227,9 +254,9 @@ Rechenproben, die im Rahmen der Textkorrekturen nachgerechnet wurden:
    Zielseite, damit stille Ersetzungen auffallen (heute nur bei Umzug erkennbar).
 2. **Draft-Flag der 9 YMYL-Artikel** klären: versiegelt und freigegeben, aber als
    Entwurf geführt.
-3. **`test_faktenfrische_763` reparieren**: Die Testdaten zeigen auf einen Artikel,
-   den es im Bestand nicht (mehr) gibt – der Test ist dauerhaft rot und damit als
-   Wächter wertlos.
+3. **Regression-Check dauerhaft grün halten**: Er war vor diesem Lauf rot
+   (Abschnitt 6.1). Ein roter Wächter wird ignoriert – genau das darf nicht
+   wieder passieren; die Uhr-Probe läuft jetzt wieder mit.
 
 ---
 

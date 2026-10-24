@@ -200,28 +200,48 @@ class WorkerListeTest(unittest.TestCase):
     """`worker_liste` fragt den geschützten Export ab – fail-closed bei Fehlern."""
 
     def test_liste_wird_geliefert(self):
-        echt = versand.worker_abfrage
+        # F-08: Token-Exporte laufen nur über den getrennten Schreibschlüssel.
+        # Der Test stellt ihn bereit, statt den Vertrag zu umgehen – die Sperre
+        # selbst bleibt getestet (siehe test_ohne_schreibschluessel_gesperrt).
+        echt_abfrage = versand.worker_abfrage
+        echt_schreib = versand.worker_schreibschluessel
 
         def fake(pfad, body, *, base=None, key=None):
             self.assertEqual(pfad, "/export/abonnenten")
             self.assertEqual(base, WERKER)
-            self.assertEqual(key, "k")
+            self.assertEqual(key, "schreib")
+            self.assertEqual(body.get("mit_token"), "1")
             return {"abonnenten": [{"email": "a@b.de", "token": "t", "themen": []}]}
 
         versand.worker_abfrage = fake
+        versand.worker_schreibschluessel = lambda env=None: "schreib"
         try:
             liste = digest.worker_liste(WERKER, "k")
         finally:
-            versand.worker_abfrage = echt
+            versand.worker_abfrage = echt_abfrage
+            versand.worker_schreibschluessel = echt_schreib
         self.assertEqual(liste[0]["email"], "a@b.de")
 
+    def test_ohne_schreibschluessel_gesperrt(self):
+        """Ohne getrennten Schreibschlüssel gibt es keinen tokenhaltigen Export."""
+        echt = versand.worker_schreibschluessel
+        versand.worker_schreibschluessel = lambda env=None: ""
+        try:
+            with self.assertRaises(RuntimeError):
+                digest.worker_liste(WERKER, "k")
+        finally:
+            versand.worker_schreibschluessel = echt
+
     def test_kein_liste_feld_liefert_leer(self):
-        echt = versand.worker_abfrage
+        echt_abfrage = versand.worker_abfrage
+        echt_schreib = versand.worker_schreibschluessel
         versand.worker_abfrage = lambda *a, **k: {"status": "ok"}
+        versand.worker_schreibschluessel = lambda env=None: "schreib"
         try:
             self.assertEqual(digest.worker_liste(WERKER, "k"), [])
         finally:
-            versand.worker_abfrage = echt
+            versand.worker_abfrage = echt_abfrage
+            versand.worker_schreibschluessel = echt_schreib
 
 
 class CaptureWacheTest(unittest.TestCase):

@@ -33,7 +33,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
 HEIZ = '2026-10-14-heizperiode-vorbereiten-im-spaetsommer'
-REISE = '2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen'
+REISE = '2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen'
 KORRIGIERT_AM = dt.date(2026, 10, 15)
 DASHES = {
     '\u2013': '-', '\u2014': '-', '\u2012': '-', '\u2011': '-',
@@ -303,7 +303,10 @@ class Faktenfrische763MetaTests(unittest.TestCase):
         self.assertEqual(kwh_zeile * self._zahl(kosten[0]), self._zahl(kosten[1]),
                          'Kosten-Zeile rechnet nicht auf (131,4 × 0,30 = 39,42)')
         _, rbody = read(REISE)
-        m = re.search(r'\|\s*\*\*summe\*\*\s*\|\s*\*\*([^*]+)\*\*\s*\|\s*\*\*(\d+) ?(?:€|euro)\*\*',
+        # Schmales geschütztes Leerzeichen (U+202F) ist im Bestand normal –
+        # ein Muster mit ASCII-Leerzeichen übersieht die Summenzelle und
+        # meldet dann „Summenzeile fehlt“, obwohl die Rechnung stimmt.
+        m = re.search(r'\|\s*\*\*summe\*\*\s*\|\s*\*\*([^*]+)\*\*\s*\|\s*\*\*(\d+)\s*(?:€|euro)\*\*',
                       rbody, re.IGNORECASE)
         self.assertIsNotNone(m, 'Summenzeile der Reise-Modellrechnung fehlt')
         summanden = re.findall(r'(\d+)(?: ?(?:€|euro))? ?(?:\+|×|\*)? ?(\d+)?', m.group(1))
