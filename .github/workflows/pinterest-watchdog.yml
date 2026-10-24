@@ -98,6 +98,20 @@ jobs:
           echo "exit=$?" >> "$GITHUB_OUTPUT"
           set -e
 
+      # 24.10.2026 (#822): Die Zielwache lief in KEINEM Workflow – obwohl sie
+      # den Befund unabhängig reproduziert (7 von 46 Pins zeigten auf geparkte
+      # oder fehlende Ziele). Eine Wache ohne Fahrer ist die Ursache, nicht die
+      # Heilung. P14 heilt vorher an der Quelle (Masterplan/Queue), danach
+      # belegt diese Wache den Bestand: L1/L2 prüfen jedes Ziel gegen den
+      # Bestand, L3–L5 Domain/UTM/URL-Form. Der Schritt meldet sich im selben
+      # Issue (Label `pinterest`), damit kein zweiter Kanal entsteht.
+      - name: Pinterest-Zielwache (Masterplan, Queue, alle Permalinks)
+        id: ziel
+        continue-on-error: true
+        run: |
+          python3 scripts/pinterest_ziele.py --check
+          python3 scripts/pinterest_link_guard.py
+
       # Täglicher Nachweis für die Secrets-Wache (#206): der Pinterest-Token läuft
       # nach 30 Tagen ab. Der Governance-Lauf prüft wöchentlich – dieser Lauf
       # bestätigt ihn täglich live, damit „Token tot" nie erst nach Wochen auffällt.
@@ -142,27 +156,36 @@ jobs:
             --description "Pinterest-Kanal: Befunde des Watchdogs" --force || true
 
       - name: Issue bei Problemen eröffnen
-        if: steps.check.outputs.exit != '0'
+        if: steps.check.outputs.exit != '0' || steps.ziel.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
           SCHRITT_CHECK_EXIT: ${{ steps.check.outputs.exit }}
+          SCHRITT_ZIEL: ${{ steps.ziel.outcome }}
         run: |
           EXISTING=$(gh issue list --state open --label pinterest \
             --json number --jq '.[0].number' 2>/dev/null || echo "")
           TS=$(date -u '+%Y-%m-%d %H:%M UTC')
+          # #822: Der Befund kann aus zwei Messungen kommen – der Heiler-Prüfung
+          # (PINTEREST-REPORT.md) oder der unabhängigen Zielwache
+          # (PINTEREST-LINK-GUARD-REPORT.md). Der Vermerk nennt die Quelle,
+          # sonst sucht der Leser im falschen Report.
+          LAGE="Exit ${SCHRITT_CHECK_EXIT} (PINTEREST-REPORT.md)"
+          if [ "$SCHRITT_ZIEL" = "failure" ]; then
+            LAGE="$LAGE · Zielwache rot (PINTEREST-LINK-GUARD-REPORT.md)"
+          fi
           if [ -z "$EXISTING" ]; then
             gh issue create --title "Pinterest-Check: Probleme gefunden" \
               --label pinterest \
-              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden (Exit ${SCHRITT_CHECK_EXIT}). Details im PINTEREST-REPORT.md."
+              --body "**$TS** – Der Pinterest-Watchdog hat Probleme gefunden: ${LAGE}."
             echo "Issue erstellt"
           else
             gh issue comment "$EXISTING" \
-              --body "**$TS** – weiterhin Probleme (Exit ${SCHRITT_CHECK_EXIT})."
+              --body "**$TS** – weiterhin Probleme: ${LAGE}."
             echo "Issue kommentiert"
           fi
 
       - name: Issue bei Erfolg schließen
-        if: steps.check.outputs.exit == '0'
+        if: steps.check.outputs.exit == '0' && steps.ziel.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

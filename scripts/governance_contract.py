@@ -158,6 +158,15 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # der breite deckt die uebrige Familie (R7/R15/R16) und wirkt als
           # Auffangnetz. Beide mit Wirkungsprobe (C25) und Selbsttest (C6).
           "politur_ruine_heiler.py",
+          # Search-Console-Artefakte (24.10.2026, Blockade von #853): Seit dem
+          # 21.10. lag in `main` eine aus zwei Läufen zusammengesetzte
+          # `data/gsc/meta.json` – gültig war sie nie mehr, und der
+          # Artefakt-Wächter im Integritäts-Siegel stand für JEDEN Pull-Request
+          # auf Rot. Diese Wache prüft Bedeutung statt nur Syntax (Schema,
+          # Eindeutigkeit, Kopf gegen Tagesledger) und heilt ausschließlich mit
+          # belegbarem Git-Stand. Sie steht hier, weil eine Wache, die niemand
+          # verlangt, irgendwann niemand mehr ausführt (C6).
+          "gsc_artefakte_guard.py",
           # Satz-Heiler (07.10.2026, BOT-WATCHDOG #614): Der Lesbarkeits-
           # Heiler kann die Schwelle (< 60) mit Stufe A nicht erreichen und
           # mit Stufe B (Ganztext) nicht schreiben - die Klasse war damit
@@ -459,6 +468,17 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # keine Tags, Block am Textende). Alle Pinterest-Schreiber und der
           # Watchdog hängen daran; `--selftest` friert die Regel ein.
           "pinterest_hashtags.py",
+          # Zielwache (#822): „Ist dieses Ziel noch ein Artikel?“ – die Frage,
+          # die P10 fünf Tage lang falsch beantwortete und die der Masterplan
+          # für 7 von 46 Pins gar nicht stellte. Ihr Selbsttest friert Regel
+          # und Heilung ein (Retarget nur auf erklärte Live-Nachfolger).
+          "pinterest_ziele.py",
+          # Zielseiten-Garantie (#822): L1/L2 prüfen jedes Pin-Ziel (Plan,
+          # Queue, alle Permalinks) gegen den Bestand. Die Wache hat den
+          # Befund unabhängig reproduziert – sie lief nur in keinem Workflow
+          # („Wache ohne Fahrer“). Jetzt im Minimum: ihr Selbsttest läuft im
+          # Qualitäts-Gate, ihr Lauf im Pinterest-Watchdog (C43).
+          "pinterest_link_guard.py",
           # Fremdmessung-Sperre (19.10.2026, #806): Der am 11.10.2026 entfernte
           # Reichweiten-Dienst lebte als ANBINDUNG weiter (Skripte, Workflow-
           # Schritte, Secret, Datenstände) und täuschte eine Messung vor. Die
@@ -2080,6 +2100,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
         script_texts, root=root, python_bin=python_bin, quick=quick)
     schritte, _fehler = _gate_schritte(root)
     checks += c42_gate_schritt_hat_erzeuger(schritte, STEP_SIGNATURES, root=root)
+    checks += c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows, root=root)
     return checks
 
 
@@ -3243,6 +3264,155 @@ def c42_gate_schritt_hat_erzeuger(steps, signaturen, root=BLOG_DIR):
                                f"Erzeuger mehr (Muster `{muster}` trifft keine "
                                "Datei in scripts/) – der Schritt würde dauerhaft "
                                "„Datenlage offen“ melden (#806)."))
+    return out
+
+
+# --- C43: Ein geparktes Ziel ist kein Pin-Ziel (#822, 24.10.2026) -----------
+#
+# Befund: Der Pinterest-Watchdog meldete vom 20. bis 24.10.2026 jeden Tag
+# denselben Posten: „[P10] …dein-haus-sicher-schuetzen… Artikel-Seite ist ein
+# Meta-Refresh-Alias – nicht direkt pinnen“. Der Artikel war am 19.10.2026
+# nach dem Redaktions-Standard (RS1–RS3) geparkt (draft: true) und seine
+# ehemalige URL in data/weiterleitungen.yaml als Regel C auf die
+# Versicherungs-Pillar-Seite erklärt. Die Meta-Refresh-Seite war die GEWOLLTE
+# Auslieferung. P10 maß die falsche Menge (alle Slugs statt der Live-Artikel)
+# und hatte keinen Heiler – ein Befund ohne Schließpfad, exakt die Bauart C37.
+#
+# Beim Nachmessen kam die eigentliche Pinterest-Schwäche ans Licht: 7 von 46
+# Pins im Masterplan zeigten auf Ziele, die keine Artikel-Seite mehr sind
+# (4 geparkte Entwürfe, 3 URLs ohne Inhalt – davon 3 mit erklärter
+# Weiterleitung, 4 ohne). Die Wache, die genau das prüft
+# (pinterest_link_guard L1/L2), rief kein einziger Workflow auf: eine Wache
+# ohne Fahrer. Und die Prüfung „ist das Ziel noch ein Artikel?“ existierte
+# nirgends – deshalb stand dieselbe Frage in vier Skripten viermal anders.
+#
+# Der Vertrag in sieben Sätzen:
+#   a) EINE QUELLE: scripts/pinterest_ziele.py beantwortet „ist dieses Ziel
+#      noch ein Artikel?“ über weiterleitungen.live_urls() – dieselbe
+#      Live-Definition wie url_wache und der Weiterleitungs-Vertrag im
+#      deploy.yml-Gate. Eine zweite Draft-Erkennung ist ein Befund (Lehre #585).
+#   b) RICHTIGE MENGE: P10 misst Live-Artikel. Eine geparkte URL mit
+#      erklärter Weiterleitung ist Betriebszustand und steht ausdrücklich im
+#      Report – „kein Befund“ heißt nicht „nicht gemessen“ (C2).
+#   c) SCHLIESSFADEN: P10 heilt in beide Richtungen. Überdeckt eine
+#      Weiterleitung einen LIVE-Artikel, gewinnt der Artikel (SSOT-Eintrag und
+#      Alias-Seite weg, fail-closed bei mehrdeutiger Form). Eine verwaiste
+#      Alias-Seite ohne SSOT-Eintrag wird entfernt; Handarbeit bleibt Befund.
+#   d) KEIN ERFUNDENES ZIEL: P14 heilt nur über die SSOT. Regeln A/B
+#      (gleichwertiger, geprüfter Live-Beitrag) werden umgeschrieben, alles
+#      andere wird geparkt (kein Content-Verlust); Queue-Einträge werden
+#      entfernt, nie geparkt.
+#   e) WIRKUNG AM BESTAND: Kein Pin-Ziel in Masterplan oder Queue ist eine
+#      Weiterleitung, ein Entwurf oder fehlend – der Vertrag misst die Daten,
+#      nicht nur den Quelltext.
+#   f) FAHRER: Der Pinterest-Watchdog fährt den Heiler (--fix) UND die
+#      unabhängige Zielwache (pinterest_link_guard L1/L2). Eine Wache ohne
+#      Fahrer war die Ursache, nicht die Heilung.
+#   g) NACHWEIS: Quellfingerabdruck kennt SSOT und Zieldaten (Report-Schema 5);
+#      Regressionstests + Selbsttest laufen im Vertrag.
+C43_SSOT = "pinterest_ziele.py"
+C43_SSOT_MARKER = ("def url_pfad(", "def ziel_status(", "def befunde(",
+                   "def heile(", "RETARGET_REGELN", "ZULAESSIG",
+                   "weiterleitungen", "--selftest")
+C43_MELDER = "pinterest_check.py"
+C43_MELDER_MARKER = (
+    ("import pinterest_ziele as pz", "die Ziel-SSOT ist nicht angebunden"),
+    ("def _p10_pruefen(", "P10 misst nicht über die Ziel-SSOT"),
+    ("if geparkt and eintrag:",
+     "die Betriebszustand-Ausnahme ist nicht an den Parkstand gebunden"),
+    ("erklaert.append(", "der geparkte Betriebszustand wird nirgends belegt"),
+    ("pz.entferne_weiterleitung(", "die Heilung des Live-Falls fehlt"),
+    ("def _check_pin_ziele(", "es gibt keine Prüfung der Pin-Ziele (P14)"),
+    ("pz.heile(", "P14 hat keinen Heiler – das Issue bliebe offen"),
+    ("scripts/pinterest_ziele.py", "der Quellfingerabdruck kennt die Ziel-SSOT nicht"),
+    ("data/weiterleitungen.yaml", "der Quellfingerabdruck kennt die SSOT nicht"),
+)
+C43_WORKFLOW = "pinterest-watchdog.yml"
+C43_WORKFLOW_MARKER = (
+    ("pinterest_check.py --fix", "der Heiler hätte keinen Fahrer"),
+    ("pinterest_ziele.py --check", "die Zielwache wird nicht gefahren"),
+    ("pinterest_link_guard.py", "die unabhängige Zielwache bleibt ohne Fahrer"),
+)
+C43_TESTS = {"test_pinterest_ziele.py": ("ZielStatusTests", "HeilungTests",
+                                         "WeiterleitungsEintragTests"),
+             "test_pinterest_check.py": ("PinterestP10ParkTests",
+                                         "PinterestPinZielTests")}
+
+
+def c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows,
+                                         root=BLOG_DIR) -> list[tuple[str, str]]:
+    """Ein geparktes, weitergeleitetes oder fehlendes Ziel ist kein Pin-Ziel."""
+    out = []
+    ssot = (script_texts or {}).get(C43_SSOT, "")
+    if not ssot.strip():
+        out.append(("C43", f"scripts/{C43_SSOT} fehlt – es gäbe keine Stelle, die "
+                           "„ist dieses Ziel noch ein Artikel?“ beantwortet (#822)."))
+        return out
+    for marker in C43_SSOT_MARKER:
+        if marker not in ssot:
+            out.append(("C43", f"scripts/{C43_SSOT}: `{marker}` fehlt – die "
+                               "Ziel-Regel ist unvollständig (#822)."))
+    if "weiterleitungen.live_urls" not in ssot and "_weiterleitungs_modul" not in ssot:
+        out.append(("C43", f"scripts/{C43_SSOT} benutzt nicht die Live-SSOT "
+                           "(weiterleitungen.live_urls) – eine eigene Draft-Regel "
+                           "wäre die zweite Wahrheit (#585)."))
+    if C43_SSOT not in GUARDS:
+        out.append(("C43", f"scripts/{C43_SSOT} steht nicht im vertraglichen Minimum "
+                           "(GUARDS/C6) – sein Selbsttest liefe nie."))
+
+    # (b)(c)(d) Der Melder misst die richtige Menge und hat einen Schließpfad.
+    melder = (script_texts or {}).get(C43_MELDER, "")
+    for marker, befund in C43_MELDER_MARKER:
+        if marker not in melder:
+            out.append(("C43", f"scripts/{C43_MELDER}: `{marker}` fehlt – "
+                               f"{befund} (#822)."))
+    if "def _check_no_redirect_on_article(" not in melder:
+        out.append(("C43", "scripts/pinterest_check.py: P10 ist nicht mehr im "
+                           "Lauf verdrahtet (#822)."))
+
+    # (e) Wirkung am Bestand – nicht die Absicht im Quelltext.
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import pinterest_ziele as pz  # noqa: PLC0415
+    except Exception as exc:  # noqa: BLE001 – Importfehler ist ein Befund
+        out.append(("C43", f"scripts/{C43_SSOT} nicht importierbar: {exc}"))
+        return out
+    try:
+        for b in pz.befunde(root):
+            out.append(("C43", f"Pin Tag {b['tag']} ({b['titel'][:40]}) zeigt auf "
+                               f"{b['pfad'] or 'kein Ziel'} – Status {b['status']}; "
+                               "kein Pin auf eine Weiterleitung/einen Entwurf (#822)."))
+    except pz.QuellenFehler as exc:
+        out.append(("C43", f"Pin-Ziele nicht messbar ({exc}) – fail-closed (#822)."))
+
+    # (f) Die Auslieferung fährt Heiler UND Zielwache.
+    wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C43_WORKFLOW:
+            wf = inhalt or ""
+    if not wf:
+        wf = _read(os.path.join(root, ".github", "workflows", C43_WORKFLOW))
+    if not wf:
+        out.append(("C43", f".github/workflows/{C43_WORKFLOW} fehlt – ohne den Lauf "
+                           "gäbe es weder Messung noch Heilung (#822)."))
+    else:
+        for marker, befund in C43_WORKFLOW_MARKER:
+            if marker not in wf:
+                out.append(("C43", f".github/workflows/{C43_WORKFLOW}: `{marker}` "
+                                   f"fehlt – {befund} (#822)."))
+
+    # (g) Regressionstest – ein Vertrag ohne Test ist Prosa.
+    for name, klassen in C43_TESTS.items():
+        pfad = os.path.join(root, "scripts", "tests", name)
+        if not os.path.isfile(pfad):
+            out.append(("C43", f"scripts/tests/{name} fehlt – der Vertrag wäre "
+                               "ungetestet (#822)."))
+            continue
+        text = _read(pfad)
+        for klasse in klassen:
+            if klasse not in text:
+                out.append(("C43", f"scripts/tests/{name}: die Testklasse `{klasse}` "
+                                   "fehlt (#822)."))
     return out
 
 
@@ -5269,6 +5439,27 @@ RULE_TEXT = {
            "ehrliche Restluecke), der Aufruf VOR write_post, die Schwelle "
            "importiert statt eigenstaendig (Lehre #585), Regressionstest und "
            "Selbsttest im vertraglichen Minimum (C6).",
+    "C43": "Ein geparktes Ziel ist kein Pin-Ziel: Vom 20. bis 24.10.2026 meldete "
+           "der Pinterest-Watchdog jeden Tag denselben Posten – [P10] der "
+           "geparkte Artikel „Dein Haus sicher schützen“ sei ein "
+           "Meta-Refresh-Alias. Er WAR einer, und zwar der gewollte: Der "
+           "Artikel ist seit 19.10.2026 Entwurf (RS1–RS3), seine URL in "
+           "data/weiterleitungen.yaml als Regel C erklärt. P10 maß die falsche "
+           "Menge (alle Slugs statt der Live-Artikel) und hatte keinen Heiler – "
+           "dieselbe Bauart wie C37. Beim Nachmessen: 7 von 46 Pins im "
+           "Masterplan zeigten auf Ziele ohne Artikel-Seite (4 Entwürfe, 3 "
+           "fehlend), und die Wache, die das prüft (pinterest_link_guard L1/L2), "
+           "rief kein Workflow auf. Jetzt: EINE Quelle "
+           "(scripts/pinterest_ziele.py) über weiterleitungen.live_urls(); P10 "
+           "misst Live-Artikel und nennt geparkte URLS mit erklärter "
+           "Weiterleitung ausdrücklich als Betriebszustand; P10 heilt in beide "
+           "Richtungen (Live-Artikel gewinnt gegen eine überdeckende "
+           "Weiterleitung, verwaiste Alias-Seiten werden entfernt, Handarbeit "
+           "bleibt Befund); P14 heilt Pin-Ziele nur über die SSOT (Retarget bei "
+           "Regeln A/B, sonst parken – kein erfundenes Ziel, kein "
+           "Content-Verlust); der Watchdog fährt Heiler und Zielwache; "
+           "Report-Schema 5 kennt SSOT und Zieldaten; Tests und Selbsttest "
+           "laufen im Vertrag (Pinterest P10/P14, #822, 24.10.2026).",
     "C42": "Jeder Gate-Schritt hat einen lebenden Erzeuger: Der "
            "Governance-Report #806 fuehrte zwei Info-Zeilen unter „Datenlagen & "
            "Status“ – einen Datenimport ohne Dienst und die Seitenaufrufe als "
@@ -5341,7 +5532,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C41": "Der Schreiber misst vor dem Schreiben (eine Garantie für alle "
                 "Schreiberbahnen, SSOT-Schwelle, Tor T1–T4, ehrliche Restlücke)",
          "C42": "Jeder Gate-Schritt hat einen lebenden Erzeuger (kein Schritt ohne "
-                "Quelle, keine dauerhafte „Datenlage offen“-Zeile)"}
+                "Quelle, keine dauerhafte „Datenlage offen“-Zeile)",
+         "C43": "Ein geparktes Ziel ist kein Pin-Ziel (P10 misst die richtige "
+                "Menge, P14 heilt über die SSOT, die Zielwache hat einen Fahrer)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -7200,6 +7393,54 @@ def _selftest():
         failures.append("C42: ein Schritt ohne Report und ohne Ausnahme bleibt "
                         "unentdeckt (#806).")
 
+    # --- C43: Ein geparktes Ziel ist kein Pin-Ziel (Issue #822) --------------
+    # Vier Sabotagen, ein Ergebnis: Ohne Quelle, ohne richtige Menge, ohne
+    # Heiler und ohne Fahrer muss der Vertrag rot werden.
+    c43_namen = ("pinterest_check.py", "pinterest_ziele.py", "pinterest_link_guard.py")
+    echte_c43 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                 for name in c43_namen}
+    echte_wflows_c43 = {"pinterest-watchdog.yml":
+                        _read(os.path.join(BLOG_DIR, ".github", "workflows",
+                                           "pinterest-watchdog.yml"))}
+    if c43_geparktes_ziel_ist_kein_pin_ziel(echte_c43, echte_wflows_c43, root=BLOG_DIR):
+        failures.append("C43: der echte Zustand wird beanstandet: "
+                        f"{c43_geparktes_ziel_ist_kein_pin_ziel(echte_c43, echte_wflows_c43, root=BLOG_DIR)}")
+
+    # (a) Ohne Ziel-SSOT gibt es keine Antwort auf „ist das noch ein Artikel?“
+    ohne_ssot = {n: t for n, t in echte_c43.items() if n != "pinterest_ziele.py"}
+    if not [f for f in c43_geparktes_ziel_ist_kein_pin_ziel(
+            ohne_ssot, echte_wflows_c43, root=BLOG_DIR)
+            if "keine Stelle" in f[1]]:
+        failures.append("C43: eine fehlende Ziel-SSOT bleibt unentdeckt (#822).")
+
+    # (b) Ein Melder ohne Heiler: der Befund wäre wieder ein Dauerläufer.
+    ohne_heiler = dict(echte_c43, **{
+        "pinterest_check.py": echte_c43["pinterest_check.py"].replace(
+            "pz.heile(", "pz_heile_nicht(")})
+    if not [f for f in c43_geparktes_ziel_ist_kein_pin_ziel(
+            ohne_heiler, echte_wflows_c43, root=BLOG_DIR)
+            if "pz.heile(" in f[1]]:
+        failures.append("C43: ein P14 ohne Heiler bleibt unentdeckt (#822).")
+
+    # (c) Eine Wache ohne Fahrer: genau der Zustand, in dem der Befund
+    #     entstanden ist (pinterest_link_guard lief in keinem Workflow).
+    ohne_fahrer = {"pinterest-watchdog.yml": echte_wflows_c43["pinterest-watchdog.yml"]
+                   .replace("pinterest_link_guard.py", "pinterest_link_guard_aus.py")}
+    if not [f for f in c43_geparktes_ziel_ist_kein_pin_ziel(
+            echte_c43, ohne_fahrer, root=BLOG_DIR)
+            if "ohne Fahrer" in f[1]]:
+        failures.append("C43: eine Zielwache ohne Fahrer bleibt unentdeckt (#822).")
+
+    # (d) Eine geparkte URL mit erklärter Weiterleitung ist Betriebszustand –
+    #     wer sie als Defekt meldet, baut #822 nach. Das prüft der Selbsttest
+    #     des Melders selbst.
+    if not [f for f in c43_geparktes_ziel_ist_kein_pin_ziel(
+            dict(echte_c43, **{"pinterest_check.py": echte_c43["pinterest_check.py"]
+                               .replace("if geparkt and eintrag:", "if False:")}),
+            echte_wflows_c43, root=BLOG_DIR)
+            if "nicht an den Parkstand gebunden" in f[1]]:
+        failures.append("C43: die Betriebszustand-Ausnahme ist nicht belegt (#822).")
+
     # Die EINZIGE Urteilsstelle des Selbsttests (Dauerheilung #806): erst
     # hier wird über alle Kunstbefunde entschieden – die Abschnitte sammeln,
     # dieser Abschluss urteilt.
@@ -7208,7 +7449,7 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C42 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C43 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

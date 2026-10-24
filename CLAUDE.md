@@ -1827,6 +1827,51 @@ Beim Heilen kamen zwei blinde Flecken derselben Prüfung ans Licht:
 - Tests: `python3 -m unittest scripts.tests.test_pinterest_hashtags scripts.tests.test_pinterest_check`
   (45) · Bericht: `PINTEREST-729-HASHTAG-DAUERHEILUNG-PREMIUM-2026-10-13.md`.
 
+## Eine Prüfung muss die richtige Menge messen (Pinterest P10/P14, C43, seit #822, 24.10.2026)
+
+Der Pinterest-Watchdog meldete vom 20. bis 24.10.2026 **jeden Tag denselben**
+Posten: „[P10] 2026-08-12-dein-haus-sicher-schuetzen… Artikel-Seite ist ein
+Meta-Refresh-Alias – nicht direkt pinnen“. Der Artikel **war** ein Alias – und
+zwar der gewollte: Er ist seit 19.10.2026 nach dem Redaktions-Standard
+(RS1–RS3) geparkt (`draft: true`), seine URL steht in
+`data/weiterleitungen.yaml` als Regel C. Die Meta-Refresh-Seite unter
+`static/posts/<slug>/` war die Auslieferung, nicht der Defekt. P10 maß die
+falsche Menge: `_post_slugs()` kennt Entwürfe, P10 fragte aber nie, ob der
+Slug überhaupt live ist. Ein Befund ohne Schließpfad – dieselbe Bauart wie C37.
+
+Zwei Lehren, die über Pinterest hinausgehen:
+
+- **Eine Prüfung ohne Mengen-Begriff ist ein Dauerläufer.** „Seite ist ein
+  Redirect“ ist kein Defekt, solange nicht feststeht, *welche* Seiten Inhalt
+  liefern müssen. Verbindlich ist jetzt: Live-Artikel (Hugo-Logik, `draft:
+  true` zählt nicht) liefern Inhalt; eine geparkte URL darf weiterleiten, wenn
+  die SSOT es erklärt – und dann steht das ausdrücklich im Report („kein
+  Befund“ heißt nicht „nicht gemessen“, C2). Dieselbe Live-Definition benutzen
+  `url_wache.py`, `weiterleitungen.py` und jetzt `pinterest_ziele.py`
+  (`weiterleitungen.live_urls`) – keine zweite Draft-Erkennung.
+- **Der Blick auf die Daten fand den eigentlichen Defekt.** Während P10 den
+  Betriebszustand anzeigte, standen **7 von 46 Pins** im Masterplan auf
+  Zielen, die keine Artikel-Seite mehr sind (4 geparkte Entwürfe, 3 URLs ohne
+  Inhalt). Genau davor warnt P10 seit jeher – nur prüfte niemand den Plan.
+  P14 misst jetzt jedes Pin-Ziel (Masterplan + Queue) und heilt **nur über die
+  SSOT**: Regeln A/B (gleichwertiger, geprüfter Live-Nachfolger) werden
+  umgeschrieben, alles andere wird geparkt (kein Content-Verlust), Queue-
+  Einträge entfernt. Kein Ziel wird geraten, kein Pin gelöscht.
+- **Eine Wache ohne Fahrer ist keine Wache.** `pinterest_link_guard.py`
+  (L1/L2: jedes Pin-Ziel gegen den Bestand) hat den Befund am 24.10.2026
+  unabhängig reproduziert – und wurde von **keinem** Workflow aufgerufen. Sie
+  läuft jetzt im Pinterest-Watchdog (gleiches Issue, kein zweiter Kanal), und
+  ihr `--selftest` steht im vertraglichen Minimum (C6).
+- **Heilung in beide Richtungen, fail-closed.** Überdeckt eine Weiterleitung
+  einen LIVE-Artikel, gewinnt der Artikel (SSOT-Eintrag + Alias-Seite weg,
+  chirurgisch, nachgeparst, sonst nichts geschrieben). Handgebaute Alias-Seiten
+  bleiben ein Befund für Menschen.
+- **Vertrag C43** friert das ein (Quelle, Menge, Schließpfad, Wirkung am
+  Bestand, Fahrer, Nachweis Report-Schema 5, Tests). Prüfung:
+  `python3 scripts/governance_contract.py --selftest` ·
+  `python3 -m unittest scripts.tests.test_pinterest_ziele scripts.tests.test_pinterest_check`.
+  Bericht: `PINTEREST-822-DAUERHEILUNG-PREMIUM-2026-10-24.md`.
+
 ## Metadaten und Cover-Wahrheit (seit 14.10.2026, Nachschärfung #743)
 
 - **Ein Cover ist nur wahr, wenn es aus seinem Titel neu rendert.** Der Generator
@@ -2044,3 +2089,40 @@ ohne Wirkung“.
   ist der Politur-Layer und bleibt zuletzt.
 - Bilder: immer `width`/`height` (CLS-Gate), Varianten via
   `scripts/check_covers.py --fix`.
+
+## Ein Messartefakt ist eine ganze Messung, kein Text (seit 24.10.2026, #853)
+
+Seit dem 21.10.2026 stand das `Integritäts-Siegel` für **jeden** Pull-Request
+rot. Die Annotation sagte nur `.github#30 – Process completed with exit code 1`;
+der Lauf-Log war über die API nicht lesbar (`results-receiver … EOF`). Die
+Ursache stand im Repo, nicht im Netz: `artefakt_waechter.py` meldete drei
+`A1-JSON-SYNTAX`-Funde in `data/gsc/` – alle drei Dateien waren aus **mehreren
+Läufen** zusammengesetzt (`meta.json`: vier `stand`-Schlüssel in einem Objekt;
+Top-Listen: zwei Läufe ohne Trennkomma hintereinander).
+
+Der Import konnte das nicht sein (`write_text(json.dumps(...)` schreibt immer
+vollständig). Entstanden ist es beim **Zusammenführen** der Bot-Branches:
+PR #828 enthält zwei manuelle `Merge branch 'main'`-Commits, und Git hat die
+drei JSON-Dateien als Text gemergt. Ein Text-Merge auf einem Messartefakt hat
+keine Zeile, die zu beiden Läufen gehört.
+
+Vier Regeln halten die Klasse jetzt:
+
+- **Struktur:** `data/gsc/*.json merge=binary` in `.gitattributes` – wie beim
+  Siegel (#346), den Reserve-Snapshots (#634) und den Quelltext-Wachen (#783).
+  Der Tagesledger bleibt `merge=union`: Tage sind unabhängige Messungen.
+- **Bedeutung:** `scripts/gsc_artefakte_guard.py` prüft vier Klassen – G1 Kopf,
+  G2 Schema + Eindeutigkeit der Top-Listen, G3 Ledger streng aufsteigend, G4
+  Kopf gegen gemessene Tage. G2–G4 fangen die Fälle, die **gültiges JSON**
+  erzeugen und trotzdem falsch sind; der Selbsttest sabotiert 20 Fälle.
+- **Herkunft:** `--heal` holt den letzten belegbar gültigen Git-Stand zurück
+  (nie rekonstruieren, nie den Ledger zurückrollen, nie ein Teilstück
+  schreiben); `--heal --rev <sha>` setzt alle Kopfdaten aus EINEM Lauf.
+- **Verdrahtung:** die Wache läuft in `integrity-lock.yml` (jeder PR) und in
+  `gsc-import.yml` **vor** jedem Commit; `data/gsc/**` löst jetzt `regression`
+  aus, `scripts/tests/test_gsc_artefakte.py` prüft die echten Dateien; der
+  Selbsttest steht im vertraglichen Minimum (C6).
+
+Vertrag: **C6** (`GUARDS`) · Runbook `docs/ANLEITUNG-GSC-API-ZUGRIFF.md`,
+Abschnitt „Wenn ein Artefakt kaputt ist“ · Bericht
+`GSC-DATEN-INTEGRITAET-HIGHEND-2026-10-24.md`.

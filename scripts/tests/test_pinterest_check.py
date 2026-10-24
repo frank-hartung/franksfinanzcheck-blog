@@ -299,5 +299,165 @@ class PinterestReportHonestyTests(unittest.TestCase):
         self.assertNotIn("Nicht gemessen", text)
 
 
+class PinterestP10ParkTests(unittest.TestCase):
+    """#822: P10 unterscheidet Betriebszustand (geparkt) von Defekt (live).
+
+    Fünf Tage lang meldete der Watchdog den geparkten Artikel „Dein Haus
+    sicher schützen“ als Alias-Defekt, obwohl `data/weiterleitungen.yaml`
+    die Weiterleitung ausdrücklich erklärte – und P10 hatte keinen Heiler,
+    also konnte das Issue nie zugehen.
+    """
+
+    SSOT = ('eintraege:\n'
+            '  - {von: "/posts/parked/", nach: "/pillar/x/", regel: "C", grund: "geparkt"}\n')
+
+    def _repo(self, tmp, slugs, ssot=SSOT):
+        root = Path(tmp)
+        for slug, draft in slugs:
+            d = root / "content" / "posts" / slug
+            d.mkdir(parents=True)
+            (d / "index.md").write_text(
+                "---\ntitle: X\n" + ("draft: true\n" if draft else "") + "---\n",
+                encoding="utf-8")
+            for basis in ("static", "public"):
+                page = root / basis / "posts" / slug / "index.html"
+                page.parent.mkdir(parents=True)
+                page.write_text('<meta name="ff-weiterleitung" content="regel-C">'
+                                '<meta http-equiv="refresh" content="0; url=/pillar/x/">',
+                                encoding="utf-8")
+        (root / "data").mkdir()
+        (root / "data" / "url_entfallen.yaml").write_text("eintraege: []\n", encoding="utf-8")
+        (root / "data" / "weiterleitungen.yaml").write_text(ssot, encoding="utf-8")
+        return root
+
+    def test_geparkte_url_mit_erklaerter_weiterleitung_ist_kein_befund(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp, [("parked", True)])
+            probleme, heilungen, erklaert = pc._p10_pruefen(root, root / "public")
+            self.assertEqual(probleme, [])
+            self.assertEqual(heilungen, [])
+            self.assertEqual(erklaert, [("parked", "/pillar/x/", "C")])
+
+    def test_live_artikel_der_von_weiterleitung_ueberdeckt_wird_ist_ein_defekt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp, [("live", False)])
+            probleme, _h, _e = pc._p10_pruefen(root, root / "public")
+            self.assertEqual(len(probleme), 1)
+            self.assertEqual(probleme[0][0], "P10")
+            self.assertIn("LIVE-Artikel", probleme[0][2])
+
+    def test_heilung_gibt_dem_live_artikel_die_url_zurueck(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp, [("live", False)])
+            probleme, heilungen, _e = pc._p10_pruefen(root, root / "public", fix=True)
+            self.assertEqual(probleme, [])
+            self.assertEqual(len(heilungen), 1)
+            self.assertNotIn('"/posts/live/"',
+                             (root / "data" / "weiterleitungen.yaml").read_text(encoding="utf-8"))
+            for basis in ("static", "public"):
+                self.assertFalse((root / basis / "posts" / "live" / "index.html").exists())
+            # zweiter Lauf: nichts mehr zu tun (idempotent)
+            self.assertEqual(pc._p10_pruefen(root, root / "public", fix=True)[0], [])
+
+    def test_verwaiste_weiterleitung_einer_geparkten_url_wird_entfernt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp, [("parked", True)], ssot="eintraege: []\n")
+            probleme, _h, _e = pc._p10_pruefen(root, root / "public")
+            self.assertEqual(len(probleme), 1)
+            self.assertIn("verwaiste Weiterleitung", probleme[0][2])
+            probleme, heilungen, _e = pc._p10_pruefen(root, root / "public", fix=True)
+            self.assertEqual(probleme, [])
+            self.assertEqual(len(heilungen), 1)
+            self.assertFalse((root / "static" / "posts" / "parked" / "index.html").exists())
+
+    def test_handgemachte_alias_seite_bleibt_handentscheidung(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp, [("live", False)])
+            (root / "static" / "posts" / "live" / "index.html").write_text(
+                '<meta http-equiv="refresh" content="0; url=/x/">', encoding="utf-8")
+            probleme, heilungen, _e = pc._p10_pruefen(root, root / "public", fix=True)
+            self.assertEqual(heilungen, [])
+            self.assertEqual(len(probleme), 1)
+            self.assertIn("Handentscheidung", probleme[0][2])
+
+    def test_unlesbare_quelle_ist_fail_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp, [("live", False)])
+            (root / "data" / "weiterleitungen.yaml").unlink()
+            probleme, heilungen, erklaert = pc._p10_pruefen(root, root / "public", fix=True)
+            self.assertEqual(heilungen, [])
+            self.assertEqual(erklaert, [])
+            self.assertEqual(len(probleme), 1)
+            self.assertIn("nicht lesbar", probleme[0][2])
+
+
+class PinterestPinZielTests(unittest.TestCase):
+    """#822: P14 misst jedes Pin-Ziel gegen die Live-SSOT und heilt an der Quelle."""
+
+    PLAN = """pins:
+- tag: 1
+  titel: 'Live'
+  url: https://franksfinanzcheck.de/posts/live/
+- tag: 2
+  titel: 'Alt'
+  url: https://franksfinanzcheck.de/posts/alt/
+- tag: 3
+  titel: 'Weg'
+  url: https://franksfinanzcheck.de/posts/weg/
+"""
+
+    def _repo(self, tmp):
+        root = Path(tmp)
+        d = root / "content" / "posts" / "live"
+        d.mkdir(parents=True)
+        (d / "index.md").write_text("---\ntitle: X\n---\n", encoding="utf-8")
+        (root / "data").mkdir()
+        (root / "data" / "url_entfallen.yaml").write_text("eintraege: []\n", encoding="utf-8")
+        (root / "data" / "weiterleitungen.yaml").write_text(
+            'eintraege:\n  - {von: "/posts/alt/", nach: "/posts/live/", regel: "B", '
+            'grund: "gleiche Suchabsicht"}\n', encoding="utf-8")
+        (root / "data" / "pinterest_plan.yaml").write_text(self.PLAN, encoding="utf-8")
+        return root
+
+    def test_check_meldet_p14_und_schreibt_nichts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp)
+            with patch.object(pc, "BLOG_DIR", str(root)), patch.object(pc, "DO_FIX", False):
+                pc.PROBLEMS.clear()
+                pc.FIXED.clear()
+                pc._check_pin_ziele()
+                self.assertEqual({p[0] for p in pc.PROBLEMS}, {"P14"})
+                self.assertEqual(pc.FIXED, [])
+            self.assertEqual((root / "data" / "pinterest_plan.yaml").read_text(encoding="utf-8"),
+                             self.PLAN)
+
+    def test_fehlender_masterplan_wird_als_p14_gemeldet_nicht_verschwiegen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp)
+            (root / "data" / "pinterest_plan.yaml").unlink()
+            with patch.object(pc, "BLOG_DIR", str(root)), patch.object(pc, "DO_FIX", True):
+                pc.PROBLEMS.clear()
+                pc.FIXED.clear()
+                pc._check_pin_ziele()
+                self.assertEqual([p[0] for p in pc.PROBLEMS], ["P14"])
+                self.assertIn("nicht messbar", pc.PROBLEMS[0][2])
+
+    def test_fix_schreibt_retarget_und_parkt_den_rest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._repo(tmp)
+            with patch.object(pc, "BLOG_DIR", str(root)), patch.object(pc, "DO_FIX", True):
+                pc.PROBLEMS.clear()
+                pc.FIXED.clear()
+                pc._check_pin_ziele()
+                self.assertEqual(pc.PROBLEMS, [])
+                self.assertEqual(len(pc.FIXED), 2)
+            plan = (root / "data" / "pinterest_plan.yaml").read_text(encoding="utf-8")
+            self.assertIn("https://franksfinanzcheck.de/posts/live/", plan)
+            self.assertNotIn("/posts/alt/", plan)
+            self.assertNotIn("/posts/weg/", plan)
+            park = (root / "data" / "pinterest_plan_parked.yaml").read_text(encoding="utf-8")
+            self.assertIn("Weg", park)
+
+
 if __name__ == "__main__":
     unittest.main()
