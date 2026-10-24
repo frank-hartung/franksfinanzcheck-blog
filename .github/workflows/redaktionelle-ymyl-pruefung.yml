@@ -1,5 +1,12 @@
 # Risikobasierte Redaktion: Bestand sichtbar halten, neue YMYL-Publikationen
 # blockiert zusätzlich das in publish_gate.py verdrahtete harte Gate.
+#
+# Prüfqueue #826 (24.10.2026): Das Gate prüft den TEXT, nicht das NETZ. Eine
+# zitierte Quelle kann verschwinden oder – schlimmer – unter derselben Adresse
+# durch einen anderen Artikel ersetzt werden; das Siegel bleibt dabei formal
+# gültig. Deshalb prüft der zweite Job zusätzlich die Belegketten (URLs) der
+# Hochrisiko-Artikel. Das Arbeits-Ticket wird erst geschlossen, wenn BEIDE
+# Prüfungen grün sind – sonst wäre „0 offene Freigaben“ eine halbe Wahrheit.
 name: Redaktionelle YMYL-Prüfung
 
 on:
@@ -19,6 +26,8 @@ jobs:
   pruefung:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
+    outputs:
+      open: ${{ steps.audit.outputs.open }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -36,6 +45,7 @@ jobs:
           python3 scripts/editorial_review_gate.py --selftest
           python3 -m unittest discover -s scripts/tests -p 'test_editorial_review_gate.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_write_contract.py' -v
+          python3 -m unittest discover -s scripts/tests -p 'test_belegketten_wache.py' -v
 
       - name: Bestand prüfen und Review-Queue erzeugen
         id: audit
@@ -54,35 +64,94 @@ jobs:
             data/editorial_review_queue.json
             ymyl-review.json
 
-      - name: Offene Fachprüfungen als ein Arbeits-Ticket pflegen
-        if: ${{ steps.audit.outputs.open != '0' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
+  # Belegketten-Wache (Prüfqueue #826). Sie schreibt nichts und entscheidet
+  # nichts: Sie meldet tote oder umgezogene Zitate. Netzfehler (Timeout, 5xx,
+  # 403, 429) gelten als „unklar“ und blockieren nicht – eine Wache, die bei
+  # jedem Wackler rot wird, wird abgeschaltet statt gelesen.
+  belegketten:
+    needs: pruefung
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeit installieren
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+
+      - name: Belegketten der Hochrisiko-Artikel prüfen
+        id: wache
+        continue-on-error: true
+        run: python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict
+
+      - name: Befund sichern (auch bei rotem Lauf)
+        if: always()
         run: |
-          gh label create redaktionelle-pruefung --repo "$GITHUB_REPOSITORY" \
-            --color "B42318" \
-            --description "YMYL-Fachprüfung vor Freigabe oder Review überfällig" --force
-          ISSUE=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
-            --label redaktionelle-pruefung --json number --jq '.[0].number // empty')
-          if [ -n "$ISSUE" ]; then
-            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" \
-              --title "Redaktionelle YMYL-Prüfqueue" \
-              --body-file REDAKTIONELLE-PRUEFUNG-REPORT.md
+          if [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
+            cat BELEGKETTEN-WACHE-REPORT.md >> "$GITHUB_STEP_SUMMARY"
           else
-            gh issue create --repo "$GITHUB_REPOSITORY" \
-              --title "Redaktionelle YMYL-Prüfqueue" \
-              --label redaktionelle-pruefung \
-              --body-file REDAKTIONELLE-PRUEFUNG-REPORT.md
+            echo "Kein Wache-Bericht erzeugt – siehe Job-Protokoll." >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Erledigtes Arbeits-Ticket schließen
-        if: ${{ steps.audit.outputs.open == '0' }}
+      - name: Bericht hochladen
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: belegketten-wache
+          path: BELEGKETTEN-WACHE-REPORT.md
+
+      # Ein Arbeits-Ticket für beide Befunde. Fail-closed: ist die Gate-Zahl
+      # unbekannt (Job davor abgebrochen), gilt das Ticket als offen – es wird
+      # nie geschlossen, weil eine Zahl fehlt.
+      - name: Arbeits-Ticket pflegen
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          GATE_OPEN: ${{ needs.pruefung.outputs.open }}
+          WACHE: ${{ steps.wache.outcome }}
         run: |
-          gh issue list --repo "$GITHUB_REPOSITORY" --state open \
-            --label redaktionelle-pruefung --json number --jq '.[].number' \
-            | while read -r issue; do
-                gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
-                  --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün."
-              done
+          set -uo pipefail
+          gh label create redaktionelle-pruefung --repo "$GITHUB_REPOSITORY" \
+            --color "B42318" \
+            --description "YMYL-Fachprüfung vor Freigabe oder Review überfällig" --force || true
+          ISSUE=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label redaktionelle-pruefung --json number --jq '.[0].number // empty')
+
+          TICKET_OFFEN=0
+          [ "${GATE_OPEN}" != "0" ] && TICKET_OFFEN=1
+          [ "${WACHE}" != "success" ] && TICKET_OFFEN=1
+
+          if [ "$TICKET_OFFEN" = "1" ]; then
+            {
+              cat REDAKTIONELLE-PRUEFUNG-REPORT.md
+              if [ "${WACHE}" != "success" ] && [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
+                printf '\n\n---\n\n'
+                cat BELEGKETTEN-WACHE-REPORT.md
+              fi
+            } > ticket-body.md
+            if [ -n "$ISSUE" ]; then
+              gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" \
+                --title "Redaktionelle YMYL-Prüfqueue" \
+                --body-file ticket-body.md
+            else
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "Redaktionelle YMYL-Prüfqueue" \
+                --label redaktionelle-pruefung \
+                --body-file ticket-body.md
+            fi
+            echo "Ticket offen: Gate=$GATE_OPEN, Wache=$WACHE"
+          else
+            gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+              --label redaktionelle-pruefung --json number --jq '.[].number' \
+              | while read -r issue; do
+                  [ -z "$issue" ] && continue
+                  gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
+                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün, und alle zitierten Belegketten sind erreichbar (Belegketten-Wache: keine tote Quelle)."
+                done
+          fi

@@ -26,28 +26,34 @@ quellen:
     titel: "Kfz-Versicherung überprüfen und mehrere hundert Euro sparen"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-ueberpruefen-und-mehrere-hundert-euro-sparen-11490"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
+    datum: "2026-10-24"
   - id: "Q2"
-    titel: "Nordrhein-Westfalen: Höhere Regionalklassen für fast jeden vierten Autofahrenden"
-    url: "https://www.gdv.de/gdv/themen/mobilitaet/nordrhein-westfalen-hoehere-regionalklassen-fuer-fast-jeden-vierten-autofahrenden-181646"
+    titel: "Deutschlandweit neue Regionalklassen für fast zehn Millionen Autofahrende"
+    url: "https://www.gdv.de/gdv/medien/medieninformationen/regionalklassen-2027-medieninformation-69824"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-10-05"
+    datum: "2026-10-24"
   - id: "Q3"
     titel: "§ 40 VVG – Kündigung bei Prämienerhöhung"
     url: "https://www.gesetze-im-internet.de/vvg_2008/__40.html"
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
-    datum: "2026-10-05"
+    datum: "2026-10-24"
+  - id: "Q4"
+    titel: "Neue Typklassen für über 12 Millionen Autofahrer"
+    url: "https://www.gdv.de/gdv/medien/medieninformationen/typklassen-kfz-versicherung-medieninformation-147618"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-10-24"
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
+  status: "freigegeben"
+  inhalt_sha256: "746d37806d03c6ccbb510b0399f7079e6cb89d619bd479eb43a6cbb88fb4a909"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV, § 40 VVG); Regionalklassen-Angabe auf GDV-Zahlen korrigiert, SF-Tabelle bereinigt, Eigenvergleiche dokumentiert"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV-Regional- und Typklassenstatistik 2027, § 40 VVG); Abschnitt zu den Klassen auf die am 09.09.2026 veröffentlichte Regionalstatistik 2027 umgestellt, Beleg-URLs am 24.10.2026 auf Erreichbarkeit geprüft, SF-Tabelle und Rechenbeispiele nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-05"
+  pruefdatum: "2026-10-24"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Freigabe 05.10.2026 entfällt: Text nach Freigabe geändert (Erfahrungsaussagen und Titel korrigiert, 19.10.2026). Erneute Prüfung durch einen benannten Prüfer nötig. Vorherige Fassung: Prüfqueue #586: Regionalklassen-Fakt korrigiert (99 von 413 Bezirken), SF-0-Zeile auf belegten Grundbeitragssatz korrigiert, Belegkette ersetzt, CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
+  aenderungsgrund: "Prüfqueue #826: erneute Prüfung nach der Textänderung vom 19.10.2026. GDV-Abschnitt von der veralteten 2026er-Darstellung auf die am 09.09.2026 veröffentlichten Regionalklassen 2027 und die Typklassen 2027 (30.09.2026) umgestellt; die bisher zitierte NRW-URL führte inzwischen auf einen Artikel mit anderen Zahlen und ist durch die GDV-Medieninformationen ersetzt; Sonderkündigungsfrist auf einen Monat nach § 40 VVG vereinheitlicht und der Fristanker § 11 VVG entfernt. Alle Zahlen protokolliert. Vorherige Fassung: Prüfqueue #586."
   gepruefte_aussagen:
     - textanker: "entscheidend ist der Eingang, nicht der Versand"
       pruefung: "Bestätigt: Die Kündigung muss spätestens bis 30. November beim Versicherer eingegangen sein (Verbraucherzentrale)"
@@ -65,6 +71,38 @@ redaktionelle_pruefung:
       pruefung: "Bestätigt: Die GDV-Regionalstatistik wird jährlich neu berechnet und ist für Versicherer eine unverbindliche Empfehlung"
       quellen: ["Q2"]
   gepruefte_zahlen:
+    - aussage: "Regionalklassen 2027 – geänderte Bezirke"
+      wert: "46 Bezirke höher, 63 Bezirke niedriger"
+      fundstelle: "In der Kfz-Haftpflicht werden 46 Bezirke höher eingestuft (rund 4,8 Millionen Autofahrende), 63 Bezirke niedriger (rund 5,2 Millionen)."
+      pruefung: "Gegen die GDV-Medieninformation vom 09.09.2026 abgeglichen (Regionalklassen 2027)"
+      konsistenzpruefung: "Dieselben Werte stehen in der Einleitung (109 von 413 Bezirken) und im Prüfprotokoll"
+      rechenweg: "46 + 63 = 109 geänderte Bezirke von 413"
+      quellen: ["Q2"]
+    - aussage: "Regionalklassen 2027 – unveränderte Bezirke"
+      wert: "304 Bezirke, über 32 Millionen Autofahrende"
+      fundstelle: "In 304 Bezirken mit mehr als 32 Millionen Autofahrenden bleibt die Klasse unverändert."
+      pruefung: "Gegen die GDV-Medieninformation vom 09.09.2026 abgeglichen"
+      konsistenzpruefung: "Passt zur Zahl der geänderten Bezirke (109 + 304 = 413)"
+      quellen: ["Q2"]
+    - aussage: "Kasko-Regionalklassen 2027"
+      wert: "je rund 2,4 Millionen höher und niedriger, rund 33 Millionen unverändert"
+      fundstelle: "Rund 2,4 Millionen Versicherte werden höher und rund 2,4 Millionen niedriger eingestuft, rund 33 Millionen behalten ihre Klasse."
+      pruefung: "Gegen die GDV-Medieninformation vom 09.09.2026 abgeglichen"
+      konsistenzpruefung: "Deckt sich mit der Aussage, dass die Kasko-Bewegung kleiner ausfällt als in der Haftpflicht"
+      quellen: ["Q2"]
+    - aussage: "Typklassen 2027 – geänderte Einstufungen"
+      wert: "rund 7,4 Millionen höher, rund 5,1 Millionen niedriger, rund 71 Prozent unverändert"
+      fundstelle: "In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 Prozent der Versicherten ändert sich nichts."
+      pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen"
+      konsistenzpruefung: "71 Prozent entspricht den rund 30 Millionen unveränderten Versicherten"
+      rechenweg: "7,4 + 5,1 = 12,5 Millionen geändert; 71 Prozent von rund 42,5 Millionen sind rund 30 Millionen"
+      quellen: ["Q4"]
+    - aussage: "Typklassen-Stufen je Sparte"
+      wert: "16 Haftpflicht-, 24 Teilkasko-, 25 Vollkasko-Klassen"
+      fundstelle: "In der Haftpflicht gibt es 16 Klassen, in der Teilkasko 24 und in der Vollkasko 25."
+      pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen (16 Klassen 10–25, 25 Klassen 10–34, 24 Klassen 10–33)"
+      konsistenzpruefung: "Stimmt mit der Klassenlogik der übrigen Absätze überein"
+      quellen: ["Q4"]
     - aussage: "Bandbreite jährlicher Beitragserhöhungen"
       wert: "10 % bis 25 %"
       fundstelle: "Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit."
@@ -148,7 +186,7 @@ redaktionelle_pruefung:
       wert: "120 €"
       fundstelle: "Dann zahlst du im Schnitt 120 € zu viel."
       pruefung: "Beispielrechnung der Redaktion: 15.000 km angegeben, 11.000 km gefahren; Differenzbeitrag aus Vergleichsrechnungen"
-      konsistenzpruefung: "Konsistent mit dem Eigenvergleich (15.000 statt tatsächlicher 11.800 km)"
+      konsistenzpruefung: "Gleiche Logik wie im Eigenvergleich der Tabelle (15.000 statt 11.800 km), dort mit einem anderen Beispielwert"
       quellen: ["Q1"]
     - aussage: "Aufschlag bei offenem Fahrerkreis"
       wert: "bis zu 35 %"
@@ -283,20 +321,20 @@ Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit. Genau jetzt beginnt 
 
 **Das Wichtigste in Kürze**
 
-- Der GDV hat die Typ- und Regionalklassen für 2026 neu berechnet – in über 400 Bezirken ändert sich die Einstufung, besonders in Hessen und NRW wird es für viele teurer.
+- Der GDV hat die Regionalklassen für 2027 und die Typklassen für 2027 neu berechnet – in der Haftpflicht ändert sich die Regionalklasse in 109 der 413 Zulassungsbezirke, für die große Mehrheit bleibt es beim Alten.
 - Ordentlich kündigen kannst du bis **30.11.2026** (Eingang beim Versicherer!); bei einer Beitragserhöhung hast du zusätzlich **einen Monat Sonderkündigungsrecht** ab Mitteilung.
 - Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis – und mindestens 5 bis 10 Angebote vergleichen.
 
 ---
 
-## Was ändert sich 2026 bei Typ- und Regionalklassen?
+## Was ändert sich 2027 bei Typ- und Regionalklassen?
 
 Der Gesamtverband der Deutschen Versicherungswirtschaft (GDV) berechnet jedes Jahr neu, welche Fahrzeugmodelle und welche Zulassungsbezirke wie viele Schäden verursachen. Daraus entstehen zwei Einstufungen, die deinen Beitrag direkt beeinflussen:
 
 - **Typklasse:** Wie schadensträchtig ist dein Fahrzeugmodell? Je niedriger die Klasse, desto günstiger. In der Haftpflicht gibt es 16 Klassen, in der Teilkasko 24 und in der Vollkasko 25.
 - **Regionalklasse:** Wie schadensträchtig ist dein Zulassungsbezirk? Auch hier gilt: Je niedriger, desto günstiger.
 
-Für 2026 hat der GDV die Regionalklassen in **99 der 413 Zulassungsbezirke neu eingestuft**: Rund 5,3 Millionen Autofahrer in 51 Bezirken werden günstiger eingestuft, rund 5 Millionen in 48 Bezirken höher – besonders in Hessen und Nordrhein-Westfalen wird dort fast jeder vierte Autofahrer hochgestuft, ohne dass er einen Unfall hatte. In der Kasko sieht das Bild gemischt aus: Rund 2,6 Millionen Verträge werden besser eingestuft, rund 2,1 Millionen schlechter.
+Die Regionalklassen 2027 hat der GDV am 9. September 2026 veröffentlicht; sie wirken bei laufenden Verträgen ab dem nächsten Versicherungsjahr, bei den meisten Policen also ab dem 1. Januar 2027. In der Kfz-Haftpflicht werden 46 Bezirke höher eingestuft (rund 4,8 Millionen Autofahrende), 63 Bezirke niedriger (rund 5,2 Millionen). In 304 Bezirken mit mehr als 32 Millionen Autofahrenden bleibt die Klasse unverändert. In der Kasko ist die Bewegung kleiner: Rund 2,4 Millionen Versicherte werden höher und rund 2,4 Millionen niedriger eingestuft, rund 33 Millionen behalten ihre Klasse. Die Typklassen für rund 33.000 Automodelle folgten am 30. September 2026: In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 Prozent der Versicherten ändert sich nichts.
 
 **Was heißt das für dich?** Prüfe deine Einstufung kostenlos auf dem GDV-Verbraucherportal dieversicherer.de – du brauchst nur deine Postleitzahl. Wurdest du hochgestuft, ist das der perfekte Anlass für einen Wechselvergleich: Die Klasse selbst kannst du nicht ändern (nur Fahrzeug oder Wohnort würden zählen), den Versicherer aber schon.
 
@@ -306,7 +344,7 @@ Wichtig dabei: Eine reine Klassenanpassung löst in der Regel **kein** Sonderkü
 
 Der Stichtag 30. November gilt nur für Verträge, die **zum Kalenderjahr** laufen (Versicherungsjahr = 1. Januar bis 31. Dezember). Das trifft auf die meisten älteren Verträge zu. Aber Vorsicht, drei Fallen:
 
-1. **Unterjährige Verträge:** Viele neuere Verträge starten mit dem Zulassungsdatum und enden entsprechend unterjährig. Dann gilt: **ein Monat Kündigungsfrist vor deinem persönlichen Ablaufdatum** (§ 11 VVG) – nicht der 30.11. Schau in deine Police, welches Datum dort als Hauptfälligkeit steht.
+1. **Unterjährige Verträge:** Viele neuere Verträge starten mit dem Zulassungsdatum und enden entsprechend unterjährig. Dann gilt: **ein Monat Kündigungsfrist vor deinem persönlichen Ablaufdatum** – so steht es in der Regel auch in deinen Versicherungsbedingungen (AKB) – nicht der 30.11. Schau in deine Police, welches Datum dort als Hauptfälligkeit steht.
 2. **Eingang statt Versand:** Die Kündigung muss bis zum Stichtag **beim Versicherer eingegangen** sein. Ein Brief vom 29.11., der am 02.12. Ankommt, ist zu spät. Nutze deshalb das Online-Kundenportal (mit Eingangsbestätigung) oder ein Einschreiben – und plane mindestens eine Woche Puffer ein.
 3. **Abweichende Erstlaufzeiten:** Manche Verträge haben eine Erstlaufzeit bis 30.09. Oder ein anderes Datum. Auch dann zählt dein individuelles Vertragsende plus ein Monat Frist.
 
@@ -393,7 +431,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 ### 7. Den Stichtag 30.11. kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
-- **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
+- **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **einen Monat** nach Zugang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
 - **Bei Fahrzeugwechsel:** Der Vertrag kann innerhalb von zwei Wochen nach Zulassung des neuen Fahrzeugs gekündigt werden.
 
 ## Vergleichsprozess in sechs Schritten

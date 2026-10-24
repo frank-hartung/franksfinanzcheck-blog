@@ -19,26 +19,27 @@ pin_title: "Unfallversicherung 2026: Sinnvoll? Kosten & Leistungen im Check"
 pin_description: "*Werbung | Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen. Mehr Spartipps auf FranksFinanzcheck! #unfallversicherung #unfallversicherungkosten #gliedertaxe"
 quellen:
   - id: "Q1"
-    titel: "Private Unfallversicherung: Wann sie sinnvoll ist"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/private-unfallversicherung-wann-sie-sinnvoll-ist-13888"
+    titel: "Private Unfallversicherung – überflüssig oder sinnvoll?"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/private-unfallversicherung-ueberfluessig-oder-sinnvoll-13888"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
+    datum: "2026-10-24"
   - id: "Q2"
     titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
+    datum: "2026-10-24"
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
+  status: "freigegeben"
+  inhalt_sha256: "6e126199d04e8c018d1024608b8b8b5475abd2753aa5fe5e11fc151f4157e8dd"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Abgrenzung Unfall/Krankheit/BU belegt, Progressions- und Gliedertaxe-Rechnungen nachgerechnet"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Beleg-URLs am 24.10.2026 auf Erreichbarkeit und Inhalt geprüft, Abgrenzung Unfall/Krankheit/BU belegt, Gliedertaxe- und Progressionsrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-05"
+  pruefdatum: "2026-10-24"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Freigabe 05.10.2026 entfällt: Text nach Freigabe geändert (Erfahrungsaussagen und Titel korrigiert, 19.10.2026). Erneute Prüfung durch einen benannten Prüfer nötig. Vorherige Fassung: Prüfqueue #586: Belegkette auf Verbraucherzentrale umgestellt, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Rechenbeispiele nachgerechnet"
+  aenderungsgrund: "Prüfqueue #826: erneute Prüfung nach der Textänderung vom 19.10.2026. Belegkette repariert – die Verbraucherzentrale-Seite ist umgezogen (alte URL lieferte 404); Gliedertaxe-Tabelle als Standardwerte der GDV-Empfehlung plus redaktionelles Beispiel für die verbesserte Gliedertaxe gekennzeichnet; Beitragsspannen ausdrücklich als redaktionelle Orientierung ohne Marktstatistik benannt; Senioren-Einordnung präzisiert. Vorherige Fassung: Prüfqueue #586."
   gepruefte_aussagen:
     - textanker: "Rücken, Psyche, Krebs oder andere Krankheiten gehören in der Regel nicht zum Schutzkern"
       pruefung: "Bestätigt: Die private Unfallversicherung leistet nur bei Unfallfolgen, nicht bei Krankheit (Verbraucherzentrale)"
@@ -50,7 +51,7 @@ redaktionelle_pruefung:
       pruefung: "Bestätigt: Hohe Progression hebt die Leistung bei schwerer Invalidität überproportional an; Verbraucherzentrale empfiehlt auf hohe Progression zu achten"
       quellen: ["Q1"]
     - textanker: "Mit dem Alter steigt oft das Risiko für Stürze"
-      pruefung: "Bestätigt: Senioren gehören zu den Gruppen, für die eine private Unfallversicherung sinnvoll sein kann (Verbraucherzentrale)"
+      pruefung: "Redaktionelle Einordnung: mit dem Alter steigen Sturzrisiken; Q1 nennt Personen ohne Berufsschutz und hohes Unfallrisiko als Zielgruppen, Senioren nicht ausdrücklich"
       quellen: ["Q1"]
     - textanker: "Sie legt fest, welcher Anteil der Grundsumme für bestimmte Verletzungen gilt"
       pruefung: "Bestätigt: Die Gliedertaxe bestimmt den Invaliditätsgrad je Körperteil und damit die Höhe der Leistung (Verbraucherzentrale)"
@@ -59,13 +60,13 @@ redaktionelle_pruefung:
     - aussage: "Grundsummen-Orientierung Kinder"
       wert: "mindestens 100.000 €"
       fundstelle: "- Kinder: oft mindestens **100.000 €**"
-      pruefung: "Marktübliche Empfehlung; Verbraucherzentrale nennt sechsstellige Grundsummen als angemessen"
+      pruefung: "Freie redaktionelle Orientierung (sechsstellige Grundsumme gilt als marktüblich); Q1 regelt die Leistungsart, nicht die Höhe"
       konsistenzpruefung: "Deckungsgleich mit FAQ („Oft mindestens 100.000 €“) und Familien-Beispiel"
       quellen: ["Q1"]
     - aussage: "Grundsummen-Orientierung Erwachsene"
       wert: "100.000 € bis 200.000 €"
       fundstelle: "- Erwachsene: oft **100.000 € bis 200.000 €**"
-      pruefung: "Marktübliche Empfehlungsspanne für Erwachsene"
+      pruefung: "Freie redaktionelle Orientierungsspanne; aus Q1 nicht ableitbar, deshalb ausdrücklich als Orientierung gekennzeichnet"
       konsistenzpruefung: "Schließt konsistent an die Kinder-Empfehlung (mindestens 100.000 €) an"
       quellen: ["Q1"]
     - aussage: "Untergrenze kritisch"
@@ -95,20 +96,20 @@ redaktionelle_pruefung:
       quellen: ["Q1"]
     - aussage: "Gliedertaxe Hand"
       wert: "55 % bzw. 70 %"
-      fundstelle: "| Hand | 55 % | 70 % |"
-      pruefung: "Marktübliche Gliedertaxe-Spannen für den Handverlust; stärkere Tarife bewerten höher"
+      fundstelle: "| Hand | 55 % | 70 % (Beispiel) |"
+      pruefung: "Standardwert 55 % für den Handverlust nach GDV-Empfehlung, in Q1 dokumentiert; die 70 % sind ein redaktionelles Beispiel für eine verbesserte Gliedertaxe und keine Angabe der Quelle"
       konsistenzpruefung: "Differenz ist Grundlage des Rechenbeispiels (110.000 vs. 140.000 €)"
       quellen: ["Q1"]
     - aussage: "Gliedertaxe Daumen"
       wert: "20 %, teils mehr"
       fundstelle: "| Daumen | 20 % | teils mehr |"
-      pruefung: "Marktübliche Gliedertaxe für den Daumenverlust"
+      pruefung: "Standardwert 20 % nach GDV-Empfehlung (Q1); „teils mehr“ ist der redaktionelle Hinweis auf verbesserte Gliedertaxen"
       konsistenzpruefung: "Folgerichtig unterhalb der Hand-Bewertung (55/70 %)"
       quellen: ["Q1"]
     - aussage: "Gliedertaxe Arm"
       wert: "70 %, teils höher"
       fundstelle: "| Arm | 70 % | teils höher |"
-      pruefung: "Marktübliche Gliedertaxe für den Armverlust"
+      pruefung: "Standardwert 70 % nach GDV-Empfehlung (Q1); „teils höher“ verweist auf verbesserte Gliedertaxen"
       konsistenzpruefung: "Folgerichtig oberhalb der Hand-Bewertung"
       quellen: ["Q1"]
     - aussage: "Rechenbeispiel Grundsumme"
@@ -141,31 +142,31 @@ redaktionelle_pruefung:
     - aussage: "Beitragsspanne Kind"
       wert: "40 € bis 80 €"
       fundstelle: "| Kind | 40 € bis 80 € |"
-      pruefung: "Marktübliche Jahrsbeiträge für Kinder-Unfallversicherungen"
+      pruefung: "Freie redaktionelle Orientierung, kein Marktstatistikwert; Q1 belegt die Leistungsmechanik, nicht die Beiträge"
       konsistenzpruefung: "Familienbeispiel (120 € für beide Kinder) liegt in dieser Spanne"
       quellen: ["Q1", "Q2"]
     - aussage: "Beitragsspanne Erwachsener"
       wert: "60 € bis 120 €"
       fundstelle: "| Erwachsener, Bürojob | 60 € bis 120 € |"
-      pruefung: "Marktübliche Jahresbeiträge für Erwachsene mit Büroberuf"
+      pruefung: "Freie redaktionelle Orientierung, kein Marktstatistikwert; Q1 belegt die Leistungsmechanik, nicht die Beiträge"
       konsistenzpruefung: "Liegt erwartungsgemäß über der Kinderspanne"
       quellen: ["Q1", "Q2"]
     - aussage: "Beitragsspanne mit Rente/Extras"
       wert: "100 € bis 180 €"
       fundstelle: "| mit Unfallrente oder Extras | 100 € bis 180 € |"
-      pruefung: "Marktübliche Aufschläge für Unfallrente und Zusatzbausteine"
+      pruefung: "Freie redaktionelle Orientierung für Aufschläge durch Unfallrente und Zusatzbausteine; kein Marktstatistikwert"
       konsistenzpruefung: "Oberste Spanne der Beitragstabelle, folgerichtig über dem Basistarif"
       quellen: ["Q1"]
     - aussage: "Hebel-Argument Beitrag zu Leistung"
       wert: "rund 100 € pro Jahr"
       fundstelle: "Wenn du für rund 100 € im Jahr einen Schutz bekommst, der in einem schweren Fall eine sechsstellige Summe leisten kann, ist das vom Hebel her stark."
-      pruefung: "Mittelwert der Beitragsspannen (60–180 €); als Orientierung dokumentiert"
+      pruefung: "Mittelwert der redaktionellen Spannen (60–180 €); im Text ausdrücklich als Orientierung am Hebel argumentiert"
       konsistenzpruefung: "Sechsstellige Leistung (ab 100.000 € Grundsumme) konsistent dokumentiert"
       quellen: ["Q1"]
     - aussage: "Familien-Beispielbeitrag"
       wert: "rund 120 € im Jahr"
       fundstelle: "Eine Familie mit zwei Kindern zahlt vielleicht zusammen rund **120 € im Jahr** für beide Policen."
-      pruefung: "Nachvollziehbar: zwei Kinder-Policen am unteren Rand der Spanne (40–80 € je Kind)"
+      pruefung: "Modellrechnung: zwei Kinder-Policen am unteren Rand der redaktionellen Spanne (40–80 € je Kind)"
       konsistenzpruefung: "Konsistent mit der Kinderspanne (40–80 €)"
       rechenweg: "2 × 60 € (Mitte der Kinderspanne) = 120 €"
       quellen: ["Q1"]
@@ -344,9 +345,9 @@ Sie legt fest, welcher Anteil der Grundsumme für bestimmte Verletzungen gilt.
 
 ### Beispiel
 
-| Verletzung | schwächerer Tarif | stärkerer Tarif |
+| Verletzung | Standard (GDV-Empfehlung) | Beispiel: verbesserte Gliedertaxe |
 |---|---:|---:|
-| Hand | 55 % | 70 % |
+| Hand | 55 % | 70 % (Beispiel) |
 | Daumen | 20 % | teils mehr |
 | Arm | 70 % | teils höher |
 
@@ -362,7 +363,7 @@ Das macht **30.000 € Unterschied**. Genau deshalb darfst du die Gliedertaxe n
 
 Die Beiträge sind oft überschaubar.
 
-### Grobe Spannen 2026
+### Grobe Spannen (redaktionelle Orientierung, keine Marktstatistik)
 
 | Person | Beitrag pro Jahr |
 |---|---:|

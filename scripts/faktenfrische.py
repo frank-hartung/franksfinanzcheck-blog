@@ -792,21 +792,68 @@ def fm_setze_quellen(fm: str, quellen: list[dict]) -> str:
     return fm.rstrip("\n") + "\n" + neu
 
 
+def _ymyl_gate():
+    """Das Freigabe-Gate als einzige Regelquelle (C19). ``None`` = fail-closed."""
+    try:
+        import editorial_review_gate  # noqa: PLC0415 – Zyklus vermeiden
+        return editorial_review_gate
+    except Exception:  # noqa: BLE001 – ohne Gate wird nicht geschrieben
+        return None
+
+
 def artikel_anwenden(art: dict, quellen: list[dict], datum: str,
                      trocken: bool) -> list[str]:
-    """Schreibt NUR Frontmatter. Body bleibt byte-identisch (Vertrag)."""
-    aenderungen = []
+    """Schreibt NUR Frontmatter. Body bleibt byte-identisch (Vertrag).
+
+    YMYL-Schreibgrenze (Prüfqueue #826, 24.10.2026)
+    -------------------------------------------------
+    Vorher schrieb dieser Lauf ``quellen:`` aus dem Recherche-Dossier in JEDEN
+    Artikel – auch in Hochrisiko-Texte. Zwei Folgen waren real:
+
+    1. Ein *Signal* wurde zur *Belegkette*. Der verworfene Entwurf vom
+       15.10.2026 trug danach genau eine „Quelle“: ``Referenzseite
+       destatis.de``, ohne Datum und ohne Bezug zu einer Aussage. Das Gate
+       liest ``quellen`` als Beweis – Signale gehören ins Dossier.
+    2. Der Schreibvorgang lief an ``editorial_review_gate`` vorbei. Ein
+       Faktenfrische-Lauf hätte damit ein vorhandenes Siegel (E17) brechen
+       können, ohne dass jemand den Text angefasst hat.
+
+    Deshalb gilt jetzt: Hochrisiko-Belegketten bleiben redaktionell (nur der
+    ``faktencheck``-Stempel wird gesetzt), und jeder Schreibvorgang wird vor
+    dem Schreiben gegen ``automatic_change_findings`` geprüft. Fehlt das Gate,
+    wird nichts geschrieben (fail-closed) – dieselbe Lehre wie WF-54C4/#607:
+    ein Schreiber ohne zugehöriges Tor ist ein Blocker-Produzent.
+    """
+    gate = _ymyl_gate()
+    if gate is None:
+        return ["ABGEBROCHEN: YMYL-Gate nicht verfügbar – fail-closed, nichts geschrieben"]
+    try:
+        fm_dict, _, roh_alt = gate.load_article(art["pfad"])
+    except Exception as exc:  # noqa: BLE001 – unlesbar heißt: nicht schreiben
+        return [f"ABGEBROCHEN: Artikel nicht auswertbar ({type(exc).__name__}) – fail-closed"]
+    hochrisiko = gate.inferred_risk(fm_dict) == gate.RISK_HIGH
+
+    aenderungen: list[str] = []
+    schreibabsicht = False
     fm = art["fm"]
-    if quellen:
+    if hochrisiko:
+        if gate.automatic_write_protected(art["pfad"]):
+            return ["ABGEBROCHEN: versiegelte YMYL-Freigabe – Faktenfrische schreibt nicht; "
+                    "den Takt gibt der Review-Termin vor (Prüfqueue #826)"]
+        aenderungen.append(
+            "YMYL: Belegkette bleibt redaktionell (Signale nur im Dossier)")
+    elif quellen:
         fm_neu = fm_setze_quellen(fm, quellen)
         if fm_neu != fm:
             aenderungen.append(f"quellen: {len(quellen)} Belege")
             fm = fm_neu
+            schreibabsicht = True
     fm_neu = fm_setze_faktencheck(fm, datum)
     if fm_neu != fm:
         aenderungen.append(f"faktencheck: {datum}")
         fm = fm_neu
-    if not aenderungen or trocken:
+        schreibabsicht = True
+    if not schreibabsicht or trocken:
         return aenderungen
 
     neu = pu.join_article(fm, art["body"])
@@ -814,6 +861,10 @@ def artikel_anwenden(art: dict, quellen: list[dict], datum: str,
     _, _, body_neu = pu.split_article(neu)
     if body_neu.strip() != art["body"].strip():
         return ["ABGEBROCHEN: Body-Drift erkannt – nichts geschrieben"]
+    # YMYL-Vertrag: eine bestehende Freigabe wird nie automatisch verändert.
+    gruende = gate.automatic_change_findings(roh_alt, neu)
+    if gruende:
+        return ["ABGEBROCHEN: " + "; ".join(gruende) + " – nichts geschrieben"]
     with open(art["pfad"], "w", encoding="utf-8") as fh:
         fh.write(neu)
     return aenderungen

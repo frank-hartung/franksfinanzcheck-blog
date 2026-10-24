@@ -33,7 +33,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
 HEIZ = '2026-10-14-heizperiode-vorbereiten-im-spaetsommer'
-REISE = '2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen'
+REISE = '2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen'
 KORRIGIERT_AM = dt.date(2026, 10, 15)
 DASHES = {
     '\u2013': '-', '\u2014': '-', '\u2012': '-', '\u2011': '-',

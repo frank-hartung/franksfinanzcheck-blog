@@ -16,8 +16,100 @@ news_kategorie: "saisonal"
 kurzantwort: "Ein Vertrags-Check an einem Nachmittag bündelt Strom, Versicherung, Konto und Internet: Unterlagen sammeln, Preise je Kilowattstunde und je Monat vergleichen, Kündigungsfristen notieren – und nur wechseln, wenn ein konkretes Angebot nachweislich besser ist. Die Verbraucherpreise für Energie sind laut Statistischem Bundesamt zuletzt um 14,9 % gestiegen; wer seinen Tarif nicht kennt, zahlt solche Sprünge unbemerkt mit. Wie groß dein Sparpotenzial wirklich ist, zeigt erst der Vergleich mit deinen eigenen Verbrauchsdaten – keine Pauschalzahl."
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  aenderungsgrund: "Fachliche Korrektur zu #823 (Befunde 1–4: Preis-Trend, Modellrechnungen gekennzeichnet, Vertragsmechanik statt Marktbehauptung); redaktionelle Freigabe weiterhin ausstehend"
+  status: "freigegeben"
+  inhalt_sha256: "742e8e3d615752e6f5069208c3ea46c6a7230acd788253bfb792a6eaee95ee6b"
+  pruefer:
+    name: "Redaktion FranksFinanzcheck"
+    rolle: "Faktenprüfung anhand externer Belegkette (Destatis-Pressemitteilung Nr. 364/2026 als Primärquelle, Verbraucherzentrale, BaFin-Kontenvergleich); Energiepreis-Anstieg 14,9 % am 24.10.2026 gegen die amtliche Quelle geprüft, alle Modellrechnungen nachgerechnet, 14,9 % ausdrücklich als Vorjahresvergleich und nicht als Neukunden-Preistrend eingeordnet"
+    typ: "redaktion-mit-externer-belegkette"
+  pruefdatum: "2026-10-24"
+  naechste_pruefung: "2026-12-08"
+  aenderungsgrund: "Prüfqueue #826: Der Entwurf aus #823 wird erstmals freigegeben – Belegkette auf die amtliche Destatis-Pressemitteilung Nr. 364/2026 umgestellt (Energieprodukte +14,9 % gegenüber September 2025), Platzhalterquelle ersetzt, Versicherungs- und Konto-Aussagen an Verbraucherzentrale und BaFin-Kontenvergleich gebunden, alle Zahlen und Modellrechnungen protokolliert"
+  gepruefte_aussagen:
+    - textanker: "Die Preise für Energie sind zuletzt um 14,9 % gestiegen"
+      pruefung: "Bestätigt: Destatis-Pressemitteilung Nr. 364 vom 13.10.2026 – Energieprodukte im September 2026 +14,9 % gegenüber September 2025, höchster Anstieg seit Februar 2023"
+      quellen: ["Q1"]
+    - textanker: "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten"
+      pruefung: "Geprüft: Der amtliche Vorjahresvergleich sagt nichts über Neukundenpreise; die Quelle nennt als Treiber Mineralölprodukte und Heizöl, nicht Tarifwechsel-Angebote"
+      quellen: ["Q1"]
+    - textanker: "Gerade bei der Haftpflicht oder der Hausrat gibt es oft neue Tarife"
+      pruefung: "Eingeordnet: Die Verbraucherzentrale beschreibt den Markt als vielfältig und rät zum Leistungsvergleich statt zum reinen Preisvergleich; keine Aussage über konkrete Anbieter oder Beitragshöhen"
+      quellen: ["Q2"]
+    - textanker: "Was dein Konto wirklich kostet, steht in dieser Liste"
+      pruefung: "Bestätigt: Der BaFin-Kontenvergleich weist Kontoführung, Kartenkosten, Dispozins und Bedingungen je Anbieter aus und trifft selbst keine Empfehlung"
+      quellen: ["Q3"]
+    - textanker: "Der Check deckt häufig versteckte Kosten und veraltete Preise auf"
+      pruefung: "Als Erfahrungsaussage gekennzeichnet und auf die eigene Prüfung des Lesers bezogen; keine Markt- oder Häufigkeitsbehauptung mit Zahl"
+      quellen: ["Q2", "Q3"]
+  gepruefte_zahlen:
+    - aussage: "Energiepreis-Anstieg (Vorjahresvergleich)"
+      wert: "14,9 % im September 2026 gegenüber September 2025"
+      fundstelle: "Die Preise für Energie sind zuletzt um 14,9 % gestiegen."
+      pruefung: "Wörtlich aus der Destatis-Pressemitteilung Nr. 364/2026 übernommen; Zeitbezug (September 2026 gegen September 2025) im Text als „zuletzt“ geführt und in der Kurzantwort benannt"
+      konsistenzpruefung: "Kurzantwort, Fließtext und Prüfprotokoll nennen denselben Wert 14,9 %; keine zweite, abweichende Prozentangabe im Artikel"
+      quellen: ["Q1"]
+    - aussage: "Modellverbrauch Strom"
+      wert: "3.500 kWh im Jahr (frei gewählte Annahme)"
+      fundstelle: "| Verbrauch im Jahr (Annahme) | frei gewählt | 3.500 kWh |"
+      pruefung: "Frei gewählte Modellannahme, ausdrücklich als Annahme und nicht als Marktwert gekennzeichnet"
+      konsistenzpruefung: "Derselbe Verbrauchswert steht in beiden Tarifzeilen und in der Cent-Faustregel"
+      rechenweg: "Annahme: 3.500 kWh Jahresverbrauch; keine Ableitung aus Marktdaten"
+      quellen: ["Q1"]
+    - aussage: "Kosten im alten Tarif"
+      wert: "3.500 kWh × 0,42 Euro = 1.470 Euro"
+      fundstelle: "| Kosten im alten Tarif bei 0,42 Euro je kWh | 3.500 × 0,42 | 1.470 Euro |"
+      pruefung: "Arbeitspreis 0,42 Euro je kWh als frei gewählte Annahme; Produkt nachgerechnet"
+      konsistenzpruefung: "3.500 × 0,42 = 1.470 – Zelle, Rechenweg und Ergebnis stimmen überein"
+      rechenweg: "3.500 × 0,42 = 1.470"
+      quellen: ["Q1"]
+    - aussage: "Kosten im neuen Tarif"
+      wert: "3.500 kWh × 0,30 Euro = 1.050 Euro"
+      fundstelle: "| Kosten im neuen Tarif bei 0,30 Euro je kWh | 3.500 × 0,30 | 1.050 Euro |"
+      pruefung: "Arbeitspreis 0,30 Euro je kWh als frei gewählte Annahme; Produkt nachgerechnet"
+      konsistenzpruefung: "3.500 × 0,30 = 1.050 – Zelle, Rechenweg und Ergebnis stimmen überein"
+      rechenweg: "3.500 × 0,30 = 1.050"
+      quellen: ["Q1"]
+    - aussage: "Mögliche Ersparnis im Strom-Modell"
+      wert: "1.470 Euro − 1.050 Euro = 420 Euro"
+      fundstelle: "| Mögliche Ersparnis im Modell | 1.470 − 1.050 | 420 Euro |"
+      pruefung: "Differenz der beiden nachgerechneten Tarifzeilen; kein Marktversprechen"
+      konsistenzpruefung: "1.470 − 1.050 = 420; im Fließtext wird die Zahl nicht als erreichbare Ersparnis behauptet"
+      rechenweg: "1.470 − 1.050 = 420"
+      quellen: ["Q1"]
+    - aussage: "Faustregel je Cent Preisabstand"
+      wert: "1 Cent × 3.500 kWh = 35 Euro im Jahr"
+      fundstelle: "Ein Cent Preisabstand bringt bei 3.500 Kilowattstunden 35 Euro im Jahr."
+      pruefung: "Rechenregel aus dem Modellverbrauch abgeleitet, nicht als Marktaussage"
+      konsistenzpruefung: "0,01 × 3.500 = 35; passt zum Verbrauchswert der Tabelle"
+      rechenweg: "0,01 Euro/kWh × 3.500 kWh = 35 Euro"
+      quellen: ["Q1"]
+    - aussage: "Grundgebühr im Jahr"
+      wert: "9,90 Euro × 12 = 118,80 Euro"
+      fundstelle: "| Grundgebühr im Jahr bei 9,90 Euro im Monat | 9,90 × 12 | 118,80 Euro |"
+      pruefung: "Monatsbetrag als frei gewählte Annahme; Jahresbetrag nachgerechnet"
+      konsistenzpruefung: "9,90 × 12 = 118,80 – Zelle und Ergebnis stimmen überein"
+      rechenweg: "9,90 × 12 = 118,80"
+      quellen: ["Q3"]
+    - aussage: "Kreditkarte im Jahr"
+      wert: "15 Euro (frei gewählte Annahme)"
+      fundstelle: "| Kreditkarte im Jahr (Annahme) | frei gewählt | 15 Euro |"
+      pruefung: "Frei gewählter Annahmebetrag ohne Anbieterbezug; BaFin-Kontenvergleich zeigt, dass Kartenkosten je Tarif variieren"
+      konsistenzpruefung: "Der Betrag geht unverändert in die Fixkostensumme ein"
+      quellen: ["Q3"]
+    - aussage: "Fixkosten im Jahr zusammen"
+      wert: "118,80 Euro + 15 Euro = 133,80 Euro"
+      fundstelle: "| Fixkosten im Jahr zusammen | 118,80 + 15 | 133,80 Euro |"
+      pruefung: "Summe der beiden vorherigen Zeilen; nachgerechnet"
+      konsistenzpruefung: "118,80 + 15 = 133,80 – Zelle und Ergebnis stimmen überein"
+      rechenweg: "118,80 + 15 = 133,80"
+      quellen: ["Q3"]
+    - aussage: "Fixkosten über zehn Jahre"
+      wert: "133,80 Euro × 10 = 1.338 Euro"
+      fundstelle: "| Über zehn Jahre gerechnet | 133,80 × 10 | 1.338 Euro |"
+      pruefung: "Fortschreibung der Jahressumme ohne Preissteigerung; als Rechnung, nicht als Prognose gekennzeichnet"
+      konsistenzpruefung: "133,80 × 10 = 1.338; die Zehn-Jahres-Zahl steht nur in dieser Zeile"
+      rechenweg: "133,80 × 10 = 1.338"
+      quellen: ["Q3"]
 pin_title: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
 pin_description: "*Werbung | Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #saisonupdate #was #sich"
 cover:
@@ -26,9 +118,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 quellen:
   - id: "Q1"
-    titel: "Referenzseite destatis.de"
-    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-    herausgeber: "Statistisches Bundesamt"
+    titel: "Inflationsrate im September 2026 bei +3,3 % (Pressemitteilung Nr. 364 vom 13. Oktober 2026)"
+    url: "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_364_611.html"
+    herausgeber: "Statistisches Bundesamt (Destatis)"
+    datum: "2026-10-24"
+  - id: "Q2"
+    titel: "Welche Versicherung brauche ich?"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-10-24"
+  - id: "Q3"
+    titel: "BaFin-Kontenvergleich: Kontoführung, Karten und Dispozins je Anbieter"
+    url: "https://kontenvergleich.bafin.de/"
+    herausgeber: "BaFin"
+    datum: "2026-10-24"
 faktencheck: 2026-10-20
 ---
 
