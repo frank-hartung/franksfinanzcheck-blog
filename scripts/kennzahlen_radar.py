@@ -124,7 +124,13 @@ def _article_dates(path):
     out = {"title": "", "lastmod": None, "date": None}
     try:
         with open(path, encoding="utf-8") as f:
-            text = f.read(20000)
+            # GANZE Datei lesen, nicht die ersten 20 000 Zeichen: YMYL-Artikel
+            # tragen ein Prüfprotokoll, das die Frontmatter über diese Grenze
+            # treibt. Vorher endete der Lesevorgang mitten im Frontmatter, der
+            # Abschluss „---“ fehlte, und der Aufrufer meldete „Slug nicht
+            # gefunden“ – ein Messfehler, der wie ein Inhaltsfehler aussah
+            # (Prüfqueue #826, 24.10.2026).
+            text = f.read()
     except OSError:
         return None
     if not text.startswith("---"):

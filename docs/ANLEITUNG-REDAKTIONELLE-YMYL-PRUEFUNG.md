@@ -87,6 +87,34 @@ redaktionelle_pruefung:
    Das Kommando verweigert das Siegel bei Lücken. Erfolgreiche Siegel werden
    append-only in `data/editorial_review_history.jsonl` protokolliert.
 
+## Belegkette im Netz prüfen (seit 24.10.2026, #826)
+
+Das Gate prüft den **Text**, nicht das **Netz**. Ein Siegel ist auch dann noch
+formal gültig, wenn die zitierte Seite nicht mehr existiert oder unter
+derselben Adresse inzwischen etwas anderes steht. Beides ist am 24.10.2026
+real aufgetreten: fünf Verbraucherzentrale-Adressen antworteten nach einer
+Seiten-Migration mit 404, und eine GDV-Adresse zeigte weiterhin eine Seite –
+aber mit den Zahlen des Folgejahres.
+
+Vor jedem Siegel deshalb:
+
+```bash
+# Prüft alle zitierten URLs der Hochrisiko-Artikel (nur lesend)
+python3 scripts/belegketten_wache.py --nur-hochrisiko --report
+```
+
+Zustände: `ok` (HTTP 200 unter genau der zitierten Adresse), `umgeleitet`
+(200, aber andere Adresse – Inhalt gegen das Zitat prüfen), `tot`
+(definitives 4xx) und `unklar` (Netzfehler, 5xx, 403, 429). `unklar` blockiert
+nicht, `tot` schon. Bei `tot` oder `umgeleitet` gilt: **nicht** einfach die URL
+austauschen, sondern die neue Seite abrufen und prüfen, ob sie die zitierte
+Aussage noch trägt; erst dann URL, Titel und Abrufdatum im Frontmatter
+korrigieren und neu versiegeln.
+
+Der werktägliche Workflow fährt dieselbe Wache und schließt das Arbeits-Ticket
+erst, wenn **beide** Prüfungen grün sind (Gate-Queue leer **und** keine tote
+Belegkette).
+
 ## Was die Freigabe automatisch bricht
 
 - Änderung an Titel, Beschreibung, Kurzantwort, Autor, Quellen, Prüfprotokoll oder Body;
@@ -114,6 +142,13 @@ Ein Hochrisiko-Entwurf entsteht nur auf menschlichen Auftrag:
   nicht mit E03 („niemand wusste davon“).
 - `python3 scripts/ki_redaktion.py --promote <slug>` verweigert
   Hochrisiko-Entwürfe ohne gültige Freigabe.
+- `scripts/faktenfrische.py` schreibt in Hochrisiko-Artikel **keine**
+  `quellen` aus Recherche-Signalen mehr. Ein Signal (Feed-Treffer,
+  Referenzseite des Amts) ist kein Beleg: Am 15.10.2026 entstand so ein
+  Entwurf mit genau einer Pseudo-Quelle („Referenzseite destatis.de“), der
+  damit dauerhaft unsiegelbar war. `quellen` ist ein Beweisfeld und bleibt
+  redaktionell; die Wartung schreibt bei `risikoklasse: hoch` nur den
+  `faktencheck`-Stempel und verweigert die Arbeit an versiegelten Fassungen.
 
 Taucht trotzdem ein E03-Entwurf auf, ist das zuerst ein Produktionsfehler und
 erst danach ein Prüfauftrag: Herkunft klären (`ki_redaktion:`,
@@ -154,6 +189,10 @@ python3 scripts/editorial_review_gate.py --all --strict
 
 # Hartes Deploy-Gate für alle tatsächlich veröffentlichten Artikel
 python3 scripts/editorial_review_gate.py --published --strict
+
+# Belegketten-Wache (nur lesend; Exit 1 nur bei definitiv toter Quelle)
+python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict
+python3 scripts/belegketten_wache.py --selftest
 ```
 
 Der werktägliche Workflow `.github/workflows/redaktionelle-ymyl-pruefung.yml`

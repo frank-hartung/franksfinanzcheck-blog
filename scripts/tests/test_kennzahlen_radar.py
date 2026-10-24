@@ -200,6 +200,27 @@ class TestArtikelKopplung(unittest.TestCase):
                                 AS_OF, slug_check=True)
             self.assertTrue(any("problem" in a for a in regeln[0]["artikel"]))
 
+    def test_grosse_frontmatter_wird_vollstaendig_gelesen(self):
+        """Prüfqueue #826: Ein YMYL-Prüfprotokoll sprengt jede Lese-Grenze.
+
+        Vorher las `_article_dates` nur 20 000 Zeichen. Sobald ein Artikel mit
+        `gepruefte_zahlen` diese Grenze überschritt, fehlte der Abschluss der
+        Frontmatter und der Radar meldete „Slug nicht gefunden“ – ein
+        Messfehler, der wie ein Inhaltsfehler aussah.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            pfad = os.path.join(tmp, "content", "posts", "lang", "index.md")
+            os.makedirs(os.path.dirname(pfad))
+            füllsel = "".join(f"    - textanker: \"Belegstelle {i}\"\n" for i in range(900))
+            with open(pfad, "w", encoding="utf-8") as fh:
+                fh.write("---\nlastmod: 2026-09-21\ntitle: \"Lang\"\n"
+                         f"gepruefte_aussagen:\n{füllsel}---\n\nText.\n")
+            self.assertGreater(os.path.getsize(pfad), 20000)
+            info = kr._article_dates(pfad)
+            self.assertIsNotNone(info)
+            self.assertEqual("Lang", info["title"])
+            self.assertEqual(datetime.date(2026, 9, 21), info["lastmod"])
+
 
 class TestRegisterValidierung(unittest.TestCase):
     def _schreibe_register(self, tmp, url):
