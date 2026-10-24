@@ -118,6 +118,24 @@ sie anschlägt. Eine Wache ohne Gegenprobe ist ein Wunsch, keine Wache.
   Schreibschlüssel; der Digest bricht **ab**, wenn ein Token fehlt
   (kein Versand ohne Abmeldelink — rechtlich keine Option).
 
+
+#### Nachtrag 24.10.2026 — F-08-Vollständigkeit
+
+Der damalige Fix schützte den Token-Massenexport, ließ aber einen Rollen-Bypass
+über `/export/token` und `/export/kontakt` zu: beide gaben mit dem Leseschlüssel
+weiterhin Token zurück; `/export/versuch` akzeptierte damit auch
+Statusänderungen. Zudem fiel `EXPORT_KEY_WRITE` bei Fehlen auf `EXPORT_KEY`
+zurück. Diese Lücken wurden im Code gehoben: alle drei Einzelrouten verlangen
+jetzt einen explizit verschiedenen Schreibschlüssel; Token/E-Mail werden bei
+Lookups ausschließlich im POST-Body übertragen. Fehlende oder gleiche Schlüssel
+sind fail-closed. Fehlversuche werden höchstens einmal pro Stunde in KV
+protokolliert, um anonyme 403-Stürme nicht als KV-Write-DoS zu nutzen.
+
+**Produktion nicht bestätigt:** Der Worker wurde in dieser Prüfung nicht live
+deployt und Cloudflare-/GitHub-Secrets konnten nicht eingesehen werden. Der
+obige 15.10.-Nachweis beschreibt daher den damaligen, unvollständigen Stand,
+nicht den bestätigten Produktionszustand.
+
 ### F-09 — Issue-Injection (behoben)
 - `scripts/alert_issue_identity.py`: `saeubern()` + Feld `workflow_sauber`,
   `--saeubern` für die Kommandozeile; Steuerzeichen, Bidi-Tricks,

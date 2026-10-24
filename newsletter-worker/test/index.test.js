@@ -23,7 +23,7 @@ import worker, {
   TAKT, takt_ausfuehren, takt_fuer, datenschutz_pflege, PFLEGE_CRON, feedback_aufrollen,
   limit_klasse, schluessel_pruefen, schreibschluessel_pruefen, tagesbudget_nehmen,
   tagesbudget_stand, schluessel_fingerabdruck, ANMELDUNG_MAX_PRO_TAG_DEFAULT,
-  menge_speicher_pruefen, menge_speicher_zuruecksetzen,
+  menge_speicher_pruefen, menge_speicher_zuruecksetzen, export_speicher_zuruecksetzen,
 } from '../src/index.js';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -111,12 +111,17 @@ function anmelden(kv, daten, extra = {}) {
 }
 
 // ------------------------------------------------------------------ health
-test('healthz: KV erreichbar -> ok', async () => {
+test('healthz: KV erreichbar -> ok und Schlüsselrollen korrekt ausgewiesen', async () => {
   const kv = kvLeeren();
-  const antwort = await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv));
+  const env = env_mit(kv, { EXPORT_KEY_WRITE: 'schreib-key-32-z------------' });
+  const antwort = await worker.fetch(new Request('http://abos.test/healthz'), env);
   assert.equal(antwort.status, 200);
   const daten = await antwort.json();
   assert.equal(daten.ok, true);
+  assert.ok(!('schluesselrollen' in daten), 'öffentlich keine Betriebsdetails');
+  const intern = await worker.fetch(export_request('/healthz', { key: EXPORT_KEY }), env);
+  assert.equal(intern.status, 200);
+  assert.equal((await intern.json()).schluesselrollen, 'getrennt');
 });
 
 // ------------------------------------------------------------------ anmeldung
@@ -424,24 +429,48 @@ test('abmeldung: GET ohne Token liefert das Formular, kein 404', async () => {
   assert.equal((await jsonAntwort.json()).status, 'formular');
 });
 
-test('export/kontakt: Secret-Pflicht und Lookup nach E-Mail', async () => {
+test('export/kontakt: Schreib-Key-Pflicht, E-Mail nur im POST-Body', async () => {
   const kv = kvLeeren();
+  const WRITE_KEY = 'schreib-key-32-z------------';
+  const env = env_mit(kv, { EXPORT_KEY_WRITE: WRITE_KEY });
   await anmelden(kv, { email: 'look@beispiel.de', consent: '1' });
   const eintrag = await kv.get('abo:look@beispiel.de', 'json');
-  const env = env_mit(kv);
-  const ohne = await worker.fetch(new Request('http://abos.test/export/kontakt?email=look@beispiel.de'), env);
+
+  const ohne = await worker.fetch(export_request('/export/kontakt', {
+    methode: 'POST', koerper: JSON.stringify({ email: 'look@beispiel.de' }),
+  }), env);
   assert.equal(ohne.status, 403);
-  const mit = await worker.fetch(new Request('http://abos.test/export/kontakt?email=look@beispiel.de', {
-    headers: { 'x-ff-key': EXPORT_KEY },
+  const lesend = await worker.fetch(export_request('/export/kontakt', {
+    key: EXPORT_KEY, methode: 'POST', koerper: JSON.stringify({ email: 'look@beispiel.de' }),
+  }), env);
+  assert.equal(lesend.status, 403, 'Leseschlüssel darf keine E-Mail zu Token auflösen');
+
+  const alteGetRoute = await worker.fetch(export_request(
+    '/export/kontakt?email=look@beispiel.de', { key: WRITE_KEY }), env);
+  assert.equal(alteGetRoute.status, 405, 'E-Mail darf nicht mehr in der URL stehen');
+
+  const mit = await worker.fetch(export_request('/export/kontakt', {
+    key: WRITE_KEY, methode: 'POST', koerper: JSON.stringify({ email: 'look@beispiel.de' }),
   }), env);
   assert.equal(mit.status, 200);
   const daten = await mit.json();
   assert.equal(daten.status, 'pending');
   assert.equal(daten.token, eintrag.token);
-  const unbekannt = await worker.fetch(new Request('http://abos.test/export/kontakt?email=nie@beispiel.de', {
-    headers: { 'x-ff-key': EXPORT_KEY },
+
+  const unbekannt = await worker.fetch(export_request('/export/kontakt', {
+    key: WRITE_KEY, methode: 'POST', koerper: JSON.stringify({ email: 'nie@beispiel.de' }),
   }), env);
   assert.equal(unbekannt.status, 404);
+
+  const vorher = kv.map.size;
+  const uebergross = await worker.fetch(export_request('/export/kontakt', {
+    key: WRITE_KEY, methode: 'POST',
+    koerper: JSON.stringify({ email: 'a'.repeat(65 * 1024) }),
+  }), env);
+  assert.equal(uebergross.status, 404, 'überdimensionierte Bodies werden vor dem Parsen verworfen');
+  assert.equal(kv.map.size, vorher, 'abgewiesener Body darf keinen KV-Schreibzugriff auslösen');
+  assert.equal((await kv.get('abo:look@beispiel.de', 'json')).token, eintrag.token,
+    'bestehender Datensatz bleibt unverändert');
 });
 
 // ------------------------------------------------------------------ praferenzen
@@ -673,26 +702,34 @@ test('export/abonnenten: nur aktive, mit Themen – Token NUR mit Schreibschlues
   assert.equal(schreibend.mit_token, true);
   assert.equal(schreibend.abonnenten[0].token, eintrag.token);
 
-  // 4. Rueckfall: ohne EXPORT_KEY_WRITE gilt der Standardschluessel fuer beide
-  //    Rollen – bestehende Laeufe brechen durch die Trennung nicht.
-  const rueckfall = await (await worker.fetch(
+  // 4. Kein Rückfall: ohne getrenntes EXPORT_KEY_WRITE bleibt der
+  //    Leseschlüssel auch bei mit_token=1 tokenfrei.
+  const failClosed = await (await worker.fetch(
     export_request('/export/abonnenten?mit_token=1', { key: EXPORT_KEY }), env_mit(kv))).json();
-  assert.equal(rueckfall.mit_token, true);
-  assert.equal(rueckfall.abonnenten[0].token, eintrag.token);
+  assert.equal(failClosed.mit_token, false);
+  assert.ok(!('token' in failClosed.abonnenten[0]));
+
+  // 5. Ein versehentlich gleicher Lese-/Schreibwert gilt ebenfalls nicht als Trennung.
+  const gleicherSchluessel = env_mit(kv, { EXPORT_KEY_WRITE: EXPORT_KEY });
+  const gleicheRolle = await (await worker.fetch(
+    export_request('/export/abonnenten?mit_token=1', { key: EXPORT_KEY }), gleicherSchluessel)).json();
+  assert.equal(gleicheRolle.mit_token, false);
 });
 
-test('export: jeder Aufruf wird protokolliert, Fehlversuche inbegriffen (F-08)', async () => {
+test('export: erfolgreiche Aufrufe und begrenzte 403-Protokollierung (F-08)', async () => {
   const kv = kvLeeren();
   const env = env_mit(kv);
-  // Der Mengenzaehler ist Prozesszustand: fuer diesen Test zuruecksetzen, damit
-  // er nicht von vorherigen Export-Aufrufen gebremst wird (Testproben-Trennung).
+  // Mengen- und Deny-Logger sind Prozesszustand; für reproduzierbare Proben leeren.
   menge_speicher_zuruecksetzen();
+  export_speicher_zuruecksetzen();
   await worker.fetch(export_request('/export/abonnenten', { key: 'falsch-falsch-falsch' }), env);
+  await worker.fetch(export_request('/export/pending', { key: 'weiterer-falscher-schluessel' }), env);
   await worker.fetch(export_request('/export/pending', { key: EXPORT_KEY }), env);
   const protokoll = [...kv.map.keys()].filter((k) => k.startsWith('exportlog:'));
-  assert.equal(protokoll.length, 2, 'auch der abgewiesene Zugriff ist ein Nachweis');
+  assert.equal(protokoll.length, 2,
+    '403-Sturm erzeugt höchstens einen KV-Nachweis pro Stunde, erfolgreiche Abfrage bleibt sichtbar');
   const eintraege = protokoll.map((k) => JSON.parse(kv.map.get(k)));
-  assert.ok(eintraege.some((e) => e.status === 403));
+  assert.equal(eintraege.filter((e) => e.status === 403).length, 1);
   assert.ok(eintraege.some((e) => e.route === '/export/pending' && e.status === 200));
   // Der Abdruck ist ein Kurz-Hash – NIE der Schluessel selbst.
   for (const e of eintraege) {
@@ -778,45 +815,71 @@ test('Log-Hygiene: die E-Mail-Adresse steht nie im Klartext-Log (F-05)', async (
   assert.match(gesamt, /sha256:[0-9a-f]{32}/);
 });
 
-test('export/pending + export/token: offene Liste und Einzel-Lookup', async () => {
+test('export/pending + export/token: Leserechte getrennt, Token nur per POST/Write-Key', async () => {
   const kv = kvLeeren();
+  const WRITE_KEY = 'schreib-key-32-z------------';
+  const env = env_mit(kv, { EXPORT_KEY_WRITE: WRITE_KEY });
   await anmelden(kv, { email: 'off@beispiel.de', consent: '1' });
   const eintrag = await kv.get('abo:off@beispiel.de', 'json');
-  const liste = await worker.fetch(export_request('/export/pending', { key: EXPORT_KEY }), env_mit(kv));
+  const liste = await worker.fetch(export_request('/export/pending', { key: EXPORT_KEY }), env);
   const ldaten = await liste.json();
   assert.equal(ldaten.anzahl, 1);
   assert.equal(ldaten.offen[0].email, 'off@beispiel.de');
-  const detail = await worker.fetch(
-    export_request(`/export/token?token=${eintrag.token}`, { key: EXPORT_KEY }), env_mit(kv));
+  assert.ok(!('token' in ldaten.offen[0]), 'Leseschlüssel darf Pending-Tokens nicht liefern');
+
+  const verweigert = await worker.fetch(export_request('/export/token', {
+    key: EXPORT_KEY, methode: 'POST', koerper: JSON.stringify({ token: eintrag.token }),
+  }), env);
+  assert.equal(verweigert.status, 403, 'Leseschlüssel darf Einzel-Token nicht laden');
+  const alteGetRoute = await worker.fetch(export_request(
+    `/export/token?token=${eintrag.token}`, { key: WRITE_KEY }), env);
+  assert.equal(alteGetRoute.status, 405, 'Token-Lookup per GET/Query ist nicht mehr unterstützt');
+
+  const anfrage = export_request('/export/token', {
+    key: WRITE_KEY, methode: 'POST', koerper: JSON.stringify({ token: eintrag.token }),
+  });
+  const detail = await worker.fetch(anfrage, env);
   const ddaten = await detail.json();
+  assert.equal(detail.status, 200);
+  assert.ok(!anfrage.url.includes(eintrag.token), 'Token darf nicht in die URL/Access-Logs');
   assert.equal(ddaten.email, 'off@beispiel.de');
   assert.equal(ddaten.status, 'pending');
+  assert.equal(ddaten.token, eintrag.token);
 });
 
-test('export/versuch: 3x "gesendet" -> abgelaufen; "bounce" -> Unterdrueckung', async () => {
+test('export/versuch: Schreib-Key nötig; 3x gesendet -> abgelaufen; Bounce -> Unterdrueckung', async () => {
   const kv = kvLeeren();
+  const WRITE_KEY = 'schreib-key-32-z------------';
+  const env = env_mit(kv, { EXPORT_KEY_WRITE: WRITE_KEY });
   await anmelden(kv, { email: 'v@beispiel.de', consent: '1' });
   const eintrag = await kv.get('abo:v@beispiel.de', 'json');
+  const lesend = await worker.fetch(export_request('/export/versuch', {
+    key: EXPORT_KEY, methode: 'POST',
+    koerper: new URLSearchParams({ token: eintrag.token, ergebnis: 'bounce' }).toString(),
+  }), env);
+  assert.equal(lesend.status, 403, 'Leseschlüssel darf Statusänderungen nicht auslösen');
+  assert.equal((await kv.get('abo:v@beispiel.de', 'json')).status, 'pending');
+
   for (let i = 1; i <= 2; i += 1) {
     await worker.fetch(export_request('/export/versuch', {
-      key: EXPORT_KEY, methode: 'POST',
+      key: WRITE_KEY, methode: 'POST',
       koerper: new URLSearchParams({ token: eintrag.token, ergebnis: 'gesendet' }).toString(),
-    }), env_mit(kv));
+    }), env);
   }
   let status = (await kv.get('abo:v@beispiel.de', 'json')).status;
   assert.equal(status, 'pending', 'nach 2 Versuchen noch offen');
   await worker.fetch(export_request('/export/versuch', {
-    key: EXPORT_KEY, methode: 'POST',
+    key: WRITE_KEY, methode: 'POST',
     koerper: new URLSearchParams({ token: eintrag.token, ergebnis: 'gesendet' }).toString(),
-  }), env_mit(kv));
+  }), env);
   assert.equal((await kv.get('abo:v@beispiel.de', 'json')).status, 'abgelaufen', 'nach 3 Versuchen abgelaufen');
 
   await anmelden(kv, { email: 'b@beispiel.de', consent: '1' });
   const zweiter = await kv.get('abo:b@beispiel.de', 'json');
   await worker.fetch(export_request('/export/versuch', {
-    key: EXPORT_KEY, methode: 'POST',
+    key: WRITE_KEY, methode: 'POST',
     koerper: new URLSearchParams({ token: zweiter.token, ergebnis: 'bounce' }).toString(),
-  }), env_mit(kv));
+  }), env);
   const abgeprueft = await kv.get('abo:b@beispiel.de', 'json');
   assert.equal(abgeprueft.status, 'unsubscribed');
   assert.equal(abgeprueft.grund, 'bounce');
@@ -1336,15 +1399,19 @@ test('Datenschutz-Pflege: Alt-IP/UA im Abo-Datensatz werden entfernt, Nachweis b
 });
 
 // ------------------------------------------------- Schutzwachen (Audit 15.10.2026)
-test('export: jeder Aufruf wird protokolliert, Fehlversuche inbegriffen (F-08)', async () => {
+test('export: erfolgreiche Aufrufe und begrenzte 403-Protokollierung (F-08)', async () => {
   const kv = kvLeeren();
   const env = env_mit(kv);
+  menge_speicher_zuruecksetzen();
+  export_speicher_zuruecksetzen();
   await worker.fetch(export_request('/export/abonnenten', { key: 'falsch-falsch-falsch' }), env);
+  await worker.fetch(export_request('/export/pending', { key: 'noch-ein-falscher-schluessel' }), env);
   await worker.fetch(export_request('/export/pending', { key: EXPORT_KEY }), env);
   const protokoll = [...kv.map.keys()].filter((k) => k.startsWith('exportlog:'));
-  assert.equal(protokoll.length, 2, 'auch der abgewiesene Zugriff ist ein Nachweis');
+  assert.equal(protokoll.length, 2, 'Deny-Bucket je Stunde plus erfolgreicher Export');
   const eintraege = protokoll.map((k) => JSON.parse(kv.map.get(k)));
-  assert.ok(eintraege.some((e) => e.status === 403));
+  assert.equal(eintraege.filter((e) => e.status === 403).length, 1,
+    '403-Sturm darf nicht pro Anfrage KV schreiben');
   assert.ok(eintraege.some((e) => e.route === '/export/pending' && e.status === 200));
   // Der Abdruck ist ein Kurz-Hash – NIE der Schluessel selbst.
   for (const e of eintraege) {
@@ -1362,17 +1429,20 @@ test('export: jeder Aufruf wird protokolliert, Fehlversuche inbegriffen (F-08)',
   assert.equal(intern.budget.anmeldung_heute, 0);
 });
 
-test('Export-Schluessel: Konstantzeitvergleich und Rollen-Rueckfall (F-08)', async () => {
+test('Export-Schluessel: Konstantzeitvergleich, getrennte Rollen, kein Rueckfall (F-08)', async () => {
   const kv = kvLeeren();
   const nur_lesen = env_mit(kv);
   const getrennt = env_mit(kv, { EXPORT_KEY_WRITE: 'schreib-key-32-z------------' });
+  const gleicher_schluessel = env_mit(kv, { EXPORT_KEY_WRITE: EXPORT_KEY });
   assert.equal(await schluessel_pruefen(nur_lesen, EXPORT_KEY), true);
   assert.equal(await schluessel_pruefen(nur_lesen, EXPORT_KEY.slice(0, -1)), false,
     'ein Zeichen weniger ist nicht der Schluessel');
   assert.equal(await schluessel_pruefen(nur_lesen, ''), false);
   assert.equal(await schluessel_pruefen(env_mit(kv), 'kurz'), false);
-  // Rueckfall: ohne eigenen Schreibschluessel gilt der Standardschluessel.
-  assert.equal(await schreibschluessel_pruefen(nur_lesen, EXPORT_KEY), true);
+  // Ohne separaten Schreibschluessel ist die Write-Rolle gesperrt.
+  assert.equal(await schreibschluessel_pruefen(nur_lesen, EXPORT_KEY), false);
+  // Identische Secrets zaehlen ebenfalls nicht als Trennung.
+  assert.equal(await schreibschluessel_pruefen(gleicher_schluessel, EXPORT_KEY), false);
   // Getrennt: der Leseschluessel oeffnet den Schreibweg NICHT.
   assert.equal(await schreibschluessel_pruefen(getrennt, EXPORT_KEY), false);
   assert.equal(await schreibschluessel_pruefen(getrennt, 'schreib-key-32-z------------'), true);

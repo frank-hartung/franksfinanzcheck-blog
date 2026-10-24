@@ -228,10 +228,15 @@ jobs:
               f.write(f"| Von Gates gehalten (braucht Korrektur) | {len(hold_posts)} |\n")
               f.write(f"| Mindestziel/Tag | {minimum} |\n\n")
               f.write("_Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._\n")
-
-          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
-              f.write(f"LEVEL={level}\n")
-              f.write(f"MELDUNG={meldung}\n")
+          # Text aus redaktionell gepflegten Inhalten bleibt in Dateien, nicht
+          # in Actions-Environment-/Output-Zeilen. Nur die feste Enum-Stufe
+          # wird als Step-Output weitergegeben.
+          with open("wache-meldung.txt", "w", encoding="utf-8") as f:
+              f.write(meldung)
+          if level not in {"OK", "WARTEND", "P1", "P2"}:
+              raise SystemExit("Unbekannte Produktions-Wachen-Stufe")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"level={level}\n")
           PYEOF
 
       # -------------------------------------------------------
@@ -241,16 +246,18 @@ jobs:
         if: github.event_name != 'workflow_run'
         env:
           GH_TOKEN: ${{ github.token }}
+          LEVEL: ${{ steps.check.outputs.level }}
         run: |
           set -Eeuo pipefail
           SEIT="$(date -u -d '00:00 today' +%Y-%m-%dT%H:%M:%SZ)"
           N="$(gh run list --workflow "$ENGINE_WORKFLOW" --created ">$SEIT" \
                --json databaseId --jq 'length' 2>/tmp/gh.err)" || {
                echo "::error::gh run list fehlgeschlagen"; cat /tmp/gh.err; exit 1; }
+          [[ "$N" =~ ^[0-9]+$ ]] || { echo "::error::Ungültige Laufanzahl"; exit 1; }
           echo "Engine-Läufe heute: $N"
-          echo "ENGINE_RUNS_TODAY=$N" >> "$GITHUB_ENV"
           if [ "${LEVEL:-OK}" != "OK" ] && [ "$N" = "0" ]; then
-            echo "MELDUNG=${MELDUNG:-} — zusätzlich: die Content-Engine hat heute GAR NICHT gelaufen." >> "$GITHUB_ENV"
+            printf '\n**Zusatzbefund:** Die Content-Engine hat heute gar keinen Lauf abgeschlossen.\n' >> "$STATUS"
+            printf ' — zusätzlich: Die Content-Engine hat heute gar keinen Lauf abgeschlossen.' >> wache-meldung.txt
           fi
 
       # -------------------------------------------------------
@@ -272,7 +279,7 @@ jobs:
         # In der WARTEND-Frist (Publikationstag, noch 0 Artikel, Fallback-Slots
         # 14:10/17:40 laufen noch) wird bewusst nicht gemeldet – die Slots sind
         # der Nachholweg, ein rotes Issue wäre hier ein Fehlalarm.
-        if: env.LEVEL != 'WARTEND'
+        if: steps.check.outputs.level != 'WARTEND'
         env:
           GH_TOKEN: ${{ github.token }}
           MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
@@ -282,7 +289,7 @@ jobs:
       # Alarm + Issue (mit Fingerprint – kein täglicher Doppelpost)
       # -------------------------------------------------------
       - name: Telegram-Alarm (P1)
-        if: env.LEVEL == 'P1'
+        if: steps.check.outputs.level == 'P1'
         env:
           TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -296,7 +303,7 @@ jobs:
           {
             echo "ROT - Content-Engine produziert nicht"
             echo ""
-            echo "$MELDUNG"
+            cat wache-meldung.txt
             echo ""
             echo "Runbook: Actions -> 'Content-Engine v2' -> letzter Lauf -> Schritt 'Phase 1 - Artikel generieren'"
             echo "Lauf: $RUN_URL"
@@ -310,6 +317,7 @@ jobs:
       - name: Issue öffnen / kommentieren / schließen
         env:
           GH_TOKEN: ${{ github.token }}
+          LEVEL: ${{ steps.check.outputs.level }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -Eeuo pipefail
@@ -402,6 +410,8 @@ jobs:
 
       - name: Step-Summary
         if: always()
+        env:
+          LEVEL: ${{ steps.check.outputs.level }}
         run: |
           {
             echo "## Produktions-Wache"

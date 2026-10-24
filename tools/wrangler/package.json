@@ -4,5 +4,8 @@
   "description": "Fest gepinntes Wrangler für den Worker-Deploy per CI (Sicherheitsaudit 14.10.2026, M-14). Installation nur mit npm ci --ignore-scripts.",
   "devDependencies": {
     "wrangler": "4.149.0"
+  },
+  "overrides": {
+    "undici": "7.30.1"
   }
 }
