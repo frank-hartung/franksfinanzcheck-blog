@@ -70,6 +70,17 @@ on:
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
       - "scripts/n8n_bridge.py"
+      - "scripts/abhaengigkeits_wache.py"
+      - "scripts/tests/test_abhaengigkeits_wache.py"
+      - "requirements*.txt"
+      - "requirements-ci.in"
+      - "package.json"
+      - "package-lock.json"
+      - "tools/*/package.json"
+      - "tools/*/package-lock.json"
+      - "cloudflare/*/package.json"
+      - "newsletter-worker/package.json"
+      - ".github/dependabot.yml"
       - ".github/workflows/sicherheits-wache.yml"
   pull_request:
     paths:
@@ -92,6 +103,17 @@ on:
       - "scripts/content_html_wache.py"
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
+      - "scripts/abhaengigkeits_wache.py"
+      - "scripts/tests/test_abhaengigkeits_wache.py"
+      - "requirements*.txt"
+      - "requirements-ci.in"
+      - "package.json"
+      - "package-lock.json"
+      - "tools/*/package.json"
+      - "tools/*/package-lock.json"
+      - "cloudflare/*/package.json"
+      - "newsletter-worker/package.json"
+      - ".github/dependabot.yml"
       - ".github/workflows/sicherheits-wache.yml"
   schedule:
     - cron: "5 6 * * *"     # täglich 08:05 MESZ – nach der Spam-Wache, vor der Redaktion
@@ -141,6 +163,66 @@ jobs:
           set -euo pipefail
           python3 scripts/n8n_schutz_wache.py --selftest
           python3 scripts/n8n_schutz_wache.py
+
+  abhaengigkeiten:
+    name: Abhängigkeiten (Pins offline · Audit online)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      # WARUM DIESER JOB (24.10.2026): GitHub meldete 58 offene
+      # Schwachstellen, während der ausgelieferte Bestand nach
+      # vollständiger Prüfung gegen dieselbe Advisory-Datenbank
+      # sauber war. Gefehlt hat eine Stimme, die den BESTAND prüft
+      # und nicht die Alarmtabelle. Dieser Job ist diese Stimme –
+      # offline bei jedem Push, online im Tageslauf.
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Eigenprüfung (Sabotage- und Gegenproben)
+        run: python3 scripts/abhaengigkeits_wache.py --selftest
+
+      - name: Struktur-Gate – jeder Pin ist eine Aussage (offline)
+        # A1 Pins · A2 Quelle/Hash-Lock · A3 Lockfile · A4 Action-SHA
+        # A5 Image-Tag · A6 Doppelversion. Braucht kein Netz und
+        # blockiert deshalb zuverlässig, auch wenn die API schweigt.
+        run: python3 scripts/abhaengigkeits_wache.py --check
+
+      - name: Vertragstests der Wache
+        run: python3 -m unittest scripts.tests.test_abhaengigkeits_wache -v
+
+      - name: Advisory-Audit – ausgelieferte Versionen gegen die Datenbank
+        # Nur im Tageslauf und auf Zuruf: Der Audit fragt für jede
+        # ausgelieferte Version die öffentliche Advisory-API. Ein
+        # Netzfehler ist STÖRUNG (Exit 2), kein Befund – ungeprüft
+        # ist nicht sauber (Vertrag C34).
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          code=0
+          python3 scripts/abhaengigkeits_wache.py --audit \
+            --report abhaengigkeiten.md --json > abhaengigkeiten.json || code=$?
+          if [ "$code" -eq 1 ]; then
+            echo "::error title=Abhängigkeits-Audit::Mindestens eine ausgelieferte Version ist von einer bekannten Schwachstelle betroffen – siehe Annotationen und Bericht."
+          elif [ "$code" -eq 2 ]; then
+            echo "::error title=Abhängigkeits-Audit gestört::Der Audit konnte nicht durchgeführt werden (Netz/API). Ungeprüft gilt nicht als sauber."
+          elif [ "$code" -ne 0 ]; then
+            echo "::error title=Abhängigkeits-Audit::Werkzeugfehler (Exit $code)."
+          fi
+          {
+            echo "## Abhängigkeits-Audit"
+            echo ""
+            sed -n '1,60p' abhaengigkeiten.md 2>/dev/null || true
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$code"
 
   live:
     name: Live-Messung (täglich und auf Zuruf)

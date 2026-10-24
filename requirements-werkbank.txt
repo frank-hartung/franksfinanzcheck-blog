@@ -16,18 +16,18 @@
 # Crawl4AI (https://crawl4ai.org) verwandelt eine Seite in sauberes,
 # LLM-taugliches Markdown. Bringt Playwright als Abhängigkeit mit –
 # derselbe Browser-Unterbau, den auch die E2E-Suite nutzt.
-crawl4ai>=0.9.4
+crawl4ai==0.9.5
 
 # --- Gewerk „konnektor" ---------------------------------------------
 # Composio (https://composio.dev). Das SDK ist bequemer als der
 # REST-Weg, aber nicht zwingend: werkbank_adapters.py spricht notfalls
 # direkt mit backend.composio.dev/api/v3.1.
-composio>=0.25.0
+composio==0.30.0
 
 # --- Querschnitt ----------------------------------------------------
 # YAML liest die SSOT (data/werkbank.yaml). Im Repo ohnehin überall
 # vorausgesetzt; hier explizit, damit ein frisches venv sofort läuft.
-PyYAML>=6.0.3
+PyYAML==6.0.3
 
 # NICHT hier gelistet und bewusst so:
 #   · Playwright        → kommt über package.json (@playwright/test),

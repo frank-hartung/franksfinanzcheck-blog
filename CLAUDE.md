@@ -30,6 +30,11 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    `layouts/_partials/head.html`, `hugo.toml` (`unsafe`), `layouts/index.sw.js`.
 4. **Keine neuen Abhängigkeiten ohne Pinning:** Actions per Commit-SHA,
    pip mit `--require-hashes`, npm nur `npm ci --ignore-scripts`.
+   **Versions-Ranges sind verboten** (`>=`, `~=`, `*`): Dependabot löst sie
+   einmal auf und hält das Ergebnis fest – so überlebten am 24.10.2026
+  58 Alarme ihre eigene Heilung. Jede Anforderung trägt `==<version>` in
+   `requirements*.txt` **und** `requirements-ci.in`; geprüft von
+   `npm run deps:check` (Regel A1) und im CI-Job „Abhängigkeiten“.
 5. **Nie** `pull_request_target` mit Checkout des PR-Codes, nie
    `${{ github.event.* }}` direkt in `run:` (immer über `env:`).
 

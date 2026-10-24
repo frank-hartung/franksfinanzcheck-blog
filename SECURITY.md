@@ -144,3 +144,51 @@ Erzwungen wird der Vertrag auf vier unabhängigen Ebenen:
 
 Beweisführung und Runbook:
 `CODE-SCANNING-ALERT-83-DAUERHEILUNG-PREMIUM-2026-10-10.md`.
+
+## Abhängigkeiten: Pin, Audit, Wache (24.10.2026)
+
+GitHub meldete am 24.10.2026 **58 offene Schwachstellen** auf `main`
+(7 kritisch, 30 hoch, 18 mäßig, 3 niedrig), während der ausgelieferte Bestand
+im selben Moment nach vollständiger Prüfung gegen dieselbe Advisory-Datenbank
+**0 Fundstellen** hatte. Zwei Lehren stehen seitdem als Vertrag:
+
+1. **Ein Pin ist eine Aussage, ein Bereich ist eine Hoffnung.** Jede
+   Anforderung in `requirements*.txt` und `requirements-ci.in` nennt eine
+   exakte Version (`==`). Ein Bereich (`>=`, `~=`, `*`) löst Dependabot
+   **einmal** auf und hält das Ergebnis fest – Änderungen an der
+   Hash-Sperrdatei lösen keine neue Auflösung aus. Genau so überlebten
+   Alarme ihre eigene Heilung. Erzwungen von `scripts/abhaengigkeits_wache.py`
+   (Regel A1) bei jedem Push.
+2. **Die Alarmtabelle ist ein Cache, kein Beweis.** Der Sicherheitsstatus
+   wird am **Bestand** gemessen, nicht an GitHubs Anzeige. Die
+   Abhängigkeits-Wache prüft bei jedem Push offline (Pins, Quelle ↔
+   Hash-Lock, Lockfiles, Action-SHAs, Image-Tags) und im Tageslauf online
+   (jede ausgelieferte Version gegen die GitHub Advisory Database).
+
+**Betrieb**
+
+```bash
+npm run deps:check    # offline, Sekunden, blockiert bei Struktur-Befund
+npm run deps:audit    # online, ~300 Abfragen, Exit 1 bei Fundstelle
+npm run test:deps     # Selbsttest (Sabotage + Gegenproben) und Vertragstests
+```
+
+Exit-Codes sind Klassen, keine Stimmungen – dieselbe Systematik wie bei der
+Sicherheits-Wache (Vertrag C34):
+
+| Exit | Bedeutung | richtige Reaktion |
+|---|---|---|
+| 0 | sauber | – |
+| 1 | Befund | Version auf `first_patched_version` pinnen, PR, Wache erneut laufen lassen |
+| 2 | Störung | Netz/API nicht erreichbar – **kein** Freibrief: ungeprüft ist nicht sauber |
+
+**Kein Dismiss ohne Messung.** Ein GitHub-Alert darf erst geschlossen werden,
+wenn die Wache dieselbe Aussage stützt: Entweder nennt sie die Fundstelle
+(dann wird sie geheilt), oder sie weist nach, dass die betroffene Version im
+Bestand nicht mehr vorkommt. „Sieht alt aus“ ist keine Begründung.
+
+Regressionstests: `scripts/tests/test_abhaengigkeits_wache.py` (33 Verträge,
+u. a. der Dauervertrag „der Bestand hat keine Struktur-Fehler“). CI:
+`.github/workflows/sicherheits-wache.yml`, Job **Abhängigkeiten (Pins offline ·
+Audit online)** – offline bei jedem Push, online im Tageslauf.
+Beweisführung: `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`.
