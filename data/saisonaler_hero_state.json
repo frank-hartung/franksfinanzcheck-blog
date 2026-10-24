@@ -8,7 +8,13 @@
       "research_brief": "",
       "research_sha256": "",
       "set_current": true,
-      "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)"
+      "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)",
+      "fehler_serie": 1,
+      "letzter_fehler": {
+        "ts": "2026-10-24T09:44:54Z",
+        "code": "ki-ohne-gueltige-fassung",
+        "detail": "Versuch 1 (gemini:gemini-3-flash-preview): Antwort ohne gültiges TITLE/LEAD-Format | Versuch 2 (gemini:gemini-3-flash-preview): Antwort ohne gültiges TITLE/LEAD-Format | Versuch 3 (gemini:gemini-3-flash-preview): Antwort ohne gültiges TITLE/LEAD-Format"
+      }
     }
   }
 }

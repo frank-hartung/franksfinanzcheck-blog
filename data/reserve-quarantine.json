@@ -1,13 +1,23 @@
 {
-  "2026-10-23-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+  "2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
     "first": "2026-10-23T14:00:14Z",
-    "grund": "Reserve-Qualitäts-Gate: RS5: 10 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
-    "hits": 1,
-    "laeufe": [
-      "run:39963409430"
+    "geschont": true,
+    "grund": "Reserve-Qualitäts-Gate: RS5: 9 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
+    "heiler": [
+      "redaktions_standard.py",
+      "check_titles.py",
+      "lesbarkeit_heiler.py",
+      "profi_polish.py"
     ],
-    "last": "2026-10-23T14:14:01Z",
-    "lauf": "run:39963409430",
+    "hits": 3,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:39963409430",
+      "run:40077480495",
+      "run:40095647943"
+    ],
+    "last": "2026-10-24T12:59:12Z",
+    "lauf": "run:40095647943",
     "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: pauschale aussagen zu den preisen im jahr <n> bringen dir nichts."
   }
 }

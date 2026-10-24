@@ -1,5 +1,5 @@
-generated_at: '2026-10-23T08:49:55Z'
-day: '2026-10-23'
+generated_at: '2026-10-24T08:23:59Z'
+day: '2026-10-24'
 mode: deterministic
 teams:
   trending:
@@ -238,59 +238,58 @@ teams:
     source: pinterest_plan
     score: 0.81
   niche_hooks:
-  - topic: Günstigen Mietwagen für den Urlaub buchen
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Günstigen Mietwagen für den Urlaub buchen
-    score: 0.55
-    keywords:
-    - Mietwagen buchen
-    - Günstige Mietwagen
-    - Mietwagen Vergleich
-  - topic: 'Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt'
-    score: 0.55
-    keywords:
-    - Strompreis
-    - Anpassung
-    - schützen
-  - topic: 'VPN für Zuhause: Brauchst du das wirklich?'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:VPN für Zuhause: Brauchst du das wirklich?'
-    score: 0.55
-    keywords:
-    - VPN Zuhause
-    - VPN sinnvoll
-    - Internet Sicherheit
-  - topic: 'Weihnachtsgeld clever umschulden: So nutzt du die Prämie für eine Sondertilgung'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Weihnachtsgeld clever umschulden: So nutzt du die Prämie für eine
-      Sondertilgung'
-    score: 0.55
-    keywords:
-    - Weihnachtsgeld Sondertilgung
-    - Ratenkredit umschulden Jahresende
-    - Schuldenfrei ins neue Jahr
-    - Vorfälligkeitsentschädigung umgehen
-  - topic: Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+  - topic: Die 50-30-20-Regel einfach erklärt
     pillar: frugalismus
     signal: niche_hook
-    source: topics:Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+    source: topics:Die 50-30-20-Regel einfach erklärt
     score: 0.55
     keywords: []
-  - topic: 'Zahnzusatzversicherung: Lohnt sich der Abschluss?'
-    pillar: versicherungen
+  - topic: Heizperiode vorbereiten im Spätsommer
+    pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.55
     keywords:
-    - Zahnzusatzversicherung
-    - Zahnarztkosten sparen
-    - Zahnersatz versichern
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: 'Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    score: 0.55
+    keywords:
+    - Kreditkarten
+    - Bonusprogramm
+    - Kreditkartenvergleich
+  - topic: 'Privathaftpflicht: Warum sie Pflicht ist und was sie kostet'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Privathaftpflicht: Warum sie Pflicht ist und was sie kostet'
+    score: 0.55
+    keywords:
+    - Privathaftpflicht
+    - Haftpflichtversicherung Vergleich
+    - Haftpflicht Kosten
+  - topic: 'Riester-Rente: Lohnt sie sich 2026 noch?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Riester-Rente: Lohnt sie sich 2026 noch?'
+    score: 0.55
+    keywords: []
+  - topic: 'Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung richtig
+      kündigst'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung
+      richtig kündigst'
+    score: 0.55
+    keywords:
+    - Kfz Versicherung kündigen Frist
+    - Wechselsaison November
+    - Sonderkündigungsrecht Autoversicherung
+    - Stichtag 30. November
 live_web:
   enabled: false
   findings: []
