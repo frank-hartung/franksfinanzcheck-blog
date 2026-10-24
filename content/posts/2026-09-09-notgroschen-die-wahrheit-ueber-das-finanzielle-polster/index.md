@@ -60,7 +60,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Warum die klassische Drei-Monats-Regel oft zu grob ist
 
@@ -145,7 +145,7 @@ Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen
 
 ![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ – 5 Stationen von „Warum die klassische Drei-Monats-Regel oft zu grob ist“ bis „Ein Rechenbeispiel für 2026“ (eigene Darstellung).*
 
 ## Wann 1.000 € ein guter Start sind – aber nicht das Endziel
 

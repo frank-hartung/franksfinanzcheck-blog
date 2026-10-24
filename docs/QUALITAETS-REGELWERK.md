@@ -74,7 +74,7 @@ offene Rechtschreib-Funde < 30 · 0 Duplikate · 0 Keyword-Dumps · 0 Intro-Form
 
 | Regel | Skript | Definition & Schwelle | Verhalten |
 |---|---|---|---|
-| R1 | `duplikat_guard.py` | Exakte Absatz-Duplikate (SHA-256) + Near-Duplikate (Ratio ≥ 0,85), H2-Sektions-Duplikate (≥ 0,85), Premium-Anhänge (5er-Shingles); Boilerplate (Disclaimer/„Weiterlesen“) ausgeschlossen | `--new-only` blockierend; Bestand Report + `--fix` (ältere Version entfernen) |
+| R1 | `duplikat_guard.py` | Exakte Absatz-Duplikate (SHA-256) + Near-Duplikate (Ratio ≥ 0,85), H2-Sektions-Duplikate (≥ 0,85), Premium-Anhänge (5er-Shingles); Boilerplate (Disclaimer/„Weiterlesen“) und reine Navigationszeilen (SSOT `template_boilerplate.ist_nur_navigation`: interne Links ohne Fließtext) ausgeschlossen. Bildzeilen (`*Abbildung: …*`) sind Metadaten: aus den D6-Blocklisten ausgenommen, als Zeile aber weiter messbar – deshalb müssen sie artikelgenau erzeugt werden (`abbildungen_ableiten.py`, #824) | `--new-only` blockierend; Bestand Report + `--fix` (ältere Version entfernen) |
 | R2 | `textverstaendnis_guard.py` | Keyword-Dump: Fließtext-Absatz > 200 Zeichen, > 12 Kommas, > 40 Tokens, ≤ 2 Verben | hart, blockierend |
 | R3 | `textverstaendnis_guard.py` + `data/terminologie.yaml` | Je Konzept ein Leitbegriff (z. B. „DNS-Server“); Synonyme > `max_synonyme` im Artikel → Fund; Ersterwähnung darf erklären | hart, blockierend |
 | R4 | `textverstaendnis_guard.py` | Satzanfangs-Echo: gleicher Anfang > 20 % der Fließtextsätze ODER > 4×/1.000 Wörter | weich (Report) |

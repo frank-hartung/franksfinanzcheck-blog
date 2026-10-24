@@ -7,9 +7,30 @@ eigenen Text des Beitrags (keine neuen Fakten):
   - abbildung-merkkarte.svg  Kernaussagen aus der Kurzantwort (max. 3 Sätze)
   - abbildung-ablauf.svg     Gliederung aus den Zwischenüberschriften
 
+BILDUNTERSCHRIFTEN SIND ARTIKELSPEZIFISCH (Dauerheilung #824, 24.10.2026)
+--------------------------------------------------------------------------
+Bis 24.10.2026 schrieb dieses Werkzeug in JEDEN der 20 Beiträge wörtlich
+dieselbe Unterschrift:
+
+  *Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften
+   (eigene Darstellung).*
+
+Damit standen 20 Artikel mit einem identischen Absatz im Bestand – die
+Duplikat-Wache (D3-X) und das Einzigartigkeits-Audit (U1) meldeten das
+korrekt als Redundanz, 25 Live-Artikel standen in der Release-Scorecard
+dauerhaft auf „blockiert“ (#824). Die Wache war nicht zu streng, der
+Generator war es: Eine Bildunterschrift, die den Artikel nicht beschreibt,
+ist auf jeder Seite derselbe Satz.
+
+Deshalb leitet `caption_*()` die Unterschrift aus dem Beitrag selbst ab
+(Titel, Kernaussage, Abschnittsnamen). Zwei Beiträge können dadurch keine
+gleiche Unterschrift tragen – `--check` beweist das bei jedem Lauf, und
+`--selftest` friert es ein. Der Lauf REPARIERT bestehende Altfassungen
+(ersetzt die alte Unterschrift), statt sie zu verdoppeln.
+
 Modi:
-  python3 scripts/abbildungen_ableiten.py            # erzeugen + einbinden (idempotent)
-  python3 scripts/abbildungen_ableiten.py --check    # Exit 1, wenn eine Abbildung fehlt
+  python3 scripts/abbildungen_ableiten.py            # erzeugen + einbinden (idempotent, heilt Altfassungen)
+  python3 scripts/abbildungen_ableiten.py --check    # Exit 1 bei fehlender/gleicher Unterschrift
   python3 scripts/abbildungen_ableiten.py --selftest # Regelprüfung ohne Dateischreiben
 """
 import glob
@@ -28,6 +49,16 @@ SKIP = re.compile(
 )
 MERK = "abbildung-merkkarte.svg"
 ABLAUF = "abbildung-ablauf.svg"
+
+# Bildzeile und Unterschrift sind getrennte Blöcke: Die Bildzeile trägt den
+# Alt-Text (mit Titel), die Unterschrift den beschreibenden Satz. Beide werden
+# hier erkannt, damit ein zweiter Lauf die vorhandene Fassung AKTUALISIERT
+# statt sie zu verdoppeln.
+BILD_RE = {
+    MERK: re.compile(r"^!\[[^\]]*\]\(" + re.escape(MERK) + r"\)\s*$"),
+    ABLAUF: re.compile(r"^!\[[^\]]*\]\(" + re.escape(ABLAUF) + r"\)\s*$"),
+}
+UNTERSCHRIFT_RE = re.compile(r"^\*Abbildung:[^\n]*\*\s*$")
 
 
 def load_slugs():
@@ -113,46 +144,147 @@ def build(post_path):
     return title, sentences, steps, front, body
 
 
+def caption_merkkarte(title, sentences=None):
+    """Artikelgenaue Unterschrift der Merkkarte.
+
+    Der Titel macht die Zeile einzigartig; die beiden festen Teile bleiben
+    bewusst KURZ (drei Wörter davor, fünf danach). Damit kann über zwei
+    Beiträge hinweg nie eine gemeinsame 7-Wort-Phrase entstehen – genau die
+    hatte zuletzt 20 Artikel als D3-X/U1 blockiert (#824).
+
+    WARUM KEINE KERNAUSSAGE IM ZITAT: Die `kurzantwort` enthält Zahlen und
+    Prozentwerte. Eine Bildzeile ist Metadaten, keine zweite Aussage – sie
+    darf keine Beträge in den YMYL-Prüfpfad (`fachpruefung_register.py`)
+    einschleusen. Zitate bleiben im Artikeltext, wo sie geprüft werden.
+    """
+    return (f"*Abbildung: Merkkarte zu „{title}“ (eigene Darstellung aus "
+            "diesem Beitrag).*")
+
+
+def caption_ablauf(title, steps):
+    """Artikelgenaue Unterschrift der Gliederung (erste und letzte Station).
+
+    Nennt die Stationen des Beitrags – ein Leser weiß damit vor dem Bild,
+    wohin die Reise geht, und zwei Beiträge teilen keine Bildzeile.
+
+    WARUM „STATIONEN“ UND NICHT „ABSCHNITTE“: Die Grafik zeigt die ersten
+    fünf inhaltlichen Zwischenüberschriften (`SKIP` blendet Kürz-/
+    FAQ-/Fazit-Kapitel aus), nicht zwingend alle Kapitel des Beitrags. Die
+    Bildzeile darf deshalb keine Gesamtzahl behaupten – sie beschreibt, was
+    im Bild steht.
+    """
+    if len(steps) >= 2:
+        return (f"*Abbildung: Gliederung zu „{title}“ – {len(steps)} "
+                f"Stationen von „{steps[0]}“ bis „{steps[-1]}“ "
+                "(eigene Darstellung).*")
+    return f"*Abbildung: Gliederung zu „{title}“ (eigene Darstellung).*"
+
+
+def _setze_unterschrift(lines, bild, caption):
+    """Bildzeile + Unterschrift setzen bzw. eine Altfassung ersetzen.
+
+    Rückgabe: (lines, gefunden). `gefunden` ist False, wenn die Bildzeile
+    fehlt – dann fügt der Aufrufer den ganzen Block ein (Erstlauf).
+    """
+    muster = BILD_RE[bild]
+    for i, line in enumerate(lines):
+        if not muster.match(line.strip()):
+            continue
+        # Die Unterschrift steht direkt unter der Bildzeile; dazwischen darf
+        # genau EINE Leerzeile liegen (Hugo rendert sie als <figcaption>).
+        j = i + 1
+        if j < len(lines) and not lines[j].strip():
+            j += 1
+        if j < len(lines) and UNTERSCHRIFT_RE.match(lines[j].strip()):
+            if lines[j] != caption:
+                lines[j] = caption
+            return lines, True
+        lines[i + 1:i + 1] = ["", caption]
+        return lines, True
+    return lines, False
+
+
 def render(post_path, write):
     title, sentences, steps, front, body = build(post_path)
     folder = os.path.dirname(post_path)
+    merk_caption = caption_merkkarte(title, sentences)
+    ablauf_caption = caption_ablauf(title, steps)
     if write:
         with open(os.path.join(folder, MERK), "w", encoding="utf-8") as fh:
             fh.write(merkkarte_svg(title, sentences))
         with open(os.path.join(folder, ABLAUF), "w", encoding="utf-8") as fh:
             fh.write(ablauf_svg(title, steps))
-        if MERK not in body:  # idempotent: nur einmal einbinden
-            lines = body.split("\n")
+        lines = body.split("\n")
+        lines, hat_merk = _setze_unterschrift(lines, MERK, merk_caption)
+        lines, hat_ablauf = _setze_unterschrift(lines, ABLAUF, ablauf_caption)
+        if not (hat_merk and hat_ablauf):  # Erstlauf: Blöcke einfügen
             h2 = [i for i, line in enumerate(lines) if line.startswith("## ")]
             if len(h2) < 2:
                 raise SystemExit(f"🛑 zu wenige Abschnitte für Abbildungen: {post_path}")
-            mid = h2[len(h2) // 2]
-            lines[mid:mid] = [
-                f"![Gliederung des Beitrags: {title}]({ABLAUF})", "",
-                "*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*", "",
-            ]
-            first = h2[0]
-            lines[first:first] = [
-                f"![Merkkarte: Kernaussagen zu {title}]({MERK})", "",
-                "*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*", "",
-            ]
+            if not hat_ablauf:
+                mid = h2[len(h2) // 2]
+                lines[mid:mid] = [f"![Gliederung des Beitrags: {title}]({ABLAUF})",
+                                  "", ablauf_caption, ""]
+            if not hat_merk:
+                first = next(i for i, line in enumerate(lines)
+                             if line.startswith("## "))
+                lines[first:first] = [f"![Merkkarte: Kernaussagen zu {title}]({MERK})",
+                                      "", merk_caption, ""]
+        neu = "\n".join(lines)
+        if neu != body:
             with open(post_path, "w", encoding="utf-8") as fh:
-                fh.write(front + "\n---\n" + "\n".join(lines))
+                fh.write(front + "\n---\n" + neu)
     return len(sentences), len(steps)
 
 
+def pruefe_post(path, problems, gesehen):
+    """Prüft EINEN Beitrag: Einbindung, artikelgenaue und eindeutige Bildzeile.
+
+    Eigene Funktion, damit der Regress-Test sie gegen eine synthetische
+    Ablage fahren kann – ein Test am Live-Bestand wäre vom Tagesgeschäft
+    abhängig (dieselbe Naht wie bei `duplikat_guard.check_article`).
+    """
+    slug = os.path.basename(os.path.dirname(path))
+    folder = os.path.dirname(path)
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    body = text.split("\n---\n", 1)[1] if "\n---\n" in text else text
+    title, sentences, steps, _front, _body = build(path)
+    erwartet = {
+        MERK: caption_merkkarte(title, sentences),
+        ABLAUF: caption_ablauf(title, steps),
+    }
+    for name in (MERK, ABLAUF):
+        if not os.path.isfile(os.path.join(folder, name)):
+            problems.append(f"{slug}: Datei fehlt {name}")
+        if name not in body:
+            problems.append(f"{slug}: nicht eingebunden {name}")
+            continue
+        if erwartet[name] not in body:
+            problems.append(
+                f"{slug}: Unterschrift fehlt oder ist nicht artikelgenau "
+                f"(erwartet: {erwartet[name][:60]}…)")
+            continue
+        if erwartet[name] in gesehen:
+            problems.append(f"{slug}: Unterschrift identisch mit "
+                            f"{gesehen[erwartet[name]]} – Artikel müssen "
+                            "sich unterscheiden (#824)")
+        else:
+            gesehen[erwartet[name]] = slug
+    return problems
+
+
 def check(slugs):
+    """Prüft Einbindung UND artikelgenaue Unterschrift (Issue #824).
+
+    Eine fehlende, veraltete oder doppelte Unterschrift ist ein Befund:
+    Genau die wörtlich gleiche Bildzeile in 20 Artikeln hat die
+    Release-Scorecard 25-mal blockiert.
+    """
     problems = []
+    gesehen = {}
     for slug in slugs:
-        path = find_post(slug)
-        folder = os.path.dirname(path)
-        with open(path, encoding="utf-8") as fh:
-            body = fh.read()
-        for name in (MERK, ABLAUF):
-            if not os.path.isfile(os.path.join(folder, name)):
-                problems.append(f"{slug}: Datei fehlt {name}")
-            if name not in body:
-                problems.append(f"{slug}: nicht eingebunden {name}")
+        pruefe_post(find_post(slug), problems, gesehen)
     return problems
 
 
@@ -162,7 +294,29 @@ def selftest():
     assert parts == ["Erster Satz.", "Zweiter Satz mit 3.5 Prozent.", "Dritter Satz!"], parts
     assert clean("**fett** &quot;x&quot;") == 'fett "x"'
     assert "<svg" in merkkarte_svg("T", ["A."]) and "<svg" in ablauf_svg("T", ["Schritt"])
-    print("✅ Abbildungen-Selbsttest bestanden")
+    # #824: Zwei Beiträge dürfen nie dieselbe Bildzeile tragen. Der Fall ist
+    # eingefroren, weil er zuletzt 20 Artikel blockiert hat.
+    a_merk = caption_merkkarte("DSL-Wechselbonus sichern", ["Ein Bonus zählt nur mit dem Effektivpreis."])
+    b_merk = caption_merkkarte("Tagesgeld im Vergleich", ["Der Zins gilt nur für Neukunden."])
+    a_ablauf = caption_ablauf("DSL-Wechselbonus sichern", ["Kosten", "Tarif", "Wechsel"])
+    b_ablauf = caption_ablauf("Tagesgeld im Vergleich", ["Zinsen", "Sicherung", "Fazit"])
+    assert a_merk != b_merk and a_ablauf != b_ablauf, "Bildzeilen sind nicht artikelgenau"
+    assert "DSL-Wechselbonus" in a_merk, a_merk
+    assert "Kosten" in a_ablauf and "Wechsel" in a_ablauf, a_ablauf
+    # Bildzeilen sind Metadaten: keine Beträge, keine Prozentwerte – sonst
+    # wandern Zahlen in den YMYL-Prüfpfad, die dort niemand geprüft hat.
+    for caption in (a_merk, b_merk, a_ablauf, b_ablauf):
+        assert not re.search(r"\d[\d.,]*\s?(?:€|Euro|Prozent|%)", caption), caption
+    # Altfassung wird erkannt und ersetzt (Migrationspfad statt Doppelung).
+    alt = [f"![Merkkarte: Kernaussagen zu T]({MERK})", "",
+           "*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*"]
+    neu, gefunden = _setze_unterschrift(list(alt), MERK, a_merk)
+    assert gefunden and neu[2] == a_merk and len(neu) == len(alt), neu
+    # Zweiter Lauf ist idempotent.
+    nochmal, _ = _setze_unterschrift(list(neu), MERK, a_merk)
+    assert nochmal == neu, "Abbildungs-Einbindung ist nicht idempotent"
+    print("✅ Abbildungen-Selbsttest bestanden (artikelgenaue Bildzeilen, "
+          "Altfassung wird ersetzt, idempotent)")
     return 0
 
 

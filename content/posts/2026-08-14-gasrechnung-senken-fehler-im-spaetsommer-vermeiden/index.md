@@ -50,7 +50,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Starte mit einem kleinen Check
 
@@ -178,7 +178,7 @@ Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden
 
 ![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
 
 ## Dein Spätsommer-Check in 45 Minuten
 

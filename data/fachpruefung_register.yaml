@@ -12,7 +12,7 @@ beitraege:
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
       - "Du hebst vier Mal Geld ab, je 100 Euro Gegenwert."
-      - "Der Automatenbetreiber verlangt in der Annahme je 4 Euro."
+      - "Der Betreiber verlangt in der Annahme je 4 Euro."
       - "Deine Bank berechnet in der Annahme ein Entgelt von 2 Prozent auf jeden abgehobenen Betrag."
       - "Rechenweg für den Automaten: 4 Abhebungen mal 4 Euro ergeben 16 Euro."
       - "Rechenweg für die Bank: 4 Abhebungen mal 100 Euro ergeben 400 Euro."

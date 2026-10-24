@@ -77,12 +77,26 @@ def measure_file(content: str):
 
 
 def status_of(chars: int) -> str:
+    """Status im Premium-Korridor.
+
+    REPARATUR 24.10.2026 (Release-Scorecard #824): Die Funktion meldete für
+    BEIDE Seiten des Optimums `unter-optimum`. Zwei Artikel mit 18.443 bzw.
+    18.940 Zeichen (Optimum 12.000–18.000) standen dadurch im Scorecard als
+    „Zeichenlänge unter-optimum“ – also als zu kurz, obwohl sie zu lang waren.
+    Die Scorecard-Schicht (`release_scorecard.py`) und die SSOT
+    (`data/release_scorecard.yaml`, „Status unter-/ueber-optimum“) kannten
+    `ueber-optimum` bereits; nur der Erzeuger lieferte es nie. Ein Befund muss
+    das benennen, was er misst – sonst führt er die Redaktion in die falsche
+    Richtung (zu lange Beiträge kürzen statt verlängern).
+    """
     if chars < MIN_CHARS:
         return "zu-kurz"
     if chars > MAX_CHARS:
         return "zu-lang"
-    if chars < OPT_MIN_CHARS or chars > OPT_MAX_CHARS:
+    if chars < OPT_MIN_CHARS:
         return "unter-optimum"
+    if chars > OPT_MAX_CHARS:
+        return "ueber-optimum"
     return "ok"
 
 
@@ -154,7 +168,9 @@ def main():
 
     ok = sum(1 for a in arts if a["status"] == "ok")
     opt = sum(1 for a in arts if a["status"] == "unter-optimum")
+    opt_lang = sum(1 for a in arts if a["status"] == "ueber-optimum")
     print(f"Längen-Check: {len(arts)} Artikel | ok: {ok} | unter-Optimum: {opt} "
+          f"| über-Optimum: {opt_lang} "
           f"| zu-kurz: {sum(1 for a in arts if a['status'] == 'zu-kurz')} "
           f"| zu-lang: {sum(1 for a in arts if a['status'] == 'zu-lang')}")
     print(f"Zielbandbreite: {MIN_CHARS}-{MAX_CHARS} Zeichen "
@@ -163,8 +179,8 @@ def main():
         print(f"  ❌ [{a['status']}] {a['slug']}: {a['chars']} Zeichen / "
               f"{a['words']} Wörter")
     for a in sorted(arts, key=lambda x: x["chars"]):
-        if a["status"] == "unter-optimum":
-            print(f"  ℹ️ [unter-Optimum] {a['slug']}: {a['chars']} Zeichen")
+        if a["status"] in ("unter-optimum", "ueber-optimum"):
+            print(f"  ℹ️ [{a['status']}] {a['slug']}: {a['chars']} Zeichen")
 
     if as_json:
         print(json.dumps({

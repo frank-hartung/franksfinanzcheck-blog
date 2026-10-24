@@ -62,7 +62,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 ![Merkkarte: Kernaussagen zu Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Welche Sparhebel lohnen sich im Herbst besonders?
 
@@ -268,7 +268,7 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 ![Gliederung des Beitrags: Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ – 5 Stationen von „Welche Sparhebel lohnen sich im Herbst besonders?“ bis „Weihnachtskonto im September“ (eigene Darstellung).*
 
 ## Weihnachtskonto im September
 

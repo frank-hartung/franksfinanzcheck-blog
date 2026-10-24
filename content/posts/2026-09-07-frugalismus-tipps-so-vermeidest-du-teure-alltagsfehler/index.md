@@ -51,7 +51,7 @@ Gute **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-c
 
 ![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte mit den Kernaussagen (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Das Wichtigste in Kürze
 
@@ -133,7 +133,7 @@ Häufig gibt es kostenlose Alternativen: Die örtliche Bibliothek verleiht Filme
 
 ![Gliederung des Beitrags: Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung des Beitrags in seinen Zwischenüberschriften (eigene Darstellung).*
+*Abbildung: Gliederung zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ – 5 Stationen von „Warum diese Frugalismus-Tipps dein Mindset verändern“ bis „Trick 2: Das Prinzip der No-Spend-Weekends“ (eigene Darstellung).*
 
 ## Trick 4: Meal Prepping und der Wocheneinkauf
 
@@ -158,8 +158,6 @@ Der zweite Fehler ist das Unterschätzen von Kleinstbeträgen. Der tägliche Kaf
 | Hunger-Einkauf | Teure Spontankäufe im Supermarkt | Nur gesättigt und mit Plan einkaufen |
 | Fehlende [Notfallreserve](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) | Teure Dispo-Zinsen bei Reparaturen | Drei Monatsgehälter auf Tagesgeld |
 | Marken-Fixierung | Höherer Preis bei gleicher Qualität | Eigenmarken testen |
-
-Und noch ein Muster: Viele vergleichen stundenlang Preise im Netz, fahren aber ein Auto, das jeden Monat ein Vielfaches davon kostet. Effizientes Sparen bedient die großen Hebel zuerst. Erst wenn die Fixkosten sitzen, lohnt der Blick auf die Details.
 
 ## Rechenbeispiel: Das Potenzial kleiner Änderungen
 
@@ -202,8 +200,6 @@ Theorie verändert kein Konto. Die vier Tricks wirken erst, wenn sie im Kalender
 | Freitag | Die Freitagsfrage stellen: Wofür gebe ich am Wochenende aus Bequemlichkeit Geld aus? | Wochenenden sind die teuerste Zeit der Woche |
 | Samstag | Wocheneinkauf mit Liste erledigen und für drei Tage vorkochen | Ein voller Kühlschrank ist die beste Versicherung gegen den Lieferdienst |
 | Sonntag | Strichliste auswerten: Wie oft hast du ungeplant Geld ausgegeben? | Die Häufigkeit zeigt früher als jede Monatsauswertung, ob die Regel trägt |
-
-Die Reihenfolge ist bewusst gewählt. Erst bremst du Impulskäufe, dann räumst du laufende Kosten auf, danach planst du den Einkauf. Wer umgekehrt startet, optimiert oft wochenlang den Wocheneinkauf und übersieht das teure Abo.
 
 ### Zähle die Häufigkeit, nicht die Summe
 
