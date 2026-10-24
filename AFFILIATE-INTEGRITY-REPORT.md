@@ -1,6 +1,6 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-23 08:59:16 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-24 08:33:10 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
 **Geprüfte Live-Artikel:** 66 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
@@ -77,7 +77,7 @@
 | 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle | 3 → 3 ✅ | /go/unfallversicherung/ |
 | 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig | 2 → 2 ✅ | /go/gas/ |
-| 2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen | 0 → 1 ✅ | /go/mietwagen/ |
+| 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick | 3 → 3 ✅ | /go/strom/ |
 
 ## Hinweise (nicht blockierend)
 
