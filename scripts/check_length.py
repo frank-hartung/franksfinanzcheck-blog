@@ -177,5 +177,139 @@ def main():
     return 1 if issues else 0
 
 
+def wirkungsprobe() -> int:
+    """Beweist an einem zu kurzen Mustertext, dass die Längen-Heilung wirkt."""
+    import tempfile
+    from unittest.mock import patch
+    import extend_articles as ea
+
+    if (
+        status_of(MIN_CHARS - 1) != "zu-kurz"
+        or status_of(MIN_CHARS) != "unter-optimum"
+        or status_of(OPT_MIN_CHARS) != "ok"
+        or status_of(MAX_CHARS + 1) != "zu-lang"
+    ):
+        print("🛑 Wirkungsprobe check_length: Schwellen-Logik verletzt.")
+        return 2
+
+    fm = (
+        '---\ntitle: "Girokonto prüfen: So senkst du deine Kosten"\n'
+        'description: "Girokonto prüfen und Kosten senken."\n'
+        "date: 2026-10-24\ndraft: true\n"
+        'author: "Frank Hartung"\n---\n\n'
+    )
+    kurz_body = (
+        "Ein eigenes Konto gehört zum Alltag. Wer die Bedingungen kennt, "
+        "vermeidet unnötige Ausgaben bei seiner Bank.\n\n"
+        "**Das Wichtigste in Kürze**\n\n"
+        "- Prüfe deine Auszüge regelmäßig in Ruhe.\n"
+        "- Vergleiche [Ratgeber Konto](/pillar/konto-karten/) vor dem Wechsel.\n"
+        "- Achte auf die Bedingungen für die Karte.\n\n"
+        "## Warum lohnt sich der Blick auf das Konto?\n\n"
+        "Viele Kunden nutzen ihr Konto seit vielen Jahren.\n\n"
+        "## Welche Posten fallen im Alltag an?\n\n"
+        "Manche Banken berechnen Gebühren für Papierauszüge.\n\n"
+        "## Wie gehst du beim Vergleich vor?\n\n"
+        "1. Sammle zuerst die aktuellen Auszüge deiner Bank.\n"
+        "2. Prüfe alle Buchungen für Karten und Überweisungen.\n"
+        "3. Vergleiche die Bedingungen mit anderen Anbietern.\n\n"
+        "**Faustregel:** Wer vor einem Wechsel alle Posten eines Jahres "
+        "nebeneinanderlegt, erkennt teure Gewohnheiten auf den ersten Blick.\n\n"
+        "## Worauf achtest du beim Wechsel?\n\n"
+        "Ein Wechsel klappt heute meist digital.\n\n"
+        "## Häufige Fragen\n\n"
+        "### Wie schnell klappt der Kontowechsel?\n\n"
+        "Die Banken helfen beim Umzug der Aufträge.\n"
+    )
+    subjekte = (
+        "Ein klarer Überblick", "Eine gute Liste", "Ein ruhiger Check",
+        "Eine saubere Notiz", "Ein kurzer Blick", "Eine feste Ordnung",
+        "Ein kluger Plan", "Eine einfache Übersicht", "Ein ehrlicher Abgleich",
+        "Eine wache Kontrolle", "Ein direkter Vergleich", "Eine frühe Prüfung",
+        "Ein wacher Blick", "Eine kluge Wahl", "Ein festes Ziel",
+        "Eine ruhige Planung", "Ein klares Budget", "Eine gute Struktur",
+        "Ein sicheres Polster", "Eine faire Karte", "Ein schlankes Modell",
+        "Eine freie Auswahl", "Ein offener Markt", "Eine schnelle Hilfe",
+        "Ein starker Schutz", "Eine kluge Reserve", "Ein guter Wechsel",
+        "Eine klare Regel", "Ein fester Termin", "Eine einfache Liste",
+    )
+    verben = (
+        "schützt dein Konto", "hilft im Alltag", "senkt die Ausgaben",
+        "spart viel Mühe", "schafft mehr Ruhe", "sichert dein Budget",
+        "ordnet die Posten", "vermeidet hohe Kosten", "stärkt deine Planung",
+        "erleichtert die Wahl", "zeigt jede Buchung", "macht Preise sichtbar",
+        "hält Fristen ein", "schont dein Polster", "bringt klaren Nutzen",
+        "bremst teure Fallen", "sorgt für Klarheit", "gibt dir Sicherheit",
+        "verbessert den Stand", "löst alte Muster", "erhöht den Spielraum",
+        "bewahrt den Überblick", "entlastet die Kasse", "stoppt stille Posten",
+        "fördert gute Schritte", "stützt deine Ziele", "klärt offene Fragen",
+        "reduziert den Aufwand", "beendet teure Tarife", "eröffnet neue Wege",
+    )
+    objekte = (
+        "beim täglichen Banking", "in jedem Quartal", "auf lange Sicht",
+        "ohne großen Aufwand", "für deine Familie", "im eigenen Haushalt",
+        "bei jeder Überweisung", "vor dem Jahresende", "nach dem Gehaltseingang",
+        "beim Kartenvergleich",
+    )
+    saetze = []
+    for i, s_teil in enumerate(subjekte):
+        for j, o_teil in enumerate(objekte):
+            v_teil = verben[(i + j) % len(verben)]
+            saetze.append(f"{s_teil} {v_teil} {o_teil}.")
+    saetze = saetze[:200]
+    bloecke = [" ".join(saetze[k : k + 4]) for k in range(0, len(saetze), 4)]
+    polster = "\n\n".join(bloecke)
+    lang_body = kurz_body.replace(
+        "Viele Kunden nutzen ihr Konto seit vielen Jahren.",
+        "Viele Kunden nutzen ihr Konto seit vielen Jahren.\n\n" + polster,
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        pfad = os.path.join(tmp, "probe-artikel", "index.md")
+        os.makedirs(os.path.dirname(pfad), exist_ok=True)
+        with open(pfad, "w", encoding="utf-8") as fh:
+            fh.write(fm + kurz_body)
+        w_vorher, c_vorher = measure_file(open(pfad, encoding="utf-8").read())
+        if status_of(c_vorher) != "zu-kurz":
+            print(f"🛑 Wirkungsprobe check_length: Vorher nicht zu-kurz ({c_vorher}).")
+            return 2
+        with (
+            patch.object(ea, "call_gemini", return_value=lang_body),
+            patch.object(ea.time, "sleep"),
+        ):
+            geheilt, info = ea.extend_article(
+                pfad, 1400, dry=False, min_chars=MIN_CHARS
+            )
+        if not geheilt:
+            print(f"🛑 Wirkungsprobe check_length: extend_article fehlgeschlagen ({info}).")
+            return 1
+        nachher_txt = open(pfad, encoding="utf-8").read()
+        w_nachher, c_nachher = measure_file(nachher_txt)
+        if status_of(c_nachher) not in ("ok", "unter-optimum") or w_nachher < 1400:
+            print(
+                f"🛑 Wirkungsprobe check_length: Nachher {w_nachher}W/{c_nachher}Z "
+                f"({status_of(c_nachher)})."
+            )
+            return 1
+        with (
+            patch.object(ea, "call_gemini", return_value=lang_body),
+            patch.object(ea.time, "sleep"),
+        ):
+            nochmal, info2 = ea.extend_article(
+                pfad, 1400, dry=False, min_chars=MIN_CHARS
+            )
+        if not nochmal or "bereits" not in info2 or open(pfad, encoding="utf-8").read() != nachher_txt:
+            print("🛑 Wirkungsprobe check_length: Heilung ist nicht idempotent.")
+            return 1
+
+    print(
+        f"✅ Wirkungsprobe check_length: {w_vorher}W/{c_vorher}Z (zu-kurz) → "
+        f"{w_nachher}W/{c_nachher}Z ({status_of(c_nachher)}), Fixpunkt bestätigt."
+    )
+    return 0
+
+
 if __name__ == "__main__":
+    if "--wirkungsprobe" in sys.argv or "--selftest" in sys.argv:
+        sys.exit(wirkungsprobe())
     sys.exit(main())

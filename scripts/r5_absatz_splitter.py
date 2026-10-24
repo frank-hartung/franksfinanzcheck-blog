@@ -153,6 +153,19 @@ def split_body_text(body: str, max_rounds: int = 6, *, verbose: bool = False,
                 print(f"  [{n} Sätze → aufgeteilt] {para[:60]}…")
         if not moved:
             break
+    if new_body != body:
+        try:
+            import redaktions_standard as rs
+            if len(rs._reserve_numeric_claim_findings(new_body)) > len(
+                rs._reserve_numeric_claim_findings(body)
+            ):
+                healed_body, _ = rs.fix_rs4_rs5_deterministic(new_body)
+                if len(rs._reserve_numeric_claim_findings(healed_body)) <= len(
+                    rs._reserve_numeric_claim_findings(body)
+                ):
+                    new_body = healed_body
+        except Exception:  # noqa: BLE001
+            pass
     return new_body, total, warnings
 
 

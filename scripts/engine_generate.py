@@ -471,7 +471,10 @@ def _reserve_vorstufe_ok(body: str, probleme: list[str]) -> tuple[bool, list[str
 
     heilbar = []
     for problem in probleme or []:
-        if re.match(r"^nur \d+ Wörter / \d+ Zeichen \(Premium:", problem):
+        if re.match(
+            r"^(?:nur \d+ Wörter / \d+ Zeichen \(Premium:|Umfang: \d+ Wörter / \d+ Zeichen;)",
+            problem,
+        ):
             heilbar.append("Länge")
             continue
         if problem.startswith("Keyword „") and (" fehlt" in problem):

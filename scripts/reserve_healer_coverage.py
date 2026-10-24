@@ -250,6 +250,12 @@ WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
     # Fixture-Text geht über die importierte Schwelle, das Ganztext-Tor T1–T4
     # hält, und die Probe läuft ohne Netz (KI injiziert).
     "satz_heiler.py": ("--wirkungsprobe",),
+    # ERWEITERUNG 24.10.2026 (WF-D4E0, #821): Längen-Gate und Redaktions-
+    # Standard beweisen ihre Heilwirkung deterministisch/offline per Fixture,
+    # damit heilbar ausgemusterte Vorrats-Kandidaten (Zeichenlänge / Score /
+    # RS-Befunde) per Beweis reaktiviert werden (#614).
+    "check_length.py": ("--wirkungsprobe",),
+    "redaktions_standard.py": ("--wirkungsprobe",),
 }
 
 #  Regeln mit Zahlen-Versprechen: Mindestens einer ihrer Heiler MUSS eine
@@ -259,7 +265,8 @@ WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
 #  gedeckt, während im Zertifikat „manuell reparieren" stand (#614) – genau
 #  die Bauart, gegen die diese Liste existiert (#609).
 PROBEN_PFLICHT: tuple[str, ...] = ("readability_failures",
-                                   "textverstaendnis_failures")
+                                   "textverstaendnis_failures",
+                                   "check_length_failures")
 
 RE_REGEL = re.compile(r"(?m)^def ([a-z0-9_]+_failures)\(")
 # (Hinweis auf Aufrufe wird nicht geparst: die Kette ist die Wahrheit.)
