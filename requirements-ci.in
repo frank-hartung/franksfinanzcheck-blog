@@ -1,9 +1,24 @@
-pyyaml
-cryptography
-pillow
-pillow-avif-plugin
-fonttools
-brotli
-feedparser
-requests
-pypdf
+# ============================================================
+#  QUELLE der CI-Abhängigkeiten – exakt gepinnt (24.10.2026)
+# ------------------------------------------------------------
+#  WARUM HIER KEINE BEREICHE STEHEN
+#  Diese Datei ist die Vorlage für `requirements-ci.txt` (das
+#  hashgesperrte Auslieferungs-Lock). Dependabot liest BEIDE.
+#  Ohne Pin löst Dependabot die Anforderung EINMAL auf und hält
+#  das Ergebnis fest; Änderungen am Lock allein lösen keine neue
+#  Auflösung aus. Genau so überlebten 58 Alarme ihre eigene
+#  Heilung (Abhängigkeits-Wache, A1/A2).
+#
+#  REGEL: Jede Zeile trägt `==<version>`, und diese Version ist
+#  identisch mit der Zeile in `requirements-ci.txt`. Die Wache
+#  prüft das bei jedem Push (`--check`, Regel A2).
+# ============================================================
+brotli==1.2.1
+cryptography==50.0.2
+feedparser==6.0.14
+fonttools==4.67.0
+pillow==13.0.0
+pillow-avif-plugin==1.6.0
+pypdf==6.21.2
+pyyaml==6.0.3
+requests==2.34.2

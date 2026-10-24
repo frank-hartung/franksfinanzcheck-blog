@@ -17,8 +17,8 @@ https://github.com/Panniantong/Agent-Reach/archive/f65526cbaaad3879473acc1ba6dbe
 
 # YouTube-/Video-Backend (von Agent Reach geroutet; hier explizit,
 # damit die Version nicht unbemerkt driftet – upstream constraint: >=2026.07.04)
-yt-dlp>=2026.8.19
+yt-dlp==2026.10.21
 
 # RSS-Backend (ist ohnehin Agent-Reach-Abhängigkeit; explizit für
 # scripts/agent_reach_research.py, das feedparser direkt nutzt)
-feedparser>=6.0
+feedparser==6.0.14

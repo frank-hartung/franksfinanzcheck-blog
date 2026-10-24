@@ -516,3 +516,67 @@ dass Live-Header oder Worker jetzt gesund seien; nach Übernahme den Workflow
 „Sicherheits-Wache“ auf `main` manuell starten und beide Zusammenfassungen
 prüfen. Ein verbleibender fachlicher Befund ist nach A1/A3 zu beheben, nicht
 durch Unterdrücken des Alarms.
+
+---
+
+## E. Abhängigkeiten — wenn GitHub Alarme zeigt und der Bestand sauber ist
+
+**Stand 24.10.2026** · Grundlage `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`
+
+GitHub meldete 58 offene Schwachstellen, während der ausgelieferte Bestand
+nach vollständiger Prüfung gegen dieselbe Advisory-Datenbank 0 Fundstellen
+hatte. Die Anzeige war älter als der Bestand. Dieser Abschnitt beschreibt,
+wie der Zustand **gemessen** wird — und was ein Befund auslöst.
+
+### E1 · Messen, nicht glauben
+
+```bash
+npm run deps:check     # offline: Pins, Quelle ↔ Hash-Lock, Locks, SHAs, Tags
+npm run deps:audit     # online: jede ausgelieferte Version gegen die Advisory-DB
+npm run test:deps      # Sabotage- und Gegenproben der Wache
+```
+
+Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). 304 Abfragen, rund
+70 Sekunden, Exit 0 sauber · 1 Befund · 2 Störung.
+
+### E2 · Befund heilen (Exit 1)
+
+Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`.
+
+1. Version auf `first_patched_version` pinnen — in **allen** Stellen, die die
+   Wache als Herkunft nennt (`quellen`).
+2. Bei pip: `requirements-ci.in` **und** `requirements-ci.txt` gemeinsam
+   ändern; der Hash-Lock wird mit neuen Hashes erzeugt, die Quelle trägt
+   denselben Pin (Regel A2 prüft die Gleichheit).
+3. `npm run deps:check && npm run deps:audit` — erst danach ist der Befund
+   geschlossen.
+4. Kein `first_patched_version` veröffentlicht? Dann bleibt der Befund offen
+   und wird als bewusster Eintrag im PR genannt. Er verschwindet nicht durch
+   Dismiss.
+
+### E3 · Störung (Exit 2) ist kein Freibrief
+
+Netzfehler, Rate-Limit oder fehlendes Token bedeuten **ungeprüft**. Der Lauf
+ist rot, nicht grün. Wiederholen (`workflow_dispatch`), nicht wegsehen.
+Ungeprüft ist nicht sauber — dieselbe Regel wie bei der Live-Header-Messung
+(Vertrag C34).
+
+### E4 · GitHub-Alarme, die die Wache nicht bestätigt
+
+Reihenfolge, die eine Behauptung von einem Nachweis trennt:
+
+1. `npm run deps:audit` laufen lassen. Exit 0 = der Bestand ist sauber.
+2. Prüfen, ob der Alarm eine Version nennt, die im Bestand **nicht mehr**
+   vorkommt (die Wache listet alle ausgelieferten Versionen; `--json`).
+3. Erst dann in der Security-Tab schließen — mit der Messung als Begründung
+   („Version nicht mehr im Bestand, Nachweis: Audit vom <Datum>, 0 Treffer“).
+4. Kommt der Alarm wieder, war die Ursache nicht die Version, sondern die
+   Auflösung: dann steht ein Range in einer Requirements-Datei (A1) oder ein
+   Manifest ohne Lockfile (A3).
+
+### E5 · Was die Wache bewusst nicht tut
+
+- Sie ersetzt Dependabot nicht: Dependabot öffnet die Update-PRs, die Wache
+  prüft den ausgelieferten Stand.
+- Sie prüft **keine** Container-Inhalte (nur bewegliche Tags).
+- Sie prüft nur, was im Repo liegt — nicht, was ein Dienst zur Laufzeit lädt.
