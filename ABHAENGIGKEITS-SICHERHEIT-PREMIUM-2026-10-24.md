@@ -203,6 +203,27 @@ Zusätzlich grün: `npm run test:sicherheit` (jetzt inklusive Wache),
 
 ---
 
+### 7.1 · Was sich nicht messen ließ — und wie damit umgegangen wird
+
+Die Alarm-Endpunkte von GitHub sind mit den hier verfügbaren Tokens **nicht
+lesbar** (HTTP 403 für `dependabot/alerts` und `secret-scanning/alerts`, auch
+mit dem `GITHUB_TOKEN` eines eigens dafür gebauten Diagnose-Laufs). Lesbar war
+`code-scanning/alerts` — und dort stand **0**.
+
+Damit gilt für die 58: Sie stammen aus der **Dependabot-Anzeige**, nicht aus
+dem Code-Scanning. Ihre Zahl ist ein Cache-Wert, den nur GitHub selbst
+fortschreibt. Deshalb wird hier nicht behauptet „die 58 sind weg", sondern
+das, was belegbar ist:
+
+> Jede ausgelieferte Version (312) ist gegen dieselbe Advisory-Datenbank
+> geprüft und sauber; jede Anforderung ist gepinnt; jede Lockfile existiert;
+> jede künftige Abweichung ist rot.
+
+Sobald GitHub den Bestand neu bewertet, verschwinden die Alarme ohne Dismiss,
+weil ihre Versionen nicht mehr vorkommen. Bleibt einer stehen, nennt die
+Wache beim nächsten Lauf die Herkunft — dann ist es kein Cache-Problem mehr,
+sondern ein Befund.
+
 ## 8 · Grenzen — was hier ausdrücklich nicht behauptet wird
 
 - **Kein Dismiss.** Es wurde kein GitHub-Alert „not affected" oder
