@@ -122,9 +122,6 @@ Du willst Gerümpel verkaufen? Setze den Erlös nach Versand und Gebühren an, n
 
 
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt Mietwagen vergleichen**](/go/mietwagen/)
-
-
 ## Mietwagen: Endpreis und Regeln statt Werbeversprechen
 
 Für manche Reise brauchst du kein Auto. Rechne zuerst gegen öffentliche Verkehrsmittel, Transfer und die geplanten Strecken. Brauchst du wirklich eines, vergleiche Angebote für dasselbe Datum und dieselbe Leistung.
