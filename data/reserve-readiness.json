@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 2,
-  "pool_size": 4,
-  "generated_at": "2026-10-22T08:55:08Z",
+  "ready": 1,
+  "pool_size": 2,
+  "generated_at": "2026-10-24T12:59:12Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-22T08:53:08Z",
+      "measured_at": "2026-10-24T12:59:10Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -22,56 +22,14 @@
       }
     },
     {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "ready": true,
-      "sha256": "b23c667a683ac091ec1f88146679dd914bfba0f40d6c5d59f97c74493c91422a",
-      "flesch": 65.1,
-      "measured_at": "2026-10-22T08:54:06Z",
-      "score": 0.982,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "slug": "2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
       "ready": false,
-      "sha256": "ada71379f7e00415f4004442d4d6e3efd0d8d1d1520b0c160cb2db00e904eea7",
-      "flesch": 71.5,
-      "measured_at": "2026-10-22T08:55:05Z",
-      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U2-ZWILLING: Titel-Zwilling am 2026-10-12 mit 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken („Stromkosten senken: Cl",
+      "sha256": "7f544de15c1dc2465b95f6dc42650752894f138b05f4c563ebfb06d96b105de0",
+      "flesch": 64.3,
+      "measured_at": "2026-10-24T12:59:12Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 9 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
       "details": [
-        "🛑 2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U2-ZWILLING: Titel-Zwilling am 2026-10-12 mit 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken („Stromkosten senken: Clevere Haushaltsger“ ↔ „Kleine Energiespar‑Tricks: Deine Kosten “) – Thema zusammenführen oder Titel schärfen",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
-      "ready": false,
-      "sha256": "2bf7901e36ab2f022da0f31ce3ad06edb8f534fc31dd41e3ade685f9c489816c",
-      "flesch": 65.2,
-      "measured_at": "2026-10-22T08:55:08Z",
-      "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
-      "details": [
-        "RS1: kein „Das Wichtigste in Kürze“-Modul",
-        "RS2: nur 1 Frage-H2 von 13 H2 (Standard: ≥ 2)",
-        "RS5: 15 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
+        "RS5: 9 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
       ],
       "score": 0.98,
       "parts": {
@@ -87,7 +45,21 @@
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "39750351231",
+    "run_id": "40095647943",
     "run_attempt": "1"
-  }
+  },
+  "geschont": [
+    {
+      "slug": "2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "klasse": "heilbar",
+      "hits": 3,
+      "heiler": [
+        "redaktions_standard.py",
+        "check_titles.py",
+        "lesbarkeit_heiler.py",
+        "profi_polish.py"
+      ],
+      "warum": "Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py und lesbarkeit_heiler.py in der Reserve-Kette (#710)."
+    }
+  ]
 }

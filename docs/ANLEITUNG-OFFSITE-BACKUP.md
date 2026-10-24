@@ -57,6 +57,59 @@ Marken-Oberflächen-Wache vom 20.09.2026:
   Release ein Entwurf ist.
 - **Fehlt etwas, ist der Lauf rot.** Kein Schein-Grün.
 
+### Betriebszusagen (Profi-Niveau: SLA · RPO · RTO · Abdeckung)
+
+| Zusage | Wert | Beleg |
+|---|---|---|
+| **RPO** (max. Datenverlust) | 24 h + Scheduler-Toleranz (52 h) | Täglich 03:00 UTC; GitHub-Scheduler belegt 09:53–12:03 MESZ; Frische-Wache `backup_freshness_guard.py` rot ab 52 h, gelb ab 36 h |
+| **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
+| **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
+| **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
+| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 17 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (26 Tests) |
+| **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
+
+**Was gesichert wird – vollständig:**
+
+| KV-Präfix | Inhalt | DSGVO-Relevanz | Quelle |
+|---|---|---|---|
+| `abo:` | Aktive Abonnenten (Status, Zeitstempel) | Art. 7 (1) Nachweis der Einwilligung | Worker `ABO` |
+| `token:` | Bestätigungs-/Abmelde-Tokens (→ abo:) | Technisch für Double-Opt-In | Worker `ABO` |
+| `nachweis:` | Einwilligungsnachweis (IP, Zeit, Text-Stand) | Art. 7 (1) Nachweispflicht | Worker `ABO` |
+| `budget:` | Tagesbudget Anmeldung/Feedback (TTL) | Betrieb, nicht personenbezogen | Worker `ABO` |
+| `exportlog:` | Export-Protokoll (TTL 30 d) | Betrieb | Worker `ABO` |
+| `takt:` | Taktgeber letzte Läufe | Betrieb | Worker `ABO` |
+| `feedback:` + `fbtag:` | Artikel-Feedback je Tag | Betrieb | Worker `ABO` |
+| D1 | Klick-Zähler (optional) | Betrieb | Cloudflare D1 |
+
+> Alle KV-Schlüssel werden gesichert – nicht nur die drei Pflicht-Präfixe.
+> Die Probe `kv_backup.py --pruefen` und `restore_drill.sh` beweisen die
+> Wiederherstellbarkeit (Struktur, keine verwaisten Tokens, Zähler).
+
+**Was NICHT gesichert wird (bewusst, mit Mitigation):**
+
+| Nicht im Backup | Warum | Mitigation |
+|---|---|---|
+| GitHub Issues/PRs/Discussions | Nicht im Git, API-limitiert | Wöchentlich manuell exportieren oder `gh issue list` archivieren (nicht automatisiert – geringes Volumen) |
+| GitHub Secrets/Variablen | GitHub gibt Secrets nie heraus | In 1Password dokumentieren (Anleitung Schritt 3–5) |
+| Cloudflare-Zone (DNS, Regeln) | Nicht im KV, nicht im Repo | `docs/SICHERHEIT-BETRIEB-RUNBOOK.md` A1 dokumentiert Sollstand; `edge:freigabe` misst |
+| `gh-pages` Branch | Regenerierbar (Build-Artefakt) | Quelle `main` ist gesichert; `deploy.yml` baut neu |
+| Worker-Logs (> 200k Zeilen/Tag) | Flüchtig (Free 1 d) | Nicht kritisch; bei Incident vorher exportieren |
+
+**Frische operativ überwachen:**
+
+```bash
+# Lokal oder in CI (braucht Lese-Token auf Backup-Repo):
+python3 scripts/backup_freshness_guard.py --repo frank-hartung/franksfinanzcheck-backup
+python3 scripts/backup_freshness_guard.py --selftest   # 12 Fälle offline
+npm run backup:frische   # Kurzform
+```
+
+Die Frische-Wache ergänzt E1–E8: Sie misst, ob die Sicherung *jüngst* wirklich
+lief (täglich erwartet, 52 h Toleranz). Eingerichtet gehört sie in einen
+täglichen Watchdog-Lauf oder als manueller Check vor Releases. Ein grünes
+`backup_einrichtung` ohne frisches Backup ist eine Konfigurations-, aber keine
+Betriebsgarantie.
+
 ## Einrichtung Schritt für Schritt
 
 Ablage-Regel: **Secrets** ins Environment `backup` (Settings → Environments →

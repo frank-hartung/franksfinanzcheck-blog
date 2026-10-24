@@ -381,11 +381,25 @@ def _e2_schreibzugang(ergebnis: Ergebnis, umgebung: dict, ziel: str,
                      "Repository anlegen bzw. im Token unter „Only select repositories“ genau dieses "
                      "Repository auswählen.", link_ziel_anlegen(besitzer))
         return
+    if status == 403:
+        meldung = _gh_meldung(antwort)
+        # 403 unterscheidet: Rate-Limit (secondary), fehlende Rechte oder IP-Beschränkung.
+        # Die API-Meldung nennen – „rate limit“ ist vorübergehend, sonst Konfiguration.
+        if meldung and "rate limit" in meldung.lower():
+            ergebnis.neu("E2", titel, "fehler",
+                         f"GitHub-Rate-Limit erreicht (HTTP 403){f': {meldung}' if meldung else ''}",
+                         "Einige Minuten warten und den Lauf neu starten (Actions → Offsite-Backup → Run workflow).")
+        else:
+            ergebnis.neu("E2", titel, "fehler",
+                         f"Zugriff verweigert (HTTP 403){f': {meldung}' if meldung else ''} – Token ohne Zugriff auf {ziel}",
+                         "Im Token unter „Only select repositories“ genau dieses Repository wählen und "
+                         "„Contents: Read and write“ prüfen.", link_schreibzugang(besitzer))
+        return
     if status != 200 or not isinstance(antwort, dict):
         meldung = _gh_meldung(antwort)
         ergebnis.neu("E2", titel, "fehler",
                      f"unerwartete Antwort HTTP {status}" + (f": {meldung}" if meldung else ""),
-                     "Token und Ziel prüfen; bei HTTP 403 Rate-Limit oder Token-Einschränkungen.")
+                     "Token und Ziel prüfen; bei wiederholtem HTTP 403 Rate-Limit ausschließen.")
         return
     if antwort.get("private") is not True:
         sichtbar = "ÖFFENTLICH" if antwort.get("private") is False else "Sichtbarkeit unbekannt"

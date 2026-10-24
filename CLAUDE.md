@@ -1899,7 +1899,14 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   lokale Simulation und meldet trotzdem Erfolg.
 - **Wiederherstellung beweisen:** `bash scripts/restore_drill.sh --repo <privates Backup-Repo>`
   (KV + Git, entschlüsselt in einem 0700-Temp-Verzeichnis).
-- Tests: `npm run test:backup` · Alarm-Szenarien #761 in
+- **Frische operativ überwachen (Highend-Ergänzung 22.10.2026):** E1–E8 prüfen die
+  *Konfiguration* – ob die Sicherung laufen *kann*. Ob sie *jüngst lief*, misst
+  `scripts/backup_freshness_guard.py --repo <privates Backup-Repo>` (52 h rot,
+  36 h gelb, beide Release-Familien `backup-*` + `kv-backup-*`). Kurzform
+  `npm run backup:frische`. Kein Ersatz für E1–E8, sondern die operative Lücke:
+  Ein Scheduler-Hänger ohne ablaufenden Token bliebe sonst bis zur nächsten
+  Anleger-Frage unbemerkt. SLA: RPO 24 h / 52 h Toleranz, RTO < 60 Min.
+- Tests: `npm run test:backup` (inkl. Frische-Wache 12 Fälle) · Alarm-Szenarien #761 in
   `scripts/tests/sim/alert_scoping_sim.mjs` · Anleitung
   `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
   `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md`.

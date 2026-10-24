@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import worker_betrieb_wache as gate
 
 BASE = "https://abos.franksfinanzcheck.de"
-REPO = {"site_key": "0x4AAA", "deckel": 100,
+REPO = {"site_key": "0x4AAA", "sitekey_spiegel": "0x4AAA", "deckel": 100,
         "edge_vorlage": "Rate limiting\nTurnstile\nStrict-Transport-Security\nEnvironments\n"}
 GUT = {"ok": True, "kv": "ok", "ts": "2026-10-19T12:00:00Z", "turnstile": "aktiv",
        "schluesselrollen": "getrennt", "exporte": [],

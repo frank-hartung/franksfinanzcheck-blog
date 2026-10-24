@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-22 09:04:49 UTC",
+ "generated_at": "2026-10-24 08:33:12 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 101,
- "checked_links": 239,
+ "checked_articles": 102,
+ "checked_links": 242,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -149,6 +149,17 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen",
+   "line": 99,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

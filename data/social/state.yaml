@@ -969,6 +969,91 @@ history:
     #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
   ref: '117479727634173619'
   ai: false
+- posted_at: '2026-10-22T12:18:17.347974+02:00'
+  channel: mastodon
+  slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
+  title: 'Haushaltskosten reduzieren: So gewinnst du die Kontrolle'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117484047623058483
+  ok: true
+  text: "\U0001F4B6 Haushaltskosten senken und die Kontrolle zurückgewinnen  \nNutze\
+    \ den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) für sofortige Transparenz.\
+    \  \nhttps://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen"
+  ref: '117484047623058483'
+  ai: true
+- posted_at: '2026-10-22T17:55:13.263596+02:00'
+  channel: mastodon
+  slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
+  title: 'VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117485372935493916
+  ok: true
+  text: '💶 VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
+
+
+    Ein VPN zu Hause schützt vor allem die Strecke zwischen deinem Gerät und dem VPN-Server,
+    etwa im öffentlichen WLAN oder beim Zugriff auf dein Heimnetz von unterwegs.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #WLAN #Internet #DNSUndNetzsicherheit #VPNSinnvoll'
+  ref: '117485372935493916'
+  ai: false
+- posted_at: '2026-10-23T12:12:15.388391+02:00'
+  channel: mastodon
+  slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
+  title: 'Kleine Energiespar‑Tricks: Deine Kosten sofort senken'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117489686600605060
+  ok: true
+  text: 'Wie schnell zeigen sich die ersten Einsparungen?
+
+
+    Du siehst den Erfolg sofort am Zähler. Er zeigt sich auch bei der nächsten Abrechnung.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #StromkostenSenken #GeldSparenImAlltag #Energiespar'
+  ref: '117489686600605060'
+  ai: false
+- posted_at: '2026-10-23T17:46:29.276991+02:00'
+  channel: mastodon
+  slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
+  title: 'Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig'
+  angle: vergleich
+  url: https://mastodon.social/@FranksFinanzcheck/117491000820019813
+  ok: true
+  text: 'Wärmepumpe vs. Gasheizung 2026 oder So entscheidest du richtig?
+
+
+    Die Beispielrechnung im Artikel zeigt, ab welchem Wärmebedarf und Förderanteil
+    sich der höhere Kaufpreis für dein Haus rechnet.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
+  ref: '117491000820019813'
+  ai: false
+- posted_at: '2026-10-24T11:37:05.885580+02:00'
+  channel: mastodon
+  slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
+  title: 'Stromkosten senken: Clevere Haushaltsgeräte im Überblick'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117495210407092416
+  ok: true
+  text: "Spare bis zu 40 % Stromkosten.  \nSparsame Geräte senken in der Beispielrechnung\
+    \ den Verbrauch um bis zu 40 % – Kühlschrank und Waschmaschine machen rund 30 %\
+    \ der Haushaltskosten aus.  \nhttps://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#StromkostenSenken #Haushaltsgeraete #Energieeffizienz"
+  ref: '117495210407092416'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -994,4 +1079,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-21T22:41:42.270993+02:00'
+updated_at: '2026-10-24T11:37:11.734428+02:00'

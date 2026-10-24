@@ -235,7 +235,8 @@ def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
                       "leer). Folge: Jede Anmeldung scheitert an der "
                       "Sicherheitsprüfung. Site-Key eintragen "
                       "(cloudflare/edge-schutz.md, A3, Schritt 2) oder "
-                      "`TURNSTILE_SITEKEY` im Worker leeren, bis das Widget steht.")
+                      "`TURNSTILE_SITEKEY` im Worker leeren, bis das Widget steht. "
+                      "Die Prüfung nicht durch Entfernen des Secrets abschalten.")
     elif turnstile == "wartet" and site_key:
         fehler.append("**Turnstile-Zustand widersprüchlich:** Das Widget wird "
                       "ausgeliefert (Site-Key in `hugo.toml` gesetzt), aber der "
@@ -252,11 +253,6 @@ def bewerte(stand: dict, repo: dict) -> tuple[list[str], list[str], list[str]]:
                          "aktiv). Paar vervollständigen: Widget anlegen, Site-Key "
                          "in `hugo.toml` UND `newsletter-worker/wrangler.toml` "
                          "eintragen, deployen (A3, Schritt 1–2).")
-                      "(Secret gesetzt), aber `hugo.toml` liefert **kein** Widget "
-                      "(`turnstileSiteKey` leer). Folge: Jede Anmeldung scheitert an "
-                      "der Sicherheitsprüfung. Site-Key eintragen "
-                      "(cloudflare/edge-schutz.md, A3, Schritt 2) und Website deployen. "
-                      "Die Prüfung nicht durch Entfernen des Secrets abschalten.")
     elif turnstile == "inaktiv" and site_key:
         fehler.append("**Turnstile-Zustand widersprüchlich:** Das Widget wird "
                       "ausgeliefert (Site-Key gesetzt), aber der Worker prüft "
