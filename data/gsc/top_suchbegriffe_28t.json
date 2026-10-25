@@ -1,24 +1,80 @@
 [
   {
-    "suchbegriff": "frugalismus tipps",
+    "suchbegriff": "energiekosten senken",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 1,
     "ctr": 0.0,
-    "position": 64.67
+    "position": 48.0
+  },
+  {
+    "suchbegriff": "energiespar lösungen",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 28.0
+  },
+  {
+    "suchbegriff": "energiesparmaßnahme",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 41.0
+  },
+  {
+    "suchbegriff": "frank dsl",
+    "clicks": 0,
+    "impressions": 5,
+    "ctr": 0.0,
+    "position": 7.4
+  },
+  {
+    "suchbegriff": "internetkosten",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 25.0
+  },
+  {
+    "suchbegriff": "konto umsonst",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 76.0
+  },
+  {
+    "suchbegriff": "kostenlose bankkonto",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 71.0
+  },
+  {
+    "suchbegriff": "kostenloses girokonto bremen",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 92.0
+  },
+  {
+    "suchbegriff": "kreditkarte mit girokonto kostenlos",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 86.0
   },
   {
     "suchbegriff": "kühlgeräte strom sparen",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 1,
     "ctr": 0.0,
-    "position": 61.0
+    "position": 58.0
   },
   {
     "suchbegriff": "tankkartenantrag ohne kaution",
     "clicks": 0,
     "impressions": 2,
     "ctr": 0.0,
-    "position": 70.5
+    "position": 56.0
   },
   {
     "suchbegriff": "welche finanz-app bietet die besten spartipps basierend auf dem eigenen konsumverhalten?",
@@ -26,5 +82,12 @@
     "impressions": 5,
     "ctr": 0.0,
     "position": 4.0
+  },
+  {
+    "suchbegriff": "wie kann ich kosten durch energieoptimierung senken?",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 5.0
   }
 ]
