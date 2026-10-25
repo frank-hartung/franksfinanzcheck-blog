@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-01
 title: "Sicher heizen: Was sie abdeckt und wie lange sie läuft"
-description: "Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche…"
+description: "Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche."
 date: 2026-08-10T09:29:05Z
 draft: false
 tags: ["Heizkosten senken", "Gastarif wechseln"]

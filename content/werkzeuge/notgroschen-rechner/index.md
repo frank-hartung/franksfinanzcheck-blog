@@ -1,7 +1,7 @@
 ---
 title: "Notgroschen-Rechner: Zielbetrag, Dauer und drei Stufen"
-seoTitle: "Notgroschen berechnen: Zielbetrag, Sparrate & Dauer | FranksFinanzcheck"
-description: "Wie hoch dein Notgroschen sein sollte, wie lange du dafür brauchst und welche Zwischenstufe du zuerst erreichst – mit Zinsfortschreibung, offener Formel und Export. Lokal im Browser, ohne Anmeldung."
+seoTitle: "Notgroschen berechnen: Zielbetrag & Sparrate"
+description: "Zielbetrag, Sparrate und voraussichtliche Dauer für deinen Notgroschen berechnen. Annahmen und Rechenweg offen; Angaben bleiben im Browser."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

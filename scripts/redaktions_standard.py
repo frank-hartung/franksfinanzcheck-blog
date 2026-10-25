@@ -358,6 +358,14 @@ def _reserve_numeric_claim_findings(body):
     link_re = re.compile(r"\[([^\]]+)\]\(\s*([^)\s]+)[^)]*\)", re.I)
     text = re.sub(r"```.*?```", " ", body or "", flags=re.S)
     text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
+    # MESSFEHLER, nicht Defekt (WF-D4E0/#821, 25.10.2026): Formatierungs- und
+    # Repo-Marker sind keine Zahlenbehauptungen. Vorher zerschnitt ein
+    # Fett-Marker einen Satz („… **16. Oktober 2026**." → Fragment „Oktober
+    # 2026**.") und eine Issue-Nummer (`#763`) wurde als harte Zahl gezählt.
+    # Am 25.10.2026 trug der blockierte Pool-Kandidat dadurch „RS5: 9 …“,
+    # obwohl nur 5 Sätze echte Zahlen tragen – der Befund log über sich selbst.
+    text = re.sub(r"[*_]{1,3}", "", text)
+    text = re.sub(r"(?<![\w&])#\d+", " ", text)
     # Strip internal links so year-bearing slugs are not claims. External
     # Markdown links leave a marker that proves sentence-level evidence.
     def _link_marker(match):
@@ -413,6 +421,13 @@ def _reserve_numeric_claim_findings(body):
         r"\b(ca|bzw|usw|ggf|inkl|mind|max|vgl|nr|abs)\.", re.I
     )
 
+        r"\b(?:rechenbeispiel|modellrechnung|modellfall|annahme|annahmen|"
+        r"musterrechnung|beispielrechnung|angenommen|unterstellen wir)\b", re.I)
+    # Eine Kalenderjahreszahl („im Jahr 2026", „für 2026") ist keine
+    # Zahlenbehauptung – sie nennt keinen Betrag, keine Menge, keinen Preis.
+    # Erst wenn nach dem Entfernen der Jahreszahlen noch eine Zahl mit Einheit
+    # übrig bleibt, wird der Satz bewertet.
+    jahr_re = re.compile(r"(?<!\w)(?:19|20)\d{2}(?!\w)")
     findings = []
     in_model_section = False
     section_model_numbers: set[str] = set()
@@ -436,6 +451,12 @@ def _reserve_numeric_claim_findings(body):
                 continue
             content_lines.append(ln)
         if not content_lines:
+        if not numeric_claim.search(jahr_re.sub(" ", sentence)):
+            continue
+        if "QUELLENLINK" in sentence:
+            continue
+        # A model label must not disguise a statutory clause or a claimed study.
+        if "§" not in sentence and model_marker.search(sentence):
             continue
         para_text = re.sub(r"\s+", " ", " ".join(content_lines))
         para_text = ordinal_date_re.sub(r"\1_ORD_ \2", para_text)
@@ -1540,6 +1561,107 @@ def _vertrag_gruende(a, neu_body):
         return [f"V3 Messbarkeit: Publikations-Vertrag nicht auswertbar "
                 f"({exc.__class__.__name__}: {exc}) – fail-closed, die Änderung "
                 f"wird verworfen"]
+
+
+ZAHLEN_HEILER_MAX = 12
+
+
+def build_zahlen_heiler_prompt(body, findings, titel=""):
+    """Prompt für den Zahlen-Beleg-Heiler: repariert NUR die abgelehnten Sätze.
+
+    WARUM (25.10.2026, WF-D4E0/#821)
+    --------------------------------
+    Das harte RS5-Gate lehnt jeden Satz ab, der eine Zahl mit Einheit ohne
+    Quellenlink im SELBEN Satz und ohne Modell-Kennzeichnung nennt. Im Lauf vom
+    25.10.2026 starben **vier** frische Themen bei der Geburt an genau dieser
+    Regel (16, 20 und 8 Sätze). Der vorhandene KI-Heiler (`heal_article_ai`,
+    Auftrag 5) kennt die Regel – aber **nicht die Sätze**: Er schickt den
+    ganzen Artikel mit einer allgemeinen Anweisung an das Modell und hofft,
+    dass es die richtigen Stellen findet. Das ist die Lehre von #612 („der
+    Retry war blind“) eine Ebene tiefer: Ein Heiler, der den Befund nicht
+    kennt, heilt ihn nicht.
+
+    Dieser Prompt nennt die Sätze wörtlich. Zwei erlaubte Wege, beide
+    dokumentiert im Gate: ohne Zahl formulieren **oder** die Zahl im selben
+    Satz als Beispiel-/Modellrechnung mit genannter Annahme kennzeichnen.
+    Erfunden werden darf nichts – ein Quellenlink ist ein Beleg, „ca.“ nicht.
+    """
+    nummeriert = "\n".join(f"{i}. \u00ab{s}\u00bb" for i, s in enumerate(findings, 1))
+    return (
+        "Du bist Schlussredakteur eines seriösen deutschen Finanz-Ratgeber-Blogs. "
+        "Im folgenden Artikel lehnt das harte Zahlen-Gate diese Sätze ab, weil "
+        "sie eine Zahl nennen, ohne im SELBEN Satz einen klickbaren Quellenlink "
+        "oder eine ausdrückliche Modell-/Beispielrechnungs-Kennzeichnung zu "
+        "tragen:\n\n"
+        + nummeriert
+        + "\n\nAUFTRAG: Formuliere AUSSCHLIESSLICH diese Sätze neu. Pro Satz "
+        "sind genau zwei Wege erlaubt:\n"
+        "(a) OHNE ZAHL formulieren – beschreibe den Hebel, nicht den Betrag.\n"
+        "(b) Die Zahl behalten und im SELBEN Satz als Beispielrechnung / "
+        "Modellrechnung mit genannter Annahme kennzeichnen („In der "
+        "Beispielrechnung mit einer Annahme von … ergibt sich …“).\n\n"
+        "VERBOTEN: neue Zahlen, neue Quellen, erfundene Studien oder Links; "
+        "„ca.“, „rund“ oder „etwa“ als Ersatz für die Kennzeichnung.\n\n"
+        "HARTE REGELN:\n"
+        "- Alles außerhalb dieser Sätze bleibt WORTGLEICH.\n"
+        "- Alle Links bleiben byte-identisch; keine neuen Links.\n"
+        "- Die Anzahl der H2-Überschriften bleibt exakt gleich.\n"
+        "- Der Text wird nicht kürzer.\n"
+        "- Antwort: NUR der vollständige Markdown-Artikel, ohne Erklärungen.\n\n"
+        f"TITEL: {titel}\n\nARTIKEL:\n{body}\n"
+    )
+
+
+def zahlen_beleg_heiler(body, titel="", ki=None):
+    """Heilt die vom RS5-Gate abgelehnten Sätze gezielt. → neuer Body oder None.
+
+    Fail-closed und idempotent geprüft, bevor etwas zurückkommt:
+
+      1. Länge        – der Text darf nicht schrumpfen (≥ 97 % der Wörter).
+      2. Struktur     – Linkziele byte-identisch, H2-Anzahl gleich.
+      3. Wirkung      – die Zahl der RS5-Befunde muss STRIKT sinken; sonst
+                        gibt es keine Änderung zurück.
+      4. Keine neuen  – RS1–RS6 dürfen keinen neuen Befund dazubekommen.
+
+    Ohne Befund wird **kein** Modell aufgerufen (Idempotenz, Kosten).
+    """
+    body = body or ""
+    findings = _reserve_numeric_claim_findings(body)
+    if not findings:
+        return None, []
+    stelle = findings[:ZAHLEN_HEILER_MAX]
+    ruf = ki or _call_ai
+    neu = ruf(build_zahlen_heiler_prompt(body, stelle, titel), max_tokens=8000)
+    if not neu:
+        print("  ✗ Zahlen-Heiler: keine Antwort – Befund bleibt.")
+        return None, stelle
+    neu = neu.strip()
+    if neu.startswith("```"):
+        neu = re.sub(r"^```[a-z]*\n|\n```$", "", neu).strip()
+    if len(neu) < 500:
+        print("  ✗ Zahlen-Heiler: Antwort zu kurz – verworfen.")
+        return None, stelle
+    if len(re.findall(r"\w+", neu)) < 0.97 * len(re.findall(r"\w+", body)):
+        print("  ✗ Zahlen-Heiler: Text geschrumpft – verworfen.")
+        return None, stelle
+    if _links(neu) != _links(body):
+        print("  ✗ Zahlen-Heiler: Linkziele verändert – verworfen.")
+        return None, stelle
+    if len(re.findall(r"^##\s", neu, re.M)) != len(re.findall(r"^##\s", body, re.M)):
+        print("  ✗ Zahlen-Heiler: H2-Anzahl verändert – verworfen.")
+        return None, stelle
+    rest = _reserve_numeric_claim_findings(neu)
+    if len(rest) >= len(findings):
+        print(f"  ✗ Zahlen-Heiler ohne Wirkung ({len(findings)} → {len(rest)}) – verworfen.")
+        return None, stelle
+    vorher = {f.split(":", 1)[0].strip() for f in reserve_quality_findings(body)}
+    nachher = {f.split(":", 1)[0].strip() for f in reserve_quality_findings(neu)}
+    neu_dazu = sorted(nachher - vorher)
+    if neu_dazu:
+        print(f"  ✗ Zahlen-Heiler führt neue Befunde ein ({', '.join(neu_dazu)}) – verworfen.")
+        return None, stelle
+    print(f"  ✅ Zahlen-Heiler: {len(findings)} → {len(rest)} unbelegte Zahlenbehauptung(en).")
+    return neu, stelle
 
 
 def heal_article_ai(a, res, verworfen=None):

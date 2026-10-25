@@ -363,6 +363,23 @@ jobs:
       # einen eigenen Output + eine eigene Siegel-Zeile zu brauchen.
       werkzeugbefunde: ${{ steps.werkzeugbefunde.outputs.werkzeugbefunde }}
       werkzeugbefunde_anzahl: ${{ steps.werkzeugbefunde.outputs.werkzeugbefunde_anzahl }}
+    # ============ ASSET-VERSION INJIZIEREN (Live-Probe 25.10.2026) ============
+    # Befund: Alle Template-Verbraucher (layouts/_partials/asset_url.html,
+    # cover.html, ff_fontfaces.html, layouts/index.sw.js, hugo.toml Doku)
+    # leiten die Cache-Generation aus HUGO_JSDELIVR_SHA ab – NUR dieser
+    # Deploy injizierte die Variable nie. Live lief /sw.js deshalb mit
+    # VERSION="dev" und jede Asset-URL ohne ?v=<sha>:
+    #   · Der Service Worker sollte „Cache-Generation pro Deploy“ rotieren
+    #     (alter Cache fliegt beim Aktivieren) – mit "dev" blieb der
+    #     Cache-Name über Deploys identisch, stale Assets überlebten.
+    #   · GitHub Pages' max-age=600 war das einzige Frische-Versprechen.
+    # e2e.yml, layout-ai.yml und pinterest-watchdog.yml bauen längst mit
+    # `HUGO_JSDELIVR_SHA: ${{ github.sha }}` – die Produktion zieht nach.
+    # Job-Ebene, damit JEDER Hugo-Aufruf dieses Jobs (Erst-Build, Rebuild
+    # nach Gate-Heilungen) dieselbe Generation trägt. github.sha ist ein
+    # sicherer Kontext (M-10-Muster: Übergabe über env:, nie in run:).
+    env:
+      HUGO_JSDELIVR_SHA: ${{ github.sha }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -1411,6 +1428,19 @@ jobs:
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./public
+          # SECURITY.TXT-LIVE-PROBE (25.10.2026): upload-pages-artifact
+          # archiviert seit v4 mit `--exclude=.[^/]*` – versteckte Dateien
+          # reisten NICHT mit ins Pages-Deployment. Folge: Die am 14.10.
+          # (#750, Befund I-03) eingeführte /.well-known/security.txt
+          # (RFC 9116) lieferte live 11 Tage HTTP 404, während dieselbe
+          # Datei im gh-pages-Zweig (peaceiris-Push, ohne diesen Ausschluss)
+          # sichtbar war – Schein-Grün der #537-Klasse (Quelle richtig,
+          # Audit-Spur richtig, Auslieferung falsch). `include-hidden-files`
+          # publiziert die beiden versteckten Pfade des Builds
+          # (.well-known/, .nojekyll – Bestand am 25.10. verifiziert);
+          # .git und .github schließt die Action weiterhin immer aus.
+          # Vertragstest: scripts/tests/test_pages_deployment_guard.py
+          include-hidden-files: true
 
       # ------------------------------------------------------------
       # AUSLIEFERUNGS-BELEG (Dauerheilung #676, 10.10.2026)

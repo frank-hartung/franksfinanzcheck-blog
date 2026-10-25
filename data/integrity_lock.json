@@ -2,6 +2,8 @@
   "schema": 2,
   "signed_at": "2026-10-25T13:53:47.305984+00:00",
   "head": "b5138a1b",
+  "signed_at": "2026-10-25T13:47:22.300249+00:00",
+  "head": "4d782b4",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -43,6 +45,7 @@
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
     "scripts/redaktions_standard.py": "dcf8591230a6b505a061b6cb668d5d69b33d247741027fc0c06436e21d0077aa",
+    "scripts/redaktions_standard.py": "62ccfa114110b95a82aa998ca3de966abbaea434d6670d70ef887eef50ae0eb9",
     "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
@@ -213,6 +216,10 @@
       "prev_sha256": "7625b594f34898c713138b46ad70685a87b3eb45ae811f056a06ad8f840e245c"
     },
     {
+  "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b",
+  "audit_start_sha256": "b27321cfb9d7084f31f0b8d42a1139714128abdebcf296132abb4b1bc02691e1",
+  "audit": [
+    {
       "date": "2026-10-15",
       "art": "heal",
       "head": "60db253",
@@ -240,7 +247,7 @@
         }
       ],
       "files_sha256": "e49296f6232554c34db74d9fb060b4667b29c98678aa49172d6edca738746576",
-      "prev_sha256": "3e4ce7f9f7989fbe510bdc60b69deab9e53c02c5f5c14768f4d65981221a0d1e"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-15",
@@ -452,6 +459,8 @@
       "head": "b5138a1b",
       "geaendert": [
         "scripts/affiliate_marketer.py",
+      "head": "cbbb181",
+      "geaendert": [
         "scripts/redaktions_standard.py"
       ],
       "herkunft": [
@@ -468,6 +477,43 @@
           ],
           "commits_art": "letzte-commits"
         },
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "cbbb181",
+              "datum": "2026-10-25",
+              "betreff": "fix(rs5): der Zähler log über sich selbst – Jahreszahlen, Issue-Refs und Fett-Marker sind keine Zahlenbehauptungen (#821)"
+            },
+            {
+              "sha": "baac9d7",
+              "datum": "2026-10-25",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "1847c5b27c8939ea74a4307a99471016e82ec0fad87b105118aaafb13752b00d",
+      "prev_sha256": "0916b34576657655dff2593a397cc751981154e8d8c077e06d22e3e8f0573ab4"
+    },
+    {
+      "date": "2026-10-25",
+      "art": "set-current",
+      "head": "cbbb181",
+      "geaendert": [],
+      "files_sha256": "1847c5b27c8939ea74a4307a99471016e82ec0fad87b105118aaafb13752b00d",
+      "prev_sha256": "a8f6fa227873156a09db6e81d1441fd57d55bd30f6be9de93be146a0e887ecee"
+    },
+    {
+      "date": "2026-10-25",
+      "art": "set-current",
+      "head": "d1528dd",
+      "geaendert": [
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
         {
           "pfad": "scripts/redaktions_standard.py",
           "klasse": "fest",
@@ -484,6 +530,24 @@
       ],
       "prev_sha256": "0916b34576657655dff2593a397cc751981154e8d8c077e06d22e3e8f0573ab4",
       "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5"
+              "sha": "d1528dd",
+              "datum": "2026-10-25",
+              "betreff": "fix(rs5): Messfehler im Zahlen-Gate – Jahre, Issue-Refs und Fett-Marker zählen nicht als Behauptung (#821) (#865)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b",
+      "prev_sha256": "116e0597796ca60e9f4a17118304282c658cb2ef40025516190f825ae8f4914a"
+    },
+    {
+      "date": "2026-10-25",
+      "art": "set-current",
+      "head": "4d782b4",
+      "geaendert": [],
+      "prev_sha256": "93f74b3addf79556d61508732919edd938f231e5a0c38e4cf7f960bbed735ca8",
+      "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b"
     }
   ]
 }

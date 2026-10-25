@@ -58,6 +58,13 @@ def _workflow() -> dict:
     return yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))
 
 
+def _frischwache_workflow() -> dict:
+    if yaml is None:
+        raise unittest.SkipTest("PyYAML lokal nicht installiert (CI installiert es)")
+    wf = REPO / ".github" / "workflows" / "backup-frischwache.yml"
+    return yaml.safe_load(wf.read_text(encoding="utf-8"))
+
+
 class _OhneNetz:
     """HTTP-Ersatz, der jeden Aufruf protokolliert und eine Antwort-Funktion nutzt."""
 
@@ -381,7 +388,7 @@ class FrischwacheVertrag(unittest.TestCase):
     def test_workflow_existiert_und_laueft_taeglich(self):
         wf = REPO / ".github" / "workflows" / "backup-frischwache.yml"
         self.assertTrue(wf.is_file(), "backup-frischwache.yml fehlt – RPO wäre unbewacht")
-        data = yaml.safe_load(wf.read_text(encoding="utf-8"))
+        data = _frischwache_workflow()
         # PyYAML 1.1: `on` wird als bool True geparst – GitHub meint den Trigger.
         on = data.get("on", data.get(True, {}))
         self.assertIn("schedule", on, "Frischwache muss täglich laufen (schedule)")

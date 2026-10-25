@@ -88,9 +88,11 @@ Die drei Entscheide, die diese Form festlegen:
 >   (`routes` in `wrangler.toml`); Cloudflare legt DNS und Zertifikat selbst an.
 > - **Deploy nur per CI:** Actions → „Cloudflare-Worker deployen“ →
 >   `newsletter-worker`. Der Lauf wartet auf deine Freigabe im Environment
->   `cloudflare-produktion` und setzt die KV-ID aus der Repository-Variable
->   `KV_NAMESPACE_ID_ABO` ein. Ein lokales `wrangler deploy` ist nur noch
->   für die Ersteinrichtung gedacht.
+>   `cloudflare-produktion`; danach liest `scripts/worker_ressourcen.py` die ID
+>   der bereits produktiv gebundenen KV-Ressource `ABO` aus `ff-newsletter` und
+>   setzt sie nur für diesen Deploy ein. Fehlende oder mehrdeutige Bindungen
+>   brechen vor Wrangler ab, statt eine ID zu raten. Ein lokales
+>   `wrangler deploy` ist nur noch für die Ersteinrichtung gedacht.
 > - Der Worker sendet beim Dispatch **keine Tokens und keine Adressen**
 >   mehr; der Lifecycle-Workflow hat keine `token`-Eingabe mehr (Tokens
 >   standen sonst unmaskiert in öffentlichen Logs).
@@ -193,8 +195,8 @@ Repository → **Settings → Secrets and variables → Actions**:
 
 **F-08, gehärtet:** `EXPORT_KEY` darf nur tokenfreie Listen lesen. Token- oder E-Mail-Einzel-Lookups laufen ausschließlich als POST mit dem getrennten Schreibschlüssel; Token/E-Mail stehen nicht in der Export-URL. Ein fehlender oder gleicher Schlüssel führt zu 403/fail-closed.
 | `NEWSLETTER_HASH_KEY` | Secret | 32+ Zeichen, zufällig (`openssl rand -hex 32`). Schlüssel der Empfänger-Hashes im Journal (HMAC statt ungesalzenem SHA-256, Audit H-04). Einmal setzen, **nie** wechseln – sonst greift der Duplikatsschutz einen Tag lang nicht. |
-| `KV_NAMESPACE_ID_ABO` | Variable | ID des KV-Namespace `ABO` (kein Geheimnis) – für Worker-Deploy und verschlüsseltes Backup |
-| `CF_WORKERS_DEPLOY_TOKEN` | Secret im Environment `cloudflare-produktion` | eigener Cloudflare-Token nur für Worker-Deploys (nicht der Workers-AI-Token) |
+| `KV_NAMESPACE_ID_ABO` | Variable, bedingt optional | Bestehende KV-ID (kein Geheimnis): weiterhin für das verschlüsselte Backup erforderlich; beim CI-Worker-Deploy nur optionaler Bootstrap. Der Regelbetrieb löst die vorhandene `ABO`-Bindung automatisch auf und verwendet eine gesetzte ID bevorzugt, ohne sie still zu ersetzen. |
+| `CF_WORKERS_DEPLOY_TOKEN` | Secret im Environment `cloudflare-produktion` | eigener Cloudflare-Token nur für Worker-Deploys (nicht der Workers-AI-Token); `Workers Scripts: Edit` und `Read`, damit Deploy und bestehende Bindungsauflösung funktionieren |
 | `CLOUDFLARE_ACCOUNT_ID` | Secret (vorhanden) | Konto-ID – das bestehende Repo-Secret wird auch für den Worker-Deploy genutzt |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | optional | nur wenn `NEWSLETTER_TRANSPORT=smtp` |
 | `NEWSLETTER_TRANSPORT` | Variable, optional | `smtp` (Default: `resend`) |

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-28
 title: "Preisgarantie Gas: Was du jetzt tun kannst – Gaspreissprünge"
-description: "Preisgarantie Gas: Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder…"
+description: "Preisgarantie Gas: Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder."
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Gastarif wechseln", "Heizkosten senken"]

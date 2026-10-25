@@ -44,6 +44,13 @@ jobs:
     name: Bauen (nur Sicherheits-Gates)
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    # ASSET-VERSION (Live-Probe 25.10.2026, gleichlautend mit deploy.yml):
+    # Der Notfall-Pfad muss dieselbe Auslieferungsqualität liefern wie der
+    # reguläre Deploy – sonst rotiert ausgerechnet im Notfall die
+    # sw.js-Cache-Generation nicht (VERSION="dev") und Asset-URLs tragen
+    # kein ?v=<sha>.
+    env:
+      HUGO_JSDELIVR_SHA: ${{ github.sha }}
     steps:
       - name: Bestätigung prüfen
         env:
@@ -134,6 +141,11 @@ jobs:
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./public
+          # Versteckte Dateien mitnehmen (Begründung ausführlich in
+          # deploy.yml): ohne diese Option liefert /.well-known/security.txt
+          # live 404 (upload-pages-artifact v4+ schließt Dotfiles per
+          # --exclude=.[^/]* aus).
+          include-hidden-files: true
 
   ausliefern:
     name: An GitHub Pages ausliefern

@@ -1,6 +1,6 @@
 ---
 title: "So entstehen unsere Vergleiche: das Bewertungsraster"
-description: "Das vollständige Bewertungsraster von FranksFinanzcheck: welche Anbieter berücksichtigt und welche ausgeschlossen werden, wie Reihenfolgen entstehen, warum Provision kein Bewertungskriterium ist, welche Mindestkriterien gelten und wann ein Link deaktiviert wird."
+description: "So bewerten wir Vergleichsportale: Kriterien, Ausschlüsse und Rechenwege – Provisionen bestimmen keine Platzierung. Mit öffentlichem Bewertungsraster."
 draft: false
 author: "Frank Hartung"
 showToc: true

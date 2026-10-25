@@ -1,6 +1,6 @@
 ---
 title: "Einlagensicherung: Wie viel Guthaben geschützt ist"
-description: "Was Einlagensicherung leistet, was sie nicht abdeckt und wie du vor einer Geldanlage prüfst, wie viele Institute hinter einem Angebot stehen. Mit…"
+description: "Was Einlagensicherung leistet, was sie nicht abdeckt und wie du vor einer Geldanlage prüfst, wie viele Institute hinter einem Angebot stehen. Mit."
 date: 2026-09-23T06:10:00Z
 lastmod: 2026-10-13
 draft: false

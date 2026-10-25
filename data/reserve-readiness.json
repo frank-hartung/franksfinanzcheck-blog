@@ -3,6 +3,9 @@
   "ready": 6,
   "pool_size": 6,
   "generated_at": "2026-10-25T13:46:01Z",
+  "ready": 1,
+  "pool_size": 2,
+  "generated_at": "2026-10-25T13:38:49Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -11,6 +14,8 @@
       "flesch": 66.7,
       "measured_at": "2026-10-25T13:41:18Z",
       "score": 0.992,
+      "measured_at": "2026-10-25T13:38:46Z",
+      "score": 0.984,
       "parts": {
         "spelling": 0.96,
         "meta": 1.0,
@@ -96,6 +101,15 @@
       "flesch": 64.6,
       "measured_at": "2026-10-25T13:46:01Z",
       "score": 0.988,
+      "ready": false,
+      "sha256": "87890c362df3a0c3981db591f09430f5298a4090567db1b2a40af790a9fa1911",
+      "flesch": 63.8,
+      "measured_at": "2026-10-25T13:38:49Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 7 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
+      "details": [
+        "RS5: 7 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
+      ],
+      "score": 0.98,
       "parts": {
         "spelling": 0.94,
         "meta": 1.0,
@@ -110,4 +124,22 @@
   "measurement": {
     "kind": "full"
   }
+    "kind": "full",
+    "run_id": "40196967906",
+    "run_attempt": "1"
+  },
+  "geschont": [
+    {
+      "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "klasse": "heilbar",
+      "hits": 5,
+      "heiler": [
+        "redaktions_standard.py",
+        "check_titles.py",
+        "lesbarkeit_heiler.py",
+        "profi_polish.py"
+      ],
+      "warum": "Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py und lesbarkeit_heiler.py in der Reserve-Kette (#710)."
+    }
+  ]
 }

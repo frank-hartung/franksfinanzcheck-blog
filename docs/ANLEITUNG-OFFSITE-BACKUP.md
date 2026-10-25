@@ -28,6 +28,13 @@ liegen die Zugänge, und sei es nur für Minuten, in einem Environment, das
 jeder Branch nutzen darf. Die Einrichtungsprüfung im Lauf setzt denselben
 Hinweis an den Anfang ihrer Liste („Zuerst E8“), solange das zutrifft.
 
+**Komfort-Weg (seit 25.10.2026):** Statt der sechs Klickstrecken führt
+`bash scripts/backup_einrichten_wizard.sh` am eigenen Rechner interaktiv
+durch dieselben Schritte (erst E8, dann E1–E7; Geheimnisse werden verdeckt
+abgefragt, nie geloggt; PAT-/Cloudflare-Formulare werden vorbelegt
+geöffnet). `bash scripts/backup_einrichten_wizard.sh --check` prüft den
+Stand jederzeit ohne Änderung. Beide Wege enden an derselben Stelle.
+
 Danach: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Grün
 heißt gesichert. Die offene Meldung schließt sich beim ersten grünen Lauf
 von selbst.

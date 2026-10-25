@@ -484,6 +484,40 @@ def _reserve_vorstufe_ok(body: str, probleme: list[str]) -> tuple[bool, list[str
     return bool(heilbar), sorted(set(heilbar))
 
 
+ZAHLEN_HEILER_MAX_VERSUCHE = 1
+
+
+def _nur_zahlenbefund(probleme: list[str]) -> bool:
+    """Blockiert AUSSCHLIESSLICH das harte Zahlen-Gate (RS5)?
+
+    Nur dann lohnt der gezielte Zahlen-Heiler: Er repariert Sätze, er baut
+    kein Gerüst. Längen-, Struktur-, Floskel- oder Modulbefunde brauchen eine
+    neue Generierung, nicht eine Satz-OP.
+    """
+    return bool(probleme) and all(str(p).startswith("RS5:") for p in probleme)
+
+
+def _zahlen_heilung(body: str, titel: str, schluesselwoerter) -> str | None:
+    """Ein gezielter Heilversuch am Geburtspunkt – fail-closed. → Body oder None.
+
+    WF-D4E0 / #821 (25.10.2026): Der Lauf verbrannte vier frische Themen, weil
+    jeder Rohtext mit 8–20 unbelegten Zahlen geboren wurde und die
+    Wiederholung dieselbe Regel blind erneut verletzte. Das Gate bleibt hart;
+    der Text bekommt vorher die Chance, die abgelehnten Sätze selbst zu
+    reparieren – mit den Sätzen im Prompt, nicht mit der Regel allein.
+    """
+    try:
+        import redaktions_standard as rs
+        neu, _stelle = rs.zahlen_beleg_heiler(body, titel=titel)
+    except Exception as exc:  # noqa: BLE001 – Heilung darf die Geburt nie kippen
+        print(f"  ⚠ Zahlen-Heiler nicht ausführbar: {exc}")
+        return None
+    if not neu:
+        return None
+    ok, _prob = g.profi_quality_ok(neu, schluesselwoerter)
+    return neu if ok else None
+
+
 def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3,
                  reserve_vorstufe=False):
     """Ein Generierungs-Versuch über beide Provider. Liefert (filename|None, info).
@@ -509,6 +543,7 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
     # das Kontingent war nach drei Versuchen aufgebraucht. Die Befunde gehen
     # jetzt als Korrektur-Auftrag in den Prompt (`generate_article_text`).
     letzte_hinweise: list[str] = []
+    zahlen_heilungen = 0
     for attempt in range(1, max_attempts + 1):
         provider = providers[(attempt - 1) % len(providers)]
         os.environ["AI_PROVIDER"] = provider
@@ -545,6 +580,16 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
         vorstufe_heiler = []
         if not relaxed:
             ok_profi, prob = g.profi_quality_ok(body, keywords)
+            if (not ok_profi and zahlen_heilungen < ZAHLEN_HEILER_MAX_VERSUCHE
+                    and _nur_zahlenbefund(prob)):
+                zahlen_heilungen += 1
+                repariert = _zahlen_heilung(body, title, keywords)
+                if repariert:
+                    body = repariert
+                    ok_profi, prob = True, []
+                    vorstufe_heiler.append("Zahlen")
+                    print(f"  💡 Zahlen-Heiler angenommen "
+                          f"(Versuch {attempt}/{max_attempts}, {provider})")
             if not ok_profi:
                 if reserve_vorstufe:
                     vorstufe_ok, vorstufe_heiler = _reserve_vorstufe_ok(body, prob)
@@ -571,6 +616,9 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
                 continue
 
         used_titles.add(title.lower())
+        if vorstufe_heiler == ["Zahlen"]:
+            return ((title, desc, body),
+                    f"OK via {provider_name} (Zahlen-Heiler)")
         if vorstufe_heiler:
             return ((title, desc, body),
                     f"VORSTUFE via {provider_name} "

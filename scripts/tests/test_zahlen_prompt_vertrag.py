@@ -83,6 +83,46 @@ class ZahlenPromptVertragTests(unittest.TestCase):
                   "[laut Anbieter](https://example.org/tarif).")
         self.assertFalse(rs._reserve_numeric_claim_findings(belegt))
 
+    # --- MESSFEHLER-FÄLLE (WF-D4E0/#821, 25.10.2026) ---------------------
+    # Der Detektor zählte Formatierungs- und Repo-Marker als harte Zahlen und
+    # meldete am 25.10.2026 „RS5: 9 …“, obwohl nur 5 echte Zahlen im Text
+    # standen. Ein Befund, der über sich selbst lügt, schickt die Redaktion
+    # auf die falsche Baustelle – dieselbe Klasse wie „THEMENMANGEL“ bei 55
+    # freien Themen.
+
+    def test_kalenderjahr_ist_keine_zahlenbehauptung(self):
+        for satz in ("Pauschale Aussagen zu den Preisen im Jahr 2026 bringen "
+                     "dir nichts.",
+                     "Digitale Vertragspapiere sind praktisch, aber kein "
+                     "Spartrend für 2026.",
+                     "Was 2026 gilt, entscheidet deine Bank selbst."):
+            self.assertEqual([], rs._reserve_numeric_claim_findings(satz), satz)
+
+    def test_jahr_verdeckt_keine_echte_zahl(self):
+        # Das Jahr wird entfernt, der Betrag bleibt – und bleibt ein Befund.
+        self.assertTrue(rs._reserve_numeric_claim_findings(
+            "Für 2026 rechnet die Bank mit 250 € Jahresgebühr."))
+
+    def test_repo_referenz_ist_keine_zahlenbehauptung(self):
+        # Interne Issue-/PR-Nummern gehören ohnehin nicht in den Artikel;
+        # sie sind aber keine Preisangabe.
+        self.assertEqual([], rs._reserve_numeric_claim_findings(
+            "Redaktionell überarbeitet zu Issue #763 am 15. Oktober."))
+
+    def test_fettmarker_zerschneidet_keinen_satz(self):
+        # Vorher entstand aus „… am **16. Oktober 2026**." das Fragment
+        # „Oktober 2026**.“, weil am Punkt hinter der Zahl getrennt wurde.
+        self.assertEqual([], rs._reserve_numeric_claim_findings(
+            "Geglättet am **16. Oktober 2026** und redaktionell geprüft."))
+
+    def test_echte_unbelegte_zahl_bleibt_rot(self):
+        # Die Schutzrichtung ist unangetastet: Beträge und Fristen ohne Beleg
+        # bleiben harte Befunde.
+        self.assertTrue(rs._reserve_numeric_claim_findings(
+            "Reichen 120 € nicht, ändere den Plan."))
+        self.assertTrue(rs._reserve_numeric_claim_findings(
+            "Drei Monate reichen zum Prüfen nicht."))
+
 
 if __name__ == "__main__":
     unittest.main()

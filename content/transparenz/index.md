@@ -1,6 +1,6 @@
 ---
 title: "Transparenz: Wie sich FranksFinanzcheck finanziert"
-description: "Offenlegung ohne Kleingedrucktes: Welche Partner FranksFinanzcheck vergüten, wann eine Provision entsteht, was sie nicht beeinflusst – und wie die Kennzeichnung in jedem einzelnen Artikel technisch überwacht wird."
+description: "Wie FranksFinanzcheck Provisionen erhält, wo Werbung gekennzeichnet wird und warum Vergütung keine Reihenfolge bestimmt."
 draft: false
 author: "Frank Hartung"
 showToc: true

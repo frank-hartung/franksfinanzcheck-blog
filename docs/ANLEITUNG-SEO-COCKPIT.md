@@ -89,9 +89,13 @@ erraten. Keine Zeitreihe und kein automatisches Rank-Tracking.
   und externe Skripte. Kein CDN, kein Tracking, keine externen Fonts.
 - Importtexte/Metadaten werden als Text gerendert; eingebettetes JSON wird
   gegen `</script>`-Injection geschützt; CSV-Export neutralisiert Formeln.
-- Ausgabe ausschließlich in `.cache/seo-cockpit/` (bereits Git-ignoriert),
+- Der lokale Bericht liegt in `.cache/seo-cockpit/` (Git-ignoriert),
   außerhalb von `static/`, `content/` und `public/`. Nicht hochladen.
-- Keine Änderungen an Abos, Accounts, GitHub-Secrets oder Workflows.
+- Der wöchentliche GitHub-Actions-Lauf baut zusätzlich den finalen Stand nach
+  den Inhaltsheilungen und schreibt die kompakte P1/P2/P3-Zusammenfassung in
+  die Laufübersicht. Der vollständige JSON-/CSV-Bericht bleibt auf dem Runner
+  und wird nicht als Website-Inhalt veröffentlicht.
+- Das Cockpit ändert keine Artikel, Verträge, Accounts oder GitHub-Secrets.
 
 ## Prüfungen und Exits
 
@@ -106,13 +110,16 @@ npm run test:e2e
 ```
 
 `seo:check` liefert 1 bei P1-Befunden. Auditor: Exit 2 bei fehlendem Build,
-ungültiger Sitemap oder anderen Eingabefehlern. P2/P3 stoppen den Prozess
-nicht. Die Tools schreiben keine automatischen GitHub-Issues.
-Alle Cockpit-Befunde tragen `owner=human`: Dieses Werkzeug heilt nicht
-selbst, Änderungen benötigen den Betreiber beziehungsweise die Redaktion.
-`owner=auto` bleibt im bestehenden Alarmrouting ausschließlich echten
-Selbstheilern vorbehalten. Jeder Befund hat `severity` und
-`channel=seo-cockpit`; es gibt keinen neuen dauerhaften Alarm-Workflow.
+ungültiger Sitemap oder anderen Eingabefehlern. P2/P3 stoppen den lokalen
+Prozess nicht. Im wöchentlichen Workflow erscheinen alle Prioritäten in der
+Step-Summary; technische P1-Befunde pflegen ein einzelnes Ticket
+(`SEO-Cockpit: technische P1-Befunde`), das bei einem vollständigen grünen
+Folgeaudit geschlossen wird. Ein übersprungener Audit schließt kein Ticket.
+
+Alle Cockpit-Befunde tragen `owner=human`: Das Werkzeug heilt nicht selbst,
+Änderungen benötigen den Betreiber beziehungsweise die Redaktion. `owner=auto`
+bleibt im bestehenden Alarmrouting ausschließlich echten Selbstheilern
+vorbehalten. Jeder Befund hat `severity` und `channel=seo-cockpit`.
 
 Vorhandene vertiefte Prüfung bleibt zusätzlich relevant:
 

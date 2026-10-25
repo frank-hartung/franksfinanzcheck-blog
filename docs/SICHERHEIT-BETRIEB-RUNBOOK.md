@@ -34,8 +34,8 @@ ausdrücklich auf Zuruf – herstellt:
 
 ```bash
 npm run edge:freigabe          # misst DNS-Proxy, SSL-Modus (strict/full) und Regel A1
-npm run edge:freigabe:apply    # stellt den Sollstand idempotent her (ohne TLS-Downgrade!)
-npm run edge:b7:apply          # stellt content/datenschutz/index.md idempotent auf Proxy um
+npm run edge:freigabe:apply    # Preflight → Regel → SSL → DNS → Gegenmessung → lokaler B7-Text
+npm run edge:b7                # bestätigt, dass content/datenschutz/index.md auf Proxy umgestellt ist
 ```
 
 `scripts/cloudflare_edge_freigabe.py` liest den Sollstand aus der Tabelle in
@@ -45,7 +45,8 @@ Soll) / 1 (offen, mit genauem nächsten Schritt) / 2 (Werkzeugfehler). Ein
 vorhandenes `Full (strict)` (`strict`) wird akzeptiert und bei `--apply`
 **niemals** auf `Full` herabgestuft (#815). Token: `CLOUDFLARE_API_TOKEN` mit
 `Zone.DNS:Edit`, `Zone.Settings:Edit`, `Zone.Transform Rules:Edit` für diese
-Zone. **Danach zwingend B7 (`npm run edge:b7:apply` + Commit).**
+Zone. **Der Apply führt B7 erst nach erfolgreicher API-Gegenmessung aus.**
+Danach den geänderten Datenschutztext prüfen und committen.
 
 **Schritt 1 — Proxy einschalten:** Cloudflare-Dashboard → Zone
 `franksfinanzcheck.de` → **DNS** → für `franksfinanzcheck.de` und `www` die
@@ -439,10 +440,9 @@ erfolgreicher Offline-Push darf die weiterhin offene Einrichtung nicht erledigen
 `/healthz`), `budget.anmeldung_heute`, `budget.anmeldung_max`,
 `budget.feedback_max` (Ganzzahlen), `turnstile` (`aktiv`/`wartet`/`inaktiv`),
 `schluesselrollen` (`getrennt`/`gemeinsam`) und `exporte` (Liste mit gültigen
-HTTP-Statuswerten). Anhand von `bau` und der Repository-Variable
-`KV_NAMESPACE_ID_ABO` trennt die Wache seit #815 deterministisch zwischen einem
-übersprungenen/veralteten Worker-Deploy und einem abweichenden Leseschlüssel
-(`NEWSLETTER_WORKER_EXPORT_KEY`).
+HTTP-Statuswerten). Anhand von `bau` trennt die Wache seit #815 deterministisch
+zwischen einem übersprungenen/veralteten Worker-Deploy und einem abweichenden
+Leseschlüssel (`NEWSLETTER_WORKER_EXPORT_KEY`).
 Fehlende oder falsch typisierte Werte werden nicht durch Repo-Sollwerte ersetzt.
 Ein geschütztes HTTP-503-JSON mit `ok:false`/`kv:fehler` belegt einen KV-Ausfall;
 eine 503-HTML-Seite dagegen nicht. Transiente Netz-/5xx-/429-Störungen werden
@@ -451,20 +451,29 @@ der Messzugang geht ausschließlich an `https://abos.franksfinanzcheck.de`.
 
 **Falls der Worker-Deploy fehlt/veraltet ist:**
 
-1. Repository-Variable `KV_NAMESPACE_ID_ABO` unter **Settings → Secrets and
-   variables → Actions → Tab „Variables“** (ausdrücklich als Repository-Variable,
-   nicht unter *Secrets* und nicht ausschließlich im Environment) auf die
-   vorhandene Namespace-ID setzen (32 Hex-Zeichen; keinen neuen Speicher ohne
-   Migrationsplan anlegen).
-2. Environment `cloudflare-produktion` nach A4 mit Freigabe und Beschränkung
+1. Environment `cloudflare-produktion` nach A4 mit Freigabe und Beschränkung
    auf `main` einrichten. `CF_WORKERS_DEPLOY_TOKEN` und `CLOUDFLARE_ACCOUNT_ID`
-   dort sicher hinterlegen; keine Werte in Issues/Chat/Reports schreiben.
-3. Actions → **„Cloudflare-Worker deployen“** → `newsletter-worker` von `main`.
-   Ein manueller Aufruf (`workflow_dispatch`) schlägt seit #815 fail-closed fehl,
-   falls `KV_NAMESPACE_ID_ABO` fehlt (kein still übersprungener grüner Lauf mehr),
-   und prüft unmittelbar nach `wrangler deploy` live gegen `/healthz`, dass der
-   neue `BUILD`-Stempel aus `newsletter-worker/wrangler.toml` antwortet.
-4. Danach die Sicherheits-Wache von `main` mit Live-Messung starten. Nur das
+   dort sicher hinterlegen; keine Werte in Issues/Chat/Reports schreiben. Der
+   Deploy-Zugang benötigt neben dem Schreibrecht auch `Workers Scripts: Read`.
+2. Actions → **„Cloudflare-Worker deployen“** → `newsletter-worker` von `main`.
+   Nach der Environment-Freigabe liest `scripts/worker_ressourcen.py` über den
+   Deploy-Zugang die **bestehende produktive Bindung** `ABO` aus `ff-newsletter`
+   und setzt deren KV-ID nur für diesen Lauf ein. Eine manuell kopierte
+   Repository-Variable ist für diesen Regelbetrieb nicht mehr erforderlich.
+3. Der Resolver akzeptiert ausschließlich genau eine passende KV-Bindung mit
+   Namen `ABO` und `namespace_id`. Fehlt sie, ist sie mehrdeutig oder fehlt der
+   Zugang, bricht der Lauf **vor** Wrangler rot ab. Es wird weder ein Namespace
+   erzeugt noch eine andere oder geratene ID verwendet. Eine optional gesetzte
+   `KV_NAMESPACE_ID_ABO` bleibt für bewussten Bootstrap möglich; ihr Wert wird
+   dann verwendet und nicht still durch eine andere Bindung ersetzt.
+4. Der Job `deploy` muss tatsächlich ausgeführt werden, nicht nur der Plan grün
+   sein. Auch Push-Deploys ohne kopierte ID kommen jetzt in die Matrix; fehlende
+   oder unlesbare Bindungen erzeugen keinen stillen Erfolg. Unmittelbar nach
+   `wrangler deploy` prüft der Lauf live gegen `/healthz`, dass der neue
+   `BUILD`-Stempel aus `newsletter-worker/wrangler.toml` antwortet. Das
+   verschlüsselte Offsite-Backup ist ein separater Vertrag und benötigt seine
+   dokumentierte `KV_NAMESPACE_ID_ABO` weiterhin.
+5. Danach die Sicherheits-Wache von `main` mit Live-Messung starten. Nur das
    vollständige authentifizierte Betriebsbild bestätigt den neuen Stand.
    Site-Key und Turnstile-Secret bleiben in der Reihenfolge aus A3 gekoppelt.
 

@@ -1,6 +1,7 @@
 ---
 title: "Änderungsprotokoll: Was wir wann aufgrund welcher Quelle geändert haben"
-description: "Öffentliches Korrektur- und Änderungsprotokoll von FranksFinanzcheck: jede inhaltliche Korrektur, jeder Quellenwechsel und jeder Methodik-Versionssprung – mit Datum, Anlass und Beleg."
+seoTitle: "Änderungsprotokoll: Korrekturen & Quellen"
+description: "Korrekturen, Quellenwechsel und Methodik-Updates von FranksFinanzcheck – mit Datum, Anlass und Nachweis."
 draft: false
 author: "Frank Hartung"
 showToc: false

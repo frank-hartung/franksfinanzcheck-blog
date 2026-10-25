@@ -1,7 +1,7 @@
 ---
 title: "Balkonkraftwerk-Rechner: Ertrag, Ersparnis und Amortisation"
-seoTitle: "Balkonkraftwerk berechnen: Ertrag, Amortisation & Einspeisung | FranksFinanzcheck"
-description: "Wie viel ein Balkonkraftwerk im Jahr spart, wann es sich amortisiert und ob sich die Einspeisevergütung lohnt – mit offener Formel. Lokal im Browser, ohne Anmeldung."
+seoTitle: "Balkonkraftwerk-Rechner: Ertrag & Amortisation"
+description: "Ertrag und Amortisation deines Balkonkraftwerks mit eigenen Angaben berechnen. Modellannahmen und Rechenweg sind offen; alles läuft lokal im Browser."
 date: 2026-10-19
 lastmod: 2026-10-19
 draft: false

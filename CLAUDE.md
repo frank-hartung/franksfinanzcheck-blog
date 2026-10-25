@@ -140,6 +140,8 @@ python3 scripts/audit_log.py --selftest              # Beweis-Ledger: Umlenkung/
 python3 scripts/repo_isolation.py --selftest         # Test-Sandbox: data/audit/ bleibt unberührt (C27)
 python3 scripts/selftest_ki.py --trap-workflows      # KI-Probe: kein Selbsttest hängt an Modell/Netz (#138)
 npm run test:release                                 # Release-Scorecard: Selbsttest + 41 Unit-Tests (Produktionswahrheit)
+python3 scripts/themen_nachschub_waechter.py           # Themennachschub: Vorlauf der AUTO-Bahn in Produktionstagen (C44)
+npm run test:themen:nachschub                        # Nachschub-Wache: Selbsttest + Füllwort-Grenze + Diagnose-Tests
 python3 scripts/release_scorecard.py                 # Release-Scorecard: acht Dimensionen je Live-Artikel + Siegel
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
@@ -645,6 +647,107 @@ Am 02.10.2026 lief die Engine, schrieb vier Artikel und veröffentlichte
   Phantom und entsperrt den halben Pool.
 - Bedienung: `npm run engine:kapazitaet`, `npm run engine:abgleich`.
   Anleitung: `docs/ANLEITUNG-ENGINE-KAPAZITAET.md`.
+
+## Der Vorrat endet nicht, er läuft aus (Themennachschub, C44, seit #821, 25.10.2026)
+
+Vom 19.10. bis 25.10.2026 fiel der Reserve-Vorrat von 6 auf 1 gate-fertige
+Kandidaten. Jede Nacht wurde derselbe Schritt rot, und jede Nacht stand im
+Ticket nur der Vorrat. Die Ursache war messbar banal – und drei Wochen
+unsichtbar: **In der AUTO-Bahn war kein Thema mehr frei.**
+
+- **Zwei Ursachen, nicht eine.** (a) `reserve_topics.FUELLWOERTER` kannte
+  „guenstig“, aber nicht „guenstige(n)“, nicht „tarife“, „anbieter“,
+  „welche“ oder die Jahreszeiten. Ein einziges Artikel-Wort sperrte damit
+  ganze Themenfamilien (Top-Blocker „guenstige“: 15 Themen); 154 von 202
+  galten als „belegt“. (b) Die übrigen 21 waren sämtlich YMYL-Hochrisiko –
+  frei, aber per Vertrag nie automatisch veröffentlichbar.
+  → Nach der Reparatur: 0 → 19 freie AUTO-Themen, plus 36 neue, geprüfte
+  AUTO-Themen in `data/topics.yaml` (Stand 25.10.: **55 frei = 27,5
+  Produktionstage**).
+- **Ein Füllwort ist keine Sachgrenze.** Ergänzt wird nur, was im Titel
+  nichts unterscheidet (Beugungen gelisteter Wörter, Rollen-Nomen wie
+  *Tarif/Anbieter/Wechsel*, Jahreszeiten, Fragewörter). Produkte und
+  Sachthemen bleiben Leitbegriffe: „Stromfresser“, „Kreditkarte“,
+  „Reiseversicherung“ und „Gasrechnung“ kollidieren weiterhin. Eine
+  bequeme Füllwort-Liste würde die Dublettenprüfung entwerten; ein Test
+  verbietet genau das.
+- **Stück ist keine Zeit.** „55 Themen“ plant niemand, „27,5
+  Produktionstage“ schon. `scripts/themen_nachschub_waechter.py` rechnet
+  den Vorrat über `engine_capacity.lage()` (→ `reserve_topics.disponieren`,
+  also mit dem Maß des Disponenten – **keine zweite Zählregel**) in Tage um
+  und vergleicht ihn mit dem Mindestvorlauf (`THEMEN_HORIZON_TAGE`,
+  Default 14). Exit 1 unter dem Horizont; `--warn-only` berichtet nur.
+- **Der Befund nennt die Bahn.** `reserve_gate.diagnose()` unterscheidet
+  jetzt „AUTO-Bahn leer“ (mit der Zahl der Fachfreigabe-Themen), „beide
+  Bahnen leer“ (mit belegt/Cooldown) und „Vorlauf knapp“. Der alte Satz
+  „alles thematisch belegt oder im Cooldown“ war am 25.10. nachweislich
+  falsch und schickte die Reparatur zu Cooldowns, Dubletten und API-Keys.
+  Die Ursache steht zusätzlich in der Gate-Meldung, die im Ticket landet.
+- **Der Lauf misst vor der Kette.** `.github/workflows/content-reserve.yml`
+  ruft die Wache als eigenen Schritt VOR Runde 0 auf – bewusst ohne
+  `continue-on-error` (ein Befund an die Redaktion gehört in den Lauf),
+  aber keine der folgenden Stufen hängt an ihrem Ergebnis: Heilung und
+  Nachzertifizierung des Bestands laufen weiter.
+- **Nachschub ist Redaktionsarbeit.** Neue Themen brauchen Titel, drei
+  Keywords, ein `/go/`-Ziel mit passendem Angebot und eine Kollisionsprüfung
+  gegen Bestand + Pool. Keine Versicherungs-, Kredit-, Renten- oder
+  Baufi-Themen – die gehören in die Fachfreigabe-Bahn und kosten dort einen
+  Prüfplatz, keinen Automatik-Slot.
+- Bedienung: `npm run engine:nachschub` · `npm run test:themen:nachschub`.
+  Vertrag: C44. Bericht:
+  `WARTUNG-INHALTSQUALITAET-WF-D4E0-821-DAUERHEILUNG-PREMIUM-2026-10-25.md`.
+
+## Ein Befund, der sich selbst falsch zählt (RS5-Messfehler, seit #821, 25.10.2026)
+
+Am 25.10.2026 meldete der Reserve-Blocker `RS5: 9 Zahlenbehauptung(en) ohne
+Satzbeleg` – gemessen waren es **5**. Vier „Funde" waren Artefakte des Zählers,
+keine Aussagen des Textes: zwei **Kalenderjahre** („im Jahr 2026", „kein
+Spartrend für 2026"), eine repo-interne **Issue-Nummer** (`#763`) und ein
+Satz-Fragment („Oktober 2026**."), das ein **Fett-Marker** zerschnitten hatte.
+
+Dieselbe Lehre wie bei der Diagnose (Abschnitt „Der Vorrat endet nicht"):
+Nicht nur der Lauf kann lügen, auch die **Messung**. Wer einem zu hohen Befund
+glaubt, schickt die Redaktion in die falsche Baustelle – hier: in eine
+Zahlen-Korrektur an Sätzen, die gar keine Zahl enthalten.
+
+- `redaktions_standard._reserve_numeric_claim_findings` entfernt Fett-/Kursiv-
+  Marker **vor** der Satztrennung, zählt `#<Zahl>` nicht als Betrag und
+  bewertet einen Satz erst, wenn nach dem Entfernen der **Jahreszahlen**
+  (1900–2099) noch eine Zahl mit Einheit übrig bleibt.
+- Die Schutzrichtung bleibt hart: „Reichen 120 € nicht, ändere den Plan."
+  und „Drei Monate reichen zum Prüfen nicht." bleiben Befunde. Der Kandidat
+  bleibt blockiert – mit der Wahrheit (5 statt 9).
+- Verriegelt in `scripts/tests/test_zahlen_prompt_vertrag.py`
+  (`test_kalenderjahr_ist_keine_zahlenbehauptung`,
+  `test_repo_referenz_ist_keine_zahlenbehauptung`,
+  `test_fettmarker_zerschneidet_keinen_satz`,
+  `test_echte_unbelegte_zahl_bleibt_rot`).
+
+## Der Geburtspunkt fährt denselben Heiler wie die Kette (Zahlen, seit #821, 25.10.2026)
+
+Das harte RS5-Gate lehnt jeden Satz ab, der eine Zahl mit Einheit ohne
+Quellenlink im selben Satz und ohne Modell-Kennzeichnung nennt. Am 25.10.2026
+starben daran **vier frische Themen bei der Geburt** (16, 20 und 8 Sätze) –
+drei Versuche je Thema, alle am selben Punkt, danach Cooldown. Verbrauchtes
+Kontingent ohne einen Kandidaten.
+
+Die Wiederholung war blind (Lehre #612), der vorhandene Heiler auch: Er kannte
+die **Regel**, nicht die **Sätze**.
+
+- `redaktions_standard.zahlen_beleg_heiler` repariert ausschließlich die
+  abgelehnten Sätze, wörtlich im Prompt. Zwei erlaubte Wege: ohne Zahl
+  formulieren oder die Zahl im selben Satz als Beispiel-/Modellrechnung mit
+  genannter Annahme kennzeichnen. „ca./rund/etwa“ bleibt kein Beleg.
+- Fail-closed mit Wirkungsprobe: Text nicht geschrumpft, Linkziele
+  byte-identisch, H2-Anzahl gleich, RS5-Zahl **strikt gesunken**, kein neuer
+  RS1–RS6-Befund. Ohne Befund kein Modellaufruf.
+- `engine_generate.try_generate` ruft ihn **einmal** je Generierung und nur bei
+  `_nur_zahlenbefund` (ausschließlich RS5). Längen-/Strukturdefekte brauchen
+  eine neue Generierung, keine Satz-OP.
+- Das Gate bleibt unverändert hart – der Text wird besser, nicht die Messung
+  weicher. Tests: `scripts/tests/test_zahlen_heiler.py` (in
+  `npm run test:reserve`). Vorgangsbericht:
+  `WARTUNG-INHALTSQUALITAET-WF-D4E0-821-DAUERHEILUNG-PREMIUM-2026-10-25.md`.
 
 ## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
 

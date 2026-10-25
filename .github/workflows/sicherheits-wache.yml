@@ -66,6 +66,8 @@ on:
       - "scripts/tests/test_cloudflare_edge_freigabe.py"
       - "scripts/worker_deploy_vorbereiten.py"
       - "scripts/tests/test_worker_deploy_vorbereiten.py"
+      - "scripts/worker_ressourcen.py"
+      - "scripts/tests/test_worker_ressourcen.py"
       - "scripts/alert_resolve_gate.py"
       - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
@@ -107,6 +109,8 @@ on:
       - "scripts/tests/test_cloudflare_edge_freigabe.py"
       - "scripts/worker_deploy_vorbereiten.py"
       - "scripts/tests/test_worker_deploy_vorbereiten.py"
+      - "scripts/worker_ressourcen.py"
+      - "scripts/tests/test_worker_ressourcen.py"
       - "scripts/alert_resolve_gate.py"
       - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
@@ -170,8 +174,9 @@ jobs:
       - name: Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)
         run: |
           set -euo pipefail
-          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten
+          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen
           python3 scripts/worker_deploy_vorbereiten.py --selftest
+          python3 scripts/worker_ressourcen.py --selftest
           python3 scripts/worker_betrieb_wache.py --selftest
           python3 scripts/worker_betrieb_wache.py --offline
 
@@ -294,7 +299,6 @@ jobs:
           NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE || 'https://abos.franksfinanzcheck.de' }}
           NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           NEWSLETTER_WORKER_WRITE_KEY: ${{ secrets.NEWSLETTER_WORKER_WRITE_KEY }}
-          KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
         run: |
           set -euo pipefail
           rm -f worker-live.md worker-live.json
