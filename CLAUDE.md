@@ -697,6 +697,32 @@ unsichtbar: **In der AUTO-Bahn war kein Thema mehr frei.**
   Vertrag: C44. Bericht:
   `WARTUNG-INHALTSQUALITAET-WF-D4E0-821-DAUERHEILUNG-PREMIUM-2026-10-25.md`.
 
+## Ein Befund, der sich selbst falsch zählt (RS5-Messfehler, seit #821, 25.10.2026)
+
+Am 25.10.2026 meldete der Reserve-Blocker `RS5: 9 Zahlenbehauptung(en) ohne
+Satzbeleg` – gemessen waren es **5**. Vier „Funde" waren Artefakte des Zählers,
+keine Aussagen des Textes: zwei **Kalenderjahre** („im Jahr 2026", „kein
+Spartrend für 2026"), eine repo-interne **Issue-Nummer** (`#763`) und ein
+Satz-Fragment („Oktober 2026**."), das ein **Fett-Marker** zerschnitten hatte.
+
+Dieselbe Lehre wie bei der Diagnose (Abschnitt „Der Vorrat endet nicht"):
+Nicht nur der Lauf kann lügen, auch die **Messung**. Wer einem zu hohen Befund
+glaubt, schickt die Redaktion in die falsche Baustelle – hier: in eine
+Zahlen-Korrektur an Sätzen, die gar keine Zahl enthalten.
+
+- `redaktions_standard._reserve_numeric_claim_findings` entfernt Fett-/Kursiv-
+  Marker **vor** der Satztrennung, zählt `#<Zahl>` nicht als Betrag und
+  bewertet einen Satz erst, wenn nach dem Entfernen der **Jahreszahlen**
+  (1900–2099) noch eine Zahl mit Einheit übrig bleibt.
+- Die Schutzrichtung bleibt hart: „Reichen 120 € nicht, ändere den Plan."
+  und „Drei Monate reichen zum Prüfen nicht." bleiben Befunde. Der Kandidat
+  bleibt blockiert – mit der Wahrheit (5 statt 9).
+- Verriegelt in `scripts/tests/test_zahlen_prompt_vertrag.py`
+  (`test_kalenderjahr_ist_keine_zahlenbehauptung`,
+  `test_repo_referenz_ist_keine_zahlenbehauptung`,
+  `test_fettmarker_zerschneidet_keinen_satz`,
+  `test_echte_unbelegte_zahl_bleibt_rot`).
+
 ## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
 
 Die schwebende Artikel-Navigation ist zweimal (26.09.2026) an einem
