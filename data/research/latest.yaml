@@ -1,5 +1,5 @@
-generated_at: '2026-10-24T08:23:59Z'
-day: '2026-10-24'
+generated_at: '2026-10-25T08:42:53Z'
+day: '2026-10-25'
 mode: deterministic
 teams:
   trending:
@@ -197,16 +197,6 @@ teams:
     source: pain_points:hausrat-unterschaetzt
     score: 0.7
   viral_outliers:
-  - topic: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.85
-  - topic: 'Privathaftpflicht: Warum sie unverzichtbar ist'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.84
   - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
     pillar: strom-sparen
     signal: viral_outlier
@@ -227,69 +217,81 @@ teams:
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  - topic: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.81
   - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
     pillar: konto-karten
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  niche_hooks:
-  - topic: Die 50-30-20-Regel einfach erklärt
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Die 50-30-20-Regel einfach erklärt
-    score: 0.55
-    keywords: []
-  - topic: Heizperiode vorbereiten im Spätsommer
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
     pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Heizperiode vorbereiten im Spätsommer
-    score: 0.55
-    keywords:
-    - Gasrechnung senken
-    - Heizkosten sparen
-    - Herbst Vorbereitung
-    - Heizung prüfen
-  - topic: 'Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+    pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
+  niche_hooks:
+  - topic: Günstige Kreditkarten für den Online-Einkauf
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    source: topics:Günstige Kreditkarten für den Online-Einkauf
     score: 0.55
     keywords:
-    - Kreditkarten
-    - Bonusprogramm
-    - Kreditkartenvergleich
-  - topic: 'Privathaftpflicht: Warum sie Pflicht ist und was sie kostet'
+    - Kreditkarte
+    - Online-Einkauf
+    - Günstig
+  - topic: Günstigen Mietwagen für den Urlaub buchen
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Günstigen Mietwagen für den Urlaub buchen
+    score: 0.55
+    keywords:
+    - Mietwagen buchen
+    - Günstige Mietwagen
+    - Mietwagen Vergleich
+  - topic: Internet-Speed optimieren mit dem richtigen Router
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Internet-Speed optimieren mit dem richtigen Router
+    score: 0.55
+    keywords:
+    - Internet-Speed
+    - Router
+    - Optimieren
+  - topic: 'Mietwagen für die Stadt: Kleine Autos im Vergleich'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Mietwagen für die Stadt: Kleine Autos im Vergleich'
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Stadtverkehr
+    - Kleine Autos
+  - topic: 'Umzug: Diese Versicherungen und Verträge musst du ummelden'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Privathaftpflicht: Warum sie Pflicht ist und was sie kostet'
+    source: 'topics:Umzug: Diese Versicherungen und Verträge musst du ummelden'
     score: 0.55
     keywords:
-    - Privathaftpflicht
-    - Haftpflichtversicherung Vergleich
-    - Haftpflicht Kosten
-  - topic: 'Riester-Rente: Lohnt sie sich 2026 noch?'
-    pillar: konto-karten
+    - Umzug Checkliste
+    - Verträge ummelden
+    - Umzug sparen
+  - topic: 'Wohnmobil mieten statt kaufen: Was günstiger ist'
+    pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Riester-Rente: Lohnt sie sich 2026 noch?'
-    score: 0.55
-    keywords: []
-  - topic: 'Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung richtig
-      kündigst'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung
-      richtig kündigst'
+    source: 'topics:Wohnmobil mieten statt kaufen: Was günstiger ist'
     score: 0.55
     keywords:
-    - Kfz Versicherung kündigen Frist
-    - Wechselsaison November
-    - Sonderkündigungsrecht Autoversicherung
-    - Stichtag 30. November
+    - Wohnmobil mieten
+    - Wohnmobil kaufen oder mieten
+    - Camper Vergleich
 live_web:
   enabled: false
   findings: []
