@@ -162,12 +162,56 @@ jobs:
           pip install --quiet --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           # gh CLI ist auf ubuntu-latest vorinstalliert
 
+      # ------------------------------------------------------------
+      #  SELBSTTEST – „sehen können" heißt nicht „Repo ist grün"
+      #  ------------------------------------------------------------
+      #  DAUERHEILUNG #864 (25.10.2026): Dieser Schritt hieß „Wache muss
+      #  sehen können" und tötete am 25.10. genau das Gegenteil: Der
+      #  Selbsttest verlangte ein syntaxgrünes Repo, `redaktions_standard.py`
+      #  hatte einen IndentationError (Zeile 424) – der Schritt starb, und
+      #  damit standen Nachmessung, Reserve-Heilung, Routing-Zustand und
+      #  JEDER weitere Schritt als `skipped` im Lauf. Ein Melder, der beim
+      #  ersten Befund die Augen schließt, ist kein Melder.
+      #
+      #  Jetzt gilt die Trennung, die vorher fehlte:
+      #    · Der MESSKERN muss lauffähig sein (bot_watchdog.py + Router) –
+      #      sonst ist keine Aussage möglich und der Lauf endet sofort.
+      #    · Jeder weitere Selbsttest läuft EINZELN und fehlertolerant; ein
+      #      Fehler wird als ::error:: sichtbar und am ENDE bilanziert
+      #      (Schritt „Wachen-Selbsttest-Bilanz" nach dem Alarm-Routing).
+      #      So entsteht der rote Lauf, aber erst nach Messung, Heilung
+      #      und Meldung – der Befund bleibt handlungsfähig.
       - name: Selftest (Wache muss sehen können)
+        id: selftest
         run: |
-          python3 scripts/bot_watchdog.py --selftest
-          python3 scripts/watchdog_recovery.py --selftest
-          python3 scripts/cadence_guard.py --selftest
+          set +e
+          fehler=0
+
+          echo "--- Messkern (ohne ihn ist keine Aussage möglich) ---"
+          if ! python3 -m py_compile scripts/bot_watchdog.py scripts/alert_router.py; then
+            echo "::error::Messkern nicht lauffähig (bot_watchdog.py/alert_router.py) – der Watchdog kann nicht messen."
+            exit 1
+          fi
+
+          echo "--- Selbsttests (einzeln, fehlertolerant) ---"
+          for pruefung in \
+              "scripts/bot_watchdog.py --selftest" \
+              "scripts/watchdog_recovery.py --selftest" \
+              "scripts/cadence_guard.py --selftest" \
+              "scripts/skript_syntax_wache.py --selftest" \
+              "scripts/skript_syntax_heiler.py --selftest"; do
+            # shellcheck disable=SC2086
+            if ! python3 $pruefung; then
+              echo "::error::Selbsttest fehlgeschlagen: python3 $pruefung"
+              fehler=1
+            fi
+          done
           python3 scripts/watchdog_check4_tls.py --help 2>&1 | head -n 5 || true
+          if [ "$fehler" = "1" ]; then
+            echo "⚠️  Mindestens ein Selbsttest ist rot – der Lauf misst trotzdem weiter"
+            echo "    (Befund ≠ Werkzeugfehler, #864). Bilanz folgt nach dem Routing."
+          fi
+          echo "fehler=$fehler" >> "$GITHUB_OUTPUT"
 
       - name: Watchdog-Prüfungen (Profi-Level)
         id: checks
@@ -190,6 +234,40 @@ jobs:
           cat /tmp/problems.txt || echo "(keine)"
           # Zusätzlich klassische Checks für Rückwärtskompatibilität in GITHUB_ENV laden
           # bot_watchdog.py schreibt bereits ins GITHUB_ENV via emit-env
+
+      # ------------------------------------------------------------
+      #  SELBSTHEILUNG #864 (25.10.2026) – der fehlende Heilweg
+      #  ------------------------------------------------------------
+      #  `skript-syntax` war der einzige P1-Befund mit Besitzer `auto`, für
+      #  den es keinen Heiler gab: Das Ticket nannte eine Arbeitsanweisung
+      #  an einen Menschen und konnte sich deshalb nur schließen, wenn
+      #  jemand fremden Code reparierte. Am 25.10. blieb es genau daran
+      #  hängen (offener Befund, roter Watchdog-Lauf, kein Ausweg).
+      #
+      #  Der Heiler stellt die JÜNGSTE Fassung derselben Datei her, die
+      #  nachweislich kompiliert – nichts anderes. Jede Heilung steht mit
+      #  beiden Commit-Kennungen in `data/skript_syntax_heilungen.jsonl`.
+      #  Ohne heilbaren Vorgänger (oder nach zwei Heilungen derselben Datei
+      #  in 24 h) heilt er NICHT: Dann ist ein Schreiber defekt, und der
+      #  Befund bleibt offen – sichtbar statt im Kreis geheilt.
+      #
+      #  TAKT: Der Schritt läuft in BEIDEN Takten. Das ist eine eng
+      #  begrenzte Ausnahme von „der Ausfall-Takt ist read-only" (#676):
+      #  Check 2 gehört zur Ausfall-Klasse, also muss der Takt den Befund
+      #  auch heilen dürfen – sonst misst er stündlich etwas, das er per
+      #  Konstruktion nicht anfassen darf. Begrenzt ist sie durch den
+      #  Heiler selbst (eine Datei, ein Commit, Audit-Ledger, Bremse).
+      - name: Skript-Syntax heilen (letzte kompilierbare Fassung)
+        if: ${{ contains(env.CHECK2, 'FAIL') }}
+        continue-on-error: true
+        env:
+          GIT_USER: "Bot-Watchdog"
+          GIT_MAIL: "bot-watchdog@users.noreply.github.com"
+        run: |
+          set +e
+          python3 scripts/skript_syntax_heiler.py --fix --commit
+          echo "syntax_heilung_exit=$?" >> "$GITHUB_STEP_SUMMARY"
+          set -e
 
       # REPARATUR 08.10.2026 (Issue #661): Der Dispatch stand bis hier vorn –
       # und damit VOR der billigen Selbstheilung. Folge: Der Watchdog stieß
@@ -319,7 +397,10 @@ jobs:
       # ein gelöstes Problem ist derselbe Vertrauensverlust wie ein
       # übersehener Fehler).
       - name: Nachmessung (geheilte Befunde dürfen kein Ticket erzeugen)
-        if: ${{ contains(env.CHECK3, 'FAIL') || contains(env.CHECK3B, 'FAIL') || contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        # #864: Auch die Syntaxheilung wird nachgemessen. Ohne CHECK2 hier
+        # meldete das Routing einen Stand, den dieser Lauf selbst repariert
+        # hat – und der Befund hielte das Ticket einen weiteren Tag offen.
+        if: ${{ contains(env.CHECK2, 'FAIL') || contains(env.CHECK3, 'FAIL') || contains(env.CHECK3B, 'FAIL') || contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -463,6 +544,26 @@ jobs:
             git commit -m "chore(watchdog): Alarm-Routing-Zustand"
             scripts/git_sync.sh --push-only
           fi
+
+      # ------------------------------------------------------------
+      #  BILANZ DER SELBSTTESTS – rot, aber erst JETZT (#864)
+      #  ------------------------------------------------------------
+      #  Ein Werkzeugfehler muss sichtbar bleiben: Ein grüner Lauf über
+      #  einer kaputten Wache wäre die gefährlichste Sorte Grün (C2). Er
+      #  wird deshalb nicht verschluckt – nur nach hinten gestellt, hinter
+      #  Messung, Heilung und Meldung. Vorher (bis 25.10.2026) stand die
+      #  Selbsttest-Bedingung VOR allem anderen und nahm beim ersten
+      #  fremden Befund dem ganzen Lauf die Stimme.
+      - name: Wachen-Selbsttest-Bilanz (rot erst nach Messung und Meldung)
+        if: always()
+        env:
+          SELFTEST_FEHLER: ${{ steps.selftest.outputs.fehler }}
+        run: |
+          if [ "${SELFTEST_FEHLER:-0}" = "1" ]; then
+            echo "::error::Mindestens ein Wachen-Selbsttest ist rot (Schritt: Selftest, Wache muss sehen koennen). Die Messungen dieses Laufs stehen im Report und im Routing - der Werkzeugfehler bleibt bestehen, bis er behoben ist."
+            exit 1
+          fi
+          echo "✅ Alle Wachen-Selbsttests bestanden."
 
       # REPORT: BOT-WATCHDOG-REPORT.md ist seit dem Premium-Audit 12.09.2026
       # gitignored und nicht versioniert (bleibt im Lauf-Log). Der frühere

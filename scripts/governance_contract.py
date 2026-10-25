@@ -493,7 +493,26 @@ GUARDS = [# Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # Schritte, Secret, Datenstände) und täuschte eine Messung vor. Die
           # Wache liest den Quelltext und meldet jede Spur; ohne vertragliches
           # Minimum liefe ihr Selbsttest in keinem Gate (C40).
-          "fremdmessung_sperre.py"]
+          "fremdmessung_sperre.py",
+          # Skript-Syntax-Wache (25.10.2026, Bot-Watchdog #864): Am 25.10.
+          # stand `redaktions_standard.py` mit einem IndentationError auf
+          # main – aus einem Squash-Merge –, und vier weitere Commits gingen
+          # unbemerkt darüber. Keine Stelle im Repo kompilierte den
+          # LIEGENDEN Stand. Diese Wache ist die eine Quelle der Wahrheit für
+          # „Python im Repo ist gültig" und steht deshalb im vertraglichen
+          # Minimum (C6): Ihr Selbsttest beweist den DETEKTOR (erkennt
+          # Fehler, Zeile, Quellzeile, schweigt bei gutem Code) und hängt
+          # bewusst NICHT am Repo-Stand – sonst wäre sie während des
+          # Ausfalls blind, für den sie gebaut ist.
+          "skript_syntax_wache.py",
+          # Skript-Syntax-Heiler (25.10.2026, Bot-Watchdog #864): Der Befund
+          # `skript-syntax` trug Besitzer `auto`, hatte aber keinen Heilweg –
+          # das Ticket konnte sich nur schließen, wenn ein Mensch fremden
+          # Code reparierte. Der Heiler stellt die jüngste kompilierbare
+          # Fassung derselben Datei her (Audit-Ledger, Wiederholungsbremse,
+          # kein Erfinden ohne Vorgänger). Sein Selbsttest friert jede dieser
+          # Sicherungen an einem echten Wegwerf-Repository ein (C6).
+          "skript_syntax_heiler.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

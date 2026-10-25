@@ -123,6 +123,16 @@ try:
 except ImportError:
     pinterest_audit = None
 
+# Skript-Syntax: EINE Quelle der Wahrheit (Meldung #864, 25.10.2026). Die
+# Regel „jedes Skript im Repo kompiliert" stand vorher zweimal hier – einmal
+# als Check 2 und einmal als Selbsttest-Bedingung. Der Import scheitert
+# nicht still: Fehlt die Wache, fällt `check_syntax` auf die eingebaute
+# Prüfung zurück und der Befund nennt den fehlenden Baustein.
+try:
+    import skript_syntax_wache as syntax_wache
+except ImportError:            # pragma: no cover – nur bei kaputtem Baum
+    syntax_wache = None
+
 REPORT_PATH = BLOG_DIR / "BOT-WATCHDOG-REPORT.md"
 FINDINGS_PATH = Path("/tmp/bot_watchdog_findings.json")
 
@@ -299,20 +309,122 @@ def newest_slug():
             best = (dt, slug, p)
     return best[1] if best else "", best_dt
 
-def check_syntax():
-    """Check all scripts/*.py syntaktisch."""
-    scripts = sorted((BLOG_DIR / "scripts").glob("*.py"))
-    if not scripts:
-        return False, "scripts-Verzeichnis enthält keine Python-Dateien"
+def _herkunft(datei: str) -> str:
+    """Welcher Commit hat den kaputten Stand zuletzt angefasst?
+
+    Für den Heilweg ist das die entscheidende Zeile: Ein Ticket, das nur
+    „Irgendwo ist ein Syntaxfehler" sagt, schickt jeden Leser auf dieselbe
+    Suche – der Heiler dagegen braucht nur Datei und Geschichte.
+    """
     try:
-        result = subprocess.run(
-            [sys.executable, "-m", "py_compile", *(str(path) for path in scripts)],
-            capture_output=True, text=True, timeout=15,
-        )
-    except subprocess.TimeoutExpired:
-        return False, "py_compile timeout after 15 seconds"
-    if result.returncode != 0:
-        return False, (result.stderr or result.stdout).strip()[:500]
+        ausgabe = subprocess.run(
+            ["git", "log", "-1", "--format=%h %s", "--", datei],
+            cwd=str(BLOG_DIR), capture_output=True, text=True, timeout=10,
+        ).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return ""
+    return ausgabe[:140]
+
+
+class _NotnagelFehler:
+    """Befund-Ersatz, wenn die Syntax-Wache selbst fehlt (gleiche Felder)."""
+
+    __slots__ = ("datei", "zeile", "art", "quelle")
+
+    def __init__(self, datei: str, zeile: int, art: str, quelle: str = "") -> None:
+        self.datei, self.zeile, self.art, self.quelle = datei, zeile, art, quelle
+
+    def text(self) -> str:
+        return f"{self.datei}:{self.zeile}: {self.art}"
+
+
+def syntax_fehler() -> list:
+    """Alle Syntaxfehler im Repo – über die Wache, sonst eingebaut.
+
+    Der Rückfall ist Absicht: Ist `skript_syntax_wache.py` selbst nicht
+    importierbar, muss diese Messung trotzdem stattfinden (und der Befund
+    nennt den Grund über die leere Liste + `syntax_wache is None`).
+    """
+    if syntax_wache is not None:
+        return syntax_wache.finde(BLOG_DIR)
+
+    # Notnagel ohne Fremdmodul: derselbe Vertrag, kleinere Ausgabe. Bewusst
+    # ohne py_compile – das schreibt `__pycache__` in den Arbeitsbaum.
+    fehler = []
+    for pfad in sorted((BLOG_DIR / "scripts").rglob("*.py")):
+        if "__pycache__" in pfad.parts:
+            continue
+        try:
+            quelle = pfad.read_text(encoding="utf-8")
+            compile(quelle, pfad.name, "exec")
+        except SyntaxError as exc:
+            fehler.append(_NotnagelFehler(
+                datei=pfad.relative_to(BLOG_DIR).as_posix(),
+                zeile=int(exc.lineno or 0),
+                art=f"{type(exc).__name__}: {exc.msg}"))
+        except (OSError, UnicodeError):
+            continue
+    return fehler
+
+
+def check_syntax():
+    """Check 2: Kompiliert jedes Python-Skript, so wie es im Repo liegt?
+
+    Rückgabe bleibt `(ok, meldung)` – Aufrufer und Tests hängen an dieser
+    Form. Neu ist der INHALT der Meldung: Datei, Zeile, Fehlerart und der
+    Commit, der den Stand zuletzt angefasst hat. Die alte Fassung gab
+    `Sorry: IndentationError … (redaktions_standard.py, line 424)` aus –
+    ohne Pfad, ohne Quellzeile, ohne Herkunft (Meldung #864).
+    """
+    if syntax_wache is None:
+        # Die Wache fehlt (z. B. von einem Merge zerschnitten): Der Befund
+        # nennt BEIDES – den fehlenden Baustein und die Notnagel-Funde.
+        funde = syntax_fehler()
+        hinweis = "skript_syntax_wache.py nicht importierbar – Notnagel-Prüfung"
+        if not funde:
+            return True, ""
+        return False, hinweis + ": " + " | ".join(f.text() for f in funde[:8])
+
+    alle = syntax_wache.dateien(BLOG_DIR)
+    if not alle:
+        return False, "scripts-Verzeichnis enthält keine Python-Dateien"
+    fehler = syntax_wache.finde(BLOG_DIR)
+    if not fehler:
+        return True, ""
+
+    zeilen = []
+    for f in fehler[:8]:
+        herkunft = _herkunft(f.datei)
+        zeilen.append(f"{f.text()}" + (f" · zuletzt: {herkunft}" if herkunft else ""))
+    if len(fehler) > 8:
+        zeilen.append(f"… und {len(fehler) - 8} weitere")
+    return False, " | ".join(zeilen)[:900]
+
+
+def syntax_detektor_sichtbar() -> tuple[bool, str]:
+    """Kann die Wache einen Syntaxfehler überhaupt SEHEN?
+
+    Das ist die eigentliche Frage hinter „Wache muss sehen können": nicht
+    „ist das Repo grün", sondern „funktioniert der Detektor". Die alte
+    Selbsttest-Bedingung verwechselte beides – ein fremdes kaputtes Skript
+    kippte den Selbsttest und damit den ganzen Lauf, samt aller Heil- und
+    Meldestufen (Meldung #864, 25.10.2026).
+    """
+    import tempfile
+    if syntax_wache is None:
+        return False, "skript_syntax_wache.py nicht importierbar – Syntaxprüfung blind"
+    with tempfile.TemporaryDirectory() as tmp:
+        probe = Path(tmp) / "probe.py"
+        probe.write_text("def f():\n    return 1\n        return 2\n", encoding="utf-8")
+        fund = syntax_wache.pruefe_datei(probe, Path(tmp))
+        if fund is None:
+            return False, "Detektor übersieht einen absichtlich kaputten Text"
+        if fund.zeile != 3:
+            return False, f"Detektor nennt Zeile {fund.zeile} statt 3"
+        gut = Path(tmp) / "gut.py"
+        gut.write_text("def f():\n    return 1\n", encoding="utf-8")
+        if syntax_wache.pruefe_datei(gut, Path(tmp)) is not None:
+            return False, "Detektor meldet fehlerfreien Code als Befund"
     return True, ""
 
 def deploy_ausfall_spur(workflow_file=None, limit=15):
@@ -1477,17 +1589,30 @@ def run_all(triage=False):
                 evidence=[f"BILANZ={text_b}"]))
 
     # 2 Syntax
+    #
+    # DAUERHEILUNG #864 (25.10.2026): Der Befund trägt `auto` – also muss es
+    # einen maschinellen Weg geben. Bis heute stand hier eine Arbeitsanweisung
+    # an einen Menschen („Betroffenes Skript reparieren"), während das Ticket
+    # sich nur schließen kann, wenn der Befund verschwindet. Jetzt nennt der
+    # nächste Schritt den Heiler, der im selben Workflow läuft
+    # (`scripts/skript_syntax_heiler.py --fix --commit`): letzte kompilierbare
+    # Fassung, auditiert in `data/skript_syntax_heilungen.jsonl`.
     ok, err = check_syntax()
     if ok:
         env["CHECK2"] = "OK"
     else:
         env["CHECK2"] = "FAIL"
+        dateien = [f.datei for f in syntax_fehler()]
         findings.append(_f(
             "skript-syntax", "Skript-Syntaxfehler", "P1", "auto",
             detail=str(err)[:300],
-            next_step="Betroffenes Skript reparieren – `python3 -m py_compile scripts/*.py` "
-                      "nennt die Zeile.",
-            evidence=[f"py_compile: {str(err)[:120]}"]))
+            next_step="Selbstheilung: `python3 scripts/skript_syntax_heiler.py --fix --commit` "
+                      "stellt die letzte kompilierbare Fassung her (Audit in "
+                      "`data/skript_syntax_heilungen.jsonl`); bleibt der Fund ohne "
+                      "Heilweg (`kein-vorgaenger`/`wiederholungsbremse`), ist die "
+                      "Datei menschlicher Besitz.",
+            evidence=[f"Syntax: {str(err)[:200]}"]
+                     + [f"Betroffen: {d}" for d in dateien[:4]]))
 
     # 3b Auslieferungs-Kette VOR der Live-Messung lesen: Der HTTP-Status ist
     # die Folge, der abgebrochene Deploy-Schritt die Ursache (#676).
@@ -1903,13 +2028,37 @@ def selftest():
     except Exception as e:
         errors.append(f"build_bilanz Exception: {e}")
 
-    # Test syntax check
+    # Syntaxmessung: Hier wird DER DETEKTOR geprüft, nicht der Repo-Stand.
+    #
+    # Meldung #864 (25.10.2026): Bis heute stand hier `check_syntax()` und
+    # ein einziger Fund – damals ein IndentationError in einem fremden
+    # Skript – kippte den Selbsttest. Der Workflow-Schritt „Selftest (Wache
+    # muss sehen können)" starb damit VOR der Messung: alle Prüfungen, alle
+    # Heilungen und das Alarm-Routing standen als `skipped` im Lauf, das
+    # Ticket entstand erst durch die Nachmessung des Routers – und der Lauf
+    # war rot, ohne dass ihn jemand reparieren konnte.
+    #
+    # Die Verwechslung ist der eigentliche Defekt: „Das Repo ist kaputt" ist
+    # ein BEFUND (Check 2, maschinell heilbar). „Der Detektor sieht nichts"
+    # ist ein WERKZEUGFEHLER (Abbruch, denn dann ist keine Aussage möglich).
     try:
-        ok, err = check_syntax()
-        if not ok:
-            errors.append(f"check_syntax meldet Fehler im eigenen Repo: {err[:200]}")
+        sichtbar, grund = syntax_detektor_sichtbar()
+        if not sichtbar:
+            errors.append(f"Syntaxdetektor blind: {grund}")
     except Exception as e:
-        errors.append(f"check_syntax Exception: {e}")
+        errors.append(f"Syntaxdetektor-Selbstprobe Exception: {e}")
+
+    # Die Messung selbst muss laufen können (nicht: grün sein).
+    try:
+        funde = syntax_fehler()
+        if not isinstance(funde, list):
+            errors.append("syntax_fehler liefert keine Liste")
+        # Ein Fund ist KEIN Werkzeugfehler: Er wird als Check 2 gemeldet,
+        # geheilt (skript_syntax_heiler.py) und erst dann bewertet.
+        print(f"ℹ️  Syntaxmessung: {len(funde)} Befund(e) im Arbeitsbaum"
+              + (" (maschinell heilbar)" if funde else " – grün"))
+    except Exception as e:
+        errors.append(f"Syntaxmessung Exception: {e}")
 
     # Regression #676: Die Auslieferungs-Kette muss am Artefakt-Upload
     # erkannt werden – nicht am Workflow-Ergebnis. Ein deploy-Job, der vor

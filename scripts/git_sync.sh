@@ -132,6 +132,21 @@
 #    Content-Konflikt = harter Stopp. Belege: Run 37325495772 (#590),
 #    37066812647, 37007043195; Tests in scripts/tests/test_git_sync.py.
 #
+#  NOTBREMSE #864 (25.10.2026) – kein Push mit einem kaputten Skript:
+#    Am 25.10.2026 stand `scripts/redaktions_standard.py` mit einem
+#    IndentationError auf main (Squash-Merge von PR #869 auf eine gewanderte
+#    main). Jeder folgende Bot-Commit – Scorecard, Social, Governance, Gate –
+#    schob den kaputten Stand weiter, weil der gemeinsame Schreibweg nur
+#    Konflikte kannte, nicht Syntax. Der Watchdog sah den Fehler, aber sein
+#    Selbsttest starb daran (Meldung #864).
+#    Diese Notbremse prüft NUR die Dateien, die DIESER Commit anfasst:
+#      · vor dem Commit:  die gestageten `.py`-Dateien
+#      · vor dem Push:    die `.py`-Dateien, die origin/$BRANCH noch nicht hat
+#    Ein bereits kaputter Fremdstand auf main blockiert damit keinen Lauf –
+#    er heilt sich über `scripts/skript_syntax_heiler.py` (Bot-Watchdog).
+#    Ohne python3 wird nur gewarnt: die Notbremse darf die Automatisierung
+#    nicht an einem fehlenden Werkzeug aufhalten (der Push-Lauf prüft ohnehin).
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -989,6 +1004,54 @@ sync_und_push() {
 }
 
 # ========================================================================
+#  NOTBREMSE #864: Syntaxprüfung für die Dateien DIESES Commits
+#    $1 = staged | push
+#  Exit 0 = nichts zu prüfen oder alles gültig · 1 = kaputtes Skript
+# ========================================================================
+syntax_notbremse() {
+  local modus="$1" dateien="" f fehler kaputt=0
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::warning::git_sync.sh: python3 fehlt – Syntax-Notbremse (#864) übersprungen."
+    return 0
+  fi
+  case "$modus" in
+    staged)
+      dateien=$(git diff --cached --name-only --diff-filter=ACMR -- '*.py' || true)
+      ;;
+    push)
+      dateien=$(git diff --name-only "origin/$BRANCH...HEAD" -- '*.py' 2>/dev/null || true)
+      ;;
+  esac
+  [ -n "$dateien" ] || return 0
+
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    [ -f "$f" ] || continue
+    if ! fehler=$(python3 -c '
+import sys
+pfad = sys.argv[1]
+try:
+    with open(pfad, encoding="utf-8") as fh:
+        compile(fh.read(), pfad, "exec")
+except SyntaxError as exc:
+    print(f"{pfad}:{exc.lineno}: {type(exc).__name__}: {exc.msg}")
+    sys.exit(1)
+' "$f"); then
+      echo "::error::git_sync.sh: Syntaxfehler – kein Commit/Push (Notbremse #864): $fehler"
+      kaputt=1
+    fi
+  done <<< "$dateien"
+
+  if [ "$kaputt" = "1" ]; then
+    echo "::error::git_sync.sh: Mindestens ein Skript dieses Commits kompiliert nicht."\
+         " Heilung: python3 scripts/skript_syntax_heiler.py --fix --commit"\
+         " (letzte kompilierbare Fassung, Audit in data/skript_syntax_heilungen.jsonl)."
+    return 1
+  fi
+  return 0
+}
+
+# ========================================================================
 #  b) --push-only: nur rebasen und pushen
 # ========================================================================
 if [ "$PUSH_ONLY" = "1" ]; then
@@ -1013,6 +1076,7 @@ if [ "$PUSH_ONLY" = "1" ]; then
     sync_ok
     exit 0
   fi
+  syntax_notbremse push || exit 1        # #864: kein Push mit kaputtem Skript
   sync_und_push    || exit 1
   echo "git_sync.sh: Push erfolgreich."
   sync_ok
@@ -1047,6 +1111,14 @@ if [ "$DRY_RUN" = "1" ]; then
   git diff --cached --stat
   echo "DRY_RUN – kein Commit, kein Push."
   exit 0
+fi
+
+# #864: Kein Commit, der ein Skript syntaxkaputt macht. Die Staging-Ablage
+# bleibt unangetastet (nur der Index wird geleert) – kein Halb-Zustand.
+if ! syntax_notbremse staged; then
+  git reset -q || true
+  echo "::error::git_sync.sh: Commit abgebrochen (Syntax-Notbremse). Keine Änderung gepusht."
+  exit 1
 fi
 
 git commit -m "$MSG"
