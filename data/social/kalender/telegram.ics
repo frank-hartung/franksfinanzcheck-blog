@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fu
  ellen:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Urlaub sparen: Budget\, Buchung und Kosten i
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
  ushalt:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Energiekosten senken: Smarte Helfer für den 

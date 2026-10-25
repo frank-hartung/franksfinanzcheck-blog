@@ -6,11 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-f
- uellen:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+UID:instagram:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die
+ -kontrolle:nutzen:2026-10-27@franksfinanzcheck.de
+DTSTAMP:20261025T215321Z
 DTSTART:20261027T104500Z
 DTEND:20261027T110000Z
+SUMMARY:Instagram: Haushaltskosten reduzieren: So gewinnst du die Kont
+ rolle (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduz
+ ieren-so-gewinnst-du-die-kontrolle/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-redu
+ zieren-so-gewinnst-du-die-kontrolle/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-f
+ uellen:nutzen:2026-10-29@franksfinanzcheck.de
+DTSTAMP:20261025T215321Z
+DTSTART:20261029T104500Z
+DTEND:20261029T110000Z
 SUMMARY:Instagram: Urlaub sparen: Budget\, Buchung und Kosten im Blick
   (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -22,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-h
- aushalt:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
-DTSTART:20261029T104500Z
-DTEND:20261029T110000Z
+ aushalt:nutzen:2026-10-30@franksfinanzcheck.de
+DTSTAMP:20261025T215321Z
+DTSTART:20261030T104500Z
+DTEND:20261030T110000Z
 SUMMARY:Instagram: Energiekosten senken: Smarte Helfer für den Haushal
  t (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -37,10 +52,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-f
- uer-schritt:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
-DTSTART:20261030T104500Z
-DTEND:20261030T110000Z
+ uer-schritt:nutzen:2026-10-31@franksfinanzcheck.de
+DTSTAMP:20261025T215321Z
+DTSTART:20261031T104500Z
+DTEND:20261031T110000Z
 SUMMARY:Instagram: Dein Weg zu geringeren Monatskosten: Schritt für Sc
  hritt (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -52,10 +67,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixko
- sten-falle:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
-DTSTART:20261031T104500Z
-DTEND:20261031T110000Z
+ sten-falle:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261025T215321Z
+DTSTART:20261101T104500Z
+DTEND:20261101T110000Z
 SUMMARY:Instagram: VPN Zuhause: Schutzschild oder unnötige Fixkosten-F
  alle? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -66,24 +81,9 @@ URL:https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzsc
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die
- -kontrolle:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
-DTSTART:20261101T104500Z
-DTEND:20261101T110000Z
-SUMMARY:Instagram: Haushaltskosten reduzieren: So gewinnst du die Kont
- rolle (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduz
- ieren-so-gewinnst-du-die-kontrolle/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-redu
- zieren-so-gewinnst-du-die-kontrolle/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:instagram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-so
  fort-senken:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261103T104500Z
 DTEND:20261103T110000Z
 SUMMARY:Instagram: Kleine Energiespar‑Tricks: Deine Kosten sofort senk
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-05@fr
  anksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261105T104500Z
 DTEND:20261105T110000Z
 SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheides
  t-du-richtig:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261106T104500Z
 DTEND:20261106T110000Z
 SUMMARY:Instagram: Wärmepumpe vs. Gasheizung 2026: So entscheidest du 
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
  utzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261107T104500Z
 DTEND:20261107T110000Z
 SUMMARY:Instagram: Geld abheben im Ausland: Wo die Gebühren wirklich e
@@ -143,7 +143,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-i
  m-ueberblick:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261025T182715Z
+DTSTAMP:20261025T215321Z
 DTSTART:20261108T104500Z
 DTEND:20261108T110000Z
 SUMMARY:Instagram: Stromkosten senken: Clevere Haushaltsgeräte im Über
