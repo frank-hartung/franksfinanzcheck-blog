@@ -55,9 +55,11 @@ tatsächlich passiert.
 Aktivierungsstatus und Host-Filter gegen die Cloudflare-API;
 `npm run edge:freigabe:apply` stellt sie idempotent her, ohne ein bestehendes
 `Full (strict)` je herabzustufen (`scripts/cloudflare_edge_freigabe.py`,
-Sollstand wird aus der Tabelle oben gelesen – eine Quelle). Unmittelbar nach dem
-Proxy-Start aktualisiert `npm run edge:b7:apply` idempotent die
-Datenschutzerklärung (Runbook B7).
+Sollstand wird aus der Tabelle oben gelesen – eine Quelle). Der Apply schreibt
+in der Reihenfolge Regel → SSL → DNS, vergleicht danach API-Ist und Soll und
+aktualisiert erst dann unmittelbar nach dem Proxy-Start idempotent die
+Datenschutzerklärung (Runbook B7). `npm run edge:b7` prüft diesen Textstand
+jederzeit separat; ein offener B7 blockiert den finalen Live-Abschluss.
 
 **Live-Messung mit Klassifikation:** `npm run header:check:live` (bzw. der
 tägliche Job „Live-Messung“ der Sicherheits-Wache). Die Wache liefert vier
@@ -142,9 +144,12 @@ und Prüfung stehen in
 **Environments:** Produktive Worker-Deploys gehören nach
 `cloudflare-produktion`, mit Freigabe durch den Inhaber und Beschränkung auf
 `main`. Eigener Deploy-Zugang: `CF_WORKERS_DEPLOY_TOKEN`; der Workers-AI-Zugang
-`CLOUDFLARE_API_TOKEN` ist ausdrücklich kein Ersatz. Ohne Ressourcen-ID oder
-Zugang ist ein grüner Plan mit übersprungenem Deploy **kein** erfolgreicher
-Deploy. Siehe Runbook A4 und D2 sowie `.github/workflows/worker-deploy.yml`.
+`CLOUDFLARE_API_TOKEN` ist ausdrücklich kein Ersatz. Nach der Freigabe löst
+`scripts/worker_ressourcen.py` die bereits produktiven KV-/D1-Bindungen über
+denselben Zugang auf. Eine fehlende, unlesbare oder mehrdeutige Bindung bricht
+vor dem Deploy rot ab; ein grüner Plan mit übersprungenem Deploy ist **kein**
+erfolgreicher Deploy. Siehe Runbook A4 und D2 sowie
+`.github/workflows/worker-deploy.yml`.
 
 Die Betriebs-Wache prüft die Vollständigkeit dieser Vorlage **auch offline**.
 Damit fällt eine verlorene Einrichtungsanleitung schon im Quellseiten-Lauf

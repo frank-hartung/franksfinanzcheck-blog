@@ -67,7 +67,6 @@ DECKEL_STANDARD = 100
 FEEDBACK_STANDARD = 200
 WARNSCHWELLE = 0.8  # ab 80 % Auslastung wird gemeldet (Handlungsspielraum)
 TURNSTILE_ZUSTAENDE = ("aktiv", "wartet", "inaktiv")
-KV_ID_RE = re.compile(r"^[0-9a-f]{32}$")
 
 
 PAUSEN = (2.0, 8.0, 30.0)
@@ -180,9 +179,11 @@ def diagnose_unvollstaendiges_bild(
 ) -> list[str]:
     """Trennt deterministisch „veralteter Deploy“ von „falscher Leseschlüssel“ (WF-E813 / #815).
 
-    Sicherheitsregel: NIEMALS Rohwerte aus `stand` oder `kv_namespace_id` in den
-    Bericht kopieren (Geheimnis- und Kanalhygiene). Geprüft wird ausschließlich
-    in Python gegen den vertrauenswürdigen Repo-Wert `repo_build` und das 32-Hex-Muster.
+    Sicherheitsregel: NIEMALS Rohwerte aus `stand` oder dem optionalen
+    Altparameter `kv_namespace_id` in den Bericht kopieren. Maßgeblich ist der
+    vertrauenswürdige Repo-Build. Eine kopierte GitHub-Variable ist seit der
+    automatischen Bindungsauflösung kein Deploy-Beweis und keine Voraussetzung
+    mehr; der Altparameter bleibt nur für Aufrufkompatibilität bestehen.
     """
     if not isinstance(stand, dict):
         return []
@@ -194,31 +195,14 @@ def diagnose_unvollstaendiges_bild(
     soll = (repo_build or "").strip()
 
     if not bau:
-        if kv_namespace_id is not None:
-            kvid = kv_namespace_id.strip()
-            if not kvid:
-                return [
-                    "Deploy-Diagnose: Build-Stempel (`bau`) fehlt in `/healthz` UND "
-                    "Repository-Variable `KV_NAMESPACE_ID_ABO` ist in GitHub leer – "
-                    "`worker-deploy.yml` hat den Deploy von `newsletter-worker` deshalb "
-                    "übersprungen. Zuerst `KV_NAMESPACE_ID_ABO` als Repository-Variable "
-                    "(Settings → Secrets and variables → Actions → Tab „Variables“, "
-                    "nicht Secrets) setzen und `newsletter-worker` von `main` deployen "
-                    "(docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
-                ]
-            if not KV_ID_RE.match(kvid):
-                return [
-                    "Deploy-Diagnose: Build-Stempel (`bau`) fehlt in `/healthz` UND "
-                    "Repository-Variable `KV_NAMESPACE_ID_ABO` hat kein gültiges "
-                    "32-Hex-Format – `worker-deploy.yml` konnte `newsletter-worker` "
-                    "nicht deployen (docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
-                ]
         if soll:
             return [
                 f"Deploy-Diagnose: Build-Stempel (`bau`) fehlt in `/healthz` – live "
                 f"antwortet noch ein veralteter Worker-Deploy vor Repo-Stand `{soll}`. "
                 "Zuerst Workflow „Cloudflare-Worker deployen“ für `newsletter-worker` "
-                "auf `main` ausführen, nicht den Leseschlüssel auf Verdacht ändern "
+                "auf `main` ausführen, nicht den Leseschlüssel auf Verdacht ändern. "
+                "Der Deploy übernimmt eine fehlende KV-ID lesend aus der bestehenden "
+                "ABO-Bindung; keinen neuen Namespace ohne Migrationsplan anlegen "
                 "(docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
             ]
         return []
@@ -556,7 +540,6 @@ def main(argv: list[str] | None = None) -> int:
             (os.environ.get("NEWSLETTER_WORKER_BASE") or "").rstrip("/"),
             os.environ.get("NEWSLETTER_WORKER_EXPORT_KEY") or "",
             schreibschluessel=os.environ.get("NEWSLETTER_WORKER_WRITE_KEY") or "",
-            kv_namespace_id=os.environ.get("KV_NAMESPACE_ID_ABO"),
         )
     if args.report:
         Path(args.report).write_text(bericht, encoding="utf-8")
@@ -689,7 +672,8 @@ def selftest() -> int:
         holen=lambda *_: {"ok": True, "ts": "2026-10-24T10:00:00Z"},
         repo=repo_mit_build, pausen=(),
     )
-    assert "KV_NAMESPACE_ID_ABO" in bericht_kv, "Fehlende KV-Variable nicht diagnostiziert"
+    assert "bestehenden ABO-Bindung" in bericht_kv, "Automatische Bindungsauflösung fehlt im Deploy-Rat"
+    assert "keinen neuen Namespace" in bericht_kv, "Datenschutz gegen Ersatz-Namespace fehlt"
     _, bericht_key, _ = netz_pruefen(
         "https://abos.franksfinanzcheck.de", "attrappe",
         kv_namespace_id="a" * 32,

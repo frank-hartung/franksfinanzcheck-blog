@@ -405,6 +405,11 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # erlaubt dort ausschliesslich /zones-Pfade – kein /ai/, kein Modell-
     # Endpunkt, kein zweiter Anbieter.
     Path("scripts/cloudflare_edge_freigabe.py"),
+    # Kein Modellaufruf: bestehende KV-/D1-Bindungen fuer den Worker-Deploy
+    # lesen (WF-E813 / #815). Ausgleich: scripts/tests/test_worker_ressourcen.py
+    # erlaubt ausschliesslich api.cloudflare.com/client/v4/accounts/<konto>/
+    # workers/scripts/<bekannter-worker>/settings – kein /ai/, kein Modellhost.
+    Path("scripts/worker_ressourcen.py"),
     # Kein Modellaufruf: Backup-Frische liest nur GitHub-Releases (operative
     # Luecke zu E1–E8; WF-9E5A-Highend 22.10.2026). Ausgleich: TransportVertrag
     # erlaubt dort ausschliesslich api.github.com/repos/…/releases.

@@ -9,7 +9,9 @@
 #
 #  Lösung: Deploy NUR per CI (.github/workflows/worker-deploy.yml) aus dem
 #  Repo. Die Ressourcen-IDs (KV-Namespace, D1-Datenbank) sind keine
-#  Geheimnisse und kommen aus Repository-Variablen; dieses Skript setzt sie
+#  Geheimnisse und kommen aus Repository-Variablen ODER werden erst im
+#  freigabepflichtigen Deploy-Job durch worker_ressourcen.py aus der
+#  bestehenden Produktionsbindung aufgelöst; dieses Skript setzt sie
 #  ein und verweigert den Deploy, wenn
 #    · noch ein Platzhalter übrig ist,
 #    · eine ID nicht das erwartete Format hat,
@@ -62,6 +64,23 @@ WORKER: dict[str, dict] = {
         "test": ["node", "--test", "test/worker.test.mjs"],
         "nur_manuell": True,
     },
+}
+
+# Änderungen an der Deploy-Kette selbst müssen beide automatischen Worker
+# erneut ausrollen. Nur so bleibt der produktive Stand nachweisbar derselbe,
+# dessen Vorbereitung und Ressourcen-Auflösung gerade geändert wurde.
+DEPLOY_DATEIEN = {
+    ".github/workflows/worker-deploy.yml",
+    "scripts/worker_deploy_vorbereiten.py",
+    "scripts/worker_ressourcen.py",
+}
+
+# Nur für die REINE Strukturprüfung im Planungs-Job. Diese Werte verlassen
+# `pruefe()` nicht und werden niemals geschrieben oder deployt. Die echten IDs
+# löst worker_ressourcen.py erst nach der Environment-Freigabe auf.
+PLAN_IDS = {
+    "KV_NAMESPACE_ID_ABO": "0" * 32,
+    "D1_DATABASE_ID": "00000000-0000-0000-0000-000000000000",
 }
 
 PLATZHALTER_RE = re.compile(r"HIER-DIE-ID|EINTRAGEN|PLATZHALTER|<[A-Z_]+>", re.IGNORECASE)
@@ -121,15 +140,15 @@ def vorbereiten(name: str, umgebung: dict | None = None, root: Path = ROOT) -> i
 def plan_auswerten(
     umgebung: dict | None = None, root: Path = ROOT
 ) -> tuple[int, list[str], list[str], str]:
-    """Plant den Deploy und verhindert Schein-Grün bei workflow_dispatch (WF-E813 / #815).
+    """Plant Auswahl und Quellstruktur, niemals das Schicksal produktiver Daten.
 
     Rückgabe: (exit_code, bereit_liste, annotationen, step_summary_markdown).
-    - Bei `workflow_dispatch`: hat der Betreiber ausdrücklich einen Worker zum
-      Deploy gewählt und fehlt dessen Voraussetzung (z. B. `KV_NAMESPACE_ID_ABO`),
-      ist das `Exit 1` + `::error::` – niemals ein still übersprungener grüner Lauf!
-    - Bei `push`: bleibt `Exit 0` (damit kein Duplikat-Alarm neben der täglichen
-      Sicherheits-Wache entsteht), schreibt aber eine unübersehbare `::warning::`
-      und eine Step-Summary-Tabelle mit dem exakten Einrichtungs-Ort.
+    Der Planungs-Job läuft bewusst ohne Environment und ohne Cloudflare-
+    Zugang. Deshalb prüft er hier nur Worker-Auswahl und statische Konfiguration.
+    Die echte KV-/D1-ID wird später im freigabepflichtigen Deploy-Job aus einer
+    Repository-Variable ODER der bereits produktiven Worker-Bindung aufgelöst.
+    Fehlt beides oder ist die Bindung uneindeutig, bricht DER DEPLOY rot ab –
+    niemals wird der Worker still aus der Matrix weggelassen (WF-E813/#815).
     """
     umgebung = os.environ if umgebung is None else umgebung
     ereignis = (umgebung.get("EREIGNIS") or "").strip()
@@ -153,8 +172,8 @@ def plan_auswerten(
             if cfg["nur_manuell"]:
                 continue
             praefix = cfg["verzeichnis"].rstrip("/") + "/"
-            if alle or any(p.startswith(praefix) for p in geaendert) \
-                    or ".github/workflows/worker-deploy.yml" in geaendert:
+            if (alle or any(p.startswith(praefix) for p in geaendert)
+                    or any(p in DEPLOY_DATEIEN for p in geaendert)):
                 kandidaten.append(name)
 
     if not kandidaten:
@@ -164,33 +183,41 @@ def plan_auswerten(
     bereit: list[str] = []
     blockiert: list[tuple[str, list[str]]] = []
     for name in kandidaten:
-        ok, gruende, _ = pruefe(name, umgebung, root)
+        # Ressourcen-IDs gehören nicht in diesen zugangslosen Planungs-Job.
+        # Gültige Attrappen lassen `pruefe()` ausschließlich die übrige
+        # Struktur prüfen; `pruefe()` schreibt nachweislich nichts.
+        struktur_umgebung = dict(umgebung)
+        for variable, _muster in WORKER[name]["ersatz"].values():
+            struktur_umgebung[variable] = PLAN_IDS[variable]
+        ok, gruende, _ = pruefe(name, struktur_umgebung, root)
         if ok:
             bereit.append(name)
-            zeilen.append(f"- ✅ **{name}**: bereit zum Deploy (Freigabe in `cloudflare-produktion`).")
+            zeilen.append(
+                f"- ✅ **{name}**: Deploy vorgemerkt; Ressource wird nach Freigabe in "
+                "`cloudflare-produktion` aus Variable oder bestehender Produktions-Bindung aufgelöst."
+            )
         else:
             blockiert.append((name, gruende))
-            stufe = "error" if manuell else "warning"
-            for g in gruende:
-                annotationen.append(
-                    f"::{stufe}::{name} wird NICHT deployt: {g}. "
-                    "Als Repository-Variable unter Settings → Secrets and variables → Actions → "
-                    "Tab „Variables“ (nicht Secrets, nicht nur im Environment) hinterlegen."
-                )
-            zeilen.append(f"- {'❌' if manuell else '⚠️'} **{name}**: **NICHT deployt** – "
-                          + "; ".join(gruende) + ".")
+            for grund in gruende:
+                annotationen.append(f"::error::{name}: Ungültige Deploy-Konfiguration: {grund}.")
+            zeilen.append(f"- ❌ **{name}**: **NICHT deployfähig** – " + "; ".join(gruende) + ".")
 
     if blockiert:
         zeilen += [
             "",
-            "### Einrichtungs-Hinweis (kein Deploy-Nachweis ohne diese Variable)",
-            "- Ort in GitHub: **Settings → Secrets and variables → Actions → Tab „Variables“ → New repository variable**",
-            "- Wichtig: **Repository-Variable** anlegen (nicht unter *Secrets* und nicht ausschließlich im Environment `cloudflare-produktion`, da der Planungs-Job vor dem Environment läuft).",
-            "- Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt D2.",
+            "### Fail-closed statt Schein-Grün",
+            "Die fehlerhafte Quellkonfiguration muss behoben werden. Der Deploy wird nicht "
+            "übersprungen und als Erfolg dargestellt. Runbook: "
+            "`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt D2.",
         ]
-        if manuell:
-            return 1, [], annotationen, "\n".join(zeilen)
+        return 1, [], annotationen, "\n".join(zeilen)
 
+    zeilen += [
+        "",
+        "**Datensicherheit:** Der Deploy liest fehlende IDs ausschließlich aus der "
+        "bereits gebundenen Produktionsressource. Er legt keinen Ersatzspeicher an "
+        "und bricht bei fehlender oder mehrdeutiger Bindung ab.",
+    ]
     return 0, bereit, annotationen, "\n".join(zeilen)
 
 
@@ -279,16 +306,17 @@ def _selftest() -> int:
         ok, _, text = pruefe("newsletter-worker", {"KV_NAMESPACE_ID_ABO": "a" * 32}, t)
         if not ok or "a" * 32 not in text:
             fehler.append("gültige ID nicht eingesetzt")
-        # WF-E813 / #815: workflow_dispatch ohne Variable muss Exit 1 liefern (kein Schein-Grün!).
+        # WF-E813 / #815, zweite Stufe: Eine fehlende kopierte Variable darf
+        # den vorhandenen Produktions-Worker nicht mehr aus der Matrix lassen.
         code_manuell, bereit_m, _, summary_m = plan_auswerten(
             {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker"}, t)
-        if code_manuell != 1 or bereit_m != [] or "Variables" not in summary_m:
-            fehler.append("manueller Deploy ohne Variable lieferte kein fail-closed Exit 1")
-        # Push ohne Variable bleibt Exit 0 mit klarer Warnung in der Summary.
-        code_push, bereit_p, ann_p, _ = plan_auswerten(
+        if (code_manuell != 0 or bereit_m != ["newsletter-worker"]
+                or "bestehender Produktions-Bindung" not in summary_m):
+            fehler.append("manueller Deploy ohne Variable wurde weiterhin übersprungen")
+        code_push, bereit_p, _, summary_p = plan_auswerten(
             {"EREIGNIS": "push", "GEAENDERT": "newsletter-worker/src/index.js"}, t)
-        if code_push != 0 or bereit_p != [] or not any("::warning::" in a for a in ann_p):
-            fehler.append("Push-Plan ohne Variable erzeugte keine ::warning::")
+        if code_push != 0 or bereit_p != ["newsletter-worker"] or "keinen Ersatzspeicher" not in summary_p:
+            fehler.append("Push-Plan ohne Variable ließ den Produktions-Deploy weiterhin aus")
         # Live-Deploy-Nachweis: verzögerte Edge-Propagation heilt, falscher Stempel scheitert.
         antworten = iter(["alt", "ff-test-1"])
         code_nw, _ = deploy_nachweis(
@@ -306,6 +334,10 @@ def _selftest() -> int:
         ok, _, _ = pruefe("newsletter-worker", {}, t)
         if ok:
             fehler.append("workers_dev = true akzeptiert")
+        code_defekt, bereit_defekt, annotationen_defekt, _ = plan_auswerten(
+            {"EREIGNIS": "push", "GEAENDERT": "newsletter-worker/src/index.js"}, t)
+        if code_defekt != 1 or bereit_defekt or not any("::error::" in a for a in annotationen_defekt):
+            fehler.append("defekte Push-Konfiguration wurde weiterhin grün übersprungen")
         (t / "newsletter-worker" / "wrangler.toml").write_text(
             'name = "x"\n# workers_dev = false\n', encoding="utf-8")
         ok, _, _ = pruefe("newsletter-worker", {}, t)

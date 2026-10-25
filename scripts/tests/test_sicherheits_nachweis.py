@@ -29,9 +29,17 @@ import alert_issue_identity as identitaet
 
 def gute_messungen():
     # Genau wie main() gehört der Markdown-Bericht auch in die JSON-Datei.
-    _, bericht, kopf = header.netz_pruefen(
-        holen=lambda *_: (200, {**header.GUTE_KOPFZEILEN, **header.PROXY_KENNUNG}),
-        pausen=(), schlaf=lambda _: None)
+    # Die gute Ausgangslage enthält ausdrücklich auch einen abgeschlossenen
+    # B7-Text; so testen Fachfälle nicht versehentlich mit einem Abschlussblocker.
+    with tempfile.TemporaryDirectory() as tmp:
+        wurzel = Path(tmp)
+        datenschutz = wurzel / "content" / "datenschutz" / "index.md"
+        datenschutz.parent.mkdir(parents=True)
+        datenschutz.write_text("Cloudflare-Proxy und Zugriffsdaten sind beschrieben.", encoding="utf-8")
+        with patch.object(header, "WURZEL", wurzel):
+            _, bericht, kopf = header.netz_pruefen(
+                holen=lambda *_: (200, {**header.GUTE_KOPFZEILEN, **header.PROXY_KENNUNG}),
+                pausen=(), schlaf=lambda _: None)
     kopf["bericht"] = bericht
     stand = {"ok": True, "kv": "ok", "turnstile": "inaktiv", "schluesselrollen": "getrennt",
              "budget": {"anmeldung_heute": 3, "anmeldung_max": 100, "feedback_max": 200}, "exporte": []}
@@ -69,6 +77,7 @@ class Messvertrag(unittest.TestCase):
         for stand in (None, [], {}, {**gut, "klasse": "OFFLINE"}, {**gut, "klasse": None},
                       {**gut, "exit": True}, {**gut, "gemessen": True}, {**gut, "gemessen": 0},
                       {**gut, "bericht": ""}, {**gut, "warnungen": "alles ok"},
+                      {**gut, "abschluss_blocker": "offen"}, {**gut, "abschluss_blocker": [""]},
                       {**gut, "fehlend": ["offener Befund"]}, {**gut, "stoerung": ["offline"]},
                       {**gut, "klasse": "BEFUND", "exit": 1},
                       {**gut, "klasse": "STOERUNG", "exit": 2},
@@ -138,6 +147,15 @@ class Messvertrag(unittest.TestCase):
         ok2, grund2 = nachweis.live_pruefen(kopf_rot, {})
         self.assertFalse(ok2)
         self.assertIn("Messklasse", grund2)
+
+    def test_815_datenschutz_b7_blockiert_abschluss_trotz_technisch_gruener_header(self):
+        kopf, betrieb = gute_messungen()
+        kopf["abschluss_blocker"] = ["Datenschutz-Folge B7 offen: Vor-Proxy-Text"]
+        nachweis.pruefe_messung(kopf, "header", "0")
+        ok, grund = nachweis.live_pruefen(kopf, betrieb)
+        self.assertFalse(ok)
+        self.assertIn("Abschlussblocker", grund)
+        self.assertIn("Datenschutz-Folge B7 offen", grund)
 
     def test_815_frisch_deployter_worker_im_zustand_wartet_erlaubt_live_nachweis(self):
         kopf, _ = gute_messungen()

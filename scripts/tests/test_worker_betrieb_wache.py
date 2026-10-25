@@ -182,13 +182,15 @@ class RepoUndLiveVertrag(unittest.TestCase):
         gift_bau = "GIFT_BAU_AUS_NETZ"
         gift_kvid = "GIFT_KVID_UNGUELTIG"
 
-        # Fall 1: Kein bau-Stempel + KV_NAMESPACE_ID_ABO leer -> übersprungener Deploy
+        # Fall 1: Kein bau-Stempel -> veralteter Deploy; die bestehende ABO-
+        # Bindung wird automatisch übernommen, kein Kopierzwang mehr.
         code, bericht, daten = gate.netz_pruefen(
             BASE, "test-only", kv_namespace_id="",
             holen=lambda *_: {"ok": True, "ts": GUT["ts"]}, repo=repo_b, pausen=())
         self.assertEqual(code, 2)
-        self.assertIn("KV_NAMESPACE_ID_ABO", bericht)
-        self.assertIn("worker-deploy.yml", bericht)
+        self.assertIn("bestehenden ABO-Bindung", bericht)
+        self.assertIn("keinen neuen Namespace", bericht)
+        self.assertNotIn("übersprungen", bericht)
 
         # Fall 2: Fremder/alter bau-Stempel -> veralteter Deploy, KEIN Rohwert im Bericht
         code, bericht, daten = gate.netz_pruefen(
