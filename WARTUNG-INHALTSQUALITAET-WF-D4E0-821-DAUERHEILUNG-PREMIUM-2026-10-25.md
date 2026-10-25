@@ -197,3 +197,43 @@ passendes `/go/`-Ziel. Danach `python3 scripts/engine_capacity.py` – erst wenn
 `frei disponierbar: AUTO` steigt, ist der Nachschub angekommen.
 
 **Vertrag:** C44 („Der Vorrat endet nicht, er läuft aus").
+
+---
+
+## 6. Nachtrag (25.10.2026, nach dem Merge von #861): der RS5-Befund log über sich selbst
+
+Der verbliebene Pool-Blocker meldete:
+
+> `RS5: 9 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme`
+
+Nachgemessen an derselben Datei waren es **5**. Vier der neun „Zahlen" waren
+Artefakte des Detektors, keine Aussagen des Artikels:
+
+| gemeldeter „Fund" | was er wirklich war |
+|---|---|
+| „…Pauschale Aussagen zu den Preisen im **Jahr 2026**…" | Kalenderjahr |
+| „…kein Spartrend **für 2026**." | Kalenderjahr |
+| „Oktober 2026**." | Satz-Fragment, das ein Fett-Marker zerschnitten hatte |
+| „…zu **Issue #763**…" | repo-interne Vorgangsnummer |
+
+Dieselbe Fehlerklasse wie in Abschnitt 1.3, nur eine Ebene tiefer: **nicht der
+Lauf log, sondern der Zähler.** Ein Befund, der sich selbst zu hoch zählt,
+schickt die Redaktion in die falsche Baustelle – und macht einen Artikel
+schlechter, als er ist.
+
+Geheilt in `scripts/redaktions_standard._reserve_numeric_claim_findings`:
+
+* Fett-/Kursiv-Marker werden **vor** der Satztrennung entfernt (sie haben den
+  Satz an „16." zerschnitten),
+* `#<Zahl>` (Issue-/PR-Referenz) zählt nicht als Zahlenbehauptung,
+* eine reine **Kalenderjahreszahl** (1900–2099) ist keine Zahlenbehauptung –
+  erst wenn nach ihrem Entfernen eine Zahl mit Einheit übrig bleibt, wird der
+  Satz bewertet („Für 2026 rechnet die Bank mit 250 € Jahresgebühr" bleibt ein
+  Befund).
+
+**Die Schutzrichtung ist unverändert hart.** Der Kandidat bleibt blockiert –
+jetzt mit der Wahrheit (5 statt 9), und er bleibt es zu Recht: „Reichen 120 €
+nicht, ändere den Plan." und „Drei Monate reichen zum Prüfen nicht." tragen
+weiterhin unbelegte Zahlen und Fristen. Fünf neue Regressionstests in
+`scripts/tests/test_zahlen_prompt_vertrag.py` verriegeln beide Richtungen
+(Artefakt bleibt still, echte Zahl bleibt rot).

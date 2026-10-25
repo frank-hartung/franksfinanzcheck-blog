@@ -358,6 +358,14 @@ def _reserve_numeric_claim_findings(body):
     link_re = re.compile(r"\[([^\]]+)\]\(\s*([^)\s]+)[^)]*\)", re.I)
     text = re.sub(r"```.*?```", " ", body or "", flags=re.S)
     text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
+    # MESSFEHLER, nicht Defekt (WF-D4E0/#821, 25.10.2026): Formatierungs- und
+    # Repo-Marker sind keine Zahlenbehauptungen. Vorher zerschnitt ein
+    # Fett-Marker einen Satz („… **16. Oktober 2026**." → Fragment „Oktober
+    # 2026**.") und eine Issue-Nummer (`#763`) wurde als harte Zahl gezählt.
+    # Am 25.10.2026 trug der blockierte Pool-Kandidat dadurch „RS5: 9 …“,
+    # obwohl nur 5 Sätze echte Zahlen tragen – der Befund log über sich selbst.
+    text = re.sub(r"[*_]{1,3}", "", text)
+    text = re.sub(r"(?<![\w&])#\d+", " ", text)
     # Strip internal links so year-bearing slugs are not claims. External
     # Markdown links leave a marker that proves sentence-level evidence.
     def _link_marker(match):
@@ -387,10 +395,17 @@ def _reserve_numeric_claim_findings(body):
     model_marker = re.compile(
         r"\b(?:rechenbeispiel|modellrechnung|modellfall|annahme|annahmen|"
         r"musterrechnung|beispielrechnung|angenommen|unterstellen wir)\b", re.I)
+    # Eine Kalenderjahreszahl („im Jahr 2026", „für 2026") ist keine
+    # Zahlenbehauptung – sie nennt keinen Betrag, keine Menge, keinen Preis.
+    # Erst wenn nach dem Entfernen der Jahreszahlen noch eine Zahl mit Einheit
+    # übrig bleibt, wird der Satz bewertet.
+    jahr_re = re.compile(r"(?<!\w)(?:19|20)\d{2}(?!\w)")
     findings = []
     for sentence in sentences:
         sentence = sentence.strip()
         if not numeric_claim.search(sentence):
+            continue
+        if not numeric_claim.search(jahr_re.sub(" ", sentence)):
             continue
         if "QUELLENLINK" in sentence:
             continue
