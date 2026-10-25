@@ -107,8 +107,14 @@ jobs:
       - name: Quellen prüfen (Wortlaut, Profile, Namensflächen)
         run: python3 scripts/entity_marken_gate.py --source-only
 
+      # Bau ausschließlich über die gemeinsame Action (Vertrag
+      # scripts/hugo_build_vertrag.py H6 – sichtbare Fehlerausgabe statt
+      # stillem Build-Tod; Runbook: docs/ANLEITUNG-HUGO-BUILD.md).
       - name: Site bauen
-        run: hugo --minify --cleanDestinationDir --destination public
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --cleanDestinationDir --destination public"
+          label: "Entity-Gate-Build"
 
       - name: Build prüfen (JSON-LD-Parität, Entity-Box, rel=me)
         run: python3 scripts/entity_marken_gate.py --public public

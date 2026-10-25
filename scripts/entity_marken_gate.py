@@ -116,8 +116,8 @@ def _lies(root: Path, rel: str) -> str | None:
 
 def _norm(s: str) -> str:
     """HTML → vergleichbarer Text (nur für Sicht-Text-Proben im Build)."""
-    s = re.sub(r"<script[\s\S]*?</script>", " ", s)
-    s = re.sub(r"<style[\s\S]*?</style>", " ", s)
+    s = re.sub(r"<script[\s\S]*?</script>", " ", s, flags=re.IGNORECASE)
+    s = re.sub(r"<style[\s\S]*?</style>", " ", s, flags=re.IGNORECASE)
     s = re.sub(r"<[^>]+>", " ", s)
     s = _html.unescape(s).replace("\xa0", " ")
     return re.sub(r"\s+", " ", s).strip()

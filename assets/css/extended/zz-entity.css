@@ -63,3 +63,13 @@
   gap: 14px;
   padding: 10px 0 2px;
 }
+/* Mobile Startseiten-Reihenfolge (LCP-Schutz): <main> ist dort eine
+   Flex-Spalte mit fester order-Leiter (Karten 1, Hero 2, Pinterest-CTA 3,
+   Pagination 4, Saison 5, Kompass 6, Themenwelten 7 – zzz-agency-polish.css).
+   Ohne eigenen order-Wert (Standard 0) rutschte die Entity-Box VOR die
+   Artikel-Karten und drückte das LCP-Cover aus dem ersten Viewport
+   (Playwright: e2e/saisonale-startseite.spec.mjs, 390×844).
+   order: 8 = hinter allem – die Box ist der Abschluss der Startseite. */
+@media (max-width: 768px) {
+  main.main:has(.home-info) > section.ff-entity { order: 8; }
+}
