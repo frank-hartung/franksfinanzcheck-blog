@@ -1074,6 +1074,19 @@ history:
     #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
   ref: '117496395618697602'
   ai: false
+- posted_at: '2026-10-25T15:58:10.619491+01:00'
+  channel: mastodon
+  slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  title: '50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken'
+  angle: zitat
+  url: https://mastodon.social/@FranksFinanzcheck/117502135144875649
+  ok: true
+  text: "„Beherrsche dein Budget mit der 50‑30‑20‑Regel.“  \n50 % für notwendige Ausgaben,\
+    \ 30 % für Wünsche, 20 % für Sparen – automatisiere den Sparanteil sofort nach\
+    \ Gehaltseingang. \U0001F4A1  \nhttps://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#Frugalismus #Geldsparen #BudgetPlanen #503020Regel"
+  ref: '117502135144875649'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1099,4 +1112,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-25T10:54:23.244518+01:00'
+updated_at: '2026-10-25T15:58:14.825965+01:00'

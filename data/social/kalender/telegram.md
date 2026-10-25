@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 25.10.2026 10:54 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.10.2026 15:58 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -13,14 +13,14 @@
 ## Kommende Beiträge
 
 ### So, 25. Oktober 2026
-- **18:00** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
+- **18:00** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 ### So, 01. November 2026
 - **07:00** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
 ### So, 08. November 2026
-- **07:00** ⏳ Smart Home: So prüfst du echte Stromersparnis – Smarte — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/
+- **07:00** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/
 
 ## Zuletzt veröffentlicht
 
