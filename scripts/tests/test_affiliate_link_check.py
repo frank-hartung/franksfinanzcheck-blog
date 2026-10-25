@@ -102,6 +102,140 @@ class IntentBeforePillarTests(unittest.TestCase):
             ("check24", "dsl-anbieterwechsel&cat=4", "DSL-Tarifvergleich"),
         )
 
+    def test_live_vacation_budget_article_is_green_and_matches_the_intent_contract(self):
+        post = next(
+            post for post in checker.load_posts()
+            if post["slug"] == "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
+        )
+
+        self.assertEqual(
+            checker.expected_target(post)[:2],
+            ("check24", "pauschalreisen-vergleich&cat=9"),
+        )
+        self.assertFalse([
+            problem for problem in checker.check_post(post)
+            if problem["severity"] == "error"
+        ])
+
+    def test_new_vacation_budget_article_in_mietwagen_pillar_uses_pauschalreisen(self):
+        post = article(
+            "2026-10-19-urlaubskasse-clever-aufbessern",
+            "Urlaubskasse clever aufbessern",
+            "👉 **Jetzt vergleichen:** [**Pauschalreisen vergleichen**](/go/reisen/)",
+            pillar="mietwagen",
+        )
+
+        self.assertEqual(
+            checker.expected_target(post),
+            ("check24", "pauschalreisen-vergleich&cat=9", "Pauschalreisen"),
+        )
+        self.assertFalse([
+            problem for problem in checker.check_post(post)
+            if problem["severity"] == "error"
+        ])
+
+    def test_mietwagen_pillar_family_accepts_reisen_for_general_vacation_but_blocks_strict_mietwagen_mismatch(self):
+        general_vacation = article(
+            "sommerreise-planen-tipps",
+            "Sommerreise planen: So behältst du die Kosten im Griff",
+            "[Jetzt Reiseangebote vergleichen](/go/reisen/)",
+            pillar="mietwagen",
+        )
+        findings = checker.check_post(general_vacation)
+        self.assertFalse([p for p in findings if p["severity"] == "error"])
+        self.assertTrue(any(
+            p["severity"] == "info" and "Produktfamilie des Pillars „mietwagen“" in p["msg"]
+            for p in findings
+        ))
+
+        strict_mietwagen = article(
+            "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
+            "Mietwagen-Fallen im Urlaub vermeiden",
+            "[Jetzt Reiseangebote vergleichen](/go/reisen/)",
+            pillar="mietwagen",
+        )
+        self.assertTrue(any(
+            "mietwagen-preisvergleich&cat=10" in p["msg"]
+            for p in checker.check_post(strict_mietwagen)
+            if p["severity"] == "error"
+        ))
+
+    def test_konto_karten_explicit_product_routes_and_pillar_family(self):
+        kredit_post = article(
+            "2026-10-20-ratenkredit-zinsen-vergleichen",
+            "Ratenkredit Zinsen vergleichen: Worauf du achten musst",
+            "[Jetzt Ratenkredit vergleichen](/go/kredit/)",
+            pillar="konto-karten",
+        )
+        self.assertEqual(
+            checker.expected_target(kredit_post),
+            ("check24", "kredit-vergleich", "Ratenkredit"),
+        )
+        self.assertFalse([p for p in checker.check_post(kredit_post) if p["severity"] == "error"])
+
+        banking_fees_post = article(
+            "2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+            "Bankgebühren senken: 7 Schritte zum günstigeren Konto",
+            "[Kreditkarten ohne Jahresgebühr vergleichen](/go/kreditkarte/)",
+            pillar="konto-karten",
+        )
+        self.assertFalse([p for p in checker.check_post(banking_fees_post) if p["severity"] == "error"])
+
+        strict_girokonto = article(
+            "kostenloses-girokonto-wechseln",
+            "Girokonto wechseln: Schritt für Schritt",
+            "[Jetzt Ratenkredit vergleichen](/go/kredit/)",
+            pillar="konto-karten",
+        )
+        self.assertTrue(any(
+            "c24bank&cat=14" in p["msg"]
+            for p in checker.check_post(strict_girokonto)
+            if p["severity"] == "error"
+        ))
+
+    def test_versicherungen_explicit_product_routes_enforce_exact_sparte(self):
+        wohngebaeude = article(
+            "2026-10-20-wohngebaeudeversicherung-leistungen",
+            "Wohngebäudeversicherung Vergleich: Worauf Eigentümer achten müssen",
+            "[Jetzt Hausrat vergleichen](/go/hausrat/)",
+            pillar="versicherungen",
+        )
+        self.assertEqual(
+            checker.expected_target(wohngebaeude),
+            ("tarifcheck", "wohngebaeudeversicherung", "Wohngebäudeversicherung"),
+        )
+        self.assertTrue(any(
+            "deep=wohngebaeudeversicherung" in p["msg"]
+            for p in checker.check_post(wohngebaeude)
+            if p["severity"] == "error"
+        ))
+
+    def test_all_configured_deeps_exist_in_central_gateway_registry(self):
+        registered_targets = {
+            (t[0], t[1])
+            for route in checker._REGISTRY
+            for t in (checker._target_from_registered_route(route),)
+            if t and t[1] is not None
+        }
+        for slug, (deep_val, _name) in checker.SLUG_DEEP.items():
+            self.assertIn(("check24", deep_val), registered_targets, slug)
+        for pillar_key, entries in checker.PILLAR_DEEP_ALT.items():
+            for deep_val, _name in entries:
+                self.assertIn(("check24", deep_val), registered_targets, pillar_key)
+        for slug, deep_val in checker.TARIF_SLUG_DEEP.items():
+            self.assertIn(("tarifcheck", deep_val), registered_targets, slug)
+
+    def test_all_live_posts_and_pillars_pass_without_errors(self):
+        offenders = {}
+        for post in checker.load_posts():
+            errors = [
+                p["msg"] for p in checker.check_post(post)
+                if p["severity"] == "error"
+            ]
+            if errors:
+                offenders[post["slug"]] = errors
+        self.assertEqual(offenders, {})
+
 
 class EditorialExemptionTests(unittest.TestCase):
     REASON = "Reiner DNS-Messtest ohne passendes Tarifangebot."
