@@ -6,11 +6,41 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
- klich-druecken:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261024T214024Z
+UID:telegram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
+ ushalt:nutzen:2026-10-25@franksfinanzcheck.de
+DTSTAMP:20261025T095424Z
+DTSTART:20261025T170000Z
+DTEND:20261025T171500Z
+SUMMARY:Telegram (Kanal): Energiekosten senken: Smarte Helfer für den 
+ Haushalt (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-
+ senken-smarte-helfer-fuer-den-haushalt/
+URL:https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken
+ -smarte-helfer-fuer-den-haushalt/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fu
+ ellen:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261025T095424Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
+SUMMARY:Telegram (Kanal): Urlaub sparen: Budget\, Buchung und Kosten i
+ m Blick (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-
+ 7-clevere-wege-deine-kasse-zu-fuellen/
+URL:https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clev
+ ere-wege-deine-kasse-zu-fuellen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
+ klich-druecken:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261025T095424Z
+DTSTART:20261108T060000Z
+DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Smart Home: So prüfst du echte Stromersparni
  s – Smarte (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n

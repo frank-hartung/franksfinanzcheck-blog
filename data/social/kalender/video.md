@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 24.10.2026 23:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.10.2026 10:54 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
