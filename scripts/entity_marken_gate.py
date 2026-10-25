@@ -65,6 +65,7 @@ import re
 import struct
 import sys
 import tempfile
+from html.parser import HTMLParser
 from pathlib import Path
 
 try:
@@ -114,13 +115,45 @@ def _lies(root: Path, rel: str) -> str | None:
         return None
 
 
+class _TextExtraktor(HTMLParser):
+    """Sichtbarer Text ohne Script-/Style-Inhalte.
+
+    Bewusst ein Parser statt Regex-Tag-Filter (CodeQL py/bad-tag-filter):
+    Regex-Filter sind prinzipiell umgehbar (Schreibweise, Leerzeichen in
+    End-Tags wie </script >) – und hier auch unnötig, denn gebraucht wird
+    nur der sichtbare Text für Wortlaut-Proben auf der eigenen Site.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.teile: list[str] = []
+        self._skip = 0
+
+    def handle_starttag(self, tag, attrs) -> None:
+        if tag in ("script", "style"):
+            self._skip += 1
+        self.teile.append(" ")
+
+    def handle_endtag(self, tag) -> None:
+        if tag in ("script", "style") and self._skip:
+            self._skip -= 1
+        self.teile.append(" ")
+
+    def handle_data(self, data) -> None:
+        if not self._skip:
+            self.teile.append(data)
+
+
 def _norm(s: str) -> str:
     """HTML → vergleichbarer Text (nur für Sicht-Text-Proben im Build)."""
-    s = re.sub(r"<script[\s\S]*?</script>", " ", s, flags=re.IGNORECASE)
-    s = re.sub(r"<style[\s\S]*?</style>", " ", s, flags=re.IGNORECASE)
-    s = re.sub(r"<[^>]+>", " ", s)
-    s = _html.unescape(s).replace("\xa0", " ")
-    return re.sub(r"\s+", " ", s).strip()
+    extraktor = _TextExtraktor()
+    try:
+        extraktor.feed(s)
+        extraktor.close()
+    except Exception:  # noqa: BLE001 – Parser ist tolerant; Teilergebnis genügt der Probe
+        pass
+    text = "".join(extraktor.teile).replace("\xa0", " ")
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _toml_wert(text: str, key: str) -> str | None:
