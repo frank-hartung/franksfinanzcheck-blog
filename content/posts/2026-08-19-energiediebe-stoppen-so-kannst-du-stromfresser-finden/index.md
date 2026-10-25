@@ -1,6 +1,6 @@
 ---
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
-description: "Energiediebe stoppen: Stromfresser finden statt raten: Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch, ohne funktionierende…"
+description: "Energiediebe stoppen: Stromfresser finden statt raten: Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch, ohne funktionierende."
 date: 2026-08-19T08:35:12Z
 lastmod: 2026-09-28
 draft: false

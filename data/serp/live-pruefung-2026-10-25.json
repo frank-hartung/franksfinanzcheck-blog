@@ -1,0 +1,216 @@
+{
+  "zeitstempel": "2026-10-25T14:00:00+02:00",
+  "eigene_domaene": "franksfinanzcheck.de",
+  "methode": "Live-Google-SERP-Erhebung (hl=de, gl=de, pws=0, num=10), manuell, Highend-Agentur-Level",
+  "vertrag": "Kein direktes google.com-Scraping (Nutzungsvertrag / YMYL / Rechenzentrums-CAPTCHA). Erhebung über öffentliche SERP-Darstellung.",
+  "anfragen": [
+    {
+      "anfrage": "Fixkosten senken",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Fixkosten senken: Einfache Tipps zum Sparen", "domaene": "ing.de"},
+        {"rang": 2, "titel": "Fixkosten senken im Unternehmen: Tipps & Tricks", "domaene": "lexware.de"},
+        {"rang": 3, "titel": "Fixkosten senken: Wechseln & hunderte Euro sparen", "domaene": "verivox.de"},
+        {"rang": 4, "titel": "Fixkosten: verstehen, rechnen, senken", "domaene": "dirkkreuter.com"},
+        {"rang": 5, "titel": "Monatliche Fixkosten senken » 7 Spartipps", "domaene": "check24.at"},
+        {"rang": 6, "titel": "Fixkosten senken 2026: 12 Tipps zum Sparen", "domaene": "sparschweinclub.de"},
+        {"rang": 7, "titel": "Fixkosten senken: 12 Sofort-Tipps für mehr Geld im Monat", "domaene": "nuvestra.de"},
+        {"rang": 8, "titel": "Fixkosten senken: Mehr Geld, weniger Stress im Haushalt", "domaene": "haspa-insider.de"},
+        {"rang": 9, "titel": "Sparhilfe.info : Fixkosten optimieren - Laufende Kosten dauerhaft senken", "domaene": "sparhilfe.info"},
+        {"rang": 10, "titel": "Fixkosten senken in einer Stunde: Wo fast jeder Haushalt zu viel zahlt", "domaene": "werra-rundschau.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Weitere Fragen: 'Fixkosten senken privat', 'Fixkosten senken Unternehmen'."
+    },
+    {
+      "anfrage": "Gaskosten senken",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Gas sparen – ein paar einfache Tipps", "domaene": "viessmann.de"},
+        {"rang": 2, "titel": "Gas sparen: So senken Sie Ihren Gasverbrauch", "domaene": "test.de"},
+        {"rang": 3, "titel": "Die besten Tipps zum Gas sparen und Gasverbrauch senken", "domaene": "vattenfall.de"},
+        {"rang": 4, "titel": "Gas sparen: 21 Tipps zum Senken des Gasverbrauchs", "domaene": "energis.de"},
+        {"rang": 5, "titel": "✅ Ratgeber Gas sparen: Tipps für weniger Heizkosten", "domaene": "eprimo.de"},
+        {"rang": 6, "titel": "Heizkosten sparen: 11 Tipps für Ihren Geldbeutel", "domaene": "ewa-riss.de"},
+        {"rang": 7, "titel": "Gasverbrauch senken in wenigen Schritten", "domaene": "heizung.de"},
+        {"rang": 8, "titel": "Gas sparen und im Alltag Kosten senken", "domaene": "stadtwerke-dinslaken.de"},
+        {"rang": 9, "titel": "Gas sparen || Tipps für weniger Verbrauch & Kosten", "domaene": "stadtwerke-meerbusch.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Dominiert von Energieversorgern und Stiftung Warentest."
+    },
+    {
+      "anfrage": "Stromanbieter wechseln",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Stromanbieter wechseln: 2026 bis 850 € sparen", "domaene": "verivox.de"},
+        {"rang": 2, "titel": "Stromanbieter wechseln & bis zu 850,00 € im Jahr sparen", "domaene": "check24.de"},
+        {"rang": 3, "titel": "Stromanbieter wechseln: So geht's", "domaene": "lekker.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. KI-Übersicht nennt Verivox, Check24, Finanztip, lekker, Verbraucherzentrale."
+    },
+    {
+      "anfrage": "DSL Anbieter Vergleich",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "DSL-Anbieter: Welcher ist der Beste?", "domaene": "check24.de"},
+        {"rang": 2, "titel": "Internetanbieter Vergleich: So findest Du den besten!", "domaene": "finanztip.de"},
+        {"rang": 3, "titel": "DSL-Angebot: So flexibel sind unsere Tarife", "domaene": "freenet-internet.de"},
+        {"rang": 4, "titel": "Die 5 besten DSL Tarife im Vergleich", "domaene": "handelsblatt.com"},
+        {"rang": 5, "titel": "Günstige DSL-Tarife bei o2", "domaene": "o2online.de"},
+        {"rang": 6, "titel": "DSL-Tarife vergleichen und sparen", "domaene": "verivox.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Dominiert von Vergleichsportalen und Medien."
+    },
+    {
+      "anfrage": "Kontogebühren vermeiden",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Girokonto ohne Kontoführungsgebühren finden｜10/2026", "domaene": "check24.de"},
+        {"rang": 2, "titel": "Was tun, wenn das Konto teurer wird?", "domaene": "verbraucherzentrale.de"},
+        {"rang": 3, "titel": "Girokonto-Vergleich 10/2026", "domaene": "finanztip.de"},
+        {"rang": 4, "titel": "Banken Wie man Kontogebühren vermeiden kann", "domaene": "spiegel.de"},
+        {"rang": 5, "titel": "Kontoführungsgebühren sparen: Hier gibt es kostenlose ...", "domaene": "finanzwissen.de"},
+        {"rang": 6, "titel": "Kontoführungsgebühren: Diese Girokonten haben keine", "domaene": "verivox.de"},
+        {"rang": 7, "titel": "Konto & Bank ohne Kontoführungsgebühren im Vergleich", "domaene": "qonto.com"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Dominiert von Check24, Finanztip, Verbraucherzentrale, Verivox."
+    },
+    {
+      "anfrage": "Notgroschen aufbauen",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Notgroschen – Definition, Höhe, Anlage", "domaene": "finanzfluss.de"},
+        {"rang": 2, "titel": "Wie viel Notgroschen ist sinnvoll – Faustregeln für jede Lebenssituation", "domaene": "consorsfinanz.de"},
+        {"rang": 3, "titel": "Notgroschen: Warum und wie hoch?", "domaene": "sparkasse.de"},
+        {"rang": 4, "titel": "Notgroschen » Was ist das & wie hoch sollte er sein?", "domaene": "sparkasse.at"},
+        {"rang": 5, "titel": "Notgroschen: Wie hoch sollten deine Rücklagen sein? (+Rechner)", "domaene": "beatvest.com"},
+        {"rang": 6, "titel": "So bauen Sie Schritt für Schritt einen Notgroschen auf", "domaene": "mlp.de"},
+        {"rang": 7, "titel": "Notgroschen – Finanzielles Polster aufbauen", "domaene": "vr.de"},
+        {"rang": 8, "titel": "Notgroschen: 3 Tipps, um ein Finanzpolster aufzubauen", "domaene": "ing.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Dominiert von Finanzfluss, Consors, Sparkassen, ING, MLP."
+    },
+    {
+      "anfrage": "Kündigungsfristen Strom",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [],
+      "bemerkung": "Keine eigenen Treffer in den erhobenen Abschnitten. Weitere Fragen: Stadtwerke, 1 Jahr, Umzug, Grundversorgung, Eon, Enbw, Ewe, Vattenfall."
+    },
+    {
+      "anfrage": "Haushaltsbudget Rechner",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Haushaltsrechner für monatliche Einkünfte und Ausgaben", "domaene": "zinsen-berechnen.de"},
+        {"rang": 2, "titel": "Haushaltsrechner Baufinanzierung: Lebenshaltungskosten", "domaene": "baufi24.de"},
+        {"rang": 3, "titel": "Haushaltsbuch führen: Überblick über Ihre Finanzen", "domaene": "verbraucherzentrale.de"},
+        {"rang": 4, "titel": "Infos und Beispiele zum Haushaltsrechner", "domaene": "zinsen-berechnen.de"},
+        {"rang": 5, "titel": "Verwalten Sie Ihr Haushaltsbudget in Excel", "domaene": "support.microsoft.com"},
+        {"rang": 6, "titel": "Haushaltsrechner Immobilie — Budget berechnen", "domaene": "immorath.de"},
+        {"rang": 7, "titel": "Haushalts-Budget Rechner", "domaene": "blog.sh.at"},
+        {"rang": 8, "titel": "Haushaltsrechner: Monatlich frei verfügbares Budget berechnen", "domaene": "portora.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10."
+    },
+    {
+      "anfrage": "Mietwagen günstig buchen",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "ᐅ Autovermietung und Mietwagen Vergleich | billiger ...", "domaene": "billiger-mietwagen.de"},
+        {"rang": 2, "titel": "Mietwagen Preisvergleich » billiger Mietwagen buchen ...", "domaene": "mietwagen.check24.de"},
+        {"rang": 3, "titel": "Billige Mietwagen und Autovermietung im Vergleich", "domaene": "kayak.de"},
+        {"rang": 4, "titel": "Billige Mietwagen im Preisvergleich günstig buchen | idealo", "domaene": "mietwagen.idealo.de"},
+        {"rang": 5, "titel": "Mietwagen im Preisvergleich Günstig bei MietwagenCheck ...", "domaene": "mietwagen-check.de"},
+        {"rang": 6, "titel": "Autovermietung Deutschland für Mietwagen weltweit · Sunny ...", "domaene": "sunnycars.de"},
+        {"rang": 7, "titel": "TUI CARS Mietwagen - Ihr Leihwagen vom Reise-Marktführer", "domaene": "tuicars.com"},
+        {"rang": 8, "titel": "Mietwagen Preisvergleich - check24", "domaene": "check24.net"},
+        {"rang": 9, "titel": "ADAC Autovermietung: Mietwagen Preisvergleich weltweit", "domaene": "adac.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Dominiert von Vergleichsportalen (Check24, Kayak, idealo, ADAC)."
+    },
+    {
+      "anfrage": "Versicherungen kündigen",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "Versicherungsvertrag kündigen: Wann das klappt und wie Sie vorgehen", "domaene": "verbraucherzentrale.de"},
+        {"rang": 2, "titel": "Versicherung kündigen – Muster & Vorlage kostenlos - Briefwechsel", "domaene": "brief-wechsel.de"},
+        {"rang": 3, "titel": "Versicherung kündigen: Fristen, Sonderkündigung & Vorgehen", "domaene": "versicherungsriese.de"},
+        {"rang": 4, "titel": "Kfz-Versicherung kündigen: Fristen & Vorlage - GVV Direkt", "domaene": "gvv-direkt.de"}
+      ],
+      "bemerkung": "franksfinanzcheck.de nicht in den Top 10. Dominiert von Verbraucherzentrale und Spezialseiten."
+    },
+    {
+      "anfrage": "site:franksfinanzcheck.de",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [
+        {"rang": 1, "titel": "FranksFinanzcheck: Geld sparen bei Fixkosten & Verträgen", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/"},
+        {"rang": 2, "titel": "Über mich und diesen Blog - FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/ueber"},
+        {"rang": 3, "titel": "Franks Fixkosten-Kompass: Die 3 Kernbereiche ..", "domaene": "franksfinanzcheck.de"},
+        {"rang": 4, "titel": "Impressum - FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/impressum"},
+        {"rang": 5, "titel": "Datenschutzerklärung - FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/datenschutz"},
+        {"rang": 6, "titel": "Alle Ratgeber für dein Fixkosten-Cockpit - FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/posts"},
+        {"rang": 7, "titel": "tags | FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/tags"},
+        {"rang": 8, "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz", "domaene": "franksfinanzcheck.de"},
+        {"rang": 9, "titel": "sparmethoden | FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/tags/sparmethoden"},
+        {"rang": 10, "titel": "Gaspreisgarantie | FranksFinanzcheck", "domaene": "franksfinanzcheck.de", "url": "https://franksfinanzcheck.de/tags/gaspreisgarantie"}
+      ],
+      "bemerkung": "ca. 108 indexierte Seiten. Tote Assets: /tags/sparmethoden/ liefert Live-404 (erhoben 25.10.2026). Tag-Archive sind indexiert, liefern aber 404 – Index-Müll."
+    },
+    {
+      "anfrage": "FranksFinanzcheck",
+      "eigener_rang": null,
+      "eigener_titel": null,
+      "eigene_url": null,
+      "top10": [],
+      "bemerkung": "Google korrigiert die Anfrage auf 'Frank Finanzcheck' → schlägt FINANZCHECK.de vor. Eigene Marke nicht als eindeutige Rang-1-Entität erkennbar. Marken-Präsenz muss gestärkt werden."
+    }
+  ],
+  "indexlage": {
+    "site_franksfinanzcheck_de_ergebnisse": 108,
+    "tote_assets": [
+      "https://franksfinanzcheck.de/tags/sparmethoden/ (Live-404, 25.10.2026)"
+    ],
+    "gsc_zeitraum": "2026-07-25 bis 2026-10-22",
+    "gsc_klicks": 0,
+    "gsc_impressionen": 51,
+    "gsc_beitraege": 92,
+    "gsc_live_beitraege": 60
+  },
+  "urteil": "gelb",
+  "befunde": [
+    "franksfinanzcheck.de ist in keiner der 9 generischen Schlüsselbegriff-Anfragen in den Google Top 10 sichtbar.",
+    "Marken-Abfrage 'FranksFinanzcheck' wird von Google auf FINANZCHECK.de umgebügelt – eigene Marke schwach als Entität etabliert.",
+    "ca. 108 Seiten unter site: indexiert, darunter tote Tag-Archive (404), die Crawl-Budget und Qualität signal verschlechtern.",
+    "GSC: 0 Klicks, 51 Impressionen in 26 Tagen über 92 Beiträge – kaum organische Nachfrage auf eigene Inhalte.",
+    "Konkurrenz: Vergleichsportale (Verivox, Check24), Verbraucherzentrale, Finanztip, Energieversorger, Sparkassen/ING – alles etablierte Player mit Domain-Autorität."
+  ],
+  "empfehlungen": [
+    "Titel und Descriptions aller Live-Artikel auf M1/M2 prüfen (≤60 Zeichen Titel, 100–160 Zeichen Description, kein hartes Ellipsis-Ende) – metadaten_wache ist scharf.",
+    "Marken-Präsenz stärken: eigene Domain konsistent in Titel/Description, Backlinks auf Startseite (Authority-Radar), Gastbeiträge/Presse.",
+    "Tote Tag-Archive aus dem Index nehmen (noindex/404 beheben, /tags/sparmethoden/ reparieren oder entfernen).",
+    "Interne Verlinkung: jeder Beitrag verlinkt einen Rechner und seine Pillar-Seite (bereits umgesetzt für 60/60 Live-Beiträge).",
+    "Eigene Bilder und Rechenbeispiele in Top-20-Beiträgen für Bildersuche und Nutzerbindung (nur 8/20 umgesetzt).",
+    "Konto- und Kreditkarten-Beiträge fachlich prüfen lassen (YMYL, nur 9/92 Beiträge haben Prüfer-Feld).",
+    "SERP-Live-Wache (scripts/serp_live_wache.py) regelmäßig laufen lassen, um Snippet-Änderungen und Marken-Rang dauerhaft zu überwachen."
+  ]
+}

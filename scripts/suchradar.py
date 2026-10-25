@@ -266,7 +266,13 @@ def _themenpool_begriffe(root: Path, hoechstens: int) -> list[str]:
         return []
     begriffe = sorted(set(begriffe), key=str.lower)
     versatz = int(heute().replace("-", "")) % max(1, len(begriffe))
-    return [(begriffe * 2)[versatz:versatz + hoechstens]]
+    # FLACH zurückgeben. Die erste Fassung packte den Ausschnitt noch in
+    # eine Liste: `[(...)]`. `hinzufuegen()` machte daraus per str() die
+    # Python-Darstellung EINER Anfrage – messbar im Cockpit als
+    # "['Visa Mastercard ohne Gebühren', 'Vorteile', ...]". Ein Lauf, der
+    # 15 Keywords als einen kaputten Suchstring verschickt, verbraucht
+    # Budget und misst nichts. Siehe Live-SERP-Prüfung 25.10.2026.
+    return (begriffe * 2)[versatz:versatz + hoechstens]
 
 
 # ====================================================================
@@ -476,6 +482,73 @@ def _instanz_aus_treffern(treffer: list[dict]) -> str:
 
 
 # ====================================================================
+#  DATENQUALITÄT – organisches Ranking ≠ Wissens-Rückfall
+# ====================================================================
+def ist_organisch(treffer: dict) -> bool:
+    """Kommt dieser Treffer aus einem echten Suchmaschinen-Index?
+
+    Fail-closed: Eine unbekannte Quelle ist KEIN organisches Ranking. Wer
+    die Herkunft nicht kennt, darf sie nicht als Position verkaufen.
+    """
+    quelle = str(treffer.get("quelle") or "")
+    return bool(sa.ANBIETER.get(quelle, {}).get("organisch", False))
+
+
+def organische_treffer(treffer: list[dict]) -> list[dict]:
+    """Nur Treffer, hinter denen ein echter Suchindex steht.
+
+    Wikipedia ist im Register als `organisch: false` geführt. Es ist ein
+    Wissens-Rückfall, damit ein Lauf nie völlig leer bleibt – aber seine
+    „Ränge" sind API-Treffer, keine Suchpositionen. Vor dem Fix vom
+    25.10.2026 stammten 60 von 70 Treffern aus diesem Rückfall; das
+    Wettbewerbs-Radar wies wikipedia.org als stärksten „Wettbewerber" aus.
+    """
+    return [t for t in treffer if ist_organisch(t)]
+
+
+def datenqualitaet(ergebnisse: list[dict]) -> dict:
+    """Wie belastbar ist dieser Lauf? Zählt Anfragen, nicht nur Treffer.
+
+    Eine Anfrage, die nur über den Wissens-Rückfall beantwortet wurde,
+    liefert NULL verwertbare Ranking-Daten. Das im Cockpit auszuweisen
+    ist wichtiger als eine schöne Gesamttrefferzahl.
+    """
+    anbieter: dict[str, int] = {}
+    organische_anfragen = 0
+    treffer_gesamt = 0
+    treffer_organisch = 0
+    for ergebnis in ergebnisse:
+        treffer = ergebnis.get("treffer") or []
+        organisch = organische_treffer(treffer)
+        treffer_gesamt += len(treffer)
+        treffer_organisch += len(organisch)
+        if organisch:
+            organische_anfragen += 1
+        quelle = str((treffer[0].get("quelle") if treffer else "")
+                     or ergebnis.get("quelle") or "unbekannt")
+        anbieter[quelle] = anbieter.get(quelle, 0) + 1
+    erfolgreich = len(ergebnisse)
+    anteil = round(1 - (treffer_organisch / treffer_gesamt), 3) if treffer_gesamt else 0.0
+    if not erfolgreich or not organische_anfragen:
+        aussagekraft = "keine"
+    elif organische_anfragen < erfolgreich:
+        aussagekraft = "eingeschraenkt"
+    else:
+        aussagekraft = "voll"
+    return {
+        "anfragen_erfolgreich": erfolgreich,
+        "anfragen_organisch": organische_anfragen,
+        "anfragen_rueckfall": erfolgreich - organische_anfragen,
+        "treffer_gesamt": treffer_gesamt,
+        "treffer_organisch": treffer_organisch,
+        "treffer_rueckfall": treffer_gesamt - treffer_organisch,
+        "rueckfall_anteil": anteil,
+        "anbieter": dict(sorted(anbieter.items(), key=lambda x: -x[1])),
+        "aussagekraft": aussagekraft,
+    }
+
+
+# ====================================================================
 #  SUCHLAUF
 # ====================================================================
 def suchen(anfrage: str, konfig: dict, trocken: bool = False,
@@ -559,16 +632,22 @@ def lauf(konfig: dict | None = None, anfragen: list | None = None,
             quota = quota_laden()
 
     alle_treffer = [t for e in ergebnisse for t in e["treffer"]]
+    # Rang und Wettbewerb sind RANGSYSTEME. Ein Wissens-Rückfall (Wikipedia)
+    # darf in beide nicht einfließen – er hat keine Suchposition. Gemessen
+    # wird er trotzdem: `datenqualitaet` weist ihn offen aus.
+    verwertbar = organische_treffer(alle_treffer)
     befund = {
         "zeitstempel": berlin_now().isoformat(),
         "eigene_domaene": konfig.get("eigene_domaene", ""),
         "anfragen_geplant": len(auftraege),
         "zaehlung": zaehlung,
         "treffer_gesamt": len(alle_treffer),
+        "treffer_organisch": len(verwertbar),
+        "datenqualitaet": datenqualitaet(ergebnisse),
         "ergebnisse": ergebnisse,
         "fehler": fehler,
         "rang": rang_verfolgung(ergebnisse, konfig.get("eigene_domaene", "")),
-        "wettbewerb": wettbewerbs_radar(alle_treffer),
+        "wettbewerb": wettbewerbs_radar(verwertbar),
     }
     if not trocken:
         befund["quota"] = quota_laden().get(heute(), {})
@@ -624,7 +703,7 @@ def rang_verfolgung(ergebnisse: list[dict], eigene_domaene: str) -> list[dict]:
         eigener_rang = 0
         eigener_titel = ""
         eigene_url = ""
-        for treffer in ergebnis["treffer"]:
+        for treffer in organische_treffer(ergebnis["treffer"]):
             if eigene and eigene in (treffer.get("domaene") or ""):
                 eigener_rang = treffer["rang"]
                 eigener_titel = treffer.get("titel", "")
@@ -754,9 +833,30 @@ def bericht(befund: dict, konfig: dict | None = None) -> str:
         f"| Fehlgeschlagen | {z.get('fehler', 0)} |",
         f"| Übersprungen (Budget) | {z.get('uebersprungen', 0)} |",
         f"| Treffer gesamt | {befund.get('treffer_gesamt', 0)} |",
+        f"| Davon organisch | {befund.get('treffer_organisch', befund.get('treffer_gesamt', 0))} |",
         f"| Eigene Treffer | {len(sichtbar)} von {len(rang)} Anfragen |",
         "",
     ]
+
+    dq = befund.get("datenqualitaet")
+    if dq:
+        zeilen += [
+            "## Datenqualität",
+            "",
+            "| Kennzahl | Wert |",
+            "|---|---|",
+            f"| Anfragen mit echtem Suchindex | {dq.get('anfragen_organisch', 0)} "
+            f"von {dq.get('anfragen_erfolgreich', 0)} |",
+            f"| Anfragen nur mit Wissens-Rückfall | {dq.get('anfragen_rueckfall', 0)} |",
+            f"| Organische Treffer | {dq.get('treffer_organisch', 0)} "
+            f"von {dq.get('treffer_gesamt', 0)} |",
+            f"| Rückfall-Anteil | {round(float(dq.get('rueckfall_anteil', 0)) * 100)} % |",
+            f"| Aussagekraft | {dq.get('aussagekraft', '–')} |",
+            "",
+            "_Nur organische Treffer gehen in Rang und Wettbewerb ein. Der "
+            "Wikipedia-Rückfall verhindert leere Läufe, ist aber kein Ranking._",
+            "",
+        ]
 
     quota = befund.get("quota") or quota_laden().get(heute(), {})
     if quota:
@@ -817,7 +917,12 @@ def bericht(befund: dict, konfig: dict | None = None) -> str:
         "bündelt den Google-Index über fremde Instanzen, DuckDuckGo und",
         "Mojeek sind eigene Indizes. Die Ränge sind Indikationen, keine",
         "Positionsgarantie. Für die exakte Position ist die Google Search",
-        "Console die richtige Quelle – ebenfalls kostenlos.",
+        "Console die richtige Quelle – ebenfalls kostenlos. Ergänzend liegt",
+        "ein **einmalig live geprüfter Google-SERP-Snapshot** unter",
+        "`data/serp/` (siehe `SERP-LIVE-PRUEFUNG-HIGHEND-2026-10-25.md`);",
+        "die Wache `scripts/serp_live_wache.py` hält ihn und die eigenen",
+        "Snippets dauerhaft im Blick. Automatisiertes google.com-Scraping",
+        "bleibt aus Vertrags- und Datenqualitätsgründen tabu.",
         "",
         "Kein Treffer aus diesem Bericht wird ungeprüft in einen Artikel",
         "übernommen. Das Radar misst; die Entscheidung trifft Frank.",
@@ -910,6 +1015,10 @@ def selbsttest() -> int:
     begriffe = [e["anfrage"] for e in a1]
     pruefe(len(begriffe) == len(set(schlank(b) for b in begriffe)),
            "Anfragenermittlung lässt Duplikate durch")
+    pool = _themenpool_begriffe(ROOT, 5)
+    pruefe(len(pool) > 1 and all(isinstance(b, str) and not b.startswith("[")
+                                 for b in pool),
+           "Themenpool liefert keine flachen Suchbegriffe (Listen-Repr gelandet)")
 
     # 2) Budget-Limit greift
     begrenzt = ermittle_anfragen({**konfig, "max_anfragen_pro_lauf": 3,
@@ -959,19 +1068,40 @@ def selbsttest() -> int:
 
     # 7) Rang-Verfolgung findet die eigene Domaene und rechnet das Delta
     ergebnisse = [{"anfrage": "Stromkosten senken", "quelle": "searxng",
-                   "treffer": [{"domaene": "verivox.de", "rang": 1, "titel": "V"},
+                   "treffer": [{"domaene": "verivox.de", "rang": 1, "titel": "V",
+                                "quelle": "searxng"},
                                {"domaene": "franksfinanzcheck.de", "rang": 2,
-                                "titel": "F", "url": "https://franksfinanzcheck.de/x"},
-                               {"domaene": "check24.de", "rang": 3, "titel": "C"}]}]
+                                "titel": "F", "url": "https://franksfinanzcheck.de/x",
+                                "quelle": "searxng"},
+                               {"domaene": "check24.de", "rang": 3, "titel": "C",
+                                "quelle": "searxng"}]}]
     rang = rang_verfolgung(ergebnisse, "franksfinanzcheck.de")
     pruefe(rang[0]["eigener_rang"] == 2, "Eigener Rang nicht erkannt")
     pruefe(rang[0]["sichtbar"] is True, "Sichtbarkeitskennzeichen fehlt")
 
-    # 8) Ohne eigenen Treffer: sichtbar=false, kein Phantom-Rang
+    # 8) Ohne eigenen Treffer: sichtbar=false, kein Phantom-Rang.
+    #    Zusätzlich: Ein Wissens-Rückfall darf keinen Rang erfinden.
     fremd = [{"anfrage": "irgendwas", "quelle": "mojeek",
-              "treffer": [{"domaene": "andere.de", "rang": 1, "titel": "A"}]}]
+              "treffer": [{"domaene": "andere.de", "rang": 1, "titel": "A",
+                           "quelle": "mojeek"}]}]
     pruefe(rang_verfolgung(fremd, "franksfinanzcheck.de")[0]["sichtbar"] is False,
            "Fremder Treffer zählt als eigener")
+    rueckfall = [{"anfrage": "irgendwas", "quelle": "wikipedia",
+                  "treffer": [{"domaene": "franksfinanzcheck.de", "rang": 1,
+                               "titel": "F", "quelle": "wikipedia"},
+                              {"domaene": "de.wikipedia.org", "rang": 2,
+                               "titel": "W", "quelle": "wikipedia"}]}]
+    pruefe(rang_verfolgung(rueckfall, "franksfinanzcheck.de")[0]["eigener_rang"] == 0,
+           "Wissens-Rückfall wird als echter Rang gezählt")
+    dq = datenqualitaet([*ergebnisse, *rueckfall])
+    pruefe(dq["anfragen_organisch"] == 1 and dq["anfragen_rueckfall"] == 1,
+           "Datenqualität zählt Rückfall-Anfragen falsch")
+    pruefe(dq["aussagekraft"] == "eingeschraenkt",
+           "Datenqualität bewertet einen halben Rückfall-Lauf falsch")
+    pruefe("de.wikipedia.org" not in
+           {e["domaene"] for e in wettbewerbs_radar(
+               organische_treffer(rueckfall[0]["treffer"]))["domaenen"]},
+           "Wikipedia-Rückfall landet im Wettbewerbs-Radar")
 
     # 9) Wettbewerbs-Radar: Häufigkeit UND Rangtiefe getrennt
     treffer = [
@@ -1011,9 +1141,11 @@ def selbsttest() -> int:
 
     # 12) Bericht enthält die Kernzahlen und keine internen Pfade
     text = bericht({"zeitstempel": berlin_now().isoformat(), "zaehlung": {"ok": 1},
-                    "anfragen_geplant": 1, "treffer_gesamt": 3, "rang": rang,
+                    "anfragen_geplant": 1, "treffer_gesamt": 3,
+                    "treffer_organisch": 3, "datenqualitaet": dq, "rang": rang,
                     "wettbewerb": wb, "fehler": []}, konfig)
-    for pflicht in ("SUCHRADAR", "Eigene Sichtbarkeit", "Wettbewerb", "Einordnung"):
+    for pflicht in ("SUCHRADAR", "Datenqualität", "Eigene Sichtbarkeit",
+                    "Wettbewerb", "Einordnung"):
         pruefe(pflicht in text, f"Bericht: Abschnitt „{pflicht}“ fehlt")
     pruefe("data/suchradar/" not in text, "Bericht leakt interne Pfade")
 

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-28
 title: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
-description: "Standby Kosten: Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige…"
+description: "Standby Kosten: Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige."
 date: 2026-09-11T20:00:23Z
 draft: false
 tags: ["Stromkosten senken"]

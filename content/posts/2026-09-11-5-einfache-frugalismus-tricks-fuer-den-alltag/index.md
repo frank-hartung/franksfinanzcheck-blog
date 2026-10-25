@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
 title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
-description: "5 einfache Frugalismus-Tricks für den Alltag: Frugalismus ohne Askese: fünf alltagstaugliche Tricks, mit denen du Fixkosten senkst, Impulskäufe bremst und…"
+description: "5 einfache Frugalismus-Tricks für den Alltag: Frugalismus ohne Askese: fünf alltagstaugliche Tricks, mit denen du Fixkosten senkst, Impulskäufe bremst und."
 date: 2026-09-14T12:53:44Z
 draft: false
 reserve_published: 2026-09-14

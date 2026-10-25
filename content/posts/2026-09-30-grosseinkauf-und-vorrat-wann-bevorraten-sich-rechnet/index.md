@@ -1,6 +1,6 @@
 ---
 title: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
-description: "Großeinkauf planen: Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll…"
+description: "Großeinkauf planen: Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll."
 date: 2026-09-30T06:10:00Z
 lastmod: 2026-10-13
 draft: false
