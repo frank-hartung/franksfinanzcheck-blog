@@ -723,6 +723,32 @@ Zahlen-Korrektur an Sätzen, die gar keine Zahl enthalten.
   `test_fettmarker_zerschneidet_keinen_satz`,
   `test_echte_unbelegte_zahl_bleibt_rot`).
 
+## Der Geburtspunkt fährt denselben Heiler wie die Kette (Zahlen, seit #821, 25.10.2026)
+
+Das harte RS5-Gate lehnt jeden Satz ab, der eine Zahl mit Einheit ohne
+Quellenlink im selben Satz und ohne Modell-Kennzeichnung nennt. Am 25.10.2026
+starben daran **vier frische Themen bei der Geburt** (16, 20 und 8 Sätze) –
+drei Versuche je Thema, alle am selben Punkt, danach Cooldown. Verbrauchtes
+Kontingent ohne einen Kandidaten.
+
+Die Wiederholung war blind (Lehre #612), der vorhandene Heiler auch: Er kannte
+die **Regel**, nicht die **Sätze**.
+
+- `redaktions_standard.zahlen_beleg_heiler` repariert ausschließlich die
+  abgelehnten Sätze, wörtlich im Prompt. Zwei erlaubte Wege: ohne Zahl
+  formulieren oder die Zahl im selben Satz als Beispiel-/Modellrechnung mit
+  genannter Annahme kennzeichnen. „ca./rund/etwa“ bleibt kein Beleg.
+- Fail-closed mit Wirkungsprobe: Text nicht geschrumpft, Linkziele
+  byte-identisch, H2-Anzahl gleich, RS5-Zahl **strikt gesunken**, kein neuer
+  RS1–RS6-Befund. Ohne Befund kein Modellaufruf.
+- `engine_generate.try_generate` ruft ihn **einmal** je Generierung und nur bei
+  `_nur_zahlenbefund` (ausschließlich RS5). Längen-/Strukturdefekte brauchen
+  eine neue Generierung, keine Satz-OP.
+- Das Gate bleibt unverändert hart – der Text wird besser, nicht die Messung
+  weicher. Tests: `scripts/tests/test_zahlen_heiler.py` (in
+  `npm run test:reserve`). Vorgangsbericht:
+  `WARTUNG-INHALTSQUALITAET-WF-D4E0-821-DAUERHEILUNG-PREMIUM-2026-10-25.md`.
+
 ## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
 
 Die schwebende Artikel-Navigation ist zweimal (26.09.2026) an einem
