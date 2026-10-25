@@ -349,3 +349,4 @@
 {"blockiert": [], "commit": "1e9a686cfaa3c0e350e8d0480753c3e175793aef", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-24T23:23:20Z", "warnung": 0}
 {"blockiert": [], "commit": "0cd8fade76786526aaecfe5d933145c82c32c402", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-25T01:20:59Z", "warnung": 0}
 {"blockiert": [], "commit": "e17dbcb43bff8f5f5620ba9264d7f6caf13aa222", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-25T06:15:14Z", "warnung": 0}
+{"blockiert": [], "commit": "8daaf77db7c4331e3a425869697b68485894c500", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-25T08:58:02Z", "warnung": 0}
