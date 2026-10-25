@@ -895,6 +895,12 @@ def assessment(cert: Path, posts: Path) -> dict:
                 lage = nachschub_lage()
                 if lage and lage.get("verdikt") == "erschoepft":
                     message = f"{message} Ursache: {lage['befund']}"
+                elif lage and lage.get("verdikt") == "knapp":
+                    # Noch ist produziert worden – aber der Vorlauf liegt
+                    # unter dem Mindesthorizont. Diese Vorwarnung gehört in
+                    # dieselbe Meldung, sonst steht die Ursache erst im
+                    # Ticket, wenn der Vorrat bereits leer ist (19.–25.10.2026).
+                    message = f"{message} Hinweis: {lage['befund']}"
     stages = {str(n): os.environ.get(f"RESERVE_STUFE{n}_STATUS", "unbekannt")
               for n in (1, 2, 3, 4)}
     stages["sicherung"] = os.environ.get("RESERVE_SYNC_STATUS", "unbekannt")
