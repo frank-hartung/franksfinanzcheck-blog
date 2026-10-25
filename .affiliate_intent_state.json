@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24 08:33:12 UTC",
+ "generated_at": "2026-10-25 08:52:18 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 102,
@@ -109,7 +109,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
-   "line": 78,
+   "line": 104,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -120,7 +120,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-16-dns-server-aendern-fuer-schnelleres-internet",
-   "line": 102,
+   "line": 135,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
