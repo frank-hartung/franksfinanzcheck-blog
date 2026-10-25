@@ -1,7 +1,7 @@
 ---
 title: "Kündigungsfristen-Kalender: Den letzten Tag nicht verpassen"
-seoTitle: "Kündigungsfrist berechnen & Termine in den Kalender legen | FranksFinanzcheck"
-description: "Vertragsende und Frist eintragen, letzten Kündigungstag erhalten und drei Erinnerungen als Kalenderdatei mitnehmen – für Strom, Internet, Versicherung und Abos. Lokal im Browser, ohne Anmeldung."
+seoTitle: "Kündigungsfrist berechnen: Termine im Kalender"
+description: "Letzten Kündigungstag berechnen und Erinnerungen als Kalenderdatei exportieren. Für Strom, Internet, Versicherungen und Abos; Eingaben bleiben lokal."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

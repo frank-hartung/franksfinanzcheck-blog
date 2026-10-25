@@ -1,7 +1,7 @@
 ---
 title: "Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen"
-seoTitle: "Abschlag & Nachzahlung berechnen für Strom und Gas | FranksFinanzcheck"
-description: "Jahresverbrauch, Arbeitspreis, Grundpreis: Der Rechner zeigt deinen fairen Monatsabschlag und die erwartete Nachzahlung oder Gutschrift – bevor die Jahresabrechnung kommt. Lokal im Browser, mit offener Formel."
+seoTitle: "Abschlag berechnen: Strom- & Gasrechner"
+description: "Strom- oder Gasabschlag berechnen: Jahresverbrauch und Tarifpreis eingeben, Monatsbetrag sowie mögliche Nachzahlung ermitteln. Kostenlos und lokal im Browser."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

@@ -41,6 +41,8 @@ class Document(HTMLParser):
         self.redirect = False
         self.lang = ''
         self.in_title = False
+        self.in_head = False
+        self.svg_depth = 0
         self.in_schema = False
         self.schema_text = []
         self.feed(text)
@@ -52,7 +54,13 @@ class Document(HTMLParser):
             self.ids.add(a['id'])
         if tag == 'html':
             self.lang = a.get('lang', '')
-        if tag == 'title':
+        if tag == 'head':
+            self.in_head = True
+        if tag == 'svg':
+            self.svg_depth += 1
+        # A <title> in an SVG describes that graphic, not the HTML document.
+        # Only the real head title belongs in search-snippet auditing.
+        if tag == 'title' and self.in_head and self.svg_depth == 0:
             self.in_title = True
         if tag == 'meta':
             key = (a.get('name') or a.get('property') or '').lower()
@@ -72,8 +80,12 @@ class Document(HTMLParser):
             self.schema_text = []
 
     def handle_endtag(self, tag):
-        if tag == 'title':
+        if tag == 'title' and self.in_title:
             self.in_title = False
+        if tag == 'svg' and self.svg_depth:
+            self.svg_depth -= 1
+        if tag == 'head':
+            self.in_head = False
         if tag == 'script' and self.in_schema:
             try:
                 self.schemas.append(json.loads(''.join(self.schema_text)))

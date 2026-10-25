@@ -1,6 +1,7 @@
 ---
 title: "Franks Fixkosten-Kompass: Die 3 Kernbereiche & Sparthemen im Überblick"
-description: "Strom, Gas, Verträge, Budget und Notgroschen im 4K-Prüfpfad ordnen: Mit Rechnern, Checklisten, Fallstudien und verlässlichen Marktbenchmarks."
+seoTitle: "Fixkosten-Ratgeber: Strom, Verträge & Budget"
+description: "Ratgeber zu Strom, Gas, Internet, Versicherungen, Konto und Haushaltsbudget. Mit nachvollziehbaren Rechenwegen, Rechnern und dem 4K-Prüfpfad."
 date: 2026-08-08
 draft: false
 author: "Frank Hartung"

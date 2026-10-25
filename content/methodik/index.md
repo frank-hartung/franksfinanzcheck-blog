@@ -1,6 +1,6 @@
 ---
 title: "So arbeiten wir: Beweissystem, Methodik & Redaktionsstandards"
-description: "Transparenz bei FranksFinanzcheck: Beweis-Register mit Fallstudien und Messreihen, versionierte Vergleichsmethodik je Themenbereich, Belegklassen an jeder Zahl, öffentliches Änderungsprotokoll, Claude-Faktenprüfung und strenge Quell-Allowlist."
+description: "So arbeiten wir mit Quellen, Rechenwegen und Vergleichskriterien. Prüfe, wie Empfehlungen entstehen und wie Änderungen dokumentiert werden."
 draft: false
 author: "Frank Hartung"
 showToc: true

@@ -1,7 +1,7 @@
 ---
 title: "Fixkosten-Scanner: Deine laufenden Kosten in einer Zahl"
-seoTitle: "Fixkosten-Scanner: laufende Kosten berechnen & sortieren | FranksFinanzcheck"
-description: "Trag deine laufenden Posten ein und sieh in einer Zahl, was dein Haushalt monatlich bindet – mit Prüfreihenfolge, Fixkostenquote und realistischem Sparkorridor. Lokal im Browser, ohne Anmeldung."
+seoTitle: "Fixkosten berechnen: laufende Haushaltskosten"
+description: "Laufende Ausgaben erfassen und monatliche Summe sowie Fixkostenquote berechnen. Der Scanner hilft, Prüfschritte zu sortieren; Eingaben bleiben lokal."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false
