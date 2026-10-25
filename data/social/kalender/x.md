@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 25.10.2026 15:58 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.10.2026 19:27 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### So, 25. Oktober 2026
-- **19:15** ⏳ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
+- **19:15** ⚪ Urlaub sparen: Budget, Buchung und Kosten im Blick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/
 ### Mo, 26. Oktober 2026
 - **08:45** ⏳ Energiekosten senken: Smarte Helfer für den Haushalt — _nutzen_ · Launch  
