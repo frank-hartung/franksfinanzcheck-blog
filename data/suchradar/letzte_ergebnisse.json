@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-10-24T11:53:30.466924+02:00",
+ "zeitstempel": "2026-10-25T12:15:17.418256+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 13,
  "zaehlung": {
@@ -19,8 +19,8 @@
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "['Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden', 'Weihnachten sparen']",
-   "fehler": "Kein Anbieter lieferte Treffer für \"['Verträge ummelden', 'Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden', 'Weihnachten sparen']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv."
+   "anfrage": "['Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden', 'Weihnachten sparen', 'Weihnachtsgeld anlegen']",
+   "fehler": "Kein Anbieter lieferte Treffer für \"['Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden', 'Weihnachten sparen', 'Weihnachtsgeld anlegen']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://"
   }
  ],
  "rang": [
@@ -153,7 +153,7 @@
     ]
    },
    {
-    "domaene": "bank99.at",
+    "domaene": "finanzenfroh.com",
     "treffer": 1,
     "top3": 1,
     "bester_rang": 2,
@@ -163,7 +163,7 @@
     ]
    },
    {
-    "domaene": "verivox.de",
+    "domaene": "falk-ratgeber.de",
     "treffer": 1,
     "top3": 1,
     "bester_rang": 3,
@@ -173,7 +173,7 @@
     ]
    },
    {
-    "domaene": "finanzenfroh.com",
+    "domaene": "geldkiste.blog",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 4,
@@ -183,7 +183,7 @@
     ]
    },
    {
-    "domaene": "peaks.com",
+    "domaene": "genialetricks.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 5,
@@ -193,7 +193,7 @@
     ]
    },
    {
-    "domaene": "accountable.de",
+    "domaene": "geldfinanzen24.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 6,
@@ -203,7 +203,7 @@
     ]
    },
    {
-    "domaene": "falk-ratgeber.de",
+    "domaene": "finanz-echo.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 7,
@@ -213,7 +213,7 @@
     ]
    },
    {
-    "domaene": "sparschweinclub.de",
+    "domaene": "cluvon.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 8,
@@ -223,7 +223,7 @@
     ]
    },
    {
-    "domaene": "genialetricks.de",
+    "domaene": "wegweisermagazin.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 9,
@@ -233,7 +233,7 @@
     ]
    },
    {
-    "domaene": "lexware.de",
+    "domaene": "das-wohnen-und-leben-magazin.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 10,
