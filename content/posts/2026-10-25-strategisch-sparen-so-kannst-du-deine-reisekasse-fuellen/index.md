@@ -1,7 +1,7 @@
 ---
 title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 description: "Reisekasse füllen mit realistischem Sparplan: Fixkosten prüfen, Sparrate rechnen, Cashback nur als Extra. Modellrechnungen mit offen genannten Annahmen."
-date: 2026-10-24T08:20:18Z
+date: 2026-10-25T08:39:44Z
 draft: true
 reserve: true
 
@@ -33,7 +33,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
 faktencheck: 2026-10-15
-lastmod: 2026-10-24
+lastmod: 2026-10-25
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
 
@@ -48,6 +48,13 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 - Bestimme dein Reiseziel, den Zeitraum und die Gesamtkosten, dann rechne die monatliche Sparrate anhand deiner vorhandenen Mittel (Beispielrechnung).
 - Prüfe regelmäßig alle laufenden Verträge und kündige ungenutzte Abos, um zusätzliche Einsparungen zu erzielen (Modellrechnung).
 - Richte einen [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) zum Reisekonto ein, der nach den festen Ausgaben ausgeführt wird, um das Urlaubsbudget vom Alltag zu trennen.
+
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Mietwagen mit Vollkasko vergleichen**](/go/mietwagen/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Wie viel musst du für deine Reise sparen?
 
@@ -114,6 +121,11 @@ Drei Dinge setzt sie voraus: Die Kündigung wirkt. Der neue Tarif deckt dieselbe
 Ob diese Beträge bei dir erreichbar sind, zeigt erst dein eigener Vergleich. Startest du mit den Abos erst nach sechs Monaten, bleiben nur 150 € statt 300 € im Jahr. Und werfe **nicht** eher Geld aufs Reisekonto, als du es Entscheidend sind die echten Zahlungstermine.
 
 Du willst Gerümpel verkaufen? Setze den Erlös nach Versand und Gebühren an, nie den alten Kaufpreis. Solche Einnahmen kommen einmal. Als Sparrate taugen sie nicht.
+
+
+
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt Mietwagen vergleichen**](/go/mietwagen/)
+
 
 ## Mietwagen: Endpreis und Regeln statt Werbeversprechen
 
