@@ -1,0 +1,91 @@
+# ============================================================
+#  SKRIPT-SYNTAX – der liegende Stand muss kompilieren
+#  ------------------------------------------------------------
+#  WARUM ES DIESEN LAUF GIBT (Bot-Watchdog #864, 25.10.2026)
+#
+#  Am 25.10.2026 stand `scripts/redaktions_standard.py` mit einem
+#  IndentationError auf main. Entstanden ist er beim ZUSAMMENFÜHREN:
+#  Der Squash-Merge von PR #869 traf eine zwischenzeitlich gewanderte
+#  `main`; Kopf und Rumpf derselben Funktion kamen aus zwei Fassungen.
+#
+#  Danach passierte vier Commits lang … nichts:
+#    · Die PR-Prüfung sieht den PR-Stand, nicht das Ergebnis des Merge.
+#    · Die Unit-Tests sehen die Module, die sie importieren.
+#    · Der Hugo-Build sieht überhaupt kein Python.
+#    · `bot_preflight.py` läuft nur in der Content-Engine.
+#    · Der Bot-Watchdog sah den Fehler – und sein Selbsttest starb daran
+#      (also kein Bericht, keine Heilung: siehe bot-watchdog.yml).
+#
+#  Dieser Lauf schließt die Lücke an der Wurzel: Er kompiliert ALLE
+#  Python-Skripte, so wie sie im Repo liegen – bei jedem Push auf main,
+#  bei jeder PR und auf Zuruf. Er ist absichtlich winzig (Sekunden,
+#  keine Abhängigkeiten außer Python), damit er nie der Grund ist,
+#  warum eine Prüfung ausbleibt.
+#
+#  Fail-closed: Ein einziger Syntaxfehler macht den Lauf rot. Das ist
+#  die unterste Stufe – für halbe Fassungen (gültig, aber mit Namen
+#  ins Leere) ist `scripts/wachen_vertrag.py` zuständig.
+#
+#  Heilung: `python3 scripts/skript_syntax_heiler.py --fix --commit`
+#  stellt die letzte kompilierbare Fassung her (Audit-Ledger unter
+#  data/skript_syntax_heilungen.jsonl). Der Bot-Watchdog tut das
+#  selbst, sobald der Befund steht.
+# ============================================================
+name: Skript-Syntax (liegender Stand)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**.py'
+      - 'requirements*.txt'
+      - '.github/workflows/skript-syntax.yml'
+  pull_request:
+    paths:
+      - 'scripts/**.py'
+      - 'requirements*.txt'
+      - '.github/workflows/skript-syntax.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skript-syntax-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  syntax:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      # Erst der Detektor, dann der Prüfling: Eine Wache, deren Selbsttest
+      # nicht läuft, darf nicht „grün" melden (dieselbe Reihenfolge wie im
+      # Markenflächen-Haken).
+      - name: Wache selbst prüfen
+        run: python3 scripts/skript_syntax_wache.py --selftest
+
+      - name: Alle Skripte kompilieren (fail-closed)
+        run: |
+          set +e
+          python3 scripts/skript_syntax_wache.py --md >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/skript_syntax_wache.py --check
+          code=$?
+          if [ "$code" != "0" ]; then
+            echo "::error::Mindestens ein Skript kompiliert nicht. Heilung: python3 scripts/skript_syntax_heiler.py --fix --commit (letzte kompilierbare Fassung, Audit in data/skript_syntax_heilungen.jsonl)."
+          fi
+          exit "$code"
+
+      # Der Heiler ist Teil des Vertrags, nicht nur der Wache: Sein
+      # Selbsttest läuft hier mit, damit ein kaputter Heiler auffällt,
+      # bevor der Watchdog ihn im Ausfall braucht.
+      - name: Heiler selbst prüfen
+        run: python3 scripts/skript_syntax_heiler.py --selftest

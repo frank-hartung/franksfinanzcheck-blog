@@ -143,6 +143,9 @@ npm run test:release                                 # Release-Scorecard: Selbst
 python3 scripts/themen_nachschub_waechter.py           # Themennachschub: Vorlauf der AUTO-Bahn in Produktionstagen (C44)
 npm run test:themen:nachschub                        # Nachschub-Wache: Selbsttest + Füllwort-Grenze + Diagnose-Tests
 python3 scripts/release_scorecard.py                 # Release-Scorecard: acht Dimensionen je Live-Artikel + Siegel
+python3 scripts/skript_syntax_wache.py --selftest    # Skript-Syntax: der LIEGENDE Stand kompiliert (#864)
+python3 scripts/skript_syntax_wache.py              # alle Skripte prüfen (Exit 1 bei Fund)
+python3 scripts/skript_syntax_heiler.py --fix --commit   # Syntaxfehler heilen (letzte gültige Fassung, auditiert)
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
@@ -938,6 +941,43 @@ tote Wache, die aussah, als wäre sie da.
   `scripts/tests/test_wachen_vertrag.py`, `npm run test:redaktion`.
   Die #766-Dauerheilung (`FAUSTREGEL_POOL`, Wähler, Bestandsmessung, keine
   zweite RS3-Implementierung) bleibt unangetastet.
+
+## Skript-Syntax: der liegende Stand muss kompilieren (DAUERVORGABE, seit #864, 25.10.2026)
+
+Am 25.10.2026 stand `scripts/redaktions_standard.py` mit einem
+IndentationError auf `main` – entstanden beim **Squash-Merge** von PR #869 auf
+eine zwischenzeitlich gewanderte `main` (Kopf und Rumpf derselben Funktion aus
+zwei Fassungen). Vier weitere Commits gingen unbemerkt darüber: Die PR-Prüfung
+sieht den PR-Stand, die Unit-Tests die importierten Module, der Hugo-Build kein
+Python, `bot_preflight.py` nur die Content-Engine. Und der Bot-Watchdog, der
+den Fehler sah, **starb an seinem eigenen Selbsttest** – alle Heil- und
+Meldestufen des Laufs standen auf `skipped` (Meldung #864).
+
+- **Eine Quelle der Wahrheit:** `scripts/skript_syntax_wache.py` kompiliert
+  alle Skripte im Arbeitsbaum (Datei, Zeile, Art, Quellzeile), ohne etwas
+  auszuführen und ohne `__pycache__` zu schreiben. Bot-Watchdog (Check 2),
+  Push-/PR-Lauf und Heiler fragen sie – niemand formuliert die Regel neu.
+- **Prävention:** `.github/workflows/skript-syntax.yml` prüft bei jedem Push
+  auf `main` und bei jeder PR. Der gemeinsame Schreibweg
+  (`scripts/git_sync.sh`) hat eine **Notbremse**: Kein Commit/Push, dessen
+  eigene `.py`-Dateien nicht kompilieren (geprüft werden nur die Dateien
+  DIESES Commits – ein Altbefund blockiert keine Automatisierung).
+- **Heilung:** `scripts/skript_syntax_heiler.py` stellt die jüngste Fassung
+  derselben Datei her, die nachweislich kompiliert. Jede Heilung steht mit
+  beiden Commit-Kennungen in `data/skript_syntax_heilungen.jsonl`. Ohne
+  heilbaren Vorgänger oder nach zwei Heilungen derselben Datei in 24 h heilt
+  er **nicht** – dann ist ein Schreiber defekt und der Befund bleibt offen.
+- **Selbsttest ≠ Repo-Stand.** Der Selbsttest einer Wache prüft den DETEKTOR
+  (erkennt er Fehler, schweigt er bei gutem Code), nie den Prüfling. Ein
+  Selbsttest, der am kaputten Fremdskript scheitert, schaltet den Melder
+  genau dann ab, wenn er gebraucht wird. Im Workflow gilt deshalb:
+  Messkern (Watchdog + Router) muss laufen – jeder weitere Selbsttest läuft
+  einzeln, fehlertolerant, und der rote Lauf entsteht erst in der Bilanz
+  NACH Messung, Heilung und Meldung.
+- Regression: `scripts/tests/test_skript_syntax_wache.py`,
+  `scripts/tests/test_skript_syntax_heiler.py`,
+  `scripts/tests/test_bot_watchdog_syntax_sicht.py` · Hintergrund:
+  `BOT-WATCHDOG-864-DAUERHEILUNG-PREMIUM-2026-10-25.md`.
 
 ## Keine Fremdmessung (DAUERVORGABE, seit #806, 19.10.2026)
 
