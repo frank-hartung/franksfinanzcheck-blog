@@ -180,6 +180,8 @@
     "test:vergleiche": "python3 scripts/vergleichsgrundsaetze_gate.py --selftest",
     "engine:kapazitaet": "python3 scripts/engine_capacity.py",
     "engine:abgleich": "python3 scripts/reserve_topics.py --abgleich",
+    "engine:nachschub": "python3 scripts/themen_nachschub_waechter.py",
+    "test:themen:nachschub": "python3 scripts/themen_nachschub_waechter.py --selftest && python3 scripts/reserve_topics.py --selftest && python3 -m unittest scripts.tests.test_themen_nachschub",
     "engine:slots": "python3 scripts/slot_wache.py --pruefen --ohne-dispatch",
     "test:engine:kapazitaet": "python3 scripts/engine_capacity.py --selftest && python3 -m unittest scripts.tests.test_engine_capacity",
     "test:engine:slots": "python3 scripts/slot_wache.py --selftest && python3 -m unittest scripts.tests.test_slot_wache",
