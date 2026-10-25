@@ -233,7 +233,7 @@
     "reserve:check": "python3 scripts/reserve_artifacts.py --check",
     "reserve:snapshot": "python3 scripts/reserve_snapshot_heiler.py --check",
     "reserve:snapshot:fix": "python3 scripts/reserve_snapshot_heiler.py --fix",
-    "test:reserve": "python3 -m unittest scripts.tests.test_reserve_artifacts scripts.tests.test_reserve_editorial_contract scripts.tests.test_reserve_recert scripts.tests.test_reserve_convergence_progress scripts.tests.test_reserve_pipeline scripts.tests.test_reserve_vorratsschutz scripts.tests.test_reserve_snapshot_heiler scripts.tests.test_reserve_operations",
+    "test:reserve": "python3 -m unittest scripts.tests.test_reserve_artifacts scripts.tests.test_reserve_editorial_contract scripts.tests.test_reserve_recert scripts.tests.test_reserve_convergence_progress scripts.tests.test_reserve_pipeline scripts.tests.test_reserve_vorratsschutz scripts.tests.test_reserve_snapshot_heiler scripts.tests.test_reserve_operations scripts.tests.test_zahlen_prompt_vertrag scripts.tests.test_zahlen_heiler",
     "manifest:check": "python3 scripts/manifest_guard.py",
     "test:manifest": "python3 scripts/manifest_guard.py --selftest && python3 -m unittest scripts.tests.test_manifest_guard",
     "deps:check": "python3 scripts/abhaengigkeits_wache.py --check",

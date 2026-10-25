@@ -146,5 +146,6 @@ jobs:
         if: always()
         run: |
           bash -n scripts/restore_drill.sh
+          bash -n scripts/backup_einrichten_wizard.sh
           python3 scripts/kv_backup.py --selftest
           echo "Restore-Drill-Code geprueft (Syntax + Selbsttest gruen)."

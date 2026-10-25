@@ -237,3 +237,54 @@ nicht, ändere den Plan." und „Drei Monate reichen zum Prüfen nicht." tragen
 weiterhin unbelegte Zahlen und Fristen. Fünf neue Regressionstests in
 `scripts/tests/test_zahlen_prompt_vertrag.py` verriegeln beide Richtungen
 (Artefakt bleibt still, echte Zahl bleibt rot).
+
+---
+
+## 7. Der Geburtspunkt bekommt denselben Heiler wie die Kette (Zahlen-Beleg-Heiler)
+
+Der Reserve-Lauf am 25.10.2026 (13:39 UTC, nach dem Merge von #861) zeigte die
+letzte offene Ursache im Klartext – der Vorrat ist nicht mehr das Problem,
+sondern die **Geburt**:
+
+| Thema | Ergebnis von 3 Versuchen |
+|---|---|
+| „SparTipps für den Alltag" | Profi-Gate: RS5 **16** unbelegte Zahlenbehauptungen |
+| „Günstige Gasanbieter für den Haushalt finden" | Profi-Gate: RS5 **20** |
+| „Günstige Flüge für den Spätsommer finden" | Profi-Gate: RS5 **8** |
+| „Günstige Tarife fürs Handy" | leere Antwort (GEMINI), dann 630 Wörter |
+
+Alle vier Themen sind danach im Cooldown – **verbrauchtes Kontingent ohne
+einen Kandidaten**. Die Wiederholung half nicht: Sie verletzt dieselbe Regel
+mit derselben Wahrscheinlichkeit erneut (die Lehre von #612, „der Retry war
+blind"). Der vorhandene KI-Heiler `heal_article_ai` kennt die Regel – aber
+**nicht die Sätze**. Er schickt den ganzen Artikel mit einer allgemeinen
+Anweisung und hofft, dass das Modell die richtigen Stellen findet.
+
+**Neu: `redaktions_standard.zahlen_beleg_heiler`** – derselbe Vertrag, den die
+Kette fährt, nur am Geburtspunkt und mit den abgelehnten Sätzen **wörtlich im
+Prompt**. Pro Satz gibt es genau zwei erlaubte Wege, beide vom Gate gedeckt:
+
+* ohne Zahl formulieren (den Hebel beschreiben, nicht den Betrag), **oder**
+* die Zahl behalten und im selben Satz als Beispiel-/Modellrechnung mit
+  genannter Annahme kennzeichnen.
+
+Verboten bleiben neue Zahlen, neue Quellen und „ca./rund/etwa" als Ersatz.
+Aufgenommen wird die Antwort nur fail-closed und mit Wirkungsprobe:
+
+1. Text nicht geschrumpft (≥ 97 % der Wörter),
+2. Linkziele byte-identisch, H2-Anzahl gleich,
+3. RS5-Zahl **strikt gesunken** (sonst keine Änderung),
+4. kein neuer RS1–RS6-Befund,
+5. ohne Befund wird **kein** Modell aufgerufen (Idempotenz, Kosten).
+
+Im Geburts-Pfad (`engine_generate.try_generate`) läuft der Heiler **genau
+einmal** je Generierung und ausschließlich dann, wenn **nur** RS5 blockiert
+(`_nur_zahlenbefund`) – ein Längen- oder Strukturdefekt braucht eine neue
+Generierung, keine Satz-OP. Scheitert die Heilung, bleibt es beim bisherigen
+Verhalten: Versuch verworfen, Befund als Korrektur-Auftrag an den nächsten
+Prompt. **Das Gate wird nicht weicher, der Text wird besser.**
+
+Belege: `scripts/tests/test_zahlen_heiler.py` (10 Tests: Prompt nennt die
+Sätze wörtlich · wirkungslose Antwort verworfen · veränderte Links verworfen ·
+geschrumpfter Text verworfen · kein Modellaufruf ohne Befund · Klasse „nur
+RS5"). Der Heiler wird in `npm run test:reserve` mitgefahren.

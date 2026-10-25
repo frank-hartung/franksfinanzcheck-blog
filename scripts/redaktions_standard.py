@@ -1369,6 +1369,107 @@ def _vertrag_gruende(a, neu_body):
                 f"wird verworfen"]
 
 
+ZAHLEN_HEILER_MAX = 12
+
+
+def build_zahlen_heiler_prompt(body, findings, titel=""):
+    """Prompt für den Zahlen-Beleg-Heiler: repariert NUR die abgelehnten Sätze.
+
+    WARUM (25.10.2026, WF-D4E0/#821)
+    --------------------------------
+    Das harte RS5-Gate lehnt jeden Satz ab, der eine Zahl mit Einheit ohne
+    Quellenlink im SELBEN Satz und ohne Modell-Kennzeichnung nennt. Im Lauf vom
+    25.10.2026 starben **vier** frische Themen bei der Geburt an genau dieser
+    Regel (16, 20 und 8 Sätze). Der vorhandene KI-Heiler (`heal_article_ai`,
+    Auftrag 5) kennt die Regel – aber **nicht die Sätze**: Er schickt den
+    ganzen Artikel mit einer allgemeinen Anweisung an das Modell und hofft,
+    dass es die richtigen Stellen findet. Das ist die Lehre von #612 („der
+    Retry war blind“) eine Ebene tiefer: Ein Heiler, der den Befund nicht
+    kennt, heilt ihn nicht.
+
+    Dieser Prompt nennt die Sätze wörtlich. Zwei erlaubte Wege, beide
+    dokumentiert im Gate: ohne Zahl formulieren **oder** die Zahl im selben
+    Satz als Beispiel-/Modellrechnung mit genannter Annahme kennzeichnen.
+    Erfunden werden darf nichts – ein Quellenlink ist ein Beleg, „ca.“ nicht.
+    """
+    nummeriert = "\n".join(f"{i}. \u00ab{s}\u00bb" for i, s in enumerate(findings, 1))
+    return (
+        "Du bist Schlussredakteur eines seriösen deutschen Finanz-Ratgeber-Blogs. "
+        "Im folgenden Artikel lehnt das harte Zahlen-Gate diese Sätze ab, weil "
+        "sie eine Zahl nennen, ohne im SELBEN Satz einen klickbaren Quellenlink "
+        "oder eine ausdrückliche Modell-/Beispielrechnungs-Kennzeichnung zu "
+        "tragen:\n\n"
+        + nummeriert
+        + "\n\nAUFTRAG: Formuliere AUSSCHLIESSLICH diese Sätze neu. Pro Satz "
+        "sind genau zwei Wege erlaubt:\n"
+        "(a) OHNE ZAHL formulieren – beschreibe den Hebel, nicht den Betrag.\n"
+        "(b) Die Zahl behalten und im SELBEN Satz als Beispielrechnung / "
+        "Modellrechnung mit genannter Annahme kennzeichnen („In der "
+        "Beispielrechnung mit einer Annahme von … ergibt sich …“).\n\n"
+        "VERBOTEN: neue Zahlen, neue Quellen, erfundene Studien oder Links; "
+        "„ca.“, „rund“ oder „etwa“ als Ersatz für die Kennzeichnung.\n\n"
+        "HARTE REGELN:\n"
+        "- Alles außerhalb dieser Sätze bleibt WORTGLEICH.\n"
+        "- Alle Links bleiben byte-identisch; keine neuen Links.\n"
+        "- Die Anzahl der H2-Überschriften bleibt exakt gleich.\n"
+        "- Der Text wird nicht kürzer.\n"
+        "- Antwort: NUR der vollständige Markdown-Artikel, ohne Erklärungen.\n\n"
+        f"TITEL: {titel}\n\nARTIKEL:\n{body}\n"
+    )
+
+
+def zahlen_beleg_heiler(body, titel="", ki=None):
+    """Heilt die vom RS5-Gate abgelehnten Sätze gezielt. → neuer Body oder None.
+
+    Fail-closed und idempotent geprüft, bevor etwas zurückkommt:
+
+      1. Länge        – der Text darf nicht schrumpfen (≥ 97 % der Wörter).
+      2. Struktur     – Linkziele byte-identisch, H2-Anzahl gleich.
+      3. Wirkung      – die Zahl der RS5-Befunde muss STRIKT sinken; sonst
+                        gibt es keine Änderung zurück.
+      4. Keine neuen  – RS1–RS6 dürfen keinen neuen Befund dazubekommen.
+
+    Ohne Befund wird **kein** Modell aufgerufen (Idempotenz, Kosten).
+    """
+    body = body or ""
+    findings = _reserve_numeric_claim_findings(body)
+    if not findings:
+        return None, []
+    stelle = findings[:ZAHLEN_HEILER_MAX]
+    ruf = ki or _call_ai
+    neu = ruf(build_zahlen_heiler_prompt(body, stelle, titel), max_tokens=8000)
+    if not neu:
+        print("  ✗ Zahlen-Heiler: keine Antwort – Befund bleibt.")
+        return None, stelle
+    neu = neu.strip()
+    if neu.startswith("```"):
+        neu = re.sub(r"^```[a-z]*\n|\n```$", "", neu).strip()
+    if len(neu) < 500:
+        print("  ✗ Zahlen-Heiler: Antwort zu kurz – verworfen.")
+        return None, stelle
+    if len(re.findall(r"\w+", neu)) < 0.97 * len(re.findall(r"\w+", body)):
+        print("  ✗ Zahlen-Heiler: Text geschrumpft – verworfen.")
+        return None, stelle
+    if _links(neu) != _links(body):
+        print("  ✗ Zahlen-Heiler: Linkziele verändert – verworfen.")
+        return None, stelle
+    if len(re.findall(r"^##\s", neu, re.M)) != len(re.findall(r"^##\s", body, re.M)):
+        print("  ✗ Zahlen-Heiler: H2-Anzahl verändert – verworfen.")
+        return None, stelle
+    rest = _reserve_numeric_claim_findings(neu)
+    if len(rest) >= len(findings):
+        print(f"  ✗ Zahlen-Heiler ohne Wirkung ({len(findings)} → {len(rest)}) – verworfen.")
+        return None, stelle
+    vorher = {f.split(":", 1)[0].strip() for f in reserve_quality_findings(body)}
+    nachher = {f.split(":", 1)[0].strip() for f in reserve_quality_findings(neu)}
+    neu_dazu = sorted(nachher - vorher)
+    if neu_dazu:
+        print(f"  ✗ Zahlen-Heiler führt neue Befunde ein ({', '.join(neu_dazu)}) – verworfen.")
+        return None, stelle
+    print(f"  ✅ Zahlen-Heiler: {len(findings)} → {len(rest)} unbelegte Zahlenbehauptung(en).")
+    return neu, stelle
+
+
 def heal_article_ai(a, res, verworfen=None):
     """Ein KI-Durchgang für alle fehlenden Module. Liefert neuen Body oder None.
 

@@ -164,5 +164,86 @@ class PagesDeploymentGuardTestCase(unittest.TestCase):
         self.assertTrue(os.path.exists(DEPLOY_YML))
 
 
+class AuslieferungsProbenTestCase(unittest.TestCase):
+    """Live-Proben 25.10.2026: Zwei Auslieferungs-Verträge, die tagelang
+    unbemerkt gebrochen waren, werden hier eingefroren.
+
+    Befund 1 (security.txt): /.well-known/security.txt (RFC 9116, seit
+    14.10.2026 im Bestand, #750 I-03) lieferte live HTTP 404. Ursache:
+    actions/upload-pages-artifact archiviert seit v4 mit --exclude=.[^/]*
+    – versteckte Dateien kamen nie ins Pages-Deployment, während der
+    gh-pages-Zweig (peaceiris, ohne Ausschluss) sie trug. Reparatur:
+    `include-hidden-files: true` in BEIDEN Deploy-Pfaden.
+
+    Befund 2 (sw.js ohne SHA): /sw.js lief live mit VERSION="dev" und alle
+    Asset-URLs ohne ?v=<sha>, weil deploy.yml HUGO_JSDELIVR_SHA nie
+    injizierte – obwohl asset_url.html, cover.html, ff_fontfaces.html und
+    index.sw.js genau darauf ihren Cache-Generationen-Vertrag bauen
+    (e2e/layout-ai/pinterest-watchdog setzten die Variable längst).
+
+    Ohne diese Tests kippt ein wohlmeinendes Aufräumen (Action-Update,
+    Job-Umbau) die Reparatur still zurück – dieselbe Klasse wie #537.
+    """
+
+    NOTFALL_YML = os.path.join(ROOT, ".github", "workflows", "notfall-deploy.yml")
+
+    def _laden(self, pfad: str) -> tuple[dict, str]:
+        with open(pfad, encoding="utf-8") as f:
+            text = f.read()
+        return yaml.safe_load(text), text
+
+    def _upload_schritt(self, job: dict) -> dict:
+        schritte = [s for s in job.get("steps", [])
+                    if str(s.get("uses", "")).startswith("actions/upload-pages-artifact@")]
+        self.assertEqual(len(schritte), 1,
+                         "Genau ein upload-pages-artifact-Schritt je Build-Job erwartet.")
+        return schritte[0]
+
+    def test_pages_artefakt_publiziert_versteckte_dateien(self) -> None:
+        for pfad, jobname in ((DEPLOY_YML, "deploy"), (self.NOTFALL_YML, "bauen")):
+            workflow, _ = self._laden(pfad)
+            upload = self._upload_schritt(workflow["jobs"][jobname])
+            with_wert = (upload.get("with") or {}).get("include-hidden-files")
+            self.assertIn(str(with_wert).lower(), ("true", "yes"),
+                          f"{os.path.basename(pfad)}: include-hidden-files fehlt – "
+                          "/.well-known/security.txt würde live wieder 404 liefern.")
+
+    def test_deploy_pfade_injizieren_asset_sha(self) -> None:
+        for pfad, jobname in ((DEPLOY_YML, "deploy"), (self.NOTFALL_YML, "bauen")):
+            workflow, _ = self._laden(pfad)
+            env = workflow["jobs"][jobname].get("env") or {}
+            self.assertEqual(env.get("HUGO_JSDELIVR_SHA"), "${{ github.sha }}",
+                             f"{os.path.basename(pfad)}: Job '{jobname}' muss "
+                             "HUGO_JSDELIVR_SHA injizieren, sonst rotiert die "
+                             "sw.js-Cache-Generation nicht und Asset-URLs "
+                             "tragen kein ?v=<sha>.")
+
+    def test_security_txt_quelle_ist_lieferfaehig(self) -> None:
+        """Die Quelle muss im Build landen können UND RFC-9116-Kerne tragen."""
+        quelle = os.path.join(ROOT, "static", ".well-known", "security.txt")
+        self.assertTrue(os.path.exists(quelle),
+                        "static/.well-known/security.txt fehlt – die Live-Probe "
+                        "(Contact: unter /.well-known/security.txt) wäre nie grün.")
+        with open(quelle, encoding="utf-8") as f:
+            inhalt = f.read()
+        self.assertIn("Contact:", inhalt, "RFC 9116 verlangt mindestens ein Contact-Feld.")
+        self.assertIn("Expires:", inhalt, "Ohne Expires gilt die Datei als verwaist.")
+
+    def test_versteckter_build_bestand_bleibt_klein(self) -> None:
+        """include-hidden-files publiziert ALLE Dotfiles des Builds. Damit das
+        eine bewusste Entscheidung bleibt, darf static/ keine neuen
+        versteckten Pfade ansammeln, die niemand live erwartet."""
+        erlaubt = {".well-known", ".nojekyll"}
+        static_versteckt = set()
+        static_root = os.path.join(ROOT, "static")
+        for eintrag in os.listdir(static_root):
+            if eintrag.startswith("."):
+                static_versteckt.add(eintrag)
+        self.assertTrue(static_versteckt <= erlaubt,
+                        f"Neue versteckte Pfade in static/ ({sorted(static_versteckt - erlaubt)}) "
+                        "würden durch include-hidden-files ungeprüft live gehen – "
+                        "bewusst freigeben oder entfernen.")
+
+
 if __name__ == "__main__":
     unittest.main()
