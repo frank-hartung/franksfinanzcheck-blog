@@ -4,6 +4,12 @@
 **Datum:** 24.10.2026 · **Branch:** `arena/41b69185-franksfinanzcheck-blog` · **Basis:** `8a0ac6b` (`main`, 24.10.2026)
 **Vorgänger:** `SICHERHEITS-WACHE-WF-E813-DAUERHEILUNG-PREMIUM-2026-10-15.md` · `WF-E813-809-DAUERHEILUNG-PREMIUM-2026-10-19.md` · `SICHERHEITS-WACHE-WF-E813-809-DAUERHEILUNG-2026-10-19.md`
 
+**Nachtrag 25.10.2026:** PR #852 ist gemergt. Die Nachschärpe auf Branch
+`arena/49f09c66-franksfinanzcheck-blog` beseitigt die verbliebene manuelle
+ID-Kopierfalle, härtet die Edge-Schreibreihenfolge und macht Datenschutz-B7 zu
+einem echten Abschlussblocker. Die Abschnitte H2–H5 und 5 beschreiben diesen
+aktuellen Stand; der forensische Ausgangsbefund bleibt unverändert dokumentiert.
+
 ---
 
 ## 1. Forensischer Ist-Befund (belegt an den Live-Läufen bis 24.10.2026)
@@ -48,11 +54,10 @@ Eine Profi-Agentur begnügt sich nicht mit dem Hinweis „Dashboard einrichten�
 - **`newsletter-worker/src/index.js` + `wrangler.toml` + `test/index.test.js`:**
   - `BUILD = "ff-newsletter-2026-10-24"` steht in `wrangler.toml` und wird in `/healthz` öffentlich (`{ok, ts, bau}`) sowie authentifiziert ausgeliefert (verrät keinerlei Geheimnisse oder interne Struktur, 93/93 Node-Tests grün).
 - **`scripts/worker_betrieb_wache.py` + `.github/workflows/sicherheits-wache.yml`:**
-  - `sicherheits-wache.yml` übergibt die öffentliche Repository-Variable `KV_NAMESPACE_ID_ABO` an den Worker-Messschritt.
-  - `diagnose_unvollstaendiges_bild()` trennt ohne zusätzliche Netzaufrufe und **ohne je Rohwerte aus der Antwort oder Umgebung in Berichte zu kopieren** exakt drei Fälle:
-    1. `bau` fehlt + `KV_NAMESPACE_ID_ABO` leer/ungültig → **Übersprungener Deploy wegen fehlender Repository-Variable `KV_NAMESPACE_ID_ABO`** (inkl. exaktem GitHub-Pfad *Settings → Secrets and variables → Actions → Tab „Variables“*).
-    2. `bau` fehlt oder weicht vom Repo-Soll ab + `KV_NAMESPACE_ID_ABO` gültig → **Veralteter Worker-Deploy live** → `worker-deploy.yml` starten.
-    3. `bau == Repo-Soll`, aber Pflichtfelder fehlen → **Aktueller Worker läuft live, hat aber `x-ff-key` abgelehnt** → `NEWSLETTER_WORKER_EXPORT_KEY` mit `EXPORT_KEY` abgleichen.
+  - `diagnose_unvollstaendiges_bild()` trennt ohne zusätzliche Netzaufrufe und **ohne je Rohwerte aus der Antwort oder Umgebung in Berichte zu kopieren** zwei belastbare Fälle:
+    1. `bau` fehlt oder weicht vom Repo-Soll ab → **übersprungener/veralteter Worker-Deploy**. Der aktuelle Rat verweist auf die automatische Auflösung der bestehenden `ABO`-Bindung und verbietet einen ungeplanten Ersatz-Namespace.
+    2. `bau == Repo-Soll`, aber Pflichtfelder fehlen → **aktueller Worker läuft live, hat aber `x-ff-key` abgelehnt** → `NEWSLETTER_WORKER_EXPORT_KEY` mit `EXPORT_KEY` abgleichen.
+  - Eine kopierte GitHub-Variable ist seit dem Nachtrag weder Voraussetzung noch Deploy-Beweis für diese Diagnose. Der optionale Altparameter bleibt allein aufrufkompatibel, beeinflusst die Ursachenentscheidung aber nicht mehr.
   - `offline_pruefen()` überwacht dauerhaft, dass `BUILD` in `wrangler.toml` und `build_stempel` in `src/index.js` vorhanden bleiben.
 
 ### H3 — Härtung des Edge-Werkzeugs A1 + Ein-Befehl-Automatik B7 (`scripts/cloudflare_edge_freigabe.py`, `scripts/blog_header_gate.py`)
@@ -60,25 +65,32 @@ Eine Profi-Agentur begnügt sich nicht mit dem Hinweis „Dashboard einrichten�
 - **Vollständige Transform-Rule-Prüfung (`regel_abweichungen`):** Prüft `enabled != False`, `action == "rewrite"`, normalisierten Host-Filter (`AUSDRUCK` auf Hauptdomain + `www`), `operation == "set"` und exakte Werte aller 8 Kopfzeilen; `regel_koerper()` setzt explizit `"enabled": True`.
 - **Kreuzbeweis im `--selftest`:** Beweist bei jedem Lauf maschinell, dass die aus `cloudflare/edge-schutz.md` gelesenen 8 Kopfzeilen `blog_header_gate.befunde_fuer()` mit **0 Fehlern und 0 Warnungen** bestehen.
 - **Token- & Redirect-Schutz:** `_KeineWeiterleitung` verhindert jede Weitergabe des Bearer-Tokens über HTTP-3xx; Fehlermeldungen sind bereinigt.
-- **Datenschutz B7 per Befehl (`npm run edge:b7` / `npm run edge:b7:apply`):** Stellt `content/datenschutz/index.md` nach Einschalten des Proxys idempotent auf Runbook B7 um (geprüft gegen `DatenschutzQuellvertrag` / `test_datenschutz_freigabe.py`). Solange der Proxy noch aus ist, bleibt `content/datenschutz/index.md` unangetastet wahrheitsgemäß; sobald live `cf-ray` aktiv ist, erinnert `blog_header_gate.py` automatisch an B7, falls noch der Vor-Proxy-Text steht.
+- **Datenschutz B7 per Befehl (`npm run edge:b7` / `npm run edge:b7:apply`):** Stellt `content/datenschutz/index.md` nach Einschalten des Proxys idempotent auf Runbook B7 um (geprüft gegen `DatenschutzQuellvertrag` / `test_datenschutz_freigabe.py`). Solange der Proxy noch aus ist, bleibt `content/datenschutz/index.md` unangetastet wahrheitsgemäß.
+- **Kontrollierte Apply-Reihenfolge (Nachtrag):** Vollständiger Read-Preflight für beide Web-Hosts, SSL und Ruleset; danach **Header-Regel → SSL → DNS-Proxy**. Gezielte A/AAAA/CNAME-Lesungen verhindern unvollständige Standardseiten und Mail-DNS-Eingriffe. Genau eine eigene Regel ist Soll; Duplikate sind Drift. Updates erhalten ihre Position zu fremden Regeln.
+- **Read-after-write:** Erst eine erneute API-Messung darf „API-SOLL NACHGEWIESEN“ melden. Erst danach führt `--apply` B7 lokal aus. Ein Regel-Schreibfehler lässt im zustandsbehafteten Regressionstest SSL und DNS unverändert.
+- **Abschlussblocker:** Technisch korrekte Live-Header bleiben ehrlich `OK`; ein offener, nur teilweise aktualisierter oder nicht prüfbarer B7 landet zusätzlich in `abschluss_blocker` und verhindert den Gesamtabschluss in `sicherheits_nachweis.live_pruefen()`.
 
-### H4 — Fail-Closed für manuellen Worker-Deploy + Live-Beweis nach `wrangler deploy` (`scripts/worker_deploy_vorbereiten.py`, `.github/workflows/worker-deploy.yml`)
-- **Manueller Aufruf (`workflow_dispatch`):** Fehlt für den gewählten Worker `KV_NAMESPACE_ID_ABO` bzw. `D1_DATABASE_ID`, bricht `Deploy planen` jetzt **fail-closed mit Exit 1 + `::error::` + Einrichtungs-Tabelle in `GITHUB_STEP_SUMMARY`** ab – kein still übersprungener grüner Handlauf mehr!
-- **Push-Lauf (`push`):** Schreibt eine sichtbare `::warning::` + Step-Summary-Erklärung (warum nicht deployt wurde und dass die Variable unter *Tab „Variables“* statt *Secrets* liegen muss), ohne Duplikat-Issues neben WF-E813 zu erzeugen.
+### H4 — Automatische Produktionsbindung + Fail-Closed + Live-Beweis (`scripts/worker_ressourcen.py`, `scripts/worker_deploy_vorbereiten.py`, `.github/workflows/worker-deploy.yml`)
+- **Keine manuelle ID-Kopierfalle mehr:** Nach der Environment-Freigabe liest `worker_ressourcen.py` über den bestehenden Deploy-Zugang `ABO` (`kv_namespace`, `namespace_id`) aus `ff-newsletter` bzw. `DB` (`d1`, `id`) aus `klick-zaehler`. Es wird nichts angelegt, migriert oder gelöscht; IDs erscheinen nur in `GITHUB_OUTPUT`, nicht in Log oder Summary.
+- **Eindeutig statt geraten:** Genau eine passende Bindung mit gültiger ID ist Pflicht. Fehlt sie, ist sie mehrdeutig, fehlt das Leserecht oder ist eine explizit gesetzte Variable ungültig, bricht der Deploy **vor Wrangler** rot ab. Eine gültige explizite ID bleibt für Bootstrap kompatibel und wird nicht still durch eine andere Ressource ersetzt.
+- **Kein leerer Matrix-Erfolg:** Der zugangslose Planungsjob prüft nur Quellstruktur und Auswahl. Fehlende kopierte IDs lassen manuelle und Push-Deploys nicht mehr aus der Matrix verschwinden. Strukturfehler sind bei beiden Ereignissen rot; `PLAN_IDS` sind reine, nicht geschriebene Prüfattrappen.
 - **Post-Deploy-Beweis (`--nachweis`):** Direkt nach `wrangler deploy` prüft `worker-deploy.yml` live gegen `https://abos.franksfinanzcheck.de/healthz` (mit 4 Versuchen über 2 s / 5 s / 10 s für Edge-Propagation), dass der erwartete `BUILD`-Stempel aus `wrangler.toml` tatsächlich ausgeliefert wird.
 
 ### H5 — Vollständiger Live-Nachweis & lückenlose CI-Verdrahtung (`scripts/sicherheits_nachweis.py`, `.github/workflows/sicherheits-wache.yml`, `.github/workflows/alert-on-failure.yml`, `package.json`)
 - `sicherheits_nachweis.live_pruefen()` validiert immer **beide** Messdateien (`header` und `worker`) vor der Statusentscheidung und nennt bei Mehrfach-Rot alle offenen Säulen gemeinsam (`header: BEFUND, worker: STOERUNG – kein vollständiger Live-Nachweis.`).
-- `sicherheits-wache.yml` und `npm run test:sicherheit` führen jetzt sämtliche 8 Selbsttests und 8 Unit-Test-Module der Sicherheits- und Deploy-Kette gemeinsam aus.
-- `alert-on-failure.yml` liefert für `sicherheit-live`, `sicherheit-worker` und `sicherheit-wache` den geschärften Handlungsweg inkl. `KV_NAMESPACE_ID_ABO`-, `edge:freigabe:apply`- und `edge:b7:apply`-Schritten (abgesichert in `alert_scoping_sim.mjs`).
+- `sicherheits-wache.yml` und `npm run test:sicherheit` führen jetzt sämtliche 9 Selbsttests und 8 Unit-Test-Module der Sicherheits- und Deploy-Kette gemeinsam aus; die Abhängigkeits-Wache folgt mit eigenem Selbsttest und Unit-Modul.
+- Der Abschluss prüft neben `OK` und vollständiger Zielabdeckung auch optionale, strikt validierte `abschluss_blocker`. Ein technisch grüner Header mit offenem B7 bleibt dadurch im Einzelbefund wahrheitsgemäß grün, der Gesamtabschluss aber rot.
+- `alert-on-failure.yml` liefert für `sicherheit-live`, `sicherheit-worker`, `sicherheit-nachweis` und `sicherheit-wache` den geschärften Handlungsweg inkl. automatischer Bindungsauflösung, separatem Backup-Vertrag sowie `edge:freigabe:apply`- und `edge:b7:apply`-Schritten (abgesichert in `alert_scoping_sim.mjs`).
 
 ---
 
-## 3. Verifikation (alle Prüfungen lokal grün am 24.10.2026)
+## 3. Verifikation (lokale Prüfungen vom 24./25.10.2026)
 
 | Prüfung | Ergebnis |
 |---|---|
-| `npm run test:sicherheit` | ✅ **8 Selbsttest-Suiten + 196 Unit-Tests (163 + 33) + 4 Offline-Wachen grün** |
+| `npm run test:sicherheit` | ✅ **9 Selbsttest-Suiten + 196 Sicherheits-Unit-Tests (195 bestanden, 1 erwarteter Skip) + 33 Abhängigkeits-Tests + 4 Offline-Wachen grün** |
+| `npm run test:ki` | ✅ **54 Python-Tests + 17/17 KI-Worker-Tests + Transport-Sabotageproben grün** (mit isolierter PyYAML-6.0.3-Umgebung, keine produktiven Schlüssel) |
+| `npm run test:backup` | ✅ **29/29 Tests + KV-/Einrichtungs-/Frische-Selbsttests grün** (ebenfalls mit isolierter PyYAML-Umgebung) |
 | `cd newsletter-worker && node --test` | ✅ **93/93 Tests grün** (inkl. neuem `healthz`-Build-Stempel-Vertrag) |
 | `cd cloudflare/klick-zaehler && node --test test/worker.test.mjs` | ✅ **34/34 Tests grün** |
 | `cd cloudflare/ki-assistent && node --test test/worker.test.mjs` | ✅ **17/17 Tests grün** |
@@ -86,18 +98,20 @@ Eine Profi-Agentur begnügt sich nicht mit dem Hinweis „Dashboard einrichten�
 | `python3 scripts/ki_transportweg.py --selftest` | ✅ **19 Proben grün** (T6-Transportvertrag unverletzt) |
 | `python3 scripts/manifest_guard.py --selftest && python3 scripts/manifest_guard.py` | ✅ **19 Proben + 13 Manifeste grün** |
 | `python3 scripts/alert_issue_identity.py --selftest` | ✅ **10 Fallgruppen, 60 Workflows grün** |
-| Workflow-YAML (`sicherheits-wache.yml`, `worker-deploy.yml`, `alert-on-failure.yml`) | ✅ `yaml.safe_load` + echte `bash -e -o pipefail` Shell-Regressionen grün |
+| Workflow-YAML | ✅ **89/89 Workflow-Dateien** mit PyYAML 6.0.3, einschließlich doppelter Schlüssel, syntaktisch geprüft; echte `bash -e -o pipefail`-Shell-Regressionen grün |
+| Statische Hygiene | ✅ `py_compile` für alle geänderten Python-Module und `git diff --check` ohne Befund |
 
 ---
 
 ## 4. Bewusste Grenzen (Ehrlichkeits- & Sicherheits-Doktrin)
 
 - **Kein künstliches Grün und kein manuelles Schließen von #815:** In der Sandbox existieren weder produktive Cloudflare-Tokens noch produktive Worker-Secrets. Die Wache **soll** rot bleiben, bis Edge-Proxy/Header (A1) und Worker-Deploy (D2) live aktiv sind; der Auto-Close (`alert-on-failure.yml` + `sicherheits_nachweis.py --abschluss` + `alert_resolve_gate.py`) schließt #815 danach vollautomatisch beim ersten echten grünen Live-Lauf.
-- **`content/datenschutz/index.md` noch nicht vorab umgeschaltet:** Solange der Cloudflare-Proxy live noch aus ist, wäre die Behauptung eines aktiven Cloudflare-CDNs unzutreffend. Dafür steht `npm run edge:b7:apply` bereit – ein einziger idempotenter Befehl direkt nach `npm run edge:freigabe:apply`.
+- **`content/datenschutz/index.md` noch nicht vorab umgeschaltet:** Solange der Cloudflare-Proxy live noch aus ist, wäre die Behauptung eines aktiven Cloudflare-CDNs unzutreffend. `npm run edge:freigabe:apply` führt B7 deshalb erst nach erfolgreicher API-Gegenmessung lokal aus; der Stand muss committed werden. Bis dahin verhindert `abschluss_blocker` zusätzlich jedes vermeintliche Gesamtgrün.
+- **Zonen-Zugang weiterhin nicht belegt:** Für die tatsächliche Edge-Herstellung wird ein ausreichend berechtigter Zonen-Token benötigt. Es wurden weder Zugangsdaten abgefragt oder offengelegt noch DNS, SSL, Regeln oder produktive Worker in dieser Sandbox verändert.
 
 ---
 
-## 5. Einmalige Inhaber-Checkliste nach dem Merge (~10 Minuten bis zum automatischen Abschluss von #815)
+## 5. Inhaber-Checkliste nach dem Merge (echter Live-Abschluss von #815)
 
 Nach dem Merge dieses Branches nach `main`:
 
@@ -105,20 +119,36 @@ Nach dem Merge dieses Branches nach `main`:
    ```bash
    CLOUDFLARE_API_TOKEN="<Zonen-Token mit DNS:Edit, Settings:Edit, Transform Rules:Edit>" \
      npm run edge:freigabe:apply
-   npm run edge:b7:apply
+   npm run edge:b7
    git add content/datenschutz/index.md && git commit -m "docs(datenschutz): Cloudflare-Proxy B7 nach Freigabe aktiviert" && git push origin main
    ```
-2. **GitHub Repository-Variable für den Newsletter-Worker eintragen (Ursache des übersprungenen Deploys):**
-   - GitHub → **Settings → Secrets and variables → Actions → Tab „Variables“ → New repository variable**
-   - Name: `KV_NAMESPACE_ID_ABO` · Wert: die vorhandene 32-stellige Hex-ID des produktiven `ABO`-KV-Namespaces aus Cloudflare (ausdrücklich unter **Variables**, nicht unter *Secrets*).
-   - Prüfen, dass im Environment `cloudflare-produktion` `CF_WORKERS_DEPLOY_TOKEN` und `CLOUDFLARE_ACCOUNT_ID` hinterlegt sind sowie `NEWSLETTER_WORKER_EXPORT_KEY` (= Worker `EXPORT_KEY`) und `NEWSLETTER_WORKER_WRITE_KEY` (= Worker `EXPORT_KEY_WRITE`, verschieden vom Leseschlüssel) in den Repository-Secrets stimmen (Runbook A4/D2).
-3. **Newsletter-Worker von `main` ausrollen (mit automatischem `/healthz`-Build-Nachweis):**
+   Der Apply liest zuerst den kompletten Ist-Stand, schreibt Regel → SSL → DNS,
+   misst anschließend erneut und führt erst dann B7 lokal aus. Mail-DNS bleibt
+   unangetastet; bestehendes `Full (strict)` wird nie herabgestuft.
+2. **Worker-Zugänge prüfen, keine produktive ID mehr manuell kopieren:**
+   - Im Environment `cloudflare-produktion` müssen `CF_WORKERS_DEPLOY_TOKEN`
+     (`Workers Scripts: Read` + Deploy-Recht) und `CLOUDFLARE_ACCOUNT_ID`
+     hinterlegt sein. `NEWSLETTER_WORKER_EXPORT_KEY` (= Worker `EXPORT_KEY`) und
+     `NEWSLETTER_WORKER_WRITE_KEY` (= Worker `EXPORT_KEY_WRITE`, verschieden vom
+     Leseschlüssel) müssen weiterhin zusammenpassen (Runbook A4/D2).
+   - Der Resolver liest die produktive `ABO`-Bindung selbst. `KV_NAMESPACE_ID_ABO`
+     ist für diesen Deploy nur optionaler Bootstrap; das separate verschlüsselte
+     Backup benötigt die dokumentierte Variable weiterhin.
+3. **Newsletter-Worker von `main` ausrollen bzw. automatischen Deploy freigeben:**
+   Da die Deploy-Kette selbst geändert wurde, plant der Push auf `main` die
+   betroffenen Worker automatisch. Alternativ:
    ```bash
    gh workflow run worker-deploy.yml --ref main -f worker=newsletter-worker
    ```
-   *(Im Environment `cloudflare-produktion` freigeben → Schritt prüft live `bau == ff-newsletter-2026-10-24`.)*
-4. **Live-Abnahme starten – schließt #815 automatisch:**
+   Im Environment `cloudflare-produktion` freigeben. Der Lauf löst die bestehende
+   Bindung auf, deployt und prüft live `bau == ff-newsletter-2026-10-24`. Ein
+   übersprungener Job oder nur grüner Plan ist ausdrücklich kein Nachweis.
+4. **Live-Abnahme starten – schließt #815 nur bei echtem Gesamtgrün:**
    ```bash
    gh workflow run sicherheits-wache.yml --ref main
    ```
-   Sobald `Live-Messung (täglich und auf Zuruf)` inklusive `Live-Nachweis abschließen` grün durchläuft, schließt der `resolve`-Job des Fehler-Alertings Vorgang **#815** automatisch mit echtem Live-Beweis.
+   Sobald F-01 vollständig `OK`, das authentifizierte Worker-Bild vollständig
+   `OK` und kein Abschlussblocker (insbesondere B7) offen ist, schließt der
+   `resolve`-Job des Alertings Vorgang **#815** automatisch. Bei `BEFUND`,
+   `STOERUNG`, `TEILWEISE`, fehlendem Leseschlüssel oder offenem B7 bleibt der
+   Vorgang absichtlich offen.

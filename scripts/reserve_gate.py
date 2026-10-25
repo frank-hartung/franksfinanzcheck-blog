@@ -296,6 +296,20 @@ def themen_vielfalt(candidates: list[dict]) -> tuple[int, dict]:
     return len(familien), familien
 
 
+def nachschub_lage() -> dict | None:
+    """Vorlauf der AUTO-Bahn – oder ``None``, wenn die Messung nicht geht.
+
+    Fail-open mit Absicht: Eine kaputte Nachschub-Messung darf die
+    Engpass-Diagnose nicht verhindern, sie soll sie nur schärfen. Gemessen
+    wird ausschließlich in `themen_nachschub_waechter.lage()`.
+    """
+    try:
+        import themen_nachschub_waechter as waechter
+        return waechter.lage()
+    except Exception:  # noqa: BLE001 – Diagnose darf nie blockieren
+        return None
+
+
 def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
     """Warum ist der Vorrat unter dem Ziel? Ursachenklassen statt Rätselraten.
 
@@ -348,25 +362,72 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
             f"Gate – erster Fund: "
             f"„{(blocker[0].get('reason') or 'ohne Angabe')[:120]}“.")
 
-    # 3. NACHSCHUB: Gibt es überhaupt freie Themen?
+    # 3. NACHSCHUB: Gibt es überhaupt freie Themen – und in WELCHER Bahn?
+    #
+    #    REPARATUR 25.10.2026 (WF-D4E0 / #821): Hier stand „Die Disposition
+    #    findet kein freies Thema (alles thematisch belegt oder im Cooldown)".
+    #    Am 25.10. war dieser Satz nachweislich falsch: 21 Themen waren frei –
+    #    aber sämtlich YMYL-Hochrisiko in der FACHFREIGABE-Bahn, aus der die
+    #    Automatik per Vertrag nichts veröffentlichen darf. Wer in dieser Lage
+    #    „alles belegt" meldet, schickt die Redaktion zu Cooldowns, Dubletten
+    #    und Provider-Keys – also überallhin außer zur einzigen Ursache:
+    #    fehlender Themennachschub für die AUTO-Bahn.
+    #    Gemessen wird mit `themen_nachschub_waechter.lage()` und damit über
+    #    `engine_capacity.lage()` → `reserve_topics.disponieren()`: eine
+    #    Messregel, dieselbe wie im Pre-Flight (Issue #521). Der Vorlauf in
+    #    TAGEN ist die Zahl, die eine Redaktion planen kann.
     try:
-        import generate_drafts as g
-        import reserve_topics as rt
-        frei = rt.disponieren(g.load_topics(), limit=3)
-        if not frei:
+        lage = nachschub_lage()
+        if lage is None:                       # fail-open: alte Messung
+            import generate_drafts as g
+            import reserve_topics as rt
+            frei = rt.disponieren(g.load_topics(), limit=3)
+            frei_auto, frei_fach = (len(frei), 0) if frei else (0, 0)
+            vorlauf, fehlend = 0.0, 0
+        else:
+            frei_auto = int(lage["frei_auto"])
+            frei_fach = int(lage["frei_fachfreigabe"])
+            vorlauf = lage["vorlauf_tage"]
+            fehlend = lage["fehlende_themen"]
+            if not frei_auto and not frei_fach:
+                zeilen.append(
+                    f"THEMENMANGEL (BEIDE BAHNEN): Kein freies Thema – "
+                    f"{lage['themen_belegt']} von {lage['themen_gesamt']} "
+                    f"sind thematisch belegt, {lage['themen_im_cooldown']} im "
+                    f"Cooldown. Nachschub in data/topics.yaml eintragen; "
+                    f"`python3 scripts/themen_nachschub_waechter.py` nennt "
+                    f"den Vorlauf in Tagen.")
+            elif not frei_auto:
+                zeilen.append(
+                    f"THEMENMANGEL (AUTO-BAHN): Kein Thema der AUTO-Bahn frei "
+                    f"– die {frei_fach} freien Themen sind sämtlich "
+                    f"YMYL-Hochrisiko (Fachfreigabe, nie automatisch "
+                    f"veröffentlichbar). Die Automatik hat nichts zu "
+                    f"produzieren; das ist Nachschub, kein KI- oder "
+                    f"Provider-Ausfall. Neue AUTO-Themen in data/topics.yaml "
+                    f"eintragen (`python3 "
+                    f"scripts/themen_nachschub_waechter.py` nennt den "
+                    f"Vorlauf in Tagen).")
+        # Ein Vorlauf unter dem Mindestvorlauf ist ein eigener Befund – auch
+        # wenn heute noch produziert werden KANN. Genau diese Vorwarnung fehlte
+        # zwischen dem 19.10. und dem 25.10.2026: Der Vorrat war schon leer,
+        # als der erste Alarm kam.
+        if frei_auto and lage is not None and lage["verdikt"] != "ok":
             zeilen.append(
-                "THEMENMANGEL: Die Disposition findet kein freies Thema "
-                "(alles thematisch belegt oder im Cooldown). Nachschub in "
-                "data/topics.yaml eintragen – `python3 "
-                "scripts/reserve_topics.py --status` zeigt die Lage.")
-        elif len(candidates) < target:
+                f"THEMENVORLAUF KNAPP: {frei_auto} AUTO-Themen frei = "
+                f"{vorlauf:g} Produktionstage (Mindestvorlauf "
+                f"{lage['mindestvorlauf_tage']}). Es fehlen {fehlend} Themen – "
+                f"`python3 scripts/themen_nachschub_waechter.py` rechnet den "
+                f"Vorlauf nach.")
+        if frei_auto and len(candidates) < target:
+            naechstes = lage["befund"] if lage is not None else ""
             zeilen.append(
                 f"PRODUKTION: {target - len(candidates)} Kandidat(en) fehlen "
-                f"im Pool, obwohl freie Themen bereitstehen (nächstes: "
-                f"„{frei[0].get('title')}“). Die tatsächlichen Stufenausgänge "
-                f"zeigen, ob Produktion, redaktionelle Ablehnung oder "
-                f"Zeitbudget den Nachschub begrenzt haben; ein fehlender "
-                f"Messnachweis belegt keinen API-/Schlüsselfehler.")
+                f"im Pool, obwohl {frei_auto} freie AUTO-Themen bereitstehen "
+                f"(Vorlauf {vorlauf:g} Tage). Die tatsächlichen "
+                f"Stufenausgänge zeigen, ob Produktion, redaktionelle "
+                f"Ablehnung oder Zeitbudget den Nachschub begrenzt haben; ein "
+                f"fehlender Messnachweis belegt keinen API-/Schlüsselfehler.")
     except Exception as exc:  # noqa: BLE001
         zeilen.append(f"(Themen-Disposition nicht lesbar: {exc})")
 
@@ -825,6 +886,15 @@ def assessment(cert: Path, posts: Path) -> dict:
                 klasse, message = KLASSE_NACHWEIS, "Entwürfe oder Einzel-Nachweise sind gedriftet."
             else:
                 klasse, message = KLASSE_ENGPASS, "Aktuell gemessen; Zielbestand noch nicht erreicht."
+                # WF-D4E0 / #821: Der Vorrat ist unter dem Ziel, WEIL die
+                # AUTO-Bahn kein Thema mehr hat – nicht, weil ein Gate zu
+                # streng misst. Diese Ursache gehört in die Meldung, die im
+                # Ticket landet; sonst steht dort drei Wochen lang nur
+                # „Zielbestand nicht erreicht" und niemand schaut auf den
+                # Themennachschub.
+                lage = nachschub_lage()
+                if lage and lage.get("verdikt") == "erschoepft":
+                    message = f"{message} Ursache: {lage['befund']}"
     stages = {str(n): os.environ.get(f"RESERVE_STUFE{n}_STATUS", "unbekannt")
               for n in (1, 2, 3, 4)}
     stages["sicherung"] = os.environ.get("RESERVE_SYNC_STATUS", "unbekannt")

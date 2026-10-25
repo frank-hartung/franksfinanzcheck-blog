@@ -125,6 +125,73 @@ FUELLWOERTER = {
     "aendert", "wissen", "weisst", "bringt", "bringen",
 }
 
+# ---------------------------------------------------------------------------
+#  DEKLINATIONS-LÜCKE (25.10.2026, WF-D4E0 / #821)
+# ---------------------------------------------------------------------------
+#  WARUM DIESE LISTE EXISTIERT – und warum sie NICHT „mehr Wörter" ist
+#  ---------------------------------------------------------------------
+#  Die Liste oben enthält „guenstig", „guenstiger", „clever", „einfache",
+#  „kleine" – aber nicht die gebeugten Formen derselben Wörter. Ein Titel wie
+#  „Günstige Tarife fürs Handy" trägt damit plötzlich das „Leitbegriff"-Wort
+#  „guenstige", das kein Füllwort war: Ein EINZIGES bestehendes Artikel-Wort
+#  („Günstige Tarife für …") sperrte so 13 völlig verschiedene Themen.
+#
+#  Gemessen am 25.10.2026 (nicht geschätzt):
+#    * 202 Themen im Pool, 154 galten als „thematisch belegt".
+#    * Top-Blocker der belegten Themen waren KEINE Sachbegriffe, sondern
+#      „guenstige(n)" (15 Themen), „tarife" (7), „anbieter" (4), „wechsel"
+#      (4), „welche" (2), „fehler" (2), „minute" (1) …
+#    * Frei disponierbar in der AUTO-Bahn: **0**. Der Vorrat fiel seit dem
+#      19.10. von 6 auf 1, weil die Produktion kein Thema mehr fand – nicht,
+#      weil die KI versagte (Issues #821, #826).
+#  Nach dieser Ergänzung: 40 frei über alle Bahnen, davon 14 in der AUTO-Bahn
+#  – ohne eine einzige Sachgrenze zu verschieben. Die Dublettenprüfung wird
+#  NICHT aufgeweicht: „Stromfresser" bleibt spezifisch, „Wechselbonus" bleibt
+#  spezifisch (Präfix-Toleranz greift erst ab PRAEFIX_MIN=7 Zeichen, also
+#  nie für „wechsel" → „wechselbonus").
+#
+#  REGEL FÜR ERWEITERUNGEN: Aufgenommen wird nur, was im Titel NICHTS
+#  unterscheidet – Beugungen bereits gelisteter Wörter (guenstige, besten,
+#  kleinen …), reine Rollen-/Vorgangs-Nomen (tarif, anbieter, wechsel,
+#  fehler) und Jahreszeiten (sommer, winter …). Produkte und Sachthemen
+#  (Mietwagen, Kreditkarte, Balkonkraftwerk, Wärmepumpe) bleiben Leitbegriffe.
+FUELLWOERTER |= {
+    # Beugungen von bereits gelisteten Füllwörtern
+    "guenstige", "guenstigen", "guenstiges", "guenstigem",
+    "billig", "billige", "billigen", "billiger", "billiges",
+    "einfachen", "einfacher", "einfaches", "kleinen", "kleiner",
+    "kleines", "grossen", "grosser", "grosses",
+    "bester", "bestes", "cleveren", "cleveres",
+    # Reine Rollen-/Vorgangs-Nomen: „Der günstige Anbieter" ist kein Thema.
+    "tarif", "tarife", "tarifs", "anbieter", "anbietern", "anbieters",
+    "wechsel", "fehler", "fehlern", "minute", "minuten", "spartipp",
+    "spartipps", "aktuelle", "aktuellen", "aktueller", "beliebte",
+    "beliebten", "typische", "typischen", "haeufige", "haeufigen",
+    # Fragewörter („Welcher Tarif …" / „Welche Karte …")
+    "welche", "welcher", "welches", "welchem", "welchen",
+    # Jahreszeiten: Sie rahmen ein Thema, sie sind es nicht
+    # („Reiseversicherung für den Winter/Sommer" bleibt dieselbe Frage –
+    # dort kollidiert weiterhin „reiseversicherung", nicht die Jahreszeit).
+    "fruehling", "sommer", "herbst", "winter", "spaetsommer",
+    # Weitere Beugungen und Vorgangs-/Bewertungswörter. Aufgenommen wurde
+    # ausschließlich, was in der Messung vom 25.10.2026 über den GESAMTEN
+    # Bestand (95 Artikel + 202 Themen) bei mindestens drei Titeln stand,
+    # ohne ein Thema zu benennen: „sicher", „kündigen", „Vorteile",
+    # „Angebote", „Anpassung", „buchen", „Einstieg", „richtig", „klappt",
+    # „monatlich", „online", „Karten", „finanziell", „günstigsten" sowie die
+    # Verben „rechnen/planen/worauf". Produkte, Risiken und Sachthemen
+    # (Mietwagen, Internet, Kreditkarte, Stromfresser, Fixkosten, Gebühren,
+    # Zinsen, Urlaub, Ausland, Fallen, Pflicht) bleiben bewusst Leitbegriffe –
+    # eine bequeme Füllwort-Liste würde die Dublettenprüfung entwerten.
+    "sicher", "kuendigen", "kuendigst", "vorteil", "vorteile", "nachteile",
+    "angebot", "angebote", "anpassung", "buchen", "einstieg",
+    "richtige", "richtigen", "richtiger", "klappt", "monatlich",
+    "monatliche", "monatlichen", "online", "karten", "finanziell",
+    "finanzielle", "finanzieller", "guenstigsten",
+    "rechnen", "rechnest", "rechnet", "planst", "worauf", "woran", "wofuer",
+    "womit", "erkennen", "erkennst", "erkennt",
+}
+
 # Leitbegriff = inhaltstragendes Token ab dieser Länge (nach Normalisierung).
 LEIT_MIN = 6
 # Präfix-Toleranz für Wortformen: „gasrechnung" ~ „gasrechnungen".

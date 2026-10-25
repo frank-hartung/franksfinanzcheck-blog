@@ -116,7 +116,16 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 # Live-Artikel unbrauchbar gemacht, und die Site registrierte einen Service
 # Worker ohne Manifest. Beide Fehler waren im Build unsichtbar – jede Korrektur
 # ohne Wache hier wäre eine Leihgabe.
-GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
+GUARDS = [# Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
+          # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
+          # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
+          # von 6 auf 1, weil die AUTO-Bahn kein freies Thema mehr hatte –
+          # gemerkt hat es erst der rote End-Gate, jede Nacht, drei Wochen
+          # lang. Eine Wache, die niemand verlangt, führt irgendwann niemand
+          # aus; ihr Selbsttest friert Urteil, Bahn-Trennung und
+          # Env-Klemmung ein (C6).
+          "themen_nachschub_waechter.py",
+          # Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Geldflaechen ausserhalb der Textkette. Gehoert ins
           # Regelwerk, weil eine Wache, die niemand verlangt,
           # irgendwann niemand mehr ausfuehrt.
@@ -2101,6 +2110,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     schritte, _fehler = _gate_schritte(root)
     checks += c42_gate_schritt_hat_erzeuger(schritte, STEP_SIGNATURES, root=root)
     checks += c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows, root=root)
+    checks += c44_themen_nachschub(script_texts, wflows, root=root)
     return checks
 
 
@@ -3413,6 +3423,104 @@ def c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows,
             if klasse not in text:
                 out.append(("C43", f"scripts/tests/{name}: die Testklasse `{klasse}` "
                                    "fehlt (#822)."))
+    return out
+
+
+# --- C44: Der Vorrat endet nicht, er läuft aus (#821, 25.10.2026) -----------
+#
+# Befund: Zwischen dem 19.10. und dem 25.10.2026 fiel der Reserve-Vorrat von
+# sechs auf einen gate-fertigen Kandidaten, und JEDE Nacht wurde derselbe
+# Schritt rot. Die Ursache stand nirgends im Ticket: In der AUTO-Bahn war kein
+# Thema mehr frei. 154 von 202 Themen galten als „thematisch belegt" – zu
+# einem guten Teil nur, weil die Dublettenprüfung „guenstig" kannte, aber nicht
+# „guenstige(n)", und weil Jahreszeiten wie Sachbegriffe zählten. Die übrigen
+# 21 Themen waren sämtlich YMYL-Hochrisiko, also per Vertrag nie automatisch
+# veröffentlichbar. Der Melder sagte „alles belegt oder im Cooldown" – wahr
+# war das Gegenteil: frei, aber in der falschen Bahn.
+#
+# Ein Vorrat, der still ausläuft, ist die teuerste Fehlerklasse dieses Repos:
+# Der Lauf bleibt grün, solange niemand ihn misst, und wird erst rot, wenn
+# nichts mehr da ist. C44 verlangt deshalb die MECHANIK, nicht eine Zahl
+# (eine zustandsabhängige Regel würde bei leerem Pool jedes Merge blockieren –
+# C34): eine Wache, die den Vorlauf in TAGEN misst, ihre Registrierung im
+# vertraglichen Minimum (C6), den Aufruf im Reserve-Lauf, die Bahn-scharfe
+# Diagnose im End-Gate und die Füllwort-Grenze, die Produkte nicht entwertet.
+C44_WACHE = "themen_nachschub_waechter.py"
+C44_WORKFLOW = "content-reserve.yml"
+C44_TEST = "test_themen_nachschub.py"
+C44_FUELLWOERTER = ("\"guenstige\"", "\"tarife\"", "\"anbieter\"", "\"welche\"")
+C44_DIAGNOSE = ("THEMENMANGEL (AUTO-BAHN)", "nachschub_lage",
+                "THEMENVORLAUF KNAPP")
+
+
+def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
+    """Der Themennachschub hat eine Wache, einen Fahrer und eine ehrliche Diagnose."""
+    out = []
+    wache = (script_texts or {}).get(C44_WACHE, "")
+    if not wache:
+        out.append(("C44", f"scripts/{C44_WACHE} fehlt – ohne sie meldet sich "
+                           "ein leerer Vorrat erst, wenn er leer ist (#821)."))
+    else:
+        for marker, befund in (
+                ("--selftest", "die Wache wäre nicht prüfbar (C6)"),
+                ("engine_capacity", "die Messung wäre eine zweite Zählregel statt "
+                                    "der des Disponenten (C22/#521)"),
+                ("vorlauf_tage", "der Vorlauf in Tagen fehlt – die einzige Zahl, "
+                                 "die eine Redaktion planen kann"),
+                ("FACHFREIGABE", "die Bahn-Trennung fehlt im Befund")):
+            if marker not in wache:
+                out.append(("C44", f"scripts/{C44_WACHE}: `{marker}` fehlt – "
+                                   f"{befund} (#821)."))
+    if C44_WACHE not in GUARDS:
+        out.append(("C44", f"scripts/{C44_WACHE} steht nicht im vertraglichen "
+                           "Minimum (C6)."))
+
+    # Füllwort-Grenze: Die Deklinations-Lücke ist geschlossen, Produkte bleiben
+    # Leitbegriffe. Beides wird geprüft – eine bequeme Liste wäre die nächste
+    # Lüge.
+    themen = (script_texts or {}).get("reserve_topics.py", "")
+    if not themen:
+        out.append(("C44", "scripts/reserve_topics.py fehlt."))
+    else:
+        if "FUELLWOERTER |=" not in themen:
+            out.append(("C44", "scripts/reserve_topics.py: die Ergänzung der "
+                               "gebeugten Füllwörter (FUELLWOERTER |= …) fehlt – "
+                               "ein einziges Artikel-Wort sperrt dann ganze "
+                               "Themenfamilien (#821)."))
+        for wort in C44_FUELLWOERTER:
+            if wort not in themen:
+                out.append(("C44", f"scripts/reserve_topics.py: `{wort}` fehlt in "
+                                   "der Füllwort-Ergänzung (#821)."))
+
+    # Die Diagnose des End-Gates muss die Bahn nennen – nicht „alles belegt".
+    gate_text = (script_texts or {}).get("reserve_gate.py", "")
+    if not gate_text:
+        out.append(("C44", "scripts/reserve_gate.py fehlt."))
+    else:
+        for marker in C44_DIAGNOSE:
+            if marker not in gate_text:
+                out.append(("C44", f"scripts/reserve_gate.py: `{marker}` fehlt – "
+                                   "der Engpass-Befund nennte die Ursache nicht "
+                                   "(#821)."))
+
+    # Der Fahrer: Ohne Workflow-Schritt läuft die Wache nie.
+    wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C44_WORKFLOW:
+            wf = inhalt or ""
+    if not wf:
+        wf = _read(os.path.join(root, ".github", "workflows", C44_WORKFLOW))
+    if not wf:
+        out.append(("C44", f".github/workflows/{C44_WORKFLOW} fehlt."))
+    elif C44_WACHE not in wf:
+        out.append(("C44", f".github/workflows/{C44_WORKFLOW}: `{C44_WACHE}` "
+                           "wird nicht aufgerufen – eine Wache ohne Fahrer "
+                           "(#821)."))
+
+    # Ein Vertrag ohne Test ist Prosa.
+    if not os.path.isfile(os.path.join(root, "scripts", "tests", C44_TEST)):
+        out.append(("C44", f"scripts/tests/{C44_TEST} fehlt – der Vertrag wäre "
+                           "ungetestet (#821)."))
     return out
 
 
@@ -5460,6 +5568,23 @@ RULE_TEXT = {
            "Content-Verlust); der Watchdog fährt Heiler und Zielwache; "
            "Report-Schema 5 kennt SSOT und Zieldaten; Tests und Selbsttest "
            "laufen im Vertrag (Pinterest P10/P14, #822, 24.10.2026).",
+    "C44": "Der Vorrat endet nicht, er läuft aus: Zwischen dem 19.10. und "
+           "dem 25.10.2026 fiel der Reserve-Vorrat von 6 auf 1, und jede "
+           "Nacht wurde derselbe Schritt rot – in der AUTO-Bahn war kein "
+           "Thema mehr frei. 154 von 202 Themen galten als belegt, zu "
+           "einem guten Teil nur, weil die Dublettenprüfung „guenstig“ "
+           "kannte, aber nicht „guenstige(n)“; die übrigen 21 waren "
+           "sämtlich YMYL-Hochrisiko (Fachfreigabe). Der Befund sagte "
+           "„alles belegt oder im Cooldown“ – wahr war: frei, aber in der "
+           "falschen Bahn. Jetzt misst themennachschub_waechter.py den "
+           "Vorlauf in PRODUKTIONSTAGEN über engine_capacity.lage() (eine "
+           "Messregel, wie im Pre-Flight), der Reserve-Lauf ruft die Wache "
+           "VOR der Kette auf, reserve_gate.py unterscheidet „AUTO-Bahn "
+           "leer“, „beide Bahnen leer“ und „Vorlauf knapp“, und die "
+           "Füllwort-Grenze ist geschlossen (0 → 19 freie AUTO-Themen), "
+           "ohne Produkte zu entwerten: „Stromfresser“, „Kreditkarte“ und "
+           "„Reiseversicherung“ kollidieren weiterhin (WF-D4E0, #821, "
+           "25.10.2026).",
     "C42": "Jeder Gate-Schritt hat einen lebenden Erzeuger: Der "
            "Governance-Report #806 fuehrte zwei Info-Zeilen unter „Datenlagen & "
            "Status“ – einen Datenimport ohne Dienst und die Seitenaufrufe als "
@@ -5534,7 +5659,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C42": "Jeder Gate-Schritt hat einen lebenden Erzeuger (kein Schritt ohne "
                 "Quelle, keine dauerhafte „Datenlage offen“-Zeile)",
          "C43": "Ein geparktes Ziel ist kein Pin-Ziel (P10 misst die richtige "
-                "Menge, P14 heilt über die SSOT, die Zielwache hat einen Fahrer)"}
+                "Menge, P14 heilt über die SSOT, die Zielwache hat einen Fahrer)",
+         "C44": "Der Vorrat endet nicht, er läuft aus (Vorlauf in Tagen, "
+                "Bahn-scharfe Diagnose, Füllwort-Grenze)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -7449,7 +7576,7 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C43 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C44 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

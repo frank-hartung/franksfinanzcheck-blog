@@ -7,9 +7,11 @@
 #      (tools/wrangler, npm ci --ignore-scripts).
 #    · Jeder Deploy braucht die Freigabe im Environment
 #      `cloudflare-produktion` (Required reviewer, nur Branch main).
-#    · Ressourcen-IDs kommen aus Repository-Variablen (keine Geheimnisse):
-#      KV_NAMESPACE_ID_ABO (Newsletter), D1_DATABASE_ID (Klick-Zähler).
-#      Fehlt eine ID, wird der Worker nicht deployt (Hinweis statt Fehler).
+#    · Ressourcen-IDs kommen aus Repository-Variablen ODER – seit der zweiten
+#      WF-E813-Härtung – lesend aus der bereits produktiven Worker-Bindung.
+#      Dadurch blockiert eine fehlende kopierte Variable den Deploy nicht mehr.
+#      Es wird NIE ein neuer/leerer Speicher geraten oder angelegt; fehlt auch
+#      die bestehende Bindung, bricht der Deploy sichtbar rot ab (kein Skip-Grün).
 #    · `workers_dev = false` ist Pflicht (scripts/worker_deploy_vorbereiten.py).
 #    · Vor dem Deploy laufen die Worker-Tests.
 #
@@ -44,6 +46,7 @@ on:
       - "cloudflare/ki-assistent/**"
       - "tools/wrangler/**"
       - "scripts/worker_deploy_vorbereiten.py"
+      - "scripts/worker_ressourcen.py"
       - ".github/workflows/worker-deploy.yml"
 
 permissions:
@@ -92,8 +95,6 @@ jobs:
           EREIGNIS: ${{ github.event_name }}
           AUSWAHL: ${{ inputs.worker }}
           GEAENDERT: ${{ steps.diff.outputs.dateien }}
-          KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
-          D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
         run: |
           python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_deploy_vorbereiten.py --plan
@@ -143,11 +144,24 @@ jobs:
             *) echo "::error::Unbekannter Worker: $WORKER"; exit 1 ;;
           esac
 
-      - name: Konfiguration vorbereiten (IDs aus Variablen, workers_dev = false)
+      - name: Produktive Ressource auflösen (lesend, ohne neuen Speicher)
+        id: ressourcen
         env:
           WORKER: ${{ matrix.worker }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_WORKERS_DEPLOY_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
           D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
+        run: |
+          set -euo pipefail
+          python3 scripts/worker_ressourcen.py --selftest
+          python3 scripts/worker_ressourcen.py --aufloesen "$WORKER"
+
+      - name: Konfiguration vorbereiten (aufgelöste IDs, workers_dev = false)
+        env:
+          WORKER: ${{ matrix.worker }}
+          KV_NAMESPACE_ID_ABO: ${{ steps.ressourcen.outputs.kv_namespace_id_abo }}
+          D1_DATABASE_ID: ${{ steps.ressourcen.outputs.d1_database_id }}
         run: python3 scripts/worker_deploy_vorbereiten.py --vorbereiten "$WORKER"
 
       - name: Manifest-Wache (package.json & Lockfile vor npm ci)

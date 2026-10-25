@@ -234,7 +234,30 @@ class ProxyDiagnose(unittest.TestCase):
             [(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])
         self.assertEqual(code, gate.EXIT_OK)
         self.assertTrue(any("Datenschutz-Folge B7 offen" in w for w in daten["warnungen"]))
+        self.assertTrue(any("Datenschutz-Folge B7 offen" in b for b in daten["abschluss_blocker"]))
         self.assertIn("edge:b7:apply", bericht)
+
+    def test_815_fehlende_datenschutzdatei_ist_ebenfalls_abschlussblocker(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp, patch.object(gate, "WURZEL", Path(tmp)):
+            (code, bericht, daten), _ = _messen(
+                [(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_OK)
+        self.assertIn("nicht prüfbar", bericht)
+        self.assertTrue(any("fehlt" in b for b in daten["abschluss_blocker"]))
+
+    def test_815_alte_empfaengertabelle_allein_blockiert_den_abschluss(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            datei = wurzel / "content" / "datenschutz" / "index.md"
+            datei.parent.mkdir(parents=True)
+            datei.write_text("| GitHub (Hosting); Cloudflare (DNS) |", encoding="utf-8")
+            with patch.object(gate, "WURZEL", wurzel):
+                (code, _, daten), _ = _messen(
+                    [(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_OK)
+        self.assertTrue(any("Empfängertabelle" in b for b in daten["abschluss_blocker"]))
 
 
 class WorkflowVerdrahtung(unittest.TestCase):

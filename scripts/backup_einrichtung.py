@@ -511,8 +511,9 @@ def _e6_namespace(ergebnis: Ergebnis, umgebung: dict, konto: str, cf_zugang: str
     if not ns:
         ergebnis.neu("E6", titel, "fehler", "fehlt",
                      "ID des Namespace ABO (Cloudflare → Storage & Databases → Workers KV) als "
-                     "REPOSITORY-Variable KV_NAMESPACE_ID_ABO eintragen – der Worker-Deploy nutzt "
-                     "dieselbe Variable.", LINK_KV_NAMESPACES)
+                     "REPOSITORY-Variable KV_NAMESPACE_ID_ABO eintragen – das Offsite-Backup "
+                     "benötigt sie weiterhin; der Worker-Deploy kann die bestehende ABO-Bindung "
+                     "inzwischen selbst auflösen.", LINK_KV_NAMESPACES)
         return
     if not _HEX32.match(ns):
         ergebnis.neu("E6", titel, "fehler", "kein gültiges Format (erwartet: 32 Hex-Zeichen, nicht der Name)",

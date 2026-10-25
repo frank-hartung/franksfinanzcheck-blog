@@ -38,6 +38,7 @@ import re
 import sys
 import tempfile
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -48,6 +49,7 @@ API = "https://api.cloudflare.com/client/v4"
 REGEL = "FF Sicherheits-Header"
 PHASE = "http_response_headers_transform"
 HOSTS = ("franksfinanzcheck.de", "www.franksfinanzcheck.de")
+WEB_DNS_TYPEN = frozenset(("A", "AAAA", "CNAME"))
 AUSDRUCK = ('(http.host eq "franksfinanzcheck.de" or '
             'http.host eq "www.franksfinanzcheck.de")')
 SSL_ERLAUBT = ("strict", "full")
@@ -129,7 +131,11 @@ def regel_abweichungen(regel: dict | None, kopfzeilen: list[tuple[str, str]]) ->
         gruende.append(f"Aktion ist `{regel.get('action') or '?'}`, soll `rewrite`")
     if _ausdruck_norm(regel.get("expression") or "") != _ausdruck_norm(AUSDRUCK):
         gruende.append("Host-Filter (`expression`) weicht vom Soll für Hauptdomain + www ab")
-    ist = ((regel.get("action_parameters") or {}).get("headers")) or {}
+    parameter = regel.get("action_parameters") or {}
+    if not isinstance(parameter, dict):
+        gruende.append("Aktionsparameter fehlen oder sind kein Objekt")
+        return gruende
+    ist = parameter.get("headers") or {}
     if not isinstance(ist, dict):
         gruende.append("Header-Parameter fehlen oder sind kein Objekt")
         return gruende
@@ -146,6 +152,13 @@ def regel_abweichungen(regel: dict | None, kopfzeilen: list[tuple[str, str]]) ->
     if fremd:
         gruende.append("überzählige Kopfzeilen in derselben Regel: " + ", ".join(fremd))
     return gruende
+
+
+def regelsatz_abweichungen(regeln: list[dict], kopfzeilen: list[tuple[str, str]]) -> list[str]:
+    """Genau eine eigene Regel; Duplikate sind Drift, keine doppelte Absicherung."""
+    if len(regeln) != 1:
+        return [f"Transform Rule „{REGEL}“ muss genau einmal vorhanden sein; gefunden: {len(regeln)}"]
+    return regel_abweichungen(regeln[0], kopfzeilen)
 
 
 def ssl_bewerten(wert: str) -> tuple[bool, str]:
@@ -179,6 +192,28 @@ def plan_dns(satz: list[dict]) -> list[str]:
         if not eintrag.get("proxied"):
             offene.append(eintrag.get("name") or "?")
     return offene
+
+
+def dns_eintraege(token: str, zid: str) -> dict[str, list[dict]]:
+    """Liest beide Web-Hosts gezielt und vollständig, ohne Mail-DNS anzufassen.
+
+    Eine unselektierte Standardseite der Cloudflare-API kann bei mehr als 20
+    Einträgen unvollständig sein. Der exakte Namensfilter vermeidet diese
+    Blindstelle; nur A/AAAA/CNAME sind für den HTTP-Proxy relevant.
+    """
+    ergebnis: dict[str, list[dict]] = {}
+    for name in HOSTS:
+        weg = f"/zones/{zid}/dns_records?name={urllib.parse.quote(name, safe='')}&per_page=100"
+        daten = _resultat(_api(token, weg), f"DNS-Lesung für {name}")
+        if not isinstance(daten, list):
+            raise RuntimeError(f"DNS-Lesung für {name} hat kein Listenformat.")
+        web = [eintrag for eintrag in daten
+               if isinstance(eintrag, dict) and eintrag.get("name") == name
+               and eintrag.get("type") in WEB_DNS_TYPEN]
+        if any(not isinstance(eintrag.get("id"), str) or not eintrag["id"] for eintrag in web):
+            raise RuntimeError(f"DNS-Lesung für {name} enthält einen Eintrag ohne eindeutige ID.")
+        ergebnis[name] = web
+    return ergebnis
 
 
 # ------------------------------------------------------------------ Datenschutz B7
@@ -286,11 +321,17 @@ def _resultat(antwort: dict, was: str):
 
 
 def zone_id_holen(token: str, zone: str) -> str:
-    result = _resultat(_api(token, f"/zones?name={zone}"), "Zonensuche")
-    if not result:
-        raise RuntimeError(f"Zone {zone} nicht im Konto des Tokens – Rechte prüfen "
-                           "(Zone.DNS:Edit für genau diese Zone).")
-    return result[0]["id"]
+    result = _resultat(_api(token, f"/zones?name={urllib.parse.quote(zone, safe='')}"), "Zonensuche")
+    if not isinstance(result, list):
+        raise RuntimeError("Zonensuche hat kein Listenformat; keine Ersatz-Zone wird geraten.")
+    treffer = [eintrag for eintrag in result
+               if isinstance(eintrag, dict) and eintrag.get("name") == zone]
+    # Nur die ausdrücklich benannte Zone ist zulässig. Fehlende Namen oder
+    # Mehrdeutigkeit sind ein harter Stopp, niemals eine Einladung zum Raten.
+    if len(treffer) != 1 or not isinstance(treffer[0].get("id"), str) or not treffer[0]["id"]:
+        raise RuntimeError(f"Zone {zone} nicht eindeutig im Konto des Tokens – Rechte prüfen "
+                           "(Zone.DNS:Edit für genau diese Zone). Keine Änderung an einer Ersatz-Zone.")
+    return treffer[0]["id"]
 
 
 # ------------------------------------------------------------------ Prüfen
@@ -301,24 +342,25 @@ def pruefen(token: str, zone: str) -> tuple[int, str]:
     zid = zone_id_holen(token, zone)
     zeilen.append(f"- ✅ Zone erreichbar (id …{zid[-6:]}).")
 
-    # 1. DNS-Proxy (Runbook A1, Schritt 1)
-    eintraege = _resultat(_api(token, f"/zones/{zid}/dns_records"), "DNS-Lesung")
-    host_satz = [e for e in eintraege if e.get("name") in HOSTS]
+    # 1. DNS-Proxy (Runbook A1, Schritt 1; nur Web-Einträge, keine Mail-DNS)
+    dns = dns_eintraege(token, zid)
     for name in HOSTS:
-        treffer = [e for e in host_satz if e.get("name") == name]
+        treffer = dns[name]
         if not treffer:
-            fehlt.append(f"DNS: kein Eintrag für {name}")
-            zeilen.append(f"- ❌ DNS `{name}`: kein Eintrag gefunden.")
-        elif all(e.get("proxied") for e in treffer):
-            zeilen.append(f"- ✅ DNS `{name}`: proxied (orange Wolke).")
+            fehlt.append(f"DNS: kein proxyfähiger A/AAAA/CNAME-Eintrag für {name}")
+            zeilen.append(f"- ❌ DNS `{name}`: kein proxyfähiger Web-Eintrag gefunden.")
+        elif all(e.get("proxied") is True for e in treffer):
+            zeilen.append(f"- ✅ DNS `{name}`: proxied (orange Wolke; {len(treffer)} Web-Einträge).")
         else:
-            fehlt.append(f"DNS: {name} nicht proxied")
-            zeilen.append(f"- ❌ DNS `{name}`: **nicht proxied** – die Transform Rule "
-                          "kann nicht wirken (Runbook A1, Schritt 1).")
+            fehlt.append(f"DNS: {name} nicht vollständig proxied")
+            zeilen.append(f"- ❌ DNS `{name}`: **nicht vollständig proxied** – die Transform Rule "
+                          "kann nicht zuverlässig wirken (Runbook A1, Schritt 1).")
 
     # 2. SSL-Modus (Runbook A1, Schritt 2 – `strict` bevorzugt, `full` zulässig)
     ssl = _resultat(_api(token, f"/zones/{zid}/settings/ssl"), "SSL-Lesung")
-    wert = str((ssl or {}).get("value") or "")
+    if not isinstance(ssl, dict):
+        raise RuntimeError("SSL-Lesung hat kein Objektformat; der Modus wird nicht geraten.")
+    wert = str(ssl.get("value") or "")
     ssl_ok, ssl_text = ssl_bewerten(wert)
     if ssl_ok:
         zeilen.append(f"- ✅ {ssl_text}")
@@ -327,8 +369,8 @@ def pruefen(token: str, zone: str) -> tuple[int, str]:
         zeilen.append(f"- ❌ {ssl_text}")
 
     # 3. Transform Rule (Runbook A1, Schritt 3 / cloudflare/edge-schutz.md)
-    regel = _regel_finden(token, zid)
-    abweichungen = regel_abweichungen(regel, kopfzeilen)
+    regeln = _regeln_finden(token, zid)
+    abweichungen = regelsatz_abweichungen(regeln, kopfzeilen)
     if not abweichungen:
         zeilen.append(f"- ✅ Transform Rule „{REGEL}“ aktiv und vollständig "
                       f"({len(kopfzeilen)} Kopfzeilen + Host-Filter im Soll).")
@@ -357,51 +399,52 @@ def pruefen(token: str, zone: str) -> tuple[int, str]:
     return 0, "\n".join(zeilen)
 
 
-def _regel_finden(token: str, zid: str) -> dict | None:
+def _regeln_finden(token: str, zid: str) -> list[dict]:
     try:
         result = _resultat(
             _api(token, f"/zones/{zid}/rulesets/phases/{PHASE}/entrypoint"),
             "Ruleset-Lesung")
     except RuntimeError as fehler:
         if "HTTP 404" in str(fehler):
-            return None
+            return []
         raise
-    for regel in (result or {}).get("rules") or []:
-        if regel.get("description") == REGEL:
-            return regel
-    return None
+    if not isinstance(result, dict):
+        raise RuntimeError("Ruleset-Lesung hat kein Objektformat; fehlende Regel wird nicht geraten.")
+    regeln = result.get("rules") or []
+    if not isinstance(regeln, list) or not all(isinstance(regel, dict) for regel in regeln):
+        raise RuntimeError("Ruleset-Lesung enthält keine gültige Regelliste.")
+    return [regel for regel in regeln if regel.get("description") == REGEL]
 
 
 # ------------------------------------------------------------------ Anwenden
-def anwenden(token: str, zone: str, *, ssl_wunsch: str = "full") -> tuple[int, str]:
+def anwenden(token: str, zone: str, *, ssl_wunsch: str = "full",
+             b7: bool = False) -> tuple[int, str]:
+    """Stellt A1 in sicherer Reihenfolge her und misst danach erneut.
+
+    Preflight liest DNS, SSL und Ruleset VOR der ersten Änderung. Die Header-
+    Regel wird zuerst geschrieben, SSL danach und der öffentliche DNS-Proxy
+    erst zuletzt aktiviert. Ein fehlendes Transform-Recht kann so niemals eine
+    bereits umgestellte, aber headerlose Website hinterlassen. `b7=True` wird
+    erst nach erfolgreicher API-Gegenmessung angewendet (nur CLI --apply).
+    """
     kopfzeilen = vorlage_kopfzeilen()
-    zeilen = [f"# Edge-Freigabe — Sollstand hergestellt (Zone {zone})", ""]
+    zeilen = [f"# Edge-Freigabe — kontrollierte Herstellung (Zone {zone})", ""]
     zid = zone_id_holen(token, zone)
 
-    # 1. DNS auf Proxied (idempotent)
-    eintraege = _resultat(_api(token, f"/zones/{zid}/dns_records"), "DNS-Lesung")
-    dns_geaendert = 0
-    for eintrag in eintraege:
-        if eintrag.get("name") in HOSTS and not eintrag.get("proxied"):
-            _resultat(_api(token, f"/zones/{zid}/dns_records/{eintrag['id']}",
-                           methode="PATCH", daten={"proxied": True}), "DNS-Proxy")
-            zeilen.append(f"- ✅ DNS `{eintrag['name']}` → proxied.")
-            dns_geaendert += 1
-    if dns_geaendert == 0:
-        zeilen.append("- ✅ DNS bereits proxied (keine Änderung nötig).")
-
-    # 2. SSL-Modus (idempotent, NIEMALS Downgrade von `strict` auf `full`!)
+    # PREFLIGHT: Alle Ist-Daten und benötigten IDs müssen vor dem ersten Write
+    # vorliegen. Fehlende Web-Hosts oder kaputte Antworten ändern nichts.
+    dns = dns_eintraege(token, zid)
+    fehlende_hosts = [name for name in HOSTS if not dns[name]]
+    if fehlende_hosts:
+        raise RuntimeError(
+            "Preflight ohne Änderung: kein proxyfähiger A/AAAA/CNAME-Eintrag für "
+            + ", ".join(fehlende_hosts) + ". DNS zuerst im Dashboard vervollständigen."
+        )
     ssl = _resultat(_api(token, f"/zones/{zid}/settings/ssl"), "SSL-Lesung")
-    ist_ssl = str((ssl or {}).get("value") or "")
+    if not isinstance(ssl, dict):
+        raise RuntimeError("Preflight ohne Änderung: SSL-Lesung hat kein Objektformat.")
+    ist_ssl = str(ssl.get("value") or "")
     ziel_ssl = ssl_ziel_bestimmen(ist_ssl, ssl_wunsch)
-    if ziel_ssl is not None:
-        _resultat(_api(token, f"/zones/{zid}/settings/ssl",
-                       methode="PATCH", daten={"value": ziel_ssl}), "SSL-Modus")
-        zeilen.append(f"- ✅ SSL-Modus `{ist_ssl or '?'}` → `{ziel_ssl}`.")
-    else:
-        zeilen.append(f"- ✅ SSL-Modus bereits `{ist_ssl}` (kein Downgrade, keine Änderung nötig).")
-
-    # 3. Transform Rule aktiv anlegen oder ersetzen (andere Regeln bleiben)
     try:
         ruleset = _resultat(
             _api(token, f"/zones/{zid}/rulesets/phases/{PHASE}/entrypoint"),
@@ -411,23 +454,83 @@ def anwenden(token: str, zone: str, *, ssl_wunsch: str = "full") -> tuple[int, s
             ruleset = None
         else:
             raise
+    if ruleset is not None and not isinstance(ruleset, dict):
+        raise RuntimeError("Preflight ohne Änderung: Ruleset-Lesung hat kein Objektformat.")
+    regeln = (ruleset.get("rules") or []) if isinstance(ruleset, dict) else []
+    if not isinstance(regeln, list) or not all(isinstance(regel, dict) for regel in regeln):
+        raise RuntimeError("Preflight ohne Änderung: Ruleset enthält keine gültige Regelliste.")
+    if ruleset is not None and (not isinstance(ruleset.get("id"), str) or not ruleset["id"]):
+        raise RuntimeError("Preflight ohne Änderung: Ruleset-ID fehlt.")
+    eigene = [regel for regel in regeln if regel.get("description") == REGEL]
+    abweichungen = regelsatz_abweichungen(eigene, kopfzeilen)
     neue_regel = regel_koerper(kopfzeilen)
-    if ruleset is None:
-        _resultat(_api(token, f"/zones/{zid}/rulesets", methode="POST",
-                       daten={"phase": PHASE, "rules": [neue_regel]}),
-                  "Regel anlegen")
-        zeilen.append(f"- ✅ Transform Rule „{REGEL}“ aktiv angelegt ({len(kopfzeilen)} Kopfzeilen).")
-    else:
-        bestand = [r for r in (ruleset.get("rules") or []) if r.get("description") != REGEL]
-        _resultat(_api(token, f"/zones/{zid}/rulesets/{ruleset['id']}", methode="PUT",
-                       daten={"rules": bestand + [neue_regel]}), "Regel ersetzen")
-        zeilen.append(f"- ✅ Transform Rule „{REGEL}“ aktiv gesetzt/aktualisiert "
-                      f"({len(kopfzeilen)} Kopfzeilen, {len(bestand)} andere Regeln unangetastet).")
 
-    zeilen += ["", "## Ergebnis: HERGESTELLT",
-               "", "**Nächster Pflichtschritt: Runbook B7** (`npm run edge:b7:apply` und Commit) – "
-               "der Proxy ändert die Empfängerlage in der Datenschutzerklärung.",
-               "Danach: `npm run header:check:live` oder `gh workflow run sicherheits-wache.yml --ref main`."]
+    # WRITE 1/3: Erst die Schutzregel. Bei fehlendem Recht bleibt DNS unverändert.
+    if abweichungen:
+        if ruleset is None:
+            _resultat(_api(token, f"/zones/{zid}/rulesets", methode="POST",
+                           daten={"phase": PHASE, "rules": [neue_regel]}), "Regel anlegen")
+            zeilen.append(f"- ✅ Transform Rule „{REGEL}“ zuerst aktiv angelegt "
+                          f"({len(kopfzeilen)} Kopfzeilen; DNS noch unverändert).")
+        else:
+            # Die eigene Regel an ihrer bisherigen Position ersetzen. Dadurch
+            # bleibt auch ihre Reihenfolge zu fremden Regeln stabil; Duplikate
+            # werden dennoch deterministisch auf genau eine Regel reduziert.
+            neue_regeln = []
+            ersetzt = False
+            for regel in regeln:
+                if regel.get("description") != REGEL:
+                    neue_regeln.append(regel)
+                elif not ersetzt:
+                    neue_regeln.append(neue_regel)
+                    ersetzt = True
+            if not ersetzt:
+                neue_regeln.append(neue_regel)
+            bestand_anzahl = len(regeln) - len(eigene)
+            _resultat(_api(token, f"/zones/{zid}/rulesets/{ruleset['id']}", methode="PUT",
+                           daten={"rules": neue_regeln}), "Regel ersetzen")
+            zeilen.append(f"- ✅ Transform Rule „{REGEL}“ zuerst gesetzt/aktualisiert "
+                          f"({len(kopfzeilen)} Kopfzeilen, {bestand_anzahl} andere Regeln "
+                          "mit stabiler Reihenfolge).")
+    else:
+        zeilen.append(f"- ✅ Transform Rule „{REGEL}“ bereits vollständig (kein Rewrite nötig).")
+
+    # WRITE 2/3: Sicherer Ursprungsmodus; strict wird niemals herabgestuft.
+    if ziel_ssl is not None:
+        _resultat(_api(token, f"/zones/{zid}/settings/ssl",
+                       methode="PATCH", daten={"value": ziel_ssl}), "SSL-Modus")
+        zeilen.append(f"- ✅ SSL-Modus `{ist_ssl or '?'}` → `{ziel_ssl}`.")
+    else:
+        zeilen.append(f"- ✅ SSL-Modus bereits `{ist_ssl}` (kein Downgrade, keine Änderung nötig).")
+
+    # WRITE 3/3: Erst jetzt öffentlichen Verkehr durch den geschützten Proxy führen.
+    dns_geaendert = 0
+    for name in HOSTS:
+        for eintrag in dns[name]:
+            if eintrag.get("proxied") is not True:
+                _resultat(_api(token, f"/zones/{zid}/dns_records/{eintrag['id']}",
+                               methode="PATCH", daten={"proxied": True}), f"DNS-Proxy für {name}")
+                dns_geaendert += 1
+    zeilen.append(f"- ✅ DNS-Proxy zuletzt geprüft/hergestellt ({dns_geaendert} Web-Einträge geändert; "
+                  "Mail-/Sonstigeinträge unangetastet).")
+
+    # GEGENMESSUNG: Kein HERGESTELLT allein aufgrund erfolgreicher Write-Calls.
+    pruefcode, nachweis = pruefen(token, zone)
+    zeilen += ["", "## API-Gegenmessung", "", nachweis]
+    if pruefcode != 0:
+        zeilen += ["", "## Ergebnis: NICHT VOLLSTÄNDIG – Live-Wache und #815 bleiben offen."]
+        return pruefcode, "\n".join(zeilen)
+
+    if b7:
+        b7code, b7bericht = b7_kommando(DATENSCHUTZ, schreiben=True)
+        zeilen += ["", "## Datenschutz B7", "", b7bericht]
+        if b7code != 0:
+            return b7code, "\n".join(zeilen)
+        zeilen.append("Die aktualisierte Datenschutzerklärung muss noch committed und auf `main` veröffentlicht werden.")
+
+    zeilen += ["", "## Ergebnis: API-SOLL NACHGEWIESEN",
+               "", "Abschließend muss die unabhängige Live-Wache beide Säulen "
+               "(F-01 und Worker-Zustand) vollständig messen; erst ihr Erfolg darf #815 schließen."]
     return 0, "\n".join(zeilen)
 
 
@@ -540,7 +643,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.b7_check or args.b7_apply:
         try:
             code, bericht = b7_kommando(DATENSCHUTZ, schreiben=bool(args.b7_apply))
-        except RuntimeError as fehler:
+        except (RuntimeError, OSError) as fehler:
             print(f"❌ B7-Werkzeugfehler: {fehler}", file=sys.stderr)
             return 2
         print(bericht)
@@ -554,10 +657,12 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     try:
         funktion = anwenden if args.apply else pruefen
-        code, bericht = (funktion(token, args.zone.strip(), ssl_wunsch=args.ssl)
+        code, bericht = (funktion(token, args.zone.strip(), ssl_wunsch=args.ssl, b7=True)
                          if args.apply else funktion(token, args.zone.strip()))
-    except RuntimeError as fehler:
-        print(f"❌ Werkzeugfehler (nichts verändert/behauptet): {fehler}", file=sys.stderr)
+    except (RuntimeError, OSError) as fehler:
+        print(f"❌ Werkzeugfehler oder unvollständiger Lauf: {fehler} "
+              "Bei --apply können einzelne sichere Teilschritte bereits ausgeführt sein; "
+              "Ist-Zustand mit --pruefen erneut messen, nichts auf Verdacht ändern.", file=sys.stderr)
         return 2
     print(bericht)
     return code
