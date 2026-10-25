@@ -1,9 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-25T13:53:47.305984+00:00",
-  "head": "b5138a1b",
-  "signed_at": "2026-10-25T13:47:22.300249+00:00",
-  "head": "4d782b4",
+  "signed_at": "2026-10-25T15:38:45.674825+00:00",
+  "head": "77f9bef9",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -44,8 +42,7 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
-    "scripts/redaktions_standard.py": "dcf8591230a6b505a061b6cb668d5d69b33d247741027fc0c06436e21d0077aa",
-    "scripts/redaktions_standard.py": "62ccfa114110b95a82aa998ca3de966abbaea434d6670d70ef887eef50ae0eb9",
+    "scripts/redaktions_standard.py": "112f0d85299b5545d4adc308ff05090cbda9cc95b9f26738519117b21a04b827",
     "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
@@ -57,459 +54,109 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5",
-  "audit_start_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d",
+  "files_sha256": "10430face02c540dc4510bf4d57034ac4b9a948c116df4ab42232b17a1b52201",
+  "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
-      "date": "2026-10-14",
+      "date": "2026-10-25",
       "art": "set-current",
-      "head": "7c5ff87",
+      "head": "77f9bef9",
       "geaendert": [
+        "assets/css/extended/custom.css",
         "data/brand_lock.yaml",
         "hugo.toml",
         "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/_partials/affiliate_ziele_data.html",
+        "layouts/_partials/cover.html",
+        "layouts/_partials/extend_footer.html",
+        "layouts/_partials/extend_post_content.html",
         "layouts/_partials/head.html",
+        "layouts/_partials/header.html",
+        "layouts/_partials/home_clusters.html",
+        "layouts/_partials/pillar_box.html",
         "layouts/index.sw.js",
-        "layouts/robots.txt"
+        "layouts/pillar/list.html",
+        "layouts/pillar/single.html",
+        "layouts/robots.txt",
+        "layouts/shortcodes/einspartabelle.html",
+        "layouts/shortcodes/tarifvergleich.html",
+        "scripts/affiliate_integrity_gate.py",
+        "scripts/affiliate_marketer.py",
+        "scripts/artefakt_waechter.py",
+        "scripts/bake_brand.py",
+        "scripts/blog_doctor.py",
+        "scripts/brand_guard.py",
+        "scripts/casing_guard.py",
+        "scripts/check24_links.yaml",
+        "scripts/check_covers.py",
+        "scripts/content_audit.py",
+        "scripts/fazit_schmiede.py",
+        "scripts/generate_covers.py",
+        "scripts/hardcases_guard.py",
+        "scripts/internal_linker.py",
+        "scripts/lektor_guard.py",
+        "scripts/lesbarkeit_heiler.py",
+        "scripts/link_density_guard.py",
+        "scripts/plagiat_guard.py",
+        "scripts/politur_ruine_heiler.py",
+        "scripts/publikations_vertrag.py",
+        "scripts/redaktions_standard.py",
+        "scripts/reserve_artifacts.py",
+        "scripts/shortcode_guard.py",
+        "scripts/stil_guard.py",
+        "scripts/tag_casing.py",
+        "scripts/wachen_vertrag.py",
+        "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt",
+        "static/apple-touch-icon.png",
+        "static/favicon.svg",
+        "static/images/brand/logo-light.svg",
+        "static/images/brand/logo.svg"
       ],
       "herkunft": [
         {
           "pfad": "hugo.toml",
           "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "175b5ae",
-              "datum": "2026-10-14",
-              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         },
         {
           "pfad": "layouts/_default/_markup/render-link.html",
           "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "175b5ae",
-              "datum": "2026-10-14",
-              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         },
         {
           "pfad": "layouts/_partials/head.html",
           "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "175b5ae",
-              "datum": "2026-10-14",
-              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         },
         {
           "pfad": "layouts/robots.txt",
           "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "175b5ae",
-              "datum": "2026-10-14",
-              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/brand_lock.yaml",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "175b5ae",
-              "datum": "2026-10-14",
-              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/index.sw.js",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "175b5ae",
-              "datum": "2026-10-14",
-              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-14",
-      "art": "set-current",
-      "head": "0d76a34",
-      "geaendert": [
-        "layouts/index.sw.js"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/index.sw.js",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "0d76a34",
-              "datum": "2026-10-14",
-              "betreff": "fix(codeql): 13 Funde aus security-extended beheben"
-            },
-            {
-              "sha": "a7d33ec",
-              "datum": "2026-10-14",
-              "betreff": "fix(site): Website-Härtung und Rechtstexte nach Sicherheitsaudit 14.10.2026 (M-05, M-06, M-15, M-17, M-18, N-07, I-03, I-04, I-06, I-08)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1",
-      "prev_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d"
-    },
-    {
-      "date": "2026-10-14",
-      "art": "set-current",
-      "head": "74570df",
-      "geaendert": [
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "74570df",
-              "datum": "2026-10-14",
-              "betreff": "sicherheit: Befunde F-01 bis F-10 beheben und dauerhaft absichern"
-            },
-            {
-              "sha": "424628f",
-              "datum": "2026-10-14",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "a7bdf3d2e812f7bd1f4d060f3c8c8bd6929ced06447ff92816225692fd9be883",
-      "prev_sha256": "7625b594f34898c713138b46ad70685a87b3eb45ae811f056a06ad8f840e245c"
-    },
-    {
-  "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b",
-  "audit_start_sha256": "b27321cfb9d7084f31f0b8d42a1139714128abdebcf296132abb4b1bc02691e1",
-  "audit": [
-    {
-      "date": "2026-10-15",
-      "art": "heal",
-      "head": "60db253",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "60db253",
-              "datum": "2026-10-15",
-              "betreff": "fix(einzigartigkeit): Heiler wählt Faustregeln statt Massensatz (#766)"
-            },
-            {
-              "sha": "e30ee60",
-              "datum": "2026-10-15",
-              "betreff": "chore(watchdog): Alarm-Routing-Zustand"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "e49296f6232554c34db74d9fb060b4667b29c98678aa49172d6edca738746576",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-15",
-      "art": "set-current",
-      "head": "e3fee3c",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "3d66c08",
-              "datum": "2026-10-15",
-              "betreff": "fix(affiliate): honor shared editorial exemption contract (#762)"
-            },
-            {
-              "sha": "6224589",
-              "datum": "2026-10-14",
-              "betreff": "chore(suchradar): Erfassungslauf 2026-10-14 10:42"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "89dbf27d2e94b356a223080e1cdc24bffb3bf762e51192d16f174c137eec8173",
-      "prev_sha256": "b27321cfb9d7084f31f0b8d42a1139714128abdebcf296132abb4b1bc02691e1"
-    },
-    {
-      "date": "2026-10-16",
-      "art": "heal",
-      "head": "9d7a556",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d7a556",
-              "datum": "2026-10-16",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9d7a556",
-              "datum": "2026-10-16",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "323dacd89bea60b306f4972c03434ff27bb7d5806d35b9c79450b4a4c9abc38f",
-      "prev_sha256": "5862cb9bf531deba14c7bfa361a030dbe7692f09295c14047eaae39fd91f31ac"
-    },
-    {
-      "date": "2026-10-16",
-      "art": "set-current",
-      "head": "974f9d7",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "974f9d7",
-              "datum": "2026-10-16",
-              "betreff": "fix: restore quality gate contracts for #777"
-            },
-            {
-              "sha": "e662cf0",
-              "datum": "2026-10-16",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "974f9d7",
-              "datum": "2026-10-16",
-              "betreff": "fix: restore quality gate contracts for #777"
-            },
-            {
-              "sha": "e662cf0",
-              "datum": "2026-10-16",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "d840361859827ce5ae002c300906a54a9076c206585893b1173c87104af30916",
-      "prev_sha256": "64b2f264d9265aa1e1fa94731ca309b0465cc54ef7d228a5ccb068cbabddaa76"
-    },
-    {
-      "date": "2026-10-16",
-      "art": "set-current",
-      "head": "0c13fb3",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "0c13fb3",
-              "datum": "2026-10-16",
-              "betreff": "fix(affiliate): Ausnahme-Vertrag mit einem Auswerter – Wache wieder sehend (WF-53E2, #780)"
-            },
-            {
-              "sha": "f7517a5",
-              "datum": "2026-10-16",
-              "betreff": "Fix quality-gate self-tests and preserve fail-closed contracts (#777) (#784)"
-            },
-            {
-              "sha": "1a44e39",
-              "datum": "2026-10-16",
-              "betreff": "fix(affiliate): restore fail-closed render proof (#779) (#785)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "be8e9e02f1b372aa3171ba925be786fefae8ae6140b9cf2e86ef591222b8922b",
-      "prev_sha256": "002f74b5c4fcc4de1dd158371580cff4bc7d33218185dcd43a7e5cddddb22ab6"
-    },
-    {
-      "date": "2026-10-16",
-      "art": "add",
-      "head": "1e9f69f",
-      "geaendert": [
-        "scripts/wachen_vertrag.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/wachen_vertrag.py",
-          "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
+          "urteil": "NEU OHNE SIGNATUR",
           "commits": [],
-          "commits_art": "neu-unter-siegel"
-        }
-      ],
-      "files_sha256": "c1029b7da710f9c49cd5197e3752572a81251709bd73054d7cc50f99fc2dc22d",
-      "prev_sha256": "b3a260e31a9d4a15d70664f98d9f26be3d3831738f99be3ea20a6f38550b776e"
-    },
-    {
-      "date": "2026-10-19",
-      "art": "repair",
-      "head": "1089d1c",
-      "geaendert": [],
-      "quelle": {
-        "art": "bergung",
-        "beschreibung": "Bergung aus dem beschädigten Artefakt (11 lesbare Akteneinträge, Map deckt den Baum exakt)",
-        "geborgene_akteneintraege": 11
-      },
-      "beschaedigung": {
-        "zustand": "beschaedigt",
-        "groesse": 23456,
-        "offset": 19807,
-        "verdacht": "abbruch",
-        "detail": [
-          "JSON nicht lesbar: Expecting ',' delimiter: line 502 column 7 (char 19807)",
-          "Bruchstelle: Byte 19807 von 23456 (Zeile 502)",
-          "Die Datei endet AN der Bruchstelle – Muster: ein Schreibvorgang wurde abgebrochen (halbes Siegel)."
-        ]
-      },
-      "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
-      "prev_sha256": "1848c87159c8b0c3f931a2526e573e17a57dffec749c4546c375f75ce4fdbf3f"
-    },
-    {
-      "date": "2026-10-19",
-      "art": "set-current",
-      "head": "aacb7514",
-      "geaendert": [],
-      "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
-      "prev_sha256": "1f83b5d6846c243354352e6dc4471102b342c2f10d5758fb27826474b9a51a51"
-    },
-    {
-      "date": "2026-10-25",
-      "art": "set-current",
-      "head": "b5138a1b",
-      "geaendert": [
-        "scripts/affiliate_marketer.py",
-      "head": "cbbb181",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_marketer.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "b5138a1b",
-              "datum": "2026-10-25",
-              "betreff": "fix: harden YMYL review queue and source monitoring (#859)"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "commits_art": "unbekannt"
         },
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "cbbb181",
-              "datum": "2026-10-25",
-              "betreff": "fix(rs5): der Zähler log über sich selbst – Jahreszahlen, Issue-Refs und Fett-Marker sind keine Zahlenbehauptungen (#821)"
-            },
-            {
-              "sha": "baac9d7",
-              "datum": "2026-10-25",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
+        {
+          "pfad": "scripts/check24_links.yaml",
+          "klasse": "kritisch",
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         }
       ],
-      "files_sha256": "1847c5b27c8939ea74a4307a99471016e82ec0fad87b105118aaafb13752b00d",
-      "prev_sha256": "0916b34576657655dff2593a397cc751981154e8d8c077e06d22e3e8f0573ab4"
+      "files_sha256": "daca98978b9bc08e80501cccf868cc6787591be42e8447483382f20f97100d07",
+      "prev_sha256": null
     },
     {
       "date": "2026-10-25",
       "art": "set-current",
-      "head": "cbbb181",
-      "geaendert": [],
-      "files_sha256": "1847c5b27c8939ea74a4307a99471016e82ec0fad87b105118aaafb13752b00d",
-      "prev_sha256": "a8f6fa227873156a09db6e81d1441fd57d55bd30f6be9de93be146a0e887ecee"
-    },
-    {
-      "date": "2026-10-25",
-      "art": "set-current",
-      "head": "d1528dd",
+      "head": "77f9bef9",
       "geaendert": [
         "scripts/redaktions_standard.py"
       ],
@@ -518,36 +165,12 @@
           "pfad": "scripts/redaktions_standard.py",
           "klasse": "fest",
           "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "b5138a1b",
-              "datum": "2026-10-25",
-              "betreff": "fix: harden YMYL review queue and source monitoring (#859)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "prev_sha256": "0916b34576657655dff2593a397cc751981154e8d8c077e06d22e3e8f0573ab4",
-      "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5"
-              "sha": "d1528dd",
-              "datum": "2026-10-25",
-              "betreff": "fix(rs5): Messfehler im Zahlen-Gate – Jahre, Issue-Refs und Fett-Marker zählen nicht als Behauptung (#821) (#865)"
-            }
-          ],
+          "commits": [],
           "commits_art": "seit-signatur"
         }
       ],
-      "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b",
-      "prev_sha256": "116e0597796ca60e9f4a17118304282c658cb2ef40025516190f825ae8f4914a"
-    },
-    {
-      "date": "2026-10-25",
-      "art": "set-current",
-      "head": "4d782b4",
-      "geaendert": [],
-      "prev_sha256": "93f74b3addf79556d61508732919edd938f231e5a0c38e4cf7f960bbed735ca8",
-      "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b"
+      "prev_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
+      "files_sha256": "10430face02c540dc4510bf4d57034ac4b9a948c116df4ab42232b17a1b52201"
     }
   ]
 }

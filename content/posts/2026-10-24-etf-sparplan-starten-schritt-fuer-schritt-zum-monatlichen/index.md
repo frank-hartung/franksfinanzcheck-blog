@@ -98,7 +98,7 @@ Die Eröffnung eines Depots ist der erste Schritt zu deinem Ziel. Das funktionie
 
 Lege nun deinen monatlichen Betrag fest, zum Beispiel 50 €. Wähle einen Tag für die Ausführung der Order aus.
 
-Oft bietet sich der Monatsanfang an, wenn das Gehalt frisch auf dem Konto ist. Aktiviere den Plan und prüfe nach dem ersten Monat kurz die Bestätigung im Postfach. Die Einrichtung dauert meist weniger als 15 Minuten deiner Zeit.
+Oft bietet sich der Monatsanfang an, wenn das Gehalt frisch auf dem Konto ist. Aktiviere den Plan und prüfe nach dem ersten Monat kurz die Bestätigung im Postfach. **Faustregel:** Die Einrichtung dauert meist weniger als 15 Minuten deiner Zeit.
 
 ## Modellrechnung: Wie viel könnte dein Sparplan bringen?
 
@@ -155,7 +155,7 @@ Du erhältst meist eine Nachricht per E-Mail über den Vorgang. Es entstehen dir
 
 ### Wie lange sollte ich den Sparplan laufen lassen?
 
-Geduld ist an der Börse dein wichtigster Mitarbeiter. Ein Zeitraum von 10 Jahren oder mehr ist für den Erfolg sehr wichtig.
+Geduld ist an der Börse dein wichtigster Mitarbeiter. Als Orientierung gilt: Ein Zeitraum von 10 Jahren oder mehr ist für den Erfolg sehr wichtig.
 
 Erst über diese lange Zeit kann der Zinseszinseffekt seine volle Kraft entfalten. Kurzfristige Schwankungen am Markt spielen dann kaum noch eine Rolle für dein Ergebnis. Denke also immer in Jahrzehnten statt in Monaten.
 

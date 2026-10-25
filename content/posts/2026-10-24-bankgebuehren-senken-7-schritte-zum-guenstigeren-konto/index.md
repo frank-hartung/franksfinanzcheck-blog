@@ -77,13 +77,13 @@ Die Umstellung auf ein digitales Postfach spart das sofort. Wer diese Posten str
 
 ## Wie prüfst du dein Konto auf versteckte Kosten?
 
-Logge dich in dein Online-Banking ein. Suche die Funktion für den Export deiner Umsätze. Lade die Umsätze der letzten zwölf Monate als CSV oder PDF herunter.
+Logge dich in dein Online-Banking ein. Suche die Funktion für den Export deiner Umsätze. Lade die Umsätze der letzten vier Quartale als CSV oder PDF herunter.
 
 Eine CSV-Datei lässt sich gut in Excel sortieren. So siehst du alle Buchungen eines Jahres auf einen Blick.
 
 Suche gezielt nach Wörtern wie „Entgelt“, „Provision“ oder „Preis“. Zähle diese Beträge zusammen. So bekommst du einen echten Überblick. Sortiere die Treffer nach der Höhe des Betrags.
 
-Achte auch auf seltene Abbuchungen. Karten-Gebühren kommen oft nur einmal im Jahr. Nur ein Blick über zwölf Monate findet diese Posten.
+Achte auch auf seltene Abbuchungen. Karten-Gebühren kommen oft nur einmal im Jahr. Nur ein Blick über vier Quartale findet diese Posten.
 
 | Kostenart | Jahresgebühr (EUR) | Hinweis zur Reduktion |
 | :--- | :--- | :--- |
@@ -98,7 +98,7 @@ Viele erschrecken über die Summe. Doch genau das ist der erste Schritt zu besse
 
 ## So gehst du vor: 7-Schritte-Plan zum Gebühren-Check
 
-1. **Entgelte sammeln:** Nutze den digitalen Export deiner Bankdaten für zwölf Monate. Suche in der Datei nach allen Posten, die keine eigenen Überweisungen sind. Markiere diese Zeilen farblich für eine bessere Übersicht.
+1. **Entgelte sammeln:** Nutze den digitalen Export deiner Bankdaten für vier Quartale. Suche in der Datei nach allen Posten, die keine eigenen Überweisungen sind. Markiere diese Zeilen farblich für eine bessere Übersicht.
 2. **Kategorien bilden:** Ordne jede Gebühr einer klaren Kostenart zu. Unterscheide zwischen Grundgebühren, Kartenkosten und Gebühren für einzelne Transaktionen. So erkennst du sofort dein teuerstes Verhaltensmuster beim Banking.
 3. **Summe berechnen:** Addiere alle Beträge für das gesamte Jahr zusammen. Teile die Summe durch zwölf, um deine monatliche Belastung zu sehen. Oft ist dieser Betrag höher als ein kleiner [Handyvertrag](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 4 im Modellfall. **Bedingungen prüfen:** Schau in dein Preisverzeichnis nach einer Freigrenze für kostenlose Kontoführung. Viele Banken verlangen einen Geldeingang von 700 oder 1.000 €. Prüfe, ob du diese Grenze mit deinem Gehalt sicher erreichst.
@@ -112,7 +112,7 @@ Du sparst aus eigener Kraft. Schon kleine Änderungen bringen übers Jahr viel. 
 
 **Faustregel:** Zahlst du monatlich mehr als 5 % deines Nettoeinkommens für Bankgebühren? Dann wechsle deine Strategie. Meist sinken diese Kosten um über 80 %.
 
-Bei einem normalen Einkommen sollten die Gebühren fast Null sein. Alles andere ist ein Geschenk an deine Bank. Rechne einmal nach, was du in zehn Jahren zahlst.
+Bei einem normalen Einkommen sollten die Gebühren fast Null sein. Alles andere ist ein Geschenk an deine Bank. **Modellrechnung:** Rechne einmal nach, was du in zehn Jahren zahlst.
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt Kreditkarten vergleichen**](/go/kreditkarte/)
 

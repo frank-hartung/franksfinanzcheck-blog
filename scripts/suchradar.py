@@ -74,7 +74,7 @@ from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import serp_anbieter as sa                                # noqa: E402
-from url_host import ist_host_oder_subdomain              # noqa: E402
+from url_host import ist_host_oder_subdomain, nennt_host  # noqa: E402
 
 try:                                                       # pragma: no cover
     import yaml
@@ -1098,9 +1098,12 @@ def selbsttest() -> int:
            "Datenqualität zählt Rückfall-Anfragen falsch")
     pruefe(dq["aussagekraft"] == "eingeschraenkt",
            "Datenqualität bewertet einen halben Rückfall-Lauf falsch")
-    pruefe("de.wikipedia.org" not in
-           {e["domaene"] for e in wettbewerbs_radar(
-               organische_treffer(rueckfall[0]["treffer"]))["domaenen"]},
+    # HOST-NAMENSGRENZE statt rohem „not in" (URL-Wache, ALERT #83): Der
+    # exakte Mengen-Vergleich war als Substring-Prüfung erkannt worden.
+    # nennt_host() prüft die Namensgrenzen – dieselbe Bedeutung, sauber beweisbar.
+    pruefe(not any(nennt_host(e["domaene"], "de.wikipedia.org")
+                   for e in wettbewerbs_radar(
+                       organische_treffer(rueckfall[0]["treffer"]))["domaenen"]),
            "Wikipedia-Rückfall landet im Wettbewerbs-Radar")
 
     # 9) Wettbewerbs-Radar: Häufigkeit UND Rangtiefe getrennt

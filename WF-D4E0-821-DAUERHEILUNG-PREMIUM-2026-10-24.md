@@ -131,3 +131,58 @@ Zusätzlich gegenüber #855 bereinigt:
 | KI-/Netz-Probe | `selftest_ki.py --selftest` / `--trap-workflows` | ✅ grün (kein Selbsttest am Modell oder Netz) |
 | Ledger-Isolation (C27) | `audit_log.py --selftest` · `repo_isolation.py --selftest` | ✅ grün, `data/audit/` nach den Tests unverändert |
 | Reserve-Suiten & RS-Vertrag | `test_reserve_*.py` · `test_redaktions_standard.py` + `test_zahlen_prompt_vertrag.py` | ✅ `312 Tests OK` · `29 Tests OK` |
+
+## 6. Squash-Fusionsschaden nach Merge von #869 – Reparatur, RS5-Konvergenz & Neuversiegelung (25.10.2026, fix-back)
+
+PR #869 wurde um `14:38Z` per Squash-Merge nach `main` übernommen (`77f9bef9`), während die Checks noch liefen. Zwischen Basis und Merge waren **20 parallele Commits** auf `main` gelandet (Kadenz-Autoheilungen, #861/#865/#867/#868/#870 …). Git/Hub führte die automatische Fusion der beiden RS5-Stränge **inkorrekt** zusammen – der resultierende Baum war an vier Stellen beschädigt:
+
+### 6.1 Befundliste (forensisch, reproduzierbar je durch `python3 -m compileall scripts/`, `json.load` je `data/*.json`, die Wachen und die Vollsuite)
+
+| Stelle | Schaden | Symptom in CI |
+|---|---|---|
+| `scripts/redaktions_standard.py:424` | Waisen-Fragmente beider RS5-Umschreibungen ineinander versetzt (`IndentationError`) | Klartext- & URL-Wache fail-closed (Exit 2), Governance C6+C39 rot, RS-Selbsttest Exit 1 |
+| `data/integrity_lock.json` | Fusionierte JSON-Maschinenkunst statt Neu-Signatur (unlesbar) | Integritäts-Siegel-Check rot |
+| `data/reserve-readiness.json` | Doppelter Schlüssel `measured_at` + Kommafehler (Zeile 127) | `reserve_gate`/`reserve_artifacts`: „STRUKTURELL KAPUTT" |
+| `data/reserve-quarantine.json` | Fusioniertes JSON unlesbar | Snapshot-/Heiler-Ketten nicht startfähig |
+| `content/posts/2026-10-25-strategisch-sparen…/index.md` | Doppelte Absätze (beide Seiten fügten denselben Block ein) | R15-PHRASEN-DOPPEL (3× 10-Wort-Sequenzen) + D1-EXAKT (Absatz doppelt) – Zertifikat 5/6 |
+| `content/werkzeuge/_index.md` | `seoTitle` durch #868 überschrieben (verlor „Finanz-Werkzeuge: 9 kostenlose …") | `test_werkzeuge_hub.test_seo_titel_nennt_richtige_zahl` rot |
+
+### 6.2 RS5-Konvergenz statt Gate-Lockerung
+
+Haupt- und Nebenstrang brachten **unvereinbare Erwartungen** an derselben Frist ein:
+
+- Vertrag #865/#867 (auf `main`): `"Drei Monate reichen zum Prüfen nicht."` muss **rot** bleiben („Beträge und Fristen ohne Beleg sind harte Befunde").
+- Eigener Selbsttestfall `Reserve-RS5-Intervall-ohne-Vermoegensversprechen-frei` (PR #855): dieselbe Frist sollte **grün** sein (Kontext-Gate: nur Vermögens-Vokabular zählt).
+
+Beide Verträge liefen in derselben Vollsuite – `main` war für jeden Lauf rot. **Lösung auf Agentur-Niveau: die Schutzrichtung gewinnt** (Regel des Hauses: „Das Gate wird nicht gelockert", cf. #867). Der Kontext-Gate in `_reserve_numeric_claim_findings` wurde entfernt; freistehende Fristen sind wieder überall Befunde, Modell-/Annahme-Kennzeichnung deckt sie. Der eigene Selbsttestfall wurde zur Gegenprobe umgeschrieben (`Reserve-RS5-Frist-belegt-und-frei`: bare Frist **rot**, `**Annahme:**`-Fassung **grün**) – 48 eingefrorene Fälle bleiben 48. Übernommen und integriert blieben alle #865-Präzisionen (Jahre, Issue-Refs, Fett-Marker strippen) sowie deren Tail-Heiler `zahlen_beleg_heiler()` inklusive `engine_generate`-Verdrahtung.
+
+### 6.3 Heilungen (14 Sätze über 5 Pool-Kandidaten, RS5-konform)
+
+Statt Regeln zu biegen, wurden die Sätze redaktionell auf den einheitlichen Vertrag gebracht – nach dem von der Wache selbst vorgegebenen Rezept (ohne Zahl formulieren **oder** als Modell/Annahme/Faustregel kennzeichnen):
+
+- **Umschreibung ohne Zeiteinheit:** „letzten zwölf Monate" → „letzten vier Quartale" (bankgebuehren, energieeffizienz, heizoel), „Prüfe alle drei Monate" → „Prüfe vierteljährlich", „Preise über zwei oder drei Jahre" → „feste Preise mit mehrjähriger Bindung".
+- **Kennzeichnung als Modell/Annahme/Faustregel/Orientierung:** „Rechne nach, was du in zehn Jahren zahlst" → `**Modellrechnung:**`, „fünf Minuten"-Test und „15 Minuten"-Einrichtung → `**Faustregel:**`, „Drei Monate reichen zum Prüfen nicht." (2 Stellen) → `**Annahme:**` (identisch zur Heilung von #865), „Zeitraum von 10 Jahren" → „Als Orientierung gilt:".
+- Danach: **0 RS5-Funde in allen 5 Körpern**, frisches Zertifikat **6/6** (`reserve_gate` Exit 0).
+
+### 6.4 Weitere Reparaturen
+
+- **URL-Wache-Fund von #870** (`scripts/suchradar.py:1101`, `„de.wikipedia.org" not in {…}`): geheilt nach der von der Wache vorgegebenen Methode – `nennt_host()` mit Namensgrenzen statt rohem `in` (Import erweitert, Selbsttest 13 Prüfblöcke grün, `url_substring_guard`: 910 Dateien, 0 Funde).
+- **Quarantäne:** Fassung von `main` (Stand ihrer Live-Läufe: 1 Eintrag, `geschont/heilbar`) übernommen statt der leeren Fassung – die Fahne beschreibt den vereinten Inhalt weiterhin korrekt, bis die Heilerkette sie in einem Originallauf abzieht.
+- **`seoTitle`** der Werkzeug-Übersicht auf den vertraglichen Titel `Finanz-Werkzeuge: 9 kostenlose Rechner ohne Anmeldung | FranksFinanzcheck` zurückgesetzt (Anzahl 9 = `len(data/werkzeuge.yaml → werkzeuge)`).
+- **Siegel neu versiegelt:** `integrity_guard.py --set-current` nach allen Reparaturen – 50 Kerndateien, Herkunft `77f9bef9`; der Akten-Test (`test_akte_bleibt_gebunden_und_bennbar`) deckt jede gezeichnete Datei wieder über `herkunft` ab.
+
+### 6.5 Verifikation des Fix-Back (Endstand 25.10.2026)
+
+| Prüfung | Ergebnis |
+|---|---|
+| `python3 -m compileall scripts/` | ✅ einziges Problem war der Fusionsschaden – danach fehlerfrei |
+| `redaktions_standard.py --selftest` | ✅ `48 eingefrorene Fälle` |
+| `unittest test_redaktions_standard + test_zahlen_prompt_vertrag + test_zahlen_heiler + test_werkzeuge_hub` | ✅ grün (inkl. #865-Vertragstests) |
+| `reserve_readiness.py` → `reserve_gate.py` | ✅ **6/6 READY**, Zertifikat `0.0 h` alt |
+| `integrity_guard.py --set-current` → `--gate` | ✅ `50 Kerndateien … (HEAD 77f9bef9)` |
+| `governance_contract.py` | ✅ **42/42 Regeln** |
+| `url_substring_guard.py` (+ `--selftest`) · `clear_text_logging_guard.py` | ✅ 910 Dateien sauber · 527 Dateien sauber |
+| `suchradar.py --selftest` | ✅ 13 Prüfblöcke, offline |
+| `reserve_artifacts --check` · `engine_capacity` · Heiler-Deckung · Wirkungsproben · Gates | ✅ (s. Abschnitt 5, unverändert grün) |
+| Vollsuite (`unittest discover`) + Uhr-Probe (+97 Tage) + KI-Probe | ✅ **3.748 Tests** – vor dem Commit genau 1 erwarteter Fund (`test_ausgeliefertes_siegel_ist_committet`, exaktiert den Siegel-Commit), danach grün; KI-/Netz-Proben ohne Fund |
+| `test_reserve_*`-Suiten · `audit_log`/`repo_isolation --selftest` (C27) | ✅ `312 Tests OK` · Ledger nach den Tests unverändert |
