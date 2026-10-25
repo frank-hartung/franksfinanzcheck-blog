@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-01
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
-description: "Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen oder an…"
+description: "Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen oder an."
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["Gasrechnung prüfen", "Heizkosten senken", "Gastarif wechseln"]

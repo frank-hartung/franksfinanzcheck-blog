@@ -178,6 +178,23 @@ class TestAnfragen(SandboxFall):
         self.assertTrue(begriffe, "Themenpool liefert keine Schlüsselbegriffe")
         self.assertLessEqual(len(begriffe), 5)
 
+    def test_themenpool_liefert_flache_strings_keine_listenrepr(self):
+        """Regression 25.10.2026: 15 Keywords wurden als EINE Python-Liste
+        verschickt – sichtbar als Störung im Cockpit. Der alte Test prüfte
+        nur `bool(begriffe)` und `len <= 5`; eine Liste mit einer Liste
+        bestand beide Prüfungen. Deshalb hier die Form, nicht nur die Zahl.
+        """
+        begriffe = sr._themenpool_begriffe(sr.ROOT, 15)
+        self.assertEqual(len(begriffe), 15)
+        for begriff in begriffe:
+            self.assertIsInstance(begriff, str)
+            self.assertFalse(begriff.startswith("["))
+            self.assertNotIn("', '", begriff)
+        auftraege = sr.ermittle_anfragen(
+            self.konfig(anfragen=[], max_anfragen_pro_lauf=30))
+        self.assertTrue(all(not e["anfrage"].startswith("[")
+                            for e in auftraege))
+
     def test_themenpool_auswahl_ist_datumsstabil(self):
         erste = sr._themenpool_begriffe(sr.ROOT, 5)
         zweite = sr._themenpool_begriffe(sr.ROOT, 5)
@@ -474,6 +491,80 @@ class TestLaufEndeZuEnde(SandboxFall):
         abgerufen = befund["zaehlung"]["ok"] + befund["zaehlung"]["cache"]
         self.assertLessEqual(abgerufen, 2)
         self.assertGreater(befund["zaehlung"]["uebersprungen"], 0)
+
+
+# ====================================================================
+#  DATENQUALITÄT (Live-SERP-Prüfung 25.10.2026)
+# ====================================================================
+class TestDatenqualitaet(SandboxFall):
+    """Ein Wissens-Rückfall ist kein Ranking – weder für Rang noch Radar."""
+
+    @staticmethod
+    def _treffer(domaene: str, rang: int, quelle: str) -> dict:
+        return {"domaene": domaene, "rang": rang, "quelle": quelle,
+                "titel": f"Titel {rang}", "anfrage": "q", "merkmale": []}
+
+    def test_wikipedia_ist_kein_organischer_treffer(self):
+        liste = [self._treffer("de.wikipedia.org", 1, "wikipedia"),
+                 self._treffer("ing.de", 1, "searxng")]
+        self.assertEqual([t["domaene"] for t in sr.organische_treffer(liste)],
+                         ["ing.de"])
+
+    def test_unbekannte_quelle_ist_fail_closed(self):
+        self.assertFalse(sr.ist_organisch({"quelle": "neuermysteriöser Dienst"}))
+        self.assertFalse(sr.ist_organisch({}))
+
+    def test_datenqualitaet_zaehlt_rueckfall_ehrlich(self):
+        ergebnisse = [
+            {"anfrage": "a", "quelle": "wikipedia",
+             "treffer": [self._treffer("de.wikipedia.org", i, "wikipedia")
+                         for i in range(1, 7)]},
+            {"anfrage": "b", "quelle": "searxng",
+             "treffer": [self._treffer("ing.de", 1, "searxng")]},
+        ]
+        dq = sr.datenqualitaet(ergebnisse)
+        self.assertEqual(dq["anfragen_erfolgreich"], 2)
+        self.assertEqual(dq["anfragen_organisch"], 1)
+        self.assertEqual(dq["treffer_rueckfall"], 6)
+        self.assertEqual(dq["treffer_organisch"], 1)
+        self.assertEqual(dq["aussagekraft"], "eingeschraenkt")
+        self.assertEqual(dq["anbieter"]["wikipedia"], 1)
+
+    def test_rueckfall_erfindet_keinen_eigenen_rang(self):
+        ergebnisse = [{"anfrage": "a", "quelle": "wikipedia",
+                       "treffer": [self._treffer("franksfinanzcheck.de", 1,
+                                                "wikipedia")]}]
+        rang = sr.rang_verfolgung(ergebnisse, "franksfinanzcheck.de")
+        self.assertEqual(rang[0]["eigener_rang"], 0)
+        self.assertFalse(rang[0]["sichtbar"])
+
+    def test_lauf_schreibt_nur_organische_treffer_ins_wettbewerbs_radar(self):
+        antib = [self._treffer("de.wikipedia.org", 1, "wikipedia"),
+                 self._treffer("de.wikipedia.org", 2, "wikipedia"),
+                 self._treffer("ing.de", 3, "searxng")]
+        anfragen = [{"anfrage": "Fixkosten senken", "herkunft": "test",
+                     "prioritaet": 1.0}]
+        with patch.object(sa, "hole_treffer", return_value=antib):
+            befund = sr.lauf(self.konfig(), anfragen)
+        self.assertEqual(befund["treffer_gesamt"], 3)
+        self.assertEqual(befund["treffer_organisch"], 1)
+        self.assertEqual([e["domaene"] for e in
+                          befund["wettbewerb"]["domaenen"]], ["ing.de"])
+        self.assertEqual(befund["datenqualitaet"]["aussagekraft"], "voll")
+
+    def test_cockpit_weist_rueckfall_aus(self):
+        text = sr.bericht({
+            "zeitstempel": sr.berlin_now().isoformat(),
+            "zaehlung": {"ok": 1}, "anfragen_geplant": 1,
+            "treffer_gesamt": 6, "treffer_organisch": 0,
+            "datenqualitaet": sr.datenqualitaet([
+                {"anfrage": "q", "quelle": "wikipedia",
+                 "treffer": [self._treffer("de.wikipedia.org", 1,
+                                          "wikipedia")]}]),
+            "rang": [], "wettbewerb": {"domaenen": [], "merkmale": {}},
+            "fehler": []}, sr.VORGABEN)
+        self.assertIn("## Datenqualität", text)
+        self.assertIn("keine", text)
 
 
 # ====================================================================

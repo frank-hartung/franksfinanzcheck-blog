@@ -1,6 +1,6 @@
 ---
 title: "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung"
-description: "Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder…"
+description: "Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder."
 date: 2026-09-25T12:15:40Z
 lastmod: 2026-09-28
 draft: false

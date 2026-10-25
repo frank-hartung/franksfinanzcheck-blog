@@ -1,6 +1,6 @@
 ---
 title: "Lastschrift und Dauerauftrag: Was du prüfen solltest"
-description: "Lastschrift prüfen: Abbuchungen vom Konto laufen in drei Wegen. Wie du sie auseinanderhältst, erkennst, was du freigegeben hast, und richtig widersprichst…"
+description: "Lastschrift prüfen: Abbuchungen vom Konto laufen in drei Wegen. Wie du sie auseinanderhältst, erkennst, was du freigegeben hast, und richtig widersprichst."
 date: 2026-08-28T06:10:00Z
 lastmod: 2026-10-13
 draft: false
