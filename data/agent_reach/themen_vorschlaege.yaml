@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Wie ein Dorf in Brandenburg seinen Gasthof retten will
+  url: https://www.tagesschau.de/wirtschaft/dorfkneipe-rettung-brandenburg-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-10-25T13:31:56'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Uruguay: Ein Land, fast unabhängig von Öl und Gas'
   url: https://www.tagesschau.de/ausland/amerika/uruguay-erneuerbare-energie-klima-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -191,4 +198,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-20T08:33:00'
+zuletzt_ergaenzt: '2026-10-25T13:31:56'

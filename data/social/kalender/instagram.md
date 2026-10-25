@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 24.10.2026 23:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.10.2026 10:54 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -42,6 +42,9 @@
 ### Sa, 07. November 2026
 - **11:45** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
+### So, 08. November 2026
+- **11:45** ⏳ Geld abheben im Ausland: Wo die Gebühren wirklich entstehen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/
 
 ## Zuletzt veröffentlicht
 

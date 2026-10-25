@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 24.10.2026 23:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 25.10.2026 10:54 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### So, 25. Oktober 2026
-- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
+- **11:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 ### Mo, 26. Oktober 2026
 - **07:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
