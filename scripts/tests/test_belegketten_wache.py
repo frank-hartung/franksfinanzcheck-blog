@@ -11,6 +11,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import belegketten_wache as wache
@@ -63,6 +64,44 @@ class BelegkettenWacheTests(unittest.TestCase):
         ergebnis = wache.pruefe_alle(abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(OSError("x")))
         self.assertEqual([], ergebnis["blockierend"])
         self.assertGreater(ergebnis["zaehler"][wache.UNKLAR], 0)
+
+    def test_lesefehler_blockiert_statt_zu_verschwinden(self):
+        artikel = {"slug": "kaputt", "path": "content/posts/kaputt/index.md",
+                   "risk": "unbekannt", "quellen": [], "lesefehler": "YAML defekt"}
+        with patch.object(wache, "belegketten", return_value=[artikel]):
+            ergebnis = wache.pruefe_alle(nur_hochrisiko=True)
+        self.assertEqual(1, len(ergebnis["blockierend"]))
+        self.assertEqual("YAML defekt", ergebnis["befunde"][0]["befund"])
+
+    def test_url_wird_einmal_abgerufen_zuordnung_bleibt_erhalten(self):
+        artikel = [{"slug": slug, "risk": "hoch", "approved": True,
+                    "quellen": [{"id": "Q1", "titel": "Beleg", "url": "https://example.org/a"}]}
+                   for slug in ("eins", "zwei")]
+        with patch.object(wache, "belegketten", return_value=artikel), patch.object(
+                wache, "abruf_http", return_value=(404, "https://example.org/a")) as abruf:
+            ergebnis = wache.pruefe_alle()
+        self.assertEqual(1, abruf.call_count)
+        self.assertEqual(["eins", "zwei"], [e["slug"] for e in ergebnis["befunde"]])
+
+    def test_http_status_konsistent_mit_und_ohne_exception(self):
+        for code in (403, 429, 500, 501, 503, 507, 404, 410):
+            erwartet = wache.TOT if code in (404, 410) else wache.UNKLAR
+            def fehler(url, timeout=10.0):
+                raise wache.urllib.error.HTTPError(url, code, "Fehler", None, None)
+            for abruf in (fehler, lambda url, timeout: (code, url)):
+                with self.subTest(code=code, abruf=abruf):
+                    self.assertEqual(erwartet, wache.pruefe_quelle(
+                        "https://example.org/a", abruf=abruf)["status"])
+
+    def test_queue_erledigung_erfordert_vollstaendigen_abruf(self):
+        for status in (wache.UNKLAR, wache.UMGELEITET):
+            ergebnis = {"geprueft": 1, "zaehler": dict.fromkeys(
+                (wache.OK, wache.TOT, wache.UNKLAR, wache.UMGELEITET), 0),
+                "befunde": [{"status": status}], "blockierend": []}
+            ergebnis["zaehler"][status] = 1
+            with patch.object(wache, "pruefe_alle", return_value=ergebnis), redirect_stdout(io.StringIO()):
+                self.assertEqual(0, wache.main(["--strict", "--json"]))
+                self.assertEqual(1, wache.main(["--strict", "--require-complete", "--json"]))
 
     def test_selbsttest(self):
         self.assertEqual([], wache.selftest())
