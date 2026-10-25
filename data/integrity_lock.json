@@ -1,5 +1,7 @@
 {
   "schema": 2,
+  "signed_at": "2026-10-25T13:53:47.305984+00:00",
+  "head": "b5138a1b",
   "signed_at": "2026-10-25T13:47:22.300249+00:00",
   "head": "4d782b4",
   "files": {
@@ -23,7 +25,7 @@
     "layouts/shortcodes/einspartabelle.html": "7c5a4b0b4b8847e4dc2582d107a08fad5fa34ab7313ab6eb155cb687acfd8c6a",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
     "scripts/affiliate_integrity_gate.py": "954af7a875e1ffb54daf397bf9bdc9ff31198145207a8664d124225ed0a3a36f",
-    "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
+    "scripts/affiliate_marketer.py": "9d4389e092bcc327a97f86527a750b0f4396b8e64092fe21e0ffe33e4e6bf75f",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
@@ -42,6 +44,7 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
+    "scripts/redaktions_standard.py": "dcf8591230a6b505a061b6cb668d5d69b33d247741027fc0c06436e21d0077aa",
     "scripts/redaktions_standard.py": "62ccfa114110b95a82aa998ca3de966abbaea434d6670d70ef887eef50ae0eb9",
     "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
@@ -54,6 +57,165 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
+  "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5",
+  "audit_start_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d",
+  "audit": [
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "7c5ff87",
+      "geaendert": [
+        "data/brand_lock.yaml",
+        "hugo.toml",
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/head.html",
+        "layouts/index.sw.js",
+        "layouts/robots.txt"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_default/_markup/render-link.html",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/robots.txt",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "data/brand_lock.yaml",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/index.sw.js",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "175b5ae",
+              "datum": "2026-10-14",
+              "betreff": "chore(affiliate): Lebenszeichen der Integritäts-Wache (Beweis-Frische) [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2",
+      "prev_sha256": null
+    },
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "0d76a34",
+      "geaendert": [
+        "layouts/index.sw.js"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/index.sw.js",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "0d76a34",
+              "datum": "2026-10-14",
+              "betreff": "fix(codeql): 13 Funde aus security-extended beheben"
+            },
+            {
+              "sha": "a7d33ec",
+              "datum": "2026-10-14",
+              "betreff": "fix(site): Website-Härtung und Rechtstexte nach Sicherheitsaudit 14.10.2026 (M-05, M-06, M-15, M-17, M-18, N-07, I-03, I-04, I-06, I-08)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "files_sha256": "924fcd3c0a99bf777f5dea09eb76b009c98166d6d595f9e44bd52190466c37d1",
+      "prev_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d"
+    },
+    {
+      "date": "2026-10-14",
+      "art": "set-current",
+      "head": "74570df",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "74570df",
+              "datum": "2026-10-14",
+              "betreff": "sicherheit: Befunde F-01 bis F-10 beheben und dauerhaft absichern"
+            },
+            {
+              "sha": "424628f",
+              "datum": "2026-10-14",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "a7bdf3d2e812f7bd1f4d060f3c8c8bd6929ced06447ff92816225692fd9be883",
+      "prev_sha256": "7625b594f34898c713138b46ad70685a87b3eb45ae811f056a06ad8f840e245c"
+    },
+    {
   "files_sha256": "403d736216920546453510b0def9a81faa5f356501f20fb0fe1c91375f9fc45b",
   "audit_start_sha256": "b27321cfb9d7084f31f0b8d42a1139714128abdebcf296132abb4b1bc02691e1",
   "audit": [
@@ -294,12 +456,27 @@
     {
       "date": "2026-10-25",
       "art": "set-current",
+      "head": "b5138a1b",
+      "geaendert": [
+        "scripts/affiliate_marketer.py",
       "head": "cbbb181",
       "geaendert": [
         "scripts/redaktions_standard.py"
       ],
       "herkunft": [
         {
+          "pfad": "scripts/affiliate_marketer.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "b5138a1b",
+              "datum": "2026-10-25",
+              "betreff": "fix: harden YMYL review queue and source monitoring (#859)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
           "pfad": "scripts/redaktions_standard.py",
           "klasse": "fest",
           "urteil": "VERSIEGELBAR",
@@ -343,6 +520,16 @@
           "urteil": "UNERKLÄRT",
           "commits": [
             {
+              "sha": "b5138a1b",
+              "datum": "2026-10-25",
+              "betreff": "fix: harden YMYL review queue and source monitoring (#859)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "0916b34576657655dff2593a397cc751981154e8d8c077e06d22e3e8f0573ab4",
+      "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5"
               "sha": "d1528dd",
               "datum": "2026-10-25",
               "betreff": "fix(rs5): Messfehler im Zahlen-Gate – Jahre, Issue-Refs und Fett-Marker zählen nicht als Behauptung (#821) (#865)"

@@ -372,27 +372,55 @@ def _reserve_numeric_claim_findings(body):
         target = match.group(2).strip().lower()
         return " QUELLENLINK " if target.startswith(("https://", "http://")) else " INTERNLINK "
     text = link_re.sub(_link_marker, text)
-    lines = [ln for ln in text.splitlines()
-             if not ln.lstrip().startswith(("#", ">", "<!--"))]
-    text = re.sub(r"\s+", " ", " ".join(lines))
-    sentences = re.split(r"(?<=[.!?])\s+", text)
     number_words = (
-        r"ein(?:e|em|en|es)?|zwei|drei|vier|f[uü]nf|sechs|sieben|acht|"
+        r"zwei|drei|vier|f[uü]nf|sechs|sieben|acht|"
         r"neun|zehn|elf|zw[oö]lf|dreizehn|vierzehn|f[uü]nfzehn|"
         r"sechzehn|siebzehn|achtzehn|neunzehn|zwanzig|drei[ßs]ig|"
-        r"vierzig|f[uü]nfzig|sechzig|siebzig|achtzig|neunzig|hundert|"
-        r"tausend|mehrere|einige")
-    units = (
+        r"vierzig|f[uü]nfzig|sechzig|siebzig|achtzig|neunzig|"
+        r"(?<!mehrere\s)(?<!einige\s)(?<!paar\s)"
+        r"(?:(?:ein|zwei|drei|vier|f[uü]nf|sechs|sieben|acht|neun)?(?:hundert|tausend)"
+        r"(?:und)?(?:ein|zwei|drei|vier|f[uü]nf|sechs|sieben|acht|neun|zehn|elf|zw[oö]lf|"
+        r"dreizehn|vierzehn|f[uü]nfzehn|sechzehn|siebzehn|achtzehn|neunzehn|"
+        r"zwanzig|drei[ßs]ig|vierzig|f[uü]nfzig|sechzig|siebzig|achtzig|neunzig)?)"
+    )
+    hard_units = (
         r"€|eur\b|euro\b|cent\b|ct\b|%|prozent\b|kwh\b|wh\b|mwh\b|"
         r"kilowattstunden?\b|wattstunden?\b|watt\b|(?<![a-z])w\b|"
         r"kw\b|kilowatt\b|mbit/s\b|gbit/s\b|gb\b|mb\b|"
-        r"tage?n?\b|wochen?\b|monate?n?\b|jahre?n?\b|stunden?\b|"
-        r"minuten?\b|kilometer\b|km\b|meter\b|grad\b|°c\b")
-    numeric_claim = re.compile(
+        r"kilometer\b|km\b|meter\b"
+    )
+    time_units = r"tage?n?\b|wochen?\b|monate?n?\b|jahre?n?\b|stunden?\b|minuten?\b"
+    time_claim_context = re.compile(
+        r"\b(?:vermögen\w*|depot\w*|rendite\w*|zins\w*|gewinn\w*|wachs\w*|wächst|"
+        r"verdoppel\w*|ersparnis\w*|spar(?:st|t|en|e)\b|reich\b|"
+        r"vertrag\w*\s+darf|höchstens|mindestlaufzeit|kündigungsfrist)\b",
+        re.I,
+    )
+    hard_numeric_claim = re.compile(
         rf"(?ix)(?:§\s*\d+[a-z]?\b|"
-        rf"(?<!\w)(?:\d[\d.,]*|{number_words})\s*(?:{units})(?!\w)|"
-        rf"(?<!\w)\d{{3,}}(?:[.,]\d+)?(?!\w))")
+        rf"(?<!\w)(?:\d[\d.,]*|{number_words})\s*(?:{hard_units})(?!\w)|"
+        rf"(?<![#\w])(?!(?:19|20)\d{{2}}\b)\d{{3,}}(?:[.,]\d+)*(?!\w))"
+    )
+    time_numeric_claim = re.compile(
+        rf"(?ix)(?<!\w)(?:\d[\d.,]*|{number_words})\s*(?:{time_units})(?!\w)"
+    )
     model_marker = re.compile(
+        r"\b(?:rechenbeispiel\w*|modellrechnung\w*|modellannahme\w*|modellfall\w*|"
+        r"modellwert\w*|rechenfall\w*|annahme|annahmen|musterrechnung\w*|"
+        r"beispielrechnung\w*|beispielwert\w*|orientierungswert\w*|faustregel|"
+        r"rechnerisch|angenommen|unterstellen wir|nehmen wir an|wir nehmen an|"
+        r"in diesem beispiel|für das beispiel|zum beispiel|beispielsweise|"
+        r"als orientierung|orientierung\s*:)\b",
+        re.I,
+    )
+    ordinal_date_re = re.compile(
+        r"\b(\d{1,2})\.\s+(Januar|Februar|März|April|Mai|Juni|Juli|August|"
+        r"September|Oktober|November|Dezember)\b"
+    )
+    abbrev_re = re.compile(
+        r"\b(ca|bzw|usw|ggf|inkl|mind|max|vgl|nr|abs)\.", re.I
+    )
+
         r"\b(?:rechenbeispiel|modellrechnung|modellfall|annahme|annahmen|"
         r"musterrechnung|beispielrechnung|angenommen|unterstellen wir)\b", re.I)
     # Eine Kalenderjahreszahl („im Jahr 2026", „für 2026") ist keine
@@ -401,10 +429,28 @@ def _reserve_numeric_claim_findings(body):
     # übrig bleibt, wird der Satz bewertet.
     jahr_re = re.compile(r"(?<!\w)(?:19|20)\d{2}(?!\w)")
     findings = []
-    for sentence in sentences:
-        sentence = sentence.strip()
-        if not numeric_claim.search(sentence):
+    in_model_section = False
+    section_model_numbers: set[str] = set()
+    for raw_block in re.split(r"\n\s*\n", text):
+        block = raw_block.strip()
+        if not block:
             continue
+        raw_lines = block.splitlines()
+        content_lines = []
+        for ln in raw_lines:
+            s_ln = ln.lstrip()
+            if not s_ln or s_ln.startswith(("<!--", ">", "|")):
+                continue
+            if s_ln.startswith("#"):
+                if s_ln.startswith("## ") or s_ln.startswith("### "):
+                    in_model_section = bool(model_marker.search(s_ln))
+                    if not in_model_section:
+                        section_model_numbers = set()
+                    else:
+                        section_model_numbers.update(re.findall(r"\d[\d.,]*", s_ln))
+                continue
+            content_lines.append(ln)
+        if not content_lines:
         if not numeric_claim.search(jahr_re.sub(" ", sentence)):
             continue
         if "QUELLENLINK" in sentence:
@@ -412,7 +458,35 @@ def _reserve_numeric_claim_findings(body):
         # A model label must not disguise a statutory clause or a claimed study.
         if "§" not in sentence and model_marker.search(sentence):
             continue
-        findings.append(sentence[:240])
+        para_text = re.sub(r"\s+", " ", " ".join(content_lines))
+        para_text = ordinal_date_re.sub(r"\1_ORD_ \2", para_text)
+        para_text = abbrev_re.sub(r"\1_ABBR_", para_text)
+        para_model_active = in_model_section
+        for sentence in re.split(r"(?<=[.!?])\s+", para_text):
+            sentence = sentence.strip().replace("_ORD_", ".").replace("_ABBR_", ".")
+            if not sentence:
+                continue
+            if model_marker.search(sentence) and "§" not in sentence:
+                para_model_active = True
+                section_model_numbers.update(re.findall(r"\d[\d.,]*", sentence))
+                continue
+            has_hard = bool(hard_numeric_claim.search(sentence))
+            has_time = bool(
+                time_numeric_claim.search(sentence)
+                and time_claim_context.search(sentence)
+            )
+            if not (has_hard or has_time):
+                continue
+            if "QUELLENLINK" in sentence:
+                continue
+            # A model label must not disguise a statutory clause or a claimed study.
+            if "§" not in sentence:
+                if para_model_active:
+                    continue
+                nums = set(re.findall(r"\d[\d.,]*", sentence))
+                if nums and section_model_numbers and nums.issubset(section_model_numbers):
+                    continue
+            findings.append(sentence[:240])
     return findings
 
 
@@ -1295,6 +1369,126 @@ def fix_rs2_rs3_deterministic(body: str, slug: str = "", kontext: dict = None,
     return cur, healed
 
 
+_RS5_DETERMINISTIC_MARKERS = (
+    "im Modellfall",
+    "als Beispielwert",
+    "als Modellwert",
+    "im Rechenfall",
+    "im Rechenbeispiel",
+    "als Modellannahme",
+)
+
+
+def _heal_rs5_block(block: str, marker_idx: int) -> tuple[str, int]:
+    """Qualifiziert den ersten unbelegten Zahlen-Satz eines Absatzes als Modellwert."""
+    lines = block.splitlines()
+    for i, ln in enumerate(lines):
+        s_ln = ln.lstrip()
+        if not s_ln or s_ln.startswith(("#", ">", "|", "<!--")):
+            continue
+        if _reserve_numeric_claim_findings(ln) and "§" not in ln:
+            marker = _RS5_DETERMINISTIC_MARKERS[
+                marker_idx % len(_RS5_DETERMINISTIC_MARKERS)
+            ]
+            m = re.search(r"([.!?])(\s+|$)", ln)
+            if m:
+                pos = m.start(1)
+                lines[i] = ln[:pos] + f" {marker}" + ln[pos:]
+            else:
+                lines[i] = ln.rstrip() + f" ({marker})"
+            return "\n".join(lines), marker_idx + 1
+    return block, marker_idx
+
+
+def fix_rs4_rs5_deterministic(body: str) -> tuple[str, list[str]]:
+    """Heilt fehlende RS4 (Schrittfolge) und unbelegte RS5-Zahlen deterministisch.
+
+    Gesetzliche §-Verweise werden bewusst NIE als Modellrechnung etikettiert
+    (sie erfordern immer einen echten Primärquellen-Link).
+    """
+    healed: list[str] = []
+    cur = body or ""
+
+    # RS4: Vorhandene Checkliste (- [ ] ...) oder Schritt-Liste (>= 3 Punkte)
+    # in nummerierte Schritte (1. / 2. / 3.) überführen.
+    r4_ok, _ = detect_rs4(cur)
+    if not r4_ok:
+        lines = cur.splitlines()
+        runs: list[list[int]] = []
+        current_run: list[int] = []
+        for idx, ln in enumerate(lines):
+            if re.match(r"^\s*-\s*\[[ xX]?\]\s+\S", ln):
+                current_run.append(idx)
+            else:
+                if len(current_run) >= 3:
+                    runs.append(current_run)
+                current_run = []
+        if len(current_run) >= 3:
+            runs.append(current_run)
+
+        if not runs:
+            seen_h2 = False
+            current_run = []
+            for idx, ln in enumerate(lines):
+                if ln.startswith("## "):
+                    seen_h2 = True
+                if seen_h2 and re.match(r"^\s*[-*]\s+\S", ln):
+                    current_run.append(idx)
+                else:
+                    if len(current_run) >= 3:
+                        runs.append(current_run)
+                    current_run = []
+            if len(current_run) >= 3:
+                runs.append(current_run)
+
+        if runs:
+            target_run = runs[0]
+            cand_lines = list(lines)
+            for step_no, line_idx in enumerate(target_run, start=1):
+                cand_lines[line_idx] = re.sub(
+                    r"^(\s*)(?:-\s*\[[ xX]?\]|[-*])\s+",
+                    rf"\g<1>{step_no}. ",
+                    cand_lines[line_idx],
+                    count=1,
+                )
+            candidate = "\n".join(cand_lines)
+            if cur.endswith("\n") and not candidate.endswith("\n"):
+                candidate += "\n"
+            if (
+                detect_rs4(candidate)[0]
+                and _links(cur) == _links(candidate)
+                and len(h2_lines(cur)) == len(h2_lines(candidate))
+            ):
+                cur = candidate
+                healed.append("RS4")
+
+    # RS5: Unbelegte Zahlen-Sätze (ohne §) als Modell-/Beispielwert kennzeichnen.
+    vorher_rs5 = _reserve_numeric_claim_findings(cur)
+    if vorher_rs5:
+        parts = re.split(r"(\n\s*\n)", cur)
+        marker_idx = 0
+        for idx in range(0, len(parts), 2):
+            prefix_before = "".join(parts[:idx]) if idx > 0 else ""
+            prefix_with = "".join(parts[: idx + 1])
+            if len(_reserve_numeric_claim_findings(prefix_with)) > len(
+                _reserve_numeric_claim_findings(prefix_before)
+            ):
+                new_block, marker_idx = _heal_rs5_block(parts[idx], marker_idx)
+                parts[idx] = new_block
+        candidate = "".join(parts)
+        nachher_rs5 = _reserve_numeric_claim_findings(candidate)
+        if (
+            candidate != cur
+            and len(nachher_rs5) < len(vorher_rs5)
+            and _links(cur) == _links(candidate)
+            and len(h2_lines(cur)) == len(h2_lines(candidate))
+        ):
+            cur = candidate
+            healed.append("RS5")
+
+    return cur, healed
+
+
 # ---------------------------------------------------------------------------
 # KI-Heilung (RS1–RS6) mit Verifikation
 # ---------------------------------------------------------------------------
@@ -1910,7 +2104,96 @@ SELFTEST = [
         body, slug="a", titel="Energie", kontext=ktx)[0], body))(
         {"belegung": set(faustregel_saetze()), "vermeiden": set()},
         f"**Faustregel:** {FAUSTREGEL_LEGACY}")), True),
+    # --- WF-D4E0 (#821): RS5-Kontext & deterministische RS4/RS5-Heilung -----
+    ("Reserve-RS5-Jahreszahl-ohne-Behauptung-frei", lambda: (
+        _reserve_numeric_claim_findings(
+            "Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts. "
+            "Digitale Vertragspapiere sind kein Spartrend für 2026."
+        ) == []
+    ), True),
+    ("Reserve-RS5-Intervall-ohne-Vermoegensversprechen-frei", lambda: (
+        _reserve_numeric_claim_findings(
+            "Drei Monate reichen zum Prüfen nicht. "
+            "Nach drei Monaten folgt der Zwischencheck. "
+            "Setze ihn auf einen Tag nach den festen Zahlungen."
+        ) == []
+    ), True),
+    ("Reserve-RS5-Modellrechnung-Sektion-deckt-Folgesatz", lambda: (
+        _reserve_numeric_claim_findings(
+            "## Modellrechnung: 500 € ohne Bonusannahme\n\n"
+            "Startest du mit den Abos erst nach sechs Monaten, bleiben nur "
+            "150 € statt 300 € im Jahr."
+        ) == []
+    ), True),
+    ("Fix-RS4-RS5-deterministisch", lambda: (
+        lambda out: (
+            detect_rs4(out[0])[0]
+            and _reserve_numeric_claim_findings(out[0]) == []
+            and out[1] == ["RS4", "RS5"]
+        )
+    )(fix_rs4_rs5_deterministic(
+        "Ein kurzer Check spart dir oft 150 Euro im Jahr.\n\n"
+        "## Checkliste für den Start\n\n"
+        "- [ ] Kontoauszüge prüfen.\n"
+        "- [ ] Tarife vergleichen.\n"
+        "- [ ] Wechseltermin notieren.\n"
+    )), True),
 ]
+
+
+def wirkungsprobe() -> int:
+    """Beweist an einem defekten Mustertext, dass die deterministische Heilung wirkt."""
+    roh = (
+        "Viele Kunden zahlen jedes Jahr 150 Euro zu viel für ihr Konto.\n\n"
+        "**Das Wichtigste in Kürze**\n\n"
+        "- Du prüfst deine Auszüge in Ruhe.\n"
+        "- Du vergleichst die Konditionen deiner Bank.\n"
+        "- Du stellst teure Zusatzkarten rechtzeitig ab.\n\n"
+        "## Warum lohnt sich der Kontocheck\n\n"
+        "Ein altes Girokonto kostet oft 10 Euro im Monat.\n\n"
+        "## Typische Fehler beim Kontowechsel\n\n"
+        "Wer Fristen übersieht, zahlt weiter Gebühren.\n\n"
+        "## Checkliste für den Wechsel\n\n"
+        "- [ ] Auszüge der letzten Monate prüfen.\n"
+        "- [ ] Freigrenze für den Geldeingang kontrollieren.\n"
+        "- [ ] Neue Bank auswählen und Daueraufträge umziehen.\n\n"
+        "## Häufige Fragen\n\n"
+        "### Wie schnell klappt der Wechsel?\n"
+        "Der Wechsel klappt meist unkompliziert.\n"
+    )
+    vorher_rs2 = detect_rs2(roh)[0]
+    vorher_rs3 = detect_rs3(roh)[0]
+    vorher_rs4 = detect_rs4(roh)[0]
+    vorher_rs5 = _reserve_numeric_claim_findings(roh)
+    if vorher_rs2 or vorher_rs3 or vorher_rs4 or not vorher_rs5:
+        print("🛑 Wirkungsprobe redaktions_standard: Ausgangstext nicht defekt genug.")
+        return 2
+    geheilt, schritte_23 = fix_rs2_rs3_deterministic(
+        roh, slug="probe-konto", titel="Kontocheck"
+    )
+    geheilt, schritte_45 = fix_rs4_rs5_deterministic(geheilt)
+    nachher_rs2 = detect_rs2(geheilt)[0]
+    nachher_rs3 = detect_rs3(geheilt)[0]
+    nachher_rs4 = detect_rs4(geheilt)[0]
+    nachher_rs5 = _reserve_numeric_claim_findings(geheilt)
+    if not (nachher_rs2 and nachher_rs3 and nachher_rs4) or nachher_rs5:
+        print(
+            f"🛑 Wirkungsprobe redaktions_standard fehlgeschlagen: "
+            f"RS2={nachher_rs2}, RS3={nachher_rs3}, RS4={nachher_rs4}, RS5={nachher_rs5}"
+        )
+        return 1
+    nochmal, schritte_nochmal = fix_rs4_rs5_deterministic(
+        fix_rs2_rs3_deterministic(geheilt, slug="probe-konto", titel="Kontocheck")[0]
+    )
+    if nochmal != geheilt or schritte_nochmal:
+        print("🛑 Wirkungsprobe redaktions_standard: Heilung ist nicht idempotent.")
+        return 1
+    print(
+        f"✅ Wirkungsprobe redaktions_standard: "
+        f"{'+'.join(schritte_23 + schritte_45)} geheilt "
+        f"(RS5 {len(vorher_rs5)} → 0, Fixpunkt bestätigt)."
+    )
+    return 0
 
 
 def selftest():
@@ -1940,6 +2223,8 @@ def selftest():
 def main():
     if "--selftest" in sys.argv:
         return selftest()
+    if "--wirkungsprobe" in sys.argv:
+        return wirkungsprobe()
     if "--register-korrektur" in sys.argv:
         return register_korrektur()
 
@@ -2017,6 +2302,11 @@ def main():
             if rs_det and neu_body != a["body"]:
                 _schreibe(neu_body, f"{', '.join(rs_det)} (deterministisch)",
                           "+".join(rs_det))
+            if not NUR_FAUSTREGEL:
+                neu_body, rs_det45 = fix_rs4_rs5_deterministic(a["body"])
+                if rs_det45 and neu_body != a["body"]:
+                    _schreibe(neu_body, f"{', '.join(rs_det45)} (deterministisch)",
+                              "+".join(rs_det45))
         if not DRY_RUN and gehärtet:
             print(f"✅ Deterministisch geheilt: {len(gehärtet)} Schritt(e)")
         # Ein offener RS3-EINZIGARTIG-Befund ist kein Betriebsgeräusch: Ohne

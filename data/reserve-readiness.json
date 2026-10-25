@@ -1,5 +1,8 @@
 {
   "target": 6,
+  "ready": 6,
+  "pool_size": 6,
+  "generated_at": "2026-10-25T13:46:01Z",
   "ready": 1,
   "pool_size": 2,
   "generated_at": "2026-10-25T13:38:49Z",
@@ -9,10 +12,12 @@
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
+      "measured_at": "2026-10-25T13:41:18Z",
+      "score": 0.992,
       "measured_at": "2026-10-25T13:38:46Z",
       "score": 0.984,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -22,7 +27,80 @@
       }
     },
     {
+      "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "ready": true,
+      "sha256": "1ecf4772d61765beddcf426b936939d3b8408aa0bdc0e2804c13639104378ff8",
+      "flesch": 70.5,
+      "measured_at": "2026-10-25T13:42:13Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "0a590c16c0508e99869bf24ef052a9bae195a3b86602d14fc460df72b19ade92",
+      "flesch": 74.2,
+      "measured_at": "2026-10-25T13:43:10Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "ready": true,
+      "sha256": "a8814cc0998be38338721b81ebed8f614499cb86564870e40ebbbd38b9fb8762",
+      "flesch": 64.4,
+      "measured_at": "2026-10-25T13:44:04Z",
+      "score": 0.978,
+      "parts": {
+        "spelling": 1.0,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
+      "ready": true,
+      "sha256": "a6a19be96a8cfd5ba74c59ed5ae8d93d2076d645ad054405e27772d3b0e1ea34",
+      "flesch": 70.3,
+      "measured_at": "2026-10-25T13:45:00Z",
+      "score": 0.982,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
       "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "ready": true,
+      "sha256": "67a6c9aa0502941eb26432c39f7b279d4ef308daeb3872e4b598d7f84ae82c9e",
+      "flesch": 64.6,
+      "measured_at": "2026-10-25T13:46:01Z",
+      "score": 0.988,
       "ready": false,
       "sha256": "87890c362df3a0c3981db591f09430f5298a4090567db1b2a40af790a9fa1911",
       "flesch": 63.8,
@@ -33,7 +111,7 @@
       ],
       "score": 0.98,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.94,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -44,6 +122,8 @@
     }
   ],
   "measurement": {
+    "kind": "full"
+  }
     "kind": "full",
     "run_id": "40196967906",
     "run_attempt": "1"
