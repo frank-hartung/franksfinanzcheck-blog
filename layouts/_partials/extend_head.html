@@ -276,6 +276,18 @@
        wäre die Referenz ausgerechnet auf der meistgesehenen Seite
        unaufgelöst (Entity-Graph-Bruch für KI-Antwortmaschinen). */ -}}
 {{- $authorPhoto := "images/frank-hartung.jpg" | absURL -}}
+{{- /* ENTITY-PROFILE (25.10.2026): EINE Profil-Liste für Person,
+       ProfilePage UND Organization. Quelle sind ausschließlich die
+       [[params.socialIcons]] in hugo.toml (= data/entity.yaml
+       `profile_aktiv`, Parität prüft scripts/entity_marken_gate.py E4).
+       Vorher führte dieser Person-Knoten hartkodiert nur Pinterest –
+       Mastodon fehlte ausgerechnet im siteweiten Autoren-Knoten,
+       während Article-/Organization-Schema beide Profile trugen.
+       Ein neues Profil (z. B. LinkedIn) wird NUR in hugo.toml
+       ergänzt und erscheint dann hier, im Article-Schema und als
+       rel=me-Link im Footer automatisch. */ -}}
+{{- $entityProfiles := slice -}}
+{{- range site.Params.socialIcons -}}{{- with .url -}}{{- $entityProfiles = $entityProfiles | append . -}}{{- end -}}{{- end -}}
 {{- if or .IsPage .IsHome -}}
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
@@ -285,8 +297,9 @@
   "url" (printf "%sueber/" site.BaseURL)
   "image" $authorPhoto
   "jobTitle" "Autor & Betreiber von FranksFinanzcheck"
+  "worksFor" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL))
   "knowsAbout" (slice "Geld sparen" "Frugalismus" "Tarifvergleiche" "Versicherungen" "Privatfinanzen" "DSL" "Stromvergleich" "Gasvergleich")
-  "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/")
+  "sameAs" $entityProfiles
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
@@ -299,8 +312,10 @@
     "@type" "Person"
     "@id" (printf "%s#frank-hartung" site.BaseURL)
     "name" "Frank Hartung"
+    "url" (printf "%sueber/" site.BaseURL)
     "description" "Autor und Betreiber von FranksFinanzcheck. Verantwortet redaktionelle Einordnung, Methodik und transparente Quellenketten."
     "image" $authorPhoto
+    "sameAs" $entityProfiles
   )
 ) | jsonify | safeJS }}</script>
 {{- end -}}
@@ -400,19 +415,30 @@
        Impressum/Über – kein neues Expositionsrisiko). KEINE SearchAction:
        Die Site hat keine eigene Suche, ein Fake-Suchschema wäre ein
        Richtlinien-Verstoß. */ -}}
+{{- /* ENTITY-REGISTER (25.10.2026): WebSite.name + alternateName sind
+       Googles Quelle für den Site-Namen über dem Snippet-Titel – der
+       Markenträger in der modernen SERP, weil ein Marken-Suffix im
+       <title> bei 90 von 102 Seiten nicht ins 60-Zeichen-Fenster passt
+       (Messung: MARKEN-ENTITY-HIGHEND-2026-10-25.md §2). Die
+       Organization trägt als description wortgleich den kanonischen
+       Identitätssatz (hugo.toml entityDefinition = data/entity.yaml),
+       dazu founder (Person-@id), ContactPoint und
+       publishingPrinciples in Parität zum Article-Schema. sameAs kommt
+       aus $entityProfiles (oben) – keine zweite Liste mehr. */ -}}
 {{- if .IsHome -}}
-{{- $wsProfiles := slice -}}
-{{- range site.Params.socialIcons -}}{{- with .url -}}{{- $wsProfiles = $wsProfiles | append . -}}{{- end -}}{{- end -}}
+{{- $entityDesc := site.Params.entityDefinition | default site.Params.description -}}
+{{- $entityMail := site.Params.contactEmail | default "kontakt@franksfinanzcheck.de" -}}
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
   "@type" "WebSite"
   "@id" (printf "%s#website" site.BaseURL)
   "name" site.Title
+  "alternateName" "franksfinanzcheck.de"
   "url" site.BaseURL
   "description" site.Params.description
   "inLanguage" "de-DE"
   "author" (dict "@type" "Person" "@id" (printf "%s#frank-hartung" site.BaseURL))
-  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL "description" "Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: praxisnahe Spar-Anleitungen zu Strom, Gas, Internet, Versicherungen, Konto und Alltag – mit konkreten Euro-Beträgen." "email" (site.Params.contactEmail | default "kontakt@franksfinanzcheck.de") "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL)) "sameAs" $wsProfiles)
+  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "alternateName" "franksfinanzcheck.de" "url" site.BaseURL "description" $entityDesc "founder" (dict "@type" "Person" "@id" (printf "%s#frank-hartung" site.BaseURL)) "email" $entityMail "contactPoint" (dict "@type" "ContactPoint" "email" $entityMail "contactType" "editorial" "availableLanguage" "de-DE") "publishingPrinciples" (printf "%stransparenz/" site.BaseURL) "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL)) "sameAs" $entityProfiles)
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 

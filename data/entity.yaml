@@ -1,0 +1,121 @@
+# ============================================================
+#  ENTITY-REGISTER – die eine, verbindliche Marken-Identität
+#  ------------------------------------------------------------
+#  WARUM (25.10.2026, SERP-Live-Prüfung §3): Google korrigiert
+#  die Markensuche „FranksFinanzcheck" auf „Frank Finanzcheck"
+#  und schlägt FINANZCHECK.de (Kreditvergleich) vor. Die eigene
+#  Marke ist keine eindeutige Entität. Gegenmittel ist keine
+#  weitere Technik, sondern EIN wortgleicher Identitätssatz auf
+#  jeder Fläche, die Google, KI-Antwortmaschinen und Journalisten
+#  zur Einordnung lesen – plus eine ausdrückliche Abgrenzung.
+#
+#  Diese Datei ist der VERTRAG. Gerendert wird aus hugo.toml
+#  (`params.entityDefinition` / `params.entityAbgrenzung`),
+#  geschrieben steht derselbe Wortlaut in content/ueber/,
+#  content/impressum/, content/presse/ und im llms.txt-Generator.
+#  Wortgleichheit aller Flächen prüft fail-closed:
+#      python3 scripts/entity_marken_gate.py --source-only
+#      npm run entity:check          (inkl. Build + Public-Check)
+#  Runbook: docs/ANLEITUNG-MARKEN-ENTITY.md
+#  Umsetzungsbericht: MARKEN-ENTITY-HIGHEND-2026-10-25.md
+#
+#  EHRLICHKEITS-REGELN (wie data/authority_strategy.yaml):
+#   · Ein Profil steht erst unter `profile_aktiv`, wenn es
+#     existiert, öffentlich ist und auf die Startseite verlinkt.
+#     Geplante Profile (LinkedIn, Xing) führen KEINE URL – eine
+#     erfundene sameAs-URL wäre ein falsches Entity-Signal.
+#   · Publisher-Center-/Wikidata-Status bleibt `offen`, bis die
+#     externe Bestätigung vorliegt. Kein Status ohne Beleg.
+# ============================================================
+
+version: 1
+stand: "2026-10-25"
+
+marke:
+  name: "FranksFinanzcheck"
+  domain: "franksfinanzcheck.de"
+  url: "https://franksfinanzcheck.de/"
+  sprache: "de-DE"
+  land: "DE"
+  betreiber: "Frank Hartung"
+  betreiber_rolle: "Autor & Betreiber von FranksFinanzcheck"
+  kontakt_email: "kontakt@franksfinanzcheck.de"
+  kategorie: "Redaktioneller Verbraucher-Ratgeber (Fixkosten, Verträge, Fristen)"
+
+# Der kanonische Identitätssatz. Wortgleich in: hugo.toml
+# (params.entityDefinition), Startseite (entity_box.html),
+# Schema.org Organization.description, /ueber/, /presse/,
+# llms.txt. Bewusste Abweichung vom ursprünglichen Formulierungs-
+# vorschlag „kein Vergleichsservice": Die Site veröffentlicht
+# eigene Vergleiche und verlinkt gekennzeichnet auf Partner-
+# Vergleiche – „kein Vergleichsservice" wäre als Selbstaussage
+# angreifbar. „Kein Kreditvergleichsportal" ist wahr (Verträge
+# entstehen beim Anbieter, vgl. Impressum/Transparenz) und trifft
+# die Verwechslung mit FINANZCHECK.de exakt.
+definition: "FranksFinanzcheck (franksfinanzcheck.de) ist das unabhängige Fixkosten-Cockpit für deutsche Haushalte: ein redaktioneller Ratgeber von Frank Hartung, der Verträge, Fristen und laufende Kosten mit nachvollziehbarer Rechnung ordnet – kein Bankportal, kein Kreditvergleichsportal und keine Versicherungsmakler."
+
+# Kurzform für Verzeichnisse, Profil-Bios und Publisher-Felder
+# mit Zeichenlimit. Nicht gate-wortgleich, aber markenidentisch.
+definition_kurz: "FranksFinanzcheck ist das unabhängige Fixkosten-Cockpit für deutsche Haushalte – Verträge, Fristen und laufende Kosten mit klarer Rechnung prüfen."
+
+# Die kanonische Abgrenzung (Entity-Disambiguation). Wortgleich
+# in: hugo.toml (params.entityAbgrenzung), Startseite,
+# /ueber/, /impressum/, llms.txt.
+abgrenzung: "FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen Verbindung zum Kreditvergleichsportal FINANZCHECK.de. Trotz der ähnlich klingenden Namen handelt es sich um unterschiedliche, voneinander unabhängige Anbieter. Auf franksfinanzcheck.de werden Kredite, Konten und Versicherungen nicht selbst angeboten; ein Vertrag kommt – wenn du einem gekennzeichneten Partnerlink folgst – ausschließlich mit dem dort genannten Anbieter zustande."
+
+# Offizielle Profile = exakt die [[params.socialIcons]] in
+# hugo.toml (Single Source im Build). Diese Liste spiegelt sie
+# für Gate, Runbook und externe Verzeichnisse; das Gate meldet
+# jede Abweichung. Reihenfolge = Anzeige im Footer.
+profile_aktiv:
+  - name: "pinterest"
+    url: "https://www.pinterest.de/franksfinanzcheck/"
+  - name: "mastodon"
+    url: "https://mastodon.social/@FranksFinanzcheck"
+
+# Geplant, NICHT aktiv (Stand 25.10.2026: kein Profil belegt,
+# Social-Kanal steht auf Standby ohne Zugangsdaten). Aktivierung
+# = Profil anlegen, Startseite verlinken, EINEN Block in
+# hugo.toml [[params.socialIcons]] ergänzen, hierher übernehmen –
+# Schema (sameAs), Footer (rel=me) und Gate folgen automatisch.
+# Anleitung: docs/ANLEITUNG-MARKEN-ENTITY.md §4.
+profile_geplant:
+  - name: "linkedin"
+    status: "nicht aktiv – Profil muss durch Frank angelegt/bestätigt werden"
+  - name: "xing"
+    status: "nicht aktiv – Profil muss durch Frank angelegt/bestätigt werden"
+
+# Externe Entity-Register. Status nur mit Beleg ändern
+# (URL/Datum im Feld `beleg` eintragen). Feldwerte für die
+# Einreichung stehen in docs/ANLEITUNG-MARKEN-ENTITY.md §2/§3.
+externe_register:
+  google_publisher_center:
+    status: "offen"
+    beleg: ""
+    hinweis: "Profil muss Frank mit dem Google-Konto der Search Console anlegen; technisch ist alles vorbereitet (RSS /index.xml, Logo, Kontakt)."
+  google_unternehmensprofil:
+    status: "offen"
+    beleg: ""
+    hinweis: "Nur prüfen, falls ein lokales Profil sinnvoll wird – kein Kundenverkehr, daher nachrangig."
+  wikidata:
+    status: "offen"
+    beleg: ""
+    hinweis: "Erst nach belegbaren Erwähnungen in unabhängigen Quellen (Presse/Studien-Zitate) anlegen; kein Selbsteintrag ohne Relevanzbelege."
+  wikipedia:
+    status: "nicht angestrebt"
+    beleg: ""
+    hinweis: "Für eine junge Domain unrealistisch und als Eigenartikel unzulässig (Interessenkonflikt). Grundlage entsteht über zitierte Studien und Presse-Erwähnungen."
+
+# Marken-Namensflächen, die das Gate auf exakte Schreibweise
+# „FranksFinanzcheck" prüft (Impressum, Newsletter-Absender,
+# Abmeldung, Kontakt). Der Newsletter-Absendername lautet aktuell
+# „Frank von FranksFinanzcheck" (data/newsletter_studio.json) –
+# enthält die Marke exakt, ist aber eine Personen-Variante.
+# Ob er auf den reinen Markennamen umgestellt wird, ist eine
+# Zustellbarkeits-/Wiedererkennungs-Entscheidung von Frank
+# (Bericht §6) – das Gate fordert die exakte Marken-Teilzeichenkette.
+namensflaechen:
+  - "content/impressum/index.md"
+  - "content/ueber/index.md"
+  - "content/newsletter-abmelden/index.md"
+  - "data/newsletter_studio.json"

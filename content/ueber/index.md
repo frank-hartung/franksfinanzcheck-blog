@@ -17,6 +17,8 @@ showToc: true
 
 ## Wofür FranksFinanzcheck steht
 
+FranksFinanzcheck (franksfinanzcheck.de) ist das unabhängige Fixkosten-Cockpit für deutsche Haushalte: ein redaktioneller Ratgeber von Frank Hartung, der Verträge, Fristen und laufende Kosten mit nachvollziehbarer Rechnung ordnet – kein Bankportal, kein Kreditvergleichsportal und keine Versicherungsmakler.
+
 FranksFinanzcheck ist kein Sammelblog für beliebige Spartipps. Ich baue ein **Fixkosten-Cockpit für deutsche Haushalte**: ein Ort, an dem du wiederkehrende Kosten, Vertragsbedingungen und Fristen in eine nachvollziehbare Reihenfolge bringst. Der eigene [Fixkosten-Kompass](/cockpit/#fixkosten-kompass) folgt dabei immer vier Schritten: **Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern und Kurs halten.**
 
 Das bedeutet auch: Ein Wechsel ist nie das Ziel an sich. Erst wenn Preis, Leistung, Laufzeit und deine Situation zusammenpassen, ist er eine gute Entscheidung. Die [Ratgeber](/pillar/) liefern den fachlichen Tiefgang; das [Fixkosten-Cockpit](/cockpit/) macht deinen persönlichen Startpunkt sichtbar.
@@ -58,6 +60,14 @@ Das bedeutet auch: Ein Wechsel ist nie das Ziel an sich. Erst wenn Preis, Leistu
 Damit dieser Ratgeber für alle Leser dauerhaft kostenfrei bleibt, nimmt er an Partnerprogrammen (u. a. CHECK24 und Tarifcheck) teil. Das bedeutet: Wenn du über einen Empfehlungslink auf dieser Seite einen Vertrag abschließt oder ein Angebot buchst, erhalte ich eine Provision – **für dich entstehen zu keinem Zeitpunkt Mehrkosten**.
 
 **Der eiserne Grundsatz:** Provisionen haben **keinen Einfluss** auf die redaktionelle Bewertung. Was rechnerisch oder qualitativ nicht überzeugt, wird nicht empfohlen. Alle Ratgeber lassen sich auch ohne Klick auf einen Partnerlink vollständig und uneingeschränkt nutzen.
+
+---
+
+## Abgrenzung: Nicht FINANZCHECK.de
+
+FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen Verbindung zum Kreditvergleichsportal FINANZCHECK.de. Trotz der ähnlich klingenden Namen handelt es sich um unterschiedliche, voneinander unabhängige Anbieter. Auf franksfinanzcheck.de werden Kredite, Konten und Versicherungen nicht selbst angeboten; ein Vertrag kommt – wenn du einem gekennzeichneten Partnerlink folgst – ausschließlich mit dem dort genannten Anbieter zustande.
+
+Falls du über eine Suche nach einem Kreditvergleich hier gelandet bist: Einen Kreditantrag stellst du auf dieser Seite nicht. Was du hier bekommst, ist die Rechnung davor – welche laufenden Kosten du senken kannst, bevor ein Kredit überhaupt nötig wird. Wie gekennzeichnete Partnerlinks funktionieren und wer für vermittelte Angebote verantwortlich ist, steht unter [Transparenz & Werbung](/transparenz/) und im [Impressum](/impressum/).
 
 ---
 

@@ -7,7 +7,7 @@ showToc: false
 
 ## Angaben gemäß § 5 DDG
 
-**Betreiber und Diensteanbieter dieser Website:**
+**Betreiber und Diensteanbieter dieser Website (FranksFinanzcheck, franksfinanzcheck.de):**
 
 Frank Hartung<br>
 Karl-Marx-Str. 13<br>
@@ -23,6 +23,14 @@ Frank Hartung<br>
 Karl-Marx-Str. 13<br>
 19376 Ruhner Berge OT Marnitz<br>
 Deutschland
+
+---
+
+## Abgrenzung zu ähnlich klingenden Angeboten
+
+FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen Verbindung zum Kreditvergleichsportal FINANZCHECK.de. Trotz der ähnlich klingenden Namen handelt es sich um unterschiedliche, voneinander unabhängige Anbieter. Auf franksfinanzcheck.de werden Kredite, Konten und Versicherungen nicht selbst angeboten; ein Vertrag kommt – wenn du einem gekennzeichneten Partnerlink folgst – ausschließlich mit dem dort genannten Anbieter zustande.
+
+FranksFinanzcheck ist ein redaktioneller Ratgeber. Der Betreiber ist weder Kreditinstitut noch Darlehens- oder Versicherungsvermittler; Anfragen zu Kreditanträgen, Kontoeröffnungen oder Versicherungsverträgen richte bitte an den jeweiligen Anbieter. Wer für vermittelte Versicherungsangebote verantwortlich ist, steht im folgenden Abschnitt.
 
 ---
 
@@ -74,4 +82,4 @@ Wir sind nicht bereit und nicht verpflichtet, an Streit­beilegungs­verfahren v
 
 ---
 
-*Stand: 11. Oktober 2026*
+*Stand: 25. Oktober 2026*

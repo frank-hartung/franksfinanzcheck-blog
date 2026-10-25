@@ -37,3 +37,13 @@ Willkommen sind fachliche Interviews sowie sachbezogene Projekte mit Verbraucher
 ## Kurzvita
 
 Frank Hartung beschäftigt sich seit mehr als zehn Jahren praktisch mit Haushaltsbudgets, Tarifvergleichen und laufenden Kosten. Er betreibt FranksFinanzcheck und verantwortet Themenwahl, Rechnung, Quellenprüfung und Korrekturen. [Ausführliches Autorenprofil](/ueber/).
+
+## Über FranksFinanzcheck (Kurztext zur Übernahme)
+
+Für Quellenzeilen, Autorenboxen und Verzeichniseinträge darf dieser Text unverändert übernommen werden – mit Link auf die Startseite:
+
+> FranksFinanzcheck (franksfinanzcheck.de) ist das unabhängige Fixkosten-Cockpit für deutsche Haushalte: ein redaktioneller Ratgeber von Frank Hartung, der Verträge, Fristen und laufende Kosten mit nachvollziehbarer Rechnung ordnet – kein Bankportal, kein Kreditvergleichsportal und keine Versicherungsmakler.
+
+Nicht zu verwechseln mit dem Kreditvergleichsportal FINANZCHECK.de: FranksFinanzcheck steht in keiner Verbindung zu diesem Anbieter und bietet selbst keine Kredite, Konten oder Versicherungen an. [Abgrenzung im Detail](/ueber/#abgrenzung-nicht-finanzcheckde)
+
+**Offizielle Profile:** [Pinterest](https://www.pinterest.de/franksfinanzcheck/) · [Mastodon](https://mastodon.social/@FranksFinanzcheck) · RSS: [franksfinanzcheck.de/index.xml](https://franksfinanzcheck.de/index.xml)
