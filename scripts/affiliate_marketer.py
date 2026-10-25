@@ -285,6 +285,26 @@ SELFTEST = [
      "", "hausrat"),
 ]
 
+_HAS_MID_CTA_RE = re.compile(r"Spar[-‑‐–—]Tipp zwischendurch")
+_MID_CTA_LINE_RE = re.compile(
+    r"(?m)^>\s*(?:💶\s*)?\*\*Spar[-‑‐–—]Tipp zwischendurch:?\*\*.*$"
+)
+
+
+def _dedupe_mid_cta(text: str) -> tuple[str, int]:
+    """Entfernt doppelte Mid-CTA-Zeilen (behält die erste Vorkommenszeile)."""
+    mid_matches = list(_MID_CTA_LINE_RE.finditer(text))
+    if len(mid_matches) <= 1:
+        return text, 0
+    for dup in reversed(mid_matches[1:]):
+        start = dup.start()
+        end = dup.end()
+        if end < len(text) and text[end:end + 1] == "\n":
+            end += 1
+        text = text[:start] + text[end:]
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text, len(mid_matches) - 1
+
 
 def run_selftest() -> list[str]:
     """Prüft jede kanonische Route. Liefert Fehlerliste (leer = alles gut)."""
@@ -356,6 +376,20 @@ def run_selftest() -> list[str]:
         t6, n6 = heal_misrouted_links(t4, reg_test, "strom-sparen")
         if n6 != 0 or t6 != t4:
             fehler.append("  NR: Misrouting-Heilung ist nicht idempotent")
+        # Mid-CTA Unicode-Bindestrich (U+2011) + Dubletten-Abbau (#821)
+        dup_mid = (
+            "Absatz eins.\n\n"
+            "> 💶 **Spar\u2011Tipp zwischendurch:** faire Konditionen gibt es online: "
+            "[**Jetzt Mietwagen vergleichen**](/go/mietwagen/)\n\n"
+            "> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online: "
+            "[**Jetzt Mietwagen vergleichen**](/go/mietwagen/)\n\n"
+            "Absatz zwei.\n"
+        )
+        if not _HAS_MID_CTA_RE.search(dup_mid):
+            fehler.append("  Mid-CTA: U+2011 (Spar‑Tipp zwischendurch) nicht erkannt")
+        deduped, n_dedup = _dedupe_mid_cta(dup_mid)
+        if n_dedup != 1 or len(_MID_CTA_LINE_RE.findall(deduped)) != 1:
+            fehler.append(f"  Mid-CTA: Dublette nicht abgebaut (n={n_dedup})")
     except Exception as exc:  # noqa: BLE001
         fehler.append(f"  NR: Selbsttest-Ausnahme: {exc}")
     return fehler
@@ -538,8 +572,15 @@ def process(path: Path, reg: dict) -> dict:
     # sorgt fuer (1) oberen PFad, (2) Text-CTA (middle), (3) Schluss-CTA.
     # Wir verteilen den Mittel-CTA NUR wo wir unbehindert groessenstefen (>~700
     # Woerter) und maximal 2 In-Text/gefuehrte Links (kein Werbestreifen!).
+    if DO_FIX and not DRY_RUN:
+        text, n_dedup = _dedupe_mid_cta(text)
+        if n_dedup:
+            fixes["am7"] = True
+            status.append(("AM7", "Doppelten Mid-CTA bereinigt", "info"))
+
     n_affil = len(list(AFFIL.finditer(text)))
-    if DO_FIX and not DRY_RUN and 0 < n_affil <= 2 and len(text.split()) >= 700:
+    has_mid_cta = bool(_HAS_MID_CTA_RE.search(text))
+    if DO_FIX and not DRY_RUN and not has_mid_cta and 0 < n_affil <= 2 and len(text.split()) >= 700:
         # Einfuegepunkt: halbe Textmitte nach H2-Fortschritt
         text_lines = text.split("\n")
         half = len(text.split()) // 2
@@ -553,7 +594,7 @@ def process(path: Path, reg: dict) -> dict:
         if insert_at:
             route = route_for(text, pillar)
             # Verdopplung-Pfosten: nie zwei Anker denselben Namen ins selbe Auge
-            if mid_cta(pillar, reg, text, slug).strip() not in text:
+            if not re.search(r"Spar[-‑‐–—]Tipp zwischendurch", text):
                 text_lines = text_lines[:insert_at] + ["", mid_cta(pillar, reg, text, slug), ""] + text_lines[insert_at:]
                 text = "\n".join(text_lines)
                 fixes["am7"] = True
@@ -588,8 +629,8 @@ def process(path: Path, reg: dict) -> dict:
     # /go/allgemein/ (Anker/Route-Dissonanz). Jetzt: lokales Kontextfenster
     # um die CTA (Anker + ±300 Zeichen) hat Vorrang; Artikel-Kontext nur,
     # wenn lokal nichts Spezifisches erkennbar ist.
-    marker = "Schnell-Tipp von FranksFinanzcheck"
-    cur_route_m = re.search(marker + r".*?/go/([\w-]+)/", text, re.S)
+    marker_pat = r"Schnell[-‑‐–—]Tipp von FranksFinanzcheck"
+    cur_route_m = re.search(marker_pat + r".*?/go/([\w-]+)/", text, re.S)
     best = ""
     if cur_route_m:
         ctx = text[max(0, cur_route_m.start() - 300):cur_route_m.start() + 340]
@@ -602,8 +643,8 @@ def process(path: Path, reg: dict) -> dict:
         cur_route = cur_route_m.group(1)
         if cur_route != best:
             new_text, n = re.subn(
-                re.escape(marker) + r"(.*?)\/go\/" + re.escape(cur_route) + r"\/",
-                marker + "\\1/go/" + best + "/",
+                f"({marker_pat})(.*?)/go/" + re.escape(cur_route) + r"/",
+                r"\1\2/go/" + best + "/",
                 text, count=1)
             if n > 0:
                 text = new_text

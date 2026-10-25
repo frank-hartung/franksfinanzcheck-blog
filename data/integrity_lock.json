@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-19T20:01:57.310747+00:00",
-  "head": "aacb7514",
+  "signed_at": "2026-10-25T13:53:47.305984+00:00",
+  "head": "b5138a1b",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -23,7 +23,7 @@
     "layouts/shortcodes/einspartabelle.html": "7c5a4b0b4b8847e4dc2582d107a08fad5fa34ab7313ab6eb155cb687acfd8c6a",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
     "scripts/affiliate_integrity_gate.py": "954af7a875e1ffb54daf397bf9bdc9ff31198145207a8664d124225ed0a3a36f",
-    "scripts/affiliate_marketer.py": "35cbe548643e9eced98c20a58a1b9e4fcabea23f9a4a37f5cd59d98a994afa15",
+    "scripts/affiliate_marketer.py": "9d4389e092bcc327a97f86527a750b0f4396b8e64092fe21e0ffe33e4e6bf75f",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
@@ -42,7 +42,7 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
-    "scripts/redaktions_standard.py": "ae0d3ecc8326a8e80a7d8ed076e3f94a12fb081aea9932f542170e34162a1243",
+    "scripts/redaktions_standard.py": "dcf8591230a6b505a061b6cb668d5d69b33d247741027fc0c06436e21d0077aa",
     "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
@@ -54,44 +54,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
-  "audit_start_sha256": "80a251d5170c976c1f32ae6557575f0053ede33ab99731b27adaaccf18f7b85f",
+  "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5",
+  "audit_start_sha256": "80e1fbf3373f8cb8cb4f449c8bf11eaf0ab401b60d53aee639fca9305bd3642d",
   "audit": [
-    {
-      "date": "2026-10-14",
-      "art": "set-current",
-      "head": "e20b0519",
-      "geaendert": [
-        "scripts/generate_covers.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/generate_covers.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "cb9c2982",
-              "datum": "2026-10-14",
-              "betreff": "fix(metadaten): Cover-Wahrheit, Zahlenbelege und Metadaten dauerhaft heilen (#743)"
-            },
-            {
-              "sha": "8fca9035",
-              "datum": "2026-09-28",
-              "betreff": "fix: Blogbestand und Medienhygiene konsolidieren"
-            },
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "a924f7564be3450ba64c4f3fbe9c575064216dd52ba61eaf800dce41fab3dff5",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-14",
       "art": "set-current",
@@ -185,7 +150,7 @@
         }
       ],
       "files_sha256": "79101e5d64a672499e3111238003e9ae6b089030a73d44c9ea02437ce3c703b2",
-      "prev_sha256": "80a251d5170c976c1f32ae6557575f0053ede33ab99731b27adaaccf18f7b85f"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-14",
@@ -478,8 +443,47 @@
       "art": "set-current",
       "head": "aacb7514",
       "geaendert": [],
-      "prev_sha256": "1f83b5d6846c243354352e6dc4471102b342c2f10d5758fb27826474b9a51a51",
-      "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517"
+      "files_sha256": "abac7a48a60febf5a593d854a97841b3701f29f2d2d7119257a669ab2f197517",
+      "prev_sha256": "1f83b5d6846c243354352e6dc4471102b342c2f10d5758fb27826474b9a51a51"
+    },
+    {
+      "date": "2026-10-25",
+      "art": "set-current",
+      "head": "b5138a1b",
+      "geaendert": [
+        "scripts/affiliate_marketer.py",
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/affiliate_marketer.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "b5138a1b",
+              "datum": "2026-10-25",
+              "betreff": "fix: harden YMYL review queue and source monitoring (#859)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "b5138a1b",
+              "datum": "2026-10-25",
+              "betreff": "fix: harden YMYL review queue and source monitoring (#859)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "0916b34576657655dff2593a397cc751981154e8d8c077e06d22e3e8f0573ab4",
+      "files_sha256": "1446a33bde773b40f0f138e442b71d916eab5ed7f769532cb96e383d745a96d5"
     }
   ]
 }

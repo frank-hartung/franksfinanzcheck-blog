@@ -329,3 +329,4 @@
 {"date": "2026-10-19", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-10-24", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-24", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-25", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/affiliate_marketer.py", "scripts/redaktions_standard.py"]}
