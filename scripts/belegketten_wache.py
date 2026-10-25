@@ -27,9 +27,11 @@ umgeleitet  HTTP 200, aber unter anderer Adresse – Inhalt kann abweichen
 tot     HTTP 4xx (außer 429) – die Belegkette trägt nichts mehr
 ======  ===================================================================
 
-Netzfehler (Timeout, DNS, 5xx, 429) gelten als **unklar** und blockieren
-nicht: Eine Wache, die bei jedem Wackler rot wird, wird abgeschaltet statt
-gelesen. Ein definitives 404 dagegen ist ein Befund.
+Netzfehler (Timeout, DNS, 5xx, 403, 429) gelten als **unklar** und blockieren
+im Diagnosemodus nicht: Eine Wache, die bei jedem Wackler rot wird, wird abgeschaltet statt
+gelesen. Ein definitives 404 dagegen ist ein Befund. Für automatische
+Queue-Erledigung verlangt ``--require-complete`` zusätzlich einen Abruf ohne
+unklare oder umgeleitete Quellen. Lesefehler blockieren immer mit ``--strict``.
 
 Die Wache schreibt keinen Inhalt. Sie entscheidet nichts. Sie zeigt nur,
 wo eine Prüfung fällig ist – die Entscheidung bleibt redaktionell.
@@ -97,7 +99,7 @@ def pruefe_quelle(url: str, *, abruf=None, timeout: float = 10.0) -> dict:
     try:
         status, end_url = abruf(zitat, timeout=timeout)
     except urllib.error.HTTPError as exc:
-        if int(exc.code) in (429, 500, 502, 503, 504, 403):
+        if int(exc.code) in (403, 429) or int(exc.code) >= 500:
             return {"status": UNKLAR, "zitat": zitat, "end_url": "",
                     "befund": f"HTTP {exc.code} – nicht belastbar prüfbar"}
         return {"status": TOT, "zitat": zitat, "end_url": "",
@@ -105,7 +107,7 @@ def pruefe_quelle(url: str, *, abruf=None, timeout: float = 10.0) -> dict:
     except Exception as exc:  # noqa: BLE001 – Netzfehler sind kein Befund
         return {"status": UNKLAR, "zitat": zitat, "end_url": "",
                 "befund": f"nicht erreichbar ({type(exc).__name__})"}
-    if status >= 500:
+    if status in (403, 429) or status >= 500:
         return {"status": UNKLAR, "zitat": zitat, "end_url": end_url,
                 "befund": f"HTTP {status} – nicht belastbar prüfbar"}
     if status >= 400:
@@ -152,9 +154,21 @@ def belegketten(*, nur_hochrisiko: bool = False) -> list[dict]:
 def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
                 timeout: float = 10.0) -> dict:
     ergebnisse = []
+    cache = {}
     for artikel in belegketten(nur_hochrisiko=nur_hochrisiko):
+        if artikel.get("lesefehler"):
+            ergebnisse.append({
+                "status": TOT, "slug": artikel["slug"], "risk": artikel["risk"],
+                "approved": False, "id": "Frontmatter", "titel": "",
+                "zitat": artikel["path"], "end_url": "",
+                "befund": artikel["lesefehler"],
+            })
         for quelle in artikel["quellen"]:
-            ergebnis = pruefe_quelle(quelle["url"], abruf=abruf, timeout=timeout)
+            url = quelle["url"]
+            if url not in cache:
+                cache[url] = pruefe_quelle(url, abruf=abruf, timeout=timeout)
+            # Kopie: Zuordnung eines Artikels darf andere nicht überschreiben.
+            ergebnis = dict(cache[url])
             ergebnis.update({
                 "slug": artikel["slug"], "risk": artikel["risk"],
                 "approved": artikel["approved"], "id": quelle["id"],
@@ -255,6 +269,9 @@ def main(argv: list[str] | None = None) -> int:
                         help="nur Risikoklasse hoch (YMYL)")
     parser.add_argument("--strict", action="store_true",
                         help="Exit 1, wenn eine Quelle definitiv nicht mehr abrufbar ist")
+    parser.add_argument("--require-complete", action="store_true",
+                        help="Exit 1 auch bei unklaren oder umgeleiteten Quellen; "
+                             "für automatische Queue-Erledigung")
     parser.add_argument("--json", action="store_true", help="Ergebnis als JSON")
     parser.add_argument("--report", action="store_true",
                         help="BELEGKETTEN-WACHE-REPORT.md schreiben")
@@ -284,7 +301,8 @@ def main(argv: list[str] | None = None) -> int:
               f"{z[TOT]} tot · {z[UNKLAR]} unklar")
         for eintrag in ergebnis["befunde"]:
             print(_zeile(eintrag))
-    return 1 if args.strict and ergebnis["blockierend"] else 0
+    return 1 if ((args.strict and ergebnis["blockierend"])
+                 or (args.require_complete and ergebnis["befunde"])) else 0
 
 
 if __name__ == "__main__":

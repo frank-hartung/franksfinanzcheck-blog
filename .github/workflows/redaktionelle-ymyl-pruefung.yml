@@ -66,8 +66,8 @@ jobs:
 
   # Belegketten-Wache (Prüfqueue #826). Sie schreibt nichts und entscheidet
   # nichts: Sie meldet tote oder umgezogene Zitate. Netzfehler (Timeout, 5xx,
-  # 403, 429) gelten als „unklar“ und blockieren nicht – eine Wache, die bei
-  # jedem Wackler rot wird, wird abgeschaltet statt gelesen.
+  # 403, 429) gelten als „unklar“, nicht als tote Quelle. Für die automatische
+  # Ticket-Erledigung müssen aber auch diese Prüfaufträge geklärt sein.
   belegketten:
     needs: pruefung
     if: always()
@@ -88,7 +88,7 @@ jobs:
       - name: Belegketten der Hochrisiko-Artikel prüfen
         id: wache
         continue-on-error: true
-        run: python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict
+        run: python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict --require-complete
 
       - name: Befund sichern (auch bei rotem Lauf)
         if: always()
@@ -106,6 +106,13 @@ jobs:
           name: belegketten-wache
           path: BELEGKETTEN-WACHE-REPORT.md
 
+      - name: Redaktionellen Bericht aus dem vorherigen Job laden
+        if: always() && needs.pruefung.result == 'success'
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: redaktionelle-ymyl-pruefung
+          path: gate-bericht
+
       # Ein Arbeits-Ticket für beide Befunde. Fail-closed: ist die Gate-Zahl
       # unbekannt (Job davor abgebrochen), gilt das Ticket als offen – es wird
       # nie geschlossen, weil eine Zahl fehlt.
@@ -113,10 +120,11 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          GATE_RESULT: ${{ needs.pruefung.result }}
           GATE_OPEN: ${{ needs.pruefung.outputs.open }}
           WACHE: ${{ steps.wache.outcome }}
         run: |
-          set -uo pipefail
+          set -euo pipefail
           gh label create redaktionelle-pruefung --repo "$GITHUB_REPOSITORY" \
             --color "B42318" \
             --description "YMYL-Fachprüfung vor Freigabe oder Review überfällig" --force || true
@@ -125,11 +133,16 @@ jobs:
 
           TICKET_OFFEN=0
           [ "${GATE_OPEN}" != "0" ] && TICKET_OFFEN=1
+          [ "${GATE_RESULT}" != "success" ] && TICKET_OFFEN=1
           [ "${WACHE}" != "success" ] && TICKET_OFFEN=1
 
           if [ "$TICKET_OFFEN" = "1" ]; then
             {
-              cat REDAKTIONELLE-PRUEFUNG-REPORT.md
+              if [ -f gate-bericht/REDAKTIONELLE-PRUEFUNG-REPORT.md ]; then
+                cat gate-bericht/REDAKTIONELLE-PRUEFUNG-REPORT.md
+              else
+                printf '# Redaktionelle YMYL-Prüfqueue\n\nGate-Bericht fehlt; keine automatische Erledigung.\n'
+              fi
               if [ "${WACHE}" != "success" ] && [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
                 printf '\n\n---\n\n'
                 cat BELEGKETTEN-WACHE-REPORT.md
@@ -152,6 +165,6 @@ jobs:
               | while read -r issue; do
                   [ -z "$issue" ] && continue
                   gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
-                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün, und alle zitierten Belegketten sind erreichbar (Belegketten-Wache: keine tote Quelle)."
+                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün, und alle zitierten Belegketten sind ohne offene Abrufbefunde erreichbar (keine tote, unklare oder umgeleitete Quelle)."
                 done
           fi
