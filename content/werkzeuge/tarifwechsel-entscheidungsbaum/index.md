@@ -1,7 +1,7 @@
 ---
 title: "Tarifwechsel-Entscheidungsbaum: Wechseln oder bleiben?"
-seoTitle: "Tarifwechsel: Entscheidungsbaum mit begründeter Empfehlung | FranksFinanzcheck"
-description: "Fünf Fragen zu Jahreskosten, Bindung, Ersparnis, Tarifstruktur und Vorkasse – und eine begründete Empfehlung samt nächstem Schritt. Nachvollziehbare Regeln, lokal im Browser, ohne Anbieterliste."
+seoTitle: "Tarifwechsel prüfen: Kosten und Risiko abwägen"
+description: "Jahreskosten, Vertragsbindung und Risiken abwägen: Der Entscheidungsbaum gibt einen nachvollziehbaren nächsten Schritt. Kostenlos, ohne Anmeldung."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

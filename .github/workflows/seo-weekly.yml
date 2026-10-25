@@ -4,9 +4,11 @@
 #  Läuft jeden Mittwoch um 07:00 Uhr (DE):
 #    1. SEO-Audit: prüft alle Artikel (Titel, Description, Keywords,
 #       Struktur, Alt-Texte, interne Links, Wortanzahl, Sitemap)
-#    2. IndexNow-Indexierung: reicht neue Artikel automatisch bei Bing &
+#    2. SEO-Cockpit: prüft nach allen Content-Heilungen den finalen Build;
+#       P1/P2/P3 erscheinen in der Laufübersicht, P1 pflegt ein dedupliziertes Issue
+#    3. IndexNow-Indexierung: reicht neue Artikel automatisch bei Bing &
 #       Co. ein (kostenlos, ohne API-Key – Key-Datei liegt im Repo)
-#    3. Report: Bei kritischen Problemen wird ein GitHub-Issue erstellt
+#    4. Reports: kritische SEO-Befunde werden als GitHub-Issue gemeldet
 #
 #  VORAUSSETZUNG (einmalig): Bereits eingerichtet (scripts/indexnow_key.txt
 #    + static/<key>.txt). Kein Bing-Konto/API-Key nötig!
@@ -518,6 +520,51 @@ jobs:
         run: |
           python3 scripts/set_lastmod.py --git-changed
 
+      # Separater finaler Build NACH Bestand-Gate, Cover-/Meta-Fixes,
+      # Textbatterie und lastmod. Der frühere Build bleibt unmittelbar vor
+      # dem Bestand-Gate nötig, damit dieses das gerenderte HTML prüfen kann.
+      # Der Auditbericht bleibt auf dem Runner; nur die Kurzfassung erscheint
+      # in der Actions-Laufübersicht.
+      - name: Finalen Website-Stand für das SEO-Cockpit bauen
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Finaler SEO-Cockpit-Build (nach allen Content-Heilungen)"
+
+      - name: SEO-Cockpit – final gerenderte Seiten, Snippets und Sitemap
+        id: seo_cockpit
+        continue-on-error: true
+        run: |
+          set +e
+          REPORT_DIR="$RUNNER_TEMP/seo-cockpit"
+          mkdir -p "$REPORT_DIR"
+          python3 scripts/seo_cockpit.py --build public --strict --output "$REPORT_DIR" | tee /tmp/seo_cockpit_log.txt
+          rc=${PIPESTATUS[0]}
+          set -e
+          if [ -f "$REPORT_DIR/audit.json" ]; then
+            python3 - "$REPORT_DIR/audit.json" <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, sys
+          with open(sys.argv[1], encoding="utf-8") as source:
+              report = json.load(source)
+          summary = report["summary"]
+          print("### SEO-Cockpit – finaler Hugo-Build")
+          print(f"- Seiten: {summary['pages']} · indexierbar: {summary['indexable']} · Sitemap-URLs: {summary['sitemap']}")
+          print(f"- Befunde: P1 {summary['p1']} · P2 {summary['p2']} · P3 {summary['p3']}")
+          for finding in report["findings"][:40]:
+              print(f"- **{finding['severity']} · {finding['code']}** `{finding['url']}` — {finding['detail']}. Maßnahme: {finding['action']}")
+          if len(report["findings"]) > 40:
+              print(f"- … sowie {len(report['findings']) - 40} weitere Befunde im Audit-Log.")
+          PY
+          else
+            {
+              echo "### SEO-Cockpit – Auditbericht fehlt"
+              echo '```'
+              cat /tmp/seo_cockpit_log.txt 2>/dev/null || true
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+          exit "$rc"
+
       # META-REPORT.md ist seit dem Premium-Audit 12.09.2026 gitignored und
       # nicht versioniert (Report bleibt als Lauf-Artefakt im Log). Der
       # frühere „Meta-Report committen“-Schritt ist weg: `git add` auf einen
@@ -636,3 +683,55 @@ jobs:
               body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom wöchentlichen SEO-Workflow.'
             });
             console.log('✅ Issue erstellt');
+
+
+      - name: SEO-Cockpit-Befundticket pflegen
+        if: ${{ !cancelled() }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          SEO_COCKPIT_OUTCOME: ${{ steps.seo_cockpit.outcome }}
+          SEO_COCKPIT_REPORT: ${{ runner.temp }}/seo-cockpit/audit.json
+          SEO_COCKPIT_LOG: /tmp/seo_cockpit_log.txt
+        with:
+          script: |
+            const fs = require('fs');
+            const title = 'SEO-Cockpit: technische P1-Befunde';
+            const outcome = process.env.SEO_COCKPIT_OUTCOME;
+            let details = 'Der technische SEO-Cockpit-Audit ist fehlgeschlagen; siehe Actions-Lauf.';
+            try {
+              const report = JSON.parse(fs.readFileSync(process.env.SEO_COCKPIT_REPORT, 'utf-8'));
+              const summary = report.summary;
+              const findings = report.findings.filter(f => f.severity === 'P1');
+              details = '### Technische SEO-P1-Befunde (' + findings.length + ')\n\n';
+              for (const finding of findings.slice(0, 100)) {
+                details += '- **' + finding.code + '** `' + finding.url + '` — ' + finding.detail + '\n';
+                details += '  Maßnahme: ' + finding.action + '\n';
+              }
+              details += '\nAudit: ' + summary.pages + ' Seiten · ' + summary.indexable + ' indexierbar · P1 ' + summary.p1 + ' / P2 ' + summary.p2 + ' / P3 ' + summary.p3;
+            } catch (error) {
+              try { details += '\n\n```\n' + fs.readFileSync(process.env.SEO_COCKPIT_LOG, 'utf-8').slice(0, 12000) + '\n```'; } catch (ignored) {}
+            }
+            const runUrl = process.env.GITHUB_SERVER_URL + '/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId;
+            const body = '## Technischer SEO-Cockpit-Audit\n\n**Lauf:** [' + context.runId + '](' + runUrl + ')\n\n' + details + '\n\n---\nAutomatisch gepflegt vom wöchentlichen SEO-Workflow. Das Ticket wird erst geschlossen, wenn ein vollständiger Folgeaudit ohne P1-Befunde vorliegt.';
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100
+            });
+            const existing = openIssues.find(issue => issue.title === title && !issue.pull_request);
+            if (outcome === 'failure') {
+              if (existing) {
+                await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body });
+                console.log('SEO-Cockpit-Ticket #' + existing.number + ' aktualisiert.');
+              } else {
+                const { data: created } = await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body });
+                console.log('SEO-Cockpit-Ticket #' + created.number + ' erstellt.');
+              }
+            } else if (outcome === 'success' && existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number,
+                body: 'Der vollständige SEO-Cockpit-Audit ist wieder ohne technische P1-Befunde grün. Das Ticket wird geschlossen. Lauf: ' + runUrl
+              });
+              await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, state: 'closed' });
+              console.log('SEO-Cockpit-Ticket #' + existing.number + ' nach grünem Audit geschlossen.');
+            } else {
+              console.log('SEO-Cockpit wurde nicht ausgeführt; Ticketstatus bleibt unverändert. Outcome: ' + outcome);
+            }

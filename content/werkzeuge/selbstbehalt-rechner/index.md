@@ -1,7 +1,7 @@
 ---
 title: "Selbstbehalt-Rechner: Ab wann sich der Eigenanteil lohnt"
-seoTitle: "Versicherung mit Selbstbehalt berechnen: Break-even & Zehn-Jahres-Vergleich | FranksFinanzcheck"
-description: "Beitragsersparnis gegen Eigenanteil: Der Selbstbehalt-Rechner zeigt die Break-even-Schadenzahl und den Zehn-Jahres-Vergleich beider Tarife – lokal im Browser, mit offener Formel und Export."
+seoTitle: "Selbstbehalt berechnen: Break-even im Vergleich"
+description: "Beitrag und Selbstbehalt vergleichen: Der Rechner ermittelt Break-even und Gesamtkosten im Zehn-Jahres-Modell. Kostenlos und lokal im Browser."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet"
-seoTitle: "Effektivpreis-Rechner für 24 Monate: Tarife ehrlich vergleichen | FranksFinanzcheck"
-description: "Aktionspreis, Bonus, Gerätemiete und Anschlusskosten in eine einzige Vergleichszahl: Der Effektivpreis-Rechner zeigt, was ein Tarif über die volle Laufzeit kostet. Lokal, mit offener Formel, Export als CSV oder PDF."
+seoTitle: "Effektivpreis berechnen: Tarife über 24 Monate"
+description: "Aktionspreis, Bonus und Zusatzkosten über 24 Monate vergleichen: Der Rechner ermittelt den monatlichen Effektivpreis. Kostenlos, mit Formel und Export."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

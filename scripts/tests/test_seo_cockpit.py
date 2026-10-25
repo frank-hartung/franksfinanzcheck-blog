@@ -54,10 +54,19 @@ class AuditTests(unittest.TestCase):
         with self.assertRaises(ValueError): self.run_audit()
 
     def test_parser_decodes_entities_and_graph(self):
-        doc = seo.Document('<title>A &amp; B</title><meta name=robots content=NOINDEX><script type=application/ld+json>{"@graph":[{"@type":"Article"}]}</script>')
+        doc = seo.Document('<html><head><title>A &amp; B</title></head><body><meta name=robots content=NOINDEX><script type=application/ld+json>{"@graph":[{"@type":"Article"}]}</script></body></html>')
         self.assertEqual(doc.title, 'A & B')
         self.assertTrue(doc.noindex)
         self.assertIn('Article', seo.schema_types(doc.schemas))
+
+    def test_parser_ignores_svg_titles_when_reading_document_title(self):
+        doc = seo.Document(
+            '<html><head><title>Der echte Seitentitel</title></head><body>'
+            '<svg role="img"><title>Sehr lange SVG-Beschreibung, die kein Seitentitel ist</title>'
+            '<g><title>Weiterer SVG-Titel</title></g></svg>'
+            '<title>Ungültiger Titel außerhalb des Head</title></body></html>'
+        )
+        self.assertEqual(doc.title, 'Der echte Seitentitel')
 
     def test_pager_regression(self):
         self.write('page/2/index.html', page('/page/2/').replace(BASE + 'page/2/', BASE))
@@ -156,6 +165,31 @@ class AuditTests(unittest.TestCase):
             self.assertIn(f['severity'], ('P1', 'P2', 'P3'))
             self.assertEqual(f['channel'], 'seo-cockpit')
             self.assertTrue(f['action'])
+
+
+class WorkflowContractTests(unittest.TestCase):
+    def test_final_build_seo_audit_is_reported_and_ticketed_weekly(self):
+        workflow = (Path(__file__).resolve().parents[2] / '.github' / 'workflows' / 'seo-weekly.yml').read_text(encoding='utf-8')
+        bestand_build = workflow.index('name: Seite neu bauen (Grundlage des Bestand-Gates)')
+        bestand_gate = workflow.index('name: Bestand-Gate (aktuelle Publish-Gate-Regeln')
+        text_battery = workflow.index('name: Textbatterie hinterher (Kanon-Ordnung nach KI-/SEO-Edits)')
+        lastmod = workflow.index('name: lastmod für geänderte Artikel setzen (Frische-Signal)')
+        final_build = workflow.index('name: Finalen Website-Stand für das SEO-Cockpit bauen')
+        cockpit = workflow.index('name: SEO-Cockpit – final gerenderte Seiten, Snippets und Sitemap')
+        self.assertLess(bestand_build, bestand_gate)
+        self.assertLess(bestand_gate, text_battery)
+        self.assertLess(text_battery, lastmod)
+        self.assertLess(lastmod, final_build)
+        self.assertLess(final_build, cockpit)
+        audit_step = workflow[cockpit:]
+        self.assertIn('id: seo_cockpit', audit_step)
+        self.assertIn('scripts/seo_cockpit.py --build public --strict', audit_step)
+        self.assertIn('$GITHUB_STEP_SUMMARY', audit_step)
+        self.assertIn('SEO-Cockpit-Befundticket pflegen', workflow)
+        self.assertIn('steps.seo_cockpit.outcome', workflow)
+        self.assertIn('github.paginate(github.rest.issues.listForRepo', workflow)
+        self.assertIn("openIssues.find(issue => issue.title === title", workflow)
+        self.assertIn("state: 'closed'", workflow)
 
 
 if __name__ == '__main__':

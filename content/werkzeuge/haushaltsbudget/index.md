@@ -1,7 +1,7 @@
 ---
 title: "Haushaltsbudget: Verteilung sehen, lokal gespeichert"
-seoTitle: "Haushaltsbudget-Rechner mit 50-30-20-Regel, lokal gespeichert | FranksFinanzcheck"
-description: "Einnahmen, Ausgaben, Saldo und die Verteilung nach 50-30-20 auf einen Blick. Die Werte bleiben auf deinem Gerät, der Export liefert CSV oder PDF – ohne Konto und ohne Bankzugang."
+seoTitle: "Haushaltsbudget-Rechner: Einnahmen & Ausgaben"
+description: "Einnahmen und Ausgaben planen, Saldo und 50-30-20-Aufteilung berechnen. Deine Angaben bleiben lokal; CSV- und PDF-Export sind möglich."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false
