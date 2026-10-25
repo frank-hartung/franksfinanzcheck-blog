@@ -783,3 +783,163 @@ topics:
     pillar: "versicherungen"
     affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=versicherungen"
     keywords: ["Versicherungen prüfen Jahresende", "Policen kündigen Dezember", "Unnötige Versicherungen kündigen", "Doppelversicherung vermeiden"]
+
+# ------------------------------------------------------------
+#  NACHSCHUB 25.10.2026 (WF-D4E0 / #821) – AUTO-Bahn wieder handlungsfähig
+#
+#  Der Vorrat fiel seit dem 19.10. von 6 auf 1, weil die Disposition in der
+#  AUTO-Bahn kein freies Thema mehr fand: 154 von 202 Themen galten als
+#  „thematisch belegt“, die restlichen 21 waren ausschließlich YMYL-
+#  Hochrisiko (Fachfreigabe, nie automatisch veröffentlichbar).
+#
+#  Diese 36 Themen sind bewusst AUTO-fähig (kein Versicherungs-, Kredit-,
+#  Renten- oder Baufi-Thema), an je ein /go/-Ziel mit passendem Angebot
+#  geroutet und gegen Bestand + Pool auf Leitbegriff-Kollision geprüft.
+#  Messung nach dem Einbau: `python3 scripts/engine_capacity.py`.
+#  Nachschub ist Pflicht, nicht Kür: `scripts/themen_nachschub_waechter.py`
+#  meldet 14 Tage vorher, wenn die AUTO-Bahn wieder zur Neige geht.
+# ------------------------------------------------------------
+  - title: "Kühlschrank richtig einstellen: So sinkt der Verbrauch ohne Neukauf"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Kühlschrank Stromverbrauch", "Kühlschrank einstellen", "Strom sparen Küche"]
+  - title: "Grundlast messen: Wo dein Strom nachts hingeht"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Grundlast Strom", "Stromverbrauch nachts", "Zähler beobachten"]
+  - title: "Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken"]
+  - title: "Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Steckdosenleiste Schalter", "Standby vermeiden", "Arbeitsplatz Strom"]
+  - title: "Kaffeemaschine: Kapseln, Pulver oder Vollautomat im Vergleich"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Kaffeemaschine Stromverbrauch", "Kapselmaschine Kosten", "Kaffee zuhause"]
+  - title: "Waschmaschine richtig beladen: So sparst du Strom und Wasser"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Waschmaschine beladen", "Waschgang sparen", "Wasserverbrauch Haushalt"]
+  - title: "Wäschetrockner: Wann die Wäscheleine wirklich günstiger ist"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Wäschetrockner Kosten", "Wäsche aufhängen", "Trockner Stromverbrauch"]
+  - title: "Spülmaschine: So wird sie wirklich voll und sparsam"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Spülmaschine beladen", "Geschirrspüler sparsam", "Wasser sparen Küche"]
+  - title: "Wasserkosten senken: Wo im Haushalt das meiste verloren geht"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Wasserkosten senken", "Wasserverbrauch prüfen", "Nebenkosten Wasser"]
+  - title: "Mehrwegflaschen: So rechnet sich die Rückgabe"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Mehrwegflaschen Pfand", "Pfand zurückholen", "Getränke sparen"]
+  - title: "Gäste-WLAN einrichten: So trennst du Besuch vom eigenen Netz"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Gäste WLAN", "WLAN Sicherheit", "Router einrichten"]
+  - title: "WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["WLAN Repeater", "Powerline Vergleich", "WLAN verstärken"]
+  - title: "Router-Position optimieren: Mehr Empfang ohne neues Gerät"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Router Standort", "WLAN Empfang verbessern", "WLAN Tipps"]
+  - title: "Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt"]
+  - title: "Homeoffice: So planst du die Leitung für zwei Arbeitsplätze"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Homeoffice Internet", "Bandbreite Arbeitsplatz", "Leitung teilen"]
+  - title: "Mesh-WLAN nachrüsten: Für welche Wohnung sich das lohnt"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Mesh WLAN", "WLAN nachrüsten", "Abdeckung Wohnung"]
+  - title: "Kontowechselservice nutzen: So zieht dein Gehalt automatisch um"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+    keywords: ["Kontowechselservice", "Gehalt umziehen", "Bank wechseln Hilfe"]
+  - title: "Gemeinschaftskonto für Paare: So teilt ihr Kosten fair"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+    keywords: ["Gemeinschaftskonto", "Paar Finanzen", "gemeinsame Ausgaben"]
+  - title: "Geschenkkarten: Worauf du beim Aufladen achtest"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Geschenkkarte", "Gutschein aufladen", "Karte verschenken"]
+  - title: "Seniorenkonto: Worauf es bei Kontoführung und Zugang ankommt"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+    keywords: ["Seniorenkonto", "Kontoführung Alter", "Bankzugang einfach"]
+  - title: "Kartenzahlung mit PIN: So bleibt die Karte sicher"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kreditkarte"
+    keywords: ["Kartenzahlung PIN", "Karte sichern", "Kontaktlos zahlen"]
+  - title: "Ferienwohnung statt Hotel: So rechnest du die Endkosten ehrlich"
+    pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Ferienwohnung Vergleich", "Nebenkosten Ferienwohnung", "Urlaubskosten planen"]
+  - title: "Städtetrip im Winter: So planst du die Tageskasse"
+    pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=pauschalreisen-vergleich&cat=9"
+    keywords: ["Städtetrip Kosten", "Winter Städtereise", "Nebenkosten Urlaub"]
+  - title: "Carsharing statt eigenem Wagen: So rechnest du nach"
+    pillar: "mietwagen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=mietwagen-preisvergleich&cat=10"
+    keywords: ["Carsharing Kosten", "Auto teilen", "Zweitwagen vermeiden"]
+  - title: "Vorratsplanung im Haushalt: So kaufst du seltener und günstiger ein"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Vorrat planen", "Einkauf Rhythmus", "Lebensmittel Vorrat"]
+  - title: "Essensplan für die Woche: Weniger Spontankäufe, weniger Reste"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Essensplan Woche", "Einkauf planen", "Lebensmittel sparen"]
+  - title: "Lebensmittel retten: So wirfst du weniger weg"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Lebensmittel retten", "Reste verwerten", "Haltbarkeit prüfen"]
+  - title: "Kleidung secondhand: Woran du gute Stücke erkennst"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Secondhand Kleidung", "Gebraucht kaufen Qualität", "Kleidung sparen"]
+  - title: "Gebrauchte Möbel: So erkennst du solide Ware"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Gebrauchte Möbel", "Secondhand Möbel", "Möbel aufarbeiten"]
+  - title: "Kleidertausch im Freundeskreis: So funktioniert die Runde"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Kleidertausch", "Secondhand tauschen", "Kleidung weitergeben"]
+  - title: "Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=tagesgeldvergleich"
+    keywords: ["Sparziel", "Vorsätze durchhalten", "Motivation sparen"]
+  - title: "Reparatur statt Wegwerfen: Wann sich das noch rechnet"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Reparatur lohnt sich", "Neukauf vermeiden", "Reparaturbonus"]
+  - title: "Fitnessstudio: So beendest du die Mitgliedschaft ohne Friststress"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Fitnessstudio kündigen", "Mitgliedschaft beenden", "Vertragsstrafe vermeiden"]
+  - title: "Taschengeld für Kinder: So lernst du den Umgang mit Geld"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Taschengeld Kinder", "Geld lernen", "Haushaltsgeld Familie"]
+  - title: "Haustier im Alltag: Diese laufenden Ausgaben kommen dazu"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Haustier Kosten", "Tierarzt Rücklage", "Haustier Budget"]
+  - title: "Balkon bepflanzen: So senkst du die Gemüsekosten"
+    pillar: "frugalismus"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18"
+    keywords: ["Balkon Gemüse", "Kräuter ziehen", "Gemüse selber ziehen"]

@@ -228,9 +228,44 @@ und die Marker-Identität ein. Vorgangsbericht:
 
 ---
 
+## Vorlauf in Tagen – der Themennachschub (C44, seit #821)
+
+`engine_capacity.py` beantwortet „schaffen wir HEUTE das Tagesziel?". Für die
+Redaktionsplanung ist die zweite Frage wichtiger: **wie lange trägt der
+Themenvorrat noch?**
+
+```bash
+npm run engine:nachschub            # python3 scripts/themen_nachschub_waechter.py
+npm run engine:nachschub -- --json  # maschinenlesbar
+npm run engine:nachschub -- --warn-only   # berichtet, ohne Exit 1
+```
+
+Gerechnet wird ausschließlich über `engine_capacity.lage()` – also mit dem Maß
+des Disponenten (`reserve_topics.disponieren`), nie mit einer zweiten Zählregel.
+Der **Vorlauf** ist `frei_auto / Tagesbedarf` (Bedarf = `MIN_ARTIKEL_PRO_TAG`,
+Default 2). Der **Mindestvorlauf** steht in `THEMEN_HORIZON_TAGE` (Default 14,
+geklemmt auf 1–365 und nie still verschluckt).
+
+| Urteil | Bedingung | Exit |
+|---|---|---|
+| `ok` | Vorlauf ≥ Mindestvorlauf | 0 |
+| `knapp` | Mindestvorlauf/2 ≤ Vorlauf < Mindestvorlauf | 1 |
+| `erschoepft` | Vorlauf < Mindestvorlauf/2 oder 0 freie AUTO-Themen | 1 |
+
+Der Befund nennt immer die **Bahn**: „frei nur in der Fachfreigabe" (YMYL,
+menschliche Freigabe – die Automatik kann daraus nichts produzieren) ist ein
+anderer Vorgang als „beide Bahnen leer" (alles belegt oder im Cooldown). Genau
+diese Unterscheidung fehlte vom 19. bis 25.10.2026: Der End-Gate meldete
+„alles belegt", obwohl 21 Themen frei waren – in der falschen Bahn. Der Lauf
+ruft die Wache in `.github/workflows/content-reserve.yml` **vor** Runde 0 auf;
+keine Stufe hängt von ihrem Ergebnis ab. Vorgangsbericht:
+`WARTUNG-INHALTSQUALITAET-WF-D4E0-821-DAUERHEILUNG-PREMIUM-2026-10-25.md`,
+Vertrag C44.
+
 ## Tests
 
 ```bash
+npm run test:themen:nachschub     # Nachschub-Wache: Selbsttest + 9 Unit-Tests + Füllwort-Grenze
 npm run test:engine:kapazitaet    # Selbsttest + 20 Unit-Tests
 npm run test:prompt:echo          # R16-Prompt-Echo, 14 Unit-Tests
 npm run test:engine:slots         # Slot-Wache: Selbsttest + 29 Unit-Tests

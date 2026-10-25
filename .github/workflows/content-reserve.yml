@@ -1,6 +1,37 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 25.10.2026 (WF-D4E0 / #821 – „dauerhaft auf Highend-Niveau"):
+#  Der Vorrat fiel seit dem 19.10. von 6 auf 1, und jede Nacht wurde derselbe
+#  Schritt rot. Zwei Ursachen, beide strukturell behoben:
+#    1. DIE AUTO-BAHN WAR LEER – und niemand konnte das sehen. 154 von 202
+#       Themen galten als „thematisch belegt", die restlichen 21 waren
+#       sämtlich YMYL-Hochrisiko (Fachfreigabe, nie automatisch
+#       veröffentlichbar). In der AUTO-Bahn war **0** frei, in Stufe 1/4 gab
+#       es also nichts zu produzieren. Zwei Reparaturen greifen:
+#         a) `reserve_topics.FUELLWOERTER` kannte „guenstig", aber nicht
+#            „guenstige(n)" – ein einziges Artikel-Wort sperrte 15 Themen.
+#            Die Deklinations-Lücke ist geschlossen (Frei in der AUTO-Bahn:
+#            0 → 19), ohne eine Sachgrenze zu verschieben: „Stromfresser",
+#            „Reiseversicherung" und „Kreditkarte" kollidieren weiterhin.
+#         b) 36 neue AUTO-fähige Themen in `data/topics.yaml`, jedes gegen
+#            Bestand + Pool auf Leitbegriff-Kollision geprüft und an ein
+#            /go/-Ziel mit passendem Angebot geroutet (frei: 19 → 55 =
+#            27,5 Produktionstage).
+#    2. DER BEFUND NANNTE DIE FALSCHE BAUSTELLE. `reserve_gate.diagnose()`
+#       meldete „kein freies Thema (alles thematisch belegt oder im
+#       Cooldown)" – obwohl 21 frei waren. Wer das liest, prüft Cooldowns,
+#       Dubletten und API-Keys, aber nie den Nachschub. Die Diagnose misst
+#       jetzt über `engine_capacity.lage()` (eine Messregel, wie im
+#       Pre-Flight) und unterscheidet „AUTO-Bahn leer" von „beide Bahnen
+#       leer" und von „Vorlauf knapp".
+#    3. DER VORLAUF IST JETZT EINE WACHE. `themen_nachschub_waechter.py`
+#       rechnet Stück-Vorrat in Produktionstage um (Mindestvorlauf 14 Tage,
+#       ENV `THEMEN_HORIZON_TAGE`) und läuft als eigener Schritt VOR der
+#       Kette. Ein leerer Pool heilt sich nicht selbst – aber er meldet sich
+#       jetzt zwei Wochen vorher, mit Bahn, Zahl und Handlungsort.
+#  Details: WARTUNG-INHALTSQUALITAET-WF-D4E0-821-DAUERHEILUNG-PREMIUM-2026-10-25.md
+#
 #  REPARATUR 02.10.2026 (Vorgang WF-D4E0, Issue #513 – „dauerhaft auf
 #  Premium-Level einer Profi-Agentur beheben“): Der Lauf war rot, weil drei
 #  Ursachen sich verstärkten – jede ist strukturell behoben:
@@ -290,6 +321,27 @@ jobs:
         run: |
           python3 scripts/reserve_operations.py --selftest
           python3 scripts/reserve_operations.py --preflight --max-minuten 65
+
+      # ================= THEMENNACHSCHUB (VORLAUF) =================
+      # NEU 25.10.2026 (WF-D4E0 / #821): Der Vorrat fiel zwischen dem 19.10.
+      # und dem 25.10. von 6 auf 1. Ursache war nicht die KI, sondern die
+      # AUTO-Bahn: 154 von 202 Themen galten als belegt, die restlichen 21
+      # waren sämtlich YMYL-Hochrisiko (Fachfreigabe) – frei disponierbar war
+      # in der Automatik-Bahn **0**. Niemand konnte das vorher sehen: Die
+      # Messung unten rechnet den Stück-Vorrat in PRODUKTIONSTAGE um und
+      # meldet, bevor der Vorrat leer ist. Der Schritt ist bewusst NICHT
+      # `continue-on-error`: Themennachschub ist ein Befund an die Redaktion
+      # und gehört als solcher in den Lauf – er blockiert aber keine Stufe
+      # (keine der folgenden Bedingungen hängt an `steps.nachschub`), weil
+      # Heilung und Nachzertifizierung des Bestands weiterlaufen müssen.
+      - name: Themennachschub – Vorlauf der AUTO-Bahn in Tagen
+        id: nachschub
+        if: ${{ !cancelled() && steps.window.outcome == 'success' }}
+        timeout-minutes: 3
+        run: |
+          set -o pipefail
+          python3 scripts/themen_nachschub_waechter.py \
+            | tee -a "${GITHUB_STEP_SUMMARY:-/dev/null}"
 
       # ================= RUNDE 0 (BESTAND) =================
       # NEU 08.10.2026 (Issue #661): Bevor IRGENDEIN Werkzeug der Kette den
