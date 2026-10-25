@@ -87,23 +87,30 @@ class WorkflowVertrag(unittest.TestCase):
 
 
 class KeinScheinGruen815(unittest.TestCase):
-    """WF-E813 / #815: Ein manuell angeforderter Deploy ohne Variable darf nie grün lügen."""
+    """WF-E813/#815: Kein Skip-Grün; produktive Bindung statt Kopierzwang."""
 
-    def test_manueller_deploy_ohne_kv_variable_ist_fail_closed(self):
+    def test_manueller_deploy_ohne_kv_variable_bleibt_in_der_deploy_matrix(self):
         code, bereit, ann, summary = wdv.plan_auswerten(
             {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker"})
-        self.assertEqual(code, 1)
-        self.assertEqual(bereit, [])
-        self.assertTrue(any("::error::" in a and "KV_NAMESPACE_ID_ABO" in a for a in ann))
-        self.assertIn("Tab „Variables“", summary)
+        self.assertEqual(code, 0)
+        self.assertEqual(bereit, ["newsletter-worker"])
+        self.assertEqual(ann, [])
+        self.assertIn("bestehender Produktions-Bindung", summary)
+        self.assertIn("keinen Ersatzspeicher", summary)
 
-    def test_push_ohne_kv_variable_schreibt_sichtbare_warnung_und_summary(self):
+    def test_push_ohne_kv_variable_wird_nicht_mehr_gruen_uebersprungen(self):
         code, bereit, ann, summary = wdv.plan_auswerten(
             {"EREIGNIS": "push", "GEAENDERT": "newsletter-worker/src/index.js"})
         self.assertEqual(code, 0)
-        self.assertEqual(bereit, [])
-        self.assertTrue(any("::warning::" in a and "KV_NAMESPACE_ID_ABO" in a for a in ann))
-        self.assertIn("NICHT deployt", summary)
+        self.assertEqual(bereit, ["newsletter-worker"])
+        self.assertEqual(ann, [])
+        self.assertNotIn("NICHT deployt", summary)
+
+    def test_deploy_werkzeug_aenderung_rollt_beide_produktiven_worker_aus(self):
+        code, bereit, _, _ = wdv.plan_auswerten(
+            {"EREIGNIS": "push", "GEAENDERT": "scripts/worker_ressourcen.py"})
+        self.assertEqual(code, 0)
+        self.assertEqual(bereit, ["newsletter-worker", "klick-zaehler"])
 
     def test_newsletter_worker_traegt_build_stempel_und_nachweis_prueft_ihn(self):
         wrangler = (ROOT / "newsletter-worker" / "wrangler.toml").read_text(encoding="utf-8")

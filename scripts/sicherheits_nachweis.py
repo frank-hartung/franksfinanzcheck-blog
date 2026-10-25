@@ -56,6 +56,13 @@ def pruefe_messung(daten: dict, quelle: str, code: str) -> None:
         if not isinstance(daten.get(name), list) or not all(
                 isinstance(wert, str) and wert.strip() for wert in daten[name]):
             raise NachweisFehler(f"Messliste {name} fehlt oder hat ein ungültiges Format.")
+    # Optionale, fachlich belegte Pflichten außerhalb der jeweiligen Messung.
+    # Beispiel B7: Header sind technisch OK, aber der Datenschutztext passt
+    # noch nicht zum aktiven Proxy. Altartefakte ohne das Feld bleiben lesbar.
+    blocker = daten.get("abschluss_blocker", [])
+    if not isinstance(blocker, list) or not all(
+            isinstance(wert, str) and wert.strip() for wert in blocker):
+        raise NachweisFehler("Abschlussblocker haben ein ungültiges Format.")
     if not isinstance(daten.get("bericht"), str) or not daten["bericht"].strip():
         raise NachweisFehler("Lesbarer Messbericht fehlt.")
     if not isinstance(daten.get("naechster_schritt"), str):
@@ -106,6 +113,8 @@ def auswerten(quelle: str, code: str, datenpfad: str, berichtpfad: str) -> int:
     if klasse in ("OK", "TEILWEISE"):
         if klasse == "TEILWEISE":
             annotation("warning", f"{name} TEILWEISE: kein vollständiger Live-Nachweis; nicht gemessene Ziele siehe Zusammenfassung.")
+        elif daten.get("abschluss_blocker"):
+            annotation("warning", f"{name} technisch grün, aber mit Abschlussblocker (z. B. Datenschutz B7); der abschließende Live-Nachweis bleibt rot.")
         else:
             annotation("notice", f"{name} grün: vollständig gemessen, Details siehe Zusammenfassung.")
         return 0
@@ -130,6 +139,11 @@ def live_pruefen(header: dict, worker: dict) -> tuple[bool, str]:
             for quelle, daten in (("header", header), ("worker", worker))
             if daten["klasse"] != "OK"
         ]
+        for quelle, daten in (("header", header), ("worker", worker)):
+            offen.extend(
+                f"{quelle} – Abschlussblocker: {grund}"
+                for grund in daten.get("abschluss_blocker", [])
+            )
         if offen:
             return False, ", ".join(offen) + " – kein vollständiger Live-Nachweis."
         ziele = header.get("ziele")

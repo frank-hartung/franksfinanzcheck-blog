@@ -397,20 +397,38 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
     else:
         proxy = PROXY_UNBEKANNT
 
+    # Messgrün und Abschlussfreigabe sind bewusst getrennt: Die Header können
+    # technisch vollständig sein, während die rechtlich erforderliche B7-
+    # Angleichung noch fehlt. Der Blocker verhindert NUR den Gesamtabschluss;
+    # er verfälscht weder die Header-Messung noch ihre Exit-Klassifikation.
+    abschluss_blocker: list[str] = []
     if proxy == PROXY_AKTIV:
         ds_pfad = WURZEL / "content" / "datenschutz" / "index.md"
-        if ds_pfad.is_file():
+        b7_hinweis = ""
+        if not ds_pfad.is_file():
+            b7_hinweis = (
+                "**Datenschutz-Folge B7 nicht prüfbar:** Der Cloudflare-Proxy ist live, "
+                "aber `content/datenschutz/index.md` fehlt. Datenschutzdatei und B7 "
+                "wiederherstellen; ein fehlender Rechtstext ist kein grüner Abschluss."
+            )
+        else:
             ds_text = ds_pfad.read_text(encoding="utf-8")
-            if ("kein Proxy von Cloudflare" in ds_text
-                    or "keine Informationen über Seitenaufrufe" in ds_text):
+            b7_altmarken = (
+                "kein Proxy von Cloudflare",
+                "keine Informationen über Seitenaufrufe",
+                "| GitHub (Hosting); Cloudflare (DNS) |",
+                "| Cloudflare, Inc. | DNS, Cloudflare Workers, Workers KV, Datenbank |",
+            )
+            if any(marke in ds_text for marke in b7_altmarken):
                 b7_hinweis = (
                     "**Datenschutz-Folge B7 offen:** Der Cloudflare-Proxy ist live "
                     "aktiv, aber `content/datenschutz/index.md` beschreibt noch den "
-                    "Vor-Proxy-Stand („kein Proxy“ / „keine Informationen über "
-                    "Seitenaufrufe“). Mit `npm run edge:b7:apply` (Runbook B7) "
-                    "angleichen und committen."
+                    "Vor-Proxy-Stand (Text oder Empfängertabelle). Mit "
+                    "`npm run edge:b7:apply` (Runbook B7) angleichen und committen."
                 )
-                warnungen_gesamt.append(b7_hinweis)
+        if b7_hinweis:
+            warnungen_gesamt.append(b7_hinweis)
+            abschluss_blocker.append(b7_hinweis)
 
     if not gemessen:
         klasse = KLASSE_STOERUNG
@@ -460,7 +478,7 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
         if warnungen_gesamt:
             zeilen.append(f"⚠️ {len(warnungen_gesamt)} Hinweise (Härtung, kein Fehler).")
             for w in warnungen_gesamt:
-                if "Datenschutz-Folge B7 offen" in w:
+                if "Datenschutz-Folge B7" in w:
                     zeilen.append(f"  - {w}")
 
     schritt = naechster_schritt(klasse, proxy)
@@ -476,6 +494,7 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
         "nicht_gemessen": nicht_gemessen,
         "fehlend": fehlend_gesamt,
         "warnungen": warnungen_gesamt,
+        "abschluss_blocker": abschluss_blocker,
         "stoerung": stoerung_gesamt,
         "naechster_schritt": schritt,
         # Keine Cookies/sonstigen Roh-Header in öffentliche Messartefakte.
