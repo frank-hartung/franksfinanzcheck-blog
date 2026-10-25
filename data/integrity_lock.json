@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-25T15:38:45.674825+00:00",
-  "head": "77f9bef9",
+  "signed_at": "2026-10-25T18:29:11.863142+00:00",
+  "head": "42c1852",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "hugo.toml": "73561a9168ed132b9a0cbfc5d65f4594e3d2b79a93ea1b0954c678c610d571b5",
+    "hugo.toml": "d77866989bd61129d4586eba667244d457534cdf67680cb5578100e735f7ca64",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -54,7 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "10430face02c540dc4510bf4d57034ac4b9a948c116df4ab42232b17a1b52201",
+  "files_sha256": "8ce06de10d88b5769b616acc470dee83f6f93601c7e7a6425d37f55cf086d1e3",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
@@ -169,8 +169,38 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
-      "files_sha256": "10430face02c540dc4510bf4d57034ac4b9a948c116df4ab42232b17a1b52201"
+      "files_sha256": "10430face02c540dc4510bf4d57034ac4b9a948c116df4ab42232b17a1b52201",
+      "prev_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7"
+    },
+    {
+      "date": "2026-10-25",
+      "art": "set-current",
+      "head": "42c1852",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "42c1852",
+              "datum": "2026-10-25",
+              "betreff": "feat(marke): Entity-Register, Abgrenzung zu FINANZCHECK.de und Marken-Wache (E1–E9)"
+            },
+            {
+              "sha": "bd2c369",
+              "datum": "2026-10-25",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "9ff87f7d33ee81f6f8dc58dd910fb0060cd7903e3619f8ccb1f2e73dcde4e715",
+      "files_sha256": "8ce06de10d88b5769b616acc470dee83f6f93601c7e7a6425d37f55cf086d1e3"
     }
   ]
 }
