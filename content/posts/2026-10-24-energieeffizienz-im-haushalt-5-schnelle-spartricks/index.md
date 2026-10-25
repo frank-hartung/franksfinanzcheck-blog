@@ -107,7 +107,7 @@ Du spürst den Effekt direkt durch ein besseres Raumklima im Rechenfall. Der Wä
 
 > 💶 **Spar-Tipp zwischendurch:** Faire Konditionen gibt es online in Minuten: [**Stromanbieter vergleichen & sparen**](/go/strom/)
 
-Mach einen kurzen Test für deine Fenster. Schließ alle Fenster und miss nach fünf Minuten die Temperatur.
+Mach einen kurzen Test für deine Fenster. **Faustregel:** Schließ alle Fenster und miss nach fünf Minuten die Temperatur.
 
 Sinkt sie stark ab, brauchst du bessere Dichtungen. Faustregel: Jede undichte Stelle kostet etwa 1 % des gesamten Heizbudgets. Auch schwere Vorhänge vor den Fenstern helfen in der Nacht. Sie halten die Wärme im Raum und die Kälte draußen.
 
@@ -163,10 +163,10 @@ Faustregel: Jede Investition, die sich in einem Jahr bezahlt macht, lohnt sich. 
 
 ## So gehst du vor: 4K-Prüfpfad für Energie sparen
 
-1. **Kosten sehen** – Sammle zuerst deine Abrechnungen der letzten zwölf Monate. Schau dir den Verbrauch für [Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/) genau an. Vergleiche die Werte mit dem Vorjahr. So erkennst du Trends in deinem Verhalten.
+1. **Kosten sehen** – Sammle zuerst deine Abrechnungen der letzten vier Quartale. Schau dir den Verbrauch für [Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/) genau an. Vergleiche die Werte mit dem Vorjahr. So erkennst du Trends in deinem Verhalten.
 2. **Konditionen rechnen** – Vergleiche den Preis für neue Spar-Hardware mit der Ersparnis. Lohnt sich der Kauf einer neuen Leiste oder eines Thermostats? Meistens ist die Antwort ein klares Ja. Rechne die Zeit bis zur Rückzahlung aus.
 3. **Kündigungsfenster sichern** – Notiere dir das Ende deiner Vertragslaufzeit im Kalender. Nur so kannst du rechtzeitig den Anbieter wechseln. Ein Wechsel dauert oft nur wenige Minuten im Internet. Er bringt aber oft die größte Ersparnis im Jahr.
-4. **Kurs halten** – Prüfe alle drei Monate deine aktuellen Zählerstände. Reagiere bei starken Abweichungen sofort auf die Suche nach dem Grund. Vielleicht läuft eine alte Pumpe im Keller dauerhaft. Oder ein Gerät ist defekt und braucht zu viel Kraft.
+4. **Kurs halten** – Prüfe vierteljährlich deine aktuellen Zählerstände. Reagiere bei starken Abweichungen sofort auf die Suche nach dem Grund. Vielleicht läuft eine alte Pumpe im Keller dauerhaft. Oder ein Gerät ist defekt und braucht zu viel Kraft.
 
 Der Pfad gibt dir einen klaren Überblick über deine Finanzen. So hält dein Sparen auch nach vielen Wochen noch an.
 

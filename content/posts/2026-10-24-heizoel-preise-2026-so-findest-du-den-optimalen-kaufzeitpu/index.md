@@ -94,7 +94,7 @@ Auch das Wetter hat einen Einfluss auf die Wege für den Transport. Wenn die Fl�
 
 ## So planst du deinen Heizölkauf – Schritt für Schritt
 
-1. Analysiere zuerst die Entwicklung der Preise über die letzten 12 Monate hinweg. Schau dir an, wann die Kurse besonders tief waren und wann sie nach oben gingen.
+1. Analysiere zuerst die Entwicklung der Preise über die vergangenen vier Quartale hinweg. Schau dir an, wann die Kurse besonders tief waren und wann sie nach oben gingen.
 2. Bestimme nun dein persönliches Fenster für die Bestellung im Jahr. Idealerweise liegt diese Zeit zwischen dem Anfang vom Januar und dem Ende vom Februar.
 3. Nutze für deine Entscheidung den bewährten Pfad aus vier Schritten: Sieh dir zuerst die Kosten genau an. Rechne dann die Konditionen für die Lieferung aus. Sichere dir danach das Fenster für die Kündigung und halte am Ende deinen Kurs fest.
 4. Fordere bei verschiedenen Händlern mindestens drei Angebote mit einem festen Preis für die Lieferung an. So hast du eine gute Basis für eine Verhandlung.
@@ -145,13 +145,13 @@ In dieser Zeit ist die erste Kälte vom Winter oft schon vorüber und die Händl
 
 ### Wie erkenne ich den Tiefpreis beim Öl?
 
-Du erkennst den tiefen Preis am besten, wenn du den Schnitt der Woche über mindestens vier Wochen hinweg beobachtest. Sinkt der Preis in dieser Zeit stetig ab und liegt er unter dem Schnitt vom ganzen Jahr?
+**Faustregel:** Du erkennst den tiefen Preis am besten, wenn du den Schnitt der Woche über mindestens vier Wochen hinweg beobachtest. Sinkt der Preis in dieser Zeit stetig ab und liegt er unter dem Schnitt vom ganzen Jahr?
 
 Dann hast du mit hoher Sicherheit den Tiefpunkt für deinen Kauf gefunden. Warte nicht zu lange auf den allerletzten Cent Ersparnis. Wenn der Trend wieder nach oben dreht, solltest du sofort handeln und deine Bestellung beim Händler aufgeben. Ein guter Preis ist besser als ein perfekter Preis, den man am Ende doch verpasst.
 
 ### Kann ich den Preis für mehrere Jahre festschreiben?
 
-Einige große Anbieter am Markt bieten ihren Kunden feste Preise über zwei oder drei Jahre an. Solche Verträge geben dir zwar eine hohe Sicherheit bei der Planung deiner Kosten.
+Einige große Anbieter am Markt bieten ihren Kunden feste Preise mit mehrjähriger Bindung an. Solche Verträge geben dir zwar eine hohe Sicherheit bei der Planung deiner Kosten.
 
 Aber sie sind nur selten günstiger als ein Kauf, den du jedes Jahr zum richtigen Zeitpunkt selbst tätigst. Die Händler lassen sich das Risiko von steigenden Preisen oft durch einen Aufschlag bezahlen. Prüfe die Regeln und die Kosten für solche langen Verträge daher ganz genau. Oft fährst du mit einem gut getimten Kauf einmal im Jahr deutlich besser und sparst mehr Geld.
 

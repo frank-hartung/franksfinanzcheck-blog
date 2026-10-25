@@ -390,12 +390,12 @@ def _reserve_numeric_claim_findings(body):
         r"kilometer\b|km\b|meter\b"
     )
     time_units = r"tage?n?\b|wochen?\b|monate?n?\b|jahre?n?\b|stunden?\b|minuten?\b"
-    time_claim_context = re.compile(
-        r"\b(?:vermögen\w*|depot\w*|rendite\w*|zins\w*|gewinn\w*|wachs\w*|wächst|"
-        r"verdoppel\w*|ersparnis\w*|spar(?:st|t|en|e)\b|reich\b|"
-        r"vertrag\w*\s+darf|höchstens|mindestlaufzeit|kündigungsfrist)\b",
-        re.I,
-    )
+    # 25.10.2026 KONVERGENZ (WF-D4E0 #821 + #865/#867): Eine freistehende
+    # Frist OHNE Beleg bleibt hart („Drei Monate reichen zum Prüfen nicht."
+    # muss rot bleiben – Vertragstest „test_echte_unbelegte_zahl_bleibt_rot").
+    # Der frühere Kontext-Gate (nur Vermögens-Vokabular) wurde entfernt: Er
+    # machte dieselbe Frist je nach Nachbarsatz grün – eine Wache, die ihre
+    # Schutzrichtung vom Wortschatz des Satzes abhängig machte.
     hard_numeric_claim = re.compile(
         rf"(?ix)(?:§\s*\d+[a-z]?\b|"
         rf"(?<!\w)(?:\d[\d.,]*|{number_words})\s*(?:{hard_units})(?!\w)|"
@@ -421,8 +421,6 @@ def _reserve_numeric_claim_findings(body):
         r"\b(ca|bzw|usw|ggf|inkl|mind|max|vgl|nr|abs)\.", re.I
     )
 
-        r"\b(?:rechenbeispiel|modellrechnung|modellfall|annahme|annahmen|"
-        r"musterrechnung|beispielrechnung|angenommen|unterstellen wir)\b", re.I)
     # Eine Kalenderjahreszahl („im Jahr 2026", „für 2026") ist keine
     # Zahlenbehauptung – sie nennt keinen Betrag, keine Menge, keinen Preis.
     # Erst wenn nach dem Entfernen der Jahreszahlen noch eine Zahl mit Einheit
@@ -451,12 +449,6 @@ def _reserve_numeric_claim_findings(body):
                 continue
             content_lines.append(ln)
         if not content_lines:
-        if not numeric_claim.search(jahr_re.sub(" ", sentence)):
-            continue
-        if "QUELLENLINK" in sentence:
-            continue
-        # A model label must not disguise a statutory clause or a claimed study.
-        if "§" not in sentence and model_marker.search(sentence):
             continue
         para_text = re.sub(r"\s+", " ", " ".join(content_lines))
         para_text = ordinal_date_re.sub(r"\1_ORD_ \2", para_text)
@@ -470,11 +462,9 @@ def _reserve_numeric_claim_findings(body):
                 para_model_active = True
                 section_model_numbers.update(re.findall(r"\d[\d.,]*", sentence))
                 continue
-            has_hard = bool(hard_numeric_claim.search(sentence))
-            has_time = bool(
-                time_numeric_claim.search(sentence)
-                and time_claim_context.search(sentence)
-            )
+            ohne_jahr = jahr_re.sub(" ", sentence)
+            has_hard = bool(hard_numeric_claim.search(ohne_jahr))
+            has_time = bool(time_numeric_claim.search(ohne_jahr))
             if not (has_hard or has_time):
                 continue
             if "QUELLENLINK" in sentence:
@@ -2111,12 +2101,15 @@ SELFTEST = [
             "Digitale Vertragspapiere sind kein Spartrend für 2026."
         ) == []
     ), True),
-    ("Reserve-RS5-Intervall-ohne-Vermoegensversprechen-frei", lambda: (
+    ("Reserve-RS5-Frist-belegt-und-frei", lambda: (
+        # 25.10.2026 KONVERGENZ (WF-D4E0 #821 + #865/#867): freistehende
+        # Fristen ohne Beleg bleiben Befund (die Gegenprüfung liegt im
+        # Vertragstest test_echte_unbelegte_zahl_bleibt_rot); ausdrückliche
+        # Modell-/Annahme-Kennzeichnung deckt denselben Satz.
         _reserve_numeric_claim_findings(
-            "Drei Monate reichen zum Prüfen nicht. "
-            "Nach drei Monaten folgt der Zwischencheck. "
-            "Setze ihn auf einen Tag nach den festen Zahlungen."
-        ) == []
+            "Drei Monate reichen zum Prüfen nicht.") != []
+        and _reserve_numeric_claim_findings(
+            "**Annahme:** Drei Monate reichen zum Prüfen nicht.") == []
     ), True),
     ("Reserve-RS5-Modellrechnung-Sektion-deckt-Folgesatz", lambda: (
         _reserve_numeric_claim_findings(

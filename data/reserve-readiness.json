@@ -2,20 +2,15 @@
   "target": 6,
   "ready": 6,
   "pool_size": 6,
-  "generated_at": "2026-10-25T13:46:01Z",
-  "ready": 1,
-  "pool_size": 2,
-  "generated_at": "2026-10-25T13:38:49Z",
+  "generated_at": "2026-10-25T15:38:34Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-25T13:41:18Z",
+      "measured_at": "2026-10-25T15:33:26Z",
       "score": 0.992,
-      "measured_at": "2026-10-25T13:38:46Z",
-      "score": 0.984,
       "parts": {
         "spelling": 0.96,
         "meta": 1.0,
@@ -27,45 +22,11 @@
       }
     },
     {
-      "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
-      "ready": true,
-      "sha256": "1ecf4772d61765beddcf426b936939d3b8408aa0bdc0e2804c13639104378ff8",
-      "flesch": 70.5,
-      "measured_at": "2026-10-25T13:42:13Z",
-      "score": 0.974,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
-      "sha256": "0a590c16c0508e99869bf24ef052a9bae195a3b86602d14fc460df72b19ade92",
-      "flesch": 74.2,
-      "measured_at": "2026-10-25T13:43:10Z",
-      "score": 0.974,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
       "ready": true,
-      "sha256": "a8814cc0998be38338721b81ebed8f614499cb86564870e40ebbbd38b9fb8762",
-      "flesch": 64.4,
-      "measured_at": "2026-10-25T13:44:04Z",
+      "sha256": "fd980e24d6d5e22ad6ace7446ec4970b964076bd2f0df9e16f534d33964c381c",
+      "flesch": 64.3,
+      "measured_at": "2026-10-25T15:34:21Z",
       "score": 0.978,
       "parts": {
         "spelling": 1.0,
@@ -80,9 +41,9 @@
     {
       "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
       "ready": true,
-      "sha256": "a6a19be96a8cfd5ba74c59ed5ae8d93d2076d645ad054405e27772d3b0e1ea34",
+      "sha256": "ea0cfacd2ac259a3adcb78a704a45e012e2c333ddc1c1b8e3eb6d99d1d1499af",
       "flesch": 70.3,
-      "measured_at": "2026-10-25T13:45:00Z",
+      "measured_at": "2026-10-25T15:35:25Z",
       "score": 0.982,
       "parts": {
         "spelling": 0.96,
@@ -95,21 +56,46 @@
       }
     },
     {
+      "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "ready": true,
+      "sha256": "3a6ccf3d702f7abd37b0a6909cd46aa67fef811010eea3c31482d8f1b5d2f050",
+      "flesch": 70.4,
+      "measured_at": "2026-10-25T15:36:25Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "9e86fac5718db982c3a797361233ebe2054b35538e582249f8b48bb76dea1dea",
+      "flesch": 74.1,
+      "measured_at": "2026-10-25T15:37:25Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
       "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
       "ready": true,
-      "sha256": "67a6c9aa0502941eb26432c39f7b279d4ef308daeb3872e4b598d7f84ae82c9e",
+      "sha256": "9c3ce20475581169ea2b2180c1fb7ccaa9182fba0435f8710252ddfef86865e1",
       "flesch": 64.6,
-      "measured_at": "2026-10-25T13:46:01Z",
+      "measured_at": "2026-10-25T15:38:34Z",
       "score": 0.988,
-      "ready": false,
-      "sha256": "87890c362df3a0c3981db591f09430f5298a4090567db1b2a40af790a9fa1911",
-      "flesch": 63.8,
-      "measured_at": "2026-10-25T13:38:49Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 7 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts.",
-      "details": [
-        "RS5: 7 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts."
-      ],
-      "score": 0.98,
       "parts": {
         "spelling": 0.94,
         "meta": 1.0,
@@ -124,22 +110,4 @@
   "measurement": {
     "kind": "full"
   }
-    "kind": "full",
-    "run_id": "40196967906",
-    "run_attempt": "1"
-  },
-  "geschont": [
-    {
-      "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
-      "klasse": "heilbar",
-      "hits": 5,
-      "heiler": [
-        "redaktions_standard.py",
-        "check_titles.py",
-        "lesbarkeit_heiler.py",
-        "profi_polish.py"
-      ],
-      "warum": "Vorab-Befunde des Reserve-Qualitäts-Gates (RS1–RS8, Titel R1–R5, Flesch) heilen redaktions_standard.py, check_titles.py und lesbarkeit_heiler.py in der Reserve-Kette (#710)."
-    }
-  ]
 }
