@@ -69,7 +69,7 @@ Cloudflare wirbt mit einem klaren Datenschutz-Versprechen. Google ist sehr verbr
 
 DNS beschleunigt nur einen Teilschritt: die Namensauflösung. Dein Gerät fragt, wo eine Webseite liegt, und erhält eine IP-Adresse. Wie schnell die Daten danach fließen, entscheidet dieser Eintrag nicht. Das übernehmen Tarif, Leitung und Technik bei dir zu Hause.
 
-Router und WLAN sind dabei ein großer Hebel. Aktuelle Tests zeigen, wie stark die Hardware den Alltag prägt: Der heise-Test einer neuen Fritzbox mit Wi-Fi 7 macht Hardware-Kompromisse zum Thema – sie kosten dort kaum Leistung, senken aber den Stromverbrauch. Solche Fragen entscheidet das Gerät, nicht der DNS-Eintrag. Prüfe deshalb zuerst die Basis: Router-Update, gutes WLAN, passender Tarif. Der DNS-Wechsel ist dann die Feinjustierung obendrauf.
+Router und WLAN sind dabei ein großer Hebel. Aktuelle Tests zeigen, wie stark die Hardware den Alltag prägt: Der heise-Test einer neuen FRITZ!Box mit Wi-Fi 7 macht Hardware-Kompromisse zum Thema – sie kosten dort kaum Leistung, senken aber den Stromverbrauch. Solche Fragen entscheidet das Gerät, nicht der DNS-Eintrag. Prüfe deshalb zuerst die Basis: Router-Update, gutes WLAN, passender Tarif. Der DNS-Wechsel ist dann die Feinjustierung obendrauf.
 
 ## Wie du deine aktuelle DNS-Leistung prüfst
 
@@ -111,7 +111,7 @@ Die Änderung im Router ist am effektivsten. So profitieren alle Geräte im Haus
 
 Telekommunikation steht in Deutschland unter der Aufsicht der Bundesnetzagentur. Für dich als Privatnutzer gilt: Du darfst den DNS-Server deiner Geräte frei wählen. Eine Erlaubnis brauchst du dafür nicht. Der Wechsel ist reine Privatsache.
 
-Anders sieht es bei Unternehmen aus, die Telekommunikationsdienste anbieten. Für sie gelten regulatorische Pflichten, die die Behörde überwacht – von den Unternehmenspflichten bis zur Breitbandversorgung. Wer einen eigenen DNS-Dienst für andere betreiben will, sollte diese Vorgaben vorher kennen. Auch rund um Breitband und Netzausbau ist die Bundesnetzagentur die zuständige Aufsicht.
+Anders sieht es bei Unternehmen aus, die Telekommunikationsdienste anbieten. Für sie gelten regulatorische Pflichten, die Behörde überwacht – von den Unternehmenspflichten bis zur Breitbandversorgung. Wer einen eigenen DNS-Dienst für andere betreiben will, sollte diese Vorgaben vorher kennen. Auch rund um Breitband und Netzausbau ist die Bundesnetzagentur die zuständige Aufsicht.
 
 ## Kosten- und Nutzen-Check im 4K-Prüfpfad
 
