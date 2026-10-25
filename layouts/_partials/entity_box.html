@@ -1,0 +1,40 @@
+{{- /* ============================================================
+       ENTITY-BOX – sichtbare Marken-Definition auf der Startseite
+       ------------------------------------------------------------
+       WARUM (25.10.2026, SERP-Live-Prüfung §3): Google ordnet die
+       Markensuche „FranksFinanzcheck" dem Kreditvergleich
+       FINANZCHECK.de zu. Eine eindeutige Entity braucht einen
+       sichtbaren, zitierfähigen Definitionssatz auf der stärksten
+       Seite der Domain – nicht nur JSON-LD im Head. Diese Box steht
+       bewusst am Seitenende (nach den Themenwelten): kein Eingriff
+       in Hero/LCP, aber vollständig im crawlbaren Text.
+
+       VERTRAG: Beide Texte kommen aus hugo.toml
+       (params.entityDefinition / params.entityAbgrenzung) und sind
+       wortgleich mit data/entity.yaml, /ueber/, /impressum/ und
+       llms.txt. NIE hier als Literal pflegen – die Wache
+       scripts/entity_marken_gate.py (E2/E3/E8) prüft die
+       Wortgleichheit in Quelle und Build. Ohne Param rendert die
+       Box nichts (fail-sichtbar über das Gate, nicht als kaputte
+       leere Karte im Layout).
+       Styling: assets/css/extended/zz-entity.css
+       ============================================================ */ -}}
+{{- with site.Params.entityDefinition -}}
+<section class="ff-entity" data-ff-entity="1" aria-labelledby="ff-entity-titel">
+  <h2 id="ff-entity-titel">Was ist FranksFinanzcheck?</h2>
+  <p class="ff-entity-definition">{{ . }}</p>
+  <ul class="ff-entity-punkte">
+    <li><strong>Ratgeber statt Portal:</strong> Hier wird gerechnet und eingeordnet – Verträge schließt du beim jeweiligen Anbieter, nicht auf dieser Seite.</li>
+    <li><strong>Unabhängig finanziert:</strong> Gekennzeichnete Partnerlinks tragen die Seite, ohne die Bewertung zu kaufen. Details unter <a href="{{ "transparenz/" | relURL }}">Transparenz &amp; Werbung</a>.</li>
+    <li><strong>Eine verantwortliche Person:</strong> Betreiber und Autor ist <a href="{{ "ueber/" | relURL }}">Frank Hartung</a> – Methodik und Quellen stehen offen unter <a href="{{ "methodik/" | relURL }}">So arbeiten wir</a>.</li>
+  </ul>
+  {{- with site.Params.entityAbgrenzung }}
+  <p class="ff-entity-abgrenzung">{{ . }}</p>
+  {{- end }}
+  <p class="ff-entity-links">
+    <a href="{{ "ueber/" | relURL }}">Über FranksFinanzcheck</a> ·
+    <a href="{{ "presse/" | relURL }}">Presse &amp; Expertise</a> ·
+    <a href="{{ "impressum/" | relURL }}">Impressum</a>
+  </p>
+</section>
+{{- end -}}

@@ -1,0 +1,114 @@
+# ============================================================
+#  ENTITY-/MARKEN-GATE – Wache des Entity-Registers (25.10.2026)
+#  ------------------------------------------------------------
+#  WARUM (SERP-Live-Prüfung §3): Google ordnet die Markensuche
+#  „FranksFinanzcheck" dem Kreditvergleich FINANZCHECK.de zu.
+#  Gegenmittel: ein wortgleicher Identitätssatz + Abgrenzung auf
+#  Startseite, Schema.org, /ueber/, /impressum/, /presse/ und
+#  llms.txt – plus genau eine Profil-Liste für sameAs/rel=me.
+#  Dieser Wortlaut driftet ohne Wache still auseinander (so fehlte
+#  Mastodon im siteweiten Person-Knoten). Das Gate hält ihn fest.
+#
+#  Vertrag:  data/entity.yaml
+#  Wache:    scripts/entity_marken_gate.py (E1–E9, mit Selbsttest)
+#  Runbook:  docs/ANLEITUNG-MARKEN-ENTITY.md
+#  Bericht:  MARKEN-ENTITY-HIGHEND-2026-10-25.md
+#
+#  Läuft bei Push/PR auf allen Marken-Flächen. Der Selbsttest läuft
+#  zuerst – eine sabotierte Prüflogik darf kein grünes Gate liefern.
+#  Die Public-Stufe baut die Site und prüft das gerenderte Ergebnis
+#  (JSON-LD-Parität, sichtbare Entity-Box, rel=me im Footer).
+# ============================================================
+name: Entity-Marken-Gate (Marken-Identität)
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "data/entity.yaml"
+      - "hugo.toml"
+      - "content/_index.md"
+      - "content/ueber/**"
+      - "content/impressum/**"
+      - "content/presse/**"
+      - "content/newsletter/**"
+      - "content/newsletter-abmelden/**"
+      - "content/newsletter-bestaetigung/**"
+      - "content/newsletter-checkliste/**"
+      - "content/newsletter-praeferenzen/**"
+      - "data/newsletter_studio.json"
+      - "newsletter-worker/src/**"
+      - "layouts/_partials/extend_head.html"
+      - "layouts/_partials/schema_article.html"
+      - "layouts/_partials/footer.html"
+      - "layouts/_partials/entity_box.html"
+      - "layouts/_default/list.html"
+      - "scripts/entity_marken_gate.py"
+      - "scripts/generate_llms_txt.py"
+      - "static/llms.txt"
+      - ".github/workflows/entity-marken-gate.yml"
+  pull_request:
+    paths:
+      - "data/entity.yaml"
+      - "hugo.toml"
+      - "content/_index.md"
+      - "content/ueber/**"
+      - "content/impressum/**"
+      - "content/presse/**"
+      - "content/newsletter/**"
+      - "content/newsletter-abmelden/**"
+      - "content/newsletter-bestaetigung/**"
+      - "content/newsletter-checkliste/**"
+      - "content/newsletter-praeferenzen/**"
+      - "data/newsletter_studio.json"
+      - "newsletter-worker/src/**"
+      - "layouts/_partials/extend_head.html"
+      - "layouts/_partials/schema_article.html"
+      - "layouts/_partials/footer.html"
+      - "layouts/_partials/entity_box.html"
+      - "layouts/_default/list.html"
+      - "scripts/entity_marken_gate.py"
+      - "scripts/generate_llms_txt.py"
+      - "static/llms.txt"
+      - ".github/workflows/entity-marken-gate.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: entity-marken-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  entity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: pip install --quiet --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+
+      - name: Hugo (Extended, verifiziert) installieren
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Selbsttest der Wache (Sabotage-Proben)
+        run: python3 scripts/entity_marken_gate.py --selftest
+
+      - name: Quellen prüfen (Wortlaut, Profile, Namensflächen)
+        run: python3 scripts/entity_marken_gate.py --source-only
+
+      - name: Site bauen
+        run: hugo --minify --cleanDestinationDir --destination public
+
+      - name: Build prüfen (JSON-LD-Parität, Entity-Box, rel=me)
+        run: python3 scripts/entity_marken_gate.py --public public

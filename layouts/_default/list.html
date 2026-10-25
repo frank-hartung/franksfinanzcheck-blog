@@ -199,6 +199,10 @@
        Viewport, verlinkt aber alle 6 Pillar-Pages von der Startseite. */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 {{- partial "home_clusters.html" . }}
+{{- /* ENTITY-BOX (25.10.2026): sichtbare Marken-Definition + Abgrenzung
+       zu FINANZCHECK.de am Ende der Startseite. Vertrag und Begründung:
+       layouts/_partials/entity_box.html · Wache: entity_marken_gate.py */ -}}
+{{- partial "entity_box.html" . }}
 {{- end }}
 
 {{- end }}{{/* end profileMode */}}

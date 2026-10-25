@@ -1,0 +1,65 @@
+/* ============================================================
+   ENTITY-BOX + FOOTER-PROFILE (25.10.2026)
+   ------------------------------------------------------------
+   Startseiten-Entity-Definition (layouts/_partials/entity_box.html)
+   und die siteweiten Social-Profil-Links (rel=me) im Footer.
+   Nur PaperMod-Variablen → Hell/Dunkel folgt automatisch dem Theme.
+   Bewusst ruhig: Die Box ist ein Vertrauens-/Definitionsblock am
+   Seitenende, kein zweiter Hero.
+   ============================================================ */
+
+.ff-entity {
+  margin: var(--gap) 0;
+  padding: calc(var(--gap) * 0.9) var(--gap);
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ff-entity h2 {
+  margin: 0 0 0.6em;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.ff-entity-definition {
+  margin: 0 0 0.9em;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--primary);
+}
+
+.ff-entity-punkte {
+  margin: 0 0 0.9em;
+  padding-left: 1.2em;
+  line-height: 1.6;
+  color: var(--secondary);
+}
+
+.ff-entity-punkte li + li {
+  margin-top: 0.35em;
+}
+
+.ff-entity-abgrenzung {
+  margin: 0 0 0.9em;
+  padding-top: 0.9em;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--secondary);
+}
+
+.ff-entity-links {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Footer: offizielle Profile als rel=me-Links (PaperMods
+   social_icons.html). Die Theme-Basis (.social-icons a/svg) steht in
+   main.css; hier nur die Footer-Anordnung. */
+.footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 0 2px;
+}

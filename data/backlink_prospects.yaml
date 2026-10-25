@@ -52,6 +52,21 @@ campaigns:
     asset: dsl-wechsel-checkliste
     channels: [digital-pr, pinterest]
 
+  # MARKEN-ENTITY (25.10.2026, SERP-Live-Prüfung §3): Google ordnet die
+  # Markensuche FINANZCHECK.de zu. Article-Links allein bauen keine
+  # Marken-Entität – diese Kampagne zielt bewusst auf die STARTSEITE mit
+  # Marken-Ankern. Boilerplate zum Kopieren: /presse/ („Kurztext zur
+  # Übernahme"). Anker-Regeln: Marke („FranksFinanzcheck"), Domain
+  # („franksfinanzcheck.de") oder Marken-Beschreibung („Fixkosten-Cockpit
+  # von FranksFinanzcheck") – KEINE Keyword-Anker auf die Startseite.
+  # Vertrag + Status: data/entity.yaml · Runbook: docs/ANLEITUNG-MARKEN-ENTITY.md §5
+  - id: startseite-markenlinks
+    name: Marken-Entity – verdiente Links auf die Startseite
+    window: ["2026-10-25", "2027-03-31"]
+    asset: startseite-markenprofil
+    channels: [digital-pr, resource, partnerschaft]
+    note: "Ziel-URL ist ausnahmslos https://franksfinanzcheck.de/ (nicht der Artikel). Pitch über Fixkosten-Index + Autoren-Expertise; Linkziel Startseite oder /presse/, Anker = Marke/Domain. Jede gewonnene Erwähnung mit URL+Datum in authority_evidence belegen."
+
 prospects:
   # ---------- COMMUNITY (Traffic + E-E-A-T, meist nofollow/ugc) ----------
   - id: finanztip-community

@@ -1,6 +1,6 @@
 ---
 title: "Spar-Newsletter: Bestätigung"
-description: "Bestätigung deiner Newsletter-Anmeldung (Double-Opt-In): der Link in deiner Mail macht den Klick. Ohne Bestätigung kommt keine Ausgabe."
+description: "Bestätigung deiner Anmeldung zum FranksFinanzcheck-Newsletter (Double-Opt-In): Der Link in deiner Mail macht den Klick. Ohne Bestätigung kommt keine Ausgabe."
 url: "/newsletter/bestaetigung/"
 summary: "Bestätigung der Newsletter-Anmeldung: Der Link aus der Bestätigungs-Mail bestätigt per Klick (Double-Opt-In) – ohne JavaScript, ohne Passwort. Darin steht, was hilft, wenn die Mail nicht ankommt."
 robotsNoIndex: true

@@ -63,6 +63,16 @@
                prüft diesen Link im gebauten HTML. */ -}}
         <a href="{{ "so-entstehen-unsere-vergleiche/" | absURL }}">So entstehen unsere Vergleiche</a>
     </span>
+    {{- /* ENTITY-PROFILE (25.10.2026): Die offiziellen Social-Profile
+           ([[params.socialIcons]], hugo.toml) siteweit sichtbar verlinkt.
+           PaperMods social_icons.html setzt rel="noopener noreferrer me" –
+           das sichtbare Gegenstück zum sameAs im Schema (Person +
+           Organization lesen dieselbe Liste). Vorher existierten die
+           Profile nur als Schema-Werte und Einzel-Links auf /ueber/;
+           ein neues Profil (z. B. LinkedIn) erscheint hier automatisch,
+           sobald es in hugo.toml steht. Styling: zz-entity.css.
+           Wache: scripts/entity_marken_gate.py (E4/E8). */ -}}
+    {{- partial "social_icons.html" (dict) }}
 </footer>
 {{- end }}
 

@@ -156,6 +156,16 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   designVariante = ""
   title = "FranksFinanzcheck"
   description = "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung."
+  # ENTITY-REGISTER (25.10.2026): der eine, wortgleiche Identitätssatz der
+  # Marke + die Abgrenzung zu FINANZCHECK.de. Vertrag: data/entity.yaml –
+  # diese beiden Werte MÜSSEN dort (`definition` / `abgrenzung`) identisch
+  # stehen; gerendert wird von hier (Startseiten-Entity-Box, Schema.org
+  # Organization.description). Wortlaut-Änderung = beide Dateien + /ueber/,
+  # /impressum/, /presse/, llms.txt-Generator nachziehen; die Wache
+  # scripts/entity_marken_gate.py schlägt sonst fail-closed an.
+  # `description` darüber bleibt unverändert (data/brand_lock.yaml).
+  entityDefinition = "FranksFinanzcheck (franksfinanzcheck.de) ist das unabhängige Fixkosten-Cockpit für deutsche Haushalte: ein redaktioneller Ratgeber von Frank Hartung, der Verträge, Fristen und laufende Kosten mit nachvollziehbarer Rechnung ordnet – kein Bankportal, kein Kreditvergleichsportal und keine Versicherungsmakler."
+  entityAbgrenzung = "FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen Verbindung zum Kreditvergleichsportal FINANZCHECK.de. Trotz der ähnlich klingenden Namen handelt es sich um unterschiedliche, voneinander unabhängige Anbieter. Auf franksfinanzcheck.de werden Kredite, Konten und Versicherungen nicht selbst angeboten; ein Vertrag kommt – wenn du einem gekennzeichneten Partnerlink folgst – ausschließlich mit dem dort genannten Anbieter zustande."
   keywords = ["Fixkosten-Cockpit", "Fixkosten senken", "Geld sparen", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Versicherungen", "Kündigungsfrist"]
   author = "Frank Hartung"
   contactEmail = "kontakt@franksfinanzcheck.de"

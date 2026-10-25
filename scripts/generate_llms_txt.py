@@ -116,10 +116,17 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 
 ## Über diese Website
 
+FranksFinanzcheck (franksfinanzcheck.de) ist das unabhängige Fixkosten-Cockpit für deutsche Haushalte: ein redaktioneller Ratgeber von Frank Hartung, der Verträge, Fristen und laufende Kosten mit nachvollziehbarer Rechnung ordnet – kein Bankportal, kein Kreditvergleichsportal und keine Versicherungsmakler.
+
+FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen Verbindung zum Kreditvergleichsportal FINANZCHECK.de. Trotz der ähnlich klingenden Namen handelt es sich um unterschiedliche, voneinander unabhängige Anbieter. Auf franksfinanzcheck.de werden Kredite, Konten und Versicherungen nicht selbst angeboten; ein Vertrag kommt – wenn du einem gekennzeichneten Partnerlink folgst – ausschließlich mit dem dort genannten Anbieter zustande.
+
 - Betreiber und verantwortlicher Autor: Frank Hartung. Fachprüfung,
   Quellenketten und Erfahrungsbelege werden artikelbezogen ausgewiesen.
 - Arbeitsweise und Redaktionsstandards: {BASE_URL}/methodik/
 - Über den Autor: {BASE_URL}/ueber/ – Kontakt: kontakt@franksfinanzcheck.de
+- Presse (Kurztext, Daten, Downloads): {BASE_URL}/presse/
+- Offizielle Profile: Pinterest https://www.pinterest.de/franksfinanzcheck/ ·
+  Mastodon https://mastodon.social/@FranksFinanzcheck
 - Finanzierung: Affiliate-Partnerschaften (CHECK24, Tarifcheck),
   gekennzeichnete Empfehlungslinks (Werbung); Empfehlungen davon unabhängig.
 - Hinweis: Allgemeine Informationen, keine individuelle Finanz-, Steuer-

@@ -89,7 +89,7 @@ Das sind alles Domains mit hoher Domain-Autorität. FranksFinanzcheck konkurrier
 | # | Maßnahme | Aufwand | Wirkung | Status |
 |---|----------|---------|---------|--------|
 | 1 | Titel/Description aller Live-Artikel auf M1/M2 prüfen (≤60 Zeichen Titel, 100–160 Zeichen Description, kein hartes Ellipsis-Ende) | klein | mittel | ✅ erledigt (12 Descriptions repariert, metadaten_wache grün) |
-| 2 | Marken-Präsenz stärken: Domain konsistent in Snippet, Backlinks auf Startseite (Authority-Radar), Presse/Gastbeiträge | groß | sehr hoch | offen |
+| 2 | Marken-Präsenz stärken: Domain konsistent in Snippet, Backlinks auf Startseite (Authority-Radar), Presse/Gastbeiträge | groß | sehr hoch | 🔧 Entity-Fundament umgesetzt 25.10.2026 (`MARKEN-ENTITY-HIGHEND-2026-10-25.md`): kanonische Entity-Definition + Abgrenzung zu FINANZCHECK.de auf Startseite/Schema//ueber//Impressum/llms.txt, Person-sameAs repariert, rel=me im Footer, Startseiten-Kampagne im Backlink-CRM, Dauerwache `entity_marken_gate.py`. Offen bleiben Franks Handgriffe: Publisher-Center-Profil, LinkedIn/Xing-Profile, Outreach (Runbook `docs/ANLEITUNG-MARKEN-ENTITY.md`) |
 | 3 | Tote Tag-Archive aus dem Index nehmen (`/tags/sparmethoden/` → 404) | klein | mittel | offen |
 | 4 | Interne Verlinkung: jeder Beitrag verlinkt Rechner + Pillar (bereits 60/60 Live) | mittel | mittel | ✅ umgesetzt |
 | 5 | Eigene Bilder/Rechenbeispiele in Top-20-Beiträgen (Bildersuche, Nutzerbindung) | mittel–groß | hoch | 8/20 umgesetzt |

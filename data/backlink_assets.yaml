@@ -96,3 +96,19 @@ assets:
     deliverable: Tabelle mit Quellen (Destatis, Verivox-Spannen, CHECK24-Marktbeobachtung – KEINE erfundenen Preise) + Stand-Datum
     effort_hours: 4
     seo_value: 5
+  # MARKEN-ENTITY (25.10.2026): Die Startseite selbst als Linkziel –
+  # Entity-Box mit Definition + Abgrenzung, /presse/ mit Boilerplate.
+  - id: startseite-markenprofil
+    name: "Startseite als Markenprofil (Entity-Box + Presse-Boilerplate)"
+    format: markenprofil
+    status: live
+    pillar: marke
+    source_slug: /
+    why: "Verzeichnisse, Autorenboxen und Roundups verlinken Startseiten, wenn Identität, Betreiber und Abgrenzung dort in einem kopierbaren Satz stehen – genau das liefern Entity-Box und /presse/."
+    pitch_to: [digital-pr, resource, partnerschaft]
+    seasonal: [all]
+    deliverable: "Startseiten-Entity-Box + Presse-Kurztext + offizielle Profile (sameAs/rel=me)"
+    effort_hours: 2
+    seo_value: 4
+    published: "2026-10-25"
+    refresh_due: "2027-01-25"
