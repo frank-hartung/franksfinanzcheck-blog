@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-25T14:51:51Z",
+  "generated_at": "2026-10-25T16:31:49Z",
   "modus": "kandidaten",
-  "commit": "77f9bef9018c37bf05ef64539498cab3014711e6",
+  "commit": "a4c99c16c1f6d2d866cef5f307ced9cdf3b7493e",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -36,7 +36,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "ba7e63463877bac605315c688da52cba3f6e8fac9c9833b15ecacef6ec3bd961",
@@ -87,7 +87,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "030a0119ada7e50b5ae6de97f5190e29cd02864b0355a6a94923aeec23fcee65",
@@ -206,7 +206,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
       "sha256": "246118310790a76a1618b41f6ab349ac128563f6fb3f212fb80f7b6253af1e33",
@@ -291,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "65aad44b1bfe5d1618f60e582cdf0eb431d46af5b0c98bd2c3a7744a1f302de1",
@@ -376,7 +376,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
       "sha256": "8555b9563404ec307a04f2fb7b7bb7c5118c0dea2956fcb1c7eaf30bfbe9062b",
@@ -580,7 +580,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "3763ab11cf0d7ecf22c60f0f164794afba89572934c1316af07023df4b7fbbd5",
@@ -631,7 +631,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "be6ae622ade3b1a36a24548b78c03fa7b489fa55172ef7b1505baf32b9680526",
@@ -648,7 +648,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
       "sha256": "dc4f5125119df9ea4c8763c4e9567ccffffa5f27a09d41d040e174ab8a6eb4dd",
@@ -682,7 +682,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "e9f5357b4e6267232f83369c389b07e6cb8ddef25edf8a2c41f118bbb1611726",
@@ -716,7 +716,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
       "sha256": "6f01a4233da8405ff5aada8337b4232c1e7208024bbecc56cc7227d60caac247",
@@ -750,7 +750,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "365bc43c29c66f85ce5676f8c64e07016fc162c50f4a6927c800cbeb76f323a4",
@@ -784,7 +784,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
       "sha256": "4965f9dc94b6c6483adb657e8d3802575130752f0f0ade060d3eb3f193dc4bfc",
