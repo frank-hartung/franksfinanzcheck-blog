@@ -77,7 +77,17 @@ python3 scripts/affiliate_profi_check.py --fix
 ```
 
 - `affiliate_link_check.py` ersetzt generische CTAs durch passende
-  Deep-Links und prüft Kategorie/PID.
+  Deep-Links und prüft Kategorie/PID. Spezifische Einzelprodukt-Klassen
+  (`EXPLICIT_PRODUCT_ROUTES` inkl. `handytarife`, `kreditkarte`, `kredit`,
+  `fluege` sowie alle Versicherungs-Sparten) und explizite
+  Pauschalreise-/Urlaubsbudget-Ratgeber (`REISEN_EXPLICIT_RE`) werden vor dem
+  breiten Pillar-Fallback aus `affiliate_intent_contract.py` aufgelöst; für
+  die Mehrprodukt-Pillars `strom-sparen` (Strom & Gas), `mietwagen`
+  (Mietwagen & Reisen) und `konto-karten` (Girokonto/Tagesgeld, Kreditkarte,
+  Ratenkredit) akzeptiert `PILLAR_DEEP_ALT` die jeweilige Produktfamilie,
+  solange kein widersprüchlicher Primärprodukt-Intent (`STRICT_PRIMARY_ROUTES`
+  / `NIE_PAARE`) vorliegt. Der Selbsttest (`--selftest`) erzwingt zudem, dass
+  jeder konfigurierte Deep-Link in `scripts/check24_links.yaml` registriert ist.
 - `affiliate_profi_check.py` stellt Offenlegung, E-E-A-T, Trust-Box und
   CTA-Slots sicher.
 

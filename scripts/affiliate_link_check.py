@@ -64,9 +64,14 @@ SLUG_DEEP = {
     "mietwagen-fuer-den-spaetsommer": ("mietwagen-preisvergleich&cat=10", "Mietwagen-Vergleich"),
     "mietwagen-buchen-so-sparst-du": ("mietwagen-preisvergleich&cat=10", "Mietwagen-Vergleich"),
     "mietwagen-fallen-vermeiden": ("mietwagen-preisvergleich&cat=10", "Mietwagen-Vergleich"),
-    "guenstige-fluege-spaetsommer-finden": ("flugvergleich", "Flugvergleich"),
+    "guenstige-fluege-spaetsommer-finden": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     "last-minute-urlaubsangebote-sichern": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     "urlaubskasse-aufbessern-spartipps": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
+    # 21.10.2026 (#829): datierter Urlaubsbudget-Ratgeber (Nachfolger von
+    # urlaubskasse-aufbessern-spartipps / urlaub-mit-kindern-guenstig-spartricks)
+    # liegt im Sammel-Pillar „mietwagen“ („Mietwagen & Reisen“) und verlinkt
+    # vertragskonform /go/reisen/ (pauschalreisen-vergleich&cat=9).
+    "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     # Konto & Karten
     "kostenloses-girokonto-finden": ("c24bank&cat=14", "C24 Girokonto"),
     "notgroschen-aufbauen-wie-viel-reicht": ("c24bank&cat=14", "C24 Girokonto"),
@@ -75,8 +80,8 @@ SLUG_DEEP = {
     # Pillar-Fallback (konto-karten) erwartete fälschlich c24bank&cat=14
     # (C24 Girokonto) und der Report blieb dauerhaft rot.
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": ("kreditkarte", "Kreditkarten-Vergleich"),
-    "ratenkredit-bestszins-vergleichen": ("kreditvergleich", "Kreditvergleich"),
-    "tagesgeld-zinsen-sicher-anlegen": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
+    "ratenkredit-bestszins-vergleichen": ("kredit-vergleich", "Kreditvergleich"),
+    "tagesgeld-zinsen-sicher-anlegen": ("c24bank&cat=14", "C24 Tagesgeld"),
     # Versicherungen (CHECK24)
     "kfz-versicherung-wechseln": ("kfz-versicherung", "Kfz-Versicherung"),
     # Zusaetzliche Artikel (thematisch korrekte Deep-Links)
@@ -89,12 +94,12 @@ SLUG_DEEP = {
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
     "5g-home-router-oder-dsl": ("handytarife", "Handytarif-Vergleich"),
     "2026-08-10-dsl-wechselbonus-sichern": ("dsl-anbieterwechsel&cat=4", "DSL-Tarifvergleich"),
-    "flug-buchen-9-tricks-guenstige-tickets": ("flugvergleich", "Flugvergleich"),
+    "flug-buchen-9-tricks-guenstige-tickets": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     "pauschalreise-buchen-bester-zeitpunkt": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     "urlaub-mit-kindern-guenstig-spartricks": ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
     "mietwagen-im-winter-schnaeppchen-tricks": ("mietwagen-preisvergleich&cat=10", "Mietwagen-Vergleich"),
-    "festgeld-oder-tagesgeld-2026": ("tagesgeldvergleich", "Tagesgeld-Vergleich"),
-    "dispozinsen-verstehen-alternativen": ("kreditvergleich", "Kreditvergleich"),
+    "festgeld-oder-tagesgeld-2026": ("c24bank&cat=14", "C24 Tagesgeld"),
+    "dispozinsen-verstehen-alternativen": ("kredit-vergleich", "Kreditvergleich"),
     "gebuehrenfallen-banking-vermeiden": ("kreditkarte", "Kreditkarten-Vergleich"),
     "reiseversicherung-richtig-kombinieren": ("kfz-versicherung", "Kfz-Versicherung"),
 }
@@ -114,16 +119,63 @@ PILLAR_DEEP = {
     "versicherungen": None,  # partner-versicherung.de mit eigenem Deep (siehe TARIF_DEEP)
 }
 
-# 12.09.2026: Der Pillar „strom-sparen“ heißt intern „Strom & Gas“ (pinwand:
-# „Strom & Gas sparen | Tarife clever wechseln"). Ein Heizungs- oder
-# Gastarif-Artikel in diesem Pillar verlinkt korrekt /go/gas/ – die Erwartung
-# „Stromtarif-Vergleich" war damit ein Mapping-Fehler der Wache, nicht des
-# Artikels (derselbe Fall wie das Kreditkarten-Mapping vom 08.09.2026, Zeile 66).
-# Erlaubt ist deshalb die ganze Produktfamilie des Pillars; ein generischer
-# Link ohne Deep bleibt ein Fehler, und fix_post zielt weiter auf den Primär-Deep.
+# 12.09.2026 / 21.10.2026 (#829): Mehrprodukt-Pillars bündeln verwandte
+# CHECK24-Produktfamilien unter einem gemeinsamen Dach:
+# - „strom-sparen“ („Strom & Gas sparen“): Strom + Gas/Heizung
+# - „mietwagen“ („Mietwagen & Reisen“): Mietwagen + Pauschalreisen/Flüge
+# - „konto-karten“ („Konto & Karten“): C24 Girokonto/Tagesgeld + Kreditkarte + Ratenkredit
+# Wenn ein Artikel im Pillar keinen abweichenden Einzelprodukt-Intent trägt,
+# ist die Produktfamilie des Pillars zulässig; ein generischer Link ohne Deep
+# bleibt ein Fehler, und fix_post zielt weiter auf den Primär-Deep.
 PILLAR_DEEP_ALT = {
-    "strom-sparen": [("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich")],
+    "strom-sparen": [
+        ("gasanbieter-wechseln&cat=3", "Gastarif-Vergleich"),
+    ],
+    "mietwagen": [
+        ("pauschalreisen-vergleich&cat=9", "Pauschalreisen-Vergleich"),
+    ],
+    "konto-karten": [
+        ("kreditkarte", "Kreditkarten-Vergleich"),
+        ("kredit-vergleich", "Kreditvergleich"),
+    ],
 }
+
+# Eindeutige Einzelprodukt-Routen aus `affiliate_intent_contract.py`, die in
+# Slug/Titel eine spezifische Kaufabsicht belegen und deshalb vor dem breiten
+# Pillar-Fallback Vorrang haben (#742 / #829).
+EXPLICIT_PRODUCT_ROUTES = frozenset({
+    "handytarife",
+    "kreditkarte",
+    "kredit",
+    "fluege",
+    "kfz-versicherung",
+    "haftpflicht",
+    "hausrat",
+    "wohngebaeudeversicherung",
+    "unfallversicherung",
+    "reisekrankenversicherung",
+    "zahnzusatzversicherung",
+    "hunde",
+})
+
+# Für die breite Sammelroute `reisen` belegen diese Begriffe in Slug/Titel
+# eindeutig einen Pauschalreise-/Urlaubsbudget-Ratgeber statt eines
+# Mietwagen-Artikels mit Urlaubsbezug im Titel.
+REISEN_EXPLICIT_RE = re.compile(
+    r"pauschal|all.inclusive|urlaubskasse|urlaub[- ]sparen",
+    re.I,
+)
+
+# Primärrouten, bei denen Slug/Titel bereits das Hauptprodukt des Pillars
+# versprechen und deshalb NICHT über PILLAR_DEEP_ALT auf ein Nachbarprodukt
+# ausweichen dürfen (Schutz der NIE_PAARE aus affiliate_intent_contract.py).
+STRICT_PRIMARY_ROUTES = frozenset({
+    "strom",
+    "dsl",
+    "mietwagen",
+    "girokonto",
+    "tagesgeld",
+})
 # Pillar-Seiten (content/pillar/<slug>/index.md) → erwarteter Deep-Link
 PILLAR_PAGE_DEEP = {
     "strom-sparen": ("stromanbieter-wechseln&cat=1", "Stromtarif-Vergleich"),
@@ -278,13 +330,21 @@ def expected_target(post):
         text=slug.replace('-', ' '),
         titel=post.get("title", ""),
     )
-    # Der zentrale Vertrag enthält auch breite Stichwörter wie „Urlaub“,
-    # die im Bestand bewusst als sekundäres Cross-Selling verwendet werden.
-    # Nur die eindeutige Produktklasse Handytarife überschreibt deshalb
-    # derzeit den Pillar-Fallback automatisch; andere Spezialfälle bleiben
-    # kuratiert in den obenstehenden Slug-Mappings.
-    if route == "handytarife":
+    # Eindeutige Einzelprodukt-Klassen (Handytarife, Kreditkarte, Ratenkredit,
+    # Flüge sowie spezifische Versicherungs-Sparten) überschreiben den breiten
+    # Pillar-Fallback automatisch aus dem zentralen Intent-Vertrag (#742/#829).
+    if route in EXPLICIT_PRODUCT_ROUTES:
         target = _target_from_registered_route(route)
+        if target:
+            return target
+    # Die Sammelroute `reisen` enthält auch breite Wörter wie „Urlaub“ oder
+    # „Camping“, die im Mietwagen-Pillar als Roadtrip-/Urlaubskontext vorkommen.
+    # Bei expliziten Pauschalreise-/Urlaubsbudget-Begriffen in Slug oder Titel
+    # ist jedoch eindeutig `pauschalreisen-vergleich&cat=9` (/go/reisen/) gemeint.
+    if route == "reisen" and REISEN_EXPLICIT_RE.search(
+        f"{slug.replace('-', ' ')} {post.get('title', '')}"
+    ):
+        target = _target_from_registered_route("reisen")
         if target:
             return target
     # 3) Pillar-Fallback
@@ -332,18 +392,28 @@ def check_post(post):
     if art == "check24":
         expected_url = f"{CHECK24}&deep={deep}"
         getroffen = any(expected_url in l or l == expected_url for l in links)
-        if not getroffen:
-            for alt_deep, alt_name in PILLAR_DEEP_ALT.get(post["pillar"], ()):
-                alt_url = f"{CHECK24}&deep={alt_deep}"
-                if any(alt_url in l for l in links):
-                    problems.append({
-                        "severity": "info",
-                        "msg": ("Deep-Link aus der Produktfamilie des Pillars "
-                               f"„{post['pillar']}“: {alt_name} statt {name} – "
-                               "thematisch passend, kein Fehler"),
-                    })
-                    getroffen = True
-                    break
+        if not getroffen and not post.get("is_pillar"):
+            slug_title_route = affiliate_contract.route_fuer_text(
+                text=post["slug"].replace("-", " "),
+                titel=post.get("title", ""),
+            )
+            pillar_default = PILLAR_DEEP.get(post["pillar"])
+            if (
+                pillar_default
+                and deep == pillar_default[0]
+                and slug_title_route not in STRICT_PRIMARY_ROUTES
+            ):
+                for alt_deep, alt_name in PILLAR_DEEP_ALT.get(post["pillar"], ()):
+                    alt_url = f"{CHECK24}&deep={alt_deep}"
+                    if any(alt_url in l for l in links):
+                        problems.append({
+                            "severity": "info",
+                            "msg": ("Deep-Link aus der Produktfamilie des Pillars "
+                                   f"„{post['pillar']}“: {alt_name} statt {name} – "
+                                   "thematisch passend, kein Fehler"),
+                        })
+                        getroffen = True
+                        break
         if not getroffen:
             problems.append({
                 "severity": "error",
@@ -453,12 +523,69 @@ def selftest():
                for msg in malformed_problems):
         failures.append("Ungültige Ausnahmemetadaten überspringen die Linkprüfung")
 
+    vacation_budget = _selftest_post(
+        "2026-10-19-urlaubskasse-clever-aufbessern",
+        "Urlaubskasse clever aufbessern",
+        "mietwagen",
+        "👉 Jetzt Pauschalreisen vergleichen: [Pauschalreisen vergleichen](/go/reisen/)",
+    )
+    vacation_expected = expected_target(vacation_budget)
+    if vacation_expected[:2] != ("check24", "pauschalreisen-vergleich&cat=9"):
+        failures.append(
+            f"Urlaubsbudget-Ratgeber unter mietwagen falsch zugeordnet: {vacation_expected}"
+        )
+    vacation_errors = [p["msg"] for p in check_post(vacation_budget)
+                       if p["severity"] == "error"]
+    if vacation_errors:
+        failures.append(f"Urlaubsbudget-CTA (/go/reisen/) fällt durch den Check: {vacation_errors}")
+
+    strict_mietwagen = _selftest_post(
+        "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
+        "Mietwagen-Fallen im Urlaub vermeiden",
+        "mietwagen",
+        "[Pauschalreisen vergleichen](/go/reisen/)",
+    )
+    strict_mietwagen_errors = [p["msg"] for p in check_post(strict_mietwagen)
+                               if p["severity"] == "error"]
+    if not any("mietwagen-preisvergleich&cat=10" in msg for msg in strict_mietwagen_errors):
+        failures.append(
+            "Reiner Mietwagen-Ratgeber darf nicht über PILLAR_DEEP_ALT auf /go/reisen/ ausweichen"
+        )
+
+    registered_targets = {
+        (t[0], t[1])
+        for route in _REGISTRY
+        for t in (_target_from_registered_route(route),)
+        if t and t[1] is not None
+    }
+    for label, mapping in (
+        ("SLUG_DEEP", SLUG_DEEP),
+        ("PILLAR_DEEP", {k: v for k, v in PILLAR_DEEP.items() if v is not None}),
+        ("PILLAR_PAGE_DEEP", {k: v for k, v in PILLAR_PAGE_DEEP.items() if v is not None}),
+    ):
+        for key, (deep_val, _name) in mapping.items():
+            if ("check24", deep_val) not in registered_targets:
+                failures.append(f"{label}[{key!r}] verweist auf nicht registrierten Deep-Link: {deep_val}")
+    for pillar_key, entries in PILLAR_DEEP_ALT.items():
+        for deep_val, _name in entries:
+            if ("check24", deep_val) not in registered_targets:
+                failures.append(
+                    f"PILLAR_DEEP_ALT[{pillar_key!r}] verweist auf nicht registrierten Deep-Link: {deep_val}"
+                )
+    for label, mapping in (
+        ("TARIF_SLUG_DEEP", TARIF_SLUG_DEEP),
+        ("TARIF_SLUG_DEEP_EXTRA", TARIF_SLUG_DEEP_EXTRA),
+    ):
+        for key, deep_val in mapping.items():
+            if ("tarifcheck", deep_val) not in registered_targets:
+                failures.append(f"{label}[{key!r}] verweist auf nicht registrierten Tarifcheck-Deep: {deep_val}")
+
     if failures:
         print("Affiliate-Link-Check Selbsttest: FEHLER")
         for failure in failures:
             print(f"  ❌ {failure}")
         return 2
-    print("Affiliate-Link-Check Selbsttest: 5 Verträge grün")
+    print("Affiliate-Link-Check Selbsttest: 8 Verträge grün")
     return 0
 
 
