@@ -26,8 +26,11 @@
 #    · Geheimnisse werden verdeckt abgefragt (keine Terminal-Echo, keine
 #      Shell-History, keine Prozessliste – Übergabe an gh per stdin).
 #    · Kein Secret-Wert wird ausgegeben, geloggt oder in eine Datei
-#      geschrieben. E2/E5 werden mit dem eingegebenen Token live
-#      verifiziert, aber nur der ZUSTAND erscheint im Protokoll.
+#      geschrieben. E2 wird mit dem eingegebenen Token live gegen das
+#      Ziel-Repo verifiziert (nur der ZUSTAND erscheint im Protokoll);
+#      den Cloudflare-Token prüft E5 im ersten Offsite-Lauf live – der
+#      Wizard ruft die Verwaltungs-API bewusst nicht selbst auf
+#      (T6-Vertrag: scripts/ki_transportweg.py).
 #    · Erst E8 (Environment nur für main), dann Secrets – genau die
 #      Reihenfolge der Anleitung.
 #    · In CI (GITHUB_ACTIONS) verweigert sich das Skript: Einrichtung
@@ -499,21 +502,16 @@ oeffnen "$CF_TOKEN_URL"
 while :; do
   CF_TOKEN="$(heimlich "CF_KV_BACKUP_TOKEN einfügen (leer lassen = überspringen):")"
   [ -z "$CF_TOKEN" ] && { hinweis "Übersprungen – Secret später selbst setzen: CF_KV_BACKUP_TOKEN (Environment „$UMGEBUNG“)."; break; }
-  CF_PROBE="$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $CF_TOKEN" \
-    "https://api.cloudflare.com/client/v4/user/tokens/verify" 2>/dev/null)" || CF_PROBE="000"
-  if [ "$CF_PROBE" = "200" ]; then
-    if printf '%s' "$CF_TOKEN" | gh secret set CF_KV_BACKUP_TOKEN --repo "$QUELLE" --env "$UMGEBUNG"; then
-      ok "Secret CF_KV_BACKUP_TOKEN gesetzt (Probe: Token von Cloudflare als gültig bestätigt)"
-    else
-      hinweis "Token gültig, aber gh secret set fehlgeschlagen – manuell eintragen."
-    fi
+  # Bewusst KEINE eigene Verify-Abfrage an die Cloudflare-Verwaltungs-API:
+  # Der Transportweg-Wächter T6 (scripts/ki_transportweg.py) hält direkte
+  # Anbieter-Endpunkte aus neuen Skripten heraus – Ausnahmen gibt es nur
+  # mit Ausgleichstest. Die Tiefprüfung des Tokens (Art, Recht „Workers KV:
+  # Read“, Ablauf-Frist) leistet E5 im Offsite-Lauf live, mit Abhilfe-Link;
+  # dieser Wizard bietet am Ende an, den Lauf sofort zu starten.
+  if printf '%s' "$CF_TOKEN" | gh secret set CF_KV_BACKUP_TOKEN --repo "$QUELLE" --env "$UMGEBUNG"; then
+    ok "Secret CF_KV_BACKUP_TOKEN gesetzt (Gültigkeit + Rechte prüft E5 im ersten Offsite-Lauf live)"
   else
-    hinweis "Cloudflare-Verify meldete HTTP $CF_PROBE – Token ungültig, abgelaufen oder Netzproblem."
-    if frage_ja "Trotzdem als Secret setzen?"; then
-      printf '%s' "$CF_TOKEN" | gh secret set CF_KV_BACKUP_TOKEN --repo "$QUELLE" --env "$UMGEBUNG" \
-        && ok "Secret CF_KV_BACKUP_TOKEN gesetzt (ohne erfolgreiche Probe)" \
-        || hinweis "gh secret set fehlgeschlagen – manuell eintragen."
-    fi
+    hinweis "gh secret set fehlgeschlagen – Secret manuell im Environment „$UMGEBUNG“ eintragen."
   fi
   CF_TOKEN=""
   break

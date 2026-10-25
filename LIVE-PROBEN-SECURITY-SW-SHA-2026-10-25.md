@@ -98,9 +98,11 @@ Cloudflare-Konto sind für Agenten unerreichbar – und das bleibt so
   privates Ziel-Repo anlegen (`gh repo create`), Variable `BACKUP_REPO`,
   Passphrase verdeckt (32+ Zeichen, Übergabe per stdin, nie im Log),
   fine-grained PAT mit **Live-Probe gegen das Ziel-Repo** (401/404 werden
-  benannt, Token erscheint nirgends), Cloudflare-Token mit Verify-Probe,
-  KV-/D1-IDs mit Formatprüfung (32 Hex-Zeichen), Abschluss-Check und
-  optionalem Start des ersten Laufs.
+  benannt, Token erscheint nirgends), Cloudflare-Token ohne eigene
+  Verify-Abfrage (T6-Vertrag `ki_transportweg.py`: keine direkten
+  Anbieter-Endpunkte in neuen Skripten – die Tiefprüfung leistet E5 im
+  ersten Offsite-Lauf), KV-/D1-IDs mit Formatprüfung (32 Hex-Zeichen),
+  Abschluss-Check und optionalem Start des ersten Laufs.
 - Grenzen (im Kopf dokumentiert): die **Tiefprüfung** (Token-Gültigkeit im
   Backup-Kontext, Namespace lesbar, Ablauf-Fristen) macht weiterhin
   `scripts/backup_einrichtung.py` im Lauf; ein feingranularer PAT lässt
