@@ -116,7 +116,17 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 # Live-Artikel unbrauchbar gemacht, und die Site registrierte einen Service
 # Worker ohne Manifest. Beide Fehler waren im Build unsichtbar – jede Korrektur
 # ohne Wache hier wäre eine Leihgabe.
-GUARDS = [# Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
+GUARDS = [# Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
+          # Google ordnete die Markensuche dem Kreditvergleich FINANZCHECK.de
+          # zu, waehrend der siteweite Person-Knoten nur Pinterest als sameAs
+          # fuehrte und die Profile nirgends sichtbar verlinkt waren. Diese
+          # Wache haelt den einen wortgleichen Identitaetssatz plus die
+          # Abgrenzung (data/entity.yaml) auf Startseite, Schema, /ueber/,
+          # /impressum/, /presse/ und llms.txt fest und sperrt erfundene
+          # Profil-URLs (LinkedIn/Xing erst mit echtem Profil). Eine Wache,
+          # die niemand verlangt, fuehrt irgendwann niemand aus (C6).
+          "entity_marken_gate.py",
+          # Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
           # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
           # von 6 auf 1, weil die AUTO-Bahn kein freies Thema mehr hatte –
