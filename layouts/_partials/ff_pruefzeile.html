@@ -85,9 +85,6 @@
        published und modified (gemeinsam mit Schema + Sitemap). Nur eine
        belegte Änderung nach der Veröffentlichung erscheint – kein
        formatierter String und kein nicht vorhandenes firstindexed-Feld. */ -}}
-{{- /* article_dates.html liefert published und modified als Zeitwerte.
-       Nur eine belegte Änderung nach der Veröffentlichung wird angezeigt;
-       ein firstindexed-Feld gibt es in diesem Partial nicht. */ -}}
 {{- $dates := partial "article_dates.html" . -}}
 {{- $hasRevision := $dates.modified.After $dates.published -}}
 {{- $kiZeitstempel := cond $hasRevision ($dates.modified | time.Format "02.01.2006") "" -}}

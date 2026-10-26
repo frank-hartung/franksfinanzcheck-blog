@@ -24,9 +24,6 @@ datasetLicense: "/studien/fixkosten-index-2026-q4/#nutzung-und-zitierweise"
 [CSV-Datensatz herunterladen](/downloads/fixkosten-index-2026-q4.csv) · [Pressegrafik herunterladen](/downloads/fixkosten-index-2026-q4-pressegrafik.svg) · [PDF-Download: Methodik und Rechnung auf einer Seite](/downloads/fixkosten-index-2026-q4.pdf)
 
 > **Hinweis:** Das PDF enthält Methodik, Quellen und Rechnung auf einer Seite. Es wird aus dem CSV-Datensatz dieser Studie erzeugt (`scripts/studie_pdf.py`); Summe und Monatswert werden dabei gegen die Quelle nachgerechnet. Apple-Geräte (Preview) und Windows (PDF-Reader) öffnen das Dokument direkt.
-[CSV-Datensatz herunterladen](/downloads/fixkosten-index-2026-q4.csv) · [Pressegrafik herunterladen](/downloads/fixkosten-index-2026-q4-pressegrafik.svg) · [Methodik und Rechnung auf dieser Seite](#methodik)
-
-Die Methodik, Quellen und Rechenschritte stehen unten vollständig und ohne zusätzlichen Download zur Verfügung. Ein PDF ist derzeit nicht veröffentlicht.
 
 ## Kernergebnisse
 

@@ -256,29 +256,6 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # rendert nur mit explizitem mode="manual" sowie Website-ID und Beacon-Token;
   # ohne diese Werte erzeugt Hugo kein Analyse-Skript. Eine automatische
   # Edge-Injektion wird außerhalb dieses Repositories im Dashboard gesteuert.
-  # Cloudflare Web Analytics (optional, derzeit nicht aktiviert)
-  # ZWEI WEGE (wahlweise, nicht kombiniert):
-  #
-  #   Weg A (automatisch, empfohlen):
-  #     Cloudflare injiziert das Skript automatisch über die Edge.
-  #     → Aktivierung: Cloudflare Dashboard → Analytics → Web Analytics →
-  #                    Website hinzufügen → automatisches Injecting.
-  #     → Kein hugo.toml-Eintrag nötig. Kein Code-Aufwand.
-  #     → Website-ID + Token nicht nötig (wird von Cloudflare verwaltet).
-  #
-  #   Weg B (manuell, fallback):
-  #     Das Skript wird beim Hugo-Build über das Partial eingebunden.
-  #     → website + token in hugo.toml eintragen.
-  #     → Nur aktiv wenn mode = "manual" (Standard: mode nicht gesetzt → Weg A).
-  #
-  # Empfehlung: Weg A (automatisch). Das Partial bleibt nur als manuelle
-  # Alternative vor. Ohne Dashboard-Zugang (oder wenn Weg A nicht funktioniert)
-  # wäre Weg B die Alternative – aber Weg B braucht Website-ID + Token aus dem
-  # Dashboard und ist ohne Dashboard-Zugang nicht funktionsfähig.
-  #
-  # KOSTENLOS. Kein Server. Kein VPS. Kein Docker. Keine API-Gebühren.
-  # DSGVO-konform (kein Cookie), kein Consent-Popup.
-  # Quelle: https://developers.cloudflare.com/analytics/
   [params.analytics.cloudflare]
     # mode = "manual"   # Nur für eine ausdrücklich aktivierte manuelle Einbindung
     # website = "your-website-id-uuid"   # Website-ID aus dem Cloudflare-Dashboard
