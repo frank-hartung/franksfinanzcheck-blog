@@ -60,6 +60,11 @@ const AXE_QUELLE = createRequire(import.meta.url).resolve('axe-core/axe.min.js')
 /** WCAG-Tags, gegen die geprüft wird – 2.2 AA inklusive. */
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
+/** Sichtbaren Text als wörtlichen Teil des zugänglichen Namens prüfen. */
+function textMuster(text) {
+  return new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+}
+
 /** Werkzeugseiten automatisch aus dem Build (eine Wahrheit: was gebaut ist). */
 function werkzeugSeiten() {
   const ordner = path.join(PUBLIC, 'werkzeuge');
@@ -234,8 +239,8 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
       expect(await karte.getAttribute('aria-label'), `Karte ${i + 1}: kein Override`).toBeNull();
       const titel = (await karte.locator('.ff-related-card__heading').innerText()).trim();
       const datum = (await karte.locator('.ff-related-card__date').innerText()).trim();
-      await expect(karte).toHaveAccessibleName(new RegExp(titel, 'i'));
-      await expect(karte).toHaveAccessibleName(new RegExp(datum.replace(/\./g, '\\.')));
+      await expect(karte).toHaveAccessibleName(textMuster(titel));
+      await expect(karte).toHaveAccessibleName(textMuster(datum));
     }
   });
 
@@ -248,7 +253,7 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
       const karte = karten.nth(i);
       expect(await karte.getAttribute('aria-label'), `Karte ${i + 1}: kein Override`).toBeNull();
       const titel = (await karte.locator('.ff-pc-card__title').innerText()).trim();
-      await expect(karte).toHaveAccessibleName(new RegExp(titel, 'i'));
+      await expect(karte).toHaveAccessibleName(textMuster(titel));
     }
   });
 
@@ -275,7 +280,7 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
             'Ausnahme erneuern oder den Befund heilen. Eine Ausnahme ohne Ablauf ist ein offenes Tor.'
         );
       }
-      if (a.beleg && !/^https?:\/\/|\.md$/.test(String(a.beleg))) {
+      if (a.beleg && !/^(?:https?:\/\/[^\s]+|[^\s]+\.md)$/.test(String(a.beleg))) {
         fehler.push(`${name}: Beleg muss URL oder Datei im Repo sein`);
       }
     }
