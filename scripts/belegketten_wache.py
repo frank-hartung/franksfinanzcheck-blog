@@ -82,6 +82,43 @@ def _normalisiert(url: str) -> tuple[str, str, str]:
     return (host, teile.path.rstrip("/") or "/", teile.query or "")
 
 
+SPRACHSEGMENTE = {"de", "en", "at", "ch"}
+
+
+def _nur_sprachpfad(zitat: str, end_url: str) -> bool:
+    """Weiterleitung, die nur den Sprachpfad der GLEICHEN Seite ergänzt.
+
+    Befund 26.10.2026 (Prüfqueue #826): `https://kontenvergleich.bafin.de/`
+    antwortet mit 200 auf `…/de`. Die Wache meldete das als „anderer Endpunkt"
+    – zwei Artikel standen dadurch dauerhaft als Prüfauftrag in der YMYL-Queue,
+    obwohl unter dem Ziel dieselbe Seite in der deutschen Fassung liegt. Ein
+    Sprachpräfix ist aber ein Umzug des Inhaltsverzeichnisses, kein
+    Inhaltswechsel: Host und Restschicht müssen identisch sein, und der
+    zusätzliche Pfad darf ausschließlich aus genau einem Sprachsegment
+    bestehen. Alles andere bleibt `umgeleitet` (Prüfauftrag).
+    """
+    try:
+        zitat_teile = urlparse(zitat)
+        ziel_teile = urlparse(end_url)
+    except ValueError:
+        return False
+    zitat_host = (zitat_teile.hostname or "").lower().removeprefix("www.")
+    ziel_host = (ziel_teile.hostname or "").lower().removeprefix("www.")
+    if not zitat_host or zitat_host != ziel_host:
+        return False
+    if (zitat_teile.query or "") != (ziel_teile.query or ""):
+        return False
+    zitat_pfad = zitat_teile.path.rstrip("/")
+    ziel_pfad = ziel_teile.path.rstrip("/")
+    if zitat_pfad == ziel_pfad:
+        return True
+    ziel_segmente = [s for s in ziel_pfad.split("/") if s]
+    zitat_segmente = [s for s in zitat_pfad.split("/") if s]
+    return (len(ziel_segmente) == len(zitat_segmente) + 1
+            and ziel_segmente[0].lower() in SPRACHSEGMENTE
+            and ziel_segmente[1:] == zitat_segmente)
+
+
 def abruf_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
     """Ein GET mit Weiterleitungsverfolgung. Gibt (Status, End-URL) zurück."""
     anfrage = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -114,6 +151,9 @@ def pruefe_quelle(url: str, *, abruf=None, timeout: float = 10.0) -> dict:
         return {"status": TOT, "zitat": zitat, "end_url": end_url,
                 "befund": f"HTTP {status} – Beleg nicht mehr abrufbar"}
     if _normalisiert(end_url) != _normalisiert(zitat):
+        if _nur_sprachpfad(zitat, end_url):
+            return {"status": OK, "zitat": zitat, "end_url": end_url,
+                    "hinweis": "Sprachpfad kanonisiert (gleicher Host, gleiche Seite)"}
         return {"status": UMGELEITET, "zitat": zitat, "end_url": end_url,
                 "befund": "anderer Endpunkt als zitiert – Aussage gegen die neue Fassung prüfen"}
     return {"status": OK, "zitat": zitat, "end_url": end_url, "befund": ""}
@@ -257,6 +297,28 @@ def selftest() -> list[str]:
             pruefe_quelle(ziel, abruf=abruf_umzug)["status"] == UMGELEITET)
     erwarte("Schlussschräge ist kein Umzug",
             pruefe_quelle(ziel, abruf=abruf_slash)["status"] == OK)
+
+    # Sprachpfad (Befund #826): gleiche Seite unter /de – kein Inhaltswechsel.
+    def abruf_sprache(url, timeout=10.0):
+        return 200, "https://kontenvergleich.bafin.de/de"
+
+    erwarte("Sprachpfad ist kein Umzug",
+            pruefe_quelle("https://kontenvergleich.bafin.de/",
+                          abruf=abruf_sprache)["status"] == OK)
+
+    def abruf_sprache_anderer_inhalt(url, timeout=10.0):
+        return 200, "https://kontenvergleich.bafin.de/de/andere-seite"
+
+    erwarte("Sprachpfad mit anderem Inhalt bleibt Umzug",
+            pruefe_quelle("https://kontenvergleich.bafin.de/",
+                          abruf=abruf_sprache_anderer_inhalt)["status"] == UMGELEITET)
+
+    def abruf_fremder_host(url, timeout=10.0):
+        return 200, "https://example.org/de"
+
+    erwarte("Sprachpfad-Regel gilt nicht hostübergreifend",
+            pruefe_quelle("https://kontenvergleich.bafin.de/",
+                          abruf=abruf_fremder_host)["status"] == UMGELEITET)
     erwarte("http ohne s ist tot",
             pruefe_quelle("http://example.org/a", abruf=abruf_ok)["status"] == TOT)
     erwarte("leere URL ist tot", pruefe_quelle("", abruf=abruf_ok)["status"] == TOT)

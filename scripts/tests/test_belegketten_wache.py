@@ -55,6 +55,25 @@ class BelegkettenWacheTests(unittest.TestCase):
         self.assertEqual(wache.UMGELEITET, wache.pruefe_quelle(ziel, abruf=umzug)["status"])
         self.assertEqual(wache.UNKLAR, wache.pruefe_quelle(ziel, abruf=netz)["status"])
 
+    def test_sprachpfad_ist_kein_inhaltswechsel(self):
+        """#826: `/` → `/de` belegt weiterhin dieselbe Seite."""
+        def abruf(url, timeout=10.0):
+            return 200, "https://kontenvergleich.bafin.de/de"
+
+        ergebnis = wache.pruefe_quelle("https://kontenvergleich.bafin.de/", abruf=abruf)
+        self.assertEqual(wache.OK, ergebnis["status"])
+        self.assertIn("Sprachpfad", ergebnis["hinweis"])
+
+    def test_echter_umzug_bleibt_pruefauftrag(self):
+        for ziel in ("https://kontenvergleich.bafin.de/de/andere-seite",
+                     "https://www.bafin.de/de",
+                     "https://kontenvergleich.bafin.de/de?x=1"):
+            with self.subTest(ziel=ziel):
+                ergebnis = wache.pruefe_quelle(
+                    "https://kontenvergleich.bafin.de/",
+                    abruf=lambda u, timeout=10.0: (200, ziel))
+                self.assertEqual(wache.UMGELEITET, ergebnis["status"], ziel)
+
     def test_nicht_https_ist_tot(self):
         ergebnis = wache.pruefe_quelle("http://example.org/x", abruf=lambda u, timeout=10.0: (200, u))
         self.assertEqual(wache.TOT, ergebnis["status"])
