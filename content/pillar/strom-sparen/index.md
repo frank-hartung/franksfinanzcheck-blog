@@ -135,7 +135,7 @@ Der Markt unterscheidet vier grundlegende Tarifmodelle. Die folgende Matrix zeig
     <h3 class="ff-decision-matrix__title">Entscheidungsmatrix: Die 4 Energie-Tarifmodelle im Vergleich</h3>
     <p class="ff-decision-matrix__sub">Finde die optimale Balance aus Preissicherheit, Flexibilität und Ersparnis</p>
   </div>
-  <table>
+  <table tabindex="0" aria-label="Entscheidungsmatrix: Die 4 Energie-Tarifmodelle im Vergleich">
     <thead>
       <tr>
         <th>Tarifmodell</th>

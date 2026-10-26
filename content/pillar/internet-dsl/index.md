@@ -125,7 +125,7 @@ Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
     <h3 class="ff-decision-matrix__title">Entscheidungsmatrix: Die 4 Vertragsszenarien</h3>
     <p class="ff-decision-matrix__sub">Wann lohnt sich ein Wechsel, wann die Kündigung und wann das Bleiben?</p>
   </div>
-  <table>
+  <table tabindex="0" aria-label="Entscheidungsmatrix: Die 4 Vertragsszenarien">
     <thead>
       <tr>
         <th>Ausgangssituation</th>

@@ -11,6 +11,23 @@ Prüft auf allen Seiten:
   - Fokus-Styles (focus-visible) im CSS
   - prefers-reduced-motion im CSS
   - Kontrast der Branding-Farben (WCAG AA: 4.5:1 normal, 3:1 groß)
+  - Link-/Button-Namen enthalten ihren sichtbaren Text (WCAG 2.5.3)
+
+SEIT 26.10.2026 – WARUM DER NAME GEPRÜFT WIRD (Label in Name):
+Zwei Befunde lagen monatelang hinter dem Integritäts-Siegel: Der Marken-Link
+im Kopf und die Weiterlese-Karten trugen ein `aria-label`, das sichtbaren
+Text verschwieg. axe-core sieht das im Browser – aber nur auf den Seiten,
+die die E2E-Spec besucht (feste Seiten, Werkzeuge, neuester Artikel). Die
+Pillar-Seiten mit 68 gleich gebauten Karten sah sie nie. Diese Prüfung liest
+den GEBAUTEN HTML-Baum aller Seiten und vergleicht für jedes `a`/`button`
+mit `aria-label` den deklarierten Namen mit dem sichtbaren Text. Sie prüft
+die WIRKUNG (was der Screenreader vorliest), nicht das Attribut.
+Grenzen, bewusst benannt: `aria-labelledby` wird nicht aufgelöst (dafür
+fehlt hier der Accessibility-Tree), CSS-versteckte Texte außer den
+hausüblichen `sr-only`-Klassen werden nicht erkannt, und ein `display:none`
+durch Media Queries sieht nur der Browser. Die E2E-Spec prüft genau diese
+Fälle zusätzlich mit `toHaveAccessibleName` – beide Ebenen zusammen sind
+der Beweis, keine von beiden allein.
 
 Nutzung:
     python3 scripts/a11y_audit.py            # Audit (alle gebauten Seiten)
@@ -34,6 +51,8 @@ import json
 import os
 import re
 import sys
+import unicodedata
+from html.parser import HTMLParser
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC_DIR = os.path.join(BLOG_DIR, "public")
@@ -82,6 +101,110 @@ def _require_h1_contract():
             "H1-Wache scripts/h1_wache.py nicht ladbar; das A11y-Audit "
             f"bricht fail-closed ab{detail}. Es gibt keine Ersatz-Ausnahmeliste."
         )
+
+
+# ---------------------------------------------------------------------------
+#  WCAG 2.5.3 (Label in Name) – der Name muss den sichtbaren Text enthalten
+# ---------------------------------------------------------------------------
+#  Die Prüfung ist absichtlich auf `aria-label` beschränkt: Ein Name aus dem
+#  Inhalt (kein Override) ist per HTML-AAM genau der sichtbare Text und kann
+#  nicht auseinanderlaufen. `aria-labelledby` bräuchte einen gerenderten
+#  Accessibility-Tree (IDs, CSS-Sichtbarkeit) – das leistet die E2E-Spec.
+_LEERLAUF = re.compile(r"\s+")
+_VOID_ELEMENTE = {
+    "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
+    "meta", "param", "source", "track", "wbr",
+}
+# Hausübliche „visuell versteckt, für Screenreader vorhanden“-Klassen. Ihr
+# Text ist KEIN sichtbarer Text und darf im Namen fehlen.
+_VERSTECKTE_KLASSEN = {
+    "sr-only", "sr-only-focusable", "visually-hidden", "visuallyhidden",
+    "screen-reader-text", "ff-sr-only", "ff-ki-sr-only",
+}
+# Inhalt dieser Elemente ist nie sichtbarer Text eines Links.
+_NIE_SICHTBAR = {"script", "style", "template", "noscript"}
+
+
+def _normalisiere_name(text):
+    """Whitespace, Unicode-Form und Groß/Klein vereinheitlichen."""
+    return _LEERLAUF.sub(" ", unicodedata.normalize("NFKC", text)).strip().casefold()
+
+
+class _LinkNameLeser(HTMLParser):
+    """Sammelt `a`/`button` mit aria-label und den sichtbaren Text darin."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.stack = []
+        self.namen = []  # (aria-label, sichtbarer Text)
+
+    @staticmethod
+    def _ist_versteckt(attrs):
+        style = attrs.get("style", "").replace(" ", "").lower()
+        return (
+            attrs.get("aria-hidden", "").lower() == "true"
+            or "hidden" in attrs
+            or "display:none" in style
+            or bool(_VERSTECKTE_KLASSEN & set((attrs.get("class") or "").split()))
+        )
+
+    def handle_starttag(self, tag, attrs):
+        attr_dict = {k: (v if v is not None else "") for k, v in attrs}
+        if tag in _VOID_ELEMENTE:
+            return
+        eltern_versteckt = self.stack[-1]["versteckt"] if self.stack else False
+        versteckt = eltern_versteckt or self._ist_versteckt(attr_dict)
+        if tag in _NIE_SICHTBAR:
+            versteckt = True
+        self.stack.append({
+            "tag": tag,
+            "attrs": attr_dict,
+            "texte": [],
+            "versteckt": versteckt,
+            "name": attr_dict.get("aria-label") if tag in {"a", "button"} else None,
+        })
+
+    def handle_startendtag(self, tag, attrs):
+        # Selbstschließende Fremd-HTML-Elemente (SVG-Pfade u. ä.) tragen
+        # keinen Text; sie dürfen den Stapel nicht verschieben.
+        return
+
+    def handle_endtag(self, tag):
+        for i in range(len(self.stack) - 1, -1, -1):
+            if self.stack[i]["tag"] != tag:
+                continue
+            element = self.stack.pop(i)
+            if element["name"] is not None:
+                self.namen.append((element["name"], "".join(element["texte"])))
+            if self.stack:
+                self.stack[-1]["texte"].append("".join(element["texte"]))
+            return
+
+    def handle_data(self, data):
+        if self.stack and not self.stack[-1]["versteckt"]:
+            self.stack[-1]["texte"].append(data)
+
+
+def link_name_issues(html):
+    """Meldet aria-label-Overrides, die sichtbaren Text verschweigen."""
+    leser = _LinkNameLeser()
+    try:
+        leser.feed(html)
+        leser.close()
+    except Exception:  # pragma: no cover – HTMLParser ist tolerant; nie stumm grün
+        return ["Link-Namen nicht prüfbar (HTML nicht lesbar) – fail-closed"]
+    issues = []
+    for aria_label, sichtbar in leser.namen:
+        sichtbar_norm = _normalisiere_name(sichtbar)
+        if not sichtbar_norm:
+            continue  # Overlay-Links ohne eigenen Text (z. B. .entry-link)
+        if sichtbar_norm not in _normalisiere_name(aria_label):
+            issues.append(
+                "Linkname verschweigt sichtbaren Text (WCAG 2.5.3): "
+                f"aria-label „{_LEERLAUF.sub(' ', aria_label)[:80]}“ "
+                f"enthält „{_LEERLAUF.sub(' ', sichtbar)[:80]}“ nicht"
+            )
+    return issues
 
 
 def collect_html_files(public_dir=None):
@@ -148,6 +271,7 @@ def audit_page(path, public_dir=None):
             issues.append("img ohne alt-Text")
     if 'class="skip-link"' not in html and "class=skip-link" not in html:
         issues.append("Skip-Link fehlt")
+    issues.extend(link_name_issues(html))
     return name, issues
 
 

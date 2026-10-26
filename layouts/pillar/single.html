@@ -77,6 +77,10 @@
   {{- if .Content }}
   <div class="post-content md-content">
     {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- /* Dieselbe Markdown-Aufgabenliste wie in den Artikeln: Das Kästchen
+           braucht einen Platz im Accessibility-Baum (bzw. keinen) – sonst
+           meldet axe `label` (critical) auf /pillar/mietwagen/. */ -}}
+    {{- $articleContent = partial "aufgabenlisten_a11y.html" $articleContent -}}
     {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
     {{- partial "sectioned_content.html" ($articleContent | safeHTML) -}}
   </div>

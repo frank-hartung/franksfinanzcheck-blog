@@ -141,5 +141,100 @@ class HeadingAuditTests(unittest.TestCase):
         self.assertIn("H1-Wache scripts/h1_wache.py nicht ladbar", report["fehler"][0])
 
 
+class LinkNameTests(unittest.TestCase):
+    """WCAG 2.5.3 (Label in Name) – der Name muss den sichtbaren Text tragen.
+
+    Die Befunde vom 26.10.2026 waren genau dieser Fehler: ein `aria-label`,
+    das sichtbaren Text verschwieg. Deshalb prüfen die Tests die WIRKUNG
+    (den zusammengesetzten sichtbaren Text), nicht die Existenz des Attributs.
+    """
+
+    def test_override_mit_vollstaendigem_sichtbarem_text_ist_sauber(self):
+        html = (
+            '<a class="ff-pin-float" aria-label="Pin It – diesen Artikel auf Pinterest pinnen">'
+            '<svg aria-hidden="true"><path d="M0 0"/></svg><span>Pin It</span></a>'
+        )
+        self.assertEqual(audit.link_name_issues(html), [])
+
+    def test_override_der_datum_und_anriss_verschweigt_ist_ein_befund(self):
+        html = (
+            '<a class="ff-related-card" aria-label="Weiterlesen: Zinsen 2026">'
+            '<span class="ff-related-card__date">26.10.2026</span>'
+            '<strong class="ff-related-card__heading">Zinsen 2026</strong>'
+            '<span class="ff-related-card__snippet">Die besten Zinsen im Vergleich</span>'
+            '</a>'
+        )
+        issues = audit.link_name_issues(html)
+        self.assertEqual(len(issues), 1, issues)
+        self.assertIn("WCAG 2.5.3", issues[0])
+        self.assertIn("26.10.2026", issues[0])
+
+    def test_leerer_overlay_link_ohne_eigenen_text_bleibt_sauber(self):
+        # .entry-link ist eine leere Klickfläche über der Karte. Sie hat
+        # keinen sichtbaren Text IN sich – der Name darf (und muss) dort aus
+        # dem aria-label kommen.
+        html = '<article><h2>Kartentitel</h2><a class="entry-link" aria-label="Weiterlesen: Kartentitel" href="/x/"></a></article>'
+        self.assertEqual(audit.link_name_issues(html), [])
+
+    def test_sr_only_text_muss_nicht_im_namen_stehen(self):
+        html = (
+            '<a aria-label="Zur Startseite" href="/">'
+            '<span class="sr-only">FranksFinanzcheck</span>'
+            '<img src="logo.svg" alt="">'
+            '</a>'
+        )
+        self.assertEqual(audit.link_name_issues(html), [])
+
+    def test_aria_hidden_unterbaum_zaehlt_nicht_als_sichtbar(self):
+        html = (
+            '<a aria-label="Zum Thema" href="/thema/">'
+            '<span aria-hidden="true">→</span>Zum Thema'
+            '</a>'
+        )
+        self.assertEqual(audit.link_name_issues(html), [])
+
+    def test_markup_entities_und_umbrueche_werden_normalisiert(self):
+        html = (
+            '<a aria-label="Finanzen &amp; Freiheit   – Beratung" href="/x/">'
+            '<strong>Finanzen &amp; Freiheit</strong>\n<span>– Beratung</span>'
+            '</a>'
+        )
+        self.assertEqual(audit.link_name_issues(html), [])
+
+    def test_verschachtelte_auszeichnung_wird_vollstaendig_gelesen(self):
+        # Regression zur ersten Fassung: Ein Parser, der <picture> als
+        # Void-Element behandelt, verliert den gesamten Text der Karte und
+        # meldet fälschlich „sauber“ (am 26.10.2026 real passiert).
+        html = (
+            '<a aria-label="Weiterlesen: Titel" href="/x/">'
+            '<span class="cover"><picture><source srcset="a.avif"><img src="a.jpg" alt=""></picture></span>'
+            '<span class="body"><strong>Titel</strong><span>Anriss mit Substanz</span></span>'
+            '</a>'
+        )
+        issues = audit.link_name_issues(html)
+        self.assertEqual(len(issues), 1, issues)
+        self.assertIn("Anriss mit Substanz", issues[0])
+
+    def test_button_mit_override_wird_genauso_geprueft(self):
+        html = '<button aria-label="Menü">Menü öffnen</button>'
+        issues = audit.link_name_issues(html)
+        self.assertEqual(len(issues), 1, issues)
+        self.assertIn("Menü öffnen", issues[0])
+
+    def test_audit_page_meldet_den_befund_im_seitenbericht(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            public = Path(tmp)
+            path = public / "seite.html"
+            path.write_text(
+                '<html lang="de"><title>Seite</title><a class="skip-link" href="#main">Skip</a>'
+                '<h1>Seite</h1>'
+                '<a aria-label="Weiterlesen: Titel" href="/x/">Titel<span>Datum 26.10.2026</span></a>'
+                '</html>',
+                encoding="utf-8",
+            )
+            _, issues = audit.audit_page(path, public)
+        self.assertTrue(any("WCAG 2.5.3" in issue for issue in issues), issues)
+
+
 if __name__ == "__main__":
     unittest.main()
