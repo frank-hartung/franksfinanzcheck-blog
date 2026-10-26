@@ -1,6 +1,6 @@
 # Triage der Search-Console-Liste
 
-## Triage (/home/user/franksfinanzcheck-blog/data/gsc/abdeckung/details)
+## Triage (/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/gsc/abdeckung/details)
 
 4 gemeldete URLs · P2: 2 · P3: 2
 

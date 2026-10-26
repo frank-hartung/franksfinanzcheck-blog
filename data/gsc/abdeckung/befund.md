@@ -2,7 +2,7 @@
 
 ## Abdeckung (Search Console, Stand 2026-10-19, 7 Tage alt)
 
-**Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `public/sitemap.xml`
+**Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `content/ (Näherung, kein Build gemessen)`
 
 | Kennzahl | Wert |
 |---|---|
@@ -12,16 +12,6 @@
 | indexierbare Seiten im Repo | 99 |
 | Index-Puffer (Altlasten) | 18 |
 | Impressionen im Zeitraum | 62 (2.07/Tag, 6 Tage ohne) |
-
-| Bestand (am Build gemessen) | Wert |
-|---|---|
-| Gebaute URLs | 258 |
-| davon indexierbar (Sitemap) | 99 |
-| davon bewusst nicht indexierbar | 159 (davon 115 Weiterleitungsseiten) |
-| Crawl-Fläche je indexierbarer Seite | 2.61 : 1 |
-| Klassen nicht indexierbar | Weiterleitungsseiten 115, /go/-Gateways 20, Pager-Seiten 17, Newsletter-Funnel 4, Veröffentlichungskalender 1, Pinterest-Autorisierung 1, Suche 1 |
-| Indexierbar nach Sektion | posts 69, werkzeuge 10, pillar 7, studien 2, übrige Einzelseiten 11 |
-| Nicht-Index-Einträge je gebauter URL | 1.24 (mehr Einträge als URLs: überwiegend Historie) |
 
 | Grund | Seiten | Erwartung | Urteil |
 |---|---|---|---|
@@ -36,7 +26,6 @@
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 99 – 18 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
 - ℹ️ **W11** 4 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken.
-- ℹ️ **W10** 9 Sitemap-URL(s) ohne `lastmod`. Google entscheidet dann selbst, wann neu gecrawlt wird – genau das Gegenteil von Crawl-Nachfrage (M2).
 
 ### Vertrag: noindex-Bestand und Gateways — 🟢 in Ordnung
 
@@ -65,16 +54,16 @@
 
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
-| 8.88 | `/pillar/internet-dsl/` | 10 | 17 | verlinkt |
-| 8.15 | `/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/` | 6 | 2 | verlinkt |
-| 7.31 | `/pillar/` | 5 | 2 | verlinkt |
-| 6.62 | `/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/` | 2 | 4 | verlinkt |
-| 6.35 | `/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/` | 0 | 1 | nur ein Inlink |
-| 6.28 | `/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/` | 1 | 9 | verlinkt |
-| 6.28 | `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | 1 | 3 | verlinkt |
-| 6.13 | `/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/` | 1 | 2 | verlinkt |
-| 6.07 | `/posts/` | 2 | 1 | nur ein Inlink |
-| 5.83 | `/` | 3 | 0 | kein redaktioneller Inlink |
+| 8.33 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 22 | 2 | verlinkt |
+| 6.82 | `/pillar/internet-dsl/` | 11 | 17 | verlinkt |
+| 5.75 | `/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/` | 6 | 2 | verlinkt |
+| 4.31 | `/pillar/` | 5 | 2 | verlinkt |
+| 4.23 | `/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/` | 3 | 3 | verlinkt |
+| 4.02 | `/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/` | 2 | 2 | verlinkt |
+| 4.0 | `/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/` | 0 | 1 | nur ein Inlink |
+| 3.97 | `/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/` | 2 | 4 | verlinkt |
+| 3.93 | `/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/` | 1 | 4 | verlinkt |
+| 3.93 | `/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/` | 1 | 9 | verlinkt |
 
 ### Sprünge im Verlauf
 
@@ -98,7 +87,7 @@
 | M1 | P1 | 404-Detail-Liste einlesen und triagieren | Übersicht: 223 × 404 · erklärbar 30 · offen 193 |
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 99 indexierbaren Seiten |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
-| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (9 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (8 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.) |
+| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (8 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (7 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |
 | M9 | P2 | Indexquote als Zielgröße etablieren | 117 von 437 bekannten URLs |
 | M5 | P3 | noindex-Bestand als Vertrag führen | 5 × robotsNoIndex in content/ · GSC 5 |

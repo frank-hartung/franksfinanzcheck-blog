@@ -1,10 +1,24 @@
 [
   {
-    "suchbegriff": "energiekosten senken",
+    "suchbegriff": "energieeinsparung",
+    "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 25.33
+  },
+  {
+    "suchbegriff": "energiekosten reduzieren",
     "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 48.0
+    "position": 24.0
+  },
+  {
+    "suchbegriff": "energiekosten senken",
+    "clicks": 0,
+    "impressions": 12,
+    "ctr": 0.0,
+    "position": 47.58
   },
   {
     "suchbegriff": "energiespar lösungen",
@@ -70,6 +84,20 @@
     "position": 58.0
   },
   {
+    "suchbegriff": "referenzkonto",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 92.0
+  },
+  {
+    "suchbegriff": "stromeinsparung",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 43.0
+  },
+  {
     "suchbegriff": "tankkartenantrag ohne kaution",
     "clicks": 0,
     "impressions": 2,
@@ -79,15 +107,22 @@
   {
     "suchbegriff": "welche finanz-app bietet die besten spartipps basierend auf dem eigenen konsumverhalten?",
     "clicks": 0,
-    "impressions": 5,
+    "impressions": 4,
     "ctr": 0.0,
-    "position": 4.0
+    "position": 3.75
   },
   {
     "suchbegriff": "wie kann ich kosten durch energieoptimierung senken?",
     "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 5.5
+  },
+  {
+    "suchbegriff": "wie senke ich meine stromkosten ohne auf komfort zu verzichten?",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 5.0
+    "position": 11.0
   }
 ]

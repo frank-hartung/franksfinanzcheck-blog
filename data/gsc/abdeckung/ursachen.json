@@ -1,200 +1,22 @@
 {
- "ereignisse": {
-  "bis": "2026-10-17",
-  "commits": 257,
-  "shallow": true,
-  "tage": {
-   "2026-10-14": {
-    "commits": 18,
-    "content_dateien": 251,
-    "draft_neu": 36,
-    "draft_neu_posts": 36,
-    "draft_saldo": 32,
-    "post_dateien": 213,
-    "posts_saldo": 32,
-    "top": [
-     {
-      "betreff": "redaktion: Hemingway-Lesbarkeit und Offline-Sprachpflege",
-      "dateien": 123,
-      "draft_neu": 32,
-      "draft_neu_posts": 32,
-      "sha": "80582936"
-     },
-     {
-      "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)",
-      "dateien": 2,
-      "draft_neu": 2,
-      "draft_neu_posts": 2,
-      "sha": "e9e8906a"
-     },
-     {
-      "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "4769e801"
-     }
-    ]
-   },
-   "2026-10-15": {
-    "commits": 13,
-    "content_dateien": 119,
-    "draft_neu": 1,
-    "draft_neu_posts": 1,
-    "draft_saldo": 1,
-    "post_dateien": 115,
-    "posts_saldo": 1,
-    "top": [
-     {
-      "betreff": "content(ki-redaktion): neuer KI-Entwurf (draft, Rolle news)",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "7f363ac1"
-     },
-     {
-      "betreff": "fix(release-scorecard): #764 affiliate-exempt SSOT + bestand heilen (#776)",
-      "dateien": 36,
-      "draft_neu": 0,
-      "draft_neu_posts": 0,
-      "sha": "1e40a664"
-     },
-     {
-      "betreff": "fix(einzigartigkeit): Heiler wählt Faustregeln statt Massensatz (#766) (#770)",
-      "dateien": 34,
-      "draft_neu": 0,
-      "draft_neu_posts": 0,
-      "sha": "4e959b91"
-     }
-    ]
-   },
-   "2026-10-16": {
-    "commits": 13,
-    "content_dateien": 34,
-    "draft_neu": 4,
-    "draft_neu_posts": 4,
-    "draft_saldo": -1,
-    "post_dateien": 34,
-    "posts_saldo": -1,
-    "top": [
-     {
-      "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)",
-      "dateien": 2,
-      "draft_neu": 2,
-      "draft_neu_posts": 2,
-      "sha": "1c82d2c8"
-     },
-     {
-      "betreff": "content: final geprüfte Reserve und Kadenz-Korrekturen",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "195bf5d2"
-     },
-     {
-      "betreff": "content(ki-redaktion): neuer KI-Entwurf (draft, Rolle lang)",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "60a4464c"
-     }
-    ]
-   },
-   "2026-10-17": {
-    "commits": 4,
-    "content_dateien": 8,
-    "draft_neu": 0,
-    "draft_neu_posts": 0,
-    "draft_saldo": 0,
-    "post_dateien": 8,
-    "posts_saldo": 0,
-    "top": []
-   }
-  },
-  "verfuegbar": true,
-  "von": "2026-10-07"
- },
+ "ereignisse": null,
  "erzeugt": "2026-10-26",
  "ursachen": [
   {
-   "bewertung": "belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später",
+   "bewertung": "kein Beleg im Repo gefunden",
    "datum": "2026-10-17",
    "delta": 59,
    "feld": "nicht_indexiert",
-   "git": {
-    "commits": 18,
-    "content_dateien": 251,
-    "draft_neu": 36,
-    "draft_neu_gesamt": 36,
-    "draft_saldo": 32,
-    "saldo": 32,
-    "tag": "2026-10-14",
-    "top": [
-     {
-      "betreff": "redaktion: Hemingway-Lesbarkeit und Offline-Sprachpflege",
-      "dateien": 123,
-      "draft_neu": 32,
-      "draft_neu_posts": 32,
-      "sha": "80582936"
-     },
-     {
-      "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)",
-      "dateien": 2,
-      "draft_neu": 2,
-      "draft_neu_posts": 2,
-      "sha": "e9e8906a"
-     },
-     {
-      "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "4769e801"
-     }
-    ],
-    "verzug_tage": 3
-   },
+   "git": null,
    "kandidaten": [],
    "pruefweg": "Änderungsprotokoll der Seiten (git log auf content/), Deploy-Protokoll und Sitemap-Diff zum Datum; die Klassen oben sind Größenordnungen, kein Beweis."
   },
   {
-   "bewertung": "belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später",
+   "bewertung": "kein Beleg im Repo gefunden",
    "datum": "2026-10-17",
    "delta": -21,
    "feld": "indexiert",
-   "git": {
-    "commits": 18,
-    "content_dateien": 251,
-    "draft_neu": 36,
-    "draft_neu_gesamt": 36,
-    "draft_saldo": 32,
-    "saldo": 32,
-    "tag": "2026-10-14",
-    "top": [
-     {
-      "betreff": "redaktion: Hemingway-Lesbarkeit und Offline-Sprachpflege",
-      "dateien": 123,
-      "draft_neu": 32,
-      "draft_neu_posts": 32,
-      "sha": "80582936"
-     },
-     {
-      "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)",
-      "dateien": 2,
-      "draft_neu": 2,
-      "draft_neu_posts": 2,
-      "sha": "e9e8906a"
-     },
-     {
-      "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "4769e801"
-     }
-    ],
-    "verzug_tage": 3
-   },
+   "git": null,
    "kandidaten": [],
    "pruefweg": "Änderungsprotokoll der Seiten (git log auf content/), Deploy-Protokoll und Sitemap-Diff zum Datum; die Klassen oben sind Größenordnungen, kein Beweis."
   }
