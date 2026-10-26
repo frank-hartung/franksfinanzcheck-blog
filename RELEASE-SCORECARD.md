@@ -114,11 +114,11 @@ Keine.
 |---|---|---|---|---|
 | `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | ausstehend | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | hoch | ausstehend | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` | standard | nicht erforderlich | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | 2026-11-11 |
