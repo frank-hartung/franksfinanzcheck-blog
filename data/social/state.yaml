@@ -1087,6 +1087,19 @@ history:
     \  \n#Frugalismus #Geldsparen #BudgetPlanen #503020Regel"
   ref: '117502135144875649'
   ai: true
+- posted_at: '2026-10-26T12:15:10.614325+01:00'
+  channel: mastodon
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  title: 'DSL-Wechselbonus sichern: So sparst du beim Internetvertrag'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117506920725188960
+  ok: true
+  text: 'Spare über 24 Monate, wenn du den DSL‑Wechselbonus in die Gesamtrechnung
+    einbeziehst. 📉 Der Effektivpreis liegt häufig 10 €–20 € pro Monat niedriger, wenn
+    Grundgebühr, Anschlusskosten und Laufzeit berücksichtigt werden. https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #DSL #Wechselbonus #Handytarif #Mobilfunk'
+  ref: '117506920725188960'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1112,4 +1125,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-25T22:53:20.249040+01:00'
+updated_at: '2026-10-26T12:15:17.490014+01:00'

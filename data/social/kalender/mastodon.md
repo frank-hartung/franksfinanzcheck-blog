@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 25.10.2026 22:53 (Europe/Berlin)  
+> Automatisch aktualisiert: 26.10.2026 12:15 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,15 +13,18 @@
 ## Kommende Beiträge
 
 ### Mo, 26. Oktober 2026
-- **07:30** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Evergreen  
+- **07:30** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
+### Di, 27. Oktober 2026
+- **07:30** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _zahl_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
+- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _frage_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
-- **11:30** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-- **17:30** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Evergreen  
+- **11:30** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
+- **17:30** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 ### Sa, 31. Oktober 2026
 - **11:30** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
@@ -40,9 +43,13 @@
   https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
 - **17:30** ⏳ Preisgarantie Gas: Was du jetzt tun kannst – Gaspreissprünge — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/
+### Mo, 09. November 2026
+- **07:30** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 26.10.2026 12:15 · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag → https://mastodon.social/@FranksFinanzcheck/117506920725188960
 - ✅ 25.10.2026 15:58 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken → https://mastodon.social/@FranksFinanzcheck/117502135144875649
 - ✅ 24.10.2026 16:38 · Sicher heizen: Was sie abdeckt und wie lange sie läuft → https://mastodon.social/@FranksFinanzcheck/117496395618697602
 - ✅ 24.10.2026 11:37 · Stromkosten senken: Clevere Haushaltsgeräte im Überblick → https://mastodon.social/@FranksFinanzcheck/117495210407092416
@@ -52,7 +59,6 @@
 - ✅ 22.10.2026 12:18 · Haushaltskosten reduzieren: So gewinnst du die Kontrolle → https://mastodon.social/@FranksFinanzcheck/117484047623058483
 - ✅ 21.10.2026 17:59 · Dein Weg zu geringeren Monatskosten: Schritt für Schritt → https://mastodon.social/@FranksFinanzcheck/117479727634173619
 - ✅ 21.10.2026 12:17 · Energiekosten senken: Smarte Helfer für den Haushalt → https://mastodon.social/@FranksFinanzcheck/117478382629994026
-- ✅ 20.10.2026 17:40 · Balkonkraftwerk Förderung: So holst du dir Geld zurück → https://mastodon.social/@FranksFinanzcheck/117473993182890841
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
