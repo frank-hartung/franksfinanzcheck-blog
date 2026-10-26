@@ -214,30 +214,38 @@ def _scan_static():
 def _scan_public(public_dir):
     """Analysiert den gebauten Baum auf Render-Blocking + DOM-Heuristik."""
     findings = []
-    html_files = glob.glob(os.path.join(public_dir, "**", "*.html"), recursive=True)
+    # Stable order makes the 80-page JS/DOM sample reproducible across runners.
+    html_files = sorted(glob.glob(os.path.join(public_dir, "**", "*.html"), recursive=True))
     js = glob.glob(os.path.join(public_dir, "**", "*.js"), recursive=True)
     css = glob.glob(os.path.join(public_dir, "**", "*.css"), recursive=True)
     js_bytes = sum(os.path.getsize(f) for f in js)
     css_bytes = sum(os.path.getsize(f) for f in css)
     total_html = sum(os.path.getsize(f) for f in html_files)
-    # Render-Blocking: Inline-<style> Blöcke & viele <script> ohne async/defer
+    # JS-/DOM-Budgets werden auf einer stabilen Stichprobe gemessen. Die
+    # intrinsische Bildgröße ist dagegen ein billiger, deterministischer Check:
+    # ihn über alle Seiten laufen zu lassen verhindert, dass die
+    # 80-Seiten-Stichprobe Artikel und ihre Bilder auslässt.
     inline_styles = 0
     blocking_js = 0
     inline_js = 0
     structured_data = 0
     img_nosize = 0
-    for f in html_files[:80]:  # Stichprobe (Home + Top-Seiten), Budgierbar
+    sample = set(html_files[:80])
+    for f in html_files:
         try:
-            t = open(f, encoding="utf-8", errors="ignore").read()
+            with open(f, encoding="utf-8", errors="ignore") as handle:
+                t = handle.read()
         except OSError:
             continue
-        inline_styles += len(re.findall(r"<style(?![^>]*>)[^>]*>", t))
-        b, i, s = _classify_scripts(t)
-        blocking_js += b
-        inline_js += i
-        structured_data += s
-        img_nosize += len(re.findall(
-            r"<img (?![^>]*(?:width=|height=|style=))", t))
+        if f in sample:
+            inline_styles += len(re.findall(r"<style(?![^>]*>)[^>]*>", t))
+            b, i, s = _classify_scripts(t)
+            blocking_js += b
+            inline_js += i
+            structured_data += s
+        for tag in re.findall(r"<img\b[^>]*>", t, re.I):
+            if not re.search(r"\b(?:width|height|style)\s*=", tag, re.I):
+                img_nosize += 1
     # Rückwärtskompatibler Alias für ältere Manifest-Leser
     inline_scripts_plain = blocking_js
     if inline_styles:
@@ -503,7 +511,8 @@ def _append_history(verdict, s_met, p_met, findings, build_measured):
         }
         with open(HISTORY, "a", encoding="utf-8") as f:
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
-        lines = open(HISTORY, encoding="utf-8").read().splitlines()
+        with open(HISTORY, encoding="utf-8") as f:
+            lines = f.read().splitlines()
         if len(lines) > 260:
             with open(HISTORY, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines[-260:]) + "\n")

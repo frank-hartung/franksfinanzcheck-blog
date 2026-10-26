@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-26",
-  "verdict": "AMBER",
+  "verdict": "GREEN",
   "build_measured": true,
   "strict_build": true,
   "static": {
@@ -15,20 +15,13 @@
     "css_files": 0,
     "js_bytes": 504326,
     "css_bytes": 0,
-    "html_bytes": 39771816,
+    "html_bytes": 39797090,
     "inline_styles": 0,
     "blocking_js": 0,
-    "inline_js": 222,
-    "structured_data_scripts": 99,
+    "inline_js": 271,
+    "structured_data_scripts": 111,
     "inline_scripts_plain": 0,
-    "img_nosize": 10
+    "img_nosize": 0
   },
-  "findings": [
-    {
-      "level": "amber",
-      "code": "cls_img",
-      "count": 10,
-      "msg": "10 <img>-Elemente ohne width/height/style (CLS-Risiko)"
-    }
-  ]
+  "findings": []
 }
