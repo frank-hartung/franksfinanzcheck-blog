@@ -269,7 +269,7 @@ Markiere auf deiner letzten Rechnung fünf Stellen: Zeitraum, Zählerstände, kW
 
 Erst dann folgt die Maßnahme. Das ist weniger aufregend als ein „720-Euro-Trick“, aber deutlich näher an deiner echten Rechnung.
 
-**Weiterlesen:** [Fünf Spätsommer-Fehler vermeiden](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Heizkosten im Alltag senken](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Fünf Spätsommer-Fehler vermeiden](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Heizkosten im Alltag senken](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Wärmepumpe vs. Gasheizung 2026](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/)
 
 ## Häufige Fragen
 

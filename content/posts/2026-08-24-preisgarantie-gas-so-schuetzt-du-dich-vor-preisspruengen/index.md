@@ -250,7 +250,7 @@ Preissprünge am Markt verdienen Aufmerksamkeit, aber keine Panik. Entscheidend 
 
 Wenn heute ein Preisschreiben im Postfach liegt, fotografiere zuerst den Zählerstand. Markiere dann die fünf Pflichtpunkte. So wird aus Marktangst eine konkrete Entscheidung.
 
-**Weiterlesen:** [Preisgarantie verständlich erklärt](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Gastarif Schritt für Schritt vergleichen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Preisgarantie verständlich erklärt](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Gastarif Schritt für Schritt vergleichen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Balkonkraftwerk Förderung](../../posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/) · [Grundversorgung Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/)
 
 ## Häufige Fragen
 

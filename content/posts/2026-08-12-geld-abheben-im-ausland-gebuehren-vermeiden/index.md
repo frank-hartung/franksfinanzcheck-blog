@@ -217,7 +217,7 @@ Innerhalb des Euro-Raums gibt es keine Fremdwährungsumrechnung, weil beide Seit
 
 Melde den Verlust sofort über die Sperrnummer deiner Bank. Viele Institute bieten eine Ersatzkarte an eine Adresse im Reiseland an. Kläre vorher, ob dieser Service in deinem Tarif enthalten ist.
 
-**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/) · [Bankgebühren senken](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) · [Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/)
 **Lesetipp:** [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 
 ---

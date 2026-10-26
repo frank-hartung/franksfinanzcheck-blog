@@ -1,0 +1,170 @@
+name: GSC-Abdeckung – Wochenbericht
+
+# WARUM DIESER LAUF EXISTIERT (M8/M9 aus GSC-ABDECKUNG-HIGHEND-2026-10-26.md)
+# ---------------------------------------------------------------------------
+# Der Tageslauf (gsc-import.yml) misst und fragt an. Was fehlte, war der
+# Wochenblick: Steigt die Quote, sind die Abnahmekriterien erfüllt, sind die
+# Detail-Listen frisch, und was hat sich im Repo geändert, das einen Sprung
+# erklären könnte. Genau das steht hier – montags, bevor die Woche beginnt.
+#
+# Die Regel des Laufs: Er sammelt und berichtet, er repariert nicht. Ein
+# automatischer Eingriff in Indexierung wäre genau die Sorte Aktion, die man
+# später nicht mehr erklären kann.
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"      # montags 05:17 UTC (≈ 07:17 Berlin), nach dem Tageslauf
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gsc-abdeckung-woche
+  cancel-in-progress: false
+
+jobs:
+  wochenbericht:
+    name: Wochenbericht der Abdeckung
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Selbsttest der Abdeckungs-Zentrale
+        run: python3 scripts/gsc_abdeckung.py --selftest
+
+      - name: Build für die Gegenprobe
+        id: build
+        continue-on-error: true
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Build für den Wochenbericht"
+          weiter-bei-fehler: "true"
+
+      - name: Wochenkennzahl, Abnahme, Vertrag, Priorität
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --audit --schreiben || true
+          python3 scripts/gsc_abdeckung.py --kpi || true
+          python3 scripts/gsc_abdeckung.py --abnahme || true
+          python3 scripts/gsc_abdeckung.py --vertrag || true
+          python3 scripts/gsc_abdeckung.py --prioritaet || true
+          python3 scripts/gsc_abdeckung.py --altlasten || true
+          # Ohne Historie kein Beleg: der Klon ist flach. Der Belegweg steht
+          # im Bericht (M7) und braucht `fetch --shallow-since`.
+          python3 scripts/gsc_abdeckung.py --ursachen --ohne-git || true
+
+      - name: Triage, Register und Fristen
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          # Das Register gilt immer – auch ohne neue Detail-Liste. Eine Frist,
+          # die nur bei Datenimport läuft, ist keine Frist.
+          python3 scripts/gsc_abdeckung.py --entscheidungen || true
+          if compgen -G "data/gsc/abdeckung/details/*.csv" > /dev/null; then
+            python3 scripts/gsc_abdeckung.py --triage || true
+          else
+            echo "Keine Detail-Liste – Triage übersprungen (Regel W9)."
+          fi
+
+      - name: Wochenbericht in die Lauf-Zusammenfassung
+        run: |
+          set -uo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib
+
+          def lade(pfad):
+              try:
+                  return json.loads(pathlib.Path(pfad).read_text(encoding="utf-8"))
+              except Exception:
+                  return {}
+
+          befund = lade("data/gsc/abdeckung/befund.json")
+          kenn = befund.get("kennzahlen") or {}
+          gate = befund.get("gate") or {}
+          abnahme = befund.get("abnahme") or []
+          vertrag = befund.get("vertrag") or {}
+          prioritaet = befund.get("prioritaet") or {}
+
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("## 📅 Wochenbericht Abdeckung\n\n")
+              f.write(f"Stand des Befunds: **{kenn.get('stand_datum')}** "
+                      f"({kenn.get('export_alter_tage')} Tage alt) · "
+                      f"Gate: **{'ROT' if gate.get('status') == 'rot' else 'GRÜN'}**\n\n")
+              f.write("| Kennzahl | Wert |\n|---|---|\n")
+              f.write(f"| Indexiert | {kenn.get('indexiert')} von {kenn.get('bekannt')} "
+                      f"({kenn.get('quote_indexiert')} %) |\n")
+              f.write(f"| Nicht indexiert | {kenn.get('nicht_indexiert')} |\n")
+              f.write(f"| Indexierbar (Sitemap) | {kenn.get('live_indexierbar')} |\n")
+              f.write(f"| Altlasten im Index | {kenn.get('index_puffer')} |\n")
+              f.write(f"| Inhaltsseiten ohne redaktionellen Inlink | {kenn.get('ohne_inlink')} "
+                      f"von {kenn.get('inhaltsseiten')} |\n")
+              f.write(f"| Detail-Listen | {kenn.get('detail_urls')} URLs, "
+                      f"Stand {kenn.get('detail_stand') or 'fehlt'} |\n\n")
+              f.write(f"Vertrag (noindex/Gateways): **{vertrag.get('status', '?')}** · "
+                      f"Anfrage-Welle 1: {len(prioritaet.get('welle1') or [])} Seiten\n\n")
+              if abnahme:
+                  f.write("| Kriterium | Status | Messung |\n|---|---|---|\n")
+                  for x in abnahme:
+                      f.write(f"| {x.get('kriterium')} | {x.get('status')} | "
+                              f"{x.get('messung')} |\n")
+                  f.write("\n")
+              triage = lade("data/gsc/abdeckung/triage.json")
+              offen = triage.get("offen") or []
+              if triage:
+                  f.write(f"\n**Triage:** {triage.get('anzahl')} Zeilen · "
+                          f"offen: {len(offen)} · entschieden: "
+                          f"{len(triage.get('entschieden') or [])} · "
+                          f"Register: {triage.get('register_eintraege')} Einträge\n\n")
+                  if offen:
+                      f.write("| Prio | Alter | URL | Aktion |\n|---|---|---|---|\n")
+                      for x in offen[:10]:
+                          alter = (f"{x.get('alter_tage')} T."
+                                   if x.get("alter_tage") is not None else "neu")
+                          f.write(f"| {x.get('prioritaet')} | {alter} | "
+                                  f"`{x.get('url')}` | {x.get('aktion')} |\n")
+                      f.write("\n")
+                  if triage.get("eskaliert"):
+                      f.write("> ⏰ **Überfällig (SLA):** "
+                              + ", ".join(f"`{u}`" for u in triage["eskaliert"][:5])
+                              + " – eine Stufe hochgestuft.\n")
+                  if triage.get("wirkung_belegt"):
+                      f.write("> ✅ **Wirkung belegt:** "
+                              + ", ".join(f"`{u}`" for u in triage["wirkung_belegt"][:5])
+                              + " nicht mehr gemeldet – Register-Eintrag schließen.\n")
+              fehlt = not (kenn.get("detail_stand"))
+              if fehlt:
+                  f.write("> ⚠️ **Detail-Listen fehlen.** In der Search Console unter "
+                          "Indexierung → Seiten je Grund exportieren und nach "
+                          "`data/gsc/abdeckung/details/` legen. Erst dann wird aus "
+                          "den Summen eine Arbeitsliste (M1/M8).\n")
+          PY
+
+      - name: Artefakte sichern
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gsc-wochenbericht
+          path: |
+            data/gsc/abdeckung/befund.json
+            data/gsc/abdeckung/befund.md
+            data/gsc/abdeckung/vertrag.json
+            data/gsc/abdeckung/prioritaet.json
+            data/gsc/abdeckung/verlinkungsauftrag.json
+            data/gsc/abdeckung/kandidaten.json
+            data/gsc/abdeckung/ursachen.json
+            data/gsc/abdeckung/triage.json
+            data/gsc/abdeckung/triage.md
+            data/gsc/abdeckung/redaktions_queue.md
+            data/gsc/abdeckung/triage_verlauf.jsonl
+            data/gsc/abdeckung/entscheidungen.yaml
+          if-no-files-found: ignore

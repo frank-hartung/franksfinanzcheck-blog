@@ -184,7 +184,7 @@ Du musst dich nicht mit Funklöchern abfinden. Oft reichen ein guter Router-Stan
 
 Schon das verbessert dein **WLAN** spürbar. Für große Wohnungen ist ein Mesh-Set die beste Wahl. Es bringt stabiles Arbeiten und flüssiges Entertainment.
 
-**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [Störung beim Internetanbieter](../../posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/)
 
 ## Häufige Fragen
 

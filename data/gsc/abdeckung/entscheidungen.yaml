@@ -1,0 +1,18 @@
+# Entscheidungs-Register der GSC-Triage
+#
+# Hier steht, was mit einer gemeldeten URL passiert ist – und wann
+# nachgesehen wird, ob es gewirkt hat. Der Automat schlägt vor
+# (Vorschlag je Zeile in redaktions_queue.md), entschieden wird hier.
+#
+# Felder: url · entscheidung · am · wiedervorlage · erwartung
+#         (indexiert | impressionen | keine) · eigentuemer · begruendung
+#
+# Anlegen mit:
+#   python3 scripts/gsc_abdeckung.py --entscheiden "/posts/…/" \
+#     --entscheidung "Rolle festlegen" --begruendung "…" --wiedervorlage 2026-11-25
+#
+# Nach Ablauf der Wiedervorlage prüft `--triage` die Wirkung:
+#   lastmod der Seite > Entscheidungsdatum → Änderung ist live,
+#                                            Indexierung erneut anfragen (P2)
+#   lastmod unverändert                    → Entscheidung nicht umgesetzt (P1)
+#   URL nicht mehr in der Liste            → Wirkung belegt, Eintrag schließen (P3)

@@ -150,7 +150,7 @@ Eine Grundreinigung musst du meist nicht bezahlen. Bei starkem Schmutz, etwa vie
 
 **Faustregel:** Wer drei bis vier Monate im Voraus bucht und auf „Voll/Voll“ achtet, zahlt meist nur die Hälfte im Vergleich zur Spontanbuchung am Schalter.
 
-**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Campingurlaub planen](../../posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/)
 **Lesetipp:** [Mietwagen ohne Kautionsfallen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/): So sparst du im Urlaub
 
 ## Fazit: September-Roadtrip – Clevere Wege zum Mietwagen-Schnäppchen

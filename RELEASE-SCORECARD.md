@@ -139,6 +139,7 @@ Keine.
 | `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | erhoeht | nicht erforderlich | frisch geprüft vor 19 Tagen (Intervall 45 Tage) | 2026-11-21 |
 | `2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 19 Tagen (Intervall 30 Tage) | 2026-11-06 |
 | `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | frisch geprüft vor 11 Tagen (Intervall 30 Tage) | 2026-11-14 |
+| `2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 30 Tage) | 2026-11-25 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 

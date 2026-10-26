@@ -162,7 +162,7 @@ Nutze diese Liste jedes Jahr im Frühling. Dann ist der richtige Moment für ein
 
 So findest du versteckte Kosten, bevor sie dein Vermögen schmälern. Wer seine Fixkosten kennt, steht in Krisen besser da. Ein schlankes Konto ist die Basis für den Vermögensaufbau. Nimm dir diese Stunde Zeit – sie zahlt sich doppelt aus.
 
-**Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/)
+**Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/) · [Geld abheben im Ausland](../../posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/)
 **Lesetipp:** [Kreditkarte vergleichen: Kostenlos und sicher zahlen](../../posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/)
 
 ## Häufige Fragen
