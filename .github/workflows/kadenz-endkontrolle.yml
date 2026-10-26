@@ -34,7 +34,7 @@ jobs:
           python-version: "3.12"
       - uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
       - name: Dependencies (fail visibly, not best effort)
         run: |
           pip install --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"

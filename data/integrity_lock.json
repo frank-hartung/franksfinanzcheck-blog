@@ -6,6 +6,12 @@
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
     "hugo.toml": "e86edaf4dd3b4821f9b2f534e2694caf759f3cc0bdb3572eece4b100a1491363",
+  "signed_at": "2026-10-26T13:34:06.966354+00:00",
+  "head": "e79ef62c",
+  "files": {
+    "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
+    "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
+    "hugo.toml": "0c069456e8217bc834169ec6629a76b252cb51917707b46a7c893225d7605bbf",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -43,7 +49,7 @@
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
     "scripts/redaktions_standard.py": "112f0d85299b5545d4adc308ff05090cbda9cc95b9f26738519117b21a04b827",
-    "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
+    "scripts/reserve_artifacts.py": "0def702a6868f98c1b81dcfe3108f7d5c1040ce1d00102ed27ccfd5a9d7c79cb",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
@@ -55,6 +61,7 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916",
+  "files_sha256": "df9bd2794d31a512dde8cc595402d064fc78f3360c110212ec93d886890fb18c",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
@@ -209,6 +216,11 @@
       "geaendert": [
         "hugo.toml",
         "layouts/_partials/head.html"
+      "head": "e79ef62c",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/_partials/head.html",
+        "scripts/reserve_artifacts.py"
       ],
       "herkunft": [
         {
@@ -223,6 +235,10 @@
             },
             {
               "sha": "e79ef62",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "e79ef62c",
               "datum": "2026-10-26",
               "betreff": "docs(recherche): Internet-Recherche-Brief 2026-10-26"
             }
@@ -241,6 +257,23 @@
             },
             {
               "sha": "e79ef62",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "e79ef62c",
+              "datum": "2026-10-26",
+              "betreff": "docs(recherche): Internet-Recherche-Brief 2026-10-26"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/reserve_artifacts.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "e79ef62c",
               "datum": "2026-10-26",
               "betreff": "docs(recherche): Internet-Recherche-Brief 2026-10-26"
             }
@@ -250,6 +283,7 @@
       ],
       "prev_sha256": "05bb5e11c755fd6e1d1488456be4ef701803e2a0382f0eaf43d61fb77980a78e",
       "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916"
+      "files_sha256": "df9bd2794d31a512dde8cc595402d064fc78f3360c110212ec93d886890fb18c"
     }
   ]
 }

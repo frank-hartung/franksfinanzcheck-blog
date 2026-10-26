@@ -99,7 +99,7 @@ jobs:
       - name: Hugo (Extended, verifiziert) installieren
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       - name: Selbsttest der Wache (Sabotage-Proben)
         run: python3 scripts/entity_marken_gate.py --selftest

@@ -24,19 +24,19 @@
 #
 #  NUTZUNG: jede Workflow-Datei ersetzt
 #     uses: peaceiris/actions-hugo@v3
-#     with: { hugo-version: "0.164.0", extended: true }
+#     with: { hugo-version: "0.168.0", extended: true }
 #  durch
 #     uses: ./.github/actions/install-hugo
-#     with: { version: "0.164.0" }
+#     with: { version: "0.168.0" }
 #  (und entfernt eigene „Hugo-Extended prüfen“-Komfort-Schritte).
 # ============================================================
 name: "Install Hugo (Extended, verifiziert, mehrquellig)"
 
 inputs:
   version:
-    description: "Hugo-Version ohne 'v' (z. B. 0.164.0)"
+    description: "Hugo-Version ohne 'v' (z. B. 0.168.0)"
     required: true
-    default: "0.164.0"
+    default: "0.168.0"
 
 runs:
   using: composite
@@ -44,8 +44,10 @@ runs:
     - name: "Bereits vorhanden & Extended?"
       id: existing
       shell: bash
+      env:
+        EINGABE_VERSION: ${{ inputs.version }}
       run: |
-        if command -v hugo >/dev/null 2>&1 && hugo version 2>&1 | grep -qi extended; then
+        if command -v hugo >/dev/null 2>&1 && hugo version 2>&1 | grep -Fq "hugo v${EINGABE_VERSION}-" && hugo version 2>&1 | grep -qi extended; then
           echo "ok=true" >> "$GITHUB_OUTPUT"
           echo "Hugo bereits vorhanden (Extended):"
           hugo version
@@ -70,7 +72,7 @@ runs:
         # schwaecher, faengt aber Korruption und Teil-Downloads ab. Bei einer
         # Abweichung bricht der Schritt ab (fail-closed, KEIN PyPI-Fallback).
         declare -A PRUEFSUMME=(
-          ["0.164.0"]="fea17b8c076f950bb2e9f9486667bdaa29422883888d509d63931c73e8a9b3a4"
+          ["0.168.0"]="787f100057328824f38c6ad7c87ff10d6451ae0a7bc39cedaad0dd2bcde17e53"
         )
         ERWARTET="${PRUEFSUMME[$VER]:-}"
         echo "→ Download: ${URL}"
@@ -96,8 +98,10 @@ runs:
     - name: "Verifikation nach Quelle 1"
       id: verify1
       shell: bash
+      env:
+        EINGABE_VERSION: ${{ inputs.version }}
       run: |
-        if hugo version 2>&1 | grep -qi extended; then
+        if hugo version 2>&1 | grep -Fq "hugo v${EINGABE_VERSION}-" && hugo version 2>&1 | grep -qi extended; then
           echo "ok=true" >> "$GITHUB_OUTPUT"
           hugo version
         else
@@ -115,7 +119,7 @@ runs:
         echo "→ PyPI-Fallback: hugo==${VER}"
         # Hash-gepinnt (M-09): nur das bekannte manylinux-x86_64-Wheel.
         declare -A WHEEL=(
-          ["0.164.0"]="00b84fbe63dbd34c9a7cb15445d37e6f02ed6a167d171af3d7f90f74a501cf25"
+          ["0.168.0"]="eac14e88d74b08ea9129c9a137ccb0d5c6cd4a6d8614f46852d3a8708a6d5bfc"
         )
         if [ -z "${WHEEL[$VER]:-}" ]; then
           echo "::error::Kein Wheel-Hash für hugo==${VER} hinterlegt – PyPI-Fallback verweigert (fail-closed)."
@@ -135,8 +139,14 @@ runs:
     - name: "Finale Verifikation (fail-closed)"
       if: always()
       shell: bash
+      env:
+        EINGABE_VERSION: ${{ inputs.version }}
       run: |
         hugo version || { echo "❌ hugo nicht installierbar – Build würde scheitern."; exit 2; }
+        if ! hugo version 2>&1 | grep -Fq "hugo v${EINGABE_VERSION}-"; then
+          echo "::error::Hugo-Version stimmt nicht mit ${EINGABE_VERSION} überein."
+          exit 2
+        fi
         if ! hugo version 2>&1 | grep -qi extended; then
           echo "❌ Hugo ist NICHT Extended (PaperMod braucht TOCSS/Libsass)."
           echo "   Ein Build mit Standard-Binary erzeugt genau die Phantom-Fehler #209/#220."

@@ -99,7 +99,7 @@ jobs:
       - name: Hugo installieren (Extended, Prüfsumme verifiziert)
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       - name: Build
         uses: ./.github/actions/hugo-build

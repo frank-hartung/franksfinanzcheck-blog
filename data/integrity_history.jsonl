@@ -339,3 +339,4 @@
 {"date": "2026-10-25", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["hugo.toml"]}
 {"date": "2026-10-26", "kritisch": 2, "fest": 0, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html"]}
 {"date": "2026-10-26", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-26", "kritisch": 2, "fest": 1, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html", "scripts/reserve_artifacts.py"]}

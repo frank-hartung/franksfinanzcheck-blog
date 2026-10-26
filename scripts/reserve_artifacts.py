@@ -314,10 +314,50 @@ def snapshot_findings(root: Path = ROOT) -> list[str]:
     return findings
 
 
+def withdraw_invalid_ready(path: Path, posts_dir: Path) -> list[str]:
+    """Withdraw stale READY claims without fabricating a new measurement.
+
+    This is NOT recertification. In particular, the original SHA and proof time
+    remain intact so reserve_recert.py --fix can still identify and measure the
+    changed draft with the full Hugo + Hunspell production gate. A missing or
+    invalid JSON snapshot is never overwritten.
+    """
+    data = read_certificate(path)
+    changed = []
+    for row in data["candidates"]:
+        if not row["ready"]:
+            continue
+        problem = candidate_problem(row, posts_dir)
+        if problem:
+            row["ready"] = False
+            row["reason"] = (f"Zertifikat zurückgezogen: {problem}; "
+                             "vollständige Nachmessung nötig (reserve_recert.py --fix)")
+            for key in ("score", "parts", "flesch", "details"):
+                row.pop(key, None)  # historical measurements are not current scores
+            changed.append(row["slug"])
+    if changed:
+        data["ready"] = sum(row["ready"] for row in data["candidates"])
+        # generated_at and measurement stay as historical provenance; this is
+        # not a fresh measurement and cannot rejuvenate unaffected rows.
+        write_object(path, data)
+    return changed
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Offline-Snapshot- und Redaktionsprüfung")
-    parser.parse_args()
+    parser.add_argument("--withdraw-invalid", action="store_true",
+                        help="Ungültige READY-Nachweise nur zurückziehen, nie neu zertifizieren")
+    args = parser.parse_args()
+    if args.withdraw_invalid:
+        try:
+            changed = withdraw_invalid_ready(ROOT / "data" / STATE_FILES[0],
+                                             ROOT / "content" / "posts")
+        except (OSError, ValueError) as exc:
+            print(f"🛑 Nachweise nicht zurückgezogen: {exc}")
+            return 2
+        print(f"⚠ {len(changed)} ungültige READY-Nachweise zurückgezogen: "
+              f"{', '.join(changed) or 'keine'}. Keine Nachmessung.")
     findings = snapshot_findings()
     if findings:
         print("🛑 Reserve-Snapshot beschädigt oder unbelegt:")
