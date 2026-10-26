@@ -11,7 +11,7 @@
 #
 # Keine Freigabe, keine Veröffentlichung, kein Versand wird durch dieses Register ausgelöst.
 
-stand: "2026-10-19"
+stand: "2026-10-26"
 
 entscheidungen:
 
@@ -271,3 +271,16 @@ entscheidungen:
       severity: P1
       channel: "repo-betrieb"
       offen: "Kommentar in hugo.toml (Zeile 249) nennt noch „die acht“ Rechner. Die Datei ist im Siegel, die Änderung nur signiert. Nur ein Kommentar, ohne Wirkung auf den Build."
+
+  - id: E-23
+    punkt: "4 – Reserve: SHA-Drift der Entwürfe (eigener Vorgang, nicht Teil einer SEO-Änderung)"
+    entscheidung: "Der Zertifikats-Drift wird getrennt von jeder SEO-Arbeit behandelt. Nachzertifiziert wird ausschließlich mit `reserve_recert.py --fix` und vollständiger Messkette (hugo 0.164.0 + hunspell/de_DE). Wo die Kette fehlt, wird NICHTS geschrieben – ein erfundenes READY wäre schlimmer als ein offener Befund."
+    begruendung: "Zwei Entwürfe weichen von ihrem Nachweis ab. (1) `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen`: zertifiziert am 26.10.2026 09:41Z mit sha256 3a6ccf3d…f1b5d2f050, score 0.97, ready true – die Datei hat heute sha256 d64590a9…ec9b5df94. (2) `2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege`: seit dem Lauf nicht ready, Grund R13-DATUM-PUNKT („23 Dezember“, Politur-Ruine eines automatisierten Laufs). Beides in einer SEO-Änderung mitzuziehen würde eine Messung mit einer Reparatur vermischen – und im Zweifel den Nachweis entwerten."
+    status: "offen"
+    verantwortlich: auto
+    nachweis: "PYTHONPATH (PyYAML) python3 scripts/reserve_artifacts.py --check → 1 Befund (etf-sparplan); python3 scripts/reserve_recert.py --check --json → 2 Kandidaten mit Drift. Gegenprobe: reserve_recert.py --fix bricht fail-closed ab („hugo fehlt im PATH“, nach Installation von hugo 0.164.0: „hunspell fehlt“) – es wurde kein Nachweis verändert."
+    befund:
+      owner: auto
+      severity: P1
+      channel: "repo-betrieb"
+      offen: "Heilung in dieser Reihenfolge: (a) frisches Zertifikat in CI – bot-watchdog.yml bzw. content-reserve.yml rufen `reserve_recert.py --fix` mit vollständiger Kette auf und committen das Ergebnis; (b) lokal `apt-get install -y hunspell hunspell-de-de`, dann `python3 scripts/reserve_recert.py --fix`; (c) für den Flugvergleich zusätzlich die Politur-Ruine „23 Dezember“ → „23. Dezember“ im Entwurf reparieren, sonst bleibt das Textverständnis-Gate rot. Bis dahin gilt der Kandidat als nicht zertifiziert."
