@@ -1,0 +1,85 @@
+{
+ "anzahl": 4,
+ "entschieden": [
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/favicon.ico",
+   "ziel": null
+  },
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/index.xml",
+   "ziel": null
+  }
+ ],
+ "nach_prioritaet": {
+  "P2": 2,
+  "P3": 2
+ },
+ "offen": [
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1845 Wörter, 0 ähnliche Titel im Themenfeld.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "ziel": null
+  },
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1872 Wörter, 2 ähnliche Titel im Themenfeld.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "ziel": null
+  }
+ ],
+ "zeilen": [
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1845 Wörter, 0 ähnliche Titel im Themenfeld.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "ziel": null
+  },
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1872 Wörter, 2 ähnliche Titel im Themenfeld.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "ziel": null
+  },
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/favicon.ico",
+   "ziel": null
+  },
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/index.xml",
+   "ziel": null
+  }
+ ]
+}

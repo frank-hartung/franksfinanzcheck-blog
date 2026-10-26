@@ -70,7 +70,7 @@ AUFRUF
     # 4) Aus einer 404-Detail-Liste Weiterleitungs-Vorschläge ableiten
     python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
 
-    python3 scripts/gsc_abdeckung.py --selftest         # 78 Fälle, offline
+    python3 scripts/gsc_abdeckung.py --selftest         # 70 Fälle, offline
 
 WO DIE EXPORTE HERKOMMEN
     Search Console → Indexierung → Seiten → oben rechts „Exportieren“.
@@ -888,6 +888,9 @@ def kennzahlen(export: dict, wahrheit: dict, heute: dt.date | None = None) -> di
         "detail_stand": detail["stand"],
         "detail_alter_tage": detail["alter_tage"],
         "detail_urls": detail["urls"],
+        "detail_vorhanden": detail["vorhanden"],
+        "detail_soll": detail["soll"],
+        "detail_fehlend": detail["fehlend"],
         "sitemap_ohne_lastmod": lastmod_luecke(wahrheit),
         "tage_im_export": len(verlauf),
         "indexiert": indexiert,
@@ -1004,21 +1007,39 @@ def befund_gruende(export: dict, wahrheit: dict) -> list[dict]:
 # nachvollziehbar bleibt.
 DETAILS = ABDECKUNG / "details"
 
+# Die Gründe, für die die Search Console überhaupt eine Detail-Liste ausgibt.
+# Ohne diese sechs Listen bleibt jede Triage eine Summe – und man weiß nicht,
+# WELCHE Liste fehlt. Die Namen sind die Dateinamen im Ordner (siehe README).
+DETAIL_SOLL = (
+    "Nicht gefunden (404).csv",
+    "Gefunden – zurzeit nicht indexiert.csv",
+    "Gecrawlt – zurzeit nicht indexiert.csv",
+    "Seite mit Weiterleitung.csv",
+    "Alternative Seite mit ordnungsgemäßem Canonical-Tag.csv",
+    "Durch robots.txt blockiert.csv",
+)
+
 
 def detail_stand(heute: dt.date | None = None) -> dict:
     """Wie alt sind die Detail-Listen? Ohne sie bleibt jede Triage eine Summe."""
     heute = heute or dt.date.today()
-    stand_datei = DETAILS / ".stand"
+    # `stand.txt` statt `.stand`: Eine versteckte Datei in einem Datenordner
+    # wird von Aufräumskripten und Archiven gern übersehen – und dann sieht der
+    # Befund aus, als hätte niemand exportiert. Beides wird gelesen.
     stand = None
-    if stand_datei.exists():
-        stand = stand_datei.read_text(encoding="utf-8").strip()[:10] or None
+    for name in ("stand.txt", ".stand"):
+        stand_datei = DETAILS / name
+        if stand_datei.exists():
+            stand = stand_datei.read_text(encoding="utf-8").strip()[:10] or None
+            break
     urls = 0
-    for csv in sorted(DETAILS.glob("*.csv")) if DETAILS.exists() else []:
+    for datei in sorted(DETAILS.glob("*.csv")) if DETAILS.exists() else []:
         try:
-            with csv.open(encoding="utf-8-sig", newline="") as fh:
+            with datei.open(encoding="utf-8-sig", newline="") as fh:
                 kopf = next(csv.reader(fh), [])
             if any("url" in str(k).lower() for k in kopf):
-                urls += max(0, sum(1 for _ in csv.open(encoding="utf-8-sig")) - 1)
+                with datei.open(encoding="utf-8-sig") as fh:
+                    urls += max(0, sum(1 for _ in fh) - 1)
         except (OSError, StopIteration, UnicodeDecodeError):
             continue
     alter = None
@@ -1027,7 +1048,11 @@ def detail_stand(heute: dt.date | None = None) -> dict:
             alter = (heute - dt.date.fromisoformat(stand)).days
         except ValueError:
             alter = None
-    return {"stand": stand, "alter_tage": alter, "urls": urls}
+    vorhanden = {d.name for d in DETAILS.glob("*.csv")} if DETAILS.exists() else set()
+    fehlend = [name for name in DETAIL_SOLL if name not in vorhanden]
+    return {"stand": stand, "alter_tage": alter, "urls": urls,
+            "vorhanden": len(DETAIL_SOLL) - len(fehlend), "soll": len(DETAIL_SOLL),
+            "fehlend": fehlend}
 
 
 def lastmod_luecke(wahrheit: dict, root: Path = ROOT) -> int | None:
@@ -1302,15 +1327,28 @@ def massnahmen(gruende: list[dict], kenn: dict, wahrheit: dict, export: dict) ->
             "Search Console → Indexierung → Seiten → Exportieren, dann "
             "`python3 scripts/gsc_abdeckung.py --import <verzeichnis> --audit --schreiben`.")
 
-    if not export.get("details"):
+    if not export.get("details") and not kenn.get("detail_urls"):
         add("M8", "Detail-Exporte in den Tageslauf aufnehmen", "P2", "S",
             ("Der Abdeckungsbericht hat keine API. Wer ihn nur als Bildschirmfoto liest, "
              "kann nicht gegen den Bestand rechnen – und merkt einen Rückschritt erst "
              "Wochen später."),
             "Export enthält 0 Detail-Zeilen", "Mensch + Automat",
-            "Wöchentlich (Montag) die vier Exporte in die Search Console laden und "
+            "Wöchentlich (Montag) die sechs Exporte in die Search Console laden und "
             "`--import` ausführen. Der Vergleichslauf (`--gate`) erkennt Rückschritte "
             "automatisch.")
+    elif kenn.get("detail_fehlend"):
+        # Eine Liste ist besser als keine – aber sie deckt nur einen der sechs
+        # Gründe ab. Das gehört in den Plan, sonst wirkt „1 von 6“ wie „fertig“.
+        fehlt = kenn["detail_fehlend"]
+        add("M8", "Fehlende Detail-Listen nachziehen", "P3", "S",
+            (f"{kenn.get('detail_vorhanden')} von {kenn.get('detail_soll')} Detail-Listen "
+             "liegen im Bestand. Erst mit allen sechs Gründen ist die Triage vollständig "
+             "– die 404er sind die größte Gruppe und fehlen noch."),
+            f"{kenn.get('detail_urls')} URL(s) triagierbar · fehlt: "
+            + ", ".join(fehlt[:3]) + (" …" if len(fehlt) > 3 else ""),
+            "Mensch (Export) + Automat",
+            "In der Search Console je Grund exportieren und unter dem Grund-Namen "
+            "ablegen (`data/gsc/abdeckung/details/`); Namen siehe `details/README.md`.")
 
     if kenn.get("quote_indexiert") is not None and kenn["quote_indexiert"] < 50:
         add("M9", "Indexquote als Zielgröße etablieren", "P2", "S",
@@ -1787,6 +1825,35 @@ AKTION = {
 }
 
 
+def artikel_steckbrief(url: str, root: Path = ROOT) -> dict:
+    """Wörter, Inlink-Ziel und Themen-Nachbarn einer Seite – für die Triage.
+
+    „Gecrawlt, nicht indexiert“ ist die einzige Meldung im Bericht, die fast
+    immer inhaltlich begründet ist. Deshalb bekommt sie Zahlen statt Adjektive:
+    Länge, Zahl der ähnlichen Artikel im gleichen Themenfeld.
+    """
+    import difflib
+
+    pfad = _datei_zu_url(url, root)
+    if not pfad or not pfad.exists():
+        return {}
+    text = pfad.read_text(encoding="utf-8", errors="replace")
+    _, _, body = text.partition("\n---\n")
+    woerter = len(re.findall(r"\w+", body))
+    slug = _DATUM_PRAEFIX.sub("", url.rstrip("/").split("/")[-1])
+    pillar = _pillar_karte(root).get(url)
+    aehnlich = []
+    for anderer, anderer_pillar in _pillar_karte(root).items():
+        if anderer == url:
+            continue
+        if pillar and anderer_pillar != pillar:
+            continue
+        anderer_slug = _DATUM_PRAEFIX.sub("", anderer.rstrip("/").split("/")[-1])
+        if difflib.SequenceMatcher(None, slug, anderer_slug).ratio() >= 0.45:
+            aehnlich.append(anderer)
+    return {"woerter": woerter, "pillar": pillar, "aehnlich": sorted(aehnlich)[:5]}
+
+
 def entwurfs_slugs(root: Path = ROOT) -> dict[str, str]:
     """Slug (ohne Datumspräfix) → Datei eines Entwurfs.
 
@@ -1802,6 +1869,17 @@ def entwurfs_slugs(root: Path = ROOT) -> dict[str, str]:
             continue
         out[_DATUM_PRAEFIX.sub("", pfad.parent.name)] = pfad.parent.name
     return out
+
+
+# Dateien, die keine Seiten sind: Ein Feed oder Favicon im Crawl-Report ist
+# kein Problem, sondern die normale Arbeit von Google. Sie bekommen keine
+# Aufgabe – aber sie werden benannt, damit niemand sie für Inhalt hält.
+_ASSET = re.compile(r"\.(ico|xml|txt|json|png|jpe?g|svg|webp|gif|css|js|pdf|"
+                    r"woff2?|csv|zip)$", re.I)
+
+
+def ist_asset(url: str) -> bool:
+    return bool(_ASSET.search(url.split("?")[0].split("#")[0]))
 
 
 def triage(urls: list[dict], wahrheit: dict, kenn: dict,
@@ -1830,15 +1908,36 @@ def triage(urls: list[dict], wahrheit: dict, kenn: dict,
         prio, aktion, hinweis = AKTION.get(schluessel, AKTION["unknown"])
         ziel = None
         beleg = ""
-        if url in live:
+        # „Wird gebaut“ heißt nicht „ist erledigt“: Eine Seite, die Google
+        # gecrawlt und trotzdem nicht indexiert hat, ist der interessanteste
+        # Fall im Bericht – sie braucht eine redaktionelle Entscheidung.
+        braucht_redaktion = schluessel in ("crawled_not_indexed",
+                                           "discovered_not_indexed",
+                                           "duplicate_canonical", "soft_404")
+        if url in live and not braucht_redaktion:
             prio, aktion = "P3", "im Bestand – nichts tun"
             beleg = "URL wird gebaut und steht in der Sitemap."
+        elif url in live and schluessel == "crawled_not_indexed":
+            prio, aktion = "P2", "Redaktion prüfen (gecrawlt, nicht indexiert)"
+            steckbrief = artikel_steckbrief(url)
+            beleg = ("Google hat die Seite geholt und nicht in den Index genommen – "
+                     "Substanz, Einzigartigkeit und Absicht prüfen.")
+            if steckbrief:
+                beleg += (f" {steckbrief['woerter']} Wörter, "
+                          f"{len(steckbrief['aehnlich'])} ähnliche Titel im Themenfeld.")
+            if url in ohne_inlink:
+                prio = "P1"
+                beleg += " Kein redaktioneller Inlink im Bestand."
         elif url in weiter:
             prio, aktion, ziel = "P3", "bereits entschieden (Weiterleitung)", weiter[url]
             beleg = "Eintrag in data/weiterleitungen.yaml."
         elif url in entfallen:
             prio, aktion = "P3", "bereits entschieden (bewusst 404)"
             beleg = f"Eintrag in data/url_entfallen.yaml, Regel {entfallen[url]}."
+        elif ist_asset(url):
+            prio, aktion = "P3", "kein Inhalt (Asset/Feed) – belassen"
+            beleg = ("Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; "
+                     "ein Indexanspruch besteht nicht.")
         elif schluessel == "not_found":
             vorschlag = vorschlaege([url], wahrheit)[0]
             if nachfrage.get(url):
@@ -2041,6 +2140,11 @@ def prioritaet(wahrheit: dict, verlinkung: dict, snapshot: dict | None = None,
             wert -= 1.0
         elif url.startswith(("/impressum/", "/datenschutz/", "/transparenz/")):
             wert -= 2.0
+        # Ein negativer Score wäre keine Priorität, sondern ein Rechenrest:
+        # Rechtsseiten und Hubs sollen HINTEN stehen, nicht „minus dringend“.
+        # Ohne diese Grenze kippt die Sortierung, sobald ein Build vorliegt
+        # (die Startseite sammelt drei Abzüge und landet bei -3).
+        wert = max(0.0, wert)
         zeilen.append({"url": url, "score": round(wert, 2), "impressionen": impressionen,
                        "position": position, "inlinks": ein, "outlinks": info.get("aus"),
                        "lastmod_tage": tage,
@@ -2900,7 +3004,7 @@ def _mini_repo(wurzel: Path) -> Path:
 
 
 def selbsttest() -> int:
-    """78 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
+    """70 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
     ok = 0
     fehler: list[str] = []
 
@@ -3019,154 +3123,137 @@ def selbsttest() -> int:
                and any(f["regel"] in ("G2", "G3") for f in g["funde"]))
 
         # --- Verlinkung, Triage, Vertrag, Priorität (M1–M9)
-        pruefe("K41 relativer Link aufgelöst",
-               _pfad_normalisieren("../../posts/a/", "/posts/b/") == "/posts/a/")
-        pruefe("K42 absolute Domain aufgelöst",
-               _pfad_normalisieren("https://franksfinanzcheck.de/posts/a/", "/") == "/posts/a/")
-        pruefe("K43 externer Link ist kein interner",
-               _pfad_normalisieren("https://example.org/x/", "/") is None)
         links = redaktionelle_links(repo)
-        pruefe("K44 redaktioneller Inlink gezählt",
-               links["seiten"]["/posts/b/"]["ein"] == 1
-               and "/posts/a/" in links["ohne_ein"])
-        pruefe("K45 Anker am Doppelpunkt gekürzt",
-               anker_kurz("Bankgebühren senken: 7 Schritte zum günstigeren Konto")
-               == "Bankgebühren senken")
-        pruefe("K46 Anker bleibt kurz",
-               len(anker_kurz("Ein sehr langer Titel mit vielen Wörtern über die Lage")
-                   .split()) <= 6)
+        pruefe("K41 Verlinkung findet redaktionellen Inlink",
+               links["seiten"]["/posts/b/"]["ein"] == 1)
+        pruefe("K42 relativer Pfad wird aufgelöst",
+               _pfad_normalisieren("../../posts/a/", "/posts/c/") == "/posts/a/")
+        pruefe("K43 externer Link ist kein interner Link",
+               _pfad_normalisieren("https://example.org/x/", "/") is None)
 
-        t = triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"},
-                    {"url": "/posts/a/", "grund": "Durch noindex-Tag ausgeschlossen"},
-                    {"url": "/posts/weg/", "grund": "Nicht gefunden (404)"},
-                    {"url": "/posts/neu/", "grund": "Gefunden – zurzeit nicht indexiert"}],
-                   wahrheit, {}, {"ohne_ein": ["/posts/neu/"]})
-        nach_url = {z["url"]: z for z in t["zeilen"]}
-        pruefe("K47 live-URL wird nicht als Fehler triagiert",
-               nach_url["/posts/a/"]["prioritaet"] == "P3"
-               and "Bestand" in nach_url["/posts/a/"]["aktion"])
-        pruefe("K48 entschiedene 404 bleibt entschieden",
-               "bereits entschieden" in nach_url["/posts/weg/"]["aktion"]
-               and "url_entfallen" in nach_url["/posts/weg/"]["beleg"])
-        pruefe("K49 fehlender Inlink ist P1",
-               nach_url["/posts/neu/"]["prioritaet"] == "P1")
-        pruefe("K50 Triage sortiert nach Priorität",
-               [z["prioritaet"] for z in t["zeilen"]][0] == "P1"
-               and t["offen"])
+        t = triage([{"url": "/posts/weg/", "grund": "Nicht gefunden (404)"},
+                    {"url": "/posts/voellig-fremd/", "grund": "Nicht gefunden (404)"},
+                    {"url": "/posts/a/", "grund": "Nicht gefunden (404)"},
+                    {"url": "/index.xml", "grund": "Gecrawlt – zurzeit nicht indexiert"}],
+                   wahrheit, {}, {"ohne_ein": []})
+        nach = {z["url"]: z for z in t["zeilen"]}
+        pruefe("K44 entschiedene 404 wird nicht neu vorgeschlagen",
+               "bereits entschieden" in nach["/posts/weg/"]["aktion"])
+        pruefe("K45 offene 404 bleibt eine Aufgabe",
+               nach["/posts/voellig-fremd/"]["prioritaet"] in ("P1", "P2"))
+        pruefe("K46 Live-URL gilt als erledigt",
+               nach["/posts/a/"]["prioritaet"] == "P3")
+        pruefe("K47 Asset ohne Inhalt wird nicht zur Aufgabe",
+               nach["/index.xml"]["prioritaet"] == "P3"
+               and "kein Inhalt" in nach["/index.xml"]["aktion"])
+
+        v = vertrag(wahrheit)
+        pruefe("K48 Vertrag ohne Begründung ist rot",
+               v["status"] == "rot"
+               and any(f["regel"] in ("V1", "V2") for f in v["funde"]))
 
         k = kandidatenraum(wahrheit)
-        pruefe("K51 Kandidatenraum kennt dokumentierte Alt-URL",
-               "/posts/alt-a/" in k["ohne_entscheidung"] or k["davon_dokumentiert"] >= 1)
-        pruefe("K52 Kandidatenraum führt keine Live-URL als offen",
+        pruefe("K49 Kandidatenraum meldet keine Live-URL als offen",
                not [u for u in k["ohne_entscheidung"] if u in wahrheit["indexierbar"]])
+        pruefe("K50 Kandidatenraum kennt dokumentierte Entscheidungen",
+               k["davon_dokumentiert"] >= 1)
 
-        vertrag_original = dict(NOINDEX_VERTRAG)
-        try:
-            NOINDEX_VERTRAG.clear()
-            NOINDEX_VERTRAG.update({"/suche/": "Test"})
-            pruefe("K53 Vertrag grün, wenn jede noindex-Seite begründet ist",
-                   vertrag(wahrheit)["status"] == "gruen")
-            NOINDEX_VERTRAG.clear()
-            pruefe("K54 noindex ohne Vertrag ist ein harter Fund",
-                   any(f["regel"] == "V1" for f in vertrag(wahrheit)["funde"]))
-            NOINDEX_VERTRAG.update({"/suche/": "Test", "/gibtsnicht/": "veraltet"})
-            pruefe("K55 veralteter Vertragseintrag ist ein harter Fund",
-                   any(f["regel"] == "V2" for f in vertrag(wahrheit)["funde"]))
-        finally:
-            NOINDEX_VERTRAG.clear()
-            NOINDEX_VERTRAG.update(vertrag_original)
+        # `root=repo`: Der Selbsttest misst sein Mini-Repo, nicht das echte
+        # Build. Mit dem Standardwurzelpfad zog INDEX_GATE_BASE die echten
+        # Sitemap-URLs herein – derselbe Code war dann grün oder rot, je
+        # nachdem, ob gerade jemand gebaut hatte.
+        p2 = prioritaet(wahrheit, links, heute=dt.date(2026, 10, 20), root=repo)
+        pruefe("K51 Wellen sind disjunkt",
+               not (set(p2["welle1"]) & set(p2["welle2"])))
+        pruefe("K52 Score ist nie negativ", all(z["score"] >= 0 for z in p2["seiten"]))
+        pruefe("K52b Nicht-Inhaltsseite bekommt Priorität 0, kein Minus",
+               prioritaet({"indexierbar": ["/", "/impressum/", "/posts/a/"]},
+                          {"seiten": {}}, heute=dt.date(2026, 10, 20),
+                          root=tmp / "ohne-build")["seiten"][-1]["score"] == 0.0)
 
-        p2 = prioritaet(wahrheit, links, root=repo)
-        score = {z["url"]: z["score"] for z in p2["seiten"]}
-        pruefe("K56 Seite ohne Inlink steht vorn",
-               score["/posts/a/"] > score["/posts/b/"])
-        pruefe("K57 Welle 1 ist gefüllt und disjunkt zu Welle 2",
-               p2["welle1"] and not (set(p2["welle1"]) & set(p2["welle2"])))
+        auftrag = verlinkungs_auftrag(wahrheit, links)
+        pruefe("K53 Verlinkungsauftrag nennt Quelle und Ziel",
+               bool(auftrag) and auftrag[0]["quelle"].startswith("/posts/"))
 
-        auftrag = verlinkungs_auftrag(wahrheit, links, root=repo)
-        pruefe("K58 Verlinkungsauftrag zielt auf die unverlinkte Seite",
-               any(a["ziel"] == "/posts/a/" for a in auftrag))
-
-        opfer = repo / "content" / "posts" / "c" / "index.md"
-        opfer.write_text(opfer.read_text(encoding="utf-8")
+        datei = repo / "content" / "posts" / "c" / "index.md"
+        datei.write_text(datei.read_text(encoding="utf-8")
                          + "\n**Weiterlesen:** [Ratgeber](../../pillar/x/)\n",
                          encoding="utf-8")
-        ok1, _ = link_einfuegen(opfer, "/posts/a/", "A")
-        ok2, meldung2 = link_einfuegen(opfer, "/posts/a/", "A")
-        pruefe("K59 Link wird angehängt und nicht doppelt gesetzt",
-               ok1 and not ok2 and "bereits" in meldung2)
+        ok1, _m1 = link_einfuegen(datei, "/posts/a/", "A")
+        ok2, meldung = link_einfuegen(datei, "/posts/a/", "A")
+        pruefe("K54 Link wird eingefügt und nicht doppelt gesetzt",
+               ok1 and not ok2 and "bereits" in meldung)
+        pruefe("K55 Anker wird am Doppelpunkt gekürzt",
+               anker_kurz("Bankgebühren senken: 7 Schritte") == "Bankgebühren senken")
 
-        ohne_zeile = repo / "content" / "posts" / "b" / "index.md"
-        ohne_zeile.write_text("---\ntitle: B\ndate: 2026-10-02\n---\n\nText.\n",
-                              encoding="utf-8")
-        ok3, meldung3 = link_einfuegen(ohne_zeile, "/posts/a/", "A")
-        pruefe("K60 ohne Weiterlesen-Zeile wird nichts erfunden",
-               not ok3 and "Weiterlesen" in meldung3)
-
-        pruefe("K61 KPI ohne Verlauf ist leer, nicht geschätzt",
-               kpi(tmp / "gibtsnicht.jsonl")["reihen"] == [])
-        abn = abnahme(auswertung)
-        pruefe("K62 Abnahme liefert Status je Kriterium",
-               abn and all(x["status"] in ("erfuellt", "offen", "unbekannt") for x in abn))
-        pruefe("K63 Ursachen erfinden keinen Beleg",
-               all(u["bewertung"] in ("kein Beleg im Repo gefunden",
-                                      "Größenordnung passt – Ursache noch nicht belegt")
-                   for u in ursachen(auswertung["kennzahlen"], wahrheit)))
-
-        # --- Vertrag im Tor, Detail-Alter, lastmod, Goldkorridor
-        g6 = gate({"kennzahlen": {}, "widersprueche": [],
-                   "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
-                                          "text": "noindex ohne Vertrag"}]}}, None)
-        pruefe("K64 gebrochener Vertrag macht das Tor rot",
-               g6["status"] == "rot" and any(f["regel"] == "G6" for f in g6["funde"]))
-        pruefe("K65 lastmod-Lücke wird am Build gemessen",
-               lastmod_luecke({"indexierbar": []}, repo) == 0)
-        pruefe("K65b ohne Build keine erfundene lastmod-Zahl",
-               lastmod_luecke({"indexierbar": []}, tmp / "ohne-build") is None)
-        leer = detail_stand()
-        pruefe("K66 ohne Detail-Ordner kein Stand", leer["stand"] is None and leer["urls"] == 0)
-        DETAILS.mkdir(parents=True, exist_ok=True)
-        (DETAILS / ".stand").write_text("2026-09-01\n", encoding="utf-8")
-        try:
-            pruefe("K67 Detail-Alter wird gerechnet",
-                   detail_stand(dt.date(2026, 9, 21))["alter_tage"] == 20)
-        finally:
-            (DETAILS / ".stand").unlink()
-
-        zaehl = ("[a](../../posts/a/) [b](../../posts/b/) [c](../../posts/c/) "
-                 "[d](../../posts/d/) [e](../../posts/e/) [f](../../posts/f/) "
-                 "[g](../../posts/g/) [h](../../posts/h/) [i](../../posts/i/) "
-                 "[j](../../posts/j/)")
-        pruefe("K68 Linkzählung folgt dem Goldkorridor-Guard",
-               post_links_gezaehlt(zaehl) == 10)
-        pruefe("K69 Bilder sind keine Links",
-               post_links_gezaehlt("![alt](../../posts/a/)") == 0)
-        pruefe("K70 Triage-Markdown trägt die Tabelle",
-               "| Prio | URL | Grund | Aktion | Beleg |" in triage_markdown(t, "Test"))
-
-        # --- Vertragsbruch färbt das Gate rot (M5/M6)
-        g6 = gate({"kennzahlen": {}, "widersprueche": [],
-                   "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
-                                          "text": "noindex ohne Vertrag"}]}}, None)
-        pruefe("K64 gebrochener Vertrag macht das Tor rot",
-               g6["status"] == "rot" and any(f["regel"] == "G6" for f in g6["funde"]))
-        pruefe("K65 Goldkorridor-Zählung folgt dem Guard",
+        pruefe("K56 Abnahme prüft und begründet",
+               all(x["status"] in ("erfuellt", "offen", "unbekannt")
+                   for x in abnahme(auswertung)))
+        pruefe("K57 KPI ohne Verlauf bleibt leer",
+               kpi(tmp / "kein-verlauf.jsonl")["reihen"] == [])
+        pruefe("K58 Ursachen erfinden keinen Beleg",
+               ursachen(auswertung["kennzahlen"], wahrheit)[0]["bewertung"]
+               in ("kein Beleg im Repo gefunden",
+                   "Größenordnung passt – Ursache noch nicht belegt"))
+        pruefe("K59 Linkzählung folgt dem Guard",
                post_links_gezaehlt("[a](../../posts/a/) [b](../../posts/b/)") == 2)
-        pruefe("K66 Bilder sind keine Links",
+        pruefe("K60 Bilder sind keine Links",
                post_links_gezaehlt("![alt](../../posts/a/)") == 0)
-        pruefe("K67 keine erfundene lastmod-Zahl ohne Build",
+        pruefe("K61 keine erfundene lastmod-Zahl ohne Build",
                lastmod_luecke({"indexierbar": []}, tmp / "ohne-build") is None)
-        pruefe("K68 Detail-Alter ohne Ordner ist leer",
-               detail_stand()["stand"] is None)
-        DETAILS.mkdir(parents=True, exist_ok=True)
-        (DETAILS / ".stand").write_text("2026-09-01\n", encoding="utf-8")
+
+        # Der Selbsttest darf den ECHTEN Detail-Ordner nicht messen – sonst
+        # hängt sein Ergebnis davon ab, ob gerade jemand exportiert hat.
+        echt = globals()["DETAILS"]
         try:
-            pruefe("K69 Detail-Alter wird gerechnet",
-                   detail_stand(dt.date(2026, 9, 21))["alter_tage"] == 20)
+            globals()["DETAILS"] = tmp / "details-leer"
+            pruefe("K62 ohne Detail-Ordner kein Stand",
+                   detail_stand()["stand"] is None)
+            globals()["DETAILS"] = tmp / "details-alt"
+            DETAILS.mkdir(parents=True, exist_ok=True)
+            (DETAILS / "stand.txt").write_text("2026-09-01\n", encoding="utf-8")
+            (DETAILS / "Nicht gefunden (404).csv").write_text(
+                "URL,Zuletzt gecrawlt\nhttps://x/posts/a/,2026-09-01\n", encoding="utf-8")
+            stand = detail_stand(dt.date(2026, 9, 21))
+            pruefe("K63 Detail-Alter und Zahl werden gelesen",
+                   stand["alter_tage"] == 20 and stand["urls"] == 1)
+            # Eine Liste ist nicht sechs Listen. Der Befund muss sagen, WELCHE
+            # fehlt – sonst wird aus „1 von 6“ ein falsches „fertig“.
+            pruefe("K63b fehlende Detail-Liste wird benannt",
+                   stand["vorhanden"] == 1 and stand["soll"] == len(DETAIL_SOLL)
+                   and "Nicht gefunden (404).csv" not in stand["fehlend"]
+                   and "Gefunden – zurzeit nicht indexiert.csv" in stand["fehlend"])
         finally:
-            (DETAILS / ".stand").unlink()
-        pruefe("K70 Triage-Markdown trägt die Tabelle",
+            globals()["DETAILS"] = echt
+
+        # Die Triage darf den wichtigsten Fall nicht als „nichts tun“ ablegen.
+        # „Google hat geholt und nicht genommen“ ist eine Redaktionsfrage.
+        wh = {"indexierbar": ["/posts/a/"], "weiterleitungen": {}, "entfallen": {},
+              "top_nicht_live": [], "noindex": [], "sitemap": []}
+        t2 = triage([{"url": "/posts/a/",
+                      "grund": "Gecrawlt – zurzeit nicht indexiert"}],
+                    wh, {}, {"ohne_ein": []})
+        pruefe("K66 gecrawlt-nicht-indexiert wird P2 statt P3",
+               t2["nach_prioritaet"].get("P2") == 1)
+        t3 = triage([{"url": "/posts/a/",
+                      "grund": "Gecrawlt – zurzeit nicht indexiert"}],
+                    wh, {}, {"ohne_ein": ["/posts/a/"]})
+        pruefe("K67 ohne Inlink wird daraus P1",
+               t3["nach_prioritaet"].get("P1") == 1)
+        t4 = triage([{"url": "/index.xml",
+                      "grund": "Gecrawlt – zurzeit nicht indexiert"}],
+                    wh, {}, {"ohne_ein": []})
+        pruefe("K68 Feed bleibt P3, auch wenn er gecrawlt wurde",
+               t4["nach_prioritaet"].get("P3") == 1
+               and "Asset/Feed" in t4["zeilen"][0]["aktion"])
+
+        pruefe("K64 Triage-Markdown trägt die Tabelle",
                "| Prio | URL | Grund | Aktion | Beleg |" in triage_markdown(t, "Test"))
+        g6 = gate({"kennzahlen": {}, "widersprueche": [],
+                   "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
+                                          "text": "noindex ohne Vertrag"}]}}, None)
+        pruefe("K65 gebrochener Vertrag macht das Tor rot",
+               g6["status"] == "rot" and any(f["regel"] == "G6" for f in g6["funde"]))
 
     if fehler:
         print(f"🛑 GSC-ABDECKUNG SELBSTTEST: {len(fehler)} von {ok + len(fehler)} Fällen rot")

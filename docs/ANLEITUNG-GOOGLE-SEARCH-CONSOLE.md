@@ -342,16 +342,38 @@ sagt, wer sie auslöst und wo das Ergebnis liegt.
 | M5 noindex-Vertrag | Tor (hart) | `--vertrag`, Regel V1/V2 | `vertrag.json`, Gate ROT bei Leck |
 | M6 robots-Sperre | Tor (hart) | `--vertrag`, Regel V3/V4 | dito |
 | M7 Sprung erklären | Mensch | `npm run gsc:ursachen` | `ursachen.json`, Beleg aus `git log` |
-| M8 Detail-Listen | Mensch (Export) + Tageslauf | `.stand` in `details/`, Regel W9 | Warnung im Lauf, wenn sie fehlen |
+| M8 Detail-Listen | Mensch (Export) + Tageslauf | `stand.txt` in `details/`, Regel W9 | Warnung im Lauf, „1 von 6 Listen“ im Plan |
 | M9 Wochen-Kennzahl | Tageslauf | `npm run gsc:kpi`, `npm run gsc:abnahme` | KPI-Tabelle, Abnahmestatus |
 
 ### 10.1 Detail-Listen ablegen (der einzige menschliche Schritt)
 
 In der Search Console: **Indexierung → Seiten → Grund anklicken → Exportieren**,
 je Grund eine CSV. Die Dateien nach `data/gsc/abdeckung/details/` legen und das
-Exportdatum in `data/gsc/abdeckung/details/.stand` schreiben (`2026-10-26`).
+Exportdatum in `data/gsc/abdeckung/details/stand.txt` schreiben (`2026-10-26`).
 Danach triagiert der Tageslauf selbst; ohne diese Dateien sagt Regel **W9** in
-jedem Befund, dass die Summen keine Arbeitsliste sind.
+jedem Befund, dass die Summen keine Arbeitsliste sind. Liegt ein Teil der
+Listen, nennt der Maßnahmenplan (M8) die fehlenden beim Namen – „1 von 6“ heißt
+nicht „fertig“.
+
+**Der Stolperstein ist der Dateiname.** Die Search Console nennt jeden Export
+gleich (`Metadaten.csv`, `Tabelle.csv`, `Diagramm.csv`). Zehn Exporte am Stück
+liegen danach als `Tabelle (1).csv` … `Tabelle (9).csv` im Downloadordner – beim
+Ablegen überschreiben sie sich, und im Bestand kommt genau eine Liste an (so am
+26.10.2026 passiert). Regel: **eine Datei je Grund, Dateiname = Grund**, so wie
+es die Tabelle in `details/README.md` vorgibt.
+
+### 10.1a Was die Triage aus welcher Meldung macht
+
+| Meldung in der Liste | Urteil | Warum |
+|---|---|---|
+| Endung `.xml`, `.ico`, `.txt`, `.jpg` … | P3 – belassen | Feed, Favicon, Bild: Google crawlt, will aber nicht indexieren |
+| Live + „Gecrawlt – zurzeit nicht indexiert", **ohne** redaktionellen Inlink | P1 – verlinken | ohne Link kein Crawl-Anlass; erst verlinken, dann neu anfragen |
+| Live + „Gecrawlt – zurzeit nicht indexiert", mit Inlink | P2 – Redaktion prüfen | Inhalt ist da; es fehlt Nachfrage, nicht Technik (Kannibalisierung, Titel, Aktualität) |
+| War 200, jetzt 404 | P1 – reparieren | Rückschritt, siehe Gate G1 |
+| Nie existiert | P3 – Entscheidung dokumentieren | keine Reparatur möglich, nur „bauen" oder „vergessen" |
+
+Diese Zuordnung steht als Selbsttest im Code (K47, K66–K68) – sie kann nicht
+still verrutschen.
 
 ### 10.2 Verlinkung schreiben – warum nur die „Weiterlesen“-Zeile
 

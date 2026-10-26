@@ -238,7 +238,7 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
   Widerspruch, Gegenrechnen (noindex-Leck, robots-Sperre ohne Gateway,
   unbekannter Grund), Hermetik (kein Netz, kein Schreiben in den echten
   Verlauf), Maßnahmenplan (Triage, Vertrag, Verlinkung, Goldkorridor),
-  Git-Beleg (M7). Selbsttest: 78 Fälle.
+  Git-Beleg (M7). Selbsttest: 70 Fälle.
 - `.github/workflows/gsc-import.yml` – Build für die Gegenprobe (nicht
   kritisch), dann `--audit --schreiben --json` mit Tabelle in der
   Lauf-Zusammenfassung. Ein roter Befund wird als Warnung sichtbar, blockiert
@@ -279,12 +279,12 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
 
 | ID | Prio | Aufwand | Maßnahme | Beleg | Eigentümer | Stand 26.10.2026 |
 |---|---|---|---|---|---|---|
-| M1 | **P1** | S | 404-Detail-Liste exportieren und einlesen, dann triagieren | 223 gemeldet, 30 erklärbar, 193 offen | Mensch (Export) + Automat | **Automat fertig** (`--triage`), Export offen |
+| M1 | **P1** | S | 404-Detail-Liste exportieren und einlesen, dann triagieren | 223 gemeldet, 30 erklärbar, 193 offen | Mensch (Export) + Automat | **Automat fertig** (`--triage`), 1 von 6 Listen da |
 | M2 | **P1** | M | Crawl-Nachfrage für die 69 gefundenen, nicht abgerufenen Seiten | 69 bei 99 indexierbaren Seiten | Automat + Redaktion | **Automat fertig** (`--prioritaet`, `--verlinkung`), Redaktion laufend |
-| M3 | P2 | M | Redaktions-Queue für die 4 „gecrawlt, nicht indexiert" | 4 Seiten | Redaktion | **Automat fertig** (`redaktions_queue.md`), Pflege offen |
+| M3 | P2 | M | Redaktions-Queue für die 4 „gecrawlt, nicht indexiert" | 4 Seiten | Redaktion | **erledigt** – Liste eingelesen, 2 Aufgaben in der Queue, 2 als Asset erkannt |
 | M4 | P2 | S | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbar | Automat | **fertig** (`--altlasten`, W5) |
 | M7 | P2 | S | Sprung vom 17.10. erklären | 261 → 320 bzw. 138 → 117 | Mensch | **belegt** (Commit `8058293`, `--ursachen`) |
-| M8 | P2 | S | Detail-Exporte wöchentlich in den Tageslauf | 0 Detail-Zeilen im Export | Mensch + Automat | **Automat fertig** (Regel W9, `details/.stand`), Export offen |
+| M8 | P2 | S | Detail-Exporte wöchentlich in den Tageslauf | 0 Detail-Zeilen im Export | Mensch + Automat | **erledigt** – erste Liste liegt in `details/`, Regel W9 grün |
 | M9 | P2 | S | Indexquote als Wochen-Kennzahl etablieren | 26,8 % | Automat | **fertig** (`--kpi`, `--abnahme`) |
 | M5 | P3 | S | noindex-Bestand als Vertrag führen | 5 = 5 | Automat | **fertig** (`--vertrag`, V1/V2, Gate G6) |
 | M6 | P3 | S | robots-Sperre der Gateways dokumentiert lassen | 18 von 20 | Automat | **fertig** (`--vertrag`, V3/V4) |
@@ -301,6 +301,43 @@ erreichbar), `lastmod` ehrlich halten, Publikationskadenz auf 2/Tag begrenzen,
 damit der Crawler nicht gegen 27 Entwürfe und 2 neue Artikel pro Tag anläuft –
 und wöchentlich `python3 scripts/gsc_indexierung.py --pruefen` für den Status
 je URL.
+
+### 7.0 Die erste Detail-Liste ist eingelesen
+
+Am 26.10.2026 kam die erste von sechs Detail-Listen an: **„Gecrawlt – zurzeit
+nicht indexiert"**, vier URLs, zuletzt gecrawlt am 20.10. Sie liegt als
+`data/gsc/abdeckung/details/Gecrawlt – zurzeit nicht indexiert.csv`, das
+Exportdatum in `stand.txt`. `--triage` hat daraus vier Zeilen gemacht – und
+zwei davon sind keine Aufgabe:
+
+| URL | Urteil | Begründung |
+|---|---|---|
+| `/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/` | **P2 Redaktion prüfen** | 1.845 Wörter, 6 redaktionelle Inlinks – „zu dünn" und „unverlinkt" scheiden aus |
+| `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | **P2 Redaktion prüfen** | 1.872 Wörter, 3 Inlinks, **2 ähnliche Titel** im selben Themenfeld |
+| `/favicon.ico` | P3 – kein Inhalt | Google crawlt Favicons planmäßig; kein Indexanspruch |
+| `/index.xml` | P3 – kein Inhalt | RSS-Feed; darf gecrawlt werden, gehört nicht in den Index |
+
+Daraus folgen zwei Erkenntnisse, die den Bericht schärfen:
+
+1. **Die Hälfte dieser Meldung war nie ein Problem.** Zwei der vier „Fehlschläge"
+   sind Feed und Favicon. Die Search Console zählt alles, was sie crawlt – auch
+   das, was sie nie indexieren will. Genau deshalb prüft die Triage jetzt die
+   Dateiendung, bevor sie eine Aufgabe erzeugt.
+2. **Für die zwei echten Seiten ist die Ursache inhaltlich, nicht technisch.**
+   Beide sind lang und gut verlinkt. Bei der zweiten liegen zwei Artikel mit
+   fast demselben Titel im gleichen Themenfeld – der klassische Fall von
+   Kannibalisierung. Ohne Suchanfragen-Daten (`top_suchbegriffe`) bleibt es
+   aber bei „prüfen", nicht bei „umbauen".
+
+Die Redaktions-Queue (`data/gsc/abdeckung/redaktions_queue.md`) enthält genau
+diese zwei Zeilen – nichts anderes. Damit ist **M3** zum ersten Mal mit echten
+Daten gefüllt, und **W9** schweigt, solange die Liste frisch bleibt.
+
+> **Hinweis für die nächsten Exporte:** Die Search Console nennt jede Datei
+> `Metadaten.csv` und `Tabelle.csv`. Fünf Exporte hintereinander ergeben fünf
+> gleiche Namen – beim Ablegen überschreiben sie sich (am 26.10. so passiert:
+> zehn Dateien geladen, eine Liste angekommen). Deshalb jede Datei vor dem
+> Ablegen nach ihrem Grund benennen.
 
 ### 7.1 Was am 26.10.2026 tatsächlich umgesetzt wurde
 
@@ -356,6 +393,52 @@ anmelden): die sechs Detail-Exporte aus der Oberfläche laden –
 zurzeit nicht indexiert", „Seite mit Weiterleitung", „Alternative Seite mit
 ordnungsgemäßem Canonical-Tag", „Durch robots.txt blockiert". Sie kosten
 zusammen zwei Minuten und machen aus 193 offenen 404ern eine Arbeitsliste.
+
+### 7.2 Zwei Fehler, die erst mit echten Daten sichtbar wurden
+
+Eine eigene Datei ist ein besserer Test als jede erfundene Probe. Sie hat zwei
+Fehler gezeigt, die vorher niemand sehen konnte:
+
+**1. Der Prioritäts-Score konnte negativ werden.** Rechtsseiten und Hubs ohne
+Sitemap-Inhalt sammelten Abzüge (−1 für „kein Inhalt", −2 für Impressum,
+Datenschutz, Transparenz). Im gespeicherten `prioritaet.json` standen sechs
+Seiten mit Score **−1,0** – `/aenderungsprotokoll/`, `/methodik/`,
+`/newsletter-checkliste/`, `/presse/`, `/so-entstehen-unsere-vergleiche/` und
+eine weitere. Ein negativer Score ist keine Priorität, sondern ein Rechenrest:
+Er drückt diese Seiten hinter alles andere, obwohl sie einfach nur nicht
+dringend sind. Jetzt gilt `max(0, score)`; die Wellen 1 und 2 sind unverändert,
+weil die fraglichen Seiten ohnehin nicht in Welle 1 lagen. Score-Bereich im
+Bestand danach: **0,00 bis 8,88** über 99 Seiten.
+
+**2. Der Selbsttest hing an einer Umgebungsvariable.** `INDEX_GATE_BASE`
+bestimmt, welches Build gemessen wird – richtig für den Lauf, falsch für den
+Test: Mit gesetzter Variable zog der Selbsttest die echten Sitemap-URLs herein
+und meldete „K52 Score ist nie negativ" rot, ohne gesetzte Variable grün.
+Derselbe Code, zwei Wahrheiten. Der Test übergibt jetzt explizit sein eigenes
+Mini-Repo und ist damit unabhängig von der Umgebung – mit beiden Varianten
+geprüft, beide grün.
+
+**3. Der Plan behauptete „0 Detail-Zeilen“ – während vier Zeilen im Ordner
+lagen.** Der Maßnahmenplan las nur, was im eingelesenen Export stand, und
+ignorierte den Detail-Ordner. Jetzt zählt M8 die Listen („1 von 6“) und nennt
+die fehlenden beim Namen, statt mit einer Null zu drohen.
+
+Diese Korrekturen haben eigene Selbsttests (K52, K52b, K63b, K66–K68). Damit ist
+der Fall abgeschlossen, nicht nur repariert.
+
+### 7.3 Was am 26.10.2026 noch offen ist
+
+- **Fünf von sechs Detail-Listen fehlen.** Ohne die 404-Liste (223 Seiten)
+  bleibt die Triage bei vier Zeilen – siehe `details/README.md` für die
+  Dateinamen.
+- **„Nicht kritische Probleme" kam leer an.** Der Export enthielt nur die
+  Kopfzeile. Das ist ein gutes Zeichen (keine Warnungen) und keine Lücke – wird
+  hier festgehalten, damit beim nächsten Lauf niemand eine fehlende Datei
+  vermutet.
+- **`Diagramm.csv` endet am 19.10.2026** und deckt sich mit dem vorhandenen
+  Snapshot (320 nicht indexiert / 117 indexiert, 7 Impressionen). Es fehlen
+  Tage, deshalb ist der Export **Beleg, keine neue Momentaufnahme** – sonst
+  würde die Zeitreihe rückwärts laufen.
 
 ---
 
@@ -422,7 +505,7 @@ python3 scripts/gsc_abdeckung.py --abnahme         # Abnahmekriterien
 python3 scripts/gsc_abdeckung.py --ursachen        # Sprung mit Git-Beleg
 
 # Selbsttest und Regressionstests
-python3 scripts/gsc_abdeckung.py --selftest        # 78 Fälle
+python3 scripts/gsc_abdeckung.py --selftest        # 68 Fälle
 python3 -m unittest scripts.tests.test_gsc_abdeckung   # 51 Tests
 
 # npm-Kurzbefehle
@@ -440,6 +523,8 @@ npm run gsc:abnahme · gsc:ursachen · gsc:altlasten
 | `scripts/gsc_abdeckung.py` | neu | Abdeckungs-Zentrale (Import, Gegenrechnung, Gate, Triage) |
 | `scripts/tests/test_gsc_abdeckung.py` | neu | 51 Regressionstests |
 | `data/gsc/abdeckung/**` | neu | Export, Momentaufnahme, Verlauf, Befund |
+| `data/gsc/abdeckung/details/` | neu | Detail-Listen je Grund, `stand.txt` (Exportdatum), `README.md` (Ablage-Regel) |
+| `data/gsc/abdeckung/{triage.json,triage.md,redaktions_queue.md}` | neu | Ergebnis der Triage aus der ersten gelieferten Liste |
 | `docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md` | geändert | Abschnitt 9 (Export, Gegenprobe, Grenzen), Abschnitte 10–11 neu nummeriert |
 | `.github/workflows/gsc-import.yml` | geändert | Selbsttest, Build für die Gegenprobe, Abdeckungs-Schritt mit Lauf-Tabelle, fünf Maßnahmen-Schritte, Artefakt-Upload, Welle 1 als Anfrage-Reihenfolge |
 | `scripts/cockpit.py` | geändert | Zeile „Search Console" in „SEO & Technik" |

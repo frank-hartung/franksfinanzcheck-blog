@@ -35,7 +35,6 @@
 ### Widersprüche
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 99 – 18 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
-- ℹ️ **W9** Keine Detail-Liste im Bestand (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die gemeldeten URLs nicht triagieren – die Summen bleiben Summen.
 - ℹ️ **W11** 4 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken.
 - ℹ️ **W10** 9 Sitemap-URL(s) ohne `lastmod`. Google entscheidet dann selbst, wann neu gecrawlt wird – genau das Gegenteil von Crawl-Nachfrage (M2).
 
@@ -101,8 +100,8 @@
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
 | M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (9 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (8 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |
-| M8 | P2 | Detail-Exporte in den Tageslauf aufnehmen | Export enthält 0 Detail-Zeilen |
 | M9 | P2 | Indexquote als Zielgröße etablieren | 117 von 437 bekannten URLs |
 | M5 | P3 | noindex-Bestand als Vertrag führen | 5 × robotsNoIndex in content/ · GSC 5 |
 | M6 | P3 | robots.txt-Sperre der Gateways dokumentiert lassen | 18 blockiert bei 20 Gateways · 13 Roboter-Gruppen |
+| M8 | P3 | Fehlende Detail-Listen nachziehen | 4 URL(s) triagierbar · fehlt: Nicht gefunden (404).csv, Gefunden – zurzeit nicht indexiert.csv, Seite mit Weiterleitung.csv … |
 

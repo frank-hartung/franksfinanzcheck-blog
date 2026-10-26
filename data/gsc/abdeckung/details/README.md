@@ -14,11 +14,18 @@ hin – eine Datei je Grund, mit dem Namen, den die Oberfläche vergibt:
 | `Durch „noindex“-Tag ausgeschlossen.csv` | Vertragsseiten (M5) |
 | `Indexierte Seiten.csv` | die 117 – nötig, um die 18 Altlasten zu benennen (M4) |
 
-Zusätzlich eine Datei `.stand` mit dem Exportdatum in einer Zeile:
+Zusätzlich eine Datei `stand.txt` mit dem Exportdatum in einer Zeile:
 
 ```
 2026-10-26
 ```
+
+**Wichtig — jede Export-Datei einzeln umbenennen.** Die Search Console nennt
+jeden Export gleich (`Metadaten.csv` und `Tabelle.csv`). Wer fünf Gründe
+exportiert, hat danach fünfmal denselben Dateinamen und beim Ablegen
+überschreiben sich die Listen (genau das ist am 26.10.2026 passiert: fünf
+Exporte geladen, eine Liste angekommen). Deshalb: **je Grund eine Datei mit dem
+Grund als Namen** – so wie in der Tabelle oben.
 
 Beides ist freiwillig – aber ohne die Dateien bleibt jede Triage eine Summe.
 Der Befund sagt das in jeder Ausgabe (Regel **W9**) und der Tageslauf schickt

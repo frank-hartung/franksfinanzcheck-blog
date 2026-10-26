@@ -391,9 +391,18 @@
   "delta_3_nicht_indexiert": 59,
   "delta_7_indexiert": -22,
   "delta_7_nicht_indexiert": 67,
-  "detail_alter_tage": null,
-  "detail_stand": null,
-  "detail_urls": 0,
+  "detail_alter_tage": 0,
+  "detail_fehlend": [
+   "Nicht gefunden (404).csv",
+   "Gefunden – zurzeit nicht indexiert.csv",
+   "Seite mit Weiterleitung.csv",
+   "Alternative Seite mit ordnungsgemäßem Canonical-Tag.csv",
+   "Durch robots.txt blockiert.csv"
+  ],
+  "detail_soll": 6,
+  "detail_stand": "2026-10-26",
+  "detail_urls": 4,
+  "detail_vorhanden": 1,
   "export_alter_tage": 7,
   "gruende": {
    "crawled_not_indexed": 4,
@@ -470,9 +479,18 @@
    "delta_3_nicht_indexiert": 59,
    "delta_7_indexiert": -22,
    "delta_7_nicht_indexiert": 67,
-   "detail_alter_tage": null,
-   "detail_stand": null,
-   "detail_urls": 0,
+   "detail_alter_tage": 0,
+   "detail_fehlend": [
+    "Nicht gefunden (404).csv",
+    "Gefunden – zurzeit nicht indexiert.csv",
+    "Seite mit Weiterleitung.csv",
+    "Alternative Seite mit ordnungsgemäßem Canonical-Tag.csv",
+    "Durch robots.txt blockiert.csv"
+   ],
+   "detail_soll": 6,
+   "detail_stand": "2026-10-26",
+   "detail_urls": 4,
+   "detail_vorhanden": 1,
    "export_alter_tage": 7,
    "gruende": {
     "crawled_not_indexed": 4,
@@ -581,16 +599,6 @@
   },
   {
    "aufwand": "S",
-   "beleg": "Export enthält 0 Detail-Zeilen",
-   "dringlichkeit": "P2",
-   "id": "M8",
-   "owner": "Mensch + Automat",
-   "schritt": "Wöchentlich (Montag) die vier Exporte in die Search Console laden und `--import` ausführen. Der Vergleichslauf (`--gate`) erkennt Rückschritte automatisch.",
-   "titel": "Detail-Exporte in den Tageslauf aufnehmen",
-   "wirkung": "Der Abdeckungsbericht hat keine API. Wer ihn nur als Bildschirmfoto liest, kann nicht gegen den Bestand rechnen – und merkt einen Rückschritt erst Wochen später."
-  },
-  {
-   "aufwand": "S",
    "beleg": "117 von 437 bekannten URLs",
    "dringlichkeit": "P2",
    "id": "M9",
@@ -618,6 +626,16 @@
    "schritt": "Keine Änderung. Wächter: `schema_seo_gate.py` (S8) und `--gate` (W3) prüfen, dass die Sperre bleibt und keine Inhaltsseite hineingerät.",
    "titel": "robots.txt-Sperre der Gateways dokumentiert lassen",
    "wirkung": "Die Meldung „durch robots.txt blockiert“ verschwindet nie, solange `/go/` gesperrt ist. Das ist die richtige Abwägung: 20 Gateways sind keine Inhalte, und Google soll sie nicht crawlen."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "4 URL(s) triagierbar · fehlt: Nicht gefunden (404).csv, Gefunden – zurzeit nicht indexiert.csv, Seite mit Weiterleitung.csv …",
+   "dringlichkeit": "P3",
+   "id": "M8",
+   "owner": "Mensch (Export) + Automat",
+   "schritt": "In der Search Console je Grund exportieren und unter dem Grund-Namen ablegen (`data/gsc/abdeckung/details/`); Namen siehe `details/README.md`.",
+   "titel": "Fehlende Detail-Listen nachziehen",
+   "wirkung": "1 von 6 Detail-Listen liegen im Bestand. Erst mit allen sechs Gründen ist die Triage vollständig – die 404er sind die größte Gruppe und fehlen noch."
   }
  ],
  "prioritaet": {
@@ -1561,7 +1579,7 @@
     "lastmod_tage": null,
     "outlinks": 2,
     "position": null,
-    "score": -1.0,
+    "score": 0.0,
     "url": "/aenderungsprotokoll/"
    },
    {
@@ -1571,7 +1589,7 @@
     "lastmod_tage": null,
     "outlinks": 7,
     "position": null,
-    "score": -1.0,
+    "score": 0.0,
     "url": "/methodik/"
    },
    {
@@ -1581,7 +1599,7 @@
     "lastmod_tage": null,
     "outlinks": 1,
     "position": null,
-    "score": -1.0,
+    "score": 0.0,
     "url": "/newsletter-checkliste/"
    },
    {
@@ -1591,7 +1609,7 @@
     "lastmod_tage": null,
     "outlinks": 4,
     "position": null,
-    "score": -1.0,
+    "score": 0.0,
     "url": "/presse/"
    },
    {
@@ -1601,7 +1619,7 @@
     "lastmod_tage": null,
     "outlinks": 4,
     "position": null,
-    "score": -1.0,
+    "score": 0.0,
     "url": "/so-entstehen-unsere-vergleiche/"
    },
    {
@@ -1611,7 +1629,7 @@
     "lastmod_tage": null,
     "outlinks": 5,
     "position": null,
-    "score": -1.0,
+    "score": 0.0,
     "url": "/transparenz/"
    }
   ],
@@ -1771,7 +1789,7 @@
   "repo": "public/sitemap.xml"
  },
  "schema": 1,
- "stand": "2026-10-26T09:51:18Z",
+ "stand": "2026-10-26T10:07:46Z",
  "tote_ziele": [
   {
    "quellen": [
@@ -2077,11 +2095,6 @@
    "regel": "W5",
    "schwere": "hinweis",
    "text": "117 Seiten sind im Index, indexierbar sind 99 – 18 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote."
-  },
-  {
-   "regel": "W9",
-   "schwere": "hinweis",
-   "text": "Keine Detail-Liste im Bestand (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die gemeldeten URLs nicht triagieren – die Summen bleiben Summen."
   },
   {
    "regel": "W11",
