@@ -54,6 +54,16 @@
   font-size: 0.95rem;
 }
 
+/* Links im Fließtext müssen auch ohne Farbwahrnehmung erkennbar sein.
+   Die ursprünglichen Links unterschieden sich nur um 2,57:1 vom
+   umgebenden Text (Lighthouse), nicht um die geforderten 3:1. */
+.ff-entity-punkte a,
+.ff-entity-links a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .16em;
+}
+
 /* Footer: offizielle Profile als rel=me-Links (PaperMods
    social_icons.html). Die Theme-Basis (.social-icons a/svg) steht in
    main.css; hier nur die Footer-Anordnung. */
@@ -63,13 +73,6 @@
   gap: 14px;
   padding: 10px 0 2px;
 }
-/* Mobile Startseiten-Reihenfolge (LCP-Schutz): <main> ist dort eine
-   Flex-Spalte mit fester order-Leiter (Karten 1, Hero 2, Pinterest-CTA 3,
-   Pagination 4, Saison 5, Kompass 6, Themenwelten 7 – zzz-agency-polish.css).
-   Ohne eigenen order-Wert (Standard 0) rutschte die Entity-Box VOR die
-   Artikel-Karten und drückte das LCP-Cover aus dem ersten Viewport
-   (Playwright: e2e/saisonale-startseite.spec.mjs, 390×844).
-   order: 8 = hinter allem – die Box ist der Abschluss der Startseite. */
-@media (max-width: 768px) {
-  main.main:has(.home-info) > section.ff-entity { order: 8; }
-}
+/* Die Entity-Box steht im Template nach Artikelliste und Themenwelten.
+   Auch mobil ist das die sichtbare, lesbare und per Tab erreichbare
+   Reihenfolge; hier darf kein CSS-order den Abschluss vorziehen. */

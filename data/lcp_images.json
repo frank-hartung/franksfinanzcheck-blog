@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-26T14:14:05+00:00",
+  "generatedAt": "2026-10-26T16:21:46+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -14,38 +14,6 @@
     "priority": "fetchpriority=high + loading=eager for LCP candidates"
   },
   "pages": {
-    "/": {
-      "image": "images/covers/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks.jpg",
-      "type": "home",
-      "reason": "erstes sichtbares Listen-Cover",
-      "sizes": "(min-width: 768px) 620px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/": {
-      "image": "images/covers/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks.jpg",
-      "type": "section",
-      "reason": "erstes sichtbares Listen-Cover",
-      "sizes": "(min-width: 768px) 620px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-08-10-dsl-wechselbonus-sichern/": {
       "image": "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg",
       "type": "single",

@@ -36,7 +36,7 @@ faktencheck: "2026-10-13"
 
 Ein stabiler und schneller Internetanschluss gehört heute zur Grundversorgung jedes Haushalts – egal ob für Homeoffice, 4K-Streaming oder Cloud-Backups. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten, unnötige Routermieten oder stillschweigend verlängerte Altverträge. Die Hebel für eine erfolgreiche Vertrags- und Wechselentscheidung sind klar definiert: Heimnetzwerk optimieren, den echten 24-Monats-Effektivpreis kalkulieren, gesetzliche Kündigungsrechte nach TKG und BGB konsequent nutzen und Mobilfunkverträge von teuren Endgeräte-Finanzierungen entkoppeln. In diesem umfassenden Ratgeber erfährst du, wie du Verträge systematisch bereinigst und dauerhaft Bestkonditionen sicherst.
 
-### Das Wichtigste auf einen Blick
+## Das Wichtigste auf einen Blick
 
 * **DSL- & Glasfaser-Effektivpreis kalkulieren:** Der Werbepreis (z.&nbsp;B. „29,99&nbsp;€“) täuscht oft. Nur der echte Effektivpreis über 24 Monate inklusive Bereitstellung, Routermiete und Boni zeigt, was ein Tarif wirklich kostet.
 * **Monatliche Kündbarkeit nach 24 Monaten:** Nach Ablauf der Erstvertragslaufzeit gilt nach §&nbsp;56 TKG und §&nbsp;309 Nr.&nbsp;9 BGB eine gesetzliche Kündigungsfrist von maximal einem Monat.

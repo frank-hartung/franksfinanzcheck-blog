@@ -36,9 +36,10 @@
       {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile -}}
       {{- $rDir = path.Dir $rCover -}}
     {{- end -}}
-    <a href="{{ .Permalink }}"
-       aria-label="Weiterlesen: {{ .Title | plainify }}"
-       class="ff-related-card">
+    {{- /* Native Linkbezeichnung: sichtbare Rubrik, Datum, Titel und Teaser.
+           Ein aria-label nur mit dem Titel verletzte „Label in Name“; das
+           Cover ist daneben dekorativ, nicht Teil des Linknamens. */ -}}
+    <a href="{{ .Permalink }}" class="ff-related-card">
       <span class="ff-related-card__media">
         {{- if $rCover -}}
           <picture>
@@ -56,8 +57,7 @@
             {{- if gt (len $rWebpParts) 0 }}<source type="image/webp" srcset="{{ delimit $rWebpParts ", " }}" sizes="{{ $rSizes }}">{{ end }}
             <img loading="lazy" decoding="async" fetchpriority="low" data-ff-fcp-image="deferred" src="{{ partial "asset_url.html" (printf "%s/360/%s" $rDir $rFile) }}"
                  {{- if gt (len $rJpgParts) 0 }} srcset="{{ delimit $rJpgParts ", " }}" sizes="{{ $rSizes }}"{{ end }}
-                 alt="{{ .Params.cover.alt | default .Title | plainify }}"
-                 width="360" height="540"
+                 alt="" aria-hidden="true" width="360" height="540"
                  class="ff-related-card__img">
           </picture>
         {{- else -}}

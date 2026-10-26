@@ -29,7 +29,7 @@ ZAHLWORT = {
     6: "Sechs", 7: "Sieben", 8: "Acht", 9: "Neun",
     10: "Zehn", 11: "Elf", 12: "Zwölf",
 }
-ZIFFER_TITEL = re.compile(r"Finanz-Werkzeuge: (\d+) kostenlose")
+ZIFFER_TITEL = re.compile(r"\b(\d+) kostenlose Finanz-Rechner\b")
 
 
 def _werkzeuge() -> list[dict]:
@@ -62,9 +62,12 @@ class WerkzeugeHubTestCase(unittest.TestCase):
     def test_seo_titel_nennt_richtige_zahl(self) -> None:
         anzahl = len(_werkzeuge())
         text = (ROOT / "content" / "werkzeuge" / "_index.md").read_text(encoding="utf-8")
-        m = ZIFFER_TITEL.search(text)
-        self.assertIsNotNone(m, "seoTitle der Werkzeug-Übersicht nicht gefunden")
+        frontmatter = yaml.safe_load(text.split("---", 2)[1])
+        titel = frontmatter.get("seoTitle", "")
+        m = ZIFFER_TITEL.search(titel)
+        self.assertIsNotNone(m, "seoTitle muss die Zahl und kostenlose Finanz-Rechner nennen")
         self.assertEqual(int(m.group(1)), anzahl, "seoTitle nennt eine andere Anzahl")
+        self.assertLessEqual(len(titel), 65, "Meta-Titel darf nicht wieder zu lang werden")
 
     def test_e2e_spec_prueft_richtige_werkzeug_anzahl(self) -> None:
         anzahl = len(_werkzeuge())

@@ -3,7 +3,7 @@
 //        „Saison-Fokus"-Block (data/saisons.yaml)
 //  ------------------------------------------------------------
 //  Rollout 20.09.2026. Läuft im Desktop-Projekt und emuliert für
-//  die LCP-/Overflow-Prüfungen zusätzlich 390×844 (Mobile).
+//  die Text-LCP-/Reihenfolge-/Overflow-Prüfungen zusätzlich 390×844 (Mobile).
 //
 //  Was hier bewusst NICHT steht: die Auswahl-Logik (Relevanz über
 //  `keywords`, Fallback-Stufen) und die analytische WCAG-Prüfung der
@@ -77,8 +77,8 @@ function tolerierteSaisons() {
 }
 
 // Kontrast-Messung im gerenderten Zustand – gleiche Formel wie
-// e2e/design-metrics.mjs (WCAG 2.x, effektive Hintergrundfarbe durch
-// Aufwärts-Suche nach einer deckenden Fläche).
+// e2e/design-metrics.mjs (WCAG 2.x, halbtransparente Flächen
+// von innen nach außen über dem deckenden Hintergrund kompositieren).
 const KONTRAST_QUELLE = `
 var lum = function (r, g, b) {
   var f = function (c) { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
@@ -86,22 +86,29 @@ var lum = function (r, g, b) {
 };
 var parse = function (c) {
   var m = c.match(/rgba?\\((\\d+)[,\\s]+(\\d+)[,\\s]+(\\d+)(?:[,/\\s]+([\\d.]+))?\\)/);
-  if (!m) return null;
-  return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
+  if (m) return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
+  // Chromium gibt color-mix() als halbtransparentes color(srgb … / a)
+  // zurück. Der alte Parser ignorierte genau dieses Chip-BG und lieferte
+  // einen falsch-grünen WCAG-Test (Herbst tatsächlich 4,43 statt 4,5).
+  m = c.match(/color\\(srgb\\s+([\\d.]+)\\s+([\\d.]+)\\s+([\\d.]+)(?:\\s*\\/\\s*([\\d.]+))?\\)/);
+  return m ? { r: +m[1] * 255, g: +m[2] * 255, b: +m[3] * 255, a: m[4] === undefined ? 1 : +m[4] } : null;
 };
 var blend = function (fg, bg) {
   return { r: fg.r * fg.a + bg.r * (1 - fg.a), g: fg.g * fg.a + bg.g * (1 - fg.a), b: fg.b * fg.a + bg.b * (1 - fg.a) };
 };
 var ratio = function (l1, l2) { var a = Math.max(l1, l2), b = Math.min(l1, l2); return (a + 0.05) / (b + 0.05); };
 var effBg = function (el) {
-  var node = el;
-  while (node && node !== document.documentElement) {
+  var layers = [];
+  for (var node = el; node; node = node.parentElement) {
     var bg = parse(window.getComputedStyle(node).backgroundColor);
-    if (bg && bg.a > 0.85) return bg;
-    node = node.parentElement;
+    if (bg && bg.a > 0) {
+      layers.push(bg);
+      if (bg.a >= 0.999) break;
+    }
   }
-  var rootBg = parse(window.getComputedStyle(document.documentElement).backgroundColor);
-  return rootBg && rootBg.a > 0 ? rootBg : { r: 255, g: 255, b: 255, a: 1 };
+  return layers.reverse().reduce(function (back, layer) {
+    return blend(layer, back);
+  }, { r: 255, g: 255, b: 255 });
 };
 var contrastOf = function (sel) {
   var el = document.querySelector(sel);
@@ -138,16 +145,17 @@ test.describe('Saisonale Startseite', () => {
     const hinweis = page.locator('article.first-entry.home-info .ff-saison-hinweis');
     await expect(hinweis, 'Saison-Hinweis fehlt im Hero').toHaveCount(1);
 
-    // Badge VOR dem H1 (Eyebrow-Position), Hinweis NACH dem GEO-Lead
+    // Badge vor H1; der Handlungsweg kommt NACH dem GEO-Lead und VOR dem langen Hinweis.
     const reihenfolge = await page.evaluate(() => {
       const hero = document.querySelector('article.first-entry.home-info');
-      return [...hero.querySelectorAll('.ff-saison-badge, h1, .entry-content, .ff-saison-hinweis')]
+      return [...hero.querySelectorAll('.ff-saison-badge, h1, .entry-content, .ff-home-ctas, .ff-saison-hinweis')]
         .map((el) => (el.classList.contains('ff-saison-badge') ? 'badge'
           : el.tagName === 'H1' ? 'h1'
-          : el.classList.contains('entry-content') ? 'text' : 'hinweis'));
+          : el.classList.contains('entry-content') ? 'text'
+          : el.classList.contains('ff-home-ctas') ? 'ctas' : 'hinweis'));
     });
-    expect(reihenfolge, 'Hero-Reihenfolge: Badge → H1 → GEO-Lead → Hinweis')
-      .toEqual(['badge', 'h1', 'text', 'hinweis']);
+    expect(reihenfolge, 'Hero-Reihenfolge: Badge → H1 → GEO-Lead → CTA → Hinweis')
+      .toEqual(['badge', 'h1', 'text', 'ctas', 'hinweis']);
 
     const badgeSaison = await badge.getAttribute('data-ff-saison');
     expect(SAISON_IDS, `Saison ${badgeSaison} ist keine bekannte Saison`).toContain(badgeSaison);
@@ -200,8 +208,13 @@ test.describe('Saisonale Startseite', () => {
       expect(await karte.getAttribute('data-klick-placement')).toBe('start-saison');
       expect(await karte.getAttribute('data-klick-saison')).toBe(saison);
       expect(await karte.getAttribute('data-klick-slug')).toMatch(new RegExp(`^saison-${saison}-`));
-      expect(await karte.getAttribute('aria-labelledby'), `Karte ${i + 1}: aria-labelledby fehlt`)
-        .toBeTruthy();
+      // Der Linkname muss ALLE sichtbaren Texte enthalten, nicht bloß den
+      // Titel per aria-labelledby (WCAG 2.5.3 / Sprachsteuerung).
+      expect(await karte.getAttribute('aria-labelledby')).toBeNull();
+      const linkname = await karte.ariaSnapshot();
+      expect(linkname, `Karte ${i + 1}: Titel nicht im Linknamen`).toContain(titel);
+      expect(linkname, `Karte ${i + 1}: Datum nicht im Linknamen`).toContain(await karte.locator('time').innerText());
+      expect(linkname, `Karte ${i + 1}: sichtbarer CTA nicht im Linknamen`).toContain('Weiterlesen');
     }
 
     // Keine Dubletten im Block
@@ -223,8 +236,7 @@ test.describe('Saisonale Startseite', () => {
       const block = document.querySelector('section.ff-saison');
       return !!block && !!block.parentElement && block.parentElement.matches('main.main');
     });
-    expect(istKindVonMain, 'Der Block muss direktes Kind von <main> sein, sonst greift die '
-      + 'Mobile-Reihenfolge (order) aus custom.css/zz-saisonale-startseite.css nicht').toBe(true);
+    expect(istKindVonMain, 'Der Block muss direktes Kind von <main> nach dem Hero sein').toBe(true);
 
     const sprunziel = await page.evaluate(() => {
       const ueberschrift = document.getElementById('saison-fokus');
@@ -258,32 +270,49 @@ test.describe('Saisonale Startseite', () => {
     });
   });
 
-  test.describe('Mobile 390×844 (LCP-Schutz)', () => {
+  test.describe('Mobile 390×844 (Text-LCP und sinnvolle Reihenfolge)', () => {
     test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 
-    test('LCP-Cover bleibt im Viewport – der Saison-Block steht hinter den Karten', async ({ page }) => {
+    test('Hero führt sichtbar und im DOM; das nachgelagerte Feed-Cover ist lazy/low', async ({ page }) => {
       await page.goto('/');
-      await scrollThrough(page);
+      await page.evaluate(() => document.fonts.ready);
       const messung = await page.evaluate(() => {
-        const karte = document.querySelector('article.post-entry.lcp-card');
-        const bild = karte ? karte.querySelector('img') : null;
-        const block = document.querySelector('section.ff-saison');
-        const rb = bild ? bild.getBoundingClientRect() : null;
+        const main = document.querySelector('main.main');
+        const selektoren = [
+          'article.home-info', 'section.ff-saison', 'section.ff-kompass',
+          'article.post-entry', 'section.ff-entity',
+        ];
+        const teile = selektoren.map((s) => [...main.children].find((el) => el.matches(s)));
+        const bild = teile[3]?.querySelector('.entry-cover img');
         return {
-          bildTop: rb ? Math.round(rb.top) : null,
-          bildHoehe: rb ? Math.round(rb.height) : null,
+          vorhanden: teile.every(Boolean),
+          domPositionen: teile.map((el) => el && [...main.children].indexOf(el)),
+          oben: teile.map((el) => el && Math.round(el.getBoundingClientRect().top)),
+          orders: teile.map((el) => el && getComputedStyle(el).order),
+          h1Oben: Math.round(document.querySelector('h1').getBoundingClientRect().top),
           viewport: window.innerHeight,
-          orderBlock: block ? getComputedStyle(block).order : null,
-          orderKarte: karte ? getComputedStyle(karte).order : null,
-          blockTop: block ? Math.round(block.getBoundingClientRect().top) : null,
+          bild: bild && {
+            loading: bild.loading,
+            priority: bild.getAttribute('fetchpriority'),
+            lcp: bild.getAttribute('data-ff-lcp'),
+            rolle: bild.getAttribute('data-ff-fcp-image'),
+          },
+          bildPreloads: document.querySelectorAll('link[rel="preload"][as="image"]').length,
         };
       });
-      expect(messung.bildTop, 'LCP-Cover fehlt auf der Startseite').not.toBeNull();
-      expect(messung.bildTop, `LCP-Cover liegt bei top ${messung.bildTop}px unter dem Fold`)
-        .toBeLessThan(messung.viewport);
-      expect(Number(messung.orderBlock), 'Saison-Block braucht eine order ≥ 2 (Karten haben order: 1)')
-        .toBeGreaterThanOrEqual(2);
-      expect(Number(messung.orderKarte), 'Artikel-Karten müssen order: 1 behalten').toBe(1);
+      expect(messung.vorhanden, 'Hero, Saison, Kompass, Feed und Entity-Box fehlen').toBe(true);
+      expect(messung.domPositionen, 'die Lesereihenfolge muss der visuellen Reihenfolge folgen')
+        .toEqual([...messung.domPositionen].sort((a, b) => a - b));
+      expect(messung.oben, 'keine Flex-order-Umsortierung im Browser')
+        .toEqual([...messung.oben].sort((a, b) => a - b));
+      expect(messung.orders, 'alle Hauptbausteine haben die gleiche order: 0')
+        .toEqual(['0', '0', '0', '0', '0']);
+      expect(messung.oben[0], 'Hero muss im ersten Viewport beginnen').toBeLessThan(messung.viewport);
+      expect(messung.h1Oben, 'die H1 muss im ersten Viewport sichtbar sein').toBeLessThan(messung.viewport);
+      expect(messung.oben[3], 'Feed ist kein Bild-LCP im ersten Viewport')
+        .toBeGreaterThan(messung.viewport);
+      expect(messung.bild).toEqual({ loading: 'lazy', priority: 'low', lcp: null, rolle: 'deferred' });
+      expect(messung.bildPreloads, 'kein Bild-Preload konkurriert mit dem Text-Hero').toBe(0);
     });
 
     test('kein horizontaler Overflow durch den Saison-Block, Tap-Ziele groß genug', async ({ page }) => {

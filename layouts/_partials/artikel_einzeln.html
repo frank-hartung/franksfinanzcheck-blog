@@ -146,6 +146,14 @@
   {{- if .Content }}
   <div class="post-content md-content">
     {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- /* Goldmark rendert Markdown-Checklisten als DEAKTIVIERTE Inputs ohne
+           Label. Lighthouse meldet sie als unbenannte Formularfelder, obwohl
+           sie nicht bedienbar sind. Als rein visuelle Abhakfelder ausliefern:
+           aria-hidden, kein Fake-Formularfeld, Listen-Text bleibt lesbar.
+           Echte interaktive Checklisten müssten später eigene Controls mit
+           Labels und einer transparenten Speicher-Policy bekommen. */ -}}
+    {{- $articleContent = replace $articleContent `<input checked="" disabled="" type="checkbox">` `<span class="ff-task-mark" aria-hidden="true">☑</span>` -}}
+    {{- $articleContent = replace $articleContent `<input disabled="" type="checkbox">` `<span class="ff-task-mark" aria-hidden="true">☐</span>` -}}
     {{- /* Themen-Signet statt Glühbirne in allen redaktionellen Schnell-Tipps.
            Zentraler Renderer: gilt für bestehende und neue Posts. */ -}}
     {{- $tipIcon := printf `<span class="ff-article-tip-icon" aria-hidden="true">%s</span>` (partial "kurzantwort_icon.html" .) -}}

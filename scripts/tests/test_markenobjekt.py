@@ -36,6 +36,11 @@ class MarkenobjektVertrag(unittest.TestCase):
         self.assertIn('width="800" height="800"', profile)
         self.assertIn('"ueber/" | relURL', profile)
         self.assertTrue((ROOT / "static/images/frank-hartung.jpg").is_file())
+        self.assertIn('images/frank-hartung-160.webp', profile)
+        self.assertIn('loading="lazy"', profile)
+        webp = ROOT / "static/images/frank-hartung-160.webp"
+        self.assertTrue(webp.is_file(), "kleines Autorenfoto für den 48px-Avatar fehlt")
+        self.assertLess(webp.stat().st_size, 10_000, "Avatar darf nicht 71 KB laden")
 
     def test_datenblatt_kennzeichnung_ist_im_chart_renderer(self):
         chart = self.read("layouts/shortcodes/chart.html")

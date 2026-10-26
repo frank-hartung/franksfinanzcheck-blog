@@ -6,7 +6,7 @@
      layouts/_partials/_funcs/saison-kontext.html   (Daten + Auswahl)
      layouts/_partials/_funcs/saison-aufloesung.html (Fenster-Logik)
      data/saisons.yaml                         (kuratierte Quelle)
-     scripts/saisonale_startseite_gate.py      (Wache + Render-Beweis)
+     scripts/saisonale_startseite_guard.py     (Wache + Render-Beweis)
 
    DATEINAME / LADEPOSITION: assets/css/extended/ lädt alphabetisch.
    Diese Datei heißt bewusst `zz-…` und liegt damit VOR
@@ -33,9 +33,9 @@
    · Hierarchie statt Karten-Einheitsbrei (Anti-Reference „identische
      Karten-Reihen"): die erste Karte ist als Aufmacher breiter und
      größer, die beiden anderen stapeln sich daneben.
-   · CWV: keine Bilder im Block (kein CLS, kein zweites LCP-Rennen),
-     mobil `order: 4` in der bestehenden Startseiten-Reihenfolge, damit
-     die Artikel-Karten mit dem LCP-Cover (order: 1) vorne bleiben.
+   · CWV: keine Bilder im Block (kein CLS, kein zweites LCP-Rennen).
+     Der Text-Hero steht in der DOM- UND mobilen Sichtreihenfolge vor
+     dem Saisonblock und den lazy geladenen Feed-Covers.
    ============================================================ */
 
 /* ---------- 1. Saison-Paletten (Werte = data/saisons.yaml) ---------- */
@@ -380,8 +380,11 @@
 .ff-saison-tipp-label {
   flex: none;
   padding: 3px 10px;
+  border: 1px solid var(--ff-saison-linie);
   border-radius: var(--ff-radius-pill);
-  background: color-mix(in srgb, var(--ff-saison-linie) 16%, transparent);
+  /* Voll deckende Kartenfläche: die geprüften Saison-Kontraste gelten nun
+     auch IM Chip (vorher: halbtransparentes Gelb → Herbst 4,43:1). */
+  background: var(--ff-surface);
   color: var(--ff-saison-akzent);
   font-size: 0.74rem;
   font-weight: 700;
@@ -435,22 +438,9 @@
     padding: 16px 14px;
   }
 
-  /* Reihenfolge in der Startseiten-Flex-Spalte (custom.css setzt
-     Karten order: 1, Hero order: 2, Pinterest-CTA order: 3,
-     footer.order: 4, Cluster order: 5):
-     Der Saison-Block bekommt order: 5 und liegt damit
-       · HINTER den Artikel-Karten → das LCP-Cover bleibt oben
-         (gemessen: e2e/design-metrics.mjs, startseite-layout-mobile-*),
-       · HINTER der Pagination (order: 4) → die Blätter-Navigation bleibt
-         direkt an der Kartenliste und wird nicht von einem 700-px-Block
-         weggeschoben,
-       · VOR den Ratgeber-Clustern (ebenfalls order: 5) – gleicher
-         order-Wert, also entscheidet die DOM-Reihenfolge, und die ist
-         eindeutig: home_info.html rendert den Saison-Block, list.html
-         die Cluster danach. */
-  main.main > section.ff-saison {
-    order: 5;
-  }
+  /* Kein order: Der Saison-Fokus folgt dem Hero auch für Tastatur und
+     Screenreader. Eine spätere Priorisierung gehört ins Template, nicht
+     allein in CSS (WCAG 1.3.2 / 2.4.3). */
 }
 
 @media (max-width: 600px) {

@@ -39,17 +39,17 @@
         {{- $opts := dict "display" "block" -}}
         {{- ($lead | $.Page.RenderString $opts | partial "nbsp_sicherung.html") | safeHTML -}}
     </div>
-    {{- /* Der Hinweis ergänzt den Lead, ohne dessen Antwort-zuerst-Satz zu
-           verwässern. Quelle und Saison sind mit Badge/Block identisch. */ -}}
-    {{- partial "home_season.html" (dict "modus" "hinweis") }}
-    {{- /* Der Produkt-Einstieg ist kein weiterer Artikel-Feed, sondern das
-           Fixkosten-Cockpit. Die drei Wege bleiben messbar und führen jeweils
-           zu einem klaren nächsten Schritt: Überblick, Methode, Vertiefung. */ -}}
+    {{- /* Der Produkt-Einstieg steht direkt nach der Erklärung. Das ist auf
+           schmalen Displays wichtig: Der nächste Schritt darf nicht erst nach
+           dem Saison-Hinweis und dem ausführlichen Kostenprofil erscheinen. */ -}}
     <div class="ff-home-ctas">
         <a href="{{ "cockpit/" | relURL }}" class="ff-btn ff-btn-primary" data-klick="cta_click" data-klick-cta="home-cockpit" data-klick-slug="home-cockpit" data-klick-placement="start-hero">Fixkosten-Cockpit starten <span aria-hidden="true">→</span></a>
         <a href="#fixkosten-kompass" class="ff-btn ff-btn-secondary" data-klick="cta_click" data-klick-cta="home-kompass" data-klick-slug="home-kompass" data-klick-placement="start-hero">4K-Prüfpfad ansehen</a>
         <a href="{{ "posts/" | relURL }}" class="ff-btn ff-btn-outline" data-klick="cta_click" data-klick-cta="home-ratgeber" data-klick-slug="home-ratgeber" data-klick-placement="start-hero">Alle Ratgeber</a>
     </div>
+    {{- /* Der Hinweis ergänzt den Lead, ohne dessen Antwort-zuerst-Satz zu
+           verwässern. Quelle und Saison sind mit Badge/Block identisch. */ -}}
+    {{- partial "home_season.html" (dict "modus" "hinweis") }}
     {{- /* Markenobjekt statt austauschbarer Trust-Pills: Das Kostenprofil
            visualisiert den 4K-Prüfpfad auf jeder Oberfläche identisch und
            zeigt mit Franks echtem Autorenfoto, wer redaktionell verantwortet. */ -}}
@@ -73,8 +73,8 @@
   </a>
 </div>
 
-{{- /* Saison-Fokus: direktes Kind von <main>, damit die mobile LCP-Reihenfolge
-       der Premium-Variante die Artikelkarte vor dem langen Hero hält. */ -}}
+{{- /* Saison-Fokus folgt im Template direkt auf den Hero. Sicht-, Lese-
+       und Tastaturreihenfolge sind auf allen Bildschirmbreiten identisch. */ -}}
 {{- partial "home_season.html" (dict "modus" "block") }}
 
 {{- /* Der Kompass ist der dauerhafte Produktkern hinter allen sechs Themen.

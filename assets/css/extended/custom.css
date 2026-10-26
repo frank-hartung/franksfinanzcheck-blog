@@ -813,19 +813,17 @@ input:focus-visible {
     }
 }
 
-/* ---------- LCP-Beschleunigung (Startseite) ----------
-   Die ERSTE Artikel-Karte (LCP-Element) wird voll gerendert; alle weiteren
-   Karten erst bei Annäherung (content-visibility: auto). Spart Layout- und
-   Paint-Arbeit für Inhalte unterhalb des Folds → das LCP-Bild wird deutlich
-   früher gemalt (weniger "Verzögerung beim Rendering des Elements").
-   contain-intrinsic-size reserviert die Höhe → kein Scroll-Springen. */
-.post-entry:not(.lcp-card) {
+/* Listen-Karten unterhalb des Viewports beim Erstpaint auslassen. Die
+   Startseite hat einen Text-LCP im Hero; auch ihr erstes Artikel-Cover
+   liegt weit unten. content-visibility:auto rendert sichtbare Karten
+   trotzdem sofort (z. B. die erste auf /posts/), und die reservierte
+   Höhe verhindert ein Springen beim Näherkommen. */
+.post-entry {
     content-visibility: auto;
     contain-intrinsic-size: auto 240px;
 }
 
-/* Mobile: Hero + Pinterest-CTA kompakter, damit das erste Cover (LCP)
-   höher in den Viewport rückt und früher gemalt wird. */
+/* Mobile: Hero und Pinterest-CTA kompakt halten. */
 @media (max-width: 768px) {
     .ff-pinterest-cta {
         padding: 10px 12px;
@@ -853,34 +851,18 @@ input:focus-visible {
     }
 }
 
-/* LCP-Feinschliff: Auf Mobile den CTA-Beschreibungstext ausblenden –
-   nur "Folge mir auf Pinterest" + Button bleiben. Der CTA schrumpft von
-   ~156px auf ~60px → das erste Artikel-Cover (LCP-Element) rückt ~90px
-   höher in den Viewport und wird deutlich früher gemalt. */
+/* Der Pinterest-CTA hält den Text auf Mobile kurz; seine Informationen
+   bleiben über den Link erreichbar. Der Startseiten-Hero ist der Text-LCP. */
 @media (max-width: 768px) {
     .ff-pinterest-cta-text span {
         display: none;
     }
 }
 
-/* ---------- LCP: Mobile-Reihenfolge (Artikel zuerst) ----------
-   Auf Mobile schieben Hero + Pinterest-CTA HINTER die Artikel-Karten.
-   Das erste Artikel-Cover (LCP-Element) rückt von top ~557px auf ~130px –
-   der Browser muss nur noch den Header malen, bevor das LCP-Bild erscheint
-   (deutlich weniger Render-Verzögerung auf langsamen Geräten).
-   Desktop bleibt unverändert (Hero oben). Nur Startseiten-Bausteine
-   betroffen; alle anderen Seiten haben diese Klassen nicht. */
-@media (max-width: 768px) {
-    main.main {
-        display: flex;
-        flex-direction: column;
-    }
-    main.main > article.post-entry { order: 1; }
-    main.main > article.first-entry.home-info { order: 2; }
-    main.main > div.ff-pinterest-cta { order: 3; }
-    main.main > footer { order: 4; }
-    main.main > section.ff-clusters { order: 5; }
-}
+/* Die mobile Startseite folgt der DOM-Reihenfolge: zuerst der redaktionelle
+   Einstieg mit H1 und Cockpit-CTA, danach Themen und Artikel. Flex-order
+   würde die Tastatur-Reihenfolge von der sichtbaren Reihenfolge trennen und
+   den Einstieg erst nach acht Artikeln (> 4.000 px) anzeigen. */
 
 /* ============================================================
    PILLAR-HUB & THEMENWELTEN (Ratgeber-Zentrale /pillar/)

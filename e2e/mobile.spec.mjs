@@ -91,6 +91,25 @@ test.describe('Mobile (iPhone 14)', () => {
     }
   });
 
+  test('Redaktionelle Kleinst-Links haben mindestens 44px Touch-Höhe', async ({ page }) => {
+    await page.goto(await newestArticlePath(page));
+    const offenlegung = page.locator('details.ff-offenlegung');
+    await expect(offenlegung).toHaveCount(1);
+    await offenlegung.locator('summary').click();
+    const ziele = [
+      '.ff-offenlegung__text p > a:has-text("Bewertungsraster")',
+      '.ff-kostenprofil__foot a',
+      '.ff-quellen__link',
+    ];
+    for (const sel of ziele) {
+      const link = page.locator(sel).first();
+      await expect(link, `Link fehlt: ${sel}`).toBeVisible();
+      const box = await link.boundingBox();
+      expect(box?.height, `${sel}: Touch-Fläche war nur ${box?.height}px hoch`)
+        .toBeGreaterThanOrEqual(44);
+    }
+  });
+
   // ============================================================
   //  HERAUSGEBER-PILL (mobil) – Regressionswächter (27.09.2026)
   //  ------------------------------------------------------------

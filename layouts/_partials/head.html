@@ -88,45 +88,17 @@
 
 {{- /* bundle all required css */}}
 {{- /* Add extended css after theme style */ -}}
-{{- /* ---------- Kritischer Pfad: automatischer LCP-Bild-Preload (Profi-Agentur) ---------- */ -}}
-{{- /* Deterministische Erkennung des gerenderten LCP-Bildes direkt aus dem Hugo-Seitenbaum.
-       PRELOAD-BREMSE: Pager-Seiten (/page/2/, /posts/page/3/) und noindex-Archive
-       bekommen KEINEN Bild-Preload.
-       - Single-Seiten: Eigenes Artikelcover (falls nicht hidden oder preload:false).
-       - Home-Startseite (Seite 1): Erstes sichtbares Cover des Home-Feeds.
-       - Blog-Übersicht (/posts/, Seite 1): Erstes sichtbares Cover des Blog-Feeds.
-       - Pager-Seiten, Archive (eq .Kind "term"), Taxonomien: KEIN Preload ($noPreload). */ -}}
+{{- /* ---------- Bild-Preload nur auf Einzelartikeln ---------- */ -}}
+{{- /* Bei 390px: Artikelcover ~373px von oben, Startseiten-Cover ~4089px,
+       /posts/-Cover ~2474px. Auf Listen-Seiten ist Text das erste große
+       Element; ein Bild-Preload nähme dem Text-Font Bandbreite weg. */ -}}
 {{- $lcpCover := "" -}}
-{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" -}}
+{{- $lcpSizes := "(min-width: 768px) 720px, 100vw" -}}
 {{- $lcpWidths := slice "360" "480" "620" "720" -}}
-
-{{- $isPager := false -}}
-{{- if or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") (eq .Kind "taxonomy") -}}
-  {{- with .Paginator -}}{{- if gt (.PageNumber | int) 1 -}}{{- $isPager = true -}}{{- end -}}{{- end -}}
-{{- end -}}
-{{- $noPreload := or $isPager (eq .Kind "term") (eq .Kind "taxonomy") -}}
-
-{{- if and (not $noPreload) (eq .Kind "page") -}}
+{{- if eq .Kind "page" -}}
   {{- $coverHidden := or (.Param "cover.hiddenInSingle") (.Param "cover.hidden") -}}
   {{- if and .Params.cover.image (not $coverHidden) (ne .Params.cover.preload false) -}}
     {{- $lcpCover = .Params.cover.image -}}
-    {{- $lcpSizes = "(min-width: 768px) 720px, 100vw" -}}
-  {{- end -}}
-{{- else if and (not $noPreload) (or .IsHome (and (eq .Kind "section") (eq .Section "posts"))) -}}
-  {{- $targetPages := slice -}}
-  {{- if .IsHome -}}
-    {{- $targetPages = where site.RegularPages "Section" "eq" "posts" -}}
-    {{- $targetPages = where $targetPages "Params.hiddenInHomeList" "!=" "true" -}}
-  {{- else -}}
-    {{- $targetPages = (union .RegularPages .Sections).ByDate.Reverse -}}
-  {{- end -}}
-  {{- if gt (len $targetPages) 0 -}}
-    {{- $firstPost := index $targetPages 0 -}}
-    {{- $coverHidden := or ($firstPost.Param "cover.hiddenInList") ($firstPost.Param "cover.hidden") -}}
-    {{- if and $firstPost.Params.cover.image (not $coverHidden) -}}
-      {{- $lcpCover = $firstPost.Params.cover.image -}}
-      {{- $lcpSizes = "(min-width: 768px) 620px, 100vw" -}}
-    {{- end -}}
   {{- end -}}
 {{- end -}}
 
@@ -186,8 +158,12 @@
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}" title="{{ .Name }}">
 {{ end -}}
+{{- /* Auf Paginierungsseiten liefert .AllTranslations.Permalink die Listen-
+       Wurzel zurück. Die Selbstreferenz muss dieselbe echte Pager-URL wie
+       Canonical und x-default verwenden (seo_context.html). Andere Sprachen
+       behalten ihre eigene Permalink-URL. */ -}}
 {{- range .AllTranslations -}}
-<link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="{{ .Lang }}" href="{{ if eq .Lang $.Lang }}{{ $seo.url }}{{ else }}{{ .Permalink }}{{ end }}">
 {{ end -}}
 
 <noscript>
@@ -232,7 +208,9 @@
 {{- /* theme is light */}}
 {{- if (eq site.Params.defaultTheme "light") }}
 <script>
-    if (localStorage.getItem("pref-theme") === "dark") {
+    var prefTheme = null;
+    try { prefTheme = localStorage.getItem("pref-theme"); } catch (e) {}
+    if (prefTheme === "dark") {
         document.querySelector("html").dataset.theme = 'dark';
     }
 
@@ -240,7 +218,9 @@
 {{- /* theme is dark */}}
 {{- else if (eq site.Params.defaultTheme "dark") }}
 <script>
-    if (localStorage.getItem("pref-theme") === "light") {
+    var prefTheme = null;
+    try { prefTheme = localStorage.getItem("pref-theme"); } catch (e) {}
+    if (prefTheme === "light") {
         document.querySelector("html").dataset.theme = 'light';
     }
 
@@ -248,10 +228,12 @@
 {{- else }}
 {{- /* theme is auto */}}
 <script>
-    if (localStorage.getItem("pref-theme") === "dark") {
+    var prefTheme = null;
+    try { prefTheme = localStorage.getItem("pref-theme"); } catch (e) {}
+    if (prefTheme === "dark") {
         document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
+    } else if (prefTheme === "light") {
+        document.querySelector("html").dataset.theme = 'light';
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.querySelector("html").dataset.theme = 'dark';
     } else {

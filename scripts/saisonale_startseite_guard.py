@@ -53,16 +53,16 @@ Prüfungen Quelle (S1–S9):
      Fallback auf Saison-Pillars, dann auf die neuesten Artikel) für ALLE
      vier Saisons gegen den echten Content-Bestand. Meldet Quelle und
      Trefferzahl; `min_artikel` muss aus dem Bestand erreichbar sein.
-  S8 LCP-Schutz: die Mobile-Reihenfolge `main.main > section.ff-saison
-     { order: N }` existiert, und N hält die Artikel-Karten mit dem
-     LCP-Cover (order: 1) vorne, liegt hinter der Pagination (order: 4)
-     und nicht hinter den Clustern (order: 5).
+  S8 Mobile-Reihenfolge: kein CSS-`order` auf den Hauptbausteinen der
+     Startseite. Hero und Saison-Fokus müssen für Sicht, Lesen und
+     Tastatur in derselben DOM-Reihenfolge stehen; das Artikel-Cover
+     darunter ist kein Bild-LCP mehr. Reduced Motion bleibt erhalten.
   S9 Stilllegung: `homeInfoParams`, alter Wochen-Workflow und
      `scripts/willkommenstext_guard.py` bleiben entfernt; die Legacy-
      Historie endet auf einem Decommission-/Saison-Hero-Merge-Eintrag,
      nicht auf `fallback` oder `ai:*`.
 
-Prüfungen Build (B1–B7) gegen public/index.html:
+Prüfungen Build (B1–B8) gegen public/index.html:
   B1 genau EIN H1 (Bestands-Test e2e/home.spec.mjs) und genau EIN
      section.ff-saison-Baum
   B2 Badge, Hinweis und Block tragen dieselbe Saison (`data-ff-saison`)
@@ -79,6 +79,8 @@ Prüfungen Build (B1–B7) gegen public/index.html:
      hugo.Data/site.Data an (dokumentierter Build-Killer vom 19.09.2026,
      data/ enthält *.jsonl-Protokolle)
   B7 DOM-Budget: Knotenzahl der Startseite unter dem cwv_guard-Softlimit
+  B8 Hero vor Saison-Block vor Feed im DOM; Startseiten-Cover ist
+     lazy/low statt Bild-LCP und hat keinen Bild-Preload im Head.
 
 Keine Reparatur-Heuristik: Ein Defekt stoppt den Deploy (Exit 1), statt
 Texte umzuschreiben oder eine Saison still zu unterschlagen. Exit 3 =
@@ -552,28 +554,24 @@ def validate_legacy_willkommen_decommissioned(root: Path) -> list[str]:
                       "Startseiten-Quelle bestätigt.")
     return fehler
 
-def validate_lcp_schutz(css: str) -> list[str]:
-    """S8: Mobile-Reihenfolge hält das LCP-Cover vorne."""
+def validate_mobile_reihenfolge(css: str) -> list[str]:
+    """S8: Keine CSS-Umsortierung der Startseiten-Kinder gegenüber dem DOM.
+
+    Kommentare zählen nicht als Regeln; die Quelle kann eine Datei oder das
+    gesamte gebündelte extended-CSS sein. Innere Flex-Elemente (z. B. im
+    Kostenprofil) dürfen weiterhin `order` nutzen, aber nicht die Kinder von
+    main.main: deren Sicht-/Fokusreihenfolge wäre sonst verschieden.
+    """
     fehler = []
-    m = re.search(r"main\.main\s*>\s*section\.ff-saison\s*\{\s*order:\s*(\d+)", css)
-    if not m:
-        fehler.append("CSS: `main.main > section.ff-saison { order: N }` fehlt – auf Mobile "
-                      "landet der Saison-Block (order: auto = 0) VOR den Artikel-Karten und "
-                      "schiebt das LCP-Cover aus dem Viewport.")
-        return fehler
-    order = int(m.group(1))
-    if order <= 1:
-        fehler.append(f"CSS: order: {order} für section.ff-saison – die Artikel-Karten mit dem "
-                      "LCP-Cover haben order: 1 (custom.css) und müssen VORNE bleiben.")
-    if order > 5:
-        fehler.append(f"CSS: order: {order} für section.ff-saison – die Ratgeber-Cluster liegen "
-                      "bei order: 5 (custom.css); der Saison-Block muss in derselben Reihe "
-                      "VOR ihnen stehen (gleicher Wert + frühere DOM-Position genügt).")
-    if "@media (max-width: 768px)" not in css:
-        fehler.append("CSS: die Mobile-Reihenfolge der Startseite greift bei max-width 768px "
-                      "(custom.css) – die Saison-Regel muss im selben Bereich stehen.")
+    ohne_kommentare = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    for regel in re.finditer(r"([^{}]+)\{([^{}]*)\}", ohne_kommentare):
+        selektor, deklarationen = regel.group(1).strip(), regel.group(2)
+        if "main.main" in selektor and re.search(r"(?<![\w-])order\s*:", deklarationen):
+            fehler.append(f"S8: CSS-order auf Startseiten-Kind ({selektor[:110]}) "
+                          "trennt Sicht-/Tastaturreihenfolge vom DOM. "
+                          "Baustein im Template umstellen, nicht per CSS.")
     if "prefers-reduced-motion" not in css:
-        fehler.append("CSS: prefers-reduced-motion fehlt (DESIGN.md §6: Lifts aus).")
+        fehler.append("S8: prefers-reduced-motion fehlt (DESIGN.md §6: Lifts aus).")
     return fehler
 
 
@@ -847,9 +845,14 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
         if not k.attrs.get("data-klick-slug", "").startswith(f"saison-{sid}-"):
             fehler.append(f"B4: Karte {href}: data-klick-slug muss mit "
                           f"„saison-{sid}-“ beginnen.")
-        if not k.attrs.get("aria-labelledby"):
-            fehler.append(f"B4: Karte {href}: aria-labelledby fehlt (a11y-Vertrag der "
-                          "bestehenden Themenkarten).")
+        # Der Link selbst trägt den zugänglichen Namen aus ALLEN sichtbaren
+        # Texten (Datum, Thema, Titel und CTA). Ein aria-labelledby nur auf
+        # den Titel verletzt WCAG 2.5.3 „Label in Name“ (Sprachsteuerung).
+        if any(attr in k.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
+            fehler.append(f"B4: Karte {href}: ARIA überschreibt/dupliziert den sichtbaren Linknamen.")
+        ctas = [x for x in k.kids if x.hat_klasse("ff-saison-card-cta")]
+        if len(ctas) != 1 or not ctas[0].volltext() or ctas[0].attrs.get("aria-hidden") == "true":
+            fehler.append(f"B4: Karte {href}: sichtbarer CTA muss im nativen Linknamen stehen.")
 
     pillar_link = [k for k in seite.nach_klasse("ff-saison-pillar") if k.tag == "a"]
     if not pillar_link:
@@ -870,6 +873,35 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
     if len(seite.flat) > DOM_NODES_SOFT:
         fehler.append(f"B7: Startseite hat {len(seite.flat)} DOM-Knoten "
                       f"(Softlimit {DOM_NODES_SOFT}, siehe scripts/cwv_guard.py).")
+
+    # B8 – die DOM-Reihenfolge IST die visuelle/fokussierbare Reihenfolge.
+    # Der Text-Hero führt; sein nachgelagertes Feed-Cover wird nicht mehr als
+    # LCP-Bild vorgeladen oder priorisiert. Kein Parser-„Screenshot“: die
+    # tatsächliche Geometrie und CSS-order misst zusätzlich Playwright.
+    main = next((k for k in seite.flat if k.tag == "main" and k.hat_klasse("main")), None)
+    if main:
+        kinder = main.kids
+        hero_pos = next((i for i, k in enumerate(kinder) if k.hat_klasse("home-info")), None)
+        saison_pos = next((i for i, k in enumerate(kinder) if k.tag == "section" and k.hat_klasse("ff-saison")), None)
+        karte_pos = next((i for i, k in enumerate(kinder) if k.tag == "article" and k.hat_klasse("post-entry")), None)
+        if None in (hero_pos, saison_pos, karte_pos) or not hero_pos < saison_pos < karte_pos:
+            fehler.append("B8: Im DOM muss der Hero VOR dem Saison-Block VOR "
+                          "der ersten Artikelkarte stehen (Sicht- und Tastaturreihenfolge).")
+        else:
+            def nachfahren(knoten: Knoten):
+                for kind in knoten.kids:
+                    yield kind
+                    yield from nachfahren(kind)
+
+            cover = next((k for k in nachfahren(kinder[karte_pos]) if k.tag == "img"), None)
+            if not cover or cover.attrs.get("loading") != "lazy" or cover.attrs.get("fetchpriority") != "low" or cover.attrs.get("data-ff-lcp"):
+                fehler.append("B8: Das erste Startseiten-Cover muss lazy/low "
+                              "ohne Bild-LCP-Marker sein (Text-Hero führt).")
+    else:
+        fehler.append("B8: <main class=main> fehlt im Startseiten-Build.")
+    if any(k.tag == "link" and k.attrs.get("rel") == "preload" and k.attrs.get("as") == "image"
+           for k in seite.flat):
+        fehler.append("B8: Bild-Preload im Startseiten-Head konkurriert mit dem Text-Hero.")
     return fehler
 
 
@@ -913,7 +945,9 @@ def pruefe_quelle(root: Path, datum: datetime.date, json_modus: bool = False) ->
         fehler.append(f"CSS fehlt: {css_pfad}")
     else:
         fehler += validate_css_parity(saisons, css)
-        fehler += validate_lcp_schutz(css)
+        css_dateien = sorted(css_pfad.parent.glob("*.css"))
+        gebuendelt = "\n".join(p.read_text(encoding="utf-8") for p in css_dateien)
+        fehler += validate_mobile_reihenfolge(gebuendelt)
 
     artikel = live_artikel(root)
     namen = themen_namen(root)
@@ -1099,21 +1133,19 @@ def selbsttest() -> int:
         ok &= muss(any("CSS-Drift" in f for f in fund),
                    f"CSS-Drift muss auffallen, bekommen: {fund}")
 
-        # LCP-Schutz-Detektor
-        ok &= muss(bool(validate_lcp_schutz(".ff-saison { color: red; }")),
-                   "fehlende order-Regel muss auffallen")
-        ok &= muss(bool(validate_lcp_schutz("@media (max-width: 768px) { main.main > "
-                                            "section.ff-saison { order: 0 } } "
-                                            "@media (prefers-reduced-motion: reduce) {}")),
-                   "order: 0 (vor den LCP-Karten) muss auffallen")
-        ok &= muss(bool(validate_lcp_schutz("@media (max-width: 768px) { main.main > "
-                                            "section.ff-saison { order: 6 } } "
-                                            "@media (prefers-reduced-motion: reduce) {}")),
-                   "order: 6 (hinter den Clustern) muss auffallen")
-        ok &= muss(not validate_lcp_schutz("@media (max-width: 768px) { main.main > "
-                                           "section.ff-saison { order: 5 } } "
-                                           "@media (prefers-reduced-motion: reduce) {}"),
-                   "order: 5 im 768px-Bereich muss durchgehen")
+        # DOM/Sicht-Reihenfolge und Motion-Detektor
+        motion = "@media (prefers-reduced-motion: reduce) {}"
+        ok &= muss(bool(validate_mobile_reihenfolge(".ff-saison { color: red; }")),
+                   "fehlendes Reduced-Motion-Fallback muss auffallen")
+        for ziel in ("section.ff-saison", "article.post-entry", "section.ff-entity"):
+            ok &= muss(any("S8: CSS-order" in f for f in
+                           validate_mobile_reihenfolge(
+                               f"@media (max-width: 768px) {{ main.main > {ziel} {{ order: 5 }} }} {motion}")),
+                       f"CSS-order auf {ziel} muss auffallen")
+        ok &= muss(not validate_mobile_reihenfolge(
+            "/* main.main > article.post-entry { order: 5 } */ "
+            ".ff-kostenprofil__head .ff-kostenprofil__index { order: 2 } " + motion),
+            "Kommentar oder interne Flex-Anordnung darf die Wache nicht auslösen")
 
     # Build-Prüfung an synthetischem HTML
     with tempfile.TemporaryDirectory() as tmp:
@@ -1134,9 +1166,11 @@ def selbsttest() -> int:
             "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-klick=cta_click>Zum Ratgeber</a>"
             "<a class=ff-saison-card href=/posts/a/ data-klick=cta_click "
             "data-klick-placement=start-saison data-klick-saison=herbst "
-            "data-klick-slug=saison-herbst-a aria-labelledby=a-title>"
-            "<span class=ff-saison-card-titel id=a-title>Artikel A</span></a>"
-            "</section><article class='post-entry lcp-card'></article></main>"
+            "data-klick-slug=saison-herbst-a>"
+            "<span class=ff-saison-card-titel id=a-title>Artikel A</span>"
+            "<span class=ff-saison-card-cta>Weiterlesen</span></a>"
+            "</section><article class=post-entry><img src=/images/cover.jpg loading=lazy "
+            "fetchpriority=low width=360 height=540 alt=Artikel></article></main>"
             "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
         )
         (public / "index.html").write_text(gut, encoding="utf-8")
@@ -1164,7 +1198,7 @@ def selbsttest() -> int:
                    "zwei H1 müssen auffallen")
 
     print("✅ Selbsttest bestanden (Saison-Fenster, Kalender, Kontrast, Auswahl-Spiegel, "
-          "Datenpfad, CSS-Drift, LCP-Schutz, Legacy-Stilllegung, Build-Prüfung)" if ok
+          "Datenpfad, CSS-Drift, DOM-/CSS-Reihenfolge, Legacy-Stilllegung, Build-Prüfung)" if ok
           else "❌ Selbsttest FEHLGESCHLAGEN")
     return 0 if ok else 2
 

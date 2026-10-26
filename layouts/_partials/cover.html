@@ -2,19 +2,13 @@
 {{- if (and .Params.cover.image (not $.isHidden)) }}
 <figure class="entry-cover">
     {{- $loading := cond $.IsSingle "eager" "lazy" }}
-    {{- /* LCP-Optimierung (Profi-Erkenntnis):
-           - Single-Seiten: Cover ist oben im Viewport → eager + fetchpriority=high
-             (schnellstes LCP, Bild ist das LCP-Element).
-           - Startseite: Das ERSTE Cover (Seite 1, Index 0) ist auf Desktop im
-             Viewport und das größte Element → LCP-Kandidat. eager + high, damit
-             Lighthouse LCP bewertet (lazy-Bilder im Viewport führen sonst zu
-             „LCP nicht bewertet") und das Bild früh lädt.
-           - Alle weiteren Listen-Covers: lazy (unterhalb des Folds). */}}
+    {{- /* Einzelartikel: Das Cover ist mobil im ersten Viewport und bleibt
+           eager + high. In Listen (Startseite UND /posts/) folgen erst
+           Hero bzw. Themenwelten; deren Covers liegen bei 390px > 2400px
+           unter der Navigation und bleiben lazy + low. */}}
     {{- $fetchPriority := "" }}
     {{- $isLcpCandidate := false }}
-    {{- if $.IsSingle }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ end }}
-    {{- if $.IsFirst }}{{ $loading = "eager" }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ end }}
-    {{- if not $fetchPriority }}{{ $fetchPriority = "low" }}{{ end }}
+    {{- if $.IsSingle }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ else }}{{ $fetchPriority = "low" }}{{ end }}
     {{- $fcpImageRole := cond $isLcpCandidate "lcp" "deferred" }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
     {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}

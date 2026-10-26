@@ -51,22 +51,26 @@ var lum = function (r, g, b) {
 };
 var parse = function (c) {
   var m = c.match(/rgba?\\((\\d+)[,\\s]+(\\d+)[,\\s]+(\\d+)(?:[,/\\s]+([\\d.]+))?\\)/);
-  if (!m) return null;
-  return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
+  if (m) return { r: +m[1], g: +m[2], b: +m[3], a: m[4] === undefined ? 1 : +m[4] };
+  m = c.match(/color\\(srgb\\s+([\\d.]+)\\s+([\\d.]+)\\s+([\\d.]+)(?:\\s*\\/\\s*([\\d.]+))?\\)/);
+  return m ? { r: +m[1] * 255, g: +m[2] * 255, b: +m[3] * 255, a: m[4] === undefined ? 1 : +m[4] } : null;
 };
 var blend = function (fg, bg) {
   return { r: fg.r * fg.a + bg.r * (1 - fg.a), g: fg.g * fg.a + bg.g * (1 - fg.a), b: fg.b * fg.a + bg.b * (1 - fg.a) };
 };
 var ratio = function (l1, l2) { var a = Math.max(l1, l2), b = Math.min(l1, l2); return (a + 0.05) / (b + 0.05); };
 var effBg = function (el) {
-  var node = el;
-  while (node && node !== document.documentElement) {
+  var layers = [];
+  for (var node = el; node; node = node.parentElement) {
     var bg = parse(window.getComputedStyle(node).backgroundColor);
-    if (bg && bg.a > 0.85) return bg;
-    node = node.parentElement;
+    if (bg && bg.a > 0) {
+      layers.push(bg);
+      if (bg.a >= 0.999) break;
+    }
   }
-  var rootBg = parse(window.getComputedStyle(document.documentElement).backgroundColor);
-  return rootBg && rootBg.a > 0 ? rootBg : { r: 255, g: 255, b: 255, a: 1 };
+  return layers.reverse().reduce(function (back, layer) {
+    return blend(layer, back);
+  }, { r: 255, g: 255, b: 255 });
 };
 var contrastOf = function (el) {
   if (!el) return null;
@@ -163,11 +167,10 @@ r.uebergaenge = { dauer: Object.keys(dauen).sort(), easing: Object.keys(easings)
 return r;
 `;
 
-// Startseiten-Geometrie: Belegt den LCP-Schutz der saisonalen Startseite.
-// Gemessen werden die Position des LCP-Covers (erste Artikel-Karte) relativ
-// zum Viewport, die Höhe von Hero und Saison-Block sowie die FLEX-ORDER der
-// main-Kinder – auf Mobile müssen die Artikel-Karten (order: 1) VOR dem
-// Saison-Block (order: 4) stehen, sonst wandert das LCP-Bild unter den Fold.
+// Startseiten-Geometrie: Belegt den sichtbaren Text-Hero und die
+// nachgelagerten lazy Feed-Covers. Vergleicht DOM-/Sichtreihenfolge und
+// computed order, damit eine spätere CSS-Umsortierung der Tab-Reihenfolge
+// gegenüber den Pixeln nicht still durchrutscht.
 const LAYOUT_BODY = `
 var r = {};
 var rect = function (el) {
@@ -175,16 +178,17 @@ var rect = function (el) {
   var b = el.getBoundingClientRect();
   return { top: Math.round(b.top), hoehe: Math.round(b.height), breite: Math.round(b.width) };
 };
-var lcp = document.querySelector('article.post-entry.lcp-card');
-var lcpBild = lcp ? lcp.querySelector('.entry-cover img, img') : null;
+var feed = document.querySelector('main.main > article.post-entry');
+var feedBild = feed ? feed.querySelector('.entry-cover img, img') : null;
 var saison = document.querySelector('section.ff-saison');
 r.viewport = { breite: window.innerWidth, hoehe: window.innerHeight };
-r.lcpKarte = rect(lcp);
-r.lcpBild = rect(lcpBild);
-r.lcpBildImViewport = !!(lcpBild && lcpBild.getBoundingClientRect().top < window.innerHeight && lcpBild.getBoundingClientRect().height > 0);
+r.feedKarte = rect(feed);
+r.feedBild = rect(feedBild);
+r.feedBildImViewport = !!(feedBild && feedBild.getBoundingClientRect().top < window.innerHeight && feedBild.getBoundingClientRect().height > 0);
 r.saisonBlock = rect(saison);
 r.saisonImViewport = !!(saison && saison.getBoundingClientRect().top < window.innerHeight);
 r.hero = rect(document.querySelector('article.first-entry.home-info'));
+r.heroH1 = rect(document.querySelector('article.first-entry.home-info h1'));
 r.badge = rect(document.querySelector('.ff-saison-badge'));
 r.reihenfolge = Array.prototype.slice.call(document.querySelectorAll('main.main > *')).map(function (el) {
   return el.tagName.toLowerCase() + '.' + String(el.className || '').split(' ')[0] + ' (order ' + getComputedStyle(el).order + ')';
@@ -313,7 +317,7 @@ const probes = {
       await mp.goto(BASE + articlePath);
       report.seiten['tapziele-' + scheme] = await mp.evaluate(probes.tapziele);
 
-      // Mobile Startseite: bleibt das LCP-Cover trotz Saison-Block im Viewport?
+      // Mobile Startseite: Text-H1 oben, Feed-Cover lazy unter dem Fold?
       await mp.goto(BASE + '/');
       report.seiten['startseite-layout-mobile-' + scheme] = await mp.evaluate(probes.layout);
 

@@ -27,7 +27,7 @@ quellen:
 ---
 Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der Buchung von Mietwagen, Flügen und Pauschalreisen lauern zahlreiche Kostenfallen. Vor allem an den Schaltern der Autovermieter am Urlaubsflughafen versuchen viele Anbieter, teure Zusatzversicherungen zu verkaufen oder mit unfairen Tankregelungen abzukassieren. Wer am Schalter die Zusatzversicherung des Vermieters kauft, zahlt schnell das Doppelte des Buchungspreises. Mit der richtigen Vorbereitung bleibt dein Mietwagen ein Schnäppchen statt einer Kostenfalle.
 
-### Das Wichtigste auf einen Blick
+## Das Wichtigste auf einen Blick
 
 * **Vollkasko ohne Selbstbeteiligung buchen:** Schließe den Vollkaskoschutz mit Erstattung der Selbstbeteiligung immer schon vorab im Online-Vergleich ab – das ist bis zu 70&nbsp;% günstiger als vor Ort am Schalter.
 * **Faire Tankregelung "Voll zu Voll":** Wähle ausschließlich Angebote mit der Option "Voll übernommen, voll zurückgegeben", um überteuerte Servicegebühren fürs Nachtanken zu vermeiden.

@@ -78,7 +78,10 @@
       <a class="ff-saison-card" href="{{ $seite.RelPermalink }}"
          data-klick="cta_click" data-klick-cta="saison-{{ $saison.id }}-artikel"
          data-klick-slug="{{ $cardSlug }}" data-klick-placement="start-saison"
-         data-klick-saison="{{ $saison.id }}" aria-labelledby="{{ $cardSlug }}-title">
+         data-klick-saison="{{ $saison.id }}">
+        {{- /* Der native Linkname enthält Datum, Thema, Titel und CTA.
+               aria-labelledby nur auf den Titel unterschlug sichtbaren Text
+               (WCAG 2.5.3: Label in Name / Sprachsteuerung). */ -}}
         <span class="ff-saison-card-meta">
           <time datetime="{{ $seite.Date.Format "2006-01-02" }}">{{ $seite.Date | time.Format "02.01.2006" }}</time>
           {{- with $seite.Params.pillar -}}
@@ -90,7 +93,7 @@
           {{- end -}}
         </span>
         <span class="ff-saison-card-titel" id="{{ $cardSlug }}-title">{{ $seite.Title }}</span>
-        <span class="ff-saison-card-cta" aria-hidden="true">Weiterlesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span>
+        <span class="ff-saison-card-cta">Weiterlesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span>
       </a>
     </li>
     {{- end -}}

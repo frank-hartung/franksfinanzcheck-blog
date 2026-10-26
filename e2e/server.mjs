@@ -32,6 +32,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // gibt es hier schon. Ohne die Variable bleibt alles wie bisher.
 const BASE = path.resolve(process.env.E2E_ROOT || path.join(__dirname, '..', 'public'));
 const PORT = Number(process.env.E2E_PORT || 4173);
+// Lokal nur Loopback; für eine ausdrücklich freigegebene Vorschau kann der
+// Host per E2E_HOST=0.0.0.0 geöffnet werden. Die Tests bleiben isoliert.
+const HOST = process.env.E2E_HOST || '127.0.0.1';
 
 if (!fs.existsSync(path.join(BASE, 'index.html'))) {
   console.error(
@@ -182,6 +185,6 @@ const server = http.createServer((req, res) => {
   res.end('404 – Seite nicht gefunden');
 });
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`[E2E] Serviere ${BASE} auf http://127.0.0.1:${PORT}`);
+server.listen(PORT, HOST, () => {
+  console.log(`[E2E] Serviere ${BASE} auf http://${HOST}:${PORT}`);
 });

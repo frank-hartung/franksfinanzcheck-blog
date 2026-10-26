@@ -317,13 +317,17 @@ class TemplateInvarianten(unittest.TestCase):
                              f"{rel}: .Lastmod ist die Datei-Mtime = Deploy-Zeit und "
                              "damit eine erfundene Frische")
 
-    def test_head_hat_preload_bremse_fuer_pager_und_archive(self):
+    def test_head_preload_nur_fuer_sichtbare_einzelartikel(self):
         src = self.read("layouts/_partials/head.html")
-        self.assertIn("$noPreload", src)
-        self.assertIn('eq .Kind "term"', src)
-        self.assertIn("PageNumber", src,
-                      "Pager-Erkennung über .Paginator.PageNumber muss bleiben – "
-                      ".RelPermalink ist auf Pager-Seiten die Basis-URL")
+        preload_block = src.split('{{- $lcpCover := "" -}}', 1)[1].split(
+            '<link rel="preload" as="font"', 1)[0]
+        self.assertIn('if eq .Kind "page"', preload_block,
+                      "Listen, Pager und Archive dürfen kein Cover vorladen")
+        self.assertNotIn('eq .Kind "section"', preload_block)
+        self.assertNotIn('.IsHome', preload_block)
+        self.assertIn('cover.hiddenInSingle', preload_block)
+        self.assertIn('cover.preload false', preload_block)
+        self.assertIn('data-ff-lcp-optimizer="true"', preload_block)
 
     def test_robots_txt_ermoeglicht_antwortmaschinen_und_sperrt_nicht(self):
         src = self.read("layouts/robots.txt")

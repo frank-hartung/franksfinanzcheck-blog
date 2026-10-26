@@ -94,6 +94,14 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     expect(types.has('BreadcrumbList'), 'BreadcrumbList-Schema vorhanden').toBe(true);
   });
 
+  test('Markdown-Checklisten enthalten keine unbeschrifteten, deaktivierten Formularfelder', async ({ page }) => {
+    await page.goto('/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/');
+    const marken = page.locator('.post-content .ff-task-mark[aria-hidden="true"]');
+    await expect(marken, 'fünf lesbare, rein dekorative Abhak-Marker').toHaveCount(5);
+    await expect(page.locator('.post-content input[type="checkbox"][disabled]'),
+      'Goldmark-Inputs dürfen nicht ohne Labels in der Accessibility-Tree hängen').toHaveCount(0);
+  });
+
   test('Bilder: geladen, alt-Texte, width/height (CLS-Schutz)', async ({ page }) => {
     const articlePath = await newestArticlePath(page);
     await page.goto(articlePath, { waitUntil: 'load' });
@@ -113,8 +121,14 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
         probleme.push(`nicht geladen: ${src}`);
       }
       const alt = await img.getAttribute('alt');
-      const istDeko = (await img.getAttribute('aria-hidden')) === 'true';
-      if ((alt === null || alt.trim() === '') && !istDeko) probleme.push(`ohne alt: ${src}`);
+      // Im verwandten Ratgeber ist das Bild dekorativ: Titel und Teaser
+      // beschriften denselben Link bereits. alt="" vermeidet doppeltes
+      // Vorlesen, bleibt aber ein bewusst gesetztes alt-Attribut.
+      const linkbildMitTitel = await img.evaluate((el) =>
+        el.matches('.ff-related-card__img') && !!el.closest('a.ff-related-card')?.querySelector('.ff-related-card__heading')?.textContent.trim());
+      const istDeko = (await img.getAttribute('aria-hidden')) === 'true' || linkbildMitTitel;
+      if (alt === null || (alt.trim() === '' && !istDeko)) probleme.push(`ohne alt: ${src}`);
+      if (linkbildMitTitel && alt !== '') probleme.push(`redundantes Cover-alt im Linknamen: ${src}`);
       // Layout-Stabilität (CWV-Gate des Blogs): dimensionierte Bilder
       if (!(await img.getAttribute('width')) || !(await img.getAttribute('height'))) {
         probleme.push(`ohne width/height (CLS-Risiko): ${src}`);
