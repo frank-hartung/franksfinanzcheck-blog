@@ -715,6 +715,146 @@ class EntscheidungenUndFristen(unittest.TestCase):
         self.assertEqual(len(g.verlauf_laden(pfad)), 1)
 
 
+class FristenblattUndBeobachtung(unittest.TestCase):
+    """Punkt 2 und 3 vom 26.10.2026: Frist ohne Beleg, Zahl ohne Meinung.
+
+    Seite 2 ist nur über die Detail-Liste „Gefunden – zurzeit nicht indexiert“
+    entscheidbar; fehlt sie, lautet die Auskunft „Beleg fehlt“ und nicht
+    „wahrscheinlich nicht indexiert“. Seite 1 wird beobachtet: eine Zahl je
+    Momentaufnahme, ein Trend erst ab der zweiten – und eine Frist, damit aus
+    Beobachten kein Vergessen wird.
+    """
+
+    def setUp(self) -> None:
+        import datetime
+        self.dt = datetime
+        self.tmp = Path(tempfile.mkdtemp())
+        self.verlauf = self.tmp / "verlauf.jsonl"
+        self.details = self.tmp / "details"
+        self._register = {"/posts/a/": {
+            "url": "/posts/a/", "entscheidung": "Rolle bestätigt",
+            "am": "2026-10-26", "wiedervorlage": "2026-10-31",
+            "erwartung": "indexiert", "eigentuemer": "redaktion",
+            "begruendung": "Test"}}
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _verlauf(self, *zeilen: dict) -> Path:
+        self.verlauf.write_text(
+            "\n".join(json.dumps(z) for z in zeilen) + "\n", encoding="utf-8")
+        return self.verlauf
+
+    def _fristen(self, heute: str = "2026-10-26") -> dict:
+        with mock.patch.object(g, "DETAILS", self.details), \
+             mock.patch.object(g, "TOP_SEITEN", self.tmp / "top.json"):
+            return g.fristen(self.dt.date.fromisoformat(heute),
+                             register=self._register,
+                             details=g.detail_stand(self.dt.date.fromisoformat(heute)),
+                             verlauf_pfad=self.verlauf)
+
+    def _detail_liste(self, *pfade: str) -> None:
+        self.details.mkdir(parents=True, exist_ok=True)
+        zeilen = ["URL,Zuletzt gecrawlt"] + [
+            f"https://franksfinanzcheck.de{p},2026-10-26" for p in pfade]
+        (self.details / "Gefunden – zurzeit nicht indexiert.csv").write_text(
+            "\n".join(zeilen) + "\n", encoding="utf-8")
+
+    # ---------------------------------------------------------------- Punkt 3
+    def test_eine_momentaufnahme_ist_eine_zahl_kein_trend(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        b = g.beobachtung(self.verlauf, self.dt.date(2026, 10, 26))
+        self.assertEqual(b["zahl"], 26.8)
+        self.assertEqual(b["reihen"], 1)
+        self.assertIsNone(b["trend"])
+        self.assertEqual(b["status"], "eine_messung")
+        self.assertIn("26,8 %", b["text"])
+        self.assertEqual(b["faellig_am"], "2026-11-02")
+
+    def test_zweite_messung_macht_den_trend(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320},
+                      {"datum": "2026-11-02", "indexiert": 130, "nicht_indexiert": 307})
+        b = g.beobachtung(self.verlauf, self.dt.date(2026, 11, 2))
+        self.assertEqual(b["status"], "beobachtet")
+        self.assertEqual(b["trend"]["von_datum"], "2026-10-19")
+        self.assertGreater(b["trend"]["delta"], 0)
+
+    def test_alte_messung_ist_erinnerung(self) -> None:
+        self._verlauf({"datum": "2026-09-01", "indexiert": 100, "nicht_indexiert": 337})
+        b = g.beobachtung(self.verlauf, self.dt.date(2026, 10, 26))
+        self.assertEqual(b["status"], "veraltet")
+        self.assertTrue(g._beobachtung_faellig(b, self.dt.date(2026, 10, 26)))
+
+    def test_frische_einzelmessung_loest_die_wache_nicht_aus(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        b = g.beobachtung(self.verlauf, self.dt.date(2026, 10, 26))
+        self.assertFalse(g._beobachtung_faellig(b, self.dt.date(2026, 10, 26)))
+        # ... aber am Tag nach der Fälligkeit sehr wohl.
+        self.assertTrue(g._beobachtung_faellig(b, self.dt.date(2026, 11, 3)))
+
+    def test_ohne_verlauf_keine_zahl(self) -> None:
+        b = g.beobachtung(self.verlauf, self.dt.date(2026, 10, 26))
+        self.assertEqual(b["status"], "keine_messung")
+        self.assertIsNone(b["zahl"])
+
+    # ---------------------------------------------------------------- Punkt 2
+    def test_fehlende_detail_liste_heisst_beleg_fehlt(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        f = self._fristen()
+        self.assertEqual(f["zeilen"][0]["beleg_status"], "fehlt")
+        self.assertFalse(f["reif"])
+        self.assertEqual(f["dringend"], ["/posts/a/"])
+        self.assertIn("Beleg beschaffen", f["zeilen"][0]["naechster_schritt"])
+
+    def test_detail_liste_macht_den_fall_entscheidbar(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        self._detail_liste("/posts/a/")
+        f = self._fristen()
+        self.assertEqual(f["zeilen"][0]["beleg_status"], "belegt: nicht indexiert")
+        self.assertTrue(f["reif"])
+
+    def test_nicht_in_der_liste_heisst_indexiert(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        self._detail_liste("/posts/b/")
+        f = self._fristen()
+        self.assertEqual(f["zeilen"][0]["beleg_status"], "belegt: indexiert")
+
+    def test_fehlende_datei_ist_nicht_die_leere_menge(self) -> None:
+        with mock.patch.object(g, "DETAILS", self.details):
+            self.assertIsNone(g.detail_seiten("gibt-es-nicht.csv"))
+            self.details.mkdir(parents=True, exist_ok=True)
+            (self.details / "leer.csv").write_text("URL\n", encoding="utf-8")
+            self.assertEqual(g.detail_seiten("leer.csv"), set())
+
+    def test_frist_in_sieben_tagen_ohne_beleg_macht_die_wache_rot(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        self._register["/posts/a/"]["wiedervorlage"] = "2026-11-01"
+        f = self._fristen(heute="2026-10-26")
+        self.assertEqual(f["zeilen"][0]["tage"], 6)
+        self.assertEqual(f["dringend"], ["/posts/a/"])
+
+    def test_markdown_nennt_zahl_und_beleg(self) -> None:
+        self._verlauf({"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320})
+        text = g.fristen_markdown(self._fristen())
+        self.assertIn("Indexquote (eine Zahl):** 26,8 %", text)
+        self.assertIn("| 2026-10-31 | 5 | indexiert | fehlt |", text)
+
+    # ---------------------------------------------------------------- Bestand
+    def test_register_hat_beide_p2_entscheidungen_mit_frist(self) -> None:
+        register = g.entscheidungen()
+        self.assertEqual(len(register), 2)
+        for url, eintrag in register.items():
+            self.assertEqual(eintrag["wiedervorlage"], "2026-11-25", url)
+            self.assertEqual(eintrag["erwartung"], "indexiert", url)
+            self.assertEqual(eintrag["eigentuemer"], "redaktion", url)
+
+    def test_fristenblatt_des_bestands_ist_lesbar(self) -> None:
+        # Der echte Lauf darf nicht werfen und muss die eine Zahl zeigen.
+        f = g.fristen()
+        self.assertGreaterEqual(f["anzahl"], 2)
+        self.assertIn("%", g.fristen_markdown(f))
+
+
 class TitelUeberschneidung(unittest.TestCase):
     """Kannibalisierung wird am Titel gemessen, nicht am Slug.
 
