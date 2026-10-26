@@ -2930,6 +2930,270 @@ def abnahme(a: dict) -> list[dict]:
     return ergebnis
 
 
+# --------------------------------------------------------------------------
+#  Fristen und Beobachtung – die zwei offenen Punkte vom 26.10.2026
+# --------------------------------------------------------------------------
+#
+# Zwei Aufgaben, zwei verschiedene Antworten – und beide brauchen eine Zahl,
+# keine Meinung:
+#
+#   Punkt 2 (Seite 2): Ob eine Seite im Index ist, steht in der Detail-Liste
+#   „Gefunden – zurzeit nicht indexiert“. Fehlt die Liste, ist die Frage
+#   nicht beantwortbar – dann ist die ehrliche Auskunft „Beleg fehlt“ und
+#   nicht „wahrscheinlich nicht indexiert“.
+#
+#   Punkt 3 (Seite 1): Die Indexquote ist EINE Zahl je Momentaufnahme. Erst
+#   mit zwei Messungen gibt es einen Trend. Bis dahin lautet der Status
+#   „unbekannt“ – und die Beobachtung hat eine Frist, sonst ist sie ein
+#   Vorsatz.
+
+# So alt darf eine Momentaufnahme werden, bevor sie keine Beobachtung mehr
+# ist, sondern Erinnerung.
+BEOBACHTUNG_FRIST_TAGE = 14
+
+
+def _de_zahl(wert) -> str:
+    """Deutsches Zahlenformat: 26,8 statt 26.8 – wie im Bericht."""
+    if wert is None:
+        return "—"
+    return f"{wert:.1f}".replace(".", ",")
+
+
+def beobachtung(verlauf_pfad: Path | None = None, heute: dt.date | None = None) -> dict:
+    """Die Indexquote als eine Zahl – mit Stichprobenumfang und Frist.
+
+    Rückgabe bewusst ohne Interpretation: `trend` ist erst gesetzt, wenn
+    mindestens zwei Momentaufnahmen vorliegen. Alles andere wäre eine Meinung
+    über eine einzelne Messung.
+    """
+    heute = heute or dt.date.today()
+    quelle = Path(verlauf_pfad or (ABDECKUNG / "verlauf.jsonl"))
+    reihen = []
+    if quelle.exists():
+        for zeile in quelle.read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                reihe = json.loads(zeile)
+            except ValueError:
+                continue
+            if isinstance(reihe, dict) and reihe.get("datum"):
+                reihen.append(reihe)
+    reihen.sort(key=lambda r: r.get("datum") or "")
+    if not reihen:
+        return {"status": "keine_messung", "reihen": 0, "zahl": None,
+                "datum": None, "alter_tage": None, "faellig_am": None,
+                "trend": None, "text": "Keine Momentaufnahme – keine Zahl, keine Aussage."}
+    letzte = reihen[-1]
+    indexiert = letzte.get("indexiert")
+    nicht_indexiert = letzte.get("nicht_indexiert")
+    bekannt = (indexiert or 0) + (nicht_indexiert or 0)
+    zahl = prozent(indexiert or 0, bekannt)
+    try:
+        datum = dt.date.fromisoformat(str(letzte.get("datum"))[:10])
+        alter = (heute - datum).days
+        faellig = datum + dt.timedelta(days=BEOBACHTUNG_FRIST_TAGE)
+    except (TypeError, ValueError):
+        datum, alter, faellig = None, None, None
+    trend = None
+    if len(reihen) >= 2:
+        vorher = reihen[-2]
+        vorher_bekannt = (vorher.get("indexiert") or 0) + (vorher.get("nicht_indexiert") or 0)
+        trend = {
+            "von_datum": vorher.get("datum"),
+            "von_quote": prozent(vorher.get("indexiert") or 0, vorher_bekannt),
+            "delta": None,
+        }
+        trend["delta"] = round(zahl - trend["von_quote"], 1)
+    # Reihenfolge ist Absicht: Eine einzelne, uralte Messung ist keine
+    # „eine Messung“, sondern Erinnerung – das Alter schlägt die Anzahl.
+    if alter is not None and alter > BEOBACHTUNG_FRIST_TAGE:
+        status = "veraltet"
+    elif alter is None:
+        status = "datum_unlesbar"
+    elif len(reihen) < 2:
+        status = "eine_messung"
+    else:
+        status = "beobachtet"
+    if status == "eine_messung":
+        text = (f"Indexquote {_de_zahl(zahl)} % ({indexiert or 0} von {bekannt}) – eine "
+                f"Momentaufnahme vom {letzte.get('datum')}. Ein Wert ist keine "
+                "Entwicklung: Der Trend bleibt „unbekannt“, bis eine zweite "
+                f"Messung vorliegt (fällig bis {faellig.isoformat() if faellig else '?'}).")
+    elif status == "veraltet":
+        text = (f"Indexquote {_de_zahl(zahl)} % – die letzte Momentaufnahme ist {alter} Tage alt "
+                f"(Stand {letzte.get('datum')}). Älter als {BEOBACHTUNG_FRIST_TAGE} Tage "
+                "ist keine Beobachtung mehr, sondern Erinnerung: neuen Export einlesen.")
+    elif status == "beobachtet":
+        text = (f"Indexquote {_de_zahl(zahl)} % ({indexiert or 0} von {bekannt}), "
+                f"{len(reihen)} Momentaufnahmen, letzte vom {letzte.get('datum')}"
+                + (f" – Veränderung {trend['delta']:+} Punkte gegenüber "
+                   f"{trend['von_datum']}." if trend and trend["delta"] is not None else "."))
+    else:
+        text = f"Indexquote {_de_zahl(zahl)} % – Datum der Momentaufnahme unlesbar, Trend ungeprüft."
+    return {"status": status, "reihen": len(reihen), "zahl": zahl,
+            "indexiert": indexiert, "nicht_indexiert": nicht_indexiert,
+            "bekannt": bekannt, "datum": letzte.get("datum"), "alter_tage": alter,
+            "faellig_am": faellig.isoformat() if faellig else None,
+            "trend": trend, "text": text}
+
+
+# Welcher Beleg eine Entscheidung prüfbar macht. `erwartung` steht im Register;
+# die Zuordnung Beleg → Datei ist der Vertrag zwischen Entscheidung und Messung.
+BELEG_JE_ERWARTUNG = {
+    "indexiert": "Gefunden – zurzeit nicht indexiert.csv",
+    "impressionen": "Leistungsdaten (data/gsc/top_seiten_28t.json)",
+}
+
+
+def _pfad_normal(wert: str) -> str:
+    """URL → Pfad. Die Search Console exportiert volle Adressen, das Repo Pfade."""
+    pfad = re.sub(r"^https?://[^/]+", "", str(wert or "").strip())
+    pfad = pfad.split("?")[0].split("#")[0]
+    return (pfad or "/").rstrip("/") or "/"
+
+
+def detail_seiten(dateiname: str) -> set[str] | None:
+    """Die Seiten einer Detail-Liste als Pfade – None, wenn die Datei fehlt.
+
+    Der Unterschied ist wichtig: Eine leere Menge heißt „die Liste ist da und
+    nennt keine Seite“, None heißt „die Liste fehlt, ich weiß es nicht“. Wer
+    beides gleich behandelt, erfindet Befunde.
+    """
+    pfad = DETAILS / dateiname
+    if not pfad.exists():
+        return None
+    seiten: set[str] = set()
+    try:
+        with pfad.open(encoding="utf-8-sig", newline="") as fh:
+            leser = csv.DictReader(fh)
+            spalte = next((k for k in (leser.fieldnames or [])
+                           if str(k).strip().lower() in ("url", "seite", "page", "adresse")), None)
+            if spalte is None:
+                return seiten
+            for zeile in leser:
+                wert = zeile.get(spalte)
+                if wert:
+                    seiten.add(_pfad_normal(wert))
+    except (OSError, csv.Error, UnicodeDecodeError):
+        return None
+    return seiten
+
+
+def _beobachtung_faellig(beob: dict, heute: dt.date) -> bool:
+    """Ist die Beobachtung überfällig – oder nur noch nicht fertig?"""
+    status = beob.get("status")
+    if status in ("keine_messung", "veraltet", "datum_unlesbar"):
+        return True
+    if status == "eine_messung":
+        faellig = beob.get("faellig_am")
+        try:
+            return heute > dt.date.fromisoformat(str(faellig)[:10])
+        except (TypeError, ValueError):
+            return True
+    return False
+
+
+def fristen(heute: dt.date | None = None,
+            register: dict[str, dict] | None = None,
+            details: dict | None = None,
+            verlauf_pfad: Path | None = None) -> dict:
+    """Welche Entscheidung ist wann fällig – und liegt der Beleg dafür vor?
+
+    Eine Frist ohne Beleg ist genauso wertlos wie ein Beleg ohne Frist. Diese
+    Funktion verbindet beides und macht daraus eine Zeile je Entscheidung:
+
+      Frist · Tage · erwartete Wirkung · Beleg (vorhanden / fehlt / alt)
+
+    `reif` ist False, sobald eine Frist in sieben Tagen oder weniger abläuft
+    und der Beleg fehlt – dann ist Handeln fällig, nicht Berichten.
+    """
+    heute = heute or dt.date.today()
+    register = register if register is not None else entscheidungen()
+    details = details if details is not None else detail_stand(heute)
+    beob = beobachtung(verlauf_pfad, heute)
+
+    zeilen = []
+    for url, eintrag in sorted(register.items()):
+        faellig = (eintrag.get("wiedervorlage") or "")[:10]
+        try:
+            tage = (dt.date.fromisoformat(faellig) - heute).days
+        except ValueError:
+            tage = None
+        erwartung = eintrag.get("erwartung") or "indexiert"
+        beleg = BELEG_JE_ERWARTUNG.get(erwartung, "—")
+        if erwartung == "impressionen":
+            daten_da = TOP_SEITEN.exists()
+            beleg_status = "vorhanden" if daten_da else "fehlt"
+        elif erwartung == "keine":
+            beleg_status = "nicht nötig"
+        else:
+            seiten = detail_seiten(beleg)
+            if seiten is None:
+                beleg_status = "fehlt"
+            elif _pfad_normal(url) in seiten:
+                beleg_status = "belegt: nicht indexiert"
+            else:
+                beleg_status = "belegt: indexiert"
+        naechster_schritt = ("Beleg beschaffen: " + beleg if beleg_status == "fehlt"
+                             else f"Wirkung prüfen ({erwartung})")
+        zeilen.append({
+            "url": url, "entscheidung": eintrag.get("entscheidung") or "entschieden",
+            "faellig": faellig or None, "tage": tage, "erwartung": erwartung,
+            "beleg": beleg, "beleg_status": beleg_status,
+            "eigentuemer": eintrag.get("eigentuemer") or "redaktion",
+            "begruendung": eintrag.get("begruendung") or "",
+            "naechster_schritt": naechster_schritt,
+        })
+    dringend = [z for z in zeilen
+                if z["beleg_status"] == "fehlt" and z["tage"] is not None and z["tage"] <= 7]
+    return {
+        "heute": heute.isoformat(),
+        "zeilen": zeilen,
+        "anzahl": len(zeilen),
+        "dringend": [z["url"] for z in dringend],
+        "beobachtung": beob,
+        # Rot wird die Beobachtung erst, wenn sie IHR Versprechen bricht:
+        # keine Messung, eine unlesbare Messung, eine zu alte – oder eine
+        # zweite, die zum Fälligkeitstag noch nicht da ist. Eine einzelne
+        # frische Zahl ist kein Fehler, sondern der Ausgangspunkt.
+        "beobachtung_faellig": _beobachtung_faellig(beob, heute),
+        "details": details,
+        "reif": not dringend,
+    }
+
+
+def fristen_markdown(f: dict) -> str:
+    """Das Fristenblatt für den Wochenbericht – eine Tabelle, kein Prosaersatz."""
+    zeilen = ["## Fristen und Belege", ""]
+    beob = f.get("beobachtung") or {}
+    zeilen.append(f"**Indexquote (eine Zahl):** {_de_zahl(beob.get('zahl'))} % · "
+                  f"{beob.get('reihen', 0)} Momentaufnahme(n) · "
+                  f"Stand {beob.get('datum')}")
+    zeilen.append("")
+    zeilen.append(beob.get("text") or "")
+    zeilen.append("")
+    if not f["zeilen"]:
+        zeilen += ["Keine Entscheidung mit Frist im Register.", ""]
+        return "\n".join(zeilen)
+    zeilen += ["| Frist | Tage | Erwartung | Beleg | Seite |",
+               "|---|---|---|---|---|"]
+    for z in f["zeilen"]:
+        tage = "—" if z["tage"] is None else ("überfällig" if z["tage"] < 0 else str(z["tage"]))
+        zeilen.append(f"| {z['faellig'] or '—'} | {tage} | {z['erwartung']} | "
+                      f"{z['beleg_status']} | `{z['url']}` |")
+    zeilen.append("")
+    if f.get("details") and (f["details"].get("fehlend")):
+        zeilen.append(f"Fehlende Detail-Listen ({len(f['details']['fehlend'])}): "
+                      + ", ".join(f["details"]["fehlend"]) + ".")
+        zeilen.append("")
+    if f["dringend"]:
+        zeilen.append(f"**{len(f['dringend'])} Frist in sieben Tagen oder weniger ohne Beleg** – "
+                      "jetzt handeln, nicht berichten.")
+    else:
+        zeilen.append("Keine Frist in den nächsten sieben Tagen ohne Beleg.")
+    zeilen.append("")
+    return "\n".join(zeilen)
+
+
 def git_ereignisse(von: dt.date, bis: dt.date, root: Path = ROOT,
                    max_commits: int = 500) -> dict:
     """Was hat das Repo an diesen Tagen geändert? Beleg statt Vermutung.
@@ -3801,6 +4065,69 @@ def selbsttest() -> int:
                erst == 1 and zweit == 0 and len(gelesen_v) == 1
                and offen_seit("/posts/x/", gelesen_v, dt.date(2026, 11, 5)) == 10)
 
+        # --- Punkt 3: eine Zahl statt einer Meinung, mit Frist
+        vdatei = tmp / "verlauf-kpi.jsonl"
+        eine = {"datum": "2026-10-19", "indexiert": 117, "nicht_indexiert": 320}
+        vdatei.write_text(json.dumps(eine) + "\n", encoding="utf-8")
+        b1 = beobachtung(vdatei, dt.date(2026, 10, 26))
+        pruefe("K79 eine Momentaufnahme ist eine Zahl, kein Trend",
+               b1["status"] == "eine_messung" and b1["zahl"] == 26.8
+               and b1["trend"] is None and b1["reihen"] == 1)
+        pruefe("K79b die zweite Messung hat eine Frist",
+               b1["faellig_am"] == "2026-11-02" and not _beobachtung_faellig(
+                   b1, dt.date(2026, 10, 26)))
+        pruefe("K79c eine überfällige zweite Messung macht die Wache rot",
+               _beobachtung_faellig(b1, dt.date(2026, 11, 3)))
+        vdatei.write_text("\n".join([json.dumps(eine), json.dumps(
+            {"datum": "2026-11-02", "indexiert": 130, "nicht_indexiert": 307})]) + "\n",
+            encoding="utf-8")
+        b2 = beobachtung(vdatei, dt.date(2026, 11, 2))
+        pruefe("K79d zwei Messungen ergeben einen Trend",
+               b2["status"] == "beobachtet" and b2["trend"]["delta"] is not None
+               and b2["trend"]["von_datum"] == "2026-10-19")
+        vdatei.write_text(json.dumps({"datum": "2026-09-01", "indexiert": 100,
+                                      "nicht_indexiert": 337}) + "\n", encoding="utf-8")
+        pruefe("K79e eine alte Messung ist Erinnerung, keine Beobachtung",
+               beobachtung(vdatei, dt.date(2026, 10, 26))["status"] == "veraltet")
+
+        # --- Punkt 2: Frist ohne Beleg ist ein Vorsatz
+        echt_details = globals()["DETAILS"]
+        echtes_top = globals()["TOP_SEITEN"]
+        try:
+            globals()["DETAILS"] = tmp / "details-frist"
+            globals()["TOP_SEITEN"] = tmp / "top-seiten-fehlt.json"
+            reg = {"/posts/a/": {"url": "/posts/a/", "entscheidung": "Rolle bestätigt",
+                                 "am": "2026-10-26", "wiedervorlage": "2026-10-31",
+                                 "erwartung": "indexiert", "eigentuemer": "redaktion",
+                                 "begruendung": "Test"}}
+            f1 = fristen(dt.date(2026, 10, 26), register=reg, details=detail_stand(),
+                         verlauf_pfad=vdatei)
+            pruefe("K80 fehlende Detail-Liste heißt „Beleg fehlt“, nicht „unbekannt“",
+                   f1["zeilen"][0]["beleg_status"] == "fehlt"
+                   and f1["dringend"] == ["/posts/a/"] and f1["reif"] is False)
+            DETAILS.mkdir(parents=True, exist_ok=True)
+            (DETAILS / "Gefunden – zurzeit nicht indexiert.csv").write_text(
+                "URL,Zuletzt gecrawlt\nhttps://franksfinanzcheck.de/posts/a/,2026-10-26\n",
+                encoding="utf-8")
+            f2 = fristen(dt.date(2026, 10, 26), register=reg, details=detail_stand(),
+                         verlauf_pfad=vdatei)
+            pruefe("K80b die Detail-Liste macht den Fall entscheidbar",
+                   f2["zeilen"][0]["beleg_status"] == "belegt: nicht indexiert"
+                   and f2["reif"] is True)
+            pruefe("K80c Detail-Liste wird über Pfad verglichen, nicht über die volle URL",
+                   detail_seiten("Gefunden – zurzeit nicht indexiert.csv") == {"/posts/a"})
+            pruefe("K80d fehlende Datei ergibt None, nicht die leere Menge",
+                   detail_seiten("gibt-es-nicht.csv") is None)
+            (DETAILS / "Gefunden – zurzeit nicht indexiert.csv").write_text(
+                "URL\nhttps://franksfinanzcheck.de/posts/anders/\n", encoding="utf-8")
+            f3 = fristen(dt.date(2026, 10, 26), register=reg, details=detail_stand(),
+                         verlauf_pfad=vdatei)
+            pruefe("K80e nicht in der Liste heißt indexiert",
+                   f3["zeilen"][0]["beleg_status"] == "belegt: indexiert")
+        finally:
+            globals()["DETAILS"] = echt_details
+            globals()["TOP_SEITEN"] = echtes_top
+
         pruefe("K64 Triage-Markdown trägt die Tabelle",
                "| Prio | Alter | URL | Grund | Aktion |" in triage_markdown(t, "Test"))
         g6 = gate({"kennzahlen": {}, "widersprueche": [],
@@ -3856,6 +4183,12 @@ def main(argv: list[str] | None = None) -> int:
                    help="höchstens N Links je Lauf einfügen (Standard 10)")
     p.add_argument("--kpi", action="store_true", help="Wochenkennzahlen zeigen")
     p.add_argument("--abnahme", action="store_true", help="Abnahmekriterien prüfen")
+    p.add_argument("--fristen", action="store_true",
+                   help="Fristenblatt: je Entscheidung Frist, Erwartung und Beleg; "
+                        "dazu die Indexquote als eine Zahl")
+    p.add_argument("--wache", action="store_true",
+                   help="mit --fristen: Exit 1, wenn eine Frist ohne Beleg abläuft "
+                        "oder die Beobachtung veraltet ist")
     p.add_argument("--ursachen", action="store_true",
                    help="Sprünge im Bericht einordnen – mit Git-Beleg, wo möglich")
     p.add_argument("--ohne-git", action="store_true",
@@ -4002,6 +4335,27 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  {kennung:14s} {url}")
                 print(f"      {eintrag.get('entscheidung')} – "
                       f"{eintrag.get('begruendung')}")
+            return 0
+
+        if args.fristen:
+            # Braucht bewusst KEINE Momentaufnahme: Das Fristenblatt muss auch
+            # dann Auskunft geben, wenn gerade nichts importiert wurde – sonst
+            # schweigt das Werkzeug genau dann, wenn eine Frist läuft.
+            f = fristen()
+            print(fristen_markdown(f))
+            for z in f["zeilen"]:
+                if z["beleg_status"] == "fehlt":
+                    print(f"  → {z['naechster_schritt']} (Eigentümer: {z['eigentuemer']}, "
+                          f"Frist {z['faellig'] or 'offen'})")
+            if args.wache:
+                gruende = []
+                if f["dringend"]:
+                    gruende.append(f"{len(f['dringend'])} Frist in sieben Tagen ohne Beleg")
+                if f["beobachtung_faellig"]:
+                    gruende.append(f"Beobachtung: {f['beobachtung'].get('status')}")
+                if gruende:
+                    print("🛑 Fristen-Wache: " + "; ".join(gruende), file=sys.stderr)
+                    return 1
             return 0
 
         if args.altlasten:

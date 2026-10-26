@@ -67,6 +67,20 @@ jobs:
           # im Bericht (M7) und braucht `fetch --shallow-since`.
           python3 scripts/gsc_abdeckung.py --ursachen --ohne-git || true
 
+      # Punkt 2 und 3 vom 26.10.2026: Das Fristenblatt nennt je Entscheidung
+      # Frist, Erwartung und Beleg – und die Indexquote als EINE Zahl mit
+      # Stichprobenumfang. Es schreibt nichts, es berichtet. Die Wache (Exit 1)
+      # läuft hier bewusst NICHT: Ein Wochenbericht soll nicht rot werden,
+      # aber er soll sagen, dass etwas fehlt.
+      - name: Fristenblatt (Beleg je Entscheidung, Indexquote als eine Zahl)
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --fristen | tee fristen.md || true
+          {
+            echo "## Fristenblatt"
+            cat fristen.md
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Triage, Register und Fristen
         env:
           INDEX_GATE_BASE: public
