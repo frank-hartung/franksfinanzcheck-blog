@@ -483,6 +483,17 @@ await run('Reihenfolgeschutz: älterer Lauf im Ereignis → Body bleibt beim jü
                      + '- **Run:** [Details ansehen](https://x/runs/7621)\nRat von gerade eben',
                    created_at: '2026-10-15T07:54:25Z' }] },
   false, [], { anzahl: 0 });
+// Fail-open auch auf dem Lagebild-Verfalls-Pfad (26.10.2026, WF-9E5A):
+// Gleiche Klasse, älterer Lauf im Body, aber die Issue-API lehnt das Update
+// ab. Kein Absturz, kein Duplikat – die Meldung bleibt unverändert offen.
+await run('Lagebild-Verfall scheitert an der API → kein Absturz, kein Duplikat, Meldung bleibt offen',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7624,
+    updateFail: true, jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/7620)\nAlt',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [], { anzahl: 0 });
 // Klassenwechsel: Einrichtung erledigt, danach scheitert der Export → der
 // Einrichtungs-Rat wäre jetzt falsch und wird ersetzt.
 await run('Klassenwechsel: Einrichtungs-Rat offen, jetzt Export rot → Rat „backup“ ersetzt ihn',

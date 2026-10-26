@@ -44,11 +44,15 @@ dass die Regeln nicht still zurückgebaut werden:
      github-script-Kontext aus – die Produktionsszenarien inkl. exakter
      #343- und #632-Reproduktion, Phantom-Filter (#218), Dedupe,
      Fachkanal-Stummschaltung und Fail-open.
-  9. LAGEBILD (WF-9E5A / #761): Eine offene Meldung behält nicht für immer
-     den Rat des ersten roten Laufs. Die Klasse des Rats steht als Marker
-     im Body (<!-- alert-runbook: … -->); ändert sie sich, schreibt der
-     nächste rote Lauf die Meldung neu – nur bei bekannter Job-Lage und
-     fail-open.
+ 9. LAGEBILD (WF-9E5A / #761; Lagebild-Verfall WF-E813 / #815, 26.10.2026):
+    Eine offene Meldung behält nicht für immer den Rat des ersten roten
+    Laufs. Die Klasse des Rats steht als Marker im Body
+    (<!-- alert-runbook: … -->); ändert sie sich, schreibt der nächste
+    rote Lauf die Meldung neu – nur bei bekannter Job-Lage und fail-open.
+    Bleibt die Klasse gleich, vergleicht der Skript die im Body
+    aufgezeichnete Lauf-ID mit der aktuellen: Ein jüngerer Lauf erneuert
+    den Lauf-Nachweis (Lagebild-Verfall), ein gleicher oder älterer Lauf
+    (Redelivery, verspätete Zustellung) lässt den Body unangetastet.
  10. JOBBEWEIS (WF-E813 / #809): „Behoben“ schließt nur noch Meldungen,
      deren gemeldete Jobs im auflösenden Lauf vorhanden und `success` sind
      (Marker <!-- alert-jobs: [...] -->, scripts/alert_resolve_gate.py).
@@ -205,6 +209,8 @@ class ProdScopingAlarm(unittest.TestCase):
                          "Klassen-Marker gehört direkt hinter den Identitäts-Marker")
         # Den Block exakt eingrenzen: vom Nachführen bis zum Anlegen. Ein
         # großzügiges Fenster sähe sonst das catch der Label-Garantie dahinter.
+        # Seit dem Lagebild-Verfall (WF-E813/#815, 26.10.2026) bedient derselbe
+        # Block auch die Frischhaltung bei gleichem Rat und jüngerem Lauf.
         start = self.code.find("if (nachzufuehren) {\n              try {")
         ende = self.code.find("github.rest.issues.createLabel(", start)
         self.assertTrue(-1 < start < ende < self.code.find("github.rest.issues.create(", ende),
@@ -213,6 +219,43 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("github.rest.issues.update(", block)
         self.assertIn("} catch (e) {", block, "Nachführen muss fail-open sein")
         self.assertIn("return;", block, "Nach dem Nachführen darf kein Duplikat entstehen")
+
+    def test_stille_frischhaltung_bei_gleichem_rat_aber_neuem_lauf(self):
+        # WF-9E5A / #761 und WF-E813 / #815 (26.10.2026): Eine offene Meldung
+        # verwies tagelang auf einen alten Lauf, obwohl ihr Body behauptete,
+        # aktuell zu sein – der alte Dedupe-Pfad schwieg bei gleichem
+        # Klassen-Marker komplett. Vertrag: Bei gleichem Rat wird die im Body
+        # aufgezeichnete Lauf-ID mit der aktuellen verglichen. Ein jüngerer
+        # Lauf schreibt die Meldung über den bestehenden Nachführ-Pfad neu;
+        # ein gleicher oder älterer Lauf (Redelivery, verspätete Zustellung)
+        # bleibt unangetastet.
+        code = self.code
+        pos_dedupe = code.find("if (open.length > 0)")
+        pos_marker = code.find("treffer.body.indexOf(runbookMarker) !== -1", pos_dedupe)
+        # Die Lauf-ID wird per Regex aus dem Body gelesen (Run- und Job-URL).
+        self.assertIn("/(?:actions\\/)?runs\\/(\\d+)/", code)
+        pos_regex = code.find("/(?:actions\\/)?runs\\/(\\d+)/", pos_marker)
+        pos_reihe = code.find("aufgezeichnetId >= Number(run.id", pos_marker)
+        pos_nach = code.find("nachzufuehren = treffer;", pos_marker)
+        self.assertTrue(-1 < pos_marker < pos_regex < pos_reihe < pos_nach,
+                        "Im Gleiche-Klasse-Zweig erst Lauf-Alter prüfen, dann nachführen")
+        # Idempotenz/Reihenfolge: aktueller oder jüngerer Body → ohne Update zurück.
+        fenster = code[pos_marker:pos_nach]
+        self.assertIn("return;", fenster, "Kein älteres Ereignis darf ein jüngeres Lagebild überschreiben")
+        # Bei veraltetem Lauf-Nachweis fällt der Pfad auf denselben
+        # fail-open-Update-Block wie der Klassenwechsel (dort bereits begrenzt).
+        start = code.find("if (nachzufuehren) {\n              try {")
+        ende = code.find("github.rest.issues.createLabel(", start)
+        block = code[start:ende]
+        self.assertIn("github.rest.issues.update(", block)
+        self.assertIn("} catch (e) {", block, "Frischhaltung muss fail-open sein")
+        self.assertIn("return;", block, "Nach der Frischhaltung kein Duplikat erzeugen")
+        # Verhaltenstiefe: Die Simulation beweist Verfall-Erneuerung,
+        # Idempotenz und den Reihenfolgeschutz gegen ältere Ereignisse.
+        sim = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
+        self.assertIn("Lagebild-Verfall", sim)
+        self.assertIn("Reihenfolgeschutz", sim)
+        self.assertIn("Nachführung idempotent", sim)
 
     def test_809_gleichzeitige_header_und_worker_befunde_haben_vorrang(self):
         code = _kommentarfrei(_text())

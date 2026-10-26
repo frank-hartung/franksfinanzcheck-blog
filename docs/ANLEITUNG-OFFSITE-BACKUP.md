@@ -1,8 +1,9 @@
 # Anleitung: Offsite-Backup einrichten, prüfen, wiederherstellen
 
-> Vorgang WF-9E5A · Meldung #761 · Stand 24.10.2026 (Highend-Dauerheilung)
+> Vorgang WF-9E5A · Meldung #761 · Stand 26.10.2026 (Highend-Dauerheilung)
 > Workflows `.github/workflows/backup-offsite.yml` + `backup-frischwache.yml` · Prüfer `scripts/backup_einrichtung.py` ·
-> Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py`
+> Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
+> Einrichtungs-Wizard `scripts/backup_einrichten_wizard.sh`
 
 ## Kurz: Was ist zu tun?
 
@@ -28,12 +29,20 @@ liegen die Zugänge, und sei es nur für Minuten, in einem Environment, das
 jeder Branch nutzen darf. Die Einrichtungsprüfung im Lauf setzt denselben
 Hinweis an den Anfang ihrer Liste („Zuerst E8“), solange das zutrifft.
 
-**Komfort-Weg (seit 25.10.2026):** Statt der sechs Klickstrecken führt
-`bash scripts/backup_einrichten_wizard.sh` am eigenen Rechner interaktiv
-durch dieselben Schritte (erst E8, dann E1–E7; Geheimnisse werden verdeckt
+**Komfort-Weg (seit 25.10.2026, Kurzbefehle seit 26.10.2026):** Statt der
+sechs Klickstrecken führt der Wizard am eigenen Rechner interaktiv durch
+dasselbe Vorgehen (erst E8, dann E1–E7; Geheimnisse werden verdeckt
 abgefragt, nie geloggt; PAT-/Cloudflare-Formulare werden vorbelegt
-geöffnet). `bash scripts/backup_einrichten_wizard.sh --check` prüft den
-Stand jederzeit ohne Änderung. Beide Wege enden an derselben Stelle.
+geöffnet):
+
+```bash
+npm run backup:einrichten     # interaktiv durch E8 + E1–E7 (bash scripts/backup_einrichten_wizard.sh)
+npm run backup:status         # aktuellen Stand E1–E8 prüfen, ohne etwas zu ändern (--check)
+```
+
+In CI verweigert sich der Wizard bewusst (kein Mensch, kein TTY) – die
+Einrichtung bleibt eine Inhaber-Aufgabe am eigenen Rechner. Beide Wege
+enden an derselben Stelle: Der erste grüne Lauf schließt #761 automatisch.
 
 Danach: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Grün
 heißt gesichert. Die offene Meldung schließt sich beim ersten grünen Lauf
@@ -72,7 +81,7 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 | **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
 | **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
 | **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
-| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 17 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (26 Tests) |
+| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 17 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (33 Tests, inkl. Wizard-Vertrag) |
 | **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
 | **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*` | `backup_freshness_guard.py` (12 Fälle) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
 

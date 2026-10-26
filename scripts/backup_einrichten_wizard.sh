@@ -344,7 +344,7 @@ check() {
     info "Der erste grüne Lauf schließt Meldung #761 automatisch."
     return 0
   fi
-  echo "  ${ROT}${FETT}$OFFENE Pflichtpunkt(e) offen.${ENDE} Einrichtung: bash scripts/backup_einrichten_wizard.sh"
+  echo "  ${ROT}${FETT}$OFFENE Pflichtpunkt(e) offen.${ENDE} Einrichtung: npm run backup:einrichten (bash scripts/backup_einrichten_wizard.sh)"
   info "Anleitung: $ANLEITUNG"
   return 1
 }

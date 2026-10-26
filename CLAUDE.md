@@ -2104,6 +2104,18 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   eigenen Namen in `runbookKlasse`; `test_alert_scoping` erzwingt, dass Klassen
   und Ratschläge deckungsgleich bleiben. Offene Alarm-Issues nie von Hand
   umschreiben – der nächste rote Lauf erledigt das.
+- **Lagebild-Verfall / stille Frischhaltung (seit 26.10.2026, WF-E813/#815,
+  dieselbe Lücke wie WF-9E5A/#761):** Bleibt die Klasse gleich, vergleicht
+  dasselbe Skript die per Regex aus dem Body gelesene Lauf-ID
+  (`/(?:actions\/)?runs\/(\d+)/`) mit dem aktuellen Lauf. Ein jüngerer Lauf
+  schreibt die Meldung über den bestehenden Nachführ-Pfad neu (Lauf-Link,
+  Zeit, Commit, Job-Liste, `alert-jobs`-Marker), ohne den Rat anzutassen;
+  ein gleicher oder älterer Lauf (Webhook-Redelivery, verspätete Zustellung)
+  lässt den Body unangetastet – Reihenfolgeschutz. Eine offene Meldung darf
+  nie auf einen alten Lauf verweisen und gleichzeitig behaupten, aktuell zu
+  sein. Der Update-Block ist fail-open – lehnt die Issue-API ab, bleibt die
+  Meldung unverändert offen, und es entsteht kein Duplikat. Vertrag:
+  `test_alert_scoping` (Strukturvertrag + 58 Sim-Szenarien).
 - **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
   Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1: nur
   `main`). Solange Zugänge fehlen und ein fremder Branch an das Environment
@@ -2122,10 +2134,20 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   über `backup-frisch` – kein Ersatz für E1–E8, sondern die operative Lücke:
   Ein Scheduler-Hänger ohne ablaufenden Token bliebe sonst bis zur nächsten
   Anleger-Frage unbemerkt. SLA: RPO 24 h / 52 h Toleranz, RTO < 60 Min.
-- Tests: `npm run test:backup` (inkl. Frische-Wache 12 Fälle) · Alarm-Szenarien #761 in
-  `scripts/tests/sim/alert_scoping_sim.mjs` · Anleitung
+- **Inhaber-Einrichtung ist der einzige offene Auftragsteil (#761):** Der
+  Schnellweg führt über `npm run backup:einrichten`
+  (`scripts/backup_einrichten_wizard.sh`, erst E8 dann E1–E7, Geheimnisse nur
+  verdeckt, in CI bewusst gesperrt); `npm run backup:status` prüft den Stand
+  ohne Änderung. Agenten setzen weiterhin keine Secrets und umschreiben keine
+  offenen Alarm-Issues von Hand.
+- Tests: `npm run test:backup` (inkl. Frische-Wache 12 Fälle, Wizard-Vertrag) ·
+  Alarm-Szenarien in `scripts/tests/sim/alert_scoping_sim.mjs` (58 Szenarien,
+  inkl. Lagebild-Verfall und Reihenfolgeschutz) · Anleitung
   `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
-  `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md` + Highend-Bericht `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-22.md`.
+  `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md` + Highend-Berichte
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-22.md`,
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-24.md` und
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-26.md`.
 
 ## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
 
