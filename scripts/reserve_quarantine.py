@@ -78,6 +78,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import os
 import re
@@ -138,6 +139,23 @@ def signatur(grund: str) -> str:
 
 def is_transient(grund: str) -> bool:
     return any(z.lower() in (grund or "").lower() for z in TRANSIENT)
+
+
+def datei_hash(slug: str, posts_dir: Path | None = None) -> str:
+    """SHA-256 des Kandidaten-Textes – der Zähler hängt an den BYTES.
+
+    Befund 26.10.2026 (Inhaltsqualität, Reserve-Engpass): Ein Kandidat wurde
+    wegen einer Politur-Ruine („23 Dezember“) zweimal bemängelt. Die Redaktion
+    reparierte den Text – der Zähler wusste davon nichts, weil er nur die
+    Fund-Signatur kennt. Die Signatur ist aber absichtlich zahlenblind
+    (`signatur()`), also blieb ein geheilter Text auf dem Weg in die
+    Ausmusterung. Ein Zähler ohne Fassungsbezug bestraft die Reparatur.
+    """
+    pfad = (Path(posts_dir) if posts_dir else POSTS_DIR) / slug / "index.md"
+    try:
+        return hashlib.sha256(pfad.read_bytes()).hexdigest()
+    except OSError:
+        return ""
 
 
 def lauf_kennung() -> str:
@@ -263,9 +281,18 @@ def record(rows: list[dict], state_path: Path | None = None,
                 ]
                 if len(kandidaten_alt) == 1:
                     eintrag = state.pop(kandidaten_alt[0], None)
+        fassung = datei_hash(slug, posts_dir)
         if not eintrag or eintrag.get("signatur") != sig:
             eintrag = {"signatur": sig, "hits": 0, "first": now_iso(),
                        "grund": grund}
+        elif fassung and eintrag.get("datei_sha256") not in (None, "", fassung):
+            # Gleiche Signatur, ANDERE Fassung: Der Fund wurde an anderen
+            # Bytes gemessen. Die Reparatur beginnt bei null – sonst wandert
+            # ein geheilter Text nach zwei Alt-Zählern in die Ausmusterung.
+            eintrag = {"signatur": sig, "hits": 0, "first": now_iso(),
+                       "grund": grund, "fassung_gewechselt": True}
+        if fassung:
+            eintrag["datei_sha256"] = fassung
         # Ein Lauf zählt genau einmal – auch wenn die Zertifizierung in
         # derselben Nacht mehrfach läuft (#349). Ein neuer Fund (andere
         # Signatur) beginnt wieder bei null und zählt in diesem Lauf.

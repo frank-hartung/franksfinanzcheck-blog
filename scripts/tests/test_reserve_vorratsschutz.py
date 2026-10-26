@@ -202,6 +202,49 @@ class KlassenTorTests(unittest.TestCase):
             self.assertTrue(eintrag["heiler"], "Heiler-Namen fehlen")
             self.assertTrue(rq.geschonte(zustand), "Schonung nicht abrufbar")
 
+    def test_reparierte_fassung_beginnt_wieder_bei_eins(self):
+        """Ein Zähler ohne Fassungsbezug bestraft die Reparatur (26.10.2026).
+
+        Anlass: Kandidat „flugvergleich“ wurde zweimal wegen „23 Dezember“
+        bemängelt; die Ruine war repariert, die Signatur (absichtlich
+        zahlenblind) blieb gleich – der geheilt Text wäre trotzdem nach dem
+        zweiten Alt-Lauf ausgemustert worden.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "posts"
+            zustand = Path(tmp) / "q.json"
+            _pool_post(posts, "kandidat")
+            rq.record([{"slug": "kandidat", "ready": False,
+                        "reason": LESBARKEIT_GRUND}], zustand, posts,
+                      apply=True, run_key="run:1")
+            erste_fassung = rq.load_state(zustand)["kandidat"]["datei_sha256"]
+            self.assertTrue(erste_fassung, "Zähler ohne Fassungsbezug")
+
+            # Reparatur: anderer Text, gleicher Befund-Wortlaut.
+            datei = posts / "kandidat" / "index.md"
+            datei.write_text(datei.read_text(encoding="utf-8") + "\nRepariert.\n",
+                             encoding="utf-8")
+            rq.record([{"slug": "kandidat", "ready": False,
+                        "reason": LESBARKEIT_GRUND}], zustand, posts,
+                      apply=True, run_key="run:2")
+            eintrag = rq.load_state(zustand)["kandidat"]
+            self.assertEqual(int(eintrag["hits"]), 1,
+                             "reparierte Fassung erbt die Alt-Zähler")
+            self.assertNotEqual(eintrag["datei_sha256"], erste_fassung)
+            self.assertIn("reserve: true",
+                          (posts / "kandidat" / "index.md").read_text(encoding="utf-8"))
+
+    def test_gleiche_fassung_zaehlt_weiter(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "posts"
+            zustand = Path(tmp) / "q.json"
+            _pool_post(posts, "kandidat")
+            for lauf in ("run:1", "run:2"):
+                rq.record([{"slug": "kandidat", "ready": False,
+                            "reason": LESBARKEIT_GRUND}], zustand, posts,
+                          apply=True, run_key=lauf)
+            self.assertEqual(int(rq.load_state(zustand)["kandidat"]["hits"]), 2)
+
     def test_geheilter_kandidat_verliert_den_zaehler(self):
         with tempfile.TemporaryDirectory() as tmp:
             posts = Path(tmp) / "posts"
