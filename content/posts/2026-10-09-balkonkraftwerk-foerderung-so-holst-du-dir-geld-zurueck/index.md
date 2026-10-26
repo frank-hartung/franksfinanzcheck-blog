@@ -1,6 +1,7 @@
 ---
 title: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
-description: Du willst Stromkosten senken? Wir zeigen, welche Balkonkraftwerk Förderung regional möglich ist und worauf du bei Antrag und Anmeldung achten musst.
+description: Stromkosten senken: Balkonkraftwerk-Förderung regional – Antrag und Anmeldung
+
 date: 2026-10-14T14:57:58Z
 draft: false
 reserve_published: 2026-10-14

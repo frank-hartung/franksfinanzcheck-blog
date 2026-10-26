@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-25
-title: "Kleine Beträge, große Wirkung: Frugalismus für den Einstieg"
+title: "Frugalismus für Einsteiger: Mit kleinen Schritten sparen"
 description: "Frugalismus für Einsteiger: So senkst du Fixkosten, stoppst Impulskäufe und machst aus kleinen Alltagsbeträgen Monat für Monat echten Spielraum."
 date: 2026-09-07T23:25:42Z
 draft: false

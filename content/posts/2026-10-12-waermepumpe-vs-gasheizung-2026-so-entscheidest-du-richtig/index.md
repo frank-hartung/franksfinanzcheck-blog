@@ -1,6 +1,7 @@
 ---
 title: "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig"
-description: Wärmepumpe oder Gasheizung? Wir zeigen, welche Anlage 2026 deine Heizkosten senken kann – klarer Heizung Vergleich. So sparst du jeden Monat bares Geld.
+description: Wärmepumpe oder Gasheizung? Welche Anlage 2026 deine Heizkosten senken kann – klarer Heizung-Vergleich. So sparst du jeden Monat.
+
 date: 2026-10-23T01:33:21Z
 draft: false
 reserve_published: 2026-10-23

@@ -242,6 +242,15 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     url = "https://mastodon.social/@FranksFinanzcheck"
     title = "FranksFinanzcheck auf Mastodon"
 
+  # Cookielose Analytics-Vorbereitung (Umami, self-hosted auf
+  # stats.franksfinanzcheck.de). Ergänzung: Website-ID nach Bereitstellung
+  # der Umami-Instanz. Ohne website-Parameter wird das Tracking nicht
+  # geladen (kein Wirkung ohne Konfiguration). Siehe layouts/_partials/umami.html
+  # und cloudflare/edge-schutz.md (A4) für die CSP-Anpassung.
+  [params.analytics.umami]
+    # website = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"   # Pflicht, nach Umami-Install
+    domain = "stats.franksfinanzcheck.de"                  # Self-Host-URL
+
 [menu]
 [[menu.main]]
     identifier = "home"

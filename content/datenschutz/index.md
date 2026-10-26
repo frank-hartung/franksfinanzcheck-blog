@@ -20,7 +20,7 @@ Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer Date
 
 ### Das Wichtigste in Kürze
 
-- **Keine Analyse- und Werbe-Tracker.** Auf dieser Website sind keine Analyse-Dienste, Werbenetzwerke oder Tracking-Skripte eingebunden.
+- **Cookielose Analytics (Umami, optional).** Wir haben vorbereitet, eine selbst gehostete, DSGVO-konforme Analytics-Lösung (Umami) zu nutzen, die keine Cookies setzt und keine personenbezogenen Daten an Dritte übermittelt. Aktiviert ist sie noch nicht – ohne Konfiguration wird kein Tracking-Skript geladen. Sobald sie aktiv ist, findest du die vollständigen Angaben in Abschnitt 2. eine Einwilligung ist nicht erforderlich. Du kannst den Einsatz durch Browsereinstellungen (z. B. Script-Blockierung für stats.franksfinanzcheck.de) einschränken.
 - **Eigener Klickzähler ohne Cookies.** Wir zählen, wie oft Partnerlinks angeklickt werden – als Tageszähler je Partner und Artikel. Wir speichern dabei weder Cookies noch deine IP-Adresse. Wenn dein Browser „Do Not Track“ oder „Global Privacy Control“ meldet, wird nichts gezählt.
 - **Affiliate-Partner.** Beim Klick auf einen Partnerlink verlässt du unsere Website. Dann gelten die Datenschutzhinweise und Cookie-Einstellungen des Partners.
 - **Newsletter und Feedback** sind freiwillig. Für den Newsletter gilt das Double-Opt-In.
@@ -39,6 +39,7 @@ Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer Date
 | Kontakt per E-Mail | Bearbeitung deiner Anfrage | Art. 6 Abs. 1 lit. b oder lit. f DSGVO | Bis zur Erledigung, danach nach gesetzlichen Fristen | E-Mail-Dienst des Betreibers |
 | Klick auf Partnerlink | Vermittlung, Provision | Art. 6 Abs. 1 lit. f DSGVO (unsere Verlinkung); beim Partner nach dessen Regeln | Nach den Richtlinien des Partners | CHECK24, Tarifcheck24 bzw. deren Dienstleister |
 | Website-Suche | Suche nach Inhalten | Keine Übermittlung an uns | Nur im Browser | Keine |
+| Cookielose Analytics (Umami, nach Activation) | Aggregierte Auswertung von Seitenaufrufen ( Seite, Referrer, Datum, Browser-Sprache) ohne Cookies, ohne IP-Speicherung | Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Verbesserung des Angebots); nach Aktivierung der Umami-Instanz | Server-Logs auf stats.franksfinanzcheck.de; aggregiert, nicht personenbezogen | Keine (selbst gehostet, keine Dritt übermittlung) |
 | Zwischenspeicher (Service Worker) | Schnellere Ladezeiten | § 25 Abs. 2 TDDDG (technisch erforderlich) | Bis zum Löschen der Browserdaten | Keine |
 
 Ob ein Speichern oder Auslesen von Informationen auf deinem Endgerät erlaubt ist, richtet sich nach § 25 TDDDG. Die DSGVO-Rechtsgrundlage ist davon getrennt. Details zu Browser-Speichern stehen in Abschnitt 7.

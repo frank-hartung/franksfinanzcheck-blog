@@ -1,6 +1,7 @@
 ---
 title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
-description: Willst du effektiv deine Haushaltskosten reduzieren? Frank Hartung zeigt dir, wie du mit einfachen Mitteln und dem 4K-Prüfpfad deine Fixkosten senkst.
+description: Haushaltskosten reduzieren: Mit einfachen Mitteln und dem 4K-Prüfpfad gewinnst du die Kontrolle über deine Fixkosten.
+
 date: 2026-10-19T16:43:01Z
 draft: false
 reserve_published: 2026-10-19

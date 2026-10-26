@@ -1,0 +1,60 @@
+{{- /* ============================================================
+     EVENT-DRIVEN REFRESH – Ereignis-Getriebene Aktualität
+
+     Vergleich Finanztip (Konkurrenzanalyse 28.09.2026, Abschnitt 3.1):
+     Finanztip aktualisiert Ratgeber „ereignis-getrieben" statt nach
+     Kalenderintervallen. Statt „45/90/30 Tage-Frist" prüft ihr System
+     das auslösende Ereignis (Preisänderung, Gesetzesänderung, Tarifänderung).
+     Ziel laut Stellenanzeige AI-Automation-Manager: „Veränderungen früher
+     erkennen."
+
+     Das hier ist die leserseitige Sichtbarkeit dieses Prinzips:
+     Wenn ein Artikel ein auslösendes Ereignis hat, wird die
+     Ereignis-Information sichtbar gemacht. Das ist ein Frische-Signal
+     für Leser UND Google (Anders als ein virtuelles „zuletzt aktualisiert"
+     das jeden Deploy stempelt).
+
+     Trigger-Felder im Frontmatter:
+       aereignisTyp   – Art des Ereignisses (preis_aenderung, gesetz_aenderung,
+                        tarif_aenderung, markt_aenderung, studie_veroeffentlicht)
+       aereignisDatum – Datum des Ereignisses (YYYY-MM-DD)
+       aereignisBeschreibung – Was ist passiert (kurz, 1 Satz)
+
+     Alle drei Felder sind Pflicht. Fehlt eines, wird nichts gerendert.
+     Das verhindert, dass das System Fake-Daten produziert.
+
+     Stand: 25.10.2026 (Einführung, Vorbereitung für Pilot-Betrieb)
+     Wache: scripts/ereignis_wache.py – alle Artikel mit aereignis-Feldern
+            auf Vollständigkeit prüfen
+     ============================================================ */ -}}
+{{- $typ := .Params.aereignisTyp | default "" -}}
+{{- $datum := .Params.aereignisDatum | default "" -}}
+{{- $beschreibung := .Params.aereignisBeschreibung | default "" -}}
+
+{{- /* Nur wenn alle drei Felder vorhanden sind, zeigen */ -}}
+{{- if and (ne $typ "") (ne $datum "") (ne $beschreibung "") -}}
+  {{- /* Konvertiere das Ereignis-Datum ins Deutsche Format */ -}}
+  {{- $datumFormatted := time.AsTime $datum | time.Format "02.01.2006" -}}
+  {{- /* Typ-Ubersetzung für Leser */ -}}
+  {{- $typLabel := "" -}}
+  {{- if eq $typ "preis_aenderung" -}}
+    {{- $typLabel = "Preisänderung" -}}
+  {{- else if eq $typ "gesetz_aenderung" -}}
+    {{- $typLabel = "Gesetzesänderung" -}}
+  {{- else if eq $typ "tarif_aenderung" -}}
+    {{- $typLabel = "Tarifänderung" -}}
+  {{- else if eq $typ "markt_aenderung" -}}
+    {{- $typLabel = "Marktänderung" -}}
+  {{- else if eq $typ "studie_veroeffentlicht" -}}
+    {{- $typLabel = "Studie veröffentlicht" -}}
+  {{- else -}}
+    {{- $typLabel = $typ -}}
+  {{- end -}}
+<div class="ff-aereignis" role="note" style="margin:10px 0 6px;padding:8px 12px;background:#F7FAED;border-left:3px solid var(--ff-green-2);border-radius:0 6px 6px 0;font-size:.88em;color:#3d4a3a;">
+  <strong style="color:var(--ff-green);">↻ Ereignis-Getrieben Aktualisiert</strong>
+  <span style="margin:0 4px;color:var(--border);">·</span>
+  Ausgelöst durch: <strong>{{ $typLabel }}</strong>
+  <span style="margin:0 4px;color:var(--border);">·</span>
+  {{ $beschreibung }} ({{ $datumFormatted }})
+</div>
+{{- end -}}

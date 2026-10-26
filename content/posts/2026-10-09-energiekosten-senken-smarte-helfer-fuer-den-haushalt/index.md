@@ -1,6 +1,7 @@
 ---
 title: "Energiekosten senken: Smarte Helfer für den Haushalt"
-description: Reduziere deine Energiekosten mit gezielten Smart-Home-Geräten. Frank Hartung zeigt dir, wie du Technik und den 4K-Prüfpfad für deine Fixkosten nutzt.
+description: Smart-Home zur Energiekostensenkung: Welche Geräte Frank nutzt und wie der 4K-Prüfpfad hilft.
+
 date: 2026-10-16T18:36:02Z
 draft: false
 reserve_published: 2026-10-16

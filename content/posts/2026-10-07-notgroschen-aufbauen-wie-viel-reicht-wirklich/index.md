@@ -1,6 +1,6 @@
 ---
 title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
-description: "Notgroschen aufbauen: Wie viel reicht wirklich? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten …"
+description: "Notgroschen aufbauen: Wie viel reicht wirklich? – der Ratgeber von FranksFinanzcheck: Schritt für Schritt, mit Rechenbeispielen und Checklisten."
 date: 2026-10-07T11:23:39Z
 draft: true
 tags: ["Notgroschen"]

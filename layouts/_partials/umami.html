@@ -1,0 +1,53 @@
+{{- /* ============================================================
+     Cookielose Analytics-Vorbereitung (Umami, self-hosted)
+     ------------------------------------------------------------
+     Umami ist eine DSGVO-konforme, cookiefreie Analytics-Lösung.
+     Self-hosted auf stats.franksfinanzcheck.de (Cloudflare-Node, kein
+     Cross-Tracking, kein Cookie, kein Consent-Popup).
+
+     Priorität: HIGH — Fehler 6 aus dem SEO-Bericht (25.10.2026).
+     Ohne eigene Messung sind SEO-Optimierungen nicht testbar.
+
+     Aktivierung (einmalig, durch Frank):
+     1. Umami-Instanz auf stats.franksfinanzcheck.de bereitstellen
+        (Docker: Umami mit Postgres, Datenbank, Website-ID anlegen)
+     2. Website-ID in hugo.toml eintragen:
+        params.analytics.umami.website  = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        params.analytics.umami.domain   = "stats.franksfinanzcheck.de"
+     3. Cloudflare-CSP anpassen (cloudflare/edge-schutz.md A1):
+        script-src umami.franksfinanzcheck.de / stats.franksfinanzcheck.de
+        (falls nicht self)
+     4. Datenschutztext anpassen (datenschutz/index.md):
+        Erwähnung Umami als cookielose Analytics, kein Consent nötig.
+        (cloudflare/edge-schutz.md hat Datenschutz-Text-Vorlage)
+
+     Wird nicht aktiviert (kein website-Parameter), wird das Partial
+     stillschweigend nicht gerendert. Kein Tracking ohne Konfiguration.
+
+     Wache: scripts/umami_gate.py (Checks: website-Parameter gesetzt,
+     Skript nicht von Dritten, CSP-Adresse konsistent)
+
+     Quelle: Umami Docs (https://umami.is/docs/install), Stand 25.10.2026
+     ============================================================ */ -}}
+{{- $umamiWebsite := site.Params.analytics.umami.website | default "" -}}
+{{- $umamiDomain  := site.Params.analytics.umami.domain  | default "stats.franksfinanzcheck.de" -}}
+{{- if and $umamiWebsite (ne $umamiWebsite "") -}}
+<script>
+  (function() {
+    var u = "{{ $umamiDomain }}";
+    window.umami = {
+      website: "{{ $umamiWebsite }}",
+      host: u
+    };
+    var s = document.createElement("script");
+    s.async = true;
+    s.setAttribute("src", ("https://" + u + "/umami.js"));
+    document.head.appendChild(s);
+  })();
+</script>
+{{- /* DSGVO-Konformität: Umami ohne Cookies, ohne Consent-Popup.
+     Die Nutzungsdaten werden nur zum internen Auswertungszweck auf
+     stats.franksfinanzcheck.de gespeichert. Kein Datenabfluss zu
+     Dritten. Die entsprechende Datenschutzdokumentation steht in
+     /datenschutz/. */ -}}
+{{- end -}}

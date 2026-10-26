@@ -1,6 +1,7 @@
 ---
 title: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
-description: Praktische SparTipps, wie du mit kleinen Änderungen den Energieverbrauch reduzierst und deine Kosten im Griff behältst. So sparst du jeden Monat bares Geld.
+description: Praktische SparTipps: Mit kleinen Änderungen den Energieverbrauch reduzieren und die Kosten im Griff behalten – so sparst du jeden Monat.
+
 date: 2026-10-21T01:39:08Z
 draft: false
 reserve_published: 2026-10-21

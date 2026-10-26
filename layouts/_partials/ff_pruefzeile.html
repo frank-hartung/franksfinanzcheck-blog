@@ -3,12 +3,23 @@
      ------------------------------------------------------------
      Ein Autor ist nicht automatisch fachlicher Prüfer. `ai_generated`,
      ein Qualitäts-Score oder ein `faktencheck`-Datum dürfen daher niemals
-     den Satz „Zahlen & Fakten geprüft“ auslösen.
+     den Satz „Zahlen & Fakten geprüft" auslösen.
 
      Nur ein explizit freigegebener Block `redaktionelle_pruefung` rendert
      das grüne Prüfsiegel. Vollständigkeit und Fassungsgleichheit beweist
      scripts/editorial_review_gate.py vor der Veröffentlichung. Der Hash
      selbst wird nicht veröffentlicht; er ist der Manipulationsschutz.
+
+     CHANGES 2026-10-26 (Highend-Agentur-Level, SEO-Beratung 25.10.2026):
+     Ergänzung der Finanztip-äquivalenten Pro-Artikel-Transparenzzeile:
+     Bei KI-gestützten Beiträgen ohne freigegebenen Prüfer wird jetzt
+     explizit der Verantwortliche genannt, die Quellenanzahl sichtbar und
+     – sofern eine redaktionelle Überarbeitung vorliegt – das
+     Überarbeitungsdatum angezeigt. Das ist das E-E-A-T-Signal, das
+     Google bei YMYL-Inhalten erwartet, und entspricht der Konvention,
+     die finanztip.de pro Artikel nutzt (Konkurrenzanalyse 28.09.2026).
+     Vertrag: layouts/_partials/ff_pruefzeile.html
+     Wache: scripts/ki_kennzeichnung_gate.py · editorial_review_gate.py
      ============================================================ */ -}}
 {{- if eq .Section "posts" -}}
 {{- $review := .Params.redaktionelle_pruefung -}}
@@ -22,6 +33,7 @@
 {{- $reviewer := $review.pruefer -}}
 {{- $coreClaims := $review.gepruefte_aussagen | default (slice) -}}
 {{- $claims := $review.gepruefte_zahlen | default (slice) -}}
+{{- $quellen := .Params.quellen | default (slice) -}}
 <section class="ff-review-card" aria-labelledby="ff-review-title-{{ .File.UniqueID }}" data-review-status="freigegeben">
   <div class="ff-review-card__head">
     <span class="ff-review-card__seal" aria-hidden="true">
@@ -37,7 +49,7 @@
       {{- with $reviewer.rolle }}<span class="ff-review-card__role">{{ . }}</span>{{ end -}}
     </div>
     <a class="ff-review-card__sources" href="#ff-quellen-{{ .File.UniqueID }}">
-      {{ len (.Params.quellen | default (slice)) }} Quellen ansehen
+      {{ len $quellen }} Quellen ansehen
     </a>
   </div>
 
@@ -54,7 +66,7 @@
     {{- if gt (len $coreClaims) 0 }}
     <ul aria-label="Geprüfte Kernaussagen">
       {{- range $coreClaims }}
-      <li>„{{ .textanker }}“{{- with .pruefung }} – {{ . }}{{ end -}}{{- with .quellen }} (Belege: {{ delimit . ", " }}){{ end -}}</li>
+      <li>„{{ .textanker }}"{{- with .pruefung }} – {{ . }}{{ end -}}{{- with .quellen }} (Belege: {{ delimit . ", " }}){{ end -}}</li>
       {{- end }}
     </ul>
     {{- end }}
@@ -69,6 +81,21 @@
   </details>
 </section>
 {{- else -}}
+{{- /* Zeitenstempel: berechne aus article_dates.html (identisch zu Schema
+       + Sitemap), ob eine redaktionelle Überarbeitung vorliegt. Nur dann
+       anzeigen – sonst irreführende "zuletzt aktualisiert"-Wirkung. */ -}}
+{{- $dates := partial "article_dates.html" . -}}
+{{- $hasRevision := gt (int (dateFormat "YYYYMMdd" $dates.modified)) (int (dateFormat "YYYYMMdd" $dates.firstindexed)) -}}
+{{- $kiZeitstempel := cond $hasRevision ($dates.modified | time.Format "02.01.2006") "" -}}
+
+{{- /* Finanztip-äquivalente Transparenzzeile (Konkurrenzanalyse 28.09.2026,
+       Ansatz H1). Für KI-gestützte Beiträge ohne freigegebenen Prüfer wird
+       jetzt angezeigt:
+         · Verantwortlicher Autor (nimmt die Rolle des Prüfers für
+           nicht-YMYL-inhalte wahr)
+         · Quellenanzahl (Zitierbarkeit / GEO-Signal)
+         · KI-Transparenz (EU-KI-VO Art. 50, Sicherheitsaudit M-17)
+         · Überarbeitungsdatum (wenn vorhanden; Frische-Signal für Google) */ -}}
 <p class="ff-pruef{{ if and $review (eq ($review.risikoklasse | default "") "hoch") }} ff-pruef--pending{{ end }}">
   <span class="ff-pruef__chip" aria-hidden="true">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
@@ -79,13 +106,18 @@
   </span>
   <span class="ff-pruef__text">
     Verantwortlicher Autor: {{ $author }}
-    {{- /* KI-Kennzeichnung (EU-KI-Verordnung Art. 50 Abs. 4; Sicherheitsaudit
-         14.10.2026, M-17): Artikel ohne freigegebene menschliche Prüfung, die ein
-         KI-System erstellt hat, tragen das Label sichtbar am Artikelanfang. Die
-         Formulierung entspricht dem Impressum („Mit KI erstellt“). Ob ein
-         Bot-Artikel `ai_generated: true` trägt, erzwingt
-         scripts/ki_kennzeichnung_gate.py im Deploy. */ -}}
-    {{- if $ai }}<span class="ff-pruef__sep" aria-hidden="true">·</span> <strong class="ff-pruef__ki" data-ff-ki-label>Mit KI erstellt</strong>{{ end -}}
+    {{- if $ai -}}
+      <span class="ff-pruef__sep" aria-hidden="true">·</span>
+      <strong class="ff-pruef__ki" data-ff-ki-label>Mit KI-Unterstützung recherchiert</strong>
+    {{- end -}}
+    {{- if gt (len (.Params.quellen | default (slice))) 0 -}}
+      <span class="ff-pruef__sep" aria-hidden="true">·</span>
+      <span class="ff-pruef__quellen">{{ len (.Params.quellen | default (slice)) }} Quellen</span>
+    {{- end -}}
+    {{- if $kiZeitstempel -}}
+      <span class="ff-pruef__sep" aria-hidden="true">·</span>
+      <span class="ff-pruef__datum">Stand: {{ $kiZeitstempel }}</span>
+    {{- end -}}
     {{- if and $review (eq ($review.risikoklasse | default "") "hoch") -}}
       <span class="ff-pruef__sep" aria-hidden="true">·</span> Fachliche Freigabe ausstehend
     {{- end -}}
