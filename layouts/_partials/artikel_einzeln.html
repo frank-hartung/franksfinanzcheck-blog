@@ -100,6 +100,14 @@
     Stand: {{ $ffStand.modified | time.Format "02.01.2006" }} · zuletzt aktualisiert
   </div>
   {{- end }}
+  {{- /* Event-Driven Refresh: Ereignis-Getriebene Aktualität (Vergleich
+         Finanztip, Konkurrenzanalyse 28.09.2026, Abschnitt 3.1). Wenn der
+         Artikel ein auslösendes Ereignis hat (Preis-/Gesetzes-/Tarifänderung),
+         wird die Information sichtbar gemacht. Das ist das Frische-Signal, das
+         Google bei Finanzratgebern erwartet, und folgt dem Prinzip, das
+         Finanztip als Datenpipeline nutzt (Ereigniserkennung statt Kalender).
+         Wache: scripts/ereignis_wache.py */ -}}
+  {{- partial "ereigniszeile.html" . }}
   {{- /* Kurzantwort-Box (Featured Snippet / AI Overview) – nur auf Posts.
          Primär aus `kurzantwort`, robustes Fallback auf `.Description`,
          damit die Lesehilfen auch bei einer redaktionellen Lücke nicht leer

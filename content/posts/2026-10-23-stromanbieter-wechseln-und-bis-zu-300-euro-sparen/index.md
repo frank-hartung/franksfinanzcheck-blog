@@ -1,6 +1,6 @@
 ---
 title: "Stromanbieter wechseln: Und bis zu 300 Euro sparen"
-description: "Stromanbieter wechseln und bis zu 300 Euro sparen – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten …"
+description: "Stromanbieter wechseln und bis zu 300 Euro sparen – der Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen und Checklisten."
 date: 2026-10-23T09:38:32Z
 draft: true
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]

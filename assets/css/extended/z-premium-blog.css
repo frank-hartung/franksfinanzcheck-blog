@@ -1744,6 +1744,16 @@ details.toc .inner a:focus-visible {
   color: color-mix(in srgb, var(--secondary) 55%, transparent);
 }
 
+/* Zusätzliche Transparenz-Felder: Quellenanzahl + Zeitstempel in der
+   Pro-Artikel-KI-Kennzeichnung (vgl. finanztip.de-Konvention, Stand 28.09.
+   im Vergleich Finanztip). Farbton wie ff-pruef__sep, aber etwas heller,
+   damit die Information anerkannt, nicht dominant ist. */
+.ff-pruef__quellen,
+.ff-pruef__datum {
+  color: color-mix(in srgb, var(--secondary) 70%, transparent);
+  font-size: .92em;
+}
+
 .ff-pruef__link {
   margin-left: auto;
   color: var(--ff-green-2);

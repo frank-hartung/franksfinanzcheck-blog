@@ -1,5 +1,5 @@
 ---
-title: "Campingurlaub planen: Budget für Platz, Fahrt und Ausrüstung"
+title: "Campingurlaub planen: Budget für Platz und Fahrt"
 description: "Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend."
 date: 2026-10-09T14:01:19Z
 draft: false

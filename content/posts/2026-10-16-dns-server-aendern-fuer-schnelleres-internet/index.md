@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-24
 title: "DNS-Server ändern für schnelleres Internet"
-description: "DNS-Server ändern Schritt für Schritt: Was der Wechsel wirklich beschleunigt und wo deine Leitung die Grenze setzt – mit Messwerten, Rechenbeispielen und FAQ."
+description: "DNS-Server ändern Schritt für Schritt: Was der Wechsel beschleunigt und wo deine Leitung die Grenze setzt – mit Messwerten und Rechenbeispiel."
 date: 2026-10-16T09:22:08Z
 draft: true
 tags: ["DNS und Netzsicherheit", "WLAN verbessern"]

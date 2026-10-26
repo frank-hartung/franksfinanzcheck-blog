@@ -1,0 +1,35 @@
+{{- /* ============================================================
+     Cloudflare Web Analytics (Alternative zu Umami)
+     ------------------------------------------------------------
+     Cloudflare Web Analytics ist eine DSGVO-konforme, cookiefreie
+     Analytics-Lösung von Cloudflare. Kostenlos, kein eigenes Hosting,
+     kein API-Zugang, kein Consent-Popup.
+
+     Erfordert: Cloudflare Dashboard → Analytics → Web Analytics →
+                Website hinzufügen → Website-ID / Token notieren →
+                in hugo.toml eintragen
+
+     KOSTENLOS. Kein Server. Kein VPS. Kein Docker. Keine API-Gebühren.
+
+     Nutzung (ähnlich Umami):
+       - tracking_id in hugo.toml setzen (params.analytics.cloudflare.website)
+       - domain in hugo.toml (params.analytics.cloudflare.domain)
+       - Fragment wird beim Build eingebunden
+
+     Wird nicht geladen, wenn tracking_id nicht gesetzt.
+
+     Quelle: https://developers.cloudflare.com/analytics/
+     Stand: 26.10.2026
+     ============================================================ */ -}}
+{{- $cfWebsite := site.Params.analytics.cloudflare.website | default "" -}}
+{{- $cfToken := site.Params.analytics.cloudflare.token | default "" -}}
+{{- if and $cfWebsite (ne $cfWebsite "") (and $cfToken (ne $cfToken "")) -}}
+<script>
+  (function(){
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    g.dataset.cfBeacon = '{"token": "{{ $cfToken }}"}';
+    s.parentNode.insertBefore(g, s);
+  })();
+</script>
+{{- end -}}

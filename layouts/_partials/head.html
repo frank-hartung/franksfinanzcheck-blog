@@ -277,6 +277,8 @@
 {{- /* Misc */}}
 {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
 {{- partial "google_analytics.html" . }}
+{{- partial "umami.html" . }}
+{{- partial "cloudflare_analytics.html" . }}
 {{- partial "templates/opengraph.html" . }}
 {{- partial "templates/twitter_cards.html" . }}
 {{- /* Posts und Pillar haben bereits ein präziseres Article- und

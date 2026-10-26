@@ -1,6 +1,6 @@
 ---
-title: "ETF‑Sparplan starten: Schritt‑für‑Schritt zum Sparplan"
-description: "ETF‑Sparplan starten: Erfahre, wie du als Einsteiger einen ETF‑Sparplan aufsetzt, Fehler vermeidest und monatlich clever investierst – ohne Fachchinesisch."
+title: "ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung"
+description: "ETF-Sparplan starten: Erfahre, wie du als Einsteiger einen Sparplan aufsetzt, Fehler vermeidest und monatlich clever investierst – ohne Fachchinesisch."
 date: 2026-10-24T17:41:53Z
 draft: true
 reserve: true

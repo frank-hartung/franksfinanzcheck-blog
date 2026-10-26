@@ -1,6 +1,7 @@
 ---
 title: "Energieausweis: Was er für deine Fixkosten bedeutet"
-description: Brauchst du einen Energieausweis? Erfahre alles über gesetzliche Pflichten, die Energieausweis Kosten und wie die Energieeffizienzklasse Haus-Kosten senkt.
+description: Energieausweis-Kosten und Pflicht: Was das Dokument kostet, wann du einen brauchst und wie die Energieeffizienzklasse die Haus-Kosten senkt.
+
 date: 2026-10-12T11:17:49Z
 draft: true
 reserve: true

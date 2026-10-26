@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-30
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
-description: "Wohngebäudeversicherung Vergleich: So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und…"
+description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
 date: 2026-08-31T13:47:31Z
 draft: true
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]

@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-01
-title: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"
+title: "Kostenloses Girokonto: Ein Konto ohne Gebühren finden"
 description: "Woran du ein wirklich kostenloses Girokonto erkennst: Karten, Bargeld, Dispo, Kontowechsel und die typischen Gebührenfallen im Alltag."
 date: 2026-08-17T08:35:12Z
 draft: false
