@@ -37,6 +37,14 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    `npm run deps:check` (Regel A1) und im CI-Job „Abhängigkeiten“.
 5. **Nie** `pull_request_target` mit Checkout des PR-Codes, nie
    `${{ github.event.* }}` direkt in `run:` (immer über `env:`).
+6. **Keine rückverfolgenden Regexe auf mehrzeilige Eingaben.** Frontmatter,
+   eingerückte Blöcke und CSV-Zeilen werden zeilenweise mit klaren Grenzen
+   geparst, nicht mit `\s+.*\n`-Ketten. `py/redos` und
+   `py/polynomial-redos` (sowie die JS-Pendants) sind Sicherheitsfunde mit
+   `security-severity 7.5`, keine Qualitätshinweise. Funde werden im Code
+   geheilt – nie per Inline-Unterdrückung, Whitelist oder Dismiss. Vor einem
+   Commit an solchen Parsern: `npm run test:redos`. Wahrheitsort:
+   `CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md`.
 
 ## Verhalten beim UI-/Design-Arbeiten (PFLICHT)
 

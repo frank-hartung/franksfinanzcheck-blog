@@ -265,3 +265,36 @@ aus (und die Browser-Suite prüft `/page/2/` und `/posts/page/2/`).
 `A11Y-EINE-H1-DAUERHEILUNG-PREMIUM-2026-10-07.md` (Stufe 1) und
 `A11Y-EINE-H1-DAUERHEILUNG-PREMIUM-2026-10-08.md` (Stufe 2), Vertrag C30 in
 `scripts/governance_contract.py`.
+
+---
+
+## ReDoS-Wache: mehrzeilige Muster nicht dem Backtracking überlassen
+
+Code-Scanning-Alert Nr. 87 (`py/redos`, 26.10.2026) entstand in der
+GSC-Abdeckung: Ein Regex sollte aus Frontmatter nur `sitemap.disable: true`
+lesen, kombinierte aber `\s+`, `.*` und einen weiteren `\s+` über mehrere
+Zeilen. Die Eingabe `sitemap:\n` mit vielen `\t\n`-Paaren erzeugte exponentiell
+viele Zerlegungen. Die Heilung ist ein zeilenweiser Parser
+(`sitemap_deaktiviert()`), kein vorsichtiger umgeschriebener Ausdruck.
+
+```bash
+npm run redos:wache          # 12 Eigenproben + 539 Python-Dateien
+npm run redos:wache:json     # maschinenlesbarer Bericht
+npm run test:redos           # Wache + 98 Vertragstests
+python3 scripts/redos_guard.py --root /pfad/zu/einem/anderen/baum
+```
+
+Die Wache `scripts/redos_guard.py` liest den Python-AST, erkennt Muster auch in
+Aliasen, Konstanten und f-Strings und meldet zwei Klassen: **R0-SYNTAX**
+(unlesbare Datei = fail-closed) und **R1-NEWLINE-PUMP** (die historische
+Struktur). Sie ersetzt CodeQL nicht: Alle vier ReDoS-Regeln für Python und
+JavaScript bleiben zusätzlich namentlich im Security-Gate von
+`.github/workflows/codeql.yml` hart verdrahtet. Der CI-Job `redos-wache`
+läuft unabhängig vom SARIF-Upload.
+
+**Hausregel für neue Parser:** Bei eingerückten Blöcken zuerst `splitlines()`
+und eine Schleife mit klarer Blockgrenze. Wenn doch ein Regex nötig ist, muss
+zwischen zwei unbegrenzten Quantoren ein eindeutiges Pflichtzeichen stehen.
+Kein `# codeql[...]`, keine Whitelist, kein Dismiss. Details:
+[`CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md`](../CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md)
+und `SECURITY.md`.

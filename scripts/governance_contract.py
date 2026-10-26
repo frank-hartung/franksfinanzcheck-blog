@@ -116,7 +116,13 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 # Live-Artikel unbrauchbar gemacht, und die Site registrierte einen Service
 # Worker ohne Manifest. Beide Fehler waren im Build unsichtbar – jede Korrektur
 # ohne Wache hier wäre eine Leihgabe.
-GUARDS = [# Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
+GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
+          # `py/redos` trägt security-severity 7.5. Der eigene Detektor hält
+          # die historische Newline-Pumpe unabhängig vom SARIF-Upload fest.
+          # Eine Wache, die niemand verlangt, führt irgendwann niemand aus –
+          # deshalb steht ihr Selbsttest im vertraglichen Minimum (C6).
+          "redos_guard.py",
+          # Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
           # Google ordnete die Markensuche dem Kreditvergleich FINANZCHECK.de
           # zu, waehrend der siteweite Person-Knoten nur Pinterest als sameAs
           # fuehrte und die Profile nirgends sichtbar verlinkt waren. Diese

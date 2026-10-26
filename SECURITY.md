@@ -145,6 +145,40 @@ Erzwungen wird der Vertrag auf vier unabhängigen Ebenen:
 Beweisführung und Runbook:
 `CODE-SCANNING-ALERT-83-DAUERHEILUNG-PREMIUM-2026-10-10.md`.
 
+## Reguläre Ausdrücke mit begrenzter Komplexität (Code-Scanning-Alert Nr. 87, 26.10.2026)
+
+CodeQL meldete in `scripts/gsc_abdeckung.py` einen `py/redos`-Fund: Ein
+mehrzeiliges Muster für `sitemap.disable` kombinierte `\s+`, `.*` und einen
+weiteren `\s+` so, dass Eingaben aus `sitemap:\n` und vielen `\t\n`-Paaren
+exponentiell viele Zerlegungen erzeugten. `py/redos` trägt
+`security-severity 7.5` – die Regel ist ein Sicherheitsfund, kein
+Qualitätshinweis. Seitdem gilt:
+
+1. **Strukturierte Formate werden gelesen, nicht erraten.** Frontmatter,
+   CSV-Blöcke und eingerückte Konfigurationen werden zeilenweise und mit
+   klaren Bereichsgrenzen geparst. `scripts/gsc_abdeckung.py` benutzt dafür
+   `sitemap_deaktiviert()` – ohne `re.*`, in linearer Zeit.
+2. **Alle ReDoS-Regeln sind hart.** `py/redos`, `py/polynomial-redos`,
+   `js/redos` und `js/polynomial-redos` stehen namentlich im Security-Gate von
+   `.github/workflows/codeql.yml`. Ein fehlendes SARIF-Metadatum darf sie nicht
+   zu einem Qualitätshinweis herabstufen.
+3. **Keine Unterdrückung.** Funde werden an der Quelle geheilt; Inline-Kommentare
+   oder Ausnahmelisten sind kein Schließpfad.
+4. **Lokale Rückfallsperre.** `scripts/redos_guard.py` analysiert den Python-AST
+   und die Struktur statischer Muster. Regel R0 meldet unlesbaren Quelltext,
+   Regel R1 die historische Newline-Pumpe. Der Job `redos-wache` läuft ohne
+   SARIF-Upload und ohne Alert-API. CodeQL bleibt bewusst der Generalist für
+   neue ReDoS-Klassen.
+
+```bash
+npm run redos:wache     # Wache + Bestand
+npm run test:redos      # Wache + 98 Vertragstests
+npm run redos:wache:json
+```
+
+Beweisführung und Runbook:
+`CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md`.
+
 ## Abhängigkeiten: Pin, Audit, Wache (24.10.2026)
 
 GitHub meldete am 24.10.2026 **58 offene Schwachstellen** auf `main`
