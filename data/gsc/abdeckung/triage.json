@@ -22,38 +22,36 @@
    "url": "/index.xml",
    "vorschlag": "",
    "ziel": null
+  },
+  {
+   "aktion": "entschieden am 2026-10-26 (Wiedervorlage 2026-11-25)",
+   "alter_tage": null,
+   "beleg": "Register: Rolle bestätigt: Alltagssystem (K7) – kein Umbau, keine Zusammenführung – Die Seite beantwortet die Methode (App, Excel, Papier), nicht die Budgetregel. Titel-Überschneidung mit dem Jahresplan 0,00 bei Regel F – zwei Rollen, nicht zwei Dubletten. (Eigentümer: redaktion)",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "vorschlag": "",
+   "ziel": null
+  },
+  {
+   "aktion": "entschieden am 2026-10-26 (Wiedervorlage 2026-11-25)",
+   "alter_tage": null,
+   "beleg": "Register: Rolle getrennt: Jahresplan (K3) – nicht konsolidieren – Regel F verweigert die Zusammenführung mit /posts/2026-10-12-haushaltskosten-reduzieren-…/: Titel-Überschneidung 0,00, Themenfeld frugalismus. Belegte Nachfrage: 1 Impression, Position 7,0 (28 Tage bis 19.10.2026); 3 redaktionelle Inlinks. Beobachten statt umbauen. (Eigentümer: redaktion)",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "vorschlag": "",
+   "ziel": null
   }
  ],
  "eskaliert": [],
  "nach_prioritaet": {
-  "P2": 2,
-  "P3": 2
+  "P3": 4
  },
- "offen": [
-  {
-   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
-   "alter_tage": 0,
-   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1845 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
-   "grund": "Gecrawlt – zurzeit nicht indexiert",
-   "prioritaet": "P2",
-   "schluessel": "crawled_not_indexed",
-   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
-   "vorschlag": "Rolle festlegen im Cluster K7-konto-karten-gebuehren (3 Artikel), Themenfeld „konto-karten“: Diese Seite hat dort keinen Eintrag.",
-   "ziel": null
-  },
-  {
-   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
-   "alter_tage": 0,
-   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1872 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
-   "grund": "Gecrawlt – zurzeit nicht indexiert",
-   "prioritaet": "P2",
-   "schluessel": "crawled_not_indexed",
-   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
-   "vorschlag": "Rolle festlegen im Cluster K3-frugalismus (6 Artikel), Themenfeld „frugalismus“: Diese Seite hat dort keinen Eintrag.",
-   "ziel": null
-  }
- ],
- "register_eintraege": 0,
+ "offen": [],
+ "register_eintraege": 2,
  "sla": {
   "P0": 1,
   "P1": 7,
@@ -61,28 +59,6 @@
  },
  "wirkung_belegt": [],
  "zeilen": [
-  {
-   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
-   "alter_tage": 0,
-   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1845 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
-   "grund": "Gecrawlt – zurzeit nicht indexiert",
-   "prioritaet": "P2",
-   "schluessel": "crawled_not_indexed",
-   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
-   "vorschlag": "Rolle festlegen im Cluster K7-konto-karten-gebuehren (3 Artikel), Themenfeld „konto-karten“: Diese Seite hat dort keinen Eintrag.",
-   "ziel": null
-  },
-  {
-   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
-   "alter_tage": 0,
-   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1872 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
-   "grund": "Gecrawlt – zurzeit nicht indexiert",
-   "prioritaet": "P2",
-   "schluessel": "crawled_not_indexed",
-   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
-   "vorschlag": "Rolle festlegen im Cluster K3-frugalismus (6 Artikel), Themenfeld „frugalismus“: Diese Seite hat dort keinen Eintrag.",
-   "ziel": null
-  },
   {
    "aktion": "kein Inhalt (Asset/Feed) – belassen",
    "alter_tage": null,
@@ -102,6 +78,28 @@
    "prioritaet": "P3",
    "schluessel": "crawled_not_indexed",
    "url": "/index.xml",
+   "vorschlag": "",
+   "ziel": null
+  },
+  {
+   "aktion": "entschieden am 2026-10-26 (Wiedervorlage 2026-11-25)",
+   "alter_tage": null,
+   "beleg": "Register: Rolle bestätigt: Alltagssystem (K7) – kein Umbau, keine Zusammenführung – Die Seite beantwortet die Methode (App, Excel, Papier), nicht die Budgetregel. Titel-Überschneidung mit dem Jahresplan 0,00 bei Regel F – zwei Rollen, nicht zwei Dubletten. (Eigentümer: redaktion)",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "vorschlag": "",
+   "ziel": null
+  },
+  {
+   "aktion": "entschieden am 2026-10-26 (Wiedervorlage 2026-11-25)",
+   "alter_tage": null,
+   "beleg": "Register: Rolle getrennt: Jahresplan (K3) – nicht konsolidieren – Regel F verweigert die Zusammenführung mit /posts/2026-10-12-haushaltskosten-reduzieren-…/: Titel-Überschneidung 0,00, Themenfeld frugalismus. Belegte Nachfrage: 1 Impression, Position 7,0 (28 Tage bis 19.10.2026); 3 redaktionelle Inlinks. Beobachten statt umbauen. (Eigentümer: redaktion)",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
    "vorschlag": "",
    "ziel": null
   }

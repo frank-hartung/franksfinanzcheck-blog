@@ -18,6 +18,10 @@ REGELWERK (Details: docs/ANLEITUNG-WEITERLEITUNGEN.md)
   C  Pillar-Seite des Themas, nie die Startseite.
   D  bewusst 404 (data/url_entfallen.yaml).
   E  Tag-Archive: bewusst 404 (data/url_entfallen.yaml).
+  F  Konsolidierung: zwei Seiten mit identischer Suchabsicht werden zu einer.
+     Nur zulässig, wenn alle drei Belege vorliegen (Suchabsicht identisch,
+     Nachfrage belegt, kein redaktioneller Link auf die Quelle). Geprüft von
+     scripts/konsolidierung.py – dieselbe Wache, die `--check` aufruft.
   Ziele sind Live-Seiten. Ketten, Schleifen und Ziele auf Entwürfe sind verboten.
 
 Nutzung:
@@ -49,7 +53,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://franksfinanzcheck.de"
 MARKER_KEY = "ff-weiterleitung"
 GENERATOR_NOTE = "Generiert von scripts/weiterleitungen.py aus data/weiterleitungen.yaml. Nicht von Hand ändern."
-REGELN_WEITERLEITUNG = {"A", "B", "C"}
+REGELN_WEITERLEITUNG = {"A", "B", "C", "F"}
 REGELN_ENTFALLEN = {"D", "E"}
 
 _DRAFT = re.compile(r"^draft:\s*true\s*$", re.M)
@@ -139,6 +143,8 @@ def pruefe(eintraege: list[dict], entfallen: list[dict], live: set[str]) -> list
             f.append(f"{v}: Regel {r} verlangt Beitrags-Ziel, gefunden {n}")
         if r == "A" and slug_rest(v) != slug_rest(n):
             f.append(f"{v}: Regel A verlangt identischen Slug-Rest, Ziel {n} weicht ab")
+        if r == "F" and not n.startswith("/posts/"):
+            f.append(f"{v}: Regel F (Konsolidierung) verlangt Beitrags-Ziel, gefunden {n}")
         if n.startswith("/pillar/") and n.rstrip("/") == "/pillar":
             f.append(f"{v}: Ziel ist die Pillar-Übersicht – erlaubt sind nur Themenseiten")
 
@@ -164,6 +170,20 @@ def pruefe(eintraege: list[dict], entfallen: list[dict], live: set[str]) -> list
     for v in von_alle:
         if v.startswith("/tags/"):
             f.append(f"{v}: Tag-Archive dürfen nicht umgeleitet werden (Regel E)")
+
+    # Regel F ist die einzige, die Inhalt vernichtet. Ihre drei Belege werden
+    # nicht geglaubt, sondern gerechnet – von derselben Funktion, die auch
+    # `konsolidierung.py --pruefen` benutzt (eine Wahrheit, zwei Aufrufer).
+    if any(e.get("regel") == "F" for e in eintraege):
+        try:
+            try:
+                from scripts import konsolidierung as _k
+            except ImportError:  # direkter Start: scripts/ liegt auf dem Pfad
+                import konsolidierung as _k
+            for befund in _k.pruefe(list(eintraege)):
+                f.append(befund["text"])
+        except ImportError:  # pragma: no cover
+            f.append("Regel F ohne Prüfmodul (scripts/konsolidierung.py fehlt)")
     return f
 
 
@@ -343,6 +363,20 @@ def selftest() -> int:
     # 11 Ziel Pillar-Übersicht
     uebersicht = [{"von": "/posts/2026-09-21-alt/", "nach": "/pillar/", "regel": "C", "grund": "Pillar-Fallback"}]
     check("Pillar-Übersicht als Ziel erkannt", any("Pillar-Übersicht" in x or "ungültig" in x for x in pruefe(uebersicht, [], live | {"/pillar/"})))
+    # 12 Regel F wird nicht geglaubt, sondern gerechnet: Ohne die drei Belege
+    #    (Suchabsicht, Nachfrage, kein Inlink) ist eine Konsolidierung verboten.
+    konsolidierung_f = [{"von": "/posts/2026-09-21-alt/",
+                         "nach": "/posts/2026-08-19-energie/",
+                         "regel": "F", "grund": "Testfall Konsolidierung zweier Seiten"}]
+    live_f = live | {"/posts/2026-09-21-alt/"}
+    check("F ohne Belege erkannt", any("Konsolidierung ohne Beleg" in x
+                                       for x in pruefe(konsolidierung_f, [], live_f)))
+    # 13 F auf ein Pillar-Ziel ist keine Konsolidierung, sondern ein Fallback
+    falsch_f = [{"von": "/posts/2026-09-21-alt/", "nach": "/pillar/konto-karten/",
+                 "regel": "F", "grund": "Testfall Konsolidierung zweier Seiten"}]
+    check("F auf Pillar erkannt", any("Regel F (Konsolidierung) verlangt Beitrags-Ziel" in x
+                                      for x in pruefe(falsch_f, [], live)))
+
     # 12 Build/Verify im Temp-Verzeichnis, Marker, Prune
     with tempfile.TemporaryDirectory() as tmp:
         build(tmp, gut_live)
@@ -382,7 +416,7 @@ def selftest() -> int:
         for x in fehler:
             print("  -", x)
         return 2
-    print("weiterleitungen.py Selbsttest ok (18 Fälle)")
+    print("weiterleitungen.py Selbsttest ok (20 Fälle)")
     return 0
 
 

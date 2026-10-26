@@ -509,14 +509,51 @@ kann.
   Kopfzeile. Das ist ein gutes Zeichen (keine Warnungen) und keine Lücke – wird
   hier festgehalten, damit beim nächsten Lauf niemand eine fehlende Datei
   vermutet.
-- **Das Entscheidungs-Register ist leer.** Zwei Seiten tragen eine Frist
-  (30 Tage, bis 25.11.2026) und einen Vorschlag – aber keine Entscheidung.
-  Das ist Absicht: Die Entscheidung gehört der Redaktion, nicht dem Automaten.
-  Der Unterschied zu vorher: Sie kann jetzt nicht mehr still verschwinden.
+- ~~Das Entscheidungs-Register ist leer.~~ **Erledigt am 26.10.2026:** Beide
+  Seiten stehen mit Frist (25.11.2026), Erwartung „indexiert" und Eigentümer
+  „redaktion" im Register (`data/gsc/abdeckung/entscheidungen.yaml`). Die
+  Begründungen tragen den Beleg: Titel-Überschneidung 0,00, belegte Nachfrage
+  (1 Impression, Position 7,0 in 28 Tagen), drei redaktionelle Inlinks.
 - **`Diagramm.csv` endet am 19.10.2026** und deckt sich mit dem vorhandenen
   Snapshot (320 nicht indexiert / 117 indexiert, 7 Impressionen). Es fehlen
   Tage, deshalb ist der Export **Beleg, keine neue Momentaufnahme** – sonst
   würde die Zeitreihe rückwärts laufen.
+
+### 7.5 Was in dieser Runde entschieden wurde (26.10.2026)
+
+Vier offene Punkte aus dem Auftrag, vier verschiedene Antworten – und keiner
+davon ist eine Meinung:
+
+| Punkt | Antwort | Beleg / Wache |
+|---|---|---|
+| **Wann darf eine Weiterleitung zwei Seiten zusammenlegen?** | **Nie ohne drei Belege.** Regel F: Suchabsicht identisch (Titel-Überschneidung ≥ 0,50 **und** gleiches Themenfeld), Nachfrage belegt (Impressionen > 0), kein redaktioneller Inlink. | `scripts/konsolidierung.py` (Selbsttest 23 Fälle) · `weiterleitungen.py --check` ruft dieselbe Funktion · `test_konsolidierung.py` (32 Tests) |
+| **Ist Seite 2 im Index?** | Wird **messbar**, sobald die Detail-Liste „Gefunden – zurzeit nicht indexiert“ im Ordner liegt. Vorher lautet die Auskunft „Beleg fehlt“ – nicht „wahrscheinlich nicht“. | `--fristen` (belegt: indexiert / nicht indexiert / fehlt) |
+| **Steigt die Quote durch Seite 1?** | **Eine Zahl je Messung:** 26,8 % (117 von 437), Stand 19.10.2026. Trend bleibt leer, bis die zweite Momentaufnahme da ist – fällig bis 02.11.2026. | `--fristen` → `beobachtung()`; `BEOBACHTUNG_FRIST_TAGE = 14` |
+| **SHA-Drift der Reserve** | **Eigener Vorgang**, nicht in einer SEO-Änderung mitversteckt. Nachzertifizierung braucht die vollständige Messkette (hugo + hunspell); hier fehlt `hunspell`, deshalb wurde **nichts** geschrieben statt „irgendwie“ gemessen. | `reserve_recert.py --check` · CI: `bot-watchdog.yml` / `content-reserve.yml` ziehen das Zertifikat mit vollständiger Kette nach |
+
+Zwei Details, die den Unterschied machen:
+
+**Der Beleg wird gerechnet, nicht geglaubt.** Am offenen Fall gemessen:
+
+```
+Konsolidierung: /posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-…/
+            → /posts/2026-10-12-haushaltskosten-reduzieren-…/
+  🛑 suchabsicht:  Titel-Überschneidung 0.00 (keine), Themenfeld 'frugalismus'
+  ✅ nachfrage:    1 Impression(en) in 28 Tagen, Position 7.0
+  🛑 verlinkung:   3 redaktionelle(r) Link(s) zeigen auf die URL
+  → Rollen trennen (R2) statt zusammenführen (R1)
+```
+
+Die Nachfrage ist damit **belegt** – und genau deshalb ist die Absicht der
+Grund für das Nein, nicht ein Datenmangel. Vorher hätte dieselbe Prüfung
+fälschlich „keine Nachfrage“ gemeldet, weil der GSC-Export die Adresse in der
+Spalte `seite` mit vollem Host schreibt. Diese Verwechslung ist behoben und
+mit einem Test festgehalten.
+
+**Eine fehlende Datei ist kein Befund.** `detail_seiten()` unterscheidet
+„Liste fehlt“ (`None`) von „Liste da, Seite nicht genannt“ (leere Menge). Wer
+das gleich behandelt, erfindet „nicht indexiert“ – der Fehler, der bei einer
+Frist von acht Wochen teuer wird.
 
 ---
 
@@ -534,6 +571,7 @@ kann.
 | laufend | Detail-Listen nie älter als 14 Tage | `detail_alter_tage` (`W9`) | ✅ |
 | laufend | kein gebrochener Vertrag | `--vertrag`, Gate `G6` | ✅ |
 | laufend | jede offene Aufgabe hat eine Frist und wird nach Ablauf geprüft | `--triage` (Alter, SLA, Wirkungsprüfung) | ✅ (seit 26.10.) |
+| laufend | keine Frist ohne Beleg, keine Beobachtung ohne Zahl | `--fristen --wache` (Exit 1 bei Frist ohne Beleg oder veralteter Messung) | ✅ (seit 26.10.) |
 
 Seit dem 26.10.2026 prüft `npm run gsc:abnahme` diese Zeilen und nennt je
 offenem Punkt den nächsten Schritt. Ein Kriterium ohne Datum ist ein Wunsch;

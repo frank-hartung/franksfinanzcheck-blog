@@ -9,3 +9,4 @@
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1075, "findings": 0, "generated": "2026-10-05", "html_files": 107, "img_nosize": 0, "inline_js": 463, "verdict": "GREEN", "worst_cover_bytes": 138530}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1765, "findings": 0, "generated": "2026-10-12", "html_files": 115, "img_nosize": 0, "inline_js": 426, "verdict": "GREEN", "worst_cover_bytes": 138530}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 2034, "findings": 0, "generated": "2026-10-19", "html_files": 137, "img_nosize": 0, "inline_js": 404, "verdict": "GREEN", "worst_cover_bytes": 130973}
+{"blocking_js": 0, "build_measured": true, "codes": ["cls_img"], "count_img": 2199, "findings": 1, "generated": "2026-10-26", "html_files": 262, "img_nosize": 10, "inline_js": 222, "verdict": "AMBER", "worst_cover_bytes": 130973}

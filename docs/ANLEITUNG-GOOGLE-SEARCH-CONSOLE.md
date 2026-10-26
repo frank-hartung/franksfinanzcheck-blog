@@ -415,6 +415,54 @@ Zwei Dinge macht der Automat ausdrücklich **nicht**: Er entscheidet nicht
 (der Vorschlag ist ein Satz, keine Freigabe), und er ändert keinen Artikel.
 `--entscheiden` schreibt eine Zeile in ein Register, nicht in `content/`.
 
+### 10.1c Fristenblatt: aus zwei offenen Punkten zwei Belege machen
+
+Zwei Fragen standen am 26.10.2026 offen, und sie brauchen **verschiedene**
+Antworten:
+
+| Frage | Antwort | Beleg |
+|---|---|---|
+| Ist Seite 2 (Haushaltskosten) im Index? | **messen** – nicht schätzen | Detail-Liste „Gefunden – zurzeit nicht indexiert“ |
+| Steigt die Indexquote durch Seite 1 (Monatskosten)? | **beobachten** – eine Zahl je Messung | zweite Momentaufnahme in `verlauf.jsonl` |
+
+Beides steht im Fristenblatt:
+
+```bash
+python3 scripts/gsc_abdeckung.py --fristen          # Tabelle + die eine Zahl
+python3 scripts/gsc_abdeckung.py --fristen --wache  # Exit 1, wenn eine Frist ohne Beleg abläuft
+```
+
+Das Blatt nennt je Register-Eintrag: Frist, Tage bis dahin, erwartete Wirkung,
+**Beleg** (`belegt: indexiert` · `belegt: nicht indexiert` · `fehlt`) und
+Eigentümer. Und es nennt die Indexquote als **eine** Zahl mit
+Stichprobenumfang:
+
+```
+**Indexquote (eine Zahl):** 26,8 % · 1 Momentaufnahme(n) · Stand 2026-10-19
+```
+
+Drei Regeln stecken darin, und alle drei sind Absicht:
+
+1. **Eine Messung ist kein Trend.** Mit einer Momentaufnahme lautet der Status
+   `eine_messung`, der Trend bleibt leer, und der Text sagt das ausdrücklich.
+   Erst ab der zweiten Messung gibt es ein `delta`.
+2. **Eine fehlende Datei ist kein Befund.** `detail_seiten()` liefert `None`,
+   wenn die Detail-Liste fehlt, und eine leere Menge, wenn sie da ist und keine
+   Seite nennt. Wer beides gleich behandelt, erfindet „nicht indexiert“ – genau
+   dieser Fehler ist am 26.10.2026 beinahe passiert.
+3. **Beobachten hat eine Frist.** Eine Momentaufnahme, die älter als 14 Tage
+   ist (`BEOBACHTUNG_FRIST_TAGE`), ist Erinnerung, keine Beobachtung; ebenso
+   wird eine einzelne Messung nach ihrem Fälligkeitstag rot. Die Wache schweigt
+   also nicht, wenn aus „beobachten“ ein „vergessen“ wird.
+
+`--fristen` braucht **keine** frische Momentaufnahme. Das ist der Punkt: Ein
+Fristenblatt, das nur nach einem Import Auskunft gibt, schweigt genau dann,
+wenn eine Frist läuft.
+
+Der Wochenlauf (`gsc-abdeckung-woche.yml`) ruft das Blatt montags auf und
+schreibt es in die Lauf-Zusammenfassung; die Wache läuft dort **ohne**
+`--wache`, weil ein Bericht nicht rot werden soll – der Befund steht im Text.
+
 ### 10.2 Verlinkung schreiben – warum nur die „Weiterlesen“-Zeile
 
 `--verlinkung --apply` hängt neue Links ausschließlich an die kuratierte Zeile
@@ -479,8 +527,10 @@ npm run gsc:prioritaet          # Anfrage-Wellen (M2)
 npm run gsc:altlasten           # Index-Puffer benennen (M4)
 npm run gsc:kpi                 # Wochenkennzahl (M9)
 npm run gsc:abnahme             # Abnahmekriterien prüfen
+npm run gsc:fristen             # Fristenblatt: Frist, Beleg, Indexquote als eine Zahl
+npm run gsc:fristen:wache       # dasselbe als Wache (Exit 1 bei Frist ohne Beleg)
 npm run gsc:ursachen            # Sprung mit Git-Beleg erklären (M7)
 npm run gsc:setup               # sieht das Dienstkonto die Property?
 npm run indexnow                # IndexNow-Ping
-npm run test:gsc                # 6 Selbsttests + 108 Regressionstests
+npm run test:gsc                # 7 Selbsttests + 165 Regressionstests
 ```

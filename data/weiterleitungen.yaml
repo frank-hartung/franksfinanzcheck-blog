@@ -19,6 +19,11 @@
 #   B  Gleiches Thema und gleiche Suchabsicht. Ziel ist ein Live-Beitrag. Zuordnung manuell geprüft.
 #      Die Begründung steht je Eintrag im Feld "grund". Bei Teilüberschneidung steht das ausdrücklich dabei.
 #   C  Kein gleichwertiger Live-Beitrag. Ziel ist die Pillar-Seite des Themas, NIE die Startseite.
+#   F  Konsolidierung: zwei Seiten mit identischer Suchabsicht werden zu einer. Nur zulässig mit
+#      ALLEN drei Belegen (Suchabsicht identisch, Nachfrage belegt, kein redaktioneller Link auf
+#      die Quelle). Prüfen mit:  python3 scripts/konsolidierung.py --vorschlag "/posts/<quelle>/"
+#      Die Wache (weiterleitungen.py --check) rechnet dieselben Belege erneut. Details:
+#      docs/ANLEITUNG-WEITERLEITUNGEN.md, Abschnitt 3a.
 #   Ziele sind immer Live-Seiten (draft: false). Entwürfe sind als Ziel verboten.
 #   Ketten (Ziel ist selbst Quelle) und Schleifen sind verboten.
 #   Alt-URLs ohne passendes Ziel stehen in data/url_entfallen.yaml (bewusst 404, Regel D) und

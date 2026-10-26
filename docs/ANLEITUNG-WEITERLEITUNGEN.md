@@ -34,6 +34,7 @@ Nicht von Hand in `static/` ändern. Dort liegt nur das Ergebnis.
 | **C** | Kein gleichwertiger Beitrag live | Die **Pillar-Seite** des Themas. Niemals die Startseite. |
 | **D** | Kein Themenbezug, kein Pillar passt | Bewusst 404 (`url_entfallen.yaml`) |
 | **E** | Tag-Archive `/tags/…/` | Bewusst 404. Entscheidung „Index-Hygiene“ vom 29.09.2026. Tag-Archive sind noindex, nicht in der Sitemap und haben keine externen Links. |
+| **F** | **Konsolidierung:** zwei Seiten mit identischer Suchabsicht werden zu einer | Ein Live-Beitrag. Nur zulässig, wenn **alle drei** Belege vorliegen – siehe Abschnitt 3a. Prüft `scripts/konsolidierung.py`. |
 
 Harte Regeln, die der Generator erzwingt:
 
@@ -42,6 +43,43 @@ Harte Regeln, die der Generator erzwingt:
 - **Keine Schleifen:** Ziel gleich Quelle ist verboten.
 - Eine Quelle darf **nicht live** sein. Sonst überdeckt die Weiterleitung eine Live-Seite.
 - Regel C verlangt ein Pillar-Ziel, Regel A und B verlangen ein Beitrags-Ziel.
+  Regel F verlangt ebenfalls ein Beitrags-Ziel (Pillar wäre Regel C).
+
+### 3a. Regel F – wann eine Zusammenführung erlaubt ist
+
+Regel F ist die einzige, die Inhalt vernichtet. Seit dem 26.10.2026 ist sie
+deshalb nicht mehr Ansichtssache, sondern Rechenweg. `scripts/konsolidierung.py`
+prüft **drei Belege**, und alle drei müssen stehen:
+
+| Beleg | Maß | Schwelle | Warum |
+|---|---|---|---|
+| **Suchabsicht identisch** | Anteil gemeinsamer sinntragender Wörter am kürzeren **Titel** (ohne Füllwörter, ohne Jahreszahlen) **und** gleiches `pillar` | ≥ 0,50 | Zwei Titel mit verschiedener Absicht sind zwei Rollen, keine Dublette. Gemessen wird am Titel, nicht am Slug – „…-schritt-fuer-schritt“ ist eine Redewendung, keine Kannibalisierung. |
+| **Nachfrage belegt** | Impressionen der Quell-URL in `data/gsc/top_seiten_28t.json` | > 0 | Ohne Nachfrage ist eine Weiterleitung ein Denkmal für eine Seite, die niemand gesucht hat. Dann ist ein 404 die ehrliche Antwort (Regel D). Dass Google die URL *kennt* (Detail-Liste), ist ausdrücklich **nicht** genug – Bekanntheit ist keine Nachfrage. |
+| **Keine Live-Verlinkung** | redaktionelle Links auf die Quell-URL | 0 | Solange ein Link dorthin zeigt, würde die Weiterleitung einen kaputten Link verdecken statt ihn zu reparieren. Erst umhängen, dann konsolidieren. |
+
+Der Ablauf ist dreistufig, weil die Quelle erst nach der Entscheidung
+verschwindet:
+
+```bash
+# 1) Prüfen, ob eine Konsolidierung überhaupt zulässig wäre (schreibt nichts)
+python3 scripts/konsolidierung.py --vorschlag "/posts/<quelle>/" \
+                                  --ziel "/posts/<ziel>/"
+
+# 2) Nur bei „zulässig“: Artikel zurückziehen (draft oder löschen) und Eintrag
+#    mit Regel F in data/weiterleitungen.yaml aufnehmen, Grund = der Beleg.
+
+# 3) Prüfen und bauen – die Wache rechnet die drei Belege erneut
+python3 scripts/weiterleitungen.py --check
+python3 scripts/weiterleitungen.py --build
+```
+
+`--check` ruft dieselbe Funktion auf wie `konsolidierung.py --pruefen`: eine
+Wahrheit, zwei Aufrufer. Ein F-Eintrag ohne Beleg macht den Lauf rot.
+
+**Bestand:** Die Regeln A, B und C (115 Einträge, Stand 26.10.2026) sind
+manuell geprüft und bleiben unangetastet – sie werden von der F-Wache nicht
+bewertet. Wer heute eine Zusammenführung will, nimmt F. Wer A/B/C für eine
+Zusammenführung benutzt, umgeht die Belege – deshalb steht das hier.
 
 ## 4. Befehle
 
@@ -65,6 +103,8 @@ npm run test:weiterleitungen                    # Selbsttests + Unit-Tests
 2. Eine Person entscheidet die Regel:
    - exakter Nachfolger → Regel A
    - gleiches Thema, passender Beitrag → Regel B, Grund schreiben
+   - zwei Seiten mit identischer Suchabsicht → erst `konsolidierung.py
+     --vorschlag`, dann Regel F (nur mit allen drei Belegen)
    - sonst Pillar → Regel C
    - sonst bewusst 404 → Regel D, Grund schreiben
 3. Eintrag in die passende Datei schreiben.
