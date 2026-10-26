@@ -313,16 +313,43 @@ def write_verified(a: dict, new_content: str, engine: str) -> tuple[bool, str]:
 
 
 
+DESCRIPTION_ZEILE = re.compile(r"(?m)^description:[^\n]*(?:\n|$)")
+
+
+def setze_description(fm: str, text: str) -> str:
+    """Schreibt GENAU EINE description-Zeile ins Frontmatter.
+
+    WARUM NICHT ERSETZEN-ODER-ANHÄNGEN (26.10.2026, main baute nicht mehr):
+    Die alte Fassung ersetzte per Regex die erste Fundstelle und HÄNGTE sonst
+    eine Zeile an. Traf die Regex eine vorhandene Zeile nicht (z. B. nach
+    einem Merge mit zwei description-Zeilen oder bei ungewöhnlicher
+    Formatierung), standen danach zwei Schlüssel im Frontmatter. YAML lehnt
+    das beim Bauen ab (`mapping key "description" already defined`) – der
+    gesamte Hugo-Build stirbt, und zwar erst in der CI, nicht beim Autor.
+    Deshalb: alle vorhandenen description-Zeilen fallen weg, die neue steht
+    direkt hinter `title:` (oder ganz oben). Idempotent und ohne Duplikat.
+    """
+    wert = text.replace('"', "'").replace("\n", " ").strip()
+    neue_zeile = f'description: "{wert}"'
+    zeilen = [z for z in fm.splitlines() if not z.startswith("description:")]
+    if zeilen and zeilen[0].strip() == "---":
+        zeilen = zeilen[1:]
+    einfuegen = 0
+    for i, zeile in enumerate(zeilen):
+        if zeile.startswith("title:"):
+            einfuegen = i + 1
+            break
+    zeilen.insert(einfuegen, neue_zeile)
+    return "\n".join(zeilen).rstrip("\n") + "\n"
+
+
 def rebuild(a: dict, new_body: str, new_description: str | None = None) -> str:
     """Setzt die Datei FM-sicher aus Teilen zusammen (Kanon-Naht via post_utils)."""
     fm = a["fm"]
     if new_description is not None:
-        fm2 = re.sub(r"(?m)^description:\s*[\"']?.+?[\"']?\s*$",
-                     'description: "' + new_description.replace('"', "'") + '"',
-                     fm, count=1)
-        if fm2 == fm and new_description:
-            fm2 = fm.rstrip("\n") + '\ndescription: "' + new_description.replace('"', "'") + '"\n'
-        fm = fm2
+        fm = setze_description(fm, new_description)
+        if len(DESCRIPTION_ZEILE.findall(fm)) != 1:
+            raise ValueError("Frontmatter trägt nach dem Setzen nicht genau eine description-Zeile")
     return join_article(fm, new_body, a["prefix"])
 
 
