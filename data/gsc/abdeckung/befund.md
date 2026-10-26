@@ -68,10 +68,10 @@
 | 8.88 | `/pillar/internet-dsl/` | 10 | 17 | verlinkt |
 | 8.15 | `/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/` | 6 | 2 | verlinkt |
 | 7.31 | `/pillar/` | 5 | 2 | verlinkt |
+| 6.63 | `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | 1 | 3 | verlinkt |
 | 6.62 | `/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/` | 2 | 4 | verlinkt |
 | 6.35 | `/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/` | 0 | 1 | nur ein Inlink |
 | 6.28 | `/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/` | 1 | 9 | verlinkt |
-| 6.28 | `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | 1 | 3 | verlinkt |
 | 6.13 | `/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/` | 1 | 2 | verlinkt |
 | 6.07 | `/posts/` | 2 | 1 | nur ein Inlink |
 | 5.83 | `/` | 3 | 0 | kein redaktioneller Inlink |

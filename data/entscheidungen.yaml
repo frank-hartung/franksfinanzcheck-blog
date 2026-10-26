@@ -11,7 +11,7 @@
 #
 # Keine Freigabe, keine Veröffentlichung, kein Versand wird durch dieses Register ausgelöst.
 
-stand: "2026-10-19"
+stand: "2026-10-26"
 
 entscheidungen:
 
@@ -271,3 +271,15 @@ entscheidungen:
       severity: P1
       channel: "repo-betrieb"
       offen: "Kommentar in hugo.toml (Zeile 249) nennt noch „die acht“ Rechner. Die Datei ist im Siegel, die Änderung nur signiert. Nur ein Kommentar, ohne Wirkung auf den Build."
+  - id: E-23
+    punkt: "GSC-Abdeckung – zwei Seiten „gecrawlt, zurzeit nicht indexiert“ (26.10.2026)"
+    entscheidung: "Seite 1 (2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier): Rolle bestätigt, kein Umbau. Sie ist mit 1.845 Wörtern, sechs redaktionellen Inlinks (darunter der K7-Hub) und einem einzigartigen App/Excel/Papier-Vergleich weder dünn noch unverlinkt; sie wird als „Alltagssystem“ im Cluster K7 (Konto & Karten) geführt. Geändert wurde nur der Text selbst: die im Fließtext genannte 50–30–20-Regel ist jetzt verlinkt, ein doppelter Link auf denselben Tagesgeld-Artikel ist aufgelöst (9 Links, Goldkorridor). Seite 2 (2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt): Rolle getrennt statt Inhalt umgebaut. Sie teilt Titel-Muster, 4K-Prüfpfad und Veröffentlichungstag mit 2026-10-12-haushaltskosten-reduzieren (2.048 Wörter, vier Inlinks) – zwei Live-Seiten aus derselben Engine mit derselben Absicht. Nach R1 wird nicht zusammengeführt; nach R2 wird über Titel, Description, Einleitung getrennt. Neu: „Fixkosten-Check: Wann du was prüfst – der Jahresplan“, Description auf die Zeitachse, Keywords von Titelfragmenten („Dein Weg zu geringeren“) auf Suchbegriffe umgestellt, ein Positionssatz in der Einleitung. Beide Entscheidungen liegen mit Frist 25.11.2026 im Register data/gsc/abdeckung/entscheidungen.yaml; geprüft wird über die Detail-Liste (nicht über lastmod), weil keine der beiden Seiten umgebaut, sondern eingeordnet wurde."
+    begruendung: "Die Zahlen sagen: Der Engpass ist site-weit, nicht seitenweise. 117 von 437 bekannten URLs sind indexiert (26,8 %), bei 99 indexierbaren Seiten im Build. Eine Seite mit 1.845 Wörtern und sechs Inlinks ist nicht das Problem – ein Umbau wäre Aktionismus mit Risiko für ein funktionierendes Ranking. Bei Seite 2 liegt dagegen ein belegbarer Defekt vor: Der Zwilling bedient dieselbe Absicht, und die Keywords der Seite waren Kopien des eigenen Titels, keine Suchbegriffe. Genau das ist der Unterschied, den die Triage sichtbar macht: beobachten (Seite 1) gegen trennen (Seite 2)."
+    status: "umgesetzt"
+    verantwortlich: human
+    nachweis: "data/gsc/abdeckung/entscheidungen.yaml (2 Einträge, Frist 2026-11-25); data/kannibalisierung_map.yaml (K3 jetzt 7, K7 jetzt 4 Beiträge, Stand 26.10.); python3 scripts/gsc_abdeckung.py --triage → 4 Zeilen, 0 offen, Queue leer; link_density_guard.py: 95 Artikel, 0 überladen, Ziel-Duplikate 41 → 40; Hugo-Build 109 Seiten, index_hygiene_gate --base public ohne harten Fund; ff_inhalts_wache.py: 0 Befunde."
+    befund:
+      owner: human
+      severity: P2
+      channel: "seo-inhalt"
+      offen: "Bestätigung durch Frank Hartung steht aus – bis dahin ist die Entscheidung Arbeitsgrundlage, die Frist (25.11.2026) läuft. Am 25.11. entscheidet die Detail-Liste: Stehen die URLs noch drin, ist die nächste Stufe bei Seite 1 site-weit (Autorität/Crawl-Budget) und bei Seite 2 die Konsolidierung – die braucht 301-Weiterleitungen und damit eine Entscheidung zu Punkt 1, die bisher nicht beauftragt ist."

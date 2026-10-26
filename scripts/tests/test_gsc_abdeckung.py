@@ -714,6 +714,23 @@ class EntscheidungenUndFristen(unittest.TestCase):
         self.assertEqual(g.verlauf_schreiben(zeilen, self.dt.date(2026, 10, 26), pfad), 0)
         self.assertEqual(len(g.verlauf_laden(pfad)), 1)
 
+    def test_pruefung_liste_verlangt_konsequenz(self) -> None:
+        """Eine „beobachten"-Entscheidung darf nicht als „nicht umgesetzt" gelten.
+
+        Am 26.10.2026 wurden zwei Seiten eingeordnet, nicht umgebaut. Nach der
+        Frist wäre „lastmod unverändert" die falsche Frage – die richtige ist:
+        Steht die URL noch in der Meldung?
+        """
+        self._entscheiden()
+        eintrag = g.entscheidungen(self.register)["/posts/a/"]
+        eintrag["pruefung"] = "liste"
+        t = g.triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                     self.wahrheit, {}, {"ohne_ein": []},
+                     heute=self.dt.date(2026, 12, 2), verlauf=[],
+                     register={"/posts/a/": eintrag}, root=self.tmp / "leer")
+        zeile = t["offen"][0]
+        self.assertEqual(zeile["prioritaet"], "P2")
+        self.assertIn("Konsequenz ziehen", zeile["aktion"])
 
 class TitelUeberschneidung(unittest.TestCase):
     """Kannibalisierung wird am Titel gemessen, nicht am Slug.
@@ -741,3 +758,4 @@ class TitelUeberschneidung(unittest.TestCase):
         self.assertIsNotNone(treffer)
         self.assertEqual(treffer["cluster"], "K3-frugalismus")
         self.assertIsNone(g.cluster_fuer_pillar("gibt-es-nicht"))
+

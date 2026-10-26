@@ -245,7 +245,7 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
   unbekannter Grund), Hermetik (kein Netz, kein Schreiben in den echten
   Verlauf), Maßnahmenplan (Triage, Vertrag, Verlinkung, Goldkorridor),
   Git-Beleg (M7), Kreislauf (Register, Frist, Wirkungsprüfung). Selbsttest:
-  80 Fälle.
+  82 Fälle.
 - `.github/workflows/gsc-import.yml` – Build für die Gegenprobe (nicht
   kritisch), dann `--audit --schreiben --json` mit Tabelle in der
   Lauf-Zusammenfassung. Ein roter Befund wird als Warnung sichtbar, blockiert
@@ -288,7 +288,7 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
 |---|---|---|---|---|---|---|
 | M1 | **P1** | S | 404-Detail-Liste exportieren und einlesen, dann triagieren | 223 gemeldet, 30 erklärbar, 193 offen | Mensch (Export) + Automat | **Automat fertig** (`--triage`), 1 von 6 Listen da |
 | M2 | **P1** | M | Crawl-Nachfrage für die 69 gefundenen, nicht abgerufenen Seiten | 69 bei 99 indexierbaren Seiten | Automat + Redaktion | **Automat fertig** (`--prioritaet`, `--verlinkung`), Redaktion laufend |
-| M3 | P2 | M | Redaktions-Queue für die 4 „gecrawlt, nicht indexiert" | 4 Seiten | Redaktion | **erledigt und weitergeführt** – 2 Aufgaben mit Frist und Vorschlag, 2 als Asset erkannt; Entscheidung über `--entscheiden`, Wirkungsprüfung nach Frist |
+| M3 | P2 | M | Redaktions-Queue für die 4 „gecrawlt, nicht indexiert" | 4 Seiten | Redaktion | **erledigt** – 2 Assets erkannt, 2 Seiten am 26.10. entschieden (Register, Frist 25.11.), Queue leer |
 | M4 | P2 | S | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbar | Automat | **fertig** (`--altlasten`, W5) |
 | M7 | P2 | S | Sprung vom 17.10. erklären | 261 → 320 bzw. 138 → 117 | Mensch | **belegt** (Commit `8058293`, `--ursachen`) |
 | M8 | P2 | S | Detail-Exporte wöchentlich in den Tageslauf | 0 Detail-Zeilen im Export | Mensch + Automat | **erledigt** – erste Liste liegt in `details/`, Regel W9 grün |
@@ -319,8 +319,8 @@ zwei davon sind keine Aufgabe:
 
 | URL | Urteil | Begründung |
 |---|---|---|
-| `/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/` | **P2 Redaktion prüfen** | 1.845 Wörter, 6 redaktionelle Inlinks, keine Rolle im Cluster K7 – „zu dünn" und „unverlinkt" scheiden aus |
-| `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | **P2 Redaktion prüfen** | 1.872 Wörter, 3 Inlinks, keine dokumentierte Rolle im Cluster K3, **0 Titel-Überschneidungen** (frühere Angabe „2 ähnliche Titel“ war ein Messfehler, siehe 7.3) |
+| `/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/` | **entschieden 26.10.** | 1.845 Wörter, 6 redaktionelle Inlinks – Rolle als „Alltagssystem" im Cluster K7 bestätigt, kein Umbau (7.4) |
+| `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | **entschieden 26.10.** | 1.872 Wörter, 3 Inlinks, **0 Titel-Überschneidungen** (die frühere Angabe „2 ähnliche Titel“ war ein Messfehler, siehe 7.3) – Rolle als Jahresplan getrennt, Titel/Description/Keywords ersetzt (7.4) |
 | `/favicon.ico` | P3 – kein Inhalt | Google crawlt Favicons planmäßig; kein Indexanspruch |
 | `/index.xml` | P3 – kein Inhalt | RSS-Feed; darf gecrawlt werden, gehört nicht in den Index |
 
@@ -500,7 +500,117 @@ offen, mit Vorschlag und Frist, aber ohne Entscheidung – weil die dem Menschen
 gehört. Der Automat hat nur dafür gesorgt, dass sie nicht mehr verschwinden
 kann.
 
-### 7.4 Was am 26.10.2026 noch offen ist
+### 7.4 Die Entscheidung – zwei Seiten, zwei verschiedene Antworten
+
+Die Triage hat zwei offene Zeilen hinterlassen. Beide sind jetzt entschieden,
+aber **nicht gleich** – und genau darin liegt der Unterschied zwischen einer
+Liste und einer Führung.
+
+#### Seite 1: `haushaltsbuch-fuehren-app-excel-oder-papier` – Rolle bestätigt, kein Umbau
+
+**Entscheidung:** Die Seite bleibt, wie sie ist. Sie bekommt eine dokumentierte
+Rolle als „Alltagssystem“ im Cluster K7 (Konto & Karten) und zwei kleine
+Verbesserungen im Text. Kein neuer Titel, kein Umbau.
+
+**Warum nicht umbauen:** Die Zahlen geben keinen Anlass.
+
+| Prüfgröße | Wert | Urteil |
+|---|---|---|
+| Länge | 1.845 Wörter | über dem Durchschnitt, nicht dünn |
+| redaktionelle Inlinks | 6 (darunter der K7-Hub) | nicht unverlinkt |
+| Einzigartigkeit | App vs. Excel vs. Papier | kein Zwilling im Bestand |
+| Impressionen (28 Tage) | 0 | kein Signal – aber auch kein Verlust |
+| Indexquote des Blogs | 117 von 437 (26,8 %) | der Engpass ist site-weit |
+
+Eine Seite mit 1.845 Wörtern und sechs Inlinks ist nicht das Problem. Wer sie
+umbaut, riskiert ein funktionierendes Ranking für eine Vermutung. **Was
+tatsächlich fehlte, war die Rolle im Register** – sie ist jetzt da.
+
+**Was geändert wurde (klein, aber echt):** Der Fließtext nennt die
+50–30–20-Regel, verlinkte sie aber nicht – jetzt verlinkt. Ein doppelter Link
+auf denselben Tagesgeld-Artikel im selben Satz ist aufgelöst. Ergebnis: 9
+interne Links (Goldkorridor), Ziel-Duplikate im Blog 41 → 40.
+
+#### Seite 2: `dein-weg-zu-geringeren-monatskosten` – Rolle getrennt, Titel geändert
+
+**Entscheidung:** Die Seite wird nicht umgebaut, sondern **neu eingeordnet** –
+als Jahresplan (Timing). Titel, Description und Keywords sind am 26.10. ersetzt.
+
+**Warum hier und nicht bei Seite 1:** Auf der Seite liegt ein belegbarer
+Defekt, nicht nur ein Verdacht. Der Zwilling ist am selben Tag aus derselben
+Engine erschienen:
+
+| | Seite 2 (Monatskosten) | Zwilling (Haushaltskosten) |
+|---|---|---|
+| Datum | 19.10.2026, 01:20 | 19.10.2026, 16:43 |
+| Wörter | 1.872 | 2.048 |
+| Inlinks | 3 | 4 |
+| gemeinsames Framework | „4-K-Prüfpfad“ | „4K-Prüfpfad“ |
+| Keywords | `Dein Weg zu geringeren`, `Geringeren` | `Haushaltskosten`, `Reduzieren` |
+
+Die Keywords der Seite waren **Kopien des eigenen Titels**, keine Suchbegriffe.
+Zwei Live-Seiten mit derselben Absicht, demselben Framework und demselben
+Veröffentlichungstag sind aus Suchabsicht-Sicht eine Dublette – belegt durch
+Titel, Framework und Datum, **nicht** durch eine Google-Meldung: Die
+Unique­ness-Prüfung des Repos (`check_uniqueness.py`) fand zwischen beiden
+keinen kritischen Befund. Genau deshalb ist die Trennung eine redaktionelle
+Entscheidung und keine Reparatur.
+
+**Was R1/R2 vorschreiben:** Die Entscheidung E-01 vom 19.10. verbietet
+Zusammenführung, Löschung und URL-Änderung, solange keine 301-Weiterleitungen
+existieren (`disableAliases = true`). R2 verlangt stattdessen Trennung über
+Titel, Description, H1 und Einleitung. Genau das ist passiert:
+
+| Feld | vorher | jetzt |
+|---|---|---|
+| Titel | „Dein Weg zu geringeren Monatskosten: Schritt für Schritt“ | „Fixkosten-Check: Wann du was prüfst – der Jahresplan“ |
+| Description | „…systematisch deine monatlichen Ausgaben senkst…“ | Zeitachse: wann Versicherung, Energie, Abos, Konto dran sind |
+| Keywords | 4 Titelfragmente | 6 Suchbegriffe (Kündigungsfristen, Versicherung wechseln, …) |
+| Einleitung | begann mit der Modellrechnung | nennt die Rolle: „Dieser Artikel ist der **Jahresplan**“ |
+
+Die inhaltliche Begründung liefert der Artikel selbst: Seine unverwechselbare
+Stelle sind die **4 Säulen mit Zeitpunkten** – Versicherung im Herbst, Energie
+im Januar, Abos quartalsweise, Konto bei jeder Gebührenerhöhung. Das ist eine
+andere Suchabsicht als „welche Kosten treiben mich“ (der Zwilling) und als
+„wie teile ich mein Budget“ (50-30-20-Regel).
+
+#### Was die Umsetzung im Repo bewegt hat
+
+Ein Titel ist kein Textfeld, sondern ein Eingang in mehrere Wachen. Was der
+Umbau ausgelöst hat – und was das für die Sorgfalt bedeutet:
+
+| Wache | Befund | Bedeutung |
+|---|---|---|
+| `check_covers.py` | **1 STALE**: Cover zeigte „Dein Weg zu geringeren Monatskosten …“, Frontmatter den neuen Titel | ohne Neurendern hätte das Pinterest-Bild den alten Text getragen |
+| `generate_covers.py --slug` | Cover neu gerendert (1.000 × 1.500) | Bild und Titel sind wieder deckungsgleich |
+| `ff_inhalts_wache.py` (FF1–FF5) | 0 Befunde | kein Formel-Titel, keine Dublette im Titelband |
+| `check_uniqueness.py` | kritisch live↔live: 0 · nicht kritische Paare: 18 (vorher 18) | die Trennung erzeugt keine neue Überlappung |
+| `link_density_guard.py` | 95 Artikel, **0 überladen**, Ziel-Duplikate **41 → 40** | Haushaltsbuch: 11 → 9 Links, im Goldkorridor |
+| `index_hygiene_gate.py --base public` | „Crawl-Fläche sauber“ | keine neue indexierbare Dublette |
+| Hugo-Build | 109 Seiten, Sitemap 99 URLs, `lastmod` 26.10. bei beiden | Crawl-Anlass ist gesetzt |
+| `fachpruefung_register.py` | Register war veraltet (18 statt 17 Beiträge) → neu erzeugt | die 24.10.-Artikel fehlten im Prüfregister |
+| `gsc_abdeckung.py --triage` | **P3: 4 · Queue leer** | beide Zeilen sind entschieden, keine offene Aufgabe |
+
+#### Was beide Entscheidungen gemeinsam haben
+
+- **Frist 25.11.2026**, im Register `data/gsc/abdeckung/entscheidungen.yaml`.
+- **Prüfung über die Detail-Liste**, nicht über `lastmod`: Beide Entscheidungen
+  lauten „einordnen und beobachten“, nicht „umbauen“. Stehen die URLs am 25.11.
+  noch in der Meldung, zieht die Triage die Konsequenz (P2) – sie meldet dann
+  nicht fälschlich „nicht umgesetzt“.
+- **Eskalationsweg steht fest:** Seite 1 → site-weiter Hebel (Autorität,
+  Crawl-Budget, nicht noch ein Umbau). Seite 2 → Konsolidierung, und die
+  braucht 301-Weiterleitungen, also die Entscheidung zu Punkt 1, die bisher
+  niemand beauftragt hat.
+
+**Die Grenze dieser Entscheidung, offen gesagt:** Es gibt keine Nachfrage-Daten.
+Der Export enthält 13 Suchbegriffe, keiner davon zu Haushaltsbuch oder
+Monatskosten. Die Rollen sind deshalb aus dem Bestand abgeleitet (Pillar,
+Cluster, Inlinks, Framework) – nicht aus Suchvolumen. Wer das anders
+entscheiden will, braucht die Suchanfragen-Liste (`top_suchbegriffe`), nicht
+eine Meinung.
+
+### 7.5 Was am 26.10.2026 noch offen ist
 
 - **Fünf von sechs Detail-Listen fehlen.** Ohne die 404-Liste (223 Seiten)
   bleibt die Triage bei vier Zeilen – siehe `details/README.md` für die
@@ -509,10 +619,22 @@ kann.
   Kopfzeile. Das ist ein gutes Zeichen (keine Warnungen) und keine Lücke – wird
   hier festgehalten, damit beim nächsten Lauf niemand eine fehlende Datei
   vermutet.
-- **Das Entscheidungs-Register ist leer.** Zwei Seiten tragen eine Frist
-  (30 Tage, bis 25.11.2026) und einen Vorschlag – aber keine Entscheidung.
-  Das ist Absicht: Die Entscheidung gehört der Redaktion, nicht dem Automaten.
-  Der Unterschied zu vorher: Sie kann jetzt nicht mehr still verschwinden.
+- **Zwei Entscheidungen laufen, die Wirkung ist offen.** Beide Seiten sind
+  eingeordnet, keine ist indexiert (Stand 19.10.). Am 25.11.2026 entscheidet
+  die Detail-Liste, ob die Einordnung gereicht hat. Bis dahin steht die Frist
+  im Register und die Triage führt beide als „entschieden“.
+- **Ein repo-fremder Befund bleibt rot.** `reserve_artifacts.py --check` meldet
+  für zwei Artikel vom 24.10. (`bankgebuehren-senken…`,
+  `energieeffizienz-im-haushalt…`) eine abweichende SHA-256 und verlangt eine
+  Nachzertifizierung. Das stammt **nicht** aus dieser Arbeit (beide Dateien sind
+  unverändert) und wurde bewusst nicht in diesem Schritt geheilt: Der Befehl
+  dafür ist `python3 scripts/reserve_recert.py --fix`, und er zertifiziert
+  YMYL-Inhalte neu. Das gehört in einen eigenen Vorgang, nicht in eine
+  SEO-Änderung.
+- **Der Zwilling ist nicht auf der gelieferten Liste.** Ob
+  `2026-10-12-haushaltskosten-reduzieren` indexiert ist oder in den 69
+  „gefunden, nicht indexiert“ steht, sagt erst die fehlende Liste. Für die
+  Rollentrennung ist es nicht entscheidend, für die Bilanz schon.
 - **`Diagramm.csv` endet am 19.10.2026** und deckt sich mit dem vorhandenen
   Snapshot (320 nicht indexiert / 117 indexiert, 7 Impressionen). Es fehlen
   Tage, deshalb ist der Export **Beleg, keine neue Momentaufnahme** – sonst
@@ -587,7 +709,7 @@ python3 scripts/gsc_abdeckung.py --abnahme         # Abnahmekriterien
 python3 scripts/gsc_abdeckung.py --ursachen        # Sprung mit Git-Beleg
 
 # Selbsttest und Regressionstests
-python3 scripts/gsc_abdeckung.py --selftest        # 80 Fälle
+python3 scripts/gsc_abdeckung.py --selftest        # 82 Fälle
 python3 -m unittest scripts.tests.test_gsc_abdeckung   # 63 Tests
 
 # npm-Kurzbefehle
@@ -609,7 +731,11 @@ npm run gsc:register        # Entscheidungs-Register (neu)
 | `data/gsc/abdeckung/details/` | neu | Detail-Listen je Grund, `stand.txt` (Exportdatum), `README.md` (Ablage-Regel) |
 | `data/gsc/abdeckung/{triage.json,triage.md,redaktions_queue.md}` | neu | Ergebnis der Triage aus der ersten gelieferten Liste |
 | `data/gsc/abdeckung/triage_verlauf.jsonl` | neu | seit wann eine URL offen ist (Fristgrundlage) |
-| `data/gsc/abdeckung/entscheidungen.yaml` | neu | Entscheidungs-Register mit Wiedervorlage und Erwartung |
+| `data/gsc/abdeckung/entscheidungen.yaml` | neu | Entscheidungs-Register mit Wiedervorlage, Erwartung und Prüfart (2 Einträge) |
+| `data/kannibalisierung_map.yaml` | geändert | Rollen für Haushaltsbuch (K7) und Jahresplan (K3), Stand 26.10. |
+| `data/entscheidungen.yaml` | geändert | E-23: die beiden GSC-Entscheidungen mit Nachweis |
+| `content/posts/2026-08-21-haushaltsbuch-…/index.md` | geändert | 50–30–20-Regel verlinkt, Doppel-Link aufgelöst, `lastmod` 26.10. |
+| `content/posts/2026-10-12-dein-weg-…/index.md` | geändert | Titel, Description, Keywords, Einleitung, `lastmod` 26.10. |
 | `docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md` | geändert | Abschnitt 9 (Export, Gegenprobe, Grenzen), Abschnitte 10–11 neu nummeriert |
 | `.github/workflows/gsc-import.yml` | geändert | Selbsttest, Build für die Gegenprobe, Abdeckungs-Schritt mit Lauf-Tabelle, fünf Maßnahmen-Schritte, Artefakt-Upload, Welle 1 als Anfrage-Reihenfolge |
 | `scripts/cockpit.py` | geändert | Zeile „Search Console" in „SEO & Technik" |

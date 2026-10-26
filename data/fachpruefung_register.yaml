@@ -1,7 +1,7 @@
 # Fachprüfungs-Register (automatisch erzeugt: scripts/fachpruefung_register.py)
 # Stand: 19.10.2026. Keine Freigabe. Jeder Eintrag braucht einen benannten Menschen als Prüfer.
 # Quellen je Aussage: docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md (Schritte 1–5).
-anzahl: 17
+anzahl: 18
 pruefer_status: "offen – kein benannter fachpruefer und keine Redaktionsprüfung mit Belegkette"
 beitraege:
   - slug: "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden"
@@ -77,9 +77,9 @@ beitraege:
       - "## Methode 1: Die Haushaltsbuch-App (für die meisten die passende Wahl) 58 % der Nutzer führen ihr Haushaltsbuch digital."
       - "Vorteile: - Automatischer Abgleich mit dem Konto – keine Beleg- und Zettelwirtschaft - Echtzeit-Überblick über Ausgaben in jedem Bereich - Push-Benachrichtigungen bei drohender Budget-Überschreitung - Auswertungen und Tr"
       - "| | Datenhoheit | bei Drittanbieter | bei dir selbst | vollständig bei dir | | Automatische Auswertung | ✅ | ✅ (Pivot) | ❌ | | Mehrere Konten | ✅ | ✅ | umständlich | | Push-Erinnerung | ✅ | ❌ | ❌ | | Für Kartenzahler | ✅"
-      - "Besser ist ein Top-down-Budget nach der 50–30–20-Regel: 50 % des Nettoeinkommens → Fixkosten & Bedürfnisse: Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos."
+      - "Besser ist ein Top-down-Budget nach der [50–30–20-Regel](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/): 50 % des Nettoeinkommens → Fixkosten & Bedürfnisse: Miete, Energie, Lebensmittel, Vers"
       - "30 % → Wünsche & Freizeit: Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys."
-      - "20 % → Sparen & Vermögensaufbau: [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze"
+      - "20 % → Sparen & Vermögensaufbau: [Notgroschen auf dem Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung."
   - slug: "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich"
     titel: "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich"
     pillar: "konto-karten"
@@ -273,3 +273,19 @@ beitraege:
       - "Modellrechnung: Angenommen, Tarif und Gerätezahlung kosten zusammen 35 Euro im Monat."
       - "Modellrechnung: Bei einer Laufzeit von 24 Monaten zahlst du 24 mal 35 Euro."
       - "Modellrechnung: Das ergibt 840 Euro, noch ohne einmalige Gebühren."
+  - slug: "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto"
+    titel: "Bankgebühren senken: 7 Schritte zum günstigeren Konto"
+    pillar: "konto-karten"
+    risikoklasse: "standard"
+    status: "ausstehend"
+    pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
+    zahlen_fundstellen:
+      - "| Kostenart | Jahresgebühr (EUR) | Hinweis zur Reduktion | | :--- | :--- | :--- | | Kontoführung | 48 € bis 120 € | Freigrenze bei Mindesteingang prüfen | | Kreditkarte | 30 € bis 150 € | Auf gebührenfreie Karte umsteige"
+      - "Viele Banken verlangen einen Geldeingang von 700 oder 1.000 €."
+      - "Faustregel: Zahlst du monatlich mehr als 5 % deines Nettoeinkommens für Bankgebühren?"
+      - "Meist sinken diese Kosten um über 80 %."
+      - "Annahmen - Jahresnettoeinkommen: 30.000 € - Aktuelle Bankgebühren: 96 € Kontoführung + 120 € Kreditkarte + 30 € Ausland = 246 € Formel Ersparnis = Aktuelle Gebühren – Reduzierte Kosten Rechenweg Du zahlst künftig 1.500 €"
+      - "Am Jahresende hast du 246 € mehr zur freien Verfügung."
+      - "Das sind knapp 0,8 % deines Jahreseinkommens."
+      - "Über zehn Jahre sparst du mehr als 2.400 €."
+      - "10 € bis 20 €."

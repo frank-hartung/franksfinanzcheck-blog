@@ -2,7 +2,7 @@
 title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
 description: "Haushaltsbuch führen: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – mit der 50-30-20-Regel als Ordnungshilfe."
 date: 2026-08-21T06:10:00Z
-lastmod: 2026-09-28
+lastmod: 2026-10-26
 draft: false
 tags: ["Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
@@ -128,11 +128,11 @@ Dazu ein Wochenabschluss. Vorteile: keine Technik, keine Datenweitergabe. Schrei
 
 ## Das 50-30-20-Prinzip: Drei Töpfe statt 30 Kategorien
 
-Viele hören nach ein paar Wochen auf. Sie wollen jede Ausgabe bis auf den Cent notieren. Besser ist ein **Top-down-Budget** nach der **50–30–20-Regel**:
+Viele hören nach ein paar Wochen auf. Sie wollen jede Ausgabe bis auf den Cent notieren. Besser ist ein **Top-down-Budget** nach der [**50–30–20-Regel**](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/):
 
 * **50 % des Nettoeinkommens → Fixkosten & Bedürfnisse:** Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos.
 * **30 % → Wünsche & Freizeit:** Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys.
-* **20 % → Sparen & Vermögensaufbau:** [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
+* **20 % → Sparen & Vermögensaufbau:** [Notgroschen auf dem Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
 
 Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 € Sparrate. Drückst du die Fixkosten auf 1.000 €, steigt die Sparrate auf 750 €. Das gelingt mit [einem kostenlosen Girokonto](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) sowie guten Versicherungs- und Energietarifen. Dein Lebensstandard bleibt gleich.
 

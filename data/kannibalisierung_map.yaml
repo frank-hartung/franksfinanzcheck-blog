@@ -1,4 +1,4 @@
-# Kannibalisierungs-Map (Stand 19.10.2026)
+# Kannibalisierungs-Map (Stand 19.10.2026, Rollen ergänzt 26.10.2026)
 #
 # Zweck: Je Cluster ist festgelegt, welcher Beitrag welche Suchabsicht bedient.
 # Ein Beitrag = eine Rolle. Abgrenzung läuft über Titel, Description und Einleitung.
@@ -15,7 +15,7 @@
 #
 # Status-Kürzel: umgesetzt | offen (Name nennt den Verantwortlichen)
 
-stand: "2026-10-19"
+stand: "2026-10-26"
 regeln_quelle: "data/kannibalisierung_map.yaml (dieses Dokument); Entscheidungen: data/entscheidungen.yaml"
 
 cluster:
@@ -104,7 +104,12 @@ cluster:
         status: "live"
         rolle: "Saison: Herbst-Spartipps"
         status_massnahme: "primär, keine Änderung"
-    entscheidung: "Vier Live-Rollen (Konzept, Einstieg, Fehler, Tricks) plus Saison. Der Entwurf 09-23 ist eine Dublette zu 09-11."
+      - slug: "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt"
+        status: "live"
+        rolle: "Timing: Jahresplan, wann welcher Posten geprüft wird (Versicherung Herbst, Energie Januar, Abos quartalsweise, Konto)"
+        titel: "Fixkosten-Check: Wann du was prüfst – der Jahresplan"
+        status_massnahme: "umgesetzt 26.10.: Titel, Description und Keywords geschärft; Abgrenzung zum Überblick 2026-10-12-haushaltskosten-reduzieren"
+    entscheidung: "Fünf Live-Rollen (Konzept, Einstieg, Fehler, Tricks, Jahresplan) plus Saison. Der Entwurf 09-23 ist eine Dublette zu 09-11. Jahresplan und Überblicksartikel (2026-10-12-haushaltskosten-reduzieren) trennen sich über Titel, Description und Einleitung (R2), nicht über eine Zusammenführung (R1)."
 
   - id: K4-notgroschen
     primaerkeyword: "Notgroschen berechnen"
@@ -208,4 +213,9 @@ cluster:
         status: "live"
         rolle: "Girokonto ohne Gebühren"
         status_massnahme: "primär, keine Änderung; Fachprüfung offen (fachpruefung_register.yaml)"
-    entscheidung: "Drei Rollen. Alle drei Beiträge sind im Fachprüfungs-Register. Ohne benannten Prüfer keine Freigabe."
+      - slug: "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier"
+        status: "live"
+        rolle: "Alltagssystem: Werkzeugvergleich Haushaltsbuch (App, Excel, Papier) als Gegenstück zu Konto und Tagesgeld"
+        titel: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
+        status_massnahme: "Rolle 26.10. in der GSC-Triage festgelegt; 50–30–20-Regel verlinkt, Doppel-Link aufgelöst; keine Titeländerung"
+    entscheidung: "Vier Rollen (Auslandsabhebung, Kreditkarte, Girokonto, Alltagssystem Haushaltsbuch). Alle vier Beiträge sind im Fachprüfungs-Register. Ohne benannten Prüfer keine Freigabe."

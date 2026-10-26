@@ -70,7 +70,7 @@ AUFRUF
     # 4) Aus einer 404-Detail-Liste Weiterleitungs-Vorschläge ableiten
     python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
 
-    python3 scripts/gsc_abdeckung.py --selftest         # 80 Fälle, offline
+    python3 scripts/gsc_abdeckung.py --selftest         # 82 Fälle, offline
 
 WO DIE EXPORTE HERKOMMEN
     Search Console → Indexierung → Seiten → oben rechts „Exportieren“.
@@ -2095,6 +2095,7 @@ def entscheidung_eintragen(url: str, entscheidung: str, begruendung: str = "",
                            wiedervorlage: str | None = None,
                            erwartung: str = "indexiert",
                            eigentuemer: str = "redaktion",
+                           pruefung: str = "lastmod",
                            heute: dt.date | None = None,
                            pfad: Path | None = None) -> dict:
     """Schreibt eine Entscheidung ins Register – mit Frist und Erwartung.
@@ -2113,7 +2114,7 @@ def entscheidung_eintragen(url: str, entscheidung: str, begruendung: str = "",
             raise ValueError(f"{feld} muss ein Datum JJJJ-MM-TT sein, war: {wert!r}")
     werte = {"url": url, "entscheidung": entscheidung, "am": heute.isoformat(),
              "wiedervorlage": wiedervorlage, "erwartung": erwartung,
-             "eigentuemer": eigentuemer,
+             "eigentuemer": eigentuemer, "pruefung": pruefung,
              "begruendung": begruendung or "ohne Begründung eingetragen"}
     neu = "- {" + ", ".join(f'{k}: "{v}"' for k, v in werte.items()) + "}"
     kopf = (
@@ -2125,6 +2126,7 @@ def entscheidung_eintragen(url: str, entscheidung: str, begruendung: str = "",
         "#\n"
         "# Felder: url · entscheidung · am · wiedervorlage · erwartung\n"
         "#         (indexiert | impressionen | keine) · eigentuemer · begruendung\n"
+        "#         pruefung (lastmod | liste) – wie die Wirkung gemessen wird\n"
         "#\n"
         "# Nach Ablauf der Wiedervorlage prüft `--triage` die Wirkung:\n"
         "#   lastmod der Seite > Entscheidungsdatum → Änderung ist live,\n"
@@ -2416,6 +2418,14 @@ def _register_zeile(url: str, eintrag: dict, live: set[str], heute: dt.date,
     if not wv or heute.isoformat() < wv:
         return ("P3", f"entschieden am {eintrag.get('am') or '?'}"
                       f" (Wiedervorlage {wv or 'offen'})", beleg)
+    # Nicht jede Entscheidung ändert den Artikel. „Beobachten und messen“
+    # braucht keinen lastmod-Vergleich, sondern die Frage: Steht die URL
+    # weiter in der Liste? Sonst meldet die Prüfung „nicht umgesetzt“, obwohl
+    # genau das die Entscheidung war.
+    if (eintrag.get("pruefung") or "lastmod") == "liste":
+        return ("P2", f"Konsequenz ziehen: Frist {wv} abgelaufen, URL weiter gemeldet",
+                f"{beleg} · Erwartung „{eintrag.get('erwartung') or 'indexiert'}“ ist "
+                "nicht eingetreten. Nächster Schritt steht in der Begründung.")
     wirkung = wirkung_pruefen(url, eintrag, live, root)
     if wirkung["status"] == "geaendert":
         return ("P2", f"Wirkung prüfen: Änderung vom {wirkung['seit']} live – "
@@ -2453,6 +2463,27 @@ def triage_markdown(t: dict, quelle: str) -> str:
             z.append(f"  - Beleg: {zeile['beleg']}")
             if zeile.get("vorschlag"):
                 z.append(f"  - Vorschlag: {zeile['vorschlag']}")
+        z.append("")
+    # „Entschieden“ heißt bei einer noch gemeldeten URL: Der Eintrag steht im
+    # Register (Aktion nennt die Wiedervorlage). Nur bei einer nicht mehr
+    # gemeldeten URL ist der Schlüssel selbst „register“.
+    register_zeilen = [z_ for z_ in t["entschieden"]
+                       if "Wiedervorlage" in z_["aktion"]
+                       or z_["schluessel"] == "register"]
+    if register_zeilen:
+        z.append("### Entschieden – im Register, mit Frist")
+        z.append("")
+        z.append("| Wiedervorlage | URL | Entscheidung | Beleg |")
+        z.append("|---|---|---|---|")
+        for z_ in register_zeilen:
+            if "Wiedervorlage" in z_["aktion"]:
+                frist = z_["aktion"].split("Wiedervorlage")[-1].strip(" )")
+                entscheidung = z_["aktion"].split(" (Wiedervorlage")[0]
+            else:
+                frist = "Wirkung belegt"
+                entscheidung = z_["aktion"]
+            z.append(f"| {frist} | `{z_['url']}` | {entscheidung} | "
+                     f"{z_['beleg'][:160]} |")
         z.append("")
     z.append(f"Bereits entschieden (nichts zu tun): {len(t['entschieden'])}.")
     if t.get("eskaliert"):
@@ -3469,7 +3500,7 @@ def _mini_repo(wurzel: Path) -> Path:
 
 
 def selbsttest() -> int:
-    """80 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
+    """82 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
     ok = 0
     fehler: list[str] = []
 
@@ -3801,8 +3832,48 @@ def selbsttest() -> int:
                erst == 1 and zweit == 0 and len(gelesen_v) == 1
                and offen_seit("/posts/x/", gelesen_v, dt.date(2026, 11, 5)) == 10)
 
+        # Eine Entscheidung „beobachten und messen“ darf nach der Frist nicht
+        # als „nicht umgesetzt“ gelesen werden – sie war nie eine Änderung.
+        t_liste = triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                         wh_reg, {}, {"ohne_ein": []}, heute=dt.date(2026, 12, 2),
+                         verlauf=[], root=tmp / "leer",
+                         register={"/posts/a/": {"url": "/posts/a/",
+                                                 "entscheidung": "Beobachten",
+                                                 "am": "2026-10-26",
+                                                 "wiedervorlage": "2026-11-25",
+                                                 "erwartung": "indexiert",
+                                                 "pruefung": "liste",
+                                                 "begruendung": "Test"}})
+        pruefe("K79 Prüfung „liste“ verlangt eine Konsequenz statt einer Änderung",
+               t_liste["nach_prioritaet"].get("P2") == 1
+               and "Konsequenz ziehen" in t_liste["zeilen"][0]["aktion"])
+
+        md_t = triage_markdown(t, "Test")
         pruefe("K64 Triage-Markdown trägt die Tabelle",
-               "| Prio | Alter | URL | Grund | Aktion |" in triage_markdown(t, "Test"))
+               "| Prio | Alter | URL | Grund | Aktion |" in md_t)
+        # Eine entschiedene Zeile darf nicht spurlos aus dem Bericht fallen:
+        # Sie steht mit Frist unter der Tabelle.
+        pruefe("K64b entschiedene Zeile steht mit Frist im Bericht",
+               "### Entschieden – im Register, mit Frist" in triage_markdown(
+                   {"anzahl": 2, "nach_prioritaet": {"P3": 2}, "offen": [],
+                    "entschieden": [{"url": "/posts/x/", "grund": "x",
+                                     "schluessel": "register", "prioritaet": "P3",
+                                     "aktion": "entschieden am 2026-10-26 "
+                                               "(Wiedervorlage 2026-11-25)",
+                                     "ziel": None, "vorschlag": "",
+                                     "beleg": "Register: Rolle festgelegt",
+                                     "alter_tage": None}],
+                    "eskaliert": [], "wirkung_belegt": []}, "Test")
+               and "2026-11-25" in triage_markdown(
+                   {"anzahl": 2, "nach_prioritaet": {"P3": 2}, "offen": [],
+                    "entschieden": [{"url": "/posts/x/", "grund": "x",
+                                     "schluessel": "register", "prioritaet": "P3",
+                                     "aktion": "entschieden am 2026-10-26 "
+                                               "(Wiedervorlage 2026-11-25)",
+                                     "ziel": None, "vorschlag": "",
+                                     "beleg": "Register: Rolle festgelegt",
+                                     "alter_tage": None}],
+                    "eskaliert": [], "wirkung_belegt": []}, "Test"))
         g6 = gate({"kennzahlen": {}, "widersprueche": [],
                    "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
                                           "text": "noindex ohne Vertrag"}]}}, None)
@@ -3872,6 +3943,9 @@ def main(argv: list[str] | None = None) -> int:
                    help="was passieren soll: indexiert | impressionen | keine")
     p.add_argument("--eigentuemer", metavar="WER", default="redaktion",
                    help="wer die Entscheidung trägt (Standard: redaktion)")
+    p.add_argument("--pruefung", choices=("lastmod", "liste"), default="lastmod",
+                   help="wie die Wirkung geprüft wird: lastmod (Inhalt geändert?) "
+                        "oder liste (steht die URL noch in der Meldung?)")
     p.add_argument("--entscheidungen", action="store_true",
                    help="Register der Entscheidungen mit Fristen zeigen")
     p.add_argument("--selftest", action="store_true", help="offline, ohne Netz")
@@ -3977,13 +4051,13 @@ def main(argv: list[str] | None = None) -> int:
                 werte = entscheidung_eintragen(
                     args.entscheiden, args.entscheidung or "", args.begruendung or "",
                     args.wiedervorlage, args.erwartung or "indexiert",
-                    args.eigentuemer or "redaktion")
+                    args.eigentuemer or "redaktion", args.pruefung or "lastmod")
             except ValueError as fehler:
                 print(f"🛑 {fehler}", file=sys.stderr)
                 return 1
             print(f"✅ Entscheidung eingetragen: `{werte['url']}` – {werte['entscheidung']}")
             print(f"   Frist: {werte['wiedervorlage']} · Erwartung: {werte['erwartung']}"
-                  f" · Eigentümer: {werte['eigentuemer']}")
+                  f" · Eigentümer: {werte['eigentuemer']} · Prüfung: {werte['pruefung']}")
             print(f"   → {ENTSCHEIDUNGEN.relative_to(ROOT)}")
             return 0
 

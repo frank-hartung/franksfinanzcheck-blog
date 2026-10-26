@@ -1,7 +1,8 @@
 ---
-title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
-description: "Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick."
+title: "Fixkosten-Check: Wann du was prüfst – der Jahresplan"
+description: "Fixkosten prüfen, bevor sie teuer werden: Der Jahresplan zeigt, wann Versicherung, Energie, Abos und Konto dran sind – mit Fristen, Verhandlungstipps und einer Modellrechnung."
 date: 2026-10-19T01:20:46Z
+lastmod: 2026-10-26
 draft: false
 reserve_published: 2026-10-19
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -10,9 +11,9 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Dein Weg zu geringeren", "Geringeren", "Monatskosten", "Dein Weg zu geringeren Monatskosten"]
-pin_title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
-pin_description: "*Werbung | Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick. Mehr Spartipps auf FranksFinanzcheck! #deinwegzugeringeren #geringeren #monatskosten"
+keywords: ["Fixkosten-Check", "Kündigungsfristen", "Versicherung wechseln", "Stromvertrag prüfen", "Abos kündigen", "Verhandlung mit Anbieter"]
+pin_title: "Fixkosten-Check: Wann du was prüfst – der Jahresplan"
+pin_description: "*Werbung | Fixkosten-Check: Der Jahresplan zeigt, wann Versicherung, Energie, Abos und Konto dran sind – mit Fristen und Verhandlungstipps. Mehr Spartipps auf FranksFinanzcheck! #fixkosten #jahresplan #sparen"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -24,7 +25,7 @@ redaktionelle_pruefung:
 inspiration: Wie du deine monatlichen Ausgaben reduzieren kannst
 cover:
   image: "images/covers/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg"
-  alt: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
+  alt: "Fixkosten-Check: Wann du was prüfst – der Jahresplan"
   caption: "Tipp von FranksFinanzcheck"
 quellen:
   - id: "Q1"
@@ -39,7 +40,7 @@ kurzantwort: "Erstelle zuerst ein lückenloses Ausgaben‑Protokoll, identifizie
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-Wie kommen in der Modellrechnung unten 1.332 € pro Jahr zusammen – ganz ohne Überstunden? Prüfe deine festen Kosten. So bleibt viel Geld auf deinem Konto, ohne dass du verzichten musst. **Dein Weg zu geringeren Monatskosten** beginnt genau bei dieser Erkenntnis.
+Dieser Artikel ist der **Jahresplan**: Er sagt dir, *wann* welcher Posten dran ist – Versicherung im Herbst, Energie im Januar, Abos quartalsweise, Konto bei jeder Gebührenerhöhung. Wie kommen in der Modellrechnung unten 1.332 € pro Jahr zusammen – ganz ohne Überstunden? Prüfe deine festen Kosten. So bleibt viel Geld auf deinem Konto, ohne dass du verzichten musst. **Dein Weg zu geringeren Monatskosten** beginnt genau bei dieser Erkenntnis.
 
 Deine aktuelle Nebenkostenabrechnung flattert ins Haus und der Strompreis klettert spürbar. Handyrechnungen oder vergessene Optionen sprengen zusätzlich dein Budget. Das Fitnessstudio bucht fleißig ab, obwohl du seit Monaten nicht mehr dort warst.
 

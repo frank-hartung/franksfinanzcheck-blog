@@ -415,6 +415,26 @@ Zwei Dinge macht der Automat ausdrücklich **nicht**: Er entscheidet nicht
 (der Vorschlag ist ein Satz, keine Freigabe), und er ändert keinen Artikel.
 `--entscheiden` schreibt eine Zeile in ein Register, nicht in `content/`.
 
+**Wie die Prüfart gewählt wird (`--pruefung`).** Standard ist `lastmod`: Dann
+fragt die Wirkungsprüfung, ob die Seite nach der Entscheidung geändert wurde.
+Für Entscheidungen, die *nicht* in den Artikel eingreifen („Rolle bestätigt,
+beobachten“), ist das die falsche Frage – sie würden nach der Frist als „nicht
+umgesetzt“ erscheinen, obwohl genau das die Entscheidung war. Dafür gibt es
+`--pruefung liste`: Geprüft wird dann nur, ob die URL noch in der Meldung
+steht; ist sie es, lautet die Folge „Konsequenz ziehen“, nicht „umsetzen“.
+
+```bash
+# Beispiel vom 26.10.2026: Rolle bestätigt, Inhalt bleibt
+python3 scripts/gsc_abdeckung.py --entscheiden "/posts/…/" \
+  --entscheidung "Rolle bestätigen: Alltagssystem im Cluster K7" \
+  --begruendung "1845 Wörter, 6 Inlinks – nicht zu dünn, nicht unverlinkt" \
+  --erwartung indexiert --pruefung liste --wiedervorlage 2026-11-25
+```
+
+Das Register ist damit die Wahrheit über den Stand: `--entscheidungen` zeigt
+alle Einträge mit Frist, `--triage` übernimmt sie in die Liste. Am 26.10.2026
+wurden so zwei Seiten entschieden – beide mit Frist 25.11.2026.
+
 ### 10.2 Verlinkung schreiben – warum nur die „Weiterlesen“-Zeile
 
 `--verlinkung --apply` hängt neue Links ausschließlich an die kuratierte Zeile
