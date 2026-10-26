@@ -251,6 +251,17 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     # website = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"   # Pflicht, nach Umami-Install
     domain = "stats.franksfinanzcheck.de"                  # Self-Host-URL
 
+  # Cloudflare Web Analytics (kostenlose Alternative zu Umami)
+  # Kein eigenes Hosting, kein Server, kein API-Zugang, kein Consent-Popup.
+  # Aktivierung: Cloudflare Dashboard → Analytics → Web Analytics →
+  #              Website hinzufügen → Website-ID + Token notieren →
+  #              hier einfügen. KOSTENLOS (Cloudflare-eigen).
+  # Quelle: https://developers.cloudflare.com/analytics/
+  [params.analytics.cloudflare]
+    # website = "your-website-id-uuid"   # Website-ID aus Cloudflare Dashboard
+    # token   = "your-beacon-token"     # Beacon-Token aus Cloudflare Dashboard
+    domain = "franksfinanzcheck.de"
+
 [menu]
 [[menu.main]]
     identifier = "home"
