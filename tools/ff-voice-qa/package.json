@@ -8,6 +8,6 @@
     "test": "node ../../scripts/ff_voice_functional_test.mjs"
   },
   "devDependencies": {
-    "jsdom": "^30.1.2"
+    "jsdom": "^30.1.3"
   }
 }
