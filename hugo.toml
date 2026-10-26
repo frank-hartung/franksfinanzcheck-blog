@@ -262,15 +262,33 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     domain = "stats.franksfinanzcheck.de"                  # Self-Host-URL
 
   # Cloudflare Web Analytics (kostenlose Alternative zu Umami)
-  # Kein eigenes Hosting, kein Server, kein API-Zugang, kein Consent-Popup.
-  # Aktivierung: Cloudflare Dashboard → Analytics → Web Analytics →
-  #              Website hinzufügen → Website-ID + Token notieren →
-  #              hier einfügen. KOSTENLOS (Cloudflare-eigen).
+  # ZWEI WEGE (wahlweise, nicht kombiniert):
+  #
+  #   Weg A (automatisch, empfohlen):
+  #     Cloudflare injiziert das Skript automatisch über die Edge.
+  #     → Aktivierung: Cloudflare Dashboard → Analytics → Web Analytics →
+  #                    Website hinzufügen → automatisches Injecting.
+  #     → Kein hugo.toml-Eintrag nötig. Kein Code-Aufwand.
+  #     → Website-ID + Token nicht nötig (wird von Cloudflare verwaltet).
+  #
+  #   Weg B (manuell, fallback):
+  #     Das Skript wird beim Hugo-Build über das Partial eingebunden.
+  #     → website + token in hugo.toml eintragen.
+  #     → Nur aktiv wenn mode = "manual" (Standard: mode nicht gesetzt → Weg A).
+  #
+  # Empfehlung: Weg A (automatisch). Das Partial bleibt nur als manuelle
+  # Alternative vor. Ohne Dashboard-Zugang (oder wenn Weg A nicht funktioniert)
+  # wäre Weg B die Alternative – aber Weg B braucht Website-ID + Token aus dem
+  # Dashboard und ist ohne Dashboard-Zugang nicht funktionsfähig.
+  #
+  # KOSTENLOS. Kein Server. Kein VPS. Kein Docker. Keine API-Gebühren.
+  # DSGVO-konform (kein Cookie), kein Consent-Popup.
   # Quelle: https://developers.cloudflare.com/analytics/
   [params.analytics.cloudflare]
-    # website = "your-website-id-uuid"   # Website-ID aus Cloudflare Dashboard
-    # token   = "your-beacon-token"     # Beacon-Token aus Cloudflare Dashboard
-    domain = "franksfinanzcheck.de"
+    # mode = "manual"   # "manual" für manuelle Einbindung (Weg B), leer für automatisch (Weg A)
+    # website = "your-website-id-uuid"   # Nur für Weg B: Website-ID aus Cloudflare Dashboard
+    # token   = "your-beacon-token"     # Nur für Weg B: Beacon-Token aus Cloudflare Dashboard
+    domain  = "franksfinanzcheck.de"
 
 [menu]
 [[menu.main]]

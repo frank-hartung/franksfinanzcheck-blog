@@ -217,40 +217,79 @@ nur als Fallback, wenn kein Server zur Verfügung steht.
 Falls kein VPS zur Verfügung steht, ist **Cloudflare Web Analytics** die Alternative.
 Kostenlos, DSGVO-konform (kein Cookie), kein eigenes Hosting, kein API-Zugang.
 
-### Schritte
+### ZWEI WEGE (wahlweise, nicht kombiniert)
+
+Cloudflare Web Analytics unterstützt zwei Einbindungswege. Der automatische Weg (A) ist
+empfohlen — kein Code-Aufwand, keine hugo.toml-Änderung nötig.
+
+#### Weg A — Automatisch (empfohlen)
+
+Cloudflare injiziert das Skript (`beacon.min.js`) automatisch über die Edge-Infrastruktur
+in jede Seite auf der Domain. Das automatische Injecting ist die Standard-Methode von
+Cloudflare Web Analytics.
 
 1. **Cloudflare Dashboard öffnen** (cloudflare.com → Anmelden → franksFinanzcheck.de auswählen)
 2. **Navigation:** Analytics → Web Analytics → „Website hinzufügen"
 3. **Website-URL eingeben:** `https://franksfinanzcheck.de`
-4. **Website-ID und Token notieren** (aus dem Dashboard)
-5. **In hugo.toml eintragen:**
+4. **Aktivierung** → Cloudflare injiziert das Skript automatisch in alle Seiten
+5. **Test:** Seite aufrufen, Browser-Entwickler-Tools → Netzwerk → prüfen ob
+   `static.cloudflareinsights.com/beacon.min.js` geladen wird
+
+**Vorteile Weg A:**
+- Kein Code-Aufwand (kein hugo.toml-Eintrag, kein Partial-Nutzung)
+- Kein Deploy nötig nach Aktivierung
+- Sofort einsatzbereit nach Dashboard-Aktivierung
+- Automatisches Injecting über Cloudflare Edge
+
+**Nachteile Weg A:**
+- Kein separates Dashboard nur für Analytics (nur Cloudflare Analytics Dashboard)
+- Keine explizite Kontrolle über den Einbindungspunkt im HTML
+
+#### Weg B — Manuell (fallback, optional)
+
+Das Skript wird beim Hugo-Build über das Partial `cloudflare_analytics.html` eingebunden.
+Voraussetzung: Website-ID + Beacon-Token aus Cloudflare Dashboard in `hugo.toml` eintragen.
+
+1. **Cloudflare Dashboard öffnen** (wie Weg A)
+2. **Analytics → Web Analytics → Website hinzufügen**
+3. **Website-ID und Token notieren** (aus der Website-Konfiguration im Dashboard)
+4. **In hugo.toml eintragen:**
 
    ```toml
    [params.analytics.cloudflare]
-     website = "NOTIERTE-WEBSITE-ID"
-     token   = "NOTIERTER-BEACON-TOKEN"
+     mode    = "manual"                          # manuellen Weg aktivieren
+     website = "NOTIERTE-WEBSITE-ID"             # aus Dashboard
+     token   = "NOTIERTER-BEACON-TOKEN"         # aus Dashboard
      domain  = "franksfinanzcheck.de"
    ```
 
-6. **Deploy** (GitHub Actions oder lokal: `hugo --minify`)
-
-7. **Test:** Seite aufrufen, in Browser-Entwickler-Tools Netzwerk-Tab → prüfen ob
+5. **Deploy** (GitHub Actions oder lokal: `hugo --minify`)
+6. **Test:** Seite aufrufen, Browser-Entwickler-Tools → Netzwerk → prüfen ob
    `static.cloudflareinsights.com/beacon.min.js` geladen wird
 
-8. **Datenschutz-Text** (Abschnitt 1 in datenschutz/index.md) nicht ändern — der
-   beschreibt bereits, dass Analytics optional und skriptbasiert ist. Für Cloudflare
-   Analytics könnte man ergänzen, dass die Daten bei Cloudflare gespeichert werden.
+**Vorteile Weg B:**
+- Vollständige Kontrolle über den Einbindungspunkt im HTML
+- Optional: Token im Code (für Debugging, Audit)
+- Funktioniert auch, wenn das automatische Injecting nicht verfügbar ist
+
+**Nachteile Weg B:**
+- Code-Aufwand (hugo.toml-Eintrag, Partial muss geladen werden)
+- Deploy nach Konfigurationsänderung nötig
+- Website-ID + Token manuell in hugo.toml pflegen
 
 ### Keine API-Kosten
 
-Cloudflare Web Analytics hat **keine API-gebühren**. Das Beacon-Skript sendet Daten an
+Cloudflare Web Analytics hat **keine API-Gebühren**. Das Beacon-Skript sendet Daten an
 Cloudflare-Infrastruktur. Es gibt kein API-Token für Reports (im Gegensatz zu Umami-API).
+Das gilt für beide Wege (A und B).
 
 ### Was nicht funktioniert ohne Cloudflare Dashboard-Zugang
 
-Ohne Login in cloudflare.com kann weder Umami deployt werden (braucht Server) noch
-Cloudflare Web Analytics aktiviert werden (braucht Dashboard). Das ist eine Außenwirkung
-wie der Cloudflare-Proxy.
+Ohne Login in cloudflare.com (Dashboard-Zugang) kann weder Weg A noch Weg B aktiviert werden:
+- Weg A: Braucht Dashboard für Aktivierung + automatisches Injecting
+- Weg B: Braucht Dashboard für Website-ID + Token
+
+Das ist eine Außenwirkung wie der Cloudflare-Proxy.
 
 ### Vergleich Umami vs. Cloudflare Web Analytics
 
@@ -258,12 +297,60 @@ wie der Cloudflare-Proxy.
 |-----------|---------------------|--------------------------|
 | Kosten | 0 € (Software) + VPS-Kosten (~3-6 €/Monat) | 0 € |
 | Server erforderlich | Ja (Docker auf VPS) | Nein |
-| Eigenes Hosting | Ja (stats.franksfinanzcheck.de) | Nein (Cloudflare-infrastruktur) |
+| Eigenes Hosting | Ja (stats.franksfinanzcheck.de) | Nein (Cloudflare-Infrastruktur) |
 | Dashboard | Ja (eigenes Umami Dashboard) | Ja (Cloudflare Dashboard) |
 | API für Reports | Nein (kostenpflichtig, nicht genutzt) | Nein (nicht nötig) |
 | DSGVO | ✅ cookiefrei | ✅ cookiefrei |
 | Domain für Skript | stats.franksfinanzcheck.de | static.cloudflareinsights.com |
-| Einrichtungsaufwand | Mittel (Docker + Postgres) | Gering (Dashboard-Klick) |
+| Einrichtungsaufwand | Mittel (Docker + Postgres) | Gering (Dashboard-Klick, Weg A) |
+| Code-Aufwand | Kein (automatisches Injecting möglich) | Minimal (Weg A, Standard) / Mittel (Weg B) |
 
-**Empfehlung:** Cloudflare Web Analytics, wenn kein VPS verfügbar. Umami self-hosted,
-wenn ein VPS verfügbar ist und eigenes Dashboard bevorzugt wird.
+**Empfehlung:** Cloudflare Web Analytics (Weg A, automatisch) ist die beste Wahl für
+diesen Blog, weil kein VPS erforderlich ist und das automatische Injecting den
+Code-Aufwand auf null reduziert. Umami self-hosted ist die bessere Wahl, wenn ein VPS
+verfügbar ist und eigenes Dashboard bevorzugt wird.
+
+### Code-Fragment (für Weg B, bereits in cloudflare_analytics.html)
+
+```html
+<script>
+  (function() {
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    g.dataset.cfBeacon = '{"token": "WEBSEITE-TOKEN-AUS-DASHBOARD"}';
+    s.parentNode.insertBefore(g, s);
+  })();
+</script>
+```
+
+Das Fragment in `cloudflare_analytics.html` ist identisch, aber mit Hugo-Template-Variablen:
+- `site.Params.analytics.cloudflare.token` → Token-Platzhalter
+- Das Skript wird **nur geladen, wenn** `mode = "manual"` UND `token` gesetzt ist
+
+---
+
+### Zusammenfassung: Was im Repo vorbereitet ist
+
+| Komponente | Status | Bedeutung |
+|-----------|--------|-----------|
+| `cloudflare_analytics.html` | ✅ Erstellt | Manual-Einbindung (Weg B), nur aktiv wenn mode="manual" + token gesetzt |
+| `hugo.toml` [params.analytics.cloudflare] | ✅ Vorbereitet | Optionale Werte: mode, website, token, domain |
+| `head.html` | ✅ Eingebunden | cloudflare_analytics.html nach umami.html |
+| `datenschutz/index.md` | ✅ Ergänzt | Cloudflare Web Analytics als Option in Abschnitt 1 + Tabelle |
+| `ANLEITUNG-UMAMI-AKTIVIERUNG.md` | ✅ Erweitert | Abschnitt 10: Zwei Wege dokumentiert (A automatisch, B manuell) |
+
+### Was du tun musst (Außenwirkung)
+
+**Weg A (empfohlen):**
+1. Cloudflare Dashboard login (cloudflare.com)
+2. Analytics → Web Analytics → Website hinzufügen → `https://franksfinanzcheck.de`
+3. Aktivierung → automatisches Injecting → fertig (kein Code, kein Deploy)
+
+**Weg B (optional):**
+1. Wie Weg A, aber nach Schritt 2: Website-ID + Token notieren
+2. In hugo.toml eintragen: `mode = "manual"`, `website`, `token`
+3. Deploy (Push → GitHub Actions oder lokaler `hugo --minify`)
+
+**Kein Weg (ohne Dashboard-Zugang):**
+- Kein Tracking einsatzbar (außer /go/-Klickzähler als Alternative)
+- Blog mit Search Console + /go/-Klickzähler als Messung arbeiten

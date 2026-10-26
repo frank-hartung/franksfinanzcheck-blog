@@ -1,31 +1,43 @@
 {{- /* ============================================================
-     Cloudflare Web Analytics (Alternative zu Umami)
-     ------------------------------------------------------------
-     Cloudflare Web Analytics ist eine DSGVO-konforme, cookiefreie
-     Analytics-Lösung von Cloudflare. Kostenlos, kein eigenes Hosting,
-     kein API-Zugang, kein Consent-Popup.
+     Cloudflare Web Analytics
 
-     Erfordert: Cloudflare Dashboard → Analytics → Web Analytics →
-                Website hinzufügen → Website-ID / Token notieren →
-                in hugo.toml eintragen
+     ZWEI WEGE (wahlweise, nicht kombiniert):
+       A. Automatisch (Cloudflare-eigen, empfohlen):
+          Cloudflare injiziert das Skript direkt über die Edge-Infrastruktur,
+          ohne HTML-Code ändern zu müssen.
+          → Aktivierung: Cloudflare Dashboard → Analytics → Web Analytics →
+                         Website hinzufügen → automatisches Injecting ist standard.
+          → Kein Code-Aufwand. Kein hugo.toml-Eintrag nötig für das Skript.
 
-     KOSTENLOS. Kein Server. Kein VPS. Kein Docker. Keine API-Gebühren.
+       B. Manuell (via hugo.toml + Partial):
+          Das Skript wird beim Hugo-Build eingebunden (wie hier).
+          → Voraussetzung: Cloudflare Dashboard → Analytics → Web Analytics →
+                           Website-ID + Beacon-Token notieren → in hugo.toml eintragen.
 
-     Nutzung (ähnlich Umami):
-       - tracking_id in hugo.toml setzen (params.analytics.cloudflare.website)
-       - domain in hugo.toml (params.analytics.cloudflare.domain)
-       - Fragment wird beim Build eingebunden
+     BEIDES: Kostenlos, DSGVO-konform (kein Cookie), kein Consent-Popup.
+      Kein API-Zugang erforderlich (Dashboard statt API).
 
-     Wird nicht geladen, wenn tracking_id nicht gesetzt.
+     WICHTIG: Die manuelle Einbindung (B) ist eine FALLBACK-Option, wenn das
+     automatische Injecting (A) nicht verfügbar sein sollte oder deaktiviert ist.
+     Die manuelle Einbindung erfordert, dass die Website-ID + Token in hugo.toml
+     gesetzt sind. Ohne diese Werte wird das Skript nicht geladen.
 
      Quelle: https://developers.cloudflare.com/analytics/
      Stand: 26.10.2026
      ============================================================ */ -}}
+{{- /* Weg B: Manuelle Einbindung über hugo.toml + Partial.
+       Wird NUR geladen, wenn website UND token gesetzt sind.
+       Wenn Weg A (automatisches Injecting) genutzt wird: Diese Bedingung
+       ist unwirksam (die Datei ist vorhanden, aber die Werte sind leer). */ -}}
 {{- $cfWebsite := site.Params.analytics.cloudflare.website | default "" -}}
 {{- $cfToken := site.Params.analytics.cloudflare.token | default "" -}}
-{{- if and $cfWebsite (ne $cfWebsite "") (and $cfToken (ne $cfToken "")) -}}
+{{- $cfMode := site.Params.analytics.cloudflare.mode | default "manual" -}}
+
+{{- /* Nur manuellen Weg (B) rendern, wenn explizit aktiviert.
+       Wenn mode = "auto" oder leer: Auto-Weg verwendet (kein Code nötig). */ -}}
+{{- if and (eq $cfMode "manual") $cfWebsite (ne $cfWebsite "") (and $cfToken (ne $cfToken "")) -}}
 <script>
-  (function(){
+  (function() {
     var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
     g.async = true; g.src = 'https://static.cloudflareinsights.com/beacon.min.js';
     g.dataset.cfBeacon = '{"token": "{{ $cfToken }}"}';
