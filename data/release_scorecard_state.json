@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T10:26:37Z",
+  "generated_at": "2026-10-26T11:00:29Z",
   "modus": "kandidaten",
-  "commit": "0b0cc719f1100e518a9ec4475051cc3297cb9eba",
+  "commit": "37d3d63319ad7fbe5d052849b87d40fb261b437c",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -22,7 +22,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-      "sha256": "6c00c1359828092f80e96c070c520020668803183a6af7580d614040365d1fea",
+      "sha256": "006546edb07b6ad1a92c2227f8c15baff8c685cd484948d9c6a8460cbb13003f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -36,10 +36,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
-      "sha256": "ba7e63463877bac605315c688da52cba3f6e8fac9c9833b15ecacef6ec3bd961",
+      "sha256": "95baa27e548361c283e486b06ebfe91d008940203d80b7247dcba1dc06d77c84",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -53,10 +53,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "8f93bac69f79d818fa168c793fa5adb64f7376ad1b7f42c48ea97226400dacf6",
+      "sha256": "ca88530113b29c91eca13f01f66009a7d966119b6d89295693dac035090a4145",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -70,7 +70,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "98cd1a77217897981c866d07a5aba354b0e3e170ccbc28d2e40f533b4d160acd",
@@ -124,7 +124,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-      "sha256": "926653f63eba153902af2ab57dab7976f082d41a3842aa74cce47621ef90e0d7",
+      "sha256": "9d67654594f402aabe0a8ad2274d6605e9bc3618069a830cf7d7092b8c0e131a",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -138,10 +138,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
-      "sha256": "824c32485f191c88c8113bcf5b6e92c09f375484d3c7e8c184f96ffa9b5a4d5c",
+      "sha256": "717881e5b0660593b4483d2b5245bcd5c9e985a5d2249fde417f9c5859a34d21",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -155,7 +155,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
       "sha256": "d3a524b05b8bce9b76420e8600566d0d4ea23f44030e3d82dd10fef43d378b5a",
@@ -274,10 +274,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "3d941f5834513491fafe9851ccf69b7edc66f66dc8d3dfab9d5b99461e4db11b",
+      "sha256": "9e41507dd5313771c75a0d794f00ffd8d00444313aa242580a5b9ba96b1e8aa2",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -291,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "65aad44b1bfe5d1618f60e582cdf0eb431d46af5b0c98bd2c3a7744a1f302de1",
@@ -311,7 +311,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-      "sha256": "904848d4b08dc275821f6c8324ab4b51fe707629a922909b3c642c5fac4a646b",
+      "sha256": "ae2e23f55431fde05fb1a1966ee7ff0c319302fa3eae4542347f66b73492ac50",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -325,7 +325,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "95da4157a8ccfe0280642d55a56a85feedbbb8967730182a3b8541a1c918a15b",
@@ -345,7 +345,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "2f021f4c4a56ab9c719fdb54d73a93537b99e79dd87015870703c14e67590baf",
+      "sha256": "7eb23aa7d02156fc93d83a6f42890c6de29db9bc63962650b66d4b9653c35643",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -359,10 +359,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
-      "sha256": "47e741bb8232dfac451f6be15c2368e7a883184a5543e70d0ebf6df6f8e7af2a",
+      "sha256": "31723b150fde9ee295f0cb401674ff63eab1ac6e554b6c68ff67cff3096a713a",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -376,7 +376,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
       "sha256": "8555b9563404ec307a04f2fb7b7bb7c5118c0dea2956fcb1c7eaf30bfbe9062b",
@@ -396,7 +396,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
-      "sha256": "d976511b82a3fe0f4ed512670e12e30d5d0a6fa3392494bea09d72894fe63f71",
+      "sha256": "0ba2d19e9aa59575e7ed30e932cda5940a1646d9fdeff682b3f05efa37246703",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -410,10 +410,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
-      "sha256": "3bbefa3401abe8c992af28d4cd6e92ff45c0553498c2c2f7ce1909e9a6b16263",
+      "sha256": "0d40b8bb023836371335d639546643b5359c8c8a30945f2d203b4474e36c38b3",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -427,7 +427,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-26",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
       "sha256": "b0a11a0c6a86c6624c2fc67fbf5c004ee613ad63a3b8eecb86eacb64a0a3105b",
@@ -481,7 +481,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
-      "sha256": "0fe34cd0de8989c5d879d01a9e421c126586e13a723ef946dd811145acc62a95",
+      "sha256": "9c8b083671037f142c70f179477aa5794e5fe0ee80792b3b96da4f3fd0205d24",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -495,10 +495,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "0c85998954e580e92057bece65782c55e710196d5ac571c24bef00588016cfad",
+      "sha256": "14162fe906e290df74db03a84c9b27b8792edea6572f9ee094b895582dff7e05",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -512,7 +512,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "832d4e800ac1e34b16085697a7f5411bb8f311b7526ca4b05575cbdc7521f6f6",
@@ -651,7 +651,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "dc4f5125119df9ea4c8763c4e9567ccffffa5f27a09d41d040e174ab8a6eb4dd",
+      "sha256": "05a518bc8846c2999afeb7f5750eecb1125559406fc57b9665dbcaf622c70721",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -665,7 +665,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "b980c8ef3a17b925e1715e814c320d0f6c1b4973ae0bfc9b525f2f36e57e39d4",
@@ -753,7 +753,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
-      "sha256": "365bc43c29c66f85ce5676f8c64e07016fc162c50f4a6927c800cbeb76f323a4",
+      "sha256": "8e94c3cc691844554b65c9edc70e679587139645343678b1cf0176cdda6b8dc6",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -767,10 +767,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
-      "sha256": "231eb0e68abbe70068035a6827a1566e5fc6d537560fe7657bf30b12ec76b281",
+      "sha256": "4259cc1090b006d5e5693bb093d06978588a4851c009023f5142d770334039c8",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -784,7 +784,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
       "sha256": "4965f9dc94b6c6483adb657e8d3802575130752f0f0ade060d3eb3f193dc4bfc",
@@ -804,7 +804,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "3ee05ef28d31f9bc69174a59f101d0a34cd4556d2f7642b5f21e288af25b7473",
+      "sha256": "438fdd0a8d0d816909d7bb3d766ba8357e184ce2af71ee0a8a5fcf6388edf5c1",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -818,10 +818,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
-      "sha256": "76e2f54069a1de3a0476de115a68db2c69e7af6fe11415c8ba325b6493c644a9",
+      "sha256": "2b3c942be95c0e843517f9150eafec7edea56d923dbcd2b2e46a655a45e27dc1",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -835,10 +835,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-18",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
-      "sha256": "c974e4f8c7206fc3fd5beaeafc6eec85fe4c7e1b08a2908629cdcc02feadffd5",
+      "sha256": "f7ec05e313182acddde94ec0d09d7a0fda316bbde6a8e6c763fd586bdceead42",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -852,10 +852,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
-      "sha256": "8c6c57ac4a0238f04e939fe5bc9855056564a8374c5f5b30dd6f3dc6b44632a5",
+      "sha256": "ba343692d2675c35e9adccaaf03ab371fe26c7574362cdd06eb10429d0006c53",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -869,10 +869,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
-      "sha256": "1225a3b7a1a10a1071e49d4d3efe713cf87e7b1f8ebc20a36f9d10f1b9e00091",
+      "sha256": "ed9b096e11a8cc10c9d03bd921ece3e78cc47280c138da63ea6079ca7621763a",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -886,10 +886,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "62a5d83f52e438c94e01b584740a3fc4dba08e5530c133df21c00280a01db451",
+      "sha256": "7b7750b978f73334c27ba19c6fc032f6d9f605347bb15e4392b747beaf74d73f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -903,10 +903,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "8e74c6640cb13a219c09f9b6862247067d2950f5df616c8b9e8b6ec326735b51",
+      "sha256": "608219b24481a13290334aa2998928e117ce54d8b74e1fdfa8249c14f3fab64c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -920,7 +920,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "fc70b60b29e0658f002c6c5ed32184bdc943e4b817852dcd6df5d55932e7c847",
@@ -957,7 +957,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
-      "sha256": "99f002b53a12c40f1658748be35e9ab2b35bde2556e49be4b047fa5394ce3294",
+      "sha256": "cae6b7fe1e443bf74b0091cc6c0425ed645c848f796ec678f310063681778cd6",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -971,7 +971,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "5ed41e8fab4b19bf958139437cc8352dc5b8cbd87bf114bc1b7e7b60d912a971",
@@ -1008,7 +1008,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
-      "sha256": "a72754a552fa7a7c71a2d193de3114297ea03b29a66c0d4300b14f4be1e0927f",
+      "sha256": "afc2dba5a23c9eb13060c944aa49aa364afa3f530eb6117b6e2e42974fa0e3d9",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1022,7 +1022,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "dfea273a82ea3bc392de6508f31057b3a40db5427daf91882f2e7a9f3dd2a576",
@@ -1127,7 +1127,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
-      "sha256": "eb03c26c5c24ae460ab57fa4b9d0e3259934992a3f813a48a69647bbd90104c9",
+      "sha256": "aed1cef86faec0e496e886ac4d38f9562eec0820396c2e9d9619dd2839941446",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1141,7 +1141,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "cb7d88c5cc7831f60cce5dec4de56189f8f0e8d109d57a5ec28c23f0a0975c5f",
