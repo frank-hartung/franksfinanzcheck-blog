@@ -9,11 +9,11 @@
       "research_sha256": "",
       "set_current": true,
       "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)",
-      "fehler_serie": 2,
+      "fehler_serie": 3,
       "letzter_fehler": {
-        "ts": "2026-10-25T10:01:54Z",
+        "ts": "2026-10-26T11:24:15Z",
         "code": "ki-ohne-gueltige-fassung",
-        "detail": "Versuch 1 (gemini:gemini-3-flash-preview): verworfen – Lead-Länge 23 außerhalb 220–560 | Versuch 2 (gemini:gemini-3-flash-preview): Antwort ohne gültiges TITLE/LEAD-Format | Versuch 3 (gemini:gemini-3-flash-preview): Antwort ohne gültiges TITLE/LEAD-Format"
+        "detail": "Versuch 1 (gemini:gemini-3-flash-preview): verworfen – Lead-Länge 9 außerhalb 220–560; Titel ohne Spar-/Vergleichsintention; Lead beginnt nicht mit der Entity FranksFinanzcheck | Versuch 2 (gemini:gemini-3-flash-preview): verworfen – Lead-Länge 6 außerhalb 220–560; Lead beginnt nicht mit der Entity FranksFinanzcheck; Saisonname fehlt | Versuch 3 (gemini:gemini-3-flash-preview): verworfen – Lead-Länge 6 außerhalb 220–560; Lead beginnt nicht mit der Entity FranksFinanzcheck"
       }
     }
   }
