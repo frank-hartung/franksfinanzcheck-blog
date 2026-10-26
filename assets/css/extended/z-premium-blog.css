@@ -718,10 +718,8 @@ button:focus-visible {
 }
 
 /* LCP render-delay guard: never let reveal animations hide or transform the
-   above-the-fold LCP image/card before first paint. */
-.lcp-card,
-.lcp-card.ff-will-reveal,
-.lcp-card .ff-will-reveal,
+   above-the-fold cover on articles or /posts/ before first paint. The home
+   feed starts below the hero and no longer declares an image candidate. */
 [data-ff-lcp="candidate"],
 [data-ff-lcp="candidate"].ff-will-reveal {
   opacity: 1 !important;
@@ -878,6 +876,17 @@ details:not(.toc)[open] > summary::before {
   display: list-item;
   padding-inline-start: .15rem;
   text-indent: 0;
+}
+
+/* Markdown-Checklisten sind Lesestoff, keine funktionslosen Formulare:
+   dekorativer Marker statt Goldmarks disabled Input ohne Label. */
+.ff-task-mark {
+  display: inline-block;
+  margin-inline-end: .25em;
+  color: var(--primary);
+  font-size: 1.08em;
+  line-height: 1;
+  vertical-align: -.04em;
 }
 
 /* Nested lists: keep the hanging indent of the parent item and add a small

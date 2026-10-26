@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Automatischer LCP-Optimierer für Bilder.
 
-Dieses Tool berechnet pro relevanter Hugo-Seite den wahrscheinlich größten
-Above-the-fold-Bildkandidaten und schreibt ein Hugo-Datenmanifest nach
-`data/lcp_images.json`. Das Head-Template liest dieses Manifest und setzt den
-passenden AVIF-Preload mit exakt denselben `imagesizes` wie das spätere
-`<picture>`.
+Dieses Tool katalogisiert Above-the-fold-Cover der Einzelartikel und
+schreibt die Bild-Prioritäts-Policy nach `data/lcp_images.json`.
+Das Head-Template wählt passende AVIF-Preloads direkt aus der Seitenquelle;
+der Manifest-Check schützt die dazugehörigen Varianten und verhindert
+versehentliches Vorladen von Listen-Covers unterhalb des Viewports.
 
 Nutzung:
     python3 scripts/lcp_image_optimizer.py --fix
@@ -31,14 +31,8 @@ LCP_WIDTHS = (360, 480, 620, 720)
 
 @dataclass
 class Post:
-    path: str
     rel_permalink: str
-    title: str
-    date: str
-    timestamp: float
     cover: str
-    hidden_in_home: bool
-    draft: bool
 
 
 def rel(path: Path) -> str:
@@ -60,8 +54,8 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
 
     cover = ""
     cover_hidden = False
-    cover_hidden_in_list = False
     cover_hidden_in_single = False
+    cover_preload_false = False
     m = re.search(r"^cover:\s*\n(?P<body>(?:\s+[^\n]+\n?)+)", fm, re.M)
     if m:
         body = m.group("body")
@@ -71,33 +65,19 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
         hm = re.search(r"^\s*hidden:\s*(true|yes|1)\b", body, re.M | re.I)
         if hm:
             cover_hidden = True
-        hl = re.search(r"^\s*hiddenInList:\s*(true|yes|1)\b", body, re.M | re.I)
-        if hl:
-            cover_hidden_in_list = True
         hs = re.search(r"^\s*hiddenInSingle:\s*(true|yes|1)\b", body, re.M | re.I)
         if hs:
             cover_hidden_in_single = True
+        cover_preload_false = bool(re.search(r"^\s*preload:\s*(false|no|0)\b", body, re.M | re.I))
 
     def boolean(name: str) -> bool:
         value = scalar(name, "false").lower()
         return value in {"true", "yes", "1"}
 
-    date = scalar("date")
-    try:
-        dt = datetime.fromisoformat(date.replace("Z", "+00:00"))
-        timestamp = dt.timestamp()
-    except Exception:
-        timestamp = 0.0
-
     return {
-        "title": scalar("title", path.stem),
-        "date": date,
-        "timestamp": timestamp,
         "cover": cover,
-        "coverHidden": cover_hidden or boolean("coverHidden"),
-        "coverHiddenInList": cover_hidden or cover_hidden_in_list or boolean("coverHiddenInList"),
         "coverHiddenInSingle": cover_hidden or cover_hidden_in_single or boolean("coverHiddenInSingle"),
-        "hiddenInHomeList": boolean("hiddenInHomeList"),
+        "coverPreloadFalse": cover_preload_false,
         "draft": boolean("draft") or boolean("cadence_wait"),
     }
 
@@ -118,19 +98,10 @@ def collect_posts() -> list[Post]:
             continue
         fm = parse_frontmatter(path)
         cover = fm.get("cover") or ""
-        if not cover or fm.get("draft", False):
+        if not cover or fm.get("draft", False) or fm.get("coverHiddenInSingle", False) or fm.get("coverPreloadFalse", False):
             continue
-        posts.append(Post(
-            path=rel(path),
-            rel_permalink=post_permalink(path),
-            title=fm.get("title", path.stem),
-            date=fm.get("date", ""),
-            timestamp=float(fm.get("timestamp", 0.0)),
-            cover=cover,
-            hidden_in_home=bool(fm.get("hiddenInHomeList", False)) or bool(fm.get("coverHiddenInList", False)),
-            draft=bool(fm.get("draft", False)),
-        ))
-    posts.sort(key=lambda p: (p.timestamp, p.rel_permalink), reverse=True)
+        posts.append(Post(rel_permalink=post_permalink(path), cover=cover))
+    posts.sort(key=lambda p: p.rel_permalink)
     return posts
 
 
@@ -161,18 +132,9 @@ def build_manifest() -> dict[str, Any]:
             sizes="(min-width: 768px) 720px, 100vw",
         )
 
-    visible_posts = [p for p in posts if not p.hidden_in_home]
-    if visible_posts:
-        first = visible_posts[0]
-        # Home + Blogliste: Erste Karte ist der Bild-LCP-Kandidat.
-        for permalink, page_type in (("/", "home"), ("/posts/", "section")):
-            pages[permalink] = image_rule(
-                first.cover,
-                page_type=page_type,
-                reason="erstes sichtbares Listen-Cover",
-                sizes="(min-width: 768px) 620px, 100vw",
-            )
-
+    # Weder Startseite noch /posts/ brauchen einen Bild-Preload: Hero,
+    # Themen und die redaktionelle Navigation stehen vor dem Feed. Die
+    # erste Karte beginnt mobil erst > 2400px von oben (26.10.2026).
     return {
         "version": 1,
         "generatedBy": "scripts/lcp_image_optimizer.py",
@@ -202,6 +164,9 @@ def expected_avif_paths(rule: dict[str, Any]) -> list[Path]:
 
 def check_manifest(manifest: dict[str, Any]) -> list[str]:
     problems: list[str] = []
+    if manifest.get("pages") != build_manifest()["pages"]:
+        problems.append("LCP-Manifest weicht von aktuellen Einzelartikel-Covers ab "
+                        "(oder enthält alte Listen-Preloads) – --fix ausführen")
     seen_preloads: set[str] = set()
     for permalink, rule in manifest.get("pages", {}).items():
         image = rule.get("image", "")

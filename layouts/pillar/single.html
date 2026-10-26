@@ -112,6 +112,9 @@
         {{- $rFile = path.Base $rCover }}{{ $rDir = path.Dir $rCover }}
         {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile }}
       {{- end }}
+      {{- /* Native Linkbezeichnung aus sichtbarem Titel, Teaser und CTA.
+             aria-label nur mit dem Titel verletzte WCAG 2.5.3; das
+             Cover ist neben dem Text rein dekorativ. */ -}}
       <a href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}" class="ff-pc-card">
         {{- if $rCover }}
         <span class="ff-pc-card__cover">
@@ -130,8 +133,7 @@
             {{- if gt (len $rWebpParts) 0 }}<source type="image/webp" srcset="{{ delimit $rWebpParts ", " }}" sizes="{{ $rSizes }}">{{ end }}
             <img loading="lazy" decoding="async" fetchpriority="low" data-ff-fcp-image="deferred" class="ff-pc-card__img" src="{{ partial "asset_url.html" (printf "%s/360/%s" $rDir $rFile) }}"
                  {{- if gt (len $rJpgParts) 0 }} srcset="{{ delimit $rJpgParts ", " }}" sizes="{{ $rSizes }}"{{ end }}
-                 alt="{{ .Params.cover.alt | default .Title | plainify }}"
-                 width="360" height="540">
+                 alt="" aria-hidden="true" width="360" height="540">
           </picture>
         </span>
         {{- else }}

@@ -3251,7 +3251,6 @@ details.toc a {
 }
 
 @media (max-width: 600px) {
-  main.main:has(.home-info) > section.ff-kompass { order: 5; }
   .ff-kompass { margin: 32px 0; padding: 20px 18px; }
   .ff-kompass__steps { grid-template-columns: 1fr; gap: 9px; margin-top: 20px; }
   .ff-kompass__step { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; min-height: 0; padding: 15px; }
@@ -4165,10 +4164,10 @@ details.toc a {
 .ff-kostenprofil__track small { display: block; }
 .ff-kostenprofil__track span {
   margin-bottom: 18px;
-  /* 26.10.2026: 4.17:1 auf der Papierfläche (#f5f1e8) war zu wenig –
-     axe-core meldete `color-contrast` für 9.28-px-Text. #5A6A63
-     ergibt 5.07:1 dort und 5.71:1 auf Weiß. */
-  color: #5A6A63;
+  /* Auch bei dunklem Farbschema über der warmen Fläche (#e7e1d5)
+     muss der 9,28-px-Text 4,5:1 erreichen: #52655f ergibt 4,76:1
+     dort und 5,50:1 über der hellen Papierfläche (#f5f1e8). */
+  color: #52655f;
   font-size: .58rem;
   font-weight: 800;
   letter-spacing: .08em;
@@ -4182,7 +4181,7 @@ details.toc a {
 }
 .ff-kostenprofil__track small {
   margin-top: 2px;
-  color: #5A6A63; /* s. o. – 5.07:1 auf der Papierfläche */
+  color: #52655f; /* 4,76:1 auf der dunklen Papierfläche */
   font-size: .58rem;
 }
 .ff-kostenprofil__rule {
@@ -4219,7 +4218,7 @@ details.toc a {
 .ff-kostenprofil__author small,
 .ff-kostenprofil__author strong,
 .ff-kostenprofil__author em { display: block; }
-.ff-kostenprofil__author small { color: #687770; font-size: .56rem; letter-spacing: .08em; text-transform: uppercase; }
+.ff-kostenprofil__author small { color: #52655f; font-size: .56rem; letter-spacing: .08em; text-transform: uppercase; }
 .ff-kostenprofil__author strong { margin-top: 1px; font-size: .78rem; }
 .ff-kostenprofil__author em { color: #52655f; font-size: .62rem; font-style: normal; }
 .ff-kostenprofil__author b { font-size: 1rem; }
@@ -4251,7 +4250,27 @@ details.toc a {
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.ff-kostenprofil__foot a { color: var(--ff-emerald); }
+.ff-kostenprofil__foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ff-emerald);
+}
+
+/* Die drei redaktionellen Kleinst-Links (Methodik, Bewertungsraster,
+   Belegquelle) brauchen auch auf Touch-Geräten eine echte Trefferfläche.
+   Kein unsichtbarer Pseudo-Knopf: der sichtbare Link selbst ist groß genug. */
+.ff-offenlegung__text p > a {
+  display: inline-block;
+  padding-block: 12px;
+}
+.ff-quellen__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  padding-block: 4px;
+}
 
 /* Originäre Diagramme wirken wie redaktionelle Datenblätter. */
 .ff-chart {
@@ -4330,17 +4349,8 @@ details.toc a {
     white-space: nowrap;
     border: 0;
   }
-  main.main:has(.home-info) { display: flex; flex-direction: column; }
-  /* Das erste redaktionelle Cover bleibt das mobile LCP-Element. Die
-     ausführliche Markenbühne folgt direkt danach; so kostet die zusätzliche
-     Premium-Substanz keinen First-Viewport-Paint. */
-  main.main:has(.home-info) > article.post-entry { order: 1; }
-  main.main:has(.home-info) > article.first-entry.home-info { order: 2; }
-  main.main:has(.home-info) > div.ff-pinterest-cta { order: 3; }
-  main.main:has(.home-info) > footer.page-footer { order: 4; }
-  main.main:has(.home-info) > section.ff-saison { order: 5; }
-  main.main:has(.home-info) > section.ff-kompass { order: 6; }
-  main.main:has(.home-info) > section.ff-topics { order: 7; }
+  /* Keine Flex-order: Sicht-, Lese- und Tab-Reihenfolge müssen identisch sein.
+     Die H1 im Hero ist der mobile LCP-Kandidat statt einer vorgezogenen Karte. */
   .first-entry.home-info {
     padding: 26px 18px 30px;
     box-shadow: 7px 7px 0 var(--ff-paper-line);
@@ -4351,6 +4361,10 @@ details.toc a {
   }
   .first-entry.home-info > .ff-trust-row { margin-top: 26px; }
   .ff-kostenprofil--home { box-shadow: 5px 5px 0 var(--ff-signal); }
+  /* Der Produktweg bleibt nach dem Lead sofort greifbar, auch bevor das
+     ausführliche Kostenprofil beginnt. */
+  .first-entry.home-info .ff-home-ctas { gap: 8px; margin-top: 16px; }
+  .first-entry.home-info .ff-home-ctas .ff-btn-primary { width: 100%; min-height: 48px; }
 }
 
 @media (max-width: 520px) {
@@ -4405,4 +4419,12 @@ details.toc a {
 .md-content img[width][height],
 .md-content picture img[width][height] {
   height: auto;
+}
+
+/* Auf --code-bg (#37383e) verfehlt PaperMods --secondary im Dark Mode
+   die AA-Schwelle (4,24:1). Nur die zwei betroffenen Navigationsflächen
+   aufhellen; globale Tokens und helle Ansicht bleiben unangetastet. */
+:root[data-theme="dark"] .ff-themenwelt-chips a,
+:root[data-theme="dark"] .paginav .title {
+  color: color-mix(in srgb, var(--secondary) 78%, var(--primary));
 }

@@ -4,7 +4,7 @@
 // ============================================================
 
 import { test, expect } from './fixtures.mjs';
-import { watchErrors, assertNoErrors, scrollThrough, waitForImages } from './helpers.mjs';
+import { watchErrors, assertNoErrors, scrollThrough, waitForImages, newestArticlePath } from './helpers.mjs';
 
 test.describe('Startseite', () => {
   test('rendert Kernstruktur: Titel, genau ein H1, Teaser, Footer-Rechtliches', async ({ page }) => {
@@ -24,6 +24,32 @@ test.describe('Startseite', () => {
     const datenschutz = page.locator('a[href*="/datenschutz"]');
     expect(await impressum.count(), 'Impressum-Link vorhanden').toBeGreaterThan(0);
     expect(await datenschutz.count(), 'Datenschutz-Link vorhanden').toBeGreaterThan(0);
+  });
+
+  test('Bildpriorität folgt der echten Sichtbarkeit: Listen lazy, Artikel eager', async ({ page }) => {
+    for (const path of ['/', '/posts/']) {
+      await page.goto(path);
+      await expect(page.locator('link[rel="preload"][as="image"]'),
+        `${path}: Listen-Cover steht weit unter dem Fold`).toHaveCount(0);
+      const erstes = page.locator('article.post-entry .entry-cover img').first();
+      await expect(erstes).toHaveAttribute('loading', 'lazy');
+      await expect(erstes).toHaveAttribute('fetchpriority', 'low');
+      expect(await erstes.getAttribute('data-ff-lcp'), `${path}: kein Bild-LCP`).toBeNull();
+      expect(await page.locator('script[src*="gsap.min.js"]').count(),
+        'GSAP nur dort laden, wo ein Startseiten-Hero animiert wird').toBe(path === '/' ? 1 : 0);
+    }
+    await page.goto('/page/2/');
+    await expect(page.locator('script[src*="gsap.min.js"]'),
+      'auf Pager-Seite 2 gibt es keinen saisonalen Hero').toHaveCount(0);
+    const artikel = await newestArticlePath(page);
+    await page.goto(artikel);
+    const cover = page.locator('article.post-single .entry-cover img').first();
+    await expect(cover).toHaveAttribute('loading', 'eager');
+    await expect(cover).toHaveAttribute('fetchpriority', 'high');
+    await expect(cover).toHaveAttribute('data-ff-lcp', 'candidate');
+    await expect(page.locator('link[rel="preload"][as="image"][data-ff-lcp-optimizer="true"]'))
+      .toHaveCount(1);
+    await expect(page.locator('script[src*="gsap.min.js"]')).toHaveCount(0);
   });
 
   test('lädt ohne JS-Fehler und ohne defekte Same-Origin-Anfragen', async ({ page }) => {

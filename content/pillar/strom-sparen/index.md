@@ -36,7 +36,7 @@ faktencheck: "2026-10-13"
 
 Strom und Gas machen in deutschen Haushalten oft den größten Block der variablen Nebenkosten aus. Wer jahrelang im teuren Grundversorgungstarif bleibt oder veraltete Abschläge unhinterfragt abbuchen lässt, verliert Jahr für Jahr mehrere hundert Euro. Mit der richtigen Kombination aus verbrauchsreduzierenden Maßnahmen im Alltag und einem regelmäßigen, risikofreien Tarifwechsel holst du dir deine finanzielle Kontrolle zurück. In diesem umfassenden Ratgeber bündele ich alle Strategien für spürbar niedrigere Energiekosten – gestützt auf den 4K-Prüfpfad, konkrete Rechner, Praxis-Fallstudien und aktuelle Marktdaten für 2026.
 
-### Das Wichtigste auf einen Blick
+## Das Wichtigste auf einen Blick
 
 * **Tarifwechsel als größter Hebel:** Ein Wechsel des Strom- oder Gasanbieters dauert online weniger als zehn Minuten und spart im Schnitt 300&nbsp;€ bis 800&nbsp;€ pro Jahr gegenüber der Grundversorgung.
 * **Heimliche Stromfresser eliminieren:** Standby-Geräte, veraltete Kühltechnik und Dauerverbraucher verursachen bis zu 20&nbsp;% deiner jährlichen Stromrechnung.

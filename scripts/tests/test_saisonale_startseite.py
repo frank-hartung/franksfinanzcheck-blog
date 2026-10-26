@@ -235,7 +235,7 @@ class TestCssDeckung(unittest.TestCase):
             f"--ff-saison-linie: {dunkel_linie}; }}\n"
             f"@media (prefers-color-scheme: dark) {{ :root[data-theme=\"auto\"] "
             f".ff-saison--herbst {{ --ff-saison-akzent: {auto[0]}; --ff-saison-linie: {auto[1]}; }} }}\n"
-            "@media (max-width: 768px) { main.main > section.ff-saison { order: 5 } }\n"
+            "@media (max-width: 768px) { .ff-saison-card { padding: 12px } }\n"
             "@media (prefers-reduced-motion: reduce) { .ff-saison-card { transition: none } }\n"
         )
 
@@ -250,7 +250,9 @@ class TestCssDeckung(unittest.TestCase):
         saisons, _ = wache.validate_schema(daten)
         css = wache.CSS_DATEI.read_text(encoding="utf-8")
         self.assertEqual(wache.validate_css_parity(saisons, css), [])
-        self.assertEqual(wache.validate_lcp_schutz(css), [])
+        extended = sorted(wache.CSS_DATEI.parent.glob("*.css"))
+        komplett = "\n".join(p.read_text(encoding="utf-8") for p in extended)
+        self.assertEqual(wache.validate_mobile_reihenfolge(komplett), [])
 
     def test_drift_wird_gefunden(self):
         funde = wache.validate_css_parity([self.SAISON], self.css(linie="#000000"))
@@ -267,14 +269,18 @@ class TestCssDeckung(unittest.TestCase):
         funde = wache.validate_css_parity([self.SAISON], self.css(auto_gleich=False))
         self.assertTrue(any("zwei Wahrheiten" in f for f in funde), funde)
 
-    def test_order_regel_wird_geprueft(self):
-        self.assertTrue(wache.validate_lcp_schutz(".ff-saison { color: red; }"))
-        self.assertTrue(any("order: 0" in f for f in wache.validate_lcp_schutz(
-            "@media (max-width: 768px) { main.main > section.ff-saison { order: 0 } } "
-            "@media (prefers-reduced-motion: reduce) {}")))
-        self.assertTrue(wache.validate_lcp_schutz(
-            "@media (max-width: 768px) { main.main > section.ff-saison { order: 6 } } "
-            "@media (prefers-reduced-motion: reduce) {}"))
+    def test_startseiten_order_regel_wird_blockiert(self):
+        motion = "@media (prefers-reduced-motion: reduce) {}"
+        self.assertTrue(wache.validate_mobile_reihenfolge(".ff-saison { color: red; }"))
+        for ziel in ("article.first-entry.home-info", "article.post-entry", "section.ff-saison",
+                     "section.ff-kompass", "section.ff-entity", "footer.page-footer"):
+            with self.subTest(ziel=ziel):
+                funde = wache.validate_mobile_reihenfolge(
+                    f"@media (max-width: 768px) {{ main.main > {ziel} {{ order: 2 }} }} {motion}")
+                self.assertTrue(any("CSS-order" in f for f in funde), funde)
+        self.assertEqual(wache.validate_mobile_reihenfolge(
+            "/* main.main > article.post-entry { order: 1 } */ "
+            ".ff-kostenprofil__head .ff-kostenprofil__index { order: 2 } " + motion), [])
 
 
 class TestAuswahlSpiegel(unittest.TestCase):
@@ -416,9 +422,11 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 "Zum Ratgeber</a>"
                 "<a class=ff-saison-card href=/posts/a/ data-klick=cta_click "
                 "data-klick-placement=start-saison data-klick-saison=herbst "
-                "data-klick-slug=saison-herbst-a aria-labelledby=a-title>"
-                "<span class=ff-saison-card-titel id=a-title>Artikel A</span></a>"
-                "</section><article class='post-entry lcp-card'></article></main>"
+                "data-klick-slug=saison-herbst-a>"
+                "<span class=ff-saison-card-titel id=a-title>Artikel A</span>"
+                "<span class=ff-saison-card-cta>Weiterlesen</span></a>"
+                "</section><article class=post-entry><img src=/images/cover.jpg loading=lazy "
+                "fetchpriority=low width=360 height=540 alt=Artikel></article></main>"
                 "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
             )
             saison = {"id": "herbst", "badge": "Herbst-Check",
@@ -434,8 +442,18 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 ("zwei H1", gut.replace("<h1>Herbst-Check: Strom vergleichen</h1>", "<h1>Herbst-Check: Strom vergleichen</h1><h1>zwei</h1>"), "B1"),
                 ("ohne Messkette", gut.replace("data-klick-placement=start-saison", ""), "B4"),
                 ("Karte ohne Titel", gut.replace(">Artikel A</span>", "></span>"), "B3"),
+                ("ARIA überschreibt Kartentext", gut.replace("data-klick-slug=saison-herbst-a>",
+                     "data-klick-slug=saison-herbst-a aria-labelledby=a-title>"), "B4"),
+                ("CTA für Screenreader versteckt", gut.replace("class=ff-saison-card-cta>",
+                     "class=ff-saison-card-cta aria-hidden=true>"), "B4"),
                 ("Block ohne Auswahl-Quelle", gut.replace("data-ff-saison-quelle=keywords",
                                                            "data-ff-saison-quelle=neueste"), "B2"),
+                ("Cover wieder eager", gut.replace("loading=lazy", "loading=eager"), "B8"),
+                ("Bild-Preload", gut.replace("<html><body>",
+                     "<html><head><link rel=preload as=image href=/images/cover.jpg></head><body>"), "B8"),
+                ("Karte vor Hero", gut.replace("<main class=main>",
+                     "<main class=main><article class=post-entry><img src=x loading=lazy "
+                     "fetchpriority=low></article>"), "B8"),
             ]:
                 with self.subTest(fall=name):
                     (public / "index.html").write_text(variante, encoding="utf-8")

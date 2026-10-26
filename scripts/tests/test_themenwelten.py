@@ -41,9 +41,7 @@ class ThemenweltenTests(unittest.TestCase):
     def build_fixture(self, prefix="/"):
         for topic in DATA["topics"]:
             key = topic["id"]
-            # Die Karte trägt ihren Namen aus dem sichtbaren Inhalt – ein
-            # aria-label-Override „Weiterlesen: …" wäre WCAG 2.5.3-widrig.
-            self.write(f"public/pillar/{key}/index.html", f'<h1>Ratgeber</h1><a class="ff-pc-card" href="{prefix}posts/{key}-artikel/">Artikel</a>')
+            self.write(f"public/pillar/{key}/index.html", f'<h1>Ratgeber</h1><a class=ff-pc-card href="{prefix}posts/{key}-artikel/"><img alt="" aria-hidden=true><strong class=ff-pc-card__title>Artikel</strong><span class=ff-pc-card__cta>Jetzt lesen →</span></a>')
             self.write(f"public/posts/{key}-artikel/index.html", "<h1>Artikel</h1>")
         for home in (False, True):
             heading = "home-themenwelten" if home else guard.TITLE_ID
@@ -51,12 +49,11 @@ class ThemenweltenTests(unittest.TestCase):
             for topic in DATA["topics"]:
                 key = topic["id"]
                 card_id = heading + "-" + key
-                cards.append(f'''<li><a class=ff-topic-card data-topic="{key}" href="{prefix}pillar/{key}/"
-                  aria-labelledby="{card_id}-title" aria-describedby="{card_id}-description {card_id}-count">
+                cards.append(f'''<li><a class=ff-topic-card data-topic="{key}" href="{prefix}pillar/{key}/">
                   <h3 id="{card_id}-title">{escape(topic['title'])}</h3>
                   <p class=ff-topic-description id="{card_id}-description">{escape(topic['description'])}</p>
                   <span class=ff-topic-count id="{card_id}-count" data-article-count=1>1 Artikel</span>
-                  <span aria-hidden=true><svg><path d="M0 0"/></svg>Zum Thema</span></a></li>''')
+                  <span class=ff-topic-cta>Zum Thema <svg aria-hidden=true><path d="M0 0"/></svg></span></a></li>''')
             markup = f'''<main><section class=ff-topics aria-labelledby="{heading}">
               <span id={guard.LEGACY_ID} aria-hidden=true></span>
               <h2 id="{heading}">{DATA['title']}</h2><ul>{''.join(cards)}</ul></section>
@@ -149,14 +146,30 @@ class ThemenweltenTests(unittest.TestCase):
 
     def test_missing_name_description_or_hidden_card(self):
         for before, after in (
-            ('aria-labelledby="deine-6-themenwelten-strom-sparen-title"', 'aria-labelledby="missing"'),
+            ('class=ff-topic-card', 'class=ff-topic-card aria-labelledby=missing'),
             ('class=ff-topic-description', 'class=missing'),
+            ('class=ff-topic-cta', 'class=ff-topic-cta aria-hidden=true'),
             ('class=ff-topic-card', 'class=ff-topic-card hidden'),
         ):
-            with self.subTest(before=before):
+            with self.subTest(before=before, after=after):
                 self.build_fixture()
                 self.mutate_html(before, after)
                 self.assertTrue(self.findings())
+
+    def test_pillar_artikelkarte_hat_native_beschriftung_und_dekoratives_cover(self):
+        target = self.public / "pillar/strom-sparen/index.html"
+        original = target.read_text(encoding="utf-8")
+        for before, after, expected in (
+            ('class=ff-pc-card', 'class=ff-pc-card aria-label="Weiterlesen: Artikel"', "ARIA überschreiben"),
+            ('alt=""', 'alt="Doppelt vorgelesener Artikel"', "aria-hidden=true"),
+            ('aria-hidden=true', 'aria-hidden=false', "aria-hidden=true"),
+            ('Jetzt lesen', ' ', "Titel und CTA"),
+        ):
+            with self.subTest(before=before):
+                target.write_text(original.replace(before, after, 1), encoding="utf-8")
+                self.assertTrue(any(expected in error for error in self.findings()))
+        target.write_text(original, encoding="utf-8")
+        self.assertEqual(self.findings(), [])
 
     def test_live_counter_and_target_article_integrity(self):
         self.mutate_html("data-article-count=1", "data-article-count=999")

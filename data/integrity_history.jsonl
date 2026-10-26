@@ -342,5 +342,7 @@
 {"date": "2026-10-26", "kritisch": 2, "fest": 1, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html", "scripts/reserve_artifacts.py"]}
 {"date": "2026-10-26", "kritisch": 0, "fest": 1, "modus": "verify"}
 {"date": "2026-10-26", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/reserve_artifacts.py"], "head": "a792e81"}
+{"date": "2026-10-26", "kritisch": 1, "fest": 6, "modus": "set-current", "geaendert": ["assets/css/extended/custom.css", "layouts/_partials/cover.html", "layouts/_partials/extend_footer.html", "layouts/_partials/extend_post_content.html", "layouts/_partials/head.html", "layouts/_partials/header.html", "layouts/pillar/single.html"]}
 {"date": "2026-10-26", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-26", "kritisch": 0, "fest": 3, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html", "layouts/_partials/header.html", "layouts/pillar/single.html"]}
+{"date": "2026-10-26", "kritisch": 1, "fest": 5, "modus": "set-current", "geaendert": ["assets/css/extended/custom.css", "layouts/_partials/cover.html", "layouts/_partials/extend_footer.html", "layouts/_partials/extend_post_content.html", "layouts/_partials/head.html", "layouts/pillar/single.html"]}

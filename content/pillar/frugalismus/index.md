@@ -36,7 +36,7 @@ faktencheck: "2026-10-02"
 
 Frugalismus bedeutet nicht knauseriger Verzicht oder extremes Einschränken an Lebensqualität – sondern die bewusste Entscheidung, Geld nicht für Dinge zu verschwenden, die dir keinen echten Gegenwert liefern. Wenn du deine Fixkosten systematisch senkst und unbewusste Konsumlecks schließt, entsteht jeden Monat ein planbarer finanzieller Überschuss. Dieses Geld arbeitet für dich, beseitigt finanziellen Stress und schafft echte Handlungsfreiheit. Konkret bedeutet das: Fixkosten auf maximal 50 % des Nettoeinkommens Deckeln, die 50–30–20-Methode etablieren und einen 3-stufigen Notgroschen aufbauen – gestützt auf den 4K-Prüfpfad, fundierte Rechner, Praxis-Fallstudien und aktuelle Zinsdaten für 2026.
 
-### Das Wichtigste auf einen Blick
+## Das Wichtigste auf einen Blick
 
 * **Die 50–30–20-Regel als Fundament:** 50&nbsp;% des Nettoeinkommens für existenzielle Fixkosten und Grundbedürfnisse, 30&nbsp;% für persönliche Wünsche und Freizeit, 20&nbsp;% für Sparen, Schuldentilgung und Notgroschen.
 * **Notgroschen vor Geldanlage:** Bevor Geld in ETF-Sparpläne oder risikoreichere Anlagen fließt, gehören drei bis sechs Monats-Fixkosten als eiserne Reserve auf ein separates Tagesgeldkonto mit gesetzlicher Einlagensicherung.

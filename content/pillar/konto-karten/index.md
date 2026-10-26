@@ -27,7 +27,7 @@ quellen:
 ---
 Viele Filialbanken und Sparkassen erheben Monat für Monat Kontoführungsgebühren, berechnen Buchungszeilen oder verlangen teure Jahresgebühren für Kreditkarten. Im Laufe eines Jahres fließen so schnell 60&nbsp;€ bis 180&nbsp;€ für Standardleistungen vom Konto ab, die moderne Direkt- und Neobanken komplett kostenlos zur Verfügung stellen. Die gute Nachricht: Wer einmal umstellt, spart dauerhaft – das gesamte Banking auf null Euro Gebühren, die passende Kreditkarte für Reisen und die besten Zinsen für den Notgroschen.
 
-### Das Wichtigste auf einen Blick
+## Das Wichtigste auf einen Blick
 
 * **Kostenloses Girokonto als Standard:** Ein modernes Girokonto mit kostenloser App, Debitkarte und Echtzeitüberweisungen muss dich keinen Cent kosten.
 * **C24 Bank als Allround-Empfehlung:** Mehrfach als Testsieger ausgezeichnet, mit gebührenfreier Kontoführung, Pocket-Unterkonten und automatischer Zinsgutschrift.

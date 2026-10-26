@@ -3,7 +3,7 @@
 
 FCP wird bei einem Blog meist durch frühe Text-/Header-Renderbarkeit bestimmt.
 Bilder dürfen den kritischen Pfad deshalb nicht unnötig blockieren oder dem
-LCP-Cover Bandbreite wegnehmen. Dieses Tool erzeugt ein FCP-Policy-Manifest und
+sichtbaren Text-/Bild-LCP Bandbreite wegnehmen. Dieses Tool erzeugt ein FCP-Policy-Manifest und
 prüft den gebauten Hugo-Output auf Agentur-Regeln:
 
 - genau priorisierte LCP-Bilder, keine konkurrierenden High-Priority-Bilder
@@ -63,7 +63,7 @@ def build_manifest() -> dict[str, Any]:
             loading="eager",
             decoding="async",
             fetchpriority="low",
-            reason="kleines Logo darf FCP nicht mit LCP-Bild konkurrieren",
+            reason="kleines Logo darf Text-/Bild-LCP nicht mit hoher Priorität verdrängen",
         ),
         FcpPolicy(
             role="lcp",
@@ -87,7 +87,7 @@ def build_manifest() -> dict[str, Any]:
         "generatedBy": "scripts/fcp_image_optimizer.py",
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "strategy": {
-            "goal": "Bildrequests dürfen FCP nicht verzögern und nicht mit dem LCP-Cover konkurrieren.",
+            "goal": "Bildrequests dürfen Text-FCP/-LCP nicht verzögern; nur Artikelcover werden priorisiert.",
             "maxHighPriorityImagesPerPage": 1,
             "requireDimensions": True,
             "requireAsyncDecoding": True,

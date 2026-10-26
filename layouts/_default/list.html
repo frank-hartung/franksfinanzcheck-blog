@@ -121,18 +121,12 @@
 {{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
 {{- end }}
-{{- /* LCP-Marker: Die ERSTE Karte auf der Startseite bleibt voll gerendert
-       (content-visibility: visible) – alle anderen Karten bekommen
-       content-visibility: auto (siehe custom.css) und werden erst bei
-       Annäherung gerendert. Das beschleunigt das LCP-Element spürbar. */}}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0)) }}
-{{- $class = printf "%s lcp-card" $class }}
-{{- end }}
-
+{{- /* Startseite: Die erste Karte liegt nach Hero und Themenblöcken und
+       ist kein Bild-LCP mehr. Auch sie darf bis zur Annäherung ihre
+       Darstellung aufschieben; nur das /posts/-Erstcover bleibt eager. */ -}}
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- $isFirstCover := (and (or $.IsHome $isPosts) (eq $paginator.PageNumber 1) (eq $index 0)) }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden "IsFirst" $isFirstCover) }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
     <h2 class="entry-hint-parent">
       {{- .Title | safeHTML }}
@@ -195,8 +189,8 @@
 </div>
 {{- end }}
 
-{{- /* Ratgeber-Cluster am Seitenende: hält das erste Cover (LCP) im
-       Viewport, verlinkt aber alle 6 Pillar-Pages von der Startseite. */}}
+{{- /* Ratgeber-Cluster am Seitenende: verlinkt alle sechs Pillar-Pages,
+       ohne den redaktionellen Einstieg und die Artikelliste zu unterbrechen. */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 {{- partial "home_clusters.html" . }}
 {{- /* ENTITY-BOX (25.10.2026): sichtbare Marken-Definition + Abgrenzung

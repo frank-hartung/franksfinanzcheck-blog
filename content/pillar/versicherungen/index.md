@@ -31,7 +31,7 @@ quellen:
 ---
 Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen Fehlern: Entweder sind sie für viel Geld gegen Bagatellschäden überversichert, oder es fehlen elementare Policen gegen existenzbedrohende Risiken. Aus meiner langjährigen Praxis als kritischer Verbraucher gilt der eiserne Grundsatz: **Versichere nur Schäden, die deinen finanziellen Ruin bedeuten würden.** Die gute Nachricht: Wer die wenigen Pflicht-Policen richtig wählt, spart gegenüber dem üblichen Rundum-Sorglos-Paket oft hunderte Euro pro Jahr – und schläft trotzdem besser.
 
-### Das Wichtigste auf einen Blick
+## Das Wichtigste auf einen Blick
 
 * **Privathaftpflicht ist unverzichtbar:** Ein einziger unachtsamer Moment kann Millionenschäden nach sich ziehen. Eine Top-Haftpflicht gibt es bereits ab rund 35&nbsp;€ bis 50&nbsp;€ im Jahr.
 * **Existenzschutz vor Komfortschutz:** Existenzielle Risiken (Haftpflicht, Berufsunfähigkeit, Wohngebäude) haben immer absolute Priorität vor Glasbruch- oder Handyversicherungen.

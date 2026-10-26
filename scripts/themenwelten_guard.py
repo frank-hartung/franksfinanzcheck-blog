@@ -208,14 +208,14 @@ def check_worlds(page: Page, data: dict, public: Path, base_path: str, *, home=F
         titles = [n for n in page.nodes if n.inside(card) and n.tag == "h3"]
         if len(titles) != 1 or titles[0].text != topic["title"]:
             errors.append(f"{label}: Kartentitel fehlt oder weicht von der Datenquelle ab.")
-        elif card.attrs.get("aria-labelledby") != titles[0].attrs.get("id"):
-            errors.append(f"{label}: zugänglicher Linkname stimmt nicht mit dem Titel überein.")
+        if any(attr in card.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
+            errors.append(f"{label}: Linkname darf sichtbare Beschreibung, Zähler und CTA nicht per ARIA überschreiben/duplizieren.")
         descriptions = [n for n in page.by_class("ff-topic-description") if n.inside(card)]
         if len(descriptions) != 1 or descriptions[0].text != topic["description"]:
             errors.append(f"{label}: Beschreibung fehlt oder weicht von der Datenquelle ab.")
-        refs = (card.attrs.get("aria-describedby") or "").split()
-        if len(refs) != 2 or any(len(page.by_id(ref)) != 1 or not page.by_id(ref)[0].inside(card) for ref in refs):
-            errors.append(f"{label}: Beschreibung/Zähler nicht eindeutig zugänglich verknüpft.")
+        ctas = [n for n in page.by_class("ff-topic-cta") if n.inside(card)]
+        if len(ctas) != 1 or "Zum Thema" not in ctas[0].text or ctas[0].attrs.get("aria-hidden") == "true":
+            errors.append(f"{label}: sichtbarer CTA muss im nativen Linknamen stehen.")
         if any("hidden" in n.attrs or n.attrs.get("aria-hidden") == "true" for n in (card, region)):
             errors.append(f"{label}: Navigation darf nicht versteckt sein.")
         href = card.attrs.get("href", "")
@@ -242,6 +242,17 @@ def check_worlds(page: Page, data: dict, public: Path, base_path: str, *, home=F
         if len(counts) != 1 or counts[0].attrs.get("data-article-count") != str(count) or counts[0].text != expected:
             errors.append(f"{label}: Artikelzahl stimmt nicht mit dem veröffentlichten Themen-Ratgeber überein.")
         for link in article_links:
+            if any(attr in link.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
+                errors.append(f"{label}: Artikel-Karten dürfen sichtbaren Text nicht per ARIA überschreiben/duplizieren.")
+            titles = [n for n in target_page.by_class("ff-pc-card__title") if n.inside(link)]
+            if len(titles) != 1 or not titles[0].text or "Jetzt lesen" not in link.text:
+                errors.append(f"{label}: Artikel-Karte braucht sichtbaren Titel und CTA im Linknamen.")
+            images = [n for n in target_page.nodes if n.tag == "img" and n.inside(link)]
+            # Hugo --minify serialisiert alt="" als nacktes alt (HTML5: gleicher
+            # leerer Wert). Fehlendes Attribut ist dagegen ein echter Fehler.
+            if any("alt" not in image.attrs or (image.attrs.get("alt") or "") != "" or
+                   image.attrs.get("aria-hidden") != "true" for image in images):
+                errors.append(f"{label}: Cover im beschrifteten Artikel-Link braucht alt=\"\" und aria-hidden=true.")
             dest = output_path(public, link.attrs.get("href", ""), base_path)
             if not dest or not dest.is_file():
                 errors.append(f"{label}: verlinkter Themen-Artikel fehlt im Build: {link.attrs.get('href')}")

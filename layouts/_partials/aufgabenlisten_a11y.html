@@ -1,24 +1,21 @@
 {{- /* ============================================================
-    AUFGABENLISTEN (`- [ ]` im Markdown) – eine Wahrheit für alle Seiten
+    AUFGABENLISTEN (`- [ ]` im Markdown) – eine Wahrheit für Artikel
+    und Pillar-Seiten
     ------------------------------------------------------------
-    Goldmark rendert aus einer Markdown-Aufgabenliste
-    `<input disabled="" type="checkbox">` OHNE Label. axe-core meldet das
-    als `label` (impact: critical) – zu Recht: Ein Bedienelement ohne Namen
-    ist für Screenreader nur „Kontrollkästchen, deaktiviert“.
+    Goldmark rendert statische Markdown-Aufgabenlisten als deaktivierte
+    Checkboxen ohne Label. Diese Formularelemente sind nicht bedienbar;
+    axe-core meldet sie zu Recht als unbeschriftete Controls. Der Text
+    der Liste bleibt lesbar, die visuellen Abhak-Marker sind Dekoration.
 
-    Das Kästchen ist hier reine Dekoration: Es wird nichts gespeichert und
-    nichts bedienbar. Deshalb nimmt die Heilung es aus dem
-    Accessibility-Baum (`aria-hidden="true"`) und aus der Tab-Reihenfolge
-    (`tabindex="-1"`), statt den Satz in ein Label zu verwandeln – der Text
-    daneben trägt die Bedeutung vollständig.
+    Beide Goldmark-Varianten (angekreuzt und leer) werden deshalb durch
+    aria-hidden-Spans statt funktionsloser Inputs ersetzt. Anders als ein
+    zusätzliches aria-hidden am Input entstehen so gar keine namenlosen
+    Formularelemente. Für tatsächlich interaktive Checklisten braucht es
+    später beschriftete Controls und eine transparente Speicher-Policy.
 
-    Warum ein eigenes Partial (26.10.2026): Die Heilung stand nur im
-    Artikel-Layout. Die Pillar-Seiten (Ratgeber-Welten) rendern dieselbe
-    Markdown-Liste über `layouts/pillar/single.html` – dort fehlte sie, und
-    axe meldete auf /pillar/mietwagen/ sechs unbezeichnete Kästchen. Zwei
-    Kopien derselben Zeile wären zwei Wahrheiten; jetzt gibt es eine.
-
-    Ersetzung ist zeilenlokal und literal – kein mehrzeiliges Muster
-    (Repo-Regel gegen ReDoS, siehe CODE-SCANNING-ALERT-87).
+    Die Ersetzung ist literal und lokal; kein mehrzeiliges Regex-Muster.
     ============================================================ */ -}}
-{{- return (replaceRE `(<input disabled="" type="checkbox")` `${1} aria-hidden="true" tabindex="-1"` .) -}}
+{{- $content := . -}}
+{{- $content = replace $content `<input checked="" disabled="" type="checkbox">` `<span class="ff-task-mark" aria-hidden="true">☑</span>` -}}
+{{- $content = replace $content `<input disabled="" type="checkbox">` `<span class="ff-task-mark" aria-hidden="true">☐</span>` -}}
+{{- return $content -}}

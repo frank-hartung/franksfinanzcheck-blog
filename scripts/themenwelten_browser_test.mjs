@@ -137,8 +137,15 @@ try {
     check(await page.locator('.ff-topic-card').count() === 6, `${test.name}: sechs Karten`);
     check(await page.locator('.ff-mini-toc').count() === 0, `${test.name}: keine überlagernde Artikel-Navigation`);
     for (const topic of DATA.topics) {
-      const card = page.getByRole('link', { name: topic.title, exact: true });
-      check(await card.count() === 1 && await card.isVisible(), `${test.name}: zugänglicher Name ${topic.id}`);
+      const card = page.locator(`.ff-topic-card[data-topic="${topic.id}"]`);
+      // Der native Linkname enthält jetzt alle sichtbaren Karten-Texte.
+      // „exact: true“ auf nur den H3-Titel war eine veraltete Testerwartung
+      // und würde die WCAG-2.5.3-Korrektur auf jeder Viewport-Größe ablehnen.
+      check(await card.and(page.getByRole('link', { name: topic.title })).count() === 1
+        && await card.isVisible(), `${test.name}: Linkname enthält den sichtbaren Titel ${topic.id}`);
+      const accessible = await card.ariaSnapshot();
+      check(accessible.includes(topic.description) && accessible.includes('Zum Thema'),
+        `${test.name}: Linkname enthält Beschreibung und sichtbaren CTA ${topic.id}`);
       check(await card.getAttribute('href') === `${BASE_PATH}pillar/${topic.id}/`, `${test.name}: URL ${topic.id}`);
     }
     const metrics = await page.evaluate(() => {

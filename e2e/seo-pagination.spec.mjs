@@ -7,11 +7,25 @@ test.describe('SEO-Regressionen: Pagination, Sitemap, Metadaten', () => {
       await page.goto(path);
       await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'noindex, follow');
       await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', SITE_ORIGIN + path);
+      // Hugo .AllTranslations.Permalink zeigte zuvor auf die Listenwurzel,
+      // obwohl Canonical und x-default auf die Pager-URL zeigten.
+      for (const lang of ['de', 'x-default']) {
+        await expect(page.locator(`link[rel=alternate][hreflang="${lang}"]`),
+          `Pager ${path}: genau eine ${lang}-Selbstreferenz`).toHaveCount(1);
+        await expect(page.locator(`link[rel=alternate][hreflang="${lang}"]`))
+          .toHaveAttribute('href', SITE_ORIGIN + path);
+      }
       expect(await page.title()).toContain('Seite 2');
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', SITE_ORIGIN + path);
       const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
       expect(schemas.some(s => JSON.parse(s)['@type'] === 'CollectionPage')).toBe(false);
     }
+  });
+  test('Werkzeuge: prägnanter einzigartiger Titel', async ({ page }) => {
+    await page.goto('/werkzeuge/');
+    const titel = await page.title();
+    expect(titel).toContain('Finanz-Rechner');
+    expect(titel.length, `Werkzeuge-Titel ${titel.length} Zeichen`).toBeLessThanOrEqual(65);
   });
   test('Sitemap enthält beide Hubs, keine Pager und keine erfundene Rechtsseiten-Frische', async ({ request, baseURL }) => {
     const response = await request.get(`${baseURL}/sitemap.xml`);

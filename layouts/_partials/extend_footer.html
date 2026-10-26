@@ -35,10 +35,11 @@
 {{- /* Alte Einwilligungs-Cookies entfernen (Analyse-Banner und Reichweitenmessung entfernt, 11.10.2026). */ -}}
 <script>document.cookie="ff_cookie_consent=;max-age=0;path=/;SameSite=Lax";document.cookie="ff_analytics_consent_v2=;max-age=0;path=/;SameSite=Lax";</script>
 
-{{- /* ---------- Premium Blog Enhancements: GSAP + reflow-sichere UX-Microinteractions ----------
-     First-party/self-hosted, kein Tracking, keine Cookies.
-     GSAP animiert nur zeitbasierte Hero-Microinteractions; Scroll-Effekte laufen
-     bewusst über IntersectionObserver statt ScrollTrigger, damit Lighthouse keine
-     erzwungenen Layout-/Reflow-Messungen aus ScrollTrigger meldet. */ -}}
+{{- /* GSAP wird ausschließlich für die Animationen im Startseiten-Hero
+     gebraucht. Artikel, Werkzeuge und Rechtsseiten sparen die Bibliothek
+     (~72 KB unkomprimiert); ff-premium.js nutzt dort sein CSS-/Observer-
+     Fallback. Auf der Startseite bleibt die Lade-Reihenfolge per defer erhalten. */ -}}
+{{- if and .IsHome (eq .Paginator.PageNumber 1) }}
 <script defer src="{{ partial "asset_url.html" "premium/vendor/gsap.min.js" }}"></script>
+{{- end }}
 <script defer src="{{ partial "asset_url.html" "premium/ff-premium.js" }}"></script>

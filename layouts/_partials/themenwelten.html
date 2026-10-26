@@ -45,6 +45,10 @@
          data-klick="cta_click" data-klick-cta="thema-{{ .id }}"
          data-klick-slug="thema-{{ .id }}"
          data-klick-placement="{{ if $home }}start-themenwelten{{ else }}posts-themenwelten{{ end }}">
+        {{- /* Kein aria-labelledby nur auf den Titel: Beschreibung, Zähler
+               und CTA stehen sichtbar in der Karte und gehören auch zum
+               zugänglichen Linknamen. Natives Label statt doppelter
+               aria-describedby-Durchsage (WCAG 2.5.3). */ -}}
         <div class="ff-topic-card-head">
           <span class="ff-topic-icon">{{ partial "themenwelt_icon.html" .id }}</span>
           <h3 id="{{ $cardID }}-title">{{ .title }}</h3>
@@ -52,7 +56,7 @@
         <p class="ff-topic-description" id="{{ $cardID }}-description">{{ .description }}</p>
         <div class="ff-topic-card-footer">
           <span class="ff-topic-count" id="{{ $cardID }}-count" data-article-count="{{ $count }}">{{ if gt $count 0 }}{{ $count }} {{ if eq $count 1 }}Artikel{{ else }}Artikel{{ end }}{{ else }}Basis-Ratgeber{{ end }}</span>
-          <span class="ff-topic-cta">Zum Thema <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span>
+          <span class="ff-topic-cta">Zum Thema <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span>
         </div>
       </a>
     </li>
