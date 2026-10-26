@@ -40,6 +40,9 @@ data/gsc/top_suchbegriffe_28t.json merge=binary
 # Der Verlauf (`verlauf.jsonl`) bleibt bewusst ausgenommen: Eine Zeile je
 # Momentaufnahme ist eine unabhängige Messung, `*.jsonl merge=union` gilt.
 data/gsc/abdeckung/*.json merge=binary
+# Der Triage-Verlauf ist ein Protokoll (eine Zeile je URL und Tag): Beim
+# Merge zweier Läufe sind beide Zeilen wahr – union statt Konflikt.
+data/gsc/abdeckung/triage_verlauf.jsonl merge=union
 
 # Reserve-Snapshots sind ebenfalls ganze Beweise, keine Textbausteine (#634).
 # Ein paralleler Merge hatte Zeitstempel, Kandidaten und Quarantäne-Akten zu

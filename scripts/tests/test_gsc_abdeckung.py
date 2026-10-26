@@ -601,3 +601,143 @@ class TriageAusDateien(unittest.TestCase):
                 stand = g.detail_stand(g.dt.date(2026, 10, 15))
         self.assertEqual(stand["stand"], "2026-10-01")
         self.assertEqual(stand["alter_tage"], 14)
+
+
+class EntscheidungenUndFristen(unittest.TestCase):
+    """Der Kreislauf: Vorschlag → Entscheidung → Frist → Wirkungsprüfung.
+
+    Der Befund vom 26.10.2026 war nicht „zu wenige Aufgaben", sondern dass
+    eine Aufgabe nach dem ersten Bericht verschwand. Diese Tests frieren ein,
+    dass eine Entscheidung eine Frist hat, dass eine Frist abläuft und dass
+    nach Ablauf der lastmod der Seite entscheidet – nicht das Gefühl.
+    """
+
+    def setUp(self) -> None:
+        import datetime
+        import tempfile
+
+        self.dt = datetime
+        self.tmp = Path(tempfile.mkdtemp())
+        self.register = self.tmp / "entscheidungen.yaml"
+        self.wahrheit = {
+            "indexierbar": ["/posts/a/"], "noindex": [], "gateways": [],
+            "weiterleitungen": {}, "entfallen": {}, "taxonomie_404": [],
+            "anzahl_taxonomie": 0, "top_nicht_live": [],
+            "robots": {"go_gesperrt": False, "sperrt_go_gruppen": 0},
+        }
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _entscheiden(self, url: str = "/posts/a/", faellig: str = "2026-11-25",
+                     am: str = "2026-10-26", root: Path | None = None) -> dict:
+        return g.entscheidung_eintragen(
+            url, "Rolle festlegen", "Cluster ohne Eintrag",
+            wiedervorlage=faellig, heute=self.dt.date.fromisoformat(am),
+            pfad=self.register)
+
+    def _triage(self, heute: str, root: Path | None = None) -> dict:
+        return g.triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                        self.wahrheit, {}, {"ohne_ein": []},
+                        heute=self.dt.date.fromisoformat(heute),
+                        verlauf=[], register=g.entscheidungen(self.register),
+                        root=root or self.tmp / "leer")
+
+    def test_entscheidung_haelt_frist_und_ersatz(self) -> None:
+        self._entscheiden()
+        self._entscheiden(am="2026-10-27")
+        eintraege = g.entscheidungen(self.register)
+        self.assertEqual(len(eintraege), 1)
+        self.assertEqual(eintraege["/posts/a/"]["am"], "2026-10-27")
+        self.assertEqual(eintraege["/posts/a/"]["wiedervorlage"], "2026-11-25")
+        self.assertEqual(eintraege["/posts/a/"]["erwartung"], "indexiert")
+
+    def test_ohne_frist_kein_eintrag(self) -> None:
+        with self.assertRaises(ValueError):
+            self._entscheiden(faellig="25.11.2026")
+
+    def test_standardfrist_ist_die_sla(self) -> None:
+        werte = g.entscheidung_eintragen(
+            "/posts/a/", "Rolle festlegen", heute=self.dt.date(2026, 10, 26),
+            pfad=self.register)
+        self.assertEqual(werte["wiedervorlage"], "2026-11-25")
+
+    def test_vor_der_frist_ist_die_sache_entschieden(self) -> None:
+        self._entscheiden()
+        t = self._triage("2026-11-01")
+        self.assertEqual(t["offen"], [])
+        self.assertIn("Wiedervorlage", t["zeilen"][0]["aktion"])
+
+    def test_frist_abgelaufen_und_nichts_geaendert_ist_p1(self) -> None:
+        self._entscheiden()
+        t = self._triage("2026-12-02")
+        zeile = t["offen"][0]
+        self.assertEqual(zeile["prioritaet"], "P1")
+        self.assertIn("umsetzen", zeile["aktion"])
+
+    def test_frist_abgelaufen_und_geaendert_ist_p2(self) -> None:
+        self._entscheiden()
+        repo = self.tmp / "repo"
+        (repo / "content" / "posts" / "a").mkdir(parents=True)
+        (repo / "content" / "posts" / "a" / "index.md").write_text(
+            '---\ntitle: "A"\nlastmod: 2026-12-01\n---\n\nText\n', encoding="utf-8")
+        t = self._triage("2026-12-02", root=repo)
+        self.assertEqual(t["offen"][0]["prioritaet"], "P2")
+        self.assertIn("erneut anfragen", t["offen"][0]["aktion"])
+
+    def test_nicht_mehr_gemeldet_belegt_wirkung(self) -> None:
+        self._entscheiden()
+        t = g.triage([{"url": "/posts/anders/", "grund": "Nicht gefunden (404)"}],
+                     self.wahrheit, {}, {"ohne_ein": []},
+                     heute=self.dt.date(2026, 12, 2), verlauf=[],
+                     register=g.entscheidungen(self.register),
+                     root=self.tmp / "leer")
+        self.assertEqual(t["wirkung_belegt"], ["/posts/a/"])
+
+    def test_ueberfaellige_aufgabe_steigt_eine_stufe(self) -> None:
+        wahrheit = dict(self.wahrheit)
+        t = g.triage([{"url": "/posts/a/",
+                       "grund": "Gecrawlt – zurzeit nicht indexiert"}],
+                     wahrheit, {}, {"ohne_ein": []},
+                     heute=self.dt.date(2026, 10, 26),
+                     verlauf=[{"datum": "2026-09-01", "url": "/posts/a/",
+                               "prioritaet": "P2"}],
+                     register={}, root=self.tmp / "leer")
+        self.assertEqual(t["eskaliert"], ["/posts/a/"])
+        self.assertEqual(t["zeilen"][0]["prioritaet"], "P1")
+
+    def test_verlauf_zaehlt_einmal_je_url_und_tag(self) -> None:
+        pfad = self.tmp / "verlauf.jsonl"
+        zeilen = [{"url": "/posts/a/", "prioritaet": "P2", "aktion": "x"},
+                  {"url": "/posts/b/", "prioritaet": "P3", "aktion": "y"}]
+        self.assertEqual(g.verlauf_schreiben(zeilen, self.dt.date(2026, 10, 26), pfad), 1)
+        self.assertEqual(g.verlauf_schreiben(zeilen, self.dt.date(2026, 10, 26), pfad), 0)
+        self.assertEqual(len(g.verlauf_laden(pfad)), 1)
+
+
+class TitelUeberschneidung(unittest.TestCase):
+    """Kannibalisierung wird am Titel gemessen, nicht am Slug.
+
+    Am 26.10.2026 meldete die Triage „2 ähnliche Titel", weil zwei Artikel
+    „…-schritt-fuer-schritt" heißen. Das war ein Fehlalarm aus dem Slug –
+    und ein Fehlalarm in einem Bericht ist teurer als eine Lücke.
+    """
+
+    def test_fuellwoerter_zaehlen_nicht(self) -> None:
+        mass = g.titel_ueberschneidung(
+            "Dein Weg zu geringeren Monatskosten: Schritt für Schritt",
+            "ETF-Sparplan starten: Schritt für Schritt zum Investieren")
+        self.assertEqual(mass["mass"], 0.0)
+        self.assertEqual(mass["gemeinsam"], [])
+
+    def test_echte_ueberschneidung_wird_erkannt(self) -> None:
+        mass = g.titel_ueberschneidung("Haushaltsbuch führen: App oder Excel",
+                                       "Haushaltsbuch führen mit Excel")
+        self.assertEqual(mass["mass"], 1.0)
+        self.assertIn("haushaltsbuch", mass["gemeinsam"])
+
+    def test_themenfeld_wird_dem_cluster_zugeordnet(self) -> None:
+        treffer = g.cluster_fuer_pillar("frugalismus")
+        self.assertIsNotNone(treffer)
+        self.assertEqual(treffer["cluster"], "K3-frugalismus")
+        self.assertIsNone(g.cluster_fuer_pillar("gibt-es-nicht"))

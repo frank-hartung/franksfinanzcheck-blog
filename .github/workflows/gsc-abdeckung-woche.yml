@@ -62,6 +62,20 @@ jobs:
           # im Bericht (M7) und braucht `fetch --shallow-since`.
           python3 scripts/gsc_abdeckung.py --ursachen --ohne-git || true
 
+      - name: Triage, Register und Fristen
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          # Das Register gilt immer – auch ohne neue Detail-Liste. Eine Frist,
+          # die nur bei Datenimport läuft, ist keine Frist.
+          python3 scripts/gsc_abdeckung.py --entscheidungen || true
+          if compgen -G "data/gsc/abdeckung/details/*.csv" > /dev/null; then
+            python3 scripts/gsc_abdeckung.py --triage || true
+          else
+            echo "Keine Detail-Liste – Triage übersprungen (Regel W9)."
+          fi
+
       - name: Wochenbericht in die Lauf-Zusammenfassung
         run: |
           set -uo pipefail
@@ -104,6 +118,29 @@ jobs:
                       f.write(f"| {x.get('kriterium')} | {x.get('status')} | "
                               f"{x.get('messung')} |\n")
                   f.write("\n")
+              triage = lade("data/gsc/abdeckung/triage.json")
+              offen = triage.get("offen") or []
+              if triage:
+                  f.write(f"\n**Triage:** {triage.get('anzahl')} Zeilen · "
+                          f"offen: {len(offen)} · entschieden: "
+                          f"{len(triage.get('entschieden') or [])} · "
+                          f"Register: {triage.get('register_eintraege')} Einträge\n\n")
+                  if offen:
+                      f.write("| Prio | Alter | URL | Aktion |\n|---|---|---|---|\n")
+                      for x in offen[:10]:
+                          alter = (f"{x.get('alter_tage')} T."
+                                   if x.get("alter_tage") is not None else "neu")
+                          f.write(f"| {x.get('prioritaet')} | {alter} | "
+                                  f"`{x.get('url')}` | {x.get('aktion')} |\n")
+                      f.write("\n")
+                  if triage.get("eskaliert"):
+                      f.write("> ⏰ **Überfällig (SLA):** "
+                              + ", ".join(f"`{u}`" for u in triage["eskaliert"][:5])
+                              + " – eine Stufe hochgestuft.\n")
+                  if triage.get("wirkung_belegt"):
+                      f.write("> ✅ **Wirkung belegt:** "
+                              + ", ".join(f"`{u}`" for u in triage["wirkung_belegt"][:5])
+                              + " nicht mehr gemeldet – Register-Eintrag schließen.\n")
               fehlt = not (kenn.get("detail_stand"))
               if fehlt:
                   f.write("> ⚠️ **Detail-Listen fehlen.** In der Search Console unter "
@@ -125,4 +162,9 @@ jobs:
             data/gsc/abdeckung/verlinkungsauftrag.json
             data/gsc/abdeckung/kandidaten.json
             data/gsc/abdeckung/ursachen.json
+            data/gsc/abdeckung/triage.json
+            data/gsc/abdeckung/triage.md
+            data/gsc/abdeckung/redaktions_queue.md
+            data/gsc/abdeckung/triage_verlauf.jsonl
+            data/gsc/abdeckung/entscheidungen.yaml
           if-no-files-found: ignore

@@ -337,7 +337,7 @@ sagt, wer sie auslöst und wo das Ergebnis liegt.
 | M1 404er triagieren | Mensch (Export) + Tageslauf | `npm run gsc:triage` (liest `data/gsc/abdeckung/details/`) | `triage.json`, `triage.md` |
 | M2 Anfrage-Priorität | Tageslauf | `--prioritaet` → Welle 1 geht an `gsc_indexierung.py --url …` | `prioritaet.json` |
 | M2 interne Verlinkung | Mensch, je Lauf begrenzt | `npm run gsc:verlinkung` (Vorschau), `npm run gsc:verlinken` (schreibt) | `verlinkungsauftrag.json`, `data/verlinkung_history.jsonl` |
-| M3 Redaktions-Queue | Tageslauf nach Triage | `redaktions_queue.md` | nur Seiten, die eine Redaktion entscheiden kann |
+| M3 Redaktions-Queue | Tageslauf nach Triage | `redaktions_queue.md`, `--entscheiden` | nur Seiten mit Frist und Vorschlag; Entscheidung im Register |
 | M4 Altlasten benennen | Tageslauf | `npm run gsc:altlasten` | Zahl + URLs mit belegter Nachfrage |
 | M5 noindex-Vertrag | Tor (hart) | `--vertrag`, Regel V1/V2 | `vertrag.json`, Gate ROT bei Leck |
 | M6 robots-Sperre | Tor (hart) | `--vertrag`, Regel V3/V4 | dito |
@@ -373,7 +373,47 @@ es die Tabelle in `details/README.md` vorgibt.
 | Nie existiert | P3 – Entscheidung dokumentieren | keine Reparatur möglich, nur „bauen" oder „vergessen" |
 
 Diese Zuordnung steht als Selbsttest im Code (K47, K66–K68) – sie kann nicht
-still verrutschen.
+still verrutschen. Was nach der Zuordnung passiert, regelt Abschnitt 10.1b.
+
+**Warum „ähnliche Titel“ seit dem 26.10.2026 anders gemessen wird.** Die erste
+Fassung verglich Slugs und meldete für einen Artikel „2 ähnliche Titel“ – beide
+Male wegen „…-schritt-fuer-schritt“. Das ist eine Redewendung, keine
+Kannibalisierung. Gemessen wird jetzt am Titel, ohne Füllwörter und
+Jahreszahlen, und nur gegen Seiten, die tatsächlich gebaut werden (Entwürfe
+konkurrieren nicht). Ergebnis für die beiden offenen Seiten: **0
+Titel-Überschneidungen** – der Verdacht war ein Messfehler, und der Bericht sagt
+das jetzt auch.
+
+### 10.1b Der Kreislauf: Vorschlag → Entscheidung → Frist → Wirkungsprüfung
+
+Eine Liste, die nur wächst, ist keine Steuerung. Deshalb hat jede Aufgabe vier
+Stationen, und jede ist ein Befehl:
+
+| Station | Befehl | Ergebnis |
+|---|---|---|
+| **Vorschlag** | `npm run gsc:triage` | `redaktions_queue.md` – je Zeile Beleg und Vorschlag (Cluster, Titel-Überschneidung) |
+| **Entscheidung** | `python3 scripts/gsc_abdeckung.py --entscheiden <URL> --entscheidung "…" --begruendung "…"` | Eintrag in `data/gsc/abdeckung/entscheidungen.yaml` – mit Frist und Erwartung |
+| **Frist** | automatisch (`SLA_TAGE`: P0 1 Tag · P1 7 · P2 30) | überfällige Aufgabe steigt eine Stufe und trägt „überfällig seit N Tagen“ |
+| **Wirkungsprüfung** | `npm run gsc:triage` nach Ablauf der Frist | `lastmod` der Seite gegen Entscheidungsdatum (siehe unten) |
+| **Register ansehen** | `python3 scripts/gsc_abdeckung.py --entscheidungen` | alle Entscheidungen mit Frist, fällige zuerst |
+
+Die Wirkungsprüfung ist der Teil, den eine Agentur selten hat und ein Blog
+dringend braucht. Sie fragt nicht „was war geplant?“, sondern „was ist
+passiert?“:
+
+| Befund | Urteil | Nächster Schritt |
+|---|---|---|
+| Seite wurde **nach** der Entscheidung geändert | P2 | Änderung ist live, Google hat sie nicht bewertet → Indexierung erneut anfragen |
+| Seite steht **unverändert** | P1 | Entscheidung ist nur beschlossen, nicht umgesetzt |
+| URL steht **nicht mehr** in der Liste | P3 | Wirkung belegt – Eintrag schließen (ob sie im Index ist, sagt der nächste Export) |
+
+Ein Register-Eintrag schlägt jede Automatik: Was entschieden ist, wird nicht
+erneut vorgeschlagen. Es verschwindet aus der Queue – aber nicht aus der
+Aufmerksamkeit, denn die Frist läuft weiter.
+
+Zwei Dinge macht der Automat ausdrücklich **nicht**: Er entscheidet nicht
+(der Vorschlag ist ein Satz, keine Freigabe), und er ändert keinen Artikel.
+`--entscheiden` schreibt eine Zeile in ein Register, nicht in `content/`.
 
 ### 10.2 Verlinkung schreiben – warum nur die „Weiterlesen“-Zeile
 

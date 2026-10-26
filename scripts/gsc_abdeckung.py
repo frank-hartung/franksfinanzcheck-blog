@@ -70,7 +70,7 @@ AUFRUF
     # 4) Aus einer 404-Detail-Liste Weiterleitungs-Vorschläge ableiten
     python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
 
-    python3 scripts/gsc_abdeckung.py --selftest         # 70 Fälle, offline
+    python3 scripts/gsc_abdeckung.py --selftest         # 80 Fälle, offline
 
 WO DIE EXPORTE HERKOMMEN
     Search Console → Indexierung → Seiten → oben rechts „Exportieren“.
@@ -1825,33 +1825,204 @@ AKTION = {
 }
 
 
-def artikel_steckbrief(url: str, root: Path = ROOT) -> dict:
-    """Wörter, Inlink-Ziel und Themen-Nachbarn einer Seite – für die Triage.
+# --------------------------------------------------------------------------
+#  Themen-Nachbarschaft: echte Titel-Überschneidung statt Slug-Ähnlichkeit
+# --------------------------------------------------------------------------
+
+# Füllwörter und Jahreszahlen tragen keine Suchabsicht. Die erste Fassung maß
+# Ähnlichkeit auf dem SLUG – und meldete „2 ähnliche Titel“, nur weil zwei
+# Artikel „…-schritt-fuer-schritt“ heißen. Das ist keine Kannibalisierung, das
+# ist eine gemeinsame Redewendung. Seit 26.10. wird auf dem TITEL gemessen,
+# ohne Füllwörter, und nur gegen Seiten, die wirklich im Index stehen können.
+STOPP_WOERTER = frozenset("""
+aber alle allem allen aller alles als also auch auf aus bei beim bin bis bist
+damit dann das dass dein deine deinem deinen deiner deines dem den der des dich
+die dies diese diesem diesen dieser dieses dir doch dort du durch ein eine
+einem einen einer eines fuer für gegen hast hat hatte hier ich ihm ihn im in
+ist ja jede jedem jeden jeder jedes kann kannst kein keine mit nach nicht
+nichts noch nun nur ob oder ohne schon sehr sein seine seinem seinen seiner
+sich sie sind so über ueber um und unter viel vom von vor war was weil weiter
+welche welchen welcher wenn wer wie wieder wir wird werden wo zu zum zur
+schritt schritte schritten weg
+""".split())
+
+
+def _titel_woerter(text: str) -> set[str]:
+    """Sinntragende Wörter eines Titels – ohne Füllwörter und Jahreszahlen."""
+    return {w for w in re.findall(r"[a-zäöüß0-9]+", (text or "").lower())
+            if len(w) > 2 and w not in STOPP_WOERTER and not w.isdigit()}
+
+
+def _titel_register(root: Path = ROOT) -> dict[str, dict]:
+    """URL → {titel, pillar, draft} für jede Inhaltsseite im Repo.
+
+    Nicht `_titel_karte` nennen: Dieses Modul hat bereits eine (URL → Titel,
+    für den Ankertext). Zwei Funktionen mit gleichem Namen und verschiedener
+    Rückgabe sind genau die Falle, die man erst im Betrieb merkt.
+    """
+    cdir = Path(root) / "content"
+    karte: dict[str, dict] = {}
+    if not cdir.exists():
+        return karte
+    for pfad in cdir.rglob("index.md"):
+        fm = _frontmatter(pfad)
+        titel = _fm_wert(fm, "title")
+        if not titel:
+            continue
+        rel = pfad.parent.relative_to(cdir).as_posix()
+        url = _fm_wert(fm, "url") or f"/{rel}/"
+        if not url.endswith("/"):
+            url += "/"
+        karte[url] = {"titel": titel, "pillar": _fm_wert(fm, "pillar"),
+                      "draft": _fm_wahr(fm, "draft")}
+    return karte
+
+
+def titel_ueberschneidung(a: str, b: str) -> dict:
+    """Gemeinsame sinntragende Wörter zweier Titel und ihr Anteil (0 … 1).
+
+    Maß ist der Anteil am KÜRZEREN Titel: Ein kurzer, prägnanter Titel, der
+    vollständig in einem langen steckt, ist derselbe Suchbegriff – auch wenn
+    der lange noch drei Nebensätze trägt.
+    """
+    wa, wb = _titel_woerter(a), _titel_woerter(b)
+    if not wa or not wb:
+        return {"gemeinsam": [], "mass": 0.0}
+    gemeinsam = wa & wb
+    return {"gemeinsam": sorted(gemeinsam),
+            "mass": round(len(gemeinsam) / min(len(wa), len(wb)), 2)}
+
+
+def themen_nachbarn(url: str, live: set[str] | None = None, root: Path = ROOT,
+                    schwelle: float = 0.5) -> list[dict]:
+    """Live-Artikel im selben Themenfeld mit echter Titel-Überschneidung.
+
+    `live` ist die Menge der tatsächlich gebauten URLs. Ohne sie würden
+    Entwürfe als Konkurrenz gezählt – und ein Entwurf, der nie indexiert wird,
+    kann keine Seite aus dem Index verdrängen.
+    """
+    karte = _titel_register(root)
+    eigen = karte.get(url)
+    if not eigen:
+        return []
+    aus = []
+    for anderer, daten in karte.items():
+        if anderer == url or daten["draft"]:
+            continue
+        if live is not None and anderer not in live:
+            continue
+        if eigen["pillar"] and daten["pillar"] != eigen["pillar"]:
+            continue
+        mass = titel_ueberschneidung(eigen["titel"], daten["titel"])
+        if mass["mass"] >= schwelle:
+            aus.append({"url": anderer, "titel": daten["titel"], **mass})
+    return sorted(aus, key=lambda z: (-z["mass"], z["url"]))[:5]
+
+
+def kannibalisierungs_rollen(root: Path = ROOT) -> dict[str, dict]:
+    """URL → {cluster, rolle, titel} aus `data/kannibalisierung_map.yaml`.
+
+    Bewusst ohne YAML-Bibliothek: Die Datei hat je Beitrag genau eine
+    `- slug:`-Zeile mit eingerückten Folgefeldern. Ein Zeilenleser ist kleiner
+    als die Abhängigkeit und im Selbsttest ohne Installation prüfbar – dieselbe
+    Begründung wie bei `weiterleitungen.yaml`.
+    """
+    pfad = Path(root) / "data" / "kannibalisierung_map.yaml"
+    if not pfad.exists():
+        return {}
+    rollen: dict[str, dict] = {}
+    cluster = ""
+    aktuell: dict | None = None
+    for zeile in pfad.read_text(encoding="utf-8", errors="replace").splitlines():
+        treffer = re.match(r"^\s*-\s*id:\s*(K\S+)", zeile)
+        if treffer:
+            cluster = treffer.group(1)
+            aktuell = None
+            continue
+        treffer = re.match(r'^\s*-\s*slug:\s*"([^"]+)"', zeile)
+        if treffer:
+            aktuell = {"cluster": cluster, "rolle": "", "titel": ""}
+            rollen[f"/posts/{treffer.group(1)}/"] = aktuell
+            continue
+        if aktuell is None:
+            continue
+        treffer = re.match(r'^\s*(rolle|titel):\s*"([^"]*)"', zeile)
+        if treffer:
+            aktuell[treffer.group(1)] = treffer.group(2)
+    return rollen
+
+
+def artikel_steckbrief(url: str, live: set[str] | None = None,
+                       root: Path = ROOT) -> dict:
+    """Was eine Redaktion in zwei Minuten entscheiden lässt – in Zahlen.
 
     „Gecrawlt, nicht indexiert“ ist die einzige Meldung im Bericht, die fast
-    immer inhaltlich begründet ist. Deshalb bekommt sie Zahlen statt Adjektive:
-    Länge, Zahl der ähnlichen Artikel im gleichen Themenfeld.
+    immer inhaltlich begründet ist. Deshalb: Länge, Themenfeld, dokumentierte
+    Rolle im Kannibalisierungs-Register und echte Titel-Überschneidungen.
     """
-    import difflib
-
     pfad = _datei_zu_url(url, root)
     if not pfad or not pfad.exists():
         return {}
     text = pfad.read_text(encoding="utf-8", errors="replace")
     _, _, body = text.partition("\n---\n")
-    woerter = len(re.findall(r"\w+", body))
-    slug = _DATUM_PRAEFIX.sub("", url.rstrip("/").split("/")[-1])
-    pillar = _pillar_karte(root).get(url)
-    aehnlich = []
-    for anderer, anderer_pillar in _pillar_karte(root).items():
-        if anderer == url:
-            continue
-        if pillar and anderer_pillar != pillar:
-            continue
-        anderer_slug = _DATUM_PRAEFIX.sub("", anderer.rstrip("/").split("/")[-1])
-        if difflib.SequenceMatcher(None, slug, anderer_slug).ratio() >= 0.45:
-            aehnlich.append(anderer)
-    return {"woerter": woerter, "pillar": pillar, "aehnlich": sorted(aehnlich)[:5]}
+    fm = _frontmatter(pfad)
+    return {
+        "woerter": len(re.findall(r"\w+", body)),
+        "titel": _fm_wert(fm, "title") or "",
+        "pillar": _fm_wert(fm, "pillar"),
+        "rolle": kannibalisierungs_rollen(root).get(url),
+        "aehnlich": themen_nachbarn(url, live, root),
+    }
+
+
+def cluster_fuer_pillar(pillar: str | None,
+                        rollen: dict[str, dict] | None = None) -> dict | None:
+    """Welches dokumentierte Cluster gehört zu diesem Themenfeld?
+
+    Die Cluster-IDs tragen den Themenfeld-Namen (`K3-frugalismus`). Diese
+    Zuordnung ist eine Ableitung, keine Erfindung: Steht das Themenfeld im
+    Cluster-Namen, ist es dasselbe Feld – sonst gibt es keinen Treffer.
+    """
+    if not pillar:
+        return None
+    rollen = rollen if rollen is not None else kannibalisierungs_rollen()
+    for eintrag in rollen.values():
+        if pillar in (eintrag.get("cluster") or ""):
+            return {"cluster": eintrag["cluster"],
+                    "beitraege": sum(1 for e in rollen.values()
+                                     if e.get("cluster") == eintrag["cluster"])}
+    return None
+
+
+def vorschlag(steckbrief: dict) -> str:
+    """Der nächste sinnvolle Schritt – aus den Zahlen, nicht aus dem Bauch.
+
+    Bewusst ein Vorschlag, keine Entscheidung: Was ein Artikel bedeuten soll,
+    entscheidet die Redaktion. Der Automat liefert nur die Begründung mit.
+    """
+    if not steckbrief:
+        return "Seite nicht im Bestand – Eintrag prüfen."
+    rolle = steckbrief.get("rolle") or {}
+    nachbarn = steckbrief.get("aehnlich") or []
+    if not rolle.get("rolle"):
+        cluster = cluster_fuer_pillar(steckbrief.get("pillar"))
+        wo = (f" im Cluster {cluster['cluster']} ({cluster['beitraege']} Artikel)"
+              if cluster else " im Kannibalisierungs-Register")
+        if steckbrief.get("pillar"):
+            wo += f", Themenfeld „{steckbrief['pillar']}“"
+        ergaenzung = ""
+        if nachbarn:
+            ergaenzung = (f" Titel-Überschneidung mit {nachbarn[0]['url']} "
+                          f"({', '.join(nachbarn[0]['gemeinsam'])}) – Rollen trennen.")
+        return (f"Rolle festlegen{wo}: Diese Seite hat dort keinen Eintrag." + ergaenzung)
+    if nachbarn:
+        return ("Kannibalisierung belegt: "
+                + ", ".join(f"{n['url']} ({', '.join(n['gemeinsam'])})"
+                            for n in nachbarn[:2])
+                + " – Titel/Description trennen, Rolle schärfen.")
+    return ("Keine Titel-Überschneidung mit anderen Live-Artikeln – die Ursache liegt "
+            "außerhalb der Kannibalisierung (Suchabsicht, Nachfrage, Crawl). "
+            "Erst messen, dann umbauen.")
 
 
 def entwurfs_slugs(root: Path = ROOT) -> dict[str, str]:
@@ -1882,17 +2053,222 @@ def ist_asset(url: str) -> bool:
     return bool(_ASSET.search(url.split("?")[0].split("#")[0]))
 
 
+# --------------------------------------------------------------------------
+#  Entscheidungs-Register, Fristen und Wirkungsprüfung
+#  (aus „prüfen“ wird „entschieden – und nach 30 Tagen nachgesehen“)
+# --------------------------------------------------------------------------
+
+ENTSCHEIDUNGEN = ABDECKUNG / "entscheidungen.yaml"
+TRIAGE_VERLAUF = ABDECKUNG / "triage_verlauf.jsonl"
+
+# Wie lange darf eine Aufgabe offen sein, bevor sie eskaliert? Eine Frist ist
+# der Unterschied zwischen einer Liste und einem Vorsatz: Ohne sie sieht ein
+# 30 Tage alter P2 genauso aus wie ein neuer.
+SLA_TAGE = {"P0": 1, "P1": 7, "P2": 30}
+RANG = ("P0", "P1", "P2", "P3")
+
+
+def entscheidungen(pfad: Path | None = None) -> dict[str, dict]:
+    """URL → dokumentierte Entscheidung.
+
+    Zeilenform wie in `weiterleitungen.yaml` (eine Zeile je Eintrag, ohne
+    YAML-Abhängigkeit):
+
+        - {url: "/posts/…/", entscheidung: "Rolle festlegen", am: "2026-10-26",
+           wiedervorlage: "2026-11-25", erwartung: "indexiert",
+           eigentuemer: "redaktion", begruendung: "…"}
+    """
+    pfad = Path(pfad or ENTSCHEIDUNGEN)
+    if not pfad.exists():
+        return {}
+    aus: dict[str, dict] = {}
+    for zeile in pfad.read_text(encoding="utf-8", errors="replace").splitlines():
+        if not zeile.strip().startswith("- {"):
+            continue
+        eintrag = dict(re.findall(r'(\w+):\s*"([^"]*)"', zeile))
+        if eintrag.get("url"):
+            aus[eintrag["url"]] = eintrag
+    return aus
+
+
+def entscheidung_eintragen(url: str, entscheidung: str, begruendung: str = "",
+                           wiedervorlage: str | None = None,
+                           erwartung: str = "indexiert",
+                           eigentuemer: str = "redaktion",
+                           heute: dt.date | None = None,
+                           pfad: Path | None = None) -> dict:
+    """Schreibt eine Entscheidung ins Register – mit Frist und Erwartung.
+
+    Eine Entscheidung ohne Frist und ohne Erwartung ist nicht prüfbar. Beides
+    wird deshalb mitgeschrieben; die Frist folgt der SLA des Prioritätsniveaus
+    (P2 = 30 Tage), wenn keine genannt ist.
+    """
+    heute = heute or dt.date.today()
+    pfad = Path(pfad or ENTSCHEIDUNGEN)
+    wiedervorlage = wiedervorlage or (heute + dt.timedelta(days=SLA_TAGE["P2"])).isoformat()
+    for feld, wert in (("am", heute.isoformat()), ("wiedervorlage", wiedervorlage)):
+        try:
+            dt.date.fromisoformat(str(wert)[:10])
+        except ValueError:
+            raise ValueError(f"{feld} muss ein Datum JJJJ-MM-TT sein, war: {wert!r}")
+    werte = {"url": url, "entscheidung": entscheidung, "am": heute.isoformat(),
+             "wiedervorlage": wiedervorlage, "erwartung": erwartung,
+             "eigentuemer": eigentuemer,
+             "begruendung": begruendung or "ohne Begründung eingetragen"}
+    neu = "- {" + ", ".join(f'{k}: "{v}"' for k, v in werte.items()) + "}"
+    kopf = (
+        "# Entscheidungs-Register der GSC-Triage\n"
+        "#\n"
+        "# Hier steht, was mit einer gemeldeten URL passiert ist – und wann\n"
+        "# nachgesehen wird, ob es gewirkt hat. Der Automat schlägt vor\n"
+        "# (Vorschlag je Zeile in redaktions_queue.md), entschieden wird hier.\n"
+        "#\n"
+        "# Felder: url · entscheidung · am · wiedervorlage · erwartung\n"
+        "#         (indexiert | impressionen | keine) · eigentuemer · begruendung\n"
+        "#\n"
+        "# Nach Ablauf der Wiedervorlage prüft `--triage` die Wirkung:\n"
+        "#   lastmod der Seite > Entscheidungsdatum → Änderung ist live,\n"
+        "#   Indexierung erneut anfragen (P2).\n"
+        "#   lastmod unverändert                  → Entscheidung nicht umgesetzt (P1).\n"
+        "#   URL nicht mehr in der Liste          → Wirkung belegt, Eintrag schließen (P3).\n"
+        "\n")
+    zeilen = []
+    if pfad.exists():
+        zeilen = [z for z in pfad.read_text(encoding="utf-8").splitlines()
+                  if f'url: "{url}"' not in z]
+    else:
+        zeilen = kopf.rstrip("\n").splitlines()
+        if zeilen and zeilen[-1].strip():
+            zeilen.append("")
+    zeilen.append(neu)
+    pfad.parent.mkdir(parents=True, exist_ok=True)
+    pfad.write_text("\n".join(zeilen) + "\n", encoding="utf-8")
+    return werte
+
+
+def wirkung_pruefen(url: str, eintrag: dict, live: set[str],
+                    root: Path = ROOT) -> dict:
+    """Hat die Entscheidung gewirkt? Beleg: lastmod der Seite gegen das Datum.
+
+    Das ist bewusst nur EIN Beleg. Ob Google die Seite inzwischen indexiert,
+    sagt allein der nächste Export – aber ob die Redaktion überhaupt etwas
+    geändert hat, weiß das Repo selbst.
+    """
+    if url not in live:
+        return {"status": "nicht_live", "seit": "",
+                "text": "Seite ist nicht mehr live – Eintrag prüfen und schließen."}
+    pfad = _datei_zu_url(url, root)
+    fm = _frontmatter(pfad) if pfad else ""
+    letzte = (_fm_wert(fm, "lastmod") or _fm_wert(fm, "date") or "")[:10]
+    am = (eintrag.get("am") or "")[:10]
+    if letzte and am and letzte > am:
+        return {"status": "geaendert", "seit": letzte,
+                "text": f"Seite wurde am {letzte} geändert (Entscheidung {am})."}
+    return {"status": "unveraendert", "seit": letzte,
+            "text": (f"Seite steht seit {letzte or '?'} unverändert – die Entscheidung "
+                     f"vom {am or '?'} ist noch nicht umgesetzt.")}
+
+
+def offen_seit(url: str, verlauf: list[dict],
+               heute: dt.date) -> int | None:
+    """Seit wie vielen Tagen steht diese URL schon als Aufgabe in der Liste?"""
+    tage = [e.get("datum") for e in verlauf if e.get("url") == url and e.get("datum")]
+    if not tage:
+        return None
+    try:
+        return (heute - dt.date.fromisoformat(min(tage)[:10])).days
+    except ValueError:
+        return None
+
+
+def verlauf_laden(pfad: Path | None = None) -> list[dict]:
+    pfad = Path(pfad or TRIAGE_VERLAUF)
+    if not pfad.exists():
+        return []
+    aus = []
+    for zeile in pfad.read_text(encoding="utf-8", errors="replace").splitlines():
+        zeile = zeile.strip()
+        if not zeile:
+            continue
+        try:
+            eintrag = json.loads(zeile)
+        except ValueError:
+            continue
+        if eintrag.get("url") and eintrag.get("datum"):
+            aus.append(eintrag)
+    return aus
+
+
+def verlauf_schreiben(zeilen: list[dict], datum: dt.date,
+                      pfad: Path | None = None) -> int:
+    """Schreibt den heutigen Stand fort – einmal je URL und Tag. Gibt Neuzugänge."""
+    pfad = Path(pfad or TRIAGE_VERLAUF)
+    bekannt = {(e.get("datum"), e.get("url")) for e in verlauf_laden(pfad)}
+    neu = []
+    for z in zeilen:
+        if z["prioritaet"] not in ("P0", "P1", "P2"):
+            continue
+        schluessel = (datum.isoformat(), z["url"])
+        if schluessel in bekannt:
+            continue
+        bekannt.add(schluessel)
+        neu.append({"datum": datum.isoformat(), "url": z["url"],
+                    "prioritaet": z["prioritaet"], "aktion": z.get("aktion", "")})
+    if neu:
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        with pfad.open("a", encoding="utf-8") as fh:
+            for eintrag in neu:
+                fh.write(json.dumps(eintrag, ensure_ascii=False) + "\n")
+    return len(neu)
+
+
+def eskalieren(zeilen: list[dict], verlauf: list[dict],
+               heute: dt.date) -> list[str]:
+    """Setzt Alter und eskaliert überfällige Aufgaben eine Stufe hoch.
+
+    Ohne diesen Schritt ist eine Priorität eine Meinung vom Tag der Erstellung.
+    Rückgabe sind die eskalierten URLs – für die Zusammenfassung im Bericht.
+    """
+    eskaliert = []
+    for z in zeilen:
+        if z["prioritaet"] == "P3":
+            z["alter_tage"] = None
+            continue
+        seit = offen_seit(z["url"], verlauf, heute)
+        z["alter_tage"] = seit
+        grenze = SLA_TAGE.get(z["prioritaet"])
+        if seit is None or grenze is None or seit <= grenze:
+            continue
+        neu = RANG[max(0, RANG.index(z["prioritaet"]) - 1)]
+        z["aktion"] = f"{z['aktion']} · überfällig seit {seit} Tagen (SLA {grenze})"
+        z["prioritaet"] = neu
+        eskaliert.append(z["url"])
+    return eskaliert
+
+
 def triage(urls: list[dict], wahrheit: dict, kenn: dict,
-           verlinkung: dict | None = None) -> dict:
+           verlinkung: dict | None = None, heute: dt.date | None = None,
+           verlauf: list[dict] | None = None,
+           register: dict[str, dict] | None = None,
+           root: Path = ROOT) -> dict:
     """Macht aus gemeldeten URLs eine abarbeitbare Liste.
 
     Eingabe ist die Detail-Liste der Search Console (`{"url", "grund"}`), wie
     `lade_export` sie liefert. Jede URL bekommt genau eine Aktion, eine
-    Priorität und einen Beleg – und, wo möglich, einen Weiterleitungsvorschlag.
-    Einträge, die der Bestand schon entschieden hat, werden als solche geführt:
-    Eine Triage, die bereits getroffene Entscheidungen erneut vorschlägt, wird
-    nach dem zweiten Lauf ignoriert.
+    Priorität, einen Vorschlag und einen Beleg.
+
+    Drei Dinge machen aus der Liste einen Kreislauf statt einer Momentaufnahme:
+
+    * **Register** (`data/gsc/abdeckung/entscheidungen.yaml`): Was entschieden
+      wurde, wird nicht erneut vorgeschlagen – es wird auf Wirkung geprüft.
+    * **Frist** (`SLA_TAGE`): Jede offene Aufgabe hat ein Alter; überfällige
+      steigen eine Stufe. Ohne Frist ist „P2" nur ein Wort.
+    * **Wirkungsprüfung**: Nach der Wiedervorlage entscheidet der lastmod der
+      Seite, ob die Entscheidung umgesetzt wurde oder nur beschlossen.
     """
+    heute = heute or dt.date.today()
+    register = register if register is not None else entscheidungen()
+    verlauf = verlauf if verlauf is not None else verlauf_laden()
     live = set(wahrheit["indexierbar"])
     weiter = wahrheit["weiterleitungen"]
     entfallen = wahrheit["entfallen"]
@@ -1908,23 +2284,38 @@ def triage(urls: list[dict], wahrheit: dict, kenn: dict,
         prio, aktion, hinweis = AKTION.get(schluessel, AKTION["unknown"])
         ziel = None
         beleg = ""
+        ratschlag = ""
+        # Ein Eintrag im Register schlägt jede Automatik: Entscheidungen werden
+        # nicht neu vorgeschlagen, sondern auf Wirkung geprüft.
+        if url in register:
+            prio, aktion, beleg = _register_zeile(url, register[url], live, heute, root)
         # „Wird gebaut“ heißt nicht „ist erledigt“: Eine Seite, die Google
         # gecrawlt und trotzdem nicht indexiert hat, ist der interessanteste
         # Fall im Bericht – sie braucht eine redaktionelle Entscheidung.
         braucht_redaktion = schluessel in ("crawled_not_indexed",
                                            "discovered_not_indexed",
                                            "duplicate_canonical", "soft_404")
-        if url in live and not braucht_redaktion:
+        if url in register:
+            pass
+        elif url in live and not braucht_redaktion:
             prio, aktion = "P3", "im Bestand – nichts tun"
             beleg = "URL wird gebaut und steht in der Sitemap."
         elif url in live and schluessel == "crawled_not_indexed":
             prio, aktion = "P2", "Redaktion prüfen (gecrawlt, nicht indexiert)"
-            steckbrief = artikel_steckbrief(url)
+            steckbrief = artikel_steckbrief(url, live, root)
             beleg = ("Google hat die Seite geholt und nicht in den Index genommen – "
                      "Substanz, Einzigartigkeit und Absicht prüfen.")
             if steckbrief:
-                beleg += (f" {steckbrief['woerter']} Wörter, "
-                          f"{len(steckbrief['aehnlich'])} ähnliche Titel im Themenfeld.")
+                beleg += f" {steckbrief['woerter']} Wörter"
+                rolle = steckbrief.get("rolle") or {}
+                if rolle.get("rolle"):
+                    beleg += (f", Rolle im Cluster {rolle.get('cluster')}: "
+                              f"„{rolle['rolle']}“")
+                else:
+                    beleg += ", keine Rolle im Kannibalisierungs-Register"
+                beleg += (f", {len(steckbrief['aehnlich'])} Titel-Überschneidung(en) "
+                          "mit Live-Artikeln.")
+                ratschlag = vorschlag(steckbrief)
             if url in ohne_inlink:
                 prio = "P1"
                 beleg += " Kein redaktioneller Inlink im Bestand."
@@ -1939,7 +2330,7 @@ def triage(urls: list[dict], wahrheit: dict, kenn: dict,
             beleg = ("Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; "
                      "ein Indexanspruch besteht nicht.")
         elif schluessel == "not_found":
-            vorschlag = vorschlaege([url], wahrheit)[0]
+            vorschlag_weiter = vorschlaege([url], wahrheit)[0]
             if nachfrage.get(url):
                 prio, aktion = "P1", "Weiterleitung prüfen (Nachfrage belegt)"
                 beleg = (f"{nachfrage[url]['impressionen']} Impressionen bei Position "
@@ -1948,9 +2339,10 @@ def triage(urls: list[dict], wahrheit: dict, kenn: dict,
                 slug = entwuerfe[_DATUM_PRAEFIX.sub("", url.rstrip("/").split("/")[-1])]
                 prio, aktion = "P1", "Seite liegt als Entwurf – veröffentlichen"
                 beleg = f"`content/posts/{slug}/` ist `draft: true`; die Seite existiert."
-            elif vorschlag.get("vorschlag"):
-                prio, aktion, ziel = "P2", f"Vorschlag ({vorschlag['weg']})", vorschlag["vorschlag"]
-                beleg = f"Slug-Deckung, Sicherheit {vorschlag['sicherheit']}."
+            elif vorschlag_weiter.get("vorschlag"):
+                prio, aktion = "P2", f"Vorschlag ({vorschlag_weiter['weg']})"
+                ziel = vorschlag_weiter["vorschlag"]
+                beleg = f"Slug-Deckung, Sicherheit {vorschlag_weiter['sicherheit']}."
             elif not url.startswith(("/posts/", "/pillar/")):
                 prio, aktion = "P3", "belassen (keine Inhalts-URL)"
                 beleg = "Keine Inhaltsseite – Taxonomie, Asset oder Fremdpfad."
@@ -1966,10 +2358,31 @@ def triage(urls: list[dict], wahrheit: dict, kenn: dict,
             beleg = "Steht so im Inhalt (robotsNoIndex: true)."
         zeilen.append({"url": url, "grund": grund, "schluessel": schluessel,
                        "prioritaet": prio, "aktion": aktion, "ziel": ziel,
-                       "beleg": beleg or hinweis})
+                       "beleg": beleg or hinweis, "vorschlag": ratschlag})
 
-    rang = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
-    zeilen.sort(key=lambda z: (rang.get(z["prioritaet"], 9), z["url"]))
+    # Ein Register-Eintrag zu einer URL, die in dieser Liste nicht mehr auftaucht,
+    # ist der beste Beleg, den es gibt: Die Meldung ist weg. Also wird er
+    # geschlossen statt vergessen – aber nur, wenn er fällig ist.
+    gemeldet = {z["url"] for z in zeilen}
+    wirkungslos = []
+    for url, eintrag in register.items():
+        if url in gemeldet:
+            continue
+        faellig = (eintrag.get("wiedervorlage") or "")[:10]
+        if not faellig or heute.isoformat() < faellig:
+            continue
+        zeilen.append({
+            "url": url, "grund": "nicht mehr gemeldet", "schluessel": "register",
+            "prioritaet": "P3", "aktion": "Wirkung belegt – Eintrag schließen",
+            "ziel": None, "vorschlag": "",
+            "beleg": (f"Entscheidung vom {eintrag.get('am') or '?'} "
+                      f"({eintrag.get('entscheidung') or '?'}): Die URL steht nicht mehr "
+                      "in dieser Liste. Ob sie im Index ist, sagt der nächste Export."),
+        })
+        wirkungslos.append(url)
+
+    eskaliert = eskalieren(zeilen, verlauf, heute)
+    zeilen.sort(key=lambda z: (RANG.index(z["prioritaet"]), z["url"]))
     zaehler: dict[str, int] = {}
     for z in zeilen:
         zaehler[z["prioritaet"]] = zaehler.get(z["prioritaet"], 0) + 1
@@ -1979,22 +2392,74 @@ def triage(urls: list[dict], wahrheit: dict, kenn: dict,
         "offen": [z for z in zeilen if z["prioritaet"] in ("P0", "P1", "P2")],
         "entschieden": [z for z in zeilen if z["prioritaet"] == "P3"],
         "zeilen": zeilen,
+        "eskaliert": eskaliert,
+        "wirkung_belegt": wirkungslos,
+        "register_eintraege": len(register),
+        "sla": dict(SLA_TAGE),
     }
 
 
+def _register_zeile(url: str, eintrag: dict, live: set[str], heute: dt.date,
+                    root: Path = ROOT) -> tuple[str, str, str]:
+    """Eine URL aus dem Entscheidungs-Register: entschieden, fällig oder wirkt.
+
+    Die Frist ist der Kern: Vor der Wiedervorlage ist die Sache erledigt (P3),
+    danach wird geprüft, ob die Entscheidung umgesetzt wurde und ob sie wirkt.
+    """
+    aktion = eintrag.get("entscheidung") or "entschieden"
+    beleg = f"Register: {aktion}"
+    if eintrag.get("begruendung"):
+        beleg += f" – {eintrag['begruendung']}"
+    if eintrag.get("eigentuemer"):
+        beleg += f" (Eigentümer: {eintrag['eigentuemer']})"
+    wv = (eintrag.get("wiedervorlage") or "")[:10]
+    if not wv or heute.isoformat() < wv:
+        return ("P3", f"entschieden am {eintrag.get('am') or '?'}"
+                      f" (Wiedervorlage {wv or 'offen'})", beleg)
+    wirkung = wirkung_pruefen(url, eintrag, live, root)
+    if wirkung["status"] == "geaendert":
+        return ("P2", f"Wirkung prüfen: Änderung vom {wirkung['seit']} live – "
+                      "Indexierung erneut anfragen", f"{beleg} · {wirkung['text']}")
+    if wirkung["status"] == "unveraendert":
+        return ("P1", f"Entscheidung umsetzen (Wiedervorlage {wv} überschritten)",
+                f"{beleg} · {wirkung['text']}")
+    return ("P3", "Eintrag prüfen und schließen", f"{beleg} · {wirkung['text']}")
+
+
 def triage_markdown(t: dict, quelle: str) -> str:
+    """Die Triage als Tabelle – je offener Zeile mit Alter, Frist und Vorschlag.
+
+    Der Beleg steht unter der Tabelle, nicht in ihrer letzten Spalte: Eine
+    Zelle schneidet nach 80 Zeichen ab, und genau die Zahlen (Wörter, Rollen,
+    Titel-Überschneidungen) sind die Begründung.
+    """
     z = [f"## Triage ({quelle})", "",
          f"{t['anzahl']} gemeldete URLs · "
          + " · ".join(f"{k}: {v}" for k, v in t["nach_prioritaet"].items()), "",
-         "| Prio | URL | Grund | Aktion | Beleg |", "|---|---|---|---|---|"]
+         "| Prio | Alter | URL | Grund | Aktion |", "|---|---|---|---|---|"]
     for zeile in t["offen"][:80]:
         ziel = f" → `{zeile['ziel']}`" if zeile["ziel"] else ""
-        z.append(f"| {zeile['prioritaet']} | `{zeile['url']}` | {zeile['grund'][:40]} | "
-                 f"{zeile['aktion']}{ziel} | {zeile['beleg'][:80]} |")
+        alter = f"{zeile['alter_tage']} T." if zeile.get("alter_tage") is not None else "neu"
+        z.append(f"| {zeile['prioritaet']} | {alter} | `{zeile['url']}` | "
+                 f"{zeile['grund'][:40]} | {zeile['aktion']}{ziel} |")
     if len(t["offen"]) > 80:
         z.append(f"| … | *{len(t['offen']) - 80} weitere* | | | |")
     z.append("")
+    if t["offen"]:
+        z.append("### Beleg und Vorschlag je offener Zeile")
+        z.append("")
+        for zeile in t["offen"][:80]:
+            z.append(f"- **{zeile['prioritaet']}** `{zeile['url']}`")
+            z.append(f"  - Beleg: {zeile['beleg']}")
+            if zeile.get("vorschlag"):
+                z.append(f"  - Vorschlag: {zeile['vorschlag']}")
+        z.append("")
     z.append(f"Bereits entschieden (nichts zu tun): {len(t['entschieden'])}.")
+    if t.get("eskaliert"):
+        z.append(f"Überfällig (SLA) und hochgestuft: {len(t['eskaliert'])} "
+                 f"({', '.join(t['eskaliert'][:3])}).")
+    if t.get("wirkung_belegt"):
+        z.append(f"Wirkung belegt (nicht mehr gemeldet): {len(t['wirkung_belegt'])}.")
     return "\n".join(z)
 
 
@@ -3004,7 +3469,7 @@ def _mini_repo(wurzel: Path) -> Path:
 
 
 def selbsttest() -> int:
-    """70 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
+    """80 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
     ok = 0
     fehler: list[str] = []
 
@@ -3247,8 +3712,97 @@ def selbsttest() -> int:
                t4["nach_prioritaet"].get("P3") == 1
                and "Asset/Feed" in t4["zeilen"][0]["aktion"])
 
+        # --- Titel-Überschneidung statt Slug-Ähnlichkeit (Korrektur 26.10.)
+        pruefe("K69 Füllwörter erzeugen keine Kannibalisierung",
+               titel_ueberschneidung(
+                   "Dein Weg zu geringeren Monatskosten: Schritt für Schritt",
+                   "ETF-Sparplan starten: Schritt für Schritt zum Investieren"
+               )["mass"] == 0.0)
+        pruefe("K70 echte Titel-Überschneidung wird erkannt",
+               titel_ueberschneidung(
+                   "Haushaltsbuch führen: App, Excel oder Stift",
+                   "Haushaltsbuch führen mit Excel")["mass"] == 1.0)
+
+        # --- Entscheidungs-Register: entschieden ist nicht erledigt
+        regdatei = tmp / "register.yaml"
+        eintrag = entscheidung_eintragen(
+            "/posts/a/", "Rolle festlegen", "Cluster K3 hat keinen Eintrag",
+            wiedervorlage="2026-11-25", heute=dt.date(2026, 10, 26), pfad=regdatei)
+        entscheidung_eintragen("/posts/a/", "Rolle festgelegt", "zweite Fassung",
+                               wiedervorlage="2026-11-25",
+                               heute=dt.date(2026, 10, 27), pfad=regdatei)
+        gelesen = entscheidungen(regdatei)
+        pruefe("K71 Register: je URL genau ein Eintrag, Frist wird geparst",
+               eintrag["wiedervorlage"] == "2026-11-25"
+               and len(gelesen) == 1
+               and gelesen["/posts/a/"]["entscheidung"] == "Rolle festgelegt")
+
+        wh_reg = {"indexierbar": ["/posts/a/"], "weiterleitungen": {}, "entfallen": {},
+                  "top_nicht_live": [], "noindex": [], "sitemap": []}
+        t_reg = triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                       wh_reg, {}, {"ohne_ein": []}, heute=dt.date(2026, 11, 1),
+                       verlauf=[], register=gelesen, root=tmp / "leer")
+        pruefe("K72 vor der Wiedervorlage gilt die Sache als entschieden",
+               t_reg["nach_prioritaet"].get("P3") == 1
+               and "Wiedervorlage 2026-11-25" in t_reg["zeilen"][0]["aktion"])
+
+        t_faellig = triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                           wh_reg, {}, {"ohne_ein": []}, heute=dt.date(2026, 12, 2),
+                           verlauf=[], register=gelesen, root=tmp / "leer")
+        pruefe("K73 fällig und nicht umgesetzt wird P1",
+               t_faellig["nach_prioritaet"].get("P1") == 1
+               and "umsetzen" in t_faellig["zeilen"][0]["aktion"])
+
+        # Seite wurde nach der Entscheidung geändert → Änderung ist live,
+        # Google hat sie noch nicht bewertet: erneut anfragen, nicht erneut bauen.
+        aenderung = tmp / "repo-aenderung"
+        (aenderung / "content" / "posts" / "a").mkdir(parents=True)
+        (aenderung / "content" / "posts" / "a" / "index.md").write_text(
+            '---\ntitle: "A"\nlastmod: 2026-12-01\n---\n\nText\n', encoding="utf-8")
+        t_wirkung = triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                           wh_reg, {}, {"ohne_ein": []}, heute=dt.date(2026, 12, 2),
+                           verlauf=[], register=gelesen, root=aenderung)
+        pruefe("K74 nach der Änderung wird die Indexierung erneut angefragt",
+               t_wirkung["nach_prioritaet"].get("P2") == 1
+               and "erneut anfragen" in t_wirkung["zeilen"][0]["aktion"])
+
+        # --- Fristen: ohne Alter gibt es keine Eskalation
+        alt_verlauf = [{"datum": "2026-09-01", "url": "/posts/b/", "prioritaet": "P2"}]
+        t_alt = triage([{"url": "/posts/b/",
+                         "grund": "Gecrawlt – zurzeit nicht indexiert"}],
+                       {"indexierbar": ["/posts/b/"], "weiterleitungen": {},
+                        "entfallen": {}, "top_nicht_live": [], "noindex": [],
+                        "sitemap": []},
+                       {}, {"ohne_ein": []}, heute=dt.date(2026, 10, 26),
+                       verlauf=alt_verlauf, register={}, root=tmp / "leer")
+        pruefe("K75 überfällige Aufgabe steigt eine Stufe",
+               t_alt["eskaliert"] == ["/posts/b/"]
+               and "überfällig seit 55 Tagen" in t_alt["zeilen"][0]["aktion"])
+
+        # Entscheidung, die nicht mehr gemeldet wird: der beste Beleg, den es gibt
+        t_weg = triage([{"url": "/posts/anders/", "grund": "Nicht gefunden (404)"}],
+                       wh_reg, {}, {"ohne_ein": []}, heute=dt.date(2026, 12, 2),
+                       verlauf=[], register=gelesen, root=tmp / "leer")
+        pruefe("K76 nicht mehr gemeldete Entscheidung wird als Wirkung belegt geführt",
+               t_weg["wirkung_belegt"] == ["/posts/a/"])
+        regdatei.unlink()
+
+        # --- Vorschlag nennt das Cluster, Verlauf ist das Gedächtnis
+        pruefe("K77 Themenfeld wird dem Cluster zugeordnet",
+               (cluster_fuer_pillar("frugalismus") or {}).get("cluster") == "K3-frugalismus"
+               and cluster_fuer_pillar("gibtesnicht") is None)
+        verlaufdatei = tmp / "verlauf.jsonl"
+        zeilen_v = [{"url": "/posts/x/", "prioritaet": "P2", "aktion": "a"},
+                    {"url": "/posts/y/", "prioritaet": "P3", "aktion": "b"}]
+        erst = verlauf_schreiben(zeilen_v, dt.date(2026, 10, 26), verlaufdatei)
+        zweit = verlauf_schreiben(zeilen_v, dt.date(2026, 10, 26), verlaufdatei)
+        gelesen_v = verlauf_laden(verlaufdatei)
+        pruefe("K78 Verlauf zählt einmal je URL und Tag, P3 bleibt draußen",
+               erst == 1 and zweit == 0 and len(gelesen_v) == 1
+               and offen_seit("/posts/x/", gelesen_v, dt.date(2026, 11, 5)) == 10)
+
         pruefe("K64 Triage-Markdown trägt die Tabelle",
-               "| Prio | URL | Grund | Aktion | Beleg |" in triage_markdown(t, "Test"))
+               "| Prio | Alter | URL | Grund | Aktion |" in triage_markdown(t, "Test"))
         g6 = gate({"kennzahlen": {}, "widersprueche": [],
                    "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
                                           "text": "noindex ohne Vertrag"}]}}, None)
@@ -3306,6 +3860,20 @@ def main(argv: list[str] | None = None) -> int:
                    help="Sprünge im Bericht einordnen – mit Git-Beleg, wo möglich")
     p.add_argument("--ohne-git", action="store_true",
                    help="bei --ursachen keine Git-Historie lesen (schneller)")
+    p.add_argument("--entscheiden", metavar="URL",
+                   help="Entscheidung zu einer URL ins Register schreiben "
+                        "(data/gsc/abdeckung/entscheidungen.yaml)")
+    p.add_argument("--entscheidung", metavar="TEXT",
+                   help="was entschieden wurde (z. B. „Rolle festlegen: …“)")
+    p.add_argument("--begruendung", metavar="TEXT", help="warum – mit Beleg")
+    p.add_argument("--wiedervorlage", metavar="JJJJ-MM-TT",
+                   help="wann die Wirkung geprüft wird (Standard: heute + 30 Tage)")
+    p.add_argument("--erwartung", metavar="WAS", default="indexiert",
+                   help="was passieren soll: indexiert | impressionen | keine")
+    p.add_argument("--eigentuemer", metavar="WER", default="redaktion",
+                   help="wer die Entscheidung trägt (Standard: redaktion)")
+    p.add_argument("--entscheidungen", action="store_true",
+                   help="Register der Entscheidungen mit Fristen zeigen")
     p.add_argument("--selftest", action="store_true", help="offline, ohne Netz")
     args = p.parse_args(argv)
 
@@ -3350,28 +3918,90 @@ def main(argv: list[str] | None = None) -> int:
                       file=sys.stderr)
                 return 1
             wahrheit = repo_wahrheit()
+            heute = dt.date.today()
             t = triage(eintraege, wahrheit, kennzahlen(lade_snapshot(), wahrheit),
-                       redaktionelle_links())
+                       redaktionelle_links(), heute=heute)
             _json_schreiben(ABDECKUNG / "triage.json", t)
+            # Der Verlauf ist das Gedächtnis der Liste: Ohne ihn hat jede Zeile
+            # das Alter „neu“ – und eine Frist, die nie abläuft.
+            neu_im_verlauf = verlauf_schreiben(t["zeilen"], heute)
             markdown = triage_markdown(t, str(quelle))
             (ABDECKUNG / "triage.md").write_text(
                 "# Triage der Search-Console-Liste\n\n" + markdown + "\n",
                 encoding="utf-8")
             # M3: Die Redaktions-Queue ist die Schnittstelle zwischen Automat und
             # Mensch. Sie enthält nur, was eine Redaktion entscheiden kann –
-            # Technik und bereits Entschiedenes bleiben draußen.
-            queue = ["# Redaktions-Queue (aus der Triage)", ""]
+            # Technik und bereits Entschiedenes bleiben draußen. Jede Zeile
+            # trägt Frist, Alter und den Vorschlag des Automaten; entschieden
+            # wird im Register, nicht im Chat.
+            queue = ["# Redaktions-Queue (aus der Triage)", "",
+                     "Je Zeile: was zu tun ist, seit wann es offen ist, wann es",
+                     "fällig wird und was der Automat vorschlägt. Die Entscheidung",
+                     "wird mit `--entscheiden` ins Register geschrieben – dann",
+                     "verschwindet die Zeile hier und die Wirkung wird geprüft.", ""]
             for zeile in t["zeilen"]:
-                if zeile["prioritaet"] in ("P0", "P1", "P2") and \
+                if not (zeile["prioritaet"] in ("P0", "P1", "P2") and
                         zeile["schluessel"] in ("crawled_not_indexed", "soft_404",
                                                 "discovered_not_indexed",
-                                                "duplicate_canonical"):
-                    queue.append(f"- [ ] `{zeile['url']}` – {zeile['aktion']} "
-                                 f"({zeile['grund']}) · {zeile['beleg']}")
+                                                "duplicate_canonical")):
+                    continue
+                alter = (f"{zeile['alter_tage']} Tage offen"
+                         if zeile.get("alter_tage") is not None else "neu heute")
+                frist = (heute + dt.timedelta(days=SLA_TAGE.get(zeile["prioritaet"], 30)))
+                queue.append(f"- [ ] **{zeile['prioritaet']}** `{zeile['url']}` · "
+                             f"{alter} · Frist {frist.isoformat()} · {zeile['aktion']}")
+                queue.append(f"      Grund: {zeile['grund']}. Beleg: {zeile['beleg']}")
+                if zeile.get("vorschlag"):
+                    queue.append(f"      Vorschlag: {zeile['vorschlag']}")
+                queue.append(f"      Entscheidung festhalten: `python3 scripts/gsc_abdeckung.py "
+                             f"--entscheiden {zeile['url']} --entscheidung \"…\" "
+                             f"--begruendung \"…\"`")
             (ABDECKUNG / "redaktions_queue.md").write_text(
                 "\n".join(queue) + "\n", encoding="utf-8")
             print(markdown)
-            print(f"\n→ data/gsc/abdeckung/triage.json · triage.md · redaktions_queue.md")
+            if t["offen"]:
+                print(f"\nOffen: {len(t['offen'])} · Register: {t['register_eintraege']} "
+                      f"Einträge · neu im Verlauf: {neu_im_verlauf}")
+            if t["eskaliert"]:
+                print(f"⏰ Überfällig (SLA): {len(t['eskaliert'])} Aufgabe(n) "
+                      "hochgestuft – " + ", ".join(t["eskaliert"][:3]))
+            if t["wirkung_belegt"]:
+                print(f"✅ Wirkung belegt: {len(t['wirkung_belegt'])} Register-Eintrag/-Einträge "
+                      "nicht mehr gemeldet – schließen.")
+            print("\n→ data/gsc/abdeckung/triage.json · triage.md · redaktions_queue.md"
+                  " · triage_verlauf.jsonl")
+            return 0
+
+        if args.entscheiden:
+            try:
+                werte = entscheidung_eintragen(
+                    args.entscheiden, args.entscheidung or "", args.begruendung or "",
+                    args.wiedervorlage, args.erwartung or "indexiert",
+                    args.eigentuemer or "redaktion")
+            except ValueError as fehler:
+                print(f"🛑 {fehler}", file=sys.stderr)
+                return 1
+            print(f"✅ Entscheidung eingetragen: `{werte['url']}` – {werte['entscheidung']}")
+            print(f"   Frist: {werte['wiedervorlage']} · Erwartung: {werte['erwartung']}"
+                  f" · Eigentümer: {werte['eigentuemer']}")
+            print(f"   → {ENTSCHEIDUNGEN.relative_to(ROOT)}")
+            return 0
+
+        if args.entscheidungen:
+            register = entscheidungen()
+            if not register:
+                print("Kein Eintrag im Register. Nach der Triage je Zeile "
+                      "`--entscheiden <URL> --entscheidung \"…\"` aufrufen.")
+                return 0
+            heute = dt.date.today()
+            print(f"Entscheidungs-Register ({len(register)} Einträge)")
+            for url, eintrag in sorted(register.items()):
+                wv = (eintrag.get("wiedervorlage") or "")[:10]
+                faellig = bool(wv) and heute.isoformat() >= wv
+                kennung = "⏰ fällig" if faellig else f"Frist {wv or 'offen'}"
+                print(f"  {kennung:14s} {url}")
+                print(f"      {eintrag.get('entscheidung')} – "
+                      f"{eintrag.get('begruendung')}")
             return 0
 
         if args.altlasten:

@@ -419,6 +419,70 @@ jobs:
       #  Zweite Schicht: `data/gsc/*.json merge=binary` (.gitattributes) macht
       #  den Text-Merge technisch unmöglich.
       # ------------------------------------------------------------
+      # ------------------------------------------------------------
+      #  TRIAGE UND FRISTEN (26.10.2026)
+      #
+      #  Die Detail-Listen liegen im Repo, also läuft die Triage im
+      #  Tageslauf mit. Das ist der Unterschied zwischen einer Liste und
+      #  einer Steuerung: Der Verlauf (`triage_verlauf.jsonl`) zählt die
+      #  Tage, an denen eine Aufgabe offen ist – und genau dieser Verlauf
+      #  geht mit dem PR nach main. Ohne diesen Schritt würde die Frist
+      #  jede Woche bei null beginnen.
+      #
+      #  Berichtend, nicht blockierend: Eine überfällige Redaktionsaufgabe
+      #  ist kein technischer Defekt des Imports.
+      # ------------------------------------------------------------
+      - name: Triage der Detail-Listen und Fristen
+        continue-on-error: true
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          if ! compgen -G "data/gsc/abdeckung/details/*.csv" > /dev/null; then
+            {
+              echo "### 🧭 Triage"
+              echo ""
+              echo "Keine Detail-Liste im Bestand – Triage übersprungen (Regel W9)."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python3 scripts/gsc_abdeckung.py --triage > triage.log 2>&1 || true
+          tail -n 25 triage.log || true
+          python3 - <<'PY' || true
+          import json, os
+          try:
+              t = json.load(open("data/gsc/abdeckung/triage.json", encoding="utf-8"))
+          except Exception as e:
+              print(f"Triage nicht lesbar: {e}")
+              raise SystemExit(0)
+          offen = t.get("offen") or []
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 🧭 Triage der gemeldeten URLs\n\n")
+              f.write(f"{t.get('anzahl')} Zeilen · offen: **{len(offen)}** · "
+                      f"entschieden: {len(t.get('entschieden') or [])} · "
+                      f"Register: {t.get('register_eintraege')} Einträge\n\n")
+              if offen:
+                  f.write("| Prio | Alter | URL | Aktion |\n|---|---|---|---|\n")
+                  for x in offen[:15]:
+                      alter = (f"{x.get('alter_tage')} T."
+                               if x.get("alter_tage") is not None else "neu")
+                      f.write(f"| {x.get('prioritaet')} | {alter} | `{x.get('url')}` | "
+                              f"{x.get('aktion')} |\n")
+              if t.get("eskaliert"):
+                  f.write("\n> ⏰ **Überfällig (SLA)** – eine Stufe hochgestuft, weil "
+                          "die Aufgabe zu lange offen ist: "
+                          + ", ".join(f"`{u}`" for u in t["eskaliert"][:5]) + "\n")
+              if t.get("wirkung_belegt"):
+                  f.write("\n> ✅ **Wirkung belegt** – nicht mehr gemeldet, "
+                          "Register-Eintrag schließen: "
+                          + ", ".join(f"`{u}`" for u in t["wirkung_belegt"][:5]) + "\n")
+              if offen:
+                  f.write("\nEntscheidung festhalten: "
+                          "`python3 scripts/gsc_abdeckung.py --entscheiden <URL> "
+                          "--entscheidung \"…\" --begruendung \"…\"` – danach "
+                          "prüft die Triage die Wirkung.\n")
+          PY
+
       - name: Leistungsdaten prüfen, bevor sie als PR gehen
         run: |
           python3 scripts/gsc_artefakte_guard.py --selftest
