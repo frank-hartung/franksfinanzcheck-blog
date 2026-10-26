@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Im Herbst steigt die Vorfreude auf gemütliche Abende, doch gleichzeitig flattern viele Nachzahlungen für Gas ins Haus. Wenn du deine Gaskosten senken willst, lohnt sich ein gründlicher Gasvergleich, bevor die neue Heizperiode startet. Nur ein klarer Überblick verhindert böse Überraschungen und gibt dir die Sicherheit, dass du nicht mehr zahlst, als nötig.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Kosten sehen – Überblick schaffen
 
 Zuerst musst du alle wiederkehrenden Posten deines Gasvertrags erfassen. Nur so erkennst du, wo das Geld hingeht und welche Positionen verhandelbar sind.
