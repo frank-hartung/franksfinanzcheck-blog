@@ -210,7 +210,7 @@ Melde den Ausfall per E-Mail oder Kontaktformular und bewahre den Beleg. Nach me
 
 Das ist ein Einzelfall mit strengen Voraussetzungen. Hol dafür eine Beratung, statt selbst zu kündigen. Ein gekündigter Anschluss ist schwerer zu reparieren als ein laufender.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [DNS-Hack testen](../../posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/)
 **Lesetipp:** [Umzug mit Internet: Anschluss und Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/)
 
 ---

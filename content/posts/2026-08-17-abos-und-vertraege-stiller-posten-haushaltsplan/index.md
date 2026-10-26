@@ -194,7 +194,7 @@ Ein Dienst, der gegen Gebühr kündigt, ändert nichts an den Fristen. Du zahlst
 
 Zweimal im Jahr reicht. Ein Termin nach dem Jahreswechsel und einer vor der Sommerpause. Wer öfter prüft, arbeitet meist ohne echten Anlass.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Der erste eigene Haushalt](../../posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/)
 **Lesetipp:** [Haushaltsbuch führen: App, Excel oder Stift im Vergleich](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
 
 ---

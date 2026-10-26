@@ -1,0 +1,41 @@
+{
+ "funde": [],
+ "gateways": [
+  "/go/allgemein/",
+  "/go/dsl/",
+  "/go/fluege/",
+  "/go/gas/",
+  "/go/girokonto/",
+  "/go/haftpflicht/",
+  "/go/handytarife/",
+  "/go/hausrat/",
+  "/go/hunde/",
+  "/go/kfz-versicherung/",
+  "/go/kredit/",
+  "/go/kreditkarte/",
+  "/go/mietwagen/",
+  "/go/reisekrankenversicherung/",
+  "/go/reisen/",
+  "/go/strom/",
+  "/go/tagesgeld/",
+  "/go/unfallversicherung/",
+  "/go/wohngebaeudeversicherung/",
+  "/go/zahnzusatzversicherung/"
+ ],
+ "noindex_ist": [
+  "/newsletter/",
+  "/newsletter/abmelden/",
+  "/newsletter/bestaetigung/",
+  "/newsletter/praeferenzen/",
+  "/suche/"
+ ],
+ "noindex_vertrag": {
+  "/kalender/": "Veröffentlichungskalender: Funktionsfläche aus static/.",
+  "/newsletter/": "Anmeldefunnel: kein redaktioneller Inhalt, gehört nicht in den Index.",
+  "/newsletter/abmelden/": "Abmeldung: transaktionale Seite.",
+  "/newsletter/bestaetigung/": "Double-Opt-In-Bestätigung: transaktionale Seite.",
+  "/newsletter/praeferenzen/": "Präferenzen: transaktionale Seite.",
+  "/suche/": "Volltextsuche ohne eigenen Inhalt; Suchergebnisse sollen nicht indexiert werden."
+ },
+ "status": "gruen"
+}

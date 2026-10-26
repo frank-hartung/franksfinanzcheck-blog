@@ -157,7 +157,7 @@ Schreibe die wichtigsten Bedingungen auf. Bewahre Bestätigung, Zahlungsbeleg un
 
 **Faustregel:** Vergleiche eine Reise nach dem Gesamtpreis und den Bedingungen, nicht nach dem ersten Preis auf dem Bildschirm.
 
-**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/) · [Campingurlaub planen](../../posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/) · [September-Roadtrip](../../posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/)
 
 ## Häufige Fragen
 
