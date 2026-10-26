@@ -136,7 +136,7 @@ Auch das Ziel selbst bietet Sparpotenzial. Muss es die bekannte Kanaren‑Insel 
 ### Wie finde ich am besten Billigflüge für den Winter?
 Nutze eine Kombination aus großen Vergleichsportalen und den direkten Seiten der Airlines. Achte besonders auf die Wochentage Dienstag und Mittwoch. Diese sind statistisch oft günstiger als das Wochenende. Vermeide die direkte Suche in den Schulferien, wenn du zeitlich flexibel bist.
 
-### Lohnt sich ein Flugvergleich wirklich jedes Mal?
+### Lohnt sich ein Flugvergleich wirklich jedes mal?
 Ja, da die Preise in der Luftfahrtbranche extrem schwanken. Selbst innerhalb weniger Stunden kann sich ein Preis ändern. Ein Vergleich stellt sicher, dass du nicht den teuersten Anbieter erwischst. Er hilft dir auch, die versteckten Kosten für Gepäck besser zu erkennen.
 
 ### Sind Last‑Minute‑Flüge im Winter günstiger?

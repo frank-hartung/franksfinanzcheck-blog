@@ -116,7 +116,7 @@ Die Kombination aus Tarifoptimierung und Verbrauchsreduktion maximiert deine Mö
 | Abschlag zu hoch wählen | Geld liegt gebunden | Abschlag an tatsächlichen Verbrauch anpassen |
 | Einmalige Bonusangebote ohne Mindestlaufzeit | Bindung an teureren Tarif | Bedingungen genau lesen |
 
-Der größte Hebel liegt oft im Gesamtbild, nicht im einzelnen Preis. Achte darauf, dass du alle Kostenpositionen berücksichtigst und die Vertragsbedingungen verstehst.
+Der größte Hebel liegt oft im Gesamtbild, nicht im Einzelnen Preis. Achte darauf, dass du alle Kostenpositionen berücksichtigst und die Vertragsbedingungen verstehst.
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

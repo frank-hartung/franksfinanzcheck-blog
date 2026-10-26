@@ -30,7 +30,7 @@ Deutschland
 
 FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen Verbindung zum Kreditvergleichsportal FINANZCHECK.de. Trotz der ähnlich klingenden Namen handelt es sich um unterschiedliche, voneinander unabhängige Anbieter. Auf franksfinanzcheck.de werden Kredite, Konten und Versicherungen nicht selbst angeboten; ein Vertrag kommt – wenn du einem gekennzeichneten Partnerlink folgst – ausschließlich mit dem dort genannten Anbieter zustande.
 
-FranksFinanzcheck ist ein redaktioneller Ratgeber. Der Betreiber ist weder Kreditinstitut noch Darlehens- oder Versicherungsvermittler; Anfragen zu Kreditanträgen, Kontoeröffnungen oder Versicherungsverträgen richte bitte an den jeweiligen Anbieter. Wer für vermittelte Versicherungsangebote verantwortlich ist, steht im folgenden Abschnitt.
+FranksFinanzcheck ist ein redaktioneller Ratgeber. Der Betreiber ist weder Kreditinstitut noch Darlehens- oder Versicherungsvermittler; Anfragen zu Kreditanträgen, Kontoeröffnungen oder Versicherungsverträgen richte bitte an den jeweiligen Anbieter. Wer für vermittelte Versicherungsangebote verantwortlich ist, steht im Folgenden Abschnitt.
 
 ---
 
