@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T16:35:44Z",
+  "generated_at": "2026-10-26T17:10:50Z",
   "modus": "kandidaten",
-  "commit": "4870bee45c19f06ffa6034e6f4d10cddcc77b1c8",
+  "commit": "5ba9969d171aeb68be96ffebdc0261eaf6c50804",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -1090,7 +1090,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "567ccdfb834776289c4282d35fb4f74f7a363b3a407d9358c3264c7a1c46f02d",
