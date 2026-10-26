@@ -410,6 +410,10 @@ class VerhaltensSimulation(unittest.TestCase):
             # er den Issue-Body nicht steuern kann – ein Test mit einem braven
             # Namen würde genau die Lücke nicht prüfen.
             # Offsite-Backup: WF-9E5A / #761 (Einrichtungs- und Fristklasse).
+            # 26.10.2026 (WF-E813-Folgebefund): „Cloudflare-Worker deployen“
+            # und „CodeQL-Sicherheitswache“ waren still rot, ohne Meldung –
+            # beide gehören jetzt zur Wacht-Liste und bekommen ihre eigene
+            # Triage in der Simulation geprüft.
             boeser_name = "Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile"
             # „Sicherheits-Wache": WF-E813 (15.10.2026) – die Simulation prüft,
             # dass dieser Kanal seine eigene Triage bekommt und nicht den
@@ -425,7 +429,9 @@ class VerhaltensSimulation(unittest.TestCase):
                                          "Offsite-Backup",
                                          "Sicherheits-Wache",
                                          "Affiliate-Integritäts-Wache (täglich)",
-                                         "Content-Reserve (täglicher Vorrat)", boeser_name)}
+                                         "Content-Reserve (täglicher Vorrat)",
+                                         "Cloudflare-Worker deployen",
+                                         "CodeQL-Sicherheitswache", boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)
