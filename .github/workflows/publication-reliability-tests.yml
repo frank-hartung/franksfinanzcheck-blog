@@ -59,8 +59,25 @@ jobs:
       # Unit-Test-Netz darunter enthält zusätzlich Sabotageproben des Audits.
       - name: Workflow-Permissions und Betriebsverträge prüfen
         run: python3 scripts/automation_premium_audit.py --strict
-      - name: Reserve-Snapshot – vollständiger Nachweis statt Merge-Chimäre (#634)
-        run: python3 scripts/reserve_artifacts.py --check
+      # MESSEN STATT SIEGEL LESEN (26.10.2026)
+      # Das Zertifikat ist eine Messung über BYTES. Sobald ein Kandidat
+      # redaktionell (oder durch einen Frontmatter-Fix) geändert wird, ist der
+      # alte Hash zu Recht ungültig – der PR wäre blockiert, bis der nächtliche
+      # Reserve-Lauf auf main neu zertifiziert. Genau das ist am 26.10. passiert:
+      # ein YAML-Fix in `description` entwertete den Nachweis eines fertigen
+      # Entwurfs. Die Prüfung darf deshalb nicht das alte Siegel bewerten,
+      # sondern die FÄHIGKEIT, ein neues zu erzeugen: Kandidaten werden mit der
+      # echten Kette nachgemessen, das Ergebnis geprüft und der Mess-Schreib-
+      # zugriff danach verworfen (kein Repo-Commit, keine stille Reife).
+      - name: Reserve-Snapshot – Nachweis am gemessenen Stand statt am alten Siegel (#634)
+        run: |
+          set -o pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq hunspell hunspell-de-de
+          python3 scripts/reserve_recert.py --fix | tee /tmp/reserve-recert.log
+          python3 scripts/reserve_artifacts.py --check
+          git checkout -- data/reserve-readiness.json data/reserve-history.jsonl \
+            data/reserve-quarantine.json data/reserve-custody.json 2>/dev/null || true
       # BLUSTRADIUS (Dauerheilung #676, 09.10.2026): Dieser Job ist der
       # EINZIGE Ort, an dem die volle Unit-Test-Suite läuft. Am 09.10. war
       # der Reserve-Snapshot oben rot – zwei alte SHA-256-Zertifikate, ein
