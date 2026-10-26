@@ -30,6 +30,13 @@
 // tatsächlich gebaut wurde: alle Werkzeugseiten aus `public/werkzeuge/`
 // plus Hub, Cockpit, Suche, Rechtsseiten und der neueste Artikel.
 // Eine neue Werkzeugseite ist damit automatisch im Gate.
+//
+// SEIT 26.10.2026 AUCH DIE RATGEBER-WELTEN (public/pillar/*):
+// Genau dort stand der dritte Befund derselben Klasse – 68 Karten mit
+// `aria-label="Weiterlesen: <Titel>"`, die Datum, Anriss und „Jetzt lesen"
+// verschwiegen. Die feste Seitenliste kannte die Pillar-Seiten nicht, also
+// sah axe sie nie. Jetzt kommen sie automatisch aus dem Build; die Spec
+// prüft, dass mindestens sechs gebaut wurden.
 // ============================================================
 
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
@@ -61,6 +68,22 @@ function werkzeugSeiten() {
     .filter((e) => e.isDirectory() && e.name !== 'page')
     .filter((e) => existsSync(path.join(ordner, e.name, 'index.html')))
     .map((e) => `/werkzeuge/${e.name}/`)
+    .sort();
+}
+
+/**
+ * Ratgeber-Welten automatisch aus dem Build. Sie tragen die kommerziell
+ * wichtigsten Seiten und die Karten-Grids (`.ff-pc-card`), die in der festen
+ * Liste nie auftauchten – der Grund, warum der dritte 2.5.3-Befund monatelang
+ * unsichtbar blieb.
+ */
+function ratgeberSeiten() {
+  const ordner = path.join(PUBLIC, 'pillar');
+  if (!existsSync(ordner)) return [];
+  return readdirSync(ordner, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .filter((e) => existsSync(path.join(ordner, e.name, 'index.html')))
+    .map((e) => `/pillar/${e.name}/`)
     .sort();
 }
 
@@ -166,7 +189,7 @@ async function pruefeSeite(page, testInfo, pfad) {
   return ergebnis;
 }
 
-const seiten = [...festSeiten(), ...werkzeugSeiten()];
+const seiten = [...festSeiten(), ...werkzeugSeiten(), ...ratgeberSeiten()];
 
 test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
   for (const pfad of seiten) {
@@ -181,6 +204,52 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
   test('keine WCAG-Verstöße im neuesten Artikel', async ({ page }, testInfo) => {
     const pfad = await newestArticlePath(page);
     await pruefeSeite(page, testInfo, pfad);
+  });
+
+  // ---------------------------------------------------------------
+  // WCAG 2.5.3 (Label in Name) – WIRKUNG, nicht Attribut
+  // ---------------------------------------------------------------
+  // Die Lehre aus dem 26.10.2026: Ein Test, der `aria-label` auf Existenz
+  // prüft, hält einen falschen Namen für in Ordnung. Diese Tests lesen den
+  // Namen, den der Screenreader tatsächlich bekommt, und verlangen den
+  // sichtbaren Text darin.
+  test('Marken-Link im Kopf: Name ist der sichtbare Descriptor-Text', async ({ page }) => {
+    await page.goto('/');
+    const marke = page.locator('header.header a.ff-brand').first();
+    await expect(marke).toHaveAccessibleName(/Unabhängige Fixkosten-Redaktion/);
+    // Kein Override: Der Name kommt aus dem Inhalt und kann nicht driften.
+    // (Der Descriptor ist auf dem Telefon nur visuell versteckt – er bleibt
+    // im Accessibility-Tree, sonst hätte der Link gar keinen Namen.)
+    expect(await marke.getAttribute('aria-label'), 'kein aria-label-Override').toBeNull();
+  });
+
+  test('Weiterlese-Karten: Name enthält Datum und Titel', async ({ page }) => {
+    const pfad = await newestArticlePath(page);
+    await page.goto(pfad);
+    const karten = page.locator('.ff-related-card');
+    const anzahl = await karten.count();
+    expect(anzahl, 'Weiterlese-Karten im neuesten Artikel').toBeGreaterThan(0);
+    for (let i = 0; i < anzahl; i += 1) {
+      const karte = karten.nth(i);
+      expect(await karte.getAttribute('aria-label'), `Karte ${i + 1}: kein Override`).toBeNull();
+      const titel = (await karte.locator('.ff-related-card__heading').innerText()).trim();
+      const datum = (await karte.locator('.ff-related-card__date').innerText()).trim();
+      await expect(karte).toHaveAccessibleName(new RegExp(titel, 'i'));
+      await expect(karte).toHaveAccessibleName(new RegExp(datum.replace(/\./g, '\\.')));
+    }
+  });
+
+  test('Pillar-Karten: Name kommt aus dem Inhalt, nicht aus einem Override', async ({ page }) => {
+    await page.goto('/pillar/strom-sparen/');
+    const karten = page.locator('a.ff-pc-card');
+    const anzahl = await karten.count();
+    expect(anzahl, 'Pillar-Karten im Ratgeber Strom & Gas').toBeGreaterThan(0);
+    for (let i = 0; i < Math.min(anzahl, 3); i += 1) {
+      const karte = karten.nth(i);
+      expect(await karte.getAttribute('aria-label'), `Karte ${i + 1}: kein Override`).toBeNull();
+      const titel = (await karte.locator('.ff-pc-card__title').innerText()).trim();
+      await expect(karte).toHaveAccessibleName(new RegExp(titel, 'i'));
+    }
   });
 
   test('die Ausnahmen-Registry ist begründet, datiert und läuft ab', async () => {
@@ -217,4 +286,10 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
 // Kein stilles Vorbeilaufen: Wer eine Werkzeugseite baut, bekommt sie geprüft.
 test('jede gebaute Werkzeugseite landet im A11y-Gate', async () => {
   expect(werkzeugSeiten().length, 'mindestens neun Werkzeugseiten im Build').toBeGreaterThanOrEqual(9);
+});
+
+// Dasselbe für die Ratgeber-Welten: fällt eine aus dem Build, ist das ein
+// Befund und keine stille Lücke im Gate.
+test('jede gebaute Ratgeber-Welt landet im A11y-Gate', async () => {
+  expect(ratgeberSeiten().length, 'mindestens sechs Ratgeber-Welten im Build').toBeGreaterThanOrEqual(6);
 });

@@ -77,6 +77,10 @@
   {{- if .Content }}
   <div class="post-content md-content">
     {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- /* Dieselbe Markdown-Aufgabenliste wie in den Artikeln: Das Kästchen
+           braucht einen Platz im Accessibility-Baum (bzw. keinen) – sonst
+           meldet axe `label` (critical) auf /pillar/mietwagen/. */ -}}
+    {{- $articleContent = partial "aufgabenlisten_a11y.html" $articleContent -}}
     {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
     {{- partial "sectioned_content.html" ($articleContent | safeHTML) -}}
   </div>
@@ -108,8 +112,7 @@
         {{- $rFile = path.Base $rCover }}{{ $rDir = path.Dir $rCover }}
         {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile }}
       {{- end }}
-      <a href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}" aria-label="Weiterlesen: {{ .Title | plainify }}"
-         class="ff-pc-card">
+      <a href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}" class="ff-pc-card">
         {{- if $rCover }}
         <span class="ff-pc-card__cover">
           <picture>

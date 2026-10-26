@@ -227,8 +227,15 @@ def check_worlds(page: Page, data: dict, public: Path, base_path: str, *, home=F
         if not any(n.tag == "h1" for n in target_page.nodes) or any(
                 n.tag == "meta" and (n.attrs.get("http-equiv") or "").lower() == "refresh" for n in target_page.nodes):
             errors.append(f"{label}: Ziel ist kein veröffentlichter Ratgeber.")
+        # Gezählt wird über die STRUKTUR (Klasse), nicht über einen
+        # Accessible-Name-Override: Das frühere aria-label „Weiterlesen: …"
+        # an genau diesen Karten war selbst ein WCAG-2.5.3-Verstoß (der
+        # sichtbare Anriss fehlte im Namen) und ist am 26.10.2026 entfernt.
+        # Ein Gate, das seine Zahl aus dem Fehler zieht, den es verhindern
+        # soll, meldete die Heilung als Rückfall – und bliebe blind, sobald
+        # eine Karte ohne Override gebaut wird.
         article_links = [n for n in target_page.nodes if n.tag == "a"
-                         and (n.attrs.get("aria-label") or "").startswith("Weiterlesen:")]
+                         and n.has_class("ff-pc-card")]
         counts = [n for n in page.by_class("ff-topic-count") if n.inside(card)]
         count = len(article_links)
         expected = f"{count} Artikel" if count else "Basis-Ratgeber"

@@ -3441,6 +3441,18 @@ details.toc a {
   font-size: 0.88rem;
 }
 
+/* Tastaturerreichbarkeit der Matrix (WCAG 2.1.1 / axe
+   `scrollable-region-focusable`): Der PaperMod-Reset macht jede Tabelle zum
+   horizontalen Scrollcontainer (`display:block; overflow-x:auto`). Eine
+   scrollbare Fläche MUSS per Tastatur erreichbar sein – die Tabellen in
+   `.ff-decision-matrix` tragen dafür seit 26.10.2026 `tabindex="0"` und einen
+   Namen. Der Fokusring kommt aus dem Marken-Token (Gelb), nicht aus dem
+   Browser-Default. */
+.ff-decision-matrix table[tabindex]:focus-visible {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: -3px;
+}
+
 .ff-decision-matrix th,
 .ff-decision-matrix td {
   padding: 14px 16px;
@@ -4300,7 +4312,24 @@ details.toc a {
 
 @media (max-width: 768px) {
   .header-nav { min-height: 70px; }
-  .ff-brand-descriptor { display: none; }
+  /* Der Descriptor ist auf dem Telefon aus Platzgründen NICHT sichtbar – aber
+     er bleibt der Accessible Name des Marken-Links. `display: none` nimmt ihn
+     aus dem Accessibility-Tree; dann hätte `a.ff-brand` (Logo ist bewusst
+     `aria-hidden`) gar keinen Namen und axe meldete `link-name` (critical) auf
+     jeder Seite im 390-px-Projekt. Deshalb: visuell versteckt, für
+     Screenreader vorhanden – WCAG 2.5.3 verlangt den sichtbaren Text im
+     Namen, zusätzlicher Text ist erlaubt. */
+  .ff-brand-descriptor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
   main.main:has(.home-info) { display: flex; flex-direction: column; }
   /* Das erste redaktionelle Cover bleibt das mobile LCP-Element. Die
      ausführliche Markenbühne folgt direkt danach; so kostet die zusätzliche

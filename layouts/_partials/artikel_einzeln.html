@@ -150,15 +150,10 @@
            Zentraler Renderer: gilt für bestehende und neue Posts. */ -}}
     {{- $tipIcon := printf `<span class="ff-article-tip-icon" aria-hidden="true">%s</span>` (partial "kurzantwort_icon.html" .) -}}
     {{- $articleContent = replace $articleContent "💡" $tipIcon -}}
-    {{- /* Aufgabenlisten (`- [ ]` im Markdown): Goldmark rendert daraus
-           `<input disabled type="checkbox">` OHNE Label. axe-core meldet das
-           als `label` (critical) – zu Recht: Ein Bedienelement ohne Namen ist
-           für Screenreader nur „Kontrollkästchen, deaktiviert“. Das Kästchen
-           ist hier Dekoration (nichts wird gespeichert, nichts ist bedienbar),
-           deshalb raus aus dem Accessibility-Baum, statt den Satz in ein
-           Label zu verwandeln. Ersetzung ist zeilenlokal und literal – kein
-           mehrzeiliges Muster (Repo-Regel gegen ReDoS, 26.10.2026). */ -}}
-    {{- $articleContent = replaceRE `(<input disabled="" type="checkbox")` `${1} aria-hidden="true" tabindex="-1"` $articleContent -}}
+    {{- /* Aufgabenlisten (`- [ ]`): eine Wahrheit für Artikel UND Pillar-Seiten
+           im Partial `aufgabenlisten_a11y.html` (Label-Befund `critical`,
+           Heilung am 26.10.2026 zusammengeführt). */ -}}
+    {{- $articleContent = partial "aufgabenlisten_a11y.html" $articleContent -}}
     {{- if not (.Param "disableAnchoredHeadings") -}}
       {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
     {{- end -}}

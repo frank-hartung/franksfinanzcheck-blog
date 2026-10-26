@@ -36,9 +36,7 @@
       {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile -}}
       {{- $rDir = path.Dir $rCover -}}
     {{- end -}}
-    <a href="{{ .Permalink }}"
-       aria-label="Weiterlesen: {{ .Title | plainify }}"
-       class="ff-related-card">
+    <a href="{{ .Permalink }}" class="ff-related-card">
       <span class="ff-related-card__media">
         {{- if $rCover -}}
           <picture>

@@ -8,7 +8,7 @@
             {{- $label_text := (site.Params.label.text | default site.Title) }}
             {{- if site.Title }}
             <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)"
-               class="ff-brand" aria-label="FranksFinanzcheck – zur Startseite">
+               class="ff-brand">
                 {{- /* FCP-/DOM-Optimierung: Logo nicht als inline SVG-Pfade in den
                      DOM injizieren. Externes, dimensioniertes SVG konkurriert dank
                      fetchpriority=low nicht mit dem LCP-Cover. */ -}}
