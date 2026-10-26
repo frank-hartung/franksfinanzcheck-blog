@@ -62,7 +62,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was Frugalismus wirklich bedeutet?
 
-Viele verbinden [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) mit einem Leben, das nur noch aus Sparzwang besteht. Das ist die schlechte Karikatur davon.
+Viele verbinden Frugalismus mit einem Leben, das nur noch aus Sparzwang besteht. Das ist die schlechte Karikatur davon.
 
 In der Praxis geht es um etwas anderes: Du gibst weniger Geld für Dinge aus, die dir wenig bedeuten, damit du mehr Geld für Dinge hast, die dir wichtig sind. Das kann ein größerer [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) sein, weniger finanzieller Stress, früheres Arbeiten in Teilzeit oder einfach mehr Luft im Alltag.
 

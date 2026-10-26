@@ -216,7 +216,7 @@ Dann kläre zusätzlich, welche Kosten für die Überziehung angefallen sind. Di
 
 Ein Screenshot ist ein guter Anfang. Besser ist ein PDF aus dem Online-Banking, weil es nicht nachträglich verändert werden kann. Speichere beides, wenn du unsicher bist.
 
-**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/) · [Bankgebühren senken](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/)
 **Lesetipp:** [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 
 ---

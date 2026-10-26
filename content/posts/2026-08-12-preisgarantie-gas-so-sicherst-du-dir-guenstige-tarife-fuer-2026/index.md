@@ -280,7 +280,7 @@ Ein guter Gastarif bleibt auch ohne großen Bonus nachvollziehbar. Er hat einen 
 
 Dein nächster Schritt: Öffne die letzte Rechnung, notiere kWh, Arbeits- und Grundpreis und starte den Vergleich ohne Bonus. Zehn ruhige Minuten sind hier mehr wert als der größte blinkende Rabatt.
 
-**Weiterlesen:** [Was eine Gaspreisgarantie schützt](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Schutz vor Preissprüngen und deine Rechte](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Was eine Gaspreisgarantie schützt](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Schutz vor Preissprüngen und deine Rechte](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Wärmepumpe vs. Gasheizung 2026](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/)
 
 ## Häufige Fragen
 

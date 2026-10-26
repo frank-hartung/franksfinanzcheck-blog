@@ -1,58 +1,24 @@
 {
   "target": 6,
-  "ready": 6,
-  "pool_size": 6,
-  "generated_at": "2026-10-25T15:38:34Z",
+  "ready": 4,
+  "pool_size": 5,
+  "generated_at": "2026-10-26T09:43:00Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
       "flesch": 66.7,
-      "measured_at": "2026-10-25T15:33:26Z",
-      "score": 0.992,
+      "measured_at": "2026-10-26T09:40:38Z",
+      "score": 0.984,
       "parts": {
-        "spelling": 0.96,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
-      "ready": true,
-      "sha256": "fd980e24d6d5e22ad6ace7446ec4970b964076bd2f0df9e16f534d33964c381c",
-      "flesch": 64.3,
-      "measured_at": "2026-10-25T15:34:21Z",
-      "score": 0.978,
-      "parts": {
-        "spelling": 1.0,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
-      "ready": true,
-      "sha256": "ea0cfacd2ac259a3adcb78a704a45e012e2c333ddc1c1b8e3eb6d99d1d1499af",
-      "flesch": 70.3,
-      "measured_at": "2026-10-25T15:35:25Z",
-      "score": 0.982,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
       }
     },
     {
@@ -60,10 +26,10 @@
       "ready": true,
       "sha256": "3a6ccf3d702f7abd37b0a6909cd46aa67fef811010eea3c31482d8f1b5d2f050",
       "flesch": 70.4,
-      "measured_at": "2026-10-25T15:36:25Z",
-      "score": 0.974,
+      "measured_at": "2026-10-26T09:41:13Z",
+      "score": 0.97,
       "parts": {
-        "spelling": 0.98,
+        "spelling": 0.96,
         "meta": 0.85,
         "structure": 1.0,
         "typography": 1.0,
@@ -77,7 +43,7 @@
       "ready": true,
       "sha256": "9e86fac5718db982c3a797361233ebe2054b35538e582249f8b48bb76dea1dea",
       "flesch": 74.1,
-      "measured_at": "2026-10-25T15:37:25Z",
+      "measured_at": "2026-10-26T09:41:47Z",
       "score": 0.974,
       "parts": {
         "spelling": 0.98,
@@ -94,10 +60,10 @@
       "ready": true,
       "sha256": "9c3ce20475581169ea2b2180c1fb7ccaa9182fba0435f8710252ddfef86865e1",
       "flesch": 64.6,
-      "measured_at": "2026-10-25T15:38:34Z",
-      "score": 0.988,
+      "measured_at": "2026-10-26T09:42:23Z",
+      "score": 0.98,
       "parts": {
-        "spelling": 0.94,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -105,9 +71,34 @@
         "affiliate": 1.0,
         "readability": 1.0
       }
+    },
+    {
+      "slug": "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "ready": false,
+      "sha256": "b52f438a07ed8053c5779ad8350cd02c5897b7ba6d44d14f95e8afa4acdb57a2",
+      "flesch": 66.5,
+      "measured_at": "2026-10-26T09:43:00Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
+      "details": [
+        "🛑 2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.958,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     }
   ],
   "measurement": {
-    "kind": "full"
+    "kind": "full",
+    "run_id": "40297687637",
+    "run_attempt": "1"
   }
 }

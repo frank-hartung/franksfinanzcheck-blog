@@ -185,7 +185,7 @@ Rechne es einmal durch. Bleiben 600 € ein halbes Jahr im Minus, zahlst du run
 4. **Geschenkeliste erstellen:** Notiere für jede Person eine Idee samt Höchstbetrag und kaufe gezielt nach Plan ein.
 5. **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen.
 
-**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
+**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [7 Gewohnheiten für finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)
 
 
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.

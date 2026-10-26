@@ -170,7 +170,7 @@ Mach die Liste vor der Buchung. Ergänze sie, wenn du neue Informationen bekomms
 
 **Faustregel:** Buche nicht nach dem niedrigsten Übernachtungspreis. Entscheide nach Gesamtpreis, Regeln und dem Komfort, den du wirklich nutzt.
 
-**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/) · [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/)
 
 
 Genau das ist der Hebel: Campingurlaub planen.
