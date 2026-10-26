@@ -1,0 +1,10 @@
+# n8n-Upgrade am Host (2.43.5 → 2.44.3)
+
+Der Tag in `docker-compose.yml` ist **keine** laufende Aktualisierung. Dieses Repo hat keinen Zugriff auf den Host und führt keine Datenbankmigration aus. Vor dem ersten `docker compose up -d` mit dem neuen Tag den folgenden Ablauf am n8n-Host durchführen. `n8n_data` enthält Zugangsdaten: Backups nie ins Repo, nie in GitHub-Artefakte laden.
+
+1. Wartungsfenster ankündigen, laufende Ausführungen abwarten. `docker compose -f tools/n8n/docker-compose.yml config --quiet` aus der Repo-Wurzel prüfen (benötigt die lokale `.env` und `N8N_WEBHOOK_TOKEN`). Prüfen, ob Workflows weiterhin deaktiviert sind. Release-Tag `n8n@2.44.3` ist eine Bugfix-Version; Major-Version bleibt 2.
+2. Auf dem Host **vor** dem Upgrade eine vollständige verschlüsselte Sicherung der n8n-Daten (inkl. Datenbank, Verschlüsselungsschlüssel und `.env`) an einen Ort **außerhalb** des Repos erstellen und eine Rückleseprobe durchführen. Vor der Sicherung `docker compose stop n8n`; keine Kopie einer gerade schreibenden SQLite-Datenbank. Für externe Datenbanken stattdessen deren konsistenten Dump und Wiederherstellung testen. Ohne prüfbares Backup nicht fortfahren.
+3. Image `n8nio/n8n:2.44.3` ziehen, Herkunft/Version prüfen und auf dem Host den Tag bei Bedarf per Digest fixieren. `docker compose up -d n8n`; Status/Logs kontrollieren, danach UI nur über den authentifizierten Tunnel prüfen. Ports müssen auf `127.0.0.1` bleiben. Einen Test-Webhook mit Authentifizierung und einen deaktivierten Workflow prüfen; keine produktiven Workflows blind aktivieren.
+4. Bei Fehlern: Dienst stoppen. **Nicht** einfach nur das Image zurückdrehen: Datenbankmigrationen können inkompatibel sein. Vorherigen Image-Stand **und** das verifizierte Pre-Upgrade-Backup als Paar wiederherstellen; danach Status und Webhook erneut prüfen. Vor der Wiederherstellung aktuelle Daten gesondert sichern, damit nichts unbemerkt verloren geht.
+
+Die CI prüft YAML, Abhängigkeitspins und Sicherheit; ein echter Migrationstest benötigt Host, Secrets und Backup. Bis zur Host-Abnahme ist nur der Quellstand aktualisiert, nicht die laufende Installation.

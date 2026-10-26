@@ -126,7 +126,7 @@ jobs:
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       - name: Build (minifiziert – wie im Deploy)
         uses: ./.github/actions/hugo-build

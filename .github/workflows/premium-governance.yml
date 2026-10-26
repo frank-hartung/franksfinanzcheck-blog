@@ -112,7 +112,7 @@ jobs:
       - name: Hugo installieren (Messgrundlage Core-Web-Vitals)
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       # ---------- 1) MESSEN ----------
       # Der Bau darf hier NICHT sofort abbrechen: Sein Exit-Code ist der

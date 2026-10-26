@@ -59,7 +59,7 @@ jobs:
           cache-dependency-path: tools/ff-voice-browser/package-lock.json
       - uses: ./.github/actions/install-hugo
         with:
-          version: '0.164.0'
+          version: '0.168.0'
       - name: Vertragstests und echte Hugo-Negativtests
         run: |
           python3 -m unittest discover -s scripts/tests -p 'test_themenwelten.py' -v

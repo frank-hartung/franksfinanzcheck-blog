@@ -45,7 +45,7 @@ jobs:
       - name: Hugo-Build für Sitemap-Check
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       - name: Python-Abhängigkeiten (SEO, PyYAML, Crypto, Pillow)
         # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli

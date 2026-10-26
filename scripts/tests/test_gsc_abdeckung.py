@@ -647,7 +647,11 @@ class TriageAusDateien(unittest.TestCase):
             }
             eintraege = [{"url": d["url"], "grund": Path(d["datei"]).stem}
                          for d in export["details"]]
-            t = g.triage(eintraege, wahrheit, {})
+            # Keine echte Wanduhr / produktiven Register- und Verlaufsdaten:
+            # sonst hängen fällige Altfälle an der isolierten CSV und lassen
+            # dieselbe Probe in drei Monaten 4 statt 2 Aufgaben melden.
+            t = g.triage(eintraege, wahrheit, {}, heute=TAG, verlauf=[],
+                         register={}, root=ordner)
             self.assertEqual(t["anzahl"], 2)
             self.assertTrue(all(z["prioritaet"] in ("P0", "P1", "P2", "P3")
                                 for z in t["zeilen"]))

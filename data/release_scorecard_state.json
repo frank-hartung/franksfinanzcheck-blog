@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T11:34:18Z",
+  "generated_at": "2026-10-26T14:19:50Z",
   "modus": "kandidaten",
-  "commit": "c4382e5cfb06865fc9b3a22b07145bb4b77a312a",
+  "commit": "7474269a2ab98bd8fc05811f7dc6e448dde141e5",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -73,7 +73,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "98cd1a77217897981c866d07a5aba354b0e3e170ccbc28d2e40f533b4d160acd",
+      "sha256": "257f22b773e192bf52fd2caf86f6c31941b4d5e6aa81bc110eb8e748654be179",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -87,7 +87,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "030a0119ada7e50b5ae6de97f5190e29cd02864b0355a6a94923aeec23fcee65",
@@ -158,7 +158,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "d3a524b05b8bce9b76420e8600566d0d4ea23f44030e3d82dd10fef43d378b5a",
+      "sha256": "f78103261a3bbd8010a88de5bcfda577e6462ad99fe261e33118aa83533a6212",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -172,7 +172,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "4ae75d948dfe128665deef0cfc0905f076e58c67579a99d1d0ccdfad13d34f3d",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "86e69f13b360c2ec53d6cc50ffe3bf1a7d37764465ab7e3a9f81e22b0a8724ad",
+      "sha256": "18e34d0afa3f37b9f6c65b1fc6b554fe599d6cb70f72c9497accebe6231a6993",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,10 +274,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "9e41507dd5313771c75a0d794f00ffd8d00444313aa242580a5b9ba96b1e8aa2",
+      "sha256": "3dd5501cb416346896eb10832f6dbe0ec452823ebca87989ad8750c0e1ba5363",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -291,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "65aad44b1bfe5d1618f60e582cdf0eb431d46af5b0c98bd2c3a7744a1f302de1",
@@ -464,7 +464,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-      "sha256": "41f5b3c4abbfb0e1eda2ecfdd715394a140087a691342189be8337b4e4e4cc2f",
+      "sha256": "23496e384a90eda728566226cf6e03589c1b8e90f039fbf5856a1544cd81f457",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -478,7 +478,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "9c8b083671037f142c70f179477aa5794e5fe0ee80792b3b96da4f3fd0205d24",
@@ -498,7 +498,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "14162fe906e290df74db03a84c9b27b8792edea6572f9ee094b895582dff7e05",
+      "sha256": "422f473e6927b5f4a805b9ed787a58d95d8b905eddfd47d060d8a1d11266e42b",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -512,7 +512,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "832d4e800ac1e34b16085697a7f5411bb8f311b7526ca4b05575cbdc7521f6f6",
@@ -532,7 +532,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "95ac7a476486fb1d5bb228733eff901d4cafda5c405bf2004209678b4f5c1156",
+      "sha256": "5836276f92464fd94bb433dbb821b9045f368f8ab1d46b29f56b188096791bea",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -546,7 +546,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
       "sha256": "4c84a498964c32ab91c29a083ea8be54f7bec62e8a89ecaf09b903fe72fc3505",
@@ -906,7 +906,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "608219b24481a13290334aa2998928e117ce54d8b74e1fdfa8249c14f3fab64c",
+      "sha256": "b6d9c0972e679c57cd081a8acfd361f4a72c070c07294336e96c5275752b9040",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -920,7 +920,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "fc70b60b29e0658f002c6c5ed32184bdc943e4b817852dcd6df5d55932e7c847",
@@ -991,7 +991,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
-      "sha256": "15ff771d0a926f0f23e6df1f2c4dbdd7fe73e12f7b9af7dbad79fb37cbc714d8",
+      "sha256": "1162316e5821bf7b3760ad7e5d23aa4df6dc4bdbaf12f5dc001f525468d7b61e",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1005,10 +1005,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
-      "sha256": "afc2dba5a23c9eb13060c944aa49aa364afa3f530eb6117b6e2e42974fa0e3d9",
+      "sha256": "5e59cebbf9b2bca5d1348455a981fd526b81d7513deec636a37fb5067799de5f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1022,7 +1022,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "dfea273a82ea3bc392de6508f31057b3a40db5427daf91882f2e7a9f3dd2a576",
@@ -1059,7 +1059,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
-      "sha256": "a3e14912f00452201f341181ee484cdc32d1e13a3fd1b051b1401e66630536b7",
+      "sha256": "8218c3242a4a3fe9ab20ac23e54a3e56c3196030502fde56f7c5acb082ac26a4",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1073,10 +1073,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "sha256": "101f53bcc7173d38f6666ab74fa06a00fdf3ff39628f17219dea4353912a1ada",
+      "sha256": "bddc64bae630e5db122762c238f469cf7691ace9fdc165f4c0009e63c7ec2a61",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1090,10 +1090,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
-      "sha256": "e13aa31f22a99590e1751a8a8705f233dda9d754d7978086dc997d6a2e289b89",
+      "sha256": "567ccdfb834776289c4282d35fb4f74f7a363b3a407d9358c3264c7a1c46f02d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1107,7 +1107,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
       "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",

@@ -14,7 +14,7 @@
 #    2. ALLE Workflows deaktivieren (n8n-CLI im Container)
 #    3. Prüfen, dass kein Workflow mehr aktiv ist
 #    4. Container mit der gehärteten docker-compose.yml neu erstellen:
-#       Ports nur 127.0.0.1, Image 2.43.5, Execute-Command gesperrt,
+#       Ports nur 127.0.0.1, Image 2.44.3, Execute-Command gesperrt,
 #       Repo nur lesend
 #    5. Prüfen, dass 5678/8765 nicht mehr von außen lauschen
 #    6. Nächste Schritte ausgeben (Token-Rotation)
@@ -107,7 +107,7 @@ if [ "$MODUS" = "--stoppen" ]; then
   gruen "   ✔ n8n und Whisper gestoppt (Daten-Volumes bleiben erhalten)."
 else
   "${DC[@]}" up -d --force-recreate
-  gruen "   ✔ Neu erstellt: Ports nur 127.0.0.1, Image 2.43.5, Execute-Command gesperrt, Repo nur lesend."
+  gruen "   ✔ Neu erstellt: Ports nur 127.0.0.1, Image 2.44.3, Execute-Command gesperrt, Repo nur lesend."
   sleep 5
   if laeuft; then
     REST="$(aktive_workflows)"
