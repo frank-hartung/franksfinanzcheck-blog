@@ -78,6 +78,7 @@ jobs:
           python3 scripts/indexierbare_seiten.py --selftest
           python3 scripts/gsc_verifikations_guard.py --selftest
           python3 scripts/gsc_indexierung.py --selftest
+          python3 scripts/gsc_abdeckung.py --selftest
           python3 scripts/gsc_import.py --selftest
           python3 scripts/submit_indexnow.py --selftest
 
@@ -137,6 +138,153 @@ jobs:
           echo "status=$(python3 -c 'import json;print(json.load(open("data/gsc/meta.json"))["status"])' 2>/dev/null || echo unbekannt)" >> "$GITHUB_OUTPUT"
 
       # ------------------------------------------------------------
+      #  ABDECKUNG GEGENRECHNEN (26.10.2026, „Profi-Agentur")
+      #
+      #  Der Abdeckungsbericht der Search Console hat KEINE API – er kommt
+      #  nur als CSV aus der Oberfläche. Was ohne ihn fehlt, ist die
+      #  Gegenprobe: „320 nicht indexiert" ist erst dann eine Aussage, wenn
+      #  daneben steht, wie viele URLs der Build überhaupt hat (am 19.10.2026:
+      #  258, davon 99 indexierbar).
+      #
+      #  Der Build ist dafür nötig, aber nicht kritisch: scheitert er, rechnet
+      #  `gsc_abdeckung.py` gegen `content/` und schreibt das ausdrücklich in
+      #  den Befund, statt eine Zahl zu erfinden. Deshalb `weiter-bei-fehler`.
+      # ------------------------------------------------------------
+      - name: Build für die Gegenprobe (nicht kritisch)
+        id: build
+        continue-on-error: true
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Build für die GSC-Abdeckung"
+          weiter-bei-fehler: "true"
+
+      - name: Abdeckung prüfen (Befund + Tor)
+        id: abdeckung
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --audit --schreiben --json > gsc-abdeckung.json
+          rc=$?
+          python3 - <<'PY' || true
+          import json, os
+          try:
+              d = json.load(open("gsc-abdeckung.json", encoding="utf-8"))
+          except Exception as exc:
+              print(f"Abdeckungsbefund nicht lesbar: {exc}")
+              raise SystemExit(0)
+          k = d.get("kennzahlen", {})
+          g = d.get("gate", {})
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 📊 Abdeckung (Seiten-Indexierung)\n\n")
+              f.write(f"Stand: **{k.get('stand_datum')}** · Gate: "
+                      f"**{'ROT' if g.get('status') == 'rot' else 'GRÜN'}** · "
+                      f"Quelle: {d.get('quellen', {}).get('export')}\n\n")
+              f.write("| Kennzahl | Wert |\n|---|---|\n")
+              f.write(f"| Bekannte URLs | {k.get('bekannt')} |\n")
+              f.write(f"| davon indexiert | {k.get('indexiert')} ({k.get('quote_indexiert')} %) |\n")
+              f.write(f"| davon nicht indexiert | {k.get('nicht_indexiert')} |\n")
+              f.write(f"| URLs im Build | {k.get('build_seiten')} |\n")
+              f.write(f"| indexierbar (Sitemap) | {k.get('live_indexierbar')} |\n")
+              f.write(f"| Index-Altlasten (mind.) | {k.get('index_puffer')} |\n\n")
+              f.write("| Grund | Seiten | Erwartung | Urteil |\n|---|---|---|---|\n")
+              for x in d.get("gruende", []):
+                  art = x.get("erwartung_art")
+                  erwartung = ("–" if x.get("erwartung") is None
+                               else (f"≤ {x['erwartung']}" if art == "hoechstens"
+                                     else str(x["erwartung"])))
+                  f.write(f"| {x['titel']} | {x['seiten']} | {erwartung} | {x['urteil']} |\n")
+              offen = [w for w in d.get("widersprueche", []) if w.get("schwere") == "hart"]
+              if offen:
+                  f.write("\n**Harte Widersprüche**\n\n")
+                  for w in offen:
+                      f.write(f"- 🛑 **{w['regel']}** {w['text']}\n")
+              p1 = [m for m in d.get("massnahmen", []) if m.get("dringlichkeit") == "P1"]
+              if p1:
+                  f.write("\n**P1-Maßnahmen**\n\n")
+                  for m in p1:
+                      f.write(f"- **{m['id']}** {m['titel']} – {m['beleg']}\n")
+          PY
+          if [ "$rc" -ne 0 ]; then
+            echo "::warning title=GSC-Abdeckung::Der Abdeckungsbefund ist rot (Rückschritt oder Widerspruch). Details in der Lauf-Zusammenfassung."
+          fi
+          exit 0
+
+      # ------------------------------------------------------------
+      #  MASSNAHMENPLAN (M1–M9). Jeder Schritt ist eine Maßnahme aus
+      #  GSC-ABDECKUNG-HIGHEND-2026-10-26.md, die ohne Google-Zugriff
+      #  wirkt: Vertrag prüfen (M5/M6), Anfrage-Reihenfolge (M2),
+      #  Triage sobald Detail-Listen vorliegen (M1/M3), Kennzahlen (M9),
+      #  Beleg für Sprünge (M7). Kein Schritt bricht den Lauf ab – der
+      #  Befund ist eine Warnung, das Tor steht oben.
+      # ------------------------------------------------------------
+      - name: Vertrag prüfen (noindex-Bestand, Gateways, robots)
+        id: vertrag
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --vertrag || true
+
+      - name: Anfrage-Priorität und Verlinkungsauftrag berechnen
+        id: prioritaet
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --prioritaet || true
+          python3 scripts/gsc_abdeckung.py --verlinkung || true
+
+      - name: Detail-Listen triagieren (nur wenn vorhanden)
+        id: triage
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          if [ -d data/gsc/abdeckung/details ]; then
+            python3 scripts/gsc_abdeckung.py --triage || true
+          else
+            echo "::warning title=GSC-Detail-Listen::Keine Detail-Liste in data/gsc/abdeckung/details/. In der Search Console je Grund exportieren (Indexierung → Seiten → Grund → Exportieren) – ohne sie bleiben die Summen Summen."
+          fi
+
+      - name: Wochen-Kennzahl und Abnahme
+        id: kennzahl
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --kpi || true
+          python3 scripts/gsc_abdeckung.py --abnahme || true
+          python3 scripts/gsc_abdeckung.py --altlasten || true
+
+      - name: Sprünge mit Repo-Beleg erklären
+        id: ursachen
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          # Ohne Historie kein Beleg: der Klon ist flach, deshalb bewusst
+          # --ohne-git im Tageslauf. Der Belegweg steht im Bericht (M7).
+          python3 scripts/gsc_abdeckung.py --ursachen --ohne-git || true
+
+      - name: Befund-Artefakte sichern
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gsc-abdeckung
+          path: |
+            data/gsc/abdeckung/befund.json
+            data/gsc/abdeckung/befund.md
+            data/gsc/abdeckung/vertrag.json
+            data/gsc/abdeckung/prioritaet.json
+            data/gsc/abdeckung/verlinkungsauftrag.json
+            data/gsc/abdeckung/triage.md
+            data/gsc/abdeckung/redaktions_queue.md
+            data/gsc/abdeckung/ursachen.json
+          if-no-files-found: ignore
+
+      # ------------------------------------------------------------
       #  Indexierung ANFRAGEN. --live liest die ausgelieferte Sitemap:
       #  Eingereicht wird, was Google auch sehen kann – nicht, was ein
       #  lokaler Build zufällig enthält. Ohne Secrets: Status
@@ -152,6 +300,26 @@ jobs:
           zusatz=""
           if [ "${{ inputs.alles_anfragen }}" = "true" ]; then
             zusatz="--limit 200"
+          fi
+          # M2: Crawl-Nachfrage gezielt. Welle 1 (max. 40) ist die nach
+          # Wirkung sortierte Liste aus der Abdeckung – Nachfrage,
+          # fehlender Inlink, Alter. Ohne sie fragt der Lauf stumpf nach
+          # lastmod und verliert das Tageskontingent an die falschen Seiten.
+          welle=""
+          if [ -f data/gsc/abdeckung/prioritaet.json ]; then
+            welle=$(python3 - <<'PY'
+          import json
+          try:
+              d = json.load(open("data/gsc/abdeckung/prioritaet.json", encoding="utf-8"))
+          except Exception:
+              raise SystemExit(0)
+          print(" ".join(f"--url {u}" for u in (d.get("welle1_absolut") or [])[:40]))
+          PY
+          )
+          fi
+          if [ -n "$welle" ]; then
+            echo "Welle 1: $(echo "$welle" | tr ' ' '\n' | grep -c '^--url') URLs aus der Priorität."
+            zusatz="$welle"
           fi
           {
             echo "### 🗂️ Fällige Seiten (Plan aus der Live-Sitemap)"
@@ -251,6 +419,70 @@ jobs:
       #  Zweite Schicht: `data/gsc/*.json merge=binary` (.gitattributes) macht
       #  den Text-Merge technisch unmöglich.
       # ------------------------------------------------------------
+      # ------------------------------------------------------------
+      #  TRIAGE UND FRISTEN (26.10.2026)
+      #
+      #  Die Detail-Listen liegen im Repo, also läuft die Triage im
+      #  Tageslauf mit. Das ist der Unterschied zwischen einer Liste und
+      #  einer Steuerung: Der Verlauf (`triage_verlauf.jsonl`) zählt die
+      #  Tage, an denen eine Aufgabe offen ist – und genau dieser Verlauf
+      #  geht mit dem PR nach main. Ohne diesen Schritt würde die Frist
+      #  jede Woche bei null beginnen.
+      #
+      #  Berichtend, nicht blockierend: Eine überfällige Redaktionsaufgabe
+      #  ist kein technischer Defekt des Imports.
+      # ------------------------------------------------------------
+      - name: Triage der Detail-Listen und Fristen
+        continue-on-error: true
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          if ! compgen -G "data/gsc/abdeckung/details/*.csv" > /dev/null; then
+            {
+              echo "### 🧭 Triage"
+              echo ""
+              echo "Keine Detail-Liste im Bestand – Triage übersprungen (Regel W9)."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python3 scripts/gsc_abdeckung.py --triage > triage.log 2>&1 || true
+          tail -n 25 triage.log || true
+          python3 - <<'PY' || true
+          import json, os
+          try:
+              t = json.load(open("data/gsc/abdeckung/triage.json", encoding="utf-8"))
+          except Exception as e:
+              print(f"Triage nicht lesbar: {e}")
+              raise SystemExit(0)
+          offen = t.get("offen") or []
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 🧭 Triage der gemeldeten URLs\n\n")
+              f.write(f"{t.get('anzahl')} Zeilen · offen: **{len(offen)}** · "
+                      f"entschieden: {len(t.get('entschieden') or [])} · "
+                      f"Register: {t.get('register_eintraege')} Einträge\n\n")
+              if offen:
+                  f.write("| Prio | Alter | URL | Aktion |\n|---|---|---|---|\n")
+                  for x in offen[:15]:
+                      alter = (f"{x.get('alter_tage')} T."
+                               if x.get("alter_tage") is not None else "neu")
+                      f.write(f"| {x.get('prioritaet')} | {alter} | `{x.get('url')}` | "
+                              f"{x.get('aktion')} |\n")
+              if t.get("eskaliert"):
+                  f.write("\n> ⏰ **Überfällig (SLA)** – eine Stufe hochgestuft, weil "
+                          "die Aufgabe zu lange offen ist: "
+                          + ", ".join(f"`{u}`" for u in t["eskaliert"][:5]) + "\n")
+              if t.get("wirkung_belegt"):
+                  f.write("\n> ✅ **Wirkung belegt** – nicht mehr gemeldet, "
+                          "Register-Eintrag schließen: "
+                          + ", ".join(f"`{u}`" for u in t["wirkung_belegt"][:5]) + "\n")
+              if offen:
+                  f.write("\nEntscheidung festhalten: "
+                          "`python3 scripts/gsc_abdeckung.py --entscheiden <URL> "
+                          "--entscheidung \"…\" --begruendung \"…\"` – danach "
+                          "prüft die Triage die Wirkung.\n")
+          PY
+
       - name: Leistungsdaten prüfen, bevor sie als PR gehen
         run: |
           python3 scripts/gsc_artefakte_guard.py --selftest

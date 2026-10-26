@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-25 08:52:16 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-26 09:33:49 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 66 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 68 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -78,6 +78,8 @@
 | 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig | 2 → 2 ✅ | /go/gas/ |
 | 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick | 3 → 3 ✅ | /go/strom/ |
+| 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto | 3 → 3 ✅ | /go/kreditkarte/ |
+| 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks | 3 → 3 ✅ | /go/strom/ |
 
 ## Hinweise (nicht blockierend)
 

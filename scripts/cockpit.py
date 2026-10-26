@@ -68,6 +68,9 @@ from pathlib import Path
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GOVERNANCE_PATH = os.path.join(BLOG_DIR, "data", "governance_status.json")
+# Befund der GSC-Abdeckung (scripts/gsc_abdeckung.py). Reine Anzeige: Der
+# Bericht hat keine API, sein Ergebnis liegt als Datei und wird hier gelesen.
+ABDECKUNG_BEFUND_PATH = os.path.join(BLOG_DIR, "data", "gsc", "abdeckung", "befund.json")
 RESERVE_PATH = os.path.join(BLOG_DIR, "data", "reserve-readiness.json")
 # Zugangs-NACHWEISE (Ampel/Datum/Nachweisstufe) unter data/secrets_state.json –
 # der DATEINAME bleibt (Datenbestand-Vertrag), die Variable sagt, was drin ist.
@@ -251,7 +254,14 @@ def bucket_content(governance: dict, reserve: dict):
     ]
 
 
-def bucket_seo(governance: dict):
+def bucket_seo(governance: dict, abdeckung: dict | None = None):
+    """SEO & Technik. `abdeckung` ist der Befund von `gsc_abdeckung.py`.
+
+    Der Abdeckungsbericht der Search Console hat keine API; sein Befund liegt
+    deshalb als Datei (`data/gsc/abdeckung/befund.json`) und wird hier nur
+    gelesen. Fehlt er, bleibt der Bereich wie bisher – ein fehlender Export
+    ist kein Defekt, aber auch kein Grund, die Zahl zu erfinden.
+    """
     steps = governance.get("steps", {}) or {}
     keys = ["cwv", "build", "live-policy"]
     present = [steps[k] for k in keys if k in steps]
@@ -266,7 +276,24 @@ def bucket_seo(governance: dict):
         headline = f"{len(bad_keys)} Prüfpunkt(e) auffällig ({', '.join(bad_keys)})"
     else:
         headline = "in Ordnung"
-    return lvl, [headline] + details, ["data/governance_status.json"]
+
+    quellen = ["data/governance_status.json"]
+    if abdeckung:
+        kenn = abdeckung.get("kennzahlen", {}) or {}
+        gate_status = (abdeckung.get("gate", {}) or {}).get("status")
+        if kenn.get("stand_datum"):
+            offen = sum(g.get("offen") or 0 for g in abdeckung.get("gruende", []) or [])
+            details.append(
+                f"Search Console ({kenn['stand_datum']}): "
+                f"{kenn.get('indexiert')} von {kenn.get('bekannt')} bekannten URLs im Index "
+                f"({kenn.get('quote_indexiert')} %), "
+                f"{kenn.get('nicht_indexiert')} nicht indexiert, "
+                f"{offen} davon ohne Erklärung im Bestand"
+                + (" · Gate ROT" if gate_status == "rot" else ""))
+        quellen.append("data/gsc/abdeckung/befund.json")
+        if gate_status == "rot":
+            lvl = worst([lvl, "gelb"])
+    return lvl, [headline] + details, quellen
 
 
 def bucket_affiliate(governance: dict):
@@ -460,10 +487,10 @@ BUCKET_ORDER = [
 
 
 def build_cockpit(now, governance, reserve, zugang_state, channels_cfg, social_state,
-                   journal_rows, newsletter_state):
+                   journal_rows, newsletter_state, abdeckung: dict | None = None):
     buckets = {}
     buckets["Content-Pipeline"] = bucket_content(governance, reserve)
-    buckets["SEO & Technik"] = bucket_seo(governance)
+    buckets["SEO & Technik"] = bucket_seo(governance, abdeckung)
     buckets["Affiliate & Umsatz"] = bucket_affiliate(governance)
     buckets["Secrets & Zugänge"] = bucket_zugaenge(governance, zugang_state)
     buckets["Social-Automation"] = bucket_social(zugang_state, channels_cfg, social_state, now)
@@ -671,9 +698,11 @@ def main():
     journal_rows = _load_jsonl(NEWSLETTER_JOURNAL_PATH)
     newsletter_state = _load_json(NEWSLETTER_STATE_PATH, {})
 
+    abdeckung = _load_json(ABDECKUNG_BEFUND_PATH, {}) or None
+
     overall, buckets = build_cockpit(
         now, governance, reserve, zugang_state, channels_cfg, social_state,
-        journal_rows, newsletter_state,
+        journal_rows, newsletter_state, abdeckung,
     )
 
     md = render_markdown(now, overall, buckets)

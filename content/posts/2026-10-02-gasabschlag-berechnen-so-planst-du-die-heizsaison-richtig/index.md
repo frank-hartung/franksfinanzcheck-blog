@@ -158,7 +158,7 @@ Vor der Handarbeit die Grundsatzfrage: Lohnt der Wechsel überhaupt, oder ist de
 
 
 
-**Weiterlesen:** [Mehr zum Thema Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Mehr zum Thema Strom und Gas sparen](../../pillar/strom-sparen/) · [Balkonkraftwerk Förderung](../../posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/)
 **Lesetipp:** [Preisgarantie Gas: So sicherst du dir günstige Tarife](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 
 ## Häufige Fragen

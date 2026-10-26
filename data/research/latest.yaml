@@ -1,5 +1,5 @@
-generated_at: '2026-10-25T08:42:53Z'
-day: '2026-10-25'
+generated_at: '2026-10-26T09:21:15Z'
+day: '2026-10-26'
 mode: deterministic
 teams:
   trending:
@@ -84,39 +84,44 @@ teams:
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
   evergreen:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
+  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     pillar: frugalismus
     signal: evergreen
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
+    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     score: 0.85
-    keywords: []
-  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
+    keywords:
+    - Neujahrsvorsätze Geld
+    - finanzielle Ziele 2027
+    - Sparziele erreichen
+    - Gewohnheiten ändern
+  - topic: Energiekosten senken mit kleinen Veränderungen
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
+    source: topics:Energiekosten senken mit kleinen Veränderungen
     score: 0.85
     keywords:
-    - Smart-Plug
-    - Energie sparen
-    - Haushaltsgeräte
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
+    - Energie
+    - Kosten
+    - SparTipps
+  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
     pillar: internet-dsl
     signal: evergreen
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
     score: 0.85
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    - WLAN verbessern
+    - DSL Hacks
+    - Schnelles Internet zuhause
+    - Mesh Netzwerk
+  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
     pillar: mietwagen
     signal: evergreen
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
     score: 0.85
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
+    - E-Auto Mietwagen
+    - Elektromobilität
+    - Urlaub
   - topic: 10 Tipps für günstige Reisekreditkarten
     pillar: konto-karten
     signal: evergreen
@@ -238,60 +243,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Günstige Kreditkarten für den Online-Einkauf
-    pillar: konto-karten
+  - topic: 10 Tipps für günstige Reiseversicherungen
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Günstige Kreditkarten für den Online-Einkauf
+    source: topics:10 Tipps für günstige Reiseversicherungen
     score: 0.55
     keywords:
-    - Kreditkarte
-    - Online-Einkauf
-    - Günstig
-  - topic: Günstigen Mietwagen für den Urlaub buchen
+    - Reiseversicherung
+    - Versicherungsvergleich
+    - Günstige Versicherungen
+  - topic: Dein Mietwagen im Ausland am besten buchen
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Günstigen Mietwagen für den Urlaub buchen
-    score: 0.55
-    keywords:
-    - Mietwagen buchen
-    - Günstige Mietwagen
-    - Mietwagen Vergleich
-  - topic: Internet-Speed optimieren mit dem richtigen Router
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:Internet-Speed optimieren mit dem richtigen Router
-    score: 0.55
-    keywords:
-    - Internet-Speed
-    - Router
-    - Optimieren
-  - topic: 'Mietwagen für die Stadt: Kleine Autos im Vergleich'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Mietwagen für die Stadt: Kleine Autos im Vergleich'
+    source: topics:Dein Mietwagen im Ausland am besten buchen
     score: 0.55
     keywords:
     - Mietwagen
-    - Stadtverkehr
-    - Kleine Autos
-  - topic: 'Umzug: Diese Versicherungen und Verträge musst du ummelden'
+    - Ausland
+    - Buchen
+  - topic: Günstige Versicherungen für dein Zuhause finden
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Umzug: Diese Versicherungen und Verträge musst du ummelden'
+    source: topics:Günstige Versicherungen für dein Zuhause finden
     score: 0.55
     keywords:
-    - Umzug Checkliste
-    - Verträge ummelden
-    - Umzug sparen
-  - topic: 'Wohnmobil mieten statt kaufen: Was günstiger ist'
+    - Versicherungen
+    - Zuhause
+    - Günstig
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Wohnmobil mieten statt kaufen: Was günstiger ist'
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
     score: 0.55
     keywords:
-    - Wohnmobil mieten
-    - Wohnmobil kaufen oder mieten
-    - Camper Vergleich
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: So kannst du deine Heizkosten um 20 % senken
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:So kannst du deine Heizkosten um 20 % senken
+    score: 0.55
+    keywords:
+    - Heizkosten sparen
+    - energiesparende Tipps
+    - Heizperiode
+  - topic: 'Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?'
+    score: 0.55
+    keywords:
+    - Wärmepumpe
+    - Heizung Vergleich
+    - Heizkosten senken
 live_web:
   enabled: false
   findings: []
