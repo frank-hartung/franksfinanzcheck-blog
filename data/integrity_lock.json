@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-26T13:51:36.928149+00:00",
-  "head": "8b72191",
+  "signed_at": "2026-10-26T14:35:46.430174+00:00",
+  "head": "a792e81",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -43,7 +43,7 @@
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
     "scripts/redaktions_standard.py": "112f0d85299b5545d4adc308ff05090cbda9cc95b9f26738519117b21a04b827",
-    "scripts/reserve_artifacts.py": "6a6d197d8aa7533a0427eee7d528db9057a3720f4331e07fd415b3420fc97ef8",
+    "scripts/reserve_artifacts.py": "0def702a6868f98c1b81dcfe3108f7d5c1040ce1d00102ed27ccfd5a9d7c79cb",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
@@ -54,7 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916",
+  "files_sha256": "8841ad35ace38d58a9cb009418c44177cf7da60c16246d422135e7d90f6ed210",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
@@ -248,8 +248,33 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "05bb5e11c755fd6e1d1488456be4ef701803e2a0382f0eaf43d61fb77980a78e",
-      "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916"
+      "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916",
+      "prev_sha256": "05bb5e11c755fd6e1d1488456be4ef701803e2a0382f0eaf43d61fb77980a78e"
+    },
+    {
+      "date": "2026-10-26",
+      "art": "heal",
+      "head": "a792e81",
+      "geaendert": [
+        "scripts/reserve_artifacts.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/reserve_artifacts.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "7474269",
+              "datum": "2026-10-26",
+              "betreff": "fix(ci): Vier PRs konsolidieren, Basisregressionen heilen, Sicherheits-Gates erhalten (#898)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "0729d20d5dedee5fdf63594b5ee3340fea52e1af7da270ca4c115599fc4bbc28",
+      "files_sha256": "8841ad35ace38d58a9cb009418c44177cf7da60c16246d422135e7d90f6ed210"
     }
   ]
 }
