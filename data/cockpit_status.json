@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-25T22:28:15Z",
+  "generated": "2026-10-26T23:45:40Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit)",
-        "lesbarkeit: 2026-10-19-urlaubskasse-clever-aufbessern/index.md (Entwurf) – Flesch 54.2 < Publish-Schwelle 60; 2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md (Entwu…",
-        "Artikel-Reserve 6/6 bereit"
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 4/6 bereit – Nachschub nötig",
+        "lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
+        "Artikel-Reserve knapp: 4/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -16,12 +16,15 @@
       ]
     },
     "SEO & Technik": {
-      "level": "gruen",
+      "level": "gelb",
       "lines": [
-        "in Ordnung"
+        "1 Prüfpunkt(e) auffällig (cwv)",
+        "cwv: 10 <img>-Elemente ohne width/height/style (CLS-Risiko)",
+        "Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 193 davon ohne Erklärung im Bestand"
       ],
       "sources": [
-        "data/governance_status.json"
+        "data/governance_status.json",
+        "data/gsc/abdeckung/befund.json"
       ]
     },
     "Affiliate & Umsatz": {
@@ -53,8 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.3 Tag(en)",
-        "1 Fehlversuch(e) in den letzten 14 Tagen"
+        "letzter erfolgreicher Post vor 0.3 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -67,7 +69,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 16 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 17 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
