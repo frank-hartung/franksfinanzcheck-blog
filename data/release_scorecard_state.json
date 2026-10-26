@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T14:54:57Z",
+  "generated_at": "2026-10-26T16:35:44Z",
   "modus": "kandidaten",
-  "commit": "43ca71f2d3b8872472b75b3703af07b0509765fe",
+  "commit": "4870bee45c19f06ffa6034e6f4d10cddcc77b1c8",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -1076,7 +1076,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "sha256": "bddc64bae630e5db122762c238f469cf7691ace9fdc165f4c0009e63c7ec2a61",
+      "sha256": "9564eebf19fb822b15615ebc348cb6fffff74d0b168d6964fafded7aeac9dab9",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1090,7 +1090,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "567ccdfb834776289c4282d35fb4f74f7a363b3a407d9358c3264c7a1c46f02d",
