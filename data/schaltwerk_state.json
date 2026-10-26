@@ -35,6 +35,8 @@
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/verbraucher/luftfahrt-flugtickets-preise-100.html": "2026-10-05T17:55:29+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=1ujV_wftSdA": "2026-10-19T19:44:50+02:00",
+    "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=2HuHTzSNDvE": "2026-10-26T18:38:08+01:00",
+    "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=4r_1J0YeLY4": "2026-10-26T18:38:08+01:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=JoQ9_KliPWk": "2026-10-19T19:44:50+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=Q3pvk9PyRs8": "2026-10-05T17:55:29+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=TmCaACcZgN8": "2026-10-04T16:20:48+02:00",
@@ -67,7 +69,7 @@
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-10-13T03:35:57+02:00",
     "nacht-planung": "2026-10-26T06:14:15+01:00",
-    "reach-signale-kuratieren": "2026-10-19T19:44:50+02:00",
+    "reach-signale-kuratieren": "2026-10-26T18:38:08+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-10-12T21:17:05+02:00",
     "verbraucher-nachrichten": "2026-10-26T12:30:43+01:00",
@@ -137,7 +139,8 @@
       "2026-10-04": 6,
       "2026-10-05": 5,
       "2026-10-12": 5,
-      "2026-10-19": 2
+      "2026-10-19": 2,
+      "2026-10-26": 2
     },
     "standby-erinnerung": {
       "2026-10-04": 8
