@@ -1,8 +1,8 @@
 # Google Search Console für franksfinanzcheck.de
 
-Aktualisiert: 12.10.2026. Frühere Fassungen: github.io-Anleitung (ersetzt
-20.09.2026), Abschnitt „ohne API" (ersetzt 11.10.2026 durch
-[ANLEITUNG-GSC-API-ZUGRIFF.md](ANLEITUNG-GSC-API-ZUGRIFF.md)).
+Aktualisiert: 26.10.2026 (Abschnitt 9 – Abdeckungsbericht). Frühere Fassungen:
+github.io-Anleitung (ersetzt 20.09.2026), Abschnitt „ohne API" (ersetzt
+11.10.2026 durch [ANLEITUNG-GSC-API-ZUGRIFF.md](ANLEITUNG-GSC-API-ZUGRIFF.md)).
 
 Dieses Runbook trennt zwei Dinge, die leicht verwechselt werden:
 
@@ -207,13 +207,14 @@ Position liegen, nicht pauschal an „schlechten Titeln".
 
 `.github/workflows/gsc-import.yml`, 05:17 UTC (≈ 07:17 Berlin):
 
-1. Selbsttests der fünf beteiligten Wachen (fail-closed, offline)
+1. Selbsttests der sechs beteiligten Wachen (fail-closed, offline)
 2. V13 **live** gegen die ausgelieferte Site – was Google sieht, nicht was ein
    lokaler Build behauptet
 3. Leistungsdaten holen (`gsc_import.py`)
-4. Indexierung anfragen (`gsc_indexierung.py --live`)
-5. IndexNow-Ping (`submit_indexnow.py --live --kein-llms`)
-6. Zustand direkt auf main sichern; Leistungsdaten als PR
+4. Build für die Gegenprobe + Abdeckung rechnen (`gsc_abdeckung.py --audit --gate`)
+5. Indexierung anfragen (`gsc_indexierung.py --live`)
+6. IndexNow-Ping (`submit_indexnow.py --live --kein-llms`)
+7. Zustand direkt auf main sichern; Leistungsdaten als PR
 
 Ohne Secrets endet der Lauf mit Status `nicht_konfiguriert` und bleibt **grün** –
 ein noch nicht eingerichtetes Dienstkonto ist ein Zustand, kein Defekt.
@@ -226,7 +227,100 @@ lokalen Cockpit importieren: `npm run seo:audit` · `npm run seo:serve`.
 Benötigt keine API, kein Google-Cloud-Projekt, keine Zugangsdaten. Es wird
 nichts hochgeladen.
 
-## 9. Weitere Suchmaschinen
+## 9. Abdeckungsbericht (Seiten-Indexierung)
+
+Das ist der Bericht, den eine Agentur zuerst aufschlägt: **warum ist eine URL
+nicht im Index?** Er heißt in der Oberfläche „Indexierung → Seiten" und hat
+einen Nachteil, den keine Automatisierung wegzaubert: **Google stellt für ihn
+keine API bereit.** Es gibt ihn nur als CSV-Export. Bis zum 26.10.2026 lagen
+seine Zahlen deshalb als Bildschirmfoto vor – und niemand konnte sie gegen den
+eigenen Bestand rechnen.
+
+### 9.1 Exportieren (Mensch, 2 Minuten)
+
+Search Console → **Indexierung → Seiten** → oben rechts **Exportieren**. Es
+entstehen vier Dateien:
+
+| Datei | Inhalt | Wird gebraucht für |
+|---|---|---|
+| Übersicht | Grund, Quelle, Validierung, Seiten | die Rangliste der Ursachen |
+| Diagramm | Datum, nicht indexiert, indexiert, Impressionen | Verlauf und Sprünge |
+| Metadaten | Property, Sitemap | Zuordnung des Exports |
+| Detail je Grund (z. B. „Nicht gefunden (404).csv") | die betroffenen URLs | jede echte Ursachenanalyse |
+
+Die Detail-Listen sind der entscheidende Teil. Ohne sie kennt man die Summe,
+aber nicht eine einzige URL – und jede Zuordnung wäre geraten.
+
+### 9.2 Einlesen und gegenrechnen (Automat)
+
+```bash
+python3 scripts/gsc_abdeckung.py --import ~/Downloads/search-console
+python3 scripts/gsc_abdeckung.py --audit            # gegen den Repo-Bestand
+python3 scripts/gsc_abdeckung.py --audit --gate     # Tor für den Tageslauf
+python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
+```
+
+Das Modul prüft den Export **vor** dem Schreiben: Summieren sich die Gründe
+nicht auf den Tageswert im Diagramm, stammen Übersicht und Diagramm aus
+verschiedenen Momenten, und der Import wird abgelehnt (`E8`). Dieselbe Lehre
+wie am 21.10.2026, als drei GSC-Artefakte durch einen Text-Merge unlesbar
+wurden.
+
+### 9.3 Gegenprobe: die Zahl neben der Zahl
+
+Jede Meldung bekommt eine Erwartung aus dem Repo – nicht aus einer gepflegten
+Liste:
+
+| Meldung | Erwartung kommt aus | Am 19.10.2026 |
+|---|---|---|
+| „Durch noindex ausgeschlossen" | `robotsNoIndex: true` in `content/` | 5 gemeldet, 5 erwartet |
+| „Durch robots.txt blockiert" | Ordner in `static/go/` | 18 gemeldet, 20 Gateways |
+| „Seite mit Weiterleitung" | Einträge in `data/weiterleitungen.yaml` | 1 gemeldet, 115 möglich |
+| „Nicht gefunden (404)" | Taxonomie-URLs + `data/url_entfallen.yaml` | 223 gemeldet, 30 erklärbar |
+| „Gefunden / gecrawlt, nicht indexiert" | Sitemap-Bestand (Obergrenze) | 69 + 4 bei 99 Seiten |
+
+Steigt eine Zahl über ihre Erwartung, ist das ein **harter** Widerspruch: eine
+noindex-Seite, die niemand eingetragen hat (`W2`), eine robots-Sperre auf einer
+Inhaltsseite (`W3`) oder ein Grund, den das Modul nicht kennt (`W6`, heißt:
+Google hat etwas geändert). Bleibt sie darunter, steht das ausdrücklich als
+„plausibel" da – nicht als „in Ordnung".
+
+### 9.4 Was der Bericht vom 19.10.2026 zeigt
+
+- 437 bekannte URLs, davon 117 im Index (26,8 %), 320 nicht.
+- Der Build enthält **258 URLs**, davon **99 indexierbar**. Auf jede
+  indexierbare Seite kommt also 1,6 Seiten, die nicht in den Index sollen
+  (Weiterleitungen, Gateways, Pager, noindex-Funnel).
+- 320 Nicht-Index-Einträge bei 258 gebauten URLs heißt: **Es sind mehr
+  Einträge als Seiten.** Über die Hälfte der Einträge betrifft URLs, die es
+  nicht mehr gibt. Genau das ist der 404-Block.
+- 117 indexierte URLs bei 99 indexierbaren Seiten: mindestens 18 Einträge im
+  Index gehören nicht zur Sitemap (Altlasten). Die Quote ist deshalb zu hoch,
+  nicht zu niedrig.
+- Am 17.10.2026 springt „nicht indexiert" von 261 auf 320 und „indexiert" von
+  138 auf 117. Ein Sprung dieser Größe hat eine Ursache (Deploy,
+  Sitemap-Änderung, Aufräumaktion) und gehört ins Änderungsprotokoll.
+
+### 9.5 Artefakte und Grenzen
+
+| Pfad | Bedeutung |
+|---|---|
+| `data/gsc/abdeckung/export/<datum>/` | der eingelesene Export, unverändert (Beweis) |
+| `data/gsc/abdeckung/<datum>.json` | Momentaufnahme, ein Lauf = eine Messung |
+| `data/gsc/abdeckung/aktuell.json` | dieselbe Momentaufnahme unter festem Pfad |
+| `data/gsc/abdeckung/verlauf.jsonl` | eine Zeile je Momentaufnahme (append-only) |
+| `data/gsc/abdeckung/befund.json` / `.md` | Ergebnis der Gegenrechnung |
+
+Grenzen, die das Modul nicht überschreitet: Es erfindet keine URL, es schreibt
+nie in `data/weiterleitungen.yaml` oder `data/url_entfallen.yaml` (Weiterleitungen
+sind eine Entscheidung über Suchabsicht, Regeln A–E), und es ruft keine
+Suchmaschine auf. Der Befund ist offline reproduzierbar – in einem Jahr genauso.
+
+Das Alter des Befunds steht in jeder Ausgabe. Ist der Export älter als 14 Tage,
+meldet der Befund das als `W8`; älter als 21 Tage wird daraus die P1-Maßnahme
+`M10`. Ein Bildschirmfoto von vor drei Wochen ist keine Messung.
+
+## 10. Weitere Suchmaschinen
 
 - **Bing Webmaster Tools:** dieselbe Sitemap einreichen. Verifikation liegt
   bereit (`static/BingSiteAuth.xml`, `msvalidate.01` in `extend_head.html`).
@@ -235,7 +329,7 @@ nichts hochgeladen.
   `static/`. Details: [ANLEITUNG-PINTEREST-API.md](ANLEITUNG-PINTEREST-API.md).
 - Auch dort ist eine Indexierung nicht garantiert.
 
-## 10. Befehle
+## 11. Befehle
 
 ```bash
 npm run gsc:verifikation        # Build + V1–V12 (hart)
@@ -245,7 +339,10 @@ npm run gsc:bestand:live        # … laut ausgelieferter Sitemap
 npm run gsc:plan                # welche Seiten wären heute fällig?
 npm run gsc:indexieren          # Indexierung anfragen
 npm run gsc:daten               # Leistungsdaten holen
+npm run gsc:abdeckung           # Abdeckungsbericht gegenrechnen
+npm run gsc:abdeckung:gate      # … als Tor (Exit 1 bei Rückschritt)
+npm run gsc:abdeckung:md        # … als Markdown
 npm run gsc:setup               # sieht das Dienstkonto die Property?
 npm run indexnow                # IndexNow-Ping
-npm run test:gsc                # 5 Selbsttests + 52 Regressionstests
+npm run test:gsc                # 6 Selbsttests + 90 Regressionstests
 ```

@@ -1,0 +1,269 @@
+{
+ "dateien": [
+  {
+   "art": "verlauf",
+   "datei": "diagramm.csv",
+   "zeilen": 30
+  },
+  {
+   "art": "metadaten",
+   "datei": "metadaten.csv",
+   "zeilen": 1
+  },
+  {
+   "art": "leer",
+   "datei": "nicht-kritische-probleme.csv",
+   "zeilen": 0
+  },
+  {
+   "art": "uebersicht",
+   "datei": "uebersicht.csv",
+   "zeilen": 6
+  }
+ ],
+ "datum": "2026-10-19",
+ "details": [],
+ "importiert": "2026-10-26T09:21:40Z",
+ "metadaten": {
+  "Sitemap": "Alle bekannten Seiten"
+ },
+ "pruefung": [
+  {
+   "regel": "E5",
+   "schwere": "hinweis",
+   "text": "Tag 2026-09-20 hat keine Zahlen (nur Impressionen)."
+  },
+  {
+   "regel": "E10",
+   "schwere": "hinweis",
+   "text": "Keine Detail-Liste dabei. Die Summen sind damit rechenbar, die betroffenen URLs nicht. Ohne sie bleibt jede Ursachenanalyse bei der Summe stehen."
+  },
+  {
+   "regel": "E11",
+   "schwere": "hinweis",
+   "text": "Datei nicht-kritische-probleme.csv nicht zugeordnet (Art: leer)."
+  }
+ ],
+ "quelle": "google-search-console (Abdeckungsbericht, CSV-Export)",
+ "schema": 1,
+ "uebersicht": [
+  {
+   "grund": "Nicht gefunden (404)",
+   "quelle": "Website",
+   "seiten": 223,
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "grund": "Durch \"noindex\"-Tag ausgeschlossen",
+   "quelle": "Website",
+   "seiten": 5,
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "grund": "Seite mit Weiterleitung",
+   "quelle": "Website",
+   "seiten": 1,
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "quelle": "Google-Systeme",
+   "seiten": 4,
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "grund": "Durch robots.txt-Datei blockiert",
+   "quelle": "Website",
+   "seiten": 18,
+   "validierung": "Nicht gestartet"
+  },
+  {
+   "grund": "Gefunden – zurzeit nicht indexiert",
+   "quelle": "Google-Systeme",
+   "seiten": 69,
+   "validierung": "Gestartet"
+  }
+ ],
+ "verlauf": [
+  {
+   "datum": "2026-09-20",
+   "impressionen": 0,
+   "indexiert": null,
+   "nicht_indexiert": null
+  },
+  {
+   "datum": "2026-09-21",
+   "impressionen": 3,
+   "indexiert": 138,
+   "nicht_indexiert": 237
+  },
+  {
+   "datum": "2026-09-22",
+   "impressionen": 2,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-23",
+   "impressionen": 2,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-24",
+   "impressionen": 3,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-25",
+   "impressionen": 5,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-26",
+   "impressionen": 3,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-27",
+   "impressionen": 5,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-28",
+   "impressionen": 4,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-29",
+   "impressionen": 1,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-09-30",
+   "impressionen": 3,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-10-01",
+   "impressionen": 1,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-10-02",
+   "impressionen": 1,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-10-03",
+   "impressionen": 2,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-10-04",
+   "impressionen": 0,
+   "indexiert": 138,
+   "nicht_indexiert": 244
+  },
+  {
+   "datum": "2026-10-05",
+   "impressionen": 0,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-06",
+   "impressionen": 4,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-07",
+   "impressionen": 0,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-08",
+   "impressionen": 0,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-09",
+   "impressionen": 0,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-10",
+   "impressionen": 2,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-11",
+   "impressionen": 1,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-12",
+   "impressionen": 3,
+   "indexiert": 139,
+   "nicht_indexiert": 253
+  },
+  {
+   "datum": "2026-10-13",
+   "impressionen": 1,
+   "indexiert": 138,
+   "nicht_indexiert": 261
+  },
+  {
+   "datum": "2026-10-14",
+   "impressionen": 2,
+   "indexiert": 138,
+   "nicht_indexiert": 261
+  },
+  {
+   "datum": "2026-10-15",
+   "impressionen": 3,
+   "indexiert": 138,
+   "nicht_indexiert": 261
+  },
+  {
+   "datum": "2026-10-16",
+   "impressionen": 2,
+   "indexiert": 138,
+   "nicht_indexiert": 261
+  },
+  {
+   "datum": "2026-10-17",
+   "impressionen": 1,
+   "indexiert": 117,
+   "nicht_indexiert": 320
+  },
+  {
+   "datum": "2026-10-18",
+   "impressionen": 1,
+   "indexiert": 117,
+   "nicht_indexiert": 320
+  },
+  {
+   "datum": "2026-10-19",
+   "impressionen": 7,
+   "indexiert": 117,
+   "nicht_indexiert": 320
+  }
+ ]
+}

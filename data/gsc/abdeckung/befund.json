@@ -1,0 +1,420 @@
+{
+ "beweisfragen": [
+  {
+   "blockiert": "P1-Weiterleitungsplan",
+   "braucht": "Search Console → Indexierung → Seiten → „Nicht gefunden (404)“ → Exportieren; Datei hier einlesen mit `--vorschlaege`.",
+   "frage": "Welche 193 URLs liefern 404, und welche davon haben noch Nachfrage?",
+   "wirkung": "Nur so lässt sich zwischen „vergessen“ (Weiterleitung) und „richtig entsorgt“ (404 bleibt) unterscheiden. Ohne Liste wäre jede Zuordnung geraten."
+  },
+  {
+   "blockiert": "Inhalts- und Verlinkungsplan",
+   "braucht": "Detail-Export „Gefunden – zurzeit nicht indexiert.csv“ aus demselben Bericht.",
+   "frage": "Welche URLs stecken in „Gefunden – zurzeit nicht indexiert“ (69)?",
+   "wirkung": "Erst die URL macht aus einer Quote eine Redaktionsliste: welcher Artikel braucht Substanz, welcher nur einen internen Link."
+  },
+  {
+   "blockiert": "Inhalts- und Verlinkungsplan",
+   "braucht": "Detail-Export „Gecrawlt – zurzeit nicht indexiert.csv“ aus demselben Bericht.",
+   "frage": "Welche URLs stecken in „Gecrawlt – zurzeit nicht indexiert“ (4)?",
+   "wirkung": "Erst die URL macht aus einer Quote eine Redaktionsliste: welcher Artikel braucht Substanz, welcher nur einen internen Link."
+  },
+  {
+   "blockiert": "Bewertung der Weiterleitungs-Strategie",
+   "braucht": "Detail-Export „Seite mit Weiterleitung.csv“ und „Alternative Seite mit ordnungsgemäßem Canonical-Tag.csv“.",
+   "frage": "Sind die 115 Weiterleitungs-Seiten im Index angekommen?",
+   "wirkung": "Gemeldet wird bisher genau eine Weiterleitung. Entweder hat Google die 115 Meta-Refresh-Seiten noch nicht besucht, oder sie werden anders gezählt. Beides ist eine Aussage – geraten wird sie nicht."
+  }
+ ],
+ "gate": {
+  "anzahl_hart": 0,
+  "funde": [
+   {
+    "regel": "G5",
+    "schwere": "hinweis",
+    "text": "Sprung am 2026-10-17: nicht_indexiert 261 → 320 (22.6 %)."
+   },
+   {
+    "regel": "G5",
+    "schwere": "hinweis",
+    "text": "Sprung am 2026-10-17: indexiert 138 → 117 (15.2 %)."
+   }
+  ],
+  "status": "gruen"
+ },
+ "gruende": [
+  {
+   "basis": "erklärbar sind 23 Taxonomie-URLs (seit 29.09.2026 abgeschaltet: 20 Tag- und Kategorie-Archive) plus 7 bewusst entfallene Alt-URLs (Regel D). Der Rest ist Historie, die nur die Detail-Liste aufklärt.",
+   "bedeutung": "Die URL wurde aufgerufen und existiert nicht. Für Nutzer harmlos, für Suchmaschinen ein Signal: Die Seite ist weg. Handlungsbedarf entsteht nur dort, wo die URL noch Nachfrage hat (Impressionen, Backlinks, interne Links).",
+   "erwartung": 30,
+   "erwartung_art": "genau",
+   "grund": "Nicht gefunden (404)",
+   "klasse": "historie",
+   "offen": 193,
+   "quelle": "Website",
+   "schluessel": "not_found",
+   "seiten": 223,
+   "titel": "Nicht gefunden (404)",
+   "urteil": "offen",
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "basis": "Obergrenze ist der Bestand: 99 indexierbare Seiten. Alles darunter ist ein Rückstand beim Abrufen, kein Auszeichnungsfehler.",
+   "bedeutung": "Google kennt die URL aus der Sitemap oder einem Link, hat sie aber noch nicht abgerufen. Das ist eine Frage des Crawl-Budgets und der Autorität, nicht der Auszeichnung.",
+   "erwartung": 99,
+   "erwartung_art": "hoechstens",
+   "grund": "Gefunden – zurzeit nicht indexiert",
+   "klasse": "inhalt",
+   "offen": 0,
+   "quelle": "Google-Systeme",
+   "schluessel": "discovered_not_indexed",
+   "seiten": 69,
+   "titel": "Gefunden – zurzeit nicht indexiert",
+   "urteil": "plausibel",
+   "validierung": "Gestartet"
+  },
+  {
+   "basis": "20 /go/-Affiliate-Gateways, alle per robots.txt gesperrt (`Disallow: /go/` in 13 Roboter-Gruppen). Die Sperre ist Absicht: Ein Gateway ist eine Weiterleitung, keine Seite. Die Meldung bleibt dauerhaft stehen, weil Google ein noindex hinter einer Sperre nicht lesen kann – das ist erwartbar, kein Defekt.",
+   "bedeutung": "Google darf die URL nicht abrufen. Gewollt für /go/-Affiliate-Gateways; ein Defekt, sobald eine Inhaltsseite betroffen ist. Solange gesperrt, kann Google ein noindex nicht lesen – die Meldung bleibt dauerhaft stehen.",
+   "erwartung": 20,
+   "erwartung_art": "genau",
+   "grund": "Durch robots.txt-Datei blockiert",
+   "klasse": "technik",
+   "offen": 0,
+   "quelle": "Website",
+   "schluessel": "robots_blocked",
+   "seiten": 18,
+   "titel": "Durch robots.txt-Datei blockiert",
+   "urteil": "plausibel",
+   "validierung": "Nicht gestartet"
+  },
+  {
+   "basis": "5 Seiten tragen im Inhalt `robotsNoIndex: true` (/newsletter/, /newsletter/abmelden/, /newsletter/bestaetigung/, /newsletter/praeferenzen/, /suche/). Mehr als diese Zahl wäre ein Leck: eine Seite, die nicht noindex sein darf.",
+   "bedeutung": "Die Seite sagt selbst, dass sie nicht in den Index gehört. Richtig für Suche, Newsletter-Funnel und Gateways – falsch, wenn ein Artikel betroffen ist.",
+   "erwartung": 5,
+   "erwartung_art": "genau",
+   "grund": "Durch \"noindex\"-Tag ausgeschlossen",
+   "klasse": "technik",
+   "offen": 0,
+   "quelle": "Website",
+   "schluessel": "noindex",
+   "seiten": 5,
+   "titel": "Durch „noindex“-Tag ausgeschlossen",
+   "urteil": "vollstaendig",
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "basis": "Google hat gelesen und sich dagegen entschieden. Die Gegenprobe ist redaktionell: eigenständiger Inhalt, klare Suchabsicht, kein Duplikat.",
+   "bedeutung": "Google hat die Seite gelesen und sich gegen den Index entschieden. Technisch ist alles in Ordnung; es fehlt an Substanz, Einzigartigkeit oder Nachfrage. Redaktionelles Signal, kein Technikdefekt.",
+   "erwartung": 99,
+   "erwartung_art": "hoechstens",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "klasse": "inhalt",
+   "offen": 0,
+   "quelle": "Google-Systeme",
+   "schluessel": "crawled_not_indexed",
+   "seiten": 4,
+   "titel": "Gecrawlt – zurzeit nicht indexiert",
+   "urteil": "plausibel",
+   "validierung": "Fehlgeschlagen"
+  },
+  {
+   "basis": "115 Weiterleitungs-Seiten in `static/` (Meta-Refresh + `noindex,follow` + Canonical). Gemeldet wird nur, was Google tatsächlich besucht hat – die Zahl darf kleiner sein, nie größer.",
+   "bedeutung": "Die URL leitet weiter (HTTP oder Meta-Refresh). GitHub Pages kann keine echten 301 setzen; das Repo liefert deshalb Weiterleitungsseiten mit noindex und Canonical aus.",
+   "erwartung": 115,
+   "erwartung_art": "genau",
+   "grund": "Seite mit Weiterleitung",
+   "klasse": "technik",
+   "offen": 0,
+   "quelle": "Website",
+   "schluessel": "redirect",
+   "seiten": 1,
+   "titel": "Seite mit Weiterleitung",
+   "urteil": "plausibel",
+   "validierung": "Fehlgeschlagen"
+  }
+ ],
+ "kennzahlen": {
+  "anomalien": [
+   {
+    "datum": "2026-10-17",
+    "delta": 59,
+    "feld": "nicht_indexiert",
+    "nach": 320,
+    "prozent": 22.6,
+    "von": 261
+   },
+   {
+    "datum": "2026-10-17",
+    "delta": -21,
+    "feld": "indexiert",
+    "nach": 117,
+    "prozent": 15.2,
+    "von": 138
+   }
+  ],
+  "bekannt": 437,
+  "build_noindex": 159,
+  "build_noindex_klassen": {
+   "gateway": 20,
+   "kalender": 1,
+   "newsletter": 4,
+   "pager": 17,
+   "pinterest-oauth": 1,
+   "suche": 1,
+   "weiterleitung": 115
+  },
+  "build_seiten": 258,
+  "build_verhaeltnis": 2.61,
+  "build_weiterleitung": 115,
+  "delta_14_indexiert": -22,
+  "delta_14_nicht_indexiert": 67,
+  "delta_1_indexiert": 0,
+  "delta_1_nicht_indexiert": 0,
+  "delta_28_indexiert": -21,
+  "delta_28_nicht_indexiert": 83,
+  "delta_2_indexiert": 0,
+  "delta_2_nicht_indexiert": 0,
+  "delta_3_indexiert": -21,
+  "delta_3_nicht_indexiert": 59,
+  "delta_7_indexiert": -22,
+  "delta_7_nicht_indexiert": 67,
+  "export_alter_tage": 7,
+  "gruende": {
+   "crawled_not_indexed": 4,
+   "discovered_not_indexed": 69,
+   "noindex": 5,
+   "not_found": 223,
+   "redirect": 1,
+   "robots_blocked": 18
+  },
+  "impressionen_je_tag": 2.07,
+  "impressionen_summe": 62,
+  "index_puffer": 18,
+  "indexiert": 117,
+  "live_indexierbar": 99,
+  "nicht_indexiert": 320,
+  "nicht_indexiert_je_build_seite": 1.24,
+  "quote_indexiert": 26.8,
+  "robots_gesperrt": 18,
+  "stand_datum": "2026-10-19",
+  "summe_gruende": 320,
+  "tage_im_export": 30,
+  "tage_mit_impression": 24,
+  "tage_ohne_impression": 6
+ },
+ "massnahmen": [
+  {
+   "aufwand": "S",
+   "beleg": "Übersicht: 223 × 404 · erklärbar 30 · offen 193",
+   "dringlichkeit": "P1",
+   "id": "M1",
+   "owner": "Mensch (Export) + Automat",
+   "schritt": "Search Console → Indexierung → Seiten → „Nicht gefunden (404)“ → Exportieren, dann `python3 scripts/gsc_abdeckung.py --vorschlaege <datei>`.",
+   "titel": "404-Detail-Liste einlesen und triagieren",
+   "wirkung": "193 der 223 404er sind ohne Detail-Liste unerklärt. Die Triage trennt Nachfrage (Weiterleitung) von Entsorgung (404 bleibt)."
+  },
+  {
+   "aufwand": "M",
+   "beleg": "69 „Gefunden – zurzeit nicht indexiert“ bei 99 indexierbaren Seiten",
+   "dringlichkeit": "P1",
+   "id": "M2",
+   "owner": "Automat + Redaktion",
+   "schritt": "Interne Links auf die betroffenen Seiten verdichten (jede Seite aus mindestens zwei Artikeln erreichbar), Änderungsdatum ehrlich setzen, Publikations-Kadenz auf 2/Tag begrenzen; wöchentlich `scripts/gsc_indexierung.py --pruefen` für den Status je URL.",
+   "titel": "Crawl-Nachfrage für gefundene, nicht abgerufene Seiten",
+   "wirkung": "69 von 99 indexierbaren Seiten hat Google noch nicht abgerufen (69.7 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
+  },
+  {
+   "aufwand": "M",
+   "beleg": "4 × „Gecrawlt – zurzeit nicht indexiert“",
+   "dringlichkeit": "P2",
+   "id": "M3",
+   "owner": "Redaktion",
+   "schritt": "Je URL: Suchabsicht (Kurzantwort), Einzigartigkeit (`duplikat_guard.py`), Faktenfrische (`faktenfrische.py`) prüfen; erst danach erneut anfragen.",
+   "titel": "Redaktions-Queue für „gecrawlt, nicht indexiert“",
+   "wirkung": "4 Seiten wurden gelesen und abgelehnt. Das ist ein Inhaltsignal: Substanz, Einzigartigkeit, Passung zur Suchabsicht."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (9 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (8 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.)",
+   "dringlichkeit": "P2",
+   "id": "M4",
+   "owner": "Automat",
+   "schritt": "`--audit` listet die Altlasten aus den Top-Seiten; für den Rest die Detail-Exporte je Grund. Bereinigung nur dort, wo die URL keine Nachfrage hat (Weiterleitung vorhanden oder 404 ohne Impressionen).",
+   "titel": "Index-Altlasten benennen statt mitzählen",
+   "wirkung": "Der Index enthält mehr URLs als die Site hat. Die Quote ist deshalb zu hoch und jede Erfolgsmessung auf dieser Basis falsch."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "Diagramm 2026-10-17: indexiert 138 → 117",
+   "dringlichkeit": "P2",
+   "id": "M7",
+   "owner": "Mensch",
+   "schritt": "Änderungsprotokoll (`/aenderungsprotokoll/`) und Deploy-Historie zum Datum abgleichen; Ergebnis im Bericht festhalten, damit der Sprung nicht als Rauschen gilt.",
+   "titel": "Sprung im Abdeckungsbericht erklären",
+   "wirkung": "Am 2026-10-17 sind „indexiert“ von 138 auf 117 gesprungen (-21, 15.2 %). Ein Sprung dieser Größe hat eine Ursache im Repo: Deploy, Sitemap-Änderung, Aufräumaktion."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "Export enthält 0 Detail-Zeilen",
+   "dringlichkeit": "P2",
+   "id": "M8",
+   "owner": "Mensch + Automat",
+   "schritt": "Wöchentlich (Montag) die vier Exporte in die Search Console laden und `--import` ausführen. Der Vergleichslauf (`--gate`) erkennt Rückschritte automatisch.",
+   "titel": "Detail-Exporte in den Tageslauf aufnehmen",
+   "wirkung": "Der Abdeckungsbericht hat keine API. Wer ihn nur als Bildschirmfoto liest, kann nicht gegen den Bestand rechnen – und merkt einen Rückschritt erst Wochen später."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "117 von 437 bekannten URLs",
+   "dringlichkeit": "P2",
+   "id": "M9",
+   "owner": "Automat",
+   "schritt": "`--audit --md` liefert die Zeile für den Wochenbericht; Ziel: Quote steigt vier Wochen in Folge, ohne dass die Zahl der 404er wächst.",
+   "titel": "Indexquote als Zielgröße etablieren",
+   "wirkung": "Nur 26.8 % der bekannten URLs sind im Index. Die Kennzahl gehört in den Wochenbericht, nicht in ein Bildschirmfoto."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "5 × robotsNoIndex in content/ · GSC 5",
+   "dringlichkeit": "P3",
+   "id": "M5",
+   "owner": "Automat",
+   "schritt": "Wache läuft im Tageslauf (`--gate`). Kein Handlungsbedarf, solange die Zahlen deckungsgleich bleiben.",
+   "titel": "noindex-Bestand als Vertrag führen",
+   "wirkung": "5 Seiten sind absichtlich noindex (Suche, Newsletter-Funnel). Steigt die Zahl in der Search Console darüber, ist es ein Leck – die Wache meldet das hart."
+  },
+  {
+   "aufwand": "S",
+   "beleg": "18 blockiert bei 20 Gateways · 13 Roboter-Gruppen",
+   "dringlichkeit": "P3",
+   "id": "M6",
+   "owner": "Automat",
+   "schritt": "Keine Änderung. Wächter: `schema_seo_gate.py` (S8) und `--gate` (W3) prüfen, dass die Sperre bleibt und keine Inhaltsseite hineingerät.",
+   "titel": "robots.txt-Sperre der Gateways dokumentiert lassen",
+   "wirkung": "Die Meldung „durch robots.txt blockiert“ verschwindet nie, solange `/go/` gesperrt ist. Das ist die richtige Abwägung: 20 Gateways sind keine Inhalte, und Google soll sie nicht crawlen."
+  }
+ ],
+ "quellen": {
+  "datum": "2026-10-19",
+  "export": "google-search-console (Abdeckungsbericht, CSV-Export)",
+  "metadaten": {
+   "Sitemap": "Alle bekannten Seiten"
+  },
+  "repo": "public/sitemap.xml"
+ },
+ "schema": 1,
+ "stand": "2026-10-26T09:27:58Z",
+ "wahrheit": {
+  "befunde": [],
+  "entfallen": 7,
+  "gateways": 20,
+  "indexierbar": 99,
+  "noindex": [
+   "/newsletter/",
+   "/newsletter/abmelden/",
+   "/newsletter/bestaetigung/",
+   "/newsletter/praeferenzen/",
+   "/suche/"
+  ],
+  "robots": {
+   "datei": "public/robots.txt",
+   "go_gesperrt": true,
+   "sitemap_zeile": true,
+   "sperrt_go_gruppen": 13
+  },
+  "sektionen": {
+   "aenderungsprotokoll": 1,
+   "cockpit": 1,
+   "datenschutz": 1,
+   "impressum": 1,
+   "methodik": 1,
+   "newsletter-checkliste": 1,
+   "pillar": 7,
+   "posts": 69,
+   "presse": 1,
+   "so-entstehen-unsere-vergleiche": 1,
+   "startseite": 1,
+   "studien": 2,
+   "transparenz": 1,
+   "ueber": 1,
+   "werkzeuge": 10
+  },
+  "taxonomie_404": [
+   "/categories/",
+   "/categories/news/",
+   "/categories/ratgeber/",
+   "/tags/",
+   "/tags/budget-planen/",
+   "/tags/dns-und-netzsicherheit/",
+   "/tags/dsl-vergleich/",
+   "/tags/frugalismus/",
+   "/tags/gasrechnung-prüfen/",
+   "/tags/gastarif-wechseln/",
+   "/tags/geld-sparen-im-alltag/",
+   "/tags/girokonto/",
+   "/tags/haushaltsbuch-führen/",
+   "/tags/heizkosten-senken/",
+   "/tags/internet-und-mobilfunk/",
+   "/tags/kfz-versicherung/",
+   "/tags/kreditkarte-und-kredit/",
+   "/tags/mietwagen-und-wohnmobil/",
+   "/tags/notgroschen/",
+   "/tags/reisekosten-sparen/",
+   "/tags/stromkosten-senken/",
+   "/tags/tagesgeld-und-zinsen/",
+   "/tags/wlan-verbessern/"
+  ],
+  "top_nicht_live": [
+   {
+    "impressionen": 9,
+    "klicks": 0,
+    "position": 16.89,
+    "url": "/posts/kuehlschrank-strom-sparen-einstellung/",
+    "weiterleitung": "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
+   },
+   {
+    "impressionen": 8,
+    "klicks": 0,
+    "position": 5.25,
+    "url": "/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
+    "weiterleitung": "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/"
+   },
+   {
+    "impressionen": 1,
+    "klicks": 0,
+    "position": 4.0,
+    "url": "/posts/depot-umzug-steuerfrei-wechseln/",
+    "weiterleitung": "/pillar/konto-karten/"
+   },
+   {
+    "impressionen": 1,
+    "klicks": 0,
+    "position": 80.0,
+    "url": "/posts/elementarschadenversicherung-hochwasser-starkregen/",
+    "weiterleitung": "/pillar/versicherungen/"
+   },
+   {
+    "impressionen": 1,
+    "klicks": 0,
+    "position": 6.0,
+    "url": "/tags/haushaltsbuch/",
+    "weiterleitung": null
+   },
+   {
+    "impressionen": 1,
+    "klicks": 0,
+    "position": 10.0,
+    "url": "/tags/reiser%C3%BCcktritt/",
+    "weiterleitung": null
+   }
+  ],
+  "weiterleitungen": 115
+ },
+ "widersprueche": [
+  {
+   "regel": "W5",
+   "schwere": "hinweis",
+   "text": "117 Seiten sind im Index, indexierbar sind 99 – 18 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote."
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+Grund,Quelle,Validierung,Seiten
+Nicht gefunden (404),Website,Fehlgeschlagen,223
+"Durch ""noindex""-Tag ausgeschlossen",Website,Fehlgeschlagen,5
+Seite mit Weiterleitung,Website,Fehlgeschlagen,1
+Gecrawlt – zurzeit nicht indexiert,Google-Systeme,Fehlgeschlagen,4
+Durch robots.txt-Datei blockiert,Website,Nicht gestartet,18
+Gefunden – zurzeit nicht indexiert,Google-Systeme,Gestartet,69

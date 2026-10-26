@@ -32,6 +32,15 @@ data/gsc/meta.json merge=binary
 data/gsc/top_seiten_28t.json merge=binary
 data/gsc/top_suchbegriffe_28t.json merge=binary
 
+# ABDECKUNGSBERICHT – dieselbe Klasse (26.10.2026)
+# Der Bericht ist eine Momentaufnahme je Datum (`<datum>.json`) und ein Befund,
+# der aus genau dieser Momentaufnahme folgt (`befund.json`). Beide werden immer
+# als GANZES geschrieben und sind nie zeilenweise richtig. `aktuell.json` ist
+# eine Kopie der jüngsten Momentaufnahme – auch die ist ganz oder gar nicht.
+# Der Verlauf (`verlauf.jsonl`) bleibt bewusst ausgenommen: Eine Zeile je
+# Momentaufnahme ist eine unabhängige Messung, `*.jsonl merge=union` gilt.
+data/gsc/abdeckung/*.json merge=binary
+
 # Reserve-Snapshots sind ebenfalls ganze Beweise, keine Textbausteine (#634).
 # Ein paralleler Merge hatte Zeitstempel, Kandidaten und Quarantäne-Akten zu
 # ungültigem JSON vermischt. Ganze Fassung wählen, Readiness danach erneuern;

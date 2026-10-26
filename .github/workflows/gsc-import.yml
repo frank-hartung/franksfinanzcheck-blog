@@ -78,6 +78,7 @@ jobs:
           python3 scripts/indexierbare_seiten.py --selftest
           python3 scripts/gsc_verifikations_guard.py --selftest
           python3 scripts/gsc_indexierung.py --selftest
+          python3 scripts/gsc_abdeckung.py --selftest
           python3 scripts/gsc_import.py --selftest
           python3 scripts/submit_indexnow.py --selftest
 
@@ -135,6 +136,80 @@ jobs:
             python3 scripts/gsc_import.py
           fi
           echo "status=$(python3 -c 'import json;print(json.load(open("data/gsc/meta.json"))["status"])' 2>/dev/null || echo unbekannt)" >> "$GITHUB_OUTPUT"
+
+      # ------------------------------------------------------------
+      #  ABDECKUNG GEGENRECHNEN (26.10.2026, „Profi-Agentur")
+      #
+      #  Der Abdeckungsbericht der Search Console hat KEINE API – er kommt
+      #  nur als CSV aus der Oberfläche. Was ohne ihn fehlt, ist die
+      #  Gegenprobe: „320 nicht indexiert" ist erst dann eine Aussage, wenn
+      #  daneben steht, wie viele URLs der Build überhaupt hat (am 19.10.2026:
+      #  258, davon 99 indexierbar).
+      #
+      #  Der Build ist dafür nötig, aber nicht kritisch: scheitert er, rechnet
+      #  `gsc_abdeckung.py` gegen `content/` und schreibt das ausdrücklich in
+      #  den Befund, statt eine Zahl zu erfinden. Deshalb `weiter-bei-fehler`.
+      # ------------------------------------------------------------
+      - name: Build für die Gegenprobe (nicht kritisch)
+        id: build
+        continue-on-error: true
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Build für die GSC-Abdeckung"
+          weiter-bei-fehler: "true"
+
+      - name: Abdeckung prüfen (Befund + Tor)
+        id: abdeckung
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --audit --schreiben --json > gsc-abdeckung.json
+          rc=$?
+          python3 - <<'PY' || true
+          import json, os
+          try:
+              d = json.load(open("gsc-abdeckung.json", encoding="utf-8"))
+          except Exception as exc:
+              print(f"Abdeckungsbefund nicht lesbar: {exc}")
+              raise SystemExit(0)
+          k = d.get("kennzahlen", {})
+          g = d.get("gate", {})
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 📊 Abdeckung (Seiten-Indexierung)\n\n")
+              f.write(f"Stand: **{k.get('stand_datum')}** · Gate: "
+                      f"**{'ROT' if g.get('status') == 'rot' else 'GRÜN'}** · "
+                      f"Quelle: {d.get('quellen', {}).get('export')}\n\n")
+              f.write("| Kennzahl | Wert |\n|---|---|\n")
+              f.write(f"| Bekannte URLs | {k.get('bekannt')} |\n")
+              f.write(f"| davon indexiert | {k.get('indexiert')} ({k.get('quote_indexiert')} %) |\n")
+              f.write(f"| davon nicht indexiert | {k.get('nicht_indexiert')} |\n")
+              f.write(f"| URLs im Build | {k.get('build_seiten')} |\n")
+              f.write(f"| indexierbar (Sitemap) | {k.get('live_indexierbar')} |\n")
+              f.write(f"| Index-Altlasten (mind.) | {k.get('index_puffer')} |\n\n")
+              f.write("| Grund | Seiten | Erwartung | Urteil |\n|---|---|---|---|\n")
+              for x in d.get("gruende", []):
+                  art = x.get("erwartung_art")
+                  erwartung = ("–" if x.get("erwartung") is None
+                               else (f"≤ {x['erwartung']}" if art == "hoechstens"
+                                     else str(x["erwartung"])))
+                  f.write(f"| {x['titel']} | {x['seiten']} | {erwartung} | {x['urteil']} |\n")
+              offen = [w for w in d.get("widersprueche", []) if w.get("schwere") == "hart"]
+              if offen:
+                  f.write("\n**Harte Widersprüche**\n\n")
+                  for w in offen:
+                      f.write(f"- 🛑 **{w['regel']}** {w['text']}\n")
+              p1 = [m for m in d.get("massnahmen", []) if m.get("dringlichkeit") == "P1"]
+              if p1:
+                  f.write("\n**P1-Maßnahmen**\n\n")
+                  for m in p1:
+                      f.write(f"- **{m['id']}** {m['titel']} – {m['beleg']}\n")
+          PY
+          if [ "$rc" -ne 0 ]; then
+            echo "::warning title=GSC-Abdeckung::Der Abdeckungsbefund ist rot (Rückschritt oder Widerspruch). Details in der Lauf-Zusammenfassung."
+          fi
+          exit 0
 
       # ------------------------------------------------------------
       #  Indexierung ANFRAGEN. --live liest die ausgelieferte Sitemap:
