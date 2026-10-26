@@ -24,7 +24,7 @@ Was fehlte, war nicht eine Wache mehr, sondern die **Gegenprobe**. Genau die
 steht jetzt im Repo: ein Modul, das den Export einliest, gegen Sitemap, Build,
 Weiterleitungskarte, noindex-Bestand und robots.txt rechnet, jeder Zahl ein
 Urteil gibt und die offenen Posten als priorisierte Maßnahmenliste ausgibt –
-reproduzierbar, offline, mit 33 Regressionstests.
+reproduzierbar, offline, mit 51 Regressionstests.
 
 | Bereich | vorher | jetzt |
 |---|---|---|
@@ -75,6 +75,17 @@ unten. Ein Sprung dieser Größe ist keine Messungenauigkeit, sondern eine
 Ursache im Repo (Deploy, Sitemap-Änderung, Aufräumaktion). Er steht als
 Maßnahme `M7` in der Liste, weil er sich aus dem Änderungsprotokoll erklären
 lässt – nicht aus dem Bericht.
+
+**Die Ursache ist inzwischen belegt** (Nachtrag 26.10.2026, `npm run gsc:ursachen`):
+Der Commit `8058293` vom **14.10.2026, 09:45 UTC** („redaktion:
+Hemingway-Lesbarkeit und Offline-Sprachpflege") hat 3.936 Dateien geändert,
+darunter 89 in `content/posts`, und dabei **32 Beiträge mehr auf `draft: true`
+gesetzt** (36 neu zurückgestuft). Zurückgestufte Beiträge verlassen Build und
+Sitemap – Google meldet den Verlust drei Tage später, genau am 17.10.
+Zwischen 15. und 18.10. wurde weder `hugo.toml`, `layouts/`, `robots.txt` noch
+`data/weiterleitungen.yaml` angefasst; die technischen Erklärungen scheiden
+damit aus. Grenze der Aussage: Die 21 verlorenen Seiten sind nicht einzeln
+zugeordnet – dafür braucht es die Detail-Liste (M1).
 
 Impressionen: 62 in 30 Tagen (2,07/Tag), sechs Tage ohne. Klicks: null. Das ist
 der eigentliche Grund für diesen Auftrag – bei dieser Sichtbarkeit entscheidet
@@ -222,11 +233,12 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
 
 ### 5.3 Tests, Workflow, Cockpit
 
-- `scripts/tests/test_gsc_abdeckung.py` – 33 Regressionstests über vier Ebenen:
+- `scripts/tests/test_gsc_abdeckung.py` – 51 Regressionstests über sechs Ebenen:
   Lesen (BOM, Semikolon, deutsche Anführungszeichen), Nicht-Schreiben bei
   Widerspruch, Gegenrechnen (noindex-Leck, robots-Sperre ohne Gateway,
   unbekannter Grund), Hermetik (kein Netz, kein Schreiben in den echten
-  Verlauf). Selbsttest: 40 Fälle.
+  Verlauf), Maßnahmenplan (Triage, Vertrag, Verlinkung, Goldkorridor),
+  Git-Beleg (M7). Selbsttest: 78 Fälle.
 - `.github/workflows/gsc-import.yml` – Build für die Gegenprobe (nicht
   kritisch), dann `--audit --schreiben --json` mit Tabelle in der
   Lauf-Zusammenfassung. Ein roter Befund wird als Warnung sichtbar, blockiert
@@ -235,7 +247,9 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
   Gate-Status. Fehlt der Befund, bleibt der Bereich wie bisher (kein erfundener
   Zustand).
 - `package.json` – `gsc:abdeckung`, `gsc:abdeckung:gate`, `gsc:abdeckung:md`;
-  `test:gsc` um den neuen Selbsttest und die 30 Tests erweitert.
+  `test:gsc` um den neuen Selbsttest und die Tests erweitert; zusätzlich
+  `gsc:triage`, `gsc:vertrag`, `gsc:verlinkung`, `gsc:verlinken`,
+  `gsc:prioritaet`, `gsc:altlasten`, `gsc:kpi`, `gsc:abnahme`, `gsc:ursachen`.
 - `docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md` – neuer Abschnitt 9: Export
   anleiten, Zahlen lesen, Grenzen kennen.
 
@@ -263,17 +277,23 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
 
 ## 7. Maßnahmenplan
 
-| ID | Prio | Aufwand | Maßnahme | Beleg | Eigentümer |
-|---|---|---|---|---|---|
-| M1 | **P1** | S | 404-Detail-Liste exportieren und einlesen, dann triagieren | 223 gemeldet, 30 erklärbar, 193 offen | Mensch (Export) + Automat |
-| M2 | **P1** | M | Crawl-Nachfrage für die 69 gefundenen, nicht abgerufenen Seiten | 69 bei 99 indexierbaren Seiten | Automat + Redaktion |
-| M3 | P2 | M | Redaktions-Queue für die 4 „gecrawlt, nicht indexiert" | 4 Seiten | Redaktion |
-| M4 | P2 | S | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbar | Automat |
-| M7 | P2 | S | Sprung vom 17.10. erklären | 261 → 320 bzw. 138 → 117 | Mensch |
-| M8 | P2 | S | Detail-Exporte wöchentlich in den Tageslauf | 0 Detail-Zeilen im Export | Mensch + Automat |
-| M9 | P2 | S | Indexquote als Wochen-Kennzahl etablieren | 26,8 % | Automat |
-| M5 | P3 | S | noindex-Bestand als Vertrag führen | 5 = 5 | Automat |
-| M6 | P3 | S | robots-Sperre der Gateways dokumentiert lassen | 18 von 20 | Automat |
+| ID | Prio | Aufwand | Maßnahme | Beleg | Eigentümer | Stand 26.10.2026 |
+|---|---|---|---|---|---|---|
+| M1 | **P1** | S | 404-Detail-Liste exportieren und einlesen, dann triagieren | 223 gemeldet, 30 erklärbar, 193 offen | Mensch (Export) + Automat | **Automat fertig** (`--triage`), Export offen |
+| M2 | **P1** | M | Crawl-Nachfrage für die 69 gefundenen, nicht abgerufenen Seiten | 69 bei 99 indexierbaren Seiten | Automat + Redaktion | **Automat fertig** (`--prioritaet`, `--verlinkung`), Redaktion laufend |
+| M3 | P2 | M | Redaktions-Queue für die 4 „gecrawlt, nicht indexiert" | 4 Seiten | Redaktion | **Automat fertig** (`redaktions_queue.md`), Pflege offen |
+| M4 | P2 | S | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbar | Automat | **fertig** (`--altlasten`, W5) |
+| M7 | P2 | S | Sprung vom 17.10. erklären | 261 → 320 bzw. 138 → 117 | Mensch | **belegt** (Commit `8058293`, `--ursachen`) |
+| M8 | P2 | S | Detail-Exporte wöchentlich in den Tageslauf | 0 Detail-Zeilen im Export | Mensch + Automat | **Automat fertig** (Regel W9, `details/.stand`), Export offen |
+| M9 | P2 | S | Indexquote als Wochen-Kennzahl etablieren | 26,8 % | Automat | **fertig** (`--kpi`, `--abnahme`) |
+| M5 | P3 | S | noindex-Bestand als Vertrag führen | 5 = 5 | Automat | **fertig** (`--vertrag`, V1/V2, Gate G6) |
+| M6 | P3 | S | robots-Sperre der Gateways dokumentiert lassen | 18 von 20 | Automat | **fertig** (`--vertrag`, V3/V4) |
+
+„Automat fertig, Export offen" heißt: Das Werkzeug ist gebaut, getestet und im
+Tageslauf verdrahtet. Es kann nur nichts triagieren, solange niemand die
+Detail-Listen aus der Search Console exportiert – dieser eine Schritt lässt
+sich nicht automatisieren, weil die Oberfläche keinen API-Zugang dafür hat.
+Der Befund sagt das in jeder Ausgabe (Regel **W9**), statt es zu verschweigen.
 
 **Was M2 konkret heißt** (der einzige Hebel, der ohne Google-Zugriff wirkt):
 interne Verlinkung verdichten (jede der 69 Seiten aus mindestens zwei Artikeln
@@ -281,6 +301,54 @@ erreichbar), `lastmod` ehrlich halten, Publikationskadenz auf 2/Tag begrenzen,
 damit der Crawler nicht gegen 27 Entwürfe und 2 neue Artikel pro Tag anläuft –
 und wöchentlich `python3 scripts/gsc_indexierung.py --pruefen` für den Status
 je URL.
+
+### 7.1 Was am 26.10.2026 tatsächlich umgesetzt wurde
+
+Nicht die Absicht, das Ergebnis – gemessen am selben Tag:
+
+| Größe | vorher | nachher | Messweg |
+|---|---|---|---|
+| Inhaltsseiten ohne redaktionellen Inlink | 14 von 76 | **0 von 74** | `--prioritaet` / `--verlinkung` |
+| redaktionelle Links im Bestand | 508 | **539** | `redaktionelle_links()` |
+| eingefügte Links (Beleg je Paar) | – | **33** | `data/verlinkung_history.jsonl` |
+| Artikel über dem Goldkorridor (9) | 1 | **0** | `link_density_guard.py` |
+| Gate-Regel für gebrochenen Vertrag | keine | **G6 (hart)** | `--audit --gate` |
+| Hinweis „Detail-Listen fehlen“ | keiner | **W9** in jeder Ausgabe | `--audit` |
+| Hinweis „Sitemap ohne lastmod“ | keiner | **W10** (9 URLs) | `--audit` |
+
+Die Verlinkung lief in mehreren Läufen mit je höchstens zehn Links. Sie wurde
+zweimal zurückgenommen: Der erste Anlauf setzte einen Artikel von neun auf zehn
+interne Links, weil `link_density_guard.py` **Vorkommen** zählt und der Auftrag
+zunächst **Ziele** zählte. Seitdem prüft `verlinkungs_auftrag()` vor jedem
+Vorschlag die echte Datei mit der Regel des Guards (harte Grenze: nie mehr als
+neun). Der zweite Anlauf traf eine zweite, ältere Altlast: ein Artikel stand
+schon vorher bei zehn Links mit doppeltem Ziel; die Dublette im Fließtext ist
+entlinkt, die „Weiterlesen“-Zeile blieb. Ergebnis: **0 über dem Korridor**,
+88 % im Goldkorridor (vorher 85 %).
+
+Zwei Befunde sind bei der Umsetzung neu dazugekommen:
+
+- **Ein Teil der 404er kann aus dem eigenen Repo stammen.** Die Triage prüft
+  jetzt, ob der Slug einer gemeldeten 404-URL als `draft: true` im Bestand
+  liegt – dann lautet die Aktion „veröffentlichen“, nicht „weiterleiten“. Von
+  den 27 Entwürfen sind vier aus live stehenden Artikeln verlinkt (W11); das
+  Rendering zeigt dort nur noch Text, ein 404 entsteht also nicht, aber die
+  Nachfrage ist dokumentiert. Getestet mit einer Beispiel-Liste: Die URL
+  `/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/` wird
+  als **P1 „Seite liegt als Entwurf“** eingeordnet.
+- **Zwei stehende Hinweise statt Schweigen.** Regel **W9** meldet in jeder
+  Ausgabe, wenn die Detail-Listen fehlen oder älter als 14 Tage sind; Regel
+  **W10** meldet die neun Sitemap-URLs ohne `lastmod`. Beides sind keine
+  Fehler, die man wegdrückt, sondern Lücken, die man kennt.
+
+Zwei Dinge sind bewusst **nicht** passiert:
+
+- **Keine erfundenen `lastmod`-Daten.** Die neun Seiten ohne `lastmod` sind
+  statische Vertrauensseiten (Impressum, Datenschutz, Über …). Ein Datum
+  „heute“ wäre eine Lüge gegenüber Google; Regel W10 macht die Lücke sichtbar,
+  statt sie zu übertünchen.
+- **Keine Weiterleitung auf Verdacht.** Die 162 offenen Kandidaten-URLs bleiben
+  offen, bis die Detail-Liste sagt, welche davon Google wirklich gesehen hat.
 
 **Was nur ein Mensch tun kann** (kein Agent kann sich in dein Google-Konto
 anmelden): die sechs Detail-Exporte aus der Oberfläche laden –
@@ -293,14 +361,21 @@ zusammen zwei Minuten und machen aus 193 offenen 404ern eine Arbeitsliste.
 
 ## 8. Abnahmekriterien
 
-| Zeitraum | Kriterium | Messung |
-|---|---|---|
-| 14 Tage | Quote steigt, ohne dass die 404er wachsen | `--audit --gate` grün, `quote_indexiert` steigt |
-| 14 Tage | keine offene Beweisfrage mehr bei den 404ern | `offen` bei „Nicht gefunden" = 0 oder begründet |
-| 30 Tage | mindestens 90 % der Sitemap-URLs im Index | Detail-Export je Grund |
-| 30 Tage | kein Widerspruch `W2`/`W3`/`W6` | `--gate` grün |
-| 90 Tage | Impressionen auf Weiterleitungs-Stubs < 5 % | Top-Seiten gegen Sitemap |
-| laufend | Befund nie älter als 14 Tage | `export_alter_tage` im Befund (`W8`) |
+| Zeitraum | Kriterium | Messung | maschinell |
+|---|---|---|---|
+| 14 Tage | Quote steigt, ohne dass die 404er wachsen | `--audit --gate` grün, `quote_indexiert` steigt | ✅ (`--abnahme`) |
+| 14 Tage | keine offene Beweisfrage mehr bei den 404ern | `offen` bei „Nicht gefunden" = 0 oder begründet | ✅ |
+| 30 Tage | mindestens 90 % der Sitemap-URLs im Index | Detail-Export je Grund | ❌ (menschlich) |
+| 30 Tage | kein Widerspruch `W2`/`W3`/`W6` | `--gate` grün | ✅ |
+| 30 Tage | keine Inhaltsseite ohne redaktionellen Inlink | `--prioritaet` | ✅ (seit 26.10. erfüllt) |
+| 90 Tage | Impressionen auf Weiterleitungs-Stubs < 5 % | Top-Seiten gegen Sitemap | ❌ (menschlich) |
+| laufend | Befund nie älter als 14 Tage | `export_alter_tage` (`W8`) | ✅ |
+| laufend | Detail-Listen nie älter als 14 Tage | `detail_alter_tage` (`W9`) | ✅ |
+| laufend | kein gebrochener Vertrag | `--vertrag`, Gate `G6` | ✅ |
+
+Seit dem 26.10.2026 prüft `npm run gsc:abnahme` diese Zeilen und nennt je
+offenem Punkt den nächsten Schritt. Ein Kriterium ohne Datum ist ein Wunsch;
+ein Kriterium ohne Messweg ist eine Behauptung.
 
 ---
 
@@ -334,12 +409,26 @@ python3 scripts/gsc_abdeckung.py --audit --gate     # Exit 1 bei Rückschritt
 # Triage einer 404-Detail-Liste
 python3 scripts/gsc_abdeckung.py --vorschlaege "details/Nicht gefunden (404).csv"
 
+# Maßnahmenplan (M1–M9)
+python3 scripts/gsc_abdeckung.py --triage          # Detail-Listen → Arbeitsliste
+python3 scripts/gsc_abdeckung.py --vertrag         # noindex-Bestand, Gateways
+python3 scripts/gsc_abdeckung.py --kandidaten      # Obergrenze der 404-Erklärung
+python3 scripts/gsc_abdeckung.py --prioritaet      # Anfrage-Wellen
+python3 scripts/gsc_abdeckung.py --verlinkung      # Auftrag zeigen
+python3 scripts/gsc_abdeckung.py --verlinkung --apply --max 10   # schreiben
+python3 scripts/gsc_abdeckung.py --altlasten       # Index-Puffer benennen
+python3 scripts/gsc_abdeckung.py --kpi             # Wochenkennzahl
+python3 scripts/gsc_abdeckung.py --abnahme         # Abnahmekriterien
+python3 scripts/gsc_abdeckung.py --ursachen        # Sprung mit Git-Beleg
+
 # Selbsttest und Regressionstests
-python3 scripts/gsc_abdeckung.py --selftest
-python3 -m unittest scripts.tests.test_gsc_abdeckung
+python3 scripts/gsc_abdeckung.py --selftest        # 78 Fälle
+python3 -m unittest scripts.tests.test_gsc_abdeckung   # 51 Tests
 
 # npm-Kurzbefehle
-npm run gsc:abdeckung · npm run gsc:abdeckung:gate · npm run gsc:abdeckung:md
+npm run gsc:abdeckung · gsc:abdeckung:gate · gsc:triage · gsc:vertrag
+npm run gsc:prioritaet · gsc:verlinkung · gsc:verlinken · gsc:kpi
+npm run gsc:abnahme · gsc:ursachen · gsc:altlasten
 ```
 
 ---
@@ -349,10 +438,10 @@ npm run gsc:abdeckung · npm run gsc:abdeckung:gate · npm run gsc:abdeckung:md
 | Datei | Art | Inhalt |
 |---|---|---|
 | `scripts/gsc_abdeckung.py` | neu | Abdeckungs-Zentrale (Import, Gegenrechnung, Gate, Triage) |
-| `scripts/tests/test_gsc_abdeckung.py` | neu | 33 Regressionstests |
+| `scripts/tests/test_gsc_abdeckung.py` | neu | 51 Regressionstests |
 | `data/gsc/abdeckung/**` | neu | Export, Momentaufnahme, Verlauf, Befund |
 | `docs/ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md` | geändert | Abschnitt 9 (Export, Gegenprobe, Grenzen), Abschnitte 10–11 neu nummeriert |
-| `.github/workflows/gsc-import.yml` | geändert | Selbsttest, Build für die Gegenprobe, Abdeckungs-Schritt mit Lauf-Tabelle |
+| `.github/workflows/gsc-import.yml` | geändert | Selbsttest, Build für die Gegenprobe, Abdeckungs-Schritt mit Lauf-Tabelle, fünf Maßnahmen-Schritte, Artefakt-Upload, Welle 1 als Anfrage-Reihenfolge |
 | `scripts/cockpit.py` | geändert | Zeile „Search Console" in „SEO & Technik" |
 | `package.json` | geändert | drei npm-Befehle, `test:gsc` erweitert |
 | `.gitattributes` | geändert | `merge=binary` für die Abdeckungs-Artefakte |

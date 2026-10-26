@@ -212,6 +212,79 @@ jobs:
           exit 0
 
       # ------------------------------------------------------------
+      #  MASSNAHMENPLAN (M1–M9). Jeder Schritt ist eine Maßnahme aus
+      #  GSC-ABDECKUNG-HIGHEND-2026-10-26.md, die ohne Google-Zugriff
+      #  wirkt: Vertrag prüfen (M5/M6), Anfrage-Reihenfolge (M2),
+      #  Triage sobald Detail-Listen vorliegen (M1/M3), Kennzahlen (M9),
+      #  Beleg für Sprünge (M7). Kein Schritt bricht den Lauf ab – der
+      #  Befund ist eine Warnung, das Tor steht oben.
+      # ------------------------------------------------------------
+      - name: Vertrag prüfen (noindex-Bestand, Gateways, robots)
+        id: vertrag
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --vertrag || true
+
+      - name: Anfrage-Priorität und Verlinkungsauftrag berechnen
+        id: prioritaet
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --prioritaet || true
+          python3 scripts/gsc_abdeckung.py --verlinkung || true
+
+      - name: Detail-Listen triagieren (nur wenn vorhanden)
+        id: triage
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          if [ -d data/gsc/abdeckung/details ]; then
+            python3 scripts/gsc_abdeckung.py --triage || true
+          else
+            echo "::warning title=GSC-Detail-Listen::Keine Detail-Liste in data/gsc/abdeckung/details/. In der Search Console je Grund exportieren (Indexierung → Seiten → Grund → Exportieren) – ohne sie bleiben die Summen Summen."
+          fi
+
+      - name: Wochen-Kennzahl und Abnahme
+        id: kennzahl
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --kpi || true
+          python3 scripts/gsc_abdeckung.py --abnahme || true
+          python3 scripts/gsc_abdeckung.py --altlasten || true
+
+      - name: Sprünge mit Repo-Beleg erklären
+        id: ursachen
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          # Ohne Historie kein Beleg: der Klon ist flach, deshalb bewusst
+          # --ohne-git im Tageslauf. Der Belegweg steht im Bericht (M7).
+          python3 scripts/gsc_abdeckung.py --ursachen --ohne-git || true
+
+      - name: Befund-Artefakte sichern
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gsc-abdeckung
+          path: |
+            data/gsc/abdeckung/befund.json
+            data/gsc/abdeckung/befund.md
+            data/gsc/abdeckung/vertrag.json
+            data/gsc/abdeckung/prioritaet.json
+            data/gsc/abdeckung/verlinkungsauftrag.json
+            data/gsc/abdeckung/triage.md
+            data/gsc/abdeckung/redaktions_queue.md
+            data/gsc/abdeckung/ursachen.json
+          if-no-files-found: ignore
+
+      # ------------------------------------------------------------
       #  Indexierung ANFRAGEN. --live liest die ausgelieferte Sitemap:
       #  Eingereicht wird, was Google auch sehen kann – nicht, was ein
       #  lokaler Build zufällig enthält. Ohne Secrets: Status
@@ -227,6 +300,26 @@ jobs:
           zusatz=""
           if [ "${{ inputs.alles_anfragen }}" = "true" ]; then
             zusatz="--limit 200"
+          fi
+          # M2: Crawl-Nachfrage gezielt. Welle 1 (max. 40) ist die nach
+          # Wirkung sortierte Liste aus der Abdeckung – Nachfrage,
+          # fehlender Inlink, Alter. Ohne sie fragt der Lauf stumpf nach
+          # lastmod und verliert das Tageskontingent an die falschen Seiten.
+          welle=""
+          if [ -f data/gsc/abdeckung/prioritaet.json ]; then
+            welle=$(python3 - <<'PY'
+          import json
+          try:
+              d = json.load(open("data/gsc/abdeckung/prioritaet.json", encoding="utf-8"))
+          except Exception:
+              raise SystemExit(0)
+          print(" ".join(f"--url {u}" for u in (d.get("welle1_absolut") or [])[:40]))
+          PY
+          )
+          fi
+          if [ -n "$welle" ]; then
+            echo "Welle 1: $(echo "$welle" | tr ' ' '\n' | grep -c '^--url') URLs aus der Priorität."
+            zusatz="$welle"
           fi
           {
             echo "### 🗂️ Fällige Seiten (Plan aus der Live-Sitemap)"

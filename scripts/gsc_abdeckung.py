@@ -70,7 +70,7 @@ AUFRUF
     # 4) Aus einer 404-Detail-Liste Weiterleitungs-Vorschläge ableiten
     python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
 
-    python3 scripts/gsc_abdeckung.py --selftest         # 22 Fälle, offline
+    python3 scripts/gsc_abdeckung.py --selftest         # 78 Fälle, offline
 
 WO DIE EXPORTE HERKOMMEN
     Search Console → Indexierung → Seiten → oben rechts „Exportieren“.
@@ -119,6 +119,14 @@ UMGEBUNG_BASIS = "INDEX_GATE_BASE"
 GATEWAYS = ROOT / "static" / "go"
 
 SCHEMA = 1
+# Google-Kontingent der URL Inspection API je Property und Tag. Dieselbe Zahl
+# führt `gsc_indexierung.py` – hier nur für die Kapazitätsrechnung der Wellen.
+ANFRAGEN_PRO_TAG = 200
+# Hubs und Rechtsseiten werden über Navigation verlinkt – ein fehlender
+# redaktioneller Inlink ist dort kein Befund.
+HUBS = ("/", "/posts/", "/pillar/", "/werkzeuge/", "/studien/")
+# Kanonische Domain für absolute URLs (URL-Inspection-API will sie absolut).
+SITE = "https://franksfinanzcheck.de"
 
 # --------------------------------------------------------------------------
 #  Grund-Katalog
@@ -868,11 +876,19 @@ def kennzahlen(export: dict, wahrheit: dict, heute: dt.date | None = None) -> di
         except ValueError:
             alter = None
 
+    # Die Detail-Listen (welche URL, welcher Grund) kommen nur per Export. Ihr
+    # Alter entscheidet, ob aus dem Befund eine Arbeitsliste wird – deshalb
+    # steht es in denselben Kennzahlen wie das Alter des Berichts (W8).
+    detail = detail_stand(heute)
     impressionen = [z.get("impressionen") for z in verlauf if z.get("impressionen") is not None]
     live = wahrheit.get("anzahl_indexierbar") or 0
     return {
         "stand_datum": letzter.get("datum"),
         "export_alter_tage": alter,
+        "detail_stand": detail["stand"],
+        "detail_alter_tage": detail["alter_tage"],
+        "detail_urls": detail["urls"],
+        "sitemap_ohne_lastmod": lastmod_luecke(wahrheit),
         "tage_im_export": len(verlauf),
         "indexiert": indexiert,
         "nicht_indexiert": nicht_indexiert,
@@ -983,6 +999,55 @@ def befund_gruende(export: dict, wahrheit: dict) -> list[dict]:
     return out
 
 
+# Detail-Listen liegen als CSV in diesem Ordner; die Datei `.stand` nennt das
+# Exportdatum. Beides im Repo, damit der Befund auch ohne Google-Zugriff
+# nachvollziehbar bleibt.
+DETAILS = ABDECKUNG / "details"
+
+
+def detail_stand(heute: dt.date | None = None) -> dict:
+    """Wie alt sind die Detail-Listen? Ohne sie bleibt jede Triage eine Summe."""
+    heute = heute or dt.date.today()
+    stand_datei = DETAILS / ".stand"
+    stand = None
+    if stand_datei.exists():
+        stand = stand_datei.read_text(encoding="utf-8").strip()[:10] or None
+    urls = 0
+    for csv in sorted(DETAILS.glob("*.csv")) if DETAILS.exists() else []:
+        try:
+            with csv.open(encoding="utf-8-sig", newline="") as fh:
+                kopf = next(csv.reader(fh), [])
+            if any("url" in str(k).lower() for k in kopf):
+                urls += max(0, sum(1 for _ in csv.open(encoding="utf-8-sig")) - 1)
+        except (OSError, StopIteration, UnicodeDecodeError):
+            continue
+    alter = None
+    if stand:
+        try:
+            alter = (heute - dt.date.fromisoformat(stand)).days
+        except ValueError:
+            alter = None
+    return {"stand": stand, "alter_tage": alter, "urls": urls}
+
+
+def lastmod_luecke(wahrheit: dict, root: Path = ROOT) -> int | None:
+    """Sitemap-URLs ohne `lastmod` – ohne Datum crawlt Google nach Gefühl.
+
+    Gibt None zurück, wenn kein Build vorliegt: Eine 0 wäre hier eine Lüge.
+    """
+    sitemap = _oeffentlich(root) / "sitemap.xml"
+    if not sitemap.exists():
+        return None
+    import xml.etree.ElementTree as ET
+
+    ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    try:
+        baum = ET.parse(sitemap)
+    except (ET.ParseError, OSError):
+        return None
+    return len([e for e in baum.getroot().iter(f"{ns}url") if e.find(f"{ns}lastmod") is None])
+
+
 def widersprueche(gruende: list[dict], kenn: dict, wahrheit: dict,
                   pruef: list[dict]) -> list[dict]:
     """Wo Zahlen und Bestand nicht zusammenpassen – mit Regel und Folge."""
@@ -1044,6 +1109,34 @@ def widersprueche(gruende: list[dict], kenn: dict, wahrheit: dict,
             "text": (f"Der Abdeckungsbericht ist {alter} Tage alt (Stand "
                      f"{kenn.get('stand_datum')}). Die Search Console liefert ihn nur als "
                      "CSV – ohne neuen Export misst dieser Befund die Vergangenheit."),
+        })
+
+    detail_alter = kenn.get("detail_alter_tage")
+    if detail_alter is None or detail_alter > 14:
+        out.append({
+            "regel": "W9", "schwere": "hinweis",
+            "text": (("Keine Detail-Liste im Bestand" if detail_alter is None
+                      else f"Detail-Listen sind {detail_alter} Tage alt")
+                     + " (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die "
+                     "gemeldeten URLs nicht triagieren – die Summen bleiben Summen."),
+        })
+
+    tote = kenn.get("tote_ziele") or 0
+    if tote:
+        out.append({
+            "regel": "W11", "schwere": "hinweis",
+            "text": (f"{tote} Linkziel(e) im Inhalt werden nicht gebaut "
+                     "(Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – "
+                     "die Verlinkung ist wirkungslos: veröffentlichen oder entlinken."),
+        })
+
+    ohne_lastmod = kenn.get("sitemap_ohne_lastmod")
+    if ohne_lastmod:
+        out.append({
+            "regel": "W10", "schwere": "hinweis",
+            "text": (f"{ohne_lastmod} Sitemap-URL(s) ohne `lastmod`. Google entscheidet "
+                     "dann selbst, wann neu gecrawlt wird – genau das Gegenteil von "
+                     "Crawl-Nachfrage (M2)."),
         })
 
     if kenn.get("robots_gesperrt") and not wahrheit["robots"]["sitemap_zeile"]:
@@ -1266,6 +1359,14 @@ def gate(auswertung: dict, vorheriger: dict | None) -> dict:
             funde.append({"regel": "G4", "schwere": "hart",
                           "text": ("Summe der Gründe unverändert, Gesamtzahl geändert – "
                                    "die Übersicht ist unvollständig.")})
+    # Ein gebrochener Vertrag (noindex-Leck, unbegründete Sperre, fehlende
+    # Gateway-Sperre) ist kein Hinweis: Er ändert, welche Seiten überhaupt in
+    # den Index können. Deshalb hart – die Abnahme verlangt es so.
+    vertrag_teil = auswertung.get("vertrag") or {}
+    for f in vertrag_teil.get("funde") or []:
+        if f.get("schwere") == "hart":
+            funde.append({"regel": "G6", "schwere": "hart",
+                          "text": f"[{f['regel']}] {f['text']}"})
     for a in kenn.get("anomalien") or []:
         funde.append({"regel": "G5", "schwere": "hinweis",
                       "text": (f"Sprung am {a['datum']}: {a['feld']} {a['von']} → "
@@ -1432,9 +1533,28 @@ def vorheriger_snapshot(datum: str, pfad: Path | None = None) -> dict | None:
 
 def auswerten(snapshot: dict, wahrheit: dict | None = None,
               verlauf_pfad: Path | None = None, heute: dt.date | None = None) -> dict:
-    """Der vollständige Befund: Kennzahlen, Gründe, Widersprüche, Maßnahmen, Gate."""
+    """Der vollständige Befund: Kennzahlen, Gründe, Widersprüche, Maßnahmen, Gate.
+
+    Alles, was den Handlungsteil trägt, hängt an derselben Messung: Der
+    Kandidatenraum schätzt, wie viel der 404er der Bestand erklären KANN, die
+    Triage macht aus einer Detail-Liste eine Arbeitsliste, der Vertrag prüft
+    noindex und Gateways, die Priorisierung ordnet die Anfragen, KPI und
+    Abnahme machen den Erfolg messbar. Fehlt ein Eingang (kein Build, keine
+    Detail-Liste), steht das als Befund da – nicht als erfundene Zahl.
+    """
     wahrheit = wahrheit or repo_wahrheit()
+    verlinkung = redaktionelle_links()
     kenn = kennzahlen(snapshot, wahrheit, heute)
+    # Gezählt werden Inhaltsseiten. Start, Hubs und Rechtsseiten hängen an der
+    # Navigation; sie als "unverlinkt" zu führen wäre ein Fehlalarm (und würde
+    # den Verlinkungsauftrag mit sinnlosen Zielen füllen).
+    inhalt = [u for u in verlinkung["seiten"]
+              if u.startswith(("/posts/", "/pillar/")) and u not in HUBS]
+    kenn["ohne_inlink"] = len([u for u in inhalt if verlinkung["seiten"][u]["ein"] == 0])
+    kenn["ohne_auslink"] = len([u for u in inhalt if verlinkung["seiten"][u]["aus"] == 0])
+    kenn["inhaltsseiten"] = len(inhalt)
+    kenn["tote_ziele"] = len(tote_ziele())
+    kenn["median_auslink"] = verlinkung["median_aus"]
     gruende = befund_gruende(snapshot, wahrheit)
     pruef = snapshot.get("pruefung") or []
     wid = widersprueche(gruende, kenn, wahrheit, pruef)
@@ -1450,6 +1570,15 @@ def auswerten(snapshot: dict, wahrheit: dict | None = None,
         "kennzahlen": kenn,
         "gruende": gruende,
         "widersprueche": wid,
+        "tote_ziele": tote_ziele(),
+        "verlinkung": {"ohne_ein": verlinkung["ohne_ein"],
+                       "ohne_aus": verlinkung["ohne_aus"],
+                       "median_aus": verlinkung["median_aus"],
+                       "summe": verlinkung["summe"]},
+        "kandidaten": kandidatenraum(wahrheit, snapshot),
+        "vertrag": vertrag(wahrheit, wahrheit.get("bau")),
+        "prioritaet": prioritaet(wahrheit, verlinkung, snapshot, heute),
+        "ursachen": ursachen(kenn, wahrheit, git_beleg_cache()),
         "beweisfragen": beweisfragen(gruende, snapshot, wahrheit),
         "massnahmen": massnahmen(gruende, kenn, wahrheit, snapshot),
         "wahrheit": {
@@ -1467,7 +1596,955 @@ def auswerten(snapshot: dict, wahrheit: dict | None = None,
     }
     auswertung["gate"] = gate(auswertung, vorheriger_snapshot(snapshot.get("datum", ""),
                                                              verlauf_pfad))
+    auswertung["kpi"] = kpi(verlauf_pfad, kenn)
+    auswertung["abnahme"] = abnahme(auswertung)
+    auswertung["verlinkungsauftrag"] = verlinkungs_auftrag(wahrheit, verlinkung)
     return auswertung
+
+
+# --------------------------------------------------------------------------
+#  Redaktionelle Verlinkung (Grundlage für M2 und für die Priorisierung)
+# --------------------------------------------------------------------------
+
+# Interne Links in Markdown: `[Text](../../posts/x/)`, `[Text](/posts/x/)`,
+# `[Text](https://franksfinanzcheck.de/posts/x/)`. Das `(?<!!)` schließt
+# Bilder aus – `![alt](…)` ist kein Link und verlinkt nichts.
+_MD_LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)\s]+)\)")
+_DATUM_PRAEFIX = re.compile(r"^\d{4}-\d{2}-\d{2}-")
+
+
+def _pfad_normalisieren(href: str, quelle: str) -> str | None:
+    """Ziel-Link → absoluter Pfad mit Schrägstrich am Ende. None = extern."""
+    if not href or href.startswith(("mailto:", "tel:", "#", "javascript:")):
+        return None
+    if href.startswith(("http://", "https://")):
+        if "franksfinanzcheck.de" not in href:
+            return None
+        href = re.sub(r"^https?://(www\.)?franksfinanzcheck\.de", "", href)
+    href = href.split("#")[0].split("?")[0]
+    if not href:
+        return None
+    if not href.endswith("/") and "." not in href.rsplit("/", 1)[-1]:
+        href += "/"
+    if href.startswith("/"):
+        return href
+    # relativ auflösen (../../posts/x/ aus /posts/<slug>/)
+    teile = (os.path.dirname(quelle.rstrip("/")) + "/" + href).split("/")
+    stapel: list[str] = []
+    for teil in teile:
+        if teil in ("", "."):
+            continue
+        if teil == "..":
+            if stapel:
+                stapel.pop()
+            continue
+        stapel.append(teil)
+    return "/" + "/".join(stapel) + "/"
+
+
+def redaktionelle_links(root: Path = ROOT) -> dict:
+    """Eingehende und ausgehende REDAKTIONELLE Links je Seite.
+
+    Warum nicht am Build gemessen: Der Build verlinkt über Template-Blöcke
+    (Themenwelten, „Ähnliche Artikel") jede Seite mehrfach. Diese Links zählen
+    für Crawler, sagen aber nichts über die redaktionelle Verlinkung – und die
+    ist der Hebel, den eine Redaktion tatsächlich bewegen kann. Am 26.10.2026
+    waren 70 von 99 Seiten über Template-Links erreichbar, aber 14 ohne einen
+    einzigen redaktionellen Inlink; die 14 waren fast alle aus September und
+    Oktober – also genau die Seiten, die Google nicht indexiert.
+
+    Rückgabe: {"seiten": {url: {"aus": n, "ein": n, "quellen": [...]}},
+               "ohne_ein": [...], "ohne_aus": [...], "Median": …}
+    """
+    cdir = Path(root) / "content"
+    seiten: dict[str, str] = {}
+    for pfad in sorted(list(cdir.rglob("index.md")) + list(cdir.rglob("_index.md"))):
+        fm = _frontmatter(pfad)
+        if _fm_wahr(fm, "draft"):
+            continue
+        rel = pfad.parent.relative_to(cdir).as_posix()
+        url = _fm_wert(fm, "url") or ("/" if rel == "." else f"/{rel}/")
+        if not url.endswith("/"):
+            url += "/"
+        seiten[url] = pfad.read_text(encoding="utf-8", errors="replace")
+
+    ein: dict[str, list[str]] = {u: [] for u in seiten}
+    aus: dict[str, set[str]] = {}
+    for quelle, inhalt in seiten.items():
+        ziele: set[str] = set()
+        for href in _MD_LINK.findall(inhalt):
+            ziel = _pfad_normalisieren(href, quelle)
+            if ziel and ziel in seiten and ziel != quelle:
+                ziele.add(ziel)
+        aus[quelle] = ziele
+        for ziel in ziele:
+            ein[ziel].append(quelle)
+
+    werte = sorted(len(v) for v in aus.values())
+    return {
+        "seiten": {u: {"aus": len(aus[u]), "ein": len(ein[u]), "quellen": sorted(ein[u])}
+                   for u in seiten},
+        "ohne_ein": sorted(u for u in seiten if not ein[u]),
+        "ohne_aus": sorted(u for u in seiten if not aus[u]),
+        "median_aus": werte[len(werte) // 2] if werte else 0,
+        "summe": sum(werte),
+    }
+
+
+# --------------------------------------------------------------------------
+#  Kandidatenraum: wie viele der gemeldeten 404er KANN der Bestand erklären?
+# --------------------------------------------------------------------------
+
+def kandidaten(pfad_rest: str) -> list[str]:
+    """Plausible URL-Varianten eines Slugs (nur Formen, die es real gab).
+
+    Der Bestand kennt drei dokumentierte Alt-Formen (siehe
+    `data/weiterleitungen.yaml`): Ordner ohne Datumspräfix
+    (`/posts/<slug>/`), Ordner mit abweichendem Datum (`/posts/2026-08-28-…/`
+    bei `/posts/2026-08-26-…/`) und Dubletten mit `(1)`. Genau diese Formen
+    erzeugt der Kandidatenraum – keine Fantasie-URLs, keine Slug-Rateverfahren.
+    """
+    rest = _DATUM_PRAEFIX.sub("", str(pfad_rest).rstrip("/").split("/")[-1])
+    if not rest:
+        return []
+    return [f"/posts/{rest}/", f"/posts/{rest}(1)/"]
+
+
+def kandidatenraum(wahrheit: dict, snapshot: dict | None = None,
+                   root: Path = ROOT) -> dict:
+    """Obergrenze dessen, was der Repo-Bestand an 404ern erklären kann.
+
+    Das ist bewusst eine **Obergrenze**, kein Nachweis: Sie zählt jede URL, die
+    aus einer heute live stehenden Seite ableitbar ist und nicht live ist. Ob
+    Google genau diese URL je gesehen hat, sagt nur die Detail-Liste.
+    """
+    live = set(wahrheit["indexierbar"])
+    weiter = wahrheit["weiterleitungen"]
+    entfallen = wahrheit["entfallen"]
+
+    bekannt: dict[str, str] = {}
+    # 1) dokumentierte Alt-URLs (Weiterleitung + bewusst entfallen)
+    for url in list(weiter) + list(entfallen):
+        bekannt[url] = "dokumentiert"
+    # 2) Taxonomie (abgeschaltet, aber in der Historie)
+    for url in wahrheit["taxonomie_404"]:
+        bekannt.setdefault(url, "taxonomie")
+    # 3) Varianten der live stehenden Seiten
+    for url in live:
+        if not url.startswith("/posts/"):
+            continue
+        for variante in kandidaten(url):
+            if variante not in live:
+                bekannt.setdefault(variante, "variante")
+        for alt in weiter:
+            if _DATUM_PRAEFIX.sub("", alt.rstrip("/").split("/")[-1]) == \
+                    _DATUM_PRAEFIX.sub("", url.rstrip("/").split("/")[-1]):
+                bekannt.setdefault(alt, "dokumentiert")
+    # 4) Belege aus dem Snapshot und den Top-Seiten
+    if snapshot:
+        for url in snapshot.get("urls") or []:
+            if str(url).endswith("/") and url not in live:
+                bekannt.setdefault(url, "snapshot")
+    for eintrag in wahrheit.get("top_nicht_live") or []:
+        bekannt.setdefault(eintrag["url"], "top-seiten")
+
+    offen = sorted(u for u in bekannt
+                   if u not in live and u not in weiter and u not in entfallen)
+    return {
+        "gesamt": len(bekannt),
+        "davon_dokumentiert": len([u for u in bekannt if u in weiter or u in entfallen]),
+        "davon_taxonomie": len([u for u in bekannt if u in set(wahrheit["taxonomie_404"])]),
+        "davon_ohne_entscheidung": len(offen),
+        "ohne_entscheidung": offen[:400],
+        "nach_herkunft": {herkunft: sum(1 for h in bekannt.values() if h == herkunft)
+                          for herkunft in sorted(set(bekannt.values()))},
+    }
+
+
+# --------------------------------------------------------------------------
+#  Triage der Detail-Listen (M1)
+# --------------------------------------------------------------------------
+
+# Was bei welchem Grund zu tun ist. Der Text erscheint in der Triage-Liste und
+# ist bewusst eine HANDLUNG, keine Kategorie: Wer die Liste abarbeitet, soll
+# nicht mehr nachdenken müssen, was gemeint ist.
+AKTION = {
+    # Ein unentschiedener 404 ist kein erledigter 404: Er steht im Bericht, ist
+    # aber nie bewertet worden. Deshalb P2 (entscheiden), nicht P3 (belassen).
+    "not_found": ("P2", "entscheiden: Weiterleitung oder bewusst 404",
+                  "Kein Nachfolger, keine Nachfrage in den Top-Seiten."),
+    "soft_404": ("P2", "Inhalt oder Weiterleitung", "Seite antwortet leer."),
+    "noindex": ("P1", "noindex prüfen", "Absicht bestätigen oder Tag entfernen."),
+    "robots_blocked": ("P3", "Sperre belassen", "Gateway, keine Inhaltsseite."),
+    "redirect": ("P3", "Weiterleitung belassen", "Meta-Refresh, kein 301."),
+    "alternate_canonical": ("P3", "Canonical belassen", "Google hat die Dublette erkannt."),
+    "duplicate_canonical": ("P1", "Canonical setzen", "Zwei Seiten, eine Absicht."),
+    "crawled_not_indexed": ("P2", "Redaktion prüfen", "Substanz, Einzigartigkeit, Absicht."),
+    "discovered_not_indexed": ("P2", "Interne Verlinkung", "Kein redaktioneller Inlink?"),
+    "server_error": ("P0", "Technik sofort", "Serverfehler."),
+    "redirect_error": ("P1", "Kette auflösen", "Weiterleitung zeigt auf Weiterleitung."),
+    "unknown": ("P0", "Grund ansehen", "Unbekannter GSC-Grund."),
+}
+
+
+def entwurfs_slugs(root: Path = ROOT) -> dict[str, str]:
+    """Slug (ohne Datumspräfix) → Datei eines Entwurfs.
+
+    Ein 404 auf eine URL, deren Artikel als Entwurf im Repo liegt, ist kein
+    Rätsel: Die Seite existiert, sie wird nur nicht gebaut. Genau diese Fälle
+    sind die billigsten – eine Entscheidung (veröffentlichen) statt einer
+    Weiterleitung.
+    """
+    out: dict[str, str] = {}
+    for pfad in (Path(root) / "content" / "posts").glob("*/index.md"):
+        fm = _frontmatter(pfad)
+        if not _fm_wahr(fm, "draft"):
+            continue
+        out[_DATUM_PRAEFIX.sub("", pfad.parent.name)] = pfad.parent.name
+    return out
+
+
+def triage(urls: list[dict], wahrheit: dict, kenn: dict,
+           verlinkung: dict | None = None) -> dict:
+    """Macht aus gemeldeten URLs eine abarbeitbare Liste.
+
+    Eingabe ist die Detail-Liste der Search Console (`{"url", "grund"}`), wie
+    `lade_export` sie liefert. Jede URL bekommt genau eine Aktion, eine
+    Priorität und einen Beleg – und, wo möglich, einen Weiterleitungsvorschlag.
+    Einträge, die der Bestand schon entschieden hat, werden als solche geführt:
+    Eine Triage, die bereits getroffene Entscheidungen erneut vorschlägt, wird
+    nach dem zweiten Lauf ignoriert.
+    """
+    live = set(wahrheit["indexierbar"])
+    weiter = wahrheit["weiterleitungen"]
+    entfallen = wahrheit["entfallen"]
+    nachfrage = {e["url"]: e for e in wahrheit.get("top_nicht_live") or []}
+    ohne_inlink = set((verlinkung or {}).get("ohne_ein") or [])
+    entwuerfe = entwurfs_slugs()
+
+    zeilen: list[dict] = []
+    for eintrag in urls:
+        url = _pfad_normalisieren(eintrag.get("url", ""), "/") or eintrag.get("url", "")
+        grund = eintrag.get("grund") or ""
+        schluessel = klassifiziere(grund)
+        prio, aktion, hinweis = AKTION.get(schluessel, AKTION["unknown"])
+        ziel = None
+        beleg = ""
+        if url in live:
+            prio, aktion = "P3", "im Bestand – nichts tun"
+            beleg = "URL wird gebaut und steht in der Sitemap."
+        elif url in weiter:
+            prio, aktion, ziel = "P3", "bereits entschieden (Weiterleitung)", weiter[url]
+            beleg = "Eintrag in data/weiterleitungen.yaml."
+        elif url in entfallen:
+            prio, aktion = "P3", "bereits entschieden (bewusst 404)"
+            beleg = f"Eintrag in data/url_entfallen.yaml, Regel {entfallen[url]}."
+        elif schluessel == "not_found":
+            vorschlag = vorschlaege([url], wahrheit)[0]
+            if nachfrage.get(url):
+                prio, aktion = "P1", "Weiterleitung prüfen (Nachfrage belegt)"
+                beleg = (f"{nachfrage[url]['impressionen']} Impressionen bei Position "
+                         f"{nachfrage[url]['position']} – die URL wird noch gefunden.")
+            elif _DATUM_PRAEFIX.sub("", url.rstrip("/").split("/")[-1]) in entwuerfe:
+                slug = entwuerfe[_DATUM_PRAEFIX.sub("", url.rstrip("/").split("/")[-1])]
+                prio, aktion = "P1", "Seite liegt als Entwurf – veröffentlichen"
+                beleg = f"`content/posts/{slug}/` ist `draft: true`; die Seite existiert."
+            elif vorschlag.get("vorschlag"):
+                prio, aktion, ziel = "P2", f"Vorschlag ({vorschlag['weg']})", vorschlag["vorschlag"]
+                beleg = f"Slug-Deckung, Sicherheit {vorschlag['sicherheit']}."
+            elif not url.startswith(("/posts/", "/pillar/")):
+                prio, aktion = "P3", "belassen (keine Inhalts-URL)"
+                beleg = "Keine Inhaltsseite – Taxonomie, Asset oder Fremdpfad."
+            else:
+                beleg = "Kein Nachfolger im Bestand, keine Nachfrage in den Top-Seiten."
+        elif schluessel == "discovered_not_indexed" and url in ohne_inlink:
+            prio, aktion = "P1", "Inlink fehlt – Redaktion verlinken"
+            beleg = "Kein redaktioneller Inlink im Bestand (Template-Links zählen nicht)."
+        elif schluessel == "discovered_not_indexed":
+            beleg = "Mindestens ein redaktioneller Inlink vorhanden – Crawl-Budget."
+        elif schluessel == "noindex" and url in set(wahrheit["noindex"]):
+            prio, aktion = "P3", "noindex ist Vertrag"
+            beleg = "Steht so im Inhalt (robotsNoIndex: true)."
+        zeilen.append({"url": url, "grund": grund, "schluessel": schluessel,
+                       "prioritaet": prio, "aktion": aktion, "ziel": ziel,
+                       "beleg": beleg or hinweis})
+
+    rang = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+    zeilen.sort(key=lambda z: (rang.get(z["prioritaet"], 9), z["url"]))
+    zaehler: dict[str, int] = {}
+    for z in zeilen:
+        zaehler[z["prioritaet"]] = zaehler.get(z["prioritaet"], 0) + 1
+    return {
+        "anzahl": len(zeilen),
+        "nach_prioritaet": dict(sorted(zaehler.items())),
+        "offen": [z for z in zeilen if z["prioritaet"] in ("P0", "P1", "P2")],
+        "entschieden": [z for z in zeilen if z["prioritaet"] == "P3"],
+        "zeilen": zeilen,
+    }
+
+
+def triage_markdown(t: dict, quelle: str) -> str:
+    z = [f"## Triage ({quelle})", "",
+         f"{t['anzahl']} gemeldete URLs · "
+         + " · ".join(f"{k}: {v}" for k, v in t["nach_prioritaet"].items()), "",
+         "| Prio | URL | Grund | Aktion | Beleg |", "|---|---|---|---|---|"]
+    for zeile in t["offen"][:80]:
+        ziel = f" → `{zeile['ziel']}`" if zeile["ziel"] else ""
+        z.append(f"| {zeile['prioritaet']} | `{zeile['url']}` | {zeile['grund'][:40]} | "
+                 f"{zeile['aktion']}{ziel} | {zeile['beleg'][:80]} |")
+    if len(t["offen"]) > 80:
+        z.append(f"| … | *{len(t['offen']) - 80} weitere* | | | |")
+    z.append("")
+    z.append(f"Bereits entschieden (nichts zu tun): {len(t['entschieden'])}.")
+    return "\n".join(z)
+
+
+# --------------------------------------------------------------------------
+#  Vertrag: noindex-Bestand und Gateways (M5, M6)
+# --------------------------------------------------------------------------
+
+# Die noindex-Seiten sind eine ENTSCHEIDUNG, kein Zufall. Sie stehen hier mit
+# Begründung; die Wache vergleicht den Inhalt dagegen. Kommt eine Seite ohne
+# Vertrag hinzu, ist das ein Befund – und zwar der gute Fall: Jemand hat die
+# Entscheidung bewusst getroffen und trägt sie hier ein.
+NOINDEX_VERTRAG = {
+    "/suche/": "Volltextsuche ohne eigenen Inhalt; Suchergebnisse sollen nicht indexiert werden.",
+    "/newsletter/": "Anmeldefunnel: kein redaktioneller Inhalt, gehört nicht in den Index.",
+    "/newsletter/bestaetigung/": "Double-Opt-In-Bestätigung: transaktionale Seite.",
+    "/newsletter/abmelden/": "Abmeldung: transaktionale Seite.",
+    "/newsletter/praeferenzen/": "Präferenzen: transaktionale Seite.",
+    "/kalender/": "Veröffentlichungskalender: Funktionsfläche aus static/.",
+}
+
+
+def vertrag(wahrheit: dict, build: dict | None = None) -> dict:
+    """Prüft die drei Verträge: noindex-Bestand, Gateways, robots.
+
+    Das ist die Antwort auf M5 und M6: Die Meldung „durch noindex
+    ausgeschlossen“ darf sich nur dann ändern, wenn sich der Vertrag ändert.
+    """
+    funde: list[dict] = []
+    ist = set(wahrheit["noindex"])
+
+    # Der Kalender liegt in static/ und trägt sein noindex selbst – er steht im
+    # Vertrag, aber nicht im content-Baum. Er darf deshalb fehlen, ohne dass
+    # das ein Leck ist; umgekehrt muss jede noindex-Seite im Inhalt einen
+    # Vertragseintrag haben.
+    inhalt_ist = {u for u in ist}
+    ohne_vertrag = sorted(u for u in inhalt_ist if u not in NOINDEX_VERTRAG)
+    if ohne_vertrag:
+        funde.append({
+            "regel": "V1", "schwere": "hart",
+            "text": ("noindex ohne Vertragseintrag: " + ", ".join(ohne_vertrag)
+                     + ". Entweder Tag entfernen oder in NOINDEX_VERTRAG begründen."),
+        })
+    erwartet_inhalt = {u for u in NOINDEX_VERTRAG if u not in ("/kalender/",)}
+    fehlt = sorted(erwartet_inhalt - inhalt_ist)
+    if fehlt:
+        funde.append({
+            "regel": "V2", "schwere": "hart",
+            "text": ("Vertrag nennt noindex-Seiten, die es nicht (mehr) gibt: "
+                     + ", ".join(fehlt) + ". Vertrag oder Inhalt ist veraltet."),
+        })
+
+    gateways = set(wahrheit["gateways"])
+    gebaut = set((build or {}).get("gateway_liste") or [])
+    if gebaut and gebaut != gateways:
+        funde.append({
+            "regel": "V3", "schwere": "hart",
+            "text": (f"Gateways im Build ({len(gebaut)}) und in static/go/ "
+                     f"({len(gateways)}) weichen ab."),
+        })
+    if gateways and not wahrheit["robots"]["go_gesperrt"]:
+        funde.append({"regel": "V4", "schwere": "hart",
+                      "text": "robots.txt sperrt /go/ nicht."})
+    if gateways and wahrheit["robots"]["sperrt_go_gruppen"] < 1:
+        funde.append({"regel": "V4", "schwere": "hart",
+                      "text": "Keine Roboter-Gruppe sperrt /go/."})
+
+    return {"status": "rot" if [f for f in funde if f["schwere"] == "hart"] else "gruen",
+            "funde": funde,
+            "noindex_ist": sorted(inhalt_ist),
+            "noindex_vertrag": dict(sorted(NOINDEX_VERTRAG.items())),
+            "gateways": sorted(gateways)}
+
+
+# --------------------------------------------------------------------------
+#  Priorisierung und Verlinkungsauftrag (M2)
+# --------------------------------------------------------------------------
+
+def _nachfrage_karte(kenn_top: list[dict] | None, root: Path = ROOT) -> dict:
+    pfad = Path(root) / "data" / "gsc" / "top_seiten_28t.json"
+    if not pfad.exists():
+        return {}
+    try:
+        daten = json.loads(pfad.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    karte = {}
+    for eintrag in daten if isinstance(daten, list) else []:
+        url = _pfad_normalisieren(str(eintrag.get("seite", "")), "/")
+        if url:
+            karte[url] = {"impressionen": eintrag.get("impressions") or 0,
+                          "klicks": eintrag.get("clicks") or 0,
+                          "position": eintrag.get("position")}
+    return karte
+
+
+def prioritaet(wahrheit: dict, verlinkung: dict, snapshot: dict | None = None,
+               heute: dt.date | None = None, root: Path = ROOT) -> dict:
+    """Welche Seite zuerst? (M2 – der operative Kern)
+
+    Score aus vier belegbaren Größen, keine Blackbox:
+      Nachfrage  3 × (Impressionen in 28 Tagen, gedeckelt) + Positionsbonus
+      Verlinkung 2 × (fehlende redaktionelle Inlinks)
+      Frische    1 × (Tage seit lastmod, gedeckelt)
+      Absicht    1 × (Ratgeber/Pillar/Werkzeug vor Rechtsseite)
+    Ausgabe ist eine Wellen-Reihenfolge für `gsc_indexierung.py` (200/Tag) –
+    nicht „alle 99 gleichzeitig anfragen“, was Google als Muster erkennt und
+    womit man das Tageskontingent an die falschen Seiten verliert.
+    """
+    heute = heute or dt.date.today()
+    nachfrage = _nachfrage_karte(None, root)
+    oeffentlich = _oeffentlich(root)
+    sitemap = sitemap_seiten(oeffentlich / "sitemap.xml") or wahrheit["indexierbar"]
+    lastmod = _lastmod_karte(oeffentlich / "sitemap.xml")
+    seiten = verlinkung.get("seiten") or {}
+
+    zeilen = []
+    for url in sitemap:
+        info = seiten.get(url) or {"ein": 0, "aus": 0}
+        k = nachfrage.get(url) or {}
+        impressionen = k.get("impressionen") or 0
+        position = k.get("position")
+        ein = info.get("ein") or 0
+        tage = None
+        if lastmod.get(url):
+            try:
+                tage = (heute - dt.date.fromisoformat(lastmod[url])).days
+            except ValueError:
+                tage = None
+        # Navigationsseiten (Start, Hubs, Rechtsseiten) haben naturgemäß keinen
+        # redaktionellen Inlink – sie zu „reparieren“ wäre ein Fehlalarm.
+        inhaltsseite = (url.startswith(("/posts/", "/pillar/"))
+                        and url not in HUBS)
+        wert = min(impressionen, 30) / 3.0                      # 0 … 10
+        if position:
+            wert += max(0.0, (30 - min(position, 30)) / 30 * 3)   # 0 … 3
+        if inhaltsseite:
+            wert += 6.0 if ein == 0 else (3.0 if ein == 1 else 0.0)
+        if tage is not None:
+            wert += max(0.0, (60 - min(tage, 60)) / 60 * 3)      # 0 … 3
+        if url.startswith(("/pillar/", "/posts/", "/werkzeuge/")):
+            wert += 1.0
+        if not inhaltsseite:
+            wert -= 1.0
+        elif url.startswith(("/impressum/", "/datenschutz/", "/transparenz/")):
+            wert -= 2.0
+        zeilen.append({"url": url, "score": round(wert, 2), "impressionen": impressionen,
+                       "position": position, "inlinks": ein, "outlinks": info.get("aus"),
+                       "lastmod_tage": tage,
+                       "grund": ("kein redaktioneller Inlink" if ein == 0
+                                 else ("nur ein Inlink" if ein == 1 else "verlinkt"))})
+    zeilen.sort(key=lambda z: (-z["score"], z["url"]))
+    # Welle 1 = die 40 dringendsten Seiten (Tageskontingent 200, aber jede
+    # Anfrage soll auf eine Seite fallen, die davon profitiert). Welle 2 folgt.
+    welle1 = [z["url"] for z in zeilen[:40]]
+    return {
+        "stand": heute.isoformat(),
+        "seiten": zeilen,
+        "welle1": welle1,
+        "welle1_absolut": [SITE + u for u in welle1],
+        "welle2": [z["url"] for z in zeilen if z["url"] not in set(welle1)],
+        "ohne_inlink": len([z for z in zeilen if z["inlinks"] == 0]),
+        "kontingent": ANFRAGEN_PRO_TAG,
+    }
+
+
+def _lastmod_karte(sitemap: Path) -> dict:
+    if not Path(sitemap).exists():
+        return {}
+    import xml.etree.ElementTree as ET
+
+    ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    try:
+        baum = ET.parse(sitemap)
+    except ET.ParseError:
+        return {}
+    out = {}
+    for eintrag in baum.getroot().iter(f"{ns}url"):
+        loc = eintrag.find(f"{ns}loc")
+        lm = eintrag.find(f"{ns}lastmod")
+        if loc is None or lm is None or not loc.text or not lm.text:
+            continue
+        out[_pfad_normalisieren(loc.text.strip(), "/") or ""] = lm.text.strip()[:10]
+    return out
+
+
+def verlinkungs_auftrag(wahrheit: dict, verlinkung: dict, grenze: int = 2,
+                        max_je_quelle: int = 1, root: Path = ROOT) -> list[dict]:
+    """Für jede Seite mit zu wenigen redaktionellen Inlinks: konkrete Quellen.
+
+    Ausgewählt wird nicht „irgendein Artikel“, sondern der inhaltlich nächste
+    mit freier Kapazität: gleiche Sektion (Pillar) zuerst, dann ähnlicher Slug,
+    dann die Seite mit den meisten ausgehenden Links (Verteiler-Seiten). Der
+    Goldkorridor (max. 9 interne Links je Artikel) bleibt hart.
+    """
+    import difflib
+
+    seiten = verlinkung.get("seiten") or {}
+    pillar = _pillar_karte()
+    # Nur Inhaltsseiten: Start, Hubs und Rechtsseiten werden über Navigation
+    # verlinkt, nicht über „Weiterlesen“.
+    offen = [u for u in (wahrheit["indexierbar"])
+             if u.startswith(("/posts/", "/pillar/")) and u not in HUBS
+             and (seiten.get(u, {}).get("ein") or 0) < grenze]
+    offen.sort(key=lambda u: (seiten.get(u, {}).get("ein") or 0, u))
+
+    auftrag: list[dict] = []
+    belegt: dict[str, int] = {}
+    for ziel in offen:
+        braucht = grenze - (seiten.get(ziel, {}).get("ein") or 0)
+        kandidaten_q = []
+        for quelle, info in seiten.items():
+            if quelle == ziel or (info.get("aus") or 0) >= 8:
+                continue
+            if not quelle.startswith(("/posts/", "/pillar/")) or quelle in HUBS:
+                continue
+            # Der Goldkorridor ist hart: 9 Links je Artikel, und der Guard
+            # zählt Vorkommen. Wer bei 9 steht, bekommt keinen Zuwachs.
+            datei = _datei_zu_url(quelle, root)
+            if datei and datei.exists():
+                if post_links_gezaehlt(datei.read_text(encoding="utf-8",
+                                                       errors="replace")) >= 9:
+                    continue
+            if belegt.get(quelle, 0) >= max_je_quelle:
+                continue
+            if ziel in (info.get("quellen") or []):
+                continue
+            if quelle in (wahrheit["noindex"] + ["/404/"]):
+                continue
+            gleich = pillar.get(quelle) == pillar.get(ziel) and pillar.get(ziel)
+            aehnlich = difflib.SequenceMatcher(
+                None, _DATUM_PRAEFIX.sub("", quelle.rstrip("/").split("/")[-1]),
+                _DATUM_PRAEFIX.sub("", ziel.rstrip("/").split("/")[-1])).ratio()
+            rang = (0 if gleich else 1, -aehnlich, -(info.get("aus") or 0))
+            kandidaten_q.append((rang, quelle))
+        kandidaten_q.sort()
+        for _rang, quelle in kandidaten_q[:braucht]:
+            belegt[quelle] = belegt.get(quelle, 0) + 1
+            auftrag.append({"ziel": ziel, "quelle": quelle,
+                            "grund": ("gleicher Pillar" if pillar.get(quelle) == pillar.get(ziel)
+                                      else "ähnliches Thema"),
+                            "inlinks_jetzt": seiten.get(ziel, {}).get("ein") or 0})
+    return auftrag
+
+
+def _pillar_karte(root: Path = ROOT) -> dict:
+    """URL → Pillar (aus dem Frontmatter). Grundlage der Themen-Nachbarschaft."""
+    cdir = Path(root) / "content"
+    karte = {}
+    for pfad in cdir.rglob("index.md"):
+        fm = _frontmatter(pfad)
+        wert = _fm_wert(fm, "pillar")
+        if not wert:
+            continue
+        rel = pfad.parent.relative_to(cdir).as_posix()
+        url = _fm_wert(fm, "url") or f"/{rel}/"
+        if not url.endswith("/"):
+            url += "/"
+        karte[url] = wert
+    return karte
+
+
+def anker_kurz(titel: str, grenze: int = 6) -> str:
+    """Titel → kurzer Anker für die „Weiterlesen“-Zeile.
+
+    Die Zeile ist eine kuratierte Liste, kein Fließtext: Ein voller Titel mit
+    Untertitel („Bankgebühren senken: 7 Schritte zum günstigeren Konto“) macht
+    sie unlesbar. Geschnitten wird am Doppelpunkt, dann an der Wortgrenze –
+    der Anker bleibt immer ein Teil des echten Titels, nie eine Erfindung.
+    """
+    text = (titel or "").split(":")[0].split(" – ")[0].strip()
+    woerter = text.split()
+    if len(woerter) > grenze:
+        text = " ".join(woerter[:grenze])
+    return text or (titel or "").strip()
+
+
+def link_einfuegen(pfad: Path, ziel_url: str, anker: str) -> tuple[bool, str]:
+    """Hängt einen redaktionellen Link an die „Weiterlesen“-Zeile.
+
+    Warum genau dort: Jeder Artikel dieses Blogs endet mit einer kuratierten
+    Zeile `**Weiterlesen:** …`. Ein Link dort ist stilkonform, für den Leser
+    sichtbar und – anders als ein Satz mitten im Fließtext – keine
+    redaktionelle Aussage, die eine Maschine nicht treffen darf. Fehlt die
+    Zeile, wird NICHTS eingefügt (dann entscheidet die Redaktion).
+    """
+    inhalt = pfad.read_text(encoding="utf-8", errors="replace")
+    if ziel_url in inhalt:
+        return False, "Ziel steht bereits im Artikel"
+    treffer = re.search(r"^\*\*Weiterlesen:\*\*.*$", inhalt, re.M)
+    if not treffer:
+        return False, "keine „Weiterlesen“-Zeile"
+    # Relative Form wie im Bestand: aus /posts/<slug>/ zwei Ebenen hoch.
+    rest = ziel_url.lstrip("/").rstrip("/")
+    neu = treffer.group(0).rstrip() + f" · [{anker}]({'../../' + rest}/)"
+    ersetzt = inhalt[:treffer.start()] + neu + inhalt[treffer.end():]
+    if ersetzt.count("[") <= inhalt.count("["):
+        return False, "Änderung hätte nichts hinzugefügt"
+    pfad.write_text(ersetzt, encoding="utf-8")
+    return True, "eingefügt"
+
+
+def tote_ziele(root: Path = ROOT) -> list[dict]:
+    """Interne Links auf Seiten, die nicht gebaut werden (Entwurf, gelöscht).
+
+    Das Rendering mildert sie ab (`render-link.html` gibt den Ankertext als
+    Klartext aus), also entsteht daraus kein 404 – aber die Verlinkung ist
+    wirkungslos: Der Text steht da, der Link fehlt. Für die Redaktion ist das
+    eine Entscheidung (veröffentlichen oder entlinken), keine Panne.
+    """
+    cdir = Path(root) / "content"
+    alle: dict[str, tuple[bool, str]] = {}
+    for pfad in list(cdir.rglob("index.md")) + list(cdir.rglob("_index.md")):
+        text = pfad.read_text(encoding="utf-8", errors="replace")
+        fm, _, _ = text.partition("\n---")
+        rel = pfad.parent.relative_to(cdir).as_posix()
+        url = _fm_wert(fm, "url") or ("/" if rel == "." else f"/{rel}/")
+        if not url.endswith("/"):
+            url += "/"
+        alle[url] = (_fm_wahr(fm, "draft"), text)
+    live = {u for u, (draft, _t) in alle.items() if not draft}
+    tot: dict[str, list[str]] = {}
+    for url, (draft, text) in alle.items():
+        if draft:
+            continue
+        for href in _MD_LINK.findall(text):
+            ziel = _pfad_normalisieren(href, url)
+            if ziel and ziel in alle and ziel not in live:
+                tot.setdefault(ziel, []).append(url)
+    return [{"ziel": z, "quellen": sorted(q)} for z, q in sorted(tot.items())]
+
+
+def post_links_gezaehlt(inhalt: str) -> int:
+    """Interne Post-Links so gezählt, wie `link_density_guard.py` sie zählt.
+
+    Der Guard zählt VORKOMMEN der Form `[…](../../posts/…)`, nicht eindeutige
+    Ziele – und er lässt Pillar-Links aus. Wer mit einer eigenen Zählweise
+    einfügt, schiebt Artikel über den Goldkorridor (am 26.10.2026: fünf
+    Artikel bei 10 statt 9). Deshalb dieselbe Regel, inklusive der absoluten
+    Schreibweise, die der Guard (noch) nicht kennt.
+    """
+    relativ = len(re.findall(r"(?<!!)\[[^\]]*\]\(\.\./\.\./posts/[^)]+\)", inhalt))
+    absolut = len(re.findall(r"(?<!!)\[[^\]]*\]\((?:https://franksfinanzcheck\.de)?/posts/[^)]+\)",
+                             inhalt))
+    return relativ + absolut
+
+
+def _titel_karte(root: Path = ROOT) -> dict:
+    """URL → Titel (für den Ankertext). Ohne Titel kein Link."""
+    cdir = Path(root) / "content"
+    karte = {}
+    for pfad in cdir.rglob("index.md"):
+        fm = _frontmatter(pfad)
+        titel = _fm_wert(fm, "title")
+        if not titel:
+            continue
+        rel = pfad.parent.relative_to(cdir).as_posix()
+        url = _fm_wert(fm, "url") or f"/{rel}/"
+        if not url.endswith("/"):
+            url += "/"
+        karte[url] = titel
+    return karte
+
+
+def _datei_zu_url(url: str, root: Path = ROOT) -> Path | None:
+    """URL → Quelldatei (`content/<rel>/index.md`)."""
+    cdir = Path(root) / "content"
+    rel = url.strip("/")
+    for kandidat in (cdir / rel / "index.md", cdir / rel / "_index.md"):
+        if kandidat.exists():
+            return kandidat
+    # `url:`-Frontmatter kann von der Ordnerstruktur abweichen
+    for pfad in cdir.rglob("index.md"):
+        if (_fm_wert(_frontmatter(pfad), "url") or "").rstrip("/") == url.rstrip("/"):
+            return pfad
+    return None
+
+
+def _historie_schreiben(getan: list[tuple[dict, str]]) -> None:
+    """Beleg je eingefügtem Link – append-only, damit ein Lauf nachvollziehbar bleibt."""
+    if not getan:
+        return
+    ziel = ROOT / "data" / "verlinkung_history.jsonl"
+    jetzt = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    with ziel.open("a", encoding="utf-8") as fh:
+        for posten, _meldung in getan:
+            fh.write(json.dumps({"ts": jetzt, "quelle": posten["quelle"],
+                                 "ziel": posten["ziel"],
+                                 "grund": posten.get("grund")},
+                                ensure_ascii=False, sort_keys=True) + "\n")
+
+
+# --------------------------------------------------------------------------
+#  KPI, Abnahme (M9) und Ursachen eines Sprungs (M7)
+# --------------------------------------------------------------------------
+
+def kpi(verlauf_pfad: Path | None = None, kenn: dict | None = None) -> dict:
+    """Wochenbericht: die Kennzahlen, die eine Agentur montags zeigt."""
+    quelle = Path(verlauf_pfad) if verlauf_pfad else VERLAUF
+    reihen = []
+    if quelle.exists():
+        for zeile in quelle.read_text(encoding="utf-8").splitlines():
+            try:
+                reihen.append(json.loads(zeile))
+            except json.JSONDecodeError:
+                continue
+    reihen.sort(key=lambda r: r.get("datum") or "")
+    kenn = kenn or {}
+    heute_kenn = dict(kenn)
+    if reihen:
+        letzte = reihen[-1]
+        heute_kenn.setdefault("stand_datum", letzte.get("datum"))
+        heute_kenn.setdefault("indexiert", letzte.get("indexiert"))
+        heute_kenn.setdefault("nicht_indexiert", letzte.get("nicht_indexiert"))
+    return {
+        "reihen": reihen,
+        "aktuell": heute_kenn,
+        "wochen": [{"datum": r.get("datum"), "indexiert": r.get("indexiert"),
+                    "nicht_indexiert": r.get("nicht_indexiert")} for r in reihen[-8:]],
+    }
+
+
+def abnahme(a: dict) -> list[dict]:
+    """Die Abnahmekriterien aus dem Bericht – maschinell geprüft.
+
+    Ein Kriterium ohne Datum ist ein Wunsch. Jedes hier trägt: Ziel, Status,
+    Messgröße und – wenn offen – was fehlt. Geprüft wird nur, was das Repo
+    messen kann; alles andere steht als „offen (menschlich)“ da.
+    """
+    k = a.get("kennzahlen", {})
+    g = a.get("gate", {})
+    gruende = {x.get("schluessel"): x for x in a.get("gruende", [])}
+    offen_404 = (gruende.get("not_found") or {}).get("offen")
+    alter = k.get("export_alter_tage")
+    quote = k.get("quote_indexiert")
+
+    def eintrag(kriterium, ziel, status, messung, naechster_schritt=""):
+        return {"kriterium": kriterium, "ziel": ziel, "status": status,
+                "messung": messung, "naechster_schritt": naechster_schritt}
+
+    ergebnis = [
+        eintrag("Gate grün (kein Rückschritt, kein Widerspruch)", "sofort",
+                "erfuellt" if g.get("status") == "gruen" else "offen",
+                f"Gate: {g.get('status')}",
+                "" if g.get("status") == "gruen" else "Widersprüche im Befund abarbeiten"),
+        eintrag("Abdeckungsbefund nicht älter als 14 Tage", "laufend",
+                "erfuellt" if (alter is not None and alter <= 14) else "offen",
+                f"Stand {k.get('stand_datum')} ({alter} Tage alt)",
+                "Export einlesen (`--import`)"),
+        eintrag("404er mit Nachfrage triagiert", "sofort",
+                "offen" if offen_404 else "erfuellt",
+                f"{offen_404} ohne Erklärung im Bestand",
+                "Detail-Liste `Nicht gefunden (404).csv` einlesen"),
+        eintrag("Indexquote steigt", "14 Tage",
+                "unbekannt" if quote is None or len((a.get("kpi") or {}).get("reihen") or []) < 2
+                else "offen",
+                f"{quote} % bei {len((a.get('kpi') or {}).get('reihen') or [])} Momentaufnahme(n)",
+                "zweite Momentaufnahme nötig, dann Vorlauf-Vergleich"),
+        eintrag("Seiten ohne redaktionellen Inlink", "30 Tage",
+                "offen" if (k.get("ohne_inlink") or 0) else "erfuellt",
+                f"{k.get('ohne_inlink')} Seiten",
+                "Verlinkungsauftrag (`--verlinkung --apply`)"),
+    ]
+    return ergebnis
+
+
+def git_ereignisse(von: dt.date, bis: dt.date, root: Path = ROOT,
+                   max_commits: int = 500) -> dict:
+    """Was hat das Repo an diesen Tagen geändert? Beleg statt Vermutung.
+
+    Ein Sprung in der Search Console hat eine Ursache – entweder im Repo oder
+    außerhalb. Diese Funktion liefert den Repo-Teil: je Tag die Zahl der
+    Commits, die berührten Content-Dateien und den Saldo der `draft:`-Flags.
+    Der Saldo ist die entscheidende Größe: Was auf Entwurf steht, wird nicht
+    gebaut, steht nicht in der Sitemap und kann nicht im Index bleiben.
+
+    Grenze: In einem Shallow-Clone (CI-Standard) reicht die Historie nicht
+    hinter den Klon-Zeitpunkt zurück. Das wird gemeldet, nicht verschwiegen –
+    für den Belegweg muss der Job mit `fetch-depth: 0` auschecken.
+    """
+    import subprocess
+
+    def git(*args: str) -> str:
+        try:
+            return subprocess.run(["git", "-C", str(root), *args],
+                                  capture_output=True, text=True, timeout=120).stdout
+        except (OSError, subprocess.SubprocessError):
+            return ""
+
+    shallow = git("rev-parse", "--is-shallow-repository").strip() == "true"
+    protokoll = git("log", f"--since={von.isoformat()} 00:00", f"--until={bis.isoformat()} 23:59",
+                    "--format=%H|%ad|%s", "--date=short").strip().splitlines()
+    if not protokoll:
+        return {"verfuegbar": False, "shallow": shallow,
+                "grund": ("keine Git-Historie für den Zeitraum" if not shallow else
+                          "Shallow-Clone: der Zeitraum liegt vor dem Klon-Zeitpunkt "
+                          "(Beleg nur mit `fetch-depth: 0` möglich)"),
+                "tage": {}, "commits": 0}
+
+    tage: dict[str, dict] = {}
+    for zeile in protokoll[:max_commits]:
+        sha, tag, betreff = zeile.split("|", 2)
+        diff = git("show", sha, "--unified=0", "--", "content/")
+        if not diff:
+            continue
+        # Beiträge sind der Bestand, der in der Sitemap steht; Rubriken und
+        # Rechtstexte sind es auch, aber ihre Zahl bewegt sich kaum. Beides
+        # getrennt ausweisen, damit die Zahl zum GSC-Befund passt.
+        bloecke = re.split(r"^diff --git ", diff, flags=re.M)[1:]
+        plus = minus = posts_neu = posts_weg = 0
+        dateien = posts = 0
+        for block in bloecke:
+            dateien += 1
+            ist_post = block.startswith("a/content/posts/")
+            posts += 1 if ist_post else 0
+            neu = block.count("+draft: true")
+            weg = block.count("-draft: true")
+            plus += neu
+            minus += weg
+            if ist_post:
+                posts_neu += neu
+                posts_weg += weg
+        eintrag = tage.setdefault(tag, {"commits": 0, "content_dateien": 0,
+                                        "draft_saldo": 0, "draft_neu": 0,
+                                        "draft_neu_posts": 0, "posts_saldo": 0,
+                                        "post_dateien": 0, "top": []})
+        eintrag["commits"] += 1
+        eintrag["content_dateien"] += dateien
+        eintrag["post_dateien"] += posts
+        eintrag["draft_saldo"] += plus - minus
+        eintrag["draft_neu"] += plus
+        eintrag["draft_neu_posts"] += posts_neu
+        eintrag["posts_saldo"] += posts_neu - posts_weg
+        if plus or dateien >= 20:
+            eintrag["top"].append({"sha": sha[:8], "betreff": betreff[:90],
+                                   "dateien": dateien, "draft_neu": plus,
+                                   "draft_neu_posts": posts_neu})
+    for tag in tage:
+        tage[tag]["top"].sort(key=lambda x: (-x["draft_neu"], -x["dateien"]))
+        tage[tag]["top"] = tage[tag]["top"][:3]
+    return {"verfuegbar": True, "shallow": shallow, "tage": tage,
+            "commits": len(protokoll),
+            "von": von.isoformat(), "bis": bis.isoformat()}
+
+
+def git_beleg_cache(max_tage: int = 14) -> dict | None:
+    """Die Git-Ereignisse des letzten `--ursachen`-Laufs, wenn sie frisch sind.
+
+    Warum ein Cache: Der Beleg kostet einen `git log` über Hunderte Commits.
+    Das gehört nicht in jeden Audit – aber ein Befund, der „kein Beleg“ sagt,
+    obwohl der Beleg zwei Zentimeter entfernt liegt, wäre auch falsch.
+    """
+    datei = ABDECKUNG / "ursachen.json"
+    if not datei.exists():
+        return None
+    try:
+        daten = json.loads(datei.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    ereignisse = daten.get("ereignisse")
+    if not isinstance(ereignisse, dict) or not ereignisse.get("verfuegbar"):
+        return None
+    erzeugt = daten.get("erzeugt")
+    if erzeugt:
+        try:
+            alter = (dt.date.today() - dt.date.fromisoformat(str(erzeugt)[:10])).days
+        except ValueError:
+            alter = 0
+        if alter > max_tage:
+            return None
+    return ereignisse
+
+
+def ursachen(kenn: dict, wahrheit: dict, ereignisse: dict | None = None) -> list[dict]:
+    """Größenordnungen für einen Sprung – ausdrücklich als Hypothese.
+
+    Ein Sprung von 59 Seiten hat eine Ursache, die im Repo liegt oder außerhalb.
+    Was sich belegen lässt, ist die KAPAZITÄT: Welche Klassen im Bestand haben
+    ungefähr diese Größe? Was sich nicht belegen lässt, steht als offene Frage
+    da. Diese Funktion erfindet keine Ursache – sie sortiert die Kandidaten
+    nach Passung und nennt für jeden den Prüfweg.
+    """
+    bau = wahrheit.get("bau") or {}
+    klassen = bau.get("noindex_klassen") or {}
+    befund: list[dict] = []
+    for a in kenn.get("anomalien") or []:
+        delta = abs(a.get("delta") or 0)
+        kandidaten = []
+        for name, zahl in klassen.items():
+            if delta == 0:
+                continue
+            abweichung = abs(zahl - delta) / delta
+            if abweichung <= 0.35:
+                kandidaten.append({"klasse": KLASSEN_TEXT.get(name, name),
+                                   "anzahl": zahl, "abweichung_prozent": round(abweichung * 100)})
+        if wahrheit.get("anzahl_taxonomie") and delta:
+            abweichung = abs(wahrheit["anzahl_taxonomie"] - delta) / delta
+            if abweichung <= 0.35:
+                kandidaten.append({"klasse": "Taxonomie-URLs (abgeschaltet)",
+                                   "anzahl": wahrheit["anzahl_taxonomie"],
+                                   "abweichung_prozent": round(abweichung * 100)})
+        kandidaten.sort(key=lambda x: x["abweichung_prozent"])
+        eintrag = {
+            "datum": a.get("datum"), "feld": a.get("feld"), "delta": a.get("delta"),
+            "kandidaten": kandidaten[:4],
+            "pruefweg": ("Änderungsprotokoll der Seiten (git log auf content/), "
+                         "Deploy-Protokoll und Sitemap-Diff zum Datum; die Klassen "
+                         "oben sind Größenordnungen, kein Beweis."),
+            "bewertung": ("kein Beleg im Repo gefunden" if not kandidaten
+                          else "Größenordnung passt – Ursache noch nicht belegt"),
+            "git": None,
+        }
+        # Der Beleg: In den sieben Tagen vor dem Sprung muss ein Tag mit
+        # vielen neuen Entwürfen stehen. Google meldet mit Verzögerung – ein
+        # Ereignis am Tag selbst wäre ungewöhnlich, deshalb das Fenster.
+        if ereignisse and ereignisse.get("verfuegbar") and a.get("datum"):
+            try:
+                sprung = dt.date.fromisoformat(str(a["datum"])[:10])
+            except ValueError:
+                sprung = None
+            if sprung:
+                fenster = []
+                for tag, e in ereignisse["tage"].items():
+                    try:
+                        d = dt.date.fromisoformat(tag)
+                    except ValueError:
+                        continue
+                    if 0 <= (sprung - d).days <= 7 and (e["draft_neu"] or e["draft_saldo"]):
+                        fenster.append((e["draft_neu"], tag, e))
+                fenster.sort(reverse=True)
+                if fenster:
+                    _neu, tag, e = fenster[0]
+                    verzug = (sprung - dt.date.fromisoformat(tag)).days
+                    eintrag["git"] = {
+                        "tag": tag, "draft_neu": e["draft_neu_posts"] or e["draft_neu"],
+                        "saldo": e["posts_saldo"], "draft_neu_gesamt": e["draft_neu"],
+                        "draft_saldo": e["draft_saldo"],
+                        "content_dateien": e["content_dateien"],
+                        "commits": e["commits"], "top": e["top"],
+                        "verzug_tage": verzug,
+                    }
+                    # Der Beleg ersetzt die Größenordnungen: Wer den Commit hat,
+                    # braucht keine Klassenähnlichkeit mehr.
+                    eintrag["kandidaten"] = []
+                    eintrag["bewertung"] = (
+                        f"belegt (Repo): Saldo {e['posts_saldo']:+d} Beitragsentwürfe am "
+                        f"{tag} ({e['draft_neu_posts']} neu zurückgestuft), Google meldet "
+                        f"den Sprung {verzug} Tage später")
+        befund.append(eintrag)
+    return befund
 
 
 # --------------------------------------------------------------------------
@@ -1475,6 +2552,10 @@ def auswerten(snapshot: dict, wahrheit: dict | None = None,
 # --------------------------------------------------------------------------
 
 # Anzeigenamen der Build-Klassen. Technische Schlüssel, lesbare Ausgabe.
+# Kontingent der URL-Inspection-API: 200 Abfragen je Property und Tag. Steht
+# hier, weil die Wellen-Rechnung sonst eine magische Zahl enthielte.
+ANFRAGEN_PRO_TAG = 200
+
 KLASSEN_TEXT = {
     "weiterleitung": "Weiterleitungsseiten",
     "gateway": "/go/-Gateways",
@@ -1557,6 +2638,83 @@ def als_markdown(a: dict) -> str:
             zeichen = "🛑" if w["schwere"] == "hart" else "ℹ️"
             z.append(f"- {zeichen} **{w['regel']}** {w['text']}")
         z.append("")
+    v = a.get("vertrag") or {}
+    if v:
+        z.append(f"### Vertrag: noindex-Bestand und Gateways — "
+                 f"{'🟢 in Ordnung' if v.get('status') == 'gruen' else '🔴 Abweichung'}")
+        z.append("")
+        z.append(f"- {len(v.get('noindex_ist') or [])} noindex-Seiten im Inhalt, "
+                 f"{len(v.get('noindex_vertrag') or {})} im Vertrag "
+                 f"(`NOINDEX_VERTRAG`), {len(v.get('gateways') or [])} Gateways.")
+        for f in v.get("funde") or []:
+            z.append(f"- 🛑 **{f['regel']}** {f['text']}")
+        z.append("")
+
+    k2 = a.get("kandidaten") or {}
+    if k2:
+        z.append("### Kandidatenraum (Obergrenze für die 404-Erklärung)")
+        z.append("")
+        z.append(f"- {k2.get('gesamt')} historische URLs aus dem Bestand ableitbar; "
+                 f"{k2.get('davon_dokumentiert')} dokumentiert "
+                 f"(Weiterleitung oder bewusst 404), "
+                 f"{k2.get('davon_ohne_entscheidung')} ohne Entscheidung.")
+        z.append("- Das ist eine **Obergrenze**, kein Nachweis: Ob Google eine "
+                 "dieser URLs je gesehen hat, sagt nur die Detail-Liste (M1).")
+        z.append("")
+
+    vl = a.get("verlinkung") or {}
+    if vl:
+        z.append("### Redaktionelle Verlinkung")
+        z.append("")
+        z.append(f"- {k.get('ohne_inlink')} von {k.get('inhaltsseiten')} Inhaltsseiten "
+                 f"ohne redaktionellen Inlink, {k.get('ohne_auslink')} ohne ausgehenden "
+                 f"Link, Median {vl.get('median_aus')} ausgehende Links je Seite.")
+        if a.get("verlinkungsauftrag"):
+            anzahl = len(a["verlinkungsauftrag"])
+            z.append(f"- Verlinkungsauftrag: {anzahl} "
+                     f"{'Quelle-Ziel-Paar' if anzahl == 1 else 'Quelle-Ziel-Paare'} "
+                     "(`--verlinkung --apply`).")
+        z.append("")
+    if a.get("tote_ziele"):
+        z.append("### Links ins Leere")
+        z.append("")
+        for eintrag in a["tote_ziele"]:
+            z.append(f"- `{eintrag['ziel']}` – {len(eintrag['quellen'])} Quelle(n); "
+                     "die Seite wird nicht gebaut, der Link erscheint als Text.")
+        z.append("")
+    pr = a.get("prioritaet") or {}
+    if pr.get("seiten"):
+        z.append("### Anfrage-Wellen (M2)")
+        z.append("")
+        z.append(f"- Welle 1: {len(pr.get('welle1') or [])} Seiten · "
+                 f"Welle 2: {len(pr.get('welle2') or [])} · "
+                 f"Kontingent {pr.get('kontingent')} Anfragen/Tag.")
+        z.append("")
+        z.append("| Score | Seite | Impressionen | Inlinks | Grund |")
+        z.append("|---|---|---|---|---|")
+        for zeile in pr["seiten"][:10]:
+            z.append(f"| {zeile['score']} | `{zeile['url']}` | {zeile['impressionen']} | "
+                     f"{zeile['inlinks']} | {zeile['grund']} |")
+        z.append("")
+    if a.get("ursachen"):
+        z.append("### Sprünge im Verlauf")
+        z.append("")
+        for u in a["ursachen"]:
+            z.append(f"- **{u['datum']}** · {u['feld']} {u['delta']:+d} – {u['bewertung']}")
+            for kandidat in u.get("kandidaten") or []:
+                z.append(f"  - Kandidat: {kandidat['klasse']} ({kandidat['anzahl']}), "
+                         f"Abweichung {kandidat['abweichung_prozent']} %")
+        z.append("")
+    if a.get("abnahme"):
+        z.append("### Abnahme")
+        z.append("")
+        z.append("| Kriterium | Ziel | Status | Messung |")
+        z.append("|---|---|---|---|")
+        zeichen = {"erfuellt": "✅", "offen": "🛑", "unbekannt": "❔"}
+        for x in a["abnahme"]:
+            z.append(f"| {x['kriterium']} | {x['ziel']} | "
+                     f"{zeichen.get(x['status'], x['status'])} | {x['messung']} |")
+        z.append("")
     if a["massnahmen"]:
         z.append("### Maßnahmen (Auszug)")
         z.append("")
@@ -1602,6 +2760,30 @@ def drucke(a: dict) -> None:
             erwartung = str(g["erwartung"])
         print(f"    {g['seiten']:>4}  {g['titel'][:44]:<44} erwartet {erwartung:>4}  "
               f"{URTEIL_TEXT.get(g['urteil'], g['urteil'])}")
+    v = a.get("vertrag") or {}
+    if v:
+        print(f"  Vertrag:          {'grün' if v.get('status') == 'gruen' else 'ROT'} "
+              f"({len(v.get('noindex_ist') or [])} noindex, "
+              f"{len(v.get('gateways') or [])} Gateways)")
+    vl = a.get("verlinkung") or {}
+    if vl:
+        print(f"  Verlinkung:       {a['kennzahlen'].get('ohne_inlink')} von "
+              f"{a['kennzahlen'].get('inhaltsseiten')} Inhaltsseiten ohne Inlink · "
+              f"Median {vl.get('median_aus')} ausgehend")
+    pr = a.get("prioritaet") or {}
+    if pr.get("seiten"):
+        print(f"  Anfrage-Wellen:   {len(pr.get('welle1') or [])} / "
+              f"{len(pr.get('welle2') or [])} (Kontingent {pr.get('kontingent')}/Tag)")
+        for zeile in pr["seiten"][:3]:
+            print(f"    {zeile['score']:>5}  {zeile['url'][:64]:<64} {zeile['grund']}")
+    k2 = a.get("kandidaten") or {}
+    if k2:
+        print(f"  Kandidatenraum:   {k2.get('gesamt')} ableitbar · "
+              f"{k2.get('davon_ohne_entscheidung')} ohne Entscheidung (Obergrenze)")
+    if a.get("abnahme"):
+        offen = [x for x in a["abnahme"] if x["status"] != "erfuellt"]
+        print(f"  Abnahme:          {len(a['abnahme']) - len(offen)} erfüllt, "
+              f"{len(offen)} offen")
     if a["widersprueche"]:
         print()
         print("  Widersprüche:")
@@ -1668,12 +2850,35 @@ def _mini_repo(wurzel: Path) -> Path:
     for ordner, fm in (
         ("content/posts/a", "title: A\ndate: 2026-10-01\ntags: [\"Sparen\"]\ncategories: [\"Ratgeber\"]\n"),
         ("content/posts/b", "title: B\ndate: 2026-10-02\n"),
+        ("content/posts/c", "title: C\ndate: 2026-10-03\n"),
         ("content/suche", "title: Suche\nrobotsNoIndex: true\nurl: \"/suche/\"\n"),
     ):
         p = wurzel / ordner
         p.mkdir(parents=True, exist_ok=True)
         (p / "index.md").write_text(f"---\n{fm}---\n\nText.\n", encoding="utf-8")
     (wurzel / "content" / "_index.md").write_text("---\ntitle: Start\n---\n", encoding="utf-8")
+    # A verlinkt auf B (redaktionell), B auf C. C hat damit einen Inlink,
+    # A keinen – genau die Lage, die der Verlinkungsauftrag schließen soll.
+    (wurzel / "content" / "posts" / "a" / "index.md").write_text(
+        "---\ntitle: A\ndate: 2026-10-01\ntags: [\"Sparen\"]\ncategories: [\"Ratgeber\"]\n---\n\n"
+        "Text mit [B](../../posts/b/).\n\n**Weiterlesen:** [B](../../posts/b/)\n",
+        encoding="utf-8")
+    (wurzel / "content" / "posts" / "b" / "index.md").write_text(
+        "---\ntitle: B\ndate: 2026-10-02\n---\n\nText mit [C](../../posts/c/).\n\n"
+        "**Weiterlesen:** [C](../../posts/c/)\n", encoding="utf-8")
+    (wurzel / "content" / "posts" / "c" / "index.md").write_text(
+        "---\ntitle: C\ndate: 2026-10-03\n---\n\nText ohne Link.\n", encoding="utf-8")
+    (wurzel / "public").mkdir(parents=True, exist_ok=True)
+    (wurzel / "public" / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="utf-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '  <url><loc>https://franksfinanzcheck.de/posts/a/</loc>'
+        '<lastmod>2026-10-01</lastmod></url>\n'
+        '  <url><loc>https://franksfinanzcheck.de/posts/b/</loc>'
+        '<lastmod>2026-10-02</lastmod></url>\n'
+        '  <url><loc>https://franksfinanzcheck.de/posts/c/</loc>'
+        '<lastmod>2026-10-03</lastmod></url>\n'
+        '</urlset>\n', encoding="utf-8")
     for name in ("dsl", "strom"):
         p = wurzel / "static" / "go" / name
         p.mkdir(parents=True, exist_ok=True)
@@ -1695,7 +2900,7 @@ def _mini_repo(wurzel: Path) -> Path:
 
 
 def selbsttest() -> int:
-    """22 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
+    """78 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
     ok = 0
     fehler: list[str] = []
 
@@ -1813,6 +3018,156 @@ def selbsttest() -> int:
         pruefe("K40 Rückschritt im Gate", g["status"] == "rot"
                and any(f["regel"] in ("G2", "G3") for f in g["funde"]))
 
+        # --- Verlinkung, Triage, Vertrag, Priorität (M1–M9)
+        pruefe("K41 relativer Link aufgelöst",
+               _pfad_normalisieren("../../posts/a/", "/posts/b/") == "/posts/a/")
+        pruefe("K42 absolute Domain aufgelöst",
+               _pfad_normalisieren("https://franksfinanzcheck.de/posts/a/", "/") == "/posts/a/")
+        pruefe("K43 externer Link ist kein interner",
+               _pfad_normalisieren("https://example.org/x/", "/") is None)
+        links = redaktionelle_links(repo)
+        pruefe("K44 redaktioneller Inlink gezählt",
+               links["seiten"]["/posts/b/"]["ein"] == 1
+               and "/posts/a/" in links["ohne_ein"])
+        pruefe("K45 Anker am Doppelpunkt gekürzt",
+               anker_kurz("Bankgebühren senken: 7 Schritte zum günstigeren Konto")
+               == "Bankgebühren senken")
+        pruefe("K46 Anker bleibt kurz",
+               len(anker_kurz("Ein sehr langer Titel mit vielen Wörtern über die Lage")
+                   .split()) <= 6)
+
+        t = triage([{"url": "/posts/a/", "grund": "Nicht gefunden (404)"},
+                    {"url": "/posts/a/", "grund": "Durch noindex-Tag ausgeschlossen"},
+                    {"url": "/posts/weg/", "grund": "Nicht gefunden (404)"},
+                    {"url": "/posts/neu/", "grund": "Gefunden – zurzeit nicht indexiert"}],
+                   wahrheit, {}, {"ohne_ein": ["/posts/neu/"]})
+        nach_url = {z["url"]: z for z in t["zeilen"]}
+        pruefe("K47 live-URL wird nicht als Fehler triagiert",
+               nach_url["/posts/a/"]["prioritaet"] == "P3"
+               and "Bestand" in nach_url["/posts/a/"]["aktion"])
+        pruefe("K48 entschiedene 404 bleibt entschieden",
+               "bereits entschieden" in nach_url["/posts/weg/"]["aktion"]
+               and "url_entfallen" in nach_url["/posts/weg/"]["beleg"])
+        pruefe("K49 fehlender Inlink ist P1",
+               nach_url["/posts/neu/"]["prioritaet"] == "P1")
+        pruefe("K50 Triage sortiert nach Priorität",
+               [z["prioritaet"] for z in t["zeilen"]][0] == "P1"
+               and t["offen"])
+
+        k = kandidatenraum(wahrheit)
+        pruefe("K51 Kandidatenraum kennt dokumentierte Alt-URL",
+               "/posts/alt-a/" in k["ohne_entscheidung"] or k["davon_dokumentiert"] >= 1)
+        pruefe("K52 Kandidatenraum führt keine Live-URL als offen",
+               not [u for u in k["ohne_entscheidung"] if u in wahrheit["indexierbar"]])
+
+        vertrag_original = dict(NOINDEX_VERTRAG)
+        try:
+            NOINDEX_VERTRAG.clear()
+            NOINDEX_VERTRAG.update({"/suche/": "Test"})
+            pruefe("K53 Vertrag grün, wenn jede noindex-Seite begründet ist",
+                   vertrag(wahrheit)["status"] == "gruen")
+            NOINDEX_VERTRAG.clear()
+            pruefe("K54 noindex ohne Vertrag ist ein harter Fund",
+                   any(f["regel"] == "V1" for f in vertrag(wahrheit)["funde"]))
+            NOINDEX_VERTRAG.update({"/suche/": "Test", "/gibtsnicht/": "veraltet"})
+            pruefe("K55 veralteter Vertragseintrag ist ein harter Fund",
+                   any(f["regel"] == "V2" for f in vertrag(wahrheit)["funde"]))
+        finally:
+            NOINDEX_VERTRAG.clear()
+            NOINDEX_VERTRAG.update(vertrag_original)
+
+        p2 = prioritaet(wahrheit, links, root=repo)
+        score = {z["url"]: z["score"] for z in p2["seiten"]}
+        pruefe("K56 Seite ohne Inlink steht vorn",
+               score["/posts/a/"] > score["/posts/b/"])
+        pruefe("K57 Welle 1 ist gefüllt und disjunkt zu Welle 2",
+               p2["welle1"] and not (set(p2["welle1"]) & set(p2["welle2"])))
+
+        auftrag = verlinkungs_auftrag(wahrheit, links, root=repo)
+        pruefe("K58 Verlinkungsauftrag zielt auf die unverlinkte Seite",
+               any(a["ziel"] == "/posts/a/" for a in auftrag))
+
+        opfer = repo / "content" / "posts" / "c" / "index.md"
+        opfer.write_text(opfer.read_text(encoding="utf-8")
+                         + "\n**Weiterlesen:** [Ratgeber](../../pillar/x/)\n",
+                         encoding="utf-8")
+        ok1, _ = link_einfuegen(opfer, "/posts/a/", "A")
+        ok2, meldung2 = link_einfuegen(opfer, "/posts/a/", "A")
+        pruefe("K59 Link wird angehängt und nicht doppelt gesetzt",
+               ok1 and not ok2 and "bereits" in meldung2)
+
+        ohne_zeile = repo / "content" / "posts" / "b" / "index.md"
+        ohne_zeile.write_text("---\ntitle: B\ndate: 2026-10-02\n---\n\nText.\n",
+                              encoding="utf-8")
+        ok3, meldung3 = link_einfuegen(ohne_zeile, "/posts/a/", "A")
+        pruefe("K60 ohne Weiterlesen-Zeile wird nichts erfunden",
+               not ok3 and "Weiterlesen" in meldung3)
+
+        pruefe("K61 KPI ohne Verlauf ist leer, nicht geschätzt",
+               kpi(tmp / "gibtsnicht.jsonl")["reihen"] == [])
+        abn = abnahme(auswertung)
+        pruefe("K62 Abnahme liefert Status je Kriterium",
+               abn and all(x["status"] in ("erfuellt", "offen", "unbekannt") for x in abn))
+        pruefe("K63 Ursachen erfinden keinen Beleg",
+               all(u["bewertung"] in ("kein Beleg im Repo gefunden",
+                                      "Größenordnung passt – Ursache noch nicht belegt")
+                   for u in ursachen(auswertung["kennzahlen"], wahrheit)))
+
+        # --- Vertrag im Tor, Detail-Alter, lastmod, Goldkorridor
+        g6 = gate({"kennzahlen": {}, "widersprueche": [],
+                   "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
+                                          "text": "noindex ohne Vertrag"}]}}, None)
+        pruefe("K64 gebrochener Vertrag macht das Tor rot",
+               g6["status"] == "rot" and any(f["regel"] == "G6" for f in g6["funde"]))
+        pruefe("K65 lastmod-Lücke wird am Build gemessen",
+               lastmod_luecke({"indexierbar": []}, repo) == 0)
+        pruefe("K65b ohne Build keine erfundene lastmod-Zahl",
+               lastmod_luecke({"indexierbar": []}, tmp / "ohne-build") is None)
+        leer = detail_stand()
+        pruefe("K66 ohne Detail-Ordner kein Stand", leer["stand"] is None and leer["urls"] == 0)
+        DETAILS.mkdir(parents=True, exist_ok=True)
+        (DETAILS / ".stand").write_text("2026-09-01\n", encoding="utf-8")
+        try:
+            pruefe("K67 Detail-Alter wird gerechnet",
+                   detail_stand(dt.date(2026, 9, 21))["alter_tage"] == 20)
+        finally:
+            (DETAILS / ".stand").unlink()
+
+        zaehl = ("[a](../../posts/a/) [b](../../posts/b/) [c](../../posts/c/) "
+                 "[d](../../posts/d/) [e](../../posts/e/) [f](../../posts/f/) "
+                 "[g](../../posts/g/) [h](../../posts/h/) [i](../../posts/i/) "
+                 "[j](../../posts/j/)")
+        pruefe("K68 Linkzählung folgt dem Goldkorridor-Guard",
+               post_links_gezaehlt(zaehl) == 10)
+        pruefe("K69 Bilder sind keine Links",
+               post_links_gezaehlt("![alt](../../posts/a/)") == 0)
+        pruefe("K70 Triage-Markdown trägt die Tabelle",
+               "| Prio | URL | Grund | Aktion | Beleg |" in triage_markdown(t, "Test"))
+
+        # --- Vertragsbruch färbt das Gate rot (M5/M6)
+        g6 = gate({"kennzahlen": {}, "widersprueche": [],
+                   "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
+                                          "text": "noindex ohne Vertrag"}]}}, None)
+        pruefe("K64 gebrochener Vertrag macht das Tor rot",
+               g6["status"] == "rot" and any(f["regel"] == "G6" for f in g6["funde"]))
+        pruefe("K65 Goldkorridor-Zählung folgt dem Guard",
+               post_links_gezaehlt("[a](../../posts/a/) [b](../../posts/b/)") == 2)
+        pruefe("K66 Bilder sind keine Links",
+               post_links_gezaehlt("![alt](../../posts/a/)") == 0)
+        pruefe("K67 keine erfundene lastmod-Zahl ohne Build",
+               lastmod_luecke({"indexierbar": []}, tmp / "ohne-build") is None)
+        pruefe("K68 Detail-Alter ohne Ordner ist leer",
+               detail_stand()["stand"] is None)
+        DETAILS.mkdir(parents=True, exist_ok=True)
+        (DETAILS / ".stand").write_text("2026-09-01\n", encoding="utf-8")
+        try:
+            pruefe("K69 Detail-Alter wird gerechnet",
+                   detail_stand(dt.date(2026, 9, 21))["alter_tage"] == 20)
+        finally:
+            (DETAILS / ".stand").unlink()
+        pruefe("K70 Triage-Markdown trägt die Tabelle",
+               "| Prio | URL | Grund | Aktion | Beleg |" in triage_markdown(t, "Test"))
+
     if fehler:
         print(f"🛑 GSC-ABDECKUNG SELBSTTEST: {len(fehler)} von {ok + len(fehler)} Fällen rot")
         for name in fehler:
@@ -1840,6 +3195,30 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--snapshot", metavar="DATEI", help="statt aktuell.json eine Momentaufnahme")
     p.add_argument("--vorschlaege", metavar="CSV",
                    help="Detail-Export mit URLs: Weiterleitungs-Vorschläge ableiten")
+    p.add_argument("--triage", nargs="?", const=str(DETAILS),
+                   metavar="CSV_ODER_VERZEICHNIS",
+                   help="Detail-Listen einlesen und in eine abarbeitbare Liste "
+                        "übersetzen (ohne Angabe: data/gsc/abdeckung/details/)")
+    p.add_argument("--altlasten", action="store_true",
+                   help="Index-Altlasten benennen (Index-Puffer gegen Sitemap)")
+    p.add_argument("--kandidaten", action="store_true",
+                   help="Obergrenze zeigen: welche 404er kann der Bestand erklären?")
+    p.add_argument("--vertrag", action="store_true",
+                   help="noindex-Bestand und Gateways gegen den Vertrag prüfen")
+    p.add_argument("--prioritaet", action="store_true",
+                   help="Anfrage-Wellen und Verlinkungsauftrag zeigen")
+    p.add_argument("--verlinkung", action="store_true",
+                   help="Verlinkungsauftrag zeigen (mit --apply einfügen)")
+    p.add_argument("--apply", action="store_true",
+                   help="Verlinkungsauftrag in die „Weiterlesen“-Zeilen schreiben")
+    p.add_argument("--max", type=int, default=10, metavar="N",
+                   help="höchstens N Links je Lauf einfügen (Standard 10)")
+    p.add_argument("--kpi", action="store_true", help="Wochenkennzahlen zeigen")
+    p.add_argument("--abnahme", action="store_true", help="Abnahmekriterien prüfen")
+    p.add_argument("--ursachen", action="store_true",
+                   help="Sprünge im Bericht einordnen – mit Git-Beleg, wo möglich")
+    p.add_argument("--ohne-git", action="store_true",
+                   help="bei --ursachen keine Git-Historie lesen (schneller)")
     p.add_argument("--selftest", action="store_true", help="offline, ohne Netz")
     args = p.parse_args(argv)
 
@@ -1863,6 +3242,133 @@ def main(argv: list[str] | None = None) -> int:
                   f"data/gsc/abdeckung/{ergebnis['datum']}.json", file=sys.stderr)
             if not (args.audit or args.gate or args.json or args.md):
                 return 0
+
+        if args.triage:
+            quelle = Path(args.triage)
+            if not quelle.exists():
+                print(f"🛑 Keine Detail-Liste gefunden: {quelle}.\n"
+                      "   In der Search Console je Grund exportieren und als CSV in "
+                      "diesen Ordner legen; das Exportdatum in `.stand` (JJJJ-MM-TT) "
+                      "eintragen.", file=sys.stderr)
+                return 1
+            roh = lade_export(quelle)
+            eintraege = []
+            for d in roh.get("details") or []:
+                # Der Grund steckt im Dateinamen – die Detail-CSV selbst trägt
+                # keine Spalte „Grund“ (sie ist je Grund eine eigene Datei).
+                grund = Path(d.get("datei") or "").stem or "unbekannt"
+                eintraege.append({"url": d["url"], "grund": grund})
+            if not eintraege:
+                print("🛑 Keine URL in der Detail-Liste gefunden (Spalte „URL“).",
+                      file=sys.stderr)
+                return 1
+            wahrheit = repo_wahrheit()
+            t = triage(eintraege, wahrheit, kennzahlen(lade_snapshot(), wahrheit),
+                       redaktionelle_links())
+            _json_schreiben(ABDECKUNG / "triage.json", t)
+            markdown = triage_markdown(t, str(quelle))
+            (ABDECKUNG / "triage.md").write_text(
+                "# Triage der Search-Console-Liste\n\n" + markdown + "\n",
+                encoding="utf-8")
+            # M3: Die Redaktions-Queue ist die Schnittstelle zwischen Automat und
+            # Mensch. Sie enthält nur, was eine Redaktion entscheiden kann –
+            # Technik und bereits Entschiedenes bleiben draußen.
+            queue = ["# Redaktions-Queue (aus der Triage)", ""]
+            for zeile in t["zeilen"]:
+                if zeile["prioritaet"] in ("P0", "P1", "P2") and \
+                        zeile["schluessel"] in ("crawled_not_indexed", "soft_404",
+                                                "discovered_not_indexed",
+                                                "duplicate_canonical"):
+                    queue.append(f"- [ ] `{zeile['url']}` – {zeile['aktion']} "
+                                 f"({zeile['grund']}) · {zeile['beleg']}")
+            (ABDECKUNG / "redaktions_queue.md").write_text(
+                "\n".join(queue) + "\n", encoding="utf-8")
+            print(markdown)
+            print(f"\n→ data/gsc/abdeckung/triage.json · triage.md · redaktions_queue.md")
+            return 0
+
+        if args.altlasten:
+            wahrheit = repo_wahrheit()
+            snap = lade_snapshot()
+            k = kennzahlen(snap, wahrheit)
+            print(f"Index-Altlasten: {k['index_puffer']} "
+                  f"({k['indexiert']} im Index, {k['live_indexierbar']} indexierbar)")
+            print("Das sind entfernte, weitergeleitete oder abgeschaltete URLs. "
+                  "Sie stehen für Suchanfragen noch im Index.")
+            nachfrage = _nachfrage_karte(None)
+            live = set(wahrheit["indexierbar"])
+            benannt = [(u, v) for u, v in nachfrage.items() if u not in live and v["impressionen"]]
+            if benannt:
+                print("\nMit belegter Nachfrage (Top-Seiten, 28 Tage):")
+                for url, wert in sorted(benannt, key=lambda x: -x[1]["impressionen"])[:20]:
+                    print(f"  {wert['impressionen']:3d} Impr.  Pos. {wert['position']}  {url}")
+                print("\nEntscheidung je URL: Weiterleitung (data/weiterleitungen.yaml) "
+                      "oder bewusst 404 (data/url_entfallen.yaml).")
+            else:
+                print("\nKeine dieser URLs hat in den letzten 28 Tagen Impressionen – "
+                      "sie kosten kein Crawl-Budget, verzerren aber die Quote.")
+            print("\nDie vollständige Liste der 117 indexierten URLs liefert nur die "
+                  "Search Console (Indexierung → Seiten → „Indexierte Seiten“ "
+                  "exportieren) – danach `--triage`.")
+            return 0
+
+        if args.kandidaten or args.vertrag or args.prioritaet or args.verlinkung:
+            wahrheit = repo_wahrheit()
+            if args.kandidaten:
+                k = kandidatenraum(wahrheit, lade_snapshot() if AKTUELL.exists() else None)
+                _json_schreiben(ABDECKUNG / "kandidaten.json", k)
+                print(f"Kandidatenraum: {k['gesamt']} historische URLs ableitbar")
+                print(f"  dokumentiert (Weiterleitung/404): {k['davon_dokumentiert']}")
+                print(f"  ohne Entscheidung:                {k['davon_ohne_entscheidung']}")
+                print(f"  Herkunft: {k['nach_herkunft']}")
+                print("  Obergrenze, kein Nachweis – die Detail-Liste entscheidet.")
+            if args.vertrag:
+                v = vertrag(wahrheit, wahrheit.get("bau"))
+                _json_schreiben(ABDECKUNG / "vertrag.json", v)
+                print(f"\nVertrag: {v['status'].upper()}")
+                for f in v["funde"]:
+                    print(f"  🛑 [{f['regel']}] {f['text']}")
+                print(f"  {len(v['noindex_ist'])} noindex-Seiten im Inhalt, "
+                      f"{len(v['noindex_vertrag'])} im Vertrag, "
+                      f"{len(v['gateways'])} Gateways")
+            if args.prioritaet or args.verlinkung:
+                vl = redaktionelle_links()
+                if args.verlinkung:
+                    auftrag = verlinkungs_auftrag(wahrheit, vl)
+                    if args.apply:
+                        titel = _titel_karte()
+                        getan, fehl = [], []
+                        for posten in auftrag[:args.max]:
+                            pfad = _datei_zu_url(posten["quelle"])
+                            if not pfad or not pfad.exists():
+                                fehl.append((posten, "Quelldatei nicht gefunden"))
+                                continue
+                            ok, meldung = link_einfuegen(
+                                pfad, posten["ziel"],
+                                anker_kurz(titel.get(posten["ziel"], "Weiterlesen")))
+                            (getan if ok else fehl).append((posten, meldung))
+                        _historie_schreiben(getan)
+                        print(f"Verlinkung: {len(getan)} eingefügt, {len(fehl)} nicht möglich")
+                        for posten, meldung in getan:
+                            print(f"  ✅ {posten['quelle']} → {posten['ziel']}")
+                        for posten, meldung in fehl[:8]:
+                            print(f"  ℹ️  {posten['quelle']}: {meldung}")
+                    else:
+                        _json_schreiben(ABDECKUNG / "verlinkungsauftrag.json", auftrag)
+                        print(f"\nVerlinkungsauftrag: {len(auftrag)} Paare "
+                              f"(mit `--apply --max N` schreiben)")
+                        for posten in auftrag[:15]:
+                            print(f"  {posten['quelle'][:56]:<56} → {posten['ziel'][:56]}")
+                if args.prioritaet:
+                    p2 = prioritaet(wahrheit, vl)
+                    _json_schreiben(ABDECKUNG / "prioritaet.json", p2)
+                    print(f"\nAnfrage-Wellen: {len(p2['welle1'])} / {len(p2['welle2'])} "
+                          f"(Kontingent {p2['kontingent']}/Tag)")
+                    print(f"  Seiten ohne redaktionellen Inlink: {p2['ohne_inlink']}")
+                    for zeile in p2["seiten"][:10]:
+                        print(f"  {zeile['score']:>5}  {zeile['url'][:60]:<60} "
+                              f"{zeile['impressionen']:>3} Impr.  {zeile['grund']}")
+            return 0
 
         if args.vorschlaege:
             roh = lade_export(Path(args.vorschlaege))
@@ -1889,6 +3395,70 @@ def main(argv: list[str] | None = None) -> int:
             REPORT.parent.mkdir(parents=True, exist_ok=True)
             REPORT.write_text("# Befund Abdeckung\n\n" + als_markdown(auswertung) + "\n",
                               encoding="utf-8")
+        if args.kpi:
+            k = auswertung["kpi"]
+            print(f"Wochenkennzahlen ({len(k['reihen'])} Momentaufnahme(n))")
+            print("| Datum | indexiert | nicht indexiert |")
+            print("|---|---|---|")
+            for w in k["wochen"]:
+                print(f"| {w['datum']} | {w['indexiert']} | {w['nicht_indexiert']} |")
+            return 0
+        if args.abnahme:
+            print("Abnahme")
+            for x in auswertung["abnahme"]:
+                zeichen = {"erfuellt": "✅", "offen": "🛑", "unbekannt": "❔"}.get(x["status"], "•")
+                print(f"  {zeichen} {x['kriterium']}: {x['status']} ({x['messung']})")
+                if x["naechster_schritt"] and x["status"] != "erfuellt":
+                    print(f"      → {x['naechster_schritt']}")
+            return 1 if any(x["status"] == "offen" for x in auswertung["abnahme"]) else 0
+        if args.ursachen:
+            ereignisse = None
+            if not args.ohne_git:
+                daten = [a["datum"] for a in auswertung["kennzahlen"]["anomalien"]
+                         if a.get("datum")]
+                if daten:
+                    frueh = min(str(d)[:10] for d in daten)
+                    try:
+                        von = dt.date.fromisoformat(frueh) - dt.timedelta(days=10)
+                        bis = dt.date.fromisoformat(max(str(d)[:10] for d in daten))
+                    except ValueError:
+                        von = bis = None
+                    if von:
+                        ereignisse = git_ereignisse(von, bis)
+                        print(f"Git-Historie {von} … {bis}: "
+                              f"{ereignisse.get('commits', 0)} Commits"
+                              + ("  ⚠ Shallow-Clone – Beleg nur mit fetch-depth: 0"
+                                 if ereignisse.get("shallow") else ""))
+                        if not ereignisse.get("verfuegbar"):
+                            print(f"  ⚠ {ereignisse.get('grund')}")
+                        else:
+                            for tag in sorted(ereignisse["tage"]):
+                                e = ereignisse["tage"][tag]
+                                print(f"  {tag}: {e['commits']:2d} Commits, "
+                                      f"{e['content_dateien']:3d} Content-Dateien, "
+                                      f"Entwürfe {e['draft_saldo']:+d}")
+                                for top in e["top"]:
+                                    print(f"      {top['sha']} {top['draft_neu']:+3d} Entwürfe  "
+                                          f"{top['betreff'][:70]}")
+            ursachen_liste = ursachen(
+                auswertung["kennzahlen"],
+                {"anzahl_taxonomie": sum(1 for g in auswertung.get("gruende", [])
+                                         if g.get("schluessel") == "taxonomie")},
+                ereignisse)
+            _json_schreiben(ABDECKUNG / "ursachen.json",
+                            {"erzeugt": dt.date.today().isoformat(),
+                             "ereignisse": ereignisse, "ursachen": ursachen_liste})
+            for u in ursachen_liste:
+                print(f"\n{u['datum']} · {u['feld']} {u['delta']:+d} – {u['bewertung']}")
+                if u.get("git"):
+                    print(f"   Beleg: {u['git']['tag']}, {u['git']['draft_neu']} neue "
+                          f"Beitragsentwürfe in {u['git']['content_dateien']} Dateien")
+                for kandidat in u["kandidaten"]:
+                    print(f"   Kandidat: {kandidat['klasse']} ({kandidat['anzahl']}), "
+                          f"Abweichung {kandidat['abweichung_prozent']} %")
+                print(f"   Prüfweg: {u['pruefweg']}")
+            return 0
+
         if args.json:
             print(json.dumps(auswertung, ensure_ascii=False, indent=1))
         elif args.md:

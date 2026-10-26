@@ -35,6 +35,62 @@
 ### Widersprüche
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 99 – 18 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
+- ℹ️ **W9** Keine Detail-Liste im Bestand (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die gemeldeten URLs nicht triagieren – die Summen bleiben Summen.
+- ℹ️ **W11** 4 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken.
+- ℹ️ **W10** 9 Sitemap-URL(s) ohne `lastmod`. Google entscheidet dann selbst, wann neu gecrawlt wird – genau das Gegenteil von Crawl-Nachfrage (M2).
+
+### Vertrag: noindex-Bestand und Gateways — 🟢 in Ordnung
+
+- 5 noindex-Seiten im Inhalt, 6 im Vertrag (`NOINDEX_VERTRAG`), 20 Gateways.
+
+### Kandidatenraum (Obergrenze für die 404-Erklärung)
+
+- 284 historische URLs aus dem Bestand ableitbar; 122 dokumentiert (Weiterleitung oder bewusst 404), 162 ohne Entscheidung.
+- Das ist eine **Obergrenze**, kein Nachweis: Ob Google eine dieser URLs je gesehen hat, sagt nur die Detail-Liste (M1).
+
+### Redaktionelle Verlinkung
+
+- 0 von 74 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
+- Verlinkungsauftrag: 1 Quelle-Ziel-Paar (`--verlinkung --apply`).
+
+### Links ins Leere
+
+- `/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/` – 2 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+- `/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/` – 7 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+- `/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/` – 1 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+- `/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/` – 4 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+
+### Anfrage-Wellen (M2)
+
+- Welle 1: 40 Seiten · Welle 2: 59 · Kontingent 200 Anfragen/Tag.
+
+| Score | Seite | Impressionen | Inlinks | Grund |
+|---|---|---|---|---|
+| 8.88 | `/pillar/internet-dsl/` | 10 | 17 | verlinkt |
+| 8.15 | `/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/` | 6 | 2 | verlinkt |
+| 7.31 | `/pillar/` | 5 | 2 | verlinkt |
+| 6.62 | `/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/` | 2 | 4 | verlinkt |
+| 6.35 | `/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/` | 0 | 1 | nur ein Inlink |
+| 6.28 | `/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/` | 1 | 9 | verlinkt |
+| 6.28 | `/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/` | 1 | 3 | verlinkt |
+| 6.13 | `/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/` | 1 | 2 | verlinkt |
+| 6.07 | `/posts/` | 2 | 1 | nur ein Inlink |
+| 5.83 | `/` | 3 | 0 | kein redaktioneller Inlink |
+
+### Sprünge im Verlauf
+
+- **2026-10-17** · nicht_indexiert +59 – belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später
+- **2026-10-17** · indexiert -21 – belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später
+
+### Abnahme
+
+| Kriterium | Ziel | Status | Messung |
+|---|---|---|---|
+| Gate grün (kein Rückschritt, kein Widerspruch) | sofort | ✅ | Gate: gruen |
+| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (7 Tage alt) |
+| 404er mit Nachfrage triagiert | sofort | 🛑 | 193 ohne Erklärung im Bestand |
+| Indexquote steigt | 14 Tage | ❔ | 26.8 % bei 1 Momentaufnahme(n) |
+| Seiten ohne redaktionellen Inlink | 30 Tage | ✅ | 0 Seiten |
 
 ### Maßnahmen (Auszug)
 

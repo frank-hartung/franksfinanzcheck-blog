@@ -189,7 +189,7 @@ Das ist keine Schwäche, sondern eine bewusste Entscheidung.
 
 Finanzielle Freiheit entsteht selten plötzlich. Sie wächst, wenn du deine Entscheidungen kennst und regelmäßig an deine Lage anpasst. Ein einzelner Monat muss nicht perfekt sein. Eine klare Routine zählt mehr als eine perfekte Theorie.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Finanzieller Puffer: Wie viel Notgroschen ist genug?](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Finanzieller Puffer: Wie viel Notgroschen ist genug?](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) · [Sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
 
 
 Genau das ist der Hebel: 7 Gewohnheiten für finanzielle Freiheit.

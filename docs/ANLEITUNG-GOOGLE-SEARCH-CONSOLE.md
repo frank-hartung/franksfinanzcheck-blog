@@ -212,9 +212,15 @@ Position liegen, nicht pauschal an „schlechten Titeln".
    lokaler Build behauptet
 3. Leistungsdaten holen (`gsc_import.py`)
 4. Build für die Gegenprobe + Abdeckung rechnen (`gsc_abdeckung.py --audit --gate`)
-5. Indexierung anfragen (`gsc_indexierung.py --live`)
-6. IndexNow-Ping (`submit_indexnow.py --live --kein-llms`)
-7. Zustand direkt auf main sichern; Leistungsdaten als PR
+5. Maßnahmenplan: Vertrag (`--vertrag`), Anfrage-Wellen (`--prioritaet`),
+   Verlinkungsauftrag (`--verlinkung`), Triage (`--triage`, nur wenn
+   Detail-Listen vorliegen), Wochenkennzahl und Abnahme (`--kpi`, `--abnahme`,
+   `--altlasten`) – jeder Schritt endet mit einer Warnung, nie mit Abbruch
+6. Indexierung anfragen (`gsc_indexierung.py --live`), in der Reihenfolge der
+   Welle 1 aus `prioritaet.json` (max. 40 statt stumpf 200 nach `lastmod`)
+7. IndexNow-Ping (`submit_indexnow.py --live --kein-llms`)
+8. Artefakte als Download (`gsc-abdeckung`), Zustand direkt auf main sichern,
+   Leistungsdaten als PR
 
 Ohne Secrets endet der Lauf mit Status `nicht_konfiguriert` und bleibt **grün** –
 ein noch nicht eingerichtetes Dienstkonto ist ein Zustand, kein Defekt.
@@ -320,7 +326,68 @@ Das Alter des Befunds steht in jeder Ausgabe. Ist der Export älter als 14 Tage,
 meldet der Befund das als `W8`; älter als 21 Tage wird daraus die P1-Maßnahme
 `M10`. Ein Bildschirmfoto von vor drei Wochen ist keine Messung.
 
-## 10. Weitere Suchmaschinen
+## 10. Maßnahmenplan in Betrieb (M1–M9)
+
+Der Bericht `GSC-ABDECKUNG-HIGHEND-2026-10-26.md` listet neun Maßnahmen. Sie
+sind hier keine Vorsätze, sondern Befehle und Workflow-Schritte. Jede Zeile
+sagt, wer sie auslöst und wo das Ergebnis liegt.
+
+| Maßnahme | Auslöser | Befehl / Ort | Ergebnis |
+|---|---|---|---|
+| M1 404er triagieren | Mensch (Export) + Tageslauf | `npm run gsc:triage` (liest `data/gsc/abdeckung/details/`) | `triage.json`, `triage.md` |
+| M2 Anfrage-Priorität | Tageslauf | `--prioritaet` → Welle 1 geht an `gsc_indexierung.py --url …` | `prioritaet.json` |
+| M2 interne Verlinkung | Mensch, je Lauf begrenzt | `npm run gsc:verlinkung` (Vorschau), `npm run gsc:verlinken` (schreibt) | `verlinkungsauftrag.json`, `data/verlinkung_history.jsonl` |
+| M3 Redaktions-Queue | Tageslauf nach Triage | `redaktions_queue.md` | nur Seiten, die eine Redaktion entscheiden kann |
+| M4 Altlasten benennen | Tageslauf | `npm run gsc:altlasten` | Zahl + URLs mit belegter Nachfrage |
+| M5 noindex-Vertrag | Tor (hart) | `--vertrag`, Regel V1/V2 | `vertrag.json`, Gate ROT bei Leck |
+| M6 robots-Sperre | Tor (hart) | `--vertrag`, Regel V3/V4 | dito |
+| M7 Sprung erklären | Mensch | `npm run gsc:ursachen` | `ursachen.json`, Beleg aus `git log` |
+| M8 Detail-Listen | Mensch (Export) + Tageslauf | `.stand` in `details/`, Regel W9 | Warnung im Lauf, wenn sie fehlen |
+| M9 Wochen-Kennzahl | Tageslauf | `npm run gsc:kpi`, `npm run gsc:abnahme` | KPI-Tabelle, Abnahmestatus |
+
+### 10.1 Detail-Listen ablegen (der einzige menschliche Schritt)
+
+In der Search Console: **Indexierung → Seiten → Grund anklicken → Exportieren**,
+je Grund eine CSV. Die Dateien nach `data/gsc/abdeckung/details/` legen und das
+Exportdatum in `data/gsc/abdeckung/details/.stand` schreiben (`2026-10-26`).
+Danach triagiert der Tageslauf selbst; ohne diese Dateien sagt Regel **W9** in
+jedem Befund, dass die Summen keine Arbeitsliste sind.
+
+### 10.2 Verlinkung schreiben – warum nur die „Weiterlesen“-Zeile
+
+`--verlinkung --apply` hängt neue Links ausschließlich an die kuratierte Zeile
+`**Weiterlesen:** …` am Artikelende. Fehlt diese Zeile, wird nichts
+eingefügt. Damit gilt: kein erfundener Satz im Fließtext, kein Link ohne
+redaktionelle Entscheidung, kein Artikel über dem Goldkorridor (9 interne
+Links, gezählt wie `link_density_guard.py` zählt). Jeder eingefügte Link steht
+in `data/verlinkung_history.jsonl` – append-only, mit Quelle, Ziel und Grund.
+
+### 10.3 Der Sprung vom 17.10.2026 ist erklärt
+
+`npm run gsc:ursachen` liest die Git-Historie der sieben Tage vor einem Sprung
+und zählt die `draft:`-Flags. Ergebnis für den Sprung vom 17.10.:
+
+- **Beleg:** Commit `8058293` vom 14.10.2026, 09:45 UTC, „redaktion:
+  Hemingway-Lesbarkeit und Offline-Sprachpflege“ – 3.936 Dateien, davon 89 in
+  `content/posts`, Saldo **+32 Beitragsentwürfe** (36 neu zurückgestuft).
+- **Wirkung im Bericht:** Am 17.10. fällt die Zahl der indexierten Seiten von
+  138 auf 117 (−21), die nicht indexierten steigen von 261 auf 320 (+59).
+- **Kein technischer Eingriff:** Zwischen 15. und 18.10. wurde weder
+  `hugo.toml`, `layouts/`, `robots.txt` noch `data/weiterleitungen.yaml`
+  geändert – die technischen Kandidaten sind damit ausgeschlossen.
+- **Grenze:** Die 21 verlorenen Seiten sind nicht einzeln zugeordnet; dafür
+  braucht es die Detail-Liste (M1/M8). Die Größenordnung passt zur
+  Zurückstufung, ein Beweis je URL ist es nicht.
+
+Ein Shallow-Clone (CI-Standard) kann diesen Beleg nicht liefern. Deshalb läuft
+der Tageslauf mit `--ursachen --ohne-git`; für den Beleg lokal:
+
+```bash
+git fetch --shallow-since=2026-10-07 origin main   # Historie bis vor den Sprung
+npm run gsc:ursachen
+```
+
+## 11. Weitere Suchmaschinen
 
 - **Bing Webmaster Tools:** dieselbe Sitemap einreichen. Verifikation liegt
   bereit (`static/BingSiteAuth.xml`, `msvalidate.01` in `extend_head.html`).
@@ -329,7 +396,7 @@ meldet der Befund das als `W8`; älter als 21 Tage wird daraus die P1-Maßnahme
   `static/`. Details: [ANLEITUNG-PINTEREST-API.md](ANLEITUNG-PINTEREST-API.md).
 - Auch dort ist eine Indexierung nicht garantiert.
 
-## 11. Befehle
+## 12. Befehle
 
 ```bash
 npm run gsc:verifikation        # Build + V1–V12 (hart)
@@ -342,7 +409,16 @@ npm run gsc:daten               # Leistungsdaten holen
 npm run gsc:abdeckung           # Abdeckungsbericht gegenrechnen
 npm run gsc:abdeckung:gate      # … als Tor (Exit 1 bei Rückschritt)
 npm run gsc:abdeckung:md        # … als Markdown
+npm run gsc:triage              # Detail-Listen zu einer Arbeitsliste machen
+npm run gsc:vertrag             # noindex-Bestand und Gateways prüfen
+npm run gsc:verlinkung          # Verlinkungsauftrag zeigen
+npm run gsc:verlinken           # … 10 Links einfügen (Weiterlesen-Zeile)
+npm run gsc:prioritaet          # Anfrage-Wellen (M2)
+npm run gsc:altlasten           # Index-Puffer benennen (M4)
+npm run gsc:kpi                 # Wochenkennzahl (M9)
+npm run gsc:abnahme             # Abnahmekriterien prüfen
+npm run gsc:ursachen            # Sprung mit Git-Beleg erklären (M7)
 npm run gsc:setup               # sieht das Dienstkonto die Property?
 npm run indexnow                # IndexNow-Ping
-npm run test:gsc                # 6 Selbsttests + 90 Regressionstests
+npm run test:gsc                # 6 Selbsttests + 108 Regressionstests
 ```

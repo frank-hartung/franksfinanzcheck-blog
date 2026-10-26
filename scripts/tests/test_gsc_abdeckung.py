@@ -362,6 +362,183 @@ class CockpitAnbindung(unittest.TestCase):
         self.assertNotIn("data/gsc/abdeckung/befund.json", quellen)
 
 
+class Massnahmenplan(unittest.TestCase):
+    """Die Ebenen, die den Maßnahmenplan tragen (M1–M9).
+
+    Was hier eingefroren wird, ist nicht die Zahl von heute, sondern die
+    Eigenschaft: Eine Triage darf getroffene Entscheidungen nicht erneut
+    vorschlagen, ein Verlinkungsauftrag darf den Goldkorridor nicht sprengen,
+    und ein gebrochener Vertrag muss das Tor rot machen.
+    """
+
+    def setUp(self) -> None:
+        import datetime
+        import tempfile
+
+        self.dt = datetime
+        self.tmp = Path(tempfile.mkdtemp())
+        self.wahrheit = {
+            "indexierbar": ["/posts/a/", "/posts/b/", "/posts/c/"],
+            "noindex": ["/suche/"], "gateways": ["/go/x/"],
+            "weiterleitungen": {"/posts/alt/": "/posts/a/"},
+            "entfallen": {"/posts/weg/": "D"},
+            "taxonomie_404": ["/tags/x/"], "anzahl_taxonomie": 1,
+            "top_nicht_live": [{"url": "/posts/alt2/", "impressionen": 8, "position": 4.0}],
+            "robots": {"go_gesperrt": True, "sperrt_go_gruppen": 3},
+            "bau": {"gateway_liste": ["/go/x/"]},
+        }
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_triage_schlaegt_entschiedenes_nicht_neu_vor(self) -> None:
+        t = g.triage([{"url": "/posts/alt/", "grund": "Nicht gefunden (404)"},
+                      {"url": "/posts/weg/", "grund": "Nicht gefunden (404)"},
+                      {"url": "/posts/a/", "grund": "Nicht gefunden (404)"}],
+                     self.wahrheit, {})
+        aktionen = {z["url"]: z["aktion"] for z in t["zeilen"]}
+        self.assertIn("bereits entschieden", aktionen["/posts/alt/"])
+        self.assertIn("bereits entschieden", aktionen["/posts/weg/"])
+        self.assertIn("Bestand", aktionen["/posts/a/"])
+        self.assertEqual(t["offen"], [])
+
+    def test_triage_erkennt_nachfrage_als_p1(self) -> None:
+        t = g.triage([{"url": "/posts/alt2/", "grund": "Nicht gefunden (404)"}],
+                     self.wahrheit, {})
+        zeile = t["zeilen"][0]
+        self.assertEqual(zeile["prioritaet"], "P1")
+        self.assertIn("Impressionen", zeile["beleg"])
+
+    def test_triage_macht_aus_fehlendem_inlink_p1(self) -> None:
+        t = g.triage([{"url": "/posts/neu/",
+                       "grund": "Gefunden – zurzeit nicht indexiert"}],
+                     self.wahrheit, {}, {"ohne_ein": ["/posts/neu/"]})
+        self.assertEqual(t["zeilen"][0]["prioritaet"], "P1")
+        self.assertIn("Inlink", t["zeilen"][0]["aktion"])
+
+    def test_vertrag_meldet_noindex_ohne_begruendung(self) -> None:
+        with mock.patch.dict(g.NOINDEX_VERTRAG, {}, clear=True):
+            v = g.vertrag(self.wahrheit)
+        self.assertEqual(v["status"], "rot")
+        self.assertTrue(any(f["regel"] == "V1" for f in v["funde"]))
+
+    def test_vertrag_meldet_veralteten_eintrag(self) -> None:
+        with mock.patch.dict(g.NOINDEX_VERTRAG, {"/suche/": "ok", "/weg/": "alt"},
+                             clear=True):
+            v = g.vertrag(self.wahrheit)
+        self.assertTrue(any(f["regel"] == "V2" for f in v["funde"]))
+
+    def test_vertrag_prueft_gateway_sperre(self) -> None:
+        wahrheit = dict(self.wahrheit)
+        wahrheit["robots"] = {"go_gesperrt": False, "sperrt_go_gruppen": 0}
+        with mock.patch.dict(g.NOINDEX_VERTRAG, {"/suche/": "ok"}, clear=True):
+            v = g.vertrag(wahrheit)
+        self.assertTrue(any(f["regel"] == "V4" for f in v["funde"]))
+
+    def test_gebrochener_vertrag_macht_das_gate_rot(self) -> None:
+        gate = g.gate({"kennzahlen": {}, "widersprueche": [],
+                       "vertrag": {"funde": [{"regel": "V1", "schwere": "hart",
+                                              "text": "Leck"}]}}, None)
+        self.assertEqual(gate["status"], "rot")
+        self.assertTrue(any(f["regel"] == "G6" for f in gate["funde"]))
+
+    def test_kandidatenraum_ist_obergrenze_ohne_live_urls(self) -> None:
+        k = g.kandidatenraum(self.wahrheit)
+        # Dokumentierte Entscheidungen (Weiterleitung, bewusst 404) sind keine
+        # offenen Kandidaten – sie stehen als "dokumentiert" in der Bilanz.
+        self.assertNotIn("/posts/alt/", k["ohne_entscheidung"])
+        self.assertIn("/posts/alt2/", k["ohne_entscheidung"])
+        self.assertGreaterEqual(k["davon_dokumentiert"], 2)
+        self.assertFalse([u for u in k["ohne_entscheidung"]
+                          if u in set(self.wahrheit["indexierbar"])])
+
+    def test_verlinkungsauftrag_haelt_den_goldkorridor(self) -> None:
+        # Quelle mit schon neun Links darf nichts mehr bekommen – der Guard
+        # zählt Vorkommen, nicht Ziele (Lehre vom 26.10.2026).
+        posts = self.tmp / "content" / "posts"
+        for slug in ("a", "b", "c", "voll"):
+            (posts / slug).mkdir(parents=True)
+        links = " ".join(f"[x](../../posts/{s}/)" for s in ("a", "b", "c"))
+        for slug in ("a", "b", "c"):
+            (posts / slug / "index.md").write_text(
+                f"---\ntitle: {slug}\ndate: 2026-10-01\n---\n\nText.\n", encoding="utf-8")
+        (posts / "voll" / "index.md").write_text(
+            "---\ntitle: voll\ndate: 2026-10-01\n---\n\n"
+            + " ".join(f"[{i}](../../posts/a/)" for i in range(9)) + "\n",
+            encoding="utf-8")
+        verlinkung = g.redaktionelle_links(self.tmp)
+        auftrag = g.verlinkungs_auftrag(self.wahrheit, verlinkung, root=self.tmp)
+        self.assertFalse([a for a in auftrag if a["quelle"] == "/posts/voll/"])
+        self.assertTrue(links)
+
+    def test_link_einfuegen_ist_idempotent(self) -> None:
+        datei = self.tmp / "artikel.md"
+        datei.write_text("Text.\n\n**Weiterlesen:** [A](/posts/a/)\n", encoding="utf-8")
+        ok1, _ = g.link_einfuegen(datei, "/posts/b/", "B")
+        ok2, meldung = g.link_einfuegen(datei, "/posts/b/", "B")
+        self.assertTrue(ok1)
+        self.assertFalse(ok2)
+        self.assertIn("bereits", meldung)
+        self.assertEqual(datei.read_text(encoding="utf-8").count("/posts/b/"), 1)
+
+    def test_anker_bleibt_ein_titelteil(self) -> None:
+        anker = g.anker_kurz("Bankgebühren senken: 7 Schritte zum günstigeren Konto")
+        self.assertEqual(anker, "Bankgebühren senken")
+        self.assertLessEqual(len(g.anker_kurz("Ein wirklich sehr langer Titel mit "
+                                              "vielen Wörtern über alles").split()), 6)
+
+    def test_abnahme_nennt_naechsten_schritt(self) -> None:
+        a = g.abnahme({"kennzahlen": {"export_alter_tage": 30},
+                       "gate": {"status": "gruen"}, "gruende": []})
+        offen = [x for x in a if x["status"] == "offen"]
+        self.assertTrue(offen)
+        self.assertTrue(all(x["naechster_schritt"] for x in offen))
+
+    def test_ursachen_ohne_beleg_erfindet_keine_ursache(self) -> None:
+        kenn = {"anomalien": [{"datum": "2026-10-17", "feld": "nicht_indexiert",
+                               "delta": 59}]}
+        u = g.ursachen(kenn, self.wahrheit)
+        self.assertEqual(u[0]["bewertung"], "kein Beleg im Repo gefunden")
+        self.assertEqual(u[0]["kandidaten"], [])
+
+
+class GitBeleg(unittest.TestCase):
+    """M7: Ein Sprung wird erklärt, nicht behauptet."""
+
+    def test_ohne_historie_kein_beleg(self) -> None:
+        import datetime
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            e = g.git_ereignisse(datetime.date(2026, 1, 1), datetime.date(2026, 1, 2),
+                                 root=Path(tmp))
+        self.assertFalse(e["verfuegbar"])
+        self.assertTrue(e["grund"])
+
+    def test_beleg_wird_als_beleg_gelesen(self) -> None:
+        import datetime
+
+        ereignisse = {"verfuegbar": True, "shallow": False, "commits": 1, "tage": {
+            "2026-10-14": {"commits": 18, "content_dateien": 251, "draft_saldo": 32,
+                           "draft_neu": 36, "draft_neu_posts": 36, "posts_saldo": 32,
+                           "post_dateien": 89, "top": []}}}
+        kenn = {"anomalien": [{"datum": "2026-10-17", "feld": "nicht_indexiert",
+                               "delta": 59}]}
+        u = g.ursachen(kenn, {}, ereignisse)
+        self.assertIn("belegt", u[0]["bewertung"])
+        self.assertEqual(u[0]["git"]["verzug_tage"], 3)
+        self.assertEqual(u[0]["git"]["saldo"], 32)
+
+    def test_ohne_fenster_bleibt_es_eine_hypothese(self) -> None:
+        ereignisse = {"verfuegbar": True, "shallow": False, "commits": 1, "tage": {
+            "2026-09-01": {"commits": 1, "content_dateien": 2, "draft_saldo": 3,
+                           "draft_neu": 3, "draft_neu_posts": 3, "posts_saldo": 3,
+                           "post_dateien": 2, "top": []}}}
+        kenn = {"anomalien": [{"datum": "2026-10-17", "feld": "nicht_indexiert",
+                               "delta": 59}]}
+        self.assertIsNone(g.ursachen(kenn, {}, ereignisse)[0]["git"])
+
+
 class Hermetik(unittest.TestCase):
     def test_index_gate_base_gilt_nur_fuer_dieses_repo(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -383,3 +560,44 @@ class Hermetik(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TriageAusDateien(unittest.TestCase):
+    """M1: Aus der CSV der Oberfläche wird eine Arbeitsliste – offline geprüft."""
+
+    def test_detail_ordner_wird_gelesen_und_triagiert(self) -> None:
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            ordner = Path(tmp)
+            (ordner / "Nicht gefunden (404).csv").write_text(
+                "URL,Zuletzt gecrawlt\n"
+                "https://franksfinanzcheck.de/posts/alt/,2026-10-18\n"
+                "https://franksfinanzcheck.de/posts/weg/,2026-10-17\n",
+                encoding="utf-8")
+            export = g.lade_export(ordner)
+            self.assertTrue(export["details"])
+            wahrheit = {
+                "indexierbar": [], "noindex": [], "gateways": [],
+                "weiterleitungen": {"/posts/alt/": "/posts/a/"}, "entfallen": {},
+                "taxonomie_404": [], "anzahl_taxonomie": 0,
+                "top_nicht_live": [], "robots": {"go_gesperrt": False,
+                                                 "sperrt_go_gruppen": 0},
+            }
+            eintraege = [{"url": d["url"], "grund": Path(d["datei"]).stem}
+                         for d in export["details"]]
+            t = g.triage(eintraege, wahrheit, {})
+            self.assertEqual(t["anzahl"], 2)
+            self.assertTrue(all(z["prioritaet"] in ("P0", "P1", "P2", "P3")
+                                for z in t["zeilen"]))
+            self.assertIn("Weiterleitung", t["zeilen"][0]["aktion"])
+
+    def test_detail_alter_wird_aus_stand_gelesen(self) -> None:
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch.object(g, "DETAILS", Path(tmp)):
+                (Path(tmp) / ".stand").write_text("2026-10-01\n", encoding="utf-8")
+                stand = g.detail_stand(g.dt.date(2026, 10, 15))
+        self.assertEqual(stand["stand"], "2026-10-01")
+        self.assertEqual(stand["alter_tage"], 14)
