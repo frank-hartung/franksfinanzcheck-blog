@@ -221,7 +221,7 @@ Dann fehlt der Nachweis. Sorge dafür, dass mindestens einmal im Jahr ein echter
 Ja. Gib den Stand zum Auszugstag an beide Stellen weiter. So endet die eine Rechnung sauber und die nächste startet mit einem echten Wert.
 
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Energieeffizienz im Haushalt](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/) · [Energiekosten senken](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/)
 **Lesetipp:** [Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden](../../posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/)
 
 ---

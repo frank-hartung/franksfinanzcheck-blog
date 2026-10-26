@@ -1,0 +1,109 @@
+{
+ "anzahl": 4,
+ "entschieden": [
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "alter_tage": null,
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/favicon.ico",
+   "vorschlag": "",
+   "ziel": null
+  },
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "alter_tage": null,
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/index.xml",
+   "vorschlag": "",
+   "ziel": null
+  }
+ ],
+ "eskaliert": [],
+ "nach_prioritaet": {
+  "P2": 2,
+  "P3": 2
+ },
+ "offen": [
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "alter_tage": 0,
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1845 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "vorschlag": "Rolle festlegen im Cluster K7-konto-karten-gebuehren (3 Artikel), Themenfeld „konto-karten“: Diese Seite hat dort keinen Eintrag.",
+   "ziel": null
+  },
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "alter_tage": 0,
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1872 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "vorschlag": "Rolle festlegen im Cluster K3-frugalismus (6 Artikel), Themenfeld „frugalismus“: Diese Seite hat dort keinen Eintrag.",
+   "ziel": null
+  }
+ ],
+ "register_eintraege": 0,
+ "sla": {
+  "P0": 1,
+  "P1": 7,
+  "P2": 30
+ },
+ "wirkung_belegt": [],
+ "zeilen": [
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "alter_tage": 0,
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1845 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "vorschlag": "Rolle festlegen im Cluster K7-konto-karten-gebuehren (3 Artikel), Themenfeld „konto-karten“: Diese Seite hat dort keinen Eintrag.",
+   "ziel": null
+  },
+  {
+   "aktion": "Redaktion prüfen (gecrawlt, nicht indexiert)",
+   "alter_tage": 0,
+   "beleg": "Google hat die Seite geholt und nicht in den Index genommen – Substanz, Einzigartigkeit und Absicht prüfen. 1872 Wörter, keine Rolle im Kannibalisierungs-Register, 0 Titel-Überschneidung(en) mit Live-Artikeln.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P2",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "vorschlag": "Rolle festlegen im Cluster K3-frugalismus (6 Artikel), Themenfeld „frugalismus“: Diese Seite hat dort keinen Eintrag.",
+   "ziel": null
+  },
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "alter_tage": null,
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/favicon.ico",
+   "vorschlag": "",
+   "ziel": null
+  },
+  {
+   "aktion": "kein Inhalt (Asset/Feed) – belassen",
+   "alter_tage": null,
+   "beleg": "Dateiendung: Feed, Favicon oder Datei. Google darf sie crawlen; ein Indexanspruch besteht nicht.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P3",
+   "schluessel": "crawled_not_indexed",
+   "url": "/index.xml",
+   "vorschlag": "",
+   "ziel": null
+  }
+ ]
+}

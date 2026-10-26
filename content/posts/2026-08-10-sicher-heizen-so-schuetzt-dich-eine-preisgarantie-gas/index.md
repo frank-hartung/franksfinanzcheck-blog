@@ -246,7 +246,7 @@ Eine [Gaspreisgarantie](../../posts/2026-09-07-heizkosten-senken-mit-diesen-stra
 
 Dein nächster Schritt: Lies im Tarif nach, was genau geschützt ist. Ist der Umfang klar und der Preis gut, kannst du ruhig wechseln.
 
-**Weiterlesen:** [Gastarife mit Preisgarantie vergleichen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) · [Bei Preissprüngen richtig reagieren](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Gastarife mit Preisgarantie vergleichen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) · [Bei Preissprüngen richtig reagieren](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Nachtstrom-Tarife](../../posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/)
 
 ## Häufige Fragen
 

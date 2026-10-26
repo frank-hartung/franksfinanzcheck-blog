@@ -193,7 +193,7 @@ So hältst du Kurs und sparst bares Geld. Am Ende des Monats bleibt mehr für di
 
 Bleib dran und rechne nach. Handle nur, wenn die Zahlen für dich sprechen. Das ist der Kern von FranksFinanzcheck.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/) · [Nachtstrom-Tarife](../../posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/) · [Energieeffizienz im Haushalt](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/) · [Stromkosten senken](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/)
 
 ## Häufige Fragen
 
