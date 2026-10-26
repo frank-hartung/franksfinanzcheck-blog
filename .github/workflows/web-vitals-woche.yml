@@ -66,6 +66,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Manifest und Lockfile vor dem npm-Install prüfen: fehlende oder
+      # widersprüchliche Pins dürfen nicht als Messfehler durchrutschen.
+      - name: Manifest-Wache vor npm ci
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
       # Die Wache beweist sich zuerst selbst: Ein Messwerkzeug, das nicht
       # laufen kann, darf kein Urteil abgeben (Repo-Regel: ein Gate, das
       # nicht läuft, ist keins).
