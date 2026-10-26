@@ -112,6 +112,7 @@ jobs:
             scripts.tests.test_linkcheck_reporting \
             scripts.tests.test_ff_pruefzeile_template \
             scripts.tests.test_cwv_refresh \
+            scripts.tests.test_download_links \
             scripts.tests.test_fremdmessung_sperre \
             scripts.tests.test_datenschutz_freigabe
 

@@ -25,6 +25,7 @@ Ich liefere auf Anfrage kurze Zitate, Rechenwege und Quellen. Wo eine individuel
 - [Fixkosten-Index Deutschland: Energie-Baseline Q4 2026](/studien/fixkosten-index-2026-q4/)
 - [Datensatz als CSV](/downloads/fixkosten-index-2026-q4.csv)
 - [Pressegrafik als SVG](/downloads/fixkosten-index-2026-q4-pressegrafik.svg)
+- [Methodik und Rechnung als PDF (eine Seite)](/downloads/fixkosten-index-2026-q4.pdf)
 - [Redaktions- und Quellenmethodik](/methodik/)
 - [Transparenz und Finanzierung](/transparenz/)
 
