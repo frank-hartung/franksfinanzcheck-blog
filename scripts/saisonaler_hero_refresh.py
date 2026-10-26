@@ -381,12 +381,46 @@ def polish_candidate(season: dict, topics: list[str], history: list[dict],
     return None, protokoll, quelle
 
 
+MARKER_RE = re.compile(r"(?mi)^\s*(?:[-*>]\s*)?(?:\*\*)?(TITLE|LEAD)(?:\*\*)?\s*:\s*(?:\*\*)?\s*(.*)$")
+
+
+def _saeubere_feld(text: str) -> str:
+    """Antwortfeld als EIN Absatz – ohne Markdown-Reste und Zeilenumbrüche."""
+    ohne_markup = re.sub(r"[*_`]+", "", text)
+    ohne_markup = re.sub(r"^\s*[-*>]\s*", "", ohne_markup, flags=re.M)
+    return " ".join(ohne_markup.split()).strip()
+
+
 def parse_answer(answer: str) -> tuple[str, str] | None:
-    title = re.search(r"(?mi)^TITLE:\s*(.+?)\s*$", answer or "")
-    lead = re.search(r"(?mi)^LEAD:\s*(.+?)\s*$", answer or "")
-    if not title or not lead:
+    """Toleranter Parser für TITLE/LEAD – auch bei mehrzeiligen Antworten.
+
+    Anlass (26.10.2026, Issue #891): Drei Läufe in Folge scheiterten mit
+    „Lead-Länge 9/6". Der Anbieter hatte den Lead nicht in einer Zeile
+    geliefert; der Vorlagen-Parser las nur die erste Zeile, verwarf eine
+    vollständige Antwort und zählte sie als Kettenausfall. Formatfehler des
+    Modells dürfen nicht als kaputter Vertrag gelten: Der Text wird bis zum
+    nächsten Marker zusammengezogen, Markdown-Reste werden entfernt. Ob die
+    Fassung inhaltlich taugt, entscheidet unverändert `validate_candidate`.
+    """
+    text = (answer or "").replace("\r\n", "\n").replace("\r", "\n")
+    felder: dict[str, str] = {}
+    aktuell: str | None = None
+    puffer: list[str] = []
+    for zeile in text.split("\n"):
+        treffer = MARKER_RE.match(zeile)
+        if treffer:
+            if aktuell and aktuell not in felder:
+                felder[aktuell] = _saeubere_feld(" ".join(puffer))
+            aktuell = treffer.group(1).upper()
+            puffer = [treffer.group(2)]
+            continue
+        if aktuell:
+            puffer.append(zeile)
+    if aktuell and aktuell not in felder:
+        felder[aktuell] = _saeubere_feld(" ".join(puffer))
+    if not felder.get("TITLE") or not felder.get("LEAD"):
         return None
-    return title.group(1).strip(), lead.group(1).strip()
+    return felder["TITLE"], felder["LEAD"]
 
 
 def norm(text: str) -> str:

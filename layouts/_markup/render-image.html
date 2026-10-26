@@ -1,0 +1,66 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{- $imageResource := false -}}
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- $imageResource = or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
+  {{- with $imageResource -}}
+    {{- $src = .RelPermalink -}}
+    {{- with $u.RawQuery -}}
+      {{- $src = printf "%s?%s" $src . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $src = printf "%s#%s" $src . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $attributes := merge .Attributes (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "loading" "lazy") -}}
+{{- /* Intrinsic resource dimensions reserve layout space before download.
+       Honor author-supplied dimensions; only fill both when neither exists,
+       so a deliberate one-sided size is never distorted. */ -}}
+{{- $intrinsicWidth := 0 -}}
+{{- $intrinsicHeight := 0 -}}
+{{- if reflect.IsImageResourceWithMeta $imageResource -}}
+  {{- with $imageResource -}}
+    {{- $intrinsicWidth = .Width -}}
+    {{- $intrinsicHeight = .Height -}}
+  {{- end -}}
+{{- else if $imageResource -}}
+  {{- if strings.HasSuffix (lower $imageResource.Name) ".svg" -}}
+    {{- /* Hugo does not expose .Width/.Height for SVGs. Read the root
+         attributes (or viewBox) without executing or rewriting the asset. */ -}}
+    {{- $svg := $imageResource.Content -}}
+    {{- $widthMatch := findRE `(?i)\bwidth=["']([0-9]+)(?:px)?["']` $svg 1 -}}
+    {{- $heightMatch := findRE `(?i)\bheight=["']([0-9]+)(?:px)?["']` $svg 1 -}}
+    {{- with $widthMatch -}}
+      {{- $intrinsicWidth = int (replaceRE `(?i)^width=["']([0-9]+)(?:px)?["']$` "$1" (index . 0)) -}}
+    {{- end -}}
+    {{- with $heightMatch -}}
+      {{- $intrinsicHeight = int (replaceRE `(?i)^height=["']([0-9]+)(?:px)?["']$` "$1" (index . 0)) -}}
+    {{- end -}}
+    {{- if or (not $intrinsicWidth) (not $intrinsicHeight) -}}
+      {{- $viewBoxMatch := findRE `(?i)\bviewBox=["'][^"']+["']` $svg 1 -}}
+      {{- with $viewBoxMatch -}}
+        {{- $viewBoxNumbers := findRE `[-+]?(?:[0-9]*\.)?[0-9]+` (index . 0) -}}
+        {{- if ge (len $viewBoxNumbers) 4 -}}
+          {{- if not $intrinsicWidth -}}
+            {{- $intrinsicWidth = int (index $viewBoxNumbers 2) -}}
+          {{- end -}}
+          {{- if not $intrinsicHeight -}}
+            {{- $intrinsicHeight = int (index $viewBoxNumbers 3) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if and (not (isset $attributes "width")) (not (isset $attributes "height")) (gt $intrinsicWidth 0) (gt $intrinsicHeight 0) -}}
+  {{- $attributes = merge $attributes (dict "width" $intrinsicWidth "height" $intrinsicHeight) -}}
+{{- end -}}
+<img
+  {{- range $k, $v := $attributes -}}
+    {{- if $v -}}
+      {{- printf " %s=%q" $k (printf "%v" $v) | safeHTMLAttr -}}
+    {{- end -}}
+  {{- end -}}>
+{{- /**/ -}}

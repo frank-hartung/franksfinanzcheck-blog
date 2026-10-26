@@ -58,6 +58,25 @@ class GeoVertrag(unittest.TestCase):
     def test_format_parser_akzeptiert_nur_beide_felder(self):
         raw = f"TITLE: {HERBST['hero_title']}\nLEAD: {HERBST['hero_lead']}"
         self.assertEqual(hero.parse_answer(raw), (HERBST["hero_title"], HERBST["hero_lead"]))
+
+    def test_mehrzeiliger_lead_wird_zusammengezogen(self):
+        """Issue #891: Ein umbrochener Lead galt als „Lead-Länge 6"."""
+        lead = HERBST["hero_lead"]
+        umbrochen = lead.replace(" – ", "\n– ").replace(". Du ", ".\nDu ")
+        raw = f"TITLE: {HERBST['hero_title']}\nLEAD: {umbrochen}"
+        geparst = hero.parse_answer(raw)
+        self.assertEqual(geparst, (HERBST["hero_title"], lead))
+        self.assertEqual(hero.validate_candidate(*geparst, HERBST, []), [])
+
+    def test_markdown_und_aufzaehlungszeichen_werden_entfernt(self):
+        raw = (f"- **TITLE:** {HERBST['hero_title']}\n"
+               f"- **LEAD:** {HERBST['hero_lead']}")
+        self.assertEqual(hero.parse_answer(raw), (HERBST["hero_title"], HERBST["hero_lead"]))
+
+    def test_leere_oder_fehlende_felder_bleiben_ungueltig(self):
+        self.assertIsNone(hero.parse_answer("TITLE: nur ein Feld"))
+        self.assertIsNone(hero.parse_answer("LEAD: FranksFinanzcheck ohne Titel"))
+        self.assertIsNone(hero.parse_answer(f"TITLE: {HERBST['hero_title']}\nLEAD:   "))
         self.assertIsNone(hero.parse_answer("TITLE: nur ein Feld"))
 
 

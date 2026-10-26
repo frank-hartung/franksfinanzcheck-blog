@@ -81,6 +81,10 @@
   </details>
 </section>
 {{- else -}}
+{{- /* Zeitenstempel: article_dates.html liefert echte Zeitwerte für
+       published und modified (gemeinsam mit Schema + Sitemap). Nur eine
+       belegte Änderung nach der Veröffentlichung erscheint – kein
+       formatierter String und kein nicht vorhandenes firstindexed-Feld. */ -}}
 {{- /* article_dates.html liefert published und modified als Zeitwerte.
        Nur eine belegte Änderung nach der Veröffentlichung wird angezeigt;
        ein firstindexed-Feld gibt es in diesem Partial nicht. */ -}}

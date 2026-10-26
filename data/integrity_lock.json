@@ -1,5 +1,11 @@
 {
   "schema": 2,
+  "signed_at": "2026-10-26T13:51:36.928149+00:00",
+  "head": "8b72191",
+  "files": {
+    "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
+    "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
+    "hugo.toml": "e86edaf4dd3b4821f9b2f534e2694caf759f3cc0bdb3572eece4b100a1491363",
   "signed_at": "2026-10-26T13:34:06.966354+00:00",
   "head": "e79ef62c",
   "files": {
@@ -54,6 +60,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
+  "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916",
   "files_sha256": "df9bd2794d31a512dde8cc595402d064fc78f3360c110212ec93d886890fb18c",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
@@ -205,6 +212,10 @@
     {
       "date": "2026-10-26",
       "art": "set-current",
+      "head": "8b72191",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/_partials/head.html"
       "head": "e79ef62c",
       "geaendert": [
         "hugo.toml",
@@ -215,6 +226,15 @@
         {
           "pfad": "hugo.toml",
           "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "81dc7e6",
+              "datum": "2026-10-26",
+              "betreff": "fix(governance): Fremdmessungs-Rückstände entfernen (Vertrag C40)"
+            },
+            {
+              "sha": "e79ef62",
           "urteil": "UNERKLÄRT",
           "commits": [
             {
@@ -228,6 +248,15 @@
         {
           "pfad": "layouts/_partials/head.html",
           "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "81dc7e6",
+              "datum": "2026-10-26",
+              "betreff": "fix(governance): Fremdmessungs-Rückstände entfernen (Vertrag C40)"
+            },
+            {
+              "sha": "e79ef62",
           "urteil": "UNERKLÄRT",
           "commits": [
             {
@@ -253,6 +282,7 @@
         }
       ],
       "prev_sha256": "05bb5e11c755fd6e1d1488456be4ef701803e2a0382f0eaf43d61fb77980a78e",
+      "files_sha256": "eb8bfa8a925837099741801e2a2add62dbd3bc6279b7cf67e5fac74305f0e916"
       "files_sha256": "df9bd2794d31a512dde8cc595402d064fc78f3360c110212ec93d886890fb18c"
     }
   ]

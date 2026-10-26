@@ -252,6 +252,10 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     url = "https://mastodon.social/@FranksFinanzcheck"
     title = "FranksFinanzcheck auf Mastodon"
 
+  # Optionale Cloudflare-Web-Analytics-Konfiguration. Die manuelle Einbindung
+  # rendert nur mit explizitem mode="manual" sowie Website-ID und Beacon-Token;
+  # ohne diese Werte erzeugt Hugo kein Analyse-Skript. Eine automatische
+  # Edge-Injektion wird außerhalb dieses Repositories im Dashboard gesteuert.
   # Cloudflare Web Analytics (optional, derzeit nicht aktiviert)
   # ZWEI WEGE (wahlweise, nicht kombiniert):
   #
@@ -276,9 +280,9 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # DSGVO-konform (kein Cookie), kein Consent-Popup.
   # Quelle: https://developers.cloudflare.com/analytics/
   [params.analytics.cloudflare]
-    # mode = "manual"   # "manual" für manuelle Einbindung (Weg B), leer für automatisch (Weg A)
-    # website = "your-website-id-uuid"   # Nur für Weg B: Website-ID aus Cloudflare Dashboard
-    # token   = "your-beacon-token"     # Nur für Weg B: Beacon-Token aus Cloudflare Dashboard
+    # mode = "manual"   # Nur für eine ausdrücklich aktivierte manuelle Einbindung
+    # website = "your-website-id-uuid"   # Website-ID aus dem Cloudflare-Dashboard
+    # token   = "your-beacon-token"     # Beacon-Token aus dem Cloudflare-Dashboard
     domain  = "franksfinanzcheck.de"
 
 [menu]

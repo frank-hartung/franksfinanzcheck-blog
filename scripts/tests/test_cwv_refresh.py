@@ -119,6 +119,25 @@ class EinLaufEinStand(unittest.TestCase):
         self.assertEqual(cwv.TODAY.isoformat(), rows[0]["generated"])
 
 
+class VollstaendigeBildpruefung(unittest.TestCase):
+    """Bildmaße müssen auch außerhalb der JS-Stichprobe geprüft werden."""
+
+    def test_unsized_img_auf_seite_81_wird_nicht_uebersehen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for i in range(120):
+                page = root / "posts" / f"{i:03d}" / "index.html"
+                page.parent.mkdir(parents=True, exist_ok=True)
+                content = "<html><body>ok</body></html>"
+                if i == 119:
+                    content = '<html><body><img src="/card.svg" alt="Karte"></body></html>'
+                page.write_text(content, encoding="utf-8")
+            metrics, findings = cwv._scan_public(str(root))
+        self.assertEqual(metrics["html_files"], 120)
+        self.assertEqual(metrics["img_nosize"], 1)
+        self.assertTrue(any(f.get("code") == "cls_img" for f in findings))
+
+
 class BauFailClosed(unittest.TestCase):
     """`_run_build` selbst: fehlend, kaputt, Hänger – nie „ok"."""
 
