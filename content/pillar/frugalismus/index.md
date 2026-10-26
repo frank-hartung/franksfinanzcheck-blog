@@ -129,7 +129,7 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
     <h3 class="ff-decision-matrix__title">Entscheidungsmatrix: Notgroschen-Ziel nach Lebenslage</h3>
     <p class="ff-decision-matrix__sub">Finde die ideale Pufferhöhe für deine persönliche Einkommens- und Lebenssituation</p>
   </div>
-  <table>
+  <table tabindex="0" aria-label="Entscheidungsmatrix: Notgroschen-Ziel nach Lebenslage">
     <thead>
       <tr>
         <th>Lebenslage</th>

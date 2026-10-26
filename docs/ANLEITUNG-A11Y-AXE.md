@@ -46,11 +46,15 @@ sieht, prüft die Hälfte der Leser nicht.
 | WCAG-Tags | `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa` |
 | Feste Seiten | `/`, `/werkzeuge/`, `/cockpit/`, `/suche/`, `/presse/`, `/ueber/`, `/impressum/`, `/datenschutz/` |
 | Werkzeugseiten | **automatisch** alle Verzeichnisse unter `public/werkzeuge/` mit `index.html` |
+| Ratgeber-Welten | **automatisch** alle Verzeichnisse unter `public/pillar/` mit `index.html` (seit 26.10.2026) |
 | Artikel | der neueste Beitrag (`newestArticlePath`), damit die Masse des Bestands abgedeckt ist |
 | Prüfwerkzeug | `axe-core` aus `devDependencies`, exakt gepinnt – **kein CDN, kein Netzaufruf im Test** |
 
 Eine neue Werkzeugseite ist damit ohne Pflege im Gate. Die Spec prüft das
-selbst: Weniger als neun gebaute Werkzeugseiten gelten als Befund.
+selbst: Weniger als neun gebaute Werkzeugseiten gelten als Befund. Dasselbe
+gilt für die Ratgeber-Welten (mindestens sechs) – sie fehlten bis zum
+26.10.2026 in der festen Liste, und genau dort stand der dritte Befund
+derselben Klasse (68 Karten mit `aria-label="Weiterlesen: …"`).
 
 Jeder Lauf hängt sein Roh-Ergebnis als `axe-<pfad>.json` an den Test – auch
 bei Grün. Die Prüftiefe ist ein Beleg, kein Nebenprodukt.
@@ -78,53 +82,77 @@ Deshalb wirkt sie nur auf `regel` + `ziel` + `seite`, und sie läuft ab.
 Ein Eintrag ohne Grund, ohne Datum oder mit überschrittenem Prüftermin macht
 die Spec rot.
 
-## Zwei Befunde hinter dem Siegel (Stand 26.10.2026)
+**Ist-Stand 26.10.2026: `data/a11y/axe_ausnahmen.json` ist leer (`[]`).**
+Die beiden Ausnahmen hinter dem Siegel (Marken-Link, Weiterlese-Karten) sind
+eingespielt, das Siegel neu signiert und die Einträge gelöscht. Der Lauf ist
+ohne Ausnahme grün – in beiden Playwright-Projekten. Wie das belegt wurde und
+warum der Patch allein noch nicht reichte, steht unten unter „Ausnahmen in den
+Bestand überführt".
 
-Beide Dateien stehen in `data/integrity_lock.json`. Eine Änderung daran
-braucht die **Neu-Signatur des Inhabers**; ein Agent darf sie nicht nebenbei
-erteilen. Bis dahin sind die zwei Knoten als Ausnahme registriert (Ablauf
-2026-12-31). Die Patches sind fertig – sie müssen nur von befugter Hand
-eingespielt und signiert werden.
+## Ausnahmen in den Bestand überführt (26.10.2026)
 
-### 1. `layouts/_partials/header.html` – Marken-Link
+Zwei Befunde lagen in gesiegelten Dateien (`layouts/_partials/header.html`,
+`layouts/_partials/extend_post_content.html`). Beide sind geheilt, das Siegel
+ist neu signiert, die Registry ist leer. Was dabei zusätzlich auffiel, ist der
+eigentliche Wert dieser Runde:
 
-Sichtbar ist „Unabhängige Fixkosten-Redaktion", im `aria-label` fehlt dieser
-Text (WCAG 2.5.3). Der Name soll aus dem Inhalt kommen:
+### 1. Marken-Link – der Patch allein wäre auf dem Telefon rot geworden
 
-```diff
--            <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)"
--               class="ff-brand" aria-label="FranksFinanzcheck – zur Startseite">
-+            <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)"
-+               class="ff-brand">
-```
+Der `aria-label="FranksFinanzcheck – zur Startseite"` ist entfernt; der Name
+kommt aus dem sichtbaren Descriptor „Unabhängige Fixkosten-Redaktion". Das
+Logo bleibt `aria-hidden="true"`, `accesskey` und `title` unberührt.
 
-Das Logo bleibt `aria-hidden="true"` – der Name kommt dann aus dem
-Descriptor-Text, und der ist sichtbar. `accesskey` und `title` bleiben
-unberührt.
+**Falle:** `assets/css/extended/zzz-agency-polish.css` blendete den Descriptor
+unter 768 px mit `display: none` aus. Damit war er auch aus dem
+Accessibility-Tree – der Link hätte auf jeder Mobilseite **gar keinen** Namen
+gehabt (`link-name`, critical). Die Mobile-Regel versteckt den Text jetzt
+visuell (1×1-px-Technik), lässt ihn aber vorlesbar. WCAG 2.5.3 verlangt den
+sichtbaren Text im Namen; zusätzlicher Text ist erlaubt.
 
-### 2. `layouts/_partials/extend_post_content.html` – Weiterlese-Karten
+### 2. Weiterlese-Karten – Name aus dem Inhalt
 
-Der Override „Weiterlesen: <Titel>" verschweigt Datum, Kategorie und Anriss,
-die sichtbar daneben stehen:
+Der Override „Weiterlesen: <Titel>" verschwieg Datum, Kategorie und Anriss.
+Nach dem Entfernen ist der Name die Summe der sichtbaren Kindtexte. Das ist
+die robustere Variante: Sie kann nicht auseinanderlaufen, wenn sich eine Zeile
+im Card-Layout ändert.
 
-```diff
--    <a href="{{ .Permalink }}"
--       aria-label="Weiterlesen: {{ .Title | plainify }}"
--       class="ff-related-card">
-+    <a href="{{ .Permalink }}" class="ff-related-card">
-```
+### 3. Dieselbe Klasse auf den Ratgeber-Welten (68 Karten)
 
-Danach ist der Name die Summe der sichtbaren Kindtexte (Kategorie, Datum,
-Titel, Anriss). Genau das verlangt 2.5.3 – und es ist die robustere Variante:
-Sie kann nicht wieder auseinanderlaufen, wenn sich eine Zeile im Card-Layout
-ändert.
+`layouts/pillar/single.html` baute `.ff-pc-card` mit demselben Muster
+(„Weiterlesen: <Titel>", sichtbar zusätzlich Anriss und „Jetzt lesen →").
+Die feste Seitenliste der Spec kannte `/pillar/*` nicht – axe sah diese Seiten
+nie. Deshalb: Override entfernt **und** die Ratgeber-Welten automatisch ins
+Gate geholt. Der Zähler im `themenwelten_guard.py` zählt die Karten jetzt über
+die Klasse, nicht über den entfernten Override – ein Gate darf seine Zahl
+nicht aus dem Fehler ziehen, den es verhindern soll.
 
-### Nach dem Einspielen
+### 4. Zwei weitere Befunde, die erst durch die neue Abdeckung sichtbar wurden
+
+| Befund | Seite | Heilung |
+|---|---|---|
+| `label` (critical) an sechs Aufgabenlisten-Kästchen | `/pillar/mietwagen/` | Gemeinsames Partial `layouts/_partials/aufgabenlisten_a11y.html` (eine Wahrheit für Artikel **und** Pillar-Seiten) |
+| `scrollable-region-focusable` an der Entscheidungsmatrix | drei Ratgeber-Welten | `tabindex="0"` + `aria-label` an der Tabelle (PaperMod macht jede Tabelle zum Scrollcontainer), Fokusring aus dem Marken-Token |
+
+### 5. Die dauerhafte Wache: `scripts/a11y_audit.py` prüft 2.5.3
+
+axe sieht nur die besuchten Seiten. Das Audit liest **jede** gebaute Seite
+und vergleicht für jedes `a`/`button` mit `aria-label` den deklarierten Namen
+mit dem sichtbaren Text (Normalisierung: NFKC, Whitespace, Groß/Klein).
+Damit ist die Fehlerklasse nicht nur an drei Stellen weg, sondern überall
+detektierbar – auch auf künftigen Seiten ohne Spec-Eintrag.
+
+Bewusste Grenzen, damit niemand sie überdehnt: `aria-labelledby` wird nicht
+aufgelöst (dafür braucht es den Accessibility-Tree), und CSS-Sichtbarkeit über
+Media Queries sieht nur der Browser. Genau diese Fälle deckt die
+Playwright-Wirkungsprüfung (`toHaveAccessibleName`) zusätzlich ab.
+
+### Nach dem Einspielen (Wiederholungsvorlage)
 
 1. `data/integrity_lock.json` neu signieren (Inhaber, nicht Agent).
-2. Beide Einträge aus `data/a11y/axe_ausnahmen.json` **löschen**.
-3. `npm run test:a11y:browser` – muss ohne Ausnahme grün sein. Bleibt ein
-   Befund, ist der Patch unvollständig, nicht die Ausnahme zu verlängern.
+2. Einträge aus `data/a11y/axe_ausnahmen.json` **löschen** – nicht verlängern.
+3. `python3 scripts/a11y_audit.py` (alle Seiten, statisch) **und**
+   `npm run test:a11y:browser` (Chromium, beide Projekte) müssen grün sein.
+   Bleibt ein Befund, ist der Patch unvollständig.
 
 ## Geheilt am 26.10.2026 (damit es nicht zurückkommt)
 
@@ -137,6 +165,11 @@ Sie kann nicht wieder auseinanderlaufen, wenn sich eine Zeile im Card-Layout
 | `link-in-text-block` | Unterstreichung für `.ff-entity-punkte a` / `.ff-entity-links a` in `zz-entity.css` | Farbe allein ist kein Unterscheidungsmerkmal (1.4.1) |
 | `scrollable-region-focusable` | `tabindex="0"` an der Tabellen-Hülle (`render-table.html`) | Eine scrollbare Fläche muss per Tastatur erreichbar sein |
 | `color-contrast` am Saison-Tipp-Label | Herbst `#8A4F0C` (5.23:1), Winter `#7A5C00` (4.93:1) in `data/saisons.yaml` | Kontrast gegen die **gerenderte** Fläche gemessen, inklusive `color-mix`-Tint – nicht gegen die Wunschfarbe |
+| `label-content-name-mismatch` am Marken-Link | `aria-label` entfernt (`header.html`); Mobile-Regel versteckt den Descriptor nur noch visuell | Der Name kommt aus dem sichtbaren Text – und existiert auch im 390-px-Layout |
+| `label-content-name-mismatch` an Weiterlese-Karten | `aria-label` entfernt (`extend_post_content.html`) | Datum, Kategorie und Anriss stehen sichtbar daneben; der Name ist die Summe dieser Texte |
+| `label-content-name-mismatch` an 68 Pillar-Karten | `aria-label` entfernt (`pillar/single.html`), Ratgeber-Welten ins Gate | Dieselbe Klasse wäre sonst auf ungeprüften Seiten weitergewachsen |
+| `label` (critical) an Aufgabenlisten-Kästchen auf Pillar-Seiten | `aufgabenlisten_a11y.html` für Artikel und Pillar-Seiten | Eine Wahrheit statt zweier Kopien derselben Zeile |
+| `scrollable-region-focusable` an Entscheidungsmatrizen | `tabindex="0"` + `aria-label` an der Tabelle, Fokusring in `zzz-agency-polish.css` | Der PaperMod-Reset macht Tabellen scrollbar – ohne Tab-Stopp ist die Fläche für Tastatur unerreichbar |
 
 ## Grenzen (ehrlich benannt)
 

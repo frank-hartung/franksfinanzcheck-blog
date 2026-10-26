@@ -41,7 +41,9 @@ class ThemenweltenTests(unittest.TestCase):
     def build_fixture(self, prefix="/"):
         for topic in DATA["topics"]:
             key = topic["id"]
-            self.write(f"public/pillar/{key}/index.html", f'<h1>Ratgeber</h1><a aria-label="Weiterlesen: Artikel" href="{prefix}posts/{key}-artikel/">Artikel</a>')
+            # Die Karte trägt ihren Namen aus dem sichtbaren Inhalt – ein
+            # aria-label-Override „Weiterlesen: …" wäre WCAG 2.5.3-widrig.
+            self.write(f"public/pillar/{key}/index.html", f'<h1>Ratgeber</h1><a class="ff-pc-card" href="{prefix}posts/{key}-artikel/">Artikel</a>')
             self.write(f"public/posts/{key}-artikel/index.html", "<h1>Artikel</h1>")
         for home in (False, True):
             heading = "home-themenwelten" if home else guard.TITLE_ID

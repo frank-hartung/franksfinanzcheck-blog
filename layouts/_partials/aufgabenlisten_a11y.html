@@ -1,0 +1,24 @@
+{{- /* ============================================================
+    AUFGABENLISTEN (`- [ ]` im Markdown) – eine Wahrheit für alle Seiten
+    ------------------------------------------------------------
+    Goldmark rendert aus einer Markdown-Aufgabenliste
+    `<input disabled="" type="checkbox">` OHNE Label. axe-core meldet das
+    als `label` (impact: critical) – zu Recht: Ein Bedienelement ohne Namen
+    ist für Screenreader nur „Kontrollkästchen, deaktiviert“.
+
+    Das Kästchen ist hier reine Dekoration: Es wird nichts gespeichert und
+    nichts bedienbar. Deshalb nimmt die Heilung es aus dem
+    Accessibility-Baum (`aria-hidden="true"`) und aus der Tab-Reihenfolge
+    (`tabindex="-1"`), statt den Satz in ein Label zu verwandeln – der Text
+    daneben trägt die Bedeutung vollständig.
+
+    Warum ein eigenes Partial (26.10.2026): Die Heilung stand nur im
+    Artikel-Layout. Die Pillar-Seiten (Ratgeber-Welten) rendern dieselbe
+    Markdown-Liste über `layouts/pillar/single.html` – dort fehlte sie, und
+    axe meldete auf /pillar/mietwagen/ sechs unbezeichnete Kästchen. Zwei
+    Kopien derselben Zeile wären zwei Wahrheiten; jetzt gibt es eine.
+
+    Ersetzung ist zeilenlokal und literal – kein mehrzeiliges Muster
+    (Repo-Regel gegen ReDoS, siehe CODE-SCANNING-ALERT-87).
+    ============================================================ */ -}}
+{{- return (replaceRE `(<input disabled="" type="checkbox")` `${1} aria-hidden="true" tabindex="-1"` .) -}}
