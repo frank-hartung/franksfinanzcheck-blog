@@ -24,7 +24,7 @@ services:
   n8n:
     # Docker Hub statt docker.n8n.io: dasselbe offizielle Image, aber Dependabot
     # kann die Tags nur über die Registry-API von Docker Hub abfragen.
-    image: n8nio/n8n:2.43.5
+    image: n8nio/n8n:2.44.3
     container_name: ff-n8n-automation
     restart: unless-stopped
     ports:
