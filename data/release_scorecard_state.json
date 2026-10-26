@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-25T22:41:18Z",
+  "generated_at": "2026-10-26T01:18:31Z",
   "modus": "kandidaten",
-  "commit": "c70eac7894696590d128c6a01754bc459384a4c3",
+  "commit": "cdfb97b80e4d9d37b91c53c11c163dcc426a057a",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -1125,6 +1125,40 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
+      "sha256": "eb03c26c5c24ae460ab57fa4b9d0e3259934992a3f813a48a69647bbd90104c9",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "neu versiegelt"
+    },
+    "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
+      "sha256": "cb7d88c5cc7831f60cce5dec4de56189f8f0e8d109d57a5ec28c23f0a0975c5f",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }

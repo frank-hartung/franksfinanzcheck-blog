@@ -364,3 +364,4 @@
 {"blockiert": [], "commit": "d749d827ff5a27d4a1af7760982330838055cc6d", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-25T19:04:31Z", "warnung": 0}
 {"blockiert": [], "commit": "3f540fb268e1ca100a8b7b017f3d2fa3f5020df7", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-25T19:40:04Z", "warnung": 0}
 {"blockiert": [], "commit": "c70eac7894696590d128c6a01754bc459384a4c3", "freigabe_reif": 66, "kandidaten": [], "live": 66, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-25T22:41:18Z", "warnung": 0}
+{"blockiert": [], "commit": "cdfb97b80e4d9d37b91c53c11c163dcc426a057a", "freigabe_reif": 68, "kandidaten": ["2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks", "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto"], "live": 68, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-26T01:18:31Z", "warnung": 0}
