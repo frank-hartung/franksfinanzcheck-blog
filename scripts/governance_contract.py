@@ -528,7 +528,20 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Fassung derselben Datei her (Audit-Ledger, Wiederholungsbremse,
           # kein Erfinden ohne Vorgänger). Sein Selbsttest friert jede dieser
           # Sicherungen an einem echten Wegwerf-Repository ein (C6).
-          "skript_syntax_heiler.py"]
+          "skript_syntax_heiler.py",
+          # CWV-Feld-Wache (26.10.2026): Bis hierher maß das Haus Core Web
+          # Vitals nur im Labor (statischer Baum, Varianten-Builds) – die
+          # ausgelieferte Seite hatte keine Kennzahl. Die Wache liest CrUX
+          # über PageSpeed Insights, übernimmt das Urteil der API statt einer
+          # eigenen Schwelle und führt fehlende Felddaten als UNGEPRÜFT, nie
+          # als GRÜN. Ihr Selbsttest ist die Bedingung dafür, dass C6 sie fährt.
+          "cwv_feld_wache.py",
+          # MCP-Wache (26.10.2026): `.mcp.json` gibt KI-Agenten Werkzeuge in
+          # diesem Repo – ein npm-Paket ohne Pin, eine Netzbefugnis ohne Grenze
+          # und ein Dateizugriff ohne Not. Die Wache hält Pinning (M3), die
+          # Server-Allowlist (M4), die Herkunftsziele (M5) und den Geheimnis-
+          # Freiraum (M2) fest. Ohne C6 liefe ihr Selbsttest nie.
+          "mcp_wache.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

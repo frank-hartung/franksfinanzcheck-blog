@@ -92,7 +92,7 @@
 {{- if lt $minW 300 }}{{- $minW = 300 }}{{- end -}}
 {{- if gt $minW 640 }}{{- $minW = 640 }}{{- end -}}
 
-<div class="ff-table-scroll" role="region" aria-label="Tabelle">
+<div class="ff-table-scroll" role="region" aria-label="Tabelle" tabindex="0">
   <table class="ff-tbl" style="min-width: {{ $minW }}px"
     {{- range $k, $v := .Attributes }}{{- if $v }} {{ $k }}="{{ $v | transform.HTMLEscape }}"{{- end }}{{- end }}>
     <colgroup>

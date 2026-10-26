@@ -75,8 +75,11 @@ export default defineConfig({
       // WebKit-Treiber gegen den Chromium-Binary zu starten (hängt still).
       // iPhone-Emulation (isMobile) ist ohnehin Chromium-only.
       use: { ...devices['iPhone 14'], browserName: 'chromium' },
-      // Mobile-Projekt läuft gezielt nur die Mobile-Spec
-      testMatch: /mobile\.spec\.mjs/,
+      // Mobile-Projekt läuft gezielt die Mobile-Spec – und seit 26.10.2026
+      // zusätzlich die A11y-Spec: Kontrast, Tap-Ziele und Fokus unterscheiden
+      // sich im 390-px-Layout real. Ein Gate, das nur Desktop sieht, prüft
+      // die Hälfte der Leser nicht.
+      testMatch: [/mobile\.spec\.mjs/, /a11y-axe\.spec\.mjs/],
     },
   ],
 

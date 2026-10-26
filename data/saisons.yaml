@@ -105,7 +105,7 @@ saisons:
       - "kfz"
       - "jahresabrechnung"
     min_artikel: 3
-    akzent: "#9A5B12"
+    akzent: "#8A4F0C"
     akzent_dunkel: "#E9A94C"
     hero_text: "#FFD15A"
     linie: "#B26A00"
@@ -139,7 +139,7 @@ saisons:
       - "tagesgeld"
       - "gebühren"
     min_artikel: 3
-    akzent: "#8A6A00"
+    akzent: "#7A5C00"
     akzent_dunkel: "#FFD15A"
     hero_text: "#FFD15A"
     linie: "#8A6A00"

@@ -32,6 +32,9 @@ Prüfungen Quelle (S1–S9):
      (Klebewörter) aus textverstaendnis_guard.py
   S4 Farben: WCAG-2.x-Kontrast, gemessen nicht geraten –
        akzent        ≥ 4.5:1 auf #FFFFFF   (Kartenfläche hell)
+                     UND ≥ 4.5:1 auf der Pillenfläche (`color-mix` aus
+                     linie 16 % + Papier #FAFCFB) – dort steht derselbe
+                     Text in `.ff-saison-tipp-label` (26.10.2026)
        akzent_dunkel ≥ 4.5:1 auf #1E2023, #202E27, #25272A, #2E2E33
        hero_text     ≥ 4.5:1 auf #0E5A43   (vom Hero deklarierte
                      background-color – darauf löst effBg() in
@@ -125,6 +128,15 @@ SAISON_IDS = ("herbst", "winter", "fruehling", "sommer")
 # unter den Text legt, nicht gegen eine Wunschfarbe.
 FLAECHE_HELL = "#FFFFFF"            # --ff-surface / Kartenfläche hell
 FLAECHEN_DUNKEL = ("#1E2023", "#202E27", "#25272A", "#2E2E33")
+# DIE PILLENFLÄCHE (26.10.2026, axe-core-Befund `color-contrast`):
+# `.ff-saison-tipp-label` setzt Akzent-Text auf `color-mix(in srgb,
+# var(--ff-saison-linie) 16%, transparent)` – also auf Papierfarbe mit
+# 16 % Linienfarbe, NICHT auf Weiß. Bis heute prüfte S4 nur gegen #FFFFFF
+# und ließ deshalb zwei Paletten durch, die im Browser unter 4.5:1 lagen
+# (Herbst 4.32:1, Winter 3.99:1 – gemessen, nicht geschätzt). Ein Vertrag,
+# der gegen eine Wunschfarbe misst, ist eine Wunschprüfung.
+FLAECHE_PAPIER = "#FAFCFB"          # --theme (custom.css, hell)
+PILLEN_TINT = 0.16                  # Anteil der Linienfarbe in der Pille
 HERO_FLAECHENFARBE = "#0E5A43"           # background-color des Hero (agency-polish)
 HERO_VERLAUF_HELL = "#1F6F5C"     # hellster Verlauf-Stopp des Hero
 FLAECHE_LINIE_DUNKEL = "#202E27"
@@ -183,6 +195,18 @@ def kontrast(vorn: str, hinten: str) -> float:
     l1, l2 = _luminanz(vorn), _luminanz(hinten)
     heller, dunkler = max(l1, l2), min(l1, l2)
     return round((heller + 0.05) / (dunkler + 0.05), 2)
+
+
+def mischen(vorn: str, hinten: str, anteil: float) -> str:
+    """`color-mix(in srgb, vorn <anteil>, hinten)` als Hex – wie der Browser.
+
+    CSS mischt in sRGB auf den gamma-kodierten Kanälen; genau so, nicht
+    linear. Eine Näherung hier wäre eine zweite Wahrheit gegenüber dem,
+    was `.ff-saison-tipp-label` tatsächlich rendert.
+    """
+    a, b = _kanal(vorn), _kanal(hinten)
+    gemischt = [round(anteil * x + (1 - anteil) * y) for x, y in zip(a, b)]
+    return "#" + "".join(f"{max(0, min(255, c)):02X}" for c in gemischt)
 
 
 # --------------------------------------------------------------------------
@@ -364,6 +388,17 @@ def validate_farben(saisons: list[dict]) -> list[str]:
         if akzent < TEXT_MIN:
             fehler.append(f"Saison {sid}: `akzent` {farben['akzent']} auf Weiß = {akzent}:1 "
                           f"(Text braucht ≥ {TEXT_MIN}:1).")
+        # Dieselbe Farbe steht auf der getönten Pillenfläche
+        # (`.ff-saison-tipp-label`). Wer nur gegen Weiß misst, übersieht
+        # genau den Fall, den axe-core am 26.10.2026 im Browser fand.
+        pillenflaeche = mischen(farben["linie"], FLAECHE_PAPIER, PILLEN_TINT)
+        auf_pille = kontrast(farben["akzent"], pillenflaeche)
+        if auf_pille < TEXT_MIN:
+            fehler.append(
+                f"Saison {sid}: `akzent` {farben['akzent']} auf der Pillenfläche "
+                f"{pillenflaeche} ({int(PILLEN_TINT * 100)} % `linie` auf {FLAECHE_PAPIER}) "
+                f"= {auf_pille}:1 (Text braucht ≥ {TEXT_MIN}:1) – betrifft "
+                f".ff-saison-tipp-label.")
         for flaeche in FLAECHEN_DUNKEL:
             dunkel = kontrast(farben["akzent_dunkel"], flaeche)
             if dunkel < TEXT_MIN:
@@ -1024,6 +1059,19 @@ def selbsttest() -> int:
     ok &= muss(kontrast("#FFB300", "#FFFFFF") < 2.0,
                "Signalgelb auf Weiß muss unter 2:1 bleiben – genau deshalb ist es "
                "laut PRODUCT.md nie Textfarbe auf hellem Grund")
+
+    # Pillenfläche (26.10.2026): Der Fall, den S4 bis dahin übersah.
+    ok &= muss(mischen("#B26A00", FLAECHE_PAPIER, PILLEN_TINT) == "#EEE5D3",
+               "Mischen muss color-mix(in srgb, #B26A00 16%, #FAFCFB) = #EEE5D3 "
+               f"ergeben, bekommen: {mischen('#B26A00', FLAECHE_PAPIER, PILLEN_TINT)}")
+    alt = {"id": "herbst", "akzent": "#9A5B12", "akzent_dunkel": "#E9A94C",
+           "hero_text": "#FFD15A", "linie": "#B26A00", "linie_dunkel": "#E9A94C"}
+    ok &= muss(any("Pillenfläche" in f for f in validate_farben([alt])),
+               "Herbst #9A5B12 lag real bei 4.32:1 auf der Pille – die Wache muss ihn "
+               "melden (Befund von axe-core am 26.10.2026)")
+    neu = dict(alt, akzent="#8A4F0C")
+    ok &= muss(not validate_farben([neu]),
+               f"Herbst #8A4F0C muss sauber sein, gemeldet: {validate_farben([neu])}")
 
     # Auswahl-Spiegel: Relevanz schlägt Datum, Datum bricht Gleichstand
     artikel = [

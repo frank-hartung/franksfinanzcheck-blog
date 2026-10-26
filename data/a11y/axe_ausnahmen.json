@@ -1,0 +1,20 @@
+[
+  {
+    "regel": "label-content-name-mismatch",
+    "seite": "*",
+    "ziel": ".ff-brand",
+    "seit": "2026-10-26",
+    "pruefung": "2026-12-31",
+    "grund": "Der Marken-Link im Kopf trägt aria-label „FranksFinanzcheck – zur Startseite“, sichtbar ist zusätzlich der Descriptor „Unabhängige Fixkosten-Redaktion“. WCAG 2.5.3 (Label in Name) verlangt den sichtbaren Text im Accessible Name. Die Heilung ist eine Zeile in layouts/_partials/header.html – diese Datei steht unter dem Integritäts-Siegel (data/integrity_lock.json): Eine Änderung braucht die Neu-Signatur des Inhabers, kein Agent darf sie nebenbei erteilen. Fertiger Patch: docs/ANLEITUNG-A11Y-AXE.md, Abschnitt „Zwei Befunde hinter dem Siegel“.",
+    "beleg": "docs/ANLEITUNG-A11Y-AXE.md"
+  },
+  {
+    "regel": "label-content-name-mismatch",
+    "seite": "*",
+    "ziel": ".ff-related-card",
+    "seit": "2026-10-26",
+    "pruefung": "2026-12-31",
+    "grund": "Die drei Weiterlese-Karten unter Artikeln setzen aria-label „Weiterlesen: <Titel>“, sichtbar sind zusätzlich Datum, Kategorie und Anriss – damit fehlt sichtbarer Text im Namen (WCAG 2.5.3). Der Override steht in layouts/_partials/extend_post_content.html, einer gesiegelten Kerndatei (data/integrity_lock.json); die Heilung ist das Entfernen des aria-label, damit der Name aus dem Inhalt kommt. Patch und Begründung: docs/ANLEITUNG-A11Y-AXE.md.",
+    "beleg": "docs/ANLEITUNG-A11Y-AXE.md"
+  }
+]

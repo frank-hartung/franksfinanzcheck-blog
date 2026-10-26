@@ -42,6 +42,10 @@ on:
       - "tools/werkzeuge.test.mjs"
       - "hugo.toml"
       - "e2e/**"
+      # 26.10.2026: Die Ausnahmen-Registry der A11y-Spec wird selbst geprüft
+      # (Grund, Ziel, Ablauf). Eine Änderung nur dort muss den Lauf auslösen –
+      # sonst altert eine Ausnahme unbemerkt über ihren Prüftermin hinaus.
+      - "data/a11y/**"
       - "scripts/browser_setup.mjs"
       - "scripts/chromium_cache.mjs"
       - "scripts/tests/chromium_cache.test.mjs"
