@@ -4,7 +4,7 @@
   "build_measured": true,
   "strict_build": true,
   "static": {
-    "total_img_bytes": 58362108,
+    "total_img_bytes": 58228879,
     "count_img": 2199,
     "count_covers": 2175,
     "worst_cover_bytes": 130973
@@ -15,7 +15,7 @@
     "css_files": 0,
     "js_bytes": 504326,
     "css_bytes": 0,
-    "html_bytes": 39797090,
+    "html_bytes": 39806909,
     "inline_styles": 0,
     "blocking_js": 0,
     "inline_js": 271,
