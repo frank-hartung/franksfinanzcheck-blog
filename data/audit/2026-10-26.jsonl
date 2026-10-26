@@ -84,3 +84,6 @@
 {"ts": "2026-10-26T21:53:51Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-10-26T21:54:44Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-10-26T21:56:54Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "6cdb00a33b70f446e8c9f27d7cd149873eebada4"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-26T23:05:26Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-26T23:05:55Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-10-26T23:07:06Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "1ef5b7c32a02f3bb6fb4c133f95815e1f67fbfc6"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}
