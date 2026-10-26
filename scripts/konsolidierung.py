@@ -162,6 +162,13 @@ def absicht(von: str, nach: str, root: Path = ROOT) -> dict:
             "pillar": a.get("pillar")}
 
 
+def _seitenpfad(wert: str) -> str:
+    """Alles, was eine URL zur Seite macht: Schema, Host, Query und Anker weg."""
+    pfad = re.sub(r"^https?://[^/]+", "", str(wert or "").strip())
+    pfad = pfad.split("?")[0].split("#")[0]
+    return pfad if pfad.startswith("/") else "/" + pfad
+
+
 def nachfrage(url: str, root: Path = ROOT) -> dict:
     """Beleg 2: belegte Nachfrage – Impressionen, nicht bloße Bekanntheit."""
     pfad = Path(root) / "data" / "gsc" / "top_seiten_28t.json"
@@ -179,7 +186,12 @@ def nachfrage(url: str, root: Path = ROOT) -> dict:
     for eintrag in daten if isinstance(daten, list) else []:
         if not isinstance(eintrag, dict):
             continue
-        if str(eintrag.get("url") or "").rstrip("/") == url.rstrip("/"):
+        # Die Search Console exportiert die volle Adresse unter `seite`, die
+        # eigene Aufbereitung schreibt `url`. Beides muss zählen – sonst wäre
+        # jede Nachfrage „nicht belegt“ und F würde aus dem falschen Grund
+        # blockieren.
+        wert = eintrag.get("url") or eintrag.get("seite") or ""
+        if _seitenpfad(wert).rstrip("/") == _seitenpfad(url).rstrip("/"):
             treffer = eintrag
             break
     if not treffer:
@@ -345,6 +357,13 @@ def selbsttest() -> int:
         (tmp / "data" / "gsc" / "top_seiten_28t.json").write_text(json.dumps(
             [{"url": a, "impressions": 4, "position": 12.0}]), encoding="utf-8")
         pruefe_("F-Nachfrage mit Impressionen belegt", nachfrage(a, tmp)["belegt"])
+        # Der echte GSC-Export nennt das Feld `seite` und schreibt die volle
+        # Adresse. Beides muss als dieselbe Seite erkannt werden.
+        (tmp / "data" / "gsc" / "top_seiten_28t.json").write_text(json.dumps(
+            [{"seite": "https://franksfinanzcheck.de" + a, "impressions": 5}]), encoding="utf-8")
+        pruefe_("F-Nachfrage erkennt die volle GSC-Adresse", nachfrage(a, tmp)["belegt"])
+        (tmp / "data" / "gsc" / "top_seiten_28t.json").write_text(json.dumps(
+            [{"url": a, "impressions": 4, "position": 12.0}]), encoding="utf-8")
         pruefe_("F-Nachfrage bei 0 Impressionen nicht belegt",
                 not nachfrage(b, tmp)["belegt"])
 

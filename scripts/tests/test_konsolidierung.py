@@ -130,6 +130,19 @@ class BelegNachfrage(unittest.TestCase):
         self.assertFalse(befund["belegt"])
         self.assertIn("nicht vor", befund["grund"])
 
+    def test_gsc_exportform_wird_erkannt(self):
+        # Die Search Console nennt die Spalte `seite` und schreibt die volle
+        # Adresse. Ein Vergleich nur gegen `url` wäre ein Messfehler: Jede
+        # Nachfrage gälte als unbelegt und F blockierte aus dem falschen Grund.
+        pfad = self.fx.root / "data" / "gsc" / "top_seiten_28t.json"
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        pfad.write_text(json.dumps([{
+            "seite": "https://franksfinanzcheck.de" + BUCH_EXCEL,
+            "clicks": 0, "impressions": 1, "position": 7.0}]), encoding="utf-8")
+        befund = k.nachfrage(BUCH_EXCEL, self.fx.root)
+        self.assertTrue(befund["belegt"], befund["grund"])
+        self.assertEqual(befund["impressionen"], 1)
+
     def test_schwellen_sind_sichtbar(self):
         self.assertGreaterEqual(k.MIN_IMPRESSIONEN, 1)
         self.assertTrue(0 < k.SCHWELLE_ABSICHT < 1)
@@ -296,6 +309,20 @@ class FallZwilling(unittest.TestCase):
 
     def test_kein_kandidat_im_themenfeld(self):
         self.assertIsNone(k.bester_kandidat(self.QUELLE, BLOG_DIR))
+
+    def test_nachfrage_ist_eine_zahl_nicht_eine_meinung(self):
+        # 19.10.2026: die Seite hatte 1 Impression, Position 7,0 in 28 Tagen.
+        # Das ist wenig – aber es ist belegt und damit eine Zahl.
+        befund = self.urteil["pruefungen"]["nachfrage"]
+        self.assertTrue(befund["belegt"], befund["grund"])
+        self.assertEqual(befund["impressionen"], 1)
+
+    def test_der_zwilling_hat_keine_belegte_nachfrage(self):
+        # Die andere P2-Seite kommt in den Top-Seiten nicht vor. Für sie wäre
+        # ein Zusammenführen die falsche Antwort – belegt ist belegt.
+        befund = k.nachfrage(self.ZIEL, BLOG_DIR)
+        self.assertFalse(befund["belegt"])
+        self.assertEqual(befund["impressionen"], 0)
 
 
 if __name__ == "__main__":
