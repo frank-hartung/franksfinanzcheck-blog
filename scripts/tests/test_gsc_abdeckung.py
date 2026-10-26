@@ -29,6 +29,7 @@ import os
 import shutil
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -556,6 +557,66 @@ class Hermetik(unittest.TestCase):
         for verboten in ("urllib.request", "http.client", "requests", "socket"):
             self.assertNotIn(f"import {verboten}", quelle,
                              f"{verboten} macht den Befund nicht reproduzierbar")
+
+
+class SitemapOhneRegex(unittest.TestCase):
+    """Alert Nr. 87: Die `sitemap.disable`-Wahrheit ist ein Zeilenparser.
+
+    Die Proben frieren die Bedeutung des alten Ausdrucks ein – und die
+    Grenzen, die der Ausdruck fälschlicherweise überschritten hat.
+    """
+
+    def test_klassischer_block(self) -> None:
+        self.assertTrue(g.sitemap_deaktiviert(
+            "title: X\nsitemap:\n  disable: true\nlastmod: 2026-10-26\n"))
+
+    def test_inline_abbildung(self) -> None:
+        self.assertTrue(g.sitemap_deaktiviert(
+            "sitemap: {disable: true, priority: 0.5}\n"))
+        self.assertFalse(g.sitemap_deaktiviert(
+            "sitemap: {disable: false}\n"))
+        self.assertFalse(g.sitemap_deaktiviert(
+            "sitemap: {disable: false}\n  disable: true\n"),
+            "Ein eingerücktes disable darf keine geschlossene Inline-Abbildung überschreiben")
+
+    def test_nur_unquoted_bool_zaehlt(self) -> None:
+        self.assertFalse(g.sitemap_deaktiviert('sitemap:\n  disable: "true"\n'))
+        self.assertFalse(g.sitemap_deaktiviert("sitemap:\n  disable: trueish\n"))
+        self.assertTrue(g.sitemap_deaktiviert("sitemap:\n  disable: TRUE\n"))
+
+    def test_bereich_endet_bei_naechstem_schluessel(self) -> None:
+        self.assertFalse(g.sitemap_deaktiviert(
+            "sitemap:\n  priority: 0.5\nanderes:\n  disable: true\n"))
+
+    def test_verschachteltes_disable_ist_kein_direktes_kind(self) -> None:
+        self.assertFalse(g.sitemap_deaktiviert(
+            "sitemap:\n  meta:\n    disable: true\n"))
+
+    def test_kommentare_und_crlf(self) -> None:
+        self.assertTrue(g.sitemap_deaktiviert(
+            "sitemap: # nur ein Hinweis\r\n  disable: true # gewollt\r\n"))
+
+    def test_codeql_angriff_laeuft_nicht_in_backtracking(self) -> None:
+        angriff = "sitemap:\n" + "\t\n" * 30000
+        start = time.perf_counter()
+        ergebnis = g.sitemap_deaktiviert(angriff)
+        dauer = time.perf_counter() - start
+        self.assertFalse(ergebnis)
+        self.assertLess(dauer, 2.0,
+                        f"Parser brauchte {dauer:.3f}s für {len(angriff)} Zeichen")
+
+    def test_inhalts_seiten_ignoriert_deaktivierte_sitemap(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = g._mini_repo(Path(tmp) / "repo")
+            versteckt = repo / "content" / "posts" / "verborgen"
+            versteckt.mkdir(parents=True)
+            (versteckt / "index.md").write_text(
+                "---\ntitle: Verborgen\nsitemap:\n  disable: true\n---\n\nText.\n",
+                encoding="utf-8")
+            indexierbar, noindex, _taxonomie = g.inhalts_seiten(repo)
+            self.assertNotIn("/posts/verborgen/", indexierbar)
+            self.assertNotIn("/posts/verborgen/", noindex)
+            self.assertIn("/posts/a/", indexierbar)
 
 
 if __name__ == "__main__":

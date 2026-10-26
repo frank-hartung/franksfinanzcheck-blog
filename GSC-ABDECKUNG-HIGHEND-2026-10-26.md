@@ -24,7 +24,7 @@ Was fehlte, war nicht eine Wache mehr, sondern die **Gegenprobe**. Genau die
 steht jetzt im Repo: ein Modul, das den Export einliest, gegen Sitemap, Build,
 Weiterleitungskarte, noindex-Bestand und robots.txt rechnet, jeder Zahl ein
 Urteil gibt und die offenen Posten als priorisierte Maßnahmenliste ausgibt –
-reproduzierbar, offline, mit 51 Regressionstests.
+reproduzierbar, offline, mit 84 Regressionstests (nach Alert Nr. 87).
 
 | Bereich | vorher | jetzt |
 |---|---|---|
@@ -239,13 +239,14 @@ Dieselbe Regel wie bei den GSC-Leistungsdaten nach dem 21.10.2026.
 
 ### 5.3 Tests, Workflow, Cockpit
 
-- `scripts/tests/test_gsc_abdeckung.py` – 63 Regressionstests über sieben Ebenen:
+- `scripts/tests/test_gsc_abdeckung.py` – 84 Regressionstests über acht Ebenen:
   Lesen (BOM, Semikolon, deutsche Anführungszeichen), Nicht-Schreiben bei
   Widerspruch, Gegenrechnen (noindex-Leck, robots-Sperre ohne Gateway,
   unbekannter Grund), Hermetik (kein Netz, kein Schreiben in den echten
   Verlauf), Maßnahmenplan (Triage, Vertrag, Verlinkung, Goldkorridor),
-  Git-Beleg (M7), Kreislauf (Register, Frist, Wirkungsprüfung). Selbsttest:
-  80 Fälle.
+  Git-Beleg (M7), Kreislauf (Register, Frist, Wirkungsprüfung), lineare
+  `sitemap.disable`-Auswertung ohne Regex (Alert Nr. 87). Selbsttest:
+  97 Fälle.
 - `.github/workflows/gsc-import.yml` – Build für die Gegenprobe (nicht
   kritisch), dann `--audit --schreiben --json` mit Tabelle in der
   Lauf-Zusammenfassung. Ein roter Befund wird als Warnung sichtbar, blockiert
@@ -625,8 +626,8 @@ python3 scripts/gsc_abdeckung.py --abnahme         # Abnahmekriterien
 python3 scripts/gsc_abdeckung.py --ursachen        # Sprung mit Git-Beleg
 
 # Selbsttest und Regressionstests
-python3 scripts/gsc_abdeckung.py --selftest        # 80 Fälle
-python3 -m unittest scripts.tests.test_gsc_abdeckung   # 63 Tests
+python3 scripts/gsc_abdeckung.py --selftest        # 97 Fälle
+python3 -m unittest scripts.tests.test_gsc_abdeckung   # 84 Tests
 
 # npm-Kurzbefehle
 npm run gsc:abdeckung · gsc:abdeckung:gate · gsc:triage · gsc:vertrag
@@ -642,7 +643,7 @@ npm run gsc:register        # Entscheidungs-Register (neu)
 | Datei | Art | Inhalt |
 |---|---|---|
 | `scripts/gsc_abdeckung.py` | neu | Abdeckungs-Zentrale (Import, Gegenrechnung, Gate, Triage) |
-| `scripts/tests/test_gsc_abdeckung.py` | neu | 51 Regressionstests |
+| `scripts/tests/test_gsc_abdeckung.py` | neu | 84 Regressionstests (Erstlieferung: 51) |
 | `data/gsc/abdeckung/**` | neu | Export, Momentaufnahme, Verlauf, Befund |
 | `data/gsc/abdeckung/details/` | neu | Detail-Listen je Grund, `stand.txt` (Exportdatum), `README.md` (Ablage-Regel) |
 | `data/gsc/abdeckung/{triage.json,triage.md,redaktions_queue.md}` | neu | Ergebnis der Triage aus der ersten gelieferten Liste |

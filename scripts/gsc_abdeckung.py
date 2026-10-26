@@ -70,7 +70,7 @@ AUFRUF
     # 4) Aus einer 404-Detail-Liste Weiterleitungs-Vorschläge ableiten
     python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
 
-    python3 scripts/gsc_abdeckung.py --selftest         # 80 Fälle, offline
+    python3 scripts/gsc_abdeckung.py --selftest         # 97 Fälle, offline
 
 WO DIE EXPORTE HERKOMMEN
     Search Console → Indexierung → Seiten → oben rechts „Exportieren“.
@@ -99,6 +99,7 @@ import os
 import re
 import sys
 import tempfile
+import time
 import unicodedata
 from pathlib import Path
 
@@ -520,6 +521,146 @@ def _fm_liste(fm: str, schluessel: str) -> list[str]:
     return [x.strip().strip('"').strip("'") for x in roh.group(1).split(",") if x.strip()]
 
 
+def _fm_kommentar_entfernen(text: str) -> str:
+    """Entfernt einen YAML-Kommentar außerhalb von Anführungszeichen.
+
+    Linear in der Länge einer Zeile. Ein `#` ohne vorangehenden Leerraum
+    gehört in YAML zum Wert und bleibt deshalb stehen. In doppelten
+    Anführungszeichen schützt ein Backslash, in einfachen Anführungszeichen
+    steht `''` für ein Literal-Zeichen.
+    """
+    doppelt = einfach = False
+    stelle = 0
+    while stelle < len(text):
+        zeichen = text[stelle]
+        if doppelt:
+            if zeichen == "\\":
+                stelle += 2
+                continue
+            if zeichen == '"':
+                doppelt = False
+        elif einfach:
+            if zeichen == "'":
+                if stelle + 1 < len(text) and text[stelle + 1] == "'":
+                    stelle += 2
+                    continue
+                einfach = False
+        elif zeichen == '"':
+            doppelt = True
+        elif zeichen == "'":
+            einfach = True
+        elif zeichen == "#" and (stelle == 0 or text[stelle - 1].isspace()):
+            return text[:stelle].rstrip()
+        stelle += 1
+    return text.rstrip()
+
+
+def _fm_wahrer_wert(wert: str) -> bool:
+    """Nur ein unquoted YAML-Bool `true`; `"true"` bleibt eine Zeichenkette."""
+    return _fm_kommentar_entfernen(wert.strip()).strip().lower() == "true"
+
+
+def _fm_schluessel_wert(zeile: str) -> tuple[str, str] | None:
+    """Liest `schluessel: wert` einer Frontmatter-Zeile ohne Regex."""
+    text = _fm_kommentar_entfernen(zeile).strip()
+    if not text or text.startswith("- ") or ":" not in text:
+        return None
+    schluessel, wert = text.split(":", 1)
+    return (schluessel.strip().strip('"').strip("'"), wert.strip())
+
+
+def _fm_inline_felder(wert: str) -> list[str]:
+    """Teilt `{a: 1, b: "x,y"}` an Kommata außerhalb von Anführungszeichen."""
+    inhalt = wert.strip()
+    if not (inhalt.startswith("{") and inhalt.endswith("}")):
+        return []
+    felder: list[str] = []
+    puffer: list[str] = []
+    zitat: str | None = None
+    tiefe = 0
+    for zeichen in inhalt[1:-1]:
+        if zitat:
+            puffer.append(zeichen)
+            if zeichen == zitat:
+                zitat = None
+        elif zeichen in ('"', "'"):
+            zitat = zeichen
+            puffer.append(zeichen)
+        elif zeichen == "{":
+            tiefe += 1
+            puffer.append(zeichen)
+        elif zeichen == "}":
+            tiefe = max(0, tiefe - 1)
+            puffer.append(zeichen)
+        elif zeichen == "," and tiefe == 0:
+            felder.append("".join(puffer))
+            puffer = []
+        else:
+            puffer.append(zeichen)
+    felder.append("".join(puffer))
+    return felder
+
+
+def _fm_inline_deaktiviert(wert: str) -> bool:
+    for feld in _fm_inline_felder(_fm_kommentar_entfernen(wert)):
+        paar = _fm_schluessel_wert(feld)
+        if paar and paar[0] == "disable":
+            return _fm_wahrer_wert(paar[1])
+    return False
+
+
+def sitemap_deaktiviert(fm: str) -> bool:
+    """Liest `sitemap.disable: true` zeilenweise und in linearer Zeit.
+
+    Code-Scanning-Alert Nr. 87 (`py/redos`, 26.10.2026): Der frühere Ausdruck
+    `^sitemap:\\s*\\n(?:\\s+.*\\n)*?\\s+disable:\\s*true` ließ eine Eingabe
+    mit vielen `\\t\\n`-Wiederholungen auf exponentiellem Weg zerlegen. Statt
+    drei überlappender Quantoren gilt hier eine einfache YAML-Regel: Nur ein
+    `sitemap`-Schlüssel auf oberster Ebene zählt, und nur sein direktes Kind
+    `disable` mit dem unquoted Bool `true`. Ein fremder Block danach beendet
+    den Geltungsbereich. `fm.splitlines()` und die Schleife sind O(n).
+    """
+    zeilen = fm.splitlines()
+    stelle = 0
+    while stelle < len(zeilen):
+        zeile = zeilen[stelle]
+        if not zeile.strip() or zeile.lstrip().startswith("#") or zeile[:1].isspace():
+            stelle += 1
+            continue
+        kopf = _fm_schluessel_wert(zeile)
+        if not kopf or kopf[0] != "sitemap":
+            stelle += 1
+            continue
+        wert = kopf[1]
+        if wert:
+            # `sitemap: {disable: true}` ist eine vollständige Inline-Abbildung;
+            # ein anderer Wert ist ein Skalar oder ungültig. In beiden Fällen
+            # beginnt hier kein eingerückter Block mit direkten Kindern.
+            if _fm_inline_deaktiviert(wert):
+                return True
+            stelle += 1
+            continue
+        kind_einzug: int | None = None
+        folgenden = stelle + 1
+        while folgenden < len(zeilen):
+            kindzeile = zeilen[folgenden]
+            if not kindzeile.strip() or kindzeile.lstrip().startswith("#"):
+                folgenden += 1
+                continue
+            einzug = len(kindzeile) - len(kindzeile.lstrip(" \t"))
+            if einzug == 0:
+                break  # nächster Schlüssel auf oberster Ebene
+            if kind_einzug is None:
+                kind_einzug = einzug
+            if einzug == kind_einzug:
+                paar = _fm_schluessel_wert(kindzeile)
+                if paar and paar[0] == "disable" and _fm_wahrer_wert(paar[1]):
+                    return True
+            folgenden += 1
+        stelle = max(folgenden, stelle + 1)
+    return False
+
+
 def hugo_urlize(name: str) -> str:
     """Hugo-`urlize` für Taxonomie-Slugs: klein, Leerzeichen zu '-', Umlaute
     bleiben stehen (im Link dann prozent-kodiert: `/tags/reiser%C3%BCcktritt/`,
@@ -563,8 +704,10 @@ def inhalts_seiten(root: Path = ROOT) -> tuple[list[str], list[str], list[str]]:
             tags.add(tag)
         for kat in _fm_liste(fm, "categories"):
             kategorien.add(kat)
-        sitemap_aus = bool(re.search(r"^sitemap:\s*\n(?:\s+.*\n)*?\s+disable:\s*true",
-                                     fm, re.M))
+        # Alert Nr. 87: kein mehrzeiliges Regex auf Frontmatter. Der
+        # zeilenweise Parser ist O(n), kennt Blockgrenzen und kann nicht
+        # über `sitemap:\n` + viele `\t\n` in Backtracking laufen.
+        sitemap_aus = sitemap_deaktiviert(fm)
         if _fm_wahr(fm, "robotsNoIndex"):
             noindex.append(url)
         elif not sitemap_aus:
@@ -3733,16 +3876,16 @@ def _mini_repo(wurzel: Path) -> Path:
 
 
 def selbsttest() -> int:
-    """80 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
+    """97 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
     ok = 0
     fehler: list[str] = []
 
-    def pruefe(name: str, bedingung: bool) -> None:
+    def pruefe(name: str, bedingung: bool, detail: str = "") -> None:
         nonlocal ok
         if bedingung:
             ok += 1
         else:
-            fehler.append(name)
+            fehler.append(f"{name}{': ' + detail if detail else ''}")
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
@@ -3761,6 +3904,31 @@ def selbsttest() -> int:
                klassifiziere("Wurde von einem Ausländer besucht") == "unknown")
         pruefe("K7 Zahlen mit Tausenderpunkt", zahl("1.234") == 1234)
         pruefe("K8 leere Zahl", zahl("") is None)
+
+        # --- Alert Nr. 87: `sitemap.disable` ohne mehrzeiliges Regex
+        pruefe("K79 Sitemap-Block wird erkannt",
+               sitemap_deaktiviert("title: X\nsitemap:\n  disable: true\n"
+                                   "lastmod: 2026-10-26\n"))
+        pruefe("K80 Inline-Abbildung wird erkannt",
+               sitemap_deaktiviert("sitemap: {disable: true, priority: 0.5}\n")
+               and not sitemap_deaktiviert("sitemap: {disable: false}\n")
+               and not sitemap_deaktiviert("sitemap: {disable: false}\n"
+                                           "  disable: true\n"))
+        pruefe("K81 nur ein echter Bool zählt",
+               not sitemap_deaktiviert('sitemap:\n  disable: "true"\n')
+               and not sitemap_deaktiviert("sitemap:\n  meta:\n    disable: true\n"))
+        pruefe("K82 fremder Block beendet den Geltungsbereich",
+               not sitemap_deaktiviert("sitemap:\n  priority: 0.5\n"
+                                       "anderes:\n  disable: true\n"))
+        pruefe("K83 Kommentare und CRLF werden gelesen",
+               sitemap_deaktiviert("sitemap: # Hinweis\r\n  disable: true # ja\r\n"))
+        angriff = "sitemap:\n" + "\t\n" * 30000
+        start = time.perf_counter()
+        ergebnis = sitemap_deaktiviert(angriff)
+        dauer = time.perf_counter() - start
+        pruefe("K84 Angriffseingabe bleibt linear",
+               not ergebnis and dauer < 2.0,
+               f"Dauer {dauer:.3f}s bei {len(angriff)} Zeichen")
 
         # --- Einlesen: BOM, Anführungszeichen, Semikolon
         export_dir = _fixture_export(tmp / "export")
@@ -3808,6 +3976,17 @@ def selbsttest() -> int:
         pruefe("K25 Wahrheit: 1 Weiterleitung", wahrheit["anzahl_weiterleitungen"] == 1)
         pruefe("K26 Wahrheit: 1 entfallen", wahrheit["anzahl_entfallen"] == 1)
         pruefe("K27 robots /go/ gesperrt", wahrheit["robots"]["go_gesperrt"])
+        # Ein sitemap-deaktiviertes Blatt ist kein noindex-Blatt, darf aber
+        # auch nicht als indexierbar in die Gegenrechnung eingehen.
+        versteckt = repo / "content" / "posts" / "verborgen"
+        versteckt.mkdir(parents=True, exist_ok=True)
+        (versteckt / "index.md").write_text(
+            "---\ntitle: Verborgen\nsitemap:\n  disable: true\n---\n\nText.\n",
+            encoding="utf-8")
+        mit_versteckt = repo_wahrheit(repo)
+        pruefe("K85 deaktivierte Sitemap zählt nicht als indexierbar",
+               "/posts/verborgen/" not in mit_versteckt["indexierbar"]
+               and "/posts/verborgen/" not in mit_versteckt["noindex"])
 
         auswertung = auswerten(ergebnis["snapshot"], wahrheit)
         nach = {g["schluessel"]: g for g in auswertung["gruende"]}
@@ -3959,19 +4138,27 @@ def selbsttest() -> int:
         # „Google hat geholt und nicht genommen“ ist eine Redaktionsfrage.
         wh = {"indexierbar": ["/posts/a/"], "weiterleitungen": {}, "entfallen": {},
               "top_nicht_live": [], "noindex": [], "sitemap": []}
+        # Hermetisch: Ein Selbsttest darf weder den echten Verlauf noch das
+        # echte Register noch die Wanduhr lesen. Sonst wird aus K68 unter der
+        # Uhr-Probe (+97 Tage) ein anderer Fall – nicht weil der Code sich
+        # geändert hat, sondern weil das Kalenderblatt umgeblättert wurde.
+        probe_tag = dt.date(2026, 10, 26)
         t2 = triage([{"url": "/posts/a/",
                       "grund": "Gecrawlt – zurzeit nicht indexiert"}],
-                    wh, {}, {"ohne_ein": []})
+                    wh, {}, {"ohne_ein": []}, heute=probe_tag,
+                    verlauf=[], register={})
         pruefe("K66 gecrawlt-nicht-indexiert wird P2 statt P3",
                t2["nach_prioritaet"].get("P2") == 1)
         t3 = triage([{"url": "/posts/a/",
                       "grund": "Gecrawlt – zurzeit nicht indexiert"}],
-                    wh, {}, {"ohne_ein": ["/posts/a/"]})
+                    wh, {}, {"ohne_ein": ["/posts/a/"]}, heute=probe_tag,
+                    verlauf=[], register={})
         pruefe("K67 ohne Inlink wird daraus P1",
                t3["nach_prioritaet"].get("P1") == 1)
         t4 = triage([{"url": "/index.xml",
                       "grund": "Gecrawlt – zurzeit nicht indexiert"}],
-                    wh, {}, {"ohne_ein": []})
+                    wh, {}, {"ohne_ein": []}, heute=probe_tag,
+                    verlauf=[], register={})
         pruefe("K68 Feed bleibt P3, auch wenn er gecrawlt wurde",
                t4["nach_prioritaet"].get("P3") == 1
                and "Asset/Feed" in t4["zeilen"][0]["aktion"])

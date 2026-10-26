@@ -32,9 +32,13 @@
 #
 # Gate-Regel: Jedes Finding mit Security-Severity (js/xss, py/clear-text-…
 # usw.) lässt den Lauf FEHLSCHLAGEN und blockiert damit den Pull Request.
-# Reine Qualitäts-Findings (z. B. py/redos auf uncritical-Pfaden) werden
-# berichtet, blockieren nicht – ihre dauerhafte Behebung liegt im Code, nicht
-# im Gate (Beweis: 0 offene Quality-Findings seit der Heilung 2026-10).
+# LEHRE AUS ALERT Nr. 87 (26.10.2026): `py/redos` trägt security-severity
+# 7.5 – es ist KEIN Qualitäts-Hinweis. Die vier ReDoS-Regeln für Python und
+# JavaScript stehen deshalb zusätzlich namentlich in DOKU_SEC, damit das Gate
+# auch dann hart bleibt, wenn ein SARIF-Dialekt die Regel-Metadaten weglässt.
+# Der eigene Job `redos-wache` prüft die historische Struktur lokal, ohne
+# SARIF-Upload und ohne Alert-API. Bericht:
+# CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md.
 name: CodeQL-Sicherheitswache
 
 on:
@@ -239,10 +243,11 @@ jobs:
           DOKU_SEC='js/xss js/xss-through-dom js/path-injection
           js/incomplete-multi-character-sanitization
           js/incomplete-url-substring-sanitization js/hardcoded-credentials
+          js/redos js/polynomial-redos
           py/path-injection py/clear-text-logging-sensitive-data
           py/clear-text-storage-sensitive-data
           py/incomplete-url-substring-sanitization py/insecure-protocol
-          py/hardcoded-credentials'
+          py/hardcoded-credentials py/redos py/polynomial-redos'
           TOTAL=0
           SECURITY=0
           QUALITY=0
@@ -381,3 +386,34 @@ jobs:
         run: |
           python3 scripts/ki_assistent_gate.py --selftest
           node --test cloudflare/ki-assistent/test/worker.test.mjs
+
+  redos-wache:
+    name: ReDoS-Wache (unabhängig vom SARIF-Upload)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      # LEHRE AUS ALERT Nr. 87: Ein `py/redos`-Fund stand in der Security-Tab,
+      # während der Workflow-Kopf ReDoS noch als „Quality“ beschrieb. Diese
+      # Wache hängt weder am Upload noch an der Alert-API: Sie erkennt die
+      # historische Pumpe im Quelltext und prüft den geheilten Zeilenparser.
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Eigenprüfung der Rückfallsperre (Positiv- und Gegenproben)
+        run: python3 scripts/redos_guard.py --selftest
+
+      - name: Python-Bestand auf Alert-Nr.-87-Strukturen prüfen
+        run: python3 scripts/redos_guard.py
+
+      - name: Sicherheitsvertrag zu Alert Nr. 87
+        run: |
+          python3 -m unittest scripts.tests.test_redos_security -v
+          python3 -m unittest scripts.tests.test_gsc_abdeckung
+
+      - name: Linearer Frontmatter-Parser der GSC-Abdeckung
+        run: python3 scripts/gsc_abdeckung.py --selftest
