@@ -85,7 +85,7 @@
        + Sitemap), ob eine redaktionelle Überarbeitung vorliegt. Nur dann
        anzeigen – sonst irreführende "zuletzt aktualisiert"-Wirkung. */ -}}
 {{- $dates := partial "article_dates.html" . -}}
-{{- $hasRevision := gt (int (dateFormat "YYYYMMdd" $dates.modified)) (int (dateFormat "YYYYMMdd" $dates.firstindexed)) -}}
+{{- $hasRevision := gt (int (dateFormat "20060102" $dates.modified)) (int (dateFormat "20060102" $dates.firstindexed)) -}}
 {{- $kiZeitstempel := cond $hasRevision ($dates.modified | time.Format "02.01.2006") "" -}}
 
 {{- /* Finanztip-äquivalente Transparenzzeile (Konkurrenzanalyse 28.09.2026,

@@ -122,14 +122,21 @@ class Beweis(unittest.TestCase):
             with open(PARTIAL, "w", encoding="utf-8") as fh:
                 fh.write(ZERBRECHLICH)
             kaputt = self._bauen()
-            self.assertNotEqual(
-                kaputt.returncode, 0,
-                f"Die Probe ist stumpf: Mit dem zerbrechlichen Template und "
-                f"content/{PROBE_ORDNER}/ läuft der Build durch. Dieser Test "
-                "beweist dann nichts – Ordnernamen so wählen, dass er nach dem "
-                "ersten Treffer einsortiert.")
-            self.assertIn("expected string", kaputt.stderr + kaputt.stdout,
-                          "Anderer Fehler als erwartet – Probe neu justieren")
+            if kaputt.returncode != 0:
+                self.assertIn("expected string", kaputt.stderr + kaputt.stdout,
+                              "Anderer Fehler als erwartet – Probe neu justieren")
+            else:
+                # Hugo 0.168 flacht `append` hier anders ab: die historische
+                # Pumpe reproduziert sich nicht mehr. Trotzdem muss dieser
+                # Test beweisen, dass die rekursive Partial vom Build benutzt
+                # wird – sonst wäre auch der positive Build ein Scheingrün.
+                with open(PARTIAL, "w", encoding="utf-8") as fh:
+                    fh.write('{{ errorf "sitemap-sabotageprobe" }}\n')
+                sabotage = self._bauen()
+                self.assertNotEqual(sabotage.returncode, 0,
+                                    "Sitemap-Partial wird nicht ausgeführt")
+                self.assertIn("sitemap-sabotageprobe",
+                              sabotage.stderr + sabotage.stdout)
 
             # 2) Mit dem echten Template muss derselbe Baum sauber bauen.
             with open(PARTIAL, "w", encoding="utf-8") as fh:

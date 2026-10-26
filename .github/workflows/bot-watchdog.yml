@@ -303,7 +303,7 @@ jobs:
         if: ${{ steps.takt.outputs.modus == 'voll' && (contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN')) }}
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       - name: Reserve-Zertifikat nachziehen (#462)
         if: ${{ steps.takt.outputs.modus == 'voll' && contains(env.CHECK8, 'WARN') }}

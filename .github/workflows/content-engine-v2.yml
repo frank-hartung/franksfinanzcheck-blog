@@ -587,7 +587,7 @@ jobs:
         id: hugo
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       # WF-A535 (#529, 02.10.2026): Alle drei Engine-Läufe des Tages starben
       # an derselben Stelle – nicht am Tagesdefizit, sondern am ERSTEN Build

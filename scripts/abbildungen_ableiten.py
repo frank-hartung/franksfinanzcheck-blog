@@ -180,7 +180,7 @@ def caption_ablauf(title, steps):
     return f"*Abbildung: Gliederung zu „{title}“ (eigene Darstellung).*"
 
 
-def _setze_unterschrift(lines, bild, caption):
+def _setze_unterschrift(lines, bild, caption, title=None):
     """Bildzeile + Unterschrift setzen bzw. eine Altfassung ersetzen.
 
     Rückgabe: (lines, gefunden). `gefunden` ist False, wenn die Bildzeile
@@ -190,6 +190,12 @@ def _setze_unterschrift(lines, bild, caption):
     for i, line in enumerate(lines):
         if not muster.match(line.strip()):
             continue
+        # Auch der zugängliche Alternativtext gehört zur aktuellen Überschrift;
+        # bei einer Umbenennung darf nicht nur die SVG und die Caption wechseln.
+        if title is not None:
+            prefix = ("Merkkarte: Kernaussagen zu " if bild == MERK
+                      else "Gliederung des Beitrags: ")
+            lines[i] = f"![{prefix}{title}]({bild})"
         # Die Unterschrift steht direkt unter der Bildzeile; dazwischen darf
         # genau EINE Leerzeile liegen (Hugo rendert sie als <figcaption>).
         j = i + 1
@@ -215,8 +221,8 @@ def render(post_path, write):
         with open(os.path.join(folder, ABLAUF), "w", encoding="utf-8") as fh:
             fh.write(ablauf_svg(title, steps))
         lines = body.split("\n")
-        lines, hat_merk = _setze_unterschrift(lines, MERK, merk_caption)
-        lines, hat_ablauf = _setze_unterschrift(lines, ABLAUF, ablauf_caption)
+        lines, hat_merk = _setze_unterschrift(lines, MERK, merk_caption, title)
+        lines, hat_ablauf = _setze_unterschrift(lines, ABLAUF, ablauf_caption, title)
         if not (hat_merk and hat_ablauf):  # Erstlauf: Blöcke einfügen
             h2 = [i for i, line in enumerate(lines) if line.startswith("## ")]
             if len(h2) < 2:
@@ -260,6 +266,10 @@ def pruefe_post(path, problems, gesehen):
         if name not in body:
             problems.append(f"{slug}: nicht eingebunden {name}")
             continue
+        prefix = ("Merkkarte: Kernaussagen zu " if name == MERK
+                  else "Gliederung des Beitrags: ")
+        if f"![{prefix}{title}]({name})" not in body:
+            problems.append(f"{slug}: Bild-Alternativtext ist nicht artikelgenau ({name})")
         if erwartet[name] not in body:
             problems.append(
                 f"{slug}: Unterschrift fehlt oder ist nicht artikelgenau "
@@ -315,6 +325,12 @@ def selftest():
     # Zweiter Lauf ist idempotent.
     nochmal, _ = _setze_unterschrift(list(neu), MERK, a_merk)
     assert nochmal == neu, "Abbildungs-Einbindung ist nicht idempotent"
+    alt_titel = ["![Merkkarte: Kernaussagen zu Alter Titel](abbildung-merkkarte.svg)",
+                 "", a_merk]
+    neu_titel, _ = _setze_unterschrift(alt_titel, MERK, a_merk, "Neuer Titel")
+    assert neu_titel[0] == "![Merkkarte: Kernaussagen zu Neuer Titel](abbildung-merkkarte.svg)"
+    wiederholt, _ = _setze_unterschrift(neu_titel, MERK, a_merk, "Neuer Titel")
+    assert wiederholt == neu_titel, "Bild-Alt-Text muss nach Titelwechsel stabil sein"
     print("✅ Abbildungen-Selbsttest bestanden (artikelgenaue Bildzeilen, "
           "Altfassung wird ersetzt, idempotent)")
     return 0
