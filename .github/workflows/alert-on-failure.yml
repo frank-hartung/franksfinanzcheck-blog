@@ -59,15 +59,25 @@
 #    Auto-Close greifen auf beiden Formen) und werden bei jedem Lauf
 #    still auf die neue Form migriert – kein Issue fällt durchs Raster.
 #
-#  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026):
+#  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026; Frischhaltung 26.10.2026):
 #    Eine offene Meldung blieb bis zum ersten grünen Lauf wörtlich so,
 #    wie der erste rote Lauf sie geschrieben hatte. #761 riet deshalb
 #    weiter zu GROQ/GEMINI-Schlüsseln, obwohl jeder neue Lauf längst
 #    „Einrichtung unvollständig“ erkannte. Seitdem trägt jeder Body die
-#    Klasse seines Rats (<!-- alert-runbook: … -->). Ändert sie sich,
-#    schreibt der nächste rote Lauf die Meldung mit Rat, Lauf und
-#    Schritten neu: gleiche Nummer, gleicher Titel, ohne Benachrichtigung.
-#    Gleiche Klasse oder unbekannte Job-Lage → keine Umschrift.
+#    Klasse seines Rats (<!-- alert-runbook: … -->). Drei Fälle:
+#      1. KLASSENWECHSEL (oder Bestands-Body ohne Klassen-Marker): Der
+#         nächste rote Lauf schreibt die Meldung mit dem neuen Rat, Lauf
+#         und Schritten neu – gleiche Nummer, gleicher Titel, ohne
+#         Benachrichtigung (Body-Edit).
+#      2. GLEICHER RAT, ABER NEUER LAUF (stille Frischhaltung, 26.10.):
+#         Der Rat stimmt noch, aber Lauf-Link, Zeit, Commit und
+#         Job-Liste werden auf den jüngsten Lauf gezogen. #761 hatte
+#         zehn Tage lang auf einen alten Lauf verwiesen, obwohl der
+#         Body behauptete, „mit dem jüngsten Lauf nachgeführt“ zu sein.
+#      3. UNBEKANNTE JOB-LAGE oder der Body verweist bereits auf genau
+#         diesen Lauf (Redelivery/Neuversuch): keine Umschrift.
+#    Jede Umschrift ist fail-open: Lehnt die API ab, bleibt die Meldung
+#    unverändert offen und es entsteht kein Duplikat.
 #
 #  AUTO-CLOSE NUR MIT JOB-BEWEIS (WF-E813 / #809, 19.10.2026):
 #    „Behoben“ schrieb bisher jeder grüne Lauf des Workflows auf main –
@@ -524,6 +534,11 @@ jobs:
               (i.title && i.title.indexOf(altTitel) !== -1)
             ));
             let nachzufuehren = null;
+            // Stille Frischhaltung (WF-9E5A / #761, 26.10.2026): Gleicher Rat,
+            // aber der Body zeigt noch auf einen älteren Lauf. Die Meldung
+            // wird dann mit frischen Laufdaten neu geschrieben, ohne den Rat
+            // anzutasten – kein Duplikat, kein Kommentar, keine Benachrichtigung.
+            let aufzufrischen = null;
             if (open.length > 0) {
               const treffer = open[0];
               console.log('Offenes Issue existiert bereits (#' + treffer.number + ') – kein Duplikat.');
@@ -541,12 +556,11 @@ jobs:
               }
               // ==============================================================
               //  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026)
-              //  Steht der Rat dieses Laufs schon drin, bleibt die Meldung
-              //  unberührt – keine Umschrift bei jedem Lauf. Hat sich die
-              //  Klasse geändert (oder fehlt der Klassen-Marker noch: Bestand
-              //  vor dieser Regel), wird sie unten mit Rat, Lauf und Schritten
-              //  DIESES Laufs neu geschrieben. Nummer, Titel und Identität
-              //  bleiben; eine Body-Änderung benachrichtigt niemanden.
+              //  Hat sich die Klasse geändert (oder fehlt der Klassen-Marker
+              //  noch: Bestand vor dieser Regel), wird die Meldung unten mit
+              //  Rat, Lauf und Schritten DIESES Laufs neu geschrieben. Nummer,
+              //  Titel und Identität bleiben; eine Body-Änderung benachrichtigt
+              //  niemanden.
               //  Nur bei bekannter Job-Lage: Ohne Schritte fiele jede Klasse auf
               //  den allgemeinen Rat zurück und überschriebe einen präziseren.
               // ==============================================================
@@ -555,9 +569,26 @@ jobs:
                 return;
               }
               if (treffer.body.indexOf(runbookMarker) !== -1) {
-                return;
+                // ============================================================
+                //  STILLE FRISCHHALTUNG (WF-9E5A / #761, 26.10.2026)
+                //  Der Rat stimmt noch – aber eine offene Meldung, deren
+                //  Lauf-Link zehn Tage alt ist, widerspricht ihrem eigenen
+                //  Satz „Rat und Lauf oben sind aktuell“. Zeigt der Body
+                //  bereits auf GENAU diesen Lauf (Webhook-Redelivery,
+                //  Neuversuch desselben Runs), bleibt er unangetastet. Sonst
+                //  wird er mit derselben Klasse, aber frischen Laufdaten
+                //  (Run-Link, Zeit, Commit, fehlgeschlagene Jobs) neu
+                //  geschrieben. Der alert-jobs-Marker bleibt so ebenfalls
+                //  aktuell – der Auto-Close prüft danach den jüngsten Befund.
+                // ============================================================
+                if (treffer.body.indexOf(runUrl) !== -1) {
+                  console.log('Rat und Lauf in #' + treffer.number + ' sind bereits aktuell (Lauf ' + run.id + ') – keine Umschrift.');
+                  return;
+                }
+                aufzufrischen = treffer;
+              } else {
+                nachzufuehren = treffer;
               }
-              nachzufuehren = treffer;
             }
 
             const lines = [
@@ -583,8 +614,12 @@ jobs:
               '- **Zeit:** ' + created + ' · **Event:** `' + event + '`' + (run.run_attempt > 1 ? ' · **Versuch:** ' + run.run_attempt : ''),
               '- **Run:** [Details ansehen](' + runUrl + ')'
             ];
-            if (nachzufuehren) {
-              const seit = Date.parse(nachzufuehren.created_at || '');
+            // Sowohl der Klassenwechsel (nachzufuehren) als auch die stille
+            // Frischhaltung (aufzufrischen) schreiben eine bestehende Meldung
+            // neu – das „Offen seit“-Datum bleibt das der Erstanlage.
+            const bestehendeMeldung = nachzufuehren || aufzufrischen;
+            if (bestehendeMeldung) {
+              const seit = Date.parse(bestehendeMeldung.created_at || '');
               lines.push('- **Offen seit:** ' +
                 (Number.isNaN(seit) ? 'unbekannt' : new Date(seit).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })) +
                 ' · *Mit dem jüngsten Lauf nachgeführt – Rat und Lauf oben sind aktuell.*');
@@ -712,19 +747,25 @@ jobs:
             );
             const body = lines.join('\n');
 
-            if (nachzufuehren) {
+            if (bestehendeMeldung) {
+              const istFrischhaltung = !nachzufuehren;
               try {
                 await github.rest.issues.update({
                   owner: context.repo.owner, repo: context.repo.repo,
-                  issue_number: nachzufuehren.number,
+                  issue_number: bestehendeMeldung.number,
                   title: ident.titel,
                   body: body
                 });
-                console.log('↻ Meldung #' + nachzufuehren.number + ' nachgeführt: Rat „' + runbookKlasse + '“ aus Lauf ' + run.id + '.');
+                console.log('↻ Meldung #' + bestehendeMeldung.number
+                  + (istFrischhaltung
+                    ? ' still frisch gehalten: Rat „' + runbookKlasse + '“ bleibt, Laufdaten aktualisiert aus Lauf ' + run.id + '.'
+                    : ' nachgeführt: Rat „' + runbookKlasse + '“ aus Lauf ' + run.id + '.'));
               } catch (e) {
                 // Fail-open: Die Meldung bleibt offen und auffindbar, nur ihr Rat
                 // bleibt alt. Ein Absturz hier stellte das Alerting selbst rot.
-                console.log('Nachführen von #' + nachzufuehren.number + ' fehlgeschlagen (' + e.message + ') – Meldung bleibt unverändert offen.');
+                console.log((istFrischhaltung ? 'Frischhaltung' : 'Nachführen') + ' von #'
+                  + bestehendeMeldung.number + ' fehlgeschlagen (' + e.message
+                  + ') – Meldung bleibt unverändert offen.');
               }
               return;
             }

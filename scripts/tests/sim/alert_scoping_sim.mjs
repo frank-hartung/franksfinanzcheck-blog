@@ -273,14 +273,19 @@ await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true },
   true, ['Häufigste Ursachen']);
 
-// 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
-//     und auch keine überflüssige Umschrift – die Meldung trägt bereits den
-//     Rat dieses Laufs (Klassen-Marker seit WF-9E5A / #761).
-await run('Dedupe: offene Meldung mit Marker → kein Duplikat, keine Umschrift',
+// 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat.
+//     Trägt die Meldung bereits den Rat dieses Laufs, zeigt aber noch auf
+//     einen älteren Lauf, wird sie still frisch gehalten (26.10.2026): gleiche
+//     Nummer, gleicher Rat, aber aktuelle Laufdaten – ohne neue Meldung.
+await run('Dedupe: offene Meldung mit Marker, älterer Lauf → kein Duplikat, stille Frischhaltung',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
     openIssues: [{ number: 100, title: IDENTITIES['Layout-AI'].titel,
-                   body: IDENTITIES['Layout-AI'].marker + '\n<!-- alert-runbook: allgemein -->\nDetails' }] },
-  false, [], { anzahl: 0 });
+                   body: IDENTITIES['Layout-AI'].marker + '\n<!-- alert-runbook: allgemein -->\nDetails aus Lauf 99' }] },
+  false, [],
+  { anzahl: 1, nummer: 100,
+    imBody: [IDENTITIES['Layout-AI'].marker, '<!-- alert-runbook: allgemein -->',
+             'Häufigste Ursachen', 'https://x/runs/42'],
+    nichtImBody: ['Details aus Lauf 99'] });
 // 14. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
 //     (die Dedupe-Vergiftung aus #218/#343 in neuer Gestalt).
 await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entsteht',
@@ -445,13 +450,45 @@ await run('#761-Nachführung: offene Meldung mit GROQ-Rat → gleiche Nummer, Ei
              'E1–E8', 'https://x/runs/7620', 'https://x/jobs/7620', 'Voraussetzungen prüfen',
              '**Offen seit:** 15.10.2026, 09:54:25', 'actions/workflows/backup-offsite.yml'],
     nichtImBody: ['GROQ', 'Häufigste Ursachen', 'API-Key abgelaufen', 'https://x/runs/38701800402'] });
-// Idempotenz: Steht der Rat schon drin, bleibt die Meldung unberührt – auch
-// wenn der Lauf ein anderer ist (keine tägliche Umschrift).
-await run('Nachführung idempotent: Rat steht schon drin → keine Umschrift',
+// Stille Frischhaltung (26.10.2026): Der Rat (Klasse) stimmt noch, aber der
+// Body verweist auf einen älteren Lauf. Derselbe Rat bleibt, Lauf-Link, Zeit,
+// Commit und Job-Liste werden auf den jüngsten Lauf gezogen – gleiche Nummer,
+// kein Duplikat, kein Kommentar. #761 hatte so zehn Tage lang einen toten
+// „aktuellen“ Lauf gezeigt, weil der alte Code hier komplett schwieg.
+await run('Frischhaltung: gleicher Rat, älterer Lauf → Body mit frischen Laufdaten neu geschrieben, Rat bleibt',
   { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7621,
     jobs: KV_JOB_EINRICHTUNG_ROT,
     openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
-                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\nRat von gestern',
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
+                     + '1. **Einrichtung unvollständig – ein Neustart hilft nicht.**\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/7620)\nRat von gestern',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 761,
+    imBody: ['<!-- alert-runbook: backup-einrichtung -->',
+             'Einrichtung unvollständig – ein Neustart hilft nicht',
+             'https://x/runs/7621', 'https://x/jobs/7620',
+             '**Offen seit:** 15.10.2026, 09:54:25',
+             'actions/workflows/backup-offsite.yml'],
+    nichtImBody: ['https://x/runs/7620', 'Rat von gestern'] });
+// Idempotenz: Verweist der Body bereits auf GENAU diesen Lauf (Webhook-
+// Redelivery, Neuversuch), bleibt die Meldung unangetastet – keine Umschrift.
+await run('Frischhaltung idempotent: Body zeigt bereits auf diesen Lauf → keine Umschrift',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7621,
+    jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/7621)\nRat von diesem Lauf',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [], { anzahl: 0 });
+// Fail-open auch auf dem Frischhaltungs-Pfad: Lehnt die Issue-API das Update
+// ab, stürzt das Alerting nicht ab und es entsteht kein Duplikat.
+await run('Frischhaltung scheitert an der API → kein Absturz, kein Duplikat, Meldung bleibt offen',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7624,
+    updateFail: true, jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/7620)\nAlt',
                    created_at: '2026-10-15T07:54:25Z' }] },
   false, [], { anzahl: 0 });
 // Klassenwechsel: Einrichtung erledigt, danach scheitert der Export → der

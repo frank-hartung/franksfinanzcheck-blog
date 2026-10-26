@@ -424,6 +424,57 @@ class FrischwacheVertrag(unittest.TestCase):
         self.assertIn("RPO", alert)
 
 
+class WizardVertrag(unittest.TestCase):
+    """Der Einrichtungs-Wizard ist der geprüfte Schnellweg durch die einzige
+    verbliebene Inhaber-Aufgabe (#761). Er darf vom npm-Kurzbefehl und der
+    Anleitung nicht abweichen und muss in CI (kein Mensch, kein TTY) hart
+    ablehnen – Geheimnisse gehören nicht in automatisierte Läufe."""
+
+    WIZARD = SCRIPTS / "backup_einrichten_wizard.sh"
+
+    def setUp(self):
+        self.assertTrue(self.WIZARD.is_file(), "backup_einrichten_wizard.sh fehlt")
+        self.text = self.WIZARD.read_text(encoding="utf-8")
+
+    def test_bash_syntax(self):
+        proc = subprocess.run(["bash", "-n", str(self.WIZARD)],
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0, "Wizard-Syntaxfehler: " + proc.stderr)
+
+    def test_lehnt_in_ci_ab(self):
+        # Kein /dev/tty, GITHUB_ACTIONS gesetzt: Exit 1, kein Schreibversuch.
+        proc = subprocess.run(["bash", str(self.WIZARD), "--check"],
+                              capture_output=True, text=True,
+                              env={**__import__("os").environ, "GITHUB_ACTIONS": "true"})
+        self.assertEqual(proc.returncode, 1)
+        self.assertIn("CI", proc.stderr + proc.stdout)
+
+    def test_kennt_check_modus_und_alle_sieben_einstellungen(self):
+        self.assertIn("--check", self.text)
+        for name in ("BACKUP_REPO", "BACKUP_REPO_TOKEN", "BACKUP_PASSPHRASE",
+                     "CF_KV_BACKUP_TOKEN", "CLOUDFLARE_ACCOUNT_ID",
+                     "KV_NAMESPACE_ID_ABO", "D1_DATABASE_ID"):
+            with self.subTest(name):
+                self.assertIn(name, self.text)
+        # Reihenfolge der Anleitung: erst E8, dann die Secrets.
+        self.assertLess(self.text.index("pruefe_e8"),
+                        self.text.index('gh secret set BACKUP_PASSPHRASE'),
+                        "Erst absichern (E8), dann das erste Secret befüllen")
+        self.assertIn(be.ANLEITUNG, self.text)
+
+    def test_npm_kurzbefehle_zeigen_auf_den_wizard(self):
+        import json
+        skripte = json.loads((REPO / "package.json").read_text(encoding="utf-8"))["scripts"]
+        self.assertEqual(skripte.get("backup:einrichten"),
+                         "bash scripts/backup_einrichten_wizard.sh")
+        self.assertEqual(skripte.get("backup:status"),
+                         "bash scripts/backup_einrichten_wizard.sh --check")
+        # Die Anleitung muss dieselben Kurzbefehle nennen (eine Einstiegsstelle).
+        anleitung = ANLEITUNG.read_text(encoding="utf-8")
+        self.assertIn("npm run backup:einrichten", anleitung)
+        self.assertIn("npm run backup:status", anleitung)
+
+
 class NamensVertrag(unittest.TestCase):
     """Kein Name im Prüfer darf unter die CodeQL-Heuristik fallen (Alert-Klasse #78)."""
 

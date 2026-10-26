@@ -44,11 +44,14 @@ dass die Regeln nicht still zurückgebaut werden:
      github-script-Kontext aus – die Produktionsszenarien inkl. exakter
      #343- und #632-Reproduktion, Phantom-Filter (#218), Dedupe,
      Fachkanal-Stummschaltung und Fail-open.
-  9. LAGEBILD (WF-9E5A / #761): Eine offene Meldung behält nicht für immer
-     den Rat des ersten roten Laufs. Die Klasse des Rats steht als Marker
-     im Body (<!-- alert-runbook: … -->); ändert sie sich, schreibt der
-     nächste rote Lauf die Meldung neu – nur bei bekannter Job-Lage und
-     fail-open.
+ 9. LAGEBILD (WF-9E5A / #761): Eine offene Meldung behält nicht für immer
+    den Rat des ersten roten Laufs. Die Klasse des Rats steht als Marker
+    im Body (<!-- alert-runbook: … -->); ändert sie sich, schreibt der
+    nächste rote Lauf die Meldung neu – nur bei bekannter Job-Lage und
+    fail-open. Bleibt die Klasse gleich, aber ein neuerer Lauf ist rot,
+    wird der Body seit 26.10.2026 still frisch gehalten (gleicher Rat,
+    aktuelle Laufdaten); verweist er bereits auf genau diesen Lauf
+    (Redelivery), bleibt er unangetastet.
  10. JOBBEWEIS (WF-E813 / #809): „Behoben“ schließt nur noch Meldungen,
      deren gemeldete Jobs im auflösenden Lauf vorhanden und `success` sind
      (Marker <!-- alert-jobs: [...] -->, scripts/alert_resolve_gate.py).
@@ -205,7 +208,9 @@ class ProdScopingAlarm(unittest.TestCase):
                          "Klassen-Marker gehört direkt hinter den Identitäts-Marker")
         # Den Block exakt eingrenzen: vom Nachführen bis zum Anlegen. Ein
         # großzügiges Fenster sähe sonst das catch der Label-Garantie dahinter.
-        start = self.code.find("if (nachzufuehren) {\n              try {")
+        # Klassenwechsel und stille Frischhaltung teilen sich seit 26.10.2026
+        # denselben Update-Block (bestehendeMeldung).
+        start = self.code.find("if (bestehendeMeldung) {")
         ende = self.code.find("github.rest.issues.createLabel(", start)
         self.assertTrue(-1 < start < ende < self.code.find("github.rest.issues.create(", ende),
                         "Nachführen muss vor dem Anlegen entscheiden (sonst Duplikat)")
@@ -213,6 +218,43 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("github.rest.issues.update(", block)
         self.assertIn("} catch (e) {", block, "Nachführen muss fail-open sein")
         self.assertIn("return;", block, "Nach dem Nachführen darf kein Duplikat entstehen")
+
+    def test_stille_frischhaltung_bei_gleichem_rat_aber_neuem_lauf(self):
+        # WF-9E5A / #761 (26.10.2026): Zehn Tage lang verwies die offene
+        # Meldung auf einen alten Lauf, obwohl ihr Body behauptete, aktuell
+        # zu sein – der alte Dedupe-Pfad schwieg bei gleichem Klassen-Marker
+        # komplett. Vertrag: Bei gleichem Rat, aber einem neueren Lauf wird
+        # der Body still mit frischen Laufdaten neu geschrieben; verweist er
+        # bereits auf genau diesen Lauf (Redelivery), bleibt er unangetastet.
+        code = self.code
+        pos_dedupe = code.find("if (open.length > 0)")
+        pos_marker = code.find("treffer.body.indexOf(runbookMarker) !== -1", pos_dedupe)
+        pos_runurl = code.find("treffer.body.indexOf(runUrl) !== -1", pos_marker)
+        pos_refresh = code.find("aufzufrischen = treffer;", pos_marker)
+        pos_klasse = code.find("nachzufuehren = treffer;", pos_marker)
+        self.assertTrue(-1 < pos_marker < pos_runurl < pos_refresh,
+                        "Im Gleiche-Klasse-Zweig erst auf diesen Lauf prüfen, dann frisch halten")
+        self.assertTrue(-1 < pos_refresh < pos_klasse,
+                        "Die Frischhaltung gehört vor den Klassenwechsel-Pfad")
+        # Idempotenz: Derselbe Lauf (Webhook-Redelivery, Neuversuch) darf
+        # keinen API-Schreibzugriff auslösen.
+        fenster = code[pos_marker:pos_refresh]
+        self.assertIn("return;", fenster, "Lauf bereits referenziert → ohne Update zurückkehren")
+        # Die Frischhaltung nutzt denselben Body-Bau (mit alert-jobs-Marker)
+        # und denselben fail-open-Update-Block wie der Klassenwechsel.
+        self.assertIn("const bestehendeMeldung = nachzufuehren || aufzufrischen;", code)
+        self.assertIn("const istFrischhaltung = !nachzufuehren;", code)
+        update_block = code[code.find("if (bestehendeMeldung) {"):
+                            code.find("github.rest.issues.createLabel(")]
+        self.assertIn("github.rest.issues.update(", update_block)
+        self.assertIn("} catch (e) {", update_block, "Frischhaltung muss fail-open sein")
+        self.assertIn("return;", update_block, "Nach der Frischhaltung kein Duplikat erzeugen")
+        # Verhaltenstiefe: Die Simulation beweist den Refresh mit echtem Lauf-
+        # wechsel, die Idempotenz und das fail-open bei API-Ablehnung.
+        sim = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
+        self.assertIn("Frischhaltung: gleicher Rat, älterer Lauf", sim)
+        self.assertIn("Frischhaltung idempotent", sim)
+        self.assertIn("Frischhaltung scheitert an der API", sim)
 
     def test_809_gleichzeitige_header_und_worker_befunde_haben_vorrang(self):
         code = _kommentarfrei(_text())
