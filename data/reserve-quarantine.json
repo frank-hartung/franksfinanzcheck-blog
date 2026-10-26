@@ -1,1 +1,13 @@
-{}
+{
+  "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+    "first": "2026-10-26T09:28:00Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
+    "hits": 1,
+    "laeufe": [
+      "run:40297687637"
+    ],
+    "last": "2026-10-26T09:43:00Z",
+    "lauf": "run:40297687637",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-datum-punkt: politur-ruine „<n> dezember“ – überrest eines automatisierten politur-laufs, manuell reparieren"
+  }
+}
