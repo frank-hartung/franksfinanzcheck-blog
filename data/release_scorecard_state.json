@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T01:18:31Z",
+  "generated_at": "2026-10-26T06:24:13Z",
   "modus": "kandidaten",
-  "commit": "cdfb97b80e4d9d37b91c53c11c163dcc426a057a",
+  "commit": "c53fe2c1693ffba340d8dee846c2cf0e4a7b2c1c",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -1141,7 +1141,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "cb7d88c5cc7831f60cce5dec4de56189f8f0e8d109d57a5ec28c23f0a0975c5f",
@@ -1158,7 +1158,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     }
   }
 }
