@@ -622,6 +622,10 @@ jobs:
           python3 scripts/weiterleitungen.py --check
           python3 scripts/weiterleitungen.py --verify
           python3 -m unittest scripts.tests.test_weiterleitungen
+          # Regel F (Konsolidierung) rechnet ihre drei Belege selbst nach –
+          # auch für Einträge, die in der Quelle noch gar nicht stehen.
+          python3 scripts/konsolidierung.py --selftest
+          python3 -m unittest scripts.tests.test_konsolidierung
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo

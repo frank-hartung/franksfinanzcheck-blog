@@ -36,7 +36,12 @@ jobs:
           python-version: "3.12"
 
       - name: Selbsttest der Abdeckungs-Zentrale
-        run: python3 scripts/gsc_abdeckung.py --selftest
+        run: |
+          python3 scripts/gsc_abdeckung.py --selftest
+          # Die Abdeckung entscheidet auch, ob eine Seite konsolidiert werden
+          # darf (Regel F). Der Selbsttest hält fest, dass ohne Nachfrage-Beleg
+          # niemand eine Weiterleitung auf eine unbekannte Seite baut.
+          python3 scripts/konsolidierung.py --selftest
 
       - name: Build für die Gegenprobe
         id: build
