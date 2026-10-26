@@ -1,9 +1,9 @@
 ---
 title: "Bankgebühren senken: 7 Schritte zum günstigeren Konto"
 description: So reduzierst du deine Bankgebühren, sparst bares Geld und behältst dein Konto im Griff – praxisnah und ohne Fachchinesisch.
-date: 2026-10-24T17:41:53Z
-draft: true
-reserve: true
+date: 2026-10-26T01:13:39Z
+draft: false
+reserve_published: 2026-10-26
 reserve_reaktiviert: "2026-10-24 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis check_length.py"
 
 tags: ["Girokonto", "Kreditkarte und Kredit", "Tagesgeld und Zinsen"]

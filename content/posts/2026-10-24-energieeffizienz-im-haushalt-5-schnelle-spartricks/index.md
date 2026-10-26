@@ -1,9 +1,9 @@
 ---
 title: "Energieeffizienz im Haushalt: 5 schnelle Spartricks"
 description: "Energieeffizienz: Entdecke fünf praxisnahe Maßnahmen, mit denen du im Haushalt Energie sparen und deine Kosten senken kannst."
-date: 2026-10-24T17:41:53Z
-draft: true
-reserve: true
+date: 2026-10-26T01:14:06Z
+draft: false
+reserve_published: 2026-10-26
 reserve_reaktiviert: "2026-10-24 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis check_length.py"
 
 tags: ["Stromkosten senken"]
