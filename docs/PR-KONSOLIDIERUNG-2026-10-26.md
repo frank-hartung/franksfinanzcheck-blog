@@ -20,3 +20,9 @@ Zwei als READY markierte Reserve-Entwürfe hatten andere Bytes als ihre alten SH
 - `python -m unittest discover -s scripts/tests`: 3915 Tests, 3 Fehler vor Commit/Staging; zwei waren die notwendige Commit- bzw. Staging-Probe für das Siegel/einen gelöschten Partial-Pfad, der dritte die nun angepasste Hugo-Sabotageprobe. Nach Commit und Staging erneut prüfen.
 
 **Grenze:** Docker-Image und Datenbankmigration am Host nicht in dieser Sandbox ausführbar. Der Reserve-Bestand ist nicht stillschweigend auf 6/6 hochgerechnet. GitHub-CI nach Push und der Host-Migrationsnachweis sind eigenständige Abnahmen.
+
+## CI-Nachprüfung des ersten Konsolidierungs-Commits
+
+Der erste PR-Lauf brachte zwei zusätzliche Basisbefunde ans Licht: Qualitäts-/Layout-Gate scheiterten am **nicht existierenden PDF-Link** der veröffentlichten Studie. Der Link und eine irreführende Behauptung über ein angeblich vorhandenes PDF wurden entfernt; Methodik und Rechnung sind über den echten Abschnitt `#methodik` erreichbar. Danach: 3984 interne Links, 0 defekte; statisches Layout-Audit ohne kritische Funde. Die Browser-Frühwarnung bei 1385 DOM-Elementen bleibt sichtbar, aber ist laut bestehendem Severity-Vertrag unter dem harten Lighthouse-Limit 1400 und nicht der rote Befund.
+
+Zusätzlich fand die 97-Tage-Uhrprobe einen bisher undichten Test in `test_gsc_abdeckung.py`: Der angebliche Zwei-CSV-Fälle-Test las das produktive Entscheidungsregister und die echte Wanduhr; unter fremdem Datum wurden vier Fälle gezählt. Die Testnaht übergibt jetzt einen festen Tag und leeres Register/Verlauf – **84 GSC-Tests unter fremder Uhr grün**. Keine Produktions-Triage-Regel gelockert.

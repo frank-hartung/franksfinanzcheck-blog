@@ -21,9 +21,9 @@ datasetLicense: "/studien/fixkosten-index-2026-q4/#nutzung-und-zitierweise"
   <figcaption>FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026. Quelle: BDEW-Preisanalysen; eigene Rechnung.</figcaption>
 </figure>
 
-[CSV-Datensatz herunterladen](/downloads/fixkosten-index-2026-q4.csv) · [Pressegrafik herunterladen](/downloads/fixkosten-index-2026-q4-pressegrafik.svg) · [PDF-Download: Vollständige Methodik + Rechnung (1 Seite, stand vorbereitet)](/downloads/fixkosten-index-2026-q4.pdf)
+[CSV-Datensatz herunterladen](/downloads/fixkosten-index-2026-q4.csv) · [Pressegrafik herunterladen](/downloads/fixkosten-index-2026-q4-pressegrafik.svg) · [Methodik und Rechnung auf dieser Seite](#methodik)
 
-> **Hinweis:** Das PDF steht unter Vorbereitung. Es enthält die vollständige Methodik, die Quellen und die Rechnung in druckfriendly Form. Apple-Geräte (Preview) und Windows (PDF-Reader) öffnen das Dokument direkt. PDF-Downloads werden von allen gängigen AI-Suchmaschinen (Perplexity, ChatGPT mit Bing-Index, Microsoft Copilot) bevorzugt citierter als reiner CSV-Text, weil sie strukturierte, einseitige Inhalte sind.
+Die Methodik, Quellen und Rechenschritte stehen unten vollständig und ohne zusätzlichen Download zur Verfügung. Ein PDF ist derzeit nicht veröffentlicht.
 
 ## Kernergebnisse
 
