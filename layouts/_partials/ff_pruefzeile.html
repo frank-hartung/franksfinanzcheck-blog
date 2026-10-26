@@ -81,11 +81,11 @@
   </details>
 </section>
 {{- else -}}
-{{- /* Zeitenstempel: berechne aus article_dates.html (identisch zu Schema
-       + Sitemap), ob eine redaktionelle Überarbeitung vorliegt. Nur dann
-       anzeigen – sonst irreführende "zuletzt aktualisiert"-Wirkung. */ -}}
+{{- /* article_dates.html liefert published und modified als Zeitwerte.
+       Nur eine belegte Änderung nach der Veröffentlichung wird angezeigt;
+       ein firstindexed-Feld gibt es in diesem Partial nicht. */ -}}
 {{- $dates := partial "article_dates.html" . -}}
-{{- $hasRevision := gt (int (dateFormat "20060102" $dates.modified)) (int (dateFormat "20060102" $dates.firstindexed)) -}}
+{{- $hasRevision := $dates.modified.After $dates.published -}}
 {{- $kiZeitstempel := cond $hasRevision ($dates.modified | time.Format "02.01.2006") "" -}}
 
 {{- /* Finanztip-äquivalente Transparenzzeile (Konkurrenzanalyse 28.09.2026,
