@@ -1,27 +1,34 @@
 {
-  "generated": "2026-10-19",
-  "verdict": "GREEN",
+  "generated": "2026-10-26",
+  "verdict": "AMBER",
   "build_measured": true,
   "strict_build": true,
   "static": {
-    "total_img_bytes": 54071174,
-    "count_img": 2034,
-    "count_covers": 2010,
+    "total_img_bytes": 58362108,
+    "count_img": 2199,
+    "count_covers": 2175,
     "worst_cover_bytes": 130973
   },
   "public": {
-    "html_files": 137,
+    "html_files": 262,
     "js_files": 15,
     "css_files": 0,
-    "js_bytes": 500993,
+    "js_bytes": 504326,
     "css_bytes": 0,
-    "html_bytes": 36028797,
+    "html_bytes": 39771816,
     "inline_styles": 0,
     "blocking_js": 0,
-    "inline_js": 404,
-    "structured_data_scripts": 206,
+    "inline_js": 222,
+    "structured_data_scripts": 99,
     "inline_scripts_plain": 0,
-    "img_nosize": 0
+    "img_nosize": 10
   },
-  "findings": []
+  "findings": [
+    {
+      "level": "amber",
+      "code": "cls_img",
+      "count": 10,
+      "msg": "10 <img>-Elemente ohne width/height/style (CLS-Risiko)"
+    }
+  ]
 }
