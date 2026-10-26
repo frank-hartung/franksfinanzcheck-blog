@@ -1,8 +1,4 @@
 {
- "2026-10-19": {
-  "searxng": 1,
-  "wikipedia": 9
- },
  "2026-10-20": {
   "searxng": 1,
   "wikipedia": 9
@@ -24,5 +20,8 @@
  "2026-10-25": {
   "searxng": 1,
   "wikipedia": 9
+ },
+ "2026-10-26": {
+  "wikipedia": 22
  }
 }

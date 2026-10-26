@@ -11,3 +11,4 @@
 {"zeitstempel": "2026-10-23T12:37:12.276752+02:00", "anfragen": 13, "zaehlung": {"ok": 10, "cache": 0, "fehler": 3, "uebersprungen": 0}, "treffer": 70, "sichtbar": 0}
 {"zeitstempel": "2026-10-24T11:53:30.466924+02:00", "anfragen": 13, "zaehlung": {"ok": 10, "cache": 0, "fehler": 3, "uebersprungen": 0}, "treffer": 70, "sichtbar": 0}
 {"zeitstempel": "2026-10-25T12:15:17.418256+02:00", "anfragen": 13, "zaehlung": {"ok": 10, "cache": 0, "fehler": 3, "uebersprungen": 0}, "treffer": 70, "sichtbar": 0}
+{"zeitstempel": "2026-10-26T13:43:02.764750+02:00", "anfragen": 25, "zaehlung": {"ok": 22, "cache": 0, "fehler": 3, "uebersprungen": 0}, "treffer": 175, "sichtbar": 0}

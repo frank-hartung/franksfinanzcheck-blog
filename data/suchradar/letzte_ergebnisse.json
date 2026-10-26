@@ -1,14 +1,28 @@
 {
- "zeitstempel": "2026-10-25T12:15:17.418256+02:00",
+ "zeitstempel": "2026-10-26T13:43:02.764750+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
- "anfragen_geplant": 13,
+ "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 10,
+  "ok": 22,
   "cache": 0,
   "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 70,
+ "treffer_gesamt": 175,
+ "treffer_organisch": 0,
+ "datenqualitaet": {
+  "anfragen_erfolgreich": 22,
+  "anfragen_organisch": 0,
+  "anfragen_rueckfall": 22,
+  "treffer_gesamt": 175,
+  "treffer_organisch": 0,
+  "treffer_rueckfall": 175,
+  "rueckfall_anteil": 1.0,
+  "anbieter": {
+   "wikipedia": 22
+  },
+  "aussagekraft": "keine"
+ },
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
@@ -19,8 +33,8 @@
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "['Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden', 'Weihnachten sparen', 'Weihnachtsgeld anlegen']",
-   "fehler": "Kein Anbieter lieferte Treffer für \"['Visa Mastercard ohne Gebühren', 'Vorfälligkeitsentschädigung umgehen', 'Vorteile', 'VPN sinnvoll', 'VPN Zuhause', 'Wallbox sparen', 'Wechsel', 'Wechselbonus', 'Wechselbonus Handytarif', 'Wechseln', 'Wechselsaison November', 'Weihnachten Budget planen', 'Weihnachten ohne Schulden', 'Weihnachten sparen', 'Weihnachtsgeld anlegen']\": searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://"
+   "anfrage": "Seniorenkonto",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Seniorenkonto': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -41,7 +55,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "searxng",
+   "quelle": "wikipedia",
    "sichtbar": false
   },
   {
@@ -105,6 +119,126 @@
    "sichtbar": false
   },
   {
+   "anfrage": "SF-Klasse retten",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Schritte",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Schufa",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Schufa Eintrag löschen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Schuldenfrei ins neue Jahr",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Schutz",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Secondhand Kleidung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Secondhand Möbel",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Secondhand tauschen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Sinnvolle Versicherungen Angestellte",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Smart Home",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Smart-Home",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
    "anfrage": "Stromanbieter wechseln",
    "eigener_rang": 0,
    "vorher": 0,
@@ -126,130 +260,11 @@
   }
  ],
  "wettbewerb": {
-  "domaenen": [
-   {
-    "domaene": "wikipedia.org",
-    "treffer": 60,
-    "top3": 24,
-    "bester_rang": 1,
-    "durchschnitts_rang": 4.92,
-    "anfragen": [
-     "FranksFinanzcheck",
-     "Stromanbieter wechseln",
-     "DSL Anbieter Vergleich",
-     "Versicherungen kündigen",
-     "Kontogebühren vermeiden",
-     "Kündigungsfristen Strom"
-    ]
-   },
-   {
-    "domaene": "ing.de",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 1,
-    "durchschnitts_rang": 1.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "finanzenfroh.com",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 2,
-    "durchschnitts_rang": 2.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "falk-ratgeber.de",
-    "treffer": 1,
-    "top3": 1,
-    "bester_rang": 3,
-    "durchschnitts_rang": 3.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "geldkiste.blog",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 4,
-    "durchschnitts_rang": 4.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "genialetricks.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 5,
-    "durchschnitts_rang": 5.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "geldfinanzen24.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 6,
-    "durchschnitts_rang": 6.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "finanz-echo.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 7,
-    "durchschnitts_rang": 7.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "cluvon.com",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 8,
-    "durchschnitts_rang": 8.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "wegweisermagazin.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 9,
-    "durchschnitts_rang": 9.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   },
-   {
-    "domaene": "das-wohnen-und-leben-magazin.de",
-    "treffer": 1,
-    "top3": 0,
-    "bester_rang": 10,
-    "durchschnitts_rang": 10.0,
-    "anfragen": [
-     "Fixkosten senken"
-    ]
-   }
-  ],
-  "domaenen_gesamt": 11,
-  "merkmale": {
-   "wissensquelle": 60
-  }
+  "domaenen": [],
+  "domaenen_gesamt": 0,
+  "merkmale": {}
  },
  "quota": {
-  "searxng": 1,
-  "wikipedia": 9
+  "wikipedia": 22
  }
 }
