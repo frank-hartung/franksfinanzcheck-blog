@@ -4153,7 +4153,10 @@ details.toc a {
 .ff-kostenprofil__track small { display: block; }
 .ff-kostenprofil__track span {
   margin-bottom: 18px;
-  color: #687770;
+  /* 26.10.2026: 4.17:1 auf der Papierfläche (#f5f1e8) war zu wenig –
+     axe-core meldete `color-contrast` für 9.28-px-Text. #5A6A63
+     ergibt 5.07:1 dort und 5.71:1 auf Weiß. */
+  color: #5A6A63;
   font-size: .58rem;
   font-weight: 800;
   letter-spacing: .08em;
@@ -4167,7 +4170,7 @@ details.toc a {
 }
 .ff-kostenprofil__track small {
   margin-top: 2px;
-  color: #687770;
+  color: #5A6A63; /* s. o. – 5.07:1 auf der Papierfläche */
   font-size: .58rem;
 }
 .ff-kostenprofil__rule {

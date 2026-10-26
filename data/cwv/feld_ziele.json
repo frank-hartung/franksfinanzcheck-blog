@@ -1,0 +1,11 @@
+{
+  "_zweck": "Ziele der Feldmessung (CrUX über PageSpeed Insights). Bewusst kurz: Felddaten entstehen nur dort, wo echte Besucher messbar sind – eine Liste mit 60 URLs wäre eine Wunschliste, keine Messung.",
+  "_pflege": "Neue Seite? Hier eintragen. Erwartung: hohe Sichtbarkeit oder Produktkern (Rechner, Cockpit, Hub).",
+  "ziele": [
+    { "pfad": "/", "name": "Startseite" },
+    { "pfad": "/werkzeuge/", "name": "Werkzeuge-Hub" },
+    { "pfad": "/cockpit/", "name": "Fixkosten-Cockpit" },
+    { "pfad": "/werkzeuge/fixkosten-scanner/", "name": "Fixkosten-Scanner" },
+    { "pfad": "/werkzeuge/effektivpreis-rechner/", "name": "24-Monats-Effektivpreis" }
+  ]
+}

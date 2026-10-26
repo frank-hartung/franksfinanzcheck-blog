@@ -54,6 +54,25 @@
   font-size: 0.95rem;
 }
 
+/* Links im Textblock sind OHNE Farbe erkennbar (26.10.2026).
+   Anlass: axe-core meldete `link-in-text-block` (WCAG 1.4.1) für die drei
+   Inline-Links in `.ff-entity-punkte` – sie unterschieden sich vom Fließtext
+   nur durch den Farbton, nicht durch eine Linie. Ein Link mitten im Satz ist
+   keine Navigation, sondern eine Fußnote; Unterstreichung ist hier die
+   ehrliche Auszeichnung. Farbe und Unterstrich zusammen: wer Graustufen
+   sieht, findet den Link trotzdem. */
+.ff-entity-punkte a,
+.ff-entity-links a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.ff-entity-punkte a:hover,
+.ff-entity-links a:hover {
+  text-decoration-thickness: 2px;
+}
+
 /* Footer: offizielle Profile als rel=me-Links (PaperMods
    social_icons.html). Die Theme-Basis (.social-icons a/svg) steht in
    main.css; hier nur die Footer-Anordnung. */

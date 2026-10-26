@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.83",
+        "--headless",
+        "--isolated",
+        "--block-service-workers",
+        "--console-level",
+        "warning",
+        "--output-dir",
+        ".cache/mcp",
+        "--allowed-origins",
+        "https://franksfinanzcheck.de;http://127.0.0.1:4173"
+      ]
+    }
+  }
+}

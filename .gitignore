@@ -176,3 +176,11 @@ data/alt_texte/*.tmp
 /worker-live.md
 /worker-live.json
 /sicherheits-jobs.json
+
+# Web-Vitals-Messung (26.10.2026): Feld- und Laborbefunde sind Lauf-Artefakte.
+# Der Wochen-Workflow schreibt sie NUR als GitHub-Artefakt, nie als Commit –
+# ein Lauf, der den Messgegenstand verändert, misst sich selbst.
+# Versioniert bleibt allein die Quelle: data/cwv/feld_ziele.json.
+data/cwv/feld/
+data/cwv/labor/
+.cache/mcp/

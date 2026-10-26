@@ -1,0 +1,183 @@
+# ============================================================
+#  WEB VITALS – WOCHENMESSUNG DER AUSGELIEFERTEN SEITE
+#  ------------------------------------------------------------
+#  WARUM DIESER LAUF EXISTIERT (26.10.2026)
+#
+#  Bis heute maß das Haus Core Web Vitals nur dort, wo niemand
+#  liest: `design-varianten.yml` prüft VARIANTEN-Builds unter
+#  `.cache/design-varianten/<id>/public`, `scripts/cwv_guard.py`
+#  prüft den statischen Baum. Die Seite, die ein Besucher über
+#  Cloudflare lädt, hatte kein Gate und keine Kennzahl.
+#
+#  DIESER LAUF TRENNT BEWEIS UND DIAGNOSE (und das ist der Punkt):
+#
+#   1. FELDDATEN (verbindlich) – `scripts/cwv_feld_wache.py` liest
+#      CrUX über PageSpeed Insights: LCP, INP, CLS echter Besucher.
+#      Die Bewertung kommt von der API (`category`), nicht aus einer
+#      eigenen Schwelle. Ein „schlecht" ist ein Befund und macht den
+#      Lauf rot – das ist der einzige Alarm, der hier zählt.
+#      Keine Felddaten heißt UNGEPRÜFT, niemals grün.
+#
+#   2. LABORWERTE (Diagnose) – `scripts/lighthouse_live.mjs` misst
+#      dieselben URLs mit den Schwellen aus `lighthouse/assertions.json`
+#      und nennt, WELCHE Grenze reißt. Ein Laborbefund macht den Lauf
+#      NICHT rot: Ein Lauf über CDN und Mobilfunk-Drosselung ist eine
+#      Diagnose, kein Freibrief und kein Deploy-Blocker.
+#
+#  Der Lauf schreibt nichts in den Bestand (read-only): Berichte gehen
+#  als Artefakt und in die Lauf-Zusammenfassung. Ein Wochenlauf, der
+#  Commits erzeugt, wäre selbst eine Änderungsquelle am Messgegenstand.
+#
+#  Kadenz: montags 05:47 UTC (≈ 07:47 Berlin) – nach dem GSC-Wochenlauf
+#  (05:17) und vor dem Arbeitstag. Felddaten hinken bis zu 28 Tage
+#  hinterher; wöchentlich zu messen heißt, den Trend zu sehen, nicht
+#  jeden Tag einen anderen Zufallswert.
+# ============================================================
+name: Web-Vitals-Feldmessung (wöchentlich)
+
+on:
+  schedule:
+    - cron: "47 5 * * 1"     # montags 05:47 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-vitals-woche
+  cancel-in-progress: false
+
+jobs:
+  feld:
+    name: Felddaten (CrUX) + Labor (Lighthouse)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      # Optional: ohne Schlüssel antwortet PSI gedrosselt, der Lauf bleibt
+      # möglich. Der Schlüssel wird nur als Umgebungsvariable gereicht und
+      # vom Skript nie ausgegeben.
+      PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      # Die Wache beweist sich zuerst selbst: Ein Messwerkzeug, das nicht
+      # laufen kann, darf kein Urteil abgeben (Repo-Regel: ein Gate, das
+      # nicht läuft, ist keins).
+      - name: Selbsttests der Messungen (ohne Netz)
+        run: |
+          python3 scripts/cwv_feld_wache.py --selftest
+          python3 -m unittest scripts.tests.test_cwv_feld_wache
+          node --test scripts/tests/lighthouse_live.test.mjs
+
+      # ------------- 1. Felddaten: verbindlich -------------
+      - name: Felddaten messen (CrUX über PageSpeed Insights)
+        id: feld
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          python3 scripts/cwv_feld_wache.py --schreiben > feld-bericht.md 2> feld-fehler.txt
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          cat feld-bericht.md
+          cat feld-fehler.txt || true
+
+      - name: Feldbericht in die Lauf-Zusammenfassung
+        run: |
+          {
+            echo "## 📶 Felddaten (verbindlich)"
+            echo
+            cat feld-bericht.md 2>/dev/null || echo "_Kein Bericht erzeugt._"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # ------------- 2. Labor: Diagnose -------------
+      - name: Node einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci --ignore-scripts
+
+      - name: Chromium vorbereiten (gepinnt, verifiziert)
+        run: npm run browser:setup
+
+      - name: Laborwerte messen (Lighthouse, Schwellen aus dem Regelwerk)
+        id: labor
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          node scripts/lighthouse_live.mjs --laeufe 2 --schreiben > labor-bericht.md 2>&1
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          cat labor-bericht.md
+
+      - name: Laborbericht in die Lauf-Zusammenfassung
+        run: |
+          {
+            echo
+            echo "## 🔬 Laborwerte (Diagnose, nicht verbindlich)"
+            echo
+            tail -n 40 labor-bericht.md 2>/dev/null || echo "_Kein Bericht erzeugt._"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Berichte als Artefakt sichern
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: web-vitals-woche
+          path: |
+            data/cwv/feld/befund.json
+            data/cwv/feld/befund.md
+            data/cwv/feld/verlauf.jsonl
+            data/cwv/labor/befund.json
+            data/cwv/labor/befund.md
+            feld-bericht.md
+            labor-bericht.md
+          retention-days: 30
+          if-no-files-found: ignore
+
+      # Die Bewertung steht am Ende: Ein roter Lauf heißt „echte Besucher
+      # erleben schlechte Werte" (Exit 1) oder „die Messung selbst steht
+      # infrage" (Exit 2 – ungeprüft ist nicht sauber). Laborbefunde
+      # erscheinen als Warnung, nie als Fehler.
+      - name: Urteil (Felddaten entscheiden, Labor warnt)
+        run: |
+          set -uo pipefail
+          FELD="${{ steps.feld.outputs.exit }}"
+          LABOR="${{ steps.labor.outputs.exit }}"
+
+          # Labor: Diagnose. Jede Abweichung wird als Warnung sichtbar, macht
+          # den Lauf aber nicht rot – ein Lauf über CDN ist kein Freibrief.
+          if [ -z "$LABOR" ] || [ "$LABOR" = "2" ]; then
+            echo "::warning::Laborlauf ohne verwertbares Ergebnis (Exit '${LABOR:-—}') – siehe labor-bericht.md"
+          elif [ "$LABOR" = "1" ]; then
+            echo "::warning::Laborlauf meldete einen Befund mit --streng – hier nicht erwartet, Bericht prüfen."
+          elif grep -q "Gerissene Schwellen" data/cwv/labor/befund.md 2>/dev/null; then
+            echo "::warning::Laborwerte reißen Schwellen – Diagnose, kein Blocker (siehe Artefakt)."
+          fi
+
+          # Felddaten: verbindlich UND fail-closed. Ein leerer Exit-Code heißt
+          # nicht „alles gut", sondern „die Messung hat kein Urteil abgegeben" –
+          # genau die Scheingrün-Klasse, wegen der dieses Repo C2 hat.
+          case "$FELD" in
+            0)
+              echo "Felddaten ohne Befund."
+              ;;
+            1)
+              echo "::error::Felddaten schlecht (CrUX) – echte Besucher erleben Werte außerhalb der Google-Schwelle."
+              exit 1
+              ;;
+            2)
+              echo "::error::Feldmessung nicht durchführbar – ungeprüft ist nicht sauber (Exit 2)."
+              exit 1
+              ;;
+            *)
+              echo "::error::Feldmessung hat kein Urteil abgegeben (Exit '${FELD:-—}') – fail-closed, siehe feld-fehler.txt."
+              exit 1
+              ;;
+          esac

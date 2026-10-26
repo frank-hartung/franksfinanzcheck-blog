@@ -205,6 +205,13 @@ node e2e/variant-metrics.mjs --variante <id>         # Browser-Messung + Lightho
 python3 scripts/design_reach_briefing.py             # Agent-Reach-Signale → Hypothesen
 python3 scripts/design_handoff.py                     # Figma-/Relume-Artefakte erzeugen
 python3 scripts/design_handoff.py --check             # SSOT-/Exportdrift blockieren
+
+# Barrierefreiheit, Web Vitals, Browser-Diagnose (26.10.2026)
+# Details: docs/ANLEITUNG-A11Y-AXE.md · docs/ANLEITUNG-WEB-VITALS.md · docs/ANLEITUNG-PLAYWRIGHT-MCP.md
+npm run test:a11y:browser                            # axe-core im gerenderten DOM (WCAG 2.1/2.2 AA, Desktop + Mobile)
+python3 scripts/cwv_feld_wache.py                    # Felddaten (CrUX/PSI) – verbindlich, Exit 0/1/2
+node scripts/lighthouse_live.mjs                     # Laborwerte der AUSGELIEFERTEN Seite (Diagnose)
+python3 scripts/mcp_wache.py                         # .mcp.json: Pinning, Server-Allowlist, Ziele, Ablage
 ```
 
 E2E-Architektur (Details in `e2e/`-Datei-Köpfen): zero-dependency

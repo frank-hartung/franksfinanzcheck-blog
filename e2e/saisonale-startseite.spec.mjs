@@ -200,8 +200,14 @@ test.describe('Saisonale Startseite', () => {
       expect(await karte.getAttribute('data-klick-placement')).toBe('start-saison');
       expect(await karte.getAttribute('data-klick-saison')).toBe(saison);
       expect(await karte.getAttribute('data-klick-slug')).toMatch(new RegExp(`^saison-${saison}-`));
-      expect(await karte.getAttribute('aria-labelledby'), `Karte ${i + 1}: aria-labelledby fehlt`)
-        .toBeTruthy();
+      // 26.10.2026: Vorher stand hier `aria-labelledby` – und genau das war der
+      // Fehler. Ein Name-Override, der nicht JEDEN sichtbaren Text der Karte
+      // enthält, verstößt gegen WCAG 2.5.3 (Label in Name); axe-core meldete
+      // ihn auf der Startseite für alle drei Karten. Ohne Override kommt der
+      // Accessible Name aus dem Inhalt – und enthält damit zwangsläufig alles,
+      // was sichtbar ist. Geprüft wird jetzt das Ergebnis, nicht das Attribut.
+      await expect(karte, `Karte ${i + 1}: Accessible Name muss den Titel enthalten`)
+        .toHaveAccessibleName(new RegExp(titel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
     }
 
     // Keine Dubletten im Block
