@@ -76,8 +76,18 @@ jobs:
           sudo apt-get install -y -qq hunspell hunspell-de-de
           python3 scripts/reserve_recert.py --fix | tee /tmp/reserve-recert.log
           python3 scripts/reserve_artifacts.py --check
+          # Die Nachmessung darf Spuren in Zustand UND Beweis-Ledger hinterlassen
+          # (reserve_quarantine.audit() schreibt nach data/audit). Beides wird
+          # vollständig zurückgesetzt: C27 verbietet jedem Testlauf, Beweise zu
+          # schreiben – auch einem, der selbst ein Beweis ist.
           git checkout -- data/reserve-readiness.json data/reserve-history.jsonl \
-            data/reserve-quarantine.json data/reserve-custody.json 2>/dev/null || true
+            data/reserve-quarantine.json data/reserve-custody.json data/audit 2>/dev/null || true
+          git clean -qfd data/audit 2>/dev/null || true
+          if [ -n "$(git status --porcelain -- data/audit data/reserve-readiness.json)" ]; then
+            echo "🛑 Nachmessung hat den Repo-Stand verändert – Nachweis nicht isoliert."
+            git status --porcelain -- data/audit data/reserve-readiness.json
+            exit 1
+          fi
       # BLUSTRADIUS (Dauerheilung #676, 09.10.2026): Dieser Job ist der
       # EINZIGE Ort, an dem die volle Unit-Test-Suite läuft. Am 09.10. war
       # der Reserve-Snapshot oben rot – zwei alte SHA-256-Zertifikate, ein
