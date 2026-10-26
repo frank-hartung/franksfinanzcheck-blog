@@ -52,6 +52,41 @@ class Sandbox(unittest.TestCase):
         return data
 
 
+class WithdrawalTests(Sandbox):
+    def test_stale_claim_withdrawn_without_new_proof_and_recert_can_find_it(self):
+        row = self.draft()
+        row.update(score=0.99, parts={"spelling": 1.0}, flesch=75.0,
+                   measured_at="2026-10-08T12:00:00Z")
+        self.write_cert([row])
+        old = ra.read_certificate(self.cert)
+        index = self.posts / "kandidat" / "index.md"
+        index.write_bytes(index.read_bytes() + b"Geaendert.\n")
+        self.assertEqual(["kandidat"], ra.withdraw_invalid_ready(self.cert, self.posts))
+        new = ra.read_certificate(self.cert)
+        self.assertEqual(0, new["ready"])
+        self.assertEqual(old["generated_at"], new["generated_at"])
+        self.assertEqual(old["candidates"][0]["sha256"], new["candidates"][0]["sha256"])
+        self.assertEqual(old["candidates"][0]["measured_at"], new["candidates"][0]["measured_at"])
+        self.assertFalse(new["candidates"][0]["ready"])
+        self.assertNotIn("score", new["candidates"][0])
+        self.assertNotIn("flesch", new["candidates"][0])
+        self.assertIn("Nachmessung", new["candidates"][0]["reason"])
+        self.assertEqual(["geaendert"], [r["art"] for r in
+                         recert.drift(new, recert.draft_paths(self.root),
+                                      posts_dir=self.posts)])
+        saved = self.cert.read_bytes()
+        self.assertEqual([], ra.withdraw_invalid_ready(self.cert, self.posts))
+        self.assertEqual(saved, self.cert.read_bytes(), "no fake fresh proof on repeat")
+
+    def test_corrupt_certificate_is_not_overwritten(self):
+        self.cert.parent.mkdir(parents=True)
+        raw = '{"candidates":[],"candidates":[]}'
+        self.cert.write_text(raw)
+        with self.assertRaises(ValueError):
+            ra.withdraw_invalid_ready(self.cert, self.posts)
+        self.assertEqual(raw, self.cert.read_text())
+
+
 class StrictJsonTests(Sandbox):
     def test_duplicates_and_invalid_json_are_rejected_at_every_depth(self):
         for text in ('{"generated_at":"a","generated_at":"b"}',

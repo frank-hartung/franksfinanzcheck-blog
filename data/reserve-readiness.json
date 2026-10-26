@@ -1,42 +1,22 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 2,
   "pool_size": 5,
   "generated_at": "2026-10-26T09:43:00Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
-      "flesch": 66.7,
       "measured_at": "2026-10-26T09:40:38Z",
-      "score": 0.984,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
-      "ready": true,
+      "ready": false,
       "sha256": "3a6ccf3d702f7abd37b0a6909cd46aa67fef811010eea3c31482d8f1b5d2f050",
-      "flesch": 70.4,
       "measured_at": "2026-10-26T09:41:13Z",
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",

@@ -276,7 +276,7 @@ jobs:
       # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
       - uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
       - run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq hunspell hunspell-de-de

@@ -49,7 +49,7 @@ jobs:
       - name: Hugo Extended installieren
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
       - name: Echter Hugo-Produktionsbuild (kein Mock)
         if: ${{ !cancelled() }}
         uses: ./.github/actions/hugo-build

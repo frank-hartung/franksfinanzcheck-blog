@@ -91,7 +91,7 @@ jobs:
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
 
       - name: "Website bauen (identisch zur Produktion, minifiziert)"
         uses: ./.github/actions/hugo-build

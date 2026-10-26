@@ -35,7 +35,7 @@ jobs:
       - name: Hugo installieren
         uses: ./.github/actions/install-hugo
         with:
-          version: "0.164.0"
+          version: "0.168.0"
       - name: Statisches SVG und Datentabelle bauen
         uses: ./.github/actions/hugo-build
         with:
