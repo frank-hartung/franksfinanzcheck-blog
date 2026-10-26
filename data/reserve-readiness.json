@@ -1,22 +1,42 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 4,
   "pool_size": 5,
-  "generated_at": "2026-10-26T09:43:00Z",
+  "generated_at": "2026-10-26T19:57:33Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "ready": false,
-      "sha256": "b93f0a0f6e1599b6ad39ad7f79f4726e698091f6b89cd614ccc1a66723878798",
-      "measured_at": "2026-10-26T09:40:38Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
+      "flesch": 66.7,
+      "measured_at": "2026-10-26T19:56:32Z",
+      "score": 0.984,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
-      "ready": false,
-      "sha256": "3a6ccf3d702f7abd37b0a6909cd46aa67fef811010eea3c31482d8f1b5d2f050",
-      "measured_at": "2026-10-26T09:41:13Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "c6bdfb9fbb2879d7a27322e8c1acd96332d09640aef00105b1c10fdb6a90e946",
+      "flesch": 70.4,
+      "measured_at": "2026-10-26T19:57:03Z",
+      "score": 0.97,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
@@ -55,9 +75,9 @@
     {
       "slug": "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
       "ready": false,
-      "sha256": "b52f438a07ed8053c5779ad8350cd02c5897b7ba6d44d14f95e8afa4acdb57a2",
-      "flesch": 66.5,
-      "measured_at": "2026-10-26T09:43:00Z",
+      "sha256": "d38391ac50245c6bdaa5ee3a303bcd47e365e787299b8c4a7dabbbbcfdcc26bd",
+      "flesch": 66.2,
+      "measured_at": "2026-10-26T19:57:33Z",
       "reason": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
       "details": [
         "🛑 2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -77,8 +97,17 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "40297687637",
+    "kind": "partial",
+    "run_id": "40390880852",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-10-26T19:57:33Z",
+    "renewed": [
+      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }

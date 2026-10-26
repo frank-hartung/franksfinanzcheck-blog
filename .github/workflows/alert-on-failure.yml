@@ -59,25 +59,24 @@
 #    Auto-Close greifen auf beiden Formen) und werden bei jedem Lauf
 #    still auf die neue Form migriert – kein Issue fällt durchs Raster.
 #
-#  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026; Frischhaltung 26.10.2026):
+#  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026 · Stufe 2: WF-E813
+#  #815, 26.10.2026):
 #    Eine offene Meldung blieb bis zum ersten grünen Lauf wörtlich so,
 #    wie der erste rote Lauf sie geschrieben hatte. #761 riet deshalb
 #    weiter zu GROQ/GEMINI-Schlüsseln, obwohl jeder neue Lauf längst
 #    „Einrichtung unvollständig“ erkannte. Seitdem trägt jeder Body die
-#    Klasse seines Rats (<!-- alert-runbook: … -->). Drei Fälle:
-#      1. KLASSENWECHSEL (oder Bestands-Body ohne Klassen-Marker): Der
-#         nächste rote Lauf schreibt die Meldung mit dem neuen Rat, Lauf
-#         und Schritten neu – gleiche Nummer, gleicher Titel, ohne
-#         Benachrichtigung (Body-Edit).
-#      2. GLEICHER RAT, ABER NEUER LAUF (stille Frischhaltung, 26.10.):
-#         Der Rat stimmt noch, aber Lauf-Link, Zeit, Commit und
-#         Job-Liste werden auf den jüngsten Lauf gezogen. #761 hatte
-#         zehn Tage lang auf einen alten Lauf verwiesen, obwohl der
-#         Body behauptete, „mit dem jüngsten Lauf nachgeführt“ zu sein.
-#      3. UNBEKANNTE JOB-LAGE oder der Body verweist bereits auf genau
-#         diesen Lauf (Redelivery/Neuversuch): keine Umschrift.
-#    Jede Umschrift ist fail-open: Lehnt die API ab, bleibt die Meldung
-#    unverändert offen und es entsteht kein Duplikat.
+#    Klasse seines Rats (<!-- alert-runbook: … -->). Ändert sie sich,
+#    schreibt der nächste rote Lauf die Meldung mit Rat, Lauf und
+#    Schritten neu: gleiche Nummer, gleicher Titel, ohne Benachrichtigung.
+#    STUFE 2 (26.10.2026, Lagebild-Verfall): Auch bei GLEICHER Klasse
+#    wird der Lauf-Nachweis (Zeit, Run-Link, rote Schritte, Job-Marker)
+#    mit dem JÜNGSTEN roten Lauf erneuert. #815 zeigte tagelang den Lauf
+#    vom 23.10., während der Lauf vom 26.10. längst wieder rot war – der
+#    Fußsatz „Mit dem jüngsten Lauf nachgeführt“ war zur Unwahrheit
+#    geworden, und der Job-Marker des Auflösungsbeweises alterte mit.
+#    Nur ein im Body aufgezeichneter Lauf, der NICHT älter ist als der
+#    aktuelle, verhindert die Umschrift (Reihenfolge-/Doppelt-Schutz).
+#    Unbekannte Job-Lage → keine Umschrift (nichts belegt den Wechsel).
 #
 #  AUTO-CLOSE NUR MIT JOB-BEWEIS (WF-E813 / #809, 19.10.2026):
 #    „Behoben“ schrieb bisher jeder grüne Lauf des Workflows auf main –
@@ -141,6 +140,8 @@ on:
       - "Produktions-Wache (Content-Engine)"
       - "Premium-Governance"
       - "Sicherheits-Wache"   # AUDIT 15.10.2026 (F-01..F-10): Header, Inhalts-HTML, Worker-Betrieb (Budget/Bot-Schutz/Exporte) und die n8n-Kette – ein still roter Lauf wäre der Rückfall in genau die Befunde, die das Audit belegt hat
+      - "Cloudflare-Worker deployen"   # WF-E813 (26.10.2026): Der Deploy ist der Heilungsschritt der Sicherheits-Wache (Runbook D2) und stand dennoch seit 25.10. still rot – fail-closed wegen fehlendem Produktions-Zugang, ohne eine einzige Meldung
+      - "CodeQL-Sicherheitswache"      # 26.10.2026: Das Security-Gate fand in einem Merge echte Fundstellen und blieb trotzdem stumm (#908 heilte sie binnen einer Stunde – durch Folgearbeit, nicht durch ein Signal). Ein still rotes Security-Gate ist die Rückkehr der stillen Lücke
       - "Lesehilfen-Gate (Vorlesen + Kurzfassung)"
       - "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)"
       - "Slot-Wache (Content-Slots nachziehen)"   # #601: holt verpasste Cron-Slots nach – kann sie das nicht, muss es laut werden
@@ -411,6 +412,24 @@ jobs:
               failedStepNames.some(s => String(s).includes('Worker-Zustand'));
             const liveNachweisFailed = istSicherheitsWache &&
               failedStepNames.some(s => String(s).includes('Live-Nachweis abschließen'));
+            // 26.10.2026 (WF-E813-Folgebefund): Der Produktions-Deploy der
+            // Worker („Cloudflare-Worker deployen“) bricht fail-closed ab,
+            // wenn der Zugang im Environment `cloudflare-produktion` fehlt.
+            // Diese Absicht ist richtig – aber seit 25.10. war genau dieser
+            // Zustand still rot, ohne eine Meldung. Drei Rottöne, drei Ratschläge:
+            const isWorkerDeploy = wfName === 'Cloudflare-Worker deployen';
+            const workerZugangFailed = isWorkerDeploy &&
+              failedStepNames.some(s => String(s).includes('Produktive Ressource auflösen'));
+            const workerTestsFailed = isWorkerDeploy &&
+              failedStepNames.some(s => String(s).includes('Worker-Tests'));
+            // 26.10.2026: CodeQL-Sicherheitswache. Das Gate zählt offene
+            // Security-Fundstellen im SARIF (Regel, Datei, Zeile stehen in
+            // den Annotationen). Ein ruhendes Gate hätte Fundstellen still
+            // durchgelassen – der Befund gehört in eine Meldung, nicht in
+            // den Actions-Verlauf.
+            const isCodeql = wfName === 'CodeQL-Sicherheitswache';
+            const codeqlGateFailed = isCodeql &&
+              failedStepNames.some(s => String(s).includes('Sicherheits-Gate'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -456,7 +475,7 @@ jobs:
             //  Sicherheits-Wache) behalten Vorrang.
             // ================================================================
             const ersterRoterSchritt = String(failedStepNames[0] || '');
-            const selbsttestFailed = /Selbsttest|Selftest/i.test(ersterRoterSchritt);
+            const selbsttestFailed = /Selbsttest|Selftest/i.test(ersterRoterSchritt) || workerTestsFailed;
             // ================================================================
             //  KLASSE DES RATS (WF-9E5A / #761, 15.10.2026)
             //  --------------------------------------------------------------
@@ -483,6 +502,15 @@ jobs:
               : workerGateFailed ? 'sicherheit-worker'
               : liveNachweisFailed ? 'sicherheit-nachweis'
               : istSicherheitsWache ? 'sicherheit-wache'
+              // 26.10.2026: Eigene Klassen für den Worker-Deploy (Zugang vor
+              // Deploy) und das CodeQL-Gate (Fundstelle vor Störung). Rote
+              // Worker-Tests sind eine Code-Regression und teilen bewusst die
+              // bestehende Klasse „selbsttest“ (Erweiterung der Erkennung
+              // weiter oben), damit jeder Klassenname genau einen Rat hat.
+              : workerZugangFailed ? 'worker-deploy-zugang'
+              : (isWorkerDeploy && !workerTestsFailed) ? 'worker-deploy'
+              : codeqlGateFailed ? 'codeql-fund'
+              : isCodeql ? 'codeql'
               // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
               : selbsttestFailed ? 'selbsttest'
               : 'allgemein';
@@ -534,11 +562,6 @@ jobs:
               (i.title && i.title.indexOf(altTitel) !== -1)
             ));
             let nachzufuehren = null;
-            // Stille Frischhaltung (WF-9E5A / #761, 26.10.2026): Gleicher Rat,
-            // aber der Body zeigt noch auf einen älteren Lauf. Die Meldung
-            // wird dann mit frischen Laufdaten neu geschrieben, ohne den Rat
-            // anzutasten – kein Duplikat, kein Kommentar, keine Benachrichtigung.
-            let aufzufrischen = null;
             if (open.length > 0) {
               const treffer = open[0];
               console.log('Offenes Issue existiert bereits (#' + treffer.number + ') – kein Duplikat.');
@@ -556,39 +579,36 @@ jobs:
               }
               // ==============================================================
               //  LAGEBILD NACHFÜHREN (WF-9E5A / #761, 15.10.2026)
-              //  Hat sich die Klasse geändert (oder fehlt der Klassen-Marker
-              //  noch: Bestand vor dieser Regel), wird die Meldung unten mit
-              //  Rat, Lauf und Schritten DIESES Laufs neu geschrieben. Nummer,
-              //  Titel und Identität bleiben; eine Body-Änderung benachrichtigt
-              //  niemanden.
-              //  Nur bei bekannter Job-Lage: Ohne Schritte fiele jede Klasse auf
-              //  den allgemeinen Rat zurück und überschriebe einen präziseren.
+              //  Steht der Rat dieses Laufs schon drin, bleibt der RAT
+              //  unberührt – keine Klasse-Neuschreiberei bei jedem Lauf.
+              //  Seit 26.10.2026 (WF-E813 #815, Lagebild-Verfall) gilt aber:
+              //  Der LAUF-NACHWEIS wird trotzdem mit dem jüngsten roten Lauf
+              //  erneuert (Zeit, Run-Link, Schritte, alert-jobs-Marker) –
+              //  #815 zeigte tagelang den Lauf vom 23.10., während der Lauf
+              //  vom 26.10. längst wieder rot war, und der Fußsatz „Mit dem
+              //  jüngsten Lauf nachgeführt“ war zur Unwahrheit geworden.
+              //  Reihen-/Doppelt-Schutz: Nur wenn der im Body aufgezeichnete
+              //  Lauf NICHT älter als der aktuelle ist, bleibt alles stehen.
+              //  Ohne Job-Lage wird nie umgeschrieben (nichts belegt einen
+              //  Wechsel – kein Überschreiben eines präziseren Rats).
               // ==============================================================
               if (!jobsKnown) {
                 console.log('Job-Lage unbekannt – der Rat in #' + treffer.number + ' bleibt unverändert.');
                 return;
               }
               if (treffer.body.indexOf(runbookMarker) !== -1) {
-                // ============================================================
-                //  STILLE FRISCHHALTUNG (WF-9E5A / #761, 26.10.2026)
-                //  Der Rat stimmt noch – aber eine offene Meldung, deren
-                //  Lauf-Link zehn Tage alt ist, widerspricht ihrem eigenen
-                //  Satz „Rat und Lauf oben sind aktuell“. Zeigt der Body
-                //  bereits auf GENAU diesen Lauf (Webhook-Redelivery,
-                //  Neuversuch desselben Runs), bleibt er unangetastet. Sonst
-                //  wird er mit derselben Klasse, aber frischen Laufdaten
-                //  (Run-Link, Zeit, Commit, fehlgeschlagene Jobs) neu
-                //  geschrieben. Der alert-jobs-Marker bleibt so ebenfalls
-                //  aktuell – der Auto-Close prüft danach den jüngsten Befund.
-                // ============================================================
-                if (treffer.body.indexOf(runUrl) !== -1) {
-                  console.log('Rat und Lauf in #' + treffer.number + ' sind bereits aktuell (Lauf ' + run.id + ') – keine Umschrift.');
+                const aufgezeichnet = /(?:actions\/)?runs\/(\d+)/.exec(treffer.body);
+                const aufgezeichnetId = aufgezeichnet ? Number(aufgezeichnet[1]) : 0;
+                if (aufgezeichnetId >= Number(run.id || 0)) {
+                  console.log('Meldung #' + treffer.number + ' trägt bereits den Rat „' + runbookKlasse +
+                    '“ und keinen älteren Lauf – keine Umschrift.');
                   return;
                 }
-                aufzufrischen = treffer;
-              } else {
-                nachzufuehren = treffer;
+                console.log('Gleicher Rat „' + runbookKlasse + '“, aber Lauf ' + run.id +
+                  ' ist jünger als Lauf ' + (aufgezeichnetId || '?') + ' – Lagebild in #' +
+                  treffer.number + ' wird erneuert.');
               }
+              nachzufuehren = treffer;
             }
 
             const lines = [
@@ -614,12 +634,8 @@ jobs:
               '- **Zeit:** ' + created + ' · **Event:** `' + event + '`' + (run.run_attempt > 1 ? ' · **Versuch:** ' + run.run_attempt : ''),
               '- **Run:** [Details ansehen](' + runUrl + ')'
             ];
-            // Sowohl der Klassenwechsel (nachzufuehren) als auch die stille
-            // Frischhaltung (aufzufrischen) schreiben eine bestehende Meldung
-            // neu – das „Offen seit“-Datum bleibt das der Erstanlage.
-            const bestehendeMeldung = nachzufuehren || aufzufrischen;
-            if (bestehendeMeldung) {
-              const seit = Date.parse(bestehendeMeldung.created_at || '');
+            if (nachzufuehren) {
+              const seit = Date.parse(nachzufuehren.created_at || '');
               lines.push('- **Offen seit:** ' +
                 (Number.isNaN(seit) ? 'unbekannt' : new Date(seit).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })) +
                 ' · *Mit dem jüngsten Lauf nachgeführt – Rat und Lauf oben sind aktuell.*');
@@ -714,12 +730,37 @@ jobs:
                         '5. **Bei WACHE-FEHLER:** Die Prüfung selbst ist defekt (z. B. leerer Exit-Code oder fehlender Bericht). Workflow und Skript prüfen; keine Cloudflare-Regel auf Verdacht ändern. Regressionstest: `python3 -m unittest scripts.tests.test_blog_header_gate scripts.tests.test_sicherheits_nachweis` (einschließlich echter Shell-Ausführung mit Bash `-e`).',
                         '6. **Abschluss nur mit Live-Nachweis:** Ein grüner Offline-/Push-Lauf schließt diesen Vorgang nicht. Nach der Korrektur die Sicherheits-Wache auf `main` mit Live-Messung starten.'
                       ]
-                    : runbookKlasse === 'sicherheit-wache'
-                      ? [
-                          '1. **Einordnung:** Die Sicherheits-Wache prüft das Repository gegen die Befunde F-01 bis F-10 (`SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`) sowie die gepinnten Abhängigkeiten (`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt E). Rot heißt: eine Wache hat angeschlagen – kein Schlüssel- und kein Kapazitätsthema.',
-                          '2. Öffne das Log des oben rot markierten Schritts. Jede Wache nennt Fundstelle und Regel, nicht nur „rot".',
-                          '3. Alle Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Edge-Freigabe, Worker-Betrieb, Deploy-Vorbereitung, n8n-Kette und Abhängigkeits-Pins – jeweils mit Selbsttest, offline; Online-Advisory-Audit: `npm run deps:audit`).'
-                        ]
+                      : runbookKlasse === 'sicherheit-wache'
+                        ? [
+                            '1. **Einordnung:** Die Sicherheits-Wache prüft das Repository gegen die Befunde F-01 bis F-10 (`SICHERHEITSAUDIT-PREMIUM-2026-10-14.md`) sowie die gepinnten Abhängigkeiten (`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt E). Rot heißt: eine Wache hat angeschlagen – kein Schlüssel- und kein Kapazitätsthema.',
+                            '2. Öffne das Log des oben rot markierten Schritts. Jede Wache nennt Fundstelle und Regel, nicht nur „rot".',
+                            '3. Alle Wachen lokal nachfahren: `npm run test:sicherheit` (Inhalts-HTML, Header-Vorlage, Edge-Freigabe, Worker-Betrieb, Deploy-Vorbereitung, n8n-Kette und Abhängigkeits-Pins – jeweils mit Selbsttest, offline; Online-Advisory-Audit: `npm run deps:audit`).'
+                          ]
+                      : runbookKlasse === 'worker-deploy-zugang'
+                        ? [
+                            '1. **Fail-closed – gewollt, kein Betriebsausfall.** Der Deploy bricht absichtlich ab, bevor Wrangler läuft, weil der produktive Zugang im Environment `cloudflare-produktion` fehlt, unlesbar oder zu schwach ist (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`). Ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall von 24.10.2026 (Run 40100342025).',
+                            '2. Zugänge im Environment `cloudflare-produktion` (Settings → Environments → Environment secrets) hinterlegen oder erneuern; die Annotation des roten Schritts nennt, was genau fehlt. Keine Ressourcen-IDs manuell kopieren: Der Resolver liest die bestehenden produktiven Bindungen (`ABO`/KV aus `ff-newsletter`, `DB`/D1 aus `klick-zaehler`) selbst und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
+                            '3. Danach erneut ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“ (`main`) oder freigeben, falls der Lauf auf eine Environment-Freigabe wartet. Der erste grüne Lauf schließt diese Meldung automatisch; ein nur geplanter Lauf mit übersprungenem Deploy-Job tut es ausdrücklich nicht.',
+                            '4. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4/D2. Selbsttest: `python3 scripts/worker_ressourcen.py --selftest`.'
+                          ]
+                      : runbookKlasse === 'worker-deploy'
+                        ? [
+                            '1. **Zuerst den oben rot markierten Schritt lesen.** „Worker-Tests“ = Code-Regression: lokal `node --test` im Worker-Ordner nachfahren und heilen – kein Neustart, kein Schlüssel. „Deploy“ = Wrangler-/Cloudflare-Fehler (Konto, Rechte, Route); die Log-Meldung ist konkret.',
+                            '2. **Ein grüner Plan ist kein Deploy:** Der Planungsjob prüft nur Quellstruktur und Auswahl. Entschieden ist der Deploy erst mit dem Live-Nachweis – `/healthz` muss den `bau`-Stempel aus `wrangler.toml` des gebauten Stands liefern.',
+                            '3. Bei STOERUNG oder API-Fehlern nichts am produktiven Worker auf Verdacht ändern (kein Secret löschen, keine Route abschalten). Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, D2. Nach der Korrektur Deploy erneut starten; der grüne Lauf schließt diese Meldung.'
+                          ]
+                      : runbookKlasse === 'codeql-fund'
+                        ? [
+                            '1. **Echte Security-Fundstelle im Code – kein Betriebsausfall.** Die Gate-Annotation nennt Regel, Datei und Zeile (Beispiel aus dem Erstfund 26.10.2026: `js/incomplete-sanitization → e2e/a11y-axe.spec.mjs`, `js/regex/missing-regexp-anchor` mit Anker in der Alternation). Heildoktrin und Befundbeispiele: `CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md`.',
+                            '2. **Im Code heilen, nicht wegdrücken:** Den gemeldeten Ausdruck so schreiben, dass die Regel-Klasse strukturell entfällt – vollständig verankerte Einzelmuster statt Anker-in-Alternation, und Muster ohne Metazeichen direkt aus dem Inhalt bauen, statt nachträglich mit Teil-Escapes zu arbeiten. Ein Dismiss braucht eine datierte, begründete Ausnahme; „geht auch anders nicht“ ist keine.',
+                            '3. Nach dem Heilungs-Push schließt der nächste grüne Lauf auf `main` diese Meldung automatisch. Lokal nachfahren über die `::error`-Annotationen des Laufs (der SARIF-Diagnose-Schritt listet jede Fundstelle mit Regel und Ort).'
+                          ]
+                      : runbookKlasse === 'codeql'
+                        ? [
+                            '1. **Analyse- oder Upload-Störung, kein Code-Befund.** Rot ist ein CodeQL-Schritt vor oder nach dem Gate (Initialisierung, Analyse, SARIF-Upload). Das Security-Gate selbst hat nichts beanstandet.',
+                            '2. Log des roten Schritts lesen – häufig: GitHub-Ausfall (https://www.githubstatus.com), SARIF-Größenlimit oder Runner-Störung. Danach den Lauf erneut starten.',
+                            '3. Die Offline-Wachen bleiben davon unabhängig die Quelle der Wahrheit für F-01–F-10: `npm run test:sicherheit`.'
+                          ]
                       : runbookKlasse === 'selbsttest'
                         ? [
                             '1. **Einordnung: Code-Regression, kein Betriebsausfall.** Rot ist ein Selbsttest – die Wache hat ihr eigenes Prüfwerkzeug geprüft und für defekt befunden. Selbsttests laufen offline und mit Attrappen-Schlüsseln (KI-Probe, #138): Ein abgelaufener GROQ-/GEMINI-Schlüssel oder ein GitHub-Ausfall löst diesen Schritt nicht aus, und ein Neustart liefert dasselbe Rot.',
@@ -747,25 +788,19 @@ jobs:
             );
             const body = lines.join('\n');
 
-            if (bestehendeMeldung) {
-              const istFrischhaltung = !nachzufuehren;
+            if (nachzufuehren) {
               try {
                 await github.rest.issues.update({
                   owner: context.repo.owner, repo: context.repo.repo,
-                  issue_number: bestehendeMeldung.number,
+                  issue_number: nachzufuehren.number,
                   title: ident.titel,
                   body: body
                 });
-                console.log('↻ Meldung #' + bestehendeMeldung.number
-                  + (istFrischhaltung
-                    ? ' still frisch gehalten: Rat „' + runbookKlasse + '“ bleibt, Laufdaten aktualisiert aus Lauf ' + run.id + '.'
-                    : ' nachgeführt: Rat „' + runbookKlasse + '“ aus Lauf ' + run.id + '.'));
+                console.log('↻ Meldung #' + nachzufuehren.number + ' nachgeführt: Rat „' + runbookKlasse + '“ aus Lauf ' + run.id + '.');
               } catch (e) {
                 // Fail-open: Die Meldung bleibt offen und auffindbar, nur ihr Rat
                 // bleibt alt. Ein Absturz hier stellte das Alerting selbst rot.
-                console.log((istFrischhaltung ? 'Frischhaltung' : 'Nachführen') + ' von #'
-                  + bestehendeMeldung.number + ' fehlgeschlagen (' + e.message
-                  + ') – Meldung bleibt unverändert offen.');
+                console.log('Nachführen von #' + nachzufuehren.number + ' fehlgeschlagen (' + e.message + ') – Meldung bleibt unverändert offen.');
               }
               return;
             }

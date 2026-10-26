@@ -273,19 +273,16 @@ await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true },
   true, ['Häufigste Ursachen']);
 
-// 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat.
-//     Trägt die Meldung bereits den Rat dieses Laufs, zeigt aber noch auf
-//     einen älteren Lauf, wird sie still frisch gehalten (26.10.2026): gleiche
-//     Nummer, gleicher Rat, aber aktuelle Laufdaten – ohne neue Meldung.
-await run('Dedupe: offene Meldung mit Marker, älterer Lauf → kein Duplikat, stille Frischhaltung',
+// 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
+//     und auch keine überflüssige Umschrift – die Meldung trägt bereits den
+//     Rat dieses Laufs (Klassen-Marker seit WF-9E5A / #761) UND keinen
+//     älteren Lauf (Lagebild-Stufe 2 seit WF-E813 / #815, 26.10.2026).
+await run('Dedupe: offene Meldung mit Marker + gleichem Lauf → kein Duplikat, keine Umschrift',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
     openIssues: [{ number: 100, title: IDENTITIES['Layout-AI'].titel,
-                   body: IDENTITIES['Layout-AI'].marker + '\n<!-- alert-runbook: allgemein -->\nDetails aus Lauf 99' }] },
-  false, [],
-  { anzahl: 1, nummer: 100,
-    imBody: [IDENTITIES['Layout-AI'].marker, '<!-- alert-runbook: allgemein -->',
-             'Häufigste Ursachen', 'https://x/runs/42'],
-    nichtImBody: ['Details aus Lauf 99'] });
+                   body: IDENTITIES['Layout-AI'].marker + '\n<!-- alert-runbook: allgemein -->\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/42)\nDetails' }] },
+  false, [], { anzahl: 0 });
 // 14. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
 //     (die Dedupe-Vergiftung aus #218/#343 in neuer Gestalt).
 await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entsteht',
@@ -450,40 +447,46 @@ await run('#761-Nachführung: offene Meldung mit GROQ-Rat → gleiche Nummer, Ei
              'E1–E8', 'https://x/runs/7620', 'https://x/jobs/7620', 'Voraussetzungen prüfen',
              '**Offen seit:** 15.10.2026, 09:54:25', 'actions/workflows/backup-offsite.yml'],
     nichtImBody: ['GROQ', 'Häufigste Ursachen', 'API-Key abgelaufen', 'https://x/runs/38701800402'] });
-// Stille Frischhaltung (26.10.2026): Der Rat (Klasse) stimmt noch, aber der
-// Body verweist auf einen älteren Lauf. Derselbe Rat bleibt, Lauf-Link, Zeit,
-// Commit und Job-Liste werden auf den jüngsten Lauf gezogen – gleiche Nummer,
-// kein Duplikat, kein Kommentar. #761 hatte so zehn Tage lang einen toten
-// „aktuellen“ Lauf gezeigt, weil der alte Code hier komplett schwieg.
-await run('Frischhaltung: gleicher Rat, älterer Lauf → Body mit frischen Laufdaten neu geschrieben, Rat bleibt',
+// Idempotenz: Steht der Rat schon drin UND der aufgezeichnete Lauf ist der
+// aktuelle, bleibt die Meldung unberührt (keine tägliche Umschrift).
+await run('Nachführung idempotent: gleicher Rat + gleicher Lauf → keine Umschrift',
   { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7621,
     jobs: KV_JOB_EINRICHTUNG_ROT,
     openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
                    body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
-                     + '1. **Einrichtung unvollständig – ein Neustart hilft nicht.**\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/7621)\nRat von heute',
+                   created_at: '2026-10-15T07:54:25Z' }] },
+  false, [], { anzahl: 0 });
+// Lagebild-Verfall (WF-E813 / #815, 26.10.2026): Gleicher Rat, aber der Body
+// zeigt noch den VORTÄGLICHEN Lauf. Die Meldung wird mit dem jüngsten Lauf
+// erneuert – gleicher Rat, neue Zeit, neuer Run-Link, neue Job-Marker.
+await run('Lagebild-Verfall: gleicher Rat + älterer Lauf im Body → Lauf-Nachweis erneuert',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7621,
+    jobs: KV_JOB_EINRICHTUNG_ROT,
+    openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
+                   body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
                      + '- **Run:** [Details ansehen](https://x/runs/7620)\nRat von gestern',
                    created_at: '2026-10-15T07:54:25Z' }] },
   false, [],
   { anzahl: 1, nummer: 761,
-    imBody: ['<!-- alert-runbook: backup-einrichtung -->',
-             'Einrichtung unvollständig – ein Neustart hilft nicht',
-             'https://x/runs/7621', 'https://x/jobs/7620',
-             '**Offen seit:** 15.10.2026, 09:54:25',
-             'actions/workflows/backup-offsite.yml'],
-    nichtImBody: ['https://x/runs/7620', 'Rat von gestern'] });
-// Idempotenz: Verweist der Body bereits auf GENAU diesen Lauf (Webhook-
-// Redelivery, Neuversuch), bleibt die Meldung unangetastet – keine Umschrift.
-await run('Frischhaltung idempotent: Body zeigt bereits auf diesen Lauf → keine Umschrift',
-  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7621,
+    imBody: ['<!-- alert-runbook: backup-einrichtung -->', 'Einrichtung unvollständig – ein Neustart hilft nicht',
+             'https://x/runs/7621', 'https://x/jobs/7620', '**Offen seit:** 15.10.2026, 09:54:25',
+             '<!-- alert-jobs: ["' + BACKUP_KV_JOB + '"]'],
+    nichtImBody: ['https://x/runs/7620)', 'GROQ'] });
+// Reihenfolgeschutz: Ein ÄLTERES Ereignis (verspätete Zustellung, Re-Run
+// eines alten Laufs) darf ein jüngeres Lagebild NICHT überschreiben.
+await run('Reihenfolgeschutz: älterer Lauf im Ereignis → Body bleibt beim jüngeren Lauf',
+  { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7619,
     jobs: KV_JOB_EINRICHTUNG_ROT,
     openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
                    body: BACKUP_IDENT.marker + '\n<!-- alert-runbook: backup-einrichtung -->\n'
-                     + '- **Run:** [Details ansehen](https://x/runs/7621)\nRat von diesem Lauf',
+                     + '- **Run:** [Details ansehen](https://x/runs/7621)\nRat von gerade eben',
                    created_at: '2026-10-15T07:54:25Z' }] },
   false, [], { anzahl: 0 });
-// Fail-open auch auf dem Frischhaltungs-Pfad: Lehnt die Issue-API das Update
-// ab, stürzt das Alerting nicht ab und es entsteht kein Duplikat.
-await run('Frischhaltung scheitert an der API → kein Absturz, kein Duplikat, Meldung bleibt offen',
+// Fail-open auch auf dem Lagebild-Verfalls-Pfad (26.10.2026, WF-9E5A):
+// Gleiche Klasse, älterer Lauf im Body, aber die Issue-API lehnt das Update
+// ab. Kein Absturz, kein Duplikat – die Meldung bleibt unverändert offen.
+await run('Lagebild-Verfall scheitert an der API → kein Absturz, kein Duplikat, Meldung bleibt offen',
   { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7624,
     updateFail: true, jobs: KV_JOB_EINRICHTUNG_ROT,
     openIssues: [{ number: 761, title: BACKUP_IDENT.titel,
@@ -706,6 +709,67 @@ await run('#780-Nachführung: offene Meldung mit allgemeinem Rat → gleiche Num
     imBody: ['<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall',
              'https://x/runs/7804', '**Offen seit:** 16.10.2026, 10:40:23'],
     nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen', 'alert-runbook: allgemein'] });
+
+// WF-E813-Folgebefund (26.10.2026): „Cloudflare-Worker deployen“ war seit
+//     25.10. still rot (fail-closed, fehlender Produktions-Zugang) und stand
+//     NICHT in der Wacht-Liste – der Heilungsschritt der Sicherheits-Wache
+//     (Runbook D2) war unsichtbar. Drei Szenarien: Zugang, Tests, Deploy.
+const WORKER_DEPLOY = 'Cloudflare-Worker deployen';
+await run('Worker-Deploy ohne Produktions-Zugang → Einrichtungs-Rat, kein Schlüssel-/Neustart-Rat',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Deploy klick-zaehler', conclusion: 'failure', html_url: 'https://x/jobs/wd1',
+             steps: [{ name: 'Worker-Tests', conclusion: 'success' },
+                     { name: 'Produktive Ressource auflösen (lesend, ohne neuen Speicher)', conclusion: 'failure' }] }] },
+  true, ['Vorgang **' + IDENTITIES[WORKER_DEPLOY].code + '**', 'Fail-closed – gewollt, kein Betriebsausfall',
+         'cloudflare-produktion', 'CF_WORKERS_DEPLOY_TOKEN', 'worker_ressourcen.py',
+         '<!-- alert-runbook: worker-deploy-zugang -->', 'kein Betriebsausfall'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'Transienter Fehler']);
+await run('Worker-Deploy: rote Worker-Tests → Selbsttest-Rat (Code-Regression)',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Deploy newsletter-worker', conclusion: 'failure', html_url: 'https://x/jobs/wd2',
+             steps: [{ name: 'Worker-Tests', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall', 'selftest'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Fail-closed – gewollt']);
+await run('Worker-Deploy: Deploy-Schritt rot → Deploy-Rat mit Live-Nachweis-Pflicht',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    jobs: [{ name: 'Deploy klick-zaehler', conclusion: 'failure', html_url: 'https://x/jobs/wd3',
+             steps: [{ name: 'Worker-Tests', conclusion: 'success' },
+                     { name: 'Produktive Ressource auflösen (lesend, ohne neuen Speicher)', conclusion: 'success' },
+                     { name: 'Deploy', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: worker-deploy -->', 'Ein grüner Plan ist kein Deploy', 'bau`-Stempel'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen']);
+// 26.10.2026: CodeQL-Sicherheitswache. Das Gate war bei echten Fundstellen
+//     (js/incomplete-sanitization, js/regex/missing-regexp-anchor) still rot.
+await run('CodeQL-Gate: echte Fundstelle → Heilungs-Rat, kein Schlüssel-Rat',
+  { workflowName: 'CodeQL-Sicherheitswache', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'CodeQL (javascript)', conclusion: 'failure', html_url: 'https://x/jobs/cq1',
+             steps: [{ name: 'CodeQL analysieren', conclusion: 'success' },
+                     { name: 'Sicherheits-Gate (null Security-Fundstellen)', conclusion: 'failure' }] }] },
+  true, ['Vorgang **' + IDENTITIES['CodeQL-Sicherheitswache'].code + '**',
+         '<!-- alert-runbook: codeql-fund -->', 'Echte Security-Fundstelle im Code – kein Betriebsausfall',
+         'Im Code heilen, nicht wegdrücken', 'CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ']);
+await run('CodeQL: Analyse-Störung ohne Gate-Rot → Störungs-Rat, kein Heilungs-Rat',
+  { workflowName: 'CodeQL-Sicherheitswache', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'CodeQL (python)', conclusion: 'failure', html_url: 'https://x/jobs/cq2',
+             steps: [{ name: 'CodeQL initialisieren', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: codeql -->', 'Analyse- oder Upload-Störung, kein Code-Befund', 'githubstatus'],
+  null, ['im Code heilen, nicht wegdrücken', 'Häufigste Ursachen', 'API-Key abgelaufen']);
+// Nachführung der neuen Klassen über die #761/#815-Mechanik: Eine offene
+// Meldung mit veraltetem Allgemeinnrat bekommt den neuen Kanal-Rat.
+await run('Worker-Deploy: offene Meldung mit Allgemeinnrat → Zugang-Rat nachgeführt',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure', runId: 8701,
+    jobs: [{ name: 'Deploy klick-zaehler', conclusion: 'failure', html_url: 'https://x/jobs/wd4',
+             steps: [{ name: 'Produktive Ressource auflösen (lesend, ohne neuen Speicher)', conclusion: 'failure' }] }],
+    openIssues: [{ number: 870, title: IDENTITIES[WORKER_DEPLOY].titel,
+                   body: IDENTITIES[WORKER_DEPLOY].marker + '\n<!-- alert-runbook: allgemein -->\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/8690)',
+                   created_at: '2026-10-26T10:40:00Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 870,
+    imBody: ['<!-- alert-runbook: worker-deploy-zugang -->', 'CF_WORKERS_DEPLOY_TOKEN', 'https://x/runs/8701',
+             '**Offen seit:** 26.10.2026, 11:40:00'],
+    nichtImBody: ['alert-runbook: allgemein', 'Häufigste Ursachen'] });
 
 // 12. KANAL-HYGIENE (Sicherheitsaudit 15.10.2026, F-09): Der Workflow-Name
 //    stammt aus dem Webhook. Er darf den Body nicht steuern – kein Markdown,

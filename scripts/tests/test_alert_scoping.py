@@ -44,14 +44,15 @@ dass die Regeln nicht still zurückgebaut werden:
      github-script-Kontext aus – die Produktionsszenarien inkl. exakter
      #343- und #632-Reproduktion, Phantom-Filter (#218), Dedupe,
      Fachkanal-Stummschaltung und Fail-open.
- 9. LAGEBILD (WF-9E5A / #761): Eine offene Meldung behält nicht für immer
-    den Rat des ersten roten Laufs. Die Klasse des Rats steht als Marker
-    im Body (<!-- alert-runbook: … -->); ändert sie sich, schreibt der
-    nächste rote Lauf die Meldung neu – nur bei bekannter Job-Lage und
-    fail-open. Bleibt die Klasse gleich, aber ein neuerer Lauf ist rot,
-    wird der Body seit 26.10.2026 still frisch gehalten (gleicher Rat,
-    aktuelle Laufdaten); verweist er bereits auf genau diesen Lauf
-    (Redelivery), bleibt er unangetastet.
+ 9. LAGEBILD (WF-9E5A / #761; Lagebild-Verfall WF-E813 / #815, 26.10.2026):
+    Eine offene Meldung behält nicht für immer den Rat des ersten roten
+    Laufs. Die Klasse des Rats steht als Marker im Body
+    (<!-- alert-runbook: … -->); ändert sie sich, schreibt der nächste
+    rote Lauf die Meldung neu – nur bei bekannter Job-Lage und fail-open.
+    Bleibt die Klasse gleich, vergleicht der Skript die im Body
+    aufgezeichnete Lauf-ID mit der aktuellen: Ein jüngerer Lauf erneuert
+    den Lauf-Nachweis (Lagebild-Verfall), ein gleicher oder älterer Lauf
+    (Redelivery, verspätete Zustellung) lässt den Body unangetastet.
  10. JOBBEWEIS (WF-E813 / #809): „Behoben“ schließt nur noch Meldungen,
      deren gemeldete Jobs im auflösenden Lauf vorhanden und `success` sind
      (Marker <!-- alert-jobs: [...] -->, scripts/alert_resolve_gate.py).
@@ -208,9 +209,9 @@ class ProdScopingAlarm(unittest.TestCase):
                          "Klassen-Marker gehört direkt hinter den Identitäts-Marker")
         # Den Block exakt eingrenzen: vom Nachführen bis zum Anlegen. Ein
         # großzügiges Fenster sähe sonst das catch der Label-Garantie dahinter.
-        # Klassenwechsel und stille Frischhaltung teilen sich seit 26.10.2026
-        # denselben Update-Block (bestehendeMeldung).
-        start = self.code.find("if (bestehendeMeldung) {")
+        # Seit dem Lagebild-Verfall (WF-E813/#815, 26.10.2026) bedient derselbe
+        # Block auch die Frischhaltung bei gleichem Rat und jüngerem Lauf.
+        start = self.code.find("if (nachzufuehren) {\n              try {")
         ende = self.code.find("github.rest.issues.createLabel(", start)
         self.assertTrue(-1 < start < ende < self.code.find("github.rest.issues.create(", ende),
                         "Nachführen muss vor dem Anlegen entscheiden (sonst Duplikat)")
@@ -220,41 +221,41 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("return;", block, "Nach dem Nachführen darf kein Duplikat entstehen")
 
     def test_stille_frischhaltung_bei_gleichem_rat_aber_neuem_lauf(self):
-        # WF-9E5A / #761 (26.10.2026): Zehn Tage lang verwies die offene
-        # Meldung auf einen alten Lauf, obwohl ihr Body behauptete, aktuell
-        # zu sein – der alte Dedupe-Pfad schwieg bei gleichem Klassen-Marker
-        # komplett. Vertrag: Bei gleichem Rat, aber einem neueren Lauf wird
-        # der Body still mit frischen Laufdaten neu geschrieben; verweist er
-        # bereits auf genau diesen Lauf (Redelivery), bleibt er unangetastet.
+        # WF-9E5A / #761 und WF-E813 / #815 (26.10.2026): Eine offene Meldung
+        # verwies tagelang auf einen alten Lauf, obwohl ihr Body behauptete,
+        # aktuell zu sein – der alte Dedupe-Pfad schwieg bei gleichem
+        # Klassen-Marker komplett. Vertrag: Bei gleichem Rat wird die im Body
+        # aufgezeichnete Lauf-ID mit der aktuellen verglichen. Ein jüngerer
+        # Lauf schreibt die Meldung über den bestehenden Nachführ-Pfad neu;
+        # ein gleicher oder älterer Lauf (Redelivery, verspätete Zustellung)
+        # bleibt unangetastet.
         code = self.code
         pos_dedupe = code.find("if (open.length > 0)")
         pos_marker = code.find("treffer.body.indexOf(runbookMarker) !== -1", pos_dedupe)
-        pos_runurl = code.find("treffer.body.indexOf(runUrl) !== -1", pos_marker)
-        pos_refresh = code.find("aufzufrischen = treffer;", pos_marker)
-        pos_klasse = code.find("nachzufuehren = treffer;", pos_marker)
-        self.assertTrue(-1 < pos_marker < pos_runurl < pos_refresh,
-                        "Im Gleiche-Klasse-Zweig erst auf diesen Lauf prüfen, dann frisch halten")
-        self.assertTrue(-1 < pos_refresh < pos_klasse,
-                        "Die Frischhaltung gehört vor den Klassenwechsel-Pfad")
-        # Idempotenz: Derselbe Lauf (Webhook-Redelivery, Neuversuch) darf
-        # keinen API-Schreibzugriff auslösen.
-        fenster = code[pos_marker:pos_refresh]
-        self.assertIn("return;", fenster, "Lauf bereits referenziert → ohne Update zurückkehren")
-        # Die Frischhaltung nutzt denselben Body-Bau (mit alert-jobs-Marker)
-        # und denselben fail-open-Update-Block wie der Klassenwechsel.
-        self.assertIn("const bestehendeMeldung = nachzufuehren || aufzufrischen;", code)
-        self.assertIn("const istFrischhaltung = !nachzufuehren;", code)
-        update_block = code[code.find("if (bestehendeMeldung) {"):
-                            code.find("github.rest.issues.createLabel(")]
-        self.assertIn("github.rest.issues.update(", update_block)
-        self.assertIn("} catch (e) {", update_block, "Frischhaltung muss fail-open sein")
-        self.assertIn("return;", update_block, "Nach der Frischhaltung kein Duplikat erzeugen")
-        # Verhaltenstiefe: Die Simulation beweist den Refresh mit echtem Lauf-
-        # wechsel, die Idempotenz und das fail-open bei API-Ablehnung.
+        # Die Lauf-ID wird per Regex aus dem Body gelesen (Run- und Job-URL).
+        self.assertIn("/(?:actions\\/)?runs\\/(\\d+)/", code)
+        pos_regex = code.find("/(?:actions\\/)?runs\\/(\\d+)/", pos_marker)
+        pos_reihe = code.find("aufgezeichnetId >= Number(run.id", pos_marker)
+        pos_nach = code.find("nachzufuehren = treffer;", pos_marker)
+        self.assertTrue(-1 < pos_marker < pos_regex < pos_reihe < pos_nach,
+                        "Im Gleiche-Klasse-Zweig erst Lauf-Alter prüfen, dann nachführen")
+        # Idempotenz/Reihenfolge: aktueller oder jüngerer Body → ohne Update zurück.
+        fenster = code[pos_marker:pos_nach]
+        self.assertIn("return;", fenster, "Kein älteres Ereignis darf ein jüngeres Lagebild überschreiben")
+        # Bei veraltetem Lauf-Nachweis fällt der Pfad auf denselben
+        # fail-open-Update-Block wie der Klassenwechsel (dort bereits begrenzt).
+        start = code.find("if (nachzufuehren) {\n              try {")
+        ende = code.find("github.rest.issues.createLabel(", start)
+        block = code[start:ende]
+        self.assertIn("github.rest.issues.update(", block)
+        self.assertIn("} catch (e) {", block, "Frischhaltung muss fail-open sein")
+        self.assertIn("return;", block, "Nach der Frischhaltung kein Duplikat erzeugen")
+        # Verhaltenstiefe: Die Simulation beweist Verfall-Erneuerung,
+        # Idempotenz und den Reihenfolgeschutz gegen ältere Ereignisse.
         sim = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
-        self.assertIn("Frischhaltung: gleicher Rat, älterer Lauf", sim)
-        self.assertIn("Frischhaltung idempotent", sim)
-        self.assertIn("Frischhaltung scheitert an der API", sim)
+        self.assertIn("Lagebild-Verfall", sim)
+        self.assertIn("Reihenfolgeschutz", sim)
+        self.assertIn("Nachführung idempotent", sim)
 
     def test_809_gleichzeitige_header_und_worker_befunde_haben_vorrang(self):
         code = _kommentarfrei(_text())
@@ -452,6 +453,10 @@ class VerhaltensSimulation(unittest.TestCase):
             # er den Issue-Body nicht steuern kann – ein Test mit einem braven
             # Namen würde genau die Lücke nicht prüfen.
             # Offsite-Backup: WF-9E5A / #761 (Einrichtungs- und Fristklasse).
+            # 26.10.2026 (WF-E813-Folgebefund): „Cloudflare-Worker deployen“
+            # und „CodeQL-Sicherheitswache“ waren still rot, ohne Meldung –
+            # beide gehören jetzt zur Wacht-Liste und bekommen ihre eigene
+            # Triage in der Simulation geprüft.
             boeser_name = "Layout-AI` @all [Klick](http://boese.example)\nZweite Zeile"
             # „Sicherheits-Wache": WF-E813 (15.10.2026) – die Simulation prüft,
             # dass dieser Kanal seine eigene Triage bekommt und nicht den
@@ -467,7 +472,9 @@ class VerhaltensSimulation(unittest.TestCase):
                                          "Offsite-Backup",
                                          "Sicherheits-Wache",
                                          "Affiliate-Integritäts-Wache (täglich)",
-                                         "Content-Reserve (täglicher Vorrat)", boeser_name)}
+                                         "Content-Reserve (täglicher Vorrat)",
+                                         "Cloudflare-Worker deployen",
+                                         "CodeQL-Sicherheitswache", boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)
