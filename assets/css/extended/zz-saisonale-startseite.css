@@ -40,13 +40,13 @@
 
 /* ---------- 1. Saison-Paletten (Werte = data/saisons.yaml) ---------- */
 .ff-saison--herbst {
-  --ff-saison-akzent: #9A5B12;
+  --ff-saison-akzent: #8A4F0C;
   --ff-saison-linie: #B26A00;
   --ff-saison-hero-text: #FFD15A;
 }
 
 .ff-saison--winter {
-  --ff-saison-akzent: #8A6A00;
+  --ff-saison-akzent: #7A5C00;
   --ff-saison-linie: #8A6A00;
   --ff-saison-hero-text: #FFD15A;
 }
@@ -380,11 +380,8 @@
 .ff-saison-tipp-label {
   flex: none;
   padding: 3px 10px;
-  border: 1px solid var(--ff-saison-linie);
   border-radius: var(--ff-radius-pill);
-  /* Voll deckende Kartenfläche: die geprüften Saison-Kontraste gelten nun
-     auch IM Chip (vorher: halbtransparentes Gelb → Herbst 4,43:1). */
-  background: var(--ff-surface);
+  background: color-mix(in srgb, var(--ff-saison-linie) 16%, transparent);
   color: var(--ff-saison-akzent);
   font-size: 0.74rem;
   font-weight: 700;

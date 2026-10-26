@@ -4152,6 +4152,9 @@ details.toc a {
 .ff-kostenprofil__track small { display: block; }
 .ff-kostenprofil__track span {
   margin-bottom: 18px;
+  /* Auch bei dunklem Farbschema über der warmen Fläche (#e7e1d5)
+     muss der 9,28-px-Text 4,5:1 erreichen: #52655f ergibt 4,76:1
+     dort und 5,50:1 über der hellen Papierfläche (#f5f1e8). */
   color: #52655f;
   font-size: .58rem;
   font-weight: 800;
@@ -4166,7 +4169,7 @@ details.toc a {
 }
 .ff-kostenprofil__track small {
   margin-top: 2px;
-  color: #52655f;
+  color: #52655f; /* 4,76:1 auf der dunklen Papierfläche */
   font-size: .58rem;
 }
 .ff-kostenprofil__rule {

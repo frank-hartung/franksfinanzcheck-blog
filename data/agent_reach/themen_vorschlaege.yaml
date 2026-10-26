@@ -9,6 +9,20 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?
+  url: https://www.youtube.com/watch?v=2HuHTzSNDvE
+  quelle: YouTube
+  erfasst: '2026-10-26T18:38:08'
+  brief: 2026-10-26-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-26-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Stromanbieter und Stromtarif - Wohin wechseln - günstiger  Strompreis - Mein Tipp KW 52 2022
+  url: https://www.youtube.com/watch?v=4r_1J0YeLY4
+  quelle: YouTube
+  erfasst: '2026-10-26T18:38:08'
+  brief: 2026-10-26-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-26-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: 'Stromsteuer-Debatte: Union und SPD weiter weit auseinander'
   url: https://www.tagesschau.de/inland/bericht-aus-berlin-stromsteuer-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -205,4 +219,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-26T12:30:43'
+zuletzt_ergaenzt: '2026-10-26T18:38:08'

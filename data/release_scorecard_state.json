@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T14:54:57Z",
+  "generated_at": "2026-10-26T17:59:43Z",
   "modus": "kandidaten",
-  "commit": "43ca71f2d3b8872472b75b3703af07b0509765fe",
+  "commit": "daf4d5fb9be85408bdab7926f32a9e4ab7c66f9c",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -1076,7 +1076,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "sha256": "bddc64bae630e5db122762c238f469cf7691ace9fdc165f4c0009e63c7ec2a61",
+      "sha256": "9564eebf19fb822b15615ebc348cb6fffff74d0b168d6964fafded7aeac9dab9",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

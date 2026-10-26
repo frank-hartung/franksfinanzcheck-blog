@@ -146,6 +146,7 @@ on:
       - "Redaktions-Politur (Sprachglatt + Grammatik, offline)"   # AUDIT 30.09.: manueller Notlauf – auch Handläufe gehören überwacht
       - "Agent-Reach Internet-Recherche"   # AUDIT 30.09.: liefert die Montag-Briefs für Kennzahlen-Radar + Redaktion
       - "Kennzahlen-Radar"   # AUDIT 30.09.: Frühwarnsystem für Konditionsdaten – still ausfallen = Blindflug
+      - "Web-Vitals-Feldmessung (wöchentlich)"   # 26.10.2026: erste Messung der AUSGELIEFERTEN Seite – ein stiller Ausfall wäre die Rückkehr zum Blindflug auf Produktion
       - "Design-Varianten"   # AUDIT 30.09.: Design-Werkbank (Varianten-Gate + Reach-Briefing)
       - "Faktenfrische (Bestand)"   # AUDIT 30.09.: aktualisiert Artikeldaten + committed Content – Herzstück der Ehrlichkeits-Doktrin
       - "Revenue-Import"   # AUDIT 30.09.: 4×/Tag Umsatz-Datenpipeline – ohne sie zeigt der Trichter Altdaten ohne Warnung
