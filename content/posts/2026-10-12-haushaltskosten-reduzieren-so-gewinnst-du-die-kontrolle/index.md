@@ -1,6 +1,6 @@
 ---
 title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
-description: Haushaltskosten reduzieren: Mit einfachen Mitteln und dem 4K-Prüfpfad gewinnst du die Kontrolle über deine Fixkosten.
+description: "Haushaltskosten reduzieren: Mit einfachen Mitteln und dem 4K-Prüfpfad gewinnst du die Kontrolle über deine Fixkosten."
 
 date: 2026-10-19T16:43:01Z
 draft: false
