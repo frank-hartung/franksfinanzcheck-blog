@@ -190,15 +190,40 @@ oeffnen() {  # URL anzeigen; auf Wunsch im Browser öffnen
 }
 
 umgebung_anlegen() {
-  printf '{}' | gh api -X PUT "repos/$QUELLE/environments/$UMGEBUNG" --input - >/dev/null 2>&1
+  # Benutzerdefinierte Regeln aktivieren; nur so lässt sich exakt „main“ auswählen.
+  printf '{"deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true}}' | gh api -X PUT "repos/$QUELLE/environments/$UMGEBUNG" --input - >/dev/null 2>&1
 }
 
 branch_regel_setzen() {
-  printf '{"policy_type":"SELECTED_BRANCHES","allowed_branches":[{"name":"main"}]}' \
-    | gh api -X PUT "repos/$QUELLE/environments/$UMGEBUNG/deployment-branch-policies" --input - >/dev/null 2>&1
+  # Die REST-Collection unterstützt GET/POST, kein PUT. Zuerst eine exakte
+  # main-Regel erhalten oder anlegen; erst danach weitere Muster löschen.
+  # So gibt es bei einer bestehenden Policy keinen ungeschützten Zwischenstand.
+  local basis policies id name type behalten zum_loeschen
+  basis="repos/$QUELLE/environments/$UMGEBUNG/deployment-branch-policies"
+  policies="$(gh api --paginate --jq '.branch_policies[]? | [.id // "", .name // "", .type // ""] | @tsv' \
+    "$basis?per_page=100" 2>/dev/null)" || return 1
+  behalten=""
+  zum_loeschen=""
+  while IFS=$'\t' read -r id name type; do
+    [ -n "$id" ] || continue
+    case "$id" in *[!0-9]*) return 1 ;; esac
+    if [ "$name" = "main" ] && [ "$type" = "branch" ] && [ -z "$behalten" ]; then
+      behalten="$id"
+    else
+      zum_loeschen+="$id"$'\n'
+    fi
+  done <<< "$policies"
+  if [ -z "$behalten" ]; then
+    behalten="$(printf '{"name":"main","type":"branch"}' | gh api -X POST "$basis" --input - --jq '.id' 2>/dev/null)" || return 1
+    case "$behalten" in ''|*[!0-9]*) return 1 ;; esac
+  fi
+  while IFS= read -r id; do
+    [ -n "$id" ] || continue
+    gh api -X DELETE "$basis/$id" >/dev/null 2>&1 || return 1
+  done <<< "$zum_loeschen"
 }
 
-branch_regel_status() {  # stdout: ok | offen | fremd | unlesbar
+branch_regel_status() {  # stdout: custom | offen | protected | reviewer | unlesbar
   local json
   json="$(gh api "repos/$QUELLE/environments/$UMGEBUNG" 2>/dev/null)" || { echo "unlesbar"; return; }
   printf '%s' "$json" | python3 -c '
@@ -207,51 +232,55 @@ try:
     d = json.load(sys.stdin)
 except Exception:
     print("unlesbar"); sys.exit(0)
-regeln = [str((r or {}).get("type")) for r in (d.get("protection_rules") or [])]
+if not isinstance(d, dict):
+    print("unlesbar"); sys.exit(0)
+schutzregeln = d.get("protection_rules")
+if not isinstance(schutzregeln, list) or any(not isinstance(r, dict) for r in schutzregeln):
+    print("unlesbar"); sys.exit(0)
+regeln = [str(r.get("type")) for r in schutzregeln]
 politik = d.get("deployment_branch_policy")
 if "required_reviewers" in regeln:
     print("reviewer"); sys.exit(0)
-if politik is None:
+if not isinstance(politik, dict):
     print("offen"); sys.exit(0)
-if politik.get("custom_branch_policies"):
+if politik.get("custom_branch_policies") is True and politik.get("protected_branches") is False:
     print("custom"); sys.exit(0)
-print("ok")
+if politik.get("protected_branches") is True:
+    print("protected"); sys.exit(0)
+print("offen")
 '
 }
 
-branch_regel_namen() {  # bei custom: erlaubte Branch-Namen (Zeilen)
-  gh api "repos/$QUELLE/environments/$UMGEBUNG/deployment-branch-policies" 2>/dev/null \
-    | python3 -c '
-import json, sys
-try:
-    d = json.load(sys.stdin)
-except Exception:
-    sys.exit(0)
-for p in d.get("branch_policies", []):
-    print(p.get("name", ""))
-'
+branch_regel_namen() {  # bei custom: alle erlaubten Regeln (eine TSV-Zeile je Regel)
+  gh api --paginate --jq '.branch_policies[]? | [.name // "", .type // "unbekannt"] | @tsv' \
+    "repos/$QUELLE/environments/$UMGEBUNG/deployment-branch-policies?per_page=100" 2>/dev/null
 }
 
-pruefe_e8() {  # Return 0 = grün; zählt sonst OFFENE hoch
-  local status
+pruefe_e8() {  # Return 0 nur bei nachgewiesener Regel: exakt Branch main
+  local status namen
   status="$(branch_regel_status)"
   case "$status" in
-    ok)
-      ok "E8 Environment „$UMGEBUNG“: nur main darf die Backup-Zugänge nutzen" ;;
     custom)
-      local namen; namen="$(branch_regel_namen | tr '\n' ' ')"
-      if [ "$(echo "$namen" | tr -d ' ')" = "main" ]; then
-        ok "E8 Environment „$UMGEBUNG“: Branch-Regel = main"
-      else
-        offen "E8 Branch-Regel erlaubt mehr als main: $namen"
-        link "$EINSTELLUNGEN_UMGEBUNGEN"
-      fi ;;
+      namen="$(branch_regel_namen)"
+      if [ "$namen" = $'main\tbranch' ]; then
+        ok "E8 Environment „$UMGEBUNG“: ausschließlich der Branch main ist zugelassen"
+        return 0
+      fi
+      offen "E8 nicht sicher bestätigt – erwartet genau „main (branch)“, API meldet: ${namen:-keine lesbare Regel}"
+      link "$EINSTELLUNGEN_UMGEBUNGEN"
+      return 1 ;;
     reviewer)
       offen "E8 Pflicht-Freigabe (Required reviewers) ist aktiv – jeder Nachtlauf würde auf einen Klick warten und nach 30 Tagen abbrechen"
-      link "$EINSTELLUNGEN_UMGEBUNGEN" ;;
+      link "$EINSTELLUNGEN_UMGEBUNGEN"
+      return 1 ;;
+    protected)
+      offen "E8 „Protected branches“ erlaubt nicht nachweislich ausschließlich main – bitte Selected branches → nur main setzen"
+      link "$EINSTELLUNGEN_UMGEBUNGEN"
+      return 1 ;;
     offen)
       offen "E8 Environment „$UMGEBUNG“ steht JEDEM Branch offen – Zugänge wären ungeschützt"
-      link "$EINSTELLUNGEN_UMGEBUNGEN" ;;
+      link "$EINSTELLUNGEN_UMGEBUNGEN"
+      return 1 ;;
     *)
       hinweis "E8 nicht prüfbar (Environment-API nicht lesbar: braucht Recht „administration“ für $QUELLE)"
       link "$EINSTELLUNGEN_UMGEBUNGEN"
@@ -377,17 +406,33 @@ fi
 # ---- Schritt 1 (E8): Environment absichern ------------------------------
 abschnitt "Schritt 1/7 (E8) – Environment „$UMGEBUNG“ nur für main"
 info "Ohne diese Regel kommt JEDER Branch an die Backup-Zugänge (Sicherheitsaudit F-07)."
-umgebung_anlegen
-branch_regel_setzen
-pruefe_e8 || {
-  hinweis "Automatisch setzen fehlte (Recht „administration“ nötig?). Bitte im Web nachholen:"
-  link "$EINSTELLUNGEN_UMGEBUNGEN"
-  info "Deployment branches and tags → „Selected branches and tags“ → nur main; KEINE Required reviewers."
-  if ! frage_ja "Erledigt?"; then
-    echo "${ROT}Abbruch: E8 muss sitzen, bevor Secrets eingetragen werden.${ENDE}"
-    exit 1
+if ! pruefe_e8; then
+  # Pflicht-Freigaben behebt der Wizard nicht automatisch: sie können
+  # nächtliche Deployments blockieren. Bei unlesbarem Environment-Status
+  # schreiben wir ebenfalls nicht blind. Erst danach werden Regeln gesetzt.
+  case "$(branch_regel_status)" in
+    reviewer|unlesbar) ;;
+    *)
+      umgebung_anlegen
+      branch_regel_setzen
+      ;;
+  esac
+  if ! pruefe_e8; then
+    hinweis "E8 ist noch nicht sicher bestätigt oder ließ sich nicht automatisch ändern. Bitte im Web prüfen:"
+    link "$EINSTELLUNGEN_UMGEBUNGEN"
+    info "Deployment branches and tags → „Selected branches and tags“ → ausschließlich der Branch main; KEINE Required reviewers."
+    if ! frage_ja "Erledigt?"; then
+      echo "${ROT}Abbruch: E8 muss sitzen, bevor Secrets eingetragen werden.${ENDE}"
+      exit 1
+    fi
+    # Eine Bestätigung ersetzt keinen technischen Nachweis: vor jedem Secret
+    # erneut live lesen. Bei fehlendem Recht oder falscher Regel hart abbrechen.
+    if ! pruefe_e8; then
+      echo "${ROT}Abbruch: Die Environment-Regel ist weiterhin nicht als main-only bestätigt. Es wurden keine Secrets eingetragen.${ENDE}"
+      exit 1
+    fi
   fi
-}
+fi
 
 # ---- Schritt 2 (E1): Privates Backup-Repository -------------------------
 abschnitt "Schritt 2/7 (E1) – Privates Backup-Repository"

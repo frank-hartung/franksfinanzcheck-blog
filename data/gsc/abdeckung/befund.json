@@ -9,7 +9,7 @@
   },
   {
    "kriterium": "Abdeckungsbefund nicht älter als 14 Tage",
-   "messung": "Stand 2026-10-19 (7 Tage alt)",
+   "messung": "Stand 2026-10-19 (8 Tage alt)",
    "naechster_schritt": "Export einlesen (`--import`)",
    "status": "erfuellt",
    "ziel": "laufend"
@@ -389,7 +389,7 @@
   "delta_3_nicht_indexiert": 59,
   "delta_7_indexiert": -22,
   "delta_7_nicht_indexiert": 67,
-  "detail_alter_tage": 0,
+  "detail_alter_tage": 1,
   "detail_fehlend": [
    "Nicht gefunden (404).csv",
    "Gefunden – zurzeit nicht indexiert.csv",
@@ -401,7 +401,7 @@
   "detail_stand": "2026-10-26",
   "detail_urls": 4,
   "detail_vorhanden": 1,
-  "export_alter_tage": 7,
+  "export_alter_tage": 8,
   "gruende": {
    "crawled_not_indexed": 4,
    "discovered_not_indexed": 69,
@@ -469,7 +469,7 @@
    "delta_3_nicht_indexiert": 59,
    "delta_7_indexiert": -22,
    "delta_7_nicht_indexiert": 67,
-   "detail_alter_tage": 0,
+   "detail_alter_tage": 1,
    "detail_fehlend": [
     "Nicht gefunden (404).csv",
     "Gefunden – zurzeit nicht indexiert.csv",
@@ -481,7 +481,7 @@
    "detail_stand": "2026-10-26",
    "detail_urls": 4,
    "detail_vorhanden": 1,
-   "export_alter_tage": 7,
+   "export_alter_tage": 8,
    "gruende": {
     "crawled_not_indexed": 4,
     "discovered_not_indexed": 69,
@@ -558,6 +558,16 @@
    "wirkung": "69 von 99 indexierbaren Seiten hat Google noch nicht abgerufen (69.7 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
   },
   {
+   "aufwand": "S",
+   "beleg": "Stand 2026-10-19 · 8 Tage alt",
+   "dringlichkeit": "P2",
+   "id": "M10",
+   "owner": "Mensch",
+   "schritt": "Search Console → Indexierung → Seiten → Exportieren, dann `python3 scripts/gsc_abdeckung.py --import <verzeichnis> --audit --schreiben`.",
+   "titel": "Neuen Abdeckungs-Export einlesen",
+   "wirkung": "Der Befund steht auf dem Stand von vor 8 Tagen. Zahlen, die älter als vier Wochen sind, taugen nicht als Entscheidungsgrundlage."
+  },
+  {
    "aufwand": "M",
    "beleg": "4 × „Gecrawlt – zurzeit nicht indexiert“",
    "dringlichkeit": "P2",
@@ -569,7 +579,7 @@
   },
   {
    "aufwand": "S",
-   "beleg": "117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (8 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (7 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.)",
+   "beleg": "117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (7 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (6 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.)",
    "dringlichkeit": "P2",
    "id": "M4",
    "owner": "Automat",
@@ -634,22 +644,22 @@
   "seiten": [
    {
     "grund": "verlinkt",
-    "impressionen": 22,
+    "impressionen": 35,
     "inlinks": 2,
     "lastmod_tage": null,
     "outlinks": 10,
-    "position": 36.59,
-    "score": 8.33,
+    "position": 35.66,
+    "score": 11.0,
     "url": "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/"
    },
    {
     "grund": "verlinkt",
-    "impressionen": 11,
+    "impressionen": 12,
     "inlinks": 17,
     "lastmod_tage": null,
     "outlinks": 2,
-    "position": 8.45,
-    "score": 6.82,
+    "position": 8.42,
+    "score": 7.16,
     "url": "/pillar/internet-dsl/"
    },
    {
@@ -658,29 +668,39 @@
     "inlinks": 2,
     "lastmod_tage": null,
     "outlinks": 6,
-    "position": 2.5,
-    "score": 5.75,
+    "position": 2.67,
+    "score": 5.73,
     "url": "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/"
    },
    {
     "grund": "verlinkt",
-    "impressionen": 5,
+    "impressionen": 6,
     "inlinks": 2,
     "lastmod_tage": null,
     "outlinks": 2,
-    "position": 3.6,
-    "score": 4.31,
+    "position": 3.17,
+    "score": 4.68,
     "url": "/pillar/"
    },
    {
     "grund": "verlinkt",
-    "impressionen": 3,
+    "impressionen": 4,
     "inlinks": 3,
     "lastmod_tage": null,
     "outlinks": 7,
-    "position": 7.67,
-    "score": 4.23,
+    "position": 7.25,
+    "score": 4.61,
     "url": "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 10,
+    "inlinks": 7,
+    "lastmod_tage": null,
+    "outlinks": 0,
+    "position": 10.5,
+    "score": 4.28,
+    "url": "/impressum/"
    },
    {
     "grund": "verlinkt",
@@ -734,6 +754,16 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 9,
+    "inlinks": 6,
+    "lastmod_tage": null,
+    "outlinks": 3,
+    "position": 12.33,
+    "score": 3.77,
+    "url": "/datenschutz/"
+   },
+   {
+    "grund": "verlinkt",
     "impressionen": 1,
     "inlinks": 3,
     "lastmod_tage": null,
@@ -744,16 +774,6 @@
    },
    {
     "grund": "verlinkt",
-    "impressionen": 8,
-    "inlinks": 7,
-    "lastmod_tage": null,
-    "outlinks": 0,
-    "position": 11.38,
-    "score": 3.53,
-    "url": "/impressum/"
-   },
-   {
-    "grund": "verlinkt",
     "impressionen": 4,
     "inlinks": 15,
     "lastmod_tage": null,
@@ -761,16 +781,6 @@
     "position": 18.25,
     "score": 3.51,
     "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
-   },
-   {
-    "grund": "verlinkt",
-    "impressionen": 7,
-    "inlinks": 6,
-    "lastmod_tage": null,
-    "outlinks": 3,
-    "position": 10.0,
-    "score": 3.33,
-    "url": "/datenschutz/"
    },
    {
     "grund": "nur ein Inlink",
@@ -1623,22 +1633,22 @@
     "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
    }
   ],
-  "stand": "2026-10-26",
+  "stand": "2026-10-27",
   "welle1": [
    "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
    "/pillar/internet-dsl/",
    "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
    "/pillar/",
    "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+   "/impressum/",
    "/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
    "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
    "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
    "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
    "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
-   "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
-   "/impressum/",
-   "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "/datenschutz/",
+   "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "/posts/",
    "/",
    "/ueber/",
@@ -1672,15 +1682,15 @@
    "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
    "https://franksfinanzcheck.de/pillar/",
    "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+   "https://franksfinanzcheck.de/impressum/",
    "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
    "https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
    "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
    "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
    "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
-   "https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
-   "https://franksfinanzcheck.de/impressum/",
-   "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "https://franksfinanzcheck.de/datenschutz/",
+   "https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "https://franksfinanzcheck.de/posts/",
    "https://franksfinanzcheck.de/",
    "https://franksfinanzcheck.de/ueber/",
@@ -1779,7 +1789,7 @@
   "repo": "content/ (Näherung, kein Build gemessen)"
  },
  "schema": 1,
- "stand": "2026-10-26T11:04:34Z",
+ "stand": "2026-10-27T10:31:17Z",
  "tote_ziele": [
   {
    "quellen": [
@@ -1818,85 +1828,27 @@
  ],
  "ursachen": [
   {
-   "bewertung": "belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später",
+   "bewertung": "kein Beleg im Repo gefunden",
    "datum": "2026-10-17",
    "delta": 59,
    "feld": "nicht_indexiert",
-   "git": {
-    "commits": 18,
-    "content_dateien": 251,
-    "draft_neu": 36,
-    "draft_neu_gesamt": 36,
-    "draft_saldo": 32,
-    "saldo": 32,
-    "tag": "2026-10-14",
-    "top": [
-     {
-      "betreff": "redaktion: Hemingway-Lesbarkeit und Offline-Sprachpflege",
-      "dateien": 123,
-      "draft_neu": 32,
-      "draft_neu_posts": 32,
-      "sha": "80582936"
-     },
-     {
-      "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)",
-      "dateien": 2,
-      "draft_neu": 2,
-      "draft_neu_posts": 2,
-      "sha": "e9e8906a"
-     },
-     {
-      "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "4769e801"
-     }
-    ],
-    "verzug_tage": 3
-   },
+   "git": null,
    "kandidaten": [],
    "pruefweg": "Änderungsprotokoll der Seiten (git log auf content/), Deploy-Protokoll und Sitemap-Diff zum Datum; die Klassen oben sind Größenordnungen, kein Beweis."
   },
   {
-   "bewertung": "belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später",
+   "bewertung": "Größenordnung passt – Ursache noch nicht belegt",
    "datum": "2026-10-17",
    "delta": -21,
    "feld": "indexiert",
-   "git": {
-    "commits": 18,
-    "content_dateien": 251,
-    "draft_neu": 36,
-    "draft_neu_gesamt": 36,
-    "draft_saldo": 32,
-    "saldo": 32,
-    "tag": "2026-10-14",
-    "top": [
-     {
-      "betreff": "redaktion: Hemingway-Lesbarkeit und Offline-Sprachpflege",
-      "dateien": 123,
-      "draft_neu": 32,
-      "draft_neu_posts": 32,
-      "sha": "80582936"
-     },
-     {
-      "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)",
-      "dateien": 2,
-      "draft_neu": 2,
-      "draft_neu_posts": 2,
-      "sha": "e9e8906a"
-     },
-     {
-      "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve",
-      "dateien": 1,
-      "draft_neu": 1,
-      "draft_neu_posts": 1,
-      "sha": "4769e801"
-     }
-    ],
-    "verzug_tage": 3
-   },
-   "kandidaten": [],
+   "git": null,
+   "kandidaten": [
+    {
+     "abweichung_prozent": 10,
+     "anzahl": 23,
+     "klasse": "Taxonomie-URLs (abgeschaltet)"
+    }
+   ],
    "pruefweg": "Änderungsprotokoll der Seiten (git log auf content/), Deploy-Protokoll und Sitemap-Diff zum Datum; die Klassen oben sind Größenordnungen, kein Beweis."
   }
  ],
@@ -2042,16 +1994,16 @@
   ],
   "top_nicht_live": [
    {
-    "impressionen": 8,
+    "impressionen": 7,
     "klicks": 0,
-    "position": 17.62,
+    "position": 19.43,
     "url": "/posts/kuehlschrank-strom-sparen-einstellung/",
     "weiterleitung": "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
    },
    {
-    "impressionen": 7,
+    "impressionen": 6,
     "klicks": 0,
-    "position": 5.29,
+    "position": 5.17,
     "url": "/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
     "weiterleitung": "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/"
    },
