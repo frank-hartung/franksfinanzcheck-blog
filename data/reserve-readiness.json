@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 4,
   "pool_size": 6,
   "generated_at": "2026-10-27T14:49:46Z",
   "candidates": [
@@ -74,20 +74,10 @@
     },
     {
       "slug": "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
-      "ready": true,
+      "ready": false,
       "sha256": "354d63d78c757a5e2301ef11cc7d775e86bc5d35da44328f16f59a9c65ebb883",
-      "flesch": 65.3,
       "measured_at": "2026-10-27T14:49:46Z",
-      "score": 0.952,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
