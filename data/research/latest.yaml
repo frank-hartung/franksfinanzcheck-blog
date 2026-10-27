@@ -1,5 +1,5 @@
-generated_at: '2026-10-26T09:21:15Z'
-day: '2026-10-26'
+generated_at: '2026-10-27T09:20:17Z'
+day: '2026-10-27'
 mode: deterministic
 teams:
   trending:
@@ -243,42 +243,52 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 10 Tipps für günstige Reiseversicherungen
-    pillar: versicherungen
+  - topic: DSL- und Internet-Flat günstig sichern
+    pillar: internet-dsl
     signal: niche_hook
-    source: topics:10 Tipps für günstige Reiseversicherungen
+    source: topics:DSL- und Internet-Flat günstig sichern
     score: 0.55
     keywords:
-    - Reiseversicherung
-    - Versicherungsvergleich
-    - Günstige Versicherungen
-  - topic: Dein Mietwagen im Ausland am besten buchen
+    - DSL Vergleich
+    - Internetvertrag wechseln
+    - Günstiges Internet
+    - Wechselbonus
+  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
+    score: 0.55
+    keywords:
+    - E-Auto Ladekosten
+    - Stromtarif E-Auto
+    - Wallbox sparen
+  - topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Hauskauf finanzieren: Darlehen clever vergleichen'
+    score: 0.55
+    keywords:
+    - Baufinanzierung
+    - Immobilienkredit
+    - Hauskauf Finanzierung
+  - topic: 'Kartenzahlung mit PIN: So bleibt die Karte sicher'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Kartenzahlung mit PIN: So bleibt die Karte sicher'
+    score: 0.55
+    keywords:
+    - Kartenzahlung PIN
+    - Karte sichern
+    - Kontaktlos zahlen
+  - topic: 'Mietwagen für die Stadt: Kleine Autos im Vergleich'
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Dein Mietwagen im Ausland am besten buchen
+    source: 'topics:Mietwagen für die Stadt: Kleine Autos im Vergleich'
     score: 0.55
     keywords:
     - Mietwagen
-    - Ausland
-    - Buchen
-  - topic: Günstige Versicherungen für dein Zuhause finden
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Günstige Versicherungen für dein Zuhause finden
-    score: 0.55
-    keywords:
-    - Versicherungen
-    - Zuhause
-    - Günstig
-  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
-    score: 0.55
-    keywords:
-    - Mietwagen
-    - Tarife
-    - Vergleich
+    - Stadtverkehr
+    - Kleine Autos
   - topic: So kannst du deine Heizkosten um 20 % senken
     pillar: strom-sparen
     signal: niche_hook
@@ -288,15 +298,6 @@ teams:
     - Heizkosten sparen
     - energiesparende Tipps
     - Heizperiode
-  - topic: 'Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?'
-    score: 0.55
-    keywords:
-    - Wärmepumpe
-    - Heizung Vergleich
-    - Heizkosten senken
 live_web:
   enabled: false
   findings: []
