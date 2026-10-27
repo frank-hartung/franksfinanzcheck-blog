@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 4,
-  "pool_size": 5,
-  "generated_at": "2026-10-26T19:57:33Z",
+  "ready": 5,
+  "pool_size": 6,
+  "generated_at": "2026-10-27T09:41:57Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-10-26T19:56:32Z",
+      "measured_at": "2026-10-27T09:36:40Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -26,7 +26,7 @@
       "ready": true,
       "sha256": "c6bdfb9fbb2879d7a27322e8c1acd96332d09640aef00105b1c10fdb6a90e946",
       "flesch": 70.4,
-      "measured_at": "2026-10-26T19:57:03Z",
+      "measured_at": "2026-10-27T09:37:42Z",
       "score": 0.97,
       "parts": {
         "spelling": 0.96,
@@ -43,7 +43,7 @@
       "ready": true,
       "sha256": "9e86fac5718db982c3a797361233ebe2054b35538e582249f8b48bb76dea1dea",
       "flesch": 74.1,
-      "measured_at": "2026-10-26T09:41:47Z",
+      "measured_at": "2026-10-27T09:38:44Z",
       "score": 0.974,
       "parts": {
         "spelling": 0.98,
@@ -60,7 +60,7 @@
       "ready": true,
       "sha256": "9c3ce20475581169ea2b2180c1fb7ccaa9182fba0435f8710252ddfef86865e1",
       "flesch": 64.6,
-      "measured_at": "2026-10-26T09:42:23Z",
+      "measured_at": "2026-10-27T09:39:48Z",
       "score": 0.98,
       "parts": {
         "spelling": 0.9,
@@ -73,14 +73,31 @@
       }
     },
     {
-      "slug": "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "slug": "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
+      "ready": true,
+      "sha256": "5f07ce232d810c8822291111ccde0357c9269de160613265de812b79331cd4ec",
+      "flesch": 65.3,
+      "measured_at": "2026-10-27T09:40:52Z",
+      "score": 0.952,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
       "ready": false,
-      "sha256": "d38391ac50245c6bdaa5ee3a303bcd47e365e787299b8c4a7dabbbbcfdcc26bd",
+      "sha256": "355d4b2dd5b23ef80ef6b51aba4a8f64663f93e1061f449347873acfd3039fb8",
       "flesch": 66.2,
-      "measured_at": "2026-10-26T19:57:33Z",
+      "measured_at": "2026-10-27T09:41:57Z",
       "reason": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
       "details": [
-        "🛑 2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -97,17 +114,19 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "40390880852",
+    "kind": "full",
+    "run_id": "40479040838",
     "run_attempt": "1"
   },
-  "recert": {
-    "at": "2026-10-26T19:57:33Z",
-    "renewed": [
-      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
-      "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  }
+  "geschont": [
+    {
+      "slug": "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "klasse": "heilbar",
+      "hits": 2,
+      "heiler": [
+        "politur_ruine_heiler.py"
+      ],
+      "warum": "Zerlegte Datumsangaben liest der Ruinen-Heiler verlustfrei zusammen; die Verifikation vergleicht Wortzahl und harte Regeln vor/nach dem Eingriff."
+    }
+  ]
 }

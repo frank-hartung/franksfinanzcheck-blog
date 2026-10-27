@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-10-26T10:19:59+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-10-27T09:23:21+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1382,6 +1382,24 @@
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+  "title": "Flugvergleich im Winter: So findest du echte Billigflüge",
+  "ts": "2026-10-27T09:34:58+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
+  "title": "Frugalismus Familie: Clever sparen ohne Verzicht",
+  "ts": "2026-10-27T09:23:01+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }

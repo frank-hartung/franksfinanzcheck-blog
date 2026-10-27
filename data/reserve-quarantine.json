@@ -1,13 +1,20 @@
 {
-  "2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+  "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+    "datei_sha256": "355d4b2dd5b23ef80ef6b51aba4a8f64663f93e1061f449347873acfd3039fb8",
     "first": "2026-10-26T09:28:00Z",
+    "geschont": true,
     "grund": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
-    "hits": 1,
-    "laeufe": [
-      "run:40297687637"
+    "heiler": [
+      "politur_ruine_heiler.py"
     ],
-    "last": "2026-10-26T09:43:00Z",
-    "lauf": "run:40297687637",
+    "hits": 2,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:40297687637",
+      "run:40479040838"
+    ],
+    "last": "2026-10-27T09:41:57Z",
+    "lauf": "run:40479040838",
     "signatur": "textverständnis-gate nicht bestanden: r<n>-datum-punkt: politur-ruine „<n> dezember“ – überrest eines automatisierten politur-laufs, manuell reparieren"
   }
 }
