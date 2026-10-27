@@ -1,0 +1,77 @@
+{
+  "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
+  "titel": "Gastarife vergleichen vor dem Herbst",
+  "erzeugt": "2026-10-27 10:00 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "saisonal",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 30
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.html)\n    *   [Schlichtung](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/start.html)\n    *   [Verbraucherschutz in Zahlen](https://www.bundesnetzagentur.de/DE/Vportal/Verbraucher-Radar/start.html)\n\n*   [Energie (Internationales)](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/start.html)\n\n*   [ACER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/ACER/start.html)\n            *   [CEER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/CEER/start.html)\n            *   [PCI](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/PCI/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))**Energie**[Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html \"Telekommunikation\")[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](htt",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Artikel erwähnt nicht, dass Gasverträge und Preisangaben durch die Bundesnetzagentur reguliert und überwacht werden – ein zentraler Verbraucher‑Schutzrahmen fehlt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass eine Preisgarantie typischerweise 6 Monate beträgt, wird ohne jegliche Quellenangabe gemacht.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass das richtige Einstellen des Thermostats bis zu 10 % Einsparungen bringen kann, ist nicht durch die Bundesnetzagentur belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Berechnung, dass eine Temperaturabsenkung um 2 °C den Heizenergiebedarf um 6 % reduziert und damit 720 kWh spart, fehlt jede Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Behauptung, dass CHECK24 „alle wichtigen Konditionen\" nebeneinander zeigt, ist unpräzise, weil keine Messgröße oder Vergleichskriterium genannt wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
+  "fehler": [
+    "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+    "Verbraucherzentrale – Energie: Feed nicht lesbar"
+  ]
+}

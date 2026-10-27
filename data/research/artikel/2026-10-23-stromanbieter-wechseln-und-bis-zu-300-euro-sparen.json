@@ -1,0 +1,77 @@
+{
+  "slug": "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen",
+  "titel": "Stromanbieter wechseln: Und bis zu 300 Euro sparen",
+  "erzeugt": "2026-10-27 10:00 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.html)\n    *   [Schlichtung](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/start.html)\n    *   [Verbraucherschutz in Zahlen](https://www.bundesnetzagentur.de/DE/Vportal/Verbraucher-Radar/start.html)\n\n*   [Energie (Internationales)](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/start.html)\n\n*   [ACER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/ACER/start.html)\n            *   [CEER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/CEER/start.html)\n            *   [PCI](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/PCI/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))**Energie**[Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html \"Telekommunikation\")[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](htt",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass im Jahr 2026 „große Lücken zwischen den Tarifen am Markt“ bestehen, fehlt jede belegbare Quelle und ist spekulativ.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Hinweis, dass ein Bonus für Neukunden den Preis im ersten Jahr stark senken kann, wird nicht durch die bereitgestellten Quellen belegt.",
+      "beleg": ""
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Faustregel „Verbrauch > 3.000 kWh → fester Preis, < 2.000 kWh → variabler Tarif“ ist nicht durch Daten oder regulatorische Vorgaben gestützt und wirkt pauschal.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Behauptung, ein Stromanbieterwechsel koste meist keinen Cent und es gäbe keine Abschiedgebühr, wird nicht durch die genannten Quellen bestätigt.",
+      "beleg": ""
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass CHECK24 „fast alle Firmen und Tarife“ auflistet, ist nicht durch die bereitgestellten Quellen belegt und stellt ein unpräzises Werbeversprechen dar.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [
+    "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+    "Verbraucherzentrale – Energie: Feed nicht lesbar"
+  ]
+}

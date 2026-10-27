@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-10-26-gastarife-vergleichen-vor-dem-herbst.jpg"
   alt: "Gastarife vergleichen vor dem Herbst"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Bundesnetzagentur - Energie"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+faktencheck: 2026-10-27
 ---
 
 Im Herbst werden die Abende gemütlich. Gleichzeitig flattern viele Nachzahlungen für Gas ins Haus. Wer seine Gaskosten senken will, sollte den Vertrag prüfen, bevor die Heizperiode beginnt.

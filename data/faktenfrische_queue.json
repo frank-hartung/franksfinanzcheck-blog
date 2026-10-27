@@ -1,26 +1,57 @@
 {
-  "erzeugt": "2026-10-22 09:35 UTC",
+  "erzeugt": "2026-10-27 10:01 UTC",
   "uebersicht": {
-    "gesamt": 100,
+    "gesamt": 104,
     "ratgeber": 6,
-    "faellig": 1,
-    "bearbeitet": 1,
-    "geo_schnitt": 93,
-    "befunde": 5,
+    "faellig": 8,
+    "bearbeitet": 3,
+    "geo_schnitt": 94,
+    "befunde": 10,
     "geo_luecken": {
-      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 8,
-      "Mindestens eine Tabelle (extrahierbare Struktur)": 11,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 15,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 1,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 7,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 10,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 16,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 2,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 2,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     }
   },
-  "offen": [],
+  "offen": [
+    {
+      "slug": "versicherungen",
+      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "geo": 83
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+      "titel": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "geo": 100
+    }
+  ],
   "laeufe": [
     {
-      "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
-      "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+      "slug": "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen",
+      "titel": "Stromanbieter wechseln: Und bis zu 300 Euro sparen",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
@@ -28,37 +59,99 @@
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die Aussage, dass jede Zusatzoption höchstens ein Drittel der Miete kosten sollte, ist nicht durch die Verbraucherzentrale belegt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Die Aussage, dass im Jahr 2026 „große Lücken zwischen den Tarifen am Markt“ bestehen, fehlt jede belegbare Quelle und ist spekulativ.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Die Behauptung, dass die Voll‑zu‑Voll‑Tankregel meist die beste Wahl ist, wird von der Quelle nicht bestätigt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Der Hinweis, dass ein Bonus für Neukunden den Preis im ersten Jahr stark senken kann, wird nicht durch die bereitgestellten Quellen belegt.",
+          "beleg": ""
         },
         {
-          "typ": "luecke",
-          "text": "Die Angabe, dass ein Navigationsgerät zehn Euro oder mehr pro Tag kostet, fehlt in der Quelle.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "typ": "praezision",
+          "text": "Die Faustregel „Verbrauch > 3.000 kWh → fester Preis, < 2.000 kWh → variabler Tarif“ ist nicht durch Daten oder regulatorische Vorgaben gestützt und wirkt pauschal.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "luecke",
-          "text": "Die Aussage, dass ein Frühbucherrabatt nur bis zu einer bestimmten Anzahl von Tagen vor Mietbeginn gilt, ist nicht durch die Quelle belegt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "typ": "praezision",
+          "text": "Die Behauptung, ein Stromanbieterwechsel koste meist keinen Cent und es gäbe keine Abschiedgebühr, wird nicht durch die genannten Quellen bestätigt.",
+          "beleg": ""
         },
         {
-          "typ": "luecke",
-          "text": "Die Empfehlung, ausschließlich CHECK24 zu nutzen, wird von der Quelle nicht unterstützt und lässt andere Vergleichsplattformen außen vor.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "typ": "praezision",
+          "text": "Die Aussage, dass CHECK24 „fast alle Firmen und Tarife“ auflistet, ist nicht durch die bereitgestellten Quellen belegt und stellt ein unpräzises Werbeversprechen dar.",
+          "beleg": ""
         }
       ],
       "geo": 50,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+        "Verbraucherzentrale – Energie: Feed nicht lesbar"
+      ],
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-27"
+      ]
+    },
+    {
+      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
+      "titel": "Gastarife vergleichen vor dem Herbst",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt nicht, dass Gasverträge und Preisangaben durch die Bundesnetzagentur reguliert und überwacht werden – ein zentraler Verbraucher‑Schutzrahmen fehlt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Angabe, dass eine Preisgarantie typischerweise 6 Monate beträgt, wird ohne jegliche Quellenangabe gemacht.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass das richtige Einstellen des Thermostats bis zu 10 % Einsparungen bringen kann, ist nicht durch die Bundesnetzagentur belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Berechnung, dass eine Temperaturabsenkung um 2 °C den Heizenergiebedarf um 6 % reduziert und damit 720 kWh spart, fehlt jede Quellenangabe.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Behauptung, dass CHECK24 „alle wichtigen Konditionen\" nebeneinander zeigt, ist unpräzise, weil keine Messgröße oder Vergleichskriterium genannt wird.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 50,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
+        "Verbraucherzentrale – Energie: Feed nicht lesbar"
+      ],
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-27"
+      ]
+    },
+    {
+      "slug": "mietwagen",
+      "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
+      "bereich": "ratgeber",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [],
+      "geo": 83,
       "fehler": [
         "Verbraucherzentrale – Reise: Feed nicht lesbar"
       ],
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-22"
+        "faktencheck: 2026-10-27"
       ]
     }
   ]
