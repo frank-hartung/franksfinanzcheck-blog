@@ -125,7 +125,7 @@
 {{- /* ---------- V4: Provision in der Bewertung? ---------- */ -}}
 {{- if eq $abschnitt "v4" -}}
 <div class="ff-vg" data-ff-vg-frage="v4">
-  <p class="ff-vg__antwort" data-ff-vg-provision="{{ $g.provision.antwort }}"><b>{{ if eq (lower (printf "%v" $g.provision.antwort)) "nein" }}Nein.{{ else }}{{ $g.provision.antwort }}{{ end }}</b> {{ $g.provision.begruendung }}</p>
+  <p class="ff-vg__antwort" data-ff-vg-provision="{{ $g.provision.antwort }}"><strong>{{ if eq (lower (printf "%v" $g.provision.antwort)) "nein" }}Nein.{{ else }}{{ $g.provision.antwort }}{{ end }}</strong> {{ $g.provision.begruendung }}</p>
   <p class="ff-vg__listtitel">Warum das keine Behauptung ist, sondern Mechanik</p>
   <ul class="ff-vg__liste">
     {{- range $g.provision.durchsetzung }}<li>{{ . }}</li>{{ end }}

@@ -1,5 +1,7 @@
 ---
 title: "So arbeiten wir: Beweissystem, Methodik & Redaktionsstandards"
+# SITECHECK 27.10.2026: sichtbare H1 bleibt; der SERP-Titel passt ins 60-Zeichen-Fenster.
+seoTitle: "So arbeiten wir: Beweissystem & Methodik"
 description: "So arbeiten wir mit Quellen, Rechenwegen und Vergleichskriterien. Prüfe, wie Empfehlungen entstehen und wie Änderungen dokumentiert werden."
 draft: false
 author: "Frank Hartung"

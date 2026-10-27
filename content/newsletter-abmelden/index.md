@@ -1,7 +1,7 @@
 ---
 title: "Newsletter abmelden – ein Klick, keine Verhandlung"
 url: "/newsletter/abmelden/"
-description: "Abmeldung vom Newsletter von FranksFinanzcheck: Formular auf dieser Seite, der Link in jeder Mail, oder formlos per E-Mail. Was mit den Daten danach passiert."
+description: "Newsletter abmelden bei FranksFinanzcheck: per Formular, über den Link in jeder Mail oder formlos per E-Mail. Was danach mit deinen Daten passiert."
 summary: "Abmelden vom Newsletter: Formular auf dieser Seite, Ein-Klick-Link in jeder Mail oder formlos per E-Mail; Löschung der Adresse innerhalb von 30 Tagen, der Einwilligungsnachweis bleibt bis zu drei Jahre."
 robotsNoIndex: true
 sitemap:

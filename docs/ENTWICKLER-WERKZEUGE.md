@@ -298,3 +298,29 @@ zwischen zwei unbegrenzten Quantoren ein eindeutiges Pflichtzeichen stehen.
 Kein `# codeql[...]`, keine Whitelist, kein Dismiss. Details:
 [`CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md`](../CODE-SCANNING-ALERT-87-REDAUERHEILUNG-HIGHEND-2026-10-26.md)
 und `SECURITY.md`.
+
+---
+
+## Sitecheck-Wache: vier Prüfbereiche gegen den gebauten Blog
+
+`scripts/sitecheck_wache.py` prüft, was der [Pergamon Website Check](https://www.pergamon-interactive.de/sitecheck-2016.html)
+in den Bereichen **Meta, Struktur, Technik und Konfiguration** verlangt – nicht
+nur auf der Startseite, sondern auf allen indexierbaren Seiten des Builds.
+Es liest ausschließlich `public/` (oder `--site <ordner>`), braucht kein Netz
+und keine Fremdpakete.
+
+```bash
+npm run test:sitecheck       # 27 Sabotageproben + 23 Unit-Tests, offline
+npm run sitecheck:check      # Selbsttest + Hugo-Build + Vollprüfung
+python3 scripts/sitecheck_wache.py --site public --json
+```
+
+Zwei Besonderheiten: `<title>` in eingebetteten SVG-Diagrammen zählt **nicht**
+als Seitentitel, und ein `<a id="anker">` ohne `href` ist ein Sprungziel, kein
+toter Link. Die Wache ergänzt `h1_wache.py`, `a11y_audit.py`,
+`metadaten_wache.py` und `schema_seo_gate.py` – sie ersetzt keine davon.
+
+Welche Empfehlungen von 2016 bewusst **nicht** übernommen wurden (meta
+keywords, meta expires, mod_pagespeed, JS zwangsweise zusammenfassen) und
+warum, steht im Report
+[`SITECHECK-2016-OPTIMIERUNG-2026-10-27.md`](../SITECHECK-2016-OPTIMIERUNG-2026-10-27.md).
