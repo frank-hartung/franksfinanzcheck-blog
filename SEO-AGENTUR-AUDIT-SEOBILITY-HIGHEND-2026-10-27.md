@@ -96,12 +96,15 @@ Markenbegriff „Fixkosten-Kompass" bleibt unmittelbar darüber als eigene H2
 erhalten und wird nicht doppelt gesetzt. Auf `/posts/` gilt weiterhin die
 Wortgleichheit mit `data/themenwelten.json` (Gate-Vertrag unverändert).
 
-### 2.6 Doppelter Ankertext im Footer
+### 2.6 Doppelter Ankertext im Footer – bewusst **nicht** gestrichen
 
-„Suche" stand im Hauptmenü **und** im Footer (identischer Ankertext, kein
-zweiter Weg). Der Footer führt jetzt nur Ziele, die das Menü nicht anbietet.
-`Impressum`/`Datenschutz` bleiben absichtlich doppelt (rechtlich erwartete
-Erreichbarkeit, siehe §4).
+Der erste Anlauf hat den „Suche"-Link aus dem Footer entfernt, weil Seobility
+ihn als „Ankertext mehrfach verwendet" zählt. Das war falsch: `e2e/suche.spec.mjs`
+hält fest, dass die Suche von **jeder** Seite erreichbar ist, und ein zweiter
+Weg ist für Tastatur- und Sprachbedienung wertvoller als ein Hinweis im
+Crawler-Report. Die Streichung ist zurückgenommen – der Hinweis bleibt stehen
+und wird hier als solcher ausgewiesen. `Impressum`/`Datenschutz` bleiben aus
+demselben Grund doppelt (rechtlich erwartete Erreichbarkeit, siehe §4.2).
 
 ### 2.7 Neue Wache: die Defektklasse kommt nicht zurück
 
@@ -128,7 +131,7 @@ bei Schmuckbildern korrekt und bleibt erlaubt. 14 Regressionstests
 
 | Kennzahl | vorher | nachher |
 |---|---|---|
-| Links insgesamt | 11.321 | 11.443 |
+| Links insgesamt | 11.321 | 11.565 |
 | **Links ohne Linktext** | **503** | **0** |
 | **Seiten mit Links ohne Linktext** | **122 von 262** | **0** |
 | Bilder ohne `alt`-Attribut | 0 | 0 |
@@ -371,14 +374,18 @@ irgendwann eine Zahl mit Datum statt ein Gefühl.
 | `scripts/a11y_audit.py` | ✅ 0 Probleme, 0 Kontrast-Fehler (hell + dunkel) |
 | `scripts/h1_wache.py` | ✅ jede Seite genau eine H1 |
 | `scripts/seo_cockpit.py --strict` | ✅ 122 Seiten, 99 indexierbar, P1/P2/P3 = 0 |
-| `scripts/entity_marken_gate.py` | ✅ 0 Fehler (1 ausgewiesene Warnung E9: Marken-Title-Abdeckung, vorbestehend) |
+| `scripts/layout_audit.py` | ✅ 0 kritische Befunde (Chunker-Vertrag grün, 1.995 Überschriften geprüft) |
+| `scripts/check_internal_links.sh` | ✅ 3.988 interne Links, 0 defekt |
+| `scripts/entity_marken_gate.py` | ⚠️ 1 **vorbestehender** Quellbefund: „Franks Finanzcheck" in einem Reserve-**Entwurf**. Nicht in diesem PR geheilt – die Korrektur würde das byte-genaue Reserve-Zertifikat (`data/reserve-readiness.json`) ungültig machen, und die Nachzertifizierung braucht `hunspell` (in dieser Umgebung nicht installierbar). Owner-Aufgabe: Text korrigieren und im selben Lauf `python3 scripts/reserve_recert.py --fix` ausführen. Im **Build** (E1–E9) ist die Wache grün: 0 Fehler, 1 ausgewiesene Warnung E9 (Marken-Title-Abdeckung, vorbestehend) |
 | `scripts/vergleichsgrundsaetze_gate.py` | ✅ 20 Routen, 74 Offenlegungs-Bausteine, 0 Fehler |
 | `scripts/offenlegung_gate.py` | ✅ 75 Seiten, 0 Fehler |
 | `scripts/brand_surface_guard.py --only readme` | ✅ ROT 0 · GELB 0 |
 | `scripts/wachen_vertrag.py` | ✅ 340 Skripte, 0 Funde (inkl. der neuen Wache) |
 | Unittest-Suite der berührten Wachen | ✅ 279 Tests, 5 übersprungen, 0 Fehler |
 | `scripts/metadaten_wache.py` | ⚠️ 3 **vorbestehende** Inhaltsbefunde (2× `lastmod` vor `date`, 1× fehlende Kurzantwort in `content/posts/2026-10-24-bankgebuehren-…`) – nicht Teil dieser Änderung |
-| `npm run suchindex` (Pagefind) · Playwright/E2E | in dieser Umgebung nicht lauffähig (keine `node_modules`, kein Browser-Download) – bitte im CI nachziehen |
+| `npx playwright test` (E2E, Desktop + Mobil) | ✅ **180 Tests grün** (lokal mit dem im Repo gepinnten Chromium-Bundle) |
+| `node scripts/themenwelten_browser_test.mjs --public public` | ✅ 426 Prüfungen (Tastatur, Trefferfläche, Kontrast, 200 % Text, ohne JS) |
+| `npm run suchindex` (Pagefind) | ✅ 262 Seiten, 99 indexierbar – im E2E-Vorlauf grün |
 
 **Nicht geprüft, weil ohne Freigabe nicht zulässig:** die neue Wache in
 `.github/workflows/**` zu hängen (Sicherheitsregel 3 in CLAUDE.md). Vorlage
