@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T09:36:28Z",
-  "modus": "kandidaten",
-  "commit": "23edba454dd7d9b445951a552f25bbc3eb4d5dc4",
+  "generated_at": "2026-10-27T10:29:36Z",
+  "modus": "live",
+  "commit": "e9ea633fae0f93076851e4592589eb861c126514",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -260,7 +260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "18e34d0afa3f37b9f6c65b1fc6b554fe599d6cb70f72c9497accebe6231a6993",
+      "sha256": "86e69f13b360c2ec53d6cc50ffe3bf1a7d37764465ab7e3a9f81e22b0a8724ad",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,10 +274,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "3dd5501cb416346896eb10832f6dbe0ec452823ebca87989ad8750c0e1ba5363",
+      "sha256": "2ef9966a47dfc6b2464aca8ab77e03a752813453bc8bd3be86aba8801056cc74",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -291,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "65aad44b1bfe5d1618f60e582cdf0eb431d46af5b0c98bd2c3a7744a1f302de1",
@@ -991,7 +991,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
-      "sha256": "1162316e5821bf7b3760ad7e5d23aa4df6dc4bdbaf12f5dc001f525468d7b61e",
+      "sha256": "dd71e437375494c07de55209b0f4a02f73de01ddeaf56050b406f305441b79f9",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1005,10 +1005,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
-      "sha256": "5e59cebbf9b2bca5d1348455a981fd526b81d7513deec636a37fb5067799de5f",
+      "sha256": "ef4dc5205e77c88c0695eba54a9595403e08aa5b81f285f9e970e89dd56ea856",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1022,7 +1022,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "dfea273a82ea3bc392de6508f31057b3a40db5427daf91882f2e7a9f3dd2a576",
@@ -1059,7 +1059,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
-      "sha256": "8218c3242a4a3fe9ab20ac23e54a3e56c3196030502fde56f7c5acb082ac26a4",
+      "sha256": "f2986e534744bf8b53522a5a8870c9fb17a8c9d3976342818d8e5ea5c15b9a13",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1072,11 +1072,11 @@
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "sha256": "9564eebf19fb822b15615ebc348cb6fffff74d0b168d6964fafded7aeac9dab9",
+      "sha256": "99c20566fdfe768bd5b2d8c4afebfe010b6578e3414af4baa5792f23d39cc319",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1090,7 +1090,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "567ccdfb834776289c4282d35fb4f74f7a363b3a407d9358c3264c7a1c46f02d",
