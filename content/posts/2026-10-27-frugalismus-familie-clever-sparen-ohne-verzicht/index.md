@@ -1,6 +1,6 @@
 ---
 title: "Frugalismus Familie: Clever sparen ohne Verzicht"
-description: Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit Franks Finanzcheck.
+description: Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit FranksFinanzcheck.
 date: 2026-10-27T09:20:45Z
 draft: true
 reserve: true
@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Frugalismus Familie: Clever sparen ohne Verzicht"
-pin_description: "*Werbung | Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit Franks Finanzcheck. Mehr Spartipps auf FranksFinanzcheck! #frugalismus #familie #sparen"
+pin_description: "*Werbung | Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit FranksFinanzcheck. Mehr Spartipps auf FranksFinanzcheck! #frugalismus #familie #sparen"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -119,7 +119,7 @@ Fixkosten sind Miete, Strom, Internet und Versicherungen.
 Wenn am Ende des Geldes noch zu viel Monat übrig ist, musst du handeln.
 Schau dir zuerst die großen Posten an.
 Eine Ersparnis bei der Miete oder den Energiekosten bringt mehr als der Verzicht auf einen Kaffee.
-Hier hilft dir der 4K-Prüfpfad von Franks Finanzcheck.
+Hier hilft dir der 4K-Prüfpfad von FranksFinanzcheck.
 
 ## Der 4K-Prüfpfad für Haushalte mit Kindern
 

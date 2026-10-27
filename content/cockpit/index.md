@@ -1,7 +1,7 @@
 ---
 title: "Fixkosten-Cockpit: Verträge, Fristen und laufende Kosten im Blick"
 seoTitle: "Fixkosten-Cockpit für Verträge & Fristen | FranksFinanzcheck"
-description: "Das kostenlose Fixkosten-Cockpit von FranksFinanzcheck ordnet deine laufenden Kosten, Vertrags-Checks und Fristen direkt in deinem Browser – ohne Datenübertragung."
+description: "Das Fixkosten-Cockpit von FranksFinanzcheck ordnet laufende Kosten, Vertrags-Checks und Fristen direkt im Browser – ohne Datenübertragung."
 draft: false
 showToc: true
 sitemap:

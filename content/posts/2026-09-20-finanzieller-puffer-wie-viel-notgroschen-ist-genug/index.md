@@ -1,6 +1,6 @@
 ---
 title: "Finanzieller Puffer: Der Rechenweg in fünf Minuten"
-description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis."
+description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte. Klare Faustregeln, Rechenbeispiele und ein alltagstauglicher Sparplan."
 date: 2026-09-21T09:29:03Z
 lastmod: 2026-10-13
 draft: false
