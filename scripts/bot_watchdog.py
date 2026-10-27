@@ -1114,6 +1114,13 @@ def check_affiliate_integrity():
 RESERVE_DIAGNOSE: dict = {}
 
 
+# Wortlaut von `reserve_artifacts.withdraw_invalid_ready()`: „Zertifikat
+# zurückgezogen: …“. Der Präfix ist die Unterscheidung zwischen „Nachweis
+# entwertet“ (nachzertifizieren) und „Kandidat erfüllt das Gate nicht“
+# (produzieren) – beide stehen im selben Feld `reason`.
+ZURUECKGEZOGEN_PRAEFIX = "Zertifikat zurückgezogen"
+
+
 def check_content_reserve():
     """Prüft den belegten, frischen Reife-Nachweis der Reserve.
 
@@ -1187,8 +1194,21 @@ def check_content_reserve():
         if not isinstance(candidate, dict):
             continue
         if candidate.get("ready") is not True:
-            if candidate.get("reason"):
-                blocked.append(str(candidate["reason"]))
+            reason = str(candidate.get("reason") or "")
+            if reason.startswith(ZURUECKGEZOGEN_PRAEFIX):
+                # Ein zurückgezogener READY-Beleg ist DRIFT, kein Engpass.
+                # `reserve_artifacts.withdraw_invalid_ready()` nimmt ein
+                # READY zurück, sobald der Entwurf nach der Messung geändert
+                # wurde – gezählt wurde hier aber nur `ready is True`, der
+                # Kandidat verschwand also aus beiden Listen. Folge: Der
+                # Bestand las sich weiter als „4 von 4, alles gut“, der
+                # Nachweis war aber entwertet, und der Nachzertifizierungs-
+                # Schritt des Watchdogs (er hängt an genau diesem Befund)
+                # lief nie an. Ohne diese Zeile bleibt ein zurückgezogenes
+                # Zertifikat liegen, bis jemand von Hand `--fix` aufruft.
+                drifted.append(str(candidate.get("slug") or "Kandidat"))
+            elif reason:
+                blocked.append(reason)
             continue
         slug = candidate.get("slug")
         path = draft_paths.get(slug) if isinstance(slug, str) else None
@@ -1234,10 +1254,15 @@ def check_content_reserve():
     if drifted:
         diagnosis += (f"; {len(drifted)} Kandidat(en) mit Zertifikats-Drift "
                       f"(nach der Zertifizierung geheilt)")
-    if certified < minimum:
+    if certified < minimum or drifted:
         if blocked:
             diagnosis += "; Blocker: " + " | ".join(blocked[:2])
-        return False, f"Reserve unter Mindestbestand ({diagnosis})"
+        if certified < minimum:
+            return False, f"Reserve unter Mindestbestand ({diagnosis})"
+        # Genug Artikel, aber ein Nachweis ist entwertet: kein grüner Haken.
+        # Der Befund heißt dann „Nachweis veraltet“ und schickt die Maschine
+        # zur Nachzertifizierung statt zur Produktionslinie.
+        return False, f"Reserve-Nachweis veraltet ({diagnosis})"
     return True, f"Reserve ausreichend ({diagnosis})"
 
 def reserve_finding(msg: str):
