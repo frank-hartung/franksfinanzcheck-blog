@@ -154,6 +154,10 @@ python3 scripts/release_scorecard.py                 # Release-Scorecard: acht D
 python3 scripts/skript_syntax_wache.py --selftest    # Skript-Syntax: der LIEGENDE Stand kompiliert (#864)
 python3 scripts/skript_syntax_wache.py              # alle Skripte prüfen (Exit 1 bei Fund)
 python3 scripts/skript_syntax_heiler.py --fix --commit   # Syntaxfehler heilen (letzte gültige Fassung, auditiert)
+npm run trigger:check                                # Trigger-Wache: was ein Lauf prüft, löst ihn auch aus (W1/W2/W3)
+npm run test:trigger                                 # Selbsttest (Sabotage) + 17 Vertragstests, inkl. PyYAML-Gegenprobe
+npm run kommando:probe                               # Kommando-Melder: würde dieser Prozess Annotationen senden?
+npm run test:kommando                                # Fluchtschutz (ein Befund = eine Zeile), Teststille, Notausgang
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache

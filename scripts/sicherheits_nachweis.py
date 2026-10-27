@@ -16,6 +16,11 @@ from pathlib import Path
 
 from blog_header_gate import ZIELE
 
+try:  # direkter Aufruf: scripts/ liegt auf dem Modulpfad
+    from github_kommando import annotation as annotation
+except ImportError:  # Import als Paket (Tests: from scripts import ...)
+    from scripts.github_kommando import annotation as annotation
+
 LIVE_JOB = "Live-Messung (täglich und auf Zuruf)"
 HEADER_MESSUNG = "Sicherheits-Header der echten Seite messen (F-01)"
 HEADER_AUSWERTUNG = "Sicherheits-Header auswerten (F-01) · Befund · Störung · grün"
@@ -80,10 +85,11 @@ def pruefe_messung(daten: dict, quelle: str, code: str) -> None:
         raise NachweisFehler("OK enthält nicht gemessene Ziele.")
 
 
-def annotation(stufe: str, text: str) -> None:
-    # HTTP-Antworten/Fehlermeldungen sind Daten, keine Workflow-Kommandos.
-    sicher = text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-    print(f"::{stufe}::{sicher}")
+# Die Annotation selbst kommt aus `github_kommando.py` (ein Meldeweg, ein
+# Fluchtschutz, Teststille). Der Alias bleibt, weil Workflow-Schritte und
+# Tests diese Schnittstelle (`sicherheits_nachweis.annotation("error", …)`)
+# seit #809 zitieren; die Semantik ist unverändert: HTTP-Antworten und
+# Fehlermeldungen sind Daten, keine Workflow-Kommandos.
 
 
 def zusammenfassung(text: str) -> None:

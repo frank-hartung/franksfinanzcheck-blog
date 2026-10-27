@@ -141,7 +141,14 @@ on:
       - "Premium-Governance"
       - "Sicherheits-Wache"   # AUDIT 15.10.2026 (F-01..F-10): Header, Inhalts-HTML, Worker-Betrieb (Budget/Bot-Schutz/Exporte) und die n8n-Kette – ein still roter Lauf wäre der Rückfall in genau die Befunde, die das Audit belegt hat
       - "Cloudflare-Worker deployen"   # WF-E813 (26.10.2026): Der Deploy ist der Heilungsschritt der Sicherheits-Wache (Runbook D2) und stand dennoch seit 25.10. still rot – fail-closed wegen fehlendem Produktions-Zugang, ohne eine einzige Meldung
-      - "CodeQL-Sicherheitswache"      # 26.10.2026: Das Security-Gate fand in einem Merge echte Fundstellen und blieb trotzdem stumm (#908 heilte sie binnen einer Stunde – durch Folgearbeit, nicht durch ein Signal). Ein still rotes Security-Gate ist die Rückkehr der stillen Lücke
+      - "CodeQL-Sicherheitswache"
+      # WF-E813/#815 (27.10.2026): Dieser Lauf ist der einzige Ort, an dem der
+      # LIEGENDE Stand kompiliert wird (#864) – und seit heute der einzige, an
+      # dem die Trigger-Vollständigkeit geprüft wird. Er stand nicht auf der
+      # Wacht-Liste: Eine dort gefundene Regression (oder ein nicht mehr
+      # auslösender Filter) wäre still geblieben. Genau die Klasse, die diese
+      # Stufe behebt, darf nicht als neuer stiller Kanal entstehen.
+      - "Skript-Syntax (liegender Stand)"      # 26.10.2026: Das Security-Gate fand in einem Merge echte Fundstellen und blieb trotzdem stumm (#908 heilte sie binnen einer Stunde – durch Folgearbeit, nicht durch ein Signal). Ein still rotes Security-Gate ist die Rückkehr der stillen Lücke
       - "Lesehilfen-Gate (Vorlesen + Kurzfassung)"
       - "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)"
       - "Slot-Wache (Content-Slots nachziehen)"   # #601: holt verpasste Cron-Slots nach – kann sie das nicht, muss es laut werden
@@ -428,6 +435,12 @@ jobs:
             // durchgelassen – der Befund gehört in eine Meldung, nicht in
             // den Actions-Verlauf.
             const isCodeql = wfName === 'CodeQL-Sicherheitswache';
+            // 27.10.2026 (Trigger-Wache, WF-E813/#815): Der Skript-Syntax-Lauf
+            // prüft den liegenden Stand und – seit dieser Stufe – ob jede Wache
+            // von ihrem eigenen Filter ausgelöst wird. Beides ist eine
+            // Code-/Vertragsregression, kein Betriebsausfall: Es hilft kein
+            // Neustart und kein Schlüssel, sondern eine Reparatur im Repo.
+            const istSkriptSyntax = wfName === 'Skript-Syntax (liegender Stand)';
             const codeqlGateFailed = isCodeql &&
               failedStepNames.some(s => String(s).includes('Sicherheits-Gate'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
@@ -511,6 +524,10 @@ jobs:
               : (isWorkerDeploy && !workerTestsFailed) ? 'worker-deploy'
               : codeqlGateFailed ? 'codeql-fund'
               : isCodeql ? 'codeql'
+              // 27.10.2026: eigener Rat für den liegenden Stand (Syntax oder
+              // Trigger-Vollständigkeit). Ein generischer „API-Key?"-Rat wäre
+              // hier so falsch wie bei der Sicherheits-Wache (C34).
+              : istSkriptSyntax ? 'skript-syntax'
               // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
               : selbsttestFailed ? 'selbsttest'
               : 'allgemein';
@@ -760,6 +777,13 @@ jobs:
                             '1. **Analyse- oder Upload-Störung, kein Code-Befund.** Rot ist ein CodeQL-Schritt vor oder nach dem Gate (Initialisierung, Analyse, SARIF-Upload). Das Security-Gate selbst hat nichts beanstandet.',
                             '2. Log des roten Schritts lesen – häufig: GitHub-Ausfall (https://www.githubstatus.com), SARIF-Größenlimit oder Runner-Störung. Danach den Lauf erneut starten.',
                             '3. Die Offline-Wachen bleiben davon unabhängig die Quelle der Wahrheit für F-01–F-10: `npm run test:sicherheit`.'
+                          ]
+                      : runbookKlasse === 'skript-syntax'
+                        ? [
+                            '1. **Einordnung: Code- oder Vertragsregression, kein Betriebsausfall.** Rot ist entweder ein Syntaxfehler im liegenden Stand (die Zusammenführung zweier Fassungen) oder ein Befund der Trigger-Wache: Ein Workflow ruft einen Prüfer auf, den sein `paths`-Filter nicht nennt (W1), ein Filter zeigt ins Leere (W2), oder `push` und `pull_request` tragen verschiedene Listen (W3).',
+                            '2. **Lokal nachfahren:** `python3 scripts/skript_syntax_wache.py --check` bzw. `npm run trigger:check`. Beide nennen Datei, Regel und den genauen Pfad – keine Rateschritte.',
+                            '3. **Heilen:** Syntax mit `python3 scripts/skript_syntax_heiler.py --fix --commit` (auditierte letzte gültige Fassung) oder von Hand; Trigger-Befunde durch Ergänzen des Pfades in BEIDEN Listen (`push` und `pull_request`). Den Filter nie verengen, ohne den Grund im PR zu nennen.',
+                            '4. **Grenze der Prüfung:** Die Trigger-Wache sagt, ob ein Gate ANSPRINGT – nicht, ob es das Richtige prüft. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt F2. Der nächste grüne Lauf auf `main` schließt diese Meldung selbst.'
                           ]
                       : runbookKlasse === 'selbsttest'
                         ? [

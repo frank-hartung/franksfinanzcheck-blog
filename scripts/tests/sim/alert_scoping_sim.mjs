@@ -755,6 +755,34 @@ await run('CodeQL: Analyse-Störung ohne Gate-Rot → Störungs-Rat, kein Heilun
              steps: [{ name: 'CodeQL initialisieren', conclusion: 'failure' }] }] },
   true, ['<!-- alert-runbook: codeql -->', 'Analyse- oder Upload-Störung, kein Code-Befund', 'githubstatus'],
   null, ['im Code heilen, nicht wegdrücken', 'Häufigste Ursachen', 'API-Key abgelaufen']);
+// 27.10.2026 (WF-E813/#815): Der Skript-Syntax-Lauf prüft den LIEGENDEN
+//     Stand (#864) und seit dieser Stufe die Trigger-Vollständigkeit. Er stand
+//     nicht auf der Wacht-Liste; jetzt hat er einen eigenen Rat, der weder
+//     Schlüssel noch Neustart empfiehlt.
+const SKRIPT_SYNTAX = 'Skript-Syntax (liegender Stand)';
+await run('Skript-Syntax: Syntaxfehler im liegenden Stand → Code-Regressions-Rat',
+  { workflowName: SKRIPT_SYNTAX, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'syntax', conclusion: 'failure', html_url: 'https://x/jobs/ss1',
+             steps: [{ name: 'Wache selbst prüfen', conclusion: 'success' },
+                     { name: 'Alle Skripte kompilieren (fail-closed)', conclusion: 'failure' }] }] },
+  true, ['Vorgang **' + IDENTITIES[SKRIPT_SYNTAX].code + '**',
+         '<!-- alert-runbook: skript-syntax -->', 'Code- oder Vertragsregression, kein Betriebsausfall',
+         'skript_syntax_heiler.py'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ']);
+await run('Trigger-Wache rot → Vertragsregressions-Rat mit Pfad-Ergänzung',
+  { workflowName: SKRIPT_SYNTAX, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'syntax', conclusion: 'failure', html_url: 'https://x/jobs/ss2',
+             steps: [{ name: 'Trigger-Wache – was ein Lauf prüft, muss ihn auslösen', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: skript-syntax -->', 'npm run trigger:check',
+         'BEIDEN Listen', 'Abschnitt F2'],
+  null, ['Häufigste Ursachen', 'Transienter Fehler']);
+// Gegenprobe: Der Rat ist an den KANAL gebunden, nicht an den Schrittnamen.
+await run('Skript-Syntax-Rat gilt nur für den eigenen Kanal (Gegenprobe)',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Layout-AI', conclusion: 'failure', html_url: 'https://x/jobs/ss3',
+             steps: [{ name: 'Trigger-Wache – was ein Lauf prüft, muss ihn auslösen', conclusion: 'failure' }] }] },
+  true, ['Häufigste Ursachen'], null, ['<!-- alert-runbook: skript-syntax -->']);
+
 // Nachführung der neuen Klassen über die #761/#815-Mechanik: Eine offene
 // Meldung mit veraltetem Allgemeinnrat bekommt den neuen Kanal-Rat.
 await run('Worker-Deploy: offene Meldung mit Allgemeinnrat → Zugang-Rat nachgeführt',

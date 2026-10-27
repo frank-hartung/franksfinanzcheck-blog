@@ -99,6 +99,11 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 
+try:  # direkter Aufruf: scripts/ liegt auf dem Modulpfad
+    from github_kommando import annotation as _kommando_annotation
+except ImportError:  # Import als Paket (Tests: from scripts import ...)
+    from scripts.github_kommando import annotation as _kommando_annotation
+
 # --------------------------------------------------------------------------- #
 #  Regel-IDs – stabil, weil CI-Annotationen und Tests sie zitieren.
 # --------------------------------------------------------------------------- #
@@ -808,11 +813,25 @@ def bericht_markdown(befunde: Sequence[Befund], bilanz: Optional[Bilanz]) -> str
     return "\n".join(zeilen)
 
 
-def _annotation(befund: Befund) -> str:
+def _befund_annotieren(befund: Befund) -> bool:
+    """Die Befundzeile für GitHub – gebaut vom gemeinsamen Kommando-Melder.
+
+    WARUM NICHT SELBST GEBAUT (WF-E813/#815, 27.10.2026): Diese Funktion
+    setzte Dateiname und Text unmaskiert in ein Workflow-Kommando. Ein
+    Zeilenumbruch im Befund (Dateiname aus dem Baum, Requirement-Zeile aus
+    einer Datei) hätte daraus ein ZWEITES Kommando gemacht; ein `,` im
+    Dateinamen hätte eine Eigenschaft wie `line=` eingeschmuggelt. Der
+    Melder kodiert nach GitHub-Vorschrift und sendet unter einem Test-Runner
+    gar nichts – die drei falschen Annotationen in Lauf 40499567144 kamen
+    genau aus dieser Funktion, aufgerufen aus einem Unit-Test.
+    """
     ebene = "error" if befund.schwere == SCHWERE_FEHLER else "warning"
-    return (
-        f"::{ebene} file={befund.datei},line={max(1, befund.zeile)},"
-        f"title=Abhängigkeits-Wache {befund.regel}::{befund.text}"
+    return _kommando_annotation(
+        ebene,
+        befund.text,
+        datei=befund.datei,
+        zeile=max(1, befund.zeile),
+        titel=f"Abhängigkeits-Wache {befund.regel}",
     )
 
 
@@ -1045,18 +1064,20 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if args.check:
             print(f"Struktur: {len(fehler_befunde)} Fehler, {len(warnungen)} Warnung(en).")
             for befund in befunde:
-                print(_annotation(befund))
+                _befund_annotieren(befund)
         if bilanz is not None:
             if bilanz.stoerung:
-                print(f"::error title=Abhängigkeits-Audit gestört::{bilanz.stoerung}")
+                _kommando_annotation("error", bilanz.stoerung,
+                                     titel="Abhängigkeits-Audit gestört")
             else:
                 print(f"Audit: {bilanz.geprueft} Versionen geprüft, {len(bilanz.treffer)} Treffer.")
                 for treffer in bilanz.treffer:
                     fix = treffer.fix or "kein Fix veröffentlicht"
-                    print(
-                        f"::error title=Schwachstelle {treffer.ghsa}::"
+                    _kommando_annotation(
+                        "error",
                         f"{treffer.name}@{treffer.version} ({treffer.oekosystem}, "
-                        f"{treffer.schwere}) – Fix: {fix} – {treffer.zusammenfassung}"
+                        f"{treffer.schwere}) – Fix: {fix} – {treffer.zusammenfassung}",
+                        titel=f"Schwachstelle {treffer.ghsa}",
                     )
 
     if bilanz is not None and bilanz.stoerung:

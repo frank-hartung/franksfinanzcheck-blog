@@ -36,6 +36,10 @@ on:
       - "scripts/design_variant_*.py"
       - "scripts/design_reach_briefing.py"
       - "scripts/design_handoff.py"
+      # Trigger-Wache (W1): alle drei werden in diesem Lauf aufgerufen.
+      - "scripts/agent_reach_gate.py"
+      - "scripts/manifest_guard.py"
+      - "scripts/tests/test_design_varianten.py"
       - "e2e/variant-metrics.mjs"
       - "e2e/design-variante.spec.mjs"
   schedule:

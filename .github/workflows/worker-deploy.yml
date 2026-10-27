@@ -47,6 +47,7 @@ on:
       - "tools/wrangler/**"
       - "scripts/worker_deploy_vorbereiten.py"
       - "scripts/worker_ressourcen.py"
+      - "scripts/manifest_guard.py"
       - ".github/workflows/worker-deploy.yml"
 
 permissions:

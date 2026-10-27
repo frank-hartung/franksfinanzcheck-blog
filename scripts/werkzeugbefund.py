@@ -49,6 +49,18 @@ from pathlib import Path
 
 TRENNER = "\u001f"  # Unit Separator: kann in keinem Schrittnamen vorkommen
 
+try:  # direkter Aufruf: scripts/ liegt auf dem Modulpfad
+    from github_kommando import annotation as _melden_anzeige
+except ImportError:  # Import als Paket (Tests: from scripts import ...)
+    try:
+        from scripts.github_kommando import annotation as _melden_anzeige
+    except ImportError:  # Notbetrieb: der Melder darf NIE am Melden sterben (#227)
+        # Kein Kommando ohne den gemeinsamen Kodierer: Eine ungeprüfte
+        # `::`-Zeile könnte ein zweites Kommando erzeugen. Also Klartext.
+        def _melden_anzeige(ebene, text, **_):
+            print(f"[{ebene}] {text}")
+            return False
+
 
 def befund_datei() -> Path:
     """Lauf-Datei der Werkzeugbefunde (umlenkbar, nie im Repo)."""
@@ -84,13 +96,17 @@ def melden(schritt: str, text: str, *, datei: Path | None = None) -> int:
         with ziel.open("a", encoding="utf-8") as fh:
             fh.write(zeile + "\n")
     except OSError as exc:  # pragma: no cover - Dateisystem-Notfall
-        print(f"::error::Werkzeugbefund konnte nicht abgelegt werden ({exc}) – "
-              f"Befund trotzdem: {schritt}: {text}")
+        _melden_anzeige("error", f"Werkzeugbefund konnte nicht abgelegt werden ({exc}) – "
+                                 f"Befund trotzdem: {schritt}: {text}")
         return 0
-    print(f"::error title=Werkzeugbefund ({schritt})::{text} "
-          f"Die Auslieferung läuft bewusst weiter; der Lauf wird NACH der "
-          f"Veröffentlichung rot (Job release-seal, Verträge C34/C38). "
-          f"Eine ausgefallene Messung ist kein Grün (C33).")
+    # Der Melder entscheidet, ob daraus ein Workflow-Kommando wird (WF-E813
+    # #815, 27.10.2026): Unter einem Test-Runner bleibt die Zeile Klartext,
+    # damit `--selftest` und die Vertragstests keinen Lauf einfärben.
+    _melden_anzeige("error", f"{text} "
+                             f"Die Auslieferung läuft bewusst weiter; der Lauf wird NACH der "
+                             f"Veröffentlichung rot (Job release-seal, Verträge C34/C38). "
+                             f"Ausgefallene Messung ist kein Grün (C33).",
+                    titel=f"Werkzeugbefund ({schritt})")
     return 0
 
 

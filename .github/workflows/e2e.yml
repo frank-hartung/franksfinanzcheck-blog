@@ -70,6 +70,7 @@ on:
       - "tools/seo-cockpit/**"
       - "scripts/manifest_guard.py"
       - "scripts/tests/test_manifest_guard.py"
+      - "scripts/tabellen_lesbarkeit_guard.py"
       - "playwright.config.mjs"
       - "package.json"
       - "package-lock.json"

@@ -474,7 +474,9 @@ class VerhaltensSimulation(unittest.TestCase):
                                          "Affiliate-Integritäts-Wache (täglich)",
                                          "Content-Reserve (täglicher Vorrat)",
                                          "Cloudflare-Worker deployen",
-                                         "CodeQL-Sicherheitswache", boeser_name)}
+                                         "CodeQL-Sicherheitswache",
+                                         "Skript-Syntax (liegender Stand)",
+                                         boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
         umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)

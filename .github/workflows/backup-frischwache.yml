@@ -44,6 +44,11 @@ on:
     branches: ["main"]
     paths:
       - "scripts/backup_freshness_guard.py"
+      # Trigger-Wache 27.10.2026 (W1): Die Frischwache ruft beide Prüfer auf.
+      # Ohne diese Pfade startete sie bei einer Änderung daran nicht – sie
+      # hätte dann über einen Code geurteilt, der gar nicht lief.
+      - "scripts/backup_einrichtung.py"
+      - "scripts/kv_backup.py"
       - "scripts/tests/test_backup_einrichtung.py"
       - ".github/workflows/backup-frischwache.yml"
       - ".github/workflows/backup-offsite.yml"
