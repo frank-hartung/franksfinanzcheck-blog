@@ -236,6 +236,45 @@ class WatchdogKanalTestCase(unittest.TestCase):
         self.assertIn("3 gate-fertige Artikel", text)
         self.assertIn("Zertifikat passt nicht mehr", text)
 
+    def test_zurueckgezogenes_zertifikat_ist_kein_gruener_haken(self):
+        """Ein entwerteter READY-Beleg darf den Bestand nicht grün färben.
+
+        `withdraw_invalid_ready()` setzt einen Kandidaten auf `ready: False`
+        und schreibt „Zertifikat zurückgezogen: …“ als Grund. Vorher zählte
+        der Watchdog nur `ready is True` – der Kandidat fiel damit aus beiden
+        Listen und der Vorrat las sich weiter als vollständig. Der
+        Nachzertifizierungs-Schritt des Watchdogs hängt aber an genau diesem
+        Befund: Ohne ihn bleibt ein entwertetes Zertifikat liegen, bis ein
+        Mensch `reserve_recert.py --fix` aufruft.
+        """
+        candidates = []
+        for i in range(4):
+            slug = f"reserve-{i}"
+            candidates.append({
+                "slug": slug, "ready": True,
+                "sha256": self._write_reserve_draft(slug),
+            })
+        candidates.append({
+            "slug": "zurueckgezogen", "ready": False,
+            "reason": "Zertifikat zurückgezogen: Entwurf nach der Messung "
+                      "geändert; vollständige Nachmessung nötig "
+                      "(reserve_recert.py --fix)",
+        })
+        self._write_reserve_draft("zurueckgezogen")
+        self._write_reserve_certificate(candidates)
+
+        ok, text = bw.check_content_reserve()
+
+        self.assertFalse(ok)
+        self.assertIn("Reserve-Nachweis veraltet", text)
+        self.assertIn("1 Kandidat(en) mit Zertifikats-Drift", text)
+        self.assertEqual(bw.RESERVE_DIAGNOSE["drifted"], ["zurueckgezogen"])
+        # Der nächste Schritt muss die Nachzertifizierung sein, nicht die
+        # Produktionslinie – sonst entsteht ein Ticket, das nie abarbeitbar ist.
+        f = bw.reserve_finding(text)
+        self.assertIn("Zertifikat veraltet", f.title)
+        self.assertIn("reserve_recert.py --fix", f.next_step)
+
     def test_content_reserve_ignoriert_veraltetes_zertifikat(self):
         slug = "alter-nachweis"
         candidates = [{
