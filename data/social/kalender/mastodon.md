@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 27.10.2026 00:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.10.2026 11:41 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Di, 27. Oktober 2026
-- **07:30** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
 - **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _frage_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
@@ -46,6 +44,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 27.10.2026 11:41 · Energieeffizienz im Haushalt: 5 schnelle Spartricks → https://mastodon.social/@FranksFinanzcheck/117512449068863753
 - ✅ 26.10.2026 18:26 · Bankgebühren senken: 7 Schritte zum günstigeren Konto → https://mastodon.social/@FranksFinanzcheck/117508382297357813
 - ✅ 26.10.2026 12:15 · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag → https://mastodon.social/@FranksFinanzcheck/117506920725188960
 - ✅ 25.10.2026 15:58 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken → https://mastodon.social/@FranksFinanzcheck/117502135144875649
@@ -55,7 +54,6 @@
 - ✅ 23.10.2026 12:12 · Kleine Energiespar‑Tricks: Deine Kosten sofort senken → https://mastodon.social/@FranksFinanzcheck/117489686600605060
 - ✅ 22.10.2026 17:55 · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? → https://mastodon.social/@FranksFinanzcheck/117485372935493916
 - ✅ 22.10.2026 12:18 · Haushaltskosten reduzieren: So gewinnst du die Kontrolle → https://mastodon.social/@FranksFinanzcheck/117484047623058483
-- ✅ 21.10.2026 17:59 · Dein Weg zu geringeren Monatskosten: Schritt für Schritt → https://mastodon.social/@FranksFinanzcheck/117479727634173619
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
