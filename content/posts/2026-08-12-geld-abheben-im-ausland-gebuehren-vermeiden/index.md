@@ -1,6 +1,6 @@
 ---
 title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
-description: "Geld abheben im Ausland: welche zwei Gebühren am Automaten zusammenkommen, was die Abrechnung in Euro bedeutet und wie du vor der Reise deine Karte prüfst."
+description: "Geld abheben im Ausland: die zwei Gebühren am Automaten, die Abrechnung in Euro und wie du deine Karte schon vor der Reise prüfst."
 date: 2026-08-12T06:10:00Z
 lastmod: 2026-10-13
 draft: false

@@ -56,6 +56,16 @@ on:
       - "scripts/a11y_audit.py"
       - "scripts/tests/test_h1_wache.py"
       - "scripts/tests/test_a11y_audit.py"
+      # Snippet-Gate (Screaming-Frog-Spiegel, 27.10.2026): Grenzen (SSOT),
+      # Messstelle, Quell-Wache und Tests. Eine Änderung nur an der Zahl
+      # muss den Lauf auslösen, sonst altert die Grenze unbemerkt.
+      - "scripts/serp_limits.py"
+      - "scripts/seo_cockpit.py"
+      - "scripts/metadaten_wache.py"
+      - "scripts/tests/test_serp_limits.py"
+      - "scripts/tests/test_seo_cockpit.py"
+      - "scripts/tests/test_metadaten_wache.py"
+      - "tools/seo-cockpit/**"
       - "scripts/manifest_guard.py"
       - "scripts/tests/test_manifest_guard.py"
       - "playwright.config.mjs"
@@ -159,6 +169,40 @@ jobs:
       # Browser-Tests, damit ein roter Befund sofort sichtbar ist.
       - name: H1-Wache – gebaute Seiten (jede genau eine H1)
         run: python3 scripts/h1_wache.py --public public
+
+      # ------------------------------------------------------------------
+      #  SNIPPET-GATE (Screaming-Frog-Spiegel, 27.10.2026)
+      #  Ein fremder Crawl fand an der Startseite, was unsere eigenen Wachen
+      #  nicht sahen: Description über 155 Zeichen (und über 985 Pixel), einen
+      #  internen Link ohne Ankertext und „mehrere H2". Hier wird daraus ein
+      #  PR-Gate – nicht ein Deploy-Blocker: Ein zu langes Snippet darf die
+      #  Auslieferung der Live-Site nicht anhalten (C34), es darf aber nicht
+      #  unbemerkt in main wandern. Grenzen und Breitenmaß stehen in
+      #  scripts/serp_limits.py; dieselben Zahlen prüft metadaten_wache.py
+      #  an der Quelle – `--fail-on` sperrt genau die vier Codes.
+      # ------------------------------------------------------------------
+      - name: Snippet-Gate – Snippetfenster, Ankertext, Rangfolge
+        run: |
+          set +e
+          protokoll="${RUNNER_TEMP:-/tmp}/snippet-gate.log"
+          python3 scripts/seo_cockpit.py --build public \
+            --output "${RUNNER_TEMP:-/tmp}/seo-cockpit-pr" \
+            --fail-on description-length,description-breite,link-no-anchor,heading-order \
+            | tee "$protokoll"
+          gate_status=${PIPESTATUS[0]}
+          {
+            echo "### Snippet-Gate (155 Zeichen · 985 px · Ankertext · Rangfolge)"
+            echo '```'
+            tail -n 30 "$protokoll"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$gate_status" -ne 0 ]; then
+            echo "::error title=Snippet-Gate::Snippet, Ankertext oder Rangfolge verletzt – die Grenzen stehen in scripts/serp_limits.py"
+          fi
+          exit "$gate_status"
+
+      - name: Metadaten-Wache – Quelle (Titel, Description, Belege)
+        run: python3 scripts/metadaten_wache.py
 
       - name: E2E-Suite ausführen
         run: npx playwright test

@@ -57,6 +57,80 @@ def _messen(ablauf, *, pausen=(), ziele=None):
                              ziele=ziele), probe
 
 
+
+class StatischeHeadersDatei(unittest.TestCase):
+    """`static/_headers` trägt seit 27.10.2026 die Sicherheits-Kopfzeilen mit.
+
+    Befund vom 27.10.2026: Ein fremder Crawl meldete fehlende CSP-, HSTS-,
+    `nosniff`-, Frame- und Referrer-Header. Live liefert GitHub Pages sie
+    tatsächlich nicht – aber die Datei, die als Migrationsweg auf Cloudflare
+    Pages/Netlify gilt, trug bis dahin NUR Cache-Regeln. Wer umzieht, hätte
+    den Schutz nicht mitgenommen. Diese Tests halten beides fest: die Werte
+    (S1) und die Überschneidungsfreiheit (S2).
+    """
+
+    def setUp(self):
+        self.soll = gate._soll_kopfzeilen()
+        self.gesund = gate._statische_probe(self.soll)
+
+    def test_sollstand_hat_acht_kopfzeilen(self):
+        namen = [n.lower() for n, _ in self.soll]
+        self.assertEqual(len(namen), 8)
+        for pflicht in ('strict-transport-security', 'x-content-type-options',
+                        'x-frame-options', 'referrer-policy', 'content-security-policy',
+                        'permissions-policy', 'cross-origin-opener-policy',
+                        'cross-origin-resource-policy'):
+            self.assertIn(pflicht, namen)
+
+    def test_echte_datei_entspricht_der_vorlage(self):
+        text = (REPO / 'static' / '_headers').read_text(encoding='utf-8')
+        self.assertEqual(gate.statische_pruefen(text, self.soll), [])
+
+    def test_entfernte_kopfzeile_ist_befund(self):
+        ohne = "\n".join(z for z in self.gesund.splitlines() if 'X-Frame-Options' not in z)
+        befund = gate.statische_pruefen(ohne, self.soll)
+        self.assertTrue(any('S1' in f and 'x-frame-options' in f.lower() for f in befund), befund)
+
+    def test_gedrifteter_wert_ist_befund(self):
+        gedriftet = self.gesund.replace('max-age=31536000; includeSubDomains; preload',
+                                        'max-age=600')
+        befund = gate.statische_pruefen(gedriftet, self.soll)
+        self.assertTrue(any('S1' in f for f in befund), befund)
+
+    def test_zweiter_wert_derselben_kopfzeile_ist_befund(self):
+        doppelt = self.gesund.replace('  X-Frame-Options: DENY\n',
+                                      '  X-Frame-Options: DENY\n  X-Frame-Options: SAMEORIGIN\n')
+        befund = gate.statische_pruefen(doppelt, self.soll)
+        self.assertTrue(any('S1' in f for f in befund), befund)
+
+    def test_ueberschneidende_cache_regeln_sind_befund(self):
+        # Cloudflare Pages führt passende Regeln zusammen und verbindet
+        # gleiche Köpfe mit Komma: zwei max-age-Werte sind kein Cache-Header.
+        text = self.gesund.replace('/images/*\n  Cache-Control: public, max-age=31536000, immutable',
+                                   '/images/*\n  Cache-Control: public, max-age=60, must-revalidate')
+        text = text.replace('/*\n', '/*\n  Cache-Control: public, max-age=31536000, immutable\n', 1)
+        befund = gate.statische_pruefen(text, self.soll)
+        self.assertTrue(any('S2' in f and 'cache-control' in f.lower() for f in befund), befund)
+
+    def test_getrennte_pfade_sind_kein_befund(self):
+        self.assertEqual(gate.statische_pruefen(self.gesund + '\n/api/*\n  Cache-Control: no-store\n',
+                                                self.soll), [])
+
+    def test_leere_datei_ist_befund(self):
+        befund = gate.statische_pruefen('# nur ein Kommentar\n', self.soll)
+        self.assertTrue(befund)
+
+    def test_pfad_glob(self):
+        self.assertTrue(gate.pfad_passt('/*', '/posts/x/'))
+        self.assertTrue(gate.pfad_passt('/images/*', '/images/covers/a.jpg'))
+        self.assertFalse(gate.pfad_passt('/fonts/*', '/images/a.jpg'))
+
+
+class SelfTestDerWache(unittest.TestCase):
+    def test_selftest_ist_gruen(self):
+        self.assertEqual(gate.selftest(), 0)
+
+
 class StoerungIstKeinBefund(unittest.TestCase):
     """Kernregression WF-E813: Eine Nicht-Messung ist kein Sicherheitsbefund."""
 

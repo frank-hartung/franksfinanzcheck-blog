@@ -166,6 +166,17 @@
     {{- partial "post_meta.html" . -}}
   </footer>
   {{- end }}
+  {{- /* ANKERTEXT, NICHT NUR ARIA (Dauerheilung 27.10.2026, Screaming-Frog-Spiegel).
+         Der Karten-Link war leer: `<a class="entry-link" aria-label="…"></a>`.
+         Für Screenreader war er benannt, für Crawler aber ein interner Link
+         OHNE Ankertext – der fremde Crawl meldete genau das. Der sichtbare
+         Text der Karte gehört inzwischen dem <h2>-Titel weiter oben; damit
+         der Link trotzdem einen echten Ankertext trägt, steht er hier als
+         sr-only-Spanne im Link selbst. aria-label bleibt: Es benennt den
+         Link für Screenreader; den Ankertext für Crawler liefert die Spanne.
+         Beide nutzen denselben Ausdruck und können nicht auseinanderlaufen.
+         Wache: scripts/seo_cockpit.py (P2 link-no-anchor). */ -}}
+  <a class="entry-link" aria-label="Weiterlesen: {{ .Title | plainify }}" href="{{ .RelPermalink }}"><span class="sr-only">Weiterlesen: {{ .Title | plainify }}</span></a>
 </article>
 {{- end }}
 

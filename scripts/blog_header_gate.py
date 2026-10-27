@@ -20,6 +20,17 @@ Bauarten
   --offline    prüft nur die Konfigurationsdateien (Repo-Stand)
   (Vorgabe)    fragt die echte Seite ab (Netz nötig)
 
+SEIT 27.10.2026 PRÜFT `--offline` AUCH `static/_headers`
+--------------------------------------------------------
+Jene Datei galt im Haus als „Migrationsweg" für Cloudflare Pages/Netlify und
+enthielt bis dahin ausschließlich Cache-Regeln: Ein Umzug hätte HSTS,
+`nosniff`, Clickjacking-Schutz und CSP stillschweigend zurückgelassen (der
+Screaming-Frog-Befund vom 27.10.2026 zeigte genau diese fünf Lücken live).
+Sie trägt die acht Kopfzeilen der Vorlage jetzt mit; geprüft werden
+S1 (jeder Wert exakt wie in der Tabelle A1) und S2 (kein Pfad erbt zwei
+verschiedene Werte derselben Kopfzeile – Cloudflare Pages führt alle
+passenden Regeln zusammen und verbindet gleiche Namen mit Komma).
+
 Ausgabe: Markdown-Bericht, Exit-Code nach Klasse (siehe unten). Optionale
 Header (Permissions-Policy, COOP/CORP) werden gemeldet, aber nicht erzwungen —
 sie sind Härtung, kein Muss.
@@ -293,6 +304,105 @@ def naechster_schritt(klasse: str, proxy: str) -> str:
     return ""
 
 
+# --------------------------------------------------------------- static/_headers
+# Seit 27.10.2026 trägt `static/_headers` die Sicherheits-Kopfzeilen mit
+# (Migrationsweg Cloudflare Pages / Netlify). Damit gibt es eine zweite
+# Stelle, an der ein Wert stehen kann – und eine zweite Stelle ist eine
+# Stelle zu viel, wenn sie nicht geprüft wird. Diese Regeln prüfen sie:
+#   S1  Jede Kopfzeile der Vorlage (edge-schutz.md, A1) steht mit EXAKT
+#       diesem Wert in `static/_headers`.
+#   S2  Kein Pfad erbt zwei verschiedene Werte derselben Kopfzeile.
+#       Cloudflare Pages führt alle passenden Regeln zusammen und verbindet
+#       gleiche Namen mit Komma: `max-age=31536000, immutable, max-age=600`
+#       ist kein Cache-Header, sondern ein Widerspruch.
+STATISCHE_PFADE = ("/", "/posts/beispiel/", "/fonts/inter-variable.woff2",
+                   "/images/covers/beispiel.jpg", "/favicon.ico",
+                   "/sitemap.xml", "/sw.js")
+
+
+def statische_bloecke(text: str) -> list[tuple[str, dict[str, list[str]]]]:
+    """`static/_headers` → [(Pfadmuster, {kopfzeile: [werte]})].
+
+    Aufbau der Datei (Cloudflare Pages und Netlify lesen dasselbe Format):
+    eine Pfadzeile ohne Einrückung, darunter eingerückte `Name: Wert`-Zeilen.
+    Kommentare (`#`) und Leerzeilen zählen nicht.
+    """
+    bloecke: list[tuple[str, dict[str, list[str]]]] = []
+    for roh in text.splitlines():
+        zeile = roh.strip()
+        if not zeile or zeile.startswith("#"):
+            continue
+        if not roh[:1].isspace():
+            bloecke.append((zeile, {}))
+            continue
+        if not bloecke or ":" not in zeile:
+            continue
+        name, _, wert = zeile.partition(":")
+        bloecke[-1][1].setdefault(name.strip().lower(), []).append(wert.strip())
+    return bloecke
+
+
+def pfad_passt(muster: str, pfad: str) -> bool:
+    """Glob-Regel aus `_headers`: `*` steht für beliebig viele Zeichen."""
+    return re.fullmatch(re.escape(muster).replace(r"\*", ".*"), pfad) is not None
+
+
+def statische_pruefen(text: str, soll: list[tuple[str, str]]) -> list[str]:
+    """Prüft S1 (Werte) und S2 (Erbschaft) der Datei `static/_headers`."""
+    fehler: list[str] = []
+    bloecke = statische_bloecke(text)
+    if not bloecke:
+        return ["`static/_headers` enthält keine einzige Regel — die Datei "
+                "würde beim Umzug auf Cloudflare Pages nichts schützen."]
+
+    # S1: Sollstand aus der Vorlage, Wert für Wert.
+    vorhanden: dict[str, list[str]] = {}
+    for _, kopf in bloecke:
+        for name, werte in kopf.items():
+            vorhanden.setdefault(name, []).extend(werte)
+    for name, wert in soll:
+        if name.lower() not in vorhanden:
+            fehler.append(f"S1: `{name}` fehlt in `static/_headers` — beim Umzug "
+                          "auf einen Hoster, der die Datei liest, fehlt der Schutz.")
+            continue
+        ist = {w for w in vorhanden[name.lower()] if w}
+        if wert not in ist:
+            fehler.append(f"S1: `{name}` weicht von der Vorlage ab — Soll "
+                          f"`{wert[:120]}`, Ist `{' | '.join(sorted(ist))[:120]}`.")
+        weitere = ist - {wert}
+        if weitere:
+            fehler.append(f"S1: `{name}` steht zusätzlich mit einem zweiten Wert "
+                          f"in `static/_headers` (`{' | '.join(sorted(weitere))[:120]}`).")
+
+    # S2: Was erbt ein Pfad? Zwei verschiedene Werte derselben Kopfzeile
+    # sind auf Cloudflare Pages ein kommagetrennter Widerspruch.
+    for pfad in STATISCHE_PFADE:
+        geerbt: dict[str, set[str]] = {}
+        for muster, kopf in bloecke:
+            if not pfad_passt(muster, pfad):
+                continue
+            for name, werte in kopf.items():
+                geerbt.setdefault(name, set()).update(w for w in werte if w)
+        for name, werte in sorted(geerbt.items()):
+            if len(werte) > 1:
+                fehler.append(f"S2: `{pfad}` erbt `{name}` mit "
+                              f"{len(werte)} verschiedenen Werten "
+                              f"(`{' | '.join(sorted(werte))[:160]}`) — die Regeln "
+                              "überschneiden sich, der Hoster schickt beide.")
+    return fehler
+
+
+def _soll_kopfzeilen() -> list[tuple[str, str]]:
+    """Sollstand aus der EINEN Quelle: Tabelle A1 in cloudflare/edge-schutz.md.
+
+    Bewusst als später Import: `cloudflare_edge_freigabe` prüft im eigenen
+    Selbsttest diese Wache — ein Import auf Modulebene wäre ein Kreis.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from cloudflare_edge_freigabe import vorlage_kopfzeilen  # noqa: WPS433
+    return vorlage_kopfzeilen()
+
+
 def offline_pruefen() -> tuple[int, str]:
     """Ohne Netz: Prüft, dass Vorlage und Wachen zusammenpassen."""
     zeilen: list[str] = ["# Sicherheits-Header — Repo-Prüfung (offline)", ""]
@@ -309,6 +419,23 @@ def offline_pruefen() -> tuple[int, str]:
     for anweisung in CSP_SOLL + [CSP_SOLL_FRAME_SRC, CSP_SOLL_FORM_ACTION]:
         if anweisung not in text:
             fehler.append(f"CSP-Anweisung `{anweisung}` fehlt in der Vorlage.")
+    # Die ausgelieferte Datei muss denselben Sollstand tragen (S1/S2).
+    hdatei = WURZEL / "static" / "_headers"
+    if not hdatei.is_file():
+        fehler.append("`static/_headers` fehlt — der Migrationsweg auf "
+                      "Cloudflare Pages/Netlify würde ohne Sicherheits-Header starten.")
+    else:
+        try:
+            soll = _soll_kopfzeilen()
+        except Exception as ausnahme:  # noqa: BLE001 – fail-closed, nie stillschweigend grün
+            fehler.append(f"Sollstand nicht lesbar (cloudflare/edge-schutz.md, A1): "
+                          f"{type(ausnahme).__name__}: {ausnahme}")
+            soll = []
+        if soll:
+            fehler.extend(statische_pruefen(hdatei.read_text(encoding="utf-8"), soll))
+        else:
+            fehler.append("Die Tabelle A1 in `cloudflare/edge-schutz.md` liefert keine "
+                          "Kopfzeilen — ohne Sollstand ist `static/_headers` ungeprüft.")
     # Die Meta-CSP im Layout darf nicht behaupten, was sie nicht kann.
     head = WURZEL / "layouts" / "_partials" / "head.html"
     if head.exists():
@@ -332,7 +459,8 @@ def offline_pruefen() -> tuple[int, str]:
     if fehler:
         zeilen += ["## Befunde", ""] + [f"- ❌ {f}" for f in fehler]
         return 1, "\n".join(zeilen)
-    zeilen.append("✅ Header-Vorlage vollständig, Meta-CSP ohne Scheinschutz, "
+    zeilen.append("✅ Header-Vorlage vollständig, `static/_headers` deckungsgleich "
+                  "(S1/S2: Werte und Erbschaft geprüft), Meta-CSP ohne Scheinschutz, "
                   "Wachen-Regeln deckungsgleich.")
     return 0, "\n".join(zeilen)
 
@@ -565,6 +693,19 @@ def _ein_ziel() -> list[str]:
     return [ZIELE[0]]
 
 
+def _statische_probe(soll: list[tuple[str, str]]) -> str:
+    """Gesunder Stand von `static/_headers` für die Sabotageproben.
+
+    Die Kopfzeilen kommen aus dem Sollstand (keine dritte Kopie der Werte);
+    die Proben verändern genau eine Sache und beweisen damit die Wirkung.
+    """
+    kopf = "".join(f"  {name}: {wert}\n" for name, wert in soll)
+    return ("/*\n" + kopf + "\n"
+            "/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n"
+            "/images/*\n  Cache-Control: public, max-age=31536000, immutable\n"
+            "/favicon.ico\n  Cache-Control: public, max-age=31536000, immutable\n")
+
+
 def selftest() -> int:
     gut = dict(GUTE_KOPFZEILEN)
     faelle = 0
@@ -613,6 +754,44 @@ def selftest() -> int:
                             "cross-origin-opener-policy": "same-origin",
                             "cross-origin-resource-policy": "same-origin"})
     assert not f, "Optionale Header dürfen keinen Fehler erzeugen"
+    faelle += 1
+
+    # ------------------------------------------------ static/_headers (S1/S2)
+    # Jede Probe ist eine Sabotage an einem gesunden Datei-Stand: Fehlt die
+    # Wirkung, ist die Wache stumpf.
+    soll = _soll_kopfzeilen()
+    assert len(soll) == 8, f"Vorlage A1 liefert {len(soll)} statt 8 Kopfzeilen"
+    gesund = _statische_probe(soll)
+    assert statische_pruefen(gesund, soll) == [], "Gesunde _headers-Datei beanstandet"
+    faelle += 1
+
+    # S1a: sicherheitsrelevante Kopfzeile entfernt (der Zustand vor dem Fix).
+    ohne = "\n".join(z for z in gesund.splitlines() if "X-Frame-Options" not in z)
+    befund = statische_pruefen(ohne, soll)
+    assert any("S1" in f and "x-frame-options" in f.lower() for f in befund), \
+        f"Fehlende Kopfzeile nicht erkannt: {befund}"
+    faelle += 1
+
+    # S1b: Wert gedriftet (HSTS-Frist verkürzt) – der stille Weg.
+    gedriftet = gesund.replace("max-age=31536000; includeSubDomains; preload",
+                               "max-age=600")
+    befund = statische_pruefen(gedriftet, soll)
+    assert any("S1" in f and "strict-transport-security" in f.lower() for f in befund), \
+        f"Abweichender HSTS-Wert nicht erkannt: {befund}"
+    faelle += 1
+
+    # S2: zwei Regeln überschneiden sich für denselben Pfad. Cloudflare Pages
+    # verbindet beide Werte mit Komma – ein widersprüchlicher Cache-Header.
+    doppelt = gesund.replace("/*\n", "/*\n  Cache-Control: public, max-age=600\n", 1) \
+                     .replace("/images/*", "/*.png\n  Cache-Control: public, max-age=60\n/images/*")
+    befund = statische_pruefen(doppelt, soll)
+    assert any("S2" in f and "cache-control" in f.lower() for f in befund), \
+        f"Überschneidende Cache-Regeln nicht erkannt: {befund}"
+    faelle += 1
+
+    # S2-Gegenprobe: eine Regel, die nur andere Pfade trifft, ist kein Befund.
+    getrennt = gesund + "\n/api/*\n  Cache-Control: no-store\n"
+    assert statische_pruefen(getrennt, soll) == [], "Getrennte Pfade fälschlich beanstandet"
     faelle += 1
 
     code, bericht = offline_pruefen()

@@ -8,7 +8,7 @@ Frontmatter im Text belegt ist. Dieses Gate schließt diese Lücken.
 
 Regeln (jede Regel hat einen Selbsttest-Fall):
   M1  Titel 1–60 Zeichen (SERP kürzt darüber den Titel)
-  M2  Description 100–160 Zeichen (SERP-Snippet-Fenster)
+  M2  Description 100–155 Zeichen (SERP-Snippet-Fenster)
   M3  lastmod darf nicht vor dem Veröffentlichungstag (date) liegen
   M4  Veröffentlichte Inhalte: Quelle(n) vorhanden; Artikel zusätzlich
       Kurzantwort, Faktencheck-Datum und ein existierendes Cover-Bild
@@ -16,6 +16,16 @@ Regeln (jede Regel hat einen Selbsttest-Fall):
   M6  Zahlenversprechen (Spar-Pille aus savings/Description) müssen im
       Fließtext als Zahl belegt sein – „Zahlen statt Behauptungen“.
       Kein Beleg → FAIL (Korrektur: Zahl belegen oder Versprechen streichen).
+  M7  Description passt auch in der BREITE ins Snippet (≤ 985 px in
+      Arial 14 px). Die Zeichenzahl allein reicht nicht: 150 Zeichen
+      aus breiten Wörtern laufen über, 155 schmale Zeichen nicht.
+      Grenzen und Breitenmaß: scripts/serp_limits.py (eine Quelle).
+
+Grenzen sind Markt-Grenzen (seit 27.10.2026): Ein fremder Crawl
+(Screaming Frog) meldete die Startseite mit „über 155 Zeichen“ und
+„über 985 Pixel“, während M2 hier 160 erlaubte. Zwei Maßstäbe, ein
+Befund – seitdem liest diese Wache die Grenzen aus `serp_limits`,
+dieselbe Zahl, die das SEO-Cockpit am gebauten HTML prüft.
 
 Nutzung:
   python3 scripts/metadaten_wache.py            # Prüfung, Exit 0/1
@@ -36,10 +46,15 @@ try:
 except ImportError:  # fail-closed: ohne PyYAML keine Aussage
     yaml = None
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import serp_limits  # noqa: E402  (SSOT: Grenzen + Breitenmaß, keine zweite Zahl)
+
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TITLE_MAX = 60
-DESC_MIN, DESC_MAX = 100, 160
+# Keine eigenen Zahlen: die Grenzen gehören der SSOT (serp_limits.py) und
+# werden hier nur benannt, damit Berichte und Tests lesbar bleiben.
+DESC_MIN, DESC_MAX = serp_limits.DESC_MIN_ZEICHEN, serp_limits.DESC_MAX_ZEICHEN
 CONTENT_GLOBS = [
     "content/posts/*.md",
     "content/posts/*/index.md",
@@ -129,8 +144,20 @@ def check_document(rel, text, cover_exists=None, pill_fn=None):
     desc = _norm(fm.get("description"))
     if not desc:
         add("M2", "Description fehlt")
-    elif not (DESC_MIN <= len(desc) <= DESC_MAX):
-        add("M2", f"Description {len(desc)} Zeichen (erwartet {DESC_MIN}–{DESC_MAX})")
+    else:
+        if not (DESC_MIN <= len(desc) <= DESC_MAX):
+            add("M2", f"Description {len(desc)} Zeichen (erwartet {DESC_MIN}–{DESC_MAX})")
+        # M7: Breite. Ein Snippet kann bei 150 Zeichen überlaufen, wenn die
+        # Wörter breit sind – und bei 155 Zeichen passen, wenn sie schmal
+        # sind. Deshalb misst die Wache, was Google abschneidet.
+        breite = serp_limits.breite_px(desc)
+        if breite is None:
+            zeichen = ", ".join(repr(z) for z in serp_limits.unbekannte_zeichen(desc)[:5])
+            add("M7", f"Description enthält Zeichen ohne Breitenmaß ({zeichen}) – "
+                      "Snippet-Breite nicht prüfbar")
+        elif breite > serp_limits.DESC_MAX_PX:
+            add("M7", f"Description {breite:.0f} px in {serp_limits.SCHRIFT_NAME} "
+                      f"(max. {serp_limits.DESC_MAX_PX} px)")
 
     date = _days(fm.get("date"))
     lastmod = _days(fm.get("lastmod"))
@@ -279,6 +306,17 @@ def run_selftest():
         ("M6: Zahl nur im Versprechen, Pille aus Description", _GOOD.replace('savings: "bis zu 360 € im Jahr sparen"\n', "").replace(
             'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
             'description: "Strom sparen: bis zu 987 € sichern. Stromfresser finden, Tarife vergleichen und Abschläge planen – mit einfachen Rechenbeispielen."'), None, _selftest_pill, ["M6"]),
+        # M7-Sabotage (27.10.2026): 135 Zeichen – also innerhalb von M2 –
+        # laufen in Arial 14 px über 985 px. Genau diese Lücke zwischen
+        # Zeichenzahl und Sichtbarkeit meldete der fremde Crawl.
+        ("M7: Description zu breit bei 135 Zeichen", _GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            'description: "Wohngebäude und Wärmewende: Warum Wärmeverlust, Wärmepumpe und Wartung zusammengehören. Wer Wohnraum warm hält, spart mit Wärmedämmung."'),
+         None, _selftest_pill, ["M7"]),
+        # Ein Emoji ist messbar breit, aber nicht in der Kernschrift enthalten:
+        # Die Wache schätzt NICHT, sie meldet „nicht prüfbar".
+        ("M7: Zeichen ohne Breitenmaß (Emoji)", _GOOD.replace(
+            'für jeden Haushalt."', 'für jeden Haushalt. 💡"'), None, _selftest_pill, ["M7"]),
         ("M6: Zahl nur als Nummer im Text, Versprechen mit Euro", _GOOD.replace(
             'savings: "bis zu 360 € im Jahr sparen"', 'savings: "ab ca. 5 € im Monat"').replace(
             "Im Text stehen 360 Euro als Beleg: 360 € im Jahr.", "Schritt 5 erklärt den Ablauf."), None, _selftest_pill, ["M6"]),

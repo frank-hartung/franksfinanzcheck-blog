@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-14
 title: "DNS-Hack testen: Antwortzeit statt gefühltem Tempo"
-description: "DNS-Hack testen: Vergleiche DNS-Antwortzeiten mit dig. Was Messwerte aussagen – und warum sie weder mehr Bandbreite noch schnellere Seiten garantieren."
+description: "DNS-Hack testen: Vergleiche DNS-Antwortzeiten mit dig. Was Messwerte aussagen – und warum sie weder mehr Bandbreite noch schnellere Seiten bringen."
 date: 2026-09-16T08:58:26Z
 draft: false
 tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
