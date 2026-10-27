@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T23:45:40Z",
+  "generated": "2026-10-27T23:42:49Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -69,7 +69,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 17 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 18 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
