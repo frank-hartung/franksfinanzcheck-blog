@@ -177,7 +177,7 @@ Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleib
 
 ![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Ein Messplan für den ersten Abend“ bis „Kühlgeräte: erst messen, dann über Ersatz reden“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
 ## Eine Messwoche ohne Zettelchaos
 
