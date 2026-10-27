@@ -43,7 +43,7 @@ Für viele ist die Kreditkarte eine unsichtbare Gebührenquelle. Zwölf Euro im 
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ratgeber zeigt, worauf es beim Kreditkarten-[Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) ankommt: Kosten, Sicherheit und versteckte Klauseln. Am Ende bekommst du eine Checkliste für deinen Alltag.
+Dieser Ratgeber zeigt, worauf es beim Kreditkarten-Vergleich 2026 ankommt: Kosten, Sicherheit und versteckte Klauseln. Am Ende bekommst du eine Checkliste für deinen Alltag.
 
 
 
@@ -105,7 +105,7 @@ Viele Premium-Karten locken mit Reiseversicherungen und Lounge-Zugang. Das kling
 
 Ein Versicherungs-Baustein in der Karte hilft, wenn du keine eigene Police hast. Doch Vorsicht: Viele Karten-Versicherungen greifen nur, wenn du die Reise mit der Karte bezahlt hast. Eine eigene, günstige Police ist oft klarer.
 
-Mein Rat: Vergleiche die Kernkosten der Karte. Sieh Versicherungen als Bonus, nicht als Kaufgrund. Wer seine [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) schon gut geregelt hat, braucht keine Doppelversicherung.
+Mein Rat: Vergleiche die Kernkosten der Karte. Sieh Versicherungen als Bonus, nicht als Kaufgrund. Wer seine [Privathaftpflicht](../../pillar/versicherungen/) schon gut geregelt hat, braucht keine Doppelversicherung.
 
 ## Die Abrechnung: Kreditkarte clever führen
 

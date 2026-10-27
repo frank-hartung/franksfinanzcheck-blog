@@ -1,6 +1,6 @@
 ---
 title: "Datenschutzerklärung"
-description: "Datenschutzhinweise zu Hosting, eigenem Klickzähler, Affiliate-Links, Newsletter, Feedback und deinen Rechten"
+description: "Datenschutzhinweise zu Hosting, eigenem Klickzähler, Affiliate-Links, Newsletter, Feedback und deinen Rechten auf Auskunft und Löschung."
 draft: false
 showToc: true
 ---

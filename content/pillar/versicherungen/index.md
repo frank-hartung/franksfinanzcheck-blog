@@ -58,7 +58,7 @@ Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen 
 
 Nach dem Bürgerlichen Gesetzbuch (§&nbsp;823 BGB) haftest du für Schäden, die du anderen schuldhaft zufügst, mit deinem gesamten gegenwärtigen und zukünftigen Vermögen – in unbegrenzter Höhe. Eine Privathaftpflicht schützt dich vor den finanziellen Folgen und wehrt zudem unberechtigte Schadenersatzansprüche als passiver Rechtsschutz ab.
 
-Warum dieser Schutz unverzichtbar ist, worauf es bei Deckungssummen, Mietsachschäden und Gefälligkeitshandlungen ankommt und wie günstig gute Verträge sind, erfährst du in unserem Ratgeber [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/).
+Wichtig sind dabei Deckungssummen, Mietsachschäden und Gefälligkeitshandlungen. Der Schnell-Tipp darunter nennt die Faustregel für die Deckungssumme.
 
 💡 **Schnell-Tipp von Frank:** Achte bei Neuverträgen auf eine Mindestdeckungssumme von 50 Millionen Euro für Personen-, Sach- und Vermögensschäden sowie den Einschluss von Forderungsausfalldeckung (wenn dir jemand ohne Haftpflicht einen Schaden zufügt).
 
@@ -70,7 +70,7 @@ Warum dieser Schutz unverzichtbar ist, worauf es bei Deckungssummen, Mietsachsch
 
 Für Haus- und Wohnungseigentümer ist die Wohngebäudeversicherung die wichtigste Sachpolice, während Mieter mit einer Hausratversicherung ihr gesamtes bewegliches Mobiliar absichern. Durch die Zunahme extremer Wetterereignisse hat sich die Risikolage in den letzten Jahren drastisch verändert.
 
-Einen umfassenden Überblick über die aktuellen Standards, Elementarschaden-Erweiterungen und Präventionsmaßnahmen findest du im Beitrag [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/).
+Die wichtigsten Standards, die Elementarschaden-Erweiterung und die Klauseln, die im Schadenfall zählen, stehen direkt darunter.
 
 ### Wichtige Klauseln für deinen Hausrat- & Gebäudeschutz:
 * **Verzicht auf Einrede der groben Fahrlässigkeit:** Dein Versicherer zahlt auch dann, wenn eine brennende Kerze kurz unbeaufsichtigt blieb oder ein gekipptes Fenster bei Starkregen offen stand.
@@ -117,10 +117,7 @@ Wer von unten nach oben kauft, spart die 12 Mini-Policen, die im Schaden nicht t
 
 ## Cluster-Reihenfolge
 
-1. [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
-2. [Wohngebäude-Vergleich](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/)
-3. [Haus-Vorsorge 2026](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)
-4. [Kfz-Vergleich](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
+Haftpflicht zuerst, dann Gebäude und Hausrat, zuletzt Kfz. Die Reihenfolge folgt der Pyramide: Was existenzbedrohend ist, kommt vor dem, was Konto und Komfort betrifft.
 
 Kfz hat den Kalender (30.11.). Haftpflicht hat keinen – und genau deshalb bleibt sie jahrelang unangetastet, obwohl 20 € und drei Klauseln fehlen.
 

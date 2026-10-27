@@ -237,7 +237,7 @@ Du musst nur deinen Alltag kennen. Brauchst du oft Bargeld? Kommst du ohne Giroc
 
 Zahlst du heute mehr als 10 € im Monat, lohnt sich der Wechsel. Er ist schnell erledigt und bringt dir jedes Jahr Geld für wichtigere Dinge.
 
-**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/) · [Kreditkarte vergleichen](../../posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/) · [Privathaftpflicht im Check](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+**Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/) · [Kreditkarte vergleichen](../../posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/) · [Ratgeber Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen (FAQ)
 

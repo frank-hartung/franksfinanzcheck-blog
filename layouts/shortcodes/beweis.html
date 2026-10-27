@@ -34,7 +34,7 @@
   <header class="ff-bw__kopf">
     <span class="ff-bw__typ">{{ index $typNamen $e.typ }}</span>
     <span class="ff-bw__klasse ff-bw__klasse--{{ $e.belegklasse }}" title="Belegklasse: {{ index $klassenNamen $e.belegklasse }}">
-      <b aria-hidden="true">{{ index $klassenKurz $e.belegklasse }}</b> {{ index $klassenNamen $e.belegklasse }}
+      <strong aria-hidden="true">{{ index $klassenKurz $e.belegklasse }}</strong> {{ index $klassenNamen $e.belegklasse }}
     </span>
     {{- if eq $e.status "verifiziert" }}
     <span class="ff-bw__status ff-bw__status--ok">Verifizierter Beleg</span>
@@ -53,13 +53,13 @@
 
   {{- if eq $e.typ "fallstudie" }}
   <ol class="ff-bw__fall">
-    <li><b>Ausgangslage:</b> {{ $e.ausgangslage }}</li>
-    <li><b>Entscheidung:</b> {{ $e.entscheidung }}</li>
-    <li><b>Ergebnis:</b> {{ $e.ergebnis }}</li>
+    <li><strong>Ausgangslage:</strong> {{ $e.ausgangslage }}</li>
+    <li><strong>Entscheidung:</strong> {{ $e.entscheidung }}</li>
+    <li><strong>Ergebnis:</strong> {{ $e.ergebnis }}</li>
   </ol>
   <p class="ff-bw__meta">{{ $e.zeitraum }}</p>
   {{- else if eq $e.typ "modellrechnung" }}
-  <p class="ff-bw__formel"><b>Rechenweg:</b> {{ $e.rechenweg }}</p>
+  <p class="ff-bw__formel"><strong>Rechenweg:</strong> {{ $e.rechenweg }}</p>
   {{- with $e.annahmen }}
   <p class="ff-bw__listtitel">Annahmen</p>
   <ul class="ff-bw__liste">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
@@ -68,8 +68,8 @@
   {{- with $e.messaufbau }}
   <p class="ff-bw__listtitel">Messaufbau</p>
   <ul class="ff-bw__liste">
-    <li><b>Messgerät:</b> {{ .geraet }}</li>
-    <li><b>Zeitraum:</b> {{ .zeitraum }}</li>
+    <li><strong>Messgerät:</strong> {{ .geraet }}</li>
+    <li><strong>Zeitraum:</strong> {{ .zeitraum }}</li>
     {{- range .protokoll }}<li>{{ . }}</li>{{ end }}
   </ul>
   {{- end }}

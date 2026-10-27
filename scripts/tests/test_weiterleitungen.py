@@ -24,16 +24,26 @@ class QuelleBestand(unittest.TestCase):
         self.assertEqual(wl.pruefe(self.eintraege, self.entfallen, self.live), [])
 
     def test_umfang(self):
-        # 118 ehemals veröffentlichte URLs: 115 mit Ziel, 3 bewusst 404 (Regel D)
-        self.assertEqual(len(self.eintraege), 115)
+        # 253 ehemals veröffentlichte URLs: 250 mit Ziel, 3 bewusst 404 (Regel D)
+        # 27.10.2026: der Hausvorsorge-Beitrag ist wieder live → sein Regel-C-Fallback
+        # ist entfallen (250 statt 251).
+        # 27.10.2026: +136 Alt-URLs aus dem GSC-Kandidatenraum (68 Dubletten "(1)",
+        # 68 datumslose Alt-URLs, je genau ein Live-Ziel – Regel A).
+        # Siehe GSC-OPTIMIERUNGSPLAN-2026-10-27.md, Anhang A.
+        self.assertEqual(len(self.eintraege), 250)
         self.assertEqual(sum(1 for e in self.entfallen if e["regel"] == "D"), 3)
 
-    def test_geparkter_hausvorsorge_beitrag_hat_pillar_fallback(self):
-        url = "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/"
-        route = next((e for e in self.eintraege if e["von"] == url), None)
-        self.assertIsNotNone(route)
-        self.assertEqual(route["nach"], "/pillar/versicherungen/")
-        self.assertEqual(route["regel"], "C")
+    def test_weiterleitungsquelle_ist_nie_live(self):
+        """Eine Weiterleitung endet, sobald die Seite wieder live ist (27.10.2026).
+
+        Der Hausvorsorge-Beitrag war vom Redaktions-Standard geparkt und hatte
+        deshalb einen Regel-C-Fallback auf den Versicherungs-Pillar. Seit er
+        wieder ausgeliefert wird, darf keine Weiterleitung mehr auf seiner URL
+        liegen – sonst überschreibt die Meta-Refresh-Seite die echte Seite.
+        Diese Prüfung gilt für JEDE Quelle, nicht nur für diesen einen Fall.
+        """
+        doppelt = sorted({e["von"] for e in self.eintraege} & set(self.live))
+        self.assertEqual(doppelt, [], f"Quelle ist live und weitergeleitet: {doppelt}")
 
     def test_tags_nie_weitergeleitet(self):
         self.assertFalse(any(e["von"].startswith("/tags/") for e in self.eintraege))

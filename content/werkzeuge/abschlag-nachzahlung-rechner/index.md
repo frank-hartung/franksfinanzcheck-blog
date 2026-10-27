@@ -1,7 +1,7 @@
 ---
 title: "Strom- und Gas-Abschlagsrechner: Nachzahlung vorher erkennen"
 seoTitle: "Abschlag berechnen: Strom- & Gasrechner"
-description: "Strom- oder Gasabschlag berechnen: Jahresverbrauch und Tarifpreis eingeben, Monatsbetrag sowie mögliche Nachzahlung ermitteln. Kostenlos und lokal im Browser."
+description: "Strom- oder Gasabschlag berechnen: Jahresverbrauch und Tarifpreis eingeben, Monatsbetrag und mögliche Nachzahlung ermitteln – lokal im Browser."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false

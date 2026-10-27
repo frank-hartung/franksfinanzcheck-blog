@@ -23,11 +23,11 @@
 
 /* ---------- Belegklassen-Badge (gemeinsam) ---------- */
 .ff-bw__klasse{display:inline-flex;align-items:center;gap:.4em;padding:.18em .6em;border-radius:999px;font-size:.74rem;font-weight:650;color:var(--primary);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 10%,transparent);border:1px solid color-mix(in srgb,var(--ff-green-2,#0e5a43) 35%,transparent)}
-.ff-bw__klasse b{display:inline-flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;border-radius:50%;color:#fff;background:var(--ff-green-2,#0e5a43);font-style:normal}
+.ff-bw__klasse :is(b,strong){display:inline-flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;border-radius:50%;color:#fff;background:var(--ff-green-2,#0e5a43);font-style:normal}
 .ff-bw__klasse--markt{background:color-mix(in srgb,#8a5a00 10%,transparent);border-color:color-mix(in srgb,#8a5a00 35%,transparent)}
-.ff-bw__klasse--markt b{background:#8a5a00}
+.ff-bw__klasse--markt :is(b,strong){background:#8a5a00}
 .ff-bw__klasse--erfahrung{background:color-mix(in srgb,var(--ff-ink,#17211d) 8%,transparent);border-color:color-mix(in srgb,var(--ff-ink,#17211d) 30%,transparent)}
-.ff-bw__klasse--erfahrung b{background:var(--ff-ink,#17211d)}
+.ff-bw__klasse--erfahrung :is(b,strong){background:var(--ff-ink,#17211d)}
 
 /* ---------- Status-Chips ---------- */
 .ff-bw__typ{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ff-green,#1f6f5c)}
@@ -112,12 +112,12 @@
 /* ---------- Dark Mode ---------- */
 :root[data-theme="dark"] .ff-beleg__mark,
 [data-theme="dark"] .ff-beleg__mark{background:var(--ff-green,#1f6f5c)}
-:root[data-theme="dark"] .ff-bw__klasse b,
-[data-theme="dark"] .ff-bw__klasse b{background:var(--ff-green,#1f6f5c)}
-:root[data-theme="dark"] .ff-bw__klasse--markt b,
-[data-theme="dark"] .ff-bw__klasse--markt b{background:#c98a1e;color:var(--ff-ink,#17211d)}
-:root[data-theme="dark"] .ff-bw__klasse--erfahrung b,
-[data-theme="dark"] .ff-bw__klasse--erfahrung b{background:#5a6d66}
+:root[data-theme="dark"] .ff-bw__klasse :is(b,strong),
+[data-theme="dark"] .ff-bw__klasse :is(b,strong){background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-bw__klasse--markt :is(b,strong),
+[data-theme="dark"] .ff-bw__klasse--markt :is(b,strong){background:#c98a1e;color:var(--ff-ink,#17211d)}
+:root[data-theme="dark"] .ff-bw__klasse--erfahrung :is(b,strong),
+[data-theme="dark"] .ff-bw__klasse--erfahrung :is(b,strong){background:#5a6d66}
 :root[data-theme="dark"] .ff-beleg--markt .ff-beleg__mark,
 [data-theme="dark"] .ff-beleg--markt .ff-beleg__mark{background:#c98a1e;color:var(--ff-ink,#17211d)}
 :root[data-theme="dark"] .ff-beleg--erfahrung .ff-beleg__mark,

@@ -22,7 +22,7 @@
       <a class="ff-vm__pillar" href="{{ printf "pillar/%s/" .id | relURL }}">Zum Ratgeber &rarr;</a>
     </header>
     <p class="ff-vm__leitfrage">{{ .leitfrage }}</p>
-    <p class="ff-vm__formel"><b>Rechenweg:</b> {{ .rechenweg }}</p>
+    <p class="ff-vm__formel"><strong>Rechenweg:</strong> {{ .rechenweg }}</p>
     <div class="ff-vm__spalten">
       <div>
         <p class="ff-vm__listtitel">Prüfregeln &amp; Rangfolge</p>
@@ -32,7 +32,7 @@
         <p class="ff-vm__listtitel">Datenbasis</p>
         <ul class="ff-vm__liste ff-vm__liste--daten">
           {{- range .datenbasis }}
-          <li><span class="ff-bw__klasse ff-bw__klasse--{{ .klasse }}" title="{{ index $klassenNamen .klasse }}"><b aria-hidden="true">{{ index $klassenKurz .klasse }}</b></span> {{ .text }}</li>
+          <li><span class="ff-bw__klasse ff-bw__klasse--{{ .klasse }}" title="{{ index $klassenNamen .klasse }}"><strong aria-hidden="true">{{ index $klassenKurz .klasse }}</strong></span> {{ .text }}</li>
           {{- end }}
         </ul>
         {{- with .grenzen }}

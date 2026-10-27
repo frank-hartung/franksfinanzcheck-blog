@@ -29,7 +29,7 @@
   <div class="ff-bwreg__legende" role="list" aria-label="Belegklassen">
     {{- range $key, $k := $schema.belegklassen }}
     <div class="ff-bwreg__klasse" role="listitem">
-      <span class="ff-bw__klasse ff-bw__klasse--{{ $key }}"><b aria-hidden="true">{{ $k.kurz }}</b> {{ $k.name }}</span>
+      <span class="ff-bw__klasse ff-bw__klasse--{{ $key }}"><strong aria-hidden="true">{{ $k.kurz }}</strong> {{ $k.name }}</span>
       <p>{{ $k.definition }}</p>
     </div>
     {{- end }}
@@ -41,7 +41,7 @@
     <li class="ff-bwreg__item" id="beweis-{{ .id }}">
       <div class="ff-bwreg__kopf">
         <span class="ff-bw__typ">{{ index $typNamen .typ }}</span>
-        <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}"><b aria-hidden="true">{{ index $klassenKurz .belegklasse }}</b></span>
+        <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}"><strong aria-hidden="true">{{ index $klassenKurz .belegklasse }}</strong></span>
         {{- if eq .status "verifiziert" }}
         <span class="ff-bw__status ff-bw__status--ok">Verifiziert</span>
         {{- else }}
@@ -75,13 +75,13 @@
     <li class="ff-bwreg__item" id="beweis-{{ .id }}">
       <div class="ff-bwreg__kopf">
         <span class="ff-bw__typ">{{ index $typNamen .typ }}</span>
-        <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}"><b aria-hidden="true">{{ index $klassenKurz .belegklasse }}</b></span>
+        <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}"><strong aria-hidden="true">{{ index $klassenKurz .belegklasse }}</strong></span>
         <span class="ff-bw__status ff-bw__status--offen">{{ if eq .status "in-erhebung" }}In Erhebung{{ else }}Geplant{{ end }}</span>
         {{- with .faellig }}<span class="ff-bw__stand">fällig {{ dateFormat "02.01.2006" (substr (printf "%v" .) 0 10) }}</span>{{ end }}
       </div>
       <p class="ff-bwreg__titel">{{ .titel }}</p>
       <p class="ff-bwreg__fazit">{{ .kurzfazit }}</p>
-      {{- with .dokumentationsplan }}<p class="ff-bwreg__plan"><b>Dokumentationsplan:</b> {{ . }}</p>{{ end }}
+      {{- with .dokumentationsplan }}<p class="ff-bwreg__plan"><strong>Dokumentationsplan:</strong> {{ . }}</p>{{ end }}
     </li>
     {{- end }}
   </ul>

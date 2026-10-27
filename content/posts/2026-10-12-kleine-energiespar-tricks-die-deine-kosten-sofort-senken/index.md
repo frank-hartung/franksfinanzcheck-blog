@@ -88,7 +88,7 @@ Die folgende Tabelle fasst die Wirkung als Modellrechnung zusammen:
 | Duschkopf mit Begrenzer | 5 % – 8 % beim Warmwasser | gering |
 | Geräte komplett vom Netz trennen | 1 % – 2 % des Stroms | gering |
 
-#### LED‑Lampen im Vergleich
+### LED‑Lampen im Vergleich
 
 Ein Rechenbeispiel für ein einzelnes Leuchtmittel zeigt den Unterschied:
 
@@ -100,7 +100,7 @@ Ein Rechenbeispiel für ein einzelnes Leuchtmittel zeigt den Unterschied:
 
 Der Kaufpreis einer LED rechnet sich in dieser Beispielrechnung meist nach kurzer Zeit. Danach halten die Leuchtmittel sehr lange. Der Verbrauch an Strom sinkt massiv. Tausche alte Glühbirnen konsequent aus, um sofort zu sparen.
 
-#### Stand‑by‑Verbrauch konkret
+### Stand‑by‑Verbrauch konkret
 
 Die folgende Beispielrechnung zeigt den Dauerverbrauch bei einer Annahme von 0,40 €/kWh:
 
