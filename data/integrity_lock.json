@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-26T18:22:11.535904+00:00",
-  "head": "21b8fca",
+  "signed_at": "2026-10-27T15:47:00.753492+00:00",
+  "head": "6dda09c",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "hugo.toml": "e86edaf4dd3b4821f9b2f534e2694caf759f3cc0bdb3572eece4b100a1491363",
+    "hugo.toml": "f69433af403fbb87704acce7336bca462480fb257b84e900690bf31294c31078",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -54,7 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df",
+  "files_sha256": "a3e7debec9a2090370ea419b2f04bf5bbdb36bbafd418e17687b521705749fb0",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
@@ -476,8 +476,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "cd074ba68ce5d9cb9080995842ea6d635631a126609106cfddbb9d9527a93d04",
-      "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df"
+      "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df",
+      "prev_sha256": "cd074ba68ce5d9cb9080995842ea6d635631a126609106cfddbb9d9527a93d04"
+    },
+    {
+      "date": "2026-10-27",
+      "art": "set-current",
+      "head": "6dda09c",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "6dda09c",
+              "datum": "2026-10-27",
+              "betreff": "feat(seo): Sitecheck-2016-Kriterien umsetzen und dauerhaft bewachen"
+            },
+            {
+              "sha": "b6f0265",
+              "datum": "2026-10-27",
+              "betreff": "chore(schaltwerk): Automationslauf 2026-10-27 14:22"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "44c1eab647e91ea5e5a6f6056ee8dfdb3555ad1e37009f66d2677c5e784ac714",
+      "files_sha256": "a3e7debec9a2090370ea419b2f04bf5bbdb36bbafd418e17687b521705749fb0"
     }
   ]
 }
