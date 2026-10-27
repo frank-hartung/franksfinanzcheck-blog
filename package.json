@@ -25,6 +25,7 @@
     "index:hygiene": "hugo --minify --cleanDestinationDir && python3 scripts/index_hygiene_gate.py",
     "test:index:hygiene": "python3 scripts/tag_governance.py --selftest && python3 scripts/index_hygiene_gate.py --selftest",
     "weiterleitungen:check": "python3 scripts/weiterleitungen.py --check && python3 scripts/weiterleitungen.py --verify && python3 scripts/url_wache.py",
+    "test:versicherungs-cluster": "python3 -m unittest scripts.tests.test_versicherungs_cluster_verlinkung",
     "test:weiterleitungen": "python3 scripts/weiterleitungen.py --selftest && python3 scripts/konsolidierung.py --selftest && python3 scripts/url_wache.py --selftest && python3 -m unittest scripts.tests.test_weiterleitungen scripts.tests.test_konsolidierung",
   "test:konsolidierung": "python3 scripts/konsolidierung.py --selftest && python3 -m unittest scripts.tests.test_konsolidierung",
     "gsc:bestand": "python3 scripts/indexierbare_seiten.py",
