@@ -6,41 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
- kontrolle:nutzen:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261027T170000Z
-DTEND:20261027T171500Z
-SUMMARY:Telegram (Kanal): Haushaltskosten reduzieren: So gewinnst du d
- ie Kontrolle (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-12-haushaltskoste
- n-reduzieren-so-gewinnst-du-die-kontrolle/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-redu
- zieren-so-gewinnst-du-die-kontrolle/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
- ushalt:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
+UID:telegram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
+ er-schritt:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
-SUMMARY:Telegram (Kanal): Energiekosten senken: Smarte Helfer für den 
- Haushalt (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-
- senken-smarte-helfer-fuer-den-haushalt/
-URL:https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken
- -smarte-helfer-fuer-den-haushalt/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
- er-schritt:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261108T060000Z
-DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Dein Weg zu geringeren Monatskosten: Schritt
   für Schritt (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -48,6 +18,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  ringeren-monatskosten-schritt-fuer-schritt/
 URL:https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringer
  en-monatskosten-schritt-fuer-schritt/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
+ ten-falle:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261108T060000Z
+DTEND:20261108T061500Z
+SUMMARY:Telegram (Kanal): VPN Zuhause: Schutzschild oder unnötige Fixk
+ osten-Falle? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-sc
+ hutzschild-oder-unnoetige-fixkosten-falle/
+URL:https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzsc
+ hild-oder-unnoetige-fixkosten-falle/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

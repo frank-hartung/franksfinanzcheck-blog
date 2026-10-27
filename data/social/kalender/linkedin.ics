@@ -6,26 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – LinkedIn
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:linkedin:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
- ushalt:nutzen:2026-10-28@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
+UID:linkedin:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
+ er-schritt:nutzen:2026-10-28@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
 DTSTART:20261028T064500Z
 DTEND:20261028T070000Z
-SUMMARY:LinkedIn: Energiekosten senken: Smarte Helfer für den Haushalt
-  (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken-s
- marte-helfer-fuer-den-haushalt/
-URL:https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken
- -smarte-helfer-fuer-den-haushalt/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
- er-schritt:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261029T064500Z
-DTEND:20261029T070000Z
 SUMMARY:LinkedIn: Dein Weg zu geringeren Monatskosten: Schritt für Sch
  ritt (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -37,10 +22,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
- ten-falle:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261030T064500Z
-DTEND:20261030T070000Z
+ ten-falle:nutzen:2026-10-29@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261029T064500Z
+DTEND:20261029T070000Z
 SUMMARY:LinkedIn: VPN Zuhause: Schutzschild oder unnötige Fixkosten-Fa
  lle? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -52,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
- kontrolle:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261102T064500Z
-DTEND:20261102T070000Z
+ kontrolle:nutzen:2026-10-30@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261030T064500Z
+DTEND:20261030T070000Z
 SUMMARY:LinkedIn: Haushaltskosten reduzieren: So gewinnst du die Kontr
  olle (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -67,10 +52,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
- ort-senken:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261103T064500Z
-DTEND:20261103T070000Z
+ ort-senken:nutzen:2026-11-02@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261102T064500Z
+DTEND:20261102T070000Z
 SUMMARY:LinkedIn: Kleine Energiespar‑Tricks: Deine Kosten sofort senke
  n (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -82,10 +67,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
- en-konto:nutzen:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261104T064500Z
-DTEND:20261104T070000Z
+ en-konto:nutzen:2026-11-03@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261103T064500Z
+DTEND:20261103T070000Z
 SUMMARY:LinkedIn: Bankgebühren senken: 7 Schritte zum günstigeren Kont
  o (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -97,10 +82,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
- -du-richtig:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261105T064500Z
-DTEND:20261105T070000Z
+ -du-richtig:nutzen:2026-11-04@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261104T064500Z
+DTEND:20261104T070000Z
 SUMMARY:LinkedIn: Wärmepumpe vs. Gasheizung 2026: So entscheidest du r
  ichtig (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -111,11 +96,11 @@ URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-06@fra
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-05@fra
  nksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261106T064500Z
-DTEND:20261106T070000Z
+DTSTAMP:20261027T212254Z
+DTSTART:20261105T064500Z
+DTEND:20261105T070000Z
 SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
  vertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -126,10 +111,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
- -ueberblick:nutzen:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261109T064500Z
-DTEND:20261109T070000Z
+ -ueberblick:nutzen:2026-11-06@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261106T064500Z
+DTEND:20261106T070000Z
 SUMMARY:LinkedIn: Stromkosten senken: Clevere Haushaltsgeräte im Überb
  lick (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -141,10 +126,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
- tzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261027T164347Z
-DTSTART:20261110T064500Z
-DTEND:20261110T070000Z
+ tzen:2026-11-09@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261109T064500Z
+DTEND:20261109T070000Z
 SUMMARY:LinkedIn: Geld abheben im Ausland: Wo die Gebühren wirklich en
  tstehen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -152,6 +137,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
  d-gebuehren-vermeiden/
 URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
  and-gebuehren-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
+ icks:nutzen:2026-11-10@franksfinanzcheck.de
+DTSTAMP:20261027T212254Z
+DTSTART:20261110T064500Z
+DTEND:20261110T070000Z
+SUMMARY:LinkedIn: Energieeffizienz im Haushalt: 5 schnelle Spartricks 
+ (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-ha
+ ushalt-5-schnelle-spartricks/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
+ haushalt-5-schnelle-spartricks/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
