@@ -31,6 +31,11 @@
 | Fließtext | nicht zu dünn | kürzeste Seite 1.921 Zeichen | unverändert grün |
 | HTML-Übertragung | klein halten | Median 340 kB roh → **68 kB gzip** | 340 kB → 68 kB |
 
+Die Übersichtsseite nennt außerdem **Markup** und **Recht**; eigene Ratgeber
+dazu existieren nicht mehr (beide URLs liefern 404). Ihre Inhalte sind in der
+Struktur-Serie enthalten: gültiges HTML statt veralteter Tags (S3) sowie
+erreichbare Impressum- und Datenschutzlinks (S6). Beides ist unten geprüft.
+
 Der Check selbst bewertet vier Bereiche. Nach der Runde:
 
 ```
