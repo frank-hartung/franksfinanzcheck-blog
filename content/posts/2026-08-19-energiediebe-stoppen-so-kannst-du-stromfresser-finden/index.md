@@ -1,6 +1,6 @@
 ---
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
-description: "Energiediebe stoppen: Stromfresser finden statt raten: Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch, ohne funktionierende."
+description: "Energiediebe stoppen: Stromfresser finden statt raten. Mit Messplan, Kostenformel und Amortisationscheck sinkt der Verbrauch, ohne Komfortverlust."
 date: 2026-08-19T08:35:12Z
 lastmod: 2026-09-28
 draft: false
@@ -40,7 +40,7 @@ Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alt
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Darum gilt bei Stromfressern eine einfache Regel: **erst messen, dann rechnen, dann entscheiden**. So sparst du mehr als mit einem Kauf aus schlechtem Gewissen.
-### Dein Schnellstart
+## Dein Schnellstart
 
 Beginne mit einem Gerät. Wähle einen typischen Tag. Lies den Zähler ab. Miss den Verbrauch.
 
@@ -53,7 +53,7 @@ Ein Gerät mit kurzer Nutzung ist oft weniger wichtig. Dauerläufer verdienen zu
 Dokumentiere Datum, Preis und Ergebnis. Danach entscheidest du: abschalten, anders nutzen oder ersetzen.
 
 
-#### Prüfe in drei Schritten
+### Prüfe in drei Schritten
 
 Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kosten. Drittens: Vergleiche mit einer konkreten Alternative. Behalte den Beleg.
 

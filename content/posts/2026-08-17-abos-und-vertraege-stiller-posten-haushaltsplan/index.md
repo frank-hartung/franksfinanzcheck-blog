@@ -1,6 +1,6 @@
 ---
 title: "Abos und Verträge: Der stille Posten im Haushaltsplan"
-description: "Abos und Verträge fressen Budget, ohne aufzufallen. So findest du sie, kündigst richtig und rechnest nach, was ein einziger Klick pro Monat wirklich kostet."
+description: "Abos und Verträge fressen Budget, ohne aufzufallen. So findest du sie, kündigst richtig und rechnest nach, was ein Klick im Monat wirklich kostet."
 date: 2026-08-17T06:10:00Z
 lastmod: 2026-10-13
 draft: false

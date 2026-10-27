@@ -4,6 +4,25 @@
 Kein Netzwerk, keine Accounts, keine Content-Änderungen. Ausgabe ist ein
 privates Werkzeug in .cache/seo-cockpit/, KEIN Bestandteil des Blog-Deploys.
 Exit: 0 erfolgreich, 1 bei --strict und P1-Funden, 2 bei Eingabefehlern.
+
+SPIEGEL DES MARKTWERKZEUGS (27.10.2026, Screaming-Frog-Befund)
+-------------------------------------------------------------
+Ein fremder Crawl meldete viermal, was dieses Cockpit nicht sah: eine
+Description über 155 Zeichen, dieselbe über 985 Pixel, einen internen
+Link ohne Ankertext und „mehrere H2". Das Cockpit erlaubte 165 Zeichen
+und prüfte Ankertext gar nicht – ein Audit, das großzügiger misst als
+der Markt, meldet Grün und wird vom nächsten Fremdlauf widerlegt.
+
+Drei Prüfungen sind deshalb neu bzw. geschärft (Grenzen und Breitenmaß
+kommen aus `scripts/serp_limits.py`, NICHT als Kopie):
+  · description-length  – über 155 Zeichen (Google kürzt im Snippet ab)
+  · description-breite  – über 985 Pixel in Arial 14 px (dieselbe Grenze,
+    die das Marktwerkzeug ansetzt; gemessen über die Helvetica-Kernmetrik)
+  · link-no-anchor      – interner Link ohne Ankertext; `aria-label`
+    benennt ihn für Screenreader, ist aber kein Ankertext für Crawler
+  · heading-order       – Sprung in der Überschriftenhierarchie (h2 → h4).
+    „Mehrere H2" selbst ist KEIN Befund: HTML erlaubt beliebig viele H2,
+    solange die Rangfolge stimmt. Genau das prüft diese Regel.
 """
 from __future__ import annotations
 
@@ -22,7 +41,16 @@ import tomllib
 from urllib.parse import unquote, urljoin, urlsplit
 import xml.etree.ElementTree as ET
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import serp_limits  # noqa: E402  (SSOT der Snippet-Grenzen, gleiche Zahlen wie metadaten_wache)
+
 ROOT = Path(__file__).resolve().parents[1]
+
+# Die Befunde, die das PR-Gate sperren (Screaming-Frog-Spiegel, 27.10.2026).
+# EINE Liste: `--fail-on` nennt sie im Hilfetext, `.github/workflows/e2e.yml`
+# übergibt sie, und `test_seo_cockpit.py` vergleicht beides mit dieser
+# Konstante – eine Änderung hier ohne Änderung dort ist ein roter Test.
+GATE_CODES = ('description-length', 'description-breite', 'link-no-anchor', 'heading-order')
 
 
 class Document(HTMLParser):
@@ -36,6 +64,9 @@ class Document(HTMLParser):
         self.ids = set()
         self.images = []
         self.headings = Counter()
+        self.heading_seq = []
+        self.anchors = []
+        self._anchor = None
         self.schemas = []
         self.schema_errors = 0
         self.redirect = False
@@ -69,12 +100,23 @@ class Document(HTMLParser):
                 self.redirect = True
         if tag == 'link' and 'canonical' in (a.get('rel') or '').split():
             self.canonicals.append(a.get('href') or '')
-        if tag == 'a' and a.get('href'):
-            self.links.add(a['href'])
+        if tag == 'a':
+            # Ankertext mitschreiben (27.10.2026): Ein Link kann optisch
+            # eine ganze Karte abdecken und trotzdem textlos sein – für
+            # Crawler ist er dann ein Link ohne Ankertext.
+            if a.get('href'):
+                self.links.add(a['href'])
+            self._anchor = {'href': a.get('href') or '',
+                            'aria': (a.get('aria-label') or '').strip(),
+                            'text': [], 'alt': []}
         if tag == 'img':
             self.images.append(a)
-        if tag in ('h1', 'h2', 'h3'):
-            self.headings[tag] += 1
+            if self._anchor is not None:
+                self._anchor['alt'].append((a.get('alt') or '').strip())
+        if tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6'):
+            self.heading_seq.append(int(tag[1]))
+            if tag in ('h1', 'h2', 'h3'):
+                self.headings[tag] += 1
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.in_schema = True
             self.schema_text = []
@@ -82,6 +124,14 @@ class Document(HTMLParser):
     def handle_endtag(self, tag):
         if tag == 'title' and self.in_title:
             self.in_title = False
+        if tag == 'a' and self._anchor is not None:
+            self.anchors.append({
+                'href': self._anchor['href'],
+                'aria': self._anchor['aria'],
+                'text': re.sub(r'\s+', ' ', ''.join(self._anchor['text'])).strip(),
+                'alt': ' '.join(t for t in self._anchor['alt'] if t).strip(),
+            })
+            self._anchor = None
         if tag == 'svg' and self.svg_depth:
             self.svg_depth -= 1
         if tag == 'head':
@@ -98,6 +148,11 @@ class Document(HTMLParser):
             self.title_parts.append(value)
         if self.in_schema:
             self.schema_text.append(value)
+        # Nur echter Text zählt als Ankertext. Der <title> in einem Icon-SVG
+        # ist ein Tooltip der Grafik, kein Linktext – sonst wäre jeder
+        # Social-Icon-Link „benannt", obwohl im Link kein Wort steht.
+        if self._anchor is not None and self.svg_depth == 0:
+            self._anchor['text'].append(value)
 
     @property
     def title(self):
@@ -218,10 +273,37 @@ def audit(build: Path, base: str) -> dict:
             descriptions = doc.meta['description']
             if len(descriptions) != 1 or not descriptions[0].strip():
                 add(rel, 'description-missing', 'P2', 'Description fehlt oder ist mehrfach vorhanden.', 'Eine individuelle Meta-Description setzen.')
-            elif not 70 <= len(descriptions[0]) <= 165:
-                add(rel, 'description-length', 'P3', f'{len(descriptions[0])} Zeichen', 'Suchintention und Nutzen knapp beschreiben; keine starre Zeichengarantie.', 'human')
+            else:
+                # Grenzen aus der SSOT (scripts/serp_limits.py) – dieselben
+                # Zahlen prüft metadaten_wache M2/M7 an der Quelle. Ein
+                # Snippet, das Google abschneidet, ist kein „Richtwert",
+                # sondern verschenkter Platz (Befund vom 27.10.2026).
+                for code, detail in serp_limits.befunde(descriptions[0]):
+                    if code == 'zu-kurz':
+                        add(rel, 'description-kurz', 'P3', detail,
+                            'Mehr Substanz in 100–155 Zeichen: Suchintention, Nutzen, nächster Schritt.', 'human')
+                    elif code == 'zu-lang':
+                        add(rel, 'description-length', 'P2', detail,
+                            'Auf 100–155 Zeichen kürzen; was hinter der Grenze steht, zeigt Google nicht.', 'human')
+                    elif code == 'zu-breit':
+                        add(rel, 'description-breite', 'P2', detail,
+                            'Satz kürzen oder breite Wörter ersetzen – die Zeichenzahl allein reicht nicht.', 'human')
+                    else:  # unmessbar
+                        add(rel, 'description-messbar', 'P3', detail,
+                            'Zeichen durch messbare Schriftzeichen ersetzen (die SERP-Breite ist sonst ungeprüft).', 'human')
             if doc.headings['h1'] != 1:
                 add(rel, 'h1-count', 'P2', f'{doc.headings["h1"]} H1-Überschriften', 'Eine klare Hauptüberschrift im sichtbaren Inhalt verwenden.')
+            spruenge = []
+            vorher = 0
+            for rang in doc.heading_seq:
+                if vorher and rang > vorher + 1:
+                    spruenge.append(f'h{vorher}→h{rang}')
+                vorher = rang
+            if spruenge:
+                add(rel, 'heading-order', 'P3',
+                    ', '.join(sorted(set(spruenge))) + ' (Rangstufe übersprungen)',
+                    'Fehlende Zwischenstufe als Überschrift auszeichnen oder die tiefere Stufe zu Text machen. '
+                    'Mehrere H2 sind zulässig – nur die Rangfolge muss stimmen.', 'human')
             if not doc.lang:
                 add(rel, 'language', 'P2', 'HTML-Sprache fehlt.', 'lang="de" am HTML-Element ausgeben.')
             for key in ('og:title', 'og:description', 'og:image', 'twitter:card'):
@@ -247,6 +329,24 @@ def audit(build: Path, base: str) -> dict:
             add(rel, 'broken-link', 'P1', '\n'.join(broken), 'Interne Linkziele korrigieren oder wiederherstellen.')
         if anchors:
             add(rel, 'broken-anchor', 'P2', '\n'.join(anchors), 'Anker mit vorhandenen Abschnitts-IDs abgleichen; dynamische IDs manuell prüfen.', 'human')
+        # Interne Links ohne Ankertext (Screaming-Frog-Befund 27.10.2026).
+        # `aria-label` und ein `title` am Icon sind Fürsprecher der
+        # Barrierefreiheit, aber kein Ankertext: Was im Link steht, ist für
+        # den Crawler der Linktext. Deshalb zählt nur Text oder Bild-Alt.
+        ohne_text = []
+        for anker in doc.anchors:
+            href = anker['href']
+            if not href or href.startswith(('javascript:', 'mailto:', 'tel:')):
+                continue
+            if local_file(build, urljoin(url, href), base) is None:
+                continue
+            if anker['text'] or anker['alt']:
+                continue
+            ohne_text.append(href + (' (nur aria-label)' if anker['aria'] else ''))
+        if ohne_text:
+            add(rel, 'link-no-anchor', 'P2', '\n'.join(ohne_text[:20]),
+                'Ankertext in den Link schreiben (sichtbar oder als sr-only-Spanne); '
+                'aria-label benennt ihn für Screenreader, nicht für Suchmaschinen.')
         missing_alt = sum('alt' not in img for img in doc.images)
         if missing_alt:
             add(rel, 'image-alt', 'P2', f'{missing_alt} Bilder ohne alt-Attribut', 'Informative Alt-Texte ergänzen; dekorative Bilder erhalten alt="".')
@@ -255,7 +355,10 @@ def audit(build: Path, base: str) -> dict:
             target = local_file(build, urljoin(url, src), base) if src else None
             if target is not None and not target.is_file():
                 add(rel, 'image-missing', 'P1', src, 'Bildpfad korrigieren.')
-        pages.append(dict(path=rel, url=url, title=doc.title, description=next(iter(doc.meta['description']), ''),
+        beschreibung = next(iter(doc.meta['description']), '')
+        pages.append(dict(path=rel, url=url, title=doc.title, description=beschreibung,
+                          description_px=(None if serp_limits.breite_px(beschreibung) is None
+                                          else round(serp_limits.breite_px(beschreibung))),
                           indexable=indexable, canonical=next(iter(doc.canonicals), ''),
                           in_sitemap=url in locations, h1=doc.headings['h1'], h2=doc.headings['h2'],
                           schema=sorted(schema_types(doc.schemas)), images=len(doc.images)))
@@ -318,6 +421,11 @@ def main():
     parser.add_argument('--build', type=Path, default=ROOT / 'public')
     parser.add_argument('--output', type=Path, default=ROOT / '.cache' / 'seo-cockpit')
     parser.add_argument('--strict', action='store_true', help='Exit 1 bei technischen P1-Befunden')
+    parser.add_argument('--fail-on', metavar='CODES', default='',
+                        help='Kommagetrennte Befund-Codes, die den Lauf rot machen '
+                             f'(z. B. {",".join(GATE_CODES)}). '
+                             'Für PR-Gates: der Befund sperrt die Zusammenführung, '
+                             'nicht die Auslieferung der Live-Site (C34).')
     args = parser.parse_args()
     try:
         output = args.output.resolve()
@@ -336,6 +444,14 @@ def main():
     s = result['summary']
     print(f"SEO-Cockpit: {s['pages']} Seiten, {s['indexable']} indexierbar; P1: {s['p1']}, P2: {s['p2']}, P3: {s['p3']}.")
     print(f"Öffnen: {output / 'index.html'}")
+    sperrliste = {code.strip() for code in args.fail_on.split(',') if code.strip()}
+    gesperrt = [f for f in result['findings'] if f['code'] in sperrliste]
+    if gesperrt:
+        print(f"Gate: {len(gesperrt)} Befund(e) aus der Sperrliste "
+              f"({', '.join(sorted(sperrliste))}):")
+        for f in gesperrt[:40]:
+            print(f"  - {f['severity']} · {f['code']} · {f['url']} — {f['detail'].splitlines()[0]}")
+        return 1
     return 1 if args.strict and s['p1'] else 0
 
 

@@ -1,6 +1,6 @@
 ---
 title: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
-description: "Kleine Energiespar‑Tricks: Energiespar-Tipps: Kleine Änderungen helfen dir, den Verbrauch zu senken und deine Kosten besser im Blick zu behalten."
+description: "Kleine Energiespar-Tricks: Mit wenigen Änderungen im Alltag sinkt der Verbrauch, und du behältst deine Kosten dauerhaft im Blick."
 
 date: 2026-10-21T01:39:08Z
 draft: false
@@ -88,7 +88,7 @@ Die folgende Tabelle fasst die Wirkung als Modellrechnung zusammen:
 | Duschkopf mit Begrenzer | 5 % – 8 % beim Warmwasser | gering |
 | Geräte komplett vom Netz trennen | 1 % – 2 % des Stroms | gering |
 
-#### LED‑Lampen im Vergleich
+### LED‑Lampen im Vergleich
 
 Ein Rechenbeispiel für ein einzelnes Leuchtmittel zeigt den Unterschied:
 
@@ -100,7 +100,7 @@ Ein Rechenbeispiel für ein einzelnes Leuchtmittel zeigt den Unterschied:
 
 Der Kaufpreis einer LED rechnet sich in dieser Beispielrechnung meist nach kurzer Zeit. Danach halten die Leuchtmittel sehr lange. Der Verbrauch an Strom sinkt massiv. Tausche alte Glühbirnen konsequent aus, um sofort zu sparen.
 
-#### Stand‑by‑Verbrauch konkret
+### Stand‑by‑Verbrauch konkret
 
 Die folgende Beispielrechnung zeigt den Dauerverbrauch bei einer Annahme von 0,40 €/kWh:
 

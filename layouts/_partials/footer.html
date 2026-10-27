@@ -83,6 +83,11 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
+    {{- /* Ankertext statt reiner Grafik (27.10.2026): Ein Link, der nur ein
+           SVG enthält, hat für Crawler keinen Ankertext – der fremde Crawl
+           meldete ihn als „interner Link ohne Ankertext". Die sr-only-Spanne
+           gibt ihm einen, ohne das Icon-Layout zu ändern. */ -}}
+    <span class="sr-only">Nach oben</span>
 </a>
 {{- end }}
 

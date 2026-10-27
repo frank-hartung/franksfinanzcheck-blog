@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-28
 title: "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck"
-description: "Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung sicher – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb."
+description: "Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb."
 date: 2026-09-11T08:45:00Z
 draft: false
 tags: ["Heizkosten senken", "Stromkosten senken"]
@@ -40,7 +40,7 @@ Heizungs-Check im Check: Der erste kalte Montag ist ein schlechter Zeitpunkt fü
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Ein Heizungs-Check ist keine Bastelanleitung für Gasgeräte. Er trennt klar: **Beobachten und einfache Handgriffe machst du selbst. Technik mit Sicherheitsrisiko macht der Fachbetrieb.**
-### Dein Schnellstart
+## Dein Schnellstart
 
 Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf Geräusche.
 
@@ -55,7 +55,7 @@ Ein sauberer Check spart Zeit. Er ersetzt keine Wartung.
 Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den Fachbetrieb.
 
 
-#### Prüfe in drei Schritten
+### Prüfe in drei Schritten
 
 Erstens: Beobachte die Wärme beim normalen Probelauf. Zweitens: Notiere Raum, Problem und Datum. Drittens: Ändere nur eine Einstellung und prüfe später erneut. Ein Foto von Manometer und Zähler hilft beim Vergleich. Es ersetzt aber keine Fachdiagnose.
 

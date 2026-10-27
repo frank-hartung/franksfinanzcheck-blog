@@ -164,7 +164,7 @@ Ein klarer Plan vor dem Tausch der Heizung schont dein Budget.
 4. **Die Dämmung vergessen** – Ohne dichte Fenster arbeitet jede Heizung unnötig teuer.
 5. **Zuschüsse zu spät prüfen** – Wer den Antrag vergisst, verschenkt in der Beispielrechnung bis zu 70 % mögliche Förderung.
 
-#### Pro- und Contra-Tabelle
+### Pro- und Contra-Tabelle
 
 | Kriterium | Wärmepumpe (Vorteil) | Wärmepumpe (Nachteil) | Gasheizung (Vorteil) | Gasheizung (Nachteil) |
 |-----------|------------------|----------------------|------------------|----------------------|

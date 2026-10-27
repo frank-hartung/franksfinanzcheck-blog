@@ -15,7 +15,7 @@ BASE = 'https://example.org/'
 
 def page(path='/', title='Ein individueller Ratgeber für deinen Alltag', extra='', body='', robots='index, follow'):
     return f'''<html lang=de><head><title>{title}</title>
-<meta name=robots content="{robots}"><meta name=description content="Dieser ausführliche Ratgeber erklärt dir wichtige Grundlagen und nächste Schritte für den Alltag.">
+<meta name=robots content="{robots}"><meta name=description content="Dieser ausführliche Ratgeber erklärt dir wichtige Grundlagen, typische Fehler und die nächsten Schritte für deinen Alltag.">
 <link rel=canonical href="{BASE.rstrip('/') + path}">
 <meta property=og:title content="{title}"><meta property=og:description content="Beschreibung">
 <meta property=og:image content="{BASE}cover.jpg"><meta name=twitter:card content=summary_large_image>
@@ -158,6 +158,93 @@ class AuditTests(unittest.TestCase):
         text = seo.safe_csv([['=1+1', '  @SUM(1)', '+2', '-3', 'normal']])
         self.assertEqual(text, "'=1+1,'  @SUM(1),'+2,'-3,normal\r\n")
 
+    # ------------------------------------------------------------------
+    #  Screaming-Frog-Spiegel, 27.10.2026
+    #  Ein fremder Crawl meldete vier Dinge, die dieses Cockpit nicht sah:
+    #  Description > 155 Zeichen, Description > 985 px, internen Link ohne
+    #  Ankertext und „mehrere H2". Die drei ersten sind echte Befunde, das
+    #  vierte ist eine Rangfolgen-Frage. Genau so prüft es das Cockpit jetzt.
+    # ------------------------------------------------------------------
+
+    def beschreibung(self, text):
+        self.write('index.html', page().replace(
+            'content="Dieser ausführliche Ratgeber erklärt dir wichtige Grundlagen, typische Fehler und die nächsten Schritte für deinen Alltag."',
+            f'content="{text}"'))
+
+    def test_description_ueber_155_zeichen_ist_p2(self):
+        self.beschreibung('S' * 156)
+        befund = [f for f in self.run_audit()['findings'] if f['code'] == 'description-length']
+        self.assertEqual(len(befund), 1)
+        self.assertEqual(befund[0]['severity'], 'P2')
+        self.assertIn('156 Zeichen', befund[0]['detail'])
+
+    def test_description_ueber_985_pixel_ist_p2(self):
+        # 135 Zeichen – innerhalb der Zeichengrenze, ausserhalb des Snippets.
+        breit = ('Wohngebäude und Wärmewende: Warum Wärmeverlust, Wärmepumpe und Wartung '
+                 'zusammengehören. Wer Wohnraum warm hält, spart mit Wärmedämmung.')
+        self.assertLessEqual(len(breit), seo.serp_limits.DESC_MAX_ZEICHEN)
+        self.beschreibung(breit)
+        befund = [f for f in self.run_audit()['findings'] if f['code'] == 'description-breite']
+        self.assertEqual(len(befund), 1)
+        self.assertIn('985', befund[0]['detail'])
+
+    def test_description_ohne_breitenmass_ist_hinweis(self):
+        self.beschreibung('Dieser ausführliche Ratgeber erklärt dir wichtige Grundlagen '
+                          'und die nächsten Schritte für deinen Alltag. 💡')
+        self.assertIn('description-messbar', self.codes())
+
+    def test_interner_link_ohne_ankertext_ist_p2(self):
+        self.write('ziel/index.html', page('/ziel/', title='Ein eigener Titel für die Zielseite'))
+        self.sitemap('/', '/ziel/')
+        self.write('index.html', page(body='<a class="entry-link" aria-label="Weiterlesen: Ziel" href="ziel/"></a>'))
+        befund = [f for f in self.run_audit()['findings'] if f['code'] == 'link-no-anchor']
+        self.assertEqual(len(befund), 1)
+        self.assertEqual(befund[0]['severity'], 'P2')
+        self.assertIn('nur aria-label', befund[0]['detail'])
+
+    def test_sr_only_text_und_bild_alt_sind_ankertext(self):
+        self.write('ziel/index.html', page('/ziel/', title='Ein eigener Titel für die Zielseite'))
+        self.sitemap('/', '/ziel/')
+        self.write('index.html', page(
+            body='<a href="ziel/"><span class="sr-only">Weiterlesen: Ziel</span></a>'
+                 '<a href="ziel/"><img src="data:image/gif;base64,R0lGOD" alt="Ziel"></a>'))
+        self.assertNotIn('link-no-anchor', self.codes())
+
+    def test_externer_link_ohne_text_ist_kein_befund(self):
+        self.write('index.html', page(body='<a href="https://example.com/x"><svg></svg></a>'))
+        self.assertNotIn('link-no-anchor', self.codes())
+
+    def test_icon_title_zaehlt_nicht_als_ankertext(self):
+        # Der <title> im SVG ist ein Tooltip der Grafik, kein Linktext.
+        self.write('ziel/index.html', page('/ziel/', title='Ein eigener Titel für die Zielseite'))
+        self.sitemap('/', '/ziel/')
+        self.write('index.html', page(body='<a href="ziel/"><svg><title>Ziel</title></svg></a>'))
+        self.assertIn('link-no-anchor', self.codes())
+
+    def test_ueberschriften_sprung_ist_p3(self):
+        self.write('index.html', page(body='<h2>Abschnitt</h2><h4>Zu tief</h4>'))
+        befund = [f for f in self.run_audit()['findings'] if f['code'] == 'heading-order']
+        self.assertEqual(len(befund), 1)
+        self.assertIn('h2→h4', befund[0]['detail'])
+
+    def test_mehrere_h2_sind_kein_befund(self):
+        # „H2: Mehrere" aus dem Fremdcrawl ist eine Rangfolgen-Frage, keine
+        # Fehlermeldung: HTML erlaubt beliebig viele H2.
+        self.write('index.html', page(body='<h2>Eins</h2><h2>Zwei</h2><h2>Drei</h2>'))
+        self.assertNotIn('heading-order', self.codes())
+
+    def test_fail_on_sperrt_nur_die_genannten_codes(self):
+        self.beschreibung('S' * 156)
+        output = Path(self.tmp.name) / 'report'
+        with patch.object(sys, 'argv', ['seo_cockpit.py', '--build', str(self.build),
+                                        '--output', str(output),
+                                        '--fail-on', 'description-length']):
+            self.assertEqual(seo.main(), 1)
+        with patch.object(sys, 'argv', ['seo_cockpit.py', '--build', str(self.build),
+                                        '--output', str(output),
+                                        '--fail-on', 'broken-link']):
+            self.assertEqual(seo.main(), 0)
+
     def test_all_findings_have_owner_and_priority(self):
         self.write('index.html', '<html>Kaputt</html>')
         for f in self.run_audit()['findings']:
@@ -168,6 +255,13 @@ class AuditTests(unittest.TestCase):
 
 
 class WorkflowContractTests(unittest.TestCase):
+    def test_pr_gate_uebergibt_genau_die_gate_codes(self):
+        # Eine Sperrliste, die im Workflow anders lautet als im Code, ist
+        # keine Sperre: Der PR wäre grün, während das Cockpit rot sieht.
+        workflow = (Path(__file__).resolve().parents[2] / '.github' / 'workflows' / 'e2e.yml').read_text(encoding='utf-8')
+        self.assertIn('--fail-on ' + ','.join(seo.GATE_CODES), workflow)
+        self.assertIn('scripts/metadaten_wache.py', workflow)
+
     def test_final_build_seo_audit_is_reported_and_ticketed_weekly(self):
         workflow = (Path(__file__).resolve().parents[2] / '.github' / 'workflows' / 'seo-weekly.yml').read_text(encoding='utf-8')
         bestand_build = workflow.index('name: Seite neu bauen (Grundlage des Bestand-Gates)')

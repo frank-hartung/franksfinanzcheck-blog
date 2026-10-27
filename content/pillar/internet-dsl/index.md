@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-14
 title: "Internet, DSL & Mobilfunk: Ratgeber für schnelles Netz"
-description: "Verträge und Wechselentscheidungen meistern: DSL-Wechselbonus sichern, Glasfaser einordnen, Kündigungsrechte nutzen, WLAN verbessern und Mobilfunk optimieren."
+description: "DSL-Wechselbonus sichern, Glasfaser einordnen, Kündigungsrechte nutzen, WLAN verbessern und Mobilfunk optimieren – Schritt für Schritt erklärt."
 date: 2026-08-08
 draft: false
 author: "Frank Hartung"
