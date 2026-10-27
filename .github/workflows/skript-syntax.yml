@@ -34,17 +34,20 @@
 name: Skript-Syntax (liegender Stand)
 
 on:
+  # Trigger-Wache (27.10.2026): Die Workflow-Dateien selbst gehören in den
+  # Filter – sie legen fest, WAS geprüft wird. Ohne diesen Pfad hätte eine
+  # Änderung an einem Trigger keinen Lauf ausgelöst, der sie prüft.
   push:
     branches: [main]
     paths:
       - 'scripts/**.py'
       - 'requirements*.txt'
-      - '.github/workflows/skript-syntax.yml'
+      - '.github/workflows/**.yml'
   pull_request:
     paths:
       - 'scripts/**.py'
       - 'requirements*.txt'
-      - '.github/workflows/skript-syntax.yml'
+      - '.github/workflows/**.yml'
   workflow_dispatch: {}
 
 permissions:
@@ -83,6 +86,27 @@ jobs:
             echo "::error::Mindestens ein Skript kompiliert nicht. Heilung: python3 scripts/skript_syntax_heiler.py --fix --commit (letzte kompilierbare Fassung, Audit in data/skript_syntax_heilungen.jsonl)."
           fi
           exit "$code"
+
+      # TRIGGER-WACHE (WF-E813/#815, 27.10.2026)
+      # Eine Wache springt nur an, wenn ihr `paths`-Filter die geänderte Datei
+      # nennt. Diese Prüfung hält beides zusammen: Was ein Workflow aufruft,
+      # muss ihn auch auslösen (W1), kein Filter darf auf eine verschwundene
+      # Datei zeigen (W2), und push/pull_request müssen dieselbe Liste tragen
+      # (W3). Am 27.10.2026 fand sie 36 solche Stellen in neun Workflows.
+      - name: Trigger-Wache – was ein Lauf prüft, muss ihn auslösen
+        run: |
+          set +e
+          python3 scripts/trigger_wache.py --md >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/trigger_wache.py --selftest
+          selbst=$?
+          python3 scripts/trigger_wache.py --check
+          befund=$?
+          if [ "$selbst" != "0" ]; then
+            echo "::error::Selbsttest der Trigger-Wache rot – die Prüfung selbst ist defekt (Exit $selbst). Keine Filter auf Verdacht ändern; Befund steht im Job-Log."
+          elif [ "$befund" != "0" ]; then
+            echo "::error::Trigger-Wache: mindestens ein Workflow ruft einen Prüfer auf, den sein paths-Filter nicht auslöst (oder umgekehrt). Heilung: Datei in BEIDEN Listen ergänzen – npm run trigger:check nennt Workflow, Ereignis und Pfad."
+          fi
+          [ "$selbst" = "0" ] && [ "$befund" = "0" ]
 
       # Der Heiler ist Teil des Vertrags, nicht nur der Wache: Sein
       # Selbsttest läuft hier mit, damit ein kaputter Heiler auffällt,

@@ -74,7 +74,11 @@ BEREICHE: list[tuple[str, str]] = [
      "Lesbarkeit & Gestaltung"),
     (r"content|engine|reserve|faktenfrische|artikel|kadenz|ki-redaktion|agc|recherche|agent",
      "Inhaltsqualität"),
-    (r"issue|triage|cleanup|dependabot|watchdog|wache|marken", "Betriebspflege"),
+    # `skript|syntax`: Der Lauf „Skript-Syntax (liegender Stand)“ prüft, ob der
+    # liegende Code kompiliert und ob jede Wache von ihrem eigenen Filter
+    # ausgelöst wird (Trigger-Wache, 27.10.2026) – Betriebspflege, nicht Technik.
+    (r"issue|triage|cleanup|dependabot|watchdog|wache|marken|skript|syntax",
+     "Betriebspflege"),
     (r"frist|recht", "Rechtliches"),
 ]
 BEREICH_SONST = "Technik"

@@ -55,6 +55,24 @@ RECOVERY_INPUT = "watchdog_recovery"
 ROOT = Path(__file__).resolve().parent.parent
 WATCHDOG = ROOT / "scripts" / "bot_watchdog.py"
 
+try:  # direkter Aufruf: scripts/ liegt auf dem Modulpfad
+    from github_kommando import annotation as _annotation
+except ImportError:  # Import als Paket (Tests: from scripts import ...)
+    from scripts.github_kommando import annotation as _annotation
+
+
+def _melden(ebene: str, text: str) -> None:
+    """Ein Hinweis des Brokers – als Annotation in CI, sonst als Klartext.
+
+    WARUM NICHT MEHR DIREKT (WF-E813/#815, 27.10.2026): Diese Warnungen
+    standen als rohe `::warning::`-Zeilen im Code. Wird das Modul aus einem
+    Test heraus aufgerufen, parst GitHub sie als Annotation – der grüne Job
+    trägt dann Warnungen, die zu einem Testbaum gehören. Der gemeinsame
+    Melder schweigt unter einem Test-Runner und kodiert Umbrüche, damit ein
+    `gh`-Fehlertext kein zweites Kommando erzeugen kann.
+    """
+    _annotation(ebene, text, titel="Watchdog-Reparatur")
+
 
 def _run(command: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(command, text=True, capture_output=True, check=False)
@@ -82,10 +100,10 @@ def reserve_running() -> bool:
 def trigger_reserve() -> int:
     """Dispatch one reserve repair, returning a shell-friendly status."""
     if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
-        print("::warning::Keine GitHub-Authentifizierung – Reserve nicht ausgelöst")
+        _melden("warning", "Keine GitHub-Authentifizierung – Reserve nicht ausgelöst")
         return 2
     if shutil.which("gh") is None:
-        print("::warning::gh CLI fehlt – Reserve nicht ausgelöst")
+        _melden("warning", "gh CLI fehlt – Reserve nicht ausgelöst")
         return 2
     try:
         if reserve_running():
@@ -94,14 +112,14 @@ def trigger_reserve() -> int:
     except RuntimeError as exc:
         # Fail open for recovery: a failed status query must not prevent a
         # repair, while the warning remains visible in the Actions log.
-        print(f"::warning::{exc}; starte einmalig neu")
+        _melden("warning", f"{exc}; starte einmalig neu")
     result = _run([
         "gh", "workflow", "run", WORKFLOW, "--ref", REF,
         "--field", f"{RECOVERY_INPUT}=true",
     ])
     if result.returncode:
-        print(f"::warning::Content-Reserve konnte nicht gestartet werden: "
-              f"{result.stderr.strip() or result.stdout.strip()}")
+        _melden("warning", "Content-Reserve konnte nicht gestartet werden: "
+                f"{result.stderr.strip() or result.stdout.strip()}")
         return result.returncode
     print("🚑 Content-Reserve wegen niedrigem Bestand gestartet (workflow_dispatch).")
     return 0
@@ -143,13 +161,13 @@ def deploy_chain_blocked() -> tuple[bool, str]:
         sys.path.insert(0, str(ROOT / "scripts"))
         import bot_watchdog
     except Exception as exc:  # pragma: no cover - defensiv
-        print(f"::warning::Watchdog-Klassifikation nicht verfügbar ({exc}); "
-              f"Catchup wird ausgelöst")
+        _melden("warning", f"Watchdog-Klassifikation nicht verfügbar ({exc}); "
+                f"Catchup wird ausgelöst")
         return False, "Klassifikation nicht verfügbar"
     try:
         lage, schritt, beleg = bot_watchdog.deploy_blockade()
     except Exception as exc:  # pragma: no cover - defensiv
-        print(f"::warning::Deploy-Kette nicht messbar ({exc}); Catchup wird ausgelöst")
+        _melden("warning", f"Deploy-Kette nicht messbar ({exc}); Catchup wird ausgelöst")
         return False, f"nicht messbar: {exc}"
     if lage == "blockiert":
         return True, f"Schritt „{schritt}“ – {beleg}"
@@ -163,16 +181,16 @@ def trigger_deploy_catchup() -> int:
     at all, then avoid duplicate runs, then dispatch.
     """
     if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
-        print("::warning::Keine GitHub-Authentifizierung – Deploy-Catchup nicht ausgelöst")
+        _melden("warning", "Keine GitHub-Authentifizierung – Deploy-Catchup nicht ausgelöst")
         return 2
     if shutil.which("gh") is None:
-        print("::warning::gh CLI fehlt – Deploy-Catchup nicht ausgelöst")
+        _melden("warning", "gh CLI fehlt – Deploy-Catchup nicht ausgelöst")
         return 2
 
     blocked, evidence = deploy_chain_blocked()
     if blocked:
         # Ein erneuter Dispatch würde exakt denselben Schritt treffen.
-        print(f"::error::Auslieferung blockiert: {evidence}")
+        _melden("error", f"Auslieferung blockiert: {evidence}")
         print("🛑 Deploy-Catchup NICHT ausgelöst – er würde am selben Schritt "
               "scheitern. Der blockierende Schritt in deploy.yml muss zuerst "
               "weg (Dauerheilung #676: erst liefern, dann siegeln).")
@@ -183,12 +201,12 @@ def trigger_deploy_catchup() -> int:
             print("✅ Deploy oder Catchup läuft bereits; kein Doppel-Dispatch.")
             return 0
     except RuntimeError as exc:
-        print(f"::warning::{exc}; starte einmalig neu")
+        _melden("warning", f"{exc}; starte einmalig neu")
 
     result = _run(["gh", "workflow", "run", DEPLOY_CATCHUP_WORKFLOW, "--ref", REF])
     if result.returncode:
-        print(f"::warning::Deploy-Catchup konnte nicht gestartet werden: "
-              f"{result.stderr.strip() or result.stdout.strip()}")
+        _melden("warning", "Deploy-Catchup konnte nicht gestartet werden: "
+                f"{result.stderr.strip() or result.stdout.strip()}")
         return result.returncode
     print("🚑 Deploy-Catchup ausgelöst – der fehlende Artikel wird nachgeliefert "
           "(Nachmessung im selben Watchdog-Lauf).")
@@ -211,28 +229,28 @@ def reconcile_after_reserve() -> int:
     and the scheduled watchdog will retry the routing path.
     """
     if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
-        print("::warning::Keine GitHub-Authentifizierung – Watchdog-Abgleich nicht möglich")
+        _melden("warning", "Keine GitHub-Authentifizierung – Watchdog-Abgleich nicht möglich")
         return 2
     if not os.environ.get("GITHUB_REPOSITORY"):
-        print("::warning::GITHUB_REPOSITORY fehlt – Watchdog-Abgleich nicht möglich")
+        _melden("warning", "GITHUB_REPOSITORY fehlt – Watchdog-Abgleich nicht möglich")
         return 2
     if shutil.which("gh") is None:
-        print("::warning::gh CLI fehlt – Watchdog-Abgleich nicht möglich")
+        _melden("warning", "gh CLI fehlt – Watchdog-Abgleich nicht möglich")
         return 2
     if not WATCHDOG.is_file():
-        print(f"::warning::Watchdog-Skript fehlt: {WATCHDOG}")
+        _melden("warning", f"Watchdog-Skript fehlt: {WATCHDOG}")
         return 2
 
     measure = _run([sys.executable, str(WATCHDOG), "--emit-env"])
     if measure.returncode:
-        print("::warning::Watchdog-Nachmessung fehlgeschlagen: "
-              f"{measure.stderr.strip() or measure.stdout.strip()}")
+        _melden("warning", "Watchdog-Nachmessung fehlgeschlagen: "
+                f"{measure.stderr.strip() or measure.stdout.strip()}")
         return measure.returncode
 
     route = _run([sys.executable, str(WATCHDOG), "--route"])
     if route.returncode:
-        print("::warning::Watchdog-Alarmrouting fehlgeschlagen: "
-              f"{route.stderr.strip() or route.stdout.strip()}")
+        _melden("warning", "Watchdog-Alarmrouting fehlgeschlagen: "
+                f"{route.stderr.strip() or route.stdout.strip()}")
         return route.returncode
 
     print("✅ Watchdog nach erfolgreicher Reserve-Reparatur vollständig nachgemessen und geroutet.")

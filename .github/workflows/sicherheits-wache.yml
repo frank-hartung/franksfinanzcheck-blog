@@ -81,6 +81,11 @@ on:
       - "scripts/n8n_bridge.py"
       - "scripts/abhaengigkeits_wache.py"
       - "scripts/tests/test_abhaengigkeits_wache.py"
+      # Trigger-Wache (W1/W3), 27.10.2026: Der gemeinsame Kommando-Melder
+      # entscheidet, ob ein Befund als Annotation erscheint. Ändert er sich,
+      # muss DIESER Lauf ihn prüfen – er ist der Kanal, der WF-E813 führt.
+      - "scripts/github_kommando.py"
+      - "scripts/tests/test_github_kommando.py"
       - "requirements*.txt"
       - "requirements-ci.in"
       - "package.json"
@@ -121,8 +126,11 @@ on:
       - "scripts/content_html_wache.py"
       - "scripts/worker_betrieb_wache.py"
       - "scripts/n8n_schutz_wache.py"
+      - "scripts/n8n_bridge.py"
       - "scripts/abhaengigkeits_wache.py"
       - "scripts/tests/test_abhaengigkeits_wache.py"
+      - "scripts/github_kommando.py"
+      - "scripts/tests/test_github_kommando.py"
       - "requirements*.txt"
       - "requirements-ci.in"
       - "package.json"

@@ -22,6 +22,9 @@
 name: Lesehilfen-Gate (Vorlesen + Kurzfassung)
 
 on:
+  # Trigger-Wache (W1/W3), 27.10.2026: Beide Listen sind identisch und
+  # nennen ALLE Prüfer, die dieser Lauf aufruft – inklusive
+  # `audio_coverage_check.py` und der Manifest-Wache (vor jedem node-Aufruf).
   push:
     branches: ["**"]
     paths:
@@ -31,15 +34,14 @@ on:
       - "scripts/heading_anchor_guard.py"
       - "assets/css/extended/ff-voice.css"
       - "assets/css/extended/z-premium-blog.css"
-      - "layouts/_partials/ff_voice_toolbar.html"
       # Dauerheilung #623 (07.10.2026): Die Artikel-Ansicht liegt seitdem im
-      # gemeinsamen Baustein – ohne diesen Pfad liefe eine Änderung an der
-      # Einbindung der Lesehilfen nicht mehr durch dieses Gate.
-      - "layouts/_partials/artikel_einzeln.html"
-      - "layouts/single.html"
-      - "layouts/_default/single.html"
-      - "layouts/pillar/single.html"
-      - "layouts/shortcodes/**"
+      # gemeinsamen Baustein. Seit dem 27.10.2026 (Trigger-Wache, W3) steht
+      # dafür der GANZE Baum `layouts/**` in BEIDEN Listen: Die frühere
+      # Handliste zählte sechs Einzeldateien auf, der pull_request-Filter
+      # trug eine andere Fassung. Zwei Kopien derselben Absicht driften –
+      # und dann prüft eine Änderung an der Einbindung der Lesehilfen nur
+      # noch eine der beiden Seiten.
+      - "layouts/**"
       - "scripts/ff_voice_functional_test.mjs"
       - "scripts/ff_heading_glyph_guard_test.mjs"
       - "scripts/ff_voice_voice_test.js"
@@ -48,12 +50,14 @@ on:
       - "scripts/ff_voice_self_heal_test.mjs"
       - "scripts/ff_voice_browser_test.mjs"
       - "scripts/ff_voice_qa_lib.mjs"
-      - "tools/ff-voice-browser/**"
       - "scripts/ff_voice_probe.mjs"
+      - "tools/ff-voice-browser/**"
       - "scripts/ff_voice_parity_check.py"
       - "scripts/ff_voice_toolbar_check.py"
       - "scripts/ff_voice_audio.py"
       - "scripts/ff_voice_backends.py"
+      - "scripts/audio_coverage_check.py"
+      - "scripts/manifest_guard.py"
       - "tools/ff-voice-qa/**"
       - "content/posts/**"
       - "content/pillar/**"
@@ -66,11 +70,14 @@ on:
       - "scripts/heading_anchor_guard.py"
       - "assets/css/extended/ff-voice.css"
       - "assets/css/extended/z-premium-blog.css"
+      # Dauerheilung #623 (07.10.2026): Die Artikel-Ansicht liegt seitdem im
+      # gemeinsamen Baustein. Seit dem 27.10.2026 (Trigger-Wache, W3) steht
+      # dafür der GANZE Baum `layouts/**` in BEIDEN Listen: Die frühere
+      # Handliste zählte sechs Einzeldateien auf, der pull_request-Filter
+      # trug eine andere Fassung. Zwei Kopien derselben Absicht driften –
+      # und dann prüft eine Änderung an der Einbindung der Lesehilfen nur
+      # noch eine der beiden Seiten.
       - "layouts/**"
-      - "content/posts/**"
-      - "content/pillar/**"
-      - "scripts/ff_voice_audio.py"
-      - "scripts/ff_voice_backends.py"
       - "scripts/ff_voice_functional_test.mjs"
       - "scripts/ff_heading_glyph_guard_test.mjs"
       - "scripts/ff_voice_voice_test.js"
@@ -78,6 +85,19 @@ on:
       - "scripts/ff_voice_tts_hardening_test.mjs"
       - "scripts/ff_voice_self_heal_test.mjs"
       - "scripts/ff_voice_browser_test.mjs"
+      - "scripts/ff_voice_qa_lib.mjs"
+      - "scripts/ff_voice_probe.mjs"
+      - "tools/ff-voice-browser/**"
+      - "scripts/ff_voice_parity_check.py"
+      - "scripts/ff_voice_toolbar_check.py"
+      - "scripts/ff_voice_audio.py"
+      - "scripts/ff_voice_backends.py"
+      - "scripts/audio_coverage_check.py"
+      - "scripts/manifest_guard.py"
+      - "tools/ff-voice-qa/**"
+      - "content/posts/**"
+      - "content/pillar/**"
+      - ".github/workflows/lesehilfen-gate.yml"
   schedule:
     - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
   workflow_dispatch: {}

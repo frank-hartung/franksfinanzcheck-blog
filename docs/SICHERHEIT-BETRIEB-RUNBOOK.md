@@ -609,3 +609,78 @@ Reihenfolge, die eine Behauptung von einem Nachweis trennt:
   prüft den ausgelieferten Stand.
 - Sie prüft **keine** Container-Inhalte (nur bewegliche Tags).
 - Sie prüft nur, was im Repo liegt — nicht, was ein Dienst zur Laufzeit lädt.
+
+---
+
+## F. Signale, die nicht lügen (WF-E813/#815, 27.10.2026)
+
+**Grundlage:** `WARTUNG-BETRIEBSPFLEGE-WF-E813-815-HIGHEND-2026-10-27.md`
+**Wozu:** Die Kette aus A1, D1 und D2 funktioniert nur, wenn ein rotes Kreuz
+etwas bedeutet und ein grünes nichts verdeckt. Zwei Betriebsfehler dieser Art
+sind am 27.10.2026 gemessen und dauerhaft geheilt worden.
+
+### F1 · Ein Befund ist ein Kommando, kein Text
+
+Jede Zeile, die mit `::` beginnt, liest der GitHub-Runner als **Befehl** –
+`::error file=…,line=…,title=…::Text` wird daraus eine Annotation. Wer Datei-
+oder Textinhalte unmaskiert einsetzt, kann Befehle **erzeugen**: Ein
+Zeilenumbruch beginnt ein zweites Kommando, ein `,` bricht aus der
+Eigenschaftsliste aus. Genau das war passiert: Die Vertragstests der
+Abhängigkeits-Wache riefen `main()` auf einem vergifteten Testbaum auf, und
+der **grüne** Job trug danach drei rote Annotationen über eine
+`requirements-x.txt`, die es im Repository nicht gibt.
+
+Deshalb gibt es **einen** Meldeweg: `scripts/github_kommando.py`.
+
+```bash
+npm run kommando:probe     # sendet dieser Prozess Annotationen? (zeigt ein kodiertes Beispiel)
+npm run test:kommando      # 22 Vertragstests: Fluchtschutz, Teststille, Notausgang
+```
+
+Regeln für jeden neuen Melder:
+
+1. **Nicht selbst `print("::…")`.** `annotation(ebene, text, datei=…, zeile=…,
+   titel=…)` benutzen; die Kodierung (`%`, CR, LF; `:`/`,` in Eigenschaften)
+   ist dort an einer Stelle festgelegt.
+2. **Ein Befund ist eine Zeile.** Ein Umbruch im Text ist immer ein Fehler in
+   der Meldung, nie ein zweiter Befund.
+3. **Testläufe färben nichts.** Unter `unittest`/`pytest` sendet der Melder
+   nichts, auch mitten in Actions – ein Test prüft Verhalten, er gestaltet
+   nicht den Lauf, in dem er läuft.
+4. **Notausgang:** `GITHUB_KOMMANDOS=an` erzwingt das Senden (Gegenprobe),
+   `GITHUB_KOMMANDOS=aus` erzwingt die Stille. Beides schlägt die Automatik.
+
+### F2 · Was ein Lauf prüft, muss ihn auch auslösen
+
+Ein Gate springt nur an, wenn der `paths`-Filter seines Workflows die
+geänderte Datei nennt. Diese Liste wird von Hand gepflegt – zweimal (für
+`push` und `pull_request`). Am 27.10.2026 fand die neue Trigger-Wache dort
+**36 Befunde in neun Workflows**, darunter `manifest_guard.py` (in fünf Gates
+benutzt, in vier Filtern nicht genannt), die Lesehilfen-Liste (17
+Abweichungen zwischen push und pull_request) und die Backup-Frischwache, die
+ihre eigenen Prüfer nicht auslöste.
+
+```bash
+npm run trigger:check      # Exit 0 sauber · 1 Befund · 2 Form nicht lesbar
+npm run test:trigger       # Selbsttest (Sabotage) + Vertragstests inkl. PyYAML-Gegenprobe
+```
+
+| Regel | Bedeutung | Was du tust |
+|---|---|---|
+| **W1 Referenz** | Ein Workflow ruft ein Skript auf, das sein `paths`-Filter nicht nennt. | Pfad ergänzen (beide Listen). |
+| **W2 Waise** | Ein Filtereintrag zeigt auf eine Datei, die es nicht mehr gibt. | Eintrag entfernen oder Datei wiederherstellen. |
+| **W3 Symmetrie** | `push` und `pull_request` tragen unterschiedliche Listen. | Dieselbe Liste in beide Blöcke; im Zweifel die weitere Fassung. |
+
+Der Test `test_dauervertrag_bestand_ohne_befund` hält den Bestand sauber: Wer
+einen Prüfer aufruft, ohne ihn zu nennen, macht ihn rot – nicht erst ein Gate,
+das nicht anspringt.
+
+**Der Kanal selbst ist überwacht.** Der Lauf „Skript-Syntax (liegender Stand)“
+steht seit dem 27.10.2026 auf der Wacht-Liste des zentralen Fehler-Alertings
+(Vorgang `WF-CA1D`, Bereich Betriebspflege) und hat eine eigene Triage-Klasse
+`skript-syntax`. Eine Regression in genau dieser Wache bleibt damit nicht
+still: Sie erzeugt eine Meldung mit Reparaturweg statt eines Funklochs.
+
+**Ehrliche Grenze:** Beide Prüfungen sagen nichts über die *Richtigkeit* eines
+Gates, nur über seine Erreichbarkeit. Ob ein Rat zutrifft, entscheidet weiter
+die Klassifikation der Wache selbst (Abschnitte A1, D1, D2).

@@ -53,6 +53,10 @@ on:
       - "data/brand_surface_allowlist.txt"
       - "scripts/brand_surface_guard.py"
       - "scripts/haken_wache.py"
+      # Trigger-Wache (W1): Die Markenfläche liest die Vorgangs-Identität
+      # (Code, Bereich, Titel) aus dieser Datei. Ändert sie sich, muss die
+      # Markenfläche neu geprüft werden – sie ist öffentlich.
+      - "scripts/alert_issue_identity.py"
       - ".githooks/**"
   pull_request:
     paths:
@@ -60,6 +64,10 @@ on:
       - "data/brand_surface_allowlist.txt"
       - "scripts/brand_surface_guard.py"
       - "scripts/haken_wache.py"
+      # Trigger-Wache (W1): Die Markenfläche liest die Vorgangs-Identität
+      # (Code, Bereich, Titel) aus dieser Datei. Ändert sie sich, muss die
+      # Markenfläche neu geprüft werden – sie ist öffentlich.
+      - "scripts/alert_issue_identity.py"
       - ".githooks/**"
   workflow_dispatch:
     inputs:

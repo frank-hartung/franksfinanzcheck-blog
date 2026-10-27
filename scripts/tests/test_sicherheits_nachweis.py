@@ -184,7 +184,11 @@ class Auswertung(unittest.TestCase):
             elif daten is not None:
                 (root / "messung.md").write_text(daten["bericht"])
             stdout = io.StringIO()
-            with patch.dict(os.environ, {"GITHUB_STEP_SUMMARY": str(root / "summary")}), contextlib.redirect_stdout(stdout):
+            with patch.dict(os.environ, {"GITHUB_STEP_SUMMARY": str(root / "summary"),
+                                         # Ausdrückliche Ansage: Diese Tests prüfen
+                                         # die Sendezeile, nicht die Teststille.
+                                         "GITHUB_KOMMANDOS": "an"}), \
+                    contextlib.redirect_stdout(stdout):
                 ergebnis = nachweis.auswerten("worker", code, str(root / "messung.json"), str(root / "messung.md"))
             return ergebnis, stdout.getvalue(), (root / "summary").read_text()
 
@@ -222,7 +226,8 @@ class Auswertung(unittest.TestCase):
 
     def test_annotationen_sind_gegen_neue_kommandos_geschuetzt(self):
         stdout = io.StringIO()
-        with contextlib.redirect_stdout(stdout):
+        with patch.dict(os.environ, {"GITHUB_KOMMANDOS": "an"}), \
+                contextlib.redirect_stdout(stdout):
             nachweis.annotation("error", "Messfehler 100%\r\n::notice::Falschgrün")
         self.assertEqual(stdout.getvalue().splitlines(), [
             "::error::Messfehler 100%25%0D%0A::notice::Falschgrün"])

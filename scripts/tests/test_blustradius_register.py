@@ -112,8 +112,11 @@ class SchrittbloeckeBeweisenSich(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             arbeit = Path(tmp)
             (arbeit / "scripts").mkdir()
-            shutil.copy(SCRIPTS / "werkzeugbefund.py",
-                        arbeit / "scripts" / "werkzeugbefund.py")
+            # Der Schritt benutzt den gemeinsamen Kommando-Melder (WF-E813/#815,
+            # 27.10.2026). Die Bühne muss deshalb dieselben Dateien tragen wie
+            # das Repository – sonst prüft der Test einen Aufbau, den es nicht gibt.
+            for datei in ("werkzeugbefund.py", "github_kommando.py"):
+                shutil.copy(SCRIPTS / datei, arbeit / "scripts" / datei)
             for name, (selftest_code, code) in stubs.items():
                 (arbeit / "scripts" / name).write_text(
                     "#!/usr/bin/env python3\nimport sys\n"
@@ -126,9 +129,15 @@ class SchrittbloeckeBeweisenSich(unittest.TestCase):
             zusammenfassung.touch()
             runner = arbeit / "runner_temp"
             runner.mkdir()
+            # WICHTIG: `GITHUB_KOMMANDOS=aus` – diese Bühne SIMULIERT einen
+            # Lauf, sie ist keiner. Ohne die Ansage würde der Melder in CI
+            # `::`-Zeilen ausgeben, und diese Unit-Tests würden den Lauf, in
+            # dem sie laufen, mit fremden Annotationen einfärben (Befund der
+            # Stufe 4, WF-E813/#815). Geprüft wird der Befund, nicht die Farbe.
             env = dict(os.environ, GITHUB_OUTPUT=str(ausgabe),
                        GITHUB_STEP_SUMMARY=str(zusammenfassung),
-                       RUNNER_TEMP=str(runner), GITHUB_SHA="0" * 40)
+                       RUNNER_TEMP=str(runner), GITHUB_SHA="0" * 40,
+                       GITHUB_KOMMANDOS="aus")
             env.update(env_extra or {})
             skript = arbeit / "step.sh"
             skript.write_text(step["run"], encoding="utf-8")

@@ -38,6 +38,9 @@ on:
       - "assets/css/extended/**"
       - "scripts/robustheits_gate.py"
       - "scripts/tests/test_robustheits_gate.py"
+      # Trigger-Wache (W1): Der Lauf prüft seine Werkzeuge selbst mit.
+      - "scripts/manifest_guard.py"
+      - "scripts/selftest_clock.py"
       - "tools/robust.test.mjs"
       - "tools/ff-suche.test.mjs"
       - "data/robustheit_ausnahmen.yaml"
@@ -49,6 +52,9 @@ on:
       - "assets/css/extended/**"
       - "scripts/robustheits_gate.py"
       - "scripts/tests/test_robustheits_gate.py"
+      # Trigger-Wache (W1): Der Lauf prüft seine Werkzeuge selbst mit.
+      - "scripts/manifest_guard.py"
+      - "scripts/selftest_clock.py"
       - "tools/robust.test.mjs"
       - "tools/ff-suche.test.mjs"
       - "data/robustheit_ausnahmen.yaml"
