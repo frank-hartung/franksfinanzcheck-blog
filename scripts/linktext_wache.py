@@ -44,11 +44,20 @@ WAS GEPRÜFT WIRD (jede HTML-Datei in `public/`)
                          es wird unter L3 als Hinweis gezählt, damit
                          niemand versehentlich Inhaltsbilder versteckt.
   L3  HINWEIS            Zählung von `alt=""` (dekorativ) und von
-                         Ankertexten über `--langtext-grenze` Zeichen.
-                         Beides beendet den Lauf nicht: Ein langer
-                         Ankertext ist eine Abwägung (Karten-Links
-                         tragen bewusst Beschreibung + CTA, WCAG 2.5.3),
-                         ein leerer Alt-Text ist bei Schmuck korrekt.
+                         Ankertexten über `LANGTEXT_GRENZE` (60) Zeichen.
+                         Beides beendet den Lauf nicht: Ein leerer
+                         Alt-Text ist bei Schmuck korrekt, und ein
+                         etwas längerer Ankertext ist eine Abwägung.
+  L4  KARTENLINK ZU LANG Indexierbare Seite, Kartenlink (Klasse enthält
+                         card/karte/tile/entry-title), Ankertext über
+                         `LANGTEXT_FEHLER` (80) Zeichen – Fehler. Genau
+                         diese Form war der Seobility-Befund „Linktexte
+                         zu lang": eine Karte, die Titel, Anriss, Zähler
+                         und CTA als EINEN Link trug. Redaktionelle Links
+                         (Fließtext, Inhaltsverzeichnis, Quellenangabe)
+                         sind ausgenommen, ebenso nicht indexierbare
+                         Seiten (z. B. /go/-Weiterleitungen mit
+                         noindex,nofollow).
 
 Aufruf
 ======
@@ -73,7 +82,29 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_DIR = ROOT / "public"
+# Ab hier ist ein Ankertext ein HINWEIS (Abwägung: Karten mit Anriss,
+# Zitat-Titel, Pagination mit Artikeltitel sind legitim länger).
 LANGTEXT_GRENZE = 60
+# Ab hier ist ein Ankertext ein FEHLER – aber nur auf indexierbaren Seiten.
+# 80 Zeichen decken jeden echten Kartentitel ab und liegen weit unter den
+# 115–158-Zeichen-Kartenlinks, die der Seobility-Check vom 27.10.2026
+# gemeldet hat (Titel + Beschreibung + Zähler + CTA in einem Link).
+LANGTEXT_FEHLER = 80
+# L4 gilt für KARTEN-LINKS, nicht für redaktionelle Links im Fließtext.
+# Der Grund ist die Fehlerklasse: Ein langer Ankertext entsteht im Template,
+# wenn eine ganze Karte (Titel + Anriss + Zähler + CTA) EIN Link ist – genau
+# der Seobility-Befund vom 27.10.2026. Ein Link MITTEN im Satz, ein
+# Inhaltsverzeichnis-Sprungziel oder eine Quellenangabe darf dagegen lang
+# sein: dort ist der Text die Aussage, nicht das Etikett eines Ziels.
+KARTEN_KLASSEN = re.compile(
+    r"(?:^|-)(?:card|karte|tile|entry-title)(?:$|__|-)")
+
+
+def ist_kartenlink(eintrag: dict) -> bool:
+    for klasse in (eintrag["klasse"] or "").split():
+        if KARTEN_KLASSEN.search(klasse):
+            return True
+    return False
 
 # Elemente, deren Inhalt nie sichtbarer Text eines Links ist.
 # `noscript` steht bewusst NICHT darin: Wer ohne JavaScript crawlt, sieht
@@ -90,6 +121,7 @@ class LinkSammler(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.links: list[dict] = []
         self.bilder: list[dict] = []
+        self.robots: list[str] = []
         self._stapel: list[dict] = []
         self._stumm = 0
 
@@ -111,6 +143,8 @@ class LinkSammler(HTMLParser):
         attr = {k: (v if v is not None else "") for k, v in attrs}
         if tag in NICHT_TEXT:
             self._stumm += 1
+        if tag == "meta" and (attr.get("name") or "").lower() == "robots":
+            self.robots.append(attr.get("content") or "")
         if tag in {"a", "area"}:
             eintrag = {
                 "tag": tag,
@@ -155,7 +189,9 @@ def pruefe_html(html: str) -> tuple[list[str], dict]:
     sammler = LinkSammler()
     sammler.feed(html)
     befuende: list[str] = []
-    statistik = {"links": 0, "ohne_text": 0, "lang": 0, "alt_leer": 0, "bilder": 0}
+    statistik = {"links": 0, "ohne_text": 0, "lang": 0, "zu_lang": 0, "alt_leer": 0, "bilder": 0}
+    robots = " ".join(sammler.robots).lower()
+    indexierbar = "noindex" not in robots
 
     for eintrag in sammler.links:
         if not eintrag["href"]:
@@ -171,6 +207,12 @@ def pruefe_html(html: str) -> tuple[list[str], dict]:
             befuende.append(f"L1: Link ohne Linktext → {ziel}{hinweis}")
         elif len(text) > LANGTEXT_GRENZE:
             statistik["lang"] += 1
+            if (len(text) > LANGTEXT_FEHLER and indexierbar
+                    and ist_kartenlink(eintrag)):
+                statistik["zu_lang"] += 1
+                befuende.append(
+                    f"L4: Ankertext mit {len(text)} Zeichen (Grenze {LANGTEXT_FEHLER}) → "
+                    f"„{text[:60]}…“ ({eintrag['href'][:50]})")
 
     for bild in sammler.bilder:
         statistik["bilder"] += 1
@@ -191,7 +233,7 @@ def pruefe_build(public: Path) -> dict:
     if not public.is_dir():
         ergebnis["befunde"].append(f"Build-Verzeichnis fehlt: {public}")
         return ergebnis
-    summe = {"links": 0, "ohne_text": 0, "lang": 0, "alt_leer": 0, "bilder": 0}
+    summe = {"links": 0, "ohne_text": 0, "lang": 0, "zu_lang": 0, "alt_leer": 0, "bilder": 0}
     for datei in sammle_html(public):
         rel = datei.relative_to(public).as_posix()
         try:
@@ -247,6 +289,17 @@ def selftest() -> int:
     if statistik["ohne_text"] != 2 or statistik["bilder"] != 1:
         print("SELFTEST FEHLER: Statistik falsch:", statistik)
         fehler += 1
+    # L4: Ein Kartenlink über der Fehlergrenze muss auffallen, derselbe
+    # Text als redaktioneller Link (ohne Karten-Klasse) nicht.
+    langer_text = "Ein Satz, der so lang ist, dass er als Ankertext nichts mehr über das Ziel sagt " * 2
+    karte = f'<main><h1>T</h1><a class="ff-topic-card__title-link" href="/x/">{langer_text}</a></main>'
+    if not any(b.startswith("L4:") for b in pruefe_html(karte)[0]):
+        print("SELFTEST FEHLER: L4 erkennt einen zu langen Kartenlink nicht.")
+        fehler += 1
+    redaktion = f'<main><h1>T</h1><a class="ff-quellen__link" href="/x/">{langer_text}</a></main>'
+    if pruefe_html(redaktion)[0]:
+        print("SELFTEST FEHLER: L4 bestraft einen redaktionellen Quellenlink.")
+        fehler += 1
     # aria-label allein darf NICHT als Linktext gelten (Seobility-Kern).
     if not any("aria-label" in b for b in befuende):
         print("SELFTEST FEHLER: aria-label wurde als Linktext gewertet.")
@@ -254,7 +307,7 @@ def selftest() -> int:
     if fehler:
         print(f"❌ Selbsttest: {fehler} Probe(n) nicht bestanden.")
         return 2
-    print("✅ Selbsttest: L1 (Linktext inkl. SVG-Falle) und L2 (alt) sind scharf.")
+    print("✅ Selbsttest: L1 (Linktext inkl. SVG-Falle), L2 (alt) und L4 (Kartenlink-Länge) sind scharf.")
     return 0
 
 
@@ -277,6 +330,7 @@ def main(argv=None) -> int:
     if not ergebnis["befunde"]:
         print("  ✅ L1: kein Link ohne Linktext")
         print("  ✅ L2: jedes Bild trägt ein alt-Attribut")
+        print(f"  ✅ L4: kein Ankertext über {LANGTEXT_FEHLER} Zeichen auf indexierbaren Seiten")
     else:
         for befund in ergebnis["befunde"][:40]:
             print("  ❌", befund)
@@ -285,7 +339,8 @@ def main(argv=None) -> int:
     s = ergebnis["statistik"]
     print(f"  Seiten: {ergebnis['seiten']} · Links: {s.get('links', 0)} · Bilder: {s.get('bilder', 0)}")
     print(f"  Hinweis L3: {s.get('alt_leer', 0)} dekorative Bilder mit alt=\"\" · "
-          f"{s.get('lang', 0)} Ankertexte über {LANGTEXT_GRENZE} Zeichen (Abwägung, kein Fehler)")
+          f"{s.get('lang', 0)} Ankertexte über {LANGTEXT_GRENZE} Zeichen "
+          f"(davon {s.get('zu_lang', 0)} über der Fehlergrenze {LANGTEXT_FEHLER})")
     if ergebnis["befunde"]:
         print("Ergebnis: NICHT bestanden – Linktexte/Alt-Texte reparieren (SEO-Sicht).")
         return 1

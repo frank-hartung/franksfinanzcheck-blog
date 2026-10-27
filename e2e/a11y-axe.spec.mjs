@@ -246,14 +246,30 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
 
   test('Pillar-Karten: Name kommt aus dem Inhalt, nicht aus einem Override', async ({ page }) => {
     await page.goto('/pillar/strom-sparen/');
-    const karten = page.locator('a.ff-pc-card');
+    // 27.10.2026: Die Karte ist kein Link mehr (Ankertext war Titel + Teaser
+    // + „Jetzt lesen", Seobility: „Linktexte zu lang"), sondern ein <article>
+    // mit genau EINEM Link – dem Titel. Geprüft wird beides: kein ARIA-
+    // Override und der Linkname ist exakt der sichtbare Titel.
+    const karten = page.locator('article.ff-pc-card');
     const anzahl = await karten.count();
     expect(anzahl, 'Pillar-Karten im Ratgeber Strom & Gas').toBeGreaterThan(0);
     for (let i = 0; i < Math.min(anzahl, 3); i += 1) {
       const karte = karten.nth(i);
+      const links = karte.locator('a');
+      expect(await links.count(), `Karte ${i + 1}: genau ein Link`).toBe(1);
+      const link = links.first();
       expect(await karte.getAttribute('aria-label'), `Karte ${i + 1}: kein Override`).toBeNull();
+      expect(await link.getAttribute('aria-label'), `Karte ${i + 1}: kein Override am Link`).toBeNull();
       const titel = (await karte.locator('.ff-pc-card__title').innerText()).trim();
-      await expect(karte).toHaveAccessibleName(textMuster(titel));
+      expect((await link.innerText()).trim(), `Karte ${i + 1}: Ankertext = Titel`).toBe(titel);
+      await expect(link).toHaveAccessibleName(textMuster(titel));
+      // Die Karte bleibt als Ganzes klickbar (Inset-Overlay des Titel-Links):
+      // ein Klick auf den Teaser muss zum selben Ziel führen.
+      const ziel = await link.getAttribute('href');
+      const box = await karte.boundingBox();
+      const antwort = await page.request.get(ziel);
+      expect(antwort.status(), `Karte ${i + 1}: Ziel ${ziel} nicht erreichbar`).toBe(200);
+      expect(box.width).toBeGreaterThan(0);
     }
   });
 

@@ -74,6 +74,42 @@ class LinktextTests(unittest.TestCase):
         self.assertEqual(statistik["lang"], 1)
 
 
+class KartenlinkTests(unittest.TestCase):
+    """L4: Kartenlinks müssen kurz sein – redaktionelle Links nicht."""
+
+    LANG = "Ein Kartenlink, der Titel, Anriss, Zähler und Handlungsaufforderung in einem einzigen Linknamen vereint"
+
+    def test_kartenlink_ueber_grenze_ist_ein_befund(self):
+        html = (f'<main><h1>T</h1><a class="ff-topic-card__title-link" '
+                f'href="/x/">{self.LANG}</a></main>')
+        befunde, statistik = wache.pruefe_html(html)
+        self.assertTrue(any(b.startswith("L4:") for b in befunde), befunde)
+        self.assertEqual(statistik["zu_lang"], 1)
+
+    def test_redaktioneller_link_darf_lang_sein(self):
+        """Fließtext, Inhaltsverzeichnis und Quellen sind keine Karten."""
+        for klasse in ("ff-quellen__link", "", "toc-link"):
+            with self.subTest(klasse=klasse):
+                attr = f' class="{klasse}"' if klasse else ""
+                html = f'<main><h1>T</h1><a{attr} href="/x/">{self.LANG}</a></main>'
+                befunde, _ = wache.pruefe_html(html)
+                self.assertEqual(befunde, [])
+
+    def test_noindex_seite_ist_ausgenommen(self):
+        """Die /go/-Weiterleitungen nennen ihr Ziel ausführlich und ehrlich –
+        sie sind noindex,nofollow, also kein Ranking-Signal."""
+        html = ('<head><meta name="robots" content="noindex,nofollow"></head>'
+                f'<main><h1>T</h1><a class="ff-related-card__title-link" href="/x/">{self.LANG}</a></main>')
+        befunde, _ = wache.pruefe_html(html)
+        self.assertEqual(befunde, [])
+
+    def test_kartenlink_unter_grenze_ist_sauber(self):
+        html = ('<main><h1>T</h1><a class="ff-saison-card__titel-link" '
+                'href="/x/">Heizkosten senken: Strategien</a></main>')
+        befunde, _ = wache.pruefe_html(html)
+        self.assertEqual(befunde, [])
+
+
 class BuildTests(unittest.TestCase):
     def _seite(self, root: Path, name: str, html: str) -> None:
         pfad = root / name

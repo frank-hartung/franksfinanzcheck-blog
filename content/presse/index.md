@@ -31,6 +31,10 @@ Ich liefere auf Anfrage kurze Zitate, Rechenwege und Quellen. Wo eine individuel
 
 Die Grafik darf in redaktionellen Beiträgen unverändert genutzt werden. Bitte mit Quellenzeile **„FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“** und Link auf die Ausgabeseite. Die Daten stehen zur Prüfung und Berichterstattung bereit; eine Freigabe redaktioneller Texte ist nicht erforderlich.
 
+Statt die Grafik selbst zu verlinken, kann der fertige Einbett-Block kopiert werden: Bild und Quellenzeile liegen dann schon zusammen, mit absoluten URLs und ohne Skript, iframe oder Tracking-Parameter.
+
+{{< einbetten bild="/downloads/fixkosten-index-2026-q4-pressegrafik.svg" breite="1200" hoehe="628" alt="Modellrechnung mit 925 Euro Stromkosten, 1.431,60 Euro Gaskosten und 2.356,60 Euro Energiekosten pro Jahr" quelle="FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026" presse_seite="true" ziel="/studien/fixkosten-index-2026-q4/" >}}
+
 ## Interviews und Kooperationen
 
 Willkommen sind fachliche Interviews sowie sachbezogene Projekte mit Verbraucherorganisationen, Verbänden, Forschung und unabhängigen Fachleuten. Eine Zusammenarbeit wird nur dann öffentlich genannt, wenn sie tatsächlich vereinbart und belegbar ist. Inhaltliche Kontrolle gegen Bezahlung, Linkkauf und verdeckte Werbung sind ausgeschlossen.

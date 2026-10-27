@@ -65,6 +65,124 @@
 /* Ohne `:has` (ältere Engines) bleibt der Fokus sichtbar: der
    Browser zeichnet dann den Standardring am Anker. */
 
+/* ---------- 1b. Karten mit präzisem Ankertext (27.10.2026) ---------- */
+
+/* Sechs Kartenfamilien tragen jetzt statt eines Riesenlinks einen
+   Titel-Link mit Inset-Overlay:
+     .ff-topic-card        Themenwelten (Startseite + /posts/)
+     .ff-saison-card       Saison-Fokus (Startseite)
+     .ff-pc-card           Ratgeber-Pillar-Artikelkarten
+     .ff-related-card      „Das könnte dich auch interessieren" (Artikel)
+     .ff-wz-karte          Werkzeug-Raster (/werkzeuge/)
+     .ff-wz-weiter__karte  Werkzeug → Ratgeber/Cockpit
+   Gemeinsam ist allen: die Karte bleibt vollständig klickbar, der
+   Ankertext ist kurz und themenbezogen. Die Overlays liegen INNERHALB
+   der Karte (kein Überlauf, kein Klick-Diebstahl an Nachbarkarten). */
+
+.ff-topic-card,
+.ff-saison-card,
+.ff-pc-card,
+.ff-related-card,
+.ff-wz-karte,
+.ff-wz-weiter__karte {
+    position: relative;
+}
+
+/* Die Titel-Links erben Typografie und Farbe der Karte – und zwar mit
+   Karten-Scope, weil Artikel-Inhalte Links global unterstreichen
+   (`.md-content a:not(.anchor)`) und die Verwandt-Karten INNERHALB des
+   Artikeltexts stehen. Ohne diesen Scope wäre jeder Kartentitel
+   unterstrichen: eine sichtbare Design-Regression ohne SEO-Nutzen. */
+.ff-topic-card a.ff-topic-card__title-link,
+.ff-saison-card a.ff-saison-card__titel-link,
+.ff-pc-card a.ff-pc-card__title-link,
+.ff-related-card a.ff-related-card__title-link,
+.ff-wz-karte a.ff-wz-karte__title-link,
+.ff-wz-weiter__karte a.ff-wz-weiter__title-link {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    text-decoration: none;
+}
+
+.ff-topic-card a.ff-topic-card__title-link:hover,
+.ff-saison-card a.ff-saison-card__titel-link:hover,
+.ff-pc-card a.ff-pc-card__title-link:hover,
+.ff-related-card a.ff-related-card__title-link:hover,
+.ff-wz-karte a.ff-wz-karte__title-link:hover,
+.ff-wz-weiter__karte a.ff-wz-weiter__title-link:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ff-topic-card__title-link::after,
+.ff-saison-card__titel-link::after,
+.ff-pc-card__title-link::after,
+.ff-related-card__title-link::after,
+.ff-wz-karte__title-link::after,
+.ff-wz-weiter__title-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    /* Der Radius folgt der jeweiligen Karte, damit der Fokusring und
+       der Klickbereich nicht über die Rundung hinauslaufen. */
+    border-radius: inherit;
+}
+
+.ff-topic-card__title-link:focus-visible,
+.ff-saison-card__titel-link:focus-visible,
+.ff-pc-card__title-link:focus-visible,
+.ff-related-card__title-link:focus-visible,
+.ff-wz-karte__title-link:focus-visible,
+.ff-wz-weiter__title-link:focus-visible {
+    outline: none;
+}
+
+/* Der Fokusring liegt auf der KARTE – nicht auf der Textzeile. Ein Ring um
+   einen Satz mitten in der Karte liest sich wie ein Link im Fließtext. */
+.ff-topic-card:has(.ff-topic-card__title-link:focus-visible),
+.ff-saison-card:has(.ff-saison-card__titel-link:focus-visible),
+.ff-pc-card:has(.ff-pc-card__title-link:focus-visible),
+.ff-related-card:has(.ff-related-card__title-link:focus-visible),
+.ff-wz-karte:has(.ff-wz-karte__title-link:focus-visible),
+.ff-wz-weiter__karte:has(.ff-wz-weiter__title-link:focus-visible) {
+    outline: 3px solid var(--ff-emerald);
+    outline-offset: 3px;
+}
+
+/* Hover/Fokus wandert auf die Karte – vorher reagierte die Karte auf
+   :hover des Links. Ohne diese Regel bliebe der visuelle Zustand aus,
+   obwohl die Trefferfläche stimmt. */
+.ff-topic-card:hover .ff-topic-cta,
+.ff-topic-card:focus-within .ff-topic-cta {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Die Verwandt-Karten im Artikel: Der Hover-Zustand hing am Karten-Link. */
+.ff-related-card:hover .ff-related-card__heading,
+.ff-related-card:focus-within .ff-related-card__heading {
+    color: var(--ff-emerald-dark);
+}
+
+:root[data-theme="dark"] .ff-related-card:hover .ff-related-card__heading,
+:root[data-theme="dark"] .ff-related-card:focus-within .ff-related-card__heading {
+    color: #a8ecd2;
+}
+
+/* Die Titelzeilen bleiben über dem Overlay: Text bleibt lesbar, markierbar
+   und per Klick direkt erreichbar (gleiches Ziel wie das Overlay). */
+.ff-topic-card h3,
+.ff-saison-card-titel,
+.ff-pc-card__title,
+.ff-related-card__heading,
+.ff-wz-karte__name,
+.ff-wz-weiter__karte strong {
+    position: relative;
+    z-index: 2;
+}
+
 /* ---------- 2. Teilen-Zeile ---------- */
 
 .ff-teilen {
@@ -138,4 +256,99 @@
     .ff-teilen__aktion {
         transition: color 0.15s ease, border-color 0.15s ease;
     }
+}
+
+/* ---------- 3. Einbett-Angebot (Linkable Asset) ---------- */
+
+.ff-einbetten {
+    margin: 32px 0;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+}
+
+.ff-einbetten__titel {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+}
+
+.ff-einbetten__intro {
+    margin: 0 0 14px;
+    max-width: 68ch;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--secondary);
+}
+
+.ff-einbetten__code {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--primary) 4%, transparent);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    tab-size: 2;
+}
+
+.ff-einbetten__code:focus-visible {
+    outline: 2px solid var(--ff-emerald);
+    outline-offset: 2px;
+}
+
+/* Der Codeblock ist der einzige Ort mit Zwangsumbrüchen im Block –
+   Embed-Snippets werden zeilenweise kopiert, nicht umbrochen. */
+.ff-einbetten__code code {
+    white-space: pre;
+}
+
+.ff-einbetten__aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    margin: 0;
+}
+
+.ff-einbetten__knopf {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 9px 16px;
+    border: 1px solid var(--ff-emerald);
+    border-radius: 999px;
+    background: var(--ff-emerald);
+    color: #fff;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ff-einbetten__knopf:hover {
+    background: var(--ff-emerald-dark);
+    border-color: var(--ff-emerald-dark);
+}
+
+.ff-einbetten__knopf:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.ff-einbetten__link {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.ff-einbetten__status {
+    margin: 10px 0 0;
+    font-size: 0.85rem;
+    color: var(--secondary);
+}
+
+.ff-einbetten__status:empty {
+    display: none;
 }

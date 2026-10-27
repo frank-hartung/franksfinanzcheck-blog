@@ -200,11 +200,20 @@ def check_worlds(page: Page, data: dict, public: Path, base_path: str, *, home=F
         errors.append("Doppelte IDs im Themenbereich.")
     for card, topic in zip(cards, data["topics"]):
         label = topic["id"]
-        if card.tag != "a" or not card.inside(region) or card.attrs.get("data-topic") != label:
-            errors.append(f"{label}: Reihenfolge/Struktur der Karte stimmt nicht.")
-        nested = [n for n in page.nodes if n.inside(card) and n.tag in {"a", "button", "input", "select", "textarea"}]
-        if nested:
-            errors.append(f"{label}: keine verschachtelten Bedienelemente in einer Link-Karte.")
+        # ANKERTEXT PRÄZISE (27.10.2026): Die Karte ist kein Link mehr,
+        # sondern ein <article> mit GENAU EINEM Link – dem Titel. Grund:
+        # Als Ganzes verlinkt trug sie Titel + Beschreibung + Zähler + CTA
+        # als Ankertext (115–132 Zeichen, Seobility: „Linktexte zu lang").
+        # Die Klickfläche über die ganze Karte liefert ein Inset-Overlay
+        # (CSS), keine zweite Linkfläche im DOM.
+        if card.tag != "article" or not card.inside(region) or card.attrs.get("data-topic") != label:
+            errors.append(f"{label}: Reihenfolge/Struktur der Karte stimmt nicht "
+                          "(erwartet: <article class=ff-topic-card> in Datenreihenfolge).")
+        bedien = [n for n in page.nodes if n.inside(card)
+                  and n.tag in {"a", "button", "input", "select", "textarea"}]
+        if len(bedien) != 1:
+            errors.append(f"{label}: genau ein Bedienelement pro Themenkarte "
+                          f"(Ist: {len(bedien)}) – sonst wird der Ankertext wieder unscharf.")
         titles = [n for n in page.nodes if n.inside(card) and n.tag == "h3"]
         if len(titles) != 1 or titles[0].text != topic["title"]:
             errors.append(f"{label}: Kartentitel fehlt oder weicht von der Datenquelle ab.")
@@ -214,11 +223,29 @@ def check_worlds(page: Page, data: dict, public: Path, base_path: str, *, home=F
         if len(descriptions) != 1 or descriptions[0].text != topic["description"]:
             errors.append(f"{label}: Beschreibung fehlt oder weicht von der Datenquelle ab.")
         ctas = [n for n in page.by_class("ff-topic-cta") if n.inside(card)]
-        if len(ctas) != 1 or "Zum Thema" not in ctas[0].text or ctas[0].attrs.get("aria-hidden") == "true":
-            errors.append(f"{label}: sichtbarer CTA muss im nativen Linknamen stehen.")
+        # Der CTA ist sichtbar, gehört aber NICHT in den Linknamen: Er ist
+        # keine Sprachsteuerungs-Ansage („klick Strom und Gas sparen" trifft
+        # den Titel), und sein Text würde den Ankertext wieder aufblähen.
+        if len(ctas) != 1:
+            errors.append(f"{label}: CTA fehlt.")
+        elif ctas[0].attrs.get("aria-hidden") != "true":
+            errors.append(f"{label}: der „Zum Thema“-CTA muss aria-hidden sein – "
+                          "sonst steht er im Linknamen und macht den Ankertext unscharf.")
         if any("hidden" in n.attrs or n.attrs.get("aria-hidden") == "true" for n in (card, region)):
             errors.append(f"{label}: Navigation darf nicht versteckt sein.")
-        href = card.attrs.get("href", "")
+        links = [n for n in page.nodes if n.tag == "a" and n.inside(card)]
+        link = links[0] if links else None
+        if link is None:
+            errors.append(f"{label}: Themenkarte ohne Link.")
+            continue
+        if not link.has_class("ff-topic-card__title-link"):
+            errors.append(f"{label}: der Link muss der Titel sein (Klasse ff-topic-card__title-link).")
+        if link.text != topic["title"]:
+            errors.append(f"{label}: Ankertext muss exakt der Kartentitel sein "
+                          f"(Ist: {link.text!r}) – Beschreibung/Zähler/CTA gehören nicht hinein.")
+        if any(attr in link.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
+            errors.append(f"{label}: Titel-Link darf seinen Namen nicht per ARIA überschreiben.")
+        href = link.attrs.get("href", "")
         target = output_path(public, href, base_path)
         if href != f"{base_path}pillar/{label}/" or not target or not target.is_file():
             errors.append(f"{label}: Themen-Ziel fehlt im Build oder URL ist falsch: {href}")
@@ -234,28 +261,40 @@ def check_worlds(page: Page, data: dict, public: Path, base_path: str, *, home=F
         # Ein Gate, das seine Zahl aus dem Fehler zieht, den es verhindern
         # soll, meldete die Heilung als Rückfall – und bliebe blind, sobald
         # eine Karte ohne Override gebaut wird.
-        article_links = [n for n in target_page.nodes if n.tag == "a"
-                         and n.has_class("ff-pc-card")]
+        article_cards = [n for n in target_page.nodes if n.has_class("ff-pc-card")]
         counts = [n for n in page.by_class("ff-topic-count") if n.inside(card)]
-        count = len(article_links)
+        count = len(article_cards)
         expected = f"{count} Artikel" if count else "Basis-Ratgeber"
         if len(counts) != 1 or counts[0].attrs.get("data-article-count") != str(count) or counts[0].text != expected:
             errors.append(f"{label}: Artikelzahl stimmt nicht mit dem veröffentlichten Themen-Ratgeber überein.")
-        for link in article_links:
-            if any(attr in link.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
+        for article in article_cards:
+            # Artikelkarte im Ratgeber: ebenfalls <article> + genau EIN
+            # Titel-Link (vorher war die Karte der Link aus Titel + Teaser
+            # + „Jetzt lesen").
+            innere = [n for n in target_page.nodes if n.tag == "a" and n.inside(article)]
+            if len(innere) != 1:
+                errors.append(f"{label}: Artikelkarte braucht genau einen Link (Ist: {len(innere)}).")
+                continue
+            link_in_card = innere[0]
+            if any(attr in link_in_card.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
                 errors.append(f"{label}: Artikel-Karten dürfen sichtbaren Text nicht per ARIA überschreiben/duplizieren.")
-            titles = [n for n in target_page.by_class("ff-pc-card__title") if n.inside(link)]
-            if len(titles) != 1 or not titles[0].text or "Jetzt lesen" not in link.text:
-                errors.append(f"{label}: Artikel-Karte braucht sichtbaren Titel und CTA im Linknamen.")
-            images = [n for n in target_page.nodes if n.tag == "img" and n.inside(link)]
+            titles = [n for n in target_page.by_class("ff-pc-card__title") if n.inside(article)]
+            if len(titles) != 1 or not titles[0].text or titles[0].text != link_in_card.text:
+                errors.append(f"{label}: Artikel-Karte braucht sichtbaren Titel als Linknamen.")
+            if not link_in_card.has_class("ff-pc-card__title-link"):
+                errors.append(f"{label}: Artikel-Link muss der Titel sein (ff-pc-card__title-link).")
+            ctas = [n for n in target_page.by_class("ff-pc-card__cta") if n.inside(article)]
+            if len(ctas) != 1 or ctas[0].attrs.get("aria-hidden") != "true":
+                errors.append(f"{label}: „Jetzt lesen“-CTA muss sichtbar und aria-hidden sein.")
+            images = [n for n in target_page.nodes if n.tag == "img" and n.inside(article)]
             # Hugo --minify serialisiert alt="" als nacktes alt (HTML5: gleicher
             # leerer Wert). Fehlendes Attribut ist dagegen ein echter Fehler.
             if any("alt" not in image.attrs or (image.attrs.get("alt") or "") != "" or
                    image.attrs.get("aria-hidden") != "true" for image in images):
                 errors.append(f"{label}: Cover im beschrifteten Artikel-Link braucht alt=\"\" und aria-hidden=true.")
-            dest = output_path(public, link.attrs.get("href", ""), base_path)
+            dest = output_path(public, link_in_card.attrs.get("href", ""), base_path)
             if not dest or not dest.is_file():
-                errors.append(f"{label}: verlinkter Themen-Artikel fehlt im Build: {link.attrs.get('href')}")
+                errors.append(f"{label}: verlinkter Themen-Artikel fehlt im Build: {link_in_card.attrs.get('href')}")
     return errors
 
 

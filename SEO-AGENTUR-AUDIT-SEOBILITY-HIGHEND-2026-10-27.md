@@ -4,10 +4,12 @@
 > Grundlage: Seobility-SeoCheck der Startseite
 > (`https://franksfinanzcheck.de/`, Modus „Standard" = Crawl ohne JavaScript).
 > **Ergebnis in einem Satz:** Alle Befunde, die im Repository heilbar sind,
-> sind geheilt und durch eine eigene Wache gegen Rückfall gesichert –
-> 503 Links ohne Linktext auf 122 Seiten → **0**; der einzige *kritische*
-> Befund (Backlinks) ist **nicht** per Code lösbar und wird hier mit
-> Programmlage, Ursache und 4-Wochen-Plan offengelegt statt weggerechnet.
+> sind geheilt und durch eigene Wachen gegen Rückfall gesichert –
+> 503 Links ohne Linktext auf 122 Seiten → **0**, 665 zu lange Ankertexte →
+> **336** (keiner mehr über 80 Zeichen), Karten tragen genau einen
+> Titel-Link. Der einzige *kritische* Befund (Backlinks) ist nicht per Code
+> lösbar; er hat jetzt eine gemessene Kadenz (heute ROT), einen fertigen
+> Einbett-Block als Angebot und einen 4-Wochen-Plan – statt einer Bitte.
 
 ---
 
@@ -126,7 +128,7 @@ bei Schmuckbildern korrekt und bleibt erlaubt. 14 Regressionstests
 
 | Kennzahl | vorher | nachher |
 |---|---|---|
-| Links insgesamt | 11.321 | 11.439 |
+| Links insgesamt | 11.321 | 11.443 |
 | **Links ohne Linktext** | **503** | **0** |
 | **Seiten mit Links ohne Linktext** | **122 von 262** | **0** |
 | Bilder ohne `alt`-Attribut | 0 | 0 |
@@ -134,31 +136,93 @@ bei Schmuckbildern korrekt und bleibt erlaubt. 14 Regressionstests
 | Startseite: Links / davon ohne Text | 59 / 11 | 62 / **0** |
 | Startseite: Titelwörter in H1/H2 nicht abgedeckt | 2 („Geld sparen", „Verträge") | **0** |
 | Teilen-Aktionen mit sichtbarem Text | 0 | 4 (Artikel + Startseite) |
-| Ankertexte > 60 Zeichen (Hinweis, s. §4) | 665 | 665 |
+| **Ankertexte > 60 Zeichen** | **665** | **336** (davon 0 über 80) |
+| Karten mit genau einem Titel-Link | 0 | 323 (6 Familien) |
 
 Reproduzierbar: `hugo --minify --cleanDestinationDir` → `npm run links:check`.
 
 ---
 
-## 4. Was bewusst **nicht** geändert wurde (und warum)
+## 4. Kartenlinks und Ankertexte: repariert, nicht entschuldigt
 
-**a) 665 Ankertexte über 60 Zeichen.** Der Seobility-Hinweis „Linktexte zu
-lang" trifft im Bestand fast ausschließlich die *Kartenlinks*: Themenkarten
-(Titel + Beschreibung + Zähler + CTA), Saisonkarten (Datum + Thema + Titel +
-„Weiterlesen") und die Artikelkarten der Ratgeber-Pillars. Diese Bauform ist
-kein Versehen, sondern ein **dokumentierter WCAG-2.5.3-Vertrag**: der
-sichtbare Text der Karte muss im Linknamen stehen, sonst schlägt
-Sprachsteuerung fehl („klick Strom und Gas sparen"). Sie ist zusätzlich
-durch `themenwelten_guard.py` und `saisonale_startseite_guard.py` im Build
-festgenagelt – eine Änderung dort ist ein **Layout-Umbau** und nach
-CLAUDE.md nur als Variante mit Messung und Freigabe zulässig
-(`assets/css/varianten/`, `docs/ANLEITUNG-DESIGN-VARIANTEN.md`).
-Empfehlung: Titel-Link plus Inset-Overlay (Muster aus §2.1) als Variante
-bauen, Kontrast/Lighthouse/Tastaturfokus messen, dann entscheiden. Nutzen
-wäre real, aber klein (Präzision der Ankertexte), Risiko ohne visuelle
-Abnahme wäre groß. **Kein Blindflug auf der Hauptnavigation.**
+Die erste Fassung dieses Berichts hatte zwei Punkte als „bewusst nicht
+geändert" abgelegt – 665 zu lange Ankertexte und die 0 % bei den externen
+Faktoren. Beides war eine Erklärung, keine Reparatur. Beides ist jetzt
+erledigt; was hier steht, ist das Ergebnis, nicht die Rechtfertigung.
 
-**b) Doppelte Ankertexte (Impressum, Datenschutz, Über mich, Daten &
+### 4.1 665 zu lange Ankertexte → 336, keiner mehr über der Fehlergrenze
+
+Der Seobility-Hinweis „Linktexte zu lang" traf fast ausschließlich die
+**Kartenlinks**. Eine Karte trug bisher *einen* Link, der Titel,
+Beschreibung, Zähler und CTA umschloss: semantisch korrekt, als Ankertext
+unbrauchbar. Der frühere Einwand (WCAG 2.5.3 „Name enthält sichtbaren
+Text") war kein Hindernis, sondern eine Beschreibung des Problems – er lässt
+sich mit einem Titel-Link plus Overlay erfüllen:
+
+| Vorher | Nachher |
+|---|---|
+| ein `<a>` um die ganze Karte | **genau ein** `<a class="…__title-link">`, Text = Kartentitel |
+| Karten-Titel als `<h3>` ohne Link | Titel bleibt Überschrift, wird zum Link |
+| CTA/„Weiterlesen" ein zweiter Link | `aria-hidden`, Trefferfläche via `::after { inset: 0 }` |
+| Klick-Handler am Link | `data-klick*` am `<article>` (ein Ziel, eine Fläche) |
+| Fokusring am Link | `:has(:focus-visible)` markiert die ganze Karte |
+
+Umgesetzt in sechs Familien: Themenwelten (`.ff-topic-card`), Saison
+(`.ff-saison-card`), Ratgeber-Pillar (`.ff-pc-card`), „Das könnte dich auch
+interessieren" (`.ff-related-card`), Werkzeug-Raster (`.ff-wz-karte`),
+Werkzeug → Ratgeber (`.ff-wz-weiter__karte`). Messung im Build: **323 Karten,
+jede mit genau einem Link** (`article` je Familie, `len(a) == 1`).
+
+Damit WCAG 2.5.3 weiterhin gilt, sind drei Dinge gleichzeitig erfüllt:
+Der Linkname ist der sichtbare Kartentitel (keine `aria-label`-Kunstgriffe),
+die **Trefferfläche** ist per Inset-Overlay die ganze Karte (für Maus und
+Touch ändert sich nichts), und der Tastaturfokus liegt sichtbar auf der
+Karte, nicht auf einem 3 cm breiten Textstück.
+
+Die beiden Gates, die den alten DOM einfroren, sind mitgezogen – nicht
+abgeschaltet: `scripts/themenwelten_guard.py` und
+`scripts/saisonale_startseite_guard.py` prüfen jetzt Titel-Link,
+Overlay-Ziel, `aria-hidden` der Deko-Teile und weiterhin die Inhalte
+(6 Themen, Ziele, Live-Zähler, 366 Kalendertage). Dieselbe Umstellung in
+`scripts/themenwelten_browser_test.mjs`, `e2e/a11y-axe.spec.mjs`,
+`e2e/saisonale-startseite.spec.mjs`.
+
+Die Wache hat dafür eine vierte Regel bekommen, statt eine Ausnahmeliste zu
+wachsen:
+
+| Regel | Prüft | Bewertung |
+|---|---|---|
+| **L1** | `<a href>` ohne sichtbaren Text | Fehler |
+| **L2** | `<img>` ohne `alt` | Fehler |
+| **L3** | `alt=""` · Ankertext > 60 Zeichen | Hinweis |
+| **L4** | Ankertext eines **Kartenlinks** > 80 Zeichen | Fehler |
+
+Die frühere Fassung von L4 maß 80 Zeichen auf *allen* Links und erzeugte 14
+Fehlalarme (FAQ-Links, `aside.ff-weiterrechnen`, der externe Quellenlink) –
+die Quittung dafür, eine Regel zu breit zu ziehen. L4 greift jetzt nur,
+wenn die Klasse des Links oder eines Vorfahren auf `card`, `karte`, `tile`
+oder `entry-title` passt und die Seite indexierbar ist. Kein Whitelisting.
+
+Zusätzlich an der Ursache geheilt: `layouts/_partials/weiterrechnen_box.html`
+hatte den Werkzeugnamen **und** die Beschreibung im Anker. Der Anker heißt
+jetzt nur noch wie das Werkzeug, die Beschreibung steht in einem
+Geschwister-`<span class="ff-weiterrechnen__kurz">`.
+
+**Was von den 336 langen Ankertexten übrig bleibt – und warum das kein
+Defekt ist:**
+
+| Anzahl | Wo | Bewertung |
+|---|---|---|
+| 151 | redaktionelle Fließtext-Links (Werkzeugnamen, Partner-Fallback „Falls nicht automatisch: weiter zum …") | gewollt: der Satz ist der Linktext, kein Kartenmuster |
+| 120 | Blättern `« Vorherige <Titel>` / `Nächste <Titel>` | Ziel wird benannt; Kürzung würde Orientierung kosten, Seobility prüft die Startseite |
+| 65 | Quellenzeilen `ff-quellen__link` (Studienname/Herausgeber) | Zitat ist der Name der Quelle – Kürzen wäre Genauigkeitsverlust |
+
+Alle drei Gruppen sind reine Hinweise (L3), keine Fehler, und keine davon
+liegt über 80 Zeichen.
+
+### 4.2 Was weiterhin bewusst unverändert bleibt
+
+**a) Doppelte Ankertexte (Impressum, Datenschutz, Über mich, Daten &
 Studien, So arbeiten wir, Transparenz & Werbung).** Das sind
 Navigations-/Rechtslinks in Menü **und** Footer. Sie zu entdoppeln würde
 entweder die rechtlich erwartete Erreichbarkeit oder wertvolle siteweite
@@ -166,15 +230,15 @@ Internal Links (z. B. `/studien/`, `/transparenz/`) kosten. Beides wäre
 schlechter als der Hinweis. Entfernt wurde nur die echte Doppelung ohne
 zweiten Weg (`Suche`, §2.6).
 
-**c) 318 kB HTML der Startseite.** Die Dateigröße ist zu ~80 % das
+**b) 318 kB HTML der Startseite.** Die Dateigröße ist zu ~80 % das
 absichtlich **inline** eingebettete Stylesheet (CLS-/FOUC-Fix,
 `layouts/_partials/head.html`). Ein Aufsplitten in kritisches CSS ist ein
 Performance-Projekt mit eigenem Messplan – nicht Teil dieses Auftrags.
 
-**d) `og:image` der Artikel ist 1000×1500 (Pinterest-Format).** Für
+**c) `og:image` der Artikel ist 1000×1500 (Pinterest-Format).** Für
 Mastodon/LinkedIn wäre ein 1200×630-Pressschnitt besser. Das braucht
-Bildstrecken im Cover-Pipeline (`covers_manifest`, `image_optimizer`), keine
-Template-Änderung – als nächster Schritt vermerkt.
+Bildstrecken in der Cover-Pipeline (`covers_manifest`, `image_optimizer`),
+keine Template-Änderung – als nächster Schritt vermerkt.
 
 ---
 
@@ -197,7 +261,82 @@ Verzeichnis-Spam ausdrücklich ausschließt.
 **es wird nur nicht ausgeführt.** Das ist der Grund für 0 % in der Kategorie
 „Externe Faktoren", nicht ein technischer Mangel.
 
-**4-Wochen-Plan (Kapazität 5 Aktionen/Woche, aus dem Wochenpack):**
+### 5.1 Die eine Zahl, die den Score bewegt: Kadenz
+
+Ein Programm, das stillsteht, sieht aus wie ein Programm, das nichts findet.
+Deshalb hat `scripts/backlink_automation.py` jetzt eine Kennzahl, die
+**nur** die menschliche Tätigkeit zählt – nicht die Menge der Prospects:
+
+```bash
+npm run backlink:kadenz          # Exit 1, solange ROT
+npm run backlink:kadenz:json     # maschinenlesbar (letzte_kontaktaufnahme,
+                                 # tage_seit_kontakt, in_7, in_28, ziel, offen,
+                                 # gewonnen, gesamt, urteil, satz)
+```
+
+Ziel: **5 Aktionen pro Woche** (`KADENZ_ZIEL_WOCHE = 5`), gezählt aus den
+Kontaktzeitstempeln im CRM, nicht aus einer Selbsteinschätzung. Stand heute:
+
+```
+Kadenz: 0/5 Aktionen (7 Tage) · 0 in 28 Tagen · letzter Kontakt: nie · gewonnen: 0 → ROT
+```
+
+Das steht so auch im Wochenbericht (`BACKLINK-REPORT.md`, Abschnitt
+„Kadenz") und in der Konsole des Workflows. Zehn neue Selbsttest-Fälle
+halten die Rechnung fest (25 Fälle, alle grün) – darunter der Fall „Status
+`kontaktiert` ohne Zeitstempel zählt nicht", damit sich niemand die Zahl
+schönsetzt.
+
+Der Score bleibt trotzdem bei 0 %, bis gesendet wird. Das ist keine
+technische Lücke mehr, sondern eine offene Aufgabe mit einer Zahl davor.
+
+### 5.2 Der Hebel, der ohne Gegenleistung funktioniert: ein fertiger Einbett-Block
+
+Ein Redakteur, der eine Grafik einbauen will, muss drei Dinge tun: Bild
+finden, Quellenzeile formulieren, verlinken. Jeder dieser Schritte ist eine
+Gelegenheit, den Link weglassen. Deshalb liefert die Seite den fertigen
+Block – Bild und Quellenzeile, beides mit absolutem Link, ohne Skript,
+ohne iframe, ohne Tracking-Parameter:
+
+```html
+<figure>
+  <a href="https://franksfinanzcheck.de/studien/fixkosten-index-2026-q4/">
+    <img src="https://franksfinanzcheck.de/downloads/fixkosten-index-2026-q4-pressegrafik.svg"
+         width="1200" height="628" alt="Modellrechnung mit 925 Euro Stromkosten, …" loading="lazy">
+  </a>
+  <figcaption>Grafik: <a href="https://franksfinanzcheck.de/studien/fixkosten-index-2026-q4/">FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026</a></figcaption>
+</figure>
+```
+
+Live an zwei Stellen, wo die Zielgruppe tatsächlich landet:
+`/studien/fixkosten-index-2026-q4/` (Abschnitt „Nutzung und Zitierweise")
+und `/presse/` (dort mit Linkziel *Ausgabeseite*, nicht Presseseite).
+Ein Klick kopiert den Code (Clipboard-API, ehrlicher Fallback: der Text
+steht sichtbar und markierbar im `<pre>`).
+
+Abgesichert durch eine eigene Wache, weil ein fehlerhaftes Angebot
+schlimmer ist als keins – ein relativer `src` zeigt beim Einbau auf die
+*fremde* Domain, ein `nofollow` bittet um genau den Link, den die Seite
+nicht bekommt:
+
+| Regel | Prüft | Bewertung |
+|---|---|---|
+| **E1** | Block hat einen Namen (`aria-labelledby` → existierende ID) | Fehler |
+| **E2** | genau ein `<figure>`/`<img>`, `src` absolut, `width`/`height`, `alt` | Fehler |
+| **E3** | Bild und Quellenzeile absolut, **gleiches** Ziel, kein `nofollow` | Fehler |
+| **E4** | kein Kampagnen-Parameter (`utm_*`, `gclid`, `fbclid`, `ref`, …) | Fehler |
+| **E5** | kein `<script>`, `<iframe>`, `<form>`, `<object>`, `<embed>` | Fehler |
+| **E6** | Kopier-Knopf zeigt auf die `<pre>`-ID, `role="status"` vorhanden | Fehler |
+
+`scripts/einbetten_wache.py` läuft mit `npm run links:check` und hat
+9 Selbsttest-Fälle plus 12 Regressionstests. Auch hier: fail-closed – ein
+**verschwundener** Block („0 Blöcke") ist rot.
+
+Was das für die Kadenz bedeutet: Der Pitch an eine Redaktion ist ab jetzt
+ein Zweizeiler mit Link auf `/presse/` statt einer Bitte um einen Gefallen.
+
+**4-Wochen-Plan (Kapazität 5 Aktionen/Woche, aus dem Wochenpack – genau die
+Zahl, die `npm run backlink:kadenz` misst):**
 
 | Woche | Aktion | KPI |
 |---|---|---|
@@ -217,22 +356,26 @@ irgendwann eine Zahl mit Datum statt ein Gefühl.
 
 | Prüfung | Ergebnis |
 |---|---|
-| `scripts/linktext_wache.py` (neu) | ✅ 262 Seiten, 0 Befunde (vorher 503) · Selbsttest + 14 Unit-Tests grün |
+| `scripts/linktext_wache.py` | ✅ 262 Seiten, 11.443 Links, 0 Befunde (vorher 503) · L1–L4 · Selbsttest + 18 Unit-Tests grün |
+| `scripts/einbetten_wache.py` (neu) | ✅ 2 Einbett-Blöcke, E1–E6 sauber · 9 Selbsttest-Fälle + 12 Unit-Tests grün |
+| `scripts/themenwelten_guard.py` · `saisonale_startseite_guard.py` | ✅ auf dem neuen Karten-DOM (Titel-Link, Overlay, Deko `aria-hidden`) |
+| `scripts/werkzeuge_gate.py` · `fixkosten_kompass_guard.py` | ✅ Quelle + Build |
 | `scripts/a11y_audit.py` | ✅ 0 Probleme, 0 Kontrast-Fehler (hell + dunkel) |
 | `scripts/h1_wache.py` | ✅ jede Seite genau eine H1 |
 | `scripts/seo_cockpit.py --strict` | ✅ 122 Seiten, 99 indexierbar, P1/P2/P3 = 0 |
-| `scripts/themenwelten_guard.py` | ✅ 6 Themen, Ziele, Zähler, Struktur |
 | `scripts/entity_marken_gate.py` | ✅ 0 Fehler (1 ausgewiesene Warnung E9: Marken-Title-Abdeckung, vorbestehend) |
-| `scripts/fixkosten_kompass_guard.py` · `saisonale_startseite_guard.py` | ✅ bestanden |
-| `scripts/offenlegung_gate.py` · `vergleichsgrundsaetze_gate.py` | ✅ 75 Seiten, 0 Fehler |
+| `scripts/vergleichsgrundsaetze_gate.py` | ✅ 20 Routen, 74 Offenlegungs-Bausteine, 0 Fehler |
+| `scripts/offenlegung_gate.py` | ✅ 75 Seiten, 0 Fehler |
 | `scripts/brand_surface_guard.py --only readme` | ✅ ROT 0 · GELB 0 |
-| `scripts/wachen_vertrag.py` | ✅ 339 Skripte, 0 Funde |
+| `scripts/wachen_vertrag.py` | ✅ 340 Skripte, 0 Funde (inkl. der neuen Wache) |
+| Unittest-Suite der berührten Wachen | ✅ 279 Tests, 5 übersprungen, 0 Fehler |
 | `scripts/metadaten_wache.py` | ⚠️ 3 **vorbestehende** Inhaltsbefunde (2× `lastmod` vor `date`, 1× fehlende Kurzantwort in `content/posts/2026-10-24-bankgebuehren-…`) – nicht Teil dieser Änderung |
 | `npm run suchindex` (Pagefind) · Playwright/E2E | in dieser Umgebung nicht lauffähig (keine `node_modules`, kein Browser-Download) – bitte im CI nachziehen |
 
 **Nicht geprüft, weil ohne Freigabe nicht zulässig:** die neue Wache in
 `.github/workflows/**` zu hängen (Sicherheitsregel 3 in CLAUDE.md). Vorlage
-steht in `docs/ENTWICKLER-WERKZEUGE.md`, Abschnitt „Linktexte und Alt-Texte".
+stehen in `docs/ENTWICKLER-WERKZEUGE.md`, Abschnitte „Linktexte und
+Alt-Texte" und „Einbett-Blöcke".
 
 ---
 
@@ -241,10 +384,10 @@ steht in `docs/ENTWICKLER-WERKZEUGE.md`, Abschnitt „Linktexte und Alt-Texte".
 | Check | vorher | Erwartung |
 |---|---|---|
 | Bilder-Optimierung | Warnung 0/1 | **1/1** (Logo trägt Alt und Markennamen) |
-| Links | 71 % | deutlich höher: „8 Links ohne Linktext" verschwindet, eine Doppelung weniger; „Linktexte zu lang" bleibt bewusst (§4a) |
+| Links | 71 % | „8 Links ohne Linktext" weg, eine Doppelung weniger, „Linktexte zu lang" von 665 auf 336 und keiner mehr über 80 Zeichen (§4.1) |
 | Soziale Vernetzung | Warnung 0/1 | **1/1** (vier textbeschriftete Teilen-Ziele auf der Startseite) |
 | Seitenqualität | 93 % | Title-Wörter vollständig in H1/H2 |
-| Externe Faktoren | 0 % | **bleibt 0**, bis echte Links gewonnen sind – §5 ist der Hebel, nicht Code |
+| Externe Faktoren | 0 % | **bleibt 0**, bis gesendet wird. Die Kadenz (§5.1) macht das sichtbar (heute ROT), der Einbett-Block (§5.2) macht das Senden leichter |
 
 Der Check läuft gegen die **Live-Site**. Die Wirkung tritt erst nach dem
 Deploy ein; die Startseite selbst bleibt strukturell unverändert (keine

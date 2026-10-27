@@ -112,10 +112,20 @@
         {{- $rFile = path.Base $rCover }}{{ $rDir = path.Dir $rCover }}
         {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile }}
       {{- end }}
-      {{- /* Native Linkbezeichnung aus sichtbarem Titel, Teaser und CTA.
-             aria-label nur mit dem Titel verletzte WCAG 2.5.3; das
-             Cover ist neben dem Text rein dekorativ. */ -}}
-      <a href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}" class="ff-pc-card">
+      {{- /* ANKERTEXT PRÄZISE, KARTE GANZ KLICKBAR (27.10.2026):
+             Vorher war die ganze Karte EIN Link aus Cover + Titel + Teaser
+             + „Jetzt lesen" – ein Ankertext von 100–185 Zeichen. Seobility
+             meldet das zu Recht als „Linktexte zu lang": Der Titel sagt,
+             worum es geht, der Teaser verwässert das Signal. Jetzt ist der
+             Titel der Link (`ff-pc-card__title-link`), die Trefferfläche
+             liegt per Inset-Overlay über der ganzen Karte
+             (assets/css/extended/zzzz-seo-und-teilen.css). Cover und CTA
+             sind Schmuck (`aria-hidden`), damit Screenreader genau einen
+             präzisen Linknamen hören.
+             Vertrag: scripts/themenwelten_guard.py prüft im Build, dass
+             pro Karte genau EIN Link mit Titeltext existiert, das Cover
+             `alt=""` trägt und der Artikelzähler zum Ziel passt. */ -}}
+      <article class="ff-pc-card">
         {{- if $rCover }}
         <span class="ff-pc-card__cover">
           <picture>
@@ -140,11 +150,11 @@
         <span class="ff-pc-card__cover--fallback"></span>
         {{- end }}
         <span class="ff-pc-card__body">
-          <strong class="ff-pc-card__title">{{ .Title | plainify }}</strong>
+          <strong class="ff-pc-card__title"><a class="ff-pc-card__title-link" href="{{ printf "posts/%s/" .File.ContentBaseName | relURL }}">{{ .Title | plainify }}</a></strong>
           {{- with .Description }}<span class="ff-pc-card__desc">{{ . | plainify | truncate 110 }}</span>{{ end }}
-          <span class="ff-pc-card__cta">Jetzt lesen →</span>
+          <span class="ff-pc-card__cta" aria-hidden="true">Jetzt lesen →</span>
         </span>
-      </a>
+      </article>
       {{- end }}
     </div>
   </div>

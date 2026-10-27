@@ -138,15 +138,17 @@ try {
     check(await page.locator('.ff-mini-toc').count() === 0, `${test.name}: keine überlagernde Artikel-Navigation`);
     for (const topic of DATA.topics) {
       const card = page.locator(`.ff-topic-card[data-topic="${topic.id}"]`);
-      // Der native Linkname enthält jetzt alle sichtbaren Karten-Texte.
-      // „exact: true“ auf nur den H3-Titel war eine veraltete Testerwartung
-      // und würde die WCAG-2.5.3-Korrektur auf jeder Viewport-Größe ablehnen.
-      check(await card.and(page.getByRole('link', { name: topic.title })).count() === 1
-        && await card.isVisible(), `${test.name}: Linkname enthält den sichtbaren Titel ${topic.id}`);
+      // 27.10.2026: Ankertext ist NUR der Kartentitel (kurz und präzise,
+      // Seobility „Linktexte zu lang"), die Karte selbst ist kein Link mehr.
+      // Der zugängliche Name des einen Links ist deshalb EXAKT der Titel.
+      const titelLink = card.and(page.getByRole('link', { name: topic.title, exact: true }));
+      check(await titelLink.count() === 1 && await card.isVisible(),
+        `${test.name}: genau ein Link, Name = sichtbarer Titel ${topic.id}`);
       const accessible = await card.ariaSnapshot();
       check(accessible.includes(topic.description) && accessible.includes('Zum Thema'),
-        `${test.name}: Linkname enthält Beschreibung und sichtbaren CTA ${topic.id}`);
-      check(await card.getAttribute('href') === `${BASE_PATH}pillar/${topic.id}/`, `${test.name}: URL ${topic.id}`);
+        `${test.name}: Beschreibung und CTA bleiben sichtbar (ohne Linknamen) ${topic.id}`);
+      check(await card.locator('.ff-topic-card__title-link').first().getAttribute('href') ===
+        `${BASE_PATH}pillar/${topic.id}/`, `${test.name}: URL ${topic.id}`);
     }
     const metrics = await page.evaluate(() => {
       const cards = [...document.querySelectorAll('.ff-topic-card')];
@@ -213,12 +215,25 @@ try {
   await page.locator('.ff-posts-jump').focus();
   for (const topic of DATA.topics) {
     await page.keyboard.press('Tab');
-    const focus = await page.evaluate(() => ({
-      topic: document.activeElement.dataset.topic,
-      outline: getComputedStyle(document.activeElement).outlineStyle,
-      width: parseFloat(getComputedStyle(document.activeElement).outlineWidth),
-    }));
-    check(focus.topic === topic.id && focus.outline !== 'none' && focus.width >= 3, `Tastatur: ${topic.title} in Reihenfolge mit sichtbarem Fokus`);
+    // 27.10.2026: fokussiert ist der Titel-Link; der Fokusring liegt auf der
+    // KARTE (CSS `:has(:focus-visible)`), damit er nicht wie ein Link mitten
+    // im Text aussieht. Beides wird geprüft: Fokus sitzt im richtigen Link,
+    // sichtbarer Ring liegt auf der Karte.
+    const focus = await page.evaluate(() => {
+      const aktiv = document.activeElement;
+      const karte = aktiv.closest('.ff-topic-card');
+      const ring = karte ? getComputedStyle(karte) : null;
+      return {
+        topic: karte ? karte.dataset.topic : null,
+        inKarte: !!aktiv.closest('.ff-topic-card'),
+        outline: ring ? ring.outlineStyle : 'none',
+        width: ring ? parseFloat(ring.outlineWidth) : 0,
+        name: aktiv.getAttribute('class') || '',
+      };
+    });
+    check(focus.topic === topic.id && focus.inKarte && focus.name.includes('ff-topic-card__title-link')
+      && focus.outline !== 'none' && focus.width >= 3,
+      `Tastatur: ${topic.title} in Reihenfolge mit sichtbarem Fokus`);
   }
   await page.keyboard.press('Enter');
   await page.waitForURL(url('pillar/mietwagen/'));

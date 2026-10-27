@@ -280,7 +280,7 @@ Build**, dateiweise, und nicht die Quelle:
 ```bash
 npm run links:check        # Sabotageproben + Hugo-Build + alle 262 Seiten
 npm run links:check:json   # maschinenlesbar
-npm run test:links         # Wache + 14 Regressionstests
+npm run test:links         # beide Wachen + 30 Regressionstests
 python3 scripts/linktext_wache.py --public public
 ```
 
@@ -289,6 +289,7 @@ python3 scripts/linktext_wache.py --public public
 | **L1** | `<a href>` ohne sichtbaren Text (auch `<area>`) | **Fehler** |
 | **L2** | `<img>` ohne `alt`-Attribut | **Fehler** |
 | **L3** | `alt=""` (dekorativ) und Ankertexte über 60 Zeichen | Hinweis, kein Fehler |
+| **L4** | Ankertext eines **Kartenlinks** über 80 Zeichen | **Fehler** |
 
 Drei Grenzen sind bewusst gezogen:
 
@@ -300,6 +301,16 @@ Drei Grenzen sind bewusst gezogen:
 - **Ausnahmen werden benannt, nicht stillschweigend geduldet.** Ein Link mit
   `data-ff-linktext-frei` wird übersprungen; wer die Ausnahme setzt, schreibt
   im Template dazu, welche Wache die Fläche stattdessen abdeckt.
+- **L4 gilt nur für Kartenlinks.** Der erste Versuch (80 Zeichen auf *allen*
+  Links) bestrafte redaktionelle Prosa, FAQ-Antworten und Quellenzeilen – er
+  wurde verworfen, nicht aufgeweicht. L4 greift, wenn die Klasse des Links
+  oder eines Vorfahren auf Kartenmuster passt (`card`, `karte`, `tile`,
+  `entry-title`) und die Seite indexierbar ist. Die sechs Kartenfamilien
+  (Themenwelten, Saison, Pillar, Related, Werkzeug-Raster, Werkzeug-Weiter)
+  tragen deshalb genau *einen* Titel-Link; Titel sind kurz, die Beschreibung
+  steht daneben, nicht im Anker. WCAG 2.5.3 bleibt erfüllt, weil der Namen
+  des Links dem sichtbaren Kartentitel entspricht und die Trefferfläche per
+  `::after { inset: 0 }` über die ganze Karte liegt.
 - **`alt=""` ist kein Fehler.** Dekorative Bilder (Logos in Wortmarken-Links,
   Icons) *sollen* leer bleiben (WCAG 1.1.1). Gezählt wird es trotzdem, damit
   niemand versehentlich ein Inhaltsbild versteckt.
@@ -310,6 +321,36 @@ braucht die ausdrückliche Freigabe des Inhabers (CLAUDE.md, Sicherheitsregel 3)
 Vorlage für den Einstieg: ein Schritt nach `python3 scripts/a11y_audit.py`
 in `seo-weekly.yml` mit
 `python3 scripts/linktext_wache.py --public public`.
+
+## Einbett-Blöcke (der einzige Text, den Fremde kopieren sollen)
+
+Der Seobility-Punkt „Externe Faktoren 0 %" lässt sich nicht im eigenen HTML
+lösen – er hängt an fremden Seiten. Der einzige Hebel, der ohne Gegenleistung
+funktioniert, ist ein Angebot, das keine Arbeit macht: Bild plus Quellenzeile
+als fertiger Copy-Paste-Block. `layouts/_partials/ff_einbetten.html` liefert
+ihn (Shortcode `einbetten`, verwendet in der Q4-Studie und auf `/presse/`).
+
+```bash
+npm run links:check                          # enthält die Einbett-Wache
+python3 scripts/einbetten_wache.py --selftest
+python3 scripts/einbetten_wache.py --public public
+```
+
+| Regel | Prüft | Bewertung |
+|---|---|---|
+| **E1** | Block hat einen Namen (`aria-labelledby` → existierende ID) | **Fehler** |
+| **E2** | genau ein `<figure>`/`<img>`, `src` absolut, `width`/`height`, `alt` | **Fehler** |
+| **E3** | Bild und Quellenzeile absolut, **gleiches** Ziel, kein `nofollow`/`sponsored` | **Fehler** |
+| **E4** | kein Kampagnen-Parameter (`utm_*`, `gclid`, `fbclid`, `ref`, …) | **Fehler** |
+| **E5** | kein `<script>`, `<iframe>`, `<form>`, `<object>`, `<embed>` | **Fehler** |
+| **E6** | Kopier-Knopf zeigt auf die `<pre>`-ID, Live-Bereich `role="status"` vorhanden | **Fehler** |
+
+Ein fehlerhaftes Angebot ist schlimmer als keins: Ein relativer `src` zeigt
+beim Einbau auf die *fremde* Domain, ein `nofollow` bittet um genau den Link,
+den die Seite nicht bekommt. Deshalb ist die Wache fail-closed – auch ein
+verschwundener Block (`0 Blöcke`) ist rot.
+
+**Noch nicht in CI**, gleiche Begründung wie oben (Sicherheitsregel 3).
 
 ## ReDoS-Wache: mehrzeilige Muster nicht dem Backtracking überlassen
 
