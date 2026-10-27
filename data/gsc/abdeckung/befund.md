@@ -20,12 +20,11 @@
 | Durch robots.txt-Datei blockiert | 18 | 20 | plausibel |
 | Durch „noindex“-Tag ausgeschlossen | 5 | 5 | vollständig erklärt |
 | Gecrawlt – zurzeit nicht indexiert | 4 | ≤ 99 | plausibel |
-| Seite mit Weiterleitung | 1 | 115 | plausibel |
+| Seite mit Weiterleitung | 1 | 250 | plausibel |
 
 ### Widersprüche
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 99 – 18 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
-- ℹ️ **W11** 4 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken.
 
 ### Vertrag: noindex-Bestand und Gateways — 🟢 in Ordnung
 
@@ -33,20 +32,13 @@
 
 ### Kandidatenraum (Obergrenze für die 404-Erklärung)
 
-- 284 historische URLs aus dem Bestand ableitbar; 122 dokumentiert (Weiterleitung oder bewusst 404), 162 ohne Entscheidung.
+- 283 historische URLs aus dem Bestand ableitbar; 257 dokumentiert (Weiterleitung oder bewusst 404), 26 ohne Entscheidung.
 - Das ist eine **Obergrenze**, kein Nachweis: Ob Google eine dieser URLs je gesehen hat, sagt nur die Detail-Liste (M1).
 
 ### Redaktionelle Verlinkung
 
 - 0 von 74 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
 - Verlinkungsauftrag: 1 Quelle-Ziel-Paar (`--verlinkung --apply`).
-
-### Links ins Leere
-
-- `/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/` – 2 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
-- `/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/` – 7 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
-- `/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/` – 1 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
-- `/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/` – 4 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
 
 ### Anfrage-Wellen (M2)
 
