@@ -31,10 +31,12 @@
     {{- end }}
 
     <span>
-        {{- /* SUCHE 08.10.2026: Such-Link siteweit auch im Footer – zusätzlich zum
-               Hauptmenü-Eintrag (hugo.toml). Die Suche selbst: content/suche/. */ -}}
-        <a href="{{ "suche/" | absURL }}">Suche</a>
-        {{- print " · " -}}
+        {{- /* SUCHE (27.10.2026): Der Such-Link steht im Hauptmenü
+               (hugo.toml, accesskey "/") und war hier ein zweiter Link mit
+               identischem Ankertext – Seobility zählt das als „Ankertext
+               mehrfach verwendet“ und es kostet Crawl-Aufmerksamkeit, ohne
+               einen zweiten Weg zu eröffnen. Der Footer führt jetzt nur
+               noch Ziele, die das Menü NICHT anbietet. */ -}}
         <a href="{{ "impressum/" | absURL }}">Impressum</a>
         {{- print " · " -}}
         <a href="{{ "datenschutz/" | absURL }}">Datenschutz</a>
@@ -77,12 +79,18 @@
 {{- end }}
 
 {{- if (not site.Params.disableScrollToTop) }}
-<a href="#top" id="top-link" class="top-link hidden" aria-label="Nach oben" title="Nach oben (Alt + G)" accesskey="g">
+{{- /* LINKTEXT STATT ARIA-LABEL (27.10.2026): Der Nach-oben-Pfeil war ein
+       Link ohne Text (nur aria-label/title). Crawler zählen ihn als „Link
+       ohne Linktext“, Seobility führte ihn in der Startseiten-Prüfung mit.
+       Der sichtbare Pfeil bleibt, der Name steht als `.sr-only` im Link –
+       für Screenreader und Sprachsteuerung unverändert. */ -}}
+<a href="#top" id="top-link" class="top-link hidden" title="Nach oben (Alt + G)" accesskey="g">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up" aria-hidden="true" focusable="false">
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
+    <span class="sr-only">Nach oben</span>
 </a>
 {{- end }}
 

@@ -240,11 +240,21 @@ try {
   await page.locator('.ff-posts-jump').click();
   await page.waitForURL(url('posts/#neueste-artikel'));
   check((await page.locator('#neueste-artikel').boundingBox()).y >= 60, 'Sprung zur Artikelliste nicht vom Header verdeckt');
-  const firstArticle = await page.locator('.ff-posts-feed .entry-link').first().getAttribute('href');
+  // KARTEN-LINK (27.10.2026): Der Linktext steckt jetzt im Kartentitel
+  // (`.entry-title-link`), die Trefferfläche zieht ein Inset-Overlay auf die
+  // ganze Karte. Die Prüfung deckt beides ab: Ziel-Href am Titelanker und
+  // Klick auf den Anriss (Overlay) – vorher lag dort ein leerer `.entry-link`.
+  const firstCard = page.locator('.ff-posts-feed .post-entry').first();
+  const firstArticle = await firstCard.locator('.entry-title-link').getAttribute('href');
+  check(await firstCard.locator('.entry-title-link').innerText() !== '', 'Kartenlink trägt einen sichtbaren Ankertext');
+  await firstCard.locator('.entry-content').click();
+  await page.waitForURL('**' + firstArticle);
+  check(await page.locator('main h1').count() === 1, 'Ganze Karte klickbar (Overlay des Titelankers)');
+  await page.goBack({ waitUntil: 'networkidle' });
   await page.locator('.pagination .next').click();
   await page.waitForURL(url('posts/page/2/'));
   check(await page.locator('.ff-topics, .ff-posts-guide, .ff-filter-bar').count() === 0, 'Seite 2 ohne duplizierte Themen/Einleitung');
-  check(await page.locator('.ff-posts-feed .entry-link').count() > 0, 'Seite 2 enthält ältere Artikel');
+  check(await page.locator('.ff-posts-feed .entry-title-link').count() > 0, 'Seite 2 enthält ältere Artikel');
   await page.locator('.ff-posts-jump').click();
   await page.waitForURL(url('posts/#deine-6-themenwelten'));
   check(await page.locator('.ff-topic-card').count() === 6, 'Rückweg von Seite 2 zu allen Themen');

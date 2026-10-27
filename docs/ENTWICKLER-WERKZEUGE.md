@@ -268,6 +268,49 @@ aus (und die Browser-Suite prüft `/page/2/` und `/posts/page/2/`).
 
 ---
 
+## Linktexte und Alt-Texte (SEO-Sicht auf den Build)
+
+Ein Link ohne Ankertext ist für Crawler kein Link, sondern eine Fläche; ein
+Bild ohne `alt` ist für die Bildersuche unsichtbar. Beides war am 27.10.2026
+im Seobility-Check der Startseite ein Befund („8 Links haben keinen
+Linktext", „1 Bild ohne Alt-Attribut") – und beides entsteht nicht im
+Template, sondern erst beim Rendern. Deshalb prüft die Wache den **fertigen
+Build**, dateiweise, und nicht die Quelle:
+
+```bash
+npm run links:check        # Sabotageproben + Hugo-Build + alle 262 Seiten
+npm run links:check:json   # maschinenlesbar
+npm run test:links         # Wache + 14 Regressionstests
+python3 scripts/linktext_wache.py --public public
+```
+
+| Regel | Prüft | Bewertung |
+|---|---|---|
+| **L1** | `<a href>` ohne sichtbaren Text (auch `<area>`) | **Fehler** |
+| **L2** | `<img>` ohne `alt`-Attribut | **Fehler** |
+| **L3** | `alt=""` (dekorativ) und Ankertexte über 60 Zeichen | Hinweis, kein Fehler |
+
+Drei Grenzen sind bewusst gezogen:
+
+- **`aria-label` zählt nicht als Linktext.** Es ist die richtige Antwort auf
+  die Frage „Wie heißt dieser Link?" und die falsche auf „Worauf verlinkt
+  diese Seite?" – Crawler lesen den Textknoten. Der frühere Overlay-Link
+  `.entry-link` war a11y-konform und SEO-leer; heute trägt der Kartentitel
+  den Anker, die Trefferfläche zieht `::after`.
+- **Ausnahmen werden benannt, nicht stillschweigend geduldet.** Ein Link mit
+  `data-ff-linktext-frei` wird übersprungen; wer die Ausnahme setzt, schreibt
+  im Template dazu, welche Wache die Fläche stattdessen abdeckt.
+- **`alt=""` ist kein Fehler.** Dekorative Bilder (Logos in Wortmarken-Links,
+  Icons) *sollen* leer bleiben (WCAG 1.1.1). Gezählt wird es trotzdem, damit
+  niemand versehentlich ein Inhaltsbild versteckt.
+
+**Noch nicht in CI.** Die Wache läuft über `npm run links:check`; sie in
+`.github/workflows/**` zu hängen, ist eine Änderung an der Lieferkette und
+braucht die ausdrückliche Freigabe des Inhabers (CLAUDE.md, Sicherheitsregel 3).
+Vorlage für den Einstieg: ein Schritt nach `python3 scripts/a11y_audit.py`
+in `seo-weekly.yml` mit
+`python3 scripts/linktext_wache.py --public public`.
+
 ## ReDoS-Wache: mehrzeilige Muster nicht dem Backtracking überlassen
 
 Code-Scanning-Alert Nr. 87 (`py/redos`, 26.10.2026) entstand in der

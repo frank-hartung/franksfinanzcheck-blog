@@ -1,0 +1,141 @@
+/* ============================================================
+   SEO- UND TEILEN-SCHICHT (27.10.2026)
+   ------------------------------------------------------------
+   Zwei Zutaten, die zusammengehören, weil beide die *Link-
+   Semantik* der Seite betreffen (nicht das Erscheinungsbild):
+
+   1. `.entry-title-link` – der Kartentitel ist der Link.
+      Der frühere Overlay-Link `.entry-link` war für Crawler ein
+      Link ohne Text (Seobility: „8 Links haben keinen Linktext“).
+      Die Trefferfläche zieht jetzt ein Inset-Pseudo-Element auf
+      die ganze Karte. Geometrie, Hover-, Fokus- und Dark-Mode-
+      Verhalten bleiben unverändert: es werden keine Farben und
+      keine Maße neu erfunden, sondern nur die vorhandene
+      `.entry-link`-Fläche auf den Titelanker übertragen.
+
+   2. `.ff-teilen` – Teilen-Zeile (Mastodon, Pinterest, E-Mail,
+      Link kopieren) als progressive Enhancement. Kein Skript
+      von Dritten, keine Einbettung, keine Cookies: die Ziele
+      sind reine Links, das Kopieren ist ein `<button>`, der
+      ohne JavaScript ehrlich beschriftet bleibt.
+
+   Kontrast: es werden ausschließlich vorhandene Tokens
+   (--primary, --secondary, --border, --entry, --ff-emerald)
+   verwendet; hell und dunkel erben automatisch.
+   Wache: npm run a11y:check · npm run seo:check ·
+          npm run test:design (Kontrast in beiden Themes)
+   ============================================================ */
+
+/* ---------- 1. Karten-Link: Titel trägt den Ankertext ---------- */
+
+.post-entry {
+    /* Bezugsrahmen für das Inset-Overlay (vorher implizit durch
+       die absolute Positionierung von `.entry-link` gegeben). */
+    position: relative;
+}
+
+.post-entry .entry-header h2 a.entry-title-link {
+    color: inherit;
+    text-decoration: none;
+    text-underline-offset: 3px;
+}
+
+/* Die Karte als Ganzes bleibt klickbar: das Overlay liegt über
+   Cover, Anriss und Metazeile, aber innerhalb der Kartenfläche
+   (kein Überlauf in die Nachbarkarte). */
+.post-entry .entry-title-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    z-index: 1;
+}
+
+/* Tastaturfokus: der Ring gehört um die Karte, nicht um die
+   Textzeile – sonst wirkt der Fokus wie ein Link mitten im Text. */
+.post-entry .entry-title-link:focus-visible {
+    outline: none;
+}
+
+.post-entry:has(.entry-title-link:focus-visible) {
+    outline: 2px solid var(--ff-emerald);
+    outline-offset: 2px;
+}
+
+/* Ohne `:has` (ältere Engines) bleibt der Fokus sichtbar: der
+   Browser zeichnet dann den Standardring am Anker. */
+
+/* ---------- 2. Teilen-Zeile ---------- */
+
+.ff-teilen {
+    margin: 28px 0 8px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+}
+
+.ff-teilen__titel {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+.ff-teilen__liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ff-teilen__aktion {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--theme);
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ff-teilen__aktion:hover {
+    border-color: var(--ff-emerald);
+    color: var(--ff-emerald);
+}
+
+.ff-teilen__aktion:focus-visible {
+    outline: 2px solid var(--ff-emerald);
+    outline-offset: 2px;
+}
+
+.ff-teilen__aktion svg {
+    flex: none;
+}
+
+.ff-teilen__status {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: var(--secondary);
+}
+
+.ff-teilen__status:empty {
+    margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .ff-teilen__aktion {
+        transition: color 0.15s ease, border-color 0.15s ease;
+    }
+}
