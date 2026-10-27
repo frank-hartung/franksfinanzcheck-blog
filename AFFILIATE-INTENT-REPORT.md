@@ -1,12 +1,12 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-10-26 09:33:51 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-10-27 09:30:35 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 102 · **Gateway-Links:** 241 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 104 · **Gateway-Links:** 244 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
 ## 🟡 Hinweise – nicht blockierend (ehrliches Cross-Selling, redaktioneller Prüfpunkt)
 
-### IW2 – Primär-CTA ↔ Artikelthema (10)
+### IW2 – Primär-CTA ↔ Artikelthema (11)
 
 - `content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md`:229 [end] /go/strom/ «→ Stromtarife vergleichen und wechseln» – end-CTA führt zu „Stromtarife“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/index.md`:229 [end] /go/mietwagen/ «→ Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen» – end-CTA führt zu „Mietwagen“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
@@ -18,6 +18,7 @@
 - `content/posts/2026-10-19-urlaubskasse-clever-aufbessern/index.md`:138 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden/index.md`:153 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 - `content/posts/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen/index.md`:123 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
+- `content/posts/2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md`:144 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
 
 ### IW4 – Nie-Paare (4)
 

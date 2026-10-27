@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-26 09:33:51 UTC",
+ "generated_at": "2026-10-27 09:30:35 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 102,
- "checked_links": 241,
+ "checked_articles": 104,
+ "checked_links": 244,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -160,6 +160,17 @@
    "severity": "P3",
    "blocking": false,
    "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
+   "line": 126,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []
