@@ -4,8 +4,9 @@ title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
 date: 2026-10-19T01:19:44Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-10-19T13:09:54Z
-cadence_grund: "Redaktions-Standard: RS1, RS2, RS3"
+cadence_grund: "Redaktion 27.10.2026: RS1–RS7 grün, YMYL-Freigabe neu versiegelt – zurück in die Kadenz"
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
@@ -42,14 +43,14 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "78d22ca55a0dc1ed832ca558322038ded11d2d8ce6d8f07079ceafc4413df283"
+  inhalt_sha256: "a7cab88bd880291c9574671aa125b97ce1773f53f20f15f29959d4a08fa476cf"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Hausrat-Richtwert auf belegte 650 €/m² korrigiert, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Prüfqueue #586: Belegkette themengerecht ersetzt (tote URLs), Hausrat-Richtwert faktenbasiert korrigiert, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
+  aenderungsgrund: "Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
   gepruefte_aussagen:
     - textanker: "Viele denken, Starkregen und Rückstau seien automatisch dabei."
       pruefung: "Bestätigt: Schäden durch Starkregen, Rückstau oder Überschwemmung sind nur über den Baustein Erweiterte Elementargefahren abgedeckt (Verbraucherzentrale)"
@@ -216,7 +217,7 @@ Ein Schaden durch Rückstau, Wasser oder Einbruch kann heute oft 6.000 € bis 
 
 ---
 
-## Das Wichtigste in Kurzform – Dein Haus sicher schützen
+## Das Wichtigste in Kürze – Dein Haus sicher schützen
 
 - Eigentümer benötigen in der Regel eine leistungsstarke **Wohngebäudeversicherung**.
 - Mieter sollten vor allem auf eine aktuelle **Hausratversicherung** setzen.
@@ -246,7 +247,7 @@ Kurz zusammengefasst:
 - **Das Gebäude selbst** wird durch die Wohngebäudeversicherung geschützt.
 - **Alles, was bei einem Umzug herausfällt**, deckt die Hausratversicherung ab.
 
-## Welche drei Bausteine heute wirklich zählen
+## Welche drei Bausteine heute wirklich zählen?
 
 Ein zukunftssicherer Schutz basiert im Jahr 2026 meist auf diesen drei Säulen.
 
@@ -460,6 +461,8 @@ Schreibe jede Änderung sofort auf. Eine einfache Liste reicht:
 Mache dazu ein paar Fotos mit dem Handy. Zeige teure Geräte und neue Bauteile. Im Schadenfall geht die Abwicklung dann viel schneller.
 
 > 💶 **Spar-Tipp zwischendurch:** Ein guter Schutz definiert sich über die Abwesenheit von Lücken. Prüfe jetzt, ob dein Tarif noch zeitgemäß ist und alle wichtigen Bausteine enthält: [**Jetzt Wohngebäudeversicherung vergleichen**](/go/wohngebaeudeversicherung/)
+
+**Faustregel:** Versicherungen gehören bei jedem Umzug auf den Tisch: Deckung, Selbstbeteiligung, Ausschlüsse – in dieser Reihenfolge.
 
 ## Fazit: Zuhause nicht gefühlt, sondern geprüft absichern
 

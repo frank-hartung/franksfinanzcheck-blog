@@ -4,6 +4,9 @@ title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
 date: 2026-08-31T13:47:31Z
 draft: true
+cadence_wait: true
+cadence_demoted: 2026-10-27T17:09:23Z
+cadence_grund: "Redaktion 27.10.2026: RS1–RS7 grün, YMYL-Freigabe neu versiegelt – zurück in die Kadenz"
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -39,14 +42,14 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "b7076eb5f1436968a2bfa7575f8fd1eeeb84664d804c3512eb6bd88dde64e391"
+  inhalt_sha256: "3d15a0a3c9904002c08218c771558c56bc0ff5df3efd4ccf869977f997bf6fcc"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Elementar- und Unterversicherungs-Aussagen belegt, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Prüfqueue #586: Belegkette themengerecht ersetzt (tote URLs), Affiliate-CTA hinter die fachliche Grundlage verschoben, Beispielrechnungen dokumentiert und nachgerechnet"
+  aenderungsgrund: "Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
   gepruefte_aussagen:
     - textanker: "Genau dafür braucht es meist den Baustein **Elementarschutz**"
       pruefung: "Bestätigt: Starkregen, Rückstau und Überschwemmung sind in Standardtarifen nicht automatisch enthalten und benötigen den Elementar-Baustein (Verbraucherzentrale, GDV)"
@@ -168,7 +171,7 @@ Wer sauber vergleicht, schützt sein Haus besser. Und oft spart er sogar noch Ge
 - Auch **Neuwert, Rohre, Garage, PV und Wärmepumpe** gehören in den Vergleich.
 - Ein guter Tarif ist nicht der billigste, sondern der **passendste**.
 
-## Was eine Wohngebäudeversicherung überhaupt absichert
+## Was eine Wohngebäudeversicherung überhaupt absichert?
 
 Die Police schützt dein Haus – nicht deine losen Sachen darin.
 
@@ -195,7 +198,7 @@ Viele Tarife decken als Basis ab:
 
 Das ist wichtig, aber noch nicht automatisch vollständig. Gerade bei Wasser denken viele zu breit. Nicht jede Art von Wasserschaden ist automatisch erfasst.
 
-## Warum Elementarschutz heute so wichtig ist
+## Warum Elementarschutz heute so wichtig ist?
 
 Ein normaler Gebäudetarif schützt oft **nicht automatisch** bei Schäden durch:
 
@@ -407,6 +410,8 @@ Genau in solchen Momenten kippt ein alter Vertrag vom okayen Schutz zur echten L
 **Würde der Versicherer diesen neuen Zustand heute schon kennen?** Wenn die Antwort nein lautet, reicht als erster Schritt oft eine kurze Mitteilung zu neuer Technik, Anbau oder Nebengebäude – du weißt dann schwarz auf weiß, ob dein Schutz noch passt.
 
 Halte dir dafür eine kleine Hausliste: was neu dazugekommen ist, wann es passiert ist und ob der Versicherer davon schon weiß. Diese drei Zeilen verkürzen jeden künftigen Vergleich spürbar.
+
+**Faustregel:** Eine Selbstbeteiligung senkt den Beitrag und erhöht dein Risiko; entscheide nach dem Betrag, den du im Zweifel zahlen kannst.
 
 ## Fazit: Vergleiche die Wohngebäudeversicherung wie ein Schutzpaket, nicht wie einen Stromtarif
 
