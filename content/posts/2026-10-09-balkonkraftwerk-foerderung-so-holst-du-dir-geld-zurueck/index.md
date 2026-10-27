@@ -1,6 +1,6 @@
 ---
 title: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
-description: "Stromkosten senken: Balkonkraftwerk-Förderung regional – Antrag und Anmeldung"
+description: "Balkonkraftwerk Förderung: Stromkosten senken: Balkonkraftwerk-Förderung regional – Antrag und Anmeldung So sparst du jeden Monat bares Geld."
 
 date: 2026-10-14T14:57:58Z
 draft: false

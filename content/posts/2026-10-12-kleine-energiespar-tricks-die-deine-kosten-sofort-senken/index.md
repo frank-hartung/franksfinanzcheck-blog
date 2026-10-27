@@ -1,6 +1,6 @@
 ---
 title: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
-description: "Energiespar-Tipps: Kleine Änderungen helfen dir, den Verbrauch zu senken und deine Kosten besser im Blick zu behalten."
+description: "Kleine Energiespar‑Tricks: Energiespar-Tipps: Kleine Änderungen helfen dir, den Verbrauch zu senken und deine Kosten besser im Blick zu behalten."
 
 date: 2026-10-21T01:39:08Z
 draft: false

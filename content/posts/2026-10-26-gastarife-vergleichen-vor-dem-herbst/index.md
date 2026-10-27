@@ -3,10 +3,10 @@ title: "Gastarife vergleichen vor dem Herbst"
 description: "Gastarife vergleichen vor dem Herbst – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-10-26T10:36:12Z
 draft: true
-tags: ["Heizkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken"]
+keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Gastarife vergleichen vor dem Herbst", "vergleichen", "Gaspreisgarantie", "Gastarif wechseln"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,7 +15,14 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Gastarife vergleichen vor dem Herbst"
+pin_description: "*Werbung | Gastarife vergleichen vor dem Herbst – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #gasvergleich #gaskosten #sparen"
+cover:
+  image: "images/covers/2026-10-26-gastarife-vergleichen-vor-dem-herbst.jpg"
+  alt: "Gastarife vergleichen vor dem Herbst"
+  caption: "Tipp von FranksFinanzcheck"
 ---
+
 Im Herbst werden die Abende gemütlich. Gleichzeitig flattern viele Nachzahlungen für Gas ins Haus. Wer seine Gaskosten senken will, sollte den Vertrag prüfen, bevor die Heizperiode beginnt.
 
 Der Vergleich schützt dich vor bösen Überraschungen. So zahlst du am Ende nur, was nötig ist.

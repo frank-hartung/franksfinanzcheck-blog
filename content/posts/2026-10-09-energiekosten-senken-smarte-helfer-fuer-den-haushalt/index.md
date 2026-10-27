@@ -1,6 +1,6 @@
 ---
 title: "Energiekosten senken: Smarte Helfer für den Haushalt"
-description: "Smart-Home zur Energiekostensenkung: Welche Geräte Frank nutzt und wie der 4K-Prüfpfad hilft."
+description: "Smart-Home zur Energiekostensenkung: Welche Geräte Frank nutzt und wie der 4K-Prüfpfad hilft. So sparst du jeden Monat bares Geld."
 
 date: 2026-10-16T18:36:02Z
 draft: false

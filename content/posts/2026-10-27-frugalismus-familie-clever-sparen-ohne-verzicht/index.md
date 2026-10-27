@@ -4,11 +4,11 @@ description: Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler be
 date: 2026-10-27T09:20:45Z
 draft: true
 reserve: true
-tags: ["Frugalismus"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Verzicht"]
+keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Frugalismus Familie: Clever sparen ohne Verzicht"
 pin_description: "*Werbung | Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit Franks Finanzcheck. Mehr Spartipps auf FranksFinanzcheck! #frugalismus #familie #sparen"
 ai_generated: true
