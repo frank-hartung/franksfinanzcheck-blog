@@ -141,11 +141,19 @@ try {
       // 27.10.2026: Ankertext ist NUR der Kartentitel (kurz und präzise,
       // Seobility „Linktexte zu lang"), die Karte selbst ist kein Link mehr.
       // Der zugängliche Name des einen Links ist deshalb EXAKT der Titel.
-      const titelLink = card.and(page.getByRole('link', { name: topic.title, exact: true }));
+      // Kind-Locator, nicht `.and()`: Die Karte IST kein Link mehr, der Link
+      // liegt als einziges <a> darin. `.and()` würde die Schnittmenge zweier
+      // Elemente verlangen – also nichts finden.
+      const titelLink = card.getByRole('link', { name: topic.title, exact: true });
       check(await titelLink.count() === 1 && await card.isVisible(),
         `${test.name}: genau ein Link, Name = sichtbarer Titel ${topic.id}`);
-      const accessible = await card.ariaSnapshot();
-      check(accessible.includes(topic.description) && accessible.includes('Zum Thema'),
+      check(await card.locator('a').count() === 1,
+        `${test.name}: Karte trägt genau einen Link ${topic.id}`);
+      // Sichtbarkeit wird am gerenderten Text gemessen, NICHT am
+      // Barrierefreiheitsbaum: Der CTA ist seit dem Karten-Umbau aria-hidden
+      // (sonst stünde er im Linknamen). Er muss trotzdem sichtbar bleiben.
+      const sichtbar = (await card.innerText()).replace(/\s+/g, ' ');
+      check(sichtbar.includes(topic.description) && sichtbar.includes('Zum Thema'),
         `${test.name}: Beschreibung und CTA bleiben sichtbar (ohne Linknamen) ${topic.id}`);
       check(await card.locator('.ff-topic-card__title-link').first().getAttribute('href') ===
         `${BASE_PATH}pillar/${topic.id}/`, `${test.name}: URL ${topic.id}`);

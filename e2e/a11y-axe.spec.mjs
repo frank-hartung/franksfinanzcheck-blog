@@ -228,10 +228,15 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
     expect(await marke.getAttribute('aria-label'), 'kein aria-label-Override').toBeNull();
   });
 
-  test('Weiterlese-Karten: Name enthält Datum und Titel', async ({ page }) => {
+  test('Weiterlese-Karten: Linkname ist der Titel, Datum bleibt sichtbar', async ({ page }) => {
     const pfad = await newestArticlePath(page);
     await page.goto(pfad);
-    const karten = page.locator('.ff-related-card');
+    // 27.10.2026: Die Karte ist kein Link mehr (Ankertext war Titel + Datum +
+    // CTA, Seobility: „Linktexte zu lang"), sondern ein <article> mit genau
+    // einem Titel-Link. WCAG 2.5.3 gilt weiter: der Linkname IST der
+    // sichtbare Titel. Datum und CTA bleiben sichtbar, aber außerhalb des
+    // Linknamens.
+    const karten = page.locator('article.ff-related-card');
     const anzahl = await karten.count();
     expect(anzahl, 'Weiterlese-Karten im neuesten Artikel').toBeGreaterThan(0);
     for (let i = 0; i < anzahl; i += 1) {
@@ -239,8 +244,16 @@ test.describe('Barrierefreiheit (axe-core, WCAG 2.1/2.2 A+AA)', () => {
       expect(await karte.getAttribute('aria-label'), `Karte ${i + 1}: kein Override`).toBeNull();
       const titel = (await karte.locator('.ff-related-card__heading').innerText()).trim();
       const datum = (await karte.locator('.ff-related-card__date').innerText()).trim();
-      await expect(karte).toHaveAccessibleName(textMuster(titel));
-      await expect(karte).toHaveAccessibleName(textMuster(datum));
+      const links = karte.locator('a');
+      expect(await links.count(), `Karte ${i + 1}: genau ein Link`).toBe(1);
+      const link = links.first();
+      expect(await link.getAttribute('aria-label'), `Karte ${i + 1}: kein Override am Link`).toBeNull();
+      await expect(link).toHaveAccessibleName(textMuster(titel));
+      await expect(link).not.toHaveAccessibleName(textMuster(datum));
+      // Sichtbarkeit am gerenderten Text, nicht am Accessibility-Tree:
+      // Das Datum ist bewusst aus dem Linknamen heraus, aber nicht vom Auge.
+      expect((await karte.innerText()).replace(/\s+/g, ' '),
+        `Karte ${i + 1}: Datum nicht mehr sichtbar`).toContain(datum);
     }
   });
 

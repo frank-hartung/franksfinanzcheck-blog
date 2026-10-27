@@ -125,7 +125,7 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
       // beschriften denselben Link bereits. alt="" vermeidet doppeltes
       // Vorlesen, bleibt aber ein bewusst gesetztes alt-Attribut.
       const linkbildMitTitel = await img.evaluate((el) =>
-        el.matches('.ff-related-card__img') && !!el.closest('a.ff-related-card')?.querySelector('.ff-related-card__heading')?.textContent.trim());
+        el.matches('.ff-related-card__img') && !!el.closest('.ff-related-card')?.querySelector('.ff-related-card__heading')?.textContent.trim());
       const istDeko = (await img.getAttribute('aria-hidden')) === 'true' || linkbildMitTitel;
       if (alt === null || (alt.trim() === '' && !istDeko)) probleme.push(`ohne alt: ${src}`);
       if (linkbildMitTitel && alt !== '') probleme.push(`redundantes Cover-alt im Linknamen: ${src}`);

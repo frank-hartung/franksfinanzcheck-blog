@@ -222,13 +222,21 @@ test.describe('Saisonale Startseite', () => {
       const linkname = await titelLink.ariaSnapshot();
       expect(linkname, `Karte ${i + 1}: Titel nicht im Linknamen`).toContain(titel);
       expect(linkname, `Karte ${i + 1}: CTA gehört nicht in den Linknamen`).not.toContain('Weiterlesen');
-      expect(linkname, `Karte ${i + 1}: Datum nicht im Linknamen`).toContain(await karte.locator('time').innerText());
-      expect(linkname, `Karte ${i + 1}: sichtbarer CTA nicht im Linknamen`).toContain('Weiterlesen');
+      expect(linkname, `Karte ${i + 1}: Datum gehört nicht in den Linknamen`).not.toContain(
+        await karte.locator('time').innerText());
+      // Datum und CTA sind weiterhin SICHTBAR (nur nicht im Linknamen) –
+      // sonst wäre die Karte ärmer geworden, als sie kürzer zu benennen.
+      const sichtbar = (await karte.innerText()).replace(/\s+/g, ' ');
+      expect(sichtbar, `Karte ${i + 1}: Datum nicht mehr sichtbar`).toContain(
+        await karte.locator('time').innerText());
+      expect(sichtbar, `Karte ${i + 1}: CTA nicht mehr sichtbar`).toContain('Weiterlesen');
     }
 
     // Keine Dubletten im Block
     const ziele = [];
-    for (let i = 0; i < anzahl; i++) ziele.push(await karten.nth(i).getAttribute('href'));
+    for (let i = 0; i < anzahl; i++) {
+      ziele.push(await karten.nth(i).locator('.ff-saison-card__titel-link').getAttribute('href'));
+    }
     expect(new Set(ziele).size, 'Saison-Block zeigt denselben Artikel mehrfach').toBe(ziele.length);
 
     const ratgeber = page.locator('a.ff-saison-pillar');
