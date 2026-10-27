@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 27.10.2026 11:42 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.10.2026 17:43 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 27. Oktober 2026
-- **11:30** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _frage_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mi, 28. Oktober 2026
 - **11:30** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
@@ -44,6 +41,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 27.10.2026 17:43 · Preisgarantie Gas: So sicherst du günstige Tarife → https://mastodon.social/@FranksFinanzcheck/117513874714476845
 - ✅ 27.10.2026 11:41 · Energieeffizienz im Haushalt: 5 schnelle Spartricks → https://mastodon.social/@FranksFinanzcheck/117512449068863753
 - ✅ 26.10.2026 18:26 · Bankgebühren senken: 7 Schritte zum günstigeren Konto → https://mastodon.social/@FranksFinanzcheck/117508382297357813
 - ✅ 26.10.2026 12:15 · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag → https://mastodon.social/@FranksFinanzcheck/117506920725188960
@@ -53,7 +51,6 @@
 - ✅ 23.10.2026 17:46 · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig → https://mastodon.social/@FranksFinanzcheck/117491000820019813
 - ✅ 23.10.2026 12:12 · Kleine Energiespar‑Tricks: Deine Kosten sofort senken → https://mastodon.social/@FranksFinanzcheck/117489686600605060
 - ✅ 22.10.2026 17:55 · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? → https://mastodon.social/@FranksFinanzcheck/117485372935493916
-- ✅ 22.10.2026 12:18 · Haushaltskosten reduzieren: So gewinnst du die Kontrolle → https://mastodon.social/@FranksFinanzcheck/117484047623058483
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

@@ -1127,6 +1127,26 @@ history:
     #StromkostenSenken #Energieeffizienz #EnergieSparen #Spartricks'
   ref: '117512449068863753'
   ai: true
+- posted_at: '2026-10-27T17:43:36.828259+01:00'
+  channel: mastodon
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  title: 'Preisgarantie Gas: So sicherst du günstige Tarife'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117513874714476845
+  ok: true
+  text: 'Soll ich den Bonus im Vergleich ausschalten?
+
+
+    Für die erste Sortierung ja. Danach kannst du den sicheren Bonus separat für das
+    erste Jahr einrechnen.
+
+
+    https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
+  ref: '117513874714476845'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1152,4 +1172,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-27T11:41:12.806024+01:00'
+updated_at: '2026-10-27T17:43:46.337710+01:00'

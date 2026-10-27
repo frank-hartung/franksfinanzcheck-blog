@@ -18,18 +18,18 @@
     <div class="ff-chg__kopf">
       <time class="ff-chg__datum" datetime="{{ substr (printf "%v" .datum) 0 10 }}">{{ dateFormat "02.01.2006" (substr (printf "%v" .datum) 0 10) }}</time>
       <span class="ff-chg__typ ff-chg__typ--{{ .typ }}">{{ index $typNamen .typ | default .typ }}</span>
-      <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}" title="Belegklasse: {{ index $klassenNamen .belegklasse }}"><b aria-hidden="true">{{ index $klassenKurz .belegklasse }}</b></span>
+      <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}" title="Belegklasse: {{ index $klassenNamen .belegklasse }}"><strong aria-hidden="true">{{ index $klassenKurz .belegklasse }}</strong></span>
     </div>
     <p class="ff-chg__titel">{{ .titel }}</p>
     <p class="ff-chg__was">{{ .was }}</p>
-    <p class="ff-chg__warum"><b>Anlass:</b> {{ .warum }}</p>
+    <p class="ff-chg__warum"><strong>Anlass:</strong> {{ .warum }}</p>
     <p class="ff-chg__quelle">
-      <b>Quelle/Beleg:</b>
+      <strong>Quelle/Beleg:</strong>
       <a href="{{ .quelle.url }}" rel="noopener external" target="_blank">{{ .quelle.name }}</a>
     </p>
     {{- with .seiten }}
     <p class="ff-chg__seiten">
-      <b>Betroffen:</b>
+      <strong>Betroffen:</strong>
       {{- range $i, $s := . }}{{ if $i }} · {{ end }} <a href="{{ $s.pfad | relURL }}">{{ $s.name }}</a>{{ end }}
     </p>
     {{- end }}

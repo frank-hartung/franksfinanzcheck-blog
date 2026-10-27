@@ -1,6 +1,6 @@
 ---
 title: "Finanzieller Puffer: Der Rechenweg in fünf Minuten"
-description: "Finanzieller Puffer: Wie groß dein Notgroschen sein sollte – klare Faustregeln, Rechenbeispiele und ein alltagstauglicher Plan für drei bis sechs Monate."
+description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte. Klare Faustregeln, Rechenbeispiele und ein alltagstauglicher Sparplan."
 date: 2026-09-21T09:29:03Z
 lastmod: 2026-10-13
 draft: false
@@ -210,7 +210,7 @@ Auch das Gegenteil ist möglich. Wenn du **50.000 €** auf dem Tagesgeld parks
 Ein ETF ist Vermögensaufbau. Ein ETF ist kein Notgroschen. Fällt der Markt genau dann, wenn du das Geld brauchst, wird aus Theorie schnell Verlust.
 
 ### 5. Versicherungen vergessen
-Der Puffer ersetzt keine saubere Absicherung. Eine gute [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) bleibt Pflicht. Der Notgroschen deckt kleine bis mittlere Schläge ab, nicht jeden Großschaden.
+Der Puffer ersetzt keine saubere Absicherung. Eine gute [Privathaftpflicht](../../pillar/versicherungen/) bleibt Pflicht. Der Notgroschen deckt kleine bis mittlere Schläge ab, nicht jeden Großschaden.
 
 ## Wie oft solltest du die Höhe neu prüfen?
 

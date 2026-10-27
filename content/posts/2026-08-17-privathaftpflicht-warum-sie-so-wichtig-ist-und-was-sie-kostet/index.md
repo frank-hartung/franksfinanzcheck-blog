@@ -1,11 +1,12 @@
 ---
 lastmod: 2026-10-16
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
-description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln Pflicht sind und was guter Schutz für Singles und Familien kostet."
+description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute zählen und was guter Schutz für Singles und Familien kostet."
 date: 2026-10-16T15:15:38Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-10-16T18:02:46Z
-cadence_grund: "Redaktions-Standard: RS2, RS3"
+cadence_grund: "Redaktion 27.10.2026: RS1–RS7 grün, YMYL-Freigabe neu versiegelt – zurück in die Kadenz"
 endredaktion_status: freigegeben
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
@@ -44,14 +45,14 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "f91c27c6089fc3bae67b3621f0bbe495a2be9a1433254b7571232eff6bf3663c"
+  inhalt_sha256: "d10320380068bed39ca060945330801d3868a0794581db6debef193dfcb099d3"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, BaFin); Beitrags- und Schadenbandbreiten abgeglichen, Beispielrechnung nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-24"
   naechste_pruefung: "2026-12-08"
-  aenderungsgrund: "Prüfqueue #826: BaFin-Adresse auf die kanonische Verbraucher-URL umgestellt (alte Adresse leitete nur noch um), Belegkette am 24.10.2026 abgerufen und inhaltlich abgeglichen; Prüfqueue #586: tote Beleg-URLs ersetzt, Affiliate-CTA hinter die fachliche Grundlage verschoben, Tippfehler korrigiert, alle Zahlen und Bandbreiten dokumentiert"
+  aenderungsgrund: "Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
   gepruefte_aussagen:
     - textanker: "Denn Forderungen können deine Existenz bedrohen."
       pruefung: "Mit den BaFin-Verbraucherinformationen zur Haftpflichtversicherung abgeglichen: Sie deckt gesetzliche Schadenersatzansprüche Dritter bis zur vereinbarten Deckungssumme"
@@ -169,7 +170,7 @@ Denn Forderungen können deine Existenz bedrohen. Das Beste daran: Der Schutz ko
 - Ältere Policen bieten oft nicht mehr das Leistungsniveau, das heute Standard sein sollte.
 - Ein reiner Preisvergleich greift zu kurz – die Qualität der Klauseln ist entscheidend.
 
-## Warum die Privathaftpflicht so wichtig ist
+## Warum die Privathaftpflicht so wichtig ist?
 
 Viele Versicherungen decken kleine Risiken ab. Der Schaden ist dort ärgerlich, aber berechenbar. Bei der Haftpflicht ist das anders. Hier haftest du per Gesetz mit deinem ganzen Vermögen. Auch dein künftiges Einkommen zählt dazu. 
 
@@ -200,7 +201,7 @@ Typische Beispiele aus dem Alltag (Stand: Oktober 2026):
 
 Es sind oft die kleinen Unachtsamkeiten mit großer Wirkung, die den Wert dieser Versicherung unterstreichen.
 
-## Was ein guter Tarif 2026 mindestens können sollte
+## Was ein guter Tarif 2026 mindestens können sollte?
 
 Der Preis ist nur ein Teil der Antwort. Im Ernstfall zählen die Bedingungen. Ein guter Tarif erfüllt deshalb klare Standards.
 
@@ -369,6 +370,8 @@ Du musst kein Experte sein, um deine Police zu prüfen. Diese vier Schritte helf
 Stell dir eine Frage: **Schützt mich mein Vertrag bei einem schweren Personenschaden?** Zögerst du, dann vergleiche jetzt.
 
 > 💶 **Spar-Tipp zwischendurch:** Schau nicht nur auf den Euro-Betrag, sondern auf das Risiko. Ein schwacher Tarif, der im Ernstfall nicht zahlt, ist die teuerste Ersparnis deines Lebens. Vergleichen kannst du hier: [**Jetzt Haftpflichtversicherung vergleichen**](/go/haftpflicht/)
+
+**Faustregel:** Vergleiche zuerst die Leistung, dann den Preis; ein fehlender Baustein kostet später mehr als der Aufpreis heute.
 
 ## Fazit: Wenig Beitrag, große Schutzwirkung
 

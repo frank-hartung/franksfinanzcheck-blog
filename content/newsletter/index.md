@@ -1,6 +1,6 @@
 ---
 title: "Spar-Newsletter: zwei Mails pro Woche, jede mit Rechnung"
-description: "Anmeldung zum Newsletter von FranksFinanzcheck: dienstags die Zahlen der Woche, freitags die Fristen davor – mit Double-Opt-In, Themenauswahl und Abmeldung in einem Klick."
+description: "Spar-Newsletter von FranksFinanzcheck: dienstags die Zahlen der Woche, freitags die Fristen. Mit Double-Opt-In, Themenauswahl und Ein-Klick-Abmeldung."
 url: "/newsletter/"
 summary: "Anmeldung zum Newsletter von FranksFinanzcheck: zwei Mails pro Woche (Dienstag und Freitag) mit ausgewählten Spartipps, Rechnern und Fristen, Double-Opt-In, Themenauswahl, jederzeit kündbar."
 robotsNoIndex: true

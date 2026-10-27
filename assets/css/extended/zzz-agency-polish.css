@@ -4221,7 +4221,7 @@ details.toc a {
 .ff-kostenprofil__author small { color: #52655f; font-size: .56rem; letter-spacing: .08em; text-transform: uppercase; }
 .ff-kostenprofil__author strong { margin-top: 1px; font-size: .78rem; }
 .ff-kostenprofil__author em { color: #52655f; font-size: .62rem; font-style: normal; }
-.ff-kostenprofil__author b { font-size: 1rem; }
+.ff-kostenprofil__author :is(b,strong) { font-size: 1rem; }
 .ff-kostenprofil__author:hover { background: rgba(255,255,255,.42); }
 
 /* Artikelpass: dasselbe Objekt, auf eine redaktionelle Zeile verdichtet. */

@@ -85,7 +85,7 @@ Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im He
 **Vorteile:** – Sofortige Prämienreduktion.
 - Möglichkeit, moderne Telematik‑Tarife (nach gefahrenen Kilometern) zu testen – oft günstiger bei wenig Fahrleistung im Herbst.
 
-**Nachteile:** – Bei sehr alten Fahrzeugen kann die [Schadenfreiheitsklasse](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (SF‑Klasse) beim Wechsel verloren gehen.
+**Nachteile:** – Bei sehr alten Fahrzeugen kann die Schadenfreiheitsklasse (SF‑Klasse) beim Wechsel verloren gehen.
 - Manche Sonderkonditionen (z. B. Jahresendbonus) entfallen.
 
 **Beispielrechnung:** Anna fährt 12 000 km/Jahr, zahlt 820 € für ihre Vollkasko. Nach dem Vergleich findet sie einen Tarif mit 560 € Jahresbeitrag inkl. Telematik‑Rabatt. Sie spart **260 €** und behält die gleiche SF‑Klasse, weil der neue Anbieter die Rückübernahme anbietet.
@@ -118,7 +118,7 @@ Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, s
 
 ### 3. Sachversicherungen bündeln und Altverträge kündigen
 
-Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat.
+Viele zahlen für alte Privathaftpflicht-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat.
 
 Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
 
@@ -231,10 +231,10 @@ So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du n
 
 | Sparmaßnahme | Zeitaufwand | Typische Ersparnis |
 |:---|:---|:---|
-| [Kfz‑Versicherung wechseln](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (bis 30.11.) | 30 Minuten | **ca. 180–350 €** |
+| Kfz‑Versicherung wechseln (bis 30.11.) | 30 Minuten | **ca. 180–350 €** |
 | [Heizung entlüften im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) & Thermostate einstellen | 45 Minuten | **ca. 160–240 €** |
 | Strom‑ & Gastarif optimieren | 20 Minuten | **ca. 300–450 €** |
-| [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) & Hausrat anpassen | 25 Minuten | **ca. 80–150 €** |
+| Privathaftpflicht & Hausrat anpassen | 25 Minuten | **ca. 80–150 €** |
 | Saisonales Einkaufen & Kochen | fortlaufend | **ca. 150–250 €** |
 | Fensterdichtungen & Zugluftstopper | 15 Minuten | **ca. 8–12 €** |
 | Gratis‑Freizeitaktivitäten | flexibel | **ca. 60–100 €** |

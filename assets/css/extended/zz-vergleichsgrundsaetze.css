@@ -24,7 +24,7 @@
 .ff-vg__fussnote{margin:.6rem 0 0;font-size:.82rem;line-height:1.55;color:var(--secondary)}
 .ff-vg__portal{padding:.65rem .8rem;border-left:4px solid var(--ff-green-2,#0e5a43);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 7%,transparent);line-height:1.6}
 .ff-vg__antwort{font-size:1.05rem;line-height:1.65}
-.ff-vg__antwort b{color:var(--ff-green-2,#0e5a43);font-weight:800}
+.ff-vg__antwort :is(b,strong){color:var(--ff-green-2,#0e5a43);font-weight:800}
 
 /* ---------- Tabellen (Routen-Register, Deaktivierung) ---------- */
 .ff-vg__scroll{overflow-x:auto;margin:.5rem 0}
@@ -62,8 +62,8 @@
 [data-theme="dark"] .ff-vg__version{background:var(--ff-green,#1f6f5c)}
 :root[data-theme="dark"] .ff-vg__mversion,
 [data-theme="dark"] .ff-vg__mversion{background:var(--ff-green,#1f6f5c)}
-:root[data-theme="dark"] .ff-vg__antwort b,
-[data-theme="dark"] .ff-vg__antwort b{color:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-vg__antwort :is(b,strong),
+[data-theme="dark"] .ff-vg__antwort :is(b,strong){color:var(--ff-green,#1f6f5c)}
 :root[data-theme="dark"] .ff-vg__ausschluss,
 [data-theme="dark"] .ff-vg__ausschluss{border-left-color:#c98a1e}
 :root[data-theme="dark"] .ff-vg__zieltyp--abweichung,

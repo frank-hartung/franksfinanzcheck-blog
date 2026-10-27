@@ -1,7 +1,6 @@
 ---
 title: "Werkzeuge: Rechnen, bevor du entscheidest"
-seoTitle: "9 kostenlose Finanz-Rechner ohne Anmeldung | FranksFinanzcheck"
-description: "Kostenlose Rechner für Fixkosten, Stromabschlag, Haushaltsbudget und Fristen. Formel offen, keine Anmeldung, keine Datenübertragung an den Server."
+description: "Kostenlose Rechner für Fixkosten, Stromabschlag, Haushaltsbudget und Fristen. Formel offen, keine Anmeldung, keine Übertragung an einen Server."
 date: 2026-10-02
 lastmod: 2026-10-02
 draft: false
