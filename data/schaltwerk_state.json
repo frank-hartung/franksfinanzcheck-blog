@@ -65,6 +65,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/energie-heizen-winter-100.html": "2026-10-17T13:08:39+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html": "2026-10-06T00:34:19+02:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wissen/klima/treibhausgase-so-hoch-wie-nie-100.html": "2026-10-27T15:22:48+01:00",
     "wochenbericht::wochenbericht:2026-10-18": "2026-10-18T19:17:16+02:00"
   },
   "letzter_lauf": {
@@ -73,7 +74,7 @@
     "reach-signale-kuratieren": "2026-10-26T18:38:08+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-10-12T21:17:05+02:00",
-    "verbraucher-nachrichten": "2026-10-26T12:30:43+01:00",
+    "verbraucher-nachrichten": "2026-10-27T15:22:48+01:00",
     "wochenbericht": "2026-10-18T19:17:16+02:00"
   },
   "marker": {
@@ -159,7 +160,8 @@
       "2026-10-17": 1,
       "2026-10-20": 1,
       "2026-10-25": 1,
-      "2026-10-26": 1
+      "2026-10-26": 1,
+      "2026-10-27": 1
     },
     "wochenbericht": {
       "2026-10-18": 1

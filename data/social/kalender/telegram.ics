@@ -6,26 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fu
- ellen:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261026T231020Z
+UID:telegram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
+ ushalt:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261027T104246Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
-SUMMARY:Telegram (Kanal): Urlaub sparen: Budget\, Buchung und Kosten i
- m Blick (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-
- 7-clevere-wege-deine-kasse-zu-fuellen/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-urlaub-sparen-7-clev
- ere-wege-deine-kasse-zu-fuellen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
- ushalt:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261026T231020Z
-DTSTART:20261108T060000Z
-DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Energiekosten senken: Smarte Helfer für den 
  Haushalt (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -33,6 +18,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  senken-smarte-helfer-fuer-den-haushalt/
 URL:https://franksfinanzcheck.de/posts/2026-10-09-energiekosten-senken
  -smarte-helfer-fuer-den-haushalt/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
+ er-schritt:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261027T104246Z
+DTSTART:20261108T060000Z
+DTEND:20261108T061500Z
+SUMMARY:Telegram (Kanal): Dein Weg zu geringeren Monatskosten: Schritt
+  für Schritt (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-ge
+ ringeren-monatskosten-schritt-fuer-schritt/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringer
+ en-monatskosten-schritt-fuer-schritt/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

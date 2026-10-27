@@ -1113,6 +1113,20 @@ history:
     \  \n#Girokonto #Konto #Tagesgeld #Zinsen"
   ref: '117508382297357813'
   ai: true
+- posted_at: '2026-10-27T11:41:08.056559+01:00'
+  channel: mastodon
+  slug: 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks
+  title: 'Energieeffizienz im Haushalt: 5 schnelle Spartricks'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117512449068863753
+  ok: true
+  text: 'Spare bis zu 10 % bei der Stromrechnung. 🔧 Reduziere die Raumtemperatur um
+    1 °C, nutze LED‑Leuchten, stelle Kühlschrank auf 4 °C und Gefrierfach auf –18 °C,
+    setze Zeitschaltuhren ein und erneuere Fensterdichtungen – nachweislich bis zu
+    15 % weniger Wärmeverlust. 💡 https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #StromkostenSenken #Energieeffizienz #EnergieSparen #Spartricks'
+  ref: '117512449068863753'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1138,4 +1152,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-27T00:10:19.574644+01:00'
+updated_at: '2026-10-27T11:41:12.806024+01:00'
