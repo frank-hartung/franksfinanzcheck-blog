@@ -36,10 +36,16 @@
       {{- $rBase = strings.TrimSuffix (path.Ext $rFile) $rFile -}}
       {{- $rDir = path.Dir $rCover -}}
     {{- end -}}
-    {{- /* Native Linkbezeichnung: sichtbare Rubrik, Datum, Titel und Teaser.
-           Ein aria-label nur mit dem Titel verletzte „Label in Name“; das
-           Cover ist daneben dekorativ, nicht Teil des Linknamens. */ -}}
-    <a href="{{ .Permalink }}" class="ff-related-card">
+    {{- /* ANKERTEXT PRÄZISE (27.10.2026): Die Karte war EIN Link aus
+           Rubrik, Datum, Titel und Teaser (bis 158 Zeichen Ankertext –
+           Seobility: „Linktexte zu lang"). Jetzt trägt der Titel den Link,
+           die Trefferfläche liegt per Inset-Overlay über der ganzen Karte
+           (zzzz-seo-und-teilen.css). Cover, Rubrik, Datum und Teaser bleiben
+           sichtbar, sind aber nicht Teil des Linknamens: sie sagen nichts
+           darüber, worauf die Gegenseite spezialisiert ist.
+           Ein aria-label nur mit dem Titel wäre ein WCAG-2.5.3-Verstoß –
+           der Linkname IST hier der sichtbare Titel, ohne Override. */ -}}
+    <article class="ff-related-card">
       <span class="ff-related-card__media">
         {{- if $rCover -}}
           <picture>
@@ -70,10 +76,10 @@
       </span>
       <span class="ff-related-card__body">
         <span class="ff-related-card__date">{{ .Date.Format "02.01.2006" }}</span>
-        <strong class="ff-related-card__heading">{{ .Title | plainify }}</strong>
+        <strong class="ff-related-card__heading"><a class="ff-related-card__title-link" href="{{ .Permalink }}" data-klick="cta_click" data-klick-cta="verwandt" data-klick-slug="{{ .File.ContentBaseName }}" data-klick-placement="artikel-verwandt">{{ .Title | plainify }}</a></strong>
         <span class="ff-related-card__snippet">{{ .Description | plainify | truncate 80 }}</span>
       </span>
-    </a>
+    </article>
     {{- end -}}
   </div>
 </section>

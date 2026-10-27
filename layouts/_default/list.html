@@ -129,7 +129,23 @@
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
     <h2 class="entry-hint-parent">
-      {{- .Title | safeHTML }}
+      {{- /* ANKERTEXT STATT LEERER KLICKFLÄCHE (SEO/A11Y, 27.10.2026):
+             Bis hier stand am Kartenende ein absolut positionierter,
+             leerer `<a class="entry-link" aria-label="Weiterlesen: …">`.
+             Für Crawler war die Karte damit ein Link ohne Ankertext –
+             Seobility zählte auf der Startseite acht davon
+             („Links ohne Linktext“), und der Seobility-Links-Score lag
+             bei 71 %. Jetzt trägt der Kartentitel den Link: echter,
+             themenbezogener Ankertext (bester interner Linktext, den
+             eine Liste überhaupt liefern kann), keine leere Klickfläche.
+             Die ganze Karte bleibt klickbar – die Trefferfläche zieht
+             `.entry-title-link::after` in assets/css/extended/
+             zzzz-seo-und-teilen.css auf die Kartengröße (Inset-Overlay,
+             gleiche Geometrie wie zuvor `.entry-link`).
+             Regressionswache: scripts/h1_wache.py (eine H1 pro Seite,
+             Karten-H2 unverändert) · scripts/a11y_audit.py
+             (Linkname = Titel) · e2e/design-metrics.mjs. */ -}}
+      <a class="entry-title-link" href="{{ .RelPermalink }}">{{ .Title | safeHTML }}</a>
       {{- if .Draft }}
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
@@ -207,6 +223,12 @@
        zu FINANZCHECK.de am Ende der Startseite. Vertrag und Begründung:
        layouts/_partials/entity_box.html · Wache: entity_marken_gate.py */ -}}
 {{- partial "entity_box.html" . }}
+{{- /* TEILEN (27.10.2026): Empfehlen ohne Werbebudget – für einen
+       unabhängigen Ratgeber der günstigste Reichweitenkanal. Steht
+       bewusst NACH der Entity-Box: der zitierfähige Identitätssatz
+       bleibt der letzte redaktionelle Satz, die Teilen-Zeile ist
+       Werkzeug. Technik/Begründung: layouts/_partials/ff_teilen.html. */ -}}
+{{- partial "ff_teilen.html" (dict "page" . "ort" "startseite") }}
 {{- end }}
 
 {{- end }}{{/* end profileMode */}}

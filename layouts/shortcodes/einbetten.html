@@ -1,0 +1,35 @@
+{{- /* Shortcode „einbetten" – Bindeglied zwischen Redaktion und
+       layouts/_partials/ff_einbetten.html.
+
+       Warum ein Shortcode: Die Einbett-Angebote stehen in den Studien
+       (content/studien/…), also dort, wo die zitierfähigen Grafiken liegen.
+       Die Redaktion schreibt nur Bild, Maße, Alt-Text und Quellenzeile ins
+       Markdown – nie HTML. Die Logik (absolute URLs, Lizenzsatz, Kopier-
+       Knopf) lebt an genau einer Stelle im Partial.
+
+       Aufruf im Markdown:
+         einbetten mit den Attributen bild, alt, quelle (Pflicht)
+         sowie optional breite und hoehe (Standard 1200 × 628) und
+         presse_seite="true" auf /presse/ (unterdrückt den Selbstlink) und
+         ziel="/studien/x/" (Linkziel im Snippet, wenn nicht die Seite selbst).
+       (Doppelte geschweifte Klammern im Markdown nicht nötig – der
+       Shortcode-Name steht allein zwischen den Delimitern.)
+
+       Wache: scripts/linktext_wache.py (jeder Link hat Text),
+              scripts/a11y_audit.py (alt-Text, Kontraste). */ -}}
+{{- $bild := .Get "bild" -}}
+{{- if not $bild -}}
+  {{- errorf "Shortcode „einbetten“ braucht ein `bild`-Attribut (Pfad unter static/) in %s" .Page.File.Path -}}
+{{- end -}}
+{{- if not (.Get "alt") -}}
+  {{- errorf "Shortcode „einbetten“ braucht einen `alt`-Text in %s" .Page.File.Path -}}
+{{- end -}}
+{{- partial "ff_einbetten.html" (dict
+      "seite" .Page
+      "bild" $bild
+      "breite" (.Get "breite" | default 1200)
+      "hoehe" (.Get "hoehe" | default 628)
+      "alt" (.Get "alt")
+      "quelle" (.Get "quelle" | default .Page.Title)
+      "presse_seite" (.Get "presse_seite" | default false)
+      "ziel" (.Get "ziel" | default "")) -}}

@@ -420,11 +420,12 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 "data-ff-saison-quelle=keywords data-ff-saison-treffer=1>"
                 "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-klick=cta_click>"
                 "Zum Ratgeber</a>"
-                "<a class=ff-saison-card href=/posts/a/ data-klick=cta_click "
+                "<article class=ff-saison-card data-klick=cta_click "
                 "data-klick-placement=start-saison data-klick-saison=herbst "
                 "data-klick-slug=saison-herbst-a>"
-                "<span class=ff-saison-card-titel id=a-title>Artikel A</span>"
-                "<span class=ff-saison-card-cta>Weiterlesen</span></a>"
+                "<span class=ff-saison-card-titel id=a-title>"
+                "<a class=ff-saison-card__titel-link href=/posts/a/>Artikel A</a></span>"
+                "<span class=ff-saison-card-cta aria-hidden=true>Weiterlesen</span></article>"
                 "</section><article class=post-entry><img src=/images/cover.jpg loading=lazy "
                 "fetchpriority=low width=360 height=540 alt=Artikel></article></main>"
                 "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
@@ -441,11 +442,19 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 ("falsche Saison", gut.replace("data-ff-saison=herbst", "data-ff-saison=sommer"), "B2"),
                 ("zwei H1", gut.replace("<h1>Herbst-Check: Strom vergleichen</h1>", "<h1>Herbst-Check: Strom vergleichen</h1><h1>zwei</h1>"), "B1"),
                 ("ohne Messkette", gut.replace("data-klick-placement=start-saison", ""), "B4"),
-                ("Karte ohne Titel", gut.replace(">Artikel A</span>", "></span>"), "B3"),
+                ("Karte ohne Titel", gut.replace(">Artikel A</a>", "></a>"), "B3"),
                 ("ARIA überschreibt Kartentext", gut.replace("data-klick-slug=saison-herbst-a>",
                      "data-klick-slug=saison-herbst-a aria-labelledby=a-title>"), "B4"),
-                ("CTA für Screenreader versteckt", gut.replace("class=ff-saison-card-cta>",
-                     "class=ff-saison-card-cta aria-hidden=true>"), "B4"),
+                # 27.10.2026: Der CTA MUSS jetzt aria-hidden sein (er steht
+                # sonst im Linknamen und macht den Ankertext unscharf). Die
+                # Gegenprobe ist deshalb der CTA OHNE aria-hidden.
+                ("CTA im Linknamen", gut.replace("class=ff-saison-card-cta aria-hidden=true>",
+                     "class=ff-saison-card-cta>"), "B4"),
+                ("Ankertext nicht der Titel", gut.replace(
+                    "<span class=ff-saison-card-titel id=a-title>",
+                    "<span class=ff-saison-card-titel id=a-title>Datum: "), "B4"),
+                ("zweiter Link in der Karte", gut.replace("<span class=ff-saison-card-cta",
+                     "<a href=/posts/a/>mehr</a><span class=ff-saison-card-cta"), "B3"),
                 ("Block ohne Auswahl-Quelle", gut.replace("data-ff-saison-quelle=keywords",
                                                            "data-ff-saison-quelle=neueste"), "B2"),
                 ("Cover wieder eager", gut.replace("loading=lazy", "loading=eager"), "B8"),

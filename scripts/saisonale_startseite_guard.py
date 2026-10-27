@@ -740,6 +740,13 @@ class Knoten:
         teile = [self.text] + [k.volltext() for k in self.kids]
         return re.sub(r"\s+", " ", " ".join(t for t in teile if t)).strip()
 
+    def links(self) -> list["Knoten"]:
+        """Alle Links in diesem Teilbaum (27.10.2026: Karte = article + 1 Link)."""
+        gefunden = [self] if self.tag == "a" else []
+        for kind in self.kids:
+            gefunden.extend(kind.links())
+        return gefunden
+
 
 class SeitenBaum(HTMLParser):
     def __init__(self, html: str):
@@ -853,19 +860,32 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
                       f"der Spiegel erwartet {quelle!r} – Template und Wache laufen auseinander.")
 
     # B3 – Karten: Anzahl, Reihenfolge, Ziele
-    karten = [k for k in seite.nach_klasse("ff-saison-card") if k.tag == "a"]
+    # ANKERTEXT PRÄZISE (27.10.2026): Seit heute ist die Karte ein
+    # <article> mit GENAU EINEM Link – dem Titel (`.ff-saison-card__titel-link`).
+    # Vorher war die Karte selbst der Link und trug Datum, Thema, Titel und
+    # „Weiterlesen" als Ankertext (94–101 Zeichen; Seobility: „Linktexte zu
+    # lang"). Die Klickfläche über die ganze Karte liefert ein Inset-Overlay
+    # im CSS, keine zweite Linkfläche im DOM. Messattribute (`data-klick*`)
+    # bleiben am <article>, damit der Trichter unverändert zählt.
+    karten = seite.nach_klasse("ff-saison-card")
     if len(karten) != mindest:
         fehler.append(f"B3: {len(karten)} Saison-Karten gebaut, erwartet {mindest} "
                       "(`min_artikel` – der Block darf nie leer oder halb sein).")
-    gebaut = [k.attrs.get("href", "") for k in karten]
+    gebaut = []
+    for k in karten:
+        titel_links = [x for x in k.links() if x.hat_klasse("ff-saison-card__titel-link")]
+        gebaut.append(titel_links[0].attrs.get("href", "") if len(titel_links) == 1 else "")
     erwartet_hrefs = [a["href"] for a in erwartet]
     if gebaut[:len(erwartet_hrefs)] != erwartet_hrefs:
         fehler.append("B3: Karten-Reihenfolge weicht vom Auswahl-Spiegel ab.\n"
                       f"      gebaut:   {gebaut}\n      erwartet: {erwartet_hrefs}")
     for k in karten:
-        href = k.attrs.get("href", "")
-        ziel = output_path(public, href, base_path)
-        if ziel is None:
+        alle_links = k.links()
+        href = alle_links[0].attrs.get("href", "") if len(alle_links) == 1 else ""
+        ziel = output_path(public, href, base_path) if href else None
+        if not href:
+            fehler.append(f"B3: Saison-Karte ohne genau einen Link (Ist: {len(alle_links)}).")
+        elif ziel is None:
             fehler.append(f"B3: Saison-Karte verlinkt ins Leere: {href}")
         titel = [x for x in k.kids if x.hat_klasse("ff-saison-card-titel")]
         if not titel or not titel[0].volltext():
@@ -880,14 +900,23 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
         if not k.attrs.get("data-klick-slug", "").startswith(f"saison-{sid}-"):
             fehler.append(f"B4: Karte {href}: data-klick-slug muss mit "
                           f"„saison-{sid}-“ beginnen.")
-        # Der Link selbst trägt den zugänglichen Namen aus ALLEN sichtbaren
-        # Texten (Datum, Thema, Titel und CTA). Ein aria-labelledby nur auf
-        # den Titel verletzt WCAG 2.5.3 „Label in Name“ (Sprachsteuerung).
-        if any(attr in k.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
-            fehler.append(f"B4: Karte {href}: ARIA überschreibt/dupliziert den sichtbaren Linknamen.")
+        # Der Linkname ist exakt der sichtbare Titel. Kein ARIA-Override auf
+        # Karte oder Link (der Linkname bleibt der sichtbare Text), und der
+        # CTA steht sichtbar, aber AUSSERHALB des Linknamens (`aria-hidden`) –
+        # sonst wäre „Weiterlesen" Teil eines Ankertexts, der nur den Titel
+        # benennen soll.
+        for knoten in (k, *alle_links):
+            if any(attr in knoten.attrs for attr in ("aria-label", "aria-labelledby", "aria-describedby")):
+                fehler.append(f"B4: Karte {href}: ARIA überschreibt/dupliziert den sichtbaren Linknamen.")
+        if alle_links and not alle_links[0].hat_klasse("ff-saison-card__titel-link"):
+            fehler.append(f"B4: Karte {href}: der Link muss der Titel sein (ff-saison-card__titel-link).")
+        if alle_links and titel and alle_links[0].volltext() != titel[0].volltext():
+            fehler.append(f"B4: Karte {href}: Ankertext muss exakt dem Kartentitel entsprechen "
+                          f"(Ist: {alle_links[0].volltext()!r}).")
         ctas = [x for x in k.kids if x.hat_klasse("ff-saison-card-cta")]
-        if len(ctas) != 1 or not ctas[0].volltext() or ctas[0].attrs.get("aria-hidden") == "true":
-            fehler.append(f"B4: Karte {href}: sichtbarer CTA muss im nativen Linknamen stehen.")
+        if len(ctas) != 1 or ctas[0].attrs.get("aria-hidden") != "true":
+            fehler.append(f"B4: Karte {href}: sichtbarer CTA muss aria-hidden sein "
+                          "(er steht sonst im Linknamen und macht den Ankertext unscharf).")
 
     pillar_link = [k for k in seite.nach_klasse("ff-saison-pillar") if k.tag == "a"]
     if not pillar_link:
@@ -1212,11 +1241,14 @@ def selbsttest() -> int:
             "<section class='ff-saison ff-saison--herbst' data-ff-saison=herbst "
             "data-ff-saison-quelle=keywords data-ff-saison-treffer=1>"
             "<a class=ff-saison-pillar href=/pillar/strom-sparen/ data-klick=cta_click>Zum Ratgeber</a>"
-            "<a class=ff-saison-card href=/posts/a/ data-klick=cta_click "
+            # 27.10.2026: Karte = <article> mit GENAU EINEM Link (Titel),
+            # CTA sichtbar und aria-hidden (steht nicht im Linknamen).
+            "<article class=ff-saison-card data-klick=cta_click "
             "data-klick-placement=start-saison data-klick-saison=herbst "
             "data-klick-slug=saison-herbst-a>"
-            "<span class=ff-saison-card-titel id=a-title>Artikel A</span>"
-            "<span class=ff-saison-card-cta>Weiterlesen</span></a>"
+            "<span class=ff-saison-card-titel id=a-title>"
+            "<a class=ff-saison-card__titel-link href=/posts/a/>Artikel A</a></span>"
+            "<span class=ff-saison-card-cta aria-hidden=true>Weiterlesen</span></article>"
             "</section><article class=post-entry><img src=/images/cover.jpg loading=lazy "
             "fetchpriority=low width=360 height=540 alt=Artikel></article></main>"
             "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
@@ -1234,6 +1266,12 @@ def selbsttest() -> int:
         ok &= muss(any("ins Leere" in f for f in
                        validate_build(public, saison, erwartet, "keywords", 1)),
                    "toter Karten-Link muss auffallen")
+        (public / "index.html").write_text(gut.replace(
+            "<span class=ff-saison-card-cta aria-hidden=true>",
+            "<span class=ff-saison-card-cta>"), encoding="utf-8")
+        ok &= muss(any(f.startswith("B4") and "aria-hidden" in f for f in
+                       validate_build(public, saison, erwartet, "keywords", 1)),
+                   "CTA ohne aria-hidden (Teil des Linknamens) muss auffallen")
         (public / "index.html").write_text(gut.replace("data-ff-saison=herbst", "data-ff-saison=sommer"),
                                            encoding="utf-8")
         ok &= muss(bool(validate_build(public, saison, erwartet, "keywords", 1)),

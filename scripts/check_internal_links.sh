@@ -37,7 +37,11 @@ while IFS= read -r file; do
   # ist JavaScript in einem Attribut, kein Markup-Link. Der Wert ist
   # backslash-escapt, und `this.src=` traf das src=-Extraktionsmuster.
   if command -v perl >/dev/null 2>&1; then
-    scan="$(perl -0777 -pe 's|<script\b.*?</script>| |gs; s|<style\b.*?</style>| |gs; s|<!--.*?-->| |gs; s|onerror="[^"]*"||gs; s|onerror='"'"'[^'"'"']*'"'"'||gs' "$file" 2>/dev/null || cat "$file")"
+    # CODE-BLÖCKE (28.10.2026): Das Einbett-Snippet steht als HTML-Beispiel im
+    # <pre> (/presse/ und Q4-Studie). Hugo maskiert die spitzen Klammern, die
+    # Anführungszeichen bleiben literal – der Scanner sah darin sechs „kaputte
+    # interne Links“. Ein Code-Beispiel ist Text, kein Markup (wie <script>).
+    scan="$(perl -0777 -pe 's|<script\b.*?</script>| |gs; s|<style\b.*?</style>| |gs; s|<!--.*?-->| |gs; s|<pre\b.*?</pre>| |gs; s|onerror="[^"]*"||gs; s|onerror='"'"'[^'"'"']*'"'"'||gs' "$file" 2>/dev/null || cat "$file")"
   else
     scan="$(cat "$file")"
   fi

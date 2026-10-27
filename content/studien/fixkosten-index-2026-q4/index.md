@@ -72,6 +72,8 @@ Redaktionen, Verbraucherorganisationen und Fachleute dürfen Tabelle und Presseg
 
 Bitte auf diese Seite verlinken, damit Leser Methodik und Aktualisierungen prüfen können. Für Rückfragen und Interviews: [kontakt@franksfinanzcheck.de](mailto:kontakt@franksfinanzcheck.de). Korrekturhinweise werden im [Änderungsprotokoll](/aenderungsprotokoll/) dokumentiert.
 
+{{< einbetten bild="/downloads/fixkosten-index-2026-q4-pressegrafik.svg" breite="1200" hoehe="628" alt="Modellrechnung mit 925 Euro Stromkosten, 1.431,60 Euro Gaskosten und 2.356,60 Euro Energiekosten pro Jahr" quelle="FranksFinanzcheck, Fixkosten-Index Deutschland: Energie-Baseline Q4 2026" >}}
+
 ## Nächste Ausgabe
 
 Die nächste reguläre Ausgabe erscheint im ersten Quartal 2027. Bis dahin wird geprüft, ob aktualisierte BDEW-Werte eine außerplanmäßige Revision erfordern. Der quartalsweise Plan steht im Bereich [Daten & Studien](/studien/).

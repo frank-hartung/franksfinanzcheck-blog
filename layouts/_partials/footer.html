@@ -31,8 +31,15 @@
     {{- end }}
 
     <span>
-        {{- /* SUCHE 08.10.2026: Such-Link siteweit auch im Footer – zusätzlich zum
-               Hauptmenü-Eintrag (hugo.toml). Die Suche selbst: content/suche/. */ -}}
+        {{- /* SUCHE 08.10.2026, wiederhergestellt 27.10.2026: Der Such-Link
+               steht hier UND im Hauptmenü (hugo.toml). Seobility zählt das als
+               „Ankertext mehrfach verwendet“ – ein Hinweis, kein Fehler. Die
+               Streichung war ein Rückschritt: `e2e/suche.spec.mjs` („Footer
+               verlinkt die Suche auf jeder Seite“) hält fest, dass die Suche
+               von jeder Seite aus erreichbar bleibt, und ein zweiter Weg ist
+               für Tastatur- und Sprachbedienung genau das Gegenteil von
+               Ballast. Der Hinweis wird an dieser Stelle bewusst in Kauf
+               genommen und im SEO-Bericht als solcher ausgewiesen. */ -}}
         <a href="{{ "suche/" | absURL }}">Suche</a>
         {{- print " · " -}}
         <a href="{{ "impressum/" | absURL }}">Impressum</a>
@@ -77,9 +84,14 @@
 {{- end }}
 
 {{- if (not site.Params.disableScrollToTop) }}
-<a href="#top" id="top-link" class="top-link hidden" aria-label="Nach oben" title="Nach oben (Alt + G)" accesskey="g">
+{{- /* LINKTEXT STATT ARIA-LABEL (27.10.2026): Der Nach-oben-Pfeil war ein
+       Link ohne Text (nur aria-label/title). Crawler zählen ihn als „Link
+       ohne Linktext“, Seobility führte ihn in der Startseiten-Prüfung mit.
+       Der sichtbare Pfeil bleibt, der Name steht als `.sr-only` im Link –
+       für Screenreader und Sprachsteuerung unverändert. */ -}}
+<a href="#top" id="top-link" class="top-link hidden" title="Nach oben (Alt + G)" accesskey="g">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up" aria-hidden="true" focusable="false">
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
