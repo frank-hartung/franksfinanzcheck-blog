@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 5,
   "pool_size": 6,
-  "generated_at": "2026-10-27T09:41:57Z",
+  "generated_at": "2026-10-27T14:49:46Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -24,9 +24,9 @@
     {
       "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
       "ready": true,
-      "sha256": "c6bdfb9fbb2879d7a27322e8c1acd96332d09640aef00105b1c10fdb6a90e946",
+      "sha256": "acf5095a9aaf3df3b0ec3b70306bf61ae3eed7fce05069873245155781f5cb18",
       "flesch": 70.4,
-      "measured_at": "2026-10-27T09:37:42Z",
+      "measured_at": "2026-10-27T14:48:42Z",
       "score": 0.97,
       "parts": {
         "spelling": 0.96,
@@ -75,9 +75,9 @@
     {
       "slug": "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
       "ready": true,
-      "sha256": "5f07ce232d810c8822291111ccde0357c9269de160613265de812b79331cd4ec",
+      "sha256": "354d63d78c757a5e2301ef11cc7d775e86bc5d35da44328f16f59a9c65ebb883",
       "flesch": 65.3,
-      "measured_at": "2026-10-27T09:40:52Z",
+      "measured_at": "2026-10-27T14:49:46Z",
       "score": 0.952,
       "parts": {
         "spelling": 0.88,
@@ -114,8 +114,8 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "40479040838",
+    "kind": "partial",
+    "run_id": "40524430366",
     "run_attempt": "1"
   },
   "geschont": [
@@ -128,5 +128,13 @@
       ],
       "warum": "Zerlegte Datumsangaben liest der Ruinen-Heiler verlustfrei zusammen; die Verifikation vergleicht Wortzahl und harte Regeln vor/nach dem Eingriff."
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-27T14:49:46Z",
+    "renewed": [
+      "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
