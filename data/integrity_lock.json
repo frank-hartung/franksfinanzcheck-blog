@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-26T18:22:11.535904+00:00",
-  "head": "21b8fca",
+  "signed_at": "2026-10-27T17:39:14.784043+00:00",
+  "head": "973b342",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -11,14 +11,14 @@
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "10b234943b5bea933f7d634c407f3d28dbb62c8deb9850637de150a435cd2191",
     "layouts/_partials/extend_footer.html": "5e4bf28e7948489240c2b948edb4d54c6dea5d267ba5546b3424d14a80477771",
-    "layouts/_partials/extend_post_content.html": "95f277d0cd8053a703817ef5d9a8ee2a386821230021a4fc51c23873e9c6457b",
+    "layouts/_partials/extend_post_content.html": "80e06fb1c3a6d346ca6207828f048b27c0693b30edc93641cabfa1d0eb3acac0",
     "layouts/_partials/head.html": "4a6441dae814764b59dd61b6d5735ea3ad05787378ecaa6120985582b89e5fe6",
-    "layouts/_partials/header.html": "aec82071a46845bb8948bae7b9cad43c50d3ac3667df26f6b125f9208906c789",
-    "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
+    "layouts/_partials/header.html": "bda2230cb500594afb00e0cbefd76edf1d7ff1b3c74c7004ac9b5d38d6d96aa2",
+    "layouts/_partials/home_clusters.html": "6418eb7b8e32a460464a6147308e3dc86ad0f85c0e3fc8316472f06eb6aa4255",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "5363a44b377a53bb546731de2e9e19e0c5a154171ff09a04e5121b2012419ac1",
     "layouts/pillar/list.html": "eaa48324e16d5b9ca314782881399733e8539010c4fb266c7ecddaf331ae4d91",
-    "layouts/pillar/single.html": "4a6ec799b2d6d0f213df102258df87a5d60cb68b351be5169c1411c1db491027",
+    "layouts/pillar/single.html": "9917ad3506d3445aadc738af2fb4e5e0bc1fdec8d12322f59b6853bbd9473fee",
     "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
     "layouts/shortcodes/einspartabelle.html": "7c5a4b0b4b8847e4dc2582d107a08fad5fa34ab7313ab6eb155cb687acfd8c6a",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
@@ -54,7 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df",
+  "files_sha256": "bba81d6835c457568f23f7138896f280a6040eaf52003f0b26c8614f7d9ea373",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
@@ -476,8 +476,95 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "cd074ba68ce5d9cb9080995842ea6d635631a126609106cfddbb9d9527a93d04",
-      "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df"
+      "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df",
+      "prev_sha256": "cd074ba68ce5d9cb9080995842ea6d635631a126609106cfddbb9d9527a93d04"
+    },
+    {
+      "date": "2026-10-27",
+      "art": "set-current",
+      "head": "973b342",
+      "geaendert": [
+        "layouts/_partials/extend_post_content.html",
+        "layouts/_partials/header.html",
+        "layouts/_partials/home_clusters.html",
+        "layouts/pillar/single.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/extend_post_content.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "e25525c",
+              "datum": "2026-10-27",
+              "betreff": "SEO: Karten tragen einen Titel-Link, Backlink-Kadenz wird gemessen, Einbett-Block als Angebot"
+            },
+            {
+              "sha": "5320cbd",
+              "datum": "2026-10-27",
+              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/header.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9c855fc",
+              "datum": "2026-10-27",
+              "betreff": "fix(seo): Linktexte, Alt-Texte und Teilen-Zeile nach Seobility-Befund"
+            },
+            {
+              "sha": "5320cbd",
+              "datum": "2026-10-27",
+              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/home_clusters.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9c855fc",
+              "datum": "2026-10-27",
+              "betreff": "fix(seo): Linktexte, Alt-Texte und Teilen-Zeile nach Seobility-Befund"
+            },
+            {
+              "sha": "5320cbd",
+              "datum": "2026-10-27",
+              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/pillar/single.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "e25525c",
+              "datum": "2026-10-27",
+              "betreff": "SEO: Karten tragen einen Titel-Link, Backlink-Kadenz wird gemessen, Einbett-Block als Angebot"
+            },
+            {
+              "sha": "5320cbd",
+              "datum": "2026-10-27",
+              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "44c1eab647e91ea5e5a6f6056ee8dfdb3555ad1e37009f66d2677c5e784ac714",
+      "files_sha256": "bba81d6835c457568f23f7138896f280a6040eaf52003f0b26c8614f7d9ea373"
     }
   ]
 }

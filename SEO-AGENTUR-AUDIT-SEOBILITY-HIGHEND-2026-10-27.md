@@ -376,7 +376,9 @@ irgendwann eine Zahl mit Datum statt ein Gefühl.
 | `scripts/seo_cockpit.py --strict` | ✅ 122 Seiten, 99 indexierbar, P1/P2/P3 = 0 |
 | `scripts/layout_audit.py` | ✅ 0 kritische Befunde (Chunker-Vertrag grün, 1.995 Überschriften geprüft) |
 | `scripts/check_internal_links.sh` | ✅ 3.988 interne Links, 0 defekt |
-| `scripts/entity_marken_gate.py` | ⚠️ 1 **vorbestehender** Quellbefund: „Franks Finanzcheck" in einem Reserve-**Entwurf**. Nicht in diesem PR geheilt – die Korrektur würde das byte-genaue Reserve-Zertifikat (`data/reserve-readiness.json`) ungültig machen, und die Nachzertifizierung braucht `hunspell` (in dieser Umgebung nicht installierbar). Owner-Aufgabe: Text korrigieren und im selben Lauf `python3 scripts/reserve_recert.py --fix` ausführen. Im **Build** (E1–E9) ist die Wache grün: 0 Fehler, 1 ausgewiesene Warnung E9 (Marken-Title-Abdeckung, vorbestehend) |
+| `scripts/entity_marken_gate.py` | ✅ Quelle 0 Fehler (3× „Franks Finanzcheck" in einem Reserve-Entwurf auf die Markenschreibweise korrigiert) · Build: 0 Fehler, 1 ausgewiesene Warnung E9 (Marken-Title-Abdeckung, vorbestehend) |
+| `scripts/integrity_guard.py` | ✅ Siegel neu signiert (50 Kerndateien, Herkunft im Lock) – die vier geänderten Layouts stehen mit ihren Commits im `data/integrity_lock.json` |
+| `scripts/reserve_recert.py --check` | ⚠️ 1 erwartete Folge: Die Textkorrektur im Entwurf entwertet dessen byte-genaues Zertifikat. `--fix` braucht `hunspell` (hier nicht installierbar); der Bot-Watchdog (`.github/workflows/bot-watchdog.yml`) zieht die Nachzertifizierung beim nächsten Lauf nach. Bewusst rot statt gefälscht |
 | `scripts/vergleichsgrundsaetze_gate.py` | ✅ 20 Routen, 74 Offenlegungs-Bausteine, 0 Fehler |
 | `scripts/offenlegung_gate.py` | ✅ 75 Seiten, 0 Fehler |
 | `scripts/brand_surface_guard.py --only readme` | ✅ ROT 0 · GELB 0 |
