@@ -1,7 +1,40 @@
-# Cache-Header – greift bei einer Migration auf Cloudflare Pages / Netlify
-# (GitHub Pages ignoriert diese Datei und setzt hart max-age=600 für alles –
-#  dort übernimmt der Service Worker das Langzeit-Caching, siehe sw.js)
+# ===========================================================================
+#  _headers – Sicherheits- und Cache-Kopfzeilen für Hoster, die diese Datei
+#  lesen (Cloudflare Pages, Netlify). GitHub Pages IGNORIERT sie: dort
+#  liefert erst die Transform Rule aus cloudflare/edge-schutz.md (Abschnitt
+#  A1) die Sicherheits-Header, geprüft von scripts/blog_header_gate.py.
+#
+#  SEIT 27.10.2026 TRÄGT DIESE DATEI AUCH DIE SICHERHEITS-KOPFZEILEN.
+#  Vorher standen hier nur Cache-Regeln – wer den Blog auf Cloudflare Pages
+#  umzieht, bekam damit HSTS, nosniff und Clickjacking-Schutz NICHT, obwohl
+#  die Datei als „der Migrationsweg" galt. Die Werte sind nicht neu getippt:
+#  sie stammen aus der Tabelle in cloudflare/edge-schutz.md (A1) und werden
+#  von `npm run header:check` (offline) Zeichen für Zeichen dagegen geprüft.
+#  Eine zweite Wahrheit neben dem Dashboard ist damit ausgeschlossen.
+#
+#  WARUM ES HIER KEIN CATCH-ALL `Cache-Control` GIBT:
+#  Cloudflare Pages führt ALLE passenden Regeln zusammen und verbindet
+#  gleiche Kopfzeilen mit Komma (`max-age=31536000, immutable, max-age=600`).
+#  Ein `/*`-Cache-Wert neben den Asset-Regeln wäre deshalb kein Default,
+#  sondern ein widersprüchlicher Cache-Header – genau die Sorte Fehler, die
+#  niemand im Browser sieht. Deshalb setzt `Cache-Control` nur dort, wo
+#  keine zweite Regel denselben Pfad trifft; HTML bleibt beim ETag des
+#  Hosters (revalidiert, immer aktuell). Die Wache prüft diese Überschneidung
+#  (Regel S2 in scripts/blog_header_gate.py).
+# ===========================================================================
 
+# --- Sicherheit: gilt für jede ausgelieferte Datei -------------------------
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://abos.franksfinanzcheck.de https://stats.franksfinanzcheck.de https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://abos.franksfinanzcheck.de; object-src 'none'
+
+# --- Cache: unveränderliche Dateien, ein Jahr ------------------------------
 # Versionierte Assets (?v=<SHA>) → 1 Jahr cachen (immutable)
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
@@ -9,7 +42,3 @@
   Cache-Control: public, max-age=31536000, immutable
 /favicon.ico
   Cache-Control: public, max-age=31536000, immutable
-
-# HTML-Seiten → kurz cachen (immer aktuell)
-/*
-  Cache-Control: public, max-age=600

@@ -23,8 +23,12 @@ eintragen. Eine Behauptung ohne Messung ist keine Behauptung.
 ### A1 · Sicherheits-Header aktivieren (Finding F-01) — 🔴 wichtigster Schritt
 
 **Lage:** Die Seite liegt auf GitHub Pages. GitHub Pages **ignoriert
-`static/_headers`** (steht als Kommentar in der Datei selbst). Deshalb fehlen
-live HSTS, Clickjacking-Schutz und `nosniff`. Die Meta-CSP im HTML kann
+`static/_headers`**. Die Datei trägt seit 27.10.2026 trotzdem die acht
+Sicherheits-Kopfzeilen aus A1 (geprüft von `npm run header:check`, Regeln
+S1/S2): Sie ist der Migrationsweg für Cloudflare Pages und Netlify, und ohne
+sie hätte ein Umzug den Schutz stillschweigend zurückgelassen. Live wirken
+die Header aber erst über den Proxy. Deshalb fehlen
+auf GitHub Pages HSTS, Clickjacking-Schutz und `nosniff`. Die Meta-CSP im HTML kann
 `frame-ancestors` und HSTS nicht liefern — das geht **nur** als HTTP-Header.
 Deshalb: Proxy davor, Header per Transform Rule.
 

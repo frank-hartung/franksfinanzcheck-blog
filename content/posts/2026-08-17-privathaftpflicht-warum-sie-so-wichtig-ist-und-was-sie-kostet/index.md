@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-14
+lastmod: 2026-10-16
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute zählen und was guter Schutz für Singles und Familien kostet."
 date: 2026-10-16T15:15:38Z

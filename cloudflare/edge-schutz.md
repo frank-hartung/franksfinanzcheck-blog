@@ -42,6 +42,21 @@ nötig (Inline-Skripte für Theme und Service-Worker-Registrierung). Auch damit
 ist die Regel ein Fortschritt: **fremde** Skripte, Frames und Formularziele sind
 ausgeschlossen. Der nächste Ausbauschritt steht in Schritt 4.
 
+**Dieselben acht Kopfzeilen stehen seit 27.10.2026 auch in
+`static/_headers`** — für den Fall, dass der Blog auf Cloudflare Pages oder
+Netlify umzieht: Beide lesen diese Datei, GitHub Pages ignoriert sie. Bis
+dahin enthielt sie ausschließlich Cache-Regeln; ein Umzug hätte den Schutz
+also stillschweigend zurückgelassen. Die Werte sind nicht neu getippt,
+sondern aus der Tabelle oben übernommen und werden von
+`npm run header:check` (offline) Zeichen für Zeichen dagegen geprüft
+(Regel S1), samt Überschneidungsfreiheit der Regeln (S2: Cloudflare Pages
+führt alle passenden Regeln zusammen und verbindet gleiche Kopfzeilen mit
+Komma — zwei `Cache-Control`-Werte für denselben Pfad wären ein
+widersprüchlicher Cache-Header. Deshalb setzt `static/_headers` kein
+Catch-all `Cache-Control`). Eine zweite Wahrheit neben diesem Dokument ist
+damit ausgeschlossen; das Dashboard bleibt die Wirkstelle, die Datei der
+Migrationsweg.
+
 **Ein Proxy ändert die Rechtslage** — deshalb steht der fertige
 Datenschutz-Text in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Schritt B7. Er nennt
 Cloudflare als Empfänger der Zugriffsdaten und stimmt damit überein, was

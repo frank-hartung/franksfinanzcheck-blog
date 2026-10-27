@@ -57,6 +57,27 @@ class MetadatenWacheTests(unittest.TestCase):
                              'description: "Zu kurz."')
         self.assertIn("M2", rules(short))
 
+    def test_description_zu_breit_ist_befund(self):
+        # 27.10.2026 (Screaming-Frog-Befund „über 985 Pixel"): 135 Zeichen
+        # passen in M2, laufen in Arial 14 px aber über die Snippet-Breite.
+        breit = ("Wohngebäude und Wärmewende: Warum Wärmeverlust, Wärmepumpe und Wartung "
+                 "zusammengehören. Wer Wohnraum warm hält, spart mit Wärmedämmung.")
+        text = GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            f'description: "{breit}"')
+        self.assertEqual(rules(text), ["M7"])
+        self.assertLessEqual(len(breit), w.DESC_MAX)
+
+    def test_description_mit_zeichen_ohne_breitenmass_ist_befund(self):
+        text = GOOD.replace('für jeden Haushalt."', 'für jeden Haushalt. 💡"')
+        self.assertEqual(rules(text), ["M7"])
+
+    def test_grenzen_kommen_aus_der_ssot(self):
+        # Keine zweite Zahl im Haus: metadaten_wache liest die Grenzen aus
+        # scripts/serp_limits.py, das SEO-Cockpit prüft dieselben.
+        import scripts.serp_limits as sl
+        self.assertEqual((w.DESC_MIN, w.DESC_MAX), (sl.DESC_MIN_ZEICHEN, sl.DESC_MAX_ZEICHEN))
+
     def test_lastmod_vor_date_ist_befund(self):
         self.assertIn("M3", rules(GOOD.replace("lastmod: 2026-09-02", "lastmod: 2026-08-01")))
 

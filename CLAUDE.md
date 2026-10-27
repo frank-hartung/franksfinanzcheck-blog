@@ -2314,3 +2314,68 @@ Vier Regeln halten die Klasse jetzt:
 Vertrag: **C6** (`GUARDS`) · Runbook `docs/ANLEITUNG-GSC-API-ZUGRIFF.md`,
 Abschnitt „Wenn ein Artefakt kaputt ist“ · Bericht
 `GSC-DATEN-INTEGRITAET-HIGHEND-2026-10-24.md`.
+
+## Ein Snippet ist 155 Zeichen und 985 Pixel (DAUERVORGABE, seit 27.10.2026)
+
+Am 27.10.2026 legte ein fremder Crawl (Screaming Frog) einen Befundbericht
+über **eine** Seite vor: fehlende Sicherheits-Header, Meta-Description über
+155 Zeichen, dieselbe Description über 985 Pixel, ein interner Link ohne
+Ankertext, „mehrere H2". Vier davon waren keine Fehlmessung des Werkzeugs,
+sondern ein **zu großzügiger eigener Maßstab**:
+
+- `metadaten_wache` erlaubte 160 Zeichen, `seo_cockpit` 165 – der Markt
+  kürzt bei 155. Zwei Grenzen im Haus, keine davon die des Marktes.
+- Ankertext prüfte niemand. Die Karten-Links der Listenansicht waren leer
+  (`<a class="entry-link" aria-label="…"></a>`): für Screenreader benannt,
+  für Crawler ein Link ohne Text.
+- „Mehrere H2" ist **kein** Befund (HTML erlaubt beliebig viele) – vier
+  Seiten sprangen aber in der Rangfolge (h1→h3, h2→h4). Das ist einer.
+
+Regeln:
+
+- **Eine Zahl, zwei Messstellen.** Grenzen und Breitenmaß stehen in
+  `scripts/serp_limits.py` (100/155 Zeichen, 985 px in Arial 14 px,
+  Advance-Breiten der Helvetica-Kernmetrik – Arial ist metrisch identisch).
+  `metadaten_wache` (Quelle) und `seo_cockpit` (gebautes HTML) **importieren**
+  sie; eine zweite Grenze im Code ist ein Befund
+  (`scripts/tests/test_serp_limits.py`, Klasse `Bindung`).
+- **Breite ist nicht Zeichenzahl.** 135 Zeichen aus breiten Wörtern laufen
+  über 985 px, 155 schmale nicht. Wer nur zählt, meldet Grün für ein
+  abgeschnittenes Snippet. Zeichen ohne Metrik (Emoji, CJK) werden **nicht**
+  geschätzt: `breite_px()` gibt `None` und die Wache meldet „nicht prüfbar".
+- **Ein Link braucht Text, nicht nur `aria-label`.** Icon-Links und
+  Karten-Links tragen eine `sr-only`-Spanne im Link selbst; `aria-label`
+  bleibt für Screenreader, ersetzt aber keinen Ankertext.
+- **Rangfolge statt H2-Zählung.** `seo_cockpit` prüft Sprünge (h2→h4), nicht
+  die Anzahl der H2. Wer eine Rangstufe überspringt, ändert die Markdown-Ebene
+  (`####` → `###`), nicht das Aussehen.
+- **Verdrahtung:** `e2e.yml` (jeder PR) fährt `seo_cockpit --fail-on
+  description-length,description-breite,link-no-anchor,heading-order` und
+  `metadaten_wache`; `npm run serp:check` ist der lokale Zwilling. Bewusst
+  **kein** Deploy-Blocker: ein zu langes Snippet darf die Auslieferung der
+  Live-Site nicht anhalten (C34), es darf aber nicht unbemerkt nach `main`.
+
+Vertrag: Bericht `SERP-SPIEGEL-SCREAMING-FROG-HIGHEND-2026-10-27.md` ·
+Selbsttests `metadaten_wache --selftest` (13 Proben) und
+`seo_cockpit`/`serp_limits` (`npm run test:serp`).
+
+## Kopfzeilen stehen an einer Stelle, auch für den Umzug (seit 27.10.2026)
+
+`static/_headers` enthielt bis zum 27.10.2026 **nur Cache-Regeln** und galt
+trotzdem als Migrationsweg. Wer damit auf Cloudflare Pages umgezogen wäre,
+hätte HSTS, `nosniff`, Clickjacking-Schutz und CSP nicht mitgenommen – die
+Datei ist wirkungslos auf GitHub Pages, aber sie ist die einzige Stelle, an
+der ein anderer Hoster die Header findet.
+
+- Die acht Kopfzeilen der Tabelle A1 (`cloudflare/edge-schutz.md`) stehen
+  jetzt auch in `static/_headers`; der Sollstand wird **aus der Tabelle
+  gelesen**, nicht abgetippt.
+- `blog_header_gate --offline` prüft S1 (jeder Wert exakt wie in der Vorlage)
+  und S2 (**kein Pfad erbt zwei verschiedene Werte** derselben Kopfzeile).
+  S2 ist kein Formalismus: Cloudflare Pages führt alle passenden Regeln
+  zusammen und verbindet gleiche Namen mit Komma – zwei `Cache-Control`-Werte
+  ergäben `max-age=31536000, immutable, max-age=600`, also einen
+  widersprüchlichen Cache-Header. Deshalb gibt es dort kein Catch-all
+  `Cache-Control`.
+- Live messen bleibt `npm run header:check:live` (Sicherheits-Wache); die
+  Datei ist keine Messung, sondern der zweite Auslieferungsweg.

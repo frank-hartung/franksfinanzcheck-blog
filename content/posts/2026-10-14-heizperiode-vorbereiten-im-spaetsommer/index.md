@@ -1,6 +1,6 @@
 ---
 title: "Heizperiode vorbereiten im Spätsommer"
-description: "Heizperiode vorbereiten: Heizkörper nach Bedarf prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Rechenwege offen, ohne Sparversprechen."
+description: "Heizperiode vorbereiten: Heizkörper prüfen, Verbrauch messen, Tarife mit Grundpreis vergleichen – offene Rechenwege statt Sparversprechen."
 date: 2026-10-14T09:48:27Z
 draft: true
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
