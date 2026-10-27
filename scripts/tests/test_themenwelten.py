@@ -41,7 +41,7 @@ class ThemenweltenTests(unittest.TestCase):
     def build_fixture(self, prefix="/"):
         for topic in DATA["topics"]:
             key = topic["id"]
-            self.write(f"public/pillar/{key}/index.html", f'<h1>Ratgeber</h1><a class=ff-pc-card href="{prefix}posts/{key}-artikel/"><img alt="" aria-hidden=true><strong class=ff-pc-card__title>Artikel</strong><span class=ff-pc-card__cta>Jetzt lesen →</span></a>')
+            self.write(f"public/pillar/{key}/index.html", f'<h1>Ratgeber</h1><article class=ff-pc-card><img alt="" aria-hidden=true><strong class=ff-pc-card__title><a class=ff-pc-card__title-link href="{prefix}posts/{key}-artikel/">Artikel</a></strong><span class=ff-pc-card__cta aria-hidden=true>Jetzt lesen →</span></article>')
             self.write(f"public/posts/{key}-artikel/index.html", "<h1>Artikel</h1>")
         for home in (False, True):
             heading = "home-themenwelten" if home else guard.TITLE_ID
@@ -49,11 +49,11 @@ class ThemenweltenTests(unittest.TestCase):
             for topic in DATA["topics"]:
                 key = topic["id"]
                 card_id = heading + "-" + key
-                cards.append(f'''<li><a class=ff-topic-card data-topic="{key}" href="{prefix}pillar/{key}/">
-                  <h3 id="{card_id}-title">{escape(topic['title'])}</h3>
+                cards.append(f'''<li><article class=ff-topic-card data-topic="{key}">
+                  <h3 id="{card_id}-title"><a class=ff-topic-card__title-link href="{prefix}pillar/{key}/">{escape(topic['title'])}</a></h3>
                   <p class=ff-topic-description id="{card_id}-description">{escape(topic['description'])}</p>
                   <span class=ff-topic-count id="{card_id}-count" data-article-count=1>1 Artikel</span>
-                  <span class=ff-topic-cta>Zum Thema <svg aria-hidden=true><path d="M0 0"/></svg></span></a></li>''')
+                  <span class=ff-topic-cta aria-hidden=true>Zum Thema <svg aria-hidden=true><path d="M0 0"/></svg></span></article></li>''')
             markup = f'''<main><section class=ff-topics aria-labelledby="{heading}">
               <span id={guard.LEGACY_ID} aria-hidden=true></span>
               <h2 id="{heading}">{DATA['title']}</h2><ul>{''.join(cards)}</ul></section>
@@ -137,18 +137,28 @@ class ThemenweltenTests(unittest.TestCase):
         self.mutate_html("</main>", '<span id="deine-6-themenwelten"></span></main>')
         self.assertTrue(self.findings())
 
-    def test_wrong_url_and_nested_controls(self):
+    def test_wrong_url_and_zweiter_link_in_der_karte(self):
         self.mutate_html('href="/pillar/strom-sparen/"', 'href="https://example.com/"')
         self.assertTrue(self.findings())
+        # Ein ZWEITER Link in der Karte wäre der Rückfall in den langen
+        # Ankertext von vor dem 27.10.2026.
         self.build_fixture()
-        self.mutate_html("Zum Thema", '<a href="/">Zum Thema</a>')
-        self.assertTrue(any("verschachtelten" in error for error in self.findings()))
+        self.mutate_html('<p class=ff-topic-description', '<a href="/x/">mehr</a><p class=ff-topic-description')
+        self.assertTrue(any("genau ein Bedienelement" in error for error in self.findings()))
+
+    def test_ankertext_muss_der_titel_sein(self):
+        """Der Kern der Seobility-Heilung: Ankertext = Titel, nicht die Karte."""
+        self.mutate_html(
+            '<a class=ff-topic-card__title-link href="/pillar/strom-sparen/">Strom &amp; Gas sparen</a>',
+            '<a class=ff-topic-card__title-link href="/pillar/strom-sparen/">Strom &amp; Gas sparen – Tarife, '
+            'Wechsel und Heizkosten</a>')
+        self.assertTrue(any("Ankertext muss exakt der Kartentitel" in e for e in self.findings()))
 
     def test_missing_name_description_or_hidden_card(self):
         for before, after in (
             ('class=ff-topic-card', 'class=ff-topic-card aria-labelledby=missing'),
             ('class=ff-topic-description', 'class=missing'),
-            ('class=ff-topic-cta', 'class=ff-topic-cta aria-hidden=true'),
+            ('class=ff-topic-cta aria-hidden=true', 'class=ff-topic-cta'),
             ('class=ff-topic-card', 'class=ff-topic-card hidden'),
         ):
             with self.subTest(before=before, after=after):
@@ -160,10 +170,10 @@ class ThemenweltenTests(unittest.TestCase):
         target = self.public / "pillar/strom-sparen/index.html"
         original = target.read_text(encoding="utf-8")
         for before, after, expected in (
-            ('class=ff-pc-card', 'class=ff-pc-card aria-label="Weiterlesen: Artikel"', "ARIA überschreiben"),
+            ('class=ff-pc-card__title-link', 'class=ff-pc-card__title-link aria-label="Weiterlesen: Artikel"', "ARIA überschreiben"),
             ('alt=""', 'alt="Doppelt vorgelesener Artikel"', "aria-hidden=true"),
             ('aria-hidden=true', 'aria-hidden=false', "aria-hidden=true"),
-            ('Jetzt lesen', ' ', "Titel und CTA"),
+            ('class=ff-pc-card__cta', 'class=missing', "Jetzt lesen"),
         ):
             with self.subTest(before=before):
                 target.write_text(original.replace(before, after, 1), encoding="utf-8")

@@ -39,7 +39,8 @@ Listen). Deshalb wurde nicht die eine gemeldete URL repariert, sondern der
 ```bash
 hugo --minify --cleanDestinationDir --environment production
 python3 scripts/seo_cockpit.py --build public --fail-on \
-  description-length,description-breite,link-no-anchor,heading-order
+  description-length,description-breite,heading-order
+python3 scripts/linktext_wache.py --public public
 ```
 
 Vorher: **0 Befunde** (das Cockpit erlaubte 165 Zeichen und prüfte Ankertext
@@ -145,11 +146,18 @@ weil es **denselben** Ausdruck verwendet: Label und Text können nicht
 auseinanderlaufen. `aria-label` allein hätte nicht gereicht, ein sichtbarer
 Text hätte das Kartenlayout verändert.
 
-Die Wache dazu ist neu und misst die gerenderte Wahrheit
-(`link-no-anchor`, P2): Ein interner Link ohne Text und ohne Bild-Alt ist ein
-Befund – auch dann, wenn er ein `aria-label` trägt (dann mit dem Zusatz „nur
-aria-label"). Der `<title>` in einem Icon-SVG zählt bewusst **nicht** als
-Ankertext; er ist ein Tooltip der Grafik. Nach dem Fix: **0**.
+Die Wache dazu misst die gerenderte Wahrheit: Ein interner Link ohne Text und
+ohne Bild-Alt ist ein Befund – auch dann, wenn er ein `aria-label` trägt (dann
+mit dem Zusatz „nur aria-label"). Der `<title>` in einem Icon-SVG zählt
+bewusst **nicht** als Ankertext; er ist ein Tooltip der Grafik. Nach dem Fix:
+**0**.
+
+Zwei Messstellen, ein Besitzer: `seo_cockpit.py` führt `link-no-anchor` als
+Audit-Dimension im Bericht, das **Gate** aber ist `scripts/linktext_wache.py`
+(L1–L4, mit Selbsttest und begründeten Ausnahmen `data-ff-linktext-frei` und
+`<a>` ohne `href`). Sie kam am selben Tag aus dem Seobility-Lauf und deckt
+dieselbe Klasse breiter ab; `link-no-anchor` steht deshalb nicht in
+`seo_cockpit.GATE_CODES`. Zwei Wachen für einen Befund laufen auseinander.
 
 ---
 
@@ -237,14 +245,16 @@ erscheint sie dort trotzdem als fehlend.
 | `serp_limits.py` (SSOT) | Grenzen + Arial-Breitenmaß, 219 Zeichen | Basis aller Prüfungen |
 | `metadaten_wache.py` M2/M7 | Description 100–155 Z **und** ≤ 985 px, Quelle | `npm run metadaten:check`, PR-Gate |
 | `seo_cockpit.py` `description-length`/`-breite`/`-kurz`/`-messbar` | dasselbe am **gebauten** HTML | `npm run serp:check`, PR-Gate |
-| `seo_cockpit.py` `link-no-anchor` | interner Link ohne Ankertext | PR-Gate |
+| `seo_cockpit.py` `link-no-anchor` | interner Link ohne Ankertext | Bericht (Audit) |
+| `linktext_wache.py` L1–L4 | Linktexte und Alt-Texte im Build | `npm run links:check`, PR-Gate |
 | `seo_cockpit.py` `heading-order` | Rangfolge-Sprünge (nicht H2-Anzahl) | PR-Gate |
 | `blog_header_gate.py` S1/S2 | `static/_headers` == Vorlage A1, keine Überschneidung | `npm run header:check`, Sicherheits-Wache |
 | `blog_header_gate.py` live | die acht Header an der echten Seite | `npm run header:check:live`, täglich |
 
 **Verdrahtung:** `.github/workflows/e2e.yml` fährt bei jedem PR
-`seo_cockpit --fail-on description-length,description-breite,link-no-anchor,heading-order`
-und `metadaten_wache`; die Sicherheits-Wache fährt `blog_header_gate --offline`
+`seo_cockpit --fail-on description-length,description-breite,heading-order`,
+`linktext_wache` (Ankertext und Alt-Texte) und `metadaten_wache`; die
+Sicherheits-Wache fährt `blog_header_gate --offline`
 (jetzt inklusive S1/S2) bei Änderungen an `static/**` und `cloudflare/**`.
 
 Bewusst **kein Deploy-Blocker**: Ein zu langes Snippet darf die Auslieferung

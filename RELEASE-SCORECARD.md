@@ -113,8 +113,8 @@ Keine.
 | Artikel | Risikoklasse | Freigabe | Faktenstand | Nächste Prüfung |
 |---|---|---|---|---|
 | `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | ausstehend | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | ausstehend | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | hoch | vorhanden | 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) | unbekannt ⚠️ überfällig |
 | `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) | unbekannt ⚠️ überfällig |
 | `2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |

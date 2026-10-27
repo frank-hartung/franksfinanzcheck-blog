@@ -606,6 +606,31 @@ def write_report(meta, prospects, articles, assets, campaigns, weekly, today):
         f"|---|---|---|---|---|",
         f"| {n_open} | {n_won} | {n_ret} | {n_all} | {cap} |",
         "",
+    ]
+
+    # Kadenz (27.10.2026): Die Zahlen, die den 0-%-Backlink-Befund erklären.
+    k = kadenz(prospects, today)
+    symbol = {"rot": "🔴", "gelb": "🟡", "gruen": "🟢"}[k["urteil"]]
+    lines += [
+        "### Kadenz (die einzige Zahl, die den Backlink-Score bewegt)",
+        "",
+        f"{symbol} **{k['satz']}**",
+        "",
+        f"| Letzter Kontakt | Tage her | Aktionen 7 T. | Aktionen 28 T. | Ziel/Woche | Gewonnen |",
+        f"|---|---|---|---|---|---|",
+        f"| {k['letzte_kontaktaufnahme'] or '– nie –'} "
+        f"| {k['tage_seit_kontakt'] if k['tage_seit_kontakt'] is not None else '–'} "
+        f"| {k['in_7']} | {k['in_28']} | {k['ziel']} | {k['gewonnen']} |",
+        "",
+        "Eine Kontaktaufnahme wird so verbucht (setzt Datum + Status):",
+        "",
+        "```bash",
+        "python3 scripts/backlink_automation.py --mark <prospect-id>=kontaktiert",
+        "```",
+        "",
+    ]
+
+    lines += [
         "Status-Pflege (CRM, YAML bleibt unangetastet):",
         "",
         "```bash",
@@ -944,6 +969,32 @@ def run_selftest():
           http_check("://kaputt", timeout=0.01,
                      deadline=time.monotonic() + 0.05) is None)
 
+    # 10. Kadenz (27.10.2026): Die Zahl, die den 0-%-Backlink-Befund erklärt,
+    #     muss rechnen und nicht schönen.
+    heute = dt.date(2026, 10, 27)
+    leer = kadenz([{"id": "a", "status": "neu"}], heute)
+    check("Kadenz ohne Kontakt ist ROT",
+          leer["urteil"] == "rot" and leer["in_28"] == 0
+          and leer["tage_seit_kontakt"] is None)
+    frisch = kadenz([{"id": "a", "status": "kontaktiert",
+                      "last_contacted": "2026-10-26"}], heute)
+    check("Kadenz zählt frische Kontakte",
+          frisch["in_7"] == 1 and frisch["tage_seit_kontakt"] == 1)
+    voll = kadenz([{"id": str(i), "status": "kontaktiert",
+                    "last_contacted": "2026-10-26"} for i in range(5)], heute)
+    check("Kadenz ist grün ab Zielmarke", voll["urteil"] == "gruen")
+    alt = kadenz([{"id": "a", "status": "kontaktiert",
+                   "last_contacted": "2026-08-01"}], heute)
+    check("Kadenz zählt alte Kontakte nicht als frisch",
+          alt["in_7"] == 0 and alt["in_28"] == 0 and alt["urteil"] == "rot")
+    gewonnen = kadenz([{"id": "a", "status": "gewonnen"},
+                       {"id": "b", "status": "kontaktiert",
+                        "last_contacted": "kaputt"}], heute)
+    check("Kadenz verträgt kaputte Datumswerte und zählt Gewinne",
+          gewonnen["gewonnen"] == 1 and gewonnen["in_7"] == 0)
+    check("Kadenzzeile nennt Urteil und Zahl",
+          "ROT" in kadenz_zeile(leer) and "0/5" in kadenz_zeile(leer))
+
     failed = [n for n, ok in results if not ok]
     if failed:
         print(f"🛑 BACKLINK-SELFTEST FEHLGESCHLAGEN ({len(failed)}/{len(results)}):")
@@ -955,6 +1006,72 @@ def run_selftest():
 
 
 # ----------------------------------------------------------------- Main
+# ------------------------------------------------------------- Kadenz (KPI)
+KADENZ_ZIEL_WOCHE = 5
+
+
+def kadenz(prospects, today=None):
+    """Messbare Kadenz statt Gefühl: Was ist in 7/28 Tagen passiert?
+
+    WARUM (27.10.2026): Der Seobility-Check meldet „fast keine Links von
+    anderen Webseiten" (0 %, kritisch). Das Programm ist gebaut – 32
+    kuratierte Prospects, Wochenpack mit Copy, CRM, Assets –, aber im CRM
+    standen 0 Kontaktaufnahmen. Ein Bericht, der das als „26 offen" zählt,
+    sieht beschäftigt aus und sagt trotzdem nichts über Fortschritt.
+    Diese Funktion macht die eine Zahl sichtbar, die zählt: wann zuletzt
+    jemand tatsächlich angeschrieben wurde.
+    """
+    today = today or dt.date.today()
+    kontakt = []
+    for p in prospects:
+        wann = p.get("last_contacted")
+        if not wann:
+            continue
+        try:
+            datum = dt.date.fromisoformat(str(wann)[:10])
+        except ValueError:
+            continue
+        kontakt.append((datum, p))
+    kontakt.sort(key=lambda x: x[0], reverse=True)
+    letzte = kontakt[0][0] if kontakt else None
+    tage_seit = (today - letzte).days if letzte else None
+    in_7 = sum(1 for d, _ in kontakt if (today - d).days <= 7)
+    in_28 = sum(1 for d, _ in kontakt if (today - d).days <= 28)
+    gewonnen = [p for p in prospects if (p.get("status") or "") == "gewonnen"]
+    offen = [p for p in prospects if (p.get("status") or "neu") in OPEN_STATUSES]
+    if in_28 == 0:
+        urteil = "rot"
+        satz = ("Keine einzige Kontaktaufnahme in 28 Tagen: Die Pipeline steht, "
+                "das Wochenpack wird nicht abgearbeitet.")
+    elif in_7 < KADENZ_ZIEL_WOCHE:
+        urteil = "gelb"
+        satz = (f"{in_7} von {KADENZ_ZIEL_WOCHE} Aktionen in dieser Woche – "
+                "Kadenz unter Ziel, Qualität vor Nachholen.")
+    else:
+        urteil = "gruen"
+        satz = f"Kadenz erfüllt: {in_7} Aktionen in dieser Woche."
+    return {
+        "letzte_kontaktaufnahme": letzte.isoformat() if letzte else None,
+        "tage_seit_kontakt": tage_seit,
+        "in_7": in_7, "in_28": in_28,
+        "ziel": KADENZ_ZIEL_WOCHE,
+        "offen": len(offen), "gewonnen": len(gewonnen), "gesamt": len(prospects),
+        "urteil": urteil, "satz": satz,
+    }
+
+
+def kadenz_zeile(k):
+    """Ein Satz für Report, Konsole und wöchentliche Meldung."""
+    teile = [f"Kadenz: {k['in_7']}/{k['ziel']} Aktionen (7 Tage)",
+             f"{k['in_28']} in 28 Tagen"]
+    if k["tage_seit_kontakt"] is None:
+        teile.append("letzter Kontakt: nie")
+    else:
+        teile.append(f"letzter Kontakt vor {k['tage_seit_kontakt']} Tagen")
+    teile.append(f"gewonnen: {k['gewonnen']}")
+    return " · ".join(teile) + f" → {k['urteil'].upper()}"
+
+
 def main():
     argv = sys.argv[1:]
     if "--selftest" in argv:
@@ -977,6 +1094,18 @@ def main():
             sys.exit("Nutzung: --note <id>=<text>")
         save_state(state)
         return 0
+
+    if "--kadenz" in argv:
+        data = _load_yaml(DATA_FILE)
+        prospects = [merge_prospect(p, state) for p in (data.get("prospects") or [])]
+        k = kadenz(prospects)
+        if "--json" in argv:
+            print(json.dumps(k, ensure_ascii=False, indent=2))
+        else:
+            print(kadenz_zeile(k))
+        # Exit 1 nur im expliziten Kadenz-Modus: Der Wochenlauf bleibt grün,
+        # der Ausfall wird als Befund gemeldet, nicht als roter Workflow.
+        return 0 if k["urteil"] != "rot" else 1
 
     no_net = "--no-net" in argv
     data = _load_yaml(DATA_FILE)
@@ -1023,6 +1152,8 @@ def main():
     save_state(state)
 
     print(f"Report: {os.path.relpath(REPORT_FILE, BLOG_DIR)}")
+    k = kadenz(prospects, today)
+    print(kadenz_zeile(k))
     print(f"Wochenpack: {len(weekly)} Aktionen · "
           f"offen {sum(1 for p in prospects if p.get('status') in OPEN_STATUSES)} · "
           f"Kampagnen {len(campaigns)}")

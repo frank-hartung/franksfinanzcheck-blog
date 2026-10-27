@@ -1,2 +1,12 @@
 {{- /* Dieselben sechs Themen, Ziele und Live-Zähler wie auf /posts/. */ -}}
-{{- partial "themenwelten.html" (dict "id" "home-themenwelten" "title" "Dein Fixkosten-Kompass – 6 Themenwelten" "home" true) -}}
+{{- /* TITEL-KOHÄRENZ (27.10.2026): Seobility vergleicht die Wörter des
+       <title> mit den Überschriften und meldete „Geld sparen“ und
+       „Verträgen“ als nicht abgedeckt – der Title verspricht genau das,
+       was diese Sektion liefert. Die Startseiten-H2 trägt die Formulierung
+       deshalb jetzt selbst; der Markenbegriff „Fixkosten-Kompass“ bleibt
+       unmittelbar darüber als eigene H2 erhalten (fixkosten_kompass.html)
+       und wird hier nicht doppelt gesetzt.
+       Vertrag: scripts/themenwelten_guard.py prüft auf der Startseite die
+       stabile ID `home-themenwelten` und die Kartenstruktur, auf /posts/
+       weiterhin die Wortgleichheit mit data/themenwelten.json. */ -}}
+{{- partial "themenwelten.html" (dict "id" "home-themenwelten" "title" "Geld sparen bei Fixkosten & Verträgen – 6 Themenwelten" "home" true) -}}

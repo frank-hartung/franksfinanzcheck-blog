@@ -177,6 +177,15 @@
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
+    {{- /* TEILEN (27.10.2026): eigene, textbeschriftete Teilen-Zeile
+           (Mastodon, Pinterest, E-Mail, Link kopieren) statt der
+           Icon-Links aus PaperMod – reine Icon-Links sind Links ohne
+           Linktext und ohne Sprachsteuerungs-Ziel. Details und
+           Begründung: layouts/_partials/ff_teilen.html.
+           Abschaltbar pro Artikel über `disableShare: true`. */ -}}
+    {{- if ne .Params.disableShare true }}
+    {{- partial "ff_teilen.html" (dict "page" . "ort" "artikel") -}}
+    {{- end }}
     {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
     {{- partial "share_icons.html" . -}}
     {{- end }}

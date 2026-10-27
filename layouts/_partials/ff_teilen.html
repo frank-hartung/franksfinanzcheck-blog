@@ -1,0 +1,78 @@
+{{- /* ============================================================
+       TEILEN-ZEILE (27.10.2026)
+       ------------------------------------------------------------
+       Warum: Der Seobility-Check der Startseite monierte „wenige
+       Social-Sharing-Möglichkeiten“ (Nice to have) – und die Seite
+       hatte tatsächlich nur zwei Follow-Links im Footer, aber
+       nirgends eine Möglichkeit, einen Inhalt weiterzugeben.
+       Empfehlen ist für einen unabhängigen Ratgeber der billigste
+       Reichweitenkanal: kein Werbebudget, keine Einbettung, keine
+       Datenweitergabe beim bloßen Seitenaufruf.
+
+       Vertrag:
+         · Jede Aktion hat SICHTBAREN Text („Auf Mastodon teilen“) –
+           ohne Icon: Das DOM-Budget der Artikelseite ist knapp.
+           Reine Icon-Links sind für Crawler Links ohne Linktext und
+           für Sprachsteuerung nicht ansprechbar – genau der Fehler,
+           der hier behoben wird.
+         · Kein Skript, kein Pixel und kein Cookie von Dritten. Die
+           Ziele sind normale Links; sie öffnen erst nach Klick.
+         · „Link kopieren“ ist ein <button> mit Clipboard-API und
+           ehrlichem Fallback (Feld mit markiertem Text), wenn der
+           Browser das Clipboard verweigert – kein toter Knopf.
+         · Titel/URL kommen aus der Seite selbst (Canonical-Host,
+           kein Tracking-Parameter in der geteilten URL).
+       Aufruf: partial "ff_teilen.html" (dict "page" . "ort" "artikel")
+       ============================================================ */ -}}
+{{- $seite := .page | default . -}}
+{{- $ort := .ort | default "artikel" -}}
+{{- $url := $seite.Permalink -}}
+{{- $titel := $seite.Title | plainify -}}
+{{- $text := printf "%s – %s" $titel $url -}}
+<aside class="ff-teilen" data-ff-teilen="{{ $ort }}" aria-label="Diese Seite teilen">
+  <p class="ff-teilen__titel">Teilen &amp; weiterempfehlen</p>
+  {{- /* Warum keine <ul>/<li> und keine Icons mehr (27.10.2026): Die
+         Teilen-Zeile steht auf jeder Artikelseite. Vier Icons kosteten
+         12 DOM-Elemente, die Listenstruktur fünf weitere – genug, um eine
+         ohnehin schwere Seite über die harte Lighthouse-Grenze von 1400
+         Elementen zu schieben (gemessen: 1414 statt 1384). Die Chips
+         tragen ihren Namen als Text; ein Icon daneben wäre nur Dekoration,
+         die man auch vorlesen müsste. */ -}}
+  <p class="ff-teilen__liste">
+    <a class="ff-teilen__aktion" rel="nofollow noopener noreferrer" target="_blank"
+       href="https://mastodon.social/share?text={{ $text | urlquery }}"
+       data-klick="share_click" data-klick-netzwerk="mastodon" data-klick-placement="{{ $ort }}">Auf Mastodon teilen</a>
+    <a class="ff-teilen__aktion" rel="nofollow noopener noreferrer" target="_blank"
+       href="https://www.pinterest.com/pin/create/button/?url={{ $url | urlquery }}&amp;description={{ $titel | urlquery }}"
+       data-klick="share_click" data-klick-netzwerk="pinterest" data-klick-placement="{{ $ort }}">Auf Pinterest merken</a>
+    <a class="ff-teilen__aktion"
+       href="mailto:?subject={{ printf "Empfehlung: %s" $titel | urlquery }}&amp;body={{ printf "Diesen Ratgeber fand ich hilfreich: %s" $text | urlquery }}"
+       data-klick="share_click" data-klick-netzwerk="email" data-klick-placement="{{ $ort }}">Per E-Mail empfehlen</a>
+    <button class="ff-teilen__aktion" type="button" data-ff-teilen-kopieren="{{ $url }}"
+            data-klick="share_click" data-klick-netzwerk="kopie" data-klick-placement="{{ $ort }}">Link kopieren</button>
+  </p>
+  <p class="ff-teilen__status" role="status" aria-live="polite" data-ff-teilen-status></p>
+</aside>
+{{- if not (.page.Scratch.Get "ffTeilenSkript") -}}
+{{- .page.Scratch.Set "ffTeilenSkript" true -}}
+<script>
+  (function () {
+    var knopf = document.querySelector('[data-ff-teilen-kopieren]');
+    if (!knopf) { return; }
+    var status = knopf.closest('.ff-teilen').querySelector('[data-ff-teilen-status]');
+    function melden(text) { if (status) { status.textContent = text; } }
+    knopf.addEventListener('click', function () {
+      var url = knopf.getAttribute('data-ff-teilen-kopieren');
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        melden('Bitte die Adresse aus der Seitenleiste kopieren: ' + url);
+        return;
+      }
+      navigator.clipboard.writeText(url).then(function () {
+        melden('Link kopiert.');
+      }, function () {
+        melden('Kopieren wurde vom Browser verweigert – bitte die Adresse aus der Seitenleiste kopieren: ' + url);
+      });
+    });
+  })();
+</script>
+{{- end -}}

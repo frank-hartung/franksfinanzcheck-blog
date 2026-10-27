@@ -2350,10 +2350,16 @@ Regeln:
   die Anzahl der H2. Wer eine Rangstufe überspringt, ändert die Markdown-Ebene
   (`####` → `###`), nicht das Aussehen.
 - **Verdrahtung:** `e2e.yml` (jeder PR) fährt `seo_cockpit --fail-on
-  description-length,description-breite,link-no-anchor,heading-order` und
-  `metadaten_wache`; `npm run serp:check` ist der lokale Zwilling. Bewusst
-  **kein** Deploy-Blocker: ein zu langes Snippet darf die Auslieferung der
-  Live-Site nicht anhalten (C34), es darf aber nicht unbemerkt nach `main`.
+  description-length,description-breite,heading-order`, die
+  `linktext_wache` (Linktexte und Alt-Texte) und `metadaten_wache`;
+  `npm run serp:check` ist der lokale Zwilling. Bewusst **kein**
+  Deploy-Blocker: ein zu langes Snippet darf die Auslieferung der Live-Site
+  nicht anhalten (C34), es darf aber nicht unbemerkt nach `main`.
+- **Ein Befund, eine Wache.** Ankertext (`link-no-anchor`) steht im Cockpit
+  weiter im Bericht, sperrt aber nicht: derselbe Befund kam am 27.10.2026
+  auch über Seobility und hat mit `scripts/linktext_wache.py` eine breitere
+  Wache mit eigenen Ausnahmen (`data-ff-linktext-frei`, `<a>` ohne `href`)
+  und Selbsttest bekommen. Zwei Wachen für einen Befund laufen auseinander.
 
 Vertrag: Bericht `SERP-SPIEGEL-SCREAMING-FROG-HIGHEND-2026-10-27.md` ·
 Selbsttests `metadaten_wache --selftest` (13 Proben) und

@@ -16,8 +16,13 @@
     {{- end -}}
   {{- end -}}
   {{- if $gewaehlt -}}
+  {{- /* ANKERTEXT PRÄZISE (27.10.2026): Der Link trug Name UND
+         Kurzbeschreibung des Werkzeugs (bis 132 Zeichen Ankertext,
+         Seobility: „Linktexte zu lang"). Der Linktext ist jetzt der
+         Werkzeugname, die Beschreibung steht sichtbar daneben – für Leser
+         ändert sich nichts, für Crawler wird das Ziel eindeutig. */ -}}
   <aside class="ff-weiterrechnen" role="complementary" aria-label="Passendes Werkzeug" style="margin:1.25rem 0;padding:1rem 1.25rem;border:1px solid var(--border,rgba(15,23,42,.12));border-radius:12px;">
-    Weiterrechnen: <a href="{{ printf "werkzeuge/%s/" $gewaehlt.slug | relURL }}">{{ $gewaehlt.name }} – {{ $gewaehlt.kurz }}</a>
+    Weiterrechnen: <a class="ff-weiterrechnen__link" href="{{ printf "werkzeuge/%s/" $gewaehlt.slug | relURL }}">{{ $gewaehlt.name }}</a><span class="ff-weiterrechnen__kurz"> – {{ $gewaehlt.kurz }}</span>
   </aside>
   {{- end -}}
 {{- end -}}

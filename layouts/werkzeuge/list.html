@@ -28,17 +28,21 @@
     {{- range $daten.werkzeuge }}
     {{- $stufe := "" -}}
     {{- with where $kompass.stages "id" .kompass -}}{{- $stufe = (index . 0).title -}}{{- end -}}
-    <a class="ff-wz-karte" href="{{ printf "werkzeuge/%s/" .slug | relURL }}">
+    {{- /* ANKERTEXT PRÄZISE (27.10.2026): Die Karte war ein Link aus Stufe,
+           Name, Kurzbeschreibung und Format-Chips (bis 158 Zeichen). Jetzt ist
+           der Werkzeugname der Link, die Karte bleibt per Inset-Overlay ganz
+           klickbar (zzzz-seo-und-teilen.css). */ -}}
+    <article class="ff-wz-karte">
       <span class="ff-wz-karte__icon" aria-hidden="true">{{ .icon }}</span>
       <span class="ff-wz-karte__stufe">{{ $stufe }}</span>
-      <strong class="ff-wz-karte__name">{{ .name }}</strong>
+      <strong class="ff-wz-karte__name"><a class="ff-wz-karte__title-link" href="{{ printf "werkzeuge/%s/" .slug | relURL }}" data-klick="cta_click" data-klick-cta="werkzeug-{{ .id }}" data-klick-slug="werkzeug-{{ .id }}" data-klick-placement="werkzeuge-hub">{{ .name }}</a></strong>
       <span class="ff-wz-karte__kurz">{{ .kurz }}</span>
       <span class="ff-wz-karte__meta">
         {{- range .exporte }}<span class="ff-wz-karte__format">{{ . | upper }}</span>{{ end -}}
         {{- if .speicher }}<span class="ff-wz-karte__format">Lokal speicherbar</span>{{ end -}}
       </span>
       <span class="ff-wz-karte__cta" aria-hidden="true">Öffnen →</span>
-    </a>
+    </article>
     {{- end }}
   </section>
 

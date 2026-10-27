@@ -65,6 +65,8 @@ on:
       - "scripts/tests/test_serp_limits.py"
       - "scripts/tests/test_seo_cockpit.py"
       - "scripts/tests/test_metadaten_wache.py"
+      - "scripts/linktext_wache.py"
+      - "scripts/tests/test_linktext_wache.py"
       - "tools/seo-cockpit/**"
       - "scripts/manifest_guard.py"
       - "scripts/tests/test_manifest_guard.py"
@@ -179,27 +181,41 @@ jobs:
       #  Auslieferung der Live-Site nicht anhalten (C34), es darf aber nicht
       #  unbemerkt in main wandern. Grenzen und Breitenmaß stehen in
       #  scripts/serp_limits.py; dieselben Zahlen prüft metadaten_wache.py
-      #  an der Quelle – `--fail-on` sperrt genau die vier Codes.
+      #  an der Quelle – `--fail-on` sperrt genau die drei Codes.
+      #  Ankertext und Alt-Texte prüft daneben `scripts/linktext_wache.py`
+      #  (aus dem Seobility-Lauf vom 27.10.2026, mit eigenen Ausnahmen und
+      #  Selbsttest). Zwei Wachen für einen Befund laufen auseinander –
+      #  deshalb steht `link-no-anchor` hier NICHT in der Sperrliste; das
+      #  Cockpit führt die Zeile weiter im Bericht.
       # ------------------------------------------------------------------
-      - name: Snippet-Gate – Snippetfenster, Ankertext, Rangfolge
+      - name: Snippet-Gate – Snippetfenster und Rangfolge
         run: |
           set +e
           protokoll="${RUNNER_TEMP:-/tmp}/snippet-gate.log"
           python3 scripts/seo_cockpit.py --build public \
             --output "${RUNNER_TEMP:-/tmp}/seo-cockpit-pr" \
-            --fail-on description-length,description-breite,link-no-anchor,heading-order \
+            --fail-on description-length,description-breite,heading-order \
             | tee "$protokoll"
           gate_status=${PIPESTATUS[0]}
           {
-            echo "### Snippet-Gate (155 Zeichen · 985 px · Ankertext · Rangfolge)"
+            echo "### Snippet-Gate (155 Zeichen · 985 px · Rangfolge)"
             echo '```'
             tail -n 30 "$protokoll"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           if [ "$gate_status" -ne 0 ]; then
-            echo "::error title=Snippet-Gate::Snippet, Ankertext oder Rangfolge verletzt – die Grenzen stehen in scripts/serp_limits.py"
+            echo "::error title=Snippet-Gate::Snippet oder Rangfolge verletzt – die Grenzen stehen in scripts/serp_limits.py"
           fi
           exit "$gate_status"
+
+      # Ankertext und Alt-Texte: eine Wache, ein Besitzer (27.10.2026).
+      # Der Seobility-Lauf hat dieselbe Klasse gefunden wie der fremde Crawl;
+      # `linktext_wache.py` prüft sie am gerenderten HTML – inklusive der
+      # begründeten Ausnahmen (`data-ff-linktext-frei`, `<a>` ohne `href`).
+      - name: Linktext-Wache – Linktexte und Alt-Texte im Build
+        run: |
+          python3 scripts/linktext_wache.py --selftest
+          python3 scripts/linktext_wache.py --public public
 
       - name: Metadaten-Wache – Quelle (Titel, Description, Belege)
         run: python3 scripts/metadaten_wache.py

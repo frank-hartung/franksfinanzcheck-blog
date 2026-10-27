@@ -138,15 +138,25 @@ try {
     check(await page.locator('.ff-mini-toc').count() === 0, `${test.name}: keine überlagernde Artikel-Navigation`);
     for (const topic of DATA.topics) {
       const card = page.locator(`.ff-topic-card[data-topic="${topic.id}"]`);
-      // Der native Linkname enthält jetzt alle sichtbaren Karten-Texte.
-      // „exact: true“ auf nur den H3-Titel war eine veraltete Testerwartung
-      // und würde die WCAG-2.5.3-Korrektur auf jeder Viewport-Größe ablehnen.
-      check(await card.and(page.getByRole('link', { name: topic.title })).count() === 1
-        && await card.isVisible(), `${test.name}: Linkname enthält den sichtbaren Titel ${topic.id}`);
-      const accessible = await card.ariaSnapshot();
-      check(accessible.includes(topic.description) && accessible.includes('Zum Thema'),
-        `${test.name}: Linkname enthält Beschreibung und sichtbaren CTA ${topic.id}`);
-      check(await card.getAttribute('href') === `${BASE_PATH}pillar/${topic.id}/`, `${test.name}: URL ${topic.id}`);
+      // 27.10.2026: Ankertext ist NUR der Kartentitel (kurz und präzise,
+      // Seobility „Linktexte zu lang"), die Karte selbst ist kein Link mehr.
+      // Der zugängliche Name des einen Links ist deshalb EXAKT der Titel.
+      // Kind-Locator, nicht `.and()`: Die Karte IST kein Link mehr, der Link
+      // liegt als einziges <a> darin. `.and()` würde die Schnittmenge zweier
+      // Elemente verlangen – also nichts finden.
+      const titelLink = card.getByRole('link', { name: topic.title, exact: true });
+      check(await titelLink.count() === 1 && await card.isVisible(),
+        `${test.name}: genau ein Link, Name = sichtbarer Titel ${topic.id}`);
+      check(await card.locator('a').count() === 1,
+        `${test.name}: Karte trägt genau einen Link ${topic.id}`);
+      // Sichtbarkeit wird am gerenderten Text gemessen, NICHT am
+      // Barrierefreiheitsbaum: Der CTA ist seit dem Karten-Umbau aria-hidden
+      // (sonst stünde er im Linknamen). Er muss trotzdem sichtbar bleiben.
+      const sichtbar = (await card.innerText()).replace(/\s+/g, ' ');
+      check(sichtbar.includes(topic.description) && sichtbar.includes('Zum Thema'),
+        `${test.name}: Beschreibung und CTA bleiben sichtbar (ohne Linknamen) ${topic.id}`);
+      check(await card.locator('.ff-topic-card__title-link').first().getAttribute('href') ===
+        `${BASE_PATH}pillar/${topic.id}/`, `${test.name}: URL ${topic.id}`);
     }
     const metrics = await page.evaluate(() => {
       const cards = [...document.querySelectorAll('.ff-topic-card')];
@@ -213,12 +223,25 @@ try {
   await page.locator('.ff-posts-jump').focus();
   for (const topic of DATA.topics) {
     await page.keyboard.press('Tab');
-    const focus = await page.evaluate(() => ({
-      topic: document.activeElement.dataset.topic,
-      outline: getComputedStyle(document.activeElement).outlineStyle,
-      width: parseFloat(getComputedStyle(document.activeElement).outlineWidth),
-    }));
-    check(focus.topic === topic.id && focus.outline !== 'none' && focus.width >= 3, `Tastatur: ${topic.title} in Reihenfolge mit sichtbarem Fokus`);
+    // 27.10.2026: fokussiert ist der Titel-Link; der Fokusring liegt auf der
+    // KARTE (CSS `:has(:focus-visible)`), damit er nicht wie ein Link mitten
+    // im Text aussieht. Beides wird geprüft: Fokus sitzt im richtigen Link,
+    // sichtbarer Ring liegt auf der Karte.
+    const focus = await page.evaluate(() => {
+      const aktiv = document.activeElement;
+      const karte = aktiv.closest('.ff-topic-card');
+      const ring = karte ? getComputedStyle(karte) : null;
+      return {
+        topic: karte ? karte.dataset.topic : null,
+        inKarte: !!aktiv.closest('.ff-topic-card'),
+        outline: ring ? ring.outlineStyle : 'none',
+        width: ring ? parseFloat(ring.outlineWidth) : 0,
+        name: aktiv.getAttribute('class') || '',
+      };
+    });
+    check(focus.topic === topic.id && focus.inKarte && focus.name.includes('ff-topic-card__title-link')
+      && focus.outline !== 'none' && focus.width >= 3,
+      `Tastatur: ${topic.title} in Reihenfolge mit sichtbarem Fokus`);
   }
   await page.keyboard.press('Enter');
   await page.waitForURL(url('pillar/mietwagen/'));
@@ -226,7 +249,24 @@ try {
 
   for (const topic of DATA.topics) {
     await page.goto(url('posts/'), { waitUntil: 'networkidle' });
-    await page.locator(`.ff-topic-card[data-topic="${topic.id}"] .ff-topic-description`).click();
+    const karte = page.locator(`.ff-topic-card[data-topic="${topic.id}"]`);
+    // In die Mitte scrollen: sonst liegt die Karte unter dem Sticky-Header
+    // und der Mausklick träfe die Kopfzeile statt der Karte.
+    await karte.evaluate(el => el.scrollIntoView({ block: 'center' }));
+    // Trefferfläche messen, nicht behaupten: Ein Punkt mitten im Anriss
+    // muss beim Titel-Link landen (Inset-Overlay). Vorher lag dort die
+    // <p>-Box selbst – die Karte war nur am Titel klickbar.
+    const imAnriss = await karte.evaluate(el => {
+      const desc = el.querySelector('.ff-topic-description');
+      const r = desc.getBoundingClientRect();
+      const treffer = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      return !!(treffer && treffer.closest('.ff-topic-card__title-link'));
+    });
+    check(imAnriss, `Ganze Karte klickbar (Overlay deckt den Anriss): ${topic.id}`);
+    // `force: true` ist hier die Aussage: Der Klick geht auf die Koordinate,
+    // das Overlay fängt ihn – Playwright würde sonst genau das verweigern,
+    // was der Test beweisen soll.
+    await karte.locator('.ff-topic-description').click({ force: true });
     await page.waitForURL(url(`pillar/${topic.id}/`));
     check(await page.locator('main h1').count() === 1, `Ganze Karte klickbar, Ziel erreichbar: ${topic.id}`);
   }
@@ -240,11 +280,32 @@ try {
   await page.locator('.ff-posts-jump').click();
   await page.waitForURL(url('posts/#neueste-artikel'));
   check((await page.locator('#neueste-artikel').boundingBox()).y >= 60, 'Sprung zur Artikelliste nicht vom Header verdeckt');
-  const firstArticle = await page.locator('.ff-posts-feed .entry-link').first().getAttribute('href');
+  // KARTEN-LINK (27.10.2026): Der Linktext steckt jetzt im Kartentitel
+  // (`.entry-title-link`), die Trefferfläche zieht ein Inset-Overlay auf die
+  // ganze Karte. Die Prüfung deckt beides ab: Ziel-Href am Titelanker und
+  // Klick auf den Anriss (Overlay) – vorher lag dort ein leerer `.entry-link`.
+  const firstCard = page.locator('.ff-posts-feed .post-entry').first();
+  const firstArticle = await firstCard.locator('.entry-title-link').getAttribute('href');
+  check(await firstCard.locator('.entry-title-link').innerText() !== '', 'Kartenlink trägt einen sichtbaren Ankertext');
+  // Trefferfläche messen statt behaupten: Ein Punkt im Anriss muss beim
+  // Titelanker landen (Inset-Overlay). `force: true` ist die Aussage des
+  // Tests – der Klick geht auf die Koordinate, das Overlay fängt ihn.
+  await firstCard.evaluate(el => el.scrollIntoView({ block: 'center' }));
+  const imAnriss = await firstCard.evaluate(el => {
+    const body = el.querySelector('.entry-content');
+    const r = body.getBoundingClientRect();
+    const treffer = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    return !!(treffer && treffer.closest('.entry-title-link'));
+  });
+  check(imAnriss, 'Ganze Karte klickbar (Overlay deckt den Anriss des Artikels)');
+  await firstCard.locator('.entry-content').click({ force: true });
+  await page.waitForURL('**' + firstArticle);
+  check(await page.locator('main h1').count() === 1, 'Ganze Karte klickbar (Overlay des Titelankers)');
+  await page.goBack({ waitUntil: 'networkidle' });
   await page.locator('.pagination .next').click();
   await page.waitForURL(url('posts/page/2/'));
   check(await page.locator('.ff-topics, .ff-posts-guide, .ff-filter-bar').count() === 0, 'Seite 2 ohne duplizierte Themen/Einleitung');
-  check(await page.locator('.ff-posts-feed .entry-link').count() > 0, 'Seite 2 enthält ältere Artikel');
+  check(await page.locator('.ff-posts-feed .entry-title-link').count() > 0, 'Seite 2 enthält ältere Artikel');
   await page.locator('.ff-posts-jump').click();
   await page.waitForURL(url('posts/#deine-6-themenwelten'));
   check(await page.locator('.ff-topic-card').count() === 6, 'Rückweg von Seite 2 zu allen Themen');
