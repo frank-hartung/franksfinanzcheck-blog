@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 27.10.2026 11:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 27.10.2026 11:42 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
