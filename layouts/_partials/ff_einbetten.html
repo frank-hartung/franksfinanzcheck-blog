@@ -1,0 +1,104 @@
+{{- /* ============================================================
+       EINBETT-SNIPPET (27.10.2026)
+       ------------------------------------------------------------
+       Warum: Der Seobility-Check nennt als einzigen KRITISCHEN Punkt
+       „fast keine Links von anderen Webseiten". Der wirksamste
+       redaktionelle Hebel dagegen ist kein Pitch, sondern ein
+       fertiges Angebot: Wer eine Grafik mit einem Copy-Paste-Block
+       (Bild + Quellenzeile MIT Link) bekommt, verlinkt häufiger als
+       jemand, der erst ein `<figure>` bauen muss. Genau das ist der
+       Unterschied zwischen „Die Grafik darf genutzt werden" und
+       „Hier ist der Code".
+
+       Regeln:
+         · Der Link steht IM Snippet (Bild verlinkt + Quellenzeile),
+           absolute URL, kein Tracking-Parameter, rel nicht nofollow –
+           wer einbettet, verlinkt freiwillig und nachvollziehbar.
+         · Kein Skript, kein iframe, kein Cookie: statisches HTML.
+         · Der Text darunter nennt die Lizenz in einem Satz und die
+           Bedingung (Quellenzeile + Link) – Einbetten bleibt
+           freiwillig, nichts wird erzwungen.
+         · Kopieren per <button> mit Clipboard-API und ehrlichem
+           Fallback (Text steht sichtbar im <pre> und ist markierbar).
+
+       Aufruf:
+         partial "ff_einbetten.html" (dict
+             "seite" . "bild" "/downloads/x.svg" "breite" 1200 "hoehe" 628
+             "alt" "…" "quelle" "FranksFinanzcheck, … Q4 2026"
+             "presse_seite" false "ziel" "/studien/x/")
+       · presse_seite: true auf /presse/ selbst – dort entfallen der
+         Rückverweis auf die Presseseite (Selbstlink) und der zweite
+         Download-Link (die Datei steht dort schon in der Liste).
+       · ziel: Linkziel IM Snippet. Standard ist die aktuelle Seite –
+         auf /presse/ ist das falsch, denn die Quellenzeile soll auf die
+         Ausgabeseite zeigen (dort stehen Rechnung, Quellen, Methodik).
+       ============================================================ */ -}}
+{{- $seite := .seite -}}
+{{- $bild := .bild | absURL -}}
+{{- /* int-Cast: Shortcode-Parameter kommen als String – ohne Cast
+       rendert printf %d „%!d(string=1200)“ in den kopierbaren Code. */ -}}
+{{- $breite := int (.breite | default 1200) -}}
+{{- $hoehe := int (.hoehe | default 628) -}}
+{{- $alt := .alt | default "" -}}
+{{- $quelle := .quelle | default $seite.Title -}}
+{{- $url := .ziel | default $seite.Permalink -}}
+{{- if hasPrefix $url "/" }}{{ $url = $url | absURL }}{{ end -}}
+{{- $presseSeite := .presse_seite | default false -}}
+{{- /* ID pro Grafik, damit zwei Einbett-Blöcke auf einer Seite keine
+       doppelten IDs erzeugen (der Kopier-Knopf zielt auf diese ID). */ -}}
+{{- $id := printf "ff-einbetten-%s" (path.BaseName $bild) -}}
+{{- $snippet := printf `<figure>
+  <a href="%s">
+    <img src="%s" width="%d" height="%d" alt="%s" loading="lazy">
+  </a>
+  <figcaption>Grafik: <a href="%s">%s</a></figcaption>
+</figure>` $url $bild $breite $hoehe $alt $url $quelle -}}
+{{- /* Die Überschrift steht AUSSERHALB der <section>: Der Chunker-Vertrag
+       (scripts/layout_audit.py, seit 27.10.2026 als Hart-Gate) verlangt,
+       dass jede H2/H3 mit id im Artikelinhalt ein direkter Block des
+       Inhalts ist – sonst reißt die Text-Teilung den Container auf.
+       Die <section> hängt ihren Namen trotzdem an diese id. */ -}}
+<h2 class="ff-einbetten__titel" id="{{ $id }}-titel">Grafik einbetten</h2>
+<section class="ff-einbetten" aria-labelledby="{{ $id }}-titel">
+  <p class="ff-einbetten__intro">
+    Diesen Block dürfen Redaktionen, Blogs und Verbraucherorganisationen unverändert
+    übernehmen – Bild und Quellenzeile, beides mit Link auf die Ausgabeseite.
+    Bedingung: Quellenzeile und Link bleiben erhalten.
+    {{- if not $presseSeite }} Mehr unter
+    <a href="{{ "presse/" | relURL }}">Presse &amp; Expertise</a>.{{ end }}
+  </p>
+  {{- /* Ohne tabindex: Der Code bricht um, statt waagerecht zu scrollen –
+         ein Scrollbereich ohne Tastaturzugang wäre ein WCAG-Verstoß
+         (axe: scrollable-region-focusable). */ -}}
+  <pre class="ff-einbetten__code" id="{{ $id }}"><code>{{ $snippet }}</code></pre>
+  <p class="ff-einbetten__aktionen">
+    <button class="ff-einbetten__knopf" type="button" data-ff-einbetten-kopieren="{{ $id }}">
+      Einbett-Code kopieren
+    </button>
+    {{- if not $presseSeite }}
+    <a class="ff-einbetten__link" href="{{ .bild | relURL }}">Grafik einzeln herunterladen (SVG)</a>
+    {{- end }}
+  </p>
+  <p class="ff-einbetten__status" role="status" aria-live="polite" data-ff-einbetten-status></p>
+</section>
+<script>
+  (function () {
+    var knopf = document.currentScript.previousElementSibling.querySelector('[data-ff-einbetten-kopieren]');
+    if (!knopf) { return; }
+    var block = document.getElementById(knopf.getAttribute('data-ff-einbetten-kopieren'));
+    var status = knopf.closest('.ff-einbetten').querySelector('[data-ff-einbetten-status]');
+    function melden(t) { if (status) { status.textContent = t; } }
+    knopf.addEventListener('click', function () {
+      var text = block ? block.innerText : '';
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        melden('Bitte den Code oben markieren und kopieren.');
+        return;
+      }
+      navigator.clipboard.writeText(text).then(function () {
+        melden('Einbett-Code kopiert.');
+      }, function () {
+        melden('Der Browser hat das Kopieren verweigert – bitte den Code oben markieren und kopieren.');
+      });
+    });
+  })();
+</script>

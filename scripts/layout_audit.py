@@ -134,8 +134,16 @@ def check_internal_links():
     # Härtung 2026-10 (py/bad-tag-filter, 2. Runde): End-Tags mit BELIEBIGEM
     # Inhalt vor „>“ („</script >“, „</script\t\n bar>“) müssen erfasst
     # werden, sonst rutscht Skript-Inhalt als href-Quelle in die Prüfung.
-    NOISE_RE = re.compile(r"<!--.*?-->|<script\b.*?</script[^>]*>|<style\b.*?</style[^>]*>",
-                          re.S | re.I)
+    # CODE-BLÖCKE (27.10.2026): Seit dem Einbett-Block steht auf /presse/ und
+    # in der Q4-Studie ein HTML-Snippet im `<pre>`. Hugo escaped die spitzen
+    # Klammern, die Anführungszeichen bleiben aber literal – der Scanner sah
+    # darin vier „kaputte interne Links“ (`…/studien/…">`). Ein Code-Beispiel
+    # ist Text, kein Markup: derselbe Grund wie bei <script>, deshalb
+    # dieselbe Behandlung. Echte Links stehen nie in einem <pre>.
+    NOISE_RE = re.compile(
+        r"<!--.*?-->|<script\b.*?</script[^>]*>|<style\b.*?</style[^>]*>"
+        r"|<pre\b.*?</pre\s*>",
+        re.S | re.I)
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()
         text = NOISE_RE.sub(" ", text)

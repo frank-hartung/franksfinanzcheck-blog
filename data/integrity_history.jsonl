@@ -346,4 +346,6 @@
 {"date": "2026-10-26", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-26", "kritisch": 0, "fest": 3, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html", "layouts/_partials/header.html", "layouts/pillar/single.html"]}
 {"date": "2026-10-26", "kritisch": 1, "fest": 5, "modus": "set-current", "geaendert": ["assets/css/extended/custom.css", "layouts/_partials/cover.html", "layouts/_partials/extend_footer.html", "layouts/_partials/extend_post_content.html", "layouts/_partials/head.html", "layouts/pillar/single.html"]}
+{"date": "2026-10-27", "kritisch": 0, "fest": 4, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html", "layouts/_partials/header.html", "layouts/_partials/home_clusters.html", "layouts/pillar/single.html"]}
 {"date": "2026-10-27", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["hugo.toml"]}
+{"date": "2026-10-27", "kritisch": 0, "fest": 4, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html", "layouts/_partials/header.html", "layouts/_partials/home_clusters.html", "layouts/pillar/single.html"]}

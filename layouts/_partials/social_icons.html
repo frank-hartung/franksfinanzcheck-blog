@@ -1,0 +1,28 @@
+{{- /* ============================================================
+       SOCIAL-ICONS – Site-Override von PaperMod (27.10.2026)
+       ------------------------------------------------------------
+       Quelle bleibt `site.Params.socialIcons` in hugo.toml – dieselbe
+       Liste speist Person-/Organization-`sameAs` (layouts/_partials/
+       extend_head.html) und das `rel="me"`-Gegenstück im Footer.
+       Wache: scripts/entity_marken_gate.py (E4/E5/E8).
+
+       ÄNDERUNG: Die beiden Profil-Links bestanden nur aus einem SVG
+       und einem `title` – für Crawler „Links ohne Linktext“
+       (Seobility-Startseiten-Check: 8 solche Links, davon 2 hier),
+       für Sprachsteuerung namenlos. Der sichtbare Icon-Link bekommt
+       jetzt seinen Namen als `.sr-only`-Text; Optik, Ziel, `rel` und
+       `title` bleiben unverändert. Kein zusätzliches Markup im
+       sichtbaren Fluss (absolute Positionierung, 1×1 px).
+       ============================================================ */ -}}
+<div class="social-icons" {{ with .align}}align="{{.}}" {{- end }}>
+    {{- range site.Params.socialIcons }}
+    {{- $name := .title | default .name }}
+    <a href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+        title="{{ $name | title }}">
+        {{- partial "svg.html" . -}}
+        {{- /* Das SVG ist Schmuck (keine eigene Beschriftung); der
+               Linkname steht als Text im Link. */ -}}
+        <span class="sr-only">{{ $name }}</span>
+    </a>
+    {{- end }}
+</div>

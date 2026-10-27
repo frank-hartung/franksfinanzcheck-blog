@@ -12,9 +12,17 @@
                 {{- /* FCP-/DOM-Optimierung: Logo nicht als inline SVG-Pfade in den
                      DOM injizieren. Externes, dimensioniertes SVG konkurriert dank
                      fetchpriority=low nicht mit dem LCP-Cover. */ -}}
-                <picture class="ff-brand-logo" aria-hidden="true">
+                {{- /* ALT-TEXT (27.10.2026): Das Logo trug `alt=""` und lag in
+                     einem `aria-hidden`-Bild – für Seobility ein Bild ohne
+                     Alternativtext (Startseiten-Check „Bilder-Optimierung“),
+                     für Screenreader ein Markenlink, dessen Name nur aus dem
+                     Claim bestand. Das Bild trägt jetzt den Markennamen; der
+                     Linkname ist damit „FranksFinanzcheck – Unabhängige
+                     Fixkosten-Redaktion“. Kein zusätzlicher Request, keine
+                     Layoutänderung (Breite/Höhe unverändert). */ -}}
+                <picture class="ff-brand-logo">
                     <source media="(prefers-color-scheme: dark)" srcset="{{ partial "asset_url.html" "images/brand/logo-light.svg" }}">
-                    <img src="{{ partial "asset_url.html" "images/brand/logo.svg" }}" width="262" height="30" alt="" loading="eager" decoding="async" fetchpriority="low" data-ff-fcp-image="logo">
+                    <img src="{{ partial "asset_url.html" "images/brand/logo.svg" }}" width="262" height="30" alt="FranksFinanzcheck" loading="eager" decoding="async" fetchpriority="low" data-ff-fcp-image="logo">
                 </picture>
                 <span class="ff-brand-descriptor">Unabhängige Fixkosten-Redaktion</span>
             </a>

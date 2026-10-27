@@ -181,7 +181,9 @@ test.describe('Saisonale Startseite', () => {
     const saison = await block.getAttribute('data-ff-saison');
     const minKarten = (erwartet && erwartet.id === saison) ? erwartet.min_artikel : 3;
 
-    const karten = page.locator('a.ff-saison-card');
+    // 27.10.2026: Karte = <article>, Anker ist der Titel (kurzer, präziser
+    // Linktext). Die Klickfläche über die ganze Karte liefert das CSS.
+    const karten = page.locator('article.ff-saison-card');
     const anzahl = await karten.count();
     expect(anzahl, `Saison-Block zeigt ${anzahl} Karten, min_artikel verlangt ${minKarten}`)
       .toBeGreaterThanOrEqual(minKarten);
@@ -192,7 +194,9 @@ test.describe('Saisonale Startseite', () => {
 
     for (let i = 0; i < anzahl; i++) {
       const karte = karten.nth(i);
-      const href = await karte.getAttribute('href');
+      const titelLink = karte.locator('.ff-saison-card__titel-link');
+      expect(await karte.locator('a').count(), `Karte ${i + 1}: genau ein Link`).toBe(1);
+      const href = await titelLink.getAttribute('href');
       expect(href, `Karte ${i + 1} ohne Ziel`).toBeTruthy();
       const antwort = await page.request.get(href);
       expect(antwort.status(), `Karte ${i + 1} (${href}) nicht erreichbar`).toBe(200);
@@ -208,18 +212,31 @@ test.describe('Saisonale Startseite', () => {
       expect(await karte.getAttribute('data-klick-placement')).toBe('start-saison');
       expect(await karte.getAttribute('data-klick-saison')).toBe(saison);
       expect(await karte.getAttribute('data-klick-slug')).toMatch(new RegExp(`^saison-${saison}-`));
-      // Der Linkname muss ALLE sichtbaren Texte enthalten, nicht bloß den
-      // Titel per aria-labelledby (WCAG 2.5.3 / Sprachsteuerung).
+      // Der Linkname ist EXAKT der sichtbare Titel (WCAG 2.5.3: der
+      // sichtbare Text, den man ansagt, ist der Linktext). Datum, Thema und
+      // CTA bleiben sichtbar, stehen aber nicht im Linknamen – sonst wäre
+      // der Ankertext wieder unscharf (Seobility-Befund vom 27.10.2026).
       expect(await karte.getAttribute('aria-labelledby')).toBeNull();
-      const linkname = await karte.ariaSnapshot();
+      expect(await titelLink.getAttribute('aria-labelledby')).toBeNull();
+      await expect(titelLink).toHaveAccessibleName(titel);
+      const linkname = await titelLink.ariaSnapshot();
       expect(linkname, `Karte ${i + 1}: Titel nicht im Linknamen`).toContain(titel);
-      expect(linkname, `Karte ${i + 1}: Datum nicht im Linknamen`).toContain(await karte.locator('time').innerText());
-      expect(linkname, `Karte ${i + 1}: sichtbarer CTA nicht im Linknamen`).toContain('Weiterlesen');
+      expect(linkname, `Karte ${i + 1}: CTA gehört nicht in den Linknamen`).not.toContain('Weiterlesen');
+      expect(linkname, `Karte ${i + 1}: Datum gehört nicht in den Linknamen`).not.toContain(
+        await karte.locator('time').innerText());
+      // Datum und CTA sind weiterhin SICHTBAR (nur nicht im Linknamen) –
+      // sonst wäre die Karte ärmer geworden, als sie kürzer zu benennen.
+      const sichtbar = (await karte.innerText()).replace(/\s+/g, ' ');
+      expect(sichtbar, `Karte ${i + 1}: Datum nicht mehr sichtbar`).toContain(
+        await karte.locator('time').innerText());
+      expect(sichtbar, `Karte ${i + 1}: CTA nicht mehr sichtbar`).toContain('Weiterlesen');
     }
 
     // Keine Dubletten im Block
     const ziele = [];
-    for (let i = 0; i < anzahl; i++) ziele.push(await karten.nth(i).getAttribute('href'));
+    for (let i = 0; i < anzahl; i++) {
+      ziele.push(await karten.nth(i).locator('.ff-saison-card__titel-link').getAttribute('href'));
+    }
     expect(new Set(ziele).size, 'Saison-Block zeigt denselben Artikel mehrfach').toBe(ziele.length);
 
     const ratgeber = page.locator('a.ff-saison-pillar');
@@ -329,7 +346,9 @@ test.describe('Saisonale Startseite', () => {
       expect(overflow.block, `Saison-Block läuft horizontal über (${overflow.block}px`)
         .toBeLessThanOrEqual(1);
 
-      const hoehen = await page.evaluate(() => [...document.querySelectorAll('a.ff-saison-card, a.ff-saison-pillar')]
+      // Tap-Ziel ist die KARTE (das Inset-Overlay des Titel-Links füllt sie
+      // vollständig) – der Text-Anker selbst ist nur eine Zeile hoch.
+      const hoehen = await page.evaluate(() => [...document.querySelectorAll('article.ff-saison-card, a.ff-saison-pillar')]
         .map((el) => Math.round(el.getBoundingClientRect().height)));
       expect(hoehen.length, 'keine Saison-Links gefunden').toBeGreaterThan(0);
       for (const h of hoehen) {
