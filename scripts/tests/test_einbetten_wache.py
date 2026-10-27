@@ -29,8 +29,11 @@ SNIPPET = (
 
 def block(snippet: str = SNIPPET, knopf_ziel: str = "ff-einbetten-x") -> str:
     return (
-        '<section class="ff-einbetten" aria-labelledby="ff-einbetten-x-titel">'
+        # Überschrift AUSSERHALB der <section>: Der Chunker-Vertrag
+        # (scripts/layout_audit.py) erlaubt im Artikelinhalt keine H2 mit id
+        # in einem Container. Der Name der Section hängt trotzdem daran.
         '<h2 id="ff-einbetten-x-titel">Grafik einbetten</h2>'
+        '<section class="ff-einbetten" aria-labelledby="ff-einbetten-x-titel">'
         f'<pre class="ff-einbetten__code" id="ff-einbetten-x">'
         # Im Build steht der Code escaped im <pre> – der Test liest ihn genauso.
         f'<code>{html.escape(snippet, quote=False)}</code></pre>'
@@ -40,8 +43,8 @@ def block(snippet: str = SNIPPET, knopf_ziel: str = "ff-einbetten-x") -> str:
 
 
 def funde(markup: str) -> list[str]:
-    return wache.pruefe_block(
-        BeautifulSoup(markup, "lxml").select_one(".ff-einbetten"), "test")
+    doc = BeautifulSoup(markup, "lxml")
+    return wache.pruefe_block(doc.select_one(".ff-einbetten"), "test", doc)
 
 
 class EinbettenTests(unittest.TestCase):
@@ -87,6 +90,7 @@ class EinbettenTests(unittest.TestCase):
 
     def test_block_ohne_namen(self):
         markup = block().replace(' aria-labelledby="ff-einbetten-x-titel"', "")
+        self.assertIn("<section class=\"ff-einbetten\">", markup)
         self.assertTrue(any(f.startswith("E1:") for f in funde(markup)))
 
     def test_unrenderte_template_reste(self):

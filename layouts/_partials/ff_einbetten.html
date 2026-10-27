@@ -53,8 +53,13 @@
   </a>
   <figcaption>Grafik: <a href="%s">%s</a></figcaption>
 </figure>` $url $bild $breite $hoehe $alt $url $quelle -}}
+{{- /* Die Überschrift steht AUSSERHALB der <section>: Der Chunker-Vertrag
+       (scripts/layout_audit.py, seit 27.10.2026 als Hart-Gate) verlangt,
+       dass jede H2/H3 mit id im Artikelinhalt ein direkter Block des
+       Inhalts ist – sonst reißt die Text-Teilung den Container auf.
+       Die <section> hängt ihren Namen trotzdem an diese id. */ -}}
+<h2 class="ff-einbetten__titel" id="{{ $id }}-titel">Grafik einbetten</h2>
 <section class="ff-einbetten" aria-labelledby="{{ $id }}-titel">
-  <h2 class="ff-einbetten__titel" id="{{ $id }}-titel">Grafik einbetten</h2>
   <p class="ff-einbetten__intro">
     Diesen Block dürfen Redaktionen, Blogs und Verbraucherorganisationen unverändert
     übernehmen – Bild und Quellenzeile, beides mit Link auf die Ausgabeseite.

@@ -338,12 +338,20 @@ python3 scripts/einbetten_wache.py --public public
 
 | Regel | Prüft | Bewertung |
 |---|---|---|
-| **E1** | Block hat einen Namen (`aria-labelledby` → existierende ID) | **Fehler** |
+| **E1** | Block hat einen Namen: `aria-labelledby` → existierende Überschrift (steht **außerhalb** der `<section>`, s. Chunker-Vertrag) | **Fehler** |
 | **E2** | genau ein `<figure>`/`<img>`, `src` absolut, `width`/`height`, `alt` | **Fehler** |
 | **E3** | Bild und Quellenzeile absolut, **gleiches** Ziel, kein `nofollow`/`sponsored` | **Fehler** |
 | **E4** | kein Kampagnen-Parameter (`utm_*`, `gclid`, `fbclid`, `ref`, …) | **Fehler** |
 | **E5** | kein `<script>`, `<iframe>`, `<form>`, `<object>`, `<embed>` | **Fehler** |
 | **E6** | Kopier-Knopf zeigt auf die `<pre>`-ID, Live-Bereich `role="status"` vorhanden | **Fehler** |
+
+Die Überschrift des Blocks steht bewusst **vor** der `<section>`: Der
+Chunker-Vertrag in `scripts/layout_audit.py` verlangt, dass jede H2 mit `id`
+im Artikelinhalt ein direkter Block des Inhalts ist – sonst reißt die
+Text-Teilung den Container auf. Der Name der Section zeigt trotzdem auf
+genau diese Überschrift. Derselbe Lauf hat auch den Link-Scanner des Audits
+gehärtet: `<pre>`-Blöcke sind Text, kein Markup (sonst meldet das
+Code-Beispiel „kaputte interne Links“).
 
 Ein fehlerhaftes Angebot ist schlimmer als keins: Ein relativer `src` zeigt
 beim Einbau auf die *fremde* Domain, ein `nofollow` bittet um genau den Link,

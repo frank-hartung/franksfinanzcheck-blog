@@ -314,6 +314,13 @@ und `/presse/` (dort mit Linkziel *Ausgabeseite*, nicht Presseseite).
 Ein Klick kopiert den Code (Clipboard-API, ehrlicher Fallback: der Text
 steht sichtbar und markierbar im `<pre>`).
 
+Die Überschrift steht bewusst **vor** der `<section>`: Der Chunker-Vertrag
+in `scripts/layout_audit.py` verlangt, dass jede H2 mit `id` im Artikelinhalt
+ein direkter Block des Inhalts bleibt – sonst reißt die Text-Teilung den
+Container auf. Derselbe Lauf hat den Link-Scanner des Audits gehärtet
+(`<pre>`-Blöcke sind Text, kein Markup – sonst meldet das Code-Beispiel
+selbst „kaputte interne Links“).
+
 Abgesichert durch eine eigene Wache, weil ein fehlerhaftes Angebot
 schlimmer ist als keins – ein relativer `src` zeigt beim Einbau auf die
 *fremde* Domain, ein `nofollow` bittet um genau den Link, den die Seite
@@ -321,7 +328,7 @@ nicht bekommt:
 
 | Regel | Prüft | Bewertung |
 |---|---|---|
-| **E1** | Block hat einen Namen (`aria-labelledby` → existierende ID) | Fehler |
+| **E1** | Block hat einen Namen (`aria-labelledby` → existierende Überschrift **außerhalb** der Section) | Fehler |
 | **E2** | genau ein `<figure>`/`<img>`, `src` absolut, `width`/`height`, `alt` | Fehler |
 | **E3** | Bild und Quellenzeile absolut, **gleiches** Ziel, kein `nofollow` | Fehler |
 | **E4** | kein Kampagnen-Parameter (`utm_*`, `gclid`, `fbclid`, `ref`, …) | Fehler |
@@ -360,6 +367,7 @@ irgendwann eine Zahl mit Datum statt ein Gefühl.
 | `scripts/einbetten_wache.py` (neu) | ✅ 2 Einbett-Blöcke, E1–E6 sauber · 9 Selbsttest-Fälle + 12 Unit-Tests grün |
 | `scripts/themenwelten_guard.py` · `saisonale_startseite_guard.py` | ✅ auf dem neuen Karten-DOM (Titel-Link, Overlay, Deko `aria-hidden`) |
 | `scripts/werkzeuge_gate.py` · `fixkosten_kompass_guard.py` | ✅ Quelle + Build |
+| `scripts/layout_audit.py` · `scripts/entity_marken_gate.py` | ✅ Kritisch 0 (vorher 2 Chunker-Verstöße durch die Einbett-Überschrift) · Quelle 0 Fehler (ein „Franks Finanzcheck" in einem Artikel korrigiert) |
 | `scripts/a11y_audit.py` | ✅ 0 Probleme, 0 Kontrast-Fehler (hell + dunkel) |
 | `scripts/h1_wache.py` | ✅ jede Seite genau eine H1 |
 | `scripts/seo_cockpit.py --strict` | ✅ 122 Seiten, 99 indexierbar, P1/P2/P3 = 0 |

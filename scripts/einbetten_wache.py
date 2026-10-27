@@ -23,8 +23,9 @@
 #    · ein Kopier-Knopf ohne Ziel-ID kopiert nichts und meldet nichts.
 #
 #  WAS GEPRÜFT WIRD (Build, `public/`)
-#    E1  Der Block existiert und trägt genau eine Überschrift, auf die
-#        `aria-labelledby` zeigt (Section braucht einen Namen).
+#    E1  Der Block hat einen Namen: `aria-labelledby` zeigt seitenweit auf
+#        eine echte Überschrift (die steht außerhalb der <section>, weil der
+#        Chunker-Vertrag im Artikelinhalt keine H2 im Container erlaubt).
 #    E2  Das Snippet enthält genau ein `<figure>` mit `<img>`, dessen
 #        `src` absolut ist und `width`/`height`/nicht-leeren `alt` hat.
 #    E3  Beide Links im Snippet sind absolut, zeigen auf DIESELBE URL
@@ -65,14 +66,26 @@ def _absolut(wert: str) -> bool:
     return wert.startswith("https://") or wert.startswith("http://")
 
 
-def pruefe_block(block, seite: str) -> list[str]:
-    """Prüft einen `.ff-einbetten`-Block und gibt Befunde zurück."""
+def pruefe_block(block, seite: str, dokument=None) -> list[str]:
+    """Prüft einen `.ff-einbetten`-Block und gibt Befunde zurück.
+
+    `dokument` ist die ganze Seite: Die Überschrift steht seit dem
+    Chunker-Vertrag (layout_audit.py) AUSSERHALB der <section> – eine H2
+    mit id darf im Artikelinhalt kein Container-Kind sein, sonst reißt die
+    Text-Teilung den Block auf. Der Name der Section muss trotzdem auf eine
+    echte Überschrift zeigen, deshalb wird seitenweit gesucht.
+    """
     funde: list[str] = []
     titel_id = block.get("aria-labelledby")
     if not titel_id:
         funde.append(f"E1: Block ohne aria-labelledby ({seite})")
-    elif not block.find(id=titel_id):
-        funde.append(f"E1: aria-labelledby zeigt auf fehlende ID {titel_id!r} ({seite})")
+    else:
+        ziel = block.find(id=titel_id) or (
+            dokument.find(id=titel_id) if dokument is not None else None)
+        if ziel is None:
+            funde.append(f"E1: aria-labelledby zeigt auf fehlende ID {titel_id!r} ({seite})")
+        elif ziel.name not in ("h2", "h3", "h4"):
+            funde.append(f"E1: aria-labelledby zeigt auf <{ziel.name}>, keine Überschrift ({seite})")
 
     code = block.select_one("pre.ff-einbetten__code")
     if code is None:
@@ -158,7 +171,7 @@ def pruefe_public(public: Path | str = PUBLIC) -> tuple[int, list[str]]:
         soup = BeautifulSoup(html.read_text(encoding="utf-8", errors="replace"), "lxml")
         for block in soup.select(".ff-einbetten"):
             blocke += 1
-            funde.extend(pruefe_block(block, seite))
+            funde.extend(pruefe_block(block, seite, soup))
     return blocke, funde
 
 
