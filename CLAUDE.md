@@ -2117,10 +2117,15 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   Meldung unverändert offen, und es entsteht kein Duplikat. Vertrag:
   `test_alert_scoping` (Strukturvertrag + 58 Sim-Szenarien).
 - **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
-  Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1: nur
-  `main`). Solange Zugänge fehlen und ein fremder Branch an das Environment
-  käme, stellt der Prüfer „Zuerst E8“ über die Liste; die Reihenfolge der
-  Anleitung sichert `test_backup_einrichtung` ab.
+  Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1:
+  explizit genau `main` vom Typ `branch`). Der Wizard schreibt die Policy über
+  die unterstützte REST-Kette (Environment-`PUT`, Policy-`GET`/`DELETE`/`POST`)
+  und verlangt danach einen paginierten Live-Read-back; unlesbar, `protected branches`,
+  zusätzliche Branches/Tags oder fehlende Regeln bedeuten Abbruch vor dem
+  ersten Secret. Eine manuelle „Erledigt?“-Bestätigung ersetzt den Nachweis
+  nicht. Solange Zugänge fehlen und ein fremder Branch an das Environment
+  käme, stellt der Prüfer „Zuerst E8“ über die Liste; Tests sichern Payload,
+  Rückprüfung und Fail-closed-Reihenfolge.
 - **KV zurückspielen nur mit `--remote`:** Wrangler 4 schreibt sonst in die
   lokale Simulation und meldet trotzdem Erfolg.
 - **Wiederherstellung beweisen:** `bash scripts/restore_drill.sh --repo <privates Backup-Repo>`
@@ -2136,18 +2141,21 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   Anleger-Frage unbemerkt. SLA: RPO 24 h / 52 h Toleranz, RTO < 60 Min.
 - **Inhaber-Einrichtung ist der einzige offene Auftragsteil (#761):** Der
   Schnellweg führt über `npm run backup:einrichten`
-  (`scripts/backup_einrichten_wizard.sh`, erst E8 dann E1–E7, Geheimnisse nur
-  verdeckt, in CI bewusst gesperrt); `npm run backup:status` prüft den Stand
-  ohne Änderung. Agenten setzen weiterhin keine Secrets und umschreiben keine
-  offenen Alarm-Issues von Hand.
-- Tests: `npm run test:backup` (inkl. Frische-Wache 12 Fälle, Wizard-Vertrag) ·
+  (`scripts/backup_einrichten_wizard.sh`, E8 erst live auf ausschließlich
+  `main` beweisen, dann E1–E7; Geheimnisse nur verdeckt, in CI bewusst
+  gesperrt); `npm run backup:status` prüft den Stand ohne Änderung. Agenten
+  setzen weiterhin keine Secrets und umschreiben keine offenen Alarm-Issues
+  von Hand.
+- Tests: `npm run test:backup` (Frische-Wache 12 Fälle, E8 REST- und
+  Fail-closed-Wizard-Verträge) ·
   Alarm-Szenarien in `scripts/tests/sim/alert_scoping_sim.mjs` (58 Szenarien,
   inkl. Lagebild-Verfall und Reihenfolgeschutz) · Anleitung
   `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
   `WF-9E5A-761-DAUERHEILUNG-PREMIUM-2026-10-15.md` + Highend-Berichte
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-22.md`,
-  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-24.md` und
-  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-26.md`.
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-24.md`,
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-26.md` und
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-27.md`.
 
 ## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
 

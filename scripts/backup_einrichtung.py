@@ -28,7 +28,10 @@
 #  Ein offener Pflichtpunkt (E1–E6, E7 sobald gesetzt) ergibt Exit 1 –
 #  fail-closed wie bisher. Jeder Punkt erscheint als Annotation UND als Zeile
 #  in der Job-Zusammenfassung, mit dem Link, unter dem er erledigt wird.
-#  E8 ist ein Hinweis: Er schützt die Zugänge, ohne die Sicherung zu stoppen.
+#  E8 bleibt ein Laufzeit-Hinweis, damit ein fehlender Branch-Schutz keine
+#  Sicherung stillschweigend überspringt. Er gilt nur dann als sicher, wenn
+#  die API exakt „Selected branches = main“ nachweist; protected-branches,
+#  fehlende Regeln und nicht prüfbare Antworten gelten als offen.
 #
 #  FRISTEN: Die Ablaufdaten aus E2 (Header github-authentication-token-
 #  expiration) und E5 (expires_on) gehen als BACKUP_FRIST_TAGE in die
@@ -168,9 +171,10 @@ class Ergebnis:
     befunde: list[Befund] = field(default_factory=list)
     # (Name der Einstellung, Resttage) – Namen, nie Werte
     fristen: list[tuple[str, int]] = field(default_factory=list)
-    # E8: Käme ein fremder Branch an die Backup-Zugänge? (Environment fehlt,
-    # keine Branch-Regel oder Regel erlaubt mehr als main.) Eine reine
-    # Pflicht-Freigabe zählt nicht – sie bremst Läufe, öffnet aber nichts.
+    # E8: Ist der Zugriff nachweislich auf den Branch main beschränkt?
+    # Fehlende/mehrdeutige Regeln oder eine nicht prüfbare API-Antwort gelten
+    # als offen. Eine reine Pflicht-Freigabe zählt nicht dazu – sie bremst
+    # Läufe, erweitert aber den Branch-Zugriff nicht.
     environment_offen: bool = False
 
     def neu(self, *args, **kwargs) -> Befund:
@@ -574,6 +578,45 @@ def _e7_d1(ergebnis: Ergebnis, umgebung: dict, konto: str, cf_zugang: str) -> No
                  "der Klick-Zähler nicht gesichert werden soll.", link_cloudflare_lesezugang(True))
 
 
+def _gh_branch_policies_lesen(basis: str, kopf: dict) -> tuple[int, dict, list | None, str]:
+    """Liest alle Seiten der Environment-Branch-Policy; bei Zweifel liefert es kein Grün."""
+    url = f"{basis}/deployment-branch-policies?per_page=100"
+    besucht: set[str] = set()
+    policies: list = []
+    letzte_kopf: dict = {}
+    for _ in range(100):
+        if url in besucht:
+            return 0, letzte_kopf, None, "pagination_loop"
+        besucht.add(url)
+        status, antwort_kopf, antwort, netz = HTTP("GET", url, kopf)
+        letzte_kopf = antwort_kopf if isinstance(antwort_kopf, dict) else {}
+        if status != 200 or not isinstance(antwort, dict):
+            return status, letzte_kopf, None, netz
+        seite = antwort.get("branch_policies")
+        if not isinstance(seite, list):
+            return status, letzte_kopf, None, "missing_branch_policies"
+        policies.extend(seite)
+        link = str(letzte_kopf.get("link") or "")
+        naechste = None
+        for teil in link.split(","):
+            adresse = re.search(r"<([^>]+)>", teil)
+            relation = re.search(r';\s*rel="?([^";\s]+)"?', teil)
+            if adresse and relation and relation.group(1) == "next":
+                naechste = adresse.group(1)
+                break
+        if not naechste:
+            return status, letzte_kopf, policies, ""
+        try:
+            teile = urllib.parse.urlsplit(naechste)
+            basis_teile = urllib.parse.urlsplit(GH_API)
+        except ValueError:
+            return 0, letzte_kopf, None, "invalid_pagination_link"
+        if (teile.scheme, teile.netloc) != (basis_teile.scheme, basis_teile.netloc):
+            return 0, letzte_kopf, None, "untrusted_pagination_link"
+        url = naechste
+    return 0, letzte_kopf, None, "pagination_limit"
+
+
 def _e8_environment(ergebnis: Ergebnis, umgebung: dict) -> None:
     titel = f"Environment-Schutz · „{ENVIRONMENT}“ nur für main"
     quelle = (umgebung.get("GITHUB_REPOSITORY") or "").strip()
@@ -598,33 +641,62 @@ def _e8_environment(ergebnis: Ergebnis, umgebung: dict) -> None:
                      "Environment „backup“ anlegen, Deployment branches: nur main.", einstellungen)
         return
     if status != 200 or not isinstance(antwort, dict):
-        ergebnis.neu("E8", titel, "info", f"nicht prüfbar (HTTP {status})")
+        ergebnis.environment_offen = True
+        ergebnis.neu("E8", titel, "warnung",
+                     f"nicht prüfbar (HTTP {status}) – Beschränkung auf main ist nicht nachgewiesen",
+                     "Environment-Regel mit dem Inhaber-Konto prüfen: „Selected branches and tags“ → "
+                     "nur main; keine Required reviewers.", einstellungen)
+        return
+    schutzregeln = antwort.get("protection_rules")
+    if not isinstance(schutzregeln, list) or any(not isinstance(r, dict) for r in schutzregeln):
+        ergebnis.environment_offen = True
+        ergebnis.neu("E8", titel, "warnung",
+                     "Protection Rules nicht prüfbar – das Fehlen von Required reviewers ist nicht bestätigt",
+                     "Environment-Regel mit dem Inhaber-Konto prüfen: keine Required reviewers; Selected → "
+                     "nur main.", einstellungen)
         return
     hinweise = []
-    regeln = [str((r or {}).get("type")) for r in (antwort.get("protection_rules") or [])]
+    regeln = [str(r.get("type")) for r in schutzregeln]
     if "required_reviewers" in regeln:
         hinweise.append("Pflicht-Freigabe aktiv: jeder nächtliche Lauf wartet auf einen Klick und bricht "
                         "nach 30 Tagen ab – für „backup“ entfernen, Schutz über die Branch-Regel")
     politik = antwort.get("deployment_branch_policy")
-    if politik is None:
+    if not isinstance(politik, dict):
         ergebnis.environment_offen = True
         hinweise.append("jeder Branch darf das Environment nutzen – ein Arbeitszweig mit geänderter "
                         "Workflow-Datei käme an die Backup-Zugänge")
-    elif politik.get("custom_branch_policies"):
-        status2, _k2, liste, _n2 = HTTP("GET", f"{basis}/deployment-branch-policies", kopf)
-        if status2 == 200 and isinstance(liste, dict):
-            namen = sorted(str((p or {}).get("name")) for p in (liste.get("branch_policies") or []))
-            fremde = [n for n in namen if n != "main"]
-            if fremde:
+    elif politik.get("custom_branch_policies") is True and politik.get("protected_branches") is False:
+        status2, _k2, branch_policies, _n2 = _gh_branch_policies_lesen(basis, kopf)
+        if status2 != 200 or not isinstance(branch_policies, list):
+            ergebnis.environment_offen = True
+            hinweise.append(f"ausgewählte Branch-Regeln nicht prüfbar (HTTP {status2}) – main ist nicht nachgewiesen")
+        else:
+            nur_main = (
+                len(branch_policies) == 1
+                and isinstance(branch_policies[0], dict)
+                and branch_policies[0].get("name") == "main"
+                and branch_policies[0].get("type") == "branch"
+            )
+            if not nur_main:
                 ergebnis.environment_offen = True
-            if fremde or not namen:
-                hinweise.append("Branch-Regel erlaubt mehr als main: " + _kurz(", ".join(fremde) or "(leer)", 80))
+                namen = [
+                    f"{p.get('name', '?')} ({p.get('type', 'Typ unbekannt')})"
+                    for p in branch_policies if isinstance(p, dict)
+                ]
+                hinweise.append("Branch-Regel muss genau den Branch main enthalten; aktuell: "
+                                + _kurz(", ".join(namen) or "(keine Regeln)", 100))
+    else:
+        ergebnis.environment_offen = True
+        if politik.get("protected_branches") is True:
+            hinweise.append("„Protected branches“ ist aktiv, erlaubt aber nicht nachweislich nur main")
+        else:
+            hinweise.append("keine ausdrücklich ausgewählte Branch-Regel – jeder Branch kann zulässig sein")
     if hinweise:
         ergebnis.neu("E8", titel, "warnung", " · ".join(hinweise),
                      "Settings → Environments → backup: „Deployment branches and tags“ → Selected → "
                      "nur main; keine Required reviewers.", einstellungen)
         return
-    ergebnis.neu("E8", titel, "ok", "nur main darf die Backup-Zugänge nutzen")
+    ergebnis.neu("E8", titel, "ok", "nur der Branch main ist ausdrücklich zugelassen")
 
 
 def pruefen(umgebung: dict, jetzt: dt.datetime | None = None) -> Ergebnis:
@@ -1059,6 +1131,40 @@ def selbsttest() -> int:  # noqa: C901 – bewusst ein Block: jede Fallgruppe si
         fertig = lauf(voll, env=ohne_regel)
         if fertig.offen() or reihenfolge_hinweis(fertig) or "E8" not in schlusssatz(fertig):
             fehler.append("F17: fertige Einrichtung – E8 gehört in den Schlusssatz, nicht nach vorn")
+
+        # F18: E8 ist nur dann sicher, wenn exakt der Branch main ausgewählt
+        # und die Einstellung samt Branch-Typ live nachweisbar ist. „Protected
+        # branches“ kann weitere Branches zulassen; unbekannt ist nicht grün.
+        geschuetzt = lauf(voll, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                                {"protected_branches": True, "custom_branch_policies": False}}))
+        alle_policy = lauf(voll, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                                {"protected_branches": False, "custom_branch_policies": False}}))
+        unvollstaendige_policy = lauf(voll, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                                           {"custom_branch_policies": True}}))
+        schutzregeln_unlesbar = lauf(voll, env=(200, {}, {"deployment_branch_policy":
+                                                          {"protected_branches": False,
+                                                           "custom_branch_policies": True}}))
+        tag_main = lauf(voll, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                             {"protected_branches": False, "custom_branch_policies": True}}),
+                        env_politik=(200, {}, {"branch_policies": [{"name": "main", "type": "tag"}]}))
+        politik_nicht_pruefbar = lauf(voll, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                                           {"protected_branches": False,
+                                                            "custom_branch_policies": True}}),
+                                      env_politik=(403, {}, {"message": "Resource not accessible by integration"}))
+        umgebung_nicht_pruefbar = lauf(voll, env=(403, {}, {"message": "Resource not accessible by integration"}))
+        for name, probe in (("protected branches", geschuetzt), ("keine ausgewählte Regel", alle_policy),
+                            ("unvollständige Policy", unvollstaendige_policy),
+                            ("Protection Rules nicht lesbar", schutzregeln_unlesbar),
+                            ("Tag statt Branch", tag_main),
+                            ("Branch-Regeln nicht lesbar", politik_nicht_pruefbar),
+                            ("Environment nicht lesbar", umgebung_nicht_pruefbar)):
+            if probe.stufe_von("E8") != "warnung" or not probe.environment_offen:
+                fehler.append(f"F18: {name} darf nicht als main-only durchgehen")
+        teil_geschuetzt = lauf(teil, env=(200, {}, {"protection_rules": [], "deployment_branch_policy":
+                                                    {"protected_branches": True,
+                                                     "custom_branch_policies": False}}))
+        if not reihenfolge_hinweis(teil_geschuetzt):
+            fehler.append("F18: unsicheres E8 muss vor Secrets in den Einrichtungshinweis")
     finally:
         HTTP, SCHLAF, _http_einmal = echt_http, echt_schlaf, echt_einmal
 
@@ -1067,7 +1173,7 @@ def selbsttest() -> int:  # noqa: C901 – bewusst ein Block: jede Fallgruppe si
             print(f"❌ {eintrag}")
         print(f"🛑 backup_einrichtung-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_einrichtung-Selbsttest: 17 Fallgruppen – Leerstand (#761), gesunde Einrichtung, "
+    print("✅ backup_einrichtung-Selbsttest: 18 Fallgruppen – Leerstand (#761), gesunde Einrichtung, "
           "öffentliches Ziel, 401/404, Fristen, Passphrase-Grenze, Konto-Token, KV-/D1-Rechte, "
           "Environment-Schutz, Netzausfall + Wiederholung, keine Secret-Werte in der Ausgabe, Kodierung, "
           "Reihenfolge „erst absichern, dann befüllen“.")

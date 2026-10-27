@@ -138,8 +138,8 @@ class PrueferVerhalten(unittest.TestCase):
 
         def welt(status, politik=None, branches=(), regeln=()):
             def antwort(url, kopf):
-                if url.endswith("/deployment-branch-policies"):
-                    return 200, {}, {"branch_policies": [{"name": n} for n in branches]}, ""
+                if "/deployment-branch-policies" in url:
+                    return 200, {}, {"branch_policies": [{"name": n, "type": "branch"} for n in branches]}, ""
                 self.assertTrue(url.endswith("/environments/backup"), url)
                 return status, {}, {"protection_rules": [{"type": t} for t in regeln],
                                     "deployment_branch_policy": politik}, ""
@@ -173,6 +173,30 @@ class PrueferVerhalten(unittest.TestCase):
         self.assertEqual(be.reihenfolge_hinweis(fertig), "")
         self.assertIn("E8", be.schlusssatz(fertig))
         self.assertNotIn("Zuerst E8", be.konsolen_bericht(fertig) + be.zusammenfassung(fertig))
+
+    def test_e8_verwirft_zusaetzliche_regel_auf_folgeseite(self):
+        basis = "https://api.github.com/repos/frank-hartung/franksfinanzcheck-blog/environments/backup"
+        folgeseite = basis + "/deployment-branch-policies?per_page=100&page=2"
+        environment = {"protection_rules": [], "deployment_branch_policy": {
+            "protected_branches": False, "custom_branch_policies": True}}
+
+        def antwort(url, _kopf):
+            if url == basis:
+                return 200, {}, environment, ""
+            if url == folgeseite:
+                return 200, {}, {"branch_policies": [{"name": "arena/*", "type": "branch"}]}, ""
+            if "/deployment-branch-policies" in url:
+                return 200, {"link": f'<{folgeseite}>; rel="next", <{folgeseite}>; rel="last"'}, {
+                    "branch_policies": [{"name": "main", "type": "branch"}]}, ""
+            self.fail(f"unerwarteter API-Aufruf: {url}")
+
+        http = _OhneNetz(antwort)
+        be.HTTP = http
+        lage = be.pruefen({"GITHUB_REPOSITORY": "frank-hartung/franksfinanzcheck-blog",
+                           "CF_ACCOUNT_ID": "a" * 32}, JETZT)
+        self.assertTrue(lage.environment_offen)
+        self.assertEqual(lage.stufe_von("E8"), "warnung")
+        self.assertIn(folgeseite, http.aufrufe, "E8 muss jede Branch-Policy-Seite lesen")
 
     def test_fristen_grenzen(self):
         with redirect_stdout(io.StringIO()):
@@ -436,6 +460,14 @@ class WizardVertrag(unittest.TestCase):
         self.assertTrue(self.WIZARD.is_file(), "backup_einrichten_wizard.sh fehlt")
         self.text = self.WIZARD.read_text(encoding="utf-8")
 
+    def _funktion(self, name: str) -> str:
+        """Isoliert eine Top-Level-Bash-Funktion für Tests mit gemocktem `gh`."""
+        start = re.search(rf"(?m)^{re.escape(name)}\(\) \{{[^\n]*\n", self.text)
+        self.assertIsNotNone(start, f"Bash-Funktion {name} fehlt")
+        ende = re.search(r"(?m)^\}", self.text[start.end():])
+        self.assertIsNotNone(ende, f"Bash-Funktion {name} ist nicht geschlossen")
+        return self.text[start.start():start.end() + ende.start() + 1]
+
     def test_bash_syntax(self):
         proc = subprocess.run(["bash", "-n", str(self.WIZARD)],
                               capture_output=True, text=True)
@@ -448,6 +480,231 @@ class WizardVertrag(unittest.TestCase):
                               env={**__import__("os").environ, "GITHUB_ACTIONS": "true"})
         self.assertEqual(proc.returncode, 1)
         self.assertIn("CI", proc.stderr + proc.stdout)
+
+    def _e8_lauf(self, environment: dict, policies: dict | None = None,
+                  environment_fail: bool = False, policies_fail: bool = False) -> int:
+        funktionen = "\n\n".join(self._funktion(name) for name in
+                                     ("branch_regel_status", "branch_regel_namen", "pruefe_e8"))
+        harness = r'''
+set -o pipefail
+QUELLE="frank-hartung/franksfinanzcheck-blog"
+UMGEBUNG="backup"
+EINSTELLUNGEN_UMGEBUNGEN="https://example.invalid/settings"
+gh() {
+  case "$*" in
+    *"/deployment-branch-policies"*)
+      [ "${WIZARD_POLICIES_FAIL:-0}" != "1" ] || return 1
+      printf '%s' "$WIZARD_POLICIES_JSON" | python3 -c '
+import json, sys
+for p in json.load(sys.stdin).get("branch_policies", []):
+    print("{}\t{}".format(p.get("name", ""), p.get("type", "unbekannt")))
+'
+      ;;
+    *)
+      [ "${WIZARD_ENV_FAIL:-0}" != "1" ] || return 1
+      printf '%s' "$WIZARD_ENV_JSON"
+      ;;
+  esac
+}
+ok() { :; }
+offen() { :; }
+hinweis() { :; }
+link() { :; }
+''' + funktionen + "\npruefe_e8\n"
+        umgebung = {
+            **__import__("os").environ,
+            "WIZARD_ENV_JSON": __import__("json").dumps(environment),
+            "WIZARD_POLICIES_JSON": __import__("json").dumps(policies or {"branch_policies": []}),
+            "WIZARD_ENV_FAIL": "1" if environment_fail else "0",
+            "WIZARD_POLICIES_FAIL": "1" if policies_fail else "0",
+        }
+        proc = subprocess.run(["bash", "-c", harness], capture_output=True, text=True, env=umgebung)
+        self.assertEqual(proc.stderr, "", proc.stderr)
+        return proc.returncode
+
+    def test_environment_policy_uses_supported_rest_endpoint(self):
+        import json
+        import os
+        import tempfile
+
+        funktion = self._funktion("umgebung_anlegen")
+        with tempfile.TemporaryDirectory() as ordner:
+            args_datei, body_datei = Path(ordner) / "args", Path(ordner) / "body"
+            harness = '''set -euo pipefail
+QUELLE="frank-hartung/franksfinanzcheck-blog"
+UMGEBUNG="backup"
+gh() { echo "$*" > "$GH_ARGS_FILE"; cat > "$GH_BODY_FILE"; }
+''' + funktion + "\numgebung_anlegen\n"
+            umgebung = {**os.environ, "GH_ARGS_FILE": str(args_datei), "GH_BODY_FILE": str(body_datei)}
+            proc = subprocess.run(["bash", "-c", harness], capture_output=True, text=True, env=umgebung)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+            self.assertIn("-X PUT repos/frank-hartung/franksfinanzcheck-blog/environments/backup",
+                          args_datei.read_text(encoding="utf-8"))
+            self.assertEqual(json.loads(body_datei.read_text(encoding="utf-8")), {
+                "deployment_branch_policy": {"protected_branches": False, "custom_branch_policies": True}
+            })
+
+    def test_branch_policy_replacement_uses_supported_rest_operations(self):
+        import json
+        import os
+        import tempfile
+
+        funktion = self._funktion("branch_regel_setzen")
+        basis = "repos/frank-hartung/franksfinanzcheck-blog/environments/backup/deployment-branch-policies"
+        cases = (
+            ("create before cleanup", [
+                {"id": 101, "name": "arena/*", "type": "branch"},
+                {"id": 202, "name": "main", "type": "tag"},
+            ], True),
+            ("preserve main rule", [
+                {"id": 111, "name": "main", "type": "branch"},
+                {"id": 202, "name": "arena/*", "type": "branch"},
+            ], False),
+        )
+        for name, policies, post_needed in cases:
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as ordner:
+                log_datei, body_datei = Path(ordner) / "calls", Path(ordner) / "body"
+                harness = r'''
+set -euo pipefail
+QUELLE="frank-hartung/franksfinanzcheck-blog"
+UMGEBUNG="backup"
+gh() {
+  echo "$*" >> "$GH_LOG_FILE"
+  case "$*" in
+    *--paginate*)
+      printf '%s' "$GH_POLICY_JSON" | python3 -c '
+import json, sys
+for p in json.load(sys.stdin).get("branch_policies", []):
+    print("{}\t{}\t{}".format(p.get("id", ""), p.get("name", ""), p.get("type", "")))
+'
+      ;;
+    *--input*) cat > "$GH_BODY_FILE"; echo 303 ;;
+    *"-X DELETE"*) ;;
+    *) echo "unexpected gh operation" >&2; return 1 ;;
+  esac
+}
+''' + funktion + "\nbranch_regel_setzen\n"
+                umgebung = {
+                    **os.environ,
+                    "GH_LOG_FILE": str(log_datei),
+                    "GH_BODY_FILE": str(body_datei),
+                    "GH_POLICY_JSON": json.dumps({"branch_policies": policies}),
+                }
+                proc = subprocess.run(["bash", "-c", harness], capture_output=True, text=True, env=umgebung)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                calls = log_datei.read_text(encoding="utf-8").splitlines()
+                self.assertIn("--paginate --jq .branch_policies[]?", calls[0])
+                self.assertIn(basis + "?per_page=100", calls[0])
+                if post_needed:
+                    self.assertEqual(len(calls), 4, calls)
+                    self.assertIn("-X POST " + basis, calls[1])
+                    self.assertIn("-X DELETE " + basis + "/101", calls[2])
+                    self.assertIn("-X DELETE " + basis + "/202", calls[3])
+                    self.assertEqual(json.loads(body_datei.read_text(encoding="utf-8")),
+                                     {"name": "main", "type": "branch"})
+                else:
+                    self.assertEqual(len(calls), 2, calls)
+                    self.assertIn("-X DELETE " + basis + "/202", calls[1])
+                    self.assertNotIn("-X DELETE " + basis + "/111", "\n".join(calls))
+                    self.assertFalse(any("-X POST" in call for call in calls), calls)
+
+    def test_branch_policy_api_failure_stops_safely(self):
+        import os
+        import tempfile
+
+        funktion = self._funktion("branch_regel_setzen")
+        for failure in ("list", "post", "delete"):
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as ordner:
+                log_datei = Path(ordner) / "calls"
+                harness = r'''
+set -u
+QUELLE="frank-hartung/franksfinanzcheck-blog"
+UMGEBUNG="backup"
+gh() {
+  echo "$*" >> "$GH_LOG_FILE"
+  case "$*" in
+    *--paginate*)
+      [ "$FAIL_AT" != "list" ] || return 1
+      printf '{"branch_policies":[{"id":101,"name":"arena/*","type":"branch"}]}' | python3 -c '
+import json, sys
+for p in json.load(sys.stdin).get("branch_policies", []):
+    print("{}\t{}\t{}".format(p.get("id", ""), p.get("name", ""), p.get("type", "")))
+'
+      ;;
+    *"-X DELETE"*) [ "$FAIL_AT" != "delete" ] || return 1 ;;
+    *--input*)
+      [ "$FAIL_AT" != "post" ] || return 1
+      cat >/dev/null
+      echo 303
+      ;;
+    *) echo "unexpected gh operation" >&2; return 1 ;;
+  esac
+}
+''' + funktion + "\nbranch_regel_setzen\n"
+                umgebung = {**os.environ, "GH_LOG_FILE": str(log_datei), "FAIL_AT": failure}
+                proc = subprocess.run(["bash", "-c", harness], capture_output=True, text=True, env=umgebung)
+                self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+                calls = log_datei.read_text(encoding="utf-8").splitlines()
+                posts = [i for i, call in enumerate(calls) if "-X POST" in call]
+                deletes = [i for i, call in enumerate(calls) if "-X DELETE" in call]
+                if failure == "list":
+                    self.assertFalse(posts, calls)
+                    self.assertFalse(deletes, calls)
+                elif failure == "post":
+                    self.assertEqual(len(posts), 1, calls)
+                    self.assertFalse(deletes, calls)
+                else:
+                    self.assertEqual(len(posts), 1, calls)
+                    self.assertEqual(len(deletes), 1, calls)
+                    self.assertLess(posts[0], deletes[0], calls)
+
+    def test_e8_gate_fails_closed_unless_exact_main_branch_is_live(self):
+        readback = self._funktion("branch_regel_namen")
+        self.assertIn("gh api --paginate --jq", readback,
+                      "der E8-Nachweis muss auch nachgelagerte Seiten vollständig lesen")
+        self.assertIn("?per_page=100", readback)
+        policy_main = {"protected_branches": False, "custom_branch_policies": True}
+        selected_main = {"branch_policies": [{"name": "main", "type": "branch"}]}
+        environment = {"protection_rules": [], "deployment_branch_policy": policy_main}
+        self.assertEqual(self._e8_lauf(environment, selected_main), 0)
+
+        cases = (
+            ("alle Branches", {"protection_rules": [], "deployment_branch_policy": None}, None, False, False),
+            ("protected branches", {"protection_rules": [], "deployment_branch_policy":
+                                    {"protected_branches": True, "custom_branch_policies": False}}, None, False, False),
+            ("unvollständige Policy", {"protection_rules": [], "deployment_branch_policy":
+                                       {"custom_branch_policies": True}}, selected_main, False, False),
+            ("keine explizite Auswahl", {"protection_rules": [], "deployment_branch_policy":
+                                         {"protected_branches": False, "custom_branch_policies": False}}, None, False, False),
+            ("zusätzlicher Branch", environment, {"branch_policies": [
+                {"name": "main", "type": "branch"}, {"name": "arena/*", "type": "branch"}]}, False, False),
+            ("Tag statt Branch", environment, {"branch_policies": [{"name": "main", "type": "tag"}]}, False, False),
+            ("Pflicht-Freigabe", {"protection_rules": [{"type": "required_reviewers"}],
+                                  "deployment_branch_policy": policy_main}, selected_main, False, False),
+            ("Protection Rules nicht lesbar", {"deployment_branch_policy": policy_main}, selected_main, False, False),
+            ("Environment nicht lesbar", environment, selected_main, True, False),
+            ("Branch-Liste nicht lesbar", environment, selected_main, False, True),
+        )
+        for name, env_daten, policy_daten, env_fail, policy_fail in cases:
+            with self.subTest(name):
+                self.assertEqual(self._e8_lauf(env_daten, policy_daten, env_fail, policy_fail), 1,
+                                 f"E8 muss bei {name} vor Secrets stoppen")
+
+    def test_setup_rechecks_e8_after_manual_claim_before_any_secret(self):
+        abschnitt = self.text.split("# ---- Schritt 1 (E8): Environment absichern", 1)[1]
+        abschnitt = abschnitt.split("# ---- Schritt 2 (E1): Privates Backup-Repository", 1)[0]
+        pruefungen = [m.start() for m in re.finditer(r"if ! pruefe_e8; then", abschnitt)]
+        self.assertEqual(len(pruefungen), 3,
+                         "E8 muss vor Änderungen, nach automatischem Setup und nach manueller Bestätigung live geprüft werden")
+        self.assertLess(pruefungen[0], abschnitt.index("umgebung_anlegen"))
+        self.assertLess(abschnitt.index("branch_regel_setzen"), pruefungen[1])
+        self.assertLess(pruefungen[1], abschnitt.index("Erledigt?"))
+        self.assertLess(abschnitt.index("Erledigt?"), pruefungen[2])
+        self.assertIn("reviewer|unlesbar", abschnitt,
+                      "bei Required Reviewers oder unbekanntem Zustand nicht blind mutieren")
+        self.assertIn("Erledigt?", abschnitt)
+        self.assertIn("weiterhin nicht als main-only bestätigt", abschnitt)
+        self.assertNotIn("gh secret set", abschnitt)
 
     def test_kennt_check_modus_und_alle_sieben_einstellungen(self):
         self.assertIn("--check", self.text)
