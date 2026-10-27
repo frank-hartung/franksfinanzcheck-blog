@@ -56,7 +56,7 @@ Harte Funde: 0 · Hinweise: 0
 4. Vorhanden und bewacht bleiben: HTML5-Doctype, `lang="de"`, `charset`, `viewport` mit `width=device-width`, genau ein `https`-Canonical, `robots` je Seite, eindeutige Titel und Beschreibungen.
 
 ### Struktur
-5. **Überschriftenhierarchie in vier Artikeln geradegerückt.** Der „Schnellstart“-Block begann mit `h3` direkt nach der H1, zwei Artikel sprangen von `h2` auf `h4`. Jetzt: `h1 → h2 → h3` ohne Sprung. Anker-IDs blieben identisch, bestehende Links bleiben gültig.
+5. **Überschriftenhierarchie in vier Artikeln geradegerückt.** Der „Schnellstart“-Block begann mit `h3` direkt nach der H1, zwei Artikel sprangen von `h2` auf `h4`. Jetzt: `h1 → h2 → h3` ohne Sprung. Anker-IDs blieben identisch, bestehende Links bleiben gültig. **Folgeänderung:** Beim Stromfresser-Artikel ändern die neuen H2 die abgeleiteten „Stationen“ der Gliederungsgrafik. `abbildungen_ableiten.py` hat deshalb `abbildung-ablauf.svg` und die artikelgenaue Bildunterschrift neu geschrieben; der Abbildungs-Check ist wieder bei 0 Befunden. Ohne diesen Schritt wäre die Inhalts-Wache FF5 rot gelaufen.
 6. **19 `<b>`-Tags auf `<strong>` umgestellt** – in den Beweis-, Änderungs-, Methodik- und Vergleichs-Shortcodes sowie im Kostenprofil. Die drei betroffenen Stylesheets selektieren jetzt `:is(b, strong)`, damit das Design unverändert bleibt und künftige Inhalte mit `<b>` trotzdem richtig aussehen. `<b>` ist in HTML5 nicht *ungültig* – die Wache meldet es deshalb als Hinweis, nicht als Fehler; `<font>`, `<center>`, `<marquee>`, `<frameset>` und Konsorten sind harte Funde.
 7. **42 tote Inhaltsverzeichnis-Links entfernt.** PaperMod baute das TOC aus *allen* Überschriften, auch aus Widget-Überschriften ohne `id` – Ergebnis: `href="#"`, ein Klick sprang an den Seitenanfang. Die eigene Fassung `layouts/_partials/toc.html` lässt nur Überschriften mit echter `id` zu; UI-Beschriftungen von Rechnern und Boxen sind keine Kapitel. Messung nachher: **0** `href="#"`, **0** Anker ohne Ziel auf 77 Seiten mit Inhaltsverzeichnis. Das Theme selbst bleibt unangetastet und updatefähig.
 
@@ -128,7 +128,18 @@ python3 scripts/manifest_guard.py                ✅ package.json/Lock synchron
 python3 scripts/wachen_vertrag.py                ✅ 339 Skripte, 0 Funde
 python3 scripts/skript_syntax_wache.py           ✅ 547 Dateien kompilieren
 python3 scripts/integrity_guard.py --gate        ✅ Siegel nach Neu-Signatur gültig
+python3 scripts/abbildungen_ableiten.py --check  ✅ 20 Beiträge, 0 Befunde
+python3 scripts/reserve_artifacts.py --check     ✅ Snapshot vollständig
 ```
+
+**CI-Regression nachgezogen:** Der Merge-Stand wurde zusätzlich mit der
+vollständigen Suite geprüft – `python3 -m unittest discover -s scripts/tests -v`
+(**4.025 Tests, 0 Fehler, 14 Skips**) und die Uhr-Probe
+`python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97`
+(**4.025 Tests, 0 Fehler, 16 Skips**), dazu alle Selbsttests des
+Regression-Jobs (`engine_generate`, `reserve_pool`, `cadence_guard`,
+`fm_boundary_guard`, `social_studio`). Der aktuelle `main`-Stand (`bba81c1`)
+wurde dafür konfliktfrei in den Branch geholt.
 
 Hugo-Build: `hugo v0.168.0+extended` (lokal aus dem im Repo dokumentierten PyPI-Fallback `hugo==0.168.0`), 109 Seiten + 17 Paginierungsseiten, 2.434 statische Dateien, ~2 s.
 
@@ -144,5 +155,6 @@ mit Inhaltsverzeichnis gilt nachher: 0 `href="#"`, 0 Anker ohne Ziel.
 ## 6. Bekannter Rest (nicht Teil dieses Auftrags)
 
 - `python3 scripts/metadaten_wache.py` meldet weiterhin **3 inhaltliche Altbefunde**: zwei Artikel mit `lastmod` vor `date` und ein Artikel ohne `kurzantwort`. Das sind redaktionelle Pflichtfelder, keine Sitecheck-Kriterien. Sie sollten in einem eigenen Content-Vorgang geheilt werden, damit die Wache wieder vollständig grün ist.
+- **Reserve-Zertifikat:** Die E6-Markenkorrektur im Reserve-Entwurf `2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht` ändert dessen SHA-256. Statt eine Messung zu erfinden, wurde der ungültige READY-Nachweis mit `python3 scripts/reserve_artifacts.py --withdraw-invalid` zurückgezogen (`data/reserve-readiness.json`: 4/6 statt 5/6 bereit, Score/Teilscores entfernt, Grund dokumentiert). Eine vollständige Nachzertifizierung bleibt `reserve_recert.py --fix` in der Produktionskette vorbehalten (`hugo` + `hunspell` + Rechtschreibkette); in der Sandbox fehlt `hunspell`. Der Reserve-Snapshot-Check ist damit grün.
 - Die drei `seoTitle`-Werte und 13 Description-Texte sind redaktionelle Entscheidungen. Wer sie ändert, sollte `npm run test:sitecheck` mitlaufen lassen – die Wache merkt sofort, wenn ein Titel über 60 Zeichen rutscht.
 - Der Online-Check von Pergamon selbst kann nach dem Deploy mit `https://franksfinanzcheck.de/` erneut gefahren werden; die hier geprüften Kriterien decken seine vier veröffentlichten Prüfbereiche ab, nicht seine undokumentierte Gewichtung im „Total Score“.
