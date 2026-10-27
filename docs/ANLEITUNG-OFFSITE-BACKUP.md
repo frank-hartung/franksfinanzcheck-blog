@@ -1,6 +1,6 @@
 # Anleitung: Offsite-Backup einrichten, prüfen, wiederherstellen
 
-> Vorgang WF-9E5A · Meldung #761 · Stand 26.10.2026 (Highend-Dauerheilung)
+> Vorgang WF-9E5A · Meldung #761 · Stand 27.10.2026 (Highend-Dauerheilung)
 > Workflows `.github/workflows/backup-offsite.yml` + `backup-frischwache.yml` · Prüfer `scripts/backup_einrichtung.py` ·
 > Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
 > Einrichtungs-Wizard `scripts/backup_einrichten_wizard.sh`
@@ -81,7 +81,7 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 | **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
 | **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
 | **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
-| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 17 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (33 Tests, inkl. Wizard-Vertrag) |
+| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 18 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (39 Tests, inkl. Wizard-Vertrag) |
 | **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
 | **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*` | `backup_freshness_guard.py` (12 Fälle) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
 
@@ -154,9 +154,21 @@ Settings → Environments → `backup`: <https://github.com/frank-hartung/franks
 - **Keine „Required reviewers“.** Sonst wartet jeder nächtliche Lauf auf
   einen Klick und bricht nach 30 Tagen ab.
 
-Der Prüfer liest diese Einstellungen bei jedem Lauf und meldet Abweichungen
-als Hinweis; die Sicherung läuft trotzdem. Solange Zugänge fehlen und das
-Environment offensteht, setzt er „Zuerst E8“ an den Anfang der Prüfliste.
+Der Wizard setzt die Branch-Policy über die GitHub-REST-Endpunkte für
+Environment und Deployment-Branch-Policies (Environment `PUT`, Policies
+`GET`/`DELETE`/`POST`). Er erhält eine vorhandene `main`-Regel oder legt sie
+vor dem Entfernen weiterer Regeln an; sowohl Auflistung als auch Read-back
+sind paginiert. Nur **genau eine Regel `main` vom Typ `branch`** gilt als
+sicher. „Protected branches“ reicht nicht als Nachweis. Ist die API nicht
+lesbar, fehlt eine Berechtigung oder bleibt eine fremde Regel übrig, bricht
+der Wizard vor jedem Secret ab – eine manuelle „Erledigt?“-Bestätigung allein
+reicht nicht.
+
+Der Laufzeit-Prüfer liest diese Einstellungen bei jedem Lauf und meldet
+Abweichungen als Hinweis; die Sicherung läuft trotzdem, damit ein E8-Befund
+die eigentliche Sicherung nicht still überspringt. Solange Pflichtzugänge
+fehlen und das Environment nicht nachweislich nur `main` zulässt, setzt er
+„Zuerst E8“ an den Anfang der Prüfliste.
 
 ### Schritt 2 – Privates Backup-Repository anlegen (E1)
 
@@ -260,7 +272,7 @@ Danach einmal die Wiederherstellung proben (Abschnitt „Wiederherstellung“).
 | E5 | Cloudflare-Token aktiv (Nutzer- oder Konto-Token), Ablaufdatum | nicht anerkannt · abgelaufen · deaktiviert | Schritt 5 |
 | E6 | Namespace-ID: Format, mit **diesem** Token lesbar | Name statt ID · 403: Recht fehlt · 404: falsches Konto | Schritt 6 bzw. Schritt 5 |
 | E7 | optional: D1-Datenbank lesbar | nicht lesbar | D1: Read ergänzen oder Variable entfernen |
-| E8 | Environment nur für `main`, ohne Pflicht-Freigabe | Hinweis (vor dem Befüllen: „Zuerst E8“) | Schritt 1 |
+| E8 | Ausdrücklich ausgewählte Branch-Regel: genau `main` vom Typ `branch`; keine Pflicht-Freigabe | Hinweis (vor dem Befüllen: „Zuerst E8“); Wizard stoppt vor Secrets, wenn E8 nicht live bestätigt ist | Schritt 1 |
 
 „GitHub-API nicht erreichbar“ oder „Cloudflare-API nicht erreichbar“ ist
 meist vorübergehend: den Lauf später neu starten.
@@ -391,8 +403,12 @@ abwählen.
 ## Hintergrund: Vorgang WF-9E5A / #761
 
 Am 15.10.2026 war der KV-Job ab seinem ersten Lauf rot: Fünf von sechs
-Voraussetzungen fehlten. Dass er rot war, ist richtig – ein Grün ohne
-Sicherung wäre ein Schein-Grün. Behoben wurden die Umstände:
+Voraussetzungen fehlten. Auch der jüngste Lauf vom 27.10.2026 (Run
+`40474184391`) zeigt E1, E2, E3, E5 und E6 weiterhin als fehlend; E4 ist
+vorhanden, E7 bleibt optional. E8 ist nicht auf `main` beschränkt. Dass der
+Job rot ist, ist richtig – ein Grün ohne Sicherung wäre ein Schein-Grün. Die
+technischen Umstände und der sichere Einrichtungsweg sind behoben; die noch
+fehlenden Zugangsdaten muss der Inhaber einmalig am eigenen Konto einrichten.
 
 - **Rat:** Die Meldung riet zu „API-Key (GROQ/GEMINI)“ und „neu starten“.
   Jetzt nennt sie die Einrichtung und verlinkt diese Anleitung. Ändert sich
