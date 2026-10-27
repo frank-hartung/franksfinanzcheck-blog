@@ -171,17 +171,13 @@
     color: #a8ecd2;
 }
 
-/* Die Titelzeilen bleiben über dem Overlay: Text bleibt lesbar, markierbar
-   und per Klick direkt erreichbar (gleiches Ziel wie das Overlay). */
-.ff-topic-card h3,
-.ff-saison-card-titel,
-.ff-pc-card__title,
-.ff-related-card__heading,
-.ff-wz-karte__name,
-.ff-wz-weiter__karte strong {
-    position: relative;
-    z-index: 2;
-}
+/* KEIN `position: relative` auf den Titelzeilen (Lehre vom 27.10.2026):
+   Das Overlay ist ein `::after` des Titel-Links mit `inset: 0`. Sein
+   Bezugsrahmen ist der NÄCHSTE positionierte Vorfahr. Stand `position:
+   relative` auf der Titelzeile, deckte das Overlay nur noch die
+   Überschrift ab – die Karte war dann in der Mitte nicht mehr klickbar,
+   und der Browser-Test fand genau das (Klick auf den Anriss lief ins
+   Leere). Der Bezugsrahmen muss der <article> sein, sonst nichts. */
 
 /* ---------- 2. Teilen-Zeile ---------- */
 
@@ -292,7 +288,6 @@
 .ff-einbetten__code {
     margin: 0 0 14px;
     padding: 14px 16px;
-    overflow-x: auto;
     border: 1px solid var(--border);
     border-radius: 10px;
     background: color-mix(in srgb, var(--primary) 4%, transparent);
@@ -301,15 +296,16 @@
     tab-size: 2;
 }
 
-.ff-einbetten__code:focus-visible {
-    outline: 2px solid var(--ff-emerald);
-    outline-offset: 2px;
-}
-
-/* Der Codeblock ist der einzige Ort mit Zwangsumbrüchen im Block –
-   Embed-Snippets werden zeilenweise kopiert, nicht umbrochen. */
+/* KEIN waagerechtes Scrollen (Lehre vom 27.10.2026, axe-Regel
+   „scrollable-region-focusable"): `<code>` ist im Theme ein Grid-Container
+   und wurde damit selbst zum Scrollbereich – der Fokus lag auf dem <pre>,
+   die scrollende Box war eine Ebene tiefer. Statt einen weiteren
+   tabindex zu verteilen, bricht der Code jetzt um: Nichts ist versteckt,
+   nichts muss per Tastatur erreicht werden, und der kopierte Text bleibt
+   zeilengleich. */
 .ff-einbetten__code code {
-    white-space: pre;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 
 .ff-einbetten__aktionen {

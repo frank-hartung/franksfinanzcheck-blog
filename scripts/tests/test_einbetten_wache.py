@@ -13,8 +13,6 @@ import sys
 import unittest
 from pathlib import Path
 
-from bs4 import BeautifulSoup
-
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import einbetten_wache as wache  # noqa: E402
@@ -43,8 +41,10 @@ def block(snippet: str = SNIPPET, knopf_ziel: str = "ff-einbetten-x") -> str:
 
 
 def funde(markup: str) -> list[str]:
-    doc = BeautifulSoup(markup, "lxml")
-    return wache.pruefe_block(doc.select_one(".ff-einbetten"), "test", doc)
+    """Prüft den Block so, wie die Wache ihn im Build liest (ohne bs4 –
+    im Gate-Job ist nur requirements-ci.txt installiert)."""
+    doc = wache.baum(markup)
+    return wache.pruefe_block(doc.erste("section", "ff-einbetten"), "test", doc)
 
 
 class EinbettenTests(unittest.TestCase):
@@ -90,7 +90,7 @@ class EinbettenTests(unittest.TestCase):
 
     def test_block_ohne_namen(self):
         markup = block().replace(' aria-labelledby="ff-einbetten-x-titel"', "")
-        self.assertIn("<section class=\"ff-einbetten\">", markup)
+        self.assertIn('<section class="ff-einbetten">', markup)
         self.assertTrue(any(f.startswith("E1:") for f in funde(markup)))
 
     def test_unrenderte_template_reste(self):

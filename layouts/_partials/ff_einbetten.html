@@ -67,7 +67,10 @@
     {{- if not $presseSeite }} Mehr unter
     <a href="{{ "presse/" | relURL }}">Presse &amp; Expertise</a>.{{ end }}
   </p>
-  <pre class="ff-einbetten__code" id="{{ $id }}" tabindex="0" aria-label="Einbett-Code, vollständig markierbar"><code>{{ $snippet }}</code></pre>
+  {{- /* Ohne tabindex: Der Code bricht um, statt waagerecht zu scrollen –
+         ein Scrollbereich ohne Tastaturzugang wäre ein WCAG-Verstoß
+         (axe: scrollable-region-focusable). */ -}}
+  <pre class="ff-einbetten__code" id="{{ $id }}"><code>{{ $snippet }}</code></pre>
   <p class="ff-einbetten__aktionen">
     <button class="ff-einbetten__knopf" type="button" data-ff-einbetten-kopieren="{{ $id }}">
       Einbett-Code kopieren

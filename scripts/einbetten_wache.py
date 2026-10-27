@@ -30,29 +30,37 @@
 #        `src` absolut ist und `width`/`height`/nicht-leeren `alt` hat.
 #    E3  Beide Links im Snippet sind absolut, zeigen auf DIESELBE URL
 #        (Bild und Quellenzeile) und tragen kein `nofollow`/`sponsored`.
-#    E4  Weder der sichtbare Code noch die Links enthalten
-#        Tracking-Parameter (utm_, pk_, mtm_, gclid, fbclid, ref=).
+#    E4  Die Links enthalten keine Tracking-Parameter (utm_*, pk_*, mtm_*,
+#        gclid, fbclid, mc_cid, ref).
 #    E5  Es gibt kein `<script>`/`<iframe>`/`<form>` im Snippet – das
 #        Angebot muss ohne Cookie und ohne Fremdcode funktionieren.
 #    E6  Kopier-Knopf: `data-ff-einbetten-kopieren` zeigt auf eine
 #        existierende ID, und ein Live-Bereich (`role="status"`) ist da.
+#
+#  WARUM EIGENER PARSER STATT bs4 (28.10.2026, roter Lauf „gate“)
+#  ------------------------------------------------------------
+#  Diese Wache läuft über `scripts/selftest_runner.py` in jedem Gate.
+#  Der Gate-Job installiert nur `requirements-ci.txt` – dort steht kein
+#  bs4. Die erste Fassung starb dort mit `ModuleNotFoundError` und riss
+#  den ganzen Gate-Job mit. Die anderen Build-Wachen dieses Repos
+#  (`linktext_wache.py`, `a11y_audit.py`) lesen HTML deshalb mit
+#  `html.parser` aus der Standardbibliothek. Ein Prüfwerkzeug, das nur in
+#  einer Umgebung mit Zusatzpaketen funktioniert, prüft überall sonst
+#  nichts.
 #
 #  Kein Whitelisting: Was hier durchfällt, ist ein echter Defekt im
 #  Angebot – nicht ein Sonderfall der Redaktion.
 # ============================================================
 from __future__ import annotations
 
-import html
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import parse_qsl
-
-from bs4 import BeautifulSoup
 
 BLOG_DIR = Path(__file__).resolve().parent.parent
 PUBLIC = BLOG_DIR / "public"
 
-LOKALE_HOSTS = ("franksfinanzcheck.de",)
 # Nur echte Kampagnen-Parameter. Ein Blick auf `href="…"` würde sonst
 # schon am Wort „ref=“ in `href=` anschlagen – genau dieser Fehlalarm
 # stand beim ersten Lauf auf dem Zettel.
@@ -60,13 +68,106 @@ SPUR_PARAMETER = ("utm_source", "utm_medium", "utm_campaign", "utm_content",
                   "utm_term", "pk_campaign", "pk_kwd", "mtm_campaign",
                   "gclid", "fbclid", "mc_cid", "mc_eid", "ref")
 VERBOTENE_TAGS = ("script", "iframe", "form", "object", "embed")
+UEBERSCHRIFTEN = ("h1", "h2", "h3", "h4", "h5", "h6")
+LEER = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link",
+        "meta", "param", "source", "track", "wbr"}
+
+
+class Knoten:
+    """Minimaler DOM-Knoten: Tag, Attribute, Kinder, eigener Text."""
+
+    __slots__ = ("tag", "attrs", "kids", "texte", "eltern")
+
+    def __init__(self, tag: str, attrs: dict | None = None, eltern=None):
+        self.tag = tag
+        self.attrs = attrs or {}
+        self.kids: list[Knoten] = []
+        self.texte: list[str] = []
+        self.eltern = eltern
+
+    # --- Attribute ---------------------------------------------------
+    def get(self, name: str, vorgabe: str | None = None) -> str | None:
+        return self.attrs.get(name, vorgabe)
+
+    @property
+    def klassen(self) -> set[str]:
+        return set((self.attrs.get("class") or "").split())
+
+    def hat_klasse(self, name: str) -> bool:
+        return name in self.klassen
+
+    # --- Baum --------------------------------------------------------
+    def alle(self, tag: str | None = None):
+        for kind in self.kids:
+            if tag is None or kind.tag == tag:
+                yield kind
+            yield from kind.alle(tag)
+
+    def erste(self, tag: str | None = None, klasse: str | None = None):
+        for knoten in self.alle(tag):
+            if klasse is None or knoten.hat_klasse(klasse):
+                return knoten
+        return None
+
+    def mit_id(self, wert: str):
+        for knoten in self.alle():
+            if knoten.attrs.get("id") == wert:
+                return knoten
+        return None
+
+    def text(self) -> str:
+        """textContent: eigener Text plus alle Nachfahren, in Reihenfolge."""
+        teile = list(self.texte)
+        for kind in self.kids:
+            teile.append(kind.text())
+        return "".join(teile)
+
+
+class Baum(HTMLParser):
+    """Baut aus HTML einen Knotenbaum (tolerant, ohne Zusatzpakete)."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.wurzel = Knoten("#dokument")
+        self._stapel = [self.wurzel]
+
+    def _anhaengen(self, tag: str, attrs) -> Knoten:
+        knoten = Knoten(tag, {k: (v if v is not None else "") for k, v in attrs},
+                        self._stapel[-1])
+        self._stapel[-1].kids.append(knoten)
+        return knoten
+
+    def handle_starttag(self, tag, attrs):
+        knoten = self._anhaengen(tag, attrs)
+        if tag not in LEER:
+            self._stapel.append(knoten)
+
+    def handle_startendtag(self, tag, attrs):
+        self._anhaengen(tag, attrs)
+
+    def handle_endtag(self, tag):
+        # Tolerant schließen: bis zum passenden Tag zurückrollen.
+        for i in range(len(self._stapel) - 1, 0, -1):
+            if self._stapel[i].tag == tag:
+                del self._stapel[i:]
+                return
+
+    def handle_data(self, data):
+        self._stapel[-1].texte.append(data)
+
+
+def baum(html_text: str) -> Knoten:
+    parser = Baum()
+    parser.feed(html_text)
+    parser.close()
+    return parser.wurzel
 
 
 def _absolut(wert: str) -> bool:
     return wert.startswith("https://") or wert.startswith("http://")
 
 
-def pruefe_block(block, seite: str, dokument=None) -> list[str]:
+def pruefe_block(block: Knoten, seite: str, dokument: Knoten | None = None) -> list[str]:
     """Prüft einen `.ff-einbetten`-Block und gibt Befunde zurück.
 
     `dokument` ist die ganze Seite: Die Überschrift steht seit dem
@@ -80,35 +181,34 @@ def pruefe_block(block, seite: str, dokument=None) -> list[str]:
     if not titel_id:
         funde.append(f"E1: Block ohne aria-labelledby ({seite})")
     else:
-        ziel = block.find(id=titel_id) or (
-            dokument.find(id=titel_id) if dokument is not None else None)
+        ziel = dokument.mit_id(titel_id) if dokument is not None else None
         if ziel is None:
             funde.append(f"E1: aria-labelledby zeigt auf fehlende ID {titel_id!r} ({seite})")
-        elif ziel.name not in ("h2", "h3", "h4"):
-            funde.append(f"E1: aria-labelledby zeigt auf <{ziel.name}>, keine Überschrift ({seite})")
+        elif ziel.tag not in UEBERSCHRIFTEN:
+            funde.append(f"E1: aria-labelledby zeigt auf <{ziel.tag}>, keine Überschrift ({seite})")
 
-    code = block.select_one("pre.ff-einbetten__code")
+    code = block.erste(klasse="ff-einbetten__code")
     if code is None:
         funde.append(f"E1: kein <pre class=ff-einbetten__code> ({seite})")
         return funde
-    snippet_text = code.get_text()
+    snippet_text = code.text()
     if "{{" in snippet_text or "}}" in snippet_text:
         funde.append(f"E2: unrenderte Template-Reste im Snippet ({seite})")
     if "%!" in snippet_text:
         funde.append(f"E2: kaputter Format-String im Snippet ({seite})")
 
-    unter = BeautifulSoup(snippet_text, "lxml")
+    unter = baum(snippet_text)
     for tag in VERBOTENE_TAGS:
-        if unter.find(tag):
+        if unter.erste(tag) is not None:
             funde.append(f"E5: <{tag}> im Snippet – Angebot muss statisch sein ({seite})")
 
-    figures = unter.find_all("figure")
-    if len(figures) != 1:
-        funde.append(f"E2: Snippet enthält {len(figures)} <figure> statt genau eins ({seite})")
+    figuren = list(unter.alle("figure"))
+    if len(figuren) != 1:
+        funde.append(f"E2: Snippet enthält {len(figuren)} <figure> statt genau eins ({seite})")
         return funde
-    figure = figures[0]
+    figure = figuren[0]
 
-    bilder = figure.find_all("img")
+    bilder = list(figure.alle("img"))
     if len(bilder) != 1:
         funde.append(f"E2: Snippet enthält {len(bilder)} <img> statt genau eins ({seite})")
         return funde
@@ -116,36 +216,42 @@ def pruefe_block(block, seite: str, dokument=None) -> list[str]:
     src = bild.get("src") or ""
     if not _absolut(src):
         funde.append(f"E2: Bild-src ist nicht absolut: {src!r} ({seite})")
-    if not bild.get("alt", "").strip():
+    if not (bild.get("alt") or "").strip():
         funde.append(f"E2: Bild ohne alt-Text ({seite})")
     for mass in ("width", "height"):
         wert = (bild.get(mass) or "").strip()
         if not wert.isdigit() or int(wert) <= 0:
             funde.append(f"E2: Bild ohne gültiges {mass} ({seite})")
 
-    links = figure.find_all("a")
+    links = list(figure.alle("a"))
     if len(links) != 2:
         funde.append(f"E3: {len(links)} Links im Snippet (erwartet: Bild + Quellenzeile) ({seite})")
     ziele = {(a.get("href") or "") for a in links}
     if len(ziele) != 1:
-        funde.append(f"E3: Bild und Quellenzeile zeigen auf verschiedene URLs: {sorted(ziele)} ({seite})")
+        funde.append(f"E3: Bild und Quellenzeile zeigen auf verschiedene URLs: "
+                     f"{sorted(ziele)} ({seite})")
     for ziel in ziele:
         if not _absolut(ziel):
             funde.append(f"E3: Linkziel nicht absolut: {ziel!r} ({seite})")
     for a in links:
-        rel = " ".join(a.get("rel") or []).lower()
+        rel = " ".join((a.get("rel") or "").split()).lower()
         if "nofollow" in rel or "sponsored" in rel:
             funde.append(f"E3: Snippet-Link trägt rel={rel!r} ({seite})")
         # Ein Link um ein Bild hat als Linktext naturgemäß keinen Text –
         # sein Name kommt aus dem alt-Text (E2 prüft, dass er da ist).
-        if not a.get_text(strip=True) and a.find("img") is None:
+        if not a.text().strip() and a.erste("img") is None:
             funde.append(f"E3: Snippet-Link ohne Linktext ({seite})")
+
     for ziel in ziele:
         for schluessel, _wert in parse_qsl(ziel.split("?", 1)[-1]):
             if schluessel.lower() in SPUR_PARAMETER:
                 funde.append(f"E4: Tracking-Parameter {schluessel!r} im Link ({seite})")
 
-    knopf = block.select_one("[data-ff-einbetten-kopieren]")
+    knopf = None
+    for knoten in block.alle():
+        if "data-ff-einbetten-kopieren" in knoten.attrs:
+            knopf = knoten
+            break
     if knopf is None:
         funde.append(f"E6: kein Kopier-Knopf ({seite})")
     else:
@@ -155,7 +261,8 @@ def pruefe_block(block, seite: str, dokument=None) -> list[str]:
                 f"E6: Knopf zielt auf {ziel_id!r}, das <pre> hat "
                 f"id={(code.get('id') or '')!r} ({seite})"
             )
-    if block.select_one('[role="status"]') is None:
+    live = any(k.get("role") == "status" for k in block.alle())
+    if not live:
         funde.append(f"E6: kein Live-Bereich (role=status) für die Rückmeldung ({seite})")
     return funde
 
@@ -166,12 +273,14 @@ def pruefe_public(public: Path | str = PUBLIC) -> tuple[int, list[str]]:
         return 0, [f"E0: Build fehlt ({root}) – erst `hugo --minify` laufen lassen"]
     blocke = 0
     funde: list[str] = []
-    for html in sorted(root.rglob("*.html")):
-        seite = "/" + str(html.relative_to(root))
-        soup = BeautifulSoup(html.read_text(encoding="utf-8", errors="replace"), "lxml")
-        for block in soup.select(".ff-einbetten"):
+    for html_datei in sorted(root.rglob("*.html")):
+        seite = "/" + str(html_datei.relative_to(root))
+        dokument = baum(html_datei.read_text(encoding="utf-8", errors="replace"))
+        for block in dokument.alle("section"):
+            if not block.hat_klasse("ff-einbetten"):
+                continue
             blocke += 1
-            funde.extend(pruefe_block(block, seite, soup))
+            funde.extend(pruefe_block(block, seite, dokument))
     return blocke, funde
 
 
@@ -187,28 +296,31 @@ def selftest() -> int:
               titel: bool = True) -> str:
         aria = ' aria-labelledby="ff-einbetten-x-titel"' if titel else ""
         kopf = '<h2 id="ff-einbetten-x-titel">Grafik einbetten</h2>' if titel else ""
+        # Der Code steht escaped im <pre> – wie im echten Build.
+        from html import escape
         return (
-            f'<section class="ff-einbetten"{aria}>{kopf}'
+            f'<main>{kopf}<section class="ff-einbetten"{aria}>'
             f'<pre class="ff-einbetten__code" id="ff-einbetten-x">'
-            # Im echten Build steht der Snippet-Code escaped im <pre> –
-            # ohne Escape wäre der Testfall schöner als die Wirklichkeit.
-            f'<code>{html.escape(snippet, quote=False)}</code></pre>'
+            f'<code>{escape(snippet, quote=False)}</code></pre>'
             f'<button data-ff-einbetten-kopieren="{knopf_ziel}">kopieren</button>'
-            '<p role="status"></p></section>'
+            '<p role="status"></p></section></main>'
         )
 
     def funde(markup: str) -> list[str]:
-        return pruefe_block(BeautifulSoup(markup, "lxml").select_one(".ff-einbetten"), "test")
+        dokument = baum(markup)
+        block_knoten = dokument.erste("section", "ff-einbetten")
+        return pruefe_block(block_knoten, "test", dokument)
 
     faelle = [
         ("guter Block", funde(block()), 0),
         ("relativer Bildpfad", funde(block(gutes_snippet.replace(
-            'src="https://franksfinanzcheck.de/downloads/x.svg"', 'src="/downloads/x.svg"')), ), 1),
+            'src="https://franksfinanzcheck.de/downloads/x.svg"', 'src="/downloads/x.svg"'))), 1),
         ("nofollow im Snippet", funde(block(gutes_snippet.replace(
             '<a href="https://franksfinanzcheck.de/x/"><img',
             '<a rel="nofollow" href="https://franksfinanzcheck.de/x/"><img'))), 1),
         ("Tracking-Parameter", funde(block(gutes_snippet.replace(
-            "https://franksfinanzcheck.de/x/", "https://franksfinanzcheck.de/x/?utm_source=li"))), 1),
+            "https://franksfinanzcheck.de/x/",
+            "https://franksfinanzcheck.de/x/?utm_source=li"))), 1),
         ("leerer alt-Text", funde(block(gutes_snippet.replace('alt="Grafik"', 'alt=""'))), 1),
         ("iframe im Snippet", funde(block(
             gutes_snippet + '<iframe src="https://x.test/"></iframe>')), 1),

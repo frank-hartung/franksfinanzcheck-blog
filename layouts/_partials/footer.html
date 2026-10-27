@@ -31,12 +31,17 @@
     {{- end }}
 
     <span>
-        {{- /* SUCHE (27.10.2026): Der Such-Link steht im Hauptmenü
-               (hugo.toml, accesskey "/") und war hier ein zweiter Link mit
-               identischem Ankertext – Seobility zählt das als „Ankertext
-               mehrfach verwendet“ und es kostet Crawl-Aufmerksamkeit, ohne
-               einen zweiten Weg zu eröffnen. Der Footer führt jetzt nur
-               noch Ziele, die das Menü NICHT anbietet. */ -}}
+        {{- /* SUCHE 08.10.2026, wiederhergestellt 27.10.2026: Der Such-Link
+               steht hier UND im Hauptmenü (hugo.toml). Seobility zählt das als
+               „Ankertext mehrfach verwendet“ – ein Hinweis, kein Fehler. Die
+               Streichung war ein Rückschritt: `e2e/suche.spec.mjs` („Footer
+               verlinkt die Suche auf jeder Seite“) hält fest, dass die Suche
+               von jeder Seite aus erreichbar bleibt, und ein zweiter Weg ist
+               für Tastatur- und Sprachbedienung genau das Gegenteil von
+               Ballast. Der Hinweis wird an dieser Stelle bewusst in Kauf
+               genommen und im SEO-Bericht als solcher ausgewiesen. */ -}}
+        <a href="{{ "suche/" | absURL }}">Suche</a>
+        {{- print " · " -}}
         <a href="{{ "impressum/" | absURL }}">Impressum</a>
         {{- print " · " -}}
         <a href="{{ "datenschutz/" | absURL }}">Datenschutz</a>

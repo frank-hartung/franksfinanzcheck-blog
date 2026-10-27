@@ -249,7 +249,24 @@ try {
 
   for (const topic of DATA.topics) {
     await page.goto(url('posts/'), { waitUntil: 'networkidle' });
-    await page.locator(`.ff-topic-card[data-topic="${topic.id}"] .ff-topic-description`).click();
+    const karte = page.locator(`.ff-topic-card[data-topic="${topic.id}"]`);
+    // In die Mitte scrollen: sonst liegt die Karte unter dem Sticky-Header
+    // und der Mausklick träfe die Kopfzeile statt der Karte.
+    await karte.evaluate(el => el.scrollIntoView({ block: 'center' }));
+    // Trefferfläche messen, nicht behaupten: Ein Punkt mitten im Anriss
+    // muss beim Titel-Link landen (Inset-Overlay). Vorher lag dort die
+    // <p>-Box selbst – die Karte war nur am Titel klickbar.
+    const imAnriss = await karte.evaluate(el => {
+      const desc = el.querySelector('.ff-topic-description');
+      const r = desc.getBoundingClientRect();
+      const treffer = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      return !!(treffer && treffer.closest('.ff-topic-card__title-link'));
+    });
+    check(imAnriss, `Ganze Karte klickbar (Overlay deckt den Anriss): ${topic.id}`);
+    // `force: true` ist hier die Aussage: Der Klick geht auf die Koordinate,
+    // das Overlay fängt ihn – Playwright würde sonst genau das verweigern,
+    // was der Test beweisen soll.
+    await karte.locator('.ff-topic-description').click({ force: true });
     await page.waitForURL(url(`pillar/${topic.id}/`));
     check(await page.locator('main h1').count() === 1, `Ganze Karte klickbar, Ziel erreichbar: ${topic.id}`);
   }
@@ -270,7 +287,18 @@ try {
   const firstCard = page.locator('.ff-posts-feed .post-entry').first();
   const firstArticle = await firstCard.locator('.entry-title-link').getAttribute('href');
   check(await firstCard.locator('.entry-title-link').innerText() !== '', 'Kartenlink trägt einen sichtbaren Ankertext');
-  await firstCard.locator('.entry-content').click();
+  // Trefferfläche messen statt behaupten: Ein Punkt im Anriss muss beim
+  // Titelanker landen (Inset-Overlay). `force: true` ist die Aussage des
+  // Tests – der Klick geht auf die Koordinate, das Overlay fängt ihn.
+  await firstCard.evaluate(el => el.scrollIntoView({ block: 'center' }));
+  const imAnriss = await firstCard.evaluate(el => {
+    const body = el.querySelector('.entry-content');
+    const r = body.getBoundingClientRect();
+    const treffer = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    return !!(treffer && treffer.closest('.entry-title-link'));
+  });
+  check(imAnriss, 'Ganze Karte klickbar (Overlay deckt den Anriss des Artikels)');
+  await firstCard.locator('.entry-content').click({ force: true });
   await page.waitForURL('**' + firstArticle);
   check(await page.locator('main h1').count() === 1, 'Ganze Karte klickbar (Overlay des Titelankers)');
   await page.goBack({ waitUntil: 'networkidle' });
