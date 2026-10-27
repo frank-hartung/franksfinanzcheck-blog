@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-10-26 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-10-27 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -19,14 +19,7 @@
 
 | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung |
 |---|---|---|---|---|---|---|---|
-| ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
-
-## Heutige Live-Kandidaten (Deploy-Scope)
-
-| Artikel | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung | Urteil |
-|---|---|---|---|---|---|---|---|---|---|
-| `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
-| `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
+| ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
 
 ## Live-Bestand (Artikel für Artikel)
 
@@ -38,7 +31,7 @@
 | `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-28 | **freigabe-reif** |
 | `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-28 | **freigabe-reif** |
 | `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-27 | **freigabe-reif** |
+| `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-27 | **blockiert** |
 | `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
 | `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
 | `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
@@ -46,7 +39,7 @@
 | `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **freigabe-reif** |
 | `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
 | `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
-| `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-27 | **freigabe-reif** |
+| `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-27 | **blockiert** |
 | `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
 | `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-10-28 | **freigabe-reif** |
 | `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-12 | **freigabe-reif** |
@@ -101,9 +94,16 @@
 | `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
 | `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
 
-## Blockierende Funde (0 Artikel)
+## Blockierende Funde (2 Artikel)
 
-Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
+### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` (blockiert, Risikoklasse standard)
+
+- **F1-faktenfrische** [faktenalter]: 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) – keine Veröffentlichung ohne aktuellen Beleg
+
+### `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` (blockiert, Risikoklasse standard)
+
+- **F1-faktenfrische** [faktenalter]: 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) – keine Veröffentlichung ohne aktuellen Beleg
+
 ## Warnungen ohne Blockade (0 Artikel)
 
 Keine.
@@ -112,34 +112,34 @@ Keine.
 
 | Artikel | Risikoklasse | Freigabe | Faktenstand | Nächste Prüfung |
 |---|---|---|---|---|
-| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | ausstehend | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | hoch | ausstehend | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich` | hoch | vorhanden | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` | standard | nicht erforderlich | frisch geprüft vor 29 Tagen (Intervall 45 Tage) | 2026-11-11 |
-| `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 24 Tagen (Intervall 45 Tage) | 2026-11-16 |
-| `2026-10-05-die-50-30-20-regel-einfach-erklaert` | standard | nicht erforderlich | frisch geprüft vor 21 Tagen (Intervall 90 Tage) | 2027-01-03 |
-| `2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 18 Tagen (Intervall 90 Tage) | 2027-01-06 |
-| `2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich` | standard | nicht erforderlich | frisch geprüft vor 18 Tagen (Intervall 45 Tage) | 2026-11-22 |
-| `2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 30 Tage) | 2026-11-12 |
-| `2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 90 Tage) | 2027-01-11 |
-| `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 20 Tagen (Intervall 45 Tage) | 2026-11-20 |
-| `2026-10-12-stromfresser-im-haushalt-entlarven` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 45 Tage) | 2026-11-27 |
-| `2026-10-14-heizperiode-vorbereiten-im-spaetsommer` | standard | nicht erforderlich | frisch geprüft vor 11 Tagen (Intervall 30 Tage) | 2026-11-14 |
-| `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | frisch geprüft vor 6 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
-| `2026-10-16-dns-server-aendern-fuer-schnelleres-internet` | standard | nicht erforderlich | frisch geprüft vor 6 Tagen (Intervall 90 Tage) | 2027-01-18 |
-| `2026-10-19-urlaubskasse-clever-aufbessern` | standard | nicht erforderlich | frisch geprüft vor 6 Tagen (Intervall 30 Tage) | 2026-11-19 |
-| `2026-10-21-mietwagen-fallen-im-urlaub-vermeiden` | standard | nicht erforderlich | frisch geprüft vor 4 Tagen (Intervall 30 Tage) | 2026-11-21 |
+| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | ausstehend | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | hoch | vorhanden | 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) | unbekannt ⚠️ überfällig |
+| `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) | unbekannt ⚠️ überfällig |
+| `2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | hoch | ausstehend | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich` | hoch | vorhanden | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
+| `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` | standard | nicht erforderlich | frisch geprüft vor 30 Tagen (Intervall 45 Tage) | 2026-11-11 |
+| `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 25 Tagen (Intervall 45 Tage) | 2026-11-16 |
+| `2026-10-05-die-50-30-20-regel-einfach-erklaert` | standard | nicht erforderlich | frisch geprüft vor 22 Tagen (Intervall 90 Tage) | 2027-01-03 |
+| `2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 19 Tagen (Intervall 90 Tage) | 2027-01-06 |
+| `2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich` | standard | nicht erforderlich | frisch geprüft vor 19 Tagen (Intervall 45 Tage) | 2026-11-22 |
+| `2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 14 Tagen (Intervall 30 Tage) | 2026-11-12 |
+| `2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit` | standard | nicht erforderlich | frisch geprüft vor 14 Tagen (Intervall 90 Tage) | 2027-01-11 |
+| `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 21 Tagen (Intervall 45 Tage) | 2026-11-20 |
+| `2026-10-12-stromfresser-im-haushalt-entlarven` | standard | nicht erforderlich | frisch geprüft vor 14 Tagen (Intervall 45 Tage) | 2026-11-27 |
+| `2026-10-14-heizperiode-vorbereiten-im-spaetsommer` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 30 Tage) | 2026-11-14 |
+| `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` | hoch | vorhanden | frisch geprüft vor 7 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
+| `2026-10-16-dns-server-aendern-fuer-schnelleres-internet` | standard | nicht erforderlich | frisch geprüft vor 7 Tagen (Intervall 90 Tage) | 2027-01-18 |
+| `2026-10-19-urlaubskasse-clever-aufbessern` | standard | nicht erforderlich | frisch geprüft vor 7 Tagen (Intervall 30 Tage) | 2026-11-19 |
+| `2026-10-21-mietwagen-fallen-im-urlaub-vermeiden` | standard | nicht erforderlich | frisch geprüft vor 5 Tagen (Intervall 30 Tage) | 2026-11-21 |
 | `2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | erhoeht | nicht erforderlich | frisch geprüft vor 19 Tagen (Intervall 45 Tage) | 2026-11-21 |
-| `2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 19 Tagen (Intervall 30 Tage) | 2026-11-06 |
-| `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | frisch geprüft vor 11 Tagen (Intervall 30 Tage) | 2026-11-14 |
-| `2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 30 Tage) | 2026-11-25 |
+| `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | erhoeht | nicht erforderlich | frisch geprüft vor 20 Tagen (Intervall 45 Tage) | 2026-11-21 |
+| `2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 20 Tagen (Intervall 30 Tage) | 2026-11-06 |
+| `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | standard | nicht erforderlich | frisch geprüft vor 12 Tagen (Intervall 30 Tage) | 2026-11-14 |
+| `2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 30 Tage) | 2026-11-25 |
 | `2026-10-26-gastarife-vergleichen-vor-dem-herbst` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)

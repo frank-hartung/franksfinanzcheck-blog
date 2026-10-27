@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T23:37:47Z",
+  "generated_at": "2026-10-27T05:13:41Z",
   "modus": "kandidaten",
-  "commit": "e7a75123d1a4ece7117e24de74c3d50780ab9820",
+  "commit": "138a1a025a7ab8e52f001e3f94f2a1a041e89fe6",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -108,12 +108,12 @@
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "6d6a706d2d1ac0fec52faf0c5eaa1657d9642abbf6cf7b305c8ac167a6c3bdbe",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -244,12 +244,12 @@
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "bf75545698a6532929e21035d145a9f5d2fa0e2cba3b98f9ce818200def59c1f",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
