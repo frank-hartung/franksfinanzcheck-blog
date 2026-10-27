@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
 title: "DSL Hacks: Was brauchst du wirklich? – Schnelles Internet"
-description: "DSL Hacks: WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was dein Zuhause wirklich braucht – mit klaren Kosten und einer Entscheidungshilfe."
+description: "WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was dein Zuhause wirklich braucht – mit klaren Kosten und einer Entscheidungshilfe."
 date: 2026-09-28T01:05:48Z
 draft: false
 reserve_published: 2026-09-28

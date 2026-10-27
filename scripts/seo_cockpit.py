@@ -19,7 +19,13 @@ kommen aus `scripts/serp_limits.py`, NICHT als Kopie):
   · description-breite  – über 985 Pixel in Arial 14 px (dieselbe Grenze,
     die das Marktwerkzeug ansetzt; gemessen über die Helvetica-Kernmetrik)
   · link-no-anchor      – interner Link ohne Ankertext; `aria-label`
-    benennt ihn für Screenreader, ist aber kein Ankertext für Crawler
+    benennt ihn für Screenreader, ist aber kein Ankertext für Crawler.
+    NUR BERICHT, NICHT GATE: Am 27.10.2026 hat der Seobility-Lauf
+    dieselbe Klasse unabhängig gefunden und mit `scripts/linktext_wache.py`
+    eine eigene Wache samt Selbsttest und begründeten Ausnahmen
+    (`data-ff-linktext-frei`, `<a>` ohne `href`) bekommen. Zwei Wachen für
+    einen Befund laufen auseinander – dort gilt die breitere, hier bleibt
+    die Zeile als Audit-Dimension (das Cockpit zeigt sie im Bericht).
   · heading-order       – Sprung in der Überschriftenhierarchie (h2 → h4).
     „Mehrere H2" selbst ist KEIN Befund: HTML erlaubt beliebig viele H2,
     solange die Rangfolge stimmt. Genau das prüft diese Regel.
@@ -50,7 +56,9 @@ ROOT = Path(__file__).resolve().parents[1]
 # EINE Liste: `--fail-on` nennt sie im Hilfetext, `.github/workflows/e2e.yml`
 # übergibt sie, und `test_seo_cockpit.py` vergleicht beides mit dieser
 # Konstante – eine Änderung hier ohne Änderung dort ist ein roter Test.
-GATE_CODES = ('description-length', 'description-breite', 'link-no-anchor', 'heading-order')
+# `link-no-anchor` fehlt hier bewusst: Ankertext und Alt-Texte gate-t
+# `scripts/linktext_wache.py` (breitere Regel, eigene Ausnahmen, Selbsttest).
+GATE_CODES = ('description-length', 'description-breite', 'heading-order')
 
 
 class Document(HTMLParser):
@@ -346,7 +354,8 @@ def audit(build: Path, base: str) -> dict:
         if ohne_text:
             add(rel, 'link-no-anchor', 'P2', '\n'.join(ohne_text[:20]),
                 'Ankertext in den Link schreiben (sichtbar oder als sr-only-Spanne); '
-                'aria-label benennt ihn für Screenreader, nicht für Suchmaschinen.')
+                'aria-label benennt ihn für Screenreader, nicht für Suchmaschinen. '
+                'Gate: scripts/linktext_wache.py (L1).')
         missing_alt = sum('alt' not in img for img in doc.images)
         if missing_alt:
             add(rel, 'image-alt', 'P2', f'{missing_alt} Bilder ohne alt-Attribut', 'Informative Alt-Texte ergänzen; dekorative Bilder erhalten alt="".')
