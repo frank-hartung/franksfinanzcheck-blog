@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T18:50:56Z",
+  "generated_at": "2026-10-27T20:00:43Z",
   "modus": "kandidaten",
-  "commit": "529c1dd3db490afad67355ca331a459de41d75bf",
+  "commit": "0b6a1a2744d19bd5874400c8d1348c28624b3ac0",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -53,7 +53,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "ca88530113b29c91eca13f01f66009a7d966119b6d89295693dac035090a4145",
@@ -155,7 +155,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
       "sha256": "147bb7eae2e6be0c6d266c120178abd2fb8e8be8c4c29b541645fd926aed8e1a",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "23496e384a90eda728566226cf6e03589c1b8e90f039fbf5856a1544cd81f457",
@@ -614,7 +614,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
       "sha256": "a4a96bced7c037833d9c148a9803c82f4417282a22842f3b020dc6a0287195c5",
@@ -631,7 +631,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "b96b575fbeafd39b1258395e093a6fff97a0a00e918a65e46ddd40f2ce0f5037",
@@ -682,7 +682,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "e9f5357b4e6267232f83369c389b07e6cb8ddef25edf8a2c41f118bbb1611726",
@@ -750,7 +750,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "8e94c3cc691844554b65c9edc70e679587139645343678b1cf0176cdda6b8dc6",
@@ -835,7 +835,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-18",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
       "sha256": "f7ec05e313182acddde94ec0d09d7a0fda316bbde6a8e6c763fd586bdceead42",
@@ -1090,7 +1090,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "22481443097a042860dc13d27f685be0a669857e636b77404726a7551a4c2d4f",
@@ -1141,7 +1141,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "cb7d88c5cc7831f60cce5dec4de56189f8f0e8d109d57a5ec28c23f0a0975c5f",
