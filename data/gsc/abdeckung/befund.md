@@ -1,6 +1,6 @@
 # Befund Abdeckung
 
-## Abdeckung (Search Console, Stand 2026-10-19, 7 Tage alt)
+## Abdeckung (Search Console, Stand 2026-10-19, 8 Tage alt)
 
 **Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `content/ (Näherung, kein Build gemessen)`
 
@@ -54,28 +54,29 @@
 
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
-| 8.33 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 22 | 2 | verlinkt |
-| 6.82 | `/pillar/internet-dsl/` | 11 | 17 | verlinkt |
-| 5.75 | `/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/` | 6 | 2 | verlinkt |
-| 4.31 | `/pillar/` | 5 | 2 | verlinkt |
-| 4.23 | `/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/` | 3 | 3 | verlinkt |
+| 11.0 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 35 | 2 | verlinkt |
+| 7.16 | `/pillar/internet-dsl/` | 12 | 17 | verlinkt |
+| 5.73 | `/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/` | 6 | 2 | verlinkt |
+| 4.68 | `/pillar/` | 6 | 2 | verlinkt |
+| 4.61 | `/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/` | 4 | 3 | verlinkt |
+| 4.28 | `/impressum/` | 10 | 7 | verlinkt |
 | 4.02 | `/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/` | 2 | 2 | verlinkt |
 | 4.0 | `/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/` | 0 | 1 | nur ein Inlink |
 | 3.97 | `/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/` | 2 | 4 | verlinkt |
 | 3.93 | `/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/` | 1 | 4 | verlinkt |
-| 3.93 | `/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/` | 1 | 9 | verlinkt |
 
 ### Sprünge im Verlauf
 
-- **2026-10-17** · nicht_indexiert +59 – belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später
-- **2026-10-17** · indexiert -21 – belegt (Repo): Saldo +32 Beitragsentwürfe am 2026-10-14 (36 neu zurückgestuft), Google meldet den Sprung 3 Tage später
+- **2026-10-17** · nicht_indexiert +59 – kein Beleg im Repo gefunden
+- **2026-10-17** · indexiert -21 – Größenordnung passt – Ursache noch nicht belegt
+  - Kandidat: Taxonomie-URLs (abgeschaltet) (23), Abweichung 10 %
 
 ### Abnahme
 
 | Kriterium | Ziel | Status | Messung |
 |---|---|---|---|
 | Gate grün (kein Rückschritt, kein Widerspruch) | sofort | ✅ | Gate: gruen |
-| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (7 Tage alt) |
+| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (8 Tage alt) |
 | 404er mit Nachfrage triagiert | sofort | 🛑 | 193 ohne Erklärung im Bestand |
 | Indexquote steigt | 14 Tage | ❔ | 26.8 % bei 1 Momentaufnahme(n) |
 | Seiten ohne redaktionellen Inlink | 30 Tage | ✅ | 0 Seiten |
@@ -86,8 +87,9 @@
 |---|---|---|---|
 | M1 | P1 | 404-Detail-Liste einlesen und triagieren | Übersicht: 223 × 404 · erklärbar 30 · offen 193 |
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 99 indexierbaren Seiten |
+| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 8 Tage alt |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
-| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (8 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (7 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.) |
+| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 99 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (7 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (6 Impr.), /posts/depot-umzug-steuerfrei-wechseln/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/haushaltsbuch/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |
 | M9 | P2 | Indexquote als Zielgröße etablieren | 117 von 437 bekannten URLs |
 | M5 | P3 | noindex-Bestand als Vertrag führen | 5 × robotsNoIndex in content/ · GSC 5 |
