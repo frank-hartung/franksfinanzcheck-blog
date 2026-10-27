@@ -10,7 +10,8 @@
        Datenweitergabe beim bloßen Seitenaufruf.
 
        Vertrag:
-         · Jede Aktion hat SICHTBAREN Text („Auf Mastodon teilen“).
+         · Jede Aktion hat SICHTBAREN Text („Auf Mastodon teilen“) –
+           ohne Icon: Das DOM-Budget der Artikelseite ist knapp.
            Reine Icon-Links sind für Crawler Links ohne Linktext und
            für Sprachsteuerung nicht ansprechbar – genau der Fehler,
            der hier behoben wird.
@@ -30,50 +31,26 @@
 {{- $text := printf "%s – %s" $titel $url -}}
 <aside class="ff-teilen" data-ff-teilen="{{ $ort }}" aria-label="Diese Seite teilen">
   <p class="ff-teilen__titel">Teilen &amp; weiterempfehlen</p>
-  <ul class="ff-teilen__liste" role="list">
-    <li>
-      <a class="ff-teilen__aktion" rel="nofollow noopener noreferrer" target="_blank"
-         href="https://mastodon.social/share?text={{ $text | urlquery }}"
-         data-klick="share_click" data-klick-netzwerk="mastodon" data-klick-placement="{{ $ort }}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <path d="M4 12v3a4 4 0 0 0 4 4h9" /><path d="M15 5h5v5" /><path d="M20 5 11 14" />
-        </svg>
-        Auf Mastodon teilen
-      </a>
-    </li>
-    <li>
-      <a class="ff-teilen__aktion" rel="nofollow noopener noreferrer" target="_blank"
-         href="https://www.pinterest.com/pin/create/button/?url={{ $url | urlquery }}&amp;description={{ $titel | urlquery }}"
-         data-klick="share_click" data-klick-netzwerk="pinterest" data-klick-placement="{{ $ort }}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-          <path d="M12 2a10 10 0 0 0-3.65 19.31c-.05-.79-.1-2 .02-2.87.11-.78 1.2-5.03 1.2-5.03s-.3-.6-.3-1.5c0-1.4.8-2.45 1.8-2.45.86 0 1.28.64 1.28 1.42 0 .86-.55 2.15-.84 3.35-.24 1 .5 1.83 1.5 1.83 1.8 0 3.18-1.9 3.18-4.63 0-2.42-1.74-4.11-4.23-4.11-2.88 0-4.57 2.16-4.57 4.4 0 .87.34 1.8.76 2.31.08.1.1.19.07.29-.07.32-.25 1-.28 1.15-.04.19-.15.23-.34.14-1.23-.57-2-2.37-2-3.82 0-3.12 2.27-5.98 6.53-5.98 3.43 0 6.1 2.44 6.1 5.7 0 3.4-2.14 6.14-5.12 6.14-1 0-1.95-.52-2.27-1.14l-.62 2.35c-.22.86-.83 1.94-1.24 2.6A10 10 0 1 0 12 2Z" />
-        </svg>
-        Auf Pinterest merken
-      </a>
-    </li>
-    <li>
-      <a class="ff-teilen__aktion"
-         href="mailto:?subject={{ printf "Empfehlung: %s" $titel | urlquery }}&amp;body={{ printf "Diesen Ratgeber fand ich hilfreich: %s" $text | urlquery }}"
-         data-klick="share_click" data-klick-netzwerk="email" data-klick-placement="{{ $ort }}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m2 7 10 6 10-6" />
-        </svg>
-        Per E-Mail empfehlen
-      </a>
-    </li>
-    <li>
-      <button class="ff-teilen__aktion" type="button" data-ff-teilen-kopieren="{{ $url }}"
-              data-klick="share_click" data-klick-netzwerk="kopie" data-klick-placement="{{ $ort }}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-        </svg>
-        Link kopieren
-      </button>
-    </li>
-  </ul>
+  {{- /* Warum keine <ul>/<li> und keine Icons mehr (27.10.2026): Die
+         Teilen-Zeile steht auf jeder Artikelseite. Vier Icons kosteten
+         12 DOM-Elemente, die Listenstruktur fünf weitere – genug, um eine
+         ohnehin schwere Seite über die harte Lighthouse-Grenze von 1400
+         Elementen zu schieben (gemessen: 1414 statt 1384). Die Chips
+         tragen ihren Namen als Text; ein Icon daneben wäre nur Dekoration,
+         die man auch vorlesen müsste. */ -}}
+  <p class="ff-teilen__liste">
+    <a class="ff-teilen__aktion" rel="nofollow noopener noreferrer" target="_blank"
+       href="https://mastodon.social/share?text={{ $text | urlquery }}"
+       data-klick="share_click" data-klick-netzwerk="mastodon" data-klick-placement="{{ $ort }}">Auf Mastodon teilen</a>
+    <a class="ff-teilen__aktion" rel="nofollow noopener noreferrer" target="_blank"
+       href="https://www.pinterest.com/pin/create/button/?url={{ $url | urlquery }}&amp;description={{ $titel | urlquery }}"
+       data-klick="share_click" data-klick-netzwerk="pinterest" data-klick-placement="{{ $ort }}">Auf Pinterest merken</a>
+    <a class="ff-teilen__aktion"
+       href="mailto:?subject={{ printf "Empfehlung: %s" $titel | urlquery }}&amp;body={{ printf "Diesen Ratgeber fand ich hilfreich: %s" $text | urlquery }}"
+       data-klick="share_click" data-klick-netzwerk="email" data-klick-placement="{{ $ort }}">Per E-Mail empfehlen</a>
+    <button class="ff-teilen__aktion" type="button" data-ff-teilen-kopieren="{{ $url }}"
+            data-klick="share_click" data-klick-netzwerk="kopie" data-klick-placement="{{ $ort }}">Link kopieren</button>
+  </p>
   <p class="ff-teilen__status" role="status" aria-live="polite" data-ff-teilen-status></p>
 </aside>
 {{- if not (.page.Scratch.Get "ffTeilenSkript") -}}

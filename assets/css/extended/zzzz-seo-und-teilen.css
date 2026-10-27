@@ -202,13 +202,14 @@
     color: var(--secondary);
 }
 
+/* Die Aktionen stehen als Chip-Reihe in einem Absatz (kein <ul>/<li>,
+   keine Icons – DOM-Budget der Artikelseite, siehe Partial-Kommentar). */
 .ff-teilen__liste {
     display: flex;
     flex-wrap: wrap;
     gap: 8px 10px;
     margin: 0;
     padding: 0;
-    list-style: none;
 }
 
 .ff-teilen__aktion {
@@ -240,6 +241,12 @@
 
 .ff-teilen__aktion svg {
     flex: none;
+}
+
+/* In einem <p> sind Buttons und Links inline – ohne diese Zeile würde
+   der Browser die Zeilenhöhe des Absatzes mitschreiben. */
+.ff-teilen__liste .ff-teilen__aktion {
+    vertical-align: middle;
 }
 
 .ff-teilen__status {
