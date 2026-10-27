@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T10:29:36Z",
-  "modus": "live",
-  "commit": "e9ea633fae0f93076851e4592589eb861c126514",
+  "generated_at": "2026-10-27T10:42:44Z",
+  "modus": "kandidaten",
+  "commit": "b7491b5f2f58079aa00e3a587d81bce3a870c467",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -274,7 +274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "2ef9966a47dfc6b2464aca8ab77e03a752813453bc8bd3be86aba8801056cc74",
@@ -291,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "65aad44b1bfe5d1618f60e582cdf0eb431d46af5b0c98bd2c3a7744a1f302de1",
@@ -1005,7 +1005,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
       "sha256": "ef4dc5205e77c88c0695eba54a9595403e08aa5b81f285f9e970e89dd56ea856",
@@ -1022,7 +1022,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "dfea273a82ea3bc392de6508f31057b3a40db5427daf91882f2e7a9f3dd2a576",
@@ -1073,7 +1073,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
       "sha256": "99c20566fdfe768bd5b2d8c4afebfe010b6578e3414af4baa5792f23d39cc319",
@@ -1090,7 +1090,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "567ccdfb834776289c4282d35fb4f74f7a363b3a407d9358c3264c7a1c46f02d",
