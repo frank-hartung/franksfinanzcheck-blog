@@ -15,6 +15,11 @@
       "serien": 0,
       "ueberlang": false
     },
+    "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "mikro": 13,
       "serien": 1,
@@ -37,6 +42,11 @@
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -110,6 +120,26 @@
       "serien": 0,
       "ueberlang": false
     },
+    "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
       "mikro": 1,
       "serien": 0,
@@ -127,6 +157,11 @@
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
+      "mikro": 3,
       "serien": 0,
       "ueberlang": false
     },
@@ -190,9 +225,9 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "mikro": 26,
-      "serien": 1,
+    "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
+      "mikro": 3,
+      "serien": 0,
       "ueberlang": false
     },
     "2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen": {
@@ -216,7 +251,12 @@
       "ueberlang": false
     },
     "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-      "mikro": 4,
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
+      "mikro": 6,
       "serien": 0,
       "ueberlang": false
     },
@@ -230,8 +270,18 @@
       "serien": 0,
       "ueberlang": false
     },
+    "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
+      "mikro": 10,
+      "serien": 0,
+      "ueberlang": false
+    },
     "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
       "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
+      "mikro": 4,
       "serien": 0,
       "ueberlang": false
     },
@@ -261,52 +311,27 @@
       "ueberlang": false
     },
     "2026-10-05-die-50-30-20-regel-einfach-erklaert": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
       "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
-    "2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
-      "mikro": 6,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-06-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-06-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-06-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
-      "mikro": 7,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "mikro": 6,
+    "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
+      "mikro": 4,
       "serien": 0,
       "ueberlang": false
     },
     "2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert": {
-      "mikro": 3,
-      "serien": 1,
+      "mikro": 0,
+      "serien": 0,
       "ueberlang": false
     },
-    "2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+    "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
       "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
+      "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
@@ -315,53 +340,163 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-      "mikro": 8,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
       "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
-    "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-      "mikro": 8,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
-      "mikro": 1,
+      "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
-      "mikro": 9,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
-      "mikro": 3,
+      "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-      "mikro": 9,
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-12-stromfresser-im-haushalt-entlarven": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-16-dns-server-aendern-fuer-schnelleres-internet": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-19-urlaubskasse-clever-aufbessern": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-28-dsl-und-internet-flat-guenstig-sichern": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     }
@@ -372,5 +507,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-10-07"
+  "stand": "2026-10-28"
 }
