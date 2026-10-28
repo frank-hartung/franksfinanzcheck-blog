@@ -171,7 +171,13 @@ if (typeof document !== 'undefined') {
 
     const fuss = el('footer');
     const link = el('a', 'Seite in neuem Tab öffnen');
-    link.href = page.url;
+    // Wie im SEO-Cockpit: nur geprüfte http(s)-Ziele verlinken. Ohne die
+    // Prüfung wäre ein `javascript:`-Ziel aus dem Inhalt im lokalen Bericht
+    // ein Klick-XSS (CodeQL js/xss-through-dom, Lauf vom 28.10.2026).
+    try {
+      const ziel = new URL(page.url);
+      if (ziel.protocol === 'https:' || ziel.protocol === 'http:') link.href = ziel.href;
+    } catch { /* Rohtext statt unsicherem Link */ }
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     fuss.append(link, el('span', page.sektion === 'pillar' ? 'Pillar' : page.sektion === 'build' ? 'Build' : 'Artikel'));
