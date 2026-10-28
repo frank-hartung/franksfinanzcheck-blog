@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 28.10.2026 12:25 (Europe/Berlin)  
+> Automatisch aktualisiert: 28.10.2026 19:55 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,12 +12,11 @@
 
 ## Kommende Beiträge
 
-### Mi, 28. Oktober 2026
-- **11:30** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### Do, 29. Oktober 2026
 - **07:30** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _frage_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+- **07:30** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
 ### Sa, 31. Oktober 2026
 - **11:30** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
@@ -45,6 +44,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 28.10.2026 19:55 · Gasrechnung senken: Fehler im Spätsommer vermeiden → https://mastodon.social/@FranksFinanzcheck/117520055691320012
 - ✅ 28.10.2026 12:25 · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung → https://mastodon.social/@FranksFinanzcheck/117518286645334223
 - ✅ 27.10.2026 17:43 · Preisgarantie Gas: So sicherst du günstige Tarife → https://mastodon.social/@FranksFinanzcheck/117513874714476845
 - ✅ 27.10.2026 11:41 · Energieeffizienz im Haushalt: 5 schnelle Spartricks → https://mastodon.social/@FranksFinanzcheck/117512449068863753
@@ -54,7 +54,6 @@
 - ✅ 24.10.2026 16:38 · Sicher heizen: Was sie abdeckt und wie lange sie läuft → https://mastodon.social/@FranksFinanzcheck/117496395618697602
 - ✅ 24.10.2026 11:37 · Stromkosten senken: Clevere Haushaltsgeräte im Überblick → https://mastodon.social/@FranksFinanzcheck/117495210407092416
 - ✅ 23.10.2026 17:46 · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig → https://mastodon.social/@FranksFinanzcheck/117491000820019813
-- ✅ 23.10.2026 12:12 · Kleine Energiespar‑Tricks: Deine Kosten sofort senken → https://mastodon.social/@FranksFinanzcheck/117489686600605060
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
