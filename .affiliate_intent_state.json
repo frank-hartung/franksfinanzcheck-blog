@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-27 09:30:35 UTC",
+ "generated_at": "2026-10-28 10:15:03 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 104,
- "checked_links": 244,
+ "checked_articles": 105,
+ "checked_links": 247,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -164,7 +164,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-   "line": 126,
+   "line": 127,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
