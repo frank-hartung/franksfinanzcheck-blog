@@ -2,11 +2,10 @@
 lastmod: 2026-10-19
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 brauchen – Wohngebäude, Hausrat, Elementarschutz und Unterversicherung."
-date: 2026-10-19T01:19:44Z
+date: 2026-10-28T08:36:47Z
 draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-19T13:09:54Z
-cadence_grund: "Redaktion 27.10.2026: RS1–RS7 grün, YMYL-Freigabe neu versiegelt – zurück in die Kadenz"
+cadence_demoted: 2026-10-28T08:37:58Z
+cadence_grund: "ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert"
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
