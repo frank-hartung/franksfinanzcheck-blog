@@ -564,6 +564,21 @@ def main(argv: list[str]) -> int:
 
     if args.selftest:
         return selftest()
+    # Ein Absturz ist KEINE Policy-Aussage. Ohne diesen Fänger endet eine
+    # Ausnahme mit Exit 1 – und der Workflow meldete „ein Befund sperrt",
+    # obwohl in Wahrheit das Werkzeug gestorben ist (real passiert im ersten
+    # CI-Lauf am 28.10.2026). Exit 2 heißt: nichts wird freigegeben.
+    try:
+        return _pruefe_und_berichte(args)
+    except Exception as fehler:  # noqa: BLE001 – Beweislast: alles melden
+        import traceback
+        traceback.print_exc()
+        print(f"❌ SEO-Parität CI: Werkzeug gestorben – {type(fehler).__name__}: {fehler}",
+              file=sys.stderr)
+        return 2
+
+
+def _pruefe_und_berichte(args) -> int:
     if args.json == "-" or args.summary:
         with contextlib.redirect_stdout(sys.stderr):
             if selftest() != 0:

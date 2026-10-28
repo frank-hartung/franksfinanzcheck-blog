@@ -40,6 +40,17 @@
 #  07.10.2026, `scripts/selftest_clock.py`). Wer es strenger will, startet
 #  den Lauf von Hand mit `streng: true` – dann bewusst, nicht als Dauerzustand.
 #
+#  EXIT 1 UND EXIT 2 SIND VERSCHIEDENE AUSSAGEN
+#  --------------------------------------------
+#  `1` = die Policy sagt nein (ein Befund sperrt). `2` = es wurde nichts
+#  gemessen (Werkzeug, Selbsttest oder Umleitung defekt). Der erste Lauf
+#  dieses Workflows (28.10.2026) hat den Unterschied vorgeführt: `bash`
+#  wertete `> seo-paritaet/summary.md` aus, BEVOR das Verzeichnis existierte,
+#  die Zeile starb mit Exit 1 – und der PR las „ein Befund sperrt", obwohl
+#  kein Befund erhoben wurde. Darum: `mkdir -p` vor der Umleitung, jede
+#  Ausnahme im Skript wird zu Exit 2, und die erste Fehlerzeile steht in der
+#  Annotation statt nur im Log.
+#
 #  WAS DIESER LAUF NICHT TUT
 #  -------------------------
 #    · keine Netzaufrufe außer den GitHub-eigenen Actions; PyYAML kommt aus
@@ -164,21 +175,34 @@ jobs:
           STRENG: ${{ github.event.inputs.streng || 'false' }}
           BERICHT: seo-paritaet/bericht.md
           DATEN: seo-paritaet/bericht.json
-          ZUSAMMENFASSUNG: seo-paritaet/summary.md
         run: |
           set +e
+          # Das Ausgabeverzeichnis muss VOR der Umleitung existieren: `bash`
+          # wertet `> seo-paritaet/summary.md` aus, bevor das Skript läuft.
+          # Fehlt es, stirbt die Zeile mit Exit 1 – und der Lauf meldete
+          # „ein Befund sperrt", obwohl gar nichts gerechnet wurde (erster
+          # Lauf dieses Workflows, 28.10.2026).
+          mkdir -p seo-paritaet
           zusatz=""
           if [ "$STRENG" = "true" ]; then zusatz="--streng"; fi
           python3 scripts/seo_paritaet_ci.py \
             --md "$BERICHT" --json "$DATEN" --summary $zusatz \
-            > "$ZUSAMMENFASSUNG" 2> /tmp/seo-paritaet.log
+            > /tmp/seo-paritaet-summary.md 2> /tmp/seo-paritaet.log
           code=$?
           cat /tmp/seo-paritaet.log
-          cat "$ZUSAMMENFASSUNG" >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/seo-paritaet-summary.md >> "$GITHUB_STEP_SUMMARY"
+          if [ "$code" -ne 0 ]; then
+            # Die erste echte Fehlerzeile gehört in die Annotation: Wer sie
+            # nicht sieht, lädt ein Artefakt herunter, das er nicht braucht.
+            zeile="$(grep -m1 -E '^[A-Za-z_.]*(Error|Exception):|^Traceback' /tmp/seo-paritaet.log 2>/dev/null)"
+            [ -n "$zeile" ] || zeile="$(tail -n 1 /tmp/seo-paritaet.log 2>/dev/null)"
+            [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"
+            zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-600)"
+          fi
           if [ "$code" = "1" ]; then
-            echo "::error title=SEO-Parität::Mindestens ein Befund sperrt den Merge. Der Bericht steht in der Lauf-Zusammenfassung, die vollständige Liste im Artefakt 'seo-paritaet-gate'. Policy und Maßnahmen: docs/ANLEITUNG-SEO-PARITAET.md"
+            echo "::error title=SEO-Parität::Mindestens ein Befund sperrt den Merge – ${zeile}. Der Bericht steht in der Lauf-Zusammenfassung, die vollständige Liste im Artefakt 'seo-paritaet-gate'. Policy: docs/ANLEITUNG-SEO-PARITAET.md"
           elif [ "$code" = "2" ]; then
-            echo "::error title=SEO-Parität::Ein Werkzeug oder sein Selbsttest ist defekt – es wird nichts freigegeben. Log oben; Ursache zuerst beheben."
+            echo "::error title=SEO-Parität::Ein Werkzeug oder sein Selbsttest ist defekt – es wird nichts freigegeben. ${zeile}"
           fi
           exit "$code"
 
@@ -238,17 +262,21 @@ jobs:
         env:
           BERICHT: seo-paritaet/bericht-build.md
           DATEN: seo-paritaet/bericht-build.json
-          ZUSAMMENFASSUNG: seo-paritaet/summary-build.md
         run: |
           set +e
+          mkdir -p seo-paritaet
           python3 scripts/seo_paritaet_ci.py --quelle build --ohne-tests \
             --md "$BERICHT" --json "$DATEN" --summary \
-            > "$ZUSAMMENFASSUNG" 2> /tmp/seo-paritaet-build.log
+            > /tmp/seo-paritaet-build-summary.md 2> /tmp/seo-paritaet-build.log
           code=$?
           cat /tmp/seo-paritaet-build.log
-          cat "$ZUSAMMENFASSUNG" >> "$GITHUB_STEP_SUMMARY"
+          cat /tmp/seo-paritaet-build-summary.md >> "$GITHUB_STEP_SUMMARY"
           if [ "$code" != "0" ]; then
-            echo "::error title=SEO-Parität (gebaut)::Die gerenderte Seite verletzt die Karten-Policy (z. B. og:image fehlt). Befund in der Lauf-Zusammenfassung, Details im Artefakt 'seo-paritaet-build'."
+            zeile="$(grep -m1 -E '^[A-Za-z_.]*(Error|Exception):|^Traceback' /tmp/seo-paritaet-build.log 2>/dev/null)"
+            [ -n "$zeile" ] || zeile="$(tail -n 1 /tmp/seo-paritaet-build.log 2>/dev/null)"
+            [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"
+            zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-600)"
+            echo "::error title=SEO-Parität (gebaut)::${zeile} · Die gerenderte Seite verletzt entweder die Karten-Policy (z. B. og:image fehlt) oder der Build ist unvollständig. Details im Artefakt 'seo-paritaet-build'."
           fi
           exit "$code"
 

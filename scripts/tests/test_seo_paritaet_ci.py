@@ -134,6 +134,14 @@ class ExitVertragTests(unittest.TestCase):
         lage = ci.Befund(warnungen=[posten("social", "social-titel", "P3")])
         self.assertEqual(lage.exit_code, 0)
 
+    def test_absturz_ist_exit_2_und_keine_policy_aussage(self):
+        """Eine Ausnahme darf nie als „Sperre" (1) durchgehen – real passiert
+        im ersten CI-Lauf am 28.10.2026, als die Shell-Umleitung starb."""
+        with patch.object(ci, "lauf", side_effect=TypeError("kaputt")), \
+                contextlib.redirect_stdout(io.StringIO()), \
+                contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(ci.main(["--ohne-tests"]), 2)
+
     def test_ausfall_eines_werkzeugs_ist_nie_gruen(self):
         """Ein fehlgeschlagener Unterprozess landet in `fehler`, nicht in `ok`."""
         schritt = ci.fuehre_aus("Probe", ["/gibt/es/nicht"])
