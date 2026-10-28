@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T19:38:55Z",
+  "generated_at": "2026-10-28T21:17:04Z",
   "modus": "kandidaten",
-  "commit": "94af82e98d7c548afa609a27e90aa433b92f909e",
+  "commit": "1dbfe3890a8adc1db3f34b1e9989fcc7b7bf4b28",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "4c575772621489ea99614e990911794c8158574c7c3d933d55f0252cc8d44ad6",
@@ -1178,7 +1178,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "99aff0f7993077fd32d7279e9c40da483dd2788b5d7b74b4bdc977ba27c26721",
+      "sha256": "44c2d8c72fe0c322b3e3a5d974f7e9949a7751e0237ba21521f6d6e03bc62819",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
