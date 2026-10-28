@@ -1,7 +1,7 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 6,
+  "ready": 3,
+  "pool_size": 4,
   "generated_at": "2026-10-28T12:51:59Z",
   "candidates": [
     {
@@ -13,40 +13,6 @@
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
-      "sha256": "9e86fac5718db982c3a797361233ebe2054b35538e582249f8b48bb76dea1dea",
-      "flesch": 74.1,
-      "measured_at": "2026-10-28T10:22:43Z",
-      "score": 0.974,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
-      "ready": true,
-      "sha256": "9c3ce20475581169ea2b2180c1fb7ccaa9182fba0435f8710252ddfef86865e1",
-      "flesch": 64.6,
-      "measured_at": "2026-10-28T10:23:49Z",
-      "score": 0.98,
-      "parts": {
-        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -122,6 +88,14 @@
     "at": "2026-10-28T12:51:59Z",
     "renewed": [
       "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  },
+  "ausgebucht": {
+    "at": "2026-10-28T19:34:09Z",
+    "slugs": [
+      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
     ],
     "tool": "scripts/reserve_recert.py"
   }
