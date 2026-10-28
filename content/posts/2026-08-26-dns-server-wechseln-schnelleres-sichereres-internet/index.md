@@ -116,7 +116,7 @@ DoH und DoT verschlüsseln die DNS‑Verbindung zwischen deinem Gerät beziehung
 
 Außerdem bleiben andere Netzwerkdaten sichtbar, etwa die Verbindung zu einer Ziel‑IP und Zeitpunkt oder Umfang des Datenverkehrs. HTTPS schützt den Inhalt der Verbindung zur Website, macht dich aber nicht vollständig anonym.
 
-Auch der Inkognitomodus ändert daran nichts: Er begrenzt vor allem, was der Browser lokal speichert. Google weist darauf hin, dass besuchte Websites und Netzwerkbetreiber wie Arbeitgeber oder Internetanbieter Aktivitäten dennoch beobachten können ([Chrome‑Hilfe](https://support.google.com/chrome/answer/95464?hl=de)).
+Auch der Inkognitomodus ändert daran nichts: Er begrenzt vor allem, was der Browser lokal speichert. Google weist darauf hin, dass besuchte Websites und Netzwerkbetreiber wie Arbeitgeber oder [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) Aktivitäten dennoch beobachten können ([Chrome‑Hilfe](https://support.google.com/chrome/answer/95464?hl=de)).
 
 ## DNS auf Router oder Endgerät ändern
 

@@ -53,7 +53,7 @@ kurzantwort: "Reduziere die Raumtemperatur um ein Grad, nutze LED‑Leuchten, st
 ## Warum lohnt sich Energieeffizienz im Haushalt?
 
 
-Darum geht es hier konkret: Energieeffizienz.
+Darum geht es hier konkret: [Energieeffizienz](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/).
 
 Effizienz bedeutet: Du behältst deinen Komfort, brauchst aber weniger Strom und Wärme als Modellwert. Damit sinken deine festen [Kosten sofort](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/). Deutsche Haushalte geben rund 30 % ihres Budgets für Energie aus.
 
@@ -93,7 +93,7 @@ Das schafft zudem eine gemütliche Stimmung im Wohnzimmer. Nutze das Tageslicht 
 
 ## Welche einfachen Maßnahmen reduzieren den Heizenergieverbrauch?
 
-Heizung und Warmwasser kosten in den meisten Häusern am meisten im Rechenbeispiel. Entlüfte deine Heizkörper daher regelmäßig vor jedem Winter.
+Heizung und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) kosten in den meisten Häusern am meisten im Rechenbeispiel. Entlüfte deine Heizkörper daher regelmäßig vor jedem Winter.
 
 Luft im System verhindert, dass das warme Wasser optimal fließt als Beispielwert. Das System muss dann viel mehr arbeiten. Das kostet dich etwa 5 % mehr Energie als nötig. Ein kleiner Schlüssel aus dem Baumarkt reicht dafür völlig aus.
 
@@ -107,7 +107,7 @@ Du spürst den Effekt direkt durch ein besseres Raumklima im Rechenfall. Der Wä
 
 > 💶 **Spar-Tipp zwischendurch:** Faire Konditionen gibt es online in Minuten: [**Stromanbieter vergleichen & sparen**](/go/strom/)
 
-Mach einen kurzen Test für deine Fenster. **Faustregel:** Schließ alle Fenster und miss nach fünf Minuten die Temperatur.
+Mach einen kurzen Test für deine Fenster. **Faustregel:** Schließ alle Fenster und miss nach [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) die Temperatur.
 
 Sinkt sie stark ab, brauchst du bessere Dichtungen. Faustregel: Jede undichte Stelle kostet etwa 1 % des gesamten Heizbudgets. Auch schwere Vorhänge vor den Fenstern helfen in der Nacht. Sie halten die Wärme im Raum und die Kälte draußen.
 
@@ -119,7 +119,7 @@ Sinkt sie stark ab, brauchst du bessere Dichtungen. Faustregel: Jede undichte St
 - [ ] **Thermostate** auf feste Zeiten für Absenkungen einstellen: Nachts reichen oft 17 Grad in den Wohnräumen aus. Das spart massiv Brennstoff.
 - [ ] **Fensterdichtungen** auf Risse oder Lücken kontrollieren: Klebe neue Dichtungen ein, wenn du einen Luftzug spürst. Das Material kostet nur wenige Euro.
 
-Erledige jede Woche eine Aufgabe aus dieser Liste. So wirst du Schritt für Schritt sparsamer. Du hast keinen Zeitdruck und siehst stetig Fortschritte. Dokumentiere deine Taten in einem kleinen Heft.
+Erledige jede Woche eine Aufgabe aus dieser Liste. So wirst du [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) sparsamer. Du hast keinen Zeitdruck und siehst stetig Fortschritte. Dokumentiere deine Taten in einem kleinen Heft.
 
 Kombiniere die einzelnen Punkte für den besten Erfolg. Faustregel: Fünf kleine Änderungen bringen oft mehr als eine große Investition.
 
@@ -165,7 +165,7 @@ Faustregel: Jede Investition, die sich in einem Jahr bezahlt macht, lohnt sich. 
 
 1. **Kosten sehen** – Sammle zuerst deine Abrechnungen der letzten vier Quartale. Schau dir den Verbrauch für [Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/) genau an. Vergleiche die Werte mit dem Vorjahr. So erkennst du Trends in deinem Verhalten.
 2. **Konditionen rechnen** – Vergleiche den Preis für neue Spar-Hardware mit der Ersparnis. Lohnt sich der Kauf einer neuen Leiste oder eines Thermostats? Meistens ist die Antwort ein klares Ja. Rechne die Zeit bis zur Rückzahlung aus.
-3. **Kündigungsfenster sichern** – Notiere dir das Ende deiner Vertragslaufzeit im Kalender. Nur so kannst du rechtzeitig den Anbieter wechseln. Ein Wechsel dauert oft nur wenige Minuten im Internet. Er bringt aber oft die größte Ersparnis im Jahr.
+3. **Kündigungsfenster sichern** – Notiere dir das Ende deiner [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) im Kalender. Nur so kannst du rechtzeitig den Anbieter wechseln. Ein Wechsel dauert oft nur wenige Minuten im Internet. Er bringt aber oft die größte Ersparnis im Jahr.
 4. **Kurs halten** – Prüfe vierteljährlich deine aktuellen Zählerstände. Reagiere bei starken Abweichungen sofort auf die Suche nach dem Grund. Vielleicht läuft eine alte Pumpe im Keller dauerhaft. Oder ein Gerät ist defekt und braucht zu viel Kraft.
 
 Der Pfad gibt dir einen klaren Überblick über deine Finanzen. So hält dein Sparen auch nach vielen Wochen noch an.

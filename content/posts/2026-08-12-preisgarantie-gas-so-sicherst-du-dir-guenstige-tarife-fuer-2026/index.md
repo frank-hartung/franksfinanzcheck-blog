@@ -264,7 +264,7 @@ Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie i
 
 Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und ob eine Paketmenge enthalten ist.
 
-Falls zwei Tarife fast gleich teuer sind, gewinnt nicht automatisch der mit dem größten Bonus. Bevorzuge die klarere Klausel, den besseren Preis ohne Bonus und die passendere Kündigungsfrist. Bei den übrigen Tarifen entscheidest du nach Gesamtpreis und gewünschter Sicherheit.
+Falls zwei Tarife fast gleich teuer sind, gewinnt nicht automatisch der mit dem größten Bonus. Bevorzuge die klarere Klausel, den besseren Preis ohne Bonus und die passendere [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Bei den übrigen Tarifen entscheidest du nach Gesamtpreis und gewünschter Sicherheit.
 
 Halte auch den Abrufzeitpunkt und deine Postleitzahl fest. So bleibt später klar, für welchen Ort und welchen Verbrauch das Angebot galt. Energiepreise können sich zwischen Suche und Abschluss ändern.
 

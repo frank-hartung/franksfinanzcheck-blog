@@ -199,7 +199,7 @@ Damit wird schnell klar: Routermiete ist kein Nebenthema. Sie kann den schönen 
 ### Kauf ist oft sinnvoll, wenn …
 
 - Du längerfristig planst,
-- du die Box über Anbieterwechsel hinweg nutzen willst,
+- du die Box über [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) hinweg nutzen willst,
 - du Mietkosten vermeiden möchtest.
 
 ## Wie du Ausfallzeiten klein hältst

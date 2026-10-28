@@ -208,7 +208,7 @@ Verkürze die Zeit bis zum Schlafmodus. Wenn du nur selten druckst, schalte das 
 
 ### Router und Repeater
 
-Reduziere ungenutzte Funkbänder oder plane WLAN-Pausen, statt den Router samt Telefonie und Smart Home hart zu trennen. Firmware und Anbietergerät bestimmen, welche Optionen verfügbar sind.
+Reduziere ungenutzte Funkbänder oder plane WLAN-Pausen, statt den Router samt Telefonie und [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) hart zu trennen. Firmware und Anbietergerät bestimmen, welche Optionen verfügbar sind.
 
 ### PC und Monitor
 

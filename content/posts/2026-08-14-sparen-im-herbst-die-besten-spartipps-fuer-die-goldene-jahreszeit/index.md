@@ -45,7 +45,7 @@ Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-f
 
 Heizkostenverträge solltest du vor dem ersten Frost prüfen. Auch Versicherer passen jetzt ihre Tarife an.
 
-Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca. 500 € und 1.300 €** an Haushaltskosten. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir Schritt für Schritt.
+Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca. 500 € und 1.300 €** an Haushaltskosten. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/).
 
 **Das Wichtigste in Kürze**
 
@@ -76,7 +76,7 @@ Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im He
 
 | Schritt | Was du tun musst | Hinweis |
 |---|---|---|
-| 1 | Kündigungsfrist prüfen (meist 1 Monat) | Kündigung muss spätestens 30. Nov. beim Versicherer eingehen. |
+| 1 | [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen (meist 1 Monat) | Kündigung muss spätestens 30. Nov. beim Versicherer eingehen. |
 | 2 | Angebote von mindestens drei Anbietern einholen | Nutze Vergleichsportale, achte auf **freie Werkstattwahl**. |
 | 3 | Deckungssumme prüfen (mind. 100 Mio. €) | Höhere Deckung schützt bei Personenschäden. |
 | 4 | Zusatzschutz für Marderbisse aktivieren, falls relevant | Oft günstiger als ein separater Marderschaden‑Zusatz. |
@@ -101,7 +101,7 @@ Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, s
 **Konkrete Maßnahmen:**
 
 1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
-2. **Vorlauftemperatur** um 5 °C reduzieren (z. B. von 70 °C auf 65 °C).
+2. **Vorlauftemperatur** um 5 °C [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) (z. B. von 70 °C auf 65 °C).
 3. **Witterungsgeführte Thermostate** installieren (Kosten 15–30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
 4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
 
@@ -158,7 +158,7 @@ Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Str
 | Pro | Contra |
 |---|---|
 | In der Regel günstigere Grundpreise | Eventuell höhere Abschlagszahlung zu Beginn |
-| Transparente Vertragslaufzeit | Bei Wechsel kann ein kurzer Sonderkündigungszeitraum entstehen |
+| Transparente [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) | Bei Wechsel kann ein kurzer Sonderkündigungszeitraum entstehen |
 
 **Beispiel:** Markus hat einen Stromtarif mit 30 ct/kWh Grundpreis + 6 ct/kWh Arbeitspreis. Neuer Anbieter bietet 27 ct/kWh Grundpreis + 5,5 ct/kWh Arbeitspreis. Jahresverbrauch 3.500 kWh → Ersparnis: (3 ct + 0,5 ct) × 3.500 kWh = 122,5 € plus geringere Grundgebühr → insgesamt ca. **150 €**.
 

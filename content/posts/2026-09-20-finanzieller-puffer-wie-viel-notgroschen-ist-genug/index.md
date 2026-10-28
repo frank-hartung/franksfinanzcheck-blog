@@ -161,7 +161,7 @@ Die größte Hürde ist selten die Mathematik. Es ist die Routine. Wer jeden Mon
 ### Schritt für Schritt
 
 1. **Ziel festlegen:** Zum Beispiel 6.000 € oder 8.000 €.
-2. **Konto trennen:** Eröffne ein eigenes Tagesgeldkonto ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/).
+2. **Konto trennen:** Eröffne ein eigenes [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/).
 3. **Rate bestimmen:** Etwa 150 €, 300 € oder 500 € pro Monat.
 4. **Dauerauftrag setzen:** Am besten direkt nach dem Gehaltseingang.
 5. **Sonderzahlungen nutzen:** Steuererstattung, Bonus oder Geschenk-Geld teilweise zum Puffer schieben.

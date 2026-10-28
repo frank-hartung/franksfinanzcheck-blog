@@ -54,7 +54,7 @@ Der Posten ist deshalb so schwer zu greifen, weil er an mehreren Stellen gleichz
 
 Wie dein Warmwasser entsteht, entscheidet über die Rechnung. Es gibt zwei Grundwege.
 
-**Zentral über die Heizung.** Ein Kessel, eine Therme oder eine Wärmepumpe erwärmt das Wasser in einem Speicher. Der Verbrauch erscheint auf der Heizkostenabrechnung, oft als eigener Block mit einer eigenen Zahl.
+**Zentral über die Heizung.** Ein Kessel, eine Therme oder eine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/) erwärmt das Wasser in einem Speicher. Der Verbrauch erscheint auf der Heizkostenabrechnung, oft als eigener Block mit einer eigenen Zahl.
 
 **Dezentral im Gerät.** Ein Durchlauferhitzer oder ein Boiler erwärmt das Wasser direkt dort, wo du es brauchst. Der Verbrauch erscheint auf deiner Stromrechnung. Bei Durchlauferhitzern fällt das an der Stromrechnung auf, weil die Leistungsaufnahme hoch ist.
 

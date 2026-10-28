@@ -48,7 +48,7 @@ Dann kannst du entscheiden, was bleiben soll und was sich ändern darf.
 
 **Das Wichtigste in Kürze**
 
-- Finanzielle Freiheit heißt vor allem: mehr passende Wahlmöglichkeiten.
+- [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) heißt vor allem: mehr passende Wahlmöglichkeiten.
 - Ein ehrlicher Überblick ist nützlicher als ein strenger Sparplan.
 - Rücklagen, Verträge und Ziele brauchen unterschiedliche Regeln.
 

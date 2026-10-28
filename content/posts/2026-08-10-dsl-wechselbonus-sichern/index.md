@@ -218,7 +218,7 @@ Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-d
 
 ### Typischer Ablauf
 
-1. [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) und Kündigungsfrist des aktuellen Anschlusses prüfen.
+1. [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) des aktuellen Anschlusses prüfen.
 2. Unabhängigen Tarifvergleich durchführen und Effektivpreis berechnen.
 3. Neuen Wunschtarif inklusive Bonus auswählen.
 4. Den Wechselauftrag online beim neuen Anbieter einreichen (dieser kündigt in der Regel für dich).

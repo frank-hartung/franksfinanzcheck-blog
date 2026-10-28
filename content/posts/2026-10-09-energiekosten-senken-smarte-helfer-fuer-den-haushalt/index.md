@@ -139,7 +139,7 @@ Vernachlässige niemals die Sicherheit deiner Geräte. Billigprodukte ohne Updat
 
 ## Modellrechnung: Smarte Thermostate vs. Manuelle Regelung
 
-Die folgende Rechnung zeigt den Weg. Sie arbeitet mit klaren Annahmen für eine 80 m² Wohnung mit Gasheizung. Ersetze die Werte durch deine eigenen Zahlen.
+Die folgende Rechnung zeigt den Weg. Sie arbeitet mit klaren Annahmen für eine 80 m² Wohnung mit [Gasheizung](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/). Ersetze die Werte durch deine eigenen Zahlen.
 
 **Annahmen (Beispielwerte):**
 * Jährliche Heizkosten bisher in dieser Annahme: 1.200 €.

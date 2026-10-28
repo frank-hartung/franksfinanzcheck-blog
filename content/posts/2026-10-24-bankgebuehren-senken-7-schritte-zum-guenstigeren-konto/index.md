@@ -58,7 +58,7 @@ So kosten Buchungen und Karten extra. Manche Banken verlangen sogar Geld für M�
 
 Ohne dein Wissen wird dein Konto zur Kostenfalle. Viele Kunden schlucken das aus Gewohnheit.
 
-Mit dieser Trägheit rechnen die Banken fest. Sie erhöhen die Preise in kleinen Schritten. Ein Euro mehr im Monat fällt kaum auf. Genau darauf setzen die Institute.
+Mit dieser Trägheit rechnen die Banken fest. Sie erhöhen die Preise in [kleinen Schritten](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/). Ein Euro mehr im Monat fällt kaum auf. Genau darauf setzen die Institute.
 
 Über das Jahr summiert sich das aber. Du zahlst für eine Filiale, die du selten nutzt. Prüfe diese Kosten darum regelmäßig.
 
@@ -185,7 +185,7 @@ Prüfe immer die Gebühren für Abhebungen an fremden Automaten. Manche Banken e
 
 ---
 
-Mit diesem Leitfaden senkst du deine Gebühren Schritt für Schritt. Setze die Schritte jetzt um und behalte dein Geld.
+Mit diesem Leitfaden senkst du deine Gebühren [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/). Setze die Schritte jetzt um und behalte dein Geld.
 
 Nutze es für die wichtigen Dinge im Leben. Der Check lohnt sich schon ab dem ersten Monat. Je früher du anfängst, desto länger wirkt die Ersparnis. Wer heute spart, sorgt für seine [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Unabhängigkeit vor.
 

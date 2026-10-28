@@ -179,7 +179,7 @@ Lass dein altes Konto noch zwei bis drei Monate offen. So siehst du, ob auch der
 
 ![Gliederung des Beitrags: Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ – 5 Stationen von „Was ein Girokonto wirklich teuer macht“ bis „Girocard oder Debitkarte – was brauchst du wirklich?“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ – 5 Stationen von „Was ein Girokonto wirklich teuer macht“ bis „Girocard oder Debitkarte – was [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/)?“ (eigene Darstellung).*
 
 ## Welche Extras ein gutes Konto 2026 haben darf
 

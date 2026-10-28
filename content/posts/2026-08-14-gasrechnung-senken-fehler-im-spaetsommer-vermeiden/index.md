@@ -50,7 +50,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „[Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/): Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Starte mit einem kleinen Check
 

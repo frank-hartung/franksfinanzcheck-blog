@@ -104,7 +104,7 @@ Es gibt drei Konstellationen, in denen der Einheitstarif die bessere Wahl bleibt
 
 **Der Aufwand ist zu hoch.** Geräte in die Nacht zu verschieben kostet Planung. Vergleiche zusätzlich die Nachtstrom-Angebote: Ein günstiger Nachttarif mit hohem Grundpreis frisst den Vorteil wieder auf. Läuft der Trockner dann um 23 Uhr, wenn alle schlafen, sinkt der Nutzen. Ein Tarif, der Verhalten erzwingt, muss diesen Zwang mit Ersparnis bezahlen.
 
-**Die Alternative wäre besser.** Wer sein Geld in einen günstigeren Gesamttarif oder in eine Verbrauchsreduktion steckt, hat oft mehr davon. Die Verbraucherzentrale nennt das den ersten Schritt jeder Stromsparstrategie: erst den Verbrauch senken, dann den Preis verhandeln ([Strom sparen im Haushalt](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/strom-sparen-im-haushalt-einfache-tipps-10734)).
+**Die Alternative wäre besser.** Wer sein Geld in einen [günstigeren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) Gesamttarif oder in eine Verbrauchsreduktion steckt, hat oft mehr davon. Die Verbraucherzentrale nennt das den ersten Schritt jeder Stromsparstrategie: erst den Verbrauch senken, dann den Preis verhandeln ([Strom sparen im Haushalt](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/strom-sparen-im-haushalt-einfache-tipps-10734)).
 
 ## Modellrechnung: 3.500 Kilowattstunden
 
@@ -169,7 +169,7 @@ Kläre zusätzlich, ob für den Zählerwechsel eine Gebühr anfällt. Solche Bet
 
 Einige Tarifmodelle arbeiten mit Sperrzeiten für bestimmte Verbraucher. Wärmepumpen und Nachtspeichergeräte werden dann zu festen Zeiten vom Netz genommen, weil der Netzbetreiber sie steuert.
 
-Wenn in deinem Vertrag solche Zeiten stehen, gehören sie in deine Planung. Eine Wärmepumpe mit Sperrzeiten braucht eine Heizungsplanung, die kalten Stunden überbrückt. Sonst wird es am Morgen kalt, und der Vergleich mit einem Einheitstarif fällt anders aus als gedacht.
+Wenn in deinem Vertrag solche Zeiten stehen, gehören sie in deine Planung. Eine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/) mit Sperrzeiten braucht eine Heizungsplanung, die kalten Stunden überbrückt. Sonst wird es am Morgen kalt, und der Vergleich mit einem Einheitstarif fällt anders aus als gedacht.
 
 Für Haushalte ohne steuerbare Geräte ist dieser Punkt ohne Bedeutung. Er betrifft vor allem Gebäude mit elektrischer Heizung, also genau die Fälle, in denen ein Doppeltarif interessant ist.
 

@@ -139,7 +139,7 @@ Du zahlst hier rund 9 € im Monat mehr. Dafür bekommst du Ruhe. Ob dir das de
 
 ## Warum wenige Cent einen großen Unterschied machen
 
-Bei einer Gasheizung läppern sich schon kleine Unterschiede zusammen.
+Bei einer [Gasheizung](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/) läppern sich schon kleine Unterschiede zusammen.
 
 | Preisunterschied pro kWh | bei 10.000 kWh | bei 20.000 kWh |
 |---:|---:|---:|

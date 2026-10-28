@@ -230,7 +230,7 @@ Prüfe den Namen. Prüfe das Datum. Prüfe den Flughafen. Ein Tippfehler kann te
 
 ## Danke fürs lesen
 
-Bis hierhin hast du die wichtigsten Regeln. Du weißt, worauf du achten musst. Du weißt, wo Fallen lauern. Du weißt, wie du fair vergleichst. Das ist viel mehr als das, was viele Schnellbucher wissen.
+Bis hierhin hast du die wichtigsten Regeln. Du weißt, [worauf du achten](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) musst. Du weißt, wo Fallen lauern. Du weißt, wie du fair vergleichst. Das ist viel mehr als das, was viele Schnellbucher wissen.
 
 Buche klug. Buche fair. Und hab eine schöne Reise.
 
@@ -269,7 +269,7 @@ Gleiche Reisedaten, Personenzahl, Unterkunft, Verpflegung und Gepäck ab. Vergle
 Prüfe zunächst vorhandene Policen und Kartenleistungen. Entscheidend sind versicherte Personen, Deckung, Selbstbehalt, Ausschlüsse und Fristen. Eine Jahrespolice kann bei häufigen Reisen passen. Sie ist aber nicht automatisch günstiger oder umfassender.
 
 ### Kurzer Merksatz vor der Buchung
-Nimm dir Zeit. Der Rabatt auf dem Banner ist selten der echte Preis. Rechne nach. Frag nach. Vergleiche in Ruhe. So buchst du günstig. Und so vermeidest du Überraschungen nach der Reise.
+Nimm dir Zeit. Der Rabatt auf dem Banner ist selten der echte Preis. Rechne nach. Frag nach. Vergleiche in Ruhe. So buchst du günstig. Und so [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Überraschungen nach der Reise.
 
 ## Weiterrechnen und vertiefen
 

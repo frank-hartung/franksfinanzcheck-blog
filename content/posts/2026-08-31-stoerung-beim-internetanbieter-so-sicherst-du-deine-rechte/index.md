@@ -133,7 +133,7 @@ Wichtig ist die Regel für verpasste Termine. Kommt der Techniker ohne Absage ni
 
 Bei einem längeren Ausfall hast du zwei Hebel: die Gutschrift für die ausgefallene Leistung und bei einigen Verzögerungen die Entschädigung. Die Details hängen vom Anlass ab.
 
-Für den Anbieterwechsel regelt [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) die Entschädigung bei Verzögerungen ausdrücklich. Bei einem laufenden Vertrag ist die Reklamation meist der erste Weg. Verlange eine Gutschrift für die Tage ohne Leistung und nenne ihre Zahl.
+Für den [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) regelt [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) die Entschädigung bei Verzögerungen ausdrücklich. Bei einem laufenden Vertrag ist die Reklamation meist der erste Weg. Verlange eine Gutschrift für die Tage ohne Leistung und nenne ihre Zahl.
 
 Das Muster für diese Nachricht ist einfach. Beschreibe den Zeitraum des Ausfalls und nenne die Vorgangsnummer. Beziehe dich auf die zugesagte Leistung und bitte um eine Gutschrift. Setze eine Frist für die Antwort.
 

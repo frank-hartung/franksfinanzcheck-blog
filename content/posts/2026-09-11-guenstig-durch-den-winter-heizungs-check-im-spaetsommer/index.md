@@ -148,7 +148,7 @@ Als Mieter greifst du hier normalerweise nicht selbst ein. Melde einen auffälli
 
 Vergleiche die programmierten Zeiten mit deinem Alltag. Läuft die Heizung morgens zwei Stunden, bevor jemand aufsteht? Bleibt sie warm, obwohl tagsüber niemand zu Hause ist?
 
-Passe die Zeiten in kleinen Schritten an. Notiere vorher den alten Zustand. Nach ein paar Tagen prüfst du Komfort und Verbrauch.
+Passe die Zeiten in [kleinen Schritten](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) an. Notiere vorher den alten Zustand. Nach ein paar Tagen prüfst du Komfort und Verbrauch.
 
 ### Heizkurve und Vorlauftemperatur
 

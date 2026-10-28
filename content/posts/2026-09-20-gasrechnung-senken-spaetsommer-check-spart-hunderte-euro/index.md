@@ -69,7 +69,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Entlüftungsschlüssel nur bei typischen Luftproblemen,
 - Notiz mit vier Spalten: Rechnung, Zähler, Räume, Vertrag.
 
-Bei zentraler Heizung tritt die Heizkostenabrechnung an die Stelle eines eigenen Gasvertrags. Den Anbieter kannst du dann meist nicht selbst wechseln.
+Bei zentraler Heizung tritt die [Heizkostenabrechnung](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) an die Stelle eines eigenen Gasvertrags. Den Anbieter kannst du dann meist nicht selbst wechseln.
 
 ## Minute 0 bis 15: Rechnung und Vertrag
 
@@ -270,7 +270,7 @@ Jeder Termin dauert höchstens 15 Minuten. Hinterlege beim Kalendereintrag ein F
 
 Ein fester Rhythmus verhindert auch falsche Reaktionen. Der hohe Januarverbrauch ist bei Frost normal und kein Grund, sofort an fünf Einstellungen zu drehen. Ein steigender Preis trotz stabilem Verbrauch weist dagegen eher zum Vertrag.
 
-Notiere pro Termin nur eine Entscheidung, einen Verantwortlichen und eine Frist. So bleibt auch in einem Mehrpersonenhaushalt klar, wer den Zähler abliest oder den Termin vereinbart. Zu viele gleichzeitige Maßnahmen erschweren den Vergleich. Energie sparen ist hier erstaunlich unspektakulär: wenige Zahlen, feste Termine, saubere Zuständigkeit.
+Notiere pro Termin nur eine Entscheidung, einen Verantwortlichen und eine Frist. So bleibt auch in einem Mehrpersonenhaushalt klar, wer den Zähler abliest oder den Termin vereinbart. Zu viele gleichzeitige Maßnahmen erschweren den Vergleich. [Energie sparen](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/) ist hier erstaunlich unspektakulär: wenige Zahlen, feste Termine, saubere Zuständigkeit.
 
 **Faustregel:** Miss den Verbrauch, bevor du den Tarif wechselst; die größere Ersparnis sitzt meist nicht im Preis, sondern im Verbrauch.
 

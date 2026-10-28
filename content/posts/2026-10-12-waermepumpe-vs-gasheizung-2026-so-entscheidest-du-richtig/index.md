@@ -46,7 +46,7 @@ So kannst du effektiv deine [Heizkosten senken](../../posts/2026-09-11-guenstig-
 - Die **Gasheizung** startet mit kleinerem Kaufpreis, birgt aber hohe Risiken beim Preis für Gas.
 - Dein gewählter Stromtarif entscheidet stark über die laufenden Kosten.
 - Staatliche Zuschüsse senken deinen Eigenanteil in der Beispielrechnung unten um bis zu 70 %.
-- Die steigende CO₂-Abgabe verteuert fossile Brennstoffe in den kommenden Jahren Schritt für Schritt.
+- Die steigende CO₂-Abgabe verteuert fossile Brennstoffe in den kommenden Jahren [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/).
 
 ---
 
@@ -180,7 +180,7 @@ Ein klarer Plan vor dem Tausch der Heizung schont dein Budget.
 | :--- | :--- | :--- |
 | Kaufpreis | Drei Angebote einholen | Schützt vor überteuerten Preisen |
 | Betrieb | Strom- und Gaspreise [2026 vergleichen](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) | Zeigt die echte Last pro Monat |
-| Effizienz | Leistung bei Frost prüfen | Verhindert hohe Stromkosten im Winter |
+| Effizienz | Leistung bei Frost prüfen | Verhindert hohe [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) im Winter |
 | Gaspreis | Steigende CO₂-Abgabe einrechnen | Macht das Preisrisiko bei Gas sichtbar |
 | Dämmung | Zustand der Fenster prüfen | Bestimmt die passende Größe der Anlage |
 | Zuschuss | Förderprogramme vorab klären | Senkt den Kaufpreis im Rechenbeispiel um bis zu 21.000 € |

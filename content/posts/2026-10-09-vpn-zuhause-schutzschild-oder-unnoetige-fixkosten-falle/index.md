@@ -89,7 +89,7 @@ Wer keinen Zugriff aufs Heimnetz braucht, spart sich diesen Aufwand. Dann reicht
 
 Drei Fragen klären die Entscheidung meist schnell. Nutzt du öffentliche WLANs? Greifst du von unterwegs auf Geräte im Heimnetz zu? Möchtest du verhindern, dass dein Anbieter die Ziele deiner Anfragen sieht?
 
-Wenn du alle drei Fragen mit Nein beantwortest, bezahlst du mit einem Abo vermutlich für einen Schutz, den du nicht brauchst. Dann ist das Geld in einem günstigeren Internettarif oft besser aufgehoben.
+Wenn du alle drei Fragen mit Nein beantwortest, bezahlst du mit einem Abo vermutlich für einen Schutz, den du nicht brauchst. Dann ist das Geld in einem [günstigeren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) Internettarif oft besser aufgehoben.
 
 Eine Alternative ist ein VPN direkt auf dem Router. Dann nutzen alle Geräte im Haushalt denselben Tunnel, auch Fernseher oder Kameras ohne eigene App. Das BSI rät dabei zur Vorsicht mit Portfreigaben. Die Einrichtung setzt daher etwas technisches Verständnis voraus oder einen Router, der das Verfahren von Haus aus unterstützt.
 
