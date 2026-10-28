@@ -1,0 +1,65 @@
+name: Wöchentlicher Live-SEO-Crawl
+
+on:
+  schedule:
+    - cron: "0 8 * * 0" # Sonntag 10:00 Uhr MESZ / 09:00 Uhr MEZ
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-spider-weekly
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Öffentliche Blog-Site crawlen
+        id: crawl
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/seo_spider.py \
+            --url https://franksfinanzcheck.de/ \
+            --max-pages 500 \
+            --delay 0.5 \
+            --timeout 10 \
+            --time-limit 900 \
+            --json "$RUNNER_TEMP/seo-spider.json" \
+            --csv "$RUNNER_TEMP/seo-spider.csv" \
+            --links-csv "$RUNNER_TEMP/seo-spider-links.csv" \
+            --fail-on-errors | tee "$RUNNER_TEMP/seo-spider.log"
+          result=${PIPESTATUS[0]}
+          {
+            echo "## Wöchentlicher Live-SEO-Crawl"
+            echo
+            echo '```text'
+            head -n 3 "$RUNNER_TEMP/seo-spider.log"
+            echo '```'
+            echo
+            if [ "$result" -eq 0 ]; then
+              echo "Crawl ohne HTTP-/Verbindungsfehler abgeschlossen. Vollständiger URL-Bericht: Actions-Artefakt seo-spider-report."
+            else
+              echo "Live-Crawl fehlgeschlagen oder HTTP-/Verbindungsfehler gefunden (Exit $result). Bericht wird, falls erzeugt, als Artefakt hochgeladen."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$result"
+
+      - name: Crawl-Berichte sichern
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: seo-spider-report
+          path: |
+            ${{ runner.temp }}/seo-spider.json
+            ${{ runner.temp }}/seo-spider.csv
+            ${{ runner.temp }}/seo-spider-links.csv
+            ${{ runner.temp }}/seo-spider.log
+          if-no-files-found: warn
+          retention-days: 14
