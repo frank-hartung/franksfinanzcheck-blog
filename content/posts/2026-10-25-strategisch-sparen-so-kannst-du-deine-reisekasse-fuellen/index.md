@@ -50,6 +50,9 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 
 ## Wie viel musst du für deine Reise sparen?
 
+
+Darum geht es hier konkret: Reisekasse füllen.
+
 Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle alles zusammen: Gepäck, Transfer, Parken, Gebühren, Puffer. Wer nur Flug und Hotel rechnet, plant halb.
 
 **Modellrechnung:** Die Reise soll 1.800 € kosten.  
