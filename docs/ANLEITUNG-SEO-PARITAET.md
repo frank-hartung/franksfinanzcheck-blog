@@ -186,7 +186,7 @@ npm run test:seo-paritaet
 #   + node --test tools/social-vorschau/app.test.cjs
 ```
 
-Stand 28.10.2026: 90 Unit-Tests und 7 JS-Tests.
+Stand 28.10.2026: 94 Unit-Tests und 7 JS-Tests.
 
 Jedes Werkzeug hat zusätzlich `--selftest` (Sabotage-Proben). Die Unit-Tests
 sind hermetisch: Temp-Verzeichnis, kein Hugo, kein Netz, keine echten Inhalte.
@@ -230,7 +230,10 @@ Social-Karten)"** und hat zwei Jobs mit *einer* Policy.
   Template-Regel auf, die das Frontmatter nicht kennt – etwa „Titel unter
   40 Zeichen bekommt den Marken-Zusatz". Er läuft **nicht** bei jedem PR:
   `e2e.yml` baut dort bereits; ein zweiter Build pro Layout-PR wäre Wartezeit
-  ohne neue Erkenntnis.
+  ohne neue Erkenntnis. Weil dieser Job nur nächtlich läuft, prüft
+  `scripts/tests/test_seo_paritaet_ci.py` seinen Code-Pfad (`--quelle build`)
+  gegen handgeschriebenes `public/`-HTML: fehlendes `og:image` sperrt,
+  Tag- und Blätterseiten verfälschen die Zählung nicht.
 
 ### Was blockiert (und was nicht)
 

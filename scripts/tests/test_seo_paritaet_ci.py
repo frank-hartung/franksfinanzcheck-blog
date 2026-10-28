@@ -291,6 +291,75 @@ class EndeZuEndeTests(unittest.TestCase):
                             for p in lage.sperren))
 
 
+def gebaute_seite(root: str, *, mit_bild: bool = True) -> None:
+    """Mini-`public/` mit gerenderten og:*-Tags – ohne Hugo.
+
+    Der Job `gebaut` des Workflows läuft nur nächtlich; sein Code-Pfad
+    (`--quelle build`) wird hier gegen handgeschriebenes HTML geprüft.
+    Genau das ist der Unterschied zum Gate: gelesen wird, was im HTML steht,
+    nicht was im Frontmatter versprochen wurde.
+    """
+    bild = ('<meta property="og:image" content="https://franksfinanzcheck.de/images/cover.png">'
+            '<meta property="og:image:alt" content="Stromzähler">' if mit_bild else "")
+    # Auch die Startseite gehört dazu – sonst gilt der Build als nicht
+    # vorhanden (`public/index.html` fehlt) und der Lauf endet fail-closed.
+    seiten = {
+        "index.html": ("FranksFinanzcheck", "https://franksfinanzcheck.de/",
+                       "Finanzen ohne Verkaufsdruck."),
+        os.path.join("posts", "artikel", "index.html"): (
+            "Strom sparen", "https://franksfinanzcheck.de/posts/artikel/",
+            "Stromfresser finden, Tarife vergleichen."),
+    }
+    for rel, (titel, url, beschreibung) in seiten.items():
+        pfad = os.path.join(root, "public", rel)
+        os.makedirs(os.path.dirname(pfad), exist_ok=True)
+        with open(pfad, "w", encoding="utf-8") as fh:
+            fh.write(f'<html><head><title>{titel}</title>'
+                     f'<link rel="canonical" href="{url}">'
+                     f'<meta property="og:title" content="{titel}">'
+                     f'<meta property="og:description" content="{beschreibung}">'
+                     f'{bild}</head><body></body></html>')
+
+
+class GebauteWahrheitTests(unittest.TestCase):
+    """Der zweite Job: dieselbe Policy, andere Quelle."""
+
+    def test_build_quelle_wird_gelesen_und_sauber_bewertet(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            mini_repo(tmp, cornerstone=False)
+            gebaute_seite(tmp)
+            lage = ci.lauf(tmp, ohne_tests=True, quelle="build",
+                           mit_linkvorschlaegen=False)
+        self.assertEqual(lage.exit_code, 0, [p.regel for p in lage.sperren])
+        self.assertEqual(lage.kennzahlen["social"]["quelle"], "build")
+        # Startseite und Artikel – die Tag-/Blätterseiten sind ausgeschlossen.
+        self.assertEqual(lage.kennzahlen["social"]["seiten"], 2)
+
+    def test_fehlendes_og_image_am_gebauten_html_sperrt(self):
+        """Die Nachtwache muss den Fall fangen, den das Frontmatter nicht zeigt."""
+        with tempfile.TemporaryDirectory() as tmp:
+            mini_repo(tmp, cornerstone=False)
+            gebaute_seite(tmp, mit_bild=False)
+            lage = ci.lauf(tmp, ohne_tests=True, quelle="build",
+                           mit_linkvorschlaegen=False)
+        regeln = {(p.werkzeug, p.regel, p.schwere) for p in lage.sperren}
+        self.assertIn(("social", "social-bild", "P1"), regeln)
+        self.assertEqual(lage.exit_code, 1)
+
+    def test_tagseiten_verfaelschen_die_zaehlung_nicht(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            mini_repo(tmp, cornerstone=False)
+            gebaute_seite(tmp)
+            for ordner in ("tags", "page"):
+                pfad = os.path.join(tmp, "public", ordner, "x")
+                os.makedirs(pfad, exist_ok=True)
+                with open(os.path.join(pfad, "index.html"), "w", encoding="utf-8") as fh:
+                    fh.write("<html><head><title>Liste</title></head></html>")
+            _, kennzahlen = ci.sammle_posten(tmp, mit_linkvorschlaegen=False,
+                                             quelle="build")
+        self.assertEqual(kennzahlen["social"]["seiten"], 2)
+
+
 class CliTests(unittest.TestCase):
     """Der Einstiegspunkt selbst – der Selbsttest ist die Eintrittskarte."""
 

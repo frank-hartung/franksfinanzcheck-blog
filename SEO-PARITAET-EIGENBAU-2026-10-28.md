@@ -119,7 +119,7 @@ Redaktionssignal, kein Merge-Hindernis; `--streng` gibt es trotzdem, aber nur
 von Hand.
 
 Messwert des ersten vollständigen Laufs am Bestand (inklusive aller
-Selbsttests und 90 Unit-Tests): **0 Sperren, 268 Hinweise, 4,9 s, Exit 0.**
+Selbsttests und 94 Unit-Tests): **0 Sperren, 268 Hinweise, 4,9 s, Exit 0.**
 Der Bestand ist damit nicht „sauber" – er ist ehrlich eingeordnet: keine
 Markierungsbrüche, aber 76 Artikel ohne `keywords_fokus` und 192 Kartenhinweise,
 die als Redaktionsliste im Bericht stehen.

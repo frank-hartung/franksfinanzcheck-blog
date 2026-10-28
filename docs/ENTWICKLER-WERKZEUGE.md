@@ -72,7 +72,7 @@ npm run social:vorschau         # Kartenvorschau für 6 Kanäle → .cache/socia
 npm run social:vorschau:serve   # http://127.0.0.1:4175
 npm run seo:paritaet            # CI-Gate lokal: Selbsttests + Suiten + Befunde
 npm run seo:paritaet:bericht    # vollständiger Bericht → .cache/seo-paritaet/
-npm run test:seo-paritaet       # 90 Unit-Tests + 7 JS-Tests
+npm run test:seo-paritaet       # 94 Unit-Tests + 7 JS-Tests
 ```
 
 Die CI-Einbindung ist ein Workflow mit zwei Jobs und **einer** Policy
