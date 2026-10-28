@@ -1,5 +1,5 @@
-generated_at: '2026-10-27T09:20:17Z'
-day: '2026-10-27'
+generated_at: '2026-10-28T10:00:42Z'
+day: '2026-10-28'
 mode: deterministic
 teams:
   trending:
@@ -243,61 +243,57 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: DSL- und Internet-Flat günstig sichern
-    pillar: internet-dsl
+  - topic: 'Büroausstattung: Diese Kosten kannst du von der Steuer absetzen'
+    pillar: frugalismus
     signal: niche_hook
-    source: topics:DSL- und Internet-Flat günstig sichern
+    source: 'topics:Büroausstattung: Diese Kosten kannst du von der Steuer absetzen'
     score: 0.55
-    keywords:
-    - DSL Vergleich
-    - Internetvertrag wechseln
-    - Günstiges Internet
-    - Wechselbonus
-  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
-    score: 0.55
-    keywords:
-    - E-Auto Ladekosten
-    - Stromtarif E-Auto
-    - Wallbox sparen
-  - topic: 'Hauskauf finanzieren: Darlehen clever vergleichen'
+    keywords: []
+  - topic: Die Vorteile von Online-Konten und wie du sie nutzt
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Hauskauf finanzieren: Darlehen clever vergleichen'
+    source: topics:Die Vorteile von Online-Konten und wie du sie nutzt
     score: 0.55
     keywords:
-    - Baufinanzierung
-    - Immobilienkredit
-    - Hauskauf Finanzierung
-  - topic: 'Kartenzahlung mit PIN: So bleibt die Karte sicher'
+    - Online-Konten
+    - Vorteile
+    - nutzen
+  - topic: Die besten Kreditkarten für den Alltag im Vergleich
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Kartenzahlung mit PIN: So bleibt die Karte sicher'
+    source: topics:Die besten Kreditkarten für den Alltag im Vergleich
     score: 0.55
     keywords:
-    - Kartenzahlung PIN
-    - Karte sichern
-    - Kontaktlos zahlen
-  - topic: 'Mietwagen für die Stadt: Kleine Autos im Vergleich'
+    - Kreditkarte
+    - Alltag
+    - Vergleich
+  - topic: Günstige Reisezeitpunkte für den Urlaub
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Mietwagen für die Stadt: Kleine Autos im Vergleich'
+    source: topics:Günstige Reisezeitpunkte für den Urlaub
     score: 0.55
     keywords:
-    - Mietwagen
-    - Stadtverkehr
-    - Kleine Autos
-  - topic: So kannst du deine Heizkosten um 20 % senken
-    pillar: strom-sparen
+    - Reise
+    - Urlaub
+    - SparTipps
+  - topic: Last-Minute Urlaubsangebote sichern
+    pillar: mietwagen
     signal: niche_hook
-    source: topics:So kannst du deine Heizkosten um 20 % senken
+    source: topics:Last-Minute Urlaubsangebote sichern
     score: 0.55
     keywords:
-    - Heizkosten sparen
-    - energiesparende Tipps
-    - Heizperiode
+    - Last Minute Urlaub
+    - Reiseangebote günstig
+    - Sommerurlaub Schnäppchen
+  - topic: Preiswerter DSL-Anschluss für Zuhause
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Preiswerter DSL-Anschluss für Zuhause
+    score: 0.55
+    keywords:
+    - DSL
+    - Anschluss
+    - Preiswert
 live_web:
   enabled: false
   findings: []

@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 5,
   "pool_size": 6,
-  "generated_at": "2026-10-27T14:49:46Z",
+  "generated_at": "2026-10-28T10:27:04Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-10-27T09:36:40Z",
+      "measured_at": "2026-10-28T10:21:40Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -22,28 +22,11 @@
       }
     },
     {
-      "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
-      "ready": true,
-      "sha256": "acf5095a9aaf3df3b0ec3b70306bf61ae3eed7fce05069873245155781f5cb18",
-      "flesch": 70.4,
-      "measured_at": "2026-10-27T14:48:42Z",
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": true,
       "sha256": "9e86fac5718db982c3a797361233ebe2054b35538e582249f8b48bb76dea1dea",
       "flesch": 74.1,
-      "measured_at": "2026-10-27T09:38:44Z",
+      "measured_at": "2026-10-28T10:22:43Z",
       "score": 0.974,
       "parts": {
         "spelling": 0.98,
@@ -60,7 +43,7 @@
       "ready": true,
       "sha256": "9c3ce20475581169ea2b2180c1fb7ccaa9182fba0435f8710252ddfef86865e1",
       "flesch": 64.6,
-      "measured_at": "2026-10-27T09:39:48Z",
+      "measured_at": "2026-10-28T10:23:49Z",
       "score": 0.98,
       "parts": {
         "spelling": 0.9,
@@ -74,20 +57,47 @@
     },
     {
       "slug": "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
-      "ready": false,
-      "sha256": "354d63d78c757a5e2301ef11cc7d775e86bc5d35da44328f16f59a9c65ebb883",
-      "measured_at": "2026-10-27T14:49:46Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "974b04d64ac65802d69a507c7492d3b6c743f0e1399656b657a574d9e90244dc",
+      "flesch": 65.2,
+      "measured_at": "2026-10-28T10:24:54Z",
+      "score": 0.952,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
-      "slug": "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
+      "ready": true,
+      "sha256": "cc5dd94da778b35f0d603d22de16182905de4dc38b7c1f66e8b3ebc2bddd3129",
+      "flesch": 61.9,
+      "measured_at": "2026-10-28T10:25:59Z",
+      "score": 0.952,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
       "ready": false,
-      "sha256": "355d4b2dd5b23ef80ef6b51aba4a8f64663f93e1061f449347873acfd3039fb8",
+      "sha256": "439ce56bdbae5f19109bfa0c117d3d4629ea5fe8bc8128e6d87ad08889559937",
       "flesch": 66.2,
-      "measured_at": "2026-10-27T09:41:57Z",
+      "measured_at": "2026-10-28T10:27:04Z",
       "reason": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
       "details": [
-        "🛑 2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -104,27 +114,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "40524430366",
+    "kind": "full",
+    "run_id": "40667750341",
     "run_attempt": "1"
-  },
-  "geschont": [
-    {
-      "slug": "2026-10-27-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
-      "klasse": "heilbar",
-      "hits": 2,
-      "heiler": [
-        "politur_ruine_heiler.py"
-      ],
-      "warum": "Zerlegte Datumsangaben liest der Ruinen-Heiler verlustfrei zusammen; die Verifikation vergleicht Wortzahl und harte Regeln vor/nach dem Eingriff."
-    }
-  ],
-  "recert": {
-    "at": "2026-10-27T14:49:46Z",
-    "renewed": [
-      "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
-      "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

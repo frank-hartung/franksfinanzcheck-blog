@@ -1,5 +1,5 @@
-generated_at: '2026-09-28T10:09:40Z'
-day: '2026-09-28'
+generated_at: '2026-10-28T10:00:42Z'
+day: '2026-10-28'
 mode: deterministic
 teams:
   trending:
@@ -22,20 +22,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.75
-  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
-      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-      als der reine Anbieterwechsel.
-    pillar: internet-dsl
-    signal: trending
-    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
-    score: 0.65
   - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
       ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
       statt sie automatisch zu verlängern.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.6
+    score: 0.65
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: trending
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.65
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -43,18 +42,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:konto-gebuehren-transparenz
     score: 0.6
+  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
+      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+      als der reine Anbieterwechsel.
+    pillar: internet-dsl
+    signal: trending
+    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
+    score: 0.6
   - topic: Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue
       Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten
       wieder fallen.
     pillar: konto-karten
     signal: trending
     source: aktuelle_entwicklungen:zinsumfeld-tagesgeld
-    score: 0.6
-  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
-      Ergebnis nimmt, lässt oft bares Geld liegen.
-    pillar: versicherungen
-    signal: trending
-    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
     score: 0.6
   - topic: Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an
       einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
@@ -84,57 +84,62 @@ teams:
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
   evergreen:
-  - topic: Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     pillar: frugalismus
     signal: evergreen
-    source: topics:Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     score: 0.85
-    keywords: []
-  - topic: Energieeffiziente Geräte für dein Zuhause
+    keywords:
+    - Neujahrsvorsätze Geld
+    - finanzielle Ziele 2027
+    - Sparziele erreichen
+    - Gewohnheiten ändern
+  - topic: Energiekosten senken mit kleinen Veränderungen
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Energieeffiziente Geräte für dein Zuhause
+    source: topics:Energiekosten senken mit kleinen Veränderungen
     score: 0.85
     keywords:
-    - Energieeffiziente
-    - Geräte
-    - Zuhause
-  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    - Energie
+    - Kosten
+    - SparTipps
+  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
     pillar: internet-dsl
     signal: evergreen
-    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
     score: 0.85
     keywords:
-    - DSL-Tarife
-    - günstige Anbieter
-    - Internetvergleich
-  - topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    - WLAN verbessern
+    - DSL Hacks
+    - Schnelles Internet zuhause
+    - Mesh Netzwerk
+  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
     pillar: mietwagen
     signal: evergreen
-    source: topics:5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
     score: 0.85
     keywords:
-    - Mietwagen
-    - Fehler
-    - vermeiden
-  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    - E-Auto Mietwagen
+    - Elektromobilität
+    - Urlaub
+  - topic: 10 Tipps für günstige Reisekreditkarten
     pillar: konto-karten
     signal: evergreen
-    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    source: topics:10 Tipps für günstige Reisekreditkarten
     score: 0.85
     keywords:
-    - Kreditkarte Ausland
-    - Auslandsgebühren vermeiden
-    - Reisekreditkarte
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
+    - Reisekreditkarten
+    - günstige Karten
+    - Reisekosten sparen
+  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     score: 0.85
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
+    - Rechtsschutzversicherung
+    - Rechtsschutz Leistungen
+    - Rechtsstreit versichern
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -197,16 +202,6 @@ teams:
     source: pain_points:hausrat-unterschaetzt
     score: 0.7
   viral_outliers:
-  - topic: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.85
-  - topic: 'Privathaftpflicht: Warum sie unverzichtbar ist'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.84
   - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
     pillar: strom-sparen
     signal: viral_outlier
@@ -227,35 +222,33 @@ teams:
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  - topic: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.81
   - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
     pillar: konto-karten
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  niche_hooks:
-  - topic: 'Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch'
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
     pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch'
-    score: 0.55
-    keywords:
-    - Balkonkraftwerk Förderung
-    - Solaranlage Zuschuss
-    - Steckersolar
-  - topic: 'Campingurlaub 2026: So hältst du die Kosten im Rahmen'
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
     pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
+  niche_hooks:
+  - topic: 'Büroausstattung: Diese Kosten kannst du von der Steuer absetzen'
+    pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Campingurlaub 2026: So hältst du die Kosten im Rahmen'
+    source: 'topics:Büroausstattung: Diese Kosten kannst du von der Steuer absetzen'
     score: 0.55
-    keywords:
-    - Camping
-    - Urlaub sparen
-    - Campingplatz
+    keywords: []
   - topic: Die Vorteile von Online-Konten und wie du sie nutzt
     pillar: konto-karten
     signal: niche_hook
@@ -265,33 +258,42 @@ teams:
     - Online-Konten
     - Vorteile
     - nutzen
-  - topic: 'Flugverspätung: So bekommst du deine Entschädigung'
+  - topic: Die besten Kreditkarten für den Alltag im Vergleich
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Die besten Kreditkarten für den Alltag im Vergleich
+    score: 0.55
+    keywords:
+    - Kreditkarte
+    - Alltag
+    - Vergleich
+  - topic: Günstige Reisezeitpunkte für den Urlaub
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Flugverspätung: So bekommst du deine Entschädigung'
+    source: topics:Günstige Reisezeitpunkte für den Urlaub
     score: 0.55
     keywords:
-    - Flugverspätung Entschädigung
-    - Fluggastrechte
-    - Entschädigung beantragen
-  - topic: Gastarife vergleichen vor dem Herbst
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Gastarife vergleichen vor dem Herbst
-    score: 0.55
-    keywords:
-    - Gasvergleich
-    - Gaskosten sparen
-    - Heizkosten senken
-  - topic: SparTipps für den Alltag
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:SparTipps für den Alltag
-    score: 0.55
-    keywords:
+    - Reise
+    - Urlaub
     - SparTipps
-    - Alltag
-    - Geld
+  - topic: Last-Minute Urlaubsangebote sichern
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Last-Minute Urlaubsangebote sichern
+    score: 0.55
+    keywords:
+    - Last Minute Urlaub
+    - Reiseangebote günstig
+    - Sommerurlaub Schnäppchen
+  - topic: Preiswerter DSL-Anschluss für Zuhause
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Preiswerter DSL-Anschluss für Zuhause
+    score: 0.55
+    keywords:
+    - DSL
+    - Anschluss
+    - Preiswert
 live_web:
   enabled: false
   findings: []

@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-27 09:30:32 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-28 10:15:00 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 68 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 70 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -22,6 +22,7 @@
 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan | 0 → 1 ✅ | /go/allgemein/ |
 | 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren | 2 → 3 ✅ | /go/girokonto/ |
+| 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | 2 → 3 ✅ | /go/strom/ |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause | 3 → 3 ✅ | /go/dsl/ |
@@ -80,6 +81,7 @@
 | 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto | 3 → 3 ✅ | /go/kreditkarte/ |
 | 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks | 3 → 3 ✅ | /go/strom/ |
+| 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen | 2 → 3 ✅ | /go/tagesgeld/ |
 
 ## Hinweise (nicht blockierend)
 

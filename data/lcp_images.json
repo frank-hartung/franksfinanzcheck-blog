@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-27T11:00:33+00:00",
+  "generatedAt": "2026-10-28T10:41:57+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -160,6 +160,22 @@
     },
     "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/": {
       "image": "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/": {
+      "image": "images/covers/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1088,6 +1104,22 @@
     },
     "/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/": {
       "image": "images/covers/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/": {
+      "image": "images/covers/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

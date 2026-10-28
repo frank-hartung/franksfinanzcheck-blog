@@ -1243,7 +1243,7 @@
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
   "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-10-27T09:55:04+00:00",
+  "ts": "2026-10-28T10:41:52+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1405,7 +1405,25 @@
  },
  "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
   "title": "Gastarife vergleichen vor dem Herbst",
-  "ts": "2026-10-27T09:55:08+00:00",
+  "ts": "2026-10-28T10:41:56+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+  "title": "Flugvergleich im Winter: So findest du echte Billigflüge",
+  "ts": "2026-10-28T10:19:33+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
+  "title": "Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar",
+  "ts": "2026-10-28T10:05:54+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
