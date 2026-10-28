@@ -567,6 +567,12 @@ und ab Mittwoch liefert sie Inhalt statt einer Weiterleitung.
    waren). Sobald sie live sind, gehören sie in die „Cluster-Reihenfolge" –
    dann sind es echte, wirksame Links statt Text. Vorher einzutragen würde die
    4 toten Linkziele sofort wieder erzeugen.
+   > **28.10.2026 – erledigt für den Wohngebäude-Vergleich.** Der Artikel ist
+   > live (`draft: false`, seit 28.10.), der Link steht jetzt in der
+   > „Cluster-Reihenfolge". Die Wache
+   > `test_versicherungs_cluster_verlinkung.py` prüft beide Richtungen und ist
+   > grün; sie meldet den nächsten der drei verbleibenden Artikel, sobald er
+   > live geht. Beleg: `VIER-REGRESSIONSTESTS-HEILUNG-2026-10-28.md`.
 2. **13 Entwurfs-Verlinkungen** (Entwurf → Entwurf im Versicherungs-Cluster)
    werden mit der Veröffentlichung gültig, sobald auch die Quell-Entwürfe live
    gehen (u. a. Unfall-, Zahnzusatz-, Tierkrankenversicherung).

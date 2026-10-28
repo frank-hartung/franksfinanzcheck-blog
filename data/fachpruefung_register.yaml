@@ -1,7 +1,7 @@
 # Fachprüfungs-Register (automatisch erzeugt: scripts/fachpruefung_register.py)
 # Stand: 19.10.2026. Keine Freigabe. Jeder Eintrag braucht einen benannten Menschen als Prüfer.
 # Quellen je Aussage: docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md (Schritte 1–5).
-anzahl: 18
+anzahl: 19
 pruefer_status: "offen – kein benannter fachpruefer und keine Redaktionsprüfung mit Belegkette"
 beitraege:
   - slug: "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden"
@@ -289,3 +289,22 @@ beitraege:
       - "Das sind knapp 0,8 % deines Jahreseinkommens."
       - "Über zehn Jahre sparst du mehr als 2.400 €."
       - "10 € bis 20 €."
+  - slug: "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen"
+    titel: "ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung"
+    pillar: "frugalismus"
+    risikoklasse: "erhoeht"
+    status: "ausstehend"
+    pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
+    zahlen_fundstellen:
+      - "Davon bleiben am Ende vielleicht 50 € für dich frei."
+      - "- Ein Beitrag von 50 € im Monat kann über 20 Jahre stark wachsen als Beispielwert."
+      - "Bei 5 % Rendite im Jahr entstehen rund 30.000 €."
+      - "| Kostenart | Typische Spanne | Hinweis | | :--- | :--- | :--- | | Gebühr für Order | 0 % bis 0,5 % | Viele Broker bieten heute kostenlose Pläne an."
+      - "| | Jahres-TER | 0,05 % bis 0,3 % | Die Kosten hängen vom gewählten Index ab."
+      - "| | Depotgebühr | 0 € bis 5 € im Monat | Oft ist das Depot bei einem Sparplan kostenlos."
+      - "| | Spread beim Kauf | 0,02 % bis 0,1 % | Das ist der Unterschied zwischen Kauf und Verkauf."
+      - "| Bei einem günstigen Anbieter liegen deine Kosten unter 0,2 % des Kapitals als Modellwert."
+      - "Faustregel: Eine TER von 0,1 % oder weniger ist für die meisten Fonds sehr günstig."
+      - "Lege nun deinen monatlichen Betrag fest, zum Beispiel 50 €."
+      - "Wir nehmen an, du zahlst jeden Monat 50 € in deinen Plan ein."
+      - "Über einen Zeitraum von 20 Jahren ergibt das eine Summe von 12.000 € an Eigenkapital."
