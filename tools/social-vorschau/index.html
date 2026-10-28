@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Social-Vorschau | FranksFinanzcheck</title>
+  <link rel="stylesheet" href="style.css">
+  <script id="vorschau-data" type="application/json">/*VORSCHAU_DATA*/</script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt</a>
+<header class="kopf">
+  <a class="marke" href="#main"><span class="marke-zeichen" aria-hidden="true">ff.</span><span>FranksFinanzcheck<small>Social-Vorschau</small></span></a>
+  <div class="kopf-rechts">
+    <p class="kopf-status"><span class="punkt" aria-hidden="true"></span> Lokal erzeugt · keine Übertragung</p>
+    <button id="theme" type="button" class="thema">Darstellung wechseln</button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <div class="kopfzeile">
+    <div>
+      <p class="eyebrow">Vor dem Teilen prüfen</p>
+      <h1>So sieht dein Artikel aus, bevor ihn jemand sieht.</h1>
+      <p class="intro">Titel, Beschreibung und Bild gegen die Kanalgrenzen geprüft – X, Facebook, LinkedIn, WhatsApp, Slack und Pinterest. Die Grenzen sind Richtwerte: Kein Netzwerk dokumentiert verbindlich, wo es kürzt.</p>
+    </div>
+    <div class="stempel">
+      <span>Stand der Daten</span>
+      <strong id="stempel-zeit">–</strong>
+      <small id="stempel-quelle"></small>
+    </div>
+  </div>
+
+  <div id="kennzahlen" class="kennzahlen" aria-label="Kennzahlen"></div>
+
+  <section class="werkzeug" aria-label="Ansicht filtern">
+    <div class="feld">
+      <label for="suche">Seite suchen</label>
+      <input id="suche" type="search" placeholder="Titel, URL oder Slug …" autocomplete="off">
+    </div>
+    <div class="feld">
+      <label for="filter">Auswahl</label>
+      <select id="filter">
+        <option value="alle">Alle Seiten</option>
+        <option value="befunde">Nur Seiten mit Befunden</option>
+        <option value="ohne-bild">Ohne Vorschaubild</option>
+      </select>
+    </div>
+  </section>
+
+  <section aria-label="Kanal wählen">
+    <h2 class="kanal-titel">Kanal</h2>
+    <div id="kanaele" class="kanaele" role="group" aria-label="Kanal für die Vorschau"></div>
+    <p id="kanal-notiz" class="notiz"></p>
+  </section>
+
+  <p id="treffer" class="treffer" role="status" aria-live="polite"></p>
+  <div id="karten" class="karten"></div>
+  <noscript><p class="hinweis">Für die Vorschau bitte JavaScript aktivieren. Alle Ergebnisse stehen auch in <code>vorschau.json</code> und <code>befunde.csv</code>.</p></noscript>
+</main>
+
+<footer>
+  <p>Eigenständiges Werkzeug für FranksFinanzcheck. Grenzen und Bildmaße aus <code>scripts/social_limits.py</code>, Bildmaße aus dem Dateikopf – keine Schätzung. Vorschaubilder sind eine Annäherung: Jeder Client schneidet anders.</p>
+</footer>
+</body>
+</html>

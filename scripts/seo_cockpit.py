@@ -27,6 +27,12 @@ kommen aus `scripts/serp_limits.py`, NICHT als Kopie):
     einen Befund laufen auseinander – dort gilt die breitere, hier bleibt
     die Zeile als Audit-Dimension (das Cockpit zeigt sie im Bericht).
   · heading-order       – Sprung in der Überschriftenhierarchie (h2 → h4).
+  · cornerstone-*       – Cornerstone-Inhalte (28.10.2026): markierte Seiten,
+    die zu wenig verlinkt, veraltet oder unvollständig sind, und Kandidaten
+    mit vielen eingehenden Links. Die Regeln stehen in
+    `scripts/cornerstone_wache.py` und werden hier NICHT nachgebaut – der
+    Bericht liest sie als Import, damit Gate und Cockpit dieselbe Meinung
+    haben. Ohne Inhalt (z. B. in hermetischen Tests) entfallen die Befunde.
     „Mehrere H2" selbst ist KEIN Befund: HTML erlaubt beliebig viele H2,
     solange die Rangfolge stimmt. Genau das prüft diese Regel.
 """
@@ -51,6 +57,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import serp_limits  # noqa: E402  (SSOT der Snippet-Grenzen, gleiche Zahlen wie metadaten_wache)
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# Cornerstone-Stand wird einmal je Prozess gelesen: Der Audit läuft einmal,
+# und 45 Artikel-YAMLs mehrfach zu parsen wäre reine Wartezeit.
+_CORNERSTONE: dict = {}
 
 # Die Befunde, die das PR-Gate sperren (Screaming-Frog-Spiegel, 27.10.2026).
 # EINE Liste: `--fail-on` nennt sie im Hilfetext, `.github/workflows/e2e.yml`
@@ -196,6 +206,52 @@ def schema_types(value):
         for child in value:
             result.update(schema_types(child))
     return result
+
+
+def cornerstone_stand() -> dict | None:
+    """Cornerstone-Bewertung aus dem Inhalt – gecacht, fehlertolerant.
+
+    Fehlertolerant ist hier Pflicht: Das Cockpit ist ein Build-Audit. Wenn
+    PyYAML fehlt oder eine YAML-Datei kaputt ist, darf der gesamte Audit
+    nicht ausfallen – dann entfallen nur die Cornerstone-Befunde.
+    """
+    if 'stand' in _CORNERSTONE:
+        return _CORNERSTONE['stand']
+    try:
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import cornerstone_wache as cw
+        stand = cw.pruefe(str(ROOT))
+    except Exception:  # noqa: BLE001 – Bericht darf nicht an Inhalten scheitern
+        stand = None
+    _CORNERSTONE['stand'] = stand
+    return stand
+
+
+def add_cornerstone_findings(add, pages: list) -> None:
+    """Überträgt Cornerstone-Regeln in den Audit – nur für Seiten im Build."""
+    stand = cornerstone_stand()
+    if not stand:
+        return
+    vorhanden = {page['path'] for page in pages}
+    for befund in stand['befunde']:
+        seite = stand['seiten'].get(befund['slug'], {})
+        rel = '/' + str(seite.get('datei', '')).replace('content/', '').replace('/index.md', '/')
+        if rel not in vorhanden:
+            continue
+        code = {'C1': 'cornerstone-flag', 'C2': 'cornerstone-draft',
+                'C3': 'cornerstone-eingehend', 'C4': 'cornerstone-veraltet',
+                'C5': 'cornerstone-unvollstaendig', 'C6': 'cornerstone-breite'}.get(
+                    befund['regel'], 'cornerstone')
+        add(rel, code, befund['schwere'], befund['text'], befund['massnahme'], 'human')
+    for kandidat in stand['kandidaten']:
+        seite = stand['seiten'].get(kandidat['slug'], {})
+        rel = '/' + str(seite.get('datei', '')).replace('content/', '').replace('/index.md', '/')
+        if rel not in vorhanden:
+            continue
+        add(rel, 'cornerstone-kandidat', 'P3',
+            f"{kandidat['eingehend']} eingehende interne Links, nicht als Cornerstone markiert.",
+            'Prüfen, ob der Artikel eine Themenwelt trägt; dann `cornerstone: true` setzen '
+            '(`python3 scripts/cornerstone_wache.py --kandidaten`).', 'human')
 
 
 def audit(build: Path, base: str) -> dict:
@@ -383,6 +439,7 @@ def audit(build: Path, base: str) -> dict:
         page.update(incoming=len(incoming[rel]), depth=depths.get(rel))
         if page['indexable'] and rel != '/' and not incoming[rel]:
             add(rel, 'orphan-page', 'P2', 'Keine internen eingehenden Links im Build.', 'Von passender Themenwelt und thematisch verwandten Artikeln verlinken.', 'human')
+    add_cornerstone_findings(add, pages)
     for field in ('title', 'description'):
         groups = defaultdict(list)
         for page in pages:

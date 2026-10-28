@@ -57,6 +57,33 @@ werden. Es wird **nicht** mit dem Blog veröffentlicht.
 
 ---
 
+## SEO-Parität: vier eigene Werkzeuge (28.10.2026)
+
+Die Funktionen, für die Blogger zu Yoast Premium greifen, laufen hier als
+eigenständige Module – ohne WordPress, ohne Lizenz, ohne fremden Code:
+
+```bash
+npm run links:vorschlaege       # interne Linkvorschläge als Liste (schreibt nichts)
+npm run cornerstone:check       # markierte Cornerstones: verlinkt, frisch, vollständig
+npm run cornerstone:kandidaten  # Kandidaten mit paste-fertiger Frontmatter-Zeile
+npm run fokus:check             # mehrere Fokus-Keywords + Kannibalisierung
+npm run fokus:vorschlag         # Feldvorschläge aus den vorhandenen keywords
+npm run social:vorschau         # Kartenvorschau für 6 Kanäle → .cache/social-vorschau/
+npm run social:vorschau:serve   # http://127.0.0.1:4175
+npm run test:seo-paritaet       # 59 Unit-Tests + JS-Tests
+```
+
+Gemeinsame Grundlage statt vier Meinungen: Der Linkgraph wird einmal in
+`scripts/cornerstone_wache.py` gezählt und von den Linkvorschlägen sowie vom
+SEO-Cockpit mitbenutzt; die Kanalgrenzen stehen einmal in
+`scripts/social_limits.py`. Die Cornerstone-Befunde erscheinen im bestehenden
+Cockpit-Bericht, damit niemand zwei Dashboards pflegen muss.
+
+[Regeln, Bedienung und Grenzen](ANLEITUNG-SEO-PARITAET.md) ·
+[Bestandsaufnahme und Begründung](../SEO-PARITAET-EIGENBAU-2026-10-28.md)
+
+---
+
 ## 0 € Redaktionsarchitektur (Whisper lokal · n8n · Pages)
 
 Stand 03.10.2026 – der Betriebsunterbau der Redaktion, bewusst ohne laufende

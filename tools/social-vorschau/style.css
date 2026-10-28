@@ -1,0 +1,122 @@
+/* Social-Vorschau – FranksFinanzcheck.
+   Farben und Maße aus DESIGN.md (Marken-Tokens). Keine externen Ressourcen. */
+:root{
+  color-scheme:light;
+  --bg:#f6f8f7;--panel:#fff;--ink:#17211d;--muted:#56645e;--line:#dce6e1;
+  --green:#0e5a43;--soft:#eaf4ef;--yellow:#ffb300;--yellow-soft:#fff4d6;
+  --red:#a32424;--red-bg:#fff0ee;--blue:#1e4995;--shadow:0 5px 24px #183e2c08;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.6
+}
+:root[data-theme=dark]{
+  color-scheme:dark;
+  --bg:#1d1e20;--panel:#282c2a;--ink:#f0f5f2;--muted:#b5c4bc;--line:#414c46;
+  --green:#7fd1b4;--soft:#233e33;--yellow:#ffd15a;--yellow-soft:#3a3320;
+  --red:#ffb6a9;--red-bg:#452d29;--blue:#a7c4ff;--shadow:none
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink)}
+a{color:var(--green);text-underline-offset:4px}
+code{font-size:.92em;background:var(--soft);padding:1px 5px;border-radius:4px}
+button,input,select{font:inherit}
+button,.wahl{min-height:44px}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.skip{position:fixed;top:-90px;left:16px;z-index:20;background:var(--panel);padding:12px;border-radius:var(--radius-sm)}
+.skip:focus{top:8px}
+.kopf{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;
+  padding:18px 42px;background:var(--panel);border-bottom:1px solid var(--line)}
+.marke{display:flex;gap:11px;align-items:center;text-decoration:none;color:var(--ink);font-size:14px;font-weight:750;letter-spacing:-.3px}
+.marke-zeichen{display:grid;place-items:center;width:43px;height:43px;background:#0e5a43;color:#fff;border-radius:10px;font-size:25px;flex-shrink:0}
+.marke small{display:block;color:var(--muted);font-size:12px;font-weight:450;letter-spacing:0}
+.kopf-rechts{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.kopf-status{margin:0;font-size:12px;color:var(--muted)}
+.thema{min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:var(--radius-sm);
+  background:var(--panel);color:var(--green);font-size:12px;font-weight:600;cursor:pointer}
+.thema:hover{border-color:var(--green)}
+.punkt{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px}
+main{max-width:1400px;margin:0 auto;padding:40px 42px 56px}
+.kopfzeile{display:flex;gap:28px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.eyebrow{margin:0 0 10px;font-size:13px;font-weight:650;color:var(--green)}
+h1{margin:0 0 16px;font-size:clamp(30px,3.4vw,44px);line-height:1.14;letter-spacing:-1.4px;font-weight:700;text-wrap:balance;max-width:24ch}
+h2{font-size:20px;line-height:1.35;letter-spacing:-.4px;margin:0 0 12px}
+.intro{color:var(--muted);max-width:68ch;margin:0}
+.stempel{flex-shrink:0;text-align:right;font-size:12px;color:var(--muted)}
+.stempel strong{display:block;color:var(--ink);font-size:16px;margin:6px 0}
+.stempel small{font-size:11px;display:block;max-width:26ch}
+.kennzahlen{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);
+  border-radius:var(--radius-md);background:var(--panel);margin:30px 0;overflow:hidden}
+.kennzahl{padding:20px 22px;border-right:1px solid var(--line)}
+.kennzahl:last-child{border-right:0}
+.kennzahl span{display:block;font-size:12px;color:var(--muted)}
+.kennzahl strong{display:block;font-size:32px;line-height:1.3;font-weight:650;letter-spacing:-1.4px;
+  font-variant-numeric:tabular-nums;margin:4px 0}
+.kennzahl small{font-size:11px;color:var(--muted)}
+.werkzeug{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 26px}
+.feld{flex:1 1 240px}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted)}
+input,select{display:block;width:100%;margin-top:6px;padding:10px 12px;min-height:44px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel);color:var(--ink)}
+.kanal-titel{font-size:13px;font-weight:650;color:var(--muted);letter-spacing:0;margin-bottom:8px}
+.kanaele{display:flex;gap:8px;flex-wrap:wrap}
+.wahl{border:1px solid var(--line);border-radius:999px;padding:0 18px;background:var(--panel);
+  color:var(--ink);font-size:13px;font-weight:600;cursor:pointer}
+.wahl[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--panel)}
+:root[data-theme=dark] .wahl[aria-pressed=true]{color:#17211d}
+.notiz{margin:12px 0 0;font-size:12px;color:var(--muted);max-width:80ch;min-height:2.6em}
+.treffer{font-size:12px;color:var(--muted);margin:18px 0 10px}
+.karten{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:22px}
+.karte{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.karte.bild-fehlt{border-color:var(--red)}
+.bild-fläche{position:relative;aspect-ratio:1.91/1;background:var(--soft);display:grid;place-items:center;overflow:hidden}
+.bild-fläche img{width:100%;height:100%;object-fit:cover;display:block}
+.bild-fläche .fehlt{font-size:12px;color:var(--muted);text-align:center;padding:16px;max-width:26ch}
+.bild-maß{position:absolute;right:8px;bottom:8px;background:rgba(23,33,29,.82);color:#fff;
+  font-size:10px;padding:2px 7px;border-radius:999px;font-variant-numeric:tabular-nums}
+.inhalt{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.herkunft{font-size:11px;color:var(--muted);text-transform:lowercase;letter-spacing:.01em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.karte h3{margin:0;font-size:16px;line-height:1.35;font-weight:650;overflow-wrap:anywhere}
+.karte .text{margin:0;font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.rest{opacity:.38;text-decoration:line-through;text-decoration-thickness:1px}
+.zaehler{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.zaehler .ueber{color:var(--red);font-weight:650}
+.befunde{margin:2px 0 0;padding:0;list-style:none;display:grid;gap:5px}
+.befunde li{display:flex;gap:8px;font-size:11.5px;line-height:1.45;align-items:flex-start}
+.marke-schwere{flex-shrink:0;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700}
+.p1{background:var(--red-bg);color:var(--red)}
+.p2{background:var(--yellow-soft);color:#7a5300}
+:root[data-theme=dark] .p2{color:var(--yellow)}
+.p3{background:var(--soft);color:var(--green)}
+.karte footer{margin-top:auto;padding-top:10px;display:flex;justify-content:space-between;
+  gap:10px;align-items:center;font-size:11.5px;border-top:1px solid var(--line)}
+.karte footer a{text-decoration:none;font-weight:600}
+.ohne-befund{color:var(--green);font-size:11.5px}
+.leer{margin:30px 0;padding:28px;border:1px dashed var(--line);border-radius:var(--radius-md);
+  color:var(--muted);font-size:14px}
+.hinweis{background:var(--soft);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:16px 18px;font-size:13px}
+body>footer{padding:22px 42px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;max-width:1400px;margin:0 auto}
+body>footer p{margin:0;max-width:100ch}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme=light]){color-scheme:dark;--bg:#1d1e20;--panel:#282c2a;--ink:#f0f5f2;
+    --muted:#b5c4bc;--line:#414c46;--green:#7fd1b4;--soft:#233e33;--yellow:#ffd15a;
+    --yellow-soft:#3a3320;--red:#ffb6a9;--red-bg:#452d29;--blue:#a7c4ff;--shadow:none}
+  :root:not([data-theme=light]) .wahl[aria-pressed=true]{color:#17211d}
+  :root:not([data-theme=light]) .p2{color:var(--yellow)}
+}
+@media(max-width:900px){
+  .kopf{padding:16px 20px}
+  main{padding:28px 20px 44px}
+  .kennzahlen{grid-template-columns:1fr 1fr}
+  .kennzahl:nth-child(2){border-right:0}
+  .kennzahl:nth-child(1),.kennzahl:nth-child(2){border-bottom:1px solid var(--line)}
+  body>footer{padding:20px}
+}
+@media(max-width:560px){
+  h1{font-size:30px;letter-spacing:-1px}
+  .stempel{display:none}
+  .kennzahl strong{font-size:26px}
+  .karten{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
