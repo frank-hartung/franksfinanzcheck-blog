@@ -70,8 +70,18 @@ npm run fokus:check             # mehrere Fokus-Keywords + Kannibalisierung
 npm run fokus:vorschlag         # Feldvorschläge aus den vorhandenen keywords
 npm run social:vorschau         # Kartenvorschau für 6 Kanäle → .cache/social-vorschau/
 npm run social:vorschau:serve   # http://127.0.0.1:4175
-npm run test:seo-paritaet       # 59 Unit-Tests + JS-Tests
+npm run seo:paritaet            # CI-Gate lokal: Selbsttests + Suiten + Befunde
+npm run seo:paritaet:bericht    # vollständiger Bericht → .cache/seo-paritaet/
+npm run test:seo-paritaet       # 90 Unit-Tests + 7 JS-Tests
 ```
+
+Die CI-Einbindung ist ein Workflow mit zwei Jobs und **einer** Policy
+(`.github/workflows/seo-paritaet.yml` → `scripts/seo_paritaet_ci.py`):
+`gate` prüft bei jedem PR das Frontmatter (Sekunden, blockiert den Merge),
+`gebaut` prüft nächtlich die gerenderten `og:*`-Tags am echten Build.
+Sperre sind P1, Fokus-Keywords P2 und Cornerstone C1/C2/C3/C5; alle P3 und
+C4 („älter als 180 Tage") bleiben Hinweise, weil ein uhrzeitabhängiges Gate
+zur Zeitbombe wird. Exit `2` heißt „Werkzeug defekt" und gibt nie frei.
 
 Gemeinsame Grundlage statt vier Meinungen: Der Linkgraph wird einmal in
 `scripts/cornerstone_wache.py` gezählt und von den Linkvorschlägen sowie vom

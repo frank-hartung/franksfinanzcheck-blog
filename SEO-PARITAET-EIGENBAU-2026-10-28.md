@@ -102,6 +102,28 @@ Was diese Module nicht liefern (und nicht liefern können): Rankingdaten,
 Suchvolumen, Wettbewerbervergleiche. Dafür fehlt eine Datenquelle, kein
 Feature.
 
+## CI-Einbindung (28.10.2026)
+
+Die vier Werkzeuge hatten bis dahin vier Ausgabeformate, drei Exit-Codes und
+keinen Lauf, der sie im Betrieb auslöst – lokal richtig, im Betrieb unsichtbar.
+Neu ist ein Einstiegspunkt (`scripts/seo_paritaet_ci.py`) mit einer
+dokumentierten, selbstgetesteten Policy, den ein Workflow mit zwei Messpunkten
+aufruft: `gate` (Frontmatter, jeder PR, Sekunden) und `gebaut` (gerenderte
+`og:*-Tags` am echten Build, nächtlich).
+
+Entscheidend ist, was **nicht** sperrt: alle P3 und Cornerstone C4
+(„älter als 180 Tage"). Ein Gate, das von der Uhr abhängt, wird irgendwann rot,
+ohne dass jemand Code angefasst hat – dieselbe Zeitbombe, die
+`scripts/selftest_clock.py` am 07.10.2026 dingfest gemacht hat. Alter ist ein
+Redaktionssignal, kein Merge-Hindernis; `--streng` gibt es trotzdem, aber nur
+von Hand.
+
+Messwert des ersten vollständigen Laufs am Bestand (inklusive aller
+Selbsttests und 90 Unit-Tests): **0 Sperren, 268 Hinweise, 4,9 s, Exit 0.**
+Der Bestand ist damit nicht „sauber" – er ist ehrlich eingeordnet: keine
+Markierungsbrüche, aber 76 Artikel ohne `keywords_fokus` und 192 Kartenhinweise,
+die als Redaktionsliste im Bericht stehen.
+
 ## Empfehlung
 
 Kein Nachbau, kein Fremdcode. Reihenfolge nach Nutzen: **Punkt 4 → 2 → 1 → 3**.

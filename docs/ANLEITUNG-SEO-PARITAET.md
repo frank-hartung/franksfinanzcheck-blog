@@ -6,6 +6,12 @@ Nachbau gibt, sondern vier eigenständige Module, steht in
 [SEO-PARITAET-EIGENBAU-2026-10-28.md](../SEO-PARITAET-EIGENBAU-2026-10-28.md).
 Dieses Dokument ist die Bedienungsanleitung.
 
+Seit dem 28.10.2026 laufen die vier Werkzeuge als eigener Workflow
+(`.github/workflows/seo-paritaet.yml`, Einstiegspunkt
+`scripts/seo_paritaet_ci.py`) – bei jedem PR auf Sekundenbasis und nächtlich
+gegen die gebaute Seite. Die Policy (was den Merge blockiert) steht dort:
+[CI-Einbindung](#ci-einbindung-githubworkflowsseo-paritaetyml-28102026).
+
 ## Voraussetzungen
 
 - Python ≥ 3.11
@@ -176,8 +182,11 @@ npm run test:seo-paritaet
 #   scripts.tests.test_cornerstone_wache
 #   scripts.tests.test_link_vorschlaege
 #   scripts.tests.test_social_vorschau
+#   scripts.tests.test_seo_paritaet_ci     (Policy, Exit-Codes, Bericht)
 #   + node --test tools/social-vorschau/app.test.cjs
 ```
+
+Stand 28.10.2026: 90 Unit-Tests und 7 JS-Tests.
 
 Jedes Werkzeug hat zusätzlich `--selftest` (Sabotage-Proben). Die Unit-Tests
 sind hermetisch: Temp-Verzeichnis, kein Hugo, kein Netz, keine echten Inhalte.
@@ -195,25 +204,88 @@ python3 -m venv .venv && .venv/bin/pip install pyyaml==6.0.3
   scripts.tests.test_social_vorschau
 ```
 
-## Einbindung in die CI (Entscheidung des Inhabers)
+## CI-Einbindung (`.github/workflows/seo-paritaet.yml`, 28.10.2026)
 
-Die Workflows sind sicherheitsrelevante Dateien (siehe `CLAUDE.md`, Regel 3)
-und wurden hier bewusst **nicht** angefasst. Vorschlag für einen eigenen
-Schritt im PR-Gate:
+Der Lauf heißt **„SEO-Parität (Cornerstones · Fokus-Keywords ·
+Social-Karten)"** und hat zwei Jobs mit *einer* Policy.
 
-```yaml
-- name: SEO-Parität
-  run: |
-    python3 scripts/fokus_keywords.py --selftest
-    python3 scripts/fokus_keywords.py
-    python3 scripts/cornerstone_wache.py --selftest
-    python3 scripts/cornerstone_wache.py
-    python3 scripts/social_vorschau.py --selftest
-    npm run test:seo-paritaet
+| Job | Wann | Quelle | Dauer | Entscheidet |
+|---|---|---|---|---|
+| `gate` („Gate (Frontmatter, ohne Build)") | Push auf `main`, jeder passende PR, auf Zuruf | Frontmatter | ~1 min | Ja – blockiert den Merge |
+| `gebaut` („Gebaute Wahrheit") | nächtlich 06:50 MESZ, auf Zuruf | gerendertes `public/` | ~3 min | Ja – für den Nachtlauf |
+
+**Trigger** (beide Listen sind identisch – `npm run trigger:check` prüft das):
+`scripts/seo_paritaet_ci.py`, die fünf Werkzeugmodule samt ihren Tests,
+`tools/social-vorschau/**`, `content/posts/**`, `content/pillar/**`,
+`requirements-ci.{in,txt}`, diese Anleitung und der Workflow selbst.
+
+### Warum zwei Jobs und nicht einer
+
+- **`gate`** liest das Frontmatter. Das genügt für alles, was der Autor
+  gesetzt hat (Cornerstone-Flag, `keywords_fokus`, `cover`), braucht keinen
+  Hugo und ist in Sekunden fertig – Voraussetzung dafür, dass er bei jedem
+  Artikel-PR läuft.
+- **`gebaut`** baut mit `--minify` (dasselbe Kommando wie die Produktion) und
+  liest die **tatsächlich gerenderten** `og:*`-Tags. Nur so fällt eine
+  Template-Regel auf, die das Frontmatter nicht kennt – etwa „Titel unter
+  40 Zeichen bekommt den Marken-Zusatz". Er läuft **nicht** bei jedem PR:
+  `e2e.yml` baut dort bereits; ein zweiter Build pro Layout-PR wäre Wartezeit
+  ohne neue Erkenntnis.
+
+### Was blockiert (und was nicht)
+
+Die Policy steht in `scripts/seo_paritaet_ci.py`, nicht im YAML – damit sie
+einen Selbsttest haben kann. Kurzfassung:
+
+| Klasse | Befunde | Wirkung |
+|---|---|---|
+| **Sperre** | jeder Befund mit `P1` (z. B. `social-bild`: kein `og:image`) | Merge blockiert, Exit 1 |
+| **Sperre** | Fokus-Keywords `P2` (F1–F8) | der Autor hat das Feld gesetzt, also gilt der Vertrag |
+| **Sperre** | Cornerstone C1/C2/C3/C5 | eine ausdrückliche Markierung wird gebrochen |
+| Bernstein | alle `P3` (Kartenlängen, `og:image:alt`, `keywords_fokus` fehlt = F9) | sichtbar im Summary, kein Hindernis |
+| Bernstein | Cornerstone C4 („älter als 180 Tage"), C6 | Redaktionssignal, kein Merge-Kriterium |
+
+C4 sperrt **absichtlich nicht**: Ein Gate, das von der Uhr abhängt, wird
+irgendwann rot, ohne dass jemand Code angefasst hat (Lehre vom 07.10.2026,
+`scripts/selftest_clock.py --offset 97`). Wer es strenger will, startet den
+Lauf von Hand mit `streng: true` – dann bewusst, nicht als Dauerzustand.
+
+**Exit-Codes des Einstiegspunkts:** `0` keine Sperre · `1` Sperre · `2`
+Werkzeug oder Selbsttest defekt (dann wird **nichts** freigegeben). Fehlt
+Node, steht „nicht gemessen" im Bericht – nie ein stilles Grün.
+
+### Selbst nachsehen
+
+```bash
+npm run seo:paritaet            # Kurzfassung auf der Konsole, inkl. Selbsttests + Suiten
+npm run seo:paritaet:bericht    # vollständiger Bericht → .cache/seo-paritaet/
+python3 scripts/seo_paritaet_ci.py --streng     # so streng, wie der Nachtlauf nicht ist
+python3 scripts/seo_paritaet_ci.py --ohne-tests # nur Befunde (schnell, lokal)
 ```
 
-`fokus_keywords` und `cornerstone_wache` sind Gates (Exit 1 bei P1/P2),
-`link_vorschlaege` und `social_vorschau` sind Berichte (Exit 0).
+Wo der Befund steht: in der **Lauf-Zusammenfassung** des Jobs (erste 25
+Einträge) und vollständig im Artefakt `seo-paritaet-gate`
+bzw. `seo-paritaet-build` (14 Tage). Es gibt bewusst **keine**
+PR-Kommentare – ein Kanal, nicht zwei.
+
+### Wenn der Lauf rot ist
+
+1. `social-bild` (P1): `og:image` fehlt. Bei einem Artikel heißt das
+   `cover.image` setzen (`npm run cornerstone:kandidaten` zeigt das Muster).
+2. `fokus_keywords` F1–F8: Feld korrigieren, nicht die Wache. F8
+   (Kannibalisierung) heißt: zwei Seiten streiten um dieselbe Suchanfrage –
+   eine der beiden bekommt ein anderes Fokus-Keyword.
+3. `cornerstone` C3/C5: verlinken (`npm run links:vorschlaege -- --datei …`)
+   oder Pflichtfelder ergänzen. Wer die Markierung nicht mehr will, entfernt
+   `cornerstone: true` – das ist eine Entscheidung, kein Unfall.
+4. Exit `2`: Zuerst den Selbsttest des genannten Werkzeugs reparieren. Ein
+   defektes Werkzeug darf keinen Merge freigeben.
+
+### Was der Lauf nicht tut
+
+Kein Netz außer den GitHub-Actions, kein `npm ci` (der DOM-Test prüft reine
+Funktionen), keine Schreibzugriffe auf `content/`, `data/` oder `static/`,
+keine PR-Kommentare, kein Push. Berechtigungen: `contents: read`.
 
 ## Was diese Werkzeuge nicht sind
 

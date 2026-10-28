@@ -303,8 +303,11 @@ def load_pages():
             "path": path,
         }
     if skipped:
+        # Diagnose gehört auf stderr: `lade_pages` ist eine Bibliotheksfunktion.
+        # Ein print auf stdout macht jeden `--json`-Verbraucher unlesbar
+        # (gefunden vom CI-Test am 28.10.2026).
         print(f"(Linker-Scope: {skipped} Draft-/Zukunfts-Posts als Ziele "
-              f"ausgeschlossen)")
+              f"ausgeschlossen)", file=sys.stderr)
     return pages
 
 
