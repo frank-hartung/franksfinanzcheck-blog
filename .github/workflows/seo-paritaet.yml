@@ -194,11 +194,14 @@ jobs:
           if [ "$code" -ne 0 ]; then
             # Die erste echte Fehlerzeile gehört in die Annotation: Wer sie
             # nicht sieht, lädt ein Artefakt herunter, das er nicht braucht.
-            if grep -q '^Traceback' /tmp/seo-paritaet.log 2>/dev/null; then
+            # Reihenfolge der Aussagekraft: benannter Test, dann Ausnahme,
+            # dann irgendetwas. „failures=1" allein hilft niemandem.
+            zeile="$(grep -m1 -E '^(❌|FAIL:|ERROR:)' /tmp/seo-paritaet.log 2>/dev/null)"
+            if [ -z "$zeile" ] && grep -q '^Traceback' /tmp/seo-paritaet.log 2>/dev/null; then
               # Die Überschrift „Traceback" sagt nichts. Interessant sind die
               # letzten Zeilen: Datei, Zeile, Ausnahmetyp, Meldung.
               zeile="$(grep -v '^[[:space:]]*$' /tmp/seo-paritaet.log | tail -n 2 | tr '\n' ' ')"
-            else
+            elif [ -z "$zeile" ]; then
               zeile="$(tail -n 1 /tmp/seo-paritaet.log 2>/dev/null)"
             fi
             [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"

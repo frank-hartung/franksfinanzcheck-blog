@@ -207,11 +207,29 @@ def fuehre_aus(name: str, befehl: list[str], *, cwd: str = BLOG_DIR,
                        time.monotonic() - start)
     dauer = time.monotonic() - start
     ausgabe = (ergebnis.stdout + ergebnis.stderr).strip()
+    zeilen = ausgabe.splitlines()
+
+    def _aussage() -> str:
+        """Der Satz, der die Reparatur beginnt – nicht die letzte Zeile.
+
+        `unittest` endet mit „FAILED (failures=1)"; welche Prüfung das war,
+        steht eine Zeile darüber als `FAIL: test_…`. Genau diese Zeile fehlt
+        sonst in jeder Zusammenfassung (Lehre aus dem roten Gate-Lauf vom
+        28.10.2026, in dem nur „failures=1" zu lesen war).
+        """
+        for zeile in zeilen:
+            if zeile.startswith(("FAIL:", "ERROR:")):
+                return zeile.strip()
+        for zeile in reversed(zeilen):
+            if zeile.strip():
+                return zeile.strip()
+        return ""
+
     if ergebnis.returncode != 0:
-        schwanz = "\n".join(ausgabe.splitlines()[-12:])
-        print(f"── {name}: Exit {ergebnis.returncode} ──\n{schwanz}", file=sys.stderr)
-    return Schritt(name, ergebnis.returncode == 0,
-                   ausgabe.splitlines()[-1] if ausgabe else "", dauer)
+        schwanz = "\n".join(zeilen[-12:])
+        print(f"── {name}: Exit {ergebnis.returncode} ──\n{schwanz}\n"
+              f"── {name}: {_aussage()}", file=sys.stderr)
+    return Schritt(name, ergebnis.returncode == 0, _aussage() if ausgabe else "", dauer)
 
 
 def selbsttests() -> list[Schritt]:
@@ -590,6 +608,12 @@ def _pruefe_und_berichte(args) -> int:
                 mit_linkvorschlaegen=not args.ohne_linkvorschlaege,
                 quelle=args.quelle)
     md = summary_md(lage, streng=args.streng)
+
+    # Fehler gehören AUCH auf stderr – im Summary-Betrieb der CI ist stderr
+    # das Einzige, was im Log steht, und der Workflow baut daraus seine
+    # Annotation. Stand nur im Markdown, blieb der Befund unsichtbar.
+    for fehler in lage.fehler:
+        print(f"❌ {fehler}", file=sys.stderr)
 
     if args.md:
         ziel = os.path.abspath(args.md)
