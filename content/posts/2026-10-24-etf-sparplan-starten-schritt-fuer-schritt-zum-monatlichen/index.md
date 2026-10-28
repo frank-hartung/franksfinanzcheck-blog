@@ -2,6 +2,7 @@
 title: "ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung"
 description: "ETF-Sparplan starten: Erfahre, wie du als Einsteiger einen Sparplan aufsetzt, Fehler vermeidest und monatlich clever investierst – ohne Fachchinesisch."
 date: 2026-10-28T01:27:02Z
+kurzantwort: "Ein ETF-Sparplan ist ein automatischer Dauerauftrag fürs Depot: Du legst eine feste Monatssumme fest, der Broker kauft dafür Anteile eines breit gestreuten Index-ETF – die Einrichtung dauert meist unter 15 Minuten. Im Rechenbeispiel des Artikels werden aus 50 € monatlich über 20 Jahre bei angenommenen 5 % Rendite p. a. rund 30.000 €."
 draft: false
 reserve_published: 2026-10-28
 reserve_reaktiviert: "2026-10-24 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis check_length.py"

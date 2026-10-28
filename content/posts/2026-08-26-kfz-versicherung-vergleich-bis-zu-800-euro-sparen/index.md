@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-21
+lastmod: 2026-10-28
 title: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen"
 description: "Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis – Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung."
 date: 2026-10-28T01:24:59Z
