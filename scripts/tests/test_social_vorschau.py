@@ -272,8 +272,12 @@ class ServerTests(unittest.TestCase):
     def test_bilder_aus_static_werden_ausgeliefert(self):
         """Die Karten verlinken relativ (`../../static/images/…`); der Browser
         fragt `/static/images/…` – das muss die Positivliste enthalten."""
-        kandidaten = [k for k in sv._auslieferbar(self.tmp) if k.startswith("/static/")]
-        self.assertTrue(kandidaten, "keine Bilder aus static/ in der Positivliste")
+        # Nach Endung filtern, nicht die erste Zeile der Liste nehmen: Die
+        # Reihenfolge kommt aus `os.walk` und ist damit von der Festplatte
+        # abhängig – in der CI stand dort `manifest.json` (roter Lauf 794f1a5).
+        kandidaten = [k for k in sv._auslieferbar(self.tmp)
+                      if k.startswith("/static/") and k.lower().endswith((".png", ".jpg", ".jpeg"))]
+        self.assertTrue(kandidaten, "kein Bild aus static/ in der Positivliste")
         status, typ, _ = self.hole(kandidaten[0])
         self.assertEqual(status, 200, kandidaten[0])
         self.assertTrue(typ.startswith("image/"), typ)
