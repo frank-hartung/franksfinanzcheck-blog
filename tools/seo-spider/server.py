@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Local-only web UI for the FF SEO Spider. Python standard library only."""
 from __future__ import annotations
-import argparse, json, mimetypes, pathlib, threading
+import argparse, json, pathlib, threading
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
@@ -80,8 +80,12 @@ class Handler(BaseHTTPRequestHandler):
         if file not in ("index.html", "app.js", "style.css"):
             return self.send_bytes(b"Not found", "text/plain", 404)
         data = (HERE / file).read_bytes()
-        kind = mimetypes.guess_type(file)[0] or "application/octet-stream"
-        self.send_bytes(data, kind + ("; charset=utf-8" if kind.startswith("text/") or kind in ("application/javascript",) else ""))
+        content_type = {
+            "index.html": "text/html; charset=utf-8",
+            "app.js": "application/javascript; charset=utf-8",
+            "style.css": "text/css; charset=utf-8",
+        }[file]
+        self.send_bytes(data, content_type)
     def do_POST(self):
         origin = self.headers.get("Origin")
         if origin and urlparse(origin).netloc != self.headers.get("Host", ""):
