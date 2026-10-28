@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T01:34:21Z",
+  "generated_at": "2026-10-28T08:43:43Z",
   "modus": "kandidaten",
-  "commit": "3bec09bb15eb78b9fe4d06d04b00e7149415130f",
+  "commit": "d90009a2b8f70a594f54769935647022fb2af3e7",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -189,7 +189,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "4ae75d948dfe128665deef0cfc0905f076e58c67579a99d1d0ccdfad13d34f3d",
@@ -1192,7 +1192,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     }
   }
 }
