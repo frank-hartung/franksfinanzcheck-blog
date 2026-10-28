@@ -194,10 +194,15 @@ jobs:
           if [ "$code" -ne 0 ]; then
             # Die erste echte Fehlerzeile gehört in die Annotation: Wer sie
             # nicht sieht, lädt ein Artefakt herunter, das er nicht braucht.
-            zeile="$(grep -m1 -E '^[A-Za-z_.]*(Error|Exception):|^Traceback' /tmp/seo-paritaet.log 2>/dev/null)"
-            [ -n "$zeile" ] || zeile="$(tail -n 1 /tmp/seo-paritaet.log 2>/dev/null)"
+            if grep -q '^Traceback' /tmp/seo-paritaet.log 2>/dev/null; then
+              # Die Überschrift „Traceback" sagt nichts. Interessant sind die
+              # letzten Zeilen: Datei, Zeile, Ausnahmetyp, Meldung.
+              zeile="$(grep -v '^[[:space:]]*$' /tmp/seo-paritaet.log | tail -n 2 | tr '\n' ' ')"
+            else
+              zeile="$(tail -n 1 /tmp/seo-paritaet.log 2>/dev/null)"
+            fi
             [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"
-            zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-600)"
+            zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-800)"
           fi
           if [ "$code" = "1" ]; then
             echo "::error title=SEO-Parität::Mindestens ein Befund sperrt den Merge – ${zeile}. Der Bericht steht in der Lauf-Zusammenfassung, die vollständige Liste im Artefakt 'seo-paritaet-gate'. Policy: docs/ANLEITUNG-SEO-PARITAET.md"
@@ -272,8 +277,11 @@ jobs:
           cat /tmp/seo-paritaet-build.log
           cat /tmp/seo-paritaet-build-summary.md >> "$GITHUB_STEP_SUMMARY"
           if [ "$code" != "0" ]; then
-            zeile="$(grep -m1 -E '^[A-Za-z_.]*(Error|Exception):|^Traceback' /tmp/seo-paritaet-build.log 2>/dev/null)"
-            [ -n "$zeile" ] || zeile="$(tail -n 1 /tmp/seo-paritaet-build.log 2>/dev/null)"
+            if grep -q '^Traceback' /tmp/seo-paritaet-build.log 2>/dev/null; then
+              zeile="$(grep -v '^[[:space:]]*$' /tmp/seo-paritaet-build.log | tail -n 2 | tr '\n' ' ')"
+            else
+              zeile="$(tail -n 1 /tmp/seo-paritaet-build.log 2>/dev/null)"
+            fi
             [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"
             zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-600)"
             echo "::error title=SEO-Parität (gebaut)::${zeile} · Die gerenderte Seite verletzt entweder die Karten-Policy (z. B. og:image fehlt) oder der Build ist unvollständig. Details im Artefakt 'seo-paritaet-build'."
