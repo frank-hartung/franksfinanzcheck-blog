@@ -48,7 +48,7 @@ Hier liest du, wo es die besten Zinsen gibt. Du erfährst auch, wie sicher dein 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere dir die aktuellen Spitzenzinsen auf einem dauerhaft kostenlosen Tagesgeldkonto: [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -179,7 +179,7 @@ Diese Summe deckt fast einen Monat Versicherungen. Oder einen kurzen Urlaub.
 6. **Kapital transferieren:** Überweise den Betrag deines Notgroschens auf das neue Konto.
 7. **Wiedervorlage:** Setze dir einen Termin zum Ende der Zinsgarantie, um erneut die Zinsen zu vergleichen.
 
-![Gliederung des Beitrags: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](abbildung-ablauf. svg)
+![Gliederung des Beitrags: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich“ – 5 Stationen von „Was ist Tagesgeld eigentlich?“ bis „Aktuelle Zinslandschaft im Oktober 2026“ (eigene Darstellung).*
 

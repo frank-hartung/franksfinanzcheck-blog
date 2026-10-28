@@ -2,9 +2,14 @@
 title: "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden"
 description: Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen solltest, um Heizkosten zu senken und Fehler zu vermeiden.
 date: 2026-10-28T15:04:32Z
-draft: false
-reserve_published: 2026-10-28
-reserve_reaktiviert: "2026-10-24 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis check_length.py"
+draft: true
+lastmod: 2026-10-28
+redaktionelle_pruefung:
+  risikoklasse: "erhoeht"
+  status: "ausstehend"
+  aenderungsgrund: "Zurückgestellt: saisonale Preisprognosen und konkrete Einsparzahlen waren nicht mit einer belastbaren, datierten Quellenkette belegt; redaktionelle Prüfung vor erneuter Veröffentlichung erforderlich."
+affiliate_exempt: true
+affiliate_exempt_reason: "Für Heizöl ist keine passende, registrierte Partnerroute vorhanden; Stromtarif-CTAs wären sachfremd. Der Artikel bleibt bis zur Quellenprüfung Entwurf."
 
 tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
@@ -16,11 +21,6 @@ pin_description: "*Werbung | Heizöl Preise schwanken stark. Erfahre, wann du He
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
-redaktionelle_pruefung:
-  risikoklasse: "standard"
-  status: "ausstehend"
-  aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
-
 inspiration: "Heizöl kaufen: Wann ist der beste Zeitpunkt?"
 cover:
   image: "images/covers/2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg"
@@ -50,8 +50,6 @@ Das muss nicht sein, wenn du ein paar einfache Regeln beachtest. Hier erfährst 
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Wie entwickeln sich die Heizöl Preise im Jahresverlauf?
 
@@ -90,7 +88,6 @@ Auch das Wetter hat einen Einfluss auf die Wege für den Transport. Wenn die Fl�
 3. **Verzicht auf Optionen mit einem festen Preis** – Tarife mit schwankenden Preisen werden bei steigenden Kosten auf dem Markt sehr schnell teuer. Ein fester Preis gibt dir Sicherheit für die gesamte Dauer vom Vertrag. So erlebst du keine bösen Überraschungen, wenn die Preise für Energie weltweit steigen.
 4. **Fehlender Blick auf den Stand im Lager** – Ein leerer Tank zwingt dich zu einem Notkauf zum höchsten Preis am Markt. Wenn du keine Wahl mehr hast, diktiert der Händler die Bedingungen für den Kauf. Kontrolliere deinen Tank daher regelmäßig, damit du immer aus einer Position der Stärke heraus handelst.
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Stromanbieter vergleichen & sparen**](/go/strom/)
 
 ## So planst du deinen Heizölkauf – Schritt für Schritt
 
@@ -174,7 +171,3 @@ Dieses Modell ordnet deine Gedanken und hilft dir bei einer klugen Entscheidung 
 Dann rechnest du die Konditionen für die Lieferung aus, um versteckte Kosten zu finden. Im dritten Schritt sicherst du dir das Fenster für die Kündigung, damit du im nächsten Jahr wieder frei wählen kannst. Am Ende hältst du deinen Kurs fest und lässt dich nicht von kurzen Schwankungen am Markt nervös machen. Mit diesem System vermeidest du teure Fehler aus einer Laune heraus.
 
 ---
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

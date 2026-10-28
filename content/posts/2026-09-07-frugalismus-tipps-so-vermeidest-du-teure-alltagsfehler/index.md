@@ -47,7 +47,7 @@ Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €** im M
 
 Gute **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** setzen deshalb nicht auf Geiz, sondern auf weniger Reibungsverlust. Sie bremsen Impulskäufe, machen laufende Kosten sichtbar und lenken dein Geld stärker in Dinge, die dir wirklich wichtig sind.
 
-![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -129,7 +129,7 @@ Gehe deshalb einmal im Quartal deine Kontoauszüge durch. Identifiziere jede aut
 
 Häufig gibt es kostenlose Alternativen: Die örtliche Bibliothek verleiht Filme, Magazine und teils sogar Streaming-Zugänge. Wer Fixkosten so drückt, gewinnt Spielraum ohne täglichen Verzicht-Stress – einer der stärksten Hebel beim **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)**.
 
-![Gliederung des Beitrags: Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-ablauf. svg)
+![Gliederung des Beitrags: Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ – 5 Stationen von „Warum diese Frugalismus-Tipps dein Mindset verändern“ bis „Trick 2: Das Prinzip der No-Spend-Weekends“ (eigene Darstellung).*
 

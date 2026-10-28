@@ -183,6 +183,29 @@ class TestReportProtokoll(unittest.TestCase):
         self.assertIn(f"| INFO | operating_boundary | {grenze} |", out)
         self.assertNotIn("funnel_gap", out)
 
+    def test_report_nennt_geschaeftsmessbarkeit_getrennt_von_pipeline_ampel(self):
+        src, _measured, _boundaries = rf.lage([], {}, {}, {}, zaehler_aktiv=False)
+        status = rf.messbarkeit(src)
+        out = rf.render(self._f(), [], [], business_measurement=status)
+        self.assertEqual(status["status"], "unbekannt")
+        self.assertEqual(status["gemessene_quellen"], 0)
+        self.assertIn("Geschäftsmessbarkeit:** **UNBEKANNT", out)
+        self.assertIn("Pipeline-Ampel:** **GREEN**", out)
+        self.assertIn("kein Umsatz- oder Erfolgssignal", out)
+
+    def test_geschaeftsmessbarkeit_ist_nur_mit_beiden_frischen_quellen_vollstaendig(self):
+        full = rf.messbarkeit([("clicks", "Klicks", "ok", 0),
+                               ("offline", "Provision", "ok", 0)])
+        partial = rf.messbarkeit([("clicks", "Klicks", "ok", 0),
+                                 ("offline", "Provision", "disabled", None)])
+        stale = rf.messbarkeit([("clicks", "Klicks", "alt", 20),
+                                ("offline", "Provision", "ok", 0)])
+        self.assertEqual(full["status"], "vollstaendig")
+        self.assertEqual(full["abdeckung_prozent"], 100)
+        self.assertEqual(partial["status"], "teilweise")
+        self.assertEqual(partial["abdeckung_prozent"], 50)
+        self.assertEqual(stale["status"], "veraltet")
+
     def test_report_nennt_keine_besuchszahlen(self):
         out = rf.render(self._f(), [], [])
         for wort in ("Besuche", "Outbound-CTR", "pro 100 Besuche"):

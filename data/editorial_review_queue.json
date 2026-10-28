@@ -1,8 +1,177 @@
 {
-  "generated_at": "2026-10-24",
+  "generated_at": "2026-10-28",
   "high_risk_total": 10,
-  "approved": 10,
+  "approved": 3,
   "open_live": 0,
-  "open_drafts": 0,
-  "items": []
+  "open_drafts": 7,
+  "items": [
+    {
+      "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+      "path": "content/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
+      "path": "content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
+      "path": "content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+      "path": "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 4: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „September 2026: In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund …“"
+        },
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-tierkrankenversicherung-hund-katze-kosten",
+      "path": "content/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich",
+      "path": "content/posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "path": "content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 3: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 4: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 5: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 6: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 7: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 8: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 9: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E13",
+          "detail": "geprüfte Zahl 10: Fundstelle kommt im Artikel nicht vor"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kosten im alten Tarif bei 0,42 € je kWh | 3.500 × 0,42 | 1.470 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kosten im alten Tarif bei 0,42 € je kWh | 3.500 × 0,42 | 1.470 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kosten im neuen Tarif bei 0,30 € je kWh | 3.500 × 0,30 | 1.050 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kosten im neuen Tarif bei 0,30 € je kWh | 3.500 × 0,30 | 1.050 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Mögliche Ersparnis im Modell | 1.470 − 1.050 | 420 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Cent Preisabstand bringt bei 3.500 Kilowattstunden 35 € im Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Grundgebühr im Jahr bei 9,90 € im Monat | 9,90 × 12 | 118,80 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Grundgebühr im Jahr bei 9,90 € im Monat | 9,90 × 12 | 118,80 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kreditkarte im Jahr (Annahme) | frei gewählt | 15 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Fixkosten im Jahr zusammen | 118,80 + 15 | 133,80 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Über zehn Jahre gerechnet | 133,80 × 10 | 1.338 € |“"
+        },
+        {
+          "code": "E17",
+          "detail": "Text/Quellen wurden nach der Freigabe verändert"
+        }
+      ]
+    }
+  ]
 }

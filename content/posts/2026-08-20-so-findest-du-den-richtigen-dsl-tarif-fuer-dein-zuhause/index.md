@@ -54,7 +54,7 @@ Dieser Ratgeber hilft dir dabei, im Tarif-Dschungel den Durchblick zu behalten. 
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe zuerst, welche Tarife an deiner Adresse überhaupt verfügbar sind. Danach vergleichst du Preise, Boni und Routerkosten: [**DSL-Tarife vergleichen**](/go/dsl/) _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „DSL-Tarif für dein Zuhause: Das passende Angebot finden“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -173,7 +173,7 @@ Prüfe vor einem Wechsel:
 
 Falls dein WLAN das Nadelöhr ist, schau hier rein: [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
 
-![Gliederung des Beitrags: DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-ablauf. svg)
+![Gliederung des Beitrags: DSL-Tarif für dein Zuhause: Das passende Angebot finden](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „DSL-Tarif für dein Zuhause: Das passende Angebot finden“ – 5 Stationen von „Wie viel Internet-Geschwindigkeit brauchst du wirklich?“ bis „Nicht jedes Internetproblem ist ein Tarifproblem“ (eigene Darstellung).*
 
