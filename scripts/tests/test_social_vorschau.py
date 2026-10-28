@@ -244,10 +244,13 @@ class ServerTests(unittest.TestCase):
                 return antwort.status, antwort.headers.get("Content-Type", ""), antwort.read()
         except self._request.HTTPError as fehler:
             return fehler.code, fehler.headers.get("Content-Type", ""), b""
-        except (self._request.URLError, ValueError) as fehler:
+        except Exception as fehler:  # noqa: BLE001 – Testhilfe, siehe unten
             # Der Client selbst kann eine Anfrage mit Steuerzeichen ablehnen
-            # (http.client.InvalidURL, ab 3.12 strenger geprüft). Auch das ist
-            # ein Beweis: Es geht kein präparierter Header auf die Reise.
+            # (http.client.InvalidURL – erbt von HTTPException, nicht von
+            # ValueError, und wird ab 3.12 strenger geprüft). Auch das ist ein
+            # Beweis: Es geht kein präparierter Header auf die Reise. Deshalb
+            # hier bewusst jede Ausnahme: Der Test soll die Abwehr messen,
+            # nicht die Ausnahmeklassen des `urllib`-Stapels.
             return 0, f"abgelehnt: {type(fehler).__name__}", b""
 
     def test_startseite_und_json_werden_ausgeliefert(self):
