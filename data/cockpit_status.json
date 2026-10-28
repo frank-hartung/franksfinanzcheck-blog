@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-27T23:42:49Z",
+  "generated": "2026-10-28T23:58:27Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 4/6 bereit – Nachschub nötig",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig",
         "lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
-        "Artikel-Reserve knapp: 4/6 bereit – Nachschub nötig"
+        "Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -20,7 +20,7 @@
       "lines": [
         "1 Prüfpunkt(e) auffällig (cwv)",
         "cwv: 10 <img>-Elemente ohne width/height/style (CLS-Risiko)",
-        "Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 193 davon ohne Erklärung im Bestand"
+        "Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 191 davon ohne Erklärung im Bestand"
       ],
       "sources": [
         "data/governance_status.json",
@@ -56,7 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.3 Tag(en)"
+        "letzter erfolgreicher Post vor 0.2 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -69,7 +69,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 18 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 19 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
