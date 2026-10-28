@@ -37,9 +37,9 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-[WLAN verbessern](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
+[WLAN verbessern](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss im Modellfall. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
 
-In über 90 % der Fälle liegt das nicht an der Leitung. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
+In über 90 % der Fälle liegt das nicht an der Leitung als Beispielwert. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
 
 Die folgenden Schritte zeigen dir, wie du dein **[WLAN verbessern](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/)** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz. Schon kleine Standortwechsel bringen oft überraschend viel.
 
@@ -56,7 +56,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Bevor du Geld für neue Hardware ausgibst, prüfe die Störfaktoren in der Wohnung. Diese Punkte bremsen WLAN am häufigsten:
 
-* **Schlechter Router-Standort:** Steht der Router im geschlossenen Metallschrank, hinter dem Smart-TV oder auf dem Fußboden in der Zimmerecke, wird das Funksignal direkt am Entstehungsort absorbiert. Ein freier Standplatz steigert den Empfang um bis zu 40 %.
+* **Schlechter Router-Standort:** Steht der Router im geschlossenen Metallschrank, hinter dem Smart-TV oder auf dem Fußboden in der Zimmerecke, wird das Funksignal direkt am Entstehungsort absorbiert als Modellwert. Ein freier Standplatz steigert den Empfang um bis zu 40 %.
 * **Störquellen aus dem 2,4-GHz-Band:** Mikrowellen, schnurlose DECT-Telefone, Babyfone und Funkmäuse funken auf denselben Frequenzen und erzeugen messbare Paketverluste. Halte mindestens zwei Meter Abstand zu solchen Geräten ein.
 * **Kanal-Überlastung durch Nachbarn:** In Mehrfamilienhäusern funken oft zwanzig Router auf demselben Funkkanal. Ein manueller Wechsel auf einen freien Funkkanal (z. B. Kanal 1, 6 oder 11 im 2,4-GHz-Bereich) verdoppelt oft die effektive Datenrate.
 * **Wasser und Metall im Mauerwerk:** Stahlbetondecken, Fußbodenheizungsrohre und große Wandspiegel dämpfen die Funkwellen um mehr als 70 %.
@@ -75,13 +75,13 @@ Ein einfacher Repeater halbiert die Bandbreite. Er muss Daten gleichzeitig empfa
 
 Ein Mesh-System spannt ein intelligentes Funknetz auf. Mehrere Knoten reden über ein eigenes Band. So bleibst du im ganzen Haus bei voller Datenrate.
 
-Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € und 150 €. Es amortisiert sich durch dauerhaften Arbeits- und Streamingkomfort sofort.
+Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € und 150 € im Rechenfall. Es amortisiert sich durch dauerhaften Arbeits- und Streamingkomfort sofort.
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**DSL-Tarif prüfen & sparen**](/go/dsl/)
 
 ## 5 Sofort-Tipps zur Optimierung deines Heimnetzwerks
 
-1. **Router erhöht und zentral aufstellen:** Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden.
+1 im Rechenbeispiel. **Router erhöht und zentral aufstellen:** Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden.
 2. **2,4-GHz- und 5-GHz-Netz trennen:** Gib beiden Frequenzbändern in den Router-Einstellungen unterschiedliche Namen (SSIDs). Verbinde bandbreitenintensive Endgeräte wie Laptops und Smart-TVs mit dem schnellen 5-GHz-Band, während Smart-Home-Komponenten das weitreichende 2,4-GHz-Band nutzen.
 3. **Funkkanal automatisch optimieren:** Moderne Router bieten eine automatische Kanalwahl, die regelmäßig prüft, welcher Frequenzbereich in der Nachbarschaft am geringsten ausgelastet ist.
 4. **Antennen präzise ausrichten:** Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen.
@@ -89,7 +89,7 @@ Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € 
 
 Willst du generell sparen? Unser Leitfaden [Sparen im Herbst – die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) zeigt, wo Geld liegen bleibt.
 
-Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten. Mehr dazu steht im Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/). Auch die Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) hilft weiter.
+Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten als Modellannahme. Mehr dazu steht im Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/). Auch die Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) hilft weiter.
 
 <!-- premium-length-2026 -->
 
@@ -114,7 +114,7 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ## Typische WLAN-Fehler, die Speed fressen
 
-**Router im Technikschrank.** Holz, Metall und Kartons dämpfen 5 GHz stark. Stelle den Router frei und erhöht auf. Am besten zentral in der Wohnung. Das holt oft 30 bis 50 % Reichweite zurück.
+**Router im Technikschrank.** Holz, Metall und Kartons dämpfen 5 GHz stark im Modellfall. Stelle den Router frei und erhöht auf. Am besten zentral in der Wohnung. Das holt oft 30 bis 50 % Reichweite zurück.
 
 **2,4 GHz und 5 GHz unter demselben Namen.** Alte Geräte bleiben am langsamen Band. So ziehen sie das ganze Netz nach unten. Vergib getrennte Namen, zum Beispiel „Zuhause“ und „Zuhause-5G“. Dann hast du die Kontrolle.
 
@@ -126,7 +126,7 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ## Schritt-für-Schritt: vom Funkloch zum nutzbaren Homeoffice
 
-1. **Messen, nicht schätzen.** Speedtest per Kabel am Router, dann per WLAN am Schreibtisch, im Schlafzimmer, auf der Terrasse. Notiere Download, Upload, Ping. Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen.
+1 als Beispielwert. **Messen, nicht schätzen.** Speedtest per Kabel am Router, dann per WLAN am Schreibtisch, im Schlafzimmer, auf der Terrasse. Notiere Download, Upload, Ping. Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen.
 2. **Kabel-Referenz.** Liegt der LAN-Test klar unter dem Vertrag, ist es der Anschluss (Provider anrufen, Entstörungsnummer, 14-Tage-Protokoll). Liegt LAN gut und WLAN schlecht, arbeitest du am Funk.
 3. **Position.** Router auf Augenhöhe, weg von Mikrowelle, DECT-Basis und Bluetooth-Lautsprechern. Antennen senkrecht.
 4. **Kanal und Band.** 5 GHz für Arbeitsgeräte, 2,4 GHz für Smarthome. DFS-Kanäle meiden, wenn die FRITZ!Box ständig neu startet (Radar-Erkennung).
@@ -144,9 +144,9 @@ Mesh-Systeme (WLAN 6/6E) nutzen eine gemeinsame SSID. Sie reichen dich an den st
 
 Dein Handy bleibt am schwachen Knoten hängen. Powerline hängt an der Hausverkabelung.
 
-LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s. Das gilt selbst bei „1.200 Mbit“ auf der Packung. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
+LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s als Modellwert. Das gilt selbst bei „1.200 Mbit“ auf der Packung. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
 
-Hast du Glasfaser mit 300 Mbit/s oder mehr? Dann binde den zweiten Knoten per LAN-Kabel an. So bleibt das Funkband den Geräten. Im Homeoffice kommt an, wofür du zahlst.
+Hast du Glasfaser mit 300 Mbit/s oder mehr im Rechenfall? Dann binde den zweiten Knoten per LAN-Kabel an. So bleibt das Funkband den Geräten. Im Homeoffice kommt an, wofür du zahlst.
 
 ## Wann eher der Tarif als das WLAN das Problem ist?
 
@@ -201,7 +201,7 @@ Die neuen Standards bedienen viele Geräte gleichzeitig. Smartphones, TVs und Ta
 Abends schalten die Nachbarn ihre Router ein. Auch Streaming-Geräte laufen dann. Die Funkkanäle sind schlicht überlastet.
 
 ### Kann ein alter Router schnelle Internetanschlüsse ausbremsen?
-Ja. Fehlt dem Router ein Gigabit-LAN-Port, bremst er. 100 bis 250 Mbit/s kommen dann nicht an. Der Router wird zum Flaschenhals.
+Ja im Rechenbeispiel. Fehlt dem Router ein Gigabit-LAN-Port, bremst er. 100 bis 250 Mbit/s kommen dann nicht an. Der Router wird zum Flaschenhals.
 
 ---
 

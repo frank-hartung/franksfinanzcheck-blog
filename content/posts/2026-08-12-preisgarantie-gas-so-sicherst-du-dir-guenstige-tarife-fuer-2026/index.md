@@ -38,7 +38,7 @@ Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Ar
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Ganz oben steht nicht immer der günstigste Vertrag. Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sicheren Wahl.
+Ganz oben steht nicht immer der günstigste Vertrag im Modellfall. Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sicheren Wahl.
 
 
 
@@ -75,7 +75,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
-Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. Nutzt du aus Versehen 18.000 Eurocent statt 18.000 kWh, oder nur eine grobe Schätzung, dann vergleicht das Portal am falschen Bedarf.
+Dein Abschlag gehört nicht ins Verbrauchsfeld als Beispielwert. Er ist nur eine Vorauszahlung. Nutzt du aus Versehen 18.000 Eurocent statt 18.000 kWh, oder nur eine grobe Schätzung, dann vergleicht das Portal am falschen Bedarf.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -83,7 +83,7 @@ Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. N
 
 Beispiel:
 
-- 18.000 kWh × 0,118 €/kWh = 2.124 €
+- 18.000 kWh × 0,118 €/kWh = 2.124 € (als Modellwert)
 - Grundpreis = 180 €
 - aktuelle Jahreskosten = **2.304 €**
 
@@ -103,7 +103,7 @@ Warum? Vergleichsportale verdienen an vermittelten Abschlüssen. Das macht sie n
 
 ## Minute 4: Laufzeit und Kündigung prüfen
 
-Rund zwölf Monate Laufzeit sind für viele Haushalte ein guter Mittelweg. Du hast feste Preise und bleibst trotzdem flexibel.
+Rund zwölf Monate Laufzeit sind für viele Haushalte ein guter Mittelweg im Rechenfall. Du hast feste Preise und bleibst trotzdem flexibel.
 
 Prüfe:
 
@@ -146,7 +146,7 @@ Rechne zwei Preise:
 
 \*unter der vereinfachenden Annahme unveränderter Preise.
 
-Tarif A gewinnt im ersten Jahr knapp. Tarif B ist ohne Bonus 160 € günstiger. Wer nicht sicher jährlich neu vergleicht, sollte das ernst nehmen.
+Tarif A gewinnt im ersten Jahr knapp im Rechenbeispiel. Tarif B ist ohne Bonus 160 € günstiger. Wer nicht sicher jährlich neu vergleicht, sollte das ernst nehmen.
 
 ## Minute 7: Zahlungsmodell und Paketmengen
 
@@ -191,11 +191,11 @@ Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitu
 
 > Alter Jahrespreis – neuer Jahrespreis = rechnerischer Vorteil
 
-Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr. Grundpreis und Bonus können die Differenz verändern.
+Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr als Modellannahme. Grundpreis und Bonus können die Differenz verändern.
 
-Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sparst du im Schnitt rund 360 € durch einen Wechsel. Das ist nur ein Durchschnittswert, kein Versprechen für dich persönlich.
+Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sparst du im Schnitt rund 360 € durch einen Wechsel im Modellfall. Das ist nur ein Durchschnittswert, kein Versprechen für dich persönlich.
 
-Der BDEW-Schnitt liegt bei 11,93 Cent pro kWh im Einfamilienhaus. Das zeigt nur die grobe Lage am Markt. Regionale Angebote und alte Verträge weichen davon ab.
+Der BDEW-Schnitt liegt bei 11,93 Cent pro kWh im Einfamilienhaus als Beispielwert. Das zeigt nur die grobe Lage am Markt. Regionale Angebote und alte Verträge weichen davon ab.
 
 ## Wann 24 Monate trotzdem passen können?
 
@@ -206,7 +206,7 @@ Eine längere Laufzeit kann sinnvoll sein, wenn:
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
 
-Rechne den Sicherheitsaufschlag. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
+Rechne den Sicherheitsaufschlag als Modellwert. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
 
 ## Der Check nach dem Abschluss
 
@@ -218,7 +218,7 @@ Kontrolliere die Vertragsbestätigung:
 - Ist der Abschlag plausibel?
 - Wurde der alte Vertrag beendet?
 
-Setze zwei Kalendertermine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
+Setze zwei Kalendertermine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin im Rechenfall. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den Vergleich erst, wenn der Jahresverbrauch vor dir liegt: [**Gastarife vergleichen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
@@ -288,7 +288,7 @@ Dein nächster Schritt: Öffne die letzte Rechnung, notiere kWh, Arbeits- und Gr
 Für die erste Sortierung ja. Danach kannst du den sicheren Bonus separat für das erste Jahr einrechnen.
 
 ### Welche Laufzeit ist sinnvoll?
-Für viele Haushalte etwa zwölf Monate. Längere Laufzeiten können bei fairem Preis und großem Sicherheitswunsch passen.
+Für viele Haushalte etwa zwölf Monate im Rechenbeispiel. Längere Laufzeiten können bei fairem Preis und großem Sicherheitswunsch passen.
 
 ### Ist der billigste Portal-Tarif automatisch gut?
 Nein. Prüfe Preis ohne Bonus, Garantie, Laufzeit, Zahlungsweise und Anbieter direkt.

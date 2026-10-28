@@ -75,7 +75,7 @@ Nutze für deine Fixkosten den 4K-Prüfpfad von FranksFinanzcheck. Dieser hilft 
 
 **Smart-Home-Geräte** wie intelligente Zwischenstecker sind dabei deine wichtigsten Detektive. Du misst den Durchfluss direkt an der Steckdose. Die Daten landen sofort auf deinem Smartphone. So erkennst du, ob die alte Tiefkühltruhe ein Fall für den Sperrmüll ist.
 
-Ein Beispiel: Ein Gerät mit nur 1 Watt Standby-Verbrauch kostet dich bei 30 Cent pro kWh etwa 3 bis 4 € im Jahr. Für einen durchschnittlichen Haushalt liegen Standby-Lasten grob bei 50 bis 100 € pro Jahr – eine Spanne aus der Rechnung, keine Garantie. Sobald du diese Daten kennst, folgt der zweite Schritt: **Konditionen rechnen**.
+Ein Beispiel: Ein Gerät mit nur 1 Watt Standby-Verbrauch kostet dich bei 30 Cent pro kWh etwa 3 bis 4 € im Jahr im Modellfall. Für einen durchschnittlichen Haushalt liegen Standby-Lasten grob bei 50 bis 100 € pro Jahr – eine Spanne aus der Rechnung, keine Garantie. Sobald du diese Daten kennst, folgt der zweite Schritt: **Konditionen rechnen**.
 
 Ein smartes Thermostat koste in der Annahme 50 €. Es spare jährlich etwa 15 € Heizkosten.
 
@@ -109,11 +109,11 @@ Die folgende Tabelle zeigt Spannen für typische Haushalte. Das sind Erfahrungsw
 
 Die Kosten hängen von System und Umfang ab. Die folgenden Preise sind eine Marktübersicht.
 
-Sie dienen als Beispiel (Spannenangaben, Stand Herbst 2026). Ein hochwertiges Thermostat kostet meist zwischen 30 € und 70 €. Oft brauchst du zusätzlich eine zentrale Steuereinheit – das Gateway oder die Bridge.
+Sie dienen als Beispiel (Spannenangaben, Stand Herbst 2026) als Beispielwert. Ein hochwertiges Thermostat kostet meist zwischen 30 € und 70 €. Oft brauchst du zusätzlich eine zentrale Steuereinheit – das Gateway oder die Bridge.
 
-Die Bridge kostet einmalig grob 50 bis 100 €. Sie bildet das Gehirn deines Systems und verbindet alle Geräte mit deinem WLAN. Es gibt zwar Bluetooth-Geräte ohne Bridge, diese haben jedoch eine geringere Reichweite.
+Die Bridge kostet einmalig grob 50 bis 100 € als Modellwert. Sie bildet das Gehirn deines Systems und verbindet alle Geräte mit deinem WLAN. Es gibt zwar Bluetooth-Geräte ohne Bridge, diese haben jedoch eine geringere Reichweite.
 
-Für ein Starter-Set mit drei Thermostaten und einer Bridge planst du rund 150 bis 250 € ein. Die Heizkosten machen in Haushalten den größten Teil der Ausgaben aus. Ob sich das für dich lohnt, hängt von deinen gemessenen Werten ab – die Rechnung unten zeigt den Weg mit klaren Annahmen.
+Für ein Starter-Set mit drei Thermostaten und einer Bridge planst du rund 150 bis 250 € ein im Rechenfall. Die Heizkosten machen in Haushalten den größten Teil der Ausgaben aus. Ob sich das für dich lohnt, hängt von deinen gemessenen Werten ab – die Rechnung unten zeigt den Weg mit klaren Annahmen.
 
 ## Schritt-für-Schritt: So rüstest du deinen Haushalt auf
 
@@ -162,7 +162,7 @@ Hier kannst du direkt prüfen, ob dein Tarif noch zeitgemäß ist:
 
 Ein Wechsel dauert oft nur wenige Minuten. Ob er deine Fixkosten stark senkt?
 
-Das hängt von deinem Tarif und deinem Verbrauch ab. Die Rechnung zeigt: Ein Sparpotenzial von grob mehreren hundert Euro pro Jahr ist in vielen Haushalten möglich. Das ist aber keine Garantie. Technik plus Tarifprüfung ist die effektivste Strategie für dich.
+Das hängt von deinem Tarif und deinem Verbrauch ab im Rechenbeispiel. Die Rechnung zeigt: Ein Sparpotenzial von grob mehreren hundert Euro pro Jahr ist in vielen Haushalten möglich. Das ist aber keine Garantie. Technik plus Tarifprüfung ist die effektivste Strategie für dich.
 
 ## Welche Fehler kosten dich Geld?
 
@@ -199,7 +199,7 @@ Bleib dran und rechne nach. Handle nur, wenn die Zahlen für dich sprechen. Das 
 ## Häufige Fragen
 
 ### Verbrauchen Smart-Home-Geräte nicht selbst zu viel Strom?
-Moderne Komponenten wie Thermostate verbrauchen meist nur sehr wenig Energie. Eine Bridge benötigt erfahrungsgemäß etwa 2 bis 5 Watt dauerhaft – eine Spanne der Rechnung. Das sind bei üblichem Strompreis grob 10 bis 15 € im Jahr. Die Ersparnis bei der Heizung kompensiert diese Kosten in der Regel um ein Vielfaches.
+Moderne Komponenten wie Thermostate verbrauchen meist nur sehr wenig Energie als Modellannahme. Eine Bridge benötigt erfahrungsgemäß etwa 2 bis 5 Watt dauerhaft – eine Spanne der Rechnung. Das sind bei üblichem Strompreis grob 10 bis 15 € im Jahr. Die Ersparnis bei der Heizung kompensiert diese Kosten in der Regel um ein Vielfaches.
 
 ### Kann ich smarte Thermostate auch in einer Mietwohnung nutzen?
 Das ist in den meisten Fällen problemlos möglich. Du schraubst die alten Thermostate ab und setzt die neuen auf. Bewahre die alten Regler unbedingt auf. Beim Auszug montierst du sie einfach wieder zurück.

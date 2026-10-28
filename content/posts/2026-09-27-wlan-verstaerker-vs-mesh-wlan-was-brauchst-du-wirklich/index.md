@@ -76,7 +76,7 @@ Ein WLAN‑Verstärker – im Handel meist **Repeater** genannt – ist eine kle
 
 ### Die Vorteile
 
-- **Günstig**: Brauchbare Geräte gibt es ab etwa 20 bis 60 €.
+- **Günstig**: Brauchbare Geräte gibt es ab etwa 20 bis 60 € im Modellfall.
 - **Schnell eingerichtet**: Steckdose, WPS‑Knopf drücken, fertig.
 - **Unauffällig**: Kein Kabel, keine Montage, kein neues Netz.
 
@@ -101,7 +101,7 @@ Ein Mesh‑System besteht aus mehreren Stationen (meist zwei oder drei), die zus
 
 ### Die Nachteile
 
-- **Preis**: Solide Sets starten bei etwa 150 €, leistungsstarke mit Wi‑Fi 6E oder Wi‑Fi 7 liegen bei 250 bis 400 €.
+- **Preis**: Solide Sets starten bei etwa 150 €, leistungsstarke mit Wi‑Fi 6E oder Wi‑Fi 7 liegen bei 250 bis 400 € als Beispielwert.
 - **Standorte nötig**: Jede Station braucht eine Steckdose an einer sinnvollen Stelle – nicht im Schrank versteckt.
 - **Overkill‑Gefahr**: In einer 55‑Quadratmeter‑Wohnung ist Mesh meist überdimensioniert.
 
@@ -119,7 +119,7 @@ Ein Mesh‑System besteht aus mehreren Stationen (meist zwei oder drei), die zus
 
 ## Die entscheidende Frage vor jedem Kauf
 
-Halte kurz inne und stelle fest, **welches** Problem du überhaupt hast. Dafür brauchst du nur dein Handy oder einen Laptop und zehn Minuten.
+Halte kurz inne und stelle fest, **welches** Problem du überhaupt hast als Modellwert. Dafür brauchst du nur dein Handy oder einen Laptop und zehn Minuten.
 
 ### Schritt 1: Direkt am Router messen
 
@@ -137,7 +137,7 @@ Wiederhole denselben Test in dem Raum, in dem das WLAN schwächelt. Notiere auch
 | Schon am Router langsam | **Vertrags‑ oder Leitungsproblem** | erst Tarif prüfen, keine Technik kaufen |
 | Überall mäßig, abends schlimmer | häufig **Auslastung** oder alter Router | Router‑Tausch oder [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen |
 
-Genau der zweite Fall ist der teuerste Denkfehler: Da kaufen Menschen ein 300‑Euro‑Mesh‑System und merken danach, dass der Engpass gar nicht im WLAN lag, sondern in einem alten 16‑Mbit‑Vertrag. Neue Technik kann kein Tempo verteilen, das nie am Anschluss ankommt.
+Genau der zweite Fall ist der teuerste Denkfehler: Da kaufen Menschen ein 300‑Euro‑Mesh‑System und merken danach, dass der Engpass gar nicht im WLAN lag, sondern in einem alten 16‑Mbit‑Vertrag im Rechenfall. Neue Technik kann kein Tempo verteilen, das nie am Anschluss ankommt.
 
 > 💶 **Spar‑Tipp zwischendurch:** Beim Internet sparst du oft nicht durch „noch mehr Geschwindigkeit“, sondern durch den passenderen Tarif. Prüfe deshalb immer Bedarf plus Effektivpreis gemeinsam: [**DSL‑Tarif prüfen & sparen**](/go/dsl/)
 
@@ -149,7 +149,7 @@ Nach allem, was ich an Messungen gemacht habe, lässt sich die Wahl erstaunlich 
 
 - … Genau **ein Raum** schlecht versorgt ist,
 - … Dein Grundtempo am Router stimmt,
-- … Du weniger als 70 € ausgeben willst,
+- … Du weniger als 70 € ausgeben willst, (im Rechenbeispiel)
 - … Du im betroffenen Raum keine Anwendungen hast, die maximales Tempo brauchen (Surfen, Mail, Musik reichen meist völlig).
 
 ### Mesh‑WLAN, wenn …
@@ -157,7 +157,7 @@ Nach allem, was ich an Messungen gemacht habe, lässt sich die Wahl erstaunlich 
 - … **mehrere Räume oder Etagen** betroffen sind,
 - … Viele Geräte gleichzeitig online sind (Familie, Streaming, Home‑Office, Smart‑Home),
 - … Du dich durch das Haus bewegst und das Netz nicht wechseln willst,
-- … Du eine Lösung für die nächsten Jahre suchst und bereit bist, dafür 150 € oder mehr zu investieren.
+- … Du eine Lösung für die nächsten Jahre suchst und bereit bist, dafür 150 € oder mehr zu investieren als Modellannahme.
 
 ### Übrigens: die dritte Option
 
@@ -190,7 +190,7 @@ Und falls du beim Messen feststellst, dass dein Grundtempo selbst am Router weit
 
 Die Frage „WLAN‑Verstärker oder Mesh‑WLAN?“ beantwortet sich fast von selbst, sobald du drei Dinge kennst: die Zahl der Problemräume, dein Grundtempo am Router und dein Budget.
 
-**Ein Funkloch, kleines Budget, sonst alles gut:** Ein Repeater für unter 60 € ist die ehrliche, unkomplizierte Lösung. **Mehrere Räume oder Etagen, viele Geräte, Lösung für Jahre:** Dann ist Mesh das Geld wert und der Repeater nur eine Hängebrücke. **Grundtempo stimmt nicht:** Dann bringt die beste Funktechnik nichts – erst der Anschluss muss liefern, danach darf man ihn verteilen.
+**Ein Funkloch, kleines Budget, sonst alles gut:** Ein Repeater für unter 60 € ist die ehrliche, unkomplizierte Lösung im Modellfall. **Mehrere Räume oder Etagen, viele Geräte, Lösung für Jahre:** Dann ist Mesh das Geld wert und der Repeater nur eine Hängebrücke. **Grundtempo stimmt nicht:** Dann bringt die beste Funktechnik nichts – erst der Anschluss muss liefern, danach darf man ihn verteilen.
 
 Bleibt der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart hat: **Miss zweimal, kauf einmal.**
 

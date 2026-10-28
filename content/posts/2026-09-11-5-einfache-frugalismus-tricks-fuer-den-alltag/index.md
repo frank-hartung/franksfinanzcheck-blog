@@ -41,17 +41,17 @@ faktencheck: "2026-09-27"
 
 Im Kern geht es darum, Geld nicht automatisch auszugeben, nur weil es gerade bequem ist. Du senkst teure Routinen, streichst Ballast und gibst bewusster für das aus, was dir wirklich wichtig ist. Das ist kein Verzichtsprojekt. Das ist saubere Prioritätensetzung.
 
-Wer damit anfängt, muss nicht sofort alles umkrempeln. Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.
+Wer damit anfängt, muss nicht sofort alles umkrempeln im Modellfall. Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ## Das Wichtigste in Kürze
 
-- Frugalismus heißt nicht Geiz, sondern **bewusste Ausgaben**.
-- Der größte Hebel liegt fast immer bei **Fixkosten, Verträgen und Alltagsroutinen**.
-- Ein Tarifcheck bei Strom, Internet oder Versicherungen spart oft mehr als zehn kleine Verbote.
-- Einkaufsliste, 30-Tage-Regel und getrennte Spartöpfe machen Sparen im Alltag viel leichter.
-- Entscheidend ist nicht Perfektion, sondern Wiederholung.
+1. Frugalismus heißt nicht Geiz, sondern **bewusste Ausgaben**.
+2. Der größte Hebel liegt fast immer bei **Fixkosten, Verträgen und Alltagsroutinen**.
+3. Ein Tarifcheck bei Strom, Internet oder Versicherungen spart oft mehr als zehn kleine Verbote.
+4. Einkaufsliste, 30-Tage-Regel und getrennte Spartöpfe machen Sparen im Alltag viel leichter.
+5. Entscheidend ist nicht Perfektion, sondern Wiederholung.
 
 ---
 
@@ -81,7 +81,7 @@ Dazu zählen vor allem:
 
 ### Warum das so viel bringt
 
-Ein Abo für 12 € im Monat wirkt harmlos. Drei davon sind schon 36 €. Dazu noch 8 € zu viel fürs Konto, 10 € beim Handy und 15 € beim Strom – und plötzlich liegen **50 € bis 70 € im Monat** einfach so auf der Straße.
+Ein Abo für 12 € im Monat wirkt harmlos als Beispielwert. Drei davon sind schon 36 €. Dazu noch 8 € zu viel fürs Konto, 10 € beim Handy und 15 € beim Strom – und plötzlich liegen **50 € bis 70 € im Monat** einfach so auf der Straße.
 
 ### Kleines Rechenbeispiel
 
@@ -107,7 +107,7 @@ Energie ist ein Frugalismus-Klassiker, weil kleine Änderungen hier lange wirken
 - Warmwasser bewusster nutzen
 - Dichtungen und Zugluft prüfen
 
-Ein Grad weniger Raumtemperatur kann grob **6 % Heizenergie** sparen. Bei 120 € monatlichen Heizkosten sind das etwa **7 € pro Monat**. Zusammen mit einem besseren Tarif wird aus einer kleinen Gewohnheit schnell ein ordentlicher Betrag.
+Ein Grad weniger Raumtemperatur kann grob **6 % Heizenergie** sparen als Modellwert. Bei 120 € monatlichen Heizkosten sind das etwa **7 € pro Monat**. Zusammen mit einem besseren Tarif wird aus einer kleinen Gewohnheit schnell ein ordentlicher Betrag.
 
 ### Gute Ergänzungen dazu
 
@@ -123,18 +123,18 @@ Viele Budgetlöcher entstehen nicht durch große Lebensentscheidungen, sondern d
 
 ### So funktioniert sie
 
-Alles, was mehr als etwa **50 €** kostet und nicht dringend notwendig ist, kommt erst auf eine Liste. Kauf frühestens nach 30 Tagen. Bei kleineren Spontankäufen reicht oft schon eine 24-Stunden-Regel.
+Alles, was mehr als etwa **50 €** kostet und nicht dringend notwendig ist, kommt erst auf eine Liste im Rechenfall. Kauf frühestens nach 30 Tagen. Bei kleineren Spontankäufen reicht oft schon eine 24-Stunden-Regel.
 
 Der Effekt ist größer, als er klingt. Viele Wünsche verlieren in ein paar Tagen ihren Reiz. Das heißt nicht, dass du sie dir verbieten musst. Es heißt nur, dass du sie nicht aus einem Moment heraus kaufst.
 
 ### Beispiel aus dem Alltag
 
-- Kopfhörer im Angebot für 89 €
+- Kopfhörer im Angebot für 89 € (im Rechenbeispiel)
 - Küchen-Gadget für 39 €
 - Jacke, obwohl schon zwei gute da sind
 - spontane Online-Bestellung am Abend
 
-Wenn du nur zwei solcher Käufe im Monat vermeidest oder bewusst verschiebst, bleiben schnell **80 € bis 150 €** mehr übrig. Genau das ist Frugalismus: erst denken, dann bezahlen.
+Wenn du nur zwei solcher Käufe im Monat vermeidest oder bewusst verschiebst, bleiben schnell **80 € bis 150 €** mehr übrig als Modellannahme. Genau das ist Frugalismus: erst denken, dann bezahlen.
 
 ## Trick 4: Essen planen statt ständig nach Gefühl kaufen
 
@@ -181,7 +181,7 @@ Darum gilt: Jede Ersparnis braucht sofort einen festen Platz.
 - Extra-Konto für Urlaub, Reparaturen und Notgroschen
 - Ersparnisse aus Tarifwechseln direkt umleiten
 
-Wenn du durch einen Tarifwechsel 18 € im Monat sparst, gehen genau diese 18 € direkt auf ein separates Konto. Sonst lösen sie sich im Alltag fast immer wieder auf.
+Wenn du durch einen Tarifwechsel 18 € im Monat sparst, gehen genau diese 18 € direkt auf ein separates Konto im Modellfall. Sonst lösen sie sich im Alltag fast immer wieder auf.
 
 **Faustregel:** Frugalismus scheitert seltener am Sparen als am Liegenlassen der Ersparnis auf dem Hauptkonto.
 
@@ -190,7 +190,7 @@ Wenn du durch einen Tarifwechsel 18 € im Monat sparst, gehen genau diese 18 
 Die fünf Tricks funktionieren am besten, wenn du drei kleine Routinen einziehst.
 
 ### 1. Ein fester Geld-Check pro Monat
-Einmal im Monat 20 Minuten reichen oft schon:
+Einmal im Monat 20 Minuten reichen oft schon: (als Beispielwert)
 
 - Konto prüfen
 - Fixkosten überfliegen
@@ -214,11 +214,11 @@ Nach einem Jahr ist dein Finanz-Alltag oft deutlich schlanker – ohne Radikalku
 
 Wer nicht nur sparen, sondern das Ganze sauber strukturieren will, kann mit der [50-30-20-Regel](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) arbeiten.
 
-- **50 %** für Fixkosten
+- **50 %** für Fixkosten (als Modellwert)
 - **30 %** für Wünsche und Alltag
 - **20 %** für Sparen und Vorsorge
 
-Das ist keine starre Bibel. Aber es ist ein guter Spiegel. Wenn deine Fixkosten bei 65 % liegen, weißt du sofort, wo der größte Druck sitzt.
+Das ist keine starre Bibel im Rechenfall. Aber es ist ein guter Spiegel. Wenn deine Fixkosten bei 65 % liegen, weißt du sofort, wo der größte Druck sitzt.
 
 ### Beispiel bei 2.800 € netto
 
@@ -292,7 +292,7 @@ Nein. Frugalismus heißt, bewusster auszugeben. Du sparst bei Dingen, die dir we
 Fast immer bei Fixkosten. Strom, Handy, Konto, Versicherungen und Abos bringen oft schneller etwas als kleine Alltagsverbote.
 
 ### Wie viel kann ich realistisch sparen?
-Das ist sehr individuell. Schon kleine Fixkosten-Optimierungen bringen oft 30 € bis 100 € im Monat. Mit mehreren Hebeln auch mehr.
+Das ist sehr individuell im Rechenbeispiel. Schon kleine Fixkosten-Optimierungen bringen oft 30 € bis 100 € im Monat. Mit mehreren Hebeln auch mehr.
 
 ### Ist Frugalismus nur etwas für Menschen mit hohem Einkommen?
 Nein. Gerade bei normalem oder engem Budget kann bewusster Umgang mit Fixkosten und Routinen besonders entlastend sein.

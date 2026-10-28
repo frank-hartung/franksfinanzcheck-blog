@@ -41,7 +41,7 @@ faktencheck: "2026-10-13"
 
 Finanzieller Puffer im Check: Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 
-Die gute Nachricht: Du brauchst dafür kein Vermögen. In vielen Haushalten reichen **drei bis sechs Monatsausgaben**. Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €. Das ist viel Geld, aber kein Fantasiewert.
+Die gute Nachricht: Du brauchst dafür kein Vermögen im Modellfall. In vielen Haushalten reichen **drei bis sechs Monatsausgaben**. Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €. Das ist viel Geld, aber kein Fantasiewert.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision. Für dich entstehen dabei keine Mehrkosten.
 
@@ -65,7 +65,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Viele sparen oder investieren, ohne vorher ihre Basis zu sichern. Das klappt so lange, bis etwas schiefgeht. Dann wird aus einer kleinen Störung schnell ein teurer Monat.
 
-Ohne Reserve landet die Rechnung oft auf dem Dispo. Das kann schnell **8 % bis 14 % Zinsen pro Jahr** kosten. Gegen solche Zinsen sieht selbst ein gut verzinstes Tagesgeld ordentlich aus.
+Ohne Reserve landet die Rechnung oft auf dem Dispo als Beispielwert. Das kann schnell **8 % bis 14 % Zinsen pro Jahr** kosten. Gegen solche Zinsen sieht selbst ein gut verzinstes Tagesgeld ordentlich aus.
 
 Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) schützt aber nicht nur dein Konto. Er schützt auch dein Depot. Wenn du in einer schlechten Börsenphase plötzlich Geld brauchst, musst du sonst vielleicht genau dann verkaufen, wenn Kurse im Keller sind. Das ist doppelt ärgerlich.
 
@@ -144,13 +144,13 @@ Darum landet der Puffer in den meisten Fällen am besten auf einem separaten [Ta
 | ETF / Aktien | Nein | Kursschwankungen im falschen Moment |
 | Bargeld zu Hause | Nur kleiner Teil | okay für Sofortfälle, aber nicht für die ganze Reserve |
 
-Wenn du magst, kannst du zweistufig arbeiten: etwa **500 € bis 1.000 €** schnell erreichbar auf dem Girokonto oder in bar für echte Sofortfälle, der Rest auf Tagesgeld.
+Wenn du magst, kannst du zweistufig arbeiten: etwa **500 € bis 1.000 €** schnell erreichbar auf dem Girokonto oder in bar für echte Sofortfälle, der Rest auf Tagesgeld als Modellwert.
 
 ## Erst Schulden tilgen oder erst den Puffer aufbauen?
 
-Hier lohnt sich ein nüchterner Blick auf den Zinssatz. Teure Schulden haben meist Vorrang. Ein Ratenkredit mit 9 % oder ein Dispo mit 12 % frisst mehr Geld, als dein Tagesgeld jemals bringt.
+Hier lohnt sich ein nüchterner Blick auf den Zinssatz im Rechenfall. Teure Schulden haben meist Vorrang. Ein Ratenkredit mit 9 % oder ein Dispo mit 12 % frisst mehr Geld, als dein Tagesgeld jemals bringt.
 
-Trotzdem ist ein kompletter Null-Puffer riskant. Viele fahren gut mit einem **Mini-Notgroschen von 1.000 € bis 2.000 €**. Danach werden teure Schulden aggressiv abgebaut. Anschließend wächst der volle Puffer.
+Trotzdem ist ein kompletter Null-Puffer riskant im Rechenbeispiel. Viele fahren gut mit einem **Mini-Notgroschen von 1.000 € bis 2.000 €**. Danach werden teure Schulden aggressiv abgebaut. Anschließend wächst der volle Puffer.
 
 Das ist kein starres Gesetz. Es ist eine praktische Reihenfolge für normale Haushalte.
 
@@ -179,13 +179,13 @@ Ein kurzes Rechenbeispiel hilft:
 | 7.200 € | 500 € | rund 15 Monate |
 | 9.000 € | 500 € | 18 Monate |
 
-Du musst also nicht alles auf einmal schaffen. Ein Puffer wächst in Stufen. Auch **1.500 €** sind besser als gar nichts.
+Du musst also nicht alles auf einmal schaffen als Modellannahme. Ein Puffer wächst in Stufen. Auch **1.500 €** sind besser als gar nichts.
 
 ## Die 50/30/20-Regel als Starthilfe
 
 Wenn du noch kein festes Sparsystem hast, kann die [50-30-20-Regel](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) helfen. Dabei gehen grob:
 
-- **50 %** in Grundkosten,
+- **50 %** in Grundkosten, (im Modellfall)
 - **30 %** in persönliche Wünsche,
 - **20 %** in Sparen und Vorsorge.
 
@@ -204,7 +204,7 @@ Der Notgroschen ist nicht für Weihnachten, Urlaube oder Möbel gedacht. Diese A
 Ein Single mit sicherem Job kommt anders durch als ein Selbstständiger mit altem Auto und Eigenheim. Ein zu kleiner Puffer spart nur scheinbar Geld.
 
 ### 3. Zu viel Cash liegen lassen
-Auch das Gegenteil ist möglich. Wenn du **50.000 €** auf dem Tagesgeld parkst, obwohl du mit **8.000 €** gut abgesichert wärst, blockierst du viel Kapital. Das kann auf Dauer Rendite kosten.
+Auch das Gegenteil ist möglich als Beispielwert. Wenn du **50.000 €** auf dem Tagesgeld parkst, obwohl du mit **8.000 €** gut abgesichert wärst, blockierst du viel Kapital. Das kann auf Dauer Rendite kosten.
 
 ### 4. Alles im Depot parken
 Ein ETF ist Vermögensaufbau. Ein ETF ist kein Notgroschen. Fällt der Markt genau dann, wenn du das Geld brauchst, wird aus Theorie schnell Verlust.
@@ -223,7 +223,7 @@ Mindestens einmal im Jahr. Noch wichtiger ist ein Check bei Veränderungen:
 - Hauskauf oder größere Sanierung
 - Trennung oder Zusammenzug
 
-Schon **200 € mehr Fixkosten im Monat** erhöhen deinen sinnvollen Puffer bei vier Monaten Reserve um **800 €**. Solche Sprünge merkt man im Alltag kaum, in der Rücklagenplanung aber sofort.
+Schon **200 € mehr Fixkosten im Monat** erhöhen deinen sinnvollen Puffer bei vier Monaten Reserve um **800 €** als Modellwert. Solche Sprünge merkt man im Alltag kaum, in der Rücklagenplanung aber sofort.
 
 ## Wie der Notgroschen dein restliches System besser macht
 
@@ -259,7 +259,7 @@ Wenn du heute nur einen Schritt machst, dann diesen: Rechne deine festen Monatsk
 ## Häufige Fragen
 
 ### Soll ich erst Schulden abzahlen oder den Notgroschen aufbauen?
-Teure Schulden haben meist Vorrang. Ein kleiner Startpuffer von 1.000 € bis 2.000 € ist trotzdem sinnvoll, damit du bei einer kaputten Waschmaschine nicht direkt neue Schulden machst.
+Teure Schulden haben meist Vorrang im Rechenfall. Ein kleiner Startpuffer von 1.000 € bis 2.000 € ist trotzdem sinnvoll, damit du bei einer kaputten Waschmaschine nicht direkt neue Schulden machst.
 
 ### Zählt Geld für die Kfz-Versicherung zum Notgroschen?
 Nein. Die Kfz-Versicherung ist planbar. Dafür legst du besser eine eigene Rücklage an. Der Notgroschen ist nur für Unvorhergesehenes da.

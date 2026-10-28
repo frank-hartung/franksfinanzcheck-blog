@@ -196,7 +196,7 @@ Lies die Bewertungen der letzten Wochen. Achte auf Hinweise zu Zufahrt, Nachbarn
 
 ### Was kostet eine Nacht realistisch?
 
-Plane für Stellplatz und zwei Personen meist 20 bis 45 €. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
+Plane für Stellplatz und zwei Personen meist 20 bis 45 € im Modellfall. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
 
 ### Wie halte ich Lebensmittel frisch?
 
@@ -204,11 +204,11 @@ Kühle nur, was du wirklich brauchst. Ein guter Kühler hält mehrere Tage. Kauf
 
 ### Wie plane ich den Einkauf vor der Abreise?
 
-Mach eine Liste für die ersten drei Tage. Alles Frische kaufst du unterwegs. Trockenes wie Reis, Nudeln und Kaffee kommt von zu Hause. Das spart Platz und Geld.
+Mach eine Liste für die ersten drei Tage als Beispielwert. Alles Frische kaufst du unterwegs. Trockenes wie Reis, Nudeln und Kaffee kommt von zu Hause. Das spart Platz und Geld.
 
 ### Lohnt sich die längere Anreisezeit?
 
-Plane Pausen alle zwei Stunden ein. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
+Plane Pausen alle zwei Stunden ein als Modellwert. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
 
 ### Was hilft gegen Regen auf der Tour?
 

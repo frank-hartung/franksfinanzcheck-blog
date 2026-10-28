@@ -166,7 +166,7 @@ Meist nichts. Der neue Anbieter übernimmt die Portierung. Prüfe nur die Schlus
 
 ### Wie lange dauert die Portierung?
 
-Oft zwei bis vier Wochen. Der Termin steht in der Bestätigung. Lege ihn auf eine ruhige Woche. Für den Übergang hilft mobiler Zugang.
+Oft zwei bis vier Wochen im Modellfall. Der Termin steht in der Bestätigung. Lege ihn auf eine ruhige Woche. Für den Übergang hilft mobiler Zugang.
 
 ### Was mache ich mit dem alten Router?
 

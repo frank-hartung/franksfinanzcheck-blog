@@ -162,3 +162,61 @@
 {"zeit": "2026-10-26T21:53:35.282429+00:00", "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-10-28T12:53:20.309594+00:00", "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-10-28T12:53:20.309594+00:00", "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst", "regel": "YMYL", "aktion": "ki-heilung-ymyl-skip", "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-10-dsl-wechselbonus-sichern", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor", "regel": "RS4+RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "V1 Lesbarkeit: Flesch 36.3 liegt unter der Publish-Schwelle 60 und verschlechtert den Text (62.5 → 36.3) – dieser Artikel würde vom Publish-Gate blockiert (Bel…"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-10-28T16:14:54.553234+00:00", "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: H2-Anzahl verändert – Heilung verworfen"}

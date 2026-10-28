@@ -59,7 +59,7 @@ Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den 
 
 Erstens: Beobachte die Wärme beim normalen Probelauf. Zweitens: Notiere Raum, Problem und Datum. Drittens: Ändere nur eine Einstellung und prüfe später erneut. Ein Foto von Manometer und Zähler hilft beim Vergleich. Es ersetzt aber keine Fachdiagnose.
 
-Bei 18.000 kWh im Jahr macht schon ein Cent Preisunterschied rund 180 € im Jahr aus. Darum gehören Technik-Check und Tarif-Check zusammen – aber nicht in denselben Handgriff.
+Bei 18.000 kWh im Jahr macht schon ein Cent Preisunterschied rund 180 € im Jahr aus im Modellfall. Darum gehören Technik-Check und Tarif-Check zusammen – aber nicht in denselben Handgriff.
 
 
 
@@ -98,7 +98,7 @@ Leg Anleitung, letzte Wartungsrechnung und Verbrauchsdaten bereit. Notiere auße
 - bekannte Problemräume,
 - Datum der letzten Wartung.
 
-Das dauert zehn Minuten und verhindert blindes Drehen. Bei einer Mietwohnung reicht es oft, Probleme sauber aufzuschreiben und weiterzugeben.
+Das dauert zehn Minuten und verhindert blindes Drehen als Beispielwert. Bei einer Mietwohnung reicht es oft, Probleme sauber aufzuschreiben und weiterzugeben.
 
 ## Schritt 1: Probelauf mit allen Räumen
 
@@ -146,7 +146,7 @@ Als Mieter greifst du hier normalerweise nicht selbst ein. Melde einen auffälli
 
 ## Schritt 6: Heizzeiten und Regelung prüfen
 
-Vergleiche die programmierten Zeiten mit deinem Alltag. Läuft die Heizung morgens zwei Stunden, bevor jemand aufsteht? Bleibt sie warm, obwohl tagsüber niemand zu Hause ist?
+Vergleiche die programmierten Zeiten mit deinem Alltag als Modellwert. Läuft die Heizung morgens zwei Stunden, bevor jemand aufsteht? Bleibt sie warm, obwohl tagsüber niemand zu Hause ist?
 
 Passe die Zeiten in [kleinen Schritten](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) an. Notiere vorher den alten Zustand. Nach ein paar Tagen prüfst du Komfort und Verbrauch.
 

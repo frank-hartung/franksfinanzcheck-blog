@@ -50,7 +50,7 @@ Der Briefkasten liefert es jeden Herbst: die Preisanpassung deines Gasanbieters.
 
 **Das Wichtigste in Kürze**
 * Der Abschlag ist eine Vorauszahlung auf die Jahresrechnung, kein Festpreis.
-* **Formel:** Jahresverbrauch × Arbeitspreis + 12 × Grundpreis, geteilt durch 12 Monate.
+* **Formel:** Jahresverbrauch × Arbeitspreis + 12 × Grundpreis, geteilt durch 12 Monate im Modellfall.
 * Grundversorgung ist fast immer der teuerste Tarif – prüfen lohnt sich.
 * **[Nachzahlung vermeiden](../../posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/):** Zählerstand regelmäßig ablesen und Abschlag anpassen lassen.
 * Ein Grad weniger Raumtemperatur spart nach Einschätzung der Verbraucherzentralen rund 6 % Heizenergie.
@@ -98,7 +98,7 @@ Zahlt dein Anbieter mit 150 € im Monat deutlich mehr, verschenkst du ein zins
 
 Der Heizbeginn verschiebt den Zähler in den Schnellgang. Wer seine Zahlen jetzt kennt, reagiert rechtzeitig statt erst bei der Jahresrechnung. Drei Gründe machen den Herbst zum Planungsmonat.
 
-Erstens verschicken viele Anbieter ihre Preisanpassungen zum Jahresende. Zweitens läuft bei vielen Verträgen die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) zum Jahreswechsel aus. Drittens sitzt du in der Grundversorgung fast sicher im teuersten Tarif des Marktes – und diese Falle lässt sich innerhalb von zwei Wochen verlassen.
+Erstens verschicken viele Anbieter ihre Preisanpassungen zum Jahresende als Beispielwert. Zweitens läuft bei vielen Verträgen die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) zum Jahreswechsel aus. Drittens sitzt du in der Grundversorgung fast sicher im teuersten Tarif des Marktes – und diese Falle lässt sich innerhalb von zwei Wochen verlassen.
 
 **Faustregel:** Wer seit über einem Jahr keinen Gastarif mehr verglichen hat, zahlt mit hoher Wahrscheinlichkeit zu viel.
 
@@ -119,7 +119,7 @@ Bei FranksFinanzcheck prüfen wir Verträge mit dem 4K-Prüfpfad. Er funktionier
 1. **Kosten sehen:** Hole die letzte Jahresrechnung hervor. Notiere Jahresverbrauch, Arbeitspreis, Grundpreis und den aktuellen Abschlag.
 2. **Konditionen rechnen:** Setze deine echten kWh in einen Vergleichsrechner ein. Achte auf Preisgarantie, Laufzeit und Boni statt auf den schönsten Monatspreis.
 3. **Kündigungsfenster sichern:** Notiere die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) des Altvertrags und trage dir den spätesten Wechselzeitpunkt in den Kalender ein.
-4. **Kurs halten:** Lies monatlich den Zählerstand ab und vergleiche nach drei Monaten, ob der neue Abschlag zum Verbrauch passt.
+4 als Modellwert. **Kurs halten:** Lies monatlich den Zählerstand ab und vergleiche nach drei Monaten, ob der neue Abschlag zum Verbrauch passt.
 
 Mit dieser Routine wird die Heizsaison planbar. Du weißt vor der ersten kalten Woche, was das Jahr kostet, statt im Frühjahr vom Abrechnungsbrief überrascht zu werden.
 
@@ -127,7 +127,7 @@ Mit dieser Routine wird die Heizsaison planbar. Du weißt vor der ersten kalten 
 
 Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden Saison:
 
-1. **Raumtemperatur um ein Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie. Von 23 auf 21 Grad sind das im Modellfall bis zu 160 € im Jahr.
+1 im Rechenfall. **Raumtemperatur um ein Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie. Von 23 auf 21 Grad sind das im Modellfall bis zu 160 € im Jahr.
 2. **Abschlag an den echten Verbrauch anpassen:** Melde deinem Anbieter den aktuellen Zählerstand. Er muss einen nachweislich zu hohen oder zu niedrigen Abschlag korrigieren.
 3. **Aus der Grundversorgung wechseln:** Der Grundtarif der Stadtwerke ist die Notversorgung, nicht der Bestpreis. Ein Wechsel ist jederzeit mit kurzer Frist möglich.
 4. **Stoßlüften statt Dauerlüften:** Fünf bis zehn Minuten weit geöffnete Fenster tauschen die Luft komplett, ohne die Wände auszukühlen. Gekippte Fenster heizen für die Straße.
@@ -142,7 +142,7 @@ Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden 
 | Zählerstand nie ablesen | Abschlag bleibt Fantasiewert | Erinnerung am Monatsersten setzen |
 | Preiserhöhung hinnnehmen | Teurer Altvertrag läuft weiter | Sonderkündigungsrecht prüfen und wechseln |
 
-Gerade der zweite Punkt kostet jedes Jahr viele Haushalte dreistellige Beträge. Ein Tarif mit 200 € Sofortbonus, der danach 15 % teurer ist, verliert gegen den ehrlichen Durchschnittstarif fast immer.
+Gerade der zweite Punkt kostet jedes Jahr viele Haushalte dreistellige Beträge im Rechenbeispiel. Ein Tarif mit 200 € Sofortbonus, der danach 15 % teurer ist, verliert gegen den ehrlichen Durchschnittstarif fast immer.
 
 ## Schritt-für-Schritt: Dein Abschlags-Check in 30 Minuten
 
@@ -186,7 +186,7 @@ Beides zahlt vor der Rechnung. Der Abschlag läuft monatlich. Eine Vorauszahlung
 
 ### Wie spare ich in der Heizsaison am schnellsten?
 
-Senke die Temperatur um ein Grad. Das spart nach Einschätzung der Verbraucherzentralen rund 6 % Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
+Senke die Temperatur um ein Grad als Modellannahme. Das spart nach Einschätzung der Verbraucherzentralen rund 6 % Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
 
 ### Was tun bei sehr hohem Abschlag?
 

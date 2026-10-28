@@ -43,7 +43,7 @@ Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verw
 
 Frugalisten verzichten nicht auf Dinge, die Freude bringen. Sie streichen nur Ausgaben ohne Wert: Impulskäufe, ungenutzte Abos, teure Statussymbole.
 
-Mit den richtigen **[Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)‑Tipps** bleibt dir jeden Monat ein Überschuss von **350 € bis 600 €**. Er liegt auf einem guten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) oder in breiten Sparplänen. Dort arbeitet er für dich.
+Mit den richtigen **[Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)‑Tipps** bleibt dir jeden Monat ein Überschuss von **350 € bis 600 €** im Modellfall. Er liegt auf einem guten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) oder in breiten Sparplänen. Dort arbeitet er für dich.
 
 
 ---
@@ -57,7 +57,7 @@ Die Idee ist einfach. Jeder Euro für unnötigen Konsum kostet dich Arbeitszeit.
 
 * **[Finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Gelassenheit:** Plötzliche Ausgaben wie eine Autoreparatur oder eine Waschmaschinen‑Neuanschaffung verlieren ihren Schrecken.
 * **Mehr Handlungsoptionen:** Eine hohe Sparquote ermöglicht berufliche Auszeiten (Sabbaticals), Weiterbildungen oder den Einstieg in die Teilzeit.
-* **Den Zinseszinseffekt nutzen:** Wer 300 € monatlich bei 6 % Rendite anlegt, verfügt nach 15 Jahren über ein Vermögen von rund **87.000 €** (bei nur 54.000 € eigener Einzahlung).
+* **Den Zinseszinseffekt nutzen:** Wer 300 € monatlich bei 6 % Rendite anlegt, verfügt nach 15 Jahren über ein Vermögen von rund **87.000 €** (bei nur 54.000 € eigener Einzahlung) als Beispielwert.
 
 > **Rechenbeispiel:** > 30‑Jähriger mit 2.500 € Netto, 20 % Sparquote (500 €) investiert in einen globalen ETF‑Sparplan (Kosten 0,15 % p.a., durchschnittliche Rendite 7 %). Nach 30 Jahren beträgt das Portfolio ca. **560.000 €** – genug für einen komfortablen Ruhestand ohne Vollzeit‑Job.
 
@@ -75,24 +75,24 @@ Ohne komplizierte Tabellen behältst du deine Finanzen mit der 50–30–20‑Me
 
 ### Varianten, wenn die Miete mehr frisst
 
-In Großstädten liegt der Anteil für Miete häufig bei 40 % – 45 % des Nettoeinkommens. Dann empfiehlt sich die **60‑25‑15‑Variante** (siehe unten). Wichtig ist, dass du die Sparquote nicht aus den Augen verlierst – sie ist das Kernstück der **Finanziellen Freiheit**.
+In Großstädten liegt der Anteil für Miete häufig bei 40 % – 45 % des Nettoeinkommens als Modellwert. Dann empfiehlt sich die **60‑25‑15‑Variante** (siehe unten). Wichtig ist, dass du die Sparquote nicht aus den Augen verlierst – sie ist das Kernstück der **Finanziellen Freiheit**.
 
 ## Die 5 wirksamsten Frugalismus‑Hacks für den Alltag
 
 ### 1. Die 72‑Stunden‑Regel gegen Impulskäufe
 
-Möchtest du etwas für über 30 € kaufen? Ist es kein dringendes Bedürfnis?
+Möchtest du etwas für über 30 € kaufen im Rechenfall? Ist es kein dringendes Bedürfnis?
 
-Dann warte 72 Stunden. In über 80 % der Fälle verfliegt der Kaufreiz. Das Geld bleibt auf deinem Konto.
+Dann warte 72 Stunden im Rechenbeispiel. In über 80 % der Fälle verfliegt der Kaufreiz. Das Geld bleibt auf deinem Konto.
 
 
 ### 2. Der monatliche Abo‑ und Vertrags‑Audit
 
-Prüfe die Kontoauszüge der letzten drei Monate. Welche Dienste nutzt du wirklich? Kündige alles Ungenutzte. Viele Haushalte sparen so **40 € bis 80 € im Monat**.
+Prüfe die Kontoauszüge der letzten drei Monate als Modellannahme. Welche Dienste nutzt du wirklich? Kündige alles Ungenutzte. Viele Haushalte sparen so **40 € bis 80 € im Monat**.
 
 ### 3. Vorkochen (Meal Prep) & smarter Wocheneinkauf
 
-Essen auswärts kostet schnell 10 € – 15 € am Tag. Das sind rund 250 € im Monat. Wer mit Zettel einkauft und für zwei bis drei Tage vorkocht, zahlt unter 6 € am Tag. Die Ersparnis liegt bei über **150 € im Monat**.
+Essen auswärts kostet schnell 10 € – 15 € am Tag im Modellfall. Das sind rund 250 € im Monat. Wer mit Zettel einkauft und für zwei bis drei Tage vorkocht, zahlt unter 6 € am Tag. Die Ersparnis liegt bei über **150 € im Monat**.
 
 ### 4. Den Notgroschen zuerst aufbauen
 
@@ -102,14 +102,14 @@ Investiere erst, wenn die Reserve steht. Drei bis sechs Monatsausgaben gehören 
 
 Zahle dich zuerst selbst. Überweise deine Sparrate nicht am Monatsende.
 
-Dann ist meist nichts übrig. Setze einen Dauerauftrag direkt nach dem Gehalt. Er überweist 15 % – 25 % auf dein Sparkonto.
+Dann ist meist nichts übrig als Beispielwert. Setze einen Dauerauftrag direkt nach dem Gehalt. Er überweist 15 % – 25 % auf dein Sparkonto.
 
 
 ## Automatisierung: So läuft das Sparen im Hintergrund
 
 1. **Girokonto wählen** – ein Konto ohne Kontoführungsgebühren und mit Echtzeit‑Benachrichtigungen.
 2. **Unterkonten anlegen** – ein „Fixkosten‑Pocket“, ein „Lifestyle‑Pocket“ und ein „Spar‑Pocket“.
-3. **Daueraufträge einrichten** – am Tag nach Gehaltseingang automatisch 20 % auf das Tagesgeld‑Konto, 10 % auf den ETF‑Sparplan.
+3 als Modellwert. **Daueraufträge einrichten** – am Tag nach Gehaltseingang automatisch 20 % auf das Tagesgeld‑Konto, 10 % auf den ETF‑Sparplan.
 4. **Rund-um-die‑Uhr‑Monitoring** – Apps wie Outbank oder MoneyControl zeigen dir sofort, wenn ein Abo überfällig ist.
 5. **Jährliche Anpassung** – prüfe im Januar, ob die 50‑30‑20‑Verteilung noch passt, und justiere die Daueraufträge.
 
@@ -125,7 +125,7 @@ Durch diese **Automatisierung** entfallen Fehlentscheidungen aus „Ich‑hab‑
 | Verzicht auf Spontankäufe (72‑Std‑Regel) | 0 Minuten | **120,00 €** | **1.440,00 €** |
 | **Summe Ersparnis** | – | **380,00 € / Monat** | **4.560,00 € / Jahr** |
 
-Wie du auch beim Konto und bei Fixkosten auf 0 € kommst, zeigt der Ratgeber [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/). Dazu passt der Ratgeber „Frugalismus & Budget“.
+Wie du auch beim Konto und bei Fixkosten auf 0 € kommst, zeigt der Ratgeber [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) im Rechenfall. Dazu passt der Ratgeber „Frugalismus & Budget“.
 
 ## Pro & Contra von Frugalismus
 
@@ -147,7 +147,7 @@ Der Schlüssel liegt im **Balance‑Act**: Sparen, wo es keinen Mehrwert gibt, u
 | **Aktien‑Einzelkauf** | 5 % – 12 % (stark schwankend) | 1‑2 Tage | 0,2 % – 0,5 % | Erfahrene Anleger, gezielte Themeninvestments |
 | **Robo‑Advisor** | 4 % – 6 % | 1‑2 Tage | 0,25 % – 0,50 % | Anfänger, die automatisiert diversifizieren wollen |
 
-**Praxis‑Tipp:** Sobald du 3‑6 Monatsausgaben (z. B. 4.500 €) als **Notgroschen** hast, lege den Überschuss in einen weltweiten ETF‑Sparplan. Das kombiniert Sicherheit (Tagesgeld) mit Wachstums­potenzial (ETF).
+**Praxis‑Tipp:** Sobald du 3‑6 Monatsausgaben (z im Rechenbeispiel. B. 4.500 €) als **Notgroschen** hast, lege den Überschuss in einen weltweiten ETF‑Sparplan. Das kombiniert Sicherheit (Tagesgeld) mit Wachstums­potenzial (ETF).
 
 ## Rechenbeispiel mit einer fiktiven Person: Max, 28, Software‑Entwickler
 
@@ -172,12 +172,12 @@ Der Schlüssel liegt im **Balance‑Act**: Sparen, wo es keinen Mehrwert gibt, u
 
 ## Die 50–30–20‑Regel, wenn die Miete 40 % frisst
 
-In vielen Städten ist 50 % für Grundbedürfnisse Illusion. Dann gilt eine ehrliche Variante:
+In vielen Städten ist 50 % für Grundbedürfnisse Illusion als Modellannahme. Dann gilt eine ehrliche Variante:
 
-- **60 % Grund** (Miete, Energie, Lebensmittel, Pflichtversicherungen, ÖPNV) - **25 % Leben** (Freizeit, Freunde, kleines Reisen)
+- **60 % Grund** (Miete, Energie, Lebensmittel, Pflichtversicherungen, ÖPNV) - **25 % Leben** (Freizeit, Freunde, kleines Reisen) (im Modellfall)
 - **15 % Puffer & Vermögensaufbau**
 
-15 % von 2.600 € netto sind 390 €. Damit füllst du deinen Notgroschen in 12 bis 18 Monaten. Dazu senkst du die 60 %: Zimmer vermieten, Energie‑Wechsel, Policen bündeln. Sinkt die Miete‑Quote, wandern fünf Punkte in die 15 %‑Kategorie.
+15 % von 2.600 € netto sind 390 € als Beispielwert. Damit füllst du deinen Notgroschen in 12 bis 18 Monaten. Dazu senkst du die 60 %: Zimmer vermieten, Energie‑Wechsel, Policen bündeln. Sinkt die Miete‑Quote, wandern fünf Punkte in die 15 %‑Kategorie.
 
 ## Fünf Frugalismus‑Hacks, die 2026 noch funktionieren
 
@@ -185,17 +185,17 @@ In vielen Städten ist 50 % für Grundbedürfnisse Illusion. Dann gilt eine eh
 
 **2. 24‑Stunden‑Warenkorb.** Online‑Shops speichern den Warenkorb. Schluss‑Kauf erst am nächsten Abend. Die Hälfte der Artikel überlebt die Nacht nicht.
 
-**3. Nutzungspreis.** 200‑€‑Werkzeug, acht Einsätze in drei Jahren = 25 € pro Einsatz. Leihen in der Bibliothek der Dinge oder Nachbarschaft kostet 0–5 €.
+**3 als Modellwert. Nutzungspreis.** 200‑€‑Werkzeug, acht Einsätze in drei Jahren = 25 € pro Einsatz. Leihen in der Bibliothek der Dinge oder Nachbarschaft kostet 0–5 €.
 
-**4. Gehaltserhöhung zuerst sparen.** Kommt 150 € netto oben drauf, wandern 100 € in den Dauerauftrag, 50 € in den Leben‑Topf. Lifestyle‑Inflation ist der leise Killer der Sparquote.
+**4 im Rechenfall. Gehaltserhöhung zuerst sparen.** Kommt 150 € netto oben drauf, wandern 100 € in den Dauerauftrag, 50 € in den Leben‑Topf. Lifestyle‑Inflation ist der leise Killer der Sparquote.
 
-**5. Ein No‑Spend‑Weekend pro Monat.** 48 Stunden ohne Bezahlvorgänge außer vorgeplanten Tickets. Nicht als Strafe, als Diagnose: Wo zuckst du?
+**5 im Rechenbeispiel. Ein No‑Spend‑Weekend pro Monat.** 48 Stunden ohne Bezahlvorgänge außer vorgeplanten Tickets. Nicht als Strafe, als Diagnose: Wo zuckst du?
 
 ## Typische Irrtümer
 
 Frugalismus ist kein Wettbewerb. Wer trägt den ältesten Pulli?
 
-Wer verbraucht am wenigsten? Und wer 8 Stunden für 12 € Ersparnis opfert, rechnet falsch. Auch wichtig: Spare nicht bei Versicherungen, die dich vor großen Risiken schützen. Haftpflicht und Krankenversicherung gehören dazu.
+Wer verbraucht am wenigsten als Modellannahme? Und wer 8 Stunden für 12 € Ersparnis opfert, rechnet falsch. Auch wichtig: Spare nicht bei Versicherungen, die dich vor großen Risiken schützen. Haftpflicht und Krankenversicherung gehören dazu.
 
 
 Die kluge Version ist langweilig: automatisierte Rate, wenige bewusste Freuden, Rest in Ruhe lassen. Genau daraus entsteht die Freiheit, die der Titel verspricht – nicht aus dem 15. Lifehack.
@@ -224,7 +224,7 @@ Ja. Frugalismus beginnt im Kopf. Du prüfst deine Ausgaben und senkst die Fixkos
 
 ### Wie fange ich am besten mit Frugalismus an?
 
-Führe zwei bis drei Monate ein Haushaltsbuch. Notiere alle Ausgaben. Danach kündigst du ungenutzte Abos. Und du wechselst teure Strom‑, Gas‑ und DSL‑Verträge.
+Führe zwei bis drei Monate ein Haushaltsbuch im Modellfall. Notiere alle Ausgaben. Danach kündigst du ungenutzte Abos. Und du wechselst teure Strom‑, Gas‑ und DSL‑Verträge.
 
 ### Was mache ich mit dem ersparten Geld?
 
@@ -232,7 +232,7 @@ Zuerst füllst du deinen Notgroschen. Ein Tagesgeldkonto ist dafür ideal. Alles
 
 ### Wie wirkt sich Inflation auf meine Frugalismus‑Strategie aus?
 
-Inflation reduziert die Kaufkraft deines Geldes. Deshalb sollte **der Notgroschen** auf einem Konto mit mindestens 0,5 % – 1,5 % Zinsen liegen, um die reale Wertentwicklung zumindest teilweise auszugleichen.
+Inflation reduziert die Kaufkraft deines Geldes als Beispielwert. Deshalb sollte **der Notgroschen** auf einem Konto mit mindestens 0,5 % – 1,5 % Zinsen liegen, um die reale Wertentwicklung zumindest teilweise auszugleichen.
 
 Gleichzeitig erhöht sich der Anreiz, Geld in renditestärkere Anlagen (z. B. ETFs) zu stecken, sobald die Sicherheitsreserve steht.
 

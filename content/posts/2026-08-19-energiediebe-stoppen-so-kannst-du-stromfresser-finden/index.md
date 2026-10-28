@@ -82,7 +82,7 @@ Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank sei
 Darum geht es hier konkret: Energiediebe stoppen.
 
 - Nutze deinen **eigenen Arbeitspreis** aus dem Stromvertrag, nicht irgendeinen Werbewert.
-- Miss Kühl- und Gefriergeräte mindestens **24 Stunden**, besser mehrere Tage.
+- Miss Kühl- und Gefriergeräte mindestens **24 Stunden**, besser mehrere Tage im Modellfall.
 - Rechne Dauerlast so: **Watt × Stunden ÷ 1.000 = kWh**.
 - Teile Geräte danach in drei Gruppen: **abschalten, anders nutzen, ersetzen**.
 - Vergleiche bei einem Neukauf den konkreten Verbrauch in kWh, nicht nur die Effizienzklasse.
@@ -114,7 +114,7 @@ Ein Strommessgerät kommt zwischen Steckdose und Gerätestecker. Viele Verbrauch
 
 ### Die passende Messdauer
 
-- **Kühl- und Gefriergerät:** mindestens 24 Stunden, besser 72 Stunden. So erfasst du Kühl- und Abtauzyklen.
+- **Kühl- und Gefriergerät:** mindestens 24 Stunden, besser 72 Stunden als Beispielwert. So erfasst du Kühl- und Abtauzyklen.
 - **Waschmaschine, Spülmaschine, Trockner:** drei bis fünf vollständige, typische Programme messen.
 - **TV, PC und Konsole:** Betrieb und Bereitschaft getrennt erfassen.
 - **[Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/):** aktuelle Leistung notieren und auf die tatsächliche Laufzeit hochrechnen.
@@ -133,13 +133,13 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 
 > Jahresverbrauch = Watt × 24 × 365 ÷ 1.000
 
-Beispiel: Eine Gerätegruppe zieht unnötig 18 Watt. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
+Beispiel: Eine Gerätegruppe zieht unnötig 18 Watt als Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
 
-Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt rund 32 €. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel“ eine echte Zahl.
+Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt rund 32 € im Rechenfall. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel“ eine echte Zahl.
 
 ## Kühlgeräte: erst messen, dann über Ersatz reden
 
-Kühlschrank und Gefriertruhe laufen ständig. Trotzdem ist „älter als zehn Jahre“ allein kein guter Grund zum Kauf. Das UBA rät: Miss den Verbrauch des alten Geräts und vergleiche ihn mit passenden neuen Geräten.
+Kühlschrank und Gefriertruhe laufen ständig im Rechenbeispiel. Trotzdem ist „älter als zehn Jahre“ allein kein guter Grund zum Kauf. Das UBA rät: Miss den Verbrauch des alten Geräts und vergleiche ihn mit passenden neuen Geräten.
 
 Achte beim Vergleich auf:
 
@@ -152,9 +152,9 @@ Ein zu großes neues Gerät kann trotz guter Klasse mehr Strom brauchen als ein 
 
 ### Beispiel für die Amortisation
 
-Dein altes Gerät verbraucht gemessen 310 kWh im Jahr. Das passende Neugerät ist mit 140 kWh angegeben.
+Dein altes Gerät verbraucht gemessen 310 kWh im Jahr als Modellannahme. Das passende Neugerät ist mit 140 kWh angegeben.
 
-- Differenz: **170 kWh**
+- Differenz: **170 kWh** (im Modellfall)
 - Ersparnis bei 0,37 €/kWh: **62,90 € pro Jahr**
 - Kaufpreis: **650 €**
 - Einfache Amortisationszeit: **rund 10,3 Jahre**
@@ -195,9 +195,9 @@ Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitsk
 
 **Watt und Kilowattstunden verwechseln:** Watt ist die momentane Leistung. Die Kilowattstunde (kWh) ist die über Zeit verbrauchte Energie.
 
-**Zu kurz messen:** Fünf Minuten sagen bei Kühlgerät und Waschprogramm fast nichts aus.
+**Zu kurz messen:** Fünf Minuten sagen bei Kühlgerät und Waschprogramm fast nichts aus als Beispielwert.
 
-**Anschaffungskosten vergessen:** 60 € Stromersparnis machen einen 900-Euro-Kauf nicht sofort wirtschaftlich.
+**Anschaffungskosten vergessen:** 60 € Stromersparnis machen einen 900-Euro-Kauf nicht sofort wirtschaftlich als Modellwert.
 
 **Standby und Betrieb vermischen:** Für die richtige Maßnahme musst du wissen, in welchem Zustand der Verbrauch entsteht.
 
@@ -224,13 +224,13 @@ Dieser Test ist eine Momentaufnahme. Kühlgeräte und Pumpen schalten währendde
 
 ### Plausibilitätscheck mit der Rechnung
 
-Teile deinen Jahresverbrauch durch 8.760 Stunden. Bei 3.500 kWh ergibt sich rechnerisch eine mittlere Leistung von rund 400 Watt. Ständig fließen deshalb noch lange keine 400 Watt.
+Teile deinen Jahresverbrauch durch 8.760 Stunden im Rechenfall. Bei 3.500 kWh ergibt sich rechnerisch eine mittlere Leistung von rund 400 Watt. Ständig fließen deshalb noch lange keine 400 Watt.
 
 Herd und Waschmaschine erzeugen Spitzen, während nachts oft deutlich weniger läuft. Der Mittelwert hilft nur, eine gemessene Dauerlast einzuordnen.
 
 Setze dir für die Suche eine Abbruchregel. Hast du die zwei größten vermeidbaren Verbraucher gefunden, setzt du erst die Maßnahmen um. Sonst verbringst du einen ganzen Sonntag mit Messwerten, während die teure TV-Leiste weiterläuft.
 
-Prüfe nach vier Wochen am Zähler, ob der Verbrauch plausibel gesunken ist. Erst dann beginnt die nächste Messrunde.
+Prüfe nach vier Wochen am Zähler, ob der Verbrauch plausibel gesunken ist im Rechenbeispiel. Erst dann beginnt die nächste Messrunde.
 
 ## Verbraucher ohne Stecker richtig einordnen
 
@@ -246,7 +246,7 @@ Nutze stattdessen diese Daten:
 
 Halte bei solchen Tests Datum und Dauer fest. Nur dann kannst du dieselbe Nutzung später nach einer Änderung erneut prüfen. Bei einem Durchlauferhitzer ist die Anschlussleistung allein noch kein Jahresverbrauch.
 
-Entscheidend sind Duschdauer, Wassermenge und Temperatur. Auch eine Wallbox mit 11 kW zieht diese Leistung nicht rund um die Uhr.
+Entscheidend sind Duschdauer, Wassermenge und Temperatur als Modellannahme. Auch eine Wallbox mit 11 kW zieht diese Leistung nicht rund um die Uhr.
 
 Für den Zählertest kannst du eine definierte Nutzung beobachten: Zählerstand vorher und nachher notieren und gleichzeitig andere große Verbraucher vermeiden. Du erhältst damit eine grobe Differenz, ersetzt aber keine fachgerechte Einzelmessung.
 
@@ -263,14 +263,14 @@ So entlarvst du Energiediebe Schritt für Schritt: erst messen, dann rechnen, da
 
 Stromfresser findest du nicht am Alter oder an einer warmen Oberfläche, sondern mit einer Messung. Starte bei Dauerläufern und Geräten, die Wärme erzeugen. Rechne anschließend mit deinem persönlichen Strompreis.
 
-Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und häng es für 24 Stunden an das verdächtigste Kühlgerät. Danach hast du eine Zahl statt eines Verdachts.
+Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und häng es für 24 Stunden an das verdächtigste Kühlgerät im Modellfall. Danach hast du eine Zahl statt eines Verdachts.
 
 **Weiterlesen:** Standby-Kosten gezielt [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 
 ## Häufige Fragen
 
 ### Wie lange muss ich ein Gerät messen?
-Bei gleichmäßigem Verbrauch reichen oft einige Stunden. Kühl- und Gefriergeräte solltest du mindestens 24 Stunden, besser mehrere Tage messen. Programme misst du vollständig und mehrfach.
+Bei gleichmäßigem Verbrauch reichen oft einige Stunden als Beispielwert. Kühl- und Gefriergeräte solltest du mindestens 24 Stunden, besser mehrere Tage messen. Programme misst du vollständig und mehrfach.
 
 ### Ab welchem Verbrauch lohnt ein Austausch?
 Dafür gibt es keine feste kWh-Grenze. Rechne die Differenz zu einem passenden Neugerät in Euro um und teile den Kaufpreis durch die jährliche Ersparnis.

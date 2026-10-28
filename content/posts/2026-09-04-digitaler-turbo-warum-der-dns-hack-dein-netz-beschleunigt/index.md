@@ -144,7 +144,7 @@ Schreibe dir die Werte auf. Notiere auch den Wochentag und die Uhrzeit. Nur so k
 Dein Betriebssystem speichert Antworten zwischen. Das ist sinnvoll für den Alltag. Für den Messvergleich kann es aber verfälschen. Leere den lokalen DNS-Cache vor dem Test, wenn du sicher gehen willst. Ansonsten wiederhole die Abfrage einfach ein zweites Mal. Der zweite Wert ist oft der aussagekräftigere.
 
 ### Was du nicht erwarten solltest
-Ein Wechsel des DNS-Servers macht aus einer 16-Mbit-Leitung kein 100-Mbit-Netz. Er verbessert nicht den WLAN-Empfang im hinteren Zimmer. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), wenn dein Anschluss grundsätzlich zu langsam ist. Er kann aber in manchen Fällen die Zeit bis zum ersten Laden einer Seite verkürzen.
+Ein Wechsel des DNS-Servers macht aus einer 16-Mbit-Leitung kein 100-Mbit-Netz im Modellfall. Er verbessert nicht den WLAN-Empfang im hinteren Zimmer. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), wenn dein Anschluss grundsätzlich zu langsam ist. Er kann aber in manchen Fällen die Zeit bis zum ersten Laden einer Seite verkürzen.
 
 Das ist ein kleiner Effekt. Er ist manchmal spürbar. Er ist aber kein Wundermittel.
 

@@ -221,7 +221,7 @@ Kopple die Gewohnheit an etwas Festes. Etwa den Kontoblick an den Montagskaffee.
 
 ### Was mache ich in einem teuren Monat?
 
-Halte die Routine, auch wenn die Beträge sinken. Fünf Euro statt fünfzig zählen. Es geht um das Muster, nicht um die Summe.
+Halte die Routine, auch wenn die Beträge sinken im Modellfall. Fünf Euro statt fünfzig zählen. Es geht um das Muster, nicht um die Summe.
 
 ### Soll ich das Geld sofort aufteilen?
 

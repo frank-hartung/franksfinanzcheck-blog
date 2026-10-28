@@ -53,7 +53,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Darum geht es hier konkret: [Heizkosten senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/).
 
-- Die Verbraucherzentrale nennt **rund 6 % weniger Heizenergie pro Grad** als Faustwert.
+- Die Verbraucherzentrale nennt **rund 6 % weniger Heizenergie pro Grad** als Faustwert im Modellfall.
 - Wohnräume liegen oft bei etwa **20 °C**, Schlafzimmer bei **16 bis 18 °C** sinnvoll.
 - Lüfte kurz mit ganz geöffneten Fenstern statt stundenlang auf Kipp.
 - Stelle Heizkörper frei und entlüfte sie nur bei typischen Anzeichen.
@@ -130,13 +130,13 @@ Für einen Gasvertrag brauchst du vier Zahlen:
 
 > Jahreskosten = Verbrauch × Arbeitspreis + Grundpreis
 
-Beispiel: 16.000 kWh × 0,105 €/kWh + 180 € Grundpreis ergeben **1.860 €**. Bei zwölf gleichen Abschlägen wären das rechnerisch 155 € im Monat.
+Beispiel: 16.000 kWh × 0,105 €/kWh + 180 € Grundpreis ergeben **1.860 €** als Beispielwert. Bei zwölf gleichen Abschlägen wären das rechnerisch 155 € im Monat.
 
-Ein Abschlag von 130 € macht den Tarif nicht günstiger. Er baut in diesem Beispiel nur eine mögliche Nachzahlung auf.
+Ein Abschlag von 130 € macht den Tarif nicht günstiger als Modellwert. Er baut in diesem Beispiel nur eine mögliche Nachzahlung auf.
 
 ## Was mehrere Maßnahmen zusammen bringen können?
 
-Prozentwerte lassen sich nicht einfach addieren. Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
+Prozentwerte lassen sich nicht einfach addieren im Rechenfall. Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
 
 Seriöser ist ein Vorher-nachher-Vergleich:
 
@@ -150,7 +150,7 @@ Notiere Wetter und Abwesenheiten knapp dazu. So erkennst du Trends, ohne einen k
 
 ## Tarif prüfen: der zweite Hebel
 
-11,93 Cent je Kilowattstunde – das ist der BDEW-Schnitt für Einfamilienhäuser 2026. Als feste Zielmarke taugt die Zahl nicht. Als grober Maßstab aber schon: Liegt dein Arbeitspreis klar darüber, lohnt ein Blick in den Vertrag. Region, Verbrauchsmenge und Vertragsart verschieben das Bild zusätzlich.
+11,93 Cent je Kilowattstunde – das ist der BDEW-Schnitt für Einfamilienhäuser 2026 im Rechenbeispiel. Als feste Zielmarke taugt die Zahl nicht. Als grober Maßstab aber schon: Liegt dein Arbeitspreis klar darüber, lohnt ein Blick in den Vertrag. Region, Verbrauchsmenge und Vertragsart verschieben das Bild zusätzlich.
 
 Rechne jedes Angebot mit deiner tatsächlichen Jahresmenge durch. Wichtig sind:
 
@@ -192,7 +192,7 @@ An Speichertemperatur und Zirkulation solltest du nicht blind drehen. Zu niedrig
 
 Lies den Gaszähler in einem Monat ohne Heizung ab. Die Differenz zeigt grob den Sockel für [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) und eventuell Kochen. Ziehst du diesen Sockel vom Winterverbrauch ab, wird der Anteil der Raumheizung klarer.
 
-Beispiel: Im Juli verbrauchst du 45 kWh Gas. Im Januar sind es 2.000 kWh. Der Sommerwert ist keine perfekte Korrektur. Er zeigt aber: Der große Winterhebel liegt bei der Raumwärme. Ist der Sommerverbrauch überraschend hoch, lohnt ein Blick auf Warmwasser, Speicher und Zirkulation.
+Beispiel: Im Juli verbrauchst du 45 kWh Gas als Modellannahme. Im Januar sind es 2.000 kWh. Der Sommerwert ist keine perfekte Korrektur. Er zeigt aber: Der große Winterhebel liegt bei der Raumwärme. Ist der Sommerverbrauch überraschend hoch, lohnt ein Blick auf Warmwasser, Speicher und Zirkulation.
 
 ## Verbräuche fair miteinander vergleichen
 
@@ -225,7 +225,7 @@ Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizk
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 
-Senk heute in einem überheizten Raum die Zieltemperatur um ein Grad. Stell den Heizkörper frei und notiere den Zählerstand. In vier Wochen prüfst du, ob Verbrauch und Komfort passen.
+Senk heute in einem überheizten Raum die Zieltemperatur um ein Grad im Modellfall. Stell den Heizkörper frei und notiere den Zählerstand. In vier Wochen prüfst du, ob Verbrauch und Komfort passen.
 
 So wird aus einem Spartipp ein messbares System. Tarif und Technik kommen danach – nicht statt der Verbrauchskontrolle.
 
@@ -234,7 +234,7 @@ So wird aus einem Spartipp ein messbares System. Tarif und Technik kommen danach
 ## Häufige Fragen
 
 ### Spart ein Grad weniger immer 6 %?
-Nein. Die 6 % sind ein grober Richtwert. Gebäude, Wetter, Ausgangstemperatur und Nutzungsverhalten beeinflussen das Ergebnis.
+Nein als Beispielwert. Die 6 % sind ein grober Richtwert. Gebäude, Wetter, Ausgangstemperatur und Nutzungsverhalten beeinflussen das Ergebnis.
 
 ### Wird es auf Stufe 5 schneller warm?
 Nein. Ein Thermostat begrenzt die Zieltemperatur. Stufe 5 lässt länger heizen, beschleunigt die Anlage aber nicht automatisch.

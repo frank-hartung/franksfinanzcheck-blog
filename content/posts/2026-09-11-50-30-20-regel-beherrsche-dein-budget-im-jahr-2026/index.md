@@ -52,12 +52,12 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Das Wichtigste in Kürze
 
-- Die 50–30–20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
-- **50 %** sind für notwendige Ausgaben gedacht.
-- **30 %** sind für Wünsche und Freizeit da.
-- **20 %** gehen in Sparen, Rücklagen oder Schuldenabbau.
-- Der größte Hebel liegt oft nicht im Verzicht, sondern bei den **Fixkosten**.
-- Die Regel ist ein Rahmen. Du darfst sie an dein Leben anpassen.
+1. Die 50–30–20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
+2 im Modellfall. **50 %** sind für notwendige Ausgaben gedacht.
+3. **30 %** sind für Wünsche und Freizeit da.
+4. **20 %** gehen in Sparen, Rücklagen oder Schuldenabbau.
+5. Der größte Hebel liegt oft nicht im Verzicht, sondern bei den **Fixkosten**.
+6. Die Regel ist ein Rahmen. Du darfst sie an dein Leben anpassen.
 
 ## Was bedeutet die 50-30-20-Regel konkret?
 
@@ -102,7 +102,7 @@ Hierhin gehören:
 
 Dieser Topf macht aus Einkommen Schritt für Schritt Vermögen oder zumindest Stabilität.
 
-Die Reihenfolge innerhalb dieses Blocks entscheidet mehr, als viele denken. Sinnvoll ist meist: erst eine kleine Sicherheitsreserve, dann schrittweise **3 bis 6 Monatsausgaben** als Notgroschen, danach der volle Fokus auf Vermögensaufbau. Ein ETF-Depot hilft dir wenig, wenn die Waschmaschine kaputtgeht und du dafür Anteile verkaufen müsstest. Parkst du den Puffer getrennt vom Alltagskonto, bleiben die 20 % außerdem stabiler – sie werden dann nicht jedes Mal angebrochen, wenn ein Monat teuer wird.
+Die Reihenfolge innerhalb dieses Blocks entscheidet mehr, als viele denken als Beispielwert. Sinnvoll ist meist: erst eine kleine Sicherheitsreserve, dann schrittweise **3 bis 6 Monatsausgaben** als Notgroschen, danach der volle Fokus auf Vermögensaufbau. Ein ETF-Depot hilft dir wenig, wenn die Waschmaschine kaputtgeht und du dafür Anteile verkaufen müsstest. Parkst du den Puffer getrennt vom Alltagskonto, bleiben die 20 % außerdem stabiler – sie werden dann nicht jedes Mal angebrochen, wenn ein Monat teuer wird.
 
 ## Warum die Regel so gut funktioniert
 
@@ -131,20 +131,20 @@ Das sind aufs Jahr gerechnet **6.720 €**. Selbst wenn du davon zuerst nur ein
 Damit die Regel nicht abstrakt bleibt, hier ein mögliches Beispiel für einen Ein-Personen-Haushalt oder ein kleines Paar-Budget.
 
 ### 50 % Notwendiges = 1.400 €
-- Miete warm: 920 €
+- Miete warm: 920 € (als Modellwert)
 - Strom und Gas: 140 €
 - Lebensmittel und Drogerie: 240 €
 - Internet und Mobilfunk: 45 €
 - Versicherungen: 55 €
 
 ### 30 % Wünsche = 840 €
-- Freizeit und Essen gehen: 260 €
+- Freizeit und Essen gehen: 260 € (im Rechenfall)
 - Kleidung und Shopping: 160 €
 - Reisen / Ausflüge: 220 €
 - Abos, Kultur, Hobbys: 200 €
 
 ### 20 % Sparen = 560 €
-- ETF-Sparplan: 350 €
+- ETF-Sparplan: 350 € (im Rechenbeispiel)
 - Notgroschen: 150 €
 - Sondertilgung oder Extra-Rücklage: 60 €
 
@@ -164,7 +164,7 @@ Denn dort zahlst du jeden Monat automatisch.
 - Versicherungen aktualisieren
 - unnötige Abos kündigen
 
-Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer.
+Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer als Modellannahme.
 
 Passend dazu helfen dir auch diese Ratgeber:
 
@@ -197,7 +197,7 @@ Richte direkt nach Gehaltseingang einen Dauerauftrag ein. Was zuerst verschwinde
 Ein fester Wunsch-Topf ist klüger als dauerndes Schuldgefühl. So steuerst du Konsum bewusst statt chaotisch.
 
 ### 5. Einmal im Monat kurz prüfen
-Zehn Minuten reichen oft. Wichtig ist nur, dass du nachsteuerst, wenn eine Kategorie ständig aus dem Ruder läuft.
+Zehn Minuten reichen oft im Modellfall. Wichtig ist nur, dass du nachsteuerst, wenn eine Kategorie ständig aus dem Ruder läuft.
 
 ## Die häufigsten Denkfehler
 
@@ -219,7 +219,7 @@ Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-
 
 ![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf. svg)
 
-*Abbildung: Gliederung zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50–30–20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50–30–20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).* (als Beispielwert)
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 
@@ -283,9 +283,9 @@ Wer das einmal klar sieht, trifft oft automatisch bessere Entscheidungen.
 
 Mehr als viele denken.
 
-Wenn du durch Vertragschecks und Kündigungen **100 € pro Monat** einsparst und diesen Betrag in deinen 20-%-Topf schiebst, sind das:
+Wenn du durch Vertragschecks und Kündigungen **100 € pro Monat** einsparst und diesen Betrag in deinen 20-%-Topf schiebst, sind das: (als Modellwert)
 
-- **1.200 € pro Jahr**
+- **1.200 € pro Jahr** (im Rechenfall)
 - **6.000 € in fünf Jahren**
 - Plus mögliche Zinsen oder Rendite
 
@@ -299,7 +299,7 @@ Darum fühlt sich die 50–30–20-Regel so wirksam an: Sie verbindet Alltag und
 
 Die **50–30–20-Regel** ist keine Wunderformel. Aber sie ist eine der einfachsten Methoden, um aus diffusem Geldstress ein klares System zu machen. Du weißt, was du brauchst, was du genießen darfst und was in deine Zukunft fließt.
 
-Der eigentliche Gamechanger liegt oft nicht im Verzicht, sondern in besseren Fixkosten. Genau dort werden aus kleinen Entscheidungen schnell **50 €, 100 € oder 200 € pro Monat**. Und genau diese Summe entscheidet oft darüber, ob Sparen nur ein Vorsatz bleibt – oder endlich real wird.
+Der eigentliche Gamechanger liegt oft nicht im Verzicht, sondern in besseren Fixkosten im Rechenbeispiel. Genau dort werden aus kleinen Entscheidungen schnell **50 €, 100 € oder 200 € pro Monat**. Und genau diese Summe entscheidet oft darüber, ob Sparen nur ein Vorsatz bleibt – oder endlich real wird.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Notgroschen: die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) · [Frugalismus bewusst leben](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)
 

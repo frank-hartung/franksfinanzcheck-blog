@@ -158,7 +158,7 @@ Devisenkurse werden an Handelstagen gestellt. Am Wochenende ruht der Handel. Man
 
 Für dich heißt das: Der Tag der Abhebung kann den Kurs beeinflussen. Wenn du flexibel bist, hebe an einem Werktag ab. Das ist keine Garantie für einen besseren Kurs, aber es vermeidet den Sonderfall.
 
-Dasselbe gilt für den Bearbeitungstag. Deine Bank bucht die Abhebung nicht immer am selben Tag. Zwischen Nutzung und Kontobuchung können ein bis drei Tage liegen, abhängig von Feiertagen und vom Land. Plane deshalb etwas Puffer ein, wenn du nach der Rückkehr eine Rechnung erwartest.
+Dasselbe gilt für den Bearbeitungstag im Modellfall. Deine Bank bucht die Abhebung nicht immer am selben Tag. Zwischen Nutzung und Kontobuchung können ein bis drei Tage liegen, abhängig von Feiertagen und vom Land. Plane deshalb etwas Puffer ein, wenn du nach der Rückkehr eine Rechnung erwartest.
 
 ## Selbstcheck in fünf Minuten
 

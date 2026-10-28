@@ -43,11 +43,11 @@ Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-f
 
 Heizkostenverträge solltest du vor dem ersten Frost prüfen. Auch Versicherer passen jetzt ihre Tarife an.
 
-Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca. 500 € und 1.300 €** an Haushaltskosten. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/).
+Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca im Modellfall. 500 € und 1.300 €** an Haushaltskosten. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/).
 
 **Das Wichtigste in Kürze**
 
-- **Wechselstichtag nutzen:** Durch den Wechsel der Kfz-Versicherung bis zum 30. November lassen sich ca. 150 € bis 400 € jährlich einsparen.
+- **Wechselstichtag nutzen:** Durch den Wechsel der Kfz-Versicherung bis zum 30 als Beispielwert. November lassen sich ca. 150 € bis 400 € jährlich einsparen.
 - **Heizkosten optimieren:** Technische Maßnahmen wie das Entlüften und smarte Thermostate senken den Energieverbrauch um ca. 8 % bis 12 %.
 - **Antizyklisch handeln:** Der Abschluss von Strom- und Gasverträgen im Herbst sichert oft bessere Konditionen vor der winterlichen Hochphase.
 
@@ -68,7 +68,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 Der 30. November ist der wichtigste Termin für Autofahrer. Fast alle Kfz‑Verträge enden am 31. Dezember.
 
-Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im Herbst kämpfen die Versicherer um Neukunden. Ein Wechsel bringt deshalb oft **ca. 180 € bis 350 €** im Jahr – bei gleicher Leistung.
+Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen als Modellwert. Im Herbst kämpfen die Versicherer um Neukunden. Ein Wechsel bringt deshalb oft **ca. 180 € bis 350 €** im Jahr – bei gleicher Leistung.
 
 **Wie du vorgehst:**
 
@@ -94,11 +94,11 @@ Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im He
 
 Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen.
 
-Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart in der Regel 8 % bis 12 % Energie. Bei einem Einfamilienhaus entspricht dies einer Spanne von **ca. 160 € bis 240 €**.
+Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart in der Regel 8 % bis 12 % Energie im Rechenfall. Bei einem Einfamilienhaus entspricht dies einer Spanne von **ca. 160 € bis 240 €**.
 
 **Konkrete Maßnahmen:**
 
-1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
+1 im Rechenbeispiel. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
 2. **Vorlauftemperatur** um 5 °C [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) (z. B. von 70 °C auf 65 °C).
 3. **Witterungsgeführte Thermostate** installieren (Kosten 15–30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
 4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
@@ -110,15 +110,15 @@ Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, s
 | Deutlich geringere Heizkosten | Anfangsinvestition für smarte Thermostate |
 | Komfortsteigerung durch gleichmäßigere Raumtemperatur | Bei sehr alten Heizungen kann die Regelung begrenzt sein |
 
-**Praxisbeispiel:** Familie Müller hat ein 150 m² Haus, Jahresverbrauch 18 000 kWh. Nach dem Entlüften und einer Vorlauftemperatur‑Reduktion von 70 °C auf 65 °C sinkt ihr Verbrauch auf 15 800 kWh → **2 200 kWh Ersparnis**, das entspricht ca. **210 €** bei einem Gaspreis von 9,5 ¢/kWh.
+**Praxisbeispiel:** Familie Müller hat ein 150 m² Haus, Jahresverbrauch 18 000 kWh als Modellannahme. Nach dem Entlüften und einer Vorlauftemperatur‑Reduktion von 70 °C auf 65 °C sinkt ihr Verbrauch auf 15 800 kWh → **2 200 kWh Ersparnis**, das entspricht ca. **210 €** bei einem Gaspreis von 9,5 ¢/kWh.
 
 ---
 
 ### 3. Sachversicherungen bündeln und Altverträge kündigen
 
-Viele zahlen für alte Privathaftpflicht-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat.
+Viele zahlen für alte Privathaftpflicht-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden im Modellfall. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat.
 
-Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
+Ein Vergleich bringt schnell **ca als Beispielwert. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
 
 **Checkliste für den Versicherungs‑Check:**
 
@@ -131,7 +131,7 @@ Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft 
 
 **Vor‑ und Nachteile einer Bündelung:**
 
-- **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt.
+- **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt als Modellwert.
 - **Nachteil:** Bei einem Schaden kann die gesamte Police gekündigt werden, wenn du mit dem Anbieter unzufrieden bist.
 
 **Rechenbeispiel:** Lena hat drei Einzelverträge: Haftpflicht 6 €/Monat, Hausrat 5 €/Monat, Rechtsschutz 4 €/Monat → 180 €/Jahr. Ein Kombi‑Angebot kostet 12 €/Monat (144 €/Jahr). Sie spart **36 €** und hat nur noch einen Vertrag zu verwalten.
@@ -142,14 +142,14 @@ Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft 
 
 Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, sicherst du dir oft bessere Preise. Viele Tarife haben lange Preisgarantien.
 
-Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Strom und 20.000 kWh Gas) liegt das Sparpotenzial bei bis zu **ca. 450 €**.
+Meide die teure Grundversorgung im Rechenfall. Bei einem Durchschnittsverbrauch (3.500 kWh Strom und 20.000 kWh Gas) liegt das Sparpotenzial bei bis zu **ca. 450 €**.
 
 **Schritte zum Wechsel:**
 
 1. **Zählerstände notieren** (letzte Ablesung).
 2. **Verbrauchsprofil analysieren** (z. B. über den Jahresverbrauchs‑Rechner des BDEW).
 3. **Mindertarif vs. Grundversorgung** vergleichen (Achtung: Grundversorgung hat oft höhere Grundgebühr).
-4. **Preisgarantie prüfen** – 12–24 Monate sind üblich.
+4 im Rechenbeispiel. **Preisgarantie prüfen** – 12–24 Monate sind üblich.
 
 **Pro‑ und Contra‑Liste:**
 
@@ -158,7 +158,7 @@ Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Str
 | In der Regel günstigere Grundpreise | Eventuell höhere Abschlagszahlung zu Beginn |
 | Transparente [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) | Bei Wechsel kann ein kurzer Sonderkündigungszeitraum entstehen |
 
-**Beispiel:** Markus hat einen Stromtarif mit 30 ct/kWh Grundpreis + 6 ct/kWh Arbeitspreis. Neuer Anbieter bietet 27 ct/kWh Grundpreis + 5,5 ct/kWh Arbeitspreis. Jahresverbrauch 3.500 kWh → Ersparnis: (3 ct + 0,5 ct) × 3.500 kWh = 122,5 € plus geringere Grundgebühr → insgesamt ca. **150 €**.
+**Beispiel:** Markus hat einen Stromtarif mit 30 ct/kWh Grundpreis + 6 ct/kWh Arbeitspreis als Modellannahme. Neuer Anbieter bietet 27 ct/kWh Grundpreis + 5,5 ct/kWh Arbeitspreis. Jahresverbrauch 3.500 kWh → Ersparnis: (3 ct + 0,5 ct) × 3.500 kWh = 122,5 € plus geringere Grundgebühr → insgesamt ca. **150 €**.
 
 ---
 
@@ -166,7 +166,7 @@ Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Str
 
 Kürbisse, Äpfel und Kohl haben im Herbst Saison. Regionales Obst und Gemüse ist frisch und deutlich preiswerter.
 
-Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren sparen monatlich etwa **ca. 50 € bis 80 €**. Wer mit Wochenplänen kocht, reduziert Lebensmittelabfälle auf ein Minimum.
+Importware kostet oft ein Vielfaches im Modellfall. Meal‑Prep, Einkochen und Einfrieren sparen monatlich etwa **ca. 50 € bis 80 €**. Wer mit Wochenplänen kocht, reduziert Lebensmittelabfälle auf ein Minimum.
 
 **Praktische Tipps:**
 
@@ -186,7 +186,7 @@ Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren spar
 
 ### 6. Energieeffizienz durch Fensterdichtungen und Zugluftstopper
 
-Undichte Fenster lassen kalte Luft herein. Dichtungsbänder aus dem Baumarkt kosten oft nur rund 10 €.
+Undichte Fenster lassen kalte Luft herein als Beispielwert. Dichtungsbänder aus dem Baumarkt kosten oft nur rund 10 €.
 
 Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft weniger. Das entlastet deine Strom‑ und Gasrechnung spürbar.
 
@@ -194,12 +194,12 @@ Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft w
 
 1. **Risse lokalisieren:** Mit einer brennenden Kerze – Flackern zeigt Zugluft.
 2. **Dichtungsband anbringen:** Selbstklebend, 2–3 cm Breite, rund um Fensterrahmen.
-3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
+3 als Modellwert. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
 4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
 
 **Rechenbeispiel:** Kosten für Dichtungsband (10 m Rolle) = 9,90 €. Einsparung bei einem 100 m² Haus: ca.
 
-5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis. Der Pay‑back liegt nach ca. 1,5 Jahren.
+5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis im Rechenfall. Der Pay‑back liegt nach ca. 1,5 Jahren.
 
 ---
 
@@ -207,7 +207,7 @@ Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft w
 
 Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen steigen lassen. Auch Heim‑Kino mit selbstgemachtem Popcorn ist günstig.
 
-So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du nicht verzichten.
+So sparst du monatlich ca im Rechenbeispiel. **60 € bis 100 €**. Auf Lebensfreude musst du nicht verzichten.
 
 **Ideen für kostenlose Aktivitäten:**
 
@@ -244,21 +244,21 @@ So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du n
 
 ## Herbst als Kassensturz, nicht als Konsum‑Saison
 
-Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres‑Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
+Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate als Modellannahme. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres‑Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
 
-**Fixkosten‑Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld‑Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
+**Fixkosten‑Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro im Modellfall. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld‑Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
 
 **Kleidung und Sport.** Second‑Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du nur wenige Tage in den Alpen bist. Kosten pro Nutzung berechnen.
 
 **Heizen vorbereiten.** Entlüften, Dichtungen, Tarif. Das ist der größte saisonale Hebel, oft wirksamer als Rabattaktionen im Handel.
 
-**Lebensmittel.** Saisonales Gemüse, Einkochen, was du wirklich isst. Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern gebundenes Kapital.
+**Lebensmittel.** Saisonales Gemüse, Einkochen, was du wirklich isst als Beispielwert. Ein Glas, das zwei Jahre im Keller steht, ist kein Spartipp, sondern gebundenes Kapital.
 
 ## Black Friday ohne Nachzahlung
 
-Liste vor dem Event: nur Dinge, die schon auf der 30‑Tage‑Wunschliste stehen. Preis 30 Tage vorher notieren – viele „‑40 %“ beziehen sich auf den UVP, nicht auf den tatsächlichen Marktpreis von Mitte Oktober. Cashback nur für geplante Käufe nutzen. Bezahlmittel ohne Dispo verwenden.
+Liste vor dem Event: nur Dinge, die schon auf der 30‑Tage‑Wunschliste stehen als Modellwert. Preis 30 Tage vorher notieren – viele „‑40 %“ beziehen sich auf den UVP, nicht auf den tatsächlichen Marktpreis von Mitte Oktober. Cashback nur für geplante Käufe nutzen. Bezahlmittel ohne Dispo verwenden.
 
-Weihnachten: Budget pro Person vorher festlegen, Umschläge oder ein Unterkonto nutzen. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 € – sonst unterschätzt du den Dezember finanziell.
+Weihnachten: Budget pro Person vorher festlegen, Umschläge oder ein Unterkonto nutzen im Rechenfall. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 € – sonst unterschätzt du den Dezember finanziell.
 
 Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine Rechnungen, die du im Oktober hättest vermeiden können.
 
@@ -270,7 +270,7 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 ## Weihnachtskonto im September
 
-Ein Unterkonto oder Umschlag „Dezember“ ab 1.9. Führen: 4 × ca. 50–150 € je nach Haushalt zurücklegen. Geschenke, Bahnfahrten, Festessen einplanen.
+Ein Unterkonto oder Umschlag „Dezember“ ab 1.9 im Rechenbeispiel. Führen: 4 × ca. 50–150 € je nach Haushalt zurücklegen. Geschenke, Bahnfahrten, Festessen einplanen.
 
 Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das verhindert den Januar, in dem viele Spartipps bereits zu spät kommen.
 
@@ -280,9 +280,9 @@ Parallel: Energie‑ und [DSL‑Vergleich](../../posts/2026-08-10-dsl-wechselbon
 
 ## Der September‑Abend, der den Dezember trägt
 
-Setz dir 75 Minuten – so teilst du sie ein:
+Setz dir 75 Minuten – so teilst du sie ein: (als Modellannahme)
 
-- 25 Minuten Verträge (Energie, DSL, Mobilfunk – alles, was älter als 12 Monate ist, kommt in den Vergleich).
+- 25 Minuten Verträge (Energie, DSL, Mobilfunk – alles, was älter als 12 Monate ist, kommt in den Vergleich) im Modellfall.
 - 25 Minuten Dezember‑Budget auf ein Unterkonto schieben.
 - 25 Minuten Kleidung/Heizen: Was du wirklich brauchst vs. was der Herbstschlussverkauf suggeriert.
 
@@ -310,11 +310,11 @@ Die Kündigungsfrist beträgt in der Regel einen Monat. Deine Kündigung muss da
 
 ### Habe ich ein Sonderkündigungsrecht bei Beitragserhöhungen?
 
-Ja. Erhöht die Versicherung deinen Beitrag, hast du in der Regel vier Wochen Zeit für eine Kündigung. Das gilt auch bei einer neuen Einstufung der Typklasse. Die Frist startet mit dem Erhalt der schriftlichen Mitteilung.
+Ja als Beispielwert. Erhöht die Versicherung deinen Beitrag, hast du in der Regel vier Wochen Zeit für eine Kündigung. Das gilt auch bei einer neuen Einstufung der Typklasse. Die Frist startet mit dem Erhalt der schriftlichen Mitteilung.
 
 ### Wie viel kann ich durch saisonales Kochen sparen?
 
-Saisonales Gemüse ist in der Haupterntezeit oft ca. 40 % – 60 % günstiger als außerhalb der Saison. Treibhausware und Flugimporte verursachen deutlich höhere Kosten.
+Saisonales Gemüse ist in der Haupterntezeit oft ca als Modellwert. 40 % – 60 % günstiger als außerhalb der Saison. Treibhausware und Flugimporte verursachen deutlich höhere Kosten.
 
 ### Lohnen sich Mehrsparten‑Rabatte bei Versicherungen?
 
@@ -326,7 +326,7 @@ Entlüfte alle Heizkörper. Prüfe die Dichtungen an Fenstern und Türen. Säube
 
 ### Was ist der Unterschied zwischen einem Grundtarif und einem Sondertarif beim Stromwechsel?
 
-Ein Grundtarif (Grundversorgung) wird vom lokalen Netzbetreiber angeboten und hat meist höhere Grundgebühren. Sondertarife von Drittanbietern bieten oft niedrigere Arbeitspreise und feste Preisgarantien von 12–24 Monaten. Der Wechsel lohnt sich in der Regel, wenn du bereit bist, den Anbieter aktiv zu vergleichen.
+Ein Grundtarif (Grundversorgung) wird vom lokalen Netzbetreiber angeboten und hat meist höhere Grundgebühren im Rechenfall. Sondertarife von Drittanbietern bieten oft niedrigere Arbeitspreise und feste Preisgarantien von 12–24 Monaten. Der Wechsel lohnt sich in der Regel, wenn du bereit bist, den Anbieter aktiv zu vergleichen.
 
 ### Kann ich gleichzeitig mehrere Sparhebel umsetzen, ohne dass sie sich gegenseitig aufheben?
 

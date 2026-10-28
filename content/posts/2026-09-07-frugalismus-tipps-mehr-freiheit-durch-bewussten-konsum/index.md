@@ -45,15 +45,15 @@ Ein Coffee-to-go hier, ein spontaner Lieferdienst dort, dazu zwei Streaming-Abos
 
 Genau deshalb lohnt sich **Frugalismus für den Einstieg**. Nicht als Askese-Projekt, sondern als ehrlicher Blick auf die Frage: Wofür gebe ich Geld aus – und was davon ist mir wirklich wichtig? Wer das sauber trennt, spart nicht nur Geld. Er gewinnt oft auch Ruhe.
 
-Denn kleine Beträge haben eine unangenehme Eigenschaft: Sie fallen im Alltag kaum auf und sind im Jahr trotzdem groß. Wer nur **5 € pro Arbeitstag** für Dinge ausgibt, die er eigentlich nicht braucht, landet schnell bei über **1.000 € im Jahr**. Das ist mehr als nur Kleingeld.
+Denn kleine Beträge haben eine unangenehme Eigenschaft: Sie fallen im Alltag kaum auf und sind im Jahr trotzdem groß im Modellfall. Wer nur **5 € pro Arbeitstag** für Dinge ausgibt, die er eigentlich nicht braucht, landet schnell bei über **1.000 € im Jahr**. Das ist mehr als nur Kleingeld.
 
 ## Das Wichtigste in Kürze
 
-- Frugalismus heißt nicht Geiz, sondern **bewusste Prioritäten**.
-- Die größten Hebel liegen oft bei **Fixkosten, Gewohnheiten und Impulskäufen**.
-- Schon **20 € bis 50 € pro Monat** aus Kleinstbeträgen summieren sich auf mehrere hundert Euro im Jahr.
-- Ein **Haushaltsbuch** oder eine einfache Ausgabenliste ist die Grundlage für echte Veränderungen.
-- Wer Ersparnisse sofort sichert, macht aus guten Vorsätzen echte Ergebnisse.
+1. Frugalismus heißt nicht Geiz, sondern **bewusste Prioritäten**.
+2. Die größten Hebel liegen oft bei **Fixkosten, Gewohnheiten und Impulskäufen**.
+3 als Beispielwert. Schon **20 € bis 50 € pro Monat** aus Kleinstbeträgen summieren sich auf mehrere hundert Euro im Jahr.
+4. Ein **Haushaltsbuch** oder eine einfache Ausgabenliste ist die Grundlage für echte Veränderungen.
+5. Wer Ersparnisse sofort sichert, macht aus guten Vorsätzen echte Ergebnisse.
 
 ---
 
@@ -81,7 +81,7 @@ Ein Beispiel:
 | ungenutztes Abo | 12,99 € | 155,88 € im Jahr |
 | spontane Lieferdienst-Bestellung 1× pro Woche | 18 € | 72 € im Monat |
 
-Die Summe daraus kann schnell bei **150 € bis 250 € im Monat** liegen. Nicht immer, aber oft deutlich näher dran, als man denkt.
+Die Summe daraus kann schnell bei **150 € bis 250 € im Monat** liegen als Modellwert. Nicht immer, aber oft deutlich näher dran, als man denkt.
 
 Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz großen Lebensentscheidung an, sondern bei den stillen Routinen dazwischen.
 
@@ -89,7 +89,7 @@ Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz 
 
 Ohne Überblick ist Sparen oft nur ein Bauchgefühl. Ein **Haushaltsbuch führen** klingt trocken, ist aber einer der wirksamsten Schritte überhaupt.
 
-Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:
+Du musst dafür kein Excel-Monster bauen im Rechenfall. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:
 
 - Miete und Nebenkosten
 - Strom, Gas, Internet, Handy
@@ -100,7 +100,7 @@ Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Mona
 
 ### Warum das so stark wirkt
 
-Viele Menschen wissen grob, wofür sie Geld ausgeben. Genaue Zahlen verändern aber die Perspektive. Erst wenn du schwarz auf weiß siehst, dass du **79 €** für Streaming, Apps und digitale Kleindienste zahlst, entsteht echter Handlungsdruck.
+Viele Menschen wissen grob, wofür sie Geld ausgeben im Rechenbeispiel. Genaue Zahlen verändern aber die Perspektive. Erst wenn du schwarz auf weiß siehst, dass du **79 €** für Streaming, Apps und digitale Kleindienste zahlst, entsteht echter Handlungsdruck.
 
 **Praxis-Tipp:** Fang nicht mit Perfektion an. Eine simple Notiz-App, eine Tabelle oder ein Zettel reichen völlig. Wichtig ist die Ehrlichkeit, nicht das Tool.
 
@@ -112,7 +112,7 @@ Nicht jeder Fehlkauf ist teuer. Aber viele Fehlkäufe zusammen sind es. Genau hi
 Für kleinere Käufe: Eine Nacht warten. Wenn du es morgen noch willst, schaust du neu drauf.
 
 ### Die 30-Tage-Regel
-Für alles ab etwa **50 €**: Erst auf eine Wunschliste, dann 30 Tage warten. In vielen Fällen verliert der Kauf bis dahin seinen Reiz.
+Für alles ab etwa **50 €**: Erst auf eine Wunschliste, dann 30 Tage warten als Modellannahme. In vielen Fällen verliert der Kauf bis dahin seinen Reiz.
 
 ### Warum das funktioniert
 
@@ -198,7 +198,7 @@ Darum gilt: Jede Ersparnis braucht einen festen Parkplatz.
 - Dauerauftrag direkt nach Gehaltseingang
 - gesparte Beträge aus Tarifwechseln sofort umleiten
 
-Wenn du durch Kündigungen und Vertragsoptimierung **45 € pro Monat** sparst, sollten genau diese **45 €** am besten automatisch weggeschoben werden. Sonst löst sich die Ersparnis fast immer wieder auf.
+Wenn du durch Kündigungen und Vertragsoptimierung **45 € pro Monat** sparst, sollten genau diese **45 €** am besten automatisch weggeschoben werden im Modellfall. Sonst löst sich die Ersparnis fast immer wieder auf.
 
 **Faustregel:** Frugalismus wird erst dann sichtbar, wenn gespartes Geld nicht nur theoretisch existiert, sondern getrennt liegt.
 
@@ -217,7 +217,7 @@ Das heißt nicht, dass du nie wieder unterwegs essen darfst. Es zeigt nur, wie s
 ## Welche Fehler Frugalismus unnötig schwer machen
 
 ### Fehler 1: Bei Kleinigkeiten sparen, große Brocken ignorieren
-Wer 30 Minuten über einen günstigeren Kaffee nachdenkt, aber 20 € pro Monat beim Handy verschenkt, arbeitet am falschen Ende.
+Wer 30 Minuten über einen günstigeren Kaffee nachdenkt, aber 20 € pro Monat beim Handy verschenkt, arbeitet am falschen Ende als Beispielwert.
 
 ### Fehler 2: Alles auf einmal ändern wollen
 Radikale Pläne halten selten lange. Ein Hebel pro Woche oder Monat ist oft klüger.
