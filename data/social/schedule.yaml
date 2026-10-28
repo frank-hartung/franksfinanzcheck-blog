@@ -1,5 +1,5 @@
 version: 1
-generated_at: '2026-10-27T22:22:53.613626+01:00'
+generated_at: '2026-10-28T06:29:52.247927+01:00'
 horizon_days: 14
 timezone: Europe/Berlin
 items:
@@ -676,10 +676,22 @@ items:
   status: published
   attempts: 1
   reason: ''
-- id: linkedin:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-10-28
+- id: mastodon:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:vergleich:2026-10-28
+  channel: mastodon
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+  angle: vergleich
+  kind: launch
+  pillar: frugalismus
+  date: '2026-10-28'
+  time: 07:30
+  scheduled_at: '2026-10-28T07:30:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: linkedin:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:zitat:2026-10-28
   channel: linkedin
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: zitat
   kind: launch
   pillar: frugalismus
   date: '2026-10-28'
@@ -688,10 +700,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-10-28
+- id: bluesky:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:vergleich:2026-10-28
   channel: bluesky
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: frugalismus
   date: '2026-10-28'
@@ -700,10 +712,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:nutzen:2026-10-28
+- id: x:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:takeaway:2026-10-28
   channel: x
   slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: frugalismus
   date: '2026-10-28'
@@ -712,10 +724,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:nutzen:2026-10-28
+- id: threads:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:takeaway:2026-10-28
   channel: threads
   slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: frugalismus
   date: '2026-10-28'
@@ -748,10 +760,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-10-28
+- id: bluesky:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:zitat:2026-10-28
   channel: bluesky
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: zitat
   kind: launch
   pillar: internet-dsl
   date: '2026-10-28'
@@ -760,10 +772,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-10-28
+- id: x:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:zahl:2026-10-28
   channel: x
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: zahl
   kind: launch
   pillar: internet-dsl
   date: '2026-10-28'
@@ -772,10 +784,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:nutzen:2026-10-28
+- id: facebook:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:zahl:2026-10-28
   channel: facebook
   slug: 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto
-  angle: nutzen
+  angle: zahl
   kind: launch
   pillar: konto-karten
   date: '2026-10-28'
@@ -784,10 +796,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:nutzen:2026-10-28
+- id: threads:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:mythos:2026-10-28
   channel: threads
   slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: strom-sparen
   date: '2026-10-28'
@@ -796,22 +808,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:zahl:2026-10-28
-  channel: mastodon
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  angle: zahl
-  kind: evergreen
-  pillar: internet-dsl
-  date: '2026-10-28'
-  time: '17:30'
-  scheduled_at: '2026-10-28T17:30:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: x:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:nutzen:2026-10-28
+- id: x:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:mythos:2026-10-28
   channel: x
   slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: strom-sparen
   date: '2026-10-28'
@@ -820,10 +820,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-10-29
+- id: mastodon:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:frage:2026-10-29
+  channel: mastodon
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  angle: frage
+  kind: evergreen
+  pillar: internet-dsl
+  date: '2026-10-29'
+  time: 07:30
+  scheduled_at: '2026-10-29T07:30:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: linkedin:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:frage:2026-10-29
   channel: linkedin
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: internet-dsl
   date: '2026-10-29'
@@ -832,10 +844,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:nutzen:2026-10-29
+- id: bluesky:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:vergleich:2026-10-29
   channel: bluesky
   slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: frugalismus
   date: '2026-10-29'
@@ -844,10 +856,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-10-29
+- id: x:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:mythos:2026-10-29
   channel: x
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: frugalismus
   date: '2026-10-29'
@@ -856,10 +868,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-10-29
+- id: threads:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:takeaway:2026-10-29
   channel: threads
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: frugalismus
   date: '2026-10-29'
@@ -868,10 +880,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:nutzen:2026-10-29
+- id: facebook:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:vergleich:2026-10-29
   channel: facebook
   slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: frugalismus
   date: '2026-10-29'
@@ -880,22 +892,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-29
-  channel: pinterest
-  slug: 2026-08-10-dsl-wechselbonus-sichern
-  angle: nutzen
-  kind: launch
-  pillar: internet-dsl
-  date: '2026-10-29'
-  time: '10:15'
-  scheduled_at: '2026-10-29T10:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: instagram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:nutzen:2026-10-29
+- id: instagram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:takeaway:2026-10-29
   channel: instagram
   slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-10-29'
@@ -904,10 +904,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:nutzen:2026-10-29
+- id: bluesky:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:frage:2026-10-29
   channel: bluesky
   slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-10-29'
@@ -916,10 +916,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:nutzen:2026-10-29
+- id: x:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:thread:2026-10-29
   channel: x
   slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  angle: nutzen
+  angle: thread
   kind: launch
   pillar: strom-sparen
   date: '2026-10-29'
@@ -928,10 +928,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:nutzen:2026-10-29
+- id: facebook:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:frage:2026-10-29
   channel: facebook
   slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-10-29'
@@ -940,10 +940,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-10-29
+- id: threads:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:vergleich:2026-10-29
   channel: threads
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: internet-dsl
   date: '2026-10-29'
@@ -952,10 +952,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:nutzen:2026-10-29
+- id: x:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:frage:2026-10-29
   channel: x
   slug: 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: konto-karten
   date: '2026-10-29'
@@ -964,10 +964,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:nutzen:2026-10-30
+- id: linkedin:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle:vergleich:2026-10-30
   channel: linkedin
   slug: 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: frugalismus
   date: '2026-10-30'
@@ -988,10 +988,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:takeaway:2026-10-30
+- id: x:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:nutzen:2026-10-30
   channel: x
   slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
-  angle: takeaway
+  angle: nutzen
   kind: launch
   pillar: strom-sparen
   date: '2026-10-30'
@@ -1000,10 +1000,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:nutzen:2026-10-30
+- id: threads:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:frage:2026-10-30
   channel: threads
   slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-10-30'
@@ -1012,10 +1012,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-10-30
+- id: facebook:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:vergleich:2026-10-30
   channel: facebook
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: frugalismus
   date: '2026-10-30'
@@ -1024,22 +1024,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-10-30
+- id: pinterest:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-10-30
   channel: pinterest
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  angle: nutzen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: takeaway
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-10-30'
   time: '10:15'
   scheduled_at: '2026-10-30T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-10-30
+- id: instagram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:frage:2026-10-30
   channel: instagram
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: frugalismus
   date: '2026-10-30'
@@ -1048,10 +1048,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:nutzen:2026-10-30
+- id: bluesky:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig:takeaway:2026-10-30
   channel: bluesky
   slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-10-30'
@@ -1060,22 +1060,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-30
+- id: x:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:thread:2026-10-30
   channel: x
-  slug: 2026-08-10-dsl-wechselbonus-sichern
-  angle: nutzen
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  angle: thread
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-10-30'
   time: '13:15'
   scheduled_at: '2026-10-30T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-10-30
+- id: facebook:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:vergleich:2026-10-30
   channel: facebook
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: internet-dsl
   date: '2026-10-30'
@@ -1084,10 +1084,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:nutzen:2026-10-30
+- id: threads:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:takeaway:2026-10-30
   channel: threads
   slug: 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: konto-karten
   date: '2026-10-30'
@@ -1108,34 +1108,34 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-31
+- id: bluesky:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:zahl:2026-10-31
   channel: bluesky
-  slug: 2026-08-10-dsl-wechselbonus-sichern
-  angle: nutzen
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  angle: zahl
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-10-31'
   time: 08:15
   scheduled_at: '2026-10-31T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-10-31
+- id: x:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:mythos:2026-10-31
   channel: x
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
-  angle: nutzen
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+  angle: mythos
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-10-31'
   time: 08:45
   scheduled_at: '2026-10-31T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:nutzen:2026-10-31
+- id: threads:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:takeaway:2026-10-31
   channel: threads
   slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-10-31'
@@ -1144,10 +1144,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:nutzen:2026-10-31
+- id: facebook:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:vergleich:2026-10-31
   channel: facebook
   slug: 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: strom-sparen
   date: '2026-10-31'
@@ -1156,22 +1156,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-10-31
+- id: pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-10-31
   channel: pinterest
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-10-31'
   time: '10:15'
   scheduled_at: '2026-10-31T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:zahl:2026-10-31
+- id: mastodon:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:mythos:2026-10-31
   channel: mastodon
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  angle: zahl
+  angle: mythos
   kind: evergreen
   pillar: konto-karten
   date: '2026-10-31'
@@ -1180,10 +1180,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-10-31
+- id: instagram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:karussell:2026-10-31
   channel: instagram
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: karussell
   kind: launch
   pillar: internet-dsl
   date: '2026-10-31'
@@ -1192,10 +1192,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:nutzen:2026-10-31
+- id: bluesky:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:takeaway:2026-10-31
   channel: bluesky
   slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-10-31'
@@ -1204,58 +1204,58 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-10-31
+- id: x:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-10-31
   channel: x
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  angle: nutzen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: takeaway
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-10-31'
   time: '13:15'
   scheduled_at: '2026-10-31T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-10-31
+- id: facebook:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:takeaway:2026-10-31
   channel: facebook
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
-  angle: nutzen
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+  angle: takeaway
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-10-31'
   time: '15:15'
   scheduled_at: '2026-10-31T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-31
+- id: threads:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-10-31
   channel: threads
-  slug: 2026-08-10-dsl-wechselbonus-sichern
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-10-31'
   time: '16:15'
   scheduled_at: '2026-10-31T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-10-31
+- id: x:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:thread:2026-10-31
   channel: x
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  angle: nutzen
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  angle: thread
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-10-31'
   time: '19:15'
   scheduled_at: '2026-10-31T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:nutzen:2026-11-01
+- id: telegram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt:vergleich:2026-11-01
   channel: telegram
   slug: 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: frugalismus
   date: '2026-11-01'
@@ -1264,24 +1264,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-01
+- id: bluesky:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:zahl:2026-11-01
   channel: bluesky
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
-  angle: nutzen
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+  angle: zahl
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-11-01'
   time: 08:15
   scheduled_at: '2026-11-01T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-01
+- id: x:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:mythos:2026-11-01
   channel: x
-  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  angle: nutzen
+  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  angle: mythos
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-01'
   time: 08:45
   scheduled_at: '2026-11-01T08:45:00+01:00'
@@ -1300,10 +1300,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:nutzen:2026-11-01
+- id: facebook:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:takeaway:2026-11-01
   channel: facebook
   slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
-  angle: nutzen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-11-01'
@@ -1312,12 +1312,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-01
+- id: pinterest:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-01
   channel: pinterest
-  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-01'
   time: '10:15'
   scheduled_at: '2026-11-01T10:15:00+01:00'
@@ -1336,10 +1336,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:nutzen:2026-11-01
+- id: bluesky:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:mythos:2026-11-01
   channel: bluesky
   slug: 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: strom-sparen
   date: '2026-11-01'
@@ -1348,58 +1348,58 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-01
+- id: x:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:thread:2026-11-01
   channel: x
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
-  angle: nutzen
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  angle: thread
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-11-01'
   time: '13:15'
   scheduled_at: '2026-11-01T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-01
+- id: facebook:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:vergleich:2026-11-01
   channel: facebook
-  slug: 2026-08-10-dsl-wechselbonus-sichern
-  angle: nutzen
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  angle: vergleich
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-01'
   time: '15:15'
   scheduled_at: '2026-11-01T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-01
+- id: threads:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:nutzen:2026-11-01
   channel: threads
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-11-01'
   time: '16:15'
   scheduled_at: '2026-11-01T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-01
+- id: x:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:frage:2026-11-01
   channel: x
-  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  angle: nutzen
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-01'
   time: '19:15'
   scheduled_at: '2026-11-01T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:nutzen:2026-11-02
+- id: linkedin:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:zahl:2026-11-02
   channel: linkedin
   slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
-  angle: nutzen
+  angle: zahl
   kind: launch
   pillar: strom-sparen
   date: '2026-11-02'
@@ -1408,10 +1408,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-02
+- id: bluesky:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-11-02
   channel: bluesky
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  angle: nutzen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: takeaway
   kind: launch
   pillar: internet-dsl
   date: '2026-11-02'
@@ -1420,15 +1420,87 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-02
+- id: x:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:frage:2026-11-02
   channel: x
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  angle: nutzen
+  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  angle: frage
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-02'
   time: 08:45
   scheduled_at: '2026-11-02T08:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: threads:2026-08-10-dsl-wechselbonus-sichern:mythos:2026-11-02
+  channel: threads
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: mythos
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-11-02'
+  time: 09:15
+  scheduled_at: '2026-11-02T09:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:vergleich:2026-11-02
+  channel: facebook
+  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  angle: vergleich
+  kind: launch
+  pillar: konto-karten
+  date: '2026-11-02'
+  time: 09:45
+  scheduled_at: '2026-11-02T09:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: mastodon:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:vergleich:2026-11-02
+  channel: mastodon
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  angle: vergleich
+  kind: evergreen
+  pillar: internet-dsl
+  date: '2026-11-02'
+  time: '11:30'
+  scheduled_at: '2026-11-02T11:30:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: bluesky:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:vergleich:2026-11-02
+  channel: bluesky
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  angle: vergleich
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-11-02'
+  time: '12:15'
+  scheduled_at: '2026-11-02T12:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: x:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-02
+  channel: x
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+  angle: nutzen
+  kind: launch
+  pillar: frugalismus
+  date: '2026-11-02'
+  time: '13:15'
+  scheduled_at: '2026-11-02T13:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:takeaway:2026-11-02
+  channel: facebook
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  angle: takeaway
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-11-02'
+  time: '15:15'
+  scheduled_at: '2026-11-02T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
@@ -1439,87 +1511,15 @@ items:
   kind: launch
   pillar: strom-sparen
   date: '2026-11-02'
-  time: 09:15
-  scheduled_at: '2026-11-02T09:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-02
-  channel: facebook
-  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  angle: nutzen
-  kind: launch
-  pillar: strom-sparen
-  date: '2026-11-02'
-  time: 09:45
-  scheduled_at: '2026-11-02T09:45:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: mastodon:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:zahl:2026-11-02
-  channel: mastodon
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
-  angle: zahl
-  kind: evergreen
-  pillar: internet-dsl
-  date: '2026-11-02'
-  time: '11:30'
-  scheduled_at: '2026-11-02T11:30:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: bluesky:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-02
-  channel: bluesky
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  angle: nutzen
-  kind: launch
-  pillar: strom-sparen
-  date: '2026-11-02'
-  time: '12:15'
-  scheduled_at: '2026-11-02T12:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: x:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-02
-  channel: x
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
-  angle: nutzen
-  kind: launch
-  pillar: internet-dsl
-  date: '2026-11-02'
-  time: '13:15'
-  scheduled_at: '2026-11-02T13:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-02
-  channel: facebook
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
-  angle: nutzen
-  kind: launch
-  pillar: frugalismus
-  date: '2026-11-02'
-  time: '15:15'
-  scheduled_at: '2026-11-02T15:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-02
-  channel: threads
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  angle: nutzen
-  kind: launch
-  pillar: internet-dsl
-  date: '2026-11-02'
   time: '16:15'
   scheduled_at: '2026-11-02T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:zahl:2026-11-02
+- id: mastodon:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:mythos:2026-11-02
   channel: mastodon
   slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
-  angle: zahl
+  angle: mythos
   kind: evergreen
   pillar: strom-sparen
   date: '2026-11-02'
@@ -1528,22 +1528,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-02
+- id: x:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-02
   channel: x
-  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-02'
   time: '19:15'
   scheduled_at: '2026-11-02T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:nutzen:2026-11-03
+- id: linkedin:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:frage:2026-11-03
   channel: linkedin
   slug: 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: konto-karten
   date: '2026-11-03'
@@ -1552,70 +1552,70 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-03
+- id: bluesky:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:vergleich:2026-11-03
   channel: bluesky
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
-  angle: nutzen
+  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  angle: vergleich
   kind: launch
-  pillar: frugalismus
+  pillar: konto-karten
   date: '2026-11-03'
   time: 08:15
   scheduled_at: '2026-11-03T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-03
+- id: x:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:frage:2026-11-03
   channel: x
-  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  angle: nutzen
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  angle: frage
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-03'
   time: 08:45
   scheduled_at: '2026-11-03T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-03
+- id: threads:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:frage:2026-11-03
   channel: threads
-  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  angle: nutzen
+  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-03'
   time: 09:15
   scheduled_at: '2026-11-03T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-03
+- id: facebook:2026-08-10-dsl-wechselbonus-sichern:frage:2026-11-03
   channel: facebook
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  angle: nutzen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-03'
   time: 09:45
   scheduled_at: '2026-11-03T09:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-03
+- id: pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:takeaway:2026-11-03
   channel: pinterest
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
-  angle: nutzen
+  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  angle: takeaway
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-03'
   time: '10:15'
   scheduled_at: '2026-11-03T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:nutzen:2026-11-03
+- id: instagram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken:frage:2026-11-03
   channel: instagram
   slug: 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-11-03'
@@ -1624,10 +1624,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-03
+- id: bluesky:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:vergleich:2026-11-03
   channel: bluesky
   slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: strom-sparen
   date: '2026-11-03'
@@ -1636,58 +1636,58 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nutzen:2026-11-03
+- id: x:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:mythos:2026-11-03
   channel: x
-  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  angle: nutzen
+  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  angle: mythos
   kind: launch
-  pillar: mietwagen
+  pillar: strom-sparen
   date: '2026-11-03'
   time: '13:15'
   scheduled_at: '2026-11-03T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-03
+- id: facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:zahl:2026-11-03
   channel: facebook
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  angle: nutzen
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  angle: zahl
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-11-03'
   time: '15:15'
   scheduled_at: '2026-11-03T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-03
+- id: threads:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:takeaway:2026-11-03
   channel: threads
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
-  angle: nutzen
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  angle: takeaway
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-11-03'
   time: '16:15'
   scheduled_at: '2026-11-03T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:nutzen:2026-11-03
+- id: x:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:zahl:2026-11-03
   channel: x
-  slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  angle: nutzen
+  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  angle: zahl
   kind: launch
-  pillar: frugalismus
+  pillar: konto-karten
   date: '2026-11-03'
   time: '19:15'
   scheduled_at: '2026-11-03T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:zahl:2026-11-04
+- id: mastodon:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:mythos:2026-11-04
   channel: mastodon
   slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  angle: zahl
+  angle: mythos
   kind: evergreen
   pillar: konto-karten
   date: '2026-11-04'
@@ -1708,48 +1708,48 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-04
+- id: bluesky:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:zahl:2026-11-04
   channel: bluesky
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  angle: nutzen
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  angle: zahl
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-04'
   time: 08:15
   scheduled_at: '2026-11-04T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:nutzen:2026-11-04
+- id: x:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:zahl:2026-11-04
   channel: x
-  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  angle: nutzen
+  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  angle: zahl
   kind: launch
-  pillar: strom-sparen
+  pillar: mietwagen
   date: '2026-11-04'
   time: 08:45
   scheduled_at: '2026-11-04T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-04
+- id: threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:frage:2026-11-04
   channel: threads
-  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  angle: nutzen
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-04'
   time: 09:15
   scheduled_at: '2026-11-04T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-04
+- id: facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:zahl:2026-11-04
   channel: facebook
-  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
-  angle: nutzen
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+  angle: zahl
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-11-04'
   time: 09:45
   scheduled_at: '2026-11-04T09:45:00+01:00'
@@ -1780,46 +1780,46 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:takeaway:2026-11-04
+- id: x:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:thread:2026-11-04
   channel: x
-  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
-  angle: takeaway
+  slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
+  angle: thread
   kind: launch
-  pillar: internet-dsl
+  pillar: frugalismus
   date: '2026-11-04'
   time: '13:15'
   scheduled_at: '2026-11-04T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-04
+- id: facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:takeaway:2026-11-04
   channel: facebook
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
-  angle: nutzen
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  angle: takeaway
   kind: launch
-  pillar: internet-dsl
+  pillar: konto-karten
   date: '2026-11-04'
   time: '15:15'
   scheduled_at: '2026-11-04T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-04
+- id: threads:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:zahl:2026-11-04
   channel: threads
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  angle: nutzen
+  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  angle: zahl
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-04'
   time: '16:15'
   scheduled_at: '2026-11-04T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutzen:2026-11-04
+- id: x:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:frage:2026-11-04
   channel: x
-  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
-  angle: nutzen
+  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-11-04'
@@ -1828,33 +1828,33 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-05
+- id: linkedin:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:vergleich:2026-11-05
   channel: linkedin
-  slug: 2026-08-10-dsl-wechselbonus-sichern
-  angle: nutzen
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  angle: vergleich
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-05'
   time: 07:45
   scheduled_at: '2026-11-05T07:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-05
+- id: bluesky:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:mythos:2026-11-05
   channel: bluesky
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
-  angle: nutzen
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+  angle: mythos
   kind: launch
-  pillar: internet-dsl
+  pillar: frugalismus
   date: '2026-11-05'
   time: 08:15
   scheduled_at: '2026-11-05T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:nutzen:2026-11-05
+- id: x:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:nutzen:2026-11-05
   channel: x
-  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
   angle: nutzen
   kind: launch
   pillar: internet-dsl
@@ -1864,12 +1864,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-05
+- id: threads:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-05
   channel: threads
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: frugalismus
   date: '2026-11-05'
   time: 09:15
   scheduled_at: '2026-11-05T09:15:00+01:00'
@@ -1888,22 +1888,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-05
+- id: pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:takeaway:2026-11-05
   channel: pinterest
-  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  angle: nutzen
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  angle: takeaway
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-05'
   time: '10:15'
   scheduled_at: '2026-11-05T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:nutzen:2026-11-05
+- id: instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto:karussell:2026-11-05
   channel: instagram
   slug: 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto
-  angle: nutzen
+  angle: karussell
   kind: launch
   pillar: konto-karten
   date: '2026-11-05'
@@ -1912,70 +1912,70 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-05
+- id: bluesky:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:zahl:2026-11-05
   channel: bluesky
-  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
-  angle: nutzen
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  angle: zahl
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-05'
   time: '12:15'
   scheduled_at: '2026-11-05T12:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:nutzen:2026-11-05
+- id: x:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:mythos:2026-11-05
   channel: x
-  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
-  angle: nutzen
+  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  angle: mythos
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-05'
   time: '13:15'
   scheduled_at: '2026-11-05T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-05
+- id: facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:vergleich:2026-11-05
   channel: facebook
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  angle: nutzen
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  angle: vergleich
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-05'
   time: '15:15'
   scheduled_at: '2026-11-05T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-05
+- id: threads:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:zahl:2026-11-05
   channel: threads
-  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
-  angle: nutzen
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  angle: zahl
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-05'
   time: '16:15'
   scheduled_at: '2026-11-05T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:nutzen:2026-11-05
+- id: x:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:mythos:2026-11-05
   channel: x
-  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
-  angle: nutzen
+  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  angle: mythos
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-05'
   time: '19:15'
   scheduled_at: '2026-11-05T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:nutzen:2026-11-06
+- id: linkedin:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:zahl:2026-11-06
   channel: linkedin
   slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
-  angle: nutzen
+  angle: zahl
   kind: launch
   pillar: strom-sparen
   date: '2026-11-06'
@@ -1984,70 +1984,70 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-06
+- id: bluesky:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:mythos:2026-11-06
   channel: bluesky
-  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  angle: nutzen
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  angle: mythos
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-06'
   time: 08:15
   scheduled_at: '2026-11-06T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:nutzen:2026-11-06
+- id: x:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:nutzen:2026-11-06
   channel: x
-  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
+  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: konto-karten
   date: '2026-11-06'
   time: 08:45
   scheduled_at: '2026-11-06T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-06
+- id: threads:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:frage:2026-11-06
   channel: threads
-  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  angle: nutzen
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  angle: frage
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-06'
   time: 09:15
   scheduled_at: '2026-11-06T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:nutzen:2026-11-06
+- id: facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:vergleich:2026-11-06
   channel: facebook
-  slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  angle: nutzen
+  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  angle: vergleich
   kind: launch
-  pillar: frugalismus
+  pillar: konto-karten
   date: '2026-11-06'
   time: 09:45
   scheduled_at: '2026-11-06T09:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-06
+- id: pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:takeaway:2026-11-06
   channel: pinterest
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
-  angle: nutzen
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  angle: takeaway
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-11-06'
   time: '10:15'
   scheduled_at: '2026-11-06T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:nutzen:2026-11-06
+- id: instagram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick:mythos:2026-11-06
   channel: instagram
   slug: 2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: strom-sparen
   date: '2026-11-06'
@@ -2056,58 +2056,58 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nutzen:2026-11-06
+- id: bluesky:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-06
   channel: bluesky
-  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: strom-sparen
   date: '2026-11-06'
   time: '12:15'
   scheduled_at: '2026-11-06T12:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-11-06
+- id: x:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:nutzen:2026-11-06
   channel: x
-  slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
+  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: strom-sparen
   date: '2026-11-06'
   time: '13:15'
   scheduled_at: '2026-11-06T13:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:nutzen:2026-11-06
+- id: facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nutzen:2026-11-06
   channel: facebook
-  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: mietwagen
   date: '2026-11-06'
   time: '15:15'
   scheduled_at: '2026-11-06T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nutzen:2026-11-06
+- id: threads:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:frage:2026-11-06
   channel: threads
-  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  angle: nutzen
+  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  angle: frage
   kind: launch
-  pillar: mietwagen
+  pillar: strom-sparen
   date: '2026-11-06'
   time: '16:15'
   scheduled_at: '2026-11-06T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:zahl:2026-11-06
+- id: x:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:mythos:2026-11-06
   channel: x
-  slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
-  angle: zahl
+  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
+  angle: mythos
   kind: launch
   pillar: internet-dsl
   date: '2026-11-06'
@@ -2116,58 +2116,58 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:nutzen:2026-11-07
+- id: bluesky:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:frage:2026-11-07
   channel: bluesky
-  slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  angle: nutzen
+  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  angle: frage
   kind: launch
-  pillar: frugalismus
+  pillar: konto-karten
   date: '2026-11-07'
   time: 08:15
   scheduled_at: '2026-11-07T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:nutzen:2026-11-07
+- id: x:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:mythos:2026-11-07
   channel: x
-  slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
-  angle: nutzen
+  slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
+  angle: mythos
   kind: launch
-  pillar: konto-karten
+  pillar: mietwagen
   date: '2026-11-07'
   time: 08:45
   scheduled_at: '2026-11-07T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:nutzen:2026-11-07
+- id: threads:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-07
   channel: threads
-  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: konto-karten
   date: '2026-11-07'
   time: 09:15
   scheduled_at: '2026-11-07T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-07
+- id: facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:vergleich:2026-11-07
   channel: facebook
-  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  angle: nutzen
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  angle: vergleich
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-07'
   time: 09:45
   scheduled_at: '2026-11-07T09:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:zahl:2026-11-07
+- id: mastodon:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:zitat:2026-11-07
   channel: mastodon
   slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  angle: zahl
+  angle: zitat
   kind: evergreen
   pillar: frugalismus
   date: '2026-11-07'
@@ -2176,34 +2176,34 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-07
+- id: instagram:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:mythos:2026-11-07
   channel: instagram
-  slug: 2026-08-10-dsl-wechselbonus-sichern
-  angle: nutzen
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  angle: mythos
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-07'
   time: '11:45'
   scheduled_at: '2026-11-07T11:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:nutzen:2026-11-07
+- id: bluesky:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:zahl:2026-11-07
   channel: bluesky
-  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  angle: nutzen
+  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  angle: zahl
   kind: launch
-  pillar: strom-sparen
+  pillar: mietwagen
   date: '2026-11-07'
   time: '12:15'
   scheduled_at: '2026-11-07T12:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen:nutzen:2026-11-07
+- id: x:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:frage:2026-11-07
   channel: x
-  slug: 2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen
-  angle: nutzen
+  slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
+  angle: frage
   kind: launch
   pillar: internet-dsl
   date: '2026-11-07'
@@ -2212,34 +2212,34 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nutzen:2026-11-07
+- id: facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:zahl:2026-11-07
   channel: facebook
-  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  angle: nutzen
+  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  angle: zahl
   kind: launch
-  pillar: mietwagen
+  pillar: strom-sparen
   date: '2026-11-07'
   time: '15:15'
   scheduled_at: '2026-11-07T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutzen:2026-11-07
+- id: threads:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:frage:2026-11-07
   channel: threads
-  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
-  angle: nutzen
+  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  angle: frage
   kind: launch
-  pillar: strom-sparen
+  pillar: mietwagen
   date: '2026-11-07'
   time: '16:15'
   scheduled_at: '2026-11-07T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:zahl:2026-11-07
+- id: mastodon:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:frage:2026-11-07
   channel: mastodon
   slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  angle: zahl
+  angle: frage
   kind: evergreen
   pillar: strom-sparen
   date: '2026-11-07'
@@ -2248,22 +2248,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:nutzen:2026-11-07
+- id: x:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:zahl:2026-11-07
   channel: x
-  slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
-  angle: nutzen
+  slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  angle: zahl
   kind: launch
-  pillar: frugalismus
+  pillar: konto-karten
   date: '2026-11-07'
   time: '19:15'
   scheduled_at: '2026-11-07T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:nutzen:2026-11-08
+- id: telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle:frage:2026-11-08
   channel: telegram
   slug: 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: internet-dsl
   date: '2026-11-08'
@@ -2272,34 +2272,34 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:nutzen:2026-11-08
+- id: bluesky:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:vergleich:2026-11-08
   channel: bluesky
-  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
-  angle: nutzen
+  slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
+  angle: vergleich
   kind: launch
-  pillar: internet-dsl
+  pillar: frugalismus
   date: '2026-11-08'
   time: 08:15
   scheduled_at: '2026-11-08T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:nutzen:2026-11-08
+- id: x:2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen:mythos:2026-11-08
   channel: x
-  slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
-  angle: nutzen
+  slug: 2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen
+  angle: mythos
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-08'
   time: 08:45
   scheduled_at: '2026-11-08T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:nutzen:2026-11-08
+- id: threads:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:mythos:2026-11-08
   channel: threads
   slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: frugalismus
   date: '2026-11-08'
@@ -2308,10 +2308,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:nutzen:2026-11-08
+- id: facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:frage:2026-11-08
   channel: facebook
   slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: internet-dsl
   date: '2026-11-08'
@@ -2320,22 +2320,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-08
+- id: pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-08
   channel: pinterest
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-11-08'
   time: '10:15'
   scheduled_at: '2026-11-08T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:nutzen:2026-11-08
+- id: instagram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:mythos:2026-11-08
   channel: instagram
   slug: 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks
-  angle: nutzen
+  angle: mythos
   kind: launch
   pillar: strom-sparen
   date: '2026-11-08'
@@ -2344,10 +2344,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutzen:2026-11-08
+- id: bluesky:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:takeaway:2026-11-08
   channel: bluesky
-  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
-  angle: nutzen
+  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  angle: takeaway
   kind: launch
   pillar: strom-sparen
   date: '2026-11-08'
@@ -2356,9 +2356,9 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:zahl:2026-11-08
+- id: x:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:zahl:2026-11-08
   channel: x
-  slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
   angle: zahl
   kind: launch
   pillar: frugalismus
@@ -2368,10 +2368,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutzen:2026-11-08
+- id: facebook:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:frage:2026-11-08
   channel: facebook
   slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-11-08'
@@ -2380,10 +2380,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:nutzen:2026-11-08
+- id: threads:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:frage:2026-11-08
   channel: threads
   slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  angle: nutzen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-11-08'
@@ -2392,22 +2392,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:takeaway:2026-11-08
+- id: x:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:takeaway:2026-11-08
   channel: x
-  slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
   angle: takeaway
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-08'
   time: '19:15'
   scheduled_at: '2026-11-08T19:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:zahl:2026-11-09
+- id: mastodon:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:frage:2026-11-09
   channel: mastodon
   slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
-  angle: zahl
+  angle: frage
   kind: evergreen
   pillar: internet-dsl
   date: '2026-11-09'
@@ -2416,21 +2416,21 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-09
+- id: linkedin:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:nutzen:2026-11-09
   channel: linkedin
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-11-09'
   time: 07:45
   scheduled_at: '2026-11-09T07:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:nutzen:2026-11-09
+- id: bluesky:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:nutzen:2026-11-09
   channel: bluesky
-  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
   angle: nutzen
   kind: launch
   pillar: internet-dsl
@@ -2440,9 +2440,9 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:nutzen:2026-11-09
+- id: x:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:nutzen:2026-11-09
   channel: x
-  slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
+  slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   angle: nutzen
   kind: launch
   pillar: frugalismus
@@ -2464,46 +2464,46 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:nutzen:2026-11-09
+- id: facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:takeaway:2026-11-09
   channel: facebook
-  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
-  angle: nutzen
+  slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
+  angle: takeaway
   kind: launch
-  pillar: internet-dsl
+  pillar: frugalismus
   date: '2026-11-09'
   time: 09:45
   scheduled_at: '2026-11-09T09:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-09
+- id: instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen:karussell:2026-11-09
   channel: instagram
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
-  angle: nutzen
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+  angle: karussell
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-11-09'
   time: '11:45'
   scheduled_at: '2026-11-09T11:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:nutzen:2026-11-09
+- id: bluesky:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nutzen:2026-11-09
   channel: bluesky
-  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
+  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-09'
   time: '12:15'
   scheduled_at: '2026-11-09T12:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:nutzen:2026-11-09
+- id: x:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:frage:2026-11-09
   channel: x
-  slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
-  angle: nutzen
+  slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-11-09'
@@ -2512,10 +2512,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:nutzen:2026-11-09
+- id: facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:frage:2026-11-09
   channel: facebook
-  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
-  angle: nutzen
+  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  angle: frage
   kind: launch
   pillar: strom-sparen
   date: '2026-11-09'
@@ -2524,22 +2524,22 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:nutzen:2026-11-09
+- id: threads:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:vergleich:2026-11-09
   channel: threads
-  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
-  angle: nutzen
+  slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  angle: vergleich
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-09'
   time: '16:15'
   scheduled_at: '2026-11-09T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag:nutzen:2026-11-09
+- id: x:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:thread:2026-11-09
   channel: x
-  slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
-  angle: nutzen
+  slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
+  angle: thread
   kind: launch
   pillar: frugalismus
   date: '2026-11-09'
@@ -2548,10 +2548,10 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:nutzen:2026-11-10
+- id: linkedin:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks:vergleich:2026-11-10
   channel: linkedin
   slug: 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: strom-sparen
   date: '2026-11-10'
@@ -2560,46 +2560,46 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:nutzen:2026-11-10
+- id: bluesky:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:mythos:2026-11-10
   channel: bluesky
-  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
-  angle: nutzen
+  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  angle: mythos
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-10'
   time: 08:15
   scheduled_at: '2026-11-10T08:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:nutzen:2026-11-10
+- id: x:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:mythos:2026-11-10
   channel: x
-  slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
-  angle: nutzen
+  slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  angle: mythos
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-11-10'
   time: 08:45
   scheduled_at: '2026-11-10T08:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:nutzen:2026-11-10
+- id: threads:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:vergleich:2026-11-10
   channel: threads
-  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
-  angle: nutzen
+  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+  angle: vergleich
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-10'
   time: 09:15
   scheduled_at: '2026-11-10T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:nutzen:2026-11-10
+- id: facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:vergleich:2026-11-10
   channel: facebook
   slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
-  angle: nutzen
+  angle: vergleich
   kind: launch
   pillar: internet-dsl
   date: '2026-11-10'
@@ -2608,46 +2608,46 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-10
+- id: pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:vergleich:2026-11-10
   channel: pinterest
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
-  angle: nutzen
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  angle: vergleich
   kind: launch
-  pillar: internet-dsl
+  pillar: konto-karten
   date: '2026-11-10'
   time: '10:15'
   scheduled_at: '2026-11-10T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-10
+- id: instagram:2026-08-10-dsl-wechselbonus-sichern:mythos:2026-11-10
   channel: instagram
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  angle: nutzen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: mythos
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-10'
   time: '11:45'
   scheduled_at: '2026-11-10T11:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: bluesky:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:nutzen:2026-11-10
+- id: bluesky:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:vergleich:2026-11-10
   channel: bluesky
-  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
-  angle: nutzen
+  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
+  angle: vergleich
   kind: launch
-  pillar: internet-dsl
+  pillar: konto-karten
   date: '2026-11-10'
   time: '12:15'
   scheduled_at: '2026-11-10T12:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026:nutzen:2026-11-10
+- id: x:2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag:zahl:2026-11-10
   channel: x
-  slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
-  angle: nutzen
+  slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  angle: zahl
   kind: launch
   pillar: frugalismus
   date: '2026-11-10'
@@ -2656,34 +2656,34 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:nutzen:2026-11-10
+- id: facebook:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:vergleich:2026-11-10
   channel: facebook
-  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
-  angle: nutzen
+  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
+  angle: vergleich
   kind: launch
-  pillar: konto-karten
+  pillar: strom-sparen
   date: '2026-11-10'
   time: '15:15'
   scheduled_at: '2026-11-10T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:nutzen:2026-11-10
+- id: threads:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:mythos:2026-11-10
   channel: threads
-  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
-  angle: nutzen
+  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
+  angle: mythos
   kind: launch
-  pillar: internet-dsl
+  pillar: konto-karten
   date: '2026-11-10'
   time: '16:15'
   scheduled_at: '2026-11-10T16:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: x:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:nutzen:2026-11-10
+- id: x:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:frage:2026-11-10
   channel: x
-  slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
-  angle: nutzen
+  slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
+  angle: frage
   kind: launch
   pillar: internet-dsl
   date: '2026-11-10'
@@ -2692,6 +2692,150 @@ items:
   status: planned
   attempts: 0
   reason: ''
-gate_sperrungen: {}
-quarantaene_gehoben:
-- mastodon|2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+- id: mastodon:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:mythos:2026-11-11
+  channel: mastodon
+  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
+  angle: mythos
+  kind: evergreen
+  pillar: internet-dsl
+  date: '2026-11-11'
+  time: 07:30
+  scheduled_at: '2026-11-11T07:30:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: linkedin:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-11-11
+  channel: linkedin
+  slug: 2026-08-10-dsl-wechselbonus-sichern
+  angle: takeaway
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-11-11'
+  time: 07:45
+  scheduled_at: '2026-11-11T07:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: bluesky:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:zitat:2026-11-11
+  channel: bluesky
+  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
+  angle: zitat
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-11-11'
+  time: 08:15
+  scheduled_at: '2026-11-11T08:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: x:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026:takeaway:2026-11-11
+  channel: x
+  slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  angle: takeaway
+  kind: launch
+  pillar: frugalismus
+  date: '2026-11-11'
+  time: 08:45
+  scheduled_at: '2026-11-11T08:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: threads:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt:vergleich:2026-11-11
+  channel: threads
+  slug: 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt
+  angle: vergleich
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-11-11'
+  time: 09:15
+  scheduled_at: '2026-11-11T09:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: facebook:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen:vergleich:2026-11-11
+  channel: facebook
+  slug: 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen
+  angle: vergleich
+  kind: launch
+  pillar: konto-karten
+  date: '2026-11-11'
+  time: 09:45
+  scheduled_at: '2026-11-11T09:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:frage:2026-11-11
+  channel: instagram
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  angle: frage
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-11-11'
+  time: '11:45'
+  scheduled_at: '2026-11-11T11:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: bluesky:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:frage:2026-11-11
+  channel: bluesky
+  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
+  angle: frage
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-11-11'
+  time: '12:15'
+  scheduled_at: '2026-11-11T12:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: x:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:zahl:2026-11-11
+  channel: x
+  slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
+  angle: zahl
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-11-11'
+  time: '13:15'
+  scheduled_at: '2026-11-11T13:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: facebook:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:takeaway:2026-11-11
+  channel: facebook
+  slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
+  angle: takeaway
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-11-11'
+  time: '15:15'
+  scheduled_at: '2026-11-11T15:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: threads:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte:mythos:2026-11-11
+  channel: threads
+  slug: 2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte
+  angle: mythos
+  kind: launch
+  pillar: internet-dsl
+  date: '2026-11-11'
+  time: '16:15'
+  scheduled_at: '2026-11-11T16:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: x:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich:mythos:2026-11-11
+  channel: x
+  slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+  angle: mythos
+  kind: launch
+  pillar: frugalismus
+  date: '2026-11-11'
+  time: '19:15'
+  scheduled_at: '2026-11-11T19:15:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+quarantaene:
+  mastodon|2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026: 'L9 Zahl
+    ohne Beleg im Artikel: 503020'
