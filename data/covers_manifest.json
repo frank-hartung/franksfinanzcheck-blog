@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-10-21T13:40:22+00:00",
+  "ts": "2026-10-28T14:59:22+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1427,6 +1427,15 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-28-dsl-und-internet-flat-guenstig-sichern": {
+  "title": "DSL- und Internet-Flat günstig sichern",
+  "ts": "2026-10-28T14:59:34+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
    "savings": ""
   }
  }
