@@ -190,7 +190,9 @@ jobs:
             > /tmp/seo-paritaet-summary.md 2> /tmp/seo-paritaet.log
           code=$?
           cat /tmp/seo-paritaet.log
-          cat /tmp/seo-paritaet-summary.md >> "$GITHUB_STEP_SUMMARY"
+          # Stirbt das Skript vor dem Bericht, gibt es nichts anzuzeigen.
+          [ -s /tmp/seo-paritaet-summary.md ] \
+            && cat /tmp/seo-paritaet-summary.md >> "$GITHUB_STEP_SUMMARY"
           if [ "$code" -ne 0 ]; then
             # Die erste echte Fehlerzeile gehört in die Annotation: Wer sie
             # nicht sieht, lädt ein Artefakt herunter, das er nicht braucht.
@@ -278,7 +280,8 @@ jobs:
             > /tmp/seo-paritaet-build-summary.md 2> /tmp/seo-paritaet-build.log
           code=$?
           cat /tmp/seo-paritaet-build.log
-          cat /tmp/seo-paritaet-build-summary.md >> "$GITHUB_STEP_SUMMARY"
+          [ -s /tmp/seo-paritaet-build-summary.md ] \
+            && cat /tmp/seo-paritaet-build-summary.md >> "$GITHUB_STEP_SUMMARY"
           if [ "$code" != "0" ]; then
             if grep -q '^Traceback' /tmp/seo-paritaet-build.log 2>/dev/null; then
               zeile="$(grep -v '^[[:space:]]*$' /tmp/seo-paritaet-build.log | tail -n 2 | tr '\n' ' ')"
