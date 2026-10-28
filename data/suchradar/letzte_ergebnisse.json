@@ -1,27 +1,28 @@
 {
- "zeitstempel": "2026-10-27T13:11:24.820176+02:00",
+ "zeitstempel": "2026-10-28T13:50:04.081433+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 22,
+  "ok": 19,
   "cache": 0,
-  "fehler": 3,
+  "fehler": 6,
   "uebersprungen": 0
  },
- "treffer_gesamt": 175,
- "treffer_organisch": 0,
+ "treffer_gesamt": 154,
+ "treffer_organisch": 10,
  "datenqualitaet": {
-  "anfragen_erfolgreich": 22,
-  "anfragen_organisch": 0,
-  "anfragen_rueckfall": 22,
-  "treffer_gesamt": 175,
-  "treffer_organisch": 0,
-  "treffer_rueckfall": 175,
-  "rueckfall_anteil": 1.0,
+  "anfragen_erfolgreich": 19,
+  "anfragen_organisch": 1,
+  "anfragen_rueckfall": 18,
+  "treffer_gesamt": 154,
+  "treffer_organisch": 10,
+  "treffer_rueckfall": 144,
+  "rueckfall_anteil": 0.935,
   "anbieter": {
-   "wikipedia": 22
+   "wikipedia": 18,
+   "searxng": 1
   },
-  "aussagekraft": "keine"
+  "aussagekraft": "eingeschraenkt"
  },
  "fehler": [
   {
@@ -31,6 +32,18 @@
   {
    "anfrage": "Gaskosten senken",
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Kündigungsfristen Strom",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Kündigungsfristen Strom': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Mietwagen günstig buchen",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Mietwagen günstig buchen': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Schufa Eintrag löschen",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Schufa Eintrag löschen': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Seniorenkonto",
@@ -55,7 +68,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "wikipedia",
+   "quelle": "searxng",
    "sichtbar": false
   },
   {
@@ -89,26 +102,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Kündigungsfristen Strom",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Mietwagen günstig buchen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Notgroschen aufbauen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -120,26 +113,6 @@
   },
   {
    "anfrage": "SF-Klasse retten",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Schufa",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Schufa Eintrag löschen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -239,6 +212,16 @@
    "sichtbar": false
   },
   {
+   "anfrage": "Smart-Plug",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
    "anfrage": "Stromanbieter wechseln",
    "eigener_rang": 0,
    "vorher": 0,
@@ -260,11 +243,113 @@
   }
  ],
  "wettbewerb": {
-  "domaenen": [],
-  "domaenen_gesamt": 0,
+  "domaenen": [
+   {
+    "domaene": "ing.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 1,
+    "durchschnitts_rang": 1.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "sparkasse.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 2,
+    "durchschnitts_rang": 2.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "lexware.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 3,
+    "durchschnitts_rang": 3.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "bank99.at",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 4,
+    "durchschnitts_rang": 4.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "peaks.com",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 5,
+    "durchschnitts_rang": 5.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "mlp-financify.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 6,
+    "durchschnitts_rang": 6.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "meetadam.io",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 7,
+    "durchschnitts_rang": 7.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "fonio.ai",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 8,
+    "durchschnitts_rang": 8.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "vr.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 9,
+    "durchschnitts_rang": 9.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "accountable.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 10,
+    "durchschnitts_rang": 10.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   }
+  ],
+  "domaenen_gesamt": 10,
   "merkmale": {}
  },
  "quota": {
-  "wikipedia": 22
+  "searxng": 1,
+  "wikipedia": 18
  }
 }

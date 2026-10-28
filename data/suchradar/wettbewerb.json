@@ -1,6 +1,107 @@
 {
- "stand": "2026-10-27T13:11:24.820176+02:00",
- "domaenen": [],
- "domaenen_gesamt": 0,
+ "stand": "2026-10-28T13:50:04.081433+02:00",
+ "domaenen": [
+  {
+   "domaene": "ing.de",
+   "treffer": 1,
+   "top3": 1,
+   "bester_rang": 1,
+   "durchschnitts_rang": 1.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "sparkasse.de",
+   "treffer": 1,
+   "top3": 1,
+   "bester_rang": 2,
+   "durchschnitts_rang": 2.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "lexware.de",
+   "treffer": 1,
+   "top3": 1,
+   "bester_rang": 3,
+   "durchschnitts_rang": 3.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "bank99.at",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 4,
+   "durchschnitts_rang": 4.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "peaks.com",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 5,
+   "durchschnitts_rang": 5.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "mlp-financify.de",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 6,
+   "durchschnitts_rang": 6.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "meetadam.io",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 7,
+   "durchschnitts_rang": 7.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "fonio.ai",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 8,
+   "durchschnitts_rang": 8.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "vr.de",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 9,
+   "durchschnitts_rang": 9.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  },
+  {
+   "domaene": "accountable.de",
+   "treffer": 1,
+   "top3": 0,
+   "bester_rang": 10,
+   "durchschnitts_rang": 10.0,
+   "anfragen": [
+    "Fixkosten senken"
+   ]
+  }
+ ],
+ "domaenen_gesamt": 10,
  "merkmale": {}
 }

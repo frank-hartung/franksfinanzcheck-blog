@@ -68,6 +68,9 @@ on:
       - "scripts/linktext_wache.py"
       - "scripts/tests/test_linktext_wache.py"
       - "tools/seo-cockpit/**"
+      - "tools/seo-spider/**"
+      - "scripts/seo_spider.py"
+      - ".github/workflows/seo-spider-weekly.yml"
       - "scripts/manifest_guard.py"
       - "scripts/tests/test_manifest_guard.py"
       - "scripts/tabellen_lesbarkeit_guard.py"
@@ -220,6 +223,9 @@ jobs:
 
       - name: Metadaten-Wache – Quelle (Titel, Description, Belege)
         run: python3 scripts/metadaten_wache.py
+
+      - name: SEO Spider – Parser, URL-Sicherheit und Crawl-Logik
+        run: npm run test:seo:spider
 
       - name: E2E-Suite ausführen
         run: npx playwright test

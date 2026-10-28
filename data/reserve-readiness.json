@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 5,
   "pool_size": 6,
-  "generated_at": "2026-10-28T11:41:48Z",
+  "generated_at": "2026-10-28T12:51:59Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -77,10 +77,10 @@
       "ready": true,
       "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
       "flesch": 61.6,
-      "measured_at": "2026-10-28T11:41:48Z",
-      "score": 0.956,
+      "measured_at": "2026-10-28T12:51:59Z",
+      "score": 0.952,
       "parts": {
-        "spelling": 0.96,
+        "spelling": 0.94,
         "meta": 0.85,
         "structure": 1.0,
         "typography": 0.96,
@@ -114,10 +114,12 @@
     }
   ],
   "measurement": {
-    "kind": "partial"
+    "kind": "partial",
+    "run_id": "40690975794",
+    "run_attempt": "1"
   },
   "recert": {
-    "at": "2026-10-28T11:41:48Z",
+    "at": "2026-10-28T12:51:59Z",
     "renewed": [
       "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
     ],
