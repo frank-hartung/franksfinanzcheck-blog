@@ -146,7 +146,7 @@ Ein fester Termin im Kalender hilft dabei, diese Aufgabe nicht ständig vor sich
 ## Was ist passiert?
 Du hast einen Nachmittag reserviert, um deine wichtigsten Verträge zu prüfen. Zuerst holst du alle Unterlagen aus den Ordnern oder suchst die Logins für deine Online-Konten heraus. Du schaust dir die Rechnung für Strom an und vergleichst die Kosten mit aktuellen Angeboten. Dabei achtest du nicht nur auf den monatlichen Abschlag, sondern prüfst den Preis pro Kilowattstunde ganz genau.
 
-Auch die Gesamtlage zählt. Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt. Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten. Der Abstand zu aktuellen Angeboten ist von Fall zu Fall verschieden. Nur der konkrete Vergleich zeigt deine Zahl.
+Auch die Gesamtlage zählt. Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt. Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten. Der Abstand zu aktuellen Angeboten ist von Fall zu Fall verschieden. Nur der konkrete Vergleich zeigt deine Zahl.
 
 Du prüfst die Bedingungen deiner Versicherung und suchst nach günstigeren Angeboten mit gleicher oder besserer Leistung. Gerade bei der Haftpflicht oder der Hausrat gibt es oft neue Tarife. Manche bieten mehr Schutz für weniger Geld.
 

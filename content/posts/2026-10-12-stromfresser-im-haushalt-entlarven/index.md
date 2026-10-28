@@ -152,10 +152,10 @@ Fehler vier: Du kontrollierst deine Erfolge nicht. Ohne Check schleicht sich der
 
 Um diese Fallen zu umgehen, gehst du nach Plan vor:
 
-1.  **Kosten sehen** – Erfasse alle Positionen in deiner Stromrechnung genau.
-2.  **Konditionen rechnen** – Nutze ein Messgerät für die einzelnen Geräte im Haus.
-3.  **Kündigungsfenster sichern** – Prüfe, ob du den Anbieter wechseln solltest.
-4.  **Kurs halten** – Setze dir einen Termin für den Check im nächsten Quartal.
+1. **Kosten sehen** – Erfasse alle Positionen in deiner Stromrechnung genau.
+2. **Konditionen rechnen** – Nutze ein Messgerät für die einzelnen Geräte im Haus.
+3. **Kündigungsfenster sichern** – Prüfe, ob du den Anbieter wechseln solltest.
+4. **Kurs halten** – Setze dir einen Termin für den Check im nächsten Quartal.
 
 Wenn du diese Schritte befolgst, bleibt dein Plan stabil. Du handelst mit Wissen statt mit Vermutungen. So bleibt am Ende des Monats mehr Geld auf dem Konto.
 

@@ -50,7 +50,7 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „[Preisgarantie Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/): Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -147,7 +147,7 @@ Bei 18.000 kWh wären das für ein volles Jahr **270 €**. Gilt der neue Preis
 
 Notiere deshalb zum Änderungsdatum den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
 
-![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 

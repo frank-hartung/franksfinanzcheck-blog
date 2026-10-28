@@ -97,7 +97,7 @@ Eine Alternative ist ein VPN direkt auf dem Router. Dann nutzen alle Geräte im 
 
 Die Preise schwanken stark, je nach Anbieter, Laufzeit und Anzahl der erlaubten Geräte. Eine Preisliste im Artikel wäre schon nach kurzer Zeit überholt. Deshalb rechnen wir mit einer Annahme, die du mit dem Tarif deines Favoriten ersetzen kannst.
 
-Angenommen, ein Abo kostet 5 € im Monat; dann sind das 60 € im Jahr.
+Angenommen, ein Abo kostet 5 € im Monat; dann sind das 60 € im Jahr.
 
 Der Preis im ersten Vertragsjahr ist häufig nicht der Preis, den du später zahlst. Lockangebote gelten oft nur für die erste Laufzeit. Danach springt der Vertrag in einen teureren Standardtarif, wenn du nicht rechtzeitig kündigst. Notiere dir deshalb das Vertragsende und die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) direkt bei Vertragsbeginn.
 

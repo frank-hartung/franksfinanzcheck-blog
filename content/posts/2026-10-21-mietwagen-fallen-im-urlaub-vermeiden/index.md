@@ -59,10 +59,10 @@ Die Tankregel ist ein weiterer wichtiger Punkt. Die Regel „Voll‑zu‑Voll“
 
 Achte auch auf das Limit für die Kilometer. Manche Verträge begrenzen die Strecke pro Tag oder Woche. Überschreitest du dieses Limit? Dann steigt die Gebühr für jeden weiteren Kilometer stark an. Das kann bei langen Touren sehr teuer werden. Plane deine Route daher grob im Voraus ein.
 
-> **Rechenbeispiel:**  
-> Nehmen wir an, du mietest ein Auto für sieben Tage (T). Der Preis pro Tag (G) liegt bei 40 Euro. Die Kaution (K) beträgt 500 Euro als Sicherheit. Der Schutz (V) kostet 70 Euro für die ganze Woche. Für den Tank (Tg) planst du 80 Euro ein.  
-> Die Rechnung für den Gesamtpreis lautet: **Gesamt = (G mal T) + V + Tg**.  
-> In Zahlen: (40 Euro mal 7 Tage) + 70 Euro + 80 Euro = 430 Euro.  
+> **Rechenbeispiel:**
+> Nehmen wir an, du mietest ein Auto für sieben Tage (T). Der Preis pro Tag (G) liegt bei 40 Euro. Die Kaution (K) beträgt 500 Euro als Sicherheit. Der Schutz (V) kostet 70 Euro für die ganze Woche. Für den Tank (Tg) planst du 80 Euro ein.
+> Die Rechnung für den Gesamtpreis lautet: **Gesamt = (G mal T) + V + Tg**.
+> In Zahlen: (40 Euro mal 7 Tage) + 70 Euro + 80 Euro = 430 Euro.
 > Die Kaution von 500 Euro kommt als Blockade auf der Karte dazu. Wenn du den Eigenanteil (S) von 1.000 Euro weglässt, sparst du im Schadensfall genau diesen Betrag. Das Beispiel zeigt deutlich: Kleine Kosten pro Tag summieren sich schnell zu einer großen Summe.
 
 Achte darauf, dass jede Bedingung im Vertrag klar ist. Unklare Sätze sind oft ein Hinweis auf spätere Kosten. Frage im Zweifel direkt beim Anbieter nach. So vermeidest du böse Überraschungen nach dem Urlaub.
@@ -123,6 +123,11 @@ Viele Leute übersehen den Eigenanteil im Vertrag. Prüfe genau, was du im Falle
 Die Tankregel wird oft falsch verstanden. Wähle immer „Voll‑zu‑Voll“, wenn du sparen willst. Tanke den Wagen kurz vor der Rückgabe an einer Tankstelle voll. Behalte den Beleg vom Tanken als Beweis für die Firma. So vermeidest du teure Nachzahlungen für den Sprit.
 
 Vergiss niemals die wichtigen Fristen für die Absage. Notiere dir das Datum für eine freie Stornierung. Ein verpasster Termin kann sehr teuer werden. Nutze die Wecker in deinem Handy für diese Termine. So behältst du immer die volle Kontrolle über dein Budget.
+
+
+
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Lesetipp:** [Urlaub sparen: Budget, Buchung und Kosten im Blick](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

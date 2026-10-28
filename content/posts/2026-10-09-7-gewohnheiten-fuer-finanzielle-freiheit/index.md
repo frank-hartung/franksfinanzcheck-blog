@@ -35,7 +35,7 @@ Hier findest du sieben praxisnahe Schritte. Du kannst sie alle sofort umsetzen. 
 
 ## 1. Einnahmen bewusst planen
 
-Ein klarer Blick auf dein Einkommen ist die Basis jeder Entscheidung. Die 50-30-20-Faustregel ordnet deine Mittel sinnvoll. Du nutzt 50 % für feste Kosten. 30 % fließen in flexible Ausgaben. Die restlichen 20 % sparst du oder investierst sie.
+Ein klarer Blick auf dein Einkommen ist die Basis jeder Entscheidung. Die 50-30-20-Faustregel ordnet deine Mittel sinnvoll. Du nutzt 50 % für feste Kosten. 30 % fließen in flexible Ausgaben. Die restlichen 20 % sparst du oder investierst sie.
 
 So setzt du Prioritäten, ohne jeden Euro einzeln zu rechnen. Du behältst die Kontrolle und vermeidest böse Überraschungen. Ein fester Plan gibt dir Sicherheit im Alltag.
 
@@ -47,13 +47,13 @@ So setzt du Prioritäten, ohne jeden Euro einzeln zu rechnen. Du behältst die K
 
 > **Rechenbeispiel:** Du verdienst 3 000 € netto. Nach der 50‑30‑20‑Regel reservierst du 600 € für langfristiges Sparen. Wenn du diesen Betrag monatlich auf ein Tagesgeldkonto einzahlst, hast du nach einem Jahr 7 200 € angespart (600 € × 12). Das ist ein solider Grundstock für Notfälle oder erste Käufe. Es motiviert sehr, wenn der Kontostand jeden Monat sichtbar wächst.
 
-Das Beispiel zeigt, wie schnell ein kleiner Betrag wächst. Es verschweigt aber einen Mitläufer: die Inflation. Bei einer jährlichen Teuerung von 3,3 % (Statistisches Bundesamt) sind die 7 200 € nach einem Jahr real nur noch rund 6 970 € wert. Dein Kontostand wächst, aber deine Kaufkraft steigt langsamer. Setze Sparziele deshalb in heutiger Kaufkraft an. Lass den Zinseszins für dich arbeiten, nicht gegen dich.
+Das Beispiel zeigt, wie schnell ein kleiner Betrag wächst. Es verschweigt aber einen Mitläufer: die Inflation. Bei einer jährlichen Teuerung von 3,3 % (Statistisches Bundesamt) sind die 7 200 € nach einem Jahr real nur noch rund 6 970 € wert. Dein Kontostand wächst, aber deine Kaufkraft steigt langsamer. Setze Sparziele deshalb in heutiger Kaufkraft an. Lass den Zinseszins für dich arbeiten, nicht gegen dich.
 
 ## 2. Fixkosten regelmäßig prüfen
 
 Viele Verträge laufen still weiter, obwohl es günstigere Tarife gibt. Der erste 4K-Schritt heißt „Kosten sehen“. Er fordert dich auf, alle festen Beträge zu erfassen und zu sortieren.
 
-So siehst du sofort, wo du sparen kannst. Der Blick ist wichtig, wenn die Preise steigen. Die Energiepreise sind zuletzt stark gestiegen – um 14,9 % laut Statistischem Bundesamt. Wer seinen Tarif nicht prüft, zahlt solche Sprünge still mit. Ein Wechsel dauert oft nur wenige Minuten.
+So siehst du sofort, wo du sparen kannst. Der Blick ist wichtig, wenn die Preise steigen. Die Energiepreise sind zuletzt stark gestiegen – um 14,9 % laut Statistischem Bundesamt. Wer seinen Tarif nicht prüft, zahlt solche Sprünge still mit. Ein Wechsel dauert oft nur wenige Minuten.
 
 | Vertrag | monatlicher Betrag | Frist | mögliche Alternative (CHECK24) |
 |---------|-------------------|----------------|--------------------------------|
@@ -127,7 +127,7 @@ Vermeide häufiges Umschichten deiner Depots. Es kostet Gebühren und schwächt 
 
 > **Rechenbeispiel:** Du investierst 5 000 € in einen ETF mit einer Rendite von 7 % p.a. Nach zehn Jahren beträgt das Kapital etwa 9 800 € (5 000 € × (1+0,07)¹⁰, gerundet). Der Zinseszinseffekt wirkt erst richtig, wenn du das Geld lange stehen lässt. In zwanzig Jahren wären es schon fast 20 000 Euro.
 
-Wer lange hält, lässt sein Kapital durch Zinseszins wachsen. Ein ehrlicher Blick gehört trotzdem dazu: Die 9 800 € sind Nominalwerte. Bei 3,3 % Inflation pro Jahr entsprechen sie in heutiger Kaufkraft nur rund 7 080 €. Wer real Vermögen aufbauen will, braucht breite Streuung und niedrige Kosten. Ein langer Atem ist der wichtigste Faktor.
+Wer lange hält, lässt sein Kapital durch Zinseszins wachsen. Ein ehrlicher Blick gehört trotzdem dazu: Die 9 800 € sind Nominalwerte. Bei 3,3 % Inflation pro Jahr entsprechen sie in heutiger Kaufkraft nur rund 7 080 €. Wer real Vermögen aufbauen will, braucht breite Streuung und niedrige Kosten. Ein langer Atem ist der wichtigste Faktor.
 
 ## 7. Wissen teilen und motivieren
 
@@ -153,7 +153,7 @@ Ein zweiter Fehler: Du wechselst bei einem Angebot sofort. Du rechnest aber die 
 
 Nutze die Tabelle im Kapitel „Fixkosten prüfen“. Prüfe dort alle wichtigen Faktoren. Der dritte Fehler: Du formulierst dein Sparziel zu vage. „Ich will mehr sparen“ reicht als Vorsatz nicht aus.
 
-Nenne klare Beträge und Termine für deine Ziele. Ein Beispiel: „600 € Notgroschen bis zum Jahresende“. So bleibt das Ziel für dich greifbar. Du kannst deinen Fortschritt jederzeit messen.
+Nenne klare Beträge und Termine für deine Ziele. Ein Beispiel: „600 € Notgroschen bis zum Jahresende“. So bleibt das Ziel für dich greifbar. Du kannst deinen Fortschritt jederzeit messen.
 
 **Weiterlesen:** Die [50-30-20-Regel im Detail](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) zeigt, wie du Einnahmen und Ausgaben aufteilst. Weitere Grundlagen findest du im [Ratgeber zu Haushaltsbudget und Frugalismus](../../pillar/frugalismus/).
 

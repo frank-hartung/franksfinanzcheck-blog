@@ -383,7 +383,7 @@ Ein Vergleich lohnt sich auch deshalb, weil viele Altverträge über Jahre mitla
 
 ## Der 15-Minuten-Schnellcheck für deinen Vertrag
 
-Du musst den Vertrag nicht komplett auseinandernehmen, um zu wissen, ob er noch trägt. Eine Viertelstunde und drei Fragen reichen für den ersten Befund.
+Du musst den Vertrag nicht komplett Auseinandernehmen, um zu wissen, ob er noch trägt. Eine Viertelstunde und drei Fragen reichen für den ersten Befund.
 
 ### Diese drei Punkte zuerst prüfen
 

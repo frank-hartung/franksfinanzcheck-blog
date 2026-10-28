@@ -43,7 +43,7 @@ Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -147,7 +147,7 @@ Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
 
-Ein Wechsel senkt oft nicht nur den Preis. Er bringt dir bei gleichen Kosten oft auch mehr Tempo. Mehr dazu hier: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+Ein Wechsel senkt oft nicht nur den Preis. Er bringt dir bei gleichen Kosten oft auch mehr Tempo. Mehr dazu hier: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
 
 ## Wann ein hoher Bonus trotzdem die falsche Wahl ist
 
@@ -168,7 +168,7 @@ Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:
 
 Viele der besten Cashback-Aktionen laufen zudem nur kurze Zeit. Wer früh startet, kann gezielt zuschlagen.
 
-![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
+![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
 

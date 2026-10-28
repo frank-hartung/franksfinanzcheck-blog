@@ -38,9 +38,6 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-
-
-
 Wenn die Waschmaschine ausläuft oder das Auto plötzlich in die Werkstatt muss, wird aus einem normalen Dienstag schnell ein teurer Tag. Genau dafür ist ein [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) da. Er hält dich handlungsfähig und verhindert, dass du sofort den Dispo, eine Kreditkarte oder einen Ratenkredit brauchst.
 
 Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft daneben. Entscheidend ist nicht dein Gehalt, sondern das Geld, das du jeden Monat wirklich brauchst. Wer hohe Fixkosten hat, braucht meist mehr Reserve als jemand mit kleiner Wohnung und stabilem Job.
@@ -58,7 +55,7 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere deine Notfallreserve getrennt vom Girokonto: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -143,7 +140,7 @@ Die 50–30–20-Regel ist dafür ein praxistauglicher Start:
 
 Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen Hebel prüfen. Ein günstigerer Stromtarif, ein besserer Handyvertrag oder eine sauberere Versicherungsstruktur können sofort Geld freimachen. Genau dieser freie Betrag finanziert später deinen Notgroschen.
 
-![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ – 5 Stationen von „Warum die klassische Drei-Monats-Regel oft zu grob ist“ bis „Ein Rechenbeispiel für 2026“ (eigene Darstellung).*
 

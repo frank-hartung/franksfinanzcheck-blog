@@ -86,8 +86,7 @@ Viele Firmen messen ihren Erfolg an der Position in der Liste. Fällt eine Seite
 
 **Faustregel:** Eigene Erfahrung wirkt wie ein Stempel für gute Qualität. Berichtet ein Autor aus der Praxis, wirkt das echt. Suchmaschinen bewerten das positiv. Das stärkt die Autorität der Seite und hebt das Ranking. Persönliche Beispiele zeigen: Das Wissen wurde wirklich angewendet. Das unterscheidet einen Fachmann von einem reinen Schreiberling.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)  
-**Lesetipp:** [Büroausstattung steuerlich clever absetzen: So geht's](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Büroausstattung steuerlich clever absetzen: So geht's](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)
 
 ## FAQ – die wichtigsten Fragen zur Meldung
 

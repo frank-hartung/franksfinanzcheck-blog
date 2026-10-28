@@ -55,7 +55,7 @@ Welche Geräte sparen im Alltag wirklich messbar Strom? Ab wann rechnen sich die
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „Energiekosten senken: Smarte Helfer für den Haushalt“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -133,7 +133,7 @@ Ein weiteres Risiko ist mangelnde Kompatibilität. Produkte von fünf Hersteller
 
 Vernachlässige niemals die Sicherheit deiner Geräte. Billigprodukte ohne Updates sind oft ein Einfallstor für Hacker. Investiere in etablierte Marken mit langfristigem Support für ihre Hardware.
 
-![Gliederung des Beitrags: Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Energiekosten senken: Smarte Helfer für den Haushalt“ – 5 Stationen von „Warum steigen die Energiekosten trotz Sparbemühungen oft weiter?“ bis „Schritt-für-Schritt: So rüstest du deinen Haushalt auf“ (eigene Darstellung).*
 

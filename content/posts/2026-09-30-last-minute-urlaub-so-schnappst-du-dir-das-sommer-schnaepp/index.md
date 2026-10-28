@@ -41,7 +41,7 @@ quellen:
 faktencheck: 2026-10-14
 ---
 
-![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -166,7 +166,7 @@ Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Rei
 - [ ] Versicherungsschutz und Ausschlüsse anhand der Vertragsbedingungen geprüft
 - [ ] Buchungsbestätigung und Kontaktdaten gespeichert
 
-![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das Urlaubsbudget belasten“ (eigene Darstellung).*
 

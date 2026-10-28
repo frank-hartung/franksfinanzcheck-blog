@@ -106,11 +106,11 @@ Auch die Montage selbst verdient Aufmerksamkeit. Halterungen müssen fest sitzen
 
 Die folgende Rechnung arbeitet mit Annahmen, die du durch deine eigenen Zahlen ersetzen kannst. Die Ergebnisse sind kein Versprechen, sondern ein Maßstab.
 
-Annahme: Die Anlage kostet 500 € inklusive Halterung. Annahme: Sie erzeugt 600 kWh im Jahr, und du verbrauchst davon 70 Prozent selbst. Dazu kommt eine weitere Annahme: Dein Strompreis liegt bei 0,35 € pro kWh. Außerdem gilt die Annahme: Ein regionaler Zuschuss beträgt 100 €.
+Annahme: Die Anlage kostet 500 € inklusive Halterung. Annahme: Sie erzeugt 600 kWh im Jahr, und du verbrauchst davon 70 Prozent selbst. Dazu kommt eine weitere Annahme: Dein Strompreis liegt bei 0,35 € pro kWh. Außerdem gilt die Annahme: Ein regionaler Zuschuss beträgt 100 €.
 
-Rechenbeispiel: 600 kWh mal 0,7 mal 0,35 € ergeben rund 147 € Ersparnis im Jahr. Modellrechnung: 500 € minus 100 € Zuschuss ergeben 400 € Restkosten. Modellrechnung: Diese Restkosten decken sich nach rund 2,7 Jahren durch die Ersparnis. Die Modellrechnung ohne Zuschuss ergibt rund 3,4 Jahre.
+Rechenbeispiel: 600 kWh mal 0,7 mal 0,35 € ergeben rund 147 € Ersparnis im Jahr. Modellrechnung: 500 € minus 100 € Zuschuss ergeben 400 € Restkosten. Modellrechnung: Diese Restkosten decken sich nach rund 2,7 Jahren durch die Ersparnis. Die Modellrechnung ohne Zuschuss ergibt rund 3,4 Jahre.
 
-Nun der ungünstige Fall. Annahme: Ein Balkon mit Nordausrichtung erzeugt nur 400 kWh im Jahr. Modellrechnung: Mit 400 kWh im Jahr, 70 Prozent Eigenverbrauch und 0,35 € pro kWh sparst du rund 98 € jährlich. Modellrechnung: Die 400 € Restkosten brauchen dann etwa 4,1 Jahre.
+Nun der ungünstige Fall. Annahme: Ein Balkon mit Nordausrichtung erzeugt nur 400 kWh im Jahr. Modellrechnung: Mit 400 kWh im Jahr, 70 Prozent Eigenverbrauch und 0,35 € pro kWh sparst du rund 98 € jährlich. Modellrechnung: Die 400 € Restkosten brauchen dann etwa 4,1 Jahre.
 
 Der Schlüssel ist der Eigenverbrauch, also der Strom, den du selbst nutzt. Strom, den du selbst verbrauchst, senkt deine Rechnung. Strom, der ungenutzt ins Netz fließt, ändert an deiner Abrechnung nichts. Deshalb zählt der Eigenverbrauch mehr als die reine Leistung auf dem Datenblatt.
 

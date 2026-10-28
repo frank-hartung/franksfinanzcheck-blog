@@ -365,7 +365,7 @@ Bevor du vergleichst, solltest du verstehen, was du überhaupt vergleichst. Eine
 
 **Faustregel:** Auto bis 5 Jahre? Dann Vollkasko. 5 bis 10 Jahre? Teilkasko reicht. Älter als 10 Jahre? Dann genügt oft die Haftpflicht. Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist.
 
-## Rechenbeispiel mit fiktiven Werten: von 1.040 € auf 412 €
+## Rechenbeispiel mit fiktiven Werten: von 1.040 € auf 412 €
 
 | Merkmal | Altvertrag (Beispiel) | Neuer Tarif (Beispiel) |
 |:---|:---|:---|

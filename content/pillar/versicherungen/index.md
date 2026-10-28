@@ -29,6 +29,7 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 ---
+
 Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen Fehlern: Entweder sind sie für viel Geld gegen Bagatellschäden überversichert, oder es fehlen elementare Policen gegen existenzbedrohende Risiken. Aus meiner langjährigen Praxis als kritischer Verbraucher gilt der eiserne Grundsatz: **Versichere nur Schäden, die deinen finanziellen Ruin bedeuten würden.** Die gute Nachricht: Wer die wenigen Pflicht-Policen richtig wählt, spart gegenüber dem üblichen Rundum-Sorglos-Paket oft hunderte Euro pro Jahr – und schläft trotzdem besser.
 
 ## Das Wichtigste auf einen Blick
@@ -119,7 +120,7 @@ Wer von unten nach oben kauft, spart die 12 Mini-Policen, die im Schaden nicht t
 
 Haftpflicht zuerst, dann Gebäude und Hausrat, zuletzt Kfz. Die Reihenfolge folgt der Pyramide: Was existenzbedrohend ist, kommt vor dem, was Konto und Komfort betrifft.
 
-Kfz hat den Kalender (30.11.). Haftpflicht hat keinen – und genau deshalb bleibt sie jahrelang unangetastet, obwohl 20 € und drei Klauseln fehlen.
+Kfz hat den Kalender (30.11.). Haftpflicht hat keinen – und genau deshalb bleibt sie jahrelang unangetastet, obwohl 20 € und drei Klauseln fehlen.
 
 Beim Gebäude entscheidet nicht der Beitrag, sondern die Klausel: Elementarschutz, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung in einem Tarif zusammenzubringen ist die eigentliche Arbeit. Wie du das prüfst, steht im [Wohngebäudeversicherung-Vergleich: Worauf du achten musst](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/).
 

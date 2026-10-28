@@ -127,7 +127,7 @@ Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
 | Power-User (HD-Streaming, Hotspot, Cloud) | 25–50 GB | 12,99–24,99 € |
 | Familie / mehrere Karten | 20+ GB + Multi-SIM | ab 14,99 € |
 
-## Beispielrechnung: 25 € pro Monat sparen
+## Beispielrechnung: 25 € pro Monat sparen
 
 | Merkmal | Alter Vertrag | Neuer Vertrag |
 |:---|:---|:---|
@@ -143,7 +143,7 @@ Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
 
 Die Beispielrechnung zeigt: Mehr Leistung muss nicht mehr kosten. Im Beispiel verdoppelt sich das Datenvolumen, und 5G ist enthalten.
 
-Im Beispiel sinkt der Monatsbeitrag um 25 €. Die Rufnummer lässt sich in der Regel mitnehmen; was dabei anfällt, hängt vom Anbieter ab.
+Im Beispiel sinkt der Monatsbeitrag um 25 €. Die Rufnummer lässt sich in der Regel mitnehmen; was dabei anfällt, hängt vom Anbieter ab.
 
 
 ## Die 5 häufigsten Fallstricke beim Vertragsabschluss
@@ -241,7 +241,7 @@ Noch nie war der Markt so günstig. Allnet-Flats mit 5G gibt es unter 10 €. T
 Ein Vergleich dauert 15 Minuten. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
 
 
-**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
+**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/)
 
 ## Häufige Fragen
 

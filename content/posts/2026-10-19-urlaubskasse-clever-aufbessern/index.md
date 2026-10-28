@@ -60,7 +60,7 @@ Ein typisches Rechenbeispiel zeigt dir die Gefahr. Kleine Gebühren wirken oft h
 > Ein zweiter Fahrer kostet einmalig 10 €.
 > Die Rechnung sieht so aus: 210 € + 35 € + 10 € = 255 €.
 
-Schau dir die Ersparnis an. Ohne das Gerät für den Weg sparst du 35 €. Das ist fast so viel wie ein ganzer Tag Miete. Dieses Geld kannst du im Urlaub besser nutzen. Es fließt direkt in deine Kasse für Eis oder Abendessen. Solche kleinen Siege summieren sich schnell.
+Schau dir die Ersparnis an. Ohne das Gerät für den Weg sparst du 35 €. Das ist fast so viel wie ein ganzer Tag Miete. Dieses Geld kannst du im Urlaub besser nutzen. Es fließt direkt in deine Kasse für Eis oder Abendessen. Solche kleinen Siege summieren sich schnell.
 
 Der zweite Schritt im Pfad heißt: **Konditionen rechnen**. Hier vergleichst du dein Angebot mit anderen Wegen. Nutze dafür das Portal CHECK24. Dort siehst du alle Kosten auf einen Blick. Die Preise werden dort fair und offen gezeigt. Du siehst sofort, welcher Anbieter wirklich günstig ist. Oft ist der erste Preis nicht der beste Preis. Ein Vergleich dauert nur wenige Minuten. Diese Zeit ist gut investiertes Geld.
 
@@ -89,11 +89,11 @@ Ein Mietwagen ist nicht immer die beste Wahl. Manchmal gibt es bessere Wege für
 
 Du hast jetzt Geld beim Auto gespart. Nun musst du dieses Geld auch sicher zur Seite legen. Sonst gibst du es für andere Dinge aus. Es gibt dafür bewährte Regeln. Diese helfen dir beim Sparen im Alltag.
 
-Die erste Regel ist die **50‑30‑20‑Regel**. Das ist eine bekannte Faustregel für das Geld. 50 % von deinem Lohn gehen für feste Kosten weg. Das sind Miete, Strom oder Versicherungen. 30 % nutzt du für dein Leben und den Spaß. Dazu gehört auch der Urlaub. Die restlichen 20 % sparst du fest an. Wenn du beim Auto sparst, bleibt mehr für den Spaß übrig.
+Die erste Regel ist die **50‑30‑20‑Regel**. Das ist eine bekannte Faustregel für das Geld. 50 % von deinem Lohn gehen für feste Kosten weg. Das sind Miete, Strom oder Versicherungen. 30 % nutzt du für dein Leben und den Spaß. Dazu gehört auch der Urlaub. Die restlichen 20 % sparst du fest an. Wenn du beim Auto sparst, bleibt mehr für den Spaß übrig.
 
 Die zweite Regel ist die **Notgroschen‑Faustregel**. Du solltest immer eine Reserve haben. Diese sollte 3 bis 6 Monatsgehälter groß sein. Dieses Geld ist nicht für den Urlaub da. Es schützt dich bei Notfällen. Dein Urlaubsgeld sollte auf einem extra Konto liegen. So kommst du nicht in Versuchung.
 
-Setze dir ein klares Ziel für jeden Monat. Prüfe dieses Ziel nach jeder Buchung für ein Auto. Ein Beispiel: Du sparst 50 € bei jeder Miete. Wenn du das oft machst, hast du am Ende 600 € mehr im Jahr. Das ist eine große Summe für die Reise.
+Setze dir ein klares Ziel für jeden Monat. Prüfe dieses Ziel nach jeder Buchung für ein Auto. Ein Beispiel: Du sparst 50 € bei jeder Miete. Wenn du das oft machst, hast du am Ende 600 € mehr im Jahr. Das ist eine große Summe für die Reise.
 
 Ein weiterer Tipp aus dem 4K‑Prüfpfad lautet: **Kündigungsfenster sichern**. Das ist der dritte Schritt im Pfad. Notiere dir das Datum für die Absage. Bis zu diesem Tag kannst du den Vertrag ohne Kosten ändern. Schau kurz vor diesem Tag noch einmal nach Preisen. Findest du ein besseres Angebot? Dann buche um. So nutzt du sinkende Preise aus. Das gibt dir Flexibilität und spart Geld.
 
@@ -110,6 +110,11 @@ Fehler beim Mieten kosten viel Geld. Wer die Fallen kennt, kann sie umgehen. Hie
 | Keine Budget‑Kontrolle | Ausgaben werden zu hoch | 4K‑Pfad nutzen, monatlich prüfen |
 
 Vermeide diese Fehler mit Plan. Vergleiche nicht nur die erste Zahl auf dem Schirm. Rechne immer den Preis für das ganze Paket aus. Achte auf die Zeit. Wer zu spät bucht, zahlt oft drauf. Wer zu früh bucht und nicht mehr prüft, verpasst Rabatte. Nutze den 4K-Prüfpfad als festen Ablauf. So vergisst du keinen Punkt. Dein Reisebudget bleibt so im grünen Bereich. Du behältst die volle Kontrolle über deine Finanzen.
+
+
+
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Lesetipp:** [Urlaub sparen: Budget, Buchung und Kosten im Blick](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

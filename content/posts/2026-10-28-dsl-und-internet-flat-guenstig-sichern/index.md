@@ -33,7 +33,7 @@ Der erste Schritt im 4K‑Prüfpfad ist, alle wiederkehrenden Kosten zu erfassen
 
 Ein bewährtes Faustregel‑Beispiel ist die 50‑30‑20‑Regel: 50 % des Nettoeinkommens gehen in feste Ausgaben, 30 % in variable Kosten und 20 % in Rücklagen. Prüfe, ob dein Internetanteil im Rahmen von 5‑10 % deiner festen Ausgaben liegt. Liegt er darüber, lohnt sich ein genauer Blick auf den Vertrag.
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Du verdienst netto 2 500 €, das sind 1 250 € für feste Ausgaben. 10 % davon entsprechen 125 €. Wenn deine aktuelle DSL‑Rechnung 30 € beträgt, liegt sie bei 2,4 % – das ist im Rahmen. Solltest du jedoch 60 € zahlen, entspricht das 4,8 % und überschreitet die empfohlene Obergrenze. Dann lohnt ein Wechsel.
 
 ## Konditionen rechnen – Tarifdetails prüfen
@@ -59,11 +59,11 @@ Der dritte 4K‑Schritt ist das Timing. Viele Verträge haben eine Mindestlaufze
 
 Ein weiterer Hebel ist der Wechselbonus. Anbieter locken häufig mit einem einmaligen Bonus von 50 € bis 100 € bei einem Vertragswechsel. Dieser Bonus wird meist als Gutschrift nach drei Monaten gezahlt. Vorsicht: Der Bonus wird häufig mit einer höheren Grundgebühr oder einer längeren Mindestlaufzeit kombiniert. Rechne den Bonus in deine Gesamtrechnung ein, bevor du dich entscheidest.
 
-> **Rechenbeispiel:**  
-> Neuer Tarif: 20 € Grundpreis, 12‑Monats‑Laufzeit, 50 € Wechselbonus nach 3 Monaten.  
-> Gesamtkosten über 12 Monate = (20 € × 12) – 50 € = 190 €.  
-> Alter Tarif: 30 € Grundpreis, 24‑Monats‑Laufzeit, kein Bonus.  
-> Kosten über 12 Monate = 30 € × 12 = 360 €.  
+> **Rechenbeispiel:**
+> Neuer Tarif: 20 € Grundpreis, 12‑Monats‑Laufzeit, 50 € Wechselbonus nach 3 Monaten.
+> Gesamtkosten über 12 Monate = (20 € × 12) – 50 € = 190 €.
+> Alter Tarif: 30 € Grundpreis, 24‑Monats‑Laufzeit, kein Bonus.
+> Kosten über 12 Monate = 30 € × 12 = 360 €.
 > Der Wechsel spart 170 € im ersten Jahr, aber prüfe, ob die Laufzeit zu deinem Bedarf passt.
 
 Setze dir ein Erinnerungs‑Tool, zum Beispiel eine Kalendereinladung, die dich 6 Wochen vor Ablauf des Vertrags erinnert. So hast du genug Zeit, Angebote zu vergleichen und den Wechsel zu planen.
@@ -72,10 +72,10 @@ Setze dir ein Erinnerungs‑Tool, zum Beispiel eine Kalendereinladung, die dich 
 
 Ein häufiger Denkfehler ist, dass beim Wechsel sofort ein Ausfall der Internetverbindung droht. In der Praxis lässt sich das vermeiden, wenn du folgende Schritte beachtest:
 
-1. **Bestellbestätigung prüfen** – Warte nicht länger als 7 Tage, bis du die Auftragsbestätigung bekommst.  
-2. **Installationstermin festlegen** – Plane den Technikertermin so, dass er spätestens einen Tag nach Ablauf deines alten Vertrags liegt.  
-3. **Router‑Übergabe** – Viele Anbieter erlauben die Rückgabe des alten Routers per Post. Nutze das, um Kosten für ein neues Gerät zu sparen.  
-4. **WLAN‑Reichweite sichern** – Prüfe, ob du mit einem WLAN‑Verstärker oder einem Mesh‑System die gleiche Abdeckung wie vorher hast. Oft reicht ein einfacher Verstärker aus, wenn du nur ein paar Meter mehr Reichweite brauchst.  
+1. **Bestellbestätigung prüfen** – Warte nicht länger als 7 Tage, bis du die Auftragsbestätigung bekommst.
+2. **Installationstermin festlegen** – Plane den Technikertermin so, dass er spätestens einen Tag nach Ablauf deines alten Vertrags liegt.
+3. **Router‑Übergabe** – Viele Anbieter erlauben die Rückgabe des alten Routers per Post. Nutze das, um Kosten für ein neues Gerät zu sparen.
+4. **WLAN‑Reichweite sichern** – Prüfe, ob du mit einem WLAN‑Verstärker oder einem Mesh‑System die gleiche Abdeckung wie vorher hast. Oft reicht ein einfacher Verstärker aus, wenn du nur ein paar Meter mehr Reichweite brauchst.
 5. **Testen** – Sobald der neue Anschluss aktiv ist, führe einen Geschwindigkeitstest durch. So erkennst du sofort, ob die versprochene Leistung erreicht wird.
 
 Durch diese Planung vermeidest du Unterbrechungen und sparst gleichzeitig Zeit und Geld.
@@ -84,15 +84,20 @@ Durch diese Planung vermeidest du Unterbrechungen und sparst gleichzeitig Zeit u
 
 Viele Verbraucher fallen bei der Auswahl und dem Wechsel von DSL‑Tarifen in typische Fallen. Hier ein Überblick und konkrete Gegenmaßnahmen:
 
-- **Zu hohe Geschwindigkeit wählen** – Prüfe deinen tatsächlichen Bedarf, bevor du den Tarif buchst.  
-- **Nur den Grundpreis vergleichen** – Addiere alle Zusatzkosten, um die echten Gesamtausgaben zu kennen.  
-- **Kündigungsfrist übersehen** – Markiere das Kündigungsdatum im Kalender und setze eine Erinnerung.  
-- **Wechselbonus ohne Gegenleistung** – Lies das Kleingedruckte: Oft ist der Bonus an eine längere Laufzeit gebunden.  
-- **Vertrag ohne Probezeit** – Achte darauf, dass du bei Unzufriedenheit innerhalb der ersten 14 Tage ohne Kosten zurücktreten kannst.  
-- **Router‑Leasing unterschätzen** – Der monatliche Leasing‑Preis kann über die Vertragslaufzeit mehrere hundert Euro kosten.  
+- **Zu hohe Geschwindigkeit wählen** – Prüfe deinen tatsächlichen Bedarf, bevor du den Tarif buchst.
+- **Nur den Grundpreis vergleichen** – Addiere alle Zusatzkosten, um die echten Gesamtausgaben zu kennen.
+- **Kündigungsfrist übersehen** – Markiere das Kündigungsdatum im Kalender und setze eine Erinnerung.
+- **Wechselbonus ohne Gegenleistung** – Lies das Kleingedruckte: Oft ist der Bonus an eine längere Laufzeit gebunden.
+- **Vertrag ohne Probezeit** – Achte darauf, dass du bei Unzufriedenheit innerhalb der ersten 14 Tage ohne Kosten zurücktreten kannst.
+- **Router‑Leasing unterschätzen** – Der monatliche Leasing‑Preis kann über die Vertragslaufzeit mehrere hundert Euro kosten.
 - **Vertragslaufzeit zu lang** – Wenn du nicht sicher bist, ob du den Tarif langfristig behalten willst, wähle einen flexiblen oder unbefristeten Vertrag.
 
 Indem du diese Punkte systematisch prüfst, reduzierst du das Risiko, später mehr zu zahlen, als du geplant hast.
+
+
+
+**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
+**Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

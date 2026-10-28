@@ -36,7 +36,7 @@ faktencheck: 2026-10-06
 kurzantwort: "Reduziere die Raumtemperatur um ein Grad, nutze LED‑Leuchten, stelle den Kühlschrank auf 4 °C und das Gefrierfach auf –18 °C, installiere Zeitschaltuhren für Geräte und ziehe regelmäßig die Dichtungen von Fenstern und Türen nach. Durch diese fünf Schritte lässt sich der Haushaltsstromverbrauch meist um 10 % – 15 % senken."
 ---
 
-[Energieeffizienz](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) im Check: Spare sofort 15 % deiner Stromrechnung im Modellfall. Das geht ganz ohne neue Geräte. Ein Check deiner Gewohnheiten macht es möglich. Fünf schnelle Tricks wirken sofort. Setze sie konsequent um. So behältst du am Ende des Monats mehr Geld auf deinem Konto.
+[Energieeffizienz](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) Im Check: Spare sofort 15 % deiner Stromrechnung im Modellfall. Das geht ganz ohne neue Geräte. Ein Check deiner Gewohnheiten macht es möglich. Fünf schnelle Tricks wirken sofort. Setze sie konsequent um. So behältst du am Ende des Monats mehr Geld auf deinem Konto.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -113,7 +113,7 @@ Sinkt sie stark ab, brauchst du bessere Dichtungen. Faustregel: Jede undichte St
 
 ## Checkliste: 5 Maßnahmen für sofortige Wirkung
 
-- [ ] **LED-Lampen** in allen häufig genutzten Räumen einschrauben: Ersetze zuerst die Lampen in Küche und Wohnzimmer. Dort brennt das Licht am längsten.
+- [ ] **LED-Lampen** in allen häufig genutzten Räumen Einschrauben: Ersetze zuerst die Lampen in Küche und Wohnzimmer. Dort brennt das Licht am längsten.
 - [ ] **Bewegungsmelder** für Keller und Flure nachrüsten: So vergisst niemand mehr das Ausschalten. Die Montage ist oft ohne Fachmann möglich.
 - [ ] **Heizkörper** vor jeder Heizperiode gründlich entlüften: Das sorgt für eine gleichmäßige Wärme. Der Kessel muss weniger Druck aufbauen.
 - [ ] **Thermostate** auf feste Zeiten für Absenkungen einstellen: Nachts reichen oft 17 Grad in den Wohnräumen aus. Das spart massiv Brennstoff.

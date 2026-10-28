@@ -57,11 +57,11 @@ Seit 2022 sind die Lebenshaltungskosten dauerhaft hoch. Lebensmittel, Energie un
 
 * **Abo-Schlupflöcher:** Streaming-Dienste, Cloud-Speicher, Fitnessstudio, Zeitungs-Flatrates und Lieferdienste summieren sich oft auf 80 € bis 150 € pro Monat – ohne dass man einzeln bewusst darauf verzichtet.
 * **Kleinvieh-Mist:** Ein Coffee-to-go für 3,50 €, der Snack am Bahnhof oder die spontane Bestellung machen im Monat schnell 120 € bis 200 € aus.
-* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
 
 Ein Haushaltsbuch wirkt wie eine Lupe. Es zeigt, wo Monat für Monat Geld versickert. Ziel ist nicht Verzicht. Ziel ist eine **bewusste Entscheidung** statt einer automatischen Ausgabe.
 
-> 📊 **Modellrechnung (keine Erfahrungswerte):** Drei Streaming-Abos zu je 9 € plus ein Sportvertrag zu 25 € ergeben 52 € im Monat. Wer diese vier Posten kündigt, spart im Jahr 624 €. Setze hier deine eigenen Beträge ein.
+> 📊 **Modellrechnung (keine Erfahrungswerte):** Drei Streaming-Abos zu je 9 € plus ein Sportvertrag zu 25 € ergeben 52 € im Monat. Wer diese vier Posten kündigt, spart im Jahr 624 €. Setze hier deine eigenen Beträge ein.
 
 ## Methode 1: Die Haushaltsbuch-App (für die meisten die passende Wahl)
 
@@ -151,13 +151,13 @@ Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 �
 | Sparpotenzial | Modell-Monatsersparnis |
 |:---|---:|
 | Drei ungenutzte Streaming-/Abo-Dienste | 27 € |
-| Girokonto ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) statt 9,90 €/Monat | 9,90 € |
+| Girokonto ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) statt 9,90 €/Monat | 9,90 € |
 | Stromanbieter wechseln (3.500 kWh, 42 → 28 ct/kWh) | 40 € |
 | DSL-Tarif wechseln (44 € → 24 €) | 20 € |
 | Kfz-Versicherung vergleichen (Haftpflicht, jährlich) | ca. 17 € |
 | Spontane Online-Bestellungen halbieren | 80 € |
 | Coffee-to-go & Snacks bewusster kaufen | 60 € |
-| **Gesamt** | **rund 254 € (Summe der Annahmen oben)** |
+| **Gesamt** | **rund 254 € (Summe der Annahmen oben)** |
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
