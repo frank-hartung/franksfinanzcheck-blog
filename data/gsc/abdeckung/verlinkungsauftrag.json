@@ -1,8 +1,32 @@
 [
  {
+  "grund": "ähnliches Thema",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/",
+  "ziel": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+ },
+ {
+  "grund": "ähnliches Thema",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/",
+  "ziel": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+ },
+ {
+  "grund": "gleicher Pillar",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/",
+  "ziel": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
+ },
+ {
+  "grund": "gleicher Pillar",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/",
+  "ziel": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
+ },
+ {
   "grund": "gleicher Pillar",
   "inlinks_jetzt": 1,
-  "quelle": "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/",
+  "quelle": "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/",
   "ziel": "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/"
  }
 ]

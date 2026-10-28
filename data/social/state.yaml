@@ -1147,6 +1147,26 @@ history:
     #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
   ref: '117513874714476845'
   ai: false
+- posted_at: '2026-10-28T12:25:37.488359+01:00'
+  channel: mastodon
+  slug: 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen
+  title: 'ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung'
+  angle: vergleich
+  url: https://mastodon.social/@FranksFinanzcheck/117518286645334223
+  ok: true
+  text: 'ETF-Sparplan starten oder Dein Schritt-für-Schritt-Anleitung?
+
+
+    Im Rechenbeispiel des Artikels werden aus 50 € monatlich über 20 Jahre bei angenommenen
+    5 % Rendite p.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
+  ref: '117518286645334223'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1172,4 +1192,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-27T22:22:53.985833+01:00'
+updated_at: '2026-10-28T12:25:47.112026+01:00'

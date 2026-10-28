@@ -1,0 +1,304 @@
+# ============================================================
+#  SEO-PARITÄT – Cornerstones · Fokus-Keywords · Social-Karten
+#  (28.10.2026)
+# ------------------------------------------------------------
+#  WARUM ES DIESEN LAUF GIBT
+#  -------------------------
+#  Vier Werkzeuge aus dem Vorgang „SEO-Parität" prüfen Inhalte, die keine
+#  andere Wache sieht:
+#    · markierte Cornerstones, die niemand verlinkt oder unvollständig sind
+#    · mehrere Artikel mit demselben Fokus-Keyword (Kannibalisierung)
+#    · Social-Karten über dem Kanal-Richtwert oder ohne Bild
+#    · interne Linkvorschläge (immer nur Bericht, nie eine Änderung)
+#  Lokal richtig und im Betrieb unsichtbar ist genau die Ausfallklasse,
+#  die `scripts/trigger_wache.py` für neun andere Workflows aufgeschrieben
+#  hat (WF-E813): Die Prüfung existiert, aber nichts löst sie aus.
+#
+#  ZWEI MESSPUNKTE, EINE POLICY
+#  ----------------------------
+#    `gate`   – jeder Push auf main und jeder PR: Frontmatter, ohne Hugo,
+#               Sekunden. Dieser Job entscheidet über den Merge.
+#    `gebaut` – nächtlich und auf Zuruf: baut die Seite mit demselben
+#               Kommando wie die Produktion und prüft die TATSÄCHLICH
+#               gerenderten og:*-Tags. Das ist die maßgebliche Quelle
+#               (docs/ANLEITUNG-SEO-PARITAET.md); bisher war nur der
+#               nachgebaute Frontmatter-Weg getestet.
+#  `gebaut` läuft bewusst NICHT bei jedem PR: `e2e.yml` baut dort bereits
+#  und prüft die og-Tags auf Vorhandensein. Ein zweiter Build pro
+#  Layout-PR wäre Wartezeit ohne neue Erkenntnis – deshalb ist der
+#  Nachtlauf der Ort für die gebaute Wahrheit.
+#
+#  DIE POLICY STEHT NICHT HIER
+#  ---------------------------
+#  Welcher Befund den Merge blockiert, entscheidet
+#  `scripts/seo_paritaet_ci.py` – testbar, mit eigenem Selbsttest und
+#  Begründung im Dateikopf:
+#     SPERRE    P1 überall · Fokus-Keywords P2 · Cornerstone C1/C2/C3/C5
+#     BERNSTEIN alle P3 · Cornerstone C4 („älter als 180 Tage") und C6
+#  C4 sperrt absichtlich nicht: Ein Gate, das von der Uhr abhängt, wird
+#  irgendwann rot, ohne dass jemand Code angefasst hat (Lehre vom
+#  07.10.2026, `scripts/selftest_clock.py`). Wer es strenger will, startet
+#  den Lauf von Hand mit `streng: true` – dann bewusst, nicht als Dauerzustand.
+#
+#  EXIT 1 UND EXIT 2 SIND VERSCHIEDENE AUSSAGEN
+#  --------------------------------------------
+#  `1` = die Policy sagt nein (ein Befund sperrt). `2` = es wurde nichts
+#  gemessen (Werkzeug, Selbsttest oder Umleitung defekt). Der erste Lauf
+#  dieses Workflows (28.10.2026) hat den Unterschied vorgeführt: `bash`
+#  wertete `> seo-paritaet/summary.md` aus, BEVOR das Verzeichnis existierte,
+#  die Zeile starb mit Exit 1 – und der PR las „ein Befund sperrt", obwohl
+#  kein Befund erhoben wurde. Darum: `mkdir -p` vor der Umleitung, jede
+#  Ausnahme im Skript wird zu Exit 2, und die erste Fehlerzeile steht in der
+#  Annotation statt nur im Log.
+#
+#  WAS DIESER LAUF NICHT TUT
+#  -------------------------
+#    · keine Netzaufrufe außer den GitHub-eigenen Actions; PyYAML kommt aus
+#      dem hashgesperrten `requirements-ci.txt`, npm wird nicht gebraucht
+#      (der DOM-Test prüft reine Funktionen, kein jsdom)
+#    · keine Schreibzugriffe auf `content/`, `data/` oder `static/`
+#    · keine PR-Kommentare: Befund steht in der Lauf-Zusammenfassung und im
+#      Artefakt. Ein Kommentar pro Lauf wäre Rauschen (Governance #206:
+#      ein Kanal, nicht zwei).
+#
+#  Runbook: docs/ANLEITUNG-SEO-PARITAET.md
+#  Werkzeug: scripts/seo_paritaet_ci.py   (Selbsttest läuft im Gate mit)
+# ============================================================
+name: SEO-Parität (Cornerstones · Fokus-Keywords · Social-Karten)
+
+on:
+  # Trigger-Wache (W1/W3): Beide Listen sind IDENTISCH und nennen alles, was
+  # ein `run:`-Block dieses Laufs aufruft, plus die Inhalte, die er beurteilt.
+  # Fehlt eine Datei, prüft dieser Lauf sie nicht – `npm run trigger:check`.
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/seo_paritaet_ci.py'
+      - 'scripts/social_limits.py'
+      - 'scripts/social_vorschau.py'
+      - 'scripts/fokus_keywords.py'
+      - 'scripts/cornerstone_wache.py'
+      - 'scripts/link_vorschlaege.py'
+      - 'scripts/internal_linker.py'
+      - 'scripts/post_utils.py'
+      - 'scripts/tests/test_seo_paritaet_ci.py'
+      - 'scripts/tests/test_fokus_keywords.py'
+      - 'scripts/tests/test_cornerstone_wache.py'
+      - 'scripts/tests/test_link_vorschlaege.py'
+      - 'scripts/tests/test_social_vorschau.py'
+      - 'tools/social-vorschau/**'
+      # Inhalte sind Prüfgegenstand: Ein neuer Artikel kann einen markierten
+      # Cornerstone unterverlinkt lassen oder mit einem bestehenden
+      # Fokus-Keyword kollidieren.
+      - 'content/posts/**'
+      - 'content/pillar/**'
+      - 'requirements-ci.in'
+      - 'requirements-ci.txt'
+      - 'docs/ANLEITUNG-SEO-PARITAET.md'
+      - '.github/workflows/seo-paritaet.yml'
+  pull_request:
+    paths:
+      - 'scripts/seo_paritaet_ci.py'
+      - 'scripts/social_limits.py'
+      - 'scripts/social_vorschau.py'
+      - 'scripts/fokus_keywords.py'
+      - 'scripts/cornerstone_wache.py'
+      - 'scripts/link_vorschlaege.py'
+      - 'scripts/internal_linker.py'
+      - 'scripts/post_utils.py'
+      - 'scripts/tests/test_seo_paritaet_ci.py'
+      - 'scripts/tests/test_fokus_keywords.py'
+      - 'scripts/tests/test_cornerstone_wache.py'
+      - 'scripts/tests/test_link_vorschlaege.py'
+      - 'scripts/tests/test_social_vorschau.py'
+      - 'tools/social-vorschau/**'
+      - 'content/posts/**'
+      - 'content/pillar/**'
+      - 'requirements-ci.in'
+      - 'requirements-ci.txt'
+      - 'docs/ANLEITUNG-SEO-PARITAET.md'
+      - '.github/workflows/seo-paritaet.yml'
+  schedule:
+    # 04:50 UTC = 06:50 MESZ – nach dem Nacht-Deploy, vor der Redaktion.
+    # Der einzige Lauf, der die GEBAUTE Seite sieht: Damit fällt auch ein
+    # Template-Drift auf, den kein Pfad-Filter bemerkt.
+    - cron: '50 4 * * *'
+  workflow_dispatch:
+    inputs:
+      streng:
+        description: 'Auch reine Hinweise (P3) als Sperre behandeln'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-paritaet-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: Gate (Frontmatter, ohne Build)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      # Der DOM-Test prüft reine Funktionen (app.js) – kein npm ci nötig.
+      # Ohne Node meldet das Werkzeug „nicht gemessen", nicht „grün".
+      - name: Node einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      # PyYAML ist die einzige Abhängigkeit: gepinnt UND mit Hashes, weil ein
+      # manipulierter Index sonst ein stiller Mitleser wäre (CLAUDE.md, Regel 4).
+      - name: Abhängigkeiten installieren (gepinnt, mit Hashes)
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+
+      # EIN Einstiegspunkt: Er führt zuerst die Selbsttests der fünf Werkzeuge
+      # und die Unit-Tests aus, dann die Befunde, dann die Policy. Ein grüner
+      # Haken ohne Selbsttest wäre wertlos – die Reihenfolge steht deshalb im
+      # Skript und nicht in dieser Datei.
+      - name: SEO-Parität prüfen
+        env:
+          # Über env, nie als ${{ … }} im run-Block (Code-Injection-Vermeidung).
+          STRENG: ${{ github.event.inputs.streng || 'false' }}
+          BERICHT: seo-paritaet/bericht.md
+          DATEN: seo-paritaet/bericht.json
+        run: |
+          set +e
+          # Das Ausgabeverzeichnis muss VOR der Umleitung existieren: `bash`
+          # wertet `> seo-paritaet/summary.md` aus, bevor das Skript läuft.
+          # Fehlt es, stirbt die Zeile mit Exit 1 – und der Lauf meldete
+          # „ein Befund sperrt", obwohl gar nichts gerechnet wurde (erster
+          # Lauf dieses Workflows, 28.10.2026).
+          mkdir -p seo-paritaet
+          zusatz=""
+          if [ "$STRENG" = "true" ]; then zusatz="--streng"; fi
+          python3 scripts/seo_paritaet_ci.py \
+            --md "$BERICHT" --json "$DATEN" --summary $zusatz \
+            > /tmp/seo-paritaet-summary.md 2> /tmp/seo-paritaet.log
+          code=$?
+          cat /tmp/seo-paritaet.log
+          # Stirbt das Skript vor dem Bericht, gibt es nichts anzuzeigen.
+          [ -s /tmp/seo-paritaet-summary.md ] \
+            && cat /tmp/seo-paritaet-summary.md >> "$GITHUB_STEP_SUMMARY"
+          if [ "$code" -ne 0 ]; then
+            # Die erste echte Fehlerzeile gehört in die Annotation: Wer sie
+            # nicht sieht, lädt ein Artefakt herunter, das er nicht braucht.
+            # Reihenfolge der Aussagekraft: benannter Test, dann Ausnahme,
+            # dann irgendetwas. „failures=1" allein hilft niemandem.
+            zeile="$(grep -m1 -E '^(❌|FAIL:|ERROR:)' /tmp/seo-paritaet.log 2>/dev/null)"
+            if [ -z "$zeile" ] && grep -q '^Traceback' /tmp/seo-paritaet.log 2>/dev/null; then
+              # Die Überschrift „Traceback" sagt nichts. Interessant sind die
+              # letzten Zeilen: Datei, Zeile, Ausnahmetyp, Meldung.
+              zeile="$(grep -v '^[[:space:]]*$' /tmp/seo-paritaet.log | tail -n 2 | tr '\n' ' ')"
+            elif [ -z "$zeile" ]; then
+              zeile="$(tail -n 1 /tmp/seo-paritaet.log 2>/dev/null)"
+            fi
+            [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"
+            zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-800)"
+          fi
+          if [ "$code" = "1" ]; then
+            echo "::error title=SEO-Parität::Mindestens ein Befund sperrt den Merge – ${zeile}. Der Bericht steht in der Lauf-Zusammenfassung, die vollständige Liste im Artefakt 'seo-paritaet-gate'. Policy: docs/ANLEITUNG-SEO-PARITAET.md"
+          elif [ "$code" = "2" ]; then
+            echo "::error title=SEO-Parität::Ein Werkzeug oder sein Selbsttest ist defekt – es wird nichts freigegeben. ${zeile}"
+          fi
+          exit "$code"
+
+      # Auch bei Rot: Der Bericht ist die Grundlage der Reparatur.
+      - name: Bericht als Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: seo-paritaet-gate
+          path: seo-paritaet/
+          retention-days: 14
+          if-no-files-found: warn
+
+  gebaut:
+    name: Gebaute Wahrheit (og:*-Tags am gerenderten HTML)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    # Job-Ebene statt Schritt-Ebene: Die Composite-Action hugo-build sieht
+    # Job-Variablen zuverlässig, ein `env:` am `uses:`-Schritt nicht
+    # (gleiche Begründung wie in e2e.yml).
+    env:
+      HUGO_JSDELIVR_SHA: ${{ github.sha }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren (gepinnt, mit Hashes)
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.168.0"
+
+      # Dasselbe Kommando wie die Produktion (`--minify`): Geprüft wird die
+      # Seite, die Leser bekommen – inklusive Template-Regeln wie „Titel unter
+      # 40 Zeichen bekommt den Marken-Zusatz".
+      - name: Website bauen
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "SEO-Parität · gebaute Wahrheit"
+
+      # Derselbe Orchestrator, andere Quelle: `--quelle build` liest die
+      # gerenderten og:*-Tags statt sie aus dem Frontmatter nachzubilden.
+      # Die Selbsttests entfallen hier (sie liefen im Gate); die Policy gilt
+      # unverändert, und ein fehlender Build ist ein Werkzeugfehler (Exit 2).
+      - name: Social-Karten am gebauten HTML prüfen
+        env:
+          BERICHT: seo-paritaet/bericht-build.md
+          DATEN: seo-paritaet/bericht-build.json
+        run: |
+          set +e
+          mkdir -p seo-paritaet
+          python3 scripts/seo_paritaet_ci.py --quelle build --ohne-tests \
+            --md "$BERICHT" --json "$DATEN" --summary \
+            > /tmp/seo-paritaet-build-summary.md 2> /tmp/seo-paritaet-build.log
+          code=$?
+          cat /tmp/seo-paritaet-build.log
+          [ -s /tmp/seo-paritaet-build-summary.md ] \
+            && cat /tmp/seo-paritaet-build-summary.md >> "$GITHUB_STEP_SUMMARY"
+          if [ "$code" != "0" ]; then
+            if grep -q '^Traceback' /tmp/seo-paritaet-build.log 2>/dev/null; then
+              zeile="$(grep -v '^[[:space:]]*$' /tmp/seo-paritaet-build.log | tail -n 2 | tr '\n' ' ')"
+            else
+              zeile="$(tail -n 1 /tmp/seo-paritaet-build.log 2>/dev/null)"
+            fi
+            [ -n "$zeile" ] || zeile="kein Log – Exit ${code} ohne Ausgabe"
+            zeile="$(printf '%s' "$zeile" | tr -d '\r' | sed 's/%/%25/g' | cut -c1-600)"
+            echo "::error title=SEO-Parität (gebaut)::${zeile} · Die gerenderte Seite verletzt entweder die Karten-Policy (z. B. og:image fehlt) oder der Build ist unvollständig. Details im Artefakt 'seo-paritaet-build'."
+          fi
+          exit "$code"
+
+      - name: Bericht als Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: seo-paritaet-build
+          path: seo-paritaet/
+          retention-days: 14
+          if-no-files-found: warn

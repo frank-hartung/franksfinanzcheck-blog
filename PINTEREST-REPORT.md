@@ -1,14 +1,10 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-10-27 14:49 UTC · Modus: FIX
+**Stand:** 2026-10-28 10:42 UTC · Modus: FIX
 
-**Report-Schema:** 5 · **Geprüfte Artikel:** 98 (live: 68 · geparkt: 30)
-**Quellfingerabdruck:** `e9afd22992a3f06fff4aed759efb613162de2694e7bbaa8608efe542f5577009`
+**Report-Schema:** 5 · **Geprüfte Artikel:** 99 (live: 70 · geparkt: 29)
+**Quellfingerabdruck:** `af998a420d1b956ac0f0da323ea8be7ff6cad9b73bbcc939ce1727c9b1ae2ed9`
 
 Probleme: 0 · Geheilt: 0
-
-**Geparkte URLs mit erklärter Weiterleitung:** 1 (`data/weiterleitungen.yaml`, bewusst kein Pin-Ziel – kein Befund):
-
-- `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` → `/pillar/versicherungen/` (Regel C, geparkt)
 
 ✅ Alle Pinterest-Signale im Profi-Bereich.
