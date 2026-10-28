@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-28 19:34 UTC  
+**Stand:** 2026-10-28 21:56 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-28): 2 Artikel – Ziel erfüllt. – Bestand: 4 von Gates gehalten (ältester 0 Tage: ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert)
+**Befund:** Letzter Publikationstag (2026-10-28): 2 Artikel – Ziel erfüllt. – Bestand: 4 von Gates gehalten (ältester 0 Tage: faktenfrische: 31 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) – keine Veröffentlichung ohne aktuellen Beleg)
 
 | Kennzahl | Wert |
 |---|---|
