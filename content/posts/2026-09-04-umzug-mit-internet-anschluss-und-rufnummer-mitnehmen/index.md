@@ -210,7 +210,7 @@ Ein Neuvertrag ist häufig günstiger, weil Neukundenkonditionen gelten. Rechne 
 
 Sobald der Umzugstermin feststeht. Sechs bis acht Wochen Vorlauf geben dir Wahlmöglichkeiten bei Terminen.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 **Lesetipp:** [DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)
 
 ---

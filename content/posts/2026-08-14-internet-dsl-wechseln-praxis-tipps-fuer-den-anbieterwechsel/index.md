@@ -95,7 +95,7 @@ Entscheidend ist nicht die größte Zahl im Werbebanner, sondern was gleichzeiti
 - Cloud-Backups
 - mehrere Geräte parallel
 
-Wenn du mehr dazu wissen willst, hilft dir auch dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
+Wenn du mehr dazu wissen willst, hilft dir auch dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
 ## DSL, Kabel oder Glasfaser – was passt zu dir?
 
