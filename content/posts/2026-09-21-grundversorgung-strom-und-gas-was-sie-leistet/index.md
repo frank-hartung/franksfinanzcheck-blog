@@ -96,9 +96,9 @@ Diese Modellrechnung arbeitet mit Annahmen. Sie liefert keine Marktpreise, sonde
 
 Annahmen: Ein Haushalt verbraucht 3.000 Kilowattstunden Strom im Jahr. Der Grundversorgungstarif kostet in der Annahme 42 Cent pro Kilowattstunde, ein Sondertarif 32 Cent. Grundpreis und Boni bleiben in dieser Rechnung ausdrücklich außer Betracht.
 
-Rechenweg Grundversorgung: 3.000 Kilowattstunden mal 0,42 Euro ergeben 1.260 Euro im Jahr. Rechenweg Sondertarif: 3.000 Kilowattstunden mal 0,32 Euro ergeben 960 Euro. Modellrechnung: Der Unterschied liegt bei 300 Euro im Jahr.
+Rechenweg Grundversorgung: 3.000 Kilowattstunden mal 0,42 € ergeben 1.260 € im Jahr. Rechenweg Sondertarif: 3.000 Kilowattstunden mal 0,32 € ergeben 960 €. Modellrechnung: Der Unterschied liegt bei 300 € im Jahr.
 
-Jetzt die Gegenprobe mit einem geringeren Verbrauch. Angenommen, eine Einzelperson verbraucht 1.500 Kilowattstunden. Rechenweg: 1.500 mal 0,42 Euro ergeben 630 Euro, 1.500 mal 0,32 Euro ergeben 480 Euro. Modellrechnung: Der Unterschied liegt bei 150 Euro.
+Jetzt die Gegenprobe mit einem geringeren Verbrauch. Angenommen, eine Einzelperson verbraucht 1.500 Kilowattstunden. Rechenweg: 1.500 mal 0,42 € ergeben 630 €, 1.500 mal 0,32 € ergeben 480 €. Modellrechnung: Der Unterschied liegt bei 150 €.
 
 Die Rechnung zeigt zwei Dinge. Der Hebel wächst mit dem Verbrauch, und der Grundpreis kann den Vergleich verschieben. Rechne deshalb immer mit Arbeitspreis und Grundpreis zusammen.
 
@@ -106,8 +106,8 @@ Die beiden Verbrauchsfälle aus der Modellrechnung im Vergleich:
 
 | Jahresverbrauch | Grundversorgung im Modell | Sondertarif im Modell | Unterschied im Jahr |
 |---|---|---|---|
-| 3.000 Kilowattstunden | 1.260 Euro | 960 Euro | 300 Euro |
-| 1.500 Kilowattstunden | 630 Euro | 480 Euro | 150 Euro |
+| 3.000 Kilowattstunden | 1.260 € | 960 € | 300 € |
+| 1.500 Kilowattstunden | 630 € | 480 € | 150 € |
 
 ## Der Ausweg in drei Schritten
 

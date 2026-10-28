@@ -51,7 +51,7 @@ Die folgende Tabelle zeigt die häufigsten Energiediebe im Haushalt.
 Der größte Hebel liegt im Umgang mit dem Stand-by. Viele Geräte schlafen nie richtig. Sobald du weißt, welche Geräte im Hintergrund ziehen, handelst du gezielt. Prüfe vor allem Geräte, die sich warm anfühlen. Wärme ist oft ein Zeichen für verschwendete Energie.
 
 > **Rechenbeispiel:**
-> Ein älterer Fernseher verbraucht im Stand‑by schnell 5 Watt. Das Gerät läuft so 24 Stunden am Tag. Auf den Monat gerechnet sind das etwa 3,6 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde – dem Durchschnitt für Haushalte laut Bundesnetzagentur – kostet das 1,44 Euro. Hast du fünf solcher älteren Geräte, zahlst du über 7 Euro im Monat für nichts. Im Jahr summiert sich das auf rund 86 Euro. Aktuelle Geräte ziehen im Stand‑by meist deutlich weniger, oft nur zwischen 0,5 und 2 Watt.
+> Ein älterer Fernseher verbraucht im Stand‑by schnell 5 Watt. Das Gerät läuft so 24 Stunden am Tag. Auf den Monat gerechnet sind das etwa 3,6 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde – dem Durchschnitt für Haushalte laut Bundesnetzagentur – kostet das 1,44 €. Hast du fünf solcher älteren Geräte, zahlst du über 7 € im Monat für nichts. Im Jahr summiert sich das auf rund 86 €. Aktuelle Geräte ziehen im Stand‑by meist deutlich weniger, oft nur zwischen 0,5 und 2 Watt.
 
 ## Standby und Geräte im Ruhezustand
 
@@ -74,7 +74,7 @@ Ein typischer Denkfehler: Du hältst den kleinen Verbrauch für egal. In Wahrhei
 Am einfachsten senkst du diese Kosten mit einer Leiste. Eine schaltbare Steckdose trennt alle Geräte mit einem Klick. Dann behältst du die volle Kontrolle. Du siehst die Einsparung schon bei der nächsten Rechnung.
 
 > **Rechenbeispiel:**
-> Du nutzt einen Smart‑Plug für deine TV-Ecke mit älteren Geräten. Der Stecker kostet einmalig etwa 20 Euro. Er schaltet nachts den Fernseher, die Boxen und die Konsole ab. Zusammen ziehen diese Geräte 10 Watt. In der Nacht (8 Stunden) sparst du so 80 Wattstunden. Das sind im Jahr rund 29 Kilowattstunden oder knapp 12 Euro. Nach weniger als zwei Jahren hat sich der Stecker bezahlt gemacht.
+> Du nutzt einen Smart‑Plug für deine TV-Ecke mit älteren Geräten. Der Stecker kostet einmalig etwa 20 €. Er schaltet nachts den Fernseher, die Boxen und die Konsole ab. Zusammen ziehen diese Geräte 10 Watt. In der Nacht (8 Stunden) sparst du so 80 Wattstunden. Das sind im Jahr rund 29 Kilowattstunden oder knapp 12 €. Nach weniger als zwei Jahren hat sich der Stecker bezahlt gemacht.
 
 ## Alte Geräte und ineffiziente Technik
 
@@ -98,7 +98,7 @@ Ein typischer Fehler: Du behältst das Gerät aus Gewohnheit. Ein Austausch wirk
 Gezielte Erneuerung senkt deine Fixkosten dauerhaft. Achte beim Kauf auf das verpflichtende EU‑Energieeffizienzlabel. Es ordnet jedes neue Gerät in die Skala von A bis G ein und nennt den Jahresverbrauch direkt in Kilowattstunden – so lassen sich zwei Modelle auf einen Blick vergleichen. Ein Gerät der Klasse D kann heute besser sein als ein altes Gerät mit drei Pluszeichen.
 
 > **Rechenbeispiel:**
-> Ersetze einen alten Kühlschrank (300 kWh im Jahr) durch ein neues Modell (150 kWh im Jahr). Der Unterschied beträgt 150 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde sparst du 60 Euro pro Jahr. Kostet das neue Gerät 450 Euro, dauert es siebeneinhalb Jahre – zu lang für die Fünf-Jahres-Orientierung der Bundesnetzagentur. Ein gleichwertiges Modell für 300 Euro schafft die Frist genau, bei 280 Euro bist du nach gut viereinhalb Jahren aus den Kosten.
+> Ersetze einen alten Kühlschrank (300 kWh im Jahr) durch ein neues Modell (150 kWh im Jahr). Der Unterschied beträgt 150 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde sparst du 60 € pro Jahr. Kostet das neue Gerät 450 €, dauert es siebeneinhalb Jahre – zu lang für die Fünf-Jahres-Orientierung der Bundesnetzagentur. Ein gleichwertiges Modell für 300 € schafft die Frist genau, bei 280 € bist du nach gut viereinhalb Jahren aus den Kosten.
 
 ## Fehlende Messung und undurchsichtige Abrechnung
 
@@ -109,9 +109,9 @@ Die Tabelle zeigt Methoden für die Messung und ihre Vorteile.
 | Methode | Aufwand | Genauigkeit | Kosten (Euro) |
 | :--- | :--- | :--- | :--- |
 | Online-Analyse (Bundesnetzagentur) | gering | grob | 0 |
-| Smart‑Plug | gering | mittel | 20 – 30 |
-| Zähler‑Adapter | mittel | hoch | 50 – 80 |
-| App + Sensor | hoch | hoch | 100 – 150 |
+| Smart‑Plug | gering | mittel | 20–30 |
+| Zähler‑Adapter | mittel | hoch | 50–80 |
+| App + Sensor | hoch | hoch | 100–150 |
 | Profi‑Messung | hoch | sehr hoch | auf Anfrage |
 
 Ohne echte Zahlen triffst du keine gute Entscheidung. Kennst du den Durst deiner Geräte, handelst du sicher. Der 4K‑Prüfpfad hilft dir bei der Struktur. Zuerst musst du die Kosten sehen. Erfasse also alle Beträge in einer Liste.
@@ -119,7 +119,7 @@ Ohne echte Zahlen triffst du keine gute Entscheidung. Kennst du den Durst deiner
 Danach prüfst du die Zahlen mit einem Gerät. So findest du den Übeltäter in der Küche oder im Wohnzimmer. Oft ist es die alte Truhe im Keller. Sie läuft unbemerkt und verbraucht Unmengen an Strom. Einmal gemessen, fällt die Entscheidung zum Abschalten leicht.
 
 > **Rechenbeispiel:**
-> Du installierst einen Smart‑Plug an deinem Router. Das Gerät zeigt eine Leistung von 6 Watt an. Nach einem Monat misst der Stecker 4,3 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde kostet das 1,70 Euro. Schaltest du den Router nachts per Zeitschaltuhr aus, sparst du die Hälfte. Das sind rund 10 Euro im Jahr für eine kleine Einstellung.
+> Du installierst einen Smart‑Plug an deinem Router. Das Gerät zeigt eine Leistung von 6 Watt an. Nach einem Monat misst der Stecker 4,3 Kilowattstunden. Bei rund 40 Cent pro Kilowattstunde kostet das 1,70 €. Schaltest du den Router nachts per Zeitschaltuhr aus, sparst du die Hälfte. Das sind rund 10 € im Jahr für eine kleine Einstellung.
 
 ## Praktische Tools: Smart‑Plug und Messgeräte
 
@@ -140,7 +140,7 @@ Der Schlüssel liegt in der dauerhaften Nutzung. Im 4K‑Prüfpfad rechnest du d
 Vielleicht ist ein Filter verstopft. Das lässt den Motor schwerer arbeiten. Oder eine Dichtung ist defekt. Kleine Ursachen haben oft eine große Wirkung auf die Rechnung. Mit Technik behältst du den Überblick ohne Mühe.
 
 > **Rechenbeispiel:**
-> Du programmierst einen Stecker für die Kaffeemaschine. Sie schaltet sich nach dem Frühstück ganz aus. Die Maschine braucht im Stand‑by 2 Watt für die Uhr. Pro Monat sparst du so etwa 1,4 Kilowattstunden. Das sind zwar nur rund 60 Cent. Doch zusammen mit anderen Geräten sparst du so leicht 100 Euro im Jahr.
+> Du programmierst einen Stecker für die Kaffeemaschine. Sie schaltet sich nach dem Frühstück ganz aus. Die Maschine braucht im Stand‑by 2 Watt für die Uhr. Pro Monat sparst du so etwa 1,4 Kilowattstunden. Das sind zwar nur rund 60 Cent. Doch zusammen mit anderen Geräten sparst du so leicht 100 € im Jahr.
 
 ## Häufige Fehler und wie du sie vermeidest
 
@@ -173,7 +173,7 @@ Ja, das lohnt sich oft sehr schnell. Als Orientierung gilt: Die Ersparnis sollte
 
 ### Was kostet ein Smart‑Plug und lohnt er sich?
 
-Ein guter Stecker kostet zwischen 20 und 30 Euro. Die Ersparnis beginnt in der ersten Minute. Sobald du Geräte im Stand-by trennst, sinkt die Last. Nach etwa einem Jahr hat sich der Kauf meist amortisiert. Zudem bieten diese Stecker viel Komfort durch Zeitpläne und Apps.
+Ein guter Stecker kostet zwischen 20 und 30 €. Die Ersparnis beginnt in der ersten Minute. Sobald du Geräte im Stand-by trennst, sinkt die Last. Nach etwa einem Jahr hat sich der Kauf meist amortisiert. Zudem bieten diese Stecker viel Komfort durch Zeitpläne und Apps.
 
 ### Wie kann ich Kosten senken, ohne alles zu trennen?
 

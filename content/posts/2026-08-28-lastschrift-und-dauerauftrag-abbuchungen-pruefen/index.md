@@ -138,11 +138,11 @@ Trage diese drei Zahlen in deine Liste ein und aktualisiere sie vierteljährlich
 
 Diese Rechnung nutzt angenommene Beträge. Sie beschreibt keine Marktpreise, sondern zeigt eine Struktur.
 
-Annahmen: Du zahlst monatlich vier Abos per Lastschrift und zwei per Karte. Ein Abo kostet im Beispiel 7,50 Euro, ein Kartenabo 4 Euro. Zusätzlich taucht eine nicht erkannte Buchung über 19 Euro auf.
+Annahmen: Du zahlst monatlich vier Abos per Lastschrift und zwei per Karte. Ein Abo kostet im Beispiel 7,50 €, ein Kartenabo 4 €. Zusätzlich taucht eine nicht erkannte Buchung über 19 € auf.
 
-Rechenweg für die Lastschriften: 4 mal 7,50 Euro ergeben 30 Euro. Rechenweg für die Kartenabos: 2 mal 4 Euro ergeben 8 Euro. Modellrechnung: Die bekannten Posten summieren sich zu 38 Euro im Monat. Mit der unbekannten Buchung sind es 57 Euro.
+Rechenweg für die Lastschriften: 4 mal 7,50 € ergeben 30 €. Rechenweg für die Kartenabos: 2 mal 4 € ergeben 8 €. Modellrechnung: Die bekannten Posten summieren sich zu 38 € im Monat. Mit der unbekannten Buchung sind es 57 €.
 
-Der zweite Teil der Rechnung: Angenommen, du prüfst zwölf Monate lang jeden Auszug und findest dabei drei unklare Buchungen über 19 Euro. Modellrechnung: 3 mal 19 Euro ergeben 57 Euro. Der Aufwand für diese drei Funde liegt bei rund einer Stunde im Jahr.
+Der zweite Teil der Rechnung: Angenommen, du prüfst zwölf Monate lang jeden Auszug und findest dabei drei unklare Buchungen über 19 €. Modellrechnung: 3 mal 19 € ergeben 57 €. Der Aufwand für diese drei Funde liegt bei rund einer Stunde im Jahr.
 
 Das ist der eigentliche Punkt. Die Kontrolle ist kein Sparen, sondern eine Versicherung gegen kleine Verluste, die sich ohne Blick nicht bemerkbar machen.
 

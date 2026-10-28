@@ -83,7 +83,7 @@ Vergleiche den Verbrauch vor und nach der Änderung. Lass den Alltag dabei mögl
 
 **Modellrechnung:** Angenommen, ein Gerät zieht im Stand-by durchgehend 5 Watt. In dieser Modellrechnung ergeben 5 Watt mal 24 Stunden mal 365 Tage, geteilt durch 1.000, rund 43,8 Kilowattstunden im Jahr. Alle Werte sind frei gewählte Annahmen. Sie beschreiben kein bestimmtes Gerät.
 
-**Modellrechnung:** Wenn du für diese 43,8 Kilowattstunden einen angenommenen Preis von 0,35 Euro je Kilowattstunde einsetzt, ergibt die Rechnung rund 15,33 Euro im Jahr. Das ist eine Rechenhilfe, kein aktueller Marktpreis. Ersetze den Preis durch den Wert auf deiner eigenen Rechnung.
+**Modellrechnung:** Wenn du für diese 43,8 Kilowattstunden einen angenommenen Preis von 0,35 € je Kilowattstunde einsetzt, ergibt die Rechnung rund 15,33 € im Jahr. Das ist eine Rechenhilfe, kein aktueller Marktpreis. Ersetze den Preis durch den Wert auf deiner eigenen Rechnung.
 
 Die Rechnung zeigt nur den möglichen Stand-by-Anteil. Sie enthält noch nicht den Strombedarf der smarten Steckdose oder eines Hubs. Sie berücksichtigt auch nicht, wie oft du das Gerät nutzt. Ziehe deshalb keine feste Ersparnis aus einem einzelnen Beispiel.
 

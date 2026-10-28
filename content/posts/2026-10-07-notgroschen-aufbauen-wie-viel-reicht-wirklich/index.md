@@ -51,14 +51,14 @@ Bist du dir am Anfang noch unsicher? Dann starte erst einmal mit dem Ziel von dr
 
 ## Wie viel ist genug?
 
-Die 50-30-20-Regel hilft dir bei der Ordnung deines Geldes. Dabei gehen 50 % deines Lohns an feste Ausgaben wie die Miete. Weitere 30 % decken variable Kosten für Freizeit oder Hobbys. Die restlichen 20 % sind für das Sparen und den Abbau von Schulden gedacht. Dieser Teil ist die Basis für dein Vermögen.
+Die 50–30–20-Regel hilft dir bei der Ordnung deines Geldes. Dabei gehen 50 % deines Lohns an feste Ausgaben wie die Miete. Weitere 30 % decken variable Kosten für Freizeit oder Hobbys. Die restlichen 20 % sind für das Sparen und den Abbau von Schulden gedacht. Dieser Teil ist die Basis für dein Vermögen.
 
 Aus diesem Sparanteil kannst du einen Teil für den Notgroschen nehmen. Viele Experten raten zu 10 % des Nettolohns. Das machst du so lange, bis dein Ziel erreicht ist. So wächst dein Schutzraum Monat für Monat an.
 
 > **Rechenbeispiel:**
-> Du verdienst im Monat 2.500 € netto. Davon sparst du 10 %. Das sind 250 € jeden Monat.
-> Dein Ziel sind 4 Monatslöhne als Schutz. Das sind 4 mal 2.500 €. Die Zielsumme liegt also bei 10.000 €.
-> Rechnung für die Dauer: 10.000 € geteilt durch 250 € ergibt 40 Monate.
+> Du verdienst im Monat 2.500 € netto. Davon sparst du 10 %. Das sind 250 € jeden Monat.
+> Dein Ziel sind 4 Monatslöhne als Schutz. Das sind 4 mal 2.500 €. Die Zielsumme liegt also bei 10.000 €.
+> Rechnung für die Dauer: 10.000 € geteilt durch 250 € ergibt 40 Monate.
 
 Damit erreichst du dein Ziel in etwas mehr als drei Jahren. Deine Qualität im Leben leidet unter diesem Betrag kaum. Willst du schneller am Ziel sein? Dann erhöhe einfach deinen Anteil zum Sparen. Leite auch einmalige Beträge komplett in den Notgroschen um. Das kann Geld vom Finanzamt oder ein Bonus vom Chef sein. Auch Geldgeschenke zum Geburtstag helfen dir beim Aufbau.
 

@@ -98,11 +98,11 @@ Bewahre die Buchungsseite und die Bestätigung auf. Prüfe, ob Daten, Gästezahl
 
 ## Was zeigt eine Modellrechnung?
 
-**Modellrechnung:** Angenommen, ein Stellplatz kostet 31 Euro je Nacht und die Reise dauert fünf Nächte. Dann liegen die Platzkosten in dieser Modellrechnung bei 155 Euro. Der Betrag ist frei gewählt und kein Durchschnittspreis.
+**Modellrechnung:** Angenommen, ein Stellplatz kostet 31 € je Nacht und die Reise dauert fünf Nächte. Dann liegen die Platzkosten in dieser Modellrechnung bei 155 €. Der Betrag ist frei gewählt und kein Durchschnittspreis.
 
-**Modellrechnung:** Wenn in demselben Beispiel Strom mit 4 Euro je Nacht und eine feste Gebühr von 20 Euro hinzukommen, lautet die Rechnung 5 mal (31 plus 4) plus 20.
+**Modellrechnung:** Wenn in demselben Beispiel Strom mit 4 € je Nacht und eine feste Gebühr von 20 € hinzukommen, lautet die Rechnung 5 mal (31 plus 4) plus 20.
 
-**Modellrechnung:** In diesem Beispiel kosten Platz, Strom und Gebühr zusammen 195 Euro. Der Betrag umfasst nur diese Posten und ist kein Preisangebot.
+**Modellrechnung:** In diesem Beispiel kosten Platz, Strom und Gebühr zusammen 195 €. Der Betrag umfasst nur diese Posten und ist kein Preisangebot.
 
 **Modellrechnung:** Bei dieser Beispielreise kommen danach noch Fahrt, Essen und Ausrüstung dazu. Trage dafür deine eigenen Werte ein. So kannst du zwei Plätze fair vergleichen, auch wenn ihre Preislisten anders aufgebaut sind.
 
@@ -196,7 +196,7 @@ Lies die Bewertungen der letzten Wochen. Achte auf Hinweise zu Zufahrt, Nachbarn
 
 ### Was kostet eine Nacht realistisch?
 
-Plane für Stellplatz und zwei Personen meist 20 bis 45 Euro. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
+Plane für Stellplatz und zwei Personen meist 20 bis 45 €. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
 
 ### Wie halte ich Lebensmittel frisch?
 

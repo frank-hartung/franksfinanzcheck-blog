@@ -115,7 +115,7 @@ Anders sieht es bei Unternehmen aus, die Telekommunikationsdienste anbieten. Fü
 
 ## Kosten- und Nutzen-Check im 4K-Prüfpfad
 
-Ein Wechsel kostet dich meist 0 Euro. Die großen Dienste sind für Privatnutzer gratis. Dennoch hilft dir der 4K-Check bei der Wahl. So triffst du eine kluge Entscheidung für dein Heimnetz.
+Ein Wechsel kostet dich meist 0 €. Die großen Dienste sind für Privatnutzer gratis. Dennoch hilft dir der 4K-Check bei der Wahl. So triffst du eine kluge Entscheidung für dein Heimnetz.
 
 1. **Kosten sehen** – Prüfe, ob der Dienst wirklich dauerhaft gratis bleibt. Manche Anbieter wollen später Geld für Extras. Für normales Surfen reicht die kostenlose Basis immer aus.
 2. **Konditionen rechnen** – Vergleiche das Tempo mit dem Schutz deiner Daten. Miss die Antwortzeiten selbst, statt auf Pauschalurteile zu vertrauen. OpenDNS bietet Filteroptionen für Kinder an. Wähle, was dir am wichtigsten ist.
@@ -155,7 +155,7 @@ Der Wechsel ändert nichts an deiner Leitung. Dein Tarif bleibt genau so schnell
 Bekannte Anbieter betreiben ausgereifte Netze. Viele unterstützen moderne Verschlüsselung wie DNS-over-HTTPS oder DNS-over-TLS. So kann auf dem Weg zum Server niemand mitlesen, welche Seiten du anfragst. Ein Restrisiko bleibt: Der DNS-Anbieter selbst sieht deine Anfragen. Prüfe deshalb die Datenschutzregeln des Dienstes – und ob Zusagen wie das Löschen von Protokollen nach 24 Stunden klar dokumentiert sind.
 
 ### Was kostet ein Premium-DNS-Service?
-Die meisten Nutzer brauchen keinen bezahlten Dienst. Die kostenlosen Versionen sind bereits sehr gut. Premium-Pakete bieten oft Schutz vor Werbung oder Viren. Je nach Anbieter liegen sie grob zwischen 2 Euro und 5 Euro im Monat – die aktuellen Preise solltest du beim Dienst prüfen. Für Familien mit Kindern kann sich dieser Schutz lohnen.
+Die meisten Nutzer brauchen keinen bezahlten Dienst. Die kostenlosen Versionen sind bereits sehr gut. Premium-Pakete bieten oft Schutz vor Werbung oder Viren. Je nach Anbieter liegen sie grob zwischen 2 € und 5 € im Monat – die aktuellen Preise solltest du beim Dienst prüfen. Für Familien mit Kindern kann sich dieser Schutz lohnen.
 
 ### Kann ich den DNS-Server für jedes Gerät einzeln einstellen?
 Ja, das ist an jedem Handy oder Laptop möglich. In den WLAN-Optionen findest du meist die IP-Einstellungen. Dort kannst du von „Automatisch“ auf „Manuell“ umstellen. Der Weg über den Router ist aber bequemer. Er spart dir die Arbeit an jedem einzelnen Gerät.

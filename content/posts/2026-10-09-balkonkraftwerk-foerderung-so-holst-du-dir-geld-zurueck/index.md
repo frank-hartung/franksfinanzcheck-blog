@@ -74,7 +74,7 @@ Viele Artikel versprechen einen festen Zuschuss für jeden. Die Realität ist kl
 
 Der Bund zahlt für Balkonkraftwerke keinen Zuschuss an Privathaushalte. Sein Hebel liegt bei Steuern und Regeln. Für Solarmodule und wesentliche Komponenten entfällt die Umsatzsteuer, und die Anmeldung wurde vereinfacht.
 
-Der Nullsteuersatz hat für dich einen spürbaren Effekt. Ohne ihn wären beim Kauf [19 Prozent Umsatzsteuer](https://www.gesetze-im-internet.de/ustg_1980/__12.html) fällig. Die Regel erfasst Photovoltaikanlagen in der Nähe von Wohnungen, und ein Balkonkraftwerk fällt darunter.
+Der Nullsteuersatz hat für dich einen spürbaren Effekt. Ohne ihn wären beim Kauf [19 % Umsatzsteuer](https://www.gesetze-im-internet.de/ustg_1980/__12.html) fällig. Die Regel erfasst Photovoltaikanlagen in der Nähe von Wohnungen, und ein Balkonkraftwerk fällt darunter.
 
 Auch die BAFA fördert keine Balkonkraftwerke. Sie unterstützt Wärmepumpen und Solarthermie, aber weder Photovoltaik noch Steckersolargeräte. Das fasst der [Förderüberblick des Balkonkraftwerk-Kompendiums](https://www.balkonkraftwerk-kompendium.de/foerderungen/bundesweite-foerderungen) zusammen. Eine verlässliche BAFA-Summe für dein Balkonkraftwerk gibt es daher nicht.
 
@@ -106,11 +106,11 @@ Auch die Montage selbst verdient Aufmerksamkeit. Halterungen müssen fest sitzen
 
 Die folgende Rechnung arbeitet mit Annahmen, die du durch deine eigenen Zahlen ersetzen kannst. Die Ergebnisse sind kein Versprechen, sondern ein Maßstab.
 
-Annahme: Die Anlage kostet 500 € inklusive Halterung. Annahme: Sie erzeugt 600 kWh im Jahr, und du verbrauchst davon 70 Prozent selbst. Dazu kommt eine weitere Annahme: Dein Strompreis liegt bei 0,35 € pro kWh. Außerdem gilt die Annahme: Ein regionaler Zuschuss beträgt 100 €.
+Annahme: Die Anlage kostet 500 € inklusive Halterung. Annahme: Sie erzeugt 600 kWh im Jahr, und du verbrauchst davon 70 % selbst. Dazu kommt eine weitere Annahme: Dein Strompreis liegt bei 0,35 € pro kWh. Außerdem gilt die Annahme: Ein regionaler Zuschuss beträgt 100 €.
 
 Rechenbeispiel: 600 kWh mal 0,7 mal 0,35 € ergeben rund 147 € Ersparnis im Jahr. Modellrechnung: 500 € minus 100 € Zuschuss ergeben 400 € Restkosten. Modellrechnung: Diese Restkosten decken sich nach rund 2,7 Jahren durch die Ersparnis. Die Modellrechnung ohne Zuschuss ergibt rund 3,4 Jahre.
 
-Nun der ungünstige Fall. Annahme: Ein Balkon mit Nordausrichtung erzeugt nur 400 kWh im Jahr. Modellrechnung: Mit 400 kWh im Jahr, 70 Prozent Eigenverbrauch und 0,35 € pro kWh sparst du rund 98 € jährlich. Modellrechnung: Die 400 € Restkosten brauchen dann etwa 4,1 Jahre.
+Nun der ungünstige Fall. Annahme: Ein Balkon mit Nordausrichtung erzeugt nur 400 kWh im Jahr. Modellrechnung: Mit 400 kWh im Jahr, 70 % Eigenverbrauch und 0,35 € pro kWh sparst du rund 98 € jährlich. Modellrechnung: Die 400 € Restkosten brauchen dann etwa 4,1 Jahre.
 
 Der Schlüssel ist der Eigenverbrauch, also der Strom, den du selbst nutzt. Strom, den du selbst verbrauchst, senkt deine Rechnung. Strom, der ungenutzt ins Netz fließt, ändert an deiner Abrechnung nichts. Deshalb zählt der Eigenverbrauch mehr als die reine Leistung auf dem Datenblatt.
 

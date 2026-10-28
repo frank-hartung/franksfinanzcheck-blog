@@ -57,7 +57,7 @@ Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil
 
 * Ein Doppeltarifzähler hat zwei Zählwerke: **Hochtarif (HT)** für die teuren Zeiten und **Niedertarif (NT)** für die günstigen.
 * Der Vorteil wirkt nur über den **Nachtanteil** deines Verbrauchs, nicht über die Höhe des Rabatts allein.
-* Eine Orientierung liegt bei **30 bis 40 Prozent** Nachtanteil – darunter gewinnt meist der Einheitstarif.
+* Eine Orientierung liegt bei **30 bis 40 %** Nachtanteil – darunter gewinnt meist der Einheitstarif.
 * Prüfe zusätzlich den Grundpreis: Ein höherer Grundpreis frisst einen Teil des Vorteils auf.
 * Wie Preise und Tarifbestandteile geregelt sind, beschreibt die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html); die Kostenstruktur im Markt analysiert die [BDEW-Strompreisanalyse](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/).
 
@@ -110,32 +110,32 @@ Es gibt drei Konstellationen, in denen der Einheitstarif die bessere Wahl bleibt
 
 Diese Modellrechnung arbeitet mit angenommenen Preisen und beschreibt keinen Marktpreis. Sie zeigt nur, wie der Vergleich funktioniert.
 
-Annahmen: Dein Jahresverbrauch liegt bei 3.500 Kilowattstunden. Ein Einheitstarif kostet 0,35 Euro je Kilowattstunde. Der Doppeltarif kostet 0,38 Euro im Hochtarif und 0,28 Euro im Niedertarif. Der Grundpreis ist in beiden Fällen gleich. Dein Nachtanteil liegt bei 30 Prozent.
+Annahmen: Dein Jahresverbrauch liegt bei 3.500 Kilowattstunden. Ein Einheitstarif kostet 0,35 € je Kilowattstunde. Der Doppeltarif kostet 0,38 € im Hochtarif und 0,28 € im Niedertarif. Der Grundpreis ist in beiden Fällen gleich. Dein Nachtanteil liegt bei 30 %.
 
-Rechenweg Einheitstarif: 3.500 mal 0,35 Euro ergeben 1.225 Euro im Jahr.
+Rechenweg Einheitstarif: 3.500 mal 0,35 € ergeben 1.225 € im Jahr.
 
-Rechenweg Doppeltarif: 30 Prozent von 3.500 Kilowattstunden sind 1.050 Kilowattstunden im Niedertarif. Die restlichen 2.450 Kilowattstunden laufen im Hochtarif. Für den Hochtarif ergeben 2.450 mal 0,38 Euro 931 Euro. Für den Niedertarif ergeben 1.050 mal 0,28 Euro 294 Euro.
+Rechenweg Doppeltarif: 30 % von 3.500 Kilowattstunden sind 1.050 Kilowattstunden im Niedertarif. Die restlichen 2.450 Kilowattstunden laufen im Hochtarif. Für den Hochtarif ergeben 2.450 mal 0,38 € 931 €. Für den Niedertarif ergeben 1.050 mal 0,28 € 294 €.
 
-Modellrechnung: 931 Euro plus 294 Euro ergeben ebenfalls 1.225 Euro. Bei einem Nachtanteil von 30 Prozent sind beide Tarife also gleich teuer. Der Doppeltarif bringt in dieser Rechnung nichts.
+Modellrechnung: 931 € plus 294 € ergeben ebenfalls 1.225 €. Bei einem Nachtanteil von 30 % sind beide Tarife also gleich teuer. Der Doppeltarif bringt in dieser Rechnung nichts.
 
 ## Gegenprobe: Der Nachtanteil entscheidet
 
-Jetzt dieselben Annahmen mit einem höheren Nachtanteil von 45 Prozent.
+Jetzt dieselben Annahmen mit einem höheren Nachtanteil von 45 %.
 
-Rechenweg Niedertarif: 45 Prozent von 3.500 Kilowattstunden sind 1.575 Kilowattstunden. Bei 0,28 Euro ergeben sie 441 Euro. Rechenweg Hochtarif: Die restlichen 1.925 Kilowattstunden kosten bei 0,38 Euro 731,50 Euro.
+Rechenweg Niedertarif: 45 % von 3.500 Kilowattstunden sind 1.575 Kilowattstunden. Bei 0,28 € ergeben sie 441 €. Rechenweg Hochtarif: Die restlichen 1.925 Kilowattstunden kosten bei 0,38 € 731,50 €.
 
-Modellrechnung: 441 Euro plus 731,50 Euro ergeben 1.172,50 Euro. Gegenüber dem Einheitstarif sind das 52,50 Euro weniger im Jahr.
+Modellrechnung: 441 € plus 731,50 € ergeben 1.172,50 €. Gegenüber dem Einheitstarif sind das 52,50 € weniger im Jahr.
 
-Diese zweite Zahl ist der eigentliche Befund. Der Vorteil entsteht nicht durch den günstigen Nachtpreis allein, sondern durch die Menge, die dort landet. Zwischen 30 und 45 Prozent Nachtanteil liegen aus demselben Tarif gut 50 Euro Unterschied.
+Diese zweite Zahl ist der eigentliche Befund. Der Vorteil entsteht nicht durch den günstigen Nachtpreis allein, sondern durch die Menge, die dort landet. Zwischen 30 und 45 % Nachtanteil liegen aus demselben Tarif gut 50 € Unterschied.
 
-Ein zweiter Blick lohnt auf den Grundpreis. Kostet der Doppeltarif in der Annahme 15 Euro mehr im Jahr, bleiben von den 52,50 Euro noch 37,50 Euro. Der Vorteil schrumpft, ohne dass sich dein Verbrauch geändert hätte.
+Ein zweiter Blick lohnt auf den Grundpreis. Kostet der Doppeltarif in der Annahme 15 € mehr im Jahr, bleiben von den 52,50 € noch 37,50 €. Der Vorteil schrumpft, ohne dass sich dein Verbrauch geändert hätte.
 
 Die beiden Nachtanteile im Vergleich, gerechnet mit den Annahmen von oben:
 
 | Nachtanteil | Niedertarif im Jahr | Hochtarif im Jahr | Jahressumme | Unterschied zum Einheitstarif |
 |---|---|---|---|---|
-| 30 Prozent | 1.050 Kilowattstunden | 2.450 Kilowattstunden | 1.225,00 Euro | keiner |
-| 45 Prozent | 1.575 Kilowattstunden | 1.925 Kilowattstunden | 1.172,50 Euro | 52,50 Euro weniger |
+| 30 % | 1.050 Kilowattstunden | 2.450 Kilowattstunden | 1.225,00 € | keiner |
+| 45 % | 1.575 Kilowattstunden | 1.925 Kilowattstunden | 1.172,50 € | 52,50 € weniger |
 
 ## Was auf der Rechnung sichtbar wird
 
@@ -163,7 +163,7 @@ Für den Wechsel gilt eine einfache Reihenfolge. Erst den Tarif klären, dann de
 
 Klär deshalb vorab drei Fragen mit dem Versorger: Welche Zeitfenster gelten, welche Preise gelten in beiden Fenstern, und was passiert mit dem Grundpreis? Lass dir die Antwort schriftlich geben. Ein Telefonat ist der schlechteste Ort für solche Zusagen.
 
-Kläre zusätzlich, ob für den Zählerwechsel eine Gebühr anfällt. Solche Beträge gehören in die Rechnung: Ein einmaliger Betrag von 50 Euro frisst den rechnerischen Vorteil von 37,50 Euro im ersten Jahr komplett auf.
+Kläre zusätzlich, ob für den Zählerwechsel eine Gebühr anfällt. Solche Beträge gehören in die Rechnung: Ein einmaliger Betrag von 50 € frisst den rechnerischen Vorteil von 37,50 € im ersten Jahr komplett auf.
 
 ## Sperrzeiten und Komfort
 
@@ -199,7 +199,7 @@ Nicht immer. Kläre zuerst, ob dein bestehender Zähler zwei Zählwerke abbilden
 
 ### Wie hoch muss der Nachtanteil sein?
 
-Eine feste Grenze gibt es nicht, weil sie von beiden Preisen abhängt. Als Orientierung liegt der Punkt, an dem der Doppeltarif beginnt, bei rund 30 bis 40 Prozent. Rechne mit deinen eigenen Preisen nach.
+Eine feste Grenze gibt es nicht, weil sie von beiden Preisen abhängt. Als Orientierung liegt der Punkt, an dem der Doppeltarif beginnt, bei rund 30 bis 40 %. Rechne mit deinen eigenen Preisen nach.
 
 ### Ist Nachtstrom umweltfreundlicher?
 

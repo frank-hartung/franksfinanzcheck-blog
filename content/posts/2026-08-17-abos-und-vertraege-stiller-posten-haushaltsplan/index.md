@@ -86,7 +86,7 @@ Nicht jeder Vertrag wird auf dieselbe Weise beendet. Die Unterscheidung spart Ze
 
 Ein Betrag pro Monat wirkt klein. Derselbe Betrag pro Tag wirkt noch kleiner. Beides führt in die Irre. Der hilfreiche Wert ist die Jahressumme, weil sie auf ein Konto passt.
 
-Rechne deshalb jeden Posten auf das Jahr hoch, bevor du ihn bewertest. Aus 6 Euro im Monat werden 72 Euro im Jahr. Aus 12 Euro im Monat werden 144 Euro. Aus 45 Euro im Jahr werden 45 Euro – hier ist keine Umrechnung nötig.
+Rechne deshalb jeden Posten auf das Jahr hoch, bevor du ihn bewertest. Aus 6 € im Monat werden 72 € im Jahr. Aus 12 € im Monat werden 144 €. Aus 45 € im Jahr werden 45 € – hier ist keine Umrechnung nötig.
 
 Diese Umrechnung hat einen zweiten Nutzen. Sie macht Posten vergleichbar, die unterschiedliche Rhythmen haben. Ein Jahresbeitrag und ein Monatsabo stehen danach auf derselben Skala. Wer die Liste sortiert, sieht sofort, welche drei Positionen die höchsten Jahreswerte haben.
 
@@ -96,9 +96,9 @@ Dieselben Beträge als Jahreswert und als Anteil je Tag:
 
 | Betrag im Monat | Betrag im Jahr | Anteil je Tag (Modell) |
 |---|---|---|
-| 4,50 Euro | 54 Euro | rund 0,15 Euro |
-| 6,00 Euro | 72 Euro | rund 0,20 Euro |
-| 12,00 Euro | 144 Euro | rund 0,39 Euro |
+| 4,50 € | 54 € | rund 0,15 € |
+| 6,00 € | 72 € | rund 0,20 € |
+| 12,00 € | 144 € | rund 0,39 € |
 
 ## Preisstaffeln: Der zweite stille Kostentreiber
 
@@ -134,11 +134,11 @@ Frage drei: Welche Frist läuft? Trage das späteste Kündigungsdatum in deinen 
 
 Die folgende Rechnung arbeitet mit angenommenen Zahlen. Sie sind kein Marktwert, sondern ein Maßstab, den du mit deinen eigenen Beträgen ersetzen kannst.
 
-Annahmen: Du findest acht wiederkehrende Posten. Vier davon kosten monatlich 6 Euro. Zwei kosten monatlich 12 Euro. Zwei weitere kosten jährlich 45 Euro.
+Annahmen: Du findest acht wiederkehrende Posten. Vier davon kosten monatlich 6 €. Zwei kosten monatlich 12 €. Zwei weitere kosten jährlich 45 €.
 
-Rechenweg für die kleinen Abos: 4 mal 6 Euro ergeben 24 Euro im Monat, also 288 Euro im Jahr. Rechenweg für die mittleren: 2 mal 12 Euro ergeben 24 Euro im Monat, also ebenfalls 288 Euro im Jahr. Rechenweg für die Jahresposten: 2 mal 45 Euro ergeben 90 Euro im Jahr. Modellrechnung: Die Summe liegt bei 666 Euro pro Jahr.
+Rechenweg für die kleinen Abos: 4 mal 6 € ergeben 24 € im Monat, also 288 € im Jahr. Rechenweg für die mittleren: 2 mal 12 € ergeben 24 € im Monat, also ebenfalls 288 € im Jahr. Rechenweg für die Jahresposten: 2 mal 45 € ergeben 90 € im Jahr. Modellrechnung: Die Summe liegt bei 666 € pro Jahr.
 
-Jetzt die Gegenprobe. Angenommen, du streichst drei der monatlichen 6-Euro-Posten und einen der Jahresposten. Rechenweg: 3 mal 6 Euro ergeben 18 Euro im Monat, also 216 Euro im Jahr. Dazu kommen 45 Euro aus dem gestrichenen Jahresposten. Modellrechnung: Die Entlastung liegt bei 261 Euro im Jahr, ohne dass sich dein Alltag spürbar ändert.
+Jetzt die Gegenprobe. Angenommen, du streichst drei der monatlichen 6-Euro-Posten und einen der Jahresposten. Rechenweg: 3 mal 6 € ergeben 18 € im Monat, also 216 € im Jahr. Dazu kommen 45 € aus dem gestrichenen Jahresposten. Modellrechnung: Die Entlastung liegt bei 261 € im Jahr, ohne dass sich dein Alltag spürbar ändert.
 
 Der zweite Teil der Rechnung ist der wichtigere. Die kleinen Posten sind nicht deshalb interessant, weil sie viel kosten, sondern weil sie leicht zu finden und leicht zu beenden sind.
 

@@ -82,13 +82,13 @@ Ein weiterer Punkt ist die Verbraucherpreisentwicklung. Steigen die Preise, ist 
 
 Diese Modellrechnung nutzt angenommene Werte. Sie beschreibt keinen Marktpreis, sondern eine Mechanik.
 
-Annahmen: Du kaufst von einem haltbaren Artikel einen Vorrat für sechs Monate. Der Kleinpackungspreis liegt bei 1,20 Euro je Einheit, die Großpackung entspricht einem Grundpreis von 0,90 Euro je Einheit. Du brauchst im Monat zehn Einheiten. In der Annahme verderben zehn Prozent des Vorrats.
+Annahmen: Du kaufst von einem haltbaren Artikel einen Vorrat für sechs Monate. Der Kleinpackungspreis liegt bei 1,20 € je Einheit, die Großpackung entspricht einem Grundpreis von 0,90 € je Einheit. Du brauchst im Monat zehn Einheiten. In der Annahme verderben zehn Prozent des Vorrats.
 
-Rechenweg ohne Vorrat: Zehn Einheiten pro Monat über sechs Monate ergeben 60 Einheiten. Zu 1,20 Euro sind das 72 Euro.
+Rechenweg ohne Vorrat: Zehn Einheiten pro Monat über sechs Monate ergeben 60 Einheiten. Zu 1,20 € sind das 72 €.
 
-Rechenweg mit Vorrat: 60 Einheiten zu 0,90 Euro ergeben 54 Euro. Dazu kommen zehn Prozent Schwund, also sechs Einheiten, die ebenfalls bezahlt wurden. Rechenweg für den realen Preis: 54 Euro geteilt durch die 54 wirklich genutzten Einheiten ergeben 1,00 Euro je genutzter Einheit. Modellrechnung: Der Vorteil schrumpft von 0,30 Euro je Einheit auf 0,20 Euro je Einheit.
+Rechenweg mit Vorrat: 60 Einheiten zu 0,90 € ergeben 54 €. Dazu kommen zehn Prozent Schwund, also sechs Einheiten, die ebenfalls bezahlt wurden. Rechenweg für den realen Preis: 54 € geteilt durch die 54 wirklich genutzten Einheiten ergeben 1,00 € je genutzter Einheit. Modellrechnung: Der Vorteil schrumpft von 0,30 € je Einheit auf 0,20 € je Einheit.
 
-Jetzt die ungünstige Variante. Angenommen, der Schwund liegt bei 30 Prozent. Rechenweg: 60 Einheiten zu 0,90 Euro ergeben 54 Euro, genutzt werden 42 Einheiten. Modellrechnung: Der Preis je genutzter Einheit steigt auf rund 1,29 Euro. In diesem Fall ist der Großeinkauf teurer als der normale Wochenkauf.
+Jetzt die ungünstige Variante. Angenommen, der Schwund liegt bei 30 %. Rechenweg: 60 Einheiten zu 0,90 € ergeben 54 €, genutzt werden 42 Einheiten. Modellrechnung: Der Preis je genutzter Einheit steigt auf rund 1,29 €. In diesem Fall ist der Großeinkauf teurer als der normale Wochenkauf.
 
 Diese Rechnung erklärt, warum Vorratshaltung eine Frage der Disziplin ist und nicht nur der Mathematik. Der Vorteil entsteht im Lager, nicht an der Kasse.
 
@@ -96,9 +96,9 @@ Die Wirkung des Schwunds auf den Preis je genutzter Einheit, gerechnet mit den A
 
 | Schwund im Modell | Bezahlte Einheiten | Genutzte Einheiten | Preis je genutzter Einheit |
 |---|---|---|---|
-| 0 Prozent | 60 | 60 | 0,90 Euro |
-| 10 Prozent | 60 | 54 | 1,00 Euro |
-| 30 Prozent | 60 | 42 | 1,29 Euro |
+| 0 % | 60 | 60 | 0,90 € |
+| 10 % | 60 | 54 | 1,00 € |
+| 30 % | 60 | 42 | 1,29 € |
 
 ## Was sich lagern lässt
 

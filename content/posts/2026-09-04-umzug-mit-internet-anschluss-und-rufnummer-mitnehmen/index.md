@@ -108,9 +108,9 @@ Wer diese Reihenfolge einhält, hat den größten Teil der Überraschungen abger
 
 Diese Modellrechnung nutzt angenommene Werte. Sie zeigt eine Größenordnung, keine Marktpreise.
 
-Annahmen: Dein Vertrag kostet monatlich 40 Euro. Bei einem Umzug fällt der Anschluss für 14 Tage aus. Für die Überbrückung mietest du in der Annahme zwei Wochen mobilen Datenvolumen für 15 Euro pro Woche. Zusätzlich nutzt du an vier Abenden einen Coworking-Platz für 12 Euro pro Abend.
+Annahmen: Dein Vertrag kostet monatlich 40 €. Bei einem Umzug fällt der Anschluss für 14 Tage aus. Für die Überbrückung mietest du in der Annahme zwei Wochen mobilen Datenvolumen für 15 € pro Woche. Zusätzlich nutzt du an vier Abenden einen Coworking-Platz für 12 € pro Abend.
 
-Rechenweg für den Vertrag: 40 Euro im Monat ergeben rund 1,33 Euro pro Kalendertag. Bei 14 Tagen sind das rund 18,60 Euro, die du zahlst, ohne die Leistung zu nutzen. Rechenweg für die Überbrückung: 2 mal 15 Euro ergeben 30 Euro, 4 mal 12 Euro ergeben 48 Euro. Modellrechnung: Die Gesamtkosten der Lücke liegen bei rund 96,60 Euro. Eine Woche Verzögerung weniger halbiert diesen Betrag ungefähr.
+Rechenweg für den Vertrag: 40 € im Monat ergeben rund 1,33 € pro Kalendertag. Bei 14 Tagen sind das rund 18,60 €, die du zahlst, ohne die Leistung zu nutzen. Rechenweg für die Überbrückung: 2 mal 15 € ergeben 30 €, 4 mal 12 € ergeben 48 €. Modellrechnung: Die Gesamtkosten der Lücke liegen bei rund 96,60 €. Eine Woche Verzögerung weniger halbiert diesen Betrag ungefähr.
 
 Der Punkt dieser Rechnung ist die Reihenfolge. Der größte Teil der Kosten entsteht nicht durch hohe Preise, sondern durch verlorene Tage.
 

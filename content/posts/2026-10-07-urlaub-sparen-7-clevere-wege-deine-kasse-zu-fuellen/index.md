@@ -125,9 +125,9 @@ Lass im Plan Platz für freie Zeit. Wenn ein Ausflug Spaß macht und ins Budget 
 
 Ein Puffer fängt Änderungen auf, die du nicht genau planen kannst. Dazu können zusätzliche Wege, ein Essen unterwegs oder eine nötige Umbuchung gehören. Der passende Betrag hängt von Reisedauer, Ziel und deiner finanziellen Lage ab. Nutze keine feste Prozentregel aus einem fremden Beitrag.
 
-**Modellrechnung:** Angenommen, du planst für die Reise 900 Euro und möchtest 100 Euro davon als Reserve nicht fest verplanen. Dann stehen in dieser Modellrechnung 800 Euro für die geplanten Kosten zur Verfügung. Die Beträge sind frei gewählt und kein Richtwert.
+**Modellrechnung:** Angenommen, du planst für die Reise 900 € und möchtest 100 € davon als Reserve nicht fest verplanen. Dann stehen in dieser Modellrechnung 800 € für die geplanten Kosten zur Verfügung. Die Beträge sind frei gewählt und kein Richtwert.
 
-**Modellrechnung:** Wenn die Reise am Ende 760 Euro kostet, bleiben in diesem Beispiel 140 Euro übrig. Du kannst sie zurücklegen oder für ein anderes Ziel nutzen. Das Ergebnis gilt nur für diese Annahmen.
+**Modellrechnung:** Wenn die Reise am Ende 760 € kostet, bleiben in diesem Beispiel 140 € übrig. Du kannst sie zurücklegen oder für ein anderes Ziel nutzen. Das Ergebnis gilt nur für diese Annahmen.
 
 Eine Reserve muss nicht vollständig ausgegeben werden. Wenn sie nicht gebraucht wird, ist das kein Rechenfehler. Lass das Geld für die nächste Reise oder eine andere wichtige Ausgabe liegen. Wichtig ist, dass du es nicht vorab als sichere Ersparnis behandelst.
 

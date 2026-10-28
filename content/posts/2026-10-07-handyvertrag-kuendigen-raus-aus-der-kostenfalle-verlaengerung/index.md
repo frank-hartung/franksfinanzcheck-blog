@@ -104,11 +104,11 @@ Prüfe auch, wann ein Rabatt endet und welcher Preis danach gilt. Ein Tarif ohne
 
 Rechne es mit deinen echten Beträgen aus.
 
-**Modellrechnung:** Angenommen, Tarif und Gerätezahlung kosten zusammen 35 Euro im Monat.
+**Modellrechnung:** Angenommen, Tarif und Gerätezahlung kosten zusammen 35 € im Monat.
 
-**Modellrechnung:** Bei einer Laufzeit von 24 Monaten zahlst du 24 mal 35 Euro.
+**Modellrechnung:** Bei einer Laufzeit von 24 Monaten zahlst du 24 mal 35 €.
 
-**Modellrechnung:** Das ergibt 840 Euro, noch ohne einmalige Gebühren. Das Beispiel ist frei gewählt und kein Marktpreis. Ersetze die Werte durch die Beträge aus deinem Angebot.
+**Modellrechnung:** Das ergibt 840 €, noch ohne einmalige Gebühren. Das Beispiel ist frei gewählt und kein Marktpreis. Ersetze die Werte durch die Beträge aus deinem Angebot.
 
 Schau dir außerdem deinen Datenverbrauch an. Nutze dafür die Anzeige im Telefon oder die App deines Anbieters.
 

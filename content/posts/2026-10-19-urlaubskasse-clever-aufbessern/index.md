@@ -55,10 +55,10 @@ Ein typisches Rechenbeispiel zeigt dir die Gefahr. Kleine Gebühren wirken oft h
 
 > **Rechenbeispiel:**
 > Du mietest ein Auto für 7 Tage.
-> Die Grundmiete liegt bei 30 € pro Tag. Das macht 210 €.
-> Ein Navigationsgerät kostet 5 € pro Tag. Das macht 35 €.
-> Ein zweiter Fahrer kostet einmalig 10 €.
-> Die Rechnung sieht so aus: 210 € + 35 € + 10 € = 255 €.
+> Die Grundmiete liegt bei 30 € pro Tag. Das macht 210 €.
+> Ein Navigationsgerät kostet 5 € pro Tag. Das macht 35 €.
+> Ein zweiter Fahrer kostet einmalig 10 €.
+> Die Rechnung sieht so aus: 210 € + 35 € + 10 € = 255 €.
 
 Schau dir die Ersparnis an. Ohne das Gerät für den Weg sparst du 35 €. Das ist fast so viel wie ein ganzer Tag Miete. Dieses Geld kannst du im Urlaub besser nutzen. Es fließt direkt in deine Kasse für Eis oder Abendessen. Solche kleinen Siege summieren sich schnell.
 

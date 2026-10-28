@@ -47,7 +47,7 @@ faktencheck: 2026-10-14
 
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
 
-Kurzfristige Angebote können günstiger sein. Doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar. Nachlässe von bis zu 50 Prozent seien Einzelfälle. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
+Kurzfristige Angebote können günstiger sein. Doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar. Nachlässe von bis zu 50 % seien Einzelfälle. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

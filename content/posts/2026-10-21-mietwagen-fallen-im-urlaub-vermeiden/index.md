@@ -60,10 +60,10 @@ Die Tankregel ist ein weiterer wichtiger Punkt. Die Regel „Voll‑zu‑Voll“
 Achte auch auf das Limit für die Kilometer. Manche Verträge begrenzen die Strecke pro Tag oder Woche. Überschreitest du dieses Limit? Dann steigt die Gebühr für jeden weiteren Kilometer stark an. Das kann bei langen Touren sehr teuer werden. Plane deine Route daher grob im Voraus ein.
 
 > **Rechenbeispiel:**
-> Nehmen wir an, du mietest ein Auto für sieben Tage (T). Der Preis pro Tag (G) liegt bei 40 Euro. Die Kaution (K) beträgt 500 Euro als Sicherheit. Der Schutz (V) kostet 70 Euro für die ganze Woche. Für den Tank (Tg) planst du 80 Euro ein.
+> Nehmen wir an, du mietest ein Auto für sieben Tage (T). Der Preis pro Tag (G) liegt bei 40 €. Die Kaution (K) beträgt 500 € als Sicherheit. Der Schutz (V) kostet 70 € für die ganze Woche. Für den Tank (Tg) planst du 80 € ein.
 > Die Rechnung für den Gesamtpreis lautet: **Gesamt = (G mal T) + V + Tg**.
-> In Zahlen: (40 Euro mal 7 Tage) + 70 Euro + 80 Euro = 430 Euro.
-> Die Kaution von 500 Euro kommt als Blockade auf der Karte dazu. Wenn du den Eigenanteil (S) von 1.000 Euro weglässt, sparst du im Schadensfall genau diesen Betrag. Das Beispiel zeigt deutlich: Kleine Kosten pro Tag summieren sich schnell zu einer großen Summe.
+> In Zahlen: (40 € mal 7 Tage) + 70 € + 80 € = 430 €.
+> Die Kaution von 500 € kommt als Blockade auf der Karte dazu. Wenn du den Eigenanteil (S) von 1.000 € weglässt, sparst du im Schadensfall genau diesen Betrag. Das Beispiel zeigt deutlich: Kleine Kosten pro Tag summieren sich schnell zu einer großen Summe.
 
 Achte darauf, dass jede Bedingung im Vertrag klar ist. Unklare Sätze sind oft ein Hinweis auf spätere Kosten. Frage im Zweifel direkt beim Anbieter nach. So vermeidest du böse Überraschungen nach dem Urlaub.
 
@@ -90,7 +90,7 @@ Extras wie GPS oder Kindersitze klingen sehr praktisch. Sie erhöhen den Preis f
 | Zusatzfahrer    | Pro Tag und Fahrer | Wenn mehrere Personen das Auto nutzen |
 | Schutz ohne Eigenanteil | Höherer Tagessatz | Wenn du das Risiko komplett abdecken willst |
 
-Ein Navi kostet oft zehn Euro oder mehr pro Tag. Bei zwei Wochen Urlaub ist das eine hohe Summe. Nutze stattdessen dein eigenes Handy zur Navigation. Das spart sofort über 100 Euro in der Urlaubskasse. Die Karten kannst du oft vorher laden. So brauchst du im Ausland kein teures Datenvolumen.
+Ein Navi kostet oft zehn Euro oder mehr pro Tag. Bei zwei Wochen Urlaub ist das eine hohe Summe. Nutze stattdessen dein eigenes Handy zur Navigation. Das spart sofort über 100 € in der Urlaubskasse. Die Karten kannst du oft vorher laden. So brauchst du im Ausland kein teures Datenvolumen.
 
 Auch Kindersitze sind bei Vermietern oft sehr teuer. Zudem ist der Zustand der Sitze nicht immer gut. Nimm lieber deinen eigenen Sitz von zu Hause mit. Viele Airlines nehmen Kindersitze sogar kostenlos im Flugzeug mit. Das ist sicherer für dein Kind und schont dein Konto.
 
@@ -133,7 +133,7 @@ Vergiss niemals die wichtigen Fristen für die Absage. Notiere dir das Datum fü
 
 ### Wie hoch ist die übliche Kaution?
 
-Die Höhe der Kaution hängt vom Wert des Autos ab. Oft liegt sie zwischen 500 und 2.000 Euro. Die Firma blockt diesen Betrag auf deiner Kreditkarte. Nach der Rückgabe ohne Schäden wird das Geld wieder frei. Das dauert je nach Bank ein paar Tage.
+Die Höhe der Kaution hängt vom Wert des Autos ab. Oft liegt sie zwischen 500 und 2.000 €. Die Firma blockt diesen Betrag auf deiner Kreditkarte. Nach der Rückgabe ohne Schäden wird das Geld wieder frei. Das dauert je nach Bank ein paar Tage.
 
 ### Was bedeutet „Voll‑zu‑Voll“?
 

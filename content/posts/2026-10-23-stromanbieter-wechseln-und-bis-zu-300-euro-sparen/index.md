@@ -71,18 +71,18 @@ Achte auf die Details beim Tippen der Daten. Nutze die echten Zahlen von deinem 
 Wir schauen uns einen Haushalt mit 3.200 kWh Verbrauch im Jahr an.
 Dein alter Tarif:
 Preis pro kWh: 32 Cent.
-Grundpreis pro Monat: 10 Euro.
-Schritt 1: 3.200 kWh mal 0,32 Euro ergibt 1.024 Euro für den Strom.
-Schritt 2: 12 Monate mal 10 Euro ergibt 120 Euro Gebühr.
-Summe alt: 1.144 Euro im Jahr.
+Grundpreis pro Monat: 10 €.
+Schritt 1: 3.200 kWh mal 0,32 € ergibt 1.024 € für den Strom.
+Schritt 2: 12 Monate mal 10 € ergibt 120 € Gebühr.
+Summe alt: 1.144 € im Jahr.
 
 Dein neuer Tarif:
 Preis pro kWh: 28 Cent.
-Grundpreis pro Monat: 8 Euro.
-Schritt 3: 3.200 kWh mal 0,28 Euro ergibt 896 Euro für den Strom.
-Schritt 4: 12 Monate mal 8 Euro ergibt 96 Euro Gebühr.
-Summe neu: 992 Euro im Jahr.
-Ergebnis: Du sparst 152 Euro im Jahr durch den Wechsel. Das sind fast 13 Prozent weniger Kosten für die gleiche Leistung.
+Grundpreis pro Monat: 8 €.
+Schritt 3: 3.200 kWh mal 0,28 € ergibt 896 € für den Strom.
+Schritt 4: 12 Monate mal 8 € ergibt 96 € Gebühr.
+Summe neu: 992 € im Jahr.
+Ergebnis: Du sparst 152 € im Jahr durch den Wechsel. Das sind fast 13 % weniger Kosten für die gleiche Leistung.
 
 ## Vertragsdetails, versteckte Kosten und Kündigungsfristen
 
@@ -128,7 +128,7 @@ Ja, das geht heute fast immer mit einem Klick. Die meisten Firmen müssen einen 
 
 Du hast nun alle Werkzeuge für einen erfolgreichen Wechsel in der Hand. Der Weg zu weniger Kosten für Energie ist jetzt frei für dich. Warte nicht auf die nächste hohe Rechnung im Briefkasten. Handle lieber jetzt, solange die Preise gut sind. Der erste Schritt ist der Vergleich der Tarife im Netz. Besuche CHECK24 und gib deine Daten vom Zähler ein. Wähle einen Tarif aus, der wirklich zu deinem Leben passt. Achte dabei besonders auf die Gebühren und die Laufzeit. Setze dir sofort einen Alarm im Handy für den nächsten Termin zur Kündigung. So verpasst du nie wieder eine Chance auf Ersparnis. Dein Geld gehört dir und nicht der großen Stromfirma. Starte heute deinen Check und spare sofort bares Geld.
 
-🚀 **Jetzt Strom- & Gaspreise vergleichen** – starte deinen Wechsel und spare bis zu 300 Euro im Jahr.
+🚀 **Jetzt Strom- & Gaspreise vergleichen** – starte deinen Wechsel und spare bis zu 300 € im Jahr.
 
 ---
 

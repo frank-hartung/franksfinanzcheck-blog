@@ -94,13 +94,13 @@ Rechenweg für die Energie: 47 mal 40 ergibt rund 1.870 Kilowattstunden. Modellr
 
 Diese Rechnung zeigt die Reihenfolge. Die Duschzeit ist der größte einzelne Hebel, weil sie in die Menge wirkt. Danach folgen Temperatur und Verluste.
 
-Die beiden Varianten in der Übersicht. Der Euro-Wert ist eine Beispielrechnung mit 0,30 Euro je Kilowattstunde und kein Marktpreis:
+Die beiden Varianten in der Übersicht. Der Euro-Wert ist eine Beispielrechnung mit 0,30 € je Kilowattstunde und kein Marktpreis:
 
 | Variante im Modell | Dusche je Person | Wasserbedarf im Jahr | Energiebedarf | Kosten im Modell |
 |---|---|---|---|---|
-| Ausgangslage | 6 Minuten | rund 70 Kubikmeter | rund 2.800 Kilowattstunden | rund 840 Euro |
-| Gegenprobe | 4 Minuten | rund 47 Kubikmeter | rund 1.870 Kilowattstunden | rund 561 Euro |
-| Unterschied | 2 Minuten | rund 23 Kubikmeter | rund 930 Kilowattstunden | rund 279 Euro |
+| Ausgangslage | 6 Minuten | rund 70 Kubikmeter | rund 2.800 Kilowattstunden | rund 840 € |
+| Gegenprobe | 4 Minuten | rund 47 Kubikmeter | rund 1.870 Kilowattstunden | rund 561 € |
+| Unterschied | 2 Minuten | rund 23 Kubikmeter | rund 930 Kilowattstunden | rund 279 € |
 
 ## Was Legionellen mit der Temperatur machen?
 

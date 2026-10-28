@@ -49,10 +49,10 @@ Erfassen Sie zuerst alle Posten in Ihrem aktuellen Vertrag für Gas. So sehen Si
 Die Grundgebühr ist wie eine Miete für den Anschluss an das Netz. Sie zahlen diesen Betrag immer, auch wenn Sie gar nicht heizen. Manche Firmen verlangen hier sehr hohe Summen. Der Arbeitspreis ist der Preis für jede verbrauchte Einheit Energie. Hier liegt meist das größte Sparziel für jeden Haushalt.
 
 > **Rechenbeispiel:**
-> Sie verbrauchen im Jahr genau 12.000 kWh Gas. Der Preis für die Arbeit liegt bei 0,08 Euro pro kWh. Die feste Gebühr beträgt 10 Euro in jedem Monat.
-> Die Kosten für die Arbeit sind 12.000 kWh mal 0,08 Euro. Das ergibt 960 Euro im Jahr.
-> Die feste Gebühr ist 12 mal 10 Euro. Das ergibt 120 Euro im Jahr.
-> Die gesamten Kosten liegen also bei 1.080 Euro.
+> Sie verbrauchen im Jahr genau 12.000 kWh Gas. Der Preis für die Arbeit liegt bei 0,08 € pro kWh. Die feste Gebühr beträgt 10 € in jedem Monat.
+> Die Kosten für die Arbeit sind 12.000 kWh mal 0,08 €. Das ergibt 960 € im Jahr.
+> Die feste Gebühr ist 12 mal 10 €. Das ergibt 120 € im Jahr.
+> Die gesamten Kosten liegen also bei 1.080 €.
 > Das Ergebnis zeigt deutlich: Der Preis für die Arbeit macht den größten Teil aus. Hier sollten Sie beim Vergleich zuerst ansetzen.
 
 Mit diesem Bild prüfen Sie auch, ob Ihr monatlicher Abschlag zu hoch ist. Ein hoher Abschlag bindet Ihr Geld unnötig. Sie zahlen dem Anbieter eine Art Kredit ohne Zinsen. Sie bekommen das Geld erst nach einem Jahr zurück. Setzen Sie den Abschlag lieber passend zu Ihrem echten Bedarf fest.
@@ -71,11 +71,11 @@ Im nächsten Schritt rechnen Sie alle Bedingungen in die Kosten ein. Nur die Sum
 Eine kurze Laufzeit gibt Ihnen viel Freiheit beim Wechsel. Lange Laufzeiten binden Sie oft an hohe Preise. Eine Garantie für den Preis schützt Sie vor einem Anstieg der Kosten. Achten Sie darauf, wie lange diese Garantie wirklich gilt. Oft endet sie mitten im kalten Winter.
 
 > **Rechenbeispiel:**
-> Ihr Vertrag hat eine Garantie für den Preis von sechs Monaten. Im ersten halben Jahr zahlen Sie 0,08 Euro pro kWh. Danach steigt der Preis auf 0,09 Euro pro kWh an. Bei 12.000 kWh im Jahr sieht die Rechnung so aus:
-> Die Kosten im ersten Halbjahr sind 6.000 kWh mal 0,08 Euro. Das sind 480 Euro.
-> Die Kosten im zweiten Halbjahr sind 6.000 kWh mal 0,09 Euro. Das sind 540 Euro.
-> Die gesamten Kosten sind 480 Euro plus 540 Euro plus 120 Euro feste Gebühr. Das ergibt 1.140 Euro.
-> Der Anstieg kostet Sie also 60 Euro extra. Das ist ein klarer Grund für einen schnellen Wechsel.
+> Ihr Vertrag hat eine Garantie für den Preis von sechs Monaten. Im ersten halben Jahr zahlen Sie 0,08 € pro kWh. Danach steigt der Preis auf 0,09 € pro kWh an. Bei 12.000 kWh im Jahr sieht die Rechnung so aus:
+> Die Kosten im ersten Halbjahr sind 6.000 kWh mal 0,08 €. Das sind 480 €.
+> Die Kosten im zweiten Halbjahr sind 6.000 kWh mal 0,09 €. Das sind 540 €.
+> Die gesamten Kosten sind 480 € plus 540 € plus 120 € feste Gebühr. Das ergibt 1.140 €.
+> Der Anstieg kostet Sie also 60 € extra. Das ist ein klarer Grund für einen schnellen Wechsel.
 
 Prüfen Sie Boni und Garantien immer zusammen. Nur dann sehen Sie, ob ein Tarif auch auf Dauer günstig bleibt. Niedrige Preise im ersten Jahr sagen wenig über die Kosten danach. Oft wird es im zweiten Jahr ohne Bonus sehr teuer. Rechnen Sie den Bonus aus dem Preis heraus, um den Kern zu sehen.
 
@@ -92,7 +92,7 @@ Viele Menschen verlieren Geld, weil sie eine Frist verpassen. Manche Verträge l
 Die ordentliche Frist steht in Ihren Unterlagen. Meistens sind es drei Monate vor dem Ende der Laufzeit. Verpassen Sie diesen Tag, hängen Sie oft ein weiteres Jahr fest. Das Sonderrecht bei einem Anstieg der Preise ist sehr wertvoll. Hier haben Sie meist nur zwei bis vier Wochen Zeit für die Reaktion.
 
 > **Rechenbeispiel:**
-> Ihr Vertrag läuft am 31. August aus. Die Frist für die Kündigung liegt bei drei Monaten. Sie bemerken am 15. Juli einen Anstieg der Preise in der Post. Kündigen Sie sofort bis zum 31. Juli, sparen Sie Geld. Sie sparen etwa 0,01 Euro pro kWh für die letzten zwei Monate. Bei 2.000 kWh in dieser Zeit sind das 20 Euro. Das klingt nach wenig, summiert sich aber über das Jahr.
+> Ihr Vertrag läuft am 31. August aus. Die Frist für die Kündigung liegt bei drei Monaten. Sie bemerken am 15. Juli einen Anstieg der Preise in der Post. Kündigen Sie sofort bis zum 31. Juli, sparen Sie Geld. Sie sparen etwa 0,01 € pro kWh für die letzten zwei Monate. Bei 2.000 kWh in dieser Zeit sind das 20 €. Das klingt nach wenig, summiert sich aber über das Jahr.
 
 Ein Blick in den alten Vertrag hilft Ihnen sofort. Ein fester Termin im Kalender schützt Sie vor hohen Kosten. Der 4K-Prüfpfad nennt diesen Schritt „Kündigungsfenster sichern“. Wer seine Fristen kennt, ist dem Anbieter immer einen Schritt voraus. Notieren Sie sich das Datum am besten groß am Kühlschrank.
 
@@ -110,10 +110,10 @@ Der Markt für Gas bewegt sich ständig. Ein einmaliger Vergleich reicht deshalb
 Prüfen Sie Ihren Abschlag alle drei Monate. Wenn Sie weniger verbrauchen, senken Sie die Zahlung sofort. So bleibt mehr Geld für andere Dinge auf Ihrem Konto. Wenn Sie mehr verbrauchen, erhöhen Sie den Betrag leicht. So vermeiden Sie eine hohe Nachzahlung am Ende des Jahres.
 
 > **Rechenbeispiel:**
-> Sie passen Ihren Abschlag alle drei Monate an Ihren echten Bedarf an. Im ersten Quartal zahlen Sie 90 Euro im Monat. Im zweiten sind es 85 Euro und im dritten nur 80 Euro. Im vierten Quartal steigen die Kosten wieder auf 90 Euro an.
-> Der gesamte Abschlag ist die Summe der Monate. Das ergibt 1.035 Euro im Jahr.
-> Ohne diese Anpassung hätten Sie immer 90 Euro gezahlt. Das wären 1.080 Euro gewesen.
-> Sie sparen durch die Kontrolle 45 Euro im Jahr. Zudem bleibt Ihr Geld bei Ihnen und nicht beim Anbieter.
+> Sie passen Ihren Abschlag alle drei Monate an Ihren echten Bedarf an. Im ersten Quartal zahlen Sie 90 € im Monat. Im zweiten sind es 85 € und im dritten nur 80 €. Im vierten Quartal steigen die Kosten wieder auf 90 € an.
+> Der gesamte Abschlag ist die Summe der Monate. Das ergibt 1.035 € im Jahr.
+> Ohne diese Anpassung hätten Sie immer 90 € gezahlt. Das wären 1.080 € gewesen.
+> Sie sparen durch die Kontrolle 45 € im Jahr. Zudem bleibt Ihr Geld bei Ihnen und nicht beim Anbieter.
 
 Ein fester Termin im Kalender hilft Ihnen bei der Routine. So reagieren Sie früh auf neue Angebote am Markt. Ihre Kosten bleiben so immer im Griff. Nutzen Sie Portale, um die Lage der Preise zu prüfen. Ein kurzer Check dauert oft nur fünf Minuten Zeit.
 
@@ -131,7 +131,7 @@ Ein neuer Tarif ist nicht der einzige Weg zum Sparen. Auch Ihr eigener Verbrauch
 Stellen Sie Ihr Thermostat klug ein. Jedes Grad weniger spart sofort bares Geld. In der Nacht kann die Wärme im Wohnzimmer ruhig sinken. Entlüften Sie Ihre Heizkörper regelmäßig vor dem Winter. Wenn es im Rohr gluckert, arbeitet die Heizung nicht gut. Die Luft muss raus, damit das warme Wasser fließen kann.
 
 > **Faustregel:**
-> Eine bekannte Regel besagt: Jedes Grad weniger spart rund sechs Prozent Heizkosten. Wenn Sie die Wärme im Haus um zwei Grad senken, sparen Sie viel. Bei einem Bedarf von 12.000 kWh im Jahr sparen Sie so 720 kWh ein. Bei einem Preis von 0,08 Euro pro kWh sind das 58 Euro im Jahr. Das ist fast so viel wie ein kleiner Bonus beim Wechsel.
+> Eine bekannte Regel besagt: Jedes Grad weniger spart rund sechs Prozent Heizkosten. Wenn Sie die Wärme im Haus um zwei Grad senken, sparen Sie viel. Bei einem Bedarf von 12.000 kWh im Jahr sparen Sie so 720 kWh ein. Bei einem Preis von 0,08 € pro kWh sind das 58 € im Jahr. Das ist fast so viel wie ein kleiner Bonus beim Wechsel.
 
 Kombinieren Sie einen günstigen Tarif mit einem klugen Verbrauch. So holen Sie das Meiste aus Ihrem Budget heraus. Beide Hebel wirken sofort auf Ihre nächste Rechnung. Prüfen Sie auch die Dichtungen an Ihren Fenstern. Oft zieht kalte Luft unbemerkt in die warme Wohnung ein.
 

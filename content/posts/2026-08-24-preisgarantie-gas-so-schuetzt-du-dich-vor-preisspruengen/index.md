@@ -149,7 +149,7 @@ Notiere deshalb zum Änderungsdatum den Zählerstand und übermittle ihn nach Vo
 
 ![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf. svg)
 
-*Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Wechsel ohne Versorgungslücke
 

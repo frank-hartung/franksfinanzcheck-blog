@@ -98,17 +98,17 @@ Umgekehrt gilt: In manchen Ländern und an manchen Automaten ist das Euro-Angebo
 
 Die folgende Modellrechnung nutzt ausdrücklich Annahmen, keine Marktwerte. Ersetze sie durch deine eigenen Zahlen.
 
-Annahmen: Du reist zehn Tage. Du hebst vier Mal Geld ab, je 100 Euro Gegenwert.
+Annahmen: Du reist zehn Tage. Du hebst vier Mal Geld ab, je 100 € Gegenwert.
 
-Der Betreiber verlangt in der Annahme je 4 Euro. Deine Bank berechnet in der Annahme ein Entgelt von 2 Prozent auf jeden abgehobenen Betrag. Das Euro-Angebot des Automaten wird nicht genutzt.
+Der Betreiber verlangt in der Annahme je 4 €. Deine Bank berechnet in der Annahme ein Entgelt von 2 % auf jeden abgehobenen Betrag. Das Euro-Angebot des Automaten wird nicht genutzt.
 
-Rechenweg für den Automaten: 4 Abhebungen mal 4 Euro ergeben 16 Euro. Rechenweg für die Bank: 4 Abhebungen mal 100 Euro ergeben 400 Euro.
+Rechenweg für den Automaten: 4 Abhebungen mal 4 € ergeben 16 €. Rechenweg für die Bank: 4 Abhebungen mal 100 € ergeben 400 €.
 
-Davon 2 Prozent sind 8 Euro. Modellrechnung: Die Summe liegt bei 24 Euro auf 400 Euro abgehobenen Gegenwert. Das entspricht 6 Prozent.
+Davon 2 % sind 8 €. Modellrechnung: Die Summe liegt bei 24 € auf 400 € abgehobenen Gegenwert. Das entspricht 6 %.
 
-Nun die Gegenprobe. Angenommen, du hebst ein einziges Mal 400 Euro ab.
+Nun die Gegenprobe. Angenommen, du hebst ein einziges Mal 400 € ab.
 
-Rechenweg: 1 Abhebung mal 4 Euro ergibt 4 Euro Automatenentgelt. Dazu 2 Prozent auf 400 Euro, also 8 Euro. Modellrechnung: Zusammen 12 Euro. Der Unterschied zwischen beiden Szenarien liegt allein in der Zahl der Abhebungen.
+Rechenweg: 1 Abhebung mal 4 € ergibt 4 € Automatenentgelt. Dazu 2 % auf 400 €, also 8 €. Modellrechnung: Zusammen 12 €. Der Unterschied zwischen beiden Szenarien liegt allein in der Zahl der Abhebungen.
 
 Diese Rechnung zeigt den eigentlichen Hebel. Nicht die Höhe des einzelnen Betrags entscheidet, sondern die Anzahl der Vorgänge. Wer statt vier Mal nur zwei Mal abhebt, halbiert den festen Anteil sofort.
 

@@ -69,9 +69,9 @@ Ist die Mindestlaufzeit vorbei und der Vertrag läuft stillschweigend weiter, bi
 
 Schau nicht nur auf den Preis in der Anzeige. Prüfe, ob der Preis für die ganze Laufzeit gilt oder nur für einen Teil. Addiere Grundpreis, Bereitstellung, Versand, Routermiete und weitere Gebühren. Lies auch, was nach einem Rabattzeitraum passiert.
 
-**Modellrechnung:** Angenommen, ein DSL-Vertrag kostet 30 Euro im Monat und die Routermiete 4 Euro im Monat. In dieser Modellrechnung zahlst du über 24 Monate 24 mal 34 Euro, also 816 Euro, noch ohne einmalige Gebühren. Das ist frei gewählt und kein Marktpreis.
+**Modellrechnung:** Angenommen, ein DSL-Vertrag kostet 30 € im Monat und die Routermiete 4 € im Monat. In dieser Modellrechnung zahlst du über 24 Monate 24 mal 34 €, also 816 €, noch ohne einmalige Gebühren. Das ist frei gewählt und kein Marktpreis.
 
-**Modellrechnung:** Wenn ein Anbieter außerdem eine einmalige Bereitstellung von 40 Euro verlangt, steigt die Summe in diesem Beispiel auf 856 Euro. Nutze für deine eigene Rechnung die Preise aus dem Vertrag und der Bestätigung.
+**Modellrechnung:** Wenn ein Anbieter außerdem eine einmalige Bereitstellung von 40 € verlangt, steigt die Summe in diesem Beispiel auf 856 €. Nutze für deine eigene Rechnung die Preise aus dem Vertrag und der Bestätigung.
 
 Prüfe den Endpreis für denselben Zeitraum. Sonst vergleichst du ein Angebot mit Rabatt gegen eines ohne Rabatt. Wenn ein Tarif mit Hardware kommt, lies, ob der Router gekauft, gemietet oder zurückgeschickt werden muss. Eine Rückgabe kann Teil des Vertrags sein.
 
@@ -101,7 +101,7 @@ Entscheide nach der ganzen Laufzeit und den Bedingungen.
 
 Beauftrage den neuen Anbieter mit der Koordination, statt den alten Vertrag vorschnell selbst zu beenden. Die Bundesnetzagentur beschreibt diesen Ablauf in ihren [Hinweisen zum Anbieterwechsel](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Wechsel/artikel.html). Der neue und der bisherige Anbieter stimmen den Übergang ab.
 
-Der Wechsel soll den Anschluss nicht länger als einen Arbeitstag unterbrechen. Das regelt [§ 59 Absatz 2 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html). Wenn der Ausfall länger dauert, kann unter den gesetzlichen Voraussetzungen ein Anspruch auf Entschädigung bestehen. [§ 59 Absatz 4 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) nennt dafür 10 Euro oder 20 Prozent des Monatsentgelts je weiterem Arbeitstag, je nachdem, welcher Betrag höher ist; die Regel gilt nicht, wenn du die Verzögerung selbst verursacht hast.
+Der Wechsel soll den Anschluss nicht länger als einen Arbeitstag unterbrechen. Das regelt [§ 59 Absatz 2 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html). Wenn der Ausfall länger dauert, kann unter den gesetzlichen Voraussetzungen ein Anspruch auf Entschädigung bestehen. [§ 59 Absatz 4 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html) nennt dafür 10 € oder 20 % des Monatsentgelts je weiterem Arbeitstag, je nachdem, welcher Betrag höher ist; die Regel gilt nicht, wenn du die Verzögerung selbst verursacht hast.
 
 Notiere den vereinbarten Wechseltag und bewahre die Bestätigung auf. Prüfe, ob ein Techniker kommen muss und ob du zu Hause sein musst. Wenn sich der Termin ändert, lass dir den neuen Ablauf schriftlich bestätigen. So erkennst du, wer für den nächsten Schritt zuständig ist.
 

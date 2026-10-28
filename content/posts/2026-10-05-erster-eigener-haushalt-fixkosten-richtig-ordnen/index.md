@@ -104,13 +104,13 @@ Ein erster eigener Haushalt ist in diesen fünf Schritten schneller geordnet als
 
 Diese Modellrechnung nutzt angenommene Werte und keine Marktpreise. Sie zeigt die Struktur, nicht die Wahrheit deines Haushalts.
 
-Annahmen: Die Miete einschließlich Nebenkostenvorauszahlung beträgt 620 Euro. Strom kostet 55 Euro monatlich. Internet und Mobilfunk zusammen 45 Euro. Streaming und Software 20 Euro.
+Annahmen: Die Miete einschließlich Nebenkostenvorauszahlung beträgt 620 €. Strom kostet 55 € monatlich. Internet und Mobilfunk zusammen 45 €. Streaming und Software 20 €.
 
-Ein kleiner Vereins- und Clubbeitrag liegt bei 15 Euro. Lebensmittel und Drogerie im Alltag 240 Euro. Verkehr 60 Euro. Rücklagen für Anschaffungen 40 Euro.
+Ein kleiner Vereins- und Clubbeitrag liegt bei 15 €. Lebensmittel und Drogerie im Alltag 240 €. Verkehr 60 €. Rücklagen für Anschaffungen 40 €.
 
-Rechenweg Fixkosten: 620 plus 55 plus 45 plus 20 plus 15 ergeben 755 Euro. Rechenweg Alltag: 240 plus 60 ergeben 300 Euro. Rechenweg Rücklagen: 40 Euro. Modellrechnung: Die Summe liegt bei 1.095 Euro im Monat.
+Rechenweg Fixkosten: 620 plus 55 plus 45 plus 20 plus 15 ergeben 755 €. Rechenweg Alltag: 240 plus 60 ergeben 300 €. Rechenweg Rücklagen: 40 €. Modellrechnung: Die Summe liegt bei 1.095 € im Monat.
 
-Jetzt die Wirkung eines einzelnen Fehlers. Angenommen, du hast dich beim Internetvertrag für eine höhere Bandbreite entschieden und zahlst 20 Euro mehr pro Monat. Rechenweg: 20 Euro mal zwölf Monate ergeben 240 Euro im Jahr. Modellrechnung: Dieser eine Zusatz entspricht rund sechs Prozent deiner jährlichen Fixkosten.
+Jetzt die Wirkung eines einzelnen Fehlers. Angenommen, du hast dich beim Internetvertrag für eine höhere Bandbreite entschieden und zahlst 20 € mehr pro Monat. Rechenweg: 20 € mal zwölf Monate ergeben 240 € im Jahr. Modellrechnung: Dieser eine Zusatz entspricht rund sechs Prozent deiner jährlichen Fixkosten.
 
 Der zweite Teil der Rechnung betrifft die Wirkung im ersten Monat. Ein Umzug produziert Einmalkosten: Kaution, Erstausstattung, Anmeldung. Diese Posten gehören nicht in die laufende Rechnung. Sie gehören in einen Startplan, den du aus Rücklagen oder aus Einnahmen der ersten Monate deckst.
 
@@ -118,16 +118,16 @@ Die vier Blöcke mit den Beträgen aus der Modellrechnung:
 
 | Block | Beispielposten | Betrag im Modell |
 |---|---|---|
-| Wohnen | Miete mit Nebenkostenvorauszahlung | 620 Euro |
-| Energie | Strom | 55 Euro |
-| Verträge und Dienste | Internet, Mobilfunk, Streaming, Mitgliedschaft | 80 Euro |
-| Alltag und Rücklagen | Lebensmittel, Verkehr, Anschaffungen | 340 Euro |
+| Wohnen | Miete mit Nebenkostenvorauszahlung | 620 € |
+| Energie | Strom | 55 € |
+| Verträge und Dienste | Internet, Mobilfunk, Streaming, Mitgliedschaft | 80 € |
+| Alltag und Rücklagen | Lebensmittel, Verkehr, Anschaffungen | 340 € |
 
 ## Fixkosten und Rücklagen sind nicht dasselbe
 
 Ein häufiger Anfängerfehler ist die Vermischung. Fixkosten sind monatlich und planbar. Rücklagen sind unregelmäßig und trotzdem berechenbar.
 
-Rechne deine jährlichen Posten auf einen Monat um. Ein Betrag von 240 Euro im Jahr sind 20 Euro im Monat. Wenn du diese Umrechnung vornimmst, ist jede Jahresrechnung bereits bezahlt, wenn sie kommt.
+Rechne deine jährlichen Posten auf einen Monat um. Ein Betrag von 240 € im Jahr sind 20 € im Monat. Wenn du diese Umrechnung vornimmst, ist jede Jahresrechnung bereits bezahlt, wenn sie kommt.
 
 Dieser Trick klingt banal und wirkt sofort. Die Verbraucherzentrale beschreibt dasselbe Vorgehen für ein [Haushaltsbuch](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496): Ausgaben nach Rhythmus sortieren, nicht nach Kategorie.
 

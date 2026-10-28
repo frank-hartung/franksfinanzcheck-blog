@@ -35,7 +35,7 @@ Hier findest du sieben praxisnahe Schritte. Du kannst sie alle sofort umsetzen. 
 
 ## 1. Einnahmen bewusst planen
 
-Ein klarer Blick auf dein Einkommen ist die Basis jeder Entscheidung. Die 50-30-20-Faustregel ordnet deine Mittel sinnvoll. Du nutzt 50 % für feste Kosten. 30 % fließen in flexible Ausgaben. Die restlichen 20 % sparst du oder investierst sie.
+Ein klarer Blick auf dein Einkommen ist die Basis jeder Entscheidung. Die 50–30–20-Faustregel ordnet deine Mittel sinnvoll. Du nutzt 50 % für feste Kosten. 30 % fließen in flexible Ausgaben. Die restlichen 20 % sparst du oder investierst sie.
 
 So setzt du Prioritäten, ohne jeden Euro einzeln zu rechnen. Du behältst die Kontrolle und vermeidest böse Überraschungen. Ein fester Plan gibt dir Sicherheit im Alltag.
 
@@ -77,7 +77,7 @@ Setze Erinnerungen im Kalender, bevor die Frist abläuft. So vermeidest du unnö
 | Zeitschrift | 24 Monate | 01. Juli | 10 € | 10 € (bei Kündigung) |
 | Versicherung | 12 Monate | 30. September | 25 € | 5 € (nach Wechsel) |
 
-> **Rechenbeispiel:** Du kündigst das Fitnessstudio rechtzeitig und sparst 30 € pro Monat. Das entspricht 360 € im Jahr (30 € × 12). Das Geld kannst du in deinen Notgroschen einzahlen. Nach drei Jahren sind das bereits über 1 000 Euro.
+> **Rechenbeispiel:** Du kündigst das Fitnessstudio rechtzeitig und sparst 30 € pro Monat. Das entspricht 360 € im Jahr (30 € × 12). Das Geld kannst du in deinen Notgroschen einzahlen. Nach drei Jahren sind das bereits über 1 000 €.
 
 Rechtzeitig kündigen senkt deine Monatslast dauerhaft. Es erhöht deine Sparquote ohne Mühe.
 
@@ -90,10 +90,10 @@ So vermeidest du Impulskäufe, die dein Budget belasten. Ein klares Limit schaff
 | Kategorie | wöchentliches Limit | tatsächliche Ausgabe | Differenz |
 |-----------|----------------------|----------------------|-----------|
 | Freizeit | 20 € | 15 € | +5 € |
-| Kleidung | 30 € | 45 € | –15 € |
+| Kleidung | 30 € | 45 € | – 15 € |
 | Lebensmittel (extra) | 10 € | 8 € | +2 € |
 
-> **Rechenbeispiel:** Du überschreitest das Kleider‑Limit um 15 € pro Woche. Das sind 60 € im Monat (15 € × 4). Wenn du das Limit einhältst, hast du 60 € mehr für deine Sparziele. Auf das Jahr gerechnet sind das 720 Euro.
+> **Rechenbeispiel:** Du überschreitest das Kleider‑Limit um 15 € pro Woche. Das sind 60 € im Monat (15 € × 4). Wenn du das Limit einhältst, hast du 60 € mehr für deine Sparziele. Auf das Jahr gerechnet sind das 720 €.
 
 Hältst du das Limit ein, bleibt mehr Geld für deine Träume. Kleine Beträge summieren sich über die Zeit.
 
@@ -109,7 +109,7 @@ So wird Sparen zur Gewohnheit statt zur schweren Entscheidung. Du vergisst es ni
 | ETF‑Depot | 150 € | 1. Tag nach Gehalt | 150 € |
 | Notgroschen | 100 € | 1. Tag nach Gehalt | 100 € |
 
-> **Rechenbeispiel:** Du richtest drei Daueraufträge ein (200 €, 150 €, 100 €). Das sind 450 € monatlich, die automatisch gespart werden. In sechs Monaten hast du 2 700 € aufgebaut (450 € × 6). Nach einem Jahr sind es bereits 5 400 Euro.
+> **Rechenbeispiel:** Du richtest drei Daueraufträge ein (200 €, 150 €, 100 €). Das sind 450 € monatlich, die automatisch gespart werden. In sechs Monaten hast du 2 700 € aufgebaut (450 € × 6). Nach einem Jahr sind es bereits 5 400 €.
 
 Regelmäßige Einzahlungen bauen schnell ein finanzielles Polster auf. Die Automatik schützt dich vor Ausreden.
 
@@ -125,7 +125,7 @@ Vermeide häufiges Umschichten deiner Depots. Es kostet Gebühren und schwächt 
 | Immobilienfonds | 4‑5 % p.a. | 1 % | 10 Jahre |
 | Tagesgeld | 0,5‑1 % p.a. | 0 % | 1‑2 Jahre |
 
-> **Rechenbeispiel:** Du investierst 5 000 € in einen ETF mit einer Rendite von 7 % p.a. Nach zehn Jahren beträgt das Kapital etwa 9 800 € (5 000 € × (1+0,07)¹⁰, gerundet). Der Zinseszinseffekt wirkt erst richtig, wenn du das Geld lange stehen lässt. In zwanzig Jahren wären es schon fast 20 000 Euro.
+> **Rechenbeispiel:** Du investierst 5 000 € in einen ETF mit einer Rendite von 7 % p.a. Nach zehn Jahren beträgt das Kapital etwa 9 800 € (5 000 € × (1+0,07)¹⁰, gerundet). Der Zinseszinseffekt wirkt erst richtig, wenn du das Geld lange stehen lässt. In zwanzig Jahren wären es schon fast 20 000 €.
 
 Wer lange hält, lässt sein Kapital durch Zinseszins wachsen. Ein ehrlicher Blick gehört trotzdem dazu: Die 9 800 € sind Nominalwerte. Bei 3,3 % Inflation pro Jahr entsprechen sie in heutiger Kaufkraft nur rund 7 080 €. Wer real Vermögen aufbauen will, braucht breite Streuung und niedrige Kosten. Ein langer Atem ist der wichtigste Faktor.
 
@@ -141,7 +141,7 @@ Gemeinsame Ziele halten dich besser auf Kurs. Der Austausch motiviert und liefer
 | Meetup | Netzwerk | Spar‑Challenge-Event |
 | Social Media | Motivation | Posts mit #Frugalismus |
 
-> **Rechenbeispiel:** Du nimmst an einer monatlichen Spar‑Challenge teil. Du sparst zusätzlich 50 € pro Monat ein. Nach einem Jahr hast du 600 € extra gespart (50 € × 12). Diese Summe kannst du in deinen Notgroschen oder ein Investment stecken. Über fünf Jahre sind das 3 000 Euro plus Zinsen.
+> **Rechenbeispiel:** Du nimmst an einer monatlichen Spar‑Challenge teil. Du sparst zusätzlich 50 € pro Monat ein. Nach einem Jahr hast du 600 € extra gespart (50 € × 12). Diese Summe kannst du in deinen Notgroschen oder ein Investment stecken. Über fünf Jahre sind das 3 000 € plus Zinsen.
 
 Die Challenge lässt dich regelmäßig sparen und festigt deine Gewohnheiten. Wettbewerb spornt viele Menschen zusätzlich an.
 
@@ -168,7 +168,7 @@ Einmal im Quartal reicht völlig aus. So erkennst du Preisänderungen und neue A
 Ein einfaches Tabellenprogramm oder eine kostenlose App genügt. Du musst nur alle vier Schritte konsequent festhalten. Wichtig ist die Übersicht, nicht die Technik dahinter. Auch ein klassisches Haushaltsbuch aus Papier kann am Anfang sehr gut helfen.
 
 ### Wie hoch sollte mein Notgroschen sein?
-Die gängige Faustregel empfiehlt 3-6 Monatsgehälter – je nach deiner Risikolage. Dieser Puffer schützt dich bei Jobverlust oder teuren Reparaturen am Auto. Auch eine kaputte Waschmaschine verliert so ihren Schrecken. Sicherheit gibt dir Ruhe für deine langfristigen Anlagen.
+Die gängige Faustregel empfiehlt 3–6 Monatsgehälter – je nach deiner Risikolage. Dieser Puffer schützt dich bei Jobverlust oder teuren Reparaturen am Auto. Auch eine kaputte Waschmaschine verliert so ihren Schrecken. Sicherheit gibt dir Ruhe für deine langfristigen Anlagen.
 
 ### Kann ich frugal leben, ohne auf Freizeit zu verzichten?
 Ja, das ist absolut möglich. Setz dir ein festes Wochenbudget für Freizeit und plane deine Aktivitäten bewusst. Oft sind kostenlose Erlebnisse in der Natur viel wertvoller als teure Events. Es geht um bewussten Genuss statt um sinnlosen Konsum.

@@ -54,7 +54,7 @@ Die Sicherheit von Bankguthaben ist in Deutschland gesetzlich geregelt. Der Schu
 
 Gesetzlich geschützt sind Guthaben auf Bankkonten. Dazu zählen Sicht-, Termin- und Spareinlagen.
 
-Der Schutz greift pro Einleger und pro Bank. Nach Angaben der Aufsicht sind es 100.000 Euro ([BaFin](https://www.bafin.de/DE/Verbraucher/GeldanlageFinanzierung/Einlagensicherung/einlagensicherung_node.html)). Die Deutsche Bundesbank beschreibt denselben Rahmen in ihrem Beitrag zur [Einlagensicherung](https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936).
+Der Schutz greift pro Einleger und pro Bank. Nach Angaben der Aufsicht sind es 100.000 € ([BaFin](https://www.bafin.de/DE/Verbraucher/GeldanlageFinanzierung/Einlagensicherung/einlagensicherung_node.html)). Die Deutsche Bundesbank beschreibt denselben Rahmen in ihrem Beitrag zur [Einlagensicherung](https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936).
 
 Wichtig ist die Formulierung „pro Bank“. Sie bedeutet nicht pro Konto und nicht pro Marke. Wer bei einem Institut zwei Konten führt, hat den Betrag nur einmal zur Verfügung.
 
@@ -86,7 +86,7 @@ Der Schutzumfang im Überblick:
 
 | Konstellation | Einlagenschutz | Was du beachten musst |
 |---|---|---|
-| ein Konto bei einem Institut | bis 100.000 Euro je Einleger | der Betrag gilt pro Institut, nicht pro Konto |
+| ein Konto bei einem Institut | bis 100.000 € je Einleger | der Betrag gilt pro Institut, nicht pro Konto |
 | Konten bei zwei Instituten | zwei Schutzbeträge | es zählen Institute, nicht Marken |
 | zwei Marken, ein Institut | ein Schutzbetrag | die Zuordnung steht im Impressum |
 | Wertpapiere im Depot | kein Einlagenschutz | sie bleiben dein Eigentum, mit Kursrisiko |
@@ -95,13 +95,13 @@ Der Schutzumfang im Überblick:
 
 Die folgende Rechnung nutzt angenommene Beträge. Sie beschreibt keinen Marktzustand, sondern die Mechanik.
 
-Annahmen: Du hast 70.000 Euro auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 Euro. Bei Institut B liegen 60.000 Euro auf einem zweiten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Alle drei Konten laufen auf deinen Namen.
+Annahmen: Du hast 70.000 € auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 €. Bei Institut B liegen 60.000 € auf einem zweiten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Alle drei Konten laufen auf deinen Namen.
 
-Rechenweg Institut A: 70.000 Euro plus 45.000 Euro ergeben 115.000 Euro. Beide Konten gehören zum selben Institut. Rechenweg Institut B: 60.000 Euro liegen unterhalb der Grenze.
+Rechenweg Institut A: 70.000 € plus 45.000 € ergeben 115.000 €. Beide Konten gehören zum selben Institut. Rechenweg Institut B: 60.000 € liegen unterhalb der Grenze.
 
-Modellrechnung: Bei Institut A liegen 15.000 Euro über dem gesetzlichen Schutzbetrag, bei Institut B nichts. Wenn du stattdessen 55.000 Euro zu Institut B verlagerst, wären beide Institute innerhalb des Betrags.
+Modellrechnung: Bei Institut A liegen 15.000 € über dem gesetzlichen Schutzbetrag, bei Institut B nichts. Wenn du stattdessen 55.000 € zu Institut B verlagerst, wären beide Institute innerhalb des Betrags.
 
-Der zweite Teil der Rechnung betrifft die Praxis. Angenommen, dein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) beträgt sechs [Monatsausgaben](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von 12.000 Euro. Rechenweg: Dieser Betrag liegt bei einem einzigen Institut weit im geschützten Bereich. Modellrechnung: Die Aufteilung ist dann keine Frage des Schutzes, sondern von Verfügbarkeit und Zins.
+Der zweite Teil der Rechnung betrifft die Praxis. Angenommen, dein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) beträgt sechs [Monatsausgaben](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von 12.000 €. Rechenweg: Dieser Betrag liegt bei einem einzigen Institut weit im geschützten Bereich. Modellrechnung: Die Aufteilung ist dann keine Frage des Schutzes, sondern von Verfügbarkeit und Zins.
 
 ## Warum der Schutz pro Institut gerechnet wird
 

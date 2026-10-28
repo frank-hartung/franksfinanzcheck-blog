@@ -143,11 +143,11 @@ Wichtig: Verlange nur, was belegbar ist. Wer „Schmerzensgeld" verlangt oder mi
 
 Diese Rechnung arbeitet mit Annahmen. Sie zeigt, wie sich der Ausfall zusammensetzt – und nennt keine Preise.
 
-Annahmen: Der Vertrag kostet 40 Euro im Monat. Der Anschluss fällt fünf Tage aus. Für die Überbrückung buchst du einen mobilen Datenpass für 10 Euro.
+Annahmen: Der Vertrag kostet 40 € im Monat. Der Anschluss fällt fünf Tage aus. Für die Überbrückung buchst du einen mobilen Datenpass für 10 €.
 
-Rechenweg Tagesanteil: 40 Euro geteilt durch 30 Tage ergeben rund 1,33 Euro je Tag. Rechenweg Ausfallanteil: 1,33 Euro mal fünf Tage ergeben rund 6,67 Euro. Rechenweg Gesamtbelastung: 6,67 Euro plus 10 Euro ergeben rund 16,67 Euro.
+Rechenweg Tagesanteil: 40 € geteilt durch 30 Tage ergeben rund 1,33 € je Tag. Rechenweg Ausfallanteil: 1,33 € mal fünf Tage ergeben rund 6,67 €. Rechenweg Gesamtbelastung: 6,67 € plus 10 € ergeben rund 16,67 €.
 
-Modellrechnung: Von den 16,67 Euro entfallen rund 6,67 Euro auf bezahlte, aber nicht gelieferte Leistung. Rund 10 Euro sind Aufwand für die Überbrückung.
+Modellrechnung: Von den 16,67 € entfallen rund 6,67 € auf bezahlte, aber nicht gelieferte Leistung. Rund 10 € sind Aufwand für die Überbrückung.
 
 Den zweiten Betrag bekommst du meist nicht zurück. Den ersten schon – über eine Gutschrift, wenn du den Zeitraum belegen kannst. Die Rechnung zeigt also nicht, wie viel du zurückbekommst. Sie zeigt, warum die Zeitachse zählt: Jeder belegte Tag erhöht deinen Anteil.
 

@@ -99,8 +99,8 @@ Folgende Werte sind frei gewählte Annahmen für eine Rechnung. Es sind keine ec
 |---|---|---|
 | Leistung aller Geräte | 3 Geräte mal 5 Watt | 15 Watt |
 | Verbrauch im Jahr | 15 Watt mal 24 Stunden mal 365 Tage durch 1.000 | 131,4 kWh |
-| Kosten im Jahr bei 0,30 Euro pro kWh | 131,4 kWh mal 0,30 Euro | 39,42 Euro |
-| Aus für 8 Stunden am Tag | 15 Watt mal 8 Stunden mal 365 Tage durch 1.000 mal 0,30 Euro | 13,14 Euro |
+| Kosten im Jahr bei 0,30 € pro kWh | 131,4 kWh mal 0,30 € | 39,42 € |
+| Aus für 8 Stunden am Tag | 15 Watt mal 8 Stunden mal 365 Tage durch 1.000 mal 0,30 € | 13,14 € |
 
 Deine echte Ersparnis hängt von der gemessenen Leistung ab. Genauso wichtig ist die Dauer der Abschaltung.
 
@@ -112,13 +112,13 @@ Schau beim Vergleich nicht nur auf den Preis für die Arbeit. Rechne immer den G
 
 Niedrige Monatsabschläge sagen wenig über den echten Preis. Er kann am Ende des Jahres zu einer hohen Nachzahlung führen.
 
-**Modellrechnung für Strom:** Wir nehmen einen Verbrauch von 3.500 kWh im Jahr an. Bei einem Preis von 0,30 Euro pro kWh liegen die Kosten bei 1.050 Euro. Sinkt der Preis auf 0,27 Euro pro kWh, sind es nur noch 945 Euro.
+**Modellrechnung für Strom:** Wir nehmen einen Verbrauch von 3.500 kWh im Jahr an. Bei einem Preis von 0,30 € pro kWh liegen die Kosten bei 1.050 €. Sinkt der Preis auf 0,27 € pro kWh, sind es nur noch 945 €.
 
-Der Unterschied liegt bei 105 Euro im Jahr. Nur bei gleichem Grundpreis stimmt die Differenz. Diese Ersparnis von 10 Prozent bezieht sich nur auf den Preis für den Verbrauch.
+Der Unterschied liegt bei 105 € im Jahr. Nur bei gleichem Grundpreis stimmt die Differenz. Diese Ersparnis von 10 % bezieht sich nur auf den Preis für den Verbrauch.
 
-**Modellrechnung für Gas:** Wir nehmen einen Verbrauch von 12.000 kWh an. Bei 0,09 Euro pro kWh kostet das 1.080 Euro. Bei 0,08 Euro pro kWh sind es 960 Euro.
+**Modellrechnung für Gas:** Wir nehmen einen Verbrauch von 12.000 kWh an. Bei 0,09 € pro kWh kostet das 1.080 €. Bei 0,08 € pro kWh sind es 960 €.
 
-Hier sparst du 120 Euro im Jahr. Ist der Grundpreis beim neuen Anbieter aber um 60 Euro höher? Dann schrumpft dein Vorteil auf nur noch 60 Euro zusammen. Alle Preise in diesen Beispielen sind nur Annahmen.
+Hier sparst du 120 € im Jahr. Ist der Grundpreis beim neuen Anbieter aber um 60 € höher? Dann schrumpft dein Vorteil auf nur noch 60 € zusammen. Alle Preise in diesen Beispielen sind nur Annahmen.
 
 Nutze für deine Suche nach Infos viele verschiedene Wege. Schau direkt bei den Anbietern und auf Portalen nach. Kein Weg allein zeigt dir sicher den kleinsten Preis.
 

@@ -186,7 +186,7 @@ Beides zahlt vor der Rechnung. Der Abschlag läuft monatlich. Eine Vorauszahlung
 
 ### Wie spare ich in der Heizsaison am schnellsten?
 
-Senke die Temperatur um ein Grad. Das spart nach Einschätzung der Verbraucherzentralen rund 6 Prozent Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
+Senke die Temperatur um ein Grad. Das spart nach Einschätzung der Verbraucherzentralen rund 6 % Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
 
 ### Was tun bei sehr hohem Abschlag?
 

@@ -115,13 +115,13 @@ Halte zusätzlich deine Jahresrechnungen zusammen. Ableseliste plus Rechnung erg
 
 Diese Modellrechnung zeigt die Wirkung eines systematischen Fehlers.
 
-Annahmen: Dein gemessener Jahresverbrauch liegt bei 2.000 Kilowattstunden. Der Versorger schätzt im ersten Jahr 2.300 Kilowattstunden, im zweiten Jahr 2.200. Der Arbeitspreis beträgt in der Annahme unverändert 0,35 Euro je Kilowattstunde.
+Annahmen: Dein gemessener Jahresverbrauch liegt bei 2.000 Kilowattstunden. Der Versorger schätzt im ersten Jahr 2.300 Kilowattstunden, im zweiten Jahr 2.200. Der Arbeitspreis beträgt in der Annahme unverändert 0,35 € je Kilowattstunde.
 
-Rechenweg erstes Jahr: 2.300 mal 0,35 Euro ergeben 805 Euro. Rechenweg zweites Jahr mit Korrektur: Da nach zwei Jahren ein echter Stand vorliegt, gleicht der Versorger die Abweichungen aus.
+Rechenweg erstes Jahr: 2.300 mal 0,35 € ergeben 805 €. Rechenweg zweites Jahr mit Korrektur: Da nach zwei Jahren ein echter Stand vorliegt, gleicht der Versorger die Abweichungen aus.
 
-Rechenweg Gesamtverbrauch: Der gemessene Verbrauch über zwei Jahre liegt bei 4.000 Kilowattstunden. Gezahlt hast du 805 Euro plus 770 Euro, also 1.575 Euro. Rechenweg Sollwert: 4.000 mal 0,35 Euro ergeben 1.400 Euro.
+Rechenweg Gesamtverbrauch: Der gemessene Verbrauch über zwei Jahre liegt bei 4.000 Kilowattstunden. Gezahlt hast du 805 € plus 770 €, also 1.575 €. Rechenweg Sollwert: 4.000 mal 0,35 € ergeben 1.400 €.
 
-Modellrechnung: Die Differenz von 175 Euro ist ein Guthaben, das du über zwei Jahre vorfinanziert hast. Es kommt zurück, aber erst am Ende. Wer den Abschlag anpassen lässt, verkürzt diese Zwischenfinanzierung.
+Modellrechnung: Die Differenz von 175 € ist ein Guthaben, das du über zwei Jahre vorfinanziert hast. Es kommt zurück, aber erst am Ende. Wer den Abschlag anpassen lässt, verkürzt diese Zwischenfinanzierung.
 
 Die vier Angaben, die jede Meldung vollständig machen:
 
@@ -136,11 +136,11 @@ Die vier Angaben, die jede Meldung vollständig machen:
 
 Diese Modellrechnung nutzt keine Marktwerte. Sie zeigt, wie eine Abweichung wirkt.
 
-Grundlage: Du verbrauchst gemessen 2.000 Kilowattstunden im Jahr. Weil im Vorjahr ein Mehrverbrauch vorlag, setzt der Versorger 2.400 Kilowattstunden an. Der Arbeitspreis bleibt bei 0,35 Euro je Kilowattstunde.
+Grundlage: Du verbrauchst gemessen 2.000 Kilowattstunden im Jahr. Weil im Vorjahr ein Mehrverbrauch vorlag, setzt der Versorger 2.400 Kilowattstunden an. Der Arbeitspreis bleibt bei 0,35 € je Kilowattstunde.
 
-Rechenweg geschätzt: 2.400 Kilowattstunden mal 0,35 Euro ergeben 840 Euro. Rechenweg gemessen: 2.000 Kilowattstunden mal 0,35 Euro ergeben 700 Euro. Modellrechnung: Die Abweichung liegt bei 140 Euro auf der Jahresrechnung.
+Rechenweg geschätzt: 2.400 Kilowattstunden mal 0,35 € ergeben 840 €. Rechenweg gemessen: 2.000 Kilowattstunden mal 0,35 € ergeben 700 €. Modellrechnung: Die Abweichung liegt bei 140 € auf der Jahresrechnung.
 
-Jetzt die Gegenprobe zur Wirkung. Angenommen, du zahlst monatlich einen Abschlag von 60 Euro, also 720 Euro im Jahr. Rechenweg mit Schätzung: 840 Euro minus 720 Euro ergeben eine Nachzahlung von 120 Euro. Rechenweg mit Messwert: 700 Euro minus 720 Euro ergeben ein Guthaben von 20 Euro.
+Jetzt die Gegenprobe zur Wirkung. Angenommen, du zahlst monatlich einen Abschlag von 60 €, also 720 € im Jahr. Rechenweg mit Schätzung: 840 € minus 720 € ergeben eine Nachzahlung von 120 €. Rechenweg mit Messwert: 700 € minus 720 € ergeben ein Guthaben von 20 €.
 
 Modellrechnung: Aus der erwarteten Gutschrift entsteht eine Nachzahlung – obwohl sich dein Verbrauch nicht geändert hat. Das ist der eigentliche Effekt einer Schätzung: Sie verschiebt Geld, ohne dass jemand etwas davon merkt.
 

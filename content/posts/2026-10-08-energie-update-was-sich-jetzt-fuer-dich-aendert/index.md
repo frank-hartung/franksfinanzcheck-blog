@@ -96,7 +96,7 @@ Die drei Formen im direkten Vergleich:
 
 Wie stark die Summen auseinanderlaufen, zeigt ein Rechenbeispiel.
 
-**Rechenbeispiel:** Ein Haushalt verbraucht 4.000 Einheiten im Jahr. Der Preis pro Einheit liegt bei 0,40 Euro. Das macht 1.600 Euro für die Energie. Hinzu kommt ein Grundpreis von 10 Euro im Monat. Das sind 120 Euro im Jahr. Die Gesamtkosten betragen also 1.720 Euro. Ändert sich der Preis um nur einen Cent? Dann sparst oder zahlst du 40 Euro mehr im Jahr. Bei großen Sprüngen am Markt geht es schnell um hunderte Euro.
+**Rechenbeispiel:** Ein Haushalt verbraucht 4.000 Einheiten im Jahr. Der Preis pro Einheit liegt bei 0,40 €. Das macht 1.600 € für die Energie. Hinzu kommt ein Grundpreis von 10 € im Monat. Das sind 120 € im Jahr. Die Gesamtkosten betragen also 1.720 €. Ändert sich der Preis um nur einen Cent? Dann sparst oder zahlst du 40 € mehr im Jahr. Bei großen Sprüngen am Markt geht es schnell um hunderte Euro.
 
 Umgekehrt gilt derselbe Effekt in der Praxis: Ein Haushalt mit hohem Verbrauch zahlt bei einem Festpreis oft weniger. Das gilt zumindest dann, wenn die Preise am Markt während der Laufzeit steigen.
 
