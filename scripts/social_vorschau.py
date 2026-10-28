@@ -52,7 +52,6 @@ import csv
 import glob
 import io
 import json
-import mimetypes
 import os
 import struct
 import sys
@@ -377,32 +376,65 @@ def schreibe(daten: dict, ausgabe: str = AUSGABE) -> dict[str, str]:
     return pfade
 
 
-def bediene(daten: dict, ausgabe: str, bind: str, port: int) -> None:
-    """Kleiner lokaler Server: Vorschau unter /, Bilder aus dem Repo.
+# Was der lokale Server ausliefern darf. Eine POSITIVLISTE, keine
+# Pfadprüfung: Der Dateiname wird beim Start aus dem Dateisystem gelesen, aus
+# der Anfrage kommt nur ein Nachschlage-Schlüssel. CodeQL hat die frühere
+# Fassung (Pfad aus der URL, `startswith`-Prüfung) am 28.10.2026 als
+# `py/path-injection` gemeldet – zu Recht: Eine Prüfung kann man umgehen,
+# eine fehlende Eintragung nicht.
+TYPEN = {
+    ".html": "text/html", ".css": "text/css", ".js": "text/javascript",
+    ".json": "application/json", ".csv": "text/csv",
+    ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+    ".webp": "image/webp", ".gif": "image/gif", ".avif": "image/avif",
+    ".svg": "image/svg+xml", ".ico": "image/x-icon",
+    ".woff2": "font/woff2", ".woff": "font/woff",
+}
 
-    Nötig, weil die Vorschau ihre Cover aus `static/` lädt. Die Pfade in der
-    Seite sind relativ zu `.cache/social-vorschau/` – für `file://` und für
-    diesen Server gleichermaßen. Ausgeliefert wird ausschließlich innerhalb
-    des Repos (Pfadprüfung), und der Server ist kein Admin-Backend.
+
+def _auslieferbar(ausgabe: str) -> dict[str, str]:
+    """URL-Pfad → Datei. Zwei Wurzeln: der Bericht und `static/` (Bilder).
+
+    Auch der Content-Type kommt aus dieser Tabelle, nicht aus dem Dateinamen
+    der Anfrage: `mimetypes.guess_type` übernahm den Pfad ungeprüft in einen
+    HTTP-Header (CodeQL `py/http-response-splitting`, gleicher Lauf).
+    """
+    erlaubt: dict[str, str] = {}
+    # `static/` steht mit Präfix in der Liste, weil die Karten ihre Bilder
+    # relativ zum Bericht verlinken (`../../static/images/…`). Der Browser
+    # löst das gegen die Serverwurzel auf – es wird also `/static/images/…`
+    # angefragt, egal wie tief die Ausgabe liegt.
+    for wurzel, praefix in ((ausgabe, ""), (os.path.join(BLOG_DIR, "static"), "static/")):
+        for ordner, _, dateien in os.walk(wurzel):
+            for name in dateien:
+                pfad = os.path.join(ordner, name)
+                if os.path.splitext(name)[1].lower() in TYPEN:
+                    erlaubt["/" + praefix
+                            + os.path.relpath(pfad, wurzel).replace(os.sep, "/")] = pfad
+    return erlaubt
+
+
+def server(ausgabe: str, bind: str, port: int):
+    """Baut den lokalen Server – getrennt vom Warten, damit er prüfbar ist.
+
+    `bediene` wartet, `server` liefert nur das Objekt. Nur so kann ein Test
+    den echten Handler befragen (Port 0 = freier Port) statt eine Kopie.
     """
     from functools import partial
     from http.server import HTTPServer, SimpleHTTPRequestHandler
 
+    erlaubt = _auslieferbar(ausgabe)
+    startseite = os.path.join(ausgabe, "index.html")
+
     class Handler(SimpleHTTPRequestHandler):
         def do_GET(self):  # noqa: N802 (Standardname)
             pfad = unquote(urlsplit(self.path).path)
-            if pfad in ("/", "/index.html"):
-                datei = os.path.join(ausgabe, "index.html")
-            else:
-                kandidaten = [os.path.join(BLOG_DIR, pfad.lstrip("/")),
-                              os.path.join(ausgabe, pfad.lstrip("/"))]
-                datei = next((k for k in kandidaten if os.path.isfile(k)), "")
-            ziel = os.path.realpath(datei) if datei else ""
-            if not ziel or not ziel.startswith(os.path.realpath(BLOG_DIR)):
+            datei = startseite if pfad in ("/", "/index.html") else erlaubt.get(pfad, "")
+            if not datei or not os.path.isfile(datei):
                 self.send_error(404, "Nicht gefunden")
                 return
-            typ = mimetypes.guess_type(ziel)[0] or "application/octet-stream"
-            with open(ziel, "rb") as fh:
+            typ = TYPEN.get(os.path.splitext(datei)[1].lower(), "application/octet-stream")
+            with open(datei, "rb") as fh:
                 inhalt = fh.read()
             self.send_response(200)
             self.send_header("Content-Type", f"{typ}; charset=utf-8" if typ.startswith("text/") else typ)
@@ -415,15 +447,28 @@ def bediene(daten: dict, ausgabe: str, bind: str, port: int) -> None:
         def log_message(self, fmt, *args):  # ruhig halten: keine Pfade im Terminal
             return
 
-    server = HTTPServer((bind, port), partial(Handler))
-    print(f"Social-Vorschau: http://{'127.0.0.1' if bind == '0.0.0.0' else bind}:{port}/")
+    return HTTPServer((bind, port), partial(Handler))
+
+
+def bediene(daten: dict, ausgabe: str, bind: str, port: int) -> None:
+    """Kleiner lokaler Server: Vorschau unter /, Bilder aus dem Repo.
+
+    Nötig, weil die Vorschau ihre Cover aus `static/` lädt. Die Pfade in der
+    Seite sind relativ zu `.cache/social-vorschau/` – für `file://` und für
+    diesen Server gleichermaßen. Ausgeliefert wird nur, was in `_auslieferbar`
+    steht, und der Server ist kein Admin-Backend.
+    """
+    laufend = server(ausgabe, bind, port)
+    # Port 0 heißt „freier Port" – dann die tatsächliche Nummer nennen.
+    echt = laufend.server_address[1]
+    print(f"Social-Vorschau: http://{'127.0.0.1' if bind == '0.0.0.0' else bind}:{echt}/")
     print("Beenden mit Strg+C. Es werden keine Daten übertragen.")
     try:
-        server.serve_forever()
+        laufend.serve_forever()
     except KeyboardInterrupt:
         pass
     finally:
-        server.server_close()
+        laufend.server_close()
 
 
 # --------------------------------------------------------------------------

@@ -202,3 +202,76 @@ class VorschauTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ServerTests(unittest.TestCase):
+    """Der lokale Vorschau-Server liefert nur, was auf der Positivliste steht.
+
+    Anlass: CodeQL hat am 28.10.2026 `py/path-injection` und
+    `py/http-response-splitting` an der früheren Fassung gemeldet. Der Server
+    war ein lokales Werkzeug – „nur lokal" ist aber keine Eigenschaft, die
+    einen Pfad aus einer Anfrage harmlos macht.
+    """
+
+    def setUp(self):
+        import threading
+        import urllib.request
+        self._threading, self._request = threading, urllib.request
+        self.tmp = tempfile.mkdtemp()
+        with open(os.path.join(self.tmp, "index.html"), "w", encoding="utf-8") as fh:
+            fh.write("<html><body>Bericht</body></html>")
+        with open(os.path.join(self.tmp, "vorschau.json"), "w", encoding="utf-8") as fh:
+            fh.write("{}")
+        # Eine Datei, die NICHT auf der Positivliste steht (falsche Endung).
+        with open(os.path.join(self.tmp, "geheim.txt"), "w", encoding="utf-8") as fh:
+            fh.write("nicht ausliefern")
+        self.server = sv.server(self.tmp, "127.0.0.1", 0)
+        self.port = self.server.server_address[1]
+        self.faden = self._threading.Thread(target=self.server.serve_forever, daemon=True)
+        self.faden.start()
+
+    def tearDown(self):
+        self.server.shutdown()
+        self.server.server_close()
+        self.faden.join(timeout=5)
+        for name in os.listdir(self.tmp):
+            os.unlink(os.path.join(self.tmp, name))
+        os.rmdir(self.tmp)
+
+    def hole(self, pfad: str):
+        try:
+            with self._request.urlopen(f"http://127.0.0.1:{self.port}{pfad}", timeout=5) as antwort:
+                return antwort.status, antwort.headers.get("Content-Type", ""), antwort.read()
+        except self._request.HTTPError as fehler:
+            return fehler.code, fehler.headers.get("Content-Type", ""), b""
+
+    def test_startseite_und_json_werden_ausgeliefert(self):
+        status, typ, inhalt = self.hole("/")
+        self.assertEqual(status, 200)
+        self.assertTrue(typ.startswith("text/html"), typ)
+        self.assertIn(b"Bericht", inhalt)
+        status, typ, _ = self.hole("/vorschau.json")
+        self.assertEqual(status, 200)
+        self.assertTrue(typ.startswith("application/json"), typ)
+
+    def test_nicht_gelistete_datei_und_ausbruch_ergeben_404(self):
+        self.assertEqual(self.hole("/geheim.txt")[0], 404)
+        self.assertEqual(self.hole("/nichtda.html")[0], 404)
+        # Klassischer Ausbruch: darf die Positivliste nicht umgehen.
+        self.assertEqual(self.hole("/../../etc/passwd")[0], 404)
+        self.assertEqual(self.hole("/%2e%2e/%2e%2e/etc/passwd")[0], 404)
+
+    def test_bilder_aus_static_werden_ausgeliefert(self):
+        """Die Karten verlinken relativ (`../../static/images/…`); der Browser
+        fragt `/static/images/…` – das muss die Positivliste enthalten."""
+        kandidaten = [k for k in sv._auslieferbar(self.tmp) if k.startswith("/static/")]
+        self.assertTrue(kandidaten, "keine Bilder aus static/ in der Positivliste")
+        status, typ, _ = self.hole(kandidaten[0])
+        self.assertEqual(status, 200, kandidaten[0])
+        self.assertTrue(typ.startswith("image/"), typ)
+
+    def test_content_type_kommt_aus_der_tabelle_nicht_aus_der_anfrage(self):
+        """Ein CRLF im Dateinamen darf keinen zusätzlichen Header erzeugen."""
+        status, typ, _ = self.hole("/index.html%0d%0aX-Boese:%20ja")
+        self.assertEqual(status, 404)
+        self.assertNotIn("X-Boese", typ)
