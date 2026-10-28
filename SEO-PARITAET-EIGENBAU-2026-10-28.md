@@ -124,6 +124,28 @@ Der Bestand ist damit nicht „sauber" – er ist ehrlich eingeordnet: keine
 Markierungsbrüche, aber 76 Artikel ohne `keywords_fokus` und 192 Kartenhinweise,
 die als Redaktionsliste im Bericht stehen.
 
+## Was der erste CI-Lauf gefunden hat
+
+Ein Gate, das beim ersten Lauf grün ist, hat nichts geprüft. Dieses war beim
+ersten Lauf rot – fünfmal, und jedes Mal zu Recht:
+
+| Befund | Klasse | Ursache |
+|---|---|---|
+| Exit 1 ohne Bericht | falsche Fehlerklasse | `bash` wertete `> seo-paritaet/summary.md` aus, bevor das Verzeichnis existierte. Die Shell starb mit 1, das Skript lief nie – der PR las „ein Befund sperrt". |
+| `js/xss-through-dom` (`app.js:174`) | Sicherheit | `page.url` ging ungeprüft in `link.href`. Ein `javascript:`-Ziel aus dem Inhalt wäre im lokalen Bericht ein Klick-XSS. |
+| `py/path-injection` (Vorschau-Server) | Sicherheit | Der angefragte Pfad ging nach `startswith`-Prüfung in `open()`. Jetzt Positivliste beim Start. |
+| `py/http-response-splitting` | Sicherheit | `mimetypes.guess_type` übernahm den Pfad der Anfrage in den `Content-Type`-Header. Jetzt feste Tabelle. |
+| Metadaten-Wache rot (5) | Inhalt | Die Automatik vom 28.10. hat `date` überschrieben, ohne `lastmod` zu ziehen (4 Artikel), und einen Artikel ohne `kurzantwort` veröffentlicht (1). `e2e.yml` läuft nur bei PRs – auf `main` blieb das unsichtbar. |
+
+Zwei Lehren daraus, beide im Code festgehalten:
+
+1. **„Nichts gemessen" und „Policy sagt nein" sind verschiedene Aussagen.**
+   Exit 1 ist der Policy vorbehalten; jede Ausnahme im Skript wird zu Exit 2,
+   und die erste Fehlerzeile steht in der Annotation statt nur im Log.
+2. **Ein Gate braucht einen Lauf, der es selbst auslöst** – und eine Wache,
+   die prüft, dass es das tut (`scripts/trigger_wache.py`, W1/W3). Genau diese
+   Lücke („lokal richtig, im Betrieb unsichtbar") war der Anlass des Vorhabens.
+
 ## Empfehlung
 
 Kein Nachbau, kein Fremdcode. Reihenfolge nach Nutzen: **Punkt 4 → 2 → 1 → 3**.
