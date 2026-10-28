@@ -8,7 +8,7 @@ tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Geld abheben im Ausland", "Auslandsgebühren Karte", "Automatengebühr", "Fremdwährungsgebühr", "Kreditkarte oh", "e Ausla"]
+keywords: ["Geld abheben im Ausland", "Auslandsgebühren Karte", "Automatengebühr", "Fremdwährungsgebühr", "Kreditkarte oh", "e Ausla", "Kreditkarte"]
 pin_title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
 pin_description: "*Werbung | Geld abheben im Ausland: welche zwei Gebühren am Automaten zusammenkommen, was die Abrechnung in Euro bedeutet und wie du vor der Reise deine Karte prüfst. Mehr Spartipps auf FranksFinanzcheck! #geldabheben #auslandsgebuehren #girokonto"
 ai_generated: true
