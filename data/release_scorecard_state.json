@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T11:18:30Z",
-  "modus": "live",
-  "commit": "f56e25c73ff8ecb9534effa50b427e47988b0f57",
+  "generated_at": "2026-10-28T13:56:19Z",
+  "modus": "kandidaten",
+  "commit": "cdaaf0ca4dbd26a8cca0017890f2c1fb63ae0d76",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -175,7 +175,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
-      "sha256": "c31796eeca1dd99ae864b1d1f4953d08b29f79b549e0f69f695019db3677acd9",
+      "sha256": "647c402f7dfd33083c47835a6f30d78d44c056591ad62e721490506c8270e27a",
       "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
@@ -189,7 +189,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "4ae75d948dfe128665deef0cfc0905f076e58c67579a99d1d0ccdfad13d34f3d",
@@ -277,7 +277,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "86e69f13b360c2ec53d6cc50ffe3bf1a7d37764465ab7e3a9f81e22b0a8724ad",
+      "sha256": "18e34d0afa3f37b9f6c65b1fc6b554fe599d6cb70f72c9497accebe6231a6993",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -291,7 +291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "2ef9966a47dfc6b2464aca8ab77e03a752813453bc8bd3be86aba8801056cc74",
@@ -753,7 +753,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "c89dcfc6b21d0437eab186e30d15c0fabddd338b008f7913183a4ce20bb4304d",
+      "sha256": "2792b636408ee2097996304712cd441c9ab8b6d17083087d12b5fa0ef5304f5d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -767,7 +767,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "8e94c3cc691844554b65c9edc70e679587139645343678b1cf0176cdda6b8dc6",
@@ -1178,7 +1178,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-      "sha256": "f182ab832a158956deb241ea5c229d12eacb12f10a8049d8a822d8c438f94800",
+      "sha256": "a403481cc86ddb5f4f2565cc5051a04f5704faf01981ffe3a26f765d9c94fcc8",
       "urteil": "warnung",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1192,7 +1192,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     }
   }
 }
