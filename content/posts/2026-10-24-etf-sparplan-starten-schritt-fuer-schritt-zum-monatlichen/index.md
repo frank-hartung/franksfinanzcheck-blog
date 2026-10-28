@@ -1,9 +1,9 @@
 ---
 title: "ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung"
 description: "ETF-Sparplan starten: Erfahre, wie du als Einsteiger einen Sparplan aufsetzt, Fehler vermeidest und monatlich clever investierst – ohne Fachchinesisch."
-date: 2026-10-24T17:41:53Z
-draft: true
-reserve: true
+date: 2026-10-28T01:27:02Z
+draft: false
+reserve_published: 2026-10-28
 reserve_reaktiviert: "2026-10-24 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis check_length.py"
 
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]

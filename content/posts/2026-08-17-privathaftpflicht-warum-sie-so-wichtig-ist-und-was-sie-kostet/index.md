@@ -2,11 +2,10 @@
 lastmod: 2026-10-16
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute zählen und was guter Schutz für Singles und Familien kostet."
-date: 2026-10-16T15:15:38Z
+date: 2026-10-28T01:24:59Z
 draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-16T18:02:46Z
-cadence_grund: "Redaktion 27.10.2026: RS1–RS7 grün, YMYL-Freigabe neu versiegelt – zurück in die Kadenz"
+cadence_demoted: 2026-10-28T01:26:09Z
+cadence_grund: "ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert"
 endredaktion_status: freigegeben
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]

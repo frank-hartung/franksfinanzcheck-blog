@@ -2,11 +2,8 @@
 lastmod: 2026-09-30
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
-date: 2026-08-31T13:47:31Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-27T17:09:23Z
-cadence_grund: "Redaktion 27.10.2026: RS1–RS7 grün, YMYL-Freigabe neu versiegelt – zurück in die Kadenz"
+date: 2026-10-28T01:24:59Z
+draft: false
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
