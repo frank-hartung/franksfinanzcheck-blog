@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T21:27:36Z",
+  "generated_at": "2026-10-28T01:34:21Z",
   "modus": "kandidaten",
-  "commit": "bc2dcb1b0e4f95e77bcc26300cb9edd969d9ad74",
+  "commit": "3bec09bb15eb78b9fe4d06d04b00e7149415130f",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "ce58cab860d5f720bf96b250f48458b04175647746d4a85785ad08e72cee0e15",
@@ -23,12 +23,12 @@
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
       "sha256": "006546edb07b6ad1a92c2227f8c15baff8c685cd484948d9c6a8460cbb13003f",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -57,12 +57,12 @@
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "ca88530113b29c91eca13f01f66009a7d966119b6d89295693dac035090a4145",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -74,12 +74,12 @@
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "257f22b773e192bf52fd2caf86f6c31941b4d5e6aa81bc110eb8e748654be179",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -118,7 +118,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-27",
       "siegel_drift": "unverändert"
@@ -173,6 +173,23 @@
       },
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+      "sha256": "c31796eeca1dd99ae864b1d1f4953d08b29f79b549e0f69f695019db3677acd9",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "4ae75d948dfe128665deef0cfc0905f076e58c67579a99d1d0ccdfad13d34f3d",
@@ -254,7 +271,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-27",
       "siegel_drift": "unverändert"
@@ -278,12 +295,12 @@
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "2ef9966a47dfc6b2464aca8ab77e03a752813453bc8bd3be86aba8801056cc74",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -533,12 +550,12 @@
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
       "sha256": "5836276f92464fd94bb433dbb821b9045f368f8ab1d46b29f56b188096791bea",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -601,12 +618,12 @@
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "6361fda1724d7195fac04c5fa2fad98b2740ac6ad3edebb38672f43d4436a678",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -652,12 +669,12 @@
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
       "sha256": "05a518bc8846c2999afeb7f5750eecb1125559406fc57b9665dbcaf622c70721",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -669,12 +686,12 @@
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "57dc6f7eabd4099a2c782e2bb468b16787825af716563a8a9ddfa63cbb40be90",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1159,6 +1176,23 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
+      "sha256": "f182ab832a158956deb241ea5c229d12eacb12f10a8049d8a822d8c438f94800",
+      "urteil": "warnung",
+      "risikoklasse": "erhoeht",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-21",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
