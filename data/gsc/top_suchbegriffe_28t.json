@@ -1,17 +1,24 @@
 [
   {
-    "suchbegriff": "energiebesparing",
+    "suchbegriff": "dauerhafte kostenkontrolle",
     "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 100.0
+    "position": 44.0
+  },
+  {
+    "suchbegriff": "energiebesparing",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 87.0
   },
   {
     "suchbegriff": "energieeinsparung",
     "clicks": 0,
-    "impressions": 4,
+    "impressions": 6,
     "ctr": 0.0,
-    "position": 25.5
+    "position": 25.33
   },
   {
     "suchbegriff": "energiekosten reduzieren",
@@ -23,16 +30,30 @@
   {
     "suchbegriff": "energiekosten senken",
     "clicks": 0,
-    "impressions": 18,
+    "impressions": 22,
     "ctr": 0.0,
-    "position": 42.83
+    "position": 39.41
+  },
+  {
+    "suchbegriff": "energiekostenanalyse",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 34.0
   },
   {
     "suchbegriff": "energiespar lösungen",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 4,
     "ctr": 0.0,
-    "position": 23.5
+    "position": 22.0
+  },
+  {
+    "suchbegriff": "energiespar produkte",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 7.0
   },
   {
     "suchbegriff": "energiesparmaßnahme",
@@ -40,6 +61,13 @@
     "impressions": 2,
     "ctr": 0.0,
     "position": 42.5
+  },
+  {
+    "suchbegriff": "fixkosten senken",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 96.0
   },
   {
     "suchbegriff": "frank dsl",
@@ -61,6 +89,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 76.0
+  },
+  {
+    "suchbegriff": "kostenersparnis",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 73.0
   },
   {
     "suchbegriff": "kostenlose bankkonto",
@@ -91,18 +126,25 @@
     "position": 58.0
   },
   {
-    "suchbegriff": "referenzkonto",
+    "suchbegriff": "leistungspreis senken",
     "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 92.0
+    "position": 22.0
+  },
+  {
+    "suchbegriff": "referenzkonto",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 94.0
   },
   {
     "suchbegriff": "stromeinsparung",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 43.0
+    "position": 43.33
   },
   {
     "suchbegriff": "tankkartenantrag ohne kaution",
@@ -119,11 +161,18 @@
     "position": 3.0
   },
   {
+    "suchbegriff": "wie kann ich die kosten für energieversorgung reduzieren?",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 8.0
+  },
+  {
     "suchbegriff": "wie kann ich kosten durch energieoptimierung senken?",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 5.5
+    "position": 5.67
   },
   {
     "suchbegriff": "wie senke ich meine stromkosten ohne auf komfort zu verzichten?",
