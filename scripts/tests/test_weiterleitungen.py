@@ -30,7 +30,7 @@ class QuelleBestand(unittest.TestCase):
         # 27.10.2026: +136 Alt-URLs aus dem GSC-Kandidatenraum (68 Dubletten "(1)",
         # 68 datumslose Alt-URLs, je genau ein Live-Ziel – Regel A).
         # Siehe GSC-OPTIMIERUNGSPLAN-2026-10-27.md, Anhang A.
-        self.assertEqual(len(self.eintraege), 250)
+        self.assertEqual(len(self.eintraege), 251)  # inkl. Heizöl-Entwurf-Hold vom 28.10.2026
         self.assertEqual(sum(1 for e in self.entfallen if e["regel"] == "D"), 3)
 
     def test_weiterleitungsquelle_ist_nie_live(self):

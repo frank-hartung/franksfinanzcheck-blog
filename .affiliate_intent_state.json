@@ -1,45 +1,12 @@
 {
- "generated_at": "2026-10-28 10:15:03 UTC",
+ "generated_at": "2026-10-28 17:07:40 UTC",
  "exit_code": 0,
- "modus": "FIX",
- "checked_articles": 105,
- "checked_links": 247,
+ "modus": "REPORT",
+ "checked_articles": 107,
+ "checked_links": 248,
  "healed_count": 0,
  "healed": [],
  "findings": [
-  {
-   "code": "IW4",
-   "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
-   "line": 184,
-   "route": "strom",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
-   "line": 184,
-   "route": "strom",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „Stromtarife“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-   "line": 189,
-   "route": "mietwagen",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „Mietwagen“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
   {
    "code": "IW2",
    "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
@@ -98,7 +65,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
-   "line": 108,
+   "line": 113,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -109,7 +76,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
-   "line": 123,
+   "line": 128,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -120,7 +87,7 @@
   {
    "code": "IW2",
    "slug": "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen",
-   "line": 99,
+   "line": 104,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -129,48 +96,26 @@
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
-   "code": "IW4",
-   "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 18,
-   "route": "strom",
-   "slot": "top",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
-  },
-  {
-   "code": "IW4",
-   "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 58,
-   "route": "strom",
-   "slot": "mid",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
-  },
-  {
-   "code": "IW4",
-   "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 143,
-   "route": "strom",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
-  },
-  {
    "code": "IW2",
    "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-   "line": 127,
+   "line": 150,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
+   "line": 107,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

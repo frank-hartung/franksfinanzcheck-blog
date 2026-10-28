@@ -36,5 +36,12 @@
       "alter_tage": null
     }
   ],
-  "messluecken": 0
+  "messluecken": 0,
+  "geschaeftsmessbarkeit": {
+    "status": "unbekannt",
+    "label": "UNBEKANNT – KEINE GESCHÄFTSMESSUNG",
+    "gemessene_quellen": 0,
+    "erforderliche_quellen": 2,
+    "abdeckung_prozent": 0
+  }
 }

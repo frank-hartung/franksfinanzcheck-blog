@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-14
+lastmod: 2026-10-28
 title: "Strom & Gas sparen: Ratgeber für niedrige Energiekosten"
 description: "Strom-, Gas- und Heizkosten senken: Stromfresser enttarnen, Preisgarantien nutzen, Anbieter wechseln und dynamische Tarife einordnen – mit Rechnern."
 date: 2026-08-08
@@ -34,15 +34,15 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-Strom und Gas machen in deutschen Haushalten oft den größten Block der variablen Nebenkosten aus. Wer jahrelang im teuren Grundversorgungstarif bleibt oder veraltete Abschläge unhinterfragt abbuchen lässt, verliert Jahr für Jahr mehrere hundert Euro. Mit der richtigen Kombination aus verbrauchsreduzierenden Maßnahmen im Alltag und einem regelmäßigen, risikofreien Tarifwechsel holst du dir deine finanzielle Kontrolle zurück. In diesem umfassenden Ratgeber bündele ich alle Strategien für spürbar niedrigere Energiekosten – gestützt auf den 4K-Prüfpfad, konkrete Rechner, Praxis-Fallstudien und aktuelle Marktdaten für 2026.
+Strom- und Gasrechnungen setzen sich aus Verbrauch, Arbeitspreis, Grundpreis und Vertragsbedingungen zusammen. Ob ein Wechsel Geld spart, lässt sich deshalb nicht pauschal versprechen: Entscheidend sind dein tatsächlicher Jahresverbrauch, dein Wohnort, das konkrete Angebot und mögliche Wechselkosten oder Bonusbedingungen. Dieser Ratgeber führt dich durch den 4K-Prüfpfad, die kostenlosen Rechner und ausdrücklich gekennzeichnete Modellrechnungen. Reale Haushalts-Fallstudien veröffentlichen wir erst, wenn die Belege vollständig dokumentiert und geprüft sind.
 
 ## Das Wichtigste auf einen Blick
 
-* **Tarifwechsel als größter Hebel:** Ein Wechsel des Strom- oder Gasanbieters dauert online weniger als zehn Minuten und spart im Schnitt 300&nbsp;€ bis 800&nbsp;€ pro Jahr gegenüber der Grundversorgung.
-* **Heimliche Stromfresser eliminieren:** Standby-Geräte, veraltete Kühltechnik und Dauerverbraucher verursachen bis zu 20&nbsp;% deiner jährlichen Stromrechnung.
-* **Preisgarantien richtig wählen:** Vor der Heizperiode sorgen Tarife mit mindestens zwölf Monaten Preisgarantie für planbare Sicherheit ohne Preissprünge.
-* **Unterbrechungsfreie Versorgung:** Ein Versorgungsengpass beim Anbieterwechsel ist in Deutschland gesetzlich nach §&nbsp;36 EnWG ausgeschlossen.
-* **Energie ist ein Fixkostenposten:** Im [Fixkosten-Scanner](/werkzeuge/fixkosten-scanner/) stehen Strom, Gas und Wohn-Nebenkosten zusammen mit den übrigen Verträgen – gespart wird am größten Block, nicht am kleinsten.
+* **Tarifwechsel prüfen:** Rechne den Gesamtpreis über die Vertragsdauer mit deinem eigenen Verbrauch. Ein niedriger Arbeitspreis allein sagt nicht, ob das Angebot günstiger ist.
+* **Verbrauch messen statt schätzen:** Prüfe auffällige Geräte mit einem geeigneten Messgerät und multipliziere nur den gemessenen Verbrauch mit deinem tatsächlichen Tarif.
+* **Preisgarantie im Detail lesen:** Umfang, Ausnahmen, Laufzeit und Kündigungsbedingungen unterscheiden sich je Angebot. Eine Garantie verhindert nicht jede denkbare Preisänderung.
+* **Versorgung und Vertragswechsel auseinanderhalten:** Informiere dich vor der Kündigung über Fristen, Bestätigung und den Ablauf beim jeweiligen Anbieter; pauschale Aussagen wie „risikofrei“ ersetzen keine Prüfung des eigenen Vertrags.
+* **Energie als Teil der Haushaltsrechnung sehen:** Im [Fixkosten-Scanner](/werkzeuge/fixkosten-scanner/) kannst du Strom und Gas neben anderen laufenden Verträgen einordnen – ohne ein pauschales Sparversprechen.
 
 ---
 
@@ -53,7 +53,7 @@ Um eine fundierte Entscheidung zu treffen, benötigst du verlässliche Markt-Ben
 <div class="ff-radar-card">
   <div class="ff-radar-card__head">
     <h3 class="ff-radar-card__title"><span>📊</span> Energie-Marktradar &amp; Benchmarks Q4 2026</h3>
-    <span class="ff-radar-card__meta">Stand: Oktober 2026 · Quelle: BDEW &amp; BNetzA</span>
+    <span class="ff-radar-card__meta">Quellenstand: 28.09.2026 · BDEW; bundesweite Orientierungswerte, kein persönliches Angebot</span>
   </div>
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
@@ -67,18 +67,18 @@ Um eine fundierte Entscheidung zu treffen, benötigst du verlässliche Markt-Ben
       <div class="ff-radar-kpi__source">Einfamilienhaus / Mehrpersonen-Haushalt</div>
     </div>
     <div class="ff-radar-kpi">
-      <div class="ff-radar-kpi__label">Einsparpotenzial Grundversorgung</div>
-      <div class="ff-radar-kpi__value">bis 35 %</div>
-      <div class="ff-radar-kpi__source">Differenz Grundversorger vs. Top-Alternativtarife</div>
+      <div class="ff-radar-kpi__label">Dein mögliches Einsparpotenzial</div>
+      <div class="ff-radar-kpi__value">individuell</div>
+      <div class="ff-radar-kpi__source">Mit deinem Verbrauch und konkreten Angeboten berechnen</div>
     </div>
     <div class="ff-radar-kpi">
-      <div class="ff-radar-kpi__label">CO₂-Preis 2026</div>
-      <div class="ff-radar-kpi__value">55–65 €/t</div>  
-      <div class="ff-radar-kpi__source">Gesetzliche Staffel nach BEHG</div>
+      <div class="ff-radar-kpi__label">Für den Vergleich nötig</div>
+      <div class="ff-radar-kpi__value">Jahresverbrauch</div>
+      <div class="ff-radar-kpi__source">Der Wert aus deiner letzten Abrechnung ist aussagekräftiger als ein pauschaler Sparwert</div>
     </div>
   </div>
   <div class="ff-radar-alert">
-    <strong>Wichtiger Regulatorik-Hinweis 2026:</strong> Durch die Reform der Netzentgelte (§ 14a EnWG) profitieren Haushalte mit steuerbaren Verbrauchseinrichtungen (Wärmepumpen, private Ladeinfrastruktur) von reduzierten Netzentgelten, wenn diese netzdienlich gesteuert werden können.
+    <strong>Regulatorik-Hinweis:</strong> Für steuerbare Verbrauchseinrichtungen wie Wärmepumpen können besondere Netzentgelt-Regelungen relevant sein. Voraussetzungen und konkrete Ausgestaltung hängen vom Fall ab; prüfe die aktuellen Hinweise der Bundesnetzagentur sowie die Auskunft deines Netzbetreibers.
   </div>
 </div>
 
@@ -95,18 +95,19 @@ Statt planlosem Aktionismus folgt die Energie-Optimierung auf FranksFinanzcheck 
 
 ---
 
-## 3. Die Spar-Potenziale im Energie-Bereich
+## 3. Wo du deine Energiekosten konkret prüfen kannst
 
-| Maßnahme | Typische Ersparnis / Jahr | Zeitaufwand | Schwierigkeit |
-|---|---|---|---|
-| Stromanbieter wechseln | 150–350&nbsp;€ | 5 Minuten | Sehr einfach |
-| Gasanbieter wechseln | 200–600&nbsp;€ | 5 Minuten | Sehr einfach |
-| Standby-Stromfresser abschalten | 80–150&nbsp;€ | 15 Minuten | Einfach |
-| Heizung entlüften & Thermostate prüfen | 50–120&nbsp;€ | 30 Minuten | Einfach |
-| Hydraulischer Abgleich & Heizkurve | 100–220&nbsp;€ | Einmalig Fachbetrieb | Mittel |
-| LED-Umrüstung im gesamten Haushalt | 40–90&nbsp;€ | 1 Stunde | Einfach |
+Pauschale Euro-Ersparnisse wären ohne Verbrauch, Wohnort, Tarif und Ausgangszustand Scheingenauigkeit. Nutze die Tabelle als Prüfplan; eine mögliche Einsparung ergibt sich erst aus deinen eigenen Rechnungs- und Angebotsdaten.
 
-{{< tabellenstand quelle="BDEW-Preisdaten 2026, Modellrechnungen FranksFinanzcheck" stand="Oktober 2026" >}}
+| Hebel | Was du vergleichst | Was das Ergebnis begrenzt |
+|---|---|---|
+| Stromtarif | Jahresverbrauch, Arbeits- und Grundpreis, Einmalkosten sowie sichere Bonusbedingungen über die gesamte Laufzeit | Verfügbarkeit am Wohnort, Verbrauchsprofil, Preisänderungs- und Kündigungsbedingungen |
+| Gastarif | Abgerechnete kWh, Grundpreis, Arbeitspreis und Vertragsbedingungen im konkreten Angebot | Verbrauch und regionale Verfügbarkeit; Preisgarantien haben jeweils eigene Ausnahmen |
+| Standby-Verbrauch | Tatsächlich gemessene Watt und Nutzungsdauer mit dem eigenen Strompreis | Messgerät, Messdauer und Gerätezustand; eine Hochrechnung ist ein Modell, keine garantierte Ersparnis |
+| Heizung und Warmwasser | Abrechnung, Einstellungen und – bei technischen Änderungen – fachliche Einschätzung | Gebäudestandard, Heizungsanlage, Wetter und Nutzerverhalten |
+| Beleuchtung und Geräte | Leistungsaufnahme, Betriebsstunden und Anschaffungskosten vor einer Ersatzentscheidung | Nutzungsdauer, Kaufpreis und tatsächliche Betriebsstunden |
+
+{{< tabellenstand quelle="Prüfplan; konkrete Tarif- und Verbrauchswerte sind individuell zu erheben" stand="Oktober 2026" >}}
 
 ---
 
@@ -128,7 +129,7 @@ Die vollständigen Werkzeuge dazu – mit eigenen Eingabefeldern, offengelegter 
 
 ## 5. Entscheidungstabelle: Welches Tarifmodell passt zu dir?
 
-Der Markt unterscheidet vier grundlegende Tarifmodelle. Die folgende Matrix zeigt, wann sich welches Modell rechnet:
+Die passende Tarifart hängt von Vertrag, Zähler, Verbrauchsprofil und deiner Bereitschaft ab, Preisschwankungen zu tragen. Die Matrix ist eine Orientierung, keine pauschale Rangliste; prüfe die aktuellen Vertragsbedingungen und gesetzlichen Vorgaben vor einer Entscheidung.
 
 <div class="ff-decision-matrix">
   <div class="ff-decision-matrix__head">
@@ -148,31 +149,31 @@ Der Markt unterscheidet vier grundlegende Tarifmodelle. Die folgende Matrix zeig
     <tbody>
       <tr>
         <td><strong>12-Monats-Festpreis</strong></td>
-        <td>Fester Arbeitspreis für 12 Monate, monatliche Kündigung danach</td>
-        <td><span class="ff-decision-badge ff-decision-badge – yes">Sehr hoch</span></td>
-        <td>Haushalte, die maximale Planungssicherheit vor dem Winter wollen</td>
-        <td><span class="ff-decision-badge ff-decision-badge – yes">Standard-Empfehlung</span></td>
+        <td>Laufzeit, Preisgarantie und Kündigungsfrist unterscheiden sich je Angebot; Vertragstext prüfen.</td>
+        <td>Abhängig von Garantieumfang und den ausdrücklich ausgenommenen Preisbestandteilen.</td>
+        <td>Haushalte, die planbare Preise höher gewichten als mögliche kurzfristige Marktbewegungen.</td>
+        <td>Nur nach Vollkostenvergleich über die Laufzeit; keine pauschale Empfehlung.</td>
       </tr>
       <tr>
         <td><strong>Dynamischer Börsenstromtarif</strong></td>
-        <td>Stündliche Abrechnung nach EPEX Spot Börsenpreisen</td>
-        <td><span class="ff-decision-badge ff-decision-badge – warn">Variabel</span></td>
-        <td>Haushalte mit Smart Meter, Wärmepumpe, Heimspeicher oder E-Auto</td>
-        <td><span class="ff-decision-badge ff-decision-badge – yes">Top bei steuerbarer Last</span></td>
+        <td>Preisbestandteile, Messsystem und Abrechnung nach den konkreten Vertragsbedingungen prüfen.</td>
+        <td>Kann mit Marktpreisen schwanken; Gesamtkosten sind nicht allein aus dem Börsenpreis ablesbar.</td>
+        <td>Haushalte, die Verbrauch zeitlich verschieben können und Schwankungen finanziell tragen können.</td>
+        <td>Nur nach Vergleich der Gesamtkosten und der technischen Voraussetzungen.</td>
       </tr>
       <tr>
         <td><strong>Wärmepumpenstrom (§ 14a EnWG)</strong></td>
-        <td>Separater Zählertarif mit reduzierten Netzentgelten</td>
-        <td><span class="ff-decision-badge ff-decision-badge – yes">Hoch</span></td>
-        <td>Haushalte mit eigener Wärmepumpe ab ca. 3.000 kWh WP-Strom</td>
-        <td><span class="ff-decision-badge ff-decision-badge – yes">Pflicht-Check für Eigentümer</span></td>
+        <td>Messkonzept, Anschluss und Voraussetzungen im konkreten Fall prüfen.</td>
+        <td>Hängt von technischer Umsetzung und aktueller Regelung ab.</td>
+        <td>Haushalte mit Wärmepumpe; Eigentümer und Betreiber sollten die konkrete Anschluss- und Abrechnungssituation klären.</td>
+        <td>Keine Verbrauchsschwelle pauschal unterstellen; Netzbetreiber und Vertragsunterlagen prüfen.</td>
       </tr>
       <tr>
         <td><strong>Örtliche Grundversorgung</strong></td>
-        <td>Gesetzlicher Standardtarif, 2 Wochen Kündigungsfrist</td>
-        <td><span class="ff-decision-badge ff-decision-badge – warn">Niedrig</span></td>
-        <td>Nur als Übergangslösung bei kurzfristigem Umzug</td>
-        <td><span class="ff-decision-badge ff-decision-badge – no">Zu teuer (Wechseln!)</span></td>
+        <td>Tarif und Kündigungsbedingungen anhand der aktuellen Unterlagen des Grundversorgers prüfen.</td>
+        <td>Preis und Flexibilität hängen vom örtlichen Tarif und deiner Situation ab.</td>
+        <td>Kann eine Übergangslösung sein; auch im Bestand sollte der konkrete Preis verglichen werden.</td>
+        <td>Weder automatisch günstig noch automatisch zu teuer – mit realem Verbrauch gegen Angebote rechnen.</td>
       </tr>
     </tbody>
   </table>
@@ -200,29 +201,29 @@ Nutze diese Checkliste für deine jährliche Bestandsaufnahme:
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-2" class="ff-audit-item__checkbox">
       <label for="chk-en-2" class="ff-audit-item__content">
-        <strong>2. Zählerstand zum Monatsersten ablesen</strong>
-        Foto vom Strom- und Gaszähler machen und Verbrauchstrend im Jahresverlauf dokumentieren.
+        <strong>2. Zählerstände nachvollziehbar dokumentieren</strong>
+        Lies die Zähler nach Bedarf und gemäß den Hinweisen deines Versorgers ab; notiere Datum und Wert oder sichere ein Foto.
       </label>
     </li>
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-3" class="ff-audit-item__checkbox">
       <label for="chk-en-3" class="ff-audit-item__content">
-        <strong>3. Monatsabschlag mit Rechner gegenprüfen</strong>
-        Prüfen, ob der Abschlag im Korridor ±15 % der echten Jahreskosten liegt (Nachzahlungsbremse).
+        <strong>3. Abschlag mit Jahresverbrauch und Tarif abgleichen</strong>
+        Nutze die letzte Abrechnung und aktuelle Preise als Grundlage; ein fixer Prozentkorridor sagt nicht für jeden Haushalt eine Nachzahlung voraus.
       </label>
     </li>
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-4" class="ff-audit-item__checkbox">
       <label for="chk-en-4" class="ff-audit-item__content">
-        <strong>4. Tarifvergleich für Strom starten</strong>
-        Filtern nach Tarifen mit 12 Monaten Preisgarantie und maximal 1 Monat Kündigungsfrist.
+        <strong>4. Stromangebote über die gesamte Laufzeit vergleichen</strong>
+        Prüfe Arbeits- und Grundpreis, Laufzeit, Preisgarantie, Kündigungsfrist, Einmalkosten und Bonusbedingungen im Vertrag.
       </label>
     </li>
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-5" class="ff-audit-item__checkbox">
       <label for="chk-en-5" class="ff-audit-item__content">
-        <strong>5. Tarifvergleich für Gas starten</strong>
-        Vor der Heizperiode im Spätsommer Festpreis sichern; Boni mit und ohne Einmalzahlung rechnen.
+        <strong>5. Gasangebote anhand deines Vertrags prüfen</strong>
+        Vergleiche den Gesamtpreis mit deinem Jahresverbrauch und beachte Preisgarantie, Laufzeit, Kündigungsfristen und Bonusbedingungen – ein bestimmter Monat ist keine Spargarantie.
       </label>
     </li>
     <li class="ff-audit-item">
@@ -242,22 +243,22 @@ Nutze diese Checkliste für deine jährliche Bestandsaufnahme:
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-8" class="ff-audit-item__checkbox">
       <label for="chk-en-8" class="ff-audit-item__content">
-        <strong>8. Heizkörper entlüften &amp; Thermostate prüfen</strong>
-        Luft aus allen Heizkörpern ablassen und programmierbare Thermostate auf 20 °C Wohnbereich einstellen.
+        <strong>8. Heizkörper und Thermostate sachgerecht prüfen</strong>
+        Beachte die Bedienungsanleitung und die Anforderungen der Heizungsanlage; bei Unsicherheit oder wiederkehrenden Problemen frage die zuständige Fachperson.
       </label>
     </li>
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-9" class="ff-audit-item__checkbox">
       <label for="chk-en-9" class="ff-audit-item__content">
-        <strong>9. Kühl- und Gefriergeräte abtauen</strong>
-        Bereits eine Eisschicht von 5 mm erhöht den Stromverbrauch des Kompressors um bis zu 30 %.
+        <strong>9. Kühl- und Gefriergeräte nach Herstellerhinweis pflegen</strong>
+        Prüfe Dichtungen, Lüftungsabstand und Vereisung; konkrete Verbrauchseffekte hängen vom Gerät und dessen Zustand ab.
       </label>
     </li>
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-en-10" class="ff-audit-item__checkbox">
       <label for="chk-en-10" class="ff-audit-item__content">
-        <strong>10. Kündigungs- und Wechselschutz im Kalender notieren</strong>
-        Termin 8 Wochen vor Ablauf der Preisgarantie vormerken, um rechtzeitig nachzujustieren.
+        <strong>10. Vertragsfristen im Kalender sichern</strong>
+        Notiere die konkreten Kündigungs- und Preisänderungstermine aus deinen Unterlagen und plane rechtzeitig eine Prüfung ein.
       </label>
     </li>
   </ul>
@@ -265,91 +266,20 @@ Nutze diese Checkliste für deine jährliche Bestandsaufnahme:
 
 ---
 
-## 7. Praxis-Fallstudien aus deutschen Haushalten
+## 7. Tarifkosten selbst nachrechnen – ohne Musterhaushalt als Beweis
 
-Die folgenden beiden realitätsnahen Fallstudien zeigen, wie die systematische Umsetzung im Alltag konkret aussieht:
+Die zuvor hier gezeigten Haushaltsprofile waren nicht mit Originalbelegen dokumentiert und daher keine belastbaren Praxis-Fallstudien. Wir haben sie entfernt. Eine reale Fallstudie erscheint erst, wenn Ausgangsrechnungen, Tarifbedingungen, Rechenweg und Ergebnis geprüft und datenschutzgerecht freigegeben sind.
 
-### Fallstudie 1: Familie Peters – 4 Personen im Einfamilienhaus (130 m², Gasheizung)
+Für deine eigene Rechnung brauchst du keinen pauschalen Sparwert. Vergleiche für denselben Abrechnungszeitraum:
 
-<div class="ff-case-study-box">
-  <div class="ff-case-study-box__header">
-    <div>
-      <div class="ff-case-study-box__kicker">Praxis-Fallstudie · Bestandsgebäude</div>
-      <h3 class="ff-case-study-box__title">Familie Peters: Vollständige Heiz- &amp; Stromkosten-Sanierung</h3>
-    </div>
-    <span class="ff-case-study-box__profile">👨👩👧👦 4 Personen · 130 m² Einfamilienhaus</span>
-  </div>
-  <div class="ff-case-study-box__grid">
-    <div class="ff-case-card">
-      <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
-      <div class="ff-case-card__value">3.740 € / Jahr</div>
-      <p class="ff-case-card__details">
-        4.200 kWh Strom in der Grundversorgung (41,5 ct/kWh + 14 €/M) = 1.911 €<br>
-        19.500 kWh Gas im Alttarif (11,8 ct/kWh + 15 €/M) = 2.481 €<br>
-        Monatliche Gesamtbelastung: <strong>311 € / Monat</strong>
-      </p>
-    </div>
-    <div class="ff-case-card">
-      <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
-      <div class="ff-case-card__value">2.590 € / Jahr</div>
-      <p class="ff-case-card__details">
-        Stromwechsel auf 29,8 ct/kWh + 11 €/M = 1.383 €<br>
-        Gaswechsel auf 8,6 ct/kWh + 12 €/M = 1.821 €<br>
-        Minus 220 € Einsparung durch Standby-Leisten &amp; Absenkung Heizkurve um 1,5 °C<br>
-        Monatliche Gesamtbelastung: <strong>215 € / Monat</strong>
-      </p>
-    </div>
-  </div>
-  <div class="ff-case-study-box__steps">
-    <div class="ff-case-study-box__steps-title">Umgesetzte Maßnahmen:</div>
-    <ul class="ff-case-study-box__steps-list">
-      <li>Tarifwechsel Strom &amp; Gas im August mit 12 Monaten Preisgarantie online durchgeführt (Dauer: 15 Minuten).</li>
-      <li>Beseitigung zweier Standby-Dauerläufer (alter Zweitkühlschrank im Keller stillgelegt, TV-Wand an Steckerleiste).</li>
-      <li>Hydraulischer Abgleich der Heizung und Einstellung smarter Heizkörperthermostate (Nachtabsenkung auf 17 °C).</li>
-    </ul>
-  </div>
-  <div class="ff-case-study-box__savings">
-    <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
-    <span class="ff-case-study-box__savings-amount">1.150 € / Jahr (96 € / Monat)</span>
-  </div>
-</div>
+```text
+Jahreskosten = Jahresverbrauch (kWh) × Arbeitspreis (€/kWh)
+            + 12 × monatlicher Grundpreis
+            + einmalige Kosten
+            − Bonus, sofern die Bedingungen erfüllt und die Auszahlung sicher ist
+```
 
-### Fallstudie 2: Single-Haushalt Jonas – 55 m² Altbauwohnung mit Durchlauferhitzer
-
-<div class="ff-case-study-box">
-  <div class="ff-case-study-box__header">
-    <div>
-      <div class="ff-case-study-box__kicker">Praxis-Fallstudie · Mietwohnung</div>
-      <h3 class="ff-case-study-box__title">Jonas: Stromfresser-Beseitigung &amp; Tarifanpassung</h3>
-    </div>
-    <span class="ff-case-study-box__profile">🧑 Single · 55 m² Altbau Mietwohnung</span>
-  </div>
-  <div class="ff-case-study-box__grid">
-    <div class="ff-case-card">
-      <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
-      <div class="ff-case-card__value">1.020 € / Jahr</div>
-      <p class="ff-case-card__details">
-        Stromverbrauch 2.200 kWh/Jahr durch hydraulischen Durchlauferhitzer und alten Kühlschrank.<br>
-        Grundversorgungstarif (42,0 ct/kWh + 12 €/M). Abschlag: <strong>85 € / Monat</strong>.
-      </p>
-    </div>
-    <div class="ff-case-card">
-      <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
-      <div class="ff-case-card__value">630 € / Jahr</div>
-      <p class="ff-case-card__details">
-        Verbrauch durch Sparduschkopf und LED auf 1.850 kWh gesenkt.<br>
-        Neuer Ökostromtarif zu 30,5 ct/kWh + 9,50 €/M = 678 € abzgl. 80 € Neukundenbonus.<br>
-        Neuer Abschlag: <strong>52 € / Monat</strong>.
-      </p>
-    </div>
-  </div>
-  <div class="ff-case-study-box__savings">
-    <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
-    <span class="ff-case-study-box__savings-amount">390 € / Jahr (32,50 € / Monat)</span>
-  </div>
-</div>
-
----
+Rechne Strom und Gas getrennt. Verwende deinen tatsächlichen Verbrauch, prüfe die Preisbestandteile und vergleiche den Vertrag über seine gesamte Laufzeit. Ein nicht garantierter Bonus, eine geänderte Verbrauchsmenge oder ein anderer Abrechnungszeitraum kann den Vergleich verändern. Die [Abschlagsrechner](/werkzeuge/abschlag-nachzahlung-rechner/) helfen beim Einordnen; sie ersetzen weder die Abrechnung noch das konkrete Angebot.
 
 ## 8. Kostenlose E-Mail-Serie: Der Energie- &amp; Fixkosten-Autopilot
 
@@ -380,7 +310,7 @@ Möchtest du deine laufenden Energiekosten dauerhaft ohne bürokratischen Aufwan
     <div class="ff-course-day">
       <span class="ff-course-day__tag">Tag 4</span>
       <h4 class="ff-course-day__title">Der 15-Minuten-Wechselkalender</h4>
-      <p class="ff-course-day__desc">Der jährliche Spätsommer-Workflow für maximale Boni und garantierte Kündigungsfristen.</p>
+      <p class="ff-course-day__desc">Ein regelmäßiger Check der eigenen Vertrags- und Kündigungstermine; Boni und Fristen sind immer anhand der konkreten Bedingungen zu prüfen.</p>
     </div>
   </div>
   <div class="ff-course-cta">
@@ -395,16 +325,19 @@ Möchtest du deine laufenden Energiekosten dauerhaft ohne bürokratischen Aufwan
 ## 9. Häufige Fragen zu Strom und Gas
 
 ### Wie viel Geld kann ich durch einen Anbieterwechsel sparen?
-Ein durchschnittlicher Vier-Personen-Haushalt spart beim Wechsel aus der Grundversorgung in einen günstigen Alternativtarif zwischen 200&nbsp;€ und 400&nbsp;€ bei Strom sowie zwischen 300&nbsp;€ und 600&nbsp;€ bei Gas pro Jahr.
+Das lässt sich ohne deinen Verbrauch, Wohnort und die konkreten Vertragsangebote nicht seriös beziffern. Vergleiche die Jahreskosten deines aktuellen Vertrags mit dem vollständigen Preis des neuen Angebots – einschließlich Grundpreis, Laufzeit, Einmalkosten und nur solcher Boni, deren Bedingungen du erfüllen kannst.
 
-### Kann mir während des Wechselprozesses der Strom oder das Gas abgestellt werden?
-Nein, das ist rechtlich unmöglich. Gemäß §&nbsp;36 des Energiewirtschaftsgesetzes (EnWG) ist die unterbrechungsfreie Belieferung gesetzlich garantiert. Kommt es zu Verzögerungen, springt automatisch der lokale Grundversorger ein.
+### Kann es beim Anbieterwechsel zu einer Unterbrechung kommen?
+
+Ein Lieferantenwechsel und ein technischer Anschlusswechsel sind nicht dasselbe. Lass dir den Wechseltermin und den Ablauf vom neuen Anbieter bestätigen. Bei einer angekündigten Unterbrechung wende dich an den Netzbetreiber oder die zuständige Stelle; maßgeblich sind die aktuellen Verbraucherinformationen der Bundesnetzagentur und deine Vertragsunterlagen.
 
 ### Was bedeutet eine eingeschränkte Preisgarantie?
-Eine eingeschränkte Preisgarantie deckt die reinen Beschaffungs- und Netzkosten ab. Steuern, Abgaben und staatliche Umlagen können theoretisch weitergegeben werden. Eine volle Preisgarantie schützt vor fast allen Preissteigerungen.
+
+Der Begriff allein reicht für einen Vergleich nicht aus. Lies im Angebot nach, welche Preisbestandteile geschützt sind, welche Änderungen ausgenommen werden und wie lange die Zusage gilt. Bewerte die konkrete Klausel im Vertrag – nicht nur das Etikett „Preisgarantie“.
 
 ### Wann ist der beste Zeitpunkt für einen Tarifwechsel?
-Der Spätsommer und der frühe Herbst (August bis Oktober) sind ideal, um vor der kalten Heizperiode günstige Gas- und Stromkonditionen für die Wintermonate zu fixieren.
+
+Einen für alle Haushalte verlässlich günstigsten Monat können wir nicht belegen. Prüfe den Tarif, wenn eine Preisänderung ansteht, die Kündigungsfrist näher rückt oder du deine Abrechnung erhältst. Vergleiche dann aktuelle Angebote mit den Konditionen deines bestehenden Vertrags.
 
 ---
 
@@ -414,6 +347,11 @@ Der Spätsommer und der frühe Herbst (August bis Oktober) sind ideal, um vor de
   <div class="ff-changelog-card__title"><span>📝</span> Revisionsprotokoll &amp; Datenbasis</div>
   <ul class="ff-changelog-list">
     <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.4</span>
+      <span class="ff-changelog-item__date">28.10.2026</span>
+      <span>Belegprüfung: unbelegte Sparpauschalen und nicht belegte Haushalts-Fallstudien entfernt; Tarifvergleich, Checkliste und FAQ auf individuelle Bedingungen und nachvollziehbare Rechnungen ausgerichtet.</span>
+    </li>
+    <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.3</span>
       <span class="ff-changelog-item__date">10.10.2026</span>
       <span>Verdrahtung mit den eigenständigen Werkzeugen: Abschlagsrechner, Effektivpreis-Rechner, Entscheidungsbaum und Fixkosten-Scanner sind jetzt aus diesem Ratgeber erreichbar (10.10.2026, W8).</span>
@@ -421,7 +359,7 @@ Der Spätsommer und der frühe Herbst (August bis Oktober) sind ideal, um vor de
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.2</span>
       <span class="ff-changelog-item__date">02.10.2026</span>
-      <span>Vollständige Überarbeitung als Flagship-Kernbereich: Marktradar Q4 2026 integriert, 10-Punkte-Checkliste, Entscheidungsmatrix und Fallstudien Müller/Jonas ergänzt.</span>
+      <span>Überarbeitung des Flagship-Kernbereichs; frühere Haushaltsprofile wurden nicht als reale Fallstudien belegt und deshalb in der Revision vom 28.10.2026 entfernt.</span>
     </li>
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.1</span>

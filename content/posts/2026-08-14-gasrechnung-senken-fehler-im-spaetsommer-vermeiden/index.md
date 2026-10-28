@@ -48,7 +48,7 @@ Das meiste Geld bleibt aus einem Grund liegen: Viele werfen **Preis, Verbrauch u
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „[Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/): Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -176,7 +176,7 @@ Bei 2.000 € Gaskosten im Jahr sind das rund 120 € im Rechenbeispiel. Auch 
 
 Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden Monat ab. So siehst du schwarz auf weiß, was deine Schritte wirklich bringen.
 
-![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf. svg)
+![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
 

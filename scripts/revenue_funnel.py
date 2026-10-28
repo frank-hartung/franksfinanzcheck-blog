@@ -370,6 +370,40 @@ def evaluate(sources):
 
 # ------------------------------------------------------------------ Report
 
+def messbarkeit(src):
+    """Geschäftliche Messabdeckung getrennt von der technischen Pipeline-Ampel.
+
+    Eine bewusst deaktivierte Quelle bleibt kein technischer Fehler – sie ist
+    aber auch keine gemessene Geschäftswirkung. Nur zwei frische Quellen
+    (Affiliate-Klicks und bestätigte Partnerabrechnung) erlauben den Status
+    ``vollstaendig``. So kann ein gesunder Import-Job nicht mehr wie ein
+    erfolgreicher Affiliate-Funnel aussehen.
+    """
+    states = {key: state for key, _label, state, _age in src}
+    required = ("clicks", "offline")
+    measured = sum(states.get(key) == "ok" for key in required)
+    stale = any(states.get(key) == "alt" for key in required)
+    if measured == len(required):
+        status = "vollstaendig"
+        label = "VOLLSTÄNDIG GEMESSEN"
+    elif stale:
+        status = "veraltet"
+        label = "VERALTET / UNVOLLSTÄNDIG"
+    elif measured:
+        status = "teilweise"
+        label = "TEILWEISE GEMESSEN"
+    else:
+        status = "unbekannt"
+        label = "UNBEKANNT – KEINE GESCHÄFTSMESSUNG"
+    return {
+        "status": status,
+        "label": label,
+        "gemessene_quellen": measured,
+        "erforderliche_quellen": len(required),
+        "abdeckung_prozent": round(100 * measured / len(required)),
+    }
+
+
 def quellen_text(src, offline_meta, clicks_meta=None):
     """Zeile im Report: WOHER kommen die Zahlen gerade? (Agentur-Standard: jede
     Kennzahl braucht ihre Quelle – eine Zahl ohne Herkunft ist ein Gerücht.)"""
@@ -390,7 +424,7 @@ def quellen_text(src, offline_meta, clicks_meta=None):
 
 
 def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, quellen=None,
-           prov_monate=None):
+           prov_monate=None, business_measurement=None):
     """Markdown-Wochenseite. Enthält die Markerzeile `Messlücken: N` und die
     Gesamt-Ampel – der Governance-Gate liest beides (kein Exit-Code-Raten)."""
     rate = f["raten"]
@@ -418,11 +452,20 @@ def render(f, gaps, fix_hints, wow=None, operating_boundaries=None, quellen=None
                           "Provision bezahlt (lt. Abrechnungstabelle)"), v)
                 for k, v in rows]
     ampel = "GREEN" if not gaps else "AMBER"
+    business_measurement = business_measurement or messbarkeit([])
     out = ["# 📈 Umsatz-Funnel – Klick → Antrag → Provision",
-           f"**Stand:** {f['generated']} · **Ampel:** **{ampel}** · "
+           f"**Stand:** {f['generated']} · **Pipeline-Ampel:** **{ampel}** · "
            f"**Messlücken: {len(gaps)}**",
+           f"**Geschäftsmessbarkeit:** **{business_measurement['label']}** "
+           f"({business_measurement['gemessene_quellen']}/"
+           f"{business_measurement['erforderliche_quellen']} Quellen; "
+           f"{business_measurement['abdeckung_prozent']} % Abdeckung).",
            "",
            "## 🚦 Gesamt-Ampel: **" + ampel + "**",
+           "",
+           "_Die Pipeline-Ampel bewertet den technischen Betrieb. Sie ist "
+           "ausdrücklich kein Umsatz- oder Erfolgssignal; dafür gilt die "
+           "Geschäftsmessbarkeit oben._",
            "",
            "| Kennzahl | Wert |",
            "|---|---|"]
@@ -599,15 +642,18 @@ def main(argv=None):
 
     prev = _prev_metrics()
     wow = _wow(_history_row(f), prev)
+    visibility = messbarkeit(src)
     body = render(f, gaps, fixes, wow, operating_boundaries=operating_boundaries,
                   quellen=quellen_text(src, offline_meta, clicks_meta),
-                  prov_monate=(prov_doc.get("monate") if isinstance(prov_doc, dict) else None))
+                  prov_monate=(prov_doc.get("monate") if isinstance(prov_doc, dict) else None),
+                  business_measurement=visibility)
 
     if print_only:
         print(body)
     else:
         _write_atomic(REPORT, body)
         _write_atomic(OUT_JSON, json.dumps({**f, "messluecken": len(gaps),
+                                            "geschaeftsmessbarkeit": visibility,
                                             "quellen": f["quellen"]},
                                            ensure_ascii=False, indent=2) + "\n")
         try:

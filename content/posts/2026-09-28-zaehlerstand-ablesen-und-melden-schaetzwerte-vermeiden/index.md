@@ -226,7 +226,7 @@ Ja. Gib den Stand zum Auszugstag an beide Stellen weiter. So endet die eine Rech
 
 ---
 
-👉 **Jetzt Verbrauch gegenrechnen:** [**→ Stromtarife vergleichen und wechseln**](/go/strom/)
+👉 **Wenn dein Gaszähler betroffen ist:** Vergleiche den abgerechneten Jahresverbrauch und die Vertragskonditionen, bevor du entscheidest: [**Gastarife vergleichen**](/go/gas/)
 
 ## Weiterrechnen und vertiefen
 
