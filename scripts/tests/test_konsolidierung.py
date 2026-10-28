@@ -313,16 +313,42 @@ class FallZwilling(unittest.TestCase):
     def test_nachfrage_ist_eine_zahl_nicht_eine_meinung(self):
         # 19.10.2026: die Seite hatte 1 Impression, Position 7,0 in 28 Tagen.
         # Das ist wenig – aber es ist belegt und damit eine Zahl.
+        #
+        # Die Tageszahl selbst wird hier bewusst NICHT festgenagelt: jede
+        # GSC-Lieferung verschiebt sie, und ein Test, der montags rot wird,
+        # weil der Bot Impressionen dazugezählt hat, misst das Wetter statt
+        # den Vertrag. Festgehalten wird der Vertrag: belegt heißt, es gibt
+        # eine Zahl > 0 – nicht ein Gefühl.
         befund = self.urteil["pruefungen"]["nachfrage"]
         self.assertTrue(befund["belegt"], befund["grund"])
-        self.assertEqual(befund["impressionen"], 1)
+        self.assertEqual(befund["quelle"], "top_seiten_28t.json")
+        self.assertGreater(befund["impressionen"], 0, befund["grund"])
 
-    def test_der_zwilling_hat_keine_belegte_nachfrage(self):
-        # Die andere P2-Seite kommt in den Top-Seiten nicht vor. Für sie wäre
-        # ein Zusammenführen die falsche Antwort – belegt ist belegt.
+    def test_der_zwilling_hat_keine_nachfrage_aus_seite_eins(self):
+        # 19.10.2026 kam die andere P2-Seite in den Top-Seiten überhaupt nicht
+        # vor (0 Impressionen) – der Test hielt das als „keine belegte
+        # Nachfrage“ fest. Der Datenlauf 2026-10-28 (#926) hat die Lage
+        # geändert: 4 Impressionen, Position 39,25. Damit ist die Nachfrage
+        # belegt (Schwelle: >= 1 Impression), und die alte Aussage „kommt
+        # nicht vor“ wäre schlicht falsch.
+        #
+        # Was bleibt: Eine Seite auf Position 39 sieht niemand – belegt ist
+        # nicht dasselbe wie nachgefragt. Deshalb prüft der Test nicht mehr die
+        # Tageszahl (die ändert sich mit jedem GSC-Lauf), sondern die
+        # Eigenschaft, auf die es ankommt: weit hinter Seite 1, verschwindend
+        # wenige Impressionen. Für ein Zusammenführen wäre das weiterhin der
+        # falsche Anlass – F kippt ohnehin schon an der Suchabsicht.
         befund = k.nachfrage(self.ZIEL, BLOG_DIR)
-        self.assertFalse(befund["belegt"])
-        self.assertEqual(befund["impressionen"], 0)
+        self.assertTrue(befund["belegt"], befund["grund"])
+        self.assertIsNotNone(befund["position"], befund["grund"])
+        self.assertGreater(befund["position"], 10.0,
+                           f"Position {befund['position']} liegt auf Seite 1 – "
+                           f"dann ist die Seite keine Reserve mehr und F neu zu "
+                           f"bewerten.")
+        self.assertLess(befund["impressionen"], 10,
+                        f"{befund['impressionen']} Impressionen in 28 Tagen – "
+                        f"das ist keine Restnachfrage mehr, sondern eine Seite "
+                        f"im Aufbau; Konsolidierung prüfen.")
 
 
 if __name__ == "__main__":
