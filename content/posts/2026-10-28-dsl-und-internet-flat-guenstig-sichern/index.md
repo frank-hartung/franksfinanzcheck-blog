@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast das Gefühl, dass deine monatliche Internetrechnung zu hoch ist, das WLAN zu oft ausfällt und du trotzdem für einen schnellen Anschluss zahlst? Viele Haushalte stehen genau vor dieser Situation: Sie wollen das beste Preis‑Leistungsverhältnis, ohne lange Wartezeiten oder versteckte Kosten. In diesem Ratgeber zeige ich dir, wie du den DSL‑ und Internet‑Flat günstig sicherst, den richtigen Tarif wählst und den Wechsel reibungslos meisterst.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Kosten sehen – den Überblick schaffen
 
 Der erste Schritt im 4K‑Prüfpfad ist, alle wiederkehrenden Kosten zu erfassen. Schreibe jede monatliche Belastung in eine einfache Excel‑Tabelle oder nutze das Fixkosten‑Cockpit von FranksFinanzcheck. So erkennst du sofort, welche Posten unverzichtbar sind und wo Sparpotenzial liegt.
