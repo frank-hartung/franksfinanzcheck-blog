@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-14
 title: "Zahnzusatzversicherung 2026: Tarife & Erstattung"
-description: "Zahnzusatzversicherung 2026 im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig…"
+description: "Zahnzusatzversicherung im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen prüfst."
 date: 2026-09-25T08:10:00Z
 draft: true
 tags: ["Gesundheit und Vorsorge"]

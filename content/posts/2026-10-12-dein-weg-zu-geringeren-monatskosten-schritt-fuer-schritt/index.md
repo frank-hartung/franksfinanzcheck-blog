@@ -4,7 +4,7 @@ description: "Geringere Monatskosten: So senkst du systematisch deine laufenden 
 date: 2026-10-19T01:20:46Z
 draft: false
 reserve_published: 2026-10-19
-reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar" ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

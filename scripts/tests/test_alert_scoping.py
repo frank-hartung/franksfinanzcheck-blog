@@ -175,8 +175,17 @@ class ProdScopingAlarm(unittest.TestCase):
         m = re.search(r"const runbookKlasse = (.*?);", self.code, re.S)
         self.assertIsNotNone(m)
         klassen = re.findall(r"'([a-z-]+)'", m.group(1))
-        self.assertEqual(klassen[-2:], ["selbsttest", "allgemein"],
-                         "Selbsttest-Rat gehört hinter alle spezifischen Klassen, vor den Rückfall")
+        self.assertEqual(klassen[-1], "allgemein",
+                         "Der Rückfall „allgemein“ muss die letzte Klasse sein")
+        self.assertLess(klassen.index("selbsttest"), klassen.index("allgemein"),
+                        "Selbsttest-Rat gehört vor den Rückfall")
+        # WF-9FD5: Die Layout-Automatisierung bekommt eigene Klassen – aber
+        # NACH dem Selbsttest-Rat: Ein roter Selbsttest ist immer eine
+        # Code-Regression, unabhängig vom Kanal.
+        for eigene in ("layout-bau", "layout-audit"):
+            self.assertIn(eigene, klassen, f"Klasse {eigene} fehlt")
+            self.assertLess(klassen.index("selbsttest"), klassen.index(eigene),
+                            f"{eigene} darf den Selbsttest-Rat nicht verdrängen")
         self.assertIn("python3 scripts/selftest_runner.py", self.code)
         self.assertIn("ein Neustart liefert dasselbe Rot", self.code)
         self.assertTrue((REPO / "scripts" / "selftest_runner.py").is_file(),
@@ -476,6 +485,13 @@ class VerhaltensSimulation(unittest.TestCase):
                                          "Cloudflare-Worker deployen",
                                          "CodeQL-Sicherheitswache",
                                          "Skript-Syntax (liegender Stand)",
+                                         # WF-9FD5 (29.10.2026): Layout-AI hat
+                                         # seit #901 eigene Runbook-Klassen
+                                         # (layout-bau / layout-audit). Die
+                                         # Szenarien, die den ALLGEMEINEN Rat
+                                         # prüfen, laufen deshalb über einen
+                                         # neutralen Kanal – Bot-Watchdog.
+                                         "Bot-Watchdog",
                                          # WF-829B/#922 (29.10.2026): eigener
                                          # Prüfknopf für den Deploy-Zugang,
                                          # nur lesend, mit eigenem Alarm-Kanal.

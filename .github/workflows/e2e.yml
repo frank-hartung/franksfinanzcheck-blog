@@ -73,6 +73,12 @@ on:
       - ".github/workflows/seo-spider-weekly.yml"
       - "scripts/manifest_guard.py"
       - "scripts/tests/test_manifest_guard.py"
+      # Frontmatter-Vertrag (WF-9FD5, 29.10.2026): Die Wache prüft den Inhalt
+      # VOR dem Bau. Eine Änderung an ihr oder an ihrem Test muss den Lauf
+      # auslösen – sonst altert genau die Prüfung, die den Ausfall vom
+      # 26.10.2026 verhindert hätte.
+      - "scripts/frontmatter_wache.py"
+      - "scripts/tests/test_frontmatter_wache.py"
       - "scripts/tabellen_lesbarkeit_guard.py"
       - "playwright.config.mjs"
       - "package.json"
@@ -116,6 +122,18 @@ jobs:
         run: |
           python3 scripts/manifest_guard.py --selftest
           python3 scripts/manifest_guard.py
+
+      # WF-9FD5 / Meldung #901 (26.10.2026): Ein unquotierter Doppelpunkt im
+      # Frontmatter EINER Datei tötete den gesamten Bau – gemeldet wurde nur
+      # „assemble: failed to create page from pageMetaSource". Diese Prüfung
+      # steht deshalb VOR dem Bau und VOR der teuren Browser-Einrichtung: Ein
+      # Inhaltsfehler soll nach fünf Sekunden auffallen, nicht nach acht
+      # Minuten. Sie prüft sich zuerst selbst (Hausregel: erst der Detektor,
+      # dann der Prüfling) und heilt nichts – sie nennt Datei und Zeile.
+      - name: Frontmatter-Vertrag – Quelle (vor jedem Bau)
+        run: |
+          python3 scripts/frontmatter_wache.py --selftest
+          python3 scripts/frontmatter_wache.py
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo

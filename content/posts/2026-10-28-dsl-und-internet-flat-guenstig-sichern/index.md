@@ -1,6 +1,6 @@
 ---
 title: "DSL- und Internet-Flat günstig sichern"
-description: "DSL- und Internet-Flat günstig sichern – Schritt für Schritt: Kosten prüfen, Tarifdetails vergleichen, Kündigungsfenster nutzen und Wechsel ohne Ausfall planen."
+description: "DSL- und Internet-Flat günstig sichern: Kosten prüfen, Tarifdetails vergleichen, Kündigungsfenster nutzen und Wechsel ohne Ausfall planen."
 date: 2026-10-28T10:52:20Z
 draft: true
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
