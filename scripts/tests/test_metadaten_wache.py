@@ -121,5 +121,76 @@ class MetadatenWacheTests(unittest.TestCase):
         self.assertEqual(w.run_selftest(), 0)
 
 
+# ---------------------------------------------------------------------------
+#  Heilung an der Quelle (WF-7B6B / #925, 29.10.2026)
+# ---------------------------------------------------------------------------
+VORFALL_925 = (
+    "DSL Hacks: WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, "
+    "was dein Zuhause wirklich braucht – mit klaren Kosten und einer "
+    "Entscheidungshilfe."
+)
+
+
+class SnippetHeilungTests(unittest.TestCase):
+    """Der Heiler darf die SSOT nicht verletzen – und muss nicht können,
+    was er nicht kann (verlängern, unmessbar in der Satzmitte)."""
+
+    def test_vorfall_925_wird_geheilt(self):
+        text = GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            f'description: "{VORFALL_925}"')
+        self.assertIn("M7", rules(text))  # vorher: über 985 px
+        geheilt, meldung = w.heile_snippet("content/posts/x/index.md", text)
+        self.assertTrue(meldung, "der #925-Befund wurde nicht geheilt")
+        self.assertNotIn("M7", rules(geheilt))
+        self.assertNotIn("M2", rules(geheilt))
+        # idempotent
+        self.assertEqual(w.heile_snippet("content/posts/x/index.md", geheilt)[1], [])
+        # nur die Description-Zeile ist berührt
+        self.assertEqual(
+            geheilt.count("\n"), text.count("\n"),
+            "die Heilung hat Zeilen verändert")
+
+    def test_passende_description_bleibt_unberuehrt(self):
+        self.assertEqual(w.heile_snippet("x.md", GOOD)[1], [])
+
+    def test_zu_kurze_description_wird_nicht_verlaengert(self):
+        text = GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            'description: "Zu kurz."')
+        self.assertEqual(w.heile_snippet("x.md", text)[1], [])
+        self.assertIn("M2", rules(text))
+
+    def test_unmessbar_in_der_mitte_bleibt_liegen(self):
+        text = GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            'description: "Strom sparen \U0001F4A1 im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge planen. Mit einfachen Rechenbeispielen für den Haushalt."')
+        self.assertEqual(w.heile_snippet("x.md", text)[1], [])
+        self.assertIn("M7", rules(text))
+
+    def test_lastmod_vor_date_wird_auf_publikationstag_gehoben(self):
+        text = GOOD.replace("lastmod: 2026-09-02", "lastmod: 2026-08-01")
+        self.assertIn("M3", rules(text))
+        geheilt, meldung = w.heile_lastmod("x.md", text)
+        self.assertTrue(meldung)
+        self.assertIn("lastmod: 2026-09-01", geheilt)
+        self.assertNotIn("M3", rules(geheilt))
+        self.assertEqual(w.heile_lastmod("x.md", geheilt)[1], [])
+
+    def test_entwurf_wird_nicht_geheilt(self):
+        text = GOOD.replace("draft: false", "draft: true").replace(
+            "lastmod: 2026-09-02", "lastmod: 2026-08-01")
+        self.assertEqual(w.heile_lastmod("x.md", text)[1], [])
+
+    def test_fix_heilt_den_baum_und_konvergiert(self):
+        """--fix lässt keinen Snippet-Befund stehen, der heilbar ist."""
+        import subprocess, sys, os
+        root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        lauf = subprocess.run([sys.executable, os.path.join("scripts", "metadaten_wache.py"), "--fix"],
+                              cwd=root, capture_output=True, text=True)
+        self.assertEqual(lauf.returncode, 0, lauf.stdout + lauf.stderr)
+        self.assertIn("Befunde: 0", lauf.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()

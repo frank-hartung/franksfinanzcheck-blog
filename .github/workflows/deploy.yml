@@ -567,6 +567,57 @@ jobs:
           python3 scripts/keyword_gate.py --selftest
           python3 scripts/keyword_gate.py --fix || echo "⚠ Keyword-Gate (Premium) – Funde im Log (selbstgeheilt)"
 
+      # ================= METADATEN-WACHE (WF-7B6B / #925, 29.10.2026) ==========
+      # Befund: Das Keyword-Gate oben schrieb am 27.10.2026 eine Description
+      # mit 153 Zeichen und 1011 px – innerhalb seiner eigenen Grenze (160),
+      # außerhalb des Marktes (155 Zeichen / 985 px, SSOT serp_limits.py).
+      # Die SCHREIBER waren an keine Grenze gebunden, die Wachen schon: Der
+      # Verstoß landete auf main und wurde erst ~15 h später vom nächtlichen
+      # E2E-Lauf (Snippet-Gate) gefunden – als Meldung mit API-Key-Rat.
+      #
+      # Heilung an drei Stellen:
+      #   1. Die Schreiber lesen die SSOT (keyword_optimizer, meta_optimizer,
+      #      quality_score) – ein Verstoß wird gar nicht erst geschrieben.
+      #   2. Diese Wache läuft IM DEploy-Pfad, direkt nach den Schreiben,
+      #      und heilt die Snippet-Klasse (M2/M7) plus lastmod<date (M3) an
+      #      der Quelle – deterministisch, an der Wortgrenze, gegen BEIDE
+      #      Grenzen. Geheiltes geht in den Commit „Gate-Heilungen" unten.
+      #   3. Das nächtliche Snippet-Gate bleibt das harte PR-Gate.
+      #
+      # C34 bleibt gewahrt: Ein Befund stoppt die Auslieferung NICHT (ein zu
+      # langes Snippet darf die Live-Site nicht einfrieren) – die Heilung
+      # läuft toleriert, aber laut: Annotation, Zusammenfassung, Fund im Log.
+      # Was nicht heilbar ist (M1, M4, M5, M6, zu kurze/unmessbare
+      # Description), bleibt Meldebestand für die Redaktion.
+      - name: Metadaten-Selbsttest (Wache + Snippet-Heiler müssen lauffähig sein)
+        run: python3 scripts/metadaten_wache.py --selftest
+
+      # C34 bleibt gewahrt: Ein Befund stoppt die Auslieferung NICHT (ein zu
+      # langes Snippet darf die Live-Site nicht einfrieren) – die Heilung
+      # läuft toleriert, aber laut: Annotation, Zusammenfassung, Fund im Log.
+      # Was nicht heilbar ist (M1, M4, M5, M6, zu kurze/unmessbare
+      # Description), bleibt Meldebestand für die Redaktion.
+      #
+      # Blustradius (C38): Der Schritt ist `werkzeug` – er misst an der Quelle
+      # und repariert die deterministische Klasse, er entscheidet nicht über
+      # die Freigabe. Sein Restbefund geht deshalb über DEN Meldeweg an das
+      # Siegel (`release-seal` färbt den Lauf nach der Veröffentlichung rot),
+      # statt still im Log zu verhallen. Kein harter Exit: #676/#740.
+      - name: "Metadaten-Wache – Quelle (Snippet-SSOT, selbstheilend, C34-toleriert)"
+        run: |
+          set +e
+          python3 scripts/metadaten_wache.py --fix
+          wache=$?
+          set -e
+          if [ "$wache" -eq 0 ]; then
+            echo "✅ Metadaten-Wache grün – Snippet-SSOT und lastmod stimmen an der Quelle."
+          else
+            echo "⚠ Metadaten-Wache – Restfunde (Exit $wache): Snippet/lastmod geheilt wo möglich; M1/M4/M5/M6 und nicht heilbare Descriptions bleiben Redaktion."
+            python3 scripts/werkzeugbefund.py --melden "metadaten-wache" \
+              "Metadaten-Wache meldet Restfunde (Exit $wache) – Snippet (M2/M7) und lastmod (M3) an der Quelle geheilt wo möglich; M1/M4/M5/M6 sowie zu kurze oder nicht messbare Descriptions bleiben Redaktion. C34: die Auslieferung läuft weiter, ein Snippet-Befund darf die Live-Site nicht einfrieren (#925)." \
+              || true
+          fi
+
       # ================= DRAFT-LINK-GATE (PREM-AUDIT 26.08.2026) =================
       # Kadenz-Heilung stuft Posts auf draft (Re-Queue) zurück – ihre URLs
       # verschwinden aus dem Build, kontextuelle Links in live Artikeln

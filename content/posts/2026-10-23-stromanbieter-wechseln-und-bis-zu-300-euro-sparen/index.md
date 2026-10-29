@@ -125,7 +125,7 @@ Ein guter Vergleich verspricht dir keine festen Summen. Er zeigt dir, was du ver
 
 ---
 
-👉 **Stromtarife vergleichen:** [Tarifvergleich starten](/go/strom/)
+👉 **Stromtarife vergleichen:** [Stromanbieter vergleichen](/go/strom/)
 
 *Werbung: Dieser Artikel enthält Affiliate-Links. Bei einem Abschluss über diese Links können wir eine Provision erhalten. Der Preis für dich ändert sich dadurch nicht.*
 
