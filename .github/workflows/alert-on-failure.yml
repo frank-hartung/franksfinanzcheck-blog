@@ -439,6 +439,7 @@ jobs:
             const workerZugangFailed = isWorkerDeploy &&
               failedStepNames.some(s => String(s).includes('Produktive Ressource auflösen')
                 || String(s).includes('Zugang prüfen (alle Befunde'));
+              failedStepNames.some(s => /Produktive Ressource auflösen|Produktions-Environment absichern/.test(String(s)));
             const workerTestsFailed = isWorkerDeploy &&
               failedStepNames.some(s => String(s).includes('Worker-Tests'));
             // Der eigene Prüf-Workflow (nur auf Knopfdruck) trägt dieselbe
@@ -780,6 +781,11 @@ jobs:
                             '2. **Alle Befunde in einem Lauf:** Der Schritt „Zugang prüfen (alle Befunde auf einmal, lesend)“ sammelt Token, Konto-ID, Token-Gültigkeit, Leserecht und je Worker die produktive Bindung – und schreibt ein Dossier in die Job-Zusammenfassung (was fehlt, wohin es gehört, welche Rechte der Token braucht). Die Annotationen nennen dieselben Punkte einzeln. Zugänge im Environment `cloudflare-produktion` (Settings → Environments → Environment secrets) hinterlegen oder erneuern. Keine Ressourcen-IDs manuell kopieren: Der Resolver liest die bestehenden produktiven Bindungen (`ABO`/KV aus `ff-newsletter`, `DB`/D1 aus `klick-zaehler`) selbst und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
                             '3. **Vorher prüfen, ohne zu deployen:** Actions → „Deploy-Zugang prüfen“ → „Run workflow“ (`main`). Der Lauf liest nur (`/user/tokens/verify` und die bestehenden Script-Einstellungen), legt nichts an und deployt nichts; er bestätigt den Zugang in einem Durchgang. Danach ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“ (`main`) oder freigeben, falls der Lauf auf eine Environment-Freigabe wartet. Der erste grüne Deploy-Lauf schließt diese Meldung automatisch; ein nur geplanter Lauf mit übersprungenem Deploy-Job tut es ausdrücklich nicht.',
                             '4. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4/D2. Selbsttests: `python3 scripts/worker_zugang.py --selftest` und `python3 scripts/worker_ressourcen.py --selftest`; lokal ohne Netz prüfbar mit `python3 scripts/worker_zugang.py --pruefen`.'
+                            '1. **Fail-closed – gewollt, kein Betriebsausfall.** Lies den roten Schritt: „Produktions-Environment absichern“ bedeutet, dass Reviewer-/Branch-/Admin-Bypass-Policy fehlt oder nicht lesbar ist; „Produktive Ressource auflösen“ bedeutet fehlenden Cloudflare-Zugang oder fehlende Leserechte. Wrangler läuft in beiden Fällen nicht.',
+                            '2. **Environment zuerst absichern:** Settings → Environments → `cloudflare-produktion`: mindestens ein Required Reviewer, bei „Deployment branches and tags“ exakt der Branch `main`, und „Allow administrators to bypass configured protection rules“ aus (`can_admins_bypass=false`). Das read-only Gate läuft davor ohne Cloudflare-Secrets: `python3 scripts/worker_environment_guard.py --check` (Workflow-Token mit `actions: read`).',
+                            '3. **Danach Cloudflare-Zugänge hinterlegen:** Im selben Environment `CF_WORKERS_DEPLOY_TOKEN` (Workers Scripts: Read + Deploy) und `CLOUDFLARE_ACCOUNT_ID`. Die Annotation nennt, welcher Zugang fehlt. Keine Ressourcen-IDs manuell kopieren: `scripts/worker_ressourcen.py` liest bestehende `ABO`/KV- und `DB`/D1-Bindungen und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
+                            '4. Erneut von `main` ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“. Ein grüner Plan genügt nicht; der Deploy muss laufen und `/healthz` den Build-Stempel aus `wrangler.toml` liefern.',
+                            '5. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4/D2. Policy-Selbsttest: `python3 scripts/worker_environment_guard.py --selftest`.'
                           ]
                       : runbookKlasse === 'worker-deploy'
                         ? [

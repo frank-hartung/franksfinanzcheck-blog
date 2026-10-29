@@ -39,8 +39,10 @@ class Selbsttest(unittest.TestCase):
 
     def test_ki_assistent_nie_automatisch(self):
         self.assertNotIn("ki-assistent", wdv.plan({"EREIGNIS": "push", "GEAENDERT": "*"}))
-        self.assertEqual(wdv.plan({"EREIGNIS": "workflow_dispatch", "AUSWAHL": "ki-assistent"}),
-                         ["ki-assistent"])
+        self.assertEqual(wdv.plan({"EREIGNIS": "workflow_dispatch", "AUSWAHL": "ki-assistent",
+                                   "REF": "refs/heads/main"}), ["ki-assistent"])
+        self.assertEqual(wdv.plan({"EREIGNIS": "workflow_dispatch", "AUSWAHL": "ki-assistent",
+                                   "REF": "refs/heads/arena/feature"}), [])
 
 
 class WorkflowVertrag(unittest.TestCase):
@@ -91,12 +93,22 @@ class KeinScheinGruen815(unittest.TestCase):
 
     def test_manueller_deploy_ohne_kv_variable_bleibt_in_der_deploy_matrix(self):
         code, bereit, ann, summary = wdv.plan_auswerten(
-            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker"})
+            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker",
+             "REF": "refs/heads/main"})
         self.assertEqual(code, 0)
         self.assertEqual(bereit, ["newsletter-worker"])
         self.assertEqual(ann, [])
         self.assertIn("bestehender Produktions-Bindung", summary)
         self.assertIn("keinen Ersatzspeicher", summary)
+
+    def test_manueller_deploy_auf_nicht_main_scheitert_vor_dem_environment(self):
+        code, bereit, ann, summary = wdv.plan_auswerten(
+            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker",
+             "REF": "refs/heads/arena/untrusted"})
+        self.assertEqual(code, 1)
+        self.assertEqual(bereit, [])
+        self.assertTrue(any("ausschließlich" in a for a in ann))
+        self.assertIn("kein Produktions-Environment", summary)
 
     def test_push_ohne_kv_variable_wird_nicht_mehr_gruen_uebersprungen(self):
         code, bereit, ann, summary = wdv.plan_auswerten(
@@ -107,10 +119,12 @@ class KeinScheinGruen815(unittest.TestCase):
         self.assertNotIn("NICHT deployt", summary)
 
     def test_deploy_werkzeug_aenderung_rollt_beide_produktiven_worker_aus(self):
-        code, bereit, _, _ = wdv.plan_auswerten(
-            {"EREIGNIS": "push", "GEAENDERT": "scripts/worker_ressourcen.py"})
-        self.assertEqual(code, 0)
-        self.assertEqual(bereit, ["newsletter-worker", "klick-zaehler"])
+        for datei in ("scripts/worker_ressourcen.py", "scripts/worker_environment_guard.py"):
+            with self.subTest(datei=datei):
+                code, bereit, _, _ = wdv.plan_auswerten(
+                    {"EREIGNIS": "push", "GEAENDERT": datei})
+                self.assertEqual(code, 0)
+                self.assertEqual(bereit, ["newsletter-worker", "klick-zaehler"])
 
     def test_newsletter_worker_traegt_build_stempel_und_nachweis_prueft_ihn(self):
         wrangler = (ROOT / "newsletter-worker" / "wrangler.toml").read_text(encoding="utf-8")

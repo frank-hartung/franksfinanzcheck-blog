@@ -2121,8 +2121,11 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   Meldung unverändert offen, und es entsteht kein Duplikat. Vertrag:
   `test_alert_scoping` (Strukturvertrag + 58 Sim-Szenarien).
 - **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
-  Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1:
-  explizit genau `main` vom Typ `branch`). Der Wizard schreibt die Policy über
+  Zusätzlich verweigern `backup-offsite.yml` und `backup-frischwache.yml` auf
+  Job-Ebene jeden Ref außer `refs/heads/main`, bevor ein Job mit Environment-
+  Secrets startet. Das ist Defense in depth, kein Ersatz für die Einrichtung:
+  immer **erst absichern, dann befüllen** (Anleitung Schritt 1: explizit genau
+  `main` vom Typ `branch`). Der Wizard schreibt die Policy über
   die unterstützte REST-Kette (Environment-`PUT`, Policy-`GET`/`DELETE`/`POST`)
   und verlangt danach einen paginierten Live-Read-back; unlesbar, `protected branches`,
   zusätzliche Branches/Tags oder fehlende Regeln bedeuten Abbruch vor dem
@@ -2143,8 +2146,8 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   über `backup-frisch` – kein Ersatz für E1–E8, sondern die operative Lücke:
   Ein Scheduler-Hänger ohne ablaufenden Token bliebe sonst bis zur nächsten
   Anleger-Frage unbemerkt. SLA: RPO 24 h / 52 h Toleranz, RTO < 60 Min.
-- **Inhaber-Einrichtung ist der einzige offene Auftragsteil (#761):** Der
-  Schnellweg führt über `npm run backup:einrichten`
+- **Inhaber-Einrichtung ist der einzige offene Auftragsteil (#761; aktuell
+  erneut nachgewiesen in #923):** Der Schnellweg führt über `npm run backup:einrichten`
   (`scripts/backup_einrichten_wizard.sh`, E8 erst live auf ausschließlich
   `main` beweisen, dann E1–E7; Geheimnisse nur verdeckt, in CI bewusst
   gesperrt); `npm run backup:status` prüft den Stand ohne Änderung. Agenten
@@ -2159,7 +2162,9 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-22.md`,
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-24.md`,
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-26.md` und
-  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-27.md`.
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-27.md` und
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-29.md` (Live-Befund #923,
+  Ref-/Token-Defense-in-depth; Inhaber-Einrichtung bleibt offen).
 
 ## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
 

@@ -90,8 +90,13 @@ concurrency:
 
 jobs:
   backup:
+    # Defense in depth for E8: a workflow_dispatch from a feature branch must
+    # never even start a job that receives backup credentials. The Environment
+    # policy is still required, but this versioned ref gate prevents a changed
+    # workflow file on another ref from reaching the secrets if that policy drifts.
+    if: ${{ github.ref == 'refs/heads/main' }}
     permissions:
-      contents: write
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     # WF-9E5A: Ohne dieses Environment sähe der Job die dort abgelegten
@@ -105,12 +110,14 @@ jobs:
       UNVERSCHLUESSELT_OK: ${{ vars.BACKUP_UNVERSCHLUESSERT_OK }}
       PASSWORT: ${{ secrets.BACKUP_PASSPHRASE }}
       ZIEL_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
-      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Repository auschecken (komplette History)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          # The repo job uses a dedicated target token inline; do not leave
+          # the source GITHUB_TOKEN in .git/config for later shell commands.
+          persist-credentials: false
 
       - name: Bundle + Arbeitskopie erstellen, verifizieren, verschlüsseln
         run: |
@@ -213,7 +220,14 @@ jobs:
             exit 0
           fi
 
-          TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"
+          if [ -z "${ZIEL_TOKEN:-}" ]; then
+            echo "::error::BACKUP_REPO ist gesetzt, aber BACKUP_REPO_TOKEN fehlt – der aktuelle GITHUB_TOKEN darf kein Offsite-Ziel ersetzen. Upload gestoppt. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+            exit 1
+          fi
+          # Niemals auf den kurzlebigen GITHUB_TOKEN des Quell-Repos
+          # zurückfallen: Er beweist weder Zugriff auf das Ziel noch dessen
+          # Trennung. Der fein eingeschränkte Ziel-Token ist Pflicht.
+          TOKEN="$ZIEL_TOKEN"
           echo "ZIEL=repo" >> "$GITHUB_OUTPUT"
 
           # 1) Privatheit des Ziels VOR dem Upload beweisen – fail-closed.
@@ -287,7 +301,13 @@ jobs:
             echo "Kein dauerhaftes Ziel – nichts aufzuräumen (die Kurzzeit-Kopie löscht GitHub nach 7 Tagen selbst)."
             exit 0
           fi
-          TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"
+          if [ -z "${ZIEL_TOKEN:-}" ]; then
+            # The upload step already failed closed. Never use the source
+            # repository token merely to delete or enumerate an offsite repo.
+            echo "::notice::Aufräumen übersprungen – BACKUP_REPO_TOKEN fehlt; kein Quell-Repo-Token wird für das Ziel verwendet."
+            exit 0
+          fi
+          TOKEN="$ZIEL_TOKEN"
           GH_TOKEN="$TOKEN" python3 - "$ZIEL_REPO" "$KEEP" <<'PY'
           import json, os, subprocess, sys, urllib.request
 
@@ -361,6 +381,10 @@ jobs:
   # ============================================================
   kv-backup:
     name: KV-/D1-Backup (Abonnenten + Einwilligungsnachweise)
+    # Defense in depth for E8: do not grant Environment secrets to a manual
+    # dispatch on any ref other than the production branch. The live policy
+    # remains part of the fail-closed setup contract and is checked separately.
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     environment: backup

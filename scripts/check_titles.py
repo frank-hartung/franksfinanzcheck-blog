@@ -560,7 +560,11 @@ def main():
     fixed = 0
     for p in posts:
         issues = check_title(p["title"])
-        if issues and fix:
+        from editorial_review_gate import automatic_write_protected
+        protected = fix and automatic_write_protected(p["file"])
+        if issues and protected:
+            print(f"YMYL: Titel bleibt versiegelt: {p['file']}")
+        if issues and fix and not protected:
             new_title = fix_title(p["title"])
             if new_title != p["title"]:
                 content = open(p["file"], encoding="utf-8").read()

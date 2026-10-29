@@ -122,6 +122,13 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Eine Wache, die niemand verlangt, führt irgendwann niemand aus –
           # deshalb steht ihr Selbsttest im vertraglichen Minimum (C6).
           "redos_guard.py",
+          # GitHub-Environment-Gate (WF-E813/#815, 29.10.2026): Ein vorhandenes
+          # `environment:` ist kein Schutz, wenn GitHub es ohne Reviewer und
+          # Branch-Policy automatisch angelegt hat. Dieser read-only-Prüfer
+          # sperrt Worker-Secrets, bis Reviewer, ausschließlich `main` und
+          # deaktivierter Admin-Bypass live belegt sind; sein Selbsttest gehört
+          # zum vertraglichen Minimum.
+          "worker_environment_guard.py",
           # Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
           # Google ordnete die Markensuche dem Kreditvergleich FINANZCHECK.de
           # zu, waehrend der siteweite Person-Knoten nur Pinterest als sameAs

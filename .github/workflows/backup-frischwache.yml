@@ -63,6 +63,10 @@ concurrency:
 jobs:
   frischwache:
     name: Backup-Frische pruefen (RPO 24 h / 52 h)
+    # Defense in depth for E8: workflow_dispatch on a non-production ref must
+    # not receive the backup Environment. The Environment branch policy is
+    # still required and is checked by the setup contract.
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment: backup
