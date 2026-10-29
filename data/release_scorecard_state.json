@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T23:40:00Z",
+  "generated_at": "2026-10-29T01:05:43Z",
   "modus": "kandidaten",
-  "commit": "d79ff3789cf9e3bd49a9593639198abb37554238",
+  "commit": "6c7778a8c9a5705024339ecd0b26db5907953347",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "4c575772621489ea99614e990911794c8158574c7c3d933d55f0252cc8d44ad6",
@@ -33,7 +33,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -67,7 +67,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -84,7 +84,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -288,7 +288,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -543,7 +543,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -611,7 +611,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -662,7 +662,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
@@ -679,7 +679,7 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
+        "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
