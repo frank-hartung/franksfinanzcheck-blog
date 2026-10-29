@@ -1,8 +1,20 @@
-# 📐 Layout-Automatisierung – Wächter, Budgets und Reparatur (Issue #338)
+# 📐 Layout-Automatisierung – Wächter, Budgets und Reparatur (Issue #338 / #900)
 
-**Stand:** 21.09.2026 · **Basis:** `scripts/dom_audit.py`-Vermessung des
+**Stand:** 2026-10-29 · **Basis:** `scripts/dom_audit.py`-Vermessung des
 minifizierten Produktionsbaus (`hugo --minify`) · **Anlass:** Issue
-„⚠ Layout-Automatisierung: Probleme gefunden" (#338)
+„⚠ Layout-Automatisierung: Probleme gefunden" (#338, dauerhaft behoben #900)
+
+**Dauerhafte Behebung (#900, Highend-Profi-Agentur-Standard):**
+- Alle `open()`-Dateizugriffe in `layout_audit.py` sind auf `with`-Kontext
+  umgestellt (kein `ResourceWarning` mehr, kein stiller Datei-Leak).
+- Die Automatisierung prüft sich selbst: `test_workflow_yaml.py` (YAML,
+  JS-Syntax, Duplicate-Keys, Backslash-Faltung), `test_dom_audit.py`
+  (Parser-Vertrag, Budget, Chunker, Alt-Texte, hreflang),
+  `layout_browser_check.js` (Parser-Gegenrechnung, Sandbox-Iframe).
+- Keine zweite Zahlenkopie: Budgets kommen ausschließlich aus
+  `.cache/layout/dom-audit.json`, nicht mehr als duplizierter Wert.
+- Issue-Pflege dedupliziert über Marker **und** festen Titel: kein
+  Dauer-Issue mehr (Regel #272).
 
 Diese Datei ist das Runbook zur Layout-Wache: was sie prüft, warum die Grenzen
 so liegen, wie man sie ändert – und was am 21.09.2026 repariert wurde, damit

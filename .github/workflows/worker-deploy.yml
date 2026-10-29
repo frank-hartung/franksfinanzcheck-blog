@@ -5,8 +5,9 @@
 #  (Platzhalter-IDs im Repo, `workers_dev = true`). Jetzt gilt:
 #    · Deploy ausschließlich aus dem Repo, mit fest gepinntem Wrangler
 #      (tools/wrangler, npm ci --ignore-scripts).
-#    · Jeder Deploy braucht die Freigabe im Environment
-#      `cloudflare-produktion` (Required reviewer, nur Branch main).
+#    · Vor dem Secret-Job prüft ein read-only-Gate, dass
+#      `cloudflare-produktion` mindestens einen Required Reviewer, exakt
+#      `main` als Branch und keinen Admin-Bypass konfiguriert hat.
 #    · Ressourcen-IDs kommen aus Repository-Variablen ODER – seit der zweiten
 #      WF-E813-Härtung – lesend aus der bereits produktiven Worker-Bindung.
 #      Dadurch blockiert eine fehlende kopierte Variable den Deploy nicht mehr.
@@ -65,6 +66,7 @@ on:
       - "scripts/worker_ressourcen.py"
       - "scripts/worker_zugang.py"
       - "scripts/github_kommando.py"
+      - "scripts/worker_environment_guard.py"
       - "scripts/manifest_guard.py"
       - ".github/workflows/worker-deploy.yml"
 
@@ -114,14 +116,42 @@ jobs:
           EREIGNIS: ${{ github.event_name }}
           AUSWAHL: ${{ inputs.worker }}
           GEAENDERT: ${{ steps.diff.outputs.dateien }}
+          REF: ${{ github.ref }}
         run: |
           python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_deploy_vorbereiten.py --plan
 
+  production-policy:
+    name: Produktions-Environment absichern (nur main, Reviewer, kein Admin-Bypass)
+    needs: plan
+    if: needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != '' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    # Dieses Vorab-Gate liest nur GitHub-Environment-Metadaten. Es hat weder
+    # ein Environment noch Cloudflare-Secrets; erst sein Erfolg darf den
+    # nachfolgenden, secret-tragenden Deploy-Job freigeben.
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Environment-Guard selbsttesten (offline)
+        run: python3 scripts/worker_environment_guard.py --selftest
+
+      - name: Produktions-Environment absichern (vor Zugriff auf Secrets)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/worker_environment_guard.py --check
+
   deploy:
     name: Deploy ${{ matrix.worker }}
-    needs: plan
-    if: needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != ''
+    needs: [plan, production-policy]
+    if: github.ref == 'refs/heads/main' && needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != ''
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     environment:

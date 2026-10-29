@@ -1,7 +1,7 @@
 # Wartung · Veröffentlichung · Vorgang WF-829B (#922) — Highend-Dauerheilung
 
 **Auftrag:** `Wartung · Veröffentlichung · Vorgang WF-829B #922 Bitte dauerhaft auf Highend-Level einer Profi-Agentur beheben.`
-**Datum:** 29.10.2026 · **Branch:** `arena/0dc8309e-franksfinanzcheck-blog` · **Basis:** `2e4c7ae` (`main`)
+**Datum:** 29.10.2026 · **Branch:** `arena/0dc8309e-franksfinanzcheck-blog` · **Basis:** `2e4c7ae`, zusammengeführt mit `main` @ `76efccb` (enthält den Environment-Policy-Gate aus #935)
 **Workflow:** `.github/workflows/worker-deploy.yml` („Cloudflare-Worker deployen“)
 **Meldung:** [Issue #922](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/922) · Vorgangscode `WF-829B`
 
@@ -126,7 +126,11 @@ In `.github/workflows/worker-deploy.yml` steht die Prüfung **vor** der Auflösu
 ```
 
 Der Resolver bleibt die einzige Autorität für die IDs, die Reihenfolge bleibt
-(Prüfung → Auflösung → Vorbereitung → Deploy; per Test festgehalten). Neu ist,
+(Prüfung → Auflösung → Vorbereitung → Deploy; per Test festgehalten). Der
+Environment-Policy-Gate aus #935 (`production-policy`, liest nur
+Environment-Metadaten, ohne Cloudflare-Secrets) bleibt unverändert **davor** —
+die Zugangsprüfung ersetzt ihn nicht, sie ergänzt ihn um die Cloudflare-Seite
+(Token, Konto, Bindung). Neu ist,
 dass ein fehlendes Feld **sofort alle** fehlenden Felder nennt und das Dossier in
 die Job-Zusammenfassung schreibt. `scripts/worker_zugang.py` und
 `scripts/github_kommando.py` stehen jetzt auch in `DEPLOY_DATEIEN` und im
@@ -147,9 +151,11 @@ ist, die #922 erzeugt hat. Sein Vorgangscode ist `WF-537F`, Bereich
 
 In `.github/workflows/alert-on-failure.yml`:
 
-- `workerZugangFailed` erkennt **beide** Schritte (`Zugang prüfen (alle Befunde…`
-  **und** den alten `Produktive Ressource auflösen`) — der Umzug der Prüfung darf
-  ihren Meldeweg nicht verlieren.
+- `workerZugangFailed` erkennt jetzt **drei** Schritte (`Zugang prüfen (alle
+  Befunde…`, den alten `Produktive Ressource auflösen` **und** den
+  Environment-Gate `Produktions-Environment absichern` aus #935) — der Umzug
+  einer Prüfung darf ihren Meldeweg nicht verlieren, und der neue Gate darf ihn
+  nicht erben, ohne ihn zu nennen.
 - `istZugangsPruefung` / `zugangsPruefungFailed` ordnen den neuen Workflow
   derselben Runbook-Klasse `worker-deploy-zugang` zu.
 - Der Rat selbst nennt jetzt den Prüfknopf, das Dossier und die Selbsttests; ein
@@ -210,7 +216,7 @@ heute ausdrücklich NICHT bestätigt“).
 | `python3 scripts/actions_version_guard.py` | ✅ keine Drift |
 | `python3 scripts/manifest_guard.py` | ✅ grün |
 | `python3 scripts/worker_deploy_vorbereiten.py --selftest` | ✅ |
-| vollständiger Python-Vertragslauf (`unittest discover`, 4287 Tests) | ✅ neue/berührte Verträge grün; **6 Fehlschläge, die identisch auf `2e4c7ae` (Basis) fehlschlagen** und nichts mit diesem Vorgang zu tun haben (`test_faktenfrische_823`, `test_inhalts_register` ×3, `test_lcp_image_optimizer`, `test_versicherungs_cluster_verlinkung`) — auf dem Basisstand gegengeprüft |
+| vollständiger Python-Vertragslauf (`unittest discover`, 4312 Tests) | ✅ alle neuen/berührten Verträge grün; **11 Fehlschläge + 1 Fehler, die identisch auf `origin/main` @ `76efccb` fehlschlagen** (Bestands-/Siegel-Themen: `test_affiliate_*`, `test_alt_text_vorschlaege`, `test_belegketten_wache`, `test_frontmatter_duplikate`, `test_integrity_guard`, `test_inhalts_register` ×3, `test_lcp_image_optimizer`, `test_versicherungs_cluster_verlinkung`, `test_faktenfrische_823`) — in einem eigenen Worktree auf `main` gegengeprüft, nicht von diesem Vorgang |
 
 **Warum `test_ki_transportweg` hier auftaucht:** Der repo-weite T6-Vertrag verbietet
 direkte Anbieter-Endpunkte in jedem Skript. Der neue Leser spricht

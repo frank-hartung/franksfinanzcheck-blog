@@ -494,6 +494,11 @@ def main():
         # Sofort-Inserts verschoben Positionen → Chaos-Kaskade, die den
         # sichtbaren Text zerriss, z. B. „Zw[eitwagenre](…)gelung“.)
         if apply and planned:
+            from editorial_review_gate import automatic_write_protected
+            if automatic_write_protected(src["path"]):
+                total_added -= added
+                print(f"  YMYL: {src_fn} – keine automatischen Links")
+                continue
             content = open(src["path"], encoding="utf-8").read()
             fm_match = re.match(r"^---\n.*?\n---\n", content, re.S)
             offset = fm_match.end() if fm_match else 0
