@@ -102,7 +102,7 @@ Der Bonus lohnt sich, wenn die Gesamtkosten des neuen Tarifs trotz eventueller A
 1 bis 2 Wochen nach Auftragseingang. Technikertermin rechtzeitig buchen. Termin nach Ablauf des alten Vertrags legen.
 
 **Kann ich meinen alten Router weiterverwenden?**
-Ja, wenn er den aktuellen Standard unterstützt (z. B. WLAN 6). Prüfe, ob der neue Anbieter das Gerät freischalten muss. Sonst ist ein Rückgabe- oder Leas­ing-Modell oft günstiger.
+Ja, wenn er den aktuellen Standard unterstützt (z. B. WLAN 6). Prüfe, ob der neue Anbieter das Gerät freischalten muss. Sonst ist ein Rückgabe- oder Leas­ING-Modell oft günstiger.
 
 **Was passiert bei versäumter Kündigungsfrist?**
 Der Vertrag verlängert sich automatisch. Meist um 12 Monate. Du zahlst den alten Preis weiter. Kalender­erinnerung vermeidet das.

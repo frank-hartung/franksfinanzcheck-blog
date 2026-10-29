@@ -47,6 +47,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Dein Check in zehn Minuten
 
+
+Darum geht es hier konkret: Gasrechnung prüfen.
+
 Leg Rechnung, Vertrag und dein Handy für ein Foto bereit. Schau zuerst auf den Zeitraum und auf beide Zählerstände. Notiere dann Verbrauch, Preis je kWh und den festen Preis im Jahr. Diese fünf Werte zeigen dir meist schon, warum die Summe höher oder niedriger ist als im Vorjahr.
 
 Hast du einen eigenen Vertrag, rechnest du den Preis fürs Jahr mit deinem Verbrauch. Vergleiche diesen Wert ohne Bonus mit neuen Angeboten. Hast du eine Heizung im ganzen Haus, fragst du statt eines neuen Anbieters nach der Abrechnung und den Werten für deine Wohnung.
@@ -248,6 +251,9 @@ Zahle einen unstrittigen Betrag nicht einfach gar nicht. Bei einer strittigen Fo
 Auch ein ungewohnt hoher Verbrauch kann korrekt abgelesen sein. Kontrolliere dann Zeitraum, Bewohnerzahl, Wetter, [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) und technische Auffälligkeiten. Läuft der Zähler weiter, obwohl nachweislich kein Gasgerät aktiv sein sollte, greifst du nicht selbst in die Anlage ein. Dokumentiere die Beobachtung und verständige Vermieter, Versorger oder Fachbetrieb.
 
 Hefte die Antwort zur Abrechnung. So bleibt der Vorgang auch beim nächsten Jahreswechsel nachvollziehbar.
+
+
+Genau das ist der Hebel: Gasrechnung prüfen.
 
 ## Fazit: Die Rechnung erzählt dir, welcher Hebel wirkt
 
