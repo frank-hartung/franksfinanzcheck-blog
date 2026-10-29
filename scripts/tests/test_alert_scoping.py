@@ -492,6 +492,10 @@ class VerhaltensSimulation(unittest.TestCase):
                                          # prüfen, laufen deshalb über einen
                                          # neutralen Kanal – Bot-Watchdog.
                                          "Bot-Watchdog",
+                                         # WF-829B/#922 (29.10.2026): eigener
+                                         # Prüfknopf für den Deploy-Zugang,
+                                         # nur lesend, mit eigenem Alarm-Kanal.
+                                         "Deploy-Zugang prüfen",
                                          boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name

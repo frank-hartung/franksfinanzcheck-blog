@@ -60,11 +60,50 @@ def restore(text: str, tokens: list[str]) -> str:
         return tokens[int(m.group(1))]
     return re.sub(r'\x00(\d+)\x00', repl, text)
 
+# ---------------------------------------------------------------------------
+#  ORDINAL-DATUM: SCHÜTZEN, NICHT LÖSCHEN (Dauerheilung 29.10.2026, WF-D4E0)
+# ---------------------------------------------------------------------------
+#  Bis hierher „schützte“ der Splitter den Datumspunkt, indem er ihn
+#  WEGSCHRIEB:
+#      re.sub(r'(\b\d{1,2})\.\s+([A-ZÄÖÜ][a-zäöüß]{2,}\b)', r'\1 \2', p)
+#  Aus „am 23. Dezember“ wurde im Zähltext „23 Dezember“ – und weil die
+#  Teilung anschließend aus GENAU diesem Text gebaut wurde, landete die
+#  Ruine im Artikel: R13-DATUM-PUNKT, ein HARTES Publish-Kriterium (#482).
+#  Reale Folge im Nachtlauf 28.10.2026 (Issue #884, Kandidat
+#  `2026-10-28-flugvergleich-…`): Der R5-Split der Stufe 2, der den Artikel
+#  verlängern sollte, führte R13 ein → Schritt-Vertrag (V2) rollte den Split
+#  zurück → die Datei blieb ungeteilt → die Zertifizierungs-Vorheilung teilte
+#  erneut (ohne Vertrag) → R13 im Messbild → Gate lehnt ab → Bytes werden
+#  zurückgestellt → nächste Nacht dasselbe. Ein Selbstläufer ohne Verlierer
+#  außer dem Vorrat: 3/6, seit dem 26.10. jeden Tag.
+#  Die Lösung ist deshalb keine Ausnahme, sondern die richtige Technik:
+#  Der Punkt wird für die Satzzählung MASKIERT (`\x01` ist kein Satzzeichen
+#  und kein Whitespace) und nach der Teilung BYTEGENAU zurückgeschrieben.
+#  Damit zählt „23. Dezember“ nicht als Satzende und bleibt trotzdem exakt
+#  das, was im Original stand – inklusive schmalem geschütztem Leerzeichen
+#  (U+202F), das `\s+` mitnimmt.
+MONATE = ("Januar|Februar|März|April|Mai|Juni|Juli|August|September|"
+          "Oktober|November|Dezember")
+DATUM_PUNKT = re.compile(
+    r'(?P<zahl>\b\d{1,2})\.(?P<raum>\s+)(?=(?:' + MONATE + r')\b)')
+DATUM_MASKE = "\x01"
+
+
+def datum_maskieren(text: str) -> str:
+    """Ordinal-Punkte für die Satzzählung maskieren – verlustfrei."""
+    return DATUM_PUNKT.sub(
+        lambda m: m.group('zahl') + DATUM_MASKE + m.group('raum'), text)
+
+
+def datum_wiederherstellen(text: str) -> str:
+    return text.replace(DATUM_MASKE, ".")
+
+
 def split_para(para: str) -> str | None:
     """Teilt para an einer sinnvollen Satzgrenze. Gibt None, wenn nicht nötig."""
     p, tokens = protect(para)
-    # Datumspunkte schützen
-    p = re.sub(r'(\b\d{1,2})\.\s+([A-ZÄÖÜ][a-zäöüß]{2,}\b)', r'\1 \2', p)
+    # Datumspunkte schützen (maskieren statt löschen – s. o.)
+    p = datum_maskieren(p)
     # Satzenden finden (inkl. schließender Klammer/Quote, danach Großbuchstabe/Zahl/Anführung)
     ends = [m.end() for m in re.finditer(r'[.!?][)\"]?\s+(?=[A-ZÄÖÜ0-9„"\[])', p)]
     if not ends:
@@ -81,8 +120,8 @@ def split_para(para: str) -> str | None:
     else:
         cut = ends[len(ends) // 2]
     a, b = p[:cut], p[cut:]
-    a = restore(a, tokens)
-    b = restore(b, tokens)
+    a = datum_wiederherstellen(restore(a, tokens))
+    b = datum_wiederherstellen(restore(b, tokens))
     # Kein künstlicher Abschluss-Newline: `para` wird in einem Body ersetzt,
     # dessen bestehende Absatztrenner erhalten bleiben. Ein zusätzliches `\n`
     # erzeugte sonst drei Leerzeilen nach jedem Split.
@@ -99,7 +138,7 @@ def paras_with_many_sents(body: str):
         if re.match(r'^\s*\d+\.\s', first):
             continue
         p, tokens = protect(s)
-        p2 = re.sub(r'(\b\d{1,2})\.\s+([A-ZÄÖÜ][a-zäöüß]{2,}\b)', r'\1 \2', p)
+        p2 = datum_maskieren(p)
         n = len(re.findall(r'[.!?][)\"]?\s+(?=[A-ZÄÖÜ0-9„"\[])', p2)) + 1
         if n > MAX_SENT:
             out.append((s, n))
@@ -166,6 +205,27 @@ def split_body_text(body: str, max_rounds: int = 6, *, verbose: bool = False,
                     new_body = healed_body
         except Exception:  # noqa: BLE001
             pass
+    # FAIL-CLOSED-LETZTLINIE (29.10.2026, WF-D4E0/#884): Eine Teilung darf
+    # NIE eine Politur-Ruine (R11–R14, SSOT `sprachkern.POLITUR_RUINEN`)
+    # einführen – das sind harte Publish-Kriterien (#482). Die Maskierung
+    # oben macht die konkrete Datums-Klasse unerzeugbar; diese Zeile macht
+    # die ZUSAGE unabhängig von jeder künftigen Muster-Änderung wahr: Ist
+    # die Teilung schlechter als das Original, bleibt das Original stehen
+    # und der Grund wird gemeldet (statt still einen Blocker zu bauen).
+    if new_body != body:
+        try:
+            import sprachkern as sk
+            neu = set(sk.politur_ruine_funde(new_body))
+            alt = set(sk.politur_ruine_funde(body))
+            eingefuehrt = sorted(neu - alt)
+            if eingefuehrt:
+                klassen = ", ".join(f"{regel} {fund!r}"
+                                    for regel, fund in eingefuehrt)
+                warnings.append(f"R5-Teilung verworfen: sie hätte "
+                                f"{klassen} eingeführt (fail-closed)")
+                return body, 0, warnings
+        except Exception as exc:  # noqa: BLE001 – Wächter nie blockierend
+            warnings.append(f"Ruinen-Gegenprobe nicht verfügbar: {exc}")
     return new_body, total, warnings
 
 
@@ -272,6 +332,37 @@ def run_selftest() -> list:
     res2 = split_para(para)
     if res2 and "z. B." not in res2:
         fehler.append("Abkürzungen wurden beim Teilen zerstört")
+    # 5) ORDINAL-DATUM BLEIBT BYTEGENAU (WF-D4E0/#884, 29.10.2026).
+    #    Der reale Schaden: „am 23. Dezember“ verlor beim Teilen den Punkt,
+    #    wurde als R13-DATUM-PUNKT (hartes Publish-Kriterium) abgelehnt und
+    #    hielt den Vorrat Nacht für Nacht bei 3/6.
+    datum_para = ("Der erste Gedanke steht hier. Ein zweiter Satz folgt "
+                  "direkt. Dann ein dritter mit Inhalt. Fliege zum Beispiel "
+                  "am 23.\u202fDezember statt am 24. Dezember. Ein vierter "
+                  "rundet ab. Der fünfte beginnt neu. Danach der sechste "
+                  "Satz.\n")
+    res3 = split_para(datum_para)
+    if not res3:
+        fehler.append("Absatz mit Ordinal-Datum wird nicht geteilt")
+    else:
+        if "23.\u202fDezember" not in res3:
+            fehler.append("Ordinal-Datum (U+202F) wurde beim Teilen "
+                          "verändert – R13-Ruine erzeugt")
+        if "24. Dezember" not in res3:
+            fehler.append("Ordinal-Datum (ASCII-Leerzeichen) wurde beim "
+                          "Teilen verändert – R13-Ruine erzeugt")
+    # 5b) Und die Ruinen-Gegenprobe des Kerns hält jede künftige Muster-
+    #     Änderung auf: dasselbe Original darf nie schlechter herauskommen.
+    try:
+        import sprachkern as _sk
+        _neu, _n, _warn = split_body_text(datum_para)
+        if _sk.politur_ruine_funde(_neu):
+            fehler.append(f"Teilung führt eine Politur-Ruine ein: "
+                          f"{_sk.politur_ruine_funde(_neu)}")
+        if datum_wiederherstellen(datum_maskieren("23. Dezember")) != "23. Dezember":
+            fehler.append("Datum-Maske ist nicht verlustfrei")
+    except Exception as exc:  # noqa: BLE001
+        fehler.append(f"Ruinen-Gegenprobe nicht ausführbar: {exc}")
     return fehler
 
 

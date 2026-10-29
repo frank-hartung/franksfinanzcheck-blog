@@ -231,18 +231,48 @@ def preheal_candidate(index: Path) -> list[str]:
     Originalbytes kommen zurück.
     """
     changes: list[str] = []
+    original_bytes = index.read_bytes() if index.is_file() else b""
     try:
         import r5_absatz_splitter as r5
-        text = index.read_text(encoding='utf-8')
+        text = original_bytes.decode('utf-8')
         if r5.hard_r5_findings(text, f"content/posts/{index.parent.name}/index.md"):
             new_text, splits, warnings = r5.heal_text(text)
             if splits and new_text != text:
                 index.write_text(new_text, encoding='utf-8')
-                changes.append(f"R5-ABSATZ-HART: {splits} Absatz-Split(s)")
+                # SCHREIBER-TOR (29.10.2026, WF-D4E0/#884): Die Vorheilung
+                # ist der EINZIGE Schreiber der Zertifizierung, der bisher
+                # ohne Vertrag schrieb. Realer Schaden am 28.10.2026: Der
+                # R5-Split führte „23. Dezember“ → „23 Dezember“ (R13, hartes
+                # Publish-Kriterium). Das Gate lehnte den Kandidaten deshalb
+                # korrekt ab, `certify_one` stellte die Originalbytes zurück –
+                # der Fund war damit UNSICHTBAR und die Nacht darauf exakt
+                # derselbe. Ein Schreiber ohne Tor ist ein Blocker-Produzent
+                # (Kopf von `publikations_vertrag`), also bekommt er hier
+                # dasselbe Tor wie die Heiler-Kette: Führt die Vorheilung
+                # einen neuen harten Fund ein, wird sie bytegenau verworfen
+                # und das Gate misst das Original.
+                verstoesse: list[str] = []
+                try:
+                    import publikations_vertrag as pv
+                    verstoesse = pv.pruefe(index.parent.name, text, new_text)
+                    kurz = pv.verstoesse_kurz(verstoesse) if verstoesse else ""
+                except Exception as exc:  # noqa: BLE001 – fail-closed (V3)
+                    verstoesse = [f"Publikations-Vertrag nicht prüfbar: {exc}"]
+                    kurz = verstoesse[0]
+                if verstoesse:
+                    index.write_bytes(original_bytes)
+                    changes.append(
+                        f"R5-Vorheilung verworfen ({splits} Split(s)): {kurz}")
+                    print(f"  🛡 {index.parent.name}: R5-Vorheilung "
+                          f"verworfen – {kurz}")
+                else:
+                    changes.append(f"R5-ABSATZ-HART: {splits} Absatz-Split(s)")
             for warning in warnings[:3]:
                 print(f"  ⚠ {index.parent.name}: R5-Vorheilung: {warning}")
     except Exception as exc:  # noqa: BLE001 – echte Gate-Prüfung entscheidet danach
         print(f"  ⚠ {index.parent.name}: R5-Vorheilung nicht verfügbar: {exc}")
+        if original_bytes:
+            index.write_bytes(original_bytes)
     return changes
 
 

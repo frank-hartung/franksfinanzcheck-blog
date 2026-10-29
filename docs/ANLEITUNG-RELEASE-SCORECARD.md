@@ -167,6 +167,39 @@ npm run test:release             # Selbsttest + 41 Unit-Tests
 **Exit-Code-Vertrag:** `0` = freigabe-reif · `1` = blockierende Funde im
 Scope · `2` = Werkzeugfehler (fail-closed).
 
+### Symptom oder Ursache? Die Deckungszeile (#912, 29.10.2026)
+
+Zwischen dem 20. und dem 28.10.2026 war der Bestand siebenmal rot (12 von 20 Läufen), immer mit
+derselben Zeile: **Faktenalter blockiert**. Das Ticket #912 ließ sich nicht
+schließen, weil es nur das Symptom nannte. Die Ursache war eine Rechnung, die
+niemand angestellt hatte: Der Bestand braucht 2,58 Faktenprüfungen je Tag, der
+Bestands-Takt lieferte 0,86 – **33 % Deckung**. Jede Woche wurden zwölf Seiten
+mehr überfällig als geprüft.
+
+Der Report nennt seitdem vor den blockierenden Funden einen eigenen Abschnitt
+**„Faktenfrische-Deckung“**, und `data/release_scorecard_state.json` trägt die
+Zahlen unter `kapazitaet` (das Ticket liest sie von dort – eine Rechnung, zwei
+Leser). Er steht **nur**, wenn es Faktenalter-Funde gibt oder die Messung
+scheitert.
+
+| Spalte | Bedeutung |
+|---|---|
+| Bedarf | Σ 1/Intervall über den Bestand (aus `faktenfrische.faelligkeit`) |
+| Angebot | Budget je Lauf × Läufe je Tag (aus dem echten cron) |
+| Deckung | Angebot ÷ Bedarf – unter 100 % wächst der Rückstand zwangsläufig |
+| Rückstand abgebaut | Tage bis zum leeren Rückstand (Frist: `planung.nachhol_frist_tage`) |
+| Nächste Frist | Die Seite, die als nächste rot würde – die Zahl für die Planung |
+
+Was daraus folgt, ohne nachzudenken:
+
+- **Deckung < 100 %** → das ist keine Inhaltskrise, sondern eine Kadenz-Frage
+  (`data/agent_reach/faktenfrische.yaml`, Governance C45). Nicht die Intervalle
+  senken – die Lieferung erhöhen.
+- **Deckung ≥ 100 %, trotzdem rot** → die roten Artikel sind ein echter
+  Inhaltsbefund und gehören in die Redaktion (Abschnitt unten).
+- **`nicht beweisbar`** → Bedarf oder Laufplan waren nicht lesbar. Das ist ein
+  Werkzeugfehler (Exit 2), kein Freibrief.
+
 **Takt:**
 
 | Takt | Wo | Wirkung |

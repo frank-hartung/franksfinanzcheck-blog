@@ -74,9 +74,11 @@ jobs:
           python3 -m pip install -q --disable-pip-version-check -r requirements-agent-reach.txt pyyaml
 
       - name: Verträge vor dem Schreiben prüfen
+        id: checks
         run: |
           python3 scripts/agent_reach_gate.py
           python3 scripts/saisonaler_hero_refresh.py --selftest
+          python3 -m unittest scripts.tests.test_saisonaler_hero_refresh scripts.tests.test_saisonaler_hero_workflow scripts.tests.test_llm_client_transport
           python3 scripts/saisonale_startseite_guard.py --source-only
           python3 scripts/design_variant_gate.py --produktionswache
 
@@ -90,9 +92,9 @@ jobs:
       - name: KI-Textpolitur – nur H1 und GEO-Lead
         id: politur
         env:
-          # Dieselben Schlüssel wie die KI-Redaktion. Der erste verfügbare
-          # Anbieter gewinnt; fehlt jeder Schlüssel, bleibt die kuratierte
-          # Saisonbasis live und der Lauf meldet das als gelbe Warnung.
+          # Dieselben Schlüssel wie die KI-Redaktion. Der erste Anbieter mit
+          # vollständigem und vertragsfestem Ergebnis gewinnt; bei Ausfall
+          # bleibt die kuratierte Saisonbasis unverändert und sichtbar.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -106,6 +108,10 @@ jobs:
           python3 scripts/saisonaler_hero_refresh.py --fix $ARGS
           CODE=$?
           set -e
+          if [ "$CODE" -eq 0 ] && ! grep -Eq '^ampel=(gruen|gelb)$' "$GITHUB_OUTPUT"; then
+            echo "::error::Politur ohne gültige Zustandsmeldung – keine Freigabe."
+            CODE=2
+          fi
           echo "exit_code=$CODE" >> "$GITHUB_OUTPUT"
           # Das Skript unterscheidet selbst zwischen gelb (geprüfte Basis bleibt
           # live, Kette pausiert) und rot (Live-Hero defekt, Überalterung oder
@@ -114,21 +120,47 @@ jobs:
           exit $CODE
 
       - name: Render-Beweis bauen
+        id: render
         uses: ./.github/actions/hugo-build
         with:
           args: "--minify"
           label: "Saisonaler Hero – Render-Beweis"
 
       - name: Premium-Layout-Gates gegen den Build
+        id: render_gates
         run: |
           python3 scripts/saisonale_startseite_guard.py --public public
           python3 scripts/design_variant_gate.py --produktionswache
 
+      # Politur schreibt vorläufig in den Arbeitsbaum, damit Hugo genau diesen
+      # Kandidaten baut. Ohne erfolgreichen Build UND beide Gates werden alle
+      # drei Dateien zurückgesetzt, bevor irgendein Commit möglich ist.
+      - name: Fehlenden Render-Nachweis zurückrollen
+        id: rollback
+        if: always() && steps.politur.conclusion == 'success' && (steps.render.conclusion != 'success' || steps.render_gates.conclusion != 'success')
+        env:
+          RENDER_RESULT: ${{ steps.render.conclusion }}
+          GATES_RESULT: ${{ steps.render_gates.conclusion }}
+        run: |
+          set -euo pipefail
+          git restore --worktree -- data/saisons.yaml data/saisonaler_hero_state.json data/saisonaler_hero_history.jsonl
+          python3 scripts/saisonaler_hero_refresh.py --record-render-failure \
+            --reason "Hugo-Build=${RENDER_RESULT:-skipped}; Render-Gates=${GATES_RESULT:-skipped}"
+
       - name: Diagnose in die Lauf-Zusammenfassung schreiben
         if: always()
+        env:
+          CHECKS_RESULT: ${{ steps.checks.conclusion }}
+          RESEARCH_RESULT: ${{ steps.research.conclusion }}
+          POLITUR_RESULT: ${{ steps.politur.conclusion }}
+          RENDER_RESULT: ${{ steps.render.conclusion }}
+          GATES_RESULT: ${{ steps.render_gates.conclusion }}
+          ROLLBACK_RESULT: ${{ steps.rollback.conclusion }}
         run: |
           {
             echo "## Saisonaler Hero"
+            echo
+            echo "Verträge: ${CHECKS_RESULT:-nicht erreicht}; Recherche: ${RESEARCH_RESULT:-nicht erreicht}; Politur: ${POLITUR_RESULT:-nicht erreicht}; Build: ${RENDER_RESULT:-nicht erreicht}; Render-Gates: ${GATES_RESULT:-nicht erreicht}; Rollback: ${ROLLBACK_RESULT:-nicht benötigt}."
             echo
             if [ -f SAISONALER-HERO-REPORT.md ]; then
               cat SAISONALER-HERO-REPORT.md
@@ -138,19 +170,51 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Saisontext, Nachweis und Recherche committen
-        if: always() && steps.politur.conclusion != 'skipped'
+        id: commit
+        if: always() && steps.politur.conclusion != 'skipped' && steps.politur.conclusion != ''
+        env:
+          POLITUR_RESULT: ${{ steps.politur.conclusion }}
+          POLITUR_AMPEL: ${{ steps.politur.outputs.ampel }}
+          POLITUR_ZUSTAND: ${{ steps.politur.outputs.zustand }}
+          RENDER_RESULT: ${{ steps.render.conclusion }}
+          GATES_RESULT: ${{ steps.render_gates.conclusion }}
+          ROLLBACK_RESULT: ${{ steps.rollback.conclusion }}
         run: |
-          if git status --porcelain -- \
-               data/saisons.yaml data/saisonaler_hero_state.json \
-               data/saisonaler_hero_history.jsonl data/research/saisonal/ | grep -q .; then
+          set -euo pipefail
+          # Keine Erfolgsspur ohne BEIDE Render-Nachweise. Auch ein unerwarteter
+          # Python-Absturz oder fehlgeschlagener Rollback darf keinen halben
+          # Kandidaten bzw. dessen Fingerprint in den Commit einschmuggeln.
+          PROOF=false
+          SAFE_FAILURE_STATE=false
+          if [ "$POLITUR_RESULT" = success ] && [ "$POLITUR_AMPEL" = gruen ] && [ "$RENDER_RESULT" = success ] && [ "$GATES_RESULT" = success ]; then
+            PROOF=true
+          elif [ "$POLITUR_RESULT" = success ] && [ "$POLITUR_AMPEL" = gelb ] && [ "$RENDER_RESULT" = success ] && [ "$GATES_RESULT" = success ]; then
+            SAFE_FAILURE_STATE=true
+          elif [ "$POLITUR_RESULT" = failure ] && [ "$POLITUR_AMPEL" = rot ] && [ "$POLITUR_ZUSTAND" != 'rot – Rollback fehlgeschlagen' ]; then
+            SAFE_FAILURE_STATE=true
+          elif [ "$POLITUR_RESULT" = success ] && [ "$ROLLBACK_RESULT" = success ]; then
+            SAFE_FAILURE_STATE=true
+          fi
+
+          if [ "$PROOF" != true ]; then
+            git restore --worktree -- data/saisons.yaml data/saisonaler_hero_history.jsonl
+            if [ "$SAFE_FAILURE_STATE" != true ]; then
+              git restore --worktree -- data/saisonaler_hero_state.json
+            fi
+          fi
+          git add -- data/research/saisonal/
+          if [ "$PROOF" = true ]; then
+            git add -- data/saisons.yaml data/saisonaler_hero_state.json data/saisonaler_hero_history.jsonl
+          elif [ "$SAFE_FAILURE_STATE" = true ]; then
+            git add -- data/saisonaler_hero_state.json
+          fi
+          if git diff --cached --quiet; then
+            echo "✅ Keine versionierbaren Änderungen."
+          else
             git config user.name "Saison-Hero-Bot"
             git config user.email "saison-hero-bot@users.noreply.github.com"
-            git add data/saisons.yaml data/saisonaler_hero_state.json \
-                    data/saisonaler_hero_history.jsonl data/research/saisonal/
-            git commit -m "content(home): saisonalen Hero mit Agent Reach + KI-Feinschliff poliert"
+            git commit -m "chore(home): Saison-Hero-Lauf und Nachweise sichern"
             scripts/git_sync.sh --push-only
-          else
-            echo "✅ Keine versionierbaren Änderungen – Hero ist aktuell."
           fi
 
       - name: Report als Lauf-Artefakt sichern
@@ -173,20 +237,28 @@ jobs:
       #  Kette wieder sauber durchläuft.
       # ------------------------------------------------------------
       - name: Ausfall sichtbar machen (kein stiller Fallback)
-        if: failure() && steps.politur.conclusion != 'skipped'
+        if: failure() && github.ref_type == 'branch' && github.ref_name == github.event.repository.default_branch
         env:
           GH_TOKEN: ${{ github.token }}
           LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          CHECKS_RESULT: ${{ steps.checks.conclusion }}
+          RESEARCH_RESULT: ${{ steps.research.conclusion }}
+          POLITUR_RESULT: ${{ steps.politur.conclusion }}
+          RENDER_RESULT: ${{ steps.render.conclusion }}
+          GATES_RESULT: ${{ steps.render_gates.conclusion }}
+          ROLLBACK_RESULT: ${{ steps.rollback.conclusion }}
+          COMMIT_RESULT: ${{ steps.commit.conclusion }}
         run: |
           gh label create saisonaler-hero --repo "$GITHUB_REPOSITORY" \
             --color "0e8a16" \
             --description "Saisonaler SEO/GEO-Hero: Agent-Reach- oder KI-Lauf" --force || true
           {
-            echo "Der saisonale Hero wurde nicht als Agent-Reach + KI-poliert veröffentlicht."
-            echo "Die kuratierte Saisonbasis bleibt absichtlich unverändert sichtbar; es gab"
-            echo "keinen stillen KI- oder Fakten-Fallback."
+            echo "Der saisonale Hero-Refresh wurde nicht vollständig abgeschlossen."
+            echo "Kandidaten dürfen nur nach erfolgreichen Quell- und Render-Gates committet werden;"
+            echo "der tatsächliche Veröffentlichungsstand ist im verlinkten Lauf zu prüfen."
             echo
             echo "**Lauf:** $LAUF"
+            echo "**Schritte:** Verträge=${CHECKS_RESULT:-nicht erreicht}, Recherche=${RESEARCH_RESULT:-nicht erreicht}, Politur=${POLITUR_RESULT:-nicht erreicht}, Build=${RENDER_RESULT:-nicht erreicht}, Render-Gates=${GATES_RESULT:-nicht erreicht}, Rollback=${ROLLBACK_RESULT:-nicht benötigt}, Commit=${COMMIT_RESULT:-nicht erreicht}."
             echo
             if [ -f SAISONALER-HERO-REPORT.md ]; then
               echo "<details><summary>Diagnose-Report</summary>"
@@ -214,7 +286,7 @@ jobs:
           fi
 
       - name: Behobene Störung selbst schließen
-        if: success() && steps.politur.outputs.ampel == 'gruen'
+        if: success() && github.ref_type == 'branch' && github.ref_name == github.event.repository.default_branch && steps.politur.outputs.ampel == 'gruen'
         env:
           GH_TOKEN: ${{ github.token }}
           LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

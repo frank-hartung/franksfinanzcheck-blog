@@ -352,6 +352,7 @@ jobs:
     # ============================================================
     outputs:
       artefakt_ok: ${{ steps.artefakt.outputs.artefakt_ok }}
+      gh_pages_cache_outcome: ${{ steps.gh_pages_cache.outcome }}
       scorecard_exit: ${{ steps.scorecard.outputs.exit_code }}
       scorecard_werkzeugfehler: ${{ steps.scorecard.outputs.werkzeugfehler }}
       # Dauerheilung #740: Werkzeugfehler der Quote-Nachfüllung blockieren
@@ -1398,7 +1399,15 @@ jobs:
           python3 scripts/werkzeugbefund.py --sammeln
           exit 0
 
+      # WF-54C4/#932: Dieser Branch ist Cache/Backup, nicht die öffentliche
+      # Pages-Quelle. Ein Git-Fehler darf den geprüften Build nicht vor dem
+      # offiziellen Deployment stoppen. Das ursprüngliche outcome (nicht die
+      # durch continue-on-error grüne conclusion) geht ans nachgelagerte Siegel.
+      # Ein veralteter Cache bleibt ein ernsthafter, sichtbar roter Befund.
       - name: Deploy auf gh-pages
+        id: gh_pages_cache
+        continue-on-error: true
+        timeout-minutes: 15
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -1534,6 +1543,7 @@ jobs:
           DEPLOY_ERGEBNIS: ${{ needs.deploy.result }}
           PAGES_ERGEBNIS: ${{ needs.pages-deployment.result }}
           ARTEFAKT_OK: ${{ needs.deploy.outputs.artefakt_ok }}
+          GH_PAGES_CACHE_OUTCOME: ${{ needs.deploy.outputs.gh_pages_cache_outcome }}
           SCORECARD_EXIT: ${{ needs.deploy.outputs.scorecard_exit }}
           SCORECARD_WERKZEUGFEHLER: ${{ needs.deploy.outputs.scorecard_werkzeugfehler }}
           REFILL_WERKZEUGFEHLER: ${{ needs.deploy.outputs.refill_werkzeugfehler }}
@@ -1548,6 +1558,7 @@ jobs:
           echo "| deploy-Job | ${DEPLOY_ERGEBNIS:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| pages-deployment | ${PAGES_ERGEBNIS:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Auslieferungs-Artefakt | ${ARTEFAKT_OK:-nicht bestätigt} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| gh-pages-Cache | ${GH_PAGES_CACHE_OUTCOME:-nicht ausgeführt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Release-Scorecard Exit | ${SCORECARD_EXIT:-unbekannt} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Quote-Nachfüllung Werkzeugfehler | ${REFILL_WERKZEUGFEHLER:-nein} |" >> "$GITHUB_STEP_SUMMARY"
           echo "| Werkzeugbefunde (C38) | ${WERKZEUGBEFUNDE_ANZAHL:-0} |" >> "$GITHUB_STEP_SUMMARY"
@@ -1574,6 +1585,13 @@ jobs:
             fehler=1
           else
             echo "✅ Auslieferung belegt: Artefakt hochgeladen und offizielles Pages-Deployment erfolgreich."
+          fi
+
+          # Nur bei erreichtem Artefakt ist der Cache-Schritt zwingend erwartet;
+          # ein früheres Inhalts-/Build-Gate bleibt ein eigener Ausfall.
+          if [ "$ARTEFAKT_OK" = "true" ] && [ "${GH_PAGES_CACHE_OUTCOME:-}" != "success" ]; then
+            echo "::error::gh-pages-Cache nicht aktualisiert (outcome: ${GH_PAGES_CACHE_OUTCOME:-unbekannt}). Der Cache für Audio, Backup und Diff-Basis kann veraltet sein. Git-Fehler im Deploy-Schritt prüfen; offizielles Pages-Ergebnis steht oben. Runbook: docs/publication-reliability.md#gh-pages-cache-ausfall-wf-54c4--932"
+            fehler=1
           fi
 
           if [ "$SCORECARD_WERKZEUGFEHLER" = "true" ]; then
