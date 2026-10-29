@@ -3,7 +3,7 @@ title: "Stromanbieter wechseln: Tarife prüfen und Kosten senken"
 description: "Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung."
 date: 2026-10-23T09:38:32Z
 draft: true
-tags: ["Stromkosten senken", "Stromanbieter wechseln"]
+tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten senken", "Stromtarif vergleichen", "Stromanbieter"]
