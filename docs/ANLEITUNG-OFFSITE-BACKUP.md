@@ -1,6 +1,6 @@
 # Anleitung: Offsite-Backup einrichten, prüfen, wiederherstellen
 
-> Vorgang WF-9E5A · Meldung #761 · Stand 27.10.2026 (Highend-Dauerheilung)
+> Vorgang WF-9E5A · Meldung #923 · Stand 29.10.2026 (Highend-Dauerheilung)
 > Workflows `.github/workflows/backup-offsite.yml` + `backup-frischwache.yml` · Prüfer `scripts/backup_einrichtung.py` ·
 > Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
 > Einrichtungs-Wizard `scripts/backup_einrichten_wizard.sh`
@@ -42,17 +42,37 @@ npm run backup:status         # aktuellen Stand E1–E8 prüfen, ohne etwas zu �
 
 In CI verweigert sich der Wizard bewusst (kein Mensch, kein TTY) – die
 Einrichtung bleibt eine Inhaber-Aufgabe am eigenen Rechner. Beide Wege
-enden an derselben Stelle: Der erste grüne Lauf schließt #761 automatisch.
+enden an derselben Stelle: Der erste grüne Lauf schließt die offene
+WF-9E5A-Meldung automatisch.
 
 Danach: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Grün
 heißt gesichert. Die offene Meldung schließt sich beim ersten grünen Lauf
 von selbst.
+
+**Zusätzliche Laufzeit-Schranke:** Beide Backup-Jobs und die Frische-Wache
+haben zusätzlich eine explizite Job-Bedingung auf
+`refs/heads/main`. Ein manueller Start auf einem Feature-Branch erhält damit
+keine Environment-Secrets, selbst wenn die E8-Branch-Policy versehentlich
+entfernt wurde. Das ersetzt **nicht** Schritt 1: Das Environment muss
+weiterhin explizit nur `main` zulassen, bevor Secrets eingetragen werden.
 
 **Dringlichkeit:** Das Anmeldeformular ist geschaltet (`newsletterFormAction`
 in `hugo.toml`), und der Worker antwortet (Newsletter-Lauf vom 13.10.2026:
 0 aktive Abonnenten). Jede Anmeldung erzeugt einen Einwilligungsnachweis
 (Art. 7 Abs. 1 DSGVO), der ohne diese Einrichtung **nur** in Cloudflare
 liegt. Deshalb jetzt einrichten, vor den ersten Anmeldungen.
+
+### Live-Status 29.10.2026 – WF-9E5A #923
+
+Der aktuelle rote Lauf `40847586847` ist **kein Fehler im Exportcode** und
+kein Fall für einen Neustart. Die fail-closed-Prüfung hat korrekt festgestellt,
+dass die Inhaber-Einrichtung noch fehlt: E1 `BACKUP_REPO`, E2
+`BACKUP_REPO_TOKEN`, E3 `BACKUP_PASSPHRASE`, E5 `CF_KV_BACKUP_TOKEN` und E6
+`KV_NAMESPACE_ID_ABO` fehlen; E4 ist vorhanden, E7 bleibt optional. E8
+(Environment nur für `main`) ist ebenfalls noch nicht nachgewiesen. Bis die
+sieben Inhaber-Schritte oben erledigt sind, bleiben Abonnenten und
+Einwilligungsnachweise **ungesichert**. Ein erneuter Lauf ohne Einrichtung
+würde denselben sicheren Fehler erzeugen und schließt #923 nicht.
 
 ## Was gesichert wird – und wo
 
