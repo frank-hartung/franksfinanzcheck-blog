@@ -351,3 +351,7 @@
 {"date": "2026-10-27", "kritisch": 0, "fest": 4, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html", "layouts/_partials/header.html", "layouts/_partials/home_clusters.html", "layouts/pillar/single.html"]}
 {"date": "2026-10-27", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-28", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/internal_linker.py"]}
+{"date": "2026-10-29", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-10-29", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-10-29", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/internal_linker.py"], "head": "af40ad901"}
+{"date": "2026-10-29", "kritisch": 0, "fest": 0, "modus": "verify"}

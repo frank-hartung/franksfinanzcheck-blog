@@ -22,7 +22,7 @@ Recherche, die zu einem prüfbaren Beleg im Artikel führt.** Das ist
 | Takt | Auslöser | Befehl | Wo |
 |---|---|---|---|
 | **Erstellung** | jeder neue Artikel (kein `faktencheck` im Frontmatter) | `faktenfrische.py --neu --apply` | `content-engine-v2.yml`, Phase 3 |
-| **Bestand** | Fälligkeit nach Risikoklasse | `faktenfrische.py --apply` | `faktenfrische.yml`, Di + Do 06:40 MESZ |
+| **Bestand** | Fälligkeit nach Risikoklasse | `faktenfrische.py --apply` | `faktenfrische.yml`, **täglich** 06:40 MESZ |
 
 Fälligkeit (SSOT `data/agent_reach/faktenfrische.yaml → intervalle`):
 
@@ -37,10 +37,57 @@ Fälligkeit (SSOT `data/agent_reach/faktenfrische.yaml → intervalle`):
 Dringlichkeit wird die Ratgeberseite zuerst bearbeitet – sie trägt die interne
 Verlinkung ihrer ganzen Themenwelt.
 
-Priorität 0 hat immer die **Erstrecherche**. Danach zählt das Alter der letzten
-Prüfung. Pro Lauf werden `budget.max_artikel_pro_lauf` Artikel bearbeitet
-(Default 3) – Rotation statt Rundumschlag, damit kein Lauf die Feeds
-überrennt und jeder Commit überschaubar bleibt.
+Priorität 0 hat immer die **Erstrecherche**. Danach gilt **EDF – earliest
+deadline first**: Wer die früheste Frist hat, kommt zuerst. (Bis 29.10.2026
+sortierte der Lauf nach Risikoklasse; bei dauerhaftem Rückstand verhungerten
+die Standard-Seiten mit 90-Tage-Intervall unbegrenzt hinter den saisonalen
+Seiten, obwohl sie längst überfällig waren. Die Klasse war stärker als die
+Frist – einer der Gründe für den Dauer-Alarm #912.)
+
+## Deckung: der Takt muss zum Bestand passen (#912, 29.10.2026)
+
+Ein Intervalldatum ist keine Messung, sondern eine Rechnung: Eine Seite mit
+30-Tage-Intervall braucht 1/30 Prüfung je Tag. Über den Bestand summiert sich
+das zu einem **Bedarf**; dem steht ein **Angebot** gegenüber (Budget je Lauf ×
+Läufe je Tag aus dem cron). Solange das Angebot unter dem Bedarf liegt, wächst
+der Rückstand jeden Tag – und die Release-Scorecard meldet „Faktenalter
+blockiert“, obwohl kein Artikel falsch ist.
+
+Am 27.10.2026 war genau das der Fall:
+
+| Kennzahl | vor der Reparatur | nach der Reparatur |
+|---|---|---|
+| Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
+| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 3 (elastisch bis 10) |
+| Deckung | **33 %** | 116 % (bei Spitzen bis zu 388 %) |
+| Rückstand | +12 Seiten/Woche, nie abbaubar | in 5 Tagen abgebaut |
+
+Die Intervalle wurden **nicht** angefasst. Weniger messen wäre keine Heilung.
+Es wird mehr geliefert:
+
+- **`planung.vorlauf_tage` (7):** Eine Seite wird *arbeitbar*, bevor sie
+  fällig wird. Wer erst am Stichtag anfängt, arbeitet an einer roten Scorecard.
+- **`budget.auto_skalierung`:** Der Lauf nimmt so viele Seiten, wie die
+  Deckungsrechnung für einen fristgerechten Abbau braucht – nie unter
+  `max_artikel_pro_lauf` (Sockel), nie über `hartes_limit_pro_lauf`.
+- **`planung.nachhol_frist_tage` (7):** Ein Rückstand, der sich nicht binnen
+  sieben Tagen abbauen lässt, macht den Lauf rot. Das ist ein Alarm **mit
+  Schließpfad** (Governance C14) – grün, sobald der Plan konvergiert.
+
+Die Rechnung selbst steht in `scripts/faktenfrische_kapazitaet.py`; sie liest
+ausschließlich die eine Fälligkeitsregel (`faktenfrische.faelligkeit`) und den
+echten cron der Workflow-Datei. Wer den Plan verschiebt, verschiebt die
+Rechnung mit. Governance **C45** prüft statisch, dass
+`max_artikel_pro_lauf` (Sockel) × Läufe/Tag den Bedarf mit
+`min_deckung_prozent` (110 %) deckt. Das harte Limit ist nur die Spitze und
+zählt nicht als Plan. Reicht die Kapazität nicht, wird der **Bau** rot, bevor
+der Bestand rot wird.
+
+```bash
+python3 scripts/faktenfrische_kapazitaet.py            # Bedarf, Angebot, Abbauplan
+python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn nicht abbaubar
+python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
+```
 
 ## Was die Maschine schreiben darf – und was nicht
 

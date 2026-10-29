@@ -933,6 +933,11 @@ def main():
         for a in articles:
             orig = open(a["path"], encoding="utf-8").read()
             if a["content"] != orig:
+                from editorial_review_gate import automatic_change_findings
+                if automatic_change_findings(orig, a["content"]):
+                    a["content"] = orig
+                    print(f"YMYL: Rechtschreibänderung verworfen: {a['path']}")
+                    continue
                 open(a["path"], "w", encoding="utf-8").write(a["content"])
 
     # Report

@@ -156,9 +156,17 @@ Einzel-Lookups werden per POST-Body, nicht in der URL übertragen. Einrichtung
 und Prüfung stehen in
 [`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4](../docs/SICHERHEIT-BETRIEB-RUNBOOK.md#a4--schlüsselrollen-trennen-und-jobs-in-environments-einsperren-findings-f-07-f-08-p-1-p-4). Der Code-Stand im Repository ist kein Beleg für einen Live-Deploy.
 
-**Environments:** Produktive Worker-Deploys gehören nach
-`cloudflare-produktion`, mit Freigabe durch den Inhaber und Beschränkung auf
-`main`. Eigener Deploy-Zugang: `CF_WORKERS_DEPLOY_TOKEN`; der Workers-AI-Zugang
+**Environment `cloudflare-produktion`:** Ein in YAML benanntes Environment
+wird von GitHub beim ersten Zugriff gegebenenfalls ungeschützt angelegt. Es
+muss vor dem Betrieb explizit mit mindestens einem *Required Reviewer*, exakt
+dem Branch `main` (keine Tags/weiteren Muster) und deaktiviertem
+Administrator-Bypass (`can_admins_bypass: false`) abgesichert sein. Der
+read-only-Prüfer `scripts/worker_environment_guard.py` belegt diese Policy in
+einem vorgelagerten Job ohne Environment und ohne Cloudflare-Secrets; der
+Secret-tragende Deploy-Job startet nur nach erfolgreicher Prüfung und ist
+zusätzlich auf `main` begrenzt.
+
+Eigener Deploy-Zugang: `CF_WORKERS_DEPLOY_TOKEN`; der Workers-AI-Zugang
 `CLOUDFLARE_API_TOKEN` ist ausdrücklich kein Ersatz. Nach der Freigabe löst
 `scripts/worker_ressourcen.py` die bereits produktiven KV-/D1-Bindungen über
 denselben Zugang auf. Eine fehlende, unlesbare oder mehrdeutige Bindung bricht

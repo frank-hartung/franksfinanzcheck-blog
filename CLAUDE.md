@@ -1151,6 +1151,53 @@ Version wirklich die geprüfte war. Die Antwort ist die **Release-Scorecard**:
   `npm run release:artikel -- <slug>` · `npm run test:release`.
   Runbook mit den sechs Antworten: `docs/ANLEITUNG-RELEASE-SCORECARD.md`.
 
+### Ein Dauer-Alarm ist kein Alarm, sondern eine unbezahlte Rechnung (#912, 29.10.2026)
+
+Vom 20. bis 28.10.2026 war die Scorecard siebenmal rot (12 von 20 Läufen) – immer mit derselben
+Zeile „Faktenalter blockiert“, immer mit demselben offenen Ticket #912, das
+sich nicht schließen ließ. Die Ursache war keine Inhaltskrise, sondern eine
+Rechnung, die niemand angestellt hatte:
+
+| Kennzahl | Wert |
+|---|---|
+| Bedarf (Σ 1/Intervall über 106 Seiten) | **2,58 Faktenprüfungen/Tag** (≈ 18/Woche) |
+| Angebot (3 je Lauf × Di+Do) | **0,86/Tag** |
+| Deckung | **33 %** – Rückstand +12 Seiten/Woche |
+
+Die Intervalle waren richtig; **geliefert** wurde zu wenig. Damit war die
+Scorecard strukturell nicht grün zu bekommen – ein Dauer-Alarm ohne
+Schließpfad, den C14 in derselben Datei verbietet.
+
+- **Die Heilung ist mehr Lieferung, nicht weniger Messung:** Bestands-Takt
+  täglich statt Di+Do; Budget aus `planung`/`budget` der SSOT, elastisch per
+  `budget.auto_skalierung` (Sockel 3, `hartes_limit_pro_lauf` 10). Die
+  Intervalle (30/45/90) bleiben unangetastet.
+- **Vorlauf statt Kante:** `planung.vorlauf_tage` (7) macht eine Seite
+  *arbeitbar*, bevor sie fällig wird. Ein Rückstand ist binnen
+  `planung.nachhol_frist_tage` (7) abzubauen, sonst ist der Lauf rot – das ist
+  der Schließpfad.
+- **EDF statt Klassenrang:** Die Auswahl sortiert nach Frist
+  (earliest deadline first), nicht nach Risikoklasse. Vorher verhungerten
+  Standard-Seiten (90 Tage) unbegrenzt hinter saisonalen (30 Tage).
+- **Eine Regel, zwei Leser (C19):** `faktenfrische.faelligkeit` liefert seit
+  dem 29.10. auch `frist` und `restlaufzeit`; die Scorecard *liest* sie,
+  statt „faktencheck + Intervall“ ein zweites Mal zu rechnen.
+- **Die Ursache steht im Ticket:** `scripts/faktenfrische_kapazitaet.py`
+  rechnet Bedarf gegen Angebot (cron wird geparst, nie abgetippt), der Report
+  zeigt sie als Abschnitt „Faktenfrische-Deckung“, das Siegel trägt sie unter
+  `kapazitaet`.
+- **Der Bau wird rot, bevor der Bestand rot wird:** Governance **C45** prüft
+  statisch `max_artikel_pro_lauf (Sockel) × Läufe/Tag ≥ Bedarf ×
+  min_deckung_prozent` (110 %). Das harte Limit ist nur die Spitze und zählt
+  nicht als Plan – eine Kadenz, die erst im Dauer-Spitzenbetrieb aufgeht, baut
+  keinen Rückstand ab. Wächst der Bestand über die Kapazität, ist das ein
+  Bau-Befund mit Zahl, nicht ein Rätsel-Ticket Wochen später. Rückbauprobe:
+  cron zurück auf Di+Do → C45 nennt „0,86/Tag gegen 2,84/Tag nötig“.
+- Bedienung/Test: `npm run faktenfrische:deckung` ·
+  `python3 scripts/faktenfrische_kapazitaet.py --wache` ·
+  `npm run test:faktenfrische` (33 Unit-Tests + 36 Selbsttest-Fälle).
+  Vorgang: `RELEASE-SCORECARD-912-DAUERHEILUNG-PREMIUM-2026-10-29.md`.
+
 ## Verpasste Slots werden nachgeholt, nicht beklagt (Slot-Wache, seit #601, 05.10.2026)
 
 Am 05.10.2026 endete ein Publikationstag mit 1/2 LIVE, obwohl die
@@ -2121,8 +2168,11 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   Meldung unverändert offen, und es entsteht kein Duplikat. Vertrag:
   `test_alert_scoping` (Strukturvertrag + 58 Sim-Szenarien).
 - **Beide Backup-Jobs laufen im Environment `backup`** – dort liegen die Secrets.
-  Einrichtung immer **erst absichern, dann befüllen** (Anleitung Schritt 1:
-  explizit genau `main` vom Typ `branch`). Der Wizard schreibt die Policy über
+  Zusätzlich verweigern `backup-offsite.yml` und `backup-frischwache.yml` auf
+  Job-Ebene jeden Ref außer `refs/heads/main`, bevor ein Job mit Environment-
+  Secrets startet. Das ist Defense in depth, kein Ersatz für die Einrichtung:
+  immer **erst absichern, dann befüllen** (Anleitung Schritt 1: explizit genau
+  `main` vom Typ `branch`). Der Wizard schreibt die Policy über
   die unterstützte REST-Kette (Environment-`PUT`, Policy-`GET`/`DELETE`/`POST`)
   und verlangt danach einen paginierten Live-Read-back; unlesbar, `protected branches`,
   zusätzliche Branches/Tags oder fehlende Regeln bedeuten Abbruch vor dem
@@ -2143,8 +2193,8 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   über `backup-frisch` – kein Ersatz für E1–E8, sondern die operative Lücke:
   Ein Scheduler-Hänger ohne ablaufenden Token bliebe sonst bis zur nächsten
   Anleger-Frage unbemerkt. SLA: RPO 24 h / 52 h Toleranz, RTO < 60 Min.
-- **Inhaber-Einrichtung ist der einzige offene Auftragsteil (#761):** Der
-  Schnellweg führt über `npm run backup:einrichten`
+- **Inhaber-Einrichtung ist der einzige offene Auftragsteil (#761; aktuell
+  erneut nachgewiesen in #923):** Der Schnellweg führt über `npm run backup:einrichten`
   (`scripts/backup_einrichten_wizard.sh`, E8 erst live auf ausschließlich
   `main` beweisen, dann E1–E7; Geheimnisse nur verdeckt, in CI bewusst
   gesperrt); `npm run backup:status` prüft den Stand ohne Änderung. Agenten
@@ -2159,7 +2209,9 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-22.md`,
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-24.md`,
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-26.md` und
-  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-27.md`.
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-27.md` und
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-29.md` (Live-Befund #923,
+  Ref-/Token-Defense-in-depth; Inhaber-Einrichtung bleibt offen).
 
 ## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
 

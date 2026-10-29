@@ -1,8 +1,20 @@
-# 📐 Layout-Automatisierung – Wächter, Budgets und Reparatur (Issue #338)
+# 📐 Layout-Automatisierung – Wächter, Budgets und Reparatur (Issue #338 / #900)
 
-**Stand:** 21.09.2026 · **Basis:** `scripts/dom_audit.py`-Vermessung des
+**Stand:** 2026-10-29 · **Basis:** `scripts/dom_audit.py`-Vermessung des
 minifizierten Produktionsbaus (`hugo --minify`) · **Anlass:** Issue
-„⚠ Layout-Automatisierung: Probleme gefunden" (#338)
+„⚠ Layout-Automatisierung: Probleme gefunden" (#338, dauerhaft behoben #900)
+
+**Dauerhafte Behebung (#900, Highend-Profi-Agentur-Standard):**
+- Alle `open()`-Dateizugriffe in `layout_audit.py` sind auf `with`-Kontext
+  umgestellt (kein `ResourceWarning` mehr, kein stiller Datei-Leak).
+- Die Automatisierung prüft sich selbst: `test_workflow_yaml.py` (YAML,
+  JS-Syntax, Duplicate-Keys, Backslash-Faltung), `test_dom_audit.py`
+  (Parser-Vertrag, Budget, Chunker, Alt-Texte, hreflang),
+  `layout_browser_check.js` (Parser-Gegenrechnung, Sandbox-Iframe).
+- Keine zweite Zahlenkopie: Budgets kommen ausschließlich aus
+  `.cache/layout/dom-audit.json`, nicht mehr als duplizierter Wert.
+- Issue-Pflege dedupliziert über Marker **und** festen Titel: kein
+  Dauer-Issue mehr (Regel #272).
 
 Diese Datei ist das Runbook zur Layout-Wache: was sie prüft, warum die Grenzen
 so liegen, wie man sie ändert – und was am 21.09.2026 repariert wurde, damit
@@ -297,6 +309,35 @@ Und ein zweiter Beschluss aus #338: Die Issue-Pflege dedupliziert über den
 Marker **und** den festen Titel. Issues aus einer älteren Workflow-Version
 (ohne Marker) werden damit übernommen und bei Grün geschlossen – sonst bliebe
 der alte Alarm offen und der nächste Befund erzeugte einen zweiten.
+
+## 6b. Vierte Lehre: ein toter Bau ist kein Befund (WF-9FD5, 26.10.2026)
+
+Der Lauf vom 26.10.2026 ([40336062251](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/40336062251),
+Meldung [#901](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/901))
+fiel am Schritt **„Website bauen“** aus: ein unquotierter Doppelpunkt im
+Frontmatter einer Content-Datei. Das statische Audit lief danach **nicht**
+(`skipped`), der Browser-Audit fand kein `public/` – und die Meldung behauptete
+trotzdem „Statisches Audit: Exit 1 · kritische Befunde“. Grund: Im
+Meldungsskript stand `STATIC_EXIT ?? '1'`; ein fehlender Wert wurde zur **1**.
+
+Drei Änderungen halten das fest:
+
+1. **Der Bau hat eine `id` und wird ausgewertet.** Sein Exit-Code steht als
+   `BAU_EXIT` in der Umgebung; Statisches Audit und Browser-Audit laufen nur
+   bei `BAU_EXIT == 0`. Der Schluss-Schritt meldet zuerst den Bau und kennt für
+   „nicht gelaufen“ einen eigenen Zustand (fail-closed), statt eine Zahl zu
+   erfinden.
+2. **Die Ursache steht im Text.** Die Build-Action gibt `erste-fehlerzeile`
+   aus; Meldung und Job-Summary übernehmen sie wörtlich.
+3. **Das Frontmatter wird vor dem Bau geprüft.** `scripts/frontmatter_wache.py`
+   läuft in `.github/actions/hugo-build` (Vertrag H9) und in `e2e.yml` und nennt
+   Datei, Zeile, Spalte. Heilung: `npm run frontmatter:fix`.
+
+Der Vertrag ist ausführbar geprüft: `scripts/tests/test_layout_ai_bauausfall.py`
+startet den echten Schluss-Schritt in acht Kombinationen (Bau rot, Audit nicht
+gelaufen, Browser-Fehler …) und verlangt in jeder Lage die Wahrheit.
+
+---
 
 ## 7. Zweite Lehre: eine Prüfung, die immer Alarm schlägt, wird abgeschaltet
 

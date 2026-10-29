@@ -200,8 +200,25 @@ await run('schedule-Lauf main rot → Alarm + Schritt-Diagnose',
              steps: [{ name: 'Website bauen', conclusion: 'success' },
                      { name: 'Browser-Audit', conclusion: 'failure' }] }] },
   true, ['### Fehlgeschlagene Schritte', 'Browser-Audit', 'https://x/jobs/9', '**Event:** `schedule`', 'Layout-AI',
-         '<!-- alert-runbook: allgemein -->'],
-  null, ['Offen seit']);
+         // WF-9FD5 (29.10.2026): Der Rat für die Layout-Automatisierung ist
+         // nicht mehr „allgemein“ (API-Key/Neustart), sondern nennt die
+         // Prüfung selbst (LAYOUT-REPORT, dom_audit, Runbook).
+         '<!-- alert-runbook: layout-audit -->', 'LAYOUT-REPORT.md'],
+  null, ['Offen seit', 'API-Key abgelaufen']);
+
+// 4b. DER ECHTE AUSFALL VOM 26.10.2026 (WF-9FD5 / #901): nicht die Prüfung
+//     war rot, sondern der BAU. Damals riet die Meldung zu „API-Key
+//     abgelaufen“ und „Workflow neu starten“ – beides hätte denselben Bau
+//     wieder getötet. Jetzt gibt es dafür eine eigene Klasse mit eigenem Rat.
+await run('WF-9FD5-Reproduktion: Bau gescheitert → Runbook „layout-bau“',
+  { branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/901',
+             steps: [{ name: 'Website bauen (identisch zur Produktion, minifiziert)', conclusion: 'failure' },
+                     { name: 'Statisches Layout-Audit (Links, Covers, Alt-Texte, DOM-Budget)', conclusion: 'skipped' },
+                     { name: 'Lauf rot stellen, wenn Befunde offen sind', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: layout-bau -->', 'Der BAU ist gescheitert',
+         'python3 scripts/frontmatter_wache.py --fix', 'docs/ANLEITUNG-HUGO-BUILD.md'],
+  null, ['Offen seit', 'API-Key abgelaufen', 'Häufigste Ursachen']);
 // 5. WF-A535 #632: Frühabbruch in Phase 0.5 darf nicht mit dem generischen
 //    API-Key-/GitHub-Runbook oder dem irreführenden Tagesdefizit-Label enden.
 await run('#632-Reproduktion: Phase 0.5 + Schlussklassifikation → präzises Runbook',
@@ -272,7 +289,7 @@ await run('Dedupe: offene Alt-Meldung existiert → kein Duplikat, Titel wird mi
   false, [], { anzahl: 1, nummer: 99 });
 // 12. Fail-open: Job-API tot bei main-Fehler → Alarm trotzdem (ohne Diagnose)
 await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
-  { branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true },
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true },
   true, ['Häufigste Ursachen']);
 
 // 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
@@ -280,15 +297,15 @@ await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
 //     Rat dieses Laufs (Klassen-Marker seit WF-9E5A / #761) UND keinen
 //     älteren Lauf (Lagebild-Stufe 2 seit WF-E813 / #815, 26.10.2026).
 await run('Dedupe: offene Meldung mit Marker + gleichem Lauf → kein Duplikat, keine Umschrift',
-  { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
-    openIssues: [{ number: 100, title: IDENTITIES['Layout-AI'].titel,
-                   body: IDENTITIES['Layout-AI'].marker + '\n<!-- alert-runbook: allgemein -->\n'
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
+    openIssues: [{ number: 100, title: IDENTITIES['Bot-Watchdog'].titel,
+                   body: IDENTITIES['Bot-Watchdog'].marker + '\n<!-- alert-runbook: allgemein -->\n'
                      + '- **Run:** [Details ansehen](https://x/runs/42)\nDetails' }] },
   false, [], { anzahl: 0 });
 // 14. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
 //     (die Dedupe-Vergiftung aus #218/#343 in neuer Gestalt).
 await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entsteht',
-  { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
     openIssues: [{ number: 101, title: '🔧 Wartung · Newsletter · Vorgang WF-0000',
                    body: '<!-- alert-key: WF-0000 -->' }] },
   true, ['Häufigste Ursachen']);
@@ -310,7 +327,7 @@ await run('Tagesdefizit mit offenem engine-deficit-Fachissue → kein auto-repor
 // 16. Fehlt der Fachkanal, bleibt das Alerting fail-open: Dann ist nicht das
 //     Defizit das Problem, sondern die Zustellung der Fachmeldung.
 await run('Tagesdefizit ohne engine-deficit-Fachissue → generischer Alarm fail-open',
-  { branch: 'main', event: 'schedule', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/603',
              steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }] },
   true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
@@ -319,7 +336,7 @@ await run('Tagesdefizit ohne engine-deficit-Fachissue → generischer Alarm fail
 //     verschlucken. Der Fachkanal zählt nur, wenn er für diesen Lauf frisch
 //     aktualisiert wurde.
 await run('Tagesdefizit mit veraltetem engine-deficit-Issue → generischer Alarm fail-open',
-  { branch: 'main', event: 'schedule', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/604',
              steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
     openIssues: [{ number: 600, title: 'Content-Engine: Tagesdefizit alt',
@@ -350,7 +367,7 @@ await run('#608: Ruhetag-Lauf, frisch wiedereröffneter Fachkanal → kein Dupli
 //     worden (alte Fassung des Melders, Rechte fehlen, gh-Ausfall), bleibt das
 //     Alerting fail-open – dann ist der Melder das Problem, nicht die Quote.
 await run('#608-Gegenprobe: Fachkanal blieb geschlossen → generischer Alarm fail-open',
-  { branch: 'main', event: 'schedule', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/609',
              steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
     openIssues: [] },
@@ -560,11 +577,11 @@ await run('Nachführen scheitert an der API → kein Absturz, kein Duplikat',
 // Allgemein, nicht nur Backup: Bestand ohne Klassen-Marker (z. B. #767) wird
 // beim nächsten roten Lauf einmal nachgeführt und trägt danach den Marker.
 await run('Bestand ohne Klassen-Marker (fremder Workflow) → einmal nachgeführt mit Marker',
-  { branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7623,
-    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7623',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure', runId: 7623,
+    jobs: [{ name: 'watchdog', conclusion: 'failure', html_url: 'https://x/jobs/7623',
              steps: [{ name: 'Browser-Audit', conclusion: 'failure' }] }],
-    openIssues: [{ number: 767, title: IDENTITIES['Layout-AI'].titel,
-                   body: IDENTITIES['Layout-AI'].marker + '\nDetails', created_at: '2026-10-15T11:11:40Z' }] },
+    openIssues: [{ number: 767, title: IDENTITIES['Bot-Watchdog'].titel,
+                   body: IDENTITIES['Bot-Watchdog'].marker + '\nDetails', created_at: '2026-10-15T11:11:40Z' }] },
   false, [],
   { anzahl: 1, nummer: 767,
     imBody: ['<!-- alert-runbook: allgemein -->', 'Häufigste Ursachen', 'Browser-Audit', 'https://x/runs/7623',
@@ -572,7 +589,7 @@ await run('Bestand ohne Klassen-Marker (fremder Workflow) → einmal nachgeführ
     nichtImBody: ['Einrichtung unvollständig'] });
 // Gegenprobe: derselbe Schrittname in einem fremden Workflow → Standard-Runbook.
 await run('WF-9E5A-Gegenprobe: „Voraussetzungen prüfen“ in fremdem Workflow → Standard-Runbook',
-  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7613',
              steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen'], null, ['Einrichtung unvollständig', 'ANLEITUNG-OFFSITE-BACKUP']);
@@ -603,8 +620,11 @@ await run('Sicherheits-Wache: anderer Prüfschritt rot -> Wachen-Runbook, kein S
   true, ['F-01 bis F-10', 'npm run test:sicherheit'], null, ['API-Key abgelaufen']);
 // 14. Gegenprobe: Ein Workflow OHNE Wachen-Bezug behält das bisherige Runbook
 //     (die neue Triage darf nicht zum neuen Standardrat werden).
-await run('Gegenprobe: Layout-AI rot -> bisheriges Runbook bleibt stehen',
-  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+//     WF-9FD5 (29.10.2026): Layout-AI ist dafür kein Beispiel mehr – der Kanal
+//     hat seit #901 eigene Klassen (layout-bau / layout-audit). Bot-Watchdog
+//     ist neutral.
+await run('Gegenprobe: neutraler Workflow rot -> bisheriges Runbook bleibt stehen',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/3',
              steps: [{ name: 'Layout-Prüfung', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen', 'API-Key abgelaufen'], null, ['FF Sicherheits-Header']);
@@ -669,7 +689,7 @@ await run('#809: bestehender Header-Rat wird bei zwei roten Messungen nachgefüh
     nichtImBody: ['ausschließlich HTTP-Kopfzeilen', 'API-Key abgelaufen'] });
 
 await run('#809-Gegenprobe: gleicher Worker-Schritt in fremdem Workflow bleibt Standard',
-  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'anderer Lauf', conclusion: 'failure', html_url: 'https://x/jobs/8093',
       steps: [{ name: 'Worker-Zustand auswerten', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen'], null, ['<!-- alert-runbook: sicherheit-worker -->']);
@@ -707,7 +727,7 @@ await run('#778-Reproduktion: „Selbsttests aller Wachen“ rot → Selbsttest-
 // Der ERSTE rote Schritt entscheidet: Ein Selbsttest, der nur als Folge
 // eines früheren Fehlers rot wird, macht daraus keine Code-Regression.
 await run('#780-Gegenprobe: erster roter Schritt ist kein Selbsttest → bisheriger Rat',
-  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
     jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/7801',
              steps: [{ name: 'Browser-Audit', conclusion: 'failure' },
                      { name: 'Selbsttest der Wache (Sabotage-Proben)', conclusion: 'failure' }] }] },
@@ -758,6 +778,16 @@ await run('Worker-Deploy ohne Produktions-Zugang → Einrichtungs-Rat, kein Schl
          'cloudflare-produktion', 'CF_WORKERS_DEPLOY_TOKEN', 'worker_ressourcen.py',
          '<!-- alert-runbook: worker-deploy-zugang -->', 'kein Betriebsausfall'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'Transienter Fehler']);
+await run('Worker-Deploy: Environment-Policy ungeschützt → Reviewer-/main-/Admin-Bypass-Rat',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Produktions-Environment absichern (nur main, Reviewer, kein Admin-Bypass)',
+             conclusion: 'failure', html_url: 'https://x/jobs/wd-policy',
+             steps: [{ name: 'Produktions-Environment absichern (vor Zugriff auf Secrets)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: worker-deploy-zugang -->', 'Environment zuerst absichern',
+         'Required Reviewer', '`can_admins_bypass=false`', 'worker_environment_guard.py',
+         'CF_WORKERS_DEPLOY_TOKEN'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'GITHUB_TOKEN']);
 await run('Worker-Deploy: rote Worker-Tests → Selbsttest-Rat (Code-Regression)',
   { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
     jobs: [{ name: 'Deploy newsletter-worker', conclusion: 'failure', html_url: 'https://x/jobs/wd2',
@@ -772,6 +802,37 @@ await run('Worker-Deploy: Deploy-Schritt rot → Deploy-Rat mit Live-Nachweis-Pf
                      { name: 'Deploy', conclusion: 'failure' }] }] },
   true, ['<!-- alert-runbook: worker-deploy -->', 'Ein grüner Plan ist kein Deploy', 'bau`-Stempel'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen']);
+// WF-829B/#922 (29.10.2026): Die Zugangsprüfung entsteht VOR dem Resolver
+//     (`worker_zugang.py`, Schritt „Zugang prüfen (alle Befunde auf einmal)“)
+//     und hat einen eigenen Prüf-Workflow, der nur liest. Beide Wege müssen
+//     denselben Einrichtungs-Rat tragen – sonst hätte die Umstellung des
+//     Prüfschritts genau den Befund ohne seinen Rat gelassen, den #922 meldet.
+await run('#922: Zugangs-Vorprüfung im Deploy rot → Einrichtungs-Rat (nicht Worker-Deploy-Rat)',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Deploy newsletter-worker', conclusion: 'failure', html_url: 'https://x/jobs/wz1',
+             steps: [{ name: 'Worker-Tests', conclusion: 'success' },
+                     { name: 'Selbsttest Deploy-Zugang (ohne Netz)', conclusion: 'success' },
+                     { name: 'Zugang prüfen (alle Befunde auf einmal, lesend)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: worker-deploy-zugang -->', 'Fail-closed – gewollt, kein Betriebsausfall',
+         'CF_WORKERS_DEPLOY_TOKEN', 'alle Befunde auf einmal', '„Deploy-Zugang prüfen“'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Ein grüner Plan ist kein Deploy']);
+await run('#922: eigener Prüf-Workflow rot (nur lesend) → derselbe Einrichtungs-Rat, eigene Identität',
+  { workflowName: 'Deploy-Zugang prüfen', branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    runId: 9221,
+    jobs: [{ name: 'Zugang lesend prüfen', conclusion: 'failure', html_url: 'https://x/jobs/wz2',
+             steps: [{ name: 'Selbsttest der Zugangsprüfung (Sabotage ohne Netz)', conclusion: 'success' },
+                     { name: 'Zugang prüfen (alle Befunde auf einmal) und Dossier schreiben', conclusion: 'failure' }] }] },
+  true, ['Vorgang **' + IDENTITIES['Deploy-Zugang prüfen'].code + '**',
+         '<!-- alert-runbook: worker-deploy-zugang -->', 'Fail-closed – gewollt, kein Betriebsausfall',
+         'cloudflare-produktion', 'worker_zugang.py --selftest'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Code-Regression']);
+await run('#922: roter Selbsttest der Zugangsprüfung → Selbsttest-Rat, NICHT Zugangs-Rat',
+  { workflowName: 'Deploy-Zugang prüfen', branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    runId: 9222,
+    jobs: [{ name: 'Zugang lesend prüfen', conclusion: 'failure', html_url: 'https://x/jobs/wz3',
+             steps: [{ name: 'Selbsttest der Zugangsprüfung (Sabotage ohne Netz)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall'],
+  null, ['Fail-closed – gewollt', 'Häufigste Ursachen']);
 // 26.10.2026: CodeQL-Sicherheitswache. Das Gate war bei echten Fundstellen
 //     (js/incomplete-sanitization, js/regex/missing-regexp-anchor) still rot.
 await run('CodeQL-Gate: echte Fundstelle → Heilungs-Rat, kein Schlüssel-Rat',
@@ -812,7 +873,7 @@ await run('Trigger-Wache rot → Vertragsregressions-Rat mit Pfad-Ergänzung',
   null, ['Häufigste Ursachen', 'Transienter Fehler']);
 // Gegenprobe: Der Rat ist an den KANAL gebunden, nicht an den Schrittnamen.
 await run('Skript-Syntax-Rat gilt nur für den eigenen Kanal (Gegenprobe)',
-  { workflowName: 'Layout-AI', branch: 'main', event: 'push', conclusion: 'failure',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'push', conclusion: 'failure',
     jobs: [{ name: 'Layout-AI', conclusion: 'failure', html_url: 'https://x/jobs/ss3',
              steps: [{ name: 'Trigger-Wache – was ein Lauf prüft, muss ihn auslösen', conclusion: 'failure' }] }] },
   true, ['Häufigste Ursachen'], null, ['<!-- alert-runbook: skript-syntax -->']);

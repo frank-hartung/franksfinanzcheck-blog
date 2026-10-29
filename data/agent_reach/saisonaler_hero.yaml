@@ -4,12 +4,12 @@
 #  Dieser kleine, separate Plan ist die Recherche-Vorleistung für
 #  scripts/saisonaler_hero_refresh.py. Agent Reach liest nur öffentliche
 #  Signale; keine Aussage aus diesem Brief darf ohne Kuratierung als Fakt
-#  in den Hero gelangen. Claude sieht daraus ausschließlich bereits in
+#  in den Hero gelangen. Die KI sieht daraus ausschließlich bereits in
 #  data/saisons.yaml erlaubte Themenwörter.
 #
 #  Das trennt Recherche und Veröffentlichung sauber:
 #    Agent Reach → frischer, prüfbarer Signal-Brief
-#    Claude      → Stil, Klarheit, GEO-Struktur ohne Faktenneuerfindung
+#    KI-Modell   → Stil, Klarheit, GEO-Struktur ohne Faktenneuerfindung
 #    Guard       → Schema, Markenstimme, SEO/GEO-Kontrakt, Render-Beweis
 # ============================================================
 

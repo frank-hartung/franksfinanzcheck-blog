@@ -667,12 +667,22 @@ def naechste_pruefung(slug: str, erg_ergebnis: dict, fakten: dict | None,
         return "unbekannt", True
     faellig = fakten.get("faellig") or {}
     art = fakten.get("art") or {}
-    faktencheck = art.get("faktencheck")
-    intervall = int(faellig.get("intervall") or 90)
-    if faktencheck is None:
-        return "unbekannt (Erstrecherche ausstehend)", True
-    datum = faktencheck + dt.timedelta(days=intervall)
-    return datum.isoformat(), datum < heute
+    # REPARATUR #912 (29.10.2026): Die Frist kommt aus der EINEN
+    # Fälligkeitsregel (`faktenfrische.faelligkeit` → `frist`). Vorher
+    # rechnete die Scorecard „faktencheck + Intervall“ hier ein zweites
+    # Mal nach – zwei Stellen, eine Zahl, zwei Chancen, sich zu
+    # unterscheiden (Lektion #521). Sie liest jetzt, statt zu rechnen.
+    frist = faellig.get("frist")
+    if frist is None:
+        if art.get("faktencheck") is None:
+            return "unbekannt (Erstrecherche ausstehend)", True
+        return "unbekannt", True
+    if isinstance(frist, str):
+        try:
+            frist = dt.date.fromisoformat(frist[:10])
+        except ValueError:
+            return str(frist), True
+    return frist.isoformat(), frist < heute
 
 
 def bewerte_artikel(slug: str, befunde: dict, tool_fehler: dict, kontext: dict,
@@ -843,6 +853,14 @@ def _symbol(status: str) -> str:
     }.get(status, "❔ " + status)
 
 
+def _de_zahl(wert, stellen: int = 2) -> str:
+    """Deutsche Zahlenschreibweise für den Bericht (Lesetext, keine Daten)."""
+    try:
+        return f"{float(wert):.{stellen}f}".replace(".", ",")
+    except (TypeError, ValueError):
+        return "–"
+
+
 def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
                      pfad: Path = REPORT_PATH) -> str:
     heute = ergebnis["heute"]
@@ -927,6 +945,60 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
         z(f"| `{slug}` | " + " | ".join(normal + zelle) + f" | **{art['urteil']}** |")
     z("")
 
+    # Faktenfrische-Deckung: die URSACHE vor dem Symptom (#912).
+    kap = ergebnis.get("kapazitaet") or {}
+    faktenfunde = [b for a in ergebnis["artikel"].values() for b in a["befunde"]
+                   if b["dimension"] in ("faktenalter", "revision")
+                   and b["wirkung"] == "blockiert"]
+    if kap or faktenfunde:
+        z("## Faktenfrische-Deckung (Ursache der Faktenalter-Funde)"
+          if faktenfunde else
+          "## Faktenfrische-Deckung (die Kadenz hält den Bestand)")
+        z("")
+        z("_Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil "
+          "der Bestand mehr Prüfungen braucht, als der Takt liefert. Diese "
+          "Rechnung ist die Ursache – die Artikelzeilen oben sind das Symptom._")
+        z("")
+        if kap.get("nicht_beweisbar"):
+            z(f"❔ **nicht beweisbar** – {kap['nicht_beweisbar']}")
+        else:
+            z("| Kennzahl | Wert |")
+            z("|---|---|")
+            z(f"| Seiten im Bestand (Posts + Ratgeber) | {kap.get('artikel')} |")
+            z(f"| Fällig heute / überfällig | {kap.get('faellig')} / "
+              f"{kap.get('ueberfaellig')} |")
+            z(f"| Bedarf | {_de_zahl(kap.get('bedarf_je_tag', 0))} Prüfungen/Tag "
+              f"({_de_zahl(kap.get('bedarf_je_woche', 0), 1)}/Woche) |")
+            z(f"| Angebot | {_de_zahl(kap.get('kapazitaet_je_tag', 0))}/Tag "
+              f"(Budget {kap.get('budget')} × "
+              f"{_de_zahl(kap.get('laeufe_je_tag', 0))} Läufe/Tag) |")
+            z(f"| **Deckung** | **{_de_zahl(kap.get('deckung_prozent', 0), 0)} %** |")
+            ab = kap.get("abbau_tage")
+            z(f"| Rückstand abgebaut | "
+              + (f"in {ab} Tagen (Frist {kap.get('nachhol_frist_tage')} Tage)"
+                 if ab is not None else "**nicht abbaubar** im Horizont") + " |")
+            if kap.get("naechste_frist"):
+                n = kap["naechste_frist"]
+                z(f"| Nächste Frist | `{n['slug']}` am {n['frist']} "
+                  f"(in {n['restlaufzeit']} Tagen) |")
+            z(f"| Empfohlenes Budget | {kap.get('empfohlenes_budget')} je Lauf "
+              f"(Limit {kap.get('hartes_limit')}) |")
+            z("")
+            if not kap.get("empfehlung_erreicht"):
+                z("❌ **Strukturell unterdeckt:** Auch das harte Limit baut den "
+                  "Rückstand nicht fristgerecht ab. Zu entscheiden sind Takt "
+                  "oder Intervall – in `data/agent_reach/faktenfrische.yaml`, "
+                  "menschlich (die Maschine entscheidet das nie).")
+            elif kap.get("verletzungen_neu"):
+                seiten = ("Seite" if kap["verletzungen_neu"] == 1 else "Seiten")
+                z(f"⚠️ {kap['verletzungen_neu']} {seiten} mit zukünftiger Frist "
+                  "würden gerissen – Takt erhöhen oder Budget anheben.")
+            else:
+                z("✅ Deckung ausreichend: Der Takt kann den Bestand halten. "
+                  "Ein roter Faktenstand ist damit ein echter Inhaltsbefund, "
+                  "kein Kadenz-Artefakt.")
+        z("")
+
     # Blockierte Artikel im Detail
     blockiert = [a for a in ergebnis["artikel"].values()
                  if a["urteil"] in ("blockiert", "nicht beweisbar")]
@@ -1008,6 +1080,46 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
 # ============================================================
 #  Hauptlauf
 # ============================================================
+def kapazitaet_ermitteln(heute: dt.date) -> dict:
+    """Warum werden Artikel überhaupt überfällig? Die Deckungsrechnung.
+
+    BEFUND #912 (29.10.2026): Die Scorecard war ab dem 27.10. täglich rot,
+    und das Ticket ließ sich nicht schließen. Der Grund stand nirgends:
+    Der Bestand brauchte 2,58 Faktenprüfungen je Tag, der Takt lieferte
+    0,86 – 33 % Deckung. Jede Woche wurden zwölf Seiten mehr überfällig,
+    als geprüft werden konnten. Die Scorecard zeigte das Symptom
+    (Faktenalter blockiert), nie die Ursache.
+
+    Diese Funktion holt die Ursache aus der EINEN Deckungsrechnung
+    (`scripts/faktenfrische_kapazitaet.py`, dieselbe Fälligkeitsregel wie
+    das Publish-Gate). Sie schreibt nichts und heilt nichts (C15). Ist die
+    Rechnung nicht führbar, steht das als „nicht beweisbar“ im Bericht –
+    niemals als grüne Null.
+    """
+    try:
+        kap = _importiere_gate_module("faktenfrische_kapazitaet")
+        ff = _importiere_gate_module("faktenfrische")
+        cfg = ff.lade_config()
+        # GANZER Bestand (Posts + Ratgeber): Der Takt muss beide prüfen,
+        # deshalb ist das die ehrliche Bezugsgröße der Deckungszeile.
+        # Die Scorecard-Bewertung selbst bleibt bei den Posts – sie hat
+        # keine Ratgeber-Dimensionen.
+        artikel = [a for a in ff.alle_artikel("alle")]
+        laeufe, hinweise = kap.laeufe_aus_workflow()
+        if not laeufe:
+            return {"nicht_beweisbar": "Laufplan (cron) nicht lesbar: "
+                                       + "; ".join(hinweise)}
+        budget = int(kap.budget_vorgaben(cfg).get("max_artikel_pro_lauf") or 3)
+        plan = kap.plan(artikel, cfg, budget, laeufe, heute)
+        empfehlung = kap.empfohlenes_budget(artikel, cfg, laeufe, heute)
+        plan["empfohlenes_budget"] = int(empfehlung["budget"])
+        plan["empfehlung_erreicht"] = bool(empfehlung["erreicht"])
+        plan["hartes_limit"] = int(empfehlung["limit"])
+        return plan
+    except Exception as exc:  # noqa: BLE001 – nicht beweisbar, nie grün
+        return {"nicht_beweisbar": f"Deckungsrechnung nicht ausführbar: {exc}"}
+
+
 def durchfuehren(modus: str, heute: dt.date, slugs_live: list[str],
                  slugs_entwurf: list[str], fingerprints: dict[str, str],
                  vorheriger_zustand: dict, commit_sha: str | None) -> dict:
@@ -1044,6 +1156,7 @@ def durchfuehren(modus: str, heute: dt.date, slugs_live: list[str],
         "modus": modus,
         "artikel": artikel,
         "entwuerfe": entwuerfe,
+        "kapazitaet": kapazitaet_ermitteln(heute),
         "dimensionen_gesamt": dimensionen_gesamt,
         "kandidaten": kandidaten,
         "tool_fehler": tool_fehler,
@@ -1074,6 +1187,9 @@ def zustand_schreiben(ergebnis: dict) -> dict:
         "generated_at": jetzt,
         "modus": ergebnis["modus"],
         "commit": ergebnis.get("commit"),
+        # Die Ursache gehört ins Siegel: Ein Ticket, das nur das Symptom
+        # nennt („Faktenalter blockiert“), lässt sich nicht schließen (#912).
+        "kapazitaet": ergebnis.get("kapazitaet"),
         "artikel": {
             slug: {
                 "sha256": art["sha256"],
@@ -1248,15 +1364,24 @@ def selftest() -> list[str]:
            exit_code({"tool_fehler": {"T2-seo-audit": "x"}, "artikel": {}}, [])
            == EXIT_WERKZEUGFEHLER)
 
-    # ST8 – Nächste Prüfung: Intervall-Rechnung und Überfälligkeit.
+    # ST8 – Nächste Prüfung: Die Frist kommt aus der EINEN Fälligkeitsregel
+    # (faktenfrische.faelligkeit). Die Scorecard rechnet sie nicht nach (#912).
     heute = dt.date(2026, 10, 3)
-    fakten = {"faellig": {"intervall": 90}, "art": {"faktencheck": dt.date(2026, 9, 1)}}
+    fakten = {"faellig": {"frist": dt.date(2026, 11, 30), "intervall": 90},
+              "art": {"faktencheck": dt.date(2026, 9, 1)}}
     termin, ueber = naechste_pruefung("x", {"risk": "standard"}, fakten, heute)
-    pruefe("ST8 Standard-Intervall = faktencheck + 90 Tage",
+    pruefe("ST8 Frist aus der Fälligkeitsregel",
            termin == "2026-11-30" and not ueber)
+    pruefe("ST8 Frist gewinnt gegen abweichendes Intervall",
+           naechste_pruefung("x", {"risk": "standard"},
+                             {"faellig": {"frist": dt.date(2026, 11, 30),
+                                          "intervall": 7},
+                              "art": {"faktencheck": dt.date(2026, 9, 1)}},
+                             heute)[0] == "2026-11-30")
     termin2, ueber2 = naechste_pruefung(
         "x", {"risk": "standard"},
-        {"faellig": {"intervall": 30}, "art": {"faktencheck": dt.date(2026, 8, 1)}},
+        {"faellig": {"frist": dt.date(2026, 9, 1), "intervall": 30},
+         "art": {"faktencheck": dt.date(2026, 8, 1)}},
         heute)
     pruefe("ST8 überfällige Prüfung wird erkannt", ueber2)
     termin3, ueber3 = naechste_pruefung(
@@ -1354,6 +1479,8 @@ def main(argv: list[str] | None = None) -> int:
             "dimensionen_gesamt": ergebnis["dimensionen_gesamt"],
             "kandidaten": ergebnis["kandidaten"],
             "tool_fehler": ergebnis["tool_fehler"],
+            # Die Ursache gehört in jede maschinelle Sicht (#912).
+            "kapazitaet": ergebnis.get("kapazitaet"),
             "artikel": {
                 slug: {"urteil": a["urteil"],
                        "risikoklasse": a["risikoklasse"],

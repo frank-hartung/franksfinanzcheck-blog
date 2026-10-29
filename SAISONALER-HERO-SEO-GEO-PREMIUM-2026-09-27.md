@@ -1,5 +1,7 @@
 # Saisonaler Startseiten-Hero – SEO/GEO-Premium
 
+> Historischer Stand vom 27.09.2026: Die unten beschriebene Puter-/Claude-Brücke ist abgelöst. Der aktuelle Betrieb steht in [docs/ANLEITUNG-SAISONALER-HERO.md](docs/ANLEITUNG-SAISONALER-HERO.md).
+
 **Umsetzung:** 27.09.2026
 **Ablösung:** Der statische Willkommenstext aus `hugo.toml` ist vollständig entfernt. Es gibt keine `homeInfoParams.Title`- oder `Content`-Werte und keine alte Willkommenstext-Automation mehr.
 

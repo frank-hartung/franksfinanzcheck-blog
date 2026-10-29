@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-28
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
-description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung."
+description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
 date: 2026-10-28T01:24:59Z
 draft: true
 cadence_demoted: 2026-10-28T15:04:31Z
@@ -167,7 +167,7 @@ Wer sauber vergleicht, schützt sein Haus besser. Und oft spart er sogar noch Ge
 - Standard sind meist **Feuer, Leitungswasser, Sturm und Hagel**.
 - **Elementarschutz** ist oft ein extra Baustein.
 - Gute Tarife regeln **grobe Fahrlässigkeit** fair.
-- Auch **Neuwert, Rohre, Garage, PV und [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/)** gehören in den Vergleich.
+- Auch **Neuwert, Rohre, Garage, PV und Wärmepumpe** gehören in den Vergleich.
 - Ein guter Tarif ist nicht der billigste, sondern der **passendste**.
 
 ## Was eine Wohngebäudeversicherung überhaupt absichert?
@@ -234,7 +234,7 @@ Viele Angebote sehen günstig aus, weil sie an kritischen Stellen schwächer sin
 3. Welche Extras brauche ich für mein Haus?
 4. Erst dann: Was kostet das Ganze?
 
-So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du den typischen Fehler, einen billigen Tarif mit teuren Lücken zu kaufen. Diese sieben Klauseln entscheiden dabei am häufigsten über die Qualität:
+So vermeidest du den typischen Fehler, einen billigen Tarif mit teuren Lücken zu kaufen. Diese sieben Klauseln entscheiden dabei am häufigsten über die Qualität:
 
 ### 1. Grobe Fahrlässigkeit
 Vergisst du in einer stressigen Situation etwas oder handelst nicht perfekt, können schwache Tarife Leistungen kürzen. Gute Tarife sind hier deutlich kundenfreundlicher.
@@ -385,7 +385,7 @@ Ein Vergleich lohnt sich auch deshalb, weil viele Altverträge über Jahre mitla
 
 ## Der 15-Minuten-Schnellcheck für deinen Vertrag
 
-Du musst den Vertrag nicht komplett Auseinandernehmen, um zu wissen, ob er noch trägt. Eine Viertelstunde und drei Fragen reichen für den ersten Befund.
+Du musst den Vertrag nicht komplett auseinandernehmen, um zu wissen, ob er noch trägt. Eine Viertelstunde und drei Fragen reichen für den ersten Befund.
 
 ### Diese drei Punkte zuerst prüfen
 

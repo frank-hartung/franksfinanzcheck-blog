@@ -505,8 +505,12 @@ class MetaSatzendeHeilungTests(unittest.TestCase):
     # etwas ändert, war nicht „nicht idempot", sondern korrekt: Er hat einen
     # Verstoß geheilt. Eine Idempotenz-Probe braucht einen Text, der die
     # SSOT SCHON einhält – sonst testet sie die Heilung, nicht die Ruhe.
+    # Kein Doppelpunkt im Text: `_write` schreibt die Description UNQUOTIERT
+    # ins Frontmatter – ein „:" darin ist ungültiges YAML (Klasse WF-9FD5 /
+    # #901) und `automatic_write_protected` geht dann fail-closed, worauf der
+    # Heiler das YMYL-sichere Überspringen meldet statt zu heilen.
     DESC_OHNE_PUNKT = ("Erfahre, wie du im Spätsommer deine Gasrechnung senken "
-                       "kannst: Mit diesen Tipps startest du vorbereitet in "
+                       "kannst. Mit diesen Tipps startest du vorbereitet in "
                        "den Herbst und sparst bares Geld")
 
     def setUp(self):
@@ -2400,6 +2404,121 @@ class WfD4e0Issue821Tests(unittest.TestCase):
         self.assertGreaterEqual(total, 1)
         self.assertEqual(rs._reserve_numeric_claim_findings(split_body), [])
 
+    def test_vorstufe_nimmt_rs5_zahlenbeleg_an(self):
+        """#884: Länge + RS5 zusammen ist heilbar – nicht „unbehandelbar".
+
+        Realfall 28.10.2026: Vier frische Themen trugen „nur 858 Wörter …"
+        UND „RS5: 6 Zahlenbehauptungen …"; beides hat einen belegten Heiler
+        in der Kette, die Kombination wurde trotzdem verworfen. Der Nachschub
+        fehlte, der Vorrat blieb bei 3/6, der End-Gate wurde rot.
+        """
+        import engine_generate as eg
+        body = ("## A\n" + "Wort " * 170 + "\n## B\n" + "Wort " * 170
+                + "\n## C\n" + "Wort " * 170 + "\n## D\n" + "Wort " * 150)
+        ok, heiler = eg._reserve_vorstufe_ok(body, [
+            "nur 858 Wörter / 6423 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen)",
+            "RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare "
+            "Modellannahme: Vertraglich …",
+        ])
+        self.assertTrue(ok, "RS5 hat einen belegten Heiler in der Kette")
+        self.assertEqual(heiler, ["Länge", "Zahlenbeleg"])
+        # Allein reicht RS5 auch – die Kennzeichnung ist deterministisch.
+        self.assertTrue(eg._reserve_vorstufe_ok(
+            body, ["RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg …"])[0])
+        # Die Ausnahme bleibt an Beweis + Substanz gebunden (fail-closed).
+        import reserve_healer_coverage as rhc
+        original = rhc.WIRKUNGS_PROBEN.get("redaktions_standard.py")
+        try:
+            rhc.WIRKUNGS_PROBEN.pop("redaktions_standard.py", None)
+            self.assertFalse(eg._reserve_vorstufe_ok(
+                body, ["RS5: 2 Zahlenbehauptung(en) ohne Satzbeleg …"])[0],
+                "ohne Wirkungsnachweis darf RS5 nicht aufgeschoben werden")
+        finally:
+            if original is not None:
+                rhc.WIRKUNGS_PROBEN["redaktions_standard.py"] = original
+        # Ein Befund ohne belegten Heiler bleibt an der Geburt hart.
+        self.assertFalse(eg._reserve_vorstufe_ok(
+            body, ["RS5: 1 Zahlenbehauptung", "Struktur: nur 3 H2"])[0])
+
+
+
+class WfD4e0Issue884Tests(unittest.TestCase):
+    """#884: R5-Teilung darf keine harten Funde erzeugen (Dauerheilung)."""
+
+    DATUM = "23.\u202fDezember"
+
+    def _para(self, datum: str = None) -> str:
+        datum = datum if datum is not None else self.DATUM
+        return ("Der erste Gedanke steht hier. Ein zweiter Satz folgt direkt. "
+                "Dann ein dritter mit Inhalt. Fliege zum Beispiel am "
+                f"{datum} statt am 24. Dezember. Ein vierter rundet ab. "
+                "Der fünfte beginnt neu. Danach der sechste Satz.\n")
+
+    def test_teilung_erhaelt_ordinaldatum_bytegenau(self):
+        import r5_absatz_splitter as r5
+        for datum in (self.DATUM, "23. Dezember"):
+            neu, splits, _ = r5.split_body_text(self._para(datum))
+            self.assertGreaterEqual(splits, 1)
+            self.assertIn(datum, neu,
+                          "der Ordinalpunkt muss die Teilung überleben")
+        # Die Maske ist verlustfrei – auch für das schmale Leerzeichen.
+        self.assertEqual(r5.datum_wiederherstellen(
+            r5.datum_maskieren(self.DATUM)), self.DATUM)
+
+    def test_teilung_erzeugt_keine_neue_politur_ruine(self):
+        import r5_absatz_splitter as r5
+        import sprachkern
+        import publikations_vertrag as pv
+        raw = ("---\ntitle: \"Probe\"\ndraft: true\n---\n\n"
+               + self._para())
+        neu, splits, _ = r5.heal_text(raw)
+        self.assertGreaterEqual(splits, 1)
+        self.assertEqual(sprachkern.politur_ruine_funde(neu.split("---", 2)[2]),
+                         [])
+        self.assertEqual(pv.pruefe("probe", raw, neu), [],
+                         "der Publikations-Vertrag (V2) muss halten – sonst "
+                         "rollt der Schritt-Vertrag den Split zurück")
+
+    def test_splitter_wirft_teilung_bei_neuer_ruine_weg(self):
+        """Letztlinie: selbst ein falsches Muster darf keinen Blocker bauen."""
+        import r5_absatz_splitter as r5
+        original = r5.datum_maskieren
+        try:
+            r5.datum_maskieren = lambda text: text.replace("23.", "23")
+            neu, splits, warnungen = r5.split_body_text(self._para())
+        finally:
+            r5.datum_maskieren = original
+        self.assertEqual(splits, 0)
+        self.assertEqual(neu, self._para(),
+                         "fail-closed: Originalbytes bleiben stehen")
+        self.assertTrue(any("R5-Teilung verworfen" in w for w in warnungen))
+
+    def test_zertifizierungs_vorheilung_ist_fail_closed(self):
+        """Ein Schreiber ohne Tor ist ein Blocker-Produzent (C15)."""
+        import tempfile
+        from pathlib import Path
+        import publication_release as pr
+        import r5_absatz_splitter as r5
+        raw = ("---\ntitle: \"Probe\"\ndraft: true\n---\n\n"
+               + self._para())
+        original = r5.heal_text
+
+        def sabotage(text, **kwargs):
+            neu, n, w = original(text, **kwargs)
+            return neu.replace(self.DATUM, "23 Dezember"), n, w
+
+        with tempfile.TemporaryDirectory() as tmp:
+            index = Path(tmp) / "2026-10-29-probe" / "index.md"
+            index.parent.mkdir()
+            index.write_text(raw, encoding="utf-8")
+            r5.heal_text = sabotage
+            try:
+                changes = pr.preheal_candidate(index)
+            finally:
+                r5.heal_text = original
+            self.assertEqual(index.read_text(encoding="utf-8"), raw,
+                             "die Vorheilung muss bytegenau verworfen werden")
+            self.assertTrue(any("verworfen" in c for c in changes), changes)
 
 if __name__ == "__main__":
     unittest.main()

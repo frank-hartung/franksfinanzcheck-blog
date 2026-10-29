@@ -1,8 +1,117 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T07:13:50Z",
-  "modus": "kandidaten",
-  "commit": "c5775f07b9216b2cdf4de3dc72a6b3fc5c2aff16",
+  "generated_at": "2026-10-29T11:29:42Z",
+  "modus": "live",
+  "commit": "d5382e733ca632a3bdb7b202f4f9070097294ced",
+  "kapazitaet": {
+    "stichtag": "2026-10-29",
+    "artikel": 106,
+    "faellig": 14,
+    "ueberfaellig": 13,
+    "ueberfaellig_max_tage": 2,
+    "naechste_frist": {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "frist": "2026-11-03",
+      "restlaufzeit": 5
+    },
+    "budget": 3,
+    "laeufe_je_tag": 1.0,
+    "kapazitaet_je_tag": 3.0,
+    "bedarf_je_tag": 2.578,
+    "bedarf_je_woche": 18.0,
+    "deckung_prozent": 116.4,
+    "horizont_tage": 60,
+    "vorlauf_tage": 7,
+    "nachhol_frist_tage": 7,
+    "abbau_tage": 5,
+    "verletzungen_alt": 11,
+    "verletzungen_neu": 0,
+    "verletzungen": [
+      {
+        "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+        "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
+        "frist": "2026-10-27",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "versicherungen",
+        "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+        "frist": "2026-10-27",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
+        "titel": "DSL- und Internet-Flat günstig sichern",
+        "frist": "2026-10-29",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      }
+    ],
+    "offen_im_horizont": 9,
+    "puenktlich": true,
+    "rueckstand_abgebaut": true,
+    "empfohlenes_budget": 3,
+    "empfehlung_erreicht": true,
+    "hartes_limit": 10
+  },
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "4c575772621489ea99614e990911794c8158574c7c3d933d55f0252cc8d44ad6",
@@ -56,7 +165,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "5129e19cfd3740b511e4bc3e9829f79fbca93e80d3526793fd51d92a5a7dac75",
+      "sha256": "817e019af392f429fd1e1f753476f4bb5f9ace067715e601b25054d1d5f2eed4",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -70,7 +179,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "8a23bff63cc1022bdf3d92a531e95489b70f5628190d471c8b8f64c2eb4d0098",
@@ -192,7 +301,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "0621102b2994a66c77a14ed085d344987c5d695a308b238d0f37a4fdedd3f42c",
+      "sha256": "c1f7d3020194407a23ae3e06083ce7635a63afecb19ff044db9fa379f32b3e5f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -206,10 +315,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "246118310790a76a1618b41f6ab349ac128563f6fb3f212fb80f7b6253af1e33",
+      "sha256": "4545cb72c9e266325e39278e7f2bdb3a6191f5afd025ed04ce097fb45cbd2d18",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -223,7 +332,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "b60c49dac24f1147144d8f8137d0c3f15e4ff23ae789330657a8fb6c1313144a",
@@ -260,7 +369,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "610dfd9c9cf7ad21e4d6c8483d657744d39a411f3a7c2f9c5f5411eb3b2d03a4",
+      "sha256": "a9fa9e7407125f65010f90b9b43cff0a52c75ad0f3c889b5b97f6a1098fdecd5",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -274,10 +383,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "1cc931a4f5bbf0bb8ec7abb3acae974c87c8f10d623f0023d61ccf1bdf36179d",
+      "sha256": "18ee49e1000168f2e2d8f08a4fdd808b1ab8eda8728fa137349c485733780a56",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -291,10 +400,10 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "e605c89e88628e497e2344f9584b45d60b9418543894520936ea3b3c929b22c3",
+      "sha256": "442a324bb891078539d34f0c2e810a724f57b79973c734e8000bb6858fc2dd1d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -308,7 +417,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "c525dbe11299b94ad68da4d05691155ac6b74b6afdc2d37f3ad0165f08a36efd",
@@ -651,7 +760,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "036fce76efc930d0a73e12fc71960d5d8b2b4250c7c401a70f7c67d20ce96d44",
+      "sha256": "f468844e779aa6f947f029ec1b6fae39b2c74c22647fa74808f2fca696515b80",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -665,7 +774,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "fe041bc4c2af5dd1cdac8485c8dbc8ccfc9a5fd05c6fa6dd3c0b543004ea512f",
@@ -1042,7 +1151,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
-      "sha256": "8a5ffed589561930cbe27365e42a82d4f733871ca3da53f33ba0391ce8c2112a",
+      "sha256": "487a2ae2fb88735a7548da23d3813ebd4366777db88c1510ede703aeadbb9e17",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1056,7 +1165,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "8e8f895e975b059b1012aad2e2af92b56cd1e5f5453e5d4f0c715c2dd4af6fe2",
@@ -1178,7 +1287,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "44c2d8c72fe0c322b3e3a5d974f7e9949a7751e0237ba21521f6d6e03bc62819",
+      "sha256": "f26ea56008e6f1425a0737b750a65c688db17d108840effe606ff703c3e022e7",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1192,7 +1301,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     }
   }
 }
