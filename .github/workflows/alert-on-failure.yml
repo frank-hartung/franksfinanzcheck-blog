@@ -803,7 +803,7 @@ jobs:
                       : runbookKlasse === 'skript-syntax'
                         ? [
                             '1. **Einordnung: Code- oder Vertragsregression, kein Betriebsausfall.** Rot ist entweder ein Syntaxfehler im liegenden Stand (die Zusammenführung zweier Fassungen) oder ein Befund der Trigger-Wache: Ein Workflow ruft einen Prüfer auf, den sein `paths`-Filter nicht nennt (W1), ein Filter zeigt ins Leere (W2), oder `push` und `pull_request` tragen verschiedene Listen (W3).',
-                            '2. **Lokal nachfahren:** `python3 scripts/skript_syntax_wache.py --check` bzw. `npm run trigger:check`. Beide nennen Datei, Regel und den genauen Pfad – keine Rateschritte.',
+                            '2. **Lokal nachfahren:** `python3 scripts/skript_syntax_wache.py --check`, `python3 scripts/workflow_js_wache.py --check` bzw. `npm run trigger:check`. Beide nennen Datei, Regel und den genauen Pfad – keine Rateschritte.',
                             '3. **Heilen:** Syntax mit `python3 scripts/skript_syntax_heiler.py --fix --commit` (auditierte letzte gültige Fassung) oder von Hand; Trigger-Befunde durch Ergänzen des Pfades in BEIDEN Listen (`push` und `pull_request`). Den Filter nie verengen, ohne den Grund im PR zu nennen.',
                             '4. **Grenze der Prüfung:** Die Trigger-Wache sagt, ob ein Gate ANSPRINGT – nicht, ob es das Richtige prüft. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt F2. Der nächste grüne Lauf auf `main` schließt diese Meldung selbst.'
                           ]

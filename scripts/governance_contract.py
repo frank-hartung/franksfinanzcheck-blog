@@ -62,6 +62,14 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
                      die Engine misst über die Publish-Gate-Collectoren
                      (keine zweite Messregel) und siegelt die geprüfte
                      Version (Befund 10, 03.10.2026)
+  C45 Frischhalte-Deckung – die Kadenz der Faktenfrische deckt den Bestand:
+                     Bedarf (Σ 1/Intervall, gelesen aus der EINEN Regel
+                     `faktenfrische.faelligkeit`) gegen Angebot (Budget ×
+                     echter cron der Workflow-Datei). Am 29.10.2026 standen
+                     2,58 Prüfungen/Tag gegen 0,86 (33 % Deckung): Die
+                     Release-Scorecard war deshalb jeden Tag rot, und Ticket
+                     #912 war nicht schließbar. Reicht die Kapazität nicht,
+                     wird der BAU rot, bevor der Bestand rot wird (#912)
   C18 Pflicht-Check     – der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist
                      der Vertrag mit dem Branch-Schutz: Konstante = Workflow =
                      Ruleset. Kein `paths`-Filter, kein `if:` am Job, kein
@@ -139,6 +147,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Profil-URLs (LinkedIn/Xing erst mit echtem Profil). Eine Wache,
           # die niemand verlangt, fuehrt irgendwann niemand aus (C6).
           "entity_marken_gate.py",
+          # Deckungsrechnung der Faktenfrische (29.10.2026, #912): Sie ist
+          # die einzige Stelle, die Bedarf (Σ 1/Intervall aus
+          # `faktenfrische.faelligkeit`) und Angebot (Budget × echter cron)
+          # gegeneinander rechnet. Der Bestand brauchte 2,58 Prüfungen je
+          # Tag, der Takt lieferte 0,86 – darum war die Release-Scorecard
+          # jeden Tag rot. Eine Wache, die niemand verlangt, führt
+          # irgendwann niemand aus (C6).
+          "faktenfrische_kapazitaet.py",
           # Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
           # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
@@ -2166,6 +2182,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c42_gate_schritt_hat_erzeuger(schritte, STEP_SIGNATURES, root=root)
     checks += c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows, root=root)
     checks += c44_themen_nachschub(script_texts, wflows, root=root)
+    checks += c45_frischhalte_deckung(script_texts, wflows, root=root)
     return checks
 
 
@@ -3576,6 +3593,177 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
     if not os.path.isfile(os.path.join(root, "scripts", "tests", C44_TEST)):
         out.append(("C44", f"scripts/tests/{C44_TEST} fehlt – der Vertrag wäre "
                            "ungetestet (#821)."))
+    return out
+
+
+# --- C45: Die Frischhalte-Kadenz deckt den Bestand (#912, 29.10.2026) -------
+#
+# BEFUND. Die Release-Scorecard war ab dem 27.10.2026 jeden Tag rot
+# („Produktionswahrheit rot, Bestand blockiert“), und Ticket #912 ließ sich
+# nicht schließen. Die Ursache war keine Inhaltskrise, sondern eine
+# Rechenaufgabe, die niemand gerechnet hatte: Der Bestand braucht nach den
+# SSOT-Intervallen 2,58 Faktenprüfungen je Tag (Σ 1/Intervall über 106
+# Seiten), der Bestands-Takt lieferte Di+Do je 3 = 0,86 je Tag. Deckung
+# 33 %. Jede Woche wurden zwölf Seiten mehr überfällig als geprüft – die
+# Scorecard konnte NIE grün werden. Ein Dauer-Alarm ohne Schließpfad, den
+# C14 in derselben Datei verbietet.
+#
+# WAS C45 VERLANGT (Mechanik, keine Zustandszahl – ein zustandsabhängiger
+# Gate würde bei bestehendem Rückstand jedes Merge blockieren, C34):
+#   a) Eine Wache, die den Bedarf aus der EINEN Fälligkeitsregel liest
+#      (`faktenfrische.faelligkeit`) und das Angebot aus dem ECHTEN Plan
+#      (cron der Workflow-Datei) – keine abgetippte Zahl, kein zweiter
+#      Maßstab (C19, #521).
+#   b) Die SSOT nennt Vorlauf, Nachholfrist, Horizont und Auto-Skalierung.
+#      Fehlt einer, ist die Kadenz wieder geraten.
+#   c) Der Workflow ruft die Wache auf UND sein Takt deckt den Bedarf
+#      statisch: hartes_limit_pro_lauf × Läufe/Tag ≥ Bedarf × Mindestdeckung.
+#      Reicht die Kapazität nicht, wird der BAU rot, BEVOR der Bestand rot
+#      wird – genau die Reihenfolge, die am 27.10. gefehlt hat.
+#   d) Die Release-Scorecard nennt die Ursache, nicht nur das Symptom.
+#   e) Ein Vertrag ohne Test ist Prosa.
+C45_WACHE = "faktenfrische_kapazitaet.py"
+C45_SSOT = os.path.join("data", "agent_reach", "faktenfrische.yaml")
+C45_WORKFLOW = "faktenfrische.yml"
+C45_TESTS = ("test_faktenfrische_kapazitaet.py",)
+C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
+              "empfohlenes_budget", "nachhol_frist_tage")
+
+
+def _c45_deckung(root=BLOG_DIR):
+    """(kapazität, bedarf, mindestdeckung, laeufe, limit) oder (None, Fehler)."""
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import faktenfrische as ff            # noqa: PLC0415
+        import faktenfrische_kapazitaet as kap  # noqa: PLC0415
+    except Exception as exc:  # noqa: BLE001 – Importfehler ist ein Befund
+        return None, f"Deckungsrechnung nicht importierbar: {exc}"
+    try:
+        cfg = ff.lade_config()
+    except Exception as exc:  # noqa: BLE001
+        return None, f"Recherche-Vertrag nicht ladbar: {exc}"
+    laeufe, hinweise = kap.laeufe_aus_workflow(
+        os.path.join(root, ".github", "workflows", C45_WORKFLOW))
+    if not laeufe:
+        return None, ("Laufplan nicht lesbar (" + "; ".join(hinweise) + ") – "
+                      "die Deckung wäre geraten.")
+    artikel = ff.alle_artikel("alle")
+    if not artikel:
+        return None, "Bestand nicht lesbar – die Deckung wäre geraten."
+    bedarf = kap.bedarf_je_tag(artikel, cfg)
+    vorgaben = kap.budget_vorgaben(cfg)
+    limit = int(vorgaben["hartes_limit_pro_lauf"])
+    sockel = int(vorgaben["max_artikel_pro_lauf"])
+    deckung = int(kap.planung(cfg)["min_deckung_prozent"])
+    # Zwei Zahlen, weil eine lügen würde: Der Sockel ist das, was der
+    # Alltag ohne Sonderfall liefert; das harte Limit ist nur die
+    # Spitze. Eine Kadenz, die erst mit dauerhaft ausgereiztem Limit
+    # rechnerisch aufgeht, ist keine Deckung, sondern ein Dauer-Stau.
+    return {"kapazitaet": kap.kapazitaet_je_tag(sockel, laeufe),
+            "kapazitaet_spitze": kap.kapazitaet_je_tag(limit, laeufe),
+            "budget": sockel, "limit": limit,
+            "bedarf": bedarf, "mindest": deckung,
+            "laeufe": laeufe, "seiten": len(artikel),
+            "auto": bool(vorgaben.get("auto_skalierung"))}, None
+
+
+def c45_frischhalte_deckung(script_texts, wflows, root=BLOG_DIR):
+    """Die Kadenz der Faktenfrische deckt den Bestand – dauerhaft (#912)."""
+    out = []
+    wache = (script_texts or {}).get(C45_WACHE, "")
+    if not wache.strip():
+        out.append(("C45", f"scripts/{C45_WACHE} fehlt – ohne Deckungsrechnung "
+                           "meldet sich eine zu kleine Kadenz erst als roter "
+                           "Bestand (#912)."))
+    else:
+        for marker in C45_MARKER:
+            if marker not in wache:
+                out.append(("C45", f"scripts/{C45_WACHE}: `{marker}` fehlt – "
+                                   "Bedarf, Plan oder Urteil wären nicht "
+                                   "prüfbar (#912)."))
+    if C45_WACHE not in GUARDS:
+        out.append(("C45", f"scripts/{C45_WACHE} steht nicht im vertraglichen "
+                           "Minimum (C6) – ihr Selbsttest liefe nie."))
+
+    # b) Die SSOT nennt die Planungsgrößen (menschlich kuratiert).
+    try:
+        import yaml                          # noqa: PLC0415
+        with open(os.path.join(root, C45_SSOT), encoding="utf-8") as fh:
+            ssot = yaml.safe_load(fh) or {}
+        planung = ssot.get("planung") or {}
+        budget = ssot.get("budget") or {}
+        for feld in ("vorlauf_tage", "nachhol_frist_tage", "horizont_tage",
+                     "min_deckung_prozent"):
+            if planung.get(feld) is None:
+                out.append(("C45", f"{C45_SSOT}: `planung.{feld}` fehlt – die "
+                                   "Kadenz wäre wieder geraten (#912)."))
+        for feld in ("auto_skalierung", "hartes_limit_pro_lauf",
+                     "max_artikel_pro_lauf"):
+            if budget.get(feld) is None:
+                out.append(("C45", f"{C45_SSOT}: `budget.{feld}` fehlt – ohne "
+                                   "sie kann das Budget dem Bedarf nicht "
+                                   "folgen (#912)."))
+        if budget.get("auto_skalierung") is False:
+            out.append(("C45", f"{C45_SSOT}: `budget.auto_skalierung: false` – "
+                               "ein festes Budget unter einem wachsenden "
+                               "Bestand ist die Ursache #912."))
+    except Exception as exc:  # noqa: BLE001
+        out.append(("C45", f"{C45_SSOT} nicht lesbar: {exc}"))
+
+    # c) Der Fahrer: Workflow ruft die Wache auf – und sein Takt reicht.
+    wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C45_WORKFLOW:
+            wf = inhalt or ""
+    if not wf:
+        wf = _read(os.path.join(root, ".github", "workflows", C45_WORKFLOW))
+    if not wf:
+        out.append(("C45", f".github/workflows/{C45_WORKFLOW} fehlt – ohne "
+                           "Bestands-Takt altert jeder Artikel unbemerkt."))
+    else:
+        if C45_WACHE not in wf:
+            out.append(("C45", f".github/workflows/{C45_WORKFLOW}: `{C45_WACHE}` "
+                               "wird nicht aufgerufen – die Wache hätte keinen "
+                               "Fahrer (#912)."))
+        if "--wache" not in wf:
+            out.append(("C45", f".github/workflows/{C45_WORKFLOW}: der "
+                               "Deckungs-Nachweis läuft nicht mit `--wache` – "
+                               "ein Befund ohne Exit-Code meldet nichts (#912)."))
+        # Der Plan wird geparst, nicht abgetippt (slot_wache-Prinzip).
+        if "faktenfrische_kapazitaet.py" in wache or wache:
+            zahlen, fehler = _c45_deckung(root)
+            if fehler:
+                out.append(("C45", f"Deckung nicht beweisbar: {fehler}"))
+            else:
+                noetig = zahlen["bedarf"] * zahlen["mindest"] / 100.0
+                if zahlen["kapazitaet"] + 1e-9 < noetig:
+                    out.append((
+                        "C45",
+                        "Frischhalte-Kadenz unterdeckt: "
+                        f"{zahlen['seiten']} Seiten brauchen "
+                        f"{zahlen['bedarf']:.2f} Prüfungen/Tag ({noetig:.2f} "
+                        f"bei {zahlen['mindest']} % Mindestdeckung), der "
+                        f"Alltag liefert {zahlen['kapazitaet']:.2f}/Tag "
+                        f"({zahlen['budget']} je Lauf × "
+                        f"{zahlen['laeufe']:.2f} Läufe/Tag); selbst mit dem "
+                        f"harten Limit wären es nur "
+                        f"{zahlen['kapazitaet_spitze']:.2f}/Tag – eine "
+                        "Kadenz, die nur im Dauer-Spitzenbetrieb aufgeht, "
+                        "baut keinen Rückstand ab. Takt, Limit oder "
+                        f"Intervall in {C45_SSOT} entscheiden (#912)."))
+    # d) Die Scorecard nennt die Ursache, nicht nur das Symptom.
+    scorecard = (script_texts or {}).get("release_scorecard.py", "")
+    if scorecard and C45_WACHE.replace(".py", "") not in scorecard:
+        out.append(("C45", "scripts/release_scorecard.py nutzt die "
+                           "Deckungsrechnung nicht – das Ticket nennte wieder "
+                           "nur das Symptom („Faktenalter blockiert“) und "
+                           "ließe sich nicht schließen (#912)."))
+
+    # e) Ein Vertrag ohne Test ist Prosa.
+    for name in C45_TESTS:
+        if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
+            out.append(("C45", f"scripts/tests/{name} fehlt – die Deckungs-"
+                               "Zusage wäre ungetestet (#912)."))
     return out
 
 

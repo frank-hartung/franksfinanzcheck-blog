@@ -735,3 +735,29 @@ still: Sie erzeugt eine Meldung mit Reparaturweg statt eines Funklochs.
 **Ehrliche Grenze:** Beide Prüfungen sagen nichts über die *Richtigkeit* eines
 Gates, nur über seine Erreichbarkeit. Ob ein Rat zutrifft, entscheidet weiter
 die Klassifikation der Wache selbst (Abschnitte A1, D1, D2).
+
+### F3 · Auch das Skript IM Workflow muss kompilieren (29.10.2026)
+
+Der Block unter `uses: actions/github-script@…` ist **JavaScript in YAML**. Die
+Python-Wachen sehen ihn nicht. Am 29.10.2026 traf der Squash-Merge von PR #943
+eine zwischenzeitlich gewanderte `main` (Environment-Gate #935); in
+`alert-on-failure.yml` standen danach zwei Zeichenketten ohne Komma –
+`SyntaxError: Unexpected string`, dazu eine verwaiste `failedStepNames.some(…)`-Zeile.
+Der Runner führt den Block als Funktion aus: **jeder** Lauf des Fehler-Alertings
+starb, also genau der Kanal, der solche Ausfälle meldet.
+
+```bash
+python3 scripts/workflow_js_wache.py --check     # Exit 0 sauber · 1 Befund · 2 nicht prüfbar (node fehlt)
+python3 scripts/workflow_js_wache.py --selftest  # Extraktion, J1/J2/J3, fail-closed ohne node
+npm run workflow:js                              # dasselbe als npm-Skript
+```
+
+| Befund | Bedeutung | Was du tust |
+|---|---|---|
+| **J1** | Ein `github-script`-Block kompiliert nicht; die Meldung nennt die Workflow-Zeile. | Meist ein Zusammenschnitt beim Zusammenführen: fehlendes Komma, verwaiste Zeile, doppelte Rat-Liste. Beide Fassungen vergleichen (`git log -p -- <datei>`), nicht raten. |
+| **J2** | `github-script` ohne `script:`-Block. | Der Schritt hätte nichts auszuführen und meldete trotzdem grün – Block ergänzen oder Schritt entfernen. |
+| **J3** | Leerer `script:`-Block. | Dasselbe: ergänzen oder entfernen. |
+
+Der Lauf „Skript-Syntax (liegender Stand)“ fährt diese Prüfung mit (Selbsttest
+zuerst). Ein fehlendes `node` ergibt **Exit 2** und damit einen roten Lauf –
+eine ausgefallene Messung ist kein Grün (C33).

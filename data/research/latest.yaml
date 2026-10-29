@@ -1,5 +1,5 @@
-generated_at: '2026-10-28T10:00:42Z'
-day: '2026-10-28'
+generated_at: '2026-10-29T10:24:27Z'
+day: '2026-10-29'
 mode: deterministic
 teams:
   trending:
@@ -243,57 +243,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Büroausstattung: Diese Kosten kannst du von der Steuer absetzen'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:Büroausstattung: Diese Kosten kannst du von der Steuer absetzen'
-    score: 0.55
-    keywords: []
-  - topic: Die Vorteile von Online-Konten und wie du sie nutzt
+  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Die Vorteile von Online-Konten und wie du sie nutzt
+    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
     score: 0.55
     keywords:
-    - Online-Konten
-    - Vorteile
-    - nutzen
-  - topic: Die besten Kreditkarten für den Alltag im Vergleich
-    pillar: konto-karten
+    - Kreditkarte Ausland
+    - Auslandsgebühren vermeiden
+    - Reisekreditkarte
+  - topic: Die Vorteile einer Kreditkarten-Versicherung
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Die besten Kreditkarten für den Alltag im Vergleich
+    source: topics:Die Vorteile einer Kreditkarten-Versicherung
     score: 0.55
     keywords:
-    - Kreditkarte
-    - Alltag
-    - Vergleich
-  - topic: Günstige Reisezeitpunkte für den Urlaub
-    pillar: mietwagen
+    - Kreditkarten-Versicherung
+    - Reiseversicherung
+    - Kreditkarten-Schutz
+  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:Günstige Reisezeitpunkte für den Urlaub
+    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
     score: 0.55
     keywords:
-    - Reise
-    - Urlaub
-    - SparTipps
-  - topic: Last-Minute Urlaubsangebote sichern
-    pillar: mietwagen
+    - E-Auto Ladekosten
+    - Stromtarif E-Auto
+    - Wallbox sparen
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Last-Minute Urlaubsangebote sichern
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     score: 0.55
     keywords:
-    - Last Minute Urlaub
-    - Reiseangebote günstig
-    - Sommerurlaub Schnäppchen
-  - topic: Preiswerter DSL-Anschluss für Zuhause
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
+  - topic: 'Router-Position optimieren: Mehr Empfang ohne neues Gerät'
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Preiswerter DSL-Anschluss für Zuhause
+    source: 'topics:Router-Position optimieren: Mehr Empfang ohne neues Gerät'
     score: 0.55
     keywords:
-    - DSL
-    - Anschluss
-    - Preiswert
+    - Router Standort
+    - WLAN Empfang verbessern
+    - WLAN Tipps
+  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    score: 0.55
+    keywords:
+    - Stromanbieter Pleite
+    - Grundversorgung Strom
+    - Anbieterinsolvenz
 live_web:
   enabled: false
   findings: []

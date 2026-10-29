@@ -3,6 +3,7 @@ title: "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden"
 description: Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen solltest, um Heizkosten zu senken und Fehler zu vermeiden.
 date: 2026-10-28T15:04:32Z
 draft: true
+reserve: true
 lastmod: 2026-10-28
 redaktionelle_pruefung:
   risikoklasse: "erhoeht"

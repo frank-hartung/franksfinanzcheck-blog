@@ -76,6 +76,36 @@ selbst fehlt. Diese Heilung kann ihn nicht erzeugen — sie kann nur dafür sorg
 dass er in **einem** Schritt vollständig, präzise und ohne Deploy-Versuch
 behebbar ist, und dass die Lücke nicht wieder unsichtbar wird.
 
+### 1.3 Nachtrag 29.10.2026 — der Merge selbst wurde zum Vorfall
+
+Beim Zusammenführen mit `main` (inzwischen mit dem Environment-Gate aus #935)
+zeigte sich ein zweiter, schwererer Befund derselben Bauart: Der Squash-Merge von
+PR #943 traf eine gewanderte `main`. In `.github/workflows/alert-on-failure.yml`
+stand danach:
+
+```js
+'4. Runbook: … lokal ohne Netz prüfbar mit `… --pruefen`.'
+'1. **Fail-closed – gewollt, kein Betriebsausfall.** Lies den …'   ← kein Komma
+   failedStepNames.some(s => /Produktive Ressource auflösen|…/)     ← verwaist
+```
+
+`node` sagt dazu `SyntaxError: Unexpected string`. Der Runner führt den
+`script:`-Block als Funktion aus — **das gesamte Fehler-Alerting war auf `main`
+tot**, und zwar genau der Kanal, der solche Ausfälle meldet. Zusätzlich hatte
+die verwaiste Zeile den Environment-Gate aus #935 aus der Erkennung geworfen
+(er wäre in die Klasse `worker-deploy` gefallen), und `package.json` trug
+`test:sicherheit` **doppelt** (JSON-Parser nehmen still den letzten Schlüssel —
+die neue Zeile war damit wirkungslos).
+
+Alle vier Stellen sind in diesem Vorgang geheilt (die Dateien wurden auf die
+saubere Vereinigung beider Fassungen gesetzt) **und** die Lücke hat jetzt eine
+Wache: `scripts/workflow_js_wache.py` kompiliert jeden `github-script`-Block mit
+`node --check` (umhüllt wie der Runner: `(async () => { … })()`), nennt die
+Zeile der Workflow-Datei und läuft im Lauf „Skript-Syntax (liegender Stand)“ —
+Selbsttest zuerst, `node` fehlt ⇒ Exit 2 statt Grün. Gegenprobe: dieselbe Wache
+gegen die kaputte Fassung von `main` gehalten meldet
+`J1 .github/workflows/alert-on-failure.yml:218 … (Workflow-Zeile 783)`.
+
 ---
 
 ## 2. Was in dieser Umgebung möglich ist — und was nicht
@@ -216,6 +246,9 @@ heute ausdrücklich NICHT bestätigt“).
 | `python3 scripts/actions_version_guard.py` | ✅ keine Drift |
 | `python3 scripts/manifest_guard.py` | ✅ grün |
 | `python3 scripts/worker_deploy_vorbereiten.py --selftest` | ✅ |
+| `python3 scripts/workflow_js_wache.py --selftest` + `--check` | ✅ Selbsttest (Extraktion, J1/J2/J3, fail-closed ohne node) · **alle 14 github-script-Blöcke in 8 Workflows kompilieren** |
+| `python3 -m unittest scripts.tests.test_workflow_js_wache` | ✅ **16 Tests** (inkl. der echten Bruchstelle vom 29.10. und der Gegenprobe gegen `main`) |
+| `npm run workflow:js` | ✅ Exit 0 |
 | vollständiger Python-Vertragslauf (`unittest discover`, 4312 Tests) | ✅ alle neuen/berührten Verträge grün; **11 Fehlschläge + 1 Fehler, die identisch auf `origin/main` @ `76efccb` fehlschlagen** (Bestands-/Siegel-Themen: `test_affiliate_*`, `test_alt_text_vorschlaege`, `test_belegketten_wache`, `test_frontmatter_duplikate`, `test_integrity_guard`, `test_inhalts_register` ×3, `test_lcp_image_optimizer`, `test_versicherungs_cluster_verlinkung`, `test_faktenfrische_823`) — in einem eigenen Worktree auf `main` gegengeprüft, nicht von diesem Vorgang |
 
 **Warum `test_ki_transportweg` hier auftaucht:** Der repo-weite T6-Vertrag verbietet
