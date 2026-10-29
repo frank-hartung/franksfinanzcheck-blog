@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T11:29:42Z",
-  "modus": "live",
-  "commit": "d5382e733ca632a3bdb7b202f4f9070097294ced",
+  "generated_at": "2026-10-29T13:35:59Z",
+  "modus": "kandidaten",
+  "commit": "b6ec0a60806b29fe5b209f296d0e327082b5717f",
   "kapazitaet": {
     "stichtag": "2026-10-29",
     "artikel": 106,
@@ -165,7 +165,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "817e019af392f429fd1e1f753476f4bb5f9ace067715e601b25054d1d5f2eed4",
+      "sha256": "124696ea89e78ea96c27807fd5c7e5bb00d350b986b4d31c0e58166d6505ba46",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -199,7 +199,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-      "sha256": "02f4f24f2e5f2e8663a9b2a5619480fb8d26f10b51d3d9edbd14476ea210381f",
+      "sha256": "cc6abfb7111374571d3d17818f8fa190cd02e53d0c52cccba252f64e11722a39",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -213,7 +213,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "fb81a9253b1e175884bbf55195e3ec3feef0e15431171f934062ab10f0c54b0c",
@@ -301,7 +301,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "c1f7d3020194407a23ae3e06083ce7635a63afecb19ff044db9fa379f32b3e5f",
+      "sha256": "6c9d2a078b5bc50e3944c08a8c6f8b728ff2f950ac27f3e594c9ae0803848e24",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -318,7 +318,7 @@
       "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "4545cb72c9e266325e39278e7f2bdb3a6191f5afd025ed04ce097fb45cbd2d18",
+      "sha256": "4cbfe1cd85eb5c2e6109fa164c5ce6342229d8a93536ee0f688b09f332a62d92",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -369,7 +369,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "a9fa9e7407125f65010f90b9b43cff0a52c75ad0f3c889b5b97f6a1098fdecd5",
+      "sha256": "610dfd9c9cf7ad21e4d6c8483d657744d39a411f3a7c2f9c5f5411eb3b2d03a4",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -386,7 +386,7 @@
       "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "18ee49e1000168f2e2d8f08a4fdd808b1ab8eda8728fa137349c485733780a56",
+      "sha256": "4bf2411e61d0fd7aa9f477541d9d6fcaca2014b99763e471139adcc087cea7d7",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -403,7 +403,7 @@
       "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "442a324bb891078539d34f0c2e810a724f57b79973c734e8000bb6858fc2dd1d",
+      "sha256": "89a108108ab83fe72e90c94102fe4406e0db939d9b63ae6f3e9600c27a289ca2",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -726,7 +726,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "239aac3839eda61f65cd1fb22ceea6b5dde4722d5f4b124c1caedfd7630062e2",
+      "sha256": "512327768a1aa6cba11c0a0324020d5fd29151dfd3261d353425e149b880f0ae",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -740,7 +740,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "ab4dbf3291ef4fd03acaab060c9cf3296e5ec5ef234dd4ac057d4b9a2ca18d8d",
@@ -760,7 +760,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "f468844e779aa6f947f029ec1b6fae39b2c74c22647fa74808f2fca696515b80",
+      "sha256": "4750d34ca95558c88039c4cdef1d5c83d40991b7241f2fc7c8234ef56d71bb1e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1165,7 +1165,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "8e8f895e975b059b1012aad2e2af92b56cd1e5f5453e5d4f0c715c2dd4af6fe2",
@@ -1287,7 +1287,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "f26ea56008e6f1425a0737b750a65c688db17d108840effe606ff703c3e022e7",
+      "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
