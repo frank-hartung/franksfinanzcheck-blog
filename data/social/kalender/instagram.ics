@@ -7,10 +7,10 @@ X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:instagram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheides
- t-du-richtig:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
-DTSTART:20261030T104500Z
-DTEND:20261030T110000Z
+ t-du-richtig:nutzen:2026-10-29@franksfinanzcheck.de
+DTSTAMP:20261029T113549Z
+DTSTART:20261029T174500Z
+DTEND:20261029T180000Z
 SUMMARY:Instagram: Wärmepumpe vs. Gasheizung 2026: So entscheidest du 
  richtig (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -21,9 +21,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstige
+ ren-konto:nutzen:2026-10-30@franksfinanzcheck.de
+DTSTAMP:20261029T113549Z
+DTSTART:20261030T104500Z
+DTEND:20261030T110000Z
+SUMMARY:Instagram: Bankgebühren senken: 7 Schritte zum günstigeren Kon
+ to (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-
+ 7-schritte-zum-guenstigeren-konto/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
+ -7-schritte-zum-guenstigeren-konto/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:instagram:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-f
  uer-schritt:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+DTSTAMP:20261029T113549Z
 DTSTART:20261031T104500Z
 DTEND:20261031T110000Z
 SUMMARY:Instagram: Dein Weg zu geringeren Monatskosten: Schritt für Sc
@@ -38,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixko
  sten-falle:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+DTSTAMP:20261029T113549Z
 DTSTART:20261101T104500Z
 DTEND:20261101T110000Z
 SUMMARY:Instagram: VPN Zuhause: Schutzschild oder unnötige Fixkosten-F
@@ -53,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die
  -kontrolle:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+DTSTAMP:20261029T113549Z
 DTSTART:20261103T104500Z
 DTEND:20261103T110000Z
 SUMMARY:Instagram: Haushaltskosten reduzieren: So gewinnst du die Kont
@@ -68,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-so
  fort-senken:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+DTSTAMP:20261029T113549Z
 DTSTART:20261105T104500Z
 DTEND:20261105T110000Z
 SUMMARY:Instagram: Kleine Energiespar‑Tricks: Deine Kosten sofort senk
@@ -81,24 +96,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-t
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstige
- ren-konto:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+UID:instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum
+ -monatlichen:nutzen:2026-11-06@franksfinanzcheck.de
+DTSTAMP:20261029T113549Z
 DTSTART:20261106T104500Z
 DTEND:20261106T110000Z
-SUMMARY:Instagram: Bankgebühren senken: 7 Schritte zum günstigeren Kon
- to (nutzen)
+SUMMARY:Instagram: ETF-Sparplan starten: Dein Schritt-für-Schritt-Anle
+ itung (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-
- 7-schritte-zum-guenstigeren-konto/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
- -7-schritte-zum-guenstigeren-konto/
+ : https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-
+ schritt-fuer-schritt-zum-monatlichen/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
+ -schritt-fuer-schritt-zum-monatlichen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-i
  m-ueberblick:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+DTSTAMP:20261029T113549Z
 DTSTART:20261107T104500Z
 DTEND:20261107T110000Z
 SUMMARY:Instagram: Stromkosten senken: Clevere Haushaltsgeräte im Über
@@ -111,24 +126,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum
- -monatlichen:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+UID:instagram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reiseka
+ sse-fuellen:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261029T113549Z
 DTSTART:20261108T104500Z
 DTEND:20261108T110000Z
-SUMMARY:Instagram: ETF-Sparplan starten: Dein Schritt-für-Schritt-Anle
- itung (nutzen)
+SUMMARY:Instagram: Strategisch sparen: So kannst du deine Reisekasse f
+ üllen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-
- schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
+ : https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so
+ -kannst-du-deine-reisekasse-fuellen/
+URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
+ o-kannst-du-deine-reisekasse-fuellen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spart
  ricks:nutzen:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+DTSTAMP:20261029T113549Z
 DTSTART:20261109T104500Z
 DTEND:20261109T110000Z
 SUMMARY:Instagram: Energieeffizienz im Haushalt: 5 schnelle Spartricks
@@ -141,26 +156,11 @@ URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reiseka
- sse-fuellen:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
+UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-10@fr
+ anksfinanzcheck.de
+DTSTAMP:20261029T113549Z
 DTSTART:20261110T104500Z
 DTEND:20261110T110000Z
-SUMMARY:Instagram: Strategisch sparen: So kannst du deine Reisekasse f
- üllen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so
- -kannst-du-deine-reisekasse-fuellen/
-URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
- o-kannst-du-deine-reisekasse-fuellen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-11@fr
- anksfinanzcheck.de
-DTSTAMP:20261028T231901Z
-DTSTART:20261111T104500Z
-DTEND:20261111T110000Z
 SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
  tvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -172,10 +172,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
- ntie-gas:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261028T231901Z
-DTSTART:20261112T104500Z
-DTEND:20261112T110000Z
+ ntie-gas:nutzen:2026-11-11@franksfinanzcheck.de
+DTSTAMP:20261029T113549Z
+DTSTART:20261111T104500Z
+DTEND:20261111T110000Z
 SUMMARY:Instagram: Sicher heizen: Was sie abdeckt und wie lange sie lä
  uft (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -183,6 +183,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
  etzt-dich-eine-preisgarantie-gas/
 URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
  uetzt-dich-eine-preisgarantie-gas/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
+ utzen:2026-11-12@franksfinanzcheck.de
+DTSTAMP:20261029T113549Z
+DTSTART:20261112T104500Z
+DTEND:20261112T110000Z
+SUMMARY:Instagram: Geld abheben im Ausland: Wo die Gebühren wirklich e
+ ntstehen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
+ nd-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
