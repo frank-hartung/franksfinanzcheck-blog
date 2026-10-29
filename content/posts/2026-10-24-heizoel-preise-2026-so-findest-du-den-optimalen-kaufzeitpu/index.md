@@ -37,6 +37,8 @@ faktencheck: 2026-10-07
 
 Du willst 300 € sparen und den richtigen Moment für den Kauf von Öl treffen im Modellfall? Dann beobachte die **Heizöl Preise** genau und bestelle am Tiefpunkt. So senkst du deine Kosten für das Heizen deutlich. Du musst dabei nicht auf Komfort in deinem Heim verzichten.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Eine kluge Planung schont dein Konto und sichert die Wärme für den Winter. Viele Haushalte verschenken jedes Jahr viel Geld durch einen falschen Zeitpunkt beim Kauf.
 
 Das muss nicht sein, wenn du ein paar einfache Regeln beachtest. Hier erfährst du alles über die Zyklen am Markt. Wir zeigen dir, wie du den Markt für Öl liest und zum besten Kurs zuschlägst.
