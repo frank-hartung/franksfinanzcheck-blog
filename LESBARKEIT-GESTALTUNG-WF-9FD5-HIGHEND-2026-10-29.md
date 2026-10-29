@@ -94,6 +94,41 @@ Danach: 111 Seiten, `hugo --minify` **grün**, 136 Inhaltsdateien ohne Blocker.
 
 ---
 
+## 1c. Beim Rebase gefunden: 10 Metadaten-Befunde auf `main` (mechanisch geheilt)
+
+Der E2E-Lauf des PRs lief nach der Frontmatter-Heilung in das **Snippet-Gate**:
+eine Description mit 160 Zeichen / 1018 px (Grenze 155 / 985). Die
+`metadaten_wache` zeigte den ganzen Stand: **10 Befunde in 6 Artikeln**
+(M2 Länge, M7 Breite, M3 `lastmod` vor `date`), alle aus dem Redaktionslauf
+#941.
+
+Geheilt wurden ausschließlich die Metadaten – Bedeutung, Kernaussage und
+Keywords bleiben, die Kürzungen liegen zwischen 2 und 22 Zeichen:
+
+| Artikel | vorher | nachher |
+|---|---|---|
+| `2026-08-12-dein-haus-sicher-schuetzen-…` | 1033 px (mit `…` abgeschnitten) | 972 px |
+| `2026-08-17-privathaftpflicht-…` | 158 Z · 989 px | 152 Z · 950 px |
+| `2026-09-21-zahnzusatzversicherung-…` | 1021 px (mit `…`) | 973 px |
+| `2026-10-23-stromanbieter-wechseln-…` | 158 Z · 991 px | 134 Z · 850 px |
+| `2026-10-28-dsl-und-internet-flat-…` | 160 Z · 988 px | 138 Z · 869 px |
+| `2026-10-25-strategisch-sparen-…` | `lastmod` 25.10. vor `date` 28.10. | `lastmod: 2026-10-28` |
+
+Beleg: `metadaten_wache` **0 Befunde**, `seo_cockpit --fail-on
+description-length,description-breite,heading-order` **grün** (P2: 0).
+
+## 1d. Beim Rebase gefunden: Siegel-Drift (nach Repo-Regel geheilt)
+
+Das **Integritäts-Siegel** war auf `main` ebenfalls rot: `scripts/internal_linker.py`
+ist nach #940 (`9bb3e86c1`, „restore sealed versions") festrelevant abgewichen
+und stand als `VERSIEGELBAR` in der Akte. Nach der Repo-Regel („ein Fix, der
+eine versiegelte Kerndatei berührt, ist erst fertig, wenn der Lock im selben
+Commit mit-signiert ist") wurde `python3 scripts/integrity_guard.py --heal`
+ausgeführt – nur diese eine Datei, mit Herkunft im Lock und Eintrag in
+`data/integrity_history.jsonl`. `--check` ist danach grün.
+
+---
+
 ## 2. Warum der Alarm so danebenlag (drei Ursachen, nicht eine)
 
 | # | Ursache | Beleg |
