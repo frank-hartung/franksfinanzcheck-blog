@@ -289,11 +289,20 @@ esac
         self.assertNotEqual(0, result.returncode)
         self.assertNotIn("DEPLOY_ERREICHT", result.stdout)
 
-    def test_actual_deploy_and_content_gates_not_unconditionally_enabled(self):
+    def test_cache_and_content_gate_not_unconditionally_enabled(self):
         steps = dict(gc.step_blocks((ROOT / ".github/workflows/deploy.yml").read_text()))
         for name in ("Deploy auf gh-pages", "Themenwelten – finales Veröffentlichungs-Gate"):
             self.assertNotIn("if: always()", steps[name])
-            self.assertNotIn("continue-on-error: true", steps[name])
+        # Das fachliche Gate bleibt hart. Der gh-pages-Cache ist seit #932
+        # kein Auslieferungs-Gate mehr: Sein originales outcome wird im
+        # Siegel nach dem offiziellen Pages-Deploy fail-closed ausgewertet.
+        self.assertNotIn("continue-on-error: true", steps["Themenwelten – finales Veröffentlichungs-Gate"])
+        cache = steps["Deploy auf gh-pages"]
+        self.assertIn("id: gh_pages_cache", cache)
+        self.assertIn("continue-on-error: true", cache)
+        workflow = (ROOT / ".github/workflows/deploy.yml").read_text()
+        self.assertIn("steps.gh_pages_cache.outcome", workflow)
+        self.assertIn('"${GH_PAGES_CACHE_OUTCOME:-}" != "success"', workflow)
 
 
 if __name__ == "__main__":
