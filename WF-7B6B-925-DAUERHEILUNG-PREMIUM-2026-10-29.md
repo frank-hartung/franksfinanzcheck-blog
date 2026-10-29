@@ -151,7 +151,24 @@ Dazu ein eigener Fund aus den Regressionstests: Die Fixture `DESC_OHNE_PUNKT` in
 
 ---
 
-## 8. Grenzen dieser Analyse
+## 8. CI-Lage des Pull Requests (29.10.2026, 13:00Z)
+
+16 Checks grün – darunter **alle, die diesen Vorgang betreffen**: Snippet-Gate, Metadaten-Wache (Quelle), H1-Wache, Linktext-Wache, Frontmatter-Vertrag, Integritäts-Siegel, Klartext-Wache, CodeQL (JS + Python), Gate, navigation, lesehilfen, syntax, Quellen/Stand/Einheit.
+
+Zwei Checks bleiben rot – **beide geerbt, keine davon aus diesem Diff**:
+
+| Check | Roter Schritt | Ursache | Beleg |
+|---|---|---|---|
+| `regression` | Code-Regression – Suite und Selbsttests | 4 inhaltliche Befunde auf `main` (21 Artikel ohne artikelgenaue Bild-Unterschrift → `test_top20_haben_zwei_abbildungen`, `test_live_wache_ist_gruen`, `test_register_ist_aktuell`; eine Pillarseite verlinkt einen Entwurf → `test_pillar_verlinkt_keinen_entwurf`) | identisch rot in einem sauberen `origin/main`-Checkout: `git worktree add /tmp/mainline origin/main && cd /tmp/mainline && python3 -m unittest scripts.tests.test_inhalts_register scripts.tests.test_versicherungs_cluster_verlinkung.BestandTest` |
+| `Playwright-Suite` | E2E-Suite ausführen | die Browser-Suite; derselbe Schritt war am 28.10. 17:23Z auf einem anderen Zweig (vor diesem Vorgang) ebenfalls rot. Die Specs matchen Datumswerte flexibel (`\d{2}\.\d{2}\.\d{4}`), das Diff ändert weder Layouts noch Texte – nur `lastmod` einer Datei | Run 40735300299 |
+
+Nebenbei und messbar: **jeder Deploy auf `main` seit dem 29.10. 10:36Z stirbt am „Manifest-Schutz“** – genau an dem `package.json`-Doppelschlüssel, den dieser PR in Abschnitt 7 behebt. Der Merge dieses PR entfrostet die Auslieferung wieder.
+
+**Empfehlung:** Den PR mergen, sobald die Redaktion die vier Inhaltsbefunde (Bild-Unterschriften, Register, Pillar-Link) in einem eigenen Vorgang gezogen hat – sie sind fachliche Entscheidungen, keine Mechanik, und gehören nicht in einen Snippet-Vorgang.
+
+---
+
+## 9. Grenzen dieser Analyse
 
 - Die Job-Logs des Actions-Laufs 40677860531 sind aus der Sandbox nicht abrufbar (Blob-Speicher nicht erreichbar). Belegt sind der rote Schritt und die Uhrzeit aus der Meldung #925 selbst sowie die verletzende Zeile aus dem Commit-Diff.
 - Der Hugo-Build und damit der Messpfad am gebauten HTML laufen im CI, nicht hier. Local bewiesen ist der Quellpfad (Wache + Heiler) gegen denselben Commit.
