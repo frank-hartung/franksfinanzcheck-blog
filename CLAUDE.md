@@ -1151,6 +1151,53 @@ Version wirklich die geprüfte war. Die Antwort ist die **Release-Scorecard**:
   `npm run release:artikel -- <slug>` · `npm run test:release`.
   Runbook mit den sechs Antworten: `docs/ANLEITUNG-RELEASE-SCORECARD.md`.
 
+### Ein Dauer-Alarm ist kein Alarm, sondern eine unbezahlte Rechnung (#912, 29.10.2026)
+
+Vom 20. bis 28.10.2026 war die Scorecard siebenmal rot (12 von 20 Läufen) – immer mit derselben
+Zeile „Faktenalter blockiert“, immer mit demselben offenen Ticket #912, das
+sich nicht schließen ließ. Die Ursache war keine Inhaltskrise, sondern eine
+Rechnung, die niemand angestellt hatte:
+
+| Kennzahl | Wert |
+|---|---|
+| Bedarf (Σ 1/Intervall über 106 Seiten) | **2,58 Faktenprüfungen/Tag** (≈ 18/Woche) |
+| Angebot (3 je Lauf × Di+Do) | **0,86/Tag** |
+| Deckung | **33 %** – Rückstand +12 Seiten/Woche |
+
+Die Intervalle waren richtig; **geliefert** wurde zu wenig. Damit war die
+Scorecard strukturell nicht grün zu bekommen – ein Dauer-Alarm ohne
+Schließpfad, den C14 in derselben Datei verbietet.
+
+- **Die Heilung ist mehr Lieferung, nicht weniger Messung:** Bestands-Takt
+  täglich statt Di+Do; Budget aus `planung`/`budget` der SSOT, elastisch per
+  `budget.auto_skalierung` (Sockel 3, `hartes_limit_pro_lauf` 10). Die
+  Intervalle (30/45/90) bleiben unangetastet.
+- **Vorlauf statt Kante:** `planung.vorlauf_tage` (7) macht eine Seite
+  *arbeitbar*, bevor sie fällig wird. Ein Rückstand ist binnen
+  `planung.nachhol_frist_tage` (7) abzubauen, sonst ist der Lauf rot – das ist
+  der Schließpfad.
+- **EDF statt Klassenrang:** Die Auswahl sortiert nach Frist
+  (earliest deadline first), nicht nach Risikoklasse. Vorher verhungerten
+  Standard-Seiten (90 Tage) unbegrenzt hinter saisonalen (30 Tage).
+- **Eine Regel, zwei Leser (C19):** `faktenfrische.faelligkeit` liefert seit
+  dem 29.10. auch `frist` und `restlaufzeit`; die Scorecard *liest* sie,
+  statt „faktencheck + Intervall“ ein zweites Mal zu rechnen.
+- **Die Ursache steht im Ticket:** `scripts/faktenfrische_kapazitaet.py`
+  rechnet Bedarf gegen Angebot (cron wird geparst, nie abgetippt), der Report
+  zeigt sie als Abschnitt „Faktenfrische-Deckung“, das Siegel trägt sie unter
+  `kapazitaet`.
+- **Der Bau wird rot, bevor der Bestand rot wird:** Governance **C45** prüft
+  statisch `max_artikel_pro_lauf (Sockel) × Läufe/Tag ≥ Bedarf ×
+  min_deckung_prozent` (110 %). Das harte Limit ist nur die Spitze und zählt
+  nicht als Plan – eine Kadenz, die erst im Dauer-Spitzenbetrieb aufgeht, baut
+  keinen Rückstand ab. Wächst der Bestand über die Kapazität, ist das ein
+  Bau-Befund mit Zahl, nicht ein Rätsel-Ticket Wochen später. Rückbauprobe:
+  cron zurück auf Di+Do → C45 nennt „0,86/Tag gegen 2,84/Tag nötig“.
+- Bedienung/Test: `npm run faktenfrische:deckung` ·
+  `python3 scripts/faktenfrische_kapazitaet.py --wache` ·
+  `npm run test:faktenfrische` (33 Unit-Tests + 36 Selbsttest-Fälle).
+  Vorgang: `RELEASE-SCORECARD-912-DAUERHEILUNG-PREMIUM-2026-10-29.md`.
+
 ## Verpasste Slots werden nachgeholt, nicht beklagt (Slot-Wache, seit #601, 05.10.2026)
 
 Am 05.10.2026 endete ein Publikationstag mit 1/2 LIVE, obwohl die

@@ -243,8 +243,29 @@ class TerminrechnungTests(unittest.TestCase):
 
     HEUTE = dt.date(2026, 10, 3)
 
-    def test_standard_intervall_90_tage(self):
-        fakten = {"faellig": {"intervall": 90},
+    def test_frist_kommt_aus_der_einen_faelligkeitsregel(self):
+        """Seit #912 liest die Scorecard die Frist, sie rechnet sie nicht nach.
+
+        Der Probetag stammt aus `faktenfrische.faelligkeit` selbst – die
+        Scorecard darf das Intervall nicht ein zweites Mal anwenden
+        (Lektion #521, Governance C19).
+        """
+        import faktenfrische as ff
+        cfg = ff.lade_config()
+        art = {"titel": "Aufräumen mit System", "beschreibung": "",
+               "keywords": ["Ordnung"], "pillar": "",
+               "faktencheck": dt.date(2026, 9, 1)}
+        status = ff.faelligkeit(art, cfg, self.HEUTE)
+        fakten = {"faellig": status, "art": art}
+        termin, ueberfaellig = rs.naechste_pruefung(
+            "x", {"risk": "standard"}, fakten, self.HEUTE)
+        self.assertEqual(termin, status["frist"].isoformat())
+        self.assertEqual(termin, "2026-11-30")      # 90 Tage ab 01.09.
+        self.assertFalse(ueberfaellig)
+
+    def test_frist_gewinnt_gegen_abweichendes_intervall(self):
+        """Eine zweite Rechnung darf das Ergebnis nicht mehr verschieben."""
+        fakten = {"faellig": {"frist": dt.date(2026, 11, 30), "intervall": 7},
                   "art": {"faktencheck": dt.date(2026, 9, 1)}}
         termin, ueberfaellig = rs.naechste_pruefung(
             "x", {"risk": "standard"}, fakten, self.HEUTE)
@@ -252,10 +273,18 @@ class TerminrechnungTests(unittest.TestCase):
         self.assertFalse(ueberfaellig)
 
     def test_ueberfaellig(self):
-        fakten = {"faellig": {"intervall": 30},
+        fakten = {"faellig": {"frist": dt.date(2026, 7, 1), "intervall": 30},
                   "art": {"faktencheck": dt.date(2026, 6, 1)}}
         termin, ueberfaellig = rs.naechste_pruefung(
             "x", {"risk": "saisonal"}, fakten, self.HEUTE)
+        self.assertTrue(ueberfaellig)
+
+    def test_erstrecherche_bleibt_ueberfaellig(self):
+        fakten = {"faellig": {"frist": None, "intervall": 30},
+                  "art": {"faktencheck": None}}
+        termin, ueberfaellig = rs.naechste_pruefung(
+            "x", {"risk": "standard"}, fakten, self.HEUTE)
+        self.assertIn("Erstrecherche", termin)
         self.assertTrue(ueberfaellig)
 
     def test_hoch_nimmt_review_termin(self):
