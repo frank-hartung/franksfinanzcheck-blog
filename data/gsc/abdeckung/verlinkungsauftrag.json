@@ -1,17 +1,5 @@
 [
  {
-  "grund": "ähnliches Thema",
-  "inlinks_jetzt": 0,
-  "quelle": "/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/",
-  "ziel": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
- },
- {
-  "grund": "ähnliches Thema",
-  "inlinks_jetzt": 0,
-  "quelle": "/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/",
-  "ziel": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
- },
- {
   "grund": "gleicher Pillar",
   "inlinks_jetzt": 0,
   "quelle": "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/",
@@ -25,8 +13,20 @@
  },
  {
   "grund": "gleicher Pillar",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/",
+  "ziel": "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/"
+ },
+ {
+  "grund": "gleicher Pillar",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/",
+  "ziel": "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/"
+ },
+ {
+  "grund": "gleicher Pillar",
   "inlinks_jetzt": 1,
-  "quelle": "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/",
+  "quelle": "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/",
   "ziel": "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/"
  }
 ]
