@@ -441,6 +441,16 @@ jobs:
             // Code-/Vertragsregression, kein Betriebsausfall: Es hilft kein
             // Neustart und kein Schlüssel, sondern eine Reparatur im Repo.
             const istSkriptSyntax = wfName === 'Skript-Syntax (liegender Stand)';
+            // WF-9FD5 / Meldung #901 (26.10.2026): Bei der Layout-Automatisierung
+            // ist rot NICHT gleich rot. Damals starb der Lauf am BAU – ein
+            // unquotierter Doppelpunkt im Frontmatter EINER Content-Datei –,
+            // und der allgemeine Rat („API-Key abgelaufen", „Workflow neu
+            // starten") führte in die falsche Richtung: Ein Neustart hätte
+            // denselben Bau wieder getötet. Bau-Ausfall und Befund bekommen
+            // deshalb getrennte Klassen mit getrenntem Rat.
+            const istLayoutAi = wfName === 'Layout-AI';
+            const layoutBauFailed = istLayoutAi &&
+              failedStepNames.some(s => String(s).includes('Website bauen'));
             const codeqlGateFailed = isCodeql &&
               failedStepNames.some(s => String(s).includes('Sicherheits-Gate'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
@@ -530,6 +540,15 @@ jobs:
               : istSkriptSyntax ? 'skript-syntax'
               // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
               : selbsttestFailed ? 'selbsttest'
+              // WF-9FD5 / #901: Für die Layout-Automatisierung ist rot nicht
+              // gleich rot. Der BAU kann sterben (dann gibt es keine Messung)
+              // oder die Prüfung kann Befunde haben. Beides bekommt einen
+              // eigenen Rat – der allgemeine („API-Key abgelaufen", „neu
+              // starten") hätte am 26.10.2026 nur denselben Ausfall wiederholt.
+              // Bewusst NACH `selbsttest`: Ein roter Selbsttest ist immer eine
+              // Code-Regression, unabhängig vom Kanal.
+              : layoutBauFailed ? 'layout-bau'
+              : istLayoutAi ? 'layout-audit'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -784,6 +803,19 @@ jobs:
                             '2. **Lokal nachfahren:** `python3 scripts/skript_syntax_wache.py --check` bzw. `npm run trigger:check`. Beide nennen Datei, Regel und den genauen Pfad – keine Rateschritte.',
                             '3. **Heilen:** Syntax mit `python3 scripts/skript_syntax_heiler.py --fix --commit` (auditierte letzte gültige Fassung) oder von Hand; Trigger-Befunde durch Ergänzen des Pfades in BEIDEN Listen (`push` und `pull_request`). Den Filter nie verengen, ohne den Grund im PR zu nennen.',
                             '4. **Grenze der Prüfung:** Die Trigger-Wache sagt, ob ein Gate ANSPRINGT – nicht, ob es das Richtige prüft. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt F2. Der nächste grüne Lauf auf `main` schließt diese Meldung selbst.'
+                          ]
+                      : runbookKlasse === 'layout-bau'
+                        ? [
+                            '1. **Einordnung: Der BAU ist gescheitert – es fand KEINE Layout-Prüfung statt.** Kein Neustart und kein Schlüssel helfen hier zuverlässig: Der Build stirbt an derselben Stelle wieder. Die erste Fehlerzeile steht in der Job-Zusammenfassung und in dieser Meldung (Abschnitt „Erste Fehlerzeile").',
+                            '2. **Häufigste Ursache seit 26.10.2026 (WF-9FD5):** ein unquotierter Doppelpunkt im Frontmatter einer Inhaltsdatei – `description: Stromkosten senken: …` bricht YAML ab. Nachfahren: `python3 scripts/frontmatter_wache.py` nennt Datei, Zeile und Spalte; `python3 scripts/frontmatter_wache.py --fix` zitiert genau die betroffenen Werte, ohne den Text zu ändern.',
+                            '3. **Andere Ursachen** nennt die Selbstdiagnose des Baus (leere Verzeichnisse unter `content/`, `wrong type for value`, Hugo ohne Extended). Runbook: `docs/ANLEITUNG-HUGO-BUILD.md`.',
+                            '4. Nach der Heilung: Der nächste grüne Lauf auf `main` misst wieder und schließt diese Meldung selbst. Der Bau prüft das Frontmatter inzwischen selbst (`.github/actions/hugo-build`, Vertrag H9) – ein zweiter solcher Ausfall wird vor dem Bau gestoppt, mit Datei und Zeile.'
+                          ]
+                      : runbookKlasse === 'layout-audit'
+                        ? [
+                            '1. **Einordnung: Befund der Layout-Prüfung, kein Bauausfall.** Der Bau ist grün; rot sind Befunde am erzeugten HTML (kaputte interne Links, fehlende Cover-Varianten, Alt-Texte, Meta/H1, DOM-Budget, Chunker-Vertrag).',
+                            '2. **Nachfahren:** `LAYOUT-REPORT.md` in der Job-Zusammenfassung, Zahlen in `.cache/layout/dom-audit.json`. Jede Zeile nennt Seite und Metrik.',
+                            '3. **Heilen oder begründen:** Inhalt/Struktur reparieren – oder, wenn eine Grenze wirklich zu eng ist, sie in `scripts/dom_audit.py` (eine Quelle) mit Messung anpassen. Runbook: `docs/LAYOUT-AUTOMATISIERUNG.md`. Der nächste grüne Lauf schließt die Meldung.'
                           ]
                       : runbookKlasse === 'selbsttest'
                         ? [

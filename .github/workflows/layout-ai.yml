@@ -59,6 +59,11 @@ on:
       - "assets/css/extended/**"
       - "scripts/dom_audit.py"
       - "scripts/layout_audit.py"
+      # WF-9FD5: Der Bau prüft das Frontmatter (scripts/frontmatter_wache.py).
+      # Ändert jemand die Wache, muss dieser Lauf sie prüfen.
+      - "scripts/frontmatter_wache.py"
+      - "scripts/tests/test_frontmatter_wache.py"
+      - ".github/actions/hugo-build/**"
       - "scripts/layout_browser_check.js"
       - "scripts/layout_annotations.py"
       - "scripts/check_covers.py"
@@ -93,15 +98,49 @@ jobs:
         with:
           version: "0.168.0"
 
+      # WF-9FD5 (Meldung #901, 26.10.2026): Ein toter Bau ist KEIN „Befund".
+      # Damals starb dieser Schritt an einem unquotierten Doppelpunkt im
+      # Frontmatter EINER Content-Datei; die Folgeschritte liefen weiter, der
+      # Bericht blieb leer und der Schluss-Schritt meldete „kritische Befunde
+      # (Exit 1)" – eine erfundene Zahl (STATIC_EXIT war nie gesetzt). Die
+      # Meldung riet deshalb zu „API-Key abgelaufen".
+      # Jetzt: id + tolerierter Fehlschlag, damit Bericht, Summary und Meldung
+      # noch geschrieben werden – rot wird der Lauf am Ende, mit der ECHTEN
+      # Ursache aus `erste-fehlerzeile`.
       - name: "Website bauen (identisch zur Produktion, minifiziert)"
+        id: build
+        continue-on-error: true
         uses: ./.github/actions/hugo-build
         with:
           args: "--minify"
           label: "Layout-Audit-Build"
 
+      # Eine Wahrheit für alle Folgeschritte. Nur der Exit-Code wandert in die
+      # Umgebung (Zahl, nichts Ausführbares); die Fehlerzeile selbst reist als
+      # `env:` in die Schritte, die sie anzeigen – niemals als Shell-Text.
+      - name: "Bauergebnis verankern (nicht raten)"
+        if: ${{ always() }}
+        env:
+          BAU_RC: ${{ steps.build.outputs.rc }}
+          FM_RC: ${{ steps.build.outputs.frontmatter }}
+        run: |
+          bau_rc="${BAU_RC:-}"
+          if [ -z "$bau_rc" ]; then
+            # Kein rc = die Action kam nicht bis zum Bau (Vorprüfung schon rot).
+            # Das ist ein eigener Zustand, keine 0.
+            bau_rc="unbekannt"
+          fi
+          echo "BAU_EXIT=${bau_rc}" >> "$GITHUB_ENV"
+          echo "FM_EXIT=${FM_RC:-}" >> "$GITHUB_ENV"
+          echo "Bau: ${bau_rc} · Frontmatter-Vorprüfung: ${FM_RC:-nicht gelaufen}"
+
       # ============ STATISCHES AUDIT ============
       - name: Statisches Layout-Audit (Links, Covers, Alt-Texte, DOM-Budget)
         id: static
+        # Ohne gebaute Seite gibt es nichts zu vermessen. Vorher lief der
+        # Schritt gegen ein leeres `public/` und lieferte Befunde über Seiten,
+        # die es nicht gab.
+        if: ${{ !cancelled() && env.BAU_EXIT == '0' }}
         run: |
           set +e
           python3 scripts/layout_audit.py 2>&1 | tee /tmp/layout-audit.log
@@ -138,7 +177,9 @@ jobs:
       # ============ BROWSER-AUDIT (Puppeteer) ============
       - name: Browser-Audit (Chrome headless – Performance & Fehler)
         id: browser
-        if: ${{ !cancelled() }}
+        # Ohne `public/` gibt es keine Seite zu laden. Der Audit meldete
+        # vorher „übersprungen" – ein Skip, der wie ein grünes Ergebnis aussah.
+        if: ${{ !cancelled() && env.BAU_EXIT == '0' }}
         run: |
           # Robuste Einrichtung: apt-get-Update zuerst, Fehler dürfen den
           # Step NICHT crashen (exit 100 bei fehlendem Paket-Index) – der
@@ -181,7 +222,30 @@ jobs:
       # ============ BERICHT IN DIE JOB-SUMMARY ============
       - name: Bericht in die Job-Summary übernehmen
         if: ${{ always() }}
+        env:
+          # Untrusted Text reist als Umgebungsvariable, nie als Shell-Quelltext.
+          BAU_URSACHE: ${{ steps.build.outputs.erste-fehlerzeile }}
         run: |
+          if [ "${BAU_EXIT:-}" != "0" ]; then
+            {
+              echo "## ⛔ Kein Bau – keine Messung"
+              echo ""
+              echo "Der Schritt **„Website bauen (identisch zur Produktion, minifiziert)\"** "
+              echo "ist gescheitert (Exit \`${BAU_EXIT:-unbekannt}\`). Es wurde **nichts** "
+              echo "gemessen: kein DOM-Budget, keine Links, kein Browser-Audit."
+              echo ""
+              echo "**Erste Fehlerzeile**"
+              echo ""
+              echo '```'
+              echo "${BAU_URSACHE:-(keine Fehlerzeile überliefert – siehe Schritt-Log)}"
+              echo '```'
+              echo ""
+              echo "Häufigste Ursache seit 26.10.2026 (WF-9FD5): ein unquotierter "
+              echo "Doppelpunkt im Frontmatter einer Inhaltsdatei. Die Vorprüfung "
+              echo "\`scripts/frontmatter_wache.py\` nennt Datei und Zeile und heilt "
+              echo "die Klasse mit \`--fix\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ -f LAYOUT-REPORT.md ]; then
             {
               echo "## 📐 LAYOUT-REPORT (Layout-Automatisierung)"
@@ -205,15 +269,33 @@ jobs:
         if: ${{ always() && github.event_name != 'pull_request' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         continue-on-error: true
+        env:
+          BAU_EXIT: ${{ env.BAU_EXIT }}
+          FM_EXIT: ${{ env.FM_EXIT }}
+          BAU_URSACHE: ${{ steps.build.outputs.erste-fehlerzeile }}
         with:
           script: |
             const fs = require('fs');
             const marker = process.env.ISSUE_MARKER;
-            const staticExit = Number(process.env.STATIC_EXIT ?? '1');
-            const browserExit = Number(process.env.BROWSER_EXIT ?? '0');
+            // WF-9FD5: Der Bau-Exit ist die ERSTE Frage, nicht die letzte.
+            // Vorher stand hier `STATIC_EXIT ?? '1'` – war der Bau gestorben
+            // (dann läuft das statische Audit nie), behauptete die Meldung
+            // „Statisches Audit: Exit 1" und „kritische Befunde". Eine
+            // erfundene Zahl, die drei Stunden Fehlersuche kostete.
+            const bauExit = (process.env.BAU_EXIT ?? '').trim();
+            const bauOk = bauExit === '0';
+            const bauUrsache = (process.env.BAU_URSACHE ?? '').trim();
+            const fmExit = (process.env.FM_EXIT ?? '').trim();
+            const staticRoh = (process.env.STATIC_EXIT ?? '').trim();
+            const browserRoh = (process.env.BROWSER_EXIT ?? '').trim();
+            const staticExit = staticRoh === '' ? null : Number(staticRoh);
+            const browserExit = browserRoh === '' ? null : Number(browserRoh);
+            const staticLief = staticExit !== null;
+            const browserLief = browserExit !== null;
             // 0 = grün · 1 = Befunde · 2 = Browser-Audit übersprungen (weich)
-            const browserToolError = !(browserExit === 0 || browserExit === 1 || browserExit === 2);
-            const green = staticExit === 0 && (browserExit === 0 || browserExit === 2);
+            const browserToolError = browserLief && !(browserExit === 0 || browserExit === 1 || browserExit === 2);
+            const green = bauOk && staticExit === 0
+              && (!browserLief || browserExit === 0 || browserExit === 2);
 
             const report = fs.existsSync('LAYOUT-REPORT.md')
               ? fs.readFileSync('LAYOUT-REPORT.md', 'utf8') : '_Kein Report erzeugt._';
@@ -258,15 +340,51 @@ jobs:
               return;
             }
 
+            const bauText = bauOk ? '✅ grün'
+              : `⛔ gescheitert (Exit ${bauExit || 'unbekannt'})`;
+            const staticText = !staticLief ? 'nicht gelaufen (Bau rot)'
+              : (staticExit === 0 ? '✅ ohne kritische Befunde' : `⚠️ Exit ${staticExit}`);
+            const browserText = !browserLief ? 'nicht gelaufen (Bau rot)'
+              : (browserExit === 2 ? 'übersprungen (kein Chrome)'
+                : (browserExit === 0 ? '✅ ohne Befund' : `⚠️ Exit ${browserExit}`));
+
             const parts = [
               marker,
-              '## ⚠️ Layout-Automatisierung meldet Probleme', '',
+              bauOk ? '## ⚠️ Layout-Automatisierung meldet Probleme'
+                    : '## ⛔ Layout-Automatisierung: der Bau ist gescheitert',
+              '',
               `**Lauf:** [${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`
                 + ` · **Commit:** \`${context.sha.slice(0, 8)}\``,
-              `**Statisches Audit:** Exit ${staticExit} · **Browser-Audit:** `
-                + (browserExit === 2 ? 'übersprungen (kein Chrome)' : `Exit ${browserExit}`),
+              `**Bau:** ${bauText} · **Statisches Audit:** ${staticText}`
+                + ` · **Browser-Audit:** ${browserText}`,
               '',
             ];
+            if (!bauOk) {
+              // WF-9FD5: Die Ursache steht im Klartext in der Meldung, nicht
+              // hinter einem Link auf ein Rohlog, das nicht überall abrufbar ist.
+              parts.push('### Die Website wurde nicht gebaut – es fand KEINE Prüfung statt');
+              parts.push('');
+              parts.push('**Erste Fehlerzeile:**');
+              parts.push('```');
+              parts.push(bauUrsache || '(keine Fehlerzeile überliefert – Schritt „Website bauen" im Lauf ansehen)');
+              parts.push('```');
+              parts.push('');
+              if (fmExit === '1') {
+                parts.push('Die **Frontmatter-Vorprüfung** hat den Bau gestoppt: Eine Inhaltsdatei '
+                  + 'würde Hugo beim Parsen töten. Heilung: '
+                  + '`python3 scripts/frontmatter_wache.py --fix` (zitiert die betroffenen Werte, '
+                  + 'ohne den Text zu ändern), danach erneut prüfen.');
+              } else {
+                parts.push('Häufigste Ursache seit 26.10.2026 (WF-9FD5): ein unquotierter '
+                  + 'Doppelpunkt im Frontmatter einer Inhaltsdatei. Die Vorprüfung '
+                  + '`scripts/frontmatter_wache.py` nennt Datei und Zeile; `--fix` heilt die Klasse.');
+              }
+              parts.push('');
+              parts.push('> Diese Meldung behauptet **keine** Layout-Befunde: Ohne gebaute Seite '
+                + 'gibt es keine Messung. Sie schließt sich beim ersten grünen Lauf.');
+              parts.push('');
+            }
+            if (bauOk && staticLief) {
             if (staticExit !== 0) {
               parts.push('### Statisches Audit (vollständiger LAYOUT-REPORT)');
               parts.push('```');
@@ -294,6 +412,7 @@ jobs:
               parts.push('```');
               parts.push(browserLog || '(kein Log)');
               parts.push('```', '');
+            }
             }
             parts.push(`<sub>Report-Artefakt: \`LAYOUT-REPORT.md\` (gitignored) · `
               + `Zahlen: \`.cache/layout/dom-audit.json\` · `
@@ -332,19 +451,36 @@ jobs:
       # ============ FAIL-CLOSED: ROTER LAUF BEI BEFUNDEN ============
       - name: Lauf rot stellen, wenn Befunde offen sind
         if: ${{ always() }}
+        env:
+          BAU_URSACHE: ${{ steps.build.outputs.erste-fehlerzeile }}
         run: |
-          static_exit="${STATIC_EXIT:-1}"
-          browser_exit="${BROWSER_EXIT:-0}"
+          # Reihenfolge = Wahrheitsreihenfolge (WF-9FD5): erst der Bau, dann
+          # die Prüfungen. Ein fehlender Wert ist „nicht gelaufen" – und das
+          # ist ein eigener Befund, keine 1 und keine 0.
+          bau_exit="${BAU_EXIT:-unbekannt}"
+          static_exit="${STATIC_EXIT:-}"
+          browser_exit="${BROWSER_EXIT:-}"
           fail=0
-          if [ "$static_exit" != "0" ]; then
-            echo "::error::Statisches Layout-Audit: kritische Befunde (Exit $static_exit) – Details in LAYOUT-REPORT.md und im Issue."
+          if [ "$bau_exit" != "0" ]; then
+            echo "::error title=Bau gescheitert::Die Website wurde nicht gebaut (Exit ${bau_exit}). Es fand KEINE Layout-Prüfung statt. Erste Fehlerzeile: ${BAU_URSACHE:-(nicht überliefert)}"
             fail=1
-          fi
-          if [ "$browser_exit" = "1" ]; then
-            echo "::error::Browser-Audit: Befunde auf den geprüften Seiten (Details im Issue)."
-            fail=1
-          elif [ "$browser_exit" != "0" ] && [ "$browser_exit" != "2" ]; then
-            echo "::error::Browser-Audit ist mit Werkzeugfehler abgebrochen (Exit $browser_exit) – fail-closed."
-            fail=1
+          else
+            if [ -z "$static_exit" ]; then
+              echo "::error::Bau grün, aber das statische Layout-Audit ist nicht gelaufen – fail-closed (eine ausgefallene Prüfung ist kein Freibrief)."
+              fail=1
+            elif [ "$static_exit" != "0" ]; then
+              echo "::error::Statisches Layout-Audit: kritische Befunde (Exit $static_exit) – Details in LAYOUT-REPORT.md und im Issue."
+              fail=1
+            fi
+            if [ -z "$browser_exit" ]; then
+              echo "::error::Bau grün, aber der Browser-Audit hat kein Ergebnis hinterlassen – fail-closed."
+              fail=1
+            elif [ "$browser_exit" = "1" ]; then
+              echo "::error::Browser-Audit: Befunde auf den geprüften Seiten (Details im Issue)."
+              fail=1
+            elif [ "$browser_exit" != "0" ] && [ "$browser_exit" != "2" ]; then
+              echo "::error::Browser-Audit ist mit Werkzeugfehler abgebrochen (Exit $browser_exit) – fail-closed."
+              fail=1
+            fi
           fi
           exit $fail

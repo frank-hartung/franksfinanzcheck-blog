@@ -298,6 +298,35 @@ Marker **und** den festen Titel. Issues aus einer älteren Workflow-Version
 (ohne Marker) werden damit übernommen und bei Grün geschlossen – sonst bliebe
 der alte Alarm offen und der nächste Befund erzeugte einen zweiten.
 
+## 6b. Vierte Lehre: ein toter Bau ist kein Befund (WF-9FD5, 26.10.2026)
+
+Der Lauf vom 26.10.2026 ([40336062251](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/40336062251),
+Meldung [#901](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/901))
+fiel am Schritt **„Website bauen“** aus: ein unquotierter Doppelpunkt im
+Frontmatter einer Content-Datei. Das statische Audit lief danach **nicht**
+(`skipped`), der Browser-Audit fand kein `public/` – und die Meldung behauptete
+trotzdem „Statisches Audit: Exit 1 · kritische Befunde“. Grund: Im
+Meldungsskript stand `STATIC_EXIT ?? '1'`; ein fehlender Wert wurde zur **1**.
+
+Drei Änderungen halten das fest:
+
+1. **Der Bau hat eine `id` und wird ausgewertet.** Sein Exit-Code steht als
+   `BAU_EXIT` in der Umgebung; Statisches Audit und Browser-Audit laufen nur
+   bei `BAU_EXIT == 0`. Der Schluss-Schritt meldet zuerst den Bau und kennt für
+   „nicht gelaufen“ einen eigenen Zustand (fail-closed), statt eine Zahl zu
+   erfinden.
+2. **Die Ursache steht im Text.** Die Build-Action gibt `erste-fehlerzeile`
+   aus; Meldung und Job-Summary übernehmen sie wörtlich.
+3. **Das Frontmatter wird vor dem Bau geprüft.** `scripts/frontmatter_wache.py`
+   läuft in `.github/actions/hugo-build` (Vertrag H9) und in `e2e.yml` und nennt
+   Datei, Zeile, Spalte. Heilung: `npm run frontmatter:fix`.
+
+Der Vertrag ist ausführbar geprüft: `scripts/tests/test_layout_ai_bauausfall.py`
+startet den echten Schluss-Schritt in acht Kombinationen (Bau rot, Audit nicht
+gelaufen, Browser-Fehler …) und verlangt in jeder Lage die Wahrheit.
+
+---
+
 ## 7. Zweite Lehre: eine Prüfung, die immer Alarm schlägt, wird abgeschaltet
 
 Der erste PR-Gate-Lauf (21.09.2026) war rot – und zwar an einer Stelle, die

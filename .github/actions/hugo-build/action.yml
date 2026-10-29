@@ -88,6 +88,18 @@ outputs:
   rc:
     description: "Exit-Code von Hugo (0 = grün). Auch gesetzt, wenn weiter-bei-fehler greift."
     value: ${{ steps.bauen.outputs.rc }}
+  erste-fehlerzeile:
+    description: >-
+      Die erste Fehlerzeile von Hugo (einzeilig, ohne Präfix) – leer im
+      Erfolgsfall. Aufrufer sollen sie in ihre Meldung übernehmen, statt
+      „Befunde" zu behaupten, wenn in Wahrheit der Bau gestorben ist.
+    value: ${{ steps.bauen.outputs.erste-fehlerzeile }}
+  frontmatter:
+    description: >-
+      Exit-Code der Frontmatter-Vorprüfung (0 = kein Blocker, 1 = Blocker,
+      leer = nicht gelaufen). Ein roter Bau mit `frontmatter=1` ist ein
+      Inhaltsfehler, kein Werkzeugfehler.
+    value: ${{ steps.frontmatter.outputs.rc }}
   log:
     description: "Pfad der geschriebenen Logdatei – für Folgeschritte und Artefakt-Upload."
     value: ${{ steps.bauen.outputs.log }}
@@ -134,6 +146,55 @@ runs:
           fi
         done
 
+    - name: "Inhalt vorprüfen (Frontmatter bricht den Bau sonst erst später)"
+      id: frontmatter
+      shell: bash
+      env:
+        FF_LABEL: ${{ inputs.label }}
+      run: |
+        # WOZU DIESER SCHRITT (WF-9FD5 / #901, 26.10.2026)
+        # Ein unquotierter Doppelpunkt in EINER Content-Zeile tötete den
+        # gesamten Bau – gemeldet wurde „assemble: failed to create page from
+        # pageMetaSource", ohne Datei, ohne Zeile. Die Meldung, die daraus
+        # entstand, riet zu „API-Key abgelaufen".
+        # Diese Vorprüfung nennt Datei, Zeile und Ursache, BEVOR Hugo startet.
+        # Sie ist fail-closed: Ist die Wache selbst nicht da, wird der Bau
+        # nicht freigegeben (eine ausgefallene Prüfung ist kein Freibrief).
+        set -uo pipefail
+        : "${GITHUB_OUTPUT:=/dev/null}"
+        : "${GITHUB_STEP_SUMMARY:=/dev/null}"
+        WACHE="scripts/frontmatter_wache.py"
+
+        if [ ! -f "$WACHE" ]; then
+          echo "rc=2" >> "$GITHUB_OUTPUT"
+          echo "::error title=Frontmatter-Vorprüfung fehlt::${WACHE} ist nicht vorhanden. Ohne diese Prüfung startet der Bau blind in den nächsten inhaltsbedingten Abbruch (WF-9FD5)."
+          exit 2
+        fi
+
+        BERICHT="${RUNNER_TEMP:-/tmp}/frontmatter-bericht.md"
+        set +e
+        python3 "$WACHE" --md-datei "$BERICHT"
+        rc=$?
+        set -e
+        if [ -s "$BERICHT" ]; then
+          cat "$BERICHT" >> "$GITHUB_STEP_SUMMARY" || true
+        fi
+        echo "rc=${rc}" >> "$GITHUB_OUTPUT"
+
+        if [ "$rc" -eq 0 ]; then
+          echo "✅ Frontmatter-Vorprüfung (${FF_LABEL}): kein Bau-Blocker."
+          exit 0
+        fi
+        if [ "$rc" -eq 1 ]; then
+          KURZ="$(python3 "$WACHE" --kurzbefund 2>/dev/null | head -n1 || true)"
+          [ -n "$KURZ" ] || KURZ="Frontmatter enthält einen Bau-Blocker."
+          echo "::error title=Frontmatter blockiert den Bau::${KURZ//$'\n'/ }"
+          echo "❌ ${FF_LABEL}: Frontmatter-Blocker – Hugo würde hier sterben. Ursache steht oben in der Zusammenfassung."
+          exit 1
+        fi
+        echo "::error title=Frontmatter-Vorprüfung defekt::Die Wache endete mit Exit ${rc} (Setup-Fehler). Der Bau wird nicht freigegeben – fail-closed."
+        exit "$rc"
+
     - name: "Bauen (pipefail + tee – der Exit-Code ueberlebt die Pipe)"
       id: bauen
       shell: bash
@@ -176,6 +237,7 @@ runs:
 
         {
           echo "rc=${rc}"
+          echo "erste-fehlerzeile="
           echo "log=${LOG}"
           echo "dauer=${DAUER}"
           echo "seiten=${SEITEN}"
@@ -200,6 +262,10 @@ runs:
         [ -n "$MELDUNG" ] || MELDUNG="Hugo endete mit Exit ${rc}, schrieb aber keine Zeile."
         # Annotationen sind einzeilig: Umbrueche und %/CR maskieren.
         SAUBER="$(printf '%s' "$MELDUNG" | tr -d '\r' | sed 's/%/%25/g' | tr '\n' ' ')"
+        # Die Erste-Fehlerzeile ist eine AUSGABE, nicht nur eine Annotation:
+        # Aufrufer (Layout-AI) bauen daraus ihre Meldung. Ohne sie behauptet
+        # ein roter Lauf „Befunde", obwohl in Wahrheit der Bau gestorben ist.
+        echo "erste-fehlerzeile=${SAUBER}" >> "$GITHUB_OUTPUT"
         echo "::error title=Hugo-Build: ${FF_LABEL}::${SAUBER}"
 
         # ---------- Selbstdiagnose der bekannten Ursachen ----------
