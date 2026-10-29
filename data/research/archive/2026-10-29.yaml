@@ -1,5 +1,5 @@
-generated_at: '2026-09-29T10:07:48Z'
-day: '2026-09-29'
+generated_at: '2026-10-29T10:24:27Z'
+day: '2026-10-29'
 mode: deterministic
 teams:
   trending:
@@ -22,20 +22,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.75
-  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
-      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-      als der reine Anbieterwechsel.
-    pillar: internet-dsl
-    signal: trending
-    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
-    score: 0.65
   - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
       ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
       statt sie automatisch zu verlängern.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.6
+    score: 0.65
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: trending
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.65
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -43,18 +42,19 @@ teams:
     signal: trending
     source: aktuelle_entwicklungen:konto-gebuehren-transparenz
     score: 0.6
+  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
+      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+      als der reine Anbieterwechsel.
+    pillar: internet-dsl
+    signal: trending
+    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
+    score: 0.6
   - topic: Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue
       Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten
       wieder fallen.
     pillar: konto-karten
     signal: trending
     source: aktuelle_entwicklungen:zinsumfeld-tagesgeld
-    score: 0.6
-  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
-      Ergebnis nimmt, lässt oft bares Geld liegen.
-    pillar: versicherungen
-    signal: trending
-    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
     score: 0.6
   - topic: Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an
       einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
@@ -84,61 +84,62 @@ teams:
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
   evergreen:
-  - topic: Die besten Strategien für den Aufbau eines Notgroschens
+  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     pillar: frugalismus
     signal: evergreen
-    source: topics:Die besten Strategien für den Aufbau eines Notgroschens
+    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
     score: 0.85
     keywords:
-    - Notgroschen
-    - Aufbau
-    - Strategien
-  - topic: 'Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
+    - Neujahrsvorsätze Geld
+    - finanzielle Ziele 2027
+    - Sparziele erreichen
+    - Gewohnheiten ändern
+  - topic: Energiekosten senken mit kleinen Veränderungen
     pillar: strom-sparen
     signal: evergreen
-    source: 'topics:Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
+    source: topics:Energiekosten senken mit kleinen Veränderungen
     score: 0.85
     keywords:
-    - Strompreis 2026
-    - Stromanbieter wechseln jetzt
-    - Strompreis Prognose
-    - Stromtarif wechseln Herbst
-  - topic: 'DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    - Energie
+    - Kosten
+    - SparTipps
+  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
     pillar: internet-dsl
     signal: evergreen
-    source: 'topics:DSL-Tarife im Vergleich: Die günstigsten Anbieter'
+    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
     score: 0.85
     keywords:
-    - DSL-Tarife
-    - günstige Anbieter
-    - Internetvergleich
-  - topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    - WLAN verbessern
+    - DSL Hacks
+    - Schnelles Internet zuhause
+    - Mesh Netzwerk
+  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
     pillar: mietwagen
     signal: evergreen
-    source: topics:5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
     score: 0.85
     keywords:
-    - Mietwagen
-    - Fehler
-    - vermeiden
-  - topic: 'Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
+    - E-Auto Mietwagen
+    - Elektromobilität
+    - Urlaub
+  - topic: 10 Tipps für günstige Reisekreditkarten
     pillar: konto-karten
     signal: evergreen
-    source: 'topics:Dispo-Zinsen senken: So verhandelst du mit deiner Bank'
+    source: topics:10 Tipps für günstige Reisekreditkarten
     score: 0.85
     keywords:
-    - Dispozinsen senken
-    - Überziehungszinsen
-    - Bank verhandeln
-  - topic: 'Hausratversicherung: Wer sie braucht und was sie leistet'
+    - Reisekreditkarten
+    - günstige Karten
+    - Reisekosten sparen
+  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Hausratversicherung: Wer sie braucht und was sie leistet'
+    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     score: 0.85
     keywords:
-    - Hausratversicherung vergleichen
-    - Hausrat absichern
-    - Hausrat Kosten
+    - Rechtsschutzversicherung
+    - Rechtsschutz Leistungen
+    - Rechtsstreit versichern
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -201,16 +202,6 @@ teams:
     source: pain_points:hausrat-unterschaetzt
     score: 0.7
   viral_outliers:
-  - topic: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.85
-  - topic: 'Privathaftpflicht: Warum sie unverzichtbar ist'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.84
   - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
     pillar: strom-sparen
     signal: viral_outlier
@@ -231,66 +222,81 @@ teams:
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  - topic: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.81
   - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
     pillar: konto-karten
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
+    pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+    pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
   niche_hooks:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
-    score: 0.55
-    keywords: []
-  - topic: 'Depot eröffnen: Worauf Anfänger 2026 achten sollten'
+  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Depot eröffnen: Worauf Anfänger 2026 achten sollten'
-    score: 0.55
-    keywords: []
-  - topic: Die Vorteile einer kostenlosen Kreditkarten-Umstellung
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Die Vorteile einer kostenlosen Kreditkarten-Umstellung
+    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
     score: 0.55
     keywords:
-    - Kreditkarten
-    - Umstellung
-    - Kostenlos
-  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
-    pillar: frugalismus
+    - Kreditkarte Ausland
+    - Auslandsgebühren vermeiden
+    - Reisekreditkarte
+  - topic: Die Vorteile einer Kreditkarten-Versicherung
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+    source: topics:Die Vorteile einer Kreditkarten-Versicherung
     score: 0.55
     keywords:
-    - Neujahrsvorsätze Geld
-    - finanzielle Ziele 2027
-    - Sparziele erreichen
-    - Gewohnheiten ändern
-  - topic: So kannst du deine Heizkosten um 20 % senken
+    - Kreditkarten-Versicherung
+    - Reiseversicherung
+    - Kreditkarten-Schutz
+  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
     pillar: strom-sparen
     signal: niche_hook
-    source: topics:So kannst du deine Heizkosten um 20 % senken
+    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
     score: 0.55
     keywords:
-    - Heizkosten sparen
-    - energiesparende Tipps
-    - Heizperiode
-  - topic: 'Ökostrom wechseln: Günstig und seriös im Vergleich'
+    - E-Auto Ladekosten
+    - Stromtarif E-Auto
+    - Wallbox sparen
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    score: 0.55
+    keywords:
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
+  - topic: 'Router-Position optimieren: Mehr Empfang ohne neues Gerät'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Router-Position optimieren: Mehr Empfang ohne neues Gerät'
+    score: 0.55
+    keywords:
+    - Router Standort
+    - WLAN Empfang verbessern
+    - WLAN Tipps
+  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Ökostrom wechseln: Günstig und seriös im Vergleich'
+    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
     score: 0.55
     keywords:
-    - Ökostrom Anbieter wechseln
-    - grüner Strom günstig
-    - Ökostrom Tarife vergleichen
+    - Stromanbieter Pleite
+    - Grundversorgung Strom
+    - Anbieterinsolvenz
 live_web:
   enabled: false
   findings: []

@@ -174,7 +174,11 @@ class Faktenfrische823Tests(unittest.TestCase):
                                 f'Unbelegter Preis-Trend behauptend zurück: {sent!r}')
         joined = norm(body)
         # Die amtliche Einordnung muss als Gegenanker stehen (destatis, Q1).
-        self.assertIn('14,9 %', body, 'destatis-Zahl 14,9 % fehlt (Befund 1).')
+        # Geprüft wird der NORMALISIERTE Text: Das Satzbild setzt nach Zahlen
+        # ein geschütztes Leerzeichen (U+00A0), und `norm()` glättet es. Ein
+        # Test, den eine typografische Feinheit bricht, schützt den Inhalt
+        # nicht – genau die Lehre aus #763, die dieses Modul selbst aufstellt.
+        self.assertIn('14,9 %', joined, 'destatis-Zahl 14,9 % fehlt (Befund 1).')
         para = [c for c in chunks(body) if '14,9' in c]
         self.assertTrue(para and any('statistische' in p and 'bundesamt' in p for p in para),
                         'Die 14,9 % müssen dem Statistischen Bundesamt zugeordnet sein.')

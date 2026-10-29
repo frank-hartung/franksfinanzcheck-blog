@@ -50,7 +50,7 @@ on:
       - "Pinterest-Watchdog"
       - "FrankAutoOps-Report"
       - "Affiliate-Integritäts-Wache (täglich)"
-      - "Saisonaler Hero-Refresh (Agent Reach + Claude)"
+      - "Saisonaler Hero-Refresh (Agent Reach + KI-Feinschliff)"
       - "Blog-Gesundheits-Check (täglich)"
       - "Mastodon-SEO"
       - "Premium-Governance"

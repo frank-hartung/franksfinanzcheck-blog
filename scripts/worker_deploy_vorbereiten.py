@@ -73,6 +73,10 @@ DEPLOY_DATEIEN = {
     ".github/workflows/worker-deploy.yml",
     "scripts/worker_deploy_vorbereiten.py",
     "scripts/worker_ressourcen.py",
+    # WF-829B/#922: Die Zugangsprüfung steht VOR dem Deploy. Ändert sie sich,
+    # muss der nächste Lauf beweisen, dass sie den Deploy noch trägt.
+    "scripts/worker_zugang.py",
+    "scripts/github_kommando.py",
     "scripts/worker_environment_guard.py",
 }
 

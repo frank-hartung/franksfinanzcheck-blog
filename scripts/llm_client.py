@@ -216,9 +216,36 @@ def _mit_bildern(messages: list, bild_teile: list) -> list:
     return aus
 
 
+class IncompleteResponseError(ValueError):
+    """Ein Provider hat die Ausgabe nicht nachweislich abgeschlossen.
+
+    Nur den technischen Finish-Code weitergeben, niemals den Antworttext oder
+    einen möglicherweise sensiblen Provider-Fehler in einen Diagnose-Report.
+    """
+
+    def __init__(self, reason):
+        # Finish-Codes sind eine geschlossene Menge, keine freie Fehlermeldung.
+        # Eine bloße Zeichenfilterung könnte ein Token aus der API zurückgeben.
+        known = {
+            "FEHLT", "LENGTH", "CONTENT_FILTER", "TOOL_CALLS", "FUNCTION_CALL",
+            "FINISH_REASON_UNSPECIFIED", "MAX_TOKENS", "SAFETY", "RECITATION",
+            "LANGUAGE", "OTHER", "BLOCKLIST", "PROHIBITED_CONTENT", "SPII",
+            "MALFORMED_FUNCTION_CALL", "UNEXPECTED_TOOL_CALL", "IMAGE_SAFETY",
+            "IMAGE_PROHIBITED_CONTENT",
+        }
+        code = str(reason or "FEHLT").upper()
+        self.reason = code if code in known else "UNBEKANNT"
+        super().__init__(f"Antwort nicht abgeschlossen ({self.reason})")
+
+
+def _require_finish(reason, expected):
+    if not isinstance(reason, str) or reason.lower() != expected.lower():
+        raise IncompleteResponseError(reason)
+
+
 def _call_openai_like(url, api_key, messages, system, model,
                       temperature, max_tokens, timeout, bild_teile=None,
-                      extra_payload=None):
+                      extra_payload=None, require_complete=False):
     """Chat-Completions-Protokoll bei den kostenlosen Dritt-Hostern.
 
     Der Name beschreibt das Protokoll – es führt nie zur kostenpflichtigen
@@ -247,8 +274,10 @@ def _call_openai_like(url, api_key, messages, system, model,
         body,
         timeout,
     )
-    return ((payload.get("choices") or [{}])[0]
-            .get("message", {}).get("content") or "").strip()
+    choice = (payload.get("choices") or [{}])[0]
+    if require_complete:
+        _require_finish(choice.get("finish_reason"), "stop")
+    return (choice.get("message", {}).get("content") or "").strip()
 
 
 def cloudflare_url() -> str:
@@ -278,7 +307,7 @@ def _ohne_denkspuren(text: str) -> str:
 
 def _call_openai_compatible_provider(provider, messages, system, model,
                                      temperature, max_tokens, timeout,
-                                     bild_teile=None):
+                                     bild_teile=None, require_complete=False):
     """Groq, NVIDIA NIM und Cloudflare – ein gemeinsamer HTTP-Transport."""
     if provider == "groq":
         url = GROQ_CHAT_URL
@@ -292,12 +321,13 @@ def _call_openai_compatible_provider(provider, messages, system, model,
         raise ValueError(f"Unbekannter Chat-Completions-Provider: {provider}")
     roh = _call_openai_like(
         url, key_for(provider), messages, system, model, temperature,
-        max_tokens, timeout, bild_teile, extra_payload=extra)
+        max_tokens, timeout, bild_teile, extra_payload=extra,
+        require_complete=require_complete)
     return _ohne_denkspuren(roh or "")
 
 
 def _call_gemini(messages, system, model, temperature, max_tokens, timeout,
-                 bild_teile=None):
+                 bild_teile=None, require_complete=False):
     key = key_for("gemini")
     url = ("https://generativelanguage.googleapis.com/v1beta/models/"
            f"{model}:generateContent")
@@ -328,8 +358,12 @@ def _call_gemini(messages, system, model, temperature, max_tokens, timeout,
                                "User-Agent": USER_AGENT,
                                "x-goog-api-key": key}, body, timeout)
     cand = (payload.get("candidates") or [{}])[0]
+    if require_complete:
+        _require_finish(cand.get("finishReason"), "STOP")
     parts = (cand.get("content") or {}).get("parts") or []
-    return "".join(p.get("text", "") for p in parts).strip()
+    # Gemini kann Denk- und finale Textteile nebeneinander liefern. Nur die
+    # eigentliche Antwort ist für den Aufrufer bestimmter Redaktionsinhalt.
+    return "".join(p.get("text", "") for p in parts if not p.get("thought")).strip()
 
 
 def probe_key(provider: str, secret: str, timeout: int = 20) -> tuple[int | None, str | None]:
@@ -428,13 +462,19 @@ def chat(provider: str,
          timeout: int = 180,
          attempts: int = 3,
          bilder: list | None = None,
-         raise_on_error: bool = False) -> str | None:
+         raise_on_error: bool = False,
+         require_complete: bool = False,
+         log_errors: bool = True) -> str | None:
     """Einheitlicher Chat-Call. Liefert Antworttext oder None.
 
     None bedeutet: Provider nicht verfügbar (kein Key) oder endgültiger
     Fehler nach allen Retries. Mit ``raise_on_error=True`` wird ein
     endgültiger Transport-/HTTP-Fehler nach dem gemeinsamen Retry-Plan
     erneut ausgelöst; das erhält vorhandene Provider-Rotationen.
+    ``require_complete`` verlangt einen erfolgreichen Finish-Code und weist
+    abgeschnittene, gefilterte oder nicht nachweislich beendete Antworten ab.
+    ``log_errors=False`` erlaubt Aufrufern, Fehler selbst ohne vertrauliche
+    Providerdetails zu protokollieren.
 
     `bilder` nimmt optional [{'mime': 'image/jpeg', 'data': <bytes>}]
     entgegen und trägt die Bildteile über denselben Weg aus. Ungültige
@@ -458,14 +498,15 @@ def chat(provider: str,
     last_err: Exception | None = None
     for i in range(max(1, attempts)):
         try:
+            complete_kw = {"require_complete": True} if require_complete else {}
             if provider in ("groq", "nvidia", "cloudflare"):
                 return _call_openai_compatible_provider(
                     provider, messages, system, model,
-                    temperature, max_tokens, timeout, bild_teile)
+                    temperature, max_tokens, timeout, bild_teile, **complete_kw)
             if provider == "gemini":
                 return _call_gemini(messages, system, model,
                                     temperature, max_tokens, timeout,
-                                    bild_teile)
+                                    bild_teile, **complete_kw)
             return None
         except urllib.error.HTTPError as e:
             last_err = e
@@ -483,8 +524,9 @@ def chat(provider: str,
                 continue
             break
     if last_err is not None:
-        print(f"  ⚠ llm_client[{provider}/{model}]: "
-              f"{type(last_err).__name__}: {last_err}", file=sys.stderr)
+        if log_errors:
+            print(f"  ⚠ llm_client[{provider}/{model}]: "
+                  f"{type(last_err).__name__}: {last_err}", file=sys.stderr)
         if raise_on_error:
             raise last_err
     return None

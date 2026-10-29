@@ -41,10 +41,46 @@ intervalle:
   erstrecherche_bei_erstellung: true
 
 budget:
-  max_artikel_pro_lauf: 3       # Rotation statt Rundumschlag
+  max_artikel_pro_lauf: 3       # Rotation statt Rundumschlag (Sockel)
   max_treffer_je_artikel: 6     # so viele Fundstellen ins Dossier
   max_quellen_frontmatter: 4    # so viele Belege in den Artikel
   web_max_zeichen: 1800         # Klartext-Auszug je Webseite
+  # ----------------------------------------------------------------
+  #  DECKUNGSRECHNUNG (29.10.2026, #912 „Produktionswahrheit rot“)
+  #  ------------------------------------------------------------
+  #  Befund: Das Budget war die einzige Mengengrenze des Bestands-
+  #  Takts – 3 Artikel je Lauf, zwei Läufe je Woche. Der Bestand
+  #  braucht nach den Intervallen oben aber rund 18 Prüfungen je
+  #  Woche (2,6 je Tag bei 106 Seiten). Die Kadenz war damit
+  #  strukturell unterdeckt (33 %): Jede Woche wurden zwölf Seiten
+  #  mehr überfällig, als geprüft werden konnten. Die Release-
+  #  Scorecard konnte deshalb NIE grün werden – ein Dauer-Alarm
+  #  ohne Schließpfad (C14), der am Ende nur noch Rauschen war.
+  #
+  #  Die Heilung ist nicht „weniger messen“: Die Intervalle oben
+  #  bleiben unangetastet. Es wird mehr geliefert.
+  auto_skalierung: true         # Budget folgt dem Bedarf (unten)
+  hartes_limit_pro_lauf: 10     # Obergrenze je Lauf (Laufzeit/Feeds)
+  #  Das harte Limit ist der Vertrag mit der Deckungs-Wache
+  #  (scripts/faktenfrische_kapazitaet.py, Governance C45): Es muss
+  #  den Bedarf auch an einem Spitzentag decken. Reicht es nicht
+  #  mehr, wird der Bau rot, BEVOR der Bestand rot wird.
+
+# --- Deckungsrechnung: Vorlauf, Nachholfrist, Horizont ---------------
+#  Warum ein Vorlauf? Ein Artikel wird nicht an dem Tag fällig, an
+#  dem er rot wird, sondern eine Woche vorher arbeitbar. Wer erst am
+#  Stichtag anfängt, arbeitet an einer roten Scorecard.
+planung:
+  # Arbeit beginnt, wenn die Frist so viele Tage entfernt ist.
+  vorlauf_tage: 7
+  # Ein Rückstand (bereits überfällige Seiten) muss binnen so vielen
+  # Tagen abgebaut sein – sonst ist der Lauf rot (Schließpfad).
+  nachhol_frist_tage: 7
+  # So weit rechnet die Simulation voraus (Sichtbarkeit, nicht Wahrheit).
+  horizont_tage: 60
+  # Statische Mindestdeckung für die Wache: Kapazität/Bedarf. 110 %
+  # lässt Luft für Spitzen (viele Seiten mit demselben Prüfdatum).
+  min_deckung_prozent: 110
 
 # --- Vertrauenswürdige Belegquellen --------------------------------
 # Rang 1 = amtlich/normsetzend, Rang 2 = etablierte Verbraucher-/
