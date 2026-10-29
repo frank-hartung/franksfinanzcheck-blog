@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
  er-schritt:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261030T064500Z
 DTEND:20261030T070000Z
 SUMMARY:LinkedIn: Dein Weg zu geringeren Monatskosten: Schritt für Sch
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
  ten-falle:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261102T064500Z
 DTEND:20261102T070000Z
 SUMMARY:LinkedIn: VPN Zuhause: Schutzschild oder unnötige Fixkosten-Fa
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
  kontrolle:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261103T064500Z
 DTEND:20261103T070000Z
 SUMMARY:LinkedIn: Haushaltskosten reduzieren: So gewinnst du die Kontr
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
  ort-senken:nutzen:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261104T064500Z
 DTEND:20261104T070000Z
 SUMMARY:LinkedIn: Kleine Energiespar‑Tricks: Deine Kosten sofort senke
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
  en-konto:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261105T064500Z
 DTEND:20261105T070000Z
 SUMMARY:LinkedIn: Bankgebühren senken: 7 Schritte zum günstigeren Kont
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
  -du-richtig:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261106T064500Z
 DTEND:20261106T070000Z
 SUMMARY:LinkedIn: Wärmepumpe vs. Gasheizung 2026: So entscheidest du r
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
  monatlichen:nutzen:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261109T064500Z
 DTEND:20261109T070000Z
 SUMMARY:LinkedIn: ETF-Sparplan starten: Dein Schritt-für-Schritt-Anlei
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
  -ueberblick:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261110T064500Z
 DTEND:20261110T070000Z
 SUMMARY:LinkedIn: Stromkosten senken: Clevere Haushaltsgeräte im Überb
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
  se-fuellen:nutzen:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261111T064500Z
 DTEND:20261111T070000Z
 SUMMARY:LinkedIn: Strategisch sparen: So kannst du deine Reisekasse fü
@@ -143,7 +143,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
  icks:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261029T185959Z
+DTSTAMP:20261029T232232Z
 DTSTART:20261112T064500Z
 DTEND:20261112T070000Z
 SUMMARY:LinkedIn: Energieeffizienz im Haushalt: 5 schnelle Spartricks 
@@ -153,6 +153,20 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
  ushalt-5-schnelle-spartricks/
 URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
  haushalt-5-schnelle-spartricks/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-13@fra
+ nksfinanzcheck.de
+DTSTAMP:20261029T232232Z
+DTSTART:20261113T064500Z
+DTEND:20261113T070000Z
+SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
+ vertrag (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

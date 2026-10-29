@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 29.10.2026 19:59 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.10.2026 00:22 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -110,6 +110,13 @@
   https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/
 - **19:15** ⏳ DNS-Hack testen: Antwortzeit statt gefühltem Tempo — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
+### Fr, 13. November 2026
+- **08:45** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **13:15** ⏳ DSL-Tarif für dein Zuhause: Das passende Angebot finden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
+- **19:15** ⏳ Finanzielle Freiheit erreichen: Denke dich reich – Geld — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 
 ## Zuletzt veröffentlicht
 
