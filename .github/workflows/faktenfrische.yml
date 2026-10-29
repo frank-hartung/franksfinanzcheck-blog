@@ -7,10 +7,25 @@
 #  ZWEI TAKTE, EIN SKRIPT:
 #    Erstellung → .github/workflows/content-engine-v2.yml
 #                 (Phase 3, `--neu --apply`)
-#    Bestand    → DIESER Workflow, Di + Do 06:40 MESZ.
+#    Bestand    → DIESER Workflow, TÄGLICH 06:40 MESZ.
 #                 Rotation nach Fälligkeit aus
 #                 data/agent_reach/faktenfrische.yaml
 #                 (YMYL 45 Tage, saisonal 30, Standard 90).
+#
+#  WARUM TÄGLICH (Reparatur #912, 29.10.2026)
+#  ------------------------------------------
+#  Der Bestand braucht 2,4–2,6 Faktenprüfungen je Tag (Σ 1/Intervall
+#  über ~106 Seiten). Der Takt lieferte Di + Do je 3 = 0,86 je Tag:
+#  33 % Deckung. Damit wurden JEDE WOCHE zwölf Seiten mehr überfällig
+#  als geprüft – die Release-Scorecard konnte nie grün werden und
+#  Ticket #912 nie schließen. Ein Dauer-Alarm ohne Schließpfad, den
+#  die eigene Governance (C14) verbietet.
+#
+#  Die Intervalle bleiben unangetastet (weniger messen wäre keine
+#  Heilung). Stattdessen: täglicher Takt + Budget, das die Deckungs-
+#  rechnung selbst bestimmt (`budget.auto_skalierung`, Obergrenze
+#  `hartes_limit_pro_lauf`), + Vorlauf `planung.vorlauf_tage`, damit
+#  Arbeit VOR der roten Kante beginnt.
 #
 #  Der Lauf schreibt NUR Frontmatter (`quellen`, `faktencheck`)
 #  und Dossiers unter data/research/artikel/. Artikeltexte
@@ -23,15 +38,17 @@ name: Faktenfrische (Bestand)
 
 on:
   schedule:
-    # Di + Do 06:40 MESZ – freier Slot zwischen Newsletter (06:30)
+    # Täglich 06:40 MESZ – freier Slot zwischen Newsletter (06:30)
     # und Content-Engine; entzerrt gegenüber agent-reach-research (Mo).
-    - cron: "40 4 * * 2,4"
+    # Die Deckung rechnet mit DIESER Zeile (faktenfrische_kapazitaet.py
+    # parst den cron) – wer den Plan ändert, ändert die Rechnung mit.
+    - cron: "40 4 * * *"
   workflow_dispatch:
     inputs:
       max:
-        description: "Wie viele Artikel in diesem Lauf?"
+        description: "Artikel in diesem Lauf (auto = Deckungsrechnung entscheidet)"
         required: false
-        default: "3"
+        default: "auto"
 
 permissions:
   contents: write
@@ -72,10 +89,16 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          EINGABE_MAX: ${{ github.event.inputs.max || '3' }}
+          EINGABE_MAX: ${{ github.event.inputs.max || 'auto' }}
         run: |
-          python3 scripts/faktenfrische.py --apply \
-            --max "${EINGABE_MAX}"
+          # „auto“ = die Deckungsrechnung bestimmt das Budget (Sockel
+          # budget.max_artikel_pro_lauf, Obergrenze hartes_limit_pro_lauf).
+          # Eine Zahl schaltet die Skalierung für diesen Lauf bewusst ab.
+          if [ "${EINGABE_MAX}" = "auto" ] || [ -z "${EINGABE_MAX}" ]; then
+            python3 scripts/faktenfrische.py --apply
+          else
+            python3 scripts/faktenfrische.py --apply --max "${EINGABE_MAX}"
+          fi
 
       - name: Belege & Dossiers committen
         env:
@@ -104,12 +127,28 @@ jobs:
             echo "Keine Änderungen."
           fi
 
+      # ------------------------------------------------------------
+      # Deckungs-Nachweis (Reparatur #912): Der Lauf ist erst fertig,
+      # wenn der Rückstand FRISTGERECHT abbaubar ist. Das ist der
+      # Schließpfad des Alarms – grün, sobald der Plan konvergiert.
+      # Dieselbe Rechnung wie im Report (eine Regel, C19).
+      # ------------------------------------------------------------
+      - name: Deckungs-Nachweis (Rückstand fristgerecht abbaubar?)
+        id: deckung
+        if: always()
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python3 scripts/faktenfrische_kapazitaet.py --wache | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Report als Artefakt sichern
+        if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: faktenfrische-report
           path: |
             FAKTENFRISCHE-REPORT.md
+            data/faktenfrische_queue.json
             data/research/artikel/*.md
           if-no-files-found: ignore
 
@@ -136,3 +175,11 @@ jobs:
           else
             echo "$ANZAHL Befunde (< $SCHWELLE) – kein Ticket."
           fi
+
+      # Nach allen Schreib- und Meldeschritten: Eine Unterdeckung ist ein
+      # eigener, lauter Befund – kein stiller Ausfall eines Schritts.
+      - name: Unterdeckung melden (letzter Schritt = roter Job)
+        if: steps.deckung.outcome == 'failure'
+        run: |
+          echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar (#912). Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
+          exit 1

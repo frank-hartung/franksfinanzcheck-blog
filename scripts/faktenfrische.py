@@ -292,7 +292,20 @@ def alle_artikel(scope: str = "alle") -> list[dict]:
 # ----------------------------------------------------------------------
 
 def faelligkeit(art: dict, cfg: dict, stichtag: dt.date | None = None) -> dict:
-    """(faellig, prio, grund, alter_tage) – Priorität 0 = am dringendsten."""
+    """(faellig, prio, grund, alter_tage, frist, restlaufzeit).
+
+    DIE EINE FÄLLIGKEITSREGEL. Publish-Gate (`publish_gate.
+    faktenfrische_failures`), Release-Scorecard und Deckungsrechnung lesen
+    ausschließlich diese Funktion – wer sie umgeht, baut eine zweite
+    Wahrheit (Lektion #521, Governance C19).
+
+    Seit 29.10.2026 (#912) liefert sie zusätzlich die FRIST selbst
+    (`frist` = letzter Prüftag + Intervall) und die Restlaufzeit in
+    Tagen. Vorher rechnete die Scorecard „faktencheck + Intervall“ ein
+    zweites Mal nach (§`naechste_pruefung`) – zwei Stellen, eine Zahl,
+    aber zwei Chancen, sich zu unterscheiden. Jetzt gibt es die eine
+    Stelle, und alle anderen lesen sie.
+    """
     stichtag = stichtag or heute()
     iv = cfg.get("intervalle") or {}
     text = " ".join([art.get("titel", ""), art.get("beschreibung", ""),
@@ -314,20 +327,25 @@ def faelligkeit(art: dict, cfg: dict, stichtag: dt.date | None = None) -> dict:
         if iv.get("erstrecherche_bei_erstellung", True):
             return {"faellig": True, "prio": 0, "klasse": klasse,
                     "grund": "Erstrecherche – noch nie faktengeprüft",
-                    "alter_tage": None, "intervall": intervall}
+                    "alter_tage": None, "intervall": intervall,
+                    "frist": None, "restlaufzeit": None}
         return {"faellig": False, "prio": 9, "klasse": klasse,
                 "grund": "Erstrecherche abgeschaltet", "alter_tage": None,
-                "intervall": intervall}
+                "intervall": intervall, "frist": None, "restlaufzeit": None}
 
     alter = (stichtag - art["faktencheck"]).days
+    frist = art["faktencheck"] + dt.timedelta(days=intervall)
+    rest = (frist - stichtag).days
     if alter >= intervall:
         return {"faellig": True, "prio": 1 if klasse != "standard" else 2,
                 "klasse": klasse,
                 "grund": f"{alter} Tage seit letzter Prüfung (Intervall {intervall} Tage, {klasse})",
-                "alter_tage": alter, "intervall": intervall}
+                "alter_tage": alter, "intervall": intervall,
+                "frist": frist, "restlaufzeit": rest}
     return {"faellig": False, "prio": 9, "klasse": klasse,
             "grund": f"frisch geprüft vor {alter} Tagen (Intervall {intervall} Tage)",
-            "alter_tage": alter, "intervall": intervall}
+            "alter_tage": alter, "intervall": intervall,
+            "frist": frist, "restlaufzeit": rest}
 
 
 # ----------------------------------------------------------------------
@@ -560,10 +578,14 @@ def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
         with open(basis + ".md", "w", encoding="utf-8") as fh:
             fh.write(text)
         with open(basis + ".json", "w", encoding="utf-8") as fh:
+            # `default=str`: `faellig` trägt seit #912 die Frist als Datum
+            # (`frist`). Ohne diesen Rückfall stirbt der ERSTE Lauf mit einem
+            # echten Prüfdatum an „Object of type date is not JSON
+            # serializable“ – ein Fehler, der erst in Produktion auffällt.
             json.dump({"slug": art["slug"], "titel": art["titel"], "erzeugt": dossier["erzeugt"],
                        "faellig": faellig, "geo": geo, "treffer": dossier["treffer"],
                        "befunde": befunde, "fehler": dossier["fehler"]},
-                      fh, ensure_ascii=False, indent=2)
+                      fh, ensure_ascii=False, indent=2, default=str)
     return basis + ".md"
 
 
@@ -897,24 +919,134 @@ def rearm_faktenfrische_hold(art: dict, beleg: str) -> bool:
 # Report
 # ----------------------------------------------------------------------
 
+def _kapazitaet_nachrechnen(cfg: dict, artikel: list[dict], budget: int,
+                            stichtag: dt.date) -> dict:
+    """Deckungszahlen für Bericht/Queue – nie ein Absturz, nie ein Scheinwert."""
+    try:
+        import faktenfrische_kapazitaet as kapazitaet
+        laeufe, _ = kapazitaet.laeufe_aus_workflow()
+        if not laeufe:
+            return {"nicht_beweisbar": "Laufplan (cron) nicht lesbar"}
+        return kapazitaet.plan(artikel, cfg, budget, laeufe, stichtag)
+    except Exception as exc:  # noqa: BLE001 – Bericht darf daran nicht sterben
+        return {"nicht_beweisbar": str(exc)}
+
+
+def budget_fuer_lauf(cfg: dict, artikel: list[dict], stichtag: dt.date | None = None,
+                     explizit: int | None = None,
+                     auto_erlaubt: bool = True) -> tuple[int, dict]:
+    """Wie viele Seiten dieser Lauf schafft – gerechnet, nicht geraten.
+
+    BEFUND #912 (29.10.2026): Das Budget war die einzige Mengengrenze des
+    Bestands-Takts (3 je Lauf, zwei Läufe je Woche) und deckte 33 % des
+    Bedarfs. Jede Woche wurden zwölf Seiten mehr überfällig, als geprüft
+    werden konnten; die Release-Scorecard konnte deshalb nie grün werden.
+
+    Die Heilung ist nicht „weniger messen“, sondern genug liefern: Ist
+    `budget.auto_skalierung` gesetzt, nimmt der Lauf so viele Seiten, wie
+    die Deckungsrechnung (`faktenfrische_kapazitaet`) für einen
+    fristgerechten Abbau braucht – nie unter dem Sockel
+    `max_artikel_pro_lauf`, nie über `hartes_limit_pro_lauf`.
+    Ein ausdrückliches `--max` gewinnt immer (Handbetrieb, Nachweise).
+    """
+    vorgaben = {"max_artikel_pro_lauf": 3, "auto_skalierung": True,
+                "hartes_limit_pro_lauf": 10}
+    vorgaben.update({k: v for k, v in (cfg.get("budget") or {}).items()
+                     if v is not None})
+    sockel = max(1, int(vorgaben["max_artikel_pro_lauf"]))
+    limit = max(sockel, int(vorgaben["hartes_limit_pro_lauf"]))
+    if explizit:
+        return max(1, int(explizit)), {"quelle": "--max", "sockel": sockel,
+                                       "limit": limit, "erreicht": True}
+    if not vorgaben.get("auto_skalierung") or not auto_erlaubt:
+        # `--neu` (Erstellungstakt der Content-Engine) bleibt beim Sockel:
+        # Dort ist die Frage „welche Seite ist neu?“, nicht „wie viel
+        # Rückstand ist da?“. Ein skaliertes Budget würde nur Leerlauf
+        # erzeugen – die Neu-Artikel sind ohnehin wenige.
+        grund = ("Auto-Skalierung aus" if not vorgaben.get("auto_skalierung")
+                 else "Erstellungstakt (--neu)")
+        return sockel, {"quelle": f"Sockel ({grund})",
+                        "sockel": sockel, "limit": limit, "erreicht": True}
+    try:
+        import faktenfrische_kapazitaet as kapazitaet
+        laeufe, _hinweise = kapazitaet.laeufe_aus_workflow()
+        if not laeufe:
+            # Ohne lesbaren Plan keine Scheinpräzision – Sockel, laut.
+            return sockel, {"quelle": "Sockel (Laufplan nicht lesbar)",
+                            "sockel": sockel, "limit": limit, "erreicht": False}
+        empfehlung = kapazitaet.empfohlenes_budget(
+            artikel, cfg, laeufe, stichtag or heute())
+    except Exception as exc:  # noqa: BLE001 – Sockel ist der sichere Fall
+        return sockel, {"quelle": f"Sockel (Deckungsrechnung nicht möglich: {exc})",
+                        "sockel": sockel, "limit": limit, "erreicht": False}
+    return max(sockel, int(empfehlung["budget"])), {
+        "quelle": "Auto-Skalierung (Deckungsrechnung)",
+        "sockel": sockel, "limit": limit,
+        "erreicht": bool(empfehlung["erreicht"]),
+        "plan": empfehlung["plan"],
+    }
+
+
+def _de_zahl(wert, stellen: int = 2) -> str:
+    """Deutsche Zahlenschreibweise für den Report (Lesetext, keine Daten)."""
+    try:
+        return f"{float(wert):.{stellen}f}".replace(".", ",")
+    except (TypeError, ValueError):
+        return "–"
+
+
+def _report_deckung(uebersicht: dict) -> list[str]:
+    """Der Abschnitt, der den Dauer-Alarm #912 erklärt hätte, bevor er kam."""
+    deckung = uebersicht.get("deckung_prozent")
+    if deckung is None:
+        return ["_Deckung nicht berechenbar – Bedarf oder Laufplan nicht lesbar. "
+                "Das ist ein Befund, kein Freibrief (fail-closed)._"]
+    zeilen = [
+        f"- Deckung: **{deckung:.0f} %** · Bedarf "
+        f"**{_de_zahl(uebersicht.get('bedarf_je_woche', 0), 1)}** Prüfungen/Woche",
+    ]
+    if uebersicht.get("abbau_tage") is not None:
+        zeilen.append(f"- Rückstand abgebaut in **{uebersicht['abbau_tage']} Tagen** "
+                      f"(Frist {uebersicht.get('nachhol_frist_tage', 7)} Tage)")
+    elif uebersicht.get("faellig"):
+        zeilen.append("- Rückstand **nicht fristgerecht abbaubar** – Kadenz in "
+                      "`data/agent_reach/faktenfrische.yaml` erhöhen "
+                      "oder Intervall fachlich entscheiden.")
+    else:
+        zeilen.append("- Kein Rückstand.")
+    zeilen.append("- Regel: `scripts/faktenfrische_kapazitaet.py` "
+                  "(einzige Fälligkeitsregel `faktenfrische.faelligkeit`, "
+                  "Governance C45).")
+    return zeilen
+
+
 def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> None:
     z = [
         "# Faktenfrische-Report",
         "",
         f"> Erzeugt von `scripts/faktenfrische.py` am {jetzt_utc()}"
         f"{' (Trockenlauf)' if trocken else ''}.",
-        "> Recherche: Agent Reach (nur lesend) · Fachprüfung: Claude über die",
-        "> Puter-Brücke (ohne Anthropic-API). Belege nur von der Allowlist in",
-        "> `data/agent_reach/faktenfrische.yaml`.",
+        "> Recherche: Agent Reach (nur lesend) · Fachprüfung über die",
+        "> Gratis-Kette aus `data/ki_transportweg.yaml` (`routing.faktenpruefung`).",
+        "> Belege nur von der Allowlist in `data/agent_reach/faktenfrische.yaml` "
+        "(kein kostenpflichtiger Anbieter, keine Browser-Brücke).",
         "",
         "## Überblick",
         "",
         f"- Geprüfte Seiten im Bestand: **{uebersicht['gesamt']}** "
         f"(davon Ratgeberseiten: {uebersicht.get('ratgeber', 0)})",
-        f"- Recherche-fällig: **{uebersicht['faellig']}**",
-        f"- In diesem Lauf bearbeitet: **{uebersicht['bearbeitet']}**",
+        f"- Recherche-fällig: **{uebersicht['faellig']}** "
+        f"(+{uebersicht.get('vorlauf', 0)} im Vorlauf)",
+        f"- In diesem Lauf bearbeitet: **{uebersicht['bearbeitet']}** "
+        f"(Budget {uebersicht.get('budget')}: {uebersicht.get('budget_quelle')})",
         f"- Durchschnittliche GEO-Reife: **{uebersicht['geo_schnitt']} %**",
         f"- Offene fachliche Befunde: **{uebersicht['befunde']}**",
+        "",
+        "## Deckung (Bedarf gegen Angebot)",
+        "",
+    ]
+    z += _report_deckung(uebersicht)
+    z += [
         "",
         "## Läufe",
         "",
@@ -1070,7 +1202,7 @@ def main() -> int:
         return 2
 
     cfg = lade_config()
-    budget = int(args.max or (cfg.get("budget") or {}).get("max_artikel_pro_lauf", 3))
+    stichtag = heute()
 
     if args.file:
         art = lade_artikel(args.file)
@@ -1081,9 +1213,14 @@ def main() -> int:
     else:
         bestand = alle_artikel(args.scope)
 
+    budget, budget_info = budget_fuer_lauf(cfg, bestand, stichtag, args.max,
+                                           auto_erlaubt=not args.neu)
+    vorlauf = int((cfg.get("planung") or {}).get("vorlauf_tage", 7))
+
     # Reserve-/Entwurfsartikel zählen als „neu“ – sie sollen VOR der
     # Veröffentlichung ihre Erstrecherche bekommen.
     kandidaten = []
+    vorlauf_kandidaten = []
     geo_luecken: dict[str, int] = {}
     geo_werte = []
     for art in bestand:
@@ -1091,22 +1228,44 @@ def main() -> int:
         geo_werte.append(geo["prozent"])
         for luecke in geo["offen"]:
             geo_luecken[luecke] = geo_luecken.get(luecke, 0) + 1
-        f = faelligkeit(art, cfg)
+        f = faelligkeit(art, cfg, stichtag)
         art["_geo"], art["_faellig"] = geo, f
         if args.neu and art.get("faktencheck") is not None:
             continue
         if f["faellig"]:
             kandidaten.append(art)
+        elif (f.get("restlaufzeit") is not None
+              and f["restlaufzeit"] <= vorlauf):
+            # VORLAUF (#912): Eine Seite wird arbeitbar, bevor sie fällig
+            # wird. Wer erst am Stichtag anfängt, arbeitet an einer roten
+            # Scorecard. Der Vorlauf ist kein zweiter Fälligkeitsbegriff –
+            # „fällig“ bleibt `faellig`, hier wird nur früher gearbeitet.
+            vorlauf_kandidaten.append(art)
 
-    # Reihenfolge: Dringlichkeit → Ratgeber-Silo vor Einzelartikel (eine
-    # Silo-Seite trägt die interne Verlinkung vieler Artikel) → Alter.
-    kandidaten.sort(key=lambda a: (a["_faellig"]["prio"],
-                                   0 if a.get("bereich") == "ratgeber" else 1,
-                                   -(a["_faellig"]["alter_tage"] or 9999)))
-    auswahl = kandidaten[:budget]
+    # Reihenfolge: EDF (früheste Frist zuerst) → Erstrecherche vor allem
+    # → Ratgeber-Silo vor Einzelartikel (eine Silo-Seite trägt die interne
+    # Verlinkung vieler Artikel) → Slug als stabiler letzter Schlüssel.
+    #
+    # WARUM EDF (Reparatur #912): Die alte Reihenfolge sortierte nach
+    # Prioritätsklasse (saisonal/YMYL vor standard). Bei dauerhaftem
+    # Rückstand verhungerten die Standard-Seiten (90 Tage) unbegrenzt,
+    # obwohl sie längst überfällig waren – die Klasse war stärker als die
+    # Frist. Earliest-Deadline-First ist die Reihenfolge, die nachweislich
+    # die wenigsten Fristen reißt, und sie macht Verhungern unmöglich.
+    def _edf(a: dict):
+        frist = a["_faellig"].get("frist")
+        return (0 if a["_faellig"]["prio"] == 0 else 1,
+                frist or dt.date.min,
+                a["_faellig"]["prio"],
+                0 if a.get("bereich") == "ratgeber" else 1,
+                a.get("slug") or "")
+
+    arbeitsvorrat = sorted(kandidaten + vorlauf_kandidaten, key=_edf)
+    auswahl = arbeitsvorrat[:budget]
 
     print(f"Faktenfrische: {len(bestand)} Artikel im Blick · {len(kandidaten)} fällig · "
-          f"{len(auswahl)} in diesem Lauf (Budget {budget})"
+          f"{len(vorlauf_kandidaten)} im Vorlauf ({vorlauf} Tage) · "
+          f"{len(auswahl)} in diesem Lauf (Budget {budget}, {budget_info['quelle']})"
           + (" · OFFLINE" if args.offline else ""))
 
     laeufe, befunde_gesamt, quellen_erreicht = [], 0, 0
@@ -1147,23 +1306,38 @@ def main() -> int:
             "aenderungen": aenderungen,
         })
 
+    # Deckungsnachweis für Bericht und Queue: EINE Rechnung, zwei Leser.
+    kapazitaet = budget_info.get("plan") or _kapazitaet_nachrechnen(
+        cfg, bestand, budget, stichtag)
+
     uebersicht = {
         "gesamt": len(bestand),
         "ratgeber": sum(1 for a in bestand if a.get("bereich") == "ratgeber"),
         "faellig": len(kandidaten),
+        "vorlauf": len(vorlauf_kandidaten),
         "bearbeitet": len(auswahl),
+        "budget": budget,
+        "budget_quelle": budget_info.get("quelle"),
         "geo_schnitt": round(sum(geo_werte) / len(geo_werte)) if geo_werte else 0,
         "befunde": befunde_gesamt,
         "geo_luecken": geo_luecken,
+        "deckung_prozent": kapazitaet.get("deckung_prozent"),
+        "bedarf_je_woche": kapazitaet.get("bedarf_je_woche"),
+        "abbau_tage": kapazitaet.get("abbau_tage"),
+        "nachhol_frist_tage": kapazitaet.get("nachhol_frist_tage"),
     }
     report_schreiben(laeufe, uebersicht, trocken=not args.apply)
 
     with open(QUEUE_PFAD, "w", encoding="utf-8") as fh:
         json.dump({"erzeugt": jetzt_utc(), "uebersicht": uebersicht,
+                   "kapazitaet": kapazitaet,
                    "offen": [{"slug": a["slug"], "titel": a["titel"],
                               "grund": a["_faellig"]["grund"],
+                              "faellig": bool(a["_faellig"]["faellig"]),
+                              "frist": (a["_faellig"]["frist"].isoformat()
+                                        if a["_faellig"].get("frist") else None),
                               "geo": a["_geo"]["prozent"]}
-                             for a in kandidaten[budget:]],
+                             for a in arbeitsvorrat[budget:]],
                    "laeufe": laeufe}, fh, ensure_ascii=False, indent=2)
 
     if laeufe:
