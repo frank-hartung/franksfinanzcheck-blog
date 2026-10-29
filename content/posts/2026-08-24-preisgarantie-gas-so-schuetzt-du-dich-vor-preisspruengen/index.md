@@ -17,7 +17,7 @@ kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglic
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung"]
 pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
-pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel: Vergleiche Tarife mit Preisgarantie und Wechselbonus. Jetzt die Schritt-für-Schritt-Anleitung lesen."
+pin_description: "*Werbung | Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung. Mehr Spartipps auf FranksFinanzcheck! #preisgarantie #gas #gaspreisspruenge"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "Informationen zu Strom- und Gaspreisen für Haushaltskunden"

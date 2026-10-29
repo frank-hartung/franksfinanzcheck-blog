@@ -6,7 +6,7 @@ draft: true
 tags: ["Stromkosten senken", "Stromanbieter wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten senken", "Stromtarif vergleichen"]
+keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten senken", "Stromtarif vergleichen", "Stromanbieter"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -16,7 +16,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Fachliche Überarbeitung nach Faktenfrische-Befund; redaktionelle Schlussprüfung ausstehend"
 pin_title: "Stromtarif vergleichen: Kosten und Bedingungen prüfen"
-pin_description: "*Werbung | Stromtarife vergleichen: So prüfst du Jahreskosten, Vertragsbedingungen und Fristen – mit Rechenbeispiel und Checkliste."
+pin_description: "*Werbung | Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung. Mehr Spartipps auf FranksFinanzcheck! #stromanbieter #wechseln #stromvergleich"
 cover:
   image: "images/covers/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen.jpg"
   alt: "Stromtarif und Jahreskosten vergleichen"

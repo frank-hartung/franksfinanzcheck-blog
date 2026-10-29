@@ -14,9 +14,9 @@ cover:
   alt: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält. Er erhöht nicht die Bandbreite und verschlüsselt DNS nicht automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Das verlagert das Vertrauen auf den gewählten DNS-Anbieter."
-keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern"]
+keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern", "DNS Server wechseln"]
 pin_title: "DNS wechseln leicht gemacht: Datenschutz und Filter updaten"
-pin_description: "*Werbung | DNS-Server wechseln: Datenschutz, Filter und Einrichtung in unter 5 Minuten – für Windows, Mac, Android, iPhone und FRITZ!Box. Kostenlos, sicher, rückgängig zu machen. Jetzt lesen!"
+pin_description: "*Werbung | DNS-Server wechseln: So vergleichst du Resolver, aktivierst DoH/DoT und richtest sie sicher ein. Bandbreite und WLAN werden nicht schneller. Mehr Spartipps auf FranksFinanzcheck! #dnsserver #wechseln #dnsresolver"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"

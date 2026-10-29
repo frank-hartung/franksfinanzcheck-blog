@@ -14,9 +14,9 @@ cover:
   alt: "DSL-Tarif für dein Zuhause: Das passende Angebot finden"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Den passenden DSL-Tarif findest du über deinen echten Bedarf, nicht über die größte Werbezahl. Für 1 bis 2 Personen reichen oft 50 bis 100 Mbit/s. Familien und Homeoffice-Haushalte fahren meist mit 100 bis 250 Mbit/s gut. Rechne immer den Effektivpreis über 24 Monate. Sonst verstecken sich dort schnell 250 € bis 400 € Mehrkosten."
-keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung"]
+keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "DSL-Tarif für dein Zuhause", "DSL Tarif für dein Zuhause", "DSL-Tarif"]
 pin_title: "Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen"
-pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren. Jetzt lesen."
+pin_description: "*Werbung | DSL-Tarif finden: Prüfe deinen Bedarf, den Effektivpreis über 24 Monate und Routerkosten. Das Angebot soll zu deinem Haushalt passen. Mehr Spartipps auf FranksFinanzcheck! #dsl #tarif #finden"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"

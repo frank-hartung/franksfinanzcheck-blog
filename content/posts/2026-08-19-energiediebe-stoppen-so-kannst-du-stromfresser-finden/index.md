@@ -17,7 +17,7 @@ kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekoste
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken"]
 pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
-pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr. Jetzt checken und bis zu 300 € im Jahr sparen."
+pin_description: "*Werbung | Energiediebe stoppen: Stromfresser finden statt raten. Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch gezielt. Mehr Spartipps auf FranksFinanzcheck! #energiediebe #stoppen #stromfresser"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,0 ct/kWh im Durchschnitt"

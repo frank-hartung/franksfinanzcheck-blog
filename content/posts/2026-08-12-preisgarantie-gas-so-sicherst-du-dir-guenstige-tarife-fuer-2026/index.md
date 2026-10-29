@@ -15,9 +15,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
-keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken"]
+keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas"]
 pin_title: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
-pin_description: "*Werbung | Mit einer Preisgarantie von 12 bis 24 Monaten bist du gegen Preissprünge gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
+pin_description: "*Werbung | Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung. Mehr Spartipps auf FranksFinanzcheck! #preisgarantie #gas #gastarife"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Gaspreisanalyse August 2026"

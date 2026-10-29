@@ -6,7 +6,7 @@ draft: true
 tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Gastarif vergleichen", "Gaspreisgarantie", "Gastarif wechseln"]
+keywords: ["Gasvergleich", "Gaskosten sparen", "Heizkosten senken", "Gastarif vergleichen", "Gaspreisgarantie", "Gastarif wechseln", "Gastarife vergleichen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -16,7 +16,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Fachliche Überarbeitung nach Faktenfrische-Befund; redaktionelle Schlussprüfung ausstehend"
 pin_title: "Gastarife vergleichen: Kosten und Fristen prüfen"
-pin_description: "*Werbung | Gastarife vergleichen: Jahreskosten, Vertragsbedingungen und Verbrauch prüfen – mit transparentem Rechenbeispiel und Checkliste."
+pin_description: "*Werbung | Gastarife fundiert vergleichen: Gesamtkosten und Vertragsbedingungen prüfen, Preisänderungen einordnen und den Gasverbrauch realistisch berechnen. Mehr Spartipps auf FranksFinanzcheck! #gasvergleich #gaskosten #sparen"
 cover:
   image: "images/covers/2026-10-26-gastarife-vergleichen-vor-dem-herbst.jpg"
   alt: "Gastarife und Jahreskosten vergleichen"
