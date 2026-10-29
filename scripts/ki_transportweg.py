@@ -410,6 +410,13 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # erlaubt ausschliesslich api.cloudflare.com/client/v4/accounts/<konto>/
     # workers/scripts/<bekannter-worker>/settings – kein /ai/, kein Modellhost.
     Path("scripts/worker_ressourcen.py"),
+    # Kein Modellaufruf: Zugangs-Diagnose fuer den Worker-Deploy (WF-829B /
+    # #922) – Token-Gültigkeit und die bestehenden Script-Bindungen, lesend.
+    # Ausgleich: scripts/tests/test_worker_zugang.TransportVertrag erlaubt
+    # ausschliesslich /user/tokens/verify und
+    # /accounts/<konto>/workers/scripts/<bekannter-worker>/settings – kein
+    # /ai/, kein Modellhost, kein zweiter Anbieter.
+    Path("scripts/worker_zugang.py"),
     # Kein Modellaufruf: vor dem Worker-Deploy ausschließlich die GitHub-
     # Environment-Policy für Reviewer, main-Branch und Admin-Bypass lesen
     # (WF-E813 / #815). Ausgleich: test_worker_environment_guard erlaubt

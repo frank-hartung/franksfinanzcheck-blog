@@ -245,6 +245,18 @@ scripts/worker_betrieb_wache.py --offline` (Repo-Seite), danach einmal
 „Cloudflare-Worker deployen" über **Run workflow** starten — der Lauf zeigt, ob
 die Umgebung greift.
 
+**Zugang prüfen, ohne zu deployen (WF-829B/#922, seit 29.10.2026):**
+Actions → **„Deploy-Zugang prüfen“** → *Run workflow* (`main`, Freigabe im
+Environment `cloudflare-produktion`). Der Lauf liest ausschließlich
+(`GET /user/tokens/verify` und die bestehenden Script-Einstellungen), legt
+nichts an und deployt nichts. Er nennt **alle** offenen Punkte in einem
+Durchgang und schreibt ein Dossier („was fehlt, wohin es gehört, welche
+Rechte der Token braucht“) in die Job-Zusammenfassung. Ohne diesen Knopf
+wäre der Zugang nur über einen Deploy-Anlauf prüfbar – also über den
+Fehler selbst. Lokal und ohne Netz: `python3 scripts/worker_zugang.py
+--pruefen` zeigt dieselben Klassen (`FEHLT`, `FORMAT`, `UNGUELTIG`,
+`RECHT`, `UNBEKANNT`, `BINDUNG`, `NETZ`, `OFFEN`) aus der eigenen Umgebung.
+
 ---
 
 ### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
@@ -470,6 +482,18 @@ Ein geschütztes HTTP-503-JSON mit `ok:false`/`kv:fehler` belegt einen KV-Ausfal
 eine 503-HTML-Seite dagegen nicht. Transiente Netz-/5xx-/429-Störungen werden
 begrenzt wiederholt. Weiterleitungen tragen den Leseschlüssel niemals weiter;
 der Messzugang geht ausschließlich an `https://abos.franksfinanzcheck.de`.
+
+**Zugang prüfen statt raten (WF-829B/#922, seit 29.10.2026):** Actions →
+**„Deploy-Zugang prüfen“** → *Run workflow* (`main`) beantwortet die Frage
+„was fehlt?“ ohne Deploy und ohne Wrangler. `scripts/worker_zugang.py`
+sammelt in **einem** Lauf: Token hinterlegt? Konto-ID im richtigen Format?
+Token aktiv? Leserecht auf die Worker-Einstellungen? Bindung `ABO` bzw. `DB`
+eindeutig? Jeder Befund steht einzeln als Annotation und im Dossier der
+Step Summary. `OFFEN` heißt ausdrücklich „nicht prüfbar“ – nie „in
+Ordnung“. Der Deploy prüft denselben Zugang vorher noch einmal
+(`Zugang prüfen (alle Befunde auf einmal, lesend)`); ein fehlendes Feld
+kostet deshalb keine zweite Freigabe-Runde mehr. Klassen und Massnahmen:
+`python3 scripts/worker_zugang.py --pruefen --md -`.
 
 **Falls der Worker-Deploy fehlt/veraltet ist:**
 

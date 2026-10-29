@@ -748,6 +748,37 @@ await run('Worker-Deploy: Deploy-Schritt rot → Deploy-Rat mit Live-Nachweis-Pf
                      { name: 'Deploy', conclusion: 'failure' }] }] },
   true, ['<!-- alert-runbook: worker-deploy -->', 'Ein grüner Plan ist kein Deploy', 'bau`-Stempel'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen']);
+// WF-829B/#922 (29.10.2026): Die Zugangsprüfung entsteht VOR dem Resolver
+//     (`worker_zugang.py`, Schritt „Zugang prüfen (alle Befunde auf einmal)“)
+//     und hat einen eigenen Prüf-Workflow, der nur liest. Beide Wege müssen
+//     denselben Einrichtungs-Rat tragen – sonst hätte die Umstellung des
+//     Prüfschritts genau den Befund ohne seinen Rat gelassen, den #922 meldet.
+await run('#922: Zugangs-Vorprüfung im Deploy rot → Einrichtungs-Rat (nicht Worker-Deploy-Rat)',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Deploy newsletter-worker', conclusion: 'failure', html_url: 'https://x/jobs/wz1',
+             steps: [{ name: 'Worker-Tests', conclusion: 'success' },
+                     { name: 'Selbsttest Deploy-Zugang (ohne Netz)', conclusion: 'success' },
+                     { name: 'Zugang prüfen (alle Befunde auf einmal, lesend)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: worker-deploy-zugang -->', 'Fail-closed – gewollt, kein Betriebsausfall',
+         'CF_WORKERS_DEPLOY_TOKEN', 'alle Befunde auf einmal', '„Deploy-Zugang prüfen“'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Ein grüner Plan ist kein Deploy']);
+await run('#922: eigener Prüf-Workflow rot (nur lesend) → derselbe Einrichtungs-Rat, eigene Identität',
+  { workflowName: 'Deploy-Zugang prüfen', branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    runId: 9221,
+    jobs: [{ name: 'Zugang lesend prüfen', conclusion: 'failure', html_url: 'https://x/jobs/wz2',
+             steps: [{ name: 'Selbsttest der Zugangsprüfung (Sabotage ohne Netz)', conclusion: 'success' },
+                     { name: 'Zugang prüfen (alle Befunde auf einmal) und Dossier schreiben', conclusion: 'failure' }] }] },
+  true, ['Vorgang **' + IDENTITIES['Deploy-Zugang prüfen'].code + '**',
+         '<!-- alert-runbook: worker-deploy-zugang -->', 'Fail-closed – gewollt, kein Betriebsausfall',
+         'cloudflare-produktion', 'worker_zugang.py --selftest'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Code-Regression']);
+await run('#922: roter Selbsttest der Zugangsprüfung → Selbsttest-Rat, NICHT Zugangs-Rat',
+  { workflowName: 'Deploy-Zugang prüfen', branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    runId: 9222,
+    jobs: [{ name: 'Zugang lesend prüfen', conclusion: 'failure', html_url: 'https://x/jobs/wz3',
+             steps: [{ name: 'Selbsttest der Zugangsprüfung (Sabotage ohne Netz)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: selbsttest -->', 'Code-Regression, kein Betriebsausfall'],
+  null, ['Fail-closed – gewollt', 'Häufigste Ursachen']);
 // 26.10.2026: CodeQL-Sicherheitswache. Das Gate war bei echten Fundstellen
 //     (js/incomplete-sanitization, js/regex/missing-regexp-anchor) still rot.
 await run('CodeQL-Gate: echte Fundstelle → Heilungs-Rat, kein Schlüssel-Rat',
