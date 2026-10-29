@@ -476,6 +476,10 @@ class VerhaltensSimulation(unittest.TestCase):
                                          "Cloudflare-Worker deployen",
                                          "CodeQL-Sicherheitswache",
                                          "Skript-Syntax (liegender Stand)",
+                                         # WF-829B/#922 (29.10.2026): eigener
+                                         # Prüfknopf für den Deploy-Zugang,
+                                         # nur lesend, mit eigenem Alarm-Kanal.
+                                         "Deploy-Zugang prüfen",
                                          boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name

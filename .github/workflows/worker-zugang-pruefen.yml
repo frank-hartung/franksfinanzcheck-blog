@@ -1,0 +1,102 @@
+# ============================================================
+#  DEPLOY-ZUGANG PRÜFEN – die Frage „was fehlt?“ ohne Deploy
+#  ------------------------------------------------------------
+#  WARUM DIESER WORKFLOW EXISTIERT (Vorgang WF-829B / Meldung #922,
+#  29.10.2026)
+#
+#  Bis heute gab es im Repository genau einen Weg, den produktiven
+#  Deploy-Zugang zu prüfen: einen Worker deployen. Der Lauf
+#  `40569123622` (27.10.2026) endete dabei in BEIDEN Jobs im Schritt
+#  „Produktive Ressource auflösen“ – nach 0 Sekunden, mit der
+#  ehrlichen Annotation „CF_WORKERS_DEPLOY_TOKEN fehlt im Environment
+#  cloudflare-produktion“. Fail-closed war richtig (der stille
+#  Nicht-Deploy vom 24.10.2026 ist der Gegenbeweis), aber:
+#
+#    · Jede Prüfung kostete eine Environment-Freigabe und einen
+#      Deploy-Anlauf – für eine Frage, die kein Deployment braucht.
+#    · Der Resolver bricht beim ERSTEN fehlenden Feld ab. Der Inhaber
+#      hinterlegt den Token, startet neu und bekommt den nächsten
+#      roten Lauf für das nächste Feld.
+#    · Geprüft wurde überhaupt nur, wenn Worker-Code oder die
+#      Deploy-Kette sich änderten. Der Zugang war der einzige Teil
+#      der Kette ohne eigenen Prüfknopf.
+#
+#  Dieser Workflow ist dieser Knopf. Er liest, er ändert nichts:
+#    · `GET /user/tokens/verify`                (lebt der Token? aktiv?)
+#    · `GET …/workers/scripts/<script>/settings` (Bindung ABO / DB)
+#  Er sammelt ALLE Befunde in EINEM Lauf, schreibt ein Dossier in die
+#  Step Summary und meldet jeden Befund als genau eine Annotation.
+#  Kein Wrangler, kein Deploy, keine Ressourcen-Erzeugung.
+#
+#  Umgebung: Das Environment `cloudflare-produktion` bleibt Pflicht –
+#  die Secrets liegen dort, und die Freigabe dokumentiert, wer die
+#  Produktionszugänge geprüft hat. Ein grüner Lauf hier ersetzt
+#  ausdrücklich KEINEN Deploy: erst der vollständige grüne Lauf von
+#  „Cloudflare-Worker deployen“ schließt WF-829B.
+#
+#  Runbook: docs/SICHERHEIT-BETRIEB-RUNBOOK.md, A4 (Einrichtung) und
+#  D2 (Worker-Rot eingrenzen).
+# ============================================================
+name: Deploy-Zugang prüfen
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-zugang-pruefen
+  cancel-in-progress: false
+
+jobs:
+  zugang:
+    name: Zugang lesend prüfen
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment:
+      name: cloudflare-produktion
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Nur von main prüfen
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          if [ "$REF" != "refs/heads/main" ]; then
+            echo "::error::Der Produktionszugang wird nur von main geprüft (Ref: $REF)."
+            exit 1
+          fi
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Selbsttest der Zugangsprüfung (Sabotage ohne Netz)
+        run: python3 scripts/worker_zugang.py --selftest
+
+      - name: Zugang prüfen (alle Befunde auf einmal) und Dossier schreiben
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_WORKERS_DEPLOY_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          KV_NAMESPACE_ID_ABO: ${{ vars.KV_NAMESPACE_ID_ABO }}
+          D1_DATABASE_ID: ${{ vars.D1_DATABASE_ID }}
+        run: |
+          set -euo pipefail
+          python3 scripts/worker_zugang.py --pruefen --md "$GITHUB_STEP_SUMMARY"
+
+      - name: Nächster Schritt (nur bei grünem Befund)
+        if: success()
+        run: |
+          {
+            echo ""
+            echo "### Nächster Schritt"
+            echo ""
+            echo "Der Zugang ist belegt. Jetzt deployen: Actions → "
+            echo "**„Cloudflare-Worker deployen“** → *Run workflow* (`main`)."
+            echo "Erst dieser grüne Deploy schließt Vorgang WF-829B."
+          } >> "$GITHUB_STEP_SUMMARY"
