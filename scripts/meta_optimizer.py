@@ -338,6 +338,10 @@ def extend_description(desc, a, target_min=DESC_OPT_MIN, target_max=DESC_OPT_MAX
 
 def fix_meta(a, use_ai):
     """Wendet Fixes an. Liefert (geändert, beschreibung_neu)."""
+    from editorial_review_gate import automatic_write_protected
+    if automatic_write_protected(a["path"]):
+        print("  YMYL: Metadaten bleiben an die Freigabe gebunden")
+        return False
     content = a["content"]
     changed = False
 

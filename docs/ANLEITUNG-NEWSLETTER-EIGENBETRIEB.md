@@ -93,6 +93,11 @@ Die drei Entscheide, die diese Form festlegen:
 >   setzt sie nur für diesen Deploy ein. Fehlende oder mehrdeutige Bindungen
 >   brechen vor Wrangler ab, statt eine ID zu raten. Ein lokales
 >   `wrangler deploy` ist nur noch für die Ersteinrichtung gedacht.
+> - **Zugang prüfen ohne Deploy (WF-829B/#922, 29.10.2026):** Actions →
+>   „Deploy-Zugang prüfen“ → *Run workflow* (`main`). Der Lauf liest nur
+>   (`/user/tokens/verify`, bestehende Script-Bindungen), nennt alle offenen
+>   Punkte in einem Durchgang und schreibt ein Dossier in die Step Summary.
+>   Lokal: `python3 scripts/worker_zugang.py --pruefen`.
 > - Der Worker sendet beim Dispatch **keine Tokens und keine Adressen**
 >   mehr; der Lifecycle-Workflow hat keine `token`-Eingabe mehr (Tokens
 >   standen sonst unmaskiert in öffentlichen Logs).

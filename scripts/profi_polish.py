@@ -389,6 +389,10 @@ def run_selftest() -> int:
 
 
 def write_polished(a, new_body):
+    from editorial_review_gate import automatic_write_protected
+    if automatic_write_protected(a["path"]):
+        print("  YMYL: Politur verworfen – redaktionelle Prüfung erforderlich")
+        return False
     content = a["path"] and open(a["path"], encoding="utf-8").read()
     parts = content.split("---", 2)
 

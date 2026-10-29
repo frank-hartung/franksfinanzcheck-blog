@@ -213,8 +213,23 @@ def certify_one(index) -> dict:
                 details = ["Gate-Vorheilung hat die Messfassung verändert – "
                            "erst dauerhaft heilen, dann erneut zertifizieren"]
                 reason = details[0]
+            # WF-D4E0/#884 (29.10.2026): Auch im ABGELEHNTEN Fall muss die
+            # Diagnose sagen, ob die Vorheilung die Messfassung verändert hat.
+            # Realer Schaden: Die Vorheilung teilte Absätze und führte dabei
+            # „23. Dezember" → „23 Dezember" (R13) ein; das Gate lehnte ab,
+            # `finally` stellte die Originalbytes zurück – das Zertifikat
+            # nannte einen Fund, den die Datei auf der Platte NIE hatte.
+            # Niemand konnte das nachprüfen, die Nacht darauf war identisch.
+            vorheilung_aktiv = index.read_bytes() != proof_bytes
             if not ready and not reason:
                 details = gate_findings(gate_text)
+                if vorheilung_aktiv:
+                    details.append(
+                        "Messfassung wurde durch die Gate-Vorheilung "
+                        "verändert und danach bytegenau zurückgestellt – "
+                        "der Befund oben gilt für die HEILFASSUNG, nicht "
+                        "für die Datei auf der Platte (Vorheilung prüft "
+                        "seit #884 den Publikations-Vertrag)")
                 if diag and diag.get("score") is not None \
                         and diag["score"] < 0.85:
                     schwach = ", ".join(

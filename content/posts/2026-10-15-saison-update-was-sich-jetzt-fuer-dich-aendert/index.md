@@ -183,11 +183,11 @@ Die Werte in dieser Tabelle sind frei gewählte Annahmen. Sie sind keine Marktda
 | Schritt der Rechnung | Rechnung | Ergebnis |
 | :--- | :--- | :--- |
 | Verbrauch im Jahr (Annahme) | frei gewählt | 3.500 kWh |
-| Kosten im alten Tarif bei 0,42 € je kWh | 3.500 × 0,42 | 1.470 € |
-| Kosten im neuen Tarif bei 0,30 € je kWh | 3.500 × 0,30 | 1.050 € |
-| Mögliche Ersparnis im Modell | 1.470 − 1.050 | 420 € |
+| Kosten im alten Tarif bei 0,42 Euro je kWh | 3.500 × 0,42 | 1.470 Euro |
+| Kosten im neuen Tarif bei 0,30 Euro je kWh | 3.500 × 0,30 | 1.050 Euro |
+| Mögliche Ersparnis im Modell | 1.470 − 1.050 | 420 Euro |
 
-Eine Faustregel hilft beim Einordnen. Ein Cent Preisabstand bringt bei 3.500 Kilowattstunden 35 € im Jahr. Ob ein Angebot diesen Abstand wirklich bringt, zeigt erst der Vergleich. Nutze dafür die Werte aus deiner letzten Rechnung.
+Eine Faustregel hilft beim Einordnen. Ein Cent Preisabstand bringt bei 3.500 Kilowattstunden 35 Euro im Jahr. Ob ein Angebot diesen Abstand wirklich bringt, zeigt erst der Vergleich. Nutze dafür die Werte aus deiner letzten Rechnung.
 
 Versicherungen kalkulieren ihre Prämien nach dem Risiko und der bisherigen Schadenhistorie aller Versicherten. Ein guter Vergleich beachtet nicht nur den Preis, sondern auch den Leistungsumfang im Falle eines Schadens. Manche Versicherer bieten Rabatte für Kombi-Verträge an, zum Beispiel für Auto und Hausrat in einem Paket. Hier solltest du aber genau prüfen, ob die Einzelverträge bei verschiedenen Firmen nicht doch günstiger wären. Oft lohnt es sich, alte Verträge alle paar Jahre zu kündigen und zu aktuellen Bedingungen neu abzuschließen.
 
@@ -198,10 +198,10 @@ Auch hier sind alle Werte frei gewählt. Sie sind keine Marktdaten. Die echten G
 
 | Schritt der Rechnung | Rechnung | Ergebnis |
 | :--- | :--- | :--- |
-| Grundgebühr im Jahr bei 9,90 € im Monat | 9,90 × 12 | 118,80 € |
-| Kreditkarte im Jahr (Annahme) | frei gewählt | 15 € |
-| Fixkosten im Jahr zusammen | 118,80 + 15 | 133,80 € |
-| Über zehn Jahre gerechnet | 133,80 × 10 | 1.338 € |
+| Grundgebühr im Jahr bei 9,90 Euro im Monat | 9,90 × 12 | 118,80 Euro |
+| Kreditkarte im Jahr (Annahme) | frei gewählt | 15 Euro |
+| Fixkosten im Jahr zusammen | 118,80 + 15 | 133,80 Euro |
+| Über zehn Jahre gerechnet | 133,80 × 10 | 1.338 Euro |
 
 Ein Konto ohne Grundgebühr spart den Betrag im Modell komplett ein. Über zehn Jahre kommt so eine vierstellige Summe zusammen. Ob sich der Wechsel lohnt, hängt an den Bedingungen. Gebühren für Karten und ein nötiger Geldeingang gehören in den Vergleich.
 
