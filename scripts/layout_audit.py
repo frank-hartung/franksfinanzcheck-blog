@@ -145,7 +145,8 @@ def check_internal_links():
         r"|<pre\b.*?</pre\s*>",
         re.S | re.I)
     for page in pages:
-        text = open(page, encoding="utf-8", errors="ignore").read()
+        with open(page, encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
         text = NOISE_RE.sub(" ", text)
         for m in href_pat.finditer(text):
             raw = m.group(1) if m.group(1) is not None else (
@@ -244,7 +245,8 @@ def check_alts():
     missing = []
     images_checked = 0
     for page in pages:
-        text = open(page, encoding="utf-8", errors="ignore").read()
+        with open(page, encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
         # nur der Inhaltsblock: Header-Logo/Footer-Deko haben eigene Verträge
         m = re.search(r"<article\b.*?</article>", text, re.S | re.I)
         body = m.group(0) if m else ""
@@ -326,7 +328,8 @@ def check_schema_and_meta():
         pages.append(page)
     no_schema, no_og, no_meta, no_h1 = [], [], [], []
     for page in pages:
-        text = open(page, encoding="utf-8", errors="ignore").read()
+        with open(page, encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
         if '"@type":"Article"' not in text and '"@type": "Article"' not in text:
             no_schema.append(os.path.basename(os.path.dirname(page)))
         if 'og:image' not in text:
@@ -525,7 +528,8 @@ def check_chunker_contract():
              if "/page/" not in f]
     checked = 0
     for page in pages:
-        text = open(page, encoding="utf-8", errors="ignore").read()
+        with open(page, encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
         if "ff-content-chunk" not in text:
             continue
         root, _nodes = dom_audit.parse_document(text)

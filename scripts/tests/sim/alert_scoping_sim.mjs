@@ -744,6 +744,16 @@ await run('Worker-Deploy ohne Produktions-Zugang → Einrichtungs-Rat, kein Schl
          'cloudflare-produktion', 'CF_WORKERS_DEPLOY_TOKEN', 'worker_ressourcen.py',
          '<!-- alert-runbook: worker-deploy-zugang -->', 'kein Betriebsausfall'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'Transienter Fehler']);
+await run('Worker-Deploy: Environment-Policy ungeschützt → Reviewer-/main-/Admin-Bypass-Rat',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'Produktions-Environment absichern (nur main, Reviewer, kein Admin-Bypass)',
+             conclusion: 'failure', html_url: 'https://x/jobs/wd-policy',
+             steps: [{ name: 'Produktions-Environment absichern (vor Zugriff auf Secrets)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: worker-deploy-zugang -->', 'Environment zuerst absichern',
+         'Required Reviewer', '`can_admins_bypass=false`', 'worker_environment_guard.py',
+         'CF_WORKERS_DEPLOY_TOKEN'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'GROQ', 'GITHUB_TOKEN']);
 await run('Worker-Deploy: rote Worker-Tests → Selbsttest-Rat (Code-Regression)',
   { workflowName: WORKER_DEPLOY, branch: 'main', event: 'push', conclusion: 'failure',
     jobs: [{ name: 'Deploy newsletter-worker', conclusion: 'failure', html_url: 'https://x/jobs/wd2',
