@@ -230,7 +230,7 @@ bleibt damit auch künftig ein Befund statt einer stillen Lücke.
 | Artefakte | `artefakt_waechter.py` · `reserve_artifacts.py --check` | ✅ 515 Artefakte · Snapshot vollständig |
 | Wachen | `url_substring_guard` · `clear_text_logging_guard` · `fm_boundary_guard --check` · `check_covers` | ✅ 1.118 / 580 / 136 Dateien · 106 Covers, 0 Probleme |
 | Governance | `python3 scripts/governance_contract.py` | ✅ **42/42 Regeln** |
-| Integritäts-Siegel | `python3 scripts/integrity_guard.py --gate` | ✅ 50 Kerndateien (HEAD `2e4c7ae`) |
+| Integritäts-Siegel | `python3 scripts/integrity_guard.py --gate` | ✅ 50 Kerndateien (gemessen auf `HEAD 2e4c7ae`). Nach dem Rebase auf `main` (`76efccb`) meldet das Gate `scripts/internal_linker.py` als **fremd und unversiegelt** – Folge von #940 (`9bb3e86`), das eine gesperrte Kerndatei ohne neue Signatur änderte. Dieser Vorgang fasst den gesperrten Kern nicht an und signiert fremde Änderungen nicht mit (C15); der Fall gehört zu #826/#940. |
 | Workflow-Audit | `python3 scripts/automation_premium_audit.py --strict` | ✅ rc 0 |
 | Selbsttests aller Wachen (der CI-Schritt, der im roten Lauf grün war) | `python3 scripts/selftest_runner.py` | ✅ **245 Wachen · 490 Uhr-Proben** (`+97` und `+1461` Tage vorgestellte Uhr) · 198,8 s · alles grün |
 | Vollsuite | `python3 -m unittest discover -s scripts/tests` | **4.249 Tests**, 6 Fehlschläge – **alle sechs vorbestehend** (Baseline-Gegenprobe in einem `git worktree` auf `HEAD 2e4c7ae`: identische 6 Fehlschläge, 0 durch diese Heilung verursacht) |
