@@ -185,7 +185,9 @@ jobs:
       #  Auslieferung der Live-Site nicht anhalten (C34), es darf aber nicht
       #  unbemerkt in main wandern. Grenzen und Breitenmaß stehen in
       #  scripts/serp_limits.py; dieselben Zahlen prüft metadaten_wache.py
-      #  an der Quelle – `--fail-on` sperrt genau die drei Codes.
+      #  an der Quelle – sie ist STRENGER als dieses Gate (jeder Befund M1–M7
+      #  macht sie rot, nicht nur die drei Snippet-Codes) und heilt seit
+      #  WF-7B6B / #925 mit `--fix` die Snippet-Klasse an der Quelle.
       #  Ankertext und Alt-Texte prüft daneben `scripts/linktext_wache.py`
       #  (aus dem Seobility-Lauf vom 27.10.2026, mit eigenen Ausnahmen und
       #  Selbsttest). Zwei Wachen für einen Befund laufen auseinander –

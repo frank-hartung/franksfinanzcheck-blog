@@ -487,6 +487,23 @@ jobs:
             //  Spezifische Klassen oben (Engine, Backup, Installation,
             //  Sicherheits-Wache) behalten Vorrang.
             // ================================================================
+            // ================================================================
+            //  WF-7B6B / #925 (29.10.2026): DAS SNIPPET-GATE MISST, ES RÄT NICHT
+            //  --------------------------------------------------------------
+            //  Der nächtliche E2E-Lauf wurde rot im Schritt „Snippet-Gate –
+            //  Snippetfenster und Rangfolge": eine Description mit 153
+            //  Zeichen und 1011 px (SSOT: 155/985). Die Meldung riet zu
+            //  API-Schlüsseln, GitHub-Ausfall und Neustart – drei Ursachen,
+            //  von denen keine zutreffen KANN: Das Gate liest gebautes HTML
+            //  und eine Python-Tabelle, es kennt keinen Schlüssel, kein
+            //  Modell und kein Netz. Der Rat kostete die Zeit, die der eine
+            //  wirksame Schritt braucht (Description kürzen).
+            //  Gilt für E2E-Tests (Playwright): Snippet-Gate, Metadaten-Wache,
+            //  Linktext-Wache, H1-Wache – lauter Messschritte am Bestand.
+            // ================================================================
+            const istE2E = wfName === 'E2E-Tests (Playwright)';
+            const messGateFailed = istE2E && failedStepNames.some(s =>
+              /Snippet-Gate|Metadaten-Wache|Linktext-Wache|H1-Wache/i.test(String(s)));
             const ersterRoterSchritt = String(failedStepNames[0] || '');
             const selbsttestFailed = /Selbsttest|Selftest/i.test(ersterRoterSchritt) || workerTestsFailed;
             // ================================================================
@@ -528,6 +545,9 @@ jobs:
               // Trigger-Vollständigkeit). Ein generischer „API-Key?"-Rat wäre
               // hier so falsch wie bei der Sicherheits-Wache (C34).
               : istSkriptSyntax ? 'skript-syntax'
+              // WF-7B6B / #925: ein Messgate am Bestand (Snippet, Metadaten,
+              // Linktext, H1) – eigener Rat, kein API-Key-Raten.
+              : messGateFailed ? 'messgate-bestand'
               // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
               : selbsttestFailed ? 'selbsttest'
               : 'allgemein';
@@ -784,6 +804,13 @@ jobs:
                             '2. **Lokal nachfahren:** `python3 scripts/skript_syntax_wache.py --check` bzw. `npm run trigger:check`. Beide nennen Datei, Regel und den genauen Pfad – keine Rateschritte.',
                             '3. **Heilen:** Syntax mit `python3 scripts/skript_syntax_heiler.py --fix --commit` (auditierte letzte gültige Fassung) oder von Hand; Trigger-Befunde durch Ergänzen des Pfades in BEIDEN Listen (`push` und `pull_request`). Den Filter nie verengen, ohne den Grund im PR zu nennen.',
                             '4. **Grenze der Prüfung:** Die Trigger-Wache sagt, ob ein Gate ANSPRINGT – nicht, ob es das Richtige prüft. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt F2. Der nächste grüne Lauf auf `main` schließt diese Meldung selbst.'
+                          ]
+                      : runbookKlasse === 'messgate-bestand'
+                        ? [
+                            '1. **Einordnung: gemessen, nicht geraten.** Dieses Gate prüft den gebauten Bestand gegen eine feste Grenze (Snippet-Fenster, Metadaten, Linktexte, H1). Es braucht keinen API-Schlüssel, kein Modell und kein Netz – ein abgelaufener GROQ-/GEMINI-Schlüssel, ein Ausfall der Plattform oder ein vorübergehender Fehler können diesen Schritt nicht rot machen.',
+                            '2. **Der Befund steht im Log** – mit Seite, Regel und Maß (z. B. „description-breite … 1011 px, max. 985 px“); die Zusammenfassung des Laufs nennt dieselbe Zeile. Lokal nachfahren: `hugo --destination public && python3 scripts/seo_cockpit.py --build public --fail-on description-length,description-breite,heading-order` (Snippet am Build) bzw. `python3 scripts/metadaten_wache.py` (Quelle).',
+                            '3. **Snippet-Befund (M2/M7):** Description an der Quelle kürzen – an der Wortgrenze, Satzende behalten, Grenzen in `scripts/serp_limits.py` (100–155 Zeichen, ≤ 985 px). Deterministisch geht das auch selbst: `python3 scripts/metadaten_wache.py --fix`. Seit dem 29.10.2026 (WF-7B6B / #925) heilt der Deploy-Pfad diese Klasse vor dem Veröffentlichen; ein Rot hier heißt: die Heilung hat nicht gegriffen oder ein Schreiber (Keyword-Gate, `meta_optimizer`) hat neu verletzt – dann Regressionstests: `python3 -m unittest scripts.tests.test_keyword_optimizer scripts.tests.test_meta_optimizer scripts.tests.test_metadaten_wache`.',
+                            '4. **Kein API-Schlüssel, kein Neustart.** Beides kann einen Messschritt nicht grün machen. Wird der Schritt selbst rot (Exit 2, Selbsttest rot), ist die Prüfung kaputt – dann ist es ein Code-Befund, kein Bestandsbefund.'
                           ]
                       : runbookKlasse === 'selbsttest'
                         ? [

@@ -499,9 +499,15 @@ class MetaSatzendeHeilungTests(unittest.TestCase):
     Nacht „Stock shortage“ meldete und den Pool nie auf RESERVE_TARGET kam).
     """
 
+    # WF-7B6B / #925 (29.10.2026): Die alte Fixture war 155 Zeichen bei
+    # 996 px – also selbst ein Snippet-Verstoß (SSOT: 155 Zeichen / 985 px).
+    # Ihr Punkt-Anhang wurde 156 Zeichen, und ein Heiler, der daran noch
+    # etwas ändert, war nicht „nicht idempot", sondern korrekt: Er hat einen
+    # Verstoß geheilt. Eine Idempotenz-Probe braucht einen Text, der die
+    # SSOT SCHON einhält – sonst testet sie die Heilung, nicht die Ruhe.
     DESC_OHNE_PUNKT = ("Erfahre, wie du im Spätsommer deine Gasrechnung senken "
-                       "kannst. Mit diesen Tipps startest du vorbereitet in den "
-                       "Herbst und sparst bei der Heizung bares Geld")
+                       "kannst: Mit diesen Tipps startest du vorbereitet in "
+                       "den Herbst und sparst bares Geld")
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()

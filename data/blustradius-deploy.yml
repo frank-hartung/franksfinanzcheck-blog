@@ -181,6 +181,35 @@ schritte:
       Keyword-Vertrag (Premium #303). Der Name endet hier, weil YAML den
       Rest ab „ #" als Kommentar liest – GitHub zeigt ihn genauso an.
 
+  # --- WF-7B6B / #925 (29.10.2026): Snippet-SSOT an der QUELLE ------------
+  # Vorfall: Ein Schreiber (Keyword-Gate) setzte am 27.10.2026 ein
+  # Schlüsselwort vor eine bereits 142 Zeichen lange Description – 153
+  # Zeichen, aber 1011 px. Der Zähler des Schreibers (160) war grün, das
+  # Fenster des Marktes (155/985 px, SSOT scripts/serp_limits.py) war
+  # abgeschnitten. Der Verstoß landete auf main; ~15 h später fand ihn das
+  # nächtliche Snippet-Gate im GEBAUTEN HTML.
+  #
+  # Deshalb steht die Wache hier: Sie liest dieselbe SSOT wie das Gate,
+  # prüft aber die QUELLE – vor dem Build, direkt hinter den Schreibenden.
+  # Die deterministische Klasse (M2/M7 Snippet, M3 lastmod<date) heilt sie
+  # selbst, an der Wortgrenze, idempotent.
+  - name: Metadaten-Selbsttest (Wache + Snippet-Heiler müssen lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Metadaten-Wache – Quelle (Snippet-SSOT, selbstheilend, C34-toleriert)
+    grund: >-
+      Ein blindester Heiler würde Texte kürzen, die schon richtig sind, und
+      zu kurze Snippets ungemeldet lassen – beides ist schlimmer als ein
+      roter Selbsttest.
+
+  - name: Metadaten-Wache – Quelle (Snippet-SSOT, selbstheilend, C34-toleriert)
+    klasse: werkzeug
+    grund: >-
+      Messung an der Quelle plus deterministische Reparatur der Snippet-/
+      lastmod-Klasse. Die Freigabe entscheidet das Publish-Gate, nicht diese
+      Wache – und C34 verbietet ohnehin, die Live-Site an einem zu langen
+      Snippet einzufrieren. Der Restbefund geht über den Meldeweg an das
+      Siegel, statt still zu verhallen.
+
   - name: Draft-Link-Selbsttest (Gate muss lauffähig sein)
     klasse: gate-selbsttest
     schuetzt: Draft-Link-Gate (defekte Post-Ziele entlinken, Report)

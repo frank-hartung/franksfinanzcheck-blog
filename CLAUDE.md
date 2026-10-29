@@ -2364,8 +2364,25 @@ Regeln:
   auch über Seobility und hat mit `scripts/linktext_wache.py` eine breitere
   Wache mit eigenen Ausnahmen (`data-ff-linktext-frei`, `<a>` ohne `href`)
   und Selbsttest bekommen. Zwei Wachen für einen Befund laufen auseinander.
+- **Auch die Schreiber importieren die SSOT** (seit 29.10.2026, #925): Wer
+  Descriptions **baut**, hält sich an dieselbe Datei. `keyword_optimizer`
+  (Keyword-Gate im Deploy-Pfad), `meta_optimizer` und `quality_score`
+  importieren `serp_limits`; ihre alten eigenen Grenzen (70–160 Zeichen,
+  165 im Cockpit-Rat) sind gelöscht. Der #925-Befund entstand genau dort: Der
+  Schreiber setzte ein Schlüsselwort vor eine bereits 142 Zeichen lange
+  Description – 153 Zeichen, aber **1011 px**, also zu breit. Der Zähler im
+  Schreiber war grün, das Fenster des Marktes war abgeschnitten.
+- **Geheilt wird an der Quelle, nicht im Bericht** (seit 29.10.2026, #925):
+  `metadaten_wache.py --fix` kürzt ein zu breites Snippet deterministisch an
+  der Wortgrenze (`serp_limits.auf_snippet_kuerzen`, Satzende behalten,
+  idempotent) und richtet `lastmod` an `date` aus. Der Deploy-Pfad fährt
+  deshalb Keyword-Gate → Metadaten-Selbsttest → `metadaten_wache --fix` und
+  **veröffentlicht das Geheilte**. Rot werden darf die Wache weiter (C34):
+  Sperren wäre ein Deploy-Blocker, also bleibt sie laut – im Log und als
+  Annotation – statt still.
 
-Vertrag: Bericht `SERP-SPIEGEL-SCREAMING-FROG-HIGHEND-2026-10-27.md` ·
+Vertrag: Berichte `SERP-SPIEGEL-SCREAMING-FROG-HIGHEND-2026-10-27.md` und
+`WF-7B6B-925-DAUERHEILUNG-PREMIUM-2026-10-29.md` ·
 Selbsttests `metadaten_wache --selftest` (13 Proben) und
 `seo_cockpit`/`serp_limits` (`npm run test:serp`).
 
