@@ -227,6 +227,31 @@ def _zaehl_quotes(wert: str) -> tuple[bool, bool]:
     return True, True
 
 
+def _zitat_schluss(wert: str) -> int | None:
+    """Index des schließenden Anführungszeichens im Wert – None, wenn keins.
+
+    Gebraucht für die Klasse, die am 29.10.2026 auf `main` stand:
+    ``reserve_reaktiviert: "… Klasse „heilbar" ist heilbar, …"`` – das
+    ASCII-Zeichen nach „heilbar beendet den Wert zu früh, der Rest der Zeile
+    ist Text. Der Parser sieht das als Fehler; diese Funktion sieht es auch,
+    ohne Parser.
+    """
+    if not wert or wert[0] not in ('"', "'"):
+        return None
+    quote, i = wert[0], 1
+    while i < len(wert):
+        if quote == '"' and wert[i] == "\\":
+            i += 2
+            continue
+        if wert[i] == quote:
+            if quote == "'" and i + 1 < len(wert) and wert[i + 1] == "'":
+                i += 2
+                continue
+            return i
+        i += 1
+    return None
+
+
 def _zitat_ende(folge: list[str], quote: str) -> int | None:
     """Zeilenindex, in dem ein mehrzeiliges Zitat geschlossen wird – oder None.
 
@@ -359,6 +384,20 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
             block_einzug = einzug + len(key) + 2
             continue
         if wert[0] in ('"', "'"):
+            schluss = _zitat_schluss(wert)
+            if schluss is not None:
+                dahinter = wert[schluss + 1:].strip()
+                if dahinter and not dahinter.startswith("#"):
+                    befunde.append(Befund(
+                        "F3", BLOCKER, pfad, nr, spalte + schluss + 2,
+                        f"Text hinter dem schließenden Anführungszeichen von "
+                        f"`{key}`: „{dahinter[:40]}“. YAML beendet den Wert "
+                        f"beim ersten `\"` – steht dort ein deutsches "
+                        f"Schlusszeichen als ASCII-Zeichen (`„heilbar\"` "
+                        f"statt `„heilbar“`), bricht Hugo ab. Heilung: das "
+                        f"schließende Zitat als „ “ schreiben (`--fix`).",
+                        heilbar=True))
+                    continue
             d, e = _zaehl_quotes(wert)
             if not (d if wert[0] == '"' else e):
                 folge = fm.splitlines()[nr - startzeile + 1:]
@@ -664,7 +703,30 @@ def heile_datei(pfad: Path, text: str) -> tuple[str, list[Befund]]:
                 wert_text = wert.lstrip(" ")
                 if wert_text[0] in ("|", ">"):
                     block_einzug = einzug + len(treffer.group("key")) + 2
-                elif wert_text[0] not in ('"', "'", "[", "{", "#", "*", "&"):
+                elif wert_text[0] == '"':
+                    # Deutsches Schlusszeichen als ASCII-Zeichen
+                    # (`„heilbar"` statt `„heilbar“`): Das erste `"` beendet
+                    # den Wert zu früh. Ersetzt wird GENAU dieses Zeichen –
+                    # und nur, wenn danach der Wert sauber schließt.
+                    schluss = _zitat_schluss(wert_text)
+                    if schluss is not None:
+                        dahinter = wert_text[schluss + 1:].strip()
+                        if (dahinter and not dahinter.startswith("#")
+                                and "\u201e" in wert_text[:schluss]):
+                            repariert = (wert_text[:schluss] + "\u201c"
+                                         + wert_text[schluss + 1:])
+                            neu_schluss = _zitat_schluss(repariert)
+                            rest = (repariert[neu_schluss + 1:].strip()
+                                    if neu_schluss is not None else "x")
+                            if neu_schluss is not None and (not rest or rest.startswith("#")):
+                                neu[i] = (zeile[:len(zeile) - len(wert_text)]
+                                          + repariert + "\n")
+                                belege.append(Befund(
+                                    "F3", BLOCKER, str(pfad), nr, 1,
+                                    f"deutsches Schlusszeichen ersetzt: "
+                                    f"`{treffer.group('key').strip()}` – Text "
+                                    f"unverändert übernommen"))
+                elif wert_text[0] not in ("'", "[", "{", "#", "*", "&"):
                     if ": " in wert_text or wert_text.rstrip().endswith(":"):
                         neu[i] = (zeile[:len(zeile) - len(wert_text)]
                                   + _zitiere(wert_text.rstrip()) + "\n")
@@ -836,6 +898,14 @@ def run_selftest() -> int:
     faelle.append(("TOML kaputt", "+++\ntitle = \"x\"\ndate = \n+++\n\nText.\n", ["F2"]))
     # 17) JSON-Frontmatter kaputt.
     faelle.append(("JSON kaputt", '{"title": "x",}\n\nText.\n', ["F1"]))
+    # 18b) Deutsches Schlusszeichen als ASCII-Zeichen im Zitat – die Klasse,
+    #      die am 29.10.2026 auf `main` stand (`„heilbar"` statt `„heilbar“`).
+    #      Das erste `"` beendet den Wert zu früh; ein Parser sieht es, der
+    #      Scanner muss es auch sehen (die Build-Action läuft ohne PyYAML).
+    faelle.append(("ASCII-Schlusszeichen im Zitat", _GUT.replace(
+        'description: "Stromfresser finden, Tarife vergleichen und Abschläge planen."',
+        'description: "Klasse \u201eheilbar" ist heilbar, mit Wirkungsnachweis."'),
+        ["F3"]))
     # 18) Sequenz-Eintrag mit Doppelpunkt im Zitat bleibt sauber.
     faelle.append(("Sequenz mit zitiertem Doppelpunkt", _GUT.replace(
         'titel: "Bundesnetzagentur"', 'titel: "Netzagentur: Marktstammdaten"'), []))
@@ -868,6 +938,20 @@ def run_selftest() -> int:
                 fehler.append("Heilung: Wert wurde verändert (Beweis verletzt)")
         if f'description: "{soll_wert}"' not in geheilt:
             fehler.append("Heilung: erwartetes Zitat fehlt im Text")
+    # Heilung des deutschen Schlusszeichens: Zitat wird korrekt, Text bleibt.
+    ascii_fall = _GUT.replace(
+        'description: "Stromfresser finden, Tarife vergleichen und Abschläge planen."',
+        'description: "Klasse \u201eheilbar" ist heilbar, mit Wirkungsnachweis."')
+    geheilt_de, belege_de = heile_datei(Path("content/x/index.md"), ascii_fall)
+    soll_de = "Klasse \u201eheilbar\u201c ist heilbar, mit Wirkungsnachweis."
+    if not belege_de:
+        fehler.append("Heilung: deutsches Schlusszeichen wurde nicht ersetzt")
+    elif f'description: "{soll_de}"' not in geheilt_de:
+        fehler.append(f"Heilung: deutsches Schlusszeichen falsch repariert: "
+                      f"{[z for z in geheilt_de.splitlines() if 'description' in z]}")
+    elif erwartet(geheilt_de):
+        fehler.append(f"Heilung: danach noch Befunde {erwartet(geheilt_de)}")
+
     # Heilung darf den FLIESSTEXT nicht anfassen – auch nicht, wenn dort
     # Zeilen wie `Annahme: …` stehen (Regression der Generalprobe 29.10.2026).
     if "Annahme: Die Anlage kostet 500 Euro." not in geheilt:

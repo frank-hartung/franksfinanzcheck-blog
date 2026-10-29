@@ -130,6 +130,41 @@ class HeilungTest(unittest.TestCase):
         self.assertEqual([], belege)
 
 
+class DeutschesSchlusszeichenTest(unittest.TestCase):
+    """Die Klasse, die am 29.10.2026 auf `main` stand (#941).
+
+    Eine Textumformung ersetzte das deutsche Schlusszeichen „ durch ein
+    ASCII-Zeichen: `"… Klasse „heilbar" ist heilbar …"`. Das erste `"`
+    beendet den YAML-Wert zu früh – Hugo bricht ab, und der Deploy steht.
+    """
+
+    # Ausgangspunkt ist die SAUBERE Fassung – ihr Wert ist korrekt zitiert.
+    # Genau dieses Zitat wird durch die fehlerhafte Umformung ersetzt.
+    TEXT = SAUBER.replace(
+        'description: "Stromkosten senken: Balkonkraftwerk-Förderung regional – '
+        'Antrag und Anmeldung"',
+        'description: "Klasse \u201eheilbar" ist heilbar, mit Nachweis."')
+
+    def test_wird_erkannt(self) -> None:
+        befunde = [b for b in pruefe(self.TEXT) if b["regel"] == "F3"]
+        self.assertTrue(befunde, "Text hinter dem schließenden Zitat bleibt unentdeckt")
+        self.assertIn("schließenden Anführungszeichen", befunde[0]["meldung"])
+
+    def test_wird_ohne_pyyaml_erkannt(self) -> None:
+        befunde = [b for b in pruefe(self.TEXT, yaml_modul="ohne")
+                   if b["regel"] == "F3"]
+        self.assertTrue(befunde, "ohne PyYAML ist die Klasse unsichtbar")
+
+    def test_heilung_setzt_das_deutsche_schlusszeichen(self) -> None:
+        geheilt, belege = w.heile_datei(Path("content/posts/x/index.md"), self.TEXT)
+        self.assertTrue(belege)
+        self.assertIn('description: "Klasse \u201eheilbar\u201c ist heilbar, mit Nachweis."',
+                      geheilt)
+        self.assertEqual([], [b for b in pruefe(geheilt) if b["schwere"] == w.BLOCKER])
+        # Der Text selbst wird nicht umgeschrieben – nur das eine Zeichen.
+        self.assertIn("ist heilbar, mit Nachweis.", geheilt)
+
+
 class GeruestTest(unittest.TestCase):
     def test_offenes_frontmatter_ist_ein_blocker(self) -> None:
         befunde = pruefe("---\ntitle: \"x\"\n\nText.\n")

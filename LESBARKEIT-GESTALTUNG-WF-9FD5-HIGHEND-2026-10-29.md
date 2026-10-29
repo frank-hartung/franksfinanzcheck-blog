@@ -50,6 +50,50 @@ nächsten Lauf getötet.
 
 ---
 
+## 1b. Beim Aufsetzen gefunden: `main` ist am 29.10.2026 erneut rot — dieselbe Klasse
+
+Beim Zusammenführen des aktuellen `main` (Stand `76efccb`, Commit aus #941
+„WF-D0C9 #897 – Phase 1: Erste 9 Artikel bearbeitet") schlug die neue Wache
+sofort an:
+
+```
+content/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/index.md:7
+reserve_reaktiviert: "… Klasse „heilbar" ist heilbar, …"
+```
+
+Das deutsche Schlusszeichen **“** wurde durch das ASCII-Zeichen **"** ersetzt.
+In einem doppelt gequoteten YAML-Wert beendet dieses Zeichen den Wert zu früh –
+Hugo brach ab:
+
+```
+ERROR … expected <block end>, but found '<scalar>'
+```
+
+**Der Baum von `main` ließ sich in diesem Zustand nicht bauen** – nachgeprüft:
+`hugo --minify` auf `76efccb` endet mit Exit 1. Also genau derselbe Ausfall wie
+am 26.10., drei Tage später, an einer anderen Zeile.
+
+Zwei Dinge daran sind lehrreich:
+
+1. **Die Wache hat es gefunden, bevor ein Mensch es tat.** Der erste Lauf des
+   neuen E2E-Gates auf diesem PR war rot – nicht wegen des PR, sondern wegen
+   `main`. Genau dafür ist sie da.
+2. **Der Scanner brauchte eine Lücke weniger.** Vorher hätte nur der Parser
+   (PyYAML) die Stelle gesehen; die Build-Action läuft aber ohne PyYAML. Die
+   Regel **F3 „Text hinter dem schließenden Anführungszeichen“** schließt die
+   Lücke: Steht hinter dem ersten `"` noch Text, ist der Wert zu früh beendet.
+
+Geheilt im selben PR (`--fix`, ein Zeichen, Text unverändert):
+
+```diff
+-reserve_reaktiviert: "… Klasse „heilbar" ist heilbar, …"
++reserve_reaktiviert: "… Klasse „heilbar“ ist heilbar, …"
+```
+
+Danach: 111 Seiten, `hugo --minify` **grün**, 136 Inhaltsdateien ohne Blocker.
+
+---
+
 ## 2. Warum der Alarm so danebenlag (drei Ursachen, nicht eine)
 
 | # | Ursache | Beleg |
@@ -70,7 +114,8 @@ einer Datei stand.
 
 Prüft das Frontmatter **jeder** Inhaltsdatei vor dem Bau und nennt Datei, Zeile
 und Spalte. Regeln F1–F6 (Gerüst, Parser, Plain-Skalar, Typvertrag,
-YAML-1.1-Falle, Kommentar-Abschneidung).
+YAML-1.1-Falle, Kommentar-Abschneidung) – inklusive der zweiten live
+gefundenen Klasse „Text hinter dem schließenden Anführungszeichen“ (§1b).
 
 * **Zwei Schichten, ehrlich benannt.** Die kritische Schicht (F1, F3–F6) ist
   **stdlib-only** und läuft auch im nackten Runner der Build-Action. Ist PyYAML
@@ -80,7 +125,7 @@ YAML-1.1-Falle, Kommentar-Abschneidung).
   sonst nichts. Test: der geparste Wert ist vor und nach der Heilung identisch;
   Fließtext wird nie angefasst (Regression der Generalprobe: `Annahme: …` im
   Body war kurz davor, zitiert zu werden).
-* **21 Selbsttest-Fälle**, u. a. der Originalzustand vom 26.10.2026.
+* **22 Selbsttest-Fälle**, u. a. der Originalzustand vom 26.10.2026.
 
 ### Ebene 2 — Verhindern, dass es wieder bis zum Bau kommt
 
@@ -130,9 +175,9 @@ der Wirkung schon. Zwei neue Sabotage-Proben (S8, S9).
 
 ```text
 $ python3 scripts/frontmatter_wache.py --selftest
-✅ Selbsttest: 21 Proben bestanden – Wache ist scharf (Tiefenprüfung: YAML-Parser).
+✅ Selbsttest: 22 Proben bestanden – Wache ist scharf (Tiefenprüfung: YAML-Parser).
 # ohne PyYAML (simuliert, wie im nackten Runner):
-✅ Selbsttest: 20 Proben bestanden – Wache ist scharf (Tiefenprüfung: Scanner).
+✅ Selbsttest: 21 Proben bestanden – Wache ist scharf (Tiefenprüfung: Scanner).
 
 $ python3 scripts/frontmatter_wache.py --pfad <Baum von 2427f499> --kurzbefund
 F3 …/index.md:3:32 – Doppelpunkt im unquotierten Wert von `description` …
@@ -149,7 +194,7 @@ $ python3 scripts/hugo_build_vertrag.py --selftest
 ✅ … (H1–H9, 9 Verhaltensproben am echten Shell-Rumpf, 11 Sabotage-Proben)
 
 $ python3 -m unittest scripts.tests.test_frontmatter_wache
-Ran 21 tests … OK
+Ran 24 tests … OK
 
 $ python3 -m unittest scripts.tests.test_layout_ai_bauausfall
 Ran 8 tests … OK        # inkl. 8-gliedriger Wahrheitstabelle des Schluss-Schritts
