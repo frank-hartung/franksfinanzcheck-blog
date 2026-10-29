@@ -85,6 +85,7 @@ Dieselbe Klasse wie #654: Der rote Schritt war korrekt benannt, das Runbook war 
 | `scripts/tests/test_reserve_pipeline.py` | Fixture `DESC_OHNE_PUNKT` auf einen SSOT-konformen Text gestellt (die alte war 155 Zeichen / 996 px – selbst ein Verstoß; ihr Punkt-Anhang 156 Zeichen) |
 | `CLAUDE.md` | Zwei Regeln im Abschnitt „Ein Snippet ist 155 Zeichen und 985 Pixel“: *Auch die Schreiber importieren die SSOT* und *Geheilt wird an der Quelle, nicht im Bericht* |
 | `content/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/index.md` | `lastmod` an `date` ausgerichtet (der eine M3-Befund des Arbeitsbaums – der lebende Belegfall für `heile_lastmod`) |
+| `.github/workflows/alert-on-failure.yml`, `package.json` (Nachtrag) | Drei geerbte Defekte aus `main` geheilt: fehlendes Komma (Skript parsebar), toter Erkennungszweig, doppelter/ersetzter `test:sicherheit`-Schlüssel – siehe Abschnitt 7 |
 | `WF-7B6B-925-DAUERHEILUNG-PREMIUM-2026-10-29.md` (neu) | dieser Bericht |
 
 **Entscheidungen im Detail:**
@@ -114,13 +115,13 @@ Dieselbe Klasse wie #654: Der rote Schritt war korrekt benannt, das Runbook war 
 | `python3 -m unittest scripts.tests.test_keyword_optimizer scripts.tests.test_meta_optimizer` | ✅ 12 |
 | `python3 -m unittest scripts.tests.test_quality_score_meta` | ✅ 6 |
 | `python3 -m unittest scripts.tests.test_alert_scoping` | ✅ 28 |
-| `node scripts/tests/sim/alert_scoping_sim.mjs` (Alarm-Skript aus der YAML, echte Identitätsquelle) | ✅ 64 von 64 Szenarien |
+| `node scripts/tests/sim/alert_scoping_sim.mjs` (Alarm-Skript aus der YAML, echte Identitätsquelle) | ✅ 69 von 69 Szenarien (nach dem Merge von `main`, siehe Abschnitt 7) |
 | `python3 scripts/blustradius_register.py --check` / `--selftest` | ✅ 71 Schritte erklärt · Selbsttest grün |
 | `python3 scripts/governance_contract.py` | ✅ alle 42 Regeln |
 | `python3 scripts/automation_premium_audit.py --strict` | ✅ Exit 0 |
 | YAML aller 95 Workflows | ✅ parsen |
 | `node --check` auf dem Alarm-Skript (async-umhüllt) | ✅ |
-| `python3 -m unittest discover -s scripts/tests` (vollständig) | ✅ 4289 Tests · 6 Fehlschläge, **alle sechs auf dem unveränderten Stand gleich rot** (Faktenfrische-B1, Inhalts-Register ×3, LCP-Manifest, Versicherungs-Cluster) · 14 Überspringungen umgebungsbedingt |
+| `python3 -m unittest discover -s scripts/tests` (vollständig) | ✅ 4467 Tests · 4 Fehlschläge, **alle vier auf einem sauberen `origin/main`-Checkout gleich rot** (Inhalts-Register ×3, Versicherungs-Cluster) · 14 Überspringungen umgebungsbedingt |
 
 **Nicht lokal bewiesen:** Hugo-Build und Playwright (die Sandbox hat kein Hugo; `public/` liegt hier nicht). Der Build-Nachweis des Snippet-Gates läuft im CI-Lauf des Pull Requests. Die Zahl 1011 px ist keine Schätzung, sondern `serp_limits.breite_px()` mit der Adobe-Kernmetrik – demselben Maß, mit dem das Gate im Lauf gemessen hat.
 
@@ -134,7 +135,23 @@ Dieselbe Klasse wie #654: Der rote Schritt war korrekt benannt, das Runbook war 
 
 ---
 
-## 7. Grenzen dieser Analyse
+## 7. Nachtrag: Merge von `main` und drei geerbte Defekte (29.10.2026)
+
+Der Zweig musste `main` vom 29.10.2026 übernehmen – und der Merge legte drei Defekte frei, die **main selbst** mitgebracht hat. Keiner gehört zum Vorgang #925, aber ohne sie wäre dieser Pull Request nicht grün (und das Fehler-Alerting wäre ausgefallen):
+
+1. **Das Alarm-Skript war nicht einmal parsebar.** Im Rat der Klasse `worker-deploy-zugang` fehlte ein Komma zwischen zwei Ratzeilen – `node --check` über das github-script scheitert mit `SyntaxError: Unexpected string`. Ein Fehler-Alerting, dessen Skript nicht lädt, meldet nie wieder etwas (Schadensklasse #227). Behoben: Komma ergänzt, `node --check` grün.
+2. **Eine Erkennung war toter Code.** `workerZugangFailed` hatte eine verwaiste Zeile hinter einem abgeschlossenen Statement; der Schritt „Produktions-Environment absichern“ wurde nicht erkannt und lief in den allgemeinen API-Key-Rat – dieselbe Klasse wie #925, ein Workflow weiter. Behoben: die drei Schrittnamen in einer Erkennung zusammengeführt. Die Simulations-Probe von main („Worker-Deploy: Environment-Policy ungeschützt“) läuft seitdem grün – sie war vorher überhaupt nicht lauffähig, weil das Skript nicht parste.
+3. **`package.json` hatte `test:sicherheit` doppelt** – Klasse #654: `npm ci` bricht ab, die Manifest-Wache im Deploy- und im E2E-Lauf wird rot (der Nachtlauf vom 29.10. 11:23Z auf `main` ist genau daran gestorben). Beim Entschärfen zeigte sich die Ursache der Verdopplung: Die #922-Änderung hatte `worker_zugang` durch `worker_environment_guard` **ersetzt** statt ergänzt – npm übernahm still den letzten Wert, der Zugangs-Vertrag fiel aus der Sicherheitskette. Behoben: eine Fassung, die beide Verträge fährt; Manifest-Wache, Package-Vertrag und `test_worker_zugang` grün.
+
+Dazu ein eigener Fund aus den Regressionstests: Die Fixture `DESC_OHNE_PUNKT` in `test_reserve_pipeline.py` enthielt einen Doppelpunkt und wird **unquittiert** ins Frontmatter geschrieben – ungültiges YAML (Klasse WF-9FD5 / #901). `automatic_write_protected` geht dann fail-closed, und der Heiler meldet „YMYL: Metadaten bleiben an die Freigabe gebunden“, statt zu heilen. Die Fixture ist jetzt colonfrei; der Test prüft wieder das, was er prüfen soll.
+
+**Nach dem Merge:** Alarm-Simulation 69/69 Szenarien · `test_alert_scoping` 28/28 · Vollsuite 4467 Tests mit 4 Fehlschlägen, die auf einem sauberen `origin/main`-Checkout genauso rot sind (Inhalts-Register ×3, Versicherungs-Cluster) · Blustradius-Check grün · Governance-Vertrag alle 42 Regeln · Automation-Premium-Audit Exit 0 · Manifest-Wache grün.
+
+---
+
+---
+
+## 8. Grenzen dieser Analyse
 
 - Die Job-Logs des Actions-Laufs 40677860531 sind aus der Sandbox nicht abrufbar (Blob-Speicher nicht erreichbar). Belegt sind der rote Schritt und die Uhrzeit aus der Meldung #925 selbst sowie die verletzende Zeile aus dem Commit-Diff.
 - Der Hugo-Build und damit der Messpfad am gebauten HTML laufen im CI, nicht hier. Local bewiesen ist der Quellpfad (Wache + Heiler) gegen denselben Commit.
