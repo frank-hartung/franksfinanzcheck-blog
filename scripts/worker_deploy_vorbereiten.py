@@ -73,6 +73,7 @@ DEPLOY_DATEIEN = {
     ".github/workflows/worker-deploy.yml",
     "scripts/worker_deploy_vorbereiten.py",
     "scripts/worker_ressourcen.py",
+    "scripts/worker_environment_guard.py",
 }
 
 # Nur für die REINE Strukturprüfung im Planungs-Job. Diese Werte verlassen
@@ -157,6 +158,13 @@ def plan_auswerten(
     zeilen = ["## Worker-Deploy-Plan", ""]
 
     if manuell:
+        ref = (umgebung.get("REF") or "").strip()
+        if ref != "refs/heads/main":
+            msg = ("Manueller Worker-Deploy ist ausschließlich auf `refs/heads/main` erlaubt; "
+                   "kein Produktions-Environment wird angefordert.")
+            annotationen.append(f"::error::{msg}")
+            zeilen.append(f"- ❌ {msg}")
+            return 1, [], annotationen, "\n".join(zeilen)
         auswahl = (umgebung.get("AUSWAHL") or "").strip()
         if auswahl not in WORKER:
             msg = f"Unbekannter Worker für manuellen Deploy: „{auswahl or '(leer)'}“."
@@ -309,10 +317,16 @@ def _selftest() -> int:
         # WF-E813 / #815, zweite Stufe: Eine fehlende kopierte Variable darf
         # den vorhandenen Produktions-Worker nicht mehr aus der Matrix lassen.
         code_manuell, bereit_m, _, summary_m = plan_auswerten(
-            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker"}, t)
+            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker",
+             "REF": "refs/heads/main"}, t)
         if (code_manuell != 0 or bereit_m != ["newsletter-worker"]
                 or "bestehender Produktions-Bindung" not in summary_m):
-            fehler.append("manueller Deploy ohne Variable wurde weiterhin übersprungen")
+            fehler.append("manueller Deploy auf main ohne Variable wurde weiterhin übersprungen")
+        code_fremd, bereit_fremd, ann_fremd, _ = plan_auswerten(
+            {"EREIGNIS": "workflow_dispatch", "AUSWAHL": "newsletter-worker",
+             "REF": "refs/heads/arena/test"}, t)
+        if code_fremd != 1 or bereit_fremd or not any("ausschließlich" in a for a in ann_fremd):
+            fehler.append("manueller Deploy auf Nicht-main wurde nicht vor dem Environment abgewiesen")
         code_push, bereit_p, _, summary_p = plan_auswerten(
             {"EREIGNIS": "push", "GEAENDERT": "newsletter-worker/src/index.js"}, t)
         if code_push != 0 or bereit_p != ["newsletter-worker"] or "keinen Ersatzspeicher" not in summary_p:

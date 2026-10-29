@@ -410,6 +410,12 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # erlaubt ausschliesslich api.cloudflare.com/client/v4/accounts/<konto>/
     # workers/scripts/<bekannter-worker>/settings – kein /ai/, kein Modellhost.
     Path("scripts/worker_ressourcen.py"),
+    # Kein Modellaufruf: vor dem Worker-Deploy ausschließlich die GitHub-
+    # Environment-Policy für Reviewer, main-Branch und Admin-Bypass lesen
+    # (WF-E813 / #815). Ausgleich: test_worker_environment_guard erlaubt
+    # ausschließlich api.github.com/repos/<repo>/environments/cloudflare-
+    # produktion und dessen deployment-branch-policies.
+    Path("scripts/worker_environment_guard.py"),
     # Kein Modellaufruf: Backup-Frische liest nur GitHub-Releases (operative
     # Luecke zu E1–E8; WF-9E5A-Highend 22.10.2026). Ausgleich: TransportVertrag
     # erlaubt dort ausschliesslich api.github.com/repos/…/releases.
