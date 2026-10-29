@@ -226,6 +226,31 @@ class WorkflowVertrag(unittest.TestCase):
                     umgebung = umgebung.get("name")
                 self.assertEqual(umgebung, "backup")
 
+    def test_secret_jobs_laufen_nur_auf_main(self):
+        """E8 darf nicht die einzige Schranke für Environment-Secrets sein.
+
+        `workflow_dispatch` lässt sich in GitHub auf einem beliebigen Ref
+        starten. Ein Job-Level-if wird vor der Environment-Auswertung geprüft
+        und verhindert deshalb, dass ein geänderter Workflow auf einem
+        Feature-Branch überhaupt Geheimnisse erhält.
+        """
+        erwartet = "${{ github.ref == 'refs/heads/main' }}"
+        for name in ("backup", "kv-backup"):
+            with self.subTest(name):
+                self.assertEqual(self.wf["jobs"][name].get("if"), erwartet)
+        self.assertEqual(self.wf["jobs"]["backup"].get("permissions"), {"contents": "read"})
+
+    def test_offsite_ziel_verlangt_dedizierten_token(self):
+        backup_schritte = self.wf["jobs"]["backup"]["steps"]
+        treffer = [s for s in backup_schritte if "Dauerhaftes Ziel" in s.get("name", "")]
+        self.assertEqual(len(treffer), 1, "der Repo-Job braucht genau einen Offsite-Ziel-Schritt")
+        ziel = treffer[0]["run"]
+        self.assertIn('if [ -z "${ZIEL_TOKEN:-}" ]', ziel)
+        self.assertIn('TOKEN="$ZIEL_TOKEN"', ziel)
+        self.assertNotIn('TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"', ziel)
+        self.assertNotIn("GH_TOKEN", self.wf["jobs"]["backup"].get("env", {}),
+                         "der Repo-Job darf kein Quell-Token als Offsite-Fallback erhalten")
+
     def test_pruefung_ist_pflicht_und_steht_vorn(self):
         pruefung = self._schritt("Voraussetzungen prüfen")
         self.assertIn("scripts/backup_einrichtung.py --pruefen", pruefung.get("run", ""))
@@ -420,6 +445,8 @@ class FrischwacheVertrag(unittest.TestCase):
         self.assertTrue(any("13" in c for c in crons), f"Frischwache soll nach dem 03:00-Backup laufen (13:00 UTC): {crons}")
         job = data["jobs"]["frischwache"]
         self.assertEqual(job.get("environment"), "backup", "Secrets liegen im Environment backup")
+        self.assertEqual(job.get("if"), "${{ github.ref == 'refs/heads/main' }}",
+                         "workflow_dispatch darf die Frische-Secrets nur auf main erhalten")
         schritte = {s.get("name", ""): s for s in job.get("steps", [])}
         self.assertIn("Selbsttest (Wache prueft sich selbst – fail-closed)", schritte)
         self.assertIn("Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)", schritte)

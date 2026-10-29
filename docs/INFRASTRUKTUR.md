@@ -95,6 +95,8 @@ Ein Purge wäre nur nötig, wenn ohne SHA-Buster deployed würde (nie).
    (13:00 UTC, 52 h rot/36 h gelb, beide Familien) + beweisbare Wiederherstellung
    `restore_drill.sh` (Highend 24.10.2026). Das Blog-Repo selbst ist kein
    Offsite-Backup (gleiches Konto). Der frühere S3-Plan ist damit ersetzt.
+   Zusätzlich verweigern alle drei Jobs die Ausführung auf einem anderen Ref
+   als `main`, bevor das Environment ausgewertet wird (Defense in depth zu E8).
    Einrichtung, SLA und Abdeckung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md).
 6. **Monitoring:** Uptime-Checks gegen `https://franksfinanzcheck.de` (über
    Cloudflare-Proxy) + `https://frank-hartung.github.io/franksfinanzcheck-blog/`
