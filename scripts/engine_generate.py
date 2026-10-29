@@ -480,8 +480,44 @@ def _reserve_vorstufe_ok(body: str, probleme: list[str]) -> tuple[bool, list[str
         if problem.startswith("Keyword „") and (" fehlt" in problem):
             heilbar.append("Keyword")
             continue
+        # WF-D4E0/#884 (29.10.2026): RS5 (Zahlen ohne Satzbeleg) ist die
+        # DRITTE belegte Heilerklasse. Sie stand hier bis heute nicht, weil
+        # sie zuvor nur allein (`_nur_zahlenbefund`) in die KI-Heilung
+        # durfte. Realer Schaden im Lauf 40667750341 (28.10.2026): Vier
+        # frische Themen trugen „nur 858 Wörter …“ UND „RS5: 6 Zahlen-
+        # behauptungen …“ – beides heilbar, aber die Kombination galt als
+        # unbehandelbar. Alle vier wurden verworfen, der Nachschub fehlte,
+        # der Vorrat blieb bei 3/6 und der End-Gate war rot.
+        # Nachgewiesen heilbar ist RS5 in der Kette durch
+        # `redaktions_standard.py --fix` (deterministische Kennzeichnung als
+        # Modell-/Beispielwert, KI-Heilung unter Publikations-Vertrag) – mit
+        # grünem Wirkungsnachweis (`reserve_healer_coverage.WIRKUNGS_PROBEN`,
+        # Vertrag C25). Die Annahme wird hier nicht behauptet, sondern bei
+        # jedem Gebrauch gegen Kette + Nachweis geprüft (fail-closed).
+        if str(problem).startswith("RS5:") and _rs5_heilung_belegt():
+            heilbar.append("Zahlenbeleg")
+            continue
         return False, []
     return bool(heilbar), sorted(set(heilbar))
+
+
+def _rs5_heilung_belegt() -> bool:
+    """Läuft der RS5-Heiler in der Reserve-Kette – MIT Wirkungsnachweis?
+
+    Zwei Fragen, zwei Quellen, keine Kopie: die Kette kommt aus
+    `reserve_finisher.HEALER_CHAIN`, der Nachweis aus
+    `reserve_healer_coverage.WIRKUNGS_PROBEN` (C25). Fehlt eine der beiden
+    Zusagen, bleibt RS5 an der Geburt hart – dann ist die Vorstufe kein
+    Aufschub, sondern eine Wette.
+    """
+    try:
+        import reserve_finisher as fin
+        import reserve_healer_coverage as rhc
+        kette = {eintrag[0] for eintrag in fin.HEALER_CHAIN}
+        return ("redaktions_standard.py" in kette
+                and "redaktions_standard.py" in rhc.WIRKUNGS_PROBEN)
+    except Exception:  # noqa: BLE001 – ohne prüfbaren Nachweis keine Ausnahme
+        return False
 
 
 ZAHLEN_HEILER_MAX_VERSUCHE = 1

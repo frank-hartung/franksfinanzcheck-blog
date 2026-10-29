@@ -1,6 +1,47 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 29.10.2026 (WF-D4E0 / #884 – „dauerhaft auf Highend-Niveau"):
+#  Der Lauf 40667750341 (28.10.) war bis zum letzten Schritt grün und endete
+#  3/6 mit „Stock shortage must not look successful". Vier Befunde, alle
+#  vier strukturell behoben:
+#    1. DER R5-SPLITTER BAUTE SEINEN EIGENEN BLOCKER. `split_para()` schützte
+#       den Datumspunkt, indem es ihn LÖSCHTE („am 23. Dezember" → „23
+#       Dezember" = R13-DATUM-PUNKT, hartes Publish-Kriterium seit #482) und
+#       die Teilung anschließend aus genau diesem Text baute. Damit lief ein
+#       geschlossener Kreis: Stufe 2 teilt → Schritt-Vertrag rollt zurück
+#       (V2: neuer harter Fund) → Datei bleibt ungeteilt → die
+#       Zertifizierungs-Vorheilung teilt erneut → Gate lehnt ab → die Bytes
+#       werden bytegenau zurückgestellt → nächste Nacht dasselbe. Der
+#       Kandidat `2026-10-28-flugvergleich-…` stand deshalb seit dem 26.10.
+#       jeden Tag als „Blocker" im Zertifikat, obwohl die Datei auf der
+#       Platte sauber war. Fix: Der Punkt wird für die Satzzählung MASKIERT
+#       und bytegenau zurückgeschrieben (inkl. U+202F); eine
+#       Fail-closed-Gegenprobe gegen `sprachkern.POLITUR_RUINEN` verwirft
+#       jede Teilung, die je wieder eine Ruine einführen würde.
+#    2. DIE VORHEILUNG SCHRIEB OHNE TOR. `preheal_candidate()` war der
+#       einzige Schreiber der Zertifizierung ohne Publikations-Vertrag –
+#       deshalb blieb der Schaden aus (1) unsichtbar (Gate lehnt ab, Bytes
+#       werden zurückgestellt, Diagnose nennt einen Fund, den die Datei nie
+#       hatte). Jetzt prüft sie jede geplante Änderung gegen
+#       `publikations_vertrag.pruefe` und verwirft sie bytegenau; das
+#       Zertifikat sagt zusätzlich, wenn es eine Heilfassung gemessen hat
+#       (`reserve_readiness.certify_one`).
+#    3. RS5 GALT AN DER GEBURT ALS UNHEILBAR. Vier frische Themen scheiterten
+#       in derselben Nacht an „nur 858 Wörter …" UND „RS5: 6 Zahlen-
+#       behauptungen …". Beide Klassen haben einen belegten Heiler in der
+#       Kette (`check_length.py`, `redaktions_standard.py` – je grüner
+#       Wirkungsnachweis, C25), die Kombination wurde trotzdem verworfen.
+#       `engine_generate._reserve_vorstufe_ok` nimmt RS5 jetzt als dritte
+#       belegte Klasse an – geprüft gegen Kette UND Wirkungsnachweis bei
+#       jedem Gebrauch (fail-closed, keine zweite Wahrheit).
+#    4. EIN LECK OHNE BELEG. Der am 28.10. redaktionell zurückgezogene
+#       Heizöl-Artikel lag als Entwurf ohne `reserve`-Fahne im Repo, während
+#       das Bestands-Gedächtnis ihn als Pool-Kandidat führte. `reserve_
+#       custody.py --heal` hat die Fahne belegt wiederhergestellt (Pool 4 → 5)
+#       – ein stiller Schwund bleibt damit auch künftig ein Befund.
+#  Details: WARTUNG-INHALTSQUALITAET-WF-D4E0-884-DAUERHEILUNG-PREMIUM-2026-10-29.md
+#
 #  REPARATUR 25.10.2026 (WF-D4E0 / #821 – „dauerhaft auf Highend-Niveau"):
 #  Der Vorrat fiel seit dem 19.10. von 6 auf 1, und jede Nacht wurde derselbe
 #  Schritt rot. Zwei Ursachen, beide strukturell behoben:
