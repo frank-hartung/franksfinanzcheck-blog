@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T13:35:59Z",
+  "generated_at": "2026-10-29T14:28:54Z",
   "modus": "kandidaten",
-  "commit": "b6ec0a60806b29fe5b209f296d0e327082b5717f",
+  "commit": "208180f8ec0cd775240abccf0b6e387488be9dcb",
   "kapazitaet": {
     "stichtag": "2026-10-29",
     "artikel": 106,
@@ -179,7 +179,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "8a23bff63cc1022bdf3d92a531e95489b70f5628190d471c8b8f64c2eb4d0098",
@@ -213,7 +213,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "fb81a9253b1e175884bbf55195e3ec3feef0e15431171f934062ab10f0c54b0c",
@@ -315,7 +315,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
       "sha256": "4cbfe1cd85eb5c2e6109fa164c5ce6342229d8a93536ee0f688b09f332a62d92",
@@ -332,7 +332,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "b60c49dac24f1147144d8f8137d0c3f15e4ff23ae789330657a8fb6c1313144a",
@@ -383,7 +383,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "4bf2411e61d0fd7aa9f477541d9d6fcaca2014b99763e471139adcc087cea7d7",
@@ -400,7 +400,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "89a108108ab83fe72e90c94102fe4406e0db939d9b63ae6f3e9600c27a289ca2",
@@ -417,7 +417,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "c525dbe11299b94ad68da4d05691155ac6b74b6afdc2d37f3ad0165f08a36efd",
@@ -740,7 +740,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "ab4dbf3291ef4fd03acaab060c9cf3296e5ec5ef234dd4ac057d4b9a2ca18d8d",
@@ -774,7 +774,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "fe041bc4c2af5dd1cdac8485c8dbc8ccfc9a5fd05c6fa6dd3c0b543004ea512f",
@@ -1301,7 +1301,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     }
   }
 }
