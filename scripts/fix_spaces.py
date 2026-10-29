@@ -431,6 +431,10 @@ def main() -> int:
             total += n
             print(f"  {f.split('/')[-2]}: {n} Korrektur(en)")
             if not dry:
+                from editorial_review_gate import automatic_change_findings
+                if automatic_change_findings(content, join_article(parts[1], new_body, parts[0])):
+                    print("  YMYL: Änderung verworfen – Freigabe bleibt unverändert")
+                    continue
                 open(f, "w", encoding="utf-8").write(
                     join_article(parts[1], new_body, parts[0]))
     modus = "DRY-RUN" if dry else "FIX"

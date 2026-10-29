@@ -193,7 +193,13 @@ def target_files():
 def main() -> None:
     files = target_files()
     touched = []
+    protected = []
     for p in files:
+        from editorial_review_gate import automatic_write_protected
+        if DO_FIX and not DRY_RUN and automatic_write_protected(p):
+            protected.append(str(p.relative_to(ROOT)))
+            print(f"YMYL: Einheiten unverändert: {p}")
+            continue
         n, new_text = process_full(p)
         if n:
             if DO_FIX and not DRY_RUN and new_text != p.read_text(encoding="utf-8"):
@@ -208,7 +214,10 @@ def main() -> None:
         L += [f"## {'✅ korrigiert' if DO_FIX else '🔍 Befunde'} ({len(touched)} Dateien)", ""]
         L += [f"- `{f}`: {n} Stelle(n)" for f, n in touched[:40]]
     else:
-        L.append("🎉 Einheiten-Stil einheitlich (Hausstil).")
+        L.append("Keine ungeschützten Einheiten-Korrekturen.")
+    if protected:
+        L += ["", "## YMYL: unverändert / nicht stilistisch freigegeben", ""]
+        L += [f"- `{p}`: Freigabe schützt Originalfassung" for p in protected]
     L += ["", "---", "_U1 Euro→€ · U2 Prozent→% · U3 NBSP-Setzung · "
           "U4 Doppelraum-Bereinigung. Komposita mit Bindestrich bleiben._"]
     REPORT.write_text("\n".join(L) + "\n", encoding="utf-8")
