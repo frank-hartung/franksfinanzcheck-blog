@@ -129,6 +129,27 @@ ausgeführt – nur diese eine Datei, mit Herkunft im Lock und Eintrag in
 
 ---
 
+## 1e. Nachtrag: was der Merge von #942 offen ließ
+
+PR #942 wurde am 29.10.2026 um 10:41 UTC zusammengeführt (Squash, `d396dd3e8`)
+– **bevor** der letzte Commit dieses Vorgangs (die Auflösung des
+Hauptzweig-Merges) auf dem Zweig lag. Auf `main` fehlten dadurch zwei
+Heilungen, die hier nachgezogen werden:
+
+| Offen auf `main` | Wirkung | Nachweis |
+|---|---|---|
+| `alert-on-failure.yml`: zwei Rat-Listen ohne Komma (Zusammenführung von #935 und #943) | Die Fehler-Meldung selbst stirbt mit `SyntaxError` – **kein Alarm für irgendeinen Ausfall** | `node --check` auf dem github-script-Block: `Unexpected string` |
+| `package.json`: Schlüssel `test:sicherheit` zweimal | JSON nimmt still den letzten – die Selbsttests aus #935 (`worker_environment_guard`) fehlten im Sicherheitslauf | Manifest-Wache J2 (Annotation am PR) |
+| verwaiste Zeile `failedStepNames.some(…)` | Der Befund „Produktions-Environment absichern" fiel aus der Erkennung und bekam den falschen Rat | Simulation, Szenario „Environment-Policy ungeschützt" |
+
+Diese drei sind nicht Teil des Layout-Auftrags, aber sie liegen im selben
+Zusammenhang (ein Ausfall, den niemand meldet, ist der schlimmste). Sie sind
+hier geheilt; Beleg: alle 14 `github-script`-Blöcke bestehen `node --check`,
+die Simulation läuft mit 66 Szenarien grün, `package.json` hat keinen
+doppelten Schlüssel mehr.
+
+---
+
 ## 2. Warum der Alarm so danebenlag (drei Ursachen, nicht eine)
 
 | # | Ursache | Beleg |
