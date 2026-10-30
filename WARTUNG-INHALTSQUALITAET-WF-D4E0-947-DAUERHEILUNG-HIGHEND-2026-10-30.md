@@ -219,6 +219,12 @@ seine A6-Regel unverändert scharf.
   (`414629d`) vorhanden und sind upstream mit `dec5e0a7` (#956) behoben – nach dem
   Rebase auf `6d5ddd0` sind `manifest_guard.py` und `workflow_js_wache.py --check`
   grün. Hier wurde nichts doppelt „geheilt“.
+* **Baseline 3 (fremd, offen):** Die `Playwright-Suite (Desktop + Mobile)`
+  (`e2e.yml`) scheitert am Schritt „E2E-Suite ausführen“ – auf `main` bereits am
+  28.10. und 29.10. (`f56e25c7`, `d5382e73`), also **vor** diesem PR und
+  unabhängig von ihm (er berührt weder `layouts/`, `assets/`, `static/` noch
+  `content/`). Das Qualitäts-Gate (Build + interne Links) ist mit dieser Änderung
+  grün. Auch dieser Befund gehört in einen eigenen Vorgang.
 * **Umgebungsabhängiger Einzelbefund:** `cover_render_check.py --selftest` braucht
   `pillow`; in diesem Container fehlte es (CI installiert es aus
   `requirements-ci.txt`). Nach `pip install pillow` grün – kein Code-Befund.
