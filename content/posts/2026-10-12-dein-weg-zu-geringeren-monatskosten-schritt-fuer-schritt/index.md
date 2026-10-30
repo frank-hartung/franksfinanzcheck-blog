@@ -50,6 +50,8 @@ Ein strukturierter Check zeigt dir, welche Kosten unvermeidbar sind. Du erkennst
 - Rechne Vertragskosten immer auf die volle Laufzeit um. Nicht nur auf den Monatspreis.
 - Neue Gesetze erleichtern dir die Kündigung nach der Mindestlaufzeit erheblich.
 
+Wer die Fixkosten nicht übers Jahr verteilen, sondern an einem einzigen Nachmittag durchprüfen will: Der [4K-Prüfpfad für Haushaltskosten](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) geht die größten Preistreiber durch und endet mit einer Entscheidung je Vertrag. Dieser Jahresplan hier sammelt davor alle Abbuchungen und setzt die Fristen.
+
 ## Warum ein jährlicher Fixkosten-Check Sinn macht
 
 Einmal im Jahr alle Verträge zu prüfen, spart Zeit und bares Geld. Viele Haushalte reagieren erst bei einer Preiserhöhung. Das verschlechtert deine Verhandlungsposition. Führe stattdessen alle Posten an einem einzigen Nachmittag zusammen.

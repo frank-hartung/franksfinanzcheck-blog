@@ -179,6 +179,19 @@ jobs:
       - run: python3 scripts/abbildungen_ableiten.py --nachzug
       - run: python3 scripts/abbildungen_ableiten.py --check
 
+      # ROLLENPAARE (Dauerheilung 30.10.2026)
+      # Zwei Seiten, die bewusst getrennt bleiben, sind eine Entscheidung –
+      # und eine Entscheidung ohne Wache ist eine Behauptung. Diese Prüfung
+      # verlangt für jedes dokumentierte Paar (Feld `paar` im
+      # Entscheidungs-Register): eigene Struktur (keine gemeinsamen
+      # Zwischenüberschriften, keine wörtlichen Sätze), eine nicht
+      # überfällige Frist mit Eigentümer, den Rollenlink in beide Richtungen –
+      # und ab 10 Impressionen eine Entscheidung, die die Nachfrage
+      # beantwortet. Sie ersetzt keine Schwelle: Regel F bleibt unverändert
+      # streng, die Alternative wird nur prüfbar.
+      - run: python3 scripts/konsolidierung.py --selftest
+      - run: python3 scripts/konsolidierung.py --rollenpaare
+
       - run: |
           git config user.name "Agent (Arena.ai)"
           git config user.email "agent@franksfinanzcheck.de"

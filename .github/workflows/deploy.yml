@@ -681,6 +681,14 @@ jobs:
           # auch für Einträge, die in der Quelle noch gar nicht stehen.
           python3 scripts/konsolidierung.py --selftest
           python3 -m unittest scripts.tests.test_konsolidierung
+          # Und die Alternative zur Konsolidierung: Für jedes im Register
+          # dokumentierte Rollenpaar (Feld `paar`) müssen Struktur,
+          # Entscheidung, Frist und Rollenlink stehen. Am 30.10.2026 hatte
+          # der Zwilling 14 Impressionen statt der im Test erwarteten
+          # „unter 10“ – statt die Schwelle zu senken, verlangt die Wache
+          # ab hier eine Entscheidung, die die Nachfrage trägt. Fehlt der
+          # Rollenlink in einer Richtung, ist dieser Build rot.
+          python3 scripts/konsolidierung.py --rollenpaare
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
