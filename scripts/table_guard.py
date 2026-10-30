@@ -227,7 +227,11 @@ def main():
         for tag, zl in funde:
             alle_funde.append((str(f.relative_to(ROOT)), zl, tag))
         if fixes and DO_FIX and not DRY_RUN:
-            f.write_text("\n".join(out_lines), encoding="utf-8")
+            old_raw = f.read_text(encoding="utf-8")
+            new_raw = "\n".join(out_lines)
+            import editorial_review_gate as _ymyl_gate
+            if not _ymyl_gate.automatic_change_findings(old_raw, new_raw):
+                f.write_text(new_raw, encoding="utf-8")
 
     mode = "DRY-RUN" if DRY_RUN else ("FIX" if DO_FIX else "REPORT")
     L = ["# 📊 TABLE-REPORT (table_guard.py)", "",

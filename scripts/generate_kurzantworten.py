@@ -70,7 +70,12 @@ def set_kurzantwort(path, answer):
         fm2 = re.sub(r"^kurzantwort:.*$", f"kurzantwort: {quoted}", fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip() + f"\nkurzantwort: {quoted}\n"
-    open(path, "w", encoding="utf-8").write(join_article(fm2, parts[2], parts[0]))
+    neu = join_article(fm2, parts[2], parts[0])
+    import editorial_review_gate as _ymyl_gate
+    if _ymyl_gate.automatic_change_findings(content, neu):
+        return False
+    open(path, "w", encoding="utf-8").write(neu)
+    return True
 
 
 def main():
@@ -81,8 +86,11 @@ def main():
         files = list_post_paths()
     force = "--all" in sys.argv
 
+    import editorial_review_gate as _ymyl_gate
     ok, fail = 0, 0
     for path in files:
+        if _ymyl_gate.automatic_write_protected(path):
+            continue
         title, desc, fm = get_meta(path)
         if not title:
             continue

@@ -61,6 +61,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import editorial_review_gate as gate  # noqa: E402  (eine Regelquelle)
+from url_host import ist_host_oder_subdomain  # noqa: E402  (Host-Wahrheit)
 
 REPORT = ROOT / "BELEGKETTEN-WACHE-REPORT.md"
 USER_AGENT = "FranksFinanzcheck-Belegketten-Wache/1.0 (+https://franksfinanzcheck.de)"
@@ -68,6 +69,12 @@ TOT = "tot"
 UMGELEITET = "umgeleitet"
 UNKLAR = "unklar"
 OK = "ok"
+
+_GII_BASIS_HOST = "gesetze-im-internet.de"
+_GII_SPIEGEL_BASIS = "https://raw.githubusercontent.com/Gesetze-fuer-KI/bundesrecht/main"
+_GII_MAX_BYTES = 8 * 1024 * 1024
+_GII_SLUG_ZEICHEN = frozenset("abcdefghijklmnopqrstuvwxyz0123456789_-")
+_GII_NORM_ZEICHEN = frozenset("abcdefghijklmnopqrstuvwxyz0123456789")
 
 
 def _normalisiert(url: str) -> tuple[str, str, str]:
@@ -131,27 +138,244 @@ def abruf_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
     )
 
 
-def pruefe_quelle(url: str, *, abruf=None, timeout: float = 10.0) -> dict:
-    """Ein Zitat prüfen. ``abruf`` ist injizierbar (Selbsttest, Tests)."""
+def abruf_gii_spiegel_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
+    """Lädt den täglich synchronisierten GII-Bundesrecht-Spiegel über net_safety."""
+    from net_safety import sicherer_abruf
+
+    try:
+        status, nutzlast = sicherer_abruf(
+            url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=timeout,
+            max_bytes=_GII_MAX_BYTES,
+            erlaube_loopback=False,
+        )
+    except urllib.error.HTTPError as exc:
+        return int(exc.code), ""
+    return int(status), nutzlast.decode("utf-8", errors="replace")
+
+
+def _parse_gii_ziel(zitat: str) -> tuple[str, tuple[str, str] | None] | None:
+    """Zerlegt offizielle gesetze-im-internet.de-URLs in (Gesetzes-Slug, Einzelnorm).
+
+    Befund 30.10.2026 (Prüfqueue #826): `www.gesetze-im-internet.de` verwirft
+    TCP-Verbindungen von Azure-/GitHub-Actions-Runnern (`URLError` nach Timeout),
+    wodurch alle 4 Gesetz-Zitate im Hochrisiko-Bestand (`vvg_2008/__40.html`,
+    `bgb/__502.html`, `got_2022/`) dauerhaft `unklar` blieben und
+    `--require-complete` das Auto-Schließen blockierte.
+
+    Diese Zerlegung erlaubt ausschließlich kanonische GII-Pfade (Gesamtwerk,
+    `__<nr>.html`, `art_<nr>.html`, `anhang.html`, `anlage.html`). Unbekannte
+    Pfadformen liefern `None` und bleiben fail-closed `unklar`.
+    """
+    if not ist_host_oder_subdomain(zitat, _GII_BASIS_HOST):
+        return None
+    try:
+        teile_url = urlparse(zitat)
+    except ValueError:
+        return None
+    if teile_url.query:
+        return None
+    segmente = [s for s in (teile_url.path or "").split("/") if s]
+    if len(segmente) not in (1, 2):
+        return None
+    slug = segmente[0].lower()
+    if not slug or len(slug) > 80 or any(c not in _GII_SLUG_ZEICHEN for c in slug):
+        return None
+    if len(segmente) == 1:
+        return slug, None
+    datei = segmente[1].lower()
+    if datei == "index.html" or (
+        datei.startswith("bjnr")
+        and datei.endswith(".html")
+        and len(datei) > 9
+        and all(c in _GII_NORM_ZEICHEN for c in datei[4:-5])
+    ):
+        return slug, None
+    if datei == "anhang.html":
+        return slug, ("Anhang", "")
+    if datei == "anlage.html":
+        return slug, ("Anlage", "")
+    if datei.startswith("__") and datei.endswith(".html"):
+        nr = datei[2:-5]
+        if nr and len(nr) <= 16 and all(c in _GII_NORM_ZEICHEN for c in nr):
+            return slug, ("§", nr)
+        return None
+    if datei.startswith("art_") and datei.endswith(".html"):
+        nr = datei[4:-5]
+        if nr and len(nr) <= 16 and all(c in _GII_NORM_ZEICHEN for c in nr):
+            return slug, ("Art.", nr)
+        return None
+    return None
+
+
+def _gii_spiegel_url(slug: str) -> str:
+    """Deterministischer Pfad im täglichen Bundesrecht-Spiegel (gii-toc.xml)."""
+    shard = (
+        "0-9"
+        if slug[0].isdigit()
+        else "".join(c if c.isalnum() else "_" for c in slug[:2])
+    )
+    return f"{_GII_SPIEGEL_BASIS}/{shard}/{slug}.md"
+
+
+def _spiegel_bestaetigt_quelle(inhalt: str, slug: str) -> bool:
+    """Prüft im YAML-Kopf des Spiegels, dass die Datei genau vom GII-Slug stammt."""
+    zeilen = inhalt.splitlines()
+    if not zeilen or zeilen[0].strip() != "---":
+        return False
+    for zeile in zeilen[1:60]:
+        streifen = zeile.strip()
+        if streifen == "---":
+            break
+        if streifen.lower().startswith("quelle:"):
+            roh = streifen.split(":", 1)[1].strip().strip("\"'")
+            if not ist_host_oder_subdomain(roh, _GII_BASIS_HOST):
+                return False
+            try:
+                pfad = urlparse(roh).path.strip("/").lower()
+            except ValueError:
+                return False
+            return pfad == slug
+    return False
+
+
+def _spiegel_pruefe_einzelnorm(
+    inhalt: str, einzelnorm: tuple[str, str]
+) -> tuple[bool, bool]:
+    """Prüft zeilenweise ohne Backtracking, ob die Einzelnorm existiert und aktiv ist."""
+    typ, nr = einzelnorm
+    gefunden = False
+    aktiv = False
+    for zeile in inhalt.splitlines():
+        if not zeile.startswith("#"):
+            continue
+        titel = zeile.lstrip("#").strip().lower()
+        if not titel:
+            continue
+        if typ == "§":
+            ziel = f"§ {nr}"
+            treffer = titel == ziel or titel.startswith(ziel + " ")
+        elif typ == "Art.":
+            treffer = any(
+                titel == praefix or titel.startswith(praefix + " ")
+                for praefix in (f"art. {nr}", f"art {nr}", f"artikel {nr}")
+            )
+        else:
+            praefix = typ.lower()
+            treffer = (
+                titel == praefix
+                or titel.startswith(praefix + " ")
+                or titel.startswith(praefix + ":")
+            )
+        if treffer:
+            gefunden = True
+            if "(weggefallen)" not in titel:
+                aktiv = True
+                break
+    return gefunden, aktiv
+
+
+def _pruefe_gii_spiegel(
+    zitat: str, basis: dict, *, spiegel_abruf, timeout: float
+) -> dict:
+    """Fail-closed Normprüfung über den täglichen GII-Spiegel bei Runner-Blockade."""
+    zerlegt = _parse_gii_ziel(zitat)
+    if zerlegt is None:
+        return basis
+    slug, einzelnorm = zerlegt
+    spiegel_url = _gii_spiegel_url(slug)
+    try:
+        status, inhalt = spiegel_abruf(spiegel_url, timeout=timeout)
+    except Exception:  # noqa: BLE001 – auch Spiegel nicht erreichbar → bleibt unklar
+        return basis
+    if status in (404, 410):
+        return {
+            "status": TOT,
+            "zitat": zitat,
+            "end_url": "",
+            "befund": (
+                f"Gesetz/Verordnung '{slug}' im aktuellen Bundesrechtsbestand "
+                f"nicht mehr vorhanden (Spiegel HTTP {status})"
+            ),
+        }
+    if not (200 <= status < 300) or not _spiegel_bestaetigt_quelle(inhalt, slug):
+        return basis
+    if einzelnorm is not None:
+        gefunden, aktiv = _spiegel_pruefe_einzelnorm(inhalt, einzelnorm)
+        bezeichnung = f"{einzelnorm[0]} {einzelnorm[1]}".strip()
+        if not gefunden:
+            return {
+                "status": TOT,
+                "zitat": zitat,
+                "end_url": "",
+                "befund": (
+                    f"Einzelnorm {bezeichnung} in '{slug}' nicht vorhanden – "
+                    "Beleg trägt nicht mehr"
+                ),
+            }
+        if not aktiv:
+            return {
+                "status": TOT,
+                "zitat": zitat,
+                "end_url": "",
+                "befund": (
+                    f"Einzelnorm {bezeichnung} in '{slug}' ist weggefallen – "
+                    "Beleg trägt nicht mehr"
+                ),
+            }
+    return {
+        "status": OK,
+        "zitat": zitat,
+        "end_url": zitat,
+        "befund": "",
+        "hinweis": (
+            "Direktabruf durch GII-Runner-Filter blockiert; "
+            "aktiver Normbestand über täglichen Bundesrechts-Spiegel bestätigt"
+        ),
+    }
+
+
+def pruefe_quelle(
+    url: str, *, abruf=None, spiegel_abruf=None, timeout: float = 10.0,
+    direkt_timeout: float | None = None,
+) -> dict:
+    """Ein Zitat prüfen. ``abruf`` und ``spiegel_abruf`` sind injizierbar."""
+    nutze_spiegel = spiegel_abruf or (abruf_gii_spiegel_http if abruf is None else None)
     abruf = abruf or abruf_http
     zitat = str(url or "").strip()
     if not zitat.startswith("https://"):
         return {"status": TOT, "zitat": zitat, "end_url": "",
                 "befund": "keine HTTPS-Quelle – als Beleg unzulässig"}
+    eff_timeout = timeout if direkt_timeout is None else direkt_timeout
+    basis_unklar: dict | None = None
     try:
-        status, end_url = abruf(zitat, timeout=timeout)
+        status, end_url = abruf(zitat, timeout=eff_timeout)
     except urllib.error.HTTPError as exc:
         if int(exc.code) in (403, 429) or int(exc.code) >= 500:
-            return {"status": UNKLAR, "zitat": zitat, "end_url": "",
-                    "befund": f"HTTP {exc.code} – nicht belastbar prüfbar"}
-        return {"status": TOT, "zitat": zitat, "end_url": "",
-                "befund": f"HTTP {exc.code} – Beleg nicht mehr abrufbar"}
+            basis_unklar = {
+                "status": UNKLAR, "zitat": zitat, "end_url": "",
+                "befund": f"HTTP {exc.code} – nicht belastbar prüfbar",
+            }
+        else:
+            return {"status": TOT, "zitat": zitat, "end_url": "",
+                    "befund": f"HTTP {exc.code} – Beleg nicht mehr abrufbar"}
     except Exception as exc:  # noqa: BLE001 – Netzfehler sind kein Befund
-        return {"status": UNKLAR, "zitat": zitat, "end_url": "",
-                "befund": f"nicht erreichbar ({type(exc).__name__})"}
-    if status in (403, 429) or status >= 500:
-        return {"status": UNKLAR, "zitat": zitat, "end_url": end_url,
-                "befund": f"HTTP {status} – nicht belastbar prüfbar"}
+        basis_unklar = {
+            "status": UNKLAR, "zitat": zitat, "end_url": "",
+            "befund": f"nicht erreichbar ({type(exc).__name__})",
+        }
+    if basis_unklar is None and (status in (403, 429) or status >= 500):
+        basis_unklar = {
+            "status": UNKLAR, "zitat": zitat, "end_url": end_url,
+            "befund": f"HTTP {status} – nicht belastbar prüfbar",
+        }
+    if basis_unklar is not None:
+        if nutze_spiegel is not None and ist_host_oder_subdomain(zitat, _GII_BASIS_HOST):
+            return _pruefe_gii_spiegel(
+                zitat, basis_unklar, spiegel_abruf=nutze_spiegel, timeout=timeout,
+            )
+        return basis_unklar
     if status >= 400:
         return {"status": TOT, "zitat": zitat, "end_url": end_url,
                 "befund": f"HTTP {status} – Beleg nicht mehr abrufbar"}
@@ -197,9 +421,10 @@ def belegketten(*, nur_hochrisiko: bool = False) -> list[dict]:
 
 
 def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
-                timeout: float = 10.0) -> dict:
+                spiegel_abruf=None, timeout: float = 10.0) -> dict:
     ergebnisse = []
     cache = {}
+    gii_direkt_blockiert = False
     for artikel in belegketten(nur_hochrisiko=nur_hochrisiko):
         if artikel.get("lesefehler"):
             ergebnisse.append({
@@ -211,7 +436,17 @@ def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
         for quelle in artikel["quellen"]:
             url = quelle["url"]
             if url not in cache:
-                cache[url] = pruefe_quelle(url, abruf=abruf, timeout=timeout)
+                ist_gii = ist_host_oder_subdomain(url, _GII_BASIS_HOST)
+                d_timeout = min(timeout, 3.0) if (ist_gii and gii_direkt_blockiert) else None
+                res = pruefe_quelle(
+                    url, abruf=abruf, spiegel_abruf=spiegel_abruf,
+                    timeout=timeout, direkt_timeout=d_timeout,
+                )
+                if ist_gii and (
+                    res["status"] == UNKLAR or "GII-Runner-Filter" in str(res.get("hinweis") or "")
+                ):
+                    gii_direkt_blockiert = True
+                cache[url] = res
             # Kopie: Zuordnung eines Artikels darf andere nicht überschreiben.
             ergebnis = dict(cache[url])
             ergebnis.update({
@@ -327,6 +562,46 @@ def selftest() -> list[str]:
     erwarte("http ohne s ist tot",
             pruefe_quelle("http://example.org/a", abruf=abruf_ok)["status"] == TOT)
     erwarte("leere URL ist tot", pruefe_quelle("", abruf=abruf_ok)["status"] == TOT)
+
+    # GII-Spiegel-Normprüfung (Befund #826, 30.10.2026)
+    vvg_md = (
+        "---\n"
+        "titel: Versicherungsvertragsgesetz\n"
+        "quelle: https://www.gesetze-im-internet.de/vvg_2008/\n"
+        "---\n\n"
+        "### § 40 Kündigung bei Prämienerhöhung\n\n(1) Erhöht der Versicherer ...\n\n"
+        "### § 41 (weggefallen)\n"
+    )
+
+    def spiegel_vvg(url, timeout=10.0):
+        if url.endswith("/vv/vvg_2008.md"):
+            return 200, vvg_md
+        return 404, ""
+
+    def spiegel_offline(url, timeout=10.0):
+        raise urllib.error.URLError("offline")
+
+    erwarte("GII aktive Einzelnorm trotz Runner-Block ok",
+            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                          abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == OK)
+    erwarte("GII Gesamtwerk trotz Runner-Block ok",
+            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/",
+                          abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == OK)
+    erwarte("GII weggefallene Einzelnorm ist tot",
+            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__41.html",
+                          abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == TOT)
+    erwarte("GII fehlende Einzelnorm ist tot",
+            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__999.html",
+                          abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == TOT)
+    erwarte("GII aufgehobenes Gesetz (Spiegel 404) ist tot",
+            pruefe_quelle("https://www.gesetze-im-internet.de/altgesetz/__1.html",
+                          abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == TOT)
+    erwarte("GII direktes 404 wird niemals durch Spiegel überstimmt",
+            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                          abruf=abruf_404, spiegel_abruf=spiegel_vvg)["status"] == TOT)
+    erwarte("GII + Spiegel offline bleibt fail-closed unklar",
+            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                          abruf=abruf_netz, spiegel_abruf=spiegel_offline)["status"] == UNKLAR)
     return fehler
 
 

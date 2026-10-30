@@ -125,6 +125,85 @@ class BelegkettenWacheTests(unittest.TestCase):
     def test_selbsttest(self):
         self.assertEqual([], wache.selftest())
 
+    def test_gii_spiegel_normpruefung_heilt_runner_blockade_fail_closed(self):
+        """#826: GII blockt Runner-IPs; Spiegel bestätigt aktive Normen, entlarvt Wegfall."""
+        spiegel_dateien = {
+            "/vv/vvg_2008.md": (
+                "---\nquelle: https://www.gesetze-im-internet.de/vvg_2008/\n---\n\n"
+                "### § 40 Kündigung bei Prämienerhöhung\n\n(1) Text.\n\n"
+                "### § 40a Sonderregel\n\nText.\n\n"
+                "### § 41 (weggefallen)\n"
+            ),
+            "/bg/bgb.md": (
+                "---\nquelle: https://www.gesetze-im-internet.de/bgb/\n---\n\n"
+                "### § 502 Vorfälligkeitsentschädigung\n\n(1) Text.\n"
+            ),
+            "/go/got_2022.md": (
+                "---\nquelle: https://www.gesetze-im-internet.de/got_2022/\n---\n\n"
+                "### § 2 Gebührenhöhe\n\n### § 4 Gebühren für tierärztlichen Notdienst\n"
+            ),
+            "/fa/falsch.md": (
+                "---\nquelle: https://boese-gesetze-im-internet.de/falsch/\n---\n\n"
+                "### § 1 Text\n"
+            ),
+        }
+
+        def runner_timeout(url, timeout=10.0):
+            raise wache.urllib.error.URLError("timed out")
+
+        def spiegel(url, timeout=10.0):
+            for suffix, inhalt in spiegel_dateien.items():
+                if url.endswith(suffix):
+                    return 200, inhalt
+            return 404, ""
+
+        for zitat in (
+            "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            "https://www.gesetze-im-internet.de/bgb/__502.html",
+            "https://www.gesetze-im-internet.de/got_2022/",
+        ):
+            with self.subTest(zitat=zitat):
+                erg = wache.pruefe_quelle(zitat, abruf=runner_timeout, spiegel_abruf=spiegel)
+                self.assertEqual(wache.OK, erg["status"], erg)
+                self.assertIn("Bundesrechts-Spiegel", erg["hinweis"])
+
+        # § 4 darf NICHT auf § 40 oder § 40a matchen!
+        erg_fehlt = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__4.html",
+            abruf=runner_timeout, spiegel_abruf=spiegel,
+        )
+        self.assertEqual(wache.TOT, erg_fehlt["status"])
+
+        # Weggefallener Paragraph → TOT
+        erg_weg = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__41.html",
+            abruf=runner_timeout, spiegel_abruf=spiegel,
+        )
+        self.assertEqual(wache.TOT, erg_weg["status"])
+        self.assertIn("weggefallen", erg_weg["befund"])
+
+        # Aufgehobenes Gesetz (404 im Spiegel) → TOT
+        erg_alt = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/aufgehoben_1999/__1.html",
+            abruf=runner_timeout, spiegel_abruf=spiegel,
+        )
+        self.assertEqual(wache.TOT, erg_alt["status"])
+
+        # Gefälschter quelle:-Kopf → bleibt fail-closed UNKLAR
+        erg_spoof = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/falsch/__1.html",
+            abruf=runner_timeout, spiegel_abruf=spiegel,
+        )
+        self.assertEqual(wache.UNKLAR, erg_spoof["status"])
+
+        # Spiegel ebenfalls offline → bleibt fail-closed UNKLAR
+        erg_offline = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            abruf=runner_timeout,
+            spiegel_abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(OSError("offline")),
+        )
+        self.assertEqual(wache.UNKLAR, erg_offline["status"])
+
     def test_strict_nur_bei_toter_quelle(self):
         def tot(url, timeout=10.0):
             raise wache.urllib.error.HTTPError(url, 404, "Not Found", None, None)

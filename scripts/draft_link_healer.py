@@ -189,6 +189,10 @@ def scan(do_fix, dry_run=False, strict=False, now=None):
         findings += [(own, s, w, k) for s, w, k in details]
         if not count:
             return
+        if is_post:
+            import editorial_review_gate as _ymyl_gate
+            if _ymyl_gate.automatic_change_findings(content, new_content):
+                return
         if do_fix and not dry_run:
             open(path, "w", encoding="utf-8").write(new_content)
         tag = ""

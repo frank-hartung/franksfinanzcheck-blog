@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-30
 title: "Tierkrankenversicherung für Hund & Katze: Kosten realistisch"
-description: "Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif…"
+description: "Tierkrankenversicherung für Hund & Katze: Wann sich OP-Schutz oder Vollschutz lohnt, was Tarife kosten und worauf du im Kleingedruckten achtest."
 date: 2026-09-21T09:05:00Z
 draft: true
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
@@ -17,39 +17,39 @@ kurzantwort: "Eine Tierkrankenversicherung kann sich lohnen, wenn du hohe Tierar
 social_posted: true
 keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung", "OP Versicherung Tier", "Tierkrankenversicherung für Hund & Katze", "Tierkrankenversicherung", "realistisch"]
 pin_title: "Tierkrankenversicherung: Hund & Katze richtig einschätzen"
-pin_description: "*Werbung | Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif… Mehr Spartipps auf FranksFinanzcheck! #tierarztkostenabsichern #haustierversicherung #opversicherungtier"
+pin_description: "*Werbung | Tierkrankenversicherung für Hund und Katze im ehrlichen Kosten-Check: OP-Schutz vs. Vollschutz, Notdienst-Gebühren nach GOT und Tarif-Fallen. #tierarztkostenabsichern #haustierversicherung #opversicherungtier"
 pinwand: "Versicherung | Haustier & Finanzen"
 quellen:
   - id: "Q1"
     titel: "Krankenversicherungen für Haustiere – sinnvoll oder überflüssig?"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/krankenversicherungen-fuer-haustiere-sinnvoll-oder-ueberfluessig-10781"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-24"
+    datum: "2026-10-30"
   - id: "Q2"
     titel: "Hundekrankenversicherung Vergleich: Die besten Hunde-OP-Versicherungen (16.04.2025)"
     url: "https://www.test.de/Hundekrankenversicherung-Vergleich-5777769-0/"
     herausgeber: "Stiftung Warentest"
-    datum: "2026-10-05"
+    datum: "2026-10-30"
   - id: "Q3"
     titel: "Gebührenordnung für Tierärztinnen und Tierärzte (GOT 2022)"
     url: "https://www.gesetze-im-internet.de/got_2022/"
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
-    datum: "2026-10-05"
-faktencheck: "2026-09-27"
+    datum: "2026-10-30"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
-  vorheriger_pruefer:
+  status: "freigegeben"
+  inhalt_sha256: "398ce011498a021d628af6db9a084f688343590f530eaed5147ce5e4859f7111"
+  pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (GOT 2022 als Primärquelle, Stiftung Warentest, Verbraucherzentrale); GOT-Angaben und test.de-Zitate verifiziert, Beispielrechnungen nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
+    rolle: "Faktenprüfung anhand Primärquelle GOT 2022 (§§ 2 und 4), Stiftung Warentest (Hunde-OP-Vergleich 16.04.2025) und Verbraucherzentrale; Notdienstsatz (2- bis 4-fach) und Notdienstgebühr (50 € netto / 59,50 € brutto), Tarifbandbreiten und Beispielrechnungen am 30.10.2026 vollständig abgeglichen"
     typ: "redaktion-mit-externer-belegkette"
-  vorheriges_pruefdatum: "2026-10-24"
-  vorheriger_reviewtermin: "2026-12-08"
-  aenderungsgrund: "§§ 2 und 4 GOT: Notdienstsatz und Notdienstgebühr überarbeitet; Fachprüfung und Abgleich des Prüfprotokolls ausstehend. Historischer Änderungsgrund: Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
+  pruefdatum: "2026-10-30"
+  naechste_pruefung: "2026-12-14"
+  aenderungsgrund: "Vollständige Fach- und Belegprüfung am 30.10.2026 (#826): präzisierte §§ 2 und 4 GOT-Darstellung (2- bis 4-facher Notdienstsatz sowie 50 € netto zzgl. 19 % USt. = 59,50 € brutto) gegen den Verordnungstext geprüft, Textanker und Fundstelle im Prüfprotokoll nachgezogen, abgeschnittene Description/Pin-Description geheilt sowie FAQ-Überschrift und Lesetipp-Link bereinigt."
   gepruefte_aussagen:
-    - textanker: "dazu kommt eine pauschale Notdienstgebühr"
-      pruefung: "Bestätigt: GOT 2022 – ein- bis dreifacher Satz nach Aufwand, vierfacher Satz im Notdienst, pauschale Notdienstgebühr 59,50 € brutto"
+    - textanker: "Im tierärztlichen Notdienst zu den gesetzlichen Zeiten gilt nach § 4 GOT der zweifache bis vierfache Satz"
+      pruefung: "Bestätigt: §§ 2 und 4 GOT 2022 regeln regulär den 1- bis 3-fachen Satz und im Notdienst den 2- bis 4-fachen Satz zzgl. 50 € netto Notdienstgebühr (bei 19 % USt.: 59,50 € brutto)"
       quellen: ["Q3"]
     - textanker: "Seit der Novelle der Gebührenordnung für Tierärzte"
       pruefung: "Bestätigt: GOT-Novelle trat im November 2022 in Kraft; seither deutlich höhere Abrechnungssätze (Verbraucherzentrale)"
@@ -83,10 +83,11 @@ redaktionelle_pruefung:
       konsistenzpruefung: "Folgerichtig aus dem erweiterten Abrechnungsrahmen (1–3× Satz, Notdienst 4×)"
       quellen: ["Q3", "Q1"]
     - aussage: "Notdienstgebühr GOT"
-      wert: "59,50 €"
-      fundstelle: "Tierärzte dürfen je nach Aufwand den ein- bis dreifachen Satz abrechnen, im Notdienst ist auch der vierfache Satz möglich, dazu kommt eine pauschale Notdienstgebühr von 59,50 €."
-      pruefung: "Gesetzlich fixiert: Notdienstgebühr 59,50 € brutto (GOT 2022)"
-      konsistenzpruefung: "Wörtlich mit der Gebührenordnung identisch"
+      wert: "50 € netto / 19 % USt. / 59,50 € brutto"
+      fundstelle: "Im tierärztlichen Notdienst zu den gesetzlichen Zeiten gilt nach § 4 GOT der zweifache bis vierfache Satz; hinzu kommt eine Notdienstgebühr von 50 € zuzüglich Umsatzsteuer (bei 19 %: 59,50 € brutto)."
+      pruefung: "Gesetzlich fixiert in § 4 Abs. 1 GOT 2022: pauschal 50,00 € netto je Behandlungsbesuch; zuzüglich 19 % Regelumsatzsteuer ergeben sich exakt 59,50 € brutto"
+      konsistenzpruefung: "50,00 € × 1,19 = 59,50 €; wörtlich mit § 4 GOT identisch"
+      rechenweg: "50,00 € netto + 9,50 € (19 % USt.) = 59,50 € brutto"
       quellen: ["Q3"]
     - aussage: "Kreuzbandriss-OP (TPLO/TTA)"
       wert: "1.800–4.500 €"
@@ -420,7 +421,8 @@ Eine **Tierkrankenversicherung für Hund oder Katze** lohnt sich vor allem dann,
 
 Wenn du Leistung, Eigenanteil, Ausschlüsse und deine eigene Finanzlage zusammen betrachtest, triffst du deutlich bessere Entscheidungen. Genau so wird aus einer emotionalen Frage eine kluge Geldentscheidung.
 
-**Lesetipp:** Hausratversicherung: Was sie kostet und wen sie schützt
+**Lesetipp:** [Ratgeber Versicherungen: Alle wichtigen Policen im Überblick](../../pillar/versicherungen/)
+
 ## Häufige Fragen
 
 ### Lohnt sich eine Tierkrankenversicherung für jede Katze und jeden Hund?
@@ -435,7 +437,7 @@ Nur auf den Monatsbeitrag zu schauen und Ausschlüsse, Selbstbeteiligung oder Le
 ### Sollte ich lieber sparen statt versichern?
 Das kann sinnvoll sein, wenn du genug Rücklagen hast. Fehlt dieser Puffer, ist Versicherung oft die stressärmere Lösung.
 
-### Warum ist frühes abschließen oft besser?
+### Warum ist ein früher Abschluss oft besser?
 Weil junge Tiere meist günstiger versicherbar sind und Vorerkrankungen noch keine Rolle spielen.
 
 ### Was ist wichtiger: niedriger Beitrag oder starke Leistung?

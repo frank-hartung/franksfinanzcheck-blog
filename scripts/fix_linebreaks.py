@@ -356,11 +356,14 @@ def main() -> int:
         else:
             new_body, n = fix_body(parts[2])
         if n:
+            neu = join_article(parts[1], new_body, parts[0])
+            import editorial_review_gate as _ymyl_gate
+            if _ymyl_gate.automatic_change_findings(content, neu):
+                continue
             total += n
             print(f"  {f.split('/')[-2]}: {n} Änderung(en)")
             if not dry:
-                open(f, "w", encoding="utf-8").write(
-                    join_article(parts[1], new_body, parts[0]))
+                open(f, "w", encoding="utf-8").write(neu)
     print(f"\n{'DRY-RUN: ' if dry else ''}Zeilenumbruch-Generator (KI): {total} Änderungen.")
     if not dry:
         try:
