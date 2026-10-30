@@ -352,9 +352,8 @@ def run_selftest():
               not healed2 and all(f[3] != "missing" for f in findings2))
 
         # 4) --strict: altes Verhalten, auch transient wird entlinkt
-        open(live_a, "w", encoding="utf-8").write(
-            "Vorher: [Ziel B](../../posts/draft-b/) und "
-            "[Ziel C](../../posts/future-c/).")
+        make("live-a", body="Vorher: [Ziel B](../../posts/draft-b/) und "
+                            "[Ziel C](../../posts/future-c/).")
         scan(do_fix=True, strict=True, now=FIXED_NOW)
         a2 = open(live_a, encoding="utf-8").read()
         check("strict entlinkt auch Draft-/Zukunfts-Ziele",

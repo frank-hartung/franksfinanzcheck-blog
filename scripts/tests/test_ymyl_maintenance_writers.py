@@ -75,6 +75,7 @@ class MaintenanceWritersTests(unittest.TestCase):
         with patch.object(dash_guard, 'target_files', return_value=[self.path]), \
              patch.object(dash_guard, 'ROOT', Path(self.tmp.name)), \
              patch.object(dash_guard, 'REPORT', report), \
+             patch.object(dash_guard, 'HISTORY', Path(self.tmp.name) / 'dash_history.jsonl'), \
              patch.object(dash_guard, 'DO_FIX', True), \
              patch.object(dash_guard, 'DRY_RUN', False), \
              contextlib.redirect_stdout(io.StringIO()):
