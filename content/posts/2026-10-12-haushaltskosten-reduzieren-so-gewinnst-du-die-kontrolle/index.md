@@ -55,6 +55,8 @@ Diese Strategien senken deine Ausgaben sofort:
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Unfallversicherung vergleichen**](/go/unfallversicherung/)
 *(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
+Wenn du das einmal im Jahr neu aufsetzen willst: Der [Jahresplan für geringere Monatskosten](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) sammelt alle Abbuchungen, bildet Kategorien und setzt die Fristen. Dieser 4K-Prüfpfad ist der Nachmittag, an dem du die Fixkosten dann wirklich abarbeitest.
+
 ## Was sind die größten Preistreiber in deutschen Haushalten?
 
 Fixkosten bilden das Fundament deiner Finanzen. Doch genau hier liegt oft das Problem. Einmal abgeschlossen, laufen Verträge über Jahre einfach weiter. Dabei verändern sich der Markt und deine Bedürfnisse ständig.

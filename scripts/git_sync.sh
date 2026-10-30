@@ -1100,9 +1100,77 @@ except SyntaxError as exc:
 }
 
 # ========================================================================
+#  ABGELEITETE BILDZEILEN NACHZIEHEN (Dauerheilung 30.10.2026)
+#
+#    Die Bildzeile der Top-20-Abbildungen ist ABGELEITET: aus Titel,
+#    Kernsätzen und Abschnittsnamen (`caption_*` in
+#    scripts/abbildungen_ableiten.py). Jede Textpflege – Titel-Gate, Casing,
+#    Keyword-Optimizer, Lesbarkeit, Affiliate-Deep-Links, Duplikat-Wache –
+#    lässt sie damit veralten, ohne dass jemand eine Abbildung anfasst.
+#
+#    Genau das ist am 30.10.2026 passiert: FF5 meldete auf main 21 Beiträge,
+#    obwohl der Fehler in der Textpflege lag. Der Befund erschien dann in
+#    JEDEM fremden Pull Request und blockierte Arbeit, die damit nichts zu
+#    tun hatte (Blastradius-Klasse #676, nur andersherum).
+#
+#    Dieser Haken schließt die Lücke am Erzeuger: Wer Inhalt committet,
+#    zieht die daraus abgeleitete Bildzeile im selben Commit nach. Gestagt
+#    werden ausschließlich die von `--nachzug` GENANNTEN Pfade – kein
+#    `git add -A`, keine fremde Arbeit. Fehler blockieren nie den Commit
+#    (der Bestand geht vor); das harte Gate bleibt `--check` im Tageslauf
+#    und in der PR-Suite.
+#    $1 = staged (Vollbedienung, Standard) | push (--push-only)
+# ========================================================================
+abbildungen_nachziehen() {
+  local modus="${1:-staged}" ausgabe="" status=0 datei gezogen=0
+  [ -f scripts/abbildungen_ableiten.py ] || return 0
+  if [ "${DRY_RUN:-0}" = "1" ]; then
+    echo "DRY_RUN – Abbildungen bleiben unangetastet."
+    return 0
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::warning::git_sync.sh: python3 fehlt – Abbildungen ungeprüft (kein Nachzug)."
+    return 0
+  fi
+  # In der Vollbedienung nur, wenn dieser Commit Inhalt anfasst: Ein reiner
+  # Daten-Commit lässt den Bestand unberührt (und den Lauf schnell).
+  if [ "$modus" = "staged" ] && \
+     [ -z "$(git diff --cached --name-only -- 'content/' 2>/dev/null || true)" ]; then
+    return 0
+  fi
+  ausgabe="$(python3 scripts/abbildungen_ableiten.py --nachzug 2>&1)" || status=$?
+  if [ "$status" -ne 0 ]; then
+    echo "::warning::git_sync.sh: Abbildungs-Nachzug nicht möglich – Bildzeilen bleiben, wie sie sind: $(printf '%s' "$ausgabe" | tail -n 2 | tr '\n' ' ')"
+    return 0
+  fi
+  while IFS= read -r datei; do
+    [ -n "$datei" ] || continue
+    [ -f "$datei" ] || continue
+    git add -- "$datei" || true
+    gezogen=$((gezogen + 1))
+  done < <(printf '%s\n' "$ausgabe" | sed -n 's/^ÄNDERUNG //p')
+  if [ "$gezogen" -gt 0 ]; then
+    echo "git_sync.sh: $gezogen abgeleitete Abbildungs-Datei(en) nachgezogen (kein neuer Inhalt):"
+    printf '%s\n' "$ausgabe" | grep -E '^  ↻' | head -n 5 || true
+  fi
+  return 0
+}
+
+# ========================================================================
 #  b) --push-only: nur rebasen und pushen
 # ========================================================================
 if [ "$PUSH_ONLY" = "1" ]; then
+  # Fremd-Workflows committen selbst (`git add -A`). Ist darin eine
+  # abgeleitete Bildzeile veraltet, wird sie hier nachgezogen und als
+  # eigener Commit hinterhergeschoben – dieselbe Bauart wie die
+  # Nachweis-Korrektur weiter unten (#900).
+  abbildungen_nachziehen push
+  if ! git diff --cached --quiet 2>/dev/null; then
+    if git commit -q -m "chore(abbildungen): abgeleitete Bildzeilen nachgezogen (Textpflege)"; then
+      echo "git_sync.sh: Abbildungs-Nachzug als eigener Commit angehängt."
+    fi
+  fi
+
   # Nichts zu pushen? Dann ist alles gut (z. B. identischer Commit
   # eines parallelen Laufs) – kein Fehler.
   #
@@ -1161,6 +1229,11 @@ for p in "$@"; do
     echo "  - übersprungen (nicht vorhanden): $p"
   fi
 done
+
+# 30.10.2026: Wer Inhalt committet, zieht die daraus abgeleitete Bildzeile
+# in DENSELBEN Commit (kein neuer Satz, nur Ableitung) – sonst steht der
+# Befund später bei einem fremden PR.
+abbildungen_nachziehen staged
 
 if [ "$staged" -eq 0 ] || git diff --cached --quiet; then
   echo "git_sync.sh: keine Änderungen – nichts zu committen."

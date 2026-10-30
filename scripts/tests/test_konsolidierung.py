@@ -7,6 +7,7 @@ Rechnung benutzt.
 
 Ausführen: python3 -m unittest scripts.tests.test_konsolidierung
 """
+import datetime as dt
 import json
 import os
 import shutil
@@ -324,32 +325,189 @@ class FallZwilling(unittest.TestCase):
         self.assertEqual(befund["quelle"], "top_seiten_28t.json")
         self.assertGreater(befund["impressionen"], 0, befund["grund"])
 
-    def test_der_zwilling_hat_keine_nachfrage_aus_seite_eins(self):
-        # 19.10.2026 kam die andere P2-Seite in den Top-Seiten überhaupt nicht
-        # vor (0 Impressionen) – der Test hielt das als „keine belegte
-        # Nachfrage“ fest. Der Datenlauf 2026-10-28 (#926) hat die Lage
-        # geändert: 4 Impressionen, Position 39,25. Damit ist die Nachfrage
-        # belegt (Schwelle: >= 1 Impression), und die alte Aussage „kommt
-        # nicht vor“ wäre schlicht falsch.
-        #
-        # Was bleibt: Eine Seite auf Position 39 sieht niemand – belegt ist
-        # nicht dasselbe wie nachgefragt. Deshalb prüft der Test nicht mehr die
-        # Tageszahl (die ändert sich mit jedem GSC-Lauf), sondern die
-        # Eigenschaft, auf die es ankommt: weit hinter Seite 1, verschwindend
-        # wenige Impressionen. Für ein Zusammenführen wäre das weiterhin der
-        # falsche Anlass – F kippt ohnehin schon an der Suchabsicht.
+    # ------------------------------------------------------------------
+    #  Rollenvertrag (Dauerheilung 30.10.2026)
+    #
+    #  Bis hierher stand hier EINE Zusicherung: „der Zwilling hat weniger als
+    #  10 Impressionen“. Am 30.10.2026 hatte er 14 (Position 40,9, 0 Klicks),
+    #  und der Test war rot. Er sagte damit das Richtige – „Konsolidierung
+    #  prüfen“ –, verlangte aber eine kleine Zahl. Wer ihn reparieren will,
+    #  senkt die Schwelle; genau das darf nicht passieren.
+    #
+    #  Die Zahl bleibt, aber sie verlangt ab jetzt eine ANTWORT statt einer
+    #  Restnachfrage: Über 10 Impressionen muss die Entscheidung die
+    #  Nachfrage tragen (Erwartung `impressionen`), die Frist laufen lassen
+    #  (Wiedervorlage), und die Rollentrennung muss strukturell belegt sein
+    #  (keine gemeinsamen Zwischenüberschriften, keine wörtlichen Sätze) und
+    #  in beide Richtungen verlinkt. Das ist strenger als vorher: Eine
+    #  gelöschte Entscheidung, eine überfällige Frist, ein fehlender
+    #  Rollenlink oder eine zusammengewachsene Struktur macht rot – eine
+    #  kleine Zahl war vorher schon grün, ohne dass jemand etwas geprüft hat.
+    # ------------------------------------------------------------------
+    def test_nachfrage_ueber_der_schwelle_ist_beantwortet(self):
         befund = k.nachfrage(self.ZIEL, BLOG_DIR)
         self.assertTrue(befund["belegt"], befund["grund"])
-        self.assertIsNotNone(befund["position"], befund["grund"])
-        self.assertGreater(befund["position"], 10.0,
-                           f"Position {befund['position']} liegt auf Seite 1 – "
-                           f"dann ist die Seite keine Reserve mehr und F neu zu "
-                           f"bewerten.")
-        self.assertLess(befund["impressionen"], 10,
-                        f"{befund['impressionen']} Impressionen in 28 Tagen – "
-                        f"das ist keine Restnachfrage mehr, sondern eine Seite "
-                        f"im Aufbau; Konsolidierung prüfen.")
+        register = k._gsc().entscheidungen()
+        for url in (self.ZIEL, self.QUELLE):
+            eintrag = register.get(url) or {}
+            self.assertTrue(eintrag, f"{url}: keine dokumentierte Rollen-Entscheidung")
+            self.assertEqual(eintrag.get("erwartung"), "impressionen",
+                             f"{url}: die Entscheidung beantwortet die Nachfrage nicht")
+            self.assertGreaterEqual(eintrag.get("wiedervorlage", ""), "2026-10-30",
+                                    f"{url}: Wiedervorlage ist überfällig")
+        if befund["impressionen"] >= k.SCHWELLE_NACHFRAGE_ROLLE:
+            # Der Fall, der am 30.10. eingetreten ist: Die Zahl ist über der
+            # Schwelle – und die Antwort steht im Register, nicht in einer
+            # angepassten Schwelle.
+            self.assertIn("Kontrollpfad", register[self.ZIEL]["entscheidung"])
 
+    def test_rollenpaar_ist_beidseitig_dokumentiert(self):
+        register = k._gsc().entscheidungen()
+        self.assertEqual((register.get(self.ZIEL) or {}).get("paar"), self.QUELLE)
+        self.assertEqual((register.get(self.QUELLE) or {}).get("paar"), self.ZIEL)
+        self.assertEqual(k.rollenpaare(BLOG_DIR, register),
+                         [{"a": self.ZIEL, "b": self.QUELLE}])
+
+    def test_die_beiden_seiten_sind_strukturell_verschieden(self):
+        st = k.struktur(self.ZIEL, self.QUELLE, BLOG_DIR)
+        self.assertTrue(st["messbar"], st.get("grund", st))
+        self.assertEqual(st["gemeinsam"], [],
+                         "gemeinsame Zwischenüberschriften – dann ist es eine Dublette")
+        self.assertLessEqual(st["ueberschneidung"], k.SCHWELLE_STRUKTUR,
+                             f"{st['ueberschneidung']:.1%} wörtliche Sätze")
+
+    def test_rollenlink_in_beide_richtungen(self):
+        self.assertTrue(k._verlinkt(self.ZIEL, self.QUELLE, BLOG_DIR),
+                        "Der Kontrollpfad verlinkt den Jahresplan nicht")
+        self.assertTrue(k._verlinkt(self.QUELLE, self.ZIEL, BLOG_DIR),
+                        "Der Jahresplan verlinkt den Kontrollpfad nicht")
+
+    def test_der_lebende_bestand_ist_am_entscheidungstag_rollenklar(self):
+        """Die ganze Wache am echten Bestand – mit FESTEM Datum.
+
+        Die Frist (Wiedervorlage) ist eine Zusage und läuft ab; die Wache
+        meldet das dann zu Recht (R2 hart, `--rollenpaare` im Deploy-Gate).
+        Ein Test, der dafür die Wanduhr liest, wäre selbst eine Zeitbombe:
+        Am 14.11.2026 wäre er rot geworden, ohne dass jemand etwas geändert
+        hätte – genau die Klasse, die die Uhr-Probe (+97 Tage) findet, und
+        dieser Test hat sie am 30.10.2026 ausgelöst. Das Datum ist deshalb
+        der Entscheidungstag: Was hier geprüft wird (Struktur, Entscheidung,
+        Rollenlink), hängt nicht am Kalender; was am Kalender hängt, prüft
+        der Lauf zur Laufzeit.
+        """
+        self.assertEqual(k.rollenpaare_pruefen(BLOG_DIR, heute=dt.date(2026, 10, 30)), [])
+
+
+class RollenpaarWache(unittest.TestCase):
+    """Die Wache muss rot können – sonst ist sie Dekoration.
+
+    Jede Zusicherung des Rollenvertrags wird einzeln verletzt: fehlende
+    Entscheidung, überfällige Frist, Nachfrage ohne Antwort, gemeinsame
+    Struktur, fehlender Rollenlink. Dieselbe Bauart wie die Fixtures der
+    drei F-Belege oben.
+    """
+
+    A = "/posts/2026-10-12-jahresplan-test/"
+    B = "/posts/2026-10-12-kontrollpfad-test/"
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="rollenpaar-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self._seite("2026-10-12-jahresplan-test",
+                    "Am Anfang sammelst du alle Abbuchungen eines Jahres. "
+                    "Danach ordnest du sie nach Kategorien und Fristen.",
+                    "## Alle Zahlungen sammeln", "## Fristen sichern")
+        self._seite("2026-10-12-kontrollpfad-test",
+                    "Der Prüfpfad geht an einem Nachmittag durch alle Fixkosten. "
+                    "Am Ende steht die Entscheidung über jeden Vertrag.",
+                    "## Preistreiber finden", "## Konditionen rechnen")
+        self.register = {
+            self.A: {"url": self.A, "paar": self.B, "wiedervorlage": "2026-11-13",
+                     "eigentuemer": "redaktion", "erwartung": "impressionen"},
+            self.B: {"url": self.B, "paar": self.A, "wiedervorlage": "2026-11-13",
+                     "eigentuemer": "redaktion", "erwartung": "impressionen"},
+        }
+        self.heute = __import__("datetime").date(2026, 10, 30)
+
+    def _seite(self, slug, text, h2a, h2b, link=None):
+        ziel = self.tmp / "content" / "posts" / slug
+        ziel.mkdir(parents=True, exist_ok=True)
+        koerper = f"{text}\n\n{h2a}\n\nInhalt.\n\n{h2b}\n\nInhalt.\n"
+        if link:
+            koerper = f"Mehr dazu im {link}.\n\n" + koerper
+        (ziel / "index.md").write_text(
+            f'---\ntitle: "{slug}"\n---\n\n{koerper}', encoding="utf-8")
+
+    def _pruefen(self, register=None):
+        return k.rollenpaar_pruefen(self.A, self.B, self.tmp,
+                                    register=self.register if register is None else register,
+                                    heute=self.heute)
+
+    def _verlinken(self):
+        self._seite("2026-10-12-jahresplan-test",
+                    "Am Anfang sammelst du alle Abbuchungen eines Jahres. "
+                    "Danach ordnest du sie nach Kategorien und Fristen.",
+                    "## Alle Zahlungen sammeln", "## Fristen sichern",
+                    link=f"[Kontrollpfad](../../posts/{k._verzeichnis(self.B)}/)")
+        self._seite("2026-10-12-kontrollpfad-test",
+                    "Der Prüfpfad geht an einem Nachmittag durch alle Fixkosten. "
+                    "Am Ende steht die Entscheidung über jeden Vertrag.",
+                    "## Preistreiber finden", "## Konditionen rechnen",
+                    link=f"[Jahresplan](../../posts/{k._verzeichnis(self.A)}/)")
+
+    def test_ohne_rollenlink_rot(self):
+        # Nur eine Richtung verlinkt: Die Seite B kennt A, A kennt B nicht.
+        self._seite("2026-10-12-kontrollpfad-test",
+                    "Der Prüfpfad geht an einem Nachmittag durch alle Fixkosten. "
+                    "Am Ende steht die Entscheidung über jeden Vertrag.",
+                    "## Preistreiber finden", "## Konditionen rechnen",
+                    link=f"[Jahresplan](../../posts/{k._verzeichnis(self.A)}/)")
+        befunde = self._pruefen()
+        self.assertTrue(any("verlinkt" in b["text"] for b in befunde), befunde)
+
+    def test_fehlende_entscheidung_rot(self):
+        self._verlinken()
+        befunde = self._pruefen({})
+        self.assertTrue(any("Keine dokumentierte Rollen-Entscheidung" in b["text"]
+                            for b in befunde), befunde)
+
+    def test_ueberfaellige_frist_rot(self):
+        self._verlinken()
+        alt = {u: dict(e, wiedervorlage="2026-09-30") for u, e in self.register.items()}
+        befunde = self._pruefen(alt)
+        self.assertTrue(any("überfällig" in b["text"] for b in befunde), befunde)
+
+    def test_nachfrage_ohne_antwort_rot(self):
+        self._verlinken()
+        _leistungsdaten(self.tmp, [{"url": self.A,
+                                    "impressions": k.SCHWELLE_NACHFRAGE_ROLLE,
+                                    "position": 40.9}])
+        ohne = {u: dict(e, erwartung="indexiert") for u, e in self.register.items()}
+        befunde = self._pruefen(ohne)
+        self.assertTrue(any("Impressionen" in b["text"] for b in befunde), befunde)
+
+    def test_gemeinsame_struktur_rot(self):
+        self._verlinken()
+        self._seite("2026-10-12-kontrollpfad-test",
+                    "Der Prüfpfad geht an einem Nachmittag durch alle Fixkosten. "
+                    "Am Ende steht die Entscheidung über jeden Vertrag.",
+                    "## Fristen sichern", "## Konditionen rechnen",
+                    link=f"[Jahresplan](../../posts/{k._verzeichnis(self.A)}/)")
+        befunde = self._pruefen()
+        self.assertTrue(any("Struktur gleich" in b["text"] for b in befunde), befunde)
+
+    def test_einseitige_dokumentation_rot(self):
+        # Nur der Jahresplan trägt eine Entscheidung, die Gegenseite nicht:
+        # Der Rollenlink steht, die Zusage fehlt – das zählt nicht.
+        self._verlinken()
+        befunde = self._pruefen({self.A: dict(self.register[self.A])})
+        self.assertTrue(any("Keine dokumentierte Rollen-Entscheidung" in b["text"]
+                            for b in befunde), befunde)
+        self.assertEqual(befunde[0]["url"], self.B)
+
+    def test_vollstaendig_belegt_gruen(self):
+        self._verlinken()
+        self.assertEqual(self._pruefen(), [])
 
 if __name__ == "__main__":
     unittest.main()

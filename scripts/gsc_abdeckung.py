@@ -2241,7 +2241,8 @@ def entscheidung_eintragen(url: str, entscheidung: str, begruendung: str = "",
                            erwartung: str = "indexiert",
                            eigentuemer: str = "redaktion",
                            heute: dt.date | None = None,
-                           pfad: Path | None = None) -> dict:
+                           pfad: Path | None = None,
+                           paar: str | None = None) -> dict:
     """Schreibt eine Entscheidung ins Register – mit Frist und Erwartung.
 
     Eine Entscheidung ohne Frist und ohne Erwartung ist nicht prüfbar. Beides
@@ -2260,6 +2261,11 @@ def entscheidung_eintragen(url: str, entscheidung: str, begruendung: str = "",
              "wiedervorlage": wiedervorlage, "erwartung": erwartung,
              "eigentuemer": eigentuemer,
              "begruendung": begruendung or "ohne Begründung eingetragen"}
+    # `paar` verbindet zwei Seiten, die bewusst getrennt bleiben (Rollenpaar).
+    # Ohne dieses Feld müsste `konsolidierung.py --rollenpaare` raten, welche
+    # Seiten zusammengehören – und eine zweite Liste wäre eine zweite Wahrheit.
+    if paar:
+        werte["paar"] = paar
     neu = "- {" + ", ".join(f'{k}: "{v}"' for k, v in werte.items()) + "}"
     kopf = (
         "# Entscheidungs-Register der GSC-Triage\n"
@@ -4189,6 +4195,22 @@ def selbsttest() -> int:
                eintrag["wiedervorlage"] == "2026-11-25"
                and len(gelesen) == 1
                and gelesen["/posts/a/"]["entscheidung"] == "Rolle festgelegt")
+        # K71b: `paar` macht eine Rollentrennung maschinell prüfbar
+        # (`konsolidierung.py --rollenpaare`). Ohne das Feld müsste die Wache
+        # raten, welche Seiten zusammengehören – oder eine zweite Liste führen.
+        mit_paar = entscheidung_eintragen(
+            "/posts/b/", "Rolle getrennt", "Zwillingsprüfung 30.10.",
+            wiedervorlage="2026-11-13", erwartung="impressionen",
+            heute=dt.date(2026, 10, 30), pfad=regdatei, paar="/posts/a/")
+        gelesen_paar = entscheidungen(regdatei)
+        pruefe("K71b Register trägt das Rollenpaar als Feld",
+               mit_paar.get("paar") == "/posts/a/"
+               and gelesen_paar["/posts/b/"]["paar"] == "/posts/a/")
+        entscheidung_eintragen("/posts/b/", "Rolle getrennt", "ohne Paar",
+                               wiedervorlage="2026-11-13",
+                               heute=dt.date(2026, 10, 30), pfad=regdatei)
+        pruefe("K71c ohne --paar bleibt das Feld weg (kein Altbestand-Feld)",
+               "paar" not in entscheidungen(regdatei)["/posts/b/"])
 
         wh_reg = {"indexierbar": ["/posts/a/"], "weiterleitungen": {}, "entfallen": {},
                   "top_nicht_live": [], "noindex": [], "sitemap": []}
@@ -4394,6 +4416,9 @@ def main(argv: list[str] | None = None) -> int:
                    help="was passieren soll: indexiert | impressionen | keine")
     p.add_argument("--eigentuemer", metavar="WER", default="redaktion",
                    help="wer die Entscheidung trägt (Standard: redaktion)")
+    p.add_argument("--paar", metavar="URL",
+                   help="Gegenstück eines Rollenpaars (beide Seiten bleiben "
+                        "getrennt; prüfbar mit konsolidierung.py --rollenpaare)")
     p.add_argument("--entscheidungen", action="store_true",
                    help="Register der Entscheidungen mit Fristen zeigen")
     p.add_argument("--selftest", action="store_true", help="offline, ohne Netz")
@@ -4499,7 +4524,7 @@ def main(argv: list[str] | None = None) -> int:
                 werte = entscheidung_eintragen(
                     args.entscheiden, args.entscheidung or "", args.begruendung or "",
                     args.wiedervorlage, args.erwartung or "indexiert",
-                    args.eigentuemer or "redaktion")
+                    args.eigentuemer or "redaktion", paar=args.paar)
             except ValueError as fehler:
                 print(f"🛑 {fehler}", file=sys.stderr)
                 return 1
