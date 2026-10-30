@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T01:10:19Z",
-  "modus": "kandidaten",
-  "commit": "901318505ce85df47ab84ecc5cf974e61b37602b",
+  "generated_at": "2026-10-30T11:22:43Z",
+  "modus": "live",
+  "commit": "854652e328ebc95c985ef8d92f1ce98ee1393921",
   "kapazitaet": {
     "stichtag": "2026-10-30",
-    "artikel": 106,
-    "faellig": 14,
-    "ueberfaellig": 13,
+    "artikel": 110,
+    "faellig": 11,
+    "ueberfaellig": 10,
     "ueberfaellig_max_tage": 3,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
@@ -17,37 +17,16 @@
     "budget": 3,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 3.0,
-    "bedarf_je_tag": 2.578,
-    "bedarf_je_woche": 18.0,
-    "deckung_prozent": 116.4,
+    "bedarf_je_tag": 2.678,
+    "bedarf_je_woche": 18.7,
+    "deckung_prozent": 112.0,
     "horizont_tage": 60,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 5,
-    "verletzungen_alt": 11,
-    "verletzungen_neu": 1,
+    "abbau_tage": 4,
+    "verletzungen_alt": 8,
+    "verletzungen_neu": 0,
     "verletzungen": [
-      {
-        "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
-        "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
-        "frist": "2026-10-27",
-        "tage_zu_spaet": 3,
-        "vorher_faellig": true
-      },
-      {
-        "slug": "versicherungen",
-        "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
-        "frist": "2026-10-27",
-        "tage_zu_spaet": 3,
-        "vorher_faellig": true
-      },
-      {
-        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
-      },
       {
         "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
@@ -98,24 +77,17 @@
         "vorher_faellig": true
       },
       {
-        "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-        "titel": "DSL- und Internet-Flat günstig sichern",
+        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+        "titel": "Kostenloses Girokonto ohne Gebühren finden",
         "frist": "2026-10-30",
         "tage_zu_spaet": 1,
         "vorher_faellig": true
-      },
-      {
-        "slug": "konto-karten",
-        "titel": "Konto & Karten: Ratgeber für gebührenfreie Finanzen",
-        "frist": "2026-11-27",
-        "tage_zu_spaet": 1,
-        "vorher_faellig": false
       }
     ],
     "offen_im_horizont": 8,
-    "puenktlich": false,
+    "puenktlich": true,
     "rueckstand_abgebaut": true,
-    "empfohlenes_budget": 4,
+    "empfohlenes_budget": 3,
     "empfehlung_erreicht": true,
     "hartes_limit": 10
   },
@@ -223,21 +195,21 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
-      "sha256": "fb81a9253b1e175884bbf55195e3ec3feef0e15431171f934062ab10f0c54b0c",
-      "urteil": "blockiert",
+      "sha256": "0c8c9e33367ef2dff83a4d6a2ea8d807fd8f0a90240811c9b5761586297f1fb4",
+      "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "blockiert"
+        "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-11-29",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "sha256": "701d935e277e6bd1f49d85657a8043f751e4e206b4747aaa5ad46ade39fe0e9e",
@@ -325,7 +297,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "4cbfe1cd85eb5c2e6109fa164c5ce6342229d8a93536ee0f688b09f332a62d92",
+      "sha256": "84c8d3dfaa07751b66041bf23a4e2c4864e7434b13e4dfc143621447ecff35fe",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -339,7 +311,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "b60c49dac24f1147144d8f8137d0c3f15e4ff23ae789330657a8fb6c1313144a",
@@ -359,24 +331,24 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
-      "sha256": "a1a6d2a061e4f2da8d7a40f872a4c410c32707af33be134c2b994a38e223f581",
-      "urteil": "blockiert",
+      "sha256": "4567f782095f1bb2246588c34e1b0a5398644fac7bbf91af176eecf6f95e6654",
+      "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "blockiert"
+        "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-11-29",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "610dfd9c9cf7ad21e4d6c8483d657744d39a411f3a7c2f9c5f5411eb3b2d03a4",
+      "sha256": "a9fa9e7407125f65010f90b9b43cff0a52c75ad0f3c889b5b97f6a1098fdecd5",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -390,7 +362,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "4bf2411e61d0fd7aa9f477541d9d6fcaca2014b99763e471139adcc087cea7d7",
@@ -1293,23 +1265,6 @@
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert"
     },
-    "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-      "sha256": "d9c7d953c78eaa5c104b06b0a8c3e22d3be8ac03213dc2745e5275342d3abe3b",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "standard",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "neu versiegelt"
-    },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
       "urteil": "freigabe-reif",
@@ -1328,7 +1283,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
-      "sha256": "9d9eda23d2248c71bf6948824f5f3d10b3977aaea109e2915d626c44bc60328d",
+      "sha256": "9831b3fc0b667d7ddb84257c1115ef36eb76abdab9c014a3b3c922e087fba39b",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1342,7 +1297,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "geändert – neu geprüft"
     }
   }
 }
