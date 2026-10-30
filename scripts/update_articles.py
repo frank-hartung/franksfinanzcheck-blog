@@ -79,8 +79,8 @@ def load_articles():
         if "draft: true" in fm_raw:
             continue
 
-        def get(key):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm_raw, re.M)
+        def get(key, _fm=fm_raw):
+            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
             return m.group(1).strip() if m else ""
 
         arts.append({

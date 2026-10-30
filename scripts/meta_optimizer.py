@@ -78,8 +78,8 @@ def load_articles(files=None):
         if not scoped and "draft: true" in fm:
             continue
 
-        def get(key):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+        def get(key, _fm=fm):
+            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
             return m.group(1).strip() if m else ""
 
         anrede_raw = get("anrede").strip('"').lower()

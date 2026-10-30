@@ -79,6 +79,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import post_utils as pu  # noqa: E402
+from net_safety import pruefe_url_ziel, sicherer_abruf  # noqa: E402
 
 try:  # gemeinsamer Multi-Provider-Zugang (nur Standardbibliothek)
     import llm_client  # noqa: E402
@@ -412,12 +413,18 @@ def sammle_rss(feed: dict, begriffe: list[str], limit: int) -> tuple[list[dict],
     name = feed.get("name") or "Feed"
     url = feed.get("url") or ""
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=TIMEOUT_STD) as antwort:
-            daten = antwort.read(MAX_ABRUF_BYTES + 1)
-        if len(daten) > MAX_ABRUF_BYTES:
-            return [], f"{name}: Feed überschreitet das Größenlimit"
+        _status, _kopf, daten = sicherer_abruf(
+            url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=TIMEOUT_STD,
+            max_bytes=MAX_ABRUF_BYTES,
+            erlaube_loopback=False,
+        )
         parsed = feedparser.parse(daten)
+    except ValueError as exc:
+        if "Groessenlimit" in str(exc):
+            return [], f"{name}: Feed überschreitet das Größenlimit"
+        return [], f"{name}: Abruf fehlgeschlagen ({exc})"
     except Exception as exc:  # noqa: BLE001
         return [], f"{name}: Abruf fehlgeschlagen ({exc})"
     if getattr(parsed, "bozo", 0) and not parsed.entries:
@@ -449,14 +456,23 @@ def sammle_rss(feed: dict, begriffe: list[str], limit: int) -> tuple[list[dict],
 
 def sammle_web(url: str, begriffe: list[str], max_zeichen: int) -> tuple[dict | None, str | None]:
     """Klartext-Lektüre über den Agent-Reach-Kanal „web" (Jina Reader)."""
+    ok_ziel, ziel_grund = pruefe_url_ziel(url, erlaube_loopback=False, aufloesen=False)
+    if not ok_ziel:
+        return None, f"{domain_von(url)}: Ziel abgelehnt ({ziel_grund})"
     ziel = f"https://r.jina.ai/{url}"
-    req = urllib.request.Request(ziel, headers={"User-Agent": USER_AGENT})
     try:
-        with urllib.request.urlopen(req, timeout=TIMEOUT_STD) as antwort:
-            daten = antwort.read(MAX_ABRUF_BYTES + 1)
-            if len(daten) > MAX_ABRUF_BYTES:
-                return None, f"{domain_von(url)}: Antwort überschreitet das Größenlimit"
-            text = daten.decode("utf-8", errors="replace")
+        _status, _kopf, daten = sicherer_abruf(
+            ziel,
+            headers={"User-Agent": USER_AGENT},
+            timeout=TIMEOUT_STD,
+            max_bytes=MAX_ABRUF_BYTES,
+            erlaube_loopback=False,
+        )
+        text = daten.decode("utf-8", errors="replace")
+    except ValueError as exc:
+        if "Groessenlimit" in str(exc):
+            return None, f"{domain_von(url)}: Antwort überschreitet das Größenlimit"
+        return None, f"{domain_von(url)}: Jina-Reader-Abruf fehlgeschlagen ({exc})"
     except Exception as exc:  # noqa: BLE001
         return None, f"{domain_von(url)}: Jina-Reader-Abruf fehlgeschlagen ({exc})"
     text = re.sub(r"\n{3,}", "\n\n", text).strip()

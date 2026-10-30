@@ -222,8 +222,8 @@ def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str) -> str:
         "|---|---|---|---|---|---|",
     ]
     for p in punkte:
-        def zelle(k):
-            e = (p.get("feld") or {}).get(k)
+        def zelle(k, _p=p):
+            e = (_p.get("feld") or {}).get(k)
             if not e:
                 return "–"
             wert = e.get("percentile")

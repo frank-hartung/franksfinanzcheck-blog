@@ -51,17 +51,20 @@ on:
   workflow_dispatch:
 
 permissions:
-  # security-events für den SARIF-Upload auf main, pull-requests für die
-  # Bilanz-Kommentare der Wache auf Pull Requests.
-  security-events: write
+  # Top-Level strikt lesend (Least Privilege); Schreibrechte nur im Job `analyze`.
   contents: read
-  pull-requests: write
 
 jobs:
   analyze:
     name: CodeQL (${{ matrix.language }})
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    permissions:
+      # security-events für den SARIF-Upload auf main, pull-requests für die
+      # Bilanz-Kommentare der Wache auf Pull Requests.
+      contents: read
+      security-events: write
+      pull-requests: write
     strategy:
       fail-fast: false
       matrix:
@@ -187,6 +190,8 @@ jobs:
 
       - name: Upload-Ergebnis sichtbar machen (Default-Setup-Konflikt)
         if: github.ref == 'refs/heads/main' && steps.upload.outcome != 'success'
+        env:
+          MATRIX_LANGUAGE: ${{ matrix.language }}
         run: |
           set -euo pipefail
           # Der Upload steht bewusst auf continue-on-error: Ein blockierter
@@ -201,7 +206,7 @@ jobs:
           # Upload dieser Wache. Solange das so ist, stammen die Alert-
           # Nummern in der Security-Tab vom DEFAULT-Setup, nicht von hier.
           {
-            echo "### ⚠ SARIF-Upload blockiert (${{ matrix.language }})"
+            echo "### ⚠ SARIF-Upload blockiert (${MATRIX_LANGUAGE})"
             echo ""
             echo "Die Analyse lief vollständig, der Upload in die Security-Tab wurde abgelehnt."
             echo ""
@@ -232,6 +237,7 @@ jobs:
       - name: Sicherheits-Gate (null Security-Fundstellen)
         env:
           GH_TOKEN: ${{ github.token }}
+          MATRIX_LANGUAGE: ${{ matrix.language }}
         run: |
           set -euo pipefail
           # Sicherheitsrelevant ist ein Fund, wenn seine Regel eine
@@ -289,7 +295,7 @@ jobs:
               ' "$f" | sort -u
             fi
           done
-          BILANZ="CodeQL-Bilanz (${{ matrix.language }}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."
+          BILANZ="CodeQL-Bilanz (${MATRIX_LANGUAGE}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."
           echo "$BILANZ"
           # Bilanz als PR-Kommentar festhalten (nur bei Pull Requests) –
           # macht die Gate-Entscheidung ohne Log-Download nachvollziehbar:
@@ -302,8 +308,8 @@ jobs:
               done | sort -u)"
               UNTERDRUECKT="$(cat /tmp/*.sarif.unterdrueckt 2>/dev/null | sort -u || true)"
               {
-                echo "<!-- arena-wache-bilanz:${{ matrix.language }} -->"
-                echo "## Sicherheitswache (${{ matrix.language }})"
+                echo "<!-- arena-wache-bilanz:${MATRIX_LANGUAGE} -->"
+                echo "## Sicherheitswache (${MATRIX_LANGUAGE})"
                 echo ""
                 echo "${BILANZ}"
                 if [ -n "$VERBLEIBEND" ]; then

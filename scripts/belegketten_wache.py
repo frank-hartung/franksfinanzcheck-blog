@@ -120,10 +120,15 @@ def _nur_sprachpfad(zitat: str, end_url: str) -> bool:
 
 
 def abruf_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
-    """Ein GET mit Weiterleitungsverfolgung. Gibt (Status, End-URL) zurück."""
-    anfrage = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(anfrage, timeout=timeout) as antwort:
-        return int(antwort.status), antwort.geturl()
+    """Ein GET mit sicherer Weiterleitungsverfolgung. Gibt (Status, End-URL) zurück."""
+    from net_safety import sicherer_abruf_status
+
+    return sicherer_abruf_status(
+        url,
+        headers={"User-Agent": USER_AGENT},
+        timeout=timeout,
+        erlaube_loopback=False,
+    )
 
 
 def pruefe_quelle(url: str, *, abruf=None, timeout: float = 10.0) -> dict:

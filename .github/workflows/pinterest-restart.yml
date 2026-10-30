@@ -188,7 +188,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 scripts/spam_guard.py --domain-status > /tmp/status.txt 2>&1 || true
-          gh issue comment "$RESTART_ISSUE" --body "🚀 **Pinterest-Restart-Lauf** (Run: ${{ github.run_id }}) – Domain-Notbremse nach Bestätigung aufgehoben.
+          gh issue comment "$RESTART_ISSUE" --body "🚀 **Pinterest-Restart-Lauf** (Run: ${GITHUB_RUN_ID}) – Domain-Notbremse nach Bestätigung aufgehoben.
 
           $(cat /tmp/status.txt)
 

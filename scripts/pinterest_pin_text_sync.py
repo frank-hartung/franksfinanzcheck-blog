@@ -257,11 +257,11 @@ def load_posts() -> list:
         # NUR aus dem Frontmatter-Block lesen (Body kann ähnliche Zeilen
         # enthalten, z. B. in Tabellen oder Trennlinien-Kontexten)
         _fm_block = split_fm(content)[0]
-        def fm(key, default=""):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm_block, re.M)
+        def fm(key, default="", _fmb=_fm_block):
+            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fmb, re.M)
             return m.group(1).strip() if m else default
-        def fm_list(key):
-            m = re.search(rf"^{key}:\s*\[(.*?)\]", _fm_block, re.M)
+        def fm_list(key, _fmb=_fm_block):
+            m = re.search(rf"^{key}:\s*\[(.*?)\]", _fmb, re.M)
             if not m:
                 return []
             return [t.strip().strip('"') for t in m.group(1).split(",") if t.strip()]

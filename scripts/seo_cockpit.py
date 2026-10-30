@@ -51,9 +51,9 @@ import shutil
 import sys
 import tomllib
 from urllib.parse import unquote, urljoin, urlsplit
-import xml.etree.ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import safe_xml as ET  # noqa: E402
 import serp_limits  # noqa: E402  (SSOT der Snippet-Grenzen, gleiche Zahlen wie metadaten_wache)
 
 ROOT = Path(__file__).resolve().parents[1]

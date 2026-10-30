@@ -298,7 +298,7 @@ def topic_already_covered(topic_title, used_titles):
             "in", "den", "dem", "ein", "eine", "einer", "eines", "auf", "bei",
             "zum", "zur", "sich", "nicht", "auch", "als", "wie", "was", "dich",
             "dein", "deine", "ihr", "ihre", "so", "du", "sie", "is", "sind",
-            "fur", "gegen", "nach", "uber", "aus", "für", "über"}
+            "gegen", "nach", "uber", "aus", "für", "über"}
 
     def norm(s):
         s = s.lower()

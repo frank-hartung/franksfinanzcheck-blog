@@ -161,9 +161,10 @@ jobs:
           # fehlt es, bleibt das wie bisher eine GELB-Meldung mit Befehl.
           # Anleitung: docs/MARKEN-OBERFLAECHE-RUNBOOK.md, Abschnitt 3.
           BRAND_ADMIN_TOKEN: ${{ secrets.BRAND_ADMIN_TOKEN }}
+          EINGABE_MODUS: ${{ inputs.modus }}
         run: |
           set -euo pipefail
-          MODUS="${{ inputs.modus }}"
+          MODUS="$EINGABE_MODUS"
           if [ "$MODUS" = "pruefen" ]; then
             echo "Modus: nur prüfen (kein Schreibzugriff)"
             python3 scripts/brand_surface_guard.py --gate

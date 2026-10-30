@@ -215,7 +215,7 @@ def blocking_findings(findings: Iterable[Finding]) -> list[Finding]:
 def signature(findings: Sequence[Finding]) -> str:
     """Kurzer Fingerabdruck der Befundmenge (Änderung → Body-Update statt Kommentar)."""
     raw = "|".join(sorted(f"{f.id}:{f.severity}:{f.detail[:80]}" for f in findings))
-    return hashlib.sha1(f"{BODY_VERSION}|{raw}".encode("utf-8")).hexdigest()[:10]
+    return hashlib.sha1(f"{BODY_VERSION}|{raw}".encode("utf-8"), usedforsecurity=False).hexdigest()[:10]
 
 
 # --------------------------------------------------------------------------- #

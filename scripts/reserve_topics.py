@@ -110,7 +110,7 @@ FUELLWOERTER = {
     "jahr", "jahre", "monat", "woche", "heute", "neue", "neuen", "neues",
     "beste", "besten", "besser", "mehr", "weniger", "guenstig",
     "guenstiger", "clever", "clevere", "smart", "einfache", "kleine",
-    "grosse", "praxis", "update", "ueberblick", "haushalt", "zuhause",
+    "grosse", "praxis", "update", "haushalt", "zuhause",
     # Tätigkeiten und Allerwelts-Nomen: Sie stehen in fast jedem
     # Finanz-Titel und würden sonst wildfremde Themen verheiraten
     # („Ratenkredit Kosten" ~ „kostenloses Girokonto").

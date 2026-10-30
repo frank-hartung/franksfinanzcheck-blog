@@ -263,7 +263,7 @@ def parse_document(html: str) -> tuple[Node | None, list[Node]]:
         if not inner:
             continue
         if inner[0] == "/":
-            name = re.split(r"[\s>]", inner[1:].strip(), 1)[0].lower()
+            name = re.split(r"[\s>]", inner[1:].strip(), maxsplit=1)[0].lower()
             if not name:
                 continue
             for pos in range(len(stack) - 1, 0, -1):
@@ -275,7 +275,7 @@ def parse_document(html: str) -> tuple[Node | None, list[Node]]:
                     break
             continue
 
-        name = re.split(r"[\s/>]", inner.lstrip("/"), 1)[0].lower()
+        name = re.split(r"[\s/>]", inner.lstrip("/"), maxsplit=1)[0].lower()
         if not name:
             continue
         attrs_raw = inner[len(name):]

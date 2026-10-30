@@ -639,7 +639,7 @@ def rewrite_fields(season_id: str, title: str, lead: str) -> None:
         rx = re.compile(rf"(?m)^(\s+{key}:\s*)\".*\"\s*$")
         if not rx.search(block):
             raise ValueError(f"Saison {season_id!r} hat kein einzeiliges Feld `{key}`")
-        block = rx.sub(lambda m: m.group(1) + yaml_quote(value), block, count=1)
+        block = rx.sub(lambda m, _v=value: m.group(1) + yaml_quote(_v), block, count=1)
     replacement = source[:match.start(1)] + block + source[match.end(1):]
     tmp = SAISONS.with_suffix(".yaml.tmp")
     tmp.write_text(replacement, encoding="utf-8")

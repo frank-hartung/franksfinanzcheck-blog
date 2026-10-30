@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { parseCSV, parseGSC } = require('./app.js');
+const { parseCSV, parseGSC, RULE_LABELS } = require('./app.js');
 
 test('CSV: BOM, Semikolon, escaped quotes, mehrzeilige Felder', () => {
   assert.deepEqual(parseCSV('\uFEFFA;B\r\n"a;""b""\nc";2\r\n'), [['A', 'B'], ['a;"b"\nc', '2']]);
@@ -34,4 +34,8 @@ test('GSC: fehlerhafte Zahlen, zu viele Klicks und Spaltenzahl', () => {
 });
 test('Import bewahrt Text unverändert; UI rendert ausschließlich textContent', () => {
   assert.equal(parseGSC('Query,Clicks,Impressions,Position\n<img src=x onerror=alert(1)>,1,100,8')[0].label, '<img src=x onerror=alert(1)>');
+});
+test('Regel-Beschriftungen bewahren das 155-Zeichen-SERP-Limit ohne Schlüssel-Überschreibung', () => {
+  assert.equal(RULE_LABELS['description-length'], 'Beschreibung auf 155 Zeichen kürzen');
+  assert.equal(RULE_LABELS['description-breite'], 'Beschreibung auf 985 Pixel kürzen');
 });

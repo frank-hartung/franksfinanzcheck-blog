@@ -57,11 +57,13 @@ import re
 import sys
 import urllib.error
 import urllib.request
-import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from urllib.parse import unquote, urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if os.path.join(ROOT, "scripts") not in sys.path:
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+import safe_xml as ET  # noqa: E402
 
 SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 IMAGE_NS = "http://www.google.com/schemas/sitemap-image/1.1"
