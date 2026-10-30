@@ -49,6 +49,20 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C43 Ein geparktes Ziel ist kein Pin-Ziel (P10 misst die richtige Menge, P14 heilt über die SSOT, die Zielwache hat einen Fahrer)** – Ein geparktes Ziel ist kein Pin-Ziel: Vom 20. bis 24.10.2026 meldete der Pinterest-Watchdog jeden Tag denselben Posten – [P10] der geparkte Artikel „Dein Haus sicher schützen“ sei ein Meta-Refresh-Alias. Er WAR einer, und zwar der gewollte: Der Artikel ist seit 19.10.2026 Entwurf (RS1–RS3), seine URL in data/weiterleitungen.yaml als Regel C erklärt. P10 maß die falsche Menge (alle Slugs statt der Live-Artikel) und hatte keinen Heiler – dieselbe Bauart wie C37. Beim Nachmessen: 7 von 46 Pins im Masterplan zeigten auf Ziele ohne Artikel-Seite (4 Entwürfe, 3 fehlend), und die Wache, die das prüft (pinterest_link_guard L1/L2), rief kein Workflow auf. Jetzt: EINE Quelle (scripts/pinterest_ziele.py) über weiterleitungen.live_urls(); P10 misst Live-Artikel und nennt geparkte URLS mit erklärter Weiterleitung ausdrücklich als Betriebszustand; P10 heilt in beide Richtungen (Live-Artikel gewinnt gegen eine überdeckende Weiterleitung, verwaiste Alias-Seiten werden entfernt, Handarbeit bleibt Befund); P14 heilt Pin-Ziele nur über die SSOT (Retarget bei Regeln A/B, sonst parken – kein erfundenes Ziel, kein Content-Verlust); der Watchdog fährt Heiler und Zielwache; Report-Schema 5 kennt SSOT und Zieldaten; Tests und Selbsttest laufen im Vertrag (Pinterest P10/P14, #822, 24.10.2026).
 - **C44 Der Vorrat endet nicht, er läuft aus (Vorlauf in Tagen, Bahn-scharfe Diagnose, Füllwort-Grenze)** – Der Vorrat endet nicht, er läuft aus: Zwischen dem 19.10. und dem 25.10.2026 fiel der Reserve-Vorrat von 6 auf 1, und jede Nacht wurde derselbe Schritt rot – in der AUTO-Bahn war kein Thema mehr frei. 154 von 202 Themen galten als belegt, zu einem guten Teil nur, weil die Dublettenprüfung „guenstig“ kannte, aber nicht „guenstige(n)“; die übrigen 21 waren sämtlich YMYL-Hochrisiko (Fachfreigabe). Der Befund sagte „alles belegt oder im Cooldown“ – wahr war: frei, aber in der falschen Bahn. Jetzt misst themennachschub_waechter.py den Vorlauf in PRODUKTIONSTAGEN über engine_capacity.lage() (eine Messregel, wie im Pre-Flight), der Reserve-Lauf ruft die Wache VOR der Kette auf, reserve_gate.py unterscheidet „AUTO-Bahn leer“, „beide Bahnen leer“ und „Vorlauf knapp“, und die Füllwort-Grenze ist geschlossen (0 → 19 freie AUTO-Themen), ohne Produkte zu entwerten: „Stromfresser“, „Kreditkarte“ und „Reiseversicherung“ kollidieren weiterhin (WF-D4E0, #821, 25.10.2026).
 
+### Nachzug #912 (30.10.2026): Prüfumfang, Fassungsbindung und Kalender
+
+C45 bleibt der Kapazitätsvertrag, erhält aber zwei nicht wegkürzbare Grenzen:
+Ein Wochenmittel ist kein Nachweis täglicher Fristen, und ein Prüfdatum ist
+keine inhaltliche Freigabe. Die Kalendersimulation prüft Erst- und Folgetermine
+über 120 Tage auf dem echten cron-Kalender. Die automatische Budgetempfehlung
+ist auch der geprüfte Plan. Offene Fachbefunde überleben jeden Lauf und werden
+über F4 in Publish-Gate und Scorecard aus demselben Collector blockiert.
+Geschlossen wird nur durch eine menschliche Entscheidung mit SHA-256 der
+geprüften Fassung (`data/faktenfrische_entscheidungen.yaml`). Beschädigte
+Beweisdaten sind Werkzeugfehler. Regressionen:
+`test_faktenfrische_befund_ledger.py`; Runbook:
+`docs/ANLEITUNG-FAKTENFRISCHE.md`.
+
 ## Befund
 
 🟢 Alle Verträge erfüllt.

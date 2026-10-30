@@ -77,7 +77,7 @@ planung:
   # Tagen abgebaut sein – sonst ist der Lauf rot (Schließpfad).
   nachhol_frist_tage: 7
   # So weit rechnet die Simulation voraus (Sichtbarkeit, nicht Wahrheit).
-  horizont_tage: 60
+  horizont_tage: 120
   # Statische Mindestdeckung für die Wache: Kapazität/Bedarf. 110 %
   # lässt Luft für Spitzen (viele Seiten mit demselben Prüfdatum).
   min_deckung_prozent: 110

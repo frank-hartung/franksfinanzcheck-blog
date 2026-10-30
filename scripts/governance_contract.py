@@ -155,6 +155,7 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # jeden Tag rot. Eine Wache, die niemand verlangt, führt
           # irgendwann niemand aus (C6).
           "faktenfrische_kapazitaet.py",
+          "faktenfrische_befund_ledger.py",
           # Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
           # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
@@ -3625,7 +3626,7 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 C45_WACHE = "faktenfrische_kapazitaet.py"
 C45_SSOT = os.path.join("data", "agent_reach", "faktenfrische.yaml")
 C45_WORKFLOW = "faktenfrische.yml"
-C45_TESTS = ("test_faktenfrische_kapazitaet.py",)
+C45_TESTS = ("test_faktenfrische_kapazitaet.py", "test_faktenfrische_befund_ledger.py")
 C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
               "empfohlenes_budget", "nachhol_frist_tage")
 
