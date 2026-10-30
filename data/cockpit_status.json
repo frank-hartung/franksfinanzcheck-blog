@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T23:54:17Z",
+  "generated": "2026-10-30T23:37:55Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -20,7 +20,7 @@
       "lines": [
         "1 Prüfpunkt(e) auffällig (cwv)",
         "cwv: 10 <img>-Elemente ohne width/height/style (CLS-Risiko)",
-        "Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 191 davon ohne Erklärung im Bestand"
+        "Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 193 davon ohne Erklärung im Bestand"
       ],
       "sources": [
         "data/governance_status.json",
@@ -56,7 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.2 Tag(en)"
+        "letzter erfolgreicher Post vor 0.0 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -66,10 +66,10 @@
       ]
     },
     "Newsletter": {
-      "level": "rot",
+      "level": "gelb",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 20 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 6 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
