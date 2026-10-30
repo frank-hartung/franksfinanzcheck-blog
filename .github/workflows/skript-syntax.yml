@@ -87,6 +87,30 @@ jobs:
           fi
           exit "$code"
 
+      # WORKFLOW-JS-WACHE (WF-829B/#922, 29.10.2026)
+      # Der Block IN einem Workflow ist JavaScript, lebt in YAML und wird von
+      # keiner Python-Prüfung berührt. Am 29.10.2026 stand in
+      # alert-on-failure.yml ein Zusammenschnitt (zwei Zeichenketten ohne
+      # Komma) – das gesamte Fehler-Alerting starb an einem SyntaxError,
+      # also genau der Kanal, der solche Ausfälle meldet. Diese Stufe
+      # kompiliert jeden github-script-Block mit `node --check`.
+      - name: Workflow-JS – jeder github-script-Block muss kompilieren
+        run: |
+          set +e
+          python3 scripts/workflow_js_wache.py --md >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/workflow_js_wache.py --selftest
+          selbst=$?
+          python3 scripts/workflow_js_wache.py --check
+          befund=$?
+          if [ "$selbst" = "2" ]; then
+            echo "::error::Selbsttest der Workflow-JS-Wache rot – die Prüfung selbst ist defekt (Exit 2)."
+          elif [ "$befund" = "2" ]; then
+            echo "::error::Workflow-JS-Wache nicht durchführbar (node fehlt). Eine ausgefallene Messung ist kein Grün (C33)."
+          elif [ "$befund" != "0" ]; then
+            echo "::error::Mindestens ein github-script-Block kompiliert nicht. Heilung: die betroffene Workflow-Datei in beiden Fassungen vergleichen – typisch ist ein Zusammenschnitt beim Zusammenführen (fehlendes Komma, verwaiste Zeile). Lokal: python3 scripts/workflow_js_wache.py --check"
+          fi
+          [ "$selbst" = "0" ] && [ "$befund" = "0" ]
+
       # TRIGGER-WACHE (WF-E813/#815, 27.10.2026)
       # Eine Wache springt nur an, wenn ihr `paths`-Filter die geänderte Datei
       # nennt. Diese Prüfung hält beides zusammen: Was ein Workflow aufruft,
