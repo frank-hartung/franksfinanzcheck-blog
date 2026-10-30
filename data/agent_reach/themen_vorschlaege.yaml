@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Inflationsrate geht im Oktober auf 2,8 Prozent zurück
+  url: https://www.tagesschau.de/wirtschaft/verbraucher/inflationsrate-deutschland-oktober-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-10-30T20:18:32'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Tarifverhandlungen: IG Metall lehnt Angebot ab - Warnstreiks drohen'
   url: https://www.tagesschau.de/wirtschaft/ig-metall-wirtschaftsmeldung-oktober2026-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -233,4 +240,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-27T20:36:38'
+zuletzt_ergaenzt: '2026-10-30T20:18:32'
