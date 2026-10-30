@@ -499,6 +499,7 @@ def fix_blog(findings):
     B2/B4/B5/B6/B7 = Demotion auf draft (manuelle Prüfung)."""
     healed = []
     for slug, (post, f) in sorted(findings.items()):
+        acted = False
         # WICHTIG: Demotionsentscheid NUR über HARTe Funde – ein B2-warn
         # (Superlativ) darf einen Artikel niemals demoten!
         hard_rules = {r for r, s, _m in f if s == "hard"}
@@ -541,6 +542,7 @@ def fix_blog(findings):
                             + '"', 1)
                         open(post["path"], "w", encoding="utf-8").write(content)
                 post_heals.append("B8-'Werbung'-Prefix ergänzt")
+            acted = True
             healed.append(f"{slug}: " + " + ".join(post_heals)
                           + (" (dry-run)" if DRY_RUN else ""))
         elif hard_rules:
@@ -549,14 +551,23 @@ def fix_blog(findings):
                               f"{sorted(hard_rules)}")
                 continue
             content = post["content"]
+            # Schon `draft: true` = Zustand, keine Handlung. Früher schrieb die
+            # Wache trotzdem „blog-fix“ ins Audit – für einen einzigen
+            # Warn-Befund fünfmal am Tag (belegt am 30.10.2026 in
+            # data/spam_history.jsonl). Ein Protokoll voller Nichts-Tun
+            # verliert seinen Beweiswert; jetzt steht dort nur, was sich
+            # tatsächlich geändert hat.
             if not re.search(r"^draft:\s*true\s*$", content, re.M):
                 content = re.sub(r"^draft:\s*false\s*$", "draft: true",
                                  content, count=1, flags=re.M)
-            open(post["path"], "w", encoding="utf-8").write(content)
-            healed.append(f"{slug}: draft gesetzt (hart: "
-                          + ", ".join(sorted(hard_rules)) + ")")
-        audit({"module": "spam_guard", "action": "blog-fix", "slug": slug,
-               "rules": sorted({r for r, _s, _m in f})})
+                with open(post["path"], "w", encoding="utf-8") as fh:
+                    fh.write(content)
+                acted = True
+                healed.append(f"{slug}: draft gesetzt (hart: "
+                              + ", ".join(sorted(hard_rules)) + ")")
+        if acted:
+            audit({"module": "spam_guard", "action": "blog-fix", "slug": slug,
+                   "rules": sorted({r for r, _s, _m in f})})
     return healed
 
 

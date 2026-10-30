@@ -1350,6 +1350,44 @@ def write_report(rows, mode, scanned, scanned_words):
     REPORT.write_text("\n".join(L) + "\n", encoding="utf-8")
 
 
+def schreibe_zustand(json_flag, dry_run, new_only):
+    """Entscheidet, ob dieser Lauf den Zustandsbericht schreiben darf.
+
+    `--json` ist die ausdrückliche Anforderung; sonst schreibt jeder Voll-Lauf
+    (Bestand, kein `--new-only`) den Zustand mit. `--new-only` bleibt aus: dort
+    geprüfte Grundgesamtheit ist „heute geändert“ – eine Deliktquote darauf
+    wäre ein Scheinwert. `--dry-run` schreibt nie.
+    """
+    return bool(json_flag or (not dry_run and not new_only))
+
+
+def write_state(rows, geparkt, scanned_files, scanned_words, total, mode):
+    """Maschinenlesbarer Lauf-Zustand für die Chefredakteur-Scorecard.
+
+    Eine Schreibstelle für `.casing_report.json` – Report, Historie und
+    Zustand dürfen nie aus verschiedenen Läufen stammen. Der Zeitstempel ist
+    der Beweis der Frische: Verbraucher (Scorecard) dürfen ihn lesen und
+    müssen eine Überalterung als Datenlücke ausweisen, nicht als Befund.
+    """
+    JSON_OUT.write_text(json.dumps({
+        "stand": f"{datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}",
+        "modus": mode,
+        # `dateien` ist aus Kompatibilitätsgründen die Fundmenge; die
+        # expliziten Felder darunter sind die Grundgesamtheit des Laufs.
+        "dateien": len(rows),
+        "gepruefte_dateien": scanned_files,
+        "woerter": scanned_words,
+        "erkannte_befunde": sum(r.get("erkannte_befunde", len(r["funde"])) for r in rows),
+        "befunde": total,
+        "hart": sum(1 for r in rows for f in r["funde"] if f["regel"] in HARD_RULES),
+        "gefixt": sum(r.get("gefixt", 0) for r in rows), "geparkt": geparkt,
+        "dateien_liste": [{"pfad": r["pfad"],
+                           "erkannte_befunde": r.get("erkannte_befunde", len(r["funde"])),
+                           "befunde": len(r["funde"]), "woerter": r["woerter"]}
+                          for r in rows],
+    }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+
 def read_trend():
     if not HISTORY.exists():
         return ""
@@ -1864,24 +1902,17 @@ def main():
         # historische Vorgänger.
         log_history(rows, geparkt, len(files), scanned_words)
         write_report(rows, mode, len(files), scanned_words)
-    if DO_JSON:
-        JSON_OUT.write_text(json.dumps({
-            "stand": f"{datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}",
-            "modus": mode,
-            # `dateien` ist aus Kompatibilitätsgründen die Fundmenge; die
-            # expliziten Felder darunter sind die Grundgesamtheit des Laufs.
-            "dateien": len(rows),
-            "gepruefte_dateien": len(files),
-            "woerter": scanned_words,
-            "erkannte_befunde": sum(r.get("erkannte_befunde", len(r["funde"])) for r in rows),
-            "befunde": total,
-            "hart": sum(1 for r in rows for f in r["funde"] if f["regel"] in HARD_RULES),
-            "gefixt": sum(r.get("gefixt", 0) for r in rows), "geparkt": geparkt,
-            "dateien_liste": [{"pfad": r["pfad"],
-                               "erkannte_befunde": r.get("erkannte_befunde", len(r["funde"])),
-                               "befunde": len(r["funde"]), "woerter": r["woerter"]}
-                              for r in rows],
-        }, ensure_ascii=False, indent=1), encoding="utf-8")
+    # Der Zustandsbericht (`.casing_report.json`) ist die Quelle, aus der die
+    # Chefredakteur-Scorecard ihre Casing-Zeile liest. Er wurde früher NUR mit
+    # `--json` geschrieben – und diesen Schalter rief kein einziger Workflow auf.
+    # Folge (belegt am 30.10.2026): das Cockpit zeigte 51 Tage alte Zahlen und
+    # damit eine Gelb-Warnung für einen Befund, den der frische Lauf nicht mehr
+    # hatte. Deshalb schreibt jeder VOLL-Lauf (Bestand, nicht `--new-only`)
+    # den Zustand mit – dieselbe Messung, die den Report erzeugt. `--new-only`
+    # bleibt ausgenommen: dort ist die Grundgesamtheit nur „heute geändert“,
+    # eine Quote darauf wäre falsch (Winz-Nenner → Schein-Deliktquote).
+    if schreibe_zustand(DO_JSON, DRY_RUN, NEW_ONLY):
+        write_state(rows, geparkt, len(files), scanned_words, total, mode)
 
     if not total:
         print("Casing-Guard: 🎉 keine Befunde – Groß-/Kleinschreibung sauber.")
