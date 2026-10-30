@@ -34,9 +34,8 @@
 #       Schlagworte/Keywords DES ARTIKELS.
 #    3. Dossier: data/research/artikel/<slug>.md + .json
 #       (datierte Fundstellen mit Quelle – prüfbar, nicht behauptet)
-#    4. Claude-Fachprüfung (kostenlos via Puter-Brücke, ohne
-#       Anthropic-API): findet veraltete Angaben, inhaltliche Lücken
-#       und schlägt Belege vor.
+#    4. KI-Fachprüfung über den gemeinsamen Multi-Provider-Zugang:
+#       findet veraltete Angaben und schlägt Belege vor.
 #       ANTI-HALLUZINATIONS-VERTRAG: Jede von Claude genannte URL
 #       muss WÖRTLICH im Dossier stehen UND auf einer Allowlist-
 #       Domain liegen – sonst wird sie verworfen. Erfundene Belege
@@ -61,12 +60,13 @@
 #
 #  EXIT: 0 gelaufen · 1 offene fachliche Befunde (nur --strict)
 #        2 Selbsttest rot / Konfigurationsfehler
-#        3 keine einzige Quelle erreichbar (CI: warnen, nicht abbrechen)
+#        3 keine einzige Quelle erreichbar · 4 KI-Fachprüfung unvollständig
 # ============================================================
 from __future__ import annotations
 
 import argparse
 import datetime as dt
+import email.utils
 import json
 import os
 import re
@@ -85,16 +85,11 @@ try:  # gemeinsamer Multi-Provider-Zugang (nur Standardbibliothek)
 except Exception:  # noqa: BLE001 - ohne Client läuft alles außer der Fachprüfung
     llm_client = None
 
-# Reihenfolge der Fachprüfung: erster Anbieter mit Schlüssel gewinnt.
-# KORREKTUR 02.10.2026: Die frühere Puter-Brücke (PUTER_AUTH_TOKEN,
-# scripts/puter_chat.mjs) ist entfernt – Puter wird im Betrieb nicht genutzt,
-# die Fachprüfung lief deshalb nie.
-# Reihenfolge seit 03.10.2026 (Transportweg-Vertrag T1/T3/T4): die drei
-# Gratis-Hoster von OpenAIs offenem Modell plus Gemini als Gegenprobe
-# aus einem anderen Modellhaus. Kostenpflichtige Anbieter kommen hier
-# nicht vor – es gibt sie im Repo nicht mehr.
-# SSOT der Kette: data/ki_transportweg.yaml → routing.faktenpruefung
-PROVIDER_ORDER = ("groq", "gemini", "nvidia", "cloudflare")
+# Spiegelung von routing.faktenpruefung in data/ki_transportweg.yaml.
+# Gemini zuerst für Modellvielfalt; Groq, NVIDIA und Cloudflare als Fallback.
+# Ein Schlüssel bedeutet keine bestätigte Erreichbarkeit oder Fachqualität.
+PROVIDER_ORDER = ("gemini", "groq", "nvidia", "cloudflare")
+TRANSPORT_PFAD = os.path.join(BLOG_DIR, "data", "ki_transportweg.yaml")
 
 CONFIG_PFAD = os.path.join(BLOG_DIR, "data", "agent_reach", "faktenfrische.yaml")
 DOSSIER_DIR = os.path.join(BLOG_DIR, "data", "research", "artikel")
@@ -104,6 +99,7 @@ REPORT_PFAD = os.path.join(BLOG_DIR, "FAKTENFRISCHE-REPORT.md")
 
 USER_AGENT = "franksfinanzcheck-faktenfrische/1.0 (Agent-Reach-Integration)"
 TIMEOUT_STD = 30
+MAX_ABRUF_BYTES = 2 * 1024 * 1024
 
 # YMYL-Erkennung: Geld, Verträge, Fristen, Gesundheit/Absicherung.
 YMYL_MUSTER = re.compile(
@@ -185,7 +181,7 @@ def ist_belegfaehig(url: str, index: dict) -> dict | None:
 
 def yaml_quote(wert: str) -> str:
     """YAML-sicherer doppelt gequoteter Skalar (FM-Grenzen-Wache, F4)."""
-    return '"' + str(wert).replace("\\", "\\\\").replace('"', '\\"') + '"'
+    return json.dumps(str(wert), ensure_ascii=False)
 
 
 # ----------------------------------------------------------------------
@@ -416,7 +412,12 @@ def sammle_rss(feed: dict, begriffe: list[str], limit: int) -> tuple[list[dict],
     name = feed.get("name") or "Feed"
     url = feed.get("url") or ""
     try:
-        parsed = feedparser.parse(url, agent=USER_AGENT)
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=TIMEOUT_STD) as antwort:
+            daten = antwort.read(MAX_ABRUF_BYTES + 1)
+        if len(daten) > MAX_ABRUF_BYTES:
+            return [], f"{name}: Feed überschreitet das Größenlimit"
+        parsed = feedparser.parse(daten)
     except Exception as exc:  # noqa: BLE001
         return [], f"{name}: Abruf fehlgeschlagen ({exc})"
     if getattr(parsed, "bozo", 0) and not parsed.entries:
@@ -452,7 +453,10 @@ def sammle_web(url: str, begriffe: list[str], max_zeichen: int) -> tuple[dict | 
     req = urllib.request.Request(ziel, headers={"User-Agent": USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=TIMEOUT_STD) as antwort:
-            text = antwort.read().decode("utf-8", errors="replace")
+            daten = antwort.read(MAX_ABRUF_BYTES + 1)
+            if len(daten) > MAX_ABRUF_BYTES:
+                return None, f"{domain_von(url)}: Antwort überschreitet das Größenlimit"
+            text = daten.decode("utf-8", errors="replace")
     except Exception as exc:  # noqa: BLE001
         return None, f"{domain_von(url)}: Jina-Reader-Abruf fehlgeschlagen ({exc})"
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
@@ -526,7 +530,8 @@ def recherchiere(art: dict, cfg: dict, offline: bool = False) -> dict:
 # ----------------------------------------------------------------------
 
 def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
-                      befunde: list[dict], trocken: bool) -> str:
+                      befunde: list[dict], trocken: bool,
+                      fachpruefung: str = "unbekannt") -> str:
     os.makedirs(DOSSIER_DIR, exist_ok=True)
     basis = os.path.join(DOSSIER_DIR, art["slug"])
     zeilen = [
@@ -560,14 +565,14 @@ def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
     else:
         zeilen += ["_Keine thematisch passende Fundstelle in diesem Lauf._", ""]
 
-    zeilen += ["## Fachliche Befunde (KI-Fachprüfung)", ""]
+    zeilen += ["## Fachliche Befunde (KI-Fachprüfung)", "",
+               f"Status: {fachpruefung}", ""]
     if befunde:
         for b in befunde:
             zeilen.append(f"- **{b.get('typ', 'Befund')}** – {b.get('text', '').strip()}"
                           + (f" (Beleg: <{b['beleg']}>)" if b.get("beleg") else ""))
     else:
-        zeilen.append("_Keine Fachprüfung in diesem Lauf (kein KI-Schlüssel "
-                      "GROQ_API_KEY/GEMINI_API_KEY oder keine Befunde)._")
+        zeilen.append("_Keine Befunde gemeldet; Prüfstatus siehe oben._")
     zeilen += ["", "## Offene GEO-Punkte", ""]
     zeilen += [f"- {p}" for p in geo["offen"]] or ["- keine"]
     if dossier["fehler"]:
@@ -584,13 +589,14 @@ def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
             # serializable“ – ein Fehler, der erst in Produktion auffällt.
             json.dump({"slug": art["slug"], "titel": art["titel"], "erzeugt": dossier["erzeugt"],
                        "faellig": faellig, "geo": geo, "treffer": dossier["treffer"],
-                       "befunde": befunde, "fehler": dossier["fehler"]},
+                       "befunde": befunde, "fehler": dossier["fehler"],
+                       "fachpruefung": fachpruefung},
                       fh, ensure_ascii=False, indent=2, default=str)
     return basis + ".md"
 
 
 # ----------------------------------------------------------------------
-# Claude-Fachprüfung (kostenlos, Puter-Brücke – keine Anthropic-API)
+# KI-Fachprüfung über den gemeinsamen Multi-Provider-Zugang
 # ----------------------------------------------------------------------
 
 SYSTEM_PROMPT = """Du bist Fachprüfer einer deutschen Premium-Finanzredaktion \
@@ -635,11 +641,27 @@ und Superlative ohne messbare Daten („oft die beste Wahl für hohes Tempo“) 
 sind praezision-Befunde; verlange eigene Messung statt Pauschalurteil."""
 
 
+def lade_provider_order(pfad: str = TRANSPORT_PFAD) -> tuple[str, ...]:
+    """Routing aus der SSOT lesen; ungültige Konfiguration nicht kaschieren."""
+    daten = lade_config(pfad)
+    routing = daten.get("routing")
+    eintrag = routing.get("faktenpruefung") if isinstance(routing, dict) else None
+    kette = eintrag.get("kette") if isinstance(eintrag, dict) else None
+    erlaubt = set(PROVIDER_ORDER)
+    if (not isinstance(kette, list) or len(kette) < 2
+            or any(not isinstance(p, str) or p not in erlaubt for p in kette)
+            or len(set(kette)) != len(kette)
+            or not any(p in ("groq", "nvidia", "cloudflare") for p in kette)):
+        raise SystemExit("KI-Transportweg: ungültiges Routing für faktenpruefung")
+    return tuple(kette)
+
+
 def verfuegbare_anbieter() -> list:
-    """Anbieter mit Schlüssel, in der festgelegten Reihenfolge."""
+    """Anbieter mit Schlüssel in der Reihenfolge der Transportweg-SSOT."""
+    kette = lade_provider_order()
     if llm_client is None:
         return []
-    return [p for p in PROVIDER_ORDER if llm_client.available(p)]
+    return [p for p in kette if llm_client.available(p)]
 
 
 def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
@@ -683,14 +705,51 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
                 provider, system=SYSTEM_PROMPT, prompt=user,
                 temperature=float(ccfg.get("temperatur", 0.2)),
                 max_tokens=int(ccfg.get("max_tokens", 4096)),
-                timeout=int(ccfg.get("timeout", 300)), attempts=2)
+                timeout=int(ccfg.get("timeout", 30)), attempts=int(ccfg.get("versuche", 1)),
+                require_complete=True, raise_on_error=True, log_errors=False)
         except Exception as exc:  # noqa: BLE001 - Lauf darf daran nicht sterben
-            fehler.append(f"{provider}: {exc}")
+            fehler.append(f"{provider}: {type(exc).__name__}")
             continue
-        if antwort and antwort.strip():
-            return *claude_antwort_pruefen(antwort, dossier, cfg), f"geprüft ({provider}:{modell})"
+        if isinstance(antwort, str) and antwort.strip():
+            if _antwort_daten(antwort) is not None:
+                return *claude_antwort_pruefen(antwort, dossier, cfg), f"geprüft ({provider}:{modell})"
+            fehler.append(f"{provider}/{modell}: ungültiges Antwortformat")
+            continue
         fehler.append(f"{provider}/{modell}: keine verwertbare Antwort")
     return [], [], "Fehler: " + "; ".join(fehler)[:300]
+
+
+def _antwort_daten(rohantwort: str) -> dict | None:
+    """Validiert das äußere Antwortschema; ungültig ist nicht gleich befundfrei."""
+    if not isinstance(rohantwort, str):
+        return None
+    match = re.search(r"\{.*\}", rohantwort.strip(), re.DOTALL)
+    if not match:
+        return None
+    try:
+        daten = json.loads(match.group(0))
+    except (ValueError, RecursionError):
+        return None
+    if (not isinstance(daten, dict)
+            or not isinstance(daten.get("befunde"), list)
+            or not isinstance(daten.get("quellen"), list)):
+        return None
+    for b in daten["befunde"]:
+        if (not isinstance(b, dict) or not isinstance(b.get("text"), str)
+                or not b["text"].strip()
+                or any(k in b and not isinstance(b[k], str) for k in ("typ", "beleg"))):
+            return None
+    for q in daten["quellen"]:
+        if (not isinstance(q, dict) or not isinstance(q.get("url"), str)
+                or not q["url"].strip()
+                or any(k in q and not isinstance(q[k], str)
+                       for k in ("titel", "herausgeber", "datum"))):
+            return None
+    return daten
+
+
+def _text(wert: object) -> str:
+    return wert.strip() if isinstance(wert, str) else ""
 
 
 def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict) -> tuple[list[dict], list[dict]]:
@@ -704,40 +763,38 @@ def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict) -> tuple[l
     """
     index = allowlist_index(cfg)
     erlaubte_urls = {t.get("url", "") for t in dossier.get("treffer", []) if t.get("url")}
-    text = (rohantwort or "").strip()
-    m = re.search(r"\{.*\}", text, re.DOTALL)
-    if not m:
-        return [], []
-    try:
-        daten = json.loads(m.group(0))
-    except json.JSONDecodeError:
+    daten = _antwort_daten(rohantwort)
+    if daten is None:
         return [], []
 
     befunde = []
     for b in (daten.get("befunde") or [])[:5]:
-        if not isinstance(b, dict) or not (b.get("text") or "").strip():
+        if not isinstance(b, dict) or not _text(b.get("text")):
             continue
-        beleg = (b.get("beleg") or "").strip()
+        beleg = _text(b.get("beleg"))
         if beleg and (beleg not in erlaubte_urls or not ist_belegfaehig(beleg, index)):
             beleg = ""   # ungedeckte URL fliegt raus, der Befund bleibt lesbar
-        befunde.append({"typ": (b.get("typ") or "befund").strip()[:20],
-                        "text": b["text"].strip()[:400], "beleg": beleg})
+        befunde.append({"typ": (_text(b.get("typ")) or "befund")[:20],
+                        "text": _text(b["text"])[:400], "beleg": beleg})
 
     max_q = int((cfg.get("budget") or {}).get("max_quellen_frontmatter", 4))
     quellen, gesehen = [], set()
+    fundstellen = {t.get("url"): t for t in dossier.get("treffer", []) if t.get("url")}
+    if max_q <= 0:
+        return befunde, quellen
     for q in (daten.get("quellen") or []):
         if not isinstance(q, dict):
             continue
-        url = (q.get("url") or "").strip()
+        url = _text(q.get("url"))
         meta = ist_belegfaehig(url, index)
         if url not in erlaubte_urls or not meta or url in gesehen:
             continue
         gesehen.add(url)
         quellen.append({
-            "titel": (q.get("titel") or "").strip()[:140] or meta["herausgeber"],
+            "titel": _text(fundstellen[url].get("titel"))[:140] or meta["herausgeber"],
             "url": url,
-            "herausgeber": (q.get("herausgeber") or meta["herausgeber"]).strip()[:80],
-            "datum": (q.get("datum") or "").strip()[:10],
+            "herausgeber": meta["herausgeber"][:80],
+            "datum": datum_aus_feed(_text(fundstellen[url].get("datum"))),
         })
         if len(quellen) >= max_q:
             break
@@ -745,16 +802,25 @@ def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict) -> tuple[l
 
 
 def quellen_aus_dossier(dossier: dict, cfg: dict) -> list[dict]:
-    """Belegkette ohne Claude: die belegfähigen Fundstellen mit Zahl/Datum."""
+    """Belegfähige Dossier-Signale; die Allowlist wird erneut geprüft.
+
+    Ein Treffer ist kein Nachweis für eine konkrete Aussage im Artikel.
+    """
     max_q = int((cfg.get("budget") or {}).get("max_quellen_frontmatter", 4))
-    quellen = []
+    quellen, gesehen = [], set()
+    index = allowlist_index(cfg)
+    if max_q <= 0:
+        return quellen
     for t in dossier.get("treffer", []):
-        if not t.get("belegfaehig"):
+        url = t.get("url", "")
+        meta = ist_belegfaehig(url, index)
+        if not t.get("belegfaehig") or not meta or url in gesehen:
             continue
+        gesehen.add(url)
         quellen.append({
             "titel": t.get("titel", "")[:140],
             "url": t.get("url", ""),
-            "herausgeber": t.get("herausgeber", ""),
+            "herausgeber": meta["herausgeber"],
             "datum": (datum_aus_feed(t.get("datum", "")) or ""),
         })
         if len(quellen) >= max_q:
@@ -766,17 +832,17 @@ def datum_aus_feed(roh: str) -> str:
     """RFC-822/ISO-Datum eines Feeds → YYYY-MM-DD (leer, wenn unklar)."""
     if not roh:
         return ""
-    iso = re.match(r"(\d{4})-(\d{2})-(\d{2})", roh)
+    iso = re.match(r"(\d{4}-\d{2}-\d{2})", roh)
     if iso:
-        return iso.group(0)
-    m = re.search(r"(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})", roh)
-    if m:
-        monate = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
-                  "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-        mon = monate.get(m.group(2)[:3].title())
-        if mon:
-            return f"{m.group(3)}-{mon:02d}-{int(m.group(1)):02d}"
-    return ""
+        try:
+            return dt.date.fromisoformat(iso.group(1)).isoformat()
+        except ValueError:
+            return ""
+    try:
+        return email.utils.parsedate_to_datetime(roh).date().isoformat()
+    except (ValueError, TypeError, OverflowError):
+        return ""
+
 
 
 # ----------------------------------------------------------------------
@@ -807,7 +873,7 @@ def fm_setze_quellen(fm: str, quellen: list[dict]) -> str:
             block.append(f"    datum: {yaml_quote(q['datum'])}")
     neu = "\n".join(block)
     quelle = fm + "\n"
-    vorhanden = re.search(r"^quellen:\s*$\n(?:[ \t]+.*\n?)*", quelle, re.MULTILINE)
+    vorhanden = re.search(r"^quellen:[^\n]*\n(?:[ \t]+.*\n?)*", quelle, re.MULTILINE)
     if vorhanden:
         ersetzt = quelle[:vorhanden.start()] + neu + "\n" + quelle[vorhanden.end():]
         return ersetzt.rstrip("\n")
@@ -853,6 +919,8 @@ def artikel_anwenden(art: dict, quellen: list[dict], datum: str,
         fm_dict, _, roh_alt = gate.load_article(art["pfad"])
     except Exception as exc:  # noqa: BLE001 – unlesbar heißt: nicht schreiben
         return [f"ABGEBROCHEN: Artikel nicht auswertbar ({type(exc).__name__}) – fail-closed"]
+    if "roh" in art and roh_alt != art["roh"]:
+        return ["ABGEBROCHEN: Artikel seit dem Einlesen verändert – nichts geschrieben"]
     hochrisiko = gate.inferred_risk(fm_dict) == gate.RISK_HIGH
 
     aenderungen: list[str] = []
@@ -1064,7 +1132,9 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
             z.append(f"- **{l['slug']}** · {b.get('typ')}: {b.get('text')}"
                      + (f" ([Beleg]({b['beleg']}))" if b.get("beleg") else ""))
     else:
-        z.append("_Keine offenen Befunde._")
+        z.append("_Keine Befunde gemeldet; der Status der Fachprüfung steht unten._")
+    z += ["", "## Status der Fachprüfung", ""]
+    z += [f"- {l['slug']}: {l.get('fachpruefung', 'unbekannt')}" for l in laeufe] or ["- Kein Artikel bearbeitet."]
     z += ["", "## GEO-Lücken im Bestand", ""]
     for name, anzahl in sorted(uebersicht["geo_luecken"].items(), key=lambda x: -x[1]):
         z.append(f"- {anzahl}× {name}")
@@ -1196,6 +1266,8 @@ def main() -> int:
 
     if args.selftest:
         return selftest()
+    if args.max is not None and args.max < 1:
+        p.error("--max muss mindestens 1 sein")
 
     # Sabotage-Schutz: kein Schreibvorgang ohne grünen Selbsttest.
     if args.apply and selftest() != 0:
@@ -1268,7 +1340,7 @@ def main() -> int:
           f"{len(auswahl)} in diesem Lauf (Budget {budget}, {budget_info['quelle']})"
           + (" · OFFLINE" if args.offline else ""))
 
-    laeufe, befunde_gesamt, quellen_erreicht = [], 0, 0
+    laeufe, befunde_gesamt, unvollstaendig = [], 0, []
     for art in auswahl:
         print(f"\n▸ {art['titel'][:70]}\n  Fälligkeit: {art['_faellig']['grund']}")
         dossier = recherchiere(art, cfg, offline=args.offline)
@@ -1277,25 +1349,29 @@ def main() -> int:
 
         befunde, claude_quellen, status = claude_fachpruefung(
             art, dossier, cfg, trocken=args.offline)
-        print(f"  Claude-Fachprüfung: {status}")
+        print(f"  KI-Fachprüfung: {status}")
         quellen = claude_quellen or quellen_aus_dossier(dossier, cfg)
 
         aenderungen = []
-        if args.apply and (quellen or dossier["treffer"]):
+        geprueft = status.startswith("geprüft (")
+        if args.apply and not args.offline and (not geprueft or not quellen):
+            unvollstaendig.append(art)
+            print("  ⚠ Fachprüfung oder belegfähige Quelle fehlt – Artikel bleibt unverändert.")
+        if args.apply and quellen and geprueft:
             aenderungen = artikel_anwenden(art, quellen, heute().isoformat(), trocken=False)
+            if any(a.startswith("ABGEBROCHEN:") for a in aenderungen):
+                unvollstaendig.append(art)
             for a in aenderungen:
                 print(f"  ✍ {a}")
             if any(a.startswith("faktencheck:") for a in aenderungen):
                 if rearm_faktenfrische_hold(art, "; ".join(aenderungen)):
                     aenderungen.append("faktenfrische-Hold: Re-Queue aktiviert")
                     print("  ♻ Faktenfrische-Hold: Re-Queue aktiviert (kein Direkt-Publish)")
-        elif quellen:
+        elif quellen and not args.apply:
             print(f"  (Trockenlauf) {len(quellen)} Belege bereit – mit --apply schreiben")
 
         dossier_schreiben(art, dossier, art["_geo"], art["_faellig"], befunde,
-                          trocken=False)
-        if quellen:
-            quellen_erreicht += 1
+                          trocken=False, fachpruefung=status)
         befunde_gesamt += len(befunde)
         laeufe.append({
             "slug": art["slug"], "titel": art["titel"],
@@ -1303,6 +1379,7 @@ def main() -> int:
             "grund": art["_faellig"]["grund"], "treffer": len(dossier["treffer"]),
             "quellen": len(quellen), "befunde": befunde,
             "geo": art["_geo"]["prozent"], "fehler": dossier["fehler"],
+            "fachpruefung": status,
             "aenderungen": aenderungen,
         })
 
@@ -1337,7 +1414,7 @@ def main() -> int:
                               "frist": (a["_faellig"]["frist"].isoformat()
                                         if a["_faellig"].get("frist") else None),
                               "geo": a["_geo"]["prozent"]}
-                             for a in arbeitsvorrat[budget:]],
+                             for a in unvollstaendig + arbeitsvorrat[budget:]],
                    "laeufe": laeufe}, fh, ensure_ascii=False, indent=2)
 
     if laeufe:
@@ -1356,6 +1433,10 @@ def main() -> int:
     if alle_kanaele_tot and not args.offline:
         print("⚠ Keine einzige Quelle erreichbar – Kanalmatrix prüfen.", file=sys.stderr)
         return 3
+    if args.apply and unvollstaendig:
+        print("⚠ Recherche oder Schreibvorgang unvollständig – betroffene Artikel bleiben in der Queue.",
+              file=sys.stderr)
+        return 4
     if args.strict and befunde_gesamt:
         return 1
     return 0

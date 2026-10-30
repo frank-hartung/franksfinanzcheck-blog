@@ -105,7 +105,9 @@ routing:
     kette: [groq, nvidia, cloudflare, gemini]
   faktenpruefung:
     zweck: fachliche Prüfung gegen Rechercheergebnisse
-    kette: [groq, gemini, nvidia, cloudflare]
+    # Erst ein anderes Modellhaus, danach drei unabhängige GPT-OSS-Hoster.
+    # Priorisierung, keine Behauptung gemessener Überlegenheit.
+    kette: [gemini, groq, nvidia, cloudflare]
   politur:
     zweck: Feinschliff kurzer Texte (Hero, Titel, Meta)
     kette: [groq, nvidia, cloudflare, gemini]

@@ -529,7 +529,8 @@ jobs:
           # Geschrieben wird ausschließlich Frontmatter (`quellen`,
           # `faktencheck`) – der Artikeltext bleibt unberührt, fachliche
           # Befunde landen im FAKTENFRISCHE-REPORT.md.
-          # Exit 3 = keine Quelle erreichbar → Warnung, kein Abbruch.
+          # Exit 3 = Quellen nicht erreichbar, Exit 4 = Fachprüfung/Schreiben
+          # unvollständig → Warnung, kein Abbruch; Gate hält zurück.
           # Der finale Publish-Gate-Collector ist dagegen hart: Ohne
           # `faktencheck` bleibt der Artikel als Hold erhalten und erreicht
           # weder Hugo-Auslieferung noch Release-Scorecard (WF-54C4/#583).
