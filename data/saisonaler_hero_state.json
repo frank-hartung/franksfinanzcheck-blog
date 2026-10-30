@@ -2,19 +2,13 @@
   "version": 1,
   "saisons": {
     "herbst": {
-      "updated": "2026-10-02T22:40:15Z",
-      "fingerprint": "f44d6e939a7367a7c37ed10db376ea3756cf2fde30e9d855ce284f0b96fd7b89",
-      "model": "approved-seasonal-baseline",
-      "research_brief": "",
-      "research_sha256": "",
-      "set_current": true,
-      "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)",
-      "fehler_serie": 7,
-      "letzter_fehler": {
-        "ts": "2026-10-30T10:47:50Z",
-        "code": "ki-ohne-gueltige-fassung",
-        "detail": "i/gemini-3-flash-preview: HTTP 429 | Runde 2 (groq:openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 2 (cloudflare:@cf/openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 2 (gemini:gemini-3-flash-preview): gemini/gemini-3-flash-preview: Antwort nicht abgeschlossen (MAX_TOKENS) | Runde 3 (groq:openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 3 (cloudflare:@cf/openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 3 (gemini:gemini-3-flash-preview): gemini/gemini-3-flash-preview: HTTP 429"
-      }
+      "updated": "2026-10-30T11:30:57Z",
+      "fingerprint": "7427b5de07359afdd3e91aeb13706f22f2ee5913e0a931aa117a87710a0fa297",
+      "model": "groq:openai/gpt-oss-120b",
+      "research_brief": "data/research/saisonal/2026-10-30-internet-recherche.md",
+      "research_sha256": "5aeb63e6fe864e5ec8d56270b723ecb3ff01f4aec2ffa221367c31a10a52508f",
+      "research_json": "data/research/saisonal/2026-10-30-internet-recherche.json",
+      "research_json_sha256": "37daf71c2eef9e033596977f245de3c645f7abf3195639b781ac15c779b744a5"
     }
   }
 }
