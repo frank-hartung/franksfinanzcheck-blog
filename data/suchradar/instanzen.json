@@ -1,17 +1,17 @@
 {
  "https://paulgo.io": {
-  "erfolge": 11,
+  "erfolge": 12,
   "fehler": 0,
-  "letzte_antwort": "2026-10-29T13:48:18.783490+02:00",
+  "letzte_antwort": "2026-10-30T13:40:42.588845+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 6628.4
+  "letzte_dauer_ms": 7599.1
  },
  "https://opnxng.com": {
-  "erfolge": 13,
+  "erfolge": 14,
   "fehler": 0,
-  "letzte_antwort": "2026-10-29T13:48:23.451294+02:00",
+  "letzte_antwort": "2026-10-30T13:40:48.002833+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 3044.5
+  "letzte_dauer_ms": 4376.5
  },
  "https://priv.au": {
   "erfolge": 1,
