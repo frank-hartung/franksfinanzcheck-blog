@@ -2,8 +2,10 @@
 
 **Meldung:** [Issue #948](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/948)
 · **Datum:** 30.10.2026 · **Branch:** `arena/e755613b-franksfinanzcheck-blog`
-**Betroffener Lauf:** [`40859063513`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/40859063513)
-(29.10.2026 10:37:45 UTC, `schedule`, Job `integritaet`: **failure**)
+**Betroffene Läufe:** [`40859063513`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/40859063513)
+(29.10.2026 10:37:45 UTC) und [`41042371594`](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/41042371594)
+(30.10.2026 10:39:41 UTC, `main` @ `6d5ddd0`) – beide `schedule`, Job
+`integritaet`: **failure**, beide mit demselben Symptom.
 
 ---
 
@@ -58,6 +60,38 @@ samt Werbe-Offenlegung. Der Artikel steht im Pillar `strom-sparen`, dessen
 erwartetes Angebot ein Stromtarif-Vergleich ist. Der Link-Checker verlangt
 diesen Deep-Link – und meldete „Fehlt der passende Deep-Link“, obwohl die
 Ursache eine ganz andere war: **Ausnahme und CTA widersprachen sich.**
+
+### 1a. Reproduziert am gefahrenen Commit – nicht am Schreibtisch
+
+Der 30.10.-Lauf fiel auf `main` @ `6d5ddd0`. Genau dieser Commit wird in einen
+eigenen Worktree ausgecheckt und der Schritt nachgefahren:
+
+```bash
+git worktree add /tmp/run-check 6d5ddd0
+python3 -m unittest scripts.tests.test_affiliate_exemption \
+                    scripts.tests.test_affiliate_link_check
+# Ran 56 tests … FAILED (failures=1)
+# FAIL: test_all_live_posts_and_pillars_pass_without_errors
+# AssertionError: {'2026-10-24-heizoel-preise-…': ['Fehlt der passende Deep-Link: …']} != {}
+```
+
+`python3 scripts/affiliate_integrity_gate.py --selftest` war dabei **grün** –
+der Detektor *sah* richtig, nur der Bestand widersprach sich. Und weil GitHub
+den Schritt-Log des Laufs aus dieser Umgebung nicht herausgibt (EOF, siehe
+`docs/ANLEITUNG-CHECK24-LINKS.md`), war der Befund bis jetzt nur über genau
+diese Nachfahr-Methode zugänglich. Sie steht ab jetzt im Runbook.
+
+**Warum das trotzdem ein Dauerbefund ist:** Neun Minuten nach dem roten Lauf
+(10:48 UTC) ging `dc6c74a` – der Veröffentlichungsschutz aus #961 – auf `main`
+und zog genau diesen Artikel zurück (`draft: true`, `reserve: true`,
+`reserve_published` entfernt). Damit verschwindet das *Symptom* von selbst:
+der Artikel fällt aus dem Live-Bestand, der rote Test wird still grün. Der
+Widerspruch im Text bleibt – `main` trägt den `/go/allgemein/`-CTA weiterhin
+in einem Artikel, der sich selbst als „ohne passende Partnerroute“ ausweist.
+Ein Lauf, der nur deshalb wieder grün wird, weil ein anderer Vorgang den
+Artikel aus dem Bestand genommen hat, hat **nichts** geheilt: Beim nächsten
+Rückläufer, der diesen Text erneut veröffentlicht, steht #948 wieder da.
+Genau deshalb hier Code und Inhalt, nicht nur ein neuer Lauf.
 
 Das ist eine halbe Angabe. Wer `affiliate_exempt` setzt, erklärt „für dieses
 Thema gibt es kein passendes Angebot“; wer gleichzeitig einen CTA stehen
@@ -256,9 +290,11 @@ fail-closed nur für die Risikoklasse `hoch`; für `erhoeht` blockiert
 Entscheidung (Quellenkette), keine Affiliate-Frage – sie wurde hier deshalb
 gemeldet statt still vollzogen.
 
-**Erledigt durch das Haus selbst:** Während dieser Arbeit hat der reguläre
-Rückläufer-Pfad den Artikel abgeholt (`draft: true`, `reserve: true`,
+**Erledigt durch einen anderen Vorgang:** `dc6c74a` (#961, 30.10.2026
+10:48 UTC – neun Minuten nach dem roten Lauf) hat den Veröffentlichungsschutz
+nachgezogen und den Artikel zurückgezogen (`draft: true`, `reserve: true`,
 `reserve_published` entfernt) – er ist seither Reserve, nicht Live-Bestand.
+Dieser Vorgang hat das zur Kenntnis genommen, nicht mitgemacht.
 Damit ist der Artikel live **und** im Entwurf konsistent: Ausnahme, kein CTA,
 Prüfung ausstehend. Für die Reserve-Zertifizierung bleibt er prüfbar
 (`affiliate_integrity_gate.py --heal --file`, A8, Intent-Wache).
