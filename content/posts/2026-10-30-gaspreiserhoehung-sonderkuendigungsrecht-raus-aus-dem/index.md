@@ -38,6 +38,8 @@ Ein weißer Umschlag deines Gasanbieters liegt obenauf.
 Du ahnst den Inhalt bereits. 
 Die staatliche Stütze für die Preise endet.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Dein Versorger schreibt dir nun, dass deine Kosten steigen. 
 Das trifft besonders Menschen in der Grundversorgung hart. 
 Du fühlst dich vielleicht ausgeliefert. 

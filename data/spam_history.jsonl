@@ -25711,3 +25711,6 @@
 {"ts": "2026-10-30T01:04:41Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar", "rules": ["B5"]}
 {"ts": "2026-10-30T01:04:41Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-10-30T01:04:41Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 6}
+{"ts": "2026-10-30T10:57:07Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem", "rules": ["B3", "B5"]}
+{"ts": "2026-10-30T10:57:07Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-10-30T10:57:08Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 6}
