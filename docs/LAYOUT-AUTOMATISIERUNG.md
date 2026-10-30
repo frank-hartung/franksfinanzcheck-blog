@@ -1,16 +1,35 @@
 # 📐 Layout-Automatisierung – Wächter, Budgets und Reparatur (Issue #338 / #900)
 
-**Stand:** 2026-10-29 · **Basis:** `scripts/dom_audit.py`-Vermessung des
+**Stand:** 2026-10-30 · **Basis:** `scripts/dom_audit.py`-Vermessung des
 minifizierten Produktionsbaus (`hugo --minify`) · **Anlass:** Issue
 „⚠ Layout-Automatisierung: Probleme gefunden" (#338, dauerhaft behoben #900)
 
 **Dauerhafte Behebung (#900, Highend-Profi-Agentur-Standard):**
-- Alle `open()`-Dateizugriffe in `layout_audit.py` sind auf `with`-Kontext
-  umgestellt (kein `ResourceWarning` mehr, kein stiller Datei-Leak).
+
+Die Reparatur vom 29.10.2026 (PR #937) war eine Teilmenge: Sie räumte
+`open()`-Leichen und beschrieb Zustände, die die Automatisierung noch nicht
+konnte. Die Meldung #900 blieb danach offen – zu Recht. Am 30.10.2026 sind
+die vier Ursachen geheilt, jede mit Test und Zahl:
+
+| # | Ursache (belegt am Lauf 40336062251 / am echten Bau) | Heilung | Wächter |
+|---|---|---|---|
+| 1 | **Grün ohne Messung:** `layout_audit.py` prüfte nur, ob `public/` existiert. Ein leerer oder abgebrochener Bau ergab „0 Links kaputt, alle OK" und Exit 0. | `pruefe_baubasis()`: fehlendes Verzeichnis, fehlende Startseite, < 20 Seiten oder 0 Artikel sind **kritisch** (Exit 1) – mit Klartext, Zahlen und Report. | `test_layout_audit_bau_basis.py` (6 Fälle, inkl. „Teilbau vom 26.10.") |
+| 2 | **Fehldiagnose im Browser-Audit:** Ohne Bau lud er die 404-Seite und meldete „kein `<title>`, kein `<h1>`, console 404" als **Layout-Befunde**. | Vorprüfung vor dem Start: kein messbarer Bau = **Werkzeugfehler Exit 3** (fail-closed), nicht Befund (1) und nicht weiche Überspringung (2). | `BrowserVorpruefungTests` (führt das Skript wirklich aus) |
+| 3 | **Fehlalarm Alt-Texte:** `hugo --minify` schreibt `alt=""` als bloßes `alt`. Die Regex suchte `alt=` und meldete **77 dekorative Kartenbilder** als „Bild ohne alt-Attribut" – jede Woche. | Attribut-Scanner `tag_attributes()`: fehlend ≠ leer. `alt` + `aria-hidden`/`role=presentation` ist ein *leerer, dekorativer* Alt-Text. Echter Befund bleibt echt. | `test_tag_attributes_*`, `test_minifiziertes_leeres_alt_*` |
+| 4 | **Alarm ohne Schließpfad:** Geheilt wird über einen PR; der PR-Lauf pflegt keine Issues, der Wochenlauf kam erst Montag. #900 stand deshalb über den Merge von PR #937 hinaus offen (Regel #272). | `push` auf `main` mit **identischer Pfadliste** wie der PR-Trigger: der Merge prüft den ausgelieferten Stand und schließt die Meldung. Auto-Heilung läuft bei `push` **nicht** (kein Selbst-Anstoßen, kein Schreiben). | `AlarmLebenszyklusTest` (5 Verträge, inkl. Gleichheit beider Pfadlisten) |
+
+Zusätzlich in derselben Runde:
+- Alle verbliebenen `open()`-Zugriffe in `layout_audit.py` (Covers, Frontmatter,
+  Auto-Fix) laufen jetzt im `with`-Kontext – die Zusage aus PR #937 gilt
+  damit wirklich für die ganze Datei, nicht nur für die ersten Aufrufe.
+- Der Browser-Audit nimmt einen **freien Port** (Standard 0) statt fest 8099;
+  eine Portkollision war früher ein Werkzeugfehler mitten im Lauf.
 - Die Automatisierung prüft sich selbst: `test_workflow_yaml.py` (YAML,
   JS-Syntax, Duplicate-Keys, Backslash-Faltung), `test_dom_audit.py`
   (Parser-Vertrag, Budget, Chunker, Alt-Texte, hreflang),
-  `layout_browser_check.js` (Parser-Gegenrechnung, Sandbox-Iframe).
+  `layout_browser_check.js --selftest` (Severity-Vertrag),
+  `test_layout_ai_bauausfall.py` (Wahrheitstabelle des Schluss-Schritts,
+  Alarm-Lebenszyklus).
 - Keine zweite Zahlenkopie: Budgets kommen ausschließlich aus
   `.cache/layout/dom-audit.json`, nicht mehr als duplizierter Wert.
 - Issue-Pflege dedupliziert über Marker **und** festen Titel: kein
@@ -28,6 +47,13 @@ derselbe Fehlalarm nicht wiederkommt.
 |---|---|---|---|
 | **Statisch** (kein Browser, ohne Netz) | `scripts/dom_audit.py` | **jede** gebaute Seite | in `layout_audit.py` und damit in jedem Layout-AI-Lauf |
 | **Browser** (Chrome headless) | `scripts/layout_browser_check.js` | Startseite + 3 neueste Artikel + die statisch schwersten Seiten, je Desktop & Mobile | im Layout-AI-Workflow (weich: fehlt Chrome, wird übersprungen) |
+
+**Exit-Codes des Browser-Audits (seit #900, 30.10.2026):** `0` grün
+(ggf. mit Frühwarnungen) · `1` harte Befunde · `2` **weich übersprungen**
+(kein Chrome/kein puppeteer-core – das statische Budget hat trotzdem jede
+Seite vermessen) · `3` **Werkzeugfehler** (kein messbarer Bau, Server nicht
+startbar) und damit fail-closed. Vorher teilten sich „kein Chrome" und „leerer
+Bau" den Code 2: Der Lauf war grün, obwohl nichts gemessen wurde.
 
 `layout_audit.py` prüft intern: interne Links, Cover-Varianten, Alt-Texte,
 Schema/og/Meta/H1, **hreflang-Hygiene** (siehe § 3.1), DOM-Budget und
