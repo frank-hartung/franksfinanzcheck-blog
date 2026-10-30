@@ -163,6 +163,22 @@ jobs:
         run: python3 scripts/uniqueness_issue_sync.py --status clean
 
       - run: python3 scripts/blog_health_gate.py
+
+      # ABGELEITETE ABBILDUNGEN (Dauerheilung 30.10.2026)
+      # Die Bildzeilen der Top-20-Abbildungen werden aus Titel, Kernsätzen
+      # und Abschnittsnamen ABGELEITET. Jeder Heiler oben (Titel-Gate,
+      # Casing, Keyword-Optimizer, Duplikat-Wache, Lesbarkeit) kann sie
+      # damit veralten lassen. Am 30.10.2026 stand genau das jedem fremden
+      # Pull Request im Weg: FF5 meldete 21 Beiträge, obwohl der Fehler in
+      # dieser Textpflege entstand. Deshalb hier – am Erzeuger, täglich:
+      # erst Selbsttest (der Heiler muss sehen können), dann nachziehen,
+      # dann die GEGENPROBE als hartes Gate. Was der Nachzug nicht heilen
+      # kann, macht den Lauf rot – dann ist es ein echter Befund und kein
+      # Nachziehfall.
+      - run: python3 scripts/abbildungen_ableiten.py --selftest
+      - run: python3 scripts/abbildungen_ableiten.py --nachzug
+      - run: python3 scripts/abbildungen_ableiten.py --check
+
       - run: |
           git config user.name "Agent (Arena.ai)"
           git config user.email "agent@franksfinanzcheck.de"
