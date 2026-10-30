@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T15:21:54Z",
+  "generated_at": "2026-10-30T16:02:56Z",
   "modus": "kandidaten",
-  "commit": "4632473530acf667717248a3c7fb7e3c45e1090a",
+  "commit": "bc2988f0d2c8997de93701c08712a730a52f8455",
   "kapazitaet": {
     "stichtag": "2026-10-30",
     "artikel": 110,
-    "faellig": 11,
-    "ueberfaellig": 10,
-    "ueberfaellig_max_tage": 3,
+    "faellig": 9,
+    "ueberfaellig": 8,
+    "ueberfaellig_max_tage": 2,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
@@ -24,7 +24,7 @@
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
     "abbau_tage": 2,
-    "verletzungen_alt": 11,
+    "verletzungen_alt": 9,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
@@ -62,14 +62,6 @@
         "folgeprüfung": false
       },
       {
-        "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
-        "titel": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen",
-        "frist": "2026-10-27",
-        "tage_zu_spaet": 3,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
         "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
         "frist": "2026-10-28",
@@ -82,14 +74,6 @@
         "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
         "frist": "2026-10-28",
         "tage_zu_spaet": 2,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
-        "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
-        "frist": "2026-10-27",
-        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -210,7 +194,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "cc6abfb7111374571d3d17818f8fa190cd02e53d0c52cccba252f64e11722a39",
@@ -295,7 +279,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+      "sha256": "4815a5f03f1fd335023ed7258deea75a9609eda6721bf8851d1eff82deda3c47",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "ba94c7fcd8496d5b7f179e71a8cc68b3d7bf2cb78f4a2235a09abfff80d15a9b",
@@ -329,7 +330,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
       "sha256": "4b99ee8fcda7ceed0d815637531daebbdf6b65b49cbbc32a9fbcda08d5b12963",
@@ -346,7 +347,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "b60c49dac24f1147144d8f8137d0c3f15e4ff23ae789330657a8fb6c1313144a",
@@ -397,7 +398,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "fd6b640957c69ba88455a277213e4497d7d98b5a7d7975736879b2095514c038",
@@ -414,7 +415,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "46ecb69bf1992ab0cdd306acc6b9d652e31f275ed9f861caaef14e807f149339",
@@ -431,7 +432,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "c525dbe11299b94ad68da4d05691155ac6b74b6afdc2d37f3ad0165f08a36efd",
@@ -720,7 +721,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "e0d24fa143ec3d60806004d1fcb5d6ed621c72063dbe584002d7f6deb219a108",
@@ -1043,7 +1044,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "dca974760a0e4a012cd055bcc2edfb398ab9dd63d3d7380fa893ca76807bf3a2",
@@ -1179,7 +1180,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "5bdfc3ec90e9d1d1214ada206a25e06b57461f027b5c620c117aab0629d8de86",
@@ -1196,7 +1197,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
       "sha256": "096d4b713e0f8afe77f850eb566461012de2429d92c1d918ffcfba585b8fa178",
