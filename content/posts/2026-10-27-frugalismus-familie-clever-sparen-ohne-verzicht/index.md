@@ -1,9 +1,9 @@
 ---
 title: "Frugalismus Familie: Clever sparen ohne Verzicht"
 description: Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit FranksFinanzcheck.
-date: 2026-10-27T09:20:45Z
-draft: true
-reserve: true
+date: 2026-10-30T01:04:22Z
+draft: false
+reserve_published: 2026-10-30
 tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

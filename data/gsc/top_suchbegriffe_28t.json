@@ -1,5 +1,12 @@
 [
   {
+    "suchbegriff": "angebote zur kostenkontrolle",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 67.0
+  },
+  {
     "suchbegriff": "dauerhafte kostenkontrolle",
     "clicks": 0,
     "impressions": 1,
@@ -16,9 +23,9 @@
   {
     "suchbegriff": "energieeinsparung",
     "clicks": 0,
-    "impressions": 6,
+    "impressions": 8,
     "ctr": 0.0,
-    "position": 25.33
+    "position": 25.62
   },
   {
     "suchbegriff": "energiekosten reduzieren",
@@ -58,9 +65,9 @@
   {
     "suchbegriff": "energiesparmaßnahme",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 42.5
+    "position": 43.33
   },
   {
     "suchbegriff": "fixkosten senken",
@@ -75,6 +82,13 @@
     "impressions": 5,
     "ctr": 0.0,
     "position": 7.4
+  },
+  {
+    "suchbegriff": "haushaltskosten reduzieren",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 45.0
   },
   {
     "suchbegriff": "internetkosten",
@@ -96,6 +110,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 73.0
+  },
+  {
+    "suchbegriff": "kostenkontrolle reduzierung",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 34.0
   },
   {
     "suchbegriff": "kostenlose bankkonto",
@@ -138,6 +159,13 @@
     "impressions": 2,
     "ctr": 0.0,
     "position": 94.0
+  },
+  {
+    "suchbegriff": "strategien zur kostenkontrolle",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 55.0
   },
   {
     "suchbegriff": "stromeinsparung",

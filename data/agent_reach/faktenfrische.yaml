@@ -199,7 +199,7 @@ standard:
 # --- KI-Fachprüfung (gemeinsamer LLM-Zugang des Blogs) --------------
 # Transport: scripts/llm_client.py mit GROQ_API_KEY / GEMINI_API_KEY
 # (oder NVIDIA_API_KEY / CLOUDFLARE_API_TOKEN). Ohne Schlüssel läuft
-# alles außer der Fachprüfung. KORREKTUR 02.10.2026: Die frühere
+# Recherche und Bericht; --apply schreibt ohne abgeschlossene Fachprüfung nichts. KORREKTUR 02.10.2026: Die frühere
 # Puter-Brücke (PUTER_AUTH_TOKEN) ist entfernt – sie war nie aktiv.
 # Der Schlüsselname `claude` bleibt als Konfigurationsabschnitt erhalten,
 # das Modell bestimmt jetzt llm_client/groq_config.
@@ -207,7 +207,8 @@ claude:
   modell_fallback: []
   temperatur: 0.2          # Faktenarbeit, keine Kreativität
   max_tokens: 4096
-  timeout: 300
+  timeout: 30              # je Versuch; bei Ausfall zügig zum nächsten Anbieter
+  versuche: 1              # pro Anbieter; Redundanz über die Routing-Kette
 
 # --- Meldewesen -----------------------------------------------------
 melden:

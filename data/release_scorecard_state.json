@@ -1,8 +1,124 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T10:11:47Z",
+  "generated_at": "2026-10-30T01:10:19Z",
   "modus": "kandidaten",
-  "commit": "78caa870904d342a36aa888e0e7080d1619d9a47",
+  "commit": "901318505ce85df47ab84ecc5cf974e61b37602b",
+  "kapazitaet": {
+    "stichtag": "2026-10-30",
+    "artikel": 106,
+    "faellig": 14,
+    "ueberfaellig": 13,
+    "ueberfaellig_max_tage": 3,
+    "naechste_frist": {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "frist": "2026-11-03",
+      "restlaufzeit": 4
+    },
+    "budget": 3,
+    "laeufe_je_tag": 1.0,
+    "kapazitaet_je_tag": 3.0,
+    "bedarf_je_tag": 2.578,
+    "bedarf_je_woche": 18.0,
+    "deckung_prozent": 116.4,
+    "horizont_tage": 60,
+    "vorlauf_tage": 7,
+    "nachhol_frist_tage": 7,
+    "abbau_tage": 5,
+    "verletzungen_alt": 11,
+    "verletzungen_neu": 1,
+    "verletzungen": [
+      {
+        "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+        "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
+        "frist": "2026-10-27",
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "versicherungen",
+        "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+        "frist": "2026-10-27",
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
+        "titel": "DSL- und Internet-Flat günstig sichern",
+        "frist": "2026-10-30",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "konto-karten",
+        "titel": "Konto & Karten: Ratgeber für gebührenfreie Finanzen",
+        "frist": "2026-11-27",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": false
+      }
+    ],
+    "offen_im_horizont": 8,
+    "puenktlich": false,
+    "rueckstand_abgebaut": true,
+    "empfohlenes_budget": 4,
+    "empfehlung_erreicht": true,
+    "hartes_limit": 10
+  },
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "4c575772621489ea99614e990911794c8158574c7c3d933d55f0252cc8d44ad6",
@@ -56,7 +172,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "5129e19cfd3740b511e4bc3e9829f79fbca93e80d3526793fd51d92a5a7dac75",
+      "sha256": "124696ea89e78ea96c27807fd5c7e5bb00d350b986b4d31c0e58166d6505ba46",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -90,7 +206,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-      "sha256": "02f4f24f2e5f2e8663a9b2a5619480fb8d26f10b51d3d9edbd14476ea210381f",
+      "sha256": "cc6abfb7111374571d3d17818f8fa190cd02e53d0c52cccba252f64e11722a39",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -192,7 +308,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "0621102b2994a66c77a14ed085d344987c5d695a308b238d0f37a4fdedd3f42c",
+      "sha256": "6c9d2a078b5bc50e3944c08a8c6f8b728ff2f950ac27f3e594c9ae0803848e24",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -209,7 +325,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "246118310790a76a1618b41f6ab349ac128563f6fb3f212fb80f7b6253af1e33",
+      "sha256": "4cbfe1cd85eb5c2e6109fa164c5ce6342229d8a93536ee0f688b09f332a62d92",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -277,7 +393,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "1cc931a4f5bbf0bb8ec7abb3acae974c87c8f10d623f0023d61ccf1bdf36179d",
+      "sha256": "4bf2411e61d0fd7aa9f477541d9d6fcaca2014b99763e471139adcc087cea7d7",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -294,7 +410,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "e605c89e88628e497e2344f9584b45d60b9418543894520936ea3b3c929b22c3",
+      "sha256": "89a108108ab83fe72e90c94102fe4406e0db939d9b63ae6f3e9600c27a289ca2",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -617,7 +733,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "239aac3839eda61f65cd1fb22ceea6b5dde4722d5f4b124c1caedfd7630062e2",
+      "sha256": "512327768a1aa6cba11c0a0324020d5fd29151dfd3261d353425e149b880f0ae",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -651,7 +767,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "036fce76efc930d0a73e12fc71960d5d8b2b4250c7c401a70f7c67d20ce96d44",
+      "sha256": "4750d34ca95558c88039c4cdef1d5c83d40991b7241f2fc7c8234ef56d71bb1e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1042,7 +1158,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
-      "sha256": "8a5ffed589561930cbe27365e42a82d4f733871ca3da53f33ba0391ce8c2112a",
+      "sha256": "487a2ae2fb88735a7548da23d3813ebd4366777db88c1510ede703aeadbb9e17",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1177,8 +1293,25 @@
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert"
     },
+    "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+      "sha256": "d9c7d953c78eaa5c104b06b0a8c3e22d3be8ac03213dc2745e5275342d3abe3b",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-06",
+      "siegel_drift": "neu versiegelt"
+    },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "44c2d8c72fe0c322b3e3a5d974f7e9949a7751e0237ba21521f6d6e03bc62819",
+      "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1193,6 +1326,23 @@
       },
       "naechste_pruefung": "2026-11-14",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
+      "sha256": "9d9eda23d2248c71bf6948824f5f3d10b3977aaea109e2915d626c44bc60328d",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-11",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }

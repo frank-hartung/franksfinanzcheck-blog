@@ -18,6 +18,16 @@
 #  sie hier – nicht als Kopie, sondern als Import. Eine Zahl, die in
 #  zwei Dateien steht, ist eine Zahl, die irgendwann auseinanderläuft.
 #
+# WF-7B6B / #925 (29.10.2026): Die SCHREIBER waren nie gebunden. Das
+#  Keyword-Gate im Deploy-Pfad (keyword_optimizer.heal_description)
+#  schrieb eine Description mit eigenem Limit (160 Zeichen) und ohne
+#  Breitenkenntnis: 153 Zeichen, 1011 px – innerhalb seines Maßes,
+#  außerhalb des Marktes. Das Snippet-Gate fing es erst ~15 h später
+#  (nächtlicher E2E-Lauf). Seitdem gilt: Grenzen, Breitenmaß UND das
+#  Kürzen (`auf_snippet_kuerzen`) stehen hier; jeder Schreiber
+#  importiert sie. Ein Heiler, der die Grenze nicht kennt, produziert
+#  das nächste Rot.
+#
 #  WIE GEMESSEN WIRD (und was daran ehrlich ist)
 #  ---------------------------------------------
 #  Google zeigt das Desktop-Snippet in Arial 14 px und bricht bei rund
@@ -149,3 +159,80 @@ def passt(text: str | None, *, min_zeichen: int = DESC_MIN_ZEICHEN) -> bool:
 def masse(text: str | None) -> tuple[int, float | None]:
     """(Zeichen, Pixel) – für Berichte. Pixel sind `None`, wenn unmessbar."""
     return len(normalisiere(text)), breite_px(text)
+
+
+def auf_snippet_kuerzen(text: str | None, *,
+                        min_zeichen: int = DESC_MIN_ZEICHEN,
+                        satzende: str = "…") -> str | None:
+    """Längstes Wortgrenzen-Präfix, das ins GANZE Snippet-Fenster passt.
+
+    WF-7B6B / #925 (29.10.2026): Ein Heiler, der eine Description kürzen
+    muss, darf nicht „augenmaßlich" schneiden – genau das produzierte den
+    Vorfall (1011 px bei 153 Zeichen). Diese Funktion ist die EINE Stelle,
+    an der gekürzt wird: Sie schneidet an Wortgrenzen, prüft Zeichenzahl
+    UND Breite gegen die Grenzen dieser Datei und hängt ein ehrliches „…"
+    an, wenn wirklich geschnitten wurde (inklusive Nachprüfung, denn das
+    Zeichen selbst ist 14 px breit).
+
+    `satzende` ist das Zeichen, das ein echter Schnitt markiert – „…" für
+    die Wache, "." für den Satzende-Heiler von `meta_optimizer`, der am
+    Limit nicht einfach einen Punkt anhängen darf (die Breite würde reißen),
+    sondern kürzt und DANN punktet. Beide Marker sind gültige Satzenden;
+    gerechnet wird immer mit dem, was am Ende dasteht.
+
+    Rückgabe `None`, wenn kein Präfix das Fenster erfüllt (ein einziges
+    riesiges Wort, ein unmessbares Zeichen, oder selbst der kürzeste
+    Schnitt liegt unter `min_zeichen`). `None` ist die ehrliche Antwort:
+    Der Aufrufer lässt den Text dann UNVERÄNDERT und meldet den Befund,
+    statt eine neue Grenze zu erfinden oder einen halben Satz zu lassen.
+    """
+    roh = normalisiere(text)
+    if not roh:
+        return None
+
+    def schnitt(kern: str) -> str | None:
+        """Echtes Schnitt-Ergebnis: Kern + „…", wenn mitten im Satz.
+
+        Das „…" ist selbst ein Zeichen (14 px) – geprüft wird immer das,
+        was am Ende dasteht, nicht der Kern davor. Endet der Kern schon
+        auf Satzzeichen, bleibt es dabei (nichts zu markieren).
+        """
+        if kern[-1] in ".!?…":
+            return kern if not befunde(kern, min_zeichen=min_zeichen) else None
+        if len(kern) >= DESC_MAX_ZEICHEN:
+            return None
+        mit = kern + satzende
+        return mit if not befunde(mit, min_zeichen=min_zeichen) else None
+
+    # Nichts zu kürzen? Dann ist Kürzen kein Heilungsweg, sondern
+    # Zerstörung – der Text geht unverändert zurück. Gemeint sind die
+    # OBERgrenzen: Ein zu KURZER Text wird durch Kürzen nicht besser,
+    # und ein Schnitt muss (im Gegensatz zum frühen Ausstieg) das GANZE
+    # Fenster einhalten – sonst würde „zu lang" gegen „zu kurz" getauscht.
+    if not befunde(roh, min_zeichen=0):
+        return roh
+    # Wortgrenzen absteigend: das LÄNGSTE passende Präfix gewinnt.
+    schnitte = sorted((i for i, z in enumerate(roh) if z == " "), reverse=True)
+    for cut in schnitte:
+        kern = roh[:cut].rstrip(" ,;:–-")
+        if not kern:
+            continue
+        treffer = schnitt(kern)
+        if treffer is not None:
+            return treffer
+    # Kein Wortgrenzen-Schnitt passt (ein einziges langes Wort, oder jeder
+    # Wortgrenzen-Schnitt liegt unter der Untergrenze): dann zählt nur noch
+    # die harte Zeichengrenze – ABSTEIGEND, denn bei breiten Wörtern passt
+    # nicht jeder Schnitt der Zeichenzahl auch in die Breite. Auch diese
+    # Schnitte werden gegen BEIDE Grenzen geprüft: eine Kürzung, die die
+    # Breite ignoriert, wäre keine Heilung.
+    if len(roh) > DESC_MAX_ZEICHEN:
+        for laenge in range(min(len(roh) - 1, DESC_MAX_ZEICHEN - 1),
+                            max(min_zeichen - 2, 0), -1):
+            hart = roh[:laenge].rstrip(" ,;:–-")
+            if not hart:
+                continue
+            treffer = schnitt(hart)
+            if treffer is not None:
+                return treffer
+    return None

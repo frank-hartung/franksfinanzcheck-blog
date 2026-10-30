@@ -1188,6 +1188,31 @@ history:
     #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
   ref: '117520055691320012'
   ai: false
+- posted_at: '2026-10-29T12:35:43.326964+01:00'
+  channel: mastodon
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  title: 'DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117523988347549679
+  ok: true
+  text: 'Willst du wissen, wie lange ein Anbieterwechsel wirklich dauert? 📅 Oft einige
+    Wochen von Bestellung bis Schalttermin, der eigentliche technische Umschaltmoment
+    ist meist deutlich kürzer. https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #DSL #Handytarif #Mobilfunk #InternetUndMobilfunk'
+  ref: '117523988347549679'
+  ai: true
+- posted_at: '2026-10-29T19:59:53.390417+01:00'
+  channel: mastodon
+  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  title: 'Strategisch sparen: So kannst du deine Reisekasse füllen'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117525734870640551
+  ok: true
+  text: "\U0001F4B6 Fülle deine Reisekasse gezielt  \nRechne die Sparrate: (Reisekosten – Erspartes) ÷ Monate\
+    \ bis zur Zahlung.  \nhttps://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#Mietwagen #Reise #Frugalismus #Geldsparen"
+  ref: '117525734870640551'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1213,4 +1238,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-29T00:19:00.678890+01:00'
+updated_at: '2026-10-30T00:22:31.211087+01:00'

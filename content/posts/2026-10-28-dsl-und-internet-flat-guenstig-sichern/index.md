@@ -6,7 +6,7 @@ draft: true
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "DSL- und Internet-Flat günstig sichern", "Internet-Flat", "DSL-Vergleich"]
+keywords: ["DSL Vergleich", "Internetvertrag wechseln", "Günstiges Internet", "Wechselbonus", "DSL- und Internet-Flat günstig sichern", "Internet-Flat", "DSL-Vergleich", "DSL  und Internet Flat günstig sichern"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -16,7 +16,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Lesbarkeit auf Flesch ≥ 62 gehoben (WF-D0C9 #897)"
 pin_title: "DSL- und Internet-Flat günstig sichern"
-pin_description: "*Werbung | DSL- und Internet-Flat günstig sichern – Kosten prüfen, Tarifdetails vergleichen, Kündigungsfenster nutzen. Mehr Spartipps auf FranksFinanzcheck! #dsl #vergleich #internetvertrag"
+pin_description: "*Werbung | DSL- und Internet-Flat günstig sichern: Kosten prüfen, Tarifdetails vergleichen, Kündigungsfenster nutzen und Wechsel ohne Ausfall planen. Mehr Spartipps auf FranksFinanzcheck! #dsl #vergleich #internetvertrag"
 cover:
   image: "images/covers/2026-10-28-dsl-und-internet-flat-guenstig-sichern.jpg"
   alt: "DSL- und Internet-Flat günstig sichern"
@@ -102,7 +102,7 @@ Der Bonus lohnt sich, wenn die Gesamtkosten des neuen Tarifs trotz eventueller A
 1 bis 2 Wochen nach Auftragseingang. Technikertermin rechtzeitig buchen. Termin nach Ablauf des alten Vertrags legen.
 
 **Kann ich meinen alten Router weiterverwenden?**
-Ja, wenn er den aktuellen Standard unterstützt (z. B. WLAN 6). Prüfe, ob der neue Anbieter das Gerät freischalten muss. Sonst ist ein Rückgabe- oder Leas­ing-Modell oft günstiger.
+Ja, wenn er den aktuellen Standard unterstützt (z. B. WLAN 6). Prüfe, ob der neue Anbieter das Gerät freischalten muss. Sonst ist ein Rückgabe- oder Leas­ING-Modell oft günstiger.
 
 **Was passiert bei versäumter Kündigungsfrist?**
 Der Vertrag verlängert sich automatisch. Meist um 12 Monate. Du zahlst den alten Preis weiter. Kalender­erinnerung vermeidet das.

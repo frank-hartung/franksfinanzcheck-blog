@@ -9,9 +9,9 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Dein Weg zu geringeren", "Monatskosten", "Geringere Monatskosten"]
+keywords: ["Dein Weg zu geringeren", "Monatskosten", "Geringere Monatskosten", "Dein Weg zu geringeren Monatskosten", "geringeren"]
 pin_title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
-pin_description: "*Werbung | Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten und Checklisten. Mehr Spartipps auf FranksFinanzcheck!"
+pin_description: "*Werbung | Geringere Monatskosten: So senkst du systematisch deine laufenden Ausgaben – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick. Mehr Spartipps auf FranksFinanzcheck! #dein #weg #geringeren"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

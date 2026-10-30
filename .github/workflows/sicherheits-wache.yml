@@ -192,13 +192,10 @@ jobs:
       - name: Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)
         run: |
           set -euo pipefail
-          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_zugang
+          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_zugang scripts.tests.test_worker_environment_guard
           python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_ressourcen.py --selftest
           python3 scripts/worker_zugang.py --selftest
-          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_environment_guard
-          python3 scripts/worker_deploy_vorbereiten.py --selftest
-          python3 scripts/worker_ressourcen.py --selftest
           python3 scripts/worker_environment_guard.py --selftest
           python3 scripts/worker_betrieb_wache.py --selftest
           python3 scripts/worker_betrieb_wache.py --offline
