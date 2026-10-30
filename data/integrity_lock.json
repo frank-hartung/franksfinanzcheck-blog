@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-29T10:35:14.998491+00:00",
-  "head": "af40ad901",
+  "signed_at": "2026-10-30T10:32:46.114849+00:00",
+  "head": "0388be0",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -28,7 +28,7 @@
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
     "scripts/brand_guard.py": "caad0d0abcf8506158218e4e7b51a97b35aec83aedf0055f9f653e9bc7ca5ba7",
-    "scripts/casing_guard.py": "7ab758725dd9a25d39f5d8d9d0021d5c7b72746de2de859ccbdb85a841b31aad",
+    "scripts/casing_guard.py": "067e0c7902cdadc48373f116b11165e3d16256e75f3b5b81b23ffbdb8050e778",
     "scripts/check24_links.yaml": "054ec34a1b75703d5120b88094253b980a60136baec10358bae70b8705038946",
     "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "45e07881f24005e63decd400fd2974499511fcc7d45ae21c5973e997f55695e3",
@@ -54,7 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "104a08f860dde39cdc8bea4e44346733dfb26563e8902138d600425fd639862d",
+  "files_sha256": "441425c5b85516db5d81ae6ec569c4b8fe2f1cf0a8b6c0b619d3262f71c8023b",
   "audit_start_sha256": "4f9b9349069b05e7f53d0da84018886477c904965a610fa94f19436e96436ad7",
   "audit": [
     {
@@ -658,8 +658,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "697582844d87187e66fd8ee6c4c9126db3721f0986fe5278a100c86df07128e6",
-      "files_sha256": "104a08f860dde39cdc8bea4e44346733dfb26563e8902138d600425fd639862d"
+      "files_sha256": "104a08f860dde39cdc8bea4e44346733dfb26563e8902138d600425fd639862d",
+      "prev_sha256": "697582844d87187e66fd8ee6c4c9126db3721f0986fe5278a100c86df07128e6"
+    },
+    {
+      "date": "2026-10-30",
+      "art": "set-current",
+      "head": "0388be0",
+      "geaendert": [
+        "scripts/casing_guard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/casing_guard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "0388be0",
+              "datum": "2026-10-30",
+              "betreff": "fix(governance): #888 Messfrische und Protokollwahrheit dauerhaft heilen"
+            },
+            {
+              "sha": "57a4361",
+              "datum": "2026-10-30",
+              "betreff": "fix(faktenfrische): #911 Strom- und Gasratgeber fachlich heilen und dauerhaft absichern (#955)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "fca32aaab09ad6fc8969b69c130c629d10a8aaaec7e1115defe95da57a990110",
+      "files_sha256": "441425c5b85516db5d81ae6ec569c4b8fe2f1cf0a8b6c0b619d3262f71c8023b"
     }
   ]
 }
