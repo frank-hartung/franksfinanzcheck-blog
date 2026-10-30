@@ -4,14 +4,14 @@ description: "Geringere Monatskosten: So senkst du systematisch deine laufenden 
 date: 2026-10-19T01:20:46Z
 draft: false
 reserve_published: 2026-10-19
-reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar" ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Dein Weg zu geringeren", "Monatskosten", "Geringere Monatskosten"]
+keywords: ["Dein Weg zu geringeren", "Monatskosten", "Geringere Monatskosten", "Dein Weg zu geringeren Monatskosten", "geringeren"]
 pin_title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
-pin_description: "*Werbung | Geringere Monatskosten: Lerne, wie du systematisch deine monatlichen Ausgaben senkst – mit praktischen Schritten und Checklisten. Mehr Spartipps auf FranksFinanzcheck!"
+pin_description: "*Werbung | Geringere Monatskosten: So senkst du systematisch deine laufenden Ausgaben – mit praktischen Schritten, Checklisten und typischen Fehlern im Blick. Mehr Spartipps auf FranksFinanzcheck! #dein #weg #geringeren"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

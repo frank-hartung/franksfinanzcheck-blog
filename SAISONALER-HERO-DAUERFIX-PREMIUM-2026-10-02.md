@@ -1,5 +1,7 @@
 # 🍂 Saisonaler Hero – Dauerfix auf Premium-Niveau (02.10.2026)
 
+> Historischer Stand vom 02.10.2026. Für den aktuellen Betrieb und die Nachbesserung zu #891 gilt [docs/ANLEITUNG-SAISONALER-HERO.md](docs/ANLEITUNG-SAISONALER-HERO.md).
+
 **Anlass:** Issue #514 „Saisonaler Hero-Refresh: Aktion nötig (2026-10-02)" ·
 **Lauf:** [36999824666](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/36999824666)
 (Step „Claude-Textprüfung – nur H1 und GEO-Lead", Exit 3) ·

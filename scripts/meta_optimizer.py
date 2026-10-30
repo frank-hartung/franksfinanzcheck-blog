@@ -4,7 +4,10 @@ Automatische Meta-Daten-Optimierung (Profi-Niveau, kostenlos).
 
 Prüft und optimiert für ALLE Artikel:
   - Title (Frontmatter): 30-60 Zeichen (SEO-optimal)
-  - Meta-Description: 70-160 Zeichen (mit Keyword, klickstark)
+  - Meta-Description: mit Keyword, CTR-Vorliebe 120+ – im Snippet-Fenster
+    der SSOT (scripts/serp_limits.py: 100–155 Zeichen UND ≤ 985 px).
+    Die alten 70–160-Zeichen-Grenzen dieses Schreibers waren die Einladung
+    für Befunde der Klasse WF-7B6B / #925 (29.10.2026).
   - Keywords: 3-8 relevante Begriffe
   - Alt-Texte, OpenGraph-Bilder (og:image), Canonical
 
@@ -30,10 +33,17 @@ import llm_client
 CACHE_FILE = os.path.join(BLOG_DIR, ".meta_cache.json")
 
 TITLE_MIN, TITLE_MAX = 30, 60
-DESC_MIN, DESC_MAX = 70, 160
-# Optimale CTR-Bereiche (für den 100er-Score im Meta-Report)
+# WF-7B6B / #925 (29.10.2026): Die Snippet-Grenzen stehen in der SSOT
+# (scripts/serp_limits.py: 100–155 Zeichen UND ≤ 985 px). Dieser SCHREIBER
+# lief mit eigenen Zahlen (70–160) – dieselbe Klasse wie beim Keyword-Gate,
+# nur hat sie bisher nicht zugeschlagen. Eine zweite Grenze im Code ist ein
+# Befund, auch wenn sie gerade niemand verletzt.
+import serp_limits  # noqa: E402  (SSOT: Snippet-Fenster – keine zweite Zahl)
+DESC_MIN, DESC_MAX = serp_limits.DESC_MIN_ZEICHEN, serp_limits.DESC_MAX_ZEICHEN
+# Optimale CTR-Bereiche (für den 100er-Score im Meta-Report). 120 ist eine
+# Vorliebe, keine Grenze: die Grenze ist die SSOT.
 TITLE_OPT_MIN, TITLE_OPT_MAX = 50, 60
-DESC_OPT_MIN, DESC_OPT_MAX = 120, 160
+DESC_OPT_MIN, DESC_OPT_MAX = 120, DESC_MAX
 KEYWORDS_MIN = 3
 
 
@@ -116,7 +126,10 @@ def generate_description(a):
     if not source:
         source = a["body"]
     desc = clean_text(source, DESC_MAX - 3)
-    # Keyword vorne einbauen, falls nicht enthalten
+    # Keyword vorne einbauen, falls nicht enthalten – der Präfix kostet
+    # Zeichen UND Breite. Geprüft wird gegen die SSOT, nicht gegen eine
+    # Schreiber-Zahl (WF-7B6B / #925: 160 hier war die Einladung für
+    # 1011 px).
     kws = parse_keywords(a["keywords"])
     if kws:
         core = norm(kws[0]).split()
@@ -124,7 +137,12 @@ def generate_description(a):
         if core and core not in norm(desc):
             lead = f"{kws[0]}: " if len(kws[0]) < 40 else ""
             desc = lead + desc
-            desc = desc[:DESC_MAX - 1] + ("…" if len(desc) > DESC_MAX - 1 else "")
+    # SSOT-Nachprüfung: was über die Grenzen geht, wird an der Wortgrenze
+    # gekürzt – oder liegen gelassen, wenn kein Präfix passt.
+    if serp_limits.befunde(desc):
+        gekuerzt = serp_limits.auf_snippet_kuerzen(desc)
+        if gekuerzt is not None:
+            desc = gekuerzt
     return desc
 
 
@@ -308,15 +326,20 @@ def audit(a):
             "kw": kw_count, "issues": issues}
 
 
-def extend_description(desc, a, target_min=DESC_OPT_MIN, target_max=DESC_OPT_MAX):
-    """Verlängert eine zu kurze Description deterministisch auf 120+ Zeichen."""
+def extend_description(desc, a, target_min=DESC_OPT_MIN):
+    """Verlängert eine zu kurze Description deterministisch auf 120+ Zeichen.
+
+    Die Obergrenze ist die SSOT (Länge UND Breite), nicht `target_max`:
+    Ein Baustein, der die Description über 155 Zeichen oder 985 px schiebt,
+    wird nicht angehängt (WF-7B6B / #925).
+    """
     desc = desc.rstrip()
     # Sinnvolle Bausteine anhängen (bis Ziel erreicht)
     addons = [
         " So sparst du jeden Monat bares Geld.",
         " Schritt für Schritt erklärt – ohne Fachchinesisch.",
         " Mit praktischen Tipps für den Alltag.",
-        " Vergleiche jetzt und profitiere von den besten Konditionen.",
+        " Vergleiche jetzt und profitiere von fairen Konditionen.",
         " So gelingt dir der Wechsel schnell und unkompliziert.",
     ]
     for add in addons:
@@ -324,16 +347,16 @@ def extend_description(desc, a, target_min=DESC_OPT_MIN, target_max=DESC_OPT_MAX
             break
         if add.lstrip().lower()[:20] in desc.lower():
             continue
-        if len(desc) + len(add) <= target_max:
+        if not serp_limits.befunde(desc + add, min_zeichen=0):
             desc += add
     # Letzter Notnagel: Keyword-Phrase anhängen
     if len(desc) < target_min:
         kws = parse_keywords(a["keywords"])
         for kw in kws:
-            if len(desc) + len(kw) + 4 <= target_max:
+            if not serp_limits.befunde(f"{desc} – {kw}.", min_zeichen=0):
                 desc += f" – {kw}."
                 break
-    return desc[:target_max]
+    return desc
 
 
 def fix_meta(a, use_ai):
@@ -351,13 +374,31 @@ def fix_meta(a, use_ai):
     #    mit korrekt langer, aber punktloser Description konnte deshalb NIE
     #    die Publish-Schwelle erreichen (Reserve-Pool hing bei 5/6, der harte
     #    End-Gate wurde jede Nacht rot).
+    # WF-7B6B / #925 (29.10.2026): Geprüft werden die OBERgrenzen der SSOT
+    # (`min_zeichen=0`). Ein zu KURZER Text wird durch das Satzende nicht
+    # schlechter – das ist Schritt 1 bzw. `extend_description`. Wohl aber
+    # reißt ein Punkt am Limit die Breite: Der Schnitt muss deshalb VOR dem
+    # Satzzeichen passieren, und zwar in der EINA Schneidestelle
+    # (`serp_limits.auf_snippet_kuerzen`) – nicht mit einer zweiten,
+    # augenmaßlichen Kürzung im Schreiber.
     desc_now = a["description"].strip()
     if desc_now and not desc_has_sentence_end(desc_now):
         fixed = desc_now
-        if len(fixed) < DESC_MAX:
+        if not serp_limits.befunde(fixed + ".", min_zeichen=0):
             fixed = fixed + "."
-        else:  # exakt am Längenlimit: letztes Zeichen weicht dem Satzende
-            fixed = fixed[:DESC_MAX - 1].rstrip() + "."
+        else:  # am Limit: kürzen (SSOT) und DANN punktieren
+            gekuerzt = serp_limits.auf_snippet_kuerzen(fixed, satzende=".")
+            if gekuerzt is not None and gekuerzt != fixed:
+                fixed = gekuerzt
+            else:  # nicht schneidbar: letztes Zeichen weicht dem Satzende –
+                   # nur wenn das Ergebnis die SSOT einhält, sonst Meldung
+                   # der Wache (ein geheilter Text darf nie neue Verstöße
+                   # produzieren; genau das war #925).
+                kandidat = fixed[:DESC_MAX - 1].rstrip() + "."
+                fixed = (kandidat
+                         if kandidat != fixed
+                         and not serp_limits.befunde(kandidat, min_zeichen=0)
+                         else fixed)
         old_line = re.search(r'^description:.*$', content, re.M)
         if old_line and fixed != desc_now:
             content = (content[:old_line.start()]
@@ -374,8 +415,10 @@ def fix_meta(a, use_ai):
         if new_desc:
             if len(new_desc) < DESC_OPT_MIN:
                 new_desc = extend_description(new_desc, a)
-            elif len(new_desc) > DESC_OPT_MAX:
-                new_desc = new_desc[:DESC_OPT_MAX - 1].rstrip() + "…"
+            elif serp_limits.befunde(new_desc):
+                gekuerzt = serp_limits.auf_snippet_kuerzen(new_desc)
+                if gekuerzt is not None:
+                    new_desc = gekuerzt
         if new_desc:
             old_line = re.search(rf'^description:.*$', content, re.M)
             if old_line:

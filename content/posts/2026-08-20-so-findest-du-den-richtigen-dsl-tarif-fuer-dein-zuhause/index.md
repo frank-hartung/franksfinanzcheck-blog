@@ -14,9 +14,9 @@ cover:
   alt: "DSL-Tarif für dein Zuhause: Das passende Angebot finden"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Den passenden DSL-Tarif findest du über deinen echten Bedarf, nicht über die größte Werbezahl. Für 1 bis 2 Personen reichen oft 50 bis 100 Mbit/s. Familien und Homeoffice-Haushalte fahren meist mit 100 bis 250 Mbit/s gut. Rechne immer den Effektivpreis über 24 Monate. Sonst verstecken sich dort schnell 250 € bis 400 € Mehrkosten."
-keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung"]
+keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "DSL-Tarif für dein Zuhause", "DSL Tarif für dein Zuhause", "DSL-Tarif"]
 pin_title: "Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen"
-pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren. Jetzt lesen."
+pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif hängt von deinem Bedarf ab, nicht vom Marketing. Diese Anleitung hilft dir, Bandbreite, Preis und Laufzeit richtig zu kombinieren und nicht mehr zu zahlen als nötig. Jetzt lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -34,7 +34,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-Viele Haushalte buchen 2026 überdimensionierte Pakete. Im Vertrag steht eine prestigeträchtige Zahl wie 1.000 Mbit/s. Im Alltag funktionieren aber nur ein paar smarte Geräte und zwei Laptops gleichzeitig. Das Ergebnis: Ein teurer Vertrag. Die Leistung im heimischen WLAN wird nie voll ausgeschöpft.
+DSL Tarif finden im Check: Viele Haushalte buchen 2026 überdimensionierte Pakete. Im Vertrag steht eine prestigeträchtige Zahl wie 1.000 Mbit/s. Im Alltag funktionieren aber nur ein paar smarte Geräte und zwei Laptops gleichzeitig. Das Ergebnis: Ein teurer Vertrag. Die Leistung im heimischen WLAN wird nie voll ausgeschöpft.
 
 Dieser Ratgeber hilft dir, im Tarif-Dschungel den Durchblick zu behalten. Kein technisches Kauderwelsch. Nur das Wesentliche: Wie viel Geschwindigkeit brauchst du wirklich? Wann lohnt sich Glasfaser? Wie verhinderst du, dass versteckte Kosten deine Ersparnis auffressen?
 

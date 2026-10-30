@@ -32,7 +32,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
 faktencheck: 2026-10-15
-lastmod: 2026-10-25
+lastmod: 2026-10-28
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
 
@@ -201,7 +201,7 @@ Rechne erst durch, ob du den Verlust selbst tragen kannst. **Hole die Bedingunge
 
 ### Was, wenn die Sparrate nicht reicht?
 
-Ändere Umfang, Termin oder Ziel. Plane weder mit ungewissen Boni noch mit fallenden Preisen. Kleiner zu reisen ist planbarer, als den Alltag zu überziehen.
+Ändere Umfang, Termin oder Ziel. Plane weder mit ungewissen Boni noch mit fallenden Preisen. Kleiner zu Reisen ist planbarer, als den Alltag zu überziehen.
 
 ## Was dieser Ratgeber nicht kann?
 

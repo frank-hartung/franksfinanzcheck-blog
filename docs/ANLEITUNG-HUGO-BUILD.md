@@ -1,6 +1,6 @@
 # Hugo-Build: eine Fehlerausgabe für alle Workflows
 
-**Stand:** 2026-10-03 · **Action:** `.github/actions/hugo-build` · **Wache:** `scripts/hugo_build_vertrag.py` (H1–H8)
+**Stand:** 2026-10-29 · **Action:** `.github/actions/hugo-build` · **Wache:** `scripts/hugo_build_vertrag.py` (H1–H9)
 
 ---
 
@@ -55,6 +55,10 @@ durchläuft: Er kostet Zeit und erzieht zum Wegsehen.
 | `zeilen` | `40` | Log-Zeilen in der Zusammenfassung bei Fehlschlag. |
 | `weiter-bei-fehler` | `false` | `true` = Fehlschlag laut melden, Job trotzdem weiterlaufen lassen. |
 
+Es gibt **keine** Eingabe zum Abschalten der Frontmatter-Vorprüfung. Ein Schalter
+„Prüfung aus" wäre ein Schalter „Blindflug" – und genau der hat am 26.10.2026 einen
+Tag Bauzeit gekostet (WF-9FD5, unten).
+
 ### Ausgaben
 
 | Ausgabe | Bedeutung |
@@ -63,6 +67,8 @@ durchläuft: Er kostet Zeit und erzieht zum Wegsehen.
 | `log` | Pfad der Logdatei (für Folgeschritte, Artefakt-Upload) |
 | `dauer` | Bauzeit in Sekunden |
 | `seiten` | Von Hugo gemeldete Seitenzahl |
+| `erste-fehlerzeile` | Erste Fehlerzeile von Hugo, einzeilig (leer im Erfolgsfall) |
+| `frontmatter` | Exit der Vorprüfung: `0` ok · `1` Blocker · leer = nicht gelaufen |
 
 ---
 
@@ -80,6 +86,49 @@ durchläuft: Er kostet Zeit und erzieht zum Wegsehen.
 5. **`--quiet` wird abgelehnt** (Exit 2). Die Flagge verschluckt die
    entscheidende Zeile sogar bei eingefangener Ausgabe. Ruhe im Protokoll gibt
    es über die Logdatei — nicht durch Wegwerfen der Diagnose.
+
+---
+
+## Schritt 1: Frontmatter-Vorprüfung (WF-9FD5, 26.10.2026)
+
+Vor jedem Bau prüft `scripts/frontmatter_wache.py` das Frontmatter **jeder**
+Inhaltsdatei. Grund: Am 26.10.2026 stand in einer einzigen Datei
+
+```yaml
+description: Stromkosten senken: Balkonkraftwerk-Förderung regional – Antrag und Anmeldung
+```
+
+Der unquotierte Doppelpunkt beendet in YAML den Wert. Hugo brach ab mit
+
+```
+ERROR error building site: assemble: failed to create page from pageMetaSource
+  …/index.md:3:14: mapping value is not allowed in this context
+```
+
+– ohne zu sagen, welche Datei zuerst kam, und ohne dass eine der vorhandenen
+Wachen etwas beisteuern konnte: Sie stehen alle **hinter** dem Bau. Der
+Layout-AI-Lauf war rot, die Meldung sprach von „kritischen Befunden", und der
+Rat lautete „API-Key abgelaufen".
+
+Die Vorprüfung ist fail-closed (ist die Wache selbst nicht da, wird nicht
+gebaut), nennt **Datei, Zeile, Spalte** und heilt auf Wunsch:
+
+```bash
+python3 scripts/frontmatter_wache.py            # prüfen (Exit 0/1/2)
+python3 scripts/frontmatter_wache.py --fix      # zitiert die betroffenen Werte
+python3 scripts/frontmatter_wache.py --selftest # Sabotage-Proben (21 Fälle)
+```
+
+`--fix` ändert **nur** das Zitat, nie den Text: Der Wert wird als
+Doppelpunkt-Zitat zurückgeschrieben, und ein Test vergleicht den geparsten Wert
+vor und nach der Heilung. Fließtext wird nicht angefasst – auch nicht, wenn dort
+Zeilen wie `Annahme: …` stehen.
+
+**Zwei Schichten, ehrlich benannt:** Die kritische Schicht (Gerüst, Plain-Skalar,
+Typverträge) ist stdlib-only und läuft auch im nackten Runner der Action. Ist
+PyYAML vorhanden (E2E, Publication-Reliability), parst zusätzlich der echte
+YAML-Parser. Der Bericht sagt, welche Schicht aktiv war – stille Degradierung
+wäre derselbe Fehler wie `--quiet` (H4).
 
 ---
 
@@ -122,14 +171,14 @@ Verwendet in `bot-watchdog.yml` (Watchdog soll auch bei rotem Bau messen) und
 ## Kommandos
 
 ```bash
-npm run build:vertrag        # H1–H8 prüfen (läuft im Qualitäts-Gate)
+npm run build:vertrag        # H1–H9 prüfen (läuft im Qualitäts-Gate)
 npm run build:selftest       # Verhaltens- + Sabotage-Proben
 python3 scripts/hugo_build_vertrag.py --json
 ```
 
 Der Selbsttest führt den **echten Shell-Rumpf** der Action gegen ein
 Hugo-Attrappen-Programm aus: grüner Bau, roter Bau, leeres Verzeichnis,
-`weiter-bei-fehler`, stummer Abbruch — plus neun Sabotage-Proben. Eine Wache,
+`weiter-bei-fehler`, stummer Abbruch — plus elf Sabotage-Proben. Eine Wache,
 die nur Wörter im YAML zählt, lässt sich mit einem Kommentar betrügen.
 
 ---

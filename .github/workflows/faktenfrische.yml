@@ -85,7 +85,7 @@ jobs:
 
       - name: Recherche + Fachprüfung
         id: lauf
-        continue-on-error: true   # Exit 3 = Kanäle tot → melden, nicht abbrechen
+        continue-on-error: true   # Artefakte/Diagnose sichern, danach Fehler melden
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
@@ -185,4 +185,10 @@ jobs:
         if: steps.deckung.outcome == 'failure'
         run: |
           echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar (#912). Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
+          exit 1
+
+      - name: Unvollständige Recherche melden
+        if: steps.lauf.outcome == 'failure'
+        run: |
+          echo "::error::Faktenfrische nicht abgeschlossen. Details stehen im Lauf und im Report; betroffene Artikel bleiben unverändert."
           exit 1

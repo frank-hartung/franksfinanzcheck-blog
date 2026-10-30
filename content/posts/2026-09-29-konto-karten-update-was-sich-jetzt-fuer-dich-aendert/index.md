@@ -5,7 +5,7 @@ date: 2026-09-29T10:48:18Z
 draft: true
 tags: ["Girokonto"]
 categories: ["News"]
-keywords: ["Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren"]
+keywords: ["Debitkarte oder Maestro: Welche Karte dein Konto braucht", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren", "Girocard, Debitkarte oder Maestro", "Debitkarte"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -16,7 +16,7 @@ cover:
   alt: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
-pin_description: "*Werbung | Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht – aktuelle Einordnung von FranksFinanzcheck. Mehr Spartipps auf FranksFinanzcheck!"
+pin_description: "*Werbung | Girocard, Debitkarte oder Maestro im Vergleich: Einsatz, Kosten und Prüfpunkte für dein Konto. Einordnung mit Prüfhinweisen. Mehr Spartipps auf FranksFinanzcheck! #debitkarte #oder #maestro"
 quellen:
   - id: "Q1"
     titel: "Referenzseite verbraucherzentrale.de"

@@ -29,6 +29,11 @@ die Reparatur nicht wieder abbröckelt:
       steht mit Begründung in AUSNAHMEN.
   H7  Kein Hugo-Bau vernichtet seine Beweise (``> /dev/null``, ``|| true``,
       ``--quiet``) – außerhalb der begründeten Ausnahmen.
+  H9  Der Inhalt wird VOR dem Bau geprüft (Frontmatter, ``scripts/
+      frontmatter_wache.py``), fail-closed und vor dem Bau-Schritt. Ohne
+      diese Regel starb am 26.10.2026 (WF-9FD5 / #901) der ganze Bau an
+      einer Content-Zeile – gemeldet wurde „assemble: failed to create
+      page from pageMetaSource", ohne Datei und ohne Zeile.
 
 H2–H5 werden NICHT nur im Text gesucht: ``--selftest`` führt den echten
 Shell-Rumpf der Action gegen ein Hugo-Attrappen-Programm aus und prüft das
@@ -268,6 +273,132 @@ def h7_keine_beweisvernichtung(wf_dir: Path = None) -> list:
     return befunde
 
 
+def h9_frontmatter_vorpruefung(daten: dict | None = None,
+                               pruefe_wache: bool = True) -> list:
+    """H9 – der Inhalt wird vor dem Bau geprüft, nicht danach.
+
+    WARUM (WF-9FD5 / #901, 26.10.2026): Der wöchentliche Layout-AI-Lauf
+    starb am Bau, nicht an einer Prüfung. Ursache war ein unquotierter
+    Doppelpunkt im Frontmatter EINER Datei; Hugo brach ab, und keine der
+    vorhandenen Wachen konnte etwas sagen, weil sie alle HINTER dem Bau
+    stehen. Diese Regel hält die Vorprüfung dort, wo sie wirkt: im Bau
+    selbst, vor dem Bau-Schritt und fail-closed.
+
+    Geprüft wird nicht nur, dass die Zeilen dastehen, sondern dass sie
+    WIRKEN: Der echte Shell-Rumpf des Schritts läuft gegen eine kaputte und
+    eine saubere Vorlage. Ein `|| true` in einem Kommentar ist dann kein
+    Befund mehr – ein `|| true` in der Wirkung schon.
+    """
+    befunde: list = []
+    if daten is None:
+        if not ACTION.is_file():
+            return ["H9: Die Action fehlt – ohne sie gibt es keine Vorprüfung."]
+        try:
+            import yaml  # noqa: PLC0415
+            daten = yaml.safe_load(ACTION.read_text(encoding="utf-8"))
+        except ImportError:  # pragma: no cover - Runner ohne PyYAML
+            return []
+        except Exception as exc:  # pragma: no cover - defektes YAML
+            return [f"H9: Action ist kein gültiges YAML: {exc}"]
+    schritte = (daten.get("runs") or {}).get("steps") or []
+    ids = [schritt.get("id") for schritt in schritte]
+    rumpf = ""
+    if "frontmatter" not in ids:
+        befunde.append(
+            "H9: Der Bau hat keine Frontmatter-Vorprüfung (Schritt `id: "
+            "frontmatter`). Dann stirbt er wieder an einer Content-Zeile und "
+            "meldet nur \u201eassemble: failed to create page\u201c.")
+    else:
+        i_fm, i_bau = ids.index("frontmatter"), ids.index("bauen")
+        if i_bau != -1 and i_fm > i_bau:
+            befunde.append(
+                "H9: Die Frontmatter-Vorprüfung steht NACH dem Bau-Schritt – "
+                "sie kann den Bau dann nicht mehr aufhalten.")
+        schritt = schritte[i_fm]
+        rumpf = schritt.get("run") or ""
+        if "scripts/frontmatter_wache.py" not in rumpf:
+            befunde.append(
+                "H9: Die Vorprüfung ruft `scripts/frontmatter_wache.py` nicht "
+                "auf – irgendeine Prüfung ist keine Vorprüfung.")
+        if schritt.get("continue-on-error"):
+            befunde.append(
+                "H9: Die Vorprüfung ist toleriert (continue-on-error) – ein "
+                "Befund, der den Bau nicht stoppt, ist ein Bericht, keine Wache.")
+        if 'exit "$rc"' not in rumpf:
+            befunde.append(
+                "H9: Unbekannte Exit-Codes der Wache werden nicht "
+                "weitergereicht – fail-closed heißt: im Zweifel nicht bauen.")
+    if "erste-fehlerzeile" not in (daten.get("outputs") or {}):
+        befunde.append(
+            "H9: Ausgabe `erste-fehlerzeile` fehlt – Aufrufer (Layout-AI) "
+            "können dann nur \u201eBefunde\u201c behaupten, wenn in Wahrheit der "
+            "Bau gestorben ist.")
+
+    if not pruefe_wache:
+        return befunde
+
+    # ---- Verhaltensprobe an der Wache selbst ---------------------------
+    wache = ROOT / "scripts" / "frontmatter_wache.py"
+    if not wache.is_file():
+        befunde.append("H9: `scripts/frontmatter_wache.py` fehlt.")
+        return befunde
+    KAPUTT = ("---\ntitle: \"Balkonkraftwerk\"\n"
+              "description: Stromkosten senken: Balkonkraftwerk-Förderung regional\n"
+              "date: 2026-10-14T14:57:58Z\ndraft: false\n---\n\nText.\n")
+    SAUBER = ("---\ntitle: \"Balkonkraftwerk\"\n"
+              "description: \"Stromkosten senken: Balkonkraftwerk-Förderung\"\n"
+              "date: 2026-10-14T14:57:58Z\ndraft: false\n---\n\nText.\n")
+    with tempfile.TemporaryDirectory() as tmp:
+        basis = Path(tmp) / "repo"
+        (basis / "scripts").mkdir(parents=True)
+        shutil.copy2(wache, basis / "scripts" / wache.name)
+        ziel = basis / "content" / "posts" / "x"
+        ziel.mkdir(parents=True)
+        for name, inhalt, soll, ort in (("kaputt", KAPUTT, 1, "content/posts/x/index.md:3"),
+                                        ("sauber", SAUBER, 0, None)):
+            (ziel / "index.md").write_text(inhalt, encoding="utf-8")
+            lauf = subprocess.run(
+                [sys.executable, str(basis / "scripts" / wache.name),
+                 "--pfad", "content"],
+                cwd=basis, capture_output=True, text=True)
+            if lauf.returncode != soll:
+                befunde.append(
+                    f"H9: Die Wache lässt die {name}e Vorlage mit Exit "
+                    f"{lauf.returncode} durch (erwartet {soll}).")
+            elif ort and ort not in lauf.stdout:
+                befunde.append(
+                    f"H9: Die Wache nennt Datei/Zeile nicht (erwartet `{ort}` "
+                    f"in der Ausgabe).")
+
+        # ---- Wirkt die Vorprüfung im Schritt? Der echte Rumpf, echt rot. ----
+        bash = shutil.which("bash")
+        if bash and rumpf:
+            (ziel / "index.md").write_text(KAPUTT, encoding="utf-8")
+            ausgabe = Path(tmp) / "out.txt"
+            summary = Path(tmp) / "summary.md"
+            env = dict(os.environ, GITHUB_OUTPUT=str(ausgabe),
+                       GITHUB_STEP_SUMMARY=str(summary),
+                       RUNNER_TEMP=tmp, FF_LABEL="H9-Probe")
+            lauf = subprocess.run([bash, "-e", "-c", rumpf], cwd=basis,
+                                  env=env, capture_output=True, text=True)
+            if lauf.returncode == 0:
+                befunde.append(
+                    "H9: Der Vorprüfungs-Schritt lässt kaputtes Frontmatter "
+                    "durch (Exit 0) – er ist wirkungslos, egal wie er aussieht.")
+            elif "::error" not in lauf.stdout:
+                befunde.append(
+                    "H9: Der Vorprüfungs-Schritt stoppt den Bau, sagt aber "
+                    "nicht warum (keine `::error`-Annotation).")
+            (ziel / "index.md").write_text(SAUBER, encoding="utf-8")
+            lauf = subprocess.run([bash, "-e", "-c", rumpf], cwd=basis,
+                                  env=env, capture_output=True, text=True)
+            if lauf.returncode != 0:
+                befunde.append(
+                    "H9: Der Vorprüfungs-Schritt blockiert sauberes Frontmatter "
+                    f"(Exit {lauf.returncode}) – Fehlalarm am Bau.")
+    return befunde
+
+
 def h8_runbook() -> list:
     if not RUNBOOK.is_file():
         return [f"H8: {RUNBOOK.relative_to(ROOT)} fehlt – eine Action ohne Anleitung "
@@ -287,6 +418,8 @@ REGELN = {
            h6_alle_bauten_nutzen_die_action),
     "H7": ("Kein Hugo-Bau vernichtet seine Beweise", h7_keine_beweisvernichtung),
     "H8": ("Runbook vorhanden", h8_runbook),
+    "H9": ("Inhalt wird vor dem Bau geprüft (Frontmatter, fail-closed)",
+           h9_frontmatter_vorpruefung),
 }
 
 
@@ -579,12 +712,32 @@ def _selftest() -> int:
         if h6_alle_bauten_nutzen_die_action(wf):
             fehler.append("S7: `hugo version` wird als Bau gewertet (Fehlalarm).")
 
+    # ---- S8: eine Action OHNE Frontmatter-Vorprüfung wird erkannt ----
+    ohne = {"runs": {"steps": [{"id": "bauen", "run": "hugo --minify"}]},
+            "outputs": {"rc": {}}}
+    if not any("keine Frontmatter-Vorprüfung" in b
+               for b in h9_frontmatter_vorpruefung(daten=ohne, pruefe_wache=False)):
+        fehler.append("S8: Eine Action ohne Vorprüfung gilt als vertragskonform.")
+
+    # ---- S9: Vorprüfung an der falschen Stelle, toleriert und stumm ----
+    falsch = {"runs": {"steps": [
+        {"id": "bauen", "run": "hugo --minify"},
+        {"id": "frontmatter", "continue-on-error": True,
+         "run": "python3 scripts/frontmatter_wache.py || true"},
+    ]}, "outputs": {"rc": {}}}
+    treffer = " ".join(h9_frontmatter_vorpruefung(daten=falsch, pruefe_wache=False))
+    for erwartet in ("NACH dem Bau", "toleriert", "Unbekannte Exit-Codes",
+                     "erste-fehlerzeile"):
+        if erwartet not in treffer:
+            fehler.append(f"S9: Sabotage „{erwartet}\" wird nicht erkannt "
+                          f"(bekommen: {treffer[:120]})")
+
     if fehler:
         for f in fehler:
             print("❌ " + f)
         return 1
-    print("✅ hugo_build_vertrag --selftest OK (H1–H8, 6 Verhaltensproben am echten "
-          "Shell-Rumpf, 9 Sabotage-Proben).")
+    print("✅ hugo_build_vertrag --selftest OK (H1–H9, 9 Verhaltensproben am "
+          "echten Shell-Rumpf, 11 Sabotage-Proben).")
     return 0
 
 

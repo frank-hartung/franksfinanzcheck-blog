@@ -9,11 +9,11 @@
       "research_sha256": "",
       "set_current": true,
       "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)",
-      "fehler_serie": 5,
+      "fehler_serie": 6,
       "letzter_fehler": {
-        "ts": "2026-10-28T11:31:39Z",
+        "ts": "2026-10-29T11:43:16Z",
         "code": "ki-ohne-gueltige-fassung",
-        "detail": "Versuch 1: keine Antwort – gemini/gemini-3-flash-preview: keine verwertbare Antwort | Versuch 2: keine Antwort – gemini/gemini-3-flash-preview: keine verwertbare Antwort | Versuch 3 (gemini:gemini-3-flash-preview): Antwort ohne gültiges TITLE/LEAD-Format"
+        "detail": "ossen (MAX_TOKENS) | Runde 2 (groq:openai/gpt-oss-120b): verworfen – KI-Floskel: entdecke | Runde 2 (cloudflare:@cf/openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 2 (gemini:gemini-3-flash-preview): gemini/gemini-3-flash-preview: Antwort nicht abgeschlossen (MAX_TOKENS) | Runde 3 (groq:openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 3 (cloudflare:@cf/openai/gpt-oss-120b): verworfen – Titel ohne Spar-/Vergleichsintention | Runde 3 (gemini:gemini-3-flash-preview): gemini/gemini-3-flash-preview: Antwort nicht abgeschlossen (MAX_TOKENS)"
       }
     }
   }

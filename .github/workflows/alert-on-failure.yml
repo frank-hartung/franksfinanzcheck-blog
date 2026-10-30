@@ -126,7 +126,7 @@ on:
       - "FrankAutoOps-Report"
       - "Affiliate-Health (Wochenwache)"
       - "Affiliate-Integritäts-Wache (täglich)"    # CTA-Link-Selbstheilung (14.08.)
-      - "Saisonaler Hero-Refresh (Agent Reach + Claude)"  # SEO/GEO-Startseite, saisonal + fail-closed
+      - "Saisonaler Hero-Refresh (Agent Reach + KI-Feinschliff)"  # SEO/GEO-Startseite, saisonal + fail-closed
       - "Blog-Gesundheits-Check (täglich)"   # tägliche Selbstheilung – hatte kein eigenes Alerting
       - "Uptime-Monitor"         # PREM-AUDIT: Site-Ausfall nur per Zufall bemerkt
       - "Mastodon-Profil-Sync"   # PREM-AUDIT: Social-Kanal still
@@ -436,6 +436,12 @@ jobs:
             // auf einmal, lesend)“. Ohne die zweite Bedingung wäre genau der
             // Fehler, den #922 meldet, plötzlich ohne seinen Rat – ein Umzug
             // einer Prüfung darf ihren Meldeweg nicht verlieren.
+            // WF-829B / #922: Der Schritt heißt je nach Lauf „Produktive
+            // Ressource auflösen" oder „Produktions-Environment absichern";
+            // der Prüf-Workflow nutzt „Zugang prüfen (alle Befunde …)".
+            // Eine Erkennung, die nur einen der drei Namen kennt, routet den
+            // anderen in den allgemeinen Rat – und der riet dann zu
+            // API-Schlüsseln für eine Policy-Prüfung.
             const workerZugangFailed = isWorkerDeploy &&
               failedStepNames.some(s => /Produktive Ressource auflösen|Produktions-Environment absichern|Zugang prüfen \(alle Befunde/.test(String(s)));
             const workerTestsFailed = isWorkerDeploy &&
@@ -461,6 +467,16 @@ jobs:
             // Code-/Vertragsregression, kein Betriebsausfall: Es hilft kein
             // Neustart und kein Schlüssel, sondern eine Reparatur im Repo.
             const istSkriptSyntax = wfName === 'Skript-Syntax (liegender Stand)';
+            // WF-9FD5 / Meldung #901 (26.10.2026): Bei der Layout-Automatisierung
+            // ist rot NICHT gleich rot. Damals starb der Lauf am BAU – ein
+            // unquotierter Doppelpunkt im Frontmatter EINER Content-Datei –,
+            // und der allgemeine Rat („API-Key abgelaufen", „Workflow neu
+            // starten") führte in die falsche Richtung: Ein Neustart hätte
+            // denselben Bau wieder getötet. Bau-Ausfall und Befund bekommen
+            // deshalb getrennte Klassen mit getrenntem Rat.
+            const istLayoutAi = wfName === 'Layout-AI';
+            const layoutBauFailed = istLayoutAi &&
+              failedStepNames.some(s => String(s).includes('Website bauen'));
             const codeqlGateFailed = isCodeql &&
               failedStepNames.some(s => String(s).includes('Sicherheits-Gate'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
@@ -507,6 +523,23 @@ jobs:
             //  Spezifische Klassen oben (Engine, Backup, Installation,
             //  Sicherheits-Wache) behalten Vorrang.
             // ================================================================
+            // ================================================================
+            //  WF-7B6B / #925 (29.10.2026): DAS SNIPPET-GATE MISST, ES RÄT NICHT
+            //  --------------------------------------------------------------
+            //  Der nächtliche E2E-Lauf wurde rot im Schritt „Snippet-Gate –
+            //  Snippetfenster und Rangfolge": eine Description mit 153
+            //  Zeichen und 1011 px (SSOT: 155/985). Die Meldung riet zu
+            //  API-Schlüsseln, GitHub-Ausfall und Neustart – drei Ursachen,
+            //  von denen keine zutreffen KANN: Das Gate liest gebautes HTML
+            //  und eine Python-Tabelle, es kennt keinen Schlüssel, kein
+            //  Modell und kein Netz. Der Rat kostete die Zeit, die der eine
+            //  wirksame Schritt braucht (Description kürzen).
+            //  Gilt für E2E-Tests (Playwright): Snippet-Gate, Metadaten-Wache,
+            //  Linktext-Wache, H1-Wache – lauter Messschritte am Bestand.
+            // ================================================================
+            const istE2E = wfName === 'E2E-Tests (Playwright)';
+            const messGateFailed = istE2E && failedStepNames.some(s =>
+              /Snippet-Gate|Metadaten-Wache|Linktext-Wache|H1-Wache/i.test(String(s)));
             const ersterRoterSchritt = String(failedStepNames[0] || '');
             const selbsttestFailed = /Selbsttest|Selftest/i.test(ersterRoterSchritt) || workerTestsFailed;
             // ================================================================
@@ -548,8 +581,20 @@ jobs:
               // Trigger-Vollständigkeit). Ein generischer „API-Key?"-Rat wäre
               // hier so falsch wie bei der Sicherheits-Wache (C34).
               : istSkriptSyntax ? 'skript-syntax'
+              // WF-7B6B / #925: ein Messgate am Bestand (Snippet, Metadaten,
+              // Linktext, H1) – eigener Rat, kein API-Key-Raten.
+              : messGateFailed ? 'messgate-bestand'
               // WF-53E2 / #780: roter Selbsttest = Code-Regression (Rat unten).
               : selbsttestFailed ? 'selbsttest'
+              // WF-9FD5 / #901: Für die Layout-Automatisierung ist rot nicht
+              // gleich rot. Der BAU kann sterben (dann gibt es keine Messung)
+              // oder die Prüfung kann Befunde haben. Beides bekommt einen
+              // eigenen Rat – der allgemeine („API-Key abgelaufen", „neu
+              // starten") hätte am 26.10.2026 nur denselben Ausfall wiederholt.
+              // Bewusst NACH `selbsttest`: Ein roter Selbsttest ist immer eine
+              // Code-Regression, unabhängig vom Kanal.
+              : layoutBauFailed ? 'layout-bau'
+              : istLayoutAi ? 'layout-audit'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -776,6 +821,11 @@ jobs:
                       : runbookKlasse === 'worker-deploy-zugang'
                         ? [
                             '1. **Fail-closed – gewollt, kein Betriebsausfall.** Lies den roten Schritt: „Produktions-Environment absichern“ heißt, dass Reviewer-/Branch-/Admin-Bypass-Policy fehlt oder nicht lesbar ist. „Zugang prüfen (alle Befunde auf einmal, lesend)“ bzw. „Produktive Ressource auflösen“ heißt: Der Cloudflare-Zugang fehlt, ist unlesbar oder zu schwach (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`). Wrangler läuft in beiden Fällen nicht; ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall von 24.10.2026 (Run 40100342025).',
+                            '1. **Fail-closed – gewollt, kein Betriebsausfall.** Der Deploy bricht absichtlich ab, bevor Wrangler läuft, weil der produktive Zugang im Environment `cloudflare-produktion` fehlt, unlesbar oder zu schwach ist (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`). Ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall von 24.10.2026 (Run 40100342025).',
+                            '2. **Alle Befunde in einem Lauf:** Der Schritt „Zugang prüfen (alle Befunde auf einmal, lesend)“ sammelt Token, Konto-ID, Token-Gültigkeit, Leserecht und je Worker die produktive Bindung – und schreibt ein Dossier in die Job-Zusammenfassung (was fehlt, wohin es gehört, welche Rechte der Token braucht). Die Annotationen nennen dieselben Punkte einzeln. Zugänge im Environment `cloudflare-produktion` (Settings → Environments → Environment secrets) hinterlegen oder erneuern. Keine Ressourcen-IDs manuell kopieren: Der Resolver liest die bestehenden produktiven Bindungen (`ABO`/KV aus `ff-newsletter`, `DB`/D1 aus `klick-zaehler`) selbst und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
+                            '3. **Vorher prüfen, ohne zu deployen:** Actions → „Deploy-Zugang prüfen“ → „Run workflow“ (`main`). Der Lauf liest nur (`/user/tokens/verify` und die bestehenden Script-Einstellungen), legt nichts an und deployt nichts; er bestätigt den Zugang in einem Durchgang. Danach ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“ (`main`) oder freigeben, falls der Lauf auf eine Environment-Freigabe wartet. Der erste grüne Deploy-Lauf schließt diese Meldung automatisch; ein nur geplanter Lauf mit übersprungenem Deploy-Job tut es ausdrücklich nicht.',
+                            '4. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4/D2. Selbsttests: `python3 scripts/worker_zugang.py --selftest` und `python3 scripts/worker_ressourcen.py --selftest`; lokal ohne Netz prüfbar mit `python3 scripts/worker_zugang.py --pruefen`.',
+                            '1. **Fail-closed – gewollt, kein Betriebsausfall.** Lies den roten Schritt: „Produktions-Environment absichern“ bedeutet, dass Reviewer-/Branch-/Admin-Bypass-Policy fehlt oder nicht lesbar ist; „Produktive Ressource auflösen“ bedeutet fehlenden Cloudflare-Zugang oder fehlende Leserechte. Wrangler läuft in beiden Fällen nicht.',
                             '2. **Environment zuerst absichern:** Settings → Environments → `cloudflare-produktion`: mindestens ein Required Reviewer, bei „Deployment branches and tags“ exakt der Branch `main`, und „Allow administrators to bypass configured protection rules“ aus (`can_admins_bypass=false`). Das read-only Gate läuft davor ohne Cloudflare-Secrets: `python3 scripts/worker_environment_guard.py --check` (Workflow-Token mit `actions: read`).',
                             '3. **Alle Zugangs-Befunde in einem Lauf:** Der Schritt „Zugang prüfen (alle Befunde auf einmal, lesend)“ sammelt Token, Konto-ID, Token-Gültigkeit, Leserecht und je Worker die produktive Bindung – und schreibt ein Dossier in die Job-Zusammenfassung (was fehlt, wohin es gehört, welche Rechte der Token braucht). Im selben Environment `cloudflare-produktion` (Environment secrets) hinterlegen oder erneuern. Keine Ressourcen-IDs manuell kopieren: `scripts/worker_ressourcen.py` liest die bestehenden Bindungen (`ABO`/KV aus `ff-newsletter`, `DB`/D1 aus `klick-zaehler`) selbst und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
                             '4. **Vorher prüfen, ohne zu deployen:** Actions → „Deploy-Zugang prüfen“ → „Run workflow“ (`main`). Der Lauf liest nur (`/user/tokens/verify` und die bestehenden Script-Einstellungen), legt nichts an und deployt nichts; er bestätigt den Zugang in einem Durchgang. Danach von `main` ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“ oder freigeben, falls der Lauf auf eine Environment-Freigabe wartet. Der erste grüne Deploy-Lauf schließt diese Meldung automatisch; ein grüner Plan, ein grüner Prüf-Workflow oder ein übersprungener Deploy-Job tun es ausdrücklich nicht.',
@@ -806,6 +856,26 @@ jobs:
                             '2. **Lokal nachfahren:** `python3 scripts/skript_syntax_wache.py --check`, `python3 scripts/workflow_js_wache.py --check` bzw. `npm run trigger:check`. Beide nennen Datei, Regel und den genauen Pfad – keine Rateschritte.',
                             '3. **Heilen:** Syntax mit `python3 scripts/skript_syntax_heiler.py --fix --commit` (auditierte letzte gültige Fassung) oder von Hand; Trigger-Befunde durch Ergänzen des Pfades in BEIDEN Listen (`push` und `pull_request`). Den Filter nie verengen, ohne den Grund im PR zu nennen.',
                             '4. **Grenze der Prüfung:** Die Trigger-Wache sagt, ob ein Gate ANSPRINGT – nicht, ob es das Richtige prüft. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt F2. Der nächste grüne Lauf auf `main` schließt diese Meldung selbst.'
+                          ]
+                      : runbookKlasse === 'messgate-bestand'
+                        ? [
+                            '1. **Einordnung: gemessen, nicht geraten.** Dieses Gate prüft den gebauten Bestand gegen eine feste Grenze (Snippet-Fenster, Metadaten, Linktexte, H1). Es braucht keinen API-Schlüssel, kein Modell und kein Netz – ein abgelaufener GROQ-/GEMINI-Schlüssel, ein Ausfall der Plattform oder ein vorübergehender Fehler können diesen Schritt nicht rot machen.',
+                            '2. **Der Befund steht im Log** – mit Seite, Regel und Maß (z. B. „description-breite … 1011 px, max. 985 px“); die Zusammenfassung des Laufs nennt dieselbe Zeile. Lokal nachfahren: `hugo --destination public && python3 scripts/seo_cockpit.py --build public --fail-on description-length,description-breite,heading-order` (Snippet am Build) bzw. `python3 scripts/metadaten_wache.py` (Quelle).',
+                            '3. **Snippet-Befund (M2/M7):** Description an der Quelle kürzen – an der Wortgrenze, Satzende behalten, Grenzen in `scripts/serp_limits.py` (100–155 Zeichen, ≤ 985 px). Deterministisch geht das auch selbst: `python3 scripts/metadaten_wache.py --fix`. Seit dem 29.10.2026 (WF-7B6B / #925) heilt der Deploy-Pfad diese Klasse vor dem Veröffentlichen; ein Rot hier heißt: die Heilung hat nicht gegriffen oder ein Schreiber (Keyword-Gate, `meta_optimizer`) hat neu verletzt – dann Regressionstests: `python3 -m unittest scripts.tests.test_keyword_optimizer scripts.tests.test_meta_optimizer scripts.tests.test_metadaten_wache`.',
+                            '4. **Kein API-Schlüssel, kein Neustart.** Beides kann einen Messschritt nicht grün machen. Wird der Schritt selbst rot (Exit 2, Selbsttest rot), ist die Prüfung kaputt – dann ist es ein Code-Befund, kein Bestandsbefund.'
+                          ]
+                      : runbookKlasse === 'layout-bau'
+                        ? [
+                            '1. **Einordnung: Der BAU ist gescheitert – es fand KEINE Layout-Prüfung statt.** Kein Neustart und kein Schlüssel helfen hier zuverlässig: Der Build stirbt an derselben Stelle wieder. Die erste Fehlerzeile steht in der Job-Zusammenfassung und in dieser Meldung (Abschnitt „Erste Fehlerzeile").',
+                            '2. **Häufigste Ursache seit 26.10.2026 (WF-9FD5):** ein unquotierter Doppelpunkt im Frontmatter einer Inhaltsdatei – `description: Stromkosten senken: …` bricht YAML ab. Nachfahren: `python3 scripts/frontmatter_wache.py` nennt Datei, Zeile und Spalte; `python3 scripts/frontmatter_wache.py --fix` zitiert genau die betroffenen Werte, ohne den Text zu ändern.',
+                            '3. **Andere Ursachen** nennt die Selbstdiagnose des Baus (leere Verzeichnisse unter `content/`, `wrong type for value`, Hugo ohne Extended). Runbook: `docs/ANLEITUNG-HUGO-BUILD.md`.',
+                            '4. Nach der Heilung: Der nächste grüne Lauf auf `main` misst wieder und schließt diese Meldung selbst. Der Bau prüft das Frontmatter inzwischen selbst (`.github/actions/hugo-build`, Vertrag H9) – ein zweiter solcher Ausfall wird vor dem Bau gestoppt, mit Datei und Zeile.'
+                          ]
+                      : runbookKlasse === 'layout-audit'
+                        ? [
+                            '1. **Einordnung: Befund der Layout-Prüfung, kein Bauausfall.** Der Bau ist grün; rot sind Befunde am erzeugten HTML (kaputte interne Links, fehlende Cover-Varianten, Alt-Texte, Meta/H1, DOM-Budget, Chunker-Vertrag).',
+                            '2. **Nachfahren:** `LAYOUT-REPORT.md` in der Job-Zusammenfassung, Zahlen in `.cache/layout/dom-audit.json`. Jede Zeile nennt Seite und Metrik.',
+                            '3. **Heilen oder begründen:** Inhalt/Struktur reparieren – oder, wenn eine Grenze wirklich zu eng ist, sie in `scripts/dom_audit.py` (eine Quelle) mit Messung anpassen. Runbook: `docs/LAYOUT-AUTOMATISIERUNG.md`. Der nächste grüne Lauf schließt die Meldung.'
                           ]
                       : runbookKlasse === 'selbsttest'
                         ? [

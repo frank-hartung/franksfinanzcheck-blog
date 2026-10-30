@@ -1,10 +1,13 @@
 """Offline contract tests for the shared provider transports."""
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import os
 import sys
 import unittest
+import urllib.error
 from pathlib import Path
 from unittest import mock
 
@@ -74,6 +77,49 @@ class SharedTransportTests(unittest.TestCase):
         self.assertNotIn("gemini-test-key", url)
         self.assertNotIn("?key=", url)
         self.assertEqual(headers["x-goog-api-key"], "gemini-test-key")
+
+    def test_complete_gemini_filters_thoughts_and_requires_stop(self):
+        payload = {"candidates": [{"finishReason": "STOP", "content": {"parts": [
+            {"text": "interne Gedanken", "thought": True}, {"text": "Fertige Antwort"},
+        ]}}]}
+        with mock.patch.object(lc, "_post_json", return_value=payload):
+            answer = lc.chat("gemini", prompt="Test", attempts=1, require_complete=True)
+        self.assertEqual(answer, "Fertige Antwort")
+
+    def test_gemini_incomplete_filtered_or_missing_finish_is_never_returned(self):
+        for reason in ("MAX_TOKENS", "SAFETY", None):
+            payload = {"candidates": [{"finishReason": reason, "content": {"parts": [
+                {"text": "Geheimer Teiltext, der nicht ausgegeben werden darf"},
+            ]}}]}
+            with self.subTest(reason=reason), mock.patch.object(lc, "_post_json", return_value=payload):
+                with self.assertRaises(lc.IncompleteResponseError) as caught:
+                    lc.chat("gemini", prompt="Test", attempts=1, require_complete=True,
+                            raise_on_error=True, log_errors=False)
+                self.assertEqual(caught.exception.reason, reason or "FEHLT")
+                self.assertNotIn("Geheimer Teiltext", str(caught.exception))
+
+    def test_openai_compatible_finish_reason_is_checked_only_on_opt_in(self):
+        for reason in ("length", "content_filter", None):
+            payload = {"choices": [{"finish_reason": reason, "message": {"content": "Teilantwort"}}]}
+            with self.subTest(reason=reason), mock.patch.object(lc, "_post_json", return_value=payload):
+                self.assertIsNone(lc.chat("groq", prompt="Test", attempts=1,
+                                          require_complete=True, log_errors=False))
+                self.assertEqual(lc.chat("groq", prompt="Test", attempts=1), "Teilantwort")
+        payload = {"choices": [{"finish_reason": "stop", "message": {"content": "Komplett"}}]}
+        with mock.patch.object(lc, "_post_json", return_value=payload):
+            self.assertEqual(lc.chat("groq", prompt="Test", attempts=1,
+                                     require_complete=True), "Komplett")
+
+    def test_optional_error_logging_can_be_safely_suppressed(self):
+        secret = "private-provider-detail"
+        error = urllib.error.HTTPError(f"https://example.invalid/{secret}", 401, secret, None, None)
+        log = io.StringIO()
+        with mock.patch.object(lc, "_post_json", side_effect=error), contextlib.redirect_stderr(log):
+            with self.assertRaises(urllib.error.HTTPError):
+                lc.chat("gemini", prompt="Test", attempts=1, raise_on_error=True, log_errors=False)
+        self.assertEqual(log.getvalue(), "")
+        self.assertEqual(lc.IncompleteResponseError(secret + "\nunsafe").reason, "UNBEKANNT")
+        self.assertEqual(lc.IncompleteResponseError("secret-token-no-spaces").reason, "UNBEKANNT")
 
     def test_gemini_key_probe_uses_header_and_returns_only_status(self):
         calls = []

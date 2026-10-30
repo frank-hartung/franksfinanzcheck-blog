@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 3,
-  "pool_size": 4,
-  "generated_at": "2026-10-28T12:51:59Z",
+  "ready": 5,
+  "pool_size": 5,
+  "generated_at": "2026-10-29T15:25:50Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -57,16 +57,10 @@
     },
     {
       "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
-      "ready": false,
-      "sha256": "439ce56bdbae5f19109bfa0c117d3d4629ea5fe8bc8128e6d87ad08889559937",
+      "ready": true,
+      "sha256": "6990fadf57f04d43bcbde81367d2df64b72f0c746fe3e5f4a94d08c778f76fc0",
       "flesch": 66.2,
-      "measured_at": "2026-10-28T10:27:04Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
-      "details": [
-        "🛑 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
+      "measured_at": "2026-10-29T15:24:47Z",
       "score": 0.958,
       "parts": {
         "spelling": 0.84,
@@ -77,17 +71,35 @@
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "2b8e2f1805e3ac9192b3fa9c9697c57a967ad5c151c8b5473ed337a03a0a5aa5",
+      "flesch": 73.2,
+      "measured_at": "2026-10-29T15:25:50Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     }
   ],
   "measurement": {
     "kind": "partial",
-    "run_id": "40690975794",
+    "run_id": "40900957894",
     "run_attempt": "1"
   },
   "recert": {
-    "at": "2026-10-28T12:51:59Z",
+    "at": "2026-10-29T15:25:50Z",
     "renewed": [
-      "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
+      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
     ],
     "tool": "scripts/reserve_recert.py"
   },
