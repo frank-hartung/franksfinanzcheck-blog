@@ -6,11 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
- ten-falle:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261030T184037Z
+UID:telegram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
+ -ueberblick:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261030T230158Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
+SUMMARY:Telegram (Kanal): Stromkosten senken: Clevere Haushaltsgeräte 
+ im Überblick (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-se
+ nken-clevere-haushaltsgeraete-im-ueberblick/
+URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
+ levere-haushaltsgeraete-im-ueberblick/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
+ ten-falle:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261030T230158Z
+DTSTART:20261108T060000Z
+DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): VPN Zuhause: Schutzschild oder unnötige Fixk
  osten-Falle? (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -18,21 +33,6 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  hutzschild-oder-unnoetige-fixkosten-falle/
 URL:https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzsc
  hild-oder-unnoetige-fixkosten-falle/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
- ort-senken:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261030T184037Z
-DTSTART:20261108T060000Z
-DTEND:20261108T061500Z
-SUMMARY:Telegram (Kanal): Kleine Energiespar‑Tricks: Deine Kosten sofo
- rt senken (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-12-kleine-energie
- spar-tricks-die-deine-kosten-sofort-senken/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-t
- ricks-die-deine-kosten-sofort-senken/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

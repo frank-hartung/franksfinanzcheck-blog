@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 30.10.2026 19:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 31.10.2026 00:01 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 30. Oktober 2026
-- **20:00** ⏳ Flugvergleich im Winter: So findest du echte Billigflüge — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/
 ### Sa, 31. Oktober 2026
 - **11:30** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
@@ -39,9 +36,13 @@
 ### Mi, 11. November 2026
 - **07:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
+### Sa, 14. November 2026
+- **17:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 31.10.2026 00:01 · Flugvergleich im Winter: So findest du echte Billigflüge → https://mastodon.social/@FranksFinanzcheck/117532348748029850
 - ✅ 30.10.2026 19:40 · Frugalismus Familie: Clever sparen ohne Verzicht → https://mastodon.social/@FranksFinanzcheck/117531321037727209
 - ✅ 29.10.2026 19:59 · Strategisch sparen: So kannst du deine Reisekasse füllen → https://mastodon.social/@FranksFinanzcheck/117525734870640551
 - ✅ 29.10.2026 12:35 · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis → https://mastodon.social/@FranksFinanzcheck/117523988347549679
@@ -51,7 +52,6 @@
 - ✅ 27.10.2026 11:41 · Energieeffizienz im Haushalt: 5 schnelle Spartricks → https://mastodon.social/@FranksFinanzcheck/117512449068863753
 - ✅ 26.10.2026 18:26 · Bankgebühren senken: 7 Schritte zum günstigeren Konto → https://mastodon.social/@FranksFinanzcheck/117508382297357813
 - ✅ 26.10.2026 12:15 · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag → https://mastodon.social/@FranksFinanzcheck/117506920725188960
-- ✅ 25.10.2026 15:58 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken → https://mastodon.social/@FranksFinanzcheck/117502135144875649
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

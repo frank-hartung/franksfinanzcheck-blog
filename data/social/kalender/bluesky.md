@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 30.10.2026 19:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 31.10.2026 00:01 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -82,6 +82,11 @@
   https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
 - **12:15** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
+### Sa, 14. November 2026
+- **08:15** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+- **12:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
 
 ## Zuletzt veröffentlicht
 
