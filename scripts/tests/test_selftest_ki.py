@@ -153,7 +153,8 @@ class WorkflowVertrag(unittest.TestCase):
 
     def test_engine_benennt_fruehabbruch(self):
         self.assertIn("FRÜHABBRUCH", self.engine)
-        self.assertIn("steps.final_release.outcome }}\" = 'skipped'", self.engine)
+        self.assertIn("SCHRITT_FINAL_RELEASE_OUTCOME: ${{ steps.final_release.outcome }}", self.engine)
+        self.assertIn("\"${SCHRITT_FINAL_RELEASE_OUTCOME}\" = 'skipped'", self.engine)
         for sid in ("lock", "preflight", "kadenz", "generate", "taxonomie",
                     "phase1_commit", "hugo", "shortcode"):
             self.assertIn(f"        id: {sid}\n", self.engine, f"Schritt-id {sid} fehlt")
