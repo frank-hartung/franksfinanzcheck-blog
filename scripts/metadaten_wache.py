@@ -270,6 +270,16 @@ def heile_snippet(rel: str, text: str) -> tuple[str, list[str]]:
     neu_text = _DESC_ZEILE.sub(lambda _m: zeile, text, count=1)
     if neu_text == text:
         return text, []
+    # Description ist Bestandteil der fachlichen Freigabe, auch bei Entwürfen
+    # und bereits ungültigen oder abgelaufenen Siegeln. Ein SEO-Schnitt darf
+    # keine neue Fassung unter altem Prüfprotokoll erzeugen. Der unveränderte
+    # M2/M7-Befund bleibt für die Redaktion sichtbar; M3 bleibt separat heilbar.
+    try:
+        from editorial_review_gate import automatic_change_findings
+        if automatic_change_findings(text, neu_text):
+            return text, []
+    except Exception:  # Schutz nicht verfügbar: niemals ungeprüft schreiben
+        return text, []
     masse_alt = f"{alt_zeichen} Zeichen, {alt_px:.0f} px" if alt_px is not None else f"{alt_zeichen} Zeichen"
     masse_neu = f"{neu_zeichen} Zeichen, {neu_px:.0f} px" if neu_px is not None else f"{neu_zeichen} Zeichen"
     return neu_text, [f"M2/M7: Description {masse_alt} → {masse_neu} (Snippet-Fenster der SSOT)"]

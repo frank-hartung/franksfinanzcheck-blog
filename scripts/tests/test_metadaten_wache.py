@@ -183,13 +183,65 @@ class SnippetHeilungTests(unittest.TestCase):
         self.assertEqual(w.heile_lastmod("x.md", text)[1], [])
 
     def test_fix_heilt_den_baum_und_konvergiert(self):
-        """--fix lässt keinen Snippet-Befund stehen, der heilbar ist."""
-        import subprocess, sys, os
-        root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        lauf = subprocess.run([sys.executable, os.path.join("scripts", "metadaten_wache.py"), "--fix"],
-                              cwd=root, capture_output=True, text=True)
-        self.assertEqual(lauf.returncode, 0, lauf.stdout + lauf.stderr)
-        self.assertIn("Befunde: 0", lauf.stdout)
+        """Dateischreibtest in einem isolierten Bestand, niemals im Checkout."""
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        text = GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            f'description: "{VORFALL_925}"')
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "content/posts/test/index.md"
+            path.parent.mkdir(parents=True)
+            path.write_text(text, encoding="utf-8")
+            with patch.object(w, "_pill_fn", return_value=lambda *_: None):
+                findings, _, healed = w.run(root=tmp, heilen=True)
+                self.assertTrue(healed)
+                self.assertFalse(any(f["rule"] in ("M2", "M7") for f in findings))
+                self.assertFalse(w.run(root=tmp, heilen=True)[2])
+
+    def test_versiegelter_entwurf_bleibt_unveraendert_und_befund_sichtbar(self):
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        text = GOOD.replace("draft: false", "draft: true").replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            f'description: "{VORFALL_925}"').replace(
+            "---\n\nIm Text", "redaktionelle_pruefung:\n  status: freigegeben\n  inhalt_sha256: kaputt\n---\n\nIm Text")
+        import editorial_review_gate as gate
+        fm_text, body = gate.split_article(text)
+        fm = gate._yaml_module().safe_load(fm_text)
+        digest = gate.content_fingerprint(fm, body)
+        # Beide Fälle schützen: ein gültiges Siegel und ein bereits kaputtes.
+        for version in (text, text.replace('inhalt_sha256: kaputt', f'inhalt_sha256: {digest}')):
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / "content/posts/test/index.md"
+                path.parent.mkdir(parents=True)
+                path.write_text(version, encoding="utf-8")
+                with patch.object(w, "_pill_fn", return_value=lambda *_: None):
+                    findings, _, healed = w.run(root=tmp, heilen=True)
+                self.assertEqual(path.read_text(encoding="utf-8"), version)
+                self.assertFalse(healed)
+                self.assertTrue(any(f["rule"] == "M7" for f in findings))
+
+    def test_ausfall_des_schreibvertrags_verhindert_snippet_heilung(self):
+        from unittest.mock import patch
+        import editorial_review_gate as gate
+        text = GOOD.replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            f'description: "{VORFALL_925}"')
+        with patch.object(gate, 'automatic_change_findings', side_effect=RuntimeError('Ausfall')):
+            self.assertEqual(w.heile_snippet('x.md', text), (text, []))
+
+    def test_lastmod_bleibt_trotz_siegelschutz_heilbar(self):
+        text = GOOD.replace("lastmod: 2026-09-02", "lastmod: 2026-08-01").replace(
+            'description: "Strom sparen im Alltag: Stromfresser finden, Tarife vergleichen und Abschläge richtig planen. Mit einfachen Rechenbeispielen für jeden Haushalt."',
+            f'description: "{VORFALL_925}"').replace(
+            "---\n\nIm Text", "redaktionelle_pruefung:\n  status: freigegeben\n  inhalt_sha256: kaputt\n---\n\nIm Text")
+        healed, messages = w.heile_datei("content/posts/x/index.md", text)
+        self.assertIn(f'description: "{VORFALL_925}"', healed)
+        self.assertIn("lastmod: 2026-09-01", healed)
+        self.assertEqual(len(messages), 1)
 
 
 if __name__ == "__main__":
