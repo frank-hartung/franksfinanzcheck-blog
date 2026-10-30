@@ -710,6 +710,7 @@ jobs:
         if: ${{ always() && !cancelled() }}
         env:
           SCHRITT_STATE_HEARTBEAT: ${{ steps.state.outputs.heartbeat }}
+          SCHRITT_SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
           SCHRITT_SELFTEST_EXIT: ${{ steps.selftest.outputs.exit_code }}
           SCHRITT_GATE_EXIT_CODE: ${{ steps.gate.outputs.exit_code }}
           SCHRITT_STATE_HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
@@ -719,19 +720,25 @@ jobs:
           SCHRITT_INTENT_EXIT_CODE: ${{ steps.intent.outputs.exit_code }}
           SCHRITT_INTENT_HEALED_COUNT: ${{ steps.intent.outputs.healed_count }}
           SCHRITT_INTENT_HUMAN_FINDINGS: ${{ steps.intent.outputs.human_findings }}
+          SCHRITT_STATE_VERDICT_CHANGED: ${{ steps.state.outputs.verdict_changed }}
+          SCHRITT_STATE_CONTRACT_ERROR: ${{ steps.state.outputs.state_contract_error }}
         run: |
+          LAGE_TEXT="unverändert"
+          [ "$SCHRITT_STATE_VERDICT_CHANGED" = "true" ] && LAGE_TEXT="GEÄNDERT"
+          VERTRAG_TEXT="gültig/Legacy"
+          [ "$SCHRITT_STATE_CONTRACT_ERROR" = "true" ] && VERTRAG_TEXT="beschädigt (fail-closed)"
           {
             echo "## 🔗 Affiliate-Integritäts-Wache – Beweis-Lage"
             echo ""
             echo "| Feld | Wert |"
             echo "|---|---|"
             echo "| Herzschlag (dieser Lauf) | \`${SCHRITT_STATE_HEARTBEAT}\` |"
-            echo "| Lage gegenüber letztem Lauf | ${{ steps.state.outputs.verdict_changed == 'true' && 'GEÄNDERT' || 'unverändert' }} |"
-            echo "| Detektor-Selbsttest | ${{ steps.selftest.outcome }} (Exit ${SCHRITT_SELFTEST_EXIT:-}) |"
+            echo "| Lage gegenüber letztem Lauf | ${LAGE_TEXT} |"
+            echo "| Detektor-Selbsttest | ${SCHRITT_SELFTEST_OUTCOME} (Exit ${SCHRITT_SELFTEST_EXIT:-}) |"
             echo "| Gate-Exit | ${SCHRITT_GATE_EXIT_CODE} |"
             echo "| Automatisch geheilt | ${SCHRITT_STATE_HEALED_COUNT} Artikel |"
             echo "| Offene Restfunde | ${SCHRITT_STATE_UNRESOLVED_PROBLEMS} |"
-            echo "| Zustandsvertrag | ${{ steps.state.outputs.state_contract_error == 'true' && 'beschädigt (fail-closed)' || 'gültig/Legacy' }} |"
+            echo "| Zustandsvertrag | ${VERTRAG_TEXT} |"
             echo "| Werkzeugfehler | ${SCHRITT_STATE_TOOL_ERRORS} |"
             echo "| Nachweis in origin/main | ${SCHRITT_COMMIT_PUSH_VERIFIED} |"
             echo "| Intent-Wache (IW0–IW9) Exit | ${SCHRITT_INTENT_EXIT_CODE} |"
@@ -770,13 +777,16 @@ jobs:
           SCHRITT_GATE_EXIT_CODE: ${{ steps.gate.outputs.exit_code }}
           SCHRITT_COMMIT_PUSH_VERIFIED: ${{ steps.commit.outputs.push_verified }}
           SCHRITT_COMMIT_PUSHED: ${{ steps.commit.outputs.pushed }}
+          SCHRITT_SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
           SCHRITT_SELFTEST_EXIT: ${{ steps.selftest.outputs.exit_code }}
+          SCHRITT_INTENT_SELFTEST_OUTCOME: ${{ steps.intent_selftest.outcome }}
+          SCHRITT_HUGO_OUTCOME: ${{ steps.hugo.outcome }}
         run: |
-          SELF="${{ steps.selftest.outcome }}"
-          INTENT_SELF="${{ steps.intent_selftest.outcome }}"
+          SELF="${SCHRITT_SELFTEST_OUTCOME}"
+          INTENT_SELF="${SCHRITT_INTENT_SELFTEST_OUTCOME}"
           INTENT="${SCHRITT_INTENT_EXIT_CODE}"
           GATE="${SCHRITT_GATE_EXIT_CODE}"
-          HUGO="${{ steps.hugo.outcome }}"
+          HUGO="${SCHRITT_HUGO_OUTCOME}"
           VERIFIED="${SCHRITT_COMMIT_PUSH_VERIFIED}"
           PUSHED="${SCHRITT_COMMIT_PUSHED}"
           if [ "$SELF" != "success" ]; then

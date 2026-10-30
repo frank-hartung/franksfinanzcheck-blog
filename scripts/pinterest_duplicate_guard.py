@@ -41,17 +41,17 @@ def _read_posts():
         content = open(path, encoding="utf-8").read()
         slug = os.path.basename(os.path.dirname(path))
         # Frontmatter extrahieren
-        def fm_get(key):
-            m = re.search(rf'^{re.escape(key)}:\s*"(.*)"\s*$', content, re.M)
+        def fm_get(key, _c=content):
+            m = re.search(rf'^{re.escape(key)}:\s*"(.*)"\s*$', _c, re.M)
             if m:
                 return m.group(1)
-            m = re.search(rf"^{re.escape(key)}:\s*'(.*)'\s*$", content, re.M)
+            m = re.search(rf"^{re.escape(key)}:\s*'(.*)'\s*$", _c, re.M)
             if m:
                 return m.group(1)
-            m = re.search(rf"^{re.escape(key)}:\s*(.+?)\s*$", content, re.M)
+            m = re.search(rf"^{re.escape(key)}:\s*(.+?)\s*$", _c, re.M)
             return m.group(1).strip() if m else ""
-        def fm_list(key):
-            m = re.search(rf"^{re.escape(key)}:\s*\[(.*?)\]", content, re.M)
+        def fm_list(key, _c=content):
+            m = re.search(rf"^{re.escape(key)}:\s*\[(.*?)\]", _c, re.M)
             if m:
                 return [k.strip().strip("\"'") for k in m.group(1).split(",") if k.strip()]
             raw = fm_get(key)

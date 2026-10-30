@@ -153,10 +153,13 @@ jobs:
       # infrage" (Exit 2 – ungeprüft ist nicht sauber). Laborbefunde
       # erscheinen als Warnung, nie als Fehler.
       - name: Urteil (Felddaten entscheiden, Labor warnt)
+        env:
+          SCHRITT_FELD_EXIT: ${{ steps.feld.outputs.exit }}
+          SCHRITT_LABOR_EXIT: ${{ steps.labor.outputs.exit }}
         run: |
           set -uo pipefail
-          FELD="${{ steps.feld.outputs.exit }}"
-          LABOR="${{ steps.labor.outputs.exit }}"
+          FELD="$SCHRITT_FELD_EXIT"
+          LABOR="$SCHRITT_LABOR_EXIT"
 
           # Labor: Diagnose. Jede Abweichung wird als Warnung sichtbar, macht
           # den Lauf aber nicht rot – ein Lauf über CDN ist kein Freibrief.

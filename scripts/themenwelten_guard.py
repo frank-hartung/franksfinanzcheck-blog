@@ -119,7 +119,7 @@ class Page(HTMLParser):
     Versteckte Anker/SVGs gehören nicht zum sichtbaren Überschriftentext.
     Es werden keine CSS-/JS-Inhalte als Prosa auf Tippfehler geprüft.
     """
-    VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+    VOID = frozenset({"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"})
 
     def __init__(self, html: str):
         super().__init__(convert_charrefs=True)

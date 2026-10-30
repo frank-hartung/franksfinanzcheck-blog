@@ -818,8 +818,8 @@ def keyword_self_heal_candidates(candidates):
                     print(f"  🔑 {slug}: Keyword-Healing {'; '.join(actions[:2])}")
             else:
                 # dry-run check
-                def get_fm(key):
-                    m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+                def get_fm(key, _fm=fm):
+                    m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
                     return m.group(1).strip() if m else ""
                 kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)
                 if kw_m:
@@ -864,8 +864,8 @@ def keyword_failures(candidates):
             fm = content.split("---", 2)[1] if content.startswith("---") and content.count("---") >= 2 else ""
             body = content.split("---", 2)[2] if len(content.split("---", 2)) == 3 else content
 
-            def get(key):
-                m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+            def get(key, _fm=fm):
+                m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
                 return m.group(1).strip() if m else ""
 
             kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)

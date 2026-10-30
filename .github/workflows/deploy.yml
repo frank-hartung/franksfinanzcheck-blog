@@ -148,19 +148,21 @@ jobs:
         id: gate
         env:
           GH_TOKEN: ${{ github.token }}
+          EVENT_AFTER: ${{ github.event.after }}
+          EVENT_BEFORE: ${{ github.event.before }}
         run: |
           # 1) Manueller Lauf: immer Deploy (Audio-Backfill & Co. muessen
           #    erreichbar bleiben).
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             echo "Manuell ausgeloest – Deploy laeuft immer."
             echo "deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           # 2) Ziel-Commit dieses Laufs (HEAD von main)
-          AFTER="${{ github.event.after }}"
+          AFTER="$EVENT_AFTER"
           if [ -z "$AFTER" ] || [ "$AFTER" = "0000000000000000000000000000000000000000" ]; then
-            AFTER="$(gh api "repos/${{ github.repository }}/commits/main" --jq '.sha' 2>/dev/null || echo "")"
+            AFTER="$(gh api "repos/${GITHUB_REPOSITORY}/commits/main" --jq '.sha' 2>/dev/null || echo "")"
           fi
           if [ -z "$AFTER" ]; then
             echo "Ziel-Commit nicht ermittelbar – Deploy laeuft (Fehlsicherheit)."
@@ -182,7 +184,7 @@ jobs:
           #    nachweislich erfolgreiches Pages-Deployment dieselbe Source-SHA
           #    tragen. API-/Status-Unklarheit ist fail-safe: deploy=true.
           LIVE_DEPLOY_SHA=""
-          gh_pages_msg="$(gh api "repos/${{ github.repository }}/commits/gh-pages" --jq '.commit.message' 2>/dev/null || echo "")"
+          gh_pages_msg="$(gh api "repos/${GITHUB_REPOSITORY}/commits/gh-pages" --jq '.commit.message' 2>/dev/null || echo "")"
           if [ -n "$gh_pages_msg" ]; then
             LIVE_DEPLOY_SHA="$(echo "$gh_pages_msg" | grep -oE '[0-9a-f]{40}' | head -1 || echo "")"
           fi
@@ -191,13 +193,13 @@ jobs:
           PAGES_DEPLOY_SHA=""
           PAGES_DEPLOY_STATUS=""
           pages_deployment="$(gh api \
-            "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" \
+            "repos/${GITHUB_REPOSITORY}/deployments?environment=github-pages&per_page=100" \
             --jq '[.[] | select(.ref == "main" or .ref == "refs/heads/main")][0] | if . == null then "" else "\(.id) \(.sha)" end' \
             2>/tmp/pages-deployment.err || true)"
           if [ -n "$pages_deployment" ]; then
             read -r PAGES_DEPLOYMENT_ID PAGES_DEPLOY_SHA <<< "$pages_deployment"
             PAGES_DEPLOY_STATUS="$(gh api \
-              "repos/${{ github.repository }}/deployments/${PAGES_DEPLOYMENT_ID}/statuses?per_page=1" \
+              "repos/${GITHUB_REPOSITORY}/deployments/${PAGES_DEPLOYMENT_ID}/statuses?per_page=1" \
               --jq '.[0].state // ""' 2>/tmp/pages-status.err || true)"
           fi
 
@@ -205,7 +207,7 @@ jobs:
           echo "  • Cache auf gh-pages        : ${LIVE_DEPLOY_SHA:-unbekannt}"
           echo "  • Offizielles Pages-Deploy  : ${PAGES_DEPLOY_SHA:-nicht vorhanden} (${PAGES_DEPLOY_STATUS:-kein Erfolgsstatus})"
           echo "  • Ziel-Stand main           : ${AFTER}"
-          echo "  • Push before               : ${{ github.event.before }}"
+          echo "  • Push before               : ${EVENT_BEFORE}"
 
           # 4) Harte Auslieferungs-Invariante VOR jeder Entlastung:
           #    Nur ein erfolgreiches offizielles Deployment derselben Source-SHA
@@ -239,8 +241,8 @@ jobs:
           if [ -n "$LIVE_DEPLOY_SHA" ]; then
             BASE_SHA="$LIVE_DEPLOY_SHA"
             echo "Vergleiche Live-Stand (${LIVE_DEPLOY_SHA:0:7}) mit Ziel (${AFTER:0:7}) …"
-          elif [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
-            BASE_SHA="${{ github.event.before }}"
+          elif [ -n "$EVENT_BEFORE" ] && [ "$EVENT_BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="$EVENT_BEFORE"
             echo "Kein Live-Stand auf gh-pages gefunden – Fallback auf Push-Before (${BASE_SHA:0:7}) …"
           fi
 
@@ -251,15 +253,15 @@ jobs:
           fi
 
           # 6) Dateien zwischen BASE_SHA und AFTER diffen
-          files="$(gh api "repos/${{ github.repository }}/compare/${BASE_SHA}...${AFTER}" \
+          files="$(gh api "repos/${GITHUB_REPOSITORY}/compare/${BASE_SHA}...${AFTER}" \
             --paginate --jq '.files[].filename' 2>/tmp/compare.err)" || files=""
 
           if [ -z "$files" ]; then
             # Wenn Compare gegen LIVE_DEPLOY_SHA fehlschlägt (z. B. nach Rebase/Force-Push
             # kein gemeinsamer Vorfahre), Fallback auf Push-Before versuchen:
-            if [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "$BASE_SHA" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            if [ -n "$EVENT_BEFORE" ] && [ "$EVENT_BEFORE" != "$BASE_SHA" ] && [ "$EVENT_BEFORE" != "0000000000000000000000000000000000000000" ]; then
               echo "Compare gegen Live-Stand fehlgeschlagen – versuche Fallback auf Push-Before …"
-              files="$(gh api "repos/${{ github.repository }}/compare/${{ github.event.before }}...${AFTER}" \
+              files="$(gh api "repos/${GITHUB_REPOSITORY}/compare/${EVENT_BEFORE}...${AFTER}" \
                 --paginate --jq '.files[].filename' 2>/tmp/compare_fb.err)" || files=""
             fi
           fi

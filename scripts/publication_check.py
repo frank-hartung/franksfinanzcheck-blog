@@ -28,11 +28,13 @@ import json
 import sys
 import time
 import urllib.request
-import xml.etree.ElementTree as ET
 from pathlib import Path
 from html.parser import HTMLParser
 
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
 import cadence_guard as cg
+import safe_xml as ET
 
 BASE = 'https://franksfinanzcheck.de'
 
@@ -196,7 +198,8 @@ def check(day, online=False, posts_dir=None):
         try:
             req = urllib.request.Request(BASE + '/sitemap.xml', headers={'Cache-Control': 'no-cache'})
             with urllib.request.urlopen(req, timeout=30) as response:
-                root = ET.fromstring(response.read())
+                roh_sitemap = response.read(ET.MAX_XML_BYTES + 1)
+            root = ET.fromstring(roh_sitemap)
             urls = {node.text for node in root.iter() if node.tag.endswith('}loc') or node.tag == 'loc'}
             for slug in slugs:
                 try:

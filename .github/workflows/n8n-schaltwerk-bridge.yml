@@ -81,7 +81,7 @@ jobs:
           INPUT_PAYLOAD: ${{ github.event.inputs.payload_json }}
           EREIGNIS_ACTION: ${{ github.event.action }}
         run: |
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "repository_dispatch" ]; then
             echo "📥 Verarbeite repository_dispatch: ${EREIGNIS_ACTION}"
             python3 scripts/n8n_bridge.py --receive-payload "$EVENT_PAYLOAD"
           elif [ "${INPUT_ACTION}" = "inbox_verarbeiten" ]; then

@@ -291,7 +291,7 @@ def pick_angle(channel_cfg: dict, channel_id: str, slug: str, state: dict,
     fresh = [a for a in angles if a not in used]
     pool = fresh or [a for a in angles if a not in taken] or angles
     seed = f"{channel_id}|{slug}|{day.isoformat()}|{sequence}"
-    digest = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
+    digest = int(hashlib.sha1(seed.encode("utf-8"), usedforsecurity=False).hexdigest(), 16)
 
     # Gleiche (auch neutral zurückgemeldete) Gewichte liefern keinen Sieger.
     # Der alphabetische Tie-Break darf nicht 80 % der Posts vereinnahmen.

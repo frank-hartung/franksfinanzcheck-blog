@@ -52,6 +52,7 @@ import json
 import os
 import re
 import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -193,10 +194,16 @@ class Issues:
         ]:
             if lab in labels:
                 self._ensure_label(lab, farbe, beschr)
-        tmp = Path("/tmp/fristen_issue_body.md")
-        tmp.write_text(body, encoding="utf-8")
-        out = self._run("issue", "create", "--title", titel,
-                        "--body-file", str(tmp), "--label", ",".join(labels))
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".md", prefix="fristen_issue_", encoding="utf-8", delete=False
+        ) as fh:
+            fh.write(body)
+            tmp_pfad = Path(fh.name)
+        try:
+            out = self._run("issue", "create", "--title", titel,
+                            "--body-file", str(tmp_pfad), "--label", ",".join(labels))
+        finally:
+            tmp_pfad.unlink(missing_ok=True)
         # gh gibt die Issue-URL zurück → Nummer extrahieren
         if out and "/issues/" in out:
             try:
@@ -206,9 +213,15 @@ class Issues:
         return None
 
     def kommentieren(self, nummer: int, body: str) -> None:
-        tmp = Path("/tmp/fristen_comment.md")
-        tmp.write_text(body, encoding="utf-8")
-        self._run("issue", "comment", str(nummer), "--body-file", str(tmp))
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".md", prefix="fristen_comment_", encoding="utf-8", delete=False
+        ) as fh:
+            fh.write(body)
+            tmp_pfad = Path(fh.name)
+        try:
+            self._run("issue", "comment", str(nummer), "--body-file", str(tmp_pfad))
+        finally:
+            tmp_pfad.unlink(missing_ok=True)
 
     def label_setzen(self, nummer: int, label: str) -> None:
         self._run("issue", "edit", str(nummer), "--add-label", label)

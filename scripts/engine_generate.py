@@ -33,6 +33,7 @@ Aufruf (wie bisherige Bot-Umgebung):
   PIN_TOPICS=1 python3 scripts/engine_generate.py
 """
 import datetime
+import glob
 import json
 import os
 import random
@@ -245,7 +246,6 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
 
     # Premium: P4-Duplikat-Guard – stelle sicher, dass pin_title/description einzigartig sind
     try:
-        import glob, re
         existing_descs = set()
         existing_titles = set()
         for f in glob.glob(os.path.join(g.POSTS_DIR, "*", "index.md")):
@@ -920,7 +920,7 @@ def _pool_conflicts(pool_paths, topic_title):
             "bei", "zum", "zur", "sich", "nicht", "auch", "als", "wie", "was",
             "dein", "deine", "ihr", "ihre", "so", "du", "sie", "is", "sind",
             "gegen", "nach", "aus", "über", "uber", "durch", "mehr", "noch",
-            "schon", "dann", "auch", "diese", "dieser", "dieses"}
+            "schon", "dann", "diese", "dieser", "dieses"}
 
     def tokens(text):
         raw = re.findall(r"[a-z0-9]+", text.lower())

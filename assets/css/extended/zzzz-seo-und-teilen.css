@@ -296,16 +296,20 @@
     tab-size: 2;
 }
 
-/* KEIN waagerechtes Scrollen (Lehre vom 27.10.2026, axe-Regel
+/* KEIN waagerechtes Scrollen (Lehre vom 27.10.2026 & 30.10.2026, axe-Regel
    „scrollable-region-focusable"): `<code>` ist im Theme ein Grid-Container
-   und wurde damit selbst zum Scrollbereich – der Fokus lag auf dem <pre>,
-   die scrollende Box war eine Ebene tiefer. Statt einen weiteren
-   tabindex zu verteilen, bricht der Code jetzt um: Nichts ist versteckt,
-   nichts muss per Tastatur erreicht werden, und der kopierte Text bleibt
+   (`.md-content pre code`) und wurde damit selbst zum Scrollbereich – der
+   Fokus lag auf dem `<pre tabindex="0">`, die scrollende Box war eine Ebene
+   tiefer (u. a. auf `/pillar/strom-sparen/` mobil). Statt einen weiteren
+   tabindex zu verteilen, bricht der Code um: Nichts ist versteckt, nichts
+   muss per Tastatur gescrollt werden, und der kopierte Text bleibt
    zeilengleich. */
+.post-content pre code,
+.md-content pre code,
 .ff-einbetten__code code {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+    overflow-x: visible;
 }
 
 .ff-einbetten__aktionen {

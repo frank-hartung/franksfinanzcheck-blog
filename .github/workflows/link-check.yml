@@ -203,8 +203,9 @@ jobs:
         if: env.REPORT_PRODUCTION == 'true' && (steps.links.outcome == 'failure' || steps.schema.outcome == 'failure')
         env:
           GH_TOKEN: ${{ github.token }}
+          SCHRITT_LINKS_OUTCOME: ${{ steps.links.outcome }}
         run: |
-          if [ "${{ steps.links.outcome }}" = "failure" ]; then
+          if [ "$SCHRITT_LINKS_OUTCOME" = "failure" ]; then
             TITLE="🔗 Defekte interne Links gefunden"
             LOG=linkcheck.log
             MUSTER='KAPUTT:'
@@ -344,9 +345,12 @@ jobs:
 
       - name: Gate-Status (rot bei kaputten Links oder Schema-Funden)
         if: steps.links.outcome == 'failure' || steps.schema.outcome == 'failure'
+        env:
+          SCHRITT_LINKS_OUTCOME: ${{ steps.links.outcome }}
+          SCHRITT_SCHEMA_OUTCOME: ${{ steps.schema.outcome }}
         run: |
-          [ "${{ steps.links.outcome }}" = "failure" ] \
+          [ "$SCHRITT_LINKS_OUTCOME" = "failure" ] \
             && echo "❌ Defekte interne Links gefunden (siehe Issue + Log oben)."
-          [ "${{ steps.schema.outcome }}" = "failure" ] \
+          [ "$SCHRITT_SCHEMA_OUTCOME" = "failure" ] \
             && echo "❌ Schema-/SEO-Gate meldet harte Funde (siehe Issue + Log oben)."
           exit 1

@@ -50,7 +50,7 @@ LAUF_FAKTENCHECK = dt.date(2026, 10, 27)   # echter Recherchelauf vom 27.10.
 REGISTER = ROOT / 'data' / 'faktenfrische_befunde_911.yaml'
 DASHES = {
     '\u2013': '-', '\u2014': '-', '\u2012': '-', '\u2011': '-',
-    '\u00a0': ' ', '\u202f': ' ', '\u2212': '-', '‑': '-',
+    '\u00a0': ' ', '\u202f': ' ', '\u2212': '-',
 }
 NEGATION = re.compile(r'\b(nicht|kein|keine|keinen|keinem|keiner|ohne|kaum|nie|niemals)\b')
 

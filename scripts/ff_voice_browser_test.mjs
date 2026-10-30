@@ -391,6 +391,10 @@ const BIG_TITLE = 'Gasanbieter wechseln: Praxis-Tipps';
    hier wäre ein anderer Text, die Karte zeigte ins Leere und die
    Plausibilitäts-Wache würde die Spur zu Recht verwerfen. */
 
+let activeServer = null;
+let activeBrowser = null;
+let activePage = null;
+
 async function main() {
   const small = await computeBlocks(SMALL_TITLE, SMALL_BODY);
   const big = await computeBlocks(BIG_TITLE, BIG_BODY);
@@ -466,6 +470,7 @@ async function main() {
     res.end(pageHtml(pages[scene] || pages.s1));
   });
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
+  activeServer = server;
   const base = `http://127.0.0.1:${server.address().port}`;
 
   const browser = await chromium.launch({
@@ -473,8 +478,10 @@ async function main() {
     args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--no-zygote',
            '--autoplay-policy=no-user-gesture-required', '--disable-features=AudioServiceOutOfProcess'],
   });
+  activeBrowser = browser;
   const ctx = await browser.newContext();
   const page = await ctx.newPage();
+  activePage = page;
   const pageErrors = [];
   page.on('pageerror', (e) => pageErrors.push(String(e && e.message)));
   if (process.env.FF_VOICE_BROWSER_VERBOSE) {
@@ -713,13 +720,22 @@ async function main() {
   ok('Keine ungefangenen Seitenfehler', pageErrors.length === 0, pageErrors.slice(0, 3).join(' | '));
 
   await browser.close();
+  activeBrowser = null;
+  activePage = null;
   server.close();
+  activeServer = null;
 
   done('Echt-Browser-Funktionstest Vorlesen (Chromium)');
 }
 
 main().catch(async (e) => {
-  try { console.error('Zustand bei Abbruch:', JSON.stringify(await page.evaluate(() => ({ mode: window.__ffVoice && window.__ffVoice.mode, reading: window.__ffVoice && window.__ffVoice.reading, status: document.getElementById('ff-voice-status') && document.getElementById('ff-voice-status').textContent, spoken: window.__speech ? window.__speech.log.length : -1 })))); } catch (e2) {}
+  try {
+    if (activePage) {
+      console.error('Zustand bei Abbruch:', JSON.stringify(await activePage.evaluate(() => ({ mode: window.__ffVoice && window.__ffVoice.mode, reading: window.__ffVoice && window.__ffVoice.reading, status: document.getElementById('ff-voice-status') && document.getElementById('ff-voice-status').textContent, spoken: window.__speech ? window.__speech.log.length : -1 }))));
+    }
+  } catch (e2) {}
+  try { if (activeBrowser) await activeBrowser.close(); } catch (e3) {}
+  try { if (activeServer) activeServer.close(); } catch (e4) {}
   console.error('❌ Browser-Suite abgebrochen:', e && e.stack ? e.stack.split('\n').slice(0, 4).join('\n') : e);
   process.exit(1);
 });

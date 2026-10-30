@@ -140,9 +140,9 @@ def live_artikel(root: str, seit: datetime.date | None, bis: datetime.date | Non
         if datum > datetime.date.today():
             continue          # buildFuture=false: was nicht gebaut wird, wirbt nicht
 
-        def feld(key: str) -> str:
+        def feld(key: str, _m=m) -> str:
             mm = re.search(r'(?m)^' + key + r':\s*["\']?(.*?)["\']?\s*$',
-                           (m.group(1) if m else ""), re.S)
+                           (_m.group(1) if _m else ""), re.S)
             return re.sub(r"\s+", " ", mm.group(1)).strip() if mm else ""
 
         slug = os.path.basename(os.path.dirname(idx))

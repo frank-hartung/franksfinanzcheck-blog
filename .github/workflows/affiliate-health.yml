@@ -58,6 +58,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "Kein Update."
           else
-            git commit -m "chore+heal: Affiliate-Health E2E (Report${{ github.event_name == 'schedule' && ', Wochenwache' || '' }})"
+            ZUSATZ=""
+            if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then ZUSATZ=", Wochenwache"; fi
+            git commit -m "chore+heal: Affiliate-Health E2E (Report${ZUSATZ})"
             scripts/git_sync.sh --push-only
           fi
