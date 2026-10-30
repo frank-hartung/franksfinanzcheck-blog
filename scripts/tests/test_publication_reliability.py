@@ -17,6 +17,7 @@ import grammar_check
 import profi_polish
 import publication_check as pc
 import publication_release as pr
+import publish as manual_publish
 import publish_day_check as watchdog
 import publish_gate as pg
 import requeue_quality_holds as rqh
@@ -70,6 +71,52 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(rejected.read_bytes(), before)
         self.assertIn('draft: true', manual.read_text())
         self.assertEqual(rp.publish_to_min(posts_dir=self.posts, validator=lambda p: True), [])
+
+    @patch('reserve_pool.now_utc_iso', lambda: '2026-09-07T12:00:00Z')
+    @patch('reserve_pool.datetime.date', Monday)
+    def test_redirect_source_is_never_promoted(self):
+        """Ein Alias bleibt Hold, auch wenn das Reife-Zertifikat grün wäre."""
+        slug = '2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu'
+        post = self.post(slug, reserve=True)
+        before = post.read_bytes()
+        data = self.posts / 'data'
+        data.mkdir()
+        (data / 'weiterleitungen.yaml').write_text(
+            'eintraege:\n'
+            f'  - von: "/posts/{slug}/"\n'
+            '    nach: "/pillar/strom-sparen/"\n'
+            '    regel: "C"\n'
+            '    grund: "bewusst geparkt"\n',
+            encoding='utf-8')
+        (data / 'url_entfallen.yaml').write_text('eintraege: []\n', encoding='utf-8')
+
+        with redirect_stdout(io.StringIO()) as output:
+            published = rp.publish_to_min(
+                posts_dir=self.posts,
+                validator=lambda p: True,
+            )
+        self.assertEqual(published, [])
+        self.assertEqual(post.read_bytes(), before)
+        self.assertIn('Weiterleitungsquelle', output.getvalue())
+
+    def test_manual_publish_cannot_bypass_redirect_source_guard(self):
+        slug = 'alias-source'
+        post = self.post(slug, draft=True)
+        before = post.read_bytes()
+        data = self.posts / 'data'
+        data.mkdir()
+        (data / 'weiterleitungen.yaml').write_text(
+            'eintraege:\n  - von: "/posts/alias-source/"\n'
+            '    nach: "/posts/anderes-ziel/"\n'
+            '    regel: "C"\n    grund: "test"\n',
+            encoding='utf-8')
+        (data / 'url_entfallen.yaml').write_text('eintraege: []\n', encoding='utf-8')
+        with patch.object(manual_publish, 'POSTS_DIR', str(self.posts)), \
+             redirect_stdout(io.StringIO()) as output:
+            count = manual_publish.publish(str(post))
+        self.assertEqual(count, 0)
+        self.assertEqual(post.read_bytes(), before)
+        self.assertIn('Weiterleitungsquelle', output.getvalue())
 
     @patch('reserve_pool.now_utc_iso', lambda: '2026-09-07T12:00:00Z')
     @patch('reserve_pool.datetime.date', Monday)
@@ -136,6 +183,77 @@ class DeliveryTests(unittest.TestCase):
         self.assertIn('draft: false', accepted.read_text())
         self.assertNotIn('cadence_wait:', accepted.read_text())
         self.assertIn('draft: false', live.read_text())
+
+    def test_requeue_alias_source_is_never_promoted(self):
+        """Auch der Fallback überspringt eine Quelle aus der Redirect-SSOT."""
+        class FixedDateTime(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2026, 9, 7, 12, 0, tzinfo=dt.timezone.utc)
+
+        live = self.post('live', draft=False)
+        source = self.post('alias-source', draft=True)
+        source_text = source.read_text()
+        source.write_text(source_text.replace(
+            'draft: true\n',
+            'draft: true\ncadence_wait: true\n'
+            'cadence_demoted: 2026-09-06T12:00:00Z\n'
+            'cadence_grund: "test"\n'))
+        accepted = self.post('fallback-ok', draft=True)
+        accepted.write_text(accepted.read_text().replace(
+            'draft: true\n',
+            'draft: true\ncadence_wait: true\n'
+            'cadence_demoted: 2026-09-06T12:00:00Z\n'
+            'cadence_grund: "test"\n'))
+        before = source.read_bytes()
+        data = self.posts / 'data'
+        data.mkdir()
+        (data / 'weiterleitungen.yaml').write_text(
+            'eintraege:\n  - von: "/posts/alias-source/"\n'
+            '    nach: "/posts/fallback-ok/"\n'
+            '    regel: "C"\n    grund: "test"\n',
+            encoding='utf-8')
+        (data / 'url_entfallen.yaml').write_text('eintraege: []\n', encoding='utf-8')
+
+        with patch.object(pr.dt, 'datetime', FixedDateTime):
+            published = pr.promote_requeue_to_min(
+                posts_dir=self.posts, validator=lambda p: True)
+
+        self.assertEqual(published, ['fallback-ok'])
+        self.assertEqual(source.read_bytes(), before)
+        self.assertIn('draft: false', accepted.read_text())
+        self.assertIn('draft: false', live.read_text())
+
+    def test_cadence_alias_source_is_never_promoted(self):
+        """Die Primär-Wache blockiert Quellen vor dem Release-Schreiben."""
+        import cadence_guard as cg
+        slug = 'alias-source'
+        source = self.post(slug, draft=True)
+        original = source.read_bytes()
+        text = source.read_text().replace(
+            'draft: true\n',
+            'draft: true\ncadence_wait: true\n'
+            'cadence_demoted: 2026-09-06T12:00:00Z\n'
+            'cadence_grund: "test"\n')
+        source.write_text(text)
+        data = self.posts / 'data'
+        data.mkdir()
+        (data / 'weiterleitungen.yaml').write_text(
+            'eintraege:\n  - von: "/posts/alias-source/"\n'
+            '    nach: "/posts/anderes-ziel/"\n'
+            '    regel: "C"\n    grund: "test"\n',
+            encoding='utf-8')
+        (data / 'url_entfallen.yaml').write_text('eintraege: []\n', encoding='utf-8')
+        posts = cg.load_posts(self.posts)
+        with patch('cadence_guard.datetime.date', Monday):
+            promoted = cg.requeue_to_capacity(
+                posts, max_d=2, now_fn=lambda: '2026-09-07T12:00:00Z')
+        self.assertEqual(promoted, [])
+        self.assertEqual(source.read_bytes(), original.replace(
+            b'draft: true\n',
+            b'draft: true\ncadence_wait: true\n'
+            b'cadence_demoted: 2026-09-06T12:00:00Z\n'
+            b'cadence_grund: "test"\n'))
 
     def test_real_html_class_list_and_soft_404(self):
         class Response:

@@ -63,8 +63,12 @@ _DATUM = re.compile(r"^\d{4}-\d{2}-\d{2}-")
 # ----------------------------------------------------------------- Lesen
 
 def lade_quelle(root: str = BLOG_DIR) -> tuple[list[dict], list[dict]]:
-    w = yaml.safe_load(open(os.path.join(root, "data", "weiterleitungen.yaml"), encoding="utf-8"))
-    e = yaml.safe_load(open(os.path.join(root, "data", "url_entfallen.yaml"), encoding="utf-8"))
+    with open(os.path.join(root, "data", "weiterleitungen.yaml"),
+              encoding="utf-8") as quelle:
+        w = yaml.safe_load(quelle)
+    with open(os.path.join(root, "data", "url_entfallen.yaml"),
+              encoding="utf-8") as entfallen:
+        e = yaml.safe_load(entfallen)
     return (w or {}).get("eintraege") or [], (e or {}).get("eintraege") or []
 
 
@@ -229,7 +233,11 @@ def build(root: str, eintraege: list[dict]) -> tuple[int, int]:
     for von, html in erwartete_seiten(eintraege).items():
         p = static_pfad(root, von)
         os.makedirs(os.path.dirname(p), exist_ok=True)
-        alt = open(p, encoding="utf-8").read() if os.path.exists(p) else None
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as fh:
+                alt = fh.read()
+        else:
+            alt = None
         if alt != html:
             with open(p, "w", encoding="utf-8") as fh:
                 fh.write(html)
@@ -265,7 +273,9 @@ def verify(root: str, eintraege: list[dict]) -> list[str]:
         if not os.path.exists(p):
             f.append(f"{von}: Seite fehlt (static/… nicht erzeugt, --build ausführen)")
             continue
-        if open(p, encoding="utf-8").read() != html:
+        with open(p, encoding="utf-8") as fh:
+            erzeugt = fh.read()
+        if erzeugt != html:
             f.append(f"{von}: Seite weicht von Quelle ab (Hand geändert? --build ausführen)")
     for p in gefundene_marker(root):
         von = "/" + os.path.relpath(os.path.dirname(p), os.path.join(root, "static")).replace(os.sep, "/") + "/"
@@ -382,20 +392,24 @@ def selftest() -> int:
         build(tmp, gut_live)
         check("verify nach build grün", verify(tmp, gut_live) == [])
         p = static_pfad(tmp, gut_live[0]["von"])
-        check("Seite enthält canonical und refresh", '<meta http-equiv="refresh" content="0; url=https://franksfinanzcheck.de/posts/2026-08-19-energie/">' in open(p, encoding="utf-8").read())
-        check("Seite ist noindex,follow", 'content="noindex,follow"' in open(p, encoding="utf-8").read())
+        with open(p, encoding="utf-8") as fh:
+            erzeugt = fh.read()
+        check("Seite enthält canonical und refresh", '<meta http-equiv="refresh" content="0; url=https://franksfinanzcheck.de/posts/2026-08-19-energie/">' in erzeugt)
+        check("Seite ist noindex,follow", 'content="noindex,follow"' in erzeugt)
         # eigene, nicht mehr gelistete Seite wird entfernt
         build(tmp, [])
         check("veraltete eigene Seite entfernt", not os.path.exists(p))
         # fremde Seite ohne Marker bleibt unangetastet
         fremd = os.path.join(tmp, "static", "posts", "fremd", "index.html")
         os.makedirs(os.path.dirname(fremd), exist_ok=True)
-        open(fremd, "w", encoding="utf-8").write("<html>fremd</html>")
+        with open(fremd, "w", encoding="utf-8") as fh:
+            fh.write("<html>fremd</html>")
         build(tmp, [])
         check("fremde Seite bleibt", os.path.exists(fremd))
         # Handänderung wird von verify erkannt
         build(tmp, gut_live)
-        open(p, "a", encoding="utf-8").write("<!-- hand -->")
+        with open(p, "a", encoding="utf-8") as fh:
+            fh.write("<!-- hand -->")
         check("Handänderung erkannt", any("weicht" in x for x in verify(tmp, gut_live)))
     # 13 CSV-Format: keine Kopfzeile, Schema ohne https bei Quelle
     csv = cloudflare_csv(gut_live).strip().split("\n")

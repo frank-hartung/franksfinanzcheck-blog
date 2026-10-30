@@ -136,7 +136,18 @@ Die Datenschutz-Folgen des Proxys stehen in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`
 | Gate H5 | Weiterleitungsseiten zählen nicht in das Verhältnis indexierbar : nicht indexierbar | Im Deploy |
 | `scripts/tests/test_weiterleitungen.py` | Quelle grün, erzeugte Seiten stimmen, Snapshot-Verluste sind entschieden | Lokal über `npm run test:weiterleitungen` und im Deploy vor Hugo. |
 
-`deploy.yml` führt vor dem Build `--selftest`, `--check`, `--verify` und `python3 -m unittest scripts.tests.test_weiterleitungen` aus. Nur `--proxy-check` bleibt wegen seiner netzabhängigen Betreiberprüfung außerhalb der CI.
+`deploy.yml` führt vor dem Build den Selbsttest von `publikations_weiterleitung.py`, danach `weiterleitungen.py --selftest`, `--check`, `--verify` und `python3 -m unittest scripts.tests.test_weiterleitungen` aus. Nur `--proxy-check` bleibt wegen seiner netzabhängigen Betreiberprüfung außerhalb der CI.
+
+### Schutz vor einer Wiederveröffentlichung eines Alias
+
+Die Prüfung vor Hugo ist nicht der einzige Schutz: Reserve- und Re-Queue-
+Promotionen lesen über `scripts/publikations_weiterleitung.py` dieselbe
+Weiterleitungsquelle. Steht ein Slug als `von` in `data/weiterleitungen.yaml`,
+wird er nicht auf `draft: false` gesetzt – auch dann nicht, wenn ein altes
+Reife-Zertifikat den Text als `ready` führt. Fehlt die Quelle im echten
+Repository, bricht die Promotion fail-closed ab; ein isolierter Testbaum ohne
+Produktionsdaten bleibt weiterleitungsfrei. So kann ein späterer Slot keine
+Alias-Seite erneut mit einem Live-Artikel überdecken.
 
 ## 8. Bekannte Grenzen
 
