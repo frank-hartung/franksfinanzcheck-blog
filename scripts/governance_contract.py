@@ -198,6 +198,19 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # vertraglichen Minimum (C6) – ein Selbsttest, den niemand laesst,
           # ist keine Wache.
           "lesbarkeit_schreiber.py",
+          # Grammatik-Wache (30.10.2026, Frank-Auftrag „Rechtschreib- und
+          # Grammatikprüfung dauerhaft auf Highend-Niveau einer Profi-Agentur
+          # nachschärfen“): LT1–LT4 prüfen Wendungen, keine Morphologie. Der
+          # Artikel 2026-10-24-etf-sparplan-... stand mit „Dein Schritt-für-
+          # Schritt-Anleitung“ in Titel, H1, Cover und Pinterest – und alle
+          # Wachen meldeten 0 Funde. LT5/LT6 prüfen Kongruenz und
+          # Präpositions-Kasus gegen data/genus_lexikon.txt (Beweis statt
+          # Raten: Auto-Fix nur bei genau einem zulässigen Ziel, Titel nur mit
+          # --fix-titel wegen Cover-Marken-Lock). Weil grammar_check.py ueber
+          # sechs Wege laeuft (Engine, Hemingway, Deploy, Endredaktion,
+          # Health, Reserve), steht sein Selbsttest hier im vertraglichen
+          # Minimum (C6) – ein Selbsttest, den niemand laesst, ist keine Wache.
+          "grammar_check.py",
           # Politur-Heiler (07.10.2026, BOT-WATCHDOG #614): Er heilt die
           # Maschinen-Reste, fuer die es bis dahin KEINEN Heiler gab (R7-Intro-
           # Formel, R11/R13 Zahlen-Datums-Ruinen, R14-Marker, R15-PHrasen-Doppel,
@@ -2203,6 +2216,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows, root=root)
     checks += c44_themen_nachschub(script_texts, wflows, root=root)
     checks += c45_frischhalte_deckung(script_texts, wflows, root=root)
+    checks += c47_grammatik_kongruenz(script_texts, wflows, root=root)
     return checks
 
 
@@ -3784,6 +3798,131 @@ def c45_frischhalte_deckung(script_texts, wflows, root=BLOG_DIR):
         if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
             out.append(("C45", f"scripts/tests/{name} fehlt – die Deckungs-"
                                "Zusage wäre ungetestet (#912)."))
+    return out
+
+
+# --- C47: Grammatik-Kongruenz ist bewiesen, nicht behauptet (30.10.2026) ------
+# Befund: Der Live-Artikel `2026-10-24-etf-sparplan-…` stand mit „Dein
+# Schritt-für-Schritt-Anleitung“ in Titel, H1, Cover und Pinterest – und keine
+# der 250 Wachen meldete etwas, weil keine einzige die NACBARSCHAFT zweier
+# Wörter prüfte. Genau das ist der Unterschied zwischen „Regel fehlt“ und
+# „Fähigkeit fehlt“. Die Fähigkeit LT5 (Genus/Numerus) und LT6 (Kasus nach
+# Präposition) darf darum nicht zur Prosa verkommen:
+#   a) Die Wache muss die Kongruenz-Ebene wirklich enthalten (Beweis statt
+#      Behauptung: `kongruenz_funde`, `GENUS_FILE`, Titel-Heilung).
+#   b) Ohne Lexikon-Eintrag gibt es keine Heilung – nie ein geratenes Genus.
+#   c) Der Titel bleibt gesperrt, solange der Lauf nicht `--fix-titel` ruft.
+#   d) Die Titel-Heilung läuft VOR dem Cover-Rendern (das Bild trägt den Titel).
+#   e) Der Selbsttest hält den Vorfall und die Falsch-Positiv-Sperren fest.
+C47_WACHE = "grammar_check.py"
+C47_LEXIKON = "genus_lexikon.txt"
+C47_GENUS_TAGS = ("m", "f", "n", "pl", "m/pl", "n/pl", "f/pl", "m/n", "n/m", "m/f", "f/m")
+C47_LEXIKON_MIN = 400
+
+
+def _c47_lexikon(root):
+    """Liest data/genus_lexikon.txt und liefert (eintraege, probleme)."""
+    pfad = os.path.join(root, "data", C47_LEXIKON)
+    probleme, eintraege = [], {}
+    try:
+        with open(pfad, encoding="utf-8") as fh:
+            zeilen = fh.read().splitlines()
+    except OSError:
+        return {}, [f"data/{C47_LEXIKON} fehlt – ohne Lexikon heilt die "
+                    "Kongruenz-Ebene nichts (und niemand merkt es)."]
+    for nummer, roh in enumerate(zeilen, 1):
+        zeile = roh.split("#", 1)[0].strip()
+        if not zeile or zeile.startswith("["):
+            continue
+        teile = zeile.split()
+        if len(teile) != 2:
+            probleme.append(f"data/{C47_LEXIKON}:{nummer}: erwartet "
+                            "`<Oberfläche><TAB><Tags>`")
+            continue
+        wort, tags = teile
+        if any(t not in C47_GENUS_TAGS for t in tags.split("/")):
+            probleme.append(f"data/{C47_LEXIKON}:{nummer}: unbekannte Tags "
+                            f"„{tags}“ bei „{wort}“")
+        if wort in eintraege:
+            probleme.append(f"data/{C47_LEXIKON}:{nummer}: „{wort}“ steht "
+                            "doppelt – die letzte Zeile gewinnt still")
+        eintraege[wort] = tags
+    if len(eintraege) < C47_LEXIKON_MIN:
+        probleme.append(f"data/{C47_LEXIKON}: nur {len(eintraege)} Einträge "
+                        f"(Minimum {C47_LEXIKON_MIN}) – ein zu kleines Lexikon "
+                        "meldet Zufallstreffer statt Kongruenz")
+    return eintraege, probleme
+
+
+def c47_grammatik_kongruenz(script_texts, wflows, root=BLOG_DIR):
+    """Kongruenz-Ebene, Lexikon, Titel-Sperre und Reihenfolge sind belegt."""
+    out = []
+    quelle = (script_texts or {}).get(C47_WACHE, "")
+    if not quelle:
+        return [("C47", f"scripts/{C47_WACHE} fehlt – Kongruenz (Genus, Kasus) "
+                        "wäre wieder unsichtbar (30.10.2026).")]
+    for marker, was in (
+            ("GENUS_FILE", "das Lexikon ist in der Wache nicht angebunden"),
+            ("def kongruenz_funde(", "die Prüfung selbst fehlt"),
+            ("def lade_genus_lexikon(", "der Lexikon-Lader fehlt"),
+            ("LESUNG", "die Lesungs-Tabelle (Artikelwort → Merkmale) fehlt"),
+            ("--lexikon-pruefen", "die Selbstkontrolle des Lexikons fehlt"),
+            ("--fix-titel", "der ausdrückliche Titel-Auftrag fehlt")):
+        if marker not in quelle:
+            out.append(("C47", f"scripts/{C47_WACHE}: `{marker}` fehlt – {was}."))
+    if C47_WACHE not in GUARDS:
+        out.append(("C47", f"scripts/{C47_WACHE} steht nicht im vertraglichen "
+                           "Minimum (C6) – ein Selbsttest, den niemand lässt, "
+                           "ist keine Wache."))
+    # e) Der Selbsttest muss den Vorfall UND die Falsch-Positiv-Sperren halten.
+    selftest = quelle[quelle.find("def run_selftest("):] if "def run_selftest(" in quelle else ""
+    for marker, was in (("Schritt-für-Schritt-Anleitung", "der Vorfall vom 30.10.2026"),
+                        ("Relativpronomen", "die Relativpronomen-Falle"),
+                        ("Adjektivdeklination", "die Adjektivdeklination-Falle")):
+        if selftest and marker not in selftest:
+            out.append(("C47", f"scripts/{C47_WACHE}: im Selbsttest fehlt "
+                               f"{was} (`{marker}`) – eine Grammatik-Wache ohne "
+                               "Negativ-Probe „heilt“ korrektes Deutsch."))
+    # a) + b) Lexikon: Format, Größe, Pflichtformen des Vorfalls.
+    eintraege, probleme = _c47_lexikon(root)
+    out.extend(("C47", p) for p in probleme)
+    for pflicht in ("schritt-für-schritt-anleitung", "kraft", "grad", "anleitung"):
+        if eintraege and pflicht not in eintraege:
+            out.append(("C47", f"data/{C47_LEXIKON}: Pflichtform „{pflicht}“ "
+                               "fehlt – genau sie hat den Vorfall sichtbar "
+                               "gemacht."))
+    # c) Der Titel ist Cover-Marken-Lock: ohne --fix-titel kein Schreiben.
+    if '"zone": "title"' not in quelle:
+        out.append(("C47", f"scripts/{C47_WACHE}: die Titel-Zone ist nicht "
+                           "ausgezeichnet – dann ist nicht prüfbar, ob ein "
+                           "Lauf Cover-Marken überschreibt."))
+    # d) Reihenfolge im Tageslauf: Selbsttest → --fix → --fix-titel → Cover.
+    health = ""
+    for pfad, text in (wflows or {}).items():
+        if os.path.basename(pfad) == "blog-health-daily.yml":
+            health = text
+    if not health:
+        out.append(("C47", "blog-health-daily.yml fehlt – die tägliche "
+                           "Kongruenz-Heilung ist nicht verdrahtet."))
+    else:
+        i_test = health.find("grammar_check.py --selftest")
+        i_fix = health.find("grammar_check.py --fix ")
+        i_titel = health.find("grammar_check.py --fix-titel")
+        i_cover = health.find("check_covers.py --fix")
+        if i_fix < 0:
+            out.append(("C47", "blog-health-daily.yml: `grammar_check.py --fix` "
+                               "fehlt – die Prüfung wäre ein Protokoll."))
+        if i_titel < 0:
+            out.append(("C47", "blog-health-daily.yml: `--fix-titel` fehlt – "
+                               "der Titel-Fehler bliebe stehen."))
+        if i_test < 0 or (i_fix >= 0 and i_test > i_fix):
+            out.append(("C47", "blog-health-daily.yml: der Selbsttest läuft "
+                               "nicht VOR der Heilung – ohne Beweis schreibt "
+                               "niemand (Selbsttest-Pflicht)."))
+        if i_cover >= 0 and i_titel >= 0 and i_titel > i_cover:
+            out.append(("C47", "blog-health-daily.yml: `--fix-titel` läuft NACH "
+                               "`check_covers.py --fix` – der Titel stünde dann "
+                               "im Text, das Cover zeigte weiter den alten Satz."))
     return out
 
 
@@ -5831,6 +5970,24 @@ RULE_TEXT = {
            "Content-Verlust); der Watchdog fährt Heiler und Zielwache; "
            "Report-Schema 5 kennt SSOT und Zieldaten; Tests und Selbsttest "
            "laufen im Vertrag (Pinterest P10/P14, #822, 24.10.2026).",
+    "C47": "Grammatik ist Morphologie, nicht Meinung: Der Artikel "
+           "2026-10-24-etf-sparplan-… stand mit „Dein Schritt-für-Schritt-"
+           "Anleitung“ in Titel, H1, Cover und Pinterest – vier sichtbare "
+           "Flächen, vier Flächen zu viel, und alle Wachen meldeten 0 Funde, "
+           "weil LT1–LT4 Wendungen prüfen und weder das Wörterbuch noch die "
+           "Groß-/Kleinschreibung Kongruenz messen kann. LT5 (Genus/Numerus) "
+           "und LT6 (Kasus nach Präposition) lesen die Wahrheit deshalb aus "
+           "data/genus_lexikon.txt: Passt KEINE Lesung eines Artikelworts zum "
+           "Genus des Nomens, ist der Satz falsch – unabhängig davon, welchen "
+           "Kasus der Autor wollte. Geschrieben wird nur, wenn genau EIN Ziel "
+           "übrig bleibt (mehrdeutige Nomen, Plural-Dativ und Wechsel-"
+           "präpositionen bleiben Report), der Titel nur mit --fix-titel "
+           "(Cover-Marken-Lock), und der Lauf, der Titel heilt, rendert die "
+           "Cover danach neu. Der Selbsttest friert den Vorfall und fünf "
+           "Falsch-Positiv-Fallen ein: Relativpronomen, Demonstrativpronomen, "
+           "schwache Adjektivdeklination, Kompositum mit Leerzeichen und "
+           "„um … willen“ – eine Grammatik-Wache, die korrektes Deutsch "
+           "„heilt“, ist schlimmer als keine (30.10.2026).",
     "C44": "Der Vorrat endet nicht, er läuft aus: Zwischen dem 19.10. und "
            "dem 25.10.2026 fiel der Reserve-Vorrat von 6 auf 1, und jede "
            "Nacht wurde derselbe Schritt rot – in der AUTO-Bahn war kein "
@@ -5924,7 +6081,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C43": "Ein geparktes Ziel ist kein Pin-Ziel (P10 misst die richtige "
                 "Menge, P14 heilt über die SSOT, die Zielwache hat einen Fahrer)",
          "C44": "Der Vorrat endet nicht, er läuft aus (Vorlauf in Tagen, "
-                "Bahn-scharfe Diagnose, Füllwort-Grenze)"}
+                "Bahn-scharfe Diagnose, Füllwort-Grenze)",
+         "C47": "Grammatik ist Morphologie, nicht Meinung (LT5/LT6 gegen das "
+                "Genus-Lexikon, Titel nur mit Beweis, Cover rendert danach)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -7831,6 +7990,70 @@ def _selftest():
             if "nicht an den Parkstand gebunden" in f[1]]:
         failures.append("C43: die Betriebszustand-Ausnahme ist nicht belegt (#822).")
 
+    # --- C47: Grammatik ist Morphologie, nicht Meinung (30.10.2026) ---------
+    # Fünf Sabotagen – ohne Kongruenz-Ebene, ohne Lexikon, ohne Negativ-Probe,
+    # mit vertauschter Reihenfolge (Cover vor Titel) und mit fehlendem
+    # Selbsttest-Aufruf – müssen den Vertrag rot machen. Der echte Zustand
+    # bleibt still (erster Block). Eine Regel, die nur den Ist-Zustand kennt,
+    # ist eine Momentaufnahme, kein Vertrag.
+    c47_wache = _read(os.path.join(BLOG_DIR, "scripts", "grammar_check.py"))
+    c47_workflows = {"blog-health-daily.yml":
+                     _read(os.path.join(BLOG_DIR, ".github", "workflows",
+                                        "blog-health-daily.yml"))}
+    c47_scripts = {"grammar_check.py": c47_wache}
+    if c47_grammatik_kongruenz(c47_scripts, c47_workflows, root=BLOG_DIR):
+        failures.append("C47: der echte Zustand wird beanstandet: "
+                        f"{c47_grammatik_kongruenz(c47_scripts, c47_workflows, root=BLOG_DIR)}")
+    # (a) Die Kongruenz-Ebene fällt aus der Wache heraus.
+    if not [f for f in c47_grammatik_kongruenz(
+            {"grammar_check.py": c47_wache.replace("def kongruenz_funde(", "def weg(")},
+            c47_workflows, root=BLOG_DIR) if "kongruenz_funde" in f[1]]:
+        failures.append("C47: eine Wache ohne Kongruenz-Prüfung bleibt unentdeckt.")
+    # (b) Der Selbsttest verliert seine Falsch-Positiv-Sperren.
+    if not [f for f in c47_grammatik_kongruenz(
+            {"grammar_check.py": c47_wache.replace("Relativpronomen", "X")},
+            c47_workflows, root=BLOG_DIR) if "Relativpronomen" in f[1]]:
+        failures.append("C47: ein Selbsttest ohne Falsch-Positiv-Probe bleibt unentdeckt.")
+    # (c) Das Lexikon fehlt oder ist zu klein.
+    leer = os.path.join(BLOG_DIR, "scripts", "_c47_leerer_baum")
+    try:
+        os.makedirs(leer, exist_ok=True)
+        if not [f for f in c47_grammatik_kongruenz(
+                c47_scripts, c47_workflows, root=leer) if "fehlt" in f[1]]:
+            failures.append("C47: ein fehlendes Genus-Lexikon bleibt unentdeckt.")
+    finally:
+        try:
+            os.rmdir(leer)
+        except OSError:
+            pass
+    # (d) Die Titel-Heilung läuft NACH der Cover-Heilung.
+    zeilen = c47_workflows["blog-health-daily.yml"].splitlines(keepends=True)
+    titel_zeilen = [z for z in zeilen if "grammar_check.py --fix-titel" in z]
+    if not titel_zeilen:
+        failures.append("C47: der Selbsttest findet die Titel-Heilung im "
+                        "Workflow nicht (Verdrahtung geändert?).")
+    else:
+        ohne_titel = [z for z in zeilen if "grammar_check.py --fix-titel" not in z]
+        ziel = [i for i, z in enumerate(ohne_titel) if "check_covers.py --fix" in z]
+        if not ziel:
+            failures.append("C47: der Selbsttest findet die Cover-Heilung im "
+                            "Workflow nicht (Verdrahtung geändert?).")
+        else:
+            verdreht = "".join(ohne_titel[:ziel[0] + 1] + titel_zeilen
+                               + ohne_titel[ziel[0] + 1:])
+            if not [f for f in c47_grammatik_kongruenz(
+                    {"grammar_check.py": c47_wache},
+                    {"blog-health-daily.yml": verdreht}, root=BLOG_DIR)
+                    if "NACH" in f[1]]:
+                failures.append("C47: eine vertauschte Reihenfolge (Cover vor "
+                                "Titel) bleibt unentdeckt.")
+    # (e) Der Tageslauf verliert seinen Selbsttest-Aufruf.
+    if not [f for f in c47_grammatik_kongruenz(
+            c47_scripts, {"blog-health-daily.yml": c47_workflows["blog-health-daily.yml"]
+                          .replace("grammar_check.py --selftest", "grammar_check.py --start")},
+            root=BLOG_DIR) if "Selbsttest" in f[1]]:
+        failures.append("C47: ein Tageslauf ohne Selbsttest bleibt unentdeckt.")
+
     # Die EINZIGE Urteilsstelle des Selbsttests (Dauerheilung #806): erst
     # hier wird über alle Kunstbefunde entschieden – die Abschnitte sammeln,
     # dieser Abschluss urteilt.
@@ -7839,7 +8062,7 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C44 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C47 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

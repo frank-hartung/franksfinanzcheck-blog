@@ -33,7 +33,7 @@ quellen:
     herausgeber: "Bundesnetzagentur"
     datum: "2023-01-01"
 faktencheck: 2026-10-06
-kurzantwort: "Reduziere die Raumtemperatur um ein Grad, nutze LED‑Leuchten, stelle den Kühlschrank auf 4 °C und das Gefrierfach auf –18 °C, installiere Zeitschaltuhren für Geräte und ziehe regelmäßig die Dichtungen von Fenstern und Türen nach. Durch diese fünf Schritte lässt sich der Haushaltsstromverbrauch meist um 10 % – 15 % senken."
+kurzantwort: "Reduziere die Raumtemperatur um einen Grad, nutze LED‑Leuchten, stelle den Kühlschrank auf 4 °C und das Gefrierfach auf –18 °C, installiere Zeitschaltuhren für Geräte und ziehe regelmäßig die Dichtungen von Fenstern und Türen nach. Durch diese fünf Schritte lässt sich der Haushaltsstromverbrauch meist um 10 % – 15 % senken."
 ---
 
 [Energieeffizienz](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) Im Check: Spare sofort 15 % deiner Stromrechnung im Modellfall. Das geht ganz ohne neue Geräte. Ein Check deiner Gewohnheiten macht es möglich. Fünf schnelle Tricks wirken sofort. Setze sie konsequent um. So behältst du am Ende des Monats mehr Geld auf deinem Konto.

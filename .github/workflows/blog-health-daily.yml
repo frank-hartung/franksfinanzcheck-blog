@@ -55,6 +55,26 @@ jobs:
       - run: python3 scripts/casing_guard.py --split-headglue || echo "⚠ HeadGlue – mehrdeutige Fälle bleiben im Report"
       - run: python3 scripts/pinterest_pin_text_sync.py --apply || echo "⚠ Pin-Sync (nicht kritisch)"
 
+      # GRAMMATIK-KONGRUENZ (Dauerbefund 30.10.2026, LT5/LT6): Der Artikel
+      # 2026-10-24-etf-sparplan-… stand mit „Dein Schritt-für-Schritt-
+      # Anleitung“ in Titel, H1, Cover und Pinterest – und alle Wachen meldeten
+      # 0 Funde, weil LT1–LT4 Wendungen prüfen, keine Morphologie. Diese Stufe
+      # prüft Kongruenz und Präpositions-Kasus gegen data/genus_lexikon.txt:
+      #   1) Selbsttest (20 Fälle, Negativ-Fallen inklusive)
+      #   2) Lexikon-Format (SSOT: Tags, Duplikate)
+      #   3) Heilung im Fließtext und in der Description – nur bei genau einem
+      #      zulässigen Ziel, nie bei mehrdeutigem Genus
+      #   4) Titel-Heilung (`--fix-titel`) ebenfalls nur bei eindeutigem Beweis;
+      #      der folgende check_covers-Schritt rendert die Bildvarianten neu,
+      #      weil das Cover den Titel trägt. Idempotent: der zweite Lauf ist still.
+      - name: Grammatik-Kongruenz (LT5/LT6, offline)
+        run: |
+          set -Eeuo pipefail
+          python3 scripts/grammar_check.py --selftest
+          python3 scripts/grammar_check.py --lexikon-pruefen
+          python3 scripts/grammar_check.py --fix || echo "⚠ Grammatik – Restfunde siehe GRAMMATIK-REPORT.md"
+          python3 scripts/grammar_check.py --fix-titel || echo "⚠ Titel-Kongruenz – Vorschlag steht im GRAMMATIK-REPORT.md"
+
       - run: python3 scripts/cadence_guard.py --selftest
       - run: python3 scripts/cadence_guard.py --fix
       - run: python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate – Funde im Log (R5 heilt nicht automatisch)"

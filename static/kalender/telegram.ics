@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
  kontrolle:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Haushaltskosten reduzieren: So gewinnst du d
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
  ten-falle:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): VPN Zuhause: Schutzschild oder unnötige Fixk

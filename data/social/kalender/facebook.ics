@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:facebook:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
  ort-senken:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261030T141500Z
 DTEND:20261030T143000Z
 SUMMARY:Facebook (Seite): Kleine Energiespar‑Tricks: Deine Kosten sofo
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
  en-konto:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261030T184500Z
 DTEND:20261030T190000Z
 SUMMARY:Facebook (Seite): Bankgebühren senken: 7 Schritte zum günstige
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
  kontrolle:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261031T084500Z
 DTEND:20261031T090000Z
 SUMMARY:Facebook (Seite): Haushaltskosten reduzieren: So gewinnst du d
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
  ten-falle:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261031T141500Z
 DTEND:20261031T143000Z
 SUMMARY:Facebook (Seite): VPN Zuhause: Schutzschild oder unnötige Fixk
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
  -ueberblick:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261101T084500Z
 DTEND:20261101T090000Z
 SUMMARY:Facebook (Seite): Stromkosten senken: Clevere Haushaltsgeräte 
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
  t:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261101T141500Z
 DTEND:20261101T143000Z
 SUMMARY:Facebook (Seite): Frugalismus Familie: Clever sparen ohne Verz
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
  -du-richtig:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261102T084500Z
 DTEND:20261102T090000Z
 SUMMARY:Facebook (Seite): Wärmepumpe vs. Gasheizung 2026: So entscheid
@@ -113,11 +113,11 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
  monatlichen:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261102T141500Z
 DTEND:20261102T143000Z
-SUMMARY:Facebook (Seite): ETF-Sparplan starten: Dein Schritt-für-Schri
- tt-Anleitung (nutzen)
+SUMMARY:Facebook (Seite): ETF-Sparplan starten: Deine Schritt-für-Schr
+ itt-Anleitung (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
  Artikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-s
  tarten-schritt-fuer-schritt-zum-monatlichen/
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
  se-fuellen:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261103T084500Z
 DTEND:20261103T090000Z
 SUMMARY:Facebook (Seite): Strategisch sparen: So kannst du deine Reise
@@ -143,7 +143,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-03@fra
  nksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261103T141500Z
 DTEND:20261103T143000Z
 SUMMARY:Facebook (Seite): DSL-Wechselbonus sichern: So sparst du beim 
@@ -158,7 +158,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
  icks:nutzen:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261104T084500Z
 DTEND:20261104T090000Z
 SUMMARY:Facebook (Seite): Energieeffizienz im Haushalt: 5 schnelle Spa
@@ -173,7 +173,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
  tzen:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261104T141500Z
 DTEND:20261104T143000Z
 SUMMARY:Facebook (Seite): Geld abheben im Ausland: Wo die Gebühren wir
@@ -188,7 +188,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
  tie-gas:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261105T084500Z
 DTEND:20261105T090000Z
 SUMMARY:Facebook (Seite): Sicher heizen: Was sie abdeckt und wie lange
@@ -203,7 +203,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
  bieterwechsel:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261105T141500Z
 DTEND:20261105T143000Z
 SUMMARY:Facebook (Seite): DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten 
@@ -218,7 +218,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
  -tarife-fuer-2026:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261106T084500Z
 DTEND:20261106T090000Z
 SUMMARY:Facebook (Seite): Preisgarantie Gas: So sicherst du günstige T
@@ -233,7 +233,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspla
  n:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261106T141500Z
 DTEND:20261106T143000Z
 SUMMARY:Facebook (Seite): Abos und Verträge: Der stille Posten im Haus
@@ -248,7 +248,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verme
  iden:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261107T084500Z
 DTEND:20261107T090000Z
 SUMMARY:Facebook (Seite): Gasrechnung senken: Fehler im Spätsommer ver
@@ -263,7 +263,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
  net:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261107T141500Z
 DTEND:20261107T143000Z
 SUMMARY:Facebook (Seite): DSL-Vergleich: So findest du den günstigsten
@@ -278,7 +278,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-
  ohne-gebuehren:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261108T084500Z
 DTEND:20261108T090000Z
 SUMMARY:Facebook (Seite): Kostenloses Girokonto: Ein Konto ohne Gebühr
@@ -293,7 +293,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nu
  tzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261108T141500Z
 DTEND:20261108T143000Z
 SUMMARY:Facebook (Seite): Mietwagen ohne Kautionsfallen: So sparst du 
@@ -308,7 +308,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser
  -finden:nutzen:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261109T084500Z
 DTEND:20261109T090000Z
 SUMMARY:Facebook (Seite): Energiediebe stoppen: So kannst du Stromfres
@@ -323,7 +323,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
  us-tipps:nutzen:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261109T141500Z
 DTEND:20261109T143000Z
 SUMMARY:Facebook (Seite): Frugalismus-Tipps: Mehr Freiheit durch kluge
@@ -338,7 +338,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nu
  tzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261110T084500Z
 DTEND:20261110T090000Z
 SUMMARY:Facebook (Seite): Haushaltsbuch führen: App\, Excel oder Stift
@@ -353,7 +353,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-int
  ernet:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261110T141500Z
 DTEND:20261110T143000Z
 SUMMARY:Facebook (Seite): DNS-Server wechseln: Datenschutz\, Filter un
@@ -368,7 +368,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-prei
  sspruengen:nutzen:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261111T084500Z
 DTEND:20261111T090000Z
 SUMMARY:Facebook (Seite): Preisgarantie Gas: Was bei Preiserhöhung hil
@@ -383,7 +383,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ec
  ke:nutzen:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261111T141500Z
 DTEND:20261111T143000Z
 SUMMARY:Facebook (Seite): WLAN verbessern: So bringst du stabilen Spee
@@ -398,7 +398,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nut
  zen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261112T084500Z
 DTEND:20261112T090000Z
 SUMMARY:Facebook (Seite): Warmwasser sparen: Die Rechnung hinter – War
@@ -413,7 +413,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-
  deine-rechte:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261112T141500Z
 DTEND:20261112T143000Z
 SUMMARY:Facebook (Seite): Störung beim Internetanbieter: So sicherst d
@@ -428,7 +428,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruef
  en:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261113T084500Z
 DTEND:20261113T090000Z
 SUMMARY:Facebook (Seite): Lastschrift und Dauerauftrag: Was du prüfen 
@@ -443,7 +443,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:n
  utzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261030T112747Z
+DTSTAMP:20261030T150214Z
 DTSTART:20261113T141500Z
 DTEND:20261113T143000Z
 SUMMARY:Facebook (Seite): Handytarif 2026 vergleichen: Günstige Tarife

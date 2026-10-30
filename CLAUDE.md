@@ -160,6 +160,11 @@ npm run kommando:probe                               # Kommando-Melder: würde d
 npm run test:kommando                                # Fluchtschutz (ein Befund = eine Zeile), Teststille, Notausgang
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
+python3 scripts/grammar_check.py --selftest       # Grammatik LT1–LT6 (Wendungen + Kongruenz, offline)
+python3 scripts/grammar_check.py --lexikon-pruefen  # Genus-Lexikon (SSOT der Kongruenz): Format + Suffix-Plausibilität
+python3 scripts/grammar_check.py --fix             # Selbstheilung Fließtext/description, nur eindeutige Ziele
+python3 scripts/grammar_check.py --fix-titel       # + Titel-Kongruenz (Cover-Marken-Lock, nur mit Beweis)
+npm run test:grammatik                             # Selbsttest (20 Fälle) + Lexikon-Prüfung + Unit-Tests
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
 npm run offenlegung                                   # Build + Werbe-Offenlegung O1–O7 (artikelgenau, sichtbar)
 npm run test:offenlegung                              # Selbsttest (13 Sabotage-Proben) + 36 Unit-Tests

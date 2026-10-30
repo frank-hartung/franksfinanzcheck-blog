@@ -127,7 +127,7 @@ Mit dieser Routine wird die Heizsaison planbar. Du weißt vor der ersten kalten 
 
 Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden Saison:
 
-1 im Rechenfall. **Raumtemperatur um ein Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie. Von 23 auf 21 Grad sind das im Modellfall bis zu 160 € im Jahr.
+1 im Rechenfall. **Raumtemperatur um einen Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie. Von 23 auf 21 Grad sind das im Modellfall bis zu 160 € im Jahr.
 2. **Abschlag an den echten Verbrauch anpassen:** Melde deinem Anbieter den aktuellen Zählerstand. Er muss einen nachweislich zu hohen oder zu niedrigen Abschlag korrigieren.
 3. **Aus der Grundversorgung wechseln:** Der Grundtarif der Stadtwerke ist die Notversorgung, nicht der Bestpreis. Ein Wechsel ist jederzeit mit kurzer Frist möglich.
 4. **Stoßlüften statt Dauerlüften:** Fünf bis zehn Minuten weit geöffnete Fenster tauschen die Luft komplett, ohne die Wände auszukühlen. Gekippte Fenster heizen für die Straße.
@@ -186,7 +186,7 @@ Beides zahlt vor der Rechnung. Der Abschlag läuft monatlich. Eine Vorauszahlung
 
 ### Wie spare ich in der Heizsaison am schnellsten?
 
-Senke die Temperatur um ein Grad als Modellannahme. Das spart nach Einschätzung der Verbraucherzentralen rund 6 % Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
+Senke die Temperatur um einen Grad als Modellannahme. Das spart nach Einschätzung der Verbraucherzentralen rund 6 % Energie. Lüfte kurz und kräftig. Heize wenig genutzte Räume nur leicht.
 
 ### Was tun bei sehr hohem Abschlag?
 

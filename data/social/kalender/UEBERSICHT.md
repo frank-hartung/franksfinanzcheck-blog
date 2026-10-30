@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 30.10.2026 12:27 (Europe/Berlin)
+> Automatisch aktualisiert: 30.10.2026 16:02 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -41,7 +41,7 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **09:45** ⏳ Facebook (Seite) · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
 - **10:15** ⏳ Pinterest · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
 - **11:30** ⏳ Mastodon · _zahl_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
-- **11:45** ⏳ Instagram · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **11:45** ⏳ Instagram · _nutzen_ · ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung
 - **12:15** ⏳ Bluesky · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
 - **13:15** ⏳ X (Twitter) · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
 - **15:15** ⏳ Facebook (Seite) · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
@@ -50,12 +50,12 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ### So, 01. November 2026
 - **07:00** ⏳ Telegram (Kanal) · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
 - **08:15** ⏳ Bluesky · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
-- **08:45** ⏳ X (Twitter) · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **08:45** ⏳ X (Twitter) · _nutzen_ · ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung
 - **09:15** ⏳ Threads · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
 - **09:45** ⏳ Facebook (Seite) · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
 - **10:15** ⏳ Pinterest · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
 - **11:45** ⏳ Instagram · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
-- **12:15** ⏳ Bluesky · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **12:15** ⏳ Bluesky · _nutzen_ · ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung
 - **13:15** ⏳ X (Twitter) · _takeaway_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
 - **15:15** ⏳ Facebook (Seite) · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
 - **16:15** ⏳ Threads · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
@@ -69,8 +69,8 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **11:30** ⏳ Mastodon · _zahl_ · DSL-Vergleich: So findest du den günstigsten Internettarif
 - **12:15** ⏳ Bluesky · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
 - **13:15** ⏳ X (Twitter) · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
-- **16:15** ⏳ Threads · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung
+- **16:15** ⏳ Threads · _nutzen_ · ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung
 - **17:30** ⏳ Mastodon · _zahl_ · Energiediebe stoppen: So kannst du Stromfresser finden
 - **19:15** ⏳ X (Twitter) · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 ### Di, 03. November 2026
@@ -153,7 +153,7 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **19:15** ⏳ X (Twitter) · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
 ### Mo, 09. November 2026
 - **07:30** ⏳ Mastodon · _zahl_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
-- **07:45** ⏳ LinkedIn · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **07:45** ⏳ LinkedIn · _nutzen_ · ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung
 - **08:15** ⏳ Bluesky · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
 - **08:45** ⏳ X (Twitter) · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
 - **09:15** ⏳ Threads · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
@@ -212,6 +212,8 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **10:15** ⏳ Pinterest · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
 - **11:45** ⏳ Instagram · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
 - **12:15** ⏳ Bluesky · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
+- **13:15** ⏳ X (Twitter) · _nutzen_ · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €
 
 ---
 *Legende: ⏳ geplant · ✅ veröffentlicht · ⚪ Standby (Zugang fehlt) · 🚫 zurückgestellt.*  
