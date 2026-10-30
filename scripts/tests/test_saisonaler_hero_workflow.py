@@ -53,6 +53,12 @@ class HeroWorkflowVertrag(unittest.TestCase):
         self.assertIn("scripts.tests.test_llm_client_transport", checks)
         self.assertIn("scripts.tests.test_saisonaler_hero_workflow", checks)
 
+    def test_publication_is_default_branch_only(self):
+        condition = step(self.workflow, "commit")["if"]
+        self.assertIn("always()", condition)
+        self.assertIn("github.ref_type == 'branch'", condition)
+        self.assertIn("github.ref_name == github.event.repository.default_branch", condition)
+
     def test_alerts_and_closure_are_default_branch_only(self):
         steps = self.workflow["jobs"]["refresh"]["steps"]
         alert = next(s for s in steps if s.get("name", "").startswith("Ausfall sichtbar"))
