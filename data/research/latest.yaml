@@ -1,5 +1,5 @@
-generated_at: '2026-10-29T10:24:27Z'
-day: '2026-10-29'
+generated_at: '2026-10-30T10:27:19Z'
+day: '2026-10-30'
 mode: deterministic
 teams:
   trending:
@@ -243,60 +243,62 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
-    pillar: konto-karten
+  - topic: 'Auslandskrankenversicherung für Familien: Was sie kosten darf'
+    pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+    source: 'topics:Auslandskrankenversicherung für Familien: Was sie kosten darf'
     score: 0.55
     keywords:
-    - Kreditkarte Ausland
-    - Auslandsgebühren vermeiden
-    - Reisekreditkarte
-  - topic: Die Vorteile einer Kreditkarten-Versicherung
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Die Vorteile einer Kreditkarten-Versicherung
-    score: 0.55
-    keywords:
-    - Kreditkarten-Versicherung
-    - Reiseversicherung
-    - Kreditkarten-Schutz
-  - topic: 'E-Auto laden: So senkst du deine Stromkosten'
+    - Auslandskrankenversicherung Familie
+    - Reisekrankenversicherung Kosten
+    - Familienreiseschutz
+  - topic: 'Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
     pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:E-Auto laden: So senkst du deine Stromkosten'
+    source: 'topics:Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
     score: 0.55
     keywords:
-    - E-Auto Ladekosten
-    - Stromtarif E-Auto
-    - Wallbox sparen
-  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    - Balkonkraftwerk
+    - Mini-Solaranlage
+    - Stecker-Solargerät
+  - topic: Jahresvergleich für deine Versicherungen
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    source: topics:Jahresvergleich für deine Versicherungen
     score: 0.55
     keywords:
-    - Versicherungen prüfen Jahresende
-    - Policen kündigen Dezember
-    - überversichert was kündigen
-  - topic: 'Router-Position optimieren: Mehr Empfang ohne neues Gerät'
-    pillar: internet-dsl
+    - Versicherung
+    - Vergleich
+    - Jahresvergleich
+  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Router-Position optimieren: Mehr Empfang ohne neues Gerät'
+    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
     score: 0.55
     keywords:
-    - Router Standort
-    - WLAN Empfang verbessern
-    - WLAN Tipps
-  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
-    pillar: strom-sparen
+    - Rechtsschutzversicherung
+    - Rechtsschutz Leistungen
+    - Rechtsstreit versichern
+  - topic: 'Rückstufung nach Unfall: Wann sich der Schadenrückkauf wirklich lohnt'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    source: 'topics:Rückstufung nach Unfall: Wann sich der Schadenrückkauf wirklich
+      lohnt'
     score: 0.55
     keywords:
-    - Stromanbieter Pleite
-    - Grundversorgung Strom
-    - Anbieterinsolvenz
+    - Schadenrückkauf Kfz
+    - Rückstufung verhindern
+    - Schaden selbst zahlen oder Versicherung
+    - Rabattschutz sinnvoll
+  - topic: Versicherungsvergleich für junge Erwachsene
+    pillar: versicherungen
+    signal: niche_hook
+    source: topics:Versicherungsvergleich für junge Erwachsene
+    score: 0.55
+    keywords:
+    - Versicherungsvergleich
+    - Junge Erwachsene
+    - Versicherungen
 live_web:
   enabled: false
   findings: []
