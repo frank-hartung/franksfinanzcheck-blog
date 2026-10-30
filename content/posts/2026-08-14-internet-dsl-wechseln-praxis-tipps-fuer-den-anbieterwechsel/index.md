@@ -181,12 +181,12 @@ Das ist ein echter Kostenfaktor – und einer, der gerne unterschätzt wird.
 ### Beispiel Routermiete
 
 - 5,99 € pro Monat (als Modellannahme)
-- auf 24 Monate: **143,76 €**
+- Auf 24 Monate: **143,76 €**
 
 ### Beispiel höherwertige Mietbox
 
 - 8,99 € pro Monat (im Modellfall)
-- auf 24 Monate: **215,76 €**
+- Auf 24 Monate: **215,76 €**
 
 Damit wird schnell klar: Routermiete ist kein Nebenthema. Sie kann den schönen Bonus teilweise wieder auffressen.
 

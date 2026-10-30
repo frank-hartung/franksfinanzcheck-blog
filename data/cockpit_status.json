@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-28T23:58:27Z",
+  "generated": "2026-10-29T23:54:17Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig",
         "lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
-        "Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig"
+        "Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -69,7 +69,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 19 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 20 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",

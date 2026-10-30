@@ -229,7 +229,7 @@ Geräte sind selten 24 Stunden im Standby als Modellannahme. Die TV-Ecke läuft 
 Beispiel: Eine Bürogruppe zieht 9 Watt und kann an 250 Arbeitstagen jeweils 14 Stunden sowie an 115 freien Tagen 24 Stunden aus sein im Modellfall.
 
 - Arbeitstage: 9 W × 14 h × 250 = 31,5 kWh (als Beispielwert)
-- freie Tage: 9 W × 24 h × 115 = 24,8 kWh
+- Freie Tage: 9 W × 24 h × 115 = 24,8 kWh
 - zusammen: rund 56,3 kWh oder **20,83 €** bei 0,37 €/kWh
 
 Damit kannst du auch eine Funksteckdose beurteilen. Zieht sie selbst beispielsweise 0,7 Watt rund um die Uhr, verbraucht sie gut 6 kWh im Jahr. Von der Bruttoersparnis bleiben dann nur etwa 18,60 € übrig.

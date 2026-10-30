@@ -9,9 +9,11 @@
 // (roter pull_request-Lauf eines arena-Zweigs → KEIN Alarm), der
 // Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall),
 // der #632-Frühabbruch-Diagnose für Phase 0.5 und der #602-#608-Fachkanal-
-// Regel für Tagesdefizite (ein Zustandskanal,
-// der auch an Ruhetagen belegt wird – sonst meldet das Alerting generisch)
-// und der Nachführung offener Meldungen bei geändertem Rat (WF-9E5A / #761).
+// Regel für Tagesdefizite (ein Zustungskanal,
+// der auch an Ruhetagen belegt wird – sonst meldet das Alerting generisch),
+// der Nachführung offener Meldungen bei geändertem Rat (WF-9E5A / #761),
+// der Install-Diagnose statt API-Key-Rat (WF-7B6B / #654) und der
+// Messgate-Diagnose für das Snippet-Gate (WF-7B6B / #925).
 //
 // Aufruf:  node scripts/tests/sim/alert_scoping_sim.mjs <pfad-zum-rohskript.js>
 // Exit 0 = alle Szenarien korrekt, Exit 1 = mindestens ein Szenario falsch.
@@ -382,6 +384,38 @@ await run('#654-Reproduktion: npm ci rot auf main → Manifest-Diagnose, kein AP
   true, ['Abhängigkeiten nicht installierbar', 'manifest_guard.py', '### Fehlgeschlagene Schritte',
          '<!-- alert-runbook: installation -->'],
   null, ['API-Key abgelaufen']);
+// 10. Deploy: die Manifest-Wache rot → dieselbe Diagnose (Produktionspfad).
+// 9b. WF-7B6B / #925 (29.10.2026): Das Snippet-Gate misst den gebauten
+//     Bestand gegen die SSOT (155 Zeichen / 985 px). Vorfall: eine
+//     Description mit 153 Zeichen und 1011 px – die Meldung riet zu
+//     API-Schlüsseln, GitHub-Ausfall und Neustart. Drei Ursachen, die
+//     einen Messschritt am gebauten HTML nicht rot machen können.
+await run('#925-Reproduktion: Snippet-Gate rot auf main → Messgate-Rat, kein API-Key-Rat',
+  { workflowName: 'E2E-Tests (Playwright)', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure',
+             html_url: 'https://x/jobs/122780744332',
+             steps: [{ name: 'Website bauen', conclusion: 'success' },
+                     { name: 'Snippet-Gate – Snippetfenster und Rangfolge', conclusion: 'failure' }] }] },
+  true, ['gemessen, nicht geraten', 'metadaten_wache.py --fix', 'serp_limits.py',
+         '<!-- alert-runbook: messgate-bestand -->'],
+  null, ['API-Key abgelaufen', 'GitHub-Ausfall', 'Transienter Fehler']);
+// 9c. Gegenprobe: Die Metadaten-Wache an der Quelle ist dieselbe Klasse.
+await run('#925: Metadaten-Wache rot → Messgate-Rat',
+  { workflowName: 'E2E-Tests (Playwright)', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure',
+             html_url: 'https://x/jobs/122780744333',
+             steps: [{ name: 'Metadaten-Wache – Quelle (Titel, Description, Belege)', conclusion: 'failure' }] }] },
+  true, ['gemessen, nicht geraten', '<!-- alert-runbook: messgate-bestand -->'],
+  null, ['API-Key abgelaufen']);
+// 9d. Gegenprobe: Ein E2E-Schritt OHNE Messbezug (die Browser-Suite selbst)
+//     behält das allgemeine Runbook – die Klasse gilt den Messgates, nicht
+//     dem ganzen Workflow.
+await run('#925-Gegenprobe: E2E-Suite rot ohne Messbezug → allgemeines Runbook',
+  { workflowName: 'E2E-Tests (Playwright)', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Playwright-Suite (Desktop + Mobile)', conclusion: 'failure', html_url: 'https://x/jobs/7',
+             steps: [{ name: 'E2E-Suite ausführen', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: allgemein -->', 'API-Key abgelaufen'],
+  null, ['messgate-bestand', 'gemessen, nicht geraten']);
 // 10. Deploy: die Manifest-Wache rot → dieselbe Diagnose (Produktionspfad).
 await run('Deploy: Manifest-Schutz rot → Manifest-Diagnose',
   { workflowName: 'Deploy auf GitHub Pages', branch: 'main', event: 'push', conclusion: 'failure',

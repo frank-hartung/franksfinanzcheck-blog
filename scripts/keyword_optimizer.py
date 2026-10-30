@@ -18,7 +18,11 @@ Ebene 2 – KI-Keyword-Vorschläge (optional, falls GEMINI_API_KEY/GROQ_API_KEY
 Ebene 3 – PREMIUM-HEALING (neu 09/2026, Issue #303):
   --fix heilt Artikel deterministisch auf 100/100:
     • Titel: Keyword an den Anfang, Doppelpunkt-Konvention, 50-60 Zeichen
-    • Description: Keyword vorn, 120-160 Zeichen, Satzende
+    • Description: Keyword vorn, CTR-Vorliebe 120+ Zeichen, Satzende –
+      und GARANTIERT im Snippet-Fenster der SSOT (scripts/serp_limits.py:
+      100–155 Zeichen UND ≤ 985 px). Die alten Schreiber-Grenzen (160)
+      sind seit WF-7B6B / #925 (29.10.2026) entfernt: Dieser Heiler hatte
+      damit eine Description mit 1011 px geschrieben.
     • Erster Absatz: Keyword in den ersten 250 Zeichen injizieren
     • H2/H3: erste H2 mit Keyword anreichern, falls keine H2 Keyword trägt
     • Dichte: bei <0,3% natürlich 2-3 Vorkommen ergänzen
@@ -44,10 +48,26 @@ POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import (list_post_paths, slug_of, safe_title_cut,  # noqa: E402
                         join_article, doppel_freies_feld)
+import serp_limits  # noqa: E402  (SSOT: Snippet-Fenster – keine zweite Zahl)
 import llm_client  # noqa: E402
 
 DENSITY_MIN = 0.003
 DENSITY_MAX = 0.03
+
+# ---------------------------------------------------------------------------
+#  Snippet-Fenster: EINE Quelle (WF-7B6B / #925, 29.10.2026)
+# ---------------------------------------------------------------------------
+#  Dieser SCHREIBER lief jahrelang mit eigenen Zahlen (70–160 Zeichen) und
+#  produzierte am 27.10.2026 genau den Befund, den das Snippet-Gate am
+#  28.10.2026 fing: eine Description mit 153 Zeichen und 1011 px – innerhalb
+#  des eigenen Limits, außerhalb des Marktes (155 Zeichen / 985 px). Die
+#  Wachen waren seit dem 27.10. an die SSOT gebunden, die Schreiber nicht.
+#  Seitdem lesen sie hier: Grenzen, Breitenmaß und das Kürzen kommen aus
+#  `serp_limits`; 120 bleibt die CTR-Präferenz, keine Grenze.
+DESC_MIN = serp_limits.DESC_MIN_ZEICHEN          # 100 – Markt
+DESC_MAX = serp_limits.DESC_MAX_ZEICHEN          # 155 – Markt
+DESC_OPT_MIN = 120                               # Vorliebe (CTR), keine Grenze
+DESC_OPT_MAX = DESC_MAX                          # Vorliebe endet an der Grenze
 
 REPORT = os.path.join(BLOG_DIR, "KEYWORD-REPORT.md")
 
@@ -183,8 +203,42 @@ def _selftest() -> list[str]:
     hd = heal_description("Vier Tricks gegen teure Fehler.", "Frugalismus-Tipps", "Frugalismus-Tipps helfen dir, teure Fehler zu vermeiden und bares Geld zu sparen. Mit 4 Tricks sparst du bis zu 3700 Euro.")
     if "frugalismus" not in norm(hd):
         err.append(f"heal_description verliert Keyword: {hd}")
-    if not (70 <= len(hd) <= 165):
-        err.append(f"heal_description Länge: {len(hd)}")
+    # Grenzen kommen aus der SSOT, nicht aus diesem Schreiber (WF-7B6B #925).
+    if serp_limits.befunde(hd):
+        err.append(f"heal_description verstößt gegen die SSOT: {serp_limits.befunde(hd)} – {hd}")
+
+    # ------------------------------------------------------------------
+    #  WF-7B6B / #925 (29.10.2026): Der Vorfall als Probe.
+    #  „DSL Hacks: " vor eine passende Description ergab 153 Zeichen und
+    #  1011 px – innerhalb der alten Schreiber-Grenze (160), außerhalb des
+    #  Marktes (155/985). Seitdem darf heal_description das nicht mehr.
+    # ------------------------------------------------------------------
+    vorfall = ("WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, "
+               "was dein Zuhause wirklich braucht – mit klaren Kosten und "
+               "einer Entscheidungshilfe.")
+    geheilt = heal_description(vorfall, "DSL Hacks")
+    if "dsl hacks" not in norm(geheilt):
+        err.append(f"#925: heal_description verliert das Keyword: {geheilt}")
+    if serp_limits.befunde(geheilt):
+        err.append(f"#925: geheiltes Ergebnis verstößt gegen die SSOT: "
+                   f"{serp_limits.befunde(geheilt)} – {geheilt}")
+    if heal_description(geheilt, "DSL Hacks") != geheilt:
+        err.append("#925: Heilung ist nicht idempotent")
+    # Gegenprobe: passt die Description schon UND ist das Keyword drin,
+    # bleibt sie Byte-gleich (nur Satzende).
+    if heal_description(vorfall, "Mesh-WLAN") != vorfall:
+        err.append("#925: eine passende Description mit Keyword wurde verändert")
+    # Ein Präfix, der nicht ins Fenster passt, wird gekürzt – nie geschrieben.
+    breit = ("Wohngebäude und Wärmewende: Warum Wärmeverlust, Wärmepumpe und "
+             "Wartung zusammengehören. Wer Wohnraum warm hält, spart mit "
+             "Wärmedämmung.")
+    hb = heal_description(breit, "Wärmewende")
+    if serp_limits.befunde(hb):
+        err.append(f"#925: breite Description wurde nicht geheilt: {serp_limits.befunde(hb)} – {hb}")
+    # Was nicht zu heilen ist (ein einziges riesiges Wort), bleibt liegen –
+    # der Schreiber erfindet keine Verletzung und keine halbe Zeile.
+    if heal_description("W" * 300, "Strom") != "W" * 300:
+        err.append("#925: unheilbarer Text wurde verändert")
 
     body = "Lukas steht im Supermarkt vor dem Regal.\n\nZweiter Absatz."
     nb = heal_first_paragraph(body, "Frugalismus-Tipps")
@@ -238,18 +292,47 @@ def heal_title(old_title: str, main_kw: str) -> str:
     return candidate.strip()
 
 
+def _satzende(text: str) -> str:
+    """Satzende sicherstellen, ohne die SSOT zu verletzen.
+
+    Ein angehängtes „." ist ein Zeichen (14 px): Passt es nicht mehr ins
+    Fenster, weicht das letzte Zeichen – oder der Punkt bleibt weg und die
+    Metadaten-Wache meldet den Befund (ehrlicher als eine Verletzung).
+    """
+    if not text or text[-1] in ".!?…":
+        return text
+    if not serp_limits.befunde(text + "."):
+        return text + "."
+    if len(text) > 1 and not serp_limits.befunde(text[:-1].rstrip() + "."):
+        return text[:-1].rstrip() + "."
+    return text
+
+
 def heal_description(old_desc: str, main_kw: str, body: str = "") -> str:
+    """Description mit Keyword vorn – und GARANTIERT im Snippet-Fenster.
+
+    WF-7B6B / #925 (29.10.2026): Diese Funktion schrieb am 27.10.2026
+    „DSL Hacks: " vor eine passende Description. Das Ergebnis hatte 153
+    Zeichen (eigenes Limit: 160) und 1011 px Breite (Markt: 985). Der
+    Präfix allein war schuld – und eigene Grenzen im Schreiber. Seitdem
+    gilt: Der Kandidat wird gegen die SSOT (`serp_limits`) geprüft, BEVOR
+    er geschrieben wird; was nicht passt, wird an der Wortgrenze gekürzt
+    (`auf_snippet_kuerzen`). Ist auch das nicht möglich, bleibt die ALTE
+    Description stehen: Ein Heiler, der nicht heilen kann, lässt liegen
+    und meldet – er erfindet keine neue Verletzung.
+    """
     old_desc = (old_desc or "").strip()
     main_kw = (main_kw or "").strip()
     if not main_kw:
         return old_desc
-    if norm(main_kw) in norm(old_desc) and 70 <= len(old_desc) <= 160:
-        if old_desc[-1] not in ".!?…":
-            if len(old_desc) < 160:
-                return old_desc + "."
-            else:
-                return old_desc[:-1].rstrip() + "."
-        return old_desc
+    alt_ok = not serp_limits.befunde(old_desc)
+
+    # 1) Keyword schon drin und Description im Fenster: nichts umbauen,
+    #    höchstens das Satzende heilen (M-Klasse der Metadaten-Wache).
+    if norm(main_kw) in norm(old_desc) and alt_ok:
+        return _satzende(old_desc)
+
+    # 2) Neue Basis: alte Description, body-Auszug oder Notnagel.
     base = old_desc
     if not base or len(base) < 40:
         paras = [p.strip() for p in body.split("\n\n") if p.strip() and not p.strip().startswith("#")]
@@ -261,35 +344,46 @@ def heal_description(old_desc: str, main_kw: str, body: str = "") -> str:
                 break
         if not base:
             base = f"Praxis-Tipps zum {main_kw} – klar erklärt und sofort umsetzbar."
+
+    # 3) Keyword vorn (die eigentliche Aufgabe des Heilings) – aber nur,
+    #    wenn das Ergebnis anschließend im Fenster untergebracht werden
+    #    kann. Ein Präfix, der nicht hineinpasst, wird gekürzt, nicht
+    #    geschrieben.
     if norm(main_kw) not in norm(base):
-        # PREMIUM #303 FIX: Keyword IMMER vorn platzieren, damit es den 160-Zeichen-Cut überlebt
-        # (vorher wurde bei langen Keywords angehängt und dann weggeschnitten)
-        base = f"{main_kw}: {base}"
-    base = base.strip()
-    if len(base) < 120:
-        addons = [
-            " So sparst du jeden Monat bares Geld.",
-            " Schritt für Schritt erklärt – ohne Fachchinesisch.",
-            " Mit praktischen Tipps für den Alltag.",
-            " Vergleiche jetzt und profitiere von fairen Konditionen.",
-        ]
-        for add in addons:
-            if len(base) >= 120:
+        basis = f"{main_kw}: {base}"
+    else:
+        basis = base
+    basis = basis.strip()
+
+    # 4) CTR-Vorliebe: auf 120+ bringen – additive Bausteine nur, solange
+    #    sie die OBERGrenzen der SSOT einhalten (Länge UND Breite). Die
+    #    Untergrenze darf hier nicht sperren: Genau diese Bausteine sollen
+    #    sie ja erreichen (`min_zeichen=0` prüft nur die Obergrenzen).
+    if len(basis) < DESC_OPT_MIN:
+        for add in (" So sparst du jeden Monat bares Geld.",
+                    " Schritt für Schritt erklärt – ohne Fachchinesisch.",
+                    " Mit praktischen Tipps für den Alltag.",
+                    " Vergleiche jetzt und profitiere von fairen Konditionen."):
+            if len(basis) >= DESC_OPT_MIN:
                 break
-            if len(base) + len(add) <= 155:
-                base += add
-    if len(base) > 160:
-        cut = base[:157]
-        sp = cut.rfind(" ")
-        if sp > 100:
-            cut = cut[:sp]
-        base = cut.rstrip(" ,.;:") + "…"
-    if base and base[-1] not in ".!?…":
-        if len(base) < 160:
-            base = base + "."
-        else:
-            base = base[:-1].rstrip() + "."
-    return base
+            if not serp_limits.befunde(basis + add, min_zeichen=0):
+                basis += add
+
+    # 5) SSOT-Nachprüfung VOR dem Schreiben. Zwei Wege, keiner darf die
+    #    Grenzen verletzen: neuer Text kürzen, sonst alter Text kürzen,
+    #    sonst unverändert lassen (die Metadaten-Wache heilt/meldet dann).
+    #    „Unverändert" heißt auch: ein Text, den Kürzen nicht repariert
+    #    (zu kurz, unmessbar, ein einziges Riesewort), wird nicht geschrieben.
+    if serp_limits.befunde(basis):
+        gekuerzt = serp_limits.auf_snippet_kuerzen(basis, min_zeichen=DESC_MIN)
+        if gekuerzt is None or gekuerzt == serp_limits.normalisiere(basis):
+            if alt_ok:
+                return _satzende(old_desc)
+            gekuerzt = serp_limits.auf_snippet_kuerzen(old_desc, min_zeichen=DESC_MIN)
+            if gekuerzt is None or gekuerzt == serp_limits.normalisiere(old_desc):
+                return old_desc
+        basis = gekuerzt
+    return _satzende(basis)
 
 
 def erster_para_index(paras: list) -> int:
@@ -794,7 +888,7 @@ def write_report(results, fixed=0):
         "",
         "## Kriterien (Google Best Practices 2026)",
         "- Titel (50-60 Zeichen, Keyword vorn, Doppelpunkt-Konvention)",
-        "- Description (120-160 Zeichen, Keyword, Satzende)",
+        "- Description (Keyword vorn, CTR-Vorliebe 120+; Snippet-Fenster 100–155 Zeichen / 985 px aus serp_limits.py)",
         "- Erster Absatz (erste 250 Zeichen, Keyword)",
         "- H2/H3 (mind. eine Überschrift mit Keyword)",
         "- URL-Slug (Keyword im Slug)",

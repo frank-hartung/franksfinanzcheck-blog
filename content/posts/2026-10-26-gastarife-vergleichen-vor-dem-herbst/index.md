@@ -141,7 +141,7 @@ Ein belastbarer Gasvergleich beginnt mit deiner Abrechnung und endet mit dem vol
 
 ---
 
-👉 **Gastarife vergleichen:** [Tarifvergleich starten](/go/gas/)
+👉 **Gastarife vergleichen:** [Gasanbieter vergleichen](/go/gas/)
 
 *Werbung: Dieser Artikel enthält Affiliate-Links. Bei einem Abschluss über diese Links können wir eine Provision erhalten. Der Preis für dich ändert sich dadurch nicht.*
 

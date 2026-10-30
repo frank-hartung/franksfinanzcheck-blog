@@ -3,7 +3,8 @@
 
 Aggregiert die vorhandenen Qualitäts-Gates zu EINEM Score pro Artikel:
   - Rechtschreibung (spellcheck: 0 Funde = 1.0, sonst absteigend)
-  - Meta-Qualität (Titel ≤60, Description ≤160, Endpunkt)
+  - Meta-Qualität (Titel ≤60, Description im Snippet-Fenster der SSOT –
+    100–155 Zeichen UND ≤ 985 px –, Endpunkt)
   - Lesbarkeit (Flesch/Score aus readability_check)
   - Struktur (Wortzahl ≥1200, H2-Anzahl ≥4, FAQ vorhanden)
   - Einzigartigkeit (check_uniqueness: 0 kritische Überlappungen)
@@ -32,6 +33,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import template_boilerplate  # noqa: E402  (SSOT Fazit-/FAQ-Bausteine, #251)
 import repetition_guard  # noqa: E402  (adjacent-word repetition SSOT)
+import serp_limits  # noqa: E402  (SSOT Snippet-Fenster, WF-7B6B / #925)
 
 THRESHOLD_PUBLISH = 0.85
 THRESHOLD_REVIEW = 0.80
@@ -122,7 +124,13 @@ def score_article(path: str) -> dict:
     desc = m.get("description", "")
     if not title or len(title) > 60:
         meta_score -= 0.3
-    if not desc or len(desc) > 160 or not desc[-1] in ".!?…":
+    # WF-7B6B / #925 (29.10.2026): Die Description-Grenze des Publish-Scores
+    # war die letzte eigene Zahl im Haus (160 Zeichen). Das Snippet-Gate
+    # kürzt bei 155 Zeichen UND 985 px – ein Score, der 159 Zeichen grün
+    # nennt, publiziert einen Kandidaten, den das eigene Nacht-Gate rot
+    # macht. Gelesen wird die SSOT; die Untergrenze (100) gehört nicht
+    # diesem Score, sie ist Meldebestand der Metadaten-Wache.
+    if not desc or not serp_limits.passt(desc, min_zeichen=0) or not desc[-1] in ".!?…":
         meta_score -= 0.3
     if not m.get("kurzantwort"):
         meta_score -= 0.15
