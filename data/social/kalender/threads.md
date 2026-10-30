@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 30.10.2026 00:22 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.10.2026 12:27 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,20 +13,20 @@
 ## Kommende Beiträge
 
 ### Fr, 30. Oktober 2026
-- **09:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 - **16:15** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
+- **20:30** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
 ### Sa, 31. Oktober 2026
-- **09:15** ⏳ Dein Weg zu geringeren Monatskosten: Schritt für Schritt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/
+- **09:15** ⏳ Haushaltskosten reduzieren: So gewinnst du die Kontrolle — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/
 - **16:15** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/
 ### So, 01. November 2026
 - **09:15** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
-- **16:15** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
+- **16:15** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
 ### Mo, 02. November 2026
 - **09:15** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
@@ -35,8 +35,8 @@
 ### Di, 03. November 2026
 - **09:15** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
-- **16:15** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
+- **16:15** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
 ### Mi, 04. November 2026
 - **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
