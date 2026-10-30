@@ -143,6 +143,31 @@ Drei Aufrufe (Covers, Frontmatter, Auto-Fix) lasen weiterhin ohne
 | Workflow-/Lebenszyklus-Verträge | `python3 -m unittest scripts.tests.test_layout_ai_bauausfall` | **13 Tests grün** (5 neu) |
 | Gesamtes Unit-Test-Netz | `python3 -m unittest discover -s scripts/tests` | 4537 Tests, 22 Fehlschläge – **alle außerhalb dieses Vorgangs** (u. a. `alert-on-failure.yml`-Syntax aus #955, package.json-Doppelschlüssel, Content-/Snapshot-Drift); in Bearbeitung: PR #956 |
 
+### 3.1 Derselbe Beweis im CI (PR-Lauf)
+
+Der PR-Lauf [41043084330](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/41043084330)
+(Job `layout-audit`, 50 s) bestätigt die Kette auf echter Infrastruktur –
+inklusive der neuen Browser-Vorprüfung und des freien Ports:
+
+```
+Statisch: 380 Seiten vermessen · Maxima – Kinder 50 (html > head), Head 50,
+          Tiefe 13, Elemente 1058
+Browser-Laufzeit: max. Kinder 50 · Head 50 · Tiefe 13 · Elemente 1399
+HTML ohne Fremd-Skripte: max. Elemente 1061 · Head 50
+Erweiterungsschicht: +1 bis +1134 Elemente
+Parser-Gegenrechnung an 12 Messungen, Drift: 0      (Port: 127.0.0.1:34749)
+```
+
+Der Lauf ist grün und meldet **eine Frühwarnung** (kein roter Lauf, kein
+Issue): Auf
+`/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/`
+liegt das Laufzeit-DOM bei **1399 Elementen** – ein Element unter der harten
+Lighthouse-Grenze (1400). Das ist keine Fehlfunktion der Automatisierung,
+sondern die ehrliche Vorwarnung: Der nächste Ausbau dieser Seite kippt den
+Lauf. Empfehlung an die Redaktion (eigener Vorgang): die Mini-Inhaltsübersicht
+dieser Seite kürzen oder den Premium-Layer lazy einhängen, statt das Budget
+anzuheben. Die Zahl steht im Report, damit sie nachmessbar bleibt.
+
 ---
 
 ## 4. Geänderte Dateien
