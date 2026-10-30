@@ -216,6 +216,7 @@
     "faktenfrische:neu": "python3 scripts/faktenfrische.py --neu --apply",
     "faktenfrische:bestand": "python3 scripts/faktenfrische.py --apply",
     "test:faktenfrische": "python3 scripts/faktenfrische.py --selftest && python3 scripts/faktenfrische_kapazitaet.py --selftest && python3 -m unittest scripts.tests.test_faktenfrische_kapazitaet",
+    "test:faktenfrische:911": "python3 -m unittest scripts.tests.test_faktenfrische_911",
     "rechtschreibung:zeit": "python3 scripts/zeit_rechtschreibung.py",
     "rechtschreibung:zeit:fix": "python3 scripts/zeit_rechtschreibung.py --fix",
     "rechtschreibung:zeit:offline": "python3 scripts/zeit_rechtschreibung.py --offline",

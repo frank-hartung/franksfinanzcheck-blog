@@ -1,0 +1,230 @@
+# ============================================================
+#  BEFUND-REGISTER FAKTENFRISCHE #911
+#  Lauf: 27.10.2026, 10:01 UTC · Redaktionelle Heilung: 30.10.2026
+#
+#  Dieses Register ist die menschliche Schließakte zu den zehn
+#  fachlichen Befunden aus Issue #911. Es ersetzt keine
+#  Fachprüfung und kein Prüfsiegel: Jeder Befund dokumentiert,
+#  welche Aussage beanstandet wurde, wie der Text entschieden
+#  hat und welcher Satz die Entscheidung im Artikel trägt.
+#
+#  Vertrag:
+#    * `beleg_url` ist entweder null (die Aussage wurde gestrichen
+#      oder als Rechenweg neu gefasst) oder eine URL aus der
+#      Allowlist in data/agent_reach/faktenfrische.yaml. Die URL
+#      muss zusätzlich in `quellen` des jeweiligen Artikels stehen.
+#    * `anker` sind Bedeutungs-Invarianten, keine Zitate. Die
+#      Regression scripts/tests/test_faktenfrische_911.py prüft
+#      sie normalisiert (Kleinschreibung, Striche, Leerzeichen).
+#    * `verboten_behauptend` darf behauptend nie zurückkehren.
+#      Verneinungen, Leserfragen und ausdrücklich verworfene
+#      Beispielsätze bleiben erlaubt.
+#    * Änderungen an Artikel oder Register, die einen Anker
+#      entfernen, machen die Regression rot.
+# ============================================================
+
+stand: 2026-10-30
+issue: 911
+lauf: "2026-10-27 10:01 UTC"
+recherche:
+  methode: "Nur lesende Abfrage der allowlisteten Seiten am 30.10.2026; keine Übernahme von Marktzahlen ohne Fundstelle. Der Maschinen-Stempel faktencheck bleibt beim Laufdatum 29.10.2026."
+  abrufe:
+    - url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html"
+      titel: "Lieferantenwechsel – Informationen für Verbraucherinnen und Verbraucher"
+      herausgeber: "Bundesnetzagentur"
+      abgerufen: 2026-10-30
+      verwendet_fuer: ["Angebotsvielfalt", "kostenfreier Wechsel für Haushaltskunden", "technischer Wechsel binnen 24 Stunden", "Vollmacht und Bestätigung", "Vorkasse-Warnung"]
+    - url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+      titel: "Strom- und Gaspreise: Preisänderungen und Abschläge"
+      herausgeber: "Bundesnetzagentur"
+      abgerufen: 2026-10-30
+      verwendet_fuer: ["keine staatliche Preisgenehmigung", "Monatsfrist bei Preisänderungen", "Sonderkündigungsrecht und Ausnahmen", "Preisbindung/Preisgarantie", "Grundversorgung zwei Wochen", "Beschwerde und Schlichtung"]
+    - url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+      titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"
+      herausgeber: "Verbraucherzentrale"
+      abgerufen: 2026-10-30
+      verwendet_fuer: ["ein Grad weniger entspricht etwa sechs Prozent", "Thermostatstufen und Raumtemperaturen", "Mindesttemperatur gegen Schimmel"]
+
+artikel:
+  - slug: "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen"
+    titel: "Stromanbieter wechseln: Tarife prüfen und Kosten senken"
+    befunde: 5
+  - slug: "2026-10-26-gastarife-vergleichen-vor-dem-herbst"
+    titel: "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen"
+    befunde: 5
+
+befunde:
+  - id: "911-B1"
+    artikel: "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen"
+    typ: "luecke"
+    befund: "Die Behauptung, im Jahr 2026 bestünden große Lücken zwischen den Tarifen am Markt, war spekulativ und ohne belegbare Quelle."
+    entscheidung: "Die unbelegte Marktlücke ist gestrichen. An ihre Stelle tritt die belegte Angebotsvielfalt und die klare Aussage, dass eine Ersparnis vom eigenen Verbrauch, vom alten Tarif und vom Angebot abhängt."
+    status: "behoben"
+    belegtyp: "behauptung_ersetzt"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html"
+    anker:
+      - "Angebotsvielfalt"
+      - "Ein pauschales Sparversprechen ist damit nicht verbunden"
+    verboten_behauptend:
+      - "große Lücken zwischen den Tarifen"
+      - "große Lücken zwischen den tarifen am Markt"
+    rest_risiko: "Die Angebotsvielfalt ist eine Strukturaussage, kein Nachweis einer konkreten Ersparnis."
+
+  - id: "911-B2"
+    artikel: "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen"
+    typ: "luecke"
+    befund: "Der Hinweis, ein Neukundenbonus könne den Preis im ersten Jahr stark senken, war ohne Quelle und ohne Rechenweg."
+    entscheidung: "Die Wirkung des Bonus wird nicht mehr als Marktversprechen behauptet. Der Artikel behandelt ihn als eigene Rechengröße: Bedingungen prüfen, Auszahlung prüfen und den Tarif zusätzlich ohne Bonus rechnen."
+    status: "behoben"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Ein Bonus ist eine eigene Rechengröße"
+      - "Rechne den Tarif zusätzlich ohne Bonus"
+    verboten_behauptend:
+      - "Bonus senkt den Preis im ersten Jahr stark"
+      - "Bonus macht den Tarif im ersten Jahr deutlich billiger"
+    rest_risiko: "Ein Bonus kann im Einzelfall wirken; die konkrete Höhe steht nur im Angebot."
+
+  - id: "911-B3"
+    artikel: "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen"
+    typ: "praezision"
+    befund: "Die Faustregel „Verbrauch über 3.000 kWh bedeutet Festpreis, unter 2.000 kWh variabler Tarif“ war pauschal und nicht durch Daten oder Vorgaben gestützt."
+    entscheidung: "Die Schwellenregel ist ersatzlos gestrichen. Der Text erklärt stattdessen die Mechanik von Grundpreis und Arbeitspreis und verlangt die Rechnung mit dem eigenen Verbrauch."
+    status: "behoben"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Bei kleinen Haushalten wiegt der Grundpreis schwerer"
+      - "Rechne deshalb immer den Jahresbetrag für deinen eigenen Verbrauch"
+    verboten_behauptend:
+      - "ab 3.000 kWh"
+      - "ab 3000 kWh"
+      - "über 3.000 kWh"
+    rest_risiko: "Die Tarifwahl bleibt eine Einzelfallentscheidung; eine Verbrauchsgrenze ist keine Marktregel."
+
+  - id: "911-B4"
+    artikel: "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen"
+    typ: "praezision"
+    befund: "Die Aussage, ein Wechsel koste meist keinen Cent und es gebe keine Abschiedsgebühr, war nicht belegt und zu absolut formuliert."
+    entscheidung: "Die Aussage ist auf Haushaltskunden begrenzt und mit der Norm belegt. Der Text trennt technischen Wechsel und Vertragskündigung und nennt die gesetzliche Grundlage."
+    status: "behoben"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html"
+    anker:
+      - "Kündigung und Wechsel sind für Haushaltskunden kostenfrei"
+      - "§ 20 StromGVV"
+      - "Für andere Kundengruppen gilt diese Aussage nicht automatisch"
+    verboten_behauptend:
+      - "Abschiedsgebühr"
+      - "immer kostenfrei"
+      - "kostet keinen Cent"
+    rest_risiko: "Für Gewerbe- und Sonderkunden gelten andere Verträge; der Text sagt das ausdrücklich."
+
+  - id: "911-B5"
+    artikel: "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen"
+    typ: "praezision"
+    befund: "Die Aussage, CHECK24 liste fast alle Firmen und Tarife, war ein unpräzises Werbeversprechen ohne Beleg."
+    entscheidung: "Die Vollständigkeitsbehauptung ist gestrichen. Der Text beschreibt Portale als Auswahl mit unterschiedlichen Filtern und Sortierungen und verweist auf die Vertragsunterlagen beim Anbieter."
+    status: "behoben"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html"
+    anker:
+      - "Ein Portal hilft beim ersten Überblick"
+      - "dass ein Portal alle Anbieter und Tarife abbildet"
+      - "vor dem Abschluss die Unterlagen zu prüfen"
+    verboten_behauptend:
+      - "fast alle Firmen und Tarife"
+      - "fast alle Anbieter"
+      - "alle Tarife und Anbieter"
+    rest_risiko: "Auch mehrere Portale zusammen sind kein Beweis für Vollständigkeit."
+
+  - id: "911-B6"
+    artikel: "2026-10-26-gastarife-vergleichen-vor-dem-herbst"
+    typ: "luecke"
+    befund: "Der Artikel erwähnte den verbraucherschützenden Regulierungsrahmen der Bundesnetzagentur für Gas nicht."
+    entscheidung: "Ein eigener Abschnitt erklärt jetzt, was die Behörde reguliert und was nicht: Marktaufsicht und Wechselregeln ja, Preisgenehmigung nein. Fristen, Sonderrecht und Grundversorgung sind ergänzt."
+    status: "behoben"
+    belegtyp: "ergaenzt"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "beaufsichtigt den Gasmarkt"
+      - "Eine staatliche Genehmigung der Endkundenpreise gibt es nicht"
+      - "In der Grundversorgung gilt eine eigene Kündigungsfrist von zwei Wochen"
+      - "Beim Strom ist der technische Wechsel seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich"
+    verboten_behauptend:
+      - "nicht jeden Preis"
+      - "die Preise werden genehmigt"
+      - "Preise werden von der Behörde festgelegt"
+      - "Der technische Wechsel ist seit dem 6. Juni 2025"
+    rest_risiko: "Die Aufsicht ist keine Preisgarantie; der konkrete Tarif bleibt eine Vertragsfrage."
+
+  - id: "911-B7"
+    artikel: "2026-10-26-gastarife-vergleichen-vor-dem-herbst"
+    typ: "luecke"
+    befund: "Die Angabe, eine Preisgarantie dauere typischerweise sechs Monate, war ohne Quelle."
+    entscheidung: "Die Standarddauer ist gestrichen. Der Text sagt ausdrücklich, dass es keine einheitliche Dauer gibt, und nennt vier Prüffragen zu Umfang, Beginn, Ausnahmen und Folgepreis."
+    status: "behoben"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "keine einheitliche Standarddauer"
+      - "Welche Preisteile umfasst sie"
+      - "Welcher Preis gilt nach dem Ende"
+    verboten_behauptend:
+      - "dauert typischerweise sechs Monate"
+      - "Standarddauer von sechs Monaten"
+      - "Garantie gilt sechs Monate"
+    rest_risiko: "Die Garantie ist nur so gut wie ihre Klausel; der Text verlangt den Blick in den Vertrag."
+
+  - id: "911-B8"
+    artikel: "2026-10-26-gastarife-vergleichen-vor-dem-herbst"
+    typ: "luecke"
+    befund: "Die Behauptung, ein richtig eingestelltes Thermostat spare bis zu 10 Prozent, war nicht belegt."
+    entscheidung: "Die 10-Prozent-Angabe ist gestrichen. Der Artikel nennt den belegten Richtwert der Verbraucherzentrale von etwa sechs Prozent je Grad und ordnet ihn als Orientierung ein."
+    status: "behoben"
+    belegtyp: "behauptung_ersetzt"
+    beleg_url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    anker:
+      - "Ein Grad weniger Raumtemperatur senkt den Verbrauch um etwa sechs Prozent"
+      - "Verbraucherzentrale"
+      - "Unter 16 Grad solltest du nicht dauerhaft heizen"
+    verboten_behauptend:
+      - "bis zu 10 Prozent"
+      - "bis zu zehn Prozent"
+      - "10 % Einsparung"
+    rest_risiko: "Der Richtwert gilt nicht für jede Wohnung; Gebäude und Nutzung entscheiden mit."
+
+  - id: "911-B9"
+    artikel: "2026-10-26-gastarife-vergleichen-vor-dem-herbst"
+    typ: "luecke"
+    befund: "Die Berechnung, zwei Grad weniger senkten den Heizenergiebedarf um sechs Prozent und sparten 720 kWh, war ohne Quelle und rechnerisch unzulässig verkürzt."
+    entscheidung: "Die Rechnung ist als Modell gekennzeichnet und an eine Annahme gebunden. Der Text sagt ausdrücklich, dass zwei Grad nicht automatisch zwölf Prozent bedeuten und der Richtwert nicht beliebig vervielfacht werden darf."
+    status: "behoben"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    anker:
+      - "Ein Rechenbeispiel mit Modellwerten"
+      - "720 kWh"
+      - "Zwei Grad weniger bedeuten nicht automatisch zwölf Prozent"
+    verboten_behauptend:
+      - "zwei Grad weniger senken den Verbrauch um sechs Prozent"
+      - "spart damit 720 kWh"
+    rest_risiko: "Die 720 kWh gelten nur, wenn der gesamte Verbrauch auf die Heizung entfällt."
+
+  - id: "911-B10"
+    artikel: "2026-10-26-gastarife-vergleichen-vor-dem-herbst"
+    typ: "praezision"
+    befund: "Die Behauptung, CHECK24 zeige alle wichtigen Konditionen nebeneinander, war ohne Messgröße und als Werbeversprechen unpräzise."
+    entscheidung: "Das Vollständigkeitsversprechen ist gestrichen. Der Text beschreibt die Auswahl und verlangt den Abgleich mit den Bedingungen beim Anbieter."
+    status: "behoben"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "Ein Portal zeigt eine Auswahl, nicht den gesamten Markt"
+      - "alle Tarife oder alle Bedingungen"
+      - "Prüfe die Bedingungen beim Anbieter"
+    verboten_behauptend:
+      - "alle wichtigen Konditionen"
+      - "alle Konditionen im Überblick"
+    rest_risiko: "Portale können einzelne Konditionen zeigen, aber keine Vollständigkeit zusichern."

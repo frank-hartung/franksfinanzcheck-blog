@@ -1,6 +1,7 @@
 ---
 title: "Stromanbieter wechseln: Tarife prüfen und Kosten senken"
 description: "Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung."
+lastmod: 2026-10-30
 date: 2026-10-23T09:38:32Z
 draft: true
 tags: ["Stromkosten senken"]
@@ -14,7 +15,8 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Überarbeitung nach Faktenfrische-Befund; redaktionelle Schlussprüfung ausstehend"
+  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit den Veröffentlichungen der Bundesnetzagentur am 30.10.2026; redaktionelle Schlussprüfung ausstehend"
+kurzantwort: "Ob ein Stromwechsel Geld spart, hängt von deinem Jahresverbrauch, deinem alten Tarif und den vollständigen Kosten des neuen Angebots ab. Rechne Arbeitspreis mal Verbrauch plus Grundpreis und prüfe danach Laufzeit, Kündigungsfrist und Preisgarantie im Vertrag. Kündigung und Lieferantenwechsel sind für Haushaltskunden kostenfrei; der technische Wechsel ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich (Bundesnetzagentur)."
 pin_title: "Stromtarif vergleichen: Kosten und Bedingungen prüfen"
 pin_description: "*Werbung | Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung. Mehr Spartipps auf FranksFinanzcheck! #stromanbieter #wechseln #stromvergleich"
 cover:
@@ -33,95 +35,151 @@ quellen:
 faktencheck: 2026-10-29
 ---
 
-**Kurzantwort:** Ein Wechsel lohnt sich oft. Das neue Angebot muss bei deinem Verbrauch günstiger sein. Auch die Bedingungen müssen passen. Vergleiche den Preis für die Arbeit und die festen Kosten. Prüfe den Preis nach einem Bonus oder einer Garantie. Halte deine Frist zur Kündigung ein. Ohne deine Daten lässt sich keine Ersparnis versprechen.
+**Fachlich überarbeitet am 30.10.2026.** Für diesen Ratgeber wurden die Regeln zum Wechsel und zu Preisänderungen mit den Veröffentlichungen der Bundesnetzagentur abgeglichen. Dein Vertrag kann im Einzelfall abweichen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Wenn du über einen solchen Link abschließt, erhalten wir möglicherweise eine Provision. Für dich entstehen dadurch keine zusätzlichen Kosten.
 
-## Wann lohnt sich ein Stromanbieterwechsel
+Die letzte Abrechnung zeigt, was du tatsächlich verbraucht hast. Sie ist die beste Grundlage für jeden Vergleich. Wer nur den monatlichen Abschlag kennt, vergleicht Vorauszahlungen statt Kosten. Das führt schnell zum falschen Angebot.
 
-Firmen für Strom rechnen ihre Preise selbst aus. Die Agentur vom Staat prüft nicht jeden Preis vorab. Anbieter müssen neue Preise aber rechtzeitig mitteilen. Das Gesetz und der Vertrag regeln das genau. Erhöht der Anbieter den Preis? Dann dürfen Sie meist sofort kündigen. Prüfe den Fall in deinem Brief vom Versorger. Lies dazu die Infos der [Bundesnetzagentur zu Preisen und Abschlägen (Q2)](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+## Was ein Wechsel bringt – und was nicht
 
-Ein Vergleich zeigt nur die aktuelle Lage. Er ist kein Versprechen für die Zukunft. Preise können sich später wieder ändern. Bleiben Sie deshalb immer wachsam. Nutze für den Check deine letzte Rechnung. Vergleiche Angebote mit deinem echten Verbrauch. Ein kleiner Preis pro kWh reicht nicht aus. Auch die festen Kosten im Jahr zählen. Boni und deren Regeln ändern die Kosten oft stark.
+Die Bundesnetzagentur beschreibt den Strommarkt als Angebotsvielfalt. Du kannst den Anbieter wählen, dessen Preis, Service und Energiemix zu dir passen ([Informationen zum Wechsel, Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)). Ein pauschales Sparversprechen ist damit nicht verbunden. Ob du sparst, hängt von deinem alten Tarif, deinem Verbrauch und dem neuen Angebot ab.
+
+Anbieter kalkulieren ihre Tarife selbst. Eine staatliche Genehmigung der Preise gibt es nicht ([Preise und Abschläge, Q2](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html)). Die Behörde setzt den Marktrahmen und beaufsichtigt ihn. Einzelne Preise für Haushalte genehmigt sie nicht.
+
+Bei einer Preisänderung gelten feste Pflichten. Der Anbieter muss dich rechtzeitig informieren. Meist hast du dann ein Sonderrecht zur Kündigung. Wie du die Mitteilung prüfst, steht im Abschnitt zu Preisänderungen.
+
+## Die vier Preisbausteine
+
+Ein Tarif besteht aus mehr als dem Preis je Kilowattstunde (kWh). Für den Vergleich zählen Arbeitspreis, Grundpreis, Bonus und die Vertragsbedingungen. Die Übersicht zeigt, welche Angaben du aus dem Angebot übernimmst.
 
 | Merkmal | Was du prüfst | Warum es zählt |
 | :--- | :--- | :--- |
-| Preis pro kWh | Preis für jede verbrauchte Einheit | Bestimmt die Kosten bei hohem Verbrauch |
-| Feste Kosten | Betrag pro Monat oder Jahr | Diese Kosten zahlst du immer |
-| Bonus | Höhe und Zeit der Zahlung | Gilt oft nur im ersten Jahr |
-| Dauer und Frist | Laufzeit und Ende vom Vertrag | Zeigt den Termin für einen Wechsel |
-| Garantie | Umfang und Zeit der Bindung | Schützt dich vor einer Erhöhung |
-| Zahlung | Abschlag und Termin der Rechnung | Regelt den Fluss von deinem Geld |
+| Arbeitspreis | Euro je kWh | Bestimmt die Kosten bei deinem Verbrauch |
+| Grundpreis | Euro pro Monat oder Jahr | Fällt unabhängig vom Verbrauch an |
+| Bonus | Höhe, Bedingungen, Auszahlung | Senkt den Preis nur bei erfüllten Bedingungen |
+| Laufzeit | Beginn und Ende der Bindung | Bestimmt, wann du wieder wechseln kannst |
+| Kündigung | Frist und Form | Entscheidet über den Wechseltermin |
+| Garantie | Umfang und Enddatum | Schützt nur die genannten Preisteile |
+| Abschlag | Monatliche Vorauszahlung | Ist keine endgültige Jahresrechnung |
 
-Ein Tarif mit schwankenden Preisen ist nicht immer besser. Lies nach, wie die Firma den Preis berechnet. Welche Formel nutzt der Anbieter dafür? Welche extra Kosten kommen noch dazu? Vergleiche solche Tarife nur mit festen Preisen, wenn du das Risiko kennst. Regeln wie „ab 3.000 kWh immer Festpreis“ stimmen oft nicht. Prüfe jeden Vertrag einzeln für deinen Fall.
+Der Arbeitspreis allein sagt wenig aus. Ein niedriger Preis je kWh kann durch einen hohen Grundpreis aufgezehrt werden. Bei kleinen Haushalten wiegt der Grundpreis schwerer, bei großen der Arbeitspreis. Rechne deshalb immer den Jahresbetrag für deinen eigenen Verbrauch.
 
-## Der 4K-Prüfpfad für den Wechsel
+Ein Bonus ist eine eigene Rechengröße. Prüfe, welche Bedingungen gelten und wann das Geld auf deinem Konto ankommt. Rechne den Tarif zusätzlich ohne Bonus. Nur dieser Wert zeigt, was du im Folgejahr zahlst, wenn der Vorteil wegfällt.
 
-**1. Kosten prüfen.** Nimm deine letzte Rechnung zur Hand. Notiere den Verbrauch in kWh für das ganze Jahr. Suche den Preis pro Einheit und die festen Kosten. Nutze für den Vergleich den echten Wert vom Jahr. Der monatliche Abschlag allein hilft hier nicht weiter.
+## In vier Schritten zum belastbaren Vergleich
 
-**2. Preise rechnen.** Vergleiche die Kosten für das ganze Jahr. Rechne die festen Kosten immer mit ein. Betrachte einen Bonus für den Start getrennt. Wann zahlt die Firma diesen Bonus aus? Was kostet der Strom ohne diesen Rabatt? Ein Bonus macht den Tarif im zweiten Jahr oft teuer.
+**1. Verbrauch ablesen.** Nimm die letzte Abrechnung zur Hand. Notiere den Verbrauch in kWh für den gesamten Abrechnungszeitraum. Der monatliche Abschlag ist dafür kein Ersatz.
 
-**3. Fristen prüfen.** Schau in deinen aktuellen Vertrag für den Strom. Welche Laufzeit und welche Frist stehen dort? Der neue Anbieter kann oft für dich kündigen. Dafür braucht er aber genug Zeit vor dem Ende. Bei teurerem Strom solltest du selbst kündigen. So verpasst du die kurze Frist für das Sonderrecht nicht. Lies dazu die [Verbraucherinformationen der Bundesnetzagentur (Q2)](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+**2. Kosten rechnen.** Multipliziere den Arbeitspreis mit dem Jahresverbrauch. Addiere den Grundpreis für zwölf Monate. So erhältst du die Kosten ohne Bonus. Rechne danach dieselbe Summe mit Bonus und vergleiche beide Werte.
 
-**4. Termine merken.** Setze dir eine Erinnerung für das Ende der Garantie. Auch das Ende der Laufzeit ist ein wichtiger Termin. Ein Check pro Jahr ist eine gute Hilfe. Er ersetzt aber nicht den Blick in deine Post. Reagiere schnell auf Briefe von deinem Anbieter.
+**3. Bedingungen prüfen.** Lies Laufzeit, Frist und Garantie im Angebot. Achte darauf, welche Preisteile die Garantie umfasst und wann sie endet. Prüfe auch, ob eine Vorkasse verlangt wird.
 
-## Vergleichsrechner sinnvoll nutzen
+**4. Termine notieren.** Trage das Ende der Bindung und das Ende der Garantie in deinen Kalender ein. Ein fester Termin ist verlässlicher als der Vorsatz, später daran zu denken.
 
-Ein Portal hilft dir beim Suchen von Tarifen. Es zeigt aber nicht immer den ganzen Markt. Anbieter und Preise können sich dort täglich ändern. Prüfe deshalb alle Daten direkt beim Versorger. Achte im Portal auf die Filter für die Suche. Oft sind Boni schon in den Preis eingerechnet. Daten aus dem Netz sind nur eine Hilfe für dich. Sie beweisen nicht, welcher Tarif für alle Menschen perfekt ist.
+Bei einem normalen Wechsel kann der neue Anbieter die Kündigung übernehmen. Dafür braucht er deine Vollmacht und genug Zeit für die Abwicklung. Bei einer angekündigten Erhöhung solltest du selbst kündigen. Das Sonderrecht kann kurz befristet sein, und die Kündigung muss vor dem neuen Preis eingehen.
 
-Gib deine PLZ und den Verbrauch genau ein. Vergleiche dann die Kosten für das erste Jahr. Wie hoch sind die Kosten ohne den Bonus? Welche Teile vom Preis sind sicher? Wie lange läuft der Vertrag mit der Firma? Speichere das Angebot und die Regeln gut ab. So hast du später einen Beleg für deinen Abschluss.
+## Portale: ein Anfang, kein Vollständigkeitsbeweis
+
+Ein Portal hilft beim ersten Überblick über den Markt. Es zeigt aber eine Auswahl. Anbieter, Filter und Sortierung unterscheiden sich zwischen den Portalen. Achte außerdem darauf, ob Boni schon in den angezeigten Preis eingerechnet sind.
+
+Verlass dich nicht darauf, dass ein Portal alle Anbieter und Tarife abbildet. Die Behörde verweist auf Tarifrechner und direkte Angebote der Anbieter; das Bundeskartellamt ergänzt Hinweise zur Nutzung von Vergleichsportalen (Q1). Sie rät, vor dem Abschluss die Unterlagen zu prüfen. Dazu gehören Laufzeit, Frist, Garantie und Zahlungsweise.
+
+Gib Postleitzahl und Jahresverbrauch genau ein. Notiere den Preis mit und ohne Bonus. Speichere das Angebot als PDF oder Screenshot. Damit kannst du später belegen, auf welcher Grundlage du abgeschlossen hast.
 
 ### Beispielrechnung: zwei Tarife mit frei gewählten Annahmen
 
-Diese Zahlen sind nur ein Beispiel für die Rechnung. Es sind keine echten Preise vom Markt heute. Wir nehmen einen Haushalt mit 3.200 kWh im Jahr an. Der alte Tarif kostet 0,32 Euro pro kWh. Dazu kommen 10 Euro feste Kosten im Monat. Das neue Angebot kostet 0,28 Euro pro kWh. Die festen Kosten liegen bei 8 Euro im Monat. Boni lassen wir in diesem Beispiel weg.
+Die folgenden Preise sind frei gewählt. Sie zeigen nur den Rechenweg und sind keine Marktdaten. Angenommen werden 3.200 kWh im Jahr, 0,32 € je kWh und 10 € Grundpreis im Monat für den alten Tarif. Der neue Tarif liegt bei 0,28 € je kWh und 8 € Grundpreis; Boni bleiben außen vor.
 
 | Rechnung | Alter Tarif | Neuer Tarif |
 | :--- | ---: | ---: |
 | Kosten für Verbrauch | 3.200 × 0,32 € = 1.024 € | 3.200 × 0,28 € = 896 € |
-| Feste Kosten pro Jahr | 12 × 10 € = 120 € | 12 × 8 € = 96 € |
-| Kosten im Jahr | 1.144 € | 992 € |
+| Grundpreis pro Jahr | 12 × 10 € = 120 € | 12 × 8 € = 96 € |
+| Kosten im Jahr | 1.024 € + 120 € = 1.144 € | 896 € + 96 € = 992 € |
+| Ersparnis im Modell | – | 1.144 € − 992 € = 152 € |
 
-In diesem Beispiel sparst du 152 Euro im Jahr. Das Ergebnis gilt nur für diese Zahlen. Vor einem Wechsel musst du deine echten Preise nutzen. Setze deinen eigenen Verbrauch in die Rechnung ein. Prüfe auch alle Boni und die Fristen genau. Nur so erhältst du ein sicheres Ergebnis für dich.
+Im Modell sinken die Kosten um 152 € im Jahr. Setze für deinen Vergleich die Werte aus deiner Abrechnung und deinem Angebot ein. Prüfe zusätzlich alle Boni und Fristen. Eine Ersparnis aus einer Beispielrechnung ist keine Zusage für deinen Vertrag.
 
-## Vertragsbedingungen und Preisänderungen
+## Preisänderung: ein Monat Vorlauf und ein Sonderrecht
 
-Dauer, Frist und Garantie stehen fest im Vertrag. Diese Punkte sind bei jedem Angebot anders. Es gibt keine feste Regel für alle Verträge. Lies die Übersicht vor dem Klick auf Abschluss. So vermeidest du böse Überraschungen nach dem Wechsel.
+Als Haushaltskunde muss dich dein Anbieter spätestens einen Monat vor einer Preisänderung informieren. Die Mitteilung muss Grund, Voraussetzungen und Umfang der Änderung nennen. Meist darfst du den Vertrag dann ohne Einhaltung der normalen Frist kündigen (Q2).
 
-Eine Garantie schützt dich nur vor manchen Änderungen. Prüfe genau, welche Teile vom Preis fest bleiben. Wann beginnt diese Zeit und wann endet sie? Was passiert nach dem Ende der Garantie? Auch Infos zu neuen Preisen sind sehr wichtig. Die Agentur vom Staat erklärt die Regeln für das Gesetz. Dort findest du Infos zum [Preisen und Abschlägen (Q2)](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+Die Kündigung muss vor dem Tag beim Anbieter ankommen, ab dem der neue Preis gilt. Der Vertrag endet dann am Vortag. Eine Ausnahme gilt bei einer getrennten Anpassungsklausel, wenn der Anbieter nur hoheitlich bedingte Kosten weitergibt. Lies die Mitteilung deshalb genau.
 
-Der Wechsel der Technik geht heute sehr schnell. Seit Juni 2025 dauert das oft nur 24 Stunden. Das ändert aber nichts an deinem alten Vertrag. Du musst die Laufzeit und die Frist trotzdem einhalten. Ein Wechsel ist für Kunden beim Strom immer kostenfrei. Das bestätigt auch die Agentur vom Staat offiziell. Lies dazu die [Informationen zum Lieferantenwechsel (Q1)](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html).
+Hältst du die Erhöhung für unzulässig, kannst du widersprechen. Nenne den Grund, zum Beispiel eine bestehende Garantie oder eine zu kurze Ankündigungsfrist. Reagiert der Anbieter nicht, ist ein Beschwerde- und Schlichtungsverfahren möglich (Q2).
+
+## Wechsel in 24 Stunden: Was die Regel bedeutet
+
+Seit dem 6. Juni 2025 muss der technische Wechsel an jedem Werktag binnen 24 Stunden vollzogen werden (Q1). Die Regel betrifft den Datenaustausch zwischen Anbietern und Netzbetreiber. Deine vertragliche Frist ändert sie nicht.
+
+Kündigung und Wechsel sind für Haushaltskunden kostenfrei. Das ergibt sich aus § 20 StromGVV und § 20a Absatz 3 EnWG; die Behörde bestätigt es ausdrücklich (Q1). Für andere Kundengruppen gilt diese Aussage nicht automatisch.
+
+Der neue Anbieter kündigt im Regelfall für dich. Dafür braucht er deine Vollmacht. Er muss dir unverzüglich in Textform bestätigen, ob und zu welchem Termin er liefert. Lies deinen Zählerstand zum Wechsel ab und sende ihn an den Netzbetreiber sowie an den alten und den neuen Anbieter.
+
+## Vertrag, Garantie und Laufzeit
+
+Für Laufzeit, Frist und Garantie gibt es keine einheitliche Standarddauer. Maßgeblich ist, was in deinem Angebot und in deinem Vertrag steht. Eine Garantie schützt nur die Preisteile, die sie ausdrücklich umfasst. Steuern, Abgaben, Umlagen und Netzentgelte können ausgenommen sein.
+
+Prüfe zwei Termine: das Ende der Bindung und das Ende der Garantie. Danach gilt der dann aktuelle Preis. Eine Erinnerung im Kalender hilft mehr als eine pauschale Annahme über die Dauer von Garantien.
+
+Vorsicht bei Vorkasse. Die Behörde warnt, dass Vorauszahlungen bei einer Insolvenz des Anbieters verloren gehen können (Q1). Die Versorgung ist über die Ersatzversorgung gesichert, dein vorausgezahltes Geld nicht.
+
+## Häufige Fehler beim Wechsel
+
+- Nur den Arbeitspreis vergleichen und den Grundpreis übersehen.
+- Den Bonus als dauerhaften Rabatt behandeln.
+- Die Frist erst kurz vor dem Vertragsende prüfen.
+- Annehmen, ein Portal zeige den gesamten Markt.
+- Den technischen Wechsel mit der Kündigung verwechseln.
+- Ohne Prüfung der Unterlagen abschließen.
+
+Der letzte Punkt ist der wichtigste. Ein günstiges Suchergebnis ist noch kein passender Vertrag. Die Bedingungen entscheiden darüber, ob du flexibel bleibst und ob der Preis wirklich gilt.
 
 ## Checkliste vor dem Abschluss
 
-- Passen PLZ und der Verbrauch für das Jahr?
-- Sind alle Kosten in der Summe enthalten?
-- Ist der Bonus nur einmalig für den Start?
-- Welche Teile vom Preis sind wirklich sicher?
-- Wie lange läuft der Vertrag mit der Firma?
-- Wie hoch ist die Frist für eine Kündigung?
-- Passt die Art der Zahlung zu deinem Konto?
-- Hast du alle Dokumente auf dem PC gespeichert?
+- Stimmen Postleitzahl und Jahresverbrauch?
+- Sind Arbeitspreis und Grundpreis in den Kosten enthalten?
+- Hast du den Preis zusätzlich ohne Bonus gerechnet?
+- Kennst du die Bedingungen und den Termin der Bonus-Zahlung?
+- Welche Preisteile umfasst die Garantie?
+- Wann enden Bindung und Garantie?
+- Wie lang ist die Frist und in welcher Form muss sie eingehen?
+- Ist die Zahlungsweise für dich tragbar, besonders bei Vorkasse?
+- Hast du das Angebot und die Unterlagen gespeichert?
 
 ## Häufige Fragen
 
-### Kostet mich der Lieferantenwechsel etwas
-Die Agentur vom Staat sagt: Der Wechsel ist kostenfrei. Das gilt für alle Kunden im Haushalt. Du musst aber deinen alten Vertrag genau prüfen. Die Laufzeit und die Fristen bleiben nämlich bestehen. Du kannst nicht einfach ohne Grund sofort gehen. Lies dazu die Infos zum [Lieferantenwechsel (Q1)](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html).
+### Kostet mich der Wechsel etwas
+
+Für Haushaltskunden sind Kündigung und Wechsel kostenfrei. Das bestätigt die Behörde unter Verweis auf § 20 StromGVV und § 20a Absatz 3 EnWG. Für andere Kundengruppen gilt das nicht automatisch.
 
 ### Muss ich selbst kündigen
-Oft kündigt der neue Anbieter für dich. Das klappt gut bei einem normalen Wechsel. Er braucht dafür aber deinen Auftrag und Zeit. Erhöht die Firma aber plötzlich den Preis? Dann kündige lieber schnell selbst per Brief. So sicherst du dir dein Recht auf Kündigung. Beachte dazu die [Hinweisen zu Preisänderungen (Q2)](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+
+Bei einem normalen Wechsel kündigt der neue Anbieter im Regelfall für dich, wenn du ihn bevollmächtigst. Bei einer Erhöhung solltest du selbst fristgerecht kündigen. Das Sonderrecht kann kurz befristet sein.
 
 ### Wie viel kann ich durch einen Wechsel sparen
-Das kann man nicht pauschal für alle sagen. Es kommt auf deinen Ort und Verbrauch an. Auch dein alter Tarif spielt eine große Rolle. Berechne zuerst deine Kosten für das ganze Jahr. Vergleiche diese Summe mit dem neuen Angebot. Die Rechnung oben zeigt nur, wie man es macht. Sie ist keine Garantie für eine hohe Ersparnis.
+
+Eine pauschale Summe lässt sich nicht seriös nennen. Die Ersparnis hängt von deinem Verbrauch, deinem alten Tarif und dem neuen Angebot ab. Rechne mit deinen Werten; die Beispielrechnung oben zeigt nur den Weg.
 
 ### Was ist bei einem Bonus zu beachten
-Prüfe die Regeln für die Zahlung vom Bonus. Oft zahlt die Firma erst nach vielen Monaten. Rechne die Kosten auch ohne diesen Rabatt aus. Was zahlst du im zweiten Jahr für den Strom? Ein Bonus ist nur sicher, wenn du alle Regeln erfüllst. Bleibe bei solchen Angeboten also besonders kritisch.
 
-### Ist ein dynamischer Tarif immer die günstigere Wahl
-Nein, das ist nicht immer der Fall. Der Preis ändert sich hier sehr oft. Das bringt Chancen, aber auch hohe Risiken mit sich. Prüfe die Formel für den Preis ganz genau. Hast du die Technik für solche Tarife im Haus? Kannst du deinen Stromverbrauch zeitlich gut planen? Eine feste Grenze beim Verbrauch hilft hier nicht weiter.
+Lies die Bedingungen und den Termin der Zahlung. Rechne den Tarif zusätzlich ohne Bonus. Wenn der Vorteil wegfällt, muss der Preis für das Folgejahr trotzdem zu deinem Budget passen.
 
-### Sind alle Tarife in einem Vergleichsportal enthalten
-Nein, verlasse dich nicht nur auf ein Portal. Jede Seite zeigt andere Firmen und Filter an. Nutze die Suche nur als ersten Schritt für dich. Prüfe die echten Daten dann beim Anbieter selbst. Vergleiche die Preise und die Fristen in Ruhe. Nur so findest du den besten Schutz für dein Geld.
+### Ist ein dynamischer Tarif immer günstiger
 
-Ein guter Vergleich verspricht dir keine festen Summen. Er zeigt dir, was du vermutlich zahlen wirst. Du siehst auch, welche Regeln im Vertrag stehen. Nimm deine letzte Rechnung als Basis für den Check. Prüfe alle Kosten und alle Fristen ganz genau. Dann kannst du sicher und ohne Sorgen wechseln.
+Nein. Bei einem dynamischen Tarif folgt der Preis dem Markt. Das kann in günstigen Stunden Vorteile bringen, verlangt aber Flexibilität und ein bewusstes Risiko. Prüfe die Preisformel und die technischen Voraussetzungen, bevor du dich entscheidest.
+
+### Zeigt ein Portal den gesamten Markt
+
+Verlass dich nicht darauf. Portale zeigen eine Auswahl und unterscheiden sich bei Anbietern, Filtern und Sortierung. Prüfe die Bedingungen beim Anbieter und vergleiche die vollständigen Kosten.
+
+### Was gilt nach dem Ende der Garantie
+
+Danach gilt der Preis, der sich aus deinem Vertrag und den dann gültigen Preisen ergibt. Prüfe rechtzeitig, ob ein Wechsel günstiger ist. Die Garantie schützt nicht dauerhaft vor einer Erhöhung.
+
+Ein belastbarer Vergleich beginnt bei deiner Abrechnung. Er endet mit dem vollständigen Vertrag und einem Termin im Kalender. Die Beispielwerte helfen beim Rechenweg; sie sind keine Marktpreise. Prüfe Fristen und Bedingungen in deinen Originalunterlagen, bevor du wechselst.
+
+Wenn du zusätzlich deinen Verbrauch senken willst, findest du im Ratgeber zu [Stromkosten senken mit Haushaltsgeräten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) konkrete Anschaffungsfragen. Wer die Herkunft des Stroms wichtiger findet als den letzten Cent, prüft den [Wechsel zu einem Ökostrom-Anbieter](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/). Und wenn du gerade auch Gas beziehst, hilft dir der [Vergleich der Gastarife](../../posts/2026-10-26-gastarife-vergleichen-vor-dem-herbst/) beim zweiten Vertrag.
 
 ---
 
