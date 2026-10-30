@@ -29,6 +29,7 @@ from collections import defaultdict
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 import pinterest_hashtags as ph  # noqa: E402  – Hashtag-SSOT (#729)
+import reserve_schreibschutz as schutz  # noqa: E402  – #900
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 DO_FIX = "--fix" in sys.argv
 
@@ -158,6 +159,10 @@ def main():
             if DO_FIX:
                 existing = set(desc_map.keys())
                 for g in group[1:]:
+                    # #900: bytegebundene Reserve-Entwürfe nicht anfassen.
+                    if schutz.ist_bytegebunden(g["content"]):
+                        print("  ⏸ " + schutz.schutzvermerk(g["slug"], "pinterest_duplicate_guard.py"))
+                        continue
                     new_desc = _unique_desc(g["slug"], g["title"], g["description"], g["keywords"], existing)
                     new_content = _fm_set(g["content"], "pin_description", new_desc)
                     open(g["path"], "w", encoding="utf-8").write(new_content)
@@ -183,6 +188,9 @@ def main():
             if DO_FIX:
                 existing = set(title_map.keys())
                 for g in group[1:]:
+                    if schutz.ist_bytegebunden(g["content"]):
+                        print("  ⏸ " + schutz.schutzvermerk(g["slug"], "pinterest_duplicate_guard.py"))
+                        continue
                     new_title = _unique_title(g["slug"], g["title"], existing)
                     new_content = _fm_set(g["content"], "pin_title", new_title)
                     open(g["path"], "w", encoding="utf-8").write(new_content)

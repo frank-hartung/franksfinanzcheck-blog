@@ -72,6 +72,7 @@ from check_titles import check_title                      # noqa: E402
 import plagiat_guard as plag                               # noqa: E402
 import cadence_guard as cad                                # noqa: E402
 import pinterest_hashtags as ph                           # noqa: E402 – Hashtag-SSOT (#729)
+import reserve_schreibschutz as schutz                     # noqa: E402 – #900
 
 REPORT = os.path.join(BLOG_DIR, "SPAM-REPORT.md")
 STATE_FILE = os.path.join(BLOG_DIR, "data", "spam_state.json")
@@ -499,6 +500,12 @@ def fix_blog(findings):
     B2/B4/B5/B6/B7 = Demotion auf draft (manuelle Prüfung)."""
     healed = []
     for slug, (post, f) in sorted(findings.items()):
+        # #900: Zertifizierte Reserve-Entwürfe sind bytegebunden. Ein
+        # Heiler, der hier schreibt, entwertet den READY-Nachweis – der
+        # Fund bleibt sichtbar, die Nachmessung macht die Reserve-Kette.
+        if schutz.ist_bytegebunden(post["content"]):
+            healed.append(schutz.schutzvermerk(slug, "spam_guard.py"))
+            continue
         acted = False
         # WICHTIG: Demotionsentscheid NUR über HARTe Funde – ein B2-warn
         # (Superlativ) darf einen Artikel niemals demoten!

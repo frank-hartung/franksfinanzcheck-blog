@@ -1056,5 +1056,118 @@ class ReservePoolKonflikt661Tests(GitSyncTestBase):
         self.assertIn("Beta hand", self.origin_read(self.SLUG))
 
 
+# #900: Wahrheitspflicht für den Reserve-Nachweis.
+# Der Stub ersetzt `scripts/reserve_artifacts.py` im synthetischen Repo und
+# bildet NUR den einen Vertrag nach: passt die SHA nicht mehr, wird der
+# READY-Nachweis zurückgezogen (keine Nachmessung). Die echte Rückzugslogik
+# ist in scripts/tests/test_reserve_artifacts.py bewiesen.
+RESERVE_STUB = r'''#!/usr/bin/env python3
+import hashlib, json, pathlib, sys
+if "--probe-fehlt" in sys.argv:
+    print("Nachweisprüfung nicht möglich: No module named \'yaml\'")
+    sys.exit(2)
+cert = pathlib.Path("data/reserve-readiness.json")
+data = json.loads(cert.read_text(encoding="utf-8"))
+changed = []
+for row in data["candidates"]:
+    index = pathlib.Path("content/posts") / row["slug"] / "index.md"
+    if row["ready"] and hashlib.sha256(index.read_bytes()).hexdigest() != row["sha256"]:
+        row["ready"] = False
+        changed.append(row["slug"])
+if changed:
+    data["ready"] = sum(1 for r in data["candidates"] if r["ready"])
+    cert.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+print("%d READY-Nachweis(e) zurückgezogen (keine Nachmessung)" % len(changed))
+'''
+
+ENTWURF = ("---\ntitle: \"Kandidat\"\ndraft: true\nreserve: true\n---\n\n"
+           "Erster Absatz.\n")
+
+
+class ReserveNachweisWahrheitTests(GitSyncTestBase):
+    """#900: Kein Commit trägt einen READY-Nachweis, dessen Bytes er nicht hat.
+
+    Am 30.10.2026 heilte der Pinterest-Watchdog drei zertifizierte Entwürfe
+    und committete sie mit `git add -A`. Der Nachweis im selben Commit zeigte
+    danach auf Bytes, die es nicht mehr gab – sichtbar wurde das erst im
+    nächsten Gate. `git_sync.sh` zieht ihn jetzt zurück, bevor er das
+    Repository erreicht.
+    """
+
+    SLUG = "content/posts/kandidat/index.md"
+    CERT = "data/reserve-readiness.json"
+
+    def _vorbereiten(self, mit_stub=True):
+        import hashlib
+        import json
+        entwurf = ENTWURF.encode("utf-8")
+        # Zertifikat belegt einen ÄLTEREN Stand desselben Entwurfs.
+        falsche_sha = hashlib.sha256(entwurf + b"\nNachtrag.\n").hexdigest()
+        zertifikat = {"target": 6, "ready": 1, "pool_size": 1,
+                      "generated_at": "2026-10-30T10:36:34Z",
+                      "candidates": [{"slug": "kandidat", "ready": True,
+                                      "sha256": falsche_sha}]}
+        self._commit(self.bot_b, self.CERT,
+                     json.dumps(zertifikat, indent=2) + "\n", "cert")
+        self._commit(self.bot_b, self.SLUG, ENTWURF, "kandidat")
+        if mit_stub:
+            stub = self.bot_b / "scripts" / "reserve_artifacts.py"
+            stub.parent.mkdir(parents=True, exist_ok=True)
+            stub.write_text(RESERVE_STUB, encoding="utf-8")
+            self._commit(self.bot_b, "scripts/reserve_artifacts.py",
+                         RESERVE_STUB, "stub")
+        self.assertEqual(0, self.run_sync(["--push-only"], repo=self.bot_b).returncode)
+
+    def _nachweis(self):
+        import json
+        return json.loads(self.origin_read(self.CERT))
+
+    def test_vollmodus_committet_zurueckgezogenen_nachweis_mit(self):
+        self._vorbereiten()
+        (self.bot_b / self.SLUG).write_text(ENTWURF + "\nTransparenz-Zeile.\n",
+                                            encoding="utf-8")
+        res = self.run_sync(["chore: Heiler-Lauf", self.SLUG])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertFalse(self._nachweis()["candidates"][0]["ready"])
+        self.assertEqual(0, self._nachweis()["ready"])
+
+    def test_push_only_haengt_die_korrektur_als_eigenen_commit_an(self):
+        """Der reale Fall: der Workflow committet selbst (`git add -A`)."""
+        self._vorbereiten()
+        (self.bot_b / self.SLUG).write_text(ENTWURF + "\nTransparenz-Zeile.\n",
+                                            encoding="utf-8")
+        subprocess.run(["git", "-C", str(self.bot_b), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(self.bot_b), "commit", "-q", "-m",
+                        "chore: Pinterest-Selbstheilung + Report"], check=True)
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertFalse(self._nachweis()["candidates"][0]["ready"])
+        self.assertTrue(any("READY-Nachweise zurückgezogen" in zeile
+                            for zeile in self.origin_log()), self.origin_log())
+
+    def test_werkzeug_fehlt_aendert_nichts(self):
+        """Exit 2 (PyYAML fehlt) ist ein Werkzeugausfall, kein Befund."""
+        self._vorbereiten(mit_stub=False)
+        stub = self.bot_b / "scripts" / "reserve_artifacts.py"
+        stub.parent.mkdir(parents=True, exist_ok=True)
+        stub.write_text(RESERVE_STUB, encoding="utf-8")
+        self.assertEqual(0, self.run_sync(["--push-only"], repo=self.bot_b).returncode)
+        vorher = self._nachweis()
+        (self.bot_b / self.SLUG).write_text(ENTWURF + "\nNachtrag.\n",
+                                            encoding="utf-8")
+        subprocess.run(["git", "-C", str(self.bot_b), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(self.bot_b), "commit", "-q", "-m", "bot"], check=True)
+        # Der Stub wird über die Umgebung auf Exit 2 geschaltet.
+        (self.bot_b / "scripts" / "reserve_artifacts.py").write_text(
+            RESERVE_STUB.replace('sys.argv:', '["--probe-fehlt"] + sys.argv:'),
+            encoding="utf-8")
+        subprocess.run(["git", "-C", str(self.bot_b), "commit", "-q", "-am", "stub2"],
+                       check=True)
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("nicht prüfbar", res.stdout)
+        self.assertEqual(vorher, self._nachweis(), "Nachweis wurde trotz Ausfall verändert")
+
+
 if __name__ == "__main__":
     unittest.main()

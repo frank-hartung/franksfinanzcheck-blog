@@ -78,6 +78,23 @@ class WithdrawalTests(Sandbox):
         self.assertEqual([], ra.withdraw_invalid_ready(self.cert, self.posts))
         self.assertEqual(saved, self.cert.read_bytes(), "no fake fresh proof on repeat")
 
+    def test_missing_parser_never_withdraws(self):
+        """#900: „nicht prüfbar“ ist NICHT „Nachweis falsch“.
+
+        Am 30.10.2026 lief `--withdraw-invalid` ohne PyYAML. Jede Zeile
+        lautete „Entwurf nicht prüfbar“, und der Rückzug nahm den ganzen
+        Vorrat mit (6 → 0). Ein Werkzeugausfall darf nie wie ein Befund
+        aussehen; er muss den Vorgang stoppen.
+        """
+        row = self.draft()
+        self.write_cert([row])
+        vorher = self.cert.read_bytes()
+        with patch.dict(sys.modules, {"yaml": None}):
+            with self.assertRaises(RuntimeError):
+                ra.withdraw_invalid_ready(self.cert, self.posts)
+        self.assertEqual(vorher, self.cert.read_bytes(),
+                         "Werkzeugausfall hat den Nachweis verändert")
+
     def test_corrupt_certificate_is_not_overwritten(self):
         self.cert.parent.mkdir(parents=True)
         raw = '{"candidates":[],"candidates":[]}'

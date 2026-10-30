@@ -209,6 +209,25 @@ def reserve_metadata(content: str) -> dict:
     return metadata
 
 
+def require_metadata_support() -> None:
+    """Fail loud BEFORE a destructive proof decision (#900).
+
+    `candidate_problem()` reports “Entwurf nicht prüfbar” when PyYAML is
+    missing. For a diagnostic view that is honest; for the withdrawal path it
+    was catastrophic: on 30.10.2026 a `--withdraw-invalid` started without
+    PyYAML and the pool dropped from 6 to 0 READY rows because *every* row
+    looked unprovable. “Cannot prove” is not “proof failed”. The destructive
+    caller therefore asks this first and aborts with exit 2 when the
+    measurement tool is not available.
+    """
+    import importlib
+    for name in ("yaml", "fm_boundary_guard"):
+        try:
+            importlib.import_module(name)
+        except ImportError as exc:  # pragma: no cover - depends on environment
+            raise RuntimeError(f"Nachweisprüfung nicht möglich: {exc}") from exc
+
+
 def candidate_problem(row: dict, posts_dir: Path) -> str | None:
     """Cheap source proof: exact bytes, valid metadata and actual pool ownership."""
     index = posts_dir / row["slug"] / "index.md"
@@ -322,6 +341,7 @@ def withdraw_invalid_ready(path: Path, posts_dir: Path) -> list[str]:
     changed draft with the full Hugo + Hunspell production gate. A missing or
     invalid JSON snapshot is never overwritten.
     """
+    require_metadata_support()
     data = read_certificate(path)
     changed = []
     for row in data["candidates"]:
@@ -353,7 +373,7 @@ def main() -> int:
         try:
             changed = withdraw_invalid_ready(ROOT / "data" / STATE_FILES[0],
                                              ROOT / "content" / "posts")
-        except (OSError, ValueError) as exc:
+        except (OSError, ValueError, RuntimeError) as exc:
             print(f"🛑 Nachweise nicht zurückgezogen: {exc}")
             return 2
         print(f"⚠ {len(changed)} ungültige READY-Nachweise zurückgezogen: "

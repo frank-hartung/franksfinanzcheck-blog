@@ -554,3 +554,50 @@ Am 28.10.2026 scheiterte [Lauf 40735343102](https://github.com/frank-hartung/fra
 Der `gh-pages`-Branch bleibt Cache, Audio-Quelle und Backup-/Diff-Spur, aber ist nicht die öffentliche Pages-Quelle. Sein Schreibfehler blockiert nun weder den Artefakt-Upload noch das offizielle Deployment eines bereits durch alle Qualitäts-Gates gegangenen Builds. Der Schritt ist auf 15 Minuten begrenzt; sein **ursprüngliches `outcome`** gelangt ins nachgelagerte Auslieferungs-Siegel. Ist der Cache fehlgeschlagen, übersprungen oder unbekannt, obwohl ein Artefakt erstellt wurde, bleibt der Lauf dort rot. Das Siegel unterscheidet weiterhin zwischen erfolgreicher und nicht belegter öffentlicher Auslieferung. Fehler der Qualitäts-Gates, des Uploads oder des offiziellen Deployments werden nicht unterdrückt. Ein Cache-Fehler wird nicht automatisch als behoben behauptet: Bei nicht übereinstimmender Cache-/Pages-SHA verlangt das Deploy-Gate weiterhin einen vollständigen Reparatur-Deploy.
 
 **Betrieb:** Im roten Lauf zuerst das Log „Deploy auf gh-pages“ auf den konkreten Git-Befehl, Netzwerk-, Rechte-, Quota- oder Branch-Schutzfehler prüfen. Das Ergebnis des offiziellen `pages-deployment` und den Artefakt-Beleg separat prüfen; ein rotes Siegel allein beweist weder eine erfolgreiche noch eine ausgebliebene Auslieferung. Solange der Cache veraltet ist, können Audio-Wiederverwendung, Backup und Diff-Basis veraltet sein. Nach Behebung der Ursache den Deploy auf `main` manuell erneut auslösen und sowohl Cache-Schritt, offizielles Pages-Deployment als auch Siegel kontrollieren. Keine Branch-Schutzregeln abschalten und keinen Force-Push von Hand als Standardreparatur einsetzen. Regressionen: `python3 -m unittest scripts.tests.test_deploy_cache_isolation scripts.tests.test_pages_deployment_guard scripts.tests.test_deploy_publication_priority`.
+
+### Zertifikats-Wahrheit und Schreibschutz für Reserve-Entwürfe (#900, 30.10.2026)
+
+Der Daily-Lauf vom 30.10.2026 hat einen Fehler gezeigt, der nicht im Content
+lag, sondern in der Buchführung: `data/reserve-readiness.json` belegte sechs
+gate-fertige Reserve-Entwürfe mit ihrer SHA-256. Um 10:57 UTC heilte der
+Pinterest-Watchdog drei dieser Entwürfe (Transparenz-Zeile über
+`spam_guard.fix_blog`, gekürzte `keywords` über die Pin-Heiler) und committete
+sie mit `git add -A`. Danach zeigte der Nachweis auf Bytes, die es nicht mehr
+gab. Beide Vorgänge waren für sich „grün“; sichtbar wurde der Widerspruch erst
+im nächsten Gate (`test_reserve_artifacts`, `test_inhalts_register`).
+
+Drei Antworten, jede an der Ursache:
+
+1. **Der Nachweis kann nicht mehr lügen.** `scripts/git_sync.sh` – der einzige
+   Weg, auf dem Bots committen – zieht ungültige READY-Nachweise **vor** dem
+   Commit zurück (`reserve_artifacts.py --withdraw-invalid`, keine
+   Nachmessung) und nimmt den Rückzug in denselben Commit. Im Modus
+   `--push-only` (der Workflow hat selbst committet) reist die Korrektur als
+   eigener Commit hinterher. Nachgemessen wird dort, wo Hugo und Hunspell
+   laufen: in der Reserve-Kette.
+2. **„Nicht prüfbar“ ist nicht „falsch“.** Am selben Tag lief
+   `--withdraw-invalid` ohne PyYAML. Jede Zeile lautete „Entwurf nicht
+   prüfbar“, und der Rückzug nahm den ganzen Vorrat mit (6 → 0). Der
+   destruktive Pfad prüft jetzt zuerst die Werkzeuge (`require_metadata_support`)
+   und bricht mit Exit 2 ab, ohne eine Zeile anzufassen. `git_sync.sh` meldet
+   das als Warnung und zieht nichts zurück.
+3. **Reserve-Entwürfe sind bytegebunden.** `scripts/reserve_schreibschutz.py`
+   kennt die eine Regel, die alle Hygiene-Heiler teilen: `draft: true` **und**
+   `reserve: true` = nicht anfassen. `spam_guard.fix_blog` (Transparenz-Zeile),
+   `pinterest_duplicate_guard` (Pin-Texte) und `pinterest_seo_healer` (Titel,
+   Description, Keywords, Alt-Texte) melden den Fund weiter, schreiben aber
+   nicht; die Heilung passiert beim Übergang in die Auslieferung, wenn der
+   Entwurf kein Reserve-Entwurf mehr ist. Der Schutz ist rein textuell (kein
+   PyYAML), damit er auch in Umgebungen ohne Zusatzpakete greift.
+
+**Betrieb:** Ein zurückgezogener Nachweis ist kein Content-Problem. Er heißt
+„nachmessen“ – `python3 scripts/reserve_recert.py --fix --refresh-stale` im
+CI-Lauf mit Hugo und Hunspell. Ein Hinweis „unangetastet – bytegebundener
+Reserve-Entwurf“ in `SPAM-REPORT.md` ist der Beweis, dass der Schutz gegriffen
+hat, nicht eine offene Heilung.
+
+**Regressionen:** `scripts/tests/test_reserve_schreibschutz.py` (Regel, alle
+drei Heiler, Strukturvertrag), `WithdrawalTests.test_missing_parser_never_withdraws`
+in `scripts/tests/test_reserve_artifacts.py`,
+`ReserveNachweisWahrheitTests` in `scripts/tests/test_git_sync.py` (Vollmodus,
+`--push-only`, Werkzeugausfall).

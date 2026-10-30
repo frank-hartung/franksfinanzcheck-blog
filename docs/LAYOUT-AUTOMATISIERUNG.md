@@ -110,6 +110,47 @@ Frühwarnungen stehen nur im Report (Exit 0). Ein Issue und ein roter Lauf
 entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
 (Befund auch bei Frühwarnung).
 
+### Laufzeit-DOM: Ziel 1200 Elemente je Seite (Nachtrag zu #900, 30.10.2026)
+
+Der Nachtrag vom 30.10.2026 hat einen zweiten, stillen Fehler derselben Klasse
+gefunden: Die Frühwarnung (1350) war **keine** Grenze, sondern eine Notiz. Die
+längste Artikelseite lag zur Laufzeit bei **1401** Elementen – ein Element über
+der harten Lighthouse-Grenze –, und niemand wurde rot. Aufgefallen ist es erst
+im Browser-Lauf, also nach dem teuren Teil der Kette.
+
+Drei Dinge sind daraus geworden:
+
+1. **Die Elemente sind weg, nicht das Budget erhöht.** Von den 368
+   Laufzeit-Elementen der Seite kamen 288 aus einer einzigen Stelle: je
+   Überschrift ein Inline-`<svg>` mit drei `<path>` (vier Knoten für ein
+   Symbol). Seit #900 zeichnet CSS das Symbol als **Maske** auf `::before`,
+   der Haken nach dem Kopieren ist die Klasse `.ff-copied`, der TOC-Titel ist
+   ein **Textknoten** im `<a>` (zweite CSS-Grid-Spalte) und der Zieh-Griff ein
+   `radial-gradient` statt `<svg>` mit sechs `<circle>`. Ergebnis auf derselben
+   Seite: **1195** statt 1401 – 205 Elemente Luft bis zur harten Grenze.
+2. **Es gibt eine eigene Messung dafür:** `scripts/dom_laufzeit_messung.mjs`
+   baut den Laufzeit-DOM mit jsdom nach (echte DOM, dieselben lokalen Skripte,
+   kein Modell, kein Netz) und prüft **jede** Seite gegen 1200. Der Lauf ist
+   rot, wenn eine Seite darüber liegt, wenn der Bau fehlt oder wenn jsdom
+   fehlt (fail-closed, Exit 2 – keine stille Übersprung-Meldung).
+   ```bash
+   node scripts/dom_laufzeit_messung.mjs --dir public --top 10
+   node scripts/dom_laufzeit_messung.mjs --selftest    # ohne Bau, ohne DOM
+   ```
+   Der `layout-ai`-Lauf führt sie nach dem Bau aus; `LAUFZEIT_EXIT` fließt in
+   den Schluss-Schritt ein (fehlender Wert = rot). `static/premium/**` steht
+   deshalb in beiden Pfadlisten des Workflows – wer die Quelle ändert, sieht
+   die Messung.
+3. **Ein Rückfall wird sofort rot, nicht erst im Browser.** Der Vertrag steht
+   zweifach: `scripts/tests/test_dom_element_vertrag.py` prüft die Quelle
+   (höchstens zwei Elemente je Überschrift, kein `innerHTML` mit Symbol, kein
+   Titel-`<span>`, Maske im Stylesheet) und die jsdom-„§“-Wache prüft das
+   fertige DOM (Kopierknopf mit **null** Kindknoten).
+
+> Regel: Das Budget wird nicht erhöht. Wächst der DOM an einer Stelle, wird
+> dort ein Element ersetzt (CSS statt Knoten, Textknoten statt `<span>`), oder
+> das Feature wird kleiner. 1200 ist das Ziel, 1400 die Wand.
+
 ---
 
 ## 2. Wurzelursachen von #338 (alle fünf behoben)

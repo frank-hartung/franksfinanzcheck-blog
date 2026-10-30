@@ -200,7 +200,8 @@ class SchlussSchrittWahrheitstabelleTest(unittest.TestCase):
 
     def _lauf(self, env: dict) -> subprocess.CompletedProcess:
         basis = {k: v for k, v in os.environ.items()
-                 if k not in ("BAU_EXIT", "STATIC_EXIT", "BROWSER_EXIT")}
+                 if k not in ("BAU_EXIT", "STATIC_EXIT", "BROWSER_EXIT",
+                              "LAUFZEIT_EXIT")}
         with tempfile.NamedTemporaryFile("w", suffix=".md") as summary:
             basis.update(env)
             basis["GITHUB_STEP_SUMMARY"] = summary.name
@@ -209,17 +210,33 @@ class SchlussSchrittWahrheitstabelleTest(unittest.TestCase):
 
     def test_wahrheitstabelle(self) -> None:
         faelle = [
-            ("grün", {"BAU_EXIT": "0", "STATIC_EXIT": "0", "BROWSER_EXIT": "0"}, 0),
+            ("grün", {"BAU_EXIT": "0", "STATIC_EXIT": "0", "BROWSER_EXIT": "0",
+                      "LAUFZEIT_EXIT": "0"}, 0),
+            # #900: Die Laufzeit-DOM-Messung ist Teil der Wahrheit. Fehlt sie,
+            # ist der Lauf nicht grün – eine ausgefallene Prüfung ist kein
+            # Freibrief (dieselbe Regel wie beim Bau).
+            ("Bau grün, Laufzeit-Messung nie gelaufen",
+             {"BAU_EXIT": "0", "STATIC_EXIT": "0", "BROWSER_EXIT": "0"}, 1),
+            ("Bau grün, Laufzeit über dem Ziel 1200",
+             {"BAU_EXIT": "0", "STATIC_EXIT": "0", "BROWSER_EXIT": "0",
+              "LAUFZEIT_EXIT": "1"}, 1),
+            ("Bau grün, Laufzeit-Messung ohne DOM",
+             {"BAU_EXIT": "0", "STATIC_EXIT": "0", "BROWSER_EXIT": "0",
+              "LAUFZEIT_EXIT": "2"}, 1),
             ("Bau tot (26.10.)", {"BAU_EXIT": "1"}, 1),
             ("Bau tot, Browser lief", {"BAU_EXIT": "1", "BROWSER_EXIT": "2"}, 1),
             ("Bau grün, statisches Audit nie gelaufen", {"BAU_EXIT": "0"}, 1),
             ("Bau grün, Browser übersprungen", {"BAU_EXIT": "0", "STATIC_EXIT": "0",
-                                                "BROWSER_EXIT": "2"}, 0),
-            ("Bau grün, Browser ohne Ergebnis", {"BAU_EXIT": "0", "STATIC_EXIT": "0"}, 1),
+                                                "BROWSER_EXIT": "2",
+                                                "LAUFZEIT_EXIT": "0"}, 0),
+            ("Bau grün, Browser ohne Ergebnis", {"BAU_EXIT": "0", "STATIC_EXIT": "0",
+                                                 "LAUFZEIT_EXIT": "0"}, 1),
             ("Bau grün, Browser-Werkzeugfehler", {"BAU_EXIT": "0", "STATIC_EXIT": "0",
-                                                  "BROWSER_EXIT": "7"}, 1),
+                                                  "BROWSER_EXIT": "7",
+                                                  "LAUFZEIT_EXIT": "0"}, 1),
             ("Bau grün, statische Befunde", {"BAU_EXIT": "0", "STATIC_EXIT": "1",
-                                             "BROWSER_EXIT": "0"}, 1),
+                                             "BROWSER_EXIT": "0",
+                                             "LAUFZEIT_EXIT": "0"}, 1),
         ]
         for name, env, soll in faelle:
             with self.subTest(fall=name):

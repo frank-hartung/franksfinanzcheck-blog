@@ -929,8 +929,11 @@ t.group('13) Abschnitts-Link: kein Ankersymbol in Kurzfassung & Vorlesen');
   t.ok('Kopierknöpfe injiziert (sonst prüft die Gruppe nichts)',
     headings.length >= 3 && buttons.length === headings.length,
     'Überschriften: ' + headings.length + ', Knöpfe: ' + buttons.length);
-  t.ok('Knopf trägt ein Symbol statt einer Textglyphe',
-    buttons.length > 0 && buttons.every((b) => b.querySelector('svg')));
+  // #900: Das Symbol zeichnet CSS (Maske auf `::before`) – der Knopf hat
+  // keine Kindknoten mehr. Vier Inline-SVG-Knoten je Überschrift waren der
+  // größte Posten im Laufzeit-DOM (bei 48 Überschriften 192 Elemente).
+  t.ok('Knopf trägt ein Symbol statt einer Textglyphe (CSS-Maske, 0 Kindknoten)',
+    buttons.length > 0 && buttons.every((b) => b.children.length === 0 && b.childNodes.length === 0));
   t.eq('Knopf trägt kein Textzeichen', buttons.map((b) => b.textContent.trim()).join(''), '');
   t.ok('Knopf ist für Lesemaschinen markiert',
     buttons.length > 0 && buttons.every((b) => b.hasAttribute('data-ff-skip-read')));
@@ -957,7 +960,9 @@ t.group('13) Abschnitts-Link: kein Ankersymbol in Kurzfassung & Vorlesen');
     buttons[0].dispatchEvent(new win.MouseEvent('click', { bubbles: true, cancelable: true }));
     t.eq('Klick setzt die Abschnitts-URL', win.location.hash, '#' + first.id);
     t.eq('Rückmeldung „Link kopiert“', buttons[0].getAttribute('aria-label'), 'Link kopiert');
-    t.ok('Häkchen als Bestätigung', !!buttons[0].querySelector('svg'));
+    // Der Haken ist ein CSS-Zustand (`.ff-copied::before`), kein zweites SVG.
+    t.ok('Häkchen als Bestätigung (Zustandsklasse .ff-copied)',
+      buttons[0].classList.contains('ff-copied'));
   }
 
   // Kurzfassung: Verzeichnis, Tabellen-Titel, Klartext
