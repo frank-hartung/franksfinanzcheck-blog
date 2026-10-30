@@ -32,6 +32,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import list_post_paths, slug_of, frontmatter_date  # noqa: E402
 import cadence_guard  # noqa: E402 – Single Source of Truth für die Kadenz
 import park_state     # noqa: E402 – Park-Zustand (draft/cadence_*-Felder)
+from publikations_weiterleitung import weiterleitungsquellen  # noqa: E402
 
 
 def published_count_today():
@@ -58,6 +59,14 @@ def publish(path):
         content = f.read()
     if "draft: true" not in content:
         print(f"  – übersprungen (kein Entwurf): {slug_of(path)}")
+        return 0
+    # Alias-Quellen sind strukturell nicht publizierbar. Dieser Schutz sitzt
+    # vor jeder Heilung und jedem Frontmatter-Schreibzugriff, damit eine
+    # manuelle Freigabe den fail-closed Deploy-Schutz nicht umgehen kann.
+    slug = slug_of(path)
+    if slug in weiterleitungsquellen(POSTS_DIR):
+        print(f"  ⛔ nicht veröffentlicht: {slug} steht als "
+              "Weiterleitungsquelle in data/weiterleitungen.yaml")
         return 0
     # 0) URL-Hygiene (PREMIUM-FIX 03.09.2026): auch die manuelle Freigabe
     #    darf keinen Artikel mit Leerzeichen-URL (R8-URL-LEERZEICHEN) live

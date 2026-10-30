@@ -53,6 +53,8 @@ Selbstheilung (sofortig, konvergent, nichts geht verloren):
 
 Niemals:
   • Entwürfe (draft: true OHNE cadence_wait) werden nie angefasst.
+  • Ein Slug aus `data/weiterleitungen.yaml` wird nie re-queue-promotet:
+    Alias und Live-Seite schließen sich aus (WF-54C4/#953).
   • Es wird nie gelöscht – nur zurückgestuft/geheilt.
 
 Aufruf:
@@ -87,6 +89,7 @@ import os
 import re
 import sys
 import tempfile
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
@@ -95,6 +98,7 @@ REPORT_PATH = os.path.join(BLOG_DIR, "CADENCE-GATE-REPORT.md")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import slug_of, frontmatter_date  # noqa: E402
 import park_state  # noqa: E402  (SSOT für draft/cadence_wait/cadence_demoted/cadence_grund)
+from publikations_weiterleitung import weiterleitungsquellen  # noqa: E402
 
 # Halte-Frist: so lange darf ein Post höchstens geparkt (hold) bleiben, bevor
 # der Report ihn als Content-Verlust markiert (31.08.2026, Issue #129-Folge).
@@ -453,7 +457,29 @@ def requeue_to_capacity(posts, max_d, do_fix=True, now_fn=None):
     capacity = max_d - len(published_on(posts, today))
     if capacity <= 0:
         return []
-    waiting = [p for p in posts if p["draft"] and p["wait"]]
+    # Eine Weiterleitungsquelle ist bewusst geparkt. Ohne diesen zweiten
+    # Schutz könnte ein Alias nach einer Hold-/Re-Queue-Heilung wieder live
+    # gehen, obwohl das eigentliche Weiterleitungs-Gate bereits sauber war.
+    # Der gemeinsame Parser hält Reserve- und Re-Queue-Promotion auf derselben
+    # SSOT; isolierte Selbsttest-Bäume ohne data/ bleiben weiterleitungsfrei.
+    if posts:
+        erster = Path(posts[0]["path"]).resolve()
+        # Produktionsartikel liegen als <posts>/<slug>/index.md; die
+        # Legacy-Ladeform akzeptiert zusätzlich direktes *.md unter posts/.
+        posts_dir = (erster.parent.parent
+                     if erster.name == "index.md" else erster.parent)
+        redirect_sources = weiterleitungsquellen(posts_dir)
+    else:
+        redirect_sources = set()
+    waiting = [p for p in posts
+               if p["draft"] and p["wait"]
+               and p["slug"] not in redirect_sources]
+    blocked = sorted({p["slug"] for p in posts
+                      if p["draft"] and p["wait"]
+                      and p["slug"] in redirect_sources})
+    if blocked:
+        print("  ⛔ Re-Queue zurückgestellt (Weiterleitungsquelle): "
+              + ", ".join(blocked))
     waiting.sort(key=lambda p: (p["date_raw"], p["slug"]))
     promoted = []
     for p in waiting[:capacity]:
