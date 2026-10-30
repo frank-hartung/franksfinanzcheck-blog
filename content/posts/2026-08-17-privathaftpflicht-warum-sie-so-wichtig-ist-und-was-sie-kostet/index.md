@@ -3,7 +3,10 @@ lastmod: 2026-10-30
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Privathaftpflicht im Überblick: Welche Schäden sie abdeckt, welche Klauseln wichtig sind und wie sich Kosten und Leistungen vergleichen lassen."
 date: 2026-10-30T15:55:43Z
-draft: false
+draft: true
+cadence_wait: true
+cadence_demoted: 2026-10-30T16:47:46Z
+cadence_grund: "kadenz: über Tages-Max"
 endredaktion_status: freigegeben
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
