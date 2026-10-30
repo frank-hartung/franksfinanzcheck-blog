@@ -199,19 +199,19 @@
        · Suchmaschinen (Überschriften sind ein Ranking-Signal)
 
      Reparatur auf Verlagshaus-Niveau:
-       · SYMBOL STATT GLYPHE: reines Inline-SVG, kein Textknoten
+       · SYMBOL STATT GLYPHE: kein Textknoten im Knopf
        · `data-ff-skip-read`: Lesemaschinen überspringen den Knopf
        · `.ff-heading-text` + `aria-labelledby`: nur der echte
          Überschriften-Text beschriftet die Überschrift
+       · SEIT #900 ZEICHNET CSS DAS SYMBOL (Maske, `::before`): Das
+         Inline-SVG kostete vier DOM-Knoten je Überschrift (svg + 3
+         Pfade). Bei 48 Überschriften waren das 192 der 368
+         Laufzeit-Elemente – der größte Einzelposten im DOM-Budget.
+         Geometrie, Strichstärke und Farbe sind unverändert; der
+         Kopier-Zustand ist eine Klasse (`.ff-copied`), kein zweites SVG.
      ============================================================ */
   var COPY_LABEL = 'Link zu diesem Abschnitt kopieren';
   var COPIED_LABEL = 'Link kopiert';
-  var LINK_ICON = '<svg class="ff-heading-copy__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
-    + '<path d="M9.5 14.5 14.5 9.5"></path>'
-    + '<path d="M11 6.5 12.6 4.9a4.2 4.2 0 0 1 5.9 5.9L17 12.5"></path>'
-    + '<path d="M13 17.5 11.4 19.1a4.2 4.2 0 0 1-5.9-5.9L7 11.5"></path></svg>';
-  var CHECK_ICON = '<svg class="ff-heading-copy__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
-    + '<path d="M20 6 9 17l-5-5"></path></svg>';
   var headingUid = 0;
 
   function hasCls(el, name) {
@@ -273,18 +273,17 @@
       button.setAttribute('aria-label', COPY_LABEL);
       button.setAttribute('title', COPY_LABEL);
       button.setAttribute('data-ff-skip-read', '');
-      button.innerHTML = LINK_ICON;
       button.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
         var url = win.location.origin + win.location.pathname + '#' + heading.id;
         var done = function () {
+          // Der Haken ist ein CSS-Zustand (`.ff-copied::before`), kein
+          // zweites SVG: ein Knoten weniger je Klick, gleiche Optik.
           button.classList.add('ff-copied');
-          button.innerHTML = CHECK_ICON;
           button.setAttribute('aria-label', COPIED_LABEL);
           setTimeout(function () {
             button.classList.remove('ff-copied');
-            button.innerHTML = LINK_ICON;
             button.setAttribute('aria-label', COPY_LABEL);
           }, 1500);
         };
@@ -410,11 +409,12 @@
         num.className = 'ff-mini-toc__num';
         num.textContent = m[1];
         num.setAttribute('aria-hidden', 'true');
-        var txt = doc.createElement('span');
-        txt.className = 'ff-mini-toc__txt';
-        txt.textContent = miniTocLabel(m[2]);
+        // #900: Der Titel steht als Textknoten im <a> und belegt im
+        // CSS-Grid die zweite Spalte (anonymes Grid-Element). Ein
+        // eigener <span> wäre ein Knoten mehr je Eintrag – bei 48
+        // Einträgen genau die Differenz, die das Budget sprengte.
         a.appendChild(num);
-        a.appendChild(txt);
+        a.appendChild(doc.createTextNode(miniTocLabel(m[2])));
       } else {
         a.textContent = miniTocLabel(label);
       }
@@ -461,11 +461,9 @@
     var grip = doc.createElement('span');
     grip.className = 'ff-mini-toc__grip';
     grip.setAttribute('aria-hidden', 'true');
-    grip.innerHTML = '<svg viewBox="0 0 9 16" width="9" height="16" fill="currentColor" aria-hidden="true" focusable="false">'
-      + '<circle cx="2.2" cy="2.4" r="1.15"/><circle cx="6.8" cy="2.4" r="1.15"/>'
-      + '<circle cx="2.2" cy="8" r="1.15"/><circle cx="6.8" cy="8" r="1.15"/>'
-      + '<circle cx="2.2" cy="13.6" r="1.15"/><circle cx="6.8" cy="13.6" r="1.15"/>'
-      + '</svg>';
+    // #900: Die sechs Punkte zeichnet CSS (radial-gradient, Maße exakt wie
+    // im bisherigen SVG: 4,6 px Spalten-, 5,6 px Zeilenabstand). Ein eigenes
+    // <svg> mit sechs <circle> kostete sieben Knoten für eine Zierlinie.
     head.insertBefore(grip, head.firstChild);
 
     // Tastatur-Zugang auf die Greiffläche (kein role="button": die Fläche

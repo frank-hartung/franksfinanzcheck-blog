@@ -47,6 +47,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PREMIUM = os.path.join(ROOT, "static", "premium", "ff-premium.js")
+STYLE = os.path.join(ROOT, "assets", "css", "extended", "z-premium-blog.css")
 ENGINE = os.path.join(ROOT, "static", "premium", "ff-voice.js")
 SAFETY = os.path.join(ROOT, "static", "premium", "ff-summary-safety.js")
 THEME_ANCHOR = os.path.join(ROOT, "themes", "PaperMod", "layouts", "_partials", "anchored_headings.html")
@@ -69,11 +70,13 @@ HIDDEN_TAG_RE = re.compile(
 
 # Prüfsteine der Quelltexte: (Befund-Text, Muster, muss enthalten?)
 SOURCE_RULES = [
-    ("Knopf trägt ein Inline-SVG statt einer Glyphe", r"ff-heading-copy__ico", True),
+    ("Knopf trägt ein Symbol statt einer Glyphe (CSS-Maske)", r"ff-heading-copy", True),
     ("Knopf ist für Lesemaschinen markiert", r"data-ff-skip-read", True),
     ("Überschriften-Text in eigenem Etikett", r"ff-heading-text", True),
     ("Überschrift ist sauber beschriftet", r"aria-labelledby", True),
-    ("Häkchen als Kopier-Bestätigung", r"CHECK_ICON", True),
+    ("Häkchen ist ein CSS-Zustand (.ff-copied), kein zweites Symbol", r"ff-copied", True),
+    ("Kein Inline-SVG mehr im Knopf (#900: vier Knoten je Überschrift)",
+     r"ff-heading-copy__ico|innerHTML = LINK_ICON|innerHTML = CHECK_ICON", False),
     ("Mini-Verzeichnis nutzt den sauberen Text", r"headingText\(heading\)", True),
     ("Kein „§“ als Inhalt eines Elements", r"innerHTML\s*=\s*['\"]\s*" + GLYPH, False),
     ("Kein „§“ als Textknoten", r"textContent\s*=\s*['\"]\s*" + GLYPH, False),
@@ -170,6 +173,29 @@ def check_engine(rep):
     rep.add("2) ENGINE · static/premium/ff-voice.js",
             "Sicherheitsnetz entfernt reine Ankerrest-Knoten (Härtung #248)",
             "removeChild(last)" in safety)
+
+
+def check_style(rep):
+    """Schicht 1b: Das Symbol wird von CSS gezeichnet (Maske auf ::before).
+
+    #900: Das Inline-SVG kostete vier DOM-Knoten je Überschrift – bei 48
+    Überschriften 192 Elemente. Das Symbol bleibt, nur eben ohne Knoten.
+    """
+    layer = "1b) STIL · z-premium-blog.css"
+    src = read(STYLE)
+    if src is None:
+        rep.add(layer, "Datei vorhanden", False, "fehlt")
+        return
+    rep.add(layer, "Datei vorhanden", True)
+    rep.add(layer, "Symbol als Maske auf ::before",
+            re.search(r"\.ff-heading-copy::before\s*\{[^}]*mask\s*:", src) is not None)
+    rep.add(layer, "Kopier-Zustand als eigener Haken",
+            re.search(r"\.ff-heading-copy\.ff-copied::before\s*\{[^}]*mask-image", src) is not None)
+    rep.add(layer, "Symbolgröße 15 px (wie zuvor das SVG)", "width: 15px" in src)
+    # Kommentare dürfen das Zeichen nennen (der Befund heißt „§“) – als
+    # gezeichneter Inhalt darf es nirgends stehen.
+    rep.add(layer, "kein „§“ als gezeichneter Inhalt",
+            re.search(r"content\s*:\s*[\"']\s*" + GLYPH, src) is None)
 
 
 def check_theme(rep):
@@ -341,6 +367,7 @@ def main():
 
     rep = Report()
     check_source(rep)
+    check_style(rep)
     check_engine(rep)
     check_theme(rep)
     check_build(rep)

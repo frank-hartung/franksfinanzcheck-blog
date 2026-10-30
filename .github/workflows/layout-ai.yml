@@ -90,6 +90,11 @@ on:
       - "scripts/tests/test_workflow_yaml.py"
       - "scripts/tests/test_layout_ai_bauausfall.py"
       - "scripts/tests/test_layout_audit_bau_basis.py"
+      # #900: Die Laufzeit-DOM entsteht in static/premium/ff-premium.js.
+      # Wer dort Elemente hinzufügt, muss diese Messung sehen.
+      - "static/premium/**"
+      - "scripts/dom_laufzeit_messung.mjs"
+      - "scripts/tests/test_dom_element_vertrag.py"
       - ".github/workflows/layout-ai.yml"
   pull_request:
     paths:
@@ -109,6 +114,11 @@ on:
       - "scripts/tests/test_workflow_yaml.py"
       - "scripts/tests/test_layout_ai_bauausfall.py"
       - "scripts/tests/test_layout_audit_bau_basis.py"
+      # #900: Die Laufzeit-DOM entsteht in static/premium/ff-premium.js.
+      # Wer dort Elemente hinzufügt, muss diese Messung sehen.
+      - "static/premium/**"
+      - "scripts/dom_laufzeit_messung.mjs"
+      - "scripts/tests/test_dom_element_vertrag.py"
       - ".github/workflows/layout-ai.yml"
 
 permissions:
@@ -193,6 +203,34 @@ jobs:
           fi
           # Der Lauf wird erst im letzten Schritt rot: Report, Issue und
           # Summary sollen auch bei Befunden noch geschrieben werden.
+          exit 0
+
+      # ============ LAUFZEIT-DOM (Ziel 1200, harte Grenze bleibt 1400) ============
+      # #900: Der statische Audit sieht nur das ausgelieferte HTML. Die
+      # Laufzeit-Elemente (Kopierknöpfe, Mini-Verzeichnis) entstehen erst im
+      # Browser – am 30.10.2026 waren das 368 zusätzliche Elemente, die
+      # längste Seite lag mit 1401 genau EIN Element über der harten Grenze
+      # und fiel erst im (teuren) Browser-Lauf auf. Diese Messung bildet den
+      # Laufzeit-DOM mit jsdom nach und macht einen Rückfall sofort rot:
+      # Ziel 1200 (200 Elemente Luft), kein erhöhtes Budget.
+      # Die Manifest-Wache steht VOR jedem npm ci (WF-7B6B / #654): ein
+      # kaputtes Manifest soll den Lauf mit Klartext beenden, nicht npm.
+      - name: Manifest-Wache (package.json & Lockfile vor npm ci)
+        if: ${{ !cancelled() && env.BAU_EXIT == '0' }}
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
+      - name: Laufzeit-DOM messen (Ziel 1200 Elemente je Seite)
+        id: laufzeit
+        if: ${{ !cancelled() && env.BAU_EXIT == '0' }}
+        run: |
+          set +e
+          ( cd tools/ff-voice-qa && (npm ci --ignore-scripts --no-audit --no-fund >/dev/null 2>&1 || npm install --ignore-scripts --no-audit --no-fund >/dev/null 2>&1) ) || true
+          node scripts/dom_laufzeit_messung.mjs --dir public --json .cache/layout/laufzeit.json 2>&1 | tee /tmp/laufzeit.log
+          code=${PIPESTATUS[0]}
+          set -e
+          echo "LAUFZEIT_EXIT=$code" >> "$GITHUB_ENV"
           exit 0
 
       # ============ AUTO-HEILUNG: Cover nachziehen ============
@@ -520,6 +558,17 @@ jobs:
               fail=1
             elif [ "$static_exit" != "0" ]; then
               echo "::error::Statisches Layout-Audit: kritische Befunde (Exit $static_exit) – Details in LAYOUT-REPORT.md und im Issue."
+              fail=1
+            fi
+            laufzeit_exit="${LAUFZEIT_EXIT:-}"
+            if [ -z "$laufzeit_exit" ]; then
+              echo "::error::Bau grün, aber die Laufzeit-DOM-Messung ist nicht gelaufen – fail-closed."
+              fail=1
+            elif [ "$laufzeit_exit" = "1" ]; then
+              echo "::error::Laufzeit-DOM über dem Ziel von 1200 Elementen – Elemente aus dem DOM nehmen, NICHT das Budget erhöhen (Details in /tmp/laufzeit.log)."
+              fail=1
+            elif [ "$laufzeit_exit" != "0" ]; then
+              echo "::error::Laufzeit-DOM-Messung abgebrochen (Exit $laufzeit_exit) – fail-closed."
               fail=1
             fi
             if [ -z "$browser_exit" ]; then

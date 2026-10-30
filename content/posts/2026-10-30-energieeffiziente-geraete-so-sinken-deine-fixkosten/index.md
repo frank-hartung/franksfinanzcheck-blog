@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Energieeffiziente", "Energieeffiziente Geräte", "Geld sparen"]
+keywords: ["Energieeffiziente", "Geräte", "Zuhause", "Energieeffiziente Geräte", "Fixkosten"]
 pin_title: "Energieeffiziente Geräte: So sinken deine Fixkosten"
 pin_description: "*Werbung | Energieeffiziente Geräte senken deine Stromrechnung spürbar. Frank Hartung zeigt dir, wie du Stromfresser im Zuhause findest und Kosten clever sparst. Mehr Spartipps auf FranksFinanzcheck! #energieeffiziente #geraete #zuhause"
 ai_generated: true

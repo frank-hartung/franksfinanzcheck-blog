@@ -376,14 +376,30 @@ h3:hover .ff-heading-copy,
   opacity: 1;
 }
 
-/* Symbol statt Textglyphe (Befund 10.09.2026): der Knopf trägt ein
-   Inline-SVG, damit Überschriften-Text, Kurzfassung, Vorlesen,
-   Screenreader und Suchmaschinen kein „§“ mehr mitlesen. */
-.ff-heading-copy__ico {
+/* Symbol statt Textglyphe (Befund 10.09.2026): Überschriften-Text,
+   Kurzfassung, Vorlesen, Screenreader und Suchmaschinen dürfen kein „§“
+   mitlesen – der Knopf trägt deshalb ein Symbol, nie ein Textzeichen.
+
+   Seit #900 zeichnet CSS das Symbol (Maske auf `::before`). Das Inline-SVG
+   kostete vier DOM-Knoten je Überschrift (svg + drei Pfade); bei 48
+   Überschriften 192 Elemente – der größte Einzelposten der Laufzeit-DOM
+   (1401 statt Budget 1350). Die Maske nutzt exakt dieselben Pfade wie
+   zuvor (viewBox 24×24, Strichstärke 2, runde Enden), nur eben ohne
+   Knoten. Der Haken nach dem Kopieren ist ein Zustand, kein zweites SVG. */
+.ff-heading-copy::before {
+  content: "";
   display: block;
   width: 15px;
   height: 15px;
+  background-color: currentColor;
   pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 14.5 14.5 9.5'/%3E%3Cpath d='M11 6.5 12.6 4.9a4.2 4.2 0 0 1 5.9 5.9L17 12.5'/%3E%3Cpath d='M13 17.5 11.4 19.1a4.2 4.2 0 0 1-5.9-5.9L7 11.5'/%3E%3C/svg%3E") center / 15px 15px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 14.5 14.5 9.5'/%3E%3Cpath d='M11 6.5 12.6 4.9a4.2 4.2 0 0 1 5.9 5.9L17 12.5'/%3E%3Cpath d='M13 17.5 11.4 19.1a4.2 4.2 0 0 1-5.9-5.9L7 11.5'/%3E%3C/svg%3E") center / 15px 15px no-repeat;
+}
+
+.ff-heading-copy.ff-copied::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
 }
 
 /* Nur der redaktionelle Text beschriftet die Überschrift. */
@@ -633,19 +649,13 @@ h3:hover .ff-heading-copy,
   font-variant-numeric: tabular-nums;
 }
 
-.ff-mini-toc__txt {
-  display: block;
+/* #900: Der Titel-Eintrag ist ein Textknoten im <a> (anonymes Grid-Element
+   in Spalte 2) – ein eigener <span> kostete einen Knoten je Eintrag. Die
+   Zeilenumbruch-Regeln stehen deshalb am <a> selbst
+   (`overflow-wrap`, `hyphens`, `text-wrap: pretty` oben) und gelten für
+   beide Grid-Elemente. `min-width: 0` braucht nur das Zahl-Element. */
+.ff-mini-toc__num {
   min-width: 0;
-  max-height: none;
-  overflow: visible;
-  white-space: normal;
-  -webkit-line-clamp: unset;
-  -webkit-box-orient: unset;
-  overflow-wrap: break-word;
-  word-break: normal;
-  hyphens: manual;
-  -webkit-hyphens: manual;
-  text-wrap: pretty;
 }
 
 /* Unter 1280 px reicht der Seitenrand nicht mehr für eine Spalte neben dem
@@ -1485,6 +1495,13 @@ details.toc .inner a:focus-visible {
   height: 16px;
   color: var(--secondary);
   opacity: .55;
+  /* #900: sechs Punkte als CSS-Muster statt <svg> mit sechs <circle>.
+     Raster wie zuvor: 4,6 px zwischen den Spalten, 5,6 px zwischen den
+     Zeilen, Punktdurchmesser 2,3 px. */
+  background-image: radial-gradient(circle, currentColor 1.15px, transparent 1.35px);
+  background-size: 4.6px 5.6px;
+  background-position: 0 0;
+  background-repeat: repeat;
 }
 
 .ff-mini-toc__title {

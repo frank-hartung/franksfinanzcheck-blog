@@ -1004,6 +1004,54 @@ sync_und_push() {
 }
 
 # ========================================================================
+#  WAHRHEITSPFLICHT #900: Kein Commit trägt einen READY-Nachweis,
+#  dessen Bytes er nicht enthält
+#    data/reserve-readiness.json belegt jeden gate-fertigen Reserve-
+#    Entwurf mit der SHA-256 der exakten index.md. Schreibt ein Heiler
+#    danach noch am Entwurf (Disclosure, Keywords, Pin-Texte), zeigt der
+#    Nachweis auf Bytes, die es nicht mehr gibt. Der Fehler fällt erst
+#    im nächsten Gate auf – und liest sich dort wie ein Content-Problem.
+#
+#    Am 30.10.2026 passiert: Der Pinterest-Watchdog heilte drei
+#    zertifizierte Entwürfe und committete sie mit `git add -A`; der
+#    Nachweis war im selben Commit schon falsch.
+#
+#    Deshalb zieht dieser Haken den Nachweis VOR dem Commit zurück
+#    (`reserve_artifacts.py --withdraw-invalid`, keine Nachmessung) und
+#    nimmt ihn in den Commit. Der Bestand wird dadurch nicht kleiner –
+#    er wird nur nicht mehr behauptet. Nachgemessen wird dort, wo Hugo
+#    und Hunspell wirklich laufen: in der Reserve-Kette.
+#    Zweite Lehre aus demselben Tag: Fehlt PyYAML, gilt jede Zeile als
+#    „nicht prüfbar“. Ein Rückzug auf dieser Grundlage hat den Vorrat
+#    schon einmal von 6 auf 0 gesetzt. Exit 2 = Werkzeug fehlt = nichts
+#    zurückziehen, nur melden.
+# ========================================================================
+reserve_nachweis_nachziehen() {
+  local cert="data/reserve-readiness.json" ausgabe="" status=0
+  [ -f "$cert" ] || return 0
+  [ -f scripts/reserve_artifacts.py ] || return 0
+  if [ "${DRY_RUN:-0}" = "1" ]; then
+    echo "DRY_RUN – Reserve-Nachweis bleibt unangetastet."
+    return 0
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::warning::git_sync.sh: python3 fehlt – Reserve-Nachweis ungeprüft (kein Rückzug)."
+    return 0
+  fi
+  ausgabe="$(python3 scripts/reserve_artifacts.py --withdraw-invalid 2>&1)" || status=$?
+  if [ "$status" = "2" ]; then
+    echo "::warning::git_sync.sh: Reserve-Nachweis nicht prüfbar – nichts zurückgezogen: $ausgabe"
+    return 0
+  fi
+  if git diff --quiet -- "$cert"; then
+    return 0
+  fi
+  echo "git_sync.sh: Reserve-Nachweis zurückgezogen (keine Nachmessung, Nachzertifizierung in der Reserve-Kette):"
+  printf '%s\n' "$ausgabe" | head -n 2
+  git add -- "$cert"
+}
+
+# ========================================================================
 #  NOTBREMSE #864: Syntaxprüfung für die Dateien DIESES Commits
 #    $1 = staged | push
 #  Exit 0 = nichts zu prüfen oder alles gültig · 1 = kaputtes Skript
@@ -1076,6 +1124,15 @@ if [ "$PUSH_ONLY" = "1" ]; then
     sync_ok
     exit 0
   fi
+  # #900: Fremd-Workflows committen selbst (z. B. `git add -A`); ein
+  # falscher Nachweis in diesem Commit wird hier korrigiert, bevor er
+  # das Repository erreicht.
+  if reserve_nachweis_nachziehen; then
+    if ! git diff --cached --quiet -- data/reserve-readiness.json 2>/dev/null; then
+      git commit -q -m "chore(reserve): ungültige READY-Nachweise zurückgezogen (keine Nachmessung) #900"
+      echo "git_sync.sh: Nachweis-Korrektur als eigener Commit angehängt."
+    fi
+  fi
   syntax_notbremse push || exit 1        # #864: kein Push mit kaputtem Skript
   sync_und_push    || exit 1
   echo "git_sync.sh: Push erfolgreich."
@@ -1086,6 +1143,10 @@ fi
 # ========================================================================
 #  a) Vollständig: stagen, committen, rebasen, pushen
 # ========================================================================
+# #900: erst den Nachweis wahr machen, dann committen – der Rückzug
+# gehört in denselben Commit wie die Änderung, die ihn ausgelöst hat.
+reserve_nachweis_nachziehen || true
+
 staged=0
 for p in "$@"; do
   [ -n "$p" ] || continue

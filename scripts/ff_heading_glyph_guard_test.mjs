@@ -11,7 +11,9 @@
  *
  * Reparierter Zustand (fünf Wälle, s. ff-premium.js / ff-voice.js /
  * ff-summary-safety.js):
- *   1. Der Knopf trägt ein INLINE-SVG — kein Textknoten, kein „§“ im DOM,
+ *   1. Der Knopf ist ein leeres Bedienelement, das Symbol zeichnet CSS
+ *      (Maske) — kein Textknoten, kein „§“ im DOM, seit #900 auch kein
+ *      Inline-SVG mehr (vier Knoten je Überschrift waren zu viel),
  *   2. `data-ff-skip-read` + `aria-label` (Extraktor-Konvention, zugänglich),
  *   3. `.ff-heading-text` + `aria-labelledby` beschriftet die Überschrift
  *      nur mit dem redaktionellen Text (Screenreader, SEO),
@@ -128,18 +130,27 @@ t.group('1) ff-premium.js injiziert die Abschnitts-Knöpfe extraktionssicher');
   t.eq('Copy-Button an jeder Abschnitts-Überschrift', buttons.length, headings.length,
     `erwartet ${headings.length}, gefunden ${buttons.length}`);
 
+  // #900: Das Symbol zeichnet CSS (Maske auf `::before`) – der Knopf hat
+  // KEINE Kindknoten mehr. Vorher kostete svg + drei Pfade vier DOM-Knoten
+  // je Überschrift (bei 48 Überschriften 192 Elemente, das Budget riss).
+  // Der Vertrag ist jetzt strenger als vorher: null Kinder, null Text.
+  const style = fs.readFileSync(path.join(ROOT, 'assets', 'css', 'extended', 'z-premium-blog.css'), 'utf8');
+  const cssGlyph = /\.ff-heading-copy::before\s*\{[^}]*mask\s*:/.test(style);
+  const cssCheck = /\.ff-heading-copy\.ff-copied::before\s*\{[^}]*mask-image/.test(style);
+  t.ok('Symbol ist im Stylesheet definiert (Maske, Link + Haken)', cssGlyph && cssCheck);
+
   let markupOk = buttons.length > 0;
   let detail = '';
   buttons.forEach((b, i) => {
-    const okSvg = !!b.querySelector('svg');
+    const okNoKids = b.children.length === 0 && b.childNodes.length === 0;
     const okNoText = (b.textContent || '').trim() === '';
     const okAttrs = b.getAttribute('data-ff-skip-read') !== null
       && b.type === 'button'
       && b.getAttribute('aria-label') === 'Link zu diesem Abschnitt kopieren';
     const okPosition = b === b.parentElement.lastElementChild;
-    if (!okSvg || !okNoText || !okAttrs || !okPosition) { markupOk = false; detail = 'Button #' + i; }
+    if (!okNoKids || !okNoText || !okAttrs || !okPosition) { markupOk = false; detail = 'Button #' + i; }
   });
-  t.ok('Knopf trägt ein Symbol (Inline-SVG)', markupOk, detail);
+  t.ok('Knopf ist ein reines Bedienelement (0 Kindknoten, Symbol aus CSS)', markupOk, detail);
   t.ok('Knopf trägt KEIN Textzeichen (kein „§“ im DOM)', markupOk, detail);
   t.ok('Knopf trägt data-ff-skip-read (Extraktor-Konvention)', markupOk, detail);
   t.ok('Knopf bleibt zugänglich (type, aria-label)', markupOk, detail);

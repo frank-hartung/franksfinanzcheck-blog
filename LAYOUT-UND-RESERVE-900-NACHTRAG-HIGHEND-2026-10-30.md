@@ -1,0 +1,265 @@
+# #900 – Nachtrag: Regressions-Kette grün und Laufzeit-DOM unter Budget
+
+**Stand:** 30.10.2026 · **Vorgang:** Meldung
+[#900](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/900)
+(Nachtrag nach PR #959) · **Basis:** `main` @ `854652e` · **Beleg vor Ort:**
+Hugo 0.168.0 extended (`hugo --destination public.site`), 380 Seiten, jsdom
+(kein Browser im Sandkasten – siehe §4)
+
+---
+
+## 1. Auftrag
+
+Nach dem Abschluss von #900 (PR #959) blieben zwei Punkte offen. Beide sind
+hier erledigt, jeweils an der Ursache, mit Regressions-Test und ohne ein
+Budget, eine Schwelle oder einen Test zu lockern:
+
+1. **Die CI-Prüfung `regression` war rot** – fünf Tests, alle im Umfeld
+   „Artefakt und Inhalt sind auseinandergelaufen“.
+2. **Die DOM-Frühwarnung** war kein Wächter, sondern eine Notiz: Die längste
+   Seite lag zur Laufzeit bei **1401** Elementen – ein Element über der harten
+   Lighthouse-Grenze.
+
+---
+
+## 2. Teil 1 – die fünf roten Tests und ihre Ursachen
+
+### 2.1 Reserve-Nachweis: der Watchdog hat zertifizierte Entwürfe geheilt
+
+`test_reserve_artifacts` war rot, weil `data/reserve-readiness.json` drei
+Entwürfe mit einer SHA-256 belegte, die nicht mehr zu den Dateien passte.
+
+Beleg (Git-API, Objekt `8bdc510f`, „chore: Pinterest-Selbstheilung + Report“,
+Content-Bot, 30.10.2026T10:57:11Z, Parent `b624559b`): derselbe Commit enthält
+Änderungen an **40+ Dateien**, darunter
+
+* `2026-10-30-fenster-abdichten…`: `keywords` gekürzt (`"Abdichten"` entfernt),
+* `2026-10-30-energieeffiziente-geraete…`: `keywords` ersetzt,
+* `2026-10-30-gaspreiserhoehung…`: **zwei Zeilen eingefügt** –
+  `**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). …`
+
+Der Nachweis entstand um 10:36:34 UTC (Commit `6d5ddd09`), die Mutation um
+10:57:11 UTC. `data/spam_history.jsonl` nennt den Schreiber beim Namen:
+`{"ts": "2026-10-30T10:57:07Z", "module": "spam_guard", "action": "blog-fix",
+"slug": "2026-10-30-gaspreiserhoehung…", "rules": ["B3", "B5"]}` – also
+`spam_guard.fix_blog`, das die Transparenz-Zeile (B3) in einen **zertifizierten
+Reserve-Entwurf** schreibt; die `keywords` kamen aus den Pin-Heilern
+(`pinterest_seo_healer`, `pinterest_duplicate_guard`).
+
+**Drei Antworten, jede eine Klasse von Fehlern:**
+
+1. **Schreibschutz (die Ursache).** Neu:
+   `scripts/reserve_schreibschutz.py` – die eine Regel, die alle Hygiene-Heiler
+   teilen: `draft: true` **und** `reserve: true` ⇒ bytegebunden, nicht
+   anfassen. `spam_guard.fix_blog`, `pinterest_duplicate_guard` und
+   `pinterest_seo_healer` fragen vor jedem Schreibzugriff und melden den Fund
+   weiter („unangetastet – bytegebundener Reserve-Entwurf; Nachmessung ist
+   Sache der Reserve-Kette“). Die Heilung passiert beim Übergang in die
+   Auslieferung, wenn der Entwurf kein Reserve-Entwurf mehr ist. Der Schutz ist
+   rein textuell (kein PyYAML), damit er auch ohne Zusatzpakete greift.
+2. **Wahrheitspflicht beim Commit (der Sicherheitsgurt).** `scripts/git_sync.sh`
+   – der einzige Weg, auf dem Bots committen – zieht ungültige READY-Nachweise
+   **vor** dem Commit zurück (`reserve_artifacts.py --withdraw-invalid`, keine
+   Nachmessung) und nimmt den Rückzug in denselben Commit. Im Modus
+   `--push-only` (der Workflow hat selbst committet) reist die Korrektur als
+   eigener Commit hinterher. Kein Commit trägt mehr einen Nachweis, dessen
+   Bytes er nicht enthält.
+3. **„Nicht prüfbar“ ist nicht „falsch“.** Beim Nachvollziehen ist ein echter
+   zweiter Fehler aufgefallen: `--withdraw-invalid` ohne PyYAML hat **alle**
+   Zeilen als „Entwurf nicht prüfbar“ gewertet und den Vorrat von 6 auf 0
+   gesetzt (im Sandkasten reproduziert und rückgängig gemacht). Der destruktive
+   Pfad prüft jetzt zuerst die Werkzeuge (`require_metadata_support()`) und
+   bricht mit Exit 2 ab, ohne eine Zeile anzufassen.
+
+**Bestand:** Die drei Entwürfe sind wieder **bytegleich** zum Nachweis
+(SHA-256 geprüft: `bdbb8f37…`, `b3d6df66…`, `d74dfcaa…`; Bytes über die
+Git-API aus `6d5ddd09` zurückgeholt, kein Nachweis erfunden). `reserve_artifacts
+--withdraw-invalid` meldet „3 → 0 zurückgezogen“ nicht mehr, weil es nichts
+zurückzuziehen gibt.
+
+### 2.2 FF5: Abbildung-Unterschriften (21 Befunde)
+
+`scripts/abbildungen_ableiten.py` neu ausgeführt – 8 `index.md`, 6 SVGs. Die
+Regeneration wurde **einzeln gelesen**, nicht blind übernommen:
+
+| Datei | Änderung | Bewertung |
+|---|---|---|
+| `2026-08-17-kostenloses-girokonto…` | Satz-Link zu `wlan-verstaerker-vs-mesh` aus der Unterschrift entfernt | **Fehler behoben** – der Link hing an der Wendung „was brauchst du wirklich?“ und zeigte auf ein fremdes Thema |
+| `2026-08-14-gasrechnung-senken…` | Unterschrift-Link zu `2026-09-20-gasrechnung-senken…` entfernt | **Fehler behoben** – Fremdlink mitten im Satz; die zwei echten Textlinks auf denselben Artikel bleiben (Z. 38, 58) |
+| `2026-08-24-preisgarantie-gas…` | Titel in der Unterschrift „Gaspreisgarantie“ → „Preisgarantie Gas“ | **vereinheitlicht** – Unterschrift nannte einen anderen Titel als der Beitrag (FF5-Kern) |
+| `2026-08-19-energiediebe…`, `2026-08-20-dsl…`, `2026-08-26-dns…` | `alt`, Unterschrift und Gliederung aus dem aktuellen Inhalt | **vereinheitlicht** – u. a. „DNS-DNS-Server“ → „DNS-Server“, abgeschnittene Aufzählungen neu umbrochen |
+| 6 SVGs | neu gerendert (Gliederung/Merkkarte) | Folgen der Textkorrekturen; `ff_inhalts_wache.py` → 0 Befunde, `abbildungen_ableiten.check()` → `[]` |
+
+### 2.3 Fachprüfungs-Register
+
+`scripts/fachpruefung_register.py` neu erzeugt (19 Beiträge), `--check` →
+„✅ Fachprüfungs-Register aktuell“.
+
+### 2.4 W11: Pillar verlinkte einen demotierten Entwurf
+
+`content/pillar/versicherungen/index.md` verlinkte
+`2026-08-18-wohngebaeudeversicherung-vergleich…` – der Beitrag wurde am
+28.10. demotiert (`cadence_demoted`, `cadence_grund: "ymyl-review: E17: Text/
+Quellen wurden nach der Freigabe verändert"`). Ein Link auf einen Entwurf ist
+ein totes Ziel. Statt den Entwurf zu „promoten“ (er hat keine YMYL-Freigabe)
+ist der Link ersetzt worden durch eine Anleitung, die ohne Ziel auskommt
+(„Prüf die vier Punkte in dieser Reihenfolge – erst Elementar, dann grobe
+Fahrlässigkeit, dann Neuwert, zuletzt der Selbstbehalt“). `BestandTest` bleibt
+unverändert streng: live-Artikel **müssen** verlinkt sein, Entwürfe **dürfen**
+nicht.
+
+### 2.5 Was ausdrücklich NICHT getan wurde
+
+* Kein Test gelockert, keine Schwelle gesenkt, kein Befund umetikettiert.
+* Der Nachweis ist nicht „nachzertifiziert“ worden (das wäre ein Freibrief für
+  die Bytes, die niemand gemessen hat) – die Bytes sind zurückgeholt worden.
+* Die Drift ist nicht weggeräumt, sondern abgestellt: Schreibschutz plus
+  Wahrheitspflicht beim Commit.
+
+---
+
+## 3. Teil 2 – Laufzeit-DOM: 1401 → 1195 ohne Pixel-Änderung
+
+### 3.1 Der Befund, exakt gemessen
+
+`scripts/dom_audit.py` (statisch, ausgelieferte HTML) war grün: schwerste Seite
+**1058** Elemente, Frühwarnung 1100. Zur Laufzeit sieht der Browser mehr. Gemessen
+mit jsdom (echte DOM, dieselben lokalen Skripte, kein Modell):
+
+```
+/posts/2026-09-24-internet-dsl-update-…   ausgeliefert 1033  →  zur Laufzeit 1401
+```
+
+**1401** = ein Element über der harten Lighthouse-Grenze (1400) und 51 über der
+Frühwarnung – und der Lauf blieb grün, weil die Frühwarnung nur eine Notiz war.
+Zuwachs: **368** Elemente, davon 288 aus einer einzigen Stelle:
+
+```
+je Überschrift  1 × span.ff-heading-text
+              + 1 × button.ff-heading-copy
+              + 1 × svg + 3 × path          ← vier Knoten für ein Symbol
+              = 6 Elemente × 48 Überschriften = 288
+```
+
+Dazu: Titel-`<span>` je TOC-Eintrag, ein Zieh-Griff als `<svg>` mit sechs
+`<circle>`, Verzeichnis-Gerüst.
+
+### 3.2 Die Heilung: Symbol ins Stylesheet, nicht in den DOM
+
+| Stelle | vorher | jetzt | Elemente |
+|---|---|---|---|
+| Kopier-Symbol | `<svg>` + 3 `<path>` im Knopf | CSS-Maske auf `::before` (identische Pfade, 15 px, `currentColor`) | −4 je Überschrift |
+| Kopier-Haken | zweites `<svg>` per `innerHTML` | Klasse `.ff-copied` + zweite Maske | −1 im Klickzustand |
+| TOC-Titel | `<span class="ff-mini-toc__txt">` | Textknoten im `<a>` = zweites CSS-Grid-Element | −1 je Eintrag |
+| Zieh-Griff | `<svg>` + 6 `<circle>` | `radial-gradient` (4,6 × 5,6 px Raster, wie zuvor) | −7 je Seite |
+
+Ergebnis (alle 380 Seiten gemessen):
+
+| Seite | vorher | jetzt | Luft bis 1400 |
+|---|---|---|---|
+| `2026-09-24-internet-dsl-update-…` (48 Überschriften) | **1401** | **1195** | 205 |
+| `2026-08-26-tagesgeld-zinsen-…` (27) | 1278 | 1158 | 242 |
+| schwerste Seite über alle 380 Seiten | 1401 | 1195 | 205 |
+
+Keine Seite liegt über 1200; die Geometrie des Symbols ist unverändert
+(dieselben Pfade, dieselbe Strichstärke, dieselbe Farbe `currentColor`, gleiche
+15 px), der Haken ist derselbe Pfad als Zustand.
+
+> **Ehrlichkeit zur Grenze des Belegs:** Im Sandkasten gibt es keinen Browser
+> (kein Chromium, kein Playwright-Download). Die Zahlen oben sind mit jsdom
+> gemessen – einer echten DOM-Implementierung, die dieselben lokalen Skripte
+> ausführt, aber kein Layout rechnet. **CLS und die Pixelgleichheit** belegen
+> deshalb die CI-Läufe `e2e/design-shots.mjs`, `e2e/design-metrics.mjs`
+> (hell/dunkel) und Lighthouse – sie laufen im PR und sind Teil der Abnahme.
+> Was hier belegt ist: die DOM-Masse und die Identität der gezeichneten Pfade.
+
+### 3.3 Damit es nicht zurückkommt
+
+1. **Messung mit Grenze:** `scripts/dom_laufzeit_messung.mjs` misst **jede**
+   Seite gegen **1200** (Ziel: 200 Elemente Luft unter 1400) und ist rot
+   (Exit 1), wenn eine Seite darüber liegt; Exit 2 bei fehlendem Bau oder
+   fehlendem jsdom (fail-closed, keine stille Übersprung-Meldung). Selbsttest
+   ohne Bau: `--selftest`.
+2. **Verdrahtung:** Der `layout-ai`-Lauf führt die Messung nach dem Bau aus;
+   `LAUFZEIT_EXIT` fließt in den Schluss-Schritt („Lauf rot stellen“) ein –
+   fehlt der Wert, ist der Lauf rot. `static/premium/**` steht jetzt in beiden
+   Pfadlisten (push und pull_request), damit eine Änderung an der Quelle die
+   Messung auslöst.
+3. **Vertrag an der Quelle:**
+   `scripts/tests/test_dom_element_vertrag.py` prüft, dass je Überschrift
+   höchstens **zwei** Elemente entstehen, dass kein Symbol per `innerHTML`
+   zurückkehrt, dass der TOC-Titel ein Textknoten bleibt, dass das Stylesheet
+   Maske und Haken liefert und dass Messung und Pfade verdrahtet bleiben.
+4. **Wache am fertigen DOM:** Die jsdom-„§“-Wache
+   (`scripts/ff_heading_glyph_guard_test.mjs`) prüft jetzt **null** Kindknoten
+   je Kopierknopf – strenger als vorher (vorher genügte „irgendein `<svg>`“).
+   Auch `scripts/ff_voice_functional_test.mjs` prüft den Zustand statt eines
+   zweiten SVG; `scripts/heading_anchor_guard.py` hat eine neue Schicht
+   „1b) STIL“ für die Maske (42/42 Prüfungen).
+
+### 3.4 Was NICHT getan wurde
+
+* Das Budget wurde **nicht** erhöht: 1400 bleibt die harte Grenze, 1350 die
+  Frühwarnung; die neue Messung ist mit 1200 **strenger**.
+* Kein Feature wurde gestrichen: Kopierknopf, Haken-Rückmeldung,
+  Mini-Verzeichnis, Zieh-Griff und Fortschritt sind alle noch da.
+* Keine `<div>`-Suppe, keine `aria`-Verschlechterung: `data-ff-skip-read`,
+  `aria-labelledby`, der leere Knopf (kein Textzeichen) und die
+  Fokus-/Tastaturbedienung sind unverändert.
+
+---
+
+## 4. Belege (Befehle und Ausgaben)
+
+```text
+$ python3 scripts/ff_inhalts_wache.py
+Inhalts-Wache FF1–FF5: 0 Befund(e)
+
+$ python3 scripts/fachpruefung_register.py --check
+✅ Fachprüfungs-Register aktuell
+
+$ python3 scripts/reserve_artifacts.py --check
+✅ Reserve-Snapshot vollständig: eindeutiges JSON, echte READY-Bytes und Redaktionsvertrag.
+
+$ python3 scripts/reserve_artifacts.py --withdraw-invalid        # ohne PyYAML
+🛑 Nachweise nicht zurückgezogen: Nachweisprüfung nicht möglich: No module named 'yaml'   [Exit 2]
+
+$ python3 -m unittest scripts.tests.test_reserve_schreibschutz scripts.tests.test_reserve_artifacts
+Ran 45 tests … OK
+
+$ python3 -m unittest scripts.tests.test_git_sync          # 51 Tests inkl. 3 neue
+Ran 51 tests … OK
+
+$ python3 -m unittest scripts.tests.test_versicherungs_cluster_verlinkung
+Ran 6 tests … OK
+
+$ python3 scripts/heading_anchor_guard.py
+42/42 Prüfungen bestanden        ✅
+
+$ node scripts/ff_heading_glyph_guard_test.mjs
+49/49 Prüfungen bestanden        ✅
+
+$ node scripts/ff_voice_functional_test.mjs
+265/265 Prüfungen bestanden      ✅
+
+$ node scripts/dom_laufzeit_messung.mjs --dir public.site --top 5
+Laufzeit-DOM: 380 Seiten gemessen
+   1195  /posts/2026-09-24-internet-dsl-update-…   (ausgeliefert 1033, +162, 48 Überschriften)
+   1158  /posts/2026-08-26-tagesgeld-zinsen-…
+✅ Alle Seiten unter 1200 Laufzeit-Elementen – schwerste Seite 1195: 5 Elemente Luft bis zur Zielmarke, 205 bis zur harten Grenze 1400.
+```
+
+---
+
+## 5. Was der Betrieb davon hat
+
+| Symptom | Ursache | Heilung | Wächter |
+|---|---|---|---|
+| `regression` rot: Reserve-Snapshot | Hygiene-Heiler schrieben zertifizierte Entwürfe nach der Messung | Schreibschutz + Rückzug beim Commit | `test_reserve_schreibschutz.py`, `ReserveNachweisWahrheitTests` |
+| Vorrat fiel auf 0 (einmalig) | Rückzug ohne PyYAML wertete „unprüfbar“ als „falsch“ | `require_metadata_support()`, Exit 2 | `test_missing_parser_never_withdraws` |
+| FF5-Unterschriften falsch | Abbildungen nicht neu abgeleitet | Regeneration, einzeln gelesen | `ff_inhalts_wache.py` (FF5) |
+| Pillar-Link ins Leere (W11) | Beitrag demotiert, Link blieb | Link ersetzt, Bestandstest unverändert | `test_versicherungs_cluster_verlinkung` |
+| Laufzeit-DOM 1401 | 4 DOM-Knoten je Symbol, Titel-`<span>`, Griff-SVG | CSS-Maske, Textknoten, `radial-gradient` | `dom_laufzeit_messung.mjs` (1200), `test_dom_element_vertrag.py` |
+
+**Runbook:** `docs/LAYOUT-AUTOMATISIERUNG.md` § „Laufzeit-DOM: Ziel 1200“ ·
+`docs/publication-reliability.md` § „Zertifikats-Wahrheit und Schreibschutz“.

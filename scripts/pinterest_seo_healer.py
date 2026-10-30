@@ -41,6 +41,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
 from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
+import reserve_schreibschutz as schutz  # noqa: E402  – #900
 
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-SEO-HEALER-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -534,6 +535,9 @@ def load_articles():
             "content": content,
             "body": body,
             "fm": fm,
+            # #900: `draft: true` + `reserve: true` = bytegebundener
+            # Reserve-Entwurf. Der Heiler meldet, schreibt aber nicht.
+            "reserve": schutz.ist_bytegebunden(content),
         })
     return arts
 
@@ -599,6 +603,8 @@ def audit_article(a: dict) -> list[str]:
 
 def heal_article(a: dict) -> tuple[bool, list[str]]:
     """Heilt einen Artikel. Liefert (changed, actions)."""
+    if a.get("reserve"):
+        return False, [schutz.schutzvermerk(a.get("slug", "?"), "pinterest_seo_healer.py")]
     actions = []
     content = a["content"]
     title = a["title"]
@@ -882,6 +888,9 @@ def _ensure_unique_pin_texts(articles: list[dict]) -> int:
         existing = set(desc_map.keys())
         # Behalte ersten, fixe rest
         for art in group[1:]:
+            if art.get("reserve"):
+                print("  ⏸ " + schutz.schutzvermerk(art["slug"], "pinterest_seo_healer.py"))
+                continue
             new_desc = gen_unique_desc(art, existing)
             # Schreibe
             new_content = fm_set(art["content"], "pin_description", new_desc)
@@ -904,6 +913,9 @@ def _ensure_unique_pin_texts(articles: list[dict]) -> int:
             continue
         existing = set(title_map.keys())
         for art in group[1:]:
+            if art.get("reserve"):
+                print("  ⏸ " + schutz.schutzvermerk(art["slug"], "pinterest_seo_healer.py"))
+                continue
             new_title = gen_unique_title(art, existing)
             new_content = fm_set(art["content"], "pin_title", new_title)
             if new_content != art["content"]:
@@ -1084,6 +1096,8 @@ def main() -> int:
         print("== Cover-Alt Final-Sync ==")
         for a in load_articles():
             if not a["title"]:
+                continue
+            if a.get("reserve"):
                 continue
             bad = (
                 not a["alt"]

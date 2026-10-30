@@ -184,3 +184,6 @@ data/alt_texte/*.tmp
 data/cwv/feld/
 data/cwv/labor/
 .cache/mcp/
+
+# #900: temporäre Hugo-Builds für Messläufe (nie committen)
+public.site/

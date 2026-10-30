@@ -8,7 +8,7 @@ tags: ["Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken"]
+keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken", "Abdichten"]
 pin_title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 pin_description: "*Werbung | Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt. Mehr Spartipps auf FranksFinanzcheck! #fenster #abdichten #zugluft"
 ai_generated: true
