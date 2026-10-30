@@ -160,6 +160,14 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
 # Pflicht, damit eine künftige Regel nicht zwischen „gedeckt“ und „vergessen“
 # fällt.
 AUSNAHMEN: dict[str, str] = {
+    # #912: Ein fachlicher Befund ist keine automatisch heilbare Formatregel.
+    # Die Faktenfrische recherchiert und korrigiert, darf aber einen offenen
+    # Befund nicht durch einen Lauf-/Quellenstempel oder Modellantwort schließen.
+    # Geschlossen wird nur über die fassungsgebundene Redaktionsakte im Ledger.
+    "fakten_befund_failures":
+        "Offene Fachbefunde erfordern Recherche und eine fassungsgebundene "
+        "redaktionelle Entscheidung (data/faktenfrische_entscheidungen.yaml). "
+        "Kein Auto-Heiler darf den Befund löschen oder eine Freigabe erfinden.",
     # Werbe-Offenlegung O1–O7 (28.09.2026). Bewusst OHNE Heiler in der
     # Reserve-Kette: Die Kennzeichnung schreibt kein Artikeltext, sondern das
     # Layout (layouts/_partials/ff_offenlegung.html) aus dem Partnerregister

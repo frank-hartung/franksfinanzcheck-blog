@@ -1,4 +1,5 @@
 """Offline-Regressionen für externe Daten und die Schreibgrenze."""
+import hashlib
 import json
 import tempfile
 import unittest
@@ -32,7 +33,8 @@ class FaktenfrischeRobustheit(unittest.TestCase):
 
     def test_invalid_provider_response_falls_back(self):
         art = {"titel": "Test", "beschreibung": "", "body": ""}
-        good = json.dumps({"befunde": [], "quellen": []})
+        good = json.dumps({"artikel_sha256": ff.ledger.pruef_hash(art),
+                               "befunde": [], "quellen": []})
         with patch.object(ff, 'verfuegbare_anbieter', return_value=['a', 'b']), patch.object(ff.llm_client, 'model_for', return_value='model'), patch.object(ff.llm_client, 'chat', side_effect=['{}', good]):
             self.assertIn('geprüft (b:', ff.claude_fachpruefung(art, self.dossier, self.cfg)[2])
 
@@ -67,7 +69,8 @@ class FaktenfrischeRobustheit(unittest.TestCase):
 
     def test_incomplete_transport_falls_back_and_redacts_errors(self):
         art = {"titel": "Test", "beschreibung": "", "body": ""}
-        good = json.dumps({"befunde": [], "quellen": []})
+        good = json.dumps({"artikel_sha256": ff.ledger.pruef_hash(art),
+                               "befunde": [], "quellen": []})
         with patch.object(ff, 'verfuegbare_anbieter', return_value=['gemini', 'groq']), \
              patch.object(ff.llm_client, 'model_for', return_value='model'), \
              patch.object(ff.llm_client, 'chat', side_effect=[RuntimeError('secret'), good]) as chat:
@@ -107,6 +110,52 @@ class FaktenfrischeRobustheit(unittest.TestCase):
             queue = json.loads(Path(ff.QUEUE_PFAD).read_text(encoding='utf-8'))
             self.assertEqual([item['slug'] for item in queue['offen']], ['test'])
             self.assertEqual(queue['laeufe'][0]['fachpruefung'], 'Fehler: Ausfall')
+
+    def test_findings_survive_a_later_empty_review(self):
+        art = {"slug": "test", "titel": "Test", "beschreibung": "", "body": "Preis.",
+               "faktencheck": None, "fm": "title: Test\n", "pfad": "test/index.md"}
+        geo = {"prozent": 0, "offen": []}
+        due = {"faellig": True, "prio": 0, "grund": "neu", "frist": None, "restlaufzeit": None}
+        dossier = dict(self.dossier, fehler=[], begriffe=[], kanaele=[], erzeugt="now")
+        finding = {"typ": "praezision", "text": "Preis ohne Beleg", "beleg": ""}
+        with tempfile.TemporaryDirectory() as tmp, \
+             patch.object(ff.sys, "argv", ["faktenfrische.py", "--apply"]), \
+             patch.object(ff, "selftest", return_value=0), \
+             patch.object(ff, "lade_config", return_value=self.cfg), \
+             patch.object(ff, "alle_artikel", return_value=[dict(art)]), \
+             patch.object(ff, "geo_reife", return_value=geo), \
+             patch.object(ff, "faelligkeit", return_value=due), \
+             patch.object(ff, "budget_fuer_lauf", return_value=(1, {"quelle": "test"})), \
+             patch.object(ff, "_kapazitaet_nachrechnen", return_value={}), \
+             patch.object(ff, "recherchiere", return_value=dossier), \
+             patch.object(ff, "claude_fachpruefung", side_effect=[
+                 ([finding], [self.dossier["treffer"][0]], "geprüft (test)"),
+                 ([], [], "geprüft (test)")]), \
+             patch.object(ff, "artikel_anwenden", return_value=[]) as apply, \
+             patch.object(ff, "dossier_schreiben"), patch.object(ff, "report_schreiben"), \
+             patch.object(ff.ledger, "entscheidungen_laden", return_value={}), \
+             patch.object(ff, "QUEUE_PFAD", str(Path(tmp) / "queue.json")), \
+             patch.object(ff, "HISTORIE_PFAD", str(Path(tmp) / "history.jsonl")):
+            self.assertEqual(ff.main(), 0)
+            first = json.loads(Path(ff.QUEUE_PFAD).read_text(encoding="utf-8"))
+            self.assertEqual(len(first["fachbefunde"]), 1)
+            self.assertEqual(ff.main(), 0)
+            second = json.loads(Path(ff.QUEUE_PFAD).read_text(encoding="utf-8"))
+            self.assertEqual(second["laeufe"][0]["befunde"], [])
+            self.assertEqual(second["fachbefunde"], first["fachbefunde"])
+            self.assertEqual(second["uebersicht"]["befunde"], 1)
+            self.assertEqual(apply.call_args_list[0].args[1], [])
+
+    def test_broken_ledger_stops_before_article_writes(self):
+        with tempfile.TemporaryDirectory() as tmp, \
+             patch.object(ff.sys, "argv", ["faktenfrische.py", "--apply"]), \
+             patch.object(ff, "selftest", return_value=0), \
+             patch.object(ff, "lade_config", return_value=self.cfg), \
+             patch.object(ff, "alle_artikel") as inventory, \
+             patch.object(ff, "QUEUE_PFAD", str(Path(tmp) / "queue.json")):
+            Path(ff.QUEUE_PFAD).write_text("{kaputt", encoding="utf-8")
+            self.assertEqual(ff.main(), 2)
+            inventory.assert_not_called()
 
     def test_feed_dates_are_real_dates(self):
         self.assertEqual(ff.datum_aus_feed('2026-02-30'), '')

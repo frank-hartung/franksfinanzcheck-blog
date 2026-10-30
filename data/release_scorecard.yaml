@@ -180,6 +180,12 @@ checks:
     entscheidung: auto
     quelle: scripts/faktenfrische.py faelligkeit() (SSOT-Intervalle)
     pruefung: "Faktencheck-Alter innerhalb des Intervalls (saisonal 30 / YMYL 45 / Standard 90)"
+  - id: F4-fachbefund
+    dimension: faktenalter
+    wirkung: blockiert
+    entscheidung: human
+    quelle: scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)
+    pruefung: "kein offener Fachbefund ohne menschliche, fassungsgebundene Entscheidung"
   - id: F2-stand-kennzeichnung
     dimension: faktenalter
     wirkung: blockiert

@@ -259,6 +259,24 @@ def seo_audit_failures():
     return failed, ("; ".join(sitemap_issues) if sitemap_issues else None)
 
 
+def fakten_befund_failures(candidates=None, *, queue_path=None, decisions_path=None):
+    """Offene Fachbefunde blockieren unabhängig vom Faktenalter (#912)."""
+    try:
+        import faktenfrische_befund_ledger as ledger
+        wanted = set(candidates) if candidates is not None else None
+        failed = {}
+        qp = Path(queue_path) if queue_path else Path(BLOG_DIR) / "data" / "faktenfrische_queue.json"
+        dp = Path(decisions_path) if decisions_path else Path(BLOG_DIR) / "data" / "faktenfrische_entscheidungen.yaml"
+        for entry in ledger.offene_befunde(qp, dp):
+            slug = entry["slug"]
+            if wanted is None or slug in wanted:
+                failed.setdefault(slug, []).append(
+                    f"{entry['id']} ({entry['typ']}): {entry['text']}")
+        return failed, None, False
+    except Exception as exc:
+        return {}, f"Fachbefund-Ledger nicht beweisbar: {exc}", True
+
+
 def faktenfrische_failures(candidates=None, stichtag=None):
     """Faktenstand der Veröffentlichungskandidaten fail-closed prüfen.
 
@@ -940,6 +958,11 @@ def main():
     len_fail, len_warn = check_length_failures()
     seo_fail, seo_warn = seo_audit_failures()
     facts_fail, facts_warn, facts_tool_error = faktenfrische_failures(candidates)
+    befund_fail, befund_warn, befund_tool_error = fakten_befund_failures(candidates)
+    for slug, gruende in befund_fail.items():
+        facts_fail.setdefault(slug, []).extend(gruende)
+    facts_tool_error = facts_tool_error or befund_tool_error
+    facts_warn = facts_warn or befund_warn
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     intent_fail, intent_warn, intent_tool_error = affiliate_intent_failures(candidates)

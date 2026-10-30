@@ -22,7 +22,7 @@ Recherche, die zu einem prüfbaren Beleg im Artikel führt.** Das ist
 | Takt | Auslöser | Befehl | Wo |
 |---|---|---|---|
 | **Erstellung** | jeder neue Artikel (kein `faktencheck` im Frontmatter) | `faktenfrische.py --neu --apply` | `content-engine-v2.yml`, Phase 3 |
-| **Bestand** | Fälligkeit nach Risikoklasse | `faktenfrische.py --apply` | `faktenfrische.yml`, **täglich** 06:40 MESZ |
+| **Bestand** | Fälligkeit nach Risikoklasse | `faktenfrische.py --apply` | `faktenfrische.yml`, **täglich** 04:40 UTC (06:40 MESZ / 05:40 MEZ) |
 
 Fälligkeit (SSOT `data/agent_reach/faktenfrische.yaml → intervalle`):
 
@@ -59,8 +59,8 @@ Am 27.10.2026 war genau das der Fall:
 |---|---|---|
 | Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
 | Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 3 (elastisch bis 10) |
-| Deckung | **33 %** | 116 % (bei Spitzen bis zu 388 %) |
-| Rückstand | +12 Seiten/Woche, nie abbaubar | in 5 Tagen abgebaut |
+| Deckung | **33 %** | 155 % beim aktuellen Empfehlungsbudget 4 |
+| Rückstand | +12 Seiten/Woche, nie abbaubar | im Kalenderplan in 3 Tagen abgebaut |
 
 Die Intervalle wurden **nicht** angefasst. Weniger messen wäre keine Heilung.
 Es wird mehr geliefert:
@@ -88,6 +88,68 @@ python3 scripts/faktenfrische_kapazitaet.py            # Bedarf, Angebot, Abbaup
 python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn nicht abbaubar
 python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
 ```
+
+### Nachzug 30.10.2026: Kalender statt Wochenmittel (#912)
+
+Ein Wochendurchschnitt kann keine tägliche Frist beweisen. Die Simulation läuft
+daher über **120 echte Kalendertage**, arbeitet nur an cron-Tagen und darf
+ein Tagesbudget nicht ansparen. Auswahl und Simulation verwenden denselben
+EDF-Schlüssel. Nach jeder Prüfung entsteht aus dem tatsächlichen Prüftag die
+nächste Frist; auch diese Folgetermine werden geprüft. Verspätung wird vor
+der Arbeit des Tages gemessen, nicht erst danach weggeschrieben.
+
+Die Wache und der Scorecard-Bericht prüfen bei `auto_skalierung: true` das
+**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel 3 bleibt als
+statische Untergrenze sichtbar; aktuell ergibt die Kalendersimulation 4.
+Das ist ein Plan, kein Nachweis erfolgreich ausgeführter CI-Läufe. Ausfälle
+und nicht bestandene Prüfungen bleiben eigene, sichtbare Befunde.
+
+## Prüfdatum ist keine inhaltliche Freigabe (#912)
+
+`faktencheck` beantwortet nur: Wann wurde recherchiert? Es beantwortet nicht:
+Sind alle gefundenen fachlichen Mängel entschieden? Deshalb gelten zwei
+unabhängige Verträge:
+
+- **F1 – Faktenalter:** Ist die Recherche innerhalb des Risikointervalls?
+- **F4 – Fachbefund:** Gibt es noch einen offenen, nicht redaktionell
+  entschiedenen Befund? F4 blockiert Publish-Gate und Release-Scorecard über
+  denselben Collector `publish_gate.fakten_befund_failures()`.
+
+Befunde liegen dauerhaft unter `fachbefunde` in
+`data/faktenfrische_queue.json`. Ein späterer Lauf kann sie ergänzen, aber
+nicht durch eine leere Antwort löschen. Die Queue wird atomar ersetzt.
+Alt-Befunde aus `laeufe[].befunde` werden beim Lesen migriert. Fehlt dabei die
+frühere Fassungsbindung, bleiben sie als `legacy-unbekannt` offen, bis eine
+Neuprüfung eine echte Fassung zuordnet und die Redaktion entscheidet.
+
+Die Fachprüfung erhält den **vollständigen Text** und die mitgeprüften
+Aussageflächen im Frontmatter. Sie muss deren SHA-256 zurückgeben; eine
+Antwort zu einer anderen Fassung wird verworfen. Der Hash umfasst Titel,
+Beschreibung, Kurzantwort, Quellen und Text, nicht technische Datumsfelder.
+Bei offenen Befunden wird keine neue Quellenkette neben den unentschiedenen
+Text geschrieben.
+
+### Befund redaktionell schließen
+
+1. Text und Belege prüfen, Mängel korrigieren oder den Befund fachlich begründet
+   zurückweisen. Keine automatische Textumschrift und keine Schein-Freigabe.
+2. Die endgültige Fassung hashen:
+
+   ```bash
+   python3 scripts/faktenfrische_befund_ledger.py \
+     --fassung content/posts/<slug>/index.md
+   python3 scripts/faktenfrische_befund_ledger.py   # offene Befund-IDs
+   ```
+
+3. Einen Eintrag in `data/faktenfrische_entscheidungen.yaml` ergänzen:
+   `slug`, `befund_id`, `fassung_sha256`, `entschieden_von`, `begruendung`.
+   Die Entscheidung gilt nur für genau diese Fassung. Ungültige Signaturen,
+   Duplikate und beschädigte Register sind Werkzeugfehler, niemals Grün.
+4. Publish-Gate/Scorecard erneut messen. Erst wenn auch alle anderen Checks
+   grün sind, darf der zugehörige Vorgang über den PR-Schließpfad enden.
+
+Ein neues Prüfdatum allein schließt F4 nicht. Ebenso darf ein Mensch die
+Entscheidung nicht stellvertretend durch eine Maschine erfinden lassen.
 
 ## Was die Maschine schreiben darf – und was nicht
 
@@ -168,7 +230,8 @@ python3 scripts/faktenfrische.py --scope pillar --apply   # nur Ratgeberseiten
 python3 scripts/faktenfrische.py --scope posts --apply    # nur Blogartikel
 python3 scripts/faktenfrische.py --file content/posts/<slug>/index.md
 python3 scripts/faktenfrische.py --offline       # ohne Netz: nur GEO-Reife
-python3 scripts/faktenfrische.py --selftest      # 20 eingefrorene Fälle
+python3 scripts/faktenfrische.py --selftest      # 23 eingefrorene Fälle
+npm run test:faktenfrische                       # Selbsttests + Offline-Regressionen
 npm run faktenfrische                            # = Trockenlauf
 ```
 

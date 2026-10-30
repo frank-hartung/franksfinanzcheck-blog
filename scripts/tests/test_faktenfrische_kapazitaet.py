@@ -55,7 +55,7 @@ def cfg_probe(budget: int = 3, limit: int = 10) -> dict:
         "budget": {"max_artikel_pro_lauf": budget, "auto_skalierung": True,
                    "hartes_limit_pro_lauf": limit},
         "planung": {"vorlauf_tage": 7, "nachhol_frist_tage": 7,
-                    "horizont_tage": 60, "min_deckung_prozent": 110},
+                    "horizont_tage": 120, "min_deckung_prozent": 110},
     }
 
 
@@ -152,7 +152,8 @@ class DeckungsTest(unittest.TestCase):
     def test_unterdeckte_kadenz_wird_rot_gerechnet(self):
         # 60 überfällige Seiten (Bedarf 2,0/Tag) gegen 2 Läufe/Woche mit 3:
         # 0,86/Tag = 43 % – dieselbe Klasse wie der Produktionsbefund.
-        p = kap.plan(ueberfaellig(60), cfg_probe(), 3, 2 / 7, PROBETAG)
+        p = kap.plan(ueberfaellig(60), cfg_probe(), 3, 2 / 7, PROBETAG,
+                     lauftage=kap.lauf_tage(["40 4 * * 2,4"], PROBETAG, 120))
         self.assertEqual(round(p["deckung_prozent"]), 43)
         self.assertFalse(p["rueckstand_abgebaut"])
 
@@ -261,7 +262,7 @@ class DossierSerialisierungTest(unittest.TestCase):
                 md = ff.dossier_schreiben(art, dossier, geo, faellig, [],
                                           trocken=False)
                 self.assertTrue(md.endswith(".md"))
-                daten = json.load(open(md[:-3] + ".json", encoding="utf-8"))
+                daten = json.loads(Path(md[:-3] + ".json").read_text(encoding="utf-8"))
             finally:
                 ff.DOSSIER_DIR = alt
         self.assertEqual(daten["faellig"]["frist"],
