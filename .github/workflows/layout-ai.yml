@@ -31,10 +31,24 @@
 #    3. Grün schließt das offene Issue. Ein Issue, das nach der Heilung
 #       offen bleibt, ist ein Alarm ohne Schließpfad (Regel #272).
 #
-#  Läuft: wöchentlich (Mo 09:00 MESZ), manuell – und bei Pull Requests,
-#  die Layout/Struktur anfassen (layouts/, assets/css/, die Audit-Skripte).
-#  KEIN push-Trigger: sonst würde jeder Deploy-Commit den Audit starten und
-#  die Auto-Heilung könnte sich selbst anstoßen (Endlosschleife).
+#  Läuft: wöchentlich (Mo 09:00 MESZ), manuell – bei Pull Requests, die
+#  Layout/Struktur anfassen (layouts/, assets/css/, die Audit-Skripte) – und
+#  bei Merges auf `main`, die dieselben Pfade betreffen.
+#
+#  WARUM DER PUSH-TRIGGER (Meldung #900, 30.10.2026): Die Heilung eines
+#  Layout-Befunds reist über einen Pull Request. Der PR-Lauf darf keine Issues
+#  pflegen (siehe unten), also blieb die Meldung nach dem Merge OFFEN – bis zum
+#  nächsten Montag, im Fall #900 sogar über den Merge von PR #937 hinaus. Ein
+#  geheilter Alarm, der eine Woche offen steht, ist genau der Dauer-Alarm, den
+#  dieser Workflow abschaffen soll (Regel #272). Der Push-Lauf schließt die
+#  Meldung dort, wo sie entsteht: auf `main`, mit demselben Bau und demselben
+#  Audit wie der Wochenlauf.
+#
+#  KEINE ENDLOSSCHLEIFE: Die Pfadliste ist eng (Layout, CSS, Audit-Skripte,
+#  dieser Workflow). Deploy- und Inhalts-Commits lösen nichts aus, und die
+#  Auto-Heilung (die selbst committet) läuft NUR bei `schedule` und
+#  `workflow_dispatch` – ein Push-Lauf schreibt nie. Damit kann sich der Lauf
+#  nicht selbst anstoßen, und `git_sync.sh` bleibt der einzige Schreiber.
 #
 #  Die Pfadliste enthält bewusst auch die Wachen selbst (Audit-Skripte, ihre
 #  Tests, Annotationen-Übersetzer): Ändert jemand die Prüfung, prüft die
@@ -52,7 +66,11 @@ on:
   schedule:
     - cron: "0 7 * * 1"    # Montag 09:00 MESZ (07:00 UTC)
   workflow_dispatch: {}
-  pull_request:
+  # Merge auf main = der Stand, der ausgeliefert wird. Nur diese Pfade lösen
+  # aus; die Liste MUSS der PR-Liste entsprechen – sonst prüft der Push-Lauf
+  # etwas anderes als der PR (Wächter: test_layout_ai_bauausfall.py).
+  push:
+    branches: ["main"]
     paths:
       - "layouts/**"
       - "assets/css/**"
@@ -70,6 +88,27 @@ on:
       - "scripts/tests/test_dom_audit.py"
       - "scripts/tests/test_layout_annotations.py"
       - "scripts/tests/test_workflow_yaml.py"
+      - "scripts/tests/test_layout_ai_bauausfall.py"
+      - "scripts/tests/test_layout_audit_bau_basis.py"
+      - ".github/workflows/layout-ai.yml"
+  pull_request:
+    paths:
+      - "layouts/**"
+      - "assets/css/**"
+      - "assets/css/extended/**"
+      - "scripts/dom_audit.py"
+      - "scripts/layout_audit.py"
+      - "scripts/frontmatter_wache.py"
+      - "scripts/tests/test_frontmatter_wache.py"
+      - ".github/actions/hugo-build/**"
+      - "scripts/layout_browser_check.js"
+      - "scripts/layout_annotations.py"
+      - "scripts/check_covers.py"
+      - "scripts/tests/test_dom_audit.py"
+      - "scripts/tests/test_layout_annotations.py"
+      - "scripts/tests/test_workflow_yaml.py"
+      - "scripts/tests/test_layout_ai_bauausfall.py"
+      - "scripts/tests/test_layout_audit_bau_basis.py"
       - ".github/workflows/layout-ai.yml"
 
 permissions:
@@ -157,8 +196,13 @@ jobs:
           exit 0
 
       # ============ AUTO-HEILUNG: Cover nachziehen ============
+      # Schreibt Commits und pusht sie – das darf NUR der geplante bzw. der
+      # ausdrücklich gestartete Lauf. Ein Push-Lauf (Merge auf main) prüft und
+      # meldet, aber schreibt nie: sonst stieße er über `git_sync.sh` den
+      # nächsten Push-Lauf an (Endlosschleife) und würde im Namen des Merges
+      # ungefragt Inhalte ändern.
       - name: Auto-Heilung – fehlende Cover-Varianten nachziehen
-        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        if: ${{ !cancelled() && github.event_name != 'pull_request' && github.event_name != 'push' }}
         continue-on-error: true
         run: |
           pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
@@ -199,7 +243,11 @@ jobs:
             exit 0
           fi
           set +e
-          LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH="$CHROME_DIR" \
+          # Kein fester Port mehr: der Audit nimmt einen freien (LAYOUT_PORT=0)
+          # – eine Portkollision war früher ein Werkzeugfehler, kein Befund.
+          # Exit 3 = kein messbarer Bau (fail-closed), 2 = ohne Chrome
+          # übersprungen. Das Skript unterscheidet beides seit #900.
+          LAYOUT_BASE=$PWD/public CHROME_PATH="$CHROME_DIR" \
             node scripts/layout_browser_check.js > /tmp/browser-audit.json 2>/tmp/browser-audit.log
           code=$?
           set -e
@@ -346,7 +394,9 @@ jobs:
               : (staticExit === 0 ? '✅ ohne kritische Befunde' : `⚠️ Exit ${staticExit}`);
             const browserText = !browserLief ? 'nicht gelaufen (Bau rot)'
               : (browserExit === 2 ? 'übersprungen (kein Chrome)'
-                : (browserExit === 0 ? '✅ ohne Befund' : `⚠️ Exit ${browserExit}`));
+                : (browserExit === 0 ? '✅ ohne Befund'
+                  : (browserExit === 3 ? '⛔ Werkzeugfehler: kein messbarer Bau (Exit 3)'
+                    : `⚠️ Exit ${browserExit}`)));
 
             const parts = [
               marker,

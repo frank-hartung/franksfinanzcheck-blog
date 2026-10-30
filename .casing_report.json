@@ -1,20 +1,13 @@
 {
- "stand": "2026-09-28T01:44:30Z",
- "modus": "dry-run · Bestand",
- "dateien": 1,
- "gepruefte_dateien": 63,
- "woerter": 110338,
- "erkannte_befunde": 1,
- "befunde": 1,
- "hart": 1,
+ "stand": "2026-10-30T10:30:15Z",
+ "modus": "fix · Bestand · +Pinterest-Plan",
+ "dateien": 0,
+ "gepruefte_dateien": 111,
+ "woerter": 202920,
+ "erkannte_befunde": 0,
+ "befunde": 0,
+ "hart": 0,
  "gefixt": 0,
  "geparkt": [],
- "dateien_liste": [
-  {
-   "pfad": "content/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.md",
-   "erkannte_befunde": 1,
-   "befunde": 1,
-   "woerter": 1859
-  }
- ]
+ "dateien_liste": []
 }

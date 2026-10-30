@@ -14,7 +14,7 @@ cover:
   alt: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
-faktencheck: "2026-09-27"
+faktencheck: 2026-10-30
 quellen:
   - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"

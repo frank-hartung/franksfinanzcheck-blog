@@ -195,6 +195,14 @@
     "letzter_versuch": "2026-10-06",
     "sperre_bis": "2027-04-04"
   },
+  "Energieeffiziente Geräte für dein Zuhause": {
+    "fehler": 0,
+    "grund": "produziert: energieeffiziente-geraete-so-sinken-deine-fixkosten",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-30",
+    "letzter_versuch": "2026-10-30",
+    "sperre_bis": "2027-04-28"
+  },
   "Energieeffizienz im Haushalt: 5 einfache Maßnahmen": {
     "fehler": 0,
     "grund": "produziert: energieeffizienz-im-haushalt-5-schnelle-spartricks",
@@ -383,6 +391,14 @@
     "letzter_versuch": "2026-10-26",
     "sperre_bis": "2026-10-29"
   },
+  "Preisbremse ausgelaufen: So wehrst du dich gegen die Gaspreiserhöhung im Grundtarif": {
+    "fehler": 0,
+    "grund": "produziert: gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-30",
+    "letzter_versuch": "2026-10-30",
+    "sperre_bis": "2027-04-28"
+  },
   "Preiswerter DSL-Anschluss für Zuhause": {
     "fehler": 0,
     "grund": "produziert: preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
@@ -522,6 +538,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-10-27",
     "sperre_bis": "2026-10-30"
+  },
+  "Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft": {
+    "fehler": 0,
+    "grund": "produziert: fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-30",
+    "letzter_versuch": "2026-10-30",
+    "sperre_bis": "2027-04-28"
   },
   "Urlaubskasse clever aufbessern": {
     "abgleich_fehler": 2,

@@ -1,0 +1,75 @@
+{
+  "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+  "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+  "erzeugt": "2026-10-30 11:01 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 33,
+    "intervall": 30,
+    "frist": "2026-10-27",
+    "restlaufzeit": -3
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite verbraucherzentrale.de",
+      "url": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "datum": "",
+      "quelle": "verbraucherzentrale.de",
+      "kanal": "web",
+      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet)\n\n### [Reise-Spezial: Urlaub](https://www.verbraucherzentrale.de/reisespezial-tipps-fuer-urlauber)\n\nFlug- oder Reisedaten geändert? Rechte für Urlaub...\n\n### [Musterbriefe](https://www.verbraucherzen",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass eine „Zero‑Excess“-Option die Kaution komplett auf 0 € senkt und dafür 5 €‑12 € pro Tag kostet, wird von der Verbraucherzentrale nicht belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 € pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, wird von der Verbraucherzentrale nicht bestätigt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    }
+  ],
+  "fehler": [
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)"
+}

@@ -21,6 +21,17 @@ cover:
   image: "images/covers/2026-10-28-dsl-und-internet-flat-guenstig-sichern.jpg"
   alt: "DSL- und Internet-Flat günstig sichern"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite bundesnetzagentur.de"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+  - id: "Q2"
+    titel: "Diebe stehlen Rechenzentrums-Equipment im Wert von über 100 Millionen US-Dollar"
+    url: "https://www.heise.de/news/Diebe-stehlen-Rechenzentrums-Equipment-im-Wert-von-ueber-100-Millionen-US-Dollar-11504891.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag"
+    herausgeber: "heise online"
+    datum: "2026-10-29"
+faktencheck: 2026-10-30
 ---
 
 Deine Internetrechnung drückt auf dem Budget. Das WLAN ist langsam. Du zahlst für 1.000 Mbit/s, nutzt aber nur zwei Geräte gleichzeitig. Das ist typisch. Viele Haushalte buchen leistungsfähigere Tarife als sie wirklich brauchen.

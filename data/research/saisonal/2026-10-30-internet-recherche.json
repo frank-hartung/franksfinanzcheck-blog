@@ -1,0 +1,129 @@
+{
+  "datum": "2026-10-30",
+  "erzeugt_utc": "2026-10-30 10:44 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 0,
+  "ergebnisse": {
+    "rss": {
+      "vzbv – Energie": {
+        "treffer": [
+          {
+            "titel": "Stromsteuersenkung: Entlastung darf keine Fata Morgana werden",
+            "url": "https://www.vzbv.de/meldungen/stromsteuersenkung-entlastung-darf-keine-fata-morgana-werden",
+            "datum": "Fri, 30 Oct 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Verbraucherzentrale prüft Sammelklage gegen Stromanbieter grüüün",
+            "url": "https://www.vzbv.de/pressemitteilungen/verbraucherzentrale-prueft-sammelklage-gegen-stromanbieter-grueueuen",
+            "datum": "Thu, 29 Oct 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Smart-Meter eingebaut, aber monatelang nicht nutzbar",
+            "url": "https://www.vzbv.de/pressemitteilungen/smart-meter-eingebaut-aber-monatelang-nicht-nutzbar",
+            "datum": "Thu, 22 Oct 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Energie-Grundversorgung: Verbraucherzentrale für mehr Schutz vor hohen Preisen",
+            "url": "https://www.vzbv.de/pressemitteilungen/energie-grundversorgung-verbraucherzentrale-fuer-mehr-schutz-vor-hohen-preisen",
+            "datum": "Tue, 20 Oct 2026",
+            "quelle": "vzbv – Energie"
+          }
+        ],
+        "fehler": null
+      },
+      "vzbv – Finanzen": {
+        "treffer": [
+          {
+            "titel": "Riester-Rente von der Sparkasse? Dann bekommen Sie womöglich zu wenig",
+            "url": "https://www.vzbv.de/pressemitteilungen/riester-rente-von-der-sparkasse-dann-bekommen-sie-womoeglich-zu-wenig",
+            "datum": "Thu, 22 Oct 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Frühstartrente: Verpasste Chance für Kinder und Familien",
+            "url": "https://www.vzbv.de/meldungen/fruehstartrente-verpasste-chance-fuer-kinder-und-familien",
+            "datum": "Fri, 16 Oct 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Mehr Last als Schutz: “So verfehlt die Empfängerüberprüfung ihr Ziel”",
+            "url": "https://www.vzbv.de/pressemitteilungen/mehr-last-als-schutz-so-verfehlt-die-empfaengerueberpruefung-ihr-ziel",
+            "datum": "Fri, 09 Oct 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Finanzbildung: Unabhängigkeit und Qualität sicherstellen",
+            "url": "https://www.vzbv.de/meldungen/finanzbildung-unabhaengigkeit-und-qualitaet-sicherstellen",
+            "datum": "Wed, 07 Oct 2026",
+            "quelle": "vzbv – Finanzen"
+          }
+        ],
+        "fehler": null
+      },
+      "Bundesnetzagentur – Presse": {
+        "treffer": [
+          {
+            "titel": "Bundesnetzagentur leitet Aufsichtsverfahren gegen Energielieferanten ein",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261020_VerfahrenEnergie.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Bundesnetzagentur veröffentlicht geplanten Spielraum für Porti",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261012_Post.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Bundesnetzagentur erlässt Festlegung zur Marktintegration von Stromspeichern und Ladepunkten (MiSpeL)",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261001_Mispel.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Ergebnisse der Innovations- und Biomethanausschreibung zum 1. September 2026",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20260929_Inno_Biomethan.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          }
+        ],
+        "fehler": null
+      },
+      "Bundesnetzagentur – Gasversorgung": {
+        "treffer": [
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 26. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231026_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 19. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231019_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 12. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231012_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 5. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231005_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {},
+    "github": {}
+  }
+}

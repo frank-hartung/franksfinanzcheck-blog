@@ -132,7 +132,11 @@ POLISH_BACKOFF_SECONDS = (0, 20, 45)
 # Verarbeitung. 700 Tokens führten möglicherweise zu leeren/kurzen Antworten;
 # der Finish-Code entscheidet zusätzlich, ob die Antwort vollständig ist.
 POLISH_MAX_TOKENS = 3072
+# Gemini 3 zählt Denk- und Antworttokens gemeinsam; MAX_TOKENS bleibt ein
+# harter Fehler. Mehr Budget ermöglicht eine vollständige Antwort, garantiert sie aber nicht.
+GEMINI_POLISH_MAX_TOKENS = 8192
 POLISH_TIMEOUT_SECONDS = 60
+TITLE_INTENT_WORDS = ("sparen", "vergleich", "fixkosten", "günstiger")
 CORE_CATEGORIES = ("strom", "gas", "internet", "versicherung", "konto")
 BANNED_PHRASES = (
     "in der heutigen schnelllebigen welt", "in der heutigen zeit",
@@ -360,7 +364,10 @@ FranksFinanzcheck. Schreibe in Franks Stimme:
 Harte Regeln:
 - Keine neuen Fakten: keine Zahlen, Preise, Fristen, Gesetze, Quellen,
   Studien, Anbieter, URLs oder Superlative hinzufügen.
-- Du-Ansprache, klar, ruhig, konkret, kein Verkaufsdruck und keine KI-Floskeln.
+- Du-Ansprache, klar, ruhig, konkret, kein Verkaufsdruck. Vermeide diese
+  Floskeln und ihre Teilzeichenfolgen: {", ".join(BANNED_PHRASES)}.
+- Der Titel enthält ausdrücklich mindestens eines dieser Wörter bzw. Wortteile:
+  {", ".join(TITLE_INTENT_WORDS)}. Ein Synonym allein genügt nicht.
 - Der Lead beginnt exakt mit FranksFinanzcheck. Er nennt die Saison,
   mindestens drei der Themen Strom, Gas, Internet, Versicherungen, Konto und
   den konkreten Nutzen. Er ist ein einzelner, vollständiger Absatz.
@@ -422,7 +429,8 @@ def call_model(system: str, user: str, provider: str | None = None) -> tuple[str
         try:
             antwort = llm_client.chat(
                 name, system=system, prompt=user, temperature=0.35,
-                max_tokens=POLISH_MAX_TOKENS, timeout=POLISH_TIMEOUT_SECONDS,
+                max_tokens=GEMINI_POLISH_MAX_TOKENS if name == "gemini" else POLISH_MAX_TOKENS,
+                timeout=POLISH_TIMEOUT_SECONDS,
                 attempts=1, require_complete=True, raise_on_error=True, log_errors=False,
             )
         except Exception as exc:  # noqa: BLE001 – keine internen Providerdetails ausgeben
@@ -587,7 +595,7 @@ def validate_candidate(title: str, lead: str, season: dict, history: list[dict])
         errors.append(f"Lead-Länge {len(lead)} außerhalb 220–560")
     if not lead.rstrip().endswith((".", "!", "?")):
         errors.append("Lead endet nicht mit einem vollständigen Satz")
-    if not any(word in title.lower() for word in ("sparen", "vergleich", "fixkosten", "günstiger")):
+    if not any(word in title.lower() for word in TITLE_INTENT_WORDS):
         errors.append("Titel ohne Spar-/Vergleichsintention")
     lead_lower = lead.lower()
     if not re.match(r"^franksfinanzcheck\b", lead_lower):

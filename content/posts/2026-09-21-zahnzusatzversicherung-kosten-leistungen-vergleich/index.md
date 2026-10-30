@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-14
 title: "Zahnzusatzversicherung 2026: Tarife & Erstattung"
-description: "Zahnzusatzversicherung im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen prüfst."
+description: "Zahnzusatzversicherung vergleichen: Kosten, Erstattung und Zahnstaffel verstehen und Gesundheitsfragen vor dem Abschluss prüfen."
 date: 2026-09-25T08:10:00Z
 draft: true
 tags: ["Gesundheit und Vorsorge"]
@@ -32,15 +32,15 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "dd4a3d7633e9a13067eb3dad473037f6dbabe6b13e956f2780b09962200aff2f"
-  pruefer:
+  status: "ausstehend"
+  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
+  vorheriger_pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Festzuschuss-Sätze 60/70/75 % und GOZ/Zahnstaffel-Aussagen belegt, alle Beispielrechnungen nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-24"
-  naechste_pruefung: "2026-12-08"
-  aenderungsgrund: "Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
+  vorheriges_pruefdatum: "2026-10-24"
+  vorheriger_reviewtermin: "2026-12-08"
+  aenderungsgrund: "SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend. Historischer Änderungsgrund: Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
   gepruefte_aussagen:
     - textanker: "nur einen Festzuschuss zur sogenannten Regelversorgung"
       pruefung: "Bestätigt: Gesetzliche Krankenkassen zahlen bei Zahnersatz Festzuschüsse zur Regelversorgung; höhere Qualität geht zu Lasten des Versicherten (Verbraucherzentrale)"

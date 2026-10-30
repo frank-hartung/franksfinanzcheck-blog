@@ -26,6 +26,9 @@ SICHERHEIT:
   * Veröffentlicht wird NUR bis zum LIVE-Mindestziel und NUR an Mo/Mi/Fr
     (Guard identisch zu cadence_guard.PUBLICATION_DAYS).
   * Kein Reserve-Artikel wird je gelöscht oder überschrieben.
+  * Eine URL aus `data/weiterleitungen.yaml` ist ein Alias, kein Reserve-
+    Kandidat: `publikations_weiterleitung.py` blockiert die Promotion aus der
+    gemeinsamen SSOT, bevor `draft: false` geschrieben wird (WF-54C4/#953).
 
 MODI:
   python3 scripts/reserve_pool.py --status          # Pool + heutige LIVE-Zahl
@@ -47,6 +50,7 @@ POSTS = ROOT / "content" / "posts"
 sys.path.insert(0, str(ROOT / "scripts"))
 import reserve_artifacts as artifacts  # noqa: E402
 import cadence_guard  # noqa: E402 – PUBLICATION_DAYS/load_posts (SSOT)
+from publikations_weiterleitung import weiterleitungsquellen  # noqa: E402
 
 
 def now_utc_iso() -> str:
@@ -386,6 +390,14 @@ def publish_to_min(min_per_day: int | None = None,
               f"ohne Vielfalts-Prüfung.")
         rt, sperren = None, {1: {}, 2: {}}
 
+    # Eine URL, die in der Weiterleitungs-SSOT als `von` steht, ist bewusst
+    # geparkt. Sie darf auch dann nicht aus dem Reserve-Pool live geschaltet
+    # werden, wenn ein altes Reife-Zertifikat sie noch als `ready` führt. Genau
+    # diese Lücke veröffentlichte am 30.10.2026 den Heizöl-Hold und ließ die
+    # Meta-Refresh-Seite anschließend mit der echten Seite kollidieren (WF-54C4
+    # #953). Der Leseweg ist fail-closed im Produktionsbaum.
+    redirect_sources = weiterleitungsquellen(posts_dir)
+    redirect_blocked: set[str] = set()
     published: list = []
     zurueckgestellt: list = []
 
@@ -408,6 +420,13 @@ def publish_to_min(min_per_day: int | None = None,
             if live_count_today(posts_dir) >= min_per_day:
                 break
             if index.parent.name in published:
+                continue
+            if index.parent.name in redirect_sources:
+                if index.parent.name not in redirect_blocked:
+                    redirect_blocked.add(index.parent.name)
+                    print(f"  ⛔ Reserve zurückgestellt: {index.parent.name} "
+                          "steht als Weiterleitungsquelle in "
+                          "data/weiterleitungen.yaml")
                 continue
             original = index.read_text(encoding="utf-8")
             titel = _titel(original) if rt is not None else ""

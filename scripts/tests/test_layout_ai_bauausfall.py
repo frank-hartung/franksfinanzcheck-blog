@@ -111,6 +111,77 @@ class WorkflowStrukturTest(unittest.TestCase):
         self.assertIn("BAU_URSACHE", schritt["run"])
 
 
+@unittest.skipUnless(yaml is not None, "PyYAML fehlt – Workflow nicht lesbar")
+class AlarmLebenszyklusTest(unittest.TestCase):
+    """Ein geheilter Alarm darf nicht bis zum nächsten Montag offen bleiben.
+
+    DER VORFALL (Meldung #900, 30.10.2026)
+    --------------------------------------
+    Die Heilung reist über einen Pull Request. Der PR-Lauf darf aus gutem
+    Grund keine Issues pflegen – also blieb die Meldung nach dem Merge offen,
+    obwohl der Audit auf `main` längst grün war. Im Fall #900 stand sie sogar
+    über den Merge von PR #937 („dauerhafte Behebung") hinaus offen: Ein
+    geheilter Alarm ohne Schließpfad ist genau der Dauer-Alarm, gegen den
+    dieser Workflow gebaut wurde (Regel #272).
+
+    Die Reparatur ist ein Push-Trigger auf `main` – eng begrenzt auf dieselben
+    Pfade wie der PR-Trigger, mit Issue-Pflege, aber OHNE Auto-Heilung. Diese
+    Tests halten beide Hälften fest: der Schließpfad existiert, und er kann
+    sich nicht selbst anstoßen.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.wf = yaml.safe_load(WORKFLOW.read_text(encoding="utf-8"))
+        # `on:` wird von PyYAML als boolescher Schlüssel True gelesen.
+        cls.on = cls.wf.get("on") or cls.wf.get(True) or {}
+        cls.steps = cls.wf["jobs"]["layout-audit"]["steps"]
+
+    def test_push_auf_main_schliesst_die_meldung(self) -> None:
+        self.assertIn("push", self.on,
+                      "Ohne Push-Trigger bleibt eine geheilte Meldung bis zum "
+                      "nächsten Wochenlauf offen (genau #900)")
+        self.assertEqual(["main"], self.on["push"].get("branches"))
+
+    def test_push_und_pr_pruefen_dieselben_pfade(self) -> None:
+        # Zwei Listen sind zwei Wahrheiten. Laufen sie auseinander, prüft der
+        # Push-Lauf etwas anderes als der PR – und die Meldung schließt sich
+        # auf einem anderen Stand als dem, der geprüft wurde.
+        self.assertEqual(self.on["pull_request"]["paths"],
+                         self.on["push"]["paths"],
+                         "Die Pfadlisten von push und pull_request müssen "
+                         "identisch sein")
+        for pfad in ("scripts/layout_audit.py", "scripts/dom_audit.py",
+                     "scripts/layout_browser_check.js", "layouts/**",
+                     ".github/workflows/layout-ai.yml"):
+            self.assertIn(pfad, self.on["push"]["paths"])
+
+    def test_push_lauf_schreibt_nichts(self) -> None:
+        # Auto-Heilung committet und pusht. Liefe sie auch bei `push`, stieße
+        # sie den nächsten Push-Lauf an (Endlosschleife) und würde ungefragt
+        # Inhalte im Namen eines Merges ändern.
+        heilung = [s for s in self.steps
+                   if (s.get("name") or "").startswith("Auto-Heilung")][0]
+        bedingung = heilung.get("if", "")
+        self.assertIn("github.event_name != 'push'", bedingung)
+        self.assertIn("github.event_name != 'pull_request'", bedingung)
+        self.assertNotIn("always()", bedingung,
+                         "always() würde die Heilung auch im Push-Lauf starten")
+
+    def test_push_lauf_pflegt_das_issue(self) -> None:
+        # Gegenprobe zum PR-Modus: Der Push-Lauf MUSS das Issue pflegen,
+        # sonst gibt es keinen Schließpfad.
+        issue = [s for s in self.steps
+                 if (s.get("name") or "").startswith("Issue aktualisieren")][0]
+        self.assertIn("always()", issue.get("if", ""))
+        self.assertIn("github.event_name != 'pull_request'", issue.get("if", ""))
+
+    def test_laeufe_stehen_in_einer_reihe(self) -> None:
+        # Zwei gleichzeitige Läufe würden dasselbe Issue parallel beschreiben.
+        self.assertEqual("layout-ai", self.wf["concurrency"]["group"])
+        self.assertFalse(self.wf["concurrency"]["cancel-in-progress"])
+
+
 @unittest.skipUnless(shutil.which("bash"), "bash fehlt")
 @unittest.skipUnless(yaml is not None, "PyYAML fehlt")
 class SchlussSchrittWahrheitstabelleTest(unittest.TestCase):

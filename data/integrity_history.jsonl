@@ -357,3 +357,5 @@
 {"date": "2026-10-29", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-30", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py"]}
 {"date": "2026-10-30", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-30", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/casing_guard.py"]}
+{"date": "2026-10-30", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py"]}

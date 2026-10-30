@@ -319,8 +319,10 @@ def promote_requeue_to_min(posts_dir=None, validator=None) -> list[str]:
     """
     import cadence_guard as cg
     import park_state
+    from publikations_weiterleitung import weiterleitungsquellen
 
     posts_dir = posts_dir or ROOT / 'content' / 'posts'
+    redirect_sources = weiterleitungsquellen(posts_dir)
     today = dt.datetime.now(dt.timezone.utc).date()
     if today.weekday() not in cg.PUBLICATION_DAYS:
         print("Re-Queue-Fallback: kein Publikationstag – übersprungen.")
@@ -333,7 +335,14 @@ def promote_requeue_to_min(posts_dir=None, validator=None) -> list[str]:
         return cg.load_posts(str(posts_dir))
 
     while len(cg.published_on(_load(), today)) < minimum:
-        waiting = [p for p in _load() if p['draft'] and p['wait']]
+        all_waiting = [p for p in _load() if p['draft'] and p['wait']]
+        blocked = sorted({p['slug'] for p in all_waiting
+                          if p['slug'] in redirect_sources})
+        if blocked:
+            print("  ⛔ Re-Queue-Fallback zurückgestellt "
+                  "(Weiterleitungsquelle): " + ", ".join(blocked))
+        waiting = [p for p in all_waiting
+                   if p['slug'] not in redirect_sources]
         waiting.sort(key=lambda p: (p['date_raw'], p['slug']))
         if not waiting:
             break

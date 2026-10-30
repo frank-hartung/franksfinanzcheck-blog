@@ -1,11 +1,11 @@
 ---
 lastmod: 2026-10-28
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
-description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter brauchen – Wohngebäude, Hausrat, Elementarschutz und Unterversicherung im Blick."
+description: "Haus und Hausrat absichern: Worauf Eigentümer und Mieter bei Wohngebäude, Hausrat, Elementarschutz und Versicherungssumme achten sollten."
 date: 2026-10-28T08:36:47Z
 draft: true
 cadence_demoted: 2026-10-28T08:37:58Z
-cadence_grund: "ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert"
+cadence_grund: "ymyl-review: SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend."
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
@@ -41,15 +41,15 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "a7cab88bd880291c9574671aa125b97ce1773f53f20f15f29959d4a08fa476cf"
-  pruefer:
+  status: "ausstehend"
+  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
+  vorheriger_pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Hausrat-Richtwert auf belegte 650 €/m² korrigiert, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-05"
-  naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
+  vorheriges_pruefdatum: "2026-10-05"
+  vorheriger_reviewtermin: "2026-11-19"
+  aenderungsgrund: "SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend. Historischer Änderungsgrund: Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
   gepruefte_aussagen:
     - textanker: "Viele denken, Starkregen und Rückstau seien automatisch dabei."
       pruefung: "Bestätigt: Schäden durch Starkregen, Rückstau oder Überschwemmung sind nur über den Baustein Erweiterte Elementargefahren abgedeckt (Verbraucherzentrale)"

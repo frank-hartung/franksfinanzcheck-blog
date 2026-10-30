@@ -1,0 +1,45 @@
+# #826: Auch redaktionelle und manuelle Änderungen an Entwürfen dürfen
+# bestehende Fachsiegel nicht unbemerkt beschädigen. Kein Ticket-Zugriff.
+name: YMYL-Siegelwache
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ymyl-siegelwache-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  siegel:
+    name: YMYL-Siegelprüfung
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # PR-Basis für den Vergleich mit früheren Siegeln
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Abhängigkeiten installieren
+        run: python3 -m pip install -q --require-hashes -r requirements-ci.txt
+      - name: Siegel- und Schreibschutz testen
+        run: |
+          python3 -m unittest scripts.tests.test_ymyl_siegel_wache scripts.tests.test_ymyl_write_contract scripts.tests.test_metadaten_wache scripts.tests.test_editorial_review_gate
+      - name: Bestehende Siegel und Rückzüge im PR prüfen
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 scripts/ymyl_siegel_wache.py --base "$PR_BASE"
+      - name: Bestehende Siegel aller Posts prüfen
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/ymyl_siegel_wache.py

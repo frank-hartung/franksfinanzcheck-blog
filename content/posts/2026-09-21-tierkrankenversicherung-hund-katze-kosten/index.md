@@ -31,22 +31,22 @@ quellen:
     herausgeber: "Stiftung Warentest"
     datum: "2026-10-05"
   - id: "Q3"
-    titel: "Gebührenordnung für Tierärzte (GOT 2022), Anlage zu § 1 und § 4"
+    titel: "Gebührenordnung für Tierärztinnen und Tierärzte (GOT 2022)"
     url: "https://www.gesetze-im-internet.de/got_2022/"
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
     datum: "2026-10-05"
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "94d7967a468ff8d6203172d3b34f76a67dc9b7729c3861cc78389b2bb40f5d93"
-  pruefer:
+  status: "ausstehend"
+  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
+  vorheriger_pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (GOT 2022 als Primärquelle, Stiftung Warentest, Verbraucherzentrale); GOT-Angaben und test.de-Zitate verifiziert, Beispielrechnungen nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-24"
-  naechste_pruefung: "2026-12-08"
-  aenderungsgrund: "Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
+  vorheriges_pruefdatum: "2026-10-24"
+  vorheriger_reviewtermin: "2026-12-08"
+  aenderungsgrund: "§§ 2 und 4 GOT: Notdienstsatz und Notdienstgebühr überarbeitet; Fachprüfung und Abgleich des Prüfprotokolls ausstehend. Historischer Änderungsgrund: Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
   gepruefte_aussagen:
     - textanker: "dazu kommt eine pauschale Notdienstgebühr"
       pruefung: "Bestätigt: GOT 2022 – ein- bis dreifacher Satz nach Aufwand, vierfacher Satz im Notdienst, pauschale Notdienstgebühr 59,50 € brutto"
@@ -272,7 +272,7 @@ Die Frage „lohnt sich das?“ lässt sich nicht mit einem Bauchgefühl beantwo
 
 ### Der Ernstfall hat seit 2022 eine neue Preisklasse
 
-Seit der Novelle der Gebührenordnung für Tierärzte (GOT) im November 2022 sind tierärztliche Leistungen spürbar teurer geworden; Berichte nennen Steigerungen von rund 15 bis 20 % gegenüber der alten Ordnung. Tierärzte dürfen je nach Aufwand den ein- bis dreifachen Satz abrechnen, im Notdienst ist auch der vierfache Satz möglich, dazu kommt eine pauschale Notdienstgebühr von 59,50 €.
+Seit der Novelle der Gebührenordnung für Tierärzte (GOT) im November 2022 sind tierärztliche Leistungen spürbar teurer geworden; Berichte nennen Steigerungen von rund 15 bis 20 % gegenüber der alten Ordnung. Grundsätzlich gilt nach § 2 GOT der einfache bis dreifache Satz. Im tierärztlichen Notdienst zu den gesetzlichen Zeiten gilt nach § 4 GOT der zweifache bis vierfache Satz; hinzu kommt eine Notdienstgebühr von 50 € zuzüglich Umsatzsteuer (bei 19 %: 59,50 € brutto). Im begründeten Einzelfall kann von der Notdienstgebühr abgesehen werden.
 
 In Zahlen heißt das für die typischen Kostentreiber:
 
@@ -322,7 +322,7 @@ Versicherung ist deshalb kein Sparmodell. Sie ist ein Tausch: **ein kalkulierbar
 
 Ein Abschluss ist nur so gut wie seine Bedingungen. Stiftung Warentest hat in Finanztest 05/2025 insgesamt 121 Hunde-OP-Tarife geprüft und dabei vor allem die Versicherungsbedingungen gewichtet – Beitragsspannen von rund 8 bis über 60 € monatlich zeigen, wie weit der Markt auseinanderliegt. Entscheidend waren dort drei Punkte, die du in jedem Angebot nachlesen solltest:
 
-1. **Erstattung bis zum vierfachen GOT-Satz** – sonst zahlst du bei jedem Notdienst kräftig zu.
+1. **Erstattung bis zum vierfachen GOT-Satz** – sonst können bei hohen Notdienstsätzen erhebliche Eigenanteile entstehen.
 2. **Selbstbeteiligung**: 20 % auf 3.500 € sind 700 € Eigenanteil. Das muss zur Reserve passen, sonst ist der günstige Beitrag nur verschobenes Risiko.
 3. **Wartezeiten** (üblich sind 30 Tage für Krankheiten, oft 0 Tage bei Unfällen) und **Jahreshöchstgrenzen**, die häufig bei 2.000 oder 5.000 € liegen.
 

@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 5,
-  "generated_at": "2026-10-29T15:25:50Z",
+  "ready": 6,
+  "pool_size": 6,
+  "generated_at": "2026-10-30T10:36:34Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-10-28T10:21:40Z",
+      "measured_at": "2026-10-30T10:33:25Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -22,45 +22,11 @@
       }
     },
     {
-      "slug": "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
-      "ready": true,
-      "sha256": "974b04d64ac65802d69a507c7492d3b6c743f0e1399656b657a574d9e90244dc",
-      "flesch": 65.2,
-      "measured_at": "2026-10-28T10:24:54Z",
-      "score": 0.952,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
-      "ready": true,
-      "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
-      "flesch": 61.6,
-      "measured_at": "2026-10-28T12:51:59Z",
-      "score": 0.952,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
       "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
       "ready": true,
       "sha256": "6990fadf57f04d43bcbde81367d2df64b72f0c746fe3e5f4a94d08c778f76fc0",
       "flesch": 66.2,
-      "measured_at": "2026-10-29T15:24:47Z",
+      "measured_at": "2026-10-30T10:34:03Z",
       "score": 0.958,
       "parts": {
         "spelling": 0.84,
@@ -73,42 +39,77 @@
       }
     },
     {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
       "ready": true,
-      "sha256": "2b8e2f1805e3ac9192b3fa9c9697c57a967ad5c151c8b5473ed337a03a0a5aa5",
-      "flesch": 73.2,
-      "measured_at": "2026-10-29T15:25:50Z",
-      "score": 0.974,
+      "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
+      "flesch": 61.6,
+      "measured_at": "2026-10-30T10:34:42Z",
+      "score": 0.952,
       "parts": {
-        "spelling": 0.98,
+        "spelling": 0.94,
         "meta": 0.85,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "ready": true,
+      "sha256": "bdbb8f37118c6661fc9cc3a6ff67b2c331148100f9fe03f18029ff94972cfe78",
+      "flesch": 68.4,
+      "measured_at": "2026-10-30T10:35:20Z",
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+      "ready": true,
+      "sha256": "b3d6df66c52e0e6cdd84036656eaa45112cc2789f16a28214f151f9f6a2cfef1",
+      "flesch": 67.2,
+      "measured_at": "2026-10-30T10:35:57Z",
+      "score": 0.958,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
+      "ready": true,
+      "sha256": "d74dfcaab96d37a0229a921fb222d5e5f8114e453a9112bd24f6bba6dc07b4cd",
+      "flesch": 67.4,
+      "measured_at": "2026-10-30T10:36:34Z",
+      "score": 0.986,
+      "parts": {
+        "spelling": 1.0,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "40900957894",
+    "kind": "full",
+    "run_id": "41039588923",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-10-29T15:25:50Z",
-    "renewed": [
-      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  },
-  "ausgebucht": {
-    "at": "2026-10-28T19:34:09Z",
-    "slugs": [
-      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

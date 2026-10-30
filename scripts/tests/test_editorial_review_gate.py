@@ -101,6 +101,26 @@ class EditorialReviewGateTests(unittest.TestCase):
         self.assertTrue(result["blocking"])
         self.assertIn("E03", self.codes(result))
 
+    def test_historischer_pruefer_ersetzt_keine_neue_freigabe(self):
+        body = self.body()
+        fm = self.frontmatter(body)
+        review = fm['redaktionelle_pruefung']
+        review.pop('inhalt_sha256')
+        review['vorheriger_pruefer'] = review.pop('pruefer')
+        review['vorheriges_pruefdatum'] = review.pop('pruefdatum')
+        review['vorheriger_reviewtermin'] = review.pop('naechste_pruefung')
+        # Selbst ein fälschlich auf freigegeben gesetzter Status kann alte
+        # Prüfdaten nicht als Beweis für die neue Fassung wiederverwenden.
+        result = gate.validate_article(fm, body, today=self.TODAY, ignore_hash=True)
+        self.assertTrue({'E07', 'E08', 'E09', 'E10'} <= self.codes(result))
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'index.md'
+            raw = '---\n' + gate._yaml_module().safe_dump(fm, allow_unicode=True, sort_keys=False) + '---\n' + body
+            path.write_text(raw, encoding='utf-8')
+            with self.assertRaises(gate.ParseError):
+                gate.seal(path, today=self.TODAY)
+            self.assertEqual(path.read_text(encoding='utf-8'), raw)
+
     def test_textaenderung_entwertet_freigabe(self):
         body = self.body()
         result = gate.validate_article(self.frontmatter(body), body + "\nNeue Aussage.", today=self.TODAY)

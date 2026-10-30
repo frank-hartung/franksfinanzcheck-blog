@@ -1,15 +1,1 @@
-{
-  "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
-    "datei_sha256": "439ce56bdbae5f19109bfa0c117d3d4629ea5fe8bc8128e6d87ad08889559937",
-    "fassung_gewechselt": true,
-    "first": "2026-10-28T10:14:29Z",
-    "grund": "Textverständnis-Gate nicht bestanden: R13-DATUM-PUNKT: Politur-Ruine „23 Dezember“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
-    "hits": 1,
-    "laeufe": [
-      "run:40667750341"
-    ],
-    "last": "2026-10-28T10:27:04Z",
-    "lauf": "run:40667750341",
-    "signatur": "textverständnis-gate nicht bestanden: r<n>-datum-punkt: politur-ruine „<n> dezember“ – überrest eines automatisierten politur-laufs, manuell reparieren"
-  }
-}
+{}

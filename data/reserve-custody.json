@@ -81,8 +81,15 @@
     "seit": "2026-10-06",
     "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
     "titel": "Energieausweis: Was er für deine Fixkosten bedeutet",
-    "zuletzt_im_pool": "2026-10-29",
+    "zuletzt_im_pool": "2026-10-30",
     "zuletzt_reaktiviert": "2026-10-07",
+    "zustand": "pool"
+  },
+  "energieeffiziente-geraete-so-sinken-deine-fixkosten": {
+    "seit": "2026-10-30",
+    "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+    "titel": "Energieeffiziente Geräte: So sinken deine Fixkosten",
+    "zuletzt_im_pool": "2026-10-30",
     "zustand": "pool"
   },
   "energieeffizienz-im-haushalt-5-schnelle-spartricks": {
@@ -121,11 +128,18 @@
     "zuletzt_reaktiviert": "2026-10-24",
     "zustand": "pool"
   },
+  "fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
+    "seit": "2026-10-30",
+    "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+    "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
+    "zuletzt_im_pool": "2026-10-30",
+    "zustand": "pool"
+  },
   "flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
     "seit": "2026-10-26",
     "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
     "titel": "Flugvergleich im Winter: So findest du echte Billigflüge",
-    "zuletzt_im_pool": "2026-10-29",
+    "zuletzt_im_pool": "2026-10-30",
     "zustand": "pool"
   },
   "frugalismus-familie-clever-sparen-ohne-verzicht": {
@@ -140,6 +154,13 @@
     "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
     "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
     "zuletzt_im_pool": "2026-10-02",
+    "zustand": "pool"
+  },
+  "gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
+    "seit": "2026-10-30",
+    "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
+    "titel": "Gaspreiserhöhung Sonderkündigungsrecht",
+    "zuletzt_im_pool": "2026-10-30",
     "zustand": "pool"
   },
   "gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
@@ -217,7 +238,7 @@
     "seit": "2026-10-28",
     "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
     "titel": "Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar",
-    "zuletzt_im_pool": "2026-10-29",
+    "zuletzt_im_pool": "2026-10-30",
     "zustand": "pool"
   },
   "preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {

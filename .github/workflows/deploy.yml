@@ -670,6 +670,7 @@ jobs:
       # prüfung. Ergänzt das Gate H9 (Ziele live, keine Kette/Schleife).
       - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
         run: |
+          python3 scripts/publikations_weiterleitung.py --selftest
           python3 scripts/weiterleitungen.py --selftest
           python3 scripts/weiterleitungen.py --check
           python3 scripts/weiterleitungen.py --verify

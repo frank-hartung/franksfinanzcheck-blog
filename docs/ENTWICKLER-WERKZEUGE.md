@@ -453,3 +453,39 @@ Welche Empfehlungen von 2016 bewusst **nicht** übernommen wurden (meta
 keywords, meta expires, mod_pagespeed, JS zwangsweise zusammenfassen) und
 warum, steht im Report
 [`SITECHECK-2016-OPTIMIERUNG-2026-10-27.md`](../SITECHECK-2016-OPTIMIERUNG-2026-10-27.md).
+
+## Messfrische im Cockpit: veraltet ist eine Lücke, kein Befund (30.10.2026)
+
+Die Chefredakteur-Scorecard (`scripts/editorial_scorecard.py`) rechnet nicht
+selbst nach – sie liest Zustandsdateien. Genau darin lag ein stiller Fehler:
+`.casing_report.json` wurde **nur** von `casing_guard.py --json` geschrieben,
+und diesen Schalter rief kein Workflow auf. Am 30.10.2026 war der Zustand
+32 Tage alt; das Cockpit zeigte daraus eine Gelb-Warnung für einen Befund, den
+der frische Lauf nicht mehr hatte. Im umgekehrten Fall (alter grüner Wert,
+neue Regression) hätte dieselbe Lücke eine Verschlechterung verdeckt.
+
+Drei Regeln halten das jetzt offen:
+
+1. **Wer misst, schreibt den Zustand mit.** `casing_guard.write_state()` ist die
+   einzige Schreibstelle; jeder Voll-Lauf (Bestand) schreibt sie. `--new-only`
+   bleibt ausgenommen (Grundgesamtheit „heute geändert“ = Schein-Deliktquote),
+   `--dry-run` schreibt nie. Entscheidung: `schreibe_zustand()`.
+   Der Tageslauf `blog-health-daily` committet die Datei mit `git add -A`.
+2. **Frische vor Zahl.** Ist der Zustand älter als 14 Tage (oder undatiert),
+   zeigt die Scorecard ⚪, `n/a · Messung N Tage alt` und eine Empfehlung –
+   nie eine historische Fundzahl mit Ampel. Die Blendung kostet 3 Punkte
+   (dieselbe Regel wie bei den Core Web Vitals).
+3. **Das Audit-Log beweist Handlungen.** `spam_guard.fix_blog()` schreibt nur
+   noch, wenn es etwas geändert hat (Disclosure, `*Werbung|`-Prefix,
+   `draft: false` → `true`). Ein Artikel, der schon Entwurf ist, erzeugt keinen
+   Eintrag mehr – vorher entstanden daraus fünf Zeilen am Tag ohne Inhalt
+   (25.713 Zeilen in `data/spam_history.jsonl`).
+
+```bash
+python3 -m unittest scripts.tests.test_governance_messfrische   # 17 Verträge
+python3 scripts/casing_guard.py --fix --plan                    # schreibt den Zustand
+python3 scripts/editorial_scorecard.py                          # Casing-Zeile mit Frische-Urteil
+```
+
+Hintergrund, Belege und Abgrenzung:
+[`GOVERNANCE-888-DAUERHEILUNG-HIGHEND-2026-10-30.md`](../GOVERNANCE-888-DAUERHEILUNG-HIGHEND-2026-10-30.md).

@@ -1,6 +1,6 @@
 # Saisonaler Hero: Betrieb und Störungsbehebung
 
-Stand: 29.10.2026 · Anlass: [Issue #891](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/891)
+Stand: 30.10.2026 · Anlass: [Issue #891](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/891)
 
 ## Was der Lauf tut
 
@@ -8,7 +8,7 @@ Der tägliche Workflow `Saisonaler Hero-Refresh (Agent Reach + KI-Feinschliff)` 
 
 1. Agent Reach erzeugt einen Tagesbrief **und** seine JSON-Beilage. Beides muss zum UTC-Stichtag passen; die Beilage muss eine Agent-Reach-Version und mindestens einen fehlerfrei abgerufenen Kanal melden. Ein fehlerfreier Abruf garantiert keine relevanten Treffer. Nur in den Treffertexten der JSON-Beilage gefundene, bereits kuratierte Themenwörter gelangen in den Prompt; Quellnamen und URLs zählen nicht. Web-Auszüge fehlen in der Beilage und werden dafür nicht ausgewertet. Rohmeldungen werden nicht übernommen; Brief und JSON erhalten getrennte SHA-256-Nachweise.
 2. Die kostenlosen Anbieter werden in der bestehenden Reihenfolge Groq → NVIDIA → Cloudflare → Gemini geprüft. Nicht nur Transportfehler, sondern auch unvollständige, unlesbare oder fachlich verworfene Antworten führen zum nächsten verfügbaren Anbieter. Es gibt höchstens drei Runden, begrenzte Timeouts und eine Pause zwischen den Runden. Der Report nennt jeden verwendeten Anbieter, das Modell und die technische Fehlerklasse, aber weder Schlüssel noch rohe verworfene Antworten. „Schlüssel vorhanden“ bedeutet nicht, dass dieser gültig ist oder das Kontingent reicht.
-3. Der Prompt fordert ein vollständiges JSON-Objekt mit `title` und `lead`. Eindeutige `TITLE:`/`LEAD:`-Antworten mit Zeilenumbrüchen bleiben kompatibel. Doppelte Felder, zusätzliche Absätze/Erklärungen und unvollständiges JSON werden verworfen. Zusätzlich muss der Provider einen erfolgreichen Finish-Code melden; Denkspuren werden bei Gemini nicht als Antwort übernommen.
+3. Der Prompt nennt die tatsächlich geprüften Titel-Wortteile und die ausgeschlossenen Floskeln ausdrücklich; Korrekturauflagen und sämtliche bestehenden Prüfungen bleiben aktiv. Gemini erhält ein höheres Ausgabebudget (8192 Tokens), weil Denk- und Antworttokens gemeinsam zählen können. Auch damit bleibt `MAX_TOKENS` ein Fehler und ist kein Veröffentlichungsnachweis. Der Prompt fordert ein vollständiges JSON-Objekt mit `title` und `lead`. Eindeutige `TITLE:`/`LEAD:`-Antworten mit Zeilenumbrüchen bleiben kompatibel. Doppelte Felder, zusätzliche Absätze/Erklärungen und unvollständiges JSON werden verworfen. Zusätzlich muss der Provider einen erfolgreichen Finish-Code melden; Denkspuren werden bei Gemini nicht als Antwort übernommen.
 4. Der Kandidat muss den SEO-/GEO-Vertrag, die Faktenbremse, Neuheit gegenüber der aktuellen Fassung und der Historie sowie die Startseiten-Quellwache bestehen. Die maschinellen Wort- und Formatprüfungen sind **keine vollständige Faktenprüfung**: Sie erkennen insbesondere Ziffern, Prozentzeichen, einige Zahlwörter und URLs, können aber nicht jede mögliche unbelegte Behauptung erkennen.
 5. Erst wenn auch Hugo und beide Render-/Design-Gates erfolgreich sind, darf der Workflow Hero, State und Historie zusammen committen. Bei fehlendem Render-Nachweis setzt er diese auf den Ausgangsstand zurück und dokumentiert den Ausfall. Auch bei einem unerwarteten Abbruch oder einem Fehler beim Rollback lässt die Commit-Stufe keine ungeprüften Hero-Daten oder Erfolgs-Fingerprints durch. Recherche und ein sicher dokumentierter Fehlerzustand dürfen weiterhin gesichert werden.
 
@@ -30,8 +30,8 @@ Ein `--fix` ist kein reiner Test: Es kann bei Fälligkeit Daten und Fehlerzähle
 
 ## Wiederherstellung nach #891
 
-1. Änderungen reviewen und auf den Standardbranch übernehmen. Der Stand am 29.10. enthielt eine fällige Herbstrotation mit fünf dokumentierten Fehlversuchen; diese Nachweise werden durch den Fix nicht zurückdatiert oder gelöscht.
-2. Den geplanten Lauf abwarten oder den Workflow auf dem **Standardbranch** manuell starten. Ein Branch-Test darf das Produktions-Issue weder öffnen noch schließen. `force` ist für eine bereits fällige Rotation nicht nötig.
+1. Änderungen reviewen und auf den Standardbranch übernehmen. Der Lauf vom 29.10. meldete eine fällige Herbstrotation mit sechs aufeinanderfolgenden Fehlläufen; diese Nachweise werden durch den Fix nicht zurückdatiert oder gelöscht.
+2. Den geplanten Lauf abwarten oder den Workflow auf dem **Standardbranch** manuell starten. Ein Branch-Test darf weder Daten committen noch das Produktions-Issue öffnen oder schließen; Report und Recherche stehen als Lauf-Artefakt zur Diagnose bereit. `force` ist für eine bereits fällige Rotation nicht nötig.
 3. Im Lauf-Summary Anbieterprotokoll, neuen State/Recherche-Hash sowie Hugo und Render-Gates prüfen. Ein grüner lokaler Mock-Test beweist weder die Gültigkeit produktiver API-Schlüssel noch eine echte Veröffentlichung.
 4. Das bestehende Issue bleibt offen, bis der Standardbranch-Lauf vollständig erfolgreich und die Politur-Ampel grün ist. Der Deploy-Catchup lauscht auf den tatsächlichen Workflow-Namen; den anschließenden Deploy bei Bedarf separat überprüfen.
 

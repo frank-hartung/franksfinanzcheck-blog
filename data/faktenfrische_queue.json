@@ -1,157 +1,430 @@
 {
-  "erzeugt": "2026-10-27 10:01 UTC",
+  "erzeugt": "2026-10-30 11:01 UTC",
   "uebersicht": {
-    "gesamt": 104,
+    "gesamt": 109,
     "ratgeber": 6,
-    "faellig": 8,
-    "bearbeitet": 3,
+    "faellig": 14,
+    "vorlauf": 6,
+    "bearbeitet": 4,
+    "budget": 4,
+    "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
     "geo_schnitt": 94,
-    "befunde": 10,
+    "befunde": 20,
     "geo_luecken": {
-      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 7,
-      "Mindestens eine Tabelle (extrahierbare Struktur)": 10,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 16,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 2,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 2,
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 9,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 12,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 12,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 1,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
-    }
+    },
+    "deckung_prozent": 150.6,
+    "bedarf_je_woche": 18.6,
+    "abbau_tage": 3,
+    "nachhol_frist_tage": 7
+  },
+  "kapazitaet": {
+    "stichtag": "2026-10-30",
+    "artikel": 109,
+    "faellig": 14,
+    "ueberfaellig": 13,
+    "ueberfaellig_max_tage": 3,
+    "naechste_frist": {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "frist": "2026-11-03",
+      "restlaufzeit": 4
+    },
+    "budget": 4,
+    "laeufe_je_tag": 1.0,
+    "kapazitaet_je_tag": 4.0,
+    "bedarf_je_tag": 2.656,
+    "bedarf_je_woche": 18.6,
+    "deckung_prozent": 150.6,
+    "horizont_tage": 60,
+    "vorlauf_tage": 7,
+    "nachhol_frist_tage": 7,
+    "abbau_tage": 3,
+    "verletzungen_alt": 10,
+    "verletzungen_neu": 0,
+    "verletzungen": [
+      {
+        "slug": "versicherungen",
+        "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+        "frist": "2026-10-27",
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 2,
+        "vorher_faellig": true
+      },
+      {
+        "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
+        "titel": "DSL- und Internet-Flat günstig sichern",
+        "frist": "2026-10-30",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true
+      }
+    ],
+    "offen_im_horizont": 8,
+    "puenktlich": true,
+    "rueckstand_abgebaut": true
   },
   "offen": [
     {
-      "slug": "versicherungen",
-      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "geo": 83
-    },
-    {
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "geo": 100
-    },
-    {
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "geo": 100
-    },
-    {
       "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
       "titel": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-27",
       "geo": 100
     },
     {
       "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
       "titel": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-27",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 83
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+      "grund": "32 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
+      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-03",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
+      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-03",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
       "geo": 100
     }
   ],
   "laeufe": [
     {
-      "slug": "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen",
-      "titel": "Stromanbieter wechseln: Und bis zu 300 Euro sparen",
+      "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
+      "titel": "DSL- und Internet-Flat günstig sichern",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
+      "treffer": 2,
+      "quellen": 2,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die Aussage, dass im Jahr 2026 „große Lücken zwischen den Tarifen am Markt“ bestehen, fehlt jede belegbare Quelle und ist spekulativ.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Der Artikel behauptet, dass DSL‑Verträge häufig eine Laufzeit von 24 Monaten haben und danach eine Kündigungsfrist von einem Monat gilt, ohne dafür eine Quelle anzugeben.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Der Hinweis, dass ein Bonus für Neukunden den Preis im ersten Jahr stark senken kann, wird nicht durch die bereitgestellten Quellen belegt.",
-          "beleg": ""
+          "text": "Wechselboni von 50 € bis 100 € werden genannt, jedoch fehlt jede belegbare Angabe zu deren Höhe oder Häufigkeit.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
         },
         {
           "typ": "praezision",
-          "text": "Die Faustregel „Verbrauch > 3.000 kWh → fester Preis, < 2.000 kWh → variabler Tarif“ ist nicht durch Daten oder regulatorische Vorgaben gestützt und wirkt pauschal.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Die Behauptung, ein Stromanbieterwechsel koste meist keinen Cent und es gäbe keine Abschiedgebühr, wird nicht durch die genannten Quellen bestätigt.",
-          "beleg": ""
+          "typ": "luecke",
+          "text": "Die 50‑30‑20‑Regel wird als allgemein gültige Budget‑Methode dargestellt, ohne Hinweis, dass es sich um ein Modell handelt oder Quelle dafür zu nennen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Die Aussage, dass CHECK24 „fast alle Firmen und Tarife“ auflistet, ist nicht durch die bereitgestellten Quellen belegt und stellt ein unpräzises Werbeversprechen dar.",
-          "beleg": ""
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Informations‑ und Preisbindungspflichten der Bundesnetzagentur) obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
         }
       ],
       "geo": 50,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
-        "Verbraucherzentrale – Energie: Feed nicht lesbar"
-      ],
+      "fehler": [],
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-27"
+        "quellen: 2 Belege",
+        "faktencheck: 2026-10-30"
       ]
     },
     {
-      "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-      "titel": "Gastarife vergleichen vor dem Herbst",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Der Artikel erwähnt nicht, dass Gasverträge und Preisangaben durch die Bundesnetzagentur reguliert und überwacht werden – ein zentraler Verbraucher‑Schutzrahmen fehlt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Angabe, dass eine Preisgarantie typischerweise 6 Monate beträgt, wird ohne jegliche Quellenangabe gemacht.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Aussage, dass das richtige Einstellen des Thermostats bis zu 10 % Einsparungen bringen kann, ist nicht durch die Bundesnetzagentur belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Berechnung, dass eine Temperaturabsenkung um 2 °C den Heizenergiebedarf um 6 % reduziert und damit 720 kWh spart, fehlt jede Quellenangabe.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Behauptung, dass CHECK24 „alle wichtigen Konditionen\" nebeneinander zeigt, ist unpräzise, weil keine Messgröße oder Vergleichskriterium genannt wird.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 50,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar",
-        "Verbraucherzentrale – Energie: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-27"
-      ]
-    },
-    {
-      "slug": "mietwagen",
-      "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
+      "slug": "versicherungen",
+      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
       "bereich": "ratgeber",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
       "treffer": 1,
       "quellen": 1,
-      "befunde": [],
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Preisangaben für die Privathaftpflicht (35 – 65 € jährlich) werden ohne Quellenangabe genannt.",
+          "beleg": "https://www.gdv.de/gdv/medien/medieninformationen"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Behauptung, dass ein Kfz‑Wechsel zum 30. November jährlich 100 – 300 € spart, fehlt jede belegbare Marktinformation.",
+          "beleg": "https://www.gdv.de/gdv/medien/medieninformationen"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Empfehlung einer Mindestdeckungssumme von 50 Millionen Euro für Personen‑, Sach‑ und Vermögensschäden in der Privathaftpflicht wird nicht durch eine Quelle belegt.",
+          "beleg": "https://www.gdv.de/gdv/medien/medieninformationen"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Aussage, dass Elementarschäden bei Wohn‑ und Hausratversicherung „unverzichtbar“ seien, ist ein unqualifiziertes Superlativ ohne messbare Grundlage.",
+          "beleg": ""
+        },
+        {
+          "typ": "praezision",
+          "text": "Der Hinweis, dass ein jährlicher Kfz‑Wechsel‑Check zum Stichtag 30. November „fast immer“ zu Einsparungen führt, ist pauschal und nicht durch konkrete Daten gestützt.",
+          "beleg": ""
+        }
+      ],
       "geo": 83,
       "fehler": [
-        "Verbraucherzentrale – Reise: Feed nicht lesbar"
+        "Verbraucherzentrale – Versicherungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
+      "aenderungen": [
+        "YMYL: Belegkette bleibt redaktionell (Signale nur im Dossier)",
+        "faktencheck: 2026-10-30"
+      ]
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
+      "bereich": "artikel",
+      "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-27"
+        "faktencheck: 2026-10-30"
+      ]
+    },
+    {
+      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+      "bereich": "artikel",
+      "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass eine „Zero‑Excess“-Option die Kaution komplett auf 0 € senkt und dafür 5 €‑12 € pro Tag kostet, wird von der Verbraucherzentrale nicht belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 € pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, wird von der Verbraucherzentrale nicht bestätigt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
+      "aenderungen": [
+        "quellen: 1 Belege",
+        "faktencheck: 2026-10-30"
       ]
     }
   ]
