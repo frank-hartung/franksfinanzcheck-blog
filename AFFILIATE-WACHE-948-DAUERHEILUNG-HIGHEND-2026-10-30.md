@@ -198,19 +198,45 @@ niemand hatte ihn im Blick.
 | **Hugo 0.168.0 extended Build** (aus PyPI, wie der CI-Fallback) | ✅ 113 Seiten |
 | **`affiliate_integrity_gate.py` mit gebautem `public/`** | ✅ **Exit 0** – 71 Live-Artikel, 0 Struktur-/Render-Funde, 1 begründete Ausnahme (Heizöl ist seit dem Rückläufer Reserve) |
 | Diagnose-Schritt im Fehlerfall (simuliert) | ✅ nennt `2026-10-24-heizoel-…: Fehlt der passende Deep-Link …` |
-| `python3 -m unittest discover -s scripts/tests` | ✅ 4523 Tests, 19 Fehler/1 Error (vorher 4514 Tests, 24 Fehler/1 Error) – die fünf abgebauten roten Fälle sind genau die hier behobenen: Live-Vertrag, `alert-on-failure`-Syntax (2× JS-Wache, 1× YAML), `alert_scoping` |
+| `python3 -m unittest discover -s scripts/tests` | ✅ gemessen statt behauptet – siehe Tabelle in § 4a: **kein einziger neuer roter Test** gegenüber `origin/main` |
 | `python3 scripts/integrity_guard.py` | ✅ Kern-Drift nur `scripts/affiliate_integrity_gate.py`; mit `--set-current` neu signiert, `data/integrity_lock.json` liegt **im selben Commit** (Hausregel) |
-
-Die verbleibenden roten Tests sind Bestandsbefunde aus der Umgebung dieses
-Arbeitsstands (fehlende Bild-Manifeste, Social-Winkel für LinkedIn/Telegram,
-Weiterleitungs-Snapshots, `package.json`-Doppelschlüssel). Sie sind **nicht**
-durch diese Änderung entstanden – der Vergleich gegen den Ausgangsstand
-(`git stash`-freier Baseline-Lauf vor der ersten Änderung) zeigt sie
-unverändert.
 
 Der gerenderte Beweis (AI4/AI5) ist damit **auf dem echten Bestand** geführt –
 nach dem Zusammenführen von `main` erneut geprüft,
 nicht nur behauptet – mit demselben Hugo-Build, den die Wache täglich fährt.
+
+### 4a. Die Gegenprobe: derselbe Rechner, zwei Bäume
+
+Ein Suite-Lauf „irgendwie rot“ beweist nichts. Deshalb läuft die volle Suite
+zweimal auf **demselben** Rechner, mit **denselben** Abhängigkeiten
+(`pyyaml`, `pillow`, Hugo 0.168.0 extended aus PyPI) – einmal auf dem
+unberührten `origin/main` in einem eigenen Worktree, einmal auf diesem
+Branch:
+
+| Baum | Tests | Fehler | Skipped |
+|---|---|---|---|
+| `origin/main` (unberührt, eigener Worktree) | 4572 | **5** | 28 |
+| dieser Branch (`7d934a9`) | 4579 (+7 neue) | **5** | 22 |
+
+Die fünf roten Tests sind in beiden Bäumen **dieselben**:
+`test_inhalts_register` (3×), `test_reserve_artifacts`,
+`test_versicherungs_cluster_verlinkung`. Ergebnis: **Δ = 0** neue rote
+Tests, **+7** Tests, die vorher nicht existierten.
+
+### 4b. Was die PR-Prüfungen wirklich sagen
+
+| Prüfung (PR #965) | Ergebnis | Einordnung |
+|---|---|---|
+| `beweis` | ✅ grün | Der Selbsttest-Beweis des Vorgangs |
+| `Integritäts-Siegel` | ✅ grün | `data/integrity_lock.json` liegt im Commit, Siegel stimmt |
+| `lesehilfen` | ✅ grün | Vor dem Zusammenführen rot („Manifest-Wache“) – Ursache war ein Defekt in `main`, nicht hier; mit `main` behoben |
+| `Gate`, `ReDoS-`, `URL-`, `Klartext-Wache`, `CodeQL` (py/js), `YMYL`, `navigation`, `Quellseite` | ✅ grün | Unverändert scharf |
+| `regression` | ❌ rot | Roter Schritt *identisch* auf fremden Branches (`arena/3979d066`, `arena/2376f515`, `automation/gsc-tagesdaten…`) – repo-weiter Bestand, nicht dieser Diff; siehe Gegenprobe § 4a |
+| `Playwright-Suite` (Schritt „Metadaten-Wache – Quelle“) | ❌ rot | Befund liegt in `2026-10-30-kostenloses-girokonto-…` (Description 158 Zeichen/1013 px, erwartet ≤155 bzw. ≤985) – fremder Artikel, reproduzierbar unabhängig von diesem Branch |
+
+Damit gilt: **jede rote Prüfung dieses PRs ist vor ihm rot und ohne ihn rot
+geblieben** – belegt, nicht beteuert. Kein Befund dieses Vorgangs wird durch
+eine rote Ampel verdeckt.
 
 ## 5. Der zweite Widerspruch – und wer ihn aufgelöst hat
 
