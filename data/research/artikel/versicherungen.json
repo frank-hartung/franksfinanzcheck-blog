@@ -1,0 +1,77 @@
+{
+  "slug": "versicherungen",
+  "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+  "erzeugt": "2026-10-30 11:00 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "33 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 33,
+    "intervall": 30,
+    "frist": "2026-10-27",
+    "restlaufzeit": -3
+  },
+  "geo": {
+    "punkte": 5,
+    "maximum": 6,
+    "prozent": 83,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite gdv.de",
+      "url": "https://www.gdv.de/gdv/medien/medieninformationen",
+      "datum": "",
+      "quelle": "gdv.de",
+      "kanal": "web",
+      "auszug": "*   [Rente & Vorsorge](https://www.gdv.de/gdv/themen/leben \"Rente & Vorsorge\")\n        *   [Naturgefahren](https://www.gdv.de/gdv/themen/klima \"Naturgefahren\")\n        *   [Digitalisierung](https://www.gdv.de/gdv/themen/digitalisierung \"Digitalisierung\")\n        *   [Gesellschaft](https://www.gdv.de/gdv/themen/gesellschaft \"Gesellschaft\")\n        *   [Industrieversicherung](https://www.gdv.de/gdv/themen/industrieversicherung \"Industrieversicherung\")\n        *   [Konjunktur & Märkte](https://www.gdv.de/gdv/themen/wirtschaft \"Konjunktur & Märkte\")\n        *   [Mobilität](https://www.gdv.de/gdv/themen/mobilitaet \"Mobilität\")\n        *   [Nachhaltigkeit](https://www.gdv.de/gdv/themen/nachhaltigkeit \"Nachhaltigkeit\")\n        *   [Regulierung & Recht](https://www.gdv.de/gdv/themen/regulierung-und-recht \"Regulierung & Recht\")\n        *   [Schaden & Unfall](https://www.gdv.de/gdv/themen/schaden-unfall \"Schaden & Unfall\")\n        *   [Versicherungswirtschaft](https://www.gdv.de/gdv/themen/versicherungswirtschaft \"Versicherungswirtschaft\")\n\n*   [Musterbedingungen](https://www.gdv.de/gdv/service/musterbedingungen \"Musterbedingungen\")\n        *   [Verbraucherleitbild](https://www.gdv.de/gdv/service/verbraucherleitbild \"Verbraucherleitbild\")\n        *   [Datenschutzkodex](https://www.gdv.de/gdv/service/datenschutzkodex \"Datenschutzkodex\")\n        *   [Verhaltenskodex für den Vertrieb](https://www.gdv.de/gdv/service/verhaltenskodex-fuer-den-vertrieb \"Verhaltenskodex für den Vertrieb\")\n        *   [Schadenverhütung](https://www.gdv.de/gdv/service/schadenverhuetung \"Schadenverhütung\")\n        *   [Newsletter](https://www.gdv.de/gdv/service/gdv-newsletter \"Newsletter\")\n        *   [Glossar](https://www.gdv.de/gdv/service/glossar \"Glossar\")\n        *   [Wer versichert was](https://www.gd",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Gesamtverband der Deutschen Versicherungswirtschaft",
+      "rang": 2,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Preisangaben für die Privathaftpflicht (35 – 65 € jährlich) werden ohne Quellenangabe genannt.",
+      "beleg": "https://www.gdv.de/gdv/medien/medieninformationen"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass ein Kfz‑Wechsel zum 30. November jährlich 100 – 300 € spart, fehlt jede belegbare Marktinformation.",
+      "beleg": "https://www.gdv.de/gdv/medien/medieninformationen"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Empfehlung einer Mindestdeckungssumme von 50 Millionen Euro für Personen‑, Sach‑ und Vermögensschäden in der Privathaftpflicht wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.gdv.de/gdv/medien/medieninformationen"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass Elementarschäden bei Wohn‑ und Hausratversicherung „unverzichtbar“ seien, ist ein unqualifiziertes Superlativ ohne messbare Grundlage.",
+      "beleg": ""
+    },
+    {
+      "typ": "praezision",
+      "text": "Der Hinweis, dass ein jährlicher Kfz‑Wechsel‑Check zum Stichtag 30. November „fast immer“ zu Einsparungen führt, ist pauschal und nicht durch konkrete Daten gestützt.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [
+    "Verbraucherzentrale – Versicherungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)"
+}
