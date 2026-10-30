@@ -4428,3 +4428,29 @@ details.toc a {
 :root[data-theme="dark"] .paginav .title {
   color: color-mix(in srgb, var(--secondary) 78%, var(--primary));
 }
+
+/* ---------- Codeblöcke: der Fokus liegt auf dem Scrollbereich (WCAG 2.1.1) ----------
+   Befund (30.10.2026, axe-core im Playwright-Lauf, [mobile],
+   /pillar/strom-sparen/): `scrollable-region-focusable` – „Scrollable region
+   must have keyboard access“. Ursache war nicht unsere Gestaltung, sondern die
+   Theme-Regel `.md-content pre code { overflow-x: auto }`: Chroma liefert
+   `<pre tabindex="0"><code>…`; damit wanderte der Scrollbereich in das nicht
+   fokussierbare `code`-Element, während `pre` (das den Fokus trägt) stehen
+   blieb. Auf schmalen Viewports läuft die Rechenformel über und wird zur
+   unerreichbaren Tafel für Tastatur- und Schalter-Nutzung.
+
+   Heilung an der Ursache: `pre` scrollt (es ist fokussierbar, tabindex=0),
+   `code` nicht mehr. Optisch unverändert – derselbe Kasten, derselbe Umbruch,
+   nur ein anderer Halter für die Bildlaufleiste. */
+.md-content pre,
+.post-content pre,
+.highlight pre.chroma {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.md-content pre code,
+.post-content pre code,
+.highlight pre.chroma code {
+  overflow-x: visible;
+}
