@@ -212,6 +212,32 @@ Keine Seite liegt über 1200; die Geometrie des Symbols ist unverändert
 
 ---
 
+## 3a. Nebenbefund aus dem E2E-Lauf: Codeblock war für Tastatur unerreichbar
+
+Der Playwright-Lauf der Prüfung meldete auf `/pillar/strom-sparen/` (nur
+`[mobile]`) einen WCAG-Verstoß:
+
+```
+■ scrollable-region-focusable (serious) – Scrollable region must have
+  keyboard access · wcag2a, wcag211, wcag213
+  · <code class="language-text" data-lang="text">
+```
+
+Ursache war nicht unsere Gestaltung, sondern die Theme-Regel
+`.md-content pre code { overflow-x: auto }`: Chroma liefert
+`<pre tabindex="0"><code>…`. Der Fokus liegt damit auf `pre`, der Scrollbereich
+aber im **nicht fokussierbaren** `code`. Auf schmalen Viewports läuft die
+Rechenformel über – Tastatur- und Schalter-Nutzung kommt nicht an den Rest.
+
+Heilung an der Ursache (eine CSS-Überschreibung, optisch unverändert –
+derselbe Kasten, derselbe Umbruch, nur ein anderer Halter für die
+Bildlaufleiste): `pre` scrollt (es trägt `tabindex="0"`), `code` nicht mehr.
+Der Befund war schon vor diesem PR vorhanden (der E2E-Lauf auf `main` ist seit
+28.10. rot); er ist hier mitbehoben, mit Vertrag in
+`scripts/tests/test_a11y_code_scroll.py`.
+
+---
+
 ## 4. Belege (Befehle und Ausgaben)
 
 ```text
