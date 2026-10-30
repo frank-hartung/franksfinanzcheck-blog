@@ -4,12 +4,12 @@ hugo v0.168.0-e27a6760c5547237f87d353aebe0580feadb20f4+extended linux/amd64 Buil
 
                   │  DE  
 ──────────────────┼──────
- Pages            │  113 
- Paginator pages  │   17 
+ Pages            │  114 
+ Paginator pages  │   19 
  Non-page files   │   40 
  Static files     │ 2660 
  Processed images │    0 
  Aliases          │    0 
  Cleaned          │    0 
 
-Total in 1256 ms
+Total in 1822 ms

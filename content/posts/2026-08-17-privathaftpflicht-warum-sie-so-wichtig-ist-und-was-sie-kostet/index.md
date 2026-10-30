@@ -1,12 +1,9 @@
 ---
-lastmod: 2026-10-28
+lastmod: 2026-10-30
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Privathaftpflicht im Überblick: Welche Schäden sie abdeckt, welche Klauseln wichtig sind und wie sich Kosten und Leistungen vergleichen lassen."
-date: 2026-10-28T01:24:59Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-28T01:26:09Z
-cadence_grund: "ymyl-review (#826): Fachprüfung, Belegkette und Faktencheck am 2026-10-30 abgeschlossen – Re-Queue (nächster Publikationstag entscheidet)"
+date: 2026-10-30T15:55:43Z
+draft: false
 endredaktion_status: freigegeben
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
