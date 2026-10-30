@@ -94,6 +94,11 @@ on:
       # Wer dort Elemente hinzufügt, muss diese Messung sehen.
       - "static/premium/**"
       - "scripts/dom_laufzeit_messung.mjs"
+      # W1 der Trigger-Wache: Wer die Manifest-Wache aufruft, muss sie auch
+      # im Filter nennen – sonst prüft dieser Lauf eine Datei nie, die ihn
+      # nichts angeht (und umgekehrt).
+      - "scripts/manifest_guard.py"
+      - "scripts/tests/test_manifest_guard.py"
       - "scripts/tests/test_dom_element_vertrag.py"
       - ".github/workflows/layout-ai.yml"
   pull_request:
@@ -118,6 +123,11 @@ on:
       # Wer dort Elemente hinzufügt, muss diese Messung sehen.
       - "static/premium/**"
       - "scripts/dom_laufzeit_messung.mjs"
+      # W1 der Trigger-Wache: Wer die Manifest-Wache aufruft, muss sie auch
+      # im Filter nennen – sonst prüft dieser Lauf eine Datei nie, die ihn
+      # nichts angeht (und umgekehrt).
+      - "scripts/manifest_guard.py"
+      - "scripts/tests/test_manifest_guard.py"
       - "scripts/tests/test_dom_element_vertrag.py"
       - ".github/workflows/layout-ai.yml"
 
