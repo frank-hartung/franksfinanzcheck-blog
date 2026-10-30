@@ -8,7 +8,7 @@
  {
   "grund": "gleicher Pillar",
   "inlinks_jetzt": 0,
-  "quelle": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/",
+  "quelle": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
   "ziel": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
  },
  {
@@ -25,8 +25,14 @@
  },
  {
   "grund": "gleicher Pillar",
-  "inlinks_jetzt": 1,
+  "inlinks_jetzt": 0,
   "quelle": "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/",
-  "ziel": "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/"
+  "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
+ },
+ {
+  "grund": "gleicher Pillar",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/",
+  "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
  }
 ]
