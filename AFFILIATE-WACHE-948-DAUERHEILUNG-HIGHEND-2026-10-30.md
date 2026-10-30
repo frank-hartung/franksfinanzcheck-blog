@@ -196,7 +196,7 @@ niemand hatte ihn im Blick.
 | `python3 scripts/redos_guard.py` + `--selftest` | ✅ 1335 Dateien, 0 Funde |
 | `python3 scripts/skript_syntax_wache.py` | ✅ 589 Dateien |
 | **Hugo 0.168.0 extended Build** (aus PyPI, wie der CI-Fallback) | ✅ 113 Seiten |
-| **`affiliate_integrity_gate.py` mit gebautem `public/`** | ✅ **Exit 0** – 72 Live-Artikel, 0 Struktur-/Render-Funde, 2 begründete Ausnahmen |
+| **`affiliate_integrity_gate.py` mit gebautem `public/`** | ✅ **Exit 0** – 71 Live-Artikel, 0 Struktur-/Render-Funde, 1 begründete Ausnahme (Heizöl ist seit dem Rückläufer Reserve) |
 | Diagnose-Schritt im Fehlerfall (simuliert) | ✅ nennt `2026-10-24-heizoel-…: Fehlt der passende Deep-Link …` |
 | `python3 -m unittest discover -s scripts/tests` | ✅ 4523 Tests, 19 Fehler/1 Error (vorher 4514 Tests, 24 Fehler/1 Error) – die fünf abgebauten roten Fälle sind genau die hier behobenen: Live-Vertrag, `alert-on-failure`-Syntax (2× JS-Wache, 1× YAML), `alert_scoping` |
 | `python3 scripts/integrity_guard.py` | ✅ Kern-Drift nur `scripts/affiliate_integrity_gate.py`; mit `--set-current` neu signiert, `data/integrity_lock.json` liegt **im selben Commit** (Hausregel) |
@@ -208,12 +208,13 @@ durch diese Änderung entstanden – der Vergleich gegen den Ausgangsstand
 (`git stash`-freier Baseline-Lauf vor der ersten Änderung) zeigt sie
 unverändert.
 
-Der gerenderte Beweis (AI4/AI5) ist damit **auf dem echten Bestand** geführt,
+Der gerenderte Beweis (AI4/AI5) ist damit **auf dem echten Bestand** geführt –
+nach dem Zusammenführen von `main` erneut geprüft,
 nicht nur behauptet – mit demselben Hugo-Build, den die Wache täglich fährt.
 
-## 5. Offener Befund (bewusst nicht mitgeheilt)
+## 5. Der zweite Widerspruch – und wer ihn aufgelöst hat
 
-Der Heizöl-Artikel trägt weiterhin
+Der Heizöl-Artikel trug neben dem Affiliate-Widerspruch einen zweiten:
 
 ```yaml
 redaktionelle_pruefung:
@@ -223,13 +224,21 @@ redaktionelle_pruefung:
                     Veröffentlichung erforderlich."
 ```
 
-und ist gleichzeitig `draft: false` (live). `editorial_review_gate.py` ist
-fail-closed nur für die Risikoklasse `hoch`; für `erhoeht` ist „ausstehend“
-kein Blocker. Ob dieser Text live bleiben soll, ist eine **redaktionelle**
-Entscheidung (Quellenkette) und keine Affiliate-Frage – sie wird hier
-deshalb gemeldet statt still vollzogen. Empfehlung: entweder Belegkette
-nachziehen und `status`/`aenderungsgrund` fortschreiben, oder den Artikel
-über den regulären Rückläufer-Pfad (`reserve_janitor`) zurückziehen.
+… und war gleichzeitig `draft: false` (live). `editorial_review_gate.py` ist
+fail-closed nur für die Risikoklasse `hoch`; für `erhoeht` blockiert
+„ausstehend“ nicht. Ob der Text live bleiben darf, ist eine **redaktionelle**
+Entscheidung (Quellenkette), keine Affiliate-Frage – sie wurde hier deshalb
+gemeldet statt still vollzogen.
+
+**Erledigt durch das Haus selbst:** Während dieser Arbeit hat der reguläre
+Rückläufer-Pfad den Artikel abgeholt (`draft: true`, `reserve: true`,
+`reserve_published` entfernt) – er ist seither Reserve, nicht Live-Bestand.
+Damit ist der Artikel live **und** im Entwurf konsistent: Ausnahme, kein CTA,
+Prüfung ausstehend. Für die Reserve-Zertifizierung bleibt er prüfbar
+(`affiliate_integrity_gate.py --heal --file`, A8, Intent-Wache).
+
+Der Affiliate-Widerspruch dieses Vorgangs war davon unabhängig und ist in
+M1/M2 geheilt.
 
 ## 6. Produktionsgrenze
 
