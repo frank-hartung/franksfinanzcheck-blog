@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 30.10.2026 12:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.10.2026 19:40 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,8 @@
 ## Kommende Beiträge
 
 ### Fr, 30. Oktober 2026
-- **17:30** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _thread_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
+- **20:00** ⏳ Flugvergleich im Winter: So findest du echte Billigflüge — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/
 ### Sa, 31. Oktober 2026
 - **11:30** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
@@ -42,6 +42,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 30.10.2026 19:40 · Frugalismus Familie: Clever sparen ohne Verzicht → https://mastodon.social/@FranksFinanzcheck/117531321037727209
 - ✅ 29.10.2026 19:59 · Strategisch sparen: So kannst du deine Reisekasse füllen → https://mastodon.social/@FranksFinanzcheck/117525734870640551
 - ✅ 29.10.2026 12:35 · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis → https://mastodon.social/@FranksFinanzcheck/117523988347549679
 - ✅ 28.10.2026 19:55 · Gasrechnung senken: Fehler im Spätsommer vermeiden → https://mastodon.social/@FranksFinanzcheck/117520055691320012
@@ -51,7 +52,6 @@
 - ✅ 26.10.2026 18:26 · Bankgebühren senken: 7 Schritte zum günstigeren Konto → https://mastodon.social/@FranksFinanzcheck/117508382297357813
 - ✅ 26.10.2026 12:15 · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag → https://mastodon.social/@FranksFinanzcheck/117506920725188960
 - ✅ 25.10.2026 15:58 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken → https://mastodon.social/@FranksFinanzcheck/117502135144875649
-- ✅ 24.10.2026 16:38 · Sicher heizen: Was sie abdeckt und wie lange sie läuft → https://mastodon.social/@FranksFinanzcheck/117496395618697602
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
