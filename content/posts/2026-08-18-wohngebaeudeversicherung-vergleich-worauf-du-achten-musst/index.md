@@ -3,7 +3,10 @@ lastmod: 2026-10-30
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
 date: 2026-10-30T16:50:34Z
-draft: false
+draft: true
+cadence_wait: true
+cadence_demoted: 2026-10-30T23:09:38Z
+cadence_grund: "kadenz: über Tages-Max"
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
