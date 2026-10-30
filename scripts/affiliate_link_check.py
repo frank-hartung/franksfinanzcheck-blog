@@ -299,6 +299,19 @@ def find_affiliate_links(body):
     return sorted(links)
 
 
+def cta_ziele(body: str) -> list[str]:
+    """Menschenlesbare CTA-Ziele für Befundtexte: erst `/go/`-Schlüssel,
+    dann rohe Partner-URLs. Die Prüfung rechnet mit normalisierten URLs
+    (`find_affiliate_links`); ein Befund muss aber das nennen, was im Text
+    steht – sonst sucht der Leser im Artikel nach einer URL, die dort nicht
+    vorkommt (#948)."""
+    keys = sorted({m.group(1) for m in re.finditer(r"/go/([\w-]+)/?", body or "")})
+    raw = sorted({m.group(0) for m in re.finditer(
+        r"https://a\.(?:check24\.net|partner-versicherung\.de)/[^)\s\"']+",
+        body or "")})
+    return [f"/go/{k}/" for k in keys] + raw
+
+
 def expected_target(post):
     """Erwartetes Ziel für einen Post: (art, deep, name)
     art: 'check24' | 'tarifcheck' | 'generic_ok'"""
@@ -380,6 +393,29 @@ def check_post(post):
         # Ein Metadatenfehler blockiert zwar den Lauf, darf aber die
         # unabhängige Link-/Partner-ID-Prüfung nicht kurzschließen.
         problems.append({"severity": "error", "msg": metadata_error})
+    if exempt:
+        # DAUERHEILUNG #948 (30.10.2026): Eine Ausnahme und ein vorhandener
+        # Affiliate-CTA sind eine HALBE ANGABE – zwei redaktionelle
+        # Entscheidungen, die sich widersprechen. Der Vertrag aus #762 bleibt
+        # unangetastet (die Ausnahme hebt nur die Mindestpflicht auf, jeder
+        # vorhandene Link bleibt voll geprüft); hier wird der Widerspruch
+        # aber BENANNT, bevor die Deep-Link-Prüfung mit einer irreführenden
+        # Meldung antwortet. Genau daran scheiterte die Tageswache am
+        # 29.10.2026: Der einzige sichtbare Satz war „Fehlt der passende
+        # Deep-Link“ – die Ursache („ausgenommen, aber CTA im Text“) stand
+        # nirgends. Keine Heilung: ob CTA oder Ausnahme weicht, ist eine
+        # Redaktionsentscheidung.
+        problems.append({
+            "severity": "info",
+            "msg": ("Ausnahme und CTA widersprechen sich: `affiliate_exempt: true` "
+                    f"({exemption_reason}), aber der Artikel enthält "
+                    f"{len(links)} Affiliate-CTA(s) – "
+                    + ", ".join(cta_ziele(post["body"])[:3] or links[:3])
+                    + (" …" if len(cta_ziele(post["body"])) > 3 else "")
+                    + ". Die Ausnahme hebt nur die Mindestpflicht auf; CTA "
+                      "entfernen oder Ausnahme zurücknehmen (Redaktionsentscheidung, "
+                      "keine automatische Heilung)."),
+        })
     art, deep, name = expected_target(post)
 
     # Partner-IDs validieren

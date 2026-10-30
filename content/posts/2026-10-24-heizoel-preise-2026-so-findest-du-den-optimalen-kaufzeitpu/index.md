@@ -11,7 +11,7 @@ redaktionelle_pruefung:
   aenderungsgrund: "Zurückgestellt: saisonale Preisprognosen und konkrete Einsparzahlen waren nicht mit einer belastbaren, datierten Quellenkette belegt; redaktionelle Prüfung vor erneuter Veröffentlichung erforderlich."
 kurzantwort: "Heizölpreise schwanken mit Rohölpreis, Nachfrage und Jahreszeit. Beobachte den Markt über mehrere Wochen, vergleiche mehrere Anbieter und bestelle mit Puffer, bevor der Tank leer ist; einen garantierten Tiefpunkt gibt es nicht."
 affiliate_exempt: true
-affiliate_exempt_reason: "Für Heizöl ist keine passende, registrierte Partnerroute vorhanden; Stromtarif-CTAs wären sachfremd. Der Artikel bleibt bis zur Quellenprüfung Entwurf."
+affiliate_exempt_reason: "Für Heizöl ist keine passende, registrierte Partnerroute vorhanden (CHECK24 führt kein Heizöl); ein Strom- oder Gastarif-CTA wäre sachfremd. Der Artikel bleibt deshalb bewusst ohne Affiliate-CTA."
 
 tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
@@ -37,8 +37,6 @@ faktencheck: 2026-10-07
 ---
 
 Du willst 300 € sparen und den richtigen Moment für den Kauf von Öl treffen im Modellfall? Dann beobachte die **Heizöl Preise** genau und bestelle am Tiefpunkt. So senkst du deine Kosten für das Heizen deutlich. Du musst dabei nicht auf Komfort in deinem Heim verzichten.
-
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Eine kluge Planung schont dein Konto und sichert die Wärme für den Winter. Viele Haushalte verschenken jedes Jahr viel Geld durch einen falschen Zeitpunkt beim Kauf.
 
@@ -174,13 +172,5 @@ Dieses Modell ordnet deine Gedanken und hilft dir bei einer klugen Entscheidung 
 
 Dann rechnest du die Konditionen für die Lieferung aus, um versteckte Kosten zu finden. Im dritten Schritt sicherst du dir das Fenster für die Kündigung, damit du im nächsten Jahr wieder frei wählen kannst. Am Ende hältst du deinen Kurs fest und lässt dich nicht von kurzen Schwankungen am Markt nervös machen. Mit diesem System vermeidest du teure Fehler aus einer Laune heraus.
 
----
-
-
----
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

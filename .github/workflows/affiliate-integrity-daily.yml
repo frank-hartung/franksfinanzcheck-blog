@@ -126,11 +126,118 @@ jobs:
           version: ${{ env.HUGO_VERSION }}
 
       # ============ STAGE 1: DETEKTOR-SELBSTTEST (fail-closed) ============
+      # 30.10.2026 (#948): Der Schritt lief bis heute ohne Protokoll. Ein roter
+      # Selbsttest kürte damit ALLES ab (Hugo, Gate, Intent, Report) und das
+      # Issue sagte nur „Selftests=failure/skipped · Exit fehlt“ – ohne einen
+      # einzigen Namen. Jetzt schreibt der Schritt sein Protokoll, veröffentlicht
+      # die ersten Befundzeilen als Lauf-Annotation und gibt sie dem Issue mit.
+      # Fail-closed bleibt: Rot heißt rot, es wird nichts geheilt.
       - name: Detektor-Selbsttest (Wache muss sehen können)
         id: selftest
         run: |
-          python3 scripts/affiliate_integrity_gate.py --selftest
-          python3 -m unittest scripts.tests.test_affiliate_exemption scripts.tests.test_affiliate_link_check
+          set +e
+          set -o pipefail
+          {
+            python3 scripts/affiliate_integrity_gate.py --selftest
+            python3 -m unittest scripts.tests.test_affiliate_exemption scripts.tests.test_affiliate_link_check
+          } 2>&1 | tee /tmp/selftest.log
+          code=$?
+          echo "exit_code=${code}" >> "$GITHUB_OUTPUT"
+          # Die Zeilen, die einen Menschen zur Ursache führen: Testname,
+          # Assertion, Artikel-Slug. Bewusst gekürzt und ohne Secrets – der
+          # Detektor liest nur Repository-Inhalte.
+          detail="$(grep -aE '^(FAIL|ERROR):|^AssertionError|^[A-Za-z]*Error:|::error::|^\s+- ' /tmp/selftest.log | head -n 12 || true)"
+          if [ -z "$detail" ]; then
+            detail="$(tail -n 12 /tmp/selftest.log || true)"
+          fi
+          {
+            echo "detail<<__SELFTEST_DETAIL__"
+            printf '%s\n' "$detail" | cut -c1-300 | head -c 4000
+            echo "__SELFTEST_DETAIL__"
+          } >> "$GITHUB_OUTPUT"
+          if [ "$code" -ne 0 ]; then
+            echo "::error::Selbsttest der Wache rot – fail-closed, es wird nichts geheilt. Erster Befund: $(printf '%s' "$detail" | head -n 1)"
+            {
+              echo "## 🛑 Detektor-Selbsttest rot (fail-closed)"
+              echo ""
+              echo '```text'
+              printf '%s\n' "$detail"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+          exit "$code"
+
+      # ============ STAGE 1-N: BEFUND BEI ROTER SELBSTPRÜFUNG ==============
+      # Der Selbsttest hält den Beweis an (keine Heilung, keine Veröffentlichung).
+      # Damit der Vorgang trotzdem BEARBEITBAR ist, wird hier eine reine
+      # DIAGNOSE gezogen: `--dry-run` (keine Heilung), `--no-build` (kein
+      # Hugo-Lauf), `--json` (kein Report-/Zustandsschreiben). Sie ist
+      # ausdrücklich kein Beweis – sie nennt nur, WELCHER Artikel WAS verletzt.
+      - name: Befund zur roten Selbstprüfung (nur lesend, keine Heilung)
+        id: befund
+        if: ${{ always() && !cancelled() && (steps.selftest.outcome != 'success' || steps.intent_selftest.outcome != 'success') }}
+        continue-on-error: true
+        run: |
+          set +e
+          # Quelle 1: Integritäts-Gate, rein lesend (kein Build, keine Heilung,
+          # keine Report-/Zustandsschreibung).
+          python3 scripts/affiliate_integrity_gate.py --json --dry-run --no-build \
+            > /tmp/befund.json 2>/tmp/befund.err
+          # Quelle 2: Link-Checker – GENAU der Vertrag, der im Selbsttest
+          # (test_affiliate_link_check) über den Live-Bestand läuft. Er wird
+          # hier direkt aufgerufen statt über `--json`, weil dessen Report-
+          # Schreibung Dateien anfassen würde; ein Befund darf nichts schreiben.
+          python3 - <<'PY' > /tmp/linkcheck_befund.txt 2>/tmp/linkcheck.err
+          import sys
+          sys.path.insert(0, "scripts")
+          try:
+              import affiliate_link_check as link_check
+              for post in link_check.load_posts():
+                  for problem in link_check.check_post(post):
+                      if problem["severity"] == "error":
+                          print(f'{post["slug"]}: {problem["msg"]}')
+          except Exception as exc:  # noqa: BLE001 – Diagnose, kein Beweis
+              print(f"(Werkzeug) Link-Checker nicht auswertbar: {type(exc).__name__}: {exc}")
+          PY
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+
+          text = []
+          # Link-Checker zuerst: Er prüft den Live-Bestand am schärfsten und
+          # war am 29.10.2026 die tatsächliche Fehlerquelle (#948).
+          for line in (Path("/tmp/linkcheck_befund.txt").read_text(encoding="utf-8")
+                       if Path("/tmp/linkcheck_befund.txt").is_file() else "").splitlines():
+              if line.strip():
+                  text.append(line.strip())
+          raw = Path("/tmp/befund.json")
+          try:
+              data = json.loads(raw.read_text(encoding="utf-8"))
+          except (OSError, ValueError):
+              data = {}
+          for slug, finding in sorted((data.get("findings") or {}).items()):
+              for problem in (finding.get("problems") or [])[:4]:
+                  text.append(f"{slug}: {problem}")
+          for slug, problem in sorted((data.get("render_problems") or {}).items()):
+              text.append(f"{slug}: {problem}")
+          for error in data.get("errors") or []:
+              # „public/ fehlt" ist im Diagnose-Zustand erwartbar und keine
+              # Information über den Artikel – deshalb nur echte Werkzeugfehler.
+              if "public/ fehlt" not in error:
+                  text.append(f"(Werkzeug) {error}")
+          if not text:
+              err = ""
+              try:
+                  err = Path("/tmp/befund.err").read_text(encoding="utf-8").strip()
+              except OSError:
+                  err = ""
+              text.append(err.splitlines()[-1] if err else
+                          "Kein lesbarer Befund – bitte das Lauf-Artefakt prüfen.")
+          print("befund<<__BEFUND__")
+          print("\n".join(line[:300] for line in text[:20])[:4000])
+          print("__BEFUND__")
+          print(f"count={len(text)}")
+          PY
 
       # ============ STAGE 1a: INTENT-WACHE-SELBSTTEST (fail-closed) ======
       # 19.09.2026 (Auftrag Frank: „Falsche Affiliate-Ziele sofort
@@ -399,6 +506,9 @@ jobs:
           INTENT_EXIT: ${{ steps.intent.outputs.exit_code }}
           INTENT_HUMAN_FINDINGS: ${{ steps.intent.outputs.human_findings }}
           INTENT_SELFTEST_OUTCOME: ${{ steps.intent_selftest.outcome }}
+          SELFTEST_EXIT: ${{ steps.selftest.outputs.exit_code }}
+          SELFTEST_DETAIL: ${{ steps.selftest.outputs.detail }}
+          BEFUND: ${{ steps.befund.outputs.befund }}
         with:
           script: |
             const fs = require('fs');
@@ -435,6 +545,11 @@ jobs:
             let hugoLog = '';
             try { hugoLog = fs.readFileSync('/tmp/hugo-build.log', 'utf-8'); }
             catch (e) {}
+            // #948: Ohne dieses Protokoll war ein roter Selbsttest im Issue
+            // unsichtbar („Exit fehlt“). Der Schritt schreibt es immer.
+            let selftestLog = '';
+            try { selftestLog = fs.readFileSync('/tmp/selftest.log', 'utf-8'); }
+            catch (e) { selftestLog = ''; }
 
             const listed = await github.rest.issues.listForRepo({
               owner: context.repo.owner, repo: context.repo.repo,
@@ -502,6 +617,39 @@ jobs:
               `**Selftests:** ${process.env.SELFTEST_OUTCOME || '?'}/${process.env.INTENT_SELFTEST_OUTCOME || '?'} · ` +
               `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Integritätsfunde:** ${process.env.UNRESOLVED_PROBLEMS || 0}`,
               '',
+              '',
+              // #948: Ein Werkzeugfehler ohne Namen ist nicht bearbeitbar.
+              // Diese Sektion nennt den roten Selbsttest, seine ersten
+              // Befundzeilen und die lesende Diagnose des Gates.
+              ...(process.env.SELFTEST_OUTCOME !== 'success'
+                  || process.env.INTENT_SELFTEST_OUTCOME !== 'success'
+                ? [
+                    '---',
+                    '',
+                    '## 🛑 Selbstprüfung rot – Befund (fail-closed, nichts veröffentlicht)',
+                    '',
+                    `Der Selbsttest der Wache ist rot (Detektor/Vertrag: `
+                      + `${process.env.SELFTEST_OUTCOME || '?'}, Exit `
+                      + `${process.env.SELFTEST_EXIT || 'unbekannt'}; Intent: `
+                      + `${process.env.INTENT_SELFTEST_OUTCOME || '?'}). Damit sind `
+                      + `Hugo-Build, Integritäts-Gate und Intent-Wache bewusst `
+                      + `übersprungen: Ein Beweis mit defektem Detektor wäre wertlos.`,
+                    '',
+                    (process.env.SELFTEST_DETAIL || '').trim()
+                      ? '```text\n' + String(process.env.SELFTEST_DETAIL).trim().slice(0, 4000) + '\n```'
+                      : '_Kein Befundtext im Selbsttest-Protokoll._',
+                    '',
+                    '### Lesende Diagnose des Gates (kein Beweis, keine Heilung)',
+                    '',
+                    (process.env.BEFUND || '').trim()
+                      ? '```text\n' + String(process.env.BEFUND).trim().slice(0, 4000) + '\n```'
+                      : '_Keine Diagnose verfügbar (Modul/Import defekt). Siehe Lauf-Artefakt._',
+                    '',
+                    '**Nächster Schritt:** Den genannten Artikel bzw. Vertrag heilen, dann '
+                      + 'die Wache erneut starten. Eine Heilung durch Wegdrücken des Befunds '
+                      + 'ist ausgeschlossen.',
+                  ]
+                : []),
               '---',
               '',
               '## Link-Integrität (AI1–AI5)',
@@ -515,7 +663,8 @@ jobs:
               '<details><summary>Gate-Logs</summary>',
               '',
               '```',
-              ([log, intentLog, hugoLog].filter(Boolean).join('\n\n---\n\n') || '(kein Log)').slice(0, 20000),
+              ([log, intentLog, hugoLog, selftestLog].filter(Boolean)
+                .join('\n\n---\n\n') || '(kein Log)').slice(0, 20000),
               '```',
               '</details>',
               '',
@@ -561,6 +710,8 @@ jobs:
         if: ${{ always() && !cancelled() }}
         env:
           SCHRITT_STATE_HEARTBEAT: ${{ steps.state.outputs.heartbeat }}
+          SCHRITT_SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
+          SCHRITT_SELFTEST_EXIT: ${{ steps.selftest.outputs.exit_code }}
           SCHRITT_GATE_EXIT_CODE: ${{ steps.gate.outputs.exit_code }}
           SCHRITT_STATE_HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
           SCHRITT_STATE_UNRESOLVED_PROBLEMS: ${{ steps.state.outputs.unresolved_problems }}
@@ -583,6 +734,7 @@ jobs:
             echo "|---|---|"
             echo "| Herzschlag (dieser Lauf) | \`${SCHRITT_STATE_HEARTBEAT}\` |"
             echo "| Lage gegenüber letztem Lauf | ${LAGE_TEXT} |"
+            echo "| Detektor-Selbsttest | ${SCHRITT_SELFTEST_OUTCOME} (Exit ${SCHRITT_SELFTEST_EXIT:-}) |"
             echo "| Gate-Exit | ${SCHRITT_GATE_EXIT_CODE} |"
             echo "| Automatisch geheilt | ${SCHRITT_STATE_HEALED_COUNT} Artikel |"
             echo "| Offene Restfunde | ${SCHRITT_STATE_UNRESOLVED_PROBLEMS} |"
@@ -598,7 +750,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
-        if: always() && !cancelled() && (steps.gate.outputs.exit_code != '0' || steps.intent.outputs.exit_code != '0')
+        if: ${{ always() && !cancelled() && (steps.gate.outputs.exit_code != '0' || steps.intent.outputs.exit_code != '0' || steps.selftest.outcome != 'success') }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: affiliate-integrity-run-${{ github.run_id }}
@@ -607,6 +759,12 @@ jobs:
             .affiliate_integrity_state.json
             AFFILIATE-INTENT-REPORT.md
             .affiliate_intent_state.json
+            /tmp/selftest.log
+            /tmp/befund.json
+            /tmp/befund.err
+            /tmp/hugo-build.log
+          # #948: Auch ein roter Selbsttest hinterlässt jetzt ein Artefakt –
+          # vorher wurde die Datei bei gesprungenem Gate gar nicht erst geladen.
           if-no-files-found: ignore
           retention-days: 14
 
@@ -620,6 +778,7 @@ jobs:
           SCHRITT_COMMIT_PUSH_VERIFIED: ${{ steps.commit.outputs.push_verified }}
           SCHRITT_COMMIT_PUSHED: ${{ steps.commit.outputs.pushed }}
           SCHRITT_SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
+          SCHRITT_SELFTEST_EXIT: ${{ steps.selftest.outputs.exit_code }}
           SCHRITT_INTENT_SELFTEST_OUTCOME: ${{ steps.intent_selftest.outcome }}
           SCHRITT_HUGO_OUTCOME: ${{ steps.hugo.outcome }}
         run: |
@@ -631,7 +790,10 @@ jobs:
           VERIFIED="${SCHRITT_COMMIT_PUSH_VERIFIED}"
           PUSHED="${SCHRITT_COMMIT_PUSHED}"
           if [ "$SELF" != "success" ]; then
-            echo "::error::Detektor-Selbsttest nicht bestanden – fail-closed."
+            # #948: Der Befund steht im Protokoll und im Issue; hier die
+            # kürzeste Fassung für die Lauf-Ansicht.
+            grep -aE '^(FAIL|ERROR):|^AssertionError' /tmp/selftest.log 2>/dev/null | head -n 5 || true
+            echo "::error::Detektor-Selbsttest nicht bestanden – fail-closed (Exit ${SCHRITT_SELFTEST_EXIT:-unbekannt}). Befund siehe Schritt „Detektor-Selbsttest“ und Issue."
             exit 1
           fi
           if [ "$INTENT_SELF" != "success" ]; then

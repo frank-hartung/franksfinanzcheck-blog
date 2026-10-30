@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-29T13:56:18.029873+02:00",
+ "stand": "2026-10-30T13:48:40.869967+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -82,7 +82,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Schuldenfrei ins neue Jahr",
+   "anfrage": "SF-Klasse retten",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -103,6 +103,16 @@
   },
   {
    "anfrage": "Secondhand Kleidung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Secondhand Möbel",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -173,6 +183,16 @@
   },
   {
    "anfrage": "Smarte Steckdosen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Solaranlage Kosten",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

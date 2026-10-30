@@ -143,6 +143,42 @@ Exit-Codes: `0` grün · `1` Inhaltsschaden offen · `2` Werkzeugfehler
 (Beweis nicht möglich → es wird **nichts** veröffentlicht).
 Shortcode-CTAs (`tarifvergleich`, `einspartabelle`) laufen über
 `layouts/_partials/affiliate_anchor_attrs.html` – dort gilt derselbe Vertrag.
+
+### Wenn das Issue sagt: „Beweis nicht möglich (Werkzeugfehler, fail-closed)“
+
+Seit 30.10.2026 (#948) ist dieser Zustand **bearbeitbar**, ohne ein zweites
+Fenster zu öffnen. Das Issue nennt in der Sektion
+„🛑 Selbstprüfung rot – Befund“:
+
+1. **den roten Selbsttest** mit Exit-Code und den ersten Befundzeilen
+   (Testname, Assertion, Artikel-Slug),
+2. **die lesende Diagnose** von Link-Checker und Integritäts-Gate – sie
+   heilt nichts, baut nichts und schreibt nichts, sie nennt nur den Artikel
+   und den verletzten Vertrag,
+3. die zugehörigen Protokolle als Lauf-Artefakt
+   (`affiliate-integrity-run-<id>`, u. a. `selftest.log`).
+
+Fail-closed bleibt unangetastet: Solange der Selbsttest rot ist, laufen
+Hugo-Build, Gate und Intent-Wache nicht, und `publish_gate.py` veröffentlicht
+nichts. Ein roter Lauf heißt hier **nicht** „kaputte Technik“, sondern
+häufig „ein Artikel verletzt den Vertrag“.
+
+### Redaktionelle Ausnahme (`affiliate_exempt`)
+
+Eine Ausnahme (`affiliate_exempt: true` **plus** Begründung) hebt
+**ausschließlich** die Mindestpflicht „mindestens ein Affiliate-Link“ auf.
+Jeder vorhandene Link bleibt voll geprüft (Route, Deep-Link, Partner-ID,
+`rel="sponsored"`, Gateway).
+
+Steht ein CTA **neben** einer Ausnahme, ist das eine **halbe Angabe**: zwei
+redaktionelle Entscheidungen, die sich widersprechen („es gibt kein passendes
+Angebot“ vs. „hier ist das Angebot“). Der Wochen-Checker und der
+Tagesreport nennen diesen Widerspruch ausdrücklich als *Hinweis* – geheilt
+wird er nie automatisch, weil die Entscheidung „CTA entfernen oder Ausnahme
+zurücknehmen“ redaktionell ist. Beispiel: der Heizöl-Ratgeber vom 24.10.2026
+(#948) hatte den Portal-CTA `…→ Jetzt Fixkosten auf CHECK24 prüfen`
+(`/go/allgemein/`) neben einer Ausnahme mit der Begründung „für Heizöl gibt
+es keine Partnerroute“ – deshalb stand die Tageswache fail-closed still.
 Hintergrund: `AFFILIATE-INTEGRITY-GATE-REPORT.md` · Tagesreport:
 `AFFILIATE-INTEGRITY-REPORT.md`.
 

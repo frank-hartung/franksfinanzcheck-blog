@@ -126,6 +126,7 @@ PUBLISH_GATE_HART_FAMILIEN = {
     "T1-zeichenlaenge": "check_length.py",
     "T2-seo-audit": "seo_audit.py",
     "F1-faktenfrische": "faktenfrische.py",
+    "F4-fachbefund": "faktenfrische_befund_ledger.py",
     "T3-titel-r5": "check_titles.py",
     "T4-keyword-score": "keyword_optimizer.py",
     "T5-lesbarkeit": "readability_check.py",
@@ -554,6 +555,16 @@ def sammle(live_slugs: list[str], heute: dt.date) -> tuple[dict, dict, dict]:
     except Exception as exc:  # noqa: BLE001 – fail-closed, nie still grün
         f1_fail, f1_tool = {}, True
         tool_fehler["F1-faktenfrische"] = f"Faktenfrische nicht auswertbar: {exc}"
+
+    try:
+        befund_fail, befund_warn, befund_tool = publish_gate.fakten_befund_failures(live_slugs)
+        if befund_tool:
+            tool_fehler["F4-fachbefund"] = befund_warn or "Fachbefunde nicht beweisbar"
+        for slug, probleme in befund_fail.items():
+            for problem in probleme:
+                _merke(befunde, slug, "F4-fachbefund", problem)
+    except Exception as exc:
+        tool_fehler["F4-fachbefund"] = f"Fachbefund-Ledger nicht auswertbar: {exc}"
 
     try:
         faktenfrische = _importiere_gate_module("faktenfrische")
@@ -989,10 +1000,10 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
                   "Rückstand nicht fristgerecht ab. Zu entscheiden sind Takt "
                   "oder Intervall – in `data/agent_reach/faktenfrische.yaml`, "
                   "menschlich (die Maschine entscheidet das nie).")
-            elif kap.get("verletzungen_neu"):
-                seiten = ("Seite" if kap["verletzungen_neu"] == 1 else "Seiten")
-                z(f"⚠️ {kap['verletzungen_neu']} {seiten} mit zukünftiger Frist "
-                  "würden gerissen – Takt erhöhen oder Budget anheben.")
+            elif kap.get("verletzungen_neu") or kap.get("verletzungen_folge"):
+                z(f"⚠️ {kap.get('verletzungen_neu', 0)} Ersttermine und "
+                  f"{kap.get('verletzungen_folge_seiten', 0)} Seiten bei Folgeprüfungen "
+                  "würden ihre Frist reißen – Takt oder Budget erhöhen.")
             else:
                 z("✅ Deckung ausreichend: Der Takt kann den Bestand halten. "
                   "Ein roter Faktenstand ist damit ein echter Inhaltsbefund, "
@@ -1110,8 +1121,16 @@ def kapazitaet_ermitteln(heute: dt.date) -> dict:
             return {"nicht_beweisbar": "Laufplan (cron) nicht lesbar: "
                                        + "; ".join(hinweise)}
         budget = int(kap.budget_vorgaben(cfg).get("max_artikel_pro_lauf") or 3)
-        plan = kap.plan(artikel, cfg, budget, laeufe, heute)
-        empfehlung = kap.empfohlenes_budget(artikel, cfg, laeufe, heute)
+        horizont = int(kap.planung(cfg)["horizont_tage"])
+        lauftage = kap.lauftage_aus_workflow(heute, horizont)
+        if lauftage is None:
+            return {"nicht_beweisbar": "Laufkalender nicht beweisbar"}
+        empfehlung = kap.empfohlenes_budget(artikel, cfg, laeufe, heute, lauftage=lauftage)
+        # Bericht und Automatik müssen denselben Budgetplan zeigen. Der
+        # Sockel bleibt als Vergleich sichtbar, nicht als vermeintlicher Ist-Plan.
+        plan_budget = int(empfehlung["budget"]) if kap.budget_vorgaben(cfg).get("auto_skalierung") else budget
+        plan = kap.plan(artikel, cfg, plan_budget, laeufe, heute, lauftage=lauftage)
+        plan["sockel"] = budget
         plan["empfohlenes_budget"] = int(empfehlung["budget"])
         plan["empfehlung_erreicht"] = bool(empfehlung["erreicht"])
         plan["hartes_limit"] = int(empfehlung["limit"])

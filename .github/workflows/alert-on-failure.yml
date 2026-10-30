@@ -448,6 +448,14 @@ jobs:
             // Eine Erkennung, die nur einen der drei Namen kennt, routet den
             // anderen in den allgemeinen Rat – und der riet dann zu
             // API-Schlüsseln für eine Policy-Prüfung.
+            // 30.10.2026 (#948): Hier stand die Erkennung DOPPELT – der Merge
+            // von #935/#943 hatte zwei `const workerZugangFailed` in denselben
+            // Block gestellt. Ein `const`-Namenskonflikt ist ein Syntaxfehler
+            // des ganzen github-script-Blocks: Die zentrale Meldestelle war
+            // damit vollständig tot, ohne dass ein Lauf das zeigte (ein
+            // fehlgeschlagener Alarm-Schritt erzeugt keinen Alarm). Bewacht von
+            // scripts/tests/test_workflow_yaml.py (node --check über alle
+            // eingebetteten Skripte). EINE Bindung, EIN Name.
             const workerZugangFailed = isWorkerDeploy &&
               failedStepNames.some(s => /Produktive Ressource auflösen|Produktions-Environment absichern|Zugang prüfen \(alle Befunde/.test(String(s)));
             const workerTestsFailed = isWorkerDeploy &&
@@ -826,12 +834,18 @@ jobs:
                           ]
                       // WF-829B/#922 x #935 (29.10.2026): Beide Fassungen
                       // beschreiben DENSELBEN Kanal (fehlender oder unlesbarer
-                      // produktiver Zugang). Der Zusammenführungsstand trug zwei
-                      // Listen ohne Komma nebeneinander – für den Runner ein
+                      // produktiver Zugang). Der Zusammenführungsstand trug die
+                      // Varianten OHNE Komma nebeneinander – für den Runner ein
                       // SyntaxError, also ein TOTES Alerting genau für diesen
-                      // Ausfall. Hier steht die Vereinigung: eine Liste, beide
-                      // Prüfer (worker_environment_guard.py und worker_zugang.py),
-                      // ein Rat.
+                      // Ausfall.
+                      // 30.10.2026 (#948): Der Zusammenführungsstand war nie
+                      // repariert worden – es standen FÜNF Fassungen (18 Strings)
+                      // in EINER Liste, das JS dieses Schritts ließ sich gar
+                      // nicht mehr parsen. Jetzt: eine Liste, fünf Schritte,
+                      // beide Prüfer (worker_environment_guard.py und
+                      // worker_zugang.py), ein Rat. Wer hier eine Variante
+                      // zurückholt, muss `npm run workflow:js` (node --check
+                      // über jedes github-script) laufen lassen.
                       : runbookKlasse === 'worker-deploy-zugang'
                         ? [
                             '1. **Fail-closed – gewollt, kein Betriebsausfall.** Der Deploy bricht absichtlich ab, bevor Wrangler läuft: entweder fehlt im Environment `cloudflare-produktion` der Zugang (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`), oder seine Schutzregeln sind nicht lesbar (Reviewer-/Branch-/Admin-Bypass-Policy). Ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall vom 24.10.2026 (Run 40100342025).',

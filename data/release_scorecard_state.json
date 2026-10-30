@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T11:22:43Z",
-  "modus": "live",
-  "commit": "854652e328ebc95c985ef8d92f1ce98ee1393921",
+  "generated_at": "2026-10-30T11:36:18Z",
+  "modus": "kandidaten",
+  "commit": "369800da1aa95d4346ee186f0c37cfd80a98fe8f",
   "kapazitaet": {
     "stichtag": "2026-10-30",
     "artikel": 110,
@@ -209,7 +209,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "sha256": "701d935e277e6bd1f49d85657a8043f751e4e206b4747aaa5ad46ade39fe0e9e",
@@ -311,7 +311,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "b60c49dac24f1147144d8f8137d0c3f15e4ff23ae789330657a8fb6c1313144a",
@@ -345,7 +345,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
       "sha256": "a9fa9e7407125f65010f90b9b43cff0a52c75ad0f3c889b5b97f6a1098fdecd5",
@@ -362,7 +362,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "4bf2411e61d0fd7aa9f477541d9d6fcaca2014b99763e471139adcc087cea7d7",
@@ -1297,7 +1297,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
+      "sha256": "4888495ec6eb137ab0122f7d5db181da55fc72c241f309d7a481e671834b2499",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-25",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }

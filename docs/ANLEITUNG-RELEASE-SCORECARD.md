@@ -195,10 +195,20 @@ Was daraus folgt, ohne nachzudenken:
 - **Deckung < 100 %** → das ist keine Inhaltskrise, sondern eine Kadenz-Frage
   (`data/agent_reach/faktenfrische.yaml`, Governance C45). Nicht die Intervalle
   senken – die Lieferung erhöhen.
-- **Deckung ≥ 100 %, trotzdem rot** → die roten Artikel sind ein echter
-  Inhaltsbefund und gehören in die Redaktion (Abschnitt unten).
+- **Deckung ≥ 100 %, trotzdem rot** → F1 (Alter), F4 (offener Fachbefund)
+  und die übrigen Checks getrennt lesen. Ausreichende Kapazität beweist
+  weder eine erfolgreiche Prüfung noch eine inhaltliche Freigabe.
 - **`nicht beweisbar`** → Bedarf oder Laufplan waren nicht lesbar. Das ist ein
   Werkzeugfehler (Exit 2), kein Freibrief.
+
+**Nachzug 30.10.2026 (#912):** Die Deckung wird über 120 echte Kalendertage
+simuliert, nicht aus einem Wochenmittel abgeleitet. Gearbeitet wird nur an
+cron-Tagen mit ganzzahligem Tagesbudget; Folgefrist ist Prüftag + Intervall.
+Bericht und Automatik verwenden bei Auto-Skalierung dasselbe empfohlene
+Budget. Zusätzlich blockiert **F4-fachbefund** jeden offenen Fachbefund ohne
+menschliche, fassungsgebundene Entscheidung. Ein neues `faktencheck` allein
+schließt diesen Befund nicht. Schließpfad:
+`docs/ANLEITUNG-FAKTENFRISCHE.md`, Abschnitt „Befund redaktionell schließen“.
 
 **Takt:**
 
