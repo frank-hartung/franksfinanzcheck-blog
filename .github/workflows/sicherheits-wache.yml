@@ -73,6 +73,12 @@ on:
       - ".github/workflows/worker-zugang-pruefen.yml"
       - "scripts/worker_environment_guard.py"
       - "scripts/tests/test_worker_environment_guard.py"
+      # WF-829B / #922 (30.10.2026): Das Gate meldete die fehlende
+      # Produktionsfreigabe, aber nichts im Repo konnte sie HERSTELLEN.
+      # `worker_environment_einrichten.py` ist dieser Weg (nur verschärfend).
+      # Ändert er sich, muss dieser Lauf ihn prüfen – er trägt die Freigabe.
+      - "scripts/worker_environment_einrichten.py"
+      - "scripts/tests/test_worker_environment_einrichten.py"
       - "scripts/alert_resolve_gate.py"
       - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
@@ -126,6 +132,12 @@ on:
       - ".github/workflows/worker-zugang-pruefen.yml"
       - "scripts/worker_environment_guard.py"
       - "scripts/tests/test_worker_environment_guard.py"
+      # WF-829B / #922 (30.10.2026): Das Gate meldete die fehlende
+      # Produktionsfreigabe, aber nichts im Repo konnte sie HERSTELLEN.
+      # `worker_environment_einrichten.py` ist dieser Weg (nur verschärfend).
+      # Ändert er sich, muss dieser Lauf ihn prüfen – er trägt die Freigabe.
+      - "scripts/worker_environment_einrichten.py"
+      - "scripts/tests/test_worker_environment_einrichten.py"
       - "scripts/alert_resolve_gate.py"
       - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
@@ -192,11 +204,12 @@ jobs:
       - name: Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)
         run: |
           set -euo pipefail
-          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_zugang scripts.tests.test_worker_environment_guard
+          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_zugang scripts.tests.test_worker_environment_guard scripts.tests.test_worker_environment_einrichten
           python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_ressourcen.py --selftest
           python3 scripts/worker_zugang.py --selftest
           python3 scripts/worker_environment_guard.py --selftest
+          python3 scripts/worker_environment_einrichten.py --selftest
           python3 scripts/worker_betrieb_wache.py --selftest
           python3 scripts/worker_betrieb_wache.py --offline
 
@@ -272,6 +285,9 @@ jobs:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    permissions:
+      actions: read      # Environment-Freigabe lesen (nur Metadaten, keine Secrets)
+      contents: read
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -344,6 +360,37 @@ jobs:
         # zu allen Mess-/Auswerte-Schritten. TEILWEISE genügt ausdrücklich nicht.
         if: ${{ !cancelled() }}
         run: python3 scripts/sicherheits_nachweis.py --live f01-live.json worker-live.json
+
+      # PRODUKTIONS-ENVIRONMENT: DRIFT SICHTBAR MACHEN (WF-829B / #922, 30.10.2026)
+      # Der harte Stopp liegt im Deploy-Pfad: `worker_environment_guard.py`
+      # bricht den Deploy fail-closed ab, solange Reviewer, Branch-Regel oder
+      # Admin-Bypass-Sperre fehlen. Was fehlte, war der BLICK dazwischen: Wird
+      # das Environment neu angelegt (GitHub tut das beim ersten Verweis
+      # automatisch – ungesichert) oder ein Reviewer entfernt, merkt das sonst
+      # erst der nächste Deploy-Versuch.
+      # Bewusst WARNSTUFE, nicht rot: Der Zustand ist aus dem Repository nicht
+      # herstellbar (dieses Token darf Environments nicht schreiben, und der
+      # Admin-Bypass-Schalter ist reine Oberfläche). Rot wäre ein Dauer-Alarm
+      # ohne Schließpfad (C14). Nicht belegbar (Exit 2) bleibt dagegen rot:
+      # ungeprüft ist nicht sauber (C34).
+      - name: Produktions-Environment – Freigabestand und Drift (täglich)
+        if: ${{ !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          code=0
+          python3 scripts/worker_environment_einrichten.py --pruefen --warnstufe \
+            --md "$GITHUB_STEP_SUMMARY" || code=$?
+          if [ "$code" = "2" ]; then
+            echo "::error title=Produktions-Environment::Der Freigabestand ist nicht belegbar (Netz oder Rechte). Ungeprüft gilt nicht als sauber."
+            exit 1
+          fi
+          if [ "$code" = "1" ]; then
+            echo "::warning title=Produktions-Environment::Die Freigabe ist nicht vollständig eingerichtet; der Worker-Deploy bleibt fail-closed gesperrt. Einrichten: python3 scripts/worker_environment_einrichten.py --anwenden (plus ein Schalter im Dashboard – der Lauf nennt ihn)."
+          fi
+          exit 0
 
       - name: Sicherheits-Nachweise aufbewahren (ohne Secrets oder Abonnentendaten)
         if: ${{ !cancelled() }}

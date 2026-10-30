@@ -67,6 +67,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import email.utils
+from pathlib import Path
 import json
 import os
 import re
@@ -79,6 +80,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import post_utils as pu  # noqa: E402
+import faktenfrische_befund_ledger as ledger  # noqa: E402
 
 try:  # gemeinsamer Multi-Provider-Zugang (nur Standardbibliothek)
     import llm_client  # noqa: E402
@@ -286,6 +288,20 @@ def alle_artikel(scope: str = "alle") -> list[dict]:
 # ----------------------------------------------------------------------
 # Fälligkeit („in sinnvollen Abständen“)
 # ----------------------------------------------------------------------
+
+def edf_schluessel(art: dict, status: dict) -> tuple:
+    """EINE Reihenfolge für Arbeitsauswahl und Kapazitätssimulation (#912).
+
+    Erstrecherche zuerst, danach echte Frist. Der Vorlauf bestimmt nur die
+    Arbeitsbarkeit, nicht den Rang. Sonst plant die Simulation andere Seiten
+    ein als der Lauf anschließend auswählt.
+    """
+    return (0 if status.get("prio") == 0 else 1,
+            status.get("frist") or dt.date.min,
+            int(status.get("prio", 9)),
+            0 if art.get("bereich") == "ratgeber" else 1,
+            art.get("slug") or "")
+
 
 def faelligkeit(art: dict, cfg: dict, stichtag: dt.date | None = None) -> dict:
     """(faellig, prio, grund, alter_tage, frist, restlaufzeit).
@@ -590,6 +606,7 @@ def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
             json.dump({"slug": art["slug"], "titel": art["titel"], "erzeugt": dossier["erzeugt"],
                        "faellig": faellig, "geo": geo, "treffer": dossier["treffer"],
                        "befunde": befunde, "fehler": dossier["fehler"],
+                       "fassung_sha256": ledger.pruef_hash(art),
                        "fachpruefung": fachpruefung},
                       fh, ensure_ascii=False, indent=2, default=str)
     return basis + ".md"
@@ -610,7 +627,8 @@ gelieferten Fundstellen stehen.
 3. Du schreibst den Artikel NICHT um. Du meldest Befunde.
 4. Antworte AUSSCHLIESSLICH mit einem JSON-Objekt, ohne Vorspann, ohne \
 Code-Fence, in diesem Schema:
-{"befunde":[{"typ":"veraltet|luecke|praezision","text":"...","beleg":"https://..."}],
+{"artikel_sha256":"den übergebenen PRUEF_HASH wörtlich zurückgeben",
+ "befunde":[{"typ":"veraltet|luecke|praezision","text":"...","beleg":"https://..."}],
  "quellen":[{"titel":"...","url":"https://...","herausgeber":"...","datum":"YYYY-MM-DD"}],
  "kurzfazit":"ein Satz"}
 5. Maximal 5 Befunde, maximal 4 Quellen. Deutsche Sprache, konkret, ohne Floskeln.
@@ -698,6 +716,7 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
     if not dossier["treffer"]:
         return [], [], "übersprungen (keine Fundstellen)"
 
+    pruef_hash = ledger.pruef_hash(art)
     fund_text = "\n\n".join(
         f"[{i+1}] {t['titel']}\nURL: {t['url']}\nHerausgeber: {t.get('herausgeber')}"
         f"{chr(10) + 'Datum: ' + t['datum'] if t.get('datum') else ''}\n"
@@ -708,7 +727,8 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
         f"ARTIKEL: {art['titel']}\n"
         f"BESCHREIBUNG: {art['beschreibung']}\n"
         f"KURZANTWORT: {art.get('kurzantwort') or '–'}\n\n"
-        f"ARTIKELTEXT (gekürzt):\n{art['body'][:9000]}\n\n"
+        f"PRUEF_HASH: {pruef_hash}\n"
+        f"ARTIKELTEXT (vollständig):\n{art['body']}\n\n"
         f"FRISCHE FUNDSTELLEN:\n{fund_text}\n\n"
         "Aufgabe: Nenne fachliche Befunde (veraltete Angaben, fehlende Aspekte, "
         "unpräzise Formulierungen) und belege sie ausschließlich mit den obigen URLs."
@@ -727,7 +747,11 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
             fehler.append(f"{provider}: {type(exc).__name__}")
             continue
         if isinstance(antwort, str) and antwort.strip():
-            if _antwort_daten(antwort) is not None:
+            daten = _antwort_daten(antwort)
+            if daten is not None:
+                if daten.get("artikel_sha256") != pruef_hash:
+                    fehler.append(f"{provider}/{modell}: Prüfversion passt nicht")
+                    continue
                 return *claude_antwort_pruefen(antwort, dossier, cfg), f"geprüft ({provider}:{modell})"
             fehler.append(f"{provider}/{modell}: ungültiges Antwortformat")
             continue
@@ -1008,10 +1032,12 @@ def _kapazitaet_nachrechnen(cfg: dict, artikel: list[dict], budget: int,
     """Deckungszahlen für Bericht/Queue – nie ein Absturz, nie ein Scheinwert."""
     try:
         import faktenfrische_kapazitaet as kapazitaet
-        laeufe, _ = kapazitaet.laeufe_aus_workflow()
-        if not laeufe:
-            return {"nicht_beweisbar": "Laufplan (cron) nicht lesbar"}
-        return kapazitaet.plan(artikel, cfg, budget, laeufe, stichtag)
+        laeufe, hinweise = kapazitaet.laeufe_aus_workflow()
+        horizont = int(kapazitaet.planung(cfg)["horizont_tage"])
+        lauftage = kapazitaet.lauftage_aus_workflow(stichtag, horizont)
+        if not laeufe or lauftage is None:
+            return {"nicht_beweisbar": "Laufplan (cron) nicht lesbar: " + "; ".join(hinweise)}
+        return kapazitaet.plan(artikel, cfg, budget, laeufe, stichtag, lauftage=lauftage)
     except Exception as exc:  # noqa: BLE001 – Bericht darf daran nicht sterben
         return {"nicht_beweisbar": str(exc)}
 
@@ -1058,8 +1084,13 @@ def budget_fuer_lauf(cfg: dict, artikel: list[dict], stichtag: dt.date | None = 
             # Ohne lesbaren Plan keine Scheinpräzision – Sockel, laut.
             return sockel, {"quelle": "Sockel (Laufplan nicht lesbar)",
                             "sockel": sockel, "limit": limit, "erreicht": False}
+        tag = stichtag or heute()
+        horizont = int(kapazitaet.planung(cfg)["horizont_tage"])
+        lauftage = kapazitaet.lauftage_aus_workflow(tag, horizont)
+        if lauftage is None:
+            raise ValueError("Laufkalender nicht beweisbar")
         empfehlung = kapazitaet.empfohlenes_budget(
-            artikel, cfg, laeufe, stichtag or heute())
+            artikel, cfg, laeufe, tag, lauftage=lauftage)
     except Exception as exc:  # noqa: BLE001 – Sockel ist der sichere Fall
         return sockel, {"quelle": f"Sockel (Deckungsrechnung nicht möglich: {exc})",
                         "sockel": sockel, "limit": limit, "erreicht": False}
@@ -1148,7 +1179,13 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
             z.append(f"- **{l['slug']}** · {b.get('typ')}: {b.get('text')}"
                      + (f" ([Beleg]({b['beleg']}))" if b.get("beleg") else ""))
     else:
-        z.append("_Keine Befunde gemeldet; der Status der Fachprüfung steht unten._")
+        z.append("_In diesem Lauf keine neuen Befunde; offene Altbefunde stehen im Ledger-Abschnitt._")
+    z += ["", "## Dauerhaft offene Fachbefunde (alle Läufe)", ""]
+    z += [f"- **{b['slug']}** · `{b['id']}` · {b['text']} "
+          f"(Fassung: `{b['fassung_sha256'][:12]}`)"
+          for b in uebersicht.get("fachbefunde", [])]
+    if not uebersicht.get("fachbefunde"):
+        z.append("_Keine offenen Fachbefunde im Ledger._")
     z += ["", "## Status der Fachprüfung", ""]
     z += [f"- {l['slug']}: {l.get('fachpruefung', 'unbekannt')}" for l in laeufe] or ["- Kein Artikel bearbeitet."]
     z += ["", "## GEO-Lücken im Bestand", ""]
@@ -1291,6 +1328,13 @@ def main() -> int:
 
     cfg = lade_config()
     stichtag = heute()
+    try:
+        ledger_vorher = ledger._json_object(Path(QUEUE_PFAD))
+        ledger.zusammenfuehren(ledger_vorher, [])
+        ledger.entscheidungen_laden()
+    except Exception as exc:
+        print(f"🛑 Fachbefund-Ledger vor dem Lauf nicht beweisbar: {exc}", file=sys.stderr)
+        return 2
 
     if args.file:
         art = lade_artikel(args.file)
@@ -1340,15 +1384,8 @@ def main() -> int:
     # obwohl sie längst überfällig waren – die Klasse war stärker als die
     # Frist. Earliest-Deadline-First ist die Reihenfolge, die nachweislich
     # die wenigsten Fristen reißt, und sie macht Verhungern unmöglich.
-    def _edf(a: dict):
-        frist = a["_faellig"].get("frist")
-        return (0 if a["_faellig"]["prio"] == 0 else 1,
-                frist or dt.date.min,
-                a["_faellig"]["prio"],
-                0 if a.get("bereich") == "ratgeber" else 1,
-                a.get("slug") or "")
-
-    arbeitsvorrat = sorted(kandidaten + vorlauf_kandidaten, key=_edf)
+    arbeitsvorrat = sorted(kandidaten + vorlauf_kandidaten,
+                           key=lambda a: edf_schluessel(a, a["_faellig"]))
     auswahl = arbeitsvorrat[:budget]
 
     print(f"Faktenfrische: {len(bestand)} Artikel im Blick · {len(kandidaten)} fällig · "
@@ -1372,9 +1409,13 @@ def main() -> int:
         geprueft = status.startswith("geprüft (")
         if args.apply and not args.offline and (not geprueft or not quellen):
             unvollstaendig.append(art)
-            print("  ⚠ Fachprüfung oder belegfähige Quelle fehlt – Artikel bleibt unverändert.")
+            print("  ⚠ Prüfung unvollständig oder belegfähige Quelle fehlt – Artikel bleibt unverändert.")
         if args.apply and quellen and geprueft:
-            aenderungen = artikel_anwenden(art, quellen, heute().isoformat(), trocken=False)
+            # Offene Fachbefunde: keine ungeprüfte neue Belegkette neben dem
+            # alten Text installieren. Das Prüfdatum dokumentiert den Check;
+            # F4 hält die Veröffentlichung bis zur redaktionellen Entscheidung.
+            aenderungen = artikel_anwenden(
+                art, [] if befunde else quellen, heute().isoformat(), trocken=False)
             if any(a.startswith("ABGEBROCHEN:") for a in aenderungen):
                 unvollstaendig.append(art)
             for a in aenderungen:
@@ -1389,8 +1430,17 @@ def main() -> int:
         dossier_schreiben(art, dossier, art["_geo"], art["_faellig"], befunde,
                           trocken=False, fachpruefung=status)
         befunde_gesamt += len(befunde)
+        # Nach dem Schreiben neu lesen: Das Ledger bindet an die tatsächlich
+        # hinterlassene Fassung, nicht an einen inzwischen veralteten Input.
+        if any(a.startswith("quellen:") or a.startswith("faktencheck:") for a in aenderungen):
+            aktuelle_fassung = lade_artikel(art["pfad"])
+            if aktuelle_fassung is None:
+                print("🛑 Geprüfte Fassung nicht erneut lesbar", file=sys.stderr)
+                return 2
+            art = aktuelle_fassung
         laeufe.append({
             "slug": art["slug"], "titel": art["titel"],
+            "fassung_sha256": ledger.pruef_hash(art),
             "bereich": art.get("bereich", "artikel"),
             "grund": art["_faellig"]["grund"], "treffer": len(dossier["treffer"]),
             "quellen": len(quellen), "befunde": befunde,
@@ -1398,6 +1448,21 @@ def main() -> int:
             "fachpruefung": status,
             "aenderungen": aenderungen,
         })
+
+    # Ein Lauf ersetzt nie die offene Redaktions-Queue. Auch eine spätere
+    # "ohne Befund"-Antwort löscht keinen menschlich zu entscheidenden Fund.
+    try:
+        fachbefunde = ledger.zusammenfuehren(
+            ledger_vorher,
+            [{**b, "id": ledger.befund_id(l["slug"], b), "slug": l["slug"],
+              "fassung_sha256": l["fassung_sha256"],
+              "zuletzt_gesehen": jetzt_utc()}
+             for l in laeufe for b in l["befunde"]])
+        offene_fachbefunde = ledger.offene_eintraege(
+            fachbefunde, ledger.entscheidungen_laden())
+    except Exception as exc:
+        print(f"🛑 Fachbefund-Ledger nicht beweisbar: {exc}", file=sys.stderr)
+        return 2
 
     # Deckungsnachweis für Bericht und Queue: EINE Rechnung, zwei Leser.
     kapazitaet = budget_info.get("plan") or _kapazitaet_nachrechnen(
@@ -1412,7 +1477,9 @@ def main() -> int:
         "budget": budget,
         "budget_quelle": budget_info.get("quelle"),
         "geo_schnitt": round(sum(geo_werte) / len(geo_werte)) if geo_werte else 0,
-        "befunde": befunde_gesamt,
+        "befunde": len(offene_fachbefunde),
+        "befunde_im_lauf": befunde_gesamt,
+        "fachbefunde": offene_fachbefunde,
         "geo_luecken": geo_luecken,
         "deckung_prozent": kapazitaet.get("deckung_prozent"),
         "bedarf_je_woche": kapazitaet.get("bedarf_je_woche"),
@@ -1421,8 +1488,10 @@ def main() -> int:
     }
     report_schreiben(laeufe, uebersicht, trocken=not args.apply)
 
-    with open(QUEUE_PFAD, "w", encoding="utf-8") as fh:
+    queue_tmp = Path(str(QUEUE_PFAD) + ".tmp")
+    with queue_tmp.open("w", encoding="utf-8") as fh:
         json.dump({"erzeugt": jetzt_utc(), "uebersicht": uebersicht,
+                   "fachbefunde": fachbefunde,
                    "kapazitaet": kapazitaet,
                    "offen": [{"slug": a["slug"], "titel": a["titel"],
                               "grund": a["_faellig"]["grund"],
@@ -1432,6 +1501,7 @@ def main() -> int:
                               "geo": a["_geo"]["prozent"]}
                              for a in unvollstaendig + arbeitsvorrat[budget:]],
                    "laeufe": laeufe}, fh, ensure_ascii=False, indent=2)
+    queue_tmp.replace(QUEUE_PFAD)
 
     if laeufe:
         with open(HISTORIE_PFAD, "a", encoding="utf-8") as fh:

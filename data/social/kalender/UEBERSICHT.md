@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 30.10.2026 00:22 (Europe/Berlin)
+> Automatisch aktualisiert: 30.10.2026 12:27 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -8,14 +8,14 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 
 | Kanal | Status | Geplant | Nächster Beitrag | Kalender |
 |---|---|---:|---|---|
-| Mastodon | ⚪ Standby | 9 | Sa 31.10. 11:30 · Kostenloses Girokonto: Ein Konto | [md](mastodon.md) · [ics](mastodon.ics) |
-| Bluesky | ⚪ Standby | 30 | Fr 30.10. 08:15 · Dein Weg zu geringeren Monatskos | [md](bluesky.md) · [ics](bluesky.ics) |
-| LinkedIn | ⚪ Standby | 11 | Fr 30.10. 07:45 · Dein Weg zu geringeren Monatskos | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 45 | Fr 30.10. 08:45 · Haushaltskosten reduzieren: So g | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 30 | Fr 30.10. 09:15 · Haushaltskosten reduzieren: So g | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 30 | Fr 30.10. 09:45 · Wärmepumpe vs. Gasheizung 2026:  | [md](facebook.md) · [ics](facebook.ics) |
-| Instagram | ⚪ Standby | 13 | Fr 30.10. 11:45 · Wärmepumpe vs. Gasheizung 2026:  | [md](instagram.md) · [ics](instagram.ics) |
-| Pinterest | ⚪ Standby | 10 | Fr 30.10. 10:15 · DSL-Wechselbonus sichern: So spa | [md](pinterest.md) · [ics](pinterest.ics) |
+| Mastodon | ⚪ Standby | 10 | Fr 30.10. 17:30 · Frugalismus Familie: Clever spar | [md](mastodon.md) · [ics](mastodon.ics) |
+| Bluesky | ⚪ Standby | 29 | Fr 30.10. 12:15 · Haushaltskosten reduzieren: So g | [md](bluesky.md) · [ics](bluesky.ics) |
+| LinkedIn | ⚪ Standby | 10 | Mo 02.11. 07:45 · Haushaltskosten reduzieren: So g | [md](linkedin.md) · [ics](linkedin.ics) |
+| X (Twitter) | ⚪ Standby | 44 | Fr 30.10. 13:15 · Haushaltskosten reduzieren: So g | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 30 | Fr 30.10. 16:15 · Kleine Energiespar‑Tricks: Deine | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 30 | Fr 30.10. 15:15 · Kleine Energiespar‑Tricks: Deine | [md](facebook.md) · [ics](facebook.ics) |
+| Instagram | ⚪ Standby | 13 | Fr 30.10. 18:45 · Wärmepumpe vs. Gasheizung 2026:  | [md](instagram.md) · [ics](instagram.ics) |
+| Pinterest | ⚪ Standby | 10 | Fr 30.10. 21:15 · DSL-Wechselbonus sichern: So spa | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 2 | So 01.11. 07:00 · Haushaltskosten reduzieren: So g | [md](telegram.md) · [ics](telegram.ics) |
 | Reddit | ⚪ Standby | 0 | – | [md](reddit.md) · [ics](reddit.ics) |
 | 🎬 Reels & Shorts | 🟢 aktiv | Di+Sa | Nächste Produktion | [md](video.md) · [ics](video.ics) |
@@ -23,187 +23,195 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Fr, 30. Oktober 2026
-- **07:45** ⏳ LinkedIn · _nutzen_ · Dein Weg zu geringeren Monatskosten: Schritt für Schritt
-- **08:15** ⏳ Bluesky · _nutzen_ · Dein Weg zu geringeren Monatskosten: Schritt für Schritt
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
-- **09:15** ⏳ Threads · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
-- **10:15** ⏳ Pinterest · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- **11:45** ⏳ Instagram · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
-- **12:15** ⏳ Bluesky · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
-- **13:15** ⏳ X (Twitter) · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
+- **12:15** ⚪ Bluesky · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
 - **16:15** ⏳ Threads · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
+- **17:30** ⏳ Mastodon · _thread_ · Frugalismus Familie: Clever sparen ohne Verzicht
+- **18:15** ⏳ Bluesky · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
+- **18:45** ⏳ Instagram · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
+- **19:15** ⏳ X (Twitter) · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
+- **19:45** ⏳ Facebook (Seite) · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
+- **20:30** ⏳ Threads · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
+- **21:15** ⏳ Pinterest · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 ### Sa, 31. Oktober 2026
-- **08:15** ⏳ Bluesky · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Dein Weg zu geringeren Monatskosten: Schritt für Schritt
-- **09:15** ⏳ Threads · _nutzen_ · Dein Weg zu geringeren Monatskosten: Schritt für Schritt
+- **08:15** ⏳ Bluesky · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
+- **09:15** ⏳ Threads · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
 - **09:45** ⏳ Facebook (Seite) · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
 - **10:15** ⏳ Pinterest · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
 - **11:30** ⏳ Mastodon · _zahl_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
-- **11:45** ⏳ Instagram · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
-- **12:15** ⏳ Bluesky · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
+- **11:45** ⏳ Instagram · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **12:15** ⏳ Bluesky · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
 - **15:15** ⏳ Facebook (Seite) · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
 - **16:15** ⏳ Threads · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
 ### So, 01. November 2026
 - **07:00** ⏳ Telegram (Kanal) · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
-- **08:15** ⏳ Bluesky · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
-- **08:45** ⏳ X (Twitter) · _takeaway_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
+- **08:15** ⏳ Bluesky · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
+- **08:45** ⏳ X (Twitter) · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
 - **09:15** ⏳ Threads · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Dein Weg zu geringeren Monatskosten: Schritt für Schritt
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
 - **10:15** ⏳ Pinterest · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
-- **11:45** ⏳ Instagram · _nutzen_ · Dein Weg zu geringeren Monatskosten: Schritt für Schritt
-- **12:15** ⏳ Bluesky · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
-- **13:15** ⏳ X (Twitter) · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
-- **16:15** ⏳ Threads · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
+- **11:45** ⏳ Instagram · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
+- **12:15** ⏳ Bluesky · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **13:15** ⏳ X (Twitter) · _takeaway_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
+- **16:15** ⏳ Threads · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
 ### Mo, 02. November 2026
-- **07:45** ⏳ LinkedIn · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
-- **08:15** ⏳ Bluesky · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
+- **07:45** ⏳ LinkedIn · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
+- **08:15** ⏳ Bluesky · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
 - **09:15** ⏳ Threads · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
 - **11:30** ⏳ Mastodon · _zahl_ · DSL-Vergleich: So findest du den günstigsten Internettarif
-- **12:15** ⏳ Bluesky · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
-- **13:15** ⏳ X (Twitter) · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
+- **12:15** ⏳ Bluesky · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
 - **16:15** ⏳ Threads · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
 - **17:30** ⏳ Mastodon · _zahl_ · Energiediebe stoppen: So kannst du Stromfresser finden
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
+- **19:15** ⏳ X (Twitter) · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 ### Di, 03. November 2026
-- **07:45** ⏳ LinkedIn · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
-- **08:15** ⏳ Bluesky · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
+- **07:45** ⏳ LinkedIn · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
+- **08:15** ⏳ Bluesky · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
 - **09:15** ⏳ Threads · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
 - **10:15** ⏳ Pinterest · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
-- **11:45** ⏳ Instagram · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
-- **12:15** ⏳ Bluesky · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
-- **16:15** ⏳ Threads · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
-- **19:15** ⏳ X (Twitter) · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
+- **11:45** ⏳ Instagram · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
+- **12:15** ⏳ Bluesky · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
+- **16:15** ⏳ Threads · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
 ### Mi, 04. November 2026
 - **07:30** ⏳ Mastodon · _zahl_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
 - **07:45** ⏳ LinkedIn · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
 - **08:15** ⏳ Bluesky · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
+- **08:45** ⏳ X (Twitter) · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
 - **09:15** ⏳ Threads · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
 - **11:30** ⏳ Mastodon · _zahl_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
 - **12:15** ⏳ Bluesky · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
 - **16:15** ⏳ Threads · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
 ### Do, 05. November 2026
 - **07:45** ⏳ LinkedIn · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
 - **08:15** ⏳ Bluesky · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
-- **08:45** ⏳ X (Twitter) · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
 - **09:15** ⏳ Threads · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
 - **10:15** ⏳ Pinterest · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
-- **11:45** ⏳ Instagram · _nutzen_ · Haushaltskosten reduzieren: So gewinnst du die Kontrolle
+- **11:45** ⏳ Instagram · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
 - **12:15** ⏳ Bluesky · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
+- **13:15** ⏳ X (Twitter) · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
 - **16:15** ⏳ Threads · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
 ### Fr, 06. November 2026
 - **07:45** ⏳ LinkedIn · _nutzen_ · Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig
 - **08:15** ⏳ Bluesky · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
 - **09:15** ⏳ Threads · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Preisgarantie Gas: So sicherst du günstige Tarife
 - **10:15** ⏳ Pinterest · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
-- **11:45** ⏳ Instagram · _nutzen_ · Kleine Energiespar‑Tricks: Deine Kosten sofort senken
+- **11:45** ⏳ Instagram · _nutzen_ · Bankgebühren senken: 7 Schritte zum günstigeren Konto
 - **12:15** ⏳ Bluesky · _nutzen_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
 - **16:15** ⏳ Threads · _nutzen_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
 ### Sa, 07. November 2026
 - **08:15** ⏳ Bluesky · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
-- **08:45** ⏳ X (Twitter) · _takeaway_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
 - **09:15** ⏳ Threads · _nutzen_ · Abos und Verträge: Der stille Posten im Haushaltsplan
 - **09:45** ⏳ Facebook (Seite) · _nutzen_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
 - **11:30** ⏳ Mastodon · _zahl_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-- **11:45** ⏳ Instagram · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
+- **11:45** ⏳ Instagram · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
 - **12:15** ⏳ Bluesky · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis
+- **13:15** ⏳ X (Twitter) · _takeaway_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
 - **16:15** ⏳ Threads · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
 - **17:30** ⏳ Mastodon · _zahl_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
-- **19:15** ⏳ X (Twitter) · _nutzen_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten
 ### So, 08. November 2026
 - **07:00** ⏳ Telegram (Kanal) · _nutzen_ · VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?
 - **08:15** ⏳ Bluesky · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
+- **08:45** ⏳ X (Twitter) · _nutzen_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
 - **09:15** ⏳ Threads · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
 - **10:15** ⏳ Pinterest · _nutzen_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
-- **11:45** ⏳ Instagram · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
+- **11:45** ⏳ Instagram · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
 - **12:15** ⏳ Bluesky · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
 - **15:15** ⏳ Facebook (Seite) · _nutzen_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
 - **16:15** ⏳ Threads · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
 ### Mo, 09. November 2026
 - **07:30** ⏳ Mastodon · _zahl_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
 - **07:45** ⏳ LinkedIn · _nutzen_ · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung
 - **08:15** ⏳ Bluesky · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
-- **08:45** ⏳ X (Twitter) · _nutzen_ · September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
 - **09:15** ⏳ Threads · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
-- **11:45** ⏳ Instagram · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
+- **11:45** ⏳ Instagram · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
 - **12:15** ⏳ Bluesky · _nutzen_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
-- **13:15** ⏳ X (Twitter) · _zahl_ · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
+- **13:15** ⏳ X (Twitter) · _nutzen_ · September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
 - **16:15** ⏳ Threads · _nutzen_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Kreditkarte vergleichen: Kostenlos und sicher zahlen
+- **19:15** ⏳ X (Twitter) · _zahl_ · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €
 ### Di, 10. November 2026
 - **07:45** ⏳ LinkedIn · _nutzen_ · Stromkosten senken: Clevere Haushaltsgeräte im Überblick
 - **08:15** ⏳ Bluesky · _nutzen_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Umzug mit Internet: Anschluss und Rufnummer mitnehmen
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Kreditkarte vergleichen: Kostenlos und sicher zahlen
 - **09:15** ⏳ Threads · _nutzen_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
 - **10:15** ⏳ Pinterest · _nutzen_ · Kostenloses Girokonto: Ein Konto ohne Gebühren finden
-- **11:45** ⏳ Instagram · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
+- **11:45** ⏳ Instagram · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
 - **12:15** ⏳ Bluesky · _nutzen_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
-- **13:15** ⏳ X (Twitter) · _nutzen_ · Frugalismus für Einsteiger: Mit kleinen Schritten sparen
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Umzug mit Internet: Anschluss und Rufnummer mitnehmen
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
 - **16:15** ⏳ Threads · _nutzen_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich
+- **19:15** ⏳ X (Twitter) · _nutzen_ · Frugalismus für Einsteiger: Mit kleinen Schritten sparen
 ### Mi, 11. November 2026
 - **07:30** ⏳ Mastodon · _zahl_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
 - **07:45** ⏳ LinkedIn · _nutzen_ · Strategisch sparen: So kannst du deine Reisekasse füllen
 - **08:15** ⏳ Bluesky · _nutzen_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
-- **08:45** ⏳ X (Twitter) · _zahl_ · Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich
 - **09:15** ⏳ Threads · _nutzen_ · DNS-Server wechseln: Datenschutz, Filter und Einrichtung
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
 - **11:45** ⏳ Instagram · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 - **12:15** ⏳ Bluesky · _nutzen_ · Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten
-- **13:15** ⏳ X (Twitter) · _takeaway_ · Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Preisgarantie Gas: Was bei Preiserhöhung hilft
+- **13:15** ⏳ X (Twitter) · _zahl_ · Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
 - **16:15** ⏳ Threads · _nutzen_ · Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Notgroschen: Die Wahrheit über das finanzielle Polster
+- **19:15** ⏳ X (Twitter) · _takeaway_ · Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck
 ### Do, 12. November 2026
 - **07:45** ⏳ LinkedIn · _nutzen_ · Energieeffizienz im Haushalt: 5 schnelle Spartricks
 - **08:15** ⏳ Bluesky · _nutzen_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
-- **08:45** ⏳ X (Twitter) · _nutzen_ · Standby Kosten reduzieren: So entlarvst du Stromfresser
+- **08:45** ⏳ X (Twitter) · _nutzen_ · Notgroschen: Die Wahrheit über das finanzielle Polster
 - **09:15** ⏳ Threads · _nutzen_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
-- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten
 - **10:15** ⏳ Pinterest · _nutzen_ · DSL-Vergleich: So findest du den günstigsten Internettarif
 - **11:45** ⏳ Instagram · _nutzen_ · Sicher heizen: Was sie abdeckt und wie lange sie läuft
 - **12:15** ⏳ Bluesky · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
-- **13:15** ⏳ X (Twitter) · _nutzen_ · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen
-- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
+- **13:15** ⏳ X (Twitter) · _nutzen_ · Standby Kosten reduzieren: So entlarvst du Stromfresser
+- **15:15** ⏳ Facebook (Seite) · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
 - **16:15** ⏳ Threads · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
-- **19:15** ⏳ X (Twitter) · _nutzen_ · DNS-Hack testen: Antwortzeit statt gefühltem Tempo
+- **19:15** ⏳ X (Twitter) · _nutzen_ · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen
+### Fr, 13. November 2026
+- **07:45** ⏳ LinkedIn · _nutzen_ · Frugalismus Familie: Clever sparen ohne Verzicht
+- **08:15** ⏳ Bluesky · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
+- **08:45** ⏳ X (Twitter) · _nutzen_ · DNS-Hack testen: Antwortzeit statt gefühltem Tempo
+- **09:15** ⏳ Threads · _nutzen_ · Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt
+- **09:45** ⏳ Facebook (Seite) · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
+- **10:15** ⏳ Pinterest · _nutzen_ · Energiediebe stoppen: So kannst du Stromfresser finden
+- **11:45** ⏳ Instagram · _nutzen_ · Geld abheben im Ausland: Wo die Gebühren wirklich entstehen
+- **12:15** ⏳ Bluesky · _nutzen_ · Störung beim Internetanbieter: So sicherst du deine Rechte
 
 ---
 *Legende: ⏳ geplant · ✅ veröffentlicht · ⚪ Standby (Zugang fehlt) · 🚫 zurückgestellt.*  

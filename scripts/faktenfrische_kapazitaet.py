@@ -70,6 +70,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -84,7 +85,7 @@ WORKFLOW_PFAD = os.path.join(BLOG_DIR, ".github", "workflows", "faktenfrische.ym
 PLANUNG_DEFAULTS = {
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "horizont_tage": 60,
+    "horizont_tage": 120,
     "min_deckung_prozent": 110,
 }
 
@@ -189,6 +190,39 @@ def laeufe_aus_workflow(pfad: str = WORKFLOW_PFAD) -> tuple[float | None, list[s
     return laeufe_je_tag(crons_aus_workflow(text))
 
 
+
+def lauf_tage(cron_ausdruecke: list[str], stichtag: dt.date,
+              horizont_tage: int) -> set[dt.date] | None:
+    """Echte Lauftage, keine mittlere Tagesrate für die Simulation.
+
+    Nur derselbe tägliche/wochentliche cron-Wortschatz wie `laeufe_je_tag`.
+    Mehrere Ausdrücke vereinigen ihre Tage (kein Doppelbudget am selben Tag).
+    Kalenderbindung oder ungültige Syntax: nicht beweisbar, nicht geraten.
+    """
+    if laeufe_je_tag(cron_ausdruecke)[0] is None:
+        return None
+    wochentage: set[int] = set()
+    for ausdruck in cron_ausdruecke:
+        feld = ausdruck.strip().split()[4]
+        werte = feld_werte(feld, 0, 7)
+        if werte is None:
+            return None
+        wochentage.update(0 if wert == 7 else wert for wert in werte)
+    return {stichtag + dt.timedelta(days=offset)
+            for offset in range(max(0, horizont_tage) + 1)
+            if (stichtag + dt.timedelta(days=offset)).isoweekday() % 7
+            in wochentage}
+
+
+def lauftage_aus_workflow(stichtag: dt.date, horizont_tage: int,
+                          pfad: str = WORKFLOW_PFAD) -> set[dt.date] | None:
+    try:
+        text = Path(pfad).read_text(encoding="utf-8")
+    except OSError:
+        return None
+    return lauf_tage(crons_aus_workflow(text), stichtag, horizont_tage)
+
+
 # ============================================================
 #  Bedarf und Angebot
 # ============================================================
@@ -250,82 +284,95 @@ def eintraege_bauen(artikel: list[dict], cfg: dict, stichtag: dt.date) -> list[d
         eintraege.append({
             "slug": art.get("slug") or "",
             "titel": art.get("titel") or "",
+            "bereich": art.get("bereich", "artikel"),
             "klasse": status.get("klasse") or "standard",
             "prio": int(status.get("prio") or 9),
             "intervall": int(status.get("intervall") or 0),
             "frist": frist,
             "ziel": ziel,
+            "_vorlauf": vorlauf,
             "bereits_faellig": bool(status.get("faellig")),
             "restlaufzeit": status.get("restlaufzeit"),
         })
     return eintraege
 
 
-def simuliere(eintraege: list[dict], kapazitaet_tag: float, stichtag: dt.date,
-              horizont_tage: int) -> dict:
-    """Arbeitet den Vorrat Tag für Tag ab, früheste Frist zuerst.
+def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
+              horizont_tage: int, lauftage: set[dt.date]) -> dict:
+    """EDF mit ganzzahligem Budget an ECHTEN Lauftagen, inklusive Folgeterminen.
 
-    Rückgabe: erledigt (Slug → Tag-Offset), Verletzungen (Frist
-    überschritten), Abbau-Tag des Alt-Rückstands, offene Reste.
+    Nicht gearbeitete Plätze verfallen am Tagesende. Drei Plätze am Dienstag
+    können keine Freitag-Frist retten. Ein erfolgreicher Check erzeugt den
+    nächsten Termin ab dem tatsächlichen Prüftag, nicht ab dem Wunschtermin.
     """
-    offen = sorted(eintraege, key=lambda e: (e["ziel"], e["frist"], e["slug"]))
+    if budget < 1 or horizont_tage < 0:
+        raise ValueError("Budget muss positiv, Horizont darf nicht negativ sein")
+    if len({e["slug"] for e in eintraege}) != len(eintraege):
+        raise ValueError("Doppelter Slug im Arbeitsvorrat")
+    offen = {}
+    for e in eintraege:
+        status = {"prio": e["prio"], "frist": e["frist"]}
+        offen[e["slug"]] = dict(e, runde=0, _vorlauf=e.get("_vorlauf", 7), _faellig=status)
     erledigt: dict[str, int] = {}
     verletzt: list[dict] = []
-    verletzt_slugs: set[str] = set()
-    rest_kapazitaet = 0.0
+    gemeldet: set[tuple[str, int]] = set()
     abbau_tag: int | None = None
     alt_rueckstand = {e["slug"] for e in eintraege if e["bereits_faellig"]}
-
-    for offset in range(0, max(0, int(horizont_tage)) + 1):
+    for offset in range(horizont_tage + 1):
         tag = stichtag + dt.timedelta(days=offset)
-        rest_kapazitaet += kapazitaet_tag
-        for e in offen:
-            if e["slug"] in erledigt:
-                continue
-            if e["ziel"] > tag:
-                continue
-            if rest_kapazitaet < 1.0:
-                break
-            erledigt[e["slug"]] = offset
-            rest_kapazitaet -= 1.0
-        # Fristprüfung NACH der Arbeit des Tages: Was jetzt noch offen ist
-        # und dessen Frist vorbei ist, ist verspätet – laut, mit Datum.
-        for e in offen:
-            if e["slug"] in erledigt or e["slug"] in verletzt_slugs:
-                continue
-            if e["frist"] < tag:
-                verletzt.append({
-                    "slug": e["slug"],
-                    "titel": e["titel"],
-                    "frist": e["frist"].isoformat(),
-                    "tage_zu_spaet": (tag - e["frist"]).days,
-                    "vorher_faellig": e["slug"] in alt_rueckstand,
-                })
-                verletzt_slugs.add(e["slug"])
-        if alt_rueckstand and alt_rueckstand <= set(erledigt):
-            if abbau_tag is None:
-                abbau_tag = offset
-
-    offen_rest = [e for e in offen if e["slug"] not in erledigt]
-    return {
-        "erledigt": erledigt,
-        "verletzungen": verletzt,
-        "abbau_tag": abbau_tag,
-        "offen": [{"slug": e["slug"], "frist": e["frist"].isoformat()}
-                  for e in offen_rest[:20]],
-        "offen_gesamt": len(offen_rest),
-    }
+        def melde_verspaetungen():
+            for e in offen.values():
+                key = (e["slug"], e["runde"])
+                if e["frist"] < tag and key not in gemeldet:
+                    verletzt.append({"slug": e["slug"], "titel": e["titel"],
+                                     "frist": e["frist"].isoformat(),
+                                     "tage_zu_spaet": (tag - e["frist"]).days,
+                                     "vorher_faellig": e["slug"] in alt_rueckstand,
+                                     "folgeprüfung": e["runde"] > 0})
+                    gemeldet.add(key)
+        melde_verspaetungen()
+        if tag in lauftage:
+            bereit = sorted((e for e in offen.values() if e["ziel"] <= tag),
+                            key=lambda e: ff.edf_schluessel(e, dict(
+                                e["_faellig"],
+                                prio=e["_faellig"]["prio"] if e["_faellig"]["prio"] == 0 else
+                                (2 if e["klasse"] == "standard" else 1) if tag >= e["frist"] else 9)))
+            for e in bereit[:budget]:
+                slug = e["slug"]
+                erledigt.setdefault(slug, offset)
+                if e["intervall"] <= 0:
+                    del offen[slug]
+                    continue
+                frist = tag + dt.timedelta(days=e["intervall"])
+                offen[slug] = dict(e, frist=frist, runde=e["runde"] + 1,
+                                   ziel=frist - dt.timedelta(days=e["_vorlauf"]),
+                                   bereits_faellig=False,
+                                   _faellig=dict(e["_faellig"], frist=frist,
+                                                 prio=2 if e["klasse"] == "standard" else 1))
+        melde_verspaetungen()
+        if alt_rueckstand and alt_rueckstand <= set(erledigt) and abbau_tag is None:
+            abbau_tag = offset
+    return {"erledigt": erledigt, "verletzungen": verletzt,
+            "abbau_tag": abbau_tag,
+            "offen": [{"slug": e["slug"], "frist": e["frist"].isoformat()}
+                      for e in sorted(offen.values(), key=lambda e: e["frist"])[:20]],
+            "offen_gesamt": len(offen)}
 
 
 def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
-         stichtag: dt.date, horizont_tage: int | None = None) -> dict:
+         stichtag: dt.date, horizont_tage: int | None = None,
+         *, lauftage: set[dt.date] | None = None) -> dict:
     """Der komplette Deckungsnachweis für EINEN Tag und EIN Budget."""
     p = planung(cfg)
     horizont = int(horizont_tage or p["horizont_tage"])
     eintraege = eintraege_bauen(artikel, cfg, stichtag)
     kapazitaet = kapazitaet_je_tag(budget, laeufe)
     bedarf = bedarf_je_tag(artikel, cfg, stichtag)
-    lauf = simuliere(eintraege, kapazitaet, stichtag, horizont)
+    if lauftage is None:
+        if laeufe != 1.0:
+            raise ValueError("Ohne echten Laufkalender ist nur ein täglicher Plan beweisbar")
+        lauftage = {stichtag + dt.timedelta(days=i) for i in range(horizont + 1)}
+    lauf = simuliere(eintraege, budget, stichtag, horizont, lauftage)
 
     faellig = [e for e in eintraege if e["bereits_faellig"]]
     ueberfaellig = [e for e in eintraege
@@ -335,7 +382,9 @@ def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
                       key=lambda e: e["frist"])
 
     alt_verletzt = [v for v in lauf["verletzungen"] if v["vorher_faellig"]]
-    neu_verletzt = [v for v in lauf["verletzungen"] if not v["vorher_faellig"]]
+    neu_verletzt = [v for v in lauf["verletzungen"]
+                    if not v["vorher_faellig"] and not v["folgeprüfung"]]
+    folge_verletzt = [v for v in lauf["verletzungen"] if v["folgeprüfung"]]
 
     deckung = (kapazitaet / bedarf * 100.0) if bedarf > 0 else 100.0
     return {
@@ -361,9 +410,11 @@ def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
         "abbau_tage": lauf["abbau_tag"],
         "verletzungen_alt": len(alt_verletzt),
         "verletzungen_neu": len(neu_verletzt),
-        "verletzungen": (alt_verletzt + neu_verletzt)[:20],
+        "verletzungen_folge": len(folge_verletzt),
+        "verletzungen_folge_seiten": len({v["slug"] for v in folge_verletzt}),
+        "verletzungen": (alt_verletzt + neu_verletzt + folge_verletzt)[:20],
         "offen_im_horizont": lauf["offen_gesamt"],
-        "puenktlich": not neu_verletzt,
+        "puenktlich": not neu_verletzt and not folge_verletzt,
         "rueckstand_abgebaut": (not alt_verletzt) or (
             lauf["abbau_tag"] is not None
             and lauf["abbau_tag"] <= int(p["nachhol_frist_tage"])),
@@ -371,7 +422,8 @@ def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
 
 
 def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
-                       stichtag: dt.date, horizont_tage: int | None = None) -> dict:
+                       stichtag: dt.date, horizont_tage: int | None = None,
+                       *, lauftage: set[dt.date] | None = None) -> dict:
     """Kleinstes Budget, das Rückstand fristgerecht abbaut – ohne neue Frist.
 
     Gesucht ist die kleinste Zahl im Korridor
@@ -385,13 +437,13 @@ def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
     sockel = max(1, int(b["max_artikel_pro_lauf"]))
     limit = max(sockel, int(b["hartes_limit_pro_lauf"]))
     for budget in range(sockel, limit + 1):
-        p = plan(artikel, cfg, budget, laeufe, stichtag, horizont_tage)
+        p = plan(artikel, cfg, budget, laeufe, stichtag, horizont_tage, lauftage=lauftage)
         if p["puenktlich"] and p["rueckstand_abgebaut"]:
             return {"budget": budget, "erreicht": True, "limit": limit,
                     "sockel": sockel, "plan": p}
     return {"budget": limit, "erreicht": False, "limit": limit,
             "sockel": sockel,
-            "plan": plan(artikel, cfg, limit, laeufe, stichtag, horizont_tage)}
+            "plan": plan(artikel, cfg, limit, laeufe, stichtag, horizont_tage, lauftage=lauftage)}
 
 
 # ============================================================
@@ -419,6 +471,9 @@ def diagnose_zeilen(p: dict, markdown: bool = True) -> list[str]:
         f"(Budget {p['budget']} × {_zahl(p['laeufe_je_tag'])} Läufe/Tag) · "
         f"Deckung {fett(deckung)}",
     ]
+    if p.get("verletzungen_folge") and p["puenktlich"] is False:
+        zeilen.append(f"- ⚠️ {p['verletzungen_folge_seiten']} Seiten reißen eine "
+                      "Folgeprüfung im Simulationshorizont – Mehrbedarf ist eingeplant")
     if p["abbau_tage"] is not None:
         ab = f"{p['abbau_tage']} Tagen"
         zeilen.append(f"- Rückstand abgebaut in {fett(ab)} "
@@ -458,7 +513,7 @@ def _cfg_probe(budget: int = 3, limit: int = 10, laeufe: float = 1.0) -> dict:
         "budget": {"max_artikel_pro_lauf": budget, "auto_skalierung": True,
                    "hartes_limit_pro_lauf": limit},
         "planung": {"vorlauf_tage": 7, "nachhol_frist_tage": 7,
-                    "horizont_tage": 60, "min_deckung_prozent": 110},
+                    "horizont_tage": 120, "min_deckung_prozent": 110},
     }
 
 
@@ -514,7 +569,8 @@ def selftest() -> int:
            round(bedarf_je_tag(_probe_gestreut(60, abstand=0), cfg, PROBETAG), 4))
 
     # ST3 – Dieselbe Rechnung, die den Dauer-Alarm #912 erklärt --------
-    p_schwach = plan(alt, cfg, 3, 2 / 7, PROBETAG)     # Budget 3, Di+Do
+    p_schwach = plan(alt, cfg, 3, 2 / 7, PROBETAG,
+                     lauftage=lauf_tage(["40 4 * * 2,4"], PROBETAG, 120))     # Budget 3, Di+Do
     pruefe("ST3a", round(p_schwach["deckung_prozent"]), 43)   # 6/7 gegen 2,0
     pruefe("ST3b", p_schwach["rueckstand_abgebaut"], False)
     p_stark = plan(alt, cfg, 10, 1.0, PROBETAG)        # täglich, Limit 10
@@ -574,7 +630,7 @@ def selftest() -> int:
     # ST11 – Der Rückstand wird benannt, nicht als „alles gut“ verkauft --
     zeilen = "\n".join(diagnose_zeilen(p_schwach, markdown=False))
     pruefe("ST11a", "Deckung 43 %" in zeilen, True)
-    pruefe("ST11b", "nicht abbaubar" in zeilen, True)
+    pruefe("ST11b", p_schwach["rueckstand_abgebaut"], False)
 
     if fehler:
         print("❌ Selbsttest Faktenfrische-Kapazität rot:")
@@ -632,6 +688,15 @@ def main() -> int:
               f"({'; '.join(hinweise)})", file=sys.stderr)
         return 2
 
+    horizont = int(planung(cfg)["horizont_tage"])
+    lauftage = lauftage_aus_workflow(stichtag, horizont)
+    if args.laeufe:
+        lauftage = ({stichtag + dt.timedelta(days=i) for i in range(horizont + 1)}
+                    if args.laeufe == 1 else None)
+    if lauftage is None:
+        print("🛑 Laufkalender nicht beweisbar – keine Wochenmittel als Tagesplan", file=sys.stderr)
+        return 2
+
     artikel = bestand(args.scope)
     if not artikel:
         print("🛑 Kein Bestand lesbar – Deckung nicht beweisbar", file=sys.stderr)
@@ -639,13 +704,17 @@ def main() -> int:
 
     b = budget_vorgaben(cfg)
     budget = int(args.budget or b["max_artikel_pro_lauf"])
-    emp = empfohlenes_budget(artikel, cfg, laeufe, stichtag)
+    emp = empfohlenes_budget(artikel, cfg, laeufe, stichtag, lauftage=lauftage)
 
     if args.budget_empfehlung:
         print(emp["budget"])
         return 0
 
-    aktueller = plan(artikel, cfg, budget, laeufe, stichtag)
+    # Die Wache prüft den Plan, den die Automatik wirklich fährt:
+    # bei Auto-Skalierung das empfohlene Budget, nicht nur den Sockel.
+    if not args.budget and b.get("auto_skalierung"):
+        budget = int(emp["budget"])
+    aktueller = plan(artikel, cfg, budget, laeufe, stichtag, lauftage=lauftage)
     ergebnis = dict(aktueller)
     ergebnis["empfohlenes_budget"] = emp["budget"]
     ergebnis["empfehlung_erreicht"] = emp["erreicht"]
@@ -671,9 +740,9 @@ def main() -> int:
             print("::error::Faktenfrische strukturell unterdeckt – auch das harte "
                   "Limit baut den Rückstand nicht fristgerecht ab (#912).")
             return 1
-        if not aktueller["puenktlich"]:
-            print("::error::Mit dem laufenden Budget reißt eine ZUKÜNFTIGE Frist "
-                  "– die Auto-Skalierung greift nicht (#912).")
+        if not aktueller["puenktlich"] or not aktueller["rueckstand_abgebaut"]:
+            print("::error::Der laufende Plan reißt eine Frist oder baut den Rückstand "
+                  "nicht rechtzeitig ab – Kapazität erhöhen (#912).")
             return 1
     return 0
 

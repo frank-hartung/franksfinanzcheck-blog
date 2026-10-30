@@ -1241,10 +1241,21 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
     # erscheint mit seiner Begründung im Report und im Zustand. Eine
     # Ausnahme, die niemand sieht, ist kein Vertrag, sondern eine Lücke.
     exemptions = {}
+    # DAUERHEILUNG #948 (30.10.2026): Eine Ausnahme neben einem vorhandenen
+    # Affiliate-CTA ist eine halbe Angabe. Der Vertrag aus #762 bleibt
+    # unverändert (die Ausnahme hebt NUR die Mindestpflicht auf, jeder
+    # vorhandene Link wird weiter geprüft) – aber der Widerspruch muss im
+    # Report stehen. Am 29.10.2026 stand er nirgends: Die Tageswache meldete
+    # „Beweis nicht möglich“ und der einzige fassbare Satz war ein
+    # Deep-Link-Fund, dessen Ursache (Flag + CTA) unsichtbar blieb.
+    exemptions_with_cta: dict[str, list[str]] = {}
     for a in articles:
         exempt, reason, _error = exemption_contract.exemption_for_article(a)
         if exempt:
             exemptions[a["slug"]] = reason
+            keys = sorted({m.group(1) for m in GO_LINK_RE.finditer(a["body"])})
+            if keys:
+                exemptions_with_cta[a["slug"]] = keys
 
     if articles:
         if allow_build and not NO_BUILD:
@@ -1302,6 +1313,7 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
         "render_problems": render_problems,
         "per_article": per_article,
         "exemptions": exemptions,
+        "exemptions_with_cta": exemptions_with_cta,
         "build": build_info,
         "registry_routes": len(reg),
         "errors": errors,
@@ -1347,6 +1359,7 @@ def write_report(result: dict) -> str:
     per_article = {r["slug"]: r for r in result["per_article"]}
     healed = result["healed"]
     exemptions = result.get("exemptions") or {}
+    exemptions_with_cta = result.get("exemptions_with_cta") or {}
 
     status_icon = {EXIT_OK: "🟢", EXIT_CONTENT: "🔴", EXIT_TOOL: "🟠"}[result["exit_code"]]
     status_text = {
@@ -1438,6 +1451,17 @@ def write_report(result: dict) -> str:
         for slug in sorted(exemptions):
             lines.append(
                 f"- `{slug}` – {exemption_contract.exemption_label(exemptions[slug])}")
+            keys = exemptions_with_cta.get(slug)
+            if keys:
+                lines.append(
+                    "  - ⚠️ **Halbe Angabe:** Der Artikel ist ausgenommen, "
+                    "enthält aber "
+                    f"{len(keys)} Affiliate-CTA(s) ("
+                    + ", ".join(f"`/go/{k}/`" for k in keys)
+                    + "). Die Ausnahme hebt nur die Mindestpflicht auf – "
+                      "diese Links bleiben voll geprüft. CTA entfernen oder "
+                      "Ausnahme zurücknehmen ist eine Redaktionsentscheidung, "
+                      "keine automatische Heilung.")
         lines.append("")
 
     lines += [

@@ -1,0 +1,5 @@
+# Menschliche Schließakte zur Faktenfrische (#912).
+# Eine Entscheidung schließt nur genau diesen Befund an genau dieser Fassung.
+# Nie automatisch ergänzen. Nach einer Textänderung muss neu entschieden werden.
+# Pflichtfelder: slug, befund_id, fassung_sha256, entschieden_von, begruendung.
+entscheidungen: []

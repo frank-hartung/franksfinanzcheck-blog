@@ -1,5 +1,12 @@
 [
   {
+    "suchbegriff": "100 mbit internet monatlich kündbar",
+    "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 45.0
+  },
+  {
     "suchbegriff": "angebote zur kostenkontrolle",
     "clicks": 0,
     "impressions": 1,
@@ -9,9 +16,16 @@
   {
     "suchbegriff": "dauerhafte kostenkontrolle",
     "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 60.0
+  },
+  {
+    "suchbegriff": "dsl mobilfunk",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 44.0
+    "position": 19.0
   },
   {
     "suchbegriff": "energiebesparing",
@@ -91,6 +105,20 @@
     "position": 45.0
   },
   {
+    "suchbegriff": "ich suche ein gerät, das mir hilft, die gesamtbetriebskosten jahr für jahr zu senken.",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 4.0
+  },
+  {
+    "suchbegriff": "internet monatlich kündbar",
+    "clicks": 0,
+    "impressions": 4,
+    "ctr": 0.0,
+    "position": 66.25
+  },
+  {
     "suchbegriff": "internetkosten",
     "clicks": 0,
     "impressions": 1,
@@ -103,6 +131,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 76.0
+  },
+  {
+    "suchbegriff": "kosten für vpn tunnel im ausland",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 22.0
   },
   {
     "suchbegriff": "kostenersparnis",
@@ -156,9 +191,9 @@
   {
     "suchbegriff": "referenzkonto",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 94.0
+    "position": 95.67
   },
   {
     "suchbegriff": "strategien zur kostenkontrolle",
@@ -184,7 +219,7 @@
   {
     "suchbegriff": "welche finanz-app bietet die besten spartipps basierend auf dem eigenen konsumverhalten?",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 2,
     "ctr": 0.0,
     "position": 3.0
   },

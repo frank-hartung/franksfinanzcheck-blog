@@ -257,6 +257,50 @@ Fehler selbst. Lokal und ohne Netz: `python3 scripts/worker_zugang.py
 --pruefen` zeigt dieselben Klassen (`FEHLT`, `FORMAT`, `UNGUELTIG`,
 `RECHT`, `UNBEKANNT`, `BINDUNG`, `NETZ`, `OFFEN`) aus der eigenen Umgebung.
 
+**Die Freigabe einrichten, statt sie nur zu melden (WF-829B/#922, 30.10.2026):**
+Bis zum 30.10.2026 konnte das Repository die fehlende Freigabe nur MELDEN.
+`scripts/worker_environment_einrichten.py` stellt sie her – mit einem Token,
+das Environments schreiben darf (feingranular *Environments: read/write*,
+klassisch `repo`), lokal oder aus einem Lauf heraus:
+
+```bash
+export GITHUB_TOKEN=…                       # darf Environments lesen UND schreiben
+python3 scripts/worker_environment_einrichten.py --pruefen    # Stand je Ziel
+python3 scripts/worker_environment_einrichten.py --anwenden \
+    --reviewer frank-hartung                                  # setzt, was geht
+python3 scripts/worker_environment_einrichten.py --inventur   # alle Environments
+```
+
+Der Lauf nennt je Ziel eine Klasse und den einen nächsten Schritt:
+
+| Klasse | Bedeutung | Weg |
+|---|---|---|
+| `ERFUELLT` | belegt | – |
+| `MACHBAR` | fehlt, per GitHub-API setzbar | `--anwenden` |
+| `OBERFLAECHE` | fehlt, **nur im Dashboard** setzbar | Settings → Environments → `cloudflare-produktion` → *Allow administrators to bypass configured protection rules* **aus** |
+| `ABWEICHUNG` / `UNBEKANNT` | vorhanden, aber nicht von diesem Werkzeug gesetzt (z. B. eine zusätzliche Branch-Regel) | von Hand prüfen |
+| `OFFEN` | nicht belegbar – niemals grün | zuerst die Ursache der Unlesbarkeit |
+
+Zwei Grenzen sind gemessen, nicht vermutet:
+
+1. **`can_admins_bypass` ist über keine GitHub-API setzbar.** Die REST-Route
+   „Create or update an environment" nimmt ausschließlich `wait_timer`,
+   `prevent_self_review`, `reviewers` und `deployment_branch_policy` an
+   (`additionalProperties: false` in der veröffentlichten OpenAPI-Beschreibung);
+   die GraphQL-Mutation `updateEnvironment` kennt das Feld nicht. Das Werkzeug
+   meldet „eingerichtet bis auf einen Schalter" statt „eingerichtet" – ein
+   falsches Grün hier würde den Deploy freigeben, den das Gate zu Recht
+   blockiert.
+2. **Ein Token ohne Schreibrecht scheitert mit HTTP 403** – genau wie das
+   Agenten-Token dieses Repositories. Die Meldung nennt das fehlende Recht,
+   damit ein Rechtebefund nicht als Code-Regression gelesen wird.
+
+`--anwenden` verschärft ausschließlich: kein `DELETE`, kein Entfernen eines
+bestehenden Reviewers, keine Änderung von `wait_timer` oder
+`prevent_self_review`. Alle Environments des Repositories listet `--inventur`
+(ein Required Reviewer auf `github-pages` würde die Veröffentlichung anhalten –
+diese Entscheidung bleibt bewusst beim Menschen).
+
 ---
 
 ### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
@@ -499,10 +543,19 @@ kostet deshalb keine zweite Freigabe-Runde mehr. Klassen und Massnahmen:
 
 1. `cloudflare-produktion` nach A4 ausdrücklich absichern: mindestens ein
    Required Reviewer, Deployment-Branches **exakt** `main`, Admin-Bypass aus.
-   `scripts/worker_environment_guard.py --check` liest diese Policy vor dem
-   Secret-tragenden Deploy-Job read-only nach; ohne vollständigen Nachweis läuft
-   Wrangler nicht. Das Script braucht dafür nur den GitHub-Workflow-Token mit
-   `actions: read`, keinen Cloudflare-Zugang.
+   Seit dem 30.10.2026 ist das **kein reiner Handgriff mehr**:
+   `python3 scripts/worker_environment_einrichten.py --anwenden
+   --reviewer frank-hartung` setzt Reviewer und Branch-Regel `main`, sofern das
+   Token Environments schreiben darf; der dritte Punkt (Admin-Bypass) bleibt
+   ein Schalter im Dashboard und wird von `--pruefen` als einziger Rest
+   benannt. `scripts/worker_environment_guard.py --check` liest die Policy vor
+   dem Secret-tragenden Deploy-Job read-only nach; ohne vollständigen Nachweis
+   läuft Wrangler nicht. Das Gate braucht dafür nur den GitHub-Workflow-Token
+   mit `actions: read`, keinen Cloudflare-Zugang.
+   Täglich sichtbar (Warnstufe, kein Rot) im Live-Lauf der Sicherheits-Wache:
+   Schritt „Produktions-Environment – Freigabestand und Drift“. Warnung, nicht
+   Befund, weil der Zustand im Repository nicht herstellbar ist – rot wäre ein
+   Dauer-Alarm ohne Schließpfad (C14). Nicht belegbar (Exit 2) bleibt rot.
 2. Erst danach `CF_WORKERS_DEPLOY_TOKEN` und `CLOUDFLARE_ACCOUNT_ID` sicher im
    Environment hinterlegen; keine Werte in Issues/Chat/Reports schreiben. Der
    Deploy-Zugang benötigt neben dem Schreibrecht auch `Workers Scripts: Read`.
@@ -761,3 +814,44 @@ npm run workflow:js                              # dasselbe als npm-Skript
 Der Lauf „Skript-Syntax (liegender Stand)“ fährt diese Prüfung mit (Selbsttest
 zuerst). Ein fehlendes `node` ergibt **Exit 2** und damit einen roten Lauf –
 eine ausgefallene Messung ist kein Grün (C33).
+
+### F4 · Wer meldet den Ausfall des Melders? (WF-829B / #922, 30.10.2026)
+
+F3 hat die Erkennung gebaut – und sie hat funktioniert: Am 30.10.2026 stand
+in `alert-on-failure.yml` eine **doppelte `const workerZugangFailed`** im
+`github-script`-Block (beim Zusammenführen zweier Fassungen entstanden).
+`workflow_js_wache.py` meldete sie (`J1 … block.js:236`), der Lauf
+„Skript-Syntax (liegender Stand)“ wurde rot. **Gemeldet hat es niemand**: Der
+einzige Kanal, der einen roten Lauf in ein Issue verwandelt, war genau dieses
+tote `alert-on-failure.yml`. Belegt im Run-Log:
+
+```text
+Unhandled error: SyntaxError: Identifier 'workerZugangFailed' has already been declared
+```
+
+Die Lehre ist älter als der Fall (Kopf von `alerting-heartbeat.yml`): *Ein
+Wächter, der über die gestörte Leitung alarmiert werden will, schweigt genau
+dann, wenn er gebraucht wird.* Die Zustellung zu zählen reicht deshalb nicht –
+der Kanal muss auf seine **Lauffähigkeit** geprüft werden, und zwar von einem
+Weg, der ihn nicht benutzt.
+
+Seit dem 30.10.2026 tut das der Herzschlag, per `cron`, vor jeder Zählung:
+
+```bash
+python3 scripts/alerting_heartbeat.py --kanal          # Exit 0 lauffähig · 1 Befund · 2 nicht prüfbar
+python3 scripts/alerting_heartbeat.py --selftest       # u. a. sechs Sabotagefälle K1–K6
+```
+
+| Lage | Wirkung |
+|---|---|
+| Block kompiliert nicht | eigenes Issue **„🫀 Alerting-Kanal: das Fehler-Alerting selbst ist nicht lauffähig“**, die Zählung bleibt aus (eine Zustellquote für einen toten Kanal wäre eine Zahl ohne Bedeutung) |
+| `node` fehlt (Exit 2) | ebenfalls rot: keine Messung ist kein Grün (C33) |
+| grün | offene Kanal-Meldung wird geschlossen, danach läuft die Zählung wie bisher |
+
+Warum ein **eigener** Issue-Titel: Die Meldung „Zustellung verliert Ereignisse“
+würde auf API-Schlüssel und Netz raten, während die Ursache ein Syntaxfehler im
+Melder selbst ist. Zwei Titel, zwei Räte, ein Werkzeug.
+
+**Die Reihenfolge der Reparatur, wenn beides rot ist:** erst den Kanal heilen
+(F3: eine Fassung, `node --check`), dann den Deploy-Zugang (A4/D2). Solange der
+Melder tot ist, ist jede andere Meldung nur zufällig zu sehen – auch diese.

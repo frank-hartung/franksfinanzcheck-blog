@@ -1,6 +1,25 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 30.10.2026 (WF-D4E0 / #947 – „dauerhaft auf Highend-Niveau"):
+#  Der Lauf 40856100639 (29.10.) war an ZWEI Schritten rot, und das Ticket
+#  nannte nur den letzten. Der erste war eine einzige Zeile Content:
+#    content/posts/2026-10-12-dein-weg-…/index.md:5
+#    reserve_reaktiviert: "… Klasse „heilbar" ist heilbar, …"
+#  Commit `3d050ea1` (#941, WF-D0C9) hat das Frontmatter von neun LIVE-
+#  Artikeln neu getippt und dabei das deutsche Schlusszeichen durch ein
+#  ASCII-`"` ersetzt – YAML beendet den Wert beim ersten `"`, Hugo kann die
+#  Seite nicht bauen. Der Artefakt-Wächter erkannte das (A6), konnte es aber
+#  nicht heilen und meldete es in Parser-Sprache; im Ticket blieb „Stock
+#  shortage“ kleben. Heilung (neuer Schritt VOR RUNDE 0, Details dort):
+#  `scripts/reserve_frontmatter_gate.py` prüft und heilt über die SSOT
+#  `frontmatter_wache.py` (#942) – ausschließlich Reserve-Eigentum, nur mit
+#  Beweis (Artikeltext bytegleich, kein neuer Blocker), und benennt fremden
+#  (Live-)Content mit Datei, Zeile, Spalte und Reparaturbefehl, statt ihn
+#  still zu verändern. Das zweite Rot (3/6) war der Ketten-Befund aus #884
+#  (Commit `76efccb4` lag VOR der Heilung), nicht dieselbe Ursache.
+#  Details: WARTUNG-INHALTSQUALITAET-WF-D4E0-947-DAUERHEILUNG-HIGHEND-2026-10-30.md
+#
 #  REPARATUR 29.10.2026 (WF-D4E0 / #884 – „dauerhaft auf Highend-Niveau"):
 #  Der Lauf 40667750341 (28.10.) war bis zum letzten Schritt grün und endete
 #  3/6 mit „Stock shortage must not look successful". Vier Befunde, alle
@@ -384,6 +403,50 @@ jobs:
           python3 scripts/themen_nachschub_waechter.py \
             | tee -a "${GITHUB_STEP_SUMMARY:-/dev/null}"
 
+      # ============ FRONTMATTER-GATE (WF-D4E0 / #947) ============
+      # Der Lauf 40856100639 (29.10.2026) wurde an EINER Zeile Content rot:
+      #   content/posts/2026-10-12-dein-weg-…/index.md:5
+      #   reserve_reaktiviert: "… Klasse „heilbar" ist heilbar, …"
+      # Ein deutsches Schlusszeichen als ASCII-Zeichen beendet den YAML-Wert
+      # beim ersten `"`; Hugo kann die Seite nicht bauen. Der Artefakt-Wächter
+      # erkannte das korrekt (A6), konnte es aber nicht heilen und sagte es in
+      # Parser-Sprache („expected <block end>, but found '<scalar>'") – im
+      # Ticket stand danach „Stock shortage“, obwohl der Vorrat nie leer war.
+      #
+      # Dieses Gate schließt die Klasse an der Wurzel, mit drei Zusagen:
+      #   * KEINE ZWEITE WAHRHEIT: geprüft und geheilt wird über
+      #     `frontmatter_wache.py` (SSOT aus #942) – kein zweiter Parser.
+      #   * BESITZ STATT REICHWEITE: geheilt wird nur Reserve-Eigentum
+      #     (`reserve: true` / `reserve_blocked:`, Regel aus
+      #     `reserve_stage_guard.py`). Live-Content gehört der Engine-/
+      #     Deploy-Kette: er wird benannt, nie still verändert.
+      #   * BEWEIS STATT VERTRAUEN: geschrieben wird nur, wenn der Artikeltext
+      #     bytegleich bleibt und nach der Heilung kein neuer Blocker entsteht
+      #     (`heilung_beweisen`, B1–B4).
+      #
+      # Der Schritt ist bewusst NICHT `continue-on-error` und bewusst NICHT
+      # blockierend: Ein offener Blocker ist ein Befund (Build, nicht Vorrat)
+      # und macht den Lauf rot – aber keine folgende Stufe hängt an
+      # `steps.frontmatter`, damit der Vorrat weiterarbeitet. Die Reihenfolge
+      # (vor RUNDE 0) ist Teil der Heilung: Was der Vorrat selbst heilen kann,
+      # ist geheilt, BEVOR Zertifizierung und Artefakt-Wächter darauf sehen.
+      - name: Frontmatter-Gate (eine Content-Zeile darf den Vorrat nicht töten)
+        id: frontmatter
+        if: ${{ !cancelled() && steps.wachen.outcome == 'success' && steps.tools.outcome == 'success' }}
+        timeout-minutes: 3
+        env:
+          RESERVE_WRITERS_ALLOWED: ${{ steps.wachen.outcome == 'success' && '1' || '0' }}
+        run: |
+          set -o pipefail
+          python3 scripts/reserve_frontmatter_gate.py --selftest
+          if [ "$RESERVE_WRITERS_ALLOWED" = "1" ]; then
+            python3 scripts/reserve_frontmatter_gate.py --fix | tee frontmatter-gate.log
+          else
+            python3 scripts/reserve_frontmatter_gate.py | tee frontmatter-gate.log
+          fi
+          python3 scripts/reserve_frontmatter_gate.py --md \
+            >> "${GITHUB_STEP_SUMMARY:-/dev/null}" 2>/dev/null || true
+
       # ================= RUNDE 0 (BESTAND) =================
       # NEU 08.10.2026 (Issue #661): Bevor IRGENDEIN Werkzeug der Kette den
       # Reserve-Zustand liest, muss er lesbar sein. Janitor, Bestands-Wächter,
@@ -744,6 +807,7 @@ jobs:
             .cache/content-reserve/reserve-end.json
             reserve-end.log
             selbsttests.log
+            frontmatter-gate.log
             artefakte.log
             RESERVE-FINISH-REPORT.md
             data/reserve-readiness.json

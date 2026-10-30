@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 6,
+  "ready": 5,
   "pool_size": 6,
-  "generated_at": "2026-10-30T10:36:34Z",
+  "generated_at": "2026-10-30T12:54:43Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -19,23 +19,6 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
-      "ready": true,
-      "sha256": "6990fadf57f04d43bcbde81367d2df64b72f0c746fe3e5f4a94d08c778f76fc0",
-      "flesch": 66.2,
-      "measured_at": "2026-10-30T10:34:03Z",
-      "score": 0.958,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
       }
     },
     {
@@ -57,16 +40,20 @@
     },
     {
       "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": true,
-      "sha256": "bdbb8f37118c6661fc9cc3a6ff67b2c331148100f9fe03f18029ff94972cfe78",
-      "flesch": 68.4,
-      "measured_at": "2026-10-30T10:35:20Z",
-      "score": 0.962,
+      "ready": false,
+      "sha256": "01e7614e698db09f86d8d4ce9ce29de37600b567cf832f83fbb4e765d59aae90",
+      "flesch": 67.5,
+      "measured_at": "2026-10-30T12:52:11Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
+      "details": [
+        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
+      ],
+      "score": 0.942,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.96,
+        "typography": 0.6799999999999999,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -75,9 +62,9 @@
     {
       "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": true,
-      "sha256": "b3d6df66c52e0e6cdd84036656eaa45112cc2789f16a28214f151f9f6a2cfef1",
+      "sha256": "41a5b625076f91ebbff1458e008cbabdf24fd6bcf053cd54f0c24c63d15d0254",
       "flesch": 67.2,
-      "measured_at": "2026-10-30T10:35:57Z",
+      "measured_at": "2026-10-30T12:53:03Z",
       "score": 0.958,
       "parts": {
         "spelling": 0.86,
@@ -92,9 +79,9 @@
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
       "ready": true,
-      "sha256": "d74dfcaab96d37a0229a921fb222d5e5f8114e453a9112bd24f6bba6dc07b4cd",
-      "flesch": 67.4,
-      "measured_at": "2026-10-30T10:36:34Z",
+      "sha256": "b5e79ef506a6a8b269bce6ad13af6f8ba636cfc766aa67fd7ab42ab36c3fa52e",
+      "flesch": 67.1,
+      "measured_at": "2026-10-30T12:53:53Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -105,11 +92,45 @@
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "71638155665f0bfe9ab421f2a1ad937e911e26476e9a2afaeb47e53516031592",
+      "flesch": 74.0,
+      "measured_at": "2026-10-30T12:54:43Z",
+      "score": 0.946,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 0.5,
+        "readability": 1.0
+      }
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "41039588923",
+    "kind": "partial",
+    "run_id": "41058324288",
     "run_attempt": "1"
+  },
+  "ausgebucht": {
+    "at": "2026-10-30T12:52:10Z",
+    "slugs": [
+      "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  },
+  "recert": {
+    "at": "2026-10-30T12:54:43Z",
+    "renewed": [
+      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }

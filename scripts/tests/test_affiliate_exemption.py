@@ -282,6 +282,52 @@ class IntegrityExemptionTests(unittest.TestCase):
         self.assertEqual(error, "")
         self.assertFalse(gate.markdown_findings([article], set(gate.load_registry())))
 
+    # ---------------------------------------------------------------- #948
+    # 30.10.2026: Die Tageswache meldete „Beweis nicht möglich (Werkzeug-
+    # fehler, fail-closed)“. Der einzige fassbare Satz war ein Deep-Link-Fund
+    # („Fehlt der passende Deep-Link“) – die URSACHE, nämlich `affiliate_exempt:
+    # true` NEBEN einem vorhandenen CTA, stand nirgends. Diese Tests frieren
+    # ein, dass der Widerspruch benannt wird, BEVOR das Symptom kommt – und
+    # dass der Vertrag aus #762 dabei unangetastet bleibt.
+    def test_ausnahme_mit_cta_wird_als_halbe_angabe_benannt(self):
+        self.write_post(body=CTA)
+        self.html.write_text(ANCHOR)
+        result = self.run_gate()
+        # Vertrag #762 unverändert: Die Ausnahme hebt nur die Mindestpflicht
+        # auf, der vorhandene Link bleibt voll geprüft und grün.
+        self.assertEqual(result["exit_code"], gate.EXIT_OK, result)
+        self.assertEqual(result["exemptions_with_cta"], {"messtest": ["strom"]})
+        report = gate.write_report(result)
+        self.assertIn("Halbe Angabe", report)
+        self.assertIn("/go/strom/", report)
+        self.assertIn("Redaktionsentscheidung", report)
+
+    def test_wochenchecker_nennt_den_widerspruch_vor_dem_deeplink_fund(self):
+        problems = weekly.check_post({
+            "path": "(test)", "slug": "messtest", "title": "Messtest",
+            "pillar": "internet-dsl", "body": CTA, "content": CTA,
+            "frontmatter": EXEMPT, "is_pillar": False,
+        })
+        self.assertEqual(problems[0]["severity"], "info", problems)
+        self.assertIn("widersprechen sich", problems[0]["msg"])
+        self.assertIn("/go/strom/", problems[0]["msg"])
+        # Das Symptom bleibt unverändert stehen – nicht abgeschwächt:
+        self.assertTrue(any(p["severity"] == "error" and "Deep-Link" in p["msg"]
+                            for p in problems), problems)
+
+    def test_ausnahme_ohne_cta_bleibt_ohne_widerspruch(self):
+        result = self.run_gate()
+        self.assertEqual(result["exemptions_with_cta"], {})
+        report = gate.write_report(result)
+        self.assertNotIn("Halbe Angabe", report)
+        info = [p for p in weekly.check_post({
+            "path": "(test)", "slug": "messtest", "title": "Messtest",
+            "pillar": "internet-dsl", "body": "DNS-Messtest ohne CTA.",
+            "content": "DNS-Messtest ohne CTA.",
+            "frontmatter": EXEMPT, "is_pillar": False,
+        }) if p["severity"] == "info"]
+        self.assertFalse(any("widersprechen sich" in p["msg"] for p in info), info)
+
     def test_gate_run_keeps_the_exemption_note_visible(self):
         # #780: The note is part of the contract ("a hidden exemption is a
         # gap, not a contract"). #776 deleted it while every test stayed green.

@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-30T11:52:39.395706+00:00",
-  "head": "854652e",
+  "signed_at": "2026-10-30T11:12:03.405084+00:00",
+  "head": "b75cc84",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -22,7 +22,7 @@
     "layouts/robots.txt": "ec7bd0b0c26fab8d70b56fb3d23fcdf3f6f2fafa6523fe29a1a3d9351e29ab0a",
     "layouts/shortcodes/einspartabelle.html": "7c5a4b0b4b8847e4dc2582d107a08fad5fa34ab7313ab6eb155cb687acfd8c6a",
     "layouts/shortcodes/tarifvergleich.html": "df542c585d2746bff87fa1fee6af1ea543560aceaa741c5a5c3ebdef49a856ff",
-    "scripts/affiliate_integrity_gate.py": "954af7a875e1ffb54daf397bf9bdc9ff31198145207a8664d124225ed0a3a36f",
+    "scripts/affiliate_integrity_gate.py": "78c3144306ffafb70f93179b96bd450a50613ba21136569ba158d75d1b2fa76e",
     "scripts/affiliate_marketer.py": "9d4389e092bcc327a97f86527a750b0f4396b8e64092fe21e0ffe33e4e6bf75f",
     "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -43,7 +43,7 @@
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
     "scripts/redaktions_standard.py": "112f0d85299b5545d4adc308ff05090cbda9cc95b9f26738519117b21a04b827",
-    "scripts/reserve_artifacts.py": "f0a5e4affec798d3033b5c34fbc50688e2f9bca69ab0632d31cf9a727bfb3a6f",
+    "scripts/reserve_artifacts.py": "0def702a6868f98c1b81dcfe3108f7d5c1040ce1d00102ed27ccfd5a9d7c79cb",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
@@ -54,7 +54,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "ad64b3db198e7337e50d19df3d5f5d78711a8dbefdf0c6a05f913ec95704f8d0",
+  "files_sha256": "47d509104e0345dbeab520a2dbf5056de4cb2de6dfdc24efbaced019fdbb1a4a",
   "audit_start_sha256": "9ff87f7d33ee81f6f8dc58dd910fb0060cd7903e3619f8ccb1f2e73dcde4e715",
   "audit": [
     {
@@ -598,27 +598,32 @@
     {
       "date": "2026-10-30",
       "art": "set-current",
-      "head": "854652e",
+      "head": "b75cc84",
       "geaendert": [
-        "scripts/reserve_artifacts.py"
+        "scripts/affiliate_integrity_gate.py"
       ],
       "herkunft": [
         {
-          "pfad": "scripts/reserve_artifacts.py",
+          "pfad": "scripts/affiliate_integrity_gate.py",
           "klasse": "fest",
-          "urteil": "UNERKLÄRT",
+          "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "854652e",
+              "sha": "b75cc84",
               "datum": "2026-10-30",
-              "betreff": "fix(layout-ai): #900 – kein grünes Ergebnis ohne Messung, Alarm mit Schließpfad (#959)"
+              "betreff": "fix(affiliate): #948 – roter Selbsttest nennt seinen Befund, Alarmweg wieder erreichbar"
+            },
+            {
+              "sha": "414629d",
+              "datum": "2026-10-30",
+              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
             }
           ],
           "commits_art": "letzte-commits"
         }
       ],
       "prev_sha256": "afb8d73ee194df7272017cee54e516ea871955fb9b2f94f6a9be7af8e6929b66",
-      "files_sha256": "ad64b3db198e7337e50d19df3d5f5d78711a8dbefdf0c6a05f913ec95704f8d0"
+      "files_sha256": "47d509104e0345dbeab520a2dbf5056de4cb2de6dfdc24efbaced019fdbb1a4a"
     }
   ]
 }

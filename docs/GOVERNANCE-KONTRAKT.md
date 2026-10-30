@@ -50,6 +50,20 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C44 Der Vorrat endet nicht, er läuft aus (Vorlauf in Tagen, Bahn-scharfe Diagnose, Füllwort-Grenze)** – Der Vorrat endet nicht, er läuft aus: Zwischen dem 19.10. und dem 25.10.2026 fiel der Reserve-Vorrat von 6 auf 1, und jede Nacht wurde derselbe Schritt rot – in der AUTO-Bahn war kein Thema mehr frei. 154 von 202 Themen galten als belegt, zu einem guten Teil nur, weil die Dublettenprüfung „guenstig“ kannte, aber nicht „guenstige(n)“; die übrigen 21 waren sämtlich YMYL-Hochrisiko (Fachfreigabe). Der Befund sagte „alles belegt oder im Cooldown“ – wahr war: frei, aber in der falschen Bahn. Jetzt misst themennachschub_waechter.py den Vorlauf in PRODUKTIONSTAGEN über engine_capacity.lage() (eine Messregel, wie im Pre-Flight), der Reserve-Lauf ruft die Wache VOR der Kette auf, reserve_gate.py unterscheidet „AUTO-Bahn leer“, „beide Bahnen leer“ und „Vorlauf knapp“, und die Füllwort-Grenze ist geschlossen (0 → 19 freie AUTO-Themen), ohne Produkte zu entwerten: „Stromfresser“, „Kreditkarte“ und „Reiseversicherung“ kollidieren weiterhin (WF-D4E0, #821, 25.10.2026).
 - **C46 Weiterleitungsquellen bleiben geparkt (eine SSOT, jede Promotionsbahn, fail-closed)** – Ein Slug, der in `data/weiterleitungen.yaml` als `von` steht, ist keine Publikationsfläche: Die Redirect-Wache prüft Quelle und erzeugte Seite vor dem Build; `scripts/publikations_weiterleitung.py` liest dieselbe SSOT und blockiert vor `draft: false` die Reserve-, Kadenz- und Re-Queue-Promotion sowie die manuelle Freigabe. Fehlt die SSOT im echten Produktionsbaum, stoppt die Automation statt eine Alias-Quelle live zu setzen; isolierte Testbäume ohne `data/` bleiben testbar. Der Rückfall in den Reserve-/Hold-Zustand des Heizöl-Artikels ist damit reproduzierbar abgesichert (WF-54C4/#953, 30.10.2026).
 
+### Nachzug #912 (30.10.2026): Prüfumfang, Fassungsbindung und Kalender
+
+C45 bleibt der Kapazitätsvertrag, erhält aber zwei nicht wegkürzbare Grenzen:
+Ein Wochenmittel ist kein Nachweis täglicher Fristen, und ein Prüfdatum ist
+keine inhaltliche Freigabe. Die Kalendersimulation prüft Erst- und Folgetermine
+über 120 Tage auf dem echten cron-Kalender. Die automatische Budgetempfehlung
+ist auch der geprüfte Plan. Offene Fachbefunde überleben jeden Lauf und werden
+über F4 in Publish-Gate und Scorecard aus demselben Collector blockiert.
+Geschlossen wird nur durch eine menschliche Entscheidung mit SHA-256 der
+geprüften Fassung (`data/faktenfrische_entscheidungen.yaml`). Beschädigte
+Beweisdaten sind Werkzeugfehler. Regressionen:
+`test_faktenfrische_befund_ledger.py`; Runbook:
+`docs/ANLEITUNG-FAKTENFRISCHE.md`.
+
 ## Befund
 
 🟢 Alle Verträge erfüllt.

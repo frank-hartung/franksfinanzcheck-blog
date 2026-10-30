@@ -137,6 +137,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # deaktivierter Admin-Bypass live belegt sind; sein Selbsttest gehört
           # zum vertraglichen Minimum.
           "worker_environment_guard.py",
+          # Der Einrichtungsweg zur Produktionsfreigabe (WF-829B / #922,
+          # 30.10.2026): Das Gate konnte die fehlende Freigabe nur MELDEN,
+          # nichts im Repository konnte sie herstellen – und eine GitHub-API
+          # nimmt nicht einmal alle drei Felder an. Dieses Werkzeug setzt,
+          # was setzbar ist, und beziffert den Rest. Sein Selbsttest gehört
+          # zum vertraglichen Minimum, sonst verkommt das Gate zur Dauer-
+          # Meldung ohne Schließpfad.
+          "worker_environment_einrichten.py",
           # Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
           # Google ordnete die Markensuche dem Kreditvergleich FINANZCHECK.de
           # zu, waehrend der siteweite Person-Knoten nur Pinterest als sameAs
@@ -155,6 +163,7 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # jeden Tag rot. Eine Wache, die niemand verlangt, führt
           # irgendwann niemand aus (C6).
           "faktenfrische_kapazitaet.py",
+          "faktenfrische_befund_ledger.py",
           # Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
           # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
@@ -465,6 +474,17 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # --wirkungsprobe die Selbstheilung samt Idempotenz – ohne
           # beides im Minimum wäre die Reparatur wieder nur eine Zusage.
           "artefakt_waechter.py",
+          # Frontmatter-Gate der Reserve (30.10.2026, WF-D4E0 / #947): Der
+          # Lauf vom 29.10. war rot, weil EINE Zeile Frontmatter (deutsches
+          # Schlusszeichen als ASCII-`"`: `„heilbar"`) YAML zerlegt hat –
+          # der Artefakt-Wächter konnte die Klasse erkennen, aber nicht
+          # heilen, und im Ticket blieb „Stock shortage“ stehen. Dieses Gate
+          # prüft und heilt über die SSOT `frontmatter_wache.py` (#942),
+          # ausschließlich im Reserve-Eigentum (`reserve_stage_guard`), und
+          # nur mit Beweis (Artikeltext bytegleich, kein neuer Blocker).
+          # Ohne Eintrag hier liefe sein Selbsttest in keinem Gate (C6) –
+          # und eine Heilung ohne Selbsttest ist wieder nur eine Zusage.
+          "reserve_frontmatter_gate.py",
           # Manifest-Wache (WF-7B6B / #654, 08.10.2026): Ein Merge-Rest in
           # package.json (ungültiges JSON) hat den E2E-Lauf und danach zwei
           # Stunden lang jeden Produktions-Deploy rot gemacht – `npm ci` brach
@@ -3625,7 +3645,7 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 C45_WACHE = "faktenfrische_kapazitaet.py"
 C45_SSOT = os.path.join("data", "agent_reach", "faktenfrische.yaml")
 C45_WORKFLOW = "faktenfrische.yml"
-C45_TESTS = ("test_faktenfrische_kapazitaet.py",)
+C45_TESTS = ("test_faktenfrische_kapazitaet.py", "test_faktenfrische_befund_ledger.py")
 C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
               "empfohlenes_budget", "nachhol_frist_tage")
 

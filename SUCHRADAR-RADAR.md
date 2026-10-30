@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-29 13:56:18 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-10-30 13:48:40 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -8,22 +8,22 @@
 | Kennzahl | Wert |
 |---|---|
 | Anfragen geplant | 25 |
-| Erfolgreich | 20 |
+| Erfolgreich | 22 |
 | Aus dem Zwischenspeicher | 0 |
-| Fehlgeschlagen | 5 |
+| Fehlgeschlagen | 3 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 166 |
+| Treffer gesamt | 184 |
 | Davon organisch | 10 |
-| Eigene Treffer | 0 von 20 Anfragen |
+| Eigene Treffer | 0 von 22 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 1 von 20 |
-| Anfragen nur mit Wissens-Rückfall | 19 |
-| Organische Treffer | 10 von 166 |
-| Rückfall-Anteil | 94 % |
+| Anfragen mit echtem Suchindex | 1 von 22 |
+| Anfragen nur mit Wissens-Rückfall | 21 |
+| Organische Treffer | 10 von 184 |
+| Rückfall-Anteil | 95 % |
 | Aussagekraft | eingeschraenkt |
 
 _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfall verhindert leere Läufe, ist aber kein Ranking._
@@ -33,7 +33,7 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 | Anbieter | Abrufe | Limit |
 |---|---|---|
 | searxng | 1 | 400 |
-| wikipedia | 19 | 300 |
+| wikipedia | 21 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -45,14 +45,14 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|---|---|---|
 | ing.de | 1 | 1 | 1.0 | 1 |
 | lexware.de | 1 | 1 | 2.0 | 2 |
-| finanzenfroh.com | 1 | 1 | 3.0 | 3 |
-| genialetricks.de | 1 | 0 | 4.0 | 4 |
-| verivox.de | 1 | 0 | 5.0 | 5 |
-| bank99.at | 1 | 0 | 6.0 | 6 |
-| sparschweinclub.de | 1 | 0 | 7.0 | 7 |
-| falk-ratgeber.de | 1 | 0 | 8.0 | 8 |
-| schuldnerberatung.de | 1 | 0 | 9.0 | 9 |
-| mlp-financify.de | 1 | 0 | 10.0 | 10 |
+| sparkasse.de | 1 | 1 | 3.0 | 3 |
+| bank99.at | 1 | 0 | 4.0 | 4 |
+| peaks.com | 1 | 0 | 5.0 | 5 |
+| mlp-financify.de | 1 | 0 | 6.0 | 6 |
+| meetadam.io | 1 | 0 | 7.0 | 7 |
+| fonio.ai | 1 | 0 | 8.0 | 8 |
+| vr.de | 1 | 0 | 9.0 | 9 |
+| finanzenfroh.com | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
@@ -60,8 +60,6 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
-| SF-Klasse retten | Kein Anbieter lieferte Treffer für 'SF-Klasse retten': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
-| Secondhand Möbel | Kein Anbieter lieferte Treffer für 'Secondhand Möbel': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
 | Seniorenkonto | Kein Anbieter lieferte Treffer für 'Seniorenkonto': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / https: |
 
 ## Einordnung
