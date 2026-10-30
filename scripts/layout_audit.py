@@ -49,6 +49,17 @@ DOM_JSON = os.environ.get("LAYOUT_DOM_JSON",
 
 CRITICAL, WARN, OK = [], [], []
 
+# Mindestumfang eines messbaren Baus (Meldung #900, 30.10.2026).
+#
+# WARUM: Am 26.10.2026 stand ein Lauf rot, in dessen `public/` nur ein paar
+# Bruchstücke lagen – und ein Audit über 0 Seiten meldete „alle Checks OK".
+# Eine Prüfung, die nichts gemessen hat, darf nicht grün sein; sie ist der
+# gefährlichste Zustand, weil sie wie ein Freibrief aussieht. Die Schwelle ist
+# bewusst niedrig (der echte Bau hat ~380 Seiten): Sie fängt den leeren,
+# abgebrochenen und den falschen Pfad – nicht eine redaktionell kleinere Seite.
+MIN_SEITEN = 20
+MIN_ARTIKEL = 1
+
 # Schemata, die KEIN internes Dateiziel im Build haben – sie zu prüfen wäre
 # sinnlos. Bewusst eine einzige Quelle: die Liste stand bis 29.09.2026 zweimal
 # wortgleich im Modul (in resolve() und in check_internal_links()), und genau
@@ -182,7 +193,8 @@ def check_covers():
     posts = glob.glob(os.path.join(os.path.dirname(BASE), "content", "posts", "*", "index.md"))
     missing = []
     for f in posts:
-        text = open(f, encoding="utf-8").read()
+        with open(f, encoding="utf-8") as fh:
+            text = fh.read()
         m = re.search(r'image:\s*"(images/covers/[^"]+)"', text)
         if not m:
             continue
@@ -226,6 +238,41 @@ def is_generic_alt(value: str, tag: str) -> bool:
     return False
 
 
+# Attribute eines Tags lesen – HTML-treu statt Sonderfall-Regex.
+#
+# WARUM (Meldung #900, 30.10.2026): Der Hugo-Minifier schreibt `alt=""` als
+# bloßes `alt` – das ist gültiges HTML mit LEEREM Wert (so parst es auch jeder
+# Browser). Die alte Prüfung suchte nur `alt=` und hielt 77 dekorative
+# Kartenbilder (`alt aria-hidden=true`, gerendert in
+# `_partials/extend_post_content.html`) für „Bild ohne alt-Attribut". Ein
+# Fehlalarm, der jede Woche erneut im Report stand und die echten Befunde
+# verwässerte. Ein Attribut-Scanner unterscheidet die drei Fälle, die
+# tatsächlich verschieden sind:
+#   Name fehlt        → kein Alt-Text (WCAG-Verstoß, Befund)
+#   Name ohne Wert    → leerer Alt-Text (nur dekorativ erlaubt)
+#   Name mit Wert     → Alt-Text wird inhaltlich geprüft
+_ATTRIBUT = re.compile(
+    r"""\s([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?""")
+
+
+def tag_attributes(tag: str) -> dict:
+    """Attribute eines HTML-Starttags als {name: wert|None}.
+
+    `None` bedeutet: Attribut steht da, hat aber keinen Wert (`alt`, `hidden`).
+    Nicht vorhandene Attribute fehlen im Dict – das ist der Unterschied, auf
+    den sich die Alt-Prüfung stützt.
+    """
+    innen = re.sub(r"^<\s*[a-zA-Z][^\s/>]*", "", tag).rstrip(">")
+    attrs = {}
+    for m in _ATTRIBUT.finditer(" " + innen):
+        name = m.group(1).lower()
+        if name in attrs:                     # HTML: das erste Vorkommen gilt
+            continue
+        wert = next((g for g in m.groups()[1:] if g is not None), None)
+        attrs[name] = wert
+    return attrs
+
+
 def check_alts():
     """Alt-Texte – am GEBAUTEN Stand gemessen, nicht am Frontmatter.
 
@@ -238,6 +285,11 @@ def check_alts():
     `<img>` im gerenderten Inhalt. Ein leeres `alt` ist nur erlaubt, wenn das
     Bild ausdrücklich dekorativ ist (`aria-hidden="true"`/`role="presentation"`
     oder im Logo-Lockup, das seinen Namen am Link trägt).
+
+    NACHTRAG #900 (30.10.2026): Gemessen wird am MINIFIZIERTEN Bau – deshalb
+    werden Attribute gescannt (`tag_attributes`), nicht per Regex geraten.
+    `alt=""` kommt dort als `alt` an und bleibt ein leerer Alt-Text, kein
+    fehlender.
     """
     pages = [f for f in glob.glob(os.path.join(BASE, "**", "*.html"),
                                   recursive=True)
@@ -253,18 +305,15 @@ def check_alts():
         for img in re.finditer(r"<img\b[^>]*>", body, re.I):
             images_checked += 1
             tag = img.group(0)
-            alt = re.search(r"""\balt\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s'\"]+))""",
-                            tag, re.I)
-            value = (alt.group(1) if alt and alt.group(1) is not None else
-                     (alt.group(2) if alt and alt.group(2) is not None else
-                      (alt.group(3) if alt else None)))
-            decorative = bool(re.search(r'aria-hidden\s*=\s*["\']?true|'
-                                        r'role\s*=\s*["\']?presentation', tag, re.I))
-            if value is None:
+            attrs = tag_attributes(tag)
+            value = attrs.get("alt")
+            decorative = ((attrs.get("aria-hidden") or "").strip().lower() == "true"
+                          or (attrs.get("role") or "").strip().lower() == "presentation")
+            if "alt" not in attrs:
                 missing.append((os.path.relpath(page, BASE),
                                 "Bild ohne alt-Attribut: " + tag[:80]))
                 continue
-            value = value.strip()
+            value = (value or "").strip()
             if not value and not decorative:
                 missing.append((os.path.relpath(page, BASE),
                                 "leeres alt ohne role/aria-hidden: " + tag[:80]))
@@ -286,7 +335,8 @@ def check_alts():
     # Frontmatter-Seite: nur VERÖFFENTLICHTE Beiträge mit Cover, aber ohne alt
     problems, drafts_without_cover = [], []
     for f in glob.glob(os.path.join(ROOT, "content", "posts", "*", "index.md")):
-        text = open(f, encoding="utf-8").read()
+        with open(f, encoding="utf-8") as fh:
+            text = fh.read()
         fm = text.split("---")[1] if text.startswith("---") else ""
         slug = os.path.basename(os.path.dirname(f))
         draft = bool(re.search(r"^draft:\s*true", fm, re.M))
@@ -566,6 +616,40 @@ def check_chunker_contract():
                   "dort).")
 
 
+def seiten_und_artikel():
+    """(HTML-Seiten, Artikel-Seiten) des Baus – eine Zählweise für alle."""
+    seiten = glob.glob(os.path.join(BASE, "**", "*.html"), recursive=True)
+    artikel = glob.glob(os.path.join(BASE, "posts", "*", "index.html"))
+    return seiten, artikel
+
+
+def pruefe_baubasis():
+    """Ist überhaupt etwas gebaut worden, das man messen kann?
+
+    Rückgabe: (probleme, seiten, artikel). `probleme` ist leer, wenn der Bau
+    messbar ist. Alles andere – fehlendes Verzeichnis, fehlende Startseite,
+    zu wenige Seiten, keine Artikel – ist ein ROTER Befund und keine leere
+    Messung: Der Audit behauptet sonst „alles OK" über eine Seite, die es
+    nicht gibt (genau der Zustand aus Meldung #900).
+    """
+    if not os.path.isdir(BASE):
+        return ([f"Bauverzeichnis `{BASE}` existiert nicht – erst `hugo` bauen."],
+                0, 0)
+    seiten, artikel = seiten_und_artikel()
+    probleme = []
+    if not os.path.isfile(os.path.join(BASE, "index.html")):
+        probleme.append(f"`{os.path.join(BASE, 'index.html')}` fehlt – "
+                        "der Bau hat keine Startseite.")
+    if len(seiten) < MIN_SEITEN:
+        probleme.append(f"nur {len(seiten)} HTML-Seiten gefunden "
+                        f"(Mindestumfang für eine Messung: {MIN_SEITEN}).")
+    if len(artikel) < MIN_ARTIKEL:
+        probleme.append(f"keine Artikel-Seite unter `{BASE}/posts/` gefunden – "
+                        "Artikel-Prüfungen (Schema, og:image, Alt-Texte, "
+                        "Chunker) wären leer und damit wertlos.")
+    return probleme, len(seiten), len(artikel)
+
+
 def write_report():
     lines = ["# 📐 LAYOUT-REPORT (Layout-Automatisierung)", ""]
     lines.append("**Stand:** " + __import__("datetime").datetime.now().strftime("%Y-%m-%d %H:%M UTC"))
@@ -624,7 +708,8 @@ def auto_fix_links():
     files = (glob.glob(os.path.join(content_dir, "content", "posts", "*", "index.md"))
              + glob.glob(os.path.join(content_dir, "content", "pillar", "*", "index.md")))
     for f in files:
-        text = open(f, encoding="utf-8").read()
+        with open(f, encoding="utf-8") as fh:
+            text = fh.read()
         changed = 0
         for m in re.finditer(r"((?:\.\./)+posts/)([a-z0-9\-]+?)(/|\])", text):
             target = m.group(2)
@@ -644,7 +729,8 @@ def auto_fix_links():
                 # Kein Match = geplanter/künftiger Artikel – als Warnung merken
                 WARN.append(f"Link ohne Ziel (geplant?): {os.path.basename(os.path.dirname(f))} → {target}")
         if changed:
-            open(f, "w", encoding="utf-8").write(text)
+            with open(f, "w", encoding="utf-8") as fh:
+                fh.write(text)
     if fixed_total:
         print(f"Auto-Fix: {fixed_total} Links korrigiert.")
     else:
@@ -656,8 +742,20 @@ def main():
     if "--fix" in sys.argv:
         n = auto_fix_links()
         return 0 if n == 0 else 2
-    if not os.path.isdir(BASE):
-        print(f"FEHLER: {BASE} existiert nicht – erst `hugo` bauen.")
+    # Fail-closed VOR jeder Einzelprüfung (Meldung #900): Ein fehlender,
+    # leerer oder abgebrochener Bau ist ein roter Befund. Vorher liefen die
+    # Prüfungen über 0 Seiten und meldeten „0 kaputt, alle OK" – ein grünes
+    # Ergebnis ohne Messung, der gefährlichste Zustand einer Automatisierung.
+    probleme, seiten, artikel = pruefe_baubasis()
+    if probleme:
+        CRITICAL.append("Messbarkeit: der Bau ist unvollständig – es wurde "
+                        "NICHTS belastbar geprüft.")
+        for p in probleme:
+            CRITICAL.append(f"  - {p}")
+        CRITICAL.append(f"  - Gefunden wurden {seiten} HTML-Seiten und "
+                        f"{artikel} Artikel. Ein leerer oder abgebrochener Bau "
+                        "ist ein roter Befund, kein grünes Ergebnis.")
+        write_report()
         return 1
     check_internal_links()
     check_covers()

@@ -71,34 +71,53 @@
  *     sichtbar, aber ohne roten Lauf und ohne Issue. Sonst wäre jede
  *     ehrliche Vorwarnung ein Fehlalarm – genau das war #338.
  *
- * Ausgabe: JSON auf stdout + Exit 0 (ok oder nur Frühwarnungen) / 1 (harte
- * Befunde) / 2 (kein Chrome bzw. Werkzeugfehler).
+ * Ausgabe: JSON auf stdout + Exit-Codes (Meldung #900, 30.10.2026 – die
+ * Bedeutung von 2 und 3 war vorher vermischt):
+ *   0 = grün (oder nur Frühwarnungen)
+ *   1 = harte Befunde auf den geprüften Seiten
+ *   2 = WEICH übersprungen: kein Chrome / kein puppeteer-core. Das ist eine
+ *       Umgebungsgrenze, kein Befund – das statische DOM-Budget hat trotzdem
+ *       JEDE Seite vermessen.
+ *   3 = WERKZEUGFEHLER (fail-closed): der Bau ist leer/unvollständig, die
+ *       Seite ließ sich nicht messen oder das JSON ist unbrauchbar. Früher
+ *       lief der Audit in diesem Fall gegen ein leeres `public/` und meldete
+ *       „404 /, kein <title>, kein <h1>" als Layout-Befunde (Meldung #900) –
+ *       eine Fehldiagnose, die den Blick auf den toten Bau verstellte.
  *
  * Aufruf:
- *   LAYOUT_BASE=/pfad/zum/public LAYOUT_PORT=8099 CHROME_PATH=... \
+ *   LAYOUT_BASE=/pfad/zum/public CHROME_PATH=... \
  *     node scripts/layout_browser_check.js
+ *   LAYOUT_PORT wird nur noch für Sonderfälle gesetzt; Standard ist ein
+ *   freier Port (0), damit ein belegter Port keinen Werkzeugfehler erzeugt.
  */
 const SELFTEST = process.argv.includes('--selftest');
-// Nur im echten Lauf laden: der Selftest (Budget-/Severity-Vertrag) muss ohne
-// installierten Browser und ohne Chrome laufen können – sonst prüft ihn nie
-// jemand, weil die Testumgebung kein Puppeteer hat.
-let puppeteer = null;
-if (!SELFTEST) {
-  try {
-    puppeteer = require('puppeteer-core');
-  } catch (err) {
-    console.error('Werkzeugfehler: puppeteer-core nicht installiert (' + err.message
-      + ') – Browser-Audit übersprungen (Exit 2, das statische DOM-Budget hat '
-      + 'jede Seite vermessen).');
-    process.exit(2);
-  }
-}
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// Erst laden, wenn wirklich gemessen wird: Der Selftest (Budget-/Severity-
+// Vertrag) und die Bau-Vorprüfung müssen OHNE Puppeteer laufen können –
+// sonst meldet eine Umgebung ohne Browser immer „übersprungen" (Exit 2),
+// selbst wenn der eigentliche Fehler ein leerer Bau ist (Exit 3).
+function ladePuppeteer() {
+  try {
+    return require('puppeteer-core');
+  } catch (err) {
+    console.error('Werkzeugfehler: puppeteer-core nicht installiert ('
+      + err.message + ') – Browser-Audit übersprungen (Exit 2, das statische '
+      + 'DOM-Budget hat jede Seite vermessen).');
+    return null;
+  }
+}
+
 const BASE = process.env.LAYOUT_BASE || path.join(__dirname, '..', 'public');
-const PORT = parseInt(process.env.LAYOUT_PORT || '8099', 10);
+// 0 = freier Port. Ein fester Port (früher 8099) kollidierte mit jedem
+// zweiten Lauf auf demselben Rechner und endete als Werkzeugfehler.
+const PORT = parseInt(process.env.LAYOUT_PORT || '0', 10);
+// Mindestumfang eines messbaren Baus – identisch zu scripts/layout_audit.py.
+// Eine Messung über 0 Seiten darf nie grün sein (Meldung #900).
+const MIN_SEITEN = 20;
+const MIN_ARTIKEL = 1;
 const CHROME = process.env.CHROME_PATH || '';
 const DOM_JSON = process.env.LAYOUT_DOM_JSON ||
   path.join(__dirname, '..', '.cache', 'layout', 'dom-audit.json');
@@ -158,7 +177,54 @@ function serve(baseDir, port) {
       res.end(data);
     });
   });
-  return new Promise(resolve => server.listen(port, '127.0.0.1', () => resolve(server)));
+  // EADDRINUSE ist kein Audit-Befund: Lieber auf einem freien Port messen als
+  // den Lauf mit einem Werkzeugfehler beenden.
+  return new Promise((resolve, reject) => {
+    server.once('error', (err) => {
+      if (err && err.code === 'EADDRINUSE' && port !== 0) {
+        serve(baseDir, 0).then(resolve, reject);
+        return;
+      }
+      reject(err);
+    });
+    server.listen(port, '127.0.0.1', () => resolve(server));
+  });
+}
+
+/**
+ * Ist der Bau überhaupt messbar? (Meldung #900, 30.10.2026)
+ *
+ * Am 26.10.2026 lief der Browser-Audit gegen ein `public/` mit Bruchstücken
+ * und meldete „404 http://127.0.0.1:8099/, kein <title>, kein <h1>" als
+ * LAYOUT-BEFUNDE. Das war keine Messung, sondern eine Fehldiagnose: Der Fehler
+ * lag im Bau. Rückgabe: null = messbar, sonst Klartext-Grund (Exit 3).
+ */
+function pruefeBaubasis() {
+  let stat = null;
+  try { stat = fs.statSync(BASE); } catch (err) { stat = null; }
+  if (!stat || !stat.isDirectory()) {
+    return `Bauverzeichnis ${BASE} fehlt – erst \`hugo\` bauen`;
+  }
+  const index = path.join(BASE, 'index.html');
+  if (!fs.existsSync(index)) return `${index} fehlt (kein Bau)`;
+  const posts = path.join(BASE, 'posts');
+  if (!fs.existsSync(posts)) return `${posts} fehlt (kein Bau)`;
+  let seiten = 0;
+  let artikel = 0;
+  try {
+    seiten = fs.readdirSync(BASE, { recursive: true })
+      .filter(f => String(f).endsWith('.html')).length;
+    artikel = fs.readdirSync(posts, { withFileTypes: true })
+      .filter(d => d.isDirectory()
+        && fs.existsSync(path.join(posts, d.name, 'index.html'))).length;
+  } catch (err) {
+    return `Bau nicht lesbar (${err.message})`;
+  }
+  if (seiten < MIN_SEITEN) {
+    return `nur ${seiten} HTML-Seiten gefunden (Mindestumfang ${MIN_SEITEN})`;
+  }
+  if (artikel < MIN_ARTIKEL) return 'keine Artikel-Seite unter posts/ gefunden';
+  return null;
 }
 
 /** Statische Messwerte einer Seite (oder null, wenn nicht im Audit). */
@@ -523,11 +589,11 @@ async function auditPage(browser, url, viewport, ctx) {
 }
 
 /** Sample: Startseite + 3 neueste Artikel + die statisch schwersten Seiten. */
-function buildSampleUrls(domAudit) {
+function buildSampleUrls(domAudit, basisUrl) {
   const slugs = fs.readdirSync(path.join(BASE, 'posts'))
     .filter(d => fs.existsSync(path.join(BASE, 'posts', d, 'index.html')))
     .sort().slice(-3).reverse();
-  const urls = ['http://127.0.0.1:' + PORT + '/'];
+  const urls = [basisUrl + '/'];
   const seen = new Set(['/']);
   // Nur strikt geformte Pfade ansteuern (CodeQL js/file-access-to-http):
   // Slugs und Pfade stammen aus Dateien des Builds und gehen in Anfragen.
@@ -535,7 +601,7 @@ function buildSampleUrls(domAudit) {
   const PFAD_SICHER = /^\/[a-z0-9][a-z0-9\/._-]{0,239}$/;
   for (const s of slugs) {
     if (!SLUG_SICHER.test(s)) continue;
-    urls.push(`http://127.0.0.1:${PORT}/posts/${s}/`);
+    urls.push(`${basisUrl}/posts/${s}/`);
     seen.add(`/posts/${s}/`);
   }
   // Risiko-Seiten: größte gemessene Werte zuerst, Paginierung/Vorlagen raus
@@ -550,7 +616,7 @@ function buildSampleUrls(domAudit) {
   for (const r of risk) {
     const rel = typeof r.rel === 'string' ? r.rel : '';
     if (!PFAD_SICHER.test(rel) || /\.\./.test(rel)) continue;
-    urls.push(`http://127.0.0.1:${PORT}${rel}`);
+    urls.push(`${basisUrl}${rel}`);
   }
   return { urls, slugs, risk: risk.map(r => r.rel) };
 }
@@ -560,16 +626,39 @@ if (SELFTEST) {
 }
 
 (async () => {
-  if (!CHROME) { console.error('CHROME_PATH nicht gesetzt'); process.exit(2); }
+  // Reihenfolge = Wahrheitsreihenfolge: erst „gibt es etwas zu messen?",
+  // dann „können wir messen?". Ein leerer Bau ist ein Werkzeugfehler (3) und
+  // kein Layout-Befund (1) und keine weiche Überspringung (2).
+  const bauProblem = pruefeBaubasis();
+  if (bauProblem) {
+    console.error('Werkzeugfehler: ' + bauProblem
+      + ' – der Browser-Audit hat NICHTS gemessen (Exit 3, fail-closed).');
+    process.exit(3);
+  }
+  if (!CHROME) {
+    console.error('CHROME_PATH nicht gesetzt – Browser-Audit übersprungen '
+      + '(Exit 2, das statische DOM-Budget hat jede Seite vermessen).');
+    process.exit(2);
+  }
+  const puppeteer = ladePuppeteer();
+  if (!puppeteer) process.exit(2);
   const domAudit = loadDomAudit();
   const ctx = { domAudit, budgets: domAudit.budgets || FALLBACK.budgets };
-  const server = await serve(BASE, PORT);
+  let server;
+  try {
+    server = await serve(BASE, PORT);
+  } catch (err) {
+    console.error('Werkzeugfehler: lokaler Messserver nicht startbar ('
+      + err.message + ') – Exit 3, fail-closed.');
+    process.exit(3);
+  }
+  const basisUrl = 'http://127.0.0.1:' + server.address().port;
   const browser = await puppeteer.launch({
     executablePath: CHROME,
     args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
   });
 
-  const sample = buildSampleUrls(domAudit);
+  const sample = buildSampleUrls(domAudit, basisUrl);
   const results = [];
   for (const u of sample.urls) {
     results.push(await auditPage(browser, u, { width: 1280, height: 800 }, ctx));
