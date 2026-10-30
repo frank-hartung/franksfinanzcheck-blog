@@ -1,11 +1,11 @@
 ---
 lastmod: 2026-10-28
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
-description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln Pflicht sind und was guter Schutz für Singles und Familien kostet."
+description: "Privathaftpflicht im Überblick: Welche Schäden sie abdeckt, welche Klauseln wichtig sind und wie sich Kosten und Leistungen vergleichen lassen."
 date: 2026-10-28T01:24:59Z
 draft: true
 cadence_demoted: 2026-10-28T01:26:09Z
-cadence_grund: "ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert"
+cadence_grund: "ymyl-review: SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend."
 endredaktion_status: freigegeben
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
@@ -43,15 +43,15 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "d10320380068bed39ca060945330801d3868a0794581db6debef193dfcb099d3"
-  pruefer:
+  status: "ausstehend"
+  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
+  vorheriger_pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, BaFin); Beitrags- und Schadenbandbreiten abgeglichen, Beispielrechnung nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-24"
-  naechste_pruefung: "2026-12-08"
-  aenderungsgrund: "Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
+  vorheriges_pruefdatum: "2026-10-24"
+  vorheriger_reviewtermin: "2026-12-08"
+  aenderungsgrund: "SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend. Historischer Änderungsgrund: Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
   gepruefte_aussagen:
     - textanker: "Denn Forderungen können deine Existenz bedrohen."
       pruefung: "Mit den BaFin-Verbraucherinformationen zur Haftpflichtversicherung abgeglichen: Sie deckt gesetzliche Schadenersatzansprüche Dritter bis zur vereinbarten Deckungssumme"

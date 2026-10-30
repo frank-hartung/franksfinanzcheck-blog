@@ -47,15 +47,15 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "746d37806d03c6ccbb510b0399f7079e6cb89d619bd479eb43a6cbb88fb4a909"
-  pruefer:
+  status: "ausstehend"
+  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
+  vorheriger_pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV-Regional- und Typklassenstatistik 2027, § 40 VVG); Abschnitt zu den Klassen auf die am 09.09.2026 veröffentlichte Regionalstatistik 2027 umgestellt, Beleg-URLs am 24.10.2026 auf Erreichbarkeit geprüft, SF-Tabelle und Rechenbeispiele nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-24"
-  naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Prüfqueue #826: erneute Prüfung nach der Textänderung vom 19.10.2026. GDV-Abschnitt von der veralteten 2026er-Darstellung auf die am 09.09.2026 veröffentlichten Regionalklassen 2027 und die Typklassen 2027 (30.09.2026) umgestellt; die bisher zitierte NRW-URL führte inzwischen auf einen Artikel mit anderen Zahlen und ist durch die GDV-Medieninformationen ersetzt; Sonderkündigungsfrist auf einen Monat nach § 40 VVG vereinheitlicht und der Fristanker § 11 VVG entfernt. Alle Zahlen protokolliert. Vorherige Fassung: Prüfqueue #586."
+  vorheriges_pruefdatum: "2026-10-24"
+  vorheriger_reviewtermin: "2026-11-19"
+  aenderungsgrund: "§ 40 VVG: Kündigungsvoraussetzungen und Klassenanpassung überarbeitet; Fachprüfung und Abgleich des Prüfprotokolls ausstehend. Historischer Änderungsgrund: Prüfqueue #826: erneute Prüfung nach der Textänderung vom 19.10.2026. GDV-Abschnitt von der veralteten 2026er-Darstellung auf die am 09.09.2026 veröffentlichten Regionalklassen 2027 und die Typklassen 2027 (30.09.2026) umgestellt; die bisher zitierte NRW-URL führte inzwischen auf einen Artikel mit anderen Zahlen und ist durch die GDV-Medieninformationen ersetzt; Sonderkündigungsfrist auf einen Monat nach § 40 VVG vereinheitlicht und der Fristanker § 11 VVG entfernt. Alle Zahlen protokolliert. Vorherige Fassung: Prüfqueue #586."
   gepruefte_aussagen:
     - textanker: "entscheidend ist der Eingang, nicht der Versand"
       pruefung: "Bestätigt: Die Kündigung muss spätestens bis 30. November beim Versicherer eingegangen sein (Verbraucherzentrale)"
@@ -340,7 +340,7 @@ Die Regionalklassen 2027 hat der GDV am 9. September 2026 veröffentlicht; sie w
 
 **Was heißt das für dich?** Prüfe deine Einstufung kostenlos auf dem GDV-Verbraucherportal dieversicherer.de – du brauchst nur deine Postleitzahl. Wurdest du hochgestuft, ist das der perfekte Anlass für einen Wechselvergleich: Die Klasse selbst kannst du nicht ändern (nur Fahrzeug oder Wohnort würden zählen), den Versicherer aber schon.
 
-Wichtig dabei: Eine reine Klassenanpassung löst in der Regel **kein** Sonderkündigungsrecht aus. Steigt dein Beitrag dagegen durch eine echte Tariferhöhung des Versicherers, hast du nach § 40 VVG **einen Monat ab Mitteilung** Zeit für eine Sonderkündigung – unabhängig vom 30.11.
+Eine andere Typ- oder Regionalklasse allein sagt noch nicht, ob du kündigen kannst. Prüfe die Beitragsmitteilung: Steigt die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kann nach § 40 VVG ein Sonderkündigungsrecht bestehen. Die Kündigung muss innerhalb eines Monats nach Zugang der Mitteilung erfolgen; sie wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung.
 
 ## Gilt der 30.11. auch für deinen Vertrag?
 
@@ -433,7 +433,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 ### 7. Den Stichtag 30.11. kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
-- **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **einen Monat** nach Zugang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
+- **Sonderkündigungsrecht bei Beitragserhöhung:** Erhöht der Versicherer die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kannst du nach § 40 VVG innerhalb **eines Monats nach Zugang der Mitteilung** kündigen; die Kündigung wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung.
 - **Bei Fahrzeugwechsel:** Der Vertrag kann innerhalb von zwei Wochen nach Zulassung des neuen Fahrzeugs gekündigt werden.
 
 ## Vergleichsprozess in sechs Schritten
@@ -513,10 +513,10 @@ Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten 
 Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres – laut Kalender fällt der Stichtag 2026 auf einen Montag, entscheidend ist der Eingang beim Versicherer. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.
 
 ### Was tun, wenn ich den 30.11. Verpasst habe?
-Prüfe zuerst deine Beitragsrechnung: Erhöht der Versicherer den Preis, hast du nach § 40 VVG einen Monat ab Mitteilung ein Sonderkündigungsrecht – das rettet viele „zu spät“-Fälle noch im Dezember. Ohne Erhöhung bleibt der Wechsel zum nächsten Stichtag; notiere dir den Oktober 2027 im Kalender und optimiere bis dahin Kilometerstand und Fahrerkreis.
+Prüfe zuerst die Beitragsmitteilung. Bei einer Prämienerhöhung aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz kann § 40 VVG die Kündigung innerhalb eines Monats nach Zugang ermöglichen. Sie wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung. Prüfe außerdem deine Vertragslaufzeit und weitere Kündigungsgründe.
 
 ### Ändert eine neue Regionalklasse automatisch meinen Beitrag?
-Ja, aber erst zur nächsten Hauptfälligkeit (meist 1. Januar): Der Versicherer rechnet deinen Vertrag mit der neuen Klasse ab. Das allein ist noch kein Sonderkündigungsrecht – erst eine echte Tariferhöhung löst es aus. In der Beitragsrechnung sind beide Effekte oft vermischt, ein Blick ins Kleingedruckte lohnt sich.
+Der Versicherer berücksichtigt die neue Klasse nach seinen Vertragsbedingungen. Ob du kündigen kannst, hängt von der konkreten Beitragsanpassung und ihren Voraussetzungen ab – eine andere Klasse allein beantwortet das nicht. Prüfe die Mitteilung und gegebenenfalls § 40 VVG.
 
 ### Was ist der Unterschied zwischen Teilkasko und Vollkasko?
 Die Teilkasko deckt äußere Einwirkungen wie Diebstahl, Glasbruch, Wild, Sturm und Brand ab. Die Vollkasko übernimmt zusätzlich selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus.

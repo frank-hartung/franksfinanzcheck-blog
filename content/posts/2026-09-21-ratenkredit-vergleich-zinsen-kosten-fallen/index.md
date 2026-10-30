@@ -37,7 +37,7 @@ quellen:
     herausgeber: "Verbraucherzentrale"
     datum: "2026-10-24"
   - id: "Q4"
-    titel: "§ 502 BGB – Vorzeitige Rückzahlung"
+    titel: "§ 502 BGB – Vorfälligkeitsentschädigung"
     url: "https://www.gesetze-im-internet.de/bgb/__502.html"
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
     datum: "2026-10-05"
@@ -49,15 +49,15 @@ quellen:
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "5f2d7d78f7e618162fbb85b8a190890394cd746c2ea30478eda23b7f384cca0f"
-  pruefer:
+  status: "ausstehend"
+  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
+  vorheriger_pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand Primärquelle Bundesbank-Zinsstatistik sowie Verbraucherzentrale und § 502 BGB; Zinssatz auf Juli 2026 korrigiert, Rechenfehler im Umschuldungsbeispiel behoben, alle Annuitäten nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-24"
-  naechste_pruefung: "2026-12-08"
-  aenderungsgrund: "Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
+  vorheriges_pruefdatum: "2026-10-24"
+  vorheriger_reviewtermin: "2026-12-08"
+  aenderungsgrund: "§ 502 BGB: Grenzen und Voraussetzungen der Vorfälligkeitsentschädigung überarbeitet; Fachprüfung und Abgleich des Prüfprotokolls ausstehend. Historischer Änderungsgrund: Prüfqueue #826: Belegkette repariert – die zitierten Verbraucherzentrale-Adressen antworteten mit 404 (Seiten-Migration). Jede Ersatzadresse am 24.10.2026 abgerufen und mit dem Zitat abgeglichen; Titel an die aktuelle Seitenüberschrift angepasst; Text unverändert"
   gepruefte_aussagen:
     - textanker: "kostet laut Bundesbank im Schnitt"
       pruefung: "Korrigiert und bestätigt: Bundesbank MFI-Zinsstatistik (02.09.2026) weist für neu vergebene Konsumentenkredite an private Haushalte 7,60 % eff. aus (Juli 2026); frühere Angabe 8,54 % war veraltet"
@@ -456,7 +456,7 @@ Ein Kredit ist ein Werkzeug. Richtig eingesetzt spart er Geld. Falsch eingesetzt
 2. **Vergleichsrechner starten:** [Jetzt Ratenkredit vergleichen](/go/kredit/) – mit echtem Betrag und realistischer Laufzeit, nicht mit Wunschzahlen.
 3. **Mindestens drei Effektivzinsen nebeneinanderlegen:** Schaufenster ignorieren, 2/3-Zins und Gesamtbetrag vergleichen. Sondertilgung und Restschuld-Pflicht im Kleingedruckten prüfen.
 4. **SCHUFA-neutral anfragen:** Nur Konditionsanfragen stellen, bis du dich entschieden hast. Erst der finale Antrag wird eine echte Kreditanfrage.
-5. **Widerruf und Vorfälligkeit kennen:** 14 Tage Widerrufsrecht gelten immer. Eine spätere Ablösung kostet laut § 502 BGB maximal 1 % der Restschuld – viele Banken verzichten ganz.
+5. **Widerruf und Vorfälligkeit kennen:** Prüfe deine Widerrufsbelehrung und die geltende Frist. Bei einem Allgemein-Verbraucherdarlehen begrenzt § 502 BGB eine gegebenenfalls zulässige Vorfälligkeitsentschädigung auf höchstens 1 % des vorzeitig zurückgezahlten Betrags, bei höchstens einem Jahr Restlaufzeit auf 0,5 %. Sie darf auch die bis zum vereinbarten Rückzahlungstermin entfallenden Sollzinsen nicht übersteigen; gesetzliche Ausschlüsse sind zu beachten.
 
 ## Wann du besser noch nicht unterschreibst
 
@@ -505,7 +505,7 @@ Der 2/3-Zins zeigt, zu welchen Konditionen zwei Drittel aller Kunden wirklich ab
 Fast immer: Der Dispo kostet im Schnitt 11,30 %, der Ratenkredit 7,60 %. Ab rund 1.000 € dauerhaftem Minus rechnet sich die Ablösung meist schon im ersten Jahr – inklusive festem Tilgungsplan.
 
 ### Was kostet eine vorzeitige Kreditablösung?
-Laut § 502 BGB maximal 1 % der Restschuld, bei unter 12 Monaten Restlaufzeit nur 0,5 %. Viele Banken verzichten ganz darauf. Kostenlose Sondertilgung sollte schon beim Abschluss vereinbart sein.
+Bei Allgemein-Verbraucherdarlehen begrenzt § 502 BGB eine gegebenenfalls zulässige Entschädigung auf 1 % des vorzeitig zurückgezahlten Betrags, bei höchstens einem Jahr Restlaufzeit auf 0,5 %, und zusätzlich auf die bis zum vereinbarten Rückzahlungstermin entfallenden Sollzinsen. In bestimmten Fällen ist sie ausgeschlossen. Prüfe die Vertragsbedingungen und vereinbare kostenlose Sondertilgungen möglichst beim Abschluss.
 
 ### Brauche ich eine Restschuldversicherung zum Kredit?
 Meist nein: Sie verteuert den Kredit oft um 20 bis 30 %, und Stiftung Warentest rät in der Regel ab. Sie ist fast immer freiwillig – lasse dir keinen Kredit nur mit Versicherung verkaufen.

@@ -281,7 +281,7 @@ def automatic_change_findings(old_raw: str, new_raw: str) -> list[str]:
         review = old.get("redaktionelle_pruefung") or {}
         if not isinstance(review, dict):
             raise ParseError("Prüfprotokoll ist kein Mapping")
-        protected = review.get("inhalt_sha256") or review.get("status") == "freigegeben"
+        protected = review.get("inhalt_sha256") or str(review.get("status") or "").strip().lower() in APPROVED_STATUSES
         if protected and (
             content_fingerprint(old, old_body) != content_fingerprint(new, new_body)
             or review.get("inhalt_sha256") != (new.get("redaktionelle_pruefung") or {}).get("inhalt_sha256")
@@ -297,7 +297,7 @@ def automatic_write_protected(path: Path | str) -> bool:
     try:
         fm, _, _ = load_article(path)
         review = fm.get("redaktionelle_pruefung") or {}
-        return bool(review.get("inhalt_sha256") or review.get("status") == "freigegeben")
+        return bool(review.get("inhalt_sha256") or str(review.get("status") or "").strip().lower() in APPROVED_STATUSES)
     except Exception:
         return True
 
