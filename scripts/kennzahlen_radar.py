@@ -305,8 +305,6 @@ def scan_signale(base_dir, suchbegriffe, stand, as_of):
                 text = _extrakt_signal_text(f.read())
         except OSError:
             continue
-        except OSError:
-            continue
         treffer = sorted({b for b in suchbegriffe if b.lower() in text})
         if treffer:
             signale.append({

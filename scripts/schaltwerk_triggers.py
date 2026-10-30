@@ -33,6 +33,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS_DIR = os.path.join(BLOG_DIR, "scripts")
 if SCRIPTS_DIR not in sys.path:
     sys.path.insert(0, SCRIPTS_DIR)
+from net_safety import sicherer_abruf  # noqa: E402
 
 USER_AGENT = "FranksFinanzcheck-Schaltwerk/1.0 (+https://franksfinanzcheck.de)"
 
@@ -439,9 +440,14 @@ def trigger_rss(params: dict, ctx: dict) -> list[dict]:
     if not url:
         return []
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            roh = resp.read().decode("utf-8", "replace")
+        _status, _kopf, roh_bytes = sicherer_abruf(
+            url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=20,
+            max_bytes=2 * 1024 * 1024,
+            erlaube_loopback=False,
+        )
+        roh = roh_bytes.decode("utf-8", "replace")
     except (urllib.error.URLError, OSError, ValueError):
         return []
 

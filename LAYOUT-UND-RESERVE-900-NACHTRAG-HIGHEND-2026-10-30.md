@@ -121,6 +121,12 @@ Fahrlässigkeit, dann Neuwert, zuletzt der Selbstbehalt“). `BestandTest` bleib
 unverändert streng: live-Artikel **müssen** verlinkt sein, Entwürfe **dürfen**
 nicht.
 
+**Nachtrag nach dem Merge mit `main`:** `main` hat den Pillar inzwischen selbst
+überarbeitet; beim Merge galt die Fassung von `main`, und `BestandTest` ist mit
+ihr grün (6/6). Die zusätzliche Prüf-Reihenfolge-Sentence aus diesem PR ist
+damit entfallen – sie war Ersatz für den toten Link, nicht sein Zweck. Der
+Bestandstest ist die Wahrheit, nicht der Satz.
+
 ### 2.5 Was ausdrücklich NICHT getan wurde
 
 * Kein Test gelockert, keine Schwelle gesenkt, kein Befund umetikettiert.

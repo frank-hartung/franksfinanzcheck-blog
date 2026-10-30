@@ -60,12 +60,12 @@ import sys
 import tempfile
 import urllib.error
 import urllib.request
-import xml.etree.ElementTree as ET
 from collections import Counter
 from email.utils import parsedate_to_datetime
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import safe_xml as ET  # noqa: E402
 
 from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
 from check_titles import check_title                      # noqa: E402
@@ -606,8 +606,8 @@ def parse_feed():
         return {"tag": "PARSE-ERROR", "items": [], "error": str(e)}
     items = []
     for it in root.iter("item"):
-        def g(tag):
-            el = it.find(tag)
+        def g(tag, _it=it):
+            el = _it.find(tag)
             return (el.text or "").strip() if el is not None and el.text else ""
         enc = it.find("enclosure")
         media = it.find("{http://search.yahoo.com/mrss/}content")

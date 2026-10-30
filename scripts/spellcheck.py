@@ -54,7 +54,7 @@ ABKUERZUNGEN = {
     "z.b", "z.b.", "bzw", "bzw.", "ca", "ca.", "etc", "etc.", "inkl", "inkl.",
     "exkl", "zzgl", "vgl", "usw", "usw.", "d.h", "d.h.", "u.a", "u.a.", "usf",
     "max", "max.", "min", "min.", "nr", "nr.", "tel", "geb", "ggf", "evtl",
-    "sog", "bspw", "bzw", "bzw.", "vs", "vs.", "mbit", "kbit", "gbit", "ghz",
+    "sog", "bspw", "vs", "vs.", "mbit", "kbit", "gbit", "ghz",
     "mhz", "kmh", "kwh", "kw", "mw", "kva", "uhr", "usd", "eur", "gb", "mb",
     "tb", "ssid", "vpn", "dns", "dsl", "lte", "sms", "tan", "pin", "wlan",
     "www", "http", "https", "com", "de", "net", "org", "mio", "mind",
@@ -110,7 +110,7 @@ HEADING_START_RE = re.compile(r'^(#{1,6}\s+[^\n]+\n)([a-zäöüß])', re.M)
 COMMA_CAP_RE = re.compile(r',\s+([A-ZÄÖÜ][a-zäöüß]+)')
 
 # Höflichkeitsformen, die nach Komma korrekt groß bleiben
-POLITE_FORMS = {"sie", "ihr", "ihre", "ihnen", "sie", "ihnen"}
+POLITE_FORMS = {"sie", "ihr", "ihre", "ihnen"}
 
 # SATZZEICHEN-REGELN (deterministisch, sicher):
 # 1) Abkürzungen ohne Leerzeichen: "Z.B." → "z. B.", "z.B." → "z. B." …
@@ -213,8 +213,8 @@ def load_articles(files=None, include_drafts=False):
         if not include_drafts and "draft: true" in fm:
             continue
 
-        def get(key):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+        def get(key, _fm=fm):
+            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
             return m.group(1).strip() if m else ""
 
         # Optionales Frontmatter-Flag für Sie-Artikel:

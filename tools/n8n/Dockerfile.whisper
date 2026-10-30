@@ -7,23 +7,26 @@ FROM python:3.14-slim
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
+WORKDIR /app
+
+# Sicherheitsaudit 14.10.2026 (N-11) & Tiefencheck 30.10.2026:
+# 1) Aktuelle, gepatchte Web-Schicht (python-multipart 0.0.32, uvicorn 0.54.0,
+#    fastapi 0.143.1). Dependabot (docker/pip) pflegt die Versionen weiter.
+# 2) Build-Werkzeuge (build-essential, git) werden in derselben RUN-Schicht
+#    nach pip install wieder entfernt, damit im Laufzeit-Image nur ffmpeg
+#    und curl verbleiben (minimale Angriffsfläche).
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     curl \
     git \
     build-essential \
+    && pip install --no-cache-dir \
+        fastapi==0.143.1 \
+        uvicorn==0.54.0 \
+        python-multipart==0.0.32 \
+        faster-whisper==1.0.3 \
+    && apt-get purge -y --auto-remove git build-essential \
     && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-
-# Sicherheitsaudit 14.10.2026 (N-11): aktuelle, gepatchte Web-Schicht
-# (python-multipart 0.0.9 und Starlette < 0.40 hatten bekannte DoS-Lücken
-# im Formular-Parser). Dependabot (docker/pip) pflegt die Versionen weiter.
-RUN pip install --no-cache-dir \
-    fastapi==0.143.1 \
-    uvicorn==0.54.0 \
-    python-multipart==0.0.32 \
-    faster-whisper==1.0.3
 
 COPY whisper_server.py /app/whisper_server.py
 

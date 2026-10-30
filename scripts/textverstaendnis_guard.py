@@ -110,7 +110,7 @@ R8_STOPWORDS = {"der", "die", "das", "den", "dem", "des", "ein", "eine", "einer"
                 "eines", "einem", "einen", "und", "oder", "aber", "für", "fur",
                 "mit", "von", "vom", "zum", "zur", "auf", "bei", "nach", "aus",
                 "im", "in", "am", "an", "so", "wie", "nicht", "auch", "du", "dein",
-                "deine", "deinen", "deinem", "ihr", "ihre", "ihren", "die", "das",
+                "deine", "deinen", "deinem", "ihr", "ihre", "ihren",
                 "vor", "nur", "was", "sich", "dich", "dir"}
 
 

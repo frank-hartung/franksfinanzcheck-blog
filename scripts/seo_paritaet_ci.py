@@ -178,11 +178,11 @@ def bewerte(posten: list[Posten], *, streng: bool = False) -> tuple[list[Posten]
     """Teilt Befunde in Sperren und Bernstein. `streng` hebt alles auf Sperre."""
     sperren: list[Posten] = []
     warnungen: list[Posten] = []
-    for posten in posten:
-        if streng or ist_sperre(posten):
-            sperren.append(posten)
+    for eintrag in posten:
+        if streng or ist_sperre(eintrag):
+            sperren.append(eintrag)
         else:
-            warnungen.append(posten)
+            warnungen.append(eintrag)
     return sperren, warnungen
 
 

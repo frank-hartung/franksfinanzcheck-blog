@@ -139,7 +139,7 @@ def _parse_ts(value) -> _dt.datetime:
 
 
 def _kurz_id(channel: str, remote_id: str) -> str:
-    h = hashlib.sha1(f"{channel}:{remote_id}".encode("utf-8")).hexdigest()
+    h = hashlib.sha1(f"{channel}:{remote_id}".encode("utf-8"), usedforsecurity=False).hexdigest()
     return f"{channel[:2]}{h[:6]}"
 
 

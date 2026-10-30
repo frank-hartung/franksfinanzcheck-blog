@@ -2639,7 +2639,6 @@
      Screenreader auf dem Laufenden, ohne zu schreien. Quelle ist
      der Wort-Takt (Abschnitt 9a), nicht das Raten. */
 
-  var nowReadingText = '';
   var trackWordClock = false;   // Wortuhr in der Tonspur-Konfiguration vorhanden
 
   function blockIndexOf(block) {
@@ -2723,8 +2722,8 @@
     }
     if (activeUnit) return { bi: activeUnit.blockIndex, text: activeUnit.text, token: wordSync.tokenIndex };
     if (units && units.length && reading) {
-      var u = units[Math.max(0, Math.min(cursor, units.length - 1))];
-      if (u) return { bi: u.blockIndex, text: u.text, token: wordSync.tokenIndex };
+      var curUnit = units[Math.max(0, Math.min(cursor, units.length - 1))];
+      if (curUnit) return { bi: curUnit.blockIndex, text: curUnit.text, token: wordSync.tokenIndex };
     }
     if (progressBlock) {
       var pbi = blockIndexOf(progressBlock);
@@ -4745,9 +4744,9 @@
   function labelAround(text, index, length, fallback) {
     var before = String(text).slice(Math.max(0, index - 90), index);
     var after = String(text).slice(index + length, index + length + 60);
-    var cand = (before.match(/([A-ZÄÖÜ][\wäöüßÄÖÜ-]{3,})\s+(?:von|bis|auf|um|rund|etwa|ca\.?|circa)?\s*$/) || [])[1];
+    var cand = (before.match(/([A-ZÄÖÜ][\wäöüßÄÖÜ-]{3,})(?:\s+(?:von|bis|auf|um|rund|etwa|ca\.?|circa))?\s*$/) || [])[1];
     if (cand) return cand;
-    var afterCand = (after.match(/^\s*(?:pro|je|für|im|pro)\s+([A-Za-zÄÖÜäöüß]{3,})/) || [])[1];
+    var afterCand = (after.match(/^\s*(?:pro|je|für|im)\s+([A-Za-zÄÖÜäöüß]{3,})/) || [])[1];
     if (afterCand) return 'pro ' + afterCand;
     return fallback;
   }
@@ -4940,26 +4939,42 @@
     copyBtn.id = 'ff-voice-copy';
     copyBtn.addEventListener('click', function () {
       var text = summaryPlainText();
-      var ok = false;
-      try {
-        if (win.navigator && win.navigator.clipboard && win.navigator.clipboard.writeText) {
-          win.navigator.clipboard.writeText(text);
-          ok = true;
-        } else {
+      function fallbackCopy(val) {
+        try {
           var ta = doc.createElement('textarea');
-          ta.value = text;
+          ta.value = val;
           ta.setAttribute('readonly', '');
           ta.style.position = 'fixed';
           ta.style.opacity = '0';
           doc.body.appendChild(ta);
           ta.select();
-          ok = !!doc.execCommand('copy');
+          var copiedOk = !!doc.execCommand('copy');
           doc.body.removeChild(ta);
+          return copiedOk;
+        } catch (err) {
+          return false;
         }
-      } catch (e) { ok = false; }
+      }
+      function showCopyState(copiedOk) {
+        copyBtn.textContent = copiedOk ? T.summaryCopied : T.summaryCopyFail;
+        setTimeout(function () { copyBtn.textContent = T.summaryCopy; }, 2200);
+      }
       if (win.__ff_voice_copied) win.__ff_voice_copied(text);
-      copyBtn.textContent = ok ? T.summaryCopied : T.summaryCopyFail;
-      setTimeout(function () { copyBtn.textContent = T.summaryCopy; }, 2200);
+      try {
+        if (win.navigator && win.navigator.clipboard && win.navigator.clipboard.writeText) {
+          var p = win.navigator.clipboard.writeText(text);
+          if (p && typeof p.then === 'function') {
+            p.then(
+              function () { showCopyState(true); },
+              function () { showCopyState(fallbackCopy(text)); }
+            );
+            return;
+          }
+          showCopyState(true);
+          return;
+        }
+      } catch (e) { /* Fallback unten */ }
+      showCopyState(fallbackCopy(text));
     });
     foot.appendChild(copyBtn);
 

@@ -37,7 +37,7 @@ REISE = '2026-10-24-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen'
 KORRIGIERT_AM = dt.date(2026, 10, 15)
 DASHES = {
     '\u2013': '-', '\u2014': '-', '\u2012': '-', '\u2011': '-',
-    '\u00a0': ' ', '\u202f': ' ', '‑': '-',
+    '\u00a0': ' ', '\u202f': ' ',
 }
 
 

@@ -312,13 +312,13 @@ jobs:
           fi
           # Nur bei manuellem Lauf laut melden – ein leerer Di/Fr-Cron ist
           # normal (keine neuen Artikel), kein Warnfall.
-          if [ -n "$SENDEN" ] && [ "${{ github.event_name }}" != "schedule" ] && grep -q "nichts zu senden" /tmp/nl_build.log; then
+          if [ -n "$SENDEN" ] && [ "$GITHUB_EVENT_NAME" != "schedule" ] && grep -q "nichts zu senden" /tmp/nl_build.log; then
             echo "::warning::Versand angefordert, aber der Digest ist leer – alles im Zeitraum ist Draft oder bereits versandt. Zeitraum über „tage“ vergrößern oder Artikel veröffentlichen."
           fi
           # Ein grüner Lauf, der wegen des Di/Fr-Vertrags nichts schickt, darf
           # nicht wie ein erfolgreicher Versand aussehen. Der Cron trifft die
           # Tage von selbst; ein manueller Live-Lauf außerhalb schon nicht.
-          if [ -n "$SENDEN" ] && [ "${{ github.event_name }}" != "schedule" ] && grep -q "Versandpause" /tmp/nl_build.log; then
+          if [ -n "$SENDEN" ] && [ "$GITHUB_EVENT_NAME" != "schedule" ] && grep -q "Versandpause" /tmp/nl_build.log; then
             echo "::warning::Listen-Versand angefordert, aber der Vertrag hält ihn an (kein Dienstag/Freitag, Termin belegt oder Wochenlimit). Es ist nichts an die Liste gegangen. Ein Testversand über test_adresse ist davon unabhängig und trifft nur die eingegebene Adresse."
           fi
           {

@@ -128,9 +128,10 @@ jobs:
         env:
           GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          EINGABE_BACKFILL: ${{ inputs.backfill }}
         run: |
           set -uo pipefail
-          if [ "${{ inputs.backfill }}" = "true" ]; then
+          if [ "$EINGABE_BACKFILL" = "true" ]; then
             python3 scripts/gsc_import.py --backfill
           else
             python3 scripts/gsc_import.py
@@ -295,10 +296,11 @@ jobs:
         env:
           GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          EINGABE_ALLES_ANFRAGEN: ${{ inputs.alles_anfragen }}
         run: |
           set -uo pipefail
           zusatz=""
-          if [ "${{ inputs.alles_anfragen }}" = "true" ]; then
+          if [ "$EINGABE_ALLES_ANFRAGEN" = "true" ]; then
             zusatz="--limit 200"
           fi
           # M2: Crawl-Nachfrage gezielt. Welle 1 (max. 40) ist die nach

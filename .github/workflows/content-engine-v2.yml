@@ -719,6 +719,16 @@ jobs:
         if: ${{ !cancelled() }}
         env:
           SCHRITT_FINAL_RELEASE_RC: ${{ steps.final_release.outputs.rc }}
+          SCHRITT_PERSIST_OUTCOME: ${{ steps.persist.outcome }}
+          SCHRITT_FINAL_RELEASE_OUTCOME: ${{ steps.final_release.outcome }}
+          SCHRITT_LOCK_OUTCOME: ${{ steps.lock.outcome }}
+          SCHRITT_PREFLIGHT_OUTCOME: ${{ steps.preflight.outcome }}
+          SCHRITT_KADENZ_OUTCOME: ${{ steps.kadenz.outcome }}
+          SCHRITT_GENERATE_OUTCOME: ${{ steps.generate.outcome }}
+          SCHRITT_TAXONOMIE_OUTCOME: ${{ steps.taxonomie.outcome }}
+          SCHRITT_PHASE1_COMMIT_OUTCOME: ${{ steps.phase1_commit.outcome }}
+          SCHRITT_HUGO_OUTCOME: ${{ steps.hugo.outcome }}
+          SCHRITT_SHORTCODE_OUTCOME: ${{ steps.shortcode.outcome }}
         run: |
           RC="${SCHRITT_FINAL_RELEASE_RC}"
           # WF-A535 (#590): Die dritte ehrlich rote Klasse ist der
@@ -727,7 +737,7 @@ jobs:
           # produziert und nicht abliefert, sieht in jeder anderen Statistik
           # nach Erfolg aus (Run 37325495772: drei Commits, 23 Minuten Arbeit,
           # nichts auf main, Ticket riet zu API-Schlüsseln).
-          if [ "${{ steps.persist.outcome }}" != 'success' ]; then
+          if [ "${SCHRITT_PERSIST_OUTCOME}" != 'success' ]; then
             echo "::error::SYNCHRONVERLUST (WF-A535 #590) – die Endabnahme konnte ihren Stand nicht nach main bringen. Ursache steht wörtlich im Schritt „Persist final acceptance corrections“ (git_sync.sh nennt Datei und Klasse: konflikt/schutz/auth/netzwerk). Kein Tagesdefizit, kein API-Key-Problem. Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md bzw. den genannten Artikel von Hand angleichen."
             exit 1
           fi
@@ -737,17 +747,17 @@ jobs:
           # landete das im Topf „Endabnahme ohne Exit-Code fehlgeschlagen“ und
           # schickte die Diagnose in den falschen Schritt (Run 37694986440:
           # tatsächlich starb Phase 0.5 an einem Selbsttest).
-          if [ "${{ steps.final_release.outcome }}" = 'skipped' ]; then
+          if [ "${SCHRITT_FINAL_RELEASE_OUTCOME}" = 'skipped' ]; then
             GESTORBEN=""
             for paar in \
-              "lock=${{ steps.lock.outcome }}=Integritäts-Lock" \
-              "preflight=${{ steps.preflight.outcome }}=Pre-Flight-Check" \
-              "kadenz=${{ steps.kadenz.outcome }}=Phase 0.5 – Kadenz-Gate (Selbsttests + Selbstheilung)" \
-              "generate=${{ steps.generate.outcome }}=Phase 1 – Artikel generieren" \
-              "taxonomie=${{ steps.taxonomie.outcome }}=Taxonomie-Gate" \
-              "phase1_commit=${{ steps.phase1_commit.outcome }}=Phase-1-Commit" \
-              "hugo=${{ steps.hugo.outcome }}=Hugo-Installation" \
-              "shortcode=${{ steps.shortcode.outcome }}=Shortcode-Wache"; do
+              "lock=${SCHRITT_LOCK_OUTCOME}=Integritäts-Lock" \
+              "preflight=${SCHRITT_PREFLIGHT_OUTCOME}=Pre-Flight-Check" \
+              "kadenz=${SCHRITT_KADENZ_OUTCOME}=Phase 0.5 – Kadenz-Gate (Selbsttests + Selbstheilung)" \
+              "generate=${SCHRITT_GENERATE_OUTCOME}=Phase 1 – Artikel generieren" \
+              "taxonomie=${SCHRITT_TAXONOMIE_OUTCOME}=Taxonomie-Gate" \
+              "phase1_commit=${SCHRITT_PHASE1_COMMIT_OUTCOME}=Phase-1-Commit" \
+              "hugo=${SCHRITT_HUGO_OUTCOME}=Hugo-Installation" \
+              "shortcode=${SCHRITT_SHORTCODE_OUTCOME}=Shortcode-Wache"; do
               ergebnis="${paar#*=}"; ergebnis="${ergebnis%%=*}"
               if [ "$ergebnis" = 'failure' ]; then
                 GESTORBEN="${GESTORBEN:+$GESTORBEN, }${paar##*=}"
@@ -756,7 +766,7 @@ jobs:
             echo "::error::FRÜHABBRUCH (#138) – die Endabnahme lief nie; gescheitert ist: ${GESTORBEN:-ein Schritt vor der Endabnahme (siehe Schrittliste)}. Kein Tagesdefizit, kein API-Key-Problem. Den exakten Befehl nennt die Annotation des genannten Schritts; ein Selbsttest-Exit 2 wird mit python3 scripts/selftest_ki.py --trap <skript> eingegrenzt."
             exit 1
           fi
-          if [ "${{ steps.final_release.outcome }}" = 'success' ]; then
+          if [ "${SCHRITT_FINAL_RELEASE_OUTCOME}" = 'success' ]; then
             exit 0
           fi
           # WF-A535 (#529): Die Endabnahme kennt zwei ehrlich rote Klassen –

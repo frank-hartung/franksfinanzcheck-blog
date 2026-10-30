@@ -104,6 +104,8 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
 ABDECKUNG = ROOT / "data" / "gsc" / "abdeckung"
 AKTUELL = ABDECKUNG / "aktuell.json"
 VERLAUF = ABDECKUNG / "verlauf.jsonl"
@@ -722,7 +724,7 @@ def sitemap_seiten(pfad: Path = PUBLIC_SITEMAP) -> list[str]:
     """URLs aus der gebauten Sitemap. Leere Liste, wenn kein Build vorliegt."""
     if not Path(pfad).exists():
         return []
-    import xml.etree.ElementTree as ET
+    import safe_xml as ET
 
     ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
     try:
@@ -1206,7 +1208,7 @@ def lastmod_luecke(wahrheit: dict, root: Path = ROOT) -> int | None:
     sitemap = _oeffentlich(root) / "sitemap.xml"
     if not sitemap.exists():
         return None
-    import xml.etree.ElementTree as ET
+    import safe_xml as ET
 
     ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
     try:
@@ -2776,7 +2778,7 @@ def prioritaet(wahrheit: dict, verlinkung: dict, snapshot: dict | None = None,
 def _lastmod_karte(sitemap: Path) -> dict:
     if not Path(sitemap).exists():
         return {}
-    import xml.etree.ElementTree as ET
+    import safe_xml as ET
 
     ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
     try:

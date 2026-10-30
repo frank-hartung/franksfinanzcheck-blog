@@ -119,12 +119,12 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p /tmp/searxng
-          cat > /tmp/searxng/settings.yml <<'EOF'
+          cat > /tmp/searxng/settings.yml <<EOF
           use_default_settings: true
           general:
             instance_name: "franksfinanzcheck-werkbank"
           server:
-            secret_key: "${{ github.run_id }}-werkbank-ephemeral"
+            secret_key: "${GITHUB_RUN_ID}-werkbank-ephemeral"
             limiter: false
             image_proxy: false
           search:

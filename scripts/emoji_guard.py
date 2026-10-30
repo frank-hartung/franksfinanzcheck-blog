@@ -50,7 +50,7 @@ EMOJI_RE = re.compile(
 MOJIBAKE = {
     "Ã„": "Ä", "Ã¤": "ä", "Ã–": "Ö", "Ã¶": "ö", "Ãœ": "Ü", "Ã¼": "ü",
     "ÃŸ": "ß", "â€“": "–", "â€”": "—", "â€ž": "„", "â€œ": "“",
-    "â€\u009c": "“", "â€ž": "„", "â€™": "'", "â‚¬": "€", "Â": "",
+    "â€\u009c": "“", "â€™": "'", "â‚¬": "€", "Â": "",
 }
 EMOJI_MOJI = re.compile("ðŸ[\\x80-\\xbf]{2,4}")  # kaputte Emoji-Header
 
@@ -74,7 +74,7 @@ def check_hugo_toml() -> list[dict]:
     return findings
 
 
-ZERO_WIDTH = ["​", "‌", "‍", "﻿"]  # E5: unsichtbarer Müll (U+200B/C/D, BOM)
+ZERO_WIDTH = ["\u200b", "\u200c", "\u200d", "\ufeff"]  # E5: unsichtbarer Müll (U+200B/C/D, BOM)
 
 
 def mojibake_scan() -> tuple[list[dict], int]:

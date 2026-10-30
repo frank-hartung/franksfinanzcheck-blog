@@ -708,8 +708,8 @@ def load_articles(include_drafts: bool = False):
         if not include_drafts and "draft: true" in fm:
             continue
 
-        def get(key):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+        def get(key, _fm=fm):
+            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
             return m.group(1).strip() if m else ""
 
         title = get("title")
@@ -840,7 +840,7 @@ def ai_suggest(main_kw):
     raw = _call_ai(prompt)
     if not raw:
         return None
-    parts = [p.strip().strip("\"\"'") for p in re.split(r"[,\\n;]", raw) if p.strip()]
+    parts = [p.strip().strip("\"'„“”‚‘") for p in re.split(r"[,\n;]", raw) if p.strip()]
     parts = [re.sub(r"^[\d\-\*\.\s\)]+", "", p).strip() for p in parts]
     parts = [p for p in parts if p and len(p) > 2]
     result = parts[:5]

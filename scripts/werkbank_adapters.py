@@ -27,12 +27,16 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from net_safety import ist_loopback_ziel, pruefe_url_ziel, sicherer_abruf  # noqa: E402
 SSOT = ROOT / "data" / "werkbank.yaml"
 
 USER_AGENT = "franksfinanzcheck-werkbank/1.0 (+https://franksfinanzcheck.de)"
@@ -135,9 +139,13 @@ def _hole(url: str, timeout: int = 30, headers: dict | None = None) -> tuple[str
     kopf = {"User-Agent": USER_AGENT, "Accept-Language": "de-DE,de;q=0.9"}
     kopf.update(headers or {})
     try:
-        req = urllib.request.Request(url, headers=kopf)
-        with urllib.request.urlopen(req, timeout=timeout) as antw:
-            roh = antw.read()
+        _status, _antw_kopf, roh = sicherer_abruf(
+            url,
+            headers=kopf,
+            timeout=timeout,
+            max_bytes=4 * 1024 * 1024,
+            erlaube_loopback=True,
+        )
         return roh.decode("utf-8", errors="replace"), None
     except urllib.error.HTTPError as exc:
         return "", f"HTTP {exc.code}"
@@ -221,12 +229,16 @@ def suche_duckduckgo(frage: str, anbieter: dict, limit: int, timeout: int) -> tu
     ziel = anbieter.get("endpunkt") or "https://html.duckduckgo.com/html/"
     daten = urllib.parse.urlencode({"q": frage, "kl": "de-de"}).encode()
     try:
-        req = urllib.request.Request(
-            ziel, data=daten,
+        _status, _kopf, roh = sicherer_abruf(
+            ziel,
+            data=daten,
             headers={"User-Agent": USER_AGENT,
-                     "Content-Type": "application/x-www-form-urlencoded"})
-        with urllib.request.urlopen(req, timeout=timeout) as antw:
-            text = antw.read().decode("utf-8", errors="replace")
+                     "Content-Type": "application/x-www-form-urlencoded"},
+            timeout=timeout,
+            max_bytes=2 * 1024 * 1024,
+            erlaube_loopback=False,
+        )
+        text = roh.decode("utf-8", errors="replace")
     except Exception as exc:  # noqa: BLE001
         return [], f"DuckDuckGo nicht erreichbar ({type(exc).__name__})"
 
@@ -437,19 +449,33 @@ def lies(urls: list[str], ssot: dict, max_zeichen: int | None = None,
     if not urls:
         return {}
 
+    ergebnis: dict[str, dict] = {}
+    sichere_urls: list[str] = []
+    for u in urls:
+        ok, grund = pruefe_url_ziel(u, erlaube_loopback=True, aufloesen=False)
+        if not ok:
+            ergebnis[u] = {"fehler": f"Ziel gesperrt: {grund}"}
+        else:
+            sichere_urls.append(u)
+    if not sichere_urls:
+        return ergebnis
+
     if _modul_da("crawl4ai"):
         try:
-            ergebnis = _lies_crawl4ai(urls, max_zeichen, timeout)
+            gecrawlt = _lies_crawl4ai(sichere_urls, max_zeichen, timeout)
+            ergebnis.update(gecrawlt)
             # Crawl4AI kann einzelne Seiten verfehlen – die holt der Rückfall.
-            fehlend = [u for u in urls if not (ergebnis.get(u) or {}).get("text")]
+            fehlend = [u for u in sichere_urls if not (ergebnis.get(u) or {}).get("text")]
             for u in fehlend:
-                ergebnis[u] = _lies_jina(u, max_zeichen, timeout)
+                ergebnis[u] = _lies_urllib(u, max_zeichen, timeout) if ist_loopback_ziel(u) else _lies_jina(u, max_zeichen, timeout)
             return ergebnis
         except Exception as exc:  # noqa: BLE001 – Crawl4AI darf nie den Lauf killen
             print(f"⚠ Crawl4AI-Lauf gescheitert ({type(exc).__name__}) – Rückfall aktiv.")
 
-    ergebnis: dict[str, dict] = {}
-    for u in urls:
+    for u in sichere_urls:
+        if ist_loopback_ziel(u):
+            ergebnis[u] = _lies_urllib(u, max_zeichen, timeout)
+            continue
         res = _lies_jina(u, max_zeichen, timeout)
         if not res.get("text"):
             res = _lies_urllib(u, max_zeichen, timeout)
@@ -482,6 +508,9 @@ def browser_beweis(url: str, ssot: dict, suchbegriffe: list[str] | None = None) 
     zitierte Seite die Aussage überhaupt trägt – und ob sie ohne
     JavaScript-Fehler erreichbar ist.
     """
+    ok_ziel, ziel_grund = pruefe_url_ziel(url, erlaube_loopback=False, aufloesen=False)
+    if not ok_ziel:
+        return {"zustand": DEFEKT, "grund": f"Ziel gesperrt: {ziel_grund}", "url": url}
     status = browser_status(ssot)
     if status["zustand"] != BEREIT:
         return {"zustand": status["zustand"], "grund": status["grund"], "url": url}
@@ -586,13 +615,17 @@ def konnektor_ausfuehren(slug: str, argumente: dict, ssot: dict,
         "arguments": argumente,
     }).encode()
     try:
-        req = urllib.request.Request(
-            f"{basis}/tools/execute/{urllib.parse.quote(slug)}", data=nutzlast,
+        _status, _kopf, roh_antw = sicherer_abruf(
+            f"{basis}/tools/execute/{urllib.parse.quote(slug)}",
+            data=nutzlast,
             headers={"x-api-key": schluessel, "Content-Type": "application/json",
-                     "User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=60) as antw:
-            return {"zustand": "ausgefuehrt", "slug": slug,
-                    "antwort": json.loads(antw.read().decode("utf-8", errors="replace"))}
+                     "User-Agent": USER_AGENT},
+            timeout=60,
+            max_bytes=4 * 1024 * 1024,
+            erlaube_loopback=True,
+        )
+        return {"zustand": "ausgefuehrt", "slug": slug,
+                "antwort": json.loads(roh_antw.decode("utf-8", errors="replace"))}
     except Exception as exc:  # noqa: BLE001
         return {"zustand": DEFEKT, "slug": slug, "grund": f"{type(exc).__name__}: {exc}"}
 

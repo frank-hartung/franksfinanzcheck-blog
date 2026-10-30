@@ -504,7 +504,7 @@ class _H1TextParser(HTMLParser):
     one consistent, entity-aware view without adding a runtime dependency.
     """
 
-    _TEXTLESS_TAGS = {"script", "style"}
+    _TEXTLESS_TAGS = frozenset({"script", "style"})
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)

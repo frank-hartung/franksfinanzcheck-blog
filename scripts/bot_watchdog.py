@@ -410,7 +410,6 @@ def syntax_detektor_sichtbar() -> tuple[bool, str]:
     kippte den Selbsttest und damit den ganzen Lauf, samt aller Heil- und
     Meldestufen (Meldung #864, 25.10.2026).
     """
-    import tempfile
     if syntax_wache is None:
         return False, "skript_syntax_wache.py nicht importierbar – Syntaxprüfung blind"
     with tempfile.TemporaryDirectory() as tmp:

@@ -187,8 +187,8 @@ def run_gate():
                 parts = content.split("---", 2)
                 fm = parts[1] if len(parts)>1 else ""
                 body = parts[2] if len(parts)==3 else content
-                def get(k):
-                    mm = re.search(rf"^{k}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+                def get(k, _fm=fm):
+                    mm = re.search(rf"^{k}:\s*[\"']?(.+?)[\"']?\s*$", _fm, re.M)
                     return mm.group(1).strip() if mm else ""
                 kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)
                 if kw_m:

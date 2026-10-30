@@ -11,7 +11,6 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-import xml.etree.ElementTree as ET
 from collections import Counter, deque
 from html.parser import HTMLParser
 from urllib.robotparser import RobotFileParser
@@ -21,6 +20,7 @@ import sys
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(_REPO_ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT / "scripts"))
+import safe_xml as ET  # noqa: E402
 import serp_limits
 
 USER_AGENT = "FF-SEO-Spider/2.0 (+https://franksfinanzcheck.de/; local SEO audit)"

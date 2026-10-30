@@ -96,7 +96,7 @@ jobs:
           SCHREIBEN="--apply"
           if [ "${EINGABE_MODUS}" = "planen" ]; then SCHREIBEN=""; fi
 
-          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "pull_request_target" ]; then
             python3 scripts/vorgangs_abschluss.py \
               --pr "${EREIGNIS_NUMBER}" --apply
           elif [ -n "${EINGABE_PR}" ]; then

@@ -44,7 +44,7 @@ KORRIGIERT_AM = dt.date(2026, 10, 24)
 LAUF_FAKTENCHECK = dt.date(2026, 10, 20)   # echter Recherchelauf vom 20.10.
 DASHES = {
     '\u2013': '-', '\u2014': '-', '\u2012': '-', '\u2011': '-',
-    '\u00a0': ' ', '\u202f': ' ', '\u2212': '-', '‑': '-',
+    '\u00a0': ' ', '\u202f': ' ', '\u2212': '-',
 }
 
 

@@ -122,7 +122,7 @@ Haftpflicht zuerst, dann Gebäude und Hausrat, zuletzt Kfz. Die Reihenfolge folg
 
 Kfz hat den Kalender (30.11.). Haftpflicht hat keinen – und genau deshalb bleibt sie jahrelang unangetastet, obwohl 20 € und drei Klauseln fehlen.
 
-Beim Gebäude entscheidet nicht der Beitrag, sondern die Klausel: Elementarschutz, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung in einem Tarif zusammenzubringen ist die eigentliche Arbeit. Prüf die vier Punkte in dieser Reihenfolge – erst Elementar, dann grobe Fahrlässigkeit, dann Neuwert, zuletzt der Selbstbehalt.
+Beim Gebäude entscheidet nicht der Beitrag, sondern die Klausel: Elementarschutz, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung in einem Tarif zusammenzubringen ist die eigentliche Arbeit.
 
 ## Rechenbeispiel Haushalt mit Auto und Eigentum
 

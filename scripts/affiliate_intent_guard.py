@@ -1348,7 +1348,7 @@ def _gateway_name(html: str) -> str:
 
 def _md5(pfad: Path) -> str:
     try:
-        return hashlib.md5(pfad.read_bytes()).hexdigest()
+        return hashlib.md5(pfad.read_bytes(), usedforsecurity=False).hexdigest()
     except OSError:
         return ""
 

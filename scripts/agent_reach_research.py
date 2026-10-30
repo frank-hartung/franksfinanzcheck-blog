@@ -53,6 +53,9 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from net_safety import pruefe_url_ziel, sicherer_abruf  # noqa: E402
 DEFAULT_PLAN = ROOT / "data" / "agent_reach" / "themenplan.yaml"
 DEFAULT_OUT = ROOT / "data" / "research"
 
@@ -241,16 +244,25 @@ def _sammle_web_crawl4ai(url: str, max_zeichen: int, timeout: int) -> dict | Non
 
 
 def sammle_web(url: str, max_zeichen: int, timeout: int) -> tuple[dict | None, str | None]:
+    ok_ziel, ziel_grund = pruefe_url_ziel(url, erlaube_loopback=False, aufloesen=False)
+    if not ok_ziel:
+        return None, f"Ziel abgelehnt: {ziel_grund}"
+
     # Stufe 1: Crawl4AI (sauberes Markdown). Stufe 2: Jina Reader (Hausweg).
     besser = _sammle_web_crawl4ai(url, max_zeichen, timeout)
     if besser:
         return besser, None
 
     ziel = f"https://r.jina.ai/{url}"
-    req = urllib.request.Request(ziel, headers={"User-Agent": USER_AGENT})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as antw:
-            text = antw.read().decode("utf-8", errors="replace")
+        _status, _kopf, roh = sicherer_abruf(
+            ziel,
+            headers={"User-Agent": USER_AGENT},
+            timeout=timeout,
+            max_bytes=2 * 1024 * 1024,
+            erlaube_loopback=False,
+        )
+        text = roh.decode("utf-8", errors="replace")
     except Exception as exc:  # noqa: BLE001 – Netzwerkfehler sauber melden
         return None, f"Jina-Reader-Abruf fehlgeschlagen: {exc}"
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
