@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T22:58:04Z",
+  "generated_at": "2026-10-30T23:30:18Z",
   "modus": "kandidaten",
-  "commit": "fbc52b89419f688aed45c8705f6cbd57e7dadeb2",
+  "commit": "e3a287394fcca082275d5e6cd4bcc2d7d771cbd9",
   "kapazitaet": {
     "stichtag": "2026-10-30",
     "artikel": 110,
@@ -281,23 +281,6 @@
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
     },
-    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
-      "sha256": "23e04186e31323ed46300c4066ce0b18e1d3260c50997a145a61e0d9e990f8f2",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
-    },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "ba94c7fcd8496d5b7f179e71a8cc68b3d7bf2cb78f4a2235a09abfff80d15a9b",
       "urteil": "freigabe-reif",
@@ -450,6 +433,23 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
+      "sha256": "653d2819ec9dfe3203027c156da216aa65d2b979a5d5a6715e7bd3c62232f0cb",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "cebe1c665b11df10f24940c44dad8f770bfc2aaec981af0f8bbdb0fd109e2dd7",
