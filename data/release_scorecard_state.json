@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T16:55:15Z",
+  "generated_at": "2026-10-30T19:25:29Z",
   "modus": "kandidaten",
-  "commit": "4af6fed67b3a60908dcc99863ffe92e1059e4ef5",
+  "commit": "825031c3fe7a6b4b87c4f3f9b0ca8cbe0d5c598b",
   "kapazitaet": {
     "stichtag": "2026-10-30",
     "artikel": 110,
@@ -296,7 +296,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "ba94c7fcd8496d5b7f179e71a8cc68b3d7bf2cb78f4a2235a09abfff80d15a9b",
