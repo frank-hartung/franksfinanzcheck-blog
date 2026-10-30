@@ -1564,16 +1564,20 @@ def run(root: Path | None = None, do_heal: bool | None = None) -> dict:
             if aktionen:
                 geheilt.extend(f"{art['slug']}: {a}" for a in aktionen)
             if neuer_body != art["body"]:
+                raw = art.get("text", "")
+                anfang = body_anfang(raw)
+                if raw[anfang:] == (art["body"] or ""):
+                    neu_text = raw[:anfang] + neuer_body   # byte-exakt
+                else:
+                    # Naht unerwartet – Sicherheit vor Schönheit:
+                    # kanonischer Weg über die post_utils-Naht.
+                    neu_text = join_article(art["fm"], neuer_body,
+                                            art["prefix"])
+                import editorial_review_gate as _ymyl_gate
+                if _ymyl_gate.automatic_change_findings(raw, neu_text):
+                    print(f"  ⏸ YMYL-Schreibschutz ({art['slug']}): Siegel bleibt unberührt")
+                    continue
                 if not DRY_RUN:
-                    raw = art.get("text", "")
-                    anfang = body_anfang(raw)
-                    if raw[anfang:] == (art["body"] or ""):
-                        neu_text = raw[:anfang] + neuer_body   # byte-exakt
-                    else:
-                        # Naht unerwartet – Sicherheit vor Schönheit:
-                        # kanonischer Weg über die post_utils-Naht.
-                        neu_text = join_article(art["fm"], neuer_body,
-                                                art["prefix"])
                     art["path"].write_text(neu_text, encoding="utf-8")
                     art["text"] = neu_text
                 art["body"] = neuer_body

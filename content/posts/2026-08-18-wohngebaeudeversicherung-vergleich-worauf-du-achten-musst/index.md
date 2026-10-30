@@ -4,8 +4,9 @@ title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
 date: 2026-10-28T01:24:59Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-10-28T15:04:31Z
-cadence_grund: "ymyl-review: E17: Text/Quellen wurden nach der Freigabe verändert"
+cadence_grund: "ymyl-review (#826): Fachprüfung, Belegkette und Faktencheck am 2026-10-30 abgeschlossen – Re-Queue (nächster Publikationstag entscheidet)"
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -37,7 +38,7 @@ quellen:
     url: "https://www.gdv.de/gdv/themen/klima/klimafolgenanpassung"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-10-05"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"

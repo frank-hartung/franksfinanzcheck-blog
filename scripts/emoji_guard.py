@@ -98,10 +98,14 @@ def mojibake_scan() -> tuple[list[dict], int]:
         if DO_FIX and not DRY_RUN:
             if "kaputte Emoji (ðŸ…)" in found:
                 continue  # kaputte Emoji: nicht raten -> nur melden
+            old_text = text
             for bad, good in MOJIBAKE.items():
                 text = text.replace(bad, good)
             for c in ZERO_WIDTH:                       # E5: immer sicher zu löschen
                 text = text.replace(c, "")
+            import editorial_review_gate as _ymyl_gate
+            if _ymyl_gate.automatic_change_findings(old_text, text):
+                continue
             p.write_text(text, encoding="utf-8")
             repaired += 1
     return hits, repaired

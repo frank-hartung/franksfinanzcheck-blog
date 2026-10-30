@@ -28,7 +28,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-10-24"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"

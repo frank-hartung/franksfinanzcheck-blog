@@ -189,6 +189,10 @@ def scan(do_fix, dry_run=False, strict=False, now=None):
         findings += [(own, s, w, k) for s, w, k in details]
         if not count:
             return
+        if is_post:
+            import editorial_review_gate as _ymyl_gate
+            if _ymyl_gate.automatic_change_findings(content, new_content):
+                return
         if do_fix and not dry_run:
             open(path, "w", encoding="utf-8").write(new_content)
         tag = ""
@@ -348,9 +352,8 @@ def run_selftest():
               not healed2 and all(f[3] != "missing" for f in findings2))
 
         # 4) --strict: altes Verhalten, auch transient wird entlinkt
-        open(live_a, "w", encoding="utf-8").write(
-            "Vorher: [Ziel B](../../posts/draft-b/) und "
-            "[Ziel C](../../posts/future-c/).")
+        make("live-a", body="Vorher: [Ziel B](../../posts/draft-b/) und "
+                            "[Ziel C](../../posts/future-c/).")
         scan(do_fix=True, strict=True, now=FIXED_NOW)
         a2 = open(live_a, encoding="utf-8").read()
         check("strict entlinkt auch Draft-/Zukunfts-Ziele",

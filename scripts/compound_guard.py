@@ -243,14 +243,18 @@ def main() -> None:
     if not files:
         print("Keine Zieldateien.")
         return
+    import editorial_review_gate as _ymyl_gate
     touched, found, cands = 0, 0, []
     for p in files:
         res = process(p)
-        if res["text"] is not None and res["text"] != p.read_text(encoding="utf-8"):
-            p.write_text(res["text"], encoding="utf-8")
-            touched += 1
+        old_raw = p.read_text(encoding="utf-8")
+        if res["text"] is not None and res["text"] != old_raw:
+            if not _ymyl_gate.automatic_change_findings(old_raw, res["text"]):
+                p.write_text(res["text"], encoding="utf-8")
+                touched += 1
         found += len(res["fixes"])
-        cands += res["candidates"]
+        if not _ymyl_gate.automatic_write_protected(p):
+            cands += res["candidates"]
 
     # KI-Schiedsrichter über Kandidaten (max 6/Lauf, Kostenbremse)
     ai_fixes = []
@@ -263,10 +267,12 @@ def main() -> None:
                 by_file.setdefault(rel, []).append((phrase, verdict))
         for rel, pairs in by_file.items():
             p = ROOT / rel
-            t = p.read_text(encoding="utf-8")
+            old_t = p.read_text(encoding="utf-8")
+            t = old_t
             for old, new in pairs:
                 t = re.sub(r"\b" + re.escape(old) + r"\b", new, t)
-            p.write_text(t, encoding="utf-8")
+            if not _ymyl_gate.automatic_change_findings(old_t, t):
+                p.write_text(t, encoding="utf-8")
 
     mode = "DRY-RUN" if DRY_RUN else ("FIX" + ("+KI" if USE_AI else "") if DO_FIX else "REPORT")
     lines = ["# 🧩 COMPOUND-REPORT (compound_guard.py)", "",
