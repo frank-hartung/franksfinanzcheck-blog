@@ -638,7 +638,23 @@ nahelegen (Aufsichtsbehörde, Pflichten für Unternehmen), melde luecke. \
 Systemgrenzen einräumen (Namensauflösung ist nicht Bandbreite; Router, WLAN \
 und Hardware setzen Obergrenzen) – sonst praezision. (e) Anbieter-Rankings \
 und Superlative ohne messbare Daten („oft die beste Wahl für hohes Tempo“) \
-sind praezision-Befunde; verlange eigene Messung statt Pauschalurteil."""
+sind praezision-Befunde; verlange eigene Messung statt Pauschalurteil.
+10. Befund-Klassen aus #911 (27.10.2026) ausdrücklich mitprüfen: \
+(a) Vollständigkeits- und Vergleichsversprechen von Portalen („fast alle \
+Firmen und Tarife“, „alle wichtigen Konditionen“) sind ohne Messgröße und \
+Auswahlkriterium praezision; ein Portal zeigt eine Auswahl, nicht den \
+gesamten Markt. (b) Verbrauchs-Schwellen als Tarifregel („ab 3.000 kWh \
+Festpreis“, „unter 2.000 kWh variabel“) sind ohne Daten praezision; die \
+Tarifwahl hängt vom Angebot und vom Preisrisiko ab. (c) „Kostenlos“, „keine \
+Gebühr“ oder „keine Abschiedsgebühr“ nur mit Norm- oder Behördenbezug und \
+genannter Zielgruppe (Haushaltskunden) – sonst luecke. (d) Sparprozente aus \
+Heizverhalten brauchen Quelle und Kennzeichnung als Richtwert; \
+Scheingenauigkeit („2 °C = 6 %“) und Hochrechnungen ohne Verbrauchsanteil \
+sind praezision. (e) Aufsicht ist keine Preisgenehmigung: „reguliert“ oder \
+„überwacht“ nicht mit „genehmigt“ verwechseln und nicht „nicht jeden Preis“ \
+schreiben, wenn es keine staatliche Genehmigung gibt. (f) Behördenfristen \
+(Preisänderung, Wechsel) mit Zielgruppe, Stichtag und der Abgrenzung \
+zwischen technischem Prozess und Vertragskündigung nennen."""
 
 
 def lade_provider_order(pfad: str = TRANSPORT_PFAD) -> tuple[str, ...]:

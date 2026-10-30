@@ -19,6 +19,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 
+kurzantwort: "Frugalismus mit Familie heißt, Fixkosten und laufende Ausgaben zu prüfen, statt an kleinen Freuden zu sparen. Ein gemeinsames Familienbudget macht Kostentreiber sichtbar; Sparziele tragen, wenn alle mitziehen."
 inspiration: "Frugal leben mit Familie: So klappt Sparen auch mit Kindern"
 cover:
   image: "images/covers/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht.jpg"

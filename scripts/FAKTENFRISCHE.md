@@ -37,6 +37,23 @@ Die Offline-Tests benötigen die Projektabhängigkeiten PyYAML und feedparser;
 sie verwenden weder echte Netzabrufe noch KI-Schlüssel. Live-Kanäle und
 Provider müssen separat in der vorgesehenen Betriebsumgebung geprüft werden.
 
+## Befund-Register und Dauerheilung
+
+Ein Laufbericht ist ein Schnappschuss; die Queue wird beim nächsten Lauf
+überschrieben. Eine redaktionelle Heilung braucht deshalb eine eigene
+Schließakte: `data/faktenfrische_befunde_<issue>.yaml` hält je Befund
+die Entscheidung, den Status, den Beleg (Allowlist **und** Artikelquelle)
+sowie Bedeutungsanker fest. Die zugehörige Regression prüft zusätzlich
+Rechenwege, Metadaten, GEO-Reife, Publish-Gates und den Prüfauftrag im
+SYSTEM_PROMPT. Damit ist „behoben“ nachvollziehbar, und ein Rückfall wird
+rot, bevor er als neuer Befund teuer wird. Die Registerdatei ist – wie
+dieser Vertrag – menschlich kuratiert; die Maschine schreibt sie nie.
+
+Beispiel #911 (30.10.2026): zehn Befunde in zwei Artikeln, Register
+`data/faktenfrische_befunde_911.yaml`, Regression
+`scripts/tests/test_faktenfrische_911.py`, Aufruf
+`npm run test:faktenfrische:911`.
+
 ## KI-Routing
 
 Die Reihenfolge stammt zur Laufzeit aus `routing.faktenpruefung` in

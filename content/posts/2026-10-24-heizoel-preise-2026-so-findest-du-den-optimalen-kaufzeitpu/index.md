@@ -4,11 +4,12 @@ description: Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen 
 date: 2026-10-30T01:03:42Z
 draft: false
 reserve_published: 2026-10-30
-lastmod: 2026-10-28
+lastmod: 2026-10-30
 redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Zurückgestellt: saisonale Preisprognosen und konkrete Einsparzahlen waren nicht mit einer belastbaren, datierten Quellenkette belegt; redaktionelle Prüfung vor erneuter Veröffentlichung erforderlich."
+kurzantwort: "Heizölpreise schwanken mit Rohölpreis, Nachfrage und Jahreszeit. Beobachte den Markt über mehrere Wochen, vergleiche mehrere Anbieter und bestelle mit Puffer, bevor der Tank leer ist; einen garantierten Tiefpunkt gibt es nicht."
 affiliate_exempt: true
 affiliate_exempt_reason: "Für Heizöl ist keine passende, registrierte Partnerroute vorhanden; Stromtarif-CTAs wären sachfremd. Der Artikel bleibt bis zur Quellenprüfung Entwurf."
 
