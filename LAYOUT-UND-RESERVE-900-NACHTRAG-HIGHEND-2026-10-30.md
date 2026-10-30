@@ -238,6 +238,54 @@ Der Befund war schon vor diesem PR vorhanden (der E2E-Lauf auf `main` ist seit
 
 ---
 
+## 3b. Nebenbefund: warum der `regression`-Job rot ist – und warum es nicht dieser PR ist
+
+Der Job **„Publication reliability regression tests”** ist seit dem 28.10.
+(13:34 UTC, letzter grüner Lauf) auf **jedem** Branch rot. Auf diesem PR sind
+es exakt zwei Schritte: `Code-Regression – Suite und Selbsttests` und
+`Uhr-Probe`. Ein roter Befund, den man nicht erklären kann, ist keine Freigabe
+– deshalb wurde er bis zur Ursache verfolgt, statt ihn zu umgehen.
+
+**Messung, nicht Vermutung** (zwei frische Klone, gleiche Werkzeugkette
+Hugo 0.168.0 + `requirements-ci.txt`, dieselben Befehle wie im Workflow):
+
+| Klon | Stand | Ergebnis der Suite |
+|---|---|---|
+| `main` | `cf6f9d0` | **4646 Tests, 5 Fehlschläge** |
+| dieser Branch | `95e21bf` | **4606 Tests, ok (skipped 22)**; mit CI-Paketen 4608 Tests, ok (skipped 5) |
+
+Die fünf Fehlschläge auf `main`:
+
+```text
+FAIL: test_top20_haben_zwei_abbildungen (test_inhalts_register.AbbildungenTests)
+FAIL: test_register_ist_aktuell (test_inhalts_register.FachpruefungRegisterTests)
+FAIL: test_live_wache_ist_gruen (test_inhalts_register.FormulaAndLiveTests)      → 21 × FF5
+FAIL: test_der_zwilling_hat_keine_nachfrage_aus_seite_eins (14 statt <10 Impressionen)
+FAIL: test_pillar_verlinkt_keinen_entwurf (Wohngebäude-Vergleich)
+```
+
+**Ursache der 21 FF5-Befunde:** `data/gsc/top_seiten_28t.json` schreibt die
+GSC-Automatik täglich neu. FF5 prüft die Abbildungen der **Top-20** – und die
+Liste hat sich verschoben: neu aufgenommene Beiträge tragen Unterschriften und
+Alt-Texte, die nicht artikelgenau sind (`*Abbildung: Merkkarte zu „…` erwartet).
+Die Automatik, die die Liste schreibt, zieht `abbildungen_ableiten.py` nicht
+nach; der Befund landet damit bei jedem fremden PR statt bei seinem Erzeuger.
+
+**Warum das nichts mit diesem PR zu tun hat:** die betroffenen Skripte
+(`ff_inhalts_wache.py`, `abbildungen_ableiten.py`, `fachpruefung_register.py`)
+sind zwischen `854652e` und `cf6f9d0` **byte-identisch** – geändert haben sich
+ausschließlich Daten (`data/gsc/`). Der Branch selbst ist grün, und der
+Schwester-Branch `arena/e755613b` (Thema Affiliate, ohne eine Zeile aus diesem
+PR) zeigt im selben Lauf dieselben zwei roten Schritte. Es wurde **keine
+Prüfung abgeschaltet, entschärft oder ausgenommen**.
+
+**Empfohlene Dauerheilung (eigener Vorgang, nicht in diesem PR):** die
+GSC-Automatik läuft nach dem Listen-Update selbst `abbildungen_ableiten.py
+--check` (bzw. den Heiler mit Commit) und wird dort rot, wo der Befund
+entsteht. Bis dahin bleibt der Job ein ehrlicher, aber fremder Rot-Befund.
+
+---
+
 ## 4. Belege (Befehle und Ausgaben)
 
 ```text
