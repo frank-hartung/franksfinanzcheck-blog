@@ -296,6 +296,25 @@ Schwester-Branch `arena/e755613b` (Thema Affiliate, ohne eine Zeile aus diesem
 PR) zeigt im selben Lauf dieselben zwei roten Schritte. Es wurde **keine
 Prüfung abgeschaltet, entschärft oder ausgenommen**.
 
+**Stand nach dem Merge mit `main` (gleiche Suite, gemergter Baum):**
+
+```text
+Ran 4680 tests — 2 Fehlschläge
+  · test_current_snapshot_is_whole_and_editorially_valid  → von diesem PR verursacht, behoben
+  · test_der_zwilling_hat_keine_nachfrage_aus_seite_eins   → fremder Befund, bleibt
+```
+
+Der erste Fehlschlag war eine echte Folge des Merges: zwei 30.10.-Entwürfe
+waren in diesem PR auf ältere Bytes zurückgeholt worden, während die
+Reserve-Kette sie um 12:53 UTC auf den bearbeiteten Bytes neu gemessen hatte.
+Die Änderung ist zurückgenommen (§2.1, Nachtrag) – die Messung gilt.
+Übrig bleibt **ein** Fehlschlag: `test_der_zwilling_hat_keine_nachfrage_aus_seite_eins`
+meldet 14 statt < 10 Impressionen in 28 Tagen. Das ist **kein Codefehler,
+sondern ein redaktioneller Entscheid** („Konsolidierung prüfen“, §Kommentar im
+Test). Die Schwelle zu erhöhen wäre genau die Testentschärfung, die hier
+nirgends passiert; der Befund ist auf `main` ohne diesen PR genauso rot
+(nachgemessen am frischen Klon `cf6f9d0`).
+
 **Empfohlene Dauerheilung (eigener Vorgang, nicht in diesem PR):** die
 GSC-Automatik läuft nach dem Listen-Update selbst `abbildungen_ableiten.py
 --check` (bzw. den Heiler mit Commit) und wird dort rot, wo der Befund
