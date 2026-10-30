@@ -356,6 +356,15 @@ class Antwortformat(unittest.TestCase):
             with self.subTest(expected=expected):
                 self.assertTrue(any(expected in e for e in hero.validate_candidate(NEUER_TITEL, lead, HERBST, [])))
 
+    def test_prompt_bennt_exakt_die_geprueften_titelwoerter_und_floskeln(self):
+        system, _ = hero.prompt_for(HERBST, [])
+        for word in hero.TITLE_INTENT_WORDS + hero.BANNED_PHRASES:
+            self.assertIn(word, system)
+        self.assertTrue(any("Spar-/Vergleichsintention" in e for e in
+                            hero.validate_candidate("Dein Überblick über Strom, Gas und Internet im Herbst", NEUER_LEAD, HERBST, [])))
+        self.assertTrue(any("KI-Floskel" in e for e in
+                            hero.validate_candidate(NEUER_TITEL, NEUER_LEAD + " Entdecke mehr.", HERBST, [])))
+
     def test_ausgeschriebene_zahlen_und_prozentangaben_werden_verworfen(self):
         lead = NEUER_LEAD.replace("im Herbst", "im Herbst um drei Prozent")
         self.assertTrue(any("Faktenvertrag" in e for e in hero.validate_candidate(NEUER_TITEL, lead, HERBST, [])))
@@ -454,6 +463,21 @@ class ProviderRotation(unittest.TestCase):
         self.assertEqual(parsed, (NEUER_TITEL, NEUER_LEAD))
         self.assertIn("Faktenvertrag", log[0])
         self.assertEqual(model, "gemini:model-gemini")
+
+    def test_issue_891_korrektur_und_gemini_budget_ohne_schwächung_des_vertrags(self):
+        bad = json.dumps({"title": "Dein Überblick über Strom, Gas und Internet im Herbst", "lead": NEUER_LEAD})
+        calls = []
+        def answer(provider, **kwargs):
+            calls.append((provider, kwargs))
+            return bad if provider == "groq" else gute_antwort()
+        with mock.patch.object(hero.llm_client, "chat", side_effect=answer):
+            parsed, log, _ = hero.polish_candidate(HERBST, [], [], attempts=1, sleep=lambda _: None)
+        self.assertEqual(parsed, (NEUER_TITEL, NEUER_LEAD))
+        self.assertIn("Titel ohne Spar-/Vergleichsintention", log[0])
+        self.assertIn("Titel ohne Spar-/Vergleichsintention", calls[1][1]["prompt"])
+        self.assertEqual(calls[0][1]["max_tokens"], hero.POLISH_MAX_TOKENS)
+        self.assertEqual(calls[1][1]["max_tokens"], hero.GEMINI_POLISH_MAX_TOKENS)
+        self.assertTrue(calls[1][1]["require_complete"])
 
     def test_alle_fehler_sind_sichtbar_aber_keine_secrets(self):
         secret = "key-that-must-never-be-logged"
