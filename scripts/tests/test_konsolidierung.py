@@ -7,6 +7,7 @@ Rechnung benutzt.
 
 Ausführen: python3 -m unittest scripts.tests.test_konsolidierung
 """
+import datetime as dt
 import json
 import os
 import shutil
@@ -381,10 +382,20 @@ class FallZwilling(unittest.TestCase):
         self.assertTrue(k._verlinkt(self.QUELLE, self.ZIEL, BLOG_DIR),
                         "Der Jahresplan verlinkt den Kontrollpfad nicht")
 
-    def test_der_lebende_bestand_ist_rollenklar(self):
-        # Die ganze Wache am echten Bestand – das ist der Vertrag, den der
-        # Tageslauf fährt (`konsolidierung.py --rollenpaare`).
-        self.assertEqual(k.rollenpaare_pruefen(BLOG_DIR), [])
+    def test_der_lebende_bestand_ist_am_entscheidungstag_rollenklar(self):
+        """Die ganze Wache am echten Bestand – mit FESTEM Datum.
+
+        Die Frist (Wiedervorlage) ist eine Zusage und läuft ab; die Wache
+        meldet das dann zu Recht (R2 hart, `--rollenpaare` im Deploy-Gate).
+        Ein Test, der dafür die Wanduhr liest, wäre selbst eine Zeitbombe:
+        Am 14.11.2026 wäre er rot geworden, ohne dass jemand etwas geändert
+        hätte – genau die Klasse, die die Uhr-Probe (+97 Tage) findet, und
+        dieser Test hat sie am 30.10.2026 ausgelöst. Das Datum ist deshalb
+        der Entscheidungstag: Was hier geprüft wird (Struktur, Entscheidung,
+        Rollenlink), hängt nicht am Kalender; was am Kalender hängt, prüft
+        der Lauf zur Laufzeit.
+        """
+        self.assertEqual(k.rollenpaare_pruefen(BLOG_DIR, heute=dt.date(2026, 10, 30)), [])
 
 
 class RollenpaarWache(unittest.TestCase):

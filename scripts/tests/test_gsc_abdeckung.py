@@ -926,11 +926,15 @@ class FristenblattUndBeobachtung(unittest.TestCase):
             self.assertRegex(eintrag["wiedervorlage"], r"^\d{4}-\d{2}-\d{2}$", url)
             self.assertIn(eintrag["erwartung"], {"indexiert", "impressionen", "keine"}, url)
             self.assertTrue(eintrag["eigentuemer"].strip(), url)
-        # Die Frist ist eine Zusage: sie darf nicht in der Vergangenheit liegen.
-        heute = dt.date.today().isoformat()
-        for url, eintrag in register.items():
-            self.assertGreaterEqual(eintrag["wiedervorlage"], heute,
-                                    f"{url}: Wiedervorlage liegt in der Vergangenheit")
+        # Die Frist ist eine Zusage – aber „liegt in der Zukunft“ gehört NICHT
+        # hierher. Ein Test, der die Wanduhr liest, ist eine Verabredung mit
+        # dem Kalender: Am 14.11.2026 wäre er rot geworden, ohne dass jemand
+        # etwas geändert hätte (genau die Klasse, die die Uhr-Probe +97 Tage
+        # findet – dieser Test hat sie am 30.10.2026 selbst ausgelöst).
+        # Ob eine Frist überfällig ist, entscheidet die Wache zur Laufzeit
+        # (`konsolidierung.py --rollenpaare`, R2 hart) – dort ist „zu spät“
+        # ein Befund und kein Testfehler. Dass diese Erkennung funktioniert,
+        # beweist `test_konsolidierung.RollenpaarWache` mit festem Datum.
 
     def test_rollenpaare_sind_gegenseitig_verknuepft(self) -> None:
         """Ein `paar`-Feld zeigt auf eine echte Gegen-Entscheidung.
