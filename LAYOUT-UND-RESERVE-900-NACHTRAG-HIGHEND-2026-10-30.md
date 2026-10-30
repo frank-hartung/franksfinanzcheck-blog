@@ -71,11 +71,24 @@ Reserve-Entwurf** schreibt; die `keywords` kamen aus den Pin-Heilern
    Pfad prüft jetzt zuerst die Werkzeuge (`require_metadata_support()`) und
    bricht mit Exit 2 ab, ohne eine Zeile anzufassen.
 
-**Bestand:** Die drei Entwürfe sind wieder **bytegleich** zum Nachweis
-(SHA-256 geprüft: `bdbb8f37…`, `b3d6df66…`, `d74dfcaa…`; Bytes über die
-Git-API aus `6d5ddd09` zurückgeholt, kein Nachweis erfunden). `reserve_artifacts
---withdraw-invalid` meldet „3 → 0 zurückgezogen“ nicht mehr, weil es nichts
-zurückzuziehen gibt.
+**Bestand:** Die drei Entwürfe waren wieder **bytegleich** zum damaligen
+Nachweis (SHA-256 geprüft: `bdbb8f37…`, `b3d6df66…`, `d74dfcaa…`; Bytes über
+die Git-API aus `6d5ddd09` zurückgeholt, kein Nachweis erfunden).
+`reserve_artifacts --withdraw-invalid` meldet „3 → 0 zurückgezogen“ nicht mehr,
+weil es nichts zurückzuziehen gibt.
+
+**Nachtrag nach dem Merge mit `main` (13:0x UTC):** Die Reserve-Kette hat in
+der Zwischenzeit selbst neu gemessen – der Nachweis vom 12:53 UTC zertifiziert
+die **bearbeiteten** Bytes der beiden 30.10.-Entwürfe (`41a5b625…`,
+`b5e79ef5…`). Eine frische Messung darf ein PR nicht durch ältere Bytes
+überstimmen (das wäre derselbe Fehler in die andere Richtung). Deshalb nimmt
+der Merge für diese zwei Dateien den zertifizierten Stand von `main`; die
+Änderung dieses PRs dort ist bewusst zurückgenommen. Die beiden Änderungen
+sind inhaltlich unschädlich und eher besser (die Affiliate-Transparenz-Zeile
+B3 steht wieder drin, die Pin-Heiler-`keywords` bleiben). Was bleibt, ist die
+Ursache: der Schreibschutz verhindert, dass Heiler künftig in bytegebundene
+Entwürfe schreiben. Der dritte Entwurf (`bdbb8f37…`) ist unverändert
+bytegleich.
 
 ### 2.2 FF5: Abbildung-Unterschriften (21 Befunde)
 
@@ -113,6 +126,10 @@ nicht.
 * Kein Test gelockert, keine Schwelle gesenkt, kein Befund umetikettiert.
 * Der Nachweis ist nicht „nachzertifiziert“ worden (das wäre ein Freibrief für
   die Bytes, die niemand gemessen hat) – die Bytes sind zurückgeholt worden.
+* Wo die Reserve-Kette inzwischen **selbst** neu gemessen hat (12:53 UTC),
+  gilt die Messung: dort wurde die Änderung dieses PRs zurückgenommen, statt
+  eine frische Messung zu überstimmen. Der Unterschied steht oben im Nachtrag,
+  nicht in einer stillen Überschreibung.
 * Die Drift ist nicht weggeräumt, sondern abgestellt: Schreibschutz plus
   Wahrheitspflicht beim Commit.
 
