@@ -308,6 +308,14 @@ def _lektor_findings():
 
 _CASING_J = os.path.join(BLOG_DIR, ".casing_report.json")
 _CASING_H = os.path.join(BLOG_DIR, "data", "casing_history.jsonl")
+# Ein Zustandsbericht, den niemand mehr schreibt, ist keine Messung, sondern
+# ein Archivstück. Belegt am 30.10.2026: `.casing_report.json` war 51 Tage alt
+# (28.09.), weil nur `casing_guard.py --json` ihn schrieb und kein Workflow
+# diesen Schalter aufrief. Die Scorecard zeigte daraus eine Gelb-Warnung für
+# einen Befund, den der frische Lauf längst nicht mehr hatte – Zahl und Ampel
+# waren falsch, ohne dass es jemand sehen konnte. Deshalb: Überalterung wird
+# als Datenlücke (⚪) ausgewiesen, niemals als Befund.
+_CASING_STALE_TAGE = 14
 
 
 def _casing_words(report):
@@ -365,6 +373,11 @@ def _casing_state():
         if h.get("tag") != TODAY.isoformat():
             vorher = h.get("hart")
             break
+    stand = (j.get("stand") or "nie")[:10]
+    try:
+        alter = (TODAY - datetime.date.fromisoformat(stand)).days
+    except (TypeError, ValueError):
+        alter = None
     return {
         "hart": hart,
         "hinweise": int(j.get("befunde") or 0) - hart,
@@ -373,18 +386,33 @@ def _casing_state():
         "woerter": woerter,
         "dichte": round(1000.0 * hart / woerter, 2) if woerter else None,
         "trend": None if vorher is None else hart - int(vorher),
-        "stand": (j.get("stand") or "nie")[:10],
+        "stand": stand,
+        "alter": alter,
+        "veraltet": alter is None or alter > _CASING_STALE_TAGE,
         "tage": len({h.get("tag") for h in hist if h.get("tag")}),
     }
 
 
+def _casing_veraltet(d):
+    """Ist die Casing-Messung älter als die Frische-Frist (oder undatiert)?"""
+    return bool(d.get("casing_veraltet"))
+
+
 def _casing_lamp(d):
+    """Ampel der Casing-Zeile – erst Frische, dann Befund.
+
+    Reihenfolge ist Absicht: eine veraltete Zahl ist keine Warnung und keine
+    Entwarnung, sondern eine Lücke (⚪). Sonst färbt ein längst geheilter
+    Befund das Cockpit dauerhaft gelb (und ein grüner Zustand aus alten Zeiten
+    würde eine neue Regression verdecken).
+    """
     c = d.get("casing")
-    if c is None:
+    if c is None or _casing_veraltet(d):
         return "⚪"
     if c == 0 and not d.get("casing_geparkt"):
         return "🟢"
     return "🟡" if c <= 3 else "🔴"
+
 
 
 def collect():
@@ -438,6 +466,8 @@ def collect():
         "casing_trend": (casing or {}).get("trend") if casing is not None else None,
         "casing_geparkt": (casing or {}).get("geparkt") if casing is not None else None,
         "casing_stand": (casing or {}).get("stand") if casing is not None else None,
+        "casing_alter": (casing or {}).get("alter") if casing is not None else None,
+        "casing_veraltet": (casing or {}).get("veraltet") if casing is not None else False,
         "casing_hist": (casing or {}).get("tage") if casing is not None else None,
         "zugangsalter_rot": zugangsalter_rot,
         "zugangsalter_gelb": zugangslage["amber"],
@@ -523,6 +553,42 @@ def _funnel_datalage():
     return ("Umsatz-Funnel", "data/revenue_funnel.json", stand, note)
 
 
+def _casing_display(d):
+    """Wert-Spalte der Casing-Zeile.
+
+    Veraltet heißt: keine Zahl, sondern die ehrliche Auskunft, wie alt die
+    letzte Messung ist. Eine historische Fundzahl („1 hart“) neben einer
+    Ampel wäre genau die Schein-Genauigkeit, die dieses Cockpit vermeiden soll.
+    """
+    if d.get("casing") is None:
+        return "n/a"
+    if _casing_veraltet(d):
+        alter = d.get("casing_alter")
+        return "n/a · Messung " + (f"{alter} Tage alt" if alter is not None else "undatiert")
+    wert = str(d["casing"])
+    if d.get("casing_dichte") is not None:
+        wert += " " + chr(0xb7) + " " + format(d["casing_dichte"], ".2f") + "/1.000 W."
+    if d.get("casing_woerter"):
+        wert += " (" + format(d["casing_woerter"], ",").replace(",", ".") + " W. geprüft)"
+    return wert
+
+
+def _casing_datalage(d):
+    """Bewertungsspalte der Casing-Zeile – mit Frische-Urteil statt Scheinwert."""
+    if d.get("casing") is None:
+        return ("Bericht noch nicht erzeugt (`casing_guard.py --fix` schreibt ihn "
+                "seit 30.10.2026 in jedem Voll-Lauf)")
+    if _casing_veraltet(d):
+        alter = d.get("casing_alter")
+        wie_alt = f"{alter} Tage alt" if alter is not None else "undatiert"
+        return (f"**Messung {wie_alt} – Zahlen sind historisch, kein Befund.** "
+                "Der nächste Voll-Lauf schreibt den Zustand "
+                "(`python3 scripts/casing_guard.py --fix`)")
+    return (f"{d['casing']} hart, "
+            f"{d.get('casing_hint') if d.get('casing_hint') is not None else 'n/a'} Hinweise, "
+            f"{d['casing_hist'] or 0} Tage Historie")
+
+
 def _render_datalage(d):
     """Was ist gemessen, was ist Lücke? (Agentur-Standard: keine Schein-Sicherheit.)"""
     body = [
@@ -542,12 +608,7 @@ def _render_datalage(d):
          f"{d['lektor'] if d['lektor'] is not None else 'n/a'} auto-behebbar, "
          f"{d.get('lektor_advisory') if d.get('lektor_advisory') is not None else 'n/a'} Stil-Hinweise"),
         ("Casing", "CASING-REPORT.md + .casing_report.json",
-         d.get("casing_stand") or "fehlt",
-         f"{d['casing'] if d.get('casing') is not None else 'n/a'} hart, "
-         f"{d.get('casing_hint') if d.get('casing_hint') is not None else 'n/a'} Hinweise, "
-         f"{d['casing_hist'] or 0} Tage Historie"
-         if d.get("casing") is not None else "Bericht noch nicht erzeugt "
-         "(`casing_guard.py --json`)"),
+         d.get("casing_stand") or "fehlt", _casing_datalage(d)),
         ("Affiliate-Klicks", "data/klicks_eigen.json (via scripts/klick_import.py)",
          d.get("clicks_stand", "nie"),
          {"ok": "automatisch befüllt (eigener Klickzähler)",
@@ -605,6 +666,12 @@ def _score(d) -> int:
         elif d["cwv_verdict"] == "AMBER":
             s -= 7
     else:
+        s -= 3
+    # Casing: veraltete Messung = Blindflug – dieselbe Regel wie bei den
+    # Core Web Vitals. Ein grüner Wert aus alten Zeiten darf keinen
+    # Punkte-Bonus verdienen, sonst wäre „nie mehr gemessen" die billigste
+    # Art, sauber auszusehen.
+    if d.get("casing_veraltet"):
         s -= 3
     # Lesbarkeit (wenn bekannt)
     if d["readability"] is not None:
@@ -673,10 +740,7 @@ def render(d, score):
         f"{'⚪' if d['lektor'] is None else ('🟢' if d['lektor'] == 0 else '🟡')} |",
         f"| Stil-Hinweise (Lektorat, nur Info) | "
         f"{'n/a' if d.get('lektor_advisory') is None else d['lektor_advisory']} | ℹ️ |",
-        f"| Groß-/Kleinschreibung – harte Befunde | "
-        f"{'n/a' if d.get('casing') is None else d['casing']}"
-        f"{' ' + chr(0xb7) + ' ' + format(d['casing_dichte'], '.2f') + '/1.000 W.' if d.get('casing_dichte') is not None else ''}"
-        f"{' (' + format(d['casing_woerter'], ',').replace(',', '.') + ' W. geprüft)' if d.get('casing_woerter') else ''} "
+        f"| Groß-/Kleinschreibung – harte Befunde | {_casing_display(d)} "
         f"| {_casing_lamp(d)} |",
         f"| Schreibweise – Hinweise (nur Info) | "
         f"{'n/a' if d.get('casing_hint') is None else d.get('casing_hint')} | ℹ️ |",
@@ -727,13 +791,21 @@ def render(d, score):
     elif d.get("zugangsalter_gelb", 0) > 0:
         recs.append(f"{d['zugangsalter_gelb']} gelber Secret-Hinweis(e) – altern, aber "
                     "functieren; `--verify` im Wochentakt hält den Nachweis frisch.")
-    if d.get("casing"):
+    if _casing_veraltet(d) and d.get("casing") is not None:
+        alter = d.get("casing_alter")
+        recs.append("**Casing-Messung "
+                    + (f"{alter} Tage alt" if alter is not None else "undatiert")
+                    + "** – die Zahl darf nicht als Befund gelesen werden. "
+                    "`python3 scripts/casing_guard.py --fix --plan` misst den "
+                    "Bestand neu und schreibt den Zustandsbericht; der "
+                    "Tageslauf (`blog-health-daily`) committet ihn seither mit.")
+    elif d.get("casing"):
         recs.append(f"**{d['casing']}** harte Casing-Befunde (Marken/Akronymen/"
                     f"Tags) – `python3 scripts/casing_guard.py --fix --plan` heilt "
                     f"Inhalt UND Pinterest-Plan; `--gate` parkt betroffene "
                     f"Neugeburten stattdessen. Dichte: "
                     f"{d.get('casing_dichte')} je 1.000 Woerter.")
-    if (d.get("casing_trend") or 0) > 0:
+    if (d.get("casing_trend") or 0) > 0 and not _casing_veraltet(d):
         recs.append(f"Casing verschlechtert um {d['casing_trend']} Befund(e) "
                     "gegenüber dem Vortag – meist ein Hinweis, dass ein Editor "
                     "(KI-Nachtrag, SEO-Keyword) vor der Wache geschrieben hat.")
