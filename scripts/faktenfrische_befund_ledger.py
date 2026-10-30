@@ -184,4 +184,3 @@ if __name__ == "__main__":
         print(pruef_hash(article))
         raise SystemExit(0)
     print(json.dumps(offene_befunde(), ensure_ascii=False, indent=2))
-
