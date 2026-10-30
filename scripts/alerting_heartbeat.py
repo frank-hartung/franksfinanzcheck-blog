@@ -31,6 +31,21 @@ Urteil:
     Einzelverluste kommen als GitHub-Flake vor (Hinweis), Muster nicht.
   · Ein einzelner Verlust ist ein Hinweis (beobachten, nicht eskalieren).
 
+KANAL-PROBE (WF-829B / #922, 30.10.2026)
+----------------------------------------
+Am 29./30.10.2026 war der Meldeweg selbst tot: In
+`alert-on-failure.yml` stand nach zwei Zusammenschnitten eine doppelte
+`const`-Deklaration im `github-script`-Block. Der Runner führt den Block als
+Funktion aus, also starb JEDER Lauf mit `SyntaxError` – und jede Zustellung
+blieb aus. Die Erkennung dafür existierte bereits (`workflow_js_wache.py`,
+seit #949) und schlug auch an: Der Lauf „Skript-Syntax" war rot. Gemeldet hat
+es niemand, denn der Melder war derselbe tote Kanal.
+    Ein Wächter, der über die gestörte Leitung alarmiert werden will,
+    schweigt genau dann, wenn er gebraucht wird.
+Dieser Herzschlag läuft per CRON und ist damit der EINZIGE Weg, der einen
+toten Meldeweg noch melden kann. Er prüft ihn deshalb selbst, vor jeder
+Zählung: `--kanal`.
+
 Meldung: Das Skript schreibt nichts ins Repo (C15) und öffnet selbst nichts –
 der Workflow `.github/workflows/alerting-heartbeat.yml` läuft per CRON (nie
 per workflow_run – das wäre der beobachtete Kanal, der bewiesenermaßen
@@ -54,11 +69,18 @@ import os
 import re
 import subprocess
 import sys
+from typing import Callable
+
+import workflow_js_wache
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALERTING_DATEI = os.path.join(".github", "workflows", "alert-on-failure.yml")
 ALERTING_NAME = "Fehler-Alerting"
 ISSUE_TITEL = "🫀 Alerting-Herzschlag: workflow_run-Zustellung verliert Ereignisse"
+# Eigene Meldung für den Fall, dass der MELDEWEG selbst nicht lauffähig ist.
+# Ein eigener Titel (nicht der Zustell-Titel): Die Zählung ist dann nicht
+# „verloren", sondern gar nicht erst möglich – der Rat ist ein anderer.
+ISSUE_TITEL_KANAL = "🫀 Alerting-Kanal: das Fehler-Alerting selbst ist nicht lauffähig"
 
 # Fenster-Modell: gezählt wird [jetzt-26 h, jetzt-90 min]. Die Gnadenfrist
 # deckelt Fehlmeldungen: ein Lauf, der gerade eben endete, darf sein
@@ -212,6 +234,56 @@ def abgleich(laeufe: list, alarme: list, jetzt: dt.datetime) -> dict:
             "uebersprungen": uebersprungen,
             "von": von, "bis": bis, "jetzt": jetzt,
             "befunde": befunde, "hinweise": hinweise}
+
+
+def kanal_pruefen(datei: str = ALERTING_DATEI,
+                  pruefen: Callable | None = None) -> dict:
+    """Kann der Meldeweg selbst überhaupt laufen?
+
+    Der `github-script`-Block in `alert-on-failure.yml` ist JavaScript in YAML
+    und wird von keiner Python-Wache gesehen. Kompiliert er nicht, starb jeder
+    Lauf an einem `SyntaxError` – und mit ihm jede Meldung. Geprüft wird mit
+    derselben Wache, die auch im „Skript-Syntax"-Lauf steht (eine Wahrheit,
+    zwei Orte): `workflow_js_wache.pruefen`.
+    """
+    messen = pruefen or workflow_js_wache.pruefen
+    status, befunde, _md = messen()
+    if status == 2:
+        # Ohne `node` ist kein Block bestätigt: ausgefallene Messung ist kein
+        # Grün (C33) – die Probe darf sich dann nicht beruhigt zurückziehen.
+        return {"datei": datei, "status": 2, "befunde": list(befunde), "kanal": False}
+    eigene = [b for b in befunde if datei in b]
+    return {"datei": datei, "status": 1 if eigene else 0, "befunde": eigene,
+            "kanal": not eigene}
+
+
+def kanal_md(erg: dict) -> str:
+    zeilen = [f"### {ISSUE_TITEL_KANAL}", "",
+              f"**Geprüft:** `{erg['datei']}` · "
+              "jeder `github-script`-Block kompiliert wie im Runner "
+              "(`node --check`, umhüllt mit `(async () => { … })()`).", ""]
+    if erg["status"] == 2:
+        zeilen += ["🛑 **Nicht prüfbar** – ohne Kompilierung ist kein Block "
+                   "bestätigt (C33)."] + [f"- {b}" for b in erg["befunde"]] + [""]
+    elif erg["befunde"]:
+        zeilen += ["🔴 **Der Meldeweg ist nicht lauffähig.** Jeder Lauf des "
+                   "Fehler-Alertings stirbt an einem Syntaxfehler – es werden "
+                   "keine Meldungen zugestellt, auch keine über diesen Befund.",
+                   ""] + [f"- `{b}`" for b in erg["befunde"]] + [
+            "", "Häufigste Ursache: ein Zusammenschnitt beim Zusammenführen "
+                "(doppelte `const`-Zeile, zwei Zeichenketten ohne Komma). "
+                "Heilung: die betroffene Datei in EINER Fassung setzen; "
+                "lokal `python3 scripts/workflow_js_wache.py --check`.",
+        ]
+    else:
+        zeilen += ["✅ Alle `github-script`-Blöcke des Fehler-Alertings "
+                   "kompilieren – der Kanal ist lauffähig.", ""]
+    zeilen += ["---",
+               "Gemeldet vom Alerting-Herzschlag (`cron` – absichtlich NICHT "
+               "über `workflow_run`). Dieser Befund kann NICHT über das "
+               "Fehler-Alerting gemeldet werden: Er sagt ja gerade, dass es "
+               "nicht läuft. Bei Grün wird die Meldung automatisch geschlossen."]
+    return "\n".join(zeilen) + "\n"
 
 
 def als_md(erg: dict) -> str:
@@ -428,6 +500,51 @@ def _selftest() -> int:
             fehler.append("das Qualitäts-Gate fehlt in der Wacht-Liste – "
                           "genau sein Blindflug löste den Vorfall aus")
 
+    # --- Kanal-Probe: kann der Meldeweg selbst laufen? ----------------------
+    # WF-829B / #922 (30.10.2026): Ein doppeltes `const` im github-script-Block
+    # von alert-on-failure.yml tötete JEDEN Alerting-Lauf. Der „Skript-Syntax"-
+    # Lauf sah es und wurde rot – gemeldet hat es niemand, weil der Melder
+    # derselbe tote Kanal war. Diese Probe ist der Weg, der es trotzdem meldet.
+    original = workflow_js_wache.pruefen
+
+    def js(status, befunde):
+        return lambda *a, **k: (status, list(befunde), "")
+
+    try:
+        # K1 · Ein kaputter Block im Fehler-Alerting ist ein Befund.
+        workflow_js_wache.pruefen = js(1, ["J1 .github/workflows/alert-on-failure.yml:218: "
+                                           "github-script-Block kompiliert nicht"])
+        erg = kanal_pruefen()
+        if erg["status"] != 1 or not erg["befunde"] or erg["kanal"]:
+            fehler.append("K1 kaputter Meldeweg nicht erkannt")
+
+        # K2 · Ein Befund in einer ANDEREN Datei ist kein Kanal-Befund.
+        workflow_js_wache.pruefen = js(1, ["J1 .github/workflows/andere.yml:12: …"])
+        if kanal_pruefen()["status"] != 0:
+            fehler.append("K2 fremder Befund als Kanal-Befund gezählt")
+
+        # K3 · Fehlt `node`, ist die Probe rot (keine Messung ist kein Grün, C33).
+        workflow_js_wache.pruefen = js(2, ["J0 Prüfung nicht möglich: `node` fehlt"])
+        if kanal_pruefen()["status"] != 2:
+            fehler.append("K3 fehlendes node nicht als nicht prüfbar gemeldet")
+
+        # K4 · Grün heißt grün.
+        workflow_js_wache.pruefen = js(0, [])
+        erg = kanal_pruefen()
+        if erg["status"] != 0 or not erg["kanal"]:
+            fehler.append("K4 lauffähiger Kanal nicht als grün erkannt")
+
+        # K5 · Der Befundbericht nennt den Weg zur Heilung, nicht nur das Leid.
+        if "workflow_js_wache.py --check" not in kanal_md(kanal_pruefen(pruefen=js(1, [
+                "J1 .github/workflows/alert-on-failure.yml:218: x"]))):
+            fehler.append("K5 Befundbericht ohne Heilungsschritt")
+
+        # K6 · Die Meldung über einen toten Kanal trägt ihren eigenen Titel.
+        if ISSUE_TITEL_KANAL == ISSUE_TITEL or "Kanal" not in ISSUE_TITEL_KANAL:
+            fehler.append("K6 keine eigene Meldungsidentität für den Kanal-Befund")
+    finally:
+        workflow_js_wache.pruefen = original
+
     if fehler:
         print("🛑 alerting_heartbeat-Selbsttest FEHLGESCHLAGEN:")
         for f in fehler:
@@ -445,10 +562,28 @@ def main() -> int:
     ap.add_argument("--repo", default=os.environ.get("GITHUB_REPOSITORY",
                                                      "frank-hartung/franksfinanzcheck-blog"))
     ap.add_argument("--md", action="store_true")
+    ap.add_argument("--kanal", action="store_true",
+                    help="prüft nur, ob der Meldeweg selbst lauffähig ist")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
     if args.selftest:
         return _selftest()
+    if args.kanal:
+        erg = kanal_pruefen()
+        text = kanal_md(erg)
+        if args.md:
+            summary = os.environ.get("GITHUB_STEP_SUMMARY")
+            if summary:
+                try:
+                    with open(summary, "a", encoding="utf-8") as fh:
+                        fh.write(text)
+                except OSError:
+                    pass
+        print(text)
+        for b in erg["befunde"]:
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::error::{b.replace('%', '%25').replace(chr(10), '%0A')}")
+        return erg["status"]
     if not os.environ.get("GH_TOKEN") and not os.environ.get("GITHUB_TOKEN"):
         print("🛑 Kein GH_TOKEN/GITHUB_TOKEN – der Herzschlag kann nicht messen.")
         return 2

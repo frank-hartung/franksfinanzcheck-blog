@@ -62,11 +62,36 @@ jobs:
       - name: Python-Abhängigkeit (PyYAML für die Wacht-Liste, Fallback im Skript)
         run: python3 -m pip install -q --break-system-packages --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt" 2>/dev/null || true
 
+      # KANAL-PROBE (WF-829B / #922, 30.10.2026)
+      # Am 29./30.10. war der Meldeweg selbst tot: eine doppelte `const`-
+      # Deklaration im github-script-Block von alert-on-failure.yml. JEDER
+      # Lauf des Fehler-Alertings starb daran – und mit ihm jede Meldung.
+      # Der Lauf „Skript-Syntax" sah den Befund und wurde rot; gemeldet hat
+      # ihn niemand, weil der Melder genau dieser tote Kanal war.
+      #   Ein Wächter, der über die gestörte Leitung alarmiert, schweigt
+      #   genau dann, wenn er gebraucht wird.
+      # Diese Probe läuft VOR der Zählung und über einen Kanal, der den
+      # beobachteten nicht benutzt (cron, eigene Meldung). Fällt sie rot,
+      # bleibt die Zählung aus: Eine Zustellquote für einen Meldeweg, der
+      # gar nicht laufen kann, wäre eine Zahl ohne Bedeutung.
+      - name: Kanal-Integrität – kann das Fehler-Alerting selbst laufen?
+        id: kanal
+        run: |
+          set -uo pipefail
+          code=0
+          python3 scripts/alerting_heartbeat.py --kanal --md || code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "kanal-code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
       - name: Selbsttest der Herzschlag-Logik (vorm Messen)
         run: python3 scripts/alerting_heartbeat.py --selftest
 
       - name: Herzschlag messen (Zustellung der letzten 26 h nachzählen)
         id: messung
+        # Nur zählen, wenn der Meldeweg überhaupt laufen kann – sonst wäre
+        # „0 Zustellungen" eine Messung an einer Leiche.
+        if: steps.kanal.outputs.kanal-code == '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -79,6 +104,70 @@ jobs:
       #  grün -> offene Meldung schließen. Gleiches bewährtes Muster
       #  wie die Selbstmeldung des Qualitäts-Gates (18.09.2026).
       # ------------------------------------------------------------
+      - name: Toten Meldeweg melden (eigenes Issue, ohne das Fehler-Alerting)
+        if: ${{ steps.kanal.outputs.kanal-code != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITEL="$(python3 -c 'import sys; sys.path.insert(0, "scripts"); import alerting_heartbeat as ah; print(ah.ISSUE_TITEL_KANAL)')"
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          BEFUND="$(python3 scripts/alerting_heartbeat.py --kanal 2>&1 | grep -E '^\s*-|🔴|🛑' || true)"
+
+          BODY=$(cat <<EOF
+          ## ${TITEL}
+
+          **Run:** [${GITHUB_RUN_ID}](${RUN_URL}) · **Commit:** \`${GITHUB_SHA:0:8}\`
+
+          Das Fehler-Alerting (**Fehler-Alerting**) kann keinen einzigen Lauf
+          mehr ausführen: Ein \`github-script\`-Block in
+          \`.github/workflows/alert-on-failure.yml\` kompiliert nicht. Der
+          Runner führt den Block als Funktion aus – ein Syntaxfehler tötet
+          jeden Lauf, also auch jede Meldung. **Genau diese Meldung kann
+          deshalb nicht über das Fehler-Alerting kommen**; sie kommt vom
+          Herzschlag, der per \`cron\` läuft und den beobachteten Kanal
+          absichtlich nicht benutzt.
+
+          ${BEFUND:-Details im Run-Log.}
+
+          **Heilung:** die betroffene Workflow-Datei in EINER Fassung setzen
+          (typisch ist ein Zusammenschnitt beim Zusammenführen: doppelte
+          \`const\`-Zeile, zwei Zeichenketten ohne Komma). Lokal:
+          \`python3 scripts/workflow_js_wache.py --check\`.
+          Hintergrund: \`WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-DAUERHEILUNG-HIGHEND-2026-10-30.md\`.
+          EOF
+          )
+
+          gh label create auto-report --repo "$GITHUB_REPOSITORY" \
+            --color "d73a4a" --description "Automatisch erkannte Fehlermeldung" --force || true
+
+          EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            | jq -r --arg t "$TITEL" '.[] | select(.title == $t) | .number' | head -n 1)"
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" \
+              --body "Erneuter Befund bei [Run ${GITHUB_RUN_ID}](${RUN_URL})."$'\n\n'"${BEFUND:-Details im Run-Log.}"
+            echo "→ Bestehendes Issue #${EXISTING} aktualisiert."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITEL" --label auto-report --body "$BODY"
+            echo "→ Neues Issue erstellt."
+          fi
+
+      - name: Kanal-Meldung schließen (Meldeweg läuft wieder)
+        if: ${{ steps.kanal.outputs.kanal-code == '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITEL="$(python3 -c 'import sys; sys.path.insert(0, "scripts"); import alerting_heartbeat as ah; print(ah.ISSUE_TITEL_KANAL)')"
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            | jq -r --arg t "$TITEL" '.[] | select(.title == $t) | .number'); do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+              --comment "✅ Behoben: alle \`github-script\`-Blöcke des Fehler-Alertings kompilieren wieder ([Run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}))."
+            echo "→ Issue #$n geschlossen ($TITEL)."
+          done
+
       - name: Störung melden (Issue öffnen oder aktualisieren)
         if: ${{ steps.messung.outcome == 'failure' }}
         env:
@@ -126,7 +215,11 @@ jobs:
           fi
 
       - name: Meldung schließen (Zustellung wieder vollständig)
-        if: ${{ success() }}
+        # WF-829B/#922: Nicht `success()`. Ist der Kanal tot, bleibt die
+        # Zählung aus – der Job wäre trotzdem „erfolgreich“ und würde eine
+        # offene Zustellungs-Meldung schließen, die niemand nachgemessen
+        # hat. Schließen darf nur, wer gemessen hat.
+        if: ${{ steps.kanal.outputs.kanal-code == '0' && steps.messung.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
