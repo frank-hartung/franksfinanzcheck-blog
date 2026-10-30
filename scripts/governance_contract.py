@@ -465,6 +465,17 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # --wirkungsprobe die Selbstheilung samt Idempotenz – ohne
           # beides im Minimum wäre die Reparatur wieder nur eine Zusage.
           "artefakt_waechter.py",
+          # Frontmatter-Gate der Reserve (30.10.2026, WF-D4E0 / #947): Der
+          # Lauf vom 29.10. war rot, weil EINE Zeile Frontmatter (deutsches
+          # Schlusszeichen als ASCII-`"`: `„heilbar"`) YAML zerlegt hat –
+          # der Artefakt-Wächter konnte die Klasse erkennen, aber nicht
+          # heilen, und im Ticket blieb „Stock shortage“ stehen. Dieses Gate
+          # prüft und heilt über die SSOT `frontmatter_wache.py` (#942),
+          # ausschließlich im Reserve-Eigentum (`reserve_stage_guard`), und
+          # nur mit Beweis (Artikeltext bytegleich, kein neuer Blocker).
+          # Ohne Eintrag hier liefe sein Selbsttest in keinem Gate (C6) –
+          # und eine Heilung ohne Selbsttest ist wieder nur eine Zusage.
+          "reserve_frontmatter_gate.py",
           # Manifest-Wache (WF-7B6B / #654, 08.10.2026): Ein Merge-Rest in
           # package.json (ungültiges JSON) hat den E2E-Lauf und danach zwei
           # Stunden lang jeden Produktions-Deploy rot gemacht – `npm ci` brach

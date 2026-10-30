@@ -1,9 +1,9 @@
 ---
 title: "Flugvergleich im Winter: So findest du echte Billigflüge"
 description: "Günstig abheben statt draufzahlen: Mit dem richtigen Flugvergleich findest du Billigflüge im Winter. Vermeide Fehler und senke deine Reisekosten effektiv."
-date: 2026-10-28T10:03:36Z
-draft: true
-reserve: true
+date: 2026-10-30T11:29:25Z
+draft: false
+reserve_published: 2026-10-30
 tags: ["Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"

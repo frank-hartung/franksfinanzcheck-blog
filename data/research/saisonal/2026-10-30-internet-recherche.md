@@ -1,6 +1,6 @@
 # Internet-Recherche 2026-10-30
 
-> Automatisch erzeugt von `scripts/agent_reach_research.py` um 2026-10-30 10:44 UTC.
+> Automatisch erzeugt von `scripts/agent_reach_research.py` um 2026-10-30 11:30 UTC.
 > Agent Reach v1.5.0 – Kanalmatrix laut `agent-reach doctor`.
 > **Status: Signalsammlung.** Kein Treffer ist redaktionell geprüft oder
 > veröffentlicht; Faktenübernahme nur über menschliche Kuratierung
@@ -59,6 +59,8 @@ URL Source: https://www.vzbv.de/themen/energie
 
 Final URL: https://www.vzbv.de/experten/energie-bauen
 
+Published Time: Fri, 30 Oct 2026 09:46:18 GMT
+
 Markdown Content:
 [Zum Inhalt wechseln](https://www.vzbv.de/experten/energie-bauen#main-content)
 
@@ -69,6 +71,8 @@ Markdown Content:
 
 Wonach suchen Sie? 
 
+Wonach suchen Sie?
+
 Suche
 
 *   [DE](https://www.vzbv.de/)
@@ -76,7 +80,7 @@ Suche
 
 [](https://www.vzbv.de/erklaerung-zur-barrierefreiheit)
 
-[![Image 2: Verbraucherzentrale Bundesverband Logo](https://www.vzbv.de/themes/custom/vzbv_rebrush2025/images/vzbv-logo-negativ.svg)](https://www.v
+[![Image 2: Verbraucherzentrale Bundesverband Logo](https://www.vzbv.de/themes/c
 ```
 
 ### https://www.vzbv.de/themen/finanzen
@@ -117,6 +121,8 @@ Title: Energie
 
 URL Source: https://www.verbraucherzentrale.de/wissen/energie
 
+Published Time: Fri, 30 Oct 2026 10:44:41 GMT
+
 Markdown Content:
 [Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/energie#main-content)
 
@@ -147,7 +153,7 @@ Suche Suche
 
  Themen 
 
-*   [Finanzen](https://www.verbraucherzentrale.
+
 ```
 
 ---

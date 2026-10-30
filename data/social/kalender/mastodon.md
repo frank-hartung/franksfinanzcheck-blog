@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 30.10.2026 00:22 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.10.2026 12:27 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,6 +12,9 @@
 
 ## Kommende Beiträge
 
+### Fr, 30. Oktober 2026
+- **17:30** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _thread_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
 ### Sa, 31. Oktober 2026
 - **11:30** ⏳ Kostenloses Girokonto: Ein Konto ohne Gebühren finden — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
@@ -52,7 +55,6 @@
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
-- 🚫 07.10. 07:30 · Budget app 2026 so beherrschst du deine ausgaben ohne auf · Artikel nicht mehr im Bestand
 - 🚫 07.10. 11:30 · Oekostrom anbieter wechseln clever sparen und gruen bleiben · Artikel nicht mehr im Bestand
 - 🚫 08.10. 07:30 · 7 gewohnheiten fuer finanzielle freiheit · Artikel nicht mehr im Bestand
 - 🚫 09.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
@@ -60,6 +62,7 @@
 - 🚫 11.10. 20:00 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 12.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 24.10. 07:30 · Strategisch sparen so kannst du deine reisekasse fuellen · Artikel nicht mehr im Bestand
+- 🚫 30.10. 11:30 · Heizoel preise 2026 so findest du den optimalen kaufzeitpu · Artikel nicht mehr im Bestand
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-30T10:56:57+00:00",
+  "generatedAt": "2026-10-30T11:39:05+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1136,6 +1136,22 @@
     },
     "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/": {
       "image": "images/covers/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/": {
+      "image": "images/covers/2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
