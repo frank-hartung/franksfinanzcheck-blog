@@ -74,5 +74,63 @@ class AffiliateIntegrityWorkflowContractTests(unittest.TestCase):
         self.assertIn("intentReport", self.code)
 
 
+class SelftestBefundContractTests(unittest.TestCase):
+    """#948: Ein roter Selbsttest muss seinen Befund NENNEN und belegbar sein.
+
+    Am 29.10.2026 (Lauf 40859063513) war der Detektor-Selbsttest rot. Der Lauf
+    übersprang Hugo, Gate, Intent-Wache und Report – korrekt, fail-closed –
+    und schrieb ein Issue, in dem nur „Selftests=failure/skipped · Exit fehlt“
+    stand. Es gab keinen Artikelnamen, keinen Testnamen, kein Protokoll im
+    Artefakt. Der Mensch vor dem Dashboard konnte nichts tun, außer einen
+    zweiten Rechner aufzumachen.
+
+    Diese Klasse hält die Gegenmaßnahmen fest: Das Protokoll entsteht, der
+    Befund wird als Lauf-Annotation und im Issue veröffentlicht, und die
+    Diagnose ist ausdrücklich LESEND – sie heilt nichts und beweist nichts.
+    """
+
+    def setUp(self) -> None:
+        self.code = _workflow_code()
+
+    def test_selftest_schreibt_protokoll_und_befund(self):
+        self.assertIn("tee /tmp/selftest.log", self.code)
+        # Ohne pipefail wäre ein Fehler im ERSTEN Befehl unsichtbar, wenn der
+        # zweite grün endet – der klassische „halb geprüfter" Lauf.
+        self.assertIn("set -o pipefail", self.code)
+        self.assertIn('detail="$(grep -aE', self.code)
+        self.assertIn('echo "detail<<__SELFTEST_DETAIL__"', self.code)
+        self.assertIn('echo "::error::Selbsttest der Wache rot', self.code)
+        # Rot bleibt rot: der Schritt endet mit dem echten Exit-Code.
+        self.assertIn('exit "$code"', self.code)
+
+    def test_diagnose_ist_lesend_und_nur_bei_roter_selbstpruefung(self):
+        self.assertIn(
+            "if: ${{ always() && !cancelled() && (steps.selftest.outcome != 'success' "
+            "|| steps.intent_selftest.outcome != 'success') }}",
+            self.code,
+        )
+        # Keine Heilung, kein Hugo-Lauf, keine Report-/Zustandsschreibung.
+        self.assertIn("--json --dry-run --no-build", self.code)
+        self.assertNotIn("--heal", self.code)
+        # Die Diagnose prüft GENAU den Vertrag, der im Selbsttest über den
+        # Live-Bestand läuft (der Fund vom 29.10. kam aus dem Link-Checker,
+        # nicht aus dem Integritäts-Gate).
+        self.assertIn("import affiliate_link_check as link_check", self.code)
+        self.assertIn("for post in link_check.load_posts():", self.code)
+
+    def test_issue_nennt_den_befund_statt_nur_exit_fehl(self):
+        self.assertIn("SELFTEST_DETAIL: ${{ steps.selftest.outputs.detail }}", self.code)
+        self.assertIn("BEFUND: ${{ steps.befund.outputs.befund }}", self.code)
+        self.assertIn("## 🛑 Selbstprüfung rot – Befund (fail-closed, nichts veröffentlicht)",
+                      self.code)
+        self.assertIn("(kein Beweis, keine Heilung)", self.code)
+        # Der Befund reist auch im Log-Block des Issues mit.
+        self.assertIn("[log, intentLog, hugoLog, selftestLog]", self.code)
+
+    def test_artefakt_enthaelt_das_selbsttest_protokoll(self):
+        self.assertIn("/tmp/selftest.log", self.code)
+        self.assertIn("steps.selftest.outcome != 'success'", self.code)
+
+
 if __name__ == "__main__":
     unittest.main()
