@@ -137,6 +137,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # deaktivierter Admin-Bypass live belegt sind; sein Selbsttest gehört
           # zum vertraglichen Minimum.
           "worker_environment_guard.py",
+          # Der Einrichtungsweg zur Produktionsfreigabe (WF-829B / #922,
+          # 30.10.2026): Das Gate konnte die fehlende Freigabe nur MELDEN,
+          # nichts im Repository konnte sie herstellen – und eine GitHub-API
+          # nimmt nicht einmal alle drei Felder an. Dieses Werkzeug setzt,
+          # was setzbar ist, und beziffert den Rest. Sein Selbsttest gehört
+          # zum vertraglichen Minimum, sonst verkommt das Gate zur Dauer-
+          # Meldung ohne Schließpfad.
+          "worker_environment_einrichten.py",
           # Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
           # Google ordnete die Markensuche dem Kreditvergleich FINANZCHECK.de
           # zu, waehrend der siteweite Person-Knoten nur Pinterest als sameAs

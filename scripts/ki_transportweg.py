@@ -423,6 +423,14 @@ T6_AUSGESCHLOSSENE_PFADE = {
     # ausschließlich api.github.com/repos/<repo>/environments/cloudflare-
     # produktion und dessen deployment-branch-policies.
     Path("scripts/worker_environment_guard.py"),
+    # Kein Modellaufruf: stellt die Produktionsfreigabe des Worker-Deploys
+    # her, wo eine GitHub-API es zulässt (WF-829B / #922, 30.10.2026), und
+    # nennt den Rest als Dashboard-Schritt. Ausgleich:
+    # test_worker_environment_einrichten erlaubt ausschliesslich
+    # api.github.com/repos/<repo>/environments[/<name>[/deployment-branch-
+    # policies]] und /users/<login> – kein /ai/, kein Modellhost, kein
+    # zweiter Anbieter, kein DELETE.
+    Path("scripts/worker_environment_einrichten.py"),
     # Kein Modellaufruf: Backup-Frische liest nur GitHub-Releases (operative
     # Luecke zu E1–E8; WF-9E5A-Highend 22.10.2026). Ausgleich: TransportVertrag
     # erlaubt dort ausschliesslich api.github.com/repos/…/releases.

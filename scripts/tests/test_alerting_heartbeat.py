@@ -163,7 +163,14 @@ class HerzschlagWorkflow(unittest.TestCase):
 
     def test_selbstmeldung_mit_schliesspfad(self):
         self.assertRegex(self.code, r"if:\s*\$\{\{\s*steps\.messung\.outcome == 'failure'\s*\}\}")
-        self.assertRegex(self.code, r"if:\s*\$\{\{\s*success\(\)\s*\}\}")
+        # WF-829B/#922: Schließen ist an eine ECHTE Zählung gebunden, nicht an
+        # den Job-Erfolg. Bei totem Meldeweg bleibt die Zählung aus; `success()`
+        # wäre trotzdem wahr und würde die Zustellungs-Meldung ungemessen
+        # schließen. Wer nicht gemessen hat, darf nicht schließen.
+        self.assertRegex(self.code,
+                         r"if:\s*\$\{\{\s*steps\.kanal\.outputs\.kanal-code == '0'"
+                         r"\s*&&\s*steps\.messung\.outcome == 'success'\s*\}\}")
+        self.assertNotIn("${{ success() }}", self.code)
         self.assertIn("gh issue create", self.code, "Befund muss ein Issue öffnen")
         self.assertIn("gh issue close", self.code, "Grün muss die Meldung schließen")
         # Der Titel kommt aus dem Skript (SSOT), nicht aus einer YAML-Kopie:
@@ -177,6 +184,54 @@ class Vertrag(unittest.TestCase):
         import governance_contract as gc
         self.assertIn("alerting_heartbeat.py", gc.GUARDS,
                       "der Vertrag muss den Herzschlag-Selbsttest verlangen")
+
+    def test_kanal_probe_erkennt_toten_meldeweg(self):
+        def js(status, befunde):
+            return lambda *a, **k: (status, list(befunde), "")
+
+        original = ah.workflow_js_wache.pruefen
+        try:
+            ah.workflow_js_wache.pruefen = js(1, ["J1 .github/workflows/"
+                                                  "alert-on-failure.yml:218: x"])
+            erg = ah.kanal_pruefen()
+            self.assertEqual(erg["status"], 1)
+            self.assertTrue(erg["befunde"])
+            self.assertFalse(erg["kanal"])
+            self.assertIn("nicht lauffähig", ah.kanal_md(erg))
+
+            ah.workflow_js_wache.pruefen = js(1, ["J1 .github/workflows/andere.yml:9: x"])
+            self.assertEqual(ah.kanal_pruefen()["status"], 0)
+
+            ah.workflow_js_wache.pruefen = js(2, ["J0 node fehlt"])
+            self.assertEqual(ah.kanal_pruefen()["status"], 2)
+
+            ah.workflow_js_wache.pruefen = js(0, [])
+            self.assertTrue(ah.kanal_pruefen()["kanal"])
+        finally:
+            ah.workflow_js_wache.pruefen = original
+
+    def test_kanal_befund_traegt_eigene_meldungsidentitaet(self):
+        self.assertNotEqual(ah.ISSUE_TITEL_KANAL, ah.ISSUE_TITEL)
+        self.assertIn("Kanal", ah.ISSUE_TITEL_KANAL)
+        self.assertIn("Zustellung", ah.ISSUE_TITEL)
+
+    def test_kanal_probe_laeuft_im_workflow_vor_der_zaehlung(self):
+        text = (REPO / ".github" / "workflows" / "alerting-heartbeat.yml").read_text(
+            encoding="utf-8")
+        self.assertIn("--kanal", text)
+        self.assertIn("ISSUE_TITEL_KANAL", text)
+        # Erst der Kanal, dann die Zählung: Ein toter Meldeweg darf nicht
+        # eine Zustellquote erzeugen, die es gar nicht geben kann.
+        self.assertLess(text.index("--kanal"), text.index("--md | tee"))
+
+    def test_toter_kanal_schliesst_keine_zustellungsmeldung(self):
+        text = (REPO / ".github" / "workflows" / "alerting-heartbeat.yml").read_text(
+            encoding="utf-8")
+        # Schließen nur nach einer echten Zählung – ein toter Kanal ergibt
+        # einen „erfolgreichen“ Job ohne Messung. Wer nicht gemessen hat,
+        # darf keine offene Meldung schließen.
+        self.assertIn("steps.messung.outcome == 'success'", text)
+        self.assertNotIn("if: ${{ success() }}", text)
 
     def test_selbsttest_gruen_und_schreibfrei(self):
         vorher = subprocess.run(["git", "status", "--porcelain"],
