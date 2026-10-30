@@ -184,7 +184,10 @@ Keine Seite liegt über 1200; die Geometrie des Symbols ist unverändert
    `LAUFZEIT_EXIT` fließt in den Schluss-Schritt („Lauf rot stellen“) ein –
    fehlt der Wert, ist der Lauf rot. `static/premium/**` steht jetzt in beiden
    Pfadlisten (push und pull_request), damit eine Änderung an der Quelle die
-   Messung auslöst.
+   Messung auslöst. Dazu kommen die Manifest-Wache (vor jedem `npm ci`,
+   WF-7B6B/#654) und ihre eigene Datei im Filter – sonst meldet die
+   Trigger-Wache W1 zu Recht, dass der Lauf einen Prüfer aufruft, den seine
+   Änderung nicht auslöst.
 3. **Vertrag an der Quelle:**
    `scripts/tests/test_dom_element_vertrag.py` prüft, dass je Überschrift
    höchstens **zwei** Elemente entstehen, dass kein Symbol per `innerHTML`
@@ -241,6 +244,12 @@ $ node scripts/ff_heading_glyph_guard_test.mjs
 
 $ node scripts/ff_voice_functional_test.mjs
 265/265 Prüfungen bestanden      ✅
+
+$ python3 -m unittest discover -s scripts/tests        # volle Suite
+Ran 4602 tests in 303.790s — OK (skipped=22)
+
+$ python3 scripts/trigger_wache.py --check
+✅ Trigger-Wache: 97 Workflows, keine Befunde.
 
 $ node scripts/dom_laufzeit_messung.mjs --dir public.site --top 5
 Laufzeit-DOM: 380 Seiten gemessen
