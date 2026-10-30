@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T16:02:56Z",
+  "generated_at": "2026-10-30T16:55:15Z",
   "modus": "kandidaten",
-  "commit": "bc2988f0d2c8997de93701c08712a730a52f8455",
+  "commit": "4af6fed67b3a60908dcc99863ffe92e1059e4ef5",
   "kapazitaet": {
     "stichtag": "2026-10-30",
     "artikel": 110,
@@ -281,8 +281,8 @@
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
     },
-    "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-      "sha256": "4815a5f03f1fd335023ed7258deea75a9609eda6721bf8851d1eff82deda3c47",
+    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+      "sha256": "23e04186e31323ed46300c4066ce0b18e1d3260c50997a145a61e0d9e990f8f2",
       "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
@@ -295,7 +295,7 @@
         "freigabe": "bestanden",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-14",
+      "naechste_pruefung": "2026-11-19",
       "siegel_drift": "neu versiegelt"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
