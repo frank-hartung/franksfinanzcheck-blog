@@ -267,7 +267,7 @@ Es wird Tage geben, an denen es nicht klappt.
 Das ist völlig normal.
 
 Schau dir regelmäßig deine Fortschritte an.
-Wenn du siehst, wie dein Erspartes wächst, gibt dir das Kraft.
+Wenn du siehst, wie dein Erspartes wächst, gibt dir die Kraft.
 Du bist nicht mehr Sklave deiner Rechnungen.
 Du bist der Chef deiner Finanzen.
 

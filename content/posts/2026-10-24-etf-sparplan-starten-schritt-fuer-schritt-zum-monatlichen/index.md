@@ -123,7 +123,7 @@ Ein fehlender Puffer für Notfälle ist ein großes Risiko für dein Depot. Du s
 ## Checkliste für den Start
 
 1. Du hast ein Depot bei einem günstigen Anbieter eröffnet.
-2. Die Wahl des ETF fiel auf einen breiten Index mit kleiner TER.
+2. Die Wahl des ETFs fiel auf einen breiten Index mit kleiner TER.
 3. Dein monatlicher Betrag für den Sparplan steht fest.
 4. Der Tag für die Ausführung der Order ist im System gewählt.
 5. Ein Dauerauftrag vom Girokonto zum Depot ist eingerichtet.

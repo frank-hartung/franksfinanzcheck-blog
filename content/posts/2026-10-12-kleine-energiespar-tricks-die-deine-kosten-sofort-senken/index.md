@@ -34,7 +34,7 @@ quellen:
     herausgeber: "Bundesnetzagentur"
     datum: "2024-01-01"
 faktencheck: 2026-10-06
-kurzantwort: "Durch das Absenken der Raumtemperatur um ein Grad sowie den konsequenten Einsatz von LED-Leuchtmitteln und schaltbaren Steckerleisten sinken Heiz- und Strombedarf spürbar. Die Beispielrechnung im Artikel zeigt, wie sich solche kleinen Handgriffe im Alltag über das Jahr auf dreistellige Euro-Beträge summieren."
+kurzantwort: "Durch das Absenken der Raumtemperatur um einen Grad sowie den konsequenten Einsatz von LED-Leuchtmitteln und schaltbaren Steckerleisten sinken Heiz- und Strombedarf spürbar. Die Beispielrechnung im Artikel zeigt, wie sich solche kleinen Handgriffe im Alltag über das Jahr auf dreistellige Euro-Beträge summieren."
 ---
 
 Kleine Energiespar‑Tricks im Check: Senkst du deine Stromrechnung durch einfache Routinen, bleibt am Monatsende spürbar mehr Geld für dein Depot übrig. Oft genügen dafür nur wenige Handgriffe in deinem Alltag, wie die Modellrechnung unten zeigt.

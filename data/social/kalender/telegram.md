@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 31.10.2026 00:01 (Europe/Berlin)  
+> Automatisch aktualisiert: 31.10.2026 10:52 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -13,11 +13,14 @@
 ## Kommende Beiträge
 
 ### So, 01. November 2026
-- **07:00** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
+- **07:00** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
 ### So, 08. November 2026
-- **07:00** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
+- **07:00** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/
+### Sa, 14. November 2026
+- **07:00** ⏳ Kleine Energiespar‑Tricks: Deine Kosten sofort senken — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/
 
 ## Zuletzt veröffentlicht
 
