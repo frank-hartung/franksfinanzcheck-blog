@@ -43,6 +43,7 @@ __pycache__/
 .hemingway_report.json
 .spellcheck_report.json
 .zeit_rechtschreibung_report.json
+.copy_editing_report.json
 ops-report.json
 
 # Lauf-Artefakte der F-01-Live-Messung (Sicherheits-Wache, WF-E813):
