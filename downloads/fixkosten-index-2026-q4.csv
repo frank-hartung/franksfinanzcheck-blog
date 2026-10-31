@@ -1,0 +1,4 @@
+period,segment,assumption,unit_price,unit,annual_cost_eur,monthly_cost_eur,source,source_url,source_checked
+2026-Q4,Strom,"2-Personen-Modell; 2500 kWh/Jahr","0.3700",EUR/kWh,925.00,77.08,"BDEW-Strompreisanalyse Herbst 2026",https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/,2026-09-28
+2026-Q4,Gas,"gasbeheiztes Modell; 12000 kWh/Jahr","0.1193",EUR/kWh,1431.60,119.30,"BDEW-Gaspreisanalyse August 2026",https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/,2026-09-28
+2026-Q4,Energie gesamt,"Summe der beiden Modellszenarien",,,2356.60,196.38,"eigene Berechnung aus den zwei genannten BDEW-Werten",https://franksfinanzcheck.de/studien/fixkosten-index-2026-q4/,2026-10-02
