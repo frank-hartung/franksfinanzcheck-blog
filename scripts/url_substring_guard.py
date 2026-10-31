@@ -316,6 +316,34 @@ def _string_wert(roh: str) -> str:
     return "".join(out)
 
 
+_STATEMENT_KOEPFE = {"if", "while", "for", "with"}
+
+
+def _klammer_leitet_statement_ein(toks: list[Tok]) -> bool:
+    """Endet die letzte schließende Klammer eine `if (…)`-Bedingung?
+
+    Der Lexer läuft rückwärts über die Token, zählt Klammern und prüft, ob
+    vor der passenden öffnenden Klammer ein Statement-Kopf steht. Das ist
+    die einzige Stelle, an der JavaScripts berühmte `/`-Mehrdeutigkeit
+    tatsächlich entschieden werden kann, ohne einen Parser zu bauen.
+    """
+    tiefe = 0
+    for index in range(len(toks) - 1, -1, -1):
+        tok = toks[index]
+        if tok.art != "punkt":
+            if tiefe == 0:
+                return tok.art == "name" and tok.text in _STATEMENT_KOEPFE
+            continue
+        if tok.text in (")", "]", "}"):
+            tiefe += 1
+        elif tok.text in ("(", "[", "{"):
+            tiefe -= 1
+            if tiefe == 0:
+                davor = toks[index - 1] if index > 0 else None
+                return bool(davor and davor.art == "name" and davor.text in _STATEMENT_KOEPFE)
+    return False
+
+
 def js_lexen(quelltext: str, startzeile: int = 1) -> list[Tok]:
     """Zerlegt JavaScript in Token. Wirft LexFehler, wenn das nicht geht."""
     toks: list[Tok] = []
@@ -407,12 +435,34 @@ def js_lexen(quelltext: str, startzeile: int = 1) -> list[Tok]:
             continue
         # Regex-Literal oder Division
         if z == "/":
-            regex_moeglich = (
-                letzte_bedeutung is None
-                or letzte_bedeutung.art not in _KEIN_REGEX_DAVOR
-                or (letzte_bedeutung.art == "name" and letzte_bedeutung.text in _SCHLUESSELWORT)
-                or (letzte_bedeutung.art == "punkt" and letzte_bedeutung.text not in (")", "]", "}"))
-            )
+            # Wann beginnt nach einem `/` ein Regex-Literal, wann ist es
+            # Division? Das ist die einzige echte Mehrdeutigkeit im
+            # JavaScript-Lexer und sie muss KONJUNKTIV entschieden werden.
+            #
+            # BEFUND 31.10.2026: Hier stand eine ODER-Kette, in der der
+            # Regex-Fall bereits durch das erste Glied wahr wurde. Folge:
+            # `/` nach `)` galt IMMER als Regex-Start. Ein Ausdruck wie
+            # `Math.round((x / W) * 1000) / 10` verschluckte damit den Rest
+            # der Zeile bis zum nächsten `/` – und die Wache meldete an
+            # fremden Dateien einen Lexfehler statt eines Befunds. Genau die
+            # Sorte blinder Fleck, die Alert #83 sichtbar gemacht hat:
+            # Was eine Analyse nicht liest, hält sie für in Ordnung.
+            if letzte_bedeutung is None:
+                regex_moeglich = True
+            elif letzte_bedeutung.art == "name":
+                # Nach einem Bezeichner nur, wenn er ein Statement einleitet
+                # (`return /x/`), sonst ist es Division (`a / b`).
+                regex_moeglich = letzte_bedeutung.text in _SCHLUESSELWORT
+            elif letzte_bedeutung.art == "punkt":
+                if letzte_bedeutung.text in (")", "]", "}"):
+                    # `)` schließt meist einen Ausdruck (Division), kann aber
+                    # eine `if (…)`-Bedingung beenden (Regex).
+                    regex_moeglich = _klammer_leitet_statement_ein(toks)
+                else:
+                    regex_moeglich = True
+            else:
+                # Nach Zahl, Zeichenkette oder Regex folgt immer Division.
+                regex_moeglich = False
             if regex_moeglich:
                 j = i + 1
                 klasse = False

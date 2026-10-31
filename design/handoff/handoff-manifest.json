@@ -1,18 +1,25 @@
 {
   "schema": 1,
-  "stand": "2026-09-26",
+  "stand": "2026-10-31",
   "generator": "scripts/design_handoff.py",
   "generator_version": 1,
   "sources": {
-    "data/design/handoff.yaml": "2c6b86864fdbf40aaae7994547294727dc444ff0122710ff6afc1afcceb79daa",
-    "data/design/regelwerk.yaml": "05ef6296a04acb8d7e986082a784b625c5ad5bc68eb726005b6545f2a7e741ce",
+    "data/design/handoff.yaml": "fd0af6448e659e1514b54e5222d8c1f5c4d52c77136e8ed81d02f69a081be3f6",
+    "data/design/regelwerk.yaml": "fe66a5df8592f766f5d483e8c61d1e7788becc2ad9f409a3c4ba4060a169f03c",
     "DESIGN.md": "082144ed9ad2ee96a82b00ef4b6f71bafbd301d3f20c268987cb62a1def1c6bc",
     "PRODUCT.md": "3073948f7c99aa67e0126a1870c7d329738d2353b7b7bcd948e3a433f5ec6010",
-    "scripts/design_handoff.py": "1d810d17db7d0855432bbb8479e9ed914ac5c2d8330657a91577b2b1073d444f"
+    "figma/design-system-builder/source.js": "abe47696d82e15e5c208c31b5e311f94d53f2aba57a6eabcdee3bc5c61ea987d"
   },
   "artifacts": {
-    "component-inventory.md": "7a66aa5716a57f01b0c3a8af38621ca7c0293230834bab4b74eb9d530ea19b22",
-    "figma-tokens.tokens.json": "ef1cb0da1d60e2c866d2d633adf65e08ea4ba4d098c74d8a388020ce2dfc726b",
-    "relume-project-brief.md": "014a5ee92efdfb440c406515f7dcb9743be14f0f3cd6c3b43810fa9e0e318c1f"
+    "ANNOTATIONEN.md": "ea105f5384cd7d2415fc445e39a405b852e8ff54b7666ef17523bfdf7ea3dab7",
+    "component-inventory.md": "6bbde27f2096a4348a21dbbe762d78805f7c5039cba4f1d890085026cbdfcfe9",
+    "design-system.html": "9d48fa00316f30767dd8a9cee788e49b3c11cffd3a0e6d336af5b59ab6142c8f",
+    "figma-tokens.tokens.json": "356fdb18b290f55e55b6acf8b6bd66f62ac2e341ed5f564fb6e9c4447a31b875",
+    "patterns.md": "733ed6fcf422d25a45f4300deb8f0c26f90497c09c8ef381d51e957ae62c7a69",
+    "relume-project-brief.md": "855695c852be5faf6028da3bd5a135de5490c7110e304353bdc7abc9d47e0116",
+    "spezifikation.html": "deacff3a5997b079ad8319051af34f5e0c8fd3a04f717805f30c69b8fdc265ae"
+  },
+  "plugins": {
+    "figma/design-system-builder/code.js": "fba85c39e1374bcd35bfa375a88cdccc54ad91d87ad6990a9f1876d4a5066d33"
   }
 }

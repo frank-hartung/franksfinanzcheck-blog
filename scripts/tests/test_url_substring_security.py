@@ -131,6 +131,53 @@ class WacheIstScharf(unittest.TestCase):
         self.assertEqual(len(bericht["fehler"]), 1)
 
 
+class LexerTeiltDivisionUndRegex(unittest.TestCase):
+    """Die `/`-Mehrdeutigkeit – Befund vom 31.10.2026.
+
+    Der Lexer entschied „Regex ab `/`“ mit einer ODER-Kette, in der das
+    erste Glied bereits wahr war. Dadurch galt `/` nach `)` IMMER als
+    Regex-Start: `Math.round((x / W) * 1000) / 10` verschluckte den Rest
+    der Zeile, und die Wache meldete an fremden Dateien einen Lexfehler
+    statt eines Befunds. Diese Tests halten beide Richtungen fest, damit
+    die Verwechslung nicht zurückkommt – in keiner der beiden.
+
+    WARUM DAS SICHERHEITSRELEVANT IST
+    ---------------------------------
+    Ein Lexer, der Code falsch zerlegt, prüft die falschen Zeichenketten.
+    Wer `https://…` aus einem falsch gelesenen Ausdruck entfernt, sieht
+    eine Lücke nicht mehr – und meldet „keine Befunde“.
+    """
+
+    def test_division_nach_klammer_bleibt_division(self):
+        for probe in ("a = (b) / c;", "x = [1] / 2;", "f(a) / 2",
+                      "n = Math.round((x / W) * 1000) / 10;"):
+            with self.subTest(probe=probe):
+                arten = [t.art for t in wache.js_lexen(probe)]
+                self.assertNotIn("regex", arten, probe)
+
+    def test_division_nach_zahl_und_zeichenkette(self):
+        for probe in ("a = 4 / 2;", "a = 'x' / 2;"):
+            with self.subTest(probe=probe):
+                self.assertNotIn("regex", [t.art for t in wache.js_lexen(probe)], probe)
+
+    def test_regex_nach_statement_klammer(self):
+        for probe in ("if (a) /x/.test(b);", "while (a) /y/.test(b);"):
+            with self.subTest(probe=probe):
+                self.assertIn("regex", [t.art for t in wache.js_lexen(probe)], probe)
+
+    def test_regex_nach_schluesselwort(self):
+        for probe in ("return /re/;", "typeof /re/;"):
+            with self.subTest(probe=probe):
+                self.assertIn("regex", [t.art for t in wache.js_lexen(probe)], probe)
+
+    def test_regex_mit_anfuehrungszeichen_in_der_klasse(self):
+        # Genau diese Form steht in fremden Analyse-Skripten und war der
+        # Auslöser des Fehlbefunds.
+        probe = "s.split(',')[0].replace(/[\"']/g, '').trim()"
+        arten = [t.art for t in wache.js_lexen(probe)]
+        self.assertIn("regex", arten)
+
+
 class ScopeHatKeineBlindenFlecken(unittest.TestCase):
     """Was eine Analyse nicht liest, hält sie für in Ordnung – Lehre aus #83."""
 
