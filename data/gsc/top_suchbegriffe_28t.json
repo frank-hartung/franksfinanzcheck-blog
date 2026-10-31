@@ -2,9 +2,16 @@
   {
     "suchbegriff": "100 mbit internet monatlich kündbar",
     "clicks": 0,
+    "impressions": 5,
+    "ctr": 0.0,
+    "position": 44.0
+  },
+  {
+    "suchbegriff": "250 mbit internet monatlich kündbar",
+    "clicks": 0,
     "impressions": 3,
     "ctr": 0.0,
-    "position": 45.0
+    "position": 60.67
   },
   {
     "suchbegriff": "angebote zur kostenkontrolle",
@@ -14,18 +21,39 @@
     "position": 67.0
   },
   {
+    "suchbegriff": "banken mit kostenfreiem girokonto",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 54.0
+  },
+  {
     "suchbegriff": "dauerhafte kostenkontrolle",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 5,
     "ctr": 0.0,
-    "position": 60.0
+    "position": 63.8
   },
   {
     "suchbegriff": "dsl mobilfunk",
     "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 16.67
+  },
+  {
+    "suchbegriff": "dsl und mobilfunk",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 19.0
+    "position": 18.0
+  },
+  {
+    "suchbegriff": "dsl volumentarif",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 33.0
   },
   {
     "suchbegriff": "energiebesparing",
@@ -112,11 +140,25 @@
     "position": 4.0
   },
   {
+    "suchbegriff": "internet dsl monatlich kündbar",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 73.0
+  },
+  {
     "suchbegriff": "internet monatlich kündbar",
     "clicks": 0,
-    "impressions": 4,
+    "impressions": 5,
     "ctr": 0.0,
-    "position": 66.25
+    "position": 68.6
+  },
+  {
+    "suchbegriff": "internetanbieter monatlich kündbar",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 70.0
   },
   {
     "suchbegriff": "internetkosten",
@@ -189,6 +231,20 @@
     "position": 22.0
   },
   {
+    "suchbegriff": "monatlich kündbar dsl",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 77.0
+  },
+  {
+    "suchbegriff": "monatlich kündbares internet",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 58.0
+  },
+  {
     "suchbegriff": "referenzkonto",
     "clicks": 0,
     "impressions": 3,
@@ -219,7 +275,7 @@
   {
     "suchbegriff": "welche finanz-app bietet die besten spartipps basierend auf dem eigenen konsumverhalten?",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 1,
     "ctr": 0.0,
     "position": 3.0
   },
@@ -243,5 +299,12 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 11.0
+  },
+  {
+    "suchbegriff": "wlan monatlich kündbar",
+    "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 53.0
   }
 ]
