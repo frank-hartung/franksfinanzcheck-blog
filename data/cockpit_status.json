@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-30T23:37:55Z",
+  "generated": "2026-10-31T23:18:01Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 4/6 bereit – Nachschub nötig",
         "lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
-        "Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig"
+        "Artikel-Reserve knapp: 4/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -56,7 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.0 Tag(en)"
+        "letzter erfolgreicher Post vor 0.5 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -66,10 +66,10 @@
       ]
     },
     "Newsletter": {
-      "level": "gelb",
+      "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 6 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 7 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
