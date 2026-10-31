@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T09:46:11Z",
+  "generated_at": "2026-10-31T10:20:50Z",
   "modus": "kandidaten",
-  "commit": "3b2f1fb7fdce329ba7762073eaa0e468045ffa90",
+  "commit": "260860de99ee7ec72bf4907c66223ee183560c25",
   "kapazitaet": {
     "stichtag": "2026-10-31",
     "artikel": 110,
@@ -1299,7 +1299,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
