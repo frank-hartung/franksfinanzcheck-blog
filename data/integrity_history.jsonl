@@ -365,3 +365,5 @@
 {"date": "2026-10-30", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-30", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-31", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/hardcases_guard.py", "scripts/lektor_guard.py"]}
+{"date": "2026-10-31", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/lektor_guard.py"]}
+{"date": "2026-10-31", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/hardcases_guard.py", "scripts/lektor_guard.py"]}
