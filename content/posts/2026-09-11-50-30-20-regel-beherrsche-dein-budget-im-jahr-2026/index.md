@@ -221,8 +221,6 @@ Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-
 
 *Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).*
 
-*Abbildung: Gliederung zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50–30–20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).* (als Beispielwert)
-
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 
 Nicht jeder Haushalt landet sofort bei 50–30–20. Gerade in teuren Städten oder bei niedrigem Einkommen kann der Pflichtblock deutlich höher liegen.
