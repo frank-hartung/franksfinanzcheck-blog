@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-31T16:57:17.673500+00:00",
-  "head": "ea2435e8c",
+  "signed_at": "2026-10-31T18:30:45.809090+00:00",
+  "head": "e73b997",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -55,33 +55,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-  "audit_start_sha256": "ed1807d74a2ef753d047e071633a0a9ec1f964228a1cb55e75399421c13e3cf6",
+  "audit_start_sha256": "cd074ba68ce5d9cb9080995842ea6d635631a126609106cfddbb9d9527a93d04",
   "audit": [
-    {
-      "date": "2026-10-26",
-      "art": "heal",
-      "head": "a792e81",
-      "geaendert": [
-        "scripts/reserve_artifacts.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/reserve_artifacts.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "7474269",
-              "datum": "2026-10-26",
-              "betreff": "fix(ci): Vier PRs konsolidieren, Basisregressionen heilen, Sicherheits-Gates erhalten (#898)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "8841ad35ace38d58a9cb009418c44177cf7da60c16246d422135e7d90f6ed210",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-26",
       "art": "set-current",
@@ -148,7 +123,7 @@
         }
       ],
       "files_sha256": "52515cb9df27ff40ce8ff842e7d585844d9a4aea492d378a5377cc96b8013d0c",
-      "prev_sha256": "ed1807d74a2ef753d047e071633a0a9ec1f964228a1cb55e75399421c13e3cf6"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-26",
@@ -628,7 +603,15 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "b94498c4e426799b4766c10498300545df127e4bf73caecdd12bebfafc7c8016",
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "b94498c4e426799b4766c10498300545df127e4bf73caecdd12bebfafc7c8016"
+    },
+    {
+      "date": "2026-10-31",
+      "art": "set-current",
+      "head": "e73b997",
+      "geaendert": [],
+      "prev_sha256": "1c68222f511a9b0e8d46cada5e711f9acc6aa741c41e83afa0d4ff039e761fc1",
       "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c"
     }
   ]
