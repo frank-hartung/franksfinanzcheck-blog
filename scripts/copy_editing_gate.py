@@ -136,6 +136,9 @@ def main(argv: list[str] | None = None) -> int:
         engine_args.append("--new-only")
     if only_file:
         engine_args += ["--file", only_file]
+    # readability_check liefert seinen Flesch-Ø nur über --json auf stdout;
+    # das brauchen wir für den Schwellen-Check, also immer mitgeben.
+    engine_args.append("--json")
 
     # ========================================================================
     # PHASE 0 – Selbsttests aller Engines (Sabotage-Schutz, fail-closed)
@@ -180,8 +183,6 @@ def main(argv: list[str] | None = None) -> int:
         args = list(engine_args)
         if strict:
             args.append("--strict")
-        if as_json:
-            args.append("--json")
 
         rc, out, err = _analyse(name, args)
         result = {"rc": rc, "stdout": out, "stderr": err, "json": None}
@@ -193,11 +194,18 @@ def main(argv: list[str] | None = None) -> int:
             "zeit": ROOT / ".zeit_rechtschreibung_report.json",
             "sprachglatt": ROOT / ".sprachglatt_report.json",
             "lektor": ROOT / "LEKTOR-REPORT.md",  # kein JSON
-            "readability": ROOT / ".readability_report.json",
         }
-        jp = json_map.get(name)
-        if jp:
-            result["json"] = _load_json(jp)
+        # Lesbarkeit schreibt kein JSON-File, sondern gibt es auf stdout aus
+        # (wird immer mit --json aufgerufen, siehe engine_args). Direkt aus stdout parsen.
+        if name == "readability":
+            try:
+                result["json"] = json.loads(out)
+            except json.JSONDecodeError:
+                result["json"] = None
+        else:
+            jp = json_map.get(name)
+            if jp:
+                result["json"] = _load_json(jp)
 
         engine_results[name] = result
 
