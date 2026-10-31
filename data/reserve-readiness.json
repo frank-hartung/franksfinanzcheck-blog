@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 4,
   "pool_size": 6,
-  "generated_at": "2026-10-31T09:58:42Z",
+  "generated_at": "2026-10-31T14:39:53Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -24,9 +24,25 @@
     {
       "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": false,
-      "sha256": "71638155665f0bfe9ab421f2a1ad937e911e26476e9a2afaeb47e53516031592",
-      "measured_at": "2026-10-31T09:56:18Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "5f24a2368b3b10ede0e02d1e49563f2cdcdfc2d531eb5f8e727ecef6c0d6dd6d",
+      "flesch": 72.8,
+      "measured_at": "2026-10-31T14:39:52Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN",
+      "details": [
+        "🛑 2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.996,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
@@ -82,9 +98,9 @@
     {
       "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "aa5a6542b5f6c77da6d59b14f0a6c704d0978b6c8fc48cbe8eb7a4423cbecd13",
-      "flesch": 67.5,
-      "measured_at": "2026-10-31T09:58:42Z",
+      "sha256": "51a9064a1f24f0bdf5dcab3b72e75dfcb342b90d03b851909ae4d16695bad7db",
+      "flesch": 66.4,
+      "measured_at": "2026-10-31T14:39:53Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
       "details": [
         "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
@@ -102,8 +118,16 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "41190324785",
+    "kind": "partial",
+    "run_id": "41211080745",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-10-31T14:39:53Z",
+    "renewed": [
+      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
