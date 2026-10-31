@@ -32,15 +32,55 @@ Du brauchst aus dem Repository genau **einen Ordner**:
 figma/design-system-builder/
 ├── manifest.json   ← diese Datei wählst du in Figma aus
 ├── code.js         ← wird geladen, nicht angefasst
-└── ui.html         ← wird geladen, nicht angefasst
+├── ui.html         ← wird geladen, nicht angefasst
+└── source.js       ← Quelle des Plugins, für Figma nicht nötig
 ```
 
-**Wichtig:** Alle drei Dateien müssen zusammen im selben Ordner liegen.
-`code.js` und `ui.html` dürfen **nicht** umbenannt oder einzeln verschoben
-werden — `manifest.json` verweist auf sie.
+**Wichtig:** Alle drei Dateien (`manifest.json`, `code.js`, `ui.html`) müssen
+zusammen im selben Ordner liegen. Sie dürfen **nicht** umbenannt oder einzeln
+verschoben werden — `manifest.json` verweist auf die anderen beiden.
 
-Wenn du das Repository nicht lokal hast: lade den Ordner als ZIP von GitHub
-herunter (*Code → Download ZIP*) und entpacke ihn.
+> **Es gibt bewusst kein ZIP im Repository.** Ein gepacktes Paket müsste bei
+> jeder Plugin-Änderung neu gebaut und geprüft werden — eine zweite Wahrheit
+> neben den Dateien. Lade stattdessen eine der beiden Quellen:
+
+### Weg 1 – ganzes Repository als ZIP (empfohlen)
+
+1. Repository auf GitHub öffnen:
+   `https://github.com/frank-hartung/franksfinanzcheck-blog`
+2. Oben links den Branch **`arena/42a7556c-franksfinanzcheck-blog`** wählen
+   (nicht `main` — dort liegt das Plugin noch nicht).
+3. Grüner Knopf **Code → Download ZIP**.
+4. Entpacken. Du brauchst daraus nur den Ordner
+   `figma/design-system-builder/` — kopiere ihn an eine Stelle, die du
+   wiederfindest.
+
+### Weg 2 – die drei Dateien einzeln herunterladen
+
+Öffne auf GitHub den Ordner und lade jede Datei über den **Download-Knopf**
+(⤓) herunter:
+
+```
+figma/design-system-builder/manifest.json
+figma/design-system-builder/code.js
+figma/design-system-builder/ui.html
+```
+
+Lege alle drei in **einen gemeinsamen Ordner**. Achtung: Manche Browser
+speichern `code.js` als `code.js.txt` — prüfe die Dateiendung, sonst findet
+Figma `main` nicht.
+
+### Kontrolle, bevor es weitergeht
+
+Im Ordner müssen genau diese drei Dateien liegen — Größen zum Abgleichen:
+
+| Datei | Größe |
+|---|---|
+| `manifest.json` | ca. 0,4 KB |
+| `code.js` | ca. 25 KB |
+| `ui.html` | ca. 4,4 KB |
+
+Stimmen die Größen grob, ist das Paket vollständig.
 
 ---
 
@@ -217,6 +257,9 @@ Die eine Warnung ist **P8** — sie verschwindet mit Schritt 7.
 |---|---|---|
 | „Import plugin from manifest“ fehlt | Ansicht ist kein Design-File | Datei öffnen, nicht das Dashboard |
 | `manifest.json` wird nicht akzeptiert | Datei einzeln kopiert | Alle drei Dateien im selben Ordner |
+| Ich finde kein ZIP im Repository | Es gibt keins (Absicht) | Branch wählen, *Code → Download ZIP*; siehe Schritt 1 |
+| Figma meldet „Cannot find main“ | `code.js` heißt `code.js.txt` | Dateiendung korrigieren |
+| Ordner wirkt leer / nur `source.js` | Nur die Quelldatei geladen | `manifest.json`, `code.js` und `ui.html` dazunehmen |
 | „⛔ Aufbau nicht gestartet – es fehlt der Zugriff“ | Zugriff abgelehnt | Plugin schließen, neu starten, **Allow** wählen |
 | Aufbau bricht mittendrin ab | Figma-Version zu alt | Figma aktualisieren (Desktop-App oder Browser) |
 | „Hinweise: 1“ und Inter statt Playfair | Marken-Schrift fehlt lokal | Playfair Display installieren; Inter ist der dokumentierte Ersatz |
