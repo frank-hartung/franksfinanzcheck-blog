@@ -570,6 +570,15 @@ def p32(data, rules):
     for marker in ("aufbauen", "fertig"):
         if marker not in html:
             befund.append(_b("P32", f"ui.html kennt das Protokoll „{marker}“ nicht"))
+    # Ein `message`-Handler ohne Ursprungs- und Quellenprüfung überlässt die
+    # Oberfläche jedem Absender (CodeQL js/missing-origin-check, Fund vom
+    # 31.10.2026). Prüfen, nicht unterdrücken.
+    if "addEventListener('message'" in html or 'addEventListener("message"' in html:
+        for pflicht in ("event.origin", "event.source"):
+            if pflicht not in html:
+                befund.append(_b("P32", f"message-Handler prüft {pflicht} nicht – "
+                                        "fremde Fenster könnten die Oberfläche steuern",
+                                 schwere="P1"))
     return befund
 
 

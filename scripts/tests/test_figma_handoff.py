@@ -305,6 +305,24 @@ class PluginTest(unittest.TestCase):
         for marker in ("aufbauen", "fertig", "pluginMessage", "<button"):
             self.assertIn(marker, html)
 
+    def test_38b_ui_prueft_ursprung_und_quelle(self):
+        """Ein message-Handler ohne Herkunftsprüfung ist eine offene Tür.
+
+        CodeQL hat das am 31.10.2026 als js/missing-origin-check gemeldet.
+        Der richtige Umgang ist Härtung, nicht Unterdrückung: Ursprung,
+        Quelle und Format werden geprüft, bevor Daten die Oberfläche
+        erreichen.
+        """
+        html = (PLUGIN / "ui.html").read_text(encoding="utf-8")
+        self.assertIn("event.origin", html)
+        self.assertIn("event.source", html)
+        self.assertIn("window.parent", html)
+        self.assertIn("ERLAUBTE_TYPEN", html)
+        # Reihenfolge: die Prüfung steht VOR dem Zugriff auf pluginMessage.
+        stelle_pruefung = html.index("event.origin")
+        stelle_zugriff = html.index("daten.pluginMessage")
+        self.assertLess(stelle_pruefung, stelle_zugriff)
+
     def test_39_code_js_ist_aktuell(self):
         self.assertEqual((PLUGIN / "code.js").read_text(encoding="utf-8"), self.code,
                          "code.js ist veraltet – python3 scripts/design_handoff.py")

@@ -115,20 +115,44 @@
     parent.postMessage({ pluginMessage: { type: 'aufbauen' } }, '*');
   });
 
+  // Der UI-Rahmen ist ein iframe. Jede Nachricht, die dort ankommt, kann
+  // theoretisch von einem fremden Fenster stammen – auch wenn Figma heute
+  // nur das Elternfenster sendet. Deshalb wird VOR dem Lesen von Daten
+  // geprüft: richtiger Ursprung, richtige Quelle, bekanntes Format.
+  // Das ist keine Zeremonie: `event.data.pluginMessage` blind zu lesen
+  // heißt, einem beliebigen Absender die Oberfläche zu überlassen.
+  const EIGENER_URSPRUNG = window.location.origin;   // im Plugin-Rahmen: "null"
+  const ERLAUBTE_TYPEN = new Set(['bestand', 'fertig']);
+
+  function istZahl(wert) {
+    return typeof wert === 'number' && Number.isFinite(wert) && wert >= 0;
+  }
+
+  function zahlenSindPlausibel(z) {
+    return !!z && typeof z === 'object'
+      && istZahl(z.collections) && istZahl(z.variablen)
+      && istZahl(z.stile) && istZahl(z.komponenten);
+  }
+
   window.addEventListener('message', (event) => {
-    const msg = event.data.pluginMessage;
-    if (!msg) return;
+    if (event.origin !== EIGENER_URSPRUNG) return;   // fremder Ursprung
+    if (event.source !== window.parent) return;      // fremdes Fenster
+    const daten = event.data;
+    if (!daten || typeof daten !== 'object') return;
+    const msg = daten.pluginMessage;
+    if (!msg || typeof msg !== 'object') return;
+    if (!ERLAUBTE_TYPEN.has(msg.type)) return;
+
     if (msg.type === 'bestand') {
-      zeigeZahlen(msg.zahlen);
+      if (zahlenSindPlausibel(msg.zahlen)) zeigeZahlen(msg.zahlen);
       return;
     }
-    if (msg.type === 'fertig') {
-      protokoll.hidden = false;
-      protokoll.textContent = msg.text;
-      fuss.textContent = 'Fertig. Nichts wurde veröffentlicht.';
-      start.disabled = false;
-      start.textContent = 'Erneut prüfen';
-    }
+    if (typeof msg.text !== 'string' || !msg.text.trim()) return;
+    protokoll.hidden = false;
+    protokoll.textContent = msg.text.slice(0, 6000);
+    fuss.textContent = 'Fertig. Nichts wurde veröffentlicht.';
+    start.disabled = false;
+    start.textContent = 'Erneut prüfen';
   });
 
   parent.postMessage({ pluginMessage: { type: 'bestand' } }, '*');
