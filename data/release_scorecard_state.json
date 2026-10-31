@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T23:30:18Z",
+  "generated_at": "2026-10-31T05:53:52Z",
   "modus": "kandidaten",
-  "commit": "e3a287394fcca082275d5e6cd4bcc2d7d771cbd9",
+  "commit": "6279bdb718b732ddc3c42194c5992ba1a847b382",
   "kapazitaet": {
-    "stichtag": "2026-10-30",
+    "stichtag": "2026-10-31",
     "artikel": 110,
     "faellig": 9,
     "ueberfaellig": 8,
-    "ueberfaellig_max_tage": 2,
+    "ueberfaellig_max_tage": 3,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
-      "restlaufzeit": 4
+      "restlaufzeit": 3
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -33,7 +33,7 @@
         "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
         "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -41,7 +41,7 @@
         "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -49,7 +49,7 @@
         "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
         "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -57,7 +57,7 @@
         "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
         "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -65,7 +65,7 @@
         "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -73,7 +73,7 @@
         "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
         "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -81,7 +81,7 @@
         "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -89,14 +89,14 @@
         "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
+        "tage_zu_spaet": 3,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
       {
         "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
         "titel": "Kostenloses Girokonto ohne Gebühren finden",
-        "frist": "2026-10-30",
+        "frist": "2026-10-31",
         "tage_zu_spaet": 1,
         "vorher_faellig": true,
         "folgeprüfung": false
@@ -449,7 +449,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "cebe1c665b11df10f24940c44dad8f770bfc2aaec981af0f8bbdb0fd109e2dd7",
