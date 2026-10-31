@@ -75,7 +75,12 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    `data/design/handoff.yaml` und die generierten Artefakte unter
    `design/handoff/` verwenden. Generierte Dateien nie von Hand ändern;
    `python3 scripts/design_handoff.py --check` prüft Marken- und Exportdrift.
-   Runbook: `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`.
+   **Figma ist optional:** `design/handoff/design-system.html` ist der
+   gleichwertige Weg ohne Figma (lokal öffnen, kein Netz, kein Login).
+   `python3 scripts/figma_quality_gate.py` prüft 36 Kriterien –
+   CSS-Vertrag, Kontrast-Matrix, Hashes, Plugin-Verhalten.
+   Runbooks: `docs/ANLEITUNG-FIGMA-EINRICHTUNG.md` (Einrichtung + Weg ohne
+   Figma) und `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md` (Gesamtvertrag).
 
 ## README ist Markenfläche (DAUERVORGABE)
 
@@ -214,6 +219,8 @@ node e2e/variant-metrics.mjs --variante <id>         # Browser-Messung + Lightho
 python3 scripts/design_reach_briefing.py             # Agent-Reach-Signale → Hypothesen
 python3 scripts/design_handoff.py                     # Figma-/Relume-Artefakte erzeugen
 python3 scripts/design_handoff.py --check             # SSOT-/Exportdrift blockieren
+python3 scripts/figma_quality_gate.py                 # 36 Kriterien: Vertrag, Kontrast, Hashes, Plugin
+node scripts/tests/figma_plugin_sim.mjs               # Plugin ohne Figma bauen (idempotent, offline)
 
 # Barrierefreiheit, Web Vitals, Browser-Diagnose (26.10.2026)
 # Details: docs/ANLEITUNG-A11Y-AXE.md · docs/ANLEITUNG-WEB-VITALS.md · docs/ANLEITUNG-PLAYWRIGHT-MCP.md

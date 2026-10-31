@@ -36,6 +36,11 @@ on:
       - "scripts/design_variant_*.py"
       - "scripts/design_reach_briefing.py"
       - "scripts/design_handoff.py"
+      - "scripts/figma_quality_gate.py"
+      - "scripts/tests/test_figma_handoff.py"
+      - "scripts/tests/figma_plugin_sim.mjs"
+      - "figma/**"
+      - "docs/ANLEITUNG-FIGMA-EINRICHTUNG.md"
       # Trigger-Wache (W1): alle drei werden in diesem Lauf aufgerufen.
       - "scripts/agent_reach_gate.py"
       - "scripts/manifest_guard.py"
@@ -89,6 +94,37 @@ jobs:
 
       - name: Figma-/Relume-Handoff gegen Design-SSOT prüfen
         run: python3 scripts/design_handoff.py --check
+
+      # ---------------------------------------------------------------
+      #  FIGMA-QUALITÄT (31.10.2026)
+      #  Das Handoff ist eine zweite Darstellung des Designs – und zweite
+      #  Darstellungen veralten lautlos. Die 36 Kriterien prüfen nicht,
+      #  ob Dateien da sind, sondern ob sie noch die Wahrheit sagen:
+      #  CSS-Vertrag, Kontrast-Matrix, Hashes, Plugin-Verhalten.
+      #
+      #  Der Figma-freie Weg (design/handoff/design-system.html) ist
+      #  ausdrücklich Teil des Vertrags: Wer kein Figma hat, muss
+      #  dasselbe Ergebnis prüfen können. P34 hält das fest.
+      #  Anleitung: docs/ANLEITUNG-FIGMA-EINRICHTUNG.md
+      # ---------------------------------------------------------------
+      - name: Node einrichten (für die Plugin-Simulation)
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Figma-Gate gegen sich selbst (Sabotage-Proben)
+        run: python3 scripts/figma_quality_gate.py --selftest
+
+      - name: Figma-Qualitäts-Gate (36 Kriterien)
+        run: python3 scripts/figma_quality_gate.py
+
+      - name: Figma-Plugin ohne Figma bauen (Simulation)
+        # Beweist, dass der Aufbau durchläuft UND der zweite Lauf nichts
+        # doppelt anlegt. Fehlende Rechte brechen ab, bevor gebaut wird.
+        run: node scripts/tests/figma_plugin_sim.mjs
+
+      - name: Regressionstests des Handoffs
+        run: python3 -m unittest scripts.tests.test_figma_handoff
 
       - name: Regressionstests der Werkbank
         run: python3 -m unittest scripts.tests.test_design_varianten

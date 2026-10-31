@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>FranksFinanzcheck – Design System</title>
+<style>
+  :root {
+    --emerald: #0E5A43;
+    --emerald-bright: #7FD1B4;
+    --yellow: #FFB300;
+    --ink: #2E2E33;
+    --page: #FAFCFB;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--page);
+  }
+  header {
+    background: var(--emerald);
+    color: #fff;
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+  header h1 { margin: 0 0 4px; font-size: 17px; line-height: 1.2; }
+  header p { margin: 0; font-size: 12px; color: var(--emerald-bright); }
+  .kante { width: 48px; height: 4px; background: var(--yellow); border-radius: 999px; margin: 12px 0 0; }
+  section { margin-top: 18px; }
+  h2 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 8px; color: var(--emerald); }
+  ul { margin: 0; padding-left: 18px; }
+  li { margin-bottom: 4px; }
+  .zahlen { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .zahl { border: 1px solid #DCE6E1; border-radius: 12px; padding: 10px 12px; background: #fff; }
+  .zahl strong { display: block; font-size: 20px; color: var(--emerald); }
+  .zahl span { font-size: 11px; color: #6C6C6C; }
+  button {
+    width: 100%; min-height: 44px; margin-top: 18px;
+    border: 0; border-radius: 999px;
+    background: var(--yellow); color: var(--ink);
+    font: inherit; font-weight: 800; cursor: pointer;
+    box-shadow: 0 3px 10px rgba(255, 179, 0, .4);
+  }
+  button:focus-visible { outline: 3px solid var(--emerald); outline-offset: 2px; }
+  pre {
+    margin: 12px 0 0; padding: 12px; border-radius: 12px;
+    background: #fff; border: 1px solid #DCE6E1;
+    white-space: pre-wrap; font-size: 11px; max-height: 180px; overflow: auto;
+  }
+  .fuss { margin-top: 14px; font-size: 11px; color: #6C6C6C; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>FranksFinanzcheck<br />Design System</h1>
+    <p>Aus der SSOT aufgebaut – wiederholbar, ohne Netz.</p>
+    <div class="kante"></div>
+  </header>
+
+  <section id="ueber">
+    <h2>Was hier entsteht</h2>
+    <ul>
+      <li>Seiten in der dokumentierten Reihenfolge</li>
+      <li>Variablen: Primitives, Semantik (Hell/Dunkel), Abstand, Radius</li>
+      <li>Text-, Farb- und Effektstile aus der echten Skala</li>
+      <li>Komponenten-Sets mit Zustand × Modus</li>
+      <li>Cover mit Stand, Zahlen und Herkunft</li>
+    </ul>
+  </section>
+
+  <section id="zahlen" hidden>
+    <h2>Bestand dieser Datei</h2>
+    <div class="zahlen" id="zahlengrid"></div>
+  </section>
+
+  <button id="start" type="button">Design-System aufbauen</button>
+  <pre id="protokoll" hidden></pre>
+  <p class="fuss" id="fuss">Ein zweiter Lauf legt nichts doppelt an.</p>
+
+<script>
+  const start = document.getElementById('start');
+  const protokoll = document.getElementById('protokoll');
+  const fuss = document.getElementById('fuss');
+  const zahlenBox = document.getElementById('zahlen');
+  const grid = document.getElementById('zahlengrid');
+
+  function zeigeZahlen(z) {
+    grid.textContent = '';
+    const werte = [
+      [z.collections, 'Sammlungen'],
+      [z.variablen, 'Variablen'],
+      [z.stile, 'Stile'],
+      [z.komponenten, 'Komponenten-Sets'],
+    ];
+    for (const [wert, label] of werte) {
+      const karte = document.createElement('div');
+      karte.className = 'zahl';
+      const stark = document.createElement('strong');
+      stark.textContent = wert;
+      const span = document.createElement('span');
+      span.textContent = label;
+      karte.append(stark, span);
+      grid.appendChild(karte);
+    }
+    zahlenBox.hidden = false;
+  }
+
+  start.addEventListener('click', () => {
+    start.disabled = true;
+    start.textContent = 'Baut auf …';
+    parent.postMessage({ pluginMessage: { type: 'aufbauen' } }, '*');
+  });
+
+  window.addEventListener('message', (event) => {
+    const msg = event.data.pluginMessage;
+    if (!msg) return;
+    if (msg.type === 'bestand') {
+      zeigeZahlen(msg.zahlen);
+      return;
+    }
+    if (msg.type === 'fertig') {
+      protokoll.hidden = false;
+      protokoll.textContent = msg.text;
+      fuss.textContent = 'Fertig. Nichts wurde veröffentlicht.';
+      start.disabled = false;
+      start.textContent = 'Erneut prüfen';
+    }
+  });
+
+  parent.postMessage({ pluginMessage: { type: 'bestand' } }, '*');
+</script>
+</body>
+</html>

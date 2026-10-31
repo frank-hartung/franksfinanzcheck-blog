@@ -57,6 +57,17 @@ marke:
     - "#333"      # --border dunkel (PaperMod)
     - "#E60023"   # Pinterest-Rot (Fremdmarke, DESIGN.md §5)
 
+    # Am 31.10.2026 in das Figma-Handoff aufgenommen, weil sie bereits
+    # ausgeliefert werden und das Handoff sonst eine Lücke hätte:
+    - "#6C6C6C"   # --secondary hell (PaperMod, DESIGN.md §1)
+    - "#9B9C9D"   # --secondary dunkel (PaperMod, 6.07:1 auf --theme)
+    - "#A32B2B"   # --ff-nl-fehler hell (Newsletter, zz-newsletter.css)
+    - "#FF9A9A"   # --ff-nl-fehler dunkel
+    - "#3B82F6"   # .ff-callout--info Akzent (bestehende Komponente)
+    - "#EAB308"   # .ff-callout--warning Akzent (bestehende Komponente)
+    - "#DC2626"   # .ff-callout--danger Akzent (bestehende Komponente)
+    - "#333333"   # --border dunkel, 6-stellig kanonisch (dieselbe Farbe wie #333)
+
   # Variablen-Präfixe, die eine Variante lesen darf.
   variablen_praefixe_erlaubt:
     - "--ff-"
@@ -79,6 +90,9 @@ marke:
     - [255, 179, 0]     # CTA-Glow / ::selection
     - [127, 209, 180]   # Smaragd-Bright-Tönung (Dark Mode)
     - [230, 0, 35]      # Pinterest-Rot
+    - [59, 130, 246]    # Info-Blau (Callout dunkel, 12 % Fläche)
+    - [234, 179, 8]     # Warn-Gelb (Callout dunkel, 12 % Fläche)
+    - [127, 209, 180]   # Erfolg/Smaragd-Bright (Newsletter dunkel)
 
   # Radius-Skala (DESIGN.md §4). Werte in px; 999 = Pille.
   radien_px_erlaubt: [0, 8, 12, 16, 999]

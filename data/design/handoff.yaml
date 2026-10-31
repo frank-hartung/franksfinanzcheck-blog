@@ -1,7 +1,22 @@
 # SSOT für den externen Design-Handoff. Aus dieser Datei erzeugt
 # scripts/design_handoff.py reproduzierbare Figma-/Relume-Artefakte.
+#
+# AUFBAU IN DREI EBENEN (Highend-Rollout 31.10.2026)
+#   figma.primitives → Rohwerte. Genau die Werte, die in
+#                      assets/css/extended/custom.css und den
+#                      zz*-Schichten als CSS-Variablen stehen.
+#   figma.semantic   → Rollen pro Modus. NUR Aliase auf Primitives,
+#                      niemals neue Hex-Werte (Gate: scripts/design_handoff.py).
+#   figma.typografie → echte Skala mit Kohäsionsregel (mobile_px =
+#                      desktop_px × 0.85…1.0). Figma-Textstile entstehen
+#                      daraus, nicht aus dem Bauch.
+#
+# PRÜFKETTE
+#   scripts/design_handoff.py --check   Drift der Exporte
+#   scripts/design_handoff.py           Figma-Plugins + Tokens neu erzeugen
+#   scripts/figma_quality_gate.py       36 Profi-Agentur-Kriterien
 version: 1
-stand: "2026-09-26"
+stand: "2026-10-31"
 projekt:
   name: "FranksFinanzcheck"
   sprache: "de-DE"
@@ -11,6 +26,10 @@ projekt:
 
 figma:
   dateiname: "FranksFinanzcheck – Design System"
+  # Die Plugin-ID wird beim Einmal-Import in Figma vergeben und hier
+  # eingetragen. Leer = Plugins bleiben lauffähig, das Manifest trägt
+  # bewusst KEIN id-Feld (ein leeres "id": "" kann den Import blockieren).
+  plugin_id: ""
   page_order:
     - "00 Cover"
     - "01 Foundations"
@@ -23,6 +42,14 @@ figma:
     mobile: 390
     tablet: 768
     desktop: 1280
+    wide: 1440
+  # 8-pt-Grundraster mit den dokumentierten Feinstufen 14/18/22
+  # (DESIGN.md §3 – bewusst, nicht zufällig).
+  grid:
+    basis_px: 8
+    feinstufen_px: [14, 18, 22]
+    content_breite_px: 720
+    nav_breite_px: 1024
   primitives:
     colors:
       emerald: "#0E5A43"
@@ -38,7 +65,21 @@ figma:
       page-light: "#FAFCFB"
       page-dark: "#1D1E20"
       border-light: "#DCE6E1"
-      border-dark: "#333"
+      border-dark: "#333333"
+      # Sekundärtext: PaperMod-Variablen, die der Blog bewusst nutzt
+      # (DESIGN.md §1). Hell #6C6C6C, dunkel #9B9C9D.
+      secondary-light: "#6C6C6C"
+      secondary-dark: "#9B9C9D"
+      # Zustandsfarben aus den echten Komponenten (zz-newsletter.css,
+      # zzz-agency-polish.css .ff-callout--*). Keine Erfindung.
+      fehler-light: "#A32B2B"
+      fehler-dark: "#FF9A9A"
+      info-solid: "#3B82F6"
+      warn-solid: "#EAB308"
+      danger-solid: "#DC2626"
+      # Fremdmarke: Pinterest-Rot ist erlaubt, aber nur für den
+      # Pinterest-CTA (DESIGN.md §5).
+      pinterest: "#E60023"
     spacing_px: [8, 10, 12, 14, 16, 18, 20, 22, 24, 32, 44, 64]
     radius_px:
       none: 0
@@ -46,93 +87,239 @@ figma:
       md: 12
       lg: 16
       pill: 999
+    # Schatten-Skala (DESIGN.md §4) – vier Stufen, keine fünfte.
+    elevation:
+      karte: "0 2px 6px rgba(0,0,0,0.05)"
+      hover: "0 6px 20px rgba(14,90,67,0.14)"
+      schwebend: "0 8px 24px rgba(15,52,43,0.08)"
+      cta: "0 3px 10px rgba(255,179,0,0.40)"
   semantic:
     light:
       background: "page-light"
       surface: "white"
+      surface-soft: "emerald-soft"
       text: "anthracite"
+      text-secondary: "secondary-light"
+      text-inverted: "white"
       heading: "emerald"
       action: "yellow"
       action-hover: "yellow-dark"
+      action-text: "anthracite"
       border: "border-light"
       focus: "yellow"
+      feedback-error: "fehler-light"
+      feedback-success: "emerald"
+      brand-foreign: "pinterest"
     dark:
       background: "page-dark"
       surface: "anthracite"
+      surface-soft: "anthracite"
       text: "white"
+      text-secondary: "secondary-dark"
+      text-inverted: "page-dark"
       heading: "emerald-bright"
       action: "yellow"
       action-hover: "yellow-dark"
+      action-text: "anthracite"
       border: "border-dark"
       focus: "yellow"
+      feedback-error: "fehler-dark"
+      feedback-success: "emerald-bright"
+      brand-foreign: "pinterest"
+  # Echte Typo-Skala mit Kohäsionsregel. `mobile_px` ist nie größer
+  # als `size_px` und nie kleiner als 85 % davon (Gate).
   typography:
-    body:
-      family: "system-ui"
-      size_px: 18
-      line_height: 1.65
-      weight: 400
     h1_home:
       family: "Inter"
       size_px: 56
+      mobile_px: 34
       line_height: 1.08
       weight: 700
+      tracking: "-0.02em"
+      einsatz: "Startseiten-H1 (Saisonkopf), genau einmal pro Seite"
     h1_article:
       family: "Inter"
       size_px: 36
+      mobile_px: 28
       line_height: 1.15
       weight: 700
+      tracking: "-0.01em"
+      einsatz: "Artikel-H1 (.post-title)"
     h2:
       family: "Inter"
       size_px: 24
+      mobile_px: 21
       line_height: 1.25
       weight: 700
+      tracking: "0"
+      einsatz: "Abschnittsüberschrift + 2px Signalgelb-Unterstreichung"
+    h3:
+      family: "Inter"
+      size_px: 19
+      mobile_px: 18
+      line_height: 1.3
+      weight: 700
+      tracking: "0"
+      einsatz: "Unterabschnitt, Abstand 44px über / 16px unter"
+    body:
+      family: "system-ui"
+      size_px: 18
+      mobile_px: 17
+      line_height: 1.65
+      weight: 400
+      tracking: "0"
+      einsatz: "Fließtext, Messweite 65ch"
+    lead:
+      family: "system-ui"
+      size_px: 20
+      mobile_px: 18
+      line_height: 1.55
+      weight: 400
+      tracking: "0"
+      einsatz: "GEO-Lead unter der H1"
     meta:
       family: "system-ui"
       size_px: 14
+      mobile_px: 13
       line_height: 1.5
       weight: 500
+      tracking: "0.01em"
+      einsatz: "Meta-Zeile mit Mittel-Punkten (Datum · Lesezeit)"
+    label:
+      family: "system-ui"
+      size_px: 12
+      mobile_px: 12
+      line_height: 1.4
+      weight: 600
+      tracking: "0.06em"
+      einsatz: "Chips, Badges, Feldlabels – nie als Eyebrow über H1"
+    subline:
+      family: "Playfair Display"
+      size_px: 22
+      mobile_px: 20
+      line_height: 1.35
+      weight: 400
+      style: "italic"
+      tracking: "0"
+      einsatz: "Subline-Akzent, ausschließlich auf Smaragdflächen"
 
+# Vertrag für die Figma-Komponenten. `code` wird gegen den echten
+# CSS-Bestand geprüft – eine Klasse, die es nicht gibt, ist ein Fehler.
 components:
   - id: button-primary
     figma: "Action/Button/Primary"
     code: ".ff-btn-primary"
     states: [default, hover, focus-visible, disabled, dark]
-    accessibility: "44 px Soll-Trefferfläche; sichtbarer 3-px-Fokusring"
+    accessibility: "44 px Soll-Trefferfläche; sichtbarer 3-px-Fokusring; Gelb nur als Fläche"
+    variablen: ["action", "action-hover", "action-text", "focus"]
   - id: button-secondary
     figma: "Action/Button/Secondary"
     code: ".ff-btn-secondary"
     states: [default, hover, focus-visible, disabled, dark]
     accessibility: "44 px Soll-Trefferfläche; kein Gelb als Text auf heller Fläche"
+    variablen: ["surface", "heading", "surface-soft", "focus"]
+  - id: button-outline
+    figma: "Action/Button/Outline"
+    code: ".ff-btn-outline"
+    states: [default, hover, focus-visible, dark]
+    accessibility: "Nur auf Smaragdflächen; Rand 2 px, Kontrast ≥ 3:1 zur Fläche"
+    variablen: ["text-inverted", "heading"]
   - id: article-card
     figma: "Content/Article card"
     code: ".post-entry"
     states: [default, hover, focus-within, dark]
     accessibility: "Überschrift bleibt semantisch; Bild immer mit Alt-Text und Maßen"
+    variablen: ["surface", "border", "heading", "text-secondary"]
   - id: trust-pill
     figma: "Trust/Proof pill"
     code: ".ff-trust-pill"
     states: [default, dark]
     accessibility: "Aussage nicht nur über Farbe vermitteln"
+    variablen: ["surface-soft", "heading"]
   - id: callout
     figma: "Content/Callout"
     code: ".ff-callout"
     states: [tip, warning, info, dark]
     accessibility: "Typ und Überschrift als Text; Kontrast mindestens 4,5:1"
+    variablen: ["surface-soft", "heading", "text"]
+  - id: kurzantwort
+    figma: "Content/Kurzantwort"
+    code: ".ff-kurzantwort"
+    states: [default, dark, print]
+    accessibility: "Antwort als echter Text; Signet rein dekorativ (aria-hidden)"
+    variablen: ["surface", "heading", "border"]
   - id: newsletter-form
     figma: "Conversion/Newsletter form"
-    code: ".ff-newsletter-form"
+    code: ".ff-nl__form"
     states: [default, focus, error, success, disabled, dark]
     accessibility: "Persistente Labels; verständliche Fehlertexte; Tastaturbedienung"
+    variablen: ["surface", "border", "action", "feedback-error", "feedback-success"]
   - id: header
     figma: "Navigation/Header"
     code: ".header"
     states: [desktop, mobile, keyboard, dark]
     accessibility: "Skip-Link, Landmark und sichtbarer aktueller Navigationspunkt"
+    variablen: ["background", "heading", "focus"]
+  - id: article-header
+    figma: "Content/Article header"
+    code: ".post-header"
+    states: [default, dark]
+    accessibility: "Titel als H1, Metazeile als Text; Autor und Datum maschinenlesbar"
+    variablen: ["background", "heading", "text-secondary"]
   - id: author-trust-box
     figma: "Trust/Author box"
     code: ".ff-trust-box"
     states: [default, dark]
     accessibility: "Autor und Prüfhinweis als echter Text"
+    variablen: ["surface", "heading", "text-secondary"]
+  - id: kostenprofil
+    figma: "Brand/Kostenprofil"
+    code: ".ff-kostenprofil"
+    states: [default, article, dark]
+    accessibility: "4K-Prüfpfad als geordnete Liste; Indexzahlen sind Inhalt, keine Deko"
+    variablen: ["surface", "heading", "border", "action"]
+  - id: spar-matrix
+    figma: "Data/Spar-Matrix"
+    code: ".ff-spar-matrix-table"
+    states: [default, hover, focus-visible, dark, mobile-gestapelt]
+    accessibility: "Unter 760 px wird jede Zeile zur Karte; Feldnamen aus data-label"
+    variablen: ["surface", "border", "heading", "action"]
+  - id: pill
+    figma: "Content/Chip"
+    code: ".ff-pc-chip"
+    states: [default, dark]
+    accessibility: "Pill nur als Zusatzinfo, nie als einziger Träger einer Aussage"
+    variablen: ["surface-soft", "heading"]
+  - id: faq
+    figma: "Content/FAQ"
+    code: ".ff-faq-list"
+    states: [default, open, focus-visible, dark]
+    accessibility: "Native details/summary oder gleichwertige Tastaturbedienung"
+    variablen: ["surface", "border", "text"]
+  - id: pillar-box
+    figma: "Navigation/Pillar box"
+    code: ".ff-pillar-box"
+    states: [default, hover, focus-visible, dark]
+    accessibility: "Verlinkung mit echtem Linktext, kein 'hier klicken'"
+    variablen: ["surface-soft", "heading", "action"]
+  - id: pinterest-cta
+    figma: "Conversion/Pinterest CTA"
+    code: ".ff-pinterest-cta"
+    states: [default, hover, focus-visible, dark]
+    accessibility: "Fremdmarke Pinterest-Rot nur hier; Kontrast Weiß auf Rot ≥ 4,5:1"
+    variablen: ["brand-foreign", "text-inverted"]
+  - id: consent-banner
+    figma: "System/Consent banner"
+    code: "#ff-consent-banner"
+    states: [default, dark, keyboard]
+    accessibility: "Bedienelemente ≥ 24 px; Banner blockiert nie den Fokus"
+    variablen: ["surface", "border", "action"]
+  - id: skip-link
+    figma: "System/Skip link"
+    code: ".skip-link"
+    states: [default, focus-visible, dark]
+    accessibility: "Immer oberstes Element (z 1000001), 3-px-Fokusring"
+    variablen: ["background", "heading", "focus"]
 
 relume:
   global_rules:
@@ -142,6 +329,7 @@ relume:
     - "Primäre Handlung klar, aber ohne künstliche Dringlichkeit oder Dark Patterns."
     - "Bestehende deutsche Texte sind verbindlich; Relume liefert Struktur, keine Fakten."
     - "Mobile-first; 390 px ist der Abnahme-Viewport."
+    - "Kein Eyebrow-Label über einer H1 (Taste-Skill-Verbot, DESIGN.md-konform)."
   pages:
     - path: "/"
       name: "Startseite"
@@ -149,6 +337,7 @@ relume:
       sections:
         - {id: hero, component: "hero", goal: "Nutzenversprechen plus eine Primärhandlung"}
         - {id: trust, component: "trust-pill", goal: "Unabhängigkeit und Praxisbezug belegen"}
+        - {id: kostenprofil, component: "kostenprofil", goal: "Den 4K-Prüfpfad als Markenobjekt zeigen"}
         - {id: topics, component: "article-card", goal: "Themenwelten scannbar machen"}
         - {id: latest, component: "article-card", goal: "Aktuelle Ratgeber zeigen"}
         - {id: newsletter, component: "newsletter-form", goal: "Freiwilligen Wiedereinstieg anbieten"}
@@ -165,7 +354,9 @@ relume:
       intent: "Eine konkrete Finanzfrage nachvollziehbar und handlungsnah lösen"
       sections:
         - {id: article-head, component: "article-header", goal: "Thema, Aktualität und Autor klären"}
+        - {id: kurzantwort, component: "kurzantwort", goal: "Antwort in fünf Sekunden ermöglichen"}
         - {id: article-body, component: "prose", goal: "Schritte mit ruhigem Lesefluss vermitteln"}
+        - {id: spar-matrix, component: "spar-matrix", goal: "Handlungsoptionen vergleichbar machen"}
         - {id: contextual-cta, component: "button-primary", goal: "Nur passende nächste Handlung anbieten"}
         - {id: author, component: "author-trust-box", goal: "Erfahrung und Verantwortung transparent machen"}
         - {id: related, component: "article-card", goal: "Sinnvoll weiterlesen"}
