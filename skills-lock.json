@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "agent-reach": {
       "source": "Panniantong/Agent-Reach",
@@ -59,7 +59,12 @@
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",
       "skillPath": "skills/taste-skill/SKILL.md",
-      "computedHash": "6d838b246d0e35d0b53f4f23f98ba7a1dd561937e64f7d0c7553b0928e376c3e"
+      "computedHash": "3435ed963b15a1b6447746ec8844ab2cd38d8d2e8ead3451937f42df01e408c4",
+      "version": "2.0.0",
+      "commit": "12af471f627f866411b4bd785b19646d3672784c",
+      "committedAt": "2026-10-25T01:42:19+02:00",
+      "files": 39,
+      "note": "Vollständig gepinnt: SKILL.md, 11 Referenzen, Richtungsbibliothek, lint/draw/inspect-Skripte."
     },
     "frontend-design": {
       "source": "anthropics/skills",
@@ -71,7 +76,13 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "a80e96114cca1a7324c3b5b72586b93687a12a2a05302563fa81e1e30987a049"
+      "computedHash": "fab04b31f946573b00a8559db1fc070f8ea5825254d491c2b13156e5661a86d7",
+      "version": "4.8.0",
+      "engineVersion": "0.1.18",
+      "commit": "b7a89176e4e87422b40f98adabceb051dbb5448b",
+      "committedAt": "2026-10-31T14:41:51+08:00",
+      "files": 63,
+      "note": "Vollständig gepinnt: SKILL.md, 40 Referenzen, 5 Agenten, Live-Engine (scripts/)."
     },
     "programmatic-seo": {
       "source": "coreyhaines31/marketingskills",

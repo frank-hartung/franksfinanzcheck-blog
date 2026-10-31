@@ -51,13 +51,16 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
 1. **Skills nutzen** – installiert in `.claude/skills/`:
    | Skill | Wann |
    |---|---|
-   | `impeccable` | Designen/Polierten/Kritisieren/Auditieren von UI (liest PRODUCT.md + DESIGN.md zuerst!) |
+   | `impeccable` (4.8.0, Engine 0.1.18) | Designen/Polierten/Kritisieren/Auditieren von UI. Vollständig gepinnt: 40 Referenzen, 5 Agenten, Live-Engine. Liest PRODUCT.md + DESIGN.md zuerst; `context`, `critique`, `audit`, `polish`, `bolder`, `generate`, `live` |
    | `web-design-guidelines` (Vercel) | UI-Code-Review gegen Web Interface Guidelines |
    | `frontend-design` (Anthropic) | Neue Oberflächen mit eigener visueller Identität |
-   | `design-taste-frontend` (taste-skill) | Anti-Slop-Disziplin bei Frontend-Arbeiten |
+   | `design-taste-frontend` (taste-skill v2) | Anti-Slop-Disziplin. Vollständig gepinnt: 11 Referenzen, Richtungsbibliothek, `lint.mjs` (statisch), `inspect.mjs` (echter Browser, 1440/768/390), `draw.mjs` (Richtungen) |
    | `webapp-testing` (Anthropic) | Browser-Interaktion/Test mit Playwright |
    | `agent-reach` | **Jede** Internet-Recherche/Suche/URL-Lektüre (Twitter, Reddit, YouTube, GitHub, RSS, Web …) – auch bei deutschen Aufträgen („recherchiere …", „suche …", „was sagt man über …") |
-   Aktualisierung: `npx skills update` (Quellen in `skills-lock.json`).
+   Aktualisierung: `npx skills update` (Quellen in `skills-lock.json`). Beide
+   Design-Skills sind dort **mit Upstream-Commit, Version und SHA-256** gepinnt;
+   `python3 scripts/figma_quality_gate.py` prüft Hashgleichheit und dass kein
+   Referenzpfad ins Leere zeigt. Statischer Tells-Scan: `npm run skill:lint`.
 2. **PRODUCT.md und DESIGN.md lesen, bevor eine Farbe geändert wird.**
    Sie enthalten die Marken-Tokens, Anti-References und harten Gates.
    **Layout-Umbauten gehören in eine Variante, nicht in die Basis**
@@ -76,6 +79,16 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    `design/handoff/` verwenden. Generierte Dateien nie von Hand ändern;
    `python3 scripts/design_handoff.py --check` prüft Marken- und Exportdrift.
    Runbook: `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`.
+6. **Das Figma-Plugin ist generiert, nicht geschrieben.** Wer den Aufbau
+   ändert, ändert `figma/design-system-builder/source.js` und führt
+   `npm run figma:bauen` aus; `code.js` ist Ausgabe. Das Plugin baut Variablen,
+   Stile und Komponenten-Sets (Achsen **Zustand × Modus**), läuft ohne Netz
+   und legt bei einem zweiten Lauf nichts doppelt an.
+7. **„Highend“ wird gemessen.** Vor jedem Abschluss einer Design-Arbeit:
+   `npm run figma:selftest && npm run design:handoff:check && npm run figma:gate`.
+   Das Gate prüft 33 Kriterien über SSOT, Exporte, Plugin, Skills und Doku.
+   Die Kontrastwerte in `design/handoff/ANNOTATIONEN.md` sind gerechnet –
+   wer eine Paarung ändert, rechnet sie neu, statt sie zu behaupten.
 
 ## README ist Markenfläche (DAUERVORGABE)
 

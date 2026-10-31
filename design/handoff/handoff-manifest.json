@@ -1,18 +1,24 @@
 {
   "schema": 1,
-  "stand": "2026-09-26",
+  "stand": "2026-10-31",
   "generator": "scripts/design_handoff.py",
   "generator_version": 1,
   "sources": {
-    "data/design/handoff.yaml": "2c6b86864fdbf40aaae7994547294727dc444ff0122710ff6afc1afcceb79daa",
-    "data/design/regelwerk.yaml": "05ef6296a04acb8d7e986082a784b625c5ad5bc68eb726005b6545f2a7e741ce",
-    "DESIGN.md": "082144ed9ad2ee96a82b00ef4b6f71bafbd301d3f20c268987cb62a1def1c6bc",
+    "data/design/handoff.yaml": "f24d983422de5791baad3d1168bb2d19df4a308886b7ac1d44e41792c7041d27",
+    "data/design/regelwerk.yaml": "ce85498f7f51e74ac76e8b7ee3d56cf244faa9e4499620f031ea6bf2b9bc513c",
+    "DESIGN.md": "b333322f93f9a571351a23a4c1240117160fe7dd5af070accc93a0662a48f9a9",
     "PRODUCT.md": "3073948f7c99aa67e0126a1870c7d329738d2353b7b7bcd948e3a433f5ec6010",
-    "scripts/design_handoff.py": "1d810d17db7d0855432bbb8479e9ed914ac5c2d8330657a91577b2b1073d444f"
+    "figma/design-system-builder/source.js": "705154c2373650819187551fb06f4ae767a5b1269edcadf2fbaebe73cba84370"
   },
   "artifacts": {
-    "component-inventory.md": "7a66aa5716a57f01b0c3a8af38621ca7c0293230834bab4b74eb9d530ea19b22",
-    "figma-tokens.tokens.json": "ef1cb0da1d60e2c866d2d633adf65e08ea4ba4d098c74d8a388020ce2dfc726b",
-    "relume-project-brief.md": "014a5ee92efdfb440c406515f7dcb9743be14f0f3cd6c3b43810fa9e0e318c1f"
+    "ANNOTATIONEN.md": "ea105f5384cd7d2415fc445e39a405b852e8ff54b7666ef17523bfdf7ea3dab7",
+    "component-inventory.md": "57bf2ee8221e669cb419e2499842892f4b50984abd170c38b562c1f6fcc8cb7b",
+    "figma-tokens.tokens.json": "356fdb18b290f55e55b6acf8b6bd66f62ac2e341ed5f564fb6e9c4447a31b875",
+    "patterns.md": "f671f00a1ac60a8b1936a7d2a5a1044abb4813e902eb0f65d23ba2d5ac22a747",
+    "relume-project-brief.md": "855695c852be5faf6028da3bd5a135de5490c7110e304353bdc7abc9d47e0116",
+    "spezifikation.html": "b8cfbb2521d6796d953a9c6774719eac2c216505fdaa32494b2dd9114b02e9ad"
+  },
+  "plugins": {
+    "figma/design-system-builder/code.js": "e12ec20afddd21df53cbc1d9e01b65e7fb645267699d9307d8caaea5e596431f"
   }
 }

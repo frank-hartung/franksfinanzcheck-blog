@@ -186,16 +186,56 @@ Figma und Relume sind Entwurfswerkzeuge, keine zweite Produktionswahrheit.
 Der versionierte Vertrag liegt in `data/design/handoff.yaml`; daraus erzeugt
 `scripts/design_handoff.py` reproduzierbar:
 
-- Tokens-Studio-JSON mit Light-/Dark-Collections,
-- Relume-Projektprompt, Sitemap und Section-Vertrag,
-- Figma↔Hugo-Komponenten-Inventar mit Zuständen und A11y-Abnahme,
-- SHA-256-Manifest für Quellen und Exporte.
+- **`figma-tokens.tokens.json`** – Tokens-Studio-JSON mit Primitives sowie
+  Semantic/Light und Semantic/Dark als echte Aliase (kein Rohwert in einer Rolle).
+- **`relume-project-brief.md`** – Projektprompt, Sitemap und Section-Vertrag.
+- **`component-inventory.md`** – Figma↔Hugo-Inventar mit Zuständen und A11y-Abnahme.
+- **`patterns.md`** – Musterbibliothek: Seitenrhythmus, Typo-Einsatz, Tiefe und
+  die Regeln, die das System niemals bricht. Ein Inventar sagt, was es gibt;
+  ein Muster sagt, wann es eingesetzt wird.
+- **`ANNOTATIONEN.md`** – gerechnete WCAG-2.2-Kontrast-Matrix (24 Paarungen,
+  Hell und Dunkel) plus Pflichtzustände je Komponententyp.
+- **`handoff-manifest.json`** – SHA-256 für Quellen, Exporte und Plugin.
 
-Die Farben und Radien werden gegen `data/design/regelwerk.yaml` validiert.
-Generierte Dateien unter `design/handoff/` werden nicht von Hand bearbeitet;
-`python3 scripts/design_handoff.py --check` stoppt Drift im CI-Gate. Ein
-externer Entwurf gelangt ausschließlich als registrierte Variante durch
-Playwright, Lighthouse, Messprotokoll und menschliche Freigabe in Produktion.
+Die Farben und Radien werden gegen `data/design/regelwerk.yaml` validiert;
+jeder `code`-Vertrag wird gegen den echten CSS-Bestand geprüft – eine
+erfundene Klasse stoppt den Generator. Typografie trägt Desktop- und
+Mobilstufe mit Kohäsionsregel (Überschriften dürfen fließend skalieren,
+Fließtext, Meta und Labels nicht unter 85 % fallen).
+
+### Das Figma-Plugin `figma/design-system-builder`
+
+Der Handoff endet nicht bei JSON. `figma/design-system-builder` ist ein
+installierbares Figma-Plugin, das die Datei **aufbaut** statt sie zu beschreiben:
+
+| Was | Wie |
+|---|---|
+| Seiten | in der Reihenfolge aus `figma.page_order` |
+| Variablen | Sammlungen *Primitives*, *Semantik* (Hell/Dunkel per Alias), *Abstand*, *Radius* |
+| Dev Mode | `var(--ff-…)` als Code-Syntax je Variable |
+| Stile | Text (Desktop + Mobil), Farbe, Schatten aus der echten Skala |
+| Komponenten | Sets mit den Achsen **Zustand × Modus** |
+| Cover | Stand, Zahlen und Herkunft der Datei |
+
+`code.js` ist **generiert** aus `source.js` + Datenblock; nicht von Hand
+bearbeiten. Das Plugin läuft ohne Netzverbindung (`allowedDomains: ["none"]`),
+veröffentlicht nichts und legt bei einem zweiten Lauf nichts doppelt an –
+vorhandene Sammlungen, Stile und Sets werden erkannt und im Protokoll als
+„bereits vorhanden“ gemeldet.
+
+### Prüfkette
+
+```bash
+npm run figma:bauen        # Exporte + Plugin neu erzeugen
+npm run design:handoff:check   # Drift
+npm run figma:gate         # 33 Qualitätskriterien (SSOT, Exporte, Plugin, Skills, Doku)
+npm run figma:selftest     # Sabotage-Proben beider Werkzeuge
+```
+
+Generierte Dateien unter `design/handoff/` und `figma/design-system-builder/code.js`
+werden nicht von Hand bearbeitet; das CI-Gate stoppt Drift. Ein externer
+Entwurf gelangt ausschließlich als registrierte Variante durch Playwright,
+Lighthouse, Messprotokoll und menschliche Freigabe in Produktion.
 
 Runbook:
 [`docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`](docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md)

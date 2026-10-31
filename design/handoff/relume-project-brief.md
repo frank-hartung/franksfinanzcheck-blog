@@ -1,6 +1,6 @@
 # Relume-Projektbrief – FranksFinanzcheck
 
-> Generiert aus `data/design/handoff.yaml` · Stand 2026-09-26 · Strukturbrief, keine Veröffentlichungsfreigabe.
+> Generiert aus `data/design/handoff.yaml` · Stand 2026-10-31 · Strukturbrief, keine Veröffentlichungsfreigabe.
 
 ## Projekt-Prompt
 
@@ -20,6 +20,7 @@ Das Ergebnis ist ein Strukturvorschlag. Die Implementierung erfolgt ausschließl
 - Primäre Handlung klar, aber ohne künstliche Dringlichkeit oder Dark Patterns.
 - Bestehende deutsche Texte sind verbindlich; Relume liefert Struktur, keine Fakten.
 - Mobile-first; 390 px ist der Abnahme-Viewport.
+- Kein Eyebrow-Label über einer H1 (Taste-Skill-Verbot, DESIGN.md-konform).
 
 ## Sitemap und Section-Vertrag
 
@@ -31,9 +32,10 @@ Das Ergebnis ist ein Strukturvorschlag. Die Implementierung erfolgt ausschließl
 |---:|---|---|---|
 | 1 | `hero` | `hero` | Nutzenversprechen plus eine Primärhandlung |
 | 2 | `trust` | `trust-pill` | Unabhängigkeit und Praxisbezug belegen |
-| 3 | `topics` | `article-card` | Themenwelten scannbar machen |
-| 4 | `latest` | `article-card` | Aktuelle Ratgeber zeigen |
-| 5 | `newsletter` | `newsletter-form` | Freiwilligen Wiedereinstieg anbieten |
+| 3 | `kostenprofil` | `kostenprofil` | Den 4K-Prüfpfad als Markenobjekt zeigen |
+| 4 | `topics` | `article-card` | Themenwelten scannbar machen |
+| 5 | `latest` | `article-card` | Aktuelle Ratgeber zeigen |
+| 6 | `newsletter` | `newsletter-form` | Freiwilligen Wiedereinstieg anbieten |
 
 ### Ratgeber-Zentrale — `/pillar/`
 
@@ -53,10 +55,12 @@ Das Ergebnis ist ein Strukturvorschlag. Die Implementierung erfolgt ausschließl
 | Reihenfolge | Section-ID | Referenz | Aufgabe |
 |---:|---|---|---|
 | 1 | `article-head` | `article-header` | Thema, Aktualität und Autor klären |
-| 2 | `article-body` | `prose` | Schritte mit ruhigem Lesefluss vermitteln |
-| 3 | `contextual-cta` | `button-primary` | Nur passende nächste Handlung anbieten |
-| 4 | `author` | `author-trust-box` | Erfahrung und Verantwortung transparent machen |
-| 5 | `related` | `article-card` | Sinnvoll weiterlesen |
+| 2 | `kurzantwort` | `kurzantwort` | Antwort in fünf Sekunden ermöglichen |
+| 3 | `article-body` | `prose` | Schritte mit ruhigem Lesefluss vermitteln |
+| 4 | `spar-matrix` | `spar-matrix` | Handlungsoptionen vergleichbar machen |
+| 5 | `contextual-cta` | `button-primary` | Nur passende nächste Handlung anbieten |
+| 6 | `author` | `author-trust-box` | Erfahrung und Verantwortung transparent machen |
+| 7 | `related` | `article-card` | Sinnvoll weiterlesen |
 
 ## Übergabe zurück in den Code
 

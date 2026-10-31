@@ -36,6 +36,14 @@ on:
       - "scripts/design_variant_*.py"
       - "scripts/design_reach_briefing.py"
       - "scripts/design_handoff.py"
+      - "scripts/figma_quality_gate.py"
+      - "scripts/tests/test_figma_handoff.py"
+      - "scripts/tests/figma_plugin_sim.mjs"
+      - "figma/design-system-builder/**"
+      - "data/design/regelwerk.yaml"
+      - "skills-lock.json"
+      - ".claude/skills/impeccable/**"
+      - ".claude/skills/design-taste-frontend/**"
       # Trigger-Wache (W1): alle drei werden in diesem Lauf aufgerufen.
       - "scripts/agent_reach_gate.py"
       - "scripts/manifest_guard.py"
@@ -86,12 +94,24 @@ jobs:
           python3 scripts/design_variant_lab.py --selftest
           python3 scripts/design_reach_briefing.py --selftest
           python3 scripts/design_handoff.py --selftest
+          python3 scripts/figma_quality_gate.py --selftest
 
       - name: Figma-/Relume-Handoff gegen Design-SSOT prüfen
         run: python3 scripts/design_handoff.py --check
 
-      - name: Regressionstests der Werkbank
-        run: python3 -m unittest scripts.tests.test_design_varianten
+      # Das Gate prüft 33 Kriterien über SSOT, Exporte, Plugin, Skills und
+      # Doku. Es ersetzt die drift-Prüfung nicht, sondern erweitert sie um
+      # alles, was ein JSON-Vergleich nicht sieht.
+      # Die Simulation baut das Plugin gegen eine nachgebildete Figma-API
+      # auf – inklusive zweitem Lauf, der nichts Neues anlegen darf.
+      - name: Figma-Plugin-Simulation (Aufbau + Idempotenz)
+        run: node scripts/tests/figma_plugin_sim.mjs
+
+      - name: Figma-Handoff-Qualität (34 Kriterien)
+        run: python3 scripts/figma_quality_gate.py
+
+      - name: Regressionstests der Werkbank und des Handoffs
+        run: python3 -m unittest scripts.tests.test_design_varianten scripts.tests.test_figma_handoff
 
       - name: Lighthouse-Assertions gegen Regelwerk prüfen
         # Erzeugen und vergleichen: Weicht die committete Datei ab,

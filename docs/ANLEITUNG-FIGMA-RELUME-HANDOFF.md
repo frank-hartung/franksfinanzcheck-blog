@@ -31,20 +31,54 @@ Design-Signale  →    Sitemap/Wireframe →   Tokens + Komponenten
 | Relume-Input | `design/handoff/relume-project-brief.md` | kopierfertiger Prompt, Sitemap und Section-Vertrag |
 | Dev-Handoff | `design/handoff/component-inventory.md` | Figma-Name ↔ CSS-Vertrag ↔ Zustände ↔ A11y |
 | Nachweis | `design/handoff/handoff-manifest.json` | SHA-256 für Quellen und Exporte |
+| Muster | `design/handoff/patterns.md` | Seitenrhythmus, Typo-Einsatz, Tiefe, Verbote |
+| A11y-Notizen | `design/handoff/ANNOTATIONEN.md` | gerechnete Kontrast-Matrix, Pflichtzustände |
+| Aufbau | `figma/design-system-builder/` | Figma-Plugin: Variablen, Stile, Komponenten-Sets, Cover |
+| Qualität | `scripts/figma_quality_gate.py` | 33 Kriterien über SSOT, Exporte, Plugin, Skills, Doku |
 | Abnahme | Playwright + Lighthouse | Browserregression, A11y, SEO, CWV und Budgets |
 
 ## Einmalige Einrichtung in Figma
 
-1. Eine Datei **„FranksFinanzcheck – Design System“** anlegen.
-2. Seiten in der Reihenfolge aus `data/design/handoff.yaml → figma.page_order`
-   anlegen.
-3. Tokens Studio installieren und
-   `design/handoff/figma-tokens.tokens.json` als lokale JSON-Quelle importieren.
-4. Themes **Light** und **Dark** den gleichnamigen Token-Sets zuordnen.
-5. Komponenten exakt nach `component-inventory.md` benennen. Interaktive
+Es gibt zwei Wege. **Weg A** ist der schnelle, empfohlene: Ein Plugin baut die
+Datei aus der SSOT auf. **Weg B** ist der manuelle Weg über Tokens Studio, für
+den Fall, dass jemand die Struktur von Hand nachvollziehen will.
+
+### Weg A – Plugin „FranksFinanzcheck – Design System“ (empfohlen)
+
+1. Eine leere Datei **„FranksFinanzcheck – Design System“** anlegen.
+2. In Figma auf **Plugins → Development → Import plugin from manifest …**
+   klicken und `figma/design-system-builder/manifest.json` auswählen.
+3. Das Plugin **einmal** ausführen (Plugins → Development → FranksFinanzcheck).
+   Es legt an:
+   - die Seiten aus `figma.page_order`,
+   - die Variablen-Sammlungen *Primitives*, *Semantik* (Hell/Dunkel mit
+     echten Aliassen), *Abstand* und *Radius*,
+   - Dev-Mode-Code-Syntax `var(--ff-…)` je Variable,
+   - Textstile (Desktop **und** Mobil), Farb- und Schattenstile,
+   - ein Komponenten-Set je Komponente mit den Achsen **Zustand × Modus**,
+   - ein Cover mit Stand, Zahlen und Herkunft.
+4. Das Protokoll im Plugin nennt, was **neu** war und was **bereits vorhanden**
+   ist. Das Plugin ist idempotent: ein zweiter Lauf legt nichts doppelt an.
+5. Nach dem Import die vergebene Plugin-ID in `data/design/handoff.yaml` unter
+   `figma.plugin_id` eintragen. Damit wird das Warn-Kriterium **P8** erfüllt
+   und die Datei bleibt über Läufe hinweg eindeutig zugeordnet.
+
+> Das Plugin läuft **ohne Netzverbindung** (`networkAccess.allowedDomains:
+> ["none"]`), veröffentlicht nichts und ist aus `source.js` + Datenblock
+> generiert. `code.js` niemals von Hand bearbeiten – sonst stoppt
+> `npm run design:handoff:check`.
+
+### Weg B – manuell über Tokens Studio
+
+1. Tokens Studio installieren und `design/handoff/figma-tokens.tokens.json`
+   als lokale JSON-Quelle importieren.
+2. Themes **Light** und **Dark** den gleichnamigen Token-Sets zuordnen.
+3. Komponenten exakt nach `component-inventory.md` benennen. Interaktive
    Komponenten benötigen die dort genannten Fokus-, Fehler-, Disabled- und
    Dark-Mode-Zustände.
-6. Frames mindestens bei 390, 768 und 1280 px prüfen. Inhalte nicht durch
+4. Muster und Verbote aus `patterns.md` übernehmen; die Kontrastwerte aus
+   `ANNOTATIONEN.md` sind die Abnahmegrenze, nicht ein Vorschlag.
+5. Frames mindestens bei 390, 768 und 1280 px prüfen. Inhalte nicht durch
    Platzhalter-Fakten oder erfundene Sparbeträge ersetzen.
 
 Figma-Zugangsdaten oder Personal Access Tokens gehören **nie** in dieses Repo.
@@ -73,6 +107,12 @@ python3 -m venv .venv
 .venv/bin/python scripts/design_handoff.py
 .venv/bin/python scripts/design_handoff.py --check
 
+# Figma-Handoff: erzeugen, prüfen, Selbsttest
+npm run figma:bauen
+npm run design:handoff:check
+npm run figma:gate
+npm run figma:selftest
+
 # Varianten- und Qualitätskette
 npm ci
 npm run design:lauf v-meine-variante
@@ -81,12 +121,25 @@ npm run design:quality
 npm run test:e2e
 ```
 
+`figma:gate` prüft 33 Kriterien in fünf Ebenen – SSOT, Exporte, Plugin, Skills,
+Doku. Ein Kriterium ist entweder erfüllt oder es nennt mit einer Zeile, was
+fehlt. `--streng` behandelt Warnungen wie Fehler.
+
 `design:handoff:check` läuft zusätzlich im Workflow **Design-Varianten**. Jede
 manuelle Änderung an einem generierten Export erzeugt Drift und stoppt das Gate.
 Lighthouse ist direkt und versionsfest als Dev-Dependency installiert; die
 Messung läuft über `e2e/variant-metrics.mjs` mobil als maßgebliches Profil und
 desktop als Vergleich. Playwright bleibt für Desktop- und Mobile-Regressionen
 zuständig.
+
+## Definition of Done für den Handoff selbst
+
+- `npm run figma:selftest` grün (Generator **und** Gate, inklusive Sabotage-Proben).
+- `npm run design:handoff:check` ohne Drift.
+- `npm run figma:gate` ohne Fehler; Warnungen sind benannt und begründet.
+- Jede Komponente im Inventar existiert im CSS; jede Rolle in beiden Modi.
+- Kontrast-Matrix vollständig und rechnerisch ≥ 4,5:1.
+- Plugin-Manifest ohne Netzzugriff; `code.js` aus `source.js` erzeugt.
 
 ## Definition of Done für einen Design-Entwurf
 
