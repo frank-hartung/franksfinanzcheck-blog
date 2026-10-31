@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 4,
   "pool_size": 6,
-  "generated_at": "2026-10-30T19:20:55Z",
+  "generated_at": "2026-10-31T09:58:42Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-10-30T10:33:25Z",
+      "measured_at": "2026-10-31T09:55:31Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -22,11 +22,18 @@
       }
     },
     {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": false,
+      "sha256": "71638155665f0bfe9ab421f2a1ad937e911e26476e9a2afaeb47e53516031592",
+      "measured_at": "2026-10-31T09:56:18Z",
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+    },
+    {
       "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
       "ready": true,
       "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
       "flesch": 61.6,
-      "measured_at": "2026-10-30T10:34:42Z",
+      "measured_at": "2026-10-31T09:57:06Z",
       "score": 0.952,
       "parts": {
         "spelling": 0.94,
@@ -39,32 +46,11 @@
       }
     },
     {
-      "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
-      "sha256": "aa5a6542b5f6c77da6d59b14f0a6c704d0978b6c8fc48cbe8eb7a4423cbecd13",
-      "flesch": 67.5,
-      "measured_at": "2026-10-30T19:20:55Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
-      "details": [
-        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
-      ],
-      "score": 0.942,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.6799999999999999,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
       "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": true,
       "sha256": "41a5b625076f91ebbff1458e008cbabdf24fd6bcf053cd54f0c24c63d15d0254",
       "flesch": 67.2,
-      "measured_at": "2026-10-30T12:53:03Z",
+      "measured_at": "2026-10-31T09:57:54Z",
       "score": 0.958,
       "parts": {
         "spelling": 0.86,
@@ -81,7 +67,7 @@
       "ready": true,
       "sha256": "b5e79ef506a6a8b269bce6ad13af6f8ba636cfc766aa67fd7ab42ab36c3fa52e",
       "flesch": 67.1,
-      "measured_at": "2026-10-30T12:53:53Z",
+      "measured_at": "2026-10-31T09:58:41Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -94,40 +80,30 @@
       }
     },
     {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
-      "sha256": "71638155665f0bfe9ab421f2a1ad937e911e26476e9a2afaeb47e53516031592",
-      "flesch": 74.0,
-      "measured_at": "2026-10-30T12:54:43Z",
-      "score": 0.946,
+      "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "ready": false,
+      "sha256": "aa5a6542b5f6c77da6d59b14f0a6c704d0978b6c8fc48cbe8eb7a4423cbecd13",
+      "flesch": 67.5,
+      "measured_at": "2026-10-31T09:58:42Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
+      "details": [
+        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
+      ],
+      "score": 0.942,
       "parts": {
-        "spelling": 0.98,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.6799999999999999,
         "uniqueness": 1.0,
-        "affiliate": 0.5,
-        "readability": 1.0
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "41114151470",
+    "kind": "full",
+    "run_id": "41190324785",
     "run_attempt": "1"
-  },
-  "ausgebucht": {
-    "at": "2026-10-30T12:52:10Z",
-    "slugs": [
-      "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  },
-  "recert": {
-    "at": "2026-10-30T19:20:55Z",
-    "renewed": [
-      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

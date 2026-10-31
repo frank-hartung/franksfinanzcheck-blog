@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-30T11:39:05+00:00",
+  "generatedAt": "2026-10-31T11:15:22+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -304,6 +304,22 @@
     },
     "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/": {
       "image": "images/covers/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/": {
+      "image": "images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

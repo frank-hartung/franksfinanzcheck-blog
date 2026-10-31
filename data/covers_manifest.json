@@ -1359,8 +1359,8 @@
   }
  },
  "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-  "title": "ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung",
-  "ts": "2026-10-26T14:14:05+00:00",
+  "title": "ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung",
+  "ts": "2026-10-31T09:33:17+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1463,6 +1463,15 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden": {
+  "title": "Kostenloses Girokonto ohne Gebühren finden",
+  "ts": "2026-10-31T10:29:10+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }

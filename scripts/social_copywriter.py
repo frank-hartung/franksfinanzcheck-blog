@@ -125,6 +125,31 @@ def _frontmatter(text: str) -> str:
     return text[4:4 + m.start()] if m else ""
 
 
+# ------------------------------------------------- Grammatik der Copy-Quelle
+# Befund 30.10.2026: Der Artikel 2026-10-24-etf-sparplan-… stand mit
+# „Dein Schritt-für-Schritt-Anleitung“ im Frontmatter. Jeder Kanal baut seine
+# Überschrift aus genau diesem Feld – der Fehler wanderte also ungeprüft auf
+# Pinterest, X, Bluesky, Instagram, Facebook, Threads und LinkedIn. Eine
+# Quell-Heilung allein genügt nicht: Die Copy wird TÄGLICH neu erzeugt, und
+# jedes spätere Redaktionsversehen im Titel stünde sofort in sieben Kanälen.
+# Deshalb heilt die Copy-Quelle sich selbst – mit demselben Beweis wie der
+# Blogtext (LT5/LT6 aus `grammar_check.py`, eindeutiges Ziel oder nichts).
+def _kongruenz_heilen(text: str) -> str:
+    """Heilt eindeutige Kongruenz-Fehler in einem Copy-Baustein (sonst unverändert)."""
+    if not text:
+        return text
+    try:
+        import grammar_check
+        funde = grammar_check.kongruenz_funde(text, grammar_check.lade_genus_lexikon())
+    except Exception:  # eine kaputte Wache darf die Copy nicht blockieren
+        return text
+    for f in sorted(funde, key=lambda x: x["start"], reverse=True):
+        if not f.get("fix"):
+            continue
+        text = text[:f["start"]] + f["fix"] + text[f["end"]:]
+    return text
+
+
 def _fm_field(fm: str, name: str) -> str:
     m = re.search(rf'^{name}:\s*["\']?(.*?)["\']?\s*$', fm, re.MULTILINE)
     return m.group(1).strip() if m else ""
@@ -260,6 +285,11 @@ def load_article(path: str, base_url: str = DEFAULT_BASE) -> dict:
     title = _fm_field(fm, "title") or slug.replace("-", " ").title()
     kurzantwort = _fm_field(fm, "kurzantwort")
     description = _fm_field(fm, "description")
+    # Copy-Quelle selbstheilend: Was hier falsch bleibt, steht später in jedem
+    # Kanal. Nur eindeutige Funde werden geschrieben, der Rest bleibt sichtbar.
+    title = _kongruenz_heilen(title)
+    kurzantwort = _kongruenz_heilen(kurzantwort)
+    description = _kongruenz_heilen(description)
     cover = ""
     m_cover = re.search(r"image:\s*[\"']?(.*?)[\"']?\s*$", fm, re.MULTILINE)
     if m_cover:
@@ -298,7 +328,7 @@ def load_article(path: str, base_url: str = DEFAULT_BASE) -> dict:
         "tags": _fm_list(fm, "tags"),
         "keywords": _fm_list(fm, "keywords"),
         "pillar": _fm_field(fm, "pillar"),
-        "pin_title": _fm_field(fm, "pin_title"),
+        "pin_title": _kongruenz_heilen(_fm_field(fm, "pin_title")),
         "cover": cover,
         "cover_alt": alt,
         "draft": _fm_field(fm, "draft").lower() == "true",

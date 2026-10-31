@@ -434,6 +434,8 @@ Dauerauftrag (Frank, 25.09.2026): „Sämtliche Blogartikel dauerhaft automatisc
 | LT2 | Grammatik | „im gegensatz“ → „im Gegensatz“, „zu hause“ → „zu Hause“ | Nur Fehler-Kleinschreibung gematcht, korrekte Form kein Fund (Identity-Sperre) |
 | LT3 | Grammatik | „seid drei Jahren“ → „seit drei Jahren“, „wieder Erwarten“ → „wider Erwarten“, „vorallem“ → „vor allem“, „wahr nehmen“ → „wahrnehmen“ | „Ihr seid bereit“, „seid dem Kurs gefolgt“, Verb „wieder erwarten“ bleiben |
 | LT4 | Grammatik | „ansonten“ → „ansonsten“, „bezeihungsweise“ → „beziehungsweise“ | Whitelist schützt Marken |
+| LT5 | Grammatik (Morphologie) | „Dein Schritt-für-Schritt-Anleitung“ → „Deine …“, „die Geld“ → „das Geld“, „einen Konto“ → „ein Konto“ | Beweis aus `data/genus_lexikon.txt`; Auto-Fix nur bei **genau einem** zulässigen Ziel. Relativ-/Demonstrativpronomen, schwache Adjektivdeklination („dem einen Konto“), Komposita mit Leerzeichen, mehrdeutige Genera (der/das Nutzen), gleichlautende Plurale (die Anbieter) und Plural-Dativ bleiben unangetastet |
+| LT6 | Grammatik (Kasus) | „mit dein Konto“ → „mit deinem Konto“, „um ein Grad“ → „um einen Grad“ | Kasus kommt aus der Präposition (Dativ-/Akkusativliste), Genus aus dem Lexikon. Wechselpräpositionen (in/an/auf/über …) und Genitivpräpositionen sind **keine** Auslöser |
 | DW1 | Glättung | „ist der Meinung, dass“ → „meint, dass“ | „der Meinung des Chefs“ bleibt |
 | DW2 | Glättung | „bist in der Lage, Geld zu sparen“ → „kannst Geld sparen“ | Konjugations-Tabelle bin/bist/ist/sind/seid/war/waren → kann/kannst/kann… |
 | DW3 | Glättung | „hast die Möglichkeit, zu sparen“ → „kannst sparen“ | „Möglichkeit zum Sparen“ (kein zu-Verb) bleibt |
@@ -457,11 +459,27 @@ Dauerauftrag (Frank, 25.09.2026): „Sämtliche Blogartikel dauerhaft automatisc
 
 **Aufruf:**
 ```bash
-python3 scripts/grammar_check.py --selftest   # 11 Fälle grün
+python3 scripts/grammar_check.py --selftest   # 20 Fälle grün (LT1–LT6)
 python3 scripts/sprachglatt.py --selftest     # 12 Fälle grün
 python3 scripts/grammar_check.py --fix
+python3 scripts/grammar_check.py --fix-titel   # Titel nur bei eindeutigem Beweis
+python3 scripts/grammar_check.py --lexikon-pruefen
 python3 scripts/sprachglatt.py --fix
 ```
+
+**Nachtrag 30.10.2026 – Kongruenz (LT5/LT6).** Der Artikel
+`2026-10-24-etf-sparplan-…` stand mit „Dein Schritt-für-Schritt-Anleitung“ in
+Titel, H1, Cover **und** Pinterest – vier sichtbare Flächen, und alle Wachen
+meldeten 0 Funde. Grund: LT1–LT4 prüfen Wendungen, Hunspell kennt keine
+Nachbarschaft, die Casing-Wache prüft Groß-/Kleinschreibung. Kongruenz ist
+Morphologie und braucht eine Wissensquelle: `data/genus_lexikon.txt`
+(730 Oberflächen, 67,4 % Deckung der Artikelwort+Nomen-Stellen). Die Prüfung
+liest je Artikelwort alle zulässigen Lesungen (Genus × Numerus × Kasus) und
+schreibt nur, wenn genau ein Ziel übrig bleibt; der Titel bleibt
+Cover-Marken-Lock (`--fix-titel`), und der Lauf, der ihn heilt, rendert die
+Cover danach neu. Governance-Regel **C47** prüft Wache, Lexikon, Reihenfolge
+und Test in beide Richtungen. Betriebsanleitung:
+[docs/ANLEITUNG-GRAMMATIK-KONGRUENZ.md](ANLEITUNG-GRAMMATIK-KONGRUENZ.md).
 
 **Reports (gitignored):** `GRAMMATIK-REPORT.md`, `.grammar_report.json`, `SPRACHGLATT-REPORT.md`, `.sprachglatt_report.json`
 **History (versioniert):** `data/sprachglatt_history.jsonl`

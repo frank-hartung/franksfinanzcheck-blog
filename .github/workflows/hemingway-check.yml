@@ -71,8 +71,14 @@ jobs:
       - name: Offline-Sprachpflege
         run: |
           set -Eeuo pipefail
-          echo "== Grammatik (offline) =="
+          echo "== Grammatik (offline, LT1–LT4 Wendungen) =="
           python3 scripts/grammar_check.py --fix
+          echo "== Grammatik-Kongruenz (LT5/LT6, Genus-Lexikon) =="
+          # Seit 30.10.2026 prüft dieselbe Engine auch Morphologie (Genus,
+          # Numerus, Kasus nach Präposition) gegen data/genus_lexikon.txt.
+          # Hier NUR der Fließtext: Titel heilt blog-health-daily (dort folgt
+          # der Cover-Neubau, weil das Cover den Titel rendert).
+          python3 scripts/grammar_check.py --lexikon-pruefen
           echo "== Sprachglatt (offline) =="
           python3 scripts/sprachglatt.py --fix
 

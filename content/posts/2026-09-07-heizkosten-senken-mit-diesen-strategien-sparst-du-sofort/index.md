@@ -225,7 +225,7 @@ Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizk
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 
-Senk heute in einem überheizten Raum die Zieltemperatur um ein Grad im Modellfall. Stell den Heizkörper frei und notiere den Zählerstand. In vier Wochen prüfst du, ob Verbrauch und Komfort passen.
+Senk heute in einem überheizten Raum die Zieltemperatur um einen Grad im Modellfall. Stell den Heizkörper frei und notiere den Zählerstand. In vier Wochen prüfst du, ob Verbrauch und Komfort passen.
 
 So wird aus einem Spartipp ein messbares System. Tarif und Technik kommen danach – nicht statt der Verbrauchskontrolle.
 

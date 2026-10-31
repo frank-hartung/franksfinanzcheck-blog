@@ -1,0 +1,80 @@
+{
+  "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+  "titel": "Kostenloses Girokonto ohne Gebühren finden",
+  "erzeugt": "2026-10-31 10:34 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesbank.de",
+      "url": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "datum": "",
+      "quelle": "bundesbank.de",
+      "kanal": "web",
+      "auszug": "URL Source: https://www.bundesbank.de/de/presse/pressenotizen\n\nFinal URL: https://www.bundesbank.de/de/presse/pressemitteilungen\n\nMarkdown Content:\n*   [Hauptnavigation](https://www.bundesbank.de/de/presse/pressemitteilungen#main-navigation \" Sprung zur Hauptnavigation\")\n*   [Suche](https://www.bundesbank.de/de/presse/pressemitteilungen#header-search \"Sprung zur Suche\")\n*   [Inhaltsbereich](https://www.bundesbank.de/de/presse/pressemitteilungen#main-content \"Sprung zum Inhaltsbereich\")\n\n*   [Kontakt](https://www.bundesbank.de/de/startseite/kontakt \"Kontakt\")\n*   [Glossar](https://www.bundesbank.de/de/startseite/glossar \"Glossar\")\n*   [Gebärdensprache](https://www.bundesbank.de/de/startseite/gebaerdensprache \"Gebärdensprache\")\n*   [Leichte Sprache](https://publikationen.bundesbank.de/publikationen-de/die-bundes-bank-in-leichter-sprache)\n*   [EN](https://www.bundesbank.de/en)\n\nSuche\n*   Suche\n*   Bankleitzahlen\n\n*   [Anmelden](https://www.bundesbank.de/de/startseite/anmelden \"Anmelden\")\n\n[![Image 1: Deutsche Bundesbank](https://www.bundesbank.de/resource/crblob/722082/6a4e8cec477af9daea8b48e194795928/472B63F073F071307366337C94F8C870/logo-data.svg)](https://www.bundesbank.de/de \"Deutsche Bundesbank\")\n\nNavigation anzeigen  Suche anzeigen \n*   [en](https://www.bundesbank.de/en \"Englisch\")\n\n*   Bundesbank\n\n![Image 2: Ein Wald mit Birkenbäumen von unten fotografiert ©smallredgirl / Fotolia](https://www.bundesbank.de/resource/image/805446/ratio16x9/200/112/3fccbccc44a034100aa1efb86d9cb250/596993BD12C7EECAB46FFEC124C39005/AD5D49A215827A28B0A618B149FFEC04/baum-gruen.jpg)© smallredgirl / Fotolia   Green Finance   Der Klimawandel stellt auch den Finanzsektor vor große Herausforderungen.Die Bundesbank unterstützt den Wandel hin zu einer kohlenstoffarmen Wirtschaft.  [Green Finance](",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Deutsche Bundesbank",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass ein kostenloses Girokonto keine reguläre Kontoführungsgebühr erhebt, wird nicht durch die bereitgestellten Quellen belegt.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Angabe, dass die meisten Banken ein Mindestguthaben von ein paar hundert Euro verlangen, fehlt eine fundierte Quelle.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Quantitative Aussage, dass ein kostenloses Girokonto mindestens ein Drittel der bisherigen Kontokosten einsparen kann, ist unbelegt.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Zeitangabe, dass die Kontoeröffnung meist innerhalb weniger Werktage abgeschlossen ist, wird nicht durch die genannten Quellen gestützt.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass Inlands‑Überweisungen in der Regel kostenlos sind, fehlt eine entsprechende Quelle.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}

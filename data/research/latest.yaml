@@ -1,5 +1,5 @@
-generated_at: '2026-10-30T10:27:19Z'
-day: '2026-10-30'
+generated_at: '2026-10-31T09:57:28Z'
+day: '2026-10-31'
 mode: deterministic
 teams:
   trending:
@@ -243,62 +243,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Auslandskrankenversicherung für Familien: Was sie kosten darf'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Auslandskrankenversicherung für Familien: Was sie kosten darf'
-    score: 0.55
-    keywords:
-    - Auslandskrankenversicherung Familie
-    - Reisekrankenversicherung Kosten
-    - Familienreiseschutz
-  - topic: 'Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Balkonkraftwerk: Der einfache Einstieg in die Solarenergie'
-    score: 0.55
-    keywords:
-    - Balkonkraftwerk
-    - Mini-Solaranlage
-    - Stecker-Solargerät
-  - topic: Jahresvergleich für deine Versicherungen
+  - topic: 10 Tipps für günstige Reiseversicherungen
     pillar: versicherungen
     signal: niche_hook
-    source: topics:Jahresvergleich für deine Versicherungen
+    source: topics:10 Tipps für günstige Reiseversicherungen
     score: 0.55
     keywords:
-    - Versicherung
-    - Vergleich
-    - Jahresvergleich
-  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
-    score: 0.55
-    keywords:
-    - Rechtsschutzversicherung
-    - Rechtsschutz Leistungen
-    - Rechtsstreit versichern
-  - topic: 'Rückstufung nach Unfall: Wann sich der Schadenrückkauf wirklich lohnt'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Rückstufung nach Unfall: Wann sich der Schadenrückkauf wirklich
-      lohnt'
-    score: 0.55
-    keywords:
-    - Schadenrückkauf Kfz
-    - Rückstufung verhindern
-    - Schaden selbst zahlen oder Versicherung
-    - Rabattschutz sinnvoll
-  - topic: Versicherungsvergleich für junge Erwachsene
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Versicherungsvergleich für junge Erwachsene
-    score: 0.55
-    keywords:
+    - Reiseversicherung
     - Versicherungsvergleich
-    - Junge Erwachsene
-    - Versicherungen
+    - Günstige Versicherungen
+  - topic: 'Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?'
+    score: 0.55
+    keywords:
+    - Fahrradversicherung
+    - E-Bike versichern
+    - Fahrraddiebstahl Schutz
+  - topic: 'Handytarife vergleichen: So findest du den günstigsten Tarif'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Handytarife vergleichen: So findest du den günstigsten Tarif'
+    score: 0.55
+    keywords:
+    - Handytarif vergleichen
+    - Handyvertrag wechseln
+    - Günstiger Handytarif
+  - topic: 'Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
+    score: 0.55
+    keywords:
+    - Handyvertrag kündigen
+    - Mobilfunk sparen
+    - Tarifwechsel
+  - topic: 'Router-Position optimieren: Mehr Empfang ohne neues Gerät'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Router-Position optimieren: Mehr Empfang ohne neues Gerät'
+    score: 0.55
+    keywords:
+    - Router Standort
+    - WLAN Empfang verbessern
+    - WLAN Tipps
+  - topic: 'VPN für Zuhause: Brauchst du das wirklich?'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:VPN für Zuhause: Brauchst du das wirklich?'
+    score: 0.55
+    keywords:
+    - VPN Zuhause
+    - VPN sinnvoll
+    - Internet Sicherheit
 live_web:
   enabled: false
   findings: []

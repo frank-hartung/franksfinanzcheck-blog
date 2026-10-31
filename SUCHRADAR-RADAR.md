@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-30 13:48:40 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-10-31 13:23:22 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -46,12 +46,12 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 | ing.de | 1 | 1 | 1.0 | 1 |
 | lexware.de | 1 | 1 | 2.0 | 2 |
 | sparkasse.de | 1 | 1 | 3.0 | 3 |
-| bank99.at | 1 | 0 | 4.0 | 4 |
-| peaks.com | 1 | 0 | 5.0 | 5 |
+| peaks.com | 1 | 0 | 4.0 | 4 |
+| bank99.at | 1 | 0 | 5.0 | 5 |
 | mlp-financify.de | 1 | 0 | 6.0 | 6 |
 | meetadam.io | 1 | 0 | 7.0 | 7 |
-| fonio.ai | 1 | 0 | 8.0 | 8 |
-| vr.de | 1 | 0 | 9.0 | 9 |
+| vr.de | 1 | 0 | 8.0 | 8 |
+| fonio.ai | 1 | 0 | 9.0 | 9 |
 | finanzenfroh.com | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
