@@ -1,5 +1,17 @@
 [
  {
+  "grund": "ähnliches Thema",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
+  "ziel": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
+ },
+ {
+  "grund": "ähnliches Thema",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/",
+  "ziel": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
+ },
+ {
   "grund": "gleicher Pillar",
   "inlinks_jetzt": 0,
   "quelle": "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/",
@@ -26,13 +38,25 @@
  {
   "grund": "gleicher Pillar",
   "inlinks_jetzt": 0,
-  "quelle": "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/",
+  "quelle": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/",
+  "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
+ },
+ {
+  "grund": "ähnliches Thema",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
  },
  {
   "grund": "gleicher Pillar",
   "inlinks_jetzt": 0,
-  "quelle": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/",
-  "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
+  "quelle": "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/",
+  "ziel": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
+ },
+ {
+  "grund": "gleicher Pillar",
+  "inlinks_jetzt": 0,
+  "quelle": "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/",
+  "ziel": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
  }
 ]
